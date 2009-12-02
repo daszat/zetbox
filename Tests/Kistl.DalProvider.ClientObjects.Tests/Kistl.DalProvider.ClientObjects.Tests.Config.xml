@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <KistlConfig xmlns="http://dasz.at/Kistl/">
   <ConfigName>ClientObjects DalProvider Test Configuration</ConfigName>
-  <Server StartServer="true">
+  <Server StartServer="false">
     <!-- No references should be needed -->
     <DocumentStore>P:\Kistl\DocumentStore\Server\</DocumentStore>
   </Server>
-  <Client StartClient="true" ThrowErrors="true">
+  <Client StartClient="false" ThrowErrors="true">
     <DocumentStore>P:\Kistl\DocumentStore\Client\</DocumentStore>
   </Client>
   <SourceFileLocation>

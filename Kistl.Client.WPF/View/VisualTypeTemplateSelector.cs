@@ -171,7 +171,7 @@ namespace Kistl.Client.WPF.View
         {
             if (item == null)
             {
-                return (DataTemplate)((FrameworkElement)container).FindResource("nullTemplate");
+                return GetNullTemplate(container);
             }
 
             var rk = RequestedKind ?? GetRequestedKind(container);
@@ -209,11 +209,19 @@ namespace Kistl.Client.WPF.View
             else
             {
                 Logging.Log.WarnFormat("No '{0}' DataTemplate found for {1}", rk == null ? "(default)" : (rk is string ? rk : rk.GetType().FullName), item);
-                return (DataTemplate)((FrameworkElement)container).FindResource("emptyTemplate");
+                return GetEmptyTemplate(container);
             }
         }
 
+        private static DataTemplate GetEmptyTemplate(DependencyObject container)
+        {
+            return (DataTemplate)((FrameworkElement)container).FindResource("emptyTemplate");
+        }
 
+        private static DataTemplate GetNullTemplate(DependencyObject container)
+        {
+            return (DataTemplate)((FrameworkElement)container).FindResource("nullTemplate");
+        }
 
         public static object GetRequestedKind(DependencyObject obj)
         {

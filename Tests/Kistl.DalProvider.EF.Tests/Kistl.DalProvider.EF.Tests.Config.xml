@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <KistlConfig xmlns="http://dasz.at/Kistl/">
   <ConfigName>Kistl.DalProvider.EF's Test Configuration</ConfigName>
-  <Server StartServer="true">
+  <Server StartServer="false">
     <DatabaseProvider>System.Data.SqlClient</DatabaseProvider>
     <ConnectionString>Data Source=.\SQLEXPRESS;Initial Catalog=Kistl_test;Integrated Security=True;MultipleActiveResultSets=true;</ConnectionString>
     <DocumentStore>P:\Kistl\DocumentStore\Server\</DocumentStore>
@@ -9,8 +9,9 @@
     <ServerObjectHandlerType>Kistl.DALProvider.EF.ServerObjectHandler`1, Kistl.DALProvider.EF</ServerObjectHandlerType>
     <ServerObjectSetHandlerType>Kistl.DALProvider.EF.ServerObjectSetHandler, Kistl.DALProvider.EF</ServerObjectSetHandlerType>
     <ServerCollectionHandlerType>Kistl.DALProvider.EF.ServerCollectionHandler`4, Kistl.DALProvider.EF</ServerCollectionHandlerType>
+    <IdentityProviderType>Kistl.Server.WCFIdentityProvider, Kistl.Server</IdentityProviderType>
   </Server>
-  <Client StartClient="false">
+  <Client StartClient="false" ThrowErrors="true">
     <DocumentStore>P:\Kistl\DocumentStore\Client\</DocumentStore>
   </Client>
   <SourceFileLocation>

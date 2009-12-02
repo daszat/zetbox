@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <KistlConfig xmlns="http://dasz.at/Kistl/">
   <ConfigName>Server.API's Test Configuration</ConfigName>
-  <Server StartServer="true">
+  <Server StartServer="false">
     <DatabaseProvider>System.Data.SqlServerCe.3.5</DatabaseProvider>
     <DocumentStore>P:\Kistl\DocumentStore\Server\</DocumentStore>
     <KistlDataContextType>Kistl.API.Server.Mocks.KistlContextMock, Kistl.API.Server.Tests</KistlDataContextType>

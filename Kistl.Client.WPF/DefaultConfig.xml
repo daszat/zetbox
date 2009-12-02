@@ -11,7 +11,7 @@
     <ServerCollectionHandlerType>Kistl.DALProvider.EF.ServerCollectionHandler`4, Kistl.DALProvider.EF</ServerCollectionHandlerType>
     <IdentityProviderType>Kistl.Server.WCFIdentityProvider, Kistl.Server</IdentityProviderType>
   </Server>
-  <Client StartClient="true" ThrowErrors="false">
+  <Client StartClient="false" ThrowErrors="false">
     <DocumentStore>P:\Kistl\DocumentStore\Client\</DocumentStore>
   </Client>
   <SourceFileLocation>
