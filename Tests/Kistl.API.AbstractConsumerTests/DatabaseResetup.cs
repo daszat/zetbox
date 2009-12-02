@@ -21,7 +21,7 @@ namespace Kistl.API.AbstractConsumerTests
         protected void ResetDatabase(KistlConfig config)
         {
             string basePath = @"..\..\..\..\Kistl.Server";
-            Assert.That(config.Server.ConnectionString, Text.Contains("_test"), "test databases should be marked with '_test' in the connection string");
+            Assert.That(config.Server.ConnectionString, Is.StringContaining("_test"), "test databases should be marked with '_test' in the connection string");
 
             try
             {

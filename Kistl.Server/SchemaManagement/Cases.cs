@@ -349,16 +349,8 @@ namespace Kistl.Server.SchemaManagement
                     return;
             }
 
-            ObjectReferenceProperty nav = relEnd.Navigator;
             string tblName = relEnd.Type.TableName;
-
-            if (nav == null)
-            {
-                report.WriteLine("    ** Warning: Relation '{0}' has no Navigator on the storage side", assocName);
-                return;
-            }
-
-            db.CreateColumn(tblName, Construct.ListPositionColumnName(nav), System.Data.DbType.Int32, 0, otherEnd.IsNullable());
+            db.CreateColumn(tblName, Construct.ListPositionColumnName(otherEnd), System.Data.DbType.Int32, 0, otherEnd.IsNullable());
         }
         #endregion
 
@@ -375,26 +367,25 @@ namespace Kistl.Server.SchemaManagement
             string assocName = rel.GetAssociationName();
             report.WriteLine("  Drop 1:N Relation Position Storage: {0}", assocName);
 
-            ObjectReferenceProperty nav = null;
             string tblName = "";
-            if (rel.A.Navigator != null && rel.HasStorage(RelationEndRole.A))
+            RelationEnd otherEnd;
+            if (rel.HasStorage(RelationEndRole.A))
             {
-                nav = rel.A.Navigator;
                 tblName = rel.A.Type.TableName;
+                otherEnd = rel.B;
             }
-            else if (rel.B.Navigator != null && rel.HasStorage(RelationEndRole.B))
+            else if (rel.HasStorage(RelationEndRole.B))
             {
-                nav = rel.B.Navigator;
                 tblName = rel.B.Type.TableName;
+                otherEnd = rel.A;
             }
-
-            if (nav == null)
+            else
             {
-                report.WriteLine("    ** Warning: Relation '{0}' has no Navigator", assocName);
+                report.WriteLine("    ** Warning: Relation '{0}' has unsupported Storage set: {1}", assocName, rel.Storage);
                 return;
             }
 
-            db.DropColumn(tblName, Construct.ListPositionColumnName(nav));
+            db.DropColumn(tblName, Construct.ListPositionColumnName(otherEnd));
         }
         #endregion
 
@@ -428,15 +419,8 @@ namespace Kistl.Server.SchemaManagement
                     return;
             }
 
-            ObjectReferenceProperty nav = relEnd.Navigator;
-            if (nav == null)
-            {
-                report.WriteLine("    ** Warning: Relation '{0}' has no Navigator on the storage side", assocName);
-                return;
-            }
-
             string tblName = relEnd.Type.TableName;
-            string colName = Construct.ForeignKeyColumnName(nav);
+            string colName = Construct.ForeignKeyColumnName(otherEnd);
 
             db.AlterColumn(tblName, colName, System.Data.DbType.Int32, 0, otherEnd.IsNullable());
         }
@@ -472,15 +456,8 @@ namespace Kistl.Server.SchemaManagement
                     return;
             }
 
-            ObjectReferenceProperty nav = relEnd.Navigator;
-            if (nav == null)
-            {
-                report.WriteLine("    ** Warning: Relation '{0}' has no Navigator", assocName);
-                return;
-            }
-
             string tblName = relEnd.Type.TableName;
-            string colName = Construct.ForeignKeyColumnName(nav);
+            string colName = Construct.ForeignKeyColumnName(otherEnd);
 
             if (db.CheckColumnContainsNulls(tblName, colName))
             {
@@ -503,38 +480,37 @@ namespace Kistl.Server.SchemaManagement
             string assocName = rel.GetAssociationName();
             report.WriteLine("  Deleting 1:N Relation: {0}", assocName);
 
-            ObjectReferenceProperty nav = null;
             string tblName = "";
             string refTblName = "";
             bool isIndexed = false;
-            if (rel.A.Navigator != null && rel.HasStorage(RelationEndRole.A))
+            RelationEnd otherEnd;
+            if (rel.HasStorage(RelationEndRole.A))
             {
-                nav = rel.A.Navigator;
                 tblName = rel.A.Type.TableName;
                 refTblName = rel.B.Type.TableName;
                 isIndexed = rel.NeedsPositionStorage(RelationEndRole.A);
+                otherEnd = rel.B;
             }
-            else if (rel.B.Navigator != null && rel.HasStorage(RelationEndRole.B))
+            else if (rel.HasStorage(RelationEndRole.B))
             {
-                nav = rel.B.Navigator;
                 tblName = rel.B.Type.TableName;
                 refTblName = rel.A.Type.TableName;
                 isIndexed = rel.NeedsPositionStorage(RelationEndRole.B);
+                otherEnd = rel.A;
             }
-
-            if (nav == null)
+            else
             {
-                report.WriteLine("    ** Warning: Relation '{0}' has no Navigator", assocName);
+                report.WriteLine("    ** Warning: Relation '{0}' has unsupported Storage set: {1}", assocName, rel.Storage);
                 return;
             }
 
             db.DropFKConstraint(tblName, assocName);
 
-            string colName = Construct.ForeignKeyColumnName(nav);
+            string colName = Construct.ForeignKeyColumnName(otherEnd);
             db.DropColumn(tblName, colName);
             if (isIndexed)
             {
-                db.DropColumn(tblName, Construct.ListPositionColumnName(nav));
+                db.DropColumn(tblName, Construct.ListPositionColumnName(otherEnd));
             }
         }
         #endregion
@@ -566,19 +542,12 @@ namespace Kistl.Server.SchemaManagement
                     return;
             }
 
-            ObjectReferenceProperty nav = relEnd.Navigator;
             string tblName = relEnd.Type.TableName;
             string refTblName = otherEnd.Type.TableName;
             bool isIndexed = rel.NeedsPositionStorage(relEnd.GetRole());
 
-            if (nav == null)
-            {
-                report.WriteLine("    ** Warning: Relation '{0}' has no Navigator", assocName);
-                return;
-            }
-
-            string colName = Construct.ForeignKeyColumnName(nav);
-            string indexName = Construct.ListPositionColumnName(nav);
+            string colName = Construct.ForeignKeyColumnName(otherEnd);
+            string indexName = Construct.ListPositionColumnName(otherEnd);
 
             CreateNotNullableColumn(otherEnd, tblName, colName); 
             db.CreateFKConstraint(tblName, refTblName, colName, assocName, false);
@@ -711,7 +680,7 @@ namespace Kistl.Server.SchemaManagement
         {
             string tblName = end.Type.TableName;
             string refTblName = otherEnd.Type.TableName;
-            string colName = Construct.ForeignKeyColumnName(end.Navigator);
+            string colName = Construct.ForeignKeyColumnName(otherEnd);
             string assocName = rel.GetRelationAssociationName(role);
 
             db.DropFKConstraint(tblName, assocName);
@@ -720,8 +689,7 @@ namespace Kistl.Server.SchemaManagement
 
             if (rel.NeedsPositionStorage(role))
             {
-                // TODO: Dont use Navigator IsNullable! Check Multiplicity on RelationEnd. But first check Multiplicity in Schema
-                db.DropColumn(tblName, Construct.ListPositionColumnName(end.Navigator));
+                db.DropColumn(tblName, Construct.ListPositionColumnName(otherEnd));
             }
         }
         #endregion
@@ -750,7 +718,7 @@ namespace Kistl.Server.SchemaManagement
         {
             string tblName = relEnd.Type.TableName;
             string refTblName = otherEnd.Type.TableName;
-            string colName = Construct.ForeignKeyColumnName(relEnd.Navigator);
+            string colName = Construct.ForeignKeyColumnName(otherEnd);
             string assocName = rel.GetRelationAssociationName(role);
 
             CreateNotNullableColumn(otherEnd, tblName, colName);
@@ -797,7 +765,7 @@ namespace Kistl.Server.SchemaManagement
             RelationEnd otherEnd = rel.GetOtherEndFromRole(role);
 
             string tblName = relEnd.Type.TableName;
-            string colName = Construct.ForeignKeyColumnName(relEnd.Navigator);
+            string colName = Construct.ForeignKeyColumnName(otherEnd);
 
             db.AlterColumn(tblName, colName, System.Data.DbType.Int32, 0, otherEnd.IsNullable());
         }
@@ -822,7 +790,7 @@ namespace Kistl.Server.SchemaManagement
             RelationEnd otherEnd = rel.GetOtherEndFromRole(role);
 
             string tblName = relEnd.Type.TableName;
-            string colName = Construct.ForeignKeyColumnName(relEnd.Navigator);
+            string colName = Construct.ForeignKeyColumnName(otherEnd);
 
             if (db.CheckColumnContainsNulls(tblName, colName))
             {

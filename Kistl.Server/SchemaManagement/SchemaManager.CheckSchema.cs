@@ -199,7 +199,7 @@ namespace Kistl.Server.SchemaManagement
                 string tblName = relEnd.Type.TableName;
                 RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
                 string refTblName = otherEnd.Type.TableName;
-                string colName = Construct.ForeignKeyColumnName(relEnd.Navigator);
+                string colName = Construct.ForeignKeyColumnName(otherEnd);
                 string assocName = rel.GetRelationAssociationName(role);
 
                 if (!db.CheckFKConstraintExists(assocName))
@@ -210,7 +210,7 @@ namespace Kistl.Server.SchemaManagement
                         db.CreateFKConstraint(tblName, refTblName, colName, assocName, false);
                     }
                 }
-                CheckColumn(relEnd.Type.TableName, Construct.ForeignKeyColumnName(relEnd.Navigator), System.Data.DbType.Int32, 0, otherEnd.IsNullable());
+                CheckColumn(relEnd.Type.TableName, Construct.ForeignKeyColumnName(otherEnd), System.Data.DbType.Int32, 0, otherEnd.IsNullable());
             }
         }
 
@@ -235,19 +235,12 @@ namespace Kistl.Server.SchemaManagement
                     return;
             }
 
-            ObjectReferenceProperty nav = relEnd.Navigator;
             string tblName = relEnd.Type.TableName;
             string refTblName = otherEnd.Type.TableName;
             bool isIndexed = rel.NeedsPositionStorage(relEnd.GetRole());
 
-            if (nav == null)
-            {
-                report.WriteLine("    ** Warning: Relation '{0}' has no Navigator", assocName);
-                return;
-            }
-
-            string colName = Construct.ForeignKeyColumnName(nav);
-            string indexName = Construct.ListPositionColumnName(nav);
+            string colName = Construct.ForeignKeyColumnName(otherEnd);
+            string indexName = Construct.ListPositionColumnName(otherEnd);
 
             if (!db.CheckFKConstraintExists(assocName))
             {

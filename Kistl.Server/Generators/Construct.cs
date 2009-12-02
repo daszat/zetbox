@@ -95,60 +95,68 @@ namespace Kistl.Server.Generators
             return "fk_" + colName;
         }
 
+        [Obsolete]
         public static string ForeignKeyColumnName(ObjectReferenceProperty prop)
         {
-            return ForeignKeyColumnName(prop.PropertyName);
+            return ForeignKeyColumnName(prop, string.Empty);
         }
 
+        [Obsolete]
         public static string ForeignKeyColumnName(ObjectReferenceProperty prop, string prefix)
         {
-            return ForeignKeyColumnName(NestedColumnName(prop, prefix));
+            return ForeignKeyColumnName(NestedColumnName(prop.RelationEnd.GetParent().GetOtherEnd(prop.RelationEnd).RoleName, prefix));
         }
 
-        /// <summary>
-        /// Create a name for a foreign key referencing the <see cref="DataType"/> dt.
-        /// </summary>
-        /// <param name="dt"></param>
-        /// <returns></returns>
-        public static string ForeignKeyColumnNameReferencing(DataType dt)
+        public static string ForeignKeyColumnName(RelationEnd otherEnd)
         {
-            return ForeignKeyColumnName(dt.ClassName);
+            return ForeignKeyColumnName(otherEnd, string.Empty);
+        }
+
+        public static string ForeignKeyColumnName(RelationEnd otherEnd, string prefix)
+        {
+            return ForeignKeyColumnName(NestedColumnName(otherEnd.RoleName, prefix));
+        }
+
+        public static string NestedColumnName(string prop, string parentPropName)
+        {
+            if (String.IsNullOrEmpty(parentPropName))
+                return prop;
+
+            return parentPropName + "_" + prop;
         }
 
         public static string NestedColumnName(Property prop, string parentPropName)
         {
-            if (String.IsNullOrEmpty(parentPropName))
-                return prop.PropertyName;
-
-            return parentPropName + "_" + prop.PropertyName;
+            return NestedColumnName(prop.PropertyName, parentPropName);
         }
 
-        public static string ListPositionColumnName(Property prop)
+        public static string ListPositionColumnName(ValueTypeProperty prop)
         {
-            return ListPositionColumnName(prop, "");
+            return ListPositionColumnName(prop, string.Empty);
         }
 
-        public static string ListPositionColumnName(Property prop, string parentPropName)
+        public static string ListPositionColumnName(ValueTypeProperty prop, string parentPropName)
         {
             return ForeignKeyColumnName(Construct.NestedColumnName(prop, parentPropName)) + "_pos";
         }
 
-        /// <summary>
-        /// This is used for the ParentIndex in CollectionEntrys
-        /// </summary>
-        public static string ListPositionColumnName(DataType cls)
+        [Obsolete]
+        public static string ListPositionColumnName(ObjectReferenceProperty prop, string parentPropName)
         {
-            return ForeignKeyColumnName(cls.ClassName) + "_pos";
+            RelationEnd relEnd = prop.RelationEnd;
+            RelationEnd otherEnd = relEnd.GetParent().GetOtherEnd(relEnd);
+            return ListPositionColumnName(otherEnd, parentPropName);
         }
 
-        /// <summary>
-        /// This is used for the ParentIndex in CollectionEntrys
-        /// </summary>
-        public static string ForeignListPositionColumnName(DataType cls)
+        public static string ListPositionColumnName(RelationEnd otherEnd)
         {
-            return ForeignKeyColumnNameReferencing(cls) + "_pos";
+            return ListPositionColumnName(otherEnd, string.Empty);
         }
 
+        public static string ListPositionColumnName(RelationEnd otherEnd, string parentPropName)
+        {
+            return ForeignKeyColumnName(Construct.NestedColumnName(otherEnd.RoleName, parentPropName)) + "_pos";
+        }
         #endregion
 
     }

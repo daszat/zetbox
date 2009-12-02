@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 
 using Kistl.App.Base;
+using Kistl.App.Extensions;
 using Kistl.Server.Generators.Extensions;
 using Arebis.CodeGeneration;
 using Kistl.API;
@@ -39,7 +40,8 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.EfModel
             else if (prop is ObjectReferenceProperty && prop.NeedsPositionColumn())
             {
                 propertyName += Kistl.API.Helper.PositionSuffix;
-                columnName = Construct.ListPositionColumnName(prop, parentName);
+                // TODO: Case #1306: SSDL should not rely on NavigationProperties. 
+                columnName = Construct.ListPositionColumnName((ObjectReferenceProperty)prop, parentName);
             }
             else
             {

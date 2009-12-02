@@ -33,6 +33,7 @@
 		}
 		else
 		{
+			// TODO: Case #1306: SSDL should not rely on NavigationProperties. 
 			string propertyName = (p is ObjectReferenceProperty) 
 				? Construct.ForeignKeyColumnName((ObjectReferenceProperty)p, prefix) 
 				: Construct.NestedColumnName(p, prefix);
@@ -55,12 +56,21 @@
     <Property Name="<%= propertyName %>" Type="<%= sqlTypeName %>" <%= maxLengthAttr %><%= nullableAttr %>/>
 <%
    			
-		    if (p.NeedsPositionColumn())
+		    if (p.NeedsPositionColumn() && (p is ObjectReferenceProperty))
 		    {
 %>
-    <Property Name="<%= Construct.ListPositionColumnName(p, prefix) %>" Type="int" Nullable="true" />
+			// TODO: Case #1306: SSDL should not rely on NavigationProperties. 
+    <Property Name="<%= Construct.ListPositionColumnName((ObjectReferenceProperty)p, prefix) %>" Type="int" Nullable="true" />
 <%
 			}
+			else
+		    {
+%>
+			// TODO: Case #1306: SSDL should not rely on NavigationProperties. 
+    <Property Name="<%= Construct.ListPositionColumnName((ValueTypeProperty)p, prefix) %>" Type="int" Nullable="true" />
+<%
+			}
+			
 		}
 	}
 %>
