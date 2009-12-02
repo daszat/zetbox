@@ -26,7 +26,7 @@
             </Style.Triggers>
         </Style>
     </UserControl.Style>
-    <UserControl.Triggers>
+    <!--<UserControl.Triggers>
         <EventTrigger RoutedEvent="UserControl.Loaded">
             <BeginStoryboard>
                 <Storyboard TargetName="Rotator"
@@ -37,7 +37,7 @@
                 </Storyboard>
             </BeginStoryboard>
         </EventTrigger>
-    </UserControl.Triggers>
+    </UserControl.Triggers>-->
     <Rectangle Stroke="Aqua"
                StrokeThickness="2"
                Width="10"
