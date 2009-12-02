@@ -15,11 +15,11 @@ C:\Windows\Microsoft.NET\Framework\v3.5\MSBuild.exe /m Kistl.Complete.sln
 IF ERRORLEVEL 1 GOTO FAIL
 
 rem populate database and generate other assemblies
-bin\debug\Kistl.Server.Service.exe -updateschema Kistl.Server\Database\Database.xml
+bin\debug\Kistl.Server.Service.exe Kistl.Server.Service\DefaultConfig.xml -updateschema Kistl.Server\Database\Database.xml
 IF ERRORLEVEL 1 GOTO FAIL
-bin\debug\Kistl.Server.Service.exe -deploy Kistl.Server\Database\Database.xml -updateschema -checkschema
+bin\debug\Kistl.Server.Service.exe Kistl.Server.Service\DefaultConfig.xml -deploy Kistl.Server\Database\Database.xml -updateschema -checkschema
 IF ERRORLEVEL 1 GOTO FAIL
-bin\debug\Kistl.Server.Service.exe -generate
+bin\debug\Kistl.Server.Service.exe Kistl.Server.Service\DefaultConfig.xml -generate
 IF ERRORLEVEL 1 GOTO FAIL
 
 rem refresh local code
