@@ -67,6 +67,8 @@ namespace Kistl.Client.WPF.View
             return CreateTemplate(pmd.GetDefaultViewDescriptor(Toolkit.WPF));
         }
 
+        private static Dictionary<Type, DataTemplate> templateCache = new Dictionary<Type, DataTemplate>();
+
         private static DataTemplate CreateTemplate(ViewDescriptor visualDesc)
         {
             if (visualDesc == null)
@@ -75,9 +77,21 @@ namespace Kistl.Client.WPF.View
             }
 
             Logging.Log.DebugFormat("Creating Template with {0}", visualDesc.ToString());
-            // TODO: cache already generated templates to reduce memory pressure
-            DataTemplate result = new DataTemplate();
-            result.VisualTree = new FrameworkElementFactory(visualDesc.ControlRef.AsType(true));
+            Type t = visualDesc.ControlRef.AsType(true);
+            DataTemplate result;
+            lock (templateCache)
+            {
+                if (!templateCache.ContainsKey(t))
+                {
+                    result = new DataTemplate();
+                    result.VisualTree = new FrameworkElementFactory(t);
+                    templateCache[t] = result;
+                }
+                else
+                {
+                    result = templateCache[t];
+                }
+            }
             return result;
         }
 

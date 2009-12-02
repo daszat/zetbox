@@ -15,3 +15,7 @@ del /Q .\Kistl.Objects.Server\*.*
 xcopy /y C:\temp\KistlCodeGen\Kistl.Objects.Server\*.* .\Kistl.Objects.Server
 
 
+rem *********** Assemblies *********** 
+rem Server & Interfaces comes from MSBuild
+xcopy /y C:\temp\KistlCodeGen\bin\Debug\Kistl.Objects.Client.* .\bin\debug
+xcopy /y C:\temp\KistlCodeGen\bin\Debug\Kistl.Objects.Frozen.* .\bin\debug

@@ -8,6 +8,8 @@
     <KistlDataContextType>Kistl.DALProvider.EF.KistlDataContext, Kistl.DALProvider.EF</KistlDataContextType>
     <ServerObjectHandlerType>Kistl.DALProvider.EF.ServerObjectHandler`1, Kistl.DALProvider.EF</ServerObjectHandlerType>
     <ServerObjectSetHandlerType>Kistl.DALProvider.EF.ServerObjectSetHandler, Kistl.DALProvider.EF</ServerObjectSetHandlerType>
+    <ServerCollectionHandlerType>Kistl.DALProvider.EF.ServerCollectionHandler`4, Kistl.DALProvider.EF</ServerCollectionHandlerType>
+    <IdentityProviderType>Kistl.Server.WCFIdentityProvider, Kistl.Server</IdentityProviderType>
   </Server>
   <Client StartClient="true" ThrowErrors="false">
     <DocumentStore>P:\Kistl\DocumentStore\Client\</DocumentStore>
@@ -15,5 +17,7 @@
   <SourceFileLocation>
     <string>C:\temp\KistlCodeGen\bin\Debug</string>
     <string>P:\Kistl\bin\Debug</string>
+    <!-- Fallback path for CC.net on srv2008 -->
+    <string>C:\CruiseControlData\Kistl\bin\Debug</string>
   </SourceFileLocation>
 </KistlConfig>

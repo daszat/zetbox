@@ -1,5 +1,4 @@
 @echo off
-cd Kistl.Server
-bin\debug\Kistl.Server.exe -deploy Database\Database.xml -updateschema -checkschema 
-bin\debug\Kistl.Server.exe -generate
+bin\debug\Kistl.Server.Service.exe -deploy Kistl.Server\Database\Database.xml -updateschema -checkschema 
+bin\debug\Kistl.Server.Service.exe -generate
 pause

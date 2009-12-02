@@ -1,4 +1,3 @@
 @echo off
-cd Kistl.Server
-bin\debug\Kistl.Server.exe -updateschema Database\Database.xml
+bin\debug\Kistl.Server.Service.exe -updateschema Kistl.Server\Database\Database.xml
 pause

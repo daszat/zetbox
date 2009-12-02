@@ -14,21 +14,19 @@ rem build bootstrapper
 C:\Windows\Microsoft.NET\Framework\v3.5\MSBuild.exe /m Kistl.Complete.sln
 IF ERRORLEVEL 1 GOTO FAIL
 
-cd Kistl.Server.Service
 
 rem populate database and generate other assemblies
-bin\debug\Kistl.Server.Service.exe -updateschema ..\Kistl.Server\Database\Database.xml
+bin\debug\Kistl.Server.Service.exe -updateschema Kistl.Server\Database\Database.xml
 IF ERRORLEVEL 1 GOTO FAIL
-bin\debug\Kistl.Server.Service.exe -deploy ..\Kistl.Server\Database\Database.xml -updateschema -checkschema
+bin\debug\Kistl.Server.Service.exe -deploy Kistl.Server\Database\Database.xml -updateschema -checkschema
 IF ERRORLEVEL 1 GOTO FAIL
 bin\debug\Kistl.Server.Service.exe -generate
 IF ERRORLEVEL 1 GOTO FAIL
 
 rem regenerate Database.xml to prove roundtrippability
-bin\debug\Kistl.Server.Service.exe -publish ..\Kistl.Server\Database\Database.xml *
+bin\debug\Kistl.Server.Service.exe -publish Kistl.Server\Database\Database.xml *
 IF ERRORLEVEL 1 GOTO FAIL
 
-cd ..
 
 rem refresh local code
 rem *********** Interface *********** 

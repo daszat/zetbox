@@ -17,8 +17,6 @@
   <SourceFileLocation>
     <string>C:\temp\KistlCodeGen\bin\Debug</string>
     <string>P:\Kistl\bin\Debug</string>
-    <string>P:\Kistl\Kistl.Objects\bin\Debug</string>
-    <string>P:\Kistl\Kistl.Objects.Server\bin\Debug</string>
     <!-- Fallback path for CC.net on srv2008 -->
     <string>C:\CruiseControlData\Kistl\bin\Debug</string>
   </SourceFileLocation>

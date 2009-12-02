@@ -1,4 +1,3 @@
 @echo off
-
-bin\debug\Kistl.Server.exe -updateschema
+..\bin\debug\Kistl.Server.Service.exe -updateschema
 pause

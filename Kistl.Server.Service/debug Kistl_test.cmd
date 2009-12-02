@@ -1,3 +1,2 @@
 @echo off
-
-bin\debug\Kistl.Server.exe TestConfig.xml
+..\bin\debug\Kistl.Server.Service.exe TestConfig.xml

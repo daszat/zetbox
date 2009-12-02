@@ -1,4 +1,2 @@
 @echo off
-cd bin\debug
-
-Kistl.Server.exe
+..\bin\debug\Kistl.Server.Service.exe

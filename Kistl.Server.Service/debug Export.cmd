@@ -1,4 +1,2 @@
 @echo off
-cd bin\debug
-
-Kistl.Server.exe -export c:\temp\KistlExport.xml *
+..\bin\debug\Kistl.Server.Service.exe -export c:\temp\KistlExport.xml *

@@ -357,6 +357,7 @@ namespace Kistl.App.Base
         }
         private EntityCollectionWrapper<Kistl.App.Base.MethodInvocation, Kistl.App.Base.MethodInvocation__Implementation__> _MethodInvocationsWrapper;
 
+		private List<int> MethodInvocationsIds;
 
 
         /// <summary>
@@ -405,6 +406,7 @@ namespace Kistl.App.Base
         }
         private EntityCollectionWrapper<Kistl.App.Base.Method, Kistl.App.Base.Method__Implementation__> _MethodsWrapper;
 
+		private List<int> MethodsIds;
 
 
         /// <summary>
@@ -543,6 +545,7 @@ namespace Kistl.App.Base
         }
         private EntityCollectionWrapper<Kistl.App.Base.Property, Kistl.App.Base.Property__Implementation__> _PropertiesWrapper;
 
+		private List<int> PropertiesIds;
 
 
         /// <summary>
@@ -960,7 +963,40 @@ namespace Kistl.App.Base
             if (this._isExportGuidSet) {
                 BinarySerializer.ToStream(this._ExportGuid, binStream);
             }
+			{
+				BinarySerializer.ToStream(MethodInvocations.Count, binStream);
+				foreach(var obj in MethodInvocations)
+				{
+					if (auxObjects != null) {
+						auxObjects.Add(obj);
+					}
+					BinarySerializer.ToStream(obj.ID, binStream);
+				}
+			}
+			{
+				BinarySerializer.ToStream(Methods.Count, binStream);
+				foreach(var obj in Methods)
+				{
+					if (auxObjects != null) {
+						auxObjects.Add(obj);
+					}
+					BinarySerializer.ToStream(obj.ID, binStream);
+				}
+			}
             BinarySerializer.ToStream(Module != null ? Module.ID : (int?)null, binStream);
+			if (auxObjects != null) {
+				auxObjects.Add(Module);
+			}
+			{
+				BinarySerializer.ToStream(Properties.Count, binStream);
+				foreach(var obj in Properties)
+				{
+					if (auxObjects != null) {
+						auxObjects.Add(obj);
+					}
+					BinarySerializer.ToStream(obj.ID, binStream);
+				}
+			}
             BinarySerializer.ToStream(this._ShowIconInLists, binStream);
             BinarySerializer.ToStream(this._ShowIdInLists, binStream);
             BinarySerializer.ToStream(this._ShowNameInLists, binStream);
@@ -977,7 +1013,43 @@ namespace Kistl.App.Base
             if (this._isExportGuidSet) {
                 BinarySerializer.FromStream(out this._ExportGuid, binStream);
             }
+			{
+				int numElements;
+				BinarySerializer.FromStream(out numElements, binStream);
+				MethodInvocationsIds = new List<int>(numElements);
+				while (numElements-- > 0) 
+				{
+					int id;
+					BinarySerializer.FromStream(out id, binStream);
+					MethodInvocationsIds.Add(id);
+				}
+			}
+
+			{
+				int numElements;
+				BinarySerializer.FromStream(out numElements, binStream);
+				MethodsIds = new List<int>(numElements);
+				while (numElements-- > 0) 
+				{
+					int id;
+					BinarySerializer.FromStream(out id, binStream);
+					MethodsIds.Add(id);
+				}
+			}
+
             BinarySerializer.FromStream(out this._fk_Module, binStream);
+			{
+				int numElements;
+				BinarySerializer.FromStream(out numElements, binStream);
+				PropertiesIds = new List<int>(numElements);
+				while (numElements-- > 0) 
+				{
+					int id;
+					BinarySerializer.FromStream(out id, binStream);
+					PropertiesIds.Add(id);
+				}
+			}
+
             BinarySerializer.FromStream(out this._ShowIconInLists, binStream);
             BinarySerializer.FromStream(out this._ShowIdInLists, binStream);
             BinarySerializer.FromStream(out this._ShowNameInLists, binStream);

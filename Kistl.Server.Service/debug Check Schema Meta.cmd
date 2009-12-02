@@ -1,4 +1,3 @@
 @echo off
-cd bin\debug
 
-Kistl.Server.exe -checkschema meta
+..\bin\debug\Kistl.Server.Service.exe -checkschema meta
