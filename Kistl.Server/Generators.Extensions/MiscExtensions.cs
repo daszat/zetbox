@@ -61,12 +61,9 @@ namespace Kistl.Server.Generators.Extensions
             return String.Format("{0}_{1}_{2}_RelationEntry", rel.A.Type.ClassName, rel.Verb, rel.B.Type.ClassName);
         }
 
-        /// <summary>
-        /// Support "legacy" non-unique naming scheme
-        /// </summary>
         public static string GetRelationTableName(this Relation rel)
         {
-            return String.Format("{0}_{1}_{2}", rel.A.Type.TableName, rel.Verb, rel.B.Type.TableName);
+            return String.Format("{0}_{1}_{2}", rel.A.RoleName, rel.Verb, rel.B.RoleName);
         }
 
         public static string GetRelationFullName(this Relation rel)
@@ -77,17 +74,7 @@ namespace Kistl.Server.Generators.Extensions
         public static string GetRelationFkColumnName(this Relation rel, RelationEndRole endRole)
         {
             var relEnd = rel.GetEndFromRole(endRole);
-            // legacy condition: if navigator exists, use his objectclass' name
-            // See Kistl.Server.GeneratorsOld.Helper.GeneratorHelper.CalcForeignKeyColumnName()
-            // TODO: remove this after reworking the SQL Generator to use Relations
-            if (relEnd.Navigator != null)
-            {
-                return "fk_" + relEnd.Navigator.ObjectClass.ClassName;
-            }
-            else
-            {
-                return "fk_" + relEnd.RoleName;
-            }
+            return "fk_" + relEnd.RoleName;
         }
         #endregion
 

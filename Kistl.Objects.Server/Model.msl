@@ -681,24 +681,24 @@
                            TypeName="Model.FK_MuhBlah_ManyList_Role_has_TestCustomObjects_ManyList_Role_A"
                            StoreEntitySet="Muhblah_has_TestCustomObject_RelationEntry" >
       <EndProperty Name="MuhBlah_ManyList_Role">
-        <ScalarProperty Name="ID" ColumnName="fk_Muhblah"/>
+        <ScalarProperty Name="ID" ColumnName="fk_MuhBlah_ManyList_Role"/>
       </EndProperty>
       <EndProperty Name="CollectionEntry">
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
-      <Condition ColumnName="fk_Muhblah" IsNull="false"/>
+      <Condition ColumnName="fk_MuhBlah_ManyList_Role" IsNull="false"/>
     </AssociationSetMapping>
     <!-- B to CollectionEntry -->
     <AssociationSetMapping Name="FK_MuhBlah_ManyList_Role_has_TestCustomObjects_ManyList_Role_B"
                            TypeName="Model.FK_MuhBlah_ManyList_Role_has_TestCustomObjects_ManyList_Role_B"
                            StoreEntitySet="Muhblah_has_TestCustomObject_RelationEntry" >
       <EndProperty Name="TestCustomObjects_ManyList_Role">
-        <ScalarProperty Name="ID" ColumnName="fk_TestCustomObject"/>
+        <ScalarProperty Name="ID" ColumnName="fk_TestCustomObjects_ManyList_Role"/>
       </EndProperty>
       <EndProperty Name="CollectionEntry">
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
-      <Condition ColumnName="fk_TestCustomObject" IsNull="false"/>
+      <Condition ColumnName="fk_TestCustomObjects_ManyList_Role" IsNull="false"/>
     </AssociationSetMapping>
 
     <!--
@@ -759,12 +759,12 @@
                            TypeName="Model.FK_Presentable_displayedBy_SecondaryControlKinds_A"
                            StoreEntitySet="PresentableModelDescriptor_displayedBy_ControlKind_RelationEntry" >
       <EndProperty Name="Presentable">
-        <ScalarProperty Name="ID" ColumnName="fk_PresentableModelDescriptor"/>
+        <ScalarProperty Name="ID" ColumnName="fk_Presentable"/>
       </EndProperty>
       <EndProperty Name="CollectionEntry">
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
-      <Condition ColumnName="fk_PresentableModelDescriptor" IsNull="false"/>
+      <Condition ColumnName="fk_Presentable" IsNull="false"/>
     </AssociationSetMapping>
     <!-- B to CollectionEntry -->
     <AssociationSetMapping Name="FK_Presentable_displayedBy_SecondaryControlKinds_B"
@@ -789,7 +789,7 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.Projekt_haben_Mitarbeiter_RelationEntry)">
         <MappingFragment StoreEntitySet="Projekt_haben_Mitarbeiter_RelationEntry">
           <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="A_pos" ColumnName="fk_Projekt_pos" />
+          <ScalarProperty Name="A_pos" ColumnName="fk_Projekte_pos" />
           <ScalarProperty Name="B_pos" ColumnName="fk_Mitarbeiter_pos" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -799,12 +799,12 @@
                            TypeName="Model.FK_Projekte_haben_Mitarbeiter_A"
                            StoreEntitySet="Projekt_haben_Mitarbeiter_RelationEntry" >
       <EndProperty Name="Projekte">
-        <ScalarProperty Name="ID" ColumnName="fk_Projekt"/>
+        <ScalarProperty Name="ID" ColumnName="fk_Projekte"/>
       </EndProperty>
       <EndProperty Name="CollectionEntry">
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
-      <Condition ColumnName="fk_Projekt" IsNull="false"/>
+      <Condition ColumnName="fk_Projekte" IsNull="false"/>
     </AssociationSetMapping>
     <!-- B to CollectionEntry -->
     <AssociationSetMapping Name="FK_Projekte_haben_Mitarbeiter_B"

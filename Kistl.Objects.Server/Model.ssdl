@@ -396,7 +396,7 @@
     B: ZeroOrMore TypeRef as SupportedInterfaces
     Preferred Storage: Separate
     -->
-    <EntitySet Name="ControlKindClass_supports_TypeRef_RelationEntry" EntityType="Model.Store.ControlKindClass_supports_TypeRef_RelationEntry" Table="ControlKindClasses_supports_TypeRefs" />
+    <EntitySet Name="ControlKindClass_supports_TypeRef_RelationEntry" EntityType="Model.Store.ControlKindClass_supports_TypeRef_RelationEntry" Table="ControlKindClass_supports_SupportedInterfaces" />
     <AssociationSet Name="FK_ControlKindClass_supports_SupportedInterfaces_A" Association="Model.Store.FK_ControlKindClass_supports_SupportedInterfaces_A" >
       <End Role="ControlKindClass" EntitySet="ControlKindClass" />
       <End Role="CollectionEntry" EntitySet="ControlKindClass_supports_TypeRef_RelationEntry" />
@@ -412,7 +412,7 @@
     B: ZeroOrMore TestCustomObject as TestCustomObjects_ManyList_Role
     Preferred Storage: Separate
     -->
-    <EntitySet Name="Muhblah_has_TestCustomObject_RelationEntry" EntityType="Model.Store.Muhblah_has_TestCustomObject_RelationEntry" Table="Muhblas_has_TestCustomObjects" />
+    <EntitySet Name="Muhblah_has_TestCustomObject_RelationEntry" EntityType="Model.Store.Muhblah_has_TestCustomObject_RelationEntry" Table="MuhBlah_ManyList_Role_has_TestCustomObjects_ManyList_Role" />
     <AssociationSet Name="FK_MuhBlah_ManyList_Role_has_TestCustomObjects_ManyList_Role_A" Association="Model.Store.FK_MuhBlah_ManyList_Role_has_TestCustomObjects_ManyList_Role_A" >
       <End Role="MuhBlah_ManyList_Role" EntitySet="Muhblah" />
       <End Role="CollectionEntry" EntitySet="Muhblah_has_TestCustomObject_RelationEntry" />
@@ -428,7 +428,7 @@
     B: ZeroOrMore Interface as ImplementsInterfaces
     Preferred Storage: Separate
     -->
-    <EntitySet Name="ObjectClass_implements_Interface_RelationEntry" EntityType="Model.Store.ObjectClass_implements_Interface_RelationEntry" Table="ObjectClasses_implements_Interfaces" />
+    <EntitySet Name="ObjectClass_implements_Interface_RelationEntry" EntityType="Model.Store.ObjectClass_implements_Interface_RelationEntry" Table="ObjectClass_implements_ImplementsInterfaces" />
     <AssociationSet Name="FK_ObjectClass_implements_ImplementsInterfaces_A" Association="Model.Store.FK_ObjectClass_implements_ImplementsInterfaces_A" >
       <End Role="ObjectClass" EntitySet="ObjectClass" />
       <End Role="CollectionEntry" EntitySet="ObjectClass_implements_Interface_RelationEntry" />
@@ -444,7 +444,7 @@
     B: ZeroOrMore ControlKind as SecondaryControlKinds
     Preferred Storage: Separate
     -->
-    <EntitySet Name="PresentableModelDescriptor_displayedBy_ControlKind_RelationEntry" EntityType="Model.Store.PresentableModelDescriptor_displayedBy_ControlKind_RelationEntry" Table="PresentableModelDescriptors_displayedBy_ControlKinds" />
+    <EntitySet Name="PresentableModelDescriptor_displayedBy_ControlKind_RelationEntry" EntityType="Model.Store.PresentableModelDescriptor_displayedBy_ControlKind_RelationEntry" Table="Presentable_displayedBy_SecondaryControlKinds" />
     <AssociationSet Name="FK_Presentable_displayedBy_SecondaryControlKinds_A" Association="Model.Store.FK_Presentable_displayedBy_SecondaryControlKinds_A" >
       <End Role="Presentable" EntitySet="PresentableModelDescriptor" />
       <End Role="CollectionEntry" EntitySet="PresentableModelDescriptor_displayedBy_ControlKind_RelationEntry" />
@@ -476,7 +476,7 @@
     B: ZeroOrMore Visual as Menu
     Preferred Storage: Separate
     -->
-    <EntitySet Name="Template_hasMenu_Visual_RelationEntry" EntityType="Model.Store.Template_hasMenu_Visual_RelationEntry" Table="Templates_hasMenu_Visuals" />
+    <EntitySet Name="Template_hasMenu_Visual_RelationEntry" EntityType="Model.Store.Template_hasMenu_Visual_RelationEntry" Table="Template_hasMenu_Menu" />
     <AssociationSet Name="FK_Template_hasMenu_Menu_A" Association="Model.Store.FK_Template_hasMenu_Menu_A" >
       <End Role="Template" EntitySet="Template" />
       <End Role="CollectionEntry" EntitySet="Template_hasMenu_Visual_RelationEntry" />
@@ -492,7 +492,7 @@
     B: ZeroOrMore TypeRef as GenericArguments
     Preferred Storage: Separate
     -->
-    <EntitySet Name="TypeRef_hasGenericArguments_TypeRef_RelationEntry" EntityType="Model.Store.TypeRef_hasGenericArguments_TypeRef_RelationEntry" Table="TypeRefs_hasGenericArguments_TypeRefs" />
+    <EntitySet Name="TypeRef_hasGenericArguments_TypeRef_RelationEntry" EntityType="Model.Store.TypeRef_hasGenericArguments_TypeRef_RelationEntry" Table="TypeRef_hasGenericArguments_GenericArguments" />
     <AssociationSet Name="FK_TypeRef_hasGenericArguments_GenericArguments_A" Association="Model.Store.FK_TypeRef_hasGenericArguments_GenericArguments_A" >
       <End Role="TypeRef" EntitySet="TypeRef" />
       <End Role="CollectionEntry" EntitySet="TypeRef_hasGenericArguments_TypeRef_RelationEntry" />
@@ -508,7 +508,7 @@
     B: ZeroOrMore Visual as Children
     Preferred Storage: Separate
     -->
-    <EntitySet Name="Visual_contains_Visual_RelationEntry" EntityType="Model.Store.Visual_contains_Visual_RelationEntry" Table="Visuals_contains_Visuals" />
+    <EntitySet Name="Visual_contains_Visual_RelationEntry" EntityType="Model.Store.Visual_contains_Visual_RelationEntry" Table="Visual_contains_Children" />
     <AssociationSet Name="FK_Visual_contains_Children_A" Association="Model.Store.FK_Visual_contains_Children_A" >
       <End Role="Visual" EntitySet="Visual" />
       <End Role="CollectionEntry" EntitySet="Visual_contains_Visual_RelationEntry" />
@@ -524,7 +524,7 @@
     B: ZeroOrMore Visual as ContextMenu
     Preferred Storage: Separate
     -->
-    <EntitySet Name="Visual_hasContextMenu_Visual_RelationEntry" EntityType="Model.Store.Visual_hasContextMenu_Visual_RelationEntry" Table="Visuals_hasContextMenu_Visuals" />
+    <EntitySet Name="Visual_hasContextMenu_Visual_RelationEntry" EntityType="Model.Store.Visual_hasContextMenu_Visual_RelationEntry" Table="Visual_hasContextMenu_ContextMenu" />
     <AssociationSet Name="FK_Visual_hasContextMenu_ContextMenu_A" Association="Model.Store.FK_Visual_hasContextMenu_ContextMenu_A" >
       <End Role="Visual" EntitySet="Visual" />
       <End Role="CollectionEntry" EntitySet="Visual_hasContextMenu_Visual_RelationEntry" />
@@ -540,7 +540,7 @@
     B: ZeroOrMore Mitarbeiter as Mitarbeiter
     Preferred Storage: Separate
     -->
-    <EntitySet Name="WorkEffortAccount_has_Mitarbeiter_RelationEntry" EntityType="Model.Store.WorkEffortAccount_has_Mitarbeiter_RelationEntry" Table="WorkEffortAccounts_has_Mitarbeiter" />
+    <EntitySet Name="WorkEffortAccount_has_Mitarbeiter_RelationEntry" EntityType="Model.Store.WorkEffortAccount_has_Mitarbeiter_RelationEntry" Table="WorkEffortAccount_has_Mitarbeiter" />
     <AssociationSet Name="FK_WorkEffortAccount_has_Mitarbeiter_A" Association="Model.Store.FK_WorkEffortAccount_has_Mitarbeiter_A" >
       <End Role="WorkEffortAccount" EntitySet="WorkEffortAccount" />
       <End Role="CollectionEntry" EntitySet="WorkEffortAccount_has_Mitarbeiter_RelationEntry" />
@@ -1691,8 +1691,8 @@
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
 		
-    <Property Name="fk_Muhblah" Type="int" Nullable="true" />
-    <Property Name="fk_TestCustomObject" Type="int" Nullable="true" />
+    <Property Name="fk_MuhBlah_ManyList_Role" Type="int" Nullable="true" />
+    <Property Name="fk_TestCustomObjects_ManyList_Role" Type="int" Nullable="true" />
   </EntityType>
 
   <!-- A to CollectionEntry -->
@@ -1704,7 +1704,7 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="CollectionEntry">
-        <PropertyRef Name="fk_Muhblah" />
+        <PropertyRef Name="fk_MuhBlah_ManyList_Role" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1718,7 +1718,7 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="CollectionEntry">
-        <PropertyRef Name="fk_TestCustomObject" />
+        <PropertyRef Name="fk_TestCustomObjects_ManyList_Role" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1771,7 +1771,7 @@
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
 	<Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
 		
-    <Property Name="fk_PresentableModelDescriptor" Type="int" Nullable="true" />
+    <Property Name="fk_Presentable" Type="int" Nullable="true" />
     <Property Name="fk_SecondaryControlKinds" Type="int" Nullable="true" />
   </EntityType>
 
@@ -1784,7 +1784,7 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="CollectionEntry">
-        <PropertyRef Name="fk_PresentableModelDescriptor" />
+        <PropertyRef Name="fk_Presentable" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1810,8 +1810,8 @@
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
 		
-    <Property Name="fk_Projekt" Type="int" Nullable="true" />
-    <Property Name="fk_Projekt_pos" Type="int" Nullable="true" />
+    <Property Name="fk_Projekte" Type="int" Nullable="true" />
+    <Property Name="fk_Projekte_pos" Type="int" Nullable="true" />
     <Property Name="fk_Mitarbeiter" Type="int" Nullable="true" />
     <Property Name="fk_Mitarbeiter_pos" Type="int" Nullable="true" />
   </EntityType>
@@ -1825,7 +1825,7 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="CollectionEntry">
-        <PropertyRef Name="fk_Projekt" />
+        <PropertyRef Name="fk_Projekte" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
