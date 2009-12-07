@@ -23,7 +23,7 @@ namespace Kistl.App.Extensions
         {
             RelationEnd relEnd = rel.GetEndFromRole(endRole);
 
-            return String.Format("FK_{0}_{1}_{2}_{3}", rel.A.Type.ClassName, rel.Verb, rel.B.Type.ClassName, relEnd.RoleName);
+            return String.Format("FK_{0}_{1}_{2}_{3}", rel.A.RoleName, rel.Verb, rel.B.RoleName, relEnd.GetRole());
         }
 
         /// <summary>
@@ -31,7 +31,7 @@ namespace Kistl.App.Extensions
         /// </summary>
         public static string GetAssociationName(this Relation rel)
         {
-            return String.Format("FK_{0}_{1}_{2}", rel.A.Type.ClassName, rel.Verb, rel.B.Type.ClassName);
+            return String.Format("FK_{0}_{1}_{2}", rel.A.RoleName, rel.Verb, rel.B.RoleName);
         }
 
         public static RelationEndRole GetRole(this RelationEnd relEnd)
