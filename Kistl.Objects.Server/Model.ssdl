@@ -1124,7 +1124,7 @@
 	
   <EntityType Name="Kunde">
     <Key>
-      <PropertyRef Name="ID" />
+      <PropertyRef Name="ID" /> 
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="Adresse" Type="nvarchar" MaxLength="200" Nullable="true" />
