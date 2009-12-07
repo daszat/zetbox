@@ -617,6 +617,10 @@
       <End Role="Module" EntitySet="Module" />
       <End Role="Relation" EntitySet="Relation" />
     </AssociationSet>
+    <AssociationSet Name="FK_Muhblah_has_TestCustomObject" Association="Model.Store.FK_Muhblah_has_TestCustomObject" >
+      <End Role="MuhBlah_Role" EntitySet="Muhblah" />
+      <End Role="TestCustomObjects_List_Role" EntitySet="TestCustomObject" />
+    </AssociationSet>
     <AssociationSet Name="FK_ObjectClass_has_ObjectClass" Association="Model.Store.FK_ObjectClass_has_ObjectClass" >
       <End Role="BaseObjectClass" EntitySet="ObjectClass" />
       <End Role="SubClasses" EntitySet="ObjectClass" />
@@ -1124,7 +1128,7 @@
 	
   <EntityType Name="Kunde">
     <Key>
-      <PropertyRef Name="ID" /> 
+      <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="Adresse" Type="nvarchar" MaxLength="200" Nullable="true" />
@@ -1505,12 +1509,9 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_MuhBlah_Role" Type="int" />
     <Property Name="Birthday" Type="datetime" Nullable="true" />
     <Property Name="PersonName" Type="nvarchar" MaxLength="200" Nullable="false" />
-    <Property Name="PhoneNumberMobile_AreaCode" Type="nvarchar" MaxLength="50" Nullable="true" />
-    <Property Name="PhoneNumberMobile_Number" Type="nvarchar" MaxLength="50" Nullable="true" />
-    <Property Name="PhoneNumberOffice_AreaCode" Type="nvarchar" MaxLength="50" Nullable="true" />
-    <Property Name="PhoneNumberOffice_Number" Type="nvarchar" MaxLength="50" Nullable="true" />
  
   </EntityType>
 	
@@ -2280,6 +2281,21 @@
       </Principal>
       <Dependent Role="Relation">
         <PropertyRef Name="fk_Module" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_Muhblah_has_TestCustomObject">
+    <End Role="MuhBlah_Role" Type="Model.Store.Muhblah" Multiplicity="0..1" />
+    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
+    <End Role="TestCustomObjects_List_Role" Type="Model.Store.TestCustomObject" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MuhBlah_Role">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TestCustomObjects_List_Role">
+        <PropertyRef Name="fk_MuhBlah_Role" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

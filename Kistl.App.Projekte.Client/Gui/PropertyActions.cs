@@ -25,6 +25,7 @@ namespace Kistl.App.Projekte.Gui
         public static Guid PresentableModelDescriptor_NullableValuePropertyModel_Int = new Guid("edaf9334-dc36-4778-aa33-1e5cdaeeb767");
         public static Guid PresentableModelDescriptor_NullableValuePropertyModel_Guid = new Guid("2B6FB70F-A382-4057-A139-CC33333D619D");
         public static Guid PresentableModelDescriptor_ObjectReferenceModel = new Guid("83aae6fd-0fae-4348-b313-737a6e751027");
+        public static Guid PresentableModelDescriptor_ObjectListModel = new Guid("9fce01fe-fd6d-4e21-8b55-08d5e38aea36");
         public static Guid PresentableModelDescriptor_ReferencePropertyModel_String = new Guid("975eee82-e7e1-4a12-ab43-d2e3bc3766e4");
 
         public void OnNotifyCreated_BoolProperty(Kistl.App.Base.BoolProperty obj)
@@ -59,7 +60,14 @@ namespace Kistl.App.Projekte.Gui
 
         public void OnNotifyCreated_ObjectReferenceProperty(Kistl.App.Base.ObjectReferenceProperty obj)
         {
-            obj.ValueModelDescriptor = obj.Context.FindPersistenceObject<PresentableModelDescriptor>(PresentableModelDescriptor_ObjectReferenceModel);
+            if (obj.IsList())
+            {
+                obj.ValueModelDescriptor = obj.Context.FindPersistenceObject<PresentableModelDescriptor>(PresentableModelDescriptor_ObjectListModel);
+            }
+            else
+            {
+                obj.ValueModelDescriptor = obj.Context.FindPersistenceObject<PresentableModelDescriptor>(PresentableModelDescriptor_ObjectReferenceModel);
+            }
         }
 
         public void OnNotifyCreated_StringProperty(Kistl.App.Base.StringProperty obj)

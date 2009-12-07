@@ -111,6 +111,54 @@ namespace Kistl.App.Test
         /// <summary>
         /// 
         /// </summary>
+    /*
+    Relation: FK_Muhblah_has_TestCustomObject
+    A: ZeroOrOne Muhblah as MuhBlah_Role
+    B: ZeroOrMore TestCustomObject as TestCustomObjects_List_Role
+    Preferred Storage: MergeIntoB
+    */
+        // object list property
+   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.ObjectListProperty
+	    // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public ICollection<Kistl.App.Test.TestCustomObject> TestCustomObjects_List_Nav
+        {
+            get
+            {
+                if (_TestCustomObjects_List_NavWrapper == null)
+                {
+                    _TestCustomObjects_List_NavWrapper = new EntityCollectionWrapper<Kistl.App.Test.TestCustomObject, Kistl.App.Test.TestCustomObject__Implementation__>(
+                            this.Context, TestCustomObjects_List_Nav__Implementation__);
+                }
+                return _TestCustomObjects_List_NavWrapper;
+            }
+        }
+        
+        [EdmRelationshipNavigationProperty("Model", "FK_Muhblah_has_TestCustomObject", "TestCustomObjects_List_Role")]
+        public EntityCollection<Kistl.App.Test.TestCustomObject__Implementation__> TestCustomObjects_List_Nav__Implementation__
+        {
+            get
+            {
+                var c = ((IEntityWithRelationships)(this)).RelationshipManager
+                    .GetRelatedCollection<Kistl.App.Test.TestCustomObject__Implementation__>(
+                        "Model.FK_Muhblah_has_TestCustomObject",
+                        "TestCustomObjects_List_Role");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !c.IsLoaded)
+                {
+                    c.Load();
+                }
+                return c;
+            }
+        }
+        private EntityCollectionWrapper<Kistl.App.Test.TestCustomObject, Kistl.App.Test.TestCustomObject__Implementation__> _TestCustomObjects_List_NavWrapper;
+
+
+
+        /// <summary>
+        /// 
+        /// </summary>
         // value type property
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -354,6 +402,15 @@ namespace Kistl.App.Test
 					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("9206e71e-85ea-4d74-85ea-59ee2484ed2a")).Constraints
 						.Where(c => !c.IsValid(this, this.TestBool))
 						.Select(c => c.GetErrorText(this, this.TestBool))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "TestCustomObjects_List_Nav":
+				{
+					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("1f944324-673f-4f14-94c8-dc570ea3022d")).Constraints
+						.Where(c => !c.IsValid(this, this.TestCustomObjects_List_Nav))
+						.Select(c => c.GetErrorText(this, this.TestCustomObjects_List_Nav))
 						.ToArray();
 					
 					return String.Join("; ", errors);

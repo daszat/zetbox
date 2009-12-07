@@ -23,6 +23,11 @@ namespace Kistl.App.Test
         /// <summary>
         /// 
         /// </summary>
+
+        ICollection<Kistl.App.Test.TestCustomObject> TestCustomObjects_List_Nav { get; }
+        /// <summary>
+        /// 
+        /// </summary>
 		DateTime? TestDateTime {
 			get;
 			set;

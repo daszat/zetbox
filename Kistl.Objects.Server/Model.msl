@@ -560,14 +560,6 @@
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="Birthday" ColumnName="Birthday" />
 <ScalarProperty Name="PersonName" ColumnName="PersonName" />
-<ComplexProperty Name="PhoneNumberMobile__Implementation__" TypeName="Model.TestPhoneStruct">
-<ScalarProperty Name="AreaCode" ColumnName="PhoneNumberMobile_AreaCode" />
-<ScalarProperty Name="Number" ColumnName="PhoneNumberMobile_Number" />
-</ComplexProperty>
-<ComplexProperty Name="PhoneNumberOffice__Implementation__" TypeName="Model.TestPhoneStruct">
-<ScalarProperty Name="AreaCode" ColumnName="PhoneNumberOffice_AreaCode" />
-<ScalarProperty Name="Number" ColumnName="PhoneNumberOffice_Number" />
-</ComplexProperty>
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1324,6 +1316,23 @@
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="fk_Module" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_Muhblah_has_TestCustomObject
+    A: ZeroOrOne Muhblah as MuhBlah_Role
+    B: ZeroOrMore TestCustomObject as TestCustomObjects_List_Role
+    Preferred Storage: MergeIntoB
+    -->
+    <AssociationSetMapping Name="FK_Muhblah_has_TestCustomObject"
+                           TypeName="Model.FK_Muhblah_has_TestCustomObject"
+                           StoreEntitySet="TestCustomObject" >
+      <EndProperty Name="MuhBlah_Role">
+        <ScalarProperty Name="ID" ColumnName="fk_MuhBlah_Role"/>
+      </EndProperty>
+      <EndProperty Name="TestCustomObjects_List_Role">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_MuhBlah_Role" IsNull="false"/>
     </AssociationSetMapping>
     <!--
     Relation: FK_ObjectClass_has_ObjectClass

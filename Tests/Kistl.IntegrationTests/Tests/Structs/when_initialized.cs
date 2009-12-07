@@ -24,10 +24,10 @@ namespace Kistl.IntegrationTests.Structs
                 obj.Birthday = DateTime.Today;
                 obj.PersonName = "Person";
 
-                obj.PhoneNumberMobile.AreaCode = "43 664";
-                obj.PhoneNumberMobile.Number = "12345";
-                obj.PhoneNumberOffice.AreaCode = "43 1";
-                obj.PhoneNumberOffice.Number = "12345";
+                //obj.PhoneNumberMobile.AreaCode = "43 664";
+                //obj.PhoneNumberMobile.Number = "12345";
+                //obj.PhoneNumberOffice.AreaCode = "43 1";
+                //obj.PhoneNumberOffice.Number = "12345";
 
                 ctx.SubmitChanges();
             }

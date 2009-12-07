@@ -21,23 +21,18 @@ namespace Kistl.App.Test
 			set;
 		}
         /// <summary>
+        /// 
+        /// </summary>
+		Kistl.App.Test.Muhblah MubBlah_Nav {
+			get;
+			set;
+		}
+        /// <summary>
         /// Person&apos;s Name
         /// </summary>
 		string PersonName {
 			get;
 			set;
-		}
-        /// <summary>
-        /// Mobile Phone Number
-        /// </summary>
-		Kistl.App.Test.TestPhoneStruct PhoneNumberMobile {
-			get;
-		}
-        /// <summary>
-        /// Office Phone Number
-        /// </summary>
-		Kistl.App.Test.TestPhoneStruct PhoneNumberOffice {
-			get;
 		}
     }
 }

@@ -210,6 +210,10 @@
       <End Role="Module" EntitySet="Module" />
       <End Role="Relation" EntitySet="Relation" />
     </AssociationSet>
+    <AssociationSet Name="FK_Muhblah_has_TestCustomObject" Association="Model.FK_Muhblah_has_TestCustomObject" >
+      <End Role="MuhBlah_Role" EntitySet="Muhblah" />
+      <End Role="TestCustomObjects_List_Role" EntitySet="TestCustomObject" />
+    </AssociationSet>
     <AssociationSet Name="FK_ObjectClass_has_ObjectClass" Association="Model.FK_ObjectClass_has_ObjectClass" >
       <End Role="BaseObjectClass" EntitySet="DataType" />
       <End Role="SubClasses" EntitySet="DataType" />
@@ -634,6 +638,10 @@
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
     <Property Name="TestBool" Type="Boolean" Nullable="true" />
+    <NavigationProperty Name="TestCustomObjects_List_Nav__Implementation__"
+                        Relationship="Model.FK_Muhblah_has_TestCustomObject"
+                        FromRole="MuhBlah_Role"
+                        ToRole="TestCustomObjects_List_Role" />
     <Property Name="TestDateTime" Type="DateTime" Nullable="true" />
     <Property Name="TestEnum__Implementation__" Type="Int32" Nullable="false" />
     <Property Name="TestString" Type="String" Nullable="true" MaxLength="4000" />
@@ -838,13 +846,11 @@
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
     <Property Name="Birthday" Type="DateTime" Nullable="true" />
+    <NavigationProperty Name="MubBlah_Nav__Implementation__"
+                        Relationship="Model.FK_Muhblah_has_TestCustomObject"
+                        FromRole="TestCustomObjects_List_Role"
+                        ToRole="MuhBlah_Role" />
     <Property Name="PersonName" Type="String" Nullable="false" MaxLength="200" />
-    <Property Name="PhoneNumberMobile__Implementation__"
-              Type="Model.TestPhoneStruct"
-              Nullable="false" />
-    <Property Name="PhoneNumberOffice__Implementation__"
-              Type="Model.TestPhoneStruct"
-              Nullable="false" />
   </EntityType>
   <EntityType Name="TestObjClass">
     <Key>
@@ -1687,6 +1693,14 @@
          Multiplicity="0..1" />
     <End Role="Relation"
          Type="Model.Relation" 
+         Multiplicity="*" />
+  </Association>
+  <Association Name="FK_Muhblah_has_TestCustomObject" >
+    <End Role="MuhBlah_Role"
+         Type="Model.Muhblah" 
+         Multiplicity="0..1" />
+    <End Role="TestCustomObjects_List_Role"
+         Type="Model.TestCustomObject" 
          Multiplicity="*" />
   </Association>
   <Association Name="FK_ObjectClass_has_ObjectClass" >
