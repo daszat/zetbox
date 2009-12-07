@@ -105,21 +105,36 @@ namespace Kistl.App.Base
             e.Result.Module = obj.Module;
         }
 
+        // TODO: Replace this when NamedInstances are introduced 
+        public static Guid PresentableModelDescriptor_ObjectReferenceModel = new Guid("83aae6fd-0fae-4348-b313-737a6e751027");
+        public static Guid PresentableModelDescriptor_ObjectListModel = new Guid("9fce01fe-fd6d-4e21-8b55-08d5e38aea36");
+
         public void OnCreateNavigator_RelationEnd(RelationEnd obj, MethodReturnEventArgs<ObjectReferenceProperty> e)
         {
             Relation rel = obj.AParent ?? obj.BParent;
-            RelationEnd other = null; // rel.GetOtherEnd(obj);
+            RelationEnd other = rel != null ? rel.GetOtherEnd(obj) : null;
 
-            e.Result = obj.Context.Create<ObjectReferenceProperty>();
-            e.Result.CategoryTags = "";
-            e.Result.ObjectClass = obj.Type;
-            e.Result.RelationEnd = obj;
-            e.Result.Module = rel.Module;
+            var nav = obj.Context.Create<ObjectReferenceProperty>();
+            nav.CategoryTags = "";
+            nav.ObjectClass = obj.Type;
+            nav.RelationEnd = obj;
+            nav.Module = rel != null ? rel.Module : null;
 
             if (other != null)
             {
-                e.Result.PropertyName = other.RoleName;
+                if (nav.IsList())
+                {
+                    nav.ValueModelDescriptor = obj.Context.FindPersistenceObject<PresentableModelDescriptor>(PresentableModelDescriptor_ObjectListModel);
+                }
+                else
+                {
+                    nav.ValueModelDescriptor = obj.Context.FindPersistenceObject<PresentableModelDescriptor>(PresentableModelDescriptor_ObjectReferenceModel);
+                }
+
+                nav.PropertyName = other.RoleName;
             }
+
+            e.Result = nav;
         }
 
         #endregion

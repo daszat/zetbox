@@ -23,6 +23,11 @@ namespace Kistl.App.Test
         /// <summary>
         /// 
         /// </summary>
+
+        ICollection<Kistl.App.Test.Muhblah> MubBlah_List_Nav { get; }
+        /// <summary>
+        /// 
+        /// </summary>
 		Kistl.App.Test.Muhblah MubBlah_Nav {
 			get;
 			set;

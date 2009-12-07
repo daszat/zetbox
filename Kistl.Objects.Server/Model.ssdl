@@ -621,6 +621,10 @@
       <End Role="MuhBlah_Role" EntitySet="Muhblah" />
       <End Role="TestCustomObjects_List_Role" EntitySet="TestCustomObject" />
     </AssociationSet>
+    <AssociationSet Name="FK_Muhblah_hasOther_TestCustomObject" Association="Model.Store.FK_Muhblah_hasOther_TestCustomObject" >
+      <End Role="MuhBlah_List_Role" EntitySet="Muhblah" />
+      <End Role="TestCustomObjects_Role" EntitySet="TestCustomObject" />
+    </AssociationSet>
     <AssociationSet Name="FK_ObjectClass_has_ObjectClass" Association="Model.Store.FK_ObjectClass_has_ObjectClass" >
       <End Role="BaseObjectClass" EntitySet="ObjectClass" />
       <End Role="SubClasses" EntitySet="ObjectClass" />
@@ -1220,6 +1224,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_TestCustomObjects_Role" Type="int" />
     <Property Name="TestBool" Type="bit" Nullable="true" />
     <Property Name="TestDateTime" Type="datetime" Nullable="true" />
     <Property Name="TestEnum" Type="int" Nullable="false" />
@@ -2296,6 +2301,21 @@
       </Principal>
       <Dependent Role="TestCustomObjects_List_Role">
         <PropertyRef Name="fk_MuhBlah_Role" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_Muhblah_hasOther_TestCustomObject">
+    <End Role="TestCustomObjects_Role" Type="Model.Store.TestCustomObject" Multiplicity="0..1" />
+    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
+    <End Role="MuhBlah_List_Role" Type="Model.Store.Muhblah" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TestCustomObjects_Role">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="MuhBlah_List_Role">
+        <PropertyRef Name="fk_TestCustomObjects_Role" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

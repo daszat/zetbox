@@ -112,6 +112,54 @@ namespace Kistl.App.Test
         /// 
         /// </summary>
     /*
+    Relation: FK_Muhblah_hasOther_TestCustomObject
+    A: ZeroOrMore Muhblah as MuhBlah_List_Role
+    B: ZeroOrOne TestCustomObject as TestCustomObjects_Role
+    Preferred Storage: MergeIntoA
+    */
+        // object list property
+   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.ObjectListProperty
+	    // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public ICollection<Kistl.App.Test.Muhblah> MubBlah_List_Nav
+        {
+            get
+            {
+                if (_MubBlah_List_NavWrapper == null)
+                {
+                    _MubBlah_List_NavWrapper = new EntityCollectionWrapper<Kistl.App.Test.Muhblah, Kistl.App.Test.Muhblah__Implementation__>(
+                            this.Context, MubBlah_List_Nav__Implementation__);
+                }
+                return _MubBlah_List_NavWrapper;
+            }
+        }
+        
+        [EdmRelationshipNavigationProperty("Model", "FK_Muhblah_hasOther_TestCustomObject", "MuhBlah_List_Role")]
+        public EntityCollection<Kistl.App.Test.Muhblah__Implementation__> MubBlah_List_Nav__Implementation__
+        {
+            get
+            {
+                var c = ((IEntityWithRelationships)(this)).RelationshipManager
+                    .GetRelatedCollection<Kistl.App.Test.Muhblah__Implementation__>(
+                        "Model.FK_Muhblah_hasOther_TestCustomObject",
+                        "MuhBlah_List_Role");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !c.IsLoaded)
+                {
+                    c.Load();
+                }
+                return c;
+            }
+        }
+        private EntityCollectionWrapper<Kistl.App.Test.Muhblah, Kistl.App.Test.Muhblah__Implementation__> _MubBlah_List_NavWrapper;
+
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+    /*
     Relation: FK_Muhblah_has_TestCustomObject
     A: ZeroOrOne Muhblah as MuhBlah_Role
     B: ZeroOrMore TestCustomObject as TestCustomObjects_List_Role
@@ -325,6 +373,15 @@ namespace Kistl.App.Test
 					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("bdcf86b8-4c47-4c50-b340-d9323344c7f0")).Constraints
 						.Where(c => !c.IsValid(this, this.Birthday))
 						.Select(c => c.GetErrorText(this, this.Birthday))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "MubBlah_List_Nav":
+				{
+					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("4a929ef5-f211-47b4-92c3-4961da6d5173")).Constraints
+						.Where(c => !c.IsValid(this, this.MubBlah_List_Nav))
+						.Select(c => c.GetErrorText(this, this.MubBlah_List_Nav))
 						.ToArray();
 					
 					return String.Join("; ", errors);

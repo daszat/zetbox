@@ -14,6 +14,7 @@ namespace Kistl.App.Projekte.Gui
     /// Sets each Property a default ValueModelDescriptor.
     /// GUI Tasks - so in GUI Actions.
     /// Only called on client
+    /// Note: OnNotifyCreated should always be implemented on the client side. importing or deploying also calls this event.
     /// </summary>
     public class PropertyActions
     {
@@ -60,14 +61,8 @@ namespace Kistl.App.Projekte.Gui
 
         public void OnNotifyCreated_ObjectReferenceProperty(Kistl.App.Base.ObjectReferenceProperty obj)
         {
-            if (obj.IsList())
-            {
-                obj.ValueModelDescriptor = obj.Context.FindPersistenceObject<PresentableModelDescriptor>(PresentableModelDescriptor_ObjectListModel);
-            }
-            else
-            {
-                obj.ValueModelDescriptor = obj.Context.FindPersistenceObject<PresentableModelDescriptor>(PresentableModelDescriptor_ObjectReferenceModel);
-            }
+            // Is implemented by CreateNavigator
+            // At creating time there is no way to discover if the navigator is a Reference or List
         }
 
         public void OnNotifyCreated_StringProperty(Kistl.App.Base.StringProperty obj)

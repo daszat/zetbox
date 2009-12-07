@@ -341,6 +341,21 @@ using Kistl.DALProvider.EF;
 
 
 	/*
+    Relation: FK_Muhblah_hasOther_TestCustomObject
+    A: ZeroOrMore Muhblah as MuhBlah_List_Role
+    B: ZeroOrOne TestCustomObject as TestCustomObjects_Role
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_Muhblah_hasOther_TestCustomObject",
+    "MuhBlah_List_Role", RelationshipMultiplicity.Many, typeof(Kistl.App.Test.Muhblah__Implementation__),
+    "TestCustomObjects_Role", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Test.TestCustomObject__Implementation__)
+    )]
+
+
+	/*
     Relation: FK_ObjectClass_has_ObjectClass
     A: ZeroOrOne ObjectClass as BaseObjectClass
     B: ZeroOrMore ObjectClass as SubClasses

@@ -157,11 +157,12 @@ namespace Kistl.App.Base
             }
             else
             {
-                e.Result = String.Format("Relation: {0}({1}) : {2}({3})",
+                e.Result = String.Format("Relation: {0}({1}) {4} {2}({3})",
                     obj.A.RoleName,
                     obj.A.Type.ClassName,
                     obj.B.RoleName,
-                    obj.B.Type.ClassName);
+                    obj.B.Type.ClassName,
+                    obj.Verb);
             }
         }
 

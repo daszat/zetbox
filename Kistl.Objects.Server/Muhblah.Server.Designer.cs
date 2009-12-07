@@ -159,6 +159,96 @@ namespace Kistl.App.Test
         /// <summary>
         /// 
         /// </summary>
+    /*
+    Relation: FK_Muhblah_hasOther_TestCustomObject
+    A: ZeroOrMore Muhblah as MuhBlah_List_Role
+    B: ZeroOrOne TestCustomObject as TestCustomObjects_Role
+    Preferred Storage: MergeIntoA
+    */
+        // object reference property
+   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public Kistl.App.Test.TestCustomObject TestCustomObjects_Nav
+        {
+            get
+            {
+                return TestCustomObjects_Nav__Implementation__;
+            }
+            set
+            {
+                // TODO: NotifyPropertyChanged()
+                // TODO: only accept EF objects from same Context
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                TestCustomObjects_Nav__Implementation__ = (Kistl.App.Test.TestCustomObject__Implementation__)value;
+            }
+        }
+        
+        private int? _fk_TestCustomObjects_Nav;
+        private Guid? _fk_guid_TestCustomObjects_Nav = null;
+        // EF sees only this property
+        [EdmRelationshipNavigationProperty("Model", "FK_Muhblah_hasOther_TestCustomObject", "TestCustomObjects_Role")]
+        public Kistl.App.Test.TestCustomObject__Implementation__ TestCustomObjects_Nav__Implementation__
+        {
+            get
+            {
+                EntityReference<Kistl.App.Test.TestCustomObject__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Test.TestCustomObject__Implementation__>(
+                        "Model.FK_Muhblah_hasOther_TestCustomObject",
+                        "TestCustomObjects_Role");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load(); 
+                    if(r.Value != null) r.Value.AttachToContext(this.Context);
+                }
+                var __value = r.Value;
+				if(OnTestCustomObjects_Nav_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<Kistl.App.Test.TestCustomObject>(__value);
+					OnTestCustomObjects_Nav_Getter(this, e);
+					__value = (Kistl.App.Test.TestCustomObject__Implementation__)e.Result;
+				}
+                return __value;
+            }
+            set
+            {
+                EntityReference<Kistl.App.Test.TestCustomObject__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Test.TestCustomObject__Implementation__>(
+                        "Model.FK_Muhblah_hasOther_TestCustomObject",
+                        "TestCustomObjects_Role");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load(); 
+                }
+                Kistl.App.Test.TestCustomObject __oldValue = (Kistl.App.Test.TestCustomObject)r.Value;
+                Kistl.App.Test.TestCustomObject __newValue = (Kistl.App.Test.TestCustomObject)value;
+
+                if(OnTestCustomObjects_Nav_PreSetter != null)
+                {
+					var e = new PropertyPreSetterEventArgs<Kistl.App.Test.TestCustomObject>(__oldValue, __newValue);
+					OnTestCustomObjects_Nav_PreSetter(this, e);
+					__newValue = e.Result;
+                }
+                r.Value = (Kistl.App.Test.TestCustomObject__Implementation__)__newValue;
+                if(OnTestCustomObjects_Nav_PostSetter != null)
+                {
+					var e = new PropertyPostSetterEventArgs<Kistl.App.Test.TestCustomObject>(__oldValue, __newValue);
+					OnTestCustomObjects_Nav_PostSetter(this, e);
+                }
+                                
+            }
+        }
+        
+        
+		public event PropertyGetterHandler<Kistl.App.Test.Muhblah, Kistl.App.Test.TestCustomObject> OnTestCustomObjects_Nav_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.Test.Muhblah, Kistl.App.Test.TestCustomObject> OnTestCustomObjects_Nav_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.Test.Muhblah, Kistl.App.Test.TestCustomObject> OnTestCustomObjects_Nav_PostSetter;
+        /// <summary>
+        /// 
+        /// </summary>
         // value type property
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -341,6 +431,7 @@ namespace Kistl.App.Test
 			me.TestDateTime = other.TestDateTime;
 			me.TestEnum = other.TestEnum;
 			me.TestString = other.TestString;
+			this._fk_TestCustomObjects_Nav = otherImpl._fk_TestCustomObjects_Nav;
 		}
 
         // tail template
@@ -415,6 +506,15 @@ namespace Kistl.App.Test
 					
 					return String.Join("; ", errors);
 				}
+				case "TestCustomObjects_Nav":
+				{
+					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("aabd7cb7-c45e-43c9-97fd-76e50c310ab3")).Constraints
+						.Where(c => !c.IsValid(this, this.TestCustomObjects_Nav))
+						.Select(c => c.GetErrorText(this, this.TestCustomObjects_Nav))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
 				case "TestDateTime":
 				{
 					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("c5a66e0b-1fdb-45e4-b9e4-2ae4ee35a201")).Constraints
@@ -453,6 +553,13 @@ namespace Kistl.App.Test
 			// TODO: enable when MemoryContext uses MemoryDataObjects
 			//if (this.ObjectState == DataObjectState.Deleted) return;
 			// fix direct object references
+
+			if (_fk_guid_TestCustomObjects_Nav.HasValue)
+				TestCustomObjects_Nav__Implementation__ = (Kistl.App.Test.TestCustomObject__Implementation__)Context.FindPersistenceObject<Kistl.App.Test.TestCustomObject>(_fk_guid_TestCustomObjects_Nav.Value);
+			else if (_fk_TestCustomObjects_Nav.HasValue)
+				TestCustomObjects_Nav__Implementation__ = (Kistl.App.Test.TestCustomObject__Implementation__)Context.Find<Kistl.App.Test.TestCustomObject>(_fk_TestCustomObjects_Nav.Value);
+			else
+				TestCustomObjects_Nav__Implementation__ = null;
 		}
 #region Serializer
 
@@ -462,6 +569,7 @@ namespace Kistl.App.Test
             
             base.ToStream(binStream, auxObjects);
             BinarySerializer.ToStream(this._TestBool, binStream);
+            BinarySerializer.ToStream(TestCustomObjects_Nav != null ? TestCustomObjects_Nav.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._TestDateTime, binStream);
             BinarySerializer.ToStream((int)((Muhblah)this).TestEnum, binStream);
             BinarySerializer.ToStream(this._TestString, binStream);
@@ -472,6 +580,7 @@ namespace Kistl.App.Test
             
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._TestBool, binStream);
+            BinarySerializer.FromStream(out this._fk_TestCustomObjects_Nav, binStream);
             BinarySerializer.FromStream(out this._TestDateTime, binStream);
             BinarySerializer.FromStreamConverter(v => ((Muhblah)this).TestEnum = (Kistl.App.Test.TestEnum)v, binStream);
             BinarySerializer.FromStream(out this._TestString, binStream);
@@ -482,6 +591,7 @@ namespace Kistl.App.Test
             
             base.ToStream(xml);
             XmlStreamer.ToStream(this._TestBool, xml, "TestBool", "Kistl.App.Test");
+            XmlStreamer.ToStream(TestCustomObjects_Nav != null ? TestCustomObjects_Nav.ID : (int?)null, xml, "TestCustomObjects_Nav", "Kistl.App.Test");
             XmlStreamer.ToStream(this._TestDateTime, xml, "TestDateTime", "Kistl.App.Test");
             XmlStreamer.ToStream((int)this.TestEnum, xml, "TestEnum", "Kistl.App.Test");
             XmlStreamer.ToStream(this._TestString, xml, "TestString", "Kistl.App.Test");
@@ -492,6 +602,7 @@ namespace Kistl.App.Test
             
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._TestBool, xml, "TestBool", "Kistl.App.Test");
+            XmlStreamer.FromStream(ref this._fk_TestCustomObjects_Nav, xml, "TestCustomObjects_Nav", "Kistl.App.Test");
             XmlStreamer.FromStream(ref this._TestDateTime, xml, "TestDateTime", "Kistl.App.Test");
             XmlStreamer.FromStreamConverter(v => ((Muhblah)this).TestEnum = (Kistl.App.Test.TestEnum)v, xml, "TestEnum", "Kistl.App.Test");
             XmlStreamer.FromStream(ref this._TestString, xml, "TestString", "Kistl.App.Test");

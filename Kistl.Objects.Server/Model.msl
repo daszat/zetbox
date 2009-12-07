@@ -1335,6 +1335,23 @@
       <Condition ColumnName="fk_MuhBlah_Role" IsNull="false"/>
     </AssociationSetMapping>
     <!--
+    Relation: FK_Muhblah_hasOther_TestCustomObject
+    A: ZeroOrMore Muhblah as MuhBlah_List_Role
+    B: ZeroOrOne TestCustomObject as TestCustomObjects_Role
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_Muhblah_hasOther_TestCustomObject"
+                           TypeName="Model.FK_Muhblah_hasOther_TestCustomObject"
+                           StoreEntitySet="Muhblah" >
+      <EndProperty Name="TestCustomObjects_Role">
+        <ScalarProperty Name="ID" ColumnName="fk_TestCustomObjects_Role"/>
+      </EndProperty>
+      <EndProperty Name="MuhBlah_List_Role">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_TestCustomObjects_Role" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
     Relation: FK_ObjectClass_has_ObjectClass
     A: ZeroOrOne ObjectClass as BaseObjectClass
     B: ZeroOrMore ObjectClass as SubClasses
