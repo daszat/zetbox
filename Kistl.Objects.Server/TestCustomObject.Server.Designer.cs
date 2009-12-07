@@ -295,6 +295,96 @@ namespace Kistl.App.Test
 
 
         /// <summary>
+        /// 
+        /// </summary>
+    /*
+    Relation: FK_MuhBlah_One_Role_loves_TestCustomObjects_One_Role
+    A: ZeroOrOne Muhblah as MuhBlah_One_Role
+    B: ZeroOrOne TestCustomObject as TestCustomObjects_One_Role
+    Preferred Storage: MergeIntoA
+    */
+        // object reference property
+   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public Kistl.App.Test.Muhblah MuhBlah_One_Nav
+        {
+            get
+            {
+                return MuhBlah_One_Nav__Implementation__;
+            }
+            set
+            {
+                // TODO: NotifyPropertyChanged()
+                // TODO: only accept EF objects from same Context
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                MuhBlah_One_Nav__Implementation__ = (Kistl.App.Test.Muhblah__Implementation__)value;
+            }
+        }
+        
+        private int? _fk_MuhBlah_One_Nav;
+        private Guid? _fk_guid_MuhBlah_One_Nav = null;
+        // EF sees only this property
+        [EdmRelationshipNavigationProperty("Model", "FK_MuhBlah_One_Role_loves_TestCustomObjects_One_Role", "MuhBlah_One_Role")]
+        public Kistl.App.Test.Muhblah__Implementation__ MuhBlah_One_Nav__Implementation__
+        {
+            get
+            {
+                EntityReference<Kistl.App.Test.Muhblah__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Test.Muhblah__Implementation__>(
+                        "Model.FK_MuhBlah_One_Role_loves_TestCustomObjects_One_Role",
+                        "MuhBlah_One_Role");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load(); 
+                    if(r.Value != null) r.Value.AttachToContext(this.Context);
+                }
+                var __value = r.Value;
+				if(OnMuhBlah_One_Nav_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<Kistl.App.Test.Muhblah>(__value);
+					OnMuhBlah_One_Nav_Getter(this, e);
+					__value = (Kistl.App.Test.Muhblah__Implementation__)e.Result;
+				}
+                return __value;
+            }
+            set
+            {
+                EntityReference<Kistl.App.Test.Muhblah__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Test.Muhblah__Implementation__>(
+                        "Model.FK_MuhBlah_One_Role_loves_TestCustomObjects_One_Role",
+                        "MuhBlah_One_Role");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load(); 
+                }
+                Kistl.App.Test.Muhblah __oldValue = (Kistl.App.Test.Muhblah)r.Value;
+                Kistl.App.Test.Muhblah __newValue = (Kistl.App.Test.Muhblah)value;
+
+                if(OnMuhBlah_One_Nav_PreSetter != null)
+                {
+					var e = new PropertyPreSetterEventArgs<Kistl.App.Test.Muhblah>(__oldValue, __newValue);
+					OnMuhBlah_One_Nav_PreSetter(this, e);
+					__newValue = e.Result;
+                }
+                r.Value = (Kistl.App.Test.Muhblah__Implementation__)__newValue;
+                if(OnMuhBlah_One_Nav_PostSetter != null)
+                {
+					var e = new PropertyPostSetterEventArgs<Kistl.App.Test.Muhblah>(__oldValue, __newValue);
+					OnMuhBlah_One_Nav_PostSetter(this, e);
+                }
+                                
+            }
+        }
+        
+        
+		public event PropertyGetterHandler<Kistl.App.Test.TestCustomObject, Kistl.App.Test.Muhblah> OnMuhBlah_One_Nav_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.Test.TestCustomObject, Kistl.App.Test.Muhblah> OnMuhBlah_One_Nav_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.Test.TestCustomObject, Kistl.App.Test.Muhblah> OnMuhBlah_One_Nav_PostSetter;
+        /// <summary>
         /// Person&apos;s Name
         /// </summary>
         // value type property
@@ -360,6 +450,7 @@ namespace Kistl.App.Test
 			me.Birthday = other.Birthday;
 			me.PersonName = other.PersonName;
 			this._fk_MubBlah_Nav = otherImpl._fk_MubBlah_Nav;
+			this._fk_MuhBlah_One_Nav = otherImpl._fk_MuhBlah_One_Nav;
 		}
 
         // tail template
@@ -452,6 +543,15 @@ namespace Kistl.App.Test
 					
 					return String.Join("; ", errors);
 				}
+				case "MuhBlah_One_Nav":
+				{
+					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("e7b207d3-5d25-4716-85b3-564f10eac210")).Constraints
+						.Where(c => !c.IsValid(this, this.MuhBlah_One_Nav))
+						.Select(c => c.GetErrorText(this, this.MuhBlah_One_Nav))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
 				case "PersonName":
 				{
 					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("bd501a1f-a0a3-4ddf-b6c2-8fdc9ffdfabd")).Constraints
@@ -479,6 +579,13 @@ namespace Kistl.App.Test
 				MubBlah_Nav__Implementation__ = (Kistl.App.Test.Muhblah__Implementation__)Context.Find<Kistl.App.Test.Muhblah>(_fk_MubBlah_Nav.Value);
 			else
 				MubBlah_Nav__Implementation__ = null;
+
+			if (_fk_guid_MuhBlah_One_Nav.HasValue)
+				MuhBlah_One_Nav__Implementation__ = (Kistl.App.Test.Muhblah__Implementation__)Context.FindPersistenceObject<Kistl.App.Test.Muhblah>(_fk_guid_MuhBlah_One_Nav.Value);
+			else if (_fk_MuhBlah_One_Nav.HasValue)
+				MuhBlah_One_Nav__Implementation__ = (Kistl.App.Test.Muhblah__Implementation__)Context.Find<Kistl.App.Test.Muhblah>(_fk_MuhBlah_One_Nav.Value);
+			else
+				MuhBlah_One_Nav__Implementation__ = null;
 		}
 #region Serializer
 
@@ -489,6 +596,7 @@ namespace Kistl.App.Test
             base.ToStream(binStream, auxObjects);
             BinarySerializer.ToStream(this._Birthday, binStream);
             BinarySerializer.ToStream(MubBlah_Nav != null ? MubBlah_Nav.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(MuhBlah_One_Nav != null ? MuhBlah_One_Nav.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._PersonName, binStream);
         }
 
@@ -498,6 +606,7 @@ namespace Kistl.App.Test
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._Birthday, binStream);
             BinarySerializer.FromStream(out this._fk_MubBlah_Nav, binStream);
+            BinarySerializer.FromStream(out this._fk_MuhBlah_One_Nav, binStream);
             BinarySerializer.FromStream(out this._PersonName, binStream);
         }
 
@@ -507,6 +616,7 @@ namespace Kistl.App.Test
             base.ToStream(xml);
             XmlStreamer.ToStream(this._Birthday, xml, "Birthday", "Kistl.App.Test");
             XmlStreamer.ToStream(MubBlah_Nav != null ? MubBlah_Nav.ID : (int?)null, xml, "MubBlah_Nav", "Kistl.App.Test");
+            XmlStreamer.ToStream(MuhBlah_One_Nav != null ? MuhBlah_One_Nav.ID : (int?)null, xml, "MuhBlah_One_Nav", "Kistl.App.Test");
             XmlStreamer.ToStream(this._PersonName, xml, "PersonName", "Kistl.App.Test");
         }
 
@@ -516,6 +626,7 @@ namespace Kistl.App.Test
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._Birthday, xml, "Birthday", "Kistl.App.Test");
             XmlStreamer.FromStream(ref this._fk_MubBlah_Nav, xml, "MubBlah_Nav", "Kistl.App.Test");
+            XmlStreamer.FromStream(ref this._fk_MuhBlah_One_Nav, xml, "MuhBlah_One_Nav", "Kistl.App.Test");
             XmlStreamer.FromStream(ref this._PersonName, xml, "PersonName", "Kistl.App.Test");
         }
 

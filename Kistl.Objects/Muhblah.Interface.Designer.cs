@@ -40,6 +40,13 @@ namespace Kistl.App.Test
         /// <summary>
         /// 
         /// </summary>
+		Kistl.App.Test.TestCustomObject TestCustomObjects_One_Nav {
+			get;
+			set;
+		}
+        /// <summary>
+        /// 
+        /// </summary>
 		DateTime? TestDateTime {
 			get;
 			set;

@@ -243,6 +243,10 @@
       <End Role="MuhBlah_List_Role" EntitySet="Muhblah" />
       <End Role="TestCustomObjects_Role" EntitySet="TestCustomObject" />
     </AssociationSet>
+    <AssociationSet Name="FK_MuhBlah_One_Role_loves_TestCustomObjects_One_Role" Association="Model.FK_MuhBlah_One_Role_loves_TestCustomObjects_One_Role" >
+      <End Role="MuhBlah_One_Role" EntitySet="Muhblah" />
+      <End Role="TestCustomObjects_One_Role" EntitySet="TestCustomObject" />
+    </AssociationSet>
     <AssociationSet Name="FK_MuhBlah_Role_has_TestCustomObjects_List_Role" Association="Model.FK_MuhBlah_Role_has_TestCustomObjects_List_Role" >
       <End Role="MuhBlah_Role" EntitySet="Muhblah" />
       <End Role="TestCustomObjects_List_Role" EntitySet="TestCustomObject" />
@@ -663,6 +667,10 @@
                         Relationship="Model.FK_MuhBlah_List_Role_hasOther_TestCustomObjects_Role"
                         FromRole="MuhBlah_List_Role"
                         ToRole="TestCustomObjects_Role" />
+    <NavigationProperty Name="TestCustomObjects_One_Nav__Implementation__"
+                        Relationship="Model.FK_MuhBlah_One_Role_loves_TestCustomObjects_One_Role"
+                        FromRole="MuhBlah_One_Role"
+                        ToRole="TestCustomObjects_One_Role" />
     <Property Name="TestDateTime" Type="DateTime" Nullable="true" />
     <Property Name="TestEnum__Implementation__" Type="Int32" Nullable="false" />
     <Property Name="TestString" Type="String" Nullable="true" MaxLength="4000" />
@@ -879,6 +887,10 @@
                         Relationship="Model.FK_MuhBlah_ManyList_Role_has_TestCustomObjects_ManyList_Role_B"
                         FromRole="TestCustomObjects_ManyList_Role"
                         ToRole="CollectionEntry" />
+    <NavigationProperty Name="MuhBlah_One_Nav__Implementation__"
+                        Relationship="Model.FK_MuhBlah_One_Role_loves_TestCustomObjects_One_Role"
+                        FromRole="TestCustomObjects_One_Role"
+                        ToRole="MuhBlah_One_Role" />
     <Property Name="PersonName" Type="String" Nullable="false" MaxLength="200" />
   </EntityType>
   <EntityType Name="TestObjClass">
@@ -1811,6 +1823,14 @@
          Type="Model.Muhblah" 
          Multiplicity="*" />
     <End Role="TestCustomObjects_Role"
+         Type="Model.TestCustomObject" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_MuhBlah_One_Role_loves_TestCustomObjects_One_Role" >
+    <End Role="MuhBlah_One_Role"
+         Type="Model.Muhblah" 
+         Multiplicity="0..1" />
+    <End Role="TestCustomObjects_One_Role"
          Type="Model.TestCustomObject" 
          Multiplicity="0..1" />
   </Association>

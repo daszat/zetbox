@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2009-12-07T16:55:04.7944Z" xmlns="http://dasz.at/Kistl">
+<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2009-12-07T18:35:50.4414Z" xmlns="http://dasz.at/Kistl">
   <KistlBase:Module ExportGuid="ef6d5bd8-5826-4ce6-a9ca-c8438ddde773">
     <KistlBase:Description />
     <KistlBase:ModuleName>KistlBase</KistlBase:ModuleName>
@@ -10139,6 +10139,15 @@
     <KistlBase:EagerLoading>false</KistlBase:EagerLoading>
     <KistlBase:RelationEnd>1ddb38f7-f355-4f50-8156-96bce21ddf8b</KistlBase:RelationEnd>
   </KistlBase:ObjectReferenceProperty>
+  <KistlBase:ObjectReferenceProperty ExportGuid="42c6bc2f-0428-488a-b928-539c4c6e3e65">
+    <KistlBase:CategoryTags>List</KistlBase:CategoryTags>
+    <KistlBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</KistlBase:Module>
+    <KistlBase:ObjectClass>fd357e42-2c2c-4bef-8110-69a466d09af0</KistlBase:ObjectClass>
+    <KistlBase:PropertyName>TestCustomObjects_One_Nav</KistlBase:PropertyName>
+    <GUI:ValueModelDescriptor>83aae6fd-0fae-4348-b313-737a6e751027</GUI:ValueModelDescriptor>
+    <KistlBase:EagerLoading>false</KistlBase:EagerLoading>
+    <KistlBase:RelationEnd>46a2c1da-0607-442a-a54b-5df0fd28c35d</KistlBase:RelationEnd>
+  </KistlBase:ObjectReferenceProperty>
   <KistlBase:DateTimeProperty ExportGuid="c5a66e0b-1fdb-45e4-b9e4-2ae4ee35a201">
     <KistlBase:CategoryTags>Summary</KistlBase:CategoryTags>
     <KistlBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</KistlBase:Module>
@@ -10203,6 +10212,15 @@
     <GUI:ValueModelDescriptor>9fce01fe-fd6d-4e21-8b55-08d5e38aea36</GUI:ValueModelDescriptor>
     <KistlBase:EagerLoading>false</KistlBase:EagerLoading>
     <KistlBase:RelationEnd>a5062544-4937-4cce-a40b-2c6f6870d629</KistlBase:RelationEnd>
+  </KistlBase:ObjectReferenceProperty>
+  <KistlBase:ObjectReferenceProperty ExportGuid="e7b207d3-5d25-4716-85b3-564f10eac210">
+    <KistlBase:CategoryTags>List</KistlBase:CategoryTags>
+    <KistlBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</KistlBase:Module>
+    <KistlBase:ObjectClass>de155110-79cc-4dac-89d6-0916608be1fb</KistlBase:ObjectClass>
+    <KistlBase:PropertyName>MuhBlah_One_Nav</KistlBase:PropertyName>
+    <GUI:ValueModelDescriptor>83aae6fd-0fae-4348-b313-737a6e751027</GUI:ValueModelDescriptor>
+    <KistlBase:EagerLoading>false</KistlBase:EagerLoading>
+    <KistlBase:RelationEnd>5068a214-6f5f-45a9-9242-619a6412bdc9</KistlBase:RelationEnd>
   </KistlBase:ObjectReferenceProperty>
   <KistlBase:StringProperty ExportGuid="bd501a1f-a0a3-4ddf-b6c2-8fdc9ffdfabd">
     <KistlBase:CategoryTags>Summary</KistlBase:CategoryTags>
@@ -10290,6 +10308,13 @@
     <KistlBase:Storage>1</KistlBase:Storage>
     <KistlBase:Verb>hasOther</KistlBase:Verb>
   </KistlBase:Relation>
+  <KistlBase:Relation ExportGuid="ef051c9c-dbcb-4b63-a331-6e2d4e033806">
+    <KistlBase:A>46a2c1da-0607-442a-a54b-5df0fd28c35d</KistlBase:A>
+    <KistlBase:B>5068a214-6f5f-45a9-9242-619a6412bdc9</KistlBase:B>
+    <KistlBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</KistlBase:Module>
+    <KistlBase:Storage>1</KistlBase:Storage>
+    <KistlBase:Verb>loves</KistlBase:Verb>
+  </KistlBase:Relation>
   <KistlBase:Relation ExportGuid="9d44eac8-2470-4373-a2bf-df3bc16d3454">
     <KistlBase:A>738de243-fdf1-43f7-8b14-4f960aa2f622</KistlBase:A>
     <KistlBase:B>e4be5fa3-b7a3-431b-a4ce-7c434ceaef2f</KistlBase:B>
@@ -10320,6 +10345,14 @@
     <KistlBase:RoleName>MuhBlah_ManyList_Role</KistlBase:RoleName>
     <KistlBase:Type>fd357e42-2c2c-4bef-8110-69a466d09af0</KistlBase:Type>
   </KistlBase:RelationEnd>
+  <KistlBase:RelationEnd ExportGuid="46a2c1da-0607-442a-a54b-5df0fd28c35d">
+    <KistlBase:AParent>ef051c9c-dbcb-4b63-a331-6e2d4e033806</KistlBase:AParent>
+    <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
+    <KistlBase:Multiplicity>1</KistlBase:Multiplicity>
+    <KistlBase:Navigator>42c6bc2f-0428-488a-b928-539c4c6e3e65</KistlBase:Navigator>
+    <KistlBase:RoleName>MuhBlah_One_Role</KistlBase:RoleName>
+    <KistlBase:Type>fd357e42-2c2c-4bef-8110-69a466d09af0</KistlBase:Type>
+  </KistlBase:RelationEnd>
   <KistlBase:RelationEnd ExportGuid="83e02e4d-0fba-452a-b550-5598ddff16b7">
     <KistlBase:AParent>bd379747-6864-4c4e-95a8-319ff917fd60</KistlBase:AParent>
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
@@ -10342,6 +10375,14 @@
     <KistlBase:Multiplicity>3</KistlBase:Multiplicity>
     <KistlBase:Navigator>9c4217f2-47d8-47b5-a324-7601ecabc7b0</KistlBase:Navigator>
     <KistlBase:RoleName>TestCustomObjects_ManyList_Role</KistlBase:RoleName>
+    <KistlBase:Type>de155110-79cc-4dac-89d6-0916608be1fb</KistlBase:Type>
+  </KistlBase:RelationEnd>
+  <KistlBase:RelationEnd ExportGuid="5068a214-6f5f-45a9-9242-619a6412bdc9">
+    <KistlBase:BParent>ef051c9c-dbcb-4b63-a331-6e2d4e033806</KistlBase:BParent>
+    <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
+    <KistlBase:Multiplicity>1</KistlBase:Multiplicity>
+    <KistlBase:Navigator>e7b207d3-5d25-4716-85b3-564f10eac210</KistlBase:Navigator>
+    <KistlBase:RoleName>TestCustomObjects_One_Role</KistlBase:RoleName>
     <KistlBase:Type>de155110-79cc-4dac-89d6-0916608be1fb</KistlBase:Type>
   </KistlBase:RelationEnd>
   <KistlBase:RelationEnd ExportGuid="e5b2057b-48ab-4775-91f3-4812a0d3059c">
