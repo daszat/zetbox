@@ -56,19 +56,18 @@
     <Property Name="<%= propertyName %>" Type="<%= sqlTypeName %>" <%= maxLengthAttr %><%= nullableAttr %>/>
 <%
    			
+			// TODO: Case #1306: SSDL should not rely on NavigationProperties. 
 		    if (p.NeedsPositionColumn())
 		    {
 				if(p is ObjectReferenceProperty)
 				{
 %>
-			// TODO: Case #1306: SSDL should not rely on NavigationProperties. 
     <Property Name="<%= Construct.ListPositionColumnName((ObjectReferenceProperty)p, prefix) %>" Type="int" Nullable="true" />
 <%
 				}
 				else
 				{
 %>
-			// TODO: Case #1306: SSDL should not rely on NavigationProperties. 
     <Property Name="<%= Construct.ListPositionColumnName((ValueTypeProperty)p, prefix) %>" Type="int" Nullable="true" />
 <%
 				}

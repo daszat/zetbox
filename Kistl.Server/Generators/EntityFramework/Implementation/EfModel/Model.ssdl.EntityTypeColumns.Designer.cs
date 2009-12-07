@@ -70,13 +70,13 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.EfModel
 #line 56 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.ssdl.EntityTypeColumns.cst"
 this.WriteObjects("    <Property Name=\"",  propertyName , "\" Type=\"",  sqlTypeName , "\" ",  maxLengthAttr , "",  nullableAttr , "/>\r\n");
 #line 59 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.ssdl.EntityTypeColumns.cst"
-if (p.NeedsPositionColumn())
+// TODO: Case #1306: SSDL should not rely on NavigationProperties. 
+		    if (p.NeedsPositionColumn())
 		    {
 				if(p is ObjectReferenceProperty)
 				{
 
-#line 64 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.ssdl.EntityTypeColumns.cst"
-this.WriteObjects("			// TODO: Case #1306: SSDL should not rely on NavigationProperties. \r\n");
+#line 65 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.ssdl.EntityTypeColumns.cst"
 this.WriteObjects("    <Property Name=\"",  Construct.ListPositionColumnName((ObjectReferenceProperty)p, prefix) , "\" Type=\"int\" Nullable=\"true\" />\r\n");
 #line 67 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.ssdl.EntityTypeColumns.cst"
 }
@@ -84,9 +84,8 @@ this.WriteObjects("    <Property Name=\"",  Construct.ListPositionColumnName((Ob
 				{
 
 #line 71 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.ssdl.EntityTypeColumns.cst"
-this.WriteObjects("			// TODO: Case #1306: SSDL should not rely on NavigationProperties. \r\n");
 this.WriteObjects("    <Property Name=\"",  Construct.ListPositionColumnName((ValueTypeProperty)p, prefix) , "\" Type=\"int\" Nullable=\"true\" />\r\n");
-#line 74 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.ssdl.EntityTypeColumns.cst"
+#line 73 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.ssdl.EntityTypeColumns.cst"
 }
 			}
 		}
