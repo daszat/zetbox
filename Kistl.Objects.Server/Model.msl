@@ -664,6 +664,44 @@
     </AssociationSetMapping>
 
     <!--
+    Relation: FK_MuhBlah_ManyList_Role_has_TestCustomObjects_ManyList_Role
+    A: ZeroOrMore Muhblah as MuhBlah_ManyList_Role
+    B: ZeroOrMore TestCustomObject as TestCustomObjects_ManyList_Role
+    Preferred Storage: Separate
+    -->
+    <EntitySetMapping Name="Muhblah_has_TestCustomObject_RelationEntry">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Muhblah_has_TestCustomObject_RelationEntry)">
+        <MappingFragment StoreEntitySet="Muhblah_has_TestCustomObject_RelationEntry">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <!-- A to CollectionEntry -->
+    <AssociationSetMapping Name="FK_MuhBlah_ManyList_Role_has_TestCustomObjects_ManyList_Role_A"
+                           TypeName="Model.FK_MuhBlah_ManyList_Role_has_TestCustomObjects_ManyList_Role_A"
+                           StoreEntitySet="Muhblah_has_TestCustomObject_RelationEntry" >
+      <EndProperty Name="MuhBlah_ManyList_Role">
+        <ScalarProperty Name="ID" ColumnName="fk_Muhblah"/>
+      </EndProperty>
+      <EndProperty Name="CollectionEntry">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_Muhblah" IsNull="false"/>
+    </AssociationSetMapping>
+    <!-- B to CollectionEntry -->
+    <AssociationSetMapping Name="FK_MuhBlah_ManyList_Role_has_TestCustomObjects_ManyList_Role_B"
+                           TypeName="Model.FK_MuhBlah_ManyList_Role_has_TestCustomObjects_ManyList_Role_B"
+                           StoreEntitySet="Muhblah_has_TestCustomObject_RelationEntry" >
+      <EndProperty Name="TestCustomObjects_ManyList_Role">
+        <ScalarProperty Name="ID" ColumnName="fk_TestCustomObject"/>
+      </EndProperty>
+      <EndProperty Name="CollectionEntry">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_TestCustomObject" IsNull="false"/>
+    </AssociationSetMapping>
+
+    <!--
     Relation: FK_ObjectClass_implements_ImplementsInterfaces
     A: ZeroOrMore ObjectClass as ObjectClass
     B: ZeroOrMore Interface as ImplementsInterfaces

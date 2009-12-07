@@ -416,6 +416,24 @@ using Kistl.DALProvider.EF;
 
 
 	/*
+    Relation: FK_MuhBlah_ManyList_Role_has_TestCustomObjects_ManyList_Role
+    A: ZeroOrMore Muhblah as MuhBlah_ManyList_Role
+    B: ZeroOrMore TestCustomObject as TestCustomObjects_ManyList_Role
+    Preferred Storage: Separate
+	*/
+
+// The association from A to the CollectionEntry
+[assembly: EdmRelationship("Model", "FK_MuhBlah_ManyList_Role_has_TestCustomObjects_ManyList_Role_A",
+    "MuhBlah_ManyList_Role", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Test.Muhblah__Implementation__),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.Test.Muhblah_has_TestCustomObject_RelationEntry__Implementation__)
+    )]
+// The association from B to the CollectionEntry
+[assembly: EdmRelationship("Model", "FK_MuhBlah_ManyList_Role_has_TestCustomObjects_ManyList_Role_B",
+    "TestCustomObjects_ManyList_Role", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Test.TestCustomObject__Implementation__),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.Test.Muhblah_has_TestCustomObject_RelationEntry__Implementation__)
+    )]
+
+	/*
     Relation: FK_MuhBlah_Role_has_TestCustomObjects_List_Role
     A: ZeroOrOne Muhblah as MuhBlah_Role
     B: ZeroOrMore TestCustomObject as TestCustomObjects_List_Role

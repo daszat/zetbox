@@ -160,6 +160,54 @@ namespace Kistl.App.Test
         /// 
         /// </summary>
     /*
+    Relation: FK_MuhBlah_ManyList_Role_has_TestCustomObjects_ManyList_Role
+    A: ZeroOrMore Muhblah as MuhBlah_ManyList_Role
+    B: ZeroOrMore TestCustomObject as TestCustomObjects_ManyList_Role
+    Preferred Storage: Separate
+    */
+        // collection reference property
+		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.CollectionEntryListProperty
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public ICollection<Kistl.App.Test.TestCustomObject> TestCustomObjects_ManyList_Nav
+        {
+            get
+            {
+                if (_TestCustomObjects_ManyList_NavWrapper == null)
+                {
+                    _TestCustomObjects_ManyList_NavWrapper = new EntityRelationBSideCollectionWrapper<Kistl.App.Test.Muhblah, Kistl.App.Test.TestCustomObject, Kistl.App.Test.Muhblah_has_TestCustomObject_RelationEntry__Implementation__>(
+                            this,
+                            TestCustomObjects_ManyList_Nav__Implementation__);
+                }
+                return _TestCustomObjects_ManyList_NavWrapper;
+            }
+        }
+        
+        [EdmRelationshipNavigationProperty("Model", "FK_MuhBlah_ManyList_Role_has_TestCustomObjects_ManyList_Role_A", "CollectionEntry")]
+        public EntityCollection<Kistl.App.Test.Muhblah_has_TestCustomObject_RelationEntry__Implementation__> TestCustomObjects_ManyList_Nav__Implementation__
+        {
+            get
+            {
+                var c = ((IEntityWithRelationships)(this)).RelationshipManager
+                    .GetRelatedCollection<Kistl.App.Test.Muhblah_has_TestCustomObject_RelationEntry__Implementation__>(
+                        "Model.FK_MuhBlah_ManyList_Role_has_TestCustomObjects_ManyList_Role_A",
+                        "CollectionEntry");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !c.IsLoaded)
+                {
+                    c.Load();
+                }
+                return c;
+            }
+        }
+        private EntityRelationBSideCollectionWrapper<Kistl.App.Test.Muhblah, Kistl.App.Test.TestCustomObject, Kistl.App.Test.Muhblah_has_TestCustomObject_RelationEntry__Implementation__> _TestCustomObjects_ManyList_NavWrapper;
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+    /*
     Relation: FK_MuhBlah_List_Role_hasOther_TestCustomObjects_Role
     A: ZeroOrMore Muhblah as MuhBlah_List_Role
     B: ZeroOrOne TestCustomObject as TestCustomObjects_Role
@@ -502,6 +550,15 @@ namespace Kistl.App.Test
 					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("1f944324-673f-4f14-94c8-dc570ea3022d")).Constraints
 						.Where(c => !c.IsValid(this, this.TestCustomObjects_List_Nav))
 						.Select(c => c.GetErrorText(this, this.TestCustomObjects_List_Nav))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "TestCustomObjects_ManyList_Nav":
+				{
+					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("a3ad7340-4dc1-488c-bc9a-29ac931b1f0d")).Constraints
+						.Where(c => !c.IsValid(this, this.TestCustomObjects_ManyList_Nav))
+						.Select(c => c.GetErrorText(this, this.TestCustomObjects_ManyList_Nav))
 						.ToArray();
 					
 					return String.Join("; ", errors);

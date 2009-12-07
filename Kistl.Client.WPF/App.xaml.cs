@@ -90,7 +90,7 @@ namespace Kistl.Client.WPF
 
         private void Application_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
-            MessageBox.Show(e.Exception.ToString() + e.Exception.StackTrace);
+            MessageBox.Show(e.Exception.ToString());
             e.Handled = true;
         }
 

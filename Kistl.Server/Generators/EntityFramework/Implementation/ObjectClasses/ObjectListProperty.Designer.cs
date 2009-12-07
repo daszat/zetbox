@@ -35,7 +35,7 @@ RelationEnd relEnd = rel.GetEndFromRole(endRole);
     RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
 
 	// the name of the property to create
-	string name = relEnd.Navigator.PropertyName; //otherEnd.RoleName;
+	string name = relEnd.Navigator.PropertyName;
 	// the ef-visible property's name
 	string efName = name + Kistl.API.Helper.ImplementationSuffix;
 	// the name of the private backing store for the conversion wrapper list

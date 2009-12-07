@@ -49,6 +49,15 @@
       <End Role="SupportedInterfaces" EntitySet="TypeRef" />
       <End Role="CollectionEntry" EntitySet="ControlKindClass_supports_TypeRef_RelationEntry" />
     </AssociationSet>
+    <EntitySet Name="Muhblah_has_TestCustomObject_RelationEntry" EntityType="Model.Muhblah_has_TestCustomObject_RelationEntry" />
+    <AssociationSet Name="FK_MuhBlah_ManyList_Role_has_TestCustomObjects_ManyList_Role_A" Association="Model.FK_MuhBlah_ManyList_Role_has_TestCustomObjects_ManyList_Role_A" >
+      <End Role="MuhBlah_ManyList_Role" EntitySet="Muhblah" />
+      <End Role="CollectionEntry" EntitySet="Muhblah_has_TestCustomObject_RelationEntry" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MuhBlah_ManyList_Role_has_TestCustomObjects_ManyList_Role_B" Association="Model.FK_MuhBlah_ManyList_Role_has_TestCustomObjects_ManyList_Role_B" >
+      <End Role="TestCustomObjects_ManyList_Role" EntitySet="TestCustomObject" />
+      <End Role="CollectionEntry" EntitySet="Muhblah_has_TestCustomObject_RelationEntry" />
+    </AssociationSet>
     <EntitySet Name="ObjectClass_implements_Interface_RelationEntry" EntityType="Model.ObjectClass_implements_Interface_RelationEntry" />
     <AssociationSet Name="FK_ObjectClass_implements_ImplementsInterfaces_A" Association="Model.FK_ObjectClass_implements_ImplementsInterfaces_A" >
       <End Role="ObjectClass" EntitySet="DataType" />
@@ -646,6 +655,10 @@
                         Relationship="Model.FK_MuhBlah_Role_has_TestCustomObjects_List_Role"
                         FromRole="MuhBlah_Role"
                         ToRole="TestCustomObjects_List_Role" />
+    <NavigationProperty Name="TestCustomObjects_ManyList_Nav__Implementation__"
+                        Relationship="Model.FK_MuhBlah_ManyList_Role_has_TestCustomObjects_ManyList_Role_A"
+                        FromRole="MuhBlah_ManyList_Role"
+                        ToRole="CollectionEntry" />
     <NavigationProperty Name="TestCustomObjects_Nav__Implementation__"
                         Relationship="Model.FK_MuhBlah_List_Role_hasOther_TestCustomObjects_Role"
                         FromRole="MuhBlah_List_Role"
@@ -862,6 +875,10 @@
                         Relationship="Model.FK_MuhBlah_Role_has_TestCustomObjects_List_Role"
                         FromRole="TestCustomObjects_List_Role"
                         ToRole="MuhBlah_Role" />
+    <NavigationProperty Name="MuhBlah_ManyList_Nav__Implementation__"
+                        Relationship="Model.FK_MuhBlah_ManyList_Role_has_TestCustomObjects_ManyList_Role_B"
+                        FromRole="TestCustomObjects_ManyList_Role"
+                        ToRole="CollectionEntry" />
     <Property Name="PersonName" Type="String" Nullable="false" MaxLength="200" />
   </EntityType>
   <EntityType Name="TestObjClass">
@@ -1173,6 +1190,48 @@
          Multiplicity="0..1" />
     <End Role="CollectionEntry"
          Type="Model.ControlKindClass_supports_TypeRef_RelationEntry"
+         Multiplicity="*" />
+  </Association>
+  
+  <!--
+    Relation: FK_MuhBlah_ManyList_Role_has_TestCustomObjects_ManyList_Role
+    A: ZeroOrMore Muhblah as MuhBlah_ManyList_Role
+    B: ZeroOrMore TestCustomObject as TestCustomObjects_ManyList_Role
+    Preferred Storage: Separate
+  -->
+  <EntityType Name="Muhblah_has_TestCustomObject_RelationEntry" >
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+	
+    
+    <!-- A -->
+    <NavigationProperty Name="A__Implementation__"
+                        Relationship="Model.FK_MuhBlah_ManyList_Role_has_TestCustomObjects_ManyList_Role_A"
+                        FromRole="CollectionEntry"
+                        ToRole="MuhBlah_ManyList_Role" />
+
+    <!-- B -->
+    <NavigationProperty Name="B__Implementation__"
+                        Relationship="Model.FK_MuhBlah_ManyList_Role_has_TestCustomObjects_ManyList_Role_B"
+                        FromRole="CollectionEntry"
+                        ToRole="TestCustomObjects_ManyList_Role" />
+  </EntityType>
+  <Association Name="FK_MuhBlah_ManyList_Role_has_TestCustomObjects_ManyList_Role_A" >
+    <End Role="MuhBlah_ManyList_Role"
+         Type="Model.Muhblah" 
+         Multiplicity="0..1" />
+    <End Role="CollectionEntry"
+         Type="Model.Muhblah_has_TestCustomObject_RelationEntry"
+         Multiplicity="*" />
+  </Association>
+  <Association Name="FK_MuhBlah_ManyList_Role_has_TestCustomObjects_ManyList_Role_B" >
+    <End Role="TestCustomObjects_ManyList_Role"
+         Type="Model.TestCustomObject" 
+         Multiplicity="0..1" />
+    <End Role="CollectionEntry"
+         Type="Model.Muhblah_has_TestCustomObject_RelationEntry"
          Multiplicity="*" />
   </Association>
   

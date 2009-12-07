@@ -28,6 +28,11 @@ namespace Kistl.App.Test
         /// <summary>
         /// 
         /// </summary>
+
+        ICollection<Kistl.App.Test.TestCustomObject> TestCustomObjects_ManyList_Nav { get; }
+        /// <summary>
+        /// 
+        /// </summary>
 		Kistl.App.Test.TestCustomObject TestCustomObjects_Nav {
 			get;
 			set;

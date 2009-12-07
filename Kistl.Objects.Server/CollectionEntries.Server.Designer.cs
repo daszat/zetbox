@@ -318,6 +318,249 @@ namespace Kistl.App.GUI
     }
 }
 
+namespace Kistl.App.Test
+{
+    [EdmEntityType(NamespaceName="Model", Name="Muhblah_has_TestCustomObject_RelationEntry")]
+    [System.Diagnostics.DebuggerDisplay("Muhblah_has_TestCustomObject_RelationEntry__Implementation__")]
+    public class Muhblah_has_TestCustomObject_RelationEntry__Implementation__ : BaseServerCollectionEntry_EntityFramework, Muhblah_has_TestCustomObject_RelationEntry
+    {
+    
+        [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
+           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.IdProperty
+        public override int ID
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _ID;
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_ID != value)
+                {
+                    var __oldValue = _ID;
+                    var __newValue = value;
+                    NotifyPropertyChanging("ID", __oldValue, __newValue);
+                    _ID = __newValue;
+                    NotifyPropertyChanged("ID", __oldValue, __newValue);
+                }
+            }
+        }
+        private int _ID;
+        public Guid RelationID { get { return new Guid("d1e0da3e-ce64-4587-b62d-70c0f4371d97"); } }
+        public IDataObject AObject { get { return A; } set { A = (Kistl.App.Test.Muhblah)value; } }
+        public IDataObject BObject { get { return B; } set { B = (Kistl.App.Test.TestCustomObject)value; } }
+
+        /// <summary>
+        /// Reference to the A-Side member of this CollectionEntry
+        /// </summary>
+   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public Kistl.App.Test.Muhblah A
+        {
+            get
+            {
+                return A__Implementation__;
+            }
+            set
+            {
+                // TODO: NotifyPropertyChanged()
+                // TODO: only accept EF objects from same Context
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                A__Implementation__ = (Kistl.App.Test.Muhblah__Implementation__)value;
+            }
+        }
+        
+        private int? _fk_A;
+        private Guid? _fk_guid_A = null;
+        // EF sees only this property
+        [EdmRelationshipNavigationProperty("Model", "FK_MuhBlah_ManyList_Role_has_TestCustomObjects_ManyList_Role_A", "MuhBlah_ManyList_Role")]
+        public Kistl.App.Test.Muhblah__Implementation__ A__Implementation__
+        {
+            get
+            {
+                EntityReference<Kistl.App.Test.Muhblah__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Test.Muhblah__Implementation__>(
+                        "Model.FK_MuhBlah_ManyList_Role_has_TestCustomObjects_ManyList_Role_A",
+                        "MuhBlah_ManyList_Role");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load(); 
+                    if(r.Value != null) r.Value.AttachToContext(this.Context);
+                }
+                var __value = r.Value;
+                return __value;
+            }
+            set
+            {
+                EntityReference<Kistl.App.Test.Muhblah__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Test.Muhblah__Implementation__>(
+                        "Model.FK_MuhBlah_ManyList_Role_has_TestCustomObjects_ManyList_Role_A",
+                        "MuhBlah_ManyList_Role");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load(); 
+                }
+                Kistl.App.Test.Muhblah __oldValue = (Kistl.App.Test.Muhblah)r.Value;
+                Kistl.App.Test.Muhblah __newValue = (Kistl.App.Test.Muhblah)value;
+
+                r.Value = (Kistl.App.Test.Muhblah__Implementation__)__newValue;
+                                
+            }
+        }
+        
+        
+        /// <summary>
+        /// the B-side value of this CollectionEntry
+        /// </summary>
+   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public Kistl.App.Test.TestCustomObject B
+        {
+            get
+            {
+                return B__Implementation__;
+            }
+            set
+            {
+                // TODO: NotifyPropertyChanged()
+                // TODO: only accept EF objects from same Context
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                B__Implementation__ = (Kistl.App.Test.TestCustomObject__Implementation__)value;
+            }
+        }
+        
+        private int? _fk_B;
+        private Guid? _fk_guid_B = null;
+        // EF sees only this property
+        [EdmRelationshipNavigationProperty("Model", "FK_MuhBlah_ManyList_Role_has_TestCustomObjects_ManyList_Role_B", "TestCustomObjects_ManyList_Role")]
+        public Kistl.App.Test.TestCustomObject__Implementation__ B__Implementation__
+        {
+            get
+            {
+                EntityReference<Kistl.App.Test.TestCustomObject__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Test.TestCustomObject__Implementation__>(
+                        "Model.FK_MuhBlah_ManyList_Role_has_TestCustomObjects_ManyList_Role_B",
+                        "TestCustomObjects_ManyList_Role");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load(); 
+                    if(r.Value != null) r.Value.AttachToContext(this.Context);
+                }
+                var __value = r.Value;
+                return __value;
+            }
+            set
+            {
+                EntityReference<Kistl.App.Test.TestCustomObject__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Test.TestCustomObject__Implementation__>(
+                        "Model.FK_MuhBlah_ManyList_Role_has_TestCustomObjects_ManyList_Role_B",
+                        "TestCustomObjects_ManyList_Role");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load(); 
+                }
+                Kistl.App.Test.TestCustomObject __oldValue = (Kistl.App.Test.TestCustomObject)r.Value;
+                Kistl.App.Test.TestCustomObject __newValue = (Kistl.App.Test.TestCustomObject)value;
+
+                r.Value = (Kistl.App.Test.TestCustomObject__Implementation__)__newValue;
+                                
+            }
+        }
+        
+        
+
+#region Serializer
+
+
+        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects)
+        {
+            
+            base.ToStream(binStream, auxObjects);
+            BinarySerializer.ToStream(A != null ? A.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(B != null ? B.ID : (int?)null, binStream);
+        }
+
+        public override void FromStream(System.IO.BinaryReader binStream)
+        {
+            
+            base.FromStream(binStream);
+            BinarySerializer.FromStream(out this._fk_A, binStream);
+            BinarySerializer.FromStream(out this._fk_B, binStream);
+        }
+
+        public override void ToStream(System.Xml.XmlWriter xml)
+        {
+            
+            base.ToStream(xml);
+            XmlStreamer.ToStream(A != null ? A.ID : (int?)null, xml, "A", "Kistl.App.Test");
+            XmlStreamer.ToStream(B != null ? B.ID : (int?)null, xml, "B", "Kistl.App.Test");
+        }
+
+        public override void FromStream(System.Xml.XmlReader xml)
+        {
+            
+            base.FromStream(xml);
+            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.Test");
+            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.Test");
+        }
+
+#endregion
+
+		public override InterfaceType GetInterfaceType()
+		{
+			return new InterfaceType(typeof(Muhblah_has_TestCustomObject_RelationEntry));
+		}
+	
+		public override void ReloadReferences()
+		{
+			// Do not reload references if the current object has been deleted.
+			// TODO: enable when MemoryContext uses MemoryDataObjects
+			//if (this.ObjectState == DataObjectState.Deleted) return;
+
+			if (_fk_guid_A.HasValue)
+				A__Implementation__ = (Kistl.App.Test.Muhblah__Implementation__)Context.FindPersistenceObject<Kistl.App.Test.Muhblah>(_fk_guid_A.Value);
+			else if (_fk_A.HasValue)
+				A__Implementation__ = (Kistl.App.Test.Muhblah__Implementation__)Context.Find<Kistl.App.Test.Muhblah>(_fk_A.Value);
+			else
+				A__Implementation__ = null;
+
+
+			if (_fk_guid_B.HasValue)
+				B__Implementation__ = (Kistl.App.Test.TestCustomObject__Implementation__)Context.FindPersistenceObject<Kistl.App.Test.TestCustomObject>(_fk_guid_B.Value);
+			else if (_fk_B.HasValue)
+				B__Implementation__ = (Kistl.App.Test.TestCustomObject__Implementation__)Context.Find<Kistl.App.Test.TestCustomObject>(_fk_B.Value);
+			else
+				B__Implementation__ = null;
+	
+		}
+		
+		public override void ApplyChangesFrom(IPersistenceObject obj)
+		{
+			base.ApplyChangesFrom(obj);
+			var other = (Muhblah_has_TestCustomObject_RelationEntry__Implementation__)obj;
+			var me = (Muhblah_has_TestCustomObject_RelationEntry__Implementation__)this;
+			
+            me._fk_A = other._fk_A;
+            me._fk_B = other._fk_B;
+		}		
+		
+		
+
+    }
+}
+
 namespace Kistl.App.Base
 {
     [EdmEntityType(NamespaceName="Model", Name="ObjectClass_implements_Interface_RelationEntry")]

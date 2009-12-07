@@ -33,6 +33,11 @@ namespace Kistl.App.Test
 			set;
 		}
         /// <summary>
+        /// 
+        /// </summary>
+
+        ICollection<Kistl.App.Test.Muhblah> MuhBlah_ManyList_Nav { get; }
+        /// <summary>
         /// Person&apos;s Name
         /// </summary>
 		string PersonName {
