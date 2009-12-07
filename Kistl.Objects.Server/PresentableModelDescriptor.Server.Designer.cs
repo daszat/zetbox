@@ -61,7 +61,7 @@ namespace Kistl.App.GUI
         /// The default ControlKind for displaying this model in a GridCell
         /// </summary>
     /*
-    Relation: FK_PresentableModelDescriptor_displayedInGridBy_ControlKind
+    Relation: FK_PresentableModelDescriptor_displayedInGridBy_DefaultGridCellKind
     A: ZeroOrMore PresentableModelDescriptor as PresentableModelDescriptor
     B: ZeroOrOne ControlKind as DefaultGridCellKind
     Preferred Storage: MergeIntoA
@@ -89,14 +89,14 @@ namespace Kistl.App.GUI
         private int? _fk_DefaultGridCellKind;
         private Guid? _fk_guid_DefaultGridCellKind = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_PresentableModelDescriptor_displayedInGridBy_ControlKind", "DefaultGridCellKind")]
+        [EdmRelationshipNavigationProperty("Model", "FK_PresentableModelDescriptor_displayedInGridBy_DefaultGridCellKind", "DefaultGridCellKind")]
         public Kistl.App.GUI.ControlKind__Implementation__ DefaultGridCellKind__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.GUI.ControlKind__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.ControlKind__Implementation__>(
-                        "Model.FK_PresentableModelDescriptor_displayedInGridBy_ControlKind",
+                        "Model.FK_PresentableModelDescriptor_displayedInGridBy_DefaultGridCellKind",
                         "DefaultGridCellKind");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -117,7 +117,7 @@ namespace Kistl.App.GUI
             {
                 EntityReference<Kistl.App.GUI.ControlKind__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.ControlKind__Implementation__>(
-                        "Model.FK_PresentableModelDescriptor_displayedInGridBy_ControlKind",
+                        "Model.FK_PresentableModelDescriptor_displayedInGridBy_DefaultGridCellKind",
                         "DefaultGridCellKind");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -151,7 +151,7 @@ namespace Kistl.App.GUI
         /// The default ControlKind to use for this Presentable.
         /// </summary>
     /*
-    Relation: FK_PresentableModelDescriptor_has_ControlKind
+    Relation: FK_Presentable_has_DefaultKind
     A: ZeroOrOne PresentableModelDescriptor as Presentable
     B: ZeroOrOne ControlKind as DefaultKind
     Preferred Storage: MergeIntoA
@@ -179,14 +179,14 @@ namespace Kistl.App.GUI
         private int? _fk_DefaultKind;
         private Guid? _fk_guid_DefaultKind = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_PresentableModelDescriptor_has_ControlKind", "DefaultKind")]
+        [EdmRelationshipNavigationProperty("Model", "FK_Presentable_has_DefaultKind", "DefaultKind")]
         public Kistl.App.GUI.ControlKind__Implementation__ DefaultKind__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.GUI.ControlKind__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.ControlKind__Implementation__>(
-                        "Model.FK_PresentableModelDescriptor_has_ControlKind",
+                        "Model.FK_Presentable_has_DefaultKind",
                         "DefaultKind");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -207,7 +207,7 @@ namespace Kistl.App.GUI
             {
                 EntityReference<Kistl.App.GUI.ControlKind__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.ControlKind__Implementation__>(
-                        "Model.FK_PresentableModelDescriptor_has_ControlKind",
+                        "Model.FK_Presentable_has_DefaultKind",
                         "DefaultKind");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -444,7 +444,7 @@ namespace Kistl.App.GUI
         /// The described CLR class&apos; reference
         /// </summary>
     /*
-    Relation: FK_PresentableModelDescriptor_has_TypeRef
+    Relation: FK_Descriptor_has_PresentableModelRef
     A: ZeroOrMore PresentableModelDescriptor as Descriptor
     B: One TypeRef as PresentableModelRef
     Preferred Storage: MergeIntoA
@@ -472,14 +472,14 @@ namespace Kistl.App.GUI
         private int? _fk_PresentableModelRef;
         private Guid? _fk_guid_PresentableModelRef = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_PresentableModelDescriptor_has_TypeRef", "PresentableModelRef")]
+        [EdmRelationshipNavigationProperty("Model", "FK_Descriptor_has_PresentableModelRef", "PresentableModelRef")]
         public Kistl.App.Base.TypeRef__Implementation__ PresentableModelRef__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Base.TypeRef__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.TypeRef__Implementation__>(
-                        "Model.FK_PresentableModelDescriptor_has_TypeRef",
+                        "Model.FK_Descriptor_has_PresentableModelRef",
                         "PresentableModelRef");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -500,7 +500,7 @@ namespace Kistl.App.GUI
             {
                 EntityReference<Kistl.App.Base.TypeRef__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.TypeRef__Implementation__>(
-                        "Model.FK_PresentableModelDescriptor_has_TypeRef",
+                        "Model.FK_Descriptor_has_PresentableModelRef",
                         "PresentableModelRef");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -534,7 +534,7 @@ namespace Kistl.App.GUI
         /// 
         /// </summary>
     /*
-    Relation: FK_PresentableModelDescriptor_displayedBy_ControlKind
+    Relation: FK_Presentable_displayedBy_SecondaryControlKinds
     A: ZeroOrMore PresentableModelDescriptor as Presentable
     B: ZeroOrMore ControlKind as SecondaryControlKinds
     Preferred Storage: Separate
@@ -558,14 +558,14 @@ namespace Kistl.App.GUI
             }
         }
         
-        [EdmRelationshipNavigationProperty("Model", "FK_PresentableModelDescriptor_displayedBy_ControlKind_Presentable", "CollectionEntry")]
+        [EdmRelationshipNavigationProperty("Model", "FK_Presentable_displayedBy_SecondaryControlKinds_A", "CollectionEntry")]
         public EntityCollection<Kistl.App.GUI.PresentableModelDescriptor_displayedBy_ControlKind_RelationEntry__Implementation__> SecondaryControlKinds__Implementation__
         {
             get
             {
                 var c = ((IEntityWithRelationships)(this)).RelationshipManager
                     .GetRelatedCollection<Kistl.App.GUI.PresentableModelDescriptor_displayedBy_ControlKind_RelationEntry__Implementation__>(
-                        "Model.FK_PresentableModelDescriptor_displayedBy_ControlKind_Presentable",
+                        "Model.FK_Presentable_displayedBy_SecondaryControlKinds_A",
                         "CollectionEntry");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)

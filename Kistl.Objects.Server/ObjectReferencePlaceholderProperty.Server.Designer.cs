@@ -138,7 +138,7 @@ namespace Kistl.App.Base
         /// The ObjectClass that is referenced by this placeholder
         /// </summary>
     /*
-    Relation: FK_ObjectReferencePlaceholderProperty_ofType_ObjectClass
+    Relation: FK_ObjectReferencePlaceholderProperty_ofType_ReferencedObjectClass
     A: ZeroOrMore ObjectReferencePlaceholderProperty as ObjectReferencePlaceholderProperty
     B: One ObjectClass as ReferencedObjectClass
     Preferred Storage: MergeIntoA
@@ -166,14 +166,14 @@ namespace Kistl.App.Base
         private int? _fk_ReferencedObjectClass;
         private Guid? _fk_guid_ReferencedObjectClass = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_ObjectReferencePlaceholderProperty_ofType_ObjectClass", "ReferencedObjectClass")]
+        [EdmRelationshipNavigationProperty("Model", "FK_ObjectReferencePlaceholderProperty_ofType_ReferencedObjectClass", "ReferencedObjectClass")]
         public Kistl.App.Base.ObjectClass__Implementation__ ReferencedObjectClass__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Base.ObjectClass__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.ObjectClass__Implementation__>(
-                        "Model.FK_ObjectReferencePlaceholderProperty_ofType_ObjectClass",
+                        "Model.FK_ObjectReferencePlaceholderProperty_ofType_ReferencedObjectClass",
                         "ReferencedObjectClass");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -194,7 +194,7 @@ namespace Kistl.App.Base
             {
                 EntityReference<Kistl.App.Base.ObjectClass__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.ObjectClass__Implementation__>(
-                        "Model.FK_ObjectReferencePlaceholderProperty_ofType_ObjectClass",
+                        "Model.FK_ObjectReferencePlaceholderProperty_ofType_ReferencedObjectClass",
                         "ReferencedObjectClass");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)

@@ -112,7 +112,7 @@ namespace Kistl.App.Test
         /// 
         /// </summary>
     /*
-    Relation: FK_Muhblah_has_TestCustomObject
+    Relation: FK_MuhBlah_Role_has_TestCustomObjects_List_Role
     A: ZeroOrOne Muhblah as MuhBlah_Role
     B: ZeroOrMore TestCustomObject as TestCustomObjects_List_Role
     Preferred Storage: MergeIntoB
@@ -135,14 +135,14 @@ namespace Kistl.App.Test
             }
         }
         
-        [EdmRelationshipNavigationProperty("Model", "FK_Muhblah_has_TestCustomObject", "TestCustomObjects_List_Role")]
+        [EdmRelationshipNavigationProperty("Model", "FK_MuhBlah_Role_has_TestCustomObjects_List_Role", "TestCustomObjects_List_Role")]
         public EntityCollection<Kistl.App.Test.TestCustomObject__Implementation__> TestCustomObjects_List_Nav__Implementation__
         {
             get
             {
                 var c = ((IEntityWithRelationships)(this)).RelationshipManager
                     .GetRelatedCollection<Kistl.App.Test.TestCustomObject__Implementation__>(
-                        "Model.FK_Muhblah_has_TestCustomObject",
+                        "Model.FK_MuhBlah_Role_has_TestCustomObjects_List_Role",
                         "TestCustomObjects_List_Role");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)
@@ -160,7 +160,7 @@ namespace Kistl.App.Test
         /// 
         /// </summary>
     /*
-    Relation: FK_Muhblah_hasOther_TestCustomObject
+    Relation: FK_MuhBlah_List_Role_hasOther_TestCustomObjects_Role
     A: ZeroOrMore Muhblah as MuhBlah_List_Role
     B: ZeroOrOne TestCustomObject as TestCustomObjects_Role
     Preferred Storage: MergeIntoA
@@ -188,14 +188,14 @@ namespace Kistl.App.Test
         private int? _fk_TestCustomObjects_Nav;
         private Guid? _fk_guid_TestCustomObjects_Nav = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_Muhblah_hasOther_TestCustomObject", "TestCustomObjects_Role")]
+        [EdmRelationshipNavigationProperty("Model", "FK_MuhBlah_List_Role_hasOther_TestCustomObjects_Role", "TestCustomObjects_Role")]
         public Kistl.App.Test.TestCustomObject__Implementation__ TestCustomObjects_Nav__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Test.TestCustomObject__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Test.TestCustomObject__Implementation__>(
-                        "Model.FK_Muhblah_hasOther_TestCustomObject",
+                        "Model.FK_MuhBlah_List_Role_hasOther_TestCustomObjects_Role",
                         "TestCustomObjects_Role");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -216,7 +216,7 @@ namespace Kistl.App.Test
             {
                 EntityReference<Kistl.App.Test.TestCustomObject__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Test.TestCustomObject__Implementation__>(
-                        "Model.FK_Muhblah_hasOther_TestCustomObject",
+                        "Model.FK_MuhBlah_List_Role_hasOther_TestCustomObjects_Role",
                         "TestCustomObjects_Role");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)

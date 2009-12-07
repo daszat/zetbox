@@ -163,7 +163,7 @@ namespace Kistl.App.Projekte
         /// Identity which changed this object
         /// </summary>
     /*
-    Relation: FK_Auftrag_ChangedBy_Identity
+    Relation: FK_Auftrag_ChangedBy_ChangedBy
     A: ZeroOrMore Auftrag as Auftrag
     B: ZeroOrOne Identity as ChangedBy
     Preferred Storage: MergeIntoA
@@ -191,14 +191,14 @@ namespace Kistl.App.Projekte
         private int? _fk_ChangedBy;
         private Guid? _fk_guid_ChangedBy = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_Auftrag_ChangedBy_Identity", "ChangedBy")]
+        [EdmRelationshipNavigationProperty("Model", "FK_Auftrag_ChangedBy_ChangedBy", "ChangedBy")]
         public Kistl.App.Base.Identity__Implementation__ ChangedBy__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Base.Identity__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Identity__Implementation__>(
-                        "Model.FK_Auftrag_ChangedBy_Identity",
+                        "Model.FK_Auftrag_ChangedBy_ChangedBy",
                         "ChangedBy");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -219,7 +219,7 @@ namespace Kistl.App.Projekte
             {
                 EntityReference<Kistl.App.Base.Identity__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Identity__Implementation__>(
-                        "Model.FK_Auftrag_ChangedBy_Identity",
+                        "Model.FK_Auftrag_ChangedBy_ChangedBy",
                         "ChangedBy");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -304,7 +304,7 @@ namespace Kistl.App.Projekte
         /// Identity which created this object
         /// </summary>
     /*
-    Relation: FK_Auftrag_CreatedBy_Identity
+    Relation: FK_Auftrag_CreatedBy_CreatedBy
     A: ZeroOrMore Auftrag as Auftrag
     B: ZeroOrOne Identity as CreatedBy
     Preferred Storage: MergeIntoA
@@ -332,14 +332,14 @@ namespace Kistl.App.Projekte
         private int? _fk_CreatedBy;
         private Guid? _fk_guid_CreatedBy = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_Auftrag_CreatedBy_Identity", "CreatedBy")]
+        [EdmRelationshipNavigationProperty("Model", "FK_Auftrag_CreatedBy_CreatedBy", "CreatedBy")]
         public Kistl.App.Base.Identity__Implementation__ CreatedBy__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Base.Identity__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Identity__Implementation__>(
-                        "Model.FK_Auftrag_CreatedBy_Identity",
+                        "Model.FK_Auftrag_CreatedBy_CreatedBy",
                         "CreatedBy");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -360,7 +360,7 @@ namespace Kistl.App.Projekte
             {
                 EntityReference<Kistl.App.Base.Identity__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Identity__Implementation__>(
-                        "Model.FK_Auftrag_CreatedBy_Identity",
+                        "Model.FK_Auftrag_CreatedBy_CreatedBy",
                         "CreatedBy");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -625,7 +625,7 @@ namespace Kistl.App.Projekte
         /// Projekt zum Auftrag
         /// </summary>
     /*
-    Relation: FK_Projekt_has_Auftrag
+    Relation: FK_Projekt_has_Auftraege
     A: ZeroOrOne Projekt as Projekt
     B: ZeroOrMore Auftrag as Auftraege
     Preferred Storage: MergeIntoB
@@ -653,14 +653,14 @@ namespace Kistl.App.Projekte
         private int? _fk_Projekt;
         private Guid? _fk_guid_Projekt = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_Projekt_has_Auftrag", "Projekt")]
+        [EdmRelationshipNavigationProperty("Model", "FK_Projekt_has_Auftraege", "Projekt")]
         public Kistl.App.Projekte.Projekt__Implementation__ Projekt__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Projekte.Projekt__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.Projekt__Implementation__>(
-                        "Model.FK_Projekt_has_Auftrag",
+                        "Model.FK_Projekt_has_Auftraege",
                         "Projekt");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -681,7 +681,7 @@ namespace Kistl.App.Projekte
             {
                 EntityReference<Kistl.App.Projekte.Projekt__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.Projekt__Implementation__>(
-                        "Model.FK_Projekt_has_Auftrag",
+                        "Model.FK_Projekt_has_Auftraege",
                         "Projekt");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)

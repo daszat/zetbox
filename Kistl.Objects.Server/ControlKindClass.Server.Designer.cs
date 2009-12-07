@@ -36,7 +36,7 @@ namespace Kistl.App.GUI
         /// 
         /// </summary>
     /*
-    Relation: FK_ControlKindClass_supports_TypeRef
+    Relation: FK_ControlKindClass_supports_SupportedInterfaces
     A: ZeroOrMore ControlKindClass as ControlKindClass
     B: ZeroOrMore TypeRef as SupportedInterfaces
     Preferred Storage: Separate
@@ -60,14 +60,14 @@ namespace Kistl.App.GUI
             }
         }
         
-        [EdmRelationshipNavigationProperty("Model", "FK_ControlKindClass_supports_TypeRef_ControlKindClass", "CollectionEntry")]
+        [EdmRelationshipNavigationProperty("Model", "FK_ControlKindClass_supports_SupportedInterfaces_A", "CollectionEntry")]
         public EntityCollection<Kistl.App.GUI.ControlKindClass_supports_TypeRef_RelationEntry__Implementation__> SupportedInterfaces__Implementation__
         {
             get
             {
                 var c = ((IEntityWithRelationships)(this)).RelationshipManager
                     .GetRelatedCollection<Kistl.App.GUI.ControlKindClass_supports_TypeRef_RelationEntry__Implementation__>(
-                        "Model.FK_ControlKindClass_supports_TypeRef_ControlKindClass",
+                        "Model.FK_ControlKindClass_supports_SupportedInterfaces_A",
                         "CollectionEntry");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)

@@ -391,129 +391,129 @@
 
     <!-- EntitySets and AssociationSet for all object-object CollectionEntrys -->
     <!-- 
-    Relation: FK_ControlKindClass_supports_TypeRef
+    Relation: FK_ControlKindClass_supports_SupportedInterfaces
     A: ZeroOrMore ControlKindClass as ControlKindClass
     B: ZeroOrMore TypeRef as SupportedInterfaces
     Preferred Storage: Separate
     -->
     <EntitySet Name="ControlKindClass_supports_TypeRef_RelationEntry" EntityType="Model.Store.ControlKindClass_supports_TypeRef_RelationEntry" Table="ControlKindClasses_supports_TypeRefs" />
-    <AssociationSet Name="FK_ControlKindClass_supports_TypeRef_ControlKindClass" Association="Model.Store.FK_ControlKindClass_supports_TypeRef_ControlKindClass" >
+    <AssociationSet Name="FK_ControlKindClass_supports_SupportedInterfaces_A" Association="Model.Store.FK_ControlKindClass_supports_SupportedInterfaces_A" >
       <End Role="ControlKindClass" EntitySet="ControlKindClass" />
       <End Role="CollectionEntry" EntitySet="ControlKindClass_supports_TypeRef_RelationEntry" />
     </AssociationSet>
-    <AssociationSet Name="FK_ControlKindClass_supports_TypeRef_SupportedInterfaces" Association="Model.Store.FK_ControlKindClass_supports_TypeRef_SupportedInterfaces" >
+    <AssociationSet Name="FK_ControlKindClass_supports_SupportedInterfaces_B" Association="Model.Store.FK_ControlKindClass_supports_SupportedInterfaces_B" >
       <End Role="CollectionEntry" EntitySet="ControlKindClass_supports_TypeRef_RelationEntry" />
       <End Role="SupportedInterfaces" EntitySet="TypeRef" />
     </AssociationSet>
     
     <!-- 
-    Relation: FK_ObjectClass_implements_Interface
+    Relation: FK_ObjectClass_implements_ImplementsInterfaces
     A: ZeroOrMore ObjectClass as ObjectClass
     B: ZeroOrMore Interface as ImplementsInterfaces
     Preferred Storage: Separate
     -->
     <EntitySet Name="ObjectClass_implements_Interface_RelationEntry" EntityType="Model.Store.ObjectClass_implements_Interface_RelationEntry" Table="ObjectClasses_implements_Interfaces" />
-    <AssociationSet Name="FK_ObjectClass_implements_Interface_ObjectClass" Association="Model.Store.FK_ObjectClass_implements_Interface_ObjectClass" >
+    <AssociationSet Name="FK_ObjectClass_implements_ImplementsInterfaces_A" Association="Model.Store.FK_ObjectClass_implements_ImplementsInterfaces_A" >
       <End Role="ObjectClass" EntitySet="ObjectClass" />
       <End Role="CollectionEntry" EntitySet="ObjectClass_implements_Interface_RelationEntry" />
     </AssociationSet>
-    <AssociationSet Name="FK_ObjectClass_implements_Interface_ImplementsInterfaces" Association="Model.Store.FK_ObjectClass_implements_Interface_ImplementsInterfaces" >
+    <AssociationSet Name="FK_ObjectClass_implements_ImplementsInterfaces_B" Association="Model.Store.FK_ObjectClass_implements_ImplementsInterfaces_B" >
       <End Role="CollectionEntry" EntitySet="ObjectClass_implements_Interface_RelationEntry" />
       <End Role="ImplementsInterfaces" EntitySet="Interface" />
     </AssociationSet>
     
     <!-- 
-    Relation: FK_PresentableModelDescriptor_displayedBy_ControlKind
+    Relation: FK_Presentable_displayedBy_SecondaryControlKinds
     A: ZeroOrMore PresentableModelDescriptor as Presentable
     B: ZeroOrMore ControlKind as SecondaryControlKinds
     Preferred Storage: Separate
     -->
     <EntitySet Name="PresentableModelDescriptor_displayedBy_ControlKind_RelationEntry" EntityType="Model.Store.PresentableModelDescriptor_displayedBy_ControlKind_RelationEntry" Table="PresentableModelDescriptors_displayedBy_ControlKinds" />
-    <AssociationSet Name="FK_PresentableModelDescriptor_displayedBy_ControlKind_Presentable" Association="Model.Store.FK_PresentableModelDescriptor_displayedBy_ControlKind_Presentable" >
+    <AssociationSet Name="FK_Presentable_displayedBy_SecondaryControlKinds_A" Association="Model.Store.FK_Presentable_displayedBy_SecondaryControlKinds_A" >
       <End Role="Presentable" EntitySet="PresentableModelDescriptor" />
       <End Role="CollectionEntry" EntitySet="PresentableModelDescriptor_displayedBy_ControlKind_RelationEntry" />
     </AssociationSet>
-    <AssociationSet Name="FK_PresentableModelDescriptor_displayedBy_ControlKind_SecondaryControlKinds" Association="Model.Store.FK_PresentableModelDescriptor_displayedBy_ControlKind_SecondaryControlKinds" >
+    <AssociationSet Name="FK_Presentable_displayedBy_SecondaryControlKinds_B" Association="Model.Store.FK_Presentable_displayedBy_SecondaryControlKinds_B" >
       <End Role="CollectionEntry" EntitySet="PresentableModelDescriptor_displayedBy_ControlKind_RelationEntry" />
       <End Role="SecondaryControlKinds" EntitySet="ControlKind" />
     </AssociationSet>
     
     <!-- 
-    Relation: FK_Projekt_haben_Mitarbeiter
+    Relation: FK_Projekte_haben_Mitarbeiter
     A: ZeroOrMore Projekt as Projekte
     B: ZeroOrMore Mitarbeiter as Mitarbeiter
     Preferred Storage: Separate
     -->
     <EntitySet Name="Projekt_haben_Mitarbeiter_RelationEntry" EntityType="Model.Store.Projekt_haben_Mitarbeiter_RelationEntry" Table="Projekte_haben_Mitarbeiter" />
-    <AssociationSet Name="FK_Projekt_haben_Mitarbeiter_Projekte" Association="Model.Store.FK_Projekt_haben_Mitarbeiter_Projekte" >
+    <AssociationSet Name="FK_Projekte_haben_Mitarbeiter_A" Association="Model.Store.FK_Projekte_haben_Mitarbeiter_A" >
       <End Role="Projekte" EntitySet="Projekt" />
       <End Role="CollectionEntry" EntitySet="Projekt_haben_Mitarbeiter_RelationEntry" />
     </AssociationSet>
-    <AssociationSet Name="FK_Projekt_haben_Mitarbeiter_Mitarbeiter" Association="Model.Store.FK_Projekt_haben_Mitarbeiter_Mitarbeiter" >
+    <AssociationSet Name="FK_Projekte_haben_Mitarbeiter_B" Association="Model.Store.FK_Projekte_haben_Mitarbeiter_B" >
       <End Role="CollectionEntry" EntitySet="Projekt_haben_Mitarbeiter_RelationEntry" />
       <End Role="Mitarbeiter" EntitySet="Mitarbeiter" />
     </AssociationSet>
     
     <!-- 
-    Relation: FK_Template_hasMenu_Visual
+    Relation: FK_Template_hasMenu_Menu
     A: ZeroOrMore Template as Template
     B: ZeroOrMore Visual as Menu
     Preferred Storage: Separate
     -->
     <EntitySet Name="Template_hasMenu_Visual_RelationEntry" EntityType="Model.Store.Template_hasMenu_Visual_RelationEntry" Table="Templates_hasMenu_Visuals" />
-    <AssociationSet Name="FK_Template_hasMenu_Visual_Template" Association="Model.Store.FK_Template_hasMenu_Visual_Template" >
+    <AssociationSet Name="FK_Template_hasMenu_Menu_A" Association="Model.Store.FK_Template_hasMenu_Menu_A" >
       <End Role="Template" EntitySet="Template" />
       <End Role="CollectionEntry" EntitySet="Template_hasMenu_Visual_RelationEntry" />
     </AssociationSet>
-    <AssociationSet Name="FK_Template_hasMenu_Visual_Menu" Association="Model.Store.FK_Template_hasMenu_Visual_Menu" >
+    <AssociationSet Name="FK_Template_hasMenu_Menu_B" Association="Model.Store.FK_Template_hasMenu_Menu_B" >
       <End Role="CollectionEntry" EntitySet="Template_hasMenu_Visual_RelationEntry" />
       <End Role="Menu" EntitySet="Visual" />
     </AssociationSet>
     
     <!-- 
-    Relation: FK_TypeRef_hasGenericArguments_TypeRef
+    Relation: FK_TypeRef_hasGenericArguments_GenericArguments
     A: ZeroOrMore TypeRef as TypeRef
     B: ZeroOrMore TypeRef as GenericArguments
     Preferred Storage: Separate
     -->
     <EntitySet Name="TypeRef_hasGenericArguments_TypeRef_RelationEntry" EntityType="Model.Store.TypeRef_hasGenericArguments_TypeRef_RelationEntry" Table="TypeRefs_hasGenericArguments_TypeRefs" />
-    <AssociationSet Name="FK_TypeRef_hasGenericArguments_TypeRef_TypeRef" Association="Model.Store.FK_TypeRef_hasGenericArguments_TypeRef_TypeRef" >
+    <AssociationSet Name="FK_TypeRef_hasGenericArguments_GenericArguments_A" Association="Model.Store.FK_TypeRef_hasGenericArguments_GenericArguments_A" >
       <End Role="TypeRef" EntitySet="TypeRef" />
       <End Role="CollectionEntry" EntitySet="TypeRef_hasGenericArguments_TypeRef_RelationEntry" />
     </AssociationSet>
-    <AssociationSet Name="FK_TypeRef_hasGenericArguments_TypeRef_GenericArguments" Association="Model.Store.FK_TypeRef_hasGenericArguments_TypeRef_GenericArguments" >
+    <AssociationSet Name="FK_TypeRef_hasGenericArguments_GenericArguments_B" Association="Model.Store.FK_TypeRef_hasGenericArguments_GenericArguments_B" >
       <End Role="CollectionEntry" EntitySet="TypeRef_hasGenericArguments_TypeRef_RelationEntry" />
       <End Role="GenericArguments" EntitySet="TypeRef" />
     </AssociationSet>
     
     <!-- 
-    Relation: FK_Visual_contains_Visual
+    Relation: FK_Visual_contains_Children
     A: ZeroOrMore Visual as Visual
     B: ZeroOrMore Visual as Children
     Preferred Storage: Separate
     -->
     <EntitySet Name="Visual_contains_Visual_RelationEntry" EntityType="Model.Store.Visual_contains_Visual_RelationEntry" Table="Visuals_contains_Visuals" />
-    <AssociationSet Name="FK_Visual_contains_Visual_Visual" Association="Model.Store.FK_Visual_contains_Visual_Visual" >
+    <AssociationSet Name="FK_Visual_contains_Children_A" Association="Model.Store.FK_Visual_contains_Children_A" >
       <End Role="Visual" EntitySet="Visual" />
       <End Role="CollectionEntry" EntitySet="Visual_contains_Visual_RelationEntry" />
     </AssociationSet>
-    <AssociationSet Name="FK_Visual_contains_Visual_Children" Association="Model.Store.FK_Visual_contains_Visual_Children" >
+    <AssociationSet Name="FK_Visual_contains_Children_B" Association="Model.Store.FK_Visual_contains_Children_B" >
       <End Role="CollectionEntry" EntitySet="Visual_contains_Visual_RelationEntry" />
       <End Role="Children" EntitySet="Visual" />
     </AssociationSet>
     
     <!-- 
-    Relation: FK_Visual_hasContextMenu_Visual
+    Relation: FK_Visual_hasContextMenu_ContextMenu
     A: ZeroOrMore Visual as Visual
     B: ZeroOrMore Visual as ContextMenu
     Preferred Storage: Separate
     -->
     <EntitySet Name="Visual_hasContextMenu_Visual_RelationEntry" EntityType="Model.Store.Visual_hasContextMenu_Visual_RelationEntry" Table="Visuals_hasContextMenu_Visuals" />
-    <AssociationSet Name="FK_Visual_hasContextMenu_Visual_Visual" Association="Model.Store.FK_Visual_hasContextMenu_Visual_Visual" >
+    <AssociationSet Name="FK_Visual_hasContextMenu_ContextMenu_A" Association="Model.Store.FK_Visual_hasContextMenu_ContextMenu_A" >
       <End Role="Visual" EntitySet="Visual" />
       <End Role="CollectionEntry" EntitySet="Visual_hasContextMenu_Visual_RelationEntry" />
     </AssociationSet>
-    <AssociationSet Name="FK_Visual_hasContextMenu_Visual_ContextMenu" Association="Model.Store.FK_Visual_hasContextMenu_Visual_ContextMenu" >
+    <AssociationSet Name="FK_Visual_hasContextMenu_ContextMenu_B" Association="Model.Store.FK_Visual_hasContextMenu_ContextMenu_B" >
       <End Role="CollectionEntry" EntitySet="Visual_hasContextMenu_Visual_RelationEntry" />
       <End Role="ContextMenu" EntitySet="Visual" />
     </AssociationSet>
@@ -525,11 +525,11 @@
     Preferred Storage: Separate
     -->
     <EntitySet Name="WorkEffortAccount_has_Mitarbeiter_RelationEntry" EntityType="Model.Store.WorkEffortAccount_has_Mitarbeiter_RelationEntry" Table="WorkEffortAccounts_has_Mitarbeiter" />
-    <AssociationSet Name="FK_WorkEffortAccount_has_Mitarbeiter_WorkEffortAccount" Association="Model.Store.FK_WorkEffortAccount_has_Mitarbeiter_WorkEffortAccount" >
+    <AssociationSet Name="FK_WorkEffortAccount_has_Mitarbeiter_A" Association="Model.Store.FK_WorkEffortAccount_has_Mitarbeiter_A" >
       <End Role="WorkEffortAccount" EntitySet="WorkEffortAccount" />
       <End Role="CollectionEntry" EntitySet="WorkEffortAccount_has_Mitarbeiter_RelationEntry" />
     </AssociationSet>
-    <AssociationSet Name="FK_WorkEffortAccount_has_Mitarbeiter_Mitarbeiter" Association="Model.Store.FK_WorkEffortAccount_has_Mitarbeiter_Mitarbeiter" >
+    <AssociationSet Name="FK_WorkEffortAccount_has_Mitarbeiter_B" Association="Model.Store.FK_WorkEffortAccount_has_Mitarbeiter_B" >
       <End Role="CollectionEntry" EntitySet="WorkEffortAccount_has_Mitarbeiter_RelationEntry" />
       <End Role="Mitarbeiter" EntitySet="Mitarbeiter" />
     </AssociationSet>
@@ -537,11 +537,11 @@
 
 
     <!-- AssociationSets for all object-object relations which do not need CollectionEntrys -->
-    <AssociationSet Name="FK_Auftrag_ChangedBy_Identity" Association="Model.Store.FK_Auftrag_ChangedBy_Identity" >
+    <AssociationSet Name="FK_Auftrag_ChangedBy_ChangedBy" Association="Model.Store.FK_Auftrag_ChangedBy_ChangedBy" >
       <End Role="Auftrag" EntitySet="Auftrag" />
       <End Role="ChangedBy" EntitySet="Identity" />
     </AssociationSet>
-    <AssociationSet Name="FK_Auftrag_CreatedBy_Identity" Association="Model.Store.FK_Auftrag_CreatedBy_Identity" >
+    <AssociationSet Name="FK_Auftrag_CreatedBy_CreatedBy" Association="Model.Store.FK_Auftrag_CreatedBy_CreatedBy" >
       <End Role="Auftrag" EntitySet="Auftrag" />
       <End Role="CreatedBy" EntitySet="Identity" />
     </AssociationSet>
@@ -553,27 +553,39 @@
       <End Role="Auftrag" EntitySet="Auftrag" />
       <End Role="Mitarbeiter" EntitySet="Mitarbeiter" />
     </AssociationSet>
+    <AssociationSet Name="FK_BaseObjectClass_has_SubClasses" Association="Model.Store.FK_BaseObjectClass_has_SubClasses" >
+      <End Role="BaseObjectClass" EntitySet="ObjectClass" />
+      <End Role="SubClasses" EntitySet="ObjectClass" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BaseProperty_has_Module" Association="Model.Store.FK_BaseProperty_has_Module" >
+      <End Role="BaseProperty" EntitySet="Property" />
+      <End Role="Module" EntitySet="Module" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Child_has_Parent" Association="Model.Store.FK_Child_has_Parent" >
+      <End Role="Child" EntitySet="TypeRef" />
+      <End Role="Parent" EntitySet="TypeRef" />
+    </AssociationSet>
     <AssociationSet Name="FK_CLRObjectParameter_has_Assembly" Association="Model.Store.FK_CLRObjectParameter_has_Assembly" >
       <End Role="CLRObjectParameter" EntitySet="CLRObjectParameter" />
       <End Role="Assembly" EntitySet="Assembly" />
     </AssociationSet>
-    <AssociationSet Name="FK_DataType_has_Icon" Association="Model.Store.FK_DataType_has_Icon" >
+    <AssociationSet Name="FK_ConstrainedProperty_has_Constraints" Association="Model.Store.FK_ConstrainedProperty_has_Constraints" >
+      <End Role="ConstrainedProperty" EntitySet="Property" />
+      <End Role="Constraints" EntitySet="Constraint" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Control_isof_Kind" Association="Model.Store.FK_Control_isof_Kind" >
+      <End Role="Control" EntitySet="ViewDescriptor" />
+      <End Role="Kind" EntitySet="ControlKindClass" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DataType_has_DefaultIcon" Association="Model.Store.FK_DataType_has_DefaultIcon" >
       <End Role="DataType" EntitySet="DataType" />
       <End Role="DefaultIcon" EntitySet="Icon" />
     </AssociationSet>
-    <AssociationSet Name="FK_DataType_has_Method" Association="Model.Store.FK_DataType_has_Method" >
-      <End Role="ObjectClass" EntitySet="DataType" />
-      <End Role="Methods" EntitySet="Method" />
+    <AssociationSet Name="FK_Descriptor_has_PresentableModelRef" Association="Model.Store.FK_Descriptor_has_PresentableModelRef" >
+      <End Role="Descriptor" EntitySet="PresentableModelDescriptor" />
+      <End Role="PresentableModelRef" EntitySet="TypeRef" />
     </AssociationSet>
-    <AssociationSet Name="FK_DataType_has_MethodInvocation" Association="Model.Store.FK_DataType_has_MethodInvocation" >
-      <End Role="InvokeOnObjectClass" EntitySet="DataType" />
-      <End Role="MethodInvocations" EntitySet="MethodInvocation" />
-    </AssociationSet>
-    <AssociationSet Name="FK_DataType_has_Property" Association="Model.Store.FK_DataType_has_Property" >
-      <End Role="ObjectClass" EntitySet="DataType" />
-      <End Role="Properties" EntitySet="Property" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Enumeration_has_EnumerationEntry" Association="Model.Store.FK_Enumeration_has_EnumerationEntry" >
+    <AssociationSet Name="FK_Enumeration_has_EnumerationEntries" Association="Model.Store.FK_Enumeration_has_EnumerationEntries" >
       <End Role="Enumeration" EntitySet="Enumeration" />
       <End Role="EnumerationEntries" EntitySet="EnumerationEntry" />
     </AssociationSet>
@@ -585,11 +597,15 @@
       <End Role="Icon" EntitySet="Icon" />
       <End Role="Module" EntitySet="Module" />
     </AssociationSet>
-    <AssociationSet Name="FK_Method_has_BaseParameter" Association="Model.Store.FK_Method_has_BaseParameter" >
-      <End Role="Method" EntitySet="Method" />
-      <End Role="Parameter" EntitySet="BaseParameter" />
+    <AssociationSet Name="FK_InvokeOnObjectClass_has_MethodInvocations" Association="Model.Store.FK_InvokeOnObjectClass_has_MethodInvocations" >
+      <End Role="InvokeOnObjectClass" EntitySet="DataType" />
+      <End Role="MethodInvocations" EntitySet="MethodInvocation" />
     </AssociationSet>
-    <AssociationSet Name="FK_Method_has_MethodInvocation" Association="Model.Store.FK_Method_has_MethodInvocation" >
+    <AssociationSet Name="FK_InvokeOnProperty_has_Invocations" Association="Model.Store.FK_InvokeOnProperty_has_Invocations" >
+      <End Role="InvokeOnProperty" EntitySet="Property" />
+      <End Role="Invocations" EntitySet="PropertyInvocation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Method_has_MethodInvokations" Association="Model.Store.FK_Method_has_MethodInvokations" >
       <End Role="Method" EntitySet="Method" />
       <End Role="MethodInvokations" EntitySet="MethodInvocation" />
     </AssociationSet>
@@ -597,19 +613,23 @@
       <End Role="Method" EntitySet="Method" />
       <End Role="Module" EntitySet="Module" />
     </AssociationSet>
+    <AssociationSet Name="FK_Method_has_Parameter" Association="Model.Store.FK_Method_has_Parameter" >
+      <End Role="Method" EntitySet="Method" />
+      <End Role="Parameter" EntitySet="BaseParameter" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MethodInvocation_has_Implementor" Association="Model.Store.FK_MethodInvocation_has_Implementor" >
+      <End Role="MethodInvocation" EntitySet="MethodInvocation" />
+      <End Role="Implementor" EntitySet="TypeRef" />
+    </AssociationSet>
     <AssociationSet Name="FK_MethodInvocation_has_Module" Association="Model.Store.FK_MethodInvocation_has_Module" >
       <End Role="MethodInvocation" EntitySet="MethodInvocation" />
       <End Role="Module" EntitySet="Module" />
     </AssociationSet>
-    <AssociationSet Name="FK_MethodInvocation_has_TypeRef" Association="Model.Store.FK_MethodInvocation_has_TypeRef" >
-      <End Role="MethodInvocation" EntitySet="MethodInvocation" />
-      <End Role="Implementor" EntitySet="TypeRef" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Module_has_Assembly" Association="Model.Store.FK_Module_has_Assembly" >
+    <AssociationSet Name="FK_Module_has_Assemblies" Association="Model.Store.FK_Module_has_Assemblies" >
       <End Role="Module" EntitySet="Module" />
       <End Role="Assemblies" EntitySet="Assembly" />
     </AssociationSet>
-    <AssociationSet Name="FK_Module_has_DataType" Association="Model.Store.FK_Module_has_DataType" >
+    <AssociationSet Name="FK_Module_has_DataTypes" Association="Model.Store.FK_Module_has_DataTypes" >
       <End Role="Module" EntitySet="Module" />
       <End Role="DataTypes" EntitySet="DataType" />
     </AssociationSet>
@@ -617,27 +637,27 @@
       <End Role="Module" EntitySet="Module" />
       <End Role="Relation" EntitySet="Relation" />
     </AssociationSet>
-    <AssociationSet Name="FK_Muhblah_has_TestCustomObject" Association="Model.Store.FK_Muhblah_has_TestCustomObject" >
-      <End Role="MuhBlah_Role" EntitySet="Muhblah" />
-      <End Role="TestCustomObjects_List_Role" EntitySet="TestCustomObject" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Muhblah_hasOther_TestCustomObject" Association="Model.Store.FK_Muhblah_hasOther_TestCustomObject" >
+    <AssociationSet Name="FK_MuhBlah_List_Role_hasOther_TestCustomObjects_Role" Association="Model.Store.FK_MuhBlah_List_Role_hasOther_TestCustomObjects_Role" >
       <End Role="MuhBlah_List_Role" EntitySet="Muhblah" />
       <End Role="TestCustomObjects_Role" EntitySet="TestCustomObject" />
     </AssociationSet>
-    <AssociationSet Name="FK_ObjectClass_has_ObjectClass" Association="Model.Store.FK_ObjectClass_has_ObjectClass" >
-      <End Role="BaseObjectClass" EntitySet="ObjectClass" />
-      <End Role="SubClasses" EntitySet="ObjectClass" />
+    <AssociationSet Name="FK_MuhBlah_Role_has_TestCustomObjects_List_Role" Association="Model.Store.FK_MuhBlah_Role_has_TestCustomObjects_List_Role" >
+      <End Role="MuhBlah_Role" EntitySet="Muhblah" />
+      <End Role="TestCustomObjects_List_Role" EntitySet="TestCustomObject" />
     </AssociationSet>
-    <AssociationSet Name="FK_ObjectClass_has_PresentableModelDescriptor" Association="Model.Store.FK_ObjectClass_has_PresentableModelDescriptor" >
-      <End Role="Presentable" EntitySet="ObjectClass" />
-      <End Role="DefaultPresentableModelDescriptor" EntitySet="PresentableModelDescriptor" />
+    <AssociationSet Name="FK_ObjectClass_has_Methods" Association="Model.Store.FK_ObjectClass_has_Methods" >
+      <End Role="ObjectClass" EntitySet="DataType" />
+      <End Role="Methods" EntitySet="Method" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ObjectClass_has_Properties" Association="Model.Store.FK_ObjectClass_has_Properties" >
+      <End Role="ObjectClass" EntitySet="DataType" />
+      <End Role="Properties" EntitySet="Property" />
     </AssociationSet>
     <AssociationSet Name="FK_ObjectParameter_has_DataType" Association="Model.Store.FK_ObjectParameter_has_DataType" >
       <End Role="ObjectParameter" EntitySet="ObjectParameter" />
       <End Role="DataType" EntitySet="DataType" />
     </AssociationSet>
-    <AssociationSet Name="FK_ObjectReferencePlaceholderProperty_ofType_ObjectClass" Association="Model.Store.FK_ObjectReferencePlaceholderProperty_ofType_ObjectClass" >
+    <AssociationSet Name="FK_ObjectReferencePlaceholderProperty_ofType_ReferencedObjectClass" Association="Model.Store.FK_ObjectReferencePlaceholderProperty_ofType_ReferencedObjectClass" >
       <End Role="ObjectReferencePlaceholderProperty" EntitySet="ObjectReferencePlaceholderProperty" />
       <End Role="ReferencedObjectClass" EntitySet="ObjectClass" />
     </AssociationSet>
@@ -645,83 +665,71 @@
       <End Role="PresenceRecord" EntitySet="PresenceRecord" />
       <End Role="Mitarbeiter" EntitySet="Mitarbeiter" />
     </AssociationSet>
-    <AssociationSet Name="FK_PresentableModelDescriptor_displayedInGridBy_ControlKind" Association="Model.Store.FK_PresentableModelDescriptor_displayedInGridBy_ControlKind" >
-      <End Role="PresentableModelDescriptor" EntitySet="PresentableModelDescriptor" />
-      <End Role="DefaultGridCellKind" EntitySet="ControlKind" />
-    </AssociationSet>
-    <AssociationSet Name="FK_PresentableModelDescriptor_has_ControlKind" Association="Model.Store.FK_PresentableModelDescriptor_has_ControlKind" >
+    <AssociationSet Name="FK_Presentable_has_DefaultKind" Association="Model.Store.FK_Presentable_has_DefaultKind" >
       <End Role="Presentable" EntitySet="PresentableModelDescriptor" />
       <End Role="DefaultKind" EntitySet="ControlKind" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Presentable_has_DefaultPresentableModelDescriptor" Association="Model.Store.FK_Presentable_has_DefaultPresentableModelDescriptor" >
+      <End Role="Presentable" EntitySet="ObjectClass" />
+      <End Role="DefaultPresentableModelDescriptor" EntitySet="PresentableModelDescriptor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PresentableModelDescriptor_displayedInGridBy_DefaultGridCellKind" Association="Model.Store.FK_PresentableModelDescriptor_displayedInGridBy_DefaultGridCellKind" >
+      <End Role="PresentableModelDescriptor" EntitySet="PresentableModelDescriptor" />
+      <End Role="DefaultGridCellKind" EntitySet="ControlKind" />
     </AssociationSet>
     <AssociationSet Name="FK_PresentableModelDescriptor_has_Module" Association="Model.Store.FK_PresentableModelDescriptor_has_Module" >
       <End Role="PresentableModelDescriptor" EntitySet="PresentableModelDescriptor" />
       <End Role="Module" EntitySet="Module" />
     </AssociationSet>
-    <AssociationSet Name="FK_PresentableModelDescriptor_has_TypeRef" Association="Model.Store.FK_PresentableModelDescriptor_has_TypeRef" >
-      <End Role="Descriptor" EntitySet="PresentableModelDescriptor" />
-      <End Role="PresentableModelRef" EntitySet="TypeRef" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Projekt_has_Auftrag" Association="Model.Store.FK_Projekt_has_Auftrag" >
+    <AssociationSet Name="FK_Projekt_has_Auftraege" Association="Model.Store.FK_Projekt_has_Auftraege" >
       <End Role="Projekt" EntitySet="Projekt" />
       <End Role="Auftraege" EntitySet="Auftrag" />
     </AssociationSet>
-    <AssociationSet Name="FK_Projekt_has_Task" Association="Model.Store.FK_Projekt_has_Task" >
+    <AssociationSet Name="FK_Projekt_has_Tasks" Association="Model.Store.FK_Projekt_has_Tasks" >
       <End Role="Projekt" EntitySet="Projekt" />
       <End Role="Tasks" EntitySet="Task" />
     </AssociationSet>
-    <AssociationSet Name="FK_Property_has_Constraint" Association="Model.Store.FK_Property_has_Constraint" >
-      <End Role="ConstrainedProperty" EntitySet="Property" />
-      <End Role="Constraints" EntitySet="Constraint" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Property_has_DefaultPropertyValue" Association="Model.Store.FK_Property_has_DefaultPropertyValue" >
+    <AssociationSet Name="FK_Property_has_DefaultValue" Association="Model.Store.FK_Property_has_DefaultValue" >
       <End Role="Property" EntitySet="Property" />
       <End Role="DefaultValue" EntitySet="DefaultPropertyValue" />
     </AssociationSet>
-    <AssociationSet Name="FK_Property_has_Module" Association="Model.Store.FK_Property_has_Module" >
-      <End Role="BaseProperty" EntitySet="Property" />
-      <End Role="Module" EntitySet="Module" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Property_has_PresentableModelDescriptor" Association="Model.Store.FK_Property_has_PresentableModelDescriptor" >
+    <AssociationSet Name="FK_Property_has_ValueModelDescriptor" Association="Model.Store.FK_Property_has_ValueModelDescriptor" >
       <End Role="Property" EntitySet="Property" />
       <End Role="ValueModelDescriptor" EntitySet="PresentableModelDescriptor" />
     </AssociationSet>
-    <AssociationSet Name="FK_Property_has_PropertyInvocation" Association="Model.Store.FK_Property_has_PropertyInvocation" >
-      <End Role="InvokeOnProperty" EntitySet="Property" />
-      <End Role="Invocations" EntitySet="PropertyInvocation" />
-    </AssociationSet>
-    <AssociationSet Name="FK_PropertyInvocation_has_TypeRef" Association="Model.Store.FK_PropertyInvocation_has_TypeRef" >
+    <AssociationSet Name="FK_PropertyInvocation_has_Implementor" Association="Model.Store.FK_PropertyInvocation_has_Implementor" >
       <End Role="PropertyInvocation" EntitySet="PropertyInvocation" />
       <End Role="Implementor" EntitySet="TypeRef" />
     </AssociationSet>
-    <AssociationSet Name="FK_Relation_hasA_RelationEnd" Association="Model.Store.FK_Relation_hasA_RelationEnd" >
+    <AssociationSet Name="FK_Relation_hasA_A" Association="Model.Store.FK_Relation_hasA_A" >
       <End Role="Relation" EntitySet="Relation" />
       <End Role="A" EntitySet="RelationEnd" />
     </AssociationSet>
-    <AssociationSet Name="FK_Relation_hasB_RelationEnd" Association="Model.Store.FK_Relation_hasB_RelationEnd" >
+    <AssociationSet Name="FK_Relation_hasB_B" Association="Model.Store.FK_Relation_hasB_B" >
       <End Role="Relation" EntitySet="Relation" />
       <End Role="B" EntitySet="RelationEnd" />
     </AssociationSet>
-    <AssociationSet Name="FK_RelationEnd_has_ObjectClass" Association="Model.Store.FK_RelationEnd_has_ObjectClass" >
-      <End Role="RelationEnd" EntitySet="RelationEnd" />
-      <End Role="Type" EntitySet="ObjectClass" />
-    </AssociationSet>
-    <AssociationSet Name="FK_RelationEnd_has_ObjectReferenceProperty" Association="Model.Store.FK_RelationEnd_has_ObjectReferenceProperty" >
+    <AssociationSet Name="FK_RelationEnd_has_Navigator" Association="Model.Store.FK_RelationEnd_has_Navigator" >
       <End Role="RelationEnd" EntitySet="RelationEnd" />
       <End Role="Navigator" EntitySet="ObjectReferenceProperty" />
     </AssociationSet>
-    <AssociationSet Name="FK_StructProperty_has_Struct" Association="Model.Store.FK_StructProperty_has_Struct" >
+    <AssociationSet Name="FK_RelationEnd_has_Type" Association="Model.Store.FK_RelationEnd_has_Type" >
+      <End Role="RelationEnd" EntitySet="RelationEnd" />
+      <End Role="Type" EntitySet="ObjectClass" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StructProperty_has_StructDefinition" Association="Model.Store.FK_StructProperty_has_StructDefinition" >
       <End Role="StructProperty" EntitySet="StructProperty" />
       <End Role="StructDefinition" EntitySet="Struct" />
     </AssociationSet>
-    <AssociationSet Name="FK_Template_has_Assembly" Association="Model.Store.FK_Template_has_Assembly" >
+    <AssociationSet Name="FK_Template_has_DisplayedTypeAssembly" Association="Model.Store.FK_Template_has_DisplayedTypeAssembly" >
       <End Role="Template" EntitySet="Template" />
       <End Role="DisplayedTypeAssembly" EntitySet="Assembly" />
     </AssociationSet>
-    <AssociationSet Name="FK_Template_has_Visual" Association="Model.Store.FK_Template_has_Visual" >
+    <AssociationSet Name="FK_Template_has_VisualTree" Association="Model.Store.FK_Template_has_VisualTree" >
       <End Role="Template" EntitySet="Template" />
       <End Role="VisualTree" EntitySet="Visual" />
     </AssociationSet>
-    <AssociationSet Name="FK_TestObjClass_has_Kunde" Association="Model.Store.FK_TestObjClass_has_Kunde" >
+    <AssociationSet Name="FK_TestObjClass_has_ObjectProp" Association="Model.Store.FK_TestObjClass_has_ObjectProp" >
       <End Role="TestObjClass" EntitySet="TestObjClass" />
       <End Role="ObjectProp" EntitySet="Kunde" />
     </AssociationSet>
@@ -729,21 +737,13 @@
       <End Role="TypeRef" EntitySet="TypeRef" />
       <End Role="Assembly" EntitySet="Assembly" />
     </AssociationSet>
-    <AssociationSet Name="FK_TypeRef_has_TypeRef" Association="Model.Store.FK_TypeRef_has_TypeRef" >
-      <End Role="Child" EntitySet="TypeRef" />
-      <End Role="Parent" EntitySet="TypeRef" />
+    <AssociationSet Name="FK_View_has_ControlRef" Association="Model.Store.FK_View_has_ControlRef" >
+      <End Role="View" EntitySet="ViewDescriptor" />
+      <End Role="ControlRef" EntitySet="TypeRef" />
     </AssociationSet>
     <AssociationSet Name="FK_ViewDescriptor_has_Module" Association="Model.Store.FK_ViewDescriptor_has_Module" >
       <End Role="ViewDescriptor" EntitySet="ViewDescriptor" />
       <End Role="Module" EntitySet="Module" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ViewDescriptor_has_TypeRef" Association="Model.Store.FK_ViewDescriptor_has_TypeRef" >
-      <End Role="View" EntitySet="ViewDescriptor" />
-      <End Role="ControlRef" EntitySet="TypeRef" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ViewDescriptor_isof_ControlKindClass" Association="Model.Store.FK_ViewDescriptor_isof_ControlKindClass" >
-      <End Role="Control" EntitySet="ViewDescriptor" />
-      <End Role="Kind" EntitySet="ControlKindClass" />
     </AssociationSet>
     <AssociationSet Name="FK_Visual_has_Method" Association="Model.Store.FK_Visual_has_Method" >
       <End Role="Visual" EntitySet="Visual" />
@@ -1641,7 +1641,7 @@
   </EntityType>
 
   <!-- A to CollectionEntry -->
-  <Association Name="FK_ControlKindClass_supports_TypeRef_ControlKindClass">
+  <Association Name="FK_ControlKindClass_supports_SupportedInterfaces_A">
     <End Role="ControlKindClass" Type="Model.Store.ControlKindClass" Multiplicity="0..1" />
     <End Role="CollectionEntry" Type="Model.Store.ControlKindClass_supports_TypeRef_RelationEntry" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1655,7 +1655,7 @@
   </Association>
 
   <!-- B to CollectionEntry -->
-  <Association Name="FK_ControlKindClass_supports_TypeRef_SupportedInterfaces">
+  <Association Name="FK_ControlKindClass_supports_SupportedInterfaces_B">
     <End Role="SupportedInterfaces" Type="Model.Store.TypeRef" Multiplicity="0..1" />
     <End Role="CollectionEntry" Type="Model.Store.ControlKindClass_supports_TypeRef_RelationEntry" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1681,7 +1681,7 @@
   </EntityType>
 
   <!-- A to CollectionEntry -->
-  <Association Name="FK_ObjectClass_implements_Interface_ObjectClass">
+  <Association Name="FK_ObjectClass_implements_ImplementsInterfaces_A">
     <End Role="ObjectClass" Type="Model.Store.ObjectClass" Multiplicity="0..1" />
     <End Role="CollectionEntry" Type="Model.Store.ObjectClass_implements_Interface_RelationEntry" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1695,7 +1695,7 @@
   </Association>
 
   <!-- B to CollectionEntry -->
-  <Association Name="FK_ObjectClass_implements_Interface_ImplementsInterfaces">
+  <Association Name="FK_ObjectClass_implements_ImplementsInterfaces_B">
     <End Role="ImplementsInterfaces" Type="Model.Store.Interface" Multiplicity="0..1" />
     <End Role="CollectionEntry" Type="Model.Store.ObjectClass_implements_Interface_RelationEntry" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1721,7 +1721,7 @@
   </EntityType>
 
   <!-- A to CollectionEntry -->
-  <Association Name="FK_PresentableModelDescriptor_displayedBy_ControlKind_Presentable">
+  <Association Name="FK_Presentable_displayedBy_SecondaryControlKinds_A">
     <End Role="Presentable" Type="Model.Store.PresentableModelDescriptor" Multiplicity="0..1" />
     <End Role="CollectionEntry" Type="Model.Store.PresentableModelDescriptor_displayedBy_ControlKind_RelationEntry" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1735,7 +1735,7 @@
   </Association>
 
   <!-- B to CollectionEntry -->
-  <Association Name="FK_PresentableModelDescriptor_displayedBy_ControlKind_SecondaryControlKinds">
+  <Association Name="FK_Presentable_displayedBy_SecondaryControlKinds_B">
     <End Role="SecondaryControlKinds" Type="Model.Store.ControlKind" Multiplicity="0..1" />
     <End Role="CollectionEntry" Type="Model.Store.PresentableModelDescriptor_displayedBy_ControlKind_RelationEntry" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1762,7 +1762,7 @@
   </EntityType>
 
   <!-- A to CollectionEntry -->
-  <Association Name="FK_Projekt_haben_Mitarbeiter_Projekte">
+  <Association Name="FK_Projekte_haben_Mitarbeiter_A">
     <End Role="Projekte" Type="Model.Store.Projekt" Multiplicity="0..1" />
     <End Role="CollectionEntry" Type="Model.Store.Projekt_haben_Mitarbeiter_RelationEntry" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1776,7 +1776,7 @@
   </Association>
 
   <!-- B to CollectionEntry -->
-  <Association Name="FK_Projekt_haben_Mitarbeiter_Mitarbeiter">
+  <Association Name="FK_Projekte_haben_Mitarbeiter_B">
     <End Role="Mitarbeiter" Type="Model.Store.Mitarbeiter" Multiplicity="0..1" />
     <End Role="CollectionEntry" Type="Model.Store.Projekt_haben_Mitarbeiter_RelationEntry" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1801,7 +1801,7 @@
   </EntityType>
 
   <!-- A to CollectionEntry -->
-  <Association Name="FK_Template_hasMenu_Visual_Template">
+  <Association Name="FK_Template_hasMenu_Menu_A">
     <End Role="Template" Type="Model.Store.Template" Multiplicity="0..1" />
     <End Role="CollectionEntry" Type="Model.Store.Template_hasMenu_Visual_RelationEntry" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1815,7 +1815,7 @@
   </Association>
 
   <!-- B to CollectionEntry -->
-  <Association Name="FK_Template_hasMenu_Visual_Menu">
+  <Association Name="FK_Template_hasMenu_Menu_B">
     <End Role="Menu" Type="Model.Store.Visual" Multiplicity="0..1" />
     <End Role="CollectionEntry" Type="Model.Store.Template_hasMenu_Visual_RelationEntry" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1843,7 +1843,7 @@
   </EntityType>
 
   <!-- A to CollectionEntry -->
-  <Association Name="FK_TypeRef_hasGenericArguments_TypeRef_TypeRef">
+  <Association Name="FK_TypeRef_hasGenericArguments_GenericArguments_A">
     <End Role="TypeRef" Type="Model.Store.TypeRef" Multiplicity="0..1" />
     <End Role="CollectionEntry" Type="Model.Store.TypeRef_hasGenericArguments_TypeRef_RelationEntry" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1857,7 +1857,7 @@
   </Association>
 
   <!-- B to CollectionEntry -->
-  <Association Name="FK_TypeRef_hasGenericArguments_TypeRef_GenericArguments">
+  <Association Name="FK_TypeRef_hasGenericArguments_GenericArguments_B">
     <End Role="GenericArguments" Type="Model.Store.TypeRef" Multiplicity="0..1" />
     <End Role="CollectionEntry" Type="Model.Store.TypeRef_hasGenericArguments_TypeRef_RelationEntry" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1882,7 +1882,7 @@
   </EntityType>
 
   <!-- A to CollectionEntry -->
-  <Association Name="FK_Visual_contains_Visual_Visual">
+  <Association Name="FK_Visual_contains_Children_A">
     <End Role="Visual" Type="Model.Store.Visual" Multiplicity="0..1" />
     <End Role="CollectionEntry" Type="Model.Store.Visual_contains_Visual_RelationEntry" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1896,7 +1896,7 @@
   </Association>
 
   <!-- B to CollectionEntry -->
-  <Association Name="FK_Visual_contains_Visual_Children">
+  <Association Name="FK_Visual_contains_Children_B">
     <End Role="Children" Type="Model.Store.Visual" Multiplicity="0..1" />
     <End Role="CollectionEntry" Type="Model.Store.Visual_contains_Visual_RelationEntry" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1921,7 +1921,7 @@
   </EntityType>
 
   <!-- A to CollectionEntry -->
-  <Association Name="FK_Visual_hasContextMenu_Visual_Visual">
+  <Association Name="FK_Visual_hasContextMenu_ContextMenu_A">
     <End Role="Visual" Type="Model.Store.Visual" Multiplicity="0..1" />
     <End Role="CollectionEntry" Type="Model.Store.Visual_hasContextMenu_Visual_RelationEntry" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1935,7 +1935,7 @@
   </Association>
 
   <!-- B to CollectionEntry -->
-  <Association Name="FK_Visual_hasContextMenu_Visual_ContextMenu">
+  <Association Name="FK_Visual_hasContextMenu_ContextMenu_B">
     <End Role="ContextMenu" Type="Model.Store.Visual" Multiplicity="0..1" />
     <End Role="CollectionEntry" Type="Model.Store.Visual_hasContextMenu_Visual_RelationEntry" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1960,7 +1960,7 @@
   </EntityType>
 
   <!-- A to CollectionEntry -->
-  <Association Name="FK_WorkEffortAccount_has_Mitarbeiter_WorkEffortAccount">
+  <Association Name="FK_WorkEffortAccount_has_Mitarbeiter_A">
     <End Role="WorkEffortAccount" Type="Model.Store.WorkEffortAccount" Multiplicity="0..1" />
     <End Role="CollectionEntry" Type="Model.Store.WorkEffortAccount_has_Mitarbeiter_RelationEntry" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1974,7 +1974,7 @@
   </Association>
 
   <!-- B to CollectionEntry -->
-  <Association Name="FK_WorkEffortAccount_has_Mitarbeiter_Mitarbeiter">
+  <Association Name="FK_WorkEffortAccount_has_Mitarbeiter_B">
     <End Role="Mitarbeiter" Type="Model.Store.Mitarbeiter" Multiplicity="0..1" />
     <End Role="CollectionEntry" Type="Model.Store.WorkEffortAccount_has_Mitarbeiter_RelationEntry" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1991,7 +1991,7 @@
 
   <!-- Associations for all object-object relations without CollectionEntry (1:1, 1:N) -->
 
-  <Association Name="FK_Auftrag_ChangedBy_Identity">
+  <Association Name="FK_Auftrag_ChangedBy_ChangedBy">
     <End Role="ChangedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
     <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="Auftrag" Type="Model.Store.Auftrag" Multiplicity="*" />
@@ -2006,7 +2006,7 @@
   </Association>
 
 
-  <Association Name="FK_Auftrag_CreatedBy_Identity">
+  <Association Name="FK_Auftrag_CreatedBy_CreatedBy">
     <End Role="CreatedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
     <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="Auftrag" Type="Model.Store.Auftrag" Multiplicity="*" />
@@ -2051,6 +2051,51 @@
   </Association>
 
 
+  <Association Name="FK_BaseObjectClass_has_SubClasses">
+    <End Role="BaseObjectClass" Type="Model.Store.ObjectClass" Multiplicity="0..1" />
+    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
+    <End Role="SubClasses" Type="Model.Store.ObjectClass" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BaseObjectClass">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SubClasses">
+        <PropertyRef Name="fk_BaseObjectClass" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_BaseProperty_has_Module">
+    <End Role="Module" Type="Model.Store.Module" Multiplicity="0..1" />
+    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
+    <End Role="BaseProperty" Type="Model.Store.Property" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Module">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="BaseProperty">
+        <PropertyRef Name="fk_Module" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_Child_has_Parent">
+    <End Role="Parent" Type="Model.Store.TypeRef" Multiplicity="0..1" />
+    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
+    <End Role="Child" Type="Model.Store.TypeRef" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Parent">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Child">
+        <PropertyRef Name="fk_Parent" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
   <Association Name="FK_CLRObjectParameter_has_Assembly">
     <End Role="Assembly" Type="Model.Store.Assembly" Multiplicity="0..1" />
     <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
@@ -2066,7 +2111,37 @@
   </Association>
 
 
-  <Association Name="FK_DataType_has_Icon">
+  <Association Name="FK_ConstrainedProperty_has_Constraints">
+    <End Role="ConstrainedProperty" Type="Model.Store.Property" Multiplicity="0..1" />
+    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
+    <End Role="Constraints" Type="Model.Store.Constraint" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ConstrainedProperty">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Constraints">
+        <PropertyRef Name="fk_ConstrainedProperty" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_Control_isof_Kind">
+    <End Role="Kind" Type="Model.Store.ControlKindClass" Multiplicity="0..1" />
+    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
+    <End Role="Control" Type="Model.Store.ViewDescriptor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kind">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Control">
+        <PropertyRef Name="fk_Kind" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_DataType_has_DefaultIcon">
     <End Role="DefaultIcon" Type="Model.Store.Icon" Multiplicity="0..1" />
     <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="DataType" Type="Model.Store.DataType" Multiplicity="*" />
@@ -2081,52 +2156,22 @@
   </Association>
 
 
-  <Association Name="FK_DataType_has_Method">
-    <End Role="ObjectClass" Type="Model.Store.DataType" Multiplicity="0..1" />
+  <Association Name="FK_Descriptor_has_PresentableModelRef">
+    <End Role="PresentableModelRef" Type="Model.Store.TypeRef" Multiplicity="0..1" />
     <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
-    <End Role="Methods" Type="Model.Store.Method" Multiplicity="*" />
+    <End Role="Descriptor" Type="Model.Store.PresentableModelDescriptor" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="ObjectClass">
+      <Principal Role="PresentableModelRef">
         <PropertyRef Name="ID" />
       </Principal>
-      <Dependent Role="Methods">
-        <PropertyRef Name="fk_ObjectClass" />
+      <Dependent Role="Descriptor">
+        <PropertyRef Name="fk_PresentableModelRef" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
 
 
-  <Association Name="FK_DataType_has_MethodInvocation">
-    <End Role="InvokeOnObjectClass" Type="Model.Store.DataType" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
-    <End Role="MethodInvocations" Type="Model.Store.MethodInvocation" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="InvokeOnObjectClass">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="MethodInvocations">
-        <PropertyRef Name="fk_InvokeOnObjectClass" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-
-  <Association Name="FK_DataType_has_Property">
-    <End Role="ObjectClass" Type="Model.Store.DataType" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
-    <End Role="Properties" Type="Model.Store.Property" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ObjectClass">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="Properties">
-        <PropertyRef Name="fk_ObjectClass" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-
-  <Association Name="FK_Enumeration_has_EnumerationEntry">
+  <Association Name="FK_Enumeration_has_EnumerationEntries">
     <End Role="Enumeration" Type="Model.Store.Enumeration" Multiplicity="0..1" />
     <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="EnumerationEntries" Type="Model.Store.EnumerationEntry" Multiplicity="*" />
@@ -2171,22 +2216,37 @@
   </Association>
 
 
-  <Association Name="FK_Method_has_BaseParameter">
-    <End Role="Method" Type="Model.Store.Method" Multiplicity="0..1" />
+  <Association Name="FK_InvokeOnObjectClass_has_MethodInvocations">
+    <End Role="InvokeOnObjectClass" Type="Model.Store.DataType" Multiplicity="0..1" />
     <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
-    <End Role="Parameter" Type="Model.Store.BaseParameter" Multiplicity="*" />
+    <End Role="MethodInvocations" Type="Model.Store.MethodInvocation" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Method">
+      <Principal Role="InvokeOnObjectClass">
         <PropertyRef Name="ID" />
       </Principal>
-      <Dependent Role="Parameter">
-        <PropertyRef Name="fk_Method" />
+      <Dependent Role="MethodInvocations">
+        <PropertyRef Name="fk_InvokeOnObjectClass" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
 
 
-  <Association Name="FK_Method_has_MethodInvocation">
+  <Association Name="FK_InvokeOnProperty_has_Invocations">
+    <End Role="InvokeOnProperty" Type="Model.Store.Property" Multiplicity="0..1" />
+    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
+    <End Role="Invocations" Type="Model.Store.PropertyInvocation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="InvokeOnProperty">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Invocations">
+        <PropertyRef Name="fk_InvokeOnProperty" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_Method_has_MethodInvokations">
     <End Role="Method" Type="Model.Store.Method" Multiplicity="0..1" />
     <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="MethodInvokations" Type="Model.Store.MethodInvocation" Multiplicity="*" />
@@ -2216,6 +2276,36 @@
   </Association>
 
 
+  <Association Name="FK_Method_has_Parameter">
+    <End Role="Method" Type="Model.Store.Method" Multiplicity="0..1" />
+    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
+    <End Role="Parameter" Type="Model.Store.BaseParameter" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Method">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Parameter">
+        <PropertyRef Name="fk_Method" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_MethodInvocation_has_Implementor">
+    <End Role="Implementor" Type="Model.Store.TypeRef" Multiplicity="0..1" />
+    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
+    <End Role="MethodInvocation" Type="Model.Store.MethodInvocation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Implementor">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="MethodInvocation">
+        <PropertyRef Name="fk_Implementor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
   <Association Name="FK_MethodInvocation_has_Module">
     <End Role="Module" Type="Model.Store.Module" Multiplicity="0..1" />
     <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
@@ -2231,22 +2321,7 @@
   </Association>
 
 
-  <Association Name="FK_MethodInvocation_has_TypeRef">
-    <End Role="Implementor" Type="Model.Store.TypeRef" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
-    <End Role="MethodInvocation" Type="Model.Store.MethodInvocation" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Implementor">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="MethodInvocation">
-        <PropertyRef Name="fk_Implementor" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-
-  <Association Name="FK_Module_has_Assembly">
+  <Association Name="FK_Module_has_Assemblies">
     <End Role="Module" Type="Model.Store.Module" Multiplicity="0..1" />
     <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="Assemblies" Type="Model.Store.Assembly" Multiplicity="*" />
@@ -2261,7 +2336,7 @@
   </Association>
 
 
-  <Association Name="FK_Module_has_DataType">
+  <Association Name="FK_Module_has_DataTypes">
     <End Role="Module" Type="Model.Store.Module" Multiplicity="0..1" />
     <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="DataTypes" Type="Model.Store.DataType" Multiplicity="*" />
@@ -2291,22 +2366,7 @@
   </Association>
 
 
-  <Association Name="FK_Muhblah_has_TestCustomObject">
-    <End Role="MuhBlah_Role" Type="Model.Store.Muhblah" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
-    <End Role="TestCustomObjects_List_Role" Type="Model.Store.TestCustomObject" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="MuhBlah_Role">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="TestCustomObjects_List_Role">
-        <PropertyRef Name="fk_MuhBlah_Role" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-
-  <Association Name="FK_Muhblah_hasOther_TestCustomObject">
+  <Association Name="FK_MuhBlah_List_Role_hasOther_TestCustomObjects_Role">
     <End Role="TestCustomObjects_Role" Type="Model.Store.TestCustomObject" Multiplicity="0..1" />
     <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="MuhBlah_List_Role" Type="Model.Store.Muhblah" Multiplicity="*" />
@@ -2321,31 +2381,46 @@
   </Association>
 
 
-  <Association Name="FK_ObjectClass_has_ObjectClass">
-    <End Role="BaseObjectClass" Type="Model.Store.ObjectClass" Multiplicity="0..1" />
+  <Association Name="FK_MuhBlah_Role_has_TestCustomObjects_List_Role">
+    <End Role="MuhBlah_Role" Type="Model.Store.Muhblah" Multiplicity="0..1" />
     <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
-    <End Role="SubClasses" Type="Model.Store.ObjectClass" Multiplicity="*" />
+    <End Role="TestCustomObjects_List_Role" Type="Model.Store.TestCustomObject" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="BaseObjectClass">
+      <Principal Role="MuhBlah_Role">
         <PropertyRef Name="ID" />
       </Principal>
-      <Dependent Role="SubClasses">
-        <PropertyRef Name="fk_BaseObjectClass" />
+      <Dependent Role="TestCustomObjects_List_Role">
+        <PropertyRef Name="fk_MuhBlah_Role" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
 
 
-  <Association Name="FK_ObjectClass_has_PresentableModelDescriptor">
-    <End Role="DefaultPresentableModelDescriptor" Type="Model.Store.PresentableModelDescriptor" Multiplicity="0..1" />
+  <Association Name="FK_ObjectClass_has_Methods">
+    <End Role="ObjectClass" Type="Model.Store.DataType" Multiplicity="0..1" />
     <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
-    <End Role="Presentable" Type="Model.Store.ObjectClass" Multiplicity="*" />
+    <End Role="Methods" Type="Model.Store.Method" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="DefaultPresentableModelDescriptor">
+      <Principal Role="ObjectClass">
         <PropertyRef Name="ID" />
       </Principal>
-      <Dependent Role="Presentable">
-        <PropertyRef Name="fk_DefaultPresentableModelDescriptor" />
+      <Dependent Role="Methods">
+        <PropertyRef Name="fk_ObjectClass" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_ObjectClass_has_Properties">
+    <End Role="ObjectClass" Type="Model.Store.DataType" Multiplicity="0..1" />
+    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
+    <End Role="Properties" Type="Model.Store.Property" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ObjectClass">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Properties">
+        <PropertyRef Name="fk_ObjectClass" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -2366,7 +2441,7 @@
   </Association>
 
 
-  <Association Name="FK_ObjectReferencePlaceholderProperty_ofType_ObjectClass">
+  <Association Name="FK_ObjectReferencePlaceholderProperty_ofType_ReferencedObjectClass">
     <End Role="ReferencedObjectClass" Type="Model.Store.ObjectClass" Multiplicity="0..1" />
     <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="ObjectReferencePlaceholderProperty" Type="Model.Store.ObjectReferencePlaceholderProperty" Multiplicity="*" />
@@ -2396,22 +2471,7 @@
   </Association>
 
 
-  <Association Name="FK_PresentableModelDescriptor_displayedInGridBy_ControlKind">
-    <End Role="DefaultGridCellKind" Type="Model.Store.ControlKind" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
-    <End Role="PresentableModelDescriptor" Type="Model.Store.PresentableModelDescriptor" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="DefaultGridCellKind">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="PresentableModelDescriptor">
-        <PropertyRef Name="fk_DefaultGridCellKind" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-
-  <Association Name="FK_PresentableModelDescriptor_has_ControlKind">
+  <Association Name="FK_Presentable_has_DefaultKind">
     <End Role="DefaultKind" Type="Model.Store.ControlKind" Multiplicity="0..1" />
     <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="Presentable" Type="Model.Store.PresentableModelDescriptor" Multiplicity="*" />
@@ -2421,6 +2481,36 @@
       </Principal>
       <Dependent Role="Presentable">
         <PropertyRef Name="fk_DefaultKind" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_Presentable_has_DefaultPresentableModelDescriptor">
+    <End Role="DefaultPresentableModelDescriptor" Type="Model.Store.PresentableModelDescriptor" Multiplicity="0..1" />
+    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
+    <End Role="Presentable" Type="Model.Store.ObjectClass" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DefaultPresentableModelDescriptor">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Presentable">
+        <PropertyRef Name="fk_DefaultPresentableModelDescriptor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_PresentableModelDescriptor_displayedInGridBy_DefaultGridCellKind">
+    <End Role="DefaultGridCellKind" Type="Model.Store.ControlKind" Multiplicity="0..1" />
+    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
+    <End Role="PresentableModelDescriptor" Type="Model.Store.PresentableModelDescriptor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DefaultGridCellKind">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PresentableModelDescriptor">
+        <PropertyRef Name="fk_DefaultGridCellKind" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -2441,22 +2531,7 @@
   </Association>
 
 
-  <Association Name="FK_PresentableModelDescriptor_has_TypeRef">
-    <End Role="PresentableModelRef" Type="Model.Store.TypeRef" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
-    <End Role="Descriptor" Type="Model.Store.PresentableModelDescriptor" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="PresentableModelRef">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="Descriptor">
-        <PropertyRef Name="fk_PresentableModelRef" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-
-  <Association Name="FK_Projekt_has_Auftrag">
+  <Association Name="FK_Projekt_has_Auftraege">
     <End Role="Projekt" Type="Model.Store.Projekt" Multiplicity="0..1" />
     <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="Auftraege" Type="Model.Store.Auftrag" Multiplicity="*" />
@@ -2471,7 +2546,7 @@
   </Association>
 
 
-  <Association Name="FK_Projekt_has_Task">
+  <Association Name="FK_Projekt_has_Tasks">
     <End Role="Projekt" Type="Model.Store.Projekt" Multiplicity="0..1" />
     <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="Tasks" Type="Model.Store.Task" Multiplicity="*" />
@@ -2486,22 +2561,7 @@
   </Association>
 
 
-  <Association Name="FK_Property_has_Constraint">
-    <End Role="ConstrainedProperty" Type="Model.Store.Property" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
-    <End Role="Constraints" Type="Model.Store.Constraint" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ConstrainedProperty">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="Constraints">
-        <PropertyRef Name="fk_ConstrainedProperty" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-
-  <Association Name="FK_Property_has_DefaultPropertyValue">
+  <Association Name="FK_Property_has_DefaultValue">
     <End Role="Property" Type="Model.Store.Property" Multiplicity="0..1" />
     <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="DefaultValue" Type="Model.Store.DefaultPropertyValue" Multiplicity="*" />
@@ -2516,22 +2576,7 @@
   </Association>
 
 
-  <Association Name="FK_Property_has_Module">
-    <End Role="Module" Type="Model.Store.Module" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
-    <End Role="BaseProperty" Type="Model.Store.Property" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Module">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="BaseProperty">
-        <PropertyRef Name="fk_Module" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-
-  <Association Name="FK_Property_has_PresentableModelDescriptor">
+  <Association Name="FK_Property_has_ValueModelDescriptor">
     <End Role="ValueModelDescriptor" Type="Model.Store.PresentableModelDescriptor" Multiplicity="0..1" />
     <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="Property" Type="Model.Store.Property" Multiplicity="*" />
@@ -2546,22 +2591,7 @@
   </Association>
 
 
-  <Association Name="FK_Property_has_PropertyInvocation">
-    <End Role="InvokeOnProperty" Type="Model.Store.Property" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
-    <End Role="Invocations" Type="Model.Store.PropertyInvocation" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="InvokeOnProperty">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="Invocations">
-        <PropertyRef Name="fk_InvokeOnProperty" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-
-  <Association Name="FK_PropertyInvocation_has_TypeRef">
+  <Association Name="FK_PropertyInvocation_has_Implementor">
     <End Role="Implementor" Type="Model.Store.TypeRef" Multiplicity="0..1" />
     <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="PropertyInvocation" Type="Model.Store.PropertyInvocation" Multiplicity="*" />
@@ -2576,7 +2606,7 @@
   </Association>
 
 
-  <Association Name="FK_Relation_hasA_RelationEnd">
+  <Association Name="FK_Relation_hasA_A">
     <End Role="A" Type="Model.Store.RelationEnd" Multiplicity="0..1" />
     <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="Relation" Type="Model.Store.Relation" Multiplicity="*" />
@@ -2591,7 +2621,7 @@
   </Association>
 
 
-  <Association Name="FK_Relation_hasB_RelationEnd">
+  <Association Name="FK_Relation_hasB_B">
     <End Role="B" Type="Model.Store.RelationEnd" Multiplicity="0..1" />
     <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="Relation" Type="Model.Store.Relation" Multiplicity="*" />
@@ -2606,22 +2636,7 @@
   </Association>
 
 
-  <Association Name="FK_RelationEnd_has_ObjectClass">
-    <End Role="Type" Type="Model.Store.ObjectClass" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
-    <End Role="RelationEnd" Type="Model.Store.RelationEnd" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Type">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="RelationEnd">
-        <PropertyRef Name="fk_Type" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-
-  <Association Name="FK_RelationEnd_has_ObjectReferenceProperty">
+  <Association Name="FK_RelationEnd_has_Navigator">
     <End Role="Navigator" Type="Model.Store.ObjectReferenceProperty" Multiplicity="0..1" />
     <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="RelationEnd" Type="Model.Store.RelationEnd" Multiplicity="*" />
@@ -2636,7 +2651,22 @@
   </Association>
 
 
-  <Association Name="FK_StructProperty_has_Struct">
+  <Association Name="FK_RelationEnd_has_Type">
+    <End Role="Type" Type="Model.Store.ObjectClass" Multiplicity="0..1" />
+    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
+    <End Role="RelationEnd" Type="Model.Store.RelationEnd" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Type">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="RelationEnd">
+        <PropertyRef Name="fk_Type" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_StructProperty_has_StructDefinition">
     <End Role="StructDefinition" Type="Model.Store.Struct" Multiplicity="0..1" />
     <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="StructProperty" Type="Model.Store.StructProperty" Multiplicity="*" />
@@ -2651,7 +2681,7 @@
   </Association>
 
 
-  <Association Name="FK_Template_has_Assembly">
+  <Association Name="FK_Template_has_DisplayedTypeAssembly">
     <End Role="DisplayedTypeAssembly" Type="Model.Store.Assembly" Multiplicity="0..1" />
     <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="Template" Type="Model.Store.Template" Multiplicity="*" />
@@ -2666,7 +2696,7 @@
   </Association>
 
 
-  <Association Name="FK_Template_has_Visual">
+  <Association Name="FK_Template_has_VisualTree">
     <End Role="VisualTree" Type="Model.Store.Visual" Multiplicity="0..1" />
     <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="Template" Type="Model.Store.Template" Multiplicity="*" />
@@ -2681,7 +2711,7 @@
   </Association>
 
 
-  <Association Name="FK_TestObjClass_has_Kunde">
+  <Association Name="FK_TestObjClass_has_ObjectProp">
     <End Role="ObjectProp" Type="Model.Store.Kunde" Multiplicity="0..1" />
     <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="TestObjClass" Type="Model.Store.TestObjClass" Multiplicity="*" />
@@ -2711,16 +2741,16 @@
   </Association>
 
 
-  <Association Name="FK_TypeRef_has_TypeRef">
-    <End Role="Parent" Type="Model.Store.TypeRef" Multiplicity="0..1" />
+  <Association Name="FK_View_has_ControlRef">
+    <End Role="ControlRef" Type="Model.Store.TypeRef" Multiplicity="0..1" />
     <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
-    <End Role="Child" Type="Model.Store.TypeRef" Multiplicity="*" />
+    <End Role="View" Type="Model.Store.ViewDescriptor" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Parent">
+      <Principal Role="ControlRef">
         <PropertyRef Name="ID" />
       </Principal>
-      <Dependent Role="Child">
-        <PropertyRef Name="fk_Parent" />
+      <Dependent Role="View">
+        <PropertyRef Name="fk_ControlRef" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -2736,36 +2766,6 @@
       </Principal>
       <Dependent Role="ViewDescriptor">
         <PropertyRef Name="fk_Module" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-
-  <Association Name="FK_ViewDescriptor_has_TypeRef">
-    <End Role="ControlRef" Type="Model.Store.TypeRef" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
-    <End Role="View" Type="Model.Store.ViewDescriptor" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ControlRef">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="View">
-        <PropertyRef Name="fk_ControlRef" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-
-  <Association Name="FK_ViewDescriptor_isof_ControlKindClass">
-    <End Role="Kind" Type="Model.Store.ControlKindClass" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
-    <End Role="Control" Type="Model.Store.ViewDescriptor" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Kind">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="Control">
-        <PropertyRef Name="fk_Kind" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

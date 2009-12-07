@@ -625,7 +625,7 @@
 
     <!-- EntitySetMappings and AssociationSetMappings for object-object relations with a CollectionEntry -->
     <!--
-    Relation: FK_ControlKindClass_supports_TypeRef
+    Relation: FK_ControlKindClass_supports_SupportedInterfaces
     A: ZeroOrMore ControlKindClass as ControlKindClass
     B: ZeroOrMore TypeRef as SupportedInterfaces
     Preferred Storage: Separate
@@ -639,8 +639,8 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <!-- A to CollectionEntry -->
-    <AssociationSetMapping Name="FK_ControlKindClass_supports_TypeRef_ControlKindClass"
-                           TypeName="Model.FK_ControlKindClass_supports_TypeRef_ControlKindClass"
+    <AssociationSetMapping Name="FK_ControlKindClass_supports_SupportedInterfaces_A"
+                           TypeName="Model.FK_ControlKindClass_supports_SupportedInterfaces_A"
                            StoreEntitySet="ControlKindClass_supports_TypeRef_RelationEntry" >
       <EndProperty Name="ControlKindClass">
         <ScalarProperty Name="ID" ColumnName="fk_ControlKindClass"/>
@@ -651,8 +651,8 @@
       <Condition ColumnName="fk_ControlKindClass" IsNull="false"/>
     </AssociationSetMapping>
     <!-- B to CollectionEntry -->
-    <AssociationSetMapping Name="FK_ControlKindClass_supports_TypeRef_SupportedInterfaces"
-                           TypeName="Model.FK_ControlKindClass_supports_TypeRef_SupportedInterfaces"
+    <AssociationSetMapping Name="FK_ControlKindClass_supports_SupportedInterfaces_B"
+                           TypeName="Model.FK_ControlKindClass_supports_SupportedInterfaces_B"
                            StoreEntitySet="ControlKindClass_supports_TypeRef_RelationEntry" >
       <EndProperty Name="SupportedInterfaces">
         <ScalarProperty Name="ID" ColumnName="fk_SupportedInterfaces"/>
@@ -664,7 +664,7 @@
     </AssociationSetMapping>
 
     <!--
-    Relation: FK_ObjectClass_implements_Interface
+    Relation: FK_ObjectClass_implements_ImplementsInterfaces
     A: ZeroOrMore ObjectClass as ObjectClass
     B: ZeroOrMore Interface as ImplementsInterfaces
     Preferred Storage: Separate
@@ -678,8 +678,8 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <!-- A to CollectionEntry -->
-    <AssociationSetMapping Name="FK_ObjectClass_implements_Interface_ObjectClass"
-                           TypeName="Model.FK_ObjectClass_implements_Interface_ObjectClass"
+    <AssociationSetMapping Name="FK_ObjectClass_implements_ImplementsInterfaces_A"
+                           TypeName="Model.FK_ObjectClass_implements_ImplementsInterfaces_A"
                            StoreEntitySet="ObjectClass_implements_Interface_RelationEntry" >
       <EndProperty Name="ObjectClass">
         <ScalarProperty Name="ID" ColumnName="fk_ObjectClass"/>
@@ -690,8 +690,8 @@
       <Condition ColumnName="fk_ObjectClass" IsNull="false"/>
     </AssociationSetMapping>
     <!-- B to CollectionEntry -->
-    <AssociationSetMapping Name="FK_ObjectClass_implements_Interface_ImplementsInterfaces"
-                           TypeName="Model.FK_ObjectClass_implements_Interface_ImplementsInterfaces"
+    <AssociationSetMapping Name="FK_ObjectClass_implements_ImplementsInterfaces_B"
+                           TypeName="Model.FK_ObjectClass_implements_ImplementsInterfaces_B"
                            StoreEntitySet="ObjectClass_implements_Interface_RelationEntry" >
       <EndProperty Name="ImplementsInterfaces">
         <ScalarProperty Name="ID" ColumnName="fk_ImplementsInterfaces"/>
@@ -703,7 +703,7 @@
     </AssociationSetMapping>
 
     <!--
-    Relation: FK_PresentableModelDescriptor_displayedBy_ControlKind
+    Relation: FK_Presentable_displayedBy_SecondaryControlKinds
     A: ZeroOrMore PresentableModelDescriptor as Presentable
     B: ZeroOrMore ControlKind as SecondaryControlKinds
     Preferred Storage: Separate
@@ -717,8 +717,8 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <!-- A to CollectionEntry -->
-    <AssociationSetMapping Name="FK_PresentableModelDescriptor_displayedBy_ControlKind_Presentable"
-                           TypeName="Model.FK_PresentableModelDescriptor_displayedBy_ControlKind_Presentable"
+    <AssociationSetMapping Name="FK_Presentable_displayedBy_SecondaryControlKinds_A"
+                           TypeName="Model.FK_Presentable_displayedBy_SecondaryControlKinds_A"
                            StoreEntitySet="PresentableModelDescriptor_displayedBy_ControlKind_RelationEntry" >
       <EndProperty Name="Presentable">
         <ScalarProperty Name="ID" ColumnName="fk_PresentableModelDescriptor"/>
@@ -729,8 +729,8 @@
       <Condition ColumnName="fk_PresentableModelDescriptor" IsNull="false"/>
     </AssociationSetMapping>
     <!-- B to CollectionEntry -->
-    <AssociationSetMapping Name="FK_PresentableModelDescriptor_displayedBy_ControlKind_SecondaryControlKinds"
-                           TypeName="Model.FK_PresentableModelDescriptor_displayedBy_ControlKind_SecondaryControlKinds"
+    <AssociationSetMapping Name="FK_Presentable_displayedBy_SecondaryControlKinds_B"
+                           TypeName="Model.FK_Presentable_displayedBy_SecondaryControlKinds_B"
                            StoreEntitySet="PresentableModelDescriptor_displayedBy_ControlKind_RelationEntry" >
       <EndProperty Name="SecondaryControlKinds">
         <ScalarProperty Name="ID" ColumnName="fk_SecondaryControlKinds"/>
@@ -742,7 +742,7 @@
     </AssociationSetMapping>
 
     <!--
-    Relation: FK_Projekt_haben_Mitarbeiter
+    Relation: FK_Projekte_haben_Mitarbeiter
     A: ZeroOrMore Projekt as Projekte
     B: ZeroOrMore Mitarbeiter as Mitarbeiter
     Preferred Storage: Separate
@@ -757,8 +757,8 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <!-- A to CollectionEntry -->
-    <AssociationSetMapping Name="FK_Projekt_haben_Mitarbeiter_Projekte"
-                           TypeName="Model.FK_Projekt_haben_Mitarbeiter_Projekte"
+    <AssociationSetMapping Name="FK_Projekte_haben_Mitarbeiter_A"
+                           TypeName="Model.FK_Projekte_haben_Mitarbeiter_A"
                            StoreEntitySet="Projekt_haben_Mitarbeiter_RelationEntry" >
       <EndProperty Name="Projekte">
         <ScalarProperty Name="ID" ColumnName="fk_Projekt"/>
@@ -769,8 +769,8 @@
       <Condition ColumnName="fk_Projekt" IsNull="false"/>
     </AssociationSetMapping>
     <!-- B to CollectionEntry -->
-    <AssociationSetMapping Name="FK_Projekt_haben_Mitarbeiter_Mitarbeiter"
-                           TypeName="Model.FK_Projekt_haben_Mitarbeiter_Mitarbeiter"
+    <AssociationSetMapping Name="FK_Projekte_haben_Mitarbeiter_B"
+                           TypeName="Model.FK_Projekte_haben_Mitarbeiter_B"
                            StoreEntitySet="Projekt_haben_Mitarbeiter_RelationEntry" >
       <EndProperty Name="Mitarbeiter">
         <ScalarProperty Name="ID" ColumnName="fk_Mitarbeiter"/>
@@ -782,7 +782,7 @@
     </AssociationSetMapping>
 
     <!--
-    Relation: FK_Template_hasMenu_Visual
+    Relation: FK_Template_hasMenu_Menu
     A: ZeroOrMore Template as Template
     B: ZeroOrMore Visual as Menu
     Preferred Storage: Separate
@@ -795,8 +795,8 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <!-- A to CollectionEntry -->
-    <AssociationSetMapping Name="FK_Template_hasMenu_Visual_Template"
-                           TypeName="Model.FK_Template_hasMenu_Visual_Template"
+    <AssociationSetMapping Name="FK_Template_hasMenu_Menu_A"
+                           TypeName="Model.FK_Template_hasMenu_Menu_A"
                            StoreEntitySet="Template_hasMenu_Visual_RelationEntry" >
       <EndProperty Name="Template">
         <ScalarProperty Name="ID" ColumnName="fk_Template"/>
@@ -807,8 +807,8 @@
       <Condition ColumnName="fk_Template" IsNull="false"/>
     </AssociationSetMapping>
     <!-- B to CollectionEntry -->
-    <AssociationSetMapping Name="FK_Template_hasMenu_Visual_Menu"
-                           TypeName="Model.FK_Template_hasMenu_Visual_Menu"
+    <AssociationSetMapping Name="FK_Template_hasMenu_Menu_B"
+                           TypeName="Model.FK_Template_hasMenu_Menu_B"
                            StoreEntitySet="Template_hasMenu_Visual_RelationEntry" >
       <EndProperty Name="Menu">
         <ScalarProperty Name="ID" ColumnName="fk_Menu"/>
@@ -820,7 +820,7 @@
     </AssociationSetMapping>
 
     <!--
-    Relation: FK_TypeRef_hasGenericArguments_TypeRef
+    Relation: FK_TypeRef_hasGenericArguments_GenericArguments
     A: ZeroOrMore TypeRef as TypeRef
     B: ZeroOrMore TypeRef as GenericArguments
     Preferred Storage: Separate
@@ -836,8 +836,8 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <!-- A to CollectionEntry -->
-    <AssociationSetMapping Name="FK_TypeRef_hasGenericArguments_TypeRef_TypeRef"
-                           TypeName="Model.FK_TypeRef_hasGenericArguments_TypeRef_TypeRef"
+    <AssociationSetMapping Name="FK_TypeRef_hasGenericArguments_GenericArguments_A"
+                           TypeName="Model.FK_TypeRef_hasGenericArguments_GenericArguments_A"
                            StoreEntitySet="TypeRef_hasGenericArguments_TypeRef_RelationEntry" >
       <EndProperty Name="TypeRef">
         <ScalarProperty Name="ID" ColumnName="fk_TypeRef"/>
@@ -848,8 +848,8 @@
       <Condition ColumnName="fk_TypeRef" IsNull="false"/>
     </AssociationSetMapping>
     <!-- B to CollectionEntry -->
-    <AssociationSetMapping Name="FK_TypeRef_hasGenericArguments_TypeRef_GenericArguments"
-                           TypeName="Model.FK_TypeRef_hasGenericArguments_TypeRef_GenericArguments"
+    <AssociationSetMapping Name="FK_TypeRef_hasGenericArguments_GenericArguments_B"
+                           TypeName="Model.FK_TypeRef_hasGenericArguments_GenericArguments_B"
                            StoreEntitySet="TypeRef_hasGenericArguments_TypeRef_RelationEntry" >
       <EndProperty Name="GenericArguments">
         <ScalarProperty Name="ID" ColumnName="fk_GenericArguments"/>
@@ -861,7 +861,7 @@
     </AssociationSetMapping>
 
     <!--
-    Relation: FK_Visual_contains_Visual
+    Relation: FK_Visual_contains_Children
     A: ZeroOrMore Visual as Visual
     B: ZeroOrMore Visual as Children
     Preferred Storage: Separate
@@ -874,8 +874,8 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <!-- A to CollectionEntry -->
-    <AssociationSetMapping Name="FK_Visual_contains_Visual_Visual"
-                           TypeName="Model.FK_Visual_contains_Visual_Visual"
+    <AssociationSetMapping Name="FK_Visual_contains_Children_A"
+                           TypeName="Model.FK_Visual_contains_Children_A"
                            StoreEntitySet="Visual_contains_Visual_RelationEntry" >
       <EndProperty Name="Visual">
         <ScalarProperty Name="ID" ColumnName="fk_Visual"/>
@@ -886,8 +886,8 @@
       <Condition ColumnName="fk_Visual" IsNull="false"/>
     </AssociationSetMapping>
     <!-- B to CollectionEntry -->
-    <AssociationSetMapping Name="FK_Visual_contains_Visual_Children"
-                           TypeName="Model.FK_Visual_contains_Visual_Children"
+    <AssociationSetMapping Name="FK_Visual_contains_Children_B"
+                           TypeName="Model.FK_Visual_contains_Children_B"
                            StoreEntitySet="Visual_contains_Visual_RelationEntry" >
       <EndProperty Name="Children">
         <ScalarProperty Name="ID" ColumnName="fk_Children"/>
@@ -899,7 +899,7 @@
     </AssociationSetMapping>
 
     <!--
-    Relation: FK_Visual_hasContextMenu_Visual
+    Relation: FK_Visual_hasContextMenu_ContextMenu
     A: ZeroOrMore Visual as Visual
     B: ZeroOrMore Visual as ContextMenu
     Preferred Storage: Separate
@@ -912,8 +912,8 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <!-- A to CollectionEntry -->
-    <AssociationSetMapping Name="FK_Visual_hasContextMenu_Visual_Visual"
-                           TypeName="Model.FK_Visual_hasContextMenu_Visual_Visual"
+    <AssociationSetMapping Name="FK_Visual_hasContextMenu_ContextMenu_A"
+                           TypeName="Model.FK_Visual_hasContextMenu_ContextMenu_A"
                            StoreEntitySet="Visual_hasContextMenu_Visual_RelationEntry" >
       <EndProperty Name="Visual">
         <ScalarProperty Name="ID" ColumnName="fk_Visual"/>
@@ -924,8 +924,8 @@
       <Condition ColumnName="fk_Visual" IsNull="false"/>
     </AssociationSetMapping>
     <!-- B to CollectionEntry -->
-    <AssociationSetMapping Name="FK_Visual_hasContextMenu_Visual_ContextMenu"
-                           TypeName="Model.FK_Visual_hasContextMenu_Visual_ContextMenu"
+    <AssociationSetMapping Name="FK_Visual_hasContextMenu_ContextMenu_B"
+                           TypeName="Model.FK_Visual_hasContextMenu_ContextMenu_B"
                            StoreEntitySet="Visual_hasContextMenu_Visual_RelationEntry" >
       <EndProperty Name="ContextMenu">
         <ScalarProperty Name="ID" ColumnName="fk_ContextMenu"/>
@@ -950,8 +950,8 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <!-- A to CollectionEntry -->
-    <AssociationSetMapping Name="FK_WorkEffortAccount_has_Mitarbeiter_WorkEffortAccount"
-                           TypeName="Model.FK_WorkEffortAccount_has_Mitarbeiter_WorkEffortAccount"
+    <AssociationSetMapping Name="FK_WorkEffortAccount_has_Mitarbeiter_A"
+                           TypeName="Model.FK_WorkEffortAccount_has_Mitarbeiter_A"
                            StoreEntitySet="WorkEffortAccount_has_Mitarbeiter_RelationEntry" >
       <EndProperty Name="WorkEffortAccount">
         <ScalarProperty Name="ID" ColumnName="fk_WorkEffortAccount"/>
@@ -962,8 +962,8 @@
       <Condition ColumnName="fk_WorkEffortAccount" IsNull="false"/>
     </AssociationSetMapping>
     <!-- B to CollectionEntry -->
-    <AssociationSetMapping Name="FK_WorkEffortAccount_has_Mitarbeiter_Mitarbeiter"
-                           TypeName="Model.FK_WorkEffortAccount_has_Mitarbeiter_Mitarbeiter"
+    <AssociationSetMapping Name="FK_WorkEffortAccount_has_Mitarbeiter_B"
+                           TypeName="Model.FK_WorkEffortAccount_has_Mitarbeiter_B"
                            StoreEntitySet="WorkEffortAccount_has_Mitarbeiter_RelationEntry" >
       <EndProperty Name="Mitarbeiter">
         <ScalarProperty Name="ID" ColumnName="fk_Mitarbeiter"/>
@@ -978,13 +978,13 @@
 
     <!-- AssociationSetMappings for direct object-object relations without a CollectionEntry -->
     <!--
-    Relation: FK_Auftrag_ChangedBy_Identity
+    Relation: FK_Auftrag_ChangedBy_ChangedBy
     A: ZeroOrMore Auftrag as Auftrag
     B: ZeroOrOne Identity as ChangedBy
     Preferred Storage: MergeIntoA
     -->
-    <AssociationSetMapping Name="FK_Auftrag_ChangedBy_Identity"
-                           TypeName="Model.FK_Auftrag_ChangedBy_Identity"
+    <AssociationSetMapping Name="FK_Auftrag_ChangedBy_ChangedBy"
+                           TypeName="Model.FK_Auftrag_ChangedBy_ChangedBy"
                            StoreEntitySet="Auftrag" >
       <EndProperty Name="ChangedBy">
         <ScalarProperty Name="ID" ColumnName="fk_ChangedBy"/>
@@ -995,13 +995,13 @@
       <Condition ColumnName="fk_ChangedBy" IsNull="false"/>
     </AssociationSetMapping>
     <!--
-    Relation: FK_Auftrag_CreatedBy_Identity
+    Relation: FK_Auftrag_CreatedBy_CreatedBy
     A: ZeroOrMore Auftrag as Auftrag
     B: ZeroOrOne Identity as CreatedBy
     Preferred Storage: MergeIntoA
     -->
-    <AssociationSetMapping Name="FK_Auftrag_CreatedBy_Identity"
-                           TypeName="Model.FK_Auftrag_CreatedBy_Identity"
+    <AssociationSetMapping Name="FK_Auftrag_CreatedBy_CreatedBy"
+                           TypeName="Model.FK_Auftrag_CreatedBy_CreatedBy"
                            StoreEntitySet="Auftrag" >
       <EndProperty Name="CreatedBy">
         <ScalarProperty Name="ID" ColumnName="fk_CreatedBy"/>
@@ -1046,6 +1046,57 @@
       <Condition ColumnName="fk_Mitarbeiter" IsNull="false"/>
     </AssociationSetMapping>
     <!--
+    Relation: FK_BaseObjectClass_has_SubClasses
+    A: ZeroOrOne ObjectClass as BaseObjectClass
+    B: ZeroOrMore ObjectClass as SubClasses
+    Preferred Storage: MergeIntoB
+    -->
+    <AssociationSetMapping Name="FK_BaseObjectClass_has_SubClasses"
+                           TypeName="Model.FK_BaseObjectClass_has_SubClasses"
+                           StoreEntitySet="ObjectClass" >
+      <EndProperty Name="BaseObjectClass">
+        <ScalarProperty Name="ID" ColumnName="fk_BaseObjectClass"/>
+      </EndProperty>
+      <EndProperty Name="SubClasses">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_BaseObjectClass" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_BaseProperty_has_Module
+    A: ZeroOrMore Property as BaseProperty
+    B: ZeroOrOne Module as Module
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_BaseProperty_has_Module"
+                           TypeName="Model.FK_BaseProperty_has_Module"
+                           StoreEntitySet="Property" >
+      <EndProperty Name="Module">
+        <ScalarProperty Name="ID" ColumnName="fk_Module"/>
+      </EndProperty>
+      <EndProperty Name="BaseProperty">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_Module" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_Child_has_Parent
+    A: ZeroOrMore TypeRef as Child
+    B: ZeroOrOne TypeRef as Parent
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_Child_has_Parent"
+                           TypeName="Model.FK_Child_has_Parent"
+                           StoreEntitySet="TypeRef" >
+      <EndProperty Name="Parent">
+        <ScalarProperty Name="ID" ColumnName="fk_Parent"/>
+      </EndProperty>
+      <EndProperty Name="Child">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_Parent" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
     Relation: FK_CLRObjectParameter_has_Assembly
     A: ZeroOrMore CLRObjectParameter as CLRObjectParameter
     B: ZeroOrOne Assembly as Assembly
@@ -1063,13 +1114,47 @@
       <Condition ColumnName="fk_Assembly" IsNull="false"/>
     </AssociationSetMapping>
     <!--
-    Relation: FK_DataType_has_Icon
+    Relation: FK_ConstrainedProperty_has_Constraints
+    A: One Property as ConstrainedProperty
+    B: ZeroOrMore Constraint as Constraints
+    Preferred Storage: MergeIntoB
+    -->
+    <AssociationSetMapping Name="FK_ConstrainedProperty_has_Constraints"
+                           TypeName="Model.FK_ConstrainedProperty_has_Constraints"
+                           StoreEntitySet="Constraint" >
+      <EndProperty Name="ConstrainedProperty">
+        <ScalarProperty Name="ID" ColumnName="fk_ConstrainedProperty"/>
+      </EndProperty>
+      <EndProperty Name="Constraints">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_ConstrainedProperty" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_Control_isof_Kind
+    A: ZeroOrMore ViewDescriptor as Control
+    B: ZeroOrOne ControlKindClass as Kind
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_Control_isof_Kind"
+                           TypeName="Model.FK_Control_isof_Kind"
+                           StoreEntitySet="ViewDescriptor" >
+      <EndProperty Name="Kind">
+        <ScalarProperty Name="ID" ColumnName="fk_Kind"/>
+      </EndProperty>
+      <EndProperty Name="Control">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_Kind" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_DataType_has_DefaultIcon
     A: ZeroOrMore DataType as DataType
     B: ZeroOrOne Icon as DefaultIcon
     Preferred Storage: MergeIntoA
     -->
-    <AssociationSetMapping Name="FK_DataType_has_Icon"
-                           TypeName="Model.FK_DataType_has_Icon"
+    <AssociationSetMapping Name="FK_DataType_has_DefaultIcon"
+                           TypeName="Model.FK_DataType_has_DefaultIcon"
                            StoreEntitySet="DataType" >
       <EndProperty Name="DefaultIcon">
         <ScalarProperty Name="ID" ColumnName="fk_DefaultIcon"/>
@@ -1080,64 +1165,30 @@
       <Condition ColumnName="fk_DefaultIcon" IsNull="false"/>
     </AssociationSetMapping>
     <!--
-    Relation: FK_DataType_has_Method
-    A: One DataType as ObjectClass
-    B: ZeroOrMore Method as Methods
-    Preferred Storage: MergeIntoB
+    Relation: FK_Descriptor_has_PresentableModelRef
+    A: ZeroOrMore PresentableModelDescriptor as Descriptor
+    B: One TypeRef as PresentableModelRef
+    Preferred Storage: MergeIntoA
     -->
-    <AssociationSetMapping Name="FK_DataType_has_Method"
-                           TypeName="Model.FK_DataType_has_Method"
-                           StoreEntitySet="Method" >
-      <EndProperty Name="ObjectClass">
-        <ScalarProperty Name="ID" ColumnName="fk_ObjectClass"/>
+    <AssociationSetMapping Name="FK_Descriptor_has_PresentableModelRef"
+                           TypeName="Model.FK_Descriptor_has_PresentableModelRef"
+                           StoreEntitySet="PresentableModelDescriptor" >
+      <EndProperty Name="PresentableModelRef">
+        <ScalarProperty Name="ID" ColumnName="fk_PresentableModelRef"/>
       </EndProperty>
-      <EndProperty Name="Methods">
+      <EndProperty Name="Descriptor">
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
-      <Condition ColumnName="fk_ObjectClass" IsNull="false"/>
+      <Condition ColumnName="fk_PresentableModelRef" IsNull="false"/>
     </AssociationSetMapping>
     <!--
-    Relation: FK_DataType_has_MethodInvocation
-    A: One DataType as InvokeOnObjectClass
-    B: ZeroOrMore MethodInvocation as MethodInvocations
-    Preferred Storage: MergeIntoB
-    -->
-    <AssociationSetMapping Name="FK_DataType_has_MethodInvocation"
-                           TypeName="Model.FK_DataType_has_MethodInvocation"
-                           StoreEntitySet="MethodInvocation" >
-      <EndProperty Name="InvokeOnObjectClass">
-        <ScalarProperty Name="ID" ColumnName="fk_InvokeOnObjectClass"/>
-      </EndProperty>
-      <EndProperty Name="MethodInvocations">
-        <ScalarProperty Name="ID" ColumnName="ID"/>
-      </EndProperty>
-      <Condition ColumnName="fk_InvokeOnObjectClass" IsNull="false"/>
-    </AssociationSetMapping>
-    <!--
-    Relation: FK_DataType_has_Property
-    A: One DataType as ObjectClass
-    B: ZeroOrMore Property as Properties
-    Preferred Storage: MergeIntoB
-    -->
-    <AssociationSetMapping Name="FK_DataType_has_Property"
-                           TypeName="Model.FK_DataType_has_Property"
-                           StoreEntitySet="Property" >
-      <EndProperty Name="ObjectClass">
-        <ScalarProperty Name="ID" ColumnName="fk_ObjectClass"/>
-      </EndProperty>
-      <EndProperty Name="Properties">
-        <ScalarProperty Name="ID" ColumnName="ID"/>
-      </EndProperty>
-      <Condition ColumnName="fk_ObjectClass" IsNull="false"/>
-    </AssociationSetMapping>
-    <!--
-    Relation: FK_Enumeration_has_EnumerationEntry
+    Relation: FK_Enumeration_has_EnumerationEntries
     A: One Enumeration as Enumeration
     B: ZeroOrMore EnumerationEntry as EnumerationEntries
     Preferred Storage: MergeIntoB
     -->
-    <AssociationSetMapping Name="FK_Enumeration_has_EnumerationEntry"
-                           TypeName="Model.FK_Enumeration_has_EnumerationEntry"
+    <AssociationSetMapping Name="FK_Enumeration_has_EnumerationEntries"
+                           TypeName="Model.FK_Enumeration_has_EnumerationEntries"
                            StoreEntitySet="EnumerationEntry" >
       <EndProperty Name="Enumeration">
         <ScalarProperty Name="ID" ColumnName="fk_Enumeration"/>
@@ -1182,30 +1233,47 @@
       <Condition ColumnName="fk_Module" IsNull="false"/>
     </AssociationSetMapping>
     <!--
-    Relation: FK_Method_has_BaseParameter
-    A: One Method as Method
-    B: ZeroOrMore BaseParameter as Parameter
+    Relation: FK_InvokeOnObjectClass_has_MethodInvocations
+    A: One DataType as InvokeOnObjectClass
+    B: ZeroOrMore MethodInvocation as MethodInvocations
     Preferred Storage: MergeIntoB
     -->
-    <AssociationSetMapping Name="FK_Method_has_BaseParameter"
-                           TypeName="Model.FK_Method_has_BaseParameter"
-                           StoreEntitySet="BaseParameter" >
-      <EndProperty Name="Method">
-        <ScalarProperty Name="ID" ColumnName="fk_Method"/>
+    <AssociationSetMapping Name="FK_InvokeOnObjectClass_has_MethodInvocations"
+                           TypeName="Model.FK_InvokeOnObjectClass_has_MethodInvocations"
+                           StoreEntitySet="MethodInvocation" >
+      <EndProperty Name="InvokeOnObjectClass">
+        <ScalarProperty Name="ID" ColumnName="fk_InvokeOnObjectClass"/>
       </EndProperty>
-      <EndProperty Name="Parameter">
+      <EndProperty Name="MethodInvocations">
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
-      <Condition ColumnName="fk_Method" IsNull="false"/>
+      <Condition ColumnName="fk_InvokeOnObjectClass" IsNull="false"/>
     </AssociationSetMapping>
     <!--
-    Relation: FK_Method_has_MethodInvocation
+    Relation: FK_InvokeOnProperty_has_Invocations
+    A: One Property as InvokeOnProperty
+    B: ZeroOrMore PropertyInvocation as Invocations
+    Preferred Storage: MergeIntoB
+    -->
+    <AssociationSetMapping Name="FK_InvokeOnProperty_has_Invocations"
+                           TypeName="Model.FK_InvokeOnProperty_has_Invocations"
+                           StoreEntitySet="PropertyInvocation" >
+      <EndProperty Name="InvokeOnProperty">
+        <ScalarProperty Name="ID" ColumnName="fk_InvokeOnProperty"/>
+      </EndProperty>
+      <EndProperty Name="Invocations">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_InvokeOnProperty" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_Method_has_MethodInvokations
     A: One Method as Method
     B: ZeroOrMore MethodInvocation as MethodInvokations
     Preferred Storage: MergeIntoB
     -->
-    <AssociationSetMapping Name="FK_Method_has_MethodInvocation"
-                           TypeName="Model.FK_Method_has_MethodInvocation"
+    <AssociationSetMapping Name="FK_Method_has_MethodInvokations"
+                           TypeName="Model.FK_Method_has_MethodInvokations"
                            StoreEntitySet="MethodInvocation" >
       <EndProperty Name="Method">
         <ScalarProperty Name="ID" ColumnName="fk_Method"/>
@@ -1233,6 +1301,40 @@
       <Condition ColumnName="fk_Module" IsNull="false"/>
     </AssociationSetMapping>
     <!--
+    Relation: FK_Method_has_Parameter
+    A: One Method as Method
+    B: ZeroOrMore BaseParameter as Parameter
+    Preferred Storage: MergeIntoB
+    -->
+    <AssociationSetMapping Name="FK_Method_has_Parameter"
+                           TypeName="Model.FK_Method_has_Parameter"
+                           StoreEntitySet="BaseParameter" >
+      <EndProperty Name="Method">
+        <ScalarProperty Name="ID" ColumnName="fk_Method"/>
+      </EndProperty>
+      <EndProperty Name="Parameter">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_Method" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_MethodInvocation_has_Implementor
+    A: ZeroOrMore MethodInvocation as MethodInvocation
+    B: ZeroOrOne TypeRef as Implementor
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_MethodInvocation_has_Implementor"
+                           TypeName="Model.FK_MethodInvocation_has_Implementor"
+                           StoreEntitySet="MethodInvocation" >
+      <EndProperty Name="Implementor">
+        <ScalarProperty Name="ID" ColumnName="fk_Implementor"/>
+      </EndProperty>
+      <EndProperty Name="MethodInvocation">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_Implementor" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
     Relation: FK_MethodInvocation_has_Module
     A: ZeroOrMore MethodInvocation as MethodInvocation
     B: ZeroOrOne Module as Module
@@ -1250,30 +1352,13 @@
       <Condition ColumnName="fk_Module" IsNull="false"/>
     </AssociationSetMapping>
     <!--
-    Relation: FK_MethodInvocation_has_TypeRef
-    A: ZeroOrMore MethodInvocation as MethodInvocation
-    B: ZeroOrOne TypeRef as Implementor
-    Preferred Storage: MergeIntoA
-    -->
-    <AssociationSetMapping Name="FK_MethodInvocation_has_TypeRef"
-                           TypeName="Model.FK_MethodInvocation_has_TypeRef"
-                           StoreEntitySet="MethodInvocation" >
-      <EndProperty Name="Implementor">
-        <ScalarProperty Name="ID" ColumnName="fk_Implementor"/>
-      </EndProperty>
-      <EndProperty Name="MethodInvocation">
-        <ScalarProperty Name="ID" ColumnName="ID"/>
-      </EndProperty>
-      <Condition ColumnName="fk_Implementor" IsNull="false"/>
-    </AssociationSetMapping>
-    <!--
-    Relation: FK_Module_has_Assembly
+    Relation: FK_Module_has_Assemblies
     A: One Module as Module
     B: ZeroOrMore Assembly as Assemblies
     Preferred Storage: MergeIntoB
     -->
-    <AssociationSetMapping Name="FK_Module_has_Assembly"
-                           TypeName="Model.FK_Module_has_Assembly"
+    <AssociationSetMapping Name="FK_Module_has_Assemblies"
+                           TypeName="Model.FK_Module_has_Assemblies"
                            StoreEntitySet="Assembly" >
       <EndProperty Name="Module">
         <ScalarProperty Name="ID" ColumnName="fk_Module"/>
@@ -1284,13 +1369,13 @@
       <Condition ColumnName="fk_Module" IsNull="false"/>
     </AssociationSetMapping>
     <!--
-    Relation: FK_Module_has_DataType
+    Relation: FK_Module_has_DataTypes
     A: One Module as Module
     B: ZeroOrMore DataType as DataTypes
     Preferred Storage: MergeIntoB
     -->
-    <AssociationSetMapping Name="FK_Module_has_DataType"
-                           TypeName="Model.FK_Module_has_DataType"
+    <AssociationSetMapping Name="FK_Module_has_DataTypes"
+                           TypeName="Model.FK_Module_has_DataTypes"
                            StoreEntitySet="DataType" >
       <EndProperty Name="Module">
         <ScalarProperty Name="ID" ColumnName="fk_Module"/>
@@ -1318,30 +1403,13 @@
       <Condition ColumnName="fk_Module" IsNull="false"/>
     </AssociationSetMapping>
     <!--
-    Relation: FK_Muhblah_has_TestCustomObject
-    A: ZeroOrOne Muhblah as MuhBlah_Role
-    B: ZeroOrMore TestCustomObject as TestCustomObjects_List_Role
-    Preferred Storage: MergeIntoB
-    -->
-    <AssociationSetMapping Name="FK_Muhblah_has_TestCustomObject"
-                           TypeName="Model.FK_Muhblah_has_TestCustomObject"
-                           StoreEntitySet="TestCustomObject" >
-      <EndProperty Name="MuhBlah_Role">
-        <ScalarProperty Name="ID" ColumnName="fk_MuhBlah_Role"/>
-      </EndProperty>
-      <EndProperty Name="TestCustomObjects_List_Role">
-        <ScalarProperty Name="ID" ColumnName="ID"/>
-      </EndProperty>
-      <Condition ColumnName="fk_MuhBlah_Role" IsNull="false"/>
-    </AssociationSetMapping>
-    <!--
-    Relation: FK_Muhblah_hasOther_TestCustomObject
+    Relation: FK_MuhBlah_List_Role_hasOther_TestCustomObjects_Role
     A: ZeroOrMore Muhblah as MuhBlah_List_Role
     B: ZeroOrOne TestCustomObject as TestCustomObjects_Role
     Preferred Storage: MergeIntoA
     -->
-    <AssociationSetMapping Name="FK_Muhblah_hasOther_TestCustomObject"
-                           TypeName="Model.FK_Muhblah_hasOther_TestCustomObject"
+    <AssociationSetMapping Name="FK_MuhBlah_List_Role_hasOther_TestCustomObjects_Role"
+                           TypeName="Model.FK_MuhBlah_List_Role_hasOther_TestCustomObjects_Role"
                            StoreEntitySet="Muhblah" >
       <EndProperty Name="TestCustomObjects_Role">
         <ScalarProperty Name="ID" ColumnName="fk_TestCustomObjects_Role"/>
@@ -1352,38 +1420,55 @@
       <Condition ColumnName="fk_TestCustomObjects_Role" IsNull="false"/>
     </AssociationSetMapping>
     <!--
-    Relation: FK_ObjectClass_has_ObjectClass
-    A: ZeroOrOne ObjectClass as BaseObjectClass
-    B: ZeroOrMore ObjectClass as SubClasses
+    Relation: FK_MuhBlah_Role_has_TestCustomObjects_List_Role
+    A: ZeroOrOne Muhblah as MuhBlah_Role
+    B: ZeroOrMore TestCustomObject as TestCustomObjects_List_Role
     Preferred Storage: MergeIntoB
     -->
-    <AssociationSetMapping Name="FK_ObjectClass_has_ObjectClass"
-                           TypeName="Model.FK_ObjectClass_has_ObjectClass"
-                           StoreEntitySet="ObjectClass" >
-      <EndProperty Name="BaseObjectClass">
-        <ScalarProperty Name="ID" ColumnName="fk_BaseObjectClass"/>
+    <AssociationSetMapping Name="FK_MuhBlah_Role_has_TestCustomObjects_List_Role"
+                           TypeName="Model.FK_MuhBlah_Role_has_TestCustomObjects_List_Role"
+                           StoreEntitySet="TestCustomObject" >
+      <EndProperty Name="MuhBlah_Role">
+        <ScalarProperty Name="ID" ColumnName="fk_MuhBlah_Role"/>
       </EndProperty>
-      <EndProperty Name="SubClasses">
+      <EndProperty Name="TestCustomObjects_List_Role">
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
-      <Condition ColumnName="fk_BaseObjectClass" IsNull="false"/>
+      <Condition ColumnName="fk_MuhBlah_Role" IsNull="false"/>
     </AssociationSetMapping>
     <!--
-    Relation: FK_ObjectClass_has_PresentableModelDescriptor
-    A: ZeroOrMore ObjectClass as Presentable
-    B: One PresentableModelDescriptor as DefaultPresentableModelDescriptor
-    Preferred Storage: MergeIntoA
+    Relation: FK_ObjectClass_has_Methods
+    A: One DataType as ObjectClass
+    B: ZeroOrMore Method as Methods
+    Preferred Storage: MergeIntoB
     -->
-    <AssociationSetMapping Name="FK_ObjectClass_has_PresentableModelDescriptor"
-                           TypeName="Model.FK_ObjectClass_has_PresentableModelDescriptor"
-                           StoreEntitySet="ObjectClass" >
-      <EndProperty Name="DefaultPresentableModelDescriptor">
-        <ScalarProperty Name="ID" ColumnName="fk_DefaultPresentableModelDescriptor"/>
+    <AssociationSetMapping Name="FK_ObjectClass_has_Methods"
+                           TypeName="Model.FK_ObjectClass_has_Methods"
+                           StoreEntitySet="Method" >
+      <EndProperty Name="ObjectClass">
+        <ScalarProperty Name="ID" ColumnName="fk_ObjectClass"/>
       </EndProperty>
-      <EndProperty Name="Presentable">
+      <EndProperty Name="Methods">
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
-      <Condition ColumnName="fk_DefaultPresentableModelDescriptor" IsNull="false"/>
+      <Condition ColumnName="fk_ObjectClass" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_ObjectClass_has_Properties
+    A: One DataType as ObjectClass
+    B: ZeroOrMore Property as Properties
+    Preferred Storage: MergeIntoB
+    -->
+    <AssociationSetMapping Name="FK_ObjectClass_has_Properties"
+                           TypeName="Model.FK_ObjectClass_has_Properties"
+                           StoreEntitySet="Property" >
+      <EndProperty Name="ObjectClass">
+        <ScalarProperty Name="ID" ColumnName="fk_ObjectClass"/>
+      </EndProperty>
+      <EndProperty Name="Properties">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_ObjectClass" IsNull="false"/>
     </AssociationSetMapping>
     <!--
     Relation: FK_ObjectParameter_has_DataType
@@ -1403,13 +1488,13 @@
       <Condition ColumnName="fk_DataType" IsNull="false"/>
     </AssociationSetMapping>
     <!--
-    Relation: FK_ObjectReferencePlaceholderProperty_ofType_ObjectClass
+    Relation: FK_ObjectReferencePlaceholderProperty_ofType_ReferencedObjectClass
     A: ZeroOrMore ObjectReferencePlaceholderProperty as ObjectReferencePlaceholderProperty
     B: One ObjectClass as ReferencedObjectClass
     Preferred Storage: MergeIntoA
     -->
-    <AssociationSetMapping Name="FK_ObjectReferencePlaceholderProperty_ofType_ObjectClass"
-                           TypeName="Model.FK_ObjectReferencePlaceholderProperty_ofType_ObjectClass"
+    <AssociationSetMapping Name="FK_ObjectReferencePlaceholderProperty_ofType_ReferencedObjectClass"
+                           TypeName="Model.FK_ObjectReferencePlaceholderProperty_ofType_ReferencedObjectClass"
                            StoreEntitySet="ObjectReferencePlaceholderProperty" >
       <EndProperty Name="ReferencedObjectClass">
         <ScalarProperty Name="ID" ColumnName="fk_ReferencedObjectClass"/>
@@ -1437,30 +1522,13 @@
       <Condition ColumnName="fk_Mitarbeiter" IsNull="false"/>
     </AssociationSetMapping>
     <!--
-    Relation: FK_PresentableModelDescriptor_displayedInGridBy_ControlKind
-    A: ZeroOrMore PresentableModelDescriptor as PresentableModelDescriptor
-    B: ZeroOrOne ControlKind as DefaultGridCellKind
-    Preferred Storage: MergeIntoA
-    -->
-    <AssociationSetMapping Name="FK_PresentableModelDescriptor_displayedInGridBy_ControlKind"
-                           TypeName="Model.FK_PresentableModelDescriptor_displayedInGridBy_ControlKind"
-                           StoreEntitySet="PresentableModelDescriptor" >
-      <EndProperty Name="DefaultGridCellKind">
-        <ScalarProperty Name="ID" ColumnName="fk_DefaultGridCellKind"/>
-      </EndProperty>
-      <EndProperty Name="PresentableModelDescriptor">
-        <ScalarProperty Name="ID" ColumnName="ID"/>
-      </EndProperty>
-      <Condition ColumnName="fk_DefaultGridCellKind" IsNull="false"/>
-    </AssociationSetMapping>
-    <!--
-    Relation: FK_PresentableModelDescriptor_has_ControlKind
+    Relation: FK_Presentable_has_DefaultKind
     A: ZeroOrOne PresentableModelDescriptor as Presentable
     B: ZeroOrOne ControlKind as DefaultKind
     Preferred Storage: MergeIntoA
     -->
-    <AssociationSetMapping Name="FK_PresentableModelDescriptor_has_ControlKind"
-                           TypeName="Model.FK_PresentableModelDescriptor_has_ControlKind"
+    <AssociationSetMapping Name="FK_Presentable_has_DefaultKind"
+                           TypeName="Model.FK_Presentable_has_DefaultKind"
                            StoreEntitySet="PresentableModelDescriptor" >
       <EndProperty Name="DefaultKind">
         <ScalarProperty Name="ID" ColumnName="fk_DefaultKind"/>
@@ -1469,6 +1537,40 @@
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="fk_DefaultKind" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_Presentable_has_DefaultPresentableModelDescriptor
+    A: ZeroOrMore ObjectClass as Presentable
+    B: One PresentableModelDescriptor as DefaultPresentableModelDescriptor
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_Presentable_has_DefaultPresentableModelDescriptor"
+                           TypeName="Model.FK_Presentable_has_DefaultPresentableModelDescriptor"
+                           StoreEntitySet="ObjectClass" >
+      <EndProperty Name="DefaultPresentableModelDescriptor">
+        <ScalarProperty Name="ID" ColumnName="fk_DefaultPresentableModelDescriptor"/>
+      </EndProperty>
+      <EndProperty Name="Presentable">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_DefaultPresentableModelDescriptor" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_PresentableModelDescriptor_displayedInGridBy_DefaultGridCellKind
+    A: ZeroOrMore PresentableModelDescriptor as PresentableModelDescriptor
+    B: ZeroOrOne ControlKind as DefaultGridCellKind
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_PresentableModelDescriptor_displayedInGridBy_DefaultGridCellKind"
+                           TypeName="Model.FK_PresentableModelDescriptor_displayedInGridBy_DefaultGridCellKind"
+                           StoreEntitySet="PresentableModelDescriptor" >
+      <EndProperty Name="DefaultGridCellKind">
+        <ScalarProperty Name="ID" ColumnName="fk_DefaultGridCellKind"/>
+      </EndProperty>
+      <EndProperty Name="PresentableModelDescriptor">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_DefaultGridCellKind" IsNull="false"/>
     </AssociationSetMapping>
     <!--
     Relation: FK_PresentableModelDescriptor_has_Module
@@ -1488,30 +1590,13 @@
       <Condition ColumnName="fk_Module" IsNull="false"/>
     </AssociationSetMapping>
     <!--
-    Relation: FK_PresentableModelDescriptor_has_TypeRef
-    A: ZeroOrMore PresentableModelDescriptor as Descriptor
-    B: One TypeRef as PresentableModelRef
-    Preferred Storage: MergeIntoA
-    -->
-    <AssociationSetMapping Name="FK_PresentableModelDescriptor_has_TypeRef"
-                           TypeName="Model.FK_PresentableModelDescriptor_has_TypeRef"
-                           StoreEntitySet="PresentableModelDescriptor" >
-      <EndProperty Name="PresentableModelRef">
-        <ScalarProperty Name="ID" ColumnName="fk_PresentableModelRef"/>
-      </EndProperty>
-      <EndProperty Name="Descriptor">
-        <ScalarProperty Name="ID" ColumnName="ID"/>
-      </EndProperty>
-      <Condition ColumnName="fk_PresentableModelRef" IsNull="false"/>
-    </AssociationSetMapping>
-    <!--
-    Relation: FK_Projekt_has_Auftrag
+    Relation: FK_Projekt_has_Auftraege
     A: ZeroOrOne Projekt as Projekt
     B: ZeroOrMore Auftrag as Auftraege
     Preferred Storage: MergeIntoB
     -->
-    <AssociationSetMapping Name="FK_Projekt_has_Auftrag"
-                           TypeName="Model.FK_Projekt_has_Auftrag"
+    <AssociationSetMapping Name="FK_Projekt_has_Auftraege"
+                           TypeName="Model.FK_Projekt_has_Auftraege"
                            StoreEntitySet="Auftrag" >
       <EndProperty Name="Projekt">
         <ScalarProperty Name="ID" ColumnName="fk_Projekt"/>
@@ -1522,13 +1607,13 @@
       <Condition ColumnName="fk_Projekt" IsNull="false"/>
     </AssociationSetMapping>
     <!--
-    Relation: FK_Projekt_has_Task
+    Relation: FK_Projekt_has_Tasks
     A: One Projekt as Projekt
     B: ZeroOrMore Task as Tasks
     Preferred Storage: MergeIntoB
     -->
-    <AssociationSetMapping Name="FK_Projekt_has_Task"
-                           TypeName="Model.FK_Projekt_has_Task"
+    <AssociationSetMapping Name="FK_Projekt_has_Tasks"
+                           TypeName="Model.FK_Projekt_has_Tasks"
                            StoreEntitySet="Task" >
       <EndProperty Name="Projekt">
         <ScalarProperty Name="ID" ColumnName="fk_Projekt"/>
@@ -1539,30 +1624,13 @@
       <Condition ColumnName="fk_Projekt" IsNull="false"/>
     </AssociationSetMapping>
     <!--
-    Relation: FK_Property_has_Constraint
-    A: One Property as ConstrainedProperty
-    B: ZeroOrMore Constraint as Constraints
-    Preferred Storage: MergeIntoB
-    -->
-    <AssociationSetMapping Name="FK_Property_has_Constraint"
-                           TypeName="Model.FK_Property_has_Constraint"
-                           StoreEntitySet="Constraint" >
-      <EndProperty Name="ConstrainedProperty">
-        <ScalarProperty Name="ID" ColumnName="fk_ConstrainedProperty"/>
-      </EndProperty>
-      <EndProperty Name="Constraints">
-        <ScalarProperty Name="ID" ColumnName="ID"/>
-      </EndProperty>
-      <Condition ColumnName="fk_ConstrainedProperty" IsNull="false"/>
-    </AssociationSetMapping>
-    <!--
-    Relation: FK_Property_has_DefaultPropertyValue
+    Relation: FK_Property_has_DefaultValue
     A: One Property as Property
     B: ZeroOrOne DefaultPropertyValue as DefaultValue
     Preferred Storage: MergeIntoB
     -->
-    <AssociationSetMapping Name="FK_Property_has_DefaultPropertyValue"
-                           TypeName="Model.FK_Property_has_DefaultPropertyValue"
+    <AssociationSetMapping Name="FK_Property_has_DefaultValue"
+                           TypeName="Model.FK_Property_has_DefaultValue"
                            StoreEntitySet="DefaultPropertyValue" >
       <EndProperty Name="Property">
         <ScalarProperty Name="ID" ColumnName="fk_Property"/>
@@ -1573,30 +1641,13 @@
       <Condition ColumnName="fk_Property" IsNull="false"/>
     </AssociationSetMapping>
     <!--
-    Relation: FK_Property_has_Module
-    A: ZeroOrMore Property as BaseProperty
-    B: ZeroOrOne Module as Module
-    Preferred Storage: MergeIntoA
-    -->
-    <AssociationSetMapping Name="FK_Property_has_Module"
-                           TypeName="Model.FK_Property_has_Module"
-                           StoreEntitySet="Property" >
-      <EndProperty Name="Module">
-        <ScalarProperty Name="ID" ColumnName="fk_Module"/>
-      </EndProperty>
-      <EndProperty Name="BaseProperty">
-        <ScalarProperty Name="ID" ColumnName="ID"/>
-      </EndProperty>
-      <Condition ColumnName="fk_Module" IsNull="false"/>
-    </AssociationSetMapping>
-    <!--
-    Relation: FK_Property_has_PresentableModelDescriptor
+    Relation: FK_Property_has_ValueModelDescriptor
     A: ZeroOrMore Property as Property
     B: One PresentableModelDescriptor as ValueModelDescriptor
     Preferred Storage: MergeIntoA
     -->
-    <AssociationSetMapping Name="FK_Property_has_PresentableModelDescriptor"
-                           TypeName="Model.FK_Property_has_PresentableModelDescriptor"
+    <AssociationSetMapping Name="FK_Property_has_ValueModelDescriptor"
+                           TypeName="Model.FK_Property_has_ValueModelDescriptor"
                            StoreEntitySet="Property" >
       <EndProperty Name="ValueModelDescriptor">
         <ScalarProperty Name="ID" ColumnName="fk_ValueModelDescriptor"/>
@@ -1607,30 +1658,13 @@
       <Condition ColumnName="fk_ValueModelDescriptor" IsNull="false"/>
     </AssociationSetMapping>
     <!--
-    Relation: FK_Property_has_PropertyInvocation
-    A: One Property as InvokeOnProperty
-    B: ZeroOrMore PropertyInvocation as Invocations
-    Preferred Storage: MergeIntoB
-    -->
-    <AssociationSetMapping Name="FK_Property_has_PropertyInvocation"
-                           TypeName="Model.FK_Property_has_PropertyInvocation"
-                           StoreEntitySet="PropertyInvocation" >
-      <EndProperty Name="InvokeOnProperty">
-        <ScalarProperty Name="ID" ColumnName="fk_InvokeOnProperty"/>
-      </EndProperty>
-      <EndProperty Name="Invocations">
-        <ScalarProperty Name="ID" ColumnName="ID"/>
-      </EndProperty>
-      <Condition ColumnName="fk_InvokeOnProperty" IsNull="false"/>
-    </AssociationSetMapping>
-    <!--
-    Relation: FK_PropertyInvocation_has_TypeRef
+    Relation: FK_PropertyInvocation_has_Implementor
     A: ZeroOrMore PropertyInvocation as PropertyInvocation
     B: One TypeRef as Implementor
     Preferred Storage: MergeIntoA
     -->
-    <AssociationSetMapping Name="FK_PropertyInvocation_has_TypeRef"
-                           TypeName="Model.FK_PropertyInvocation_has_TypeRef"
+    <AssociationSetMapping Name="FK_PropertyInvocation_has_Implementor"
+                           TypeName="Model.FK_PropertyInvocation_has_Implementor"
                            StoreEntitySet="PropertyInvocation" >
       <EndProperty Name="Implementor">
         <ScalarProperty Name="ID" ColumnName="fk_Implementor"/>
@@ -1641,13 +1675,13 @@
       <Condition ColumnName="fk_Implementor" IsNull="false"/>
     </AssociationSetMapping>
     <!--
-    Relation: FK_Relation_hasA_RelationEnd
+    Relation: FK_Relation_hasA_A
     A: ZeroOrOne Relation as Relation
     B: ZeroOrOne RelationEnd as A
     Preferred Storage: MergeIntoA
     -->
-    <AssociationSetMapping Name="FK_Relation_hasA_RelationEnd"
-                           TypeName="Model.FK_Relation_hasA_RelationEnd"
+    <AssociationSetMapping Name="FK_Relation_hasA_A"
+                           TypeName="Model.FK_Relation_hasA_A"
                            StoreEntitySet="Relation" >
       <EndProperty Name="A">
         <ScalarProperty Name="ID" ColumnName="fk_A"/>
@@ -1658,13 +1692,13 @@
       <Condition ColumnName="fk_A" IsNull="false"/>
     </AssociationSetMapping>
     <!--
-    Relation: FK_Relation_hasB_RelationEnd
+    Relation: FK_Relation_hasB_B
     A: ZeroOrOne Relation as Relation
     B: ZeroOrOne RelationEnd as B
     Preferred Storage: MergeIntoA
     -->
-    <AssociationSetMapping Name="FK_Relation_hasB_RelationEnd"
-                           TypeName="Model.FK_Relation_hasB_RelationEnd"
+    <AssociationSetMapping Name="FK_Relation_hasB_B"
+                           TypeName="Model.FK_Relation_hasB_B"
                            StoreEntitySet="Relation" >
       <EndProperty Name="B">
         <ScalarProperty Name="ID" ColumnName="fk_B"/>
@@ -1675,30 +1709,13 @@
       <Condition ColumnName="fk_B" IsNull="false"/>
     </AssociationSetMapping>
     <!--
-    Relation: FK_RelationEnd_has_ObjectClass
-    A: ZeroOrMore RelationEnd as RelationEnd
-    B: ZeroOrOne ObjectClass as Type
-    Preferred Storage: MergeIntoA
-    -->
-    <AssociationSetMapping Name="FK_RelationEnd_has_ObjectClass"
-                           TypeName="Model.FK_RelationEnd_has_ObjectClass"
-                           StoreEntitySet="RelationEnd" >
-      <EndProperty Name="Type">
-        <ScalarProperty Name="ID" ColumnName="fk_Type"/>
-      </EndProperty>
-      <EndProperty Name="RelationEnd">
-        <ScalarProperty Name="ID" ColumnName="ID"/>
-      </EndProperty>
-      <Condition ColumnName="fk_Type" IsNull="false"/>
-    </AssociationSetMapping>
-    <!--
-    Relation: FK_RelationEnd_has_ObjectReferenceProperty
+    Relation: FK_RelationEnd_has_Navigator
     A: ZeroOrOne RelationEnd as RelationEnd
     B: ZeroOrOne ObjectReferenceProperty as Navigator
     Preferred Storage: MergeIntoA
     -->
-    <AssociationSetMapping Name="FK_RelationEnd_has_ObjectReferenceProperty"
-                           TypeName="Model.FK_RelationEnd_has_ObjectReferenceProperty"
+    <AssociationSetMapping Name="FK_RelationEnd_has_Navigator"
+                           TypeName="Model.FK_RelationEnd_has_Navigator"
                            StoreEntitySet="RelationEnd" >
       <EndProperty Name="Navigator">
         <ScalarProperty Name="ID" ColumnName="fk_Navigator"/>
@@ -1709,13 +1726,30 @@
       <Condition ColumnName="fk_Navigator" IsNull="false"/>
     </AssociationSetMapping>
     <!--
-    Relation: FK_StructProperty_has_Struct
+    Relation: FK_RelationEnd_has_Type
+    A: ZeroOrMore RelationEnd as RelationEnd
+    B: ZeroOrOne ObjectClass as Type
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_RelationEnd_has_Type"
+                           TypeName="Model.FK_RelationEnd_has_Type"
+                           StoreEntitySet="RelationEnd" >
+      <EndProperty Name="Type">
+        <ScalarProperty Name="ID" ColumnName="fk_Type"/>
+      </EndProperty>
+      <EndProperty Name="RelationEnd">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_Type" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_StructProperty_has_StructDefinition
     A: ZeroOrMore StructProperty as StructProperty
     B: ZeroOrOne Struct as StructDefinition
     Preferred Storage: MergeIntoA
     -->
-    <AssociationSetMapping Name="FK_StructProperty_has_Struct"
-                           TypeName="Model.FK_StructProperty_has_Struct"
+    <AssociationSetMapping Name="FK_StructProperty_has_StructDefinition"
+                           TypeName="Model.FK_StructProperty_has_StructDefinition"
                            StoreEntitySet="StructProperty" >
       <EndProperty Name="StructDefinition">
         <ScalarProperty Name="ID" ColumnName="fk_StructDefinition"/>
@@ -1726,13 +1760,13 @@
       <Condition ColumnName="fk_StructDefinition" IsNull="false"/>
     </AssociationSetMapping>
     <!--
-    Relation: FK_Template_has_Assembly
+    Relation: FK_Template_has_DisplayedTypeAssembly
     A: ZeroOrMore Template as Template
     B: ZeroOrOne Assembly as DisplayedTypeAssembly
     Preferred Storage: MergeIntoA
     -->
-    <AssociationSetMapping Name="FK_Template_has_Assembly"
-                           TypeName="Model.FK_Template_has_Assembly"
+    <AssociationSetMapping Name="FK_Template_has_DisplayedTypeAssembly"
+                           TypeName="Model.FK_Template_has_DisplayedTypeAssembly"
                            StoreEntitySet="Template" >
       <EndProperty Name="DisplayedTypeAssembly">
         <ScalarProperty Name="ID" ColumnName="fk_DisplayedTypeAssembly"/>
@@ -1743,13 +1777,13 @@
       <Condition ColumnName="fk_DisplayedTypeAssembly" IsNull="false"/>
     </AssociationSetMapping>
     <!--
-    Relation: FK_Template_has_Visual
+    Relation: FK_Template_has_VisualTree
     A: ZeroOrMore Template as Template
     B: ZeroOrOne Visual as VisualTree
     Preferred Storage: MergeIntoA
     -->
-    <AssociationSetMapping Name="FK_Template_has_Visual"
-                           TypeName="Model.FK_Template_has_Visual"
+    <AssociationSetMapping Name="FK_Template_has_VisualTree"
+                           TypeName="Model.FK_Template_has_VisualTree"
                            StoreEntitySet="Template" >
       <EndProperty Name="VisualTree">
         <ScalarProperty Name="ID" ColumnName="fk_VisualTree"/>
@@ -1760,13 +1794,13 @@
       <Condition ColumnName="fk_VisualTree" IsNull="false"/>
     </AssociationSetMapping>
     <!--
-    Relation: FK_TestObjClass_has_Kunde
+    Relation: FK_TestObjClass_has_ObjectProp
     A: ZeroOrMore TestObjClass as TestObjClass
     B: ZeroOrOne Kunde as ObjectProp
     Preferred Storage: MergeIntoA
     -->
-    <AssociationSetMapping Name="FK_TestObjClass_has_Kunde"
-                           TypeName="Model.FK_TestObjClass_has_Kunde"
+    <AssociationSetMapping Name="FK_TestObjClass_has_ObjectProp"
+                           TypeName="Model.FK_TestObjClass_has_ObjectProp"
                            StoreEntitySet="TestObjClass" >
       <EndProperty Name="ObjectProp">
         <ScalarProperty Name="ID" ColumnName="fk_ObjectProp"/>
@@ -1794,21 +1828,21 @@
       <Condition ColumnName="fk_Assembly" IsNull="false"/>
     </AssociationSetMapping>
     <!--
-    Relation: FK_TypeRef_has_TypeRef
-    A: ZeroOrMore TypeRef as Child
-    B: ZeroOrOne TypeRef as Parent
+    Relation: FK_View_has_ControlRef
+    A: ZeroOrMore ViewDescriptor as View
+    B: One TypeRef as ControlRef
     Preferred Storage: MergeIntoA
     -->
-    <AssociationSetMapping Name="FK_TypeRef_has_TypeRef"
-                           TypeName="Model.FK_TypeRef_has_TypeRef"
-                           StoreEntitySet="TypeRef" >
-      <EndProperty Name="Parent">
-        <ScalarProperty Name="ID" ColumnName="fk_Parent"/>
+    <AssociationSetMapping Name="FK_View_has_ControlRef"
+                           TypeName="Model.FK_View_has_ControlRef"
+                           StoreEntitySet="ViewDescriptor" >
+      <EndProperty Name="ControlRef">
+        <ScalarProperty Name="ID" ColumnName="fk_ControlRef"/>
       </EndProperty>
-      <EndProperty Name="Child">
+      <EndProperty Name="View">
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
-      <Condition ColumnName="fk_Parent" IsNull="false"/>
+      <Condition ColumnName="fk_ControlRef" IsNull="false"/>
     </AssociationSetMapping>
     <!--
     Relation: FK_ViewDescriptor_has_Module
@@ -1826,40 +1860,6 @@
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="fk_Module" IsNull="false"/>
-    </AssociationSetMapping>
-    <!--
-    Relation: FK_ViewDescriptor_has_TypeRef
-    A: ZeroOrMore ViewDescriptor as View
-    B: One TypeRef as ControlRef
-    Preferred Storage: MergeIntoA
-    -->
-    <AssociationSetMapping Name="FK_ViewDescriptor_has_TypeRef"
-                           TypeName="Model.FK_ViewDescriptor_has_TypeRef"
-                           StoreEntitySet="ViewDescriptor" >
-      <EndProperty Name="ControlRef">
-        <ScalarProperty Name="ID" ColumnName="fk_ControlRef"/>
-      </EndProperty>
-      <EndProperty Name="View">
-        <ScalarProperty Name="ID" ColumnName="ID"/>
-      </EndProperty>
-      <Condition ColumnName="fk_ControlRef" IsNull="false"/>
-    </AssociationSetMapping>
-    <!--
-    Relation: FK_ViewDescriptor_isof_ControlKindClass
-    A: ZeroOrMore ViewDescriptor as Control
-    B: ZeroOrOne ControlKindClass as Kind
-    Preferred Storage: MergeIntoA
-    -->
-    <AssociationSetMapping Name="FK_ViewDescriptor_isof_ControlKindClass"
-                           TypeName="Model.FK_ViewDescriptor_isof_ControlKindClass"
-                           StoreEntitySet="ViewDescriptor" >
-      <EndProperty Name="Kind">
-        <ScalarProperty Name="ID" ColumnName="fk_Kind"/>
-      </EndProperty>
-      <EndProperty Name="Control">
-        <ScalarProperty Name="ID" ColumnName="ID"/>
-      </EndProperty>
-      <Condition ColumnName="fk_Kind" IsNull="false"/>
     </AssociationSetMapping>
     <!--
     Relation: FK_Visual_has_Method

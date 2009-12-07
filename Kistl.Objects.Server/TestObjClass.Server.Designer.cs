@@ -112,7 +112,7 @@ namespace Kistl.App.Test
         /// testtest
         /// </summary>
     /*
-    Relation: FK_TestObjClass_has_Kunde
+    Relation: FK_TestObjClass_has_ObjectProp
     A: ZeroOrMore TestObjClass as TestObjClass
     B: ZeroOrOne Kunde as ObjectProp
     Preferred Storage: MergeIntoA
@@ -140,14 +140,14 @@ namespace Kistl.App.Test
         private int? _fk_ObjectProp;
         private Guid? _fk_guid_ObjectProp = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_TestObjClass_has_Kunde", "ObjectProp")]
+        [EdmRelationshipNavigationProperty("Model", "FK_TestObjClass_has_ObjectProp", "ObjectProp")]
         public Kistl.App.Projekte.Kunde__Implementation__ ObjectProp__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Projekte.Kunde__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.Kunde__Implementation__>(
-                        "Model.FK_TestObjClass_has_Kunde",
+                        "Model.FK_TestObjClass_has_ObjectProp",
                         "ObjectProp");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -168,7 +168,7 @@ namespace Kistl.App.Test
             {
                 EntityReference<Kistl.App.Projekte.Kunde__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.Kunde__Implementation__>(
-                        "Model.FK_TestObjClass_has_Kunde",
+                        "Model.FK_TestObjClass_has_ObjectProp",
                         "ObjectProp");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)

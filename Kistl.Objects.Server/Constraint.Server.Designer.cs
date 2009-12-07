@@ -61,7 +61,7 @@ namespace Kistl.App.Base
         /// The property to be constrained
         /// </summary>
     /*
-    Relation: FK_Property_has_Constraint
+    Relation: FK_ConstrainedProperty_has_Constraints
     A: One Property as ConstrainedProperty
     B: ZeroOrMore Constraint as Constraints
     Preferred Storage: MergeIntoB
@@ -89,14 +89,14 @@ namespace Kistl.App.Base
         private int? _fk_ConstrainedProperty;
         private Guid? _fk_guid_ConstrainedProperty = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_Property_has_Constraint", "ConstrainedProperty")]
+        [EdmRelationshipNavigationProperty("Model", "FK_ConstrainedProperty_has_Constraints", "ConstrainedProperty")]
         public Kistl.App.Base.Property__Implementation__ ConstrainedProperty__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Base.Property__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Property__Implementation__>(
-                        "Model.FK_Property_has_Constraint",
+                        "Model.FK_ConstrainedProperty_has_Constraints",
                         "ConstrainedProperty");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -117,7 +117,7 @@ namespace Kistl.App.Base
             {
                 EntityReference<Kistl.App.Base.Property__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Property__Implementation__>(
-                        "Model.FK_Property_has_Constraint",
+                        "Model.FK_ConstrainedProperty_has_Constraints",
                         "ConstrainedProperty");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)

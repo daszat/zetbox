@@ -264,7 +264,7 @@ namespace Kistl.App.Base
         /// list of type arguments
         /// </summary>
     /*
-    Relation: FK_TypeRef_hasGenericArguments_TypeRef
+    Relation: FK_TypeRef_hasGenericArguments_GenericArguments
     A: ZeroOrMore TypeRef as TypeRef
     B: ZeroOrMore TypeRef as GenericArguments
     Preferred Storage: Separate
@@ -288,14 +288,14 @@ namespace Kistl.App.Base
             }
         }
         
-        [EdmRelationshipNavigationProperty("Model", "FK_TypeRef_hasGenericArguments_TypeRef_TypeRef", "CollectionEntry")]
+        [EdmRelationshipNavigationProperty("Model", "FK_TypeRef_hasGenericArguments_GenericArguments_A", "CollectionEntry")]
         public EntityCollection<Kistl.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntry__Implementation__> GenericArguments__Implementation__
         {
             get
             {
                 var c = ((IEntityWithRelationships)(this)).RelationshipManager
                     .GetRelatedCollection<Kistl.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntry__Implementation__>(
-                        "Model.FK_TypeRef_hasGenericArguments_TypeRef_TypeRef",
+                        "Model.FK_TypeRef_hasGenericArguments_GenericArguments_A",
                         "CollectionEntry");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)
@@ -312,7 +312,7 @@ namespace Kistl.App.Base
         /// The TypeRef of the BaseClass of the referenced Type
         /// </summary>
     /*
-    Relation: FK_TypeRef_has_TypeRef
+    Relation: FK_Child_has_Parent
     A: ZeroOrMore TypeRef as Child
     B: ZeroOrOne TypeRef as Parent
     Preferred Storage: MergeIntoA
@@ -340,14 +340,14 @@ namespace Kistl.App.Base
         private int? _fk_Parent;
         private Guid? _fk_guid_Parent = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_TypeRef_has_TypeRef", "Parent")]
+        [EdmRelationshipNavigationProperty("Model", "FK_Child_has_Parent", "Parent")]
         public Kistl.App.Base.TypeRef__Implementation__ Parent__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Base.TypeRef__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.TypeRef__Implementation__>(
-                        "Model.FK_TypeRef_has_TypeRef",
+                        "Model.FK_Child_has_Parent",
                         "Parent");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -368,7 +368,7 @@ namespace Kistl.App.Base
             {
                 EntityReference<Kistl.App.Base.TypeRef__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.TypeRef__Implementation__>(
-                        "Model.FK_TypeRef_has_TypeRef",
+                        "Model.FK_Child_has_Parent",
                         "Parent");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)

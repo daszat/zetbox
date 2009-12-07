@@ -61,7 +61,7 @@ namespace Kistl.App.Base
         /// The A-side of this Relation.
         /// </summary>
     /*
-    Relation: FK_Relation_hasA_RelationEnd
+    Relation: FK_Relation_hasA_A
     A: ZeroOrOne Relation as Relation
     B: ZeroOrOne RelationEnd as A
     Preferred Storage: MergeIntoA
@@ -89,14 +89,14 @@ namespace Kistl.App.Base
         private int? _fk_A;
         private Guid? _fk_guid_A = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_Relation_hasA_RelationEnd", "A")]
+        [EdmRelationshipNavigationProperty("Model", "FK_Relation_hasA_A", "A")]
         public Kistl.App.Base.RelationEnd__Implementation__ A__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Base.RelationEnd__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.RelationEnd__Implementation__>(
-                        "Model.FK_Relation_hasA_RelationEnd",
+                        "Model.FK_Relation_hasA_A",
                         "A");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -117,7 +117,7 @@ namespace Kistl.App.Base
             {
                 EntityReference<Kistl.App.Base.RelationEnd__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.RelationEnd__Implementation__>(
-                        "Model.FK_Relation_hasA_RelationEnd",
+                        "Model.FK_Relation_hasA_A",
                         "A");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -151,7 +151,7 @@ namespace Kistl.App.Base
         /// The B-side of this Relation.
         /// </summary>
     /*
-    Relation: FK_Relation_hasB_RelationEnd
+    Relation: FK_Relation_hasB_B
     A: ZeroOrOne Relation as Relation
     B: ZeroOrOne RelationEnd as B
     Preferred Storage: MergeIntoA
@@ -179,14 +179,14 @@ namespace Kistl.App.Base
         private int? _fk_B;
         private Guid? _fk_guid_B = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_Relation_hasB_RelationEnd", "B")]
+        [EdmRelationshipNavigationProperty("Model", "FK_Relation_hasB_B", "B")]
         public Kistl.App.Base.RelationEnd__Implementation__ B__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Base.RelationEnd__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.RelationEnd__Implementation__>(
-                        "Model.FK_Relation_hasB_RelationEnd",
+                        "Model.FK_Relation_hasB_B",
                         "B");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -207,7 +207,7 @@ namespace Kistl.App.Base
             {
                 EntityReference<Kistl.App.Base.RelationEnd__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.RelationEnd__Implementation__>(
-                        "Model.FK_Relation_hasB_RelationEnd",
+                        "Model.FK_Relation_hasB_B",
                         "B");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)

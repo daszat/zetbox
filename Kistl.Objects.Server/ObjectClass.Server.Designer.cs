@@ -36,7 +36,7 @@ namespace Kistl.App.Base
         /// Pointer auf die Basisklasse
         /// </summary>
     /*
-    Relation: FK_ObjectClass_has_ObjectClass
+    Relation: FK_BaseObjectClass_has_SubClasses
     A: ZeroOrOne ObjectClass as BaseObjectClass
     B: ZeroOrMore ObjectClass as SubClasses
     Preferred Storage: MergeIntoB
@@ -64,14 +64,14 @@ namespace Kistl.App.Base
         private int? _fk_BaseObjectClass;
         private Guid? _fk_guid_BaseObjectClass = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_ObjectClass_has_ObjectClass", "BaseObjectClass")]
+        [EdmRelationshipNavigationProperty("Model", "FK_BaseObjectClass_has_SubClasses", "BaseObjectClass")]
         public Kistl.App.Base.ObjectClass__Implementation__ BaseObjectClass__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Base.ObjectClass__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.ObjectClass__Implementation__>(
-                        "Model.FK_ObjectClass_has_ObjectClass",
+                        "Model.FK_BaseObjectClass_has_SubClasses",
                         "BaseObjectClass");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -92,7 +92,7 @@ namespace Kistl.App.Base
             {
                 EntityReference<Kistl.App.Base.ObjectClass__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.ObjectClass__Implementation__>(
-                        "Model.FK_ObjectClass_has_ObjectClass",
+                        "Model.FK_BaseObjectClass_has_SubClasses",
                         "BaseObjectClass");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -126,7 +126,7 @@ namespace Kistl.App.Base
         /// The default PresentableModel to use for this ObjectClass
         /// </summary>
     /*
-    Relation: FK_ObjectClass_has_PresentableModelDescriptor
+    Relation: FK_Presentable_has_DefaultPresentableModelDescriptor
     A: ZeroOrMore ObjectClass as Presentable
     B: One PresentableModelDescriptor as DefaultPresentableModelDescriptor
     Preferred Storage: MergeIntoA
@@ -154,14 +154,14 @@ namespace Kistl.App.Base
         private int? _fk_DefaultPresentableModelDescriptor;
         private Guid? _fk_guid_DefaultPresentableModelDescriptor = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_ObjectClass_has_PresentableModelDescriptor", "DefaultPresentableModelDescriptor")]
+        [EdmRelationshipNavigationProperty("Model", "FK_Presentable_has_DefaultPresentableModelDescriptor", "DefaultPresentableModelDescriptor")]
         public Kistl.App.GUI.PresentableModelDescriptor__Implementation__ DefaultPresentableModelDescriptor__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.GUI.PresentableModelDescriptor__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.PresentableModelDescriptor__Implementation__>(
-                        "Model.FK_ObjectClass_has_PresentableModelDescriptor",
+                        "Model.FK_Presentable_has_DefaultPresentableModelDescriptor",
                         "DefaultPresentableModelDescriptor");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -182,7 +182,7 @@ namespace Kistl.App.Base
             {
                 EntityReference<Kistl.App.GUI.PresentableModelDescriptor__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.PresentableModelDescriptor__Implementation__>(
-                        "Model.FK_ObjectClass_has_PresentableModelDescriptor",
+                        "Model.FK_Presentable_has_DefaultPresentableModelDescriptor",
                         "DefaultPresentableModelDescriptor");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -216,7 +216,7 @@ namespace Kistl.App.Base
         /// Interfaces der Objektklasse
         /// </summary>
     /*
-    Relation: FK_ObjectClass_implements_Interface
+    Relation: FK_ObjectClass_implements_ImplementsInterfaces
     A: ZeroOrMore ObjectClass as ObjectClass
     B: ZeroOrMore Interface as ImplementsInterfaces
     Preferred Storage: Separate
@@ -240,14 +240,14 @@ namespace Kistl.App.Base
             }
         }
         
-        [EdmRelationshipNavigationProperty("Model", "FK_ObjectClass_implements_Interface_ObjectClass", "CollectionEntry")]
+        [EdmRelationshipNavigationProperty("Model", "FK_ObjectClass_implements_ImplementsInterfaces_A", "CollectionEntry")]
         public EntityCollection<Kistl.App.Base.ObjectClass_implements_Interface_RelationEntry__Implementation__> ImplementsInterfaces__Implementation__
         {
             get
             {
                 var c = ((IEntityWithRelationships)(this)).RelationshipManager
                     .GetRelatedCollection<Kistl.App.Base.ObjectClass_implements_Interface_RelationEntry__Implementation__>(
-                        "Model.FK_ObjectClass_implements_Interface_ObjectClass",
+                        "Model.FK_ObjectClass_implements_ImplementsInterfaces_A",
                         "CollectionEntry");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)
@@ -366,7 +366,7 @@ namespace Kistl.App.Base
         /// Liste der vererbten Klassen
         /// </summary>
     /*
-    Relation: FK_ObjectClass_has_ObjectClass
+    Relation: FK_BaseObjectClass_has_SubClasses
     A: ZeroOrOne ObjectClass as BaseObjectClass
     B: ZeroOrMore ObjectClass as SubClasses
     Preferred Storage: MergeIntoB
@@ -389,14 +389,14 @@ namespace Kistl.App.Base
             }
         }
         
-        [EdmRelationshipNavigationProperty("Model", "FK_ObjectClass_has_ObjectClass", "SubClasses")]
+        [EdmRelationshipNavigationProperty("Model", "FK_BaseObjectClass_has_SubClasses", "SubClasses")]
         public EntityCollection<Kistl.App.Base.ObjectClass__Implementation__> SubClasses__Implementation__
         {
             get
             {
                 var c = ((IEntityWithRelationships)(this)).RelationshipManager
                     .GetRelatedCollection<Kistl.App.Base.ObjectClass__Implementation__>(
-                        "Model.FK_ObjectClass_has_ObjectClass",
+                        "Model.FK_BaseObjectClass_has_SubClasses",
                         "SubClasses");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)

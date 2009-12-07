@@ -87,7 +87,7 @@ namespace Kistl.App.Base
         /// The RelationEnd describing this Property
         /// </summary>
     /*
-    Relation: FK_RelationEnd_has_ObjectReferenceProperty
+    Relation: FK_RelationEnd_has_Navigator
     A: ZeroOrOne RelationEnd as RelationEnd
     B: ZeroOrOne ObjectReferenceProperty as Navigator
     Preferred Storage: MergeIntoA
@@ -115,14 +115,14 @@ namespace Kistl.App.Base
         private int? _fk_RelationEnd;
         private Guid? _fk_guid_RelationEnd = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_RelationEnd_has_ObjectReferenceProperty", "RelationEnd")]
+        [EdmRelationshipNavigationProperty("Model", "FK_RelationEnd_has_Navigator", "RelationEnd")]
         public Kistl.App.Base.RelationEnd__Implementation__ RelationEnd__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Base.RelationEnd__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.RelationEnd__Implementation__>(
-                        "Model.FK_RelationEnd_has_ObjectReferenceProperty",
+                        "Model.FK_RelationEnd_has_Navigator",
                         "RelationEnd");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -143,7 +143,7 @@ namespace Kistl.App.Base
             {
                 EntityReference<Kistl.App.Base.RelationEnd__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.RelationEnd__Implementation__>(
-                        "Model.FK_RelationEnd_has_ObjectReferenceProperty",
+                        "Model.FK_RelationEnd_has_Navigator",
                         "RelationEnd");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)

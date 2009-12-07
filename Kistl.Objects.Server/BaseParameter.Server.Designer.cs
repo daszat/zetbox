@@ -276,7 +276,7 @@ namespace Kistl.App.Base
         /// Methode des Parameters
         /// </summary>
     /*
-    Relation: FK_Method_has_BaseParameter
+    Relation: FK_Method_has_Parameter
     A: One Method as Method
     B: ZeroOrMore BaseParameter as Parameter
     Preferred Storage: MergeIntoB
@@ -304,14 +304,14 @@ namespace Kistl.App.Base
         private int? _fk_Method;
         private Guid? _fk_guid_Method = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_Method_has_BaseParameter", "Method")]
+        [EdmRelationshipNavigationProperty("Model", "FK_Method_has_Parameter", "Method")]
         public Kistl.App.Base.Method__Implementation__ Method__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Base.Method__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Method__Implementation__>(
-                        "Model.FK_Method_has_BaseParameter",
+                        "Model.FK_Method_has_Parameter",
                         "Method");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -332,7 +332,7 @@ namespace Kistl.App.Base
             {
                 EntityReference<Kistl.App.Base.Method__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Method__Implementation__>(
-                        "Model.FK_Method_has_BaseParameter",
+                        "Model.FK_Method_has_Parameter",
                         "Method");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)

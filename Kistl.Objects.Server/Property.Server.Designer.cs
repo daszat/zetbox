@@ -112,7 +112,7 @@ namespace Kistl.App.Base
         /// The list of constraints applying to this Property
         /// </summary>
     /*
-    Relation: FK_Property_has_Constraint
+    Relation: FK_ConstrainedProperty_has_Constraints
     A: One Property as ConstrainedProperty
     B: ZeroOrMore Constraint as Constraints
     Preferred Storage: MergeIntoB
@@ -135,14 +135,14 @@ namespace Kistl.App.Base
             }
         }
         
-        [EdmRelationshipNavigationProperty("Model", "FK_Property_has_Constraint", "Constraints")]
+        [EdmRelationshipNavigationProperty("Model", "FK_ConstrainedProperty_has_Constraints", "Constraints")]
         public EntityCollection<Kistl.App.Base.Constraint__Implementation__> Constraints__Implementation__
         {
             get
             {
                 var c = ((IEntityWithRelationships)(this)).RelationshipManager
                     .GetRelatedCollection<Kistl.App.Base.Constraint__Implementation__>(
-                        "Model.FK_Property_has_Constraint",
+                        "Model.FK_ConstrainedProperty_has_Constraints",
                         "Constraints");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)
@@ -161,7 +161,7 @@ namespace Kistl.App.Base
         /// Property can have a default value
         /// </summary>
     /*
-    Relation: FK_Property_has_DefaultPropertyValue
+    Relation: FK_Property_has_DefaultValue
     A: One Property as Property
     B: ZeroOrOne DefaultPropertyValue as DefaultValue
     Preferred Storage: MergeIntoB
@@ -189,14 +189,14 @@ namespace Kistl.App.Base
         private int? _fk_DefaultValue;
         private Guid? _fk_guid_DefaultValue = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_Property_has_DefaultPropertyValue", "DefaultValue")]
+        [EdmRelationshipNavigationProperty("Model", "FK_Property_has_DefaultValue", "DefaultValue")]
         public Kistl.App.Base.DefaultPropertyValue__Implementation__ DefaultValue__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Base.DefaultPropertyValue__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.DefaultPropertyValue__Implementation__>(
-                        "Model.FK_Property_has_DefaultPropertyValue",
+                        "Model.FK_Property_has_DefaultValue",
                         "DefaultValue");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -217,7 +217,7 @@ namespace Kistl.App.Base
             {
                 EntityReference<Kistl.App.Base.DefaultPropertyValue__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.DefaultPropertyValue__Implementation__>(
-                        "Model.FK_Property_has_DefaultPropertyValue",
+                        "Model.FK_Property_has_DefaultValue",
                         "DefaultValue");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -364,7 +364,7 @@ namespace Kistl.App.Base
         /// 
         /// </summary>
     /*
-    Relation: FK_Property_has_PropertyInvocation
+    Relation: FK_InvokeOnProperty_has_Invocations
     A: One Property as InvokeOnProperty
     B: ZeroOrMore PropertyInvocation as Invocations
     Preferred Storage: MergeIntoB
@@ -387,14 +387,14 @@ namespace Kistl.App.Base
             }
         }
         
-        [EdmRelationshipNavigationProperty("Model", "FK_Property_has_PropertyInvocation", "Invocations")]
+        [EdmRelationshipNavigationProperty("Model", "FK_InvokeOnProperty_has_Invocations", "Invocations")]
         public EntityCollection<Kistl.App.Base.PropertyInvocation__Implementation__> Invocations__Implementation__
         {
             get
             {
                 var c = ((IEntityWithRelationships)(this)).RelationshipManager
                     .GetRelatedCollection<Kistl.App.Base.PropertyInvocation__Implementation__>(
-                        "Model.FK_Property_has_PropertyInvocation",
+                        "Model.FK_InvokeOnProperty_has_Invocations",
                         "Invocations");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)
@@ -412,7 +412,7 @@ namespace Kistl.App.Base
         /// Zugehörig zum Modul
         /// </summary>
     /*
-    Relation: FK_Property_has_Module
+    Relation: FK_BaseProperty_has_Module
     A: ZeroOrMore Property as BaseProperty
     B: ZeroOrOne Module as Module
     Preferred Storage: MergeIntoA
@@ -440,14 +440,14 @@ namespace Kistl.App.Base
         private int? _fk_Module;
         private Guid? _fk_guid_Module = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_Property_has_Module", "Module")]
+        [EdmRelationshipNavigationProperty("Model", "FK_BaseProperty_has_Module", "Module")]
         public Kistl.App.Base.Module__Implementation__ Module__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Base.Module__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Module__Implementation__>(
-                        "Model.FK_Property_has_Module",
+                        "Model.FK_BaseProperty_has_Module",
                         "Module");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -468,7 +468,7 @@ namespace Kistl.App.Base
             {
                 EntityReference<Kistl.App.Base.Module__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Module__Implementation__>(
-                        "Model.FK_Property_has_Module",
+                        "Model.FK_BaseProperty_has_Module",
                         "Module");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -502,7 +502,7 @@ namespace Kistl.App.Base
         /// 
         /// </summary>
     /*
-    Relation: FK_DataType_has_Property
+    Relation: FK_ObjectClass_has_Properties
     A: One DataType as ObjectClass
     B: ZeroOrMore Property as Properties
     Preferred Storage: MergeIntoB
@@ -530,14 +530,14 @@ namespace Kistl.App.Base
         private int? _fk_ObjectClass;
         private Guid? _fk_guid_ObjectClass = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_DataType_has_Property", "ObjectClass")]
+        [EdmRelationshipNavigationProperty("Model", "FK_ObjectClass_has_Properties", "ObjectClass")]
         public Kistl.App.Base.DataType__Implementation__ ObjectClass__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Base.DataType__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.DataType__Implementation__>(
-                        "Model.FK_DataType_has_Property",
+                        "Model.FK_ObjectClass_has_Properties",
                         "ObjectClass");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -558,7 +558,7 @@ namespace Kistl.App.Base
             {
                 EntityReference<Kistl.App.Base.DataType__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.DataType__Implementation__>(
-                        "Model.FK_DataType_has_Property",
+                        "Model.FK_ObjectClass_has_Properties",
                         "ObjectClass");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -643,7 +643,7 @@ namespace Kistl.App.Base
         /// The PresentableModel to use for values of this Property
         /// </summary>
     /*
-    Relation: FK_Property_has_PresentableModelDescriptor
+    Relation: FK_Property_has_ValueModelDescriptor
     A: ZeroOrMore Property as Property
     B: One PresentableModelDescriptor as ValueModelDescriptor
     Preferred Storage: MergeIntoA
@@ -671,14 +671,14 @@ namespace Kistl.App.Base
         private int? _fk_ValueModelDescriptor;
         private Guid? _fk_guid_ValueModelDescriptor = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_Property_has_PresentableModelDescriptor", "ValueModelDescriptor")]
+        [EdmRelationshipNavigationProperty("Model", "FK_Property_has_ValueModelDescriptor", "ValueModelDescriptor")]
         public Kistl.App.GUI.PresentableModelDescriptor__Implementation__ ValueModelDescriptor__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.GUI.PresentableModelDescriptor__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.PresentableModelDescriptor__Implementation__>(
-                        "Model.FK_Property_has_PresentableModelDescriptor",
+                        "Model.FK_Property_has_ValueModelDescriptor",
                         "ValueModelDescriptor");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -699,7 +699,7 @@ namespace Kistl.App.Base
             {
                 EntityReference<Kistl.App.GUI.PresentableModelDescriptor__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.PresentableModelDescriptor__Implementation__>(
-                        "Model.FK_Property_has_PresentableModelDescriptor",
+                        "Model.FK_Property_has_ValueModelDescriptor",
                         "ValueModelDescriptor");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)

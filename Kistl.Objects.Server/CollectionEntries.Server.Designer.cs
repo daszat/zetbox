@@ -105,14 +105,14 @@ namespace Kistl.App.GUI
         private int? _fk_A;
         private Guid? _fk_guid_A = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_ControlKindClass_supports_TypeRef_ControlKindClass", "ControlKindClass")]
+        [EdmRelationshipNavigationProperty("Model", "FK_ControlKindClass_supports_SupportedInterfaces_A", "ControlKindClass")]
         public Kistl.App.GUI.ControlKindClass__Implementation__ A__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.GUI.ControlKindClass__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.ControlKindClass__Implementation__>(
-                        "Model.FK_ControlKindClass_supports_TypeRef_ControlKindClass",
+                        "Model.FK_ControlKindClass_supports_SupportedInterfaces_A",
                         "ControlKindClass");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -127,7 +127,7 @@ namespace Kistl.App.GUI
             {
                 EntityReference<Kistl.App.GUI.ControlKindClass__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.ControlKindClass__Implementation__>(
-                        "Model.FK_ControlKindClass_supports_TypeRef_ControlKindClass",
+                        "Model.FK_ControlKindClass_supports_SupportedInterfaces_A",
                         "ControlKindClass");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -168,14 +168,14 @@ namespace Kistl.App.GUI
         private int? _fk_B;
         private Guid? _fk_guid_B = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_ControlKindClass_supports_TypeRef_SupportedInterfaces", "SupportedInterfaces")]
+        [EdmRelationshipNavigationProperty("Model", "FK_ControlKindClass_supports_SupportedInterfaces_B", "SupportedInterfaces")]
         public Kistl.App.Base.TypeRef__Implementation__ B__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Base.TypeRef__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.TypeRef__Implementation__>(
-                        "Model.FK_ControlKindClass_supports_TypeRef_SupportedInterfaces",
+                        "Model.FK_ControlKindClass_supports_SupportedInterfaces_B",
                         "SupportedInterfaces");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -190,7 +190,7 @@ namespace Kistl.App.GUI
             {
                 EntityReference<Kistl.App.Base.TypeRef__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.TypeRef__Implementation__>(
-                        "Model.FK_ControlKindClass_supports_TypeRef_SupportedInterfaces",
+                        "Model.FK_ControlKindClass_supports_SupportedInterfaces_B",
                         "SupportedInterfaces");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -409,14 +409,14 @@ namespace Kistl.App.Base
         private int? _fk_A;
         private Guid? _fk_guid_A = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_ObjectClass_implements_Interface_ObjectClass", "ObjectClass")]
+        [EdmRelationshipNavigationProperty("Model", "FK_ObjectClass_implements_ImplementsInterfaces_A", "ObjectClass")]
         public Kistl.App.Base.ObjectClass__Implementation__ A__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Base.ObjectClass__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.ObjectClass__Implementation__>(
-                        "Model.FK_ObjectClass_implements_Interface_ObjectClass",
+                        "Model.FK_ObjectClass_implements_ImplementsInterfaces_A",
                         "ObjectClass");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -431,7 +431,7 @@ namespace Kistl.App.Base
             {
                 EntityReference<Kistl.App.Base.ObjectClass__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.ObjectClass__Implementation__>(
-                        "Model.FK_ObjectClass_implements_Interface_ObjectClass",
+                        "Model.FK_ObjectClass_implements_ImplementsInterfaces_A",
                         "ObjectClass");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -472,14 +472,14 @@ namespace Kistl.App.Base
         private int? _fk_B;
         private Guid? _fk_guid_B = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_ObjectClass_implements_Interface_ImplementsInterfaces", "ImplementsInterfaces")]
+        [EdmRelationshipNavigationProperty("Model", "FK_ObjectClass_implements_ImplementsInterfaces_B", "ImplementsInterfaces")]
         public Kistl.App.Base.Interface__Implementation__ B__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Base.Interface__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Interface__Implementation__>(
-                        "Model.FK_ObjectClass_implements_Interface_ImplementsInterfaces",
+                        "Model.FK_ObjectClass_implements_ImplementsInterfaces_B",
                         "ImplementsInterfaces");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -494,7 +494,7 @@ namespace Kistl.App.Base
             {
                 EntityReference<Kistl.App.Base.Interface__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Interface__Implementation__>(
-                        "Model.FK_ObjectClass_implements_Interface_ImplementsInterfaces",
+                        "Model.FK_ObjectClass_implements_ImplementsInterfaces_B",
                         "ImplementsInterfaces");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -713,14 +713,14 @@ namespace Kistl.App.GUI
         private int? _fk_A;
         private Guid? _fk_guid_A = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_PresentableModelDescriptor_displayedBy_ControlKind_Presentable", "Presentable")]
+        [EdmRelationshipNavigationProperty("Model", "FK_Presentable_displayedBy_SecondaryControlKinds_A", "Presentable")]
         public Kistl.App.GUI.PresentableModelDescriptor__Implementation__ A__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.GUI.PresentableModelDescriptor__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.PresentableModelDescriptor__Implementation__>(
-                        "Model.FK_PresentableModelDescriptor_displayedBy_ControlKind_Presentable",
+                        "Model.FK_Presentable_displayedBy_SecondaryControlKinds_A",
                         "Presentable");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -735,7 +735,7 @@ namespace Kistl.App.GUI
             {
                 EntityReference<Kistl.App.GUI.PresentableModelDescriptor__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.PresentableModelDescriptor__Implementation__>(
-                        "Model.FK_PresentableModelDescriptor_displayedBy_ControlKind_Presentable",
+                        "Model.FK_Presentable_displayedBy_SecondaryControlKinds_A",
                         "Presentable");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -776,14 +776,14 @@ namespace Kistl.App.GUI
         private int? _fk_B;
         private Guid? _fk_guid_B = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_PresentableModelDescriptor_displayedBy_ControlKind_SecondaryControlKinds", "SecondaryControlKinds")]
+        [EdmRelationshipNavigationProperty("Model", "FK_Presentable_displayedBy_SecondaryControlKinds_B", "SecondaryControlKinds")]
         public Kistl.App.GUI.ControlKind__Implementation__ B__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.GUI.ControlKind__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.ControlKind__Implementation__>(
-                        "Model.FK_PresentableModelDescriptor_displayedBy_ControlKind_SecondaryControlKinds",
+                        "Model.FK_Presentable_displayedBy_SecondaryControlKinds_B",
                         "SecondaryControlKinds");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -798,7 +798,7 @@ namespace Kistl.App.GUI
             {
                 EntityReference<Kistl.App.GUI.ControlKind__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.ControlKind__Implementation__>(
-                        "Model.FK_PresentableModelDescriptor_displayedBy_ControlKind_SecondaryControlKinds",
+                        "Model.FK_Presentable_displayedBy_SecondaryControlKinds_B",
                         "SecondaryControlKinds");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -987,14 +987,14 @@ namespace Kistl.App.Projekte
         private int? _fk_A;
         private Guid? _fk_guid_A = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_Projekt_haben_Mitarbeiter_Projekte", "Projekte")]
+        [EdmRelationshipNavigationProperty("Model", "FK_Projekte_haben_Mitarbeiter_A", "Projekte")]
         public Kistl.App.Projekte.Projekt__Implementation__ A__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Projekte.Projekt__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.Projekt__Implementation__>(
-                        "Model.FK_Projekt_haben_Mitarbeiter_Projekte",
+                        "Model.FK_Projekte_haben_Mitarbeiter_A",
                         "Projekte");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -1009,7 +1009,7 @@ namespace Kistl.App.Projekte
             {
                 EntityReference<Kistl.App.Projekte.Projekt__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.Projekt__Implementation__>(
-                        "Model.FK_Projekt_haben_Mitarbeiter_Projekte",
+                        "Model.FK_Projekte_haben_Mitarbeiter_A",
                         "Projekte");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -1077,14 +1077,14 @@ namespace Kistl.App.Projekte
         private int? _fk_B;
         private Guid? _fk_guid_B = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_Projekt_haben_Mitarbeiter_Mitarbeiter", "Mitarbeiter")]
+        [EdmRelationshipNavigationProperty("Model", "FK_Projekte_haben_Mitarbeiter_B", "Mitarbeiter")]
         public Kistl.App.Projekte.Mitarbeiter__Implementation__ B__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Projekte.Mitarbeiter__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.Mitarbeiter__Implementation__>(
-                        "Model.FK_Projekt_haben_Mitarbeiter_Mitarbeiter",
+                        "Model.FK_Projekte_haben_Mitarbeiter_B",
                         "Mitarbeiter");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -1099,7 +1099,7 @@ namespace Kistl.App.Projekte
             {
                 EntityReference<Kistl.App.Projekte.Mitarbeiter__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.Mitarbeiter__Implementation__>(
-                        "Model.FK_Projekt_haben_Mitarbeiter_Mitarbeiter",
+                        "Model.FK_Projekte_haben_Mitarbeiter_B",
                         "Mitarbeiter");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -1344,14 +1344,14 @@ namespace Kistl.App.GUI
         private int? _fk_A;
         private Guid? _fk_guid_A = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_Template_hasMenu_Visual_Template", "Template")]
+        [EdmRelationshipNavigationProperty("Model", "FK_Template_hasMenu_Menu_A", "Template")]
         public Kistl.App.GUI.Template__Implementation__ A__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.GUI.Template__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.Template__Implementation__>(
-                        "Model.FK_Template_hasMenu_Visual_Template",
+                        "Model.FK_Template_hasMenu_Menu_A",
                         "Template");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -1366,7 +1366,7 @@ namespace Kistl.App.GUI
             {
                 EntityReference<Kistl.App.GUI.Template__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.Template__Implementation__>(
-                        "Model.FK_Template_hasMenu_Visual_Template",
+                        "Model.FK_Template_hasMenu_Menu_A",
                         "Template");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -1407,14 +1407,14 @@ namespace Kistl.App.GUI
         private int? _fk_B;
         private Guid? _fk_guid_B = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_Template_hasMenu_Visual_Menu", "Menu")]
+        [EdmRelationshipNavigationProperty("Model", "FK_Template_hasMenu_Menu_B", "Menu")]
         public Kistl.App.GUI.Visual__Implementation__ B__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.GUI.Visual__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.Visual__Implementation__>(
-                        "Model.FK_Template_hasMenu_Visual_Menu",
+                        "Model.FK_Template_hasMenu_Menu_B",
                         "Menu");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -1429,7 +1429,7 @@ namespace Kistl.App.GUI
             {
                 EntityReference<Kistl.App.GUI.Visual__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.Visual__Implementation__>(
-                        "Model.FK_Template_hasMenu_Visual_Menu",
+                        "Model.FK_Template_hasMenu_Menu_B",
                         "Menu");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -1617,14 +1617,14 @@ namespace Kistl.App.Base
         private int? _fk_A;
         private Guid? _fk_guid_A = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_TypeRef_hasGenericArguments_TypeRef_TypeRef", "TypeRef")]
+        [EdmRelationshipNavigationProperty("Model", "FK_TypeRef_hasGenericArguments_GenericArguments_A", "TypeRef")]
         public Kistl.App.Base.TypeRef__Implementation__ A__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Base.TypeRef__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.TypeRef__Implementation__>(
-                        "Model.FK_TypeRef_hasGenericArguments_TypeRef_TypeRef",
+                        "Model.FK_TypeRef_hasGenericArguments_GenericArguments_A",
                         "TypeRef");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -1639,7 +1639,7 @@ namespace Kistl.App.Base
             {
                 EntityReference<Kistl.App.Base.TypeRef__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.TypeRef__Implementation__>(
-                        "Model.FK_TypeRef_hasGenericArguments_TypeRef_TypeRef",
+                        "Model.FK_TypeRef_hasGenericArguments_GenericArguments_A",
                         "TypeRef");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -1707,14 +1707,14 @@ namespace Kistl.App.Base
         private int? _fk_B;
         private Guid? _fk_guid_B = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_TypeRef_hasGenericArguments_TypeRef_GenericArguments", "GenericArguments")]
+        [EdmRelationshipNavigationProperty("Model", "FK_TypeRef_hasGenericArguments_GenericArguments_B", "GenericArguments")]
         public Kistl.App.Base.TypeRef__Implementation__ B__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Base.TypeRef__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.TypeRef__Implementation__>(
-                        "Model.FK_TypeRef_hasGenericArguments_TypeRef_GenericArguments",
+                        "Model.FK_TypeRef_hasGenericArguments_GenericArguments_B",
                         "GenericArguments");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -1729,7 +1729,7 @@ namespace Kistl.App.Base
             {
                 EntityReference<Kistl.App.Base.TypeRef__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.TypeRef__Implementation__>(
-                        "Model.FK_TypeRef_hasGenericArguments_TypeRef_GenericArguments",
+                        "Model.FK_TypeRef_hasGenericArguments_GenericArguments_B",
                         "GenericArguments");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -2039,14 +2039,14 @@ namespace Kistl.App.GUI
         private int? _fk_A;
         private Guid? _fk_guid_A = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_Visual_contains_Visual_Visual", "Visual")]
+        [EdmRelationshipNavigationProperty("Model", "FK_Visual_contains_Children_A", "Visual")]
         public Kistl.App.GUI.Visual__Implementation__ A__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.GUI.Visual__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.Visual__Implementation__>(
-                        "Model.FK_Visual_contains_Visual_Visual",
+                        "Model.FK_Visual_contains_Children_A",
                         "Visual");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -2061,7 +2061,7 @@ namespace Kistl.App.GUI
             {
                 EntityReference<Kistl.App.GUI.Visual__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.Visual__Implementation__>(
-                        "Model.FK_Visual_contains_Visual_Visual",
+                        "Model.FK_Visual_contains_Children_A",
                         "Visual");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -2102,14 +2102,14 @@ namespace Kistl.App.GUI
         private int? _fk_B;
         private Guid? _fk_guid_B = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_Visual_contains_Visual_Children", "Children")]
+        [EdmRelationshipNavigationProperty("Model", "FK_Visual_contains_Children_B", "Children")]
         public Kistl.App.GUI.Visual__Implementation__ B__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.GUI.Visual__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.Visual__Implementation__>(
-                        "Model.FK_Visual_contains_Visual_Children",
+                        "Model.FK_Visual_contains_Children_B",
                         "Children");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -2124,7 +2124,7 @@ namespace Kistl.App.GUI
             {
                 EntityReference<Kistl.App.GUI.Visual__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.Visual__Implementation__>(
-                        "Model.FK_Visual_contains_Visual_Children",
+                        "Model.FK_Visual_contains_Children_B",
                         "Children");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -2282,14 +2282,14 @@ namespace Kistl.App.GUI
         private int? _fk_A;
         private Guid? _fk_guid_A = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_Visual_hasContextMenu_Visual_Visual", "Visual")]
+        [EdmRelationshipNavigationProperty("Model", "FK_Visual_hasContextMenu_ContextMenu_A", "Visual")]
         public Kistl.App.GUI.Visual__Implementation__ A__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.GUI.Visual__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.Visual__Implementation__>(
-                        "Model.FK_Visual_hasContextMenu_Visual_Visual",
+                        "Model.FK_Visual_hasContextMenu_ContextMenu_A",
                         "Visual");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -2304,7 +2304,7 @@ namespace Kistl.App.GUI
             {
                 EntityReference<Kistl.App.GUI.Visual__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.Visual__Implementation__>(
-                        "Model.FK_Visual_hasContextMenu_Visual_Visual",
+                        "Model.FK_Visual_hasContextMenu_ContextMenu_A",
                         "Visual");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -2345,14 +2345,14 @@ namespace Kistl.App.GUI
         private int? _fk_B;
         private Guid? _fk_guid_B = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_Visual_hasContextMenu_Visual_ContextMenu", "ContextMenu")]
+        [EdmRelationshipNavigationProperty("Model", "FK_Visual_hasContextMenu_ContextMenu_B", "ContextMenu")]
         public Kistl.App.GUI.Visual__Implementation__ B__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.GUI.Visual__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.Visual__Implementation__>(
-                        "Model.FK_Visual_hasContextMenu_Visual_ContextMenu",
+                        "Model.FK_Visual_hasContextMenu_ContextMenu_B",
                         "ContextMenu");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -2367,7 +2367,7 @@ namespace Kistl.App.GUI
             {
                 EntityReference<Kistl.App.GUI.Visual__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.Visual__Implementation__>(
-                        "Model.FK_Visual_hasContextMenu_Visual_ContextMenu",
+                        "Model.FK_Visual_hasContextMenu_ContextMenu_B",
                         "ContextMenu");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -2526,14 +2526,14 @@ namespace Kistl.App.TimeRecords
         private int? _fk_A;
         private Guid? _fk_guid_A = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_WorkEffortAccount_has_Mitarbeiter_WorkEffortAccount", "WorkEffortAccount")]
+        [EdmRelationshipNavigationProperty("Model", "FK_WorkEffortAccount_has_Mitarbeiter_A", "WorkEffortAccount")]
         public Kistl.App.TimeRecords.WorkEffortAccount__Implementation__ A__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.TimeRecords.WorkEffortAccount__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.TimeRecords.WorkEffortAccount__Implementation__>(
-                        "Model.FK_WorkEffortAccount_has_Mitarbeiter_WorkEffortAccount",
+                        "Model.FK_WorkEffortAccount_has_Mitarbeiter_A",
                         "WorkEffortAccount");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -2548,7 +2548,7 @@ namespace Kistl.App.TimeRecords
             {
                 EntityReference<Kistl.App.TimeRecords.WorkEffortAccount__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.TimeRecords.WorkEffortAccount__Implementation__>(
-                        "Model.FK_WorkEffortAccount_has_Mitarbeiter_WorkEffortAccount",
+                        "Model.FK_WorkEffortAccount_has_Mitarbeiter_A",
                         "WorkEffortAccount");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -2589,14 +2589,14 @@ namespace Kistl.App.TimeRecords
         private int? _fk_B;
         private Guid? _fk_guid_B = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_WorkEffortAccount_has_Mitarbeiter_Mitarbeiter", "Mitarbeiter")]
+        [EdmRelationshipNavigationProperty("Model", "FK_WorkEffortAccount_has_Mitarbeiter_B", "Mitarbeiter")]
         public Kistl.App.Projekte.Mitarbeiter__Implementation__ B__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Projekte.Mitarbeiter__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.Mitarbeiter__Implementation__>(
-                        "Model.FK_WorkEffortAccount_has_Mitarbeiter_Mitarbeiter",
+                        "Model.FK_WorkEffortAccount_has_Mitarbeiter_B",
                         "Mitarbeiter");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -2611,7 +2611,7 @@ namespace Kistl.App.TimeRecords
             {
                 EntityReference<Kistl.App.Projekte.Mitarbeiter__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.Mitarbeiter__Implementation__>(
-                        "Model.FK_WorkEffortAccount_has_Mitarbeiter_Mitarbeiter",
+                        "Model.FK_WorkEffortAccount_has_Mitarbeiter_B",
                         "Mitarbeiter");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)

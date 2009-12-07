@@ -123,7 +123,7 @@ namespace Kistl.App.Base
         /// The Type implementing this invocation
         /// </summary>
     /*
-    Relation: FK_MethodInvocation_has_TypeRef
+    Relation: FK_MethodInvocation_has_Implementor
     A: ZeroOrMore MethodInvocation as MethodInvocation
     B: ZeroOrOne TypeRef as Implementor
     Preferred Storage: MergeIntoA
@@ -151,14 +151,14 @@ namespace Kistl.App.Base
         private int? _fk_Implementor;
         private Guid? _fk_guid_Implementor = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_MethodInvocation_has_TypeRef", "Implementor")]
+        [EdmRelationshipNavigationProperty("Model", "FK_MethodInvocation_has_Implementor", "Implementor")]
         public Kistl.App.Base.TypeRef__Implementation__ Implementor__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Base.TypeRef__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.TypeRef__Implementation__>(
-                        "Model.FK_MethodInvocation_has_TypeRef",
+                        "Model.FK_MethodInvocation_has_Implementor",
                         "Implementor");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -179,7 +179,7 @@ namespace Kistl.App.Base
             {
                 EntityReference<Kistl.App.Base.TypeRef__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.TypeRef__Implementation__>(
-                        "Model.FK_MethodInvocation_has_TypeRef",
+                        "Model.FK_MethodInvocation_has_Implementor",
                         "Implementor");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -213,7 +213,7 @@ namespace Kistl.App.Base
         /// In dieser Objektklasse implementieren
         /// </summary>
     /*
-    Relation: FK_DataType_has_MethodInvocation
+    Relation: FK_InvokeOnObjectClass_has_MethodInvocations
     A: One DataType as InvokeOnObjectClass
     B: ZeroOrMore MethodInvocation as MethodInvocations
     Preferred Storage: MergeIntoB
@@ -241,14 +241,14 @@ namespace Kistl.App.Base
         private int? _fk_InvokeOnObjectClass;
         private Guid? _fk_guid_InvokeOnObjectClass = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_DataType_has_MethodInvocation", "InvokeOnObjectClass")]
+        [EdmRelationshipNavigationProperty("Model", "FK_InvokeOnObjectClass_has_MethodInvocations", "InvokeOnObjectClass")]
         public Kistl.App.Base.DataType__Implementation__ InvokeOnObjectClass__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Base.DataType__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.DataType__Implementation__>(
-                        "Model.FK_DataType_has_MethodInvocation",
+                        "Model.FK_InvokeOnObjectClass_has_MethodInvocations",
                         "InvokeOnObjectClass");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -269,7 +269,7 @@ namespace Kistl.App.Base
             {
                 EntityReference<Kistl.App.Base.DataType__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.DataType__Implementation__>(
-                        "Model.FK_DataType_has_MethodInvocation",
+                        "Model.FK_InvokeOnObjectClass_has_MethodInvocations",
                         "InvokeOnObjectClass");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -354,7 +354,7 @@ namespace Kistl.App.Base
         /// Methode, die Aufgerufen wird
         /// </summary>
     /*
-    Relation: FK_Method_has_MethodInvocation
+    Relation: FK_Method_has_MethodInvokations
     A: One Method as Method
     B: ZeroOrMore MethodInvocation as MethodInvokations
     Preferred Storage: MergeIntoB
@@ -382,14 +382,14 @@ namespace Kistl.App.Base
         private int? _fk_Method;
         private Guid? _fk_guid_Method = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_Method_has_MethodInvocation", "Method")]
+        [EdmRelationshipNavigationProperty("Model", "FK_Method_has_MethodInvokations", "Method")]
         public Kistl.App.Base.Method__Implementation__ Method__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Base.Method__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Method__Implementation__>(
-                        "Model.FK_Method_has_MethodInvocation",
+                        "Model.FK_Method_has_MethodInvokations",
                         "Method");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -410,7 +410,7 @@ namespace Kistl.App.Base
             {
                 EntityReference<Kistl.App.Base.Method__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Method__Implementation__>(
-                        "Model.FK_Method_has_MethodInvocation",
+                        "Model.FK_Method_has_MethodInvokations",
                         "Method");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)

@@ -61,7 +61,7 @@ namespace Kistl.App.GUI
         /// The control implementing this View
         /// </summary>
     /*
-    Relation: FK_ViewDescriptor_has_TypeRef
+    Relation: FK_View_has_ControlRef
     A: ZeroOrMore ViewDescriptor as View
     B: One TypeRef as ControlRef
     Preferred Storage: MergeIntoA
@@ -89,14 +89,14 @@ namespace Kistl.App.GUI
         private int? _fk_ControlRef;
         private Guid? _fk_guid_ControlRef = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_ViewDescriptor_has_TypeRef", "ControlRef")]
+        [EdmRelationshipNavigationProperty("Model", "FK_View_has_ControlRef", "ControlRef")]
         public Kistl.App.Base.TypeRef__Implementation__ ControlRef__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Base.TypeRef__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.TypeRef__Implementation__>(
-                        "Model.FK_ViewDescriptor_has_TypeRef",
+                        "Model.FK_View_has_ControlRef",
                         "ControlRef");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -117,7 +117,7 @@ namespace Kistl.App.GUI
             {
                 EntityReference<Kistl.App.Base.TypeRef__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.TypeRef__Implementation__>(
-                        "Model.FK_ViewDescriptor_has_TypeRef",
+                        "Model.FK_View_has_ControlRef",
                         "ControlRef");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -213,7 +213,7 @@ namespace Kistl.App.GUI
         /// 
         /// </summary>
     /*
-    Relation: FK_ViewDescriptor_isof_ControlKindClass
+    Relation: FK_Control_isof_Kind
     A: ZeroOrMore ViewDescriptor as Control
     B: ZeroOrOne ControlKindClass as Kind
     Preferred Storage: MergeIntoA
@@ -241,14 +241,14 @@ namespace Kistl.App.GUI
         private int? _fk_Kind;
         private Guid? _fk_guid_Kind = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_ViewDescriptor_isof_ControlKindClass", "Kind")]
+        [EdmRelationshipNavigationProperty("Model", "FK_Control_isof_Kind", "Kind")]
         public Kistl.App.GUI.ControlKindClass__Implementation__ Kind__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.GUI.ControlKindClass__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.ControlKindClass__Implementation__>(
-                        "Model.FK_ViewDescriptor_isof_ControlKindClass",
+                        "Model.FK_Control_isof_Kind",
                         "Kind");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -269,7 +269,7 @@ namespace Kistl.App.GUI
             {
                 EntityReference<Kistl.App.GUI.ControlKindClass__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.ControlKindClass__Implementation__>(
-                        "Model.FK_ViewDescriptor_isof_ControlKindClass",
+                        "Model.FK_Control_isof_Kind",
                         "Kind");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)

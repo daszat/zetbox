@@ -61,7 +61,7 @@ namespace Kistl.App.GUI
         /// if this is a container, here are the visually contained/controlled children of this Visual
         /// </summary>
     /*
-    Relation: FK_Visual_contains_Visual
+    Relation: FK_Visual_contains_Children
     A: ZeroOrMore Visual as Visual
     B: ZeroOrMore Visual as Children
     Preferred Storage: Separate
@@ -85,14 +85,14 @@ namespace Kistl.App.GUI
             }
         }
         
-        [EdmRelationshipNavigationProperty("Model", "FK_Visual_contains_Visual_Visual", "CollectionEntry")]
+        [EdmRelationshipNavigationProperty("Model", "FK_Visual_contains_Children_A", "CollectionEntry")]
         public EntityCollection<Kistl.App.GUI.Visual_contains_Visual_RelationEntry__Implementation__> Children__Implementation__
         {
             get
             {
                 var c = ((IEntityWithRelationships)(this)).RelationshipManager
                     .GetRelatedCollection<Kistl.App.GUI.Visual_contains_Visual_RelationEntry__Implementation__>(
-                        "Model.FK_Visual_contains_Visual_Visual",
+                        "Model.FK_Visual_contains_Children_A",
                         "CollectionEntry");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)
@@ -109,7 +109,7 @@ namespace Kistl.App.GUI
         /// The context menu for this Visual
         /// </summary>
     /*
-    Relation: FK_Visual_hasContextMenu_Visual
+    Relation: FK_Visual_hasContextMenu_ContextMenu
     A: ZeroOrMore Visual as Visual
     B: ZeroOrMore Visual as ContextMenu
     Preferred Storage: Separate
@@ -133,14 +133,14 @@ namespace Kistl.App.GUI
             }
         }
         
-        [EdmRelationshipNavigationProperty("Model", "FK_Visual_hasContextMenu_Visual_Visual", "CollectionEntry")]
+        [EdmRelationshipNavigationProperty("Model", "FK_Visual_hasContextMenu_ContextMenu_A", "CollectionEntry")]
         public EntityCollection<Kistl.App.GUI.Visual_hasContextMenu_Visual_RelationEntry__Implementation__> ContextMenu__Implementation__
         {
             get
             {
                 var c = ((IEntityWithRelationships)(this)).RelationshipManager
                     .GetRelatedCollection<Kistl.App.GUI.Visual_hasContextMenu_Visual_RelationEntry__Implementation__>(
-                        "Model.FK_Visual_hasContextMenu_Visual_Visual",
+                        "Model.FK_Visual_hasContextMenu_ContextMenu_A",
                         "CollectionEntry");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)

@@ -163,7 +163,7 @@ namespace Kistl.App.Projekte
         /// Projekte des Mitarbeiters für die er Verantwortlich ist
         /// </summary>
     /*
-    Relation: FK_Projekt_haben_Mitarbeiter
+    Relation: FK_Projekte_haben_Mitarbeiter
     A: ZeroOrMore Projekt as Projekte
     B: ZeroOrMore Mitarbeiter as Mitarbeiter
     Preferred Storage: Separate
@@ -187,14 +187,14 @@ namespace Kistl.App.Projekte
             }
         }
         
-        [EdmRelationshipNavigationProperty("Model", "FK_Projekt_haben_Mitarbeiter_Mitarbeiter", "CollectionEntry")]
+        [EdmRelationshipNavigationProperty("Model", "FK_Projekte_haben_Mitarbeiter_B", "CollectionEntry")]
         public EntityCollection<Kistl.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntry__Implementation__> Projekte__Implementation__
         {
             get
             {
                 var c = ((IEntityWithRelationships)(this)).RelationshipManager
                     .GetRelatedCollection<Kistl.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntry__Implementation__>(
-                        "Model.FK_Projekt_haben_Mitarbeiter_Mitarbeiter",
+                        "Model.FK_Projekte_haben_Mitarbeiter_B",
                         "CollectionEntry");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)

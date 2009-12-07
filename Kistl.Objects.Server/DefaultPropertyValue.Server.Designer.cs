@@ -123,7 +123,7 @@ namespace Kistl.App.Base
         /// Property where the default value is set
         /// </summary>
     /*
-    Relation: FK_Property_has_DefaultPropertyValue
+    Relation: FK_Property_has_DefaultValue
     A: One Property as Property
     B: ZeroOrOne DefaultPropertyValue as DefaultValue
     Preferred Storage: MergeIntoB
@@ -151,14 +151,14 @@ namespace Kistl.App.Base
         private int? _fk_Property;
         private Guid? _fk_guid_Property = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_Property_has_DefaultPropertyValue", "Property")]
+        [EdmRelationshipNavigationProperty("Model", "FK_Property_has_DefaultValue", "Property")]
         public Kistl.App.Base.Property__Implementation__ Property__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Base.Property__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Property__Implementation__>(
-                        "Model.FK_Property_has_DefaultPropertyValue",
+                        "Model.FK_Property_has_DefaultValue",
                         "Property");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -179,7 +179,7 @@ namespace Kistl.App.Base
             {
                 EntityReference<Kistl.App.Base.Property__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Property__Implementation__>(
-                        "Model.FK_Property_has_DefaultPropertyValue",
+                        "Model.FK_Property_has_DefaultValue",
                         "Property");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)

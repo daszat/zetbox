@@ -123,7 +123,7 @@ namespace Kistl.App.Base
         /// The Type implementing this invocation
         /// </summary>
     /*
-    Relation: FK_PropertyInvocation_has_TypeRef
+    Relation: FK_PropertyInvocation_has_Implementor
     A: ZeroOrMore PropertyInvocation as PropertyInvocation
     B: One TypeRef as Implementor
     Preferred Storage: MergeIntoA
@@ -151,14 +151,14 @@ namespace Kistl.App.Base
         private int? _fk_Implementor;
         private Guid? _fk_guid_Implementor = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_PropertyInvocation_has_TypeRef", "Implementor")]
+        [EdmRelationshipNavigationProperty("Model", "FK_PropertyInvocation_has_Implementor", "Implementor")]
         public Kistl.App.Base.TypeRef__Implementation__ Implementor__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Base.TypeRef__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.TypeRef__Implementation__>(
-                        "Model.FK_PropertyInvocation_has_TypeRef",
+                        "Model.FK_PropertyInvocation_has_Implementor",
                         "Implementor");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -179,7 +179,7 @@ namespace Kistl.App.Base
             {
                 EntityReference<Kistl.App.Base.TypeRef__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.TypeRef__Implementation__>(
-                        "Model.FK_PropertyInvocation_has_TypeRef",
+                        "Model.FK_PropertyInvocation_has_Implementor",
                         "Implementor");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -280,7 +280,7 @@ namespace Kistl.App.Base
         /// 
         /// </summary>
     /*
-    Relation: FK_Property_has_PropertyInvocation
+    Relation: FK_InvokeOnProperty_has_Invocations
     A: One Property as InvokeOnProperty
     B: ZeroOrMore PropertyInvocation as Invocations
     Preferred Storage: MergeIntoB
@@ -308,14 +308,14 @@ namespace Kistl.App.Base
         private int? _fk_InvokeOnProperty;
         private Guid? _fk_guid_InvokeOnProperty = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_Property_has_PropertyInvocation", "InvokeOnProperty")]
+        [EdmRelationshipNavigationProperty("Model", "FK_InvokeOnProperty_has_Invocations", "InvokeOnProperty")]
         public Kistl.App.Base.Property__Implementation__ InvokeOnProperty__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Base.Property__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Property__Implementation__>(
-                        "Model.FK_Property_has_PropertyInvocation",
+                        "Model.FK_InvokeOnProperty_has_Invocations",
                         "InvokeOnProperty");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -336,7 +336,7 @@ namespace Kistl.App.Base
             {
                 EntityReference<Kistl.App.Base.Property__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Property__Implementation__>(
-                        "Model.FK_Property_has_PropertyInvocation",
+                        "Model.FK_InvokeOnProperty_has_Invocations",
                         "InvokeOnProperty");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
