@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2009-12-07T18:35:50.4414Z" xmlns="http://dasz.at/Kistl">
+<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2009-12-14T11:00:34.1356Z" xmlns="http://dasz.at/Kistl">
   <KistlBase:Module ExportGuid="ef6d5bd8-5826-4ce6-a9ca-c8438ddde773">
     <KistlBase:Description />
     <KistlBase:ModuleName>KistlBase</KistlBase:ModuleName>
@@ -1497,6 +1497,15 @@
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:IsList>false</KistlBase:IsList>
   </KistlBase:BoolProperty>
+  <KistlBase:StringProperty ExportGuid="b5fa31d8-ad30-4aeb-b5a0-8b4b117b1d29">
+    <KistlBase:CategoryTags>SuggestedRelation</KistlBase:CategoryTags>
+    <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
+    <KistlBase:ObjectClass>93241989-0bb0-435f-b6e5-06fdbbf19e5d</KistlBase:ObjectClass>
+    <KistlBase:PropertyName>ImplementorRoleName</KistlBase:PropertyName>
+    <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
+    <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
+    <KistlBase:IsList>false</KistlBase:IsList>
+  </KistlBase:StringProperty>
   <KistlBase:BoolProperty ExportGuid="52692870-0bd4-47b6-99dc-eb8bf4238f24">
     <KistlBase:CategoryTags>DataModel,Summary</KistlBase:CategoryTags>
     <KistlBase:Description>Whether or not this property placeholder is list valued</KistlBase:Description>
@@ -1507,6 +1516,15 @@
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:IsList>false</KistlBase:IsList>
   </KistlBase:BoolProperty>
+  <KistlBase:StringProperty ExportGuid="06d56d44-bc5f-428b-a6b5-4348573425f9">
+    <KistlBase:CategoryTags>SuggestedRelation</KistlBase:CategoryTags>
+    <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
+    <KistlBase:ObjectClass>93241989-0bb0-435f-b6e5-06fdbbf19e5d</KistlBase:ObjectClass>
+    <KistlBase:PropertyName>ItemRoleName</KistlBase:PropertyName>
+    <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
+    <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
+    <KistlBase:IsList>false</KistlBase:IsList>
+  </KistlBase:StringProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="41da7ae6-aff7-44cf-83be-6150bf7578fd">
     <KistlBase:CategoryTags>Summary</KistlBase:CategoryTags>
     <KistlBase:Description>The ObjectClass that is referenced by this placeholder</KistlBase:Description>
@@ -1517,6 +1535,15 @@
     <KistlBase:EagerLoading>true</KistlBase:EagerLoading>
     <KistlBase:RelationEnd>9c30930f-b7fe-4145-be09-cf5c0b0ac723</KistlBase:RelationEnd>
   </KistlBase:ObjectReferenceProperty>
+  <KistlBase:StringProperty ExportGuid="dd98c4f1-bf83-4d9a-8885-546457fc6591">
+    <KistlBase:CategoryTags>SuggestedRelation</KistlBase:CategoryTags>
+    <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
+    <KistlBase:ObjectClass>93241989-0bb0-435f-b6e5-06fdbbf19e5d</KistlBase:ObjectClass>
+    <KistlBase:PropertyName>Verb</KistlBase:PropertyName>
+    <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
+    <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
+    <KistlBase:IsList>false</KistlBase:IsList>
+  </KistlBase:StringProperty>
   <KistlBase:BoolProperty ExportGuid="373f0036-42d6-41e2-a2a4-74462537f426">
     <KistlBase:CategoryTags>Main</KistlBase:CategoryTags>
     <KistlBase:Description>Whether or not this reference should be loaded eagerly</KistlBase:Description>

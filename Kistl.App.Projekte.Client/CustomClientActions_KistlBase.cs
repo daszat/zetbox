@@ -295,7 +295,7 @@ namespace Kistl.App.Base
 
             foreach (var iface in objClass.ImplementsInterfaces)
             {
-                // TODO: implement structs and ObjectReferencePlaceholderProperties too
+                // TODO: implement structs too
                 foreach (var prop in iface.Properties)
                 {
                     if (!objClass.Properties.Select(p => p.PropertyName).Contains(prop.PropertyName))
@@ -353,7 +353,7 @@ namespace Kistl.App.Base
 
                             // Create Relation
                             var rel = ctx.Create<Relation>();
-                            rel.Verb = "has"; // ph.PropertyName; TODO: Change when case #1169 is fixed
+                            rel.Verb = ph.Verb;
                             rel.Module = objClass.Module;
                             rel.Storage = ph.IsList ? StorageType.Separate : StorageType.MergeIntoA;
 
@@ -361,11 +361,11 @@ namespace Kistl.App.Base
                             rel.A.Type = objClass;
                             rel.A.Multiplicity = Multiplicity.ZeroOrMore;
                             rel.A.HasPersistentOrder = ph.HasPersistentOrder;
-                            rel.A.RoleName = ph.PropertyName; // objClass.ClassName; TODO: Change when case #1169 is fixed
+                            rel.A.RoleName = ph.ImplementorRoleName;
 
                             rel.B.Type = ph.ReferencedObjectClass;
                             rel.B.Multiplicity = ph.IsList ?  Multiplicity.ZeroOrMore : Multiplicity.ZeroOrOne;
-                            rel.B.RoleName = ph.ReferencedObjectClass.ClassName;
+                            rel.B.RoleName = ph.ItemRoleName;
                         }
                     }
                 }

@@ -1107,11 +1107,14 @@
   </EntityType>
   <EntityType Name="ObjectReferencePlaceholderProperty" BaseType="Model.Property" >
     <Property Name="HasPersistentOrder" Type="Boolean" Nullable="false" />
+    <Property Name="ImplementorRoleName" Type="String" Nullable="true" MaxLength="4000" />
     <Property Name="IsList" Type="Boolean" Nullable="false" />
+    <Property Name="ItemRoleName" Type="String" Nullable="true" MaxLength="4000" />
     <NavigationProperty Name="ReferencedObjectClass__Implementation__"
                         Relationship="Model.FK_ObjectReferencePlaceholderProperty_ofType_ReferencedObjectClass"
                         FromRole="ObjectReferencePlaceholderProperty"
                         ToRole="ReferencedObjectClass" />
+    <Property Name="Verb" Type="String" Nullable="true" MaxLength="4000" />
   </EntityType>
   <EntityType Name="ObjectReferenceProperty" BaseType="Model.Property" >
     <Property Name="EagerLoading" Type="Boolean" Nullable="false" />

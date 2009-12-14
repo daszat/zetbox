@@ -21,6 +21,13 @@ namespace Kistl.App.Base
 			set;
 		}
         /// <summary>
+        /// 
+        /// </summary>
+		string ImplementorRoleName {
+			get;
+			set;
+		}
+        /// <summary>
         /// Whether or not this property placeholder is list valued
         /// </summary>
 		bool IsList {
@@ -28,9 +35,23 @@ namespace Kistl.App.Base
 			set;
 		}
         /// <summary>
+        /// 
+        /// </summary>
+		string ItemRoleName {
+			get;
+			set;
+		}
+        /// <summary>
         /// The ObjectClass that is referenced by this placeholder
         /// </summary>
 		Kistl.App.Base.ObjectClass ReferencedObjectClass {
+			get;
+			set;
+		}
+        /// <summary>
+        /// 
+        /// </summary>
+		string Verb {
 			get;
 			set;
 		}

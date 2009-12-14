@@ -1306,7 +1306,10 @@
     <Property Name="ID" Type="int" Nullable="false" />
     <Property Name="fk_ReferencedObjectClass" Type="int" />
     <Property Name="HasPersistentOrder" Type="bit" Nullable="false" />
+    <Property Name="ImplementorRoleName" Type="nvarchar" MaxLength="4000" Nullable="true" />
     <Property Name="IsList" Type="bit" Nullable="false" />
+    <Property Name="ItemRoleName" Type="nvarchar" MaxLength="4000" Nullable="true" />
+    <Property Name="Verb" Type="nvarchar" MaxLength="4000" Nullable="true" />
  
   </EntityType>
 	

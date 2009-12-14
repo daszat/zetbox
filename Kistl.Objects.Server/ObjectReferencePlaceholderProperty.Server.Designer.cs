@@ -84,6 +84,57 @@ namespace Kistl.App.Base
 		public event PropertyPreSetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, bool> OnHasPersistentOrder_PreSetter;
 		public event PropertyPostSetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, bool> OnHasPersistentOrder_PostSetter;
         /// <summary>
+        /// 
+        /// </summary>
+        // value type property
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingDataProperty
+        public virtual string ImplementorRoleName
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _ImplementorRoleName;
+                if (OnImplementorRoleName_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<string>(__result);
+                    OnImplementorRoleName_Getter(this, __e);
+                    __result = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_ImplementorRoleName != value)
+                {
+                    var __oldValue = _ImplementorRoleName;
+                    var __newValue = value;
+                    if(OnImplementorRoleName_PreSetter != null)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
+                        OnImplementorRoleName_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("ImplementorRoleName", __oldValue, __newValue);
+                    _ImplementorRoleName = __newValue;
+                    NotifyPropertyChanged("ImplementorRoleName", __oldValue, __newValue);
+                    if(OnImplementorRoleName_PostSetter != null)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
+                        OnImplementorRoleName_PostSetter(this, __e);
+                    }
+                }
+            }
+        }
+        private string _ImplementorRoleName;
+		public event PropertyGetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, string> OnImplementorRoleName_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, string> OnImplementorRoleName_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, string> OnImplementorRoleName_PostSetter;
+        /// <summary>
         /// Whether or not this property placeholder is list valued
         /// </summary>
         // value type property
@@ -134,6 +185,57 @@ namespace Kistl.App.Base
 		public event PropertyGetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, bool> OnIsList_Getter;
 		public event PropertyPreSetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, bool> OnIsList_PreSetter;
 		public event PropertyPostSetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, bool> OnIsList_PostSetter;
+        /// <summary>
+        /// 
+        /// </summary>
+        // value type property
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingDataProperty
+        public virtual string ItemRoleName
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _ItemRoleName;
+                if (OnItemRoleName_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<string>(__result);
+                    OnItemRoleName_Getter(this, __e);
+                    __result = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_ItemRoleName != value)
+                {
+                    var __oldValue = _ItemRoleName;
+                    var __newValue = value;
+                    if(OnItemRoleName_PreSetter != null)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
+                        OnItemRoleName_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("ItemRoleName", __oldValue, __newValue);
+                    _ItemRoleName = __newValue;
+                    NotifyPropertyChanged("ItemRoleName", __oldValue, __newValue);
+                    if(OnItemRoleName_PostSetter != null)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
+                        OnItemRoleName_PostSetter(this, __e);
+                    }
+                }
+            }
+        }
+        private string _ItemRoleName;
+		public event PropertyGetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, string> OnItemRoleName_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, string> OnItemRoleName_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, string> OnItemRoleName_PostSetter;
         /// <summary>
         /// The ObjectClass that is referenced by this placeholder
         /// </summary>
@@ -225,6 +327,57 @@ namespace Kistl.App.Base
 		public event PropertyPreSetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, Kistl.App.Base.ObjectClass> OnReferencedObjectClass_PreSetter;
 		public event PropertyPostSetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, Kistl.App.Base.ObjectClass> OnReferencedObjectClass_PostSetter;
         /// <summary>
+        /// 
+        /// </summary>
+        // value type property
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingDataProperty
+        public virtual string Verb
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _Verb;
+                if (OnVerb_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<string>(__result);
+                    OnVerb_Getter(this, __e);
+                    __result = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_Verb != value)
+                {
+                    var __oldValue = _Verb;
+                    var __newValue = value;
+                    if(OnVerb_PreSetter != null)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
+                        OnVerb_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("Verb", __oldValue, __newValue);
+                    _Verb = __newValue;
+                    NotifyPropertyChanged("Verb", __oldValue, __newValue);
+                    if(OnVerb_PostSetter != null)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
+                        OnVerb_PostSetter(this, __e);
+                    }
+                }
+            }
+        }
+        private string _Verb;
+		public event PropertyGetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, string> OnVerb_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, string> OnVerb_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, string> OnVerb_PostSetter;
+        /// <summary>
         /// Returns the resulting Type of this Property Meta Object.
         /// </summary>
 		[EventBasedMethod("OnGetPropertyType_ObjectReferencePlaceholderProperty")]
@@ -279,7 +432,10 @@ namespace Kistl.App.Base
 			var me = (ObjectReferencePlaceholderProperty)this;
 
 			me.HasPersistentOrder = other.HasPersistentOrder;
+			me.ImplementorRoleName = other.ImplementorRoleName;
 			me.IsList = other.IsList;
+			me.ItemRoleName = other.ItemRoleName;
+			me.Verb = other.Verb;
 			this._fk_ReferencedObjectClass = otherImpl._fk_ReferencedObjectClass;
 		}
 
@@ -346,6 +502,15 @@ namespace Kistl.App.Base
 					
 					return String.Join("; ", errors);
 				}
+				case "ImplementorRoleName":
+				{
+					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("b5fa31d8-ad30-4aeb-b5a0-8b4b117b1d29")).Constraints
+						.Where(c => !c.IsValid(this, this.ImplementorRoleName))
+						.Select(c => c.GetErrorText(this, this.ImplementorRoleName))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
 				case "IsList":
 				{
 					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("52692870-0bd4-47b6-99dc-eb8bf4238f24")).Constraints
@@ -355,11 +520,29 @@ namespace Kistl.App.Base
 					
 					return String.Join("; ", errors);
 				}
+				case "ItemRoleName":
+				{
+					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("06d56d44-bc5f-428b-a6b5-4348573425f9")).Constraints
+						.Where(c => !c.IsValid(this, this.ItemRoleName))
+						.Select(c => c.GetErrorText(this, this.ItemRoleName))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
 				case "ReferencedObjectClass":
 				{
 					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("41da7ae6-aff7-44cf-83be-6150bf7578fd")).Constraints
 						.Where(c => !c.IsValid(this, this.ReferencedObjectClass))
 						.Select(c => c.GetErrorText(this, this.ReferencedObjectClass))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "Verb":
+				{
+					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("dd98c4f1-bf83-4d9a-8885-546457fc6591")).Constraints
+						.Where(c => !c.IsValid(this, this.Verb))
+						.Select(c => c.GetErrorText(this, this.Verb))
 						.ToArray();
 					
 					return String.Join("; ", errors);
@@ -393,11 +576,14 @@ namespace Kistl.App.Base
             
             base.ToStream(binStream, auxObjects);
             BinarySerializer.ToStream(this._HasPersistentOrder, binStream);
+            BinarySerializer.ToStream(this._ImplementorRoleName, binStream);
             BinarySerializer.ToStream(this._IsList, binStream);
+            BinarySerializer.ToStream(this._ItemRoleName, binStream);
             BinarySerializer.ToStream(ReferencedObjectClass != null ? ReferencedObjectClass.ID : (int?)null, binStream);
 			if (auxObjects != null) {
 				auxObjects.Add(ReferencedObjectClass);
 			}
+            BinarySerializer.ToStream(this._Verb, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
@@ -405,8 +591,11 @@ namespace Kistl.App.Base
             
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._HasPersistentOrder, binStream);
+            BinarySerializer.FromStream(out this._ImplementorRoleName, binStream);
             BinarySerializer.FromStream(out this._IsList, binStream);
+            BinarySerializer.FromStream(out this._ItemRoleName, binStream);
             BinarySerializer.FromStream(out this._fk_ReferencedObjectClass, binStream);
+            BinarySerializer.FromStream(out this._Verb, binStream);
         }
 
         public override void ToStream(System.Xml.XmlWriter xml)
@@ -414,8 +603,11 @@ namespace Kistl.App.Base
             
             base.ToStream(xml);
             XmlStreamer.ToStream(this._HasPersistentOrder, xml, "HasPersistentOrder", "Kistl.App.Base");
+            XmlStreamer.ToStream(this._ImplementorRoleName, xml, "ImplementorRoleName", "Kistl.App.Base");
             XmlStreamer.ToStream(this._IsList, xml, "IsList", "Kistl.App.Base");
+            XmlStreamer.ToStream(this._ItemRoleName, xml, "ItemRoleName", "Kistl.App.Base");
             XmlStreamer.ToStream(ReferencedObjectClass != null ? ReferencedObjectClass.ID : (int?)null, xml, "ReferencedObjectClass", "Kistl.App.Base");
+            XmlStreamer.ToStream(this._Verb, xml, "Verb", "Kistl.App.Base");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
@@ -423,8 +615,11 @@ namespace Kistl.App.Base
             
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._HasPersistentOrder, xml, "HasPersistentOrder", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._ImplementorRoleName, xml, "ImplementorRoleName", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._IsList, xml, "IsList", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._ItemRoleName, xml, "ItemRoleName", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_ReferencedObjectClass, xml, "ReferencedObjectClass", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._Verb, xml, "Verb", "Kistl.App.Base");
         }
 
         public override void Export(System.Xml.XmlWriter xml, string[] modules)
@@ -434,8 +629,14 @@ namespace Kistl.App.Base
     
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._HasPersistentOrder, xml, "HasPersistentOrder", "Kistl.App.Base");
     
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._ImplementorRoleName, xml, "ImplementorRoleName", "Kistl.App.Base");
+    
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._IsList, xml, "IsList", "Kistl.App.Base");
+    
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._ItemRoleName, xml, "ItemRoleName", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(ReferencedObjectClass != null ? ReferencedObjectClass.ExportGuid : (Guid?)null, xml, "ReferencedObjectClass", "Kistl.App.Base");
+    
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._Verb, xml, "Verb", "Kistl.App.Base");
         }
 
         public override void MergeImport(System.Xml.XmlReader xml)
@@ -443,8 +644,11 @@ namespace Kistl.App.Base
             
             base.MergeImport(xml);
             XmlStreamer.FromStream(ref this._HasPersistentOrder, xml, "HasPersistentOrder", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._ImplementorRoleName, xml, "ImplementorRoleName", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._IsList, xml, "IsList", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._ItemRoleName, xml, "ItemRoleName", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_guid_ReferencedObjectClass, xml, "ReferencedObjectClass", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._Verb, xml, "Verb", "Kistl.App.Base");
         }
 
 #endregion
