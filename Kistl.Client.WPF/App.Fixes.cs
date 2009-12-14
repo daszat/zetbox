@@ -4,6 +4,7 @@
 
 namespace Kistl.Client.WPF
 {
+    using System;
     using System.Linq;
 
     using Kistl.API;
@@ -57,13 +58,32 @@ namespace Kistl.Client.WPF
             }
         }
 
+        private static void MoveClrObjectParameterFullTypeName()
+        {
+            using (Logging.Log.TraceMethodCall("FixupTypeRefParents"))
+            {
+                using (IKistlContext ctx = KistlContext.GetContext())
+                {
+                    var clrObjectParameters = ctx.GetQuery<CLRObjectParameter>();
+                    foreach (var param in clrObjectParameters)
+                    {
+                        if (param.Type == null)
+                        {
+                            param.Type = param.GuessParameterType().ToRef(ctx);
+                        }
+                    }
+                    ctx.SubmitChanges();
+                }
+            }
+        }
+
         /// <summary>
         /// Calls currently needed Database fixes
         /// </summary>
-        private void FixupDatabase()
+        internal static void FixupDatabase()
         {
-            //FixNotNullableConstraints();
-            //FixupTypeRefParents();
+            MoveClrObjectParameterFullTypeName();
+            FixupTypeRefParents();
         }
     }
 }

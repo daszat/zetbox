@@ -1259,6 +1259,23 @@
       <Condition ColumnName="fk_Assembly" IsNull="false"/>
     </AssociationSetMapping>
     <!--
+    Relation: FK_ClrObjectParameter_isOf_Type
+    A: ZeroOrMore CLRObjectParameter as ClrObjectParameter
+    B: ZeroOrOne TypeRef as Type
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_ClrObjectParameter_isOf_Type"
+                           TypeName="Model.FK_ClrObjectParameter_isOf_Type"
+                           StoreEntitySet="CLRObjectParameter" >
+      <EndProperty Name="Type">
+        <ScalarProperty Name="ID" ColumnName="fk_Type"/>
+      </EndProperty>
+      <EndProperty Name="ClrObjectParameter">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_Type" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
     Relation: FK_ConstrainedProperty_has_Constraints
     A: One Property as ConstrainedProperty
     B: ZeroOrMore Constraint as Constraints

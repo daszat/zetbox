@@ -188,6 +188,21 @@ using Kistl.DALProvider.EF;
 
 
 	/*
+    Relation: FK_ClrObjectParameter_isOf_Type
+    A: ZeroOrMore CLRObjectParameter as ClrObjectParameter
+    B: ZeroOrOne TypeRef as Type
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_ClrObjectParameter_isOf_Type",
+    "ClrObjectParameter", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.CLRObjectParameter__Implementation__),
+    "Type", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.TypeRef__Implementation__)
+    )]
+
+
+	/*
     Relation: FK_ConstrainedProperty_has_Constraints
     A: One Property as ConstrainedProperty
     B: ZeroOrMore Constraint as Constraints

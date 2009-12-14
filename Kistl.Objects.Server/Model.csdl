@@ -187,6 +187,10 @@
       <End Role="CLRObjectParameter" EntitySet="BaseParameter" />
       <End Role="Assembly" EntitySet="Assembly" />
     </AssociationSet>
+    <AssociationSet Name="FK_ClrObjectParameter_isOf_Type" Association="Model.FK_ClrObjectParameter_isOf_Type" >
+      <End Role="ClrObjectParameter" EntitySet="BaseParameter" />
+      <End Role="Type" EntitySet="TypeRef" />
+    </AssociationSet>
     <AssociationSet Name="FK_ConstrainedProperty_has_Constraints" Association="Model.FK_ConstrainedProperty_has_Constraints" >
       <End Role="ConstrainedProperty" EntitySet="Property" />
       <End Role="Constraints" EntitySet="Constraint" />
@@ -1337,6 +1341,10 @@
                         FromRole="CLRObjectParameter"
                         ToRole="Assembly" />
     <Property Name="FullTypeName" Type="String" Nullable="false" MaxLength="200" />
+    <NavigationProperty Name="Type__Implementation__"
+                        Relationship="Model.FK_ClrObjectParameter_isOf_Type"
+                        FromRole="ClrObjectParameter"
+                        ToRole="Type" />
   </EntityType>
   <EntityType Name="ConsistentNavigatorConstraint" BaseType="Model.Constraint" >
   </EntityType>
@@ -2039,6 +2047,14 @@
          Multiplicity="*" />
     <End Role="Assembly"
          Type="Model.Assembly" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_ClrObjectParameter_isOf_Type" >
+    <End Role="ClrObjectParameter"
+         Type="Model.CLRObjectParameter" 
+         Multiplicity="*" />
+    <End Role="Type"
+         Type="Model.TypeRef" 
          Multiplicity="0..1" />
   </Association>
   <Association Name="FK_ConstrainedProperty_has_Constraints" >

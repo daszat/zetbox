@@ -174,6 +174,96 @@ namespace Kistl.App.Base
 		public event PropertyPreSetterHandler<Kistl.App.Base.CLRObjectParameter, string> OnFullTypeName_PreSetter;
 		public event PropertyPostSetterHandler<Kistl.App.Base.CLRObjectParameter, string> OnFullTypeName_PostSetter;
         /// <summary>
+        /// 
+        /// </summary>
+    /*
+    Relation: FK_ClrObjectParameter_isOf_Type
+    A: ZeroOrMore CLRObjectParameter as ClrObjectParameter
+    B: ZeroOrOne TypeRef as Type
+    Preferred Storage: MergeIntoA
+    */
+        // object reference property
+   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public Kistl.App.Base.TypeRef Type
+        {
+            get
+            {
+                return Type__Implementation__;
+            }
+            set
+            {
+                // TODO: NotifyPropertyChanged()
+                // TODO: only accept EF objects from same Context
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                Type__Implementation__ = (Kistl.App.Base.TypeRef__Implementation__)value;
+            }
+        }
+        
+        private int? _fk_Type;
+        private Guid? _fk_guid_Type = null;
+        // EF sees only this property
+        [EdmRelationshipNavigationProperty("Model", "FK_ClrObjectParameter_isOf_Type", "Type")]
+        public Kistl.App.Base.TypeRef__Implementation__ Type__Implementation__
+        {
+            get
+            {
+                EntityReference<Kistl.App.Base.TypeRef__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.TypeRef__Implementation__>(
+                        "Model.FK_ClrObjectParameter_isOf_Type",
+                        "Type");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load(); 
+                    if(r.Value != null) r.Value.AttachToContext(this.Context);
+                }
+                var __value = r.Value;
+				if(OnType_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<Kistl.App.Base.TypeRef>(__value);
+					OnType_Getter(this, e);
+					__value = (Kistl.App.Base.TypeRef__Implementation__)e.Result;
+				}
+                return __value;
+            }
+            set
+            {
+                EntityReference<Kistl.App.Base.TypeRef__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.TypeRef__Implementation__>(
+                        "Model.FK_ClrObjectParameter_isOf_Type",
+                        "Type");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load(); 
+                }
+                Kistl.App.Base.TypeRef __oldValue = (Kistl.App.Base.TypeRef)r.Value;
+                Kistl.App.Base.TypeRef __newValue = (Kistl.App.Base.TypeRef)value;
+
+                if(OnType_PreSetter != null)
+                {
+					var e = new PropertyPreSetterEventArgs<Kistl.App.Base.TypeRef>(__oldValue, __newValue);
+					OnType_PreSetter(this, e);
+					__newValue = e.Result;
+                }
+                r.Value = (Kistl.App.Base.TypeRef__Implementation__)__newValue;
+                if(OnType_PostSetter != null)
+                {
+					var e = new PropertyPostSetterEventArgs<Kistl.App.Base.TypeRef>(__oldValue, __newValue);
+					OnType_PostSetter(this, e);
+                }
+                                
+            }
+        }
+        
+        
+		public event PropertyGetterHandler<Kistl.App.Base.CLRObjectParameter, Kistl.App.Base.TypeRef> OnType_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.Base.CLRObjectParameter, Kistl.App.Base.TypeRef> OnType_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.Base.CLRObjectParameter, Kistl.App.Base.TypeRef> OnType_PostSetter;
+        /// <summary>
         /// Returns the resulting Type of this Method-Parameter Meta Object.
         /// </summary>
 		[EventBasedMethod("OnGetParameterType_CLRObjectParameter")]
@@ -229,6 +319,7 @@ namespace Kistl.App.Base
 
 			me.FullTypeName = other.FullTypeName;
 			this._fk_Assembly = otherImpl._fk_Assembly;
+			this._fk_Type = otherImpl._fk_Type;
 		}
 
         // tail template
@@ -303,6 +394,15 @@ namespace Kistl.App.Base
 					
 					return String.Join("; ", errors);
 				}
+				case "Type":
+				{
+					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("137292ce-4493-451d-a7fa-1b7cc7df03dd")).Constraints
+						.Where(c => !c.IsValid(this, this.Type))
+						.Select(c => c.GetErrorText(this, this.Type))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
 				default:
 					return base.GetPropertyError(propertyName);
 			}
@@ -323,6 +423,13 @@ namespace Kistl.App.Base
 				Assembly__Implementation__ = (Kistl.App.Base.Assembly__Implementation__)Context.Find<Kistl.App.Base.Assembly>(_fk_Assembly.Value);
 			else
 				Assembly__Implementation__ = null;
+
+			if (_fk_guid_Type.HasValue)
+				Type__Implementation__ = (Kistl.App.Base.TypeRef__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.TypeRef>(_fk_guid_Type.Value);
+			else if (_fk_Type.HasValue)
+				Type__Implementation__ = (Kistl.App.Base.TypeRef__Implementation__)Context.Find<Kistl.App.Base.TypeRef>(_fk_Type.Value);
+			else
+				Type__Implementation__ = null;
 		}
 #region Serializer
 
@@ -333,6 +440,7 @@ namespace Kistl.App.Base
             base.ToStream(binStream, auxObjects);
             BinarySerializer.ToStream(Assembly != null ? Assembly.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._FullTypeName, binStream);
+            BinarySerializer.ToStream(Type != null ? Type.ID : (int?)null, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
@@ -341,6 +449,7 @@ namespace Kistl.App.Base
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._fk_Assembly, binStream);
             BinarySerializer.FromStream(out this._FullTypeName, binStream);
+            BinarySerializer.FromStream(out this._fk_Type, binStream);
         }
 
         public override void ToStream(System.Xml.XmlWriter xml)
@@ -349,6 +458,7 @@ namespace Kistl.App.Base
             base.ToStream(xml);
             XmlStreamer.ToStream(Assembly != null ? Assembly.ID : (int?)null, xml, "Assembly", "Kistl.App.Base");
             XmlStreamer.ToStream(this._FullTypeName, xml, "FullTypeName", "Kistl.App.Base");
+            XmlStreamer.ToStream(Type != null ? Type.ID : (int?)null, xml, "Type", "Kistl.App.Base");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
@@ -357,6 +467,7 @@ namespace Kistl.App.Base
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._fk_Assembly, xml, "Assembly", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._FullTypeName, xml, "FullTypeName", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._fk_Type, xml, "Type", "Kistl.App.Base");
         }
 
         public override void Export(System.Xml.XmlWriter xml, string[] modules)
@@ -366,6 +477,7 @@ namespace Kistl.App.Base
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(Assembly != null ? Assembly.ExportGuid : (Guid?)null, xml, "Assembly", "Kistl.App.Base");
     
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._FullTypeName, xml, "FullTypeName", "Kistl.App.Base");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(Type != null ? Type.ExportGuid : (Guid?)null, xml, "Type", "Kistl.App.Base");
         }
 
         public override void MergeImport(System.Xml.XmlReader xml)
@@ -374,6 +486,7 @@ namespace Kistl.App.Base
             base.MergeImport(xml);
             XmlStreamer.FromStream(ref this._fk_guid_Assembly, xml, "Assembly", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._FullTypeName, xml, "FullTypeName", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._fk_guid_Type, xml, "Type", "Kistl.App.Base");
         }
 
 #endregion
