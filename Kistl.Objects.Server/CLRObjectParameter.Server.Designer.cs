@@ -33,147 +33,6 @@ namespace Kistl.App.Base
 
 
         /// <summary>
-        /// Assembly des CLR Objektes, NULL für Default Assemblies
-        /// </summary>
-    /*
-    Relation: FK_CLRObjectParameter_has_Assembly
-    A: ZeroOrMore CLRObjectParameter as CLRObjectParameter
-    B: ZeroOrOne Assembly as Assembly
-    Preferred Storage: MergeIntoA
-    */
-        // object reference property
-   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
-        // implement the user-visible interface
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Base.Assembly Assembly
-        {
-            get
-            {
-                return Assembly__Implementation__;
-            }
-            set
-            {
-                // TODO: NotifyPropertyChanged()
-                // TODO: only accept EF objects from same Context
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                Assembly__Implementation__ = (Kistl.App.Base.Assembly__Implementation__)value;
-            }
-        }
-        
-        private int? _fk_Assembly;
-        private Guid? _fk_guid_Assembly = null;
-        // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_CLRObjectParameter_has_Assembly", "Assembly")]
-        public Kistl.App.Base.Assembly__Implementation__ Assembly__Implementation__
-        {
-            get
-            {
-                EntityReference<Kistl.App.Base.Assembly__Implementation__> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Assembly__Implementation__>(
-                        "Model.FK_CLRObjectParameter_has_Assembly",
-                        "Assembly");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !r.IsLoaded)
-                {
-                    r.Load(); 
-                    if(r.Value != null) r.Value.AttachToContext(this.Context);
-                }
-                var __value = r.Value;
-				if(OnAssembly_Getter != null)
-				{
-					var e = new PropertyGetterEventArgs<Kistl.App.Base.Assembly>(__value);
-					OnAssembly_Getter(this, e);
-					__value = (Kistl.App.Base.Assembly__Implementation__)e.Result;
-				}
-                return __value;
-            }
-            set
-            {
-                EntityReference<Kistl.App.Base.Assembly__Implementation__> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Assembly__Implementation__>(
-                        "Model.FK_CLRObjectParameter_has_Assembly",
-                        "Assembly");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !r.IsLoaded)
-                {
-                    r.Load(); 
-                }
-                Kistl.App.Base.Assembly __oldValue = (Kistl.App.Base.Assembly)r.Value;
-                Kistl.App.Base.Assembly __newValue = (Kistl.App.Base.Assembly)value;
-
-                if(OnAssembly_PreSetter != null)
-                {
-					var e = new PropertyPreSetterEventArgs<Kistl.App.Base.Assembly>(__oldValue, __newValue);
-					OnAssembly_PreSetter(this, e);
-					__newValue = e.Result;
-                }
-                r.Value = (Kistl.App.Base.Assembly__Implementation__)__newValue;
-                if(OnAssembly_PostSetter != null)
-                {
-					var e = new PropertyPostSetterEventArgs<Kistl.App.Base.Assembly>(__oldValue, __newValue);
-					OnAssembly_PostSetter(this, e);
-                }
-                                
-            }
-        }
-        
-        
-		public event PropertyGetterHandler<Kistl.App.Base.CLRObjectParameter, Kistl.App.Base.Assembly> OnAssembly_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.CLRObjectParameter, Kistl.App.Base.Assembly> OnAssembly_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.CLRObjectParameter, Kistl.App.Base.Assembly> OnAssembly_PostSetter;
-        /// <summary>
-        /// Name des CLR Datentypen
-        /// </summary>
-        // value type property
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingDataProperty
-        public virtual string FullTypeName
-        {
-            get
-            {
-                // create local variable to create single point of return
-                // for the benefit of down-stream templates
-                var __result = _FullTypeName;
-                if (OnFullTypeName_Getter != null)
-                {
-                    var __e = new PropertyGetterEventArgs<string>(__result);
-                    OnFullTypeName_Getter(this, __e);
-                    __result = __e.Result;
-                }
-                return __result;
-            }
-            set
-            {
-                if (this.IsReadonly) throw new ReadOnlyObjectException();
-                if (_FullTypeName != value)
-                {
-                    var __oldValue = _FullTypeName;
-                    var __newValue = value;
-                    if(OnFullTypeName_PreSetter != null)
-                    {
-                        var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
-                        OnFullTypeName_PreSetter(this, __e);
-                        __newValue = __e.Result;
-                    }
-                    NotifyPropertyChanging("FullTypeName", __oldValue, __newValue);
-                    _FullTypeName = __newValue;
-                    NotifyPropertyChanged("FullTypeName", __oldValue, __newValue);
-                    if(OnFullTypeName_PostSetter != null)
-                    {
-                        var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
-                        OnFullTypeName_PostSetter(this, __e);
-                    }
-                }
-            }
-        }
-        private string _FullTypeName;
-		public event PropertyGetterHandler<Kistl.App.Base.CLRObjectParameter, string> OnFullTypeName_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.CLRObjectParameter, string> OnFullTypeName_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.CLRObjectParameter, string> OnFullTypeName_PostSetter;
-        /// <summary>
         /// 
         /// </summary>
     /*
@@ -317,8 +176,6 @@ namespace Kistl.App.Base
 			var otherImpl = (CLRObjectParameter__Implementation__)obj;
 			var me = (CLRObjectParameter)this;
 
-			me.FullTypeName = other.FullTypeName;
-			this._fk_Assembly = otherImpl._fk_Assembly;
 			this._fk_Type = otherImpl._fk_Type;
 		}
 
@@ -376,24 +233,6 @@ namespace Kistl.App.Base
 		{
 			switch(propertyName)
 			{
-				case "Assembly":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("304b34ac-b581-40ce-826c-0fc0cab93bb6")).Constraints
-						.Where(c => !c.IsValid(this, this.Assembly))
-						.Select(c => c.GetErrorText(this, this.Assembly))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "FullTypeName":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("7aa087db-ef36-4a93-9bc8-e0e34c9d4d4b")).Constraints
-						.Where(c => !c.IsValid(this, this.FullTypeName))
-						.Select(c => c.GetErrorText(this, this.FullTypeName))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
 				case "Type":
 				{
 					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("137292ce-4493-451d-a7fa-1b7cc7df03dd")).Constraints
@@ -417,13 +256,6 @@ namespace Kistl.App.Base
 			
 			// fix direct object references
 
-			if (_fk_guid_Assembly.HasValue)
-				Assembly__Implementation__ = (Kistl.App.Base.Assembly__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.Assembly>(_fk_guid_Assembly.Value);
-			else if (_fk_Assembly.HasValue)
-				Assembly__Implementation__ = (Kistl.App.Base.Assembly__Implementation__)Context.Find<Kistl.App.Base.Assembly>(_fk_Assembly.Value);
-			else
-				Assembly__Implementation__ = null;
-
 			if (_fk_guid_Type.HasValue)
 				Type__Implementation__ = (Kistl.App.Base.TypeRef__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.TypeRef>(_fk_guid_Type.Value);
 			else if (_fk_Type.HasValue)
@@ -438,8 +270,6 @@ namespace Kistl.App.Base
         {
             
             base.ToStream(binStream, auxObjects);
-            BinarySerializer.ToStream(Assembly != null ? Assembly.ID : (int?)null, binStream);
-            BinarySerializer.ToStream(this._FullTypeName, binStream);
             BinarySerializer.ToStream(Type != null ? Type.ID : (int?)null, binStream);
         }
 
@@ -447,8 +277,6 @@ namespace Kistl.App.Base
         {
             
             base.FromStream(binStream);
-            BinarySerializer.FromStream(out this._fk_Assembly, binStream);
-            BinarySerializer.FromStream(out this._FullTypeName, binStream);
             BinarySerializer.FromStream(out this._fk_Type, binStream);
         }
 
@@ -456,8 +284,6 @@ namespace Kistl.App.Base
         {
             
             base.ToStream(xml);
-            XmlStreamer.ToStream(Assembly != null ? Assembly.ID : (int?)null, xml, "Assembly", "Kistl.App.Base");
-            XmlStreamer.ToStream(this._FullTypeName, xml, "FullTypeName", "Kistl.App.Base");
             XmlStreamer.ToStream(Type != null ? Type.ID : (int?)null, xml, "Type", "Kistl.App.Base");
         }
 
@@ -465,8 +291,6 @@ namespace Kistl.App.Base
         {
             
             base.FromStream(xml);
-            XmlStreamer.FromStream(ref this._fk_Assembly, xml, "Assembly", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._FullTypeName, xml, "FullTypeName", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_Type, xml, "Type", "Kistl.App.Base");
         }
 
@@ -474,9 +298,6 @@ namespace Kistl.App.Base
         {
             
             base.Export(xml, modules);
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(Assembly != null ? Assembly.ExportGuid : (Guid?)null, xml, "Assembly", "Kistl.App.Base");
-    
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._FullTypeName, xml, "FullTypeName", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(Type != null ? Type.ExportGuid : (Guid?)null, xml, "Type", "Kistl.App.Base");
         }
 
@@ -484,8 +305,6 @@ namespace Kistl.App.Base
         {
             
             base.MergeImport(xml);
-            XmlStreamer.FromStream(ref this._fk_guid_Assembly, xml, "Assembly", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._FullTypeName, xml, "FullTypeName", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_guid_Type, xml, "Type", "Kistl.App.Base");
         }
 

@@ -597,10 +597,6 @@
       <End Role="Child" EntitySet="TypeRef" />
       <End Role="Parent" EntitySet="TypeRef" />
     </AssociationSet>
-    <AssociationSet Name="FK_CLRObjectParameter_has_Assembly" Association="Model.Store.FK_CLRObjectParameter_has_Assembly" >
-      <End Role="CLRObjectParameter" EntitySet="CLRObjectParameter" />
-      <End Role="Assembly" EntitySet="Assembly" />
-    </AssociationSet>
     <AssociationSet Name="FK_ClrObjectParameter_isOf_Type" Association="Model.Store.FK_ClrObjectParameter_isOf_Type" >
       <End Role="ClrObjectParameter" EntitySet="CLRObjectParameter" />
       <End Role="Type" EntitySet="TypeRef" />
@@ -1045,9 +1041,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" />
-    <Property Name="fk_Assembly" Type="int" />
     <Property Name="fk_Type" Type="int" />
-    <Property Name="FullTypeName" Type="nvarchar" MaxLength="200" Nullable="false" />
  
   </EntityType>
 	
@@ -2435,21 +2429,6 @@
       </Principal>
       <Dependent Role="Child">
         <PropertyRef Name="fk_Parent" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-
-  <Association Name="FK_CLRObjectParameter_has_Assembly">
-    <End Role="Assembly" Type="Model.Store.Assembly" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
-    <End Role="CLRObjectParameter" Type="Model.Store.CLRObjectParameter" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Assembly">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="CLRObjectParameter">
-        <PropertyRef Name="fk_Assembly" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

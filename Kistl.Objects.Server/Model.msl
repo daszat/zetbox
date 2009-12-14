@@ -63,7 +63,6 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.CLRObjectParameter)">
 	    <MappingFragment StoreEntitySet="CLRObjectParameter">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
-<ScalarProperty Name="FullTypeName" ColumnName="FullTypeName" />
 	    </MappingFragment>
       </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Model.DateTimeParameter)">
@@ -1240,23 +1239,6 @@
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="fk_Parent" IsNull="false"/>
-    </AssociationSetMapping>
-    <!--
-    Relation: FK_CLRObjectParameter_has_Assembly
-    A: ZeroOrMore CLRObjectParameter as CLRObjectParameter
-    B: ZeroOrOne Assembly as Assembly
-    Preferred Storage: MergeIntoA
-    -->
-    <AssociationSetMapping Name="FK_CLRObjectParameter_has_Assembly"
-                           TypeName="Model.FK_CLRObjectParameter_has_Assembly"
-                           StoreEntitySet="CLRObjectParameter" >
-      <EndProperty Name="Assembly">
-        <ScalarProperty Name="ID" ColumnName="fk_Assembly"/>
-      </EndProperty>
-      <EndProperty Name="CLRObjectParameter">
-        <ScalarProperty Name="ID" ColumnName="ID"/>
-      </EndProperty>
-      <Condition ColumnName="fk_Assembly" IsNull="false"/>
     </AssociationSetMapping>
     <!--
     Relation: FK_ClrObjectParameter_isOf_Type

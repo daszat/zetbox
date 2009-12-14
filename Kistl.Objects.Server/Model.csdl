@@ -183,10 +183,6 @@
       <End Role="Child" EntitySet="TypeRef" />
       <End Role="Parent" EntitySet="TypeRef" />
     </AssociationSet>
-    <AssociationSet Name="FK_CLRObjectParameter_has_Assembly" Association="Model.FK_CLRObjectParameter_has_Assembly" >
-      <End Role="CLRObjectParameter" EntitySet="BaseParameter" />
-      <End Role="Assembly" EntitySet="Assembly" />
-    </AssociationSet>
     <AssociationSet Name="FK_ClrObjectParameter_isOf_Type" Association="Model.FK_ClrObjectParameter_isOf_Type" >
       <End Role="ClrObjectParameter" EntitySet="BaseParameter" />
       <End Role="Type" EntitySet="TypeRef" />
@@ -1336,11 +1332,6 @@
   <EntityType Name="CheckboxKind" BaseType="Model.ControlKind" >
   </EntityType>
   <EntityType Name="CLRObjectParameter" BaseType="Model.BaseParameter" >
-    <NavigationProperty Name="Assembly__Implementation__"
-                        Relationship="Model.FK_CLRObjectParameter_has_Assembly"
-                        FromRole="CLRObjectParameter"
-                        ToRole="Assembly" />
-    <Property Name="FullTypeName" Type="String" Nullable="false" MaxLength="200" />
     <NavigationProperty Name="Type__Implementation__"
                         Relationship="Model.FK_ClrObjectParameter_isOf_Type"
                         FromRole="ClrObjectParameter"
@@ -2039,14 +2030,6 @@
          Multiplicity="*" />
     <End Role="Parent"
          Type="Model.TypeRef" 
-         Multiplicity="0..1" />
-  </Association>
-  <Association Name="FK_CLRObjectParameter_has_Assembly" >
-    <End Role="CLRObjectParameter"
-         Type="Model.CLRObjectParameter" 
-         Multiplicity="*" />
-    <End Role="Assembly"
-         Type="Model.Assembly" 
          Multiplicity="0..1" />
   </Association>
   <Association Name="FK_ClrObjectParameter_isOf_Type" >

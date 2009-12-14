@@ -173,21 +173,6 @@ using Kistl.DALProvider.EF;
 
 
 	/*
-    Relation: FK_CLRObjectParameter_has_Assembly
-    A: ZeroOrMore CLRObjectParameter as CLRObjectParameter
-    B: ZeroOrOne Assembly as Assembly
-    Preferred Storage: MergeIntoA
-	*/
-
-// basic association
-[assembly: EdmRelationship(
-    "Model", "FK_CLRObjectParameter_has_Assembly",
-    "CLRObjectParameter", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.CLRObjectParameter__Implementation__),
-    "Assembly", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Assembly__Implementation__)
-    )]
-
-
-	/*
     Relation: FK_ClrObjectParameter_isOf_Type
     A: ZeroOrMore CLRObjectParameter as ClrObjectParameter
     B: ZeroOrOne TypeRef as Type
