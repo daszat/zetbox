@@ -281,6 +281,36 @@ using Kistl.DALProvider.EF;
 
 
 	/*
+    Relation: FK_Kunde_was_ChangedBy
+    A: ZeroOrMore Kunde as Kunde
+    B: ZeroOrOne Identity as ChangedBy
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_Kunde_was_ChangedBy",
+    "Kunde", RelationshipMultiplicity.Many, typeof(Kistl.App.Projekte.Kunde__Implementation__),
+    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Identity__Implementation__)
+    )]
+
+
+	/*
+    Relation: FK_Kunde_was_CreatedBy
+    A: ZeroOrMore Kunde as Kunde
+    B: ZeroOrOne Identity as CreatedBy
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_Kunde_was_CreatedBy",
+    "Kunde", RelationshipMultiplicity.Many, typeof(Kistl.App.Projekte.Kunde__Implementation__),
+    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Identity__Implementation__)
+    )]
+
+
+	/*
     Relation: FK_Method_has_MethodInvokations
     A: One Method as Method
     B: ZeroOrMore MethodInvocation as MethodInvokations

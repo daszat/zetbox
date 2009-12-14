@@ -21,7 +21,7 @@ namespace Kistl.App.Base
 			set;
 		}
         /// <summary>
-        /// 
+        /// Suggested implementors role name. If empty, class name will be used
         /// </summary>
 		string ImplementorRoleName {
 			get;
@@ -35,7 +35,7 @@ namespace Kistl.App.Base
 			set;
 		}
         /// <summary>
-        /// 
+        /// Suggested role name for the referenced item
         /// </summary>
 		string ItemRoleName {
 			get;
@@ -49,7 +49,7 @@ namespace Kistl.App.Base
 			set;
 		}
         /// <summary>
-        /// 
+        /// Suggested verb for the new relation
         /// </summary>
 		string Verb {
 			get;

@@ -621,6 +621,14 @@
       <End Role="InvokeOnProperty" EntitySet="Property" />
       <End Role="Invocations" EntitySet="PropertyInvocation" />
     </AssociationSet>
+    <AssociationSet Name="FK_Kunde_was_ChangedBy" Association="Model.Store.FK_Kunde_was_ChangedBy" >
+      <End Role="Kunde" EntitySet="Kunde" />
+      <End Role="ChangedBy" EntitySet="Identity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Kunde_was_CreatedBy" Association="Model.Store.FK_Kunde_was_CreatedBy" >
+      <End Role="Kunde" EntitySet="Kunde" />
+      <End Role="CreatedBy" EntitySet="Identity" />
+    </AssociationSet>
     <AssociationSet Name="FK_Method_has_MethodInvokations" Association="Model.Store.FK_Method_has_MethodInvokations" >
       <End Role="Method" EntitySet="Method" />
       <End Role="MethodInvokations" EntitySet="MethodInvocation" />
@@ -1155,7 +1163,11 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_ChangedBy" Type="int" />
+    <Property Name="fk_CreatedBy" Type="int" />
     <Property Name="Adresse" Type="nvarchar" MaxLength="200" Nullable="true" />
+    <Property Name="ChangedOn" Type="datetime" Nullable="true" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="true" />
     <Property Name="Kundenname" Type="nvarchar" MaxLength="200" Nullable="false" />
     <Property Name="Land" Type="nvarchar" MaxLength="50" Nullable="true" />
     <Property Name="Ort" Type="nvarchar" MaxLength="100" Nullable="true" />
@@ -2304,6 +2316,36 @@
       </Principal>
       <Dependent Role="Invocations">
         <PropertyRef Name="fk_InvokeOnProperty" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_Kunde_was_ChangedBy">
+    <End Role="ChangedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
+    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
+    <End Role="Kunde" Type="Model.Store.Kunde" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ChangedBy">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Kunde">
+        <PropertyRef Name="fk_ChangedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_Kunde_was_CreatedBy">
+    <End Role="CreatedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
+    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
+    <End Role="Kunde" Type="Model.Store.Kunde" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CreatedBy">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Kunde">
+        <PropertyRef Name="fk_CreatedBy" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

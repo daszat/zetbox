@@ -353,7 +353,7 @@ namespace Kistl.App.Base
 
                             // Create Relation
                             var rel = ctx.Create<Relation>();
-                            rel.Verb = ph.Verb;
+                            rel.Verb = string.IsNullOrEmpty(ph.Verb) ? "has" : ph.Verb;
                             rel.Module = objClass.Module;
                             rel.Storage = ph.IsList ? StorageType.Separate : StorageType.MergeIntoA;
 
@@ -361,11 +361,11 @@ namespace Kistl.App.Base
                             rel.A.Type = objClass;
                             rel.A.Multiplicity = Multiplicity.ZeroOrMore;
                             rel.A.HasPersistentOrder = ph.HasPersistentOrder;
-                            rel.A.RoleName = ph.ImplementorRoleName;
+                            rel.A.RoleName = string.IsNullOrEmpty(ph.ImplementorRoleName) ? objClass.ClassName : ph.ImplementorRoleName;
 
                             rel.B.Type = ph.ReferencedObjectClass;
                             rel.B.Multiplicity = ph.IsList ?  Multiplicity.ZeroOrMore : Multiplicity.ZeroOrOne;
-                            rel.B.RoleName = ph.ItemRoleName;
+                            rel.B.RoleName = string.IsNullOrEmpty(ph.ItemRoleName) ? ph.ReferencedObjectClass.ClassName : ph.ItemRoleName;
                         }
                     }
                 }

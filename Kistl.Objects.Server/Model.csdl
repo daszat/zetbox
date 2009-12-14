@@ -207,6 +207,14 @@
       <End Role="InvokeOnProperty" EntitySet="Property" />
       <End Role="Invocations" EntitySet="PropertyInvocation" />
     </AssociationSet>
+    <AssociationSet Name="FK_Kunde_was_ChangedBy" Association="Model.FK_Kunde_was_ChangedBy" >
+      <End Role="Kunde" EntitySet="Kunde" />
+      <End Role="ChangedBy" EntitySet="Identity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Kunde_was_CreatedBy" Association="Model.FK_Kunde_was_CreatedBy" >
+      <End Role="Kunde" EntitySet="Kunde" />
+      <End Role="CreatedBy" EntitySet="Identity" />
+    </AssociationSet>
     <AssociationSet Name="FK_Method_has_MethodInvokations" Association="Model.FK_Method_has_MethodInvokations" >
       <End Role="Method" EntitySet="Method" />
       <End Role="MethodInvokations" EntitySet="MethodInvocation" />
@@ -558,6 +566,16 @@
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
     <Property Name="Adresse" Type="String" Nullable="true" MaxLength="200" />
+    <NavigationProperty Name="ChangedBy__Implementation__"
+                        Relationship="Model.FK_Kunde_was_ChangedBy"
+                        FromRole="Kunde"
+                        ToRole="ChangedBy" />
+    <Property Name="ChangedOn" Type="DateTime" Nullable="true" />
+    <NavigationProperty Name="CreatedBy__Implementation__"
+                        Relationship="Model.FK_Kunde_was_CreatedBy"
+                        FromRole="Kunde"
+                        ToRole="CreatedBy" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="true" />
     <NavigationProperty Name="EMails__Implementation__"
                         Relationship="Model.FK_Kunde_value_EMails"
                         FromRole="Kunde"
@@ -1756,6 +1774,22 @@
     <End Role="Invocations"
          Type="Model.PropertyInvocation" 
          Multiplicity="*" />
+  </Association>
+  <Association Name="FK_Kunde_was_ChangedBy" >
+    <End Role="Kunde"
+         Type="Model.Kunde" 
+         Multiplicity="*" />
+    <End Role="ChangedBy"
+         Type="Model.Identity" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_Kunde_was_CreatedBy" >
+    <End Role="Kunde"
+         Type="Model.Kunde" 
+         Multiplicity="*" />
+    <End Role="CreatedBy"
+         Type="Model.Identity" 
+         Multiplicity="0..1" />
   </Association>
   <Association Name="FK_Method_has_MethodInvokations" >
     <End Role="Method"

@@ -84,7 +84,7 @@ namespace Kistl.App.Base
 		public event PropertyPreSetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, bool> OnHasPersistentOrder_PreSetter;
 		public event PropertyPostSetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, bool> OnHasPersistentOrder_PostSetter;
         /// <summary>
-        /// 
+        /// Suggested implementors role name. If empty, class name will be used
         /// </summary>
         // value type property
         [XmlIgnore()]
@@ -186,7 +186,7 @@ namespace Kistl.App.Base
 		public event PropertyPreSetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, bool> OnIsList_PreSetter;
 		public event PropertyPostSetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, bool> OnIsList_PostSetter;
         /// <summary>
-        /// 
+        /// Suggested role name for the referenced item
         /// </summary>
         // value type property
         [XmlIgnore()]
@@ -327,7 +327,7 @@ namespace Kistl.App.Base
 		public event PropertyPreSetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, Kistl.App.Base.ObjectClass> OnReferencedObjectClass_PreSetter;
 		public event PropertyPostSetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, Kistl.App.Base.ObjectClass> OnReferencedObjectClass_PostSetter;
         /// <summary>
-        /// 
+        /// Suggested verb for the new relation
         /// </summary>
         // value type property
         [XmlIgnore()]
