@@ -19,6 +19,8 @@ namespace Kistl.Client.WPF
             //var debugger = AppContext.Factory.CreateSpecificModel<KistlDebuggerAsModel>(KistlContext.GetContext());
             //AppContext.Factory.ShowModel(debugger, true);
 
+            App.FixupDatabase();
+
             PresentableModel initialWorkspace;
             if (_timeRecorder)
             {
