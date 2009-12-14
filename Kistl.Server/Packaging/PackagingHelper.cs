@@ -18,29 +18,29 @@ namespace Kistl.Server.Packaging
             IList<IPersistenceObject> result = new List<IPersistenceObject>();
             int moduleID = module.ID;
 
-            AddMetaObjects(result, ctx.GetQuery<Module>().Where(i => i.ID == moduleID).OrderBy(m => m.ModuleName));
+            AddMetaObjects(result, ctx.GetQuery<Module>().Where(i => i.ID == moduleID).OrderBy(m => m.ModuleName).ThenBy(i => i.ExportGuid));
 
             AddMetaObjects(result, ctx.GetQuery<DataType>().Where(i => i.Module.ID == moduleID)
-                .OrderBy(i => i.ClassName));
+                .OrderBy(i => i.ClassName).ThenBy(i => i.ExportGuid));
             AddMetaObjects(result, ctx.GetPersistenceObjectQuery<ObjectClass_implements_Interface_RelationEntry>().Where(i => i.A.Module.ID == moduleID || i.B.Module.ID == moduleID)
-                .OrderBy(i => i.A.ClassName).ThenBy(i => i.B.ClassName));
+                .OrderBy(i => i.A.ClassName).ThenBy(i => i.B.ClassName).ThenBy(i => i.A.ExportGuid).ThenBy(i => i.B.ExportGuid));
             AddMetaObjects(result, ctx.GetQuery<Property>().Where(i => i.Module.ID == moduleID)
-                .OrderBy(i => i.ObjectClass.ClassName).ThenBy(i => i.PropertyName));
+                .OrderBy(i => i.ObjectClass.ClassName).ThenBy(i => i.PropertyName).ThenBy(i => i.ExportGuid));
             AddMetaObjects(result, ctx.GetQuery<Relation>().Where(i => i.Module.ID == moduleID)
-                .OrderBy(i => i.A.Type.ClassName).ThenBy(i => i.Verb).ThenBy(i => i.B.Type.ClassName));
+                .OrderBy(i => i.A.Type.ClassName).ThenBy(i => i.Verb).ThenBy(i => i.B.Type.ClassName).ThenBy(i => i.ExportGuid));
             AddMetaObjects(result, ctx.GetQuery<RelationEnd>().Where(i => (i.AParent != null && i.AParent.Module.ID == moduleID) || (i.BParent != null && i.BParent.Module.ID == moduleID))
                 .OrderBy(i => i.Type.ClassName).ThenBy(i => i.RoleName).ThenBy(i => i.ExportGuid));
             AddMetaObjects(result, ctx.GetQuery<EnumerationEntry>().Where(i => i.Enumeration.Module.ID == moduleID)
-                .OrderBy(i => i.Enumeration.ClassName).ThenBy(i => i.Name));
+                .OrderBy(i => i.Enumeration.ClassName).ThenBy(i => i.Name).ThenBy(i => i.ExportGuid));
 
             AddMetaObjects(result, ctx.GetQuery<Method>().Where(i => i.Module.ID == moduleID)
-                .OrderBy(i => i.ObjectClass.ClassName).ThenBy(i => i.MethodName));
+                .OrderBy(i => i.ObjectClass.ClassName).ThenBy(i => i.MethodName).ThenBy(i => i.ExportGuid));
             AddMetaObjects(result, ctx.GetQuery<BaseParameter>().Where(i => i.Method.Module.ID == moduleID)
-                .OrderBy(i => i.Method.ObjectClass.ClassName).ThenBy(i => i.Method.MethodName).ThenBy(i => i.ParameterName));
+                .OrderBy(i => i.Method.ObjectClass.ClassName).ThenBy(i => i.Method.MethodName).ThenBy(i => i.ParameterName).ThenBy(i => i.ExportGuid));
             AddMetaObjects(result, ctx.GetQuery<MethodInvocation>().Where(i => i.Module.ID == moduleID)
-                .OrderBy(i => i.InvokeOnObjectClass.ClassName).ThenBy(i => i.Method.MethodName).ThenBy(i => i.Implementor.FullName).ThenBy(i => i.MemberName));
+                .OrderBy(i => i.InvokeOnObjectClass.ClassName).ThenBy(i => i.Method.MethodName).ThenBy(i => i.Implementor.FullName).ThenBy(i => i.MemberName).ThenBy(i => i.ExportGuid));
             AddMetaObjects(result, ctx.GetQuery<PropertyInvocation>().Where(i => i.InvokeOnProperty.Module.ID == moduleID)
-                .OrderBy(i => i.InvokeOnProperty.PropertyName).ThenBy(i => i.Implementor.FullName).ThenBy(i => i.MemberName));
+                .OrderBy(i => i.InvokeOnProperty.PropertyName).ThenBy(i => i.Implementor.FullName).ThenBy(i => i.MemberName).ThenBy(i => i.ExportGuid));
 
             // TODO: Add Module to Constraint - or should that not be changable by other modules?
             AddMetaObjects(result, ctx.GetQuery<Constraint>().Where(i => i.ConstrainedProperty.Module.ID == moduleID).ToList().AsQueryable() // local sorting because of GetInterfaceType
@@ -48,17 +48,17 @@ namespace Kistl.Server.Packaging
 
             // TODO: Add Module to DefaultPropertyValue - or should that not be changable by other modules?
             AddMetaObjects(result, ctx.GetQuery<DefaultPropertyValue>().Where(i => i.Property.Module.ID == moduleID)
-                .OrderBy(i => i.Property.ObjectClass.ClassName).ThenBy(i => i.Property.PropertyName));
+                .OrderBy(i => i.Property.ObjectClass.ClassName).ThenBy(i => i.Property.PropertyName).ThenBy(i => i.ExportGuid));
 
             AddMetaObjects(result, ctx.GetQuery<Assembly>().Where(i => i.Module.ID == moduleID)
-                .OrderBy(i => i.AssemblyName));
+                .OrderBy(i => i.AssemblyName).ThenBy(i => i.ExportGuid));
             AddMetaObjects(result, ctx.GetQuery<TypeRef>().Where(i => i.Assembly.Module.ID == moduleID)
                 .OrderBy(i => i.Assembly.AssemblyName).ThenBy(i => i.FullName).ThenBy(i => i.ExportGuid));
             AddMetaObjects(result, ctx.GetPersistenceObjectQuery<TypeRef_hasGenericArguments_TypeRef_RelationEntry>().Where(i => i.A.Assembly.Module.ID == moduleID || i.B.Assembly.Module.ID == moduleID)
                 .OrderBy(i => i.A.Assembly.AssemblyName).ThenBy(i => i.B.Assembly.AssemblyName).ThenBy(i => i.A.FullName).ThenBy(i => i.B.FullName).ThenBy(i => i.A.ExportGuid).ThenBy(i => i.B.ExportGuid));
 
             AddMetaObjects(result, ctx.GetQuery<Icon>().Where(i => i.Module.ID == moduleID)
-                .OrderBy(i => i.IconFile));
+                .OrderBy(i => i.IconFile).ThenBy(i => i.ExportGuid));
             AddMetaObjects(result, ctx.GetQuery<PresentableModelDescriptor>().Where(i => i.Module.ID == moduleID)
                 .OrderBy(i => i.PresentableModelRef.Assembly.AssemblyName).ThenBy(i => i.PresentableModelRef.FullName).ThenBy(i => i.ExportGuid));
             AddMetaObjects(result, ctx.GetQuery<ViewDescriptor>().Where(i => i.Module.ID == moduleID)
@@ -71,7 +71,8 @@ namespace Kistl.Server.Packaging
                 AddMetaObjects(result, ctx.GetPersistenceObjectQuery<PresentableModelDescriptor_displayedBy_ControlKind_RelationEntry>()
                     .ToList().AsQueryable() // TODO: remove this workaround for GetType()
                     .OrderBy(i => i.A.PresentableModelRef.Assembly.AssemblyName).ThenBy(i => i.A.PresentableModelRef.FullName)
-                    .ThenBy(i => i.B.GetType().FullName));
+                    .ThenBy(i => i.B.GetType().FullName)
+                    .ThenBy(i => i.A.ExportGuid).ThenBy(i => i.B.ExportGuid));
             }
             return result;
         }
