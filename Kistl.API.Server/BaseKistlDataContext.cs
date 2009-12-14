@@ -6,7 +6,7 @@ using System.Collections;
 
 namespace Kistl.API.Server
 {
-    public abstract class BaseKistlDataContext : IKistlContext, IDisposable
+    public abstract class BaseKistlDataContext : IKistlServerContext, IDisposable
     {
         // TODO: implement proper IDisposable pattern
         public virtual void Dispose()
@@ -140,9 +140,20 @@ namespace Kistl.API.Server
         /// <summary>
         /// Submits the changes and returns the number of affected Objects. Note: only IDataObjects are counted.
         /// </summary>
-        /// <remarks>Das pass mir noch nicht - die Ableitung muss sich selbst um die Notifications kümmern.</remarks>
         /// <returns>Number of affected Objects</returns>
         public abstract int SubmitChanges();
+
+        /// <summary>
+        /// Submits the changes and returns the number of affected Objects.
+        /// This method does not fire any events or methods on added/changed objects. 
+        /// It also does not change any IChanged property.
+        /// </summary>
+        /// <remarks>
+        /// Only IDataObjects are counded.
+        /// </remarks>
+        /// <returns>Number of affected Objects</returns>
+        public abstract int SubmitRestore();
+
 
         protected virtual void NotifyChanging(IEnumerable<IDataObject> changedOrAdded)
         {
@@ -154,7 +165,7 @@ namespace Kistl.API.Server
                     var cb = (Kistl.App.Base.IChangedBy)obj;
                     if (obj.ObjectState == DataObjectState.New)
                     {
-                        // If cb.CreatedOn where null if DataObjectState is Modified we do not update CreatedBy.
+                        // If cb.CreatedOn where null when DataObjectState is Modified we do not update CreatedBy.
                         // We dont have the information who was creating this object.
                         cb.CreatedBy = this.Identity;
                         cb.CreatedOn = now;

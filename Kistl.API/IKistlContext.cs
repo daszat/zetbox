@@ -120,8 +120,11 @@ namespace Kistl.API
         IEnumerable<IPersistenceObject> AttachedObjects { get; }
 
         /// <summary>
-        /// Submits the changes and returns the number of affected Objects. Note: only IDataObjects are counded.
+        /// Submits the changes and returns the number of affected Objects.
         /// </summary>
+        /// <remarks>
+        /// Only IDataObjects are counded.
+        /// </remarks>
         /// <returns>Number of affected Objects</returns>
         int SubmitChanges();
 

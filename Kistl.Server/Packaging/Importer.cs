@@ -12,21 +12,34 @@ using Kistl.API.Utils;
 
 namespace Kistl.Server.Packaging
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class Importer
     {
+        #region Public Methods
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="filename"></param>
         public static void Deploy(string filename)
         {
-            using (IKistlContext ctx = KistlContext.GetContext())
+            using (IKistlServerContext ctx = KistlContext.GetServerContext())
             {
                 using (FileStream fs = File.OpenRead(filename))
                 {
                     Deploy(ctx, fs);
                 }
                 Logging.Log.Info("Submitting changes");
-                ctx.SubmitChanges();
+                ctx.SubmitRestore();
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ctx"></param>
+        /// <param name="s"></param>
         public static void Deploy(IKistlContext ctx, Stream s)
         {
             using (Logging.Log.TraceMethodCall())
@@ -103,19 +116,28 @@ namespace Kistl.Server.Packaging
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="filename"></param>
         public static void LoadFromXml(string filename)
         {
-            using (IKistlContext ctx = KistlContext.GetContext())
+            using (IKistlServerContext ctx = KistlContext.GetServerContext())
             {
                 using (FileStream fs = File.OpenRead(filename))
                 {
                     LoadFromXml(ctx, fs);
                 }
                 Logging.Log.Info("Submitting changes");
-                ctx.SubmitChanges();
+                ctx.SubmitRestore();
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ctx"></param>
+        /// <param name="filename"></param>
         public static void LoadFromXml(IKistlContext ctx, string filename)
         {
             using (FileStream fs = File.OpenRead(filename))
@@ -124,6 +146,11 @@ namespace Kistl.Server.Packaging
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ctx"></param>
+        /// <param name="s"></param>
         public static void LoadFromXml(IKistlContext ctx, Stream s)
         {
             using (Logging.Log.TraceMethodCall())
@@ -174,7 +201,9 @@ namespace Kistl.Server.Packaging
                 Logging.Log.Info("Import finished");
             }
         }
+        #endregion
 
+        #region Implementation
         private static void PreFetchObjects(IKistlContext ctx, Dictionary<Guid, IPersistenceObject> objects, Dictionary<Type, List<Guid>> guids)
         {
             Logging.Log.Info("Prefetching Objects");
@@ -299,7 +328,7 @@ namespace Kistl.Server.Packaging
                 return objects[exportGuid];
             }
         }
-
+        #endregion
 
     }
 }

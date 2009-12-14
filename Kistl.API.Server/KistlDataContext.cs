@@ -18,6 +18,11 @@ namespace Kistl.API.Server
         /// <returns>A new Context.</returns>
         public static IKistlContext GetContext()
         {
+            return GetServerContext();
+        }
+
+        public static IKistlServerContext GetServerContext()
+        {
             lock (typeof(KistlContext))
             {
                 if (_KistlDataContextType == null)
@@ -34,7 +39,7 @@ namespace Kistl.API.Server
             {
                 throw new Configuration.ConfigurationException(string.Format("Type '{0}' is not a IKistlContext object. Check your Configuration '/Server/KistlDataContextType'.", ApplicationContext.Current.Configuration.Server.KistlDataContextType));
             }
-            return (IKistlContext)obj;
+            return (IKistlServerContext)obj;
         }
     }
 }

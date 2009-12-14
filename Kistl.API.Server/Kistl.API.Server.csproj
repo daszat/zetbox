@@ -60,6 +60,7 @@
     <Compile Include="BaseKistlDataContext.cs" />
     <Compile Include="BaseServerDataObject.cs" />
     <Compile Include="IdentityProvider.cs" />
+    <Compile Include="IKistlServerContext.cs" />
     <Compile Include="ISchemaProvider.cs" />
     <Compile Include="ServerApiContext.cs" />
     <Compile Include="KistlDataContext.cs" />

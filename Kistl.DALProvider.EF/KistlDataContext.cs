@@ -267,7 +267,58 @@ namespace Kistl.DALProvider.EF
         /// <returns>Number of affected Objects</returns>
         public override int SubmitChanges()
         {
+            DebugTraceChangedObjects();
 
+            var notifySaveList = _ctx.ObjectStateManager
+                .GetObjectStateEntries(EntityState.Added | EntityState.Modified)
+                .Select(e => e.Entity)
+                .OfType<IDataObject>()
+                .ToList();
+
+            NotifyChanging(notifySaveList);
+
+            int result = 0;
+            try
+            {
+                result = _ctx.SaveChanges();
+            }
+            catch (UpdateException updex)
+            {
+                Logging.Log.Warn("Error during SubmitChanges", updex);
+                throw updex.InnerException;
+            }
+
+            NotifyChanged(notifySaveList); 
+
+            return result;
+        }
+
+        /// <summary>
+        /// Submits the changes and returns the number of affected Objects.
+        /// This method does not fire any events or methods on added/changed objects. 
+        /// It also does not change any IChanged property.
+        /// </summary>
+        /// <remarks>
+        /// Only IDataObjects are counded.
+        /// </remarks>
+        /// <returns>Number of affected Objects</returns>
+        public override int SubmitRestore()
+        {
+            DebugTraceChangedObjects();
+
+            try
+            {
+                return _ctx.SaveChanges();
+            }
+            catch (UpdateException updex)
+            {
+                Logging.Log.Warn("Error during SubmitChanges", updex);
+                throw updex.InnerException;
+            }
+        }
+
+        private void DebugTraceChangedObjects()
+        {
 #if DEBUG
             if (_ctx.ObjectStateManager
                 .GetObjectStateEntries(EntityState.Added | EntityState.Modified | EntityState.Deleted)
@@ -307,30 +358,8 @@ namespace Kistl.DALProvider.EF
                 Logging.Log.Info("**** >>>> Empty Submit Changes <<<< ****");
             }
 #endif
-
-            var notifySaveList = _ctx.ObjectStateManager
-                .GetObjectStateEntries(EntityState.Added | EntityState.Modified)
-                .Select(e => e.Entity)
-                .OfType<IDataObject>()
-                .ToList();
-
-            NotifyChanging(notifySaveList);
-
-            int result = 0;
-            try
-            {
-                result = _ctx.SaveChanges();
-            }
-            catch (UpdateException updex)
-            {
-                Logging.Log.Warn("Error during SubmitChanges", updex);
-                throw updex.InnerException;
-            }
-
-            NotifyChanged(notifySaveList); 
-
-            return result;
         }
+
 
         /// <summary>
         /// Attach an IPersistenceObject. The EntityFramework guarantees the all Objects are unique. No check requiered.
