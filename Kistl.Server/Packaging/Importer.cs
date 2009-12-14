@@ -279,23 +279,17 @@ namespace Kistl.Server.Packaging
         {
             if (!objects.ContainsKey(exportGuid))
             {
-                IPersistenceObject obj;
-                if (typeof(IDataObject).IsAssignableFrom(ifType.Type))
+                if (!typeof(IDataObject).IsAssignableFrom(ifType.Type) && 
+                    !typeof(IRelationCollectionEntry).IsAssignableFrom(ifType.Type))
                 {
-                    // TODO: Replace this with Activator.CreateInstance(GetSystemType().ToImplementationType()); like on SerializableType
-                    // Case #1196
-                    obj = ctx.Create(ifType);
+                    throw new NotSupportedException("Interfacetype " + ifType + " is not supported");
                 }
-                else if (typeof(IRelationCollectionEntry).IsAssignableFrom(ifType.Type))
+                IPersistenceObject obj = (IPersistenceObject)Activator.CreateInstance(ifType.ToImplementationType().Type);
+                if (obj == null)
                 {
-                    // TODO: Replace this with Activator.CreateInstance(GetSystemType().ToImplementationType()); like on SerializableType
-                    // Case #1196
-                    obj = ctx.CreateRelationCollectionEntry(ifType);
+                    throw new InvalidOperationException("Unable to create object of type " + ifType.ToImplementationType().Type);
                 }
-                else
-                {
-                    throw new NotSupportedException("Interfacetype " + ifType.Type.FullName + " is not supported");
-                }
+                ctx.Attach(obj);
                 objects[exportGuid] = obj;
                 ((Kistl.App.Base.IExportable)obj).ExportGuid = exportGuid;
                 return obj;
