@@ -139,6 +139,14 @@
     </AssociationSet>
 
     <!-- AssociationSets for all object-object relations without CollectionEntrys -->
+    <AssociationSet Name="FK_Assembly_was_ChangedBy" Association="Model.FK_Assembly_was_ChangedBy" >
+      <End Role="Assembly" EntitySet="Assembly" />
+      <End Role="ChangedBy" EntitySet="Identity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Assembly_was_CreatedBy" Association="Model.FK_Assembly_was_CreatedBy" >
+      <End Role="Assembly" EntitySet="Assembly" />
+      <End Role="CreatedBy" EntitySet="Identity" />
+    </AssociationSet>
     <AssociationSet Name="FK_Auftrag_ChangedBy_ChangedBy" Association="Model.FK_Auftrag_ChangedBy_ChangedBy" >
       <End Role="Auftrag" EntitySet="Auftrag" />
       <End Role="ChangedBy" EntitySet="Identity" />
@@ -159,6 +167,14 @@
       <End Role="BaseObjectClass" EntitySet="DataType" />
       <End Role="SubClasses" EntitySet="DataType" />
     </AssociationSet>
+    <AssociationSet Name="FK_BaseParameter_was_ChangedBy" Association="Model.FK_BaseParameter_was_ChangedBy" >
+      <End Role="BaseParameter" EntitySet="BaseParameter" />
+      <End Role="ChangedBy" EntitySet="Identity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BaseParameter_was_CreatedBy" Association="Model.FK_BaseParameter_was_CreatedBy" >
+      <End Role="BaseParameter" EntitySet="BaseParameter" />
+      <End Role="CreatedBy" EntitySet="Identity" />
+    </AssociationSet>
     <AssociationSet Name="FK_BaseProperty_has_Module" Association="Model.FK_BaseProperty_has_Module" >
       <End Role="BaseProperty" EntitySet="Property" />
       <End Role="Module" EntitySet="Module" />
@@ -175,6 +191,14 @@
       <End Role="ConstrainedProperty" EntitySet="Property" />
       <End Role="Constraints" EntitySet="Constraint" />
     </AssociationSet>
+    <AssociationSet Name="FK_Constraint_was_ChangedBy" Association="Model.FK_Constraint_was_ChangedBy" >
+      <End Role="Constraint" EntitySet="Constraint" />
+      <End Role="ChangedBy" EntitySet="Identity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Constraint_was_CreatedBy" Association="Model.FK_Constraint_was_CreatedBy" >
+      <End Role="Constraint" EntitySet="Constraint" />
+      <End Role="CreatedBy" EntitySet="Identity" />
+    </AssociationSet>
     <AssociationSet Name="FK_Control_isof_Kind" Association="Model.FK_Control_isof_Kind" >
       <End Role="Control" EntitySet="ViewDescriptor" />
       <End Role="Kind" EntitySet="DataType" />
@@ -183,6 +207,22 @@
       <End Role="DataType" EntitySet="DataType" />
       <End Role="DefaultIcon" EntitySet="Icon" />
     </AssociationSet>
+    <AssociationSet Name="FK_DataType_was_ChangedBy" Association="Model.FK_DataType_was_ChangedBy" >
+      <End Role="DataType" EntitySet="DataType" />
+      <End Role="ChangedBy" EntitySet="Identity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DataType_was_CreatedBy" Association="Model.FK_DataType_was_CreatedBy" >
+      <End Role="DataType" EntitySet="DataType" />
+      <End Role="CreatedBy" EntitySet="Identity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DefaultPropertyValue_was_ChangedBy" Association="Model.FK_DefaultPropertyValue_was_ChangedBy" >
+      <End Role="DefaultPropertyValue" EntitySet="DefaultPropertyValue" />
+      <End Role="ChangedBy" EntitySet="Identity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DefaultPropertyValue_was_CreatedBy" Association="Model.FK_DefaultPropertyValue_was_CreatedBy" >
+      <End Role="DefaultPropertyValue" EntitySet="DefaultPropertyValue" />
+      <End Role="CreatedBy" EntitySet="Identity" />
+    </AssociationSet>
     <AssociationSet Name="FK_Descriptor_has_PresentableModelRef" Association="Model.FK_Descriptor_has_PresentableModelRef" >
       <End Role="Descriptor" EntitySet="PresentableModelDescriptor" />
       <End Role="PresentableModelRef" EntitySet="TypeRef" />
@@ -190,6 +230,14 @@
     <AssociationSet Name="FK_Enumeration_has_EnumerationEntries" Association="Model.FK_Enumeration_has_EnumerationEntries" >
       <End Role="Enumeration" EntitySet="DataType" />
       <End Role="EnumerationEntries" EntitySet="EnumerationEntry" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EnumerationEntry_was_ChangedBy" Association="Model.FK_EnumerationEntry_was_ChangedBy" >
+      <End Role="EnumerationEntry" EntitySet="EnumerationEntry" />
+      <End Role="ChangedBy" EntitySet="Identity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EnumerationEntry_was_CreatedBy" Association="Model.FK_EnumerationEntry_was_CreatedBy" >
+      <End Role="EnumerationEntry" EntitySet="EnumerationEntry" />
+      <End Role="CreatedBy" EntitySet="Identity" />
     </AssociationSet>
     <AssociationSet Name="FK_EnumerationProperty_has_Enumeration" Association="Model.FK_EnumerationProperty_has_Enumeration" >
       <End Role="EnumerationProperty" EntitySet="Property" />
@@ -227,6 +275,14 @@
       <End Role="Method" EntitySet="Method" />
       <End Role="Parameter" EntitySet="BaseParameter" />
     </AssociationSet>
+    <AssociationSet Name="FK_Method_was_ChangedBy" Association="Model.FK_Method_was_ChangedBy" >
+      <End Role="Method" EntitySet="Method" />
+      <End Role="ChangedBy" EntitySet="Identity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Method_was_CreatedBy" Association="Model.FK_Method_was_CreatedBy" >
+      <End Role="Method" EntitySet="Method" />
+      <End Role="CreatedBy" EntitySet="Identity" />
+    </AssociationSet>
     <AssociationSet Name="FK_MethodInvocation_has_Implementor" Association="Model.FK_MethodInvocation_has_Implementor" >
       <End Role="MethodInvocation" EntitySet="MethodInvocation" />
       <End Role="Implementor" EntitySet="TypeRef" />
@@ -234,6 +290,22 @@
     <AssociationSet Name="FK_MethodInvocation_has_Module" Association="Model.FK_MethodInvocation_has_Module" >
       <End Role="MethodInvocation" EntitySet="MethodInvocation" />
       <End Role="Module" EntitySet="Module" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MethodInvocation_was_ChangedBy" Association="Model.FK_MethodInvocation_was_ChangedBy" >
+      <End Role="MethodInvocation" EntitySet="MethodInvocation" />
+      <End Role="ChangedBy" EntitySet="Identity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MethodInvocation_was_CreatedBy" Association="Model.FK_MethodInvocation_was_CreatedBy" >
+      <End Role="MethodInvocation" EntitySet="MethodInvocation" />
+      <End Role="CreatedBy" EntitySet="Identity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Mitarbeiter_was_ChangedBy" Association="Model.FK_Mitarbeiter_was_ChangedBy" >
+      <End Role="Mitarbeiter" EntitySet="Mitarbeiter" />
+      <End Role="ChangedBy" EntitySet="Identity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Mitarbeiter_was_CreatedBy" Association="Model.FK_Mitarbeiter_was_CreatedBy" >
+      <End Role="Mitarbeiter" EntitySet="Mitarbeiter" />
+      <End Role="CreatedBy" EntitySet="Identity" />
     </AssociationSet>
     <AssociationSet Name="FK_Module_has_Assemblies" Association="Model.FK_Module_has_Assemblies" >
       <End Role="Module" EntitySet="Module" />
@@ -246,6 +318,14 @@
     <AssociationSet Name="FK_Module_has_Relation" Association="Model.FK_Module_has_Relation" >
       <End Role="Module" EntitySet="Module" />
       <End Role="Relation" EntitySet="Relation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Module_was_ChangedBy" Association="Model.FK_Module_was_ChangedBy" >
+      <End Role="Module" EntitySet="Module" />
+      <End Role="ChangedBy" EntitySet="Identity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Module_was_CreatedBy" Association="Model.FK_Module_was_CreatedBy" >
+      <End Role="Module" EntitySet="Module" />
+      <End Role="CreatedBy" EntitySet="Identity" />
     </AssociationSet>
     <AssociationSet Name="FK_MuhBlah_List_Role_hasOther_TestCustomObjects_Role" Association="Model.FK_MuhBlah_List_Role_hasOther_TestCustomObjects_Role" >
       <End Role="MuhBlah_List_Role" EntitySet="Muhblah" />
@@ -303,6 +383,14 @@
       <End Role="Projekt" EntitySet="Projekt" />
       <End Role="Tasks" EntitySet="Task" />
     </AssociationSet>
+    <AssociationSet Name="FK_Projekt_was_ChangedBy" Association="Model.FK_Projekt_was_ChangedBy" >
+      <End Role="Projekt" EntitySet="Projekt" />
+      <End Role="ChangedBy" EntitySet="Identity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Projekt_was_CreatedBy" Association="Model.FK_Projekt_was_CreatedBy" >
+      <End Role="Projekt" EntitySet="Projekt" />
+      <End Role="CreatedBy" EntitySet="Identity" />
+    </AssociationSet>
     <AssociationSet Name="FK_Property_has_DefaultValue" Association="Model.FK_Property_has_DefaultValue" >
       <End Role="Property" EntitySet="Property" />
       <End Role="DefaultValue" EntitySet="DefaultPropertyValue" />
@@ -311,9 +399,25 @@
       <End Role="Property" EntitySet="Property" />
       <End Role="ValueModelDescriptor" EntitySet="PresentableModelDescriptor" />
     </AssociationSet>
+    <AssociationSet Name="FK_Property_was_ChangedBy" Association="Model.FK_Property_was_ChangedBy" >
+      <End Role="Property" EntitySet="Property" />
+      <End Role="ChangedBy" EntitySet="Identity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Property_was_CreatedBy" Association="Model.FK_Property_was_CreatedBy" >
+      <End Role="Property" EntitySet="Property" />
+      <End Role="CreatedBy" EntitySet="Identity" />
+    </AssociationSet>
     <AssociationSet Name="FK_PropertyInvocation_has_Implementor" Association="Model.FK_PropertyInvocation_has_Implementor" >
       <End Role="PropertyInvocation" EntitySet="PropertyInvocation" />
       <End Role="Implementor" EntitySet="TypeRef" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PropertyInvocation_was_ChangedBy" Association="Model.FK_PropertyInvocation_was_ChangedBy" >
+      <End Role="PropertyInvocation" EntitySet="PropertyInvocation" />
+      <End Role="ChangedBy" EntitySet="Identity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PropertyInvocation_was_CreatedBy" Association="Model.FK_PropertyInvocation_was_CreatedBy" >
+      <End Role="PropertyInvocation" EntitySet="PropertyInvocation" />
+      <End Role="CreatedBy" EntitySet="Identity" />
     </AssociationSet>
     <AssociationSet Name="FK_Relation_hasA_A" Association="Model.FK_Relation_hasA_A" >
       <End Role="Relation" EntitySet="Relation" />
@@ -323,6 +427,14 @@
       <End Role="Relation" EntitySet="Relation" />
       <End Role="B" EntitySet="RelationEnd" />
     </AssociationSet>
+    <AssociationSet Name="FK_Relation_was_ChangedBy" Association="Model.FK_Relation_was_ChangedBy" >
+      <End Role="Relation" EntitySet="Relation" />
+      <End Role="ChangedBy" EntitySet="Identity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Relation_was_CreatedBy" Association="Model.FK_Relation_was_CreatedBy" >
+      <End Role="Relation" EntitySet="Relation" />
+      <End Role="CreatedBy" EntitySet="Identity" />
+    </AssociationSet>
     <AssociationSet Name="FK_RelationEnd_has_Navigator" Association="Model.FK_RelationEnd_has_Navigator" >
       <End Role="RelationEnd" EntitySet="RelationEnd" />
       <End Role="Navigator" EntitySet="Property" />
@@ -331,9 +443,25 @@
       <End Role="RelationEnd" EntitySet="RelationEnd" />
       <End Role="Type" EntitySet="DataType" />
     </AssociationSet>
+    <AssociationSet Name="FK_RelationEnd_was_ChangedBy" Association="Model.FK_RelationEnd_was_ChangedBy" >
+      <End Role="RelationEnd" EntitySet="RelationEnd" />
+      <End Role="ChangedBy" EntitySet="Identity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RelationEnd_was_CreatedBy" Association="Model.FK_RelationEnd_was_CreatedBy" >
+      <End Role="RelationEnd" EntitySet="RelationEnd" />
+      <End Role="CreatedBy" EntitySet="Identity" />
+    </AssociationSet>
     <AssociationSet Name="FK_StructProperty_has_StructDefinition" Association="Model.FK_StructProperty_has_StructDefinition" >
       <End Role="StructProperty" EntitySet="Property" />
       <End Role="StructDefinition" EntitySet="DataType" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Task_was_ChangedBy" Association="Model.FK_Task_was_ChangedBy" >
+      <End Role="Task" EntitySet="Task" />
+      <End Role="ChangedBy" EntitySet="Identity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Task_was_CreatedBy" Association="Model.FK_Task_was_CreatedBy" >
+      <End Role="Task" EntitySet="Task" />
+      <End Role="CreatedBy" EntitySet="Identity" />
     </AssociationSet>
     <AssociationSet Name="FK_Template_has_DisplayedTypeAssembly" Association="Model.FK_Template_has_DisplayedTypeAssembly" >
       <End Role="Template" EntitySet="Template" />
@@ -350,6 +478,14 @@
     <AssociationSet Name="FK_TypeRef_has_Assembly" Association="Model.FK_TypeRef_has_Assembly" >
       <End Role="TypeRef" EntitySet="TypeRef" />
       <End Role="Assembly" EntitySet="Assembly" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TypeRef_was_ChangedBy" Association="Model.FK_TypeRef_was_ChangedBy" >
+      <End Role="TypeRef" EntitySet="TypeRef" />
+      <End Role="ChangedBy" EntitySet="Identity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TypeRef_was_CreatedBy" Association="Model.FK_TypeRef_was_CreatedBy" >
+      <End Role="TypeRef" EntitySet="TypeRef" />
+      <End Role="CreatedBy" EntitySet="Identity" />
     </AssociationSet>
     <AssociationSet Name="FK_View_has_ControlRef" Association="Model.FK_View_has_ControlRef" >
       <End Role="View" EntitySet="ViewDescriptor" />
@@ -394,6 +530,16 @@
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
     <Property Name="AssemblyName" Type="String" Nullable="false" MaxLength="200" />
+    <NavigationProperty Name="ChangedBy__Implementation__"
+                        Relationship="Model.FK_Assembly_was_ChangedBy"
+                        FromRole="Assembly"
+                        ToRole="ChangedBy" />
+    <Property Name="ChangedOn" Type="DateTime" Nullable="true" />
+    <NavigationProperty Name="CreatedBy__Implementation__"
+                        Relationship="Model.FK_Assembly_was_CreatedBy"
+                        FromRole="Assembly"
+                        ToRole="CreatedBy" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="true" />
     <Property Name="DeploymentRestrictions__Implementation__" Type="Int32" Nullable="false" />
     <Property Name="ExportGuid" Type="Guid" Nullable="false" />
     <NavigationProperty Name="Module__Implementation__"
@@ -436,6 +582,16 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ChangedBy__Implementation__"
+                        Relationship="Model.FK_BaseParameter_was_ChangedBy"
+                        FromRole="BaseParameter"
+                        ToRole="ChangedBy" />
+    <Property Name="ChangedOn" Type="DateTime" Nullable="true" />
+    <NavigationProperty Name="CreatedBy__Implementation__"
+                        Relationship="Model.FK_BaseParameter_was_CreatedBy"
+                        FromRole="BaseParameter"
+                        ToRole="CreatedBy" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="true" />
     <Property Name="Description" Type="String" Nullable="true" MaxLength="200" />
     <Property Name="ExportGuid" Type="Guid" Nullable="false" />
     <Property Name="IsList" Type="Boolean" Nullable="false" />
@@ -459,10 +615,20 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ChangedBy__Implementation__"
+                        Relationship="Model.FK_Constraint_was_ChangedBy"
+                        FromRole="Constraint"
+                        ToRole="ChangedBy" />
+    <Property Name="ChangedOn" Type="DateTime" Nullable="true" />
     <NavigationProperty Name="ConstrainedProperty__Implementation__"
                         Relationship="Model.FK_ConstrainedProperty_has_Constraints"
                         FromRole="Constraints"
                         ToRole="ConstrainedProperty" />
+    <NavigationProperty Name="CreatedBy__Implementation__"
+                        Relationship="Model.FK_Constraint_was_CreatedBy"
+                        FromRole="Constraint"
+                        ToRole="CreatedBy" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="true" />
     <Property Name="ExportGuid" Type="Guid" Nullable="false" />
     <Property Name="Reason" Type="String" Nullable="true" MaxLength="400" />
   </EntityType>
@@ -486,7 +652,17 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ChangedBy__Implementation__"
+                        Relationship="Model.FK_DataType_was_ChangedBy"
+                        FromRole="DataType"
+                        ToRole="ChangedBy" />
+    <Property Name="ChangedOn" Type="DateTime" Nullable="true" />
     <Property Name="ClassName" Type="String" Nullable="false" MaxLength="51" />
+    <NavigationProperty Name="CreatedBy__Implementation__"
+                        Relationship="Model.FK_DataType_was_CreatedBy"
+                        FromRole="DataType"
+                        ToRole="CreatedBy" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="true" />
     <NavigationProperty Name="DefaultIcon__Implementation__"
                         Relationship="Model.FK_DataType_has_DefaultIcon"
                         FromRole="DataType"
@@ -518,6 +694,16 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ChangedBy__Implementation__"
+                        Relationship="Model.FK_DefaultPropertyValue_was_ChangedBy"
+                        FromRole="DefaultPropertyValue"
+                        ToRole="ChangedBy" />
+    <Property Name="ChangedOn" Type="DateTime" Nullable="true" />
+    <NavigationProperty Name="CreatedBy__Implementation__"
+                        Relationship="Model.FK_DefaultPropertyValue_was_CreatedBy"
+                        FromRole="DefaultPropertyValue"
+                        ToRole="CreatedBy" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="true" />
     <Property Name="ExportGuid" Type="Guid" Nullable="false" />
     <NavigationProperty Name="Property__Implementation__"
                         Relationship="Model.FK_Property_has_DefaultValue"
@@ -529,6 +715,16 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ChangedBy__Implementation__"
+                        Relationship="Model.FK_EnumerationEntry_was_ChangedBy"
+                        FromRole="EnumerationEntry"
+                        ToRole="ChangedBy" />
+    <Property Name="ChangedOn" Type="DateTime" Nullable="true" />
+    <NavigationProperty Name="CreatedBy__Implementation__"
+                        Relationship="Model.FK_EnumerationEntry_was_CreatedBy"
+                        FromRole="EnumerationEntry"
+                        ToRole="CreatedBy" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="true" />
     <Property Name="Description" Type="String" Nullable="true" MaxLength="200" />
     <NavigationProperty Name="Enumeration__Implementation__"
                         Relationship="Model.FK_Enumeration_has_EnumerationEntries"
@@ -590,6 +786,16 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ChangedBy__Implementation__"
+                        Relationship="Model.FK_Method_was_ChangedBy"
+                        FromRole="Method"
+                        ToRole="ChangedBy" />
+    <Property Name="ChangedOn" Type="DateTime" Nullable="true" />
+    <NavigationProperty Name="CreatedBy__Implementation__"
+                        Relationship="Model.FK_Method_was_CreatedBy"
+                        FromRole="Method"
+                        ToRole="CreatedBy" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="true" />
     <Property Name="Description" Type="String" Nullable="true" MaxLength="200" />
     <Property Name="ExportGuid" Type="Guid" Nullable="false" />
     <Property Name="IsDisplayable" Type="Boolean" Nullable="false" />
@@ -616,6 +822,16 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ChangedBy__Implementation__"
+                        Relationship="Model.FK_MethodInvocation_was_ChangedBy"
+                        FromRole="MethodInvocation"
+                        ToRole="ChangedBy" />
+    <Property Name="ChangedOn" Type="DateTime" Nullable="true" />
+    <NavigationProperty Name="CreatedBy__Implementation__"
+                        Relationship="Model.FK_MethodInvocation_was_CreatedBy"
+                        FromRole="MethodInvocation"
+                        ToRole="CreatedBy" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="true" />
     <Property Name="ExportGuid" Type="Guid" Nullable="false" />
     <NavigationProperty Name="Implementor__Implementation__"
                         Relationship="Model.FK_MethodInvocation_has_Implementor"
@@ -640,6 +856,16 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ChangedBy__Implementation__"
+                        Relationship="Model.FK_Mitarbeiter_was_ChangedBy"
+                        FromRole="Mitarbeiter"
+                        ToRole="ChangedBy" />
+    <Property Name="ChangedOn" Type="DateTime" Nullable="true" />
+    <NavigationProperty Name="CreatedBy__Implementation__"
+                        Relationship="Model.FK_Mitarbeiter_was_CreatedBy"
+                        FromRole="Mitarbeiter"
+                        ToRole="CreatedBy" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="true" />
     <Property Name="Geburtstag" Type="DateTime" Nullable="true" />
     <Property Name="Name" Type="String" Nullable="true" MaxLength="100" />
     <NavigationProperty Name="Projekte__Implementation__"
@@ -658,6 +884,16 @@
                         Relationship="Model.FK_Module_has_Assemblies"
                         FromRole="Module"
                         ToRole="Assemblies" />
+    <NavigationProperty Name="ChangedBy__Implementation__"
+                        Relationship="Model.FK_Module_was_ChangedBy"
+                        FromRole="Module"
+                        ToRole="ChangedBy" />
+    <Property Name="ChangedOn" Type="DateTime" Nullable="true" />
+    <NavigationProperty Name="CreatedBy__Implementation__"
+                        Relationship="Model.FK_Module_was_CreatedBy"
+                        FromRole="Module"
+                        ToRole="CreatedBy" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="true" />
     <NavigationProperty Name="DataTypes__Implementation__"
                         Relationship="Model.FK_Module_has_DataTypes"
                         FromRole="Module"
@@ -743,6 +979,16 @@
                         FromRole="Projekt"
                         ToRole="Auftraege" />
     <Property Name="AufwandGes" Type="Double" Nullable="true" />
+    <NavigationProperty Name="ChangedBy__Implementation__"
+                        Relationship="Model.FK_Projekt_was_ChangedBy"
+                        FromRole="Projekt"
+                        ToRole="ChangedBy" />
+    <Property Name="ChangedOn" Type="DateTime" Nullable="true" />
+    <NavigationProperty Name="CreatedBy__Implementation__"
+                        Relationship="Model.FK_Projekt_was_CreatedBy"
+                        FromRole="Projekt"
+                        ToRole="CreatedBy" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="true" />
     <Property Name="Kundenname" Type="String" Nullable="true" MaxLength="100" />
     <NavigationProperty Name="Mitarbeiter__Implementation__"
                         Relationship="Model.FK_Projekte_haben_Mitarbeiter_A"
@@ -760,10 +1006,20 @@
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
     <Property Name="CategoryTags" Type="String" Nullable="true" MaxLength="4000" />
+    <NavigationProperty Name="ChangedBy__Implementation__"
+                        Relationship="Model.FK_Property_was_ChangedBy"
+                        FromRole="Property"
+                        ToRole="ChangedBy" />
+    <Property Name="ChangedOn" Type="DateTime" Nullable="true" />
     <NavigationProperty Name="Constraints__Implementation__"
                         Relationship="Model.FK_ConstrainedProperty_has_Constraints"
                         FromRole="ConstrainedProperty"
                         ToRole="Constraints" />
+    <NavigationProperty Name="CreatedBy__Implementation__"
+                        Relationship="Model.FK_Property_was_CreatedBy"
+                        FromRole="Property"
+                        ToRole="CreatedBy" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="true" />
     <NavigationProperty Name="DefaultValue__Implementation__"
                         Relationship="Model.FK_Property_has_DefaultValue"
                         FromRole="Property"
@@ -793,6 +1049,16 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ChangedBy__Implementation__"
+                        Relationship="Model.FK_PropertyInvocation_was_ChangedBy"
+                        FromRole="PropertyInvocation"
+                        ToRole="ChangedBy" />
+    <Property Name="ChangedOn" Type="DateTime" Nullable="true" />
+    <NavigationProperty Name="CreatedBy__Implementation__"
+                        Relationship="Model.FK_PropertyInvocation_was_CreatedBy"
+                        FromRole="PropertyInvocation"
+                        ToRole="CreatedBy" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="true" />
     <Property Name="ExportGuid" Type="Guid" Nullable="false" />
     <NavigationProperty Name="Implementor__Implementation__"
                         Relationship="Model.FK_PropertyInvocation_has_Implementor"
@@ -818,6 +1084,16 @@
                         Relationship="Model.FK_Relation_hasB_B"
                         FromRole="Relation"
                         ToRole="B" />
+    <NavigationProperty Name="ChangedBy__Implementation__"
+                        Relationship="Model.FK_Relation_was_ChangedBy"
+                        FromRole="Relation"
+                        ToRole="ChangedBy" />
+    <Property Name="ChangedOn" Type="DateTime" Nullable="true" />
+    <NavigationProperty Name="CreatedBy__Implementation__"
+                        Relationship="Model.FK_Relation_was_CreatedBy"
+                        FromRole="Relation"
+                        ToRole="CreatedBy" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="true" />
     <Property Name="Description" Type="String" Nullable="true" MaxLength="200" />
     <Property Name="ExportGuid" Type="Guid" Nullable="false" />
     <NavigationProperty Name="Module__Implementation__"
@@ -840,6 +1116,16 @@
                         Relationship="Model.FK_Relation_hasB_B"
                         FromRole="B"
                         ToRole="Relation" />
+    <NavigationProperty Name="ChangedBy__Implementation__"
+                        Relationship="Model.FK_RelationEnd_was_ChangedBy"
+                        FromRole="RelationEnd"
+                        ToRole="ChangedBy" />
+    <Property Name="ChangedOn" Type="DateTime" Nullable="true" />
+    <NavigationProperty Name="CreatedBy__Implementation__"
+                        Relationship="Model.FK_RelationEnd_was_CreatedBy"
+                        FromRole="RelationEnd"
+                        ToRole="CreatedBy" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="true" />
     <Property Name="ExportGuid" Type="Guid" Nullable="false" />
     <Property Name="HasPersistentOrder" Type="Boolean" Nullable="false" />
     <Property Name="Multiplicity__Implementation__" Type="Int32" Nullable="false" />
@@ -859,6 +1145,16 @@
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
     <Property Name="Aufwand" Type="Double" Nullable="true" />
+    <NavigationProperty Name="ChangedBy__Implementation__"
+                        Relationship="Model.FK_Task_was_ChangedBy"
+                        FromRole="Task"
+                        ToRole="ChangedBy" />
+    <Property Name="ChangedOn" Type="DateTime" Nullable="true" />
+    <NavigationProperty Name="CreatedBy__Implementation__"
+                        Relationship="Model.FK_Task_was_CreatedBy"
+                        FromRole="Task"
+                        ToRole="CreatedBy" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="true" />
     <Property Name="DatumBis" Type="DateTime" Nullable="true" />
     <Property Name="DatumVon" Type="DateTime" Nullable="true" />
     <Property Name="Name" Type="String" Nullable="true" MaxLength="100" />
@@ -933,6 +1229,16 @@
                         Relationship="Model.FK_TypeRef_has_Assembly"
                         FromRole="TypeRef"
                         ToRole="Assembly" />
+    <NavigationProperty Name="ChangedBy__Implementation__"
+                        Relationship="Model.FK_TypeRef_was_ChangedBy"
+                        FromRole="TypeRef"
+                        ToRole="ChangedBy" />
+    <Property Name="ChangedOn" Type="DateTime" Nullable="true" />
+    <NavigationProperty Name="CreatedBy__Implementation__"
+                        Relationship="Model.FK_TypeRef_was_CreatedBy"
+                        FromRole="TypeRef"
+                        ToRole="CreatedBy" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="true" />
     <Property Name="ExportGuid" Type="Guid" Nullable="false" />
     <Property Name="FullName" Type="String" Nullable="false" MaxLength="200" />
     <NavigationProperty Name="GenericArguments__Implementation__"
@@ -1639,6 +1945,22 @@
   </Association>
 
   <!-- Associations for all object-object relations without CollectionEntrys -->
+  <Association Name="FK_Assembly_was_ChangedBy" >
+    <End Role="Assembly"
+         Type="Model.Assembly" 
+         Multiplicity="*" />
+    <End Role="ChangedBy"
+         Type="Model.Identity" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_Assembly_was_CreatedBy" >
+    <End Role="Assembly"
+         Type="Model.Assembly" 
+         Multiplicity="*" />
+    <End Role="CreatedBy"
+         Type="Model.Identity" 
+         Multiplicity="0..1" />
+  </Association>
   <Association Name="FK_Auftrag_ChangedBy_ChangedBy" >
     <End Role="Auftrag"
          Type="Model.Auftrag" 
@@ -1679,6 +2001,22 @@
          Type="Model.ObjectClass" 
          Multiplicity="*" />
   </Association>
+  <Association Name="FK_BaseParameter_was_ChangedBy" >
+    <End Role="BaseParameter"
+         Type="Model.BaseParameter" 
+         Multiplicity="*" />
+    <End Role="ChangedBy"
+         Type="Model.Identity" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_BaseParameter_was_CreatedBy" >
+    <End Role="BaseParameter"
+         Type="Model.BaseParameter" 
+         Multiplicity="*" />
+    <End Role="CreatedBy"
+         Type="Model.Identity" 
+         Multiplicity="0..1" />
+  </Association>
   <Association Name="FK_BaseProperty_has_Module" >
     <End Role="BaseProperty"
          Type="Model.Property" 
@@ -1711,6 +2049,22 @@
          Type="Model.Constraint" 
          Multiplicity="*" />
   </Association>
+  <Association Name="FK_Constraint_was_ChangedBy" >
+    <End Role="Constraint"
+         Type="Model.Constraint" 
+         Multiplicity="*" />
+    <End Role="ChangedBy"
+         Type="Model.Identity" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_Constraint_was_CreatedBy" >
+    <End Role="Constraint"
+         Type="Model.Constraint" 
+         Multiplicity="*" />
+    <End Role="CreatedBy"
+         Type="Model.Identity" 
+         Multiplicity="0..1" />
+  </Association>
   <Association Name="FK_Control_isof_Kind" >
     <End Role="Control"
          Type="Model.ViewDescriptor" 
@@ -1725,6 +2079,38 @@
          Multiplicity="*" />
     <End Role="DefaultIcon"
          Type="Model.Icon" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_DataType_was_ChangedBy" >
+    <End Role="DataType"
+         Type="Model.DataType" 
+         Multiplicity="*" />
+    <End Role="ChangedBy"
+         Type="Model.Identity" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_DataType_was_CreatedBy" >
+    <End Role="DataType"
+         Type="Model.DataType" 
+         Multiplicity="*" />
+    <End Role="CreatedBy"
+         Type="Model.Identity" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_DefaultPropertyValue_was_ChangedBy" >
+    <End Role="DefaultPropertyValue"
+         Type="Model.DefaultPropertyValue" 
+         Multiplicity="*" />
+    <End Role="ChangedBy"
+         Type="Model.Identity" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_DefaultPropertyValue_was_CreatedBy" >
+    <End Role="DefaultPropertyValue"
+         Type="Model.DefaultPropertyValue" 
+         Multiplicity="*" />
+    <End Role="CreatedBy"
+         Type="Model.Identity" 
          Multiplicity="0..1" />
   </Association>
   <Association Name="FK_Descriptor_has_PresentableModelRef" >
@@ -1742,6 +2128,22 @@
     <End Role="EnumerationEntries"
          Type="Model.EnumerationEntry" 
          Multiplicity="*" />
+  </Association>
+  <Association Name="FK_EnumerationEntry_was_ChangedBy" >
+    <End Role="EnumerationEntry"
+         Type="Model.EnumerationEntry" 
+         Multiplicity="*" />
+    <End Role="ChangedBy"
+         Type="Model.Identity" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_EnumerationEntry_was_CreatedBy" >
+    <End Role="EnumerationEntry"
+         Type="Model.EnumerationEntry" 
+         Multiplicity="*" />
+    <End Role="CreatedBy"
+         Type="Model.Identity" 
+         Multiplicity="0..1" />
   </Association>
   <Association Name="FK_EnumerationProperty_has_Enumeration" >
     <End Role="EnumerationProperty"
@@ -1815,6 +2217,22 @@
          Type="Model.BaseParameter" 
          Multiplicity="*" />
   </Association>
+  <Association Name="FK_Method_was_ChangedBy" >
+    <End Role="Method"
+         Type="Model.Method" 
+         Multiplicity="*" />
+    <End Role="ChangedBy"
+         Type="Model.Identity" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_Method_was_CreatedBy" >
+    <End Role="Method"
+         Type="Model.Method" 
+         Multiplicity="*" />
+    <End Role="CreatedBy"
+         Type="Model.Identity" 
+         Multiplicity="0..1" />
+  </Association>
   <Association Name="FK_MethodInvocation_has_Implementor" >
     <End Role="MethodInvocation"
          Type="Model.MethodInvocation" 
@@ -1829,6 +2247,38 @@
          Multiplicity="*" />
     <End Role="Module"
          Type="Model.Module" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_MethodInvocation_was_ChangedBy" >
+    <End Role="MethodInvocation"
+         Type="Model.MethodInvocation" 
+         Multiplicity="*" />
+    <End Role="ChangedBy"
+         Type="Model.Identity" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_MethodInvocation_was_CreatedBy" >
+    <End Role="MethodInvocation"
+         Type="Model.MethodInvocation" 
+         Multiplicity="*" />
+    <End Role="CreatedBy"
+         Type="Model.Identity" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_Mitarbeiter_was_ChangedBy" >
+    <End Role="Mitarbeiter"
+         Type="Model.Mitarbeiter" 
+         Multiplicity="*" />
+    <End Role="ChangedBy"
+         Type="Model.Identity" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_Mitarbeiter_was_CreatedBy" >
+    <End Role="Mitarbeiter"
+         Type="Model.Mitarbeiter" 
+         Multiplicity="*" />
+    <End Role="CreatedBy"
+         Type="Model.Identity" 
          Multiplicity="0..1" />
   </Association>
   <Association Name="FK_Module_has_Assemblies" >
@@ -1854,6 +2304,22 @@
     <End Role="Relation"
          Type="Model.Relation" 
          Multiplicity="*" />
+  </Association>
+  <Association Name="FK_Module_was_ChangedBy" >
+    <End Role="Module"
+         Type="Model.Module" 
+         Multiplicity="*" />
+    <End Role="ChangedBy"
+         Type="Model.Identity" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_Module_was_CreatedBy" >
+    <End Role="Module"
+         Type="Model.Module" 
+         Multiplicity="*" />
+    <End Role="CreatedBy"
+         Type="Model.Identity" 
+         Multiplicity="0..1" />
   </Association>
   <Association Name="FK_MuhBlah_List_Role_hasOther_TestCustomObjects_Role" >
     <End Role="MuhBlah_List_Role"
@@ -1967,6 +2433,22 @@
          Type="Model.Task" 
          Multiplicity="*" />
   </Association>
+  <Association Name="FK_Projekt_was_ChangedBy" >
+    <End Role="Projekt"
+         Type="Model.Projekt" 
+         Multiplicity="*" />
+    <End Role="ChangedBy"
+         Type="Model.Identity" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_Projekt_was_CreatedBy" >
+    <End Role="Projekt"
+         Type="Model.Projekt" 
+         Multiplicity="*" />
+    <End Role="CreatedBy"
+         Type="Model.Identity" 
+         Multiplicity="0..1" />
+  </Association>
   <Association Name="FK_Property_has_DefaultValue" >
     <End Role="Property"
          Type="Model.Property" 
@@ -1983,12 +2465,44 @@
          Type="Model.PresentableModelDescriptor" 
          Multiplicity="0..1" />
   </Association>
+  <Association Name="FK_Property_was_ChangedBy" >
+    <End Role="Property"
+         Type="Model.Property" 
+         Multiplicity="*" />
+    <End Role="ChangedBy"
+         Type="Model.Identity" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_Property_was_CreatedBy" >
+    <End Role="Property"
+         Type="Model.Property" 
+         Multiplicity="*" />
+    <End Role="CreatedBy"
+         Type="Model.Identity" 
+         Multiplicity="0..1" />
+  </Association>
   <Association Name="FK_PropertyInvocation_has_Implementor" >
     <End Role="PropertyInvocation"
          Type="Model.PropertyInvocation" 
          Multiplicity="*" />
     <End Role="Implementor"
          Type="Model.TypeRef" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_PropertyInvocation_was_ChangedBy" >
+    <End Role="PropertyInvocation"
+         Type="Model.PropertyInvocation" 
+         Multiplicity="*" />
+    <End Role="ChangedBy"
+         Type="Model.Identity" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_PropertyInvocation_was_CreatedBy" >
+    <End Role="PropertyInvocation"
+         Type="Model.PropertyInvocation" 
+         Multiplicity="*" />
+    <End Role="CreatedBy"
+         Type="Model.Identity" 
          Multiplicity="0..1" />
   </Association>
   <Association Name="FK_Relation_hasA_A" >
@@ -2007,6 +2521,22 @@
          Type="Model.RelationEnd" 
          Multiplicity="0..1" />
   </Association>
+  <Association Name="FK_Relation_was_ChangedBy" >
+    <End Role="Relation"
+         Type="Model.Relation" 
+         Multiplicity="*" />
+    <End Role="ChangedBy"
+         Type="Model.Identity" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_Relation_was_CreatedBy" >
+    <End Role="Relation"
+         Type="Model.Relation" 
+         Multiplicity="*" />
+    <End Role="CreatedBy"
+         Type="Model.Identity" 
+         Multiplicity="0..1" />
+  </Association>
   <Association Name="FK_RelationEnd_has_Navigator" >
     <End Role="RelationEnd"
          Type="Model.RelationEnd" 
@@ -2023,12 +2553,44 @@
          Type="Model.ObjectClass" 
          Multiplicity="0..1" />
   </Association>
+  <Association Name="FK_RelationEnd_was_ChangedBy" >
+    <End Role="RelationEnd"
+         Type="Model.RelationEnd" 
+         Multiplicity="*" />
+    <End Role="ChangedBy"
+         Type="Model.Identity" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_RelationEnd_was_CreatedBy" >
+    <End Role="RelationEnd"
+         Type="Model.RelationEnd" 
+         Multiplicity="*" />
+    <End Role="CreatedBy"
+         Type="Model.Identity" 
+         Multiplicity="0..1" />
+  </Association>
   <Association Name="FK_StructProperty_has_StructDefinition" >
     <End Role="StructProperty"
          Type="Model.StructProperty" 
          Multiplicity="*" />
     <End Role="StructDefinition"
          Type="Model.Struct" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_Task_was_ChangedBy" >
+    <End Role="Task"
+         Type="Model.Task" 
+         Multiplicity="*" />
+    <End Role="ChangedBy"
+         Type="Model.Identity" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_Task_was_CreatedBy" >
+    <End Role="Task"
+         Type="Model.Task" 
+         Multiplicity="*" />
+    <End Role="CreatedBy"
+         Type="Model.Identity" 
          Multiplicity="0..1" />
   </Association>
   <Association Name="FK_Template_has_DisplayedTypeAssembly" >
@@ -2061,6 +2623,22 @@
          Multiplicity="*" />
     <End Role="Assembly"
          Type="Model.Assembly" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_TypeRef_was_ChangedBy" >
+    <End Role="TypeRef"
+         Type="Model.TypeRef" 
+         Multiplicity="*" />
+    <End Role="ChangedBy"
+         Type="Model.Identity" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_TypeRef_was_CreatedBy" >
+    <End Role="TypeRef"
+         Type="Model.TypeRef" 
+         Multiplicity="*" />
+    <End Role="CreatedBy"
+         Type="Model.Identity" 
          Multiplicity="0..1" />
   </Association>
   <Association Name="FK_View_has_ControlRef" >

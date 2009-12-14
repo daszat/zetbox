@@ -69,6 +69,11 @@ namespace Kistl.Server.Generators.FrozenObjects.Implementation.ObjectClasses
                     {
                         return string.Format("new Guid(\"{0}\")", value);
                     }
+                    else if (prop is DateTimeProperty)
+                    {
+                        DateTime dt = (DateTime)value;
+                        return string.Format("new DateTime({0}, {1}, {2}, {3}, {4}, {5}, {6})", dt.Year, dt.Month, dt.Day, dt.Hour, dt.Minute, dt.Second, dt.Millisecond);
+                    }
                     else
                     {
                         return String.Format("{0}", value);

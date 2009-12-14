@@ -23,6 +23,8 @@
 	    <MappingFragment StoreEntitySet="Assembly">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="AssemblyName" ColumnName="AssemblyName" />
+<ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+<ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
 <ScalarProperty Name="DeploymentRestrictions__Implementation__" ColumnName="DeploymentRestrictions" />
 <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
 	    </MappingFragment>
@@ -44,6 +46,8 @@
 	    <MappingFragment StoreEntitySet="BaseParameter">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="Method_pos" ColumnName="fk_Method_pos" />
+<ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+<ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
 <ScalarProperty Name="Description" ColumnName="Description" />
 <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
 <ScalarProperty Name="IsList" ColumnName="IsList" />
@@ -100,6 +104,8 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.Constraint)">
 	    <MappingFragment StoreEntitySet="Constraint">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+<ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
 <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
 <ScalarProperty Name="Reason" ColumnName="Reason" />
 	    </MappingFragment>
@@ -255,7 +261,9 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.DataType)">
 	    <MappingFragment StoreEntitySet="DataType">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
 <ScalarProperty Name="ClassName" ColumnName="ClassName" />
+<ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
 <ScalarProperty Name="Description" ColumnName="Description" />
 <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
 <ScalarProperty Name="ShowIconInLists" ColumnName="ShowIconInLists" />
@@ -296,6 +304,8 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.DefaultPropertyValue)">
 	    <MappingFragment StoreEntitySet="DefaultPropertyValue">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+<ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
 <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
 	    </MappingFragment>
       </EntityTypeMapping>
@@ -309,6 +319,8 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.EnumerationEntry)">
 	    <MappingFragment StoreEntitySet="EnumerationEntry">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+<ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
 <ScalarProperty Name="Description" ColumnName="Description" />
 <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -354,6 +366,8 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.Method)">
 	    <MappingFragment StoreEntitySet="Method">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+<ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
 <ScalarProperty Name="Description" ColumnName="Description" />
 <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
 <ScalarProperty Name="IsDisplayable" ColumnName="IsDisplayable" />
@@ -365,6 +379,8 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.MethodInvocation)">
 	    <MappingFragment StoreEntitySet="MethodInvocation">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+<ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
 <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
 <ScalarProperty Name="MemberName" ColumnName="MemberName" />
 	    </MappingFragment>
@@ -374,6 +390,8 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.Mitarbeiter)">
 	    <MappingFragment StoreEntitySet="Mitarbeiter">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+<ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
 <ScalarProperty Name="Geburtstag" ColumnName="Geburtstag" />
 <ScalarProperty Name="Name" ColumnName="Name" />
 <ScalarProperty Name="SVNr" ColumnName="SVNr" />
@@ -385,6 +403,8 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.Module)">
 	    <MappingFragment StoreEntitySet="Module">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+<ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
 <ScalarProperty Name="Description" ColumnName="Description" />
 <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
 <ScalarProperty Name="ModuleName" ColumnName="ModuleName" />
@@ -426,6 +446,8 @@
 	    <MappingFragment StoreEntitySet="Projekt">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="AufwandGes" ColumnName="AufwandGes" />
+<ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+<ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
 <ScalarProperty Name="Kundenname" ColumnName="Kundenname" />
 <ScalarProperty Name="Name" ColumnName="Name" />
 	    </MappingFragment>
@@ -436,6 +458,8 @@
 	    <MappingFragment StoreEntitySet="Property">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="CategoryTags" ColumnName="CategoryTags" />
+<ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+<ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
 <ScalarProperty Name="Description" ColumnName="Description" />
 <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
 <ScalarProperty Name="PropertyName" ColumnName="PropertyName" />
@@ -511,6 +535,8 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.PropertyInvocation)">
 	    <MappingFragment StoreEntitySet="PropertyInvocation">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+<ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
 <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
 <ScalarProperty Name="InvocationType__Implementation__" ColumnName="InvocationType" />
 <ScalarProperty Name="MemberName" ColumnName="MemberName" />
@@ -521,6 +547,8 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.Relation)">
 	    <MappingFragment StoreEntitySet="Relation">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+<ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
 <ScalarProperty Name="Description" ColumnName="Description" />
 <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
 <ScalarProperty Name="Storage__Implementation__" ColumnName="Storage" />
@@ -532,6 +560,8 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.RelationEnd)">
 	    <MappingFragment StoreEntitySet="RelationEnd">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+<ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
 <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
 <ScalarProperty Name="HasPersistentOrder" ColumnName="HasPersistentOrder" />
 <ScalarProperty Name="Multiplicity__Implementation__" ColumnName="Multiplicity" />
@@ -544,6 +574,8 @@
 	    <MappingFragment StoreEntitySet="Task">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="Aufwand" ColumnName="Aufwand" />
+<ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+<ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
 <ScalarProperty Name="DatumBis" ColumnName="DatumBis" />
 <ScalarProperty Name="DatumVon" ColumnName="DatumVon" />
 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -582,6 +614,8 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.TypeRef)">
 	    <MappingFragment StoreEntitySet="TypeRef">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+<ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
 <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
 <ScalarProperty Name="FullName" ColumnName="FullName" />
 	    </MappingFragment>
@@ -1021,6 +1055,40 @@
 
     <!-- AssociationSetMappings for direct object-object relations without a CollectionEntry -->
     <!--
+    Relation: FK_Assembly_was_ChangedBy
+    A: ZeroOrMore Assembly as Assembly
+    B: ZeroOrOne Identity as ChangedBy
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_Assembly_was_ChangedBy"
+                           TypeName="Model.FK_Assembly_was_ChangedBy"
+                           StoreEntitySet="Assembly" >
+      <EndProperty Name="ChangedBy">
+        <ScalarProperty Name="ID" ColumnName="fk_ChangedBy"/>
+      </EndProperty>
+      <EndProperty Name="Assembly">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_ChangedBy" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_Assembly_was_CreatedBy
+    A: ZeroOrMore Assembly as Assembly
+    B: ZeroOrOne Identity as CreatedBy
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_Assembly_was_CreatedBy"
+                           TypeName="Model.FK_Assembly_was_CreatedBy"
+                           StoreEntitySet="Assembly" >
+      <EndProperty Name="CreatedBy">
+        <ScalarProperty Name="ID" ColumnName="fk_CreatedBy"/>
+      </EndProperty>
+      <EndProperty Name="Assembly">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_CreatedBy" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
     Relation: FK_Auftrag_ChangedBy_ChangedBy
     A: ZeroOrMore Auftrag as Auftrag
     B: ZeroOrOne Identity as ChangedBy
@@ -1106,6 +1174,40 @@
       <Condition ColumnName="fk_BaseObjectClass" IsNull="false"/>
     </AssociationSetMapping>
     <!--
+    Relation: FK_BaseParameter_was_ChangedBy
+    A: ZeroOrMore BaseParameter as BaseParameter
+    B: ZeroOrOne Identity as ChangedBy
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_BaseParameter_was_ChangedBy"
+                           TypeName="Model.FK_BaseParameter_was_ChangedBy"
+                           StoreEntitySet="BaseParameter" >
+      <EndProperty Name="ChangedBy">
+        <ScalarProperty Name="ID" ColumnName="fk_ChangedBy"/>
+      </EndProperty>
+      <EndProperty Name="BaseParameter">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_ChangedBy" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_BaseParameter_was_CreatedBy
+    A: ZeroOrMore BaseParameter as BaseParameter
+    B: ZeroOrOne Identity as CreatedBy
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_BaseParameter_was_CreatedBy"
+                           TypeName="Model.FK_BaseParameter_was_CreatedBy"
+                           StoreEntitySet="BaseParameter" >
+      <EndProperty Name="CreatedBy">
+        <ScalarProperty Name="ID" ColumnName="fk_CreatedBy"/>
+      </EndProperty>
+      <EndProperty Name="BaseParameter">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_CreatedBy" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
     Relation: FK_BaseProperty_has_Module
     A: ZeroOrMore Property as BaseProperty
     B: ZeroOrOne Module as Module
@@ -1174,6 +1276,40 @@
       <Condition ColumnName="fk_ConstrainedProperty" IsNull="false"/>
     </AssociationSetMapping>
     <!--
+    Relation: FK_Constraint_was_ChangedBy
+    A: ZeroOrMore Constraint as Constraint
+    B: ZeroOrOne Identity as ChangedBy
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_Constraint_was_ChangedBy"
+                           TypeName="Model.FK_Constraint_was_ChangedBy"
+                           StoreEntitySet="Constraint" >
+      <EndProperty Name="ChangedBy">
+        <ScalarProperty Name="ID" ColumnName="fk_ChangedBy"/>
+      </EndProperty>
+      <EndProperty Name="Constraint">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_ChangedBy" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_Constraint_was_CreatedBy
+    A: ZeroOrMore Constraint as Constraint
+    B: ZeroOrOne Identity as CreatedBy
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_Constraint_was_CreatedBy"
+                           TypeName="Model.FK_Constraint_was_CreatedBy"
+                           StoreEntitySet="Constraint" >
+      <EndProperty Name="CreatedBy">
+        <ScalarProperty Name="ID" ColumnName="fk_CreatedBy"/>
+      </EndProperty>
+      <EndProperty Name="Constraint">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_CreatedBy" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
     Relation: FK_Control_isof_Kind
     A: ZeroOrMore ViewDescriptor as Control
     B: ZeroOrOne ControlKindClass as Kind
@@ -1208,6 +1344,74 @@
       <Condition ColumnName="fk_DefaultIcon" IsNull="false"/>
     </AssociationSetMapping>
     <!--
+    Relation: FK_DataType_was_ChangedBy
+    A: ZeroOrMore DataType as DataType
+    B: ZeroOrOne Identity as ChangedBy
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_DataType_was_ChangedBy"
+                           TypeName="Model.FK_DataType_was_ChangedBy"
+                           StoreEntitySet="DataType" >
+      <EndProperty Name="ChangedBy">
+        <ScalarProperty Name="ID" ColumnName="fk_ChangedBy"/>
+      </EndProperty>
+      <EndProperty Name="DataType">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_ChangedBy" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_DataType_was_CreatedBy
+    A: ZeroOrMore DataType as DataType
+    B: ZeroOrOne Identity as CreatedBy
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_DataType_was_CreatedBy"
+                           TypeName="Model.FK_DataType_was_CreatedBy"
+                           StoreEntitySet="DataType" >
+      <EndProperty Name="CreatedBy">
+        <ScalarProperty Name="ID" ColumnName="fk_CreatedBy"/>
+      </EndProperty>
+      <EndProperty Name="DataType">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_CreatedBy" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_DefaultPropertyValue_was_ChangedBy
+    A: ZeroOrMore DefaultPropertyValue as DefaultPropertyValue
+    B: ZeroOrOne Identity as ChangedBy
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_DefaultPropertyValue_was_ChangedBy"
+                           TypeName="Model.FK_DefaultPropertyValue_was_ChangedBy"
+                           StoreEntitySet="DefaultPropertyValue" >
+      <EndProperty Name="ChangedBy">
+        <ScalarProperty Name="ID" ColumnName="fk_ChangedBy"/>
+      </EndProperty>
+      <EndProperty Name="DefaultPropertyValue">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_ChangedBy" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_DefaultPropertyValue_was_CreatedBy
+    A: ZeroOrMore DefaultPropertyValue as DefaultPropertyValue
+    B: ZeroOrOne Identity as CreatedBy
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_DefaultPropertyValue_was_CreatedBy"
+                           TypeName="Model.FK_DefaultPropertyValue_was_CreatedBy"
+                           StoreEntitySet="DefaultPropertyValue" >
+      <EndProperty Name="CreatedBy">
+        <ScalarProperty Name="ID" ColumnName="fk_CreatedBy"/>
+      </EndProperty>
+      <EndProperty Name="DefaultPropertyValue">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_CreatedBy" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
     Relation: FK_Descriptor_has_PresentableModelRef
     A: ZeroOrMore PresentableModelDescriptor as Descriptor
     B: One TypeRef as PresentableModelRef
@@ -1240,6 +1444,40 @@
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="fk_Enumeration" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_EnumerationEntry_was_ChangedBy
+    A: ZeroOrMore EnumerationEntry as EnumerationEntry
+    B: ZeroOrOne Identity as ChangedBy
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_EnumerationEntry_was_ChangedBy"
+                           TypeName="Model.FK_EnumerationEntry_was_ChangedBy"
+                           StoreEntitySet="EnumerationEntry" >
+      <EndProperty Name="ChangedBy">
+        <ScalarProperty Name="ID" ColumnName="fk_ChangedBy"/>
+      </EndProperty>
+      <EndProperty Name="EnumerationEntry">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_ChangedBy" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_EnumerationEntry_was_CreatedBy
+    A: ZeroOrMore EnumerationEntry as EnumerationEntry
+    B: ZeroOrOne Identity as CreatedBy
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_EnumerationEntry_was_CreatedBy"
+                           TypeName="Model.FK_EnumerationEntry_was_CreatedBy"
+                           StoreEntitySet="EnumerationEntry" >
+      <EndProperty Name="CreatedBy">
+        <ScalarProperty Name="ID" ColumnName="fk_CreatedBy"/>
+      </EndProperty>
+      <EndProperty Name="EnumerationEntry">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_CreatedBy" IsNull="false"/>
     </AssociationSetMapping>
     <!--
     Relation: FK_EnumerationProperty_has_Enumeration
@@ -1395,6 +1633,40 @@
       <Condition ColumnName="fk_Method" IsNull="false"/>
     </AssociationSetMapping>
     <!--
+    Relation: FK_Method_was_ChangedBy
+    A: ZeroOrMore Method as Method
+    B: ZeroOrOne Identity as ChangedBy
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_Method_was_ChangedBy"
+                           TypeName="Model.FK_Method_was_ChangedBy"
+                           StoreEntitySet="Method" >
+      <EndProperty Name="ChangedBy">
+        <ScalarProperty Name="ID" ColumnName="fk_ChangedBy"/>
+      </EndProperty>
+      <EndProperty Name="Method">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_ChangedBy" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_Method_was_CreatedBy
+    A: ZeroOrMore Method as Method
+    B: ZeroOrOne Identity as CreatedBy
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_Method_was_CreatedBy"
+                           TypeName="Model.FK_Method_was_CreatedBy"
+                           StoreEntitySet="Method" >
+      <EndProperty Name="CreatedBy">
+        <ScalarProperty Name="ID" ColumnName="fk_CreatedBy"/>
+      </EndProperty>
+      <EndProperty Name="Method">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_CreatedBy" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
     Relation: FK_MethodInvocation_has_Implementor
     A: ZeroOrMore MethodInvocation as MethodInvocation
     B: ZeroOrOne TypeRef as Implementor
@@ -1427,6 +1699,74 @@
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="fk_Module" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_MethodInvocation_was_ChangedBy
+    A: ZeroOrMore MethodInvocation as MethodInvocation
+    B: ZeroOrOne Identity as ChangedBy
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_MethodInvocation_was_ChangedBy"
+                           TypeName="Model.FK_MethodInvocation_was_ChangedBy"
+                           StoreEntitySet="MethodInvocation" >
+      <EndProperty Name="ChangedBy">
+        <ScalarProperty Name="ID" ColumnName="fk_ChangedBy"/>
+      </EndProperty>
+      <EndProperty Name="MethodInvocation">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_ChangedBy" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_MethodInvocation_was_CreatedBy
+    A: ZeroOrMore MethodInvocation as MethodInvocation
+    B: ZeroOrOne Identity as CreatedBy
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_MethodInvocation_was_CreatedBy"
+                           TypeName="Model.FK_MethodInvocation_was_CreatedBy"
+                           StoreEntitySet="MethodInvocation" >
+      <EndProperty Name="CreatedBy">
+        <ScalarProperty Name="ID" ColumnName="fk_CreatedBy"/>
+      </EndProperty>
+      <EndProperty Name="MethodInvocation">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_CreatedBy" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_Mitarbeiter_was_ChangedBy
+    A: ZeroOrMore Mitarbeiter as Mitarbeiter
+    B: ZeroOrOne Identity as ChangedBy
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_Mitarbeiter_was_ChangedBy"
+                           TypeName="Model.FK_Mitarbeiter_was_ChangedBy"
+                           StoreEntitySet="Mitarbeiter" >
+      <EndProperty Name="ChangedBy">
+        <ScalarProperty Name="ID" ColumnName="fk_ChangedBy"/>
+      </EndProperty>
+      <EndProperty Name="Mitarbeiter">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_ChangedBy" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_Mitarbeiter_was_CreatedBy
+    A: ZeroOrMore Mitarbeiter as Mitarbeiter
+    B: ZeroOrOne Identity as CreatedBy
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_Mitarbeiter_was_CreatedBy"
+                           TypeName="Model.FK_Mitarbeiter_was_CreatedBy"
+                           StoreEntitySet="Mitarbeiter" >
+      <EndProperty Name="CreatedBy">
+        <ScalarProperty Name="ID" ColumnName="fk_CreatedBy"/>
+      </EndProperty>
+      <EndProperty Name="Mitarbeiter">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_CreatedBy" IsNull="false"/>
     </AssociationSetMapping>
     <!--
     Relation: FK_Module_has_Assemblies
@@ -1478,6 +1818,40 @@
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="fk_Module" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_Module_was_ChangedBy
+    A: ZeroOrMore Module as Module
+    B: ZeroOrOne Identity as ChangedBy
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_Module_was_ChangedBy"
+                           TypeName="Model.FK_Module_was_ChangedBy"
+                           StoreEntitySet="Module" >
+      <EndProperty Name="ChangedBy">
+        <ScalarProperty Name="ID" ColumnName="fk_ChangedBy"/>
+      </EndProperty>
+      <EndProperty Name="Module">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_ChangedBy" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_Module_was_CreatedBy
+    A: ZeroOrMore Module as Module
+    B: ZeroOrOne Identity as CreatedBy
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_Module_was_CreatedBy"
+                           TypeName="Model.FK_Module_was_CreatedBy"
+                           StoreEntitySet="Module" >
+      <EndProperty Name="CreatedBy">
+        <ScalarProperty Name="ID" ColumnName="fk_CreatedBy"/>
+      </EndProperty>
+      <EndProperty Name="Module">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_CreatedBy" IsNull="false"/>
     </AssociationSetMapping>
     <!--
     Relation: FK_MuhBlah_List_Role_hasOther_TestCustomObjects_Role
@@ -1718,6 +2092,40 @@
       <Condition ColumnName="fk_Projekt" IsNull="false"/>
     </AssociationSetMapping>
     <!--
+    Relation: FK_Projekt_was_ChangedBy
+    A: ZeroOrMore Projekt as Projekt
+    B: ZeroOrOne Identity as ChangedBy
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_Projekt_was_ChangedBy"
+                           TypeName="Model.FK_Projekt_was_ChangedBy"
+                           StoreEntitySet="Projekt" >
+      <EndProperty Name="ChangedBy">
+        <ScalarProperty Name="ID" ColumnName="fk_ChangedBy"/>
+      </EndProperty>
+      <EndProperty Name="Projekt">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_ChangedBy" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_Projekt_was_CreatedBy
+    A: ZeroOrMore Projekt as Projekt
+    B: ZeroOrOne Identity as CreatedBy
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_Projekt_was_CreatedBy"
+                           TypeName="Model.FK_Projekt_was_CreatedBy"
+                           StoreEntitySet="Projekt" >
+      <EndProperty Name="CreatedBy">
+        <ScalarProperty Name="ID" ColumnName="fk_CreatedBy"/>
+      </EndProperty>
+      <EndProperty Name="Projekt">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_CreatedBy" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
     Relation: FK_Property_has_DefaultValue
     A: One Property as Property
     B: ZeroOrOne DefaultPropertyValue as DefaultValue
@@ -1752,6 +2160,40 @@
       <Condition ColumnName="fk_ValueModelDescriptor" IsNull="false"/>
     </AssociationSetMapping>
     <!--
+    Relation: FK_Property_was_ChangedBy
+    A: ZeroOrMore Property as Property
+    B: ZeroOrOne Identity as ChangedBy
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_Property_was_ChangedBy"
+                           TypeName="Model.FK_Property_was_ChangedBy"
+                           StoreEntitySet="Property" >
+      <EndProperty Name="ChangedBy">
+        <ScalarProperty Name="ID" ColumnName="fk_ChangedBy"/>
+      </EndProperty>
+      <EndProperty Name="Property">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_ChangedBy" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_Property_was_CreatedBy
+    A: ZeroOrMore Property as Property
+    B: ZeroOrOne Identity as CreatedBy
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_Property_was_CreatedBy"
+                           TypeName="Model.FK_Property_was_CreatedBy"
+                           StoreEntitySet="Property" >
+      <EndProperty Name="CreatedBy">
+        <ScalarProperty Name="ID" ColumnName="fk_CreatedBy"/>
+      </EndProperty>
+      <EndProperty Name="Property">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_CreatedBy" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
     Relation: FK_PropertyInvocation_has_Implementor
     A: ZeroOrMore PropertyInvocation as PropertyInvocation
     B: One TypeRef as Implementor
@@ -1767,6 +2209,40 @@
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="fk_Implementor" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_PropertyInvocation_was_ChangedBy
+    A: ZeroOrMore PropertyInvocation as PropertyInvocation
+    B: ZeroOrOne Identity as ChangedBy
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_PropertyInvocation_was_ChangedBy"
+                           TypeName="Model.FK_PropertyInvocation_was_ChangedBy"
+                           StoreEntitySet="PropertyInvocation" >
+      <EndProperty Name="ChangedBy">
+        <ScalarProperty Name="ID" ColumnName="fk_ChangedBy"/>
+      </EndProperty>
+      <EndProperty Name="PropertyInvocation">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_ChangedBy" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_PropertyInvocation_was_CreatedBy
+    A: ZeroOrMore PropertyInvocation as PropertyInvocation
+    B: ZeroOrOne Identity as CreatedBy
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_PropertyInvocation_was_CreatedBy"
+                           TypeName="Model.FK_PropertyInvocation_was_CreatedBy"
+                           StoreEntitySet="PropertyInvocation" >
+      <EndProperty Name="CreatedBy">
+        <ScalarProperty Name="ID" ColumnName="fk_CreatedBy"/>
+      </EndProperty>
+      <EndProperty Name="PropertyInvocation">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_CreatedBy" IsNull="false"/>
     </AssociationSetMapping>
     <!--
     Relation: FK_Relation_hasA_A
@@ -1803,6 +2279,40 @@
       <Condition ColumnName="fk_B" IsNull="false"/>
     </AssociationSetMapping>
     <!--
+    Relation: FK_Relation_was_ChangedBy
+    A: ZeroOrMore Relation as Relation
+    B: ZeroOrOne Identity as ChangedBy
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_Relation_was_ChangedBy"
+                           TypeName="Model.FK_Relation_was_ChangedBy"
+                           StoreEntitySet="Relation" >
+      <EndProperty Name="ChangedBy">
+        <ScalarProperty Name="ID" ColumnName="fk_ChangedBy"/>
+      </EndProperty>
+      <EndProperty Name="Relation">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_ChangedBy" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_Relation_was_CreatedBy
+    A: ZeroOrMore Relation as Relation
+    B: ZeroOrOne Identity as CreatedBy
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_Relation_was_CreatedBy"
+                           TypeName="Model.FK_Relation_was_CreatedBy"
+                           StoreEntitySet="Relation" >
+      <EndProperty Name="CreatedBy">
+        <ScalarProperty Name="ID" ColumnName="fk_CreatedBy"/>
+      </EndProperty>
+      <EndProperty Name="Relation">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_CreatedBy" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
     Relation: FK_RelationEnd_has_Navigator
     A: ZeroOrOne RelationEnd as RelationEnd
     B: ZeroOrOne ObjectReferenceProperty as Navigator
@@ -1837,6 +2347,40 @@
       <Condition ColumnName="fk_Type" IsNull="false"/>
     </AssociationSetMapping>
     <!--
+    Relation: FK_RelationEnd_was_ChangedBy
+    A: ZeroOrMore RelationEnd as RelationEnd
+    B: ZeroOrOne Identity as ChangedBy
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_RelationEnd_was_ChangedBy"
+                           TypeName="Model.FK_RelationEnd_was_ChangedBy"
+                           StoreEntitySet="RelationEnd" >
+      <EndProperty Name="ChangedBy">
+        <ScalarProperty Name="ID" ColumnName="fk_ChangedBy"/>
+      </EndProperty>
+      <EndProperty Name="RelationEnd">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_ChangedBy" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_RelationEnd_was_CreatedBy
+    A: ZeroOrMore RelationEnd as RelationEnd
+    B: ZeroOrOne Identity as CreatedBy
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_RelationEnd_was_CreatedBy"
+                           TypeName="Model.FK_RelationEnd_was_CreatedBy"
+                           StoreEntitySet="RelationEnd" >
+      <EndProperty Name="CreatedBy">
+        <ScalarProperty Name="ID" ColumnName="fk_CreatedBy"/>
+      </EndProperty>
+      <EndProperty Name="RelationEnd">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_CreatedBy" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
     Relation: FK_StructProperty_has_StructDefinition
     A: ZeroOrMore StructProperty as StructProperty
     B: ZeroOrOne Struct as StructDefinition
@@ -1852,6 +2396,40 @@
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="fk_StructDefinition" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_Task_was_ChangedBy
+    A: ZeroOrMore Task as Task
+    B: ZeroOrOne Identity as ChangedBy
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_Task_was_ChangedBy"
+                           TypeName="Model.FK_Task_was_ChangedBy"
+                           StoreEntitySet="Task" >
+      <EndProperty Name="ChangedBy">
+        <ScalarProperty Name="ID" ColumnName="fk_ChangedBy"/>
+      </EndProperty>
+      <EndProperty Name="Task">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_ChangedBy" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_Task_was_CreatedBy
+    A: ZeroOrMore Task as Task
+    B: ZeroOrOne Identity as CreatedBy
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_Task_was_CreatedBy"
+                           TypeName="Model.FK_Task_was_CreatedBy"
+                           StoreEntitySet="Task" >
+      <EndProperty Name="CreatedBy">
+        <ScalarProperty Name="ID" ColumnName="fk_CreatedBy"/>
+      </EndProperty>
+      <EndProperty Name="Task">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_CreatedBy" IsNull="false"/>
     </AssociationSetMapping>
     <!--
     Relation: FK_Template_has_DisplayedTypeAssembly
@@ -1920,6 +2498,40 @@
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="fk_Assembly" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_TypeRef_was_ChangedBy
+    A: ZeroOrMore TypeRef as TypeRef
+    B: ZeroOrOne Identity as ChangedBy
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_TypeRef_was_ChangedBy"
+                           TypeName="Model.FK_TypeRef_was_ChangedBy"
+                           StoreEntitySet="TypeRef" >
+      <EndProperty Name="ChangedBy">
+        <ScalarProperty Name="ID" ColumnName="fk_ChangedBy"/>
+      </EndProperty>
+      <EndProperty Name="TypeRef">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_ChangedBy" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_TypeRef_was_CreatedBy
+    A: ZeroOrMore TypeRef as TypeRef
+    B: ZeroOrOne Identity as CreatedBy
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_TypeRef_was_CreatedBy"
+                           TypeName="Model.FK_TypeRef_was_CreatedBy"
+                           StoreEntitySet="TypeRef" >
+      <EndProperty Name="CreatedBy">
+        <ScalarProperty Name="ID" ColumnName="fk_CreatedBy"/>
+      </EndProperty>
+      <EndProperty Name="TypeRef">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_CreatedBy" IsNull="false"/>
     </AssociationSetMapping>
     <!--
     Relation: FK_View_has_ControlRef

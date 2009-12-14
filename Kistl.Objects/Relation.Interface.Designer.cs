@@ -10,7 +10,7 @@ namespace Kistl.App.Base
     /// <summary>
     /// Describes a Relation between two Object Classes
     /// </summary>
-    public interface Relation : IDataObject, Kistl.App.Base.IExportable 
+    public interface Relation : IDataObject, Kistl.App.Base.IChangedBy, Kistl.App.Base.IExportable 
     {
 
         /// <summary>

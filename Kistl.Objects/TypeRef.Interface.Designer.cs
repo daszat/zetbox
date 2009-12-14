@@ -10,7 +10,7 @@ namespace Kistl.App.Base
     /// <summary>
     /// This class models a reference to a specific, concrete Type. Generic Types have all parameters filled.
     /// </summary>
-    public interface TypeRef : IDataObject, Kistl.App.Base.IExportable 
+    public interface TypeRef : IDataObject, Kistl.App.Base.IChangedBy, Kistl.App.Base.IExportable 
     {
 
         /// <summary>

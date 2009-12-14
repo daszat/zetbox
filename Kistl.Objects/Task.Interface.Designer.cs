@@ -10,7 +10,7 @@ namespace Kistl.App.Projekte
     /// <summary>
     /// 
     /// </summary>
-    public interface Task : IDataObject 
+    public interface Task : IDataObject, Kistl.App.Base.IChangedBy 
     {
 
         /// <summary>

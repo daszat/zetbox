@@ -10,7 +10,7 @@ namespace Kistl.App.Base
     /// <summary>
     /// 
     /// </summary>
-    public interface DefaultPropertyValue : IDataObject, Kistl.App.Base.IExportable 
+    public interface DefaultPropertyValue : IDataObject, Kistl.App.Base.IChangedBy, Kistl.App.Base.IExportable 
     {
 
         /// <summary>

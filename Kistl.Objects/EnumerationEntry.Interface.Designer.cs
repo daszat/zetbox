@@ -10,7 +10,7 @@ namespace Kistl.App.Base
     /// <summary>
     /// Metadefinition Object for an Enumeration Entry.
     /// </summary>
-    public interface EnumerationEntry : IDataObject, Kistl.App.Base.IExportable 
+    public interface EnumerationEntry : IDataObject, Kistl.App.Base.IChangedBy, Kistl.App.Base.IExportable 
     {
 
         /// <summary>

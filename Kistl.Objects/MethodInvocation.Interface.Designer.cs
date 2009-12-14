@@ -10,7 +10,7 @@ namespace Kistl.App.Base
     /// <summary>
     /// Metadefinition Object for a MethodInvocation on a Method of a DataType.
     /// </summary>
-    public interface MethodInvocation : IDataObject, Kistl.App.Base.IExportable, Kistl.App.Base.IInvocation 
+    public interface MethodInvocation : IDataObject, Kistl.App.Base.IChangedBy, Kistl.App.Base.IExportable, Kistl.App.Base.IInvocation 
     {
 
         /// <summary>

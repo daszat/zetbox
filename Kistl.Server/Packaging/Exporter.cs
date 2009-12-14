@@ -41,7 +41,7 @@ namespace Kistl.Server.Packaging
                 {
                     Logging.Log.Debug("Loading modulelist");
                     var moduleList = GetModules(ctx, moduleNamespaces);
-                    WriteStartDocument(xml, new Kistl.App.Base.Module[] 
+                    WriteStartDocument(xml, ctx, new Kistl.App.Base.Module[] 
                         { 
                             ctx.GetQuery<Kistl.App.Base.Module>().First(m => m.Namespace == "Kistl.App.Base"),
                             ctx.GetQuery<Kistl.App.Base.Module>().First(m => m.Namespace == "Kistl.App.GUI"),
@@ -100,7 +100,7 @@ namespace Kistl.Server.Packaging
                 using (XmlWriter xml = XmlTextWriter.Create(s, new XmlWriterSettings() { Indent = true, CloseOutput = false, Encoding = Encoding.UTF8 }))
                 {
                     var moduleList = GetModules(ctx, moduleNamespaces);
-                    WriteStartDocument(xml, moduleList);
+                    WriteStartDocument(xml, ctx, moduleList);
 
                     var iexpIf = ctx.GetIExportableInterface();
                     foreach (var module in moduleList)
@@ -160,7 +160,7 @@ namespace Kistl.Server.Packaging
             xml.WriteEndElement();
         }
 
-        private static void WriteStartDocument(XmlWriter xml, IEnumerable<Kistl.App.Base.Module> moduleList)
+        private static void WriteStartDocument(XmlWriter xml, IKistlContext ctx, IEnumerable<Kistl.App.Base.Module> moduleList)
         {
             xml.WriteStartDocument();
             xml.WriteStartElement("KistlPackaging", "http://dasz.at/Kistl");
@@ -169,7 +169,24 @@ namespace Kistl.Server.Packaging
                 xml.WriteAttributeString("xmlns", module.ModuleName, null, module.Namespace);
             }
 
-            xml.WriteAttributeString("date", XmlConvert.ToString(DateTime.Now, XmlDateTimeSerializationMode.Utc));
+            DateTime? lastChanged = new DateTime?[] { 
+                ctx.GetQuery<Kistl.App.Base.Assembly>().Max(d => d.ChangedOn),
+                ctx.GetQuery<Kistl.App.Base.BaseParameter>().Max(d => d.ChangedOn),
+                ctx.GetQuery<Kistl.App.Base.Constraint>().Max(d => d.ChangedOn),
+                ctx.GetQuery<Kistl.App.Base.DataType>().Max(d => d.ChangedOn),
+                ctx.GetQuery<Kistl.App.Base.DefaultPropertyValue>().Max(d => d.ChangedOn),
+                ctx.GetQuery<Kistl.App.Base.EnumerationEntry>().Max(d => d.ChangedOn),
+                ctx.GetQuery<Kistl.App.Base.Method>().Max(d => d.ChangedOn),
+                ctx.GetQuery<Kistl.App.Base.MethodInvocation>().Max(d => d.ChangedOn),
+                ctx.GetQuery<Kistl.App.Base.Module>().Max(d => d.ChangedOn),
+                ctx.GetQuery<Kistl.App.Base.Property>().Max(d => d.ChangedOn),
+                ctx.GetQuery<Kistl.App.Base.PropertyInvocation>().Max(d => d.ChangedOn),
+                ctx.GetQuery<Kistl.App.Base.Relation>().Max(d => d.ChangedOn),
+                ctx.GetQuery<Kistl.App.Base.RelationEnd>().Max(d => d.ChangedOn),
+                ctx.GetQuery<Kistl.App.Base.TypeRef>().Max(d => d.ChangedOn)
+            }.Max();
+
+            xml.WriteAttributeString("date", XmlConvert.ToString(lastChanged ?? DateTime.Now, XmlDateTimeSerializationMode.Utc));
         }
 
         private static List<Kistl.App.Base.Module> GetModules(IKistlContext ctx, string[] moduleNamespaces)

@@ -10,7 +10,7 @@ namespace Kistl.App.Base
     /// <summary>
     /// Metadefinition Object for Methods.
     /// </summary>
-    public interface Method : IDataObject, Kistl.App.Base.IExportable 
+    public interface Method : IDataObject, Kistl.App.Base.IChangedBy, Kistl.App.Base.IExportable 
     {
 
         /// <summary>

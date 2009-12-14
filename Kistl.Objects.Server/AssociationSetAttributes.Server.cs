@@ -8,6 +8,36 @@ using Kistl.DALProvider.EF;
 
 
 	/*
+    Relation: FK_Assembly_was_ChangedBy
+    A: ZeroOrMore Assembly as Assembly
+    B: ZeroOrOne Identity as ChangedBy
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_Assembly_was_ChangedBy",
+    "Assembly", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.Assembly__Implementation__),
+    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Identity__Implementation__)
+    )]
+
+
+	/*
+    Relation: FK_Assembly_was_CreatedBy
+    A: ZeroOrMore Assembly as Assembly
+    B: ZeroOrOne Identity as CreatedBy
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_Assembly_was_CreatedBy",
+    "Assembly", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.Assembly__Implementation__),
+    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Identity__Implementation__)
+    )]
+
+
+	/*
     Relation: FK_Auftrag_ChangedBy_ChangedBy
     A: ZeroOrMore Auftrag as Auftrag
     B: ZeroOrOne Identity as ChangedBy
@@ -83,6 +113,36 @@ using Kistl.DALProvider.EF;
 
 
 	/*
+    Relation: FK_BaseParameter_was_ChangedBy
+    A: ZeroOrMore BaseParameter as BaseParameter
+    B: ZeroOrOne Identity as ChangedBy
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_BaseParameter_was_ChangedBy",
+    "BaseParameter", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.BaseParameter__Implementation__),
+    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Identity__Implementation__)
+    )]
+
+
+	/*
+    Relation: FK_BaseParameter_was_CreatedBy
+    A: ZeroOrMore BaseParameter as BaseParameter
+    B: ZeroOrOne Identity as CreatedBy
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_BaseParameter_was_CreatedBy",
+    "BaseParameter", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.BaseParameter__Implementation__),
+    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Identity__Implementation__)
+    )]
+
+
+	/*
     Relation: FK_BaseProperty_has_Module
     A: ZeroOrMore Property as BaseProperty
     B: ZeroOrOne Module as Module
@@ -143,6 +203,36 @@ using Kistl.DALProvider.EF;
 
 
 	/*
+    Relation: FK_Constraint_was_ChangedBy
+    A: ZeroOrMore Constraint as Constraint
+    B: ZeroOrOne Identity as ChangedBy
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_Constraint_was_ChangedBy",
+    "Constraint", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.Constraint__Implementation__),
+    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Identity__Implementation__)
+    )]
+
+
+	/*
+    Relation: FK_Constraint_was_CreatedBy
+    A: ZeroOrMore Constraint as Constraint
+    B: ZeroOrOne Identity as CreatedBy
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_Constraint_was_CreatedBy",
+    "Constraint", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.Constraint__Implementation__),
+    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Identity__Implementation__)
+    )]
+
+
+	/*
     Relation: FK_Control_isof_Kind
     A: ZeroOrMore ViewDescriptor as Control
     B: ZeroOrOne ControlKindClass as Kind
@@ -191,6 +281,66 @@ using Kistl.DALProvider.EF;
 
 
 	/*
+    Relation: FK_DataType_was_ChangedBy
+    A: ZeroOrMore DataType as DataType
+    B: ZeroOrOne Identity as ChangedBy
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_DataType_was_ChangedBy",
+    "DataType", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.DataType__Implementation__),
+    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Identity__Implementation__)
+    )]
+
+
+	/*
+    Relation: FK_DataType_was_CreatedBy
+    A: ZeroOrMore DataType as DataType
+    B: ZeroOrOne Identity as CreatedBy
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_DataType_was_CreatedBy",
+    "DataType", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.DataType__Implementation__),
+    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Identity__Implementation__)
+    )]
+
+
+	/*
+    Relation: FK_DefaultPropertyValue_was_ChangedBy
+    A: ZeroOrMore DefaultPropertyValue as DefaultPropertyValue
+    B: ZeroOrOne Identity as ChangedBy
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_DefaultPropertyValue_was_ChangedBy",
+    "DefaultPropertyValue", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.DefaultPropertyValue__Implementation__),
+    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Identity__Implementation__)
+    )]
+
+
+	/*
+    Relation: FK_DefaultPropertyValue_was_CreatedBy
+    A: ZeroOrMore DefaultPropertyValue as DefaultPropertyValue
+    B: ZeroOrOne Identity as CreatedBy
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_DefaultPropertyValue_was_CreatedBy",
+    "DefaultPropertyValue", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.DefaultPropertyValue__Implementation__),
+    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Identity__Implementation__)
+    )]
+
+
+	/*
     Relation: FK_Descriptor_has_PresentableModelRef
     A: ZeroOrMore PresentableModelDescriptor as Descriptor
     B: One TypeRef as PresentableModelRef
@@ -217,6 +367,36 @@ using Kistl.DALProvider.EF;
     "Model", "FK_Enumeration_has_EnumerationEntries",
     "Enumeration", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Enumeration__Implementation__),
     "EnumerationEntries", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.EnumerationEntry__Implementation__)
+    )]
+
+
+	/*
+    Relation: FK_EnumerationEntry_was_ChangedBy
+    A: ZeroOrMore EnumerationEntry as EnumerationEntry
+    B: ZeroOrOne Identity as ChangedBy
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_EnumerationEntry_was_ChangedBy",
+    "EnumerationEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.EnumerationEntry__Implementation__),
+    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Identity__Implementation__)
+    )]
+
+
+	/*
+    Relation: FK_EnumerationEntry_was_CreatedBy
+    A: ZeroOrMore EnumerationEntry as EnumerationEntry
+    B: ZeroOrOne Identity as CreatedBy
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_EnumerationEntry_was_CreatedBy",
+    "EnumerationEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.EnumerationEntry__Implementation__),
+    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Identity__Implementation__)
     )]
 
 
@@ -356,6 +536,36 @@ using Kistl.DALProvider.EF;
 
 
 	/*
+    Relation: FK_Method_was_ChangedBy
+    A: ZeroOrMore Method as Method
+    B: ZeroOrOne Identity as ChangedBy
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_Method_was_ChangedBy",
+    "Method", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.Method__Implementation__),
+    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Identity__Implementation__)
+    )]
+
+
+	/*
+    Relation: FK_Method_was_CreatedBy
+    A: ZeroOrMore Method as Method
+    B: ZeroOrOne Identity as CreatedBy
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_Method_was_CreatedBy",
+    "Method", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.Method__Implementation__),
+    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Identity__Implementation__)
+    )]
+
+
+	/*
     Relation: FK_MethodInvocation_has_Implementor
     A: ZeroOrMore MethodInvocation as MethodInvocation
     B: ZeroOrOne TypeRef as Implementor
@@ -382,6 +592,66 @@ using Kistl.DALProvider.EF;
     "Model", "FK_MethodInvocation_has_Module",
     "MethodInvocation", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.MethodInvocation__Implementation__),
     "Module", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Module__Implementation__)
+    )]
+
+
+	/*
+    Relation: FK_MethodInvocation_was_ChangedBy
+    A: ZeroOrMore MethodInvocation as MethodInvocation
+    B: ZeroOrOne Identity as ChangedBy
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_MethodInvocation_was_ChangedBy",
+    "MethodInvocation", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.MethodInvocation__Implementation__),
+    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Identity__Implementation__)
+    )]
+
+
+	/*
+    Relation: FK_MethodInvocation_was_CreatedBy
+    A: ZeroOrMore MethodInvocation as MethodInvocation
+    B: ZeroOrOne Identity as CreatedBy
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_MethodInvocation_was_CreatedBy",
+    "MethodInvocation", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.MethodInvocation__Implementation__),
+    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Identity__Implementation__)
+    )]
+
+
+	/*
+    Relation: FK_Mitarbeiter_was_ChangedBy
+    A: ZeroOrMore Mitarbeiter as Mitarbeiter
+    B: ZeroOrOne Identity as ChangedBy
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_Mitarbeiter_was_ChangedBy",
+    "Mitarbeiter", RelationshipMultiplicity.Many, typeof(Kistl.App.Projekte.Mitarbeiter__Implementation__),
+    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Identity__Implementation__)
+    )]
+
+
+	/*
+    Relation: FK_Mitarbeiter_was_CreatedBy
+    A: ZeroOrMore Mitarbeiter as Mitarbeiter
+    B: ZeroOrOne Identity as CreatedBy
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_Mitarbeiter_was_CreatedBy",
+    "Mitarbeiter", RelationshipMultiplicity.Many, typeof(Kistl.App.Projekte.Mitarbeiter__Implementation__),
+    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Identity__Implementation__)
     )]
 
 
@@ -427,6 +697,36 @@ using Kistl.DALProvider.EF;
     "Model", "FK_Module_has_Relation",
     "Module", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Module__Implementation__),
     "Relation", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.Relation__Implementation__)
+    )]
+
+
+	/*
+    Relation: FK_Module_was_ChangedBy
+    A: ZeroOrMore Module as Module
+    B: ZeroOrOne Identity as ChangedBy
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_Module_was_ChangedBy",
+    "Module", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.Module__Implementation__),
+    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Identity__Implementation__)
+    )]
+
+
+	/*
+    Relation: FK_Module_was_CreatedBy
+    A: ZeroOrMore Module as Module
+    B: ZeroOrOne Identity as CreatedBy
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_Module_was_CreatedBy",
+    "Module", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.Module__Implementation__),
+    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Identity__Implementation__)
     )]
 
 
@@ -695,6 +995,36 @@ using Kistl.DALProvider.EF;
 
 
 	/*
+    Relation: FK_Projekt_was_ChangedBy
+    A: ZeroOrMore Projekt as Projekt
+    B: ZeroOrOne Identity as ChangedBy
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_Projekt_was_ChangedBy",
+    "Projekt", RelationshipMultiplicity.Many, typeof(Kistl.App.Projekte.Projekt__Implementation__),
+    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Identity__Implementation__)
+    )]
+
+
+	/*
+    Relation: FK_Projekt_was_CreatedBy
+    A: ZeroOrMore Projekt as Projekt
+    B: ZeroOrOne Identity as CreatedBy
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_Projekt_was_CreatedBy",
+    "Projekt", RelationshipMultiplicity.Many, typeof(Kistl.App.Projekte.Projekt__Implementation__),
+    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Identity__Implementation__)
+    )]
+
+
+	/*
     Relation: FK_Projekte_haben_Mitarbeiter
     A: ZeroOrMore Projekt as Projekte
     B: ZeroOrMore Mitarbeiter as Mitarbeiter
@@ -743,6 +1073,36 @@ using Kistl.DALProvider.EF;
 
 
 	/*
+    Relation: FK_Property_was_ChangedBy
+    A: ZeroOrMore Property as Property
+    B: ZeroOrOne Identity as ChangedBy
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_Property_was_ChangedBy",
+    "Property", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.Property__Implementation__),
+    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Identity__Implementation__)
+    )]
+
+
+	/*
+    Relation: FK_Property_was_CreatedBy
+    A: ZeroOrMore Property as Property
+    B: ZeroOrOne Identity as CreatedBy
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_Property_was_CreatedBy",
+    "Property", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.Property__Implementation__),
+    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Identity__Implementation__)
+    )]
+
+
+	/*
     Relation: FK_PropertyInvocation_has_Implementor
     A: ZeroOrMore PropertyInvocation as PropertyInvocation
     B: One TypeRef as Implementor
@@ -754,6 +1114,36 @@ using Kistl.DALProvider.EF;
     "Model", "FK_PropertyInvocation_has_Implementor",
     "PropertyInvocation", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.PropertyInvocation__Implementation__),
     "Implementor", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.TypeRef__Implementation__)
+    )]
+
+
+	/*
+    Relation: FK_PropertyInvocation_was_ChangedBy
+    A: ZeroOrMore PropertyInvocation as PropertyInvocation
+    B: ZeroOrOne Identity as ChangedBy
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_PropertyInvocation_was_ChangedBy",
+    "PropertyInvocation", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.PropertyInvocation__Implementation__),
+    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Identity__Implementation__)
+    )]
+
+
+	/*
+    Relation: FK_PropertyInvocation_was_CreatedBy
+    A: ZeroOrMore PropertyInvocation as PropertyInvocation
+    B: ZeroOrOne Identity as CreatedBy
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_PropertyInvocation_was_CreatedBy",
+    "PropertyInvocation", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.PropertyInvocation__Implementation__),
+    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Identity__Implementation__)
     )]
 
 
@@ -788,6 +1178,36 @@ using Kistl.DALProvider.EF;
 
 
 	/*
+    Relation: FK_Relation_was_ChangedBy
+    A: ZeroOrMore Relation as Relation
+    B: ZeroOrOne Identity as ChangedBy
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_Relation_was_ChangedBy",
+    "Relation", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.Relation__Implementation__),
+    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Identity__Implementation__)
+    )]
+
+
+	/*
+    Relation: FK_Relation_was_CreatedBy
+    A: ZeroOrMore Relation as Relation
+    B: ZeroOrOne Identity as CreatedBy
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_Relation_was_CreatedBy",
+    "Relation", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.Relation__Implementation__),
+    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Identity__Implementation__)
+    )]
+
+
+	/*
     Relation: FK_RelationEnd_has_Navigator
     A: ZeroOrOne RelationEnd as RelationEnd
     B: ZeroOrOne ObjectReferenceProperty as Navigator
@@ -818,6 +1238,36 @@ using Kistl.DALProvider.EF;
 
 
 	/*
+    Relation: FK_RelationEnd_was_ChangedBy
+    A: ZeroOrMore RelationEnd as RelationEnd
+    B: ZeroOrOne Identity as ChangedBy
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_RelationEnd_was_ChangedBy",
+    "RelationEnd", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.RelationEnd__Implementation__),
+    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Identity__Implementation__)
+    )]
+
+
+	/*
+    Relation: FK_RelationEnd_was_CreatedBy
+    A: ZeroOrMore RelationEnd as RelationEnd
+    B: ZeroOrOne Identity as CreatedBy
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_RelationEnd_was_CreatedBy",
+    "RelationEnd", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.RelationEnd__Implementation__),
+    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Identity__Implementation__)
+    )]
+
+
+	/*
     Relation: FK_StructProperty_has_StructDefinition
     A: ZeroOrMore StructProperty as StructProperty
     B: ZeroOrOne Struct as StructDefinition
@@ -829,6 +1279,36 @@ using Kistl.DALProvider.EF;
     "Model", "FK_StructProperty_has_StructDefinition",
     "StructProperty", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.StructProperty__Implementation__),
     "StructDefinition", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Struct__Implementation__)
+    )]
+
+
+	/*
+    Relation: FK_Task_was_ChangedBy
+    A: ZeroOrMore Task as Task
+    B: ZeroOrOne Identity as ChangedBy
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_Task_was_ChangedBy",
+    "Task", RelationshipMultiplicity.Many, typeof(Kistl.App.Projekte.Task__Implementation__),
+    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Identity__Implementation__)
+    )]
+
+
+	/*
+    Relation: FK_Task_was_CreatedBy
+    A: ZeroOrMore Task as Task
+    B: ZeroOrOne Identity as CreatedBy
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_Task_was_CreatedBy",
+    "Task", RelationshipMultiplicity.Many, typeof(Kistl.App.Projekte.Task__Implementation__),
+    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Identity__Implementation__)
     )]
 
 
@@ -927,6 +1407,36 @@ using Kistl.DALProvider.EF;
     "GenericArguments", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.TypeRef__Implementation__),
     "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntry__Implementation__)
     )]
+
+	/*
+    Relation: FK_TypeRef_was_ChangedBy
+    A: ZeroOrMore TypeRef as TypeRef
+    B: ZeroOrOne Identity as ChangedBy
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_TypeRef_was_ChangedBy",
+    "TypeRef", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.TypeRef__Implementation__),
+    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Identity__Implementation__)
+    )]
+
+
+	/*
+    Relation: FK_TypeRef_was_CreatedBy
+    A: ZeroOrMore TypeRef as TypeRef
+    B: ZeroOrOne Identity as CreatedBy
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_TypeRef_was_CreatedBy",
+    "TypeRef", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.TypeRef__Implementation__),
+    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Identity__Implementation__)
+    )]
+
 
 	/*
     Relation: FK_View_has_ControlRef

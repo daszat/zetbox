@@ -152,5 +152,32 @@ namespace Kistl.App.Projekte
         public event TestMethodForParameter_Handler<Mitarbeiter> OnTestMethodForParameter_Mitarbeiter;
 
         #endregion
+
+        #region IChangedBy Members
+
+        public Kistl.App.Base.Identity ChangedBy
+        {
+            get; set;
+        }
+
+        public DateTime? ChangedOn
+        {
+            get;
+            set;
+        }
+
+        public Kistl.App.Base.Identity CreatedBy
+        {
+            get;
+            set;
+        }
+
+        public DateTime? CreatedOn
+        {
+            get;
+            set;
+        }
+
+        #endregion
     }
 }

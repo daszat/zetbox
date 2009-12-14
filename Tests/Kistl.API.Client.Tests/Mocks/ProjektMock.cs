@@ -159,5 +159,33 @@ namespace Kistl.App.Projekte
         private OneNRelationCollection<Kistl.App.Projekte.Task> _TasksWrapper;
 
         #endregion
+
+        #region IChangedBy Members
+
+        public Kistl.App.Base.Identity ChangedBy
+        {
+            get;
+            set;
+        }
+
+        public DateTime? ChangedOn
+        {
+            get;
+            set;
+        }
+
+        public Kistl.App.Base.Identity CreatedBy
+        {
+            get;
+            set;
+        }
+
+        public DateTime? CreatedOn
+        {
+            get;
+            set;
+        }
+
+        #endregion
     }
 }

@@ -10,7 +10,7 @@ namespace Kistl.App.Base
     /// <summary>
     /// Metadefinition Object for Modules.
     /// </summary>
-    public interface Module : IDataObject, Kistl.App.Base.IExportable 
+    public interface Module : IDataObject, Kistl.App.Base.IChangedBy, Kistl.App.Base.IExportable 
     {
 
         /// <summary>

@@ -553,6 +553,14 @@
 
 
     <!-- AssociationSets for all object-object relations which do not need CollectionEntrys -->
+    <AssociationSet Name="FK_Assembly_was_ChangedBy" Association="Model.Store.FK_Assembly_was_ChangedBy" >
+      <End Role="Assembly" EntitySet="Assembly" />
+      <End Role="ChangedBy" EntitySet="Identity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Assembly_was_CreatedBy" Association="Model.Store.FK_Assembly_was_CreatedBy" >
+      <End Role="Assembly" EntitySet="Assembly" />
+      <End Role="CreatedBy" EntitySet="Identity" />
+    </AssociationSet>
     <AssociationSet Name="FK_Auftrag_ChangedBy_ChangedBy" Association="Model.Store.FK_Auftrag_ChangedBy_ChangedBy" >
       <End Role="Auftrag" EntitySet="Auftrag" />
       <End Role="ChangedBy" EntitySet="Identity" />
@@ -573,6 +581,14 @@
       <End Role="BaseObjectClass" EntitySet="ObjectClass" />
       <End Role="SubClasses" EntitySet="ObjectClass" />
     </AssociationSet>
+    <AssociationSet Name="FK_BaseParameter_was_ChangedBy" Association="Model.Store.FK_BaseParameter_was_ChangedBy" >
+      <End Role="BaseParameter" EntitySet="BaseParameter" />
+      <End Role="ChangedBy" EntitySet="Identity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BaseParameter_was_CreatedBy" Association="Model.Store.FK_BaseParameter_was_CreatedBy" >
+      <End Role="BaseParameter" EntitySet="BaseParameter" />
+      <End Role="CreatedBy" EntitySet="Identity" />
+    </AssociationSet>
     <AssociationSet Name="FK_BaseProperty_has_Module" Association="Model.Store.FK_BaseProperty_has_Module" >
       <End Role="BaseProperty" EntitySet="Property" />
       <End Role="Module" EntitySet="Module" />
@@ -589,6 +605,14 @@
       <End Role="ConstrainedProperty" EntitySet="Property" />
       <End Role="Constraints" EntitySet="Constraint" />
     </AssociationSet>
+    <AssociationSet Name="FK_Constraint_was_ChangedBy" Association="Model.Store.FK_Constraint_was_ChangedBy" >
+      <End Role="Constraint" EntitySet="Constraint" />
+      <End Role="ChangedBy" EntitySet="Identity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Constraint_was_CreatedBy" Association="Model.Store.FK_Constraint_was_CreatedBy" >
+      <End Role="Constraint" EntitySet="Constraint" />
+      <End Role="CreatedBy" EntitySet="Identity" />
+    </AssociationSet>
     <AssociationSet Name="FK_Control_isof_Kind" Association="Model.Store.FK_Control_isof_Kind" >
       <End Role="Control" EntitySet="ViewDescriptor" />
       <End Role="Kind" EntitySet="ControlKindClass" />
@@ -597,6 +621,22 @@
       <End Role="DataType" EntitySet="DataType" />
       <End Role="DefaultIcon" EntitySet="Icon" />
     </AssociationSet>
+    <AssociationSet Name="FK_DataType_was_ChangedBy" Association="Model.Store.FK_DataType_was_ChangedBy" >
+      <End Role="DataType" EntitySet="DataType" />
+      <End Role="ChangedBy" EntitySet="Identity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DataType_was_CreatedBy" Association="Model.Store.FK_DataType_was_CreatedBy" >
+      <End Role="DataType" EntitySet="DataType" />
+      <End Role="CreatedBy" EntitySet="Identity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DefaultPropertyValue_was_ChangedBy" Association="Model.Store.FK_DefaultPropertyValue_was_ChangedBy" >
+      <End Role="DefaultPropertyValue" EntitySet="DefaultPropertyValue" />
+      <End Role="ChangedBy" EntitySet="Identity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DefaultPropertyValue_was_CreatedBy" Association="Model.Store.FK_DefaultPropertyValue_was_CreatedBy" >
+      <End Role="DefaultPropertyValue" EntitySet="DefaultPropertyValue" />
+      <End Role="CreatedBy" EntitySet="Identity" />
+    </AssociationSet>
     <AssociationSet Name="FK_Descriptor_has_PresentableModelRef" Association="Model.Store.FK_Descriptor_has_PresentableModelRef" >
       <End Role="Descriptor" EntitySet="PresentableModelDescriptor" />
       <End Role="PresentableModelRef" EntitySet="TypeRef" />
@@ -604,6 +644,14 @@
     <AssociationSet Name="FK_Enumeration_has_EnumerationEntries" Association="Model.Store.FK_Enumeration_has_EnumerationEntries" >
       <End Role="Enumeration" EntitySet="Enumeration" />
       <End Role="EnumerationEntries" EntitySet="EnumerationEntry" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EnumerationEntry_was_ChangedBy" Association="Model.Store.FK_EnumerationEntry_was_ChangedBy" >
+      <End Role="EnumerationEntry" EntitySet="EnumerationEntry" />
+      <End Role="ChangedBy" EntitySet="Identity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EnumerationEntry_was_CreatedBy" Association="Model.Store.FK_EnumerationEntry_was_CreatedBy" >
+      <End Role="EnumerationEntry" EntitySet="EnumerationEntry" />
+      <End Role="CreatedBy" EntitySet="Identity" />
     </AssociationSet>
     <AssociationSet Name="FK_EnumerationProperty_has_Enumeration" Association="Model.Store.FK_EnumerationProperty_has_Enumeration" >
       <End Role="EnumerationProperty" EntitySet="EnumerationProperty" />
@@ -641,6 +689,14 @@
       <End Role="Method" EntitySet="Method" />
       <End Role="Parameter" EntitySet="BaseParameter" />
     </AssociationSet>
+    <AssociationSet Name="FK_Method_was_ChangedBy" Association="Model.Store.FK_Method_was_ChangedBy" >
+      <End Role="Method" EntitySet="Method" />
+      <End Role="ChangedBy" EntitySet="Identity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Method_was_CreatedBy" Association="Model.Store.FK_Method_was_CreatedBy" >
+      <End Role="Method" EntitySet="Method" />
+      <End Role="CreatedBy" EntitySet="Identity" />
+    </AssociationSet>
     <AssociationSet Name="FK_MethodInvocation_has_Implementor" Association="Model.Store.FK_MethodInvocation_has_Implementor" >
       <End Role="MethodInvocation" EntitySet="MethodInvocation" />
       <End Role="Implementor" EntitySet="TypeRef" />
@@ -648,6 +704,22 @@
     <AssociationSet Name="FK_MethodInvocation_has_Module" Association="Model.Store.FK_MethodInvocation_has_Module" >
       <End Role="MethodInvocation" EntitySet="MethodInvocation" />
       <End Role="Module" EntitySet="Module" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MethodInvocation_was_ChangedBy" Association="Model.Store.FK_MethodInvocation_was_ChangedBy" >
+      <End Role="MethodInvocation" EntitySet="MethodInvocation" />
+      <End Role="ChangedBy" EntitySet="Identity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MethodInvocation_was_CreatedBy" Association="Model.Store.FK_MethodInvocation_was_CreatedBy" >
+      <End Role="MethodInvocation" EntitySet="MethodInvocation" />
+      <End Role="CreatedBy" EntitySet="Identity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Mitarbeiter_was_ChangedBy" Association="Model.Store.FK_Mitarbeiter_was_ChangedBy" >
+      <End Role="Mitarbeiter" EntitySet="Mitarbeiter" />
+      <End Role="ChangedBy" EntitySet="Identity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Mitarbeiter_was_CreatedBy" Association="Model.Store.FK_Mitarbeiter_was_CreatedBy" >
+      <End Role="Mitarbeiter" EntitySet="Mitarbeiter" />
+      <End Role="CreatedBy" EntitySet="Identity" />
     </AssociationSet>
     <AssociationSet Name="FK_Module_has_Assemblies" Association="Model.Store.FK_Module_has_Assemblies" >
       <End Role="Module" EntitySet="Module" />
@@ -660,6 +732,14 @@
     <AssociationSet Name="FK_Module_has_Relation" Association="Model.Store.FK_Module_has_Relation" >
       <End Role="Module" EntitySet="Module" />
       <End Role="Relation" EntitySet="Relation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Module_was_ChangedBy" Association="Model.Store.FK_Module_was_ChangedBy" >
+      <End Role="Module" EntitySet="Module" />
+      <End Role="ChangedBy" EntitySet="Identity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Module_was_CreatedBy" Association="Model.Store.FK_Module_was_CreatedBy" >
+      <End Role="Module" EntitySet="Module" />
+      <End Role="CreatedBy" EntitySet="Identity" />
     </AssociationSet>
     <AssociationSet Name="FK_MuhBlah_List_Role_hasOther_TestCustomObjects_Role" Association="Model.Store.FK_MuhBlah_List_Role_hasOther_TestCustomObjects_Role" >
       <End Role="MuhBlah_List_Role" EntitySet="Muhblah" />
@@ -717,6 +797,14 @@
       <End Role="Projekt" EntitySet="Projekt" />
       <End Role="Tasks" EntitySet="Task" />
     </AssociationSet>
+    <AssociationSet Name="FK_Projekt_was_ChangedBy" Association="Model.Store.FK_Projekt_was_ChangedBy" >
+      <End Role="Projekt" EntitySet="Projekt" />
+      <End Role="ChangedBy" EntitySet="Identity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Projekt_was_CreatedBy" Association="Model.Store.FK_Projekt_was_CreatedBy" >
+      <End Role="Projekt" EntitySet="Projekt" />
+      <End Role="CreatedBy" EntitySet="Identity" />
+    </AssociationSet>
     <AssociationSet Name="FK_Property_has_DefaultValue" Association="Model.Store.FK_Property_has_DefaultValue" >
       <End Role="Property" EntitySet="Property" />
       <End Role="DefaultValue" EntitySet="DefaultPropertyValue" />
@@ -725,9 +813,25 @@
       <End Role="Property" EntitySet="Property" />
       <End Role="ValueModelDescriptor" EntitySet="PresentableModelDescriptor" />
     </AssociationSet>
+    <AssociationSet Name="FK_Property_was_ChangedBy" Association="Model.Store.FK_Property_was_ChangedBy" >
+      <End Role="Property" EntitySet="Property" />
+      <End Role="ChangedBy" EntitySet="Identity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Property_was_CreatedBy" Association="Model.Store.FK_Property_was_CreatedBy" >
+      <End Role="Property" EntitySet="Property" />
+      <End Role="CreatedBy" EntitySet="Identity" />
+    </AssociationSet>
     <AssociationSet Name="FK_PropertyInvocation_has_Implementor" Association="Model.Store.FK_PropertyInvocation_has_Implementor" >
       <End Role="PropertyInvocation" EntitySet="PropertyInvocation" />
       <End Role="Implementor" EntitySet="TypeRef" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PropertyInvocation_was_ChangedBy" Association="Model.Store.FK_PropertyInvocation_was_ChangedBy" >
+      <End Role="PropertyInvocation" EntitySet="PropertyInvocation" />
+      <End Role="ChangedBy" EntitySet="Identity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PropertyInvocation_was_CreatedBy" Association="Model.Store.FK_PropertyInvocation_was_CreatedBy" >
+      <End Role="PropertyInvocation" EntitySet="PropertyInvocation" />
+      <End Role="CreatedBy" EntitySet="Identity" />
     </AssociationSet>
     <AssociationSet Name="FK_Relation_hasA_A" Association="Model.Store.FK_Relation_hasA_A" >
       <End Role="Relation" EntitySet="Relation" />
@@ -737,6 +841,14 @@
       <End Role="Relation" EntitySet="Relation" />
       <End Role="B" EntitySet="RelationEnd" />
     </AssociationSet>
+    <AssociationSet Name="FK_Relation_was_ChangedBy" Association="Model.Store.FK_Relation_was_ChangedBy" >
+      <End Role="Relation" EntitySet="Relation" />
+      <End Role="ChangedBy" EntitySet="Identity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Relation_was_CreatedBy" Association="Model.Store.FK_Relation_was_CreatedBy" >
+      <End Role="Relation" EntitySet="Relation" />
+      <End Role="CreatedBy" EntitySet="Identity" />
+    </AssociationSet>
     <AssociationSet Name="FK_RelationEnd_has_Navigator" Association="Model.Store.FK_RelationEnd_has_Navigator" >
       <End Role="RelationEnd" EntitySet="RelationEnd" />
       <End Role="Navigator" EntitySet="ObjectReferenceProperty" />
@@ -745,9 +857,25 @@
       <End Role="RelationEnd" EntitySet="RelationEnd" />
       <End Role="Type" EntitySet="ObjectClass" />
     </AssociationSet>
+    <AssociationSet Name="FK_RelationEnd_was_ChangedBy" Association="Model.Store.FK_RelationEnd_was_ChangedBy" >
+      <End Role="RelationEnd" EntitySet="RelationEnd" />
+      <End Role="ChangedBy" EntitySet="Identity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RelationEnd_was_CreatedBy" Association="Model.Store.FK_RelationEnd_was_CreatedBy" >
+      <End Role="RelationEnd" EntitySet="RelationEnd" />
+      <End Role="CreatedBy" EntitySet="Identity" />
+    </AssociationSet>
     <AssociationSet Name="FK_StructProperty_has_StructDefinition" Association="Model.Store.FK_StructProperty_has_StructDefinition" >
       <End Role="StructProperty" EntitySet="StructProperty" />
       <End Role="StructDefinition" EntitySet="Struct" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Task_was_ChangedBy" Association="Model.Store.FK_Task_was_ChangedBy" >
+      <End Role="Task" EntitySet="Task" />
+      <End Role="ChangedBy" EntitySet="Identity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Task_was_CreatedBy" Association="Model.Store.FK_Task_was_CreatedBy" >
+      <End Role="Task" EntitySet="Task" />
+      <End Role="CreatedBy" EntitySet="Identity" />
     </AssociationSet>
     <AssociationSet Name="FK_Template_has_DisplayedTypeAssembly" Association="Model.Store.FK_Template_has_DisplayedTypeAssembly" >
       <End Role="Template" EntitySet="Template" />
@@ -764,6 +892,14 @@
     <AssociationSet Name="FK_TypeRef_has_Assembly" Association="Model.Store.FK_TypeRef_has_Assembly" >
       <End Role="TypeRef" EntitySet="TypeRef" />
       <End Role="Assembly" EntitySet="Assembly" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TypeRef_was_ChangedBy" Association="Model.Store.FK_TypeRef_was_ChangedBy" >
+      <End Role="TypeRef" EntitySet="TypeRef" />
+      <End Role="ChangedBy" EntitySet="Identity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TypeRef_was_CreatedBy" Association="Model.Store.FK_TypeRef_was_CreatedBy" >
+      <End Role="TypeRef" EntitySet="TypeRef" />
+      <End Role="CreatedBy" EntitySet="Identity" />
     </AssociationSet>
     <AssociationSet Name="FK_View_has_ControlRef" Association="Model.Store.FK_View_has_ControlRef" >
       <End Role="View" EntitySet="ViewDescriptor" />
@@ -829,8 +965,12 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_ChangedBy" Type="int" />
+    <Property Name="fk_CreatedBy" Type="int" />
     <Property Name="fk_Module" Type="int" />
     <Property Name="AssemblyName" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="ChangedOn" Type="datetime" Nullable="true" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="true" />
     <Property Name="DeploymentRestrictions" Type="int" Nullable="false" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
  
@@ -858,8 +998,12 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_ChangedBy" Type="int" />
+    <Property Name="fk_CreatedBy" Type="int" />
     <Property Name="fk_Method" Type="int" />
     <Property Name="fk_Method_pos" Type="int" Nullable="true" />
+    <Property Name="ChangedOn" Type="datetime" Nullable="true" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="true" />
     <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="true" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
     <Property Name="IsList" Type="bit" Nullable="false" />
@@ -924,7 +1068,11 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_ChangedBy" Type="int" />
     <Property Name="fk_ConstrainedProperty" Type="int" />
+    <Property Name="fk_CreatedBy" Type="int" />
+    <Property Name="ChangedOn" Type="datetime" Nullable="true" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="true" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
     <Property Name="Reason" Type="nvarchar" MaxLength="400" Nullable="true" />
  
@@ -986,9 +1134,13 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_ChangedBy" Type="int" />
+    <Property Name="fk_CreatedBy" Type="int" />
     <Property Name="fk_DefaultIcon" Type="int" />
     <Property Name="fk_Module" Type="int" />
+    <Property Name="ChangedOn" Type="datetime" Nullable="true" />
     <Property Name="ClassName" Type="nvarchar" MaxLength="51" Nullable="false" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="true" />
     <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="true" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
     <Property Name="ShowIconInLists" Type="bit" Nullable="false" />
@@ -1018,7 +1170,11 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_ChangedBy" Type="int" />
+    <Property Name="fk_CreatedBy" Type="int" />
     <Property Name="fk_Property" Type="int" />
+    <Property Name="ChangedOn" Type="datetime" Nullable="true" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="true" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
  
   </EntityType>
@@ -1052,7 +1208,11 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_ChangedBy" Type="int" />
+    <Property Name="fk_CreatedBy" Type="int" />
     <Property Name="fk_Enumeration" Type="int" />
+    <Property Name="ChangedOn" Type="datetime" Nullable="true" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="true" />
     <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="true" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
     <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
@@ -1196,8 +1356,12 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_ChangedBy" Type="int" />
+    <Property Name="fk_CreatedBy" Type="int" />
     <Property Name="fk_Module" Type="int" />
     <Property Name="fk_ObjectClass" Type="int" />
+    <Property Name="ChangedOn" Type="datetime" Nullable="true" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="true" />
     <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="true" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
     <Property Name="IsDisplayable" Type="bit" Nullable="false" />
@@ -1210,10 +1374,14 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_ChangedBy" Type="int" />
+    <Property Name="fk_CreatedBy" Type="int" />
     <Property Name="fk_Implementor" Type="int" />
     <Property Name="fk_InvokeOnObjectClass" Type="int" />
     <Property Name="fk_Method" Type="int" />
     <Property Name="fk_Module" Type="int" />
+    <Property Name="ChangedOn" Type="datetime" Nullable="true" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="true" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
     <Property Name="MemberName" Type="nvarchar" MaxLength="200" Nullable="false" />
  
@@ -1232,6 +1400,10 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_ChangedBy" Type="int" />
+    <Property Name="fk_CreatedBy" Type="int" />
+    <Property Name="ChangedOn" Type="datetime" Nullable="true" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="true" />
     <Property Name="Geburtstag" Type="datetime" Nullable="true" />
     <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="true" />
     <Property Name="SVNr" Type="nvarchar" MaxLength="20" Nullable="true" />
@@ -1244,6 +1416,10 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_ChangedBy" Type="int" />
+    <Property Name="fk_CreatedBy" Type="int" />
+    <Property Name="ChangedOn" Type="datetime" Nullable="true" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="true" />
     <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="true" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
     <Property Name="ModuleName" Type="nvarchar" MaxLength="200" Nullable="false" />
@@ -1380,7 +1556,11 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_ChangedBy" Type="int" />
+    <Property Name="fk_CreatedBy" Type="int" />
     <Property Name="AufwandGes" Type="float" Nullable="true" />
+    <Property Name="ChangedOn" Type="datetime" Nullable="true" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="true" />
     <Property Name="Kundenname" Type="nvarchar" MaxLength="100" Nullable="true" />
     <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="true" />
  
@@ -1391,10 +1571,14 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_ChangedBy" Type="int" />
+    <Property Name="fk_CreatedBy" Type="int" />
     <Property Name="fk_Module" Type="int" />
     <Property Name="fk_ObjectClass" Type="int" />
     <Property Name="fk_ValueModelDescriptor" Type="int" />
     <Property Name="CategoryTags" Type="nvarchar" MaxLength="4000" Nullable="true" />
+    <Property Name="ChangedOn" Type="datetime" Nullable="true" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="true" />
     <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="true" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
     <Property Name="PropertyName" Type="nvarchar" MaxLength="100" Nullable="false" />
@@ -1414,8 +1598,12 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_ChangedBy" Type="int" />
+    <Property Name="fk_CreatedBy" Type="int" />
     <Property Name="fk_Implementor" Type="int" />
     <Property Name="fk_InvokeOnProperty" Type="int" />
+    <Property Name="ChangedOn" Type="datetime" Nullable="true" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="true" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
     <Property Name="InvocationType" Type="int" Nullable="false" />
     <Property Name="MemberName" Type="nvarchar" MaxLength="200" Nullable="false" />
@@ -1429,7 +1617,11 @@
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="fk_A" Type="int" />
     <Property Name="fk_B" Type="int" />
+    <Property Name="fk_ChangedBy" Type="int" />
+    <Property Name="fk_CreatedBy" Type="int" />
     <Property Name="fk_Module" Type="int" />
+    <Property Name="ChangedOn" Type="datetime" Nullable="true" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="true" />
     <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="true" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
     <Property Name="Storage" Type="int" Nullable="false" />
@@ -1450,8 +1642,12 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_ChangedBy" Type="int" />
+    <Property Name="fk_CreatedBy" Type="int" />
     <Property Name="fk_Navigator" Type="int" />
     <Property Name="fk_Type" Type="int" />
+    <Property Name="ChangedOn" Type="datetime" Nullable="true" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="true" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
     <Property Name="HasPersistentOrder" Type="bit" Nullable="false" />
     <Property Name="Multiplicity" Type="int" Nullable="false" />
@@ -1525,8 +1721,12 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_ChangedBy" Type="int" />
+    <Property Name="fk_CreatedBy" Type="int" />
     <Property Name="fk_Projekt" Type="int" />
     <Property Name="Aufwand" Type="float" Nullable="true" />
+    <Property Name="ChangedOn" Type="datetime" Nullable="true" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="true" />
     <Property Name="DatumBis" Type="datetime" Nullable="true" />
     <Property Name="DatumVon" Type="datetime" Nullable="true" />
     <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="true" />
@@ -1582,7 +1782,11 @@
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="fk_Assembly" Type="int" />
+    <Property Name="fk_ChangedBy" Type="int" />
+    <Property Name="fk_CreatedBy" Type="int" />
     <Property Name="fk_Parent" Type="int" />
+    <Property Name="ChangedOn" Type="datetime" Nullable="true" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="true" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
     <Property Name="FullName" Type="nvarchar" MaxLength="200" Nullable="false" />
  
@@ -2066,6 +2270,36 @@
 
   <!-- Associations for all object-object relations without CollectionEntry (1:1, 1:N) -->
 
+  <Association Name="FK_Assembly_was_ChangedBy">
+    <End Role="ChangedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
+    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
+    <End Role="Assembly" Type="Model.Store.Assembly" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ChangedBy">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Assembly">
+        <PropertyRef Name="fk_ChangedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_Assembly_was_CreatedBy">
+    <End Role="CreatedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
+    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
+    <End Role="Assembly" Type="Model.Store.Assembly" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CreatedBy">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Assembly">
+        <PropertyRef Name="fk_CreatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
   <Association Name="FK_Auftrag_ChangedBy_ChangedBy">
     <End Role="ChangedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
     <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
@@ -2141,6 +2375,36 @@
   </Association>
 
 
+  <Association Name="FK_BaseParameter_was_ChangedBy">
+    <End Role="ChangedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
+    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
+    <End Role="BaseParameter" Type="Model.Store.BaseParameter" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ChangedBy">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="BaseParameter">
+        <PropertyRef Name="fk_ChangedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_BaseParameter_was_CreatedBy">
+    <End Role="CreatedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
+    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
+    <End Role="BaseParameter" Type="Model.Store.BaseParameter" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CreatedBy">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="BaseParameter">
+        <PropertyRef Name="fk_CreatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
   <Association Name="FK_BaseProperty_has_Module">
     <End Role="Module" Type="Model.Store.Module" Multiplicity="0..1" />
     <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
@@ -2201,6 +2465,36 @@
   </Association>
 
 
+  <Association Name="FK_Constraint_was_ChangedBy">
+    <End Role="ChangedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
+    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
+    <End Role="Constraint" Type="Model.Store.Constraint" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ChangedBy">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Constraint">
+        <PropertyRef Name="fk_ChangedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_Constraint_was_CreatedBy">
+    <End Role="CreatedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
+    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
+    <End Role="Constraint" Type="Model.Store.Constraint" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CreatedBy">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Constraint">
+        <PropertyRef Name="fk_CreatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
   <Association Name="FK_Control_isof_Kind">
     <End Role="Kind" Type="Model.Store.ControlKindClass" Multiplicity="0..1" />
     <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
@@ -2231,6 +2525,66 @@
   </Association>
 
 
+  <Association Name="FK_DataType_was_ChangedBy">
+    <End Role="ChangedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
+    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
+    <End Role="DataType" Type="Model.Store.DataType" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ChangedBy">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="DataType">
+        <PropertyRef Name="fk_ChangedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_DataType_was_CreatedBy">
+    <End Role="CreatedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
+    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
+    <End Role="DataType" Type="Model.Store.DataType" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CreatedBy">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="DataType">
+        <PropertyRef Name="fk_CreatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_DefaultPropertyValue_was_ChangedBy">
+    <End Role="ChangedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
+    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
+    <End Role="DefaultPropertyValue" Type="Model.Store.DefaultPropertyValue" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ChangedBy">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="DefaultPropertyValue">
+        <PropertyRef Name="fk_ChangedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_DefaultPropertyValue_was_CreatedBy">
+    <End Role="CreatedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
+    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
+    <End Role="DefaultPropertyValue" Type="Model.Store.DefaultPropertyValue" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CreatedBy">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="DefaultPropertyValue">
+        <PropertyRef Name="fk_CreatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
   <Association Name="FK_Descriptor_has_PresentableModelRef">
     <End Role="PresentableModelRef" Type="Model.Store.TypeRef" Multiplicity="0..1" />
     <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
@@ -2256,6 +2610,36 @@
       </Principal>
       <Dependent Role="EnumerationEntries">
         <PropertyRef Name="fk_Enumeration" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_EnumerationEntry_was_ChangedBy">
+    <End Role="ChangedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
+    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
+    <End Role="EnumerationEntry" Type="Model.Store.EnumerationEntry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ChangedBy">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="EnumerationEntry">
+        <PropertyRef Name="fk_ChangedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_EnumerationEntry_was_CreatedBy">
+    <End Role="CreatedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
+    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
+    <End Role="EnumerationEntry" Type="Model.Store.EnumerationEntry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CreatedBy">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="EnumerationEntry">
+        <PropertyRef Name="fk_CreatedBy" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -2396,6 +2780,36 @@
   </Association>
 
 
+  <Association Name="FK_Method_was_ChangedBy">
+    <End Role="ChangedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
+    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
+    <End Role="Method" Type="Model.Store.Method" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ChangedBy">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Method">
+        <PropertyRef Name="fk_ChangedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_Method_was_CreatedBy">
+    <End Role="CreatedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
+    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
+    <End Role="Method" Type="Model.Store.Method" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CreatedBy">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Method">
+        <PropertyRef Name="fk_CreatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
   <Association Name="FK_MethodInvocation_has_Implementor">
     <End Role="Implementor" Type="Model.Store.TypeRef" Multiplicity="0..1" />
     <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
@@ -2421,6 +2835,66 @@
       </Principal>
       <Dependent Role="MethodInvocation">
         <PropertyRef Name="fk_Module" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_MethodInvocation_was_ChangedBy">
+    <End Role="ChangedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
+    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
+    <End Role="MethodInvocation" Type="Model.Store.MethodInvocation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ChangedBy">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="MethodInvocation">
+        <PropertyRef Name="fk_ChangedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_MethodInvocation_was_CreatedBy">
+    <End Role="CreatedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
+    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
+    <End Role="MethodInvocation" Type="Model.Store.MethodInvocation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CreatedBy">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="MethodInvocation">
+        <PropertyRef Name="fk_CreatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_Mitarbeiter_was_ChangedBy">
+    <End Role="ChangedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
+    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
+    <End Role="Mitarbeiter" Type="Model.Store.Mitarbeiter" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ChangedBy">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Mitarbeiter">
+        <PropertyRef Name="fk_ChangedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_Mitarbeiter_was_CreatedBy">
+    <End Role="CreatedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
+    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
+    <End Role="Mitarbeiter" Type="Model.Store.Mitarbeiter" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CreatedBy">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Mitarbeiter">
+        <PropertyRef Name="fk_CreatedBy" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -2466,6 +2940,36 @@
       </Principal>
       <Dependent Role="Relation">
         <PropertyRef Name="fk_Module" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_Module_was_ChangedBy">
+    <End Role="ChangedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
+    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
+    <End Role="Module" Type="Model.Store.Module" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ChangedBy">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Module">
+        <PropertyRef Name="fk_ChangedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_Module_was_CreatedBy">
+    <End Role="CreatedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
+    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
+    <End Role="Module" Type="Model.Store.Module" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CreatedBy">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Module">
+        <PropertyRef Name="fk_CreatedBy" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -2681,6 +3185,36 @@
   </Association>
 
 
+  <Association Name="FK_Projekt_was_ChangedBy">
+    <End Role="ChangedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
+    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
+    <End Role="Projekt" Type="Model.Store.Projekt" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ChangedBy">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Projekt">
+        <PropertyRef Name="fk_ChangedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_Projekt_was_CreatedBy">
+    <End Role="CreatedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
+    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
+    <End Role="Projekt" Type="Model.Store.Projekt" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CreatedBy">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Projekt">
+        <PropertyRef Name="fk_CreatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
   <Association Name="FK_Property_has_DefaultValue">
     <End Role="Property" Type="Model.Store.Property" Multiplicity="0..1" />
     <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
@@ -2711,6 +3245,36 @@
   </Association>
 
 
+  <Association Name="FK_Property_was_ChangedBy">
+    <End Role="ChangedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
+    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
+    <End Role="Property" Type="Model.Store.Property" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ChangedBy">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Property">
+        <PropertyRef Name="fk_ChangedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_Property_was_CreatedBy">
+    <End Role="CreatedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
+    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
+    <End Role="Property" Type="Model.Store.Property" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CreatedBy">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Property">
+        <PropertyRef Name="fk_CreatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
   <Association Name="FK_PropertyInvocation_has_Implementor">
     <End Role="Implementor" Type="Model.Store.TypeRef" Multiplicity="0..1" />
     <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
@@ -2721,6 +3285,36 @@
       </Principal>
       <Dependent Role="PropertyInvocation">
         <PropertyRef Name="fk_Implementor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_PropertyInvocation_was_ChangedBy">
+    <End Role="ChangedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
+    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
+    <End Role="PropertyInvocation" Type="Model.Store.PropertyInvocation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ChangedBy">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PropertyInvocation">
+        <PropertyRef Name="fk_ChangedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_PropertyInvocation_was_CreatedBy">
+    <End Role="CreatedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
+    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
+    <End Role="PropertyInvocation" Type="Model.Store.PropertyInvocation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CreatedBy">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PropertyInvocation">
+        <PropertyRef Name="fk_CreatedBy" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -2756,6 +3350,36 @@
   </Association>
 
 
+  <Association Name="FK_Relation_was_ChangedBy">
+    <End Role="ChangedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
+    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
+    <End Role="Relation" Type="Model.Store.Relation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ChangedBy">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Relation">
+        <PropertyRef Name="fk_ChangedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_Relation_was_CreatedBy">
+    <End Role="CreatedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
+    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
+    <End Role="Relation" Type="Model.Store.Relation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CreatedBy">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Relation">
+        <PropertyRef Name="fk_CreatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
   <Association Name="FK_RelationEnd_has_Navigator">
     <End Role="Navigator" Type="Model.Store.ObjectReferenceProperty" Multiplicity="0..1" />
     <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
@@ -2786,6 +3410,36 @@
   </Association>
 
 
+  <Association Name="FK_RelationEnd_was_ChangedBy">
+    <End Role="ChangedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
+    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
+    <End Role="RelationEnd" Type="Model.Store.RelationEnd" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ChangedBy">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="RelationEnd">
+        <PropertyRef Name="fk_ChangedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_RelationEnd_was_CreatedBy">
+    <End Role="CreatedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
+    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
+    <End Role="RelationEnd" Type="Model.Store.RelationEnd" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CreatedBy">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="RelationEnd">
+        <PropertyRef Name="fk_CreatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
   <Association Name="FK_StructProperty_has_StructDefinition">
     <End Role="StructDefinition" Type="Model.Store.Struct" Multiplicity="0..1" />
     <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
@@ -2796,6 +3450,36 @@
       </Principal>
       <Dependent Role="StructProperty">
         <PropertyRef Name="fk_StructDefinition" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_Task_was_ChangedBy">
+    <End Role="ChangedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
+    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
+    <End Role="Task" Type="Model.Store.Task" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ChangedBy">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Task">
+        <PropertyRef Name="fk_ChangedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_Task_was_CreatedBy">
+    <End Role="CreatedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
+    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
+    <End Role="Task" Type="Model.Store.Task" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CreatedBy">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Task">
+        <PropertyRef Name="fk_CreatedBy" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -2856,6 +3540,36 @@
       </Principal>
       <Dependent Role="TypeRef">
         <PropertyRef Name="fk_Assembly" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_TypeRef_was_ChangedBy">
+    <End Role="ChangedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
+    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
+    <End Role="TypeRef" Type="Model.Store.TypeRef" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ChangedBy">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TypeRef">
+        <PropertyRef Name="fk_ChangedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_TypeRef_was_CreatedBy">
+    <End Role="CreatedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
+    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
+    <End Role="TypeRef" Type="Model.Store.TypeRef" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CreatedBy">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TypeRef">
+        <PropertyRef Name="fk_CreatedBy" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

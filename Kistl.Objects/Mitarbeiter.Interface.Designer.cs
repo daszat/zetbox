@@ -10,7 +10,7 @@ namespace Kistl.App.Projekte
     /// <summary>
     /// 
     /// </summary>
-    public interface Mitarbeiter : IDataObject 
+    public interface Mitarbeiter : IDataObject, Kistl.App.Base.IChangedBy 
     {
 
         /// <summary>
