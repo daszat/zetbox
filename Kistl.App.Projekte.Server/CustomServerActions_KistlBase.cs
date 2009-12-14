@@ -164,7 +164,7 @@ namespace Kistl.App.Base
 
         public void OnGetParameterTypeString_CLRObjectParameter(Kistl.App.Base.CLRObjectParameter obj, Kistl.API.MethodReturnEventArgs<string> e)
         {
-            e.Result = obj.FullTypeName;
+            e.Result = obj.Type.FullName;
         }
         #endregion
 

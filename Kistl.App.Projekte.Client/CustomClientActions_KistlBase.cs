@@ -198,7 +198,7 @@ namespace Kistl.App.Base
 
         public void OnGetParameterTypeString_CLRObjectParameter(CLRObjectParameter obj, MethodReturnEventArgs<string> e)
         {
-            e.Result = String.Format("{0}, {1}", obj.FullTypeName, obj.Assembly);
+            e.Result = String.Format("{0}, {1}", obj.Type.FullName, obj.Type.Assembly.AssemblyName);
         }
 
         #endregion

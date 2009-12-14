@@ -82,8 +82,8 @@ namespace Kistl.Client.WPF
         /// </summary>
         internal static void FixupDatabase()
         {
-            MoveClrObjectParameterFullTypeName();
-            FixupTypeRefParents();
+            //MoveClrObjectParameterFullTypeName();
+            //FixupTypeRefParents();
         }
     }
 }
