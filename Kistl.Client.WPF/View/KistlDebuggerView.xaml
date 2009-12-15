@@ -14,7 +14,7 @@
                                   ItemsSource="{Binding AttachedObjects}"
                                   ItemTemplateSelector="{StaticResource listItemTemplateSelector}">
             <StackPanel Orientation="Vertical">
-                <TextBlock Text="{Binding Count, Converter={StaticResource FormattingConverter}, ConverterParameter=Count: {0}}" />
+                <TextBlock Text="{Binding Count, Converter={StaticResource FormattingConverter}, ConverterParameter='Count: {0}'}" />
                 <Expander Header="Created at">
                     <TextBlock Text="{Binding CreatedAt}" />
                 </Expander>
@@ -33,7 +33,7 @@
         <DockPanel Grid.Row="0">
             <TextBlock DockPanel.Dock="Top"
                        HorizontalAlignment="Center"
-                       Text="{Binding ActiveContexts.Count, Converter={StaticResource FormattingConverter}, ConverterParameter=Active Contexts: {0}}" />
+                       Text="{Binding ActiveContexts.Count, Converter={StaticResource FormattingConverter}, ConverterParameter='Active Contexts: {0}'}" />
             <TreeView ItemsSource="{Binding ActiveContexts}"
                       BorderThickness="0" />
         </DockPanel>
@@ -41,7 +41,7 @@
         <DockPanel Grid.Row="2">
             <TextBlock DockPanel.Dock="Top"
                        HorizontalAlignment="Center"
-                       Text="{Binding DisposedContexts.Count, Converter={StaticResource FormattingConverter}, ConverterParameter=Disposed Contexts: {0}}" />
+                       Text="{Binding DisposedContexts.Count, Converter={StaticResource FormattingConverter}, ConverterParameter='Disposed Contexts: {0}'}" />
             <TreeView ItemsSource="{Binding DisposedContexts}"
                       BorderThickness="0" />
         </DockPanel>
