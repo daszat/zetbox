@@ -1,3 +1,3 @@
 @echo off
-..\bin\debug\Kistl.Server.Service.exe -checkschema
+..\bin\debug\bin\server\Kistl.Server.Service.exe -checkschema
 pause

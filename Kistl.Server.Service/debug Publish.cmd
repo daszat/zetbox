@@ -1,3 +1,3 @@
 @echo off
-..\bin\debug\Kistl.Server.Service.exe -publish c:\temp\KistlMeta.xml *
+..\bin\debug\bin\server\Kistl.Server.Service.exe -publish c:\temp\KistlMeta.xml *
 pause
