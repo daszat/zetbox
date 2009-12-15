@@ -55,7 +55,11 @@ namespace Kistl.Server.Packaging
             AddMetaObjects(result, ctx.GetQuery<TypeRef>().Where(i => i.Assembly.Module.ID == moduleID)
                 .OrderBy(i => i.Assembly.AssemblyName).ThenBy(i => i.FullName).ThenBy(i => i.ExportGuid));
             AddMetaObjects(result, ctx.GetPersistenceObjectQuery<TypeRef_hasGenericArguments_TypeRef_RelationEntry>().Where(i => i.A.Assembly.Module.ID == moduleID || i.B.Assembly.Module.ID == moduleID)
-                .OrderBy(i => i.A.Assembly.AssemblyName).ThenBy(i => i.B.Assembly.AssemblyName).ThenBy(i => i.A.FullName).ThenBy(i => i.B.FullName).ThenBy(i => i.A.ExportGuid).ThenBy(i => i.B.ExportGuid));
+                .ToList().AsQueryable() // client side sorting!
+                .OrderBy(i => i.A.Assembly.AssemblyName).ThenBy(i => i.B.Assembly.AssemblyName)
+                .ThenBy(i => i.A.FullName).ThenBy(i => i.B.FullName)
+                .ThenBy(i => i.AIndex).ThenBy(i => i.BIndex)
+                .ThenBy(i => i.A.ExportGuid).ThenBy(i => i.B.ExportGuid));
 
             AddMetaObjects(result, ctx.GetQuery<Icon>().Where(i => i.Module.ID == moduleID)
                 .OrderBy(i => i.IconFile).ThenBy(i => i.ExportGuid));
