@@ -59,7 +59,8 @@ namespace Kistl.API.AbstractConsumerTests
 
             LoadSchema(config, basePath);
             LoadData(config, basePath);
-            GenerateSource(config, basePath);
+            // Do not generate source - fullreset has done this for us
+            // GenerateSource(config, basePath);
         }
 
         private static void LoadSchema(KistlConfig config, string basePath)
@@ -106,25 +107,25 @@ namespace Kistl.API.AbstractConsumerTests
             }
         }
 
-        private static void GenerateSource(KistlConfig config, string basePath)
-        {
-            AppDomain domain = null;
-            try
-            {
-                Trace.TraceInformation("Generating Source");
-                //domain = AppDomain.CreateDomain("DatabaseResetup3", null, basePath, @"bin\Debug", true);
-                domain = AppDomain.CreateDomain("DatabaseResetup3", null, AppDomain.CurrentDomain.SetupInformation);
-                var server = (Kistl.Server.Server)domain.CreateInstanceAndUnwrap(typeof(Kistl.Server.Server).Assembly.FullName, typeof(Kistl.Server.Server).FullName);
-                server.Init(config);
-                server.GenerateCode();
-            }
-            finally
-            {
-                if (domain != null)
-                {
-                    AppDomain.Unload(domain);
-                }
-            }
-        }
+        //private static void GenerateSource(KistlConfig config, string basePath)
+        //{
+        //    AppDomain domain = null;
+        //    try
+        //    {
+        //        Trace.TraceInformation("Generating Source");
+        //        //domain = AppDomain.CreateDomain("DatabaseResetup3", null, basePath, @"bin\Debug", true);
+        //        domain = AppDomain.CreateDomain("DatabaseResetup3", null, AppDomain.CurrentDomain.SetupInformation);
+        //        var server = (Kistl.Server.Server)domain.CreateInstanceAndUnwrap(typeof(Kistl.Server.Server).Assembly.FullName, typeof(Kistl.Server.Server).FullName);
+        //        server.Init(config);
+        //        server.GenerateCode();
+        //    }
+        //    finally
+        //    {
+        //        if (domain != null)
+        //        {
+        //            AppDomain.Unload(domain);
+        //        }
+        //    }
+        //}
     }
 }

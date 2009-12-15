@@ -16,6 +16,8 @@ namespace Kistl.API.Server.Tests
         public void Init()
         {
             var testCtx = new ServerApiContextMock();
+            AssemblyLoader.Load(testCtx.ImplementationAssembly);
+            AssemblyLoader.ReflectionOnlyLoadFrom(testCtx.ImplementationAssembly);
         }
     }
 }

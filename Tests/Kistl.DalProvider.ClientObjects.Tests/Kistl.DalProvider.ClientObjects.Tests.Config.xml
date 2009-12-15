@@ -3,7 +3,7 @@
   <ConfigName>ClientObjects DalProvider Test Configuration</ConfigName>
   <Server StartServer="false">
     <DatabaseProvider>System.Data.SqlClient</DatabaseProvider>
-    <ConnectionString>Data Source=.\SQLEXPRESS;Initial Catalog=Kistl;Integrated Security=True;MultipleActiveResultSets=true;</ConnectionString>
+    <ConnectionString>Data Source=.\SQLEXPRESS;Initial Catalog=Kistl_test;Integrated Security=True;MultipleActiveResultSets=true;</ConnectionString>
     <CodeGenPath>bin\CodeGen</CodeGenPath>
     <LogFilePath>bin\LogFiles</LogFilePath>
     <DocumentStore>DocumentStore\Server\</DocumentStore>

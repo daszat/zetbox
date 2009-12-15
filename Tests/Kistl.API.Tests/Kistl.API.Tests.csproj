@@ -90,9 +90,6 @@
     <Compile Include="Tests.Serializables\SerializerMockTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DefaultConfig.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Kistl.API.Tests.PartCoverSettings.xml" />
     <Content Include="Kistl.API.Tests.Config.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

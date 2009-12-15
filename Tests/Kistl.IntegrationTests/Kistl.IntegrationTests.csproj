@@ -100,6 +100,18 @@
       <Project>{AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9}</Project>
       <Name>Kistl.API</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Kistl.App.Projekte.Client\Kistl.App.Projekte.Client.csproj">
+      <Project>{379A67E8-388E-47B6-A591-5D4C05DAFBDB}</Project>
+      <Name>Kistl.App.Projekte.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Kistl.App.Projekte.Common\Kistl.App.Projekte.Common.csproj">
+      <Project>{B1AE679D-BA5A-4E70-8D21-D99C46A34F79}</Project>
+      <Name>Kistl.App.Projekte.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Kistl.App.Projekte.Server\Kistl.App.Projekte.Server.csproj">
+      <Project>{E1275AE6-5060-4E93-88D8-BA48BA52DC7A}</Project>
+      <Name>Kistl.App.Projekte.Server</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Kistl.Client.WPF\Kistl.Client.WPF.csproj">
       <Project>{2C899579-BF78-442B-8810-8C7E7A2CA212}</Project>
       <Name>Kistl.Client.WPF</Name>
@@ -108,10 +120,22 @@
       <Project>{A736E13F-D349-4CE5-A397-8438F58D0B9D}</Project>
       <Name>Kistl.Client</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Kistl.DalProvider.ClientObjects\Kistl.DalProvider.ClientObjects.csproj">
+      <Project>{3760694D-3B35-41D4-B1A3-41BB288AA19F}</Project>
+      <Name>Kistl.DalProvider.ClientObjects</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Kistl.DALProvider.EF\Kistl.DALProvider.EF.csproj">
+      <Project>{52EC8DFB-9C75-4FDB-9EE1-E78847F7F711}</Project>
+      <Name>Kistl.DALProvider.EF</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Kistl.DalProvider.Frozen\Kistl.DalProvider.Frozen.csproj">
+      <Project>{F3B74A4A-BE0C-4BC2-BE32-D1A1D179B4F7}</Project>
+      <Name>Kistl.DalProvider.Frozen</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Kistl.Objects\Kistl.Objects.csproj">
       <Project>{0C9E6E69-309F-46F7-A936-D5762229DEB9}</Project>
       <Name>Kistl.Objects</Name>
-      <Private>False</Private>
+      <Private>True</Private>
     </ProjectReference>
     <ProjectReference Include="..\..\Kistl.Server\Kistl.Server.csproj">
       <Project>{FA2B6CCD-95CB-4927-9CB5-AFE833EB38B7}</Project>

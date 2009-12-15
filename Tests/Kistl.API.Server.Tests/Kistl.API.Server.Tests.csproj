@@ -125,6 +125,10 @@
       <Project>{AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9}</Project>
       <Name>Kistl.API</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Kistl.Objects.Server\Kistl.Objects.Server.csproj">
+      <Project>{62B9344A-87D1-4715-9ABB-EAE0ACC4F523}</Project>
+      <Name>Kistl.Objects.Server</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Kistl.API.AbstractConsumerTests\Kistl.API.AbstractConsumerTests.csproj">
       <Project>{1EEA57CD-4824-4A14-9447-3BD0E57997F4}</Project>
       <Name>Kistl.API.AbstractConsumerTests</Name>
