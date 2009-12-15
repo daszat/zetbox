@@ -29,6 +29,11 @@ namespace Kistl.Server.Generators
             using (Logging.Log.TraceMethodCall())
             {
                 Logging.Log.Info("Generating Code");
+                if (string.IsNullOrEmpty(ApplicationContext.Current.Configuration.Server.CodeGenPath))
+                {
+                    throw new Kistl.API.Configuration.ConfigurationException("CodeGenPath is not defined in the current configuration file.");
+                }
+
                 using (IKistlContext ctx = KistlContext.GetContext())
                 {
                     string serverReferencePath = Path.GetDirectoryName(typeof(Generator).Assembly.Location);
@@ -41,13 +46,11 @@ namespace Kistl.Server.Generators
                         new { Caption = "Generating Frozen Source Files", Generator = DataObjectGeneratorFactory.GetFreezingGenerator(), ReferencePath = serverReferencePath },
                     };
 
-                    Directory.SetCurrentDirectory(Helper.CodeGenPath);
-
                     // doesn't stop growing
                     if (File.Exists("TemplateCodegenLog.txt"))
                         File.Delete("TemplateCodegenLog.txt");
 
-                    string binPath = Path.Combine(Helper.CodeGenPath, @"bin\Debug");
+                    string binPath = Path.Combine(ApplicationContext.Current.Configuration.Server.CodeGenPath, @"bin\Debug");
                     Directory.CreateDirectory(binPath);
 
                     var engine = new Engine(ToolsetDefinitionLocations.Registry);
@@ -55,7 +58,7 @@ namespace Kistl.Server.Generators
                     engine.RegisterLogger(new ConsoleLogger(LoggerVerbosity.Minimal));
 
                     var logger = new FileLogger();
-                    logger.Parameters = String.Format(@"logfile={0}", Path.Combine(Helper.CodeGenPath, "compile.log"));
+                    logger.Parameters = String.Format(@"logfile={0}", Path.Combine(ApplicationContext.Current.Configuration.Server.CodeGenPath, "compile.log"));
                     engine.RegisterLogger(logger);
 
                     try
@@ -64,7 +67,7 @@ namespace Kistl.Server.Generators
                         foreach (var gen in generators)
                         {
                             Trace.TraceInformation(String.Format("Generating: {0}", gen.Caption));
-                            string projectFileName = gen.Generator.Generate(ctx, Helper.CodeGenPath);
+                            string projectFileName = gen.Generator.Generate(ctx, ApplicationContext.Current.Configuration.Server.CodeGenPath);
 
                             var proj = new Project(engine);
                             proj.Load(projectFileName);

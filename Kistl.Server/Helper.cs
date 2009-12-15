@@ -45,18 +45,5 @@ namespace Kistl.Server
                 }
             }
         }
-
-        /// <summary>
-        /// Path to temp. location for Code Generation.
-        /// TODO: read from some config store
-        /// </summary>
-        public static string CodeGenPath
-        {
-            [DebuggerStepThrough]
-            get
-            {
-                return @"c:\temp\KistlCodeGen";
-            }
-        }
     }
 }

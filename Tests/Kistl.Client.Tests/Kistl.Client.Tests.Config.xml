@@ -3,19 +3,22 @@
   <ConfigName>Kistl.Client's Test Configuration</ConfigName>
   <Server StartServer="false">
     <DatabaseProvider>System.Data.SqlClient</DatabaseProvider>
-    <ConnectionString>Data Source=.\SQLEXPRESS;Initial Catalog=Kistl_test;Integrated Security=True;MultipleActiveResultSets=true;</ConnectionString>
-    <DocumentStore>P:\Kistl\DocumentStore\Server\</DocumentStore>
+    <ConnectionString>Data Source=.\SQLEXPRESS;Initial Catalog=Kistl;Integrated Security=True;MultipleActiveResultSets=true;</ConnectionString>
+    <CodeGenPath>bin\CodeGen</CodeGenPath>
+    <LogFilePath>bin\LogFiles</LogFilePath>
+    <DocumentStore>DocumentStore\Server\</DocumentStore>
     <KistlDataContextType>Kistl.DALProvider.EF.KistlDataContext, Kistl.DALProvider.EF</KistlDataContextType>
     <ServerObjectHandlerType>Kistl.DALProvider.EF.ServerObjectHandler`1, Kistl.DALProvider.EF</ServerObjectHandlerType>
     <ServerObjectSetHandlerType>Kistl.DALProvider.EF.ServerObjectSetHandler, Kistl.DALProvider.EF</ServerObjectSetHandlerType>
     <ServerCollectionHandlerType>Kistl.DALProvider.EF.ServerCollectionHandler`4, Kistl.DALProvider.EF</ServerCollectionHandlerType>
     <IdentityProviderType>Kistl.Server.WCFIdentityProvider, Kistl.Server</IdentityProviderType>
   </Server>
-  <Client StartClient="false" ThrowErrors="true">
-    <DocumentStore>P:\Kistl\DocumentStore\Client\</DocumentStore>
-  </Client>
   <SourceFileLocation>
-    <string>C:\temp\KistlCodeGen\bin\Debug</string>
-    <string>P:\Kistl\bin\Debug</string>
+    <!-- default probe path -->
+    <string>P:\Kistl\bin\CodeGen\bin\Debug</string>
+    <!-- Fallback path for local development -->
+    <string>P:\Kistl\bin\Debug\bin\server\fallback</string>
+    <!-- Fallback path for CC.net on srv2008 -->
+    <string>f:\CruiseControl.Net\Projects\Kistl\bin\Debug\bin\Server\Fallback</string>
   </SourceFileLocation>
 </KistlConfig>

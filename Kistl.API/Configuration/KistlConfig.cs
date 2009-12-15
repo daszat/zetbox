@@ -94,6 +94,18 @@ namespace Kistl.API.Configuration
             [XmlElement(IsNullable = false)]
             public string DocumentStore { get; set; }
 
+            /// <summary>
+            /// Root path of generated files
+            /// </summary>
+            [XmlElement(IsNullable = false)]
+            public string LogFilePath { get; set; }
+
+            /// <summary>
+            /// Root path for log files
+            /// </summary>
+            [XmlElement(IsNullable = false)]
+            public string CodeGenPath { get; set; }            
+
             [XmlElement(IsNullable = false)]
             public string KistlDataContextType { get; set; }
 
