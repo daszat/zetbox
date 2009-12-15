@@ -120,6 +120,12 @@ namespace Kistl.API.Configuration
 
             [XmlElement(IsNullable = false)]
             public string IdentityProviderType { get; set; }
+
+            public string GetLogFilePath(string name)
+            {
+                Directory.CreateDirectory(ApplicationContext.Current.Configuration.Server.LogFilePath);
+                return Path.Combine(ApplicationContext.Current.Configuration.Server.LogFilePath, name);
+            }
         }
 
         /// <summary>

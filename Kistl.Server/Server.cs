@@ -170,7 +170,7 @@ namespace Kistl.Server
         {
             using (IKistlContext ctx = KistlContext.GetContext())
             {
-                using (FileStream report = File.OpenWrite(Path.Combine(ApplicationContext.Current.Configuration.Server.LogFilePath, @"schemareport.log")))
+                using (FileStream report = File.OpenWrite(ApplicationContext.Current.Configuration.Server.GetLogFilePath("schemareport.log")))
                 {
                     report.SetLength(0);
                     using (var mgr = new SchemaManagement.SchemaManager(ctx, report))
@@ -185,7 +185,7 @@ namespace Kistl.Server
         {
             using (IKistlContext ctx = SchemaManagement.SchemaManager.GetSavedSchema())
             {
-                using (FileStream report = File.OpenWrite(Path.Combine(ApplicationContext.Current.Configuration.Server.LogFilePath, @"schemareport.log")))
+                using (FileStream report = File.OpenWrite(ApplicationContext.Current.Configuration.Server.GetLogFilePath("schemareport.log")))
                 {
                     report.SetLength(0);
                     using (var mgr = new SchemaManagement.SchemaManager(ctx, report))
@@ -203,7 +203,7 @@ namespace Kistl.Server
                 using (FileStream fs = File.OpenRead(file))
                 {
                     Packaging.Importer.LoadFromXml(ctx, fs);
-                    using (FileStream report = File.OpenWrite(Path.Combine(ApplicationContext.Current.Configuration.Server.LogFilePath, @"schemareport.log")))
+                    using (FileStream report = File.OpenWrite(ApplicationContext.Current.Configuration.Server.GetLogFilePath("schemareport.log")))
                     {
                         report.SetLength(0);
                         using (var mgr = new SchemaManagement.SchemaManager(ctx, report))
@@ -230,7 +230,7 @@ namespace Kistl.Server
                     }
                 }
 
-                using (FileStream report = File.OpenWrite(Path.Combine(ApplicationContext.Current.Configuration.Server.LogFilePath, @"updateschemareport.log")))
+                using (FileStream report = File.OpenWrite(ApplicationContext.Current.Configuration.Server.GetLogFilePath("updateschemareport.log")))
                 {
                     report.SetLength(0);
                     using (var mgr = new SchemaManagement.SchemaManager(ctx, report))
@@ -249,7 +249,7 @@ namespace Kistl.Server
                 {
                     Packaging.Importer.LoadFromXml(ctx, fs);
 
-                    using (FileStream report = File.OpenWrite(Path.Combine(ApplicationContext.Current.Configuration.Server.LogFilePath, @"updateschemareport.log")))
+                    using (FileStream report = File.OpenWrite(ApplicationContext.Current.Configuration.Server.GetLogFilePath("updateschemareport.log")))
                     {
                         report.SetLength(0);
                         using (var mgr = new SchemaManagement.SchemaManager(ctx, report))

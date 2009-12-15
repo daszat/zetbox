@@ -51,6 +51,8 @@ namespace Kistl.Server.Generators
                         File.Delete("TemplateCodegenLog.txt");
 
                     string binPath = Path.Combine(ApplicationContext.Current.Configuration.Server.CodeGenPath, @"bin\Debug");
+                    binPath = Path.GetFullPath(binPath); // Ensure that path is an absolute path
+
                     Directory.CreateDirectory(binPath);
 
                     var engine = new Engine(ToolsetDefinitionLocations.Registry);
