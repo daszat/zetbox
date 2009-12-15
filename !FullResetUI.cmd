@@ -1,7 +1,7 @@
 @echo off
 
 rem remove old assemblies
-del /S /Q bin\ C:\temp\KistlCodeGen\*
+del /S /Q bin\ bin\CodeGen\*
 IF ERRORLEVEL 1 GOTO FAIL
 C:\Windows\Microsoft.NET\Framework\v3.5\MSBuild.exe /m Kistl.Complete.sln /target:Clean
 IF ERRORLEVEL 1 GOTO FAIL
