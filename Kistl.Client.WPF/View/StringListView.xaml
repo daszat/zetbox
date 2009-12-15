@@ -14,6 +14,8 @@
             <Button Click="RemoveHandler">Remove selection from list</Button>
         </WrapPanel>
 
+        <TextBox x:Name="PART_ItemEditBox"  DockPanel.Dock="Bottom" Text="{Binding SelectedItemEditable, UpdateSourceTrigger=PropertyChanged}"/>
+
         <ListView ItemsSource="{Binding Value, Mode=OneWay}"
                   SelectedItem="{Binding SelectedItem}"
                   MinHeight="50"

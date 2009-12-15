@@ -29,6 +29,7 @@ namespace Kistl.Client.WPF.View
         {
             var model = (IValueListModel<string>)DataContext;
             model.AddItem("");
+            PART_ItemEditBox.Focus();
         }
 
         private void RemoveHandler(object sender, RoutedEventArgs e)

@@ -20,19 +20,19 @@ namespace Kistl.Client.Presentables
 
         /// <summary>
         /// Adds the given item to the underlying value. Triggers <see cref="INotifyCollectionChanged.CollectionChanged"/>
-        /// on the underlying <see cref="IReadOnlyValueModel&lt;X>.Value"/> property when the change has propagated.
+        /// on the underlying <see cref="IReadOnlyValueModel{TValue}.Value"/> property when the change has propagated.
         /// </summary>
         void AddItem(TElement item);
 
         /// <summary>
         /// Remove the given item from the underlying value. Triggers <see cref="INotifyCollectionChanged.CollectionChanged"/>
-        /// on the underlying <see cref="IReadOnlyValueModel&lt;X>.Value"/> property when the change has propagated.
+        /// on the underlying <see cref="IReadOnlyValueModel{TValue}.Value"/> property when the change has propagated.
         /// </summary>
         void RemoveItem(TElement item);
 
         /// <summary>
         /// Permanentely delete the given item from the data store.
-        /// Triggers <see cref="INotifyCollectionChanged.CollectionChanged"/> on the underlying <see cref="IReadOnlyValueModel&lt;X>.Value"/> property when the change has propagated.
+        /// Triggers <see cref="INotifyCollectionChanged.CollectionChanged"/> on the underlying <see cref="IReadOnlyValueModel{TValue}.Value"/> property when the change has propagated.
         /// </summary>
         void DeleteItem(TElement item);
 
@@ -331,6 +331,26 @@ namespace Kistl.Client.Presentables
                 {
                     _selectedItem = value;
                     OnPropertyChanged("SelectedItem");
+                    OnPropertyChanged("SelectedItemEditable");
+                }
+            }
+        }
+
+        public string SelectedItemEditable
+        {
+            get
+            {
+                return _selectedItem;
+            }
+            set
+            {
+                if (_selectedItem != value)
+                {
+                    RemoveItem(_selectedItem);
+                    _selectedItem = value;
+                    AddItem(_selectedItem);
+                    OnPropertyChanged("SelectedItem");
+                    OnPropertyChanged("SelectedItemEditable");
                 }
             }
         }
