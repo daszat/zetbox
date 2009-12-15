@@ -29,8 +29,7 @@
    <Directory>$(ProjectDir)/Kistl.App.Projekte.Server/obj/Debug/</Directory>
    <Directory>$(ProjectDir)/Kistl.Client.ASPNET.Toolkit/bin/Debug/</Directory>
    <Directory>$(ProjectDir)/Kistl.Client/obj/Debug/</Directory>
-   <Directory>$(ProjectDir)/Kistl.Objects.Client/obj/Debug/</Directory>
-   <Directory>$(ProjectDir)/Kistl.Objects.Server/obj/Debug/</Directory>
+   <Directory>$(ProjectDir)/Kistl.Objects/obj/Debug/</Directory>
    <Directory>$(ProjectDir)/Kistl.Server/obj/Debug/</Directory>
    <Directory>$(ProjectDir)/Tracing/</Directory>
    <Directory>$(ProjectDir)/WPFLibrary/obj/Debug/</Directory>
