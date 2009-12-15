@@ -68,7 +68,14 @@ namespace Kistl.Client.Presentables.KistlBase
         protected System.Reflection.Assembly ReflectionFromUser()
         {
             string assemblyFileName = Factory.GetSourceFileNameFromUser("Assembly files|*.dll;*.exe", "All files|*.*");
-            return System.Reflection.Assembly.ReflectionOnlyLoadFrom(assemblyFileName);
+            if (String.IsNullOrEmpty(assemblyFileName))
+            {
+                return null;
+            }
+            else
+            {
+                return System.Reflection.Assembly.ReflectionOnlyLoadFrom(assemblyFileName);
+            }
         }
 
         /// <summary>
@@ -163,12 +170,11 @@ namespace Kistl.Client.Presentables.KistlBase
             if (!CanExecute(data))
                 return;
 
-            var assembly = data as System.Reflection.Assembly;
-            if (assembly == null)
+            var assembly = data as System.Reflection.Assembly ?? this.ReflectionFromUser();
+            if (assembly != null)
             {
-                assembly = this.ReflectionFromUser();
+                ChooseTypeRefFromAssembly(RefFromReflection(assembly));
             }
-            ChooseTypeRefFromAssembly(RefFromReflection(assembly));
         }
     }
 
