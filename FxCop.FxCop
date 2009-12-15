@@ -35,7 +35,7 @@
    <Directory>$(ProjectDir)/Tracing/</Directory>
    <Directory>$(ProjectDir)/WPFLibrary/obj/Debug/</Directory>
   </AssemblyReferenceDirectories>
-  <Target Name="$(ProjectDir)/bin/Debug/Kistl.API.Client.dll" Analyze="True">
+  <Target Name="$(ProjectDir)/bin/Debug/bin/Client/Kistl.API.Client.dll" Analyze="True">
    <Modules>
     <Module Name="kistl.api.client.dll" Analyze="True">
      <Namespaces>
@@ -659,7 +659,7 @@
     </Module>
    </Modules>
   </Target>
-  <Target Name="$(ProjectDir)/bin/Debug/Kistl.API.dll" Analyze="True">
+  <Target Name="$(ProjectDir)/bin/Debug/bin/Server/Kistl.API.dll" Analyze="True">
    <Modules>
     <Module Name="kistl.api.dll" Analyze="True">
      <Namespaces>
@@ -3005,7 +3005,7 @@
     </Module>
    </Modules>
   </Target>
-  <Target Name="$(ProjectDir)/bin/Debug/Kistl.API.Server.dll" Analyze="True">
+  <Target Name="$(ProjectDir)/bin/Debug/bin/Server/Kistl.API.Server.dll" Analyze="True">
    <Modules>
     <Module Name="kistl.api.server.dll" Analyze="True">
      <Namespaces>
@@ -3288,7 +3288,7 @@
     </Module>
    </Modules>
   </Target>
-  <Target Name="$(ProjectDir)/bin/Debug/Kistl.App.Projekte.Client.dll" Analyze="True">
+  <Target Name="$(ProjectDir)/bin/Debug/bin/Client/Kistl.App.Projekte.Client.dll" Analyze="True">
    <Modules>
     <Module Name="kistl.app.projekte.client.dll" Analyze="True">
      <Namespaces>
@@ -3604,7 +3604,7 @@
     </Module>
    </Modules>
   </Target>
-  <Target Name="$(ProjectDir)/bin/Debug/Kistl.App.Projekte.Server.dll" Analyze="True">
+  <Target Name="$(ProjectDir)/bin/Debug/bin/Server/Kistl.App.Projekte.Server.dll" Analyze="True">
    <Modules>
     <Module Name="kistl.app.projekte.server.dll" Analyze="True">
      <Namespaces>
@@ -3684,7 +3684,7 @@
     </Module>
    </Modules>
   </Target>
-  <Target Name="$(ProjectDir)/bin/Debug/Kistl.Client.dll" Analyze="True">
+  <Target Name="$(ProjectDir)/bin/Debug/bin/Client/Kistl.Client.dll" Analyze="True">
    <Modules>
     <Module Name="kistl.client.dll" Analyze="True">
      <Namespaces>
@@ -5974,7 +5974,7 @@
     </Module>
    </Modules>
   </Target>
-  <Target Name="$(ProjectDir)/bin/Debug/Kistl.Client.Forms.exe" Analyze="True">
+  <Target Name="$(ProjectDir)/bin/Debug/bin/Client/Kistl.Client.Forms.exe" Analyze="True">
    <Modules>
     <Module Name="kistl.client.forms.exe" Analyze="True">
      <Namespaces>
@@ -6262,7 +6262,7 @@
     </Module>
    </Modules>
   </Target>
-  <Target Name="$(ProjectDir)/bin/Debug/Kistl.DALProvider.EF.dll" Analyze="True">
+  <Target Name="$(ProjectDir)/bin/Debug/bin/Server/Kistl.DALProvider.EF.dll" Analyze="True">
    <Modules>
     <Module Name="kistl.dalprovider.ef.dll" Analyze="True">
      <Namespaces>
@@ -6593,7 +6593,7 @@
     </Module>
    </Modules>
   </Target>
-  <Target Name="$(ProjectDir)/bin/Debug/Kistl.DalProvider.Frozen.dll" Analyze="True">
+  <Target Name="$(ProjectDir)/bin/Debug/bin/Server/Kistl.DalProvider.Frozen.dll" Analyze="True">
    <Modules>
     <Module Name="kistl.dalprovider.frozen.dll" Analyze="True">
      <Namespaces>
@@ -6716,7 +6716,7 @@
     </Module>
    </Modules>
   </Target>
-  <Target Name="$(ProjectDir)/bin/Debug/Kistl.Objects.dll" Analyze="True">
+  <Target Name="$(ProjectDir)/bin/Debug/bin/Server/Fallback/Kistl.Objects.dll" Analyze="True">
    <Modules>
     <Module Name="kistl.objects.dll" Analyze="True">
      <Namespaces>
@@ -8416,7 +8416,7 @@
     </Module>
    </Modules>
   </Target>
-  <Target Name="$(ProjectDir)/bin/Debug/Kistl.Objects.Server.dll" Analyze="True">
+  <Target Name="$(ProjectDir)/bin/Debug/bin/Server/Fallback/Kistl.Objects.Server.dll" Analyze="True">
    <Modules>
     <Module Name="kistl.objects.server.dll" Analyze="True">
      <Namespaces>
@@ -14428,7 +14428,7 @@
     </Module>
    </Modules>
   </Target>
-  <Target Name="$(ProjectDir)/bin/Debug/Kistl.Server.dll" Analyze="True">
+  <Target Name="$(ProjectDir)/bin/Debug/bin/Server/Kistl.Server.dll" Analyze="True">
    <Modules>
     <Module Name="kistl.server.exe" Analyze="True">
      <Namespaces>
@@ -16917,7 +16917,7 @@
     </Module>
    </Modules>
   </Target>
-  <Target Name="$(ProjectDir)/bin/Debug/TempAppHelpers.dll" Analyze="True">
+  <Target Name="$(ProjectDir)/bin/Debug/bin/Server/TempAppHelpers.dll" Analyze="True">
    <Modules>
     <Module Name="tempapphelpers.dll" Analyze="True">
      <Namespaces>
