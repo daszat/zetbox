@@ -1,3 +1,3 @@
 @echo off
-..\bin\debug\Kistl.Server.Service.exe -generate
+..\bin\debug\bin\Server\Kistl.Server.Service.exe -generate
 pause

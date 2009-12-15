@@ -43,10 +43,19 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation
             //this.WriteLine(@"    </Reference>");
 
             // EF Provider infrastructure
-            this.WriteLine(@"    <Reference Include=""Kistl.DALProvider.EF"" />");
+            this.WriteLine(@"    <Reference Include=""Kistl.DALProvider.EF"">");
+            this.WriteLine(@"      <SpecificVersion>False</SpecificVersion>");
+            this.WriteLine(@"      <HintPath>$(KistlAPIPath)\Kistl.DALProvider.EF.dll</HintPath>");
+            this.WriteLine(@"      <Private>False</Private>");
+            this.WriteLine(@"    </Reference>");
+
 
             // Server API
-            this.WriteLine(@"    <Reference Include=""Kistl.API.Server"" />");
+            this.WriteLine(@"    <Reference Include=""Kistl.API.Server"">");
+            this.WriteLine(@"      <SpecificVersion>False</SpecificVersion>");
+            this.WriteLine(@"      <HintPath>$(KistlAPIPath)\Kistl.API.Server.dll</HintPath>");
+            this.WriteLine(@"      <Private>False</Private>");
+            this.WriteLine(@"    </Reference>");
         }
 
         protected override void ApplyAdditionalItemGroups()

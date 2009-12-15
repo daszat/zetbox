@@ -16,6 +16,9 @@ xcopy /y C:\temp\KistlCodeGen\Kistl.Objects.Server\*.* .\Kistl.Objects.Server
 
 
 rem *********** Assemblies *********** 
-rem Server & Interfaces comes from MSBuild
-xcopy /y C:\temp\KistlCodeGen\bin\Debug\Kistl.Objects.Client.* .\bin\debug
-xcopy /y C:\temp\KistlCodeGen\bin\Debug\Kistl.Objects.Frozen.* .\bin\debug
+rem Do not copy assemblies
+
+rem *********** Build *********** 
+rem rebuild with newly generated code
+C:\Windows\Microsoft.NET\Framework\v3.5\MSBuild.exe /m Kistl.Complete.sln
+

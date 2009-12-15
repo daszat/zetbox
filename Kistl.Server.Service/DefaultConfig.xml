@@ -15,9 +15,11 @@
     <DocumentStore>P:\Kistl\DocumentStore\Client\</DocumentStore>
   </Client>
   <SourceFileLocation>
+    <!-- default probe path -->
     <string>C:\temp\KistlCodeGen\bin\Debug</string>
-    <string>P:\Kistl\bin\Debug</string>
+    <!-- Fallback path for local development -->
+    <string>P:\Kistl\bin\Debug\bin\server\fallback</string>
     <!-- Fallback path for CC.net on srv2008 -->
-    <string>C:\CruiseControlData\Kistl\bin\Debug</string>
+    <string>C:\CruiseControlData\Kistl\bin\Debug\bin\fallback</string>
   </SourceFileLocation>
 </KistlConfig>

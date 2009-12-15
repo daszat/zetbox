@@ -31,11 +31,14 @@ namespace Kistl.Server.Generators
                 Logging.Log.Info("Generating Code");
                 using (IKistlContext ctx = KistlContext.GetContext())
                 {
+                    string serverReferencePath = Path.GetDirectoryName(typeof(Generator).Assembly.Location);
+                    string clientReferencePath = Path.GetFullPath(Path.Combine(serverReferencePath, @"..\Client"));
+
                     var generators = new[]{
-                        new { Caption = "Interface Source Files", Generator = DataObjectGeneratorFactory.GetInterfaceGenerator() },
-                        new { Caption = "Server Source Files", Generator = DataObjectGeneratorFactory.GetServerGenerator() },
-                        new { Caption = "Client Source Files", Generator = DataObjectGeneratorFactory.GetClientGenerator() },
-                        new { Caption = "Generating Frozen Source Files", Generator = DataObjectGeneratorFactory.GetFreezingGenerator() },
+                        new { Caption = "Interface Source Files", Generator = DataObjectGeneratorFactory.GetInterfaceGenerator(), ReferencePath = serverReferencePath },
+                        new { Caption = "Server Source Files", Generator = DataObjectGeneratorFactory.GetServerGenerator(), ReferencePath = serverReferencePath },
+                        new { Caption = "Client Source Files", Generator = DataObjectGeneratorFactory.GetClientGenerator(), ReferencePath = clientReferencePath },
+                        new { Caption = "Generating Frozen Source Files", Generator = DataObjectGeneratorFactory.GetFreezingGenerator(), ReferencePath = serverReferencePath },
                     };
 
                     Directory.SetCurrentDirectory(Helper.CodeGenPath);
@@ -67,6 +70,9 @@ namespace Kistl.Server.Generators
                             proj.Load(projectFileName);
                             var defaultPropertyGroup = proj.AddNewPropertyGroup(false);
                             defaultPropertyGroup.AddNewProperty("OutputPath", binPath, true);
+                            // Fix XML Path
+                            defaultPropertyGroup.AddNewProperty("DocumentationFile", "$(OutputPath)\\$(AssemblyName).xml", false);
+                            defaultPropertyGroup.AddNewProperty("KistlAPIPath", gen.ReferencePath, true);
 
                             if (!engine.BuildProject(proj))
                             {
