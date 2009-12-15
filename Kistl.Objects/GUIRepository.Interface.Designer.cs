@@ -46,16 +46,6 @@ namespace Kistl.App.GUI
 			}
 		}
 		
-		/// <summary>List of all ValueListKind</summary>
-		/// 
-		public IQueryable<ValueListKind> ValueListKinds
-		{ 
-			get
-			{
-				return Context.GetQuery<ValueListKind>();
-			}
-		}
-		
 		/// <summary>List of all TypeRefRefKind</summary>
 		/// A specifc ObjectRefKind for selecting TypeRefs
 		public IQueryable<TypeRefRefKind> TypeRefRefKinds
@@ -93,6 +83,16 @@ namespace Kistl.App.GUI
 			get
 			{
 				return Context.GetQuery<StringSelectorKind>();
+			}
+		}
+		
+		/// <summary>List of all StringListKind</summary>
+		/// 
+		public IQueryable<StringListKind> StringListKinds
+		{ 
+			get
+			{
+				return Context.GetQuery<StringListKind>();
 			}
 		}
 		

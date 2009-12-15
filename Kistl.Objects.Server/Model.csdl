@@ -1460,6 +1460,12 @@
   </EntityType>
   <EntityType Name="SingleLineDataObjectKind" BaseType="Model.ControlKind" >
   </EntityType>
+  <EntityType Name="StringListKind" BaseType="Model.ControlKind" >
+    <NavigationProperty Name="ItemKind__Implementation__"
+                        Relationship="Model.FK_List_has_ItemKind"
+                        FromRole="List"
+                        ToRole="ItemKind" />
+  </EntityType>
   <EntityType Name="StringParameter" BaseType="Model.BaseParameter" >
   </EntityType>
   <EntityType Name="StringProperty" BaseType="Model.ValueTypeProperty" >
@@ -1483,12 +1489,6 @@
   <EntityType Name="TextboxKind" BaseType="Model.ControlKind" >
   </EntityType>
   <EntityType Name="TypeRefRefKind" BaseType="Model.ObjectRefKind" >
-  </EntityType>
-  <EntityType Name="ValueListKind" BaseType="Model.ControlKind" >
-    <NavigationProperty Name="ItemKind__Implementation__"
-                        Relationship="Model.FK_List_has_ItemKind"
-                        FromRole="List"
-                        ToRole="ItemKind" />
   </EntityType>
   <EntityType Name="ValueTypeProperty" BaseType="Model.Property" >
     <Property Name="HasPersistentOrder" Type="Boolean" Nullable="false" />
@@ -2204,7 +2204,7 @@
   </Association>
   <Association Name="FK_List_has_ItemKind" >
     <End Role="List"
-         Type="Model.ValueListKind" 
+         Type="Model.StringListKind" 
          Multiplicity="*" />
     <End Role="ItemKind"
          Type="Model.ControlKindClass" 

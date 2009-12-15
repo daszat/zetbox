@@ -318,6 +318,13 @@
       <End Role="B_SingleLineDataObjectKind" EntitySet="SingleLineDataObjectKind" />
     </AssociationSet>
     
+    <EntitySet Name="StringListKind" EntityType="Model.Store.StringListKind" Table="StringListKinds"/>
+    <!-- inherits from ControlKind -->
+    <AssociationSet Name="FK_StringListKind_ControlKind_ID" Association="Model.Store.FK_StringListKind_ControlKind_ID" >
+      <End Role="A_ControlKind" EntitySet="ControlKind" />
+      <End Role="B_StringListKind" EntitySet="StringListKind" />
+    </AssociationSet>
+    
     <EntitySet Name="StringParameter" EntityType="Model.Store.StringParameter" Table="StringParameters"/>
     <!-- inherits from BaseParameter -->
     <AssociationSet Name="FK_StringParameter_BaseParameter_ID" Association="Model.Store.FK_StringParameter_BaseParameter_ID" >
@@ -372,13 +379,6 @@
     <AssociationSet Name="FK_TypeRefRefKind_ObjectRefKind_ID" Association="Model.Store.FK_TypeRefRefKind_ObjectRefKind_ID" >
       <End Role="A_ObjectRefKind" EntitySet="ObjectRefKind" />
       <End Role="B_TypeRefRefKind" EntitySet="TypeRefRefKind" />
-    </AssociationSet>
-    
-    <EntitySet Name="ValueListKind" EntityType="Model.Store.ValueListKind" Table="ValueListKinds"/>
-    <!-- inherits from ControlKind -->
-    <AssociationSet Name="FK_ValueListKind_ControlKind_ID" Association="Model.Store.FK_ValueListKind_ControlKind_ID" >
-      <End Role="A_ControlKind" EntitySet="ControlKind" />
-      <End Role="B_ValueListKind" EntitySet="ValueListKind" />
     </AssociationSet>
     
     <EntitySet Name="ValueTypeProperty" EntityType="Model.Store.ValueTypeProperty" Table="ValueTypeProperties"/>
@@ -685,7 +685,7 @@
       <End Role="CreatedBy" EntitySet="Identity" />
     </AssociationSet>
     <AssociationSet Name="FK_List_has_ItemKind" Association="Model.Store.FK_List_has_ItemKind" >
-      <End Role="List" EntitySet="ValueListKind" />
+      <End Role="List" EntitySet="StringListKind" />
       <End Role="ItemKind" EntitySet="ControlKindClass" />
     </AssociationSet>
     <AssociationSet Name="FK_Method_has_MethodInvokations" Association="Model.Store.FK_Method_has_MethodInvokations" >
@@ -1673,6 +1673,15 @@
  
   </EntityType>
 	
+  <EntityType Name="StringListKind">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="fk_ItemKind" Type="int" />
+ 
+  </EntityType>
+	
   <EntityType Name="StringParameter">
     <Key>
       <PropertyRef Name="ID" />
@@ -1807,15 +1816,6 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" />
- 
-  </EntityType>
-	
-  <EntityType Name="ValueListKind">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
-    <Property Name="fk_ItemKind" Type="int" />
  
   </EntityType>
 	
@@ -2757,7 +2757,7 @@
   <Association Name="FK_List_has_ItemKind">
     <End Role="ItemKind" Type="Model.Store.ControlKindClass" Multiplicity="0..1" />
     <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
-    <End Role="List" Type="Model.Store.ValueListKind" Multiplicity="*" />
+    <End Role="List" Type="Model.Store.StringListKind" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ItemKind">
         <PropertyRef Name="ID" />
@@ -4154,6 +4154,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_StringListKind_ControlKind_ID">
+    <End Role="A_ControlKind" Type="Model.Store.ControlKind" Multiplicity="1" />
+    <End Role="B_StringListKind" Type="Model.Store.StringListKind" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="A_ControlKind">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_StringListKind">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_StringParameter_BaseParameter_ID">
     <End Role="A_BaseParameter" Type="Model.Store.BaseParameter" Multiplicity="1" />
     <End Role="B_StringParameter" Type="Model.Store.StringParameter" Multiplicity="0..1" />
@@ -4246,18 +4258,6 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="B_TypeRefRefKind">
-        <PropertyRef Name="ID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_ValueListKind_ControlKind_ID">
-    <End Role="A_ControlKind" Type="Model.Store.ControlKind" Multiplicity="1" />
-    <End Role="B_ValueListKind" Type="Model.Store.ValueListKind" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="A_ControlKind">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="B_ValueListKind">
         <PropertyRef Name="ID" />
       </Dependent>
     </ReferentialConstraint>

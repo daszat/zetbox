@@ -140,6 +140,7 @@
     <Compile Include="RelationEditorKind.Server.Designer.cs" />
     <Compile Include="RelationEnd.Server.Designer.cs" />
     <Compile Include="SingleLineDataObjectKind.Server.Designer.cs" />
+    <Compile Include="StringListKind.Server.Designer.cs" />
     <Compile Include="StringParameter.Server.Designer.cs" />
     <Compile Include="StringProperty.Server.Designer.cs" />
     <Compile Include="StringRangeConstraint.Server.Designer.cs" />
@@ -153,7 +154,6 @@
     <Compile Include="TextboxKind.Server.Designer.cs" />
     <Compile Include="TypeRef.Server.Designer.cs" />
     <Compile Include="TypeRefRefKind.Server.Designer.cs" />
-    <Compile Include="ValueListKind.Server.Designer.cs" />
     <Compile Include="ValueTypeProperty.Server.Designer.cs" />
     <Compile Include="ViewDescriptor.Server.Designer.cs" />
     <Compile Include="Visual.Server.Designer.cs" />

@@ -492,7 +492,7 @@ using Kistl.DALProvider.EF;
 
 	/*
     Relation: FK_List_has_ItemKind
-    A: ZeroOrMore ValueListKind as List
+    A: ZeroOrMore StringListKind as List
     B: One ControlKindClass as ItemKind
     Preferred Storage: MergeIntoA
 	*/
@@ -500,7 +500,7 @@ using Kistl.DALProvider.EF;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_List_has_ItemKind",
-    "List", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.ValueListKind__Implementation__),
+    "List", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.StringListKind__Implementation__),
     "ItemKind", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.GUI.ControlKindClass__Implementation__)
     )]
 

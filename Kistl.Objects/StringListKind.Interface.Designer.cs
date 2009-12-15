@@ -10,7 +10,7 @@ namespace Kistl.App.GUI
     /// <summary>
     /// 
     /// </summary>
-    public interface ValueListKind : Kistl.App.GUI.ControlKind 
+    public interface StringListKind : Kistl.App.GUI.ControlKind 
     {
 
         /// <summary>

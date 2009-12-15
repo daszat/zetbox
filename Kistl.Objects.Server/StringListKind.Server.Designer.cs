@@ -22,12 +22,12 @@ namespace Kistl.App.GUI
     /// <summary>
     /// 
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="ValueListKind")]
-    [System.Diagnostics.DebuggerDisplay("ValueListKind")]
-    public class ValueListKind__Implementation__ : Kistl.App.GUI.ControlKind__Implementation__, ValueListKind
+    [EdmEntityType(NamespaceName="Model", Name="StringListKind")]
+    [System.Diagnostics.DebuggerDisplay("StringListKind")]
+    public class StringListKind__Implementation__ : Kistl.App.GUI.ControlKind__Implementation__, StringListKind
     {
     
-		public ValueListKind__Implementation__()
+		public StringListKind__Implementation__()
 		{
         }
 
@@ -37,7 +37,7 @@ namespace Kistl.App.GUI
         /// </summary>
     /*
     Relation: FK_List_has_ItemKind
-    A: ZeroOrMore ValueListKind as List
+    A: ZeroOrMore StringListKind as List
     B: One ControlKindClass as ItemKind
     Preferred Storage: MergeIntoA
     */
@@ -119,20 +119,20 @@ namespace Kistl.App.GUI
         }
         
         
-		public event PropertyGetterHandler<Kistl.App.GUI.ValueListKind, Kistl.App.GUI.ControlKindClass> OnItemKind_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.GUI.ValueListKind, Kistl.App.GUI.ControlKindClass> OnItemKind_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.GUI.ValueListKind, Kistl.App.GUI.ControlKindClass> OnItemKind_PostSetter;
+		public event PropertyGetterHandler<Kistl.App.GUI.StringListKind, Kistl.App.GUI.ControlKindClass> OnItemKind_Getter;
+		public event PropertyPreSetterHandler<Kistl.App.GUI.StringListKind, Kistl.App.GUI.ControlKindClass> OnItemKind_PreSetter;
+		public event PropertyPostSetterHandler<Kistl.App.GUI.StringListKind, Kistl.App.GUI.ControlKindClass> OnItemKind_PostSetter;
 		public override InterfaceType GetInterfaceType()
 		{
-			return new InterfaceType(typeof(ValueListKind));
+			return new InterfaceType(typeof(StringListKind));
 		}
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{
 			base.ApplyChangesFrom(obj);
-			var other = (ValueListKind)obj;
-			var otherImpl = (ValueListKind__Implementation__)obj;
-			var me = (ValueListKind)this;
+			var other = (StringListKind)obj;
+			var otherImpl = (StringListKind__Implementation__)obj;
+			var me = (StringListKind)this;
 
 			this._fk_ItemKind = otherImpl._fk_ItemKind;
 		}
@@ -141,50 +141,50 @@ namespace Kistl.App.GUI
    		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
         [System.Diagnostics.DebuggerHidden()]
-        [EventBasedMethod("OnToString_ValueListKind")]
+        [EventBasedMethod("OnToString_StringListKind")]
         public override string ToString()
         {
             MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
             e.Result = base.ToString();
-            if (OnToString_ValueListKind != null)
+            if (OnToString_StringListKind != null)
             {
-                OnToString_ValueListKind(this, e);
+                OnToString_StringListKind(this, e);
             }
             return e.Result;
         }
-        public event ToStringHandler<ValueListKind> OnToString_ValueListKind;
+        public event ToStringHandler<StringListKind> OnToString_StringListKind;
 
-        [EventBasedMethod("OnPreSave_ValueListKind")]
+        [EventBasedMethod("OnPreSave_StringListKind")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_ValueListKind != null) OnPreSave_ValueListKind(this);
+            if (OnPreSave_StringListKind != null) OnPreSave_StringListKind(this);
         }
-        public event ObjectEventHandler<ValueListKind> OnPreSave_ValueListKind;
+        public event ObjectEventHandler<StringListKind> OnPreSave_StringListKind;
 
-        [EventBasedMethod("OnPostSave_ValueListKind")]
+        [EventBasedMethod("OnPostSave_StringListKind")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_ValueListKind != null) OnPostSave_ValueListKind(this);
+            if (OnPostSave_StringListKind != null) OnPostSave_StringListKind(this);
         }
-        public event ObjectEventHandler<ValueListKind> OnPostSave_ValueListKind;
+        public event ObjectEventHandler<StringListKind> OnPostSave_StringListKind;
 
-        [EventBasedMethod("OnCreated_ValueListKind")]
+        [EventBasedMethod("OnCreated_StringListKind")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_ValueListKind != null) OnCreated_ValueListKind(this);
+            if (OnCreated_StringListKind != null) OnCreated_StringListKind(this);
         }
-        public event ObjectEventHandler<ValueListKind> OnCreated_ValueListKind;
+        public event ObjectEventHandler<StringListKind> OnCreated_StringListKind;
 
-        [EventBasedMethod("OnDeleting_ValueListKind")]
+        [EventBasedMethod("OnDeleting_StringListKind")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_ValueListKind != null) OnDeleting_ValueListKind(this);
+            if (OnDeleting_StringListKind != null) OnDeleting_StringListKind(this);
         }
-        public event ObjectEventHandler<ValueListKind> OnDeleting_ValueListKind;
+        public event ObjectEventHandler<StringListKind> OnDeleting_StringListKind;
 
 
 		protected override string GetPropertyError(string propertyName) 

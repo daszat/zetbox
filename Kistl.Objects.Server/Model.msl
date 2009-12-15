@@ -231,6 +231,11 @@
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 	    </MappingFragment>
       </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.StringListKind)">
+	    <MappingFragment StoreEntitySet="StringListKind">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+	    </MappingFragment>
+      </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Model.StringSelectorKind)">
 	    <MappingFragment StoreEntitySet="StringSelectorKind">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
@@ -238,11 +243,6 @@
       </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Model.TextboxKind)">
 	    <MappingFragment StoreEntitySet="TextboxKind">
-	      <ScalarProperty Name="ID" ColumnName="ID" />
-	    </MappingFragment>
-      </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.ValueListKind)">
-	    <MappingFragment StoreEntitySet="ValueListKind">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 	    </MappingFragment>
       </EntityTypeMapping>
@@ -1587,13 +1587,13 @@
     </AssociationSetMapping>
     <!--
     Relation: FK_List_has_ItemKind
-    A: ZeroOrMore ValueListKind as List
+    A: ZeroOrMore StringListKind as List
     B: One ControlKindClass as ItemKind
     Preferred Storage: MergeIntoA
     -->
     <AssociationSetMapping Name="FK_List_has_ItemKind"
                            TypeName="Model.FK_List_has_ItemKind"
-                           StoreEntitySet="ValueListKind" >
+                           StoreEntitySet="StringListKind" >
       <EndProperty Name="ItemKind">
         <ScalarProperty Name="ID" ColumnName="fk_ItemKind"/>
       </EndProperty>

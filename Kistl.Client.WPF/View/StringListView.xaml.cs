@@ -16,11 +16,11 @@ using Kistl.Client.Presentables;
 namespace Kistl.Client.WPF.View
 {
     /// <summary>
-    /// Interaction logic for ValueListView.xaml
+    /// Interaction logic for StringListView.xaml
     /// </summary>
-    public partial class ValueListView : PropertyView
+    public partial class StringListView : PropertyView
     {
-        public ValueListView()
+        public StringListView()
         {
             InitializeComponent();
         }

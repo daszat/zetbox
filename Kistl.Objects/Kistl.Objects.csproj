@@ -116,6 +116,7 @@
     <Compile Include="RelationEditorKind.Interface.Designer.cs" />
     <Compile Include="RelationEnd.Interface.Designer.cs" />
     <Compile Include="SingleLineDataObjectKind.Interface.Designer.cs" />
+    <Compile Include="StringListKind.Interface.Designer.cs" />
     <Compile Include="StringParameter.Interface.Designer.cs" />
     <Compile Include="StringProperty.Interface.Designer.cs" />
     <Compile Include="StringRangeConstraint.Interface.Designer.cs" />
@@ -129,7 +130,6 @@
     <Compile Include="TextboxKind.Interface.Designer.cs" />
     <Compile Include="TypeRef.Interface.Designer.cs" />
     <Compile Include="TypeRefRefKind.Interface.Designer.cs" />
-    <Compile Include="ValueListKind.Interface.Designer.cs" />
     <Compile Include="ValueTypeProperty.Interface.Designer.cs" />
     <Compile Include="ViewDescriptor.Interface.Designer.cs" />
     <Compile Include="Visual.Interface.Designer.cs" />
