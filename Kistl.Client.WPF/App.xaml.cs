@@ -55,7 +55,7 @@ namespace Kistl.Client.WPF
 
             var config = KistlConfig.FromFile(configFilePath);
 
-            if (config.Server.StartServer)
+            if (config.Server != null && config.Server.StartServer)
             {
                 serverDomain = new ServerDomainManager();
                 serverDomain.Start(config);

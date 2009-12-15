@@ -36,6 +36,9 @@ namespace Kistl.API.Utils
         /// <param name="inverter">an optional inversion of the <paramref name="selector"/>; used to accelerate some operations; MAY be null</param>
         public ReadOnlyProjectedCollection(ICollection<TInput> collection, Func<TInput, TOutput> selector, Func<TOutput, TInput> inverter)
         {
+            if (collection == null) { throw new ArgumentNullException("collection"); }
+            if (selector == null) { throw new ArgumentNullException("selector"); }
+
             _collection = collection;
             _selector = selector;
             _inverter = inverter;

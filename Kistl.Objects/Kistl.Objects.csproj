@@ -129,6 +129,7 @@
     <Compile Include="TextboxKind.Interface.Designer.cs" />
     <Compile Include="TypeRef.Interface.Designer.cs" />
     <Compile Include="TypeRefRefKind.Interface.Designer.cs" />
+    <Compile Include="ValueListKind.Interface.Designer.cs" />
     <Compile Include="ValueTypeProperty.Interface.Designer.cs" />
     <Compile Include="ViewDescriptor.Interface.Designer.cs" />
     <Compile Include="Visual.Interface.Designer.cs" />

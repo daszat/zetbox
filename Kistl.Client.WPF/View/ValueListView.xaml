@@ -1,4 +1,4 @@
-﻿<view:PropertyView x:Class="Kistl.Client.WPF.View.ListValueView"
+﻿<view:PropertyView x:Class="Kistl.Client.WPF.View.ValueListView"
                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                    xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls"

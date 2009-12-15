@@ -2,10 +2,10 @@
 <KistlConfig xmlns="http://dasz.at/Kistl/">
   <ConfigName>Default WinFormsClient Configuration</ConfigName>
   <Client StartClient="false" ThrowErrors="false">
-    <DocumentStore>P:\Kistl\DocumentStore\Client\</DocumentStore>
+    <DocumentStore>..\..\..\..\DocumentStore\Client\</DocumentStore>
   </Client>
   <SourceFileLocation>
-    <string>C:\temp\KistlCodeGen\bin\Debug</string>
-    <string>P:\Kistl\bin\Debug</string>
+    <!-- default probe path -->
+    <string>..\..\..\CodeGen\bin\Debug</string>
   </SourceFileLocation>
 </KistlConfig>

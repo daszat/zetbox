@@ -250,4 +250,110 @@ namespace Kistl.Client.Presentables
         #endregion
 
     }
+
+    public class StringListPropertyModel
+        : PropertyModel<ICollection<string>>, IValueListModel<string>
+    {
+        public StringListPropertyModel(
+            IGuiApplicationContext appCtx, IKistlContext dataCtx,
+            IDataObject obj, StringProperty prop)
+            : base(appCtx, dataCtx, obj, prop)
+        {
+            UpdatePropertyValueCore();
+        }
+
+        private void UpdatePropertyValueCore()
+        {
+            _valueCache = Object.GetPropertyValue<ICollection<string>>(Property.PropertyName);
+            _observableValueCache = new ObservableCollection<string>(_valueCache);
+            _valueView = new ReadOnlyObservableCollectionWrapper<string>(_observableValueCache);
+        }
+
+        private ICollection<string> _valueCache;
+        private ObservableCollection<string> _observableValueCache;
+        private ReadOnlyObservableCollectionWrapper<string> _valueView;
+
+        protected override void UpdatePropertyValue()
+        {
+            UpdatePropertyValueCore();
+            OnPropertyChanged("Value");
+        }
+
+        #region IValueListModel<string> Members
+
+        public void AddItem(string item)
+        {
+            try
+            {
+                _valueCache.Add(item);
+                _observableValueCache.Add(item);
+            }
+            catch
+            {
+                UpdatePropertyValue();
+                throw;
+            }
+        }
+
+        public void RemoveItem(string item)
+        {
+            try
+            {
+                _valueCache.Remove(item);
+                _observableValueCache.Remove(item);
+            }
+            catch
+            {
+                UpdatePropertyValue();
+                throw;
+            }
+        }
+
+        public void DeleteItem(string item)
+        {
+            RemoveItem(item);
+        }
+
+        public void ActivateItem(string item, bool activate)
+        {
+        }
+
+        private string _selectedItem;
+        public string SelectedItem
+        {
+            get
+            {
+                return _selectedItem;
+            }
+            set
+            {
+                if (_selectedItem != value)
+                {
+                    _selectedItem = value;
+                    OnPropertyChanged("SelectedItem");
+                }
+            }
+        }
+
+        #endregion
+
+        #region IReadOnlyValueModel<IReadOnlyObservableCollection<string>> Members
+
+        public bool HasValue
+        {
+            get { return true; }
+        }
+
+        public bool IsNull
+        {
+            get { return !HasValue; }
+        }
+
+        public IReadOnlyObservableCollection<string> Value
+        {
+            get { return _valueView; }
+        }
+
+        #endregion
+    }
 }

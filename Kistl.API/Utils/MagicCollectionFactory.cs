@@ -59,7 +59,8 @@ namespace Kistl.API.Utils
                     return new CastingCollectionWrapper<T>((IList)collection);
                 }
             }
-            return null;
+
+            throw new ArgumentException("collection", String.Format("Unable to determine CollectionWrapper for {0}", collection.GetType().FullName));
         }
 
         public static IList<TResult> WrapAsListHelper<TFrom, TResult>(IList<TFrom> list)
@@ -78,15 +79,15 @@ namespace Kistl.API.Utils
         /// <summary>
         /// Wrap a list-like objects into an IList&lt;T&gt;. Currently works with IList&lt;T&gt;s, ILists and ICollection&lt;T&gt;s
         /// </summary>
-        public static IList<T> WrapAsList<T>(object collection)
+        public static IList<T> WrapAsList<T>(object potentialList)
         {
-            if (collection is IList<T>)
+            if (potentialList is IList<T>)
             {
-                return (IList<T>)collection;
+                return (IList<T>)potentialList;
             }
             else
             {
-                var elementTypes = collection.GetType().FindElementTypes().Where(t => typeof(T).IsAssignableFrom(t)).ToArray();
+                var elementTypes = potentialList.GetType().FindElementTypes().Where(t => typeof(T).IsAssignableFrom(t)).ToArray();
 
                 if (elementTypes.Contains(typeof(T)))
                 {
@@ -99,14 +100,26 @@ namespace Kistl.API.Utils
                 }
                 else if (elementTypes.Count() == 1)
                 {
-                    return (IList<T>)WrapAsListReflectionHelper(elementTypes.Single(), typeof(T), collection);
+                    return (IList<T>)WrapAsListReflectionHelper(elementTypes.Single(), typeof(T), potentialList);
                 }
-                else if (collection is IList)
+                else if (potentialList is IList)
                 {
-                    return new CastingListWrapper<T>((IList)collection);
+                    return new CastingListWrapper<T>((IList)potentialList);
                 }
             }
-            return null;
+
+            try
+            {
+                var potentialCollection = WrapAsCollection<T>(potentialList);
+                var sortedList = new SortListFromCollection<string, T>(item => item.ToString(), potentialCollection);
+                return sortedList;
+            }
+            catch (ArgumentException)
+            {
+                // also failed to wrap as collection, ignore this exception and fall through to the final exception
+            }
+
+            throw new ArgumentException("potentialList", String.Format("Unable to determine ListWrapper for {0}", potentialList.GetType().FullName));
         }
 
     }
@@ -388,23 +401,29 @@ namespace Kistl.API.Utils
 
         public void Insert(int index, TValue item)
         {
-            throw new NotImplementedException();
+            Add(item);
         }
 
         public void RemoveAt(int index)
         {
-            throw new NotImplementedException();
+            var key = _sortedList.Keys[index];
+            var item = _sortedList[key];
+            _baseCollection.Remove(item);
+            _sortedList.Remove(key);
         }
 
         public TValue this[int index]
         {
             get
             {
-                throw new NotImplementedException();
+                var key = _sortedList.Keys[index];
+                var item = _sortedList[key];
+                return item;
             }
             set
             {
-                throw new NotImplementedException();
+                RemoveAt(index);
+                Add(value);
             }
         }
 
@@ -414,37 +433,47 @@ namespace Kistl.API.Utils
 
         public void Add(TValue item)
         {
-            throw new NotImplementedException();
+            _baseCollection.Add(item);
+            _sortedList.Add(_keyFromItem(item), item);
         }
 
         public void Clear()
         {
-            throw new NotImplementedException();
+            _baseCollection.Clear();
+            _sortedList.Clear();
         }
 
         public bool Contains(TValue item)
         {
-            throw new NotImplementedException();
+            return _baseCollection.Contains(item);
         }
 
         public void CopyTo(TValue[] array, int arrayIndex)
         {
-            throw new NotImplementedException();
+            _sortedList.Values.CopyTo(array, arrayIndex);
         }
 
         public int Count
         {
-            get { throw new NotImplementedException(); }
+            get { return _baseCollection.Count; }
         }
 
         public bool IsReadOnly
         {
-            get { throw new NotImplementedException(); }
+            get { return _baseCollection.IsReadOnly; }
         }
 
         public bool Remove(TValue item)
         {
-            throw new NotImplementedException();
+            var result = _baseCollection.Remove(item);
+
+            // only remove item if it actually exists
+            if (result)
+            {
+                _sortedList.Remove(_keyFromItem(item));
+            }
+
+            return result;
         }
 
         #endregion
@@ -453,7 +482,7 @@ namespace Kistl.API.Utils
 
         public IEnumerator<TValue> GetEnumerator()
         {
-            throw new NotImplementedException();
+            return _sortedList.Values.GetEnumerator();
         }
 
         #endregion
@@ -462,7 +491,7 @@ namespace Kistl.API.Utils
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            throw new NotImplementedException();
+            return _sortedList.Values.GetEnumerator();
         }
 
         #endregion

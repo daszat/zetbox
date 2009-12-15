@@ -374,6 +374,13 @@
       <End Role="B_TypeRefRefKind" EntitySet="TypeRefRefKind" />
     </AssociationSet>
     
+    <EntitySet Name="ValueListKind" EntityType="Model.Store.ValueListKind" Table="ValueListKinds"/>
+    <!-- inherits from ControlKind -->
+    <AssociationSet Name="FK_ValueListKind_ControlKind_ID" Association="Model.Store.FK_ValueListKind_ControlKind_ID" >
+      <End Role="A_ControlKind" EntitySet="ControlKind" />
+      <End Role="B_ValueListKind" EntitySet="ValueListKind" />
+    </AssociationSet>
+    
     <EntitySet Name="ValueTypeProperty" EntityType="Model.Store.ValueTypeProperty" Table="ValueTypeProperties"/>
     <!-- inherits from Property -->
     <AssociationSet Name="FK_ValueTypeProperty_Property_ID" Association="Model.Store.FK_ValueTypeProperty_Property_ID" >
@@ -676,6 +683,10 @@
     <AssociationSet Name="FK_Kunde_was_CreatedBy" Association="Model.Store.FK_Kunde_was_CreatedBy" >
       <End Role="Kunde" EntitySet="Kunde" />
       <End Role="CreatedBy" EntitySet="Identity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_List_has_ItemKind" Association="Model.Store.FK_List_has_ItemKind" >
+      <End Role="List" EntitySet="ValueListKind" />
+      <End Role="ItemKind" EntitySet="ControlKindClass" />
     </AssociationSet>
     <AssociationSet Name="FK_Method_has_MethodInvokations" Association="Model.Store.FK_Method_has_MethodInvokations" >
       <End Role="Method" EntitySet="Method" />
@@ -1799,6 +1810,15 @@
  
   </EntityType>
 	
+  <EntityType Name="ValueListKind">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="fk_ItemKind" Type="int" />
+ 
+  </EntityType>
+	
   <EntityType Name="ValueTypeProperty">
     <Key>
       <PropertyRef Name="ID" />
@@ -2729,6 +2749,21 @@
       </Principal>
       <Dependent Role="Kunde">
         <PropertyRef Name="fk_CreatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_List_has_ItemKind">
+    <End Role="ItemKind" Type="Model.Store.ControlKindClass" Multiplicity="0..1" />
+    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
+    <End Role="List" Type="Model.Store.ValueListKind" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ItemKind">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="List">
+        <PropertyRef Name="fk_ItemKind" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -4211,6 +4246,18 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="B_TypeRefRefKind">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ValueListKind_ControlKind_ID">
+    <End Role="A_ControlKind" Type="Model.Store.ControlKind" Multiplicity="1" />
+    <End Role="B_ValueListKind" Type="Model.Store.ValueListKind" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="A_ControlKind">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_ValueListKind">
         <PropertyRef Name="ID" />
       </Dependent>
     </ReferentialConstraint>

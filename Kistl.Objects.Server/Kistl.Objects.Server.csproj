@@ -153,6 +153,7 @@
     <Compile Include="TextboxKind.Server.Designer.cs" />
     <Compile Include="TypeRef.Server.Designer.cs" />
     <Compile Include="TypeRefRefKind.Server.Designer.cs" />
+    <Compile Include="ValueListKind.Server.Designer.cs" />
     <Compile Include="ValueTypeProperty.Server.Designer.cs" />
     <Compile Include="ViewDescriptor.Server.Designer.cs" />
     <Compile Include="Visual.Server.Designer.cs" />

@@ -491,6 +491,21 @@ using Kistl.DALProvider.EF;
 
 
 	/*
+    Relation: FK_List_has_ItemKind
+    A: ZeroOrMore ValueListKind as List
+    B: One ControlKindClass as ItemKind
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_List_has_ItemKind",
+    "List", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.ValueListKind__Implementation__),
+    "ItemKind", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.GUI.ControlKindClass__Implementation__)
+    )]
+
+
+	/*
     Relation: FK_Method_has_MethodInvokations
     A: One Method as Method
     B: ZeroOrMore MethodInvocation as MethodInvokations

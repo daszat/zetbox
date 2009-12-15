@@ -6,7 +6,8 @@ using System.Collections;
 
 namespace Kistl.API
 {
-    public abstract class ValueCollectionWrapper<TParent, TValue, TEntry, TEntryCollection> : ICollection<TValue>
+    public abstract class ValueCollectionWrapper<TParent, TValue, TEntry, TEntryCollection> 
+        : ICollection<TValue>
         where TParent : IDataObject
         where TEntry : class, IValueCollectionEntry<TParent, TValue>
         where TEntryCollection : ICollection<TEntry>
@@ -150,7 +151,8 @@ namespace Kistl.API
         #endregion
     }
 
-    public abstract class ValueListWrapper<TParent, TValue, TEntry, TEntryCollection> : ValueCollectionWrapper<TParent, TValue, TEntry, TEntryCollection>, IList<TValue>
+    public abstract class ValueListWrapper<TParent, TValue, TEntry, TEntryCollection> 
+        : ValueCollectionWrapper<TParent, TValue, TEntry, TEntryCollection>, IList<TValue>
         where TParent : IDataObject
         where TEntry : class, IValueListEntry<TParent, TValue>
         where TEntryCollection : IList<TEntry>

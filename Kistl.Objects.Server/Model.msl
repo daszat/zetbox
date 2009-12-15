@@ -241,6 +241,11 @@
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 	    </MappingFragment>
       </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.ValueListKind)">
+	    <MappingFragment StoreEntitySet="ValueListKind">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+	    </MappingFragment>
+      </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Model.WorkspaceKind)">
 	    <MappingFragment StoreEntitySet="WorkspaceKind">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
@@ -1579,6 +1584,23 @@
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="fk_CreatedBy" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_List_has_ItemKind
+    A: ZeroOrMore ValueListKind as List
+    B: One ControlKindClass as ItemKind
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_List_has_ItemKind"
+                           TypeName="Model.FK_List_has_ItemKind"
+                           StoreEntitySet="ValueListKind" >
+      <EndProperty Name="ItemKind">
+        <ScalarProperty Name="ID" ColumnName="fk_ItemKind"/>
+      </EndProperty>
+      <EndProperty Name="List">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_ItemKind" IsNull="false"/>
     </AssociationSetMapping>
     <!--
     Relation: FK_Method_has_MethodInvokations

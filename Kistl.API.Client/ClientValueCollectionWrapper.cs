@@ -1,12 +1,15 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Kistl.API;
 
 namespace Kistl.API.Client
 {
-    public class ClientValueCollectionWrapper<TParent, TValue, TEntry, TEntryCollection> : ValueCollectionWrapper<TParent, TValue, TEntry, TEntryCollection>
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.Specialized;
+    using System.Linq;
+    using System.Text;
+    using Kistl.API;
+
+    public class ClientValueCollectionWrapper<TParent, TValue, TEntry, TEntryCollection> 
+        : ValueCollectionWrapper<TParent, TValue, TEntry, TEntryCollection>, INotifyCollectionChanged
         where TParent : IDataObject
         where TEntry : class, IValueCollectionEntry<TParent, TValue>
         where TEntryCollection : ICollection<TEntry>
@@ -15,6 +18,29 @@ namespace Kistl.API.Client
             : base(ctx, parent, collection)
         {
         }
+
+        #region INotifyCollectionChanged Members
+
+        public event NotifyCollectionChangedEventHandler CollectionChanged;
+
+        protected override void OnEntryAdded(TEntry entry)
+        {
+            base.OnEntryAdded(entry);
+            if (CollectionChanged != null)
+            {
+                CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, entry)); 
+            }
+        }
+
+        protected override void OnEntryRemoved(TEntry entry)
+        {
+            base.OnEntryRemoved(entry);
+            if (CollectionChanged != null)
+            {
+                CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, entry));
+            }
+        }
+        #endregion
     }
 
     public class ClientValueListWrapper<TParent, TValue, TEntry, TEntryCollection> : ValueListWrapper<TParent, TValue, TEntry, TEntryCollection>

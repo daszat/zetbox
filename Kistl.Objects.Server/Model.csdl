@@ -263,6 +263,10 @@
       <End Role="Kunde" EntitySet="Kunde" />
       <End Role="CreatedBy" EntitySet="Identity" />
     </AssociationSet>
+    <AssociationSet Name="FK_List_has_ItemKind" Association="Model.FK_List_has_ItemKind" >
+      <End Role="List" EntitySet="ControlKind" />
+      <End Role="ItemKind" EntitySet="DataType" />
+    </AssociationSet>
     <AssociationSet Name="FK_Method_has_MethodInvokations" Association="Model.FK_Method_has_MethodInvokations" >
       <End Role="Method" EntitySet="Method" />
       <End Role="MethodInvokations" EntitySet="MethodInvocation" />
@@ -1480,6 +1484,12 @@
   </EntityType>
   <EntityType Name="TypeRefRefKind" BaseType="Model.ObjectRefKind" >
   </EntityType>
+  <EntityType Name="ValueListKind" BaseType="Model.ControlKind" >
+    <NavigationProperty Name="ItemKind__Implementation__"
+                        Relationship="Model.FK_List_has_ItemKind"
+                        FromRole="List"
+                        ToRole="ItemKind" />
+  </EntityType>
   <EntityType Name="ValueTypeProperty" BaseType="Model.Property" >
     <Property Name="HasPersistentOrder" Type="Boolean" Nullable="false" />
     <Property Name="IsList" Type="Boolean" Nullable="false" />
@@ -2190,6 +2200,14 @@
          Multiplicity="*" />
     <End Role="CreatedBy"
          Type="Model.Identity" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_List_has_ItemKind" >
+    <End Role="List"
+         Type="Model.ValueListKind" 
+         Multiplicity="*" />
+    <End Role="ItemKind"
+         Type="Model.ControlKindClass" 
          Multiplicity="0..1" />
   </Association>
   <Association Name="FK_Method_has_MethodInvokations" >

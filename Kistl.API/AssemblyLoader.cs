@@ -76,7 +76,7 @@ namespace Kistl.API
         {
             foreach (var path in config.SourceFileLocation)
             {
-                AssemblyLoader.SearchPath.Add(path);
+                AssemblyLoader.SearchPath.Add(Path.GetFullPath(path));
             }
         }
 
