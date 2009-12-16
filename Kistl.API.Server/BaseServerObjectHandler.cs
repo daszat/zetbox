@@ -9,6 +9,7 @@ namespace Kistl.API.Server
     using System.Linq.Expressions;
 
     using Kistl.API;
+    using Kistl.API.Utils;
 
     /// <summary>
     /// This describes the common interface from the server frontend to the provider for servicing the common "Get" operations.
@@ -49,7 +50,7 @@ namespace Kistl.API.Server
         /// <summary>
         /// Implementiert den SetObject Befehl.
         /// </summary>
-        IEnumerable<IPersistenceObject> SetObjects(IKistlContext ctx, IEnumerable<IPersistenceObject> objects);
+        IEnumerable<IPersistenceObject> SetObjects(IKistlContext ctx, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests);
     }
 
     public interface IServerCollectionHandler
@@ -242,19 +243,21 @@ namespace Kistl.API.Server
         /// <summary>
         /// Implementiert den SetObject Befehl.
         /// </summary>
-        /// <param name="ctx"></param>
-        /// <param name="objList"></param>
-        /// <returns></returns>
-        public virtual IEnumerable<IPersistenceObject> SetObjects(IKistlContext ctx, IEnumerable<IPersistenceObject> objList)
+        public virtual IEnumerable<IPersistenceObject> SetObjects(IKistlContext ctx, IEnumerable<IPersistenceObject> objList, IEnumerable<ObjectNotificationRequest> notificationRequests)
         {
             var objects = objList.Cast<BaseServerPersistenceObject>().ToList();
-            var entityObjects = new List<IPersistenceObject>();
+            var entityObjects = new Dictionary<IPersistenceObject, IPersistenceObject>();
+
+            Logging.Log.Info(String.Format(
+                "SetObjects for {0} objects and {1} notification requests called.",
+                objects.Count(),
+                notificationRequests.Sum(req => req.IDs.Length)));
 
             // Fist of all, attach new Objects
             foreach (var obj in objects.Where(o => o.ClientObjectState == DataObjectState.New))
             {
                 ctx.Attach(obj);
-                if (!entityObjects.Contains(obj)) entityObjects.Add(obj);
+                entityObjects[obj] = obj;
             }
 
             // then apply changes
@@ -263,7 +266,7 @@ namespace Kistl.API.Server
                 var ctxObj = ctx.FindPersistenceObject(obj.GetInterfaceType(), obj.ID);
                 ((BasePersistenceObject)ctxObj).RecordNotifications();
                 ctxObj.ApplyChangesFrom(obj);
-                if (!entityObjects.Contains(ctxObj)) entityObjects.Add(ctxObj);
+                entityObjects[obj] = obj;
             }
 
             // then update references
@@ -272,7 +275,7 @@ namespace Kistl.API.Server
                 var ctxObj = ctx.FindPersistenceObject(obj.GetInterfaceType(), obj.ID);
                 ((BasePersistenceObject)ctxObj).RecordNotifications();
                 ctxObj.ReloadReferences();
-                if (!entityObjects.Contains(ctxObj)) entityObjects.Add(ctxObj);
+                entityObjects[obj] = obj;
             }
 
             // then delete objects
@@ -283,15 +286,29 @@ namespace Kistl.API.Server
             }
 
             // Playback notifications
-            foreach (var obj in entityObjects.Cast<BasePersistenceObject>())
+            foreach (var obj in entityObjects.Keys.Cast<BasePersistenceObject>())
             {
                 obj.PlaybackNotifications();
             }
 
             ctx.SubmitChanges();
 
-            // TODO: Detect changes made by server method calls
-            return entityObjects;
+            // Send all objects that were modified + those the client wants to be notified about, but each only once
+            var requestLookup = notificationRequests.ToLookup(r => r.Type.TypeName, r => r.IDs.ToLookup(i => i));
+            var requestedObjects = ctx.AttachedObjects
+                .Where(obj =>
+                {
+                    var ids = requestLookup[obj.GetInterfaceType().Type.FullName].FirstOrDefault();
+                    if (ids == null)
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        return ids.Contains(obj.ID) && !entityObjects.ContainsKey(obj);
+                    }
+                });
+            return entityObjects.Values.Concat(requestedObjects);
         }
     }
 }

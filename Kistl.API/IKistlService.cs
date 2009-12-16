@@ -10,6 +10,7 @@ using System.ServiceModel;
 using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
+using System.Diagnostics;
 
 namespace Kistl.API
 {
@@ -38,10 +39,11 @@ namespace Kistl.API
         /// Puts a number of changed objects into the database. The resultant objects are sent back to the client.
         /// </summary>
         /// <param name="msg">a streamable list of <see cref="IPersistenceObject"/>s</param>
+        /// <param name="notificationRequests">A list of objects the client wants to be notified about, if they change.</param>
         /// <returns>a streamable list of <see cref="IPersistenceObject"/>s</returns>
         [OperationContract]
         [FaultContract(typeof(Exception))]
-        MemoryStream SetObjects(MemoryStream msg);
+        MemoryStream SetObjects(MemoryStream msg, IEnumerable<ObjectNotificationRequest> notificationRequests);
 
         /// <summary>
         /// Returns a list of objects from the datastore, matching the specified filters.
@@ -79,5 +81,16 @@ namespace Kistl.API
         [OperationContract]
         [FaultContract(typeof(Exception))]
         MemoryStream FetchRelation(Guid relId, int role, int ID);
+    }
+
+    [DataContract]
+    [DebuggerDisplay("{IDs.Length} reqs for {Type.TypeName}")]
+    public class ObjectNotificationRequest
+    {
+        [DataMember]
+        public SerializableType Type { get; set; }
+
+        [DataMember]
+        public int[] IDs { get; set; }
     }
 }

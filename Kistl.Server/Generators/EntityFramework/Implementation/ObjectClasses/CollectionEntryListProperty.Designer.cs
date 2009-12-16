@@ -90,11 +90,10 @@ RelationEnd relEnd = rel.GetEndFromRole(endRole);
 	string referencedImplementation = otherEnd.Type.GetDataTypeString() + Kistl.API.Helper.ImplementationSuffix;
 
 	// whether or not the collection will be eagerly loaded
-	bool eagerLoading = (relEnd.Navigator != null && relEnd.Navigator.EagerLoading)
-        || (otherEnd.Navigator != null && otherEnd.Navigator.EagerLoading);
+	bool eagerLoading = relEnd.Navigator != null && relEnd.Navigator.EagerLoading;
 
 
-#line 82 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\CollectionEntryListProperty.cst"
+#line 81 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\CollectionEntryListProperty.cst"
 this.WriteObjects("		// ",  this.GetType() , "\r\n");
 this.WriteObjects("        // implement the user-visible interface\r\n");
 this.WriteObjects("        [XmlIgnore()]\r\n");
@@ -132,7 +131,7 @@ this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
 this.WriteObjects("        private ",  wrapperClass , "<",  rel.A.Type.GetDataTypeString() , ", ",  rel.B.Type.GetDataTypeString() , ", ",  ceName , "> ",  wrapperName , ";\r\n");
 this.WriteObjects("\r\n");
-#line 120 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\CollectionEntryListProperty.cst"
+#line 119 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\CollectionEntryListProperty.cst"
 AddSerialization(serializationList, efName, eagerLoading);
 
 

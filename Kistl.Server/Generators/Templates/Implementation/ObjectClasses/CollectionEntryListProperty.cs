@@ -62,8 +62,7 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
             string providerCollectionType = (rel.NeedsPositionStorage(otherEnd.GetRole()) ? "IList<" : "ICollection<")
                 + entryType + ">";
 
-            bool eagerLoading = (relEnd.Navigator != null && relEnd.Navigator.EagerLoading)
-                || (otherEnd.Navigator != null && otherEnd.Navigator.EagerLoading);
+            bool eagerLoading = relEnd.Navigator != null && relEnd.Navigator.EagerLoading;
 
             host.CallTemplate("Implementation.ObjectClasses.CollectionEntryListProperty",
                 ctx, serializationList,

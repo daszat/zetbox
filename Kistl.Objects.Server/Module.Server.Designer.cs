@@ -129,7 +129,7 @@ namespace Kistl.App.Base
             {
                 // TODO: NotifyPropertyChanged()
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if(value != null && value.Context != this.Context) throw new WrongKistlContextExeption();
+                if(value.Context != this.Context) throw new WrongKistlContextExeption();
                 ChangedBy__Implementation__ = (Kistl.App.Base.Identity__Implementation__)value;
             }
         }
@@ -270,7 +270,7 @@ namespace Kistl.App.Base
             {
                 // TODO: NotifyPropertyChanged()
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if(value != null && value.Context != this.Context) throw new WrongKistlContextExeption();
+                if(value.Context != this.Context) throw new WrongKistlContextExeption();
                 CreatedBy__Implementation__ = (Kistl.App.Base.Identity__Implementation__)value;
             }
         }
@@ -433,7 +433,6 @@ namespace Kistl.App.Base
         }
         private EntityCollectionWrapper<Kistl.App.Base.DataType, Kistl.App.Base.DataType__Implementation__> _DataTypesWrapper;
 
-		private List<int> DataTypesIds;
 
 
         /// <summary>
@@ -854,16 +853,6 @@ namespace Kistl.App.Base
             BinarySerializer.ToStream(this._ChangedOn, binStream);
             BinarySerializer.ToStream(CreatedBy != null ? CreatedBy.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._CreatedOn, binStream);
-			{
-				BinarySerializer.ToStream(DataTypes.Count, binStream);
-				foreach(var obj in DataTypes)
-				{
-					if (auxObjects != null) {
-						auxObjects.Add(obj);
-					}
-					BinarySerializer.ToStream(obj.ID, binStream);
-				}
-			}
             BinarySerializer.ToStream(this._Description, binStream);
             BinarySerializer.ToStream(this._isExportGuidSet, binStream);
             if (this._isExportGuidSet) {
@@ -881,18 +870,6 @@ namespace Kistl.App.Base
             BinarySerializer.FromStream(out this._ChangedOn, binStream);
             BinarySerializer.FromStream(out this._fk_CreatedBy, binStream);
             BinarySerializer.FromStream(out this._CreatedOn, binStream);
-			{
-				int numElements;
-				BinarySerializer.FromStream(out numElements, binStream);
-				DataTypesIds = new List<int>(numElements);
-				while (numElements-- > 0) 
-				{
-					int id;
-					BinarySerializer.FromStream(out id, binStream);
-					DataTypesIds.Add(id);
-				}
-			}
-
             BinarySerializer.FromStream(out this._Description, binStream);
             BinarySerializer.FromStream(out this._isExportGuidSet, binStream);
             if (this._isExportGuidSet) {

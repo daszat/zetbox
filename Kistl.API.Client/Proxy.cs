@@ -23,7 +23,7 @@ namespace Kistl.API.Client
         IEnumerable<IDataObject> GetList(InterfaceType ifType, int maxListCount, Expression filter, IEnumerable<Expression> orderBy, out List<IStreamable> auxObjects);
         IEnumerable<IDataObject> GetListOf(InterfaceType ifType, int ID, string property, out List<IStreamable> auxObjects);
 
-        IEnumerable<IPersistenceObject> SetObjects(IEnumerable<IPersistenceObject> objects);
+        IEnumerable<IPersistenceObject> SetObjects(IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests);
 
         IEnumerable<T> FetchRelation<T>(Guid relationId, RelationEndRole role, IDataObject parent, out List<IStreamable> auxObjects)
             where T : class, IRelationCollectionEntry;
@@ -81,7 +81,7 @@ namespace Kistl.API.Client
         {
             get
             {
-                lock(this)
+                lock (this)
                 {
                     if (_service == null || _service.State != System.ServiceModel.CommunicationState.Opened)
                     {
@@ -97,11 +97,13 @@ namespace Kistl.API.Client
             using (Logging.Facade.TraceMethodCall(ifType.ToString()))
             {
                 MemoryStream s = Service.GetList(
-                    new SerializableType(ifType), 
-                    maxListCount, 
+                    new SerializableType(ifType),
+                    maxListCount,
                     filter != null ? SerializableExpression.FromExpression(filter) : null,
                     orderBy != null ? orderBy.Select(o => SerializableExpression.FromExpression(o)).ToArray() : null);
-                return ReceiveObjects(s, out auxObjects).Cast<IDataObject>();
+                var result = ReceiveObjects(s, out auxObjects).Cast<IDataObject>();
+                Logging.Linq.Warn(String.Format("GetList retrieved {0} objects and {1} auxObjects", result.Count(), auxObjects.Count()));
+                return result;
             }
         }
 
@@ -110,11 +112,13 @@ namespace Kistl.API.Client
             using (Logging.Facade.TraceMethodCall("{0} [{1}].{2}", ifType, ID, property))
             {
                 MemoryStream s = Service.GetListOf(new SerializableType(ifType), ID, property);
-                return ReceiveObjects(s, out auxObjects).Cast<IDataObject>();
+                var result = ReceiveObjects(s, out auxObjects).Cast<IDataObject>();
+                Logging.Linq.Warn(String.Format("GetListOf retrieved {0} objects and {1} auxObjects", result.Count(), auxObjects.Count()));
+                return result;
             }
         }
 
-        public IEnumerable<IPersistenceObject> SetObjects(IEnumerable<IPersistenceObject> objects)
+        public IEnumerable<IPersistenceObject> SetObjects(IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notficationRequests)
         {
             using (Logging.Facade.TraceMethodCall())
             {
@@ -128,12 +132,14 @@ namespace Kistl.API.Client
                 }
                 BinarySerializer.ToStream(false, sw);
 
-                MemoryStream s = Service.SetObjects(ms);
+                MemoryStream s = Service.SetObjects(ms, notficationRequests.ToArray());
 
                 // merge auxiliary objects into primary set objects result
                 List<IStreamable> auxObjects;
-                var results = ReceiveObjects(s, out auxObjects);
-                return results.Concat(auxObjects).Cast<IPersistenceObject>();
+                var receivedObjects = ReceiveObjects(s, out auxObjects);
+                var result = receivedObjects.Concat(auxObjects).Cast<IPersistenceObject>();
+                Logging.Linq.Warn(String.Format("SetObjects retrieved {0} objects and {1} auxObjects", result.Count(), auxObjects.Count()));
+                return result;
             }
         }
 
@@ -183,7 +189,9 @@ namespace Kistl.API.Client
 
                 MemoryStream ms = Service.FetchRelation(relationId, (int)role, parent.ID);
 
-                return ReceiveObjects(ms, out auxObjects).Cast<T>();
+                var result = ReceiveObjects(ms, out auxObjects).Cast<T>();
+                Logging.Linq.Warn(String.Format("FetchRelation retrieved {0} objects and {1} auxObjects", result.Count(), auxObjects.Count()));
+                return result;
             }
         }
 

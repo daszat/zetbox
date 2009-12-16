@@ -214,7 +214,7 @@ namespace Kistl.API.Utils
 
         public static void TraceTotalMemory(string msg)
         {
-            Log.DebugFormat(msg + ": Consuming {0} kB Memory", (double)GC.GetTotalMemory(true) / 1024.0);
+            Log.DebugFormat(msg + ": Consuming {0:0.00} kB Memory", (double)GC.GetTotalMemory(true) / 1024.0);
         }
     }
 }

@@ -441,7 +441,12 @@ namespace Kistl.API.Client
             notifySaveList.ForEach(o => o.NotifyPreSave());
 
             // Submit to server
-            var objectsFromServer = Proxy.Current.SetObjects(objectsToSubmit.Cast<IPersistenceObject>());
+            var objectsFromServer = Proxy.Current.SetObjects(
+                objectsToSubmit
+                    .Cast<IPersistenceObject>(),
+                AttachedObjects
+                    .ToLookup(o => o.GetInterfaceType())
+                    .Select(g => new ObjectNotificationRequest() { Type = new SerializableType(g.Key), IDs = g.Select(o => o.ID).ToArray() }));
 
             // Apply Changes
             int counter = 0;

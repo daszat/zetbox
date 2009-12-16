@@ -47,9 +47,9 @@ namespace Kistl.DALProvider.EF
         : BaseServerObjectSetHandler
     {
         /// <inheritdoc/>
-        public override IEnumerable<IPersistenceObject> SetObjects(IKistlContext ctx, IEnumerable<IPersistenceObject> objects)
+        public override IEnumerable<IPersistenceObject> SetObjects(IKistlContext ctx, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests)
         {
-            return base.SetObjects(ctx, objects);
+            return base.SetObjects(ctx, objects, notificationRequests);
         }
     }
 

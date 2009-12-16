@@ -84,7 +84,7 @@ namespace Kistl.API.Client.Tests
             throw new NotImplementedException();
         }
 
-        public IEnumerable<IPersistenceObject> SetObjects(IEnumerable<IPersistenceObject> objects)
+        public IEnumerable<IPersistenceObject> SetObjects(IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests)
         {
             var result = new List<IPersistenceObject>();
             foreach (var obj in objects)

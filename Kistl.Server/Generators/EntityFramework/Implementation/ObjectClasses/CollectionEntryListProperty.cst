@@ -75,8 +75,7 @@
 	string referencedImplementation = otherEnd.Type.GetDataTypeString() + Kistl.API.Helper.ImplementationSuffix;
 
 	// whether or not the collection will be eagerly loaded
-	bool eagerLoading = (relEnd.Navigator != null && relEnd.Navigator.EagerLoading)
-        || (otherEnd.Navigator != null && otherEnd.Navigator.EagerLoading);
+	bool eagerLoading = relEnd.Navigator != null && relEnd.Navigator.EagerLoading;
 
 %>
 		// <%= this.GetType() %>

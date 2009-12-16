@@ -92,7 +92,7 @@ namespace Kistl.Client.WPF
                     var uiElementType = typeof(UIElement);
                     var assemblyName = typeof(App).Assembly.FullName;
 
-                    var referencedControlKinds =ctx.GetQuery<PresentableModelDescriptor>()
+                    var referencedControlKinds = ctx.GetQuery<PresentableModelDescriptor>()
                         .ToList()
                         .SelectMany(pmd => new[] { pmd.DefaultKind, pmd.DefaultGridCellKind }.Concat(pmd.SecondaryControlKinds))
                         .Where(ck => ck != null)
@@ -118,6 +118,34 @@ namespace Kistl.Client.WPF
             }
         }
 
+        private static void PrintEagerLoadingGraphViz()
+        {
+            using (Logging.Log.TraceMethodCall("PrintEagerLoadingGraphViz"))
+            {
+                Console.WriteLine("---------------------------------------------------------------");
+                Console.WriteLine();
+                Console.WriteLine("graph A{");
+                using (IKistlContext ctx = KistlContext.GetContext())
+                {
+                    var relations = ctx.GetQuery<Relation>();
+
+                    foreach (var rel in relations.Where(r => r.A.Navigator != null && r.A.Navigator.EagerLoading))
+                    {
+                        Console.WriteLine("{0} -> {1};", rel.A.Type.ClassName, rel.B.Type.ClassName);
+                    }
+
+                    relations = ctx.GetQuery<Relation>();
+                    foreach (var rel in relations.Where(r => r.B.Navigator != null && r.B.Navigator.EagerLoading))
+                    {
+                        Console.WriteLine("{0} -> {1};", rel.B.Type.ClassName, rel.A.Type.ClassName);
+                    }
+                }
+                Console.WriteLine("}");
+                Console.WriteLine("");
+                Console.WriteLine("---------------------------------------------------------------");
+            }
+        }
+
         /// <summary>
         /// Calls currently needed Database fixes
         /// </summary>
@@ -126,6 +154,7 @@ namespace Kistl.Client.WPF
             //MoveClrObjectParameterFullTypeName();
             //FixupTypeRefParents();
             //CheckUnusedWpfControls();
+            //PrintEagerLoadingGraphViz();
         }
     }
 }

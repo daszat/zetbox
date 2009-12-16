@@ -63,8 +63,9 @@ namespace Kistl.Server
         /// Puts a number of changed objects into the database. The resultant objects are sent back to the client.
         /// </summary>
         /// <param name="msg">a streamable list of <see cref="IPersistenceObject"/>s</param>
+        /// <param name="notificationRequests">A list of objects the client wants to be notified about, if they change.</param>
         /// <returns>a streamable list of <see cref="IPersistenceObject"/>s</returns>
-        public MemoryStream SetObjects(MemoryStream msg)
+        public MemoryStream SetObjects(MemoryStream msg, IEnumerable<ObjectNotificationRequest> notificationRequests)
         {
             try
             {
@@ -97,7 +98,7 @@ namespace Kistl.Server
                         // Set Operation
                         var changedObjects = ServerObjectHandlerFactory
                             .GetServerObjectSetHandler()
-                            .SetObjects(ctx, objects)
+                            .SetObjects(ctx, objects, notificationRequests)
                             .Cast<IStreamable>();
                         return SendObjects(changedObjects);
                     }

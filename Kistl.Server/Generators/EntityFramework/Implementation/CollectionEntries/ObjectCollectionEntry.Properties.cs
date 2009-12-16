@@ -16,8 +16,7 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.CollectionEntri
         {
             RelationEnd relEnd = rel.GetEndFromRole(endRole);
             RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
-            bool eagerLoading = (relEnd.Navigator != null && relEnd.Navigator.EagerLoading)
-                || (otherEnd.Navigator != null && otherEnd.Navigator.EagerLoading);
+            bool eagerLoading = relEnd.Navigator != null && relEnd.Navigator.EagerLoading;
 
             Implementation.ObjectClasses.ObjectReferencePropertyTemplate.Call(Host, ctx,
                 this.MembersToSerialize,

@@ -132,7 +132,7 @@ namespace Kistl.App.Base
             {
                 // TODO: NotifyPropertyChanged()
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if(value != null && value.Context != this.Context) throw new WrongKistlContextExeption();
+                if(value.Context != this.Context) throw new WrongKistlContextExeption();
                 ChangedBy__Implementation__ = (Kistl.App.Base.Identity__Implementation__)value;
             }
         }
@@ -295,7 +295,6 @@ namespace Kistl.App.Base
         }
         private EntityCollectionWrapper<Kistl.App.Base.Constraint, Kistl.App.Base.Constraint__Implementation__> _ConstraintsWrapper;
 
-		private List<int> ConstraintsIds;
 
 
         /// <summary>
@@ -322,7 +321,7 @@ namespace Kistl.App.Base
             {
                 // TODO: NotifyPropertyChanged()
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if(value != null && value.Context != this.Context) throw new WrongKistlContextExeption();
+                if(value.Context != this.Context) throw new WrongKistlContextExeption();
                 CreatedBy__Implementation__ = (Kistl.App.Base.Identity__Implementation__)value;
             }
         }
@@ -463,7 +462,7 @@ namespace Kistl.App.Base
             {
                 // TODO: NotifyPropertyChanged()
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if(value != null && value.Context != this.Context) throw new WrongKistlContextExeption();
+                if(value.Context != this.Context) throw new WrongKistlContextExeption();
                 DefaultValue__Implementation__ = (Kistl.App.Base.DefaultPropertyValue__Implementation__)value;
             }
         }
@@ -714,7 +713,7 @@ namespace Kistl.App.Base
             {
                 // TODO: NotifyPropertyChanged()
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if(value != null && value.Context != this.Context) throw new WrongKistlContextExeption();
+                if(value.Context != this.Context) throw new WrongKistlContextExeption();
                 Module__Implementation__ = (Kistl.App.Base.Module__Implementation__)value;
             }
         }
@@ -804,7 +803,7 @@ namespace Kistl.App.Base
             {
                 // TODO: NotifyPropertyChanged()
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if(value != null && value.Context != this.Context) throw new WrongKistlContextExeption();
+                if(value.Context != this.Context) throw new WrongKistlContextExeption();
                 ObjectClass__Implementation__ = (Kistl.App.Base.DataType__Implementation__)value;
             }
         }
@@ -945,7 +944,7 @@ namespace Kistl.App.Base
             {
                 // TODO: NotifyPropertyChanged()
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if(value != null && value.Context != this.Context) throw new WrongKistlContextExeption();
+                if(value.Context != this.Context) throw new WrongKistlContextExeption();
                 ValueModelDescriptor__Implementation__ = (Kistl.App.GUI.PresentableModelDescriptor__Implementation__)value;
             }
         }
@@ -1325,16 +1324,6 @@ namespace Kistl.App.Base
             BinarySerializer.ToStream(this._CategoryTags, binStream);
             BinarySerializer.ToStream(ChangedBy != null ? ChangedBy.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._ChangedOn, binStream);
-			{
-				BinarySerializer.ToStream(Constraints.Count, binStream);
-				foreach(var obj in Constraints)
-				{
-					if (auxObjects != null) {
-						auxObjects.Add(obj);
-					}
-					BinarySerializer.ToStream(obj.ID, binStream);
-				}
-			}
             BinarySerializer.ToStream(CreatedBy != null ? CreatedBy.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._CreatedOn, binStream);
             BinarySerializer.ToStream(DefaultValue != null ? DefaultValue.ID : (int?)null, binStream);
@@ -1359,18 +1348,6 @@ namespace Kistl.App.Base
             BinarySerializer.FromStream(out this._CategoryTags, binStream);
             BinarySerializer.FromStream(out this._fk_ChangedBy, binStream);
             BinarySerializer.FromStream(out this._ChangedOn, binStream);
-			{
-				int numElements;
-				BinarySerializer.FromStream(out numElements, binStream);
-				ConstraintsIds = new List<int>(numElements);
-				while (numElements-- > 0) 
-				{
-					int id;
-					BinarySerializer.FromStream(out id, binStream);
-					ConstraintsIds.Add(id);
-				}
-			}
-
             BinarySerializer.FromStream(out this._fk_CreatedBy, binStream);
             BinarySerializer.FromStream(out this._CreatedOn, binStream);
             BinarySerializer.FromStream(out this._fk_DefaultValue, binStream);

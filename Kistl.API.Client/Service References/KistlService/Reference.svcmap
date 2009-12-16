@@ -20,13 +20,16 @@
     <MetadataSource Address="http://localhost:6666/KistlService" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="KistlService2.xsd" MetadataType="Schema" ID="18508f25-70a3-4688-89a7-2d6da40dbe59" SourceId="1" SourceUrl="http://localhost:6666/KistlService?xsd=xsd0" />
-    <MetadataFile FileName="KistlService1.xsd" MetadataType="Schema" ID="5fad6955-f400-4868-bf31-ab184cb66069" SourceId="1" SourceUrl="http://localhost:6666/KistlService?xsd=xsd1" />
-    <MetadataFile FileName="KistlService4.xsd" MetadataType="Schema" ID="33f94870-2b20-4cba-9307-2969b67eba94" SourceId="1" SourceUrl="http://localhost:6666/KistlService?xsd=xsd4" />
-    <MetadataFile FileName="KistlService5.xsd" MetadataType="Schema" ID="b8b996b7-92c7-41fa-85ca-fd88c8d79a8f" SourceId="1" SourceUrl="http://localhost:6666/KistlService?xsd=xsd5" />
-    <MetadataFile FileName="KistlService1.wsdl" MetadataType="Wsdl" ID="0b481b3a-f1e6-4d37-919a-f99e54ab4a48" SourceId="1" SourceUrl="http://localhost:6666/KistlService" />
-    <MetadataFile FileName="KistlService.xsd" MetadataType="Schema" ID="37984299-f1d6-4031-a32e-7e4c2ea3bd9e" SourceId="1" SourceUrl="http://localhost:6666/KistlService?xsd=xsd2" />
     <MetadataFile FileName="KistlService3.xsd" MetadataType="Schema" ID="dbdfb965-e729-4ba1-b65d-568fc0390cff" SourceId="1" SourceUrl="http://localhost:6666/KistlService?xsd=xsd3" />
+    <MetadataFile FileName="KistlService2.xsd" MetadataType="Schema" ID="18508f25-70a3-4688-89a7-2d6da40dbe59" SourceId="1" SourceUrl="http://localhost:6666/KistlService?xsd=xsd0" />
+    <MetadataFile FileName="KistlService5.xsd" MetadataType="Schema" ID="b8b996b7-92c7-41fa-85ca-fd88c8d79a8f" SourceId="1" SourceUrl="http://localhost:6666/KistlService?xsd=xsd5" />
+    <MetadataFile FileName="KistlService.xsd" MetadataType="Schema" ID="37984299-f1d6-4031-a32e-7e4c2ea3bd9e" SourceId="1" SourceUrl="http://localhost:6666/KistlService?xsd=xsd2" />
+    <MetadataFile FileName="KistlService4.xsd" MetadataType="Schema" ID="33f94870-2b20-4cba-9307-2969b67eba94" SourceId="1" SourceUrl="http://localhost:6666/KistlService?xsd=xsd4" />
+    <MetadataFile FileName="KistlService6.xsd" MetadataType="Schema" ID="23064365-66d5-4ed3-8208-3b8e67e8e422" SourceId="1" SourceUrl="http://localhost:6666/KistlService?xsd=xsd7" />
+    <MetadataFile FileName="KistlService1.wsdl" MetadataType="Wsdl" ID="0b481b3a-f1e6-4d37-919a-f99e54ab4a48" SourceId="1" SourceUrl="http://localhost:6666/KistlService" />
+    <MetadataFile FileName="KistlService61.xsd" MetadataType="Schema" ID="49f9e1a2-11ae-417b-bddf-435b1c633090" SourceId="1" SourceUrl="http://localhost:6666/KistlService?xsd=xsd8" />
+    <MetadataFile FileName="KistlService62.xsd" MetadataType="Schema" ID="ec41611c-a71c-4082-b651-4569d336e057" SourceId="1" SourceUrl="http://localhost:6666/KistlService?xsd=xsd6" />
+    <MetadataFile FileName="KistlService1.xsd" MetadataType="Schema" ID="5fad6955-f400-4868-bf31-ab184cb66069" SourceId="1" SourceUrl="http://localhost:6666/KistlService?xsd=xsd1" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />

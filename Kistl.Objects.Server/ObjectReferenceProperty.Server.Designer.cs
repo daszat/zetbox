@@ -107,7 +107,7 @@ namespace Kistl.App.Base
             {
                 // TODO: NotifyPropertyChanged()
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if(value != null && value.Context != this.Context) throw new WrongKistlContextExeption();
+                if(value.Context != this.Context) throw new WrongKistlContextExeption();
                 RelationEnd__Implementation__ = (Kistl.App.Base.RelationEnd__Implementation__)value;
             }
         }
