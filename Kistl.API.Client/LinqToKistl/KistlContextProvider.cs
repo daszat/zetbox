@@ -7,6 +7,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 using Kistl.API.Utils;
+using Kistl.API.Client.LinqToKistl;
 
 // http://blogs.msdn.com/mattwar/archive/2007/07/30/linq-building-an-iqueryable-provider-part-i.aspx
 
@@ -66,111 +67,20 @@ namespace Kistl.API.Client
             return result;
         }
 
-        #region ConstantEvaluator
-        private static class ConstantEvaluator
-        {
-            public static Expression PartialEval(Expression expression)
-            {
-                Nominator nominator = new Nominator();
-                SubtreeEvaluator evaluator = new SubtreeEvaluator(nominator.Nominate(expression));
-                return evaluator.Eval(expression);
-            }
-
-            class SubtreeEvaluator : ExpressionTreeTranslator
-            {
-                HashSet<Expression> candidates;
-
-                internal SubtreeEvaluator(HashSet<Expression> candidates)
-                {
-                    this.candidates = candidates;
-                }
-
-                internal Expression Eval(Expression exp)
-                {
-                    return this.Visit(exp);
-                }
-
-                public override Expression Visit(Expression exp)
-                {
-                    if (exp == null)
-                    {
-                        return null;
-                    }
-
-                    if (this.candidates.Contains(exp))
-                    {
-                        return this.Evaluate(exp);
-                    }
-                    return base.Visit(exp);
-                }
-
-                private Expression Evaluate(Expression e)
-                {
-                    if (e.NodeType == ExpressionType.Constant)
-                    {
-                        return e;
-                    }
-                    LambdaExpression lambda = Expression.Lambda(e);
-                    // TODO: The following line is _the_only_ (85% of KistlContext.Find()) performance Hotspot for Linq2Kistl
-                    Delegate fn = lambda.Compile();
-                    return Expression.Constant(fn.DynamicInvoke(null), e.Type);
-                }
-            }
-
-            class Nominator : ExpressionTreeVisitor
-            {
-                HashSet<Expression> candidates;
-                bool cannotBeEvaluated;
-
-                internal Nominator()
-                {
-                }
-
-                internal HashSet<Expression> Nominate(Expression expression)
-                {
-                    this.candidates = new HashSet<Expression>();
-                    this.Visit(expression);
-                    return this.candidates;
-                }
-
-                public override void Visit(Expression expression)
-                {
-                    if (expression != null)
-                    {
-                        bool saveCannotBeEvaluated = this.cannotBeEvaluated;
-                        this.cannotBeEvaluated = false;
-                        base.Visit(expression);
-                        if (!this.cannotBeEvaluated)
-                        {
-                            if (CanBeEvaluatedLocally(expression))
-                            {
-                                this.candidates.Add(expression);
-                            }
-                            else
-                            {
-                                this.cannotBeEvaluated = true;
-                            }
-                        }
-                        this.cannotBeEvaluated |= saveCannotBeEvaluated;
-                    }
-                }
-
-                private bool CanBeEvaluatedLocally(Expression expression)
-                {
-                    if (expression.NodeType == ExpressionType.Parameter) return false;
-                    if (expression.Type.IsGenericType && expression.Type.GetGenericTypeDefinition() == typeof(KistlContextQuery<>)) return false;
-                    return true;
-                }
-            }
-        }
-
-        #endregion
 
         private List<IDataObject> VisitAndCallService(Expression e, out List<IStreamable> auxObjects)
         {
-            e = ConstantEvaluator.PartialEval(e);
+            e = TransformExpression(e);
             Visit(e);
             return CallService(out auxObjects);
+        }
+
+        private Expression TransformExpression(Expression e)
+        {
+            e = QueryTranslator.Translate(e);
+            // TODO: Maybe merge constant evaluator into QueryTranslator
+            e = ConstantEvaluator.PartialEval(e);
+            return e;
         }
 
         private List<IDataObject> CallService(out List<IStreamable> auxObjects)
@@ -261,7 +171,7 @@ namespace Kistl.API.Client
             }
 
             // Visit
-            e = ConstantEvaluator.PartialEval(e);
+            e = TransformExpression(e);
             Visit(e);
 
             List<T> result = new List<T>();

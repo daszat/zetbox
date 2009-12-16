@@ -82,5 +82,21 @@ namespace Kistl.DalProvider.EF.Tests
                 Assert.That(r.Storage, Is.EqualTo(StorageType.Separate));
             }
         }
+
+        /// <summary>
+        /// </summary>
+        [Test]
+        public void query_with_objectfilter()
+        {
+            using (IKistlContext ctx = KistlContext.GetContext())
+            {
+                var module = ctx.GetQuery<Module>().Where(m => m.ModuleName == "KistlBase");
+                Assert.That(module, Is.Not.Null);
+                var result = ctx.GetQuery<ObjectClass>().Where(c => c.Module == module).ToList();
+                Assert.That(result, Is.Not.Null);
+                Assert.That(result.Count, Is.GreaterThan(0));
+            }
+        }
+
     }
 }
