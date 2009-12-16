@@ -134,14 +134,6 @@ namespace Kistl.Server.Generators
             return ForeignKeyColumnName(Construct.NestedColumnName(prop, parentPropName)) + "_pos";
         }
 
-        [Obsolete]
-        public static string ListPositionColumnName(ObjectReferenceProperty prop, string parentPropName)
-        {
-            RelationEnd relEnd = prop.RelationEnd;
-            RelationEnd otherEnd = relEnd.GetParent().GetOtherEnd(relEnd);
-            return ListPositionColumnName(otherEnd, parentPropName);
-        }
-
         public static string ListPositionColumnName(RelationEnd otherEnd)
         {
             return ListPositionColumnName(otherEnd, string.Empty);

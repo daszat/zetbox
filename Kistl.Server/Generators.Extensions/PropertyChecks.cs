@@ -56,20 +56,6 @@ namespace Kistl.Server.Generators.Extensions
             return prop is StructProperty && ((StructProperty)prop).IsList;
         }
 
-        public static bool NeedsPositionColumn(this Property prop)
-        {
-            bool result = false;
-
-            var p = prop as ObjectReferenceProperty;
-            if (p != null)
-            {
-                var rel = RelationExtensions.Lookup(p.Context, p);
-                var relEnd = rel.GetEnd(p);
-                result = rel.NeedsPositionStorage(relEnd.GetRole());
-            }
-            return result;
-        }
-
         public static string GetCollectionTypeString(this Property prop)
         {
             bool isIndexed = false;

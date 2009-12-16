@@ -55,14 +55,8 @@
 			}
 %>
     <Property Name="<%= propertyName %>" Type="<%= sqlTypeName %>" <%= maxLengthAttr %><%= nullableAttr %>/>
+    <!-- <Property Name="<%= Construct.ListPositionColumnName((ValueTypeProperty)p, prefix) %>" Type="int" Nullable="true" /> -->
 <%
-   			
-		    if (p.NeedsPositionColumn())
-		    {
-%>
-    <Property Name="<%= Construct.ListPositionColumnName((ValueTypeProperty)p, prefix) %>" Type="int" Nullable="true" />
-<%
-			}
 		}
 	}
 %>

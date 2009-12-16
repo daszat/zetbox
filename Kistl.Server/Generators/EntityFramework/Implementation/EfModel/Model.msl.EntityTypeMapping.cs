@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Arebis.CodeGeneration;
+
+using Kistl.API;
 using Kistl.App.Base;
 using Kistl.App.Extensions;
 using Kistl.Server.Generators.Extensions;
-using Arebis.CodeGeneration;
-using Kistl.API;
 
 namespace Kistl.Server.Generators.EntityFramework.Implementation.EfModel
 {
@@ -21,6 +22,45 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.EfModel
         protected virtual void ApplyEntityTypeMapping(ObjectClass obj)
         {
             Call(Host, ctx, obj);
+        }
+
+        protected virtual void ApplyPropertyMappings()
+        {
+            var relevantRelations = ctx.GetQuery<Relation>()
+                .Where(r => (r.A.Type.ID == cls.ID && (int)r.Storage == (int)StorageType.MergeIntoA)
+                            || (r.B.Type.ID == cls.ID && (int)r.Storage == (int)StorageType.MergeIntoB))
+                .ToList()
+                .OrderBy(r => r.GetAssociationName());
+
+            foreach (var rel in relevantRelations)
+            {
+                string propertyName;
+                string columnName;
+
+                if (rel.A.Type == cls && rel.NeedsPositionStorage(RelationEndRole.A) && rel.A.Navigator != null)
+                {
+                    propertyName = rel.A.Navigator.PropertyName + Kistl.API.Helper.PositionSuffix;
+                    columnName = Construct.ListPositionColumnName(rel.B, String.Empty);
+                    this.WriteLine("<ScalarProperty Name=\"{0}\" ColumnName=\"{1}\" />", propertyName, columnName);
+                }
+
+                if (rel.B.Type == cls && rel.NeedsPositionStorage(RelationEndRole.B) && rel.B.Navigator != null)
+                {
+                    propertyName = rel.B.Navigator.PropertyName + Kistl.API.Helper.PositionSuffix;
+                    columnName = Construct.ListPositionColumnName(rel.A, String.Empty);
+                    this.WriteLine("<ScalarProperty Name=\"{0}\" ColumnName=\"{1}\" />", propertyName, columnName);
+                }
+            }
+
+            foreach (var prop in cls.Properties.OfType<ValueTypeProperty>().Where(p => !p.IsList).OrderBy(p => p.PropertyName))
+            {
+                ApplyScalarProperty(prop, "");
+            }
+
+            foreach (var prop in cls.Properties.OfType<StructProperty>().Where(p => !p.IsList).OrderBy(p => p.PropertyName))
+            {
+                ApplyComplexProperty(prop, "");
+            }
         }
 
         protected virtual void ApplyScalarProperty(Property prop, string parentName)
@@ -37,11 +77,9 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.EfModel
             {
                 columnName = Construct.NestedColumnName(prop, parentName);
             }
-            else if (prop is ObjectReferenceProperty && prop.NeedsPositionColumn())
+            else if (prop is ObjectReferenceProperty)
             {
-                propertyName += Kistl.API.Helper.PositionSuffix;
-                // TODO: Case #1306: SSDL should not rely on NavigationProperties. 
-                columnName = Construct.ListPositionColumnName((ObjectReferenceProperty)prop, parentName);
+                throw new ArgumentOutOfRangeException("prop", "cannot apply ObjectReferenceProperty as scalar");
             }
             else
             {
