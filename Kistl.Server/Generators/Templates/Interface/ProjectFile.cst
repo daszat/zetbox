@@ -28,6 +28,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <NoWarn>1591</NoWarn>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <OutputPath>..\bin\Debug\bin\Server\Fallback\</OutputPath>
     <KistlAPIPath>..\bin\Debug\bin\Server\</KistlAPIPath>
   </PropertyGroup>
@@ -37,6 +38,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <OutputPath>..\bin\Release\bin\Server\Fallback\</OutputPath>
     <KistlAPIPath>..\bin\Release\bin\Server\</KistlAPIPath>
   </PropertyGroup>
