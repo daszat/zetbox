@@ -320,6 +320,17 @@ namespace Kistl.API.Server
                 return Expression.New(c, args);
             }
         }
+
+        protected override BinaryExpression VisitBinary(BinaryExpression b)
+        {
+            if (b.NodeType == ExpressionType.Equal && typeof(IDataObject).IsAssignableFrom(b.Left.Type) && typeof(IDataObject).IsAssignableFrom(b.Right.Type))
+            {
+                return Expression.MakeBinary(b.NodeType,
+                    Expression.MakeMemberAccess(Visit(b.Left), b.Left.Type.FindFirstOrDefaultMember("ID")),
+                    Expression.MakeMemberAccess(Visit(b.Right), b.Right.Type.FindFirstOrDefaultMember("ID")));
+            }
+            return base.VisitBinary(b);
+        }
         #endregion
     }
     #endregion

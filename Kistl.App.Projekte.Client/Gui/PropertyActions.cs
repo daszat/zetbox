@@ -16,7 +16,7 @@ namespace Kistl.App.Projekte.Gui
     /// Only called on client
     /// Note: OnNotifyCreated should always be implemented on the client side. importing or deploying also calls this event.
     /// </summary>
-    public class PropertyActions
+    public static class PropertyActions
     {
         // TODO: Replace this when NamedInstances are introduced 
         public static readonly Guid PresentableModelDescriptor_NullableValuePropertyModel_Bool = new Guid("09d1f453-d0d9-429e-88e7-e84b33de7c2e");
@@ -29,48 +29,48 @@ namespace Kistl.App.Projekte.Gui
         public static readonly Guid PresentableModelDescriptor_ObjectListModel = new Guid("9fce01fe-fd6d-4e21-8b55-08d5e38aea36");
         public static readonly Guid PresentableModelDescriptor_ReferencePropertyModel_String = new Guid("975eee82-e7e1-4a12-ab43-d2e3bc3766e4");
 
-        public void OnNotifyCreated_BoolProperty(Kistl.App.Base.BoolProperty obj)
+        public static void OnNotifyCreated_BoolProperty(Kistl.App.Base.BoolProperty obj)
         {
             obj.ValueModelDescriptor = obj.Context.FindPersistenceObject<PresentableModelDescriptor>(PresentableModelDescriptor_NullableValuePropertyModel_Bool);
         }
 
-        public void OnNotifyCreated_DateTimeProperty(Kistl.App.Base.DateTimeProperty obj)
+        public static void OnNotifyCreated_DateTimeProperty(Kistl.App.Base.DateTimeProperty obj)
         {
             obj.ValueModelDescriptor = obj.Context.FindPersistenceObject<PresentableModelDescriptor>(PresentableModelDescriptor_NullableValuePropertyModel_DateTime);
         }
 
-        public void OnNotifyCreated_DoubleProperty(Kistl.App.Base.DoubleProperty obj)
+        public static void OnNotifyCreated_DoubleProperty(Kistl.App.Base.DoubleProperty obj)
         {
             obj.ValueModelDescriptor = obj.Context.FindPersistenceObject<PresentableModelDescriptor>(PresentableModelDescriptor_NullableValuePropertyModel_Double);
         }
 
-        public void OnNotifyCreated_EnumerationProperty(Kistl.App.Base.EnumerationProperty obj)
+        public static void OnNotifyCreated_EnumerationProperty(Kistl.App.Base.EnumerationProperty obj)
         {
             obj.ValueModelDescriptor = obj.Context.FindPersistenceObject<PresentableModelDescriptor>(PresentableModelDescriptor_NullableValuePropertyModel_Enum);
         }
 
-        public void OnNotifyCreated_GuidProperty(Kistl.App.Base.GuidProperty obj)
+        public static void OnNotifyCreated_GuidProperty(Kistl.App.Base.GuidProperty obj)
         {
             obj.ValueModelDescriptor = obj.Context.FindPersistenceObject<PresentableModelDescriptor>(PresentableModelDescriptor_NullableValuePropertyModel_Guid);
         }
 
-        public void OnNotifyCreated_IntProperty(Kistl.App.Base.IntProperty obj)
+        public static void OnNotifyCreated_IntProperty(Kistl.App.Base.IntProperty obj)
         {
             obj.ValueModelDescriptor = obj.Context.FindPersistenceObject<PresentableModelDescriptor>(PresentableModelDescriptor_NullableValuePropertyModel_Int);
         }
 
-        public void OnNotifyCreated_ObjectReferenceProperty(Kistl.App.Base.ObjectReferenceProperty obj)
+        public static void OnNotifyCreated_ObjectReferenceProperty(Kistl.App.Base.ObjectReferenceProperty obj)
         {
             // Is implemented by CreateNavigator
             // At creating time there is no way to discover if the navigator is a Reference or List
         }
 
-        public void OnNotifyCreated_StringProperty(Kistl.App.Base.StringProperty obj)
+        public static void OnNotifyCreated_StringProperty(Kistl.App.Base.StringProperty obj)
         {
             obj.ValueModelDescriptor = obj.Context.FindPersistenceObject<PresentableModelDescriptor>(PresentableModelDescriptor_ReferencePropertyModel_String);
         }
 
-        public void OnNotifyCreated_StructProperty(Kistl.App.Base.StructProperty obj)
+        public static void OnNotifyCreated_StructProperty(Kistl.App.Base.StructProperty obj)
         {
             // TODO:
         }

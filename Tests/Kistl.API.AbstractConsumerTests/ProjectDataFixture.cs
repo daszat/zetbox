@@ -77,6 +77,7 @@ namespace Kistl.API.AbstractConsumerTests
         public static void DeleteData(IKistlContext ctx)
         {
             ctx.GetQuery<Kunde>().ForEach(obj => ctx.Delete(obj));
+            ctx.GetQuery<Auftrag>().ForEach(obj => ctx.Delete(obj));
             ctx.GetQuery<Projekt>().ForEach(obj => { obj.Mitarbeiter.Clear(); obj.Tasks.Clear(); ctx.Delete(obj); });
             ctx.GetQuery<Task>().ForEach(obj => ctx.Delete(obj));
             ctx.GetQuery<Mitarbeiter>().ForEach(obj => ctx.Delete(obj));

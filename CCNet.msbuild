@@ -5,6 +5,9 @@
     <RemoveDir Directories="bin\Debug" />
     <RemoveDir Directories="bin\Remove" />
     <RemoveDir Directories="bin\LogFiles" />
+	
+	  <!-- Create temp dir for database backup -->
+    <MakeDir Directories="c:\temp" />
 
     <!-- Clean, then rebuild entire solution -->
     <MSBuild Projects="Kistl.Complete.sln" Targets="Clean;Rebuild" />   

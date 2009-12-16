@@ -730,7 +730,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Database\Database.sql" />
+    <EmbeddedResource Include="Database\Scripts\BackupRestoreTestDatabase.sql" />
     <None Include="Database\Scripts\DropFKConstraints.sql" />
     <EmbeddedResource Include="Database\Scripts\DropTables.sql" />
     <None Include="Generators\ClientObjects\Implementation\ObjectClasses\AttachToContextTemplate.cst">

@@ -19,8 +19,8 @@ namespace Kistl.API.Client.LinqToKistl
             if (b.NodeType == ExpressionType.Equal && typeof(IDataObject).IsAssignableFrom(b.Left.Type) && typeof(IDataObject).IsAssignableFrom(b.Right.Type))
             {
                 return Expression.MakeBinary(b.NodeType,
-                    Expression.MakeMemberAccess(b.Left, b.Left.Type.FindFirstOrDefaultMember("ID")),
-                    Expression.MakeMemberAccess(b.Right, b.Right.Type.FindFirstOrDefaultMember("ID")));
+                    Expression.MakeMemberAccess(Visit(b.Left), b.Left.Type.FindFirstOrDefaultMember("ID")),
+                    Expression.MakeMemberAccess(Visit(b.Right), b.Right.Type.FindFirstOrDefaultMember("ID")));
             }
             return base.VisitBinary(b);
         }
