@@ -238,7 +238,7 @@ namespace Kistl.API.Client.Tests
         }
 
         [Test]
-        [ExpectedException(typeof(InvalidOperationException))]
+        [ExpectedException(typeof(WrongKistlContextExeption))]
         public void DetachFromContext_NotAttached()
         {
             Assert.That(obj.Context, Is.Null);

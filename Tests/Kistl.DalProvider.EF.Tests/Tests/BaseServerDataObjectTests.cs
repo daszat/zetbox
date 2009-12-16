@@ -24,15 +24,16 @@ namespace Kistl.DalProvider.EF.Tests
         [SetUp]
         public override void SetUp()
         {
-
             currentCustomActionsManager = (CustomActionsManagerAPITest)ApplicationContext.Current.CustomActionsManager;
             currentCustomActionsManager.Reset();
 
             base.SetUp();
+
         }
 
         public void InitialiseObject(IKistlContext ctx, ObjectClass obj)
         {
+            ctx.Attach(obj);
             obj.BaseObjectClass = null;
             obj.ClassName = "testclassname";
             obj.DefaultIcon = null;
@@ -180,7 +181,7 @@ namespace Kistl.DalProvider.EF.Tests
         }
 
         [Test]
-        [ExpectedException(typeof(InvalidOperationException))]
+        [ExpectedException(typeof(WrongKistlContextExeption))]
         public void AttachToContext_Other_fails()
         {
             Assert.That(obj.Context, Is.Null);
@@ -217,7 +218,7 @@ namespace Kistl.DalProvider.EF.Tests
         }
 
         [Test]
-        [ExpectedException(typeof(InvalidOperationException))]
+        [ExpectedException(typeof(WrongKistlContextExeption))]
         public void DetachFromContext_Other()
         {
             Assert.That(obj.Context, Is.Null);

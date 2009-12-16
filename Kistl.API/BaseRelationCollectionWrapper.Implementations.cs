@@ -21,11 +21,13 @@ namespace Kistl.API
 
         protected override IEnumerable<ATYPE> GetItems()
         {
+            Collection.ForEach(e => e.AttachToContext(ParentObject.Context));
             return Collection.Select(e => e.A);
         }
 
         protected override ATYPE ItemFromEntry(ENTRYTYPE entry)
         {
+            entry.AttachToContext(ParentObject.Context);
             return entry.A;
         }
 
@@ -52,6 +54,7 @@ namespace Kistl.API
 
         protected override IEnumerable<ATYPE> GetItems()
         {
+            Collection.ForEach(e => e.AttachToContext(ParentObject.Context));
             return Collection.Select(e => e.A);
         }
 
@@ -62,6 +65,7 @@ namespace Kistl.API
 
         protected override ATYPE ItemFromEntry(ENTRYTYPE entry)
         {
+            entry.AttachToContext(ParentObject.Context);
             return entry.A;
         }
 
@@ -114,11 +118,13 @@ namespace Kistl.API
 
         protected override IEnumerable<BTYPE> GetItems()
         {
+            Collection.ForEach(e => e.AttachToContext(ParentObject.Context));
             return Collection.Select(e => e.B);
         }
 
         protected override BTYPE ItemFromEntry(ENTRYTYPE entry)
         {
+            entry.AttachToContext(ParentObject.Context);
             return entry.B;
         }
 
@@ -146,16 +152,18 @@ namespace Kistl.API
 
         protected override IEnumerable<BTYPE> GetItems()
         {
+            Collection.ForEach(e => e.AttachToContext(ParentObject.Context));
             return Collection.Select(e => e.B);
         }
 
         protected override IEnumerable<BTYPE> GetList()
         {
-            return Collection.OrderBy(e => e.BIndex).Select(e => e.B);
+            return Collection.OrderBy(e => e.BIndex).Select(e => ItemFromEntry(e));
         }
 
         protected override BTYPE ItemFromEntry(ENTRYTYPE entry)
         {
+            entry.AttachToContext(ParentObject.Context);
             return entry.B;
         }
 

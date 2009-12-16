@@ -55,7 +55,9 @@ namespace Kistl.API
         /// </summary>
         protected virtual ENTRYTYPE GetEntryOrDefault(ITEMTYPE item)
         {
-            return Collection.SingleOrDefault(e => Object.Equals(ItemFromEntry(e), item));
+            var result = Collection.SingleOrDefault(e => Object.Equals(ItemFromEntry(e), item));
+            result.AttachToContext(ParentObject.Context);
+            return result;
         }
 
         /// <summary>
@@ -246,7 +248,9 @@ namespace Kistl.API
         protected ENTRYTYPE GetAt(int index)
         {
             RepairIndexes();
-            return Collection.SingleOrDefault(e => { var idx = IndexFromEntry(e); return idx.HasValue && idx.Value == index; });
+            var result = Collection.SingleOrDefault(e => { var idx = IndexFromEntry(e); return idx.HasValue && idx.Value == index; });
+            result.AttachToContext(ParentObject.Context);
+            return result;
         }
 
         /// <summary>
