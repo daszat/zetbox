@@ -149,7 +149,8 @@ namespace Kistl.Client.Presentables
 
         protected override void UpdatePropertyValue()
         {
-            // AsyncList takes care of all that
+            _valueCache = null;
+            OnPropertyChanged("Value");
         }
     }
 

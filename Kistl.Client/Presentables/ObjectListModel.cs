@@ -220,6 +220,8 @@ namespace Kistl.Client.Presentables
 
         protected override void UpdatePropertyValue()
         {
+            _valueCache = null;
+            OnPropertyChanged("Value");
         }
 
         private void CollectChildClasses(int id, List<ObjectClass> children)
