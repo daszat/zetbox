@@ -69,7 +69,7 @@ this.WriteObjects("            set\r\n");
 this.WriteObjects("            {\r\n");
 this.WriteObjects("                // TODO: NotifyPropertyChanged()\r\n");
 this.WriteObjects("                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();\r\n");
-this.WriteObjects("                if(value.Context != this.Context) throw new WrongKistlContextExeption();\r\n");
+this.WriteObjects("                if(value != null && value.Context != this.Context) throw new WrongKistlContextExeption();\r\n");
 this.WriteObjects("                ",  efName , " = (",  referencedImplementation , ")value;\r\n");
 this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");

@@ -81,7 +81,7 @@ namespace Kistl.App.Base
             {
                 // TODO: NotifyPropertyChanged()
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if(value.Context != this.Context) throw new WrongKistlContextExeption();
+                if(value != null && value.Context != this.Context) throw new WrongKistlContextExeption();
                 AParent__Implementation__ = (Kistl.App.Base.Relation__Implementation__)value;
             }
         }
@@ -171,7 +171,7 @@ namespace Kistl.App.Base
             {
                 // TODO: NotifyPropertyChanged()
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if(value.Context != this.Context) throw new WrongKistlContextExeption();
+                if(value != null && value.Context != this.Context) throw new WrongKistlContextExeption();
                 BParent__Implementation__ = (Kistl.App.Base.Relation__Implementation__)value;
             }
         }
@@ -261,7 +261,7 @@ namespace Kistl.App.Base
             {
                 // TODO: NotifyPropertyChanged()
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if(value.Context != this.Context) throw new WrongKistlContextExeption();
+                if(value != null && value.Context != this.Context) throw new WrongKistlContextExeption();
                 ChangedBy__Implementation__ = (Kistl.App.Base.Identity__Implementation__)value;
             }
         }
@@ -402,7 +402,7 @@ namespace Kistl.App.Base
             {
                 // TODO: NotifyPropertyChanged()
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if(value.Context != this.Context) throw new WrongKistlContextExeption();
+                if(value != null && value.Context != this.Context) throw new WrongKistlContextExeption();
                 CreatedBy__Implementation__ = (Kistl.App.Base.Identity__Implementation__)value;
             }
         }
@@ -723,7 +723,7 @@ namespace Kistl.App.Base
             {
                 // TODO: NotifyPropertyChanged()
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if(value.Context != this.Context) throw new WrongKistlContextExeption();
+                if(value != null && value.Context != this.Context) throw new WrongKistlContextExeption();
                 Navigator__Implementation__ = (Kistl.App.Base.ObjectReferenceProperty__Implementation__)value;
             }
         }
@@ -864,7 +864,7 @@ namespace Kistl.App.Base
             {
                 // TODO: NotifyPropertyChanged()
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if(value.Context != this.Context) throw new WrongKistlContextExeption();
+                if(value != null && value.Context != this.Context) throw new WrongKistlContextExeption();
                 Type__Implementation__ = (Kistl.App.Base.ObjectClass__Implementation__)value;
             }
         }

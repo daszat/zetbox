@@ -228,7 +228,7 @@ namespace Kistl.App.Test
             {
                 // TODO: NotifyPropertyChanged()
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if(value.Context != this.Context) throw new WrongKistlContextExeption();
+                if(value != null && value.Context != this.Context) throw new WrongKistlContextExeption();
                 TestCustomObjects_Nav__Implementation__ = (Kistl.App.Test.TestCustomObject__Implementation__)value;
             }
         }
@@ -318,7 +318,7 @@ namespace Kistl.App.Test
             {
                 // TODO: NotifyPropertyChanged()
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if(value.Context != this.Context) throw new WrongKistlContextExeption();
+                if(value != null && value.Context != this.Context) throw new WrongKistlContextExeption();
                 TestCustomObjects_One_Nav__Implementation__ = (Kistl.App.Test.TestCustomObject__Implementation__)value;
             }
         }
