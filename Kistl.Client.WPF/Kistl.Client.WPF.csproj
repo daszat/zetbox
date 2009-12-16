@@ -214,10 +214,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\PropertyTextBoxView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="View\TimeRecords\WorkEffortView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -346,9 +342,6 @@
     </Compile>
     <Compile Include="View\ObjectReferenceView.xaml.cs">
       <DependentUpon>ObjectReferenceView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\PropertyTextBoxView.xaml.cs">
-      <DependentUpon>PropertyTextBoxView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\TimeRecords\WorkEffortView.xaml.cs">
       <DependentUpon>WorkEffortView.xaml</DependentUpon>

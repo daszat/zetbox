@@ -12,6 +12,8 @@ namespace Kistl.Client.WPF
     using Kistl.API.Utils;
     using Kistl.App.Base;
     using Kistl.App.Extensions;
+    using System.Windows;
+    using Kistl.App.GUI;
 
     /// <content>Contains various and temporary fixes needed to clean the database</content>
     public partial class App
@@ -60,7 +62,7 @@ namespace Kistl.Client.WPF
 
         private static void MoveClrObjectParameterFullTypeName()
         {
-            using (Logging.Log.TraceMethodCall("FixupTypeRefParents"))
+            using (Logging.Log.TraceMethodCall("MoveClrObjectParameterFullTypeName"))
             {
                 using (IKistlContext ctx = KistlContext.GetContext())
                 {
@@ -78,12 +80,52 @@ namespace Kistl.Client.WPF
         }
 
         /// <summary>
+        /// Prints a list of unreferenced WPF Controls (<see cref="UIElement"/>s).
+        /// Those are potentially dead code and should be audited.
+        /// </summary>
+        private static void CheckUnusedWpfControls()
+        {
+            using (Logging.Log.TraceMethodCall("CheckUnusedWpfControls"))
+            {
+                using (IKistlContext ctx = KistlContext.GetContext())
+                {
+                    var uiElementType = typeof(UIElement);
+                    var assemblyName = typeof(App).Assembly.FullName;
+
+                    var referencedControlKinds =ctx.GetQuery<PresentableModelDescriptor>()
+                        .ToList()
+                        .SelectMany(pmd => new[] { pmd.DefaultKind, pmd.DefaultGridCellKind }.Concat(pmd.SecondaryControlKinds))
+                        .Where(ck => ck != null)
+                        .ToLookup(ck => ck.GetType());
+
+                    var referencedTypes = ctx.GetQuery<ViewDescriptor>()
+                        .Where(vd => vd.Toolkit == Toolkit.WPF)
+                        .Select(vd => vd.ControlRef)
+                        .ToList()
+                        .Select(tr => tr.AsType(false))
+                        .Where(t => t != null)
+                        .ToLookup(t => t);
+
+                    var unreferencedTypes = typeof(App).Assembly
+                        .GetTypes()
+                        .Where(t => uiElementType.IsAssignableFrom(t) && !referencedTypes.Contains(t));
+
+                    foreach (var t in unreferencedTypes.OrderBy(t => t.FullName))
+                    {
+                        Logging.Log.Warn(String.Format("Found UIElement {0}, which is not referenced from the DataStore", t));
+                    }
+                }
+            }
+        }
+
+        /// <summary>
         /// Calls currently needed Database fixes
         /// </summary>
         internal static void FixupDatabase()
         {
             //MoveClrObjectParameterFullTypeName();
             //FixupTypeRefParents();
+            //CheckUnusedWpfControls();
         }
     }
 }
