@@ -9,21 +9,8 @@ namespace Kistl.API.Client.Mocks
 {
     public class CustomActionsManagerAPITest : ICustomActionsManager
     {
-        private List<IDataObject> attachedObjects = new List<IDataObject>();
-
-        public bool IsObjectAttached(IDataObject obj)
-        {
-            return attachedObjects.Contains(obj);
-        }
-
         public void Reset()
         {
-            attachedObjects.Clear();
-        }
-
-        public void AttachEvents(Kistl.API.IDataObject obj)
-        {
-            attachedObjects.Add(obj);
         }
 
         public void Init(IKistlContext ctx)

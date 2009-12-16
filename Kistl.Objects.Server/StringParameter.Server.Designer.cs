@@ -49,7 +49,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-		public event GetParameterType_Handler<StringParameter> OnGetParameterType_StringParameter;
+		public static event GetParameterType_Handler<StringParameter> OnGetParameterType_StringParameter;
 
 
 
@@ -70,7 +70,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-		public event GetParameterTypeString_Handler<StringParameter> OnGetParameterTypeString_StringParameter;
+		public static event GetParameterTypeString_Handler<StringParameter> OnGetParameterTypeString_StringParameter;
 
 
 
@@ -103,7 +103,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-        public event ToStringHandler<StringParameter> OnToString_StringParameter;
+        public static event ToStringHandler<StringParameter> OnToString_StringParameter;
 
         [EventBasedMethod("OnPreSave_StringParameter")]
         public override void NotifyPreSave()
@@ -111,7 +111,7 @@ namespace Kistl.App.Base
             base.NotifyPreSave();
             if (OnPreSave_StringParameter != null) OnPreSave_StringParameter(this);
         }
-        public event ObjectEventHandler<StringParameter> OnPreSave_StringParameter;
+        public static event ObjectEventHandler<StringParameter> OnPreSave_StringParameter;
 
         [EventBasedMethod("OnPostSave_StringParameter")]
         public override void NotifyPostSave()
@@ -119,7 +119,7 @@ namespace Kistl.App.Base
             base.NotifyPostSave();
             if (OnPostSave_StringParameter != null) OnPostSave_StringParameter(this);
         }
-        public event ObjectEventHandler<StringParameter> OnPostSave_StringParameter;
+        public static event ObjectEventHandler<StringParameter> OnPostSave_StringParameter;
 
         [EventBasedMethod("OnCreated_StringParameter")]
         public override void NotifyCreated()
@@ -127,7 +127,7 @@ namespace Kistl.App.Base
             base.NotifyCreated();
             if (OnCreated_StringParameter != null) OnCreated_StringParameter(this);
         }
-        public event ObjectEventHandler<StringParameter> OnCreated_StringParameter;
+        public static event ObjectEventHandler<StringParameter> OnCreated_StringParameter;
 
         [EventBasedMethod("OnDeleting_StringParameter")]
         public override void NotifyDeleting()
@@ -135,7 +135,7 @@ namespace Kistl.App.Base
             base.NotifyDeleting();
             if (OnDeleting_StringParameter != null) OnDeleting_StringParameter(this);
         }
-        public event ObjectEventHandler<StringParameter> OnDeleting_StringParameter;
+        public static event ObjectEventHandler<StringParameter> OnDeleting_StringParameter;
 
 
 

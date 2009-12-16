@@ -49,7 +49,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-		public event GetDataType_Handler<Interface> OnGetDataType_Interface;
+		public static event GetDataType_Handler<Interface> OnGetDataType_Interface;
 
 
 
@@ -70,7 +70,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-		public event GetDataTypeString_Handler<Interface> OnGetDataTypeString_Interface;
+		public static event GetDataTypeString_Handler<Interface> OnGetDataTypeString_Interface;
 
 
 
@@ -103,7 +103,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-        public event ToStringHandler<Interface> OnToString_Interface;
+        public static event ToStringHandler<Interface> OnToString_Interface;
 
         [EventBasedMethod("OnPreSave_Interface")]
         public override void NotifyPreSave()
@@ -111,7 +111,7 @@ namespace Kistl.App.Base
             base.NotifyPreSave();
             if (OnPreSave_Interface != null) OnPreSave_Interface(this);
         }
-        public event ObjectEventHandler<Interface> OnPreSave_Interface;
+        public static event ObjectEventHandler<Interface> OnPreSave_Interface;
 
         [EventBasedMethod("OnPostSave_Interface")]
         public override void NotifyPostSave()
@@ -119,7 +119,7 @@ namespace Kistl.App.Base
             base.NotifyPostSave();
             if (OnPostSave_Interface != null) OnPostSave_Interface(this);
         }
-        public event ObjectEventHandler<Interface> OnPostSave_Interface;
+        public static event ObjectEventHandler<Interface> OnPostSave_Interface;
 
         [EventBasedMethod("OnCreated_Interface")]
         public override void NotifyCreated()
@@ -127,7 +127,7 @@ namespace Kistl.App.Base
             base.NotifyCreated();
             if (OnCreated_Interface != null) OnCreated_Interface(this);
         }
-        public event ObjectEventHandler<Interface> OnCreated_Interface;
+        public static event ObjectEventHandler<Interface> OnCreated_Interface;
 
         [EventBasedMethod("OnDeleting_Interface")]
         public override void NotifyDeleting()
@@ -135,7 +135,7 @@ namespace Kistl.App.Base
             base.NotifyDeleting();
             if (OnDeleting_Interface != null) OnDeleting_Interface(this);
         }
-        public event ObjectEventHandler<Interface> OnDeleting_Interface;
+        public static event ObjectEventHandler<Interface> OnDeleting_Interface;
 
 
 

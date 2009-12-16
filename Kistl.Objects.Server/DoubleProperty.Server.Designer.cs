@@ -49,7 +49,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-		public event GetPropertyType_Handler<DoubleProperty> OnGetPropertyType_DoubleProperty;
+		public static event GetPropertyType_Handler<DoubleProperty> OnGetPropertyType_DoubleProperty;
 
 
 
@@ -70,7 +70,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-		public event GetPropertyTypeString_Handler<DoubleProperty> OnGetPropertyTypeString_DoubleProperty;
+		public static event GetPropertyTypeString_Handler<DoubleProperty> OnGetPropertyTypeString_DoubleProperty;
 
 
 
@@ -103,7 +103,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-        public event ToStringHandler<DoubleProperty> OnToString_DoubleProperty;
+        public static event ToStringHandler<DoubleProperty> OnToString_DoubleProperty;
 
         [EventBasedMethod("OnPreSave_DoubleProperty")]
         public override void NotifyPreSave()
@@ -111,7 +111,7 @@ namespace Kistl.App.Base
             base.NotifyPreSave();
             if (OnPreSave_DoubleProperty != null) OnPreSave_DoubleProperty(this);
         }
-        public event ObjectEventHandler<DoubleProperty> OnPreSave_DoubleProperty;
+        public static event ObjectEventHandler<DoubleProperty> OnPreSave_DoubleProperty;
 
         [EventBasedMethod("OnPostSave_DoubleProperty")]
         public override void NotifyPostSave()
@@ -119,7 +119,7 @@ namespace Kistl.App.Base
             base.NotifyPostSave();
             if (OnPostSave_DoubleProperty != null) OnPostSave_DoubleProperty(this);
         }
-        public event ObjectEventHandler<DoubleProperty> OnPostSave_DoubleProperty;
+        public static event ObjectEventHandler<DoubleProperty> OnPostSave_DoubleProperty;
 
         [EventBasedMethod("OnCreated_DoubleProperty")]
         public override void NotifyCreated()
@@ -127,7 +127,7 @@ namespace Kistl.App.Base
             base.NotifyCreated();
             if (OnCreated_DoubleProperty != null) OnCreated_DoubleProperty(this);
         }
-        public event ObjectEventHandler<DoubleProperty> OnCreated_DoubleProperty;
+        public static event ObjectEventHandler<DoubleProperty> OnCreated_DoubleProperty;
 
         [EventBasedMethod("OnDeleting_DoubleProperty")]
         public override void NotifyDeleting()
@@ -135,7 +135,7 @@ namespace Kistl.App.Base
             base.NotifyDeleting();
             if (OnDeleting_DoubleProperty != null) OnDeleting_DoubleProperty(this);
         }
-        public event ObjectEventHandler<DoubleProperty> OnDeleting_DoubleProperty;
+        public static event ObjectEventHandler<DoubleProperty> OnDeleting_DoubleProperty;
 
 
 

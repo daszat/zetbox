@@ -61,7 +61,7 @@ namespace Kistl.App.GUI
             }
             return e.Result;
         }
-        public event ToStringHandler<StringSelectorKind> OnToString_StringSelectorKind;
+        public static event ToStringHandler<StringSelectorKind> OnToString_StringSelectorKind;
 
         [EventBasedMethod("OnPreSave_StringSelectorKind")]
         public override void NotifyPreSave()
@@ -69,7 +69,7 @@ namespace Kistl.App.GUI
             base.NotifyPreSave();
             if (OnPreSave_StringSelectorKind != null) OnPreSave_StringSelectorKind(this);
         }
-        public event ObjectEventHandler<StringSelectorKind> OnPreSave_StringSelectorKind;
+        public static event ObjectEventHandler<StringSelectorKind> OnPreSave_StringSelectorKind;
 
         [EventBasedMethod("OnPostSave_StringSelectorKind")]
         public override void NotifyPostSave()
@@ -77,7 +77,7 @@ namespace Kistl.App.GUI
             base.NotifyPostSave();
             if (OnPostSave_StringSelectorKind != null) OnPostSave_StringSelectorKind(this);
         }
-        public event ObjectEventHandler<StringSelectorKind> OnPostSave_StringSelectorKind;
+        public static event ObjectEventHandler<StringSelectorKind> OnPostSave_StringSelectorKind;
 
         [EventBasedMethod("OnCreated_StringSelectorKind")]
         public override void NotifyCreated()
@@ -85,7 +85,7 @@ namespace Kistl.App.GUI
             base.NotifyCreated();
             if (OnCreated_StringSelectorKind != null) OnCreated_StringSelectorKind(this);
         }
-        public event ObjectEventHandler<StringSelectorKind> OnCreated_StringSelectorKind;
+        public static event ObjectEventHandler<StringSelectorKind> OnCreated_StringSelectorKind;
 
         [EventBasedMethod("OnDeleting_StringSelectorKind")]
         public override void NotifyDeleting()
@@ -93,7 +93,7 @@ namespace Kistl.App.GUI
             base.NotifyDeleting();
             if (OnDeleting_StringSelectorKind != null) OnDeleting_StringSelectorKind(this);
         }
-        public event ObjectEventHandler<StringSelectorKind> OnDeleting_StringSelectorKind;
+        public static event ObjectEventHandler<StringSelectorKind> OnDeleting_StringSelectorKind;
 
 
 

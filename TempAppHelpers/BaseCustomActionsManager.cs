@@ -51,34 +51,40 @@ namespace Kistl.App.Extensions
         /// </summary>
         public virtual void Init(IKistlContext ctx)
         {
+            Logging.TraceTotalMemory("Before BaseCustomActionsManager.Init()");
+
             if (Cache != null) { return; }
             var warnings = new StringBuilder();
             Cache = new InvocationCache(IsAcceptableDeploymentRestriction);
             Cache.InitializeCache(ctx, ExtraSuffix, ImplementationAssembly, ObjectClassFilter, warnings);
+
+            foreach (var t in Cache.Keys)
+            {
+                AttachEvents(t);
+            }
+
             // TODO create and use Logging API in the cache to invert control here and remove clumsy ProcessWarnings calls
             if (warnings.Length > 0)
             {
                 ProcessWarnings(warnings.ToString());
             }
+
+            Logging.TraceTotalMemory("After BaseCustomActionsManager.Init()");
         }
 
         /// <summary>
-        /// Attach using Metadata
-        /// Detaching is done through the Garbage Collector
-        /// see Unsubscribing at http://msdn2.microsoft.com/en-us/library/ms366768.aspx
+        /// Attach static events using Metadata
         /// </summary>
-        /// <param name="obj">the object on which to attach events</param>
-        public virtual void AttachEvents(IDataObject obj)
+        /// <param name="t">the object type on which to attach events</param>
+        public virtual void AttachEvents(Type t)
         {
-            if (obj == null) { throw new ArgumentNullException("obj"); }
+            if (t == null) { throw new ArgumentNullException("t"); }
 
             // defer attaching if there is no cache
             if (Cache == null) { return; }
 
-            var key = obj.GetType();
-
             // New Method
-            foreach (InvokeInfo ii in Cache.Lookup(key))
+            foreach (InvokeInfo ii in Cache.Lookup(t))
             {
                 // TODO: Fix Case 316
                 Delegate newDelegate = Delegate.CreateDelegate(
@@ -86,9 +92,10 @@ namespace Kistl.App.Extensions
                     ii.Instance,
                     ii.CLRMethod);
 
-                ii.CLREvent.AddEventHandler(obj, newDelegate);
+                ii.CLREvent.AddEventHandler(null, newDelegate);
             }
         }
+
 
         /// <summary>
         /// This method is called to let the implementor customize processing of warnings.
@@ -143,37 +150,9 @@ namespace Kistl.App.Extensions
         {
             if (!IsInitialised)
             {
-                try
-                {
-                    base.Init(ctx);
-                }
-                finally
-                {
-                    // try only once
-                    IsInitialised = true;
-                }
-
-                try
-                {
-                    // attach all frozen objects
-                    foreach (IDataObject obj in FrozenContext.Single.AttachedObjects.OfType<IDataObject>())
-                    {
-                        AttachEvents(obj);
-                    }
-                }
-                finally
-                {
-                    // drop cache
-                    Cache = null;
-                }
-            }
-        }
-
-        public override void AttachEvents(IDataObject obj)
-        {
-            if (IsInitialised)
-            {
-                base.AttachEvents(obj);
+                base.Init(ctx);
+                // try only once
+                IsInitialised = true;
             }
         }
 
@@ -207,6 +186,12 @@ namespace Kistl.App.Extensions
         private static ReadOnlyCollection<InvokeInfo> Empty = new List<InvokeInfo>().AsReadOnly();
 
         /// <summary>
+        /// List of Invocation Targets
+        /// </summary>
+        private Dictionary<Type, object> invocationTargets = new Dictionary<Type, object>();
+
+
+        /// <summary>
         /// Returns the list of InvokeInfos for the given Type or an empty list if the Type is not cached.
         /// </summary>
         /// <param name="t">the type to lookup</param>
@@ -220,6 +205,14 @@ namespace Kistl.App.Extensions
             else
             {
                 return Empty;
+            }
+        }
+
+        public IEnumerable<Type> Keys
+        {
+            get
+            {
+                return _cache.Keys;
             }
         }
 
@@ -334,6 +327,13 @@ namespace Kistl.App.Extensions
                     return;
                 }
 
+                if (!invocationTargets.ContainsKey(t))
+                {
+                    invocationTargets[t] = Activator.CreateInstance(t);
+                }
+
+                object instance = invocationTargets[t];
+
                 MethodInfo clrMethod = t.GetMethod(invoke.MemberName);
                 if (clrMethod == null)
                 {
@@ -352,7 +352,7 @@ namespace Kistl.App.Extensions
                 InvokeInfo ii = new InvokeInfo()
                 {
                     CLRMethod = clrMethod,
-                    Instance = Activator.CreateInstance(t),
+                    Instance = instance,
                     CLREvent = ei
                 };
 

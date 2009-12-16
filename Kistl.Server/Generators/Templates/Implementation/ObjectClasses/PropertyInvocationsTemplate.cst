@@ -17,6 +17,6 @@
 	string objType = prop.ObjectClass.GetDataTypeString();
 
 %>
-		public event PropertyGetterHandler<<%= objType %>, <%= propType %>> <%= eventName %>_Getter;
-		public event PropertyPreSetterHandler<<%= objType %>, <%= propType %>> <%= eventName %>_PreSetter;
-		public event PropertyPostSetterHandler<<%= objType %>, <%= propType %>> <%= eventName %>_PostSetter;
+		public static event PropertyGetterHandler<<%= objType %>, <%= propType %>> <%= eventName %>_Getter;
+		public static event PropertyPreSetterHandler<<%= objType %>, <%= propType %>> <%= eventName %>_PreSetter;
+		public static event PropertyPostSetterHandler<<%= objType %>, <%= propType %>> <%= eventName %>_PostSetter;

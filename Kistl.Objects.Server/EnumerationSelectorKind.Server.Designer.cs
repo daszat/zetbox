@@ -61,7 +61,7 @@ namespace Kistl.App.GUI
             }
             return e.Result;
         }
-        public event ToStringHandler<EnumerationSelectorKind> OnToString_EnumerationSelectorKind;
+        public static event ToStringHandler<EnumerationSelectorKind> OnToString_EnumerationSelectorKind;
 
         [EventBasedMethod("OnPreSave_EnumerationSelectorKind")]
         public override void NotifyPreSave()
@@ -69,7 +69,7 @@ namespace Kistl.App.GUI
             base.NotifyPreSave();
             if (OnPreSave_EnumerationSelectorKind != null) OnPreSave_EnumerationSelectorKind(this);
         }
-        public event ObjectEventHandler<EnumerationSelectorKind> OnPreSave_EnumerationSelectorKind;
+        public static event ObjectEventHandler<EnumerationSelectorKind> OnPreSave_EnumerationSelectorKind;
 
         [EventBasedMethod("OnPostSave_EnumerationSelectorKind")]
         public override void NotifyPostSave()
@@ -77,7 +77,7 @@ namespace Kistl.App.GUI
             base.NotifyPostSave();
             if (OnPostSave_EnumerationSelectorKind != null) OnPostSave_EnumerationSelectorKind(this);
         }
-        public event ObjectEventHandler<EnumerationSelectorKind> OnPostSave_EnumerationSelectorKind;
+        public static event ObjectEventHandler<EnumerationSelectorKind> OnPostSave_EnumerationSelectorKind;
 
         [EventBasedMethod("OnCreated_EnumerationSelectorKind")]
         public override void NotifyCreated()
@@ -85,7 +85,7 @@ namespace Kistl.App.GUI
             base.NotifyCreated();
             if (OnCreated_EnumerationSelectorKind != null) OnCreated_EnumerationSelectorKind(this);
         }
-        public event ObjectEventHandler<EnumerationSelectorKind> OnCreated_EnumerationSelectorKind;
+        public static event ObjectEventHandler<EnumerationSelectorKind> OnCreated_EnumerationSelectorKind;
 
         [EventBasedMethod("OnDeleting_EnumerationSelectorKind")]
         public override void NotifyDeleting()
@@ -93,7 +93,7 @@ namespace Kistl.App.GUI
             base.NotifyDeleting();
             if (OnDeleting_EnumerationSelectorKind != null) OnDeleting_EnumerationSelectorKind(this);
         }
-        public event ObjectEventHandler<EnumerationSelectorKind> OnDeleting_EnumerationSelectorKind;
+        public static event ObjectEventHandler<EnumerationSelectorKind> OnDeleting_EnumerationSelectorKind;
 
 
 

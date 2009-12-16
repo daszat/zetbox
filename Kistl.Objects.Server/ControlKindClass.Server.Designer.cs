@@ -96,7 +96,7 @@ namespace Kistl.App.GUI
 			    base.CreateDefaultMethods();
 			}
         }
-		public event CreateDefaultMethods_Handler<ControlKindClass> OnCreateDefaultMethods_ControlKindClass;
+		public static event CreateDefaultMethods_Handler<ControlKindClass> OnCreateDefaultMethods_ControlKindClass;
 
 
 
@@ -117,7 +117,7 @@ namespace Kistl.App.GUI
             }
             return e.Result;
         }
-		public event CreateMethod_Handler<ControlKindClass> OnCreateMethod_ControlKindClass;
+		public static event CreateMethod_Handler<ControlKindClass> OnCreateMethod_ControlKindClass;
 
 
 
@@ -138,7 +138,7 @@ namespace Kistl.App.GUI
             }
             return e.Result;
         }
-		public event CreateRelation_Handler<ControlKindClass> OnCreateRelation_ControlKindClass;
+		public static event CreateRelation_Handler<ControlKindClass> OnCreateRelation_ControlKindClass;
 
 
 
@@ -159,7 +159,7 @@ namespace Kistl.App.GUI
             }
             return e.Result;
         }
-		public event GetDataType_Handler<ControlKindClass> OnGetDataType_ControlKindClass;
+		public static event GetDataType_Handler<ControlKindClass> OnGetDataType_ControlKindClass;
 
 
 
@@ -180,7 +180,7 @@ namespace Kistl.App.GUI
             }
             return e.Result;
         }
-		public event GetDataTypeString_Handler<ControlKindClass> OnGetDataTypeString_ControlKindClass;
+		public static event GetDataTypeString_Handler<ControlKindClass> OnGetDataTypeString_ControlKindClass;
 
 
 
@@ -201,7 +201,7 @@ namespace Kistl.App.GUI
             }
             return e.Result;
         }
-		public event GetInheritedMethods_Handler<ControlKindClass> OnGetInheritedMethods_ControlKindClass;
+		public static event GetInheritedMethods_Handler<ControlKindClass> OnGetInheritedMethods_ControlKindClass;
 
 
 
@@ -221,7 +221,7 @@ namespace Kistl.App.GUI
 			    base.ImplementInterfaces();
 			}
         }
-		public event ImplementInterfaces_Handler<ControlKindClass> OnImplementInterfaces_ControlKindClass;
+		public static event ImplementInterfaces_Handler<ControlKindClass> OnImplementInterfaces_ControlKindClass;
 
 
 
@@ -254,7 +254,7 @@ namespace Kistl.App.GUI
             }
             return e.Result;
         }
-        public event ToStringHandler<ControlKindClass> OnToString_ControlKindClass;
+        public static event ToStringHandler<ControlKindClass> OnToString_ControlKindClass;
 
         [EventBasedMethod("OnPreSave_ControlKindClass")]
         public override void NotifyPreSave()
@@ -262,7 +262,7 @@ namespace Kistl.App.GUI
             base.NotifyPreSave();
             if (OnPreSave_ControlKindClass != null) OnPreSave_ControlKindClass(this);
         }
-        public event ObjectEventHandler<ControlKindClass> OnPreSave_ControlKindClass;
+        public static event ObjectEventHandler<ControlKindClass> OnPreSave_ControlKindClass;
 
         [EventBasedMethod("OnPostSave_ControlKindClass")]
         public override void NotifyPostSave()
@@ -270,7 +270,7 @@ namespace Kistl.App.GUI
             base.NotifyPostSave();
             if (OnPostSave_ControlKindClass != null) OnPostSave_ControlKindClass(this);
         }
-        public event ObjectEventHandler<ControlKindClass> OnPostSave_ControlKindClass;
+        public static event ObjectEventHandler<ControlKindClass> OnPostSave_ControlKindClass;
 
         [EventBasedMethod("OnCreated_ControlKindClass")]
         public override void NotifyCreated()
@@ -278,7 +278,7 @@ namespace Kistl.App.GUI
             base.NotifyCreated();
             if (OnCreated_ControlKindClass != null) OnCreated_ControlKindClass(this);
         }
-        public event ObjectEventHandler<ControlKindClass> OnCreated_ControlKindClass;
+        public static event ObjectEventHandler<ControlKindClass> OnCreated_ControlKindClass;
 
         [EventBasedMethod("OnDeleting_ControlKindClass")]
         public override void NotifyDeleting()
@@ -286,7 +286,7 @@ namespace Kistl.App.GUI
             base.NotifyDeleting();
             if (OnDeleting_ControlKindClass != null) OnDeleting_ControlKindClass(this);
         }
-        public event ObjectEventHandler<ControlKindClass> OnDeleting_ControlKindClass;
+        public static event ObjectEventHandler<ControlKindClass> OnDeleting_ControlKindClass;
 
 
 		protected override string GetPropertyError(string propertyName) 

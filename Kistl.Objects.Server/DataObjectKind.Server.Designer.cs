@@ -61,7 +61,7 @@ namespace Kistl.App.GUI
             }
             return e.Result;
         }
-        public event ToStringHandler<DataObjectKind> OnToString_DataObjectKind;
+        public static event ToStringHandler<DataObjectKind> OnToString_DataObjectKind;
 
         [EventBasedMethod("OnPreSave_DataObjectKind")]
         public override void NotifyPreSave()
@@ -69,7 +69,7 @@ namespace Kistl.App.GUI
             base.NotifyPreSave();
             if (OnPreSave_DataObjectKind != null) OnPreSave_DataObjectKind(this);
         }
-        public event ObjectEventHandler<DataObjectKind> OnPreSave_DataObjectKind;
+        public static event ObjectEventHandler<DataObjectKind> OnPreSave_DataObjectKind;
 
         [EventBasedMethod("OnPostSave_DataObjectKind")]
         public override void NotifyPostSave()
@@ -77,7 +77,7 @@ namespace Kistl.App.GUI
             base.NotifyPostSave();
             if (OnPostSave_DataObjectKind != null) OnPostSave_DataObjectKind(this);
         }
-        public event ObjectEventHandler<DataObjectKind> OnPostSave_DataObjectKind;
+        public static event ObjectEventHandler<DataObjectKind> OnPostSave_DataObjectKind;
 
         [EventBasedMethod("OnCreated_DataObjectKind")]
         public override void NotifyCreated()
@@ -85,7 +85,7 @@ namespace Kistl.App.GUI
             base.NotifyCreated();
             if (OnCreated_DataObjectKind != null) OnCreated_DataObjectKind(this);
         }
-        public event ObjectEventHandler<DataObjectKind> OnCreated_DataObjectKind;
+        public static event ObjectEventHandler<DataObjectKind> OnCreated_DataObjectKind;
 
         [EventBasedMethod("OnDeleting_DataObjectKind")]
         public override void NotifyDeleting()
@@ -93,7 +93,7 @@ namespace Kistl.App.GUI
             base.NotifyDeleting();
             if (OnDeleting_DataObjectKind != null) OnDeleting_DataObjectKind(this);
         }
-        public event ObjectEventHandler<DataObjectKind> OnDeleting_DataObjectKind;
+        public static event ObjectEventHandler<DataObjectKind> OnDeleting_DataObjectKind;
 
 
 

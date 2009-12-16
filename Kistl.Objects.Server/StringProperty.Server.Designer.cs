@@ -49,7 +49,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-		public event GetPropertyType_Handler<StringProperty> OnGetPropertyType_StringProperty;
+		public static event GetPropertyType_Handler<StringProperty> OnGetPropertyType_StringProperty;
 
 
 
@@ -70,7 +70,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-		public event GetPropertyTypeString_Handler<StringProperty> OnGetPropertyTypeString_StringProperty;
+		public static event GetPropertyTypeString_Handler<StringProperty> OnGetPropertyTypeString_StringProperty;
 
 
 
@@ -103,7 +103,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-        public event ToStringHandler<StringProperty> OnToString_StringProperty;
+        public static event ToStringHandler<StringProperty> OnToString_StringProperty;
 
         [EventBasedMethod("OnPreSave_StringProperty")]
         public override void NotifyPreSave()
@@ -111,7 +111,7 @@ namespace Kistl.App.Base
             base.NotifyPreSave();
             if (OnPreSave_StringProperty != null) OnPreSave_StringProperty(this);
         }
-        public event ObjectEventHandler<StringProperty> OnPreSave_StringProperty;
+        public static event ObjectEventHandler<StringProperty> OnPreSave_StringProperty;
 
         [EventBasedMethod("OnPostSave_StringProperty")]
         public override void NotifyPostSave()
@@ -119,7 +119,7 @@ namespace Kistl.App.Base
             base.NotifyPostSave();
             if (OnPostSave_StringProperty != null) OnPostSave_StringProperty(this);
         }
-        public event ObjectEventHandler<StringProperty> OnPostSave_StringProperty;
+        public static event ObjectEventHandler<StringProperty> OnPostSave_StringProperty;
 
         [EventBasedMethod("OnCreated_StringProperty")]
         public override void NotifyCreated()
@@ -127,7 +127,7 @@ namespace Kistl.App.Base
             base.NotifyCreated();
             if (OnCreated_StringProperty != null) OnCreated_StringProperty(this);
         }
-        public event ObjectEventHandler<StringProperty> OnCreated_StringProperty;
+        public static event ObjectEventHandler<StringProperty> OnCreated_StringProperty;
 
         [EventBasedMethod("OnDeleting_StringProperty")]
         public override void NotifyDeleting()
@@ -135,7 +135,7 @@ namespace Kistl.App.Base
             base.NotifyDeleting();
             if (OnDeleting_StringProperty != null) OnDeleting_StringProperty(this);
         }
-        public event ObjectEventHandler<StringProperty> OnDeleting_StringProperty;
+        public static event ObjectEventHandler<StringProperty> OnDeleting_StringProperty;
 
 
 

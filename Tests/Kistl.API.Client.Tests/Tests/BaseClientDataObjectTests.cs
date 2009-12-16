@@ -36,12 +36,6 @@ namespace Kistl.API.Client.Tests
         }
 
         [Test]
-        public void EventAttached()
-        {
-            Assert.That(currentCustomActionsManager.IsObjectAttached(obj), Is.True);
-        }
-
-        [Test]
         public void ObjectState_CreatedObject()
         {
             Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.New));

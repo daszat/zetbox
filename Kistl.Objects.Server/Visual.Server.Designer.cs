@@ -201,9 +201,9 @@ namespace Kistl.App.GUI
             }
         }
         private string _Description;
-		public event PropertyGetterHandler<Kistl.App.GUI.Visual, string> OnDescription_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.GUI.Visual, string> OnDescription_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.GUI.Visual, string> OnDescription_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.GUI.Visual, string> OnDescription_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.GUI.Visual, string> OnDescription_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.GUI.Visual, string> OnDescription_PostSetter;
         /// <summary>
         /// The Method whose return value shoud be displayed
         /// </summary>
@@ -291,9 +291,9 @@ namespace Kistl.App.GUI
         }
         
         
-		public event PropertyGetterHandler<Kistl.App.GUI.Visual, Kistl.App.Base.Method> OnMethod_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.GUI.Visual, Kistl.App.Base.Method> OnMethod_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.GUI.Visual, Kistl.App.Base.Method> OnMethod_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.GUI.Visual, Kistl.App.Base.Method> OnMethod_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.GUI.Visual, Kistl.App.Base.Method> OnMethod_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.GUI.Visual, Kistl.App.Base.Method> OnMethod_PostSetter;
         /// <summary>
         /// The Property to display
         /// </summary>
@@ -381,9 +381,9 @@ namespace Kistl.App.GUI
         }
         
         
-		public event PropertyGetterHandler<Kistl.App.GUI.Visual, Kistl.App.Base.Property> OnProperty_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.GUI.Visual, Kistl.App.Base.Property> OnProperty_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.GUI.Visual, Kistl.App.Base.Property> OnProperty_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.GUI.Visual, Kistl.App.Base.Property> OnProperty_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.GUI.Visual, Kistl.App.Base.Property> OnProperty_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.GUI.Visual, Kistl.App.Base.Property> OnProperty_PostSetter;
 		public override InterfaceType GetInterfaceType()
 		{
 			return new InterfaceType(typeof(Visual));
@@ -416,7 +416,7 @@ namespace Kistl.App.GUI
             }
             return e.Result;
         }
-        public event ToStringHandler<Visual> OnToString_Visual;
+        public static event ToStringHandler<Visual> OnToString_Visual;
 
         [EventBasedMethod("OnPreSave_Visual")]
         public override void NotifyPreSave()
@@ -424,7 +424,7 @@ namespace Kistl.App.GUI
             base.NotifyPreSave();
             if (OnPreSave_Visual != null) OnPreSave_Visual(this);
         }
-        public event ObjectEventHandler<Visual> OnPreSave_Visual;
+        public static event ObjectEventHandler<Visual> OnPreSave_Visual;
 
         [EventBasedMethod("OnPostSave_Visual")]
         public override void NotifyPostSave()
@@ -432,7 +432,7 @@ namespace Kistl.App.GUI
             base.NotifyPostSave();
             if (OnPostSave_Visual != null) OnPostSave_Visual(this);
         }
-        public event ObjectEventHandler<Visual> OnPostSave_Visual;
+        public static event ObjectEventHandler<Visual> OnPostSave_Visual;
 
         [EventBasedMethod("OnCreated_Visual")]
         public override void NotifyCreated()
@@ -440,7 +440,7 @@ namespace Kistl.App.GUI
             base.NotifyCreated();
             if (OnCreated_Visual != null) OnCreated_Visual(this);
         }
-        public event ObjectEventHandler<Visual> OnCreated_Visual;
+        public static event ObjectEventHandler<Visual> OnCreated_Visual;
 
         [EventBasedMethod("OnDeleting_Visual")]
         public override void NotifyDeleting()
@@ -448,7 +448,7 @@ namespace Kistl.App.GUI
             base.NotifyDeleting();
             if (OnDeleting_Visual != null) OnDeleting_Visual(this);
         }
-        public event ObjectEventHandler<Visual> OnDeleting_Visual;
+        public static event ObjectEventHandler<Visual> OnDeleting_Visual;
 
 
 		protected override string GetPropertyError(string propertyName) 

@@ -61,7 +61,7 @@ namespace Kistl.App.GUI
             }
             return e.Result;
         }
-        public event ToStringHandler<DataObjectSelectionTaskKind> OnToString_DataObjectSelectionTaskKind;
+        public static event ToStringHandler<DataObjectSelectionTaskKind> OnToString_DataObjectSelectionTaskKind;
 
         [EventBasedMethod("OnPreSave_DataObjectSelectionTaskKind")]
         public override void NotifyPreSave()
@@ -69,7 +69,7 @@ namespace Kistl.App.GUI
             base.NotifyPreSave();
             if (OnPreSave_DataObjectSelectionTaskKind != null) OnPreSave_DataObjectSelectionTaskKind(this);
         }
-        public event ObjectEventHandler<DataObjectSelectionTaskKind> OnPreSave_DataObjectSelectionTaskKind;
+        public static event ObjectEventHandler<DataObjectSelectionTaskKind> OnPreSave_DataObjectSelectionTaskKind;
 
         [EventBasedMethod("OnPostSave_DataObjectSelectionTaskKind")]
         public override void NotifyPostSave()
@@ -77,7 +77,7 @@ namespace Kistl.App.GUI
             base.NotifyPostSave();
             if (OnPostSave_DataObjectSelectionTaskKind != null) OnPostSave_DataObjectSelectionTaskKind(this);
         }
-        public event ObjectEventHandler<DataObjectSelectionTaskKind> OnPostSave_DataObjectSelectionTaskKind;
+        public static event ObjectEventHandler<DataObjectSelectionTaskKind> OnPostSave_DataObjectSelectionTaskKind;
 
         [EventBasedMethod("OnCreated_DataObjectSelectionTaskKind")]
         public override void NotifyCreated()
@@ -85,7 +85,7 @@ namespace Kistl.App.GUI
             base.NotifyCreated();
             if (OnCreated_DataObjectSelectionTaskKind != null) OnCreated_DataObjectSelectionTaskKind(this);
         }
-        public event ObjectEventHandler<DataObjectSelectionTaskKind> OnCreated_DataObjectSelectionTaskKind;
+        public static event ObjectEventHandler<DataObjectSelectionTaskKind> OnCreated_DataObjectSelectionTaskKind;
 
         [EventBasedMethod("OnDeleting_DataObjectSelectionTaskKind")]
         public override void NotifyDeleting()
@@ -93,7 +93,7 @@ namespace Kistl.App.GUI
             base.NotifyDeleting();
             if (OnDeleting_DataObjectSelectionTaskKind != null) OnDeleting_DataObjectSelectionTaskKind(this);
         }
-        public event ObjectEventHandler<DataObjectSelectionTaskKind> OnDeleting_DataObjectSelectionTaskKind;
+        public static event ObjectEventHandler<DataObjectSelectionTaskKind> OnDeleting_DataObjectSelectionTaskKind;
 
 
 

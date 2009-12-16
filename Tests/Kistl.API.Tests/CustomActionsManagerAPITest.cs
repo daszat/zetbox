@@ -7,11 +7,6 @@ namespace Kistl.API.Tests
 {
     public class CustomActionsManagerAPITest : Kistl.API.ICustomActionsManager
     {
-        public void AttachEvents(Kistl.API.IDataObject obj)
-        {
-            // Do nothing!
-        }
-
         public void Init(IKistlContext ctx)
         {
             // Do nothing!

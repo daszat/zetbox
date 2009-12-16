@@ -144,9 +144,9 @@ namespace Kistl.App.Base
         }
         
         
-		public event PropertyGetterHandler<Kistl.App.Base.Method, Kistl.App.Base.Identity> OnChangedBy_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.Method, Kistl.App.Base.Identity> OnChangedBy_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.Method, Kistl.App.Base.Identity> OnChangedBy_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.Method, Kistl.App.Base.Identity> OnChangedBy_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.Method, Kistl.App.Base.Identity> OnChangedBy_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.Method, Kistl.App.Base.Identity> OnChangedBy_PostSetter;
         /// <summary>
         /// Date and time where this object was changed
         /// </summary>
@@ -195,9 +195,9 @@ namespace Kistl.App.Base
             }
         }
         private DateTime? _ChangedOn;
-		public event PropertyGetterHandler<Kistl.App.Base.Method, DateTime?> OnChangedOn_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.Method, DateTime?> OnChangedOn_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.Method, DateTime?> OnChangedOn_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.Method, DateTime?> OnChangedOn_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.Method, DateTime?> OnChangedOn_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.Method, DateTime?> OnChangedOn_PostSetter;
         /// <summary>
         /// Identity which created this object
         /// </summary>
@@ -285,9 +285,9 @@ namespace Kistl.App.Base
         }
         
         
-		public event PropertyGetterHandler<Kistl.App.Base.Method, Kistl.App.Base.Identity> OnCreatedBy_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.Method, Kistl.App.Base.Identity> OnCreatedBy_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.Method, Kistl.App.Base.Identity> OnCreatedBy_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.Method, Kistl.App.Base.Identity> OnCreatedBy_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.Method, Kistl.App.Base.Identity> OnCreatedBy_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.Method, Kistl.App.Base.Identity> OnCreatedBy_PostSetter;
         /// <summary>
         /// Date and time where this object was created
         /// </summary>
@@ -336,9 +336,9 @@ namespace Kistl.App.Base
             }
         }
         private DateTime? _CreatedOn;
-		public event PropertyGetterHandler<Kistl.App.Base.Method, DateTime?> OnCreatedOn_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.Method, DateTime?> OnCreatedOn_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.Method, DateTime?> OnCreatedOn_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.Method, DateTime?> OnCreatedOn_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.Method, DateTime?> OnCreatedOn_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.Method, DateTime?> OnCreatedOn_PostSetter;
         /// <summary>
         /// Description of this Method
         /// </summary>
@@ -387,9 +387,9 @@ namespace Kistl.App.Base
             }
         }
         private string _Description;
-		public event PropertyGetterHandler<Kistl.App.Base.Method, string> OnDescription_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.Method, string> OnDescription_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.Method, string> OnDescription_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.Method, string> OnDescription_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.Method, string> OnDescription_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.Method, string> OnDescription_PostSetter;
         /// <summary>
         /// Export Guid
         /// </summary>
@@ -449,9 +449,9 @@ namespace Kistl.App.Base
             }
         }
         private Guid _ExportGuid;
-		public event PropertyGetterHandler<Kistl.App.Base.Method, Guid> OnExportGuid_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.Method, Guid> OnExportGuid_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.Method, Guid> OnExportGuid_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.Method, Guid> OnExportGuid_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.Method, Guid> OnExportGuid_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.Method, Guid> OnExportGuid_PostSetter;
         /// <summary>
         /// Shows this Method in th GUI
         /// </summary>
@@ -500,9 +500,9 @@ namespace Kistl.App.Base
             }
         }
         private bool _IsDisplayable;
-		public event PropertyGetterHandler<Kistl.App.Base.Method, bool> OnIsDisplayable_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.Method, bool> OnIsDisplayable_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.Method, bool> OnIsDisplayable_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.Method, bool> OnIsDisplayable_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.Method, bool> OnIsDisplayable_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.Method, bool> OnIsDisplayable_PostSetter;
         /// <summary>
         /// Methodenaufrufe implementiert in dieser Objekt Klasse
         /// </summary>
@@ -599,9 +599,9 @@ namespace Kistl.App.Base
             }
         }
         private string _MethodName;
-		public event PropertyGetterHandler<Kistl.App.Base.Method, string> OnMethodName_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.Method, string> OnMethodName_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.Method, string> OnMethodName_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.Method, string> OnMethodName_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.Method, string> OnMethodName_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.Method, string> OnMethodName_PostSetter;
         /// <summary>
         /// Zugehörig zum Modul
         /// </summary>
@@ -689,9 +689,9 @@ namespace Kistl.App.Base
         }
         
         
-		public event PropertyGetterHandler<Kistl.App.Base.Method, Kistl.App.Base.Module> OnModule_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.Method, Kistl.App.Base.Module> OnModule_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.Method, Kistl.App.Base.Module> OnModule_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.Method, Kistl.App.Base.Module> OnModule_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.Method, Kistl.App.Base.Module> OnModule_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.Method, Kistl.App.Base.Module> OnModule_PostSetter;
         /// <summary>
         /// 
         /// </summary>
@@ -779,9 +779,9 @@ namespace Kistl.App.Base
         }
         
         
-		public event PropertyGetterHandler<Kistl.App.Base.Method, Kistl.App.Base.DataType> OnObjectClass_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.Method, Kistl.App.Base.DataType> OnObjectClass_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.Method, Kistl.App.Base.DataType> OnObjectClass_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.Method, Kistl.App.Base.DataType> OnObjectClass_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.Method, Kistl.App.Base.DataType> OnObjectClass_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.Method, Kistl.App.Base.DataType> OnObjectClass_PostSetter;
         /// <summary>
         /// Parameter der Methode
         /// </summary>
@@ -848,7 +848,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
 		public delegate void CreateMethodInvocation_Handler<T>(T obj, MethodReturnEventArgs<Kistl.App.Base.MethodInvocation> ret);
-		public event CreateMethodInvocation_Handler<Method> OnCreateMethodInvocation_Method;
+		public static event CreateMethodInvocation_Handler<Method> OnCreateMethodInvocation_Method;
 
 
 
@@ -870,7 +870,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
 		public delegate void GetReturnParameter_Handler<T>(T obj, MethodReturnEventArgs<Kistl.App.Base.BaseParameter> ret);
-		public event GetReturnParameter_Handler<Method> OnGetReturnParameter_Method;
+		public static event GetReturnParameter_Handler<Method> OnGetReturnParameter_Method;
 
 
 
@@ -913,7 +913,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-        public event ToStringHandler<Method> OnToString_Method;
+        public static event ToStringHandler<Method> OnToString_Method;
 
         [EventBasedMethod("OnPreSave_Method")]
         public override void NotifyPreSave()
@@ -921,7 +921,7 @@ namespace Kistl.App.Base
             base.NotifyPreSave();
             if (OnPreSave_Method != null) OnPreSave_Method(this);
         }
-        public event ObjectEventHandler<Method> OnPreSave_Method;
+        public static event ObjectEventHandler<Method> OnPreSave_Method;
 
         [EventBasedMethod("OnPostSave_Method")]
         public override void NotifyPostSave()
@@ -929,7 +929,7 @@ namespace Kistl.App.Base
             base.NotifyPostSave();
             if (OnPostSave_Method != null) OnPostSave_Method(this);
         }
-        public event ObjectEventHandler<Method> OnPostSave_Method;
+        public static event ObjectEventHandler<Method> OnPostSave_Method;
 
         [EventBasedMethod("OnCreated_Method")]
         public override void NotifyCreated()
@@ -937,7 +937,7 @@ namespace Kistl.App.Base
             base.NotifyCreated();
             if (OnCreated_Method != null) OnCreated_Method(this);
         }
-        public event ObjectEventHandler<Method> OnCreated_Method;
+        public static event ObjectEventHandler<Method> OnCreated_Method;
 
         [EventBasedMethod("OnDeleting_Method")]
         public override void NotifyDeleting()
@@ -945,7 +945,7 @@ namespace Kistl.App.Base
             base.NotifyDeleting();
             if (OnDeleting_Method != null) OnDeleting_Method(this);
         }
-        public event ObjectEventHandler<Method> OnDeleting_Method;
+        public static event ObjectEventHandler<Method> OnDeleting_Method;
 
 
 		protected override string GetPropertyError(string propertyName) 

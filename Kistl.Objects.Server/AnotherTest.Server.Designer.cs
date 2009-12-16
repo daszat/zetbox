@@ -86,7 +86,7 @@ namespace Kistl.App.Test
             }
             return e.Result;
         }
-        public event ToStringHandler<AnotherTest> OnToString_AnotherTest;
+        public static event ToStringHandler<AnotherTest> OnToString_AnotherTest;
 
         [EventBasedMethod("OnPreSave_AnotherTest")]
         public override void NotifyPreSave()
@@ -94,7 +94,7 @@ namespace Kistl.App.Test
             base.NotifyPreSave();
             if (OnPreSave_AnotherTest != null) OnPreSave_AnotherTest(this);
         }
-        public event ObjectEventHandler<AnotherTest> OnPreSave_AnotherTest;
+        public static event ObjectEventHandler<AnotherTest> OnPreSave_AnotherTest;
 
         [EventBasedMethod("OnPostSave_AnotherTest")]
         public override void NotifyPostSave()
@@ -102,7 +102,7 @@ namespace Kistl.App.Test
             base.NotifyPostSave();
             if (OnPostSave_AnotherTest != null) OnPostSave_AnotherTest(this);
         }
-        public event ObjectEventHandler<AnotherTest> OnPostSave_AnotherTest;
+        public static event ObjectEventHandler<AnotherTest> OnPostSave_AnotherTest;
 
         [EventBasedMethod("OnCreated_AnotherTest")]
         public override void NotifyCreated()
@@ -110,7 +110,7 @@ namespace Kistl.App.Test
             base.NotifyCreated();
             if (OnCreated_AnotherTest != null) OnCreated_AnotherTest(this);
         }
-        public event ObjectEventHandler<AnotherTest> OnCreated_AnotherTest;
+        public static event ObjectEventHandler<AnotherTest> OnCreated_AnotherTest;
 
         [EventBasedMethod("OnDeleting_AnotherTest")]
         public override void NotifyDeleting()
@@ -118,7 +118,7 @@ namespace Kistl.App.Test
             base.NotifyDeleting();
             if (OnDeleting_AnotherTest != null) OnDeleting_AnotherTest(this);
         }
-        public event ObjectEventHandler<AnotherTest> OnDeleting_AnotherTest;
+        public static event ObjectEventHandler<AnotherTest> OnDeleting_AnotherTest;
 
 
 

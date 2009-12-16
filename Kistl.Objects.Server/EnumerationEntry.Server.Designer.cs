@@ -144,9 +144,9 @@ namespace Kistl.App.Base
         }
         
         
-		public event PropertyGetterHandler<Kistl.App.Base.EnumerationEntry, Kistl.App.Base.Identity> OnChangedBy_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.EnumerationEntry, Kistl.App.Base.Identity> OnChangedBy_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.EnumerationEntry, Kistl.App.Base.Identity> OnChangedBy_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.EnumerationEntry, Kistl.App.Base.Identity> OnChangedBy_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.EnumerationEntry, Kistl.App.Base.Identity> OnChangedBy_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.EnumerationEntry, Kistl.App.Base.Identity> OnChangedBy_PostSetter;
         /// <summary>
         /// Date and time where this object was changed
         /// </summary>
@@ -195,9 +195,9 @@ namespace Kistl.App.Base
             }
         }
         private DateTime? _ChangedOn;
-		public event PropertyGetterHandler<Kistl.App.Base.EnumerationEntry, DateTime?> OnChangedOn_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.EnumerationEntry, DateTime?> OnChangedOn_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.EnumerationEntry, DateTime?> OnChangedOn_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.EnumerationEntry, DateTime?> OnChangedOn_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.EnumerationEntry, DateTime?> OnChangedOn_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.EnumerationEntry, DateTime?> OnChangedOn_PostSetter;
         /// <summary>
         /// Identity which created this object
         /// </summary>
@@ -285,9 +285,9 @@ namespace Kistl.App.Base
         }
         
         
-		public event PropertyGetterHandler<Kistl.App.Base.EnumerationEntry, Kistl.App.Base.Identity> OnCreatedBy_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.EnumerationEntry, Kistl.App.Base.Identity> OnCreatedBy_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.EnumerationEntry, Kistl.App.Base.Identity> OnCreatedBy_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.EnumerationEntry, Kistl.App.Base.Identity> OnCreatedBy_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.EnumerationEntry, Kistl.App.Base.Identity> OnCreatedBy_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.EnumerationEntry, Kistl.App.Base.Identity> OnCreatedBy_PostSetter;
         /// <summary>
         /// Date and time where this object was created
         /// </summary>
@@ -336,9 +336,9 @@ namespace Kistl.App.Base
             }
         }
         private DateTime? _CreatedOn;
-		public event PropertyGetterHandler<Kistl.App.Base.EnumerationEntry, DateTime?> OnCreatedOn_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.EnumerationEntry, DateTime?> OnCreatedOn_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.EnumerationEntry, DateTime?> OnCreatedOn_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.EnumerationEntry, DateTime?> OnCreatedOn_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.EnumerationEntry, DateTime?> OnCreatedOn_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.EnumerationEntry, DateTime?> OnCreatedOn_PostSetter;
         /// <summary>
         /// Description of this Enumeration Entry
         /// </summary>
@@ -387,9 +387,9 @@ namespace Kistl.App.Base
             }
         }
         private string _Description;
-		public event PropertyGetterHandler<Kistl.App.Base.EnumerationEntry, string> OnDescription_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.EnumerationEntry, string> OnDescription_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.EnumerationEntry, string> OnDescription_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.EnumerationEntry, string> OnDescription_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.EnumerationEntry, string> OnDescription_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.EnumerationEntry, string> OnDescription_PostSetter;
         /// <summary>
         /// Übergeordnete Enumeration
         /// </summary>
@@ -477,9 +477,9 @@ namespace Kistl.App.Base
         }
         
         
-		public event PropertyGetterHandler<Kistl.App.Base.EnumerationEntry, Kistl.App.Base.Enumeration> OnEnumeration_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.EnumerationEntry, Kistl.App.Base.Enumeration> OnEnumeration_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.EnumerationEntry, Kistl.App.Base.Enumeration> OnEnumeration_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.EnumerationEntry, Kistl.App.Base.Enumeration> OnEnumeration_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.EnumerationEntry, Kistl.App.Base.Enumeration> OnEnumeration_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.EnumerationEntry, Kistl.App.Base.Enumeration> OnEnumeration_PostSetter;
         /// <summary>
         /// Export Guid
         /// </summary>
@@ -539,9 +539,9 @@ namespace Kistl.App.Base
             }
         }
         private Guid _ExportGuid;
-		public event PropertyGetterHandler<Kistl.App.Base.EnumerationEntry, Guid> OnExportGuid_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.EnumerationEntry, Guid> OnExportGuid_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.EnumerationEntry, Guid> OnExportGuid_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.EnumerationEntry, Guid> OnExportGuid_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.EnumerationEntry, Guid> OnExportGuid_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.EnumerationEntry, Guid> OnExportGuid_PostSetter;
         /// <summary>
         /// CLR name of this entry
         /// </summary>
@@ -590,9 +590,9 @@ namespace Kistl.App.Base
             }
         }
         private string _Name;
-		public event PropertyGetterHandler<Kistl.App.Base.EnumerationEntry, string> OnName_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.EnumerationEntry, string> OnName_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.EnumerationEntry, string> OnName_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.EnumerationEntry, string> OnName_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.EnumerationEntry, string> OnName_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.EnumerationEntry, string> OnName_PostSetter;
         /// <summary>
         /// The CLR value of this entry
         /// </summary>
@@ -641,9 +641,9 @@ namespace Kistl.App.Base
             }
         }
         private int _Value;
-		public event PropertyGetterHandler<Kistl.App.Base.EnumerationEntry, int> OnValue_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.EnumerationEntry, int> OnValue_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.EnumerationEntry, int> OnValue_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.EnumerationEntry, int> OnValue_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.EnumerationEntry, int> OnValue_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.EnumerationEntry, int> OnValue_PostSetter;
 		public override InterfaceType GetInterfaceType()
 		{
 			return new InterfaceType(typeof(EnumerationEntry));
@@ -682,7 +682,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-        public event ToStringHandler<EnumerationEntry> OnToString_EnumerationEntry;
+        public static event ToStringHandler<EnumerationEntry> OnToString_EnumerationEntry;
 
         [EventBasedMethod("OnPreSave_EnumerationEntry")]
         public override void NotifyPreSave()
@@ -690,7 +690,7 @@ namespace Kistl.App.Base
             base.NotifyPreSave();
             if (OnPreSave_EnumerationEntry != null) OnPreSave_EnumerationEntry(this);
         }
-        public event ObjectEventHandler<EnumerationEntry> OnPreSave_EnumerationEntry;
+        public static event ObjectEventHandler<EnumerationEntry> OnPreSave_EnumerationEntry;
 
         [EventBasedMethod("OnPostSave_EnumerationEntry")]
         public override void NotifyPostSave()
@@ -698,7 +698,7 @@ namespace Kistl.App.Base
             base.NotifyPostSave();
             if (OnPostSave_EnumerationEntry != null) OnPostSave_EnumerationEntry(this);
         }
-        public event ObjectEventHandler<EnumerationEntry> OnPostSave_EnumerationEntry;
+        public static event ObjectEventHandler<EnumerationEntry> OnPostSave_EnumerationEntry;
 
         [EventBasedMethod("OnCreated_EnumerationEntry")]
         public override void NotifyCreated()
@@ -706,7 +706,7 @@ namespace Kistl.App.Base
             base.NotifyCreated();
             if (OnCreated_EnumerationEntry != null) OnCreated_EnumerationEntry(this);
         }
-        public event ObjectEventHandler<EnumerationEntry> OnCreated_EnumerationEntry;
+        public static event ObjectEventHandler<EnumerationEntry> OnCreated_EnumerationEntry;
 
         [EventBasedMethod("OnDeleting_EnumerationEntry")]
         public override void NotifyDeleting()
@@ -714,7 +714,7 @@ namespace Kistl.App.Base
             base.NotifyDeleting();
             if (OnDeleting_EnumerationEntry != null) OnDeleting_EnumerationEntry(this);
         }
-        public event ObjectEventHandler<EnumerationEntry> OnDeleting_EnumerationEntry;
+        public static event ObjectEventHandler<EnumerationEntry> OnDeleting_EnumerationEntry;
 
 
 		protected override string GetPropertyError(string propertyName) 

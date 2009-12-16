@@ -116,9 +116,9 @@ namespace Kistl.App.GUI
             }
         }
         private Guid _ExportGuid;
-		public event PropertyGetterHandler<Kistl.App.GUI.ControlKind, Guid> OnExportGuid_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.GUI.ControlKind, Guid> OnExportGuid_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.GUI.ControlKind, Guid> OnExportGuid_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.GUI.ControlKind, Guid> OnExportGuid_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.GUI.ControlKind, Guid> OnExportGuid_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.GUI.ControlKind, Guid> OnExportGuid_PostSetter;
 		public override InterfaceType GetInterfaceType()
 		{
 			return new InterfaceType(typeof(ControlKind));
@@ -149,7 +149,7 @@ namespace Kistl.App.GUI
             }
             return e.Result;
         }
-        public event ToStringHandler<ControlKind> OnToString_ControlKind;
+        public static event ToStringHandler<ControlKind> OnToString_ControlKind;
 
         [EventBasedMethod("OnPreSave_ControlKind")]
         public override void NotifyPreSave()
@@ -157,7 +157,7 @@ namespace Kistl.App.GUI
             base.NotifyPreSave();
             if (OnPreSave_ControlKind != null) OnPreSave_ControlKind(this);
         }
-        public event ObjectEventHandler<ControlKind> OnPreSave_ControlKind;
+        public static event ObjectEventHandler<ControlKind> OnPreSave_ControlKind;
 
         [EventBasedMethod("OnPostSave_ControlKind")]
         public override void NotifyPostSave()
@@ -165,7 +165,7 @@ namespace Kistl.App.GUI
             base.NotifyPostSave();
             if (OnPostSave_ControlKind != null) OnPostSave_ControlKind(this);
         }
-        public event ObjectEventHandler<ControlKind> OnPostSave_ControlKind;
+        public static event ObjectEventHandler<ControlKind> OnPostSave_ControlKind;
 
         [EventBasedMethod("OnCreated_ControlKind")]
         public override void NotifyCreated()
@@ -173,7 +173,7 @@ namespace Kistl.App.GUI
             base.NotifyCreated();
             if (OnCreated_ControlKind != null) OnCreated_ControlKind(this);
         }
-        public event ObjectEventHandler<ControlKind> OnCreated_ControlKind;
+        public static event ObjectEventHandler<ControlKind> OnCreated_ControlKind;
 
         [EventBasedMethod("OnDeleting_ControlKind")]
         public override void NotifyDeleting()
@@ -181,7 +181,7 @@ namespace Kistl.App.GUI
             base.NotifyDeleting();
             if (OnDeleting_ControlKind != null) OnDeleting_ControlKind(this);
         }
-        public event ObjectEventHandler<ControlKind> OnDeleting_ControlKind;
+        public static event ObjectEventHandler<ControlKind> OnDeleting_ControlKind;
 
 
 		protected override string GetPropertyError(string propertyName) 

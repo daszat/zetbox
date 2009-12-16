@@ -10,11 +10,6 @@ namespace Kistl.Client.Mocks
     {
         #region ICustomActionsManager Members
 
-        public void AttachEvents(IDataObject obj)
-        {
-            // ignore
-        }
-
         public void Init(IKistlContext ctx)
         {
             // ignore

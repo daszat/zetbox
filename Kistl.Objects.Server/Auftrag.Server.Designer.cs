@@ -105,9 +105,9 @@ namespace Kistl.App.Projekte
             }
         }
         private string _Auftragsname;
-		public event PropertyGetterHandler<Kistl.App.Projekte.Auftrag, string> OnAuftragsname_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Projekte.Auftrag, string> OnAuftragsname_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Projekte.Auftrag, string> OnAuftragsname_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Projekte.Auftrag, string> OnAuftragsname_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Auftrag, string> OnAuftragsname_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Auftrag, string> OnAuftragsname_PostSetter;
         /// <summary>
         /// Wert in EUR des Auftrages
         /// </summary>
@@ -156,9 +156,9 @@ namespace Kistl.App.Projekte
             }
         }
         private double? _Auftragswert;
-		public event PropertyGetterHandler<Kistl.App.Projekte.Auftrag, double?> OnAuftragswert_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Projekte.Auftrag, double?> OnAuftragswert_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Projekte.Auftrag, double?> OnAuftragswert_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Projekte.Auftrag, double?> OnAuftragswert_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Auftrag, double?> OnAuftragswert_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Auftrag, double?> OnAuftragswert_PostSetter;
         /// <summary>
         /// Identity which changed this object
         /// </summary>
@@ -246,9 +246,9 @@ namespace Kistl.App.Projekte
         }
         
         
-		public event PropertyGetterHandler<Kistl.App.Projekte.Auftrag, Kistl.App.Base.Identity> OnChangedBy_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Projekte.Auftrag, Kistl.App.Base.Identity> OnChangedBy_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Projekte.Auftrag, Kistl.App.Base.Identity> OnChangedBy_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Projekte.Auftrag, Kistl.App.Base.Identity> OnChangedBy_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Auftrag, Kistl.App.Base.Identity> OnChangedBy_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Auftrag, Kistl.App.Base.Identity> OnChangedBy_PostSetter;
         /// <summary>
         /// Date and time where this object was changed
         /// </summary>
@@ -297,9 +297,9 @@ namespace Kistl.App.Projekte
             }
         }
         private DateTime? _ChangedOn;
-		public event PropertyGetterHandler<Kistl.App.Projekte.Auftrag, DateTime?> OnChangedOn_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Projekte.Auftrag, DateTime?> OnChangedOn_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Projekte.Auftrag, DateTime?> OnChangedOn_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Projekte.Auftrag, DateTime?> OnChangedOn_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Auftrag, DateTime?> OnChangedOn_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Auftrag, DateTime?> OnChangedOn_PostSetter;
         /// <summary>
         /// Identity which created this object
         /// </summary>
@@ -387,9 +387,9 @@ namespace Kistl.App.Projekte
         }
         
         
-		public event PropertyGetterHandler<Kistl.App.Projekte.Auftrag, Kistl.App.Base.Identity> OnCreatedBy_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Projekte.Auftrag, Kistl.App.Base.Identity> OnCreatedBy_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Projekte.Auftrag, Kistl.App.Base.Identity> OnCreatedBy_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Projekte.Auftrag, Kistl.App.Base.Identity> OnCreatedBy_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Auftrag, Kistl.App.Base.Identity> OnCreatedBy_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Auftrag, Kistl.App.Base.Identity> OnCreatedBy_PostSetter;
         /// <summary>
         /// Date and time where this object was created
         /// </summary>
@@ -438,9 +438,9 @@ namespace Kistl.App.Projekte
             }
         }
         private DateTime? _CreatedOn;
-		public event PropertyGetterHandler<Kistl.App.Projekte.Auftrag, DateTime?> OnCreatedOn_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Projekte.Auftrag, DateTime?> OnCreatedOn_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Projekte.Auftrag, DateTime?> OnCreatedOn_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Projekte.Auftrag, DateTime?> OnCreatedOn_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Auftrag, DateTime?> OnCreatedOn_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Auftrag, DateTime?> OnCreatedOn_PostSetter;
         /// <summary>
         /// Kunde des Projektes
         /// </summary>
@@ -528,9 +528,9 @@ namespace Kistl.App.Projekte
         }
         
         
-		public event PropertyGetterHandler<Kistl.App.Projekte.Auftrag, Kistl.App.Projekte.Kunde> OnKunde_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Projekte.Auftrag, Kistl.App.Projekte.Kunde> OnKunde_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Projekte.Auftrag, Kistl.App.Projekte.Kunde> OnKunde_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Projekte.Auftrag, Kistl.App.Projekte.Kunde> OnKunde_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Auftrag, Kistl.App.Projekte.Kunde> OnKunde_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Auftrag, Kistl.App.Projekte.Kunde> OnKunde_PostSetter;
         /// <summary>
         /// 
         /// </summary>
@@ -618,9 +618,9 @@ namespace Kistl.App.Projekte
         }
         
         
-		public event PropertyGetterHandler<Kistl.App.Projekte.Auftrag, Kistl.App.Projekte.Mitarbeiter> OnMitarbeiter_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Projekte.Auftrag, Kistl.App.Projekte.Mitarbeiter> OnMitarbeiter_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Projekte.Auftrag, Kistl.App.Projekte.Mitarbeiter> OnMitarbeiter_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Projekte.Auftrag, Kistl.App.Projekte.Mitarbeiter> OnMitarbeiter_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Auftrag, Kistl.App.Projekte.Mitarbeiter> OnMitarbeiter_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Auftrag, Kistl.App.Projekte.Mitarbeiter> OnMitarbeiter_PostSetter;
         /// <summary>
         /// Projekt zum Auftrag
         /// </summary>
@@ -708,9 +708,9 @@ namespace Kistl.App.Projekte
         }
         
         
-		public event PropertyGetterHandler<Kistl.App.Projekte.Auftrag, Kistl.App.Projekte.Projekt> OnProjekt_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Projekte.Auftrag, Kistl.App.Projekte.Projekt> OnProjekt_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Projekte.Auftrag, Kistl.App.Projekte.Projekt> OnProjekt_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Projekte.Auftrag, Kistl.App.Projekte.Projekt> OnProjekt_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Auftrag, Kistl.App.Projekte.Projekt> OnProjekt_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Auftrag, Kistl.App.Projekte.Projekt> OnProjekt_PostSetter;
         /// <summary>
         /// Testmethode zum Erstellen von Rechnungen mit Word
         /// </summary>
@@ -728,7 +728,7 @@ namespace Kistl.App.Projekte
 			}
         }
 		public delegate void RechnungErstellen_Handler<T>(T obj);
-		public event RechnungErstellen_Handler<Auftrag> OnRechnungErstellen_Auftrag;
+		public static event RechnungErstellen_Handler<Auftrag> OnRechnungErstellen_Auftrag;
 
 
 
@@ -770,7 +770,7 @@ namespace Kistl.App.Projekte
             }
             return e.Result;
         }
-        public event ToStringHandler<Auftrag> OnToString_Auftrag;
+        public static event ToStringHandler<Auftrag> OnToString_Auftrag;
 
         [EventBasedMethod("OnPreSave_Auftrag")]
         public override void NotifyPreSave()
@@ -778,7 +778,7 @@ namespace Kistl.App.Projekte
             base.NotifyPreSave();
             if (OnPreSave_Auftrag != null) OnPreSave_Auftrag(this);
         }
-        public event ObjectEventHandler<Auftrag> OnPreSave_Auftrag;
+        public static event ObjectEventHandler<Auftrag> OnPreSave_Auftrag;
 
         [EventBasedMethod("OnPostSave_Auftrag")]
         public override void NotifyPostSave()
@@ -786,7 +786,7 @@ namespace Kistl.App.Projekte
             base.NotifyPostSave();
             if (OnPostSave_Auftrag != null) OnPostSave_Auftrag(this);
         }
-        public event ObjectEventHandler<Auftrag> OnPostSave_Auftrag;
+        public static event ObjectEventHandler<Auftrag> OnPostSave_Auftrag;
 
         [EventBasedMethod("OnCreated_Auftrag")]
         public override void NotifyCreated()
@@ -794,7 +794,7 @@ namespace Kistl.App.Projekte
             base.NotifyCreated();
             if (OnCreated_Auftrag != null) OnCreated_Auftrag(this);
         }
-        public event ObjectEventHandler<Auftrag> OnCreated_Auftrag;
+        public static event ObjectEventHandler<Auftrag> OnCreated_Auftrag;
 
         [EventBasedMethod("OnDeleting_Auftrag")]
         public override void NotifyDeleting()
@@ -802,7 +802,7 @@ namespace Kistl.App.Projekte
             base.NotifyDeleting();
             if (OnDeleting_Auftrag != null) OnDeleting_Auftrag(this);
         }
-        public event ObjectEventHandler<Auftrag> OnDeleting_Auftrag;
+        public static event ObjectEventHandler<Auftrag> OnDeleting_Auftrag;
 
 
 		protected override string GetPropertyError(string propertyName) 

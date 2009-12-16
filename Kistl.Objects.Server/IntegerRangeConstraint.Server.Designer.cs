@@ -80,9 +80,9 @@ namespace Kistl.App.Base
             }
         }
         private int _Max;
-		public event PropertyGetterHandler<Kistl.App.Base.IntegerRangeConstraint, int> OnMax_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.IntegerRangeConstraint, int> OnMax_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.IntegerRangeConstraint, int> OnMax_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.IntegerRangeConstraint, int> OnMax_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.IntegerRangeConstraint, int> OnMax_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.IntegerRangeConstraint, int> OnMax_PostSetter;
         /// <summary>
         /// The smallest value accepted by this constraint
         /// </summary>
@@ -131,9 +131,9 @@ namespace Kistl.App.Base
             }
         }
         private int _Min;
-		public event PropertyGetterHandler<Kistl.App.Base.IntegerRangeConstraint, int> OnMin_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.IntegerRangeConstraint, int> OnMin_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.IntegerRangeConstraint, int> OnMin_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.IntegerRangeConstraint, int> OnMin_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.IntegerRangeConstraint, int> OnMin_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.IntegerRangeConstraint, int> OnMin_PostSetter;
         /// <summary>
         /// 
         /// </summary>
@@ -151,7 +151,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-		public event GetErrorText_Handler<IntegerRangeConstraint> OnGetErrorText_IntegerRangeConstraint;
+		public static event GetErrorText_Handler<IntegerRangeConstraint> OnGetErrorText_IntegerRangeConstraint;
 
 
 
@@ -172,7 +172,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-		public event IsValid_Handler<IntegerRangeConstraint> OnIsValid_IntegerRangeConstraint;
+		public static event IsValid_Handler<IntegerRangeConstraint> OnIsValid_IntegerRangeConstraint;
 
 
 
@@ -207,7 +207,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-        public event ToStringHandler<IntegerRangeConstraint> OnToString_IntegerRangeConstraint;
+        public static event ToStringHandler<IntegerRangeConstraint> OnToString_IntegerRangeConstraint;
 
         [EventBasedMethod("OnPreSave_IntegerRangeConstraint")]
         public override void NotifyPreSave()
@@ -215,7 +215,7 @@ namespace Kistl.App.Base
             base.NotifyPreSave();
             if (OnPreSave_IntegerRangeConstraint != null) OnPreSave_IntegerRangeConstraint(this);
         }
-        public event ObjectEventHandler<IntegerRangeConstraint> OnPreSave_IntegerRangeConstraint;
+        public static event ObjectEventHandler<IntegerRangeConstraint> OnPreSave_IntegerRangeConstraint;
 
         [EventBasedMethod("OnPostSave_IntegerRangeConstraint")]
         public override void NotifyPostSave()
@@ -223,7 +223,7 @@ namespace Kistl.App.Base
             base.NotifyPostSave();
             if (OnPostSave_IntegerRangeConstraint != null) OnPostSave_IntegerRangeConstraint(this);
         }
-        public event ObjectEventHandler<IntegerRangeConstraint> OnPostSave_IntegerRangeConstraint;
+        public static event ObjectEventHandler<IntegerRangeConstraint> OnPostSave_IntegerRangeConstraint;
 
         [EventBasedMethod("OnCreated_IntegerRangeConstraint")]
         public override void NotifyCreated()
@@ -231,7 +231,7 @@ namespace Kistl.App.Base
             base.NotifyCreated();
             if (OnCreated_IntegerRangeConstraint != null) OnCreated_IntegerRangeConstraint(this);
         }
-        public event ObjectEventHandler<IntegerRangeConstraint> OnCreated_IntegerRangeConstraint;
+        public static event ObjectEventHandler<IntegerRangeConstraint> OnCreated_IntegerRangeConstraint;
 
         [EventBasedMethod("OnDeleting_IntegerRangeConstraint")]
         public override void NotifyDeleting()
@@ -239,7 +239,7 @@ namespace Kistl.App.Base
             base.NotifyDeleting();
             if (OnDeleting_IntegerRangeConstraint != null) OnDeleting_IntegerRangeConstraint(this);
         }
-        public event ObjectEventHandler<IntegerRangeConstraint> OnDeleting_IntegerRangeConstraint;
+        public static event ObjectEventHandler<IntegerRangeConstraint> OnDeleting_IntegerRangeConstraint;
 
 
 		protected override string GetPropertyError(string propertyName) 

@@ -80,9 +80,9 @@ namespace Kistl.App.Base
             }
         }
         private bool _EagerLoading;
-		public event PropertyGetterHandler<Kistl.App.Base.ObjectReferenceProperty, bool> OnEagerLoading_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.ObjectReferenceProperty, bool> OnEagerLoading_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.ObjectReferenceProperty, bool> OnEagerLoading_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.ObjectReferenceProperty, bool> OnEagerLoading_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.ObjectReferenceProperty, bool> OnEagerLoading_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.ObjectReferenceProperty, bool> OnEagerLoading_PostSetter;
         /// <summary>
         /// The RelationEnd describing this Property
         /// </summary>
@@ -170,9 +170,9 @@ namespace Kistl.App.Base
         }
         
         
-		public event PropertyGetterHandler<Kistl.App.Base.ObjectReferenceProperty, Kistl.App.Base.RelationEnd> OnRelationEnd_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.ObjectReferenceProperty, Kistl.App.Base.RelationEnd> OnRelationEnd_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.ObjectReferenceProperty, Kistl.App.Base.RelationEnd> OnRelationEnd_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.ObjectReferenceProperty, Kistl.App.Base.RelationEnd> OnRelationEnd_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.ObjectReferenceProperty, Kistl.App.Base.RelationEnd> OnRelationEnd_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.ObjectReferenceProperty, Kistl.App.Base.RelationEnd> OnRelationEnd_PostSetter;
         /// <summary>
         /// Returns the resulting Type of this Property Meta Object.
         /// </summary>
@@ -190,7 +190,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-		public event GetPropertyType_Handler<ObjectReferenceProperty> OnGetPropertyType_ObjectReferenceProperty;
+		public static event GetPropertyType_Handler<ObjectReferenceProperty> OnGetPropertyType_ObjectReferenceProperty;
 
 
 
@@ -211,7 +211,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-		public event GetPropertyTypeString_Handler<ObjectReferenceProperty> OnGetPropertyTypeString_ObjectReferenceProperty;
+		public static event GetPropertyTypeString_Handler<ObjectReferenceProperty> OnGetPropertyTypeString_ObjectReferenceProperty;
 
 
 
@@ -246,7 +246,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-        public event ToStringHandler<ObjectReferenceProperty> OnToString_ObjectReferenceProperty;
+        public static event ToStringHandler<ObjectReferenceProperty> OnToString_ObjectReferenceProperty;
 
         [EventBasedMethod("OnPreSave_ObjectReferenceProperty")]
         public override void NotifyPreSave()
@@ -254,7 +254,7 @@ namespace Kistl.App.Base
             base.NotifyPreSave();
             if (OnPreSave_ObjectReferenceProperty != null) OnPreSave_ObjectReferenceProperty(this);
         }
-        public event ObjectEventHandler<ObjectReferenceProperty> OnPreSave_ObjectReferenceProperty;
+        public static event ObjectEventHandler<ObjectReferenceProperty> OnPreSave_ObjectReferenceProperty;
 
         [EventBasedMethod("OnPostSave_ObjectReferenceProperty")]
         public override void NotifyPostSave()
@@ -262,7 +262,7 @@ namespace Kistl.App.Base
             base.NotifyPostSave();
             if (OnPostSave_ObjectReferenceProperty != null) OnPostSave_ObjectReferenceProperty(this);
         }
-        public event ObjectEventHandler<ObjectReferenceProperty> OnPostSave_ObjectReferenceProperty;
+        public static event ObjectEventHandler<ObjectReferenceProperty> OnPostSave_ObjectReferenceProperty;
 
         [EventBasedMethod("OnCreated_ObjectReferenceProperty")]
         public override void NotifyCreated()
@@ -270,7 +270,7 @@ namespace Kistl.App.Base
             base.NotifyCreated();
             if (OnCreated_ObjectReferenceProperty != null) OnCreated_ObjectReferenceProperty(this);
         }
-        public event ObjectEventHandler<ObjectReferenceProperty> OnCreated_ObjectReferenceProperty;
+        public static event ObjectEventHandler<ObjectReferenceProperty> OnCreated_ObjectReferenceProperty;
 
         [EventBasedMethod("OnDeleting_ObjectReferenceProperty")]
         public override void NotifyDeleting()
@@ -278,7 +278,7 @@ namespace Kistl.App.Base
             base.NotifyDeleting();
             if (OnDeleting_ObjectReferenceProperty != null) OnDeleting_ObjectReferenceProperty(this);
         }
-        public event ObjectEventHandler<ObjectReferenceProperty> OnDeleting_ObjectReferenceProperty;
+        public static event ObjectEventHandler<ObjectReferenceProperty> OnDeleting_ObjectReferenceProperty;
 
 
 		protected override string GetPropertyError(string propertyName) 

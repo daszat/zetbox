@@ -144,9 +144,9 @@ namespace Kistl.App.Base
         }
         
         
-		public event PropertyGetterHandler<Kistl.App.Base.Relation, Kistl.App.Base.RelationEnd> OnA_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.Relation, Kistl.App.Base.RelationEnd> OnA_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.Relation, Kistl.App.Base.RelationEnd> OnA_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.Relation, Kistl.App.Base.RelationEnd> OnA_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.Relation, Kistl.App.Base.RelationEnd> OnA_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.Relation, Kistl.App.Base.RelationEnd> OnA_PostSetter;
         /// <summary>
         /// The B-side of this Relation.
         /// </summary>
@@ -234,9 +234,9 @@ namespace Kistl.App.Base
         }
         
         
-		public event PropertyGetterHandler<Kistl.App.Base.Relation, Kistl.App.Base.RelationEnd> OnB_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.Relation, Kistl.App.Base.RelationEnd> OnB_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.Relation, Kistl.App.Base.RelationEnd> OnB_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.Relation, Kistl.App.Base.RelationEnd> OnB_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.Relation, Kistl.App.Base.RelationEnd> OnB_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.Relation, Kistl.App.Base.RelationEnd> OnB_PostSetter;
         /// <summary>
         /// Identity which changed this object
         /// </summary>
@@ -324,9 +324,9 @@ namespace Kistl.App.Base
         }
         
         
-		public event PropertyGetterHandler<Kistl.App.Base.Relation, Kistl.App.Base.Identity> OnChangedBy_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.Relation, Kistl.App.Base.Identity> OnChangedBy_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.Relation, Kistl.App.Base.Identity> OnChangedBy_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.Relation, Kistl.App.Base.Identity> OnChangedBy_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.Relation, Kistl.App.Base.Identity> OnChangedBy_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.Relation, Kistl.App.Base.Identity> OnChangedBy_PostSetter;
         /// <summary>
         /// Date and time where this object was changed
         /// </summary>
@@ -375,9 +375,9 @@ namespace Kistl.App.Base
             }
         }
         private DateTime? _ChangedOn;
-		public event PropertyGetterHandler<Kistl.App.Base.Relation, DateTime?> OnChangedOn_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.Relation, DateTime?> OnChangedOn_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.Relation, DateTime?> OnChangedOn_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.Relation, DateTime?> OnChangedOn_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.Relation, DateTime?> OnChangedOn_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.Relation, DateTime?> OnChangedOn_PostSetter;
         /// <summary>
         /// Identity which created this object
         /// </summary>
@@ -465,9 +465,9 @@ namespace Kistl.App.Base
         }
         
         
-		public event PropertyGetterHandler<Kistl.App.Base.Relation, Kistl.App.Base.Identity> OnCreatedBy_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.Relation, Kistl.App.Base.Identity> OnCreatedBy_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.Relation, Kistl.App.Base.Identity> OnCreatedBy_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.Relation, Kistl.App.Base.Identity> OnCreatedBy_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.Relation, Kistl.App.Base.Identity> OnCreatedBy_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.Relation, Kistl.App.Base.Identity> OnCreatedBy_PostSetter;
         /// <summary>
         /// Date and time where this object was created
         /// </summary>
@@ -516,9 +516,9 @@ namespace Kistl.App.Base
             }
         }
         private DateTime? _CreatedOn;
-		public event PropertyGetterHandler<Kistl.App.Base.Relation, DateTime?> OnCreatedOn_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.Relation, DateTime?> OnCreatedOn_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.Relation, DateTime?> OnCreatedOn_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.Relation, DateTime?> OnCreatedOn_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.Relation, DateTime?> OnCreatedOn_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.Relation, DateTime?> OnCreatedOn_PostSetter;
         /// <summary>
         /// Description of this Relation
         /// </summary>
@@ -567,9 +567,9 @@ namespace Kistl.App.Base
             }
         }
         private string _Description;
-		public event PropertyGetterHandler<Kistl.App.Base.Relation, string> OnDescription_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.Relation, string> OnDescription_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.Relation, string> OnDescription_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.Relation, string> OnDescription_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.Relation, string> OnDescription_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.Relation, string> OnDescription_PostSetter;
         /// <summary>
         /// Export Guid
         /// </summary>
@@ -629,9 +629,9 @@ namespace Kistl.App.Base
             }
         }
         private Guid _ExportGuid;
-		public event PropertyGetterHandler<Kistl.App.Base.Relation, Guid> OnExportGuid_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.Relation, Guid> OnExportGuid_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.Relation, Guid> OnExportGuid_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.Relation, Guid> OnExportGuid_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.Relation, Guid> OnExportGuid_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.Relation, Guid> OnExportGuid_PostSetter;
         /// <summary>
         /// 
         /// </summary>
@@ -719,9 +719,9 @@ namespace Kistl.App.Base
         }
         
         
-		public event PropertyGetterHandler<Kistl.App.Base.Relation, Kistl.App.Base.Module> OnModule_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.Relation, Kistl.App.Base.Module> OnModule_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.Relation, Kistl.App.Base.Module> OnModule_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.Relation, Kistl.App.Base.Module> OnModule_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.Relation, Kistl.App.Base.Module> OnModule_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.Relation, Kistl.App.Base.Module> OnModule_PostSetter;
         /// <summary>
         /// Storagetype for 1:1 Relations. Must be null for non 1:1 Relations.
         /// </summary>
@@ -786,9 +786,9 @@ namespace Kistl.App.Base
             }
         }
         
-		public event PropertyGetterHandler<Kistl.App.Base.Relation, Kistl.App.Base.StorageType> OnStorage_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.Relation, Kistl.App.Base.StorageType> OnStorage_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.Relation, Kistl.App.Base.StorageType> OnStorage_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.Relation, Kistl.App.Base.StorageType> OnStorage_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.Relation, Kistl.App.Base.StorageType> OnStorage_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.Relation, Kistl.App.Base.StorageType> OnStorage_PostSetter;
         /// <summary>
         /// Verb of this Relation
         /// </summary>
@@ -837,9 +837,9 @@ namespace Kistl.App.Base
             }
         }
         private string _Verb;
-		public event PropertyGetterHandler<Kistl.App.Base.Relation, string> OnVerb_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.Relation, string> OnVerb_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.Relation, string> OnVerb_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.Relation, string> OnVerb_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.Relation, string> OnVerb_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.Relation, string> OnVerb_PostSetter;
         /// <summary>
         /// 
         /// </summary>
@@ -858,7 +858,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
 		public delegate void GetEnd_Handler<T>(T obj, MethodReturnEventArgs<Kistl.App.Base.RelationEnd> ret, Kistl.App.Base.ObjectReferenceProperty prop);
-		public event GetEnd_Handler<Relation> OnGetEnd_Relation;
+		public static event GetEnd_Handler<Relation> OnGetEnd_Relation;
 
 
 
@@ -880,7 +880,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
 		public delegate void GetEndFromRole_Handler<T>(T obj, MethodReturnEventArgs<Kistl.App.Base.RelationEnd> ret, Kistl.API.RelationEndRole role);
-		public event GetEndFromRole_Handler<Relation> OnGetEndFromRole_Relation;
+		public static event GetEndFromRole_Handler<Relation> OnGetEndFromRole_Relation;
 
 
 
@@ -902,7 +902,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
 		public delegate void GetOtherEnd_Handler<T>(T obj, MethodReturnEventArgs<Kistl.App.Base.RelationEnd> ret, Kistl.App.Base.RelationEnd relEnd);
-		public event GetOtherEnd_Handler<Relation> OnGetOtherEnd_Relation;
+		public static event GetOtherEnd_Handler<Relation> OnGetOtherEnd_Relation;
 
 
 
@@ -924,7 +924,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
 		public delegate void GetRelationType_Handler<T>(T obj, MethodReturnEventArgs<Kistl.API.RelationType> ret);
-		public event GetRelationType_Handler<Relation> OnGetRelationType_Relation;
+		public static event GetRelationType_Handler<Relation> OnGetRelationType_Relation;
 
 
 
@@ -946,7 +946,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
 		public delegate void NeedsPositionStorage_Handler<T>(T obj, MethodReturnEventArgs<bool> ret, Kistl.API.RelationEndRole endRole);
-		public event NeedsPositionStorage_Handler<Relation> OnNeedsPositionStorage_Relation;
+		public static event NeedsPositionStorage_Handler<Relation> OnNeedsPositionStorage_Relation;
 
 
 
@@ -990,7 +990,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-        public event ToStringHandler<Relation> OnToString_Relation;
+        public static event ToStringHandler<Relation> OnToString_Relation;
 
         [EventBasedMethod("OnPreSave_Relation")]
         public override void NotifyPreSave()
@@ -998,7 +998,7 @@ namespace Kistl.App.Base
             base.NotifyPreSave();
             if (OnPreSave_Relation != null) OnPreSave_Relation(this);
         }
-        public event ObjectEventHandler<Relation> OnPreSave_Relation;
+        public static event ObjectEventHandler<Relation> OnPreSave_Relation;
 
         [EventBasedMethod("OnPostSave_Relation")]
         public override void NotifyPostSave()
@@ -1006,7 +1006,7 @@ namespace Kistl.App.Base
             base.NotifyPostSave();
             if (OnPostSave_Relation != null) OnPostSave_Relation(this);
         }
-        public event ObjectEventHandler<Relation> OnPostSave_Relation;
+        public static event ObjectEventHandler<Relation> OnPostSave_Relation;
 
         [EventBasedMethod("OnCreated_Relation")]
         public override void NotifyCreated()
@@ -1014,7 +1014,7 @@ namespace Kistl.App.Base
             base.NotifyCreated();
             if (OnCreated_Relation != null) OnCreated_Relation(this);
         }
-        public event ObjectEventHandler<Relation> OnCreated_Relation;
+        public static event ObjectEventHandler<Relation> OnCreated_Relation;
 
         [EventBasedMethod("OnDeleting_Relation")]
         public override void NotifyDeleting()
@@ -1022,7 +1022,7 @@ namespace Kistl.App.Base
             base.NotifyDeleting();
             if (OnDeleting_Relation != null) OnDeleting_Relation(this);
         }
-        public event ObjectEventHandler<Relation> OnDeleting_Relation;
+        public static event ObjectEventHandler<Relation> OnDeleting_Relation;
 
 
 		protected override string GetPropertyError(string propertyName) 

@@ -105,9 +105,9 @@ namespace Kistl.App.Test
             }
         }
         private string _TestString;
-		public event PropertyGetterHandler<Kistl.App.Test.ANewObjectClass, string> OnTestString_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Test.ANewObjectClass, string> OnTestString_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Test.ANewObjectClass, string> OnTestString_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Test.ANewObjectClass, string> OnTestString_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Test.ANewObjectClass, string> OnTestString_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Test.ANewObjectClass, string> OnTestString_PostSetter;
 		public override InterfaceType GetInterfaceType()
 		{
 			return new InterfaceType(typeof(ANewObjectClass));
@@ -138,7 +138,7 @@ namespace Kistl.App.Test
             }
             return e.Result;
         }
-        public event ToStringHandler<ANewObjectClass> OnToString_ANewObjectClass;
+        public static event ToStringHandler<ANewObjectClass> OnToString_ANewObjectClass;
 
         [EventBasedMethod("OnPreSave_ANewObjectClass")]
         public override void NotifyPreSave()
@@ -146,7 +146,7 @@ namespace Kistl.App.Test
             base.NotifyPreSave();
             if (OnPreSave_ANewObjectClass != null) OnPreSave_ANewObjectClass(this);
         }
-        public event ObjectEventHandler<ANewObjectClass> OnPreSave_ANewObjectClass;
+        public static event ObjectEventHandler<ANewObjectClass> OnPreSave_ANewObjectClass;
 
         [EventBasedMethod("OnPostSave_ANewObjectClass")]
         public override void NotifyPostSave()
@@ -154,7 +154,7 @@ namespace Kistl.App.Test
             base.NotifyPostSave();
             if (OnPostSave_ANewObjectClass != null) OnPostSave_ANewObjectClass(this);
         }
-        public event ObjectEventHandler<ANewObjectClass> OnPostSave_ANewObjectClass;
+        public static event ObjectEventHandler<ANewObjectClass> OnPostSave_ANewObjectClass;
 
         [EventBasedMethod("OnCreated_ANewObjectClass")]
         public override void NotifyCreated()
@@ -162,7 +162,7 @@ namespace Kistl.App.Test
             base.NotifyCreated();
             if (OnCreated_ANewObjectClass != null) OnCreated_ANewObjectClass(this);
         }
-        public event ObjectEventHandler<ANewObjectClass> OnCreated_ANewObjectClass;
+        public static event ObjectEventHandler<ANewObjectClass> OnCreated_ANewObjectClass;
 
         [EventBasedMethod("OnDeleting_ANewObjectClass")]
         public override void NotifyDeleting()
@@ -170,7 +170,7 @@ namespace Kistl.App.Test
             base.NotifyDeleting();
             if (OnDeleting_ANewObjectClass != null) OnDeleting_ANewObjectClass(this);
         }
-        public event ObjectEventHandler<ANewObjectClass> OnDeleting_ANewObjectClass;
+        public static event ObjectEventHandler<ANewObjectClass> OnDeleting_ANewObjectClass;
 
 
 		protected override string GetPropertyError(string propertyName) 

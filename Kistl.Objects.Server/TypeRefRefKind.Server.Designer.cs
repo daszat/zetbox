@@ -61,7 +61,7 @@ namespace Kistl.App.GUI
             }
             return e.Result;
         }
-        public event ToStringHandler<TypeRefRefKind> OnToString_TypeRefRefKind;
+        public static event ToStringHandler<TypeRefRefKind> OnToString_TypeRefRefKind;
 
         [EventBasedMethod("OnPreSave_TypeRefRefKind")]
         public override void NotifyPreSave()
@@ -69,7 +69,7 @@ namespace Kistl.App.GUI
             base.NotifyPreSave();
             if (OnPreSave_TypeRefRefKind != null) OnPreSave_TypeRefRefKind(this);
         }
-        public event ObjectEventHandler<TypeRefRefKind> OnPreSave_TypeRefRefKind;
+        public static event ObjectEventHandler<TypeRefRefKind> OnPreSave_TypeRefRefKind;
 
         [EventBasedMethod("OnPostSave_TypeRefRefKind")]
         public override void NotifyPostSave()
@@ -77,7 +77,7 @@ namespace Kistl.App.GUI
             base.NotifyPostSave();
             if (OnPostSave_TypeRefRefKind != null) OnPostSave_TypeRefRefKind(this);
         }
-        public event ObjectEventHandler<TypeRefRefKind> OnPostSave_TypeRefRefKind;
+        public static event ObjectEventHandler<TypeRefRefKind> OnPostSave_TypeRefRefKind;
 
         [EventBasedMethod("OnCreated_TypeRefRefKind")]
         public override void NotifyCreated()
@@ -85,7 +85,7 @@ namespace Kistl.App.GUI
             base.NotifyCreated();
             if (OnCreated_TypeRefRefKind != null) OnCreated_TypeRefRefKind(this);
         }
-        public event ObjectEventHandler<TypeRefRefKind> OnCreated_TypeRefRefKind;
+        public static event ObjectEventHandler<TypeRefRefKind> OnCreated_TypeRefRefKind;
 
         [EventBasedMethod("OnDeleting_TypeRefRefKind")]
         public override void NotifyDeleting()
@@ -93,7 +93,7 @@ namespace Kistl.App.GUI
             base.NotifyDeleting();
             if (OnDeleting_TypeRefRefKind != null) OnDeleting_TypeRefRefKind(this);
         }
-        public event ObjectEventHandler<TypeRefRefKind> OnDeleting_TypeRefRefKind;
+        public static event ObjectEventHandler<TypeRefRefKind> OnDeleting_TypeRefRefKind;
 
 
 

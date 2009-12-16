@@ -119,9 +119,9 @@ namespace Kistl.App.Base
         }
         
         
-		public event PropertyGetterHandler<Kistl.App.Base.EnumerationProperty, Kistl.App.Base.Enumeration> OnEnumeration_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.EnumerationProperty, Kistl.App.Base.Enumeration> OnEnumeration_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.EnumerationProperty, Kistl.App.Base.Enumeration> OnEnumeration_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.EnumerationProperty, Kistl.App.Base.Enumeration> OnEnumeration_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.EnumerationProperty, Kistl.App.Base.Enumeration> OnEnumeration_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.EnumerationProperty, Kistl.App.Base.Enumeration> OnEnumeration_PostSetter;
         /// <summary>
         /// Returns the resulting Type of this Property Meta Object.
         /// </summary>
@@ -139,7 +139,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-		public event GetPropertyType_Handler<EnumerationProperty> OnGetPropertyType_EnumerationProperty;
+		public static event GetPropertyType_Handler<EnumerationProperty> OnGetPropertyType_EnumerationProperty;
 
 
 
@@ -160,7 +160,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-		public event GetPropertyTypeString_Handler<EnumerationProperty> OnGetPropertyTypeString_EnumerationProperty;
+		public static event GetPropertyTypeString_Handler<EnumerationProperty> OnGetPropertyTypeString_EnumerationProperty;
 
 
 
@@ -194,7 +194,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-        public event ToStringHandler<EnumerationProperty> OnToString_EnumerationProperty;
+        public static event ToStringHandler<EnumerationProperty> OnToString_EnumerationProperty;
 
         [EventBasedMethod("OnPreSave_EnumerationProperty")]
         public override void NotifyPreSave()
@@ -202,7 +202,7 @@ namespace Kistl.App.Base
             base.NotifyPreSave();
             if (OnPreSave_EnumerationProperty != null) OnPreSave_EnumerationProperty(this);
         }
-        public event ObjectEventHandler<EnumerationProperty> OnPreSave_EnumerationProperty;
+        public static event ObjectEventHandler<EnumerationProperty> OnPreSave_EnumerationProperty;
 
         [EventBasedMethod("OnPostSave_EnumerationProperty")]
         public override void NotifyPostSave()
@@ -210,7 +210,7 @@ namespace Kistl.App.Base
             base.NotifyPostSave();
             if (OnPostSave_EnumerationProperty != null) OnPostSave_EnumerationProperty(this);
         }
-        public event ObjectEventHandler<EnumerationProperty> OnPostSave_EnumerationProperty;
+        public static event ObjectEventHandler<EnumerationProperty> OnPostSave_EnumerationProperty;
 
         [EventBasedMethod("OnCreated_EnumerationProperty")]
         public override void NotifyCreated()
@@ -218,7 +218,7 @@ namespace Kistl.App.Base
             base.NotifyCreated();
             if (OnCreated_EnumerationProperty != null) OnCreated_EnumerationProperty(this);
         }
-        public event ObjectEventHandler<EnumerationProperty> OnCreated_EnumerationProperty;
+        public static event ObjectEventHandler<EnumerationProperty> OnCreated_EnumerationProperty;
 
         [EventBasedMethod("OnDeleting_EnumerationProperty")]
         public override void NotifyDeleting()
@@ -226,7 +226,7 @@ namespace Kistl.App.Base
             base.NotifyDeleting();
             if (OnDeleting_EnumerationProperty != null) OnDeleting_EnumerationProperty(this);
         }
-        public event ObjectEventHandler<EnumerationProperty> OnDeleting_EnumerationProperty;
+        public static event ObjectEventHandler<EnumerationProperty> OnDeleting_EnumerationProperty;
 
 
 		protected override string GetPropertyError(string propertyName) 

@@ -105,9 +105,9 @@ namespace Kistl.App.Test
             }
         }
         private string _Name;
-		public event PropertyGetterHandler<Kistl.App.Test.Company, string> OnName_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Test.Company, string> OnName_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Test.Company, string> OnName_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Test.Company, string> OnName_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Test.Company, string> OnName_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Test.Company, string> OnName_PostSetter;
 		public override InterfaceType GetInterfaceType()
 		{
 			return new InterfaceType(typeof(Company));
@@ -138,7 +138,7 @@ namespace Kistl.App.Test
             }
             return e.Result;
         }
-        public event ToStringHandler<Company> OnToString_Company;
+        public static event ToStringHandler<Company> OnToString_Company;
 
         [EventBasedMethod("OnPreSave_Company")]
         public override void NotifyPreSave()
@@ -146,7 +146,7 @@ namespace Kistl.App.Test
             base.NotifyPreSave();
             if (OnPreSave_Company != null) OnPreSave_Company(this);
         }
-        public event ObjectEventHandler<Company> OnPreSave_Company;
+        public static event ObjectEventHandler<Company> OnPreSave_Company;
 
         [EventBasedMethod("OnPostSave_Company")]
         public override void NotifyPostSave()
@@ -154,7 +154,7 @@ namespace Kistl.App.Test
             base.NotifyPostSave();
             if (OnPostSave_Company != null) OnPostSave_Company(this);
         }
-        public event ObjectEventHandler<Company> OnPostSave_Company;
+        public static event ObjectEventHandler<Company> OnPostSave_Company;
 
         [EventBasedMethod("OnCreated_Company")]
         public override void NotifyCreated()
@@ -162,7 +162,7 @@ namespace Kistl.App.Test
             base.NotifyCreated();
             if (OnCreated_Company != null) OnCreated_Company(this);
         }
-        public event ObjectEventHandler<Company> OnCreated_Company;
+        public static event ObjectEventHandler<Company> OnCreated_Company;
 
         [EventBasedMethod("OnDeleting_Company")]
         public override void NotifyDeleting()
@@ -170,7 +170,7 @@ namespace Kistl.App.Test
             base.NotifyDeleting();
             if (OnDeleting_Company != null) OnDeleting_Company(this);
         }
-        public event ObjectEventHandler<Company> OnDeleting_Company;
+        public static event ObjectEventHandler<Company> OnDeleting_Company;
 
 
 		protected override string GetPropertyError(string propertyName) 

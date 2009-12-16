@@ -144,9 +144,9 @@ namespace Kistl.App.Base
         }
         
         
-		public event PropertyGetterHandler<Kistl.App.Base.Constraint, Kistl.App.Base.Identity> OnChangedBy_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.Constraint, Kistl.App.Base.Identity> OnChangedBy_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.Constraint, Kistl.App.Base.Identity> OnChangedBy_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.Constraint, Kistl.App.Base.Identity> OnChangedBy_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.Constraint, Kistl.App.Base.Identity> OnChangedBy_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.Constraint, Kistl.App.Base.Identity> OnChangedBy_PostSetter;
         /// <summary>
         /// Date and time where this object was changed
         /// </summary>
@@ -195,9 +195,9 @@ namespace Kistl.App.Base
             }
         }
         private DateTime? _ChangedOn;
-		public event PropertyGetterHandler<Kistl.App.Base.Constraint, DateTime?> OnChangedOn_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.Constraint, DateTime?> OnChangedOn_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.Constraint, DateTime?> OnChangedOn_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.Constraint, DateTime?> OnChangedOn_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.Constraint, DateTime?> OnChangedOn_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.Constraint, DateTime?> OnChangedOn_PostSetter;
         /// <summary>
         /// The property to be constrained
         /// </summary>
@@ -285,9 +285,9 @@ namespace Kistl.App.Base
         }
         
         
-		public event PropertyGetterHandler<Kistl.App.Base.Constraint, Kistl.App.Base.Property> OnConstrainedProperty_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.Constraint, Kistl.App.Base.Property> OnConstrainedProperty_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.Constraint, Kistl.App.Base.Property> OnConstrainedProperty_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.Constraint, Kistl.App.Base.Property> OnConstrainedProperty_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.Constraint, Kistl.App.Base.Property> OnConstrainedProperty_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.Constraint, Kistl.App.Base.Property> OnConstrainedProperty_PostSetter;
         /// <summary>
         /// Identity which created this object
         /// </summary>
@@ -375,9 +375,9 @@ namespace Kistl.App.Base
         }
         
         
-		public event PropertyGetterHandler<Kistl.App.Base.Constraint, Kistl.App.Base.Identity> OnCreatedBy_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.Constraint, Kistl.App.Base.Identity> OnCreatedBy_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.Constraint, Kistl.App.Base.Identity> OnCreatedBy_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.Constraint, Kistl.App.Base.Identity> OnCreatedBy_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.Constraint, Kistl.App.Base.Identity> OnCreatedBy_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.Constraint, Kistl.App.Base.Identity> OnCreatedBy_PostSetter;
         /// <summary>
         /// Date and time where this object was created
         /// </summary>
@@ -426,9 +426,9 @@ namespace Kistl.App.Base
             }
         }
         private DateTime? _CreatedOn;
-		public event PropertyGetterHandler<Kistl.App.Base.Constraint, DateTime?> OnCreatedOn_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.Constraint, DateTime?> OnCreatedOn_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.Constraint, DateTime?> OnCreatedOn_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.Constraint, DateTime?> OnCreatedOn_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.Constraint, DateTime?> OnCreatedOn_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.Constraint, DateTime?> OnCreatedOn_PostSetter;
         /// <summary>
         /// Export Guid
         /// </summary>
@@ -488,9 +488,9 @@ namespace Kistl.App.Base
             }
         }
         private Guid _ExportGuid;
-		public event PropertyGetterHandler<Kistl.App.Base.Constraint, Guid> OnExportGuid_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.Constraint, Guid> OnExportGuid_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.Constraint, Guid> OnExportGuid_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.Constraint, Guid> OnExportGuid_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.Constraint, Guid> OnExportGuid_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.Constraint, Guid> OnExportGuid_PostSetter;
         /// <summary>
         /// The reason of this constraint
         /// </summary>
@@ -539,9 +539,9 @@ namespace Kistl.App.Base
             }
         }
         private string _Reason;
-		public event PropertyGetterHandler<Kistl.App.Base.Constraint, string> OnReason_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.Constraint, string> OnReason_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.Constraint, string> OnReason_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.Constraint, string> OnReason_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.Constraint, string> OnReason_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.Constraint, string> OnReason_PostSetter;
         /// <summary>
         /// 
         /// </summary>
@@ -560,7 +560,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
 		public delegate void GetErrorText_Handler<T>(T obj, MethodReturnEventArgs<string> ret, System.Object constrainedObject, System.Object constrainedValue);
-		public event GetErrorText_Handler<Constraint> OnGetErrorText_Constraint;
+		public static event GetErrorText_Handler<Constraint> OnGetErrorText_Constraint;
 
 
 
@@ -582,7 +582,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
 		public delegate void IsValid_Handler<T>(T obj, MethodReturnEventArgs<bool> ret, System.Object constrainedObject, System.Object constrainedValue);
-		public event IsValid_Handler<Constraint> OnIsValid_Constraint;
+		public static event IsValid_Handler<Constraint> OnIsValid_Constraint;
 
 
 
@@ -622,7 +622,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-        public event ToStringHandler<Constraint> OnToString_Constraint;
+        public static event ToStringHandler<Constraint> OnToString_Constraint;
 
         [EventBasedMethod("OnPreSave_Constraint")]
         public override void NotifyPreSave()
@@ -630,7 +630,7 @@ namespace Kistl.App.Base
             base.NotifyPreSave();
             if (OnPreSave_Constraint != null) OnPreSave_Constraint(this);
         }
-        public event ObjectEventHandler<Constraint> OnPreSave_Constraint;
+        public static event ObjectEventHandler<Constraint> OnPreSave_Constraint;
 
         [EventBasedMethod("OnPostSave_Constraint")]
         public override void NotifyPostSave()
@@ -638,7 +638,7 @@ namespace Kistl.App.Base
             base.NotifyPostSave();
             if (OnPostSave_Constraint != null) OnPostSave_Constraint(this);
         }
-        public event ObjectEventHandler<Constraint> OnPostSave_Constraint;
+        public static event ObjectEventHandler<Constraint> OnPostSave_Constraint;
 
         [EventBasedMethod("OnCreated_Constraint")]
         public override void NotifyCreated()
@@ -646,7 +646,7 @@ namespace Kistl.App.Base
             base.NotifyCreated();
             if (OnCreated_Constraint != null) OnCreated_Constraint(this);
         }
-        public event ObjectEventHandler<Constraint> OnCreated_Constraint;
+        public static event ObjectEventHandler<Constraint> OnCreated_Constraint;
 
         [EventBasedMethod("OnDeleting_Constraint")]
         public override void NotifyDeleting()
@@ -654,7 +654,7 @@ namespace Kistl.App.Base
             base.NotifyDeleting();
             if (OnDeleting_Constraint != null) OnDeleting_Constraint(this);
         }
-        public event ObjectEventHandler<Constraint> OnDeleting_Constraint;
+        public static event ObjectEventHandler<Constraint> OnDeleting_Constraint;
 
 
 		protected override string GetPropertyError(string propertyName) 

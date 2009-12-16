@@ -119,9 +119,9 @@ namespace Kistl.App.Base
         }
         
         
-		public event PropertyGetterHandler<Kistl.App.Base.ObjectClass, Kistl.App.Base.ObjectClass> OnBaseObjectClass_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.ObjectClass, Kistl.App.Base.ObjectClass> OnBaseObjectClass_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.ObjectClass, Kistl.App.Base.ObjectClass> OnBaseObjectClass_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.ObjectClass, Kistl.App.Base.ObjectClass> OnBaseObjectClass_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.ObjectClass, Kistl.App.Base.ObjectClass> OnBaseObjectClass_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.ObjectClass, Kistl.App.Base.ObjectClass> OnBaseObjectClass_PostSetter;
         /// <summary>
         /// The default PresentableModel to use for this ObjectClass
         /// </summary>
@@ -209,9 +209,9 @@ namespace Kistl.App.Base
         }
         
         
-		public event PropertyGetterHandler<Kistl.App.Base.ObjectClass, Kistl.App.GUI.PresentableModelDescriptor> OnDefaultPresentableModelDescriptor_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.ObjectClass, Kistl.App.GUI.PresentableModelDescriptor> OnDefaultPresentableModelDescriptor_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.ObjectClass, Kistl.App.GUI.PresentableModelDescriptor> OnDefaultPresentableModelDescriptor_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.ObjectClass, Kistl.App.GUI.PresentableModelDescriptor> OnDefaultPresentableModelDescriptor_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.ObjectClass, Kistl.App.GUI.PresentableModelDescriptor> OnDefaultPresentableModelDescriptor_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.ObjectClass, Kistl.App.GUI.PresentableModelDescriptor> OnDefaultPresentableModelDescriptor_PostSetter;
         /// <summary>
         /// Interfaces der Objektklasse
         /// </summary>
@@ -308,9 +308,9 @@ namespace Kistl.App.Base
             }
         }
         private bool _IsFrozenObject;
-		public event PropertyGetterHandler<Kistl.App.Base.ObjectClass, bool> OnIsFrozenObject_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.ObjectClass, bool> OnIsFrozenObject_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.ObjectClass, bool> OnIsFrozenObject_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.ObjectClass, bool> OnIsFrozenObject_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.ObjectClass, bool> OnIsFrozenObject_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.ObjectClass, bool> OnIsFrozenObject_PostSetter;
         /// <summary>
         /// Setting this to true marks the instances of this class as &quot;simple.&quot; At first this will only mean that they'll be displayed inline.
         /// </summary>
@@ -359,9 +359,9 @@ namespace Kistl.App.Base
             }
         }
         private bool _IsSimpleObject;
-		public event PropertyGetterHandler<Kistl.App.Base.ObjectClass, bool> OnIsSimpleObject_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.ObjectClass, bool> OnIsSimpleObject_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.ObjectClass, bool> OnIsSimpleObject_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.ObjectClass, bool> OnIsSimpleObject_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.ObjectClass, bool> OnIsSimpleObject_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.ObjectClass, bool> OnIsSimpleObject_PostSetter;
         /// <summary>
         /// Liste der vererbten Klassen
         /// </summary>
@@ -458,9 +458,9 @@ namespace Kistl.App.Base
             }
         }
         private string _TableName;
-		public event PropertyGetterHandler<Kistl.App.Base.ObjectClass, string> OnTableName_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.ObjectClass, string> OnTableName_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.ObjectClass, string> OnTableName_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.ObjectClass, string> OnTableName_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.ObjectClass, string> OnTableName_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.ObjectClass, string> OnTableName_PostSetter;
         /// <summary>
         /// Creates, if needed, all default  Methods
         /// </summary>
@@ -478,7 +478,7 @@ namespace Kistl.App.Base
 			}
         }
 		public delegate void CreateDefaultMethods_Handler<T>(T obj);
-		public event CreateDefaultMethods_Handler<ObjectClass> OnCreateDefaultMethods_ObjectClass;
+		public static event CreateDefaultMethods_Handler<ObjectClass> OnCreateDefaultMethods_ObjectClass;
 
 
 
@@ -500,7 +500,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
 		public delegate void CreateMethod_Handler<T>(T obj, MethodReturnEventArgs<Kistl.App.Base.Method> ret);
-		public event CreateMethod_Handler<ObjectClass> OnCreateMethod_ObjectClass;
+		public static event CreateMethod_Handler<ObjectClass> OnCreateMethod_ObjectClass;
 
 
 
@@ -522,7 +522,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
 		public delegate void CreateRelation_Handler<T>(T obj, MethodReturnEventArgs<Kistl.App.Base.Relation> ret);
-		public event CreateRelation_Handler<ObjectClass> OnCreateRelation_ObjectClass;
+		public static event CreateRelation_Handler<ObjectClass> OnCreateRelation_ObjectClass;
 
 
 
@@ -543,7 +543,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-		public event GetDataType_Handler<ObjectClass> OnGetDataType_ObjectClass;
+		public static event GetDataType_Handler<ObjectClass> OnGetDataType_ObjectClass;
 
 
 
@@ -564,7 +564,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-		public event GetDataTypeString_Handler<ObjectClass> OnGetDataTypeString_ObjectClass;
+		public static event GetDataTypeString_Handler<ObjectClass> OnGetDataTypeString_ObjectClass;
 
 
 
@@ -586,7 +586,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
 		public delegate void GetInheritedMethods_Handler<T>(T obj, MethodReturnEventArgs<IList<Kistl.App.Base.Method>> ret);
-		public event GetInheritedMethods_Handler<ObjectClass> OnGetInheritedMethods_ObjectClass;
+		public static event GetInheritedMethods_Handler<ObjectClass> OnGetInheritedMethods_ObjectClass;
 
 
 
@@ -607,7 +607,7 @@ namespace Kistl.App.Base
 			}
         }
 		public delegate void ImplementInterfaces_Handler<T>(T obj);
-		public event ImplementInterfaces_Handler<ObjectClass> OnImplementInterfaces_ObjectClass;
+		public static event ImplementInterfaces_Handler<ObjectClass> OnImplementInterfaces_ObjectClass;
 
 
 
@@ -645,7 +645,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-        public event ToStringHandler<ObjectClass> OnToString_ObjectClass;
+        public static event ToStringHandler<ObjectClass> OnToString_ObjectClass;
 
         [EventBasedMethod("OnPreSave_ObjectClass")]
         public override void NotifyPreSave()
@@ -653,7 +653,7 @@ namespace Kistl.App.Base
             base.NotifyPreSave();
             if (OnPreSave_ObjectClass != null) OnPreSave_ObjectClass(this);
         }
-        public event ObjectEventHandler<ObjectClass> OnPreSave_ObjectClass;
+        public static event ObjectEventHandler<ObjectClass> OnPreSave_ObjectClass;
 
         [EventBasedMethod("OnPostSave_ObjectClass")]
         public override void NotifyPostSave()
@@ -661,7 +661,7 @@ namespace Kistl.App.Base
             base.NotifyPostSave();
             if (OnPostSave_ObjectClass != null) OnPostSave_ObjectClass(this);
         }
-        public event ObjectEventHandler<ObjectClass> OnPostSave_ObjectClass;
+        public static event ObjectEventHandler<ObjectClass> OnPostSave_ObjectClass;
 
         [EventBasedMethod("OnCreated_ObjectClass")]
         public override void NotifyCreated()
@@ -669,7 +669,7 @@ namespace Kistl.App.Base
             base.NotifyCreated();
             if (OnCreated_ObjectClass != null) OnCreated_ObjectClass(this);
         }
-        public event ObjectEventHandler<ObjectClass> OnCreated_ObjectClass;
+        public static event ObjectEventHandler<ObjectClass> OnCreated_ObjectClass;
 
         [EventBasedMethod("OnDeleting_ObjectClass")]
         public override void NotifyDeleting()
@@ -677,7 +677,7 @@ namespace Kistl.App.Base
             base.NotifyDeleting();
             if (OnDeleting_ObjectClass != null) OnDeleting_ObjectClass(this);
         }
-        public event ObjectEventHandler<ObjectClass> OnDeleting_ObjectClass;
+        public static event ObjectEventHandler<ObjectClass> OnDeleting_ObjectClass;
 
 
 		protected override string GetPropertyError(string propertyName) 

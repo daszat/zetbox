@@ -61,7 +61,7 @@ namespace Kistl.App.GUI
             }
             return e.Result;
         }
-        public event ToStringHandler<CheckboxKind> OnToString_CheckboxKind;
+        public static event ToStringHandler<CheckboxKind> OnToString_CheckboxKind;
 
         [EventBasedMethod("OnPreSave_CheckboxKind")]
         public override void NotifyPreSave()
@@ -69,7 +69,7 @@ namespace Kistl.App.GUI
             base.NotifyPreSave();
             if (OnPreSave_CheckboxKind != null) OnPreSave_CheckboxKind(this);
         }
-        public event ObjectEventHandler<CheckboxKind> OnPreSave_CheckboxKind;
+        public static event ObjectEventHandler<CheckboxKind> OnPreSave_CheckboxKind;
 
         [EventBasedMethod("OnPostSave_CheckboxKind")]
         public override void NotifyPostSave()
@@ -77,7 +77,7 @@ namespace Kistl.App.GUI
             base.NotifyPostSave();
             if (OnPostSave_CheckboxKind != null) OnPostSave_CheckboxKind(this);
         }
-        public event ObjectEventHandler<CheckboxKind> OnPostSave_CheckboxKind;
+        public static event ObjectEventHandler<CheckboxKind> OnPostSave_CheckboxKind;
 
         [EventBasedMethod("OnCreated_CheckboxKind")]
         public override void NotifyCreated()
@@ -85,7 +85,7 @@ namespace Kistl.App.GUI
             base.NotifyCreated();
             if (OnCreated_CheckboxKind != null) OnCreated_CheckboxKind(this);
         }
-        public event ObjectEventHandler<CheckboxKind> OnCreated_CheckboxKind;
+        public static event ObjectEventHandler<CheckboxKind> OnCreated_CheckboxKind;
 
         [EventBasedMethod("OnDeleting_CheckboxKind")]
         public override void NotifyDeleting()
@@ -93,7 +93,7 @@ namespace Kistl.App.GUI
             base.NotifyDeleting();
             if (OnDeleting_CheckboxKind != null) OnDeleting_CheckboxKind(this);
         }
-        public event ObjectEventHandler<CheckboxKind> OnDeleting_CheckboxKind;
+        public static event ObjectEventHandler<CheckboxKind> OnDeleting_CheckboxKind;
 
 
 

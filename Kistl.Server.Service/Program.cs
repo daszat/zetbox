@@ -70,7 +70,11 @@ namespace Kistl.Server.Service
             bool waitForKey = false;
             try
             {
+                Logging.TraceTotalMemory("Before InitApplicationContext");
+
                 var config = InitApplicationContext(args);
+
+                Logging.TraceTotalMemory("After InitApplicationContext");
 
                 Server server = new Server();
                 bool actiondone = false;
@@ -198,6 +202,8 @@ namespace Kistl.Server.Service
 
                 if (actiondone)
                 {
+                    Logging.TraceTotalMemory("After commandline processed");
+
                     if (waitForKey)
                     {
                         Console.WriteLine("Hit the anykey to exit");
@@ -207,7 +213,9 @@ namespace Kistl.Server.Service
                 }
                 else
                 {
+                    Logging.TraceTotalMemory("Before DefaultInitialisation()");
                     DefaultInitialisation();
+                    Logging.TraceTotalMemory("After DefaultInitialisation()");
 
                     server.Start(config);
 

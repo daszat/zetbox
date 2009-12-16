@@ -61,7 +61,7 @@ namespace Kistl.App.GUI
             }
             return e.Result;
         }
-        public event ToStringHandler<LauncherKind> OnToString_LauncherKind;
+        public static event ToStringHandler<LauncherKind> OnToString_LauncherKind;
 
         [EventBasedMethod("OnPreSave_LauncherKind")]
         public override void NotifyPreSave()
@@ -69,7 +69,7 @@ namespace Kistl.App.GUI
             base.NotifyPreSave();
             if (OnPreSave_LauncherKind != null) OnPreSave_LauncherKind(this);
         }
-        public event ObjectEventHandler<LauncherKind> OnPreSave_LauncherKind;
+        public static event ObjectEventHandler<LauncherKind> OnPreSave_LauncherKind;
 
         [EventBasedMethod("OnPostSave_LauncherKind")]
         public override void NotifyPostSave()
@@ -77,7 +77,7 @@ namespace Kistl.App.GUI
             base.NotifyPostSave();
             if (OnPostSave_LauncherKind != null) OnPostSave_LauncherKind(this);
         }
-        public event ObjectEventHandler<LauncherKind> OnPostSave_LauncherKind;
+        public static event ObjectEventHandler<LauncherKind> OnPostSave_LauncherKind;
 
         [EventBasedMethod("OnCreated_LauncherKind")]
         public override void NotifyCreated()
@@ -85,7 +85,7 @@ namespace Kistl.App.GUI
             base.NotifyCreated();
             if (OnCreated_LauncherKind != null) OnCreated_LauncherKind(this);
         }
-        public event ObjectEventHandler<LauncherKind> OnCreated_LauncherKind;
+        public static event ObjectEventHandler<LauncherKind> OnCreated_LauncherKind;
 
         [EventBasedMethod("OnDeleting_LauncherKind")]
         public override void NotifyDeleting()
@@ -93,7 +93,7 @@ namespace Kistl.App.GUI
             base.NotifyDeleting();
             if (OnDeleting_LauncherKind != null) OnDeleting_LauncherKind(this);
         }
-        public event ObjectEventHandler<LauncherKind> OnDeleting_LauncherKind;
+        public static event ObjectEventHandler<LauncherKind> OnDeleting_LauncherKind;
 
 
 

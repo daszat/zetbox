@@ -105,9 +105,9 @@ namespace Kistl.App.TimeRecords
             }
         }
         private DateTime _From;
-		public event PropertyGetterHandler<Kistl.App.TimeRecords.WorkEffort, DateTime> OnFrom_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.TimeRecords.WorkEffort, DateTime> OnFrom_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.TimeRecords.WorkEffort, DateTime> OnFrom_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.TimeRecords.WorkEffort, DateTime> OnFrom_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.TimeRecords.WorkEffort, DateTime> OnFrom_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.TimeRecords.WorkEffort, DateTime> OnFrom_PostSetter;
         /// <summary>
         /// Which employee effected this work effort.
         /// </summary>
@@ -195,9 +195,9 @@ namespace Kistl.App.TimeRecords
         }
         
         
-		public event PropertyGetterHandler<Kistl.App.TimeRecords.WorkEffort, Kistl.App.Projekte.Mitarbeiter> OnMitarbeiter_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.TimeRecords.WorkEffort, Kistl.App.Projekte.Mitarbeiter> OnMitarbeiter_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.TimeRecords.WorkEffort, Kistl.App.Projekte.Mitarbeiter> OnMitarbeiter_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.TimeRecords.WorkEffort, Kistl.App.Projekte.Mitarbeiter> OnMitarbeiter_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.TimeRecords.WorkEffort, Kistl.App.Projekte.Mitarbeiter> OnMitarbeiter_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.TimeRecords.WorkEffort, Kistl.App.Projekte.Mitarbeiter> OnMitarbeiter_PostSetter;
         /// <summary>
         /// A short label describing this work effort.
         /// </summary>
@@ -246,9 +246,9 @@ namespace Kistl.App.TimeRecords
             }
         }
         private string _Name;
-		public event PropertyGetterHandler<Kistl.App.TimeRecords.WorkEffort, string> OnName_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.TimeRecords.WorkEffort, string> OnName_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.TimeRecords.WorkEffort, string> OnName_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.TimeRecords.WorkEffort, string> OnName_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.TimeRecords.WorkEffort, string> OnName_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.TimeRecords.WorkEffort, string> OnName_PostSetter;
         /// <summary>
         /// Space for notes
         /// </summary>
@@ -297,9 +297,9 @@ namespace Kistl.App.TimeRecords
             }
         }
         private string _Notes;
-		public event PropertyGetterHandler<Kistl.App.TimeRecords.WorkEffort, string> OnNotes_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.TimeRecords.WorkEffort, string> OnNotes_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.TimeRecords.WorkEffort, string> OnNotes_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.TimeRecords.WorkEffort, string> OnNotes_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.TimeRecords.WorkEffort, string> OnNotes_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.TimeRecords.WorkEffort, string> OnNotes_PostSetter;
         /// <summary>
         /// Point in time (inclusive) when the work effort ended.
         /// </summary>
@@ -348,9 +348,9 @@ namespace Kistl.App.TimeRecords
             }
         }
         private DateTime? _Thru;
-		public event PropertyGetterHandler<Kistl.App.TimeRecords.WorkEffort, DateTime?> OnThru_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.TimeRecords.WorkEffort, DateTime?> OnThru_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.TimeRecords.WorkEffort, DateTime?> OnThru_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.TimeRecords.WorkEffort, DateTime?> OnThru_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.TimeRecords.WorkEffort, DateTime?> OnThru_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.TimeRecords.WorkEffort, DateTime?> OnThru_PostSetter;
 		public override InterfaceType GetInterfaceType()
 		{
 			return new InterfaceType(typeof(WorkEffort));
@@ -385,7 +385,7 @@ namespace Kistl.App.TimeRecords
             }
             return e.Result;
         }
-        public event ToStringHandler<WorkEffort> OnToString_WorkEffort;
+        public static event ToStringHandler<WorkEffort> OnToString_WorkEffort;
 
         [EventBasedMethod("OnPreSave_WorkEffort")]
         public override void NotifyPreSave()
@@ -393,7 +393,7 @@ namespace Kistl.App.TimeRecords
             base.NotifyPreSave();
             if (OnPreSave_WorkEffort != null) OnPreSave_WorkEffort(this);
         }
-        public event ObjectEventHandler<WorkEffort> OnPreSave_WorkEffort;
+        public static event ObjectEventHandler<WorkEffort> OnPreSave_WorkEffort;
 
         [EventBasedMethod("OnPostSave_WorkEffort")]
         public override void NotifyPostSave()
@@ -401,7 +401,7 @@ namespace Kistl.App.TimeRecords
             base.NotifyPostSave();
             if (OnPostSave_WorkEffort != null) OnPostSave_WorkEffort(this);
         }
-        public event ObjectEventHandler<WorkEffort> OnPostSave_WorkEffort;
+        public static event ObjectEventHandler<WorkEffort> OnPostSave_WorkEffort;
 
         [EventBasedMethod("OnCreated_WorkEffort")]
         public override void NotifyCreated()
@@ -409,7 +409,7 @@ namespace Kistl.App.TimeRecords
             base.NotifyCreated();
             if (OnCreated_WorkEffort != null) OnCreated_WorkEffort(this);
         }
-        public event ObjectEventHandler<WorkEffort> OnCreated_WorkEffort;
+        public static event ObjectEventHandler<WorkEffort> OnCreated_WorkEffort;
 
         [EventBasedMethod("OnDeleting_WorkEffort")]
         public override void NotifyDeleting()
@@ -417,7 +417,7 @@ namespace Kistl.App.TimeRecords
             base.NotifyDeleting();
             if (OnDeleting_WorkEffort != null) OnDeleting_WorkEffort(this);
         }
-        public event ObjectEventHandler<WorkEffort> OnDeleting_WorkEffort;
+        public static event ObjectEventHandler<WorkEffort> OnDeleting_WorkEffort;
 
 
 		protected override string GetPropertyError(string propertyName) 

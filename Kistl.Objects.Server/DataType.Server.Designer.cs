@@ -144,9 +144,9 @@ namespace Kistl.App.Base
         }
         
         
-		public event PropertyGetterHandler<Kistl.App.Base.DataType, Kistl.App.Base.Identity> OnChangedBy_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.DataType, Kistl.App.Base.Identity> OnChangedBy_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.DataType, Kistl.App.Base.Identity> OnChangedBy_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.DataType, Kistl.App.Base.Identity> OnChangedBy_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.DataType, Kistl.App.Base.Identity> OnChangedBy_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.DataType, Kistl.App.Base.Identity> OnChangedBy_PostSetter;
         /// <summary>
         /// Date and time where this object was changed
         /// </summary>
@@ -195,9 +195,9 @@ namespace Kistl.App.Base
             }
         }
         private DateTime? _ChangedOn;
-		public event PropertyGetterHandler<Kistl.App.Base.DataType, DateTime?> OnChangedOn_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.DataType, DateTime?> OnChangedOn_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.DataType, DateTime?> OnChangedOn_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.DataType, DateTime?> OnChangedOn_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.DataType, DateTime?> OnChangedOn_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.DataType, DateTime?> OnChangedOn_PostSetter;
         /// <summary>
         /// Der Name der Objektklasse
         /// </summary>
@@ -246,9 +246,9 @@ namespace Kistl.App.Base
             }
         }
         private string _ClassName;
-		public event PropertyGetterHandler<Kistl.App.Base.DataType, string> OnClassName_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.DataType, string> OnClassName_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.DataType, string> OnClassName_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.DataType, string> OnClassName_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.DataType, string> OnClassName_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.DataType, string> OnClassName_PostSetter;
         /// <summary>
         /// Identity which created this object
         /// </summary>
@@ -336,9 +336,9 @@ namespace Kistl.App.Base
         }
         
         
-		public event PropertyGetterHandler<Kistl.App.Base.DataType, Kistl.App.Base.Identity> OnCreatedBy_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.DataType, Kistl.App.Base.Identity> OnCreatedBy_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.DataType, Kistl.App.Base.Identity> OnCreatedBy_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.DataType, Kistl.App.Base.Identity> OnCreatedBy_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.DataType, Kistl.App.Base.Identity> OnCreatedBy_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.DataType, Kistl.App.Base.Identity> OnCreatedBy_PostSetter;
         /// <summary>
         /// Date and time where this object was created
         /// </summary>
@@ -387,9 +387,9 @@ namespace Kistl.App.Base
             }
         }
         private DateTime? _CreatedOn;
-		public event PropertyGetterHandler<Kistl.App.Base.DataType, DateTime?> OnCreatedOn_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.DataType, DateTime?> OnCreatedOn_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.DataType, DateTime?> OnCreatedOn_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.DataType, DateTime?> OnCreatedOn_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.DataType, DateTime?> OnCreatedOn_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.DataType, DateTime?> OnCreatedOn_PostSetter;
         /// <summary>
         /// Standard Icon wenn IIcon nicht implementiert ist
         /// </summary>
@@ -477,9 +477,9 @@ namespace Kistl.App.Base
         }
         
         
-		public event PropertyGetterHandler<Kistl.App.Base.DataType, Kistl.App.GUI.Icon> OnDefaultIcon_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.DataType, Kistl.App.GUI.Icon> OnDefaultIcon_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.DataType, Kistl.App.GUI.Icon> OnDefaultIcon_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.DataType, Kistl.App.GUI.Icon> OnDefaultIcon_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.DataType, Kistl.App.GUI.Icon> OnDefaultIcon_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.DataType, Kistl.App.GUI.Icon> OnDefaultIcon_PostSetter;
         /// <summary>
         /// Description of this DataType
         /// </summary>
@@ -528,9 +528,9 @@ namespace Kistl.App.Base
             }
         }
         private string _Description;
-		public event PropertyGetterHandler<Kistl.App.Base.DataType, string> OnDescription_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.DataType, string> OnDescription_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.DataType, string> OnDescription_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.DataType, string> OnDescription_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.DataType, string> OnDescription_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.DataType, string> OnDescription_PostSetter;
         /// <summary>
         /// Export Guid
         /// </summary>
@@ -590,9 +590,9 @@ namespace Kistl.App.Base
             }
         }
         private Guid _ExportGuid;
-		public event PropertyGetterHandler<Kistl.App.Base.DataType, Guid> OnExportGuid_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.DataType, Guid> OnExportGuid_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.DataType, Guid> OnExportGuid_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.DataType, Guid> OnExportGuid_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.DataType, Guid> OnExportGuid_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.DataType, Guid> OnExportGuid_PostSetter;
         /// <summary>
         /// all implemented Methods in this DataType
         /// </summary>
@@ -778,9 +778,9 @@ namespace Kistl.App.Base
         }
         
         
-		public event PropertyGetterHandler<Kistl.App.Base.DataType, Kistl.App.Base.Module> OnModule_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.DataType, Kistl.App.Base.Module> OnModule_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.DataType, Kistl.App.Base.Module> OnModule_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.DataType, Kistl.App.Base.Module> OnModule_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.DataType, Kistl.App.Base.Module> OnModule_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.DataType, Kistl.App.Base.Module> OnModule_PostSetter;
         /// <summary>
         /// Eigenschaften der Objektklasse
         /// </summary>
@@ -878,9 +878,9 @@ namespace Kistl.App.Base
             }
         }
         private bool _ShowIconInLists;
-		public event PropertyGetterHandler<Kistl.App.Base.DataType, bool> OnShowIconInLists_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.DataType, bool> OnShowIconInLists_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.DataType, bool> OnShowIconInLists_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.DataType, bool> OnShowIconInLists_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.DataType, bool> OnShowIconInLists_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.DataType, bool> OnShowIconInLists_PostSetter;
         /// <summary>
         /// 
         /// </summary>
@@ -929,9 +929,9 @@ namespace Kistl.App.Base
             }
         }
         private bool _ShowIdInLists;
-		public event PropertyGetterHandler<Kistl.App.Base.DataType, bool> OnShowIdInLists_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.DataType, bool> OnShowIdInLists_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.DataType, bool> OnShowIdInLists_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.DataType, bool> OnShowIdInLists_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.DataType, bool> OnShowIdInLists_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.DataType, bool> OnShowIdInLists_PostSetter;
         /// <summary>
         /// 
         /// </summary>
@@ -980,9 +980,9 @@ namespace Kistl.App.Base
             }
         }
         private bool _ShowNameInLists;
-		public event PropertyGetterHandler<Kistl.App.Base.DataType, bool> OnShowNameInLists_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.DataType, bool> OnShowNameInLists_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.DataType, bool> OnShowNameInLists_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.DataType, bool> OnShowNameInLists_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.DataType, bool> OnShowNameInLists_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.DataType, bool> OnShowNameInLists_PostSetter;
         /// <summary>
         /// Returns the resulting Type of this Datatype Meta Object.
         /// </summary>
@@ -1001,7 +1001,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
 		public delegate void GetDataType_Handler<T>(T obj, MethodReturnEventArgs<System.Type> ret);
-		public event GetDataType_Handler<DataType> OnGetDataType_DataType;
+		public static event GetDataType_Handler<DataType> OnGetDataType_DataType;
 
 
 
@@ -1023,7 +1023,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
 		public delegate void GetDataTypeString_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
-		public event GetDataTypeString_Handler<DataType> OnGetDataTypeString_DataType;
+		public static event GetDataTypeString_Handler<DataType> OnGetDataTypeString_DataType;
 
 
 
@@ -1068,7 +1068,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-        public event ToStringHandler<DataType> OnToString_DataType;
+        public static event ToStringHandler<DataType> OnToString_DataType;
 
         [EventBasedMethod("OnPreSave_DataType")]
         public override void NotifyPreSave()
@@ -1076,7 +1076,7 @@ namespace Kistl.App.Base
             base.NotifyPreSave();
             if (OnPreSave_DataType != null) OnPreSave_DataType(this);
         }
-        public event ObjectEventHandler<DataType> OnPreSave_DataType;
+        public static event ObjectEventHandler<DataType> OnPreSave_DataType;
 
         [EventBasedMethod("OnPostSave_DataType")]
         public override void NotifyPostSave()
@@ -1084,7 +1084,7 @@ namespace Kistl.App.Base
             base.NotifyPostSave();
             if (OnPostSave_DataType != null) OnPostSave_DataType(this);
         }
-        public event ObjectEventHandler<DataType> OnPostSave_DataType;
+        public static event ObjectEventHandler<DataType> OnPostSave_DataType;
 
         [EventBasedMethod("OnCreated_DataType")]
         public override void NotifyCreated()
@@ -1092,7 +1092,7 @@ namespace Kistl.App.Base
             base.NotifyCreated();
             if (OnCreated_DataType != null) OnCreated_DataType(this);
         }
-        public event ObjectEventHandler<DataType> OnCreated_DataType;
+        public static event ObjectEventHandler<DataType> OnCreated_DataType;
 
         [EventBasedMethod("OnDeleting_DataType")]
         public override void NotifyDeleting()
@@ -1100,7 +1100,7 @@ namespace Kistl.App.Base
             base.NotifyDeleting();
             if (OnDeleting_DataType != null) OnDeleting_DataType(this);
         }
-        public event ObjectEventHandler<DataType> OnDeleting_DataType;
+        public static event ObjectEventHandler<DataType> OnDeleting_DataType;
 
 
 		protected override string GetPropertyError(string propertyName) 

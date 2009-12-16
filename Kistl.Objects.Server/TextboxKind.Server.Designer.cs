@@ -61,7 +61,7 @@ namespace Kistl.App.GUI
             }
             return e.Result;
         }
-        public event ToStringHandler<TextboxKind> OnToString_TextboxKind;
+        public static event ToStringHandler<TextboxKind> OnToString_TextboxKind;
 
         [EventBasedMethod("OnPreSave_TextboxKind")]
         public override void NotifyPreSave()
@@ -69,7 +69,7 @@ namespace Kistl.App.GUI
             base.NotifyPreSave();
             if (OnPreSave_TextboxKind != null) OnPreSave_TextboxKind(this);
         }
-        public event ObjectEventHandler<TextboxKind> OnPreSave_TextboxKind;
+        public static event ObjectEventHandler<TextboxKind> OnPreSave_TextboxKind;
 
         [EventBasedMethod("OnPostSave_TextboxKind")]
         public override void NotifyPostSave()
@@ -77,7 +77,7 @@ namespace Kistl.App.GUI
             base.NotifyPostSave();
             if (OnPostSave_TextboxKind != null) OnPostSave_TextboxKind(this);
         }
-        public event ObjectEventHandler<TextboxKind> OnPostSave_TextboxKind;
+        public static event ObjectEventHandler<TextboxKind> OnPostSave_TextboxKind;
 
         [EventBasedMethod("OnCreated_TextboxKind")]
         public override void NotifyCreated()
@@ -85,7 +85,7 @@ namespace Kistl.App.GUI
             base.NotifyCreated();
             if (OnCreated_TextboxKind != null) OnCreated_TextboxKind(this);
         }
-        public event ObjectEventHandler<TextboxKind> OnCreated_TextboxKind;
+        public static event ObjectEventHandler<TextboxKind> OnCreated_TextboxKind;
 
         [EventBasedMethod("OnDeleting_TextboxKind")]
         public override void NotifyDeleting()
@@ -93,7 +93,7 @@ namespace Kistl.App.GUI
             base.NotifyDeleting();
             if (OnDeleting_TextboxKind != null) OnDeleting_TextboxKind(this);
         }
-        public event ObjectEventHandler<TextboxKind> OnDeleting_TextboxKind;
+        public static event ObjectEventHandler<TextboxKind> OnDeleting_TextboxKind;
 
 
 

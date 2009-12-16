@@ -80,9 +80,9 @@ namespace Kistl.App.Base
             }
         }
         private int _MaxLength;
-		public event PropertyGetterHandler<Kistl.App.Base.StringRangeConstraint, int> OnMaxLength_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.StringRangeConstraint, int> OnMaxLength_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.StringRangeConstraint, int> OnMaxLength_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.StringRangeConstraint, int> OnMaxLength_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.StringRangeConstraint, int> OnMaxLength_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.StringRangeConstraint, int> OnMaxLength_PostSetter;
         /// <summary>
         /// The minimal length of this StringProperty
         /// </summary>
@@ -131,9 +131,9 @@ namespace Kistl.App.Base
             }
         }
         private int _MinLength;
-		public event PropertyGetterHandler<Kistl.App.Base.StringRangeConstraint, int> OnMinLength_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.StringRangeConstraint, int> OnMinLength_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.StringRangeConstraint, int> OnMinLength_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.StringRangeConstraint, int> OnMinLength_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.StringRangeConstraint, int> OnMinLength_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.StringRangeConstraint, int> OnMinLength_PostSetter;
         /// <summary>
         /// 
         /// </summary>
@@ -151,7 +151,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-		public event GetErrorText_Handler<StringRangeConstraint> OnGetErrorText_StringRangeConstraint;
+		public static event GetErrorText_Handler<StringRangeConstraint> OnGetErrorText_StringRangeConstraint;
 
 
 
@@ -172,7 +172,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-		public event IsValid_Handler<StringRangeConstraint> OnIsValid_StringRangeConstraint;
+		public static event IsValid_Handler<StringRangeConstraint> OnIsValid_StringRangeConstraint;
 
 
 
@@ -207,7 +207,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-        public event ToStringHandler<StringRangeConstraint> OnToString_StringRangeConstraint;
+        public static event ToStringHandler<StringRangeConstraint> OnToString_StringRangeConstraint;
 
         [EventBasedMethod("OnPreSave_StringRangeConstraint")]
         public override void NotifyPreSave()
@@ -215,7 +215,7 @@ namespace Kistl.App.Base
             base.NotifyPreSave();
             if (OnPreSave_StringRangeConstraint != null) OnPreSave_StringRangeConstraint(this);
         }
-        public event ObjectEventHandler<StringRangeConstraint> OnPreSave_StringRangeConstraint;
+        public static event ObjectEventHandler<StringRangeConstraint> OnPreSave_StringRangeConstraint;
 
         [EventBasedMethod("OnPostSave_StringRangeConstraint")]
         public override void NotifyPostSave()
@@ -223,7 +223,7 @@ namespace Kistl.App.Base
             base.NotifyPostSave();
             if (OnPostSave_StringRangeConstraint != null) OnPostSave_StringRangeConstraint(this);
         }
-        public event ObjectEventHandler<StringRangeConstraint> OnPostSave_StringRangeConstraint;
+        public static event ObjectEventHandler<StringRangeConstraint> OnPostSave_StringRangeConstraint;
 
         [EventBasedMethod("OnCreated_StringRangeConstraint")]
         public override void NotifyCreated()
@@ -231,7 +231,7 @@ namespace Kistl.App.Base
             base.NotifyCreated();
             if (OnCreated_StringRangeConstraint != null) OnCreated_StringRangeConstraint(this);
         }
-        public event ObjectEventHandler<StringRangeConstraint> OnCreated_StringRangeConstraint;
+        public static event ObjectEventHandler<StringRangeConstraint> OnCreated_StringRangeConstraint;
 
         [EventBasedMethod("OnDeleting_StringRangeConstraint")]
         public override void NotifyDeleting()
@@ -239,7 +239,7 @@ namespace Kistl.App.Base
             base.NotifyDeleting();
             if (OnDeleting_StringRangeConstraint != null) OnDeleting_StringRangeConstraint(this);
         }
-        public event ObjectEventHandler<StringRangeConstraint> OnDeleting_StringRangeConstraint;
+        public static event ObjectEventHandler<StringRangeConstraint> OnDeleting_StringRangeConstraint;
 
 
 		protected override string GetPropertyError(string propertyName) 

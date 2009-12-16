@@ -49,7 +49,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-		public event GetErrorText_Handler<IsValidIdentifierConstraint> OnGetErrorText_IsValidIdentifierConstraint;
+		public static event GetErrorText_Handler<IsValidIdentifierConstraint> OnGetErrorText_IsValidIdentifierConstraint;
 
 
 
@@ -70,7 +70,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-		public event IsValid_Handler<IsValidIdentifierConstraint> OnIsValid_IsValidIdentifierConstraint;
+		public static event IsValid_Handler<IsValidIdentifierConstraint> OnIsValid_IsValidIdentifierConstraint;
 
 
 
@@ -103,7 +103,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-        public event ToStringHandler<IsValidIdentifierConstraint> OnToString_IsValidIdentifierConstraint;
+        public static event ToStringHandler<IsValidIdentifierConstraint> OnToString_IsValidIdentifierConstraint;
 
         [EventBasedMethod("OnPreSave_IsValidIdentifierConstraint")]
         public override void NotifyPreSave()
@@ -111,7 +111,7 @@ namespace Kistl.App.Base
             base.NotifyPreSave();
             if (OnPreSave_IsValidIdentifierConstraint != null) OnPreSave_IsValidIdentifierConstraint(this);
         }
-        public event ObjectEventHandler<IsValidIdentifierConstraint> OnPreSave_IsValidIdentifierConstraint;
+        public static event ObjectEventHandler<IsValidIdentifierConstraint> OnPreSave_IsValidIdentifierConstraint;
 
         [EventBasedMethod("OnPostSave_IsValidIdentifierConstraint")]
         public override void NotifyPostSave()
@@ -119,7 +119,7 @@ namespace Kistl.App.Base
             base.NotifyPostSave();
             if (OnPostSave_IsValidIdentifierConstraint != null) OnPostSave_IsValidIdentifierConstraint(this);
         }
-        public event ObjectEventHandler<IsValidIdentifierConstraint> OnPostSave_IsValidIdentifierConstraint;
+        public static event ObjectEventHandler<IsValidIdentifierConstraint> OnPostSave_IsValidIdentifierConstraint;
 
         [EventBasedMethod("OnCreated_IsValidIdentifierConstraint")]
         public override void NotifyCreated()
@@ -127,7 +127,7 @@ namespace Kistl.App.Base
             base.NotifyCreated();
             if (OnCreated_IsValidIdentifierConstraint != null) OnCreated_IsValidIdentifierConstraint(this);
         }
-        public event ObjectEventHandler<IsValidIdentifierConstraint> OnCreated_IsValidIdentifierConstraint;
+        public static event ObjectEventHandler<IsValidIdentifierConstraint> OnCreated_IsValidIdentifierConstraint;
 
         [EventBasedMethod("OnDeleting_IsValidIdentifierConstraint")]
         public override void NotifyDeleting()
@@ -135,7 +135,7 @@ namespace Kistl.App.Base
             base.NotifyDeleting();
             if (OnDeleting_IsValidIdentifierConstraint != null) OnDeleting_IsValidIdentifierConstraint(this);
         }
-        public event ObjectEventHandler<IsValidIdentifierConstraint> OnDeleting_IsValidIdentifierConstraint;
+        public static event ObjectEventHandler<IsValidIdentifierConstraint> OnDeleting_IsValidIdentifierConstraint;
 
 
 

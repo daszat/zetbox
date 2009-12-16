@@ -61,7 +61,7 @@ namespace Kistl.App.GUI
             }
             return e.Result;
         }
-        public event ToStringHandler<RelationEditorKind> OnToString_RelationEditorKind;
+        public static event ToStringHandler<RelationEditorKind> OnToString_RelationEditorKind;
 
         [EventBasedMethod("OnPreSave_RelationEditorKind")]
         public override void NotifyPreSave()
@@ -69,7 +69,7 @@ namespace Kistl.App.GUI
             base.NotifyPreSave();
             if (OnPreSave_RelationEditorKind != null) OnPreSave_RelationEditorKind(this);
         }
-        public event ObjectEventHandler<RelationEditorKind> OnPreSave_RelationEditorKind;
+        public static event ObjectEventHandler<RelationEditorKind> OnPreSave_RelationEditorKind;
 
         [EventBasedMethod("OnPostSave_RelationEditorKind")]
         public override void NotifyPostSave()
@@ -77,7 +77,7 @@ namespace Kistl.App.GUI
             base.NotifyPostSave();
             if (OnPostSave_RelationEditorKind != null) OnPostSave_RelationEditorKind(this);
         }
-        public event ObjectEventHandler<RelationEditorKind> OnPostSave_RelationEditorKind;
+        public static event ObjectEventHandler<RelationEditorKind> OnPostSave_RelationEditorKind;
 
         [EventBasedMethod("OnCreated_RelationEditorKind")]
         public override void NotifyCreated()
@@ -85,7 +85,7 @@ namespace Kistl.App.GUI
             base.NotifyCreated();
             if (OnCreated_RelationEditorKind != null) OnCreated_RelationEditorKind(this);
         }
-        public event ObjectEventHandler<RelationEditorKind> OnCreated_RelationEditorKind;
+        public static event ObjectEventHandler<RelationEditorKind> OnCreated_RelationEditorKind;
 
         [EventBasedMethod("OnDeleting_RelationEditorKind")]
         public override void NotifyDeleting()
@@ -93,7 +93,7 @@ namespace Kistl.App.GUI
             base.NotifyDeleting();
             if (OnDeleting_RelationEditorKind != null) OnDeleting_RelationEditorKind(this);
         }
-        public event ObjectEventHandler<RelationEditorKind> OnDeleting_RelationEditorKind;
+        public static event ObjectEventHandler<RelationEditorKind> OnDeleting_RelationEditorKind;
 
 
 

@@ -144,9 +144,9 @@ namespace Kistl.App.GUI
         }
         
         
-		public event PropertyGetterHandler<Kistl.App.GUI.PresentableModelDescriptor, Kistl.App.GUI.ControlKind> OnDefaultGridCellKind_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.GUI.PresentableModelDescriptor, Kistl.App.GUI.ControlKind> OnDefaultGridCellKind_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.GUI.PresentableModelDescriptor, Kistl.App.GUI.ControlKind> OnDefaultGridCellKind_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.GUI.PresentableModelDescriptor, Kistl.App.GUI.ControlKind> OnDefaultGridCellKind_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.GUI.PresentableModelDescriptor, Kistl.App.GUI.ControlKind> OnDefaultGridCellKind_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.GUI.PresentableModelDescriptor, Kistl.App.GUI.ControlKind> OnDefaultGridCellKind_PostSetter;
         /// <summary>
         /// The default ControlKind to use for this Presentable.
         /// </summary>
@@ -234,9 +234,9 @@ namespace Kistl.App.GUI
         }
         
         
-		public event PropertyGetterHandler<Kistl.App.GUI.PresentableModelDescriptor, Kistl.App.GUI.ControlKind> OnDefaultKind_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.GUI.PresentableModelDescriptor, Kistl.App.GUI.ControlKind> OnDefaultKind_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.GUI.PresentableModelDescriptor, Kistl.App.GUI.ControlKind> OnDefaultKind_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.GUI.PresentableModelDescriptor, Kistl.App.GUI.ControlKind> OnDefaultKind_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.GUI.PresentableModelDescriptor, Kistl.App.GUI.ControlKind> OnDefaultKind_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.GUI.PresentableModelDescriptor, Kistl.App.GUI.ControlKind> OnDefaultKind_PostSetter;
         /// <summary>
         /// describe this PresentableModel
         /// </summary>
@@ -285,9 +285,9 @@ namespace Kistl.App.GUI
             }
         }
         private string _Description;
-		public event PropertyGetterHandler<Kistl.App.GUI.PresentableModelDescriptor, string> OnDescription_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.GUI.PresentableModelDescriptor, string> OnDescription_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.GUI.PresentableModelDescriptor, string> OnDescription_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.GUI.PresentableModelDescriptor, string> OnDescription_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.GUI.PresentableModelDescriptor, string> OnDescription_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.GUI.PresentableModelDescriptor, string> OnDescription_PostSetter;
         /// <summary>
         /// Export Guid
         /// </summary>
@@ -347,9 +347,9 @@ namespace Kistl.App.GUI
             }
         }
         private Guid _ExportGuid;
-		public event PropertyGetterHandler<Kistl.App.GUI.PresentableModelDescriptor, Guid> OnExportGuid_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.GUI.PresentableModelDescriptor, Guid> OnExportGuid_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.GUI.PresentableModelDescriptor, Guid> OnExportGuid_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.GUI.PresentableModelDescriptor, Guid> OnExportGuid_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.GUI.PresentableModelDescriptor, Guid> OnExportGuid_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.GUI.PresentableModelDescriptor, Guid> OnExportGuid_PostSetter;
         /// <summary>
         /// 
         /// </summary>
@@ -437,9 +437,9 @@ namespace Kistl.App.GUI
         }
         
         
-		public event PropertyGetterHandler<Kistl.App.GUI.PresentableModelDescriptor, Kistl.App.Base.Module> OnModule_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.GUI.PresentableModelDescriptor, Kistl.App.Base.Module> OnModule_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.GUI.PresentableModelDescriptor, Kistl.App.Base.Module> OnModule_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.GUI.PresentableModelDescriptor, Kistl.App.Base.Module> OnModule_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.GUI.PresentableModelDescriptor, Kistl.App.Base.Module> OnModule_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.GUI.PresentableModelDescriptor, Kistl.App.Base.Module> OnModule_PostSetter;
         /// <summary>
         /// The described CLR class&apos; reference
         /// </summary>
@@ -527,9 +527,9 @@ namespace Kistl.App.GUI
         }
         
         
-		public event PropertyGetterHandler<Kistl.App.GUI.PresentableModelDescriptor, Kistl.App.Base.TypeRef> OnPresentableModelRef_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.GUI.PresentableModelDescriptor, Kistl.App.Base.TypeRef> OnPresentableModelRef_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.GUI.PresentableModelDescriptor, Kistl.App.Base.TypeRef> OnPresentableModelRef_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.GUI.PresentableModelDescriptor, Kistl.App.Base.TypeRef> OnPresentableModelRef_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.GUI.PresentableModelDescriptor, Kistl.App.Base.TypeRef> OnPresentableModelRef_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.GUI.PresentableModelDescriptor, Kistl.App.Base.TypeRef> OnPresentableModelRef_PostSetter;
         /// <summary>
         /// 
         /// </summary>
@@ -613,7 +613,7 @@ namespace Kistl.App.GUI
             }
             return e.Result;
         }
-        public event ToStringHandler<PresentableModelDescriptor> OnToString_PresentableModelDescriptor;
+        public static event ToStringHandler<PresentableModelDescriptor> OnToString_PresentableModelDescriptor;
 
         [EventBasedMethod("OnPreSave_PresentableModelDescriptor")]
         public override void NotifyPreSave()
@@ -621,7 +621,7 @@ namespace Kistl.App.GUI
             base.NotifyPreSave();
             if (OnPreSave_PresentableModelDescriptor != null) OnPreSave_PresentableModelDescriptor(this);
         }
-        public event ObjectEventHandler<PresentableModelDescriptor> OnPreSave_PresentableModelDescriptor;
+        public static event ObjectEventHandler<PresentableModelDescriptor> OnPreSave_PresentableModelDescriptor;
 
         [EventBasedMethod("OnPostSave_PresentableModelDescriptor")]
         public override void NotifyPostSave()
@@ -629,7 +629,7 @@ namespace Kistl.App.GUI
             base.NotifyPostSave();
             if (OnPostSave_PresentableModelDescriptor != null) OnPostSave_PresentableModelDescriptor(this);
         }
-        public event ObjectEventHandler<PresentableModelDescriptor> OnPostSave_PresentableModelDescriptor;
+        public static event ObjectEventHandler<PresentableModelDescriptor> OnPostSave_PresentableModelDescriptor;
 
         [EventBasedMethod("OnCreated_PresentableModelDescriptor")]
         public override void NotifyCreated()
@@ -637,7 +637,7 @@ namespace Kistl.App.GUI
             base.NotifyCreated();
             if (OnCreated_PresentableModelDescriptor != null) OnCreated_PresentableModelDescriptor(this);
         }
-        public event ObjectEventHandler<PresentableModelDescriptor> OnCreated_PresentableModelDescriptor;
+        public static event ObjectEventHandler<PresentableModelDescriptor> OnCreated_PresentableModelDescriptor;
 
         [EventBasedMethod("OnDeleting_PresentableModelDescriptor")]
         public override void NotifyDeleting()
@@ -645,7 +645,7 @@ namespace Kistl.App.GUI
             base.NotifyDeleting();
             if (OnDeleting_PresentableModelDescriptor != null) OnDeleting_PresentableModelDescriptor(this);
         }
-        public event ObjectEventHandler<PresentableModelDescriptor> OnDeleting_PresentableModelDescriptor;
+        public static event ObjectEventHandler<PresentableModelDescriptor> OnDeleting_PresentableModelDescriptor;
 
 
 		protected override string GetPropertyError(string propertyName) 

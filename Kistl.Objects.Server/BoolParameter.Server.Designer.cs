@@ -49,7 +49,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-		public event GetParameterType_Handler<BoolParameter> OnGetParameterType_BoolParameter;
+		public static event GetParameterType_Handler<BoolParameter> OnGetParameterType_BoolParameter;
 
 
 
@@ -70,7 +70,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-		public event GetParameterTypeString_Handler<BoolParameter> OnGetParameterTypeString_BoolParameter;
+		public static event GetParameterTypeString_Handler<BoolParameter> OnGetParameterTypeString_BoolParameter;
 
 
 
@@ -103,7 +103,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-        public event ToStringHandler<BoolParameter> OnToString_BoolParameter;
+        public static event ToStringHandler<BoolParameter> OnToString_BoolParameter;
 
         [EventBasedMethod("OnPreSave_BoolParameter")]
         public override void NotifyPreSave()
@@ -111,7 +111,7 @@ namespace Kistl.App.Base
             base.NotifyPreSave();
             if (OnPreSave_BoolParameter != null) OnPreSave_BoolParameter(this);
         }
-        public event ObjectEventHandler<BoolParameter> OnPreSave_BoolParameter;
+        public static event ObjectEventHandler<BoolParameter> OnPreSave_BoolParameter;
 
         [EventBasedMethod("OnPostSave_BoolParameter")]
         public override void NotifyPostSave()
@@ -119,7 +119,7 @@ namespace Kistl.App.Base
             base.NotifyPostSave();
             if (OnPostSave_BoolParameter != null) OnPostSave_BoolParameter(this);
         }
-        public event ObjectEventHandler<BoolParameter> OnPostSave_BoolParameter;
+        public static event ObjectEventHandler<BoolParameter> OnPostSave_BoolParameter;
 
         [EventBasedMethod("OnCreated_BoolParameter")]
         public override void NotifyCreated()
@@ -127,7 +127,7 @@ namespace Kistl.App.Base
             base.NotifyCreated();
             if (OnCreated_BoolParameter != null) OnCreated_BoolParameter(this);
         }
-        public event ObjectEventHandler<BoolParameter> OnCreated_BoolParameter;
+        public static event ObjectEventHandler<BoolParameter> OnCreated_BoolParameter;
 
         [EventBasedMethod("OnDeleting_BoolParameter")]
         public override void NotifyDeleting()
@@ -135,7 +135,7 @@ namespace Kistl.App.Base
             base.NotifyDeleting();
             if (OnDeleting_BoolParameter != null) OnDeleting_BoolParameter(this);
         }
-        public event ObjectEventHandler<BoolParameter> OnDeleting_BoolParameter;
+        public static event ObjectEventHandler<BoolParameter> OnDeleting_BoolParameter;
 
 
 

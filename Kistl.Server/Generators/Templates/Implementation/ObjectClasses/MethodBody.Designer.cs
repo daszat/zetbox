@@ -141,7 +141,7 @@ this.WriteObjects("		public delegate void ",  delegateName , "<T>(T obj, ",  ret
 
 
 #line 117 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\MethodBody.cst"
-this.WriteObjects("		public event ",  delegateName , "<",  dt.ClassName , "> ",  eventName , ";\r\n");
+this.WriteObjects("		public static event ",  delegateName , "<",  dt.ClassName , "> ",  eventName , ";\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("\r\n");
 

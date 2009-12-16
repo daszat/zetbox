@@ -119,9 +119,9 @@ namespace Kistl.App.Base
         }
         
         
-		public event PropertyGetterHandler<Kistl.App.Base.ObjectParameter, Kistl.App.Base.DataType> OnDataType_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.ObjectParameter, Kistl.App.Base.DataType> OnDataType_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.ObjectParameter, Kistl.App.Base.DataType> OnDataType_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.ObjectParameter, Kistl.App.Base.DataType> OnDataType_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.ObjectParameter, Kistl.App.Base.DataType> OnDataType_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.ObjectParameter, Kistl.App.Base.DataType> OnDataType_PostSetter;
         /// <summary>
         /// Returns the resulting Type of this Method-Parameter Meta Object.
         /// </summary>
@@ -139,7 +139,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-		public event GetParameterType_Handler<ObjectParameter> OnGetParameterType_ObjectParameter;
+		public static event GetParameterType_Handler<ObjectParameter> OnGetParameterType_ObjectParameter;
 
 
 
@@ -160,7 +160,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-		public event GetParameterTypeString_Handler<ObjectParameter> OnGetParameterTypeString_ObjectParameter;
+		public static event GetParameterTypeString_Handler<ObjectParameter> OnGetParameterTypeString_ObjectParameter;
 
 
 
@@ -194,7 +194,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-        public event ToStringHandler<ObjectParameter> OnToString_ObjectParameter;
+        public static event ToStringHandler<ObjectParameter> OnToString_ObjectParameter;
 
         [EventBasedMethod("OnPreSave_ObjectParameter")]
         public override void NotifyPreSave()
@@ -202,7 +202,7 @@ namespace Kistl.App.Base
             base.NotifyPreSave();
             if (OnPreSave_ObjectParameter != null) OnPreSave_ObjectParameter(this);
         }
-        public event ObjectEventHandler<ObjectParameter> OnPreSave_ObjectParameter;
+        public static event ObjectEventHandler<ObjectParameter> OnPreSave_ObjectParameter;
 
         [EventBasedMethod("OnPostSave_ObjectParameter")]
         public override void NotifyPostSave()
@@ -210,7 +210,7 @@ namespace Kistl.App.Base
             base.NotifyPostSave();
             if (OnPostSave_ObjectParameter != null) OnPostSave_ObjectParameter(this);
         }
-        public event ObjectEventHandler<ObjectParameter> OnPostSave_ObjectParameter;
+        public static event ObjectEventHandler<ObjectParameter> OnPostSave_ObjectParameter;
 
         [EventBasedMethod("OnCreated_ObjectParameter")]
         public override void NotifyCreated()
@@ -218,7 +218,7 @@ namespace Kistl.App.Base
             base.NotifyCreated();
             if (OnCreated_ObjectParameter != null) OnCreated_ObjectParameter(this);
         }
-        public event ObjectEventHandler<ObjectParameter> OnCreated_ObjectParameter;
+        public static event ObjectEventHandler<ObjectParameter> OnCreated_ObjectParameter;
 
         [EventBasedMethod("OnDeleting_ObjectParameter")]
         public override void NotifyDeleting()
@@ -226,7 +226,7 @@ namespace Kistl.App.Base
             base.NotifyDeleting();
             if (OnDeleting_ObjectParameter != null) OnDeleting_ObjectParameter(this);
         }
-        public event ObjectEventHandler<ObjectParameter> OnDeleting_ObjectParameter;
+        public static event ObjectEventHandler<ObjectParameter> OnDeleting_ObjectParameter;
 
 
 		protected override string GetPropertyError(string propertyName) 

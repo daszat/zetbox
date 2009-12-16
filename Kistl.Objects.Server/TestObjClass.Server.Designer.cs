@@ -105,9 +105,9 @@ namespace Kistl.App.Test
             }
         }
         private int? _MyIntProperty;
-		public event PropertyGetterHandler<Kistl.App.Test.TestObjClass, int?> OnMyIntProperty_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Test.TestObjClass, int?> OnMyIntProperty_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Test.TestObjClass, int?> OnMyIntProperty_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Test.TestObjClass, int?> OnMyIntProperty_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Test.TestObjClass, int?> OnMyIntProperty_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Test.TestObjClass, int?> OnMyIntProperty_PostSetter;
         /// <summary>
         /// testtest
         /// </summary>
@@ -195,9 +195,9 @@ namespace Kistl.App.Test
         }
         
         
-		public event PropertyGetterHandler<Kistl.App.Test.TestObjClass, Kistl.App.Projekte.Kunde> OnObjectProp_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Test.TestObjClass, Kistl.App.Projekte.Kunde> OnObjectProp_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Test.TestObjClass, Kistl.App.Projekte.Kunde> OnObjectProp_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Test.TestObjClass, Kistl.App.Projekte.Kunde> OnObjectProp_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Test.TestObjClass, Kistl.App.Projekte.Kunde> OnObjectProp_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Test.TestObjClass, Kistl.App.Projekte.Kunde> OnObjectProp_PostSetter;
         /// <summary>
         /// String Property
         /// </summary>
@@ -246,9 +246,9 @@ namespace Kistl.App.Test
             }
         }
         private string _StringProp;
-		public event PropertyGetterHandler<Kistl.App.Test.TestObjClass, string> OnStringProp_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Test.TestObjClass, string> OnStringProp_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Test.TestObjClass, string> OnStringProp_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Test.TestObjClass, string> OnStringProp_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Test.TestObjClass, string> OnStringProp_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Test.TestObjClass, string> OnStringProp_PostSetter;
         /// <summary>
         /// Test Enumeration Property
         /// </summary>
@@ -313,9 +313,9 @@ namespace Kistl.App.Test
             }
         }
         
-		public event PropertyGetterHandler<Kistl.App.Test.TestObjClass, Kistl.App.Test.TestEnum> OnTestEnumProp_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Test.TestObjClass, Kistl.App.Test.TestEnum> OnTestEnumProp_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Test.TestObjClass, Kistl.App.Test.TestEnum> OnTestEnumProp_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Test.TestObjClass, Kistl.App.Test.TestEnum> OnTestEnumProp_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Test.TestObjClass, Kistl.App.Test.TestEnum> OnTestEnumProp_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Test.TestObjClass, Kistl.App.Test.TestEnum> OnTestEnumProp_PostSetter;
         /// <summary>
         /// testmethod
         /// </summary>
@@ -333,7 +333,7 @@ namespace Kistl.App.Test
 			}
         }
 		public delegate void TestMethod_Handler<T>(T obj, System.DateTime DateTimeParamForTestMethod);
-		public event TestMethod_Handler<TestObjClass> OnTestMethod_TestObjClass;
+		public static event TestMethod_Handler<TestObjClass> OnTestMethod_TestObjClass;
 
 
 
@@ -370,7 +370,7 @@ namespace Kistl.App.Test
             }
             return e.Result;
         }
-        public event ToStringHandler<TestObjClass> OnToString_TestObjClass;
+        public static event ToStringHandler<TestObjClass> OnToString_TestObjClass;
 
         [EventBasedMethod("OnPreSave_TestObjClass")]
         public override void NotifyPreSave()
@@ -378,7 +378,7 @@ namespace Kistl.App.Test
             base.NotifyPreSave();
             if (OnPreSave_TestObjClass != null) OnPreSave_TestObjClass(this);
         }
-        public event ObjectEventHandler<TestObjClass> OnPreSave_TestObjClass;
+        public static event ObjectEventHandler<TestObjClass> OnPreSave_TestObjClass;
 
         [EventBasedMethod("OnPostSave_TestObjClass")]
         public override void NotifyPostSave()
@@ -386,7 +386,7 @@ namespace Kistl.App.Test
             base.NotifyPostSave();
             if (OnPostSave_TestObjClass != null) OnPostSave_TestObjClass(this);
         }
-        public event ObjectEventHandler<TestObjClass> OnPostSave_TestObjClass;
+        public static event ObjectEventHandler<TestObjClass> OnPostSave_TestObjClass;
 
         [EventBasedMethod("OnCreated_TestObjClass")]
         public override void NotifyCreated()
@@ -394,7 +394,7 @@ namespace Kistl.App.Test
             base.NotifyCreated();
             if (OnCreated_TestObjClass != null) OnCreated_TestObjClass(this);
         }
-        public event ObjectEventHandler<TestObjClass> OnCreated_TestObjClass;
+        public static event ObjectEventHandler<TestObjClass> OnCreated_TestObjClass;
 
         [EventBasedMethod("OnDeleting_TestObjClass")]
         public override void NotifyDeleting()
@@ -402,7 +402,7 @@ namespace Kistl.App.Test
             base.NotifyDeleting();
             if (OnDeleting_TestObjClass != null) OnDeleting_TestObjClass(this);
         }
-        public event ObjectEventHandler<TestObjClass> OnDeleting_TestObjClass;
+        public static event ObjectEventHandler<TestObjClass> OnDeleting_TestObjClass;
 
 
 		protected override string GetPropertyError(string propertyName) 

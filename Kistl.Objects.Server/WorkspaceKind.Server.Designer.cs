@@ -61,7 +61,7 @@ namespace Kistl.App.GUI
             }
             return e.Result;
         }
-        public event ToStringHandler<WorkspaceKind> OnToString_WorkspaceKind;
+        public static event ToStringHandler<WorkspaceKind> OnToString_WorkspaceKind;
 
         [EventBasedMethod("OnPreSave_WorkspaceKind")]
         public override void NotifyPreSave()
@@ -69,7 +69,7 @@ namespace Kistl.App.GUI
             base.NotifyPreSave();
             if (OnPreSave_WorkspaceKind != null) OnPreSave_WorkspaceKind(this);
         }
-        public event ObjectEventHandler<WorkspaceKind> OnPreSave_WorkspaceKind;
+        public static event ObjectEventHandler<WorkspaceKind> OnPreSave_WorkspaceKind;
 
         [EventBasedMethod("OnPostSave_WorkspaceKind")]
         public override void NotifyPostSave()
@@ -77,7 +77,7 @@ namespace Kistl.App.GUI
             base.NotifyPostSave();
             if (OnPostSave_WorkspaceKind != null) OnPostSave_WorkspaceKind(this);
         }
-        public event ObjectEventHandler<WorkspaceKind> OnPostSave_WorkspaceKind;
+        public static event ObjectEventHandler<WorkspaceKind> OnPostSave_WorkspaceKind;
 
         [EventBasedMethod("OnCreated_WorkspaceKind")]
         public override void NotifyCreated()
@@ -85,7 +85,7 @@ namespace Kistl.App.GUI
             base.NotifyCreated();
             if (OnCreated_WorkspaceKind != null) OnCreated_WorkspaceKind(this);
         }
-        public event ObjectEventHandler<WorkspaceKind> OnCreated_WorkspaceKind;
+        public static event ObjectEventHandler<WorkspaceKind> OnCreated_WorkspaceKind;
 
         [EventBasedMethod("OnDeleting_WorkspaceKind")]
         public override void NotifyDeleting()
@@ -93,7 +93,7 @@ namespace Kistl.App.GUI
             base.NotifyDeleting();
             if (OnDeleting_WorkspaceKind != null) OnDeleting_WorkspaceKind(this);
         }
-        public event ObjectEventHandler<WorkspaceKind> OnDeleting_WorkspaceKind;
+        public static event ObjectEventHandler<WorkspaceKind> OnDeleting_WorkspaceKind;
 
 
 

@@ -144,9 +144,9 @@ namespace Kistl.App.Base
         }
         
         
-		public event PropertyGetterHandler<Kistl.App.Base.DefaultPropertyValue, Kistl.App.Base.Identity> OnChangedBy_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.DefaultPropertyValue, Kistl.App.Base.Identity> OnChangedBy_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.DefaultPropertyValue, Kistl.App.Base.Identity> OnChangedBy_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.DefaultPropertyValue, Kistl.App.Base.Identity> OnChangedBy_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.DefaultPropertyValue, Kistl.App.Base.Identity> OnChangedBy_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.DefaultPropertyValue, Kistl.App.Base.Identity> OnChangedBy_PostSetter;
         /// <summary>
         /// Date and time where this object was changed
         /// </summary>
@@ -195,9 +195,9 @@ namespace Kistl.App.Base
             }
         }
         private DateTime? _ChangedOn;
-		public event PropertyGetterHandler<Kistl.App.Base.DefaultPropertyValue, DateTime?> OnChangedOn_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.DefaultPropertyValue, DateTime?> OnChangedOn_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.DefaultPropertyValue, DateTime?> OnChangedOn_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.DefaultPropertyValue, DateTime?> OnChangedOn_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.DefaultPropertyValue, DateTime?> OnChangedOn_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.DefaultPropertyValue, DateTime?> OnChangedOn_PostSetter;
         /// <summary>
         /// Identity which created this object
         /// </summary>
@@ -285,9 +285,9 @@ namespace Kistl.App.Base
         }
         
         
-		public event PropertyGetterHandler<Kistl.App.Base.DefaultPropertyValue, Kistl.App.Base.Identity> OnCreatedBy_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.DefaultPropertyValue, Kistl.App.Base.Identity> OnCreatedBy_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.DefaultPropertyValue, Kistl.App.Base.Identity> OnCreatedBy_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.DefaultPropertyValue, Kistl.App.Base.Identity> OnCreatedBy_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.DefaultPropertyValue, Kistl.App.Base.Identity> OnCreatedBy_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.DefaultPropertyValue, Kistl.App.Base.Identity> OnCreatedBy_PostSetter;
         /// <summary>
         /// Date and time where this object was created
         /// </summary>
@@ -336,9 +336,9 @@ namespace Kistl.App.Base
             }
         }
         private DateTime? _CreatedOn;
-		public event PropertyGetterHandler<Kistl.App.Base.DefaultPropertyValue, DateTime?> OnCreatedOn_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.DefaultPropertyValue, DateTime?> OnCreatedOn_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.DefaultPropertyValue, DateTime?> OnCreatedOn_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.DefaultPropertyValue, DateTime?> OnCreatedOn_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.DefaultPropertyValue, DateTime?> OnCreatedOn_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.DefaultPropertyValue, DateTime?> OnCreatedOn_PostSetter;
         /// <summary>
         /// Export Guid
         /// </summary>
@@ -398,9 +398,9 @@ namespace Kistl.App.Base
             }
         }
         private Guid _ExportGuid;
-		public event PropertyGetterHandler<Kistl.App.Base.DefaultPropertyValue, Guid> OnExportGuid_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.DefaultPropertyValue, Guid> OnExportGuid_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.DefaultPropertyValue, Guid> OnExportGuid_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.DefaultPropertyValue, Guid> OnExportGuid_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.DefaultPropertyValue, Guid> OnExportGuid_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.DefaultPropertyValue, Guid> OnExportGuid_PostSetter;
         /// <summary>
         /// Property where the default value is set
         /// </summary>
@@ -488,9 +488,9 @@ namespace Kistl.App.Base
         }
         
         
-		public event PropertyGetterHandler<Kistl.App.Base.DefaultPropertyValue, Kistl.App.Base.Property> OnProperty_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.DefaultPropertyValue, Kistl.App.Base.Property> OnProperty_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.DefaultPropertyValue, Kistl.App.Base.Property> OnProperty_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.DefaultPropertyValue, Kistl.App.Base.Property> OnProperty_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.DefaultPropertyValue, Kistl.App.Base.Property> OnProperty_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.DefaultPropertyValue, Kistl.App.Base.Property> OnProperty_PostSetter;
         /// <summary>
         /// GetDefaultValue
         /// </summary>
@@ -509,7 +509,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
 		public delegate void GetDefaultValue_Handler<T>(T obj, MethodReturnEventArgs<System.Object> ret);
-		public event GetDefaultValue_Handler<DefaultPropertyValue> OnGetDefaultValue_DefaultPropertyValue;
+		public static event GetDefaultValue_Handler<DefaultPropertyValue> OnGetDefaultValue_DefaultPropertyValue;
 
 
 
@@ -548,7 +548,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-        public event ToStringHandler<DefaultPropertyValue> OnToString_DefaultPropertyValue;
+        public static event ToStringHandler<DefaultPropertyValue> OnToString_DefaultPropertyValue;
 
         [EventBasedMethod("OnPreSave_DefaultPropertyValue")]
         public override void NotifyPreSave()
@@ -556,7 +556,7 @@ namespace Kistl.App.Base
             base.NotifyPreSave();
             if (OnPreSave_DefaultPropertyValue != null) OnPreSave_DefaultPropertyValue(this);
         }
-        public event ObjectEventHandler<DefaultPropertyValue> OnPreSave_DefaultPropertyValue;
+        public static event ObjectEventHandler<DefaultPropertyValue> OnPreSave_DefaultPropertyValue;
 
         [EventBasedMethod("OnPostSave_DefaultPropertyValue")]
         public override void NotifyPostSave()
@@ -564,7 +564,7 @@ namespace Kistl.App.Base
             base.NotifyPostSave();
             if (OnPostSave_DefaultPropertyValue != null) OnPostSave_DefaultPropertyValue(this);
         }
-        public event ObjectEventHandler<DefaultPropertyValue> OnPostSave_DefaultPropertyValue;
+        public static event ObjectEventHandler<DefaultPropertyValue> OnPostSave_DefaultPropertyValue;
 
         [EventBasedMethod("OnCreated_DefaultPropertyValue")]
         public override void NotifyCreated()
@@ -572,7 +572,7 @@ namespace Kistl.App.Base
             base.NotifyCreated();
             if (OnCreated_DefaultPropertyValue != null) OnCreated_DefaultPropertyValue(this);
         }
-        public event ObjectEventHandler<DefaultPropertyValue> OnCreated_DefaultPropertyValue;
+        public static event ObjectEventHandler<DefaultPropertyValue> OnCreated_DefaultPropertyValue;
 
         [EventBasedMethod("OnDeleting_DefaultPropertyValue")]
         public override void NotifyDeleting()
@@ -580,7 +580,7 @@ namespace Kistl.App.Base
             base.NotifyDeleting();
             if (OnDeleting_DefaultPropertyValue != null) OnDeleting_DefaultPropertyValue(this);
         }
-        public event ObjectEventHandler<DefaultPropertyValue> OnDeleting_DefaultPropertyValue;
+        public static event ObjectEventHandler<DefaultPropertyValue> OnDeleting_DefaultPropertyValue;
 
 
 		protected override string GetPropertyError(string propertyName) 

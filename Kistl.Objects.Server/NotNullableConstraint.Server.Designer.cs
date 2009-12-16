@@ -49,7 +49,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-		public event GetErrorText_Handler<NotNullableConstraint> OnGetErrorText_NotNullableConstraint;
+		public static event GetErrorText_Handler<NotNullableConstraint> OnGetErrorText_NotNullableConstraint;
 
 
 
@@ -70,7 +70,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-		public event IsValid_Handler<NotNullableConstraint> OnIsValid_NotNullableConstraint;
+		public static event IsValid_Handler<NotNullableConstraint> OnIsValid_NotNullableConstraint;
 
 
 
@@ -103,7 +103,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-        public event ToStringHandler<NotNullableConstraint> OnToString_NotNullableConstraint;
+        public static event ToStringHandler<NotNullableConstraint> OnToString_NotNullableConstraint;
 
         [EventBasedMethod("OnPreSave_NotNullableConstraint")]
         public override void NotifyPreSave()
@@ -111,7 +111,7 @@ namespace Kistl.App.Base
             base.NotifyPreSave();
             if (OnPreSave_NotNullableConstraint != null) OnPreSave_NotNullableConstraint(this);
         }
-        public event ObjectEventHandler<NotNullableConstraint> OnPreSave_NotNullableConstraint;
+        public static event ObjectEventHandler<NotNullableConstraint> OnPreSave_NotNullableConstraint;
 
         [EventBasedMethod("OnPostSave_NotNullableConstraint")]
         public override void NotifyPostSave()
@@ -119,7 +119,7 @@ namespace Kistl.App.Base
             base.NotifyPostSave();
             if (OnPostSave_NotNullableConstraint != null) OnPostSave_NotNullableConstraint(this);
         }
-        public event ObjectEventHandler<NotNullableConstraint> OnPostSave_NotNullableConstraint;
+        public static event ObjectEventHandler<NotNullableConstraint> OnPostSave_NotNullableConstraint;
 
         [EventBasedMethod("OnCreated_NotNullableConstraint")]
         public override void NotifyCreated()
@@ -127,7 +127,7 @@ namespace Kistl.App.Base
             base.NotifyCreated();
             if (OnCreated_NotNullableConstraint != null) OnCreated_NotNullableConstraint(this);
         }
-        public event ObjectEventHandler<NotNullableConstraint> OnCreated_NotNullableConstraint;
+        public static event ObjectEventHandler<NotNullableConstraint> OnCreated_NotNullableConstraint;
 
         [EventBasedMethod("OnDeleting_NotNullableConstraint")]
         public override void NotifyDeleting()
@@ -135,7 +135,7 @@ namespace Kistl.App.Base
             base.NotifyDeleting();
             if (OnDeleting_NotNullableConstraint != null) OnDeleting_NotNullableConstraint(this);
         }
-        public event ObjectEventHandler<NotNullableConstraint> OnDeleting_NotNullableConstraint;
+        public static event ObjectEventHandler<NotNullableConstraint> OnDeleting_NotNullableConstraint;
 
 
 

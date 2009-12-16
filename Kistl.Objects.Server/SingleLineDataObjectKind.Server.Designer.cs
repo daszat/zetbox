@@ -61,7 +61,7 @@ namespace Kistl.App.GUI
             }
             return e.Result;
         }
-        public event ToStringHandler<SingleLineDataObjectKind> OnToString_SingleLineDataObjectKind;
+        public static event ToStringHandler<SingleLineDataObjectKind> OnToString_SingleLineDataObjectKind;
 
         [EventBasedMethod("OnPreSave_SingleLineDataObjectKind")]
         public override void NotifyPreSave()
@@ -69,7 +69,7 @@ namespace Kistl.App.GUI
             base.NotifyPreSave();
             if (OnPreSave_SingleLineDataObjectKind != null) OnPreSave_SingleLineDataObjectKind(this);
         }
-        public event ObjectEventHandler<SingleLineDataObjectKind> OnPreSave_SingleLineDataObjectKind;
+        public static event ObjectEventHandler<SingleLineDataObjectKind> OnPreSave_SingleLineDataObjectKind;
 
         [EventBasedMethod("OnPostSave_SingleLineDataObjectKind")]
         public override void NotifyPostSave()
@@ -77,7 +77,7 @@ namespace Kistl.App.GUI
             base.NotifyPostSave();
             if (OnPostSave_SingleLineDataObjectKind != null) OnPostSave_SingleLineDataObjectKind(this);
         }
-        public event ObjectEventHandler<SingleLineDataObjectKind> OnPostSave_SingleLineDataObjectKind;
+        public static event ObjectEventHandler<SingleLineDataObjectKind> OnPostSave_SingleLineDataObjectKind;
 
         [EventBasedMethod("OnCreated_SingleLineDataObjectKind")]
         public override void NotifyCreated()
@@ -85,7 +85,7 @@ namespace Kistl.App.GUI
             base.NotifyCreated();
             if (OnCreated_SingleLineDataObjectKind != null) OnCreated_SingleLineDataObjectKind(this);
         }
-        public event ObjectEventHandler<SingleLineDataObjectKind> OnCreated_SingleLineDataObjectKind;
+        public static event ObjectEventHandler<SingleLineDataObjectKind> OnCreated_SingleLineDataObjectKind;
 
         [EventBasedMethod("OnDeleting_SingleLineDataObjectKind")]
         public override void NotifyDeleting()
@@ -93,7 +93,7 @@ namespace Kistl.App.GUI
             base.NotifyDeleting();
             if (OnDeleting_SingleLineDataObjectKind != null) OnDeleting_SingleLineDataObjectKind(this);
         }
-        public event ObjectEventHandler<SingleLineDataObjectKind> OnDeleting_SingleLineDataObjectKind;
+        public static event ObjectEventHandler<SingleLineDataObjectKind> OnDeleting_SingleLineDataObjectKind;
 
 
 

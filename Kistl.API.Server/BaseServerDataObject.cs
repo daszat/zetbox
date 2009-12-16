@@ -62,7 +62,6 @@ namespace Kistl.API.Server
         /// </summary>
         protected BaseServerDataObject()
         {
-            ApplicationContext.Current.CustomActionsManager.AttachEvents(this);
         }
 
         /// <summary>

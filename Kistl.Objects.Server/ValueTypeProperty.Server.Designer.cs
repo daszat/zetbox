@@ -80,9 +80,9 @@ namespace Kistl.App.Base
             }
         }
         private bool _HasPersistentOrder;
-		public event PropertyGetterHandler<Kistl.App.Base.ValueTypeProperty, bool> OnHasPersistentOrder_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.ValueTypeProperty, bool> OnHasPersistentOrder_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.ValueTypeProperty, bool> OnHasPersistentOrder_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.ValueTypeProperty, bool> OnHasPersistentOrder_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.ValueTypeProperty, bool> OnHasPersistentOrder_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.ValueTypeProperty, bool> OnHasPersistentOrder_PostSetter;
         /// <summary>
         /// 
         /// </summary>
@@ -131,9 +131,9 @@ namespace Kistl.App.Base
             }
         }
         private bool _IsList;
-		public event PropertyGetterHandler<Kistl.App.Base.ValueTypeProperty, bool> OnIsList_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.ValueTypeProperty, bool> OnIsList_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.ValueTypeProperty, bool> OnIsList_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.ValueTypeProperty, bool> OnIsList_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.ValueTypeProperty, bool> OnIsList_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.ValueTypeProperty, bool> OnIsList_PostSetter;
         /// <summary>
         /// Returns the resulting Type of this Property Meta Object.
         /// </summary>
@@ -151,7 +151,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-		public event GetPropertyType_Handler<ValueTypeProperty> OnGetPropertyType_ValueTypeProperty;
+		public static event GetPropertyType_Handler<ValueTypeProperty> OnGetPropertyType_ValueTypeProperty;
 
 
 
@@ -172,7 +172,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-		public event GetPropertyTypeString_Handler<ValueTypeProperty> OnGetPropertyTypeString_ValueTypeProperty;
+		public static event GetPropertyTypeString_Handler<ValueTypeProperty> OnGetPropertyTypeString_ValueTypeProperty;
 
 
 
@@ -207,7 +207,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-        public event ToStringHandler<ValueTypeProperty> OnToString_ValueTypeProperty;
+        public static event ToStringHandler<ValueTypeProperty> OnToString_ValueTypeProperty;
 
         [EventBasedMethod("OnPreSave_ValueTypeProperty")]
         public override void NotifyPreSave()
@@ -215,7 +215,7 @@ namespace Kistl.App.Base
             base.NotifyPreSave();
             if (OnPreSave_ValueTypeProperty != null) OnPreSave_ValueTypeProperty(this);
         }
-        public event ObjectEventHandler<ValueTypeProperty> OnPreSave_ValueTypeProperty;
+        public static event ObjectEventHandler<ValueTypeProperty> OnPreSave_ValueTypeProperty;
 
         [EventBasedMethod("OnPostSave_ValueTypeProperty")]
         public override void NotifyPostSave()
@@ -223,7 +223,7 @@ namespace Kistl.App.Base
             base.NotifyPostSave();
             if (OnPostSave_ValueTypeProperty != null) OnPostSave_ValueTypeProperty(this);
         }
-        public event ObjectEventHandler<ValueTypeProperty> OnPostSave_ValueTypeProperty;
+        public static event ObjectEventHandler<ValueTypeProperty> OnPostSave_ValueTypeProperty;
 
         [EventBasedMethod("OnCreated_ValueTypeProperty")]
         public override void NotifyCreated()
@@ -231,7 +231,7 @@ namespace Kistl.App.Base
             base.NotifyCreated();
             if (OnCreated_ValueTypeProperty != null) OnCreated_ValueTypeProperty(this);
         }
-        public event ObjectEventHandler<ValueTypeProperty> OnCreated_ValueTypeProperty;
+        public static event ObjectEventHandler<ValueTypeProperty> OnCreated_ValueTypeProperty;
 
         [EventBasedMethod("OnDeleting_ValueTypeProperty")]
         public override void NotifyDeleting()
@@ -239,7 +239,7 @@ namespace Kistl.App.Base
             base.NotifyDeleting();
             if (OnDeleting_ValueTypeProperty != null) OnDeleting_ValueTypeProperty(this);
         }
-        public event ObjectEventHandler<ValueTypeProperty> OnDeleting_ValueTypeProperty;
+        public static event ObjectEventHandler<ValueTypeProperty> OnDeleting_ValueTypeProperty;
 
 
 		protected override string GetPropertyError(string propertyName) 

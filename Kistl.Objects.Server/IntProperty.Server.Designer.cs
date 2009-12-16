@@ -49,7 +49,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-		public event GetPropertyType_Handler<IntProperty> OnGetPropertyType_IntProperty;
+		public static event GetPropertyType_Handler<IntProperty> OnGetPropertyType_IntProperty;
 
 
 
@@ -70,7 +70,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-		public event GetPropertyTypeString_Handler<IntProperty> OnGetPropertyTypeString_IntProperty;
+		public static event GetPropertyTypeString_Handler<IntProperty> OnGetPropertyTypeString_IntProperty;
 
 
 
@@ -103,7 +103,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-        public event ToStringHandler<IntProperty> OnToString_IntProperty;
+        public static event ToStringHandler<IntProperty> OnToString_IntProperty;
 
         [EventBasedMethod("OnPreSave_IntProperty")]
         public override void NotifyPreSave()
@@ -111,7 +111,7 @@ namespace Kistl.App.Base
             base.NotifyPreSave();
             if (OnPreSave_IntProperty != null) OnPreSave_IntProperty(this);
         }
-        public event ObjectEventHandler<IntProperty> OnPreSave_IntProperty;
+        public static event ObjectEventHandler<IntProperty> OnPreSave_IntProperty;
 
         [EventBasedMethod("OnPostSave_IntProperty")]
         public override void NotifyPostSave()
@@ -119,7 +119,7 @@ namespace Kistl.App.Base
             base.NotifyPostSave();
             if (OnPostSave_IntProperty != null) OnPostSave_IntProperty(this);
         }
-        public event ObjectEventHandler<IntProperty> OnPostSave_IntProperty;
+        public static event ObjectEventHandler<IntProperty> OnPostSave_IntProperty;
 
         [EventBasedMethod("OnCreated_IntProperty")]
         public override void NotifyCreated()
@@ -127,7 +127,7 @@ namespace Kistl.App.Base
             base.NotifyCreated();
             if (OnCreated_IntProperty != null) OnCreated_IntProperty(this);
         }
-        public event ObjectEventHandler<IntProperty> OnCreated_IntProperty;
+        public static event ObjectEventHandler<IntProperty> OnCreated_IntProperty;
 
         [EventBasedMethod("OnDeleting_IntProperty")]
         public override void NotifyDeleting()
@@ -135,7 +135,7 @@ namespace Kistl.App.Base
             base.NotifyDeleting();
             if (OnDeleting_IntProperty != null) OnDeleting_IntProperty(this);
         }
-        public event ObjectEventHandler<IntProperty> OnDeleting_IntProperty;
+        public static event ObjectEventHandler<IntProperty> OnDeleting_IntProperty;
 
 
 

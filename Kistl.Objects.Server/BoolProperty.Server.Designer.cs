@@ -49,7 +49,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-		public event GetPropertyType_Handler<BoolProperty> OnGetPropertyType_BoolProperty;
+		public static event GetPropertyType_Handler<BoolProperty> OnGetPropertyType_BoolProperty;
 
 
 
@@ -70,7 +70,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-		public event GetPropertyTypeString_Handler<BoolProperty> OnGetPropertyTypeString_BoolProperty;
+		public static event GetPropertyTypeString_Handler<BoolProperty> OnGetPropertyTypeString_BoolProperty;
 
 
 
@@ -103,7 +103,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-        public event ToStringHandler<BoolProperty> OnToString_BoolProperty;
+        public static event ToStringHandler<BoolProperty> OnToString_BoolProperty;
 
         [EventBasedMethod("OnPreSave_BoolProperty")]
         public override void NotifyPreSave()
@@ -111,7 +111,7 @@ namespace Kistl.App.Base
             base.NotifyPreSave();
             if (OnPreSave_BoolProperty != null) OnPreSave_BoolProperty(this);
         }
-        public event ObjectEventHandler<BoolProperty> OnPreSave_BoolProperty;
+        public static event ObjectEventHandler<BoolProperty> OnPreSave_BoolProperty;
 
         [EventBasedMethod("OnPostSave_BoolProperty")]
         public override void NotifyPostSave()
@@ -119,7 +119,7 @@ namespace Kistl.App.Base
             base.NotifyPostSave();
             if (OnPostSave_BoolProperty != null) OnPostSave_BoolProperty(this);
         }
-        public event ObjectEventHandler<BoolProperty> OnPostSave_BoolProperty;
+        public static event ObjectEventHandler<BoolProperty> OnPostSave_BoolProperty;
 
         [EventBasedMethod("OnCreated_BoolProperty")]
         public override void NotifyCreated()
@@ -127,7 +127,7 @@ namespace Kistl.App.Base
             base.NotifyCreated();
             if (OnCreated_BoolProperty != null) OnCreated_BoolProperty(this);
         }
-        public event ObjectEventHandler<BoolProperty> OnCreated_BoolProperty;
+        public static event ObjectEventHandler<BoolProperty> OnCreated_BoolProperty;
 
         [EventBasedMethod("OnDeleting_BoolProperty")]
         public override void NotifyDeleting()
@@ -135,7 +135,7 @@ namespace Kistl.App.Base
             base.NotifyDeleting();
             if (OnDeleting_BoolProperty != null) OnDeleting_BoolProperty(this);
         }
-        public event ObjectEventHandler<BoolProperty> OnDeleting_BoolProperty;
+        public static event ObjectEventHandler<BoolProperty> OnDeleting_BoolProperty;
 
 
 

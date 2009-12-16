@@ -61,7 +61,7 @@ namespace Kistl.App.GUI
             }
             return e.Result;
         }
-        public event ToStringHandler<DataObjectSummaryKind> OnToString_DataObjectSummaryKind;
+        public static event ToStringHandler<DataObjectSummaryKind> OnToString_DataObjectSummaryKind;
 
         [EventBasedMethod("OnPreSave_DataObjectSummaryKind")]
         public override void NotifyPreSave()
@@ -69,7 +69,7 @@ namespace Kistl.App.GUI
             base.NotifyPreSave();
             if (OnPreSave_DataObjectSummaryKind != null) OnPreSave_DataObjectSummaryKind(this);
         }
-        public event ObjectEventHandler<DataObjectSummaryKind> OnPreSave_DataObjectSummaryKind;
+        public static event ObjectEventHandler<DataObjectSummaryKind> OnPreSave_DataObjectSummaryKind;
 
         [EventBasedMethod("OnPostSave_DataObjectSummaryKind")]
         public override void NotifyPostSave()
@@ -77,7 +77,7 @@ namespace Kistl.App.GUI
             base.NotifyPostSave();
             if (OnPostSave_DataObjectSummaryKind != null) OnPostSave_DataObjectSummaryKind(this);
         }
-        public event ObjectEventHandler<DataObjectSummaryKind> OnPostSave_DataObjectSummaryKind;
+        public static event ObjectEventHandler<DataObjectSummaryKind> OnPostSave_DataObjectSummaryKind;
 
         [EventBasedMethod("OnCreated_DataObjectSummaryKind")]
         public override void NotifyCreated()
@@ -85,7 +85,7 @@ namespace Kistl.App.GUI
             base.NotifyCreated();
             if (OnCreated_DataObjectSummaryKind != null) OnCreated_DataObjectSummaryKind(this);
         }
-        public event ObjectEventHandler<DataObjectSummaryKind> OnCreated_DataObjectSummaryKind;
+        public static event ObjectEventHandler<DataObjectSummaryKind> OnCreated_DataObjectSummaryKind;
 
         [EventBasedMethod("OnDeleting_DataObjectSummaryKind")]
         public override void NotifyDeleting()
@@ -93,7 +93,7 @@ namespace Kistl.App.GUI
             base.NotifyDeleting();
             if (OnDeleting_DataObjectSummaryKind != null) OnDeleting_DataObjectSummaryKind(this);
         }
-        public event ObjectEventHandler<DataObjectSummaryKind> OnDeleting_DataObjectSummaryKind;
+        public static event ObjectEventHandler<DataObjectSummaryKind> OnDeleting_DataObjectSummaryKind;
 
 
 

@@ -80,9 +80,9 @@ namespace Kistl.App.Base
             }
         }
         private bool _HasPersistentOrder;
-		public event PropertyGetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, bool> OnHasPersistentOrder_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, bool> OnHasPersistentOrder_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, bool> OnHasPersistentOrder_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, bool> OnHasPersistentOrder_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, bool> OnHasPersistentOrder_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, bool> OnHasPersistentOrder_PostSetter;
         /// <summary>
         /// Suggested implementors role name. If empty, class name will be used
         /// </summary>
@@ -131,9 +131,9 @@ namespace Kistl.App.Base
             }
         }
         private string _ImplementorRoleName;
-		public event PropertyGetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, string> OnImplementorRoleName_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, string> OnImplementorRoleName_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, string> OnImplementorRoleName_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, string> OnImplementorRoleName_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, string> OnImplementorRoleName_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, string> OnImplementorRoleName_PostSetter;
         /// <summary>
         /// Whether or not this property placeholder is list valued
         /// </summary>
@@ -182,9 +182,9 @@ namespace Kistl.App.Base
             }
         }
         private bool _IsList;
-		public event PropertyGetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, bool> OnIsList_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, bool> OnIsList_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, bool> OnIsList_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, bool> OnIsList_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, bool> OnIsList_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, bool> OnIsList_PostSetter;
         /// <summary>
         /// Suggested role name for the referenced item
         /// </summary>
@@ -233,9 +233,9 @@ namespace Kistl.App.Base
             }
         }
         private string _ItemRoleName;
-		public event PropertyGetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, string> OnItemRoleName_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, string> OnItemRoleName_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, string> OnItemRoleName_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, string> OnItemRoleName_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, string> OnItemRoleName_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, string> OnItemRoleName_PostSetter;
         /// <summary>
         /// The ObjectClass that is referenced by this placeholder
         /// </summary>
@@ -323,9 +323,9 @@ namespace Kistl.App.Base
         }
         
         
-		public event PropertyGetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, Kistl.App.Base.ObjectClass> OnReferencedObjectClass_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, Kistl.App.Base.ObjectClass> OnReferencedObjectClass_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, Kistl.App.Base.ObjectClass> OnReferencedObjectClass_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, Kistl.App.Base.ObjectClass> OnReferencedObjectClass_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, Kistl.App.Base.ObjectClass> OnReferencedObjectClass_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, Kistl.App.Base.ObjectClass> OnReferencedObjectClass_PostSetter;
         /// <summary>
         /// Suggested verb for the new relation
         /// </summary>
@@ -374,9 +374,9 @@ namespace Kistl.App.Base
             }
         }
         private string _Verb;
-		public event PropertyGetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, string> OnVerb_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, string> OnVerb_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, string> OnVerb_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, string> OnVerb_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, string> OnVerb_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.ObjectReferencePlaceholderProperty, string> OnVerb_PostSetter;
         /// <summary>
         /// Returns the resulting Type of this Property Meta Object.
         /// </summary>
@@ -394,7 +394,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-		public event GetPropertyType_Handler<ObjectReferencePlaceholderProperty> OnGetPropertyType_ObjectReferencePlaceholderProperty;
+		public static event GetPropertyType_Handler<ObjectReferencePlaceholderProperty> OnGetPropertyType_ObjectReferencePlaceholderProperty;
 
 
 
@@ -415,7 +415,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-		public event GetPropertyTypeString_Handler<ObjectReferencePlaceholderProperty> OnGetPropertyTypeString_ObjectReferencePlaceholderProperty;
+		public static event GetPropertyTypeString_Handler<ObjectReferencePlaceholderProperty> OnGetPropertyTypeString_ObjectReferencePlaceholderProperty;
 
 
 
@@ -454,7 +454,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-        public event ToStringHandler<ObjectReferencePlaceholderProperty> OnToString_ObjectReferencePlaceholderProperty;
+        public static event ToStringHandler<ObjectReferencePlaceholderProperty> OnToString_ObjectReferencePlaceholderProperty;
 
         [EventBasedMethod("OnPreSave_ObjectReferencePlaceholderProperty")]
         public override void NotifyPreSave()
@@ -462,7 +462,7 @@ namespace Kistl.App.Base
             base.NotifyPreSave();
             if (OnPreSave_ObjectReferencePlaceholderProperty != null) OnPreSave_ObjectReferencePlaceholderProperty(this);
         }
-        public event ObjectEventHandler<ObjectReferencePlaceholderProperty> OnPreSave_ObjectReferencePlaceholderProperty;
+        public static event ObjectEventHandler<ObjectReferencePlaceholderProperty> OnPreSave_ObjectReferencePlaceholderProperty;
 
         [EventBasedMethod("OnPostSave_ObjectReferencePlaceholderProperty")]
         public override void NotifyPostSave()
@@ -470,7 +470,7 @@ namespace Kistl.App.Base
             base.NotifyPostSave();
             if (OnPostSave_ObjectReferencePlaceholderProperty != null) OnPostSave_ObjectReferencePlaceholderProperty(this);
         }
-        public event ObjectEventHandler<ObjectReferencePlaceholderProperty> OnPostSave_ObjectReferencePlaceholderProperty;
+        public static event ObjectEventHandler<ObjectReferencePlaceholderProperty> OnPostSave_ObjectReferencePlaceholderProperty;
 
         [EventBasedMethod("OnCreated_ObjectReferencePlaceholderProperty")]
         public override void NotifyCreated()
@@ -478,7 +478,7 @@ namespace Kistl.App.Base
             base.NotifyCreated();
             if (OnCreated_ObjectReferencePlaceholderProperty != null) OnCreated_ObjectReferencePlaceholderProperty(this);
         }
-        public event ObjectEventHandler<ObjectReferencePlaceholderProperty> OnCreated_ObjectReferencePlaceholderProperty;
+        public static event ObjectEventHandler<ObjectReferencePlaceholderProperty> OnCreated_ObjectReferencePlaceholderProperty;
 
         [EventBasedMethod("OnDeleting_ObjectReferencePlaceholderProperty")]
         public override void NotifyDeleting()
@@ -486,7 +486,7 @@ namespace Kistl.App.Base
             base.NotifyDeleting();
             if (OnDeleting_ObjectReferencePlaceholderProperty != null) OnDeleting_ObjectReferencePlaceholderProperty(this);
         }
-        public event ObjectEventHandler<ObjectReferencePlaceholderProperty> OnDeleting_ObjectReferencePlaceholderProperty;
+        public static event ObjectEventHandler<ObjectReferencePlaceholderProperty> OnDeleting_ObjectReferencePlaceholderProperty;
 
 
 		protected override string GetPropertyError(string propertyName) 

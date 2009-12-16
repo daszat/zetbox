@@ -119,9 +119,9 @@ namespace Kistl.App.Base
         }
         
         
-		public event PropertyGetterHandler<Kistl.App.Base.CLRObjectParameter, Kistl.App.Base.TypeRef> OnType_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.CLRObjectParameter, Kistl.App.Base.TypeRef> OnType_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.CLRObjectParameter, Kistl.App.Base.TypeRef> OnType_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.CLRObjectParameter, Kistl.App.Base.TypeRef> OnType_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.CLRObjectParameter, Kistl.App.Base.TypeRef> OnType_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.CLRObjectParameter, Kistl.App.Base.TypeRef> OnType_PostSetter;
         /// <summary>
         /// Returns the resulting Type of this Method-Parameter Meta Object.
         /// </summary>
@@ -139,7 +139,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-		public event GetParameterType_Handler<CLRObjectParameter> OnGetParameterType_CLRObjectParameter;
+		public static event GetParameterType_Handler<CLRObjectParameter> OnGetParameterType_CLRObjectParameter;
 
 
 
@@ -160,7 +160,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-		public event GetParameterTypeString_Handler<CLRObjectParameter> OnGetParameterTypeString_CLRObjectParameter;
+		public static event GetParameterTypeString_Handler<CLRObjectParameter> OnGetParameterTypeString_CLRObjectParameter;
 
 
 
@@ -194,7 +194,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-        public event ToStringHandler<CLRObjectParameter> OnToString_CLRObjectParameter;
+        public static event ToStringHandler<CLRObjectParameter> OnToString_CLRObjectParameter;
 
         [EventBasedMethod("OnPreSave_CLRObjectParameter")]
         public override void NotifyPreSave()
@@ -202,7 +202,7 @@ namespace Kistl.App.Base
             base.NotifyPreSave();
             if (OnPreSave_CLRObjectParameter != null) OnPreSave_CLRObjectParameter(this);
         }
-        public event ObjectEventHandler<CLRObjectParameter> OnPreSave_CLRObjectParameter;
+        public static event ObjectEventHandler<CLRObjectParameter> OnPreSave_CLRObjectParameter;
 
         [EventBasedMethod("OnPostSave_CLRObjectParameter")]
         public override void NotifyPostSave()
@@ -210,7 +210,7 @@ namespace Kistl.App.Base
             base.NotifyPostSave();
             if (OnPostSave_CLRObjectParameter != null) OnPostSave_CLRObjectParameter(this);
         }
-        public event ObjectEventHandler<CLRObjectParameter> OnPostSave_CLRObjectParameter;
+        public static event ObjectEventHandler<CLRObjectParameter> OnPostSave_CLRObjectParameter;
 
         [EventBasedMethod("OnCreated_CLRObjectParameter")]
         public override void NotifyCreated()
@@ -218,7 +218,7 @@ namespace Kistl.App.Base
             base.NotifyCreated();
             if (OnCreated_CLRObjectParameter != null) OnCreated_CLRObjectParameter(this);
         }
-        public event ObjectEventHandler<CLRObjectParameter> OnCreated_CLRObjectParameter;
+        public static event ObjectEventHandler<CLRObjectParameter> OnCreated_CLRObjectParameter;
 
         [EventBasedMethod("OnDeleting_CLRObjectParameter")]
         public override void NotifyDeleting()
@@ -226,7 +226,7 @@ namespace Kistl.App.Base
             base.NotifyDeleting();
             if (OnDeleting_CLRObjectParameter != null) OnDeleting_CLRObjectParameter(this);
         }
-        public event ObjectEventHandler<CLRObjectParameter> OnDeleting_CLRObjectParameter;
+        public static event ObjectEventHandler<CLRObjectParameter> OnDeleting_CLRObjectParameter;
 
 
 		protected override string GetPropertyError(string propertyName) 

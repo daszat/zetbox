@@ -211,5 +211,10 @@ namespace Kistl.API.Utils
                 return new TraceMethodCallContext(log, "<unknown Method>", string.Format(format, p));
             }
         }
+
+        public static void TraceTotalMemory(string msg)
+        {
+            Log.DebugFormat(msg + ": Consuming {0} kB Memory", (double)GC.GetTotalMemory(true) / 1024.0);
+        }
     }
 }

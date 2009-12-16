@@ -61,7 +61,7 @@ namespace Kistl.App.GUI
             }
             return e.Result;
         }
-        public event ToStringHandler<ActionKind> OnToString_ActionKind;
+        public static event ToStringHandler<ActionKind> OnToString_ActionKind;
 
         [EventBasedMethod("OnPreSave_ActionKind")]
         public override void NotifyPreSave()
@@ -69,7 +69,7 @@ namespace Kistl.App.GUI
             base.NotifyPreSave();
             if (OnPreSave_ActionKind != null) OnPreSave_ActionKind(this);
         }
-        public event ObjectEventHandler<ActionKind> OnPreSave_ActionKind;
+        public static event ObjectEventHandler<ActionKind> OnPreSave_ActionKind;
 
         [EventBasedMethod("OnPostSave_ActionKind")]
         public override void NotifyPostSave()
@@ -77,7 +77,7 @@ namespace Kistl.App.GUI
             base.NotifyPostSave();
             if (OnPostSave_ActionKind != null) OnPostSave_ActionKind(this);
         }
-        public event ObjectEventHandler<ActionKind> OnPostSave_ActionKind;
+        public static event ObjectEventHandler<ActionKind> OnPostSave_ActionKind;
 
         [EventBasedMethod("OnCreated_ActionKind")]
         public override void NotifyCreated()
@@ -85,7 +85,7 @@ namespace Kistl.App.GUI
             base.NotifyCreated();
             if (OnCreated_ActionKind != null) OnCreated_ActionKind(this);
         }
-        public event ObjectEventHandler<ActionKind> OnCreated_ActionKind;
+        public static event ObjectEventHandler<ActionKind> OnCreated_ActionKind;
 
         [EventBasedMethod("OnDeleting_ActionKind")]
         public override void NotifyDeleting()
@@ -93,7 +93,7 @@ namespace Kistl.App.GUI
             base.NotifyDeleting();
             if (OnDeleting_ActionKind != null) OnDeleting_ActionKind(this);
         }
-        public event ObjectEventHandler<ActionKind> OnDeleting_ActionKind;
+        public static event ObjectEventHandler<ActionKind> OnDeleting_ActionKind;
 
 
 

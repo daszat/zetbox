@@ -105,9 +105,9 @@ namespace Kistl.App.Base
             }
         }
         private string _DisplayName;
-		public event PropertyGetterHandler<Kistl.App.Base.Identity, string> OnDisplayName_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.Identity, string> OnDisplayName_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.Identity, string> OnDisplayName_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.Identity, string> OnDisplayName_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.Identity, string> OnDisplayName_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.Identity, string> OnDisplayName_PostSetter;
         /// <summary>
         /// Password of a generic identity
         /// </summary>
@@ -156,9 +156,9 @@ namespace Kistl.App.Base
             }
         }
         private string _Password;
-		public event PropertyGetterHandler<Kistl.App.Base.Identity, string> OnPassword_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.Identity, string> OnPassword_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.Identity, string> OnPassword_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.Identity, string> OnPassword_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.Identity, string> OnPassword_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.Identity, string> OnPassword_PostSetter;
         /// <summary>
         /// Username of a generic identity
         /// </summary>
@@ -207,9 +207,9 @@ namespace Kistl.App.Base
             }
         }
         private string _UserName;
-		public event PropertyGetterHandler<Kistl.App.Base.Identity, string> OnUserName_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.Identity, string> OnUserName_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.Identity, string> OnUserName_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.Identity, string> OnUserName_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.Identity, string> OnUserName_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.Identity, string> OnUserName_PostSetter;
         /// <summary>
         /// IdentityName of a WCF Identity (Windows, AD or Samba)
         /// </summary>
@@ -258,9 +258,9 @@ namespace Kistl.App.Base
             }
         }
         private string _WCFAccount;
-		public event PropertyGetterHandler<Kistl.App.Base.Identity, string> OnWCFAccount_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.Identity, string> OnWCFAccount_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.Identity, string> OnWCFAccount_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.Identity, string> OnWCFAccount_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.Identity, string> OnWCFAccount_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.Identity, string> OnWCFAccount_PostSetter;
 		public override InterfaceType GetInterfaceType()
 		{
 			return new InterfaceType(typeof(Identity));
@@ -294,7 +294,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-        public event ToStringHandler<Identity> OnToString_Identity;
+        public static event ToStringHandler<Identity> OnToString_Identity;
 
         [EventBasedMethod("OnPreSave_Identity")]
         public override void NotifyPreSave()
@@ -302,7 +302,7 @@ namespace Kistl.App.Base
             base.NotifyPreSave();
             if (OnPreSave_Identity != null) OnPreSave_Identity(this);
         }
-        public event ObjectEventHandler<Identity> OnPreSave_Identity;
+        public static event ObjectEventHandler<Identity> OnPreSave_Identity;
 
         [EventBasedMethod("OnPostSave_Identity")]
         public override void NotifyPostSave()
@@ -310,7 +310,7 @@ namespace Kistl.App.Base
             base.NotifyPostSave();
             if (OnPostSave_Identity != null) OnPostSave_Identity(this);
         }
-        public event ObjectEventHandler<Identity> OnPostSave_Identity;
+        public static event ObjectEventHandler<Identity> OnPostSave_Identity;
 
         [EventBasedMethod("OnCreated_Identity")]
         public override void NotifyCreated()
@@ -318,7 +318,7 @@ namespace Kistl.App.Base
             base.NotifyCreated();
             if (OnCreated_Identity != null) OnCreated_Identity(this);
         }
-        public event ObjectEventHandler<Identity> OnCreated_Identity;
+        public static event ObjectEventHandler<Identity> OnCreated_Identity;
 
         [EventBasedMethod("OnDeleting_Identity")]
         public override void NotifyDeleting()
@@ -326,7 +326,7 @@ namespace Kistl.App.Base
             base.NotifyDeleting();
             if (OnDeleting_Identity != null) OnDeleting_Identity(this);
         }
-        public event ObjectEventHandler<Identity> OnDeleting_Identity;
+        public static event ObjectEventHandler<Identity> OnDeleting_Identity;
 
 
 		protected override string GetPropertyError(string propertyName) 

@@ -9,11 +9,22 @@ using System.Xml;
 using Kistl.API;
 using Kistl.App.Extensions;
 using Kistl.App.GUI;
+using Kistl.API.Utils;
 
 namespace Kistl.App.Base
 {
     public partial class CustomCommonActions_KistlBase
     {
+        private static int instance_counter = 0;
+        /// <summary>
+        /// TODO: Remove after measurement
+        /// </summary>
+        public CustomCommonActions_KistlBase()
+        {
+            instance_counter++;
+            Logging.Log.DebugFormat("{0}: {1} instances", this.GetType(), instance_counter);
+        }
+
         #region ObjectClass
 
         #region CreateDefaultMethods

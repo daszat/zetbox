@@ -105,9 +105,9 @@ namespace Kistl.App.Base
             }
         }
         private string _Schema;
-		public event PropertyGetterHandler<Kistl.App.Base.CurrentSchema, string> OnSchema_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.CurrentSchema, string> OnSchema_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.CurrentSchema, string> OnSchema_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.CurrentSchema, string> OnSchema_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.CurrentSchema, string> OnSchema_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.CurrentSchema, string> OnSchema_PostSetter;
         /// <summary>
         /// Version number of this schema
         /// </summary>
@@ -156,9 +156,9 @@ namespace Kistl.App.Base
             }
         }
         private int _Version;
-		public event PropertyGetterHandler<Kistl.App.Base.CurrentSchema, int> OnVersion_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.CurrentSchema, int> OnVersion_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.CurrentSchema, int> OnVersion_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.CurrentSchema, int> OnVersion_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.CurrentSchema, int> OnVersion_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.CurrentSchema, int> OnVersion_PostSetter;
 		public override InterfaceType GetInterfaceType()
 		{
 			return new InterfaceType(typeof(CurrentSchema));
@@ -190,7 +190,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-        public event ToStringHandler<CurrentSchema> OnToString_CurrentSchema;
+        public static event ToStringHandler<CurrentSchema> OnToString_CurrentSchema;
 
         [EventBasedMethod("OnPreSave_CurrentSchema")]
         public override void NotifyPreSave()
@@ -198,7 +198,7 @@ namespace Kistl.App.Base
             base.NotifyPreSave();
             if (OnPreSave_CurrentSchema != null) OnPreSave_CurrentSchema(this);
         }
-        public event ObjectEventHandler<CurrentSchema> OnPreSave_CurrentSchema;
+        public static event ObjectEventHandler<CurrentSchema> OnPreSave_CurrentSchema;
 
         [EventBasedMethod("OnPostSave_CurrentSchema")]
         public override void NotifyPostSave()
@@ -206,7 +206,7 @@ namespace Kistl.App.Base
             base.NotifyPostSave();
             if (OnPostSave_CurrentSchema != null) OnPostSave_CurrentSchema(this);
         }
-        public event ObjectEventHandler<CurrentSchema> OnPostSave_CurrentSchema;
+        public static event ObjectEventHandler<CurrentSchema> OnPostSave_CurrentSchema;
 
         [EventBasedMethod("OnCreated_CurrentSchema")]
         public override void NotifyCreated()
@@ -214,7 +214,7 @@ namespace Kistl.App.Base
             base.NotifyCreated();
             if (OnCreated_CurrentSchema != null) OnCreated_CurrentSchema(this);
         }
-        public event ObjectEventHandler<CurrentSchema> OnCreated_CurrentSchema;
+        public static event ObjectEventHandler<CurrentSchema> OnCreated_CurrentSchema;
 
         [EventBasedMethod("OnDeleting_CurrentSchema")]
         public override void NotifyDeleting()
@@ -222,7 +222,7 @@ namespace Kistl.App.Base
             base.NotifyDeleting();
             if (OnDeleting_CurrentSchema != null) OnDeleting_CurrentSchema(this);
         }
-        public event ObjectEventHandler<CurrentSchema> OnDeleting_CurrentSchema;
+        public static event ObjectEventHandler<CurrentSchema> OnDeleting_CurrentSchema;
 
 
 		protected override string GetPropertyError(string propertyName) 

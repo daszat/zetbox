@@ -117,7 +117,6 @@ namespace Kistl.API.Client
     {
         protected BaseClientDataObject()
         {
-            ApplicationContext.Current.CustomActionsManager.AttachEvents(this);
         }
 
         /// <summary>

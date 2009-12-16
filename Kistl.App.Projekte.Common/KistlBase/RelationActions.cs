@@ -9,9 +9,20 @@ namespace Kistl.App.KistlBase.Common
     using Kistl.API;
     using Kistl.App.Base;
     using Kistl.App.Extensions;
+    using Kistl.API.Utils;
 
     public class RelationActions
     {
+        private static int instance_counter = 0;
+        /// <summary>
+        /// TODO: Remove after measurement
+        /// </summary>
+        public RelationActions()
+        {
+            instance_counter++;
+            Logging.Log.DebugFormat("{0}: {1} instances", this.GetType(), instance_counter);
+        }
+
         public void OnGetOtherEnd(Relation rel, MethodReturnEventArgs<RelationEnd> e, RelationEnd relEnd)
         {
             if (rel.A == relEnd)

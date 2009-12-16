@@ -48,12 +48,6 @@ namespace Kistl.DalProvider.EF.Tests
             obj.TableName = "testtablename";
         }
 
-        [Test]
-        public void should_have_events_attached_after_init()
-        {
-            Assert.That(currentCustomActionsManager.IsObjectAttached(obj), Is.True);
-        }
-
         // TODO: WTF? Please explain
         [Test]
         [Ignore("Wrong test, ObjectState is managed by EF")]

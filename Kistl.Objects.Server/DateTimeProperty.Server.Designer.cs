@@ -49,7 +49,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-		public event GetPropertyType_Handler<DateTimeProperty> OnGetPropertyType_DateTimeProperty;
+		public static event GetPropertyType_Handler<DateTimeProperty> OnGetPropertyType_DateTimeProperty;
 
 
 
@@ -70,7 +70,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-		public event GetPropertyTypeString_Handler<DateTimeProperty> OnGetPropertyTypeString_DateTimeProperty;
+		public static event GetPropertyTypeString_Handler<DateTimeProperty> OnGetPropertyTypeString_DateTimeProperty;
 
 
 
@@ -103,7 +103,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-        public event ToStringHandler<DateTimeProperty> OnToString_DateTimeProperty;
+        public static event ToStringHandler<DateTimeProperty> OnToString_DateTimeProperty;
 
         [EventBasedMethod("OnPreSave_DateTimeProperty")]
         public override void NotifyPreSave()
@@ -111,7 +111,7 @@ namespace Kistl.App.Base
             base.NotifyPreSave();
             if (OnPreSave_DateTimeProperty != null) OnPreSave_DateTimeProperty(this);
         }
-        public event ObjectEventHandler<DateTimeProperty> OnPreSave_DateTimeProperty;
+        public static event ObjectEventHandler<DateTimeProperty> OnPreSave_DateTimeProperty;
 
         [EventBasedMethod("OnPostSave_DateTimeProperty")]
         public override void NotifyPostSave()
@@ -119,7 +119,7 @@ namespace Kistl.App.Base
             base.NotifyPostSave();
             if (OnPostSave_DateTimeProperty != null) OnPostSave_DateTimeProperty(this);
         }
-        public event ObjectEventHandler<DateTimeProperty> OnPostSave_DateTimeProperty;
+        public static event ObjectEventHandler<DateTimeProperty> OnPostSave_DateTimeProperty;
 
         [EventBasedMethod("OnCreated_DateTimeProperty")]
         public override void NotifyCreated()
@@ -127,7 +127,7 @@ namespace Kistl.App.Base
             base.NotifyCreated();
             if (OnCreated_DateTimeProperty != null) OnCreated_DateTimeProperty(this);
         }
-        public event ObjectEventHandler<DateTimeProperty> OnCreated_DateTimeProperty;
+        public static event ObjectEventHandler<DateTimeProperty> OnCreated_DateTimeProperty;
 
         [EventBasedMethod("OnDeleting_DateTimeProperty")]
         public override void NotifyDeleting()
@@ -135,7 +135,7 @@ namespace Kistl.App.Base
             base.NotifyDeleting();
             if (OnDeleting_DateTimeProperty != null) OnDeleting_DateTimeProperty(this);
         }
-        public event ObjectEventHandler<DateTimeProperty> OnDeleting_DateTimeProperty;
+        public static event ObjectEventHandler<DateTimeProperty> OnDeleting_DateTimeProperty;
 
 
 

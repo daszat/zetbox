@@ -49,7 +49,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-		public event GetDataType_Handler<Struct> OnGetDataType_Struct;
+		public static event GetDataType_Handler<Struct> OnGetDataType_Struct;
 
 
 
@@ -70,7 +70,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-		public event GetDataTypeString_Handler<Struct> OnGetDataTypeString_Struct;
+		public static event GetDataTypeString_Handler<Struct> OnGetDataTypeString_Struct;
 
 
 
@@ -103,7 +103,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-        public event ToStringHandler<Struct> OnToString_Struct;
+        public static event ToStringHandler<Struct> OnToString_Struct;
 
         [EventBasedMethod("OnPreSave_Struct")]
         public override void NotifyPreSave()
@@ -111,7 +111,7 @@ namespace Kistl.App.Base
             base.NotifyPreSave();
             if (OnPreSave_Struct != null) OnPreSave_Struct(this);
         }
-        public event ObjectEventHandler<Struct> OnPreSave_Struct;
+        public static event ObjectEventHandler<Struct> OnPreSave_Struct;
 
         [EventBasedMethod("OnPostSave_Struct")]
         public override void NotifyPostSave()
@@ -119,7 +119,7 @@ namespace Kistl.App.Base
             base.NotifyPostSave();
             if (OnPostSave_Struct != null) OnPostSave_Struct(this);
         }
-        public event ObjectEventHandler<Struct> OnPostSave_Struct;
+        public static event ObjectEventHandler<Struct> OnPostSave_Struct;
 
         [EventBasedMethod("OnCreated_Struct")]
         public override void NotifyCreated()
@@ -127,7 +127,7 @@ namespace Kistl.App.Base
             base.NotifyCreated();
             if (OnCreated_Struct != null) OnCreated_Struct(this);
         }
-        public event ObjectEventHandler<Struct> OnCreated_Struct;
+        public static event ObjectEventHandler<Struct> OnCreated_Struct;
 
         [EventBasedMethod("OnDeleting_Struct")]
         public override void NotifyDeleting()
@@ -135,7 +135,7 @@ namespace Kistl.App.Base
             base.NotifyDeleting();
             if (OnDeleting_Struct != null) OnDeleting_Struct(this);
         }
-        public event ObjectEventHandler<Struct> OnDeleting_Struct;
+        public static event ObjectEventHandler<Struct> OnDeleting_Struct;
 
 
 

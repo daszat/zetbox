@@ -80,9 +80,9 @@ namespace Kistl.App.Base
             }
         }
         private bool _HasPersistentOrder;
-		public event PropertyGetterHandler<Kistl.App.Base.StructProperty, bool> OnHasPersistentOrder_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.StructProperty, bool> OnHasPersistentOrder_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.StructProperty, bool> OnHasPersistentOrder_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.StructProperty, bool> OnHasPersistentOrder_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.StructProperty, bool> OnHasPersistentOrder_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.StructProperty, bool> OnHasPersistentOrder_PostSetter;
         /// <summary>
         /// Whether or not this struct property is list valued
         /// </summary>
@@ -131,9 +131,9 @@ namespace Kistl.App.Base
             }
         }
         private bool _IsList;
-		public event PropertyGetterHandler<Kistl.App.Base.StructProperty, bool> OnIsList_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.StructProperty, bool> OnIsList_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.StructProperty, bool> OnIsList_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.StructProperty, bool> OnIsList_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.StructProperty, bool> OnIsList_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.StructProperty, bool> OnIsList_PostSetter;
         /// <summary>
         /// Definition of this Struct
         /// </summary>
@@ -221,9 +221,9 @@ namespace Kistl.App.Base
         }
         
         
-		public event PropertyGetterHandler<Kistl.App.Base.StructProperty, Kistl.App.Base.Struct> OnStructDefinition_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.StructProperty, Kistl.App.Base.Struct> OnStructDefinition_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.StructProperty, Kistl.App.Base.Struct> OnStructDefinition_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.StructProperty, Kistl.App.Base.Struct> OnStructDefinition_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.StructProperty, Kistl.App.Base.Struct> OnStructDefinition_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.StructProperty, Kistl.App.Base.Struct> OnStructDefinition_PostSetter;
         /// <summary>
         /// Returns the resulting Type of this Property Meta Object.
         /// </summary>
@@ -241,7 +241,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-		public event GetPropertyType_Handler<StructProperty> OnGetPropertyType_StructProperty;
+		public static event GetPropertyType_Handler<StructProperty> OnGetPropertyType_StructProperty;
 
 
 
@@ -262,7 +262,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-		public event GetPropertyTypeString_Handler<StructProperty> OnGetPropertyTypeString_StructProperty;
+		public static event GetPropertyTypeString_Handler<StructProperty> OnGetPropertyTypeString_StructProperty;
 
 
 
@@ -298,7 +298,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-        public event ToStringHandler<StructProperty> OnToString_StructProperty;
+        public static event ToStringHandler<StructProperty> OnToString_StructProperty;
 
         [EventBasedMethod("OnPreSave_StructProperty")]
         public override void NotifyPreSave()
@@ -306,7 +306,7 @@ namespace Kistl.App.Base
             base.NotifyPreSave();
             if (OnPreSave_StructProperty != null) OnPreSave_StructProperty(this);
         }
-        public event ObjectEventHandler<StructProperty> OnPreSave_StructProperty;
+        public static event ObjectEventHandler<StructProperty> OnPreSave_StructProperty;
 
         [EventBasedMethod("OnPostSave_StructProperty")]
         public override void NotifyPostSave()
@@ -314,7 +314,7 @@ namespace Kistl.App.Base
             base.NotifyPostSave();
             if (OnPostSave_StructProperty != null) OnPostSave_StructProperty(this);
         }
-        public event ObjectEventHandler<StructProperty> OnPostSave_StructProperty;
+        public static event ObjectEventHandler<StructProperty> OnPostSave_StructProperty;
 
         [EventBasedMethod("OnCreated_StructProperty")]
         public override void NotifyCreated()
@@ -322,7 +322,7 @@ namespace Kistl.App.Base
             base.NotifyCreated();
             if (OnCreated_StructProperty != null) OnCreated_StructProperty(this);
         }
-        public event ObjectEventHandler<StructProperty> OnCreated_StructProperty;
+        public static event ObjectEventHandler<StructProperty> OnCreated_StructProperty;
 
         [EventBasedMethod("OnDeleting_StructProperty")]
         public override void NotifyDeleting()
@@ -330,7 +330,7 @@ namespace Kistl.App.Base
             base.NotifyDeleting();
             if (OnDeleting_StructProperty != null) OnDeleting_StructProperty(this);
         }
-        public event ObjectEventHandler<StructProperty> OnDeleting_StructProperty;
+        public static event ObjectEventHandler<StructProperty> OnDeleting_StructProperty;
 
 
 		protected override string GetPropertyError(string propertyName) 

@@ -144,9 +144,9 @@ namespace Kistl.App.GUI
         }
         
         
-		public event PropertyGetterHandler<Kistl.App.GUI.ViewDescriptor, Kistl.App.Base.TypeRef> OnControlRef_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.GUI.ViewDescriptor, Kistl.App.Base.TypeRef> OnControlRef_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.GUI.ViewDescriptor, Kistl.App.Base.TypeRef> OnControlRef_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.GUI.ViewDescriptor, Kistl.App.Base.TypeRef> OnControlRef_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.GUI.ViewDescriptor, Kistl.App.Base.TypeRef> OnControlRef_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.GUI.ViewDescriptor, Kistl.App.Base.TypeRef> OnControlRef_PostSetter;
         /// <summary>
         /// Export Guid
         /// </summary>
@@ -206,9 +206,9 @@ namespace Kistl.App.GUI
             }
         }
         private Guid _ExportGuid;
-		public event PropertyGetterHandler<Kistl.App.GUI.ViewDescriptor, Guid> OnExportGuid_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.GUI.ViewDescriptor, Guid> OnExportGuid_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.GUI.ViewDescriptor, Guid> OnExportGuid_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.GUI.ViewDescriptor, Guid> OnExportGuid_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.GUI.ViewDescriptor, Guid> OnExportGuid_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.GUI.ViewDescriptor, Guid> OnExportGuid_PostSetter;
         /// <summary>
         /// 
         /// </summary>
@@ -296,9 +296,9 @@ namespace Kistl.App.GUI
         }
         
         
-		public event PropertyGetterHandler<Kistl.App.GUI.ViewDescriptor, Kistl.App.GUI.ControlKindClass> OnKind_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.GUI.ViewDescriptor, Kistl.App.GUI.ControlKindClass> OnKind_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.GUI.ViewDescriptor, Kistl.App.GUI.ControlKindClass> OnKind_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.GUI.ViewDescriptor, Kistl.App.GUI.ControlKindClass> OnKind_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.GUI.ViewDescriptor, Kistl.App.GUI.ControlKindClass> OnKind_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.GUI.ViewDescriptor, Kistl.App.GUI.ControlKindClass> OnKind_PostSetter;
         /// <summary>
         /// 
         /// </summary>
@@ -386,9 +386,9 @@ namespace Kistl.App.GUI
         }
         
         
-		public event PropertyGetterHandler<Kistl.App.GUI.ViewDescriptor, Kistl.App.Base.Module> OnModule_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.GUI.ViewDescriptor, Kistl.App.Base.Module> OnModule_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.GUI.ViewDescriptor, Kistl.App.Base.Module> OnModule_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.GUI.ViewDescriptor, Kistl.App.Base.Module> OnModule_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.GUI.ViewDescriptor, Kistl.App.Base.Module> OnModule_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.GUI.ViewDescriptor, Kistl.App.Base.Module> OnModule_PostSetter;
         /// <summary>
         /// Which toolkit provides this View
         /// </summary>
@@ -453,9 +453,9 @@ namespace Kistl.App.GUI
             }
         }
         
-		public event PropertyGetterHandler<Kistl.App.GUI.ViewDescriptor, Kistl.App.GUI.Toolkit> OnToolkit_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.GUI.ViewDescriptor, Kistl.App.GUI.Toolkit> OnToolkit_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.GUI.ViewDescriptor, Kistl.App.GUI.Toolkit> OnToolkit_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.GUI.ViewDescriptor, Kistl.App.GUI.Toolkit> OnToolkit_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.GUI.ViewDescriptor, Kistl.App.GUI.Toolkit> OnToolkit_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.GUI.ViewDescriptor, Kistl.App.GUI.Toolkit> OnToolkit_PostSetter;
 		public override InterfaceType GetInterfaceType()
 		{
 			return new InterfaceType(typeof(ViewDescriptor));
@@ -490,7 +490,7 @@ namespace Kistl.App.GUI
             }
             return e.Result;
         }
-        public event ToStringHandler<ViewDescriptor> OnToString_ViewDescriptor;
+        public static event ToStringHandler<ViewDescriptor> OnToString_ViewDescriptor;
 
         [EventBasedMethod("OnPreSave_ViewDescriptor")]
         public override void NotifyPreSave()
@@ -498,7 +498,7 @@ namespace Kistl.App.GUI
             base.NotifyPreSave();
             if (OnPreSave_ViewDescriptor != null) OnPreSave_ViewDescriptor(this);
         }
-        public event ObjectEventHandler<ViewDescriptor> OnPreSave_ViewDescriptor;
+        public static event ObjectEventHandler<ViewDescriptor> OnPreSave_ViewDescriptor;
 
         [EventBasedMethod("OnPostSave_ViewDescriptor")]
         public override void NotifyPostSave()
@@ -506,7 +506,7 @@ namespace Kistl.App.GUI
             base.NotifyPostSave();
             if (OnPostSave_ViewDescriptor != null) OnPostSave_ViewDescriptor(this);
         }
-        public event ObjectEventHandler<ViewDescriptor> OnPostSave_ViewDescriptor;
+        public static event ObjectEventHandler<ViewDescriptor> OnPostSave_ViewDescriptor;
 
         [EventBasedMethod("OnCreated_ViewDescriptor")]
         public override void NotifyCreated()
@@ -514,7 +514,7 @@ namespace Kistl.App.GUI
             base.NotifyCreated();
             if (OnCreated_ViewDescriptor != null) OnCreated_ViewDescriptor(this);
         }
-        public event ObjectEventHandler<ViewDescriptor> OnCreated_ViewDescriptor;
+        public static event ObjectEventHandler<ViewDescriptor> OnCreated_ViewDescriptor;
 
         [EventBasedMethod("OnDeleting_ViewDescriptor")]
         public override void NotifyDeleting()
@@ -522,7 +522,7 @@ namespace Kistl.App.GUI
             base.NotifyDeleting();
             if (OnDeleting_ViewDescriptor != null) OnDeleting_ViewDescriptor(this);
         }
-        public event ObjectEventHandler<ViewDescriptor> OnDeleting_ViewDescriptor;
+        public static event ObjectEventHandler<ViewDescriptor> OnDeleting_ViewDescriptor;
 
 
 		protected override string GetPropertyError(string propertyName) 

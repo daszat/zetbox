@@ -105,9 +105,9 @@ namespace Kistl.App.TimeRecords
             }
         }
         private double? _BudgetHours;
-		public event PropertyGetterHandler<Kistl.App.TimeRecords.WorkEffortAccount, double?> OnBudgetHours_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.TimeRecords.WorkEffortAccount, double?> OnBudgetHours_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.TimeRecords.WorkEffortAccount, double?> OnBudgetHours_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.TimeRecords.WorkEffortAccount, double?> OnBudgetHours_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.TimeRecords.WorkEffortAccount, double?> OnBudgetHours_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.TimeRecords.WorkEffortAccount, double?> OnBudgetHours_PostSetter;
         /// <summary>
         /// Zugeordnete Mitarbeiter
         /// </summary>
@@ -204,9 +204,9 @@ namespace Kistl.App.TimeRecords
             }
         }
         private string _Name;
-		public event PropertyGetterHandler<Kistl.App.TimeRecords.WorkEffortAccount, string> OnName_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.TimeRecords.WorkEffortAccount, string> OnName_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.TimeRecords.WorkEffortAccount, string> OnName_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.TimeRecords.WorkEffortAccount, string> OnName_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.TimeRecords.WorkEffortAccount, string> OnName_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.TimeRecords.WorkEffortAccount, string> OnName_PostSetter;
         /// <summary>
         /// Space for notes
         /// </summary>
@@ -255,9 +255,9 @@ namespace Kistl.App.TimeRecords
             }
         }
         private string _Notes;
-		public event PropertyGetterHandler<Kistl.App.TimeRecords.WorkEffortAccount, string> OnNotes_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.TimeRecords.WorkEffortAccount, string> OnNotes_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.TimeRecords.WorkEffortAccount, string> OnNotes_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.TimeRecords.WorkEffortAccount, string> OnNotes_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.TimeRecords.WorkEffortAccount, string> OnNotes_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.TimeRecords.WorkEffortAccount, string> OnNotes_PostSetter;
         /// <summary>
         /// Aktuell gebuchte Stunden
         /// </summary>
@@ -306,9 +306,9 @@ namespace Kistl.App.TimeRecords
             }
         }
         private double? _SpentHours;
-		public event PropertyGetterHandler<Kistl.App.TimeRecords.WorkEffortAccount, double?> OnSpentHours_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.TimeRecords.WorkEffortAccount, double?> OnSpentHours_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.TimeRecords.WorkEffortAccount, double?> OnSpentHours_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.TimeRecords.WorkEffortAccount, double?> OnSpentHours_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.TimeRecords.WorkEffortAccount, double?> OnSpentHours_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.TimeRecords.WorkEffortAccount, double?> OnSpentHours_PostSetter;
 		public override InterfaceType GetInterfaceType()
 		{
 			return new InterfaceType(typeof(WorkEffortAccount));
@@ -342,7 +342,7 @@ namespace Kistl.App.TimeRecords
             }
             return e.Result;
         }
-        public event ToStringHandler<WorkEffortAccount> OnToString_WorkEffortAccount;
+        public static event ToStringHandler<WorkEffortAccount> OnToString_WorkEffortAccount;
 
         [EventBasedMethod("OnPreSave_WorkEffortAccount")]
         public override void NotifyPreSave()
@@ -350,7 +350,7 @@ namespace Kistl.App.TimeRecords
             base.NotifyPreSave();
             if (OnPreSave_WorkEffortAccount != null) OnPreSave_WorkEffortAccount(this);
         }
-        public event ObjectEventHandler<WorkEffortAccount> OnPreSave_WorkEffortAccount;
+        public static event ObjectEventHandler<WorkEffortAccount> OnPreSave_WorkEffortAccount;
 
         [EventBasedMethod("OnPostSave_WorkEffortAccount")]
         public override void NotifyPostSave()
@@ -358,7 +358,7 @@ namespace Kistl.App.TimeRecords
             base.NotifyPostSave();
             if (OnPostSave_WorkEffortAccount != null) OnPostSave_WorkEffortAccount(this);
         }
-        public event ObjectEventHandler<WorkEffortAccount> OnPostSave_WorkEffortAccount;
+        public static event ObjectEventHandler<WorkEffortAccount> OnPostSave_WorkEffortAccount;
 
         [EventBasedMethod("OnCreated_WorkEffortAccount")]
         public override void NotifyCreated()
@@ -366,7 +366,7 @@ namespace Kistl.App.TimeRecords
             base.NotifyCreated();
             if (OnCreated_WorkEffortAccount != null) OnCreated_WorkEffortAccount(this);
         }
-        public event ObjectEventHandler<WorkEffortAccount> OnCreated_WorkEffortAccount;
+        public static event ObjectEventHandler<WorkEffortAccount> OnCreated_WorkEffortAccount;
 
         [EventBasedMethod("OnDeleting_WorkEffortAccount")]
         public override void NotifyDeleting()
@@ -374,7 +374,7 @@ namespace Kistl.App.TimeRecords
             base.NotifyDeleting();
             if (OnDeleting_WorkEffortAccount != null) OnDeleting_WorkEffortAccount(this);
         }
-        public event ObjectEventHandler<WorkEffortAccount> OnDeleting_WorkEffortAccount;
+        public static event ObjectEventHandler<WorkEffortAccount> OnDeleting_WorkEffortAccount;
 
 
 		protected override string GetPropertyError(string propertyName) 

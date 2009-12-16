@@ -27,7 +27,7 @@
             }
             return e.Result;
         }
-        public event ToStringHandler<<%= cls.ClassName %>> OnToString_<%= cls.ClassName %>;
+        public static event ToStringHandler<<%= cls.ClassName %>> OnToString_<%= cls.ClassName %>;
 
         [EventBasedMethod("OnPreSave_<%= cls.ClassName %>")]
         public override void NotifyPreSave()
@@ -35,7 +35,7 @@
             base.NotifyPreSave();
             if (OnPreSave_<%= cls.ClassName %> != null) OnPreSave_<%= cls.ClassName %>(this);
         }
-        public event ObjectEventHandler<<%= cls.ClassName %>> OnPreSave_<%= cls.ClassName %>;
+        public static event ObjectEventHandler<<%= cls.ClassName %>> OnPreSave_<%= cls.ClassName %>;
 
         [EventBasedMethod("OnPostSave_<%= cls.ClassName %>")]
         public override void NotifyPostSave()
@@ -43,7 +43,7 @@
             base.NotifyPostSave();
             if (OnPostSave_<%= cls.ClassName %> != null) OnPostSave_<%= cls.ClassName %>(this);
         }
-        public event ObjectEventHandler<<%= cls.ClassName %>> OnPostSave_<%= cls.ClassName %>;
+        public static event ObjectEventHandler<<%= cls.ClassName %>> OnPostSave_<%= cls.ClassName %>;
 
         [EventBasedMethod("OnCreated_<%= cls.ClassName %>")]
         public override void NotifyCreated()
@@ -51,7 +51,7 @@
             base.NotifyCreated();
             if (OnCreated_<%= cls.ClassName %> != null) OnCreated_<%= cls.ClassName %>(this);
         }
-        public event ObjectEventHandler<<%= cls.ClassName %>> OnCreated_<%= cls.ClassName %>;
+        public static event ObjectEventHandler<<%= cls.ClassName %>> OnCreated_<%= cls.ClassName %>;
 
         [EventBasedMethod("OnDeleting_<%= cls.ClassName %>")]
         public override void NotifyDeleting()
@@ -59,7 +59,7 @@
             base.NotifyDeleting();
             if (OnDeleting_<%= cls.ClassName %> != null) OnDeleting_<%= cls.ClassName %>(this);
         }
-        public event ObjectEventHandler<<%= cls.ClassName %>> OnDeleting_<%= cls.ClassName %>;
+        public static event ObjectEventHandler<<%= cls.ClassName %>> OnDeleting_<%= cls.ClassName %>;
 
 <%
 	Implementation.ObjectClasses.GetPropertyErrorTemplate.Call(Host, ctx, cls);

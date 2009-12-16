@@ -49,7 +49,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-		public event GetErrorText_Handler<MethodInvocationConstraint> OnGetErrorText_MethodInvocationConstraint;
+		public static event GetErrorText_Handler<MethodInvocationConstraint> OnGetErrorText_MethodInvocationConstraint;
 
 
 
@@ -70,7 +70,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-		public event IsValid_Handler<MethodInvocationConstraint> OnIsValid_MethodInvocationConstraint;
+		public static event IsValid_Handler<MethodInvocationConstraint> OnIsValid_MethodInvocationConstraint;
 
 
 
@@ -103,7 +103,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-        public event ToStringHandler<MethodInvocationConstraint> OnToString_MethodInvocationConstraint;
+        public static event ToStringHandler<MethodInvocationConstraint> OnToString_MethodInvocationConstraint;
 
         [EventBasedMethod("OnPreSave_MethodInvocationConstraint")]
         public override void NotifyPreSave()
@@ -111,7 +111,7 @@ namespace Kistl.App.Base
             base.NotifyPreSave();
             if (OnPreSave_MethodInvocationConstraint != null) OnPreSave_MethodInvocationConstraint(this);
         }
-        public event ObjectEventHandler<MethodInvocationConstraint> OnPreSave_MethodInvocationConstraint;
+        public static event ObjectEventHandler<MethodInvocationConstraint> OnPreSave_MethodInvocationConstraint;
 
         [EventBasedMethod("OnPostSave_MethodInvocationConstraint")]
         public override void NotifyPostSave()
@@ -119,7 +119,7 @@ namespace Kistl.App.Base
             base.NotifyPostSave();
             if (OnPostSave_MethodInvocationConstraint != null) OnPostSave_MethodInvocationConstraint(this);
         }
-        public event ObjectEventHandler<MethodInvocationConstraint> OnPostSave_MethodInvocationConstraint;
+        public static event ObjectEventHandler<MethodInvocationConstraint> OnPostSave_MethodInvocationConstraint;
 
         [EventBasedMethod("OnCreated_MethodInvocationConstraint")]
         public override void NotifyCreated()
@@ -127,7 +127,7 @@ namespace Kistl.App.Base
             base.NotifyCreated();
             if (OnCreated_MethodInvocationConstraint != null) OnCreated_MethodInvocationConstraint(this);
         }
-        public event ObjectEventHandler<MethodInvocationConstraint> OnCreated_MethodInvocationConstraint;
+        public static event ObjectEventHandler<MethodInvocationConstraint> OnCreated_MethodInvocationConstraint;
 
         [EventBasedMethod("OnDeleting_MethodInvocationConstraint")]
         public override void NotifyDeleting()
@@ -135,7 +135,7 @@ namespace Kistl.App.Base
             base.NotifyDeleting();
             if (OnDeleting_MethodInvocationConstraint != null) OnDeleting_MethodInvocationConstraint(this);
         }
-        public event ObjectEventHandler<MethodInvocationConstraint> OnDeleting_MethodInvocationConstraint;
+        public static event ObjectEventHandler<MethodInvocationConstraint> OnDeleting_MethodInvocationConstraint;
 
 
 

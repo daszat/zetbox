@@ -116,9 +116,9 @@ namespace Kistl.App.GUI
             }
         }
         private Guid _ExportGuid;
-		public event PropertyGetterHandler<Kistl.App.GUI.Icon, Guid> OnExportGuid_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.GUI.Icon, Guid> OnExportGuid_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.GUI.Icon, Guid> OnExportGuid_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.GUI.Icon, Guid> OnExportGuid_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.GUI.Icon, Guid> OnExportGuid_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.GUI.Icon, Guid> OnExportGuid_PostSetter;
         /// <summary>
         /// Filename of the Icon
         /// </summary>
@@ -167,9 +167,9 @@ namespace Kistl.App.GUI
             }
         }
         private string _IconFile;
-		public event PropertyGetterHandler<Kistl.App.GUI.Icon, string> OnIconFile_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.GUI.Icon, string> OnIconFile_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.GUI.Icon, string> OnIconFile_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.GUI.Icon, string> OnIconFile_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.GUI.Icon, string> OnIconFile_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.GUI.Icon, string> OnIconFile_PostSetter;
         /// <summary>
         /// 
         /// </summary>
@@ -257,9 +257,9 @@ namespace Kistl.App.GUI
         }
         
         
-		public event PropertyGetterHandler<Kistl.App.GUI.Icon, Kistl.App.Base.Module> OnModule_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.GUI.Icon, Kistl.App.Base.Module> OnModule_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.GUI.Icon, Kistl.App.Base.Module> OnModule_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.GUI.Icon, Kistl.App.Base.Module> OnModule_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.GUI.Icon, Kistl.App.Base.Module> OnModule_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.GUI.Icon, Kistl.App.Base.Module> OnModule_PostSetter;
 		public override InterfaceType GetInterfaceType()
 		{
 			return new InterfaceType(typeof(Icon));
@@ -292,7 +292,7 @@ namespace Kistl.App.GUI
             }
             return e.Result;
         }
-        public event ToStringHandler<Icon> OnToString_Icon;
+        public static event ToStringHandler<Icon> OnToString_Icon;
 
         [EventBasedMethod("OnPreSave_Icon")]
         public override void NotifyPreSave()
@@ -300,7 +300,7 @@ namespace Kistl.App.GUI
             base.NotifyPreSave();
             if (OnPreSave_Icon != null) OnPreSave_Icon(this);
         }
-        public event ObjectEventHandler<Icon> OnPreSave_Icon;
+        public static event ObjectEventHandler<Icon> OnPreSave_Icon;
 
         [EventBasedMethod("OnPostSave_Icon")]
         public override void NotifyPostSave()
@@ -308,7 +308,7 @@ namespace Kistl.App.GUI
             base.NotifyPostSave();
             if (OnPostSave_Icon != null) OnPostSave_Icon(this);
         }
-        public event ObjectEventHandler<Icon> OnPostSave_Icon;
+        public static event ObjectEventHandler<Icon> OnPostSave_Icon;
 
         [EventBasedMethod("OnCreated_Icon")]
         public override void NotifyCreated()
@@ -316,7 +316,7 @@ namespace Kistl.App.GUI
             base.NotifyCreated();
             if (OnCreated_Icon != null) OnCreated_Icon(this);
         }
-        public event ObjectEventHandler<Icon> OnCreated_Icon;
+        public static event ObjectEventHandler<Icon> OnCreated_Icon;
 
         [EventBasedMethod("OnDeleting_Icon")]
         public override void NotifyDeleting()
@@ -324,7 +324,7 @@ namespace Kistl.App.GUI
             base.NotifyDeleting();
             if (OnDeleting_Icon != null) OnDeleting_Icon(this);
         }
-        public event ObjectEventHandler<Icon> OnDeleting_Icon;
+        public static event ObjectEventHandler<Icon> OnDeleting_Icon;
 
 
 		protected override string GetPropertyError(string propertyName) 

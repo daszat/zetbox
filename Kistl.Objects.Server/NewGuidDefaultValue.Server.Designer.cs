@@ -49,7 +49,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-		public event GetDefaultValue_Handler<NewGuidDefaultValue> OnGetDefaultValue_NewGuidDefaultValue;
+		public static event GetDefaultValue_Handler<NewGuidDefaultValue> OnGetDefaultValue_NewGuidDefaultValue;
 
 
 
@@ -82,7 +82,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-        public event ToStringHandler<NewGuidDefaultValue> OnToString_NewGuidDefaultValue;
+        public static event ToStringHandler<NewGuidDefaultValue> OnToString_NewGuidDefaultValue;
 
         [EventBasedMethod("OnPreSave_NewGuidDefaultValue")]
         public override void NotifyPreSave()
@@ -90,7 +90,7 @@ namespace Kistl.App.Base
             base.NotifyPreSave();
             if (OnPreSave_NewGuidDefaultValue != null) OnPreSave_NewGuidDefaultValue(this);
         }
-        public event ObjectEventHandler<NewGuidDefaultValue> OnPreSave_NewGuidDefaultValue;
+        public static event ObjectEventHandler<NewGuidDefaultValue> OnPreSave_NewGuidDefaultValue;
 
         [EventBasedMethod("OnPostSave_NewGuidDefaultValue")]
         public override void NotifyPostSave()
@@ -98,7 +98,7 @@ namespace Kistl.App.Base
             base.NotifyPostSave();
             if (OnPostSave_NewGuidDefaultValue != null) OnPostSave_NewGuidDefaultValue(this);
         }
-        public event ObjectEventHandler<NewGuidDefaultValue> OnPostSave_NewGuidDefaultValue;
+        public static event ObjectEventHandler<NewGuidDefaultValue> OnPostSave_NewGuidDefaultValue;
 
         [EventBasedMethod("OnCreated_NewGuidDefaultValue")]
         public override void NotifyCreated()
@@ -106,7 +106,7 @@ namespace Kistl.App.Base
             base.NotifyCreated();
             if (OnCreated_NewGuidDefaultValue != null) OnCreated_NewGuidDefaultValue(this);
         }
-        public event ObjectEventHandler<NewGuidDefaultValue> OnCreated_NewGuidDefaultValue;
+        public static event ObjectEventHandler<NewGuidDefaultValue> OnCreated_NewGuidDefaultValue;
 
         [EventBasedMethod("OnDeleting_NewGuidDefaultValue")]
         public override void NotifyDeleting()
@@ -114,7 +114,7 @@ namespace Kistl.App.Base
             base.NotifyDeleting();
             if (OnDeleting_NewGuidDefaultValue != null) OnDeleting_NewGuidDefaultValue(this);
         }
-        public event ObjectEventHandler<NewGuidDefaultValue> OnDeleting_NewGuidDefaultValue;
+        public static event ObjectEventHandler<NewGuidDefaultValue> OnDeleting_NewGuidDefaultValue;
 
 
 

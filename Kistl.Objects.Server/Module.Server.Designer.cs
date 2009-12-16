@@ -192,9 +192,9 @@ namespace Kistl.App.Base
         }
         
         
-		public event PropertyGetterHandler<Kistl.App.Base.Module, Kistl.App.Base.Identity> OnChangedBy_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.Module, Kistl.App.Base.Identity> OnChangedBy_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.Module, Kistl.App.Base.Identity> OnChangedBy_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.Module, Kistl.App.Base.Identity> OnChangedBy_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.Module, Kistl.App.Base.Identity> OnChangedBy_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.Module, Kistl.App.Base.Identity> OnChangedBy_PostSetter;
         /// <summary>
         /// Date and time where this object was changed
         /// </summary>
@@ -243,9 +243,9 @@ namespace Kistl.App.Base
             }
         }
         private DateTime? _ChangedOn;
-		public event PropertyGetterHandler<Kistl.App.Base.Module, DateTime?> OnChangedOn_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.Module, DateTime?> OnChangedOn_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.Module, DateTime?> OnChangedOn_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.Module, DateTime?> OnChangedOn_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.Module, DateTime?> OnChangedOn_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.Module, DateTime?> OnChangedOn_PostSetter;
         /// <summary>
         /// Identity which created this object
         /// </summary>
@@ -333,9 +333,9 @@ namespace Kistl.App.Base
         }
         
         
-		public event PropertyGetterHandler<Kistl.App.Base.Module, Kistl.App.Base.Identity> OnCreatedBy_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.Module, Kistl.App.Base.Identity> OnCreatedBy_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.Module, Kistl.App.Base.Identity> OnCreatedBy_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.Module, Kistl.App.Base.Identity> OnCreatedBy_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.Module, Kistl.App.Base.Identity> OnCreatedBy_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.Module, Kistl.App.Base.Identity> OnCreatedBy_PostSetter;
         /// <summary>
         /// Date and time where this object was created
         /// </summary>
@@ -384,9 +384,9 @@ namespace Kistl.App.Base
             }
         }
         private DateTime? _CreatedOn;
-		public event PropertyGetterHandler<Kistl.App.Base.Module, DateTime?> OnCreatedOn_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.Module, DateTime?> OnCreatedOn_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.Module, DateTime?> OnCreatedOn_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.Module, DateTime?> OnCreatedOn_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.Module, DateTime?> OnCreatedOn_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.Module, DateTime?> OnCreatedOn_PostSetter;
         /// <summary>
         /// Datentypendes Modules
         /// </summary>
@@ -484,9 +484,9 @@ namespace Kistl.App.Base
             }
         }
         private string _Description;
-		public event PropertyGetterHandler<Kistl.App.Base.Module, string> OnDescription_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.Module, string> OnDescription_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.Module, string> OnDescription_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.Module, string> OnDescription_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.Module, string> OnDescription_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.Module, string> OnDescription_PostSetter;
         /// <summary>
         /// Export Guid
         /// </summary>
@@ -546,9 +546,9 @@ namespace Kistl.App.Base
             }
         }
         private Guid _ExportGuid;
-		public event PropertyGetterHandler<Kistl.App.Base.Module, Guid> OnExportGuid_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.Module, Guid> OnExportGuid_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.Module, Guid> OnExportGuid_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.Module, Guid> OnExportGuid_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.Module, Guid> OnExportGuid_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.Module, Guid> OnExportGuid_PostSetter;
         /// <summary>
         /// Name des Moduls
         /// </summary>
@@ -597,9 +597,9 @@ namespace Kistl.App.Base
             }
         }
         private string _ModuleName;
-		public event PropertyGetterHandler<Kistl.App.Base.Module, string> OnModuleName_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.Module, string> OnModuleName_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.Module, string> OnModuleName_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.Module, string> OnModuleName_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.Module, string> OnModuleName_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.Module, string> OnModuleName_PostSetter;
         /// <summary>
         /// CLR Namespace des Moduls
         /// </summary>
@@ -648,9 +648,9 @@ namespace Kistl.App.Base
             }
         }
         private string _Namespace;
-		public event PropertyGetterHandler<Kistl.App.Base.Module, string> OnNamespace_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.Module, string> OnNamespace_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.Module, string> OnNamespace_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.Module, string> OnNamespace_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.Module, string> OnNamespace_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.Module, string> OnNamespace_PostSetter;
 		public override InterfaceType GetInterfaceType()
 		{
 			return new InterfaceType(typeof(Module));
@@ -688,7 +688,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-        public event ToStringHandler<Module> OnToString_Module;
+        public static event ToStringHandler<Module> OnToString_Module;
 
         [EventBasedMethod("OnPreSave_Module")]
         public override void NotifyPreSave()
@@ -696,7 +696,7 @@ namespace Kistl.App.Base
             base.NotifyPreSave();
             if (OnPreSave_Module != null) OnPreSave_Module(this);
         }
-        public event ObjectEventHandler<Module> OnPreSave_Module;
+        public static event ObjectEventHandler<Module> OnPreSave_Module;
 
         [EventBasedMethod("OnPostSave_Module")]
         public override void NotifyPostSave()
@@ -704,7 +704,7 @@ namespace Kistl.App.Base
             base.NotifyPostSave();
             if (OnPostSave_Module != null) OnPostSave_Module(this);
         }
-        public event ObjectEventHandler<Module> OnPostSave_Module;
+        public static event ObjectEventHandler<Module> OnPostSave_Module;
 
         [EventBasedMethod("OnCreated_Module")]
         public override void NotifyCreated()
@@ -712,7 +712,7 @@ namespace Kistl.App.Base
             base.NotifyCreated();
             if (OnCreated_Module != null) OnCreated_Module(this);
         }
-        public event ObjectEventHandler<Module> OnCreated_Module;
+        public static event ObjectEventHandler<Module> OnCreated_Module;
 
         [EventBasedMethod("OnDeleting_Module")]
         public override void NotifyDeleting()
@@ -720,7 +720,7 @@ namespace Kistl.App.Base
             base.NotifyDeleting();
             if (OnDeleting_Module != null) OnDeleting_Module(this);
         }
-        public event ObjectEventHandler<Module> OnDeleting_Module;
+        public static event ObjectEventHandler<Module> OnDeleting_Module;
 
 
 		protected override string GetPropertyError(string propertyName) 

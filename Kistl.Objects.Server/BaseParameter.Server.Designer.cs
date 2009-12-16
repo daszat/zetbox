@@ -144,9 +144,9 @@ namespace Kistl.App.Base
         }
         
         
-		public event PropertyGetterHandler<Kistl.App.Base.BaseParameter, Kistl.App.Base.Identity> OnChangedBy_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.BaseParameter, Kistl.App.Base.Identity> OnChangedBy_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.BaseParameter, Kistl.App.Base.Identity> OnChangedBy_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.BaseParameter, Kistl.App.Base.Identity> OnChangedBy_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.BaseParameter, Kistl.App.Base.Identity> OnChangedBy_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.BaseParameter, Kistl.App.Base.Identity> OnChangedBy_PostSetter;
         /// <summary>
         /// Date and time where this object was changed
         /// </summary>
@@ -195,9 +195,9 @@ namespace Kistl.App.Base
             }
         }
         private DateTime? _ChangedOn;
-		public event PropertyGetterHandler<Kistl.App.Base.BaseParameter, DateTime?> OnChangedOn_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.BaseParameter, DateTime?> OnChangedOn_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.BaseParameter, DateTime?> OnChangedOn_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.BaseParameter, DateTime?> OnChangedOn_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.BaseParameter, DateTime?> OnChangedOn_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.BaseParameter, DateTime?> OnChangedOn_PostSetter;
         /// <summary>
         /// Identity which created this object
         /// </summary>
@@ -285,9 +285,9 @@ namespace Kistl.App.Base
         }
         
         
-		public event PropertyGetterHandler<Kistl.App.Base.BaseParameter, Kistl.App.Base.Identity> OnCreatedBy_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.BaseParameter, Kistl.App.Base.Identity> OnCreatedBy_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.BaseParameter, Kistl.App.Base.Identity> OnCreatedBy_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.BaseParameter, Kistl.App.Base.Identity> OnCreatedBy_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.BaseParameter, Kistl.App.Base.Identity> OnCreatedBy_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.BaseParameter, Kistl.App.Base.Identity> OnCreatedBy_PostSetter;
         /// <summary>
         /// Date and time where this object was created
         /// </summary>
@@ -336,9 +336,9 @@ namespace Kistl.App.Base
             }
         }
         private DateTime? _CreatedOn;
-		public event PropertyGetterHandler<Kistl.App.Base.BaseParameter, DateTime?> OnCreatedOn_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.BaseParameter, DateTime?> OnCreatedOn_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.BaseParameter, DateTime?> OnCreatedOn_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.BaseParameter, DateTime?> OnCreatedOn_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.BaseParameter, DateTime?> OnCreatedOn_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.BaseParameter, DateTime?> OnCreatedOn_PostSetter;
         /// <summary>
         /// Description of this Parameter
         /// </summary>
@@ -387,9 +387,9 @@ namespace Kistl.App.Base
             }
         }
         private string _Description;
-		public event PropertyGetterHandler<Kistl.App.Base.BaseParameter, string> OnDescription_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.BaseParameter, string> OnDescription_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.BaseParameter, string> OnDescription_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.BaseParameter, string> OnDescription_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.BaseParameter, string> OnDescription_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.BaseParameter, string> OnDescription_PostSetter;
         /// <summary>
         /// Export Guid
         /// </summary>
@@ -449,9 +449,9 @@ namespace Kistl.App.Base
             }
         }
         private Guid _ExportGuid;
-		public event PropertyGetterHandler<Kistl.App.Base.BaseParameter, Guid> OnExportGuid_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.BaseParameter, Guid> OnExportGuid_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.BaseParameter, Guid> OnExportGuid_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.BaseParameter, Guid> OnExportGuid_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.BaseParameter, Guid> OnExportGuid_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.BaseParameter, Guid> OnExportGuid_PostSetter;
         /// <summary>
         /// Parameter wird als List&lt;&gt; generiert
         /// </summary>
@@ -500,9 +500,9 @@ namespace Kistl.App.Base
             }
         }
         private bool _IsList;
-		public event PropertyGetterHandler<Kistl.App.Base.BaseParameter, bool> OnIsList_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.BaseParameter, bool> OnIsList_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.BaseParameter, bool> OnIsList_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.BaseParameter, bool> OnIsList_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.BaseParameter, bool> OnIsList_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.BaseParameter, bool> OnIsList_PostSetter;
         /// <summary>
         /// Es darf nur ein Return Parameter angegeben werden
         /// </summary>
@@ -551,9 +551,9 @@ namespace Kistl.App.Base
             }
         }
         private bool _IsReturnParameter;
-		public event PropertyGetterHandler<Kistl.App.Base.BaseParameter, bool> OnIsReturnParameter_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.BaseParameter, bool> OnIsReturnParameter_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.BaseParameter, bool> OnIsReturnParameter_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.BaseParameter, bool> OnIsReturnParameter_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.BaseParameter, bool> OnIsReturnParameter_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.BaseParameter, bool> OnIsReturnParameter_PostSetter;
         /// <summary>
         /// Methode des Parameters
         /// </summary>
@@ -668,9 +668,9 @@ namespace Kistl.App.Base
         }
         private int? _Method_pos;
         
-		public event PropertyGetterHandler<Kistl.App.Base.BaseParameter, Kistl.App.Base.Method> OnMethod_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.BaseParameter, Kistl.App.Base.Method> OnMethod_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.BaseParameter, Kistl.App.Base.Method> OnMethod_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.BaseParameter, Kistl.App.Base.Method> OnMethod_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.BaseParameter, Kistl.App.Base.Method> OnMethod_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.BaseParameter, Kistl.App.Base.Method> OnMethod_PostSetter;
         /// <summary>
         /// Name des Parameter
         /// </summary>
@@ -719,9 +719,9 @@ namespace Kistl.App.Base
             }
         }
         private string _ParameterName;
-		public event PropertyGetterHandler<Kistl.App.Base.BaseParameter, string> OnParameterName_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Base.BaseParameter, string> OnParameterName_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Base.BaseParameter, string> OnParameterName_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.BaseParameter, string> OnParameterName_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.BaseParameter, string> OnParameterName_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.BaseParameter, string> OnParameterName_PostSetter;
         /// <summary>
         /// Returns the resulting Type of this Method-Parameter Meta Object.
         /// </summary>
@@ -740,7 +740,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
 		public delegate void GetParameterType_Handler<T>(T obj, MethodReturnEventArgs<System.Type> ret);
-		public event GetParameterType_Handler<BaseParameter> OnGetParameterType_BaseParameter;
+		public static event GetParameterType_Handler<BaseParameter> OnGetParameterType_BaseParameter;
 
 
 
@@ -762,7 +762,7 @@ namespace Kistl.App.Base
             return e.Result;
         }
 		public delegate void GetParameterTypeString_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
-		public event GetParameterTypeString_Handler<BaseParameter> OnGetParameterTypeString_BaseParameter;
+		public static event GetParameterTypeString_Handler<BaseParameter> OnGetParameterTypeString_BaseParameter;
 
 
 
@@ -805,7 +805,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-        public event ToStringHandler<BaseParameter> OnToString_BaseParameter;
+        public static event ToStringHandler<BaseParameter> OnToString_BaseParameter;
 
         [EventBasedMethod("OnPreSave_BaseParameter")]
         public override void NotifyPreSave()
@@ -813,7 +813,7 @@ namespace Kistl.App.Base
             base.NotifyPreSave();
             if (OnPreSave_BaseParameter != null) OnPreSave_BaseParameter(this);
         }
-        public event ObjectEventHandler<BaseParameter> OnPreSave_BaseParameter;
+        public static event ObjectEventHandler<BaseParameter> OnPreSave_BaseParameter;
 
         [EventBasedMethod("OnPostSave_BaseParameter")]
         public override void NotifyPostSave()
@@ -821,7 +821,7 @@ namespace Kistl.App.Base
             base.NotifyPostSave();
             if (OnPostSave_BaseParameter != null) OnPostSave_BaseParameter(this);
         }
-        public event ObjectEventHandler<BaseParameter> OnPostSave_BaseParameter;
+        public static event ObjectEventHandler<BaseParameter> OnPostSave_BaseParameter;
 
         [EventBasedMethod("OnCreated_BaseParameter")]
         public override void NotifyCreated()
@@ -829,7 +829,7 @@ namespace Kistl.App.Base
             base.NotifyCreated();
             if (OnCreated_BaseParameter != null) OnCreated_BaseParameter(this);
         }
-        public event ObjectEventHandler<BaseParameter> OnCreated_BaseParameter;
+        public static event ObjectEventHandler<BaseParameter> OnCreated_BaseParameter;
 
         [EventBasedMethod("OnDeleting_BaseParameter")]
         public override void NotifyDeleting()
@@ -837,7 +837,7 @@ namespace Kistl.App.Base
             base.NotifyDeleting();
             if (OnDeleting_BaseParameter != null) OnDeleting_BaseParameter(this);
         }
-        public event ObjectEventHandler<BaseParameter> OnDeleting_BaseParameter;
+        public static event ObjectEventHandler<BaseParameter> OnDeleting_BaseParameter;
 
 
 		protected override string GetPropertyError(string propertyName) 

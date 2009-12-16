@@ -105,9 +105,9 @@ namespace Kistl.App.TimeRecords
             }
         }
         private DateTime _From;
-		public event PropertyGetterHandler<Kistl.App.TimeRecords.PresenceRecord, DateTime> OnFrom_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.TimeRecords.PresenceRecord, DateTime> OnFrom_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.TimeRecords.PresenceRecord, DateTime> OnFrom_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.TimeRecords.PresenceRecord, DateTime> OnFrom_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.TimeRecords.PresenceRecord, DateTime> OnFrom_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.TimeRecords.PresenceRecord, DateTime> OnFrom_PostSetter;
         /// <summary>
         /// Which employee was present.
         /// </summary>
@@ -195,9 +195,9 @@ namespace Kistl.App.TimeRecords
         }
         
         
-		public event PropertyGetterHandler<Kistl.App.TimeRecords.PresenceRecord, Kistl.App.Projekte.Mitarbeiter> OnMitarbeiter_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.TimeRecords.PresenceRecord, Kistl.App.Projekte.Mitarbeiter> OnMitarbeiter_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.TimeRecords.PresenceRecord, Kistl.App.Projekte.Mitarbeiter> OnMitarbeiter_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.TimeRecords.PresenceRecord, Kistl.App.Projekte.Mitarbeiter> OnMitarbeiter_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.TimeRecords.PresenceRecord, Kistl.App.Projekte.Mitarbeiter> OnMitarbeiter_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.TimeRecords.PresenceRecord, Kistl.App.Projekte.Mitarbeiter> OnMitarbeiter_PostSetter;
         /// <summary>
         /// Point in time (inclusive) when the presence ended.
         /// </summary>
@@ -246,9 +246,9 @@ namespace Kistl.App.TimeRecords
             }
         }
         private DateTime? _Thru;
-		public event PropertyGetterHandler<Kistl.App.TimeRecords.PresenceRecord, DateTime?> OnThru_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.TimeRecords.PresenceRecord, DateTime?> OnThru_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.TimeRecords.PresenceRecord, DateTime?> OnThru_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.TimeRecords.PresenceRecord, DateTime?> OnThru_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.TimeRecords.PresenceRecord, DateTime?> OnThru_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.TimeRecords.PresenceRecord, DateTime?> OnThru_PostSetter;
 		public override InterfaceType GetInterfaceType()
 		{
 			return new InterfaceType(typeof(PresenceRecord));
@@ -281,7 +281,7 @@ namespace Kistl.App.TimeRecords
             }
             return e.Result;
         }
-        public event ToStringHandler<PresenceRecord> OnToString_PresenceRecord;
+        public static event ToStringHandler<PresenceRecord> OnToString_PresenceRecord;
 
         [EventBasedMethod("OnPreSave_PresenceRecord")]
         public override void NotifyPreSave()
@@ -289,7 +289,7 @@ namespace Kistl.App.TimeRecords
             base.NotifyPreSave();
             if (OnPreSave_PresenceRecord != null) OnPreSave_PresenceRecord(this);
         }
-        public event ObjectEventHandler<PresenceRecord> OnPreSave_PresenceRecord;
+        public static event ObjectEventHandler<PresenceRecord> OnPreSave_PresenceRecord;
 
         [EventBasedMethod("OnPostSave_PresenceRecord")]
         public override void NotifyPostSave()
@@ -297,7 +297,7 @@ namespace Kistl.App.TimeRecords
             base.NotifyPostSave();
             if (OnPostSave_PresenceRecord != null) OnPostSave_PresenceRecord(this);
         }
-        public event ObjectEventHandler<PresenceRecord> OnPostSave_PresenceRecord;
+        public static event ObjectEventHandler<PresenceRecord> OnPostSave_PresenceRecord;
 
         [EventBasedMethod("OnCreated_PresenceRecord")]
         public override void NotifyCreated()
@@ -305,7 +305,7 @@ namespace Kistl.App.TimeRecords
             base.NotifyCreated();
             if (OnCreated_PresenceRecord != null) OnCreated_PresenceRecord(this);
         }
-        public event ObjectEventHandler<PresenceRecord> OnCreated_PresenceRecord;
+        public static event ObjectEventHandler<PresenceRecord> OnCreated_PresenceRecord;
 
         [EventBasedMethod("OnDeleting_PresenceRecord")]
         public override void NotifyDeleting()
@@ -313,7 +313,7 @@ namespace Kistl.App.TimeRecords
             base.NotifyDeleting();
             if (OnDeleting_PresenceRecord != null) OnDeleting_PresenceRecord(this);
         }
-        public event ObjectEventHandler<PresenceRecord> OnDeleting_PresenceRecord;
+        public static event ObjectEventHandler<PresenceRecord> OnDeleting_PresenceRecord;
 
 
 		protected override string GetPropertyError(string propertyName) 

@@ -32,9 +32,9 @@ string eventName = "On" + prop.PropertyName;
 
 
 #line 20 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\PropertyInvocationsTemplate.cst"
-this.WriteObjects("		public event PropertyGetterHandler<",  objType , ", ",  propType , "> ",  eventName , "_Getter;\r\n");
-this.WriteObjects("		public event PropertyPreSetterHandler<",  objType , ", ",  propType , "> ",  eventName , "_PreSetter;\r\n");
-this.WriteObjects("		public event PropertyPostSetterHandler<",  objType , ", ",  propType , "> ",  eventName , "_PostSetter;");
+this.WriteObjects("		public static event PropertyGetterHandler<",  objType , ", ",  propType , "> ",  eventName , "_Getter;\r\n");
+this.WriteObjects("		public static event PropertyPreSetterHandler<",  objType , ", ",  propType , "> ",  eventName , "_PreSetter;\r\n");
+this.WriteObjects("		public static event PropertyPostSetterHandler<",  objType , ", ",  propType , "> ",  eventName , "_PostSetter;");
 
         }
 

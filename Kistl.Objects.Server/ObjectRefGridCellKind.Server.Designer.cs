@@ -61,7 +61,7 @@ namespace Kistl.App.GUI
             }
             return e.Result;
         }
-        public event ToStringHandler<ObjectRefGridCellKind> OnToString_ObjectRefGridCellKind;
+        public static event ToStringHandler<ObjectRefGridCellKind> OnToString_ObjectRefGridCellKind;
 
         [EventBasedMethod("OnPreSave_ObjectRefGridCellKind")]
         public override void NotifyPreSave()
@@ -69,7 +69,7 @@ namespace Kistl.App.GUI
             base.NotifyPreSave();
             if (OnPreSave_ObjectRefGridCellKind != null) OnPreSave_ObjectRefGridCellKind(this);
         }
-        public event ObjectEventHandler<ObjectRefGridCellKind> OnPreSave_ObjectRefGridCellKind;
+        public static event ObjectEventHandler<ObjectRefGridCellKind> OnPreSave_ObjectRefGridCellKind;
 
         [EventBasedMethod("OnPostSave_ObjectRefGridCellKind")]
         public override void NotifyPostSave()
@@ -77,7 +77,7 @@ namespace Kistl.App.GUI
             base.NotifyPostSave();
             if (OnPostSave_ObjectRefGridCellKind != null) OnPostSave_ObjectRefGridCellKind(this);
         }
-        public event ObjectEventHandler<ObjectRefGridCellKind> OnPostSave_ObjectRefGridCellKind;
+        public static event ObjectEventHandler<ObjectRefGridCellKind> OnPostSave_ObjectRefGridCellKind;
 
         [EventBasedMethod("OnCreated_ObjectRefGridCellKind")]
         public override void NotifyCreated()
@@ -85,7 +85,7 @@ namespace Kistl.App.GUI
             base.NotifyCreated();
             if (OnCreated_ObjectRefGridCellKind != null) OnCreated_ObjectRefGridCellKind(this);
         }
-        public event ObjectEventHandler<ObjectRefGridCellKind> OnCreated_ObjectRefGridCellKind;
+        public static event ObjectEventHandler<ObjectRefGridCellKind> OnCreated_ObjectRefGridCellKind;
 
         [EventBasedMethod("OnDeleting_ObjectRefGridCellKind")]
         public override void NotifyDeleting()
@@ -93,7 +93,7 @@ namespace Kistl.App.GUI
             base.NotifyDeleting();
             if (OnDeleting_ObjectRefGridCellKind != null) OnDeleting_ObjectRefGridCellKind(this);
         }
-        public event ObjectEventHandler<ObjectRefGridCellKind> OnDeleting_ObjectRefGridCellKind;
+        public static event ObjectEventHandler<ObjectRefGridCellKind> OnDeleting_ObjectRefGridCellKind;
 
 
 

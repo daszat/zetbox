@@ -61,7 +61,7 @@ namespace Kistl.App.GUI
             }
             return e.Result;
         }
-        public event ToStringHandler<PropertyGroupKind> OnToString_PropertyGroupKind;
+        public static event ToStringHandler<PropertyGroupKind> OnToString_PropertyGroupKind;
 
         [EventBasedMethod("OnPreSave_PropertyGroupKind")]
         public override void NotifyPreSave()
@@ -69,7 +69,7 @@ namespace Kistl.App.GUI
             base.NotifyPreSave();
             if (OnPreSave_PropertyGroupKind != null) OnPreSave_PropertyGroupKind(this);
         }
-        public event ObjectEventHandler<PropertyGroupKind> OnPreSave_PropertyGroupKind;
+        public static event ObjectEventHandler<PropertyGroupKind> OnPreSave_PropertyGroupKind;
 
         [EventBasedMethod("OnPostSave_PropertyGroupKind")]
         public override void NotifyPostSave()
@@ -77,7 +77,7 @@ namespace Kistl.App.GUI
             base.NotifyPostSave();
             if (OnPostSave_PropertyGroupKind != null) OnPostSave_PropertyGroupKind(this);
         }
-        public event ObjectEventHandler<PropertyGroupKind> OnPostSave_PropertyGroupKind;
+        public static event ObjectEventHandler<PropertyGroupKind> OnPostSave_PropertyGroupKind;
 
         [EventBasedMethod("OnCreated_PropertyGroupKind")]
         public override void NotifyCreated()
@@ -85,7 +85,7 @@ namespace Kistl.App.GUI
             base.NotifyCreated();
             if (OnCreated_PropertyGroupKind != null) OnCreated_PropertyGroupKind(this);
         }
-        public event ObjectEventHandler<PropertyGroupKind> OnCreated_PropertyGroupKind;
+        public static event ObjectEventHandler<PropertyGroupKind> OnCreated_PropertyGroupKind;
 
         [EventBasedMethod("OnDeleting_PropertyGroupKind")]
         public override void NotifyDeleting()
@@ -93,7 +93,7 @@ namespace Kistl.App.GUI
             base.NotifyDeleting();
             if (OnDeleting_PropertyGroupKind != null) OnDeleting_PropertyGroupKind(this);
         }
-        public event ObjectEventHandler<PropertyGroupKind> OnDeleting_PropertyGroupKind;
+        public static event ObjectEventHandler<PropertyGroupKind> OnDeleting_PropertyGroupKind;
 
 
 

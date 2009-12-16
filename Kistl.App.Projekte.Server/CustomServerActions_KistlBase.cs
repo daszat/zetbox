@@ -5,11 +5,22 @@ using System.Text;
 
 using Kistl.API.Server;
 using Kistl.App.Extensions;
+using Kistl.API.Utils;
 
 namespace Kistl.App.Base
 {
     public class CustomServerActions_KistlBase
     {
+        private static int instance_counter = 0;
+        /// <summary>
+        /// TODO: Remove after measurement
+        /// </summary>
+        public CustomServerActions_KistlBase()
+        {
+            instance_counter++;
+            Logging.Log.DebugFormat("{0}: {1} instances", this.GetType(), instance_counter);
+        }
+
         #region Save
         public void OnPreSave_BaseParameter(Kistl.App.Base.BaseParameter obj)
         {

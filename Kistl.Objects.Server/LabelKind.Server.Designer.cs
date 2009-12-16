@@ -61,7 +61,7 @@ namespace Kistl.App.GUI
             }
             return e.Result;
         }
-        public event ToStringHandler<LabelKind> OnToString_LabelKind;
+        public static event ToStringHandler<LabelKind> OnToString_LabelKind;
 
         [EventBasedMethod("OnPreSave_LabelKind")]
         public override void NotifyPreSave()
@@ -69,7 +69,7 @@ namespace Kistl.App.GUI
             base.NotifyPreSave();
             if (OnPreSave_LabelKind != null) OnPreSave_LabelKind(this);
         }
-        public event ObjectEventHandler<LabelKind> OnPreSave_LabelKind;
+        public static event ObjectEventHandler<LabelKind> OnPreSave_LabelKind;
 
         [EventBasedMethod("OnPostSave_LabelKind")]
         public override void NotifyPostSave()
@@ -77,7 +77,7 @@ namespace Kistl.App.GUI
             base.NotifyPostSave();
             if (OnPostSave_LabelKind != null) OnPostSave_LabelKind(this);
         }
-        public event ObjectEventHandler<LabelKind> OnPostSave_LabelKind;
+        public static event ObjectEventHandler<LabelKind> OnPostSave_LabelKind;
 
         [EventBasedMethod("OnCreated_LabelKind")]
         public override void NotifyCreated()
@@ -85,7 +85,7 @@ namespace Kistl.App.GUI
             base.NotifyCreated();
             if (OnCreated_LabelKind != null) OnCreated_LabelKind(this);
         }
-        public event ObjectEventHandler<LabelKind> OnCreated_LabelKind;
+        public static event ObjectEventHandler<LabelKind> OnCreated_LabelKind;
 
         [EventBasedMethod("OnDeleting_LabelKind")]
         public override void NotifyDeleting()
@@ -93,7 +93,7 @@ namespace Kistl.App.GUI
             base.NotifyDeleting();
             if (OnDeleting_LabelKind != null) OnDeleting_LabelKind(this);
         }
-        public event ObjectEventHandler<LabelKind> OnDeleting_LabelKind;
+        public static event ObjectEventHandler<LabelKind> OnDeleting_LabelKind;
 
 
 

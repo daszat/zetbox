@@ -61,7 +61,7 @@ namespace Kistl.App.GUI
             }
             return e.Result;
         }
-        public event ToStringHandler<ObjectListKind> OnToString_ObjectListKind;
+        public static event ToStringHandler<ObjectListKind> OnToString_ObjectListKind;
 
         [EventBasedMethod("OnPreSave_ObjectListKind")]
         public override void NotifyPreSave()
@@ -69,7 +69,7 @@ namespace Kistl.App.GUI
             base.NotifyPreSave();
             if (OnPreSave_ObjectListKind != null) OnPreSave_ObjectListKind(this);
         }
-        public event ObjectEventHandler<ObjectListKind> OnPreSave_ObjectListKind;
+        public static event ObjectEventHandler<ObjectListKind> OnPreSave_ObjectListKind;
 
         [EventBasedMethod("OnPostSave_ObjectListKind")]
         public override void NotifyPostSave()
@@ -77,7 +77,7 @@ namespace Kistl.App.GUI
             base.NotifyPostSave();
             if (OnPostSave_ObjectListKind != null) OnPostSave_ObjectListKind(this);
         }
-        public event ObjectEventHandler<ObjectListKind> OnPostSave_ObjectListKind;
+        public static event ObjectEventHandler<ObjectListKind> OnPostSave_ObjectListKind;
 
         [EventBasedMethod("OnCreated_ObjectListKind")]
         public override void NotifyCreated()
@@ -85,7 +85,7 @@ namespace Kistl.App.GUI
             base.NotifyCreated();
             if (OnCreated_ObjectListKind != null) OnCreated_ObjectListKind(this);
         }
-        public event ObjectEventHandler<ObjectListKind> OnCreated_ObjectListKind;
+        public static event ObjectEventHandler<ObjectListKind> OnCreated_ObjectListKind;
 
         [EventBasedMethod("OnDeleting_ObjectListKind")]
         public override void NotifyDeleting()
@@ -93,7 +93,7 @@ namespace Kistl.App.GUI
             base.NotifyDeleting();
             if (OnDeleting_ObjectListKind != null) OnDeleting_ObjectListKind(this);
         }
-        public event ObjectEventHandler<ObjectListKind> OnDeleting_ObjectListKind;
+        public static event ObjectEventHandler<ObjectListKind> OnDeleting_ObjectListKind;
 
 
 

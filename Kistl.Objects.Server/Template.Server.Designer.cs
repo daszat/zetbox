@@ -144,9 +144,9 @@ namespace Kistl.App.GUI
         }
         
         
-		public event PropertyGetterHandler<Kistl.App.GUI.Template, Kistl.App.Base.Assembly> OnDisplayedTypeAssembly_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.GUI.Template, Kistl.App.Base.Assembly> OnDisplayedTypeAssembly_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.GUI.Template, Kistl.App.Base.Assembly> OnDisplayedTypeAssembly_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.GUI.Template, Kistl.App.Base.Assembly> OnDisplayedTypeAssembly_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.GUI.Template, Kistl.App.Base.Assembly> OnDisplayedTypeAssembly_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.GUI.Template, Kistl.App.Base.Assembly> OnDisplayedTypeAssembly_PostSetter;
         /// <summary>
         /// FullName of the Type that is displayed with this Template
         /// </summary>
@@ -195,9 +195,9 @@ namespace Kistl.App.GUI
             }
         }
         private string _DisplayedTypeFullName;
-		public event PropertyGetterHandler<Kistl.App.GUI.Template, string> OnDisplayedTypeFullName_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.GUI.Template, string> OnDisplayedTypeFullName_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.GUI.Template, string> OnDisplayedTypeFullName_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.GUI.Template, string> OnDisplayedTypeFullName_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.GUI.Template, string> OnDisplayedTypeFullName_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.GUI.Template, string> OnDisplayedTypeFullName_PostSetter;
         /// <summary>
         /// a short name to identify this Template to the user
         /// </summary>
@@ -246,9 +246,9 @@ namespace Kistl.App.GUI
             }
         }
         private string _DisplayName;
-		public event PropertyGetterHandler<Kistl.App.GUI.Template, string> OnDisplayName_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.GUI.Template, string> OnDisplayName_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.GUI.Template, string> OnDisplayName_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.GUI.Template, string> OnDisplayName_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.GUI.Template, string> OnDisplayName_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.GUI.Template, string> OnDisplayName_PostSetter;
         /// <summary>
         /// The main menu for this Template
         /// </summary>
@@ -384,9 +384,9 @@ namespace Kistl.App.GUI
         }
         
         
-		public event PropertyGetterHandler<Kistl.App.GUI.Template, Kistl.App.GUI.Visual> OnVisualTree_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.GUI.Template, Kistl.App.GUI.Visual> OnVisualTree_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.GUI.Template, Kistl.App.GUI.Visual> OnVisualTree_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.GUI.Template, Kistl.App.GUI.Visual> OnVisualTree_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.GUI.Template, Kistl.App.GUI.Visual> OnVisualTree_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.GUI.Template, Kistl.App.GUI.Visual> OnVisualTree_PostSetter;
         /// <summary>
         /// 
         /// </summary>
@@ -404,7 +404,7 @@ namespace Kistl.App.GUI
 			}
         }
 		public delegate void PrepareDefault_Handler<T>(T obj, Kistl.App.Base.ObjectClass cls);
-		public event PrepareDefault_Handler<Template> OnPrepareDefault_Template;
+		public static event PrepareDefault_Handler<Template> OnPrepareDefault_Template;
 
 
 
@@ -441,7 +441,7 @@ namespace Kistl.App.GUI
             }
             return e.Result;
         }
-        public event ToStringHandler<Template> OnToString_Template;
+        public static event ToStringHandler<Template> OnToString_Template;
 
         [EventBasedMethod("OnPreSave_Template")]
         public override void NotifyPreSave()
@@ -449,7 +449,7 @@ namespace Kistl.App.GUI
             base.NotifyPreSave();
             if (OnPreSave_Template != null) OnPreSave_Template(this);
         }
-        public event ObjectEventHandler<Template> OnPreSave_Template;
+        public static event ObjectEventHandler<Template> OnPreSave_Template;
 
         [EventBasedMethod("OnPostSave_Template")]
         public override void NotifyPostSave()
@@ -457,7 +457,7 @@ namespace Kistl.App.GUI
             base.NotifyPostSave();
             if (OnPostSave_Template != null) OnPostSave_Template(this);
         }
-        public event ObjectEventHandler<Template> OnPostSave_Template;
+        public static event ObjectEventHandler<Template> OnPostSave_Template;
 
         [EventBasedMethod("OnCreated_Template")]
         public override void NotifyCreated()
@@ -465,7 +465,7 @@ namespace Kistl.App.GUI
             base.NotifyCreated();
             if (OnCreated_Template != null) OnCreated_Template(this);
         }
-        public event ObjectEventHandler<Template> OnCreated_Template;
+        public static event ObjectEventHandler<Template> OnCreated_Template;
 
         [EventBasedMethod("OnDeleting_Template")]
         public override void NotifyDeleting()
@@ -473,7 +473,7 @@ namespace Kistl.App.GUI
             base.NotifyDeleting();
             if (OnDeleting_Template != null) OnDeleting_Template(this);
         }
-        public event ObjectEventHandler<Template> OnDeleting_Template;
+        public static event ObjectEventHandler<Template> OnDeleting_Template;
 
 
 		protected override string GetPropertyError(string propertyName) 

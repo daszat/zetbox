@@ -114,6 +114,6 @@
 	}
 
 %>
-		public event <%= delegateName %><<%= dt.ClassName %>> <%= eventName %>;
+		public static event <%= delegateName %><<%= dt.ClassName %>> <%= eventName %>;
 
 

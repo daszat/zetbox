@@ -49,7 +49,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-		public event GetParameterType_Handler<DoubleParameter> OnGetParameterType_DoubleParameter;
+		public static event GetParameterType_Handler<DoubleParameter> OnGetParameterType_DoubleParameter;
 
 
 
@@ -70,7 +70,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-		public event GetParameterTypeString_Handler<DoubleParameter> OnGetParameterTypeString_DoubleParameter;
+		public static event GetParameterTypeString_Handler<DoubleParameter> OnGetParameterTypeString_DoubleParameter;
 
 
 
@@ -103,7 +103,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-        public event ToStringHandler<DoubleParameter> OnToString_DoubleParameter;
+        public static event ToStringHandler<DoubleParameter> OnToString_DoubleParameter;
 
         [EventBasedMethod("OnPreSave_DoubleParameter")]
         public override void NotifyPreSave()
@@ -111,7 +111,7 @@ namespace Kistl.App.Base
             base.NotifyPreSave();
             if (OnPreSave_DoubleParameter != null) OnPreSave_DoubleParameter(this);
         }
-        public event ObjectEventHandler<DoubleParameter> OnPreSave_DoubleParameter;
+        public static event ObjectEventHandler<DoubleParameter> OnPreSave_DoubleParameter;
 
         [EventBasedMethod("OnPostSave_DoubleParameter")]
         public override void NotifyPostSave()
@@ -119,7 +119,7 @@ namespace Kistl.App.Base
             base.NotifyPostSave();
             if (OnPostSave_DoubleParameter != null) OnPostSave_DoubleParameter(this);
         }
-        public event ObjectEventHandler<DoubleParameter> OnPostSave_DoubleParameter;
+        public static event ObjectEventHandler<DoubleParameter> OnPostSave_DoubleParameter;
 
         [EventBasedMethod("OnCreated_DoubleParameter")]
         public override void NotifyCreated()
@@ -127,7 +127,7 @@ namespace Kistl.App.Base
             base.NotifyCreated();
             if (OnCreated_DoubleParameter != null) OnCreated_DoubleParameter(this);
         }
-        public event ObjectEventHandler<DoubleParameter> OnCreated_DoubleParameter;
+        public static event ObjectEventHandler<DoubleParameter> OnCreated_DoubleParameter;
 
         [EventBasedMethod("OnDeleting_DoubleParameter")]
         public override void NotifyDeleting()
@@ -135,7 +135,7 @@ namespace Kistl.App.Base
             base.NotifyDeleting();
             if (OnDeleting_DoubleParameter != null) OnDeleting_DoubleParameter(this);
         }
-        public event ObjectEventHandler<DoubleParameter> OnDeleting_DoubleParameter;
+        public static event ObjectEventHandler<DoubleParameter> OnDeleting_DoubleParameter;
 
 
 

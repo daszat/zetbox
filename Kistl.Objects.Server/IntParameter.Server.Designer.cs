@@ -49,7 +49,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-		public event GetParameterType_Handler<IntParameter> OnGetParameterType_IntParameter;
+		public static event GetParameterType_Handler<IntParameter> OnGetParameterType_IntParameter;
 
 
 
@@ -70,7 +70,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-		public event GetParameterTypeString_Handler<IntParameter> OnGetParameterTypeString_IntParameter;
+		public static event GetParameterTypeString_Handler<IntParameter> OnGetParameterTypeString_IntParameter;
 
 
 
@@ -103,7 +103,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-        public event ToStringHandler<IntParameter> OnToString_IntParameter;
+        public static event ToStringHandler<IntParameter> OnToString_IntParameter;
 
         [EventBasedMethod("OnPreSave_IntParameter")]
         public override void NotifyPreSave()
@@ -111,7 +111,7 @@ namespace Kistl.App.Base
             base.NotifyPreSave();
             if (OnPreSave_IntParameter != null) OnPreSave_IntParameter(this);
         }
-        public event ObjectEventHandler<IntParameter> OnPreSave_IntParameter;
+        public static event ObjectEventHandler<IntParameter> OnPreSave_IntParameter;
 
         [EventBasedMethod("OnPostSave_IntParameter")]
         public override void NotifyPostSave()
@@ -119,7 +119,7 @@ namespace Kistl.App.Base
             base.NotifyPostSave();
             if (OnPostSave_IntParameter != null) OnPostSave_IntParameter(this);
         }
-        public event ObjectEventHandler<IntParameter> OnPostSave_IntParameter;
+        public static event ObjectEventHandler<IntParameter> OnPostSave_IntParameter;
 
         [EventBasedMethod("OnCreated_IntParameter")]
         public override void NotifyCreated()
@@ -127,7 +127,7 @@ namespace Kistl.App.Base
             base.NotifyCreated();
             if (OnCreated_IntParameter != null) OnCreated_IntParameter(this);
         }
-        public event ObjectEventHandler<IntParameter> OnCreated_IntParameter;
+        public static event ObjectEventHandler<IntParameter> OnCreated_IntParameter;
 
         [EventBasedMethod("OnDeleting_IntParameter")]
         public override void NotifyDeleting()
@@ -135,7 +135,7 @@ namespace Kistl.App.Base
             base.NotifyDeleting();
             if (OnDeleting_IntParameter != null) OnDeleting_IntParameter(this);
         }
-        public event ObjectEventHandler<IntParameter> OnDeleting_IntParameter;
+        public static event ObjectEventHandler<IntParameter> OnDeleting_IntParameter;
 
 
 

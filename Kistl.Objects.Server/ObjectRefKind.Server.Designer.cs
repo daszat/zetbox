@@ -61,7 +61,7 @@ namespace Kistl.App.GUI
             }
             return e.Result;
         }
-        public event ToStringHandler<ObjectRefKind> OnToString_ObjectRefKind;
+        public static event ToStringHandler<ObjectRefKind> OnToString_ObjectRefKind;
 
         [EventBasedMethod("OnPreSave_ObjectRefKind")]
         public override void NotifyPreSave()
@@ -69,7 +69,7 @@ namespace Kistl.App.GUI
             base.NotifyPreSave();
             if (OnPreSave_ObjectRefKind != null) OnPreSave_ObjectRefKind(this);
         }
-        public event ObjectEventHandler<ObjectRefKind> OnPreSave_ObjectRefKind;
+        public static event ObjectEventHandler<ObjectRefKind> OnPreSave_ObjectRefKind;
 
         [EventBasedMethod("OnPostSave_ObjectRefKind")]
         public override void NotifyPostSave()
@@ -77,7 +77,7 @@ namespace Kistl.App.GUI
             base.NotifyPostSave();
             if (OnPostSave_ObjectRefKind != null) OnPostSave_ObjectRefKind(this);
         }
-        public event ObjectEventHandler<ObjectRefKind> OnPostSave_ObjectRefKind;
+        public static event ObjectEventHandler<ObjectRefKind> OnPostSave_ObjectRefKind;
 
         [EventBasedMethod("OnCreated_ObjectRefKind")]
         public override void NotifyCreated()
@@ -85,7 +85,7 @@ namespace Kistl.App.GUI
             base.NotifyCreated();
             if (OnCreated_ObjectRefKind != null) OnCreated_ObjectRefKind(this);
         }
-        public event ObjectEventHandler<ObjectRefKind> OnCreated_ObjectRefKind;
+        public static event ObjectEventHandler<ObjectRefKind> OnCreated_ObjectRefKind;
 
         [EventBasedMethod("OnDeleting_ObjectRefKind")]
         public override void NotifyDeleting()
@@ -93,7 +93,7 @@ namespace Kistl.App.GUI
             base.NotifyDeleting();
             if (OnDeleting_ObjectRefKind != null) OnDeleting_ObjectRefKind(this);
         }
-        public event ObjectEventHandler<ObjectRefKind> OnDeleting_ObjectRefKind;
+        public static event ObjectEventHandler<ObjectRefKind> OnDeleting_ObjectRefKind;
 
 
 

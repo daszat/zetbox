@@ -80,9 +80,9 @@ namespace Kistl.App.Test
             }
         }
         private string _AreaCode;
-		public event PropertyGetterHandler<Kistl.App.Test.TestPhoneStruct, string> OnAreaCode_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Test.TestPhoneStruct, string> OnAreaCode_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Test.TestPhoneStruct, string> OnAreaCode_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Test.TestPhoneStruct, string> OnAreaCode_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Test.TestPhoneStruct, string> OnAreaCode_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Test.TestPhoneStruct, string> OnAreaCode_PostSetter;
         /// <summary>
         /// Enter a Number
         /// </summary>
@@ -131,9 +131,9 @@ namespace Kistl.App.Test
             }
         }
         private string _Number;
-		public event PropertyGetterHandler<Kistl.App.Test.TestPhoneStruct, string> OnNumber_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.Test.TestPhoneStruct, string> OnNumber_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.Test.TestPhoneStruct, string> OnNumber_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Test.TestPhoneStruct, string> OnNumber_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Test.TestPhoneStruct, string> OnNumber_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Test.TestPhoneStruct, string> OnNumber_PostSetter;
 		public override InterfaceType GetInterfaceType()
 		{
 			return new InterfaceType(typeof(TestPhoneStruct));

@@ -119,9 +119,9 @@ namespace Kistl.App.GUI
         }
         
         
-		public event PropertyGetterHandler<Kistl.App.GUI.StringListKind, Kistl.App.GUI.ControlKindClass> OnItemKind_Getter;
-		public event PropertyPreSetterHandler<Kistl.App.GUI.StringListKind, Kistl.App.GUI.ControlKindClass> OnItemKind_PreSetter;
-		public event PropertyPostSetterHandler<Kistl.App.GUI.StringListKind, Kistl.App.GUI.ControlKindClass> OnItemKind_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.GUI.StringListKind, Kistl.App.GUI.ControlKindClass> OnItemKind_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.GUI.StringListKind, Kistl.App.GUI.ControlKindClass> OnItemKind_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.GUI.StringListKind, Kistl.App.GUI.ControlKindClass> OnItemKind_PostSetter;
 		public override InterfaceType GetInterfaceType()
 		{
 			return new InterfaceType(typeof(StringListKind));
@@ -152,7 +152,7 @@ namespace Kistl.App.GUI
             }
             return e.Result;
         }
-        public event ToStringHandler<StringListKind> OnToString_StringListKind;
+        public static event ToStringHandler<StringListKind> OnToString_StringListKind;
 
         [EventBasedMethod("OnPreSave_StringListKind")]
         public override void NotifyPreSave()
@@ -160,7 +160,7 @@ namespace Kistl.App.GUI
             base.NotifyPreSave();
             if (OnPreSave_StringListKind != null) OnPreSave_StringListKind(this);
         }
-        public event ObjectEventHandler<StringListKind> OnPreSave_StringListKind;
+        public static event ObjectEventHandler<StringListKind> OnPreSave_StringListKind;
 
         [EventBasedMethod("OnPostSave_StringListKind")]
         public override void NotifyPostSave()
@@ -168,7 +168,7 @@ namespace Kistl.App.GUI
             base.NotifyPostSave();
             if (OnPostSave_StringListKind != null) OnPostSave_StringListKind(this);
         }
-        public event ObjectEventHandler<StringListKind> OnPostSave_StringListKind;
+        public static event ObjectEventHandler<StringListKind> OnPostSave_StringListKind;
 
         [EventBasedMethod("OnCreated_StringListKind")]
         public override void NotifyCreated()
@@ -176,7 +176,7 @@ namespace Kistl.App.GUI
             base.NotifyCreated();
             if (OnCreated_StringListKind != null) OnCreated_StringListKind(this);
         }
-        public event ObjectEventHandler<StringListKind> OnCreated_StringListKind;
+        public static event ObjectEventHandler<StringListKind> OnCreated_StringListKind;
 
         [EventBasedMethod("OnDeleting_StringListKind")]
         public override void NotifyDeleting()
@@ -184,7 +184,7 @@ namespace Kistl.App.GUI
             base.NotifyDeleting();
             if (OnDeleting_StringListKind != null) OnDeleting_StringListKind(this);
         }
-        public event ObjectEventHandler<StringListKind> OnDeleting_StringListKind;
+        public static event ObjectEventHandler<StringListKind> OnDeleting_StringListKind;
 
 
 		protected override string GetPropertyError(string propertyName) 

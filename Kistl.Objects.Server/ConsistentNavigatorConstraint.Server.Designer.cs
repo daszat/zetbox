@@ -49,7 +49,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-		public event GetErrorText_Handler<ConsistentNavigatorConstraint> OnGetErrorText_ConsistentNavigatorConstraint;
+		public static event GetErrorText_Handler<ConsistentNavigatorConstraint> OnGetErrorText_ConsistentNavigatorConstraint;
 
 
 
@@ -70,7 +70,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-		public event IsValid_Handler<ConsistentNavigatorConstraint> OnIsValid_ConsistentNavigatorConstraint;
+		public static event IsValid_Handler<ConsistentNavigatorConstraint> OnIsValid_ConsistentNavigatorConstraint;
 
 
 
@@ -103,7 +103,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-        public event ToStringHandler<ConsistentNavigatorConstraint> OnToString_ConsistentNavigatorConstraint;
+        public static event ToStringHandler<ConsistentNavigatorConstraint> OnToString_ConsistentNavigatorConstraint;
 
         [EventBasedMethod("OnPreSave_ConsistentNavigatorConstraint")]
         public override void NotifyPreSave()
@@ -111,7 +111,7 @@ namespace Kistl.App.Base
             base.NotifyPreSave();
             if (OnPreSave_ConsistentNavigatorConstraint != null) OnPreSave_ConsistentNavigatorConstraint(this);
         }
-        public event ObjectEventHandler<ConsistentNavigatorConstraint> OnPreSave_ConsistentNavigatorConstraint;
+        public static event ObjectEventHandler<ConsistentNavigatorConstraint> OnPreSave_ConsistentNavigatorConstraint;
 
         [EventBasedMethod("OnPostSave_ConsistentNavigatorConstraint")]
         public override void NotifyPostSave()
@@ -119,7 +119,7 @@ namespace Kistl.App.Base
             base.NotifyPostSave();
             if (OnPostSave_ConsistentNavigatorConstraint != null) OnPostSave_ConsistentNavigatorConstraint(this);
         }
-        public event ObjectEventHandler<ConsistentNavigatorConstraint> OnPostSave_ConsistentNavigatorConstraint;
+        public static event ObjectEventHandler<ConsistentNavigatorConstraint> OnPostSave_ConsistentNavigatorConstraint;
 
         [EventBasedMethod("OnCreated_ConsistentNavigatorConstraint")]
         public override void NotifyCreated()
@@ -127,7 +127,7 @@ namespace Kistl.App.Base
             base.NotifyCreated();
             if (OnCreated_ConsistentNavigatorConstraint != null) OnCreated_ConsistentNavigatorConstraint(this);
         }
-        public event ObjectEventHandler<ConsistentNavigatorConstraint> OnCreated_ConsistentNavigatorConstraint;
+        public static event ObjectEventHandler<ConsistentNavigatorConstraint> OnCreated_ConsistentNavigatorConstraint;
 
         [EventBasedMethod("OnDeleting_ConsistentNavigatorConstraint")]
         public override void NotifyDeleting()
@@ -135,7 +135,7 @@ namespace Kistl.App.Base
             base.NotifyDeleting();
             if (OnDeleting_ConsistentNavigatorConstraint != null) OnDeleting_ConsistentNavigatorConstraint(this);
         }
-        public event ObjectEventHandler<ConsistentNavigatorConstraint> OnDeleting_ConsistentNavigatorConstraint;
+        public static event ObjectEventHandler<ConsistentNavigatorConstraint> OnDeleting_ConsistentNavigatorConstraint;
 
 
 
