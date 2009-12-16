@@ -12,9 +12,11 @@
                  Margin="10"
                  Text="{Binding InstancesSearchString, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}" />
 
-        <Button DockPanel.Dock="Bottom"
-                Click="Open_Click">Open</Button>
-
+        <ToolBar DockPanel.Dock="Bottom">
+            <Button Click="Open_Click">Open</Button>
+            <Button Click="Refresh_Click">Refresh</Button>
+        </ToolBar>
+        
         <ListView x:Name="ClassList"
                   Margin="10"
                   BorderThickness="0"

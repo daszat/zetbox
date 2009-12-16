@@ -112,6 +112,19 @@ namespace Kistl.Client.Presentables
             }
         }
 
+        /// <summary>
+        /// Reload instances from context.
+        /// </summary>
+        public void ReloadInstances()
+        {
+            if (_instances != null)
+            {
+                _instances.Clear();
+                LoadInstances();
+                ExecuteFilter();
+            }
+        }
+
         #endregion
 
         #region Utilities and UI callbacks
@@ -166,11 +179,7 @@ namespace Kistl.Client.Presentables
         /// </summary>
         private void ExecuteFilter()
         {
-            if (this.Instances == null)
-            {
-                _instancesFiltered = new ReadOnlyObservableCollection<DataObjectModel>(new ObservableCollection<DataObjectModel>());
-            }
-            else if (InstancesSearchString == String.Empty)
+            if (InstancesSearchString == String.Empty)
             {
                 _instancesFiltered = new ReadOnlyObservableCollection<DataObjectModel>(this.Instances);
             }

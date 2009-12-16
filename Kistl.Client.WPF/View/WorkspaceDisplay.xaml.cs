@@ -15,8 +15,8 @@ namespace Kistl.Client.WPF.View
     using System.Windows.Navigation;
     using System.Windows.Shapes;
 
-    using Kistl.Client.Presentables;
     using Kistl.API.Client;
+    using Kistl.Client.Presentables;
 
     /// <summary>
     /// Interaction logic for WorkspaceDisplay.xaml, a read-only display of a <see cref="Kistl.Client.Presentables.WorkspaceModel"/>.
@@ -39,23 +39,6 @@ namespace Kistl.Client.WPF.View
                 this.Model.SelectedItem = item;
             }
 
-        }
-
-        [Obsolete("moved to ObjectClassDisplay")]
-        private void ObjectList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            var listItem = sender as ListViewItem;
-            if (listItem == null)
-                return;
-
-            var dataObject = listItem.Content as DataObjectModel;
-            if (dataObject == null)
-                return;
-            
-            var factory = App.Current.AppContext.Factory;
-            var newWorkspace = factory.CreateSpecificModel<WorkspaceModel>(KistlContext.GetContext());
-            newWorkspace.ShowForeignModel(dataObject);
-            factory.ShowModel(newWorkspace, true);
         }
 
         /// <summary>

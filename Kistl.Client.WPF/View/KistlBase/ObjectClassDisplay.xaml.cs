@@ -68,5 +68,14 @@ namespace Kistl.Client.WPF.View.KistlBase
             }
             factory.ShowModel(newWorkspace, true);
         }
+
+        private void Refresh_Click(object sender, RoutedEventArgs e)
+        {
+            var dtm = DataContext as DataTypeModel;
+            if (dtm != null)
+            {
+                dtm.ReloadInstances();
+            }
+        }
     }
 }
