@@ -33,9 +33,25 @@ namespace Kistl.API.Utils
         {
             log4net.Config.XmlConfigurator.Configure();
 
-            // initialise pattern contents
-            log4net.GlobalContext.Properties["INDENT"] = String.Empty;
-            log4net.GlobalContext.Properties["NDC"] = String.Empty;
+            ResetDefaultProperties();
+        }
+
+        private static void ResetDefaultProperties()
+        {
+            // log4net sets the property to null when popping the last stack
+            // this makes for ugly messages; thus we fix it here.
+            SetEmptyIfNull(GlobalContext.Properties, "INDENT");
+            SetEmptyIfNull(ThreadContext.Properties, "INDENT");
+            SetEmptyIfNull(GlobalContext.Properties, "NDC");
+            SetEmptyIfNull(ThreadContext.Properties, "NDC");
+        }
+
+        private static void SetEmptyIfNull(log4net.Util.ContextPropertiesBase properties, string p)
+        {
+            if (properties[p] == null)
+            {
+                properties[p] = String.Empty;
+            }
         }
 
         #region TraceMethodCallContext
@@ -97,6 +113,7 @@ namespace Kistl.API.Utils
                 {
                     stack.Dispose();
                     stack = null;
+                    ResetDefaultProperties();
                 }
 
                 if (watch != null)
