@@ -1,3 +1,4 @@
 @echo off
-..\bin\debug\bin\server\Kistl.Server.Service.exe -deploy c:\temp\KistlMeta.xml
+cd ..\
+bin\debug\bin\server\Kistl.Server.Service.exe Kistl.Server.Service\DefaultConfig.xml -deploy c:\temp\KistlMeta.xml
 pause

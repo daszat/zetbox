@@ -1,3 +1,4 @@
 @echo off
-..\bin\debug\bin\server\Kistl.Server.Service.exe -updateschema
+cd ..\
+bin\debug\bin\server\Kistl.Server.Service.exe Kistl.Server.Service\DefaultConfig.xml -updateschema
 pause

@@ -1,2 +1,3 @@
 @echo off
-..\bin\debug\bin\server\Kistl.Server.Service.exe -import c:\temp\KistlExport.xml
+cd ..\
+bin\debug\bin\server\Kistl.Server.Service.exe Kistl.Server.Service\DefaultConfig.xml -import c:\temp\KistlExport.xml
