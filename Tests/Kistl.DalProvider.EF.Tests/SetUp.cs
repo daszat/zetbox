@@ -25,7 +25,7 @@ namespace Kistl.DalProvider.EF.Tests
         {
             var appCtx = new ServerApiContextMock();
 
-            //ResetDatabase(appCtx.Configuration);
+            ResetDatabase(appCtx.Configuration);
         }
     }
 }

@@ -71,6 +71,16 @@ namespace Kistl.DalProvider.EF.Tests
             }
         }
 
-
+        [Test]
+        public void query_with_enum()
+        {
+            var q = ctx.GetQuery<Relation>().Where(r => r.Storage == StorageType.Separate).ToList();
+            Assert.IsNotEmpty(q);
+            foreach (var r in q)
+            {
+                Assert.That(r, Is.Not.Null);
+                Assert.That(r.Storage, Is.EqualTo(StorageType.Separate));
+            }
+        }
     }
 }
