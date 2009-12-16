@@ -35,9 +35,10 @@ namespace Kistl.Server.Generators.FrozenObjects.Implementation.ObjectClasses
 	
 	IEnumerable<IDataObject> instanceList = null;
 	
+	InterfaceType t;
 	try
 	{
-		InterfaceType t = cls.GetDescribedInterfaceType();
+		t = cls.GetDescribedInterfaceType();
 		if(FreezingGenerator.FrozenInstances.ContainsKey(t.Type))
 		{
 			instanceList = FreezingGenerator.FrozenInstances[t.Type].OrderBy(o => o.ID);
@@ -49,9 +50,8 @@ namespace Kistl.Server.Generators.FrozenObjects.Implementation.ObjectClasses
 	}
 	catch(TypeLoadException ex)
 	{
-		// TODO: Offensichtlich ist der Datentyp neu -> Fehler ignorieren
-		Console.WriteLine("** WARNING: DataStore, cls.GetDescribedInterfaceType()");
-		Console.WriteLine(ex.ToString());
+		// presumably the type was new and thus unknown, ignore the error for now.
+		Logging.Log.Warn(String.Format("TypeLoadException for [{0}]", cls.ClassName), ex);
 		instanceList = new List<IDataObject>();
 	}
 

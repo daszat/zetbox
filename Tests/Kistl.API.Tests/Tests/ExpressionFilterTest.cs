@@ -15,6 +15,8 @@ namespace Kistl.API.Tests
     [TestFixture]
     public class ExpressionFilterTest
     {
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Tests.Api.ExpressionFilter");
+
         TestQuery<IDataObject> ctx;
 
         [SetUp]
@@ -41,8 +43,12 @@ namespace Kistl.API.Tests
 
             List<IllegalExpression> errorList;
             bool result = list.Expression.IsLegal(out errorList);
-            System.Diagnostics.Trace.WriteLine("ErrorList for IllegalExpression:");
-            errorList.ForEach(e => System.Diagnostics.Trace.WriteLine(e.ToString()));
+
+            if (errorList.Count > 0 && Log.IsDebugEnabled)
+            {
+                Log.Debug("ErrorList for IllegalExpression:");
+                errorList.ForEach(e => Log.Debug(e.ToString()));
+            }
 
             Assert.That(result, Is.False);
         }

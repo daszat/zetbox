@@ -23,7 +23,7 @@ namespace Kistl.Client.WPF
         /// </summary>
         private static void FixupTypeRefParents()
         {
-            using (Logging.Log.TraceMethodCall("FixupTypeRefParents"))
+            using (Logging.Log.DebugTraceMethodCall("FixupTypeRefParents"))
             {
                 using (IKistlContext ctx = KistlContext.GetContext())
                 {
@@ -62,7 +62,7 @@ namespace Kistl.Client.WPF
 
         private static void MoveClrObjectParameterFullTypeName()
         {
-            using (Logging.Log.TraceMethodCall("MoveClrObjectParameterFullTypeName"))
+            using (Logging.Log.DebugTraceMethodCall("MoveClrObjectParameterFullTypeName"))
             {
                 using (IKistlContext ctx = KistlContext.GetContext())
                 {
@@ -85,7 +85,7 @@ namespace Kistl.Client.WPF
         /// </summary>
         private static void CheckUnusedWpfControls()
         {
-            using (Logging.Log.TraceMethodCall("CheckUnusedWpfControls"))
+            using (Logging.Log.DebugTraceMethodCall("CheckUnusedWpfControls"))
             {
                 using (IKistlContext ctx = KistlContext.GetContext())
                 {
@@ -120,8 +120,9 @@ namespace Kistl.Client.WPF
 
         private static void PrintEagerLoadingGraphViz()
         {
-            using (Logging.Log.TraceMethodCall("PrintEagerLoadingGraphViz"))
+            using (Logging.Log.DebugTraceMethodCall("PrintEagerLoadingGraphViz"))
             {
+                // Create output suitable for graphviz
                 Console.WriteLine("---------------------------------------------------------------");
                 Console.WriteLine();
                 Console.WriteLine("graph A{");

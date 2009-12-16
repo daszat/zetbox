@@ -204,9 +204,6 @@ namespace Kistl.API.Server
         /// GetListOf can be used to get the list of values in the property 
         /// <code>property</code> of the object with the <code>ID</code>
         /// </summary>
-        /// <param name="ctx"></param>
-        /// <param name="ID"></param>
-        /// <param name="property"></param>
         /// <returns>the list of values in the property</returns>
         public IEnumerable<IStreamable> GetListOf(IKistlContext ctx, int ID, string property)
         {
@@ -221,17 +218,12 @@ namespace Kistl.API.Server
         /// <summary>
         /// Gibt eine typisierte Objektinstanz zurück.
         /// </summary>
-        /// <param name="ctx"></param>
-        /// <param name="ID"></param>
         /// <returns>a typed object</returns>
         protected abstract T GetObjectInstance(IKistlContext ctx, int ID);
 
         /// <summary>
         /// Implementiert den GetObject Befehl.
         /// </summary>
-        /// <param name="ctx"></param>
-        /// <param name="ID"></param>
-        /// <returns></returns>
         public IDataObject GetObject(IKistlContext ctx, int ID)
         {
             return GetObjectInstance(ctx, ID);
@@ -241,17 +233,17 @@ namespace Kistl.API.Server
     public class BaseServerObjectSetHandler : IServerObjectSetHandler
     {
         /// <summary>
-        /// Implementiert den SetObject Befehl.
+        /// Implements the SetObject command
         /// </summary>
         public virtual IEnumerable<IPersistenceObject> SetObjects(IKistlContext ctx, IEnumerable<IPersistenceObject> objList, IEnumerable<ObjectNotificationRequest> notificationRequests)
         {
             var objects = objList.Cast<BaseServerPersistenceObject>().ToList();
             var entityObjects = new Dictionary<IPersistenceObject, IPersistenceObject>();
 
-            Logging.Log.Info(String.Format(
+            Logging.Log.InfoFormat(
                 "SetObjects for {0} objects and {1} notification requests called.",
                 objects.Count(),
-                notificationRequests.Sum(req => req.IDs.Length)));
+                notificationRequests.Sum(req => req.IDs.Length));
 
             // Fist of all, attach new Objects
             foreach (var obj in objects.Where(o => o.ClientObjectState == DataObjectState.New))

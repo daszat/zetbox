@@ -62,7 +62,7 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
                 this.WriteObjects("                        ", IsSetFlagName, " = true;\r\n");
                 this.WriteObjects("                        __result = this.", BackingMemberFromName(name), " = (", type, ")__p.DefaultValue.GetDefaultValue();\r\n");
                 this.WriteObjects("                    } else {\r\n");
-                this.WriteObjects("                        System.Diagnostics.Trace.TraceWarning(\"Unable to get default value for property '", _prop.ObjectClass.ClassName, ".", _prop.PropertyName, "'\");\r\n");
+                this.WriteObjects("                        Kistl.API.Utils.Logging.Log.Warn(\"Unable to get default value for property '", _prop.ObjectClass.ClassName, ".", _prop.PropertyName, "'\");\r\n");
                 this.WriteObjects("                    }\r\n");
                 this.WriteObjects("                }\r\n");
             }

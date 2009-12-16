@@ -345,7 +345,7 @@ namespace Kistl.API
         /// <returns>XML string</returns>
         public static string ToXmlString(this object obj)
         {
-            using (Logging.Log.TraceMethodCall())
+            using (Logging.Log.DebugTraceMethodCall())
             {
                 XmlSerializer xml = new XmlSerializer(obj.GetType());
                 StringBuilder sb = new StringBuilder();
@@ -362,7 +362,7 @@ namespace Kistl.API
         /// <returns>Returns a Object or throws an XML-Exception (see MSDN, XmlSerializer)</returns>
         public static T FromXmlString<T>(this string xmlStr) where T : new()
         {
-            using (Logging.Log.TraceMethodCall("Size = {0}", xmlStr.Length))
+            using (Logging.Log.DebugTraceMethodCallFormat("Size = [{0}]", xmlStr.Length))
             {
                 System.IO.StringReader sr = new System.IO.StringReader(xmlStr);
                 XmlSerializer xml = new XmlSerializer(typeof(T));

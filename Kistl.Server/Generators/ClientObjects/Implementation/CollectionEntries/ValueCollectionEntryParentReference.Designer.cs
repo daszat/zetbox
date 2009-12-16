@@ -1,5 +1,4 @@
 using System;
-using System.Diagnostics;
 using Kistl.API;
 using Kistl.API.Server;
 using Kistl.App.Base;
@@ -31,12 +30,12 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.CollectionEntries
         
         public override void Generate()
         {
-#line 18 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\CollectionEntries\ValueCollectionEntryParentReference.cst"
+#line 17 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\CollectionEntries\ValueCollectionEntryParentReference.cst"
 string cacheName = "_" + propertyName + "Cache";
 	string fkName = "fk_" + propertyName;
 	string backingName = "_" + fkName;
 
-#line 22 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\CollectionEntries\ValueCollectionEntryParentReference.cst"
+#line 21 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\CollectionEntries\ValueCollectionEntryParentReference.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("        public ",  referencedInterface , " ",  propertyName , "\r\n");
 this.WriteObjects("        {\r\n");
@@ -89,7 +88,7 @@ this.WriteObjects("\r\n");
 this.WriteObjects("        // backing store for serialization\r\n");
 this.WriteObjects("        private int? ",  backingName , ";\r\n");
 this.WriteObjects("        \r\n");
-#line 75 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\CollectionEntries\ValueCollectionEntryParentReference.cst"
+#line 74 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\CollectionEntries\ValueCollectionEntryParentReference.cst"
 if (serializationList != null)
 		serializationList.Add(Kistl.Server.Generators.Templates.Implementation.SerializerType.All, "http://dasz.at/Kistl", propertyName,backingName); // TODO: XML Namespace
 

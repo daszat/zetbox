@@ -23,6 +23,8 @@ namespace Kistl.Server
     public class Server
         : MarshalByRefObject, IKistlAppDomain, IDisposable
     {
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Server");
+
         /// <summary>
         /// WCF Service Host
         /// </summary>
@@ -48,7 +50,7 @@ namespace Kistl.Server
         /// </summary>
         public void Start(KistlConfig config)
         {
-            using (Logging.Log.TraceMethodCall("Starting Server"))
+            using (Log.InfoTraceMethodCall("Starting Server"))
             {
                 Init(config);
 
@@ -82,19 +84,19 @@ namespace Kistl.Server
         /// </summary>
         public void Stop()
         {
-            Logging.Log.Info("Stopping Server");
+            Log.Info("Stopping Server");
 
             host.Close();
 
             if (!serviceThread.Join(5000))
             {
-                Logging.Log.Info("Server did not stopped, aborting");
+                Log.Info("Server did not stopped, aborting");
                 serviceThread.Abort();
             }
             serviceThread = null;
             serverStarted.Close();
 
-            Logging.Log.Info("Server stopped");
+            Log.Info("Server stopped");
         }
 
         /// <summary>
@@ -105,7 +107,7 @@ namespace Kistl.Server
         {
             try
             {
-                using (Logging.Log.TraceMethodCall("Starting WCF Server"))
+                using (Log.DebugTraceMethodCall("Starting WCF Server"))
                 {
                     host = new ServiceHost(typeof(KistlService));
                     host.UnknownMessageReceived += new EventHandler<UnknownMessageReceivedEventArgs>(host_UnknownMessageReceived);
@@ -115,65 +117,79 @@ namespace Kistl.Server
                     serverStarted.Set();
                 }
 
-                Logging.Log.Info("WCF Server started");
+                Log.Info("WCF Server started");
 
                 while (host.State == CommunicationState.Opened)
                 {
                     Thread.Sleep(100);
                 }
 
-                Logging.Log.Info("WCF Server: Hosts closed, exiting WCF thread");
+                Log.Info("WCF Server: Hosts closed, exiting WCF thread");
             }
             catch (Exception error)
             {
-                Logging.Log.Error("Unhandled exception while running WCF Server", error);
+                Log.Error("Unhandled exception while running WCF Server", error);
                 throw error;
             }
         }
 
         private void host_Faulted(object sender, EventArgs e)
         {
-            Logging.Log.Warn("Host faulted: " + e);
+            Log.Warn("Host faulted: " + e);
         }
 
         private void host_UnknownMessageReceived(object sender, UnknownMessageReceivedEventArgs e)
         {
-            Logging.Log.WarnFormat("UnknownMessageReceived: {0}", e.Message);
+            Log.WarnFormat("UnknownMessageReceived: {0}", e.Message);
         }
 
         public void GenerateCode()
         {
-            Generators.Generator.GenerateCode();
+            using (Log.InfoTraceMethodCall())
+            {
+                Generators.Generator.GenerateCode();
+            }
         }
 
         public void Export(string file, string[] namespaces)
         {
-            Packaging.Exporter.Export(file, namespaces);
+            using (Log.InfoTraceMethodCallFormat("file=[{0}],namespaces=[{1}]", file, String.Join(";", namespaces ?? new string[] { })))
+            {
+                Packaging.Exporter.Export(file, namespaces);
+            }
         }
 
         public void Import(string file)
         {
-            Packaging.Importer.LoadFromXml(file);
+            using (Log.InfoTraceMethodCallFormat("file=[{0}]", file))
+            {
+                Packaging.Importer.LoadFromXml(file);
+            }
         }
 
         public void Publish(string file, string[] namespaces)
         {
-            Packaging.Exporter.Publish(file, namespaces);
+            using (Log.InfoTraceMethodCallFormat("file=[{0}],namespaces=[{1}]", file, String.Join(";", namespaces ?? new string[] { })))
+            {
+                Packaging.Exporter.Publish(file, namespaces);
+            }
         }
 
         public void Deploy(string file)
         {
-            Packaging.Importer.Deploy(file);
+            using (Log.InfoTraceMethodCallFormat("file=[{0}]", file))
+            {
+                Packaging.Importer.Deploy(file);
+            }
         }
 
         public void CheckSchemaFromCurrentMetaData(bool withRepair)
         {
-            using (IKistlContext ctx = KistlContext.GetContext())
+            using (Log.InfoTraceMethodCallFormat("withRepair=[{0}]", withRepair))
             {
-                using (FileStream report = File.OpenWrite(ApplicationContext.Current.Configuration.Server.GetLogFilePath("schemareport.log")))
+                using (IKistlContext ctx = KistlContext.GetContext())
                 {
-                    report.SetLength(0);
-                    using (var mgr = new SchemaManagement.SchemaManager(ctx, report))
+                    using (var mgr = new SchemaManagement.SchemaManager(ctx))
                     {
                         mgr.CheckSchema(withRepair);
                     }
@@ -183,12 +199,11 @@ namespace Kistl.Server
 
         public void CheckSchema(bool withRepair)
         {
-            using (IKistlContext ctx = SchemaManagement.SchemaManager.GetSavedSchema())
+            using (Log.InfoTraceMethodCallFormat("withRepair=[{0}]", withRepair))
             {
-                using (FileStream report = File.OpenWrite(ApplicationContext.Current.Configuration.Server.GetLogFilePath("schemareport.log")))
+                using (IKistlContext ctx = SchemaManagement.SchemaManager.GetSavedSchema())
                 {
-                    report.SetLength(0);
-                    using (var mgr = new SchemaManagement.SchemaManager(ctx, report))
+                    using (var mgr = new SchemaManagement.SchemaManager(ctx))
                     {
                         mgr.CheckSchema(withRepair);
                     }
@@ -198,15 +213,14 @@ namespace Kistl.Server
 
         public void CheckSchema(string file, bool withRepair)
         {
-            using (IKistlContext ctx = new MemoryContext())
+            using (Log.InfoTraceMethodCallFormat("file=[{0}],withRepair=[{1}]", file, withRepair))
             {
-                using (FileStream fs = File.OpenRead(file))
+                using (IKistlContext ctx = new MemoryContext())
                 {
-                    Packaging.Importer.LoadFromXml(ctx, fs);
-                    using (FileStream report = File.OpenWrite(ApplicationContext.Current.Configuration.Server.GetLogFilePath("schemareport.log")))
+                    using (FileStream fs = File.OpenRead(file))
                     {
-                        report.SetLength(0);
-                        using (var mgr = new SchemaManagement.SchemaManager(ctx, report))
+                        Packaging.Importer.LoadFromXml(ctx, fs);
+                        using (var mgr = new SchemaManagement.SchemaManager(ctx))
                         {
                             mgr.CheckSchema(withRepair);
                         }
@@ -217,23 +231,22 @@ namespace Kistl.Server
 
         public void UpdateSchema()
         {
-            using (IKistlContext ctx = new MemoryContext())
+            using (Log.InfoTraceMethodCall())
             {
-                // decouple database context
-                using (IKistlContext dbctx = KistlContext.GetContext())
+                using (IKistlContext ctx = new MemoryContext())
                 {
-                    using (MemoryStream ms = new MemoryStream())
+                    // decouple database context
+                    using (IKistlContext dbctx = KistlContext.GetContext())
                     {
-                        Packaging.Exporter.Publish(dbctx, ms, new string[] { "*" });
-                        ms.Seek(0, SeekOrigin.Begin);
-                        Packaging.Importer.LoadFromXml(ctx, ms);
+                        using (MemoryStream ms = new MemoryStream())
+                        {
+                            Packaging.Exporter.Publish(dbctx, ms, new string[] { "*" });
+                            ms.Seek(0, SeekOrigin.Begin);
+                            Packaging.Importer.LoadFromXml(ctx, ms);
+                        }
                     }
-                }
 
-                using (FileStream report = File.OpenWrite(ApplicationContext.Current.Configuration.Server.GetLogFilePath("updateschemareport.log")))
-                {
-                    report.SetLength(0);
-                    using (var mgr = new SchemaManagement.SchemaManager(ctx, report))
+                    using (var mgr = new SchemaManagement.SchemaManager(ctx))
                     {
                         mgr.UpdateSchema();
                     }
@@ -243,16 +256,15 @@ namespace Kistl.Server
 
         public void UpdateSchema(string file)
         {
-            using (IKistlContext ctx = new MemoryContext())
+            using (Log.InfoTraceMethodCallFormat("file=[{0}]", file))
             {
-                using (FileStream fs = File.OpenRead(file))
+                using (IKistlContext ctx = new MemoryContext())
                 {
-                    Packaging.Importer.LoadFromXml(ctx, fs);
-
-                    using (FileStream report = File.OpenWrite(ApplicationContext.Current.Configuration.Server.GetLogFilePath("updateschemareport.log")))
+                    using (FileStream fs = File.OpenRead(file))
                     {
-                        report.SetLength(0);
-                        using (var mgr = new SchemaManagement.SchemaManager(ctx, report))
+                        Packaging.Importer.LoadFromXml(ctx, fs);
+
+                        using (var mgr = new SchemaManagement.SchemaManager(ctx))
                         {
                             mgr.UpdateSchema();
                         }
@@ -263,37 +275,40 @@ namespace Kistl.Server
 
         public void RunFixes()
         {
-            using (IKistlContext ctx = KistlContext.GetContext())
+            using (Log.InfoTraceMethodCall())
             {
-                //var baseClass = ctx.GetQuery<ControlKindClass>().Where(cls => cls.ClassName == "ControlKind").ToList().Single();
-                //var guiModule = ctx.GetQuery<Module>().Where(mod => mod.ModuleName == "GUI").ToList().Single();
-                //var trModule = ctx.GetQuery<Module>().Where(mod => mod.ModuleName == "TimeRecords").ToList().Single();
+                using (IKistlContext ctx = KistlContext.GetContext())
+                {
+                    //var baseClass = ctx.GetQuery<ControlKindClass>().Where(cls => cls.ClassName == "ControlKind").ToList().Single();
+                    //var guiModule = ctx.GetQuery<Module>().Where(mod => mod.ModuleName == "GUI").ToList().Single();
+                    //var trModule = ctx.GetQuery<Module>().Where(mod => mod.ModuleName == "TimeRecords").ToList().Single();
 
-                //CreateCkc(ctx, baseClass, guiModule, "KistlDebuggerKind", "Displays assorted debugging related informations about the datastore and processes",
-                //    new[] { typeof(Kistl.Client.Presentables.KistlDebuggerAsModel) });
+                    //CreateCkc(ctx, baseClass, guiModule, "KistlDebuggerKind", "Displays assorted debugging related informations about the datastore and processes",
+                    //    new[] { typeof(Kistl.Client.Presentables.KistlDebuggerAsModel) });
 
-                //CreateCkc(ctx, baseClass, guiModule, "MenuItemKind", "A command used in a menu",
-                //    new[] { typeof(Kistl.Client.Presentables.ActionModel) });
+                    //CreateCkc(ctx, baseClass, guiModule, "MenuItemKind", "A command used in a menu",
+                    //    new[] { typeof(Kistl.Client.Presentables.ActionModel) });
 
-                //CreateCkc(ctx, baseClass, trModule, "TimeRecordsDashboardKind", "A dashboard for the TimeRecords module",
-                //    new[] { typeof(Kistl.Client.Presentables.TimeRecords.Dashboard) });
+                    //CreateCkc(ctx, baseClass, trModule, "TimeRecordsDashboardKind", "A dashboard for the TimeRecords module",
+                    //    new[] { typeof(Kistl.Client.Presentables.TimeRecords.Dashboard) });
 
-                //CreateCkc(ctx, baseClass, trModule, "WorkEffortKind", "A specialized control for WorkEfforts",
-                //    new[] { typeof(Kistl.Client.Presentables.TimeRecords.WorkEffortModel) });
+                    //CreateCkc(ctx, baseClass, trModule, "WorkEffortKind", "A specialized control for WorkEfforts",
+                    //    new[] { typeof(Kistl.Client.Presentables.TimeRecords.WorkEffortModel) });
 
-                //CreateCkc(ctx, baseClass, guiModule, "GuiDashboardKind", "A dashboard for the GUI module",
-                //    new[] { typeof(Kistl.Client.Presentables.GUI.DashboardModel) });
+                    //CreateCkc(ctx, baseClass, guiModule, "GuiDashboardKind", "A dashboard for the GUI module",
+                    //    new[] { typeof(Kistl.Client.Presentables.GUI.DashboardModel) });
 
-                //CreateCkc(ctx, baseClass, guiModule, "RelationKind", "A specialized control for Relations",
-                //    new[] { typeof(Kistl.Client.Presentables.Relations.RelationModel) });
+                    //CreateCkc(ctx, baseClass, guiModule, "RelationKind", "A specialized control for Relations",
+                    //    new[] { typeof(Kistl.Client.Presentables.Relations.RelationModel) });
 
-                //CreateCkc(ctx, baseClass, guiModule, "KistlDebuggerKind", "Displays assorted debugging related informations about the datastore and processes",
-                //    new[] { typeof(Kistl.Client.Presentables.KistlDebuggerAsModel) });
+                    //CreateCkc(ctx, baseClass, guiModule, "KistlDebuggerKind", "Displays assorted debugging related informations about the datastore and processes",
+                    //    new[] { typeof(Kistl.Client.Presentables.KistlDebuggerAsModel) });
 
-                //CreateCkc(ctx, baseClass, guiModule, "KistlDebuggerKind", "Displays assorted debugging related informations about the datastore and processes",
-                //    new[] { typeof(Kistl.Client.Presentables.KistlDebuggerAsModel) });
+                    //CreateCkc(ctx, baseClass, guiModule, "KistlDebuggerKind", "Displays assorted debugging related informations about the datastore and processes",
+                    //    new[] { typeof(Kistl.Client.Presentables.KistlDebuggerAsModel) });
 
-                ctx.SubmitChanges();
+                    ctx.SubmitChanges();
+                }
             }
         }
 
@@ -320,6 +335,7 @@ namespace Kistl.Server
         // http://msdn2.microsoft.com/en-us/library/ms244737.aspx
         public void Dispose()
         {
+            Log.Info("Disposing");
             //if (disposing)
             //{
             //    if (host != null)

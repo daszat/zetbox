@@ -15,17 +15,20 @@ namespace Kistl.Server.Generators.EntityFramework
 
         protected override IEnumerable<string> Generate_Other(Kistl.API.IKistlContext ctx)
         {
-            var otherFileNames = new List<string>();
+            using (log4net.NDC.Push("EfGenerateOther"))
+            {
+                var otherFileNames = new List<string>();
 
-            // those are not compilable, therefore don't add them to otherFileNames.
-            // should be handled separately in the ProjectFile Template
-            this.RunTemplate(ctx, "Implementation.EfModel.ModelCsdl", "Model.csdl");
-            this.RunTemplate(ctx, "Implementation.EfModel.ModelMsl", "Model.msl");
-            this.RunTemplate(ctx, "Implementation.EfModel.ModelSsdl", "Model.ssdl");
+                // those are not compilable, therefore don't add them to otherFileNames.
+                // should be handled separately in the ProjectFile Template
+                this.RunTemplate(ctx, "Implementation.EfModel.ModelCsdl", "Model.csdl");
+                this.RunTemplate(ctx, "Implementation.EfModel.ModelMsl", "Model.msl");
+                this.RunTemplate(ctx, "Implementation.EfModel.ModelSsdl", "Model.ssdl");
 
-            otherFileNames.Add(this.RunTemplateWithExtension(ctx, "Implementation.ObjectClasses.AssociationSetAttributes", "AssociationSetAttributes", "cs"));
+                otherFileNames.Add(this.RunTemplateWithExtension(ctx, "Implementation.ObjectClasses.AssociationSetAttributes", "AssociationSetAttributes", "cs"));
 
-            return base.Generate_Other(ctx).Concat(otherFileNames);
+                return base.Generate_Other(ctx).Concat(otherFileNames);
+            }
         }
     }
 }

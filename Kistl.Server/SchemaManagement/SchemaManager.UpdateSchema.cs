@@ -6,19 +6,17 @@ using Kistl.API;
 using Kistl.API.Server;
 using Kistl.App.Base;
 using Kistl.App.Extensions;
-// TODO: Das gehört angeschaut.
-using Kistl.Server.Generators.EntityFramework.Implementation;
 using Kistl.Server.Generators.Extensions;
 using Kistl.Server.Generators;
 using Kistl.API.Utils;
 
 namespace Kistl.Server.SchemaManagement
 {
-	public partial class SchemaManager
-	{
+    public partial class SchemaManager
+    {
         public void UpdateSchema()
         {
-            using (Logging.Log.TraceMethodCall())
+            using (Log.DebugTraceMethodCall())
             {
                 WriteReportHeader("Update Schema Report");
 
@@ -39,12 +37,8 @@ namespace Kistl.Server.SchemaManagement
                 catch (Exception ex)
                 {
                     db.RollbackTransaction();
-
-                    report.WriteLine();
-                    report.WriteLine("** ERROR:");
-                    report.WriteLine(ex.ToString());
-                    report.Flush();
-
+                    Log.Debug(String.Empty);
+                    Log.Error("An error ocurred while updating the schema", ex);
                     throw;
                 }
             }
@@ -52,29 +46,29 @@ namespace Kistl.Server.SchemaManagement
 
         private void UpdateDeletedTables()
         {
-            report.WriteLine("Updating deleted Tables");
-            report.WriteLine("-----------------------");
+            Log.Info("Updating deleted Tables");
+            Log.Debug("-----------------------");
 
             foreach (ObjectClass objClass in Case.savedSchema.GetQuery<ObjectClass>().OrderBy(o => o.Module.Namespace).ThenBy(o => o.ClassName))
             {
-                report.WriteLine("Objectclass: {0}.{1}", objClass.Module.Namespace, objClass.ClassName);
+                Log.DebugFormat("Objectclass: {0}.{1}", objClass.Module.Namespace, objClass.ClassName);
                 if (Case.IsDeleteObjectClass(objClass))
                 {
                     Case.DoDeleteObjectClass(objClass);
                 }
             }
-            report.WriteLine();
+            Log.Debug(String.Empty);
         }
 
 
         private void UpdateTables()
         {
-            report.WriteLine("Updating Tables & Columns");
-            report.WriteLine("-------------------------");
+            Log.Info("Updating Tables & Columns");
+            Log.Debug("-------------------------");
 
             foreach (ObjectClass objClass in schema.GetQuery<ObjectClass>().OrderBy(o => o.Module.Namespace).ThenBy(o => o.ClassName))
             {
-                report.WriteLine("Objectclass: {0}.{1}", objClass.Module.Namespace, objClass.ClassName);
+                Log.DebugFormat("Objectclass: {0}.{1}", objClass.Module.Namespace, objClass.ClassName);
                 if (Case.IsNewObjectClass(objClass))
                 {
                     Case.DoNewObjectClass(objClass);
@@ -87,7 +81,7 @@ namespace Kistl.Server.SchemaManagement
                 UpdateColumns(objClass, objClass.Properties, "");
                 UpdateDeletedColumns(objClass, "");
             }
-            report.WriteLine();
+            Log.Debug(String.Empty);
         }
 
         private void UpdateColumns(ObjectClass objClass, ICollection<Property> properties, string prefix)
@@ -155,12 +149,12 @@ namespace Kistl.Server.SchemaManagement
 
         private void UpdateDeletedRelations()
         {
-            report.WriteLine("Updating deleted Relations");
-            report.WriteLine("--------------------------");
+            Log.Info("Updating deleted Relations");
+            Log.Debug("--------------------------");
 
             foreach (Relation rel in Case.savedSchema.GetQuery<Relation>().OrderBy(r => r.Module.Namespace))
             {
-                report.WriteLine("Relation: {0} ({1})", rel.GetAssociationName(), rel.GetRelationType());
+                Log.DebugFormat("Relation: {0} ({1})", rel.GetAssociationName(), rel.GetRelationType());
 
                 if (rel.GetRelationType() == RelationType.one_n)
                 {
@@ -184,17 +178,17 @@ namespace Kistl.Server.SchemaManagement
                     }
                 }
             }
-            report.WriteLine();
+            Log.Debug(String.Empty);
         }
 
         private void UpdateRelations()
         {
-            report.WriteLine("Updating Relations");
-            report.WriteLine("------------------");
+            Log.Info("Updating Relations");
+            Log.Debug("------------------");
 
             foreach (Relation rel in schema.GetQuery<Relation>().OrderBy(r => r.Module.Namespace))
             {
-                report.WriteLine("Relation: {0} ({1})", rel.GetAssociationName(), rel.GetRelationType());
+                Log.DebugFormat("Relation: {0} ({1})", rel.GetAssociationName(), rel.GetRelationType());
 
                 if (rel.GetRelationType() == RelationType.one_n)
                 {
@@ -268,17 +262,17 @@ namespace Kistl.Server.SchemaManagement
                     }
                 }
             }
-            report.WriteLine();
+            Log.Debug(String.Empty);
         }
 
         private void UpdateInheritance()
         {
-            report.WriteLine("Updating Inheritance");
-            report.WriteLine("--------------------");
+            Log.Info("Updating Inheritance");
+            Log.Debug("--------------------");
 
             foreach (ObjectClass objClass in schema.GetQuery<ObjectClass>().OrderBy(o => o.Module.Namespace).ThenBy(o => o.ClassName))
             {
-                report.WriteLine("Objectclass: {0}.{1}", objClass.Module.Namespace, objClass.ClassName);
+                Log.DebugFormat("Objectclass: {0}.{1}", objClass.Module.Namespace, objClass.ClassName);
                 if (Case.IsNewObjectClassInheritance(objClass))
                 {
                     Case.DoNewObjectClassInheritance(objClass);
@@ -292,7 +286,7 @@ namespace Kistl.Server.SchemaManagement
                     Case.DoRemoveObjectClassInheritance(objClass);
                 }
             }
-            report.WriteLine();
+            Log.Debug(String.Empty);
         }
     }
 }

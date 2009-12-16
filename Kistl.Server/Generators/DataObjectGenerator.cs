@@ -12,6 +12,8 @@ namespace Kistl.Server.Generators
 {
     public abstract class BaseDataObjectGenerator
     {
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Server.Generator");
+
         private string codeBasePath = "";
 
         public virtual string Generate(Kistl.API.IKistlContext ctx, string basePath)
@@ -29,47 +31,47 @@ namespace Kistl.Server.Generators
             var generatedFileNames = new List<string>();
 
 
-            Logging.Log.Info("  Object Classes");
+            Log.Info("  Object Classes");
             foreach (ObjectClass objClass in Generator.GetObjectClassList(ctx).OrderBy(x => x.ClassName))
             {
                 generatedFileNames.Add(Generate_ObjectClass(ctx, objClass));
-                Logging.Log.Debug("    " + objClass.ClassName);
+                Log.Debug("    " + objClass.ClassName);
             }
 
-            Logging.Log.Info("  Collection Entries");
+            Log.Info("  Collection Entries");
             generatedFileNames.Add(Generate_CollectionEntries(ctx));
 
 
-            Logging.Log.Info("  Interfaces");
+            Log.Info("  Interfaces");
             foreach (Interface i in Generator.GetInterfaceList(ctx).OrderBy(x => x.ClassName))
             {
                 generatedFileNames.Add(Generate_Interface(ctx, i));
-                Logging.Log.Debug("    " + i.ClassName);
+                Log.Debug("    " + i.ClassName);
             }
 
-            Logging.Log.Info("  Enums");
+            Log.Info("  Enums");
             foreach (Enumeration e in Generator.GetEnumList(ctx).OrderBy(x => x.ClassName))
             {
                 generatedFileNames.Add(Generate_Enumeration(ctx, e));
-                Logging.Log.Debug("    " + e.ClassName);
+                Log.Debug("    " + e.ClassName);
             }
 
-            Logging.Log.Info("  Structs");
+            Log.Info("  Structs");
             foreach (Struct s in Generator.GetStructList(ctx).OrderBy(x => x.ClassName))
             {
                 generatedFileNames.Add(Generate_Struct(ctx, s));
-                Logging.Log.Debug("    " + s.ClassName);                
+                Log.Debug("    " + s.ClassName);                
             }
 
-            Logging.Log.Info("  Assemblyinfo");
+            Log.Info("  Assemblyinfo");
             generatedFileNames.Add(Generate_AssemblyInfo(ctx));
 
 
-            Logging.Log.Info("  Other Files");
+            Log.Info("  Other Files");
             generatedFileNames.AddRange(Generate_Other(ctx));
 
 
-            Logging.Log.Info("  Project File");
+            Log.Info("  Project File");
             string projectFileName = Generate_ProjectFile(ctx, ProjectGuid, generatedFileNames);
 
             return Path.Combine(this.codeBasePath, projectFileName);

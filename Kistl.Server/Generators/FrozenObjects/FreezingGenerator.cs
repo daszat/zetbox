@@ -13,6 +13,7 @@ namespace Kistl.Server.Generators.FrozenObjects
     public class FreezingGenerator
         : BaseDataObjectGenerator
     {
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Server.Generator.Frozen");
 
         public override string TemplateProviderPath { get { return this.GetType().Namespace; } }
         public override string TargetNameSpace { get { return "Kistl.Objects.Frozen"; } }
@@ -35,7 +36,7 @@ namespace Kistl.Server.Generators.FrozenObjects
                 catch (TypeLoadException ex)
                 {
                     // TODO: Offensichtlich ist der Datentyp neu -> Fehler ignorieren
-                    Logging.Log.Warn("DataStore, cls.GetDescribedInterfaceType()", ex);
+                    Log.Warn("DataStore, cls.GetDescribedInterfaceType()", ex);
                 }
             }
 

@@ -72,7 +72,7 @@ namespace Kistl.Client.WPF
             Logging.Configure();
             //SplashScreen.ShowSplashScreen("Kistl is starting...", "Init application", 5);
 
-            using (Logging.Log.TraceMethodCall("Starting Client"))
+            using (Logging.Log.InfoTraceMethodCall("Starting Client"))
             {
                 var args = HandleCommandline(e.Args);
                 // delegate all business logic into another class, which 

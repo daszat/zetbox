@@ -7,8 +7,6 @@ using Kistl.API;
 using Kistl.API.Server;
 using Kistl.App.Base;
 using Kistl.App.Extensions;
-// TODO: Das gehört angeschaut.
-using Kistl.Server.Generators.EntityFramework.Implementation;
 using Kistl.Server.Generators.Extensions;
 using Kistl.Server.Generators;
 
@@ -16,10 +14,11 @@ namespace Kistl.Server.SchemaManagement
 {
     internal class Cases : IDisposable
     {
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Server.Schema.Cases");
+
         #region Fields
         private IKistlContext schema;
         private ISchemaProvider db;
-        private TextWriter report;
 
         private IKistlContext _savedSchema;
         public IKistlContext savedSchema
@@ -44,12 +43,10 @@ namespace Kistl.Server.SchemaManagement
         }
         #endregion
 
-
-        internal Cases(IKistlContext schema, ISchemaProvider db, TextWriter report)
+        internal Cases(IKistlContext schema, ISchemaProvider db)
         {
             this.schema = schema;
             this.db = db;
-            this.report = report;
         }
 
         // Add all IsCase_ + DoCase_ Methods
@@ -63,7 +60,7 @@ namespace Kistl.Server.SchemaManagement
         }
         public void DoDeleteObjectClass(ObjectClass objClass)
         {
-            report.WriteLine("  Drop Table: {0}", objClass.TableName);
+            Log.InfoFormat("Drop Table: {0}", objClass.TableName);
             db.DropTable(objClass.TableName);
         }
         #endregion
@@ -75,7 +72,7 @@ namespace Kistl.Server.SchemaManagement
         }
         public void DoNewObjectClass(ObjectClass objClass)
         {
-            report.WriteLine("  New Table: {0}", objClass.TableName);
+            Log.InfoFormat("  New Table: {0}", objClass.TableName);
             db.CreateTable(objClass.TableName, objClass.BaseObjectClass == null);
         }
         #endregion
@@ -90,7 +87,7 @@ namespace Kistl.Server.SchemaManagement
         public void DoRenameObjectClassTable(ObjectClass objClass)
         {
             var saved = savedSchema.FindPersistenceObject<ObjectClass>(objClass.ExportGuid);
-            report.WriteLine("  ** Warning: renaming a tablename from '{0}' to '{1}' is not supported yet", saved.TableName, objClass.TableName);
+            Log.ErrorFormat("renaming a table from '{0}' to '{1}' is not supported yet", saved.TableName, objClass.TableName);
         }
         #endregion
 
@@ -104,7 +101,7 @@ namespace Kistl.Server.SchemaManagement
         public void DoRenameValueTypePropertyName(ObjectClass objClass, ValueTypeProperty prop, string prefix)
         {
             var saved = savedSchema.FindPersistenceObject<ValueTypeProperty>(prop.ExportGuid);
-            report.WriteLine("  ** Warning: renaming a Property from '{0}' to '{1}' is not supported yet", saved.PropertyName, prop.PropertyName);
+            Log.ErrorFormat("renaming a property from '{0}' to '{1}' is not supported yet", saved.PropertyName, prop.PropertyName);
         }
         #endregion
 
@@ -132,7 +129,7 @@ namespace Kistl.Server.SchemaManagement
 
             if (movedUp)
             {
-                report.WriteLine("  Moving property '{0}' from '{1}' up to '{2}'", prop.PropertyName, saved.ObjectClass.ClassName, objClass.ClassName);
+                Log.InfoFormat("Moving property '{0}' from '{1}' up to '{2}'", prop.PropertyName, saved.ObjectClass.ClassName, objClass.ClassName);
                 db.CreateColumn(tblName, colName, dbType, size, true);
 
                 db.CopyColumnData(srcTblName, srcColName, tblName, colName);
@@ -141,7 +138,7 @@ namespace Kistl.Server.SchemaManagement
                 {
                     if (db.CheckColumnContainsNulls(tblName, colName))
                     {
-                        report.WriteLine("    ** Warning: column '{0}.{1}' contains NULL values, cannot set NOT NULLABLE", tblName, colName);
+                        Log.ErrorFormat("column '{0}.{1}' contains NULL values, cannot set NOT NULLABLE", tblName, colName);
                     }
                     else
                     {
@@ -153,7 +150,7 @@ namespace Kistl.Server.SchemaManagement
             }
             else if (movedDown)
             {
-                report.WriteLine("  Moving property '{0}' from '{1}' down to '{2}' (dataloss possible)", prop.PropertyName, saved.ObjectClass.ClassName, objClass.ClassName);
+                Log.InfoFormat("Moving property '{0}' from '{1}' down to '{2}' (dataloss possible)", prop.PropertyName, saved.ObjectClass.ClassName, objClass.ClassName);
                 db.CreateColumn(tblName, colName, dbType, size, true);
 
                 db.CopyColumnData(srcTblName, srcColName, tblName, colName);
@@ -167,7 +164,7 @@ namespace Kistl.Server.SchemaManagement
             }
             else
             {
-                report.WriteLine("  ** Warning: moving a Property from '{0}' to '{1}' is not supported. ObjectClasses are not in the same hierarchy.", saved.ObjectClass.ClassName, prop.ObjectClass.ClassName);
+                Log.ErrorFormat("moving a Property from '{0}' to '{1}' is not supported. ObjectClasses are not in the same hierarchy.", saved.ObjectClass.ClassName, prop.ObjectClass.ClassName);
             }
         }
 
@@ -194,7 +191,7 @@ namespace Kistl.Server.SchemaManagement
         public void DoNewValueTypePropertyNullable(ObjectClass objClass, ValueTypeProperty prop, string prefix)
         {
             string colName = Construct.NestedColumnName(prop, prefix);
-            report.WriteLine("    New nullable ValueType Property: '{0}' ('{1}')", prop.PropertyName, colName);
+            Log.InfoFormat("New nullable ValueType Property: '{0}' ('{1}')", prop.PropertyName, colName);
             db.CreateColumn(objClass.TableName, colName, SchemaManager.GetDbType(prop),
                 prop is StringProperty ? ((StringProperty)prop).GetMaxLength() : 0, true);
         }
@@ -211,7 +208,7 @@ namespace Kistl.Server.SchemaManagement
             string colName = Construct.NestedColumnName(prop, prefix);
             var dbType = SchemaManager.GetDbType(prop);
             var size = prop is StringProperty ? ((StringProperty)prop).GetMaxLength() : 0;
-            report.WriteLine("    New not nullable ValueType Property: {0} ('{1}')", prop.PropertyName, colName);
+            Log.InfoFormat("New not nullable ValueType Property: [{0}.{1}] (col:{2})", prop.ObjectClass.ClassName, prop.PropertyName, colName);
             if (!db.CheckTableContainsData(tblName))
             {
                 db.CreateColumn(tblName, colName, dbType, size, false);
@@ -219,7 +216,7 @@ namespace Kistl.Server.SchemaManagement
             else
             {
                 db.CreateColumn(tblName, colName, dbType, size, true);
-                report.WriteLine("    ** Warning: unable to create new not nullable ValueType Property '{0}' when table '{1}' contains data. Created nullable column instead.", colName, tblName);
+                Log.ErrorFormat("unable to create new not nullable ValueType Property '{0}' when table '{1}' contains data. Created nullable column instead.", colName, tblName);
             }
         }
         #endregion
@@ -238,7 +235,7 @@ namespace Kistl.Server.SchemaManagement
 
             if (db.CheckColumnContainsNulls(tblName, colName))
             {
-                report.WriteLine("    ** Warning: column '{0}.{1}' contains NULL values, cannot set NOT NULLABLE", tblName, colName);
+                Log.ErrorFormat("column '{0}.{1}' contains NULL values, cannot set NOT NULLABLE", tblName, colName);
             }
             else
             {
@@ -275,7 +272,7 @@ namespace Kistl.Server.SchemaManagement
         public void DoRenameValueTypePropertyListName(ObjectClass objClass, ValueTypeProperty prop)
         {
             var saved = savedSchema.FindPersistenceObject<ValueTypeProperty>(prop.ExportGuid);
-            report.WriteLine("  ** Warning: renaming a Property from '{0}' to '{1}' is not supported yet", saved.PropertyName, prop.PropertyName);
+            Log.ErrorFormat("renaming a Property from '{0}' to '{1}' is not supported yet", saved.PropertyName, prop.PropertyName);
         }
         #endregion
 
@@ -289,7 +286,7 @@ namespace Kistl.Server.SchemaManagement
         public void DoMoveValueTypePropertyList(ObjectClass objClass, ValueTypeProperty prop)
         {
             var saved = savedSchema.FindPersistenceObject<ValueTypeProperty>(prop.ExportGuid);
-            report.WriteLine("  ** Warning: moving a Property from '{0}' to '{1}' is not supported yet", saved.ObjectClass.ClassName, prop.ObjectClass.ClassName);
+            Log.ErrorFormat("moving a Property from '{0}' to '{1}' is not supported yet", saved.ObjectClass.ClassName, prop.ObjectClass.ClassName);
         }
         #endregion
 
@@ -300,7 +297,7 @@ namespace Kistl.Server.SchemaManagement
         }
         public void DoNewValueTypePropertyList(ObjectClass objClass, ValueTypeProperty prop)
         {
-            report.WriteLine("    New ValueType Property List: {0}", prop.PropertyName);
+            Log.InfoFormat("New ValueType Property List: {0}", prop.PropertyName);
             string tblName = prop.GetCollectionEntryTable();
             string fkName = "fk_" + prop.ObjectClass.ClassName;
             string valPropName = prop.PropertyName;
@@ -330,7 +327,7 @@ namespace Kistl.Server.SchemaManagement
         public void Do_1_N_RelationChange_FromNotIndexed_To_Indexed(Relation rel)
         {
             string assocName = rel.GetAssociationName();
-            report.WriteLine("  Create 1:N Relation Position Storage: {0}", assocName);
+            Log.InfoFormat("Create 1:N Relation Position Storage: {0}", assocName);
 
             RelationEnd relEnd, otherEnd;
 
@@ -345,7 +342,7 @@ namespace Kistl.Server.SchemaManagement
                     relEnd = rel.B;
                     break;
                 default:
-                    report.WriteLine("    ** Warning: Relation '{0}' has unsupported Storage set: {1}", assocName, rel.Storage);
+                    Log.ErrorFormat("Relation '{0}' has unsupported Storage set: {1}, skipped", assocName, rel.Storage);
                     return;
             }
 
@@ -365,7 +362,7 @@ namespace Kistl.Server.SchemaManagement
         public void Do_1_N_RelationChange_FromIndexed_To_NotIndexed(Relation rel)
         {
             string assocName = rel.GetAssociationName();
-            report.WriteLine("  Drop 1:N Relation Position Storage: {0}", assocName);
+            Log.InfoFormat("Drop 1:N Relation Position Storage: {0}", assocName);
 
             string tblName = "";
             RelationEnd otherEnd;
@@ -381,7 +378,7 @@ namespace Kistl.Server.SchemaManagement
             }
             else
             {
-                report.WriteLine("    ** Warning: Relation '{0}' has unsupported Storage set: {1}", assocName, rel.Storage);
+                Log.ErrorFormat("Relation '{0}' has unsupported Storage set: {1}, skipped", assocName, rel.Storage);
                 return;
             }
 
@@ -400,7 +397,7 @@ namespace Kistl.Server.SchemaManagement
         public void Do_1_N_RelationChange_FromNotNullable_To_Nullable(Relation rel)
         {
             string assocName = rel.GetAssociationName();
-            report.WriteLine("  Make 1:N relation optional: {0}", assocName);
+            Log.InfoFormat("Make 1:N relation optional: {0}", assocName);
 
             RelationEnd relEnd, otherEnd;
 
@@ -415,7 +412,7 @@ namespace Kistl.Server.SchemaManagement
                     relEnd = rel.B;
                     break;
                 default:
-                    report.WriteLine("    ** Warning: Relation '{0}' has unsupported Storage set: {1}", assocName, rel.Storage);
+                    Log.ErrorFormat("Relation '{0}' has unsupported Storage set: {1}, skipped", assocName, rel.Storage);
                     return;
             }
 
@@ -437,7 +434,7 @@ namespace Kistl.Server.SchemaManagement
         public void Do_1_N_RelationChange_FromNullable_To_NotNullable(Relation rel)
         {
             string assocName = rel.GetAssociationName();
-            report.WriteLine("  Make 1:N relation mandatory: {0}", assocName);
+            Log.InfoFormat("Make 1:N relation mandatory: {0}", assocName);
 
             RelationEnd relEnd, otherEnd;
 
@@ -452,7 +449,7 @@ namespace Kistl.Server.SchemaManagement
                     relEnd = rel.B;
                     break;
                 default:
-                    report.WriteLine("    ** Warning: Relation '{0}' has unsupported Storage set: {1}", assocName, rel.Storage);
+                    Log.ErrorFormat("Relation '{0}' has unsupported Storage set: {1}, skipped", assocName, rel.Storage);
                     return;
             }
 
@@ -461,7 +458,7 @@ namespace Kistl.Server.SchemaManagement
 
             if (db.CheckColumnContainsNulls(tblName, colName))
             {
-                report.WriteLine("    ** Warning: column '{0}.{1}' contains NULL values, cannot set NOT NULLABLE", tblName, colName);
+                Log.ErrorFormat("column '{0}.{1}' contains NULL values, cannot set NOT NULLABLE", tblName, colName);
             }
             else
             {
@@ -478,7 +475,7 @@ namespace Kistl.Server.SchemaManagement
         public void DoDelete_1_N_Relation(Relation rel)
         {
             string assocName = rel.GetAssociationName();
-            report.WriteLine("  Deleting 1:N Relation: {0}", assocName);
+            Log.InfoFormat("Deleting 1:N Relation: {0}", assocName);
 
             string tblName = "";
             string refTblName = "";
@@ -500,7 +497,7 @@ namespace Kistl.Server.SchemaManagement
             }
             else
             {
-                report.WriteLine("    ** Warning: Relation '{0}' has unsupported Storage set: {1}", assocName, rel.Storage);
+                Log.ErrorFormat("Relation '{0}' has unsupported Storage set: {1}, skipped", assocName, rel.Storage);
                 return;
             }
 
@@ -523,7 +520,7 @@ namespace Kistl.Server.SchemaManagement
         public void DoNew_1_N_Relation(Relation rel)
         {
             string assocName = rel.GetAssociationName();
-            report.WriteLine("  New 1:N Relation: {0}", assocName);
+            Log.InfoFormat("New 1:N Relation: {0}", assocName);
 
             RelationEnd relEnd, otherEnd;
 
@@ -538,7 +535,7 @@ namespace Kistl.Server.SchemaManagement
                     relEnd = rel.B;
                     break;
                 default:
-                    report.WriteLine("    ** Warning: Relation '{0}' has unsupported Storage set: {1}", assocName, rel.Storage);
+                    Log.ErrorFormat("Relation '{0}' has unsupported Storage set: {1}, skipped", assocName, rel.Storage);
                     return;
             }
 
@@ -569,7 +566,7 @@ namespace Kistl.Server.SchemaManagement
         public void Do_N_M_RelationChange_FromNotIndexed_To_Indexed(Relation rel, RelationEndRole role)
         {
             string assocName = rel.GetAssociationName();
-            report.WriteLine("  Create N:M Relation {1} PositionStorage: {0}", assocName, role);
+            Log.InfoFormat("Create N:M Relation {1} PositionStorage: {0}", assocName, role);
 
             string tblName = rel.GetRelationTableName();
             string fkName = rel.GetRelationFkColumnName(role);
@@ -588,7 +585,7 @@ namespace Kistl.Server.SchemaManagement
         public void Do_N_M_RelationChange_FromIndexed_To_NotIndexed(Relation rel, RelationEndRole role)
         {
             string assocName = rel.GetAssociationName();
-            report.WriteLine("  Drop N:M Relation {1} PositionStorage: {0}", assocName, role);
+            Log.InfoFormat("Drop N:M Relation {1} PositionStorage: {0}", assocName, role);
 
             string tblName = rel.GetRelationTableName();
             string fkName = rel.GetRelationFkColumnName(role);
@@ -605,7 +602,7 @@ namespace Kistl.Server.SchemaManagement
         public void DoDelete_N_M_Relation(Relation rel)
         {
             string assocName = rel.GetAssociationName();
-            report.WriteLine("  Deleting N:M Relation: {0}", assocName);
+            Log.InfoFormat("Deleting N:M Relation: {0}", assocName);
 
             string tblName = rel.GetRelationTableName();
             string fkAName = rel.GetRelationFkColumnName(RelationEndRole.A);
@@ -626,7 +623,7 @@ namespace Kistl.Server.SchemaManagement
         public void DoNew_N_M_Relation(Relation rel)
         {
             string assocName = rel.GetAssociationName();
-            report.WriteLine("  New N:M Relation: {0}", assocName);
+            Log.InfoFormat("New N:M Relation: {0}", assocName);
 
             string tblName = rel.GetRelationTableName();
             string fkAName = rel.GetRelationFkColumnName(RelationEndRole.A);
@@ -663,7 +660,7 @@ namespace Kistl.Server.SchemaManagement
         }
         public void DoDelete_1_1_Relation(Relation rel)
         {
-            report.WriteLine("  Deleting 1:1 Relation: {0}", rel.GetAssociationName());
+            Log.InfoFormat("Deleting 1:1 Relation: {0}", rel.GetAssociationName());
 
             if (rel.HasStorage(RelationEndRole.A))
             {
@@ -701,7 +698,7 @@ namespace Kistl.Server.SchemaManagement
         }
         public void DoNew_1_1_Relation(Relation rel)
         {
-            report.WriteLine("  New 1:1 Relation: {0}", rel.GetAssociationName());
+            Log.InfoFormat("New 1:1 Relation: {0}", rel.GetAssociationName());
 
             if (rel.Storage == StorageType.MergeIntoA || rel.Storage == StorageType.Replicate)
             {
@@ -726,13 +723,13 @@ namespace Kistl.Server.SchemaManagement
 
             if (rel.NeedsPositionStorage(role))
             {
-                report.WriteLine("    ** Warning: 1:1 Relation should never need position storage, but this one does!");
+                Log.ErrorFormat("1:1 Relation should never need position storage, but this one does!");
             }
         }
 
         private void CreateNotNullableColumn(RelationEnd otherEnd, string tblName, string colName)
         {
-            report.WriteLine("    Creating new column '{0}.{1}'", tblName, colName);
+            Log.InfoFormat("Creating new column '{0}.{1}'", tblName, colName);
 
             if (otherEnd.IsNullable() || !db.CheckTableContainsData(tblName))
             {
@@ -741,7 +738,7 @@ namespace Kistl.Server.SchemaManagement
             else
             {
                 db.CreateColumn(tblName, colName, System.Data.DbType.Int32, 0, true);
-                report.WriteLine("    ** Warning: Unable to create NOT NULL column, since table contains data. Created nullable column instead");
+                Log.ErrorFormat("Unable to create NOT NULL column, since table contains data. Created nullable column instead");
             }
         }
         #endregion
@@ -794,7 +791,7 @@ namespace Kistl.Server.SchemaManagement
 
             if (db.CheckColumnContainsNulls(tblName, colName))
             {
-                report.WriteLine("    ** Warning: column '{0}.{1}' contains NULL values, cannot set NOT NULLABLE", tblName, colName);
+                Log.ErrorFormat("column '{0}.{1}' contains NULL values, cannot set NOT NULLABLE", tblName, colName);
             }
             else
             {
@@ -816,11 +813,11 @@ namespace Kistl.Server.SchemaManagement
             string assocName = Construct.InheritanceAssociationName(objClass.BaseObjectClass, objClass);
             string tblName = objClass.TableName;
 
-            report.WriteLine("  New ObjectClass Inheritance: {0} -> {1}: {2}", objClass.ClassName, objClass.BaseObjectClass.ClassName, assocName);
+            Log.InfoFormat("New ObjectClass Inheritance: {0} -> {1}: {2}", objClass.ClassName, objClass.BaseObjectClass.ClassName, assocName);
 
             if (db.CheckTableContainsData(tblName))
             {
-                report.WriteLine("    ** Warning: Table '{0}' contains data. Unable to add inheritence.", tblName);
+                Log.ErrorFormat("Table '{0}' contains data. Unable to add inheritence.", tblName);
                 return;
             }
 
@@ -841,7 +838,7 @@ namespace Kistl.Server.SchemaManagement
         }
         public void DoChangeObjectClassInheritance(ObjectClass objClass)
         {
-            report.WriteLine("  ** Warning: Changing ObjectClass inheritance is not supported yet");
+            Log.ErrorFormat("Changing ObjectClass inheritance is not supported yet");
         }
         #endregion
 
@@ -855,7 +852,7 @@ namespace Kistl.Server.SchemaManagement
         }
         public void DoRemoveObjectClassInheritance(ObjectClass objClass)
         {
-            report.WriteLine("  ** Warning: Removing ObjectClass inheritance is not supported yet");
+            Log.ErrorFormat("Removing ObjectClass inheritance is not supported yet");
         }
         #endregion
 
@@ -869,7 +866,7 @@ namespace Kistl.Server.SchemaManagement
         {
             string tblName = objClass.TableName;
             string colName = Construct.NestedColumnName(prop, prefix);
-            report.WriteLine("  Drop Column: {0}.{1}", tblName, colName);
+            Log.InfoFormat("Drop Column: {0}.{1}", tblName, colName);
             db.DropColumn(tblName, colName);
         }
         #endregion

@@ -1,43 +1,49 @@
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Text;
-
-using Microsoft.Build.BuildEngine;
-using Microsoft.Build.Framework;
-
-using Arebis.CodeGeneration;
-
-using Kistl.API;
-using Kistl.API.Server;
-using Kistl.App.Base;
-using Kistl.App.Extensions;
-using Kistl.Server.Generators.Extensions;
-using Kistl.API.Utils;
-//using Kistl.Server.GeneratorsOld;
 
 namespace Kistl.Server.Generators
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+
+    using Arebis.CodeGeneration;
+
+    using Kistl.API;
+    using Kistl.API.Server;
+    using Kistl.API.Utils;
+    using Kistl.App.Base;
+    using Kistl.App.Extensions;
+    using Kistl.Server.Generators.Extensions;
+
+    using Microsoft.Build.BuildEngine;
+    using Microsoft.Build.Framework;
+
     public static class Generator
     {
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Server.Generator");
+        
         public static void GenerateCode()
         {
-            //MoveNewRelationToDb();
-            //TranslateRelations();
-            using (Logging.Log.TraceMethodCall())
+            using (Log.DebugTraceMethodCall())
             {
-                Logging.Log.Info("Generating Code");
+                Log.Info("Generating Code");
+                
                 if (string.IsNullOrEmpty(ApplicationContext.Current.Configuration.Server.CodeGenPath))
                 {
                     throw new Kistl.API.Configuration.ConfigurationException("CodeGenPath is not defined in the current configuration file.");
                 }
 
+                Log.InfoFormat("Writing results to [{0}]", ApplicationContext.Current.Configuration.Server.CodeGenPath);
+                
                 using (IKistlContext ctx = KistlContext.GetContext())
                 {
                     string serverReferencePath = Path.GetDirectoryName(typeof(Generator).Assembly.Location);
                     string clientReferencePath = Path.GetFullPath(Path.Combine(serverReferencePath, @"..\Client"));
+
+                    Log.DebugFormat("serverReferencePath = [{0}]", serverReferencePath);
+                    Log.DebugFormat("clientReferencePath = [{0}]", clientReferencePath);
 
                     var generators = new[]{
                         new { Caption = "Interface Source Files", Generator = DataObjectGeneratorFactory.GetInterfaceGenerator(), ReferencePath = serverReferencePath },
@@ -46,12 +52,14 @@ namespace Kistl.Server.Generators
                         new { Caption = "Generating Frozen Source Files", Generator = DataObjectGeneratorFactory.GetFreezingGenerator(), ReferencePath = serverReferencePath },
                     };
 
-                    // doesn't stop growing
+                    // TODO: move MsBuild logging to log4net
                     if (File.Exists("TemplateCodegenLog.txt"))
                         File.Delete("TemplateCodegenLog.txt");
 
                     string binPath = Path.Combine(ApplicationContext.Current.Configuration.Server.CodeGenPath, @"bin\Debug");
                     binPath = Path.GetFullPath(binPath); // Ensure that path is an absolute path
+
+                    Log.DebugFormat("binPath = [{0}]", binPath);
 
                     Directory.CreateDirectory(binPath);
 
@@ -68,23 +76,28 @@ namespace Kistl.Server.Generators
 
                         foreach (var gen in generators)
                         {
-                            Trace.TraceInformation(String.Format("Generating: {0}", gen.Caption));
-                            string projectFileName = gen.Generator.Generate(ctx, ApplicationContext.Current.Configuration.Server.CodeGenPath);
-
-                            var proj = new Project(engine);
-                            proj.Load(projectFileName);
-                            var defaultPropertyGroup = proj.AddNewPropertyGroup(false);
-                            defaultPropertyGroup.AddNewProperty("OutputPath", binPath, true);
-                            // Fix XML Path
-                            defaultPropertyGroup.AddNewProperty("DocumentationFile", "$(OutputPath)\\$(AssemblyName).xml", false);
-                            defaultPropertyGroup.AddNewProperty("KistlAPIPath", gen.ReferencePath, true);
-
-                            if (!engine.BuildProject(proj))
+                            using (log4net.NDC.Push(gen.Caption))
                             {
-                                // TODO: fix dll name here
-                                //File.Delete(Path.Combine(binPath, "Kistl.Objects.dll"));
-                                //File.Delete(Path.Combine(binPath, "Kistl.Objects.pdb"));
-                                throw new ApplicationException(String.Format("Failed to compile {0}", gen.Caption));
+                                Log.InfoFormat("Generating");
+                                string projectFileName = gen.Generator.Generate(ctx, ApplicationContext.Current.Configuration.Server.CodeGenPath);
+
+                                Log.DebugFormat("Loading MsBuild Project");
+                                var proj = new Project(engine);
+                                proj.Load(projectFileName);
+                                var defaultPropertyGroup = proj.AddNewPropertyGroup(false);
+                                defaultPropertyGroup.AddNewProperty("OutputPath", binPath, true);
+                                // Fix XML Path
+                                defaultPropertyGroup.AddNewProperty("DocumentationFile", "$(OutputPath)\\$(AssemblyName).xml", false);
+                                defaultPropertyGroup.AddNewProperty("KistlAPIPath", gen.ReferencePath, true);
+
+                                Log.DebugFormat("Compiling");
+                                if (!engine.BuildProject(proj))
+                                {
+                                    // TODO: fix dll name here
+                                    //File.Delete(Path.Combine(binPath, "Kistl.Objects.dll"));
+                                    //File.Delete(Path.Combine(binPath, "Kistl.Objects.pdb"));
+                                    throw new ApplicationException(String.Format("Failed to compile {0}", gen.Caption));
+                                }
                             }
                         }
                     }
@@ -95,6 +108,7 @@ namespace Kistl.Server.Generators
                     }
                 }
             }
+            Log.Info("Finished generating Code");
         }
 
         internal static TemplateGenerator GetTemplateGenerator(string providerTemplatePath,

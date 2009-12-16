@@ -17,6 +17,8 @@ namespace Kistl.Server.Generators
     /// </summary>
     public class TemplateGenerator
     {
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Server.Generator.Templates");
+
         private NameValueCollection settings = new NameValueCollection();
         private object[] templateParameters = new object[0];
 
@@ -69,27 +71,33 @@ namespace Kistl.Server.Generators
 
         public virtual int ExecuteTemplate(GenerationHost genHost, string templateFilename, string outputFilename, object[] templateParameters)
         {
-            try
+            using (log4net.NDC.Push(templateFilename))
             {
-                genHost.Initialize(this.Settings);
-                genHost.CallTemplateToFile(templateFilename, outputFilename, templateParameters);
-                return 0;
-            }
-            catch (CompilationFailedException ex)
-            {
-                Logging.Log.Warn(string.Format("Compilation failed for file: {0}", ex.Filename), ex);
-                foreach (CompilerError err in ex.Errors)
+                try
                 {
-                    Logging.Log.WarnFormat("{0} {1}: {2}\r\n  \"{3}\", line #{4}",
-                        err.IsWarning ? "Warning" : "Error",
-                        err.ErrorNumber,
-                        err.ErrorText,
-                        err.FileName,
-                        err.Line);
+                    if (Log.IsDebugEnabled)
+                    {
+                        Log.DebugFormat("Executing template");
+                    }
+                    genHost.Initialize(this.Settings);
+                    genHost.CallTemplateToFile(templateFilename, outputFilename, templateParameters);
+                    return 0;
                 }
-                throw;
+                catch (CompilationFailedException ex)
+                {
+                    Log.Warn("Compilation failed for file", ex);
+                    foreach (CompilerError err in ex.Errors)
+                    {
+                        Log.WarnFormat("{0} {1}: {2}\r\n  \"{3}\", line #{4}",
+                            err.IsWarning ? "Warning" : "Error",
+                            err.ErrorNumber,
+                            err.ErrorText,
+                            err.FileName,
+                            err.Line);
+                    }
+                    throw;
+                }
             }
         }
     }
-
 }

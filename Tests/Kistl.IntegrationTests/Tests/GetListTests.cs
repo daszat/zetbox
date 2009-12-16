@@ -17,6 +17,8 @@ namespace Kistl.IntegrationTests
     [TestFixture]
     public class GetListTests
     {
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Tests.Integration.GetList");
+
         [SetUp]
         public void SetUp()
         {
@@ -216,7 +218,7 @@ namespace Kistl.IntegrationTests
                 Assert.That(test.Count, Is.EqualTo(1));
                 foreach (var t in test)
                 {
-                    System.Diagnostics.Trace.WriteLine(string.Format("GetListWithParameterLegal: {0}", t.ModuleName));
+                    Log.DebugFormat("GetListWithParameterLegal: {0}", t.ModuleName);
                 }
             }
         }
@@ -232,7 +234,7 @@ namespace Kistl.IntegrationTests
                            select z;
                 foreach (var t in test)
                 {
-                    System.Diagnostics.Trace.WriteLine(string.Format("GetListWithParameterIllegal: {0}", t.Name));
+                    Log.DebugFormat("GetListWithParameterIllegal: {0}", t.Name);
                 }
             }
         }
@@ -261,7 +263,7 @@ namespace Kistl.IntegrationTests
                            select new { A = z.SpentHours, B = z.BudgetHours };
                 foreach (var t in test)
                 {
-                    Trace.WriteLine(string.Format("GetListWithProjection: {0}", t.A));
+                    Log.DebugFormat("GetListWithProjection: {0}", t.A);
                 }
             }
         }

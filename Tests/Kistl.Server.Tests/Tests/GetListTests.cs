@@ -15,6 +15,8 @@ namespace Kistl.Server.Tests
     [TestFixture]
     public class GetListTests
     {
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Tests.Server.GetList");
+
         [SetUp]
         public void SetUp()
         {
@@ -216,7 +218,7 @@ namespace Kistl.Server.Tests
                 Assert.That(test.Count, Is.EqualTo(1));
                 foreach (var t in test)
                 {
-                    System.Diagnostics.Trace.WriteLine(string.Format("GetListWithParameterLegal: {0}", t.ModuleName));
+                    Log.DebugFormat("GetListWithParameterLegal: {0}", t.ModuleName);
                 }
             }
         }
@@ -233,7 +235,7 @@ namespace Kistl.Server.Tests
         //                   select z;
         //        foreach (var t in test)
         //        {
-        //            System.Diagnostics.Trace.WriteLine(string.Format("GetListWithParameterIllegal: {0}", t.Name));
+        //            Log.DebugFormat("GetListWithParameterIllegal: {0}", t.Name);
         //        }
         //    }
         //}
@@ -247,7 +249,7 @@ namespace Kistl.Server.Tests
                            select new { A = z.SpentHours, B = z.BudgetHours };
                 foreach (var t in test)
                 {
-                    System.Diagnostics.Trace.WriteLine(string.Format("GetListWithProjection: {0}", t.A));
+                    Log.DebugFormat("GetListWithProjection: {0}", t.A);
                 }
             }
         }

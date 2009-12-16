@@ -3,35 +3,35 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+
 using Kistl.API;
 using Kistl.API.Server;
+using Kistl.API.Utils;
 using Kistl.App.Base;
 using Kistl.App.Extensions;
-using Kistl.Server.Generators.Extensions;
 using Kistl.Server.Generators;
-// TODO: Das gehört angeschaut.
-using Kistl.Server.Generators.EntityFramework.Implementation;
-using Kistl.API.Utils;
+using Kistl.Server.Generators.Extensions;
 
 namespace Kistl.Server.SchemaManagement
 {
-    public partial class SchemaManager : IDisposable
+    public partial class SchemaManager
+        : IDisposable
     {
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Server.Schema");
+
         #region Fields
         private IKistlContext schema;
         private ISchemaProvider db;
-        private TextWriter report;
         private bool repair = false;
         private Cases Case { get; set; }
         #endregion
 
         #region Constructor
-        public SchemaManager(IKistlContext schema, Stream reportStream)
+        public SchemaManager(IKistlContext schema)
         {
             this.schema = schema;
-            report = new StreamWriter(reportStream);
             db = GetProvider();
-            Case = new Cases(schema, db, report);
+            Case = new Cases(schema, db);
         }
         #endregion
 
@@ -42,7 +42,6 @@ namespace Kistl.Server.SchemaManagement
             // Do not dispose "schema" -> passed to this class
             if (Case != null) Case.Dispose();
             if (db != null) db.Dispose();
-            if (report != null) report.Dispose();
         }
 
         #endregion
@@ -55,10 +54,10 @@ namespace Kistl.Server.SchemaManagement
 
         private void WriteReportHeader(string reportName)
         {
-            report.WriteLine("== {0} ==", reportName);
-            report.WriteLine("Date: {0}", DateTime.Now);
-            report.WriteLine("Database: {0}", ApplicationContext.Current.Configuration.Server.ConnectionString);
-            report.WriteLine();
+            Log.InfoFormat("== {0} ==", reportName);
+            Log.InfoFormat("Date: {0}", DateTime.Now);
+            Log.InfoFormat("Database: {0}", ApplicationContext.Current.Configuration.Server.ConnectionString);
+            Log.Info(String.Empty);
         }
         #endregion
 
@@ -124,7 +123,7 @@ namespace Kistl.Server.SchemaManagement
 
         private void SaveSchema(IKistlContext schema)
         {
-            using (Logging.Log.TraceMethodCall())
+            using (Logging.Log.DebugTraceMethodCall())
             {
                 using (var ms = new MemoryStream())
                 {

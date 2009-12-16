@@ -284,7 +284,7 @@ namespace Kistl.DALProvider.EF
             }
             catch (UpdateException updex)
             {
-                Logging.Log.Warn("Error during SubmitChanges", updex);
+                Logging.Log.Error("Error during SubmitChanges", updex);
                 throw updex.InnerException;
             }
 
@@ -312,52 +312,57 @@ namespace Kistl.DALProvider.EF
             }
             catch (UpdateException updex)
             {
-                Logging.Log.Warn("Error during SubmitChanges", updex);
+                Logging.Log.Error("Error during SubmitChanges", updex);
                 throw updex.InnerException;
             }
         }
 
         private void DebugTraceChangedObjects()
         {
-#if DEBUG
-            if (_ctx.ObjectStateManager
-                .GetObjectStateEntries(EntityState.Added | EntityState.Modified | EntityState.Deleted)
-                .Count() > 0)
+            if (Logging.Log.IsDebugEnabled)
             {
-                Logging.Log.Info("************************* >>>> Submit Changes ******************************");
+                if (_ctx.ObjectStateManager
+                    .GetObjectStateEntries(EntityState.Added | EntityState.Modified | EntityState.Deleted)
+                    .Count() > 0)
+                {
+                    Logging.Log.Debug("************************* >>>> Submit Changes ******************************");
 
-                #region Details
-                //foreach (var msgPair in new[]{
-                //    new{State = EntityState.Added,      Label="Insert" },
-                //    new{State = EntityState.Modified,   Label="Update" },
-                //    new{State = EntityState.Deleted,    Label="Delete" },
-                //    // new{State = EntityState.Unchanged,  Label="Unchanged" },
-                //})
-                //{
-                //    var debugList = _ctx.ObjectStateManager
-                //        .GetObjectStateEntries(msgPair.State)
-                //        .Where(e => e.Entity != null)
-                //        .Select(e => e.Entity);
-                //    foreach (var i in debugList)
-                //    {
-                //        Logging.Log.InfoFormat("{0}: {1} -> {2}", msgPair.Label, i.GetType(), i.ToString());
-                //    }
-                //}
-                // Logging.Log.Info("");
-                #endregion
+                    #region Details
+                    //foreach (var msgPair in new[]{
+                    //    new{State = EntityState.Added,      Label="Insert" },
+                    //    new{State = EntityState.Modified,   Label="Update" },
+                    //    new{State = EntityState.Deleted,    Label="Delete" },
+                    //    // new{State = EntityState.Unchanged,  Label="Unchanged" },
+                    //})
+                    //{
+                    //    var debugList = _ctx.ObjectStateManager
+                    //        .GetObjectStateEntries(msgPair.State)
+                    //        .Where(e => e.Entity != null)
+                    //        .Select(e => e.Entity);
+                    //    foreach (var i in debugList)
+                    //    {
+                    //        Logging.Log.InfoFormat("{0}: {1} -> {2}", msgPair.Label, i.GetType(), i.ToString());
+                    //    }
+                    //}
+                    // Logging.Log.Info("");
+                    #endregion
 
-                Logging.Log.Info("  Added: " + _ctx.ObjectStateManager.GetObjectStateEntries(EntityState.Added).Count());
-                Logging.Log.Info("  Modified: " + _ctx.ObjectStateManager.GetObjectStateEntries(EntityState.Modified).Count());
-                Logging.Log.Info("  Deleted: " + _ctx.ObjectStateManager.GetObjectStateEntries(EntityState.Deleted).Count());
-                Logging.Log.Info("  Unchanged: " + _ctx.ObjectStateManager.GetObjectStateEntries(EntityState.Unchanged).Count());
+                    Logging.Log.Debug("  Added: " + _ctx.ObjectStateManager.GetObjectStateEntries(EntityState.Added).Count());
+                    Logging.Log.Debug("  Modified: " + _ctx.ObjectStateManager.GetObjectStateEntries(EntityState.Modified).Count());
+                    Logging.Log.Debug("  Deleted: " + _ctx.ObjectStateManager.GetObjectStateEntries(EntityState.Deleted).Count());
+                    Logging.Log.Debug("  Unchanged: " + _ctx.ObjectStateManager.GetObjectStateEntries(EntityState.Unchanged).Count());
 
-                Logging.Log.Info("************************* Submit Changes <<<< ******************************");
+                    Logging.Log.Debug("************************* Submit Changes <<<< ******************************");
+                }
+                else
+                {
+                    Logging.Log.Debug("**** >>>> Empty Submit Changes <<<< ****");
+                }
             }
             else
             {
-                Logging.Log.Info("**** >>>> Empty Submit Changes <<<< ****");
+                Logging.Log.Info("Changes submitted successfully");
             }
-#endif
         }
 
 

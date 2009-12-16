@@ -1,13 +1,14 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
-using System.Diagnostics;
+using System.Xml;
+using System.Xml.XPath;
+
 using Kistl.API;
 using Kistl.API.Server;
-using System.Xml;
-using System.IO;
-using System.Xml.XPath;
 using Kistl.API.Utils;
 
 namespace Kistl.Server.Packaging
@@ -17,6 +18,8 @@ namespace Kistl.Server.Packaging
     /// </summary>
     public class Importer
     {
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Server.Importer");
+
         #region Public Methods
         /// <summary>
         /// 
@@ -30,7 +33,7 @@ namespace Kistl.Server.Packaging
                 {
                     Deploy(ctx, fs);
                 }
-                Logging.Log.Info("Submitting changes");
+                Log.Info("Submitting changes");
                 ctx.SubmitRestore();
             }
         }
@@ -42,9 +45,9 @@ namespace Kistl.Server.Packaging
         /// <param name="s"></param>
         public static void Deploy(IKistlContext ctx, Stream s)
         {
-            using (Logging.Log.TraceMethodCall())
+            using (Log.DebugTraceMethodCall())
             {
-                Logging.Log.InfoFormat("Starting Deployment from {0}", s is FileStream ? ((FileStream)s).Name : s.GetType().Name);
+                Log.InfoFormat("Starting Deployment from {0}", s is FileStream ? ((FileStream)s).Name : s.GetType().Name);
                 try
                 {
                     // TODO: Das muss ich z.Z. machen, weil die erste Query eine Entity Query ist und noch nix geladen wurde....
@@ -59,13 +62,13 @@ namespace Kistl.Server.Packaging
                 Dictionary<Guid, IPersistenceObject> currentObjects = new Dictionary<Guid, IPersistenceObject>();
                 using (XmlReader xml = XmlReader.Create(s, new XmlReaderSettings() { CloseInput = false }))
                 {
-                    Logging.Log.Info("Loading namespaces");
+                    Log.Info("Loading namespaces");
                     var namespaces = LoadModuleNamespaces(xml);
                     if (namespaces.Count() == 0) throw new InvalidOperationException("No modules found in import file");
 
                     foreach (var ns in namespaces)
                     {
-                        Logging.Log.InfoFormat("Prefeching objects for {0}", ns);
+                        Log.InfoFormat("Prefeching objects for {0}", ns);
                         var module = ctx.GetQuery<Kistl.App.Base.Module>().FirstOrDefault(m => m.Namespace == ns);
                         if (module != null)
                         {
@@ -76,7 +79,7 @@ namespace Kistl.Server.Packaging
                         }
                         else
                         {
-                            Logging.Log.InfoFormat("Found new Module '{0}' in XML", ns);
+                            Log.InfoFormat("Found new Module '{0}' in XML", ns);
                         }
                     }
                 }
@@ -85,7 +88,7 @@ namespace Kistl.Server.Packaging
                 Dictionary<Guid, IPersistenceObject> importedObjects = new Dictionary<Guid, IPersistenceObject>();
                 using (XmlReader xml = XmlReader.Create(s, new XmlReaderSettings() { CloseInput = false }))
                 {
-                    Logging.Log.Info("Loading");
+                    Log.Info("Loading");
 
                     // Find Root Element
                     while (xml.Read() && xml.NodeType != XmlNodeType.Element && xml.LocalName != "KistlPackaging" && xml.NamespaceURI != "http://dasz.at/Kistl") ;
@@ -100,19 +103,19 @@ namespace Kistl.Server.Packaging
                     }
                 }
 
-                Logging.Log.Info("Reloading References");
+                Log.Info("Reloading References");
                 foreach (var obj in importedObjects.Values)
                 {
                     obj.ReloadReferences();
                 }
 
                 var objectsToDelete = currentObjects.Where(p => !importedObjects.ContainsKey(p.Key));
-                Logging.Log.InfoFormat("Deleting {0} objects marked for deletion", objectsToDelete.Count());
+                Log.InfoFormat("Deleting {0} objects marked for deletion", objectsToDelete.Count());
                 foreach (var pairToDelete in objectsToDelete)
                 {
                     ctx.Delete(pairToDelete.Value);
                 }
-                Logging.Log.Info("Deployment finished");
+                Log.Info("Deployment finished");
             }
         }
 
@@ -128,7 +131,7 @@ namespace Kistl.Server.Packaging
                 {
                     LoadFromXml(ctx, fs);
                 }
-                Logging.Log.Info("Submitting changes");
+                Log.Info("Submitting changes");
                 ctx.SubmitRestore();
             }
         }
@@ -153,9 +156,9 @@ namespace Kistl.Server.Packaging
         /// <param name="s"></param>
         public static void LoadFromXml(IKistlContext ctx, Stream s)
         {
-            using (Logging.Log.TraceMethodCall())
+            using (Log.DebugTraceMethodCall())
             {
-                Logging.Log.InfoFormat("Starting Import from {0}", s is FileStream ? ((FileStream)s).Name : s.GetType().Name);
+                Log.InfoFormat("Starting Import from {0}", s is FileStream ? ((FileStream)s).Name : s.GetType().Name);
                 try
                 {
                     // TODO: Das muss ich z.Z. machen, weil die erste Query eine Entity Query ist und noch nix geladen wurde....
@@ -170,17 +173,17 @@ namespace Kistl.Server.Packaging
                 Dictionary<Guid, IPersistenceObject> objects = new Dictionary<Guid, IPersistenceObject>();
                 using (XmlReader xml = XmlReader.Create(s, new XmlReaderSettings() { CloseInput = false }))
                 {
-                    Logging.Log.Info("Loading Export Guids");
+                    Log.Info("Loading Export Guids");
                     Dictionary<Type, List<Guid>> guids = LoadGuids(xml);
 
-                    Logging.Log.Info("Prefeching Objects");
+                    Log.Info("Prefeching Objects");
                     PreFetchObjects(ctx, objects, guids);
                 }
                 s.Seek(0, SeekOrigin.Begin);
                 using (XmlReader xml = XmlReader.Create(s, new XmlReaderSettings() { CloseInput = false }))
                 {
 
-                    Logging.Log.Info("Loading");
+                    Log.Info("Loading");
 
                     // Find Root Element
                     while (xml.Read() && xml.NodeType != XmlNodeType.Element && xml.LocalName != "KistlPackaging" && xml.NamespaceURI != "http://dasz.at/Kistl") ;
@@ -193,12 +196,12 @@ namespace Kistl.Server.Packaging
                     }
                 }
 
-                Logging.Log.Info("Reloading References");
+                Log.Info("Reloading References");
                 foreach (var obj in objects.Values)
                 {
                     obj.ReloadReferences();
                 }
-                Logging.Log.Info("Import finished");
+                Log.Info("Import finished");
             }
         }
         #endregion
@@ -206,11 +209,11 @@ namespace Kistl.Server.Packaging
         #region Implementation
         private static void PreFetchObjects(IKistlContext ctx, Dictionary<Guid, IPersistenceObject> objects, Dictionary<Type, List<Guid>> guids)
         {
-            Logging.Log.Info("Prefetching Objects");
+            Log.Info("Prefetching Objects");
             foreach (Type t in guids.Keys)
             {
                 IEnumerable<IPersistenceObject> result = ctx.FindPersistenceObjects(new InterfaceType(t), guids[t]);
-                Logging.Log.DebugFormat("{0}: XML: {1}, Storage: {2}", t.FullName, guids[t].Count, result.Count());
+                Log.DebugFormat("{0}: XML: {1}, Storage: {2}", t.FullName, guids[t].Count, result.Count());
 
                 foreach (IPersistenceObject obj in result)
                 {
@@ -245,7 +248,7 @@ namespace Kistl.Server.Packaging
                         }
                         else
                         {
-                            Logging.Log.WarnFormat("Type {0} not found", ifTypeName);
+                            Log.WarnFormat("Type {0} not found", ifTypeName);
                         }
                     }
                 }
@@ -279,7 +282,7 @@ namespace Kistl.Server.Packaging
                 Type t = Type.GetType(ifTypeName);
                 if (t == null)
                 {
-                    Logging.Log.WarnFormat("Type {0} not found", ifTypeName);
+                    Log.WarnFormat("Type {0} not found", ifTypeName);
                     return null;
                 }
 

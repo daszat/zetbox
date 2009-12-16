@@ -67,7 +67,7 @@ namespace Kistl.Client
             {
                 if (_ObjectClasses == null)
                 {
-                    using (Logging.Log.TraceMethodCall("Getting Object Classes"))
+                    using (Logging.Log.DebugTraceMethodCall("Getting Object Classes"))
                     {
                         // Prefetch Modules
                         //_ObjectClasses = _fetchContext.GetQuery<Kistl.App.Base.ObjectClass>()

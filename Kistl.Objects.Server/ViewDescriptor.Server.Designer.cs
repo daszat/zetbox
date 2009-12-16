@@ -169,7 +169,7 @@ namespace Kistl.App.GUI
                         _isExportGuidSet = true;
                         __result = this._ExportGuid = (Guid)__p.DefaultValue.GetDefaultValue();
                     } else {
-                        System.Diagnostics.Trace.TraceWarning("Unable to get default value for property 'ViewDescriptor.ExportGuid'");
+                        Kistl.API.Utils.Logging.Log.Warn("Unable to get default value for property 'ViewDescriptor.ExportGuid'");
                     }
                 }
                 if (OnExportGuid_Getter != null)

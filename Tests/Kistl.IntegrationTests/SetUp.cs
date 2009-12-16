@@ -6,6 +6,7 @@ using System.Text;
 
 using Kistl.API;
 using Kistl.API.Configuration;
+using Kistl.API.Utils;
 using Kistl.App.GUI;
 using Kistl.Client;
 
@@ -17,34 +18,33 @@ namespace Kistl.IntegrationTests
     [SetUpFixture]
     public class SetUp : Kistl.API.AbstractConsumerTests.DatabaseResetup, IDisposable
     {
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Tests.Integration.SetUp");
+
         private ServerDomainManager manager;
 
         [SetUp]
         public void Init()
         {
-            try
+            using (Log.InfoTraceMethodCall("Starting up"))
             {
-                Trace.WriteLine("Setting up Kistl");
+                try
+                {
+                    var config = KistlConfig.FromFile("Kistl.IntegrationTests.Config.xml");
 
-                var config = KistlConfig.FromFile("Kistl.IntegrationTests.Config.xml");
+                    ResetDatabase(config);
 
-                ResetDatabase(config);
+                    manager = new ServerDomainManager();
+                    manager.Start(config);
 
-                manager = new ServerDomainManager();
-                manager.Start(config);
+                    AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
+                    var testCtx = new GuiApplicationContext(config, "WPF");
 
-                AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
-                var testCtx = new GuiApplicationContext(config, "WPF");
-
-                Trace.WriteLine("Setting up Kistl finished");
-            }
-            catch (Exception error)
-            {
-                Trace.TraceError("Error ({0}) while initialising Integration Tests: {1}", error.GetType().Name, error.Message);
-                Trace.TraceError(error.ToString());
-                Trace.TraceError(error.StackTrace);
-
-                throw error;
+                }
+                catch (Exception error)
+                {
+                    Log.ErrorFormat(String.Format("Error while initialising Integration Tests: [{0}]", error.GetType().Name), error);
+                    throw error;
+                }
             }
         }
 
@@ -55,11 +55,13 @@ namespace Kistl.IntegrationTests
             {
                 if (manager != null)
                 {
-                    System.Diagnostics.Trace.WriteLine("Shutting down Kistl");
-                    manager.DisableUnloadAppDomainOnShutdown();
-                    manager.Stop();
-                    manager = null;
-                    System.Diagnostics.Trace.WriteLine("Shutting down Kistl finished");
+                    using (Log.InfoTraceMethodCall("Shutting down"))
+                    {
+                        manager.DisableUnloadAppDomainOnShutdown();
+                        manager.Stop();
+                        manager = null;
+                        Log.Info("Shutting down Kistl finished");
+                    }
                 }
             }
         }

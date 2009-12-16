@@ -8,6 +8,7 @@ using System.Text;
 
 using Kistl.API;
 using Kistl.API.Configuration;
+using Kistl.API.Utils;
 using Kistl.App.GUI;
 
 using NUnit.Framework;
@@ -18,21 +19,22 @@ namespace Kistl.Server.Tests
     [SetUpFixture]
     public class SetUp : Kistl.API.AbstractConsumerTests.DatabaseResetup, IDisposable
     {
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Tests.Server.SetUp");
+
         private Server manager;
 
         [SetUp]
         public void Init()
         {
-            System.Diagnostics.Trace.WriteLine("Setting up Kistl");
+            using (Log.InfoTraceMethodCall("Starting up"))
+            {
+                var config = KistlConfig.FromFile("Kistl.Server.Tests.Config.xml");
 
-            var config = KistlConfig.FromFile("Kistl.Server.Tests.Config.xml");
+                ResetDatabase(config);
 
-            ResetDatabase(config);
-
-            manager = new Server();
-            manager.Start(config);
-
-            System.Diagnostics.Trace.WriteLine("Setting up Kistl finished");
+                manager = new Server();
+                manager.Start(config);
+            }
         }
 
         [TearDown]
@@ -42,10 +44,11 @@ namespace Kistl.Server.Tests
             {
                 if (manager != null)
                 {
-                    System.Diagnostics.Trace.WriteLine("Shutting down Kistl");
-                    manager.Stop();
-                    manager = null;
-                    System.Diagnostics.Trace.WriteLine("Shutting down Kistl finished");
+                    using (Log.InfoTraceMethodCall("Shutting down"))
+                    {
+                        manager.Stop();
+                        manager = null;
+                    }
                 }
             }
         }

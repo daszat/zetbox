@@ -4,14 +4,13 @@ namespace Kistl.App.Extensions
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.Diagnostics;
     using System.Linq;
     using System.Reflection;
     using System.Text;
 
     using Kistl.API;
-    using Kistl.App.Base;
     using Kistl.API.Utils;
+    using Kistl.App.Base;
 
     /// <summary>
     /// A utility class implementing basic operations and caching needed by all CustomActionsManagers.
@@ -19,6 +18,8 @@ namespace Kistl.App.Extensions
     public abstract class BaseCustomActionsManager
         : ICustomActionsManager
     {
+        protected readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Common.BaseCustomActionsManager");
+
         protected bool initialized = false;
 
         /// <summary>
@@ -65,21 +66,12 @@ namespace Kistl.App.Extensions
             if (initialized) return;
             try
             {
-                Logging.TraceTotalMemory("Before BaseCustomActionsManager.Init()");
-
-                var warnings = new StringBuilder();
+                Log.TraceTotalMemory("Before BaseCustomActionsManager.Init()");
 
                 // Init
-                CreateInvokeInfosForObjectClasses(ctx, ExtraSuffix, ImplementationAssembly, ObjectClassFilter, warnings);
+                CreateInvokeInfosForObjectClasses(ctx, ExtraSuffix, ImplementationAssembly, ObjectClassFilter);
 
-                // Process warings
-                // TODO create and use Logging API in the cache to invert control here and remove clumsy ProcessWarnings calls
-                if (warnings.Length > 0)
-                {
-                    ProcessWarnings(warnings.ToString());
-                }
-
-                Logging.TraceTotalMemory("After BaseCustomActionsManager.Init()");
+                Log.TraceTotalMemory("After BaseCustomActionsManager.Init()");
             }
             finally
             {
@@ -100,24 +92,13 @@ namespace Kistl.App.Extensions
             CLREvent.AddEventHandler(null, newDelegate);
         }
 
-
-        /// <summary>
-        /// This method is called to let the implementor customize processing of warnings.
-        /// </summary>
-        /// <param name="warnings">a human readable string containing the warnings</param>
-        protected virtual void ProcessWarnings(string warnings)
-        {
-            Logging.Log.Warn(warnings);
-        }
-
-
         /// <summary>
         /// Initializes caches for the provider of the given Context
         /// </summary>
         /// <param name="metaCtx">the context used to access the meta data</param>
         /// <param name="extraSuffix">an extra suffix to put into the created implementation class names</param>
         /// <param name="assemblyName">the name of the assembly to load implementation classes from</param>
-        private void CreateInvokeInfosForObjectClasses(IKistlContext metaCtx, string extraSuffix, string assemblyName, Func<ObjectClass, bool> filter, StringBuilder warnings)
+        private void CreateInvokeInfosForObjectClasses(IKistlContext metaCtx, string extraSuffix, string assemblyName, Func<ObjectClass, bool> filter)
         {
             if (filter == null) { throw new ArgumentNullException("filter"); }
             if (metaCtx == null) { throw new ArgumentNullException("metaCtx"); }
@@ -128,19 +109,19 @@ namespace Kistl.App.Extensions
                 {
                     if (filter == null || filter(baseObjClass))
                     {
-                        CreateInvokeInfosForAssembly(warnings, baseObjClass, extraSuffix, assemblyName);
+                        CreateInvokeInfosForAssembly(baseObjClass, extraSuffix, assemblyName);
                     }
                 }
                 catch (Exception ex)
                 {
-                    warnings.AppendLine(ex.Message);
+                    Log.Error("Exception in CreateInvokeInfosForObjectClasses", ex);
                 }
             }
         }
 
         #region Walk through objectclass and create InvocationInfos
 
-        private void CreateInvokeInfosForAssembly(StringBuilder warnings, ObjectClass baseObjClass, string extraSuffix, string assemblyName)
+        private void CreateInvokeInfosForAssembly(ObjectClass baseObjClass, string extraSuffix, string assemblyName)
         {
             // baseObjClass.GetDataType(); is not possible here, because this
             // Method is currently attaching
@@ -152,15 +133,15 @@ namespace Kistl.App.Extensions
             var implType = Type.GetType(implTypeName);
             if (implType != null)
             {
-                CreateInvokeInfos(warnings, baseObjClass, implType);
+                CreateInvokeInfos(baseObjClass, implType);
             }
             else
             {
-                warnings.AppendFormat("Cannot find Type {0}\n", implTypeName);
+                Log.ErrorFormat("Cannot find Type {0}\n", implTypeName);
             }
         }
 
-        private void CreateInvokeInfos(StringBuilder warnings, ObjectClass baseObjClass, Type objType)
+        private void CreateInvokeInfos(ObjectClass baseObjClass, Type objType)
         {
             if (objType == null)
             {
@@ -179,7 +160,7 @@ namespace Kistl.App.Extensions
                     MethodInfo methodInfo = objType.FindMethod(mi.Method.MethodName, paramTypes);
                     if (methodInfo == null)
                     {
-                        warnings.AppendFormat(
+                        Log.WarnFormat(
                             "Couldn't find method '{0}.{1}' with parameters: {2}\n",
                             mi.InvokeOnObjectClass.ClassName,
                             mi.Method.MethodName,
@@ -188,7 +169,7 @@ namespace Kistl.App.Extensions
                     else
                     {
                         var attr = (EventBasedMethodAttribute)methodInfo.GetCustomAttributes(typeof(EventBasedMethodAttribute), false).Single();
-                        CreateInvokeInfo(warnings, objType, mi, attr.EventName);
+                        CreateInvokeInfo(objType, mi, attr.EventName);
                     }
                 }
 
@@ -197,13 +178,13 @@ namespace Kistl.App.Extensions
                 {
                     foreach (PropertyInvocation pi in prop.Invocations)
                     {
-                        CreateInvokeInfo(warnings, objType, pi, "On" + prop.PropertyName + "_" + pi.InvocationType);
+                        CreateInvokeInfo(objType, pi, "On" + prop.PropertyName + "_" + pi.InvocationType);
                     }
                 }
             }
         }
 
-        private void CreateInvokeInfo(StringBuilder warnings, Type objType, IInvocation invoke, string eventName)
+        private void CreateInvokeInfo(Type objType, IInvocation invoke, string eventName)
         {
             try
             {
@@ -220,20 +201,20 @@ namespace Kistl.App.Extensions
                 Type t = Type.GetType(invoke.Implementor.FullName + ", " + invoke.Implementor.Assembly.AssemblyName);
                 if (t == null)
                 {
-                    warnings.AppendLine(string.Format("Warning: Type {0}, {1} not found", invoke.Implementor.FullName, invoke.Implementor.Assembly.AssemblyName));
+                    Log.ErrorFormat("Type {0}, {1} not found", invoke.Implementor.FullName, invoke.Implementor.Assembly.AssemblyName);
                     return;
                 }
 
                 if (!t.IsStatic())
                 {
-                    warnings.AppendLine(string.Format("Warning: Type {0}, {1} is not static", invoke.Implementor.FullName, invoke.Implementor.Assembly.AssemblyName));
+                    Log.ErrorFormat("Type {0}, {1} is not static", invoke.Implementor.FullName, invoke.Implementor.Assembly.AssemblyName);
                     return;
                 }
 
                 MethodInfo clrMethod = t.GetMethod(invoke.MemberName);
                 if (clrMethod == null)
                 {
-                    warnings.AppendLine(string.Format("Warning: CLR Method {0} not found", invoke.MemberName));
+                    Log.ErrorFormat("CLR Method {0} not found", invoke.MemberName);
                     return;
                 }
 
@@ -241,7 +222,7 @@ namespace Kistl.App.Extensions
 
                 if (ei == null)
                 {
-                    warnings.AppendLine(string.Format("Warning: CLR Event {0} not found", eventName));
+                    Log.ErrorFormat("CLR Event {0} not found", eventName);
                     return;
                 }
 
@@ -249,7 +230,7 @@ namespace Kistl.App.Extensions
             }
             catch (Exception ex)
             {
-                warnings.AppendLine(ex.Message);
+                Log.Error("Exception in CreateInvokeInfo", ex);
             }
         }
 

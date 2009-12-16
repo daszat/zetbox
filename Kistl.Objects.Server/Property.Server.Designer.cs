@@ -601,7 +601,7 @@ namespace Kistl.App.Base
                         _isExportGuidSet = true;
                         __result = this._ExportGuid = (Guid)__p.DefaultValue.GetDefaultValue();
                     } else {
-                        System.Diagnostics.Trace.TraceWarning("Unable to get default value for property 'Property.ExportGuid'");
+                        Kistl.API.Utils.Logging.Log.Warn("Unable to get default value for property 'Property.ExportGuid'");
                     }
                 }
                 if (OnExportGuid_Getter != null)

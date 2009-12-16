@@ -20,19 +20,6 @@ namespace Kistl.Client
         }
 
         /// <summary>
-        /// Displays the warnings to the user.
-        /// </summary>
-        /// <param name="warnings">the warnings to display</param>
-        protected override void ProcessWarnings(string warnings)
-        {
-            System.Diagnostics.Debug.WriteLine(warnings);
-            if (GuiApplicationContext.Current.Renderer != null)
-            {
-                GuiApplicationContext.Current.Renderer.ShowMessage(warnings);
-            }
-        }
-
-        /// <summary>
         /// Decides whether or no a deployment restriction is acceptable
         /// </summary>
         /// <param name="r">the restriction to check</param>

@@ -35,7 +35,7 @@ namespace Kistl.Server
         {
             try
             {
-                using (Logging.Facade.TraceMethodCall(type.ToString()))
+                using (Logging.Facade.DebugTraceMethodCall(type.ToString()))
                 {
                     DebugLogIdentity();
                     using (IKistlContext ctx = KistlContext.GetContext())
@@ -70,7 +70,7 @@ namespace Kistl.Server
             try
             {
                 msg.Seek(0, SeekOrigin.Begin);
-                using (Logging.Facade.TraceMethodCall())
+                using (Logging.Facade.DebugTraceMethodCall())
                 {
                     DebugLogIdentity();
 
@@ -124,7 +124,7 @@ namespace Kistl.Server
         {
             try
             {
-                using (Logging.Facade.TraceMethodCall(type.ToString()))
+                using (Logging.Facade.DebugTraceMethodCall(type.ToString()))
                 {
                     DebugLogIdentity();
 
@@ -215,7 +215,7 @@ namespace Kistl.Server
         {
             try
             {
-                using (Logging.Facade.TraceMethodCall(type.ToString()))
+                using (Logging.Facade.DebugTraceMethodCall(type.ToString()))
                 {
                     DebugLogIdentity();
 
@@ -249,7 +249,7 @@ namespace Kistl.Server
         {
             try
             {
-                using (Logging.Facade.TraceMethodCall("relId = {0}, role = {1}, parentObjID = {2}", relId, serializableRole, parentObjID))
+                using (Logging.Facade.DebugTraceMethodCallFormat("relId = [{0}], role = [{1}], parentObjID = [{2}]", relId, serializableRole, parentObjID))
                 {
                     DebugLogIdentity();
 

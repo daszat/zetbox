@@ -1,5 +1,4 @@
 using System;
-using System.Diagnostics;
 using Kistl.API;
 using Kistl.API.Server;
 using Kistl.App.Base;
@@ -43,7 +42,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
         
         public override void Generate()
         {
-#line 25 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ObjectListProperty.cst"
+#line 24 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ObjectListProperty.cst"
 RelationEnd relEnd = rel.GetEndFromRole(endRole);
     RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
         
@@ -53,7 +52,7 @@ RelationEnd relEnd = rel.GetEndFromRole(endRole);
 	bool eagerLoading = relEnd.Navigator != null && relEnd.Navigator.EagerLoading;
 	        
 
-#line 34 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ObjectListProperty.cst"
+#line 33 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ObjectListProperty.cst"
 this.WriteObjects("		// ",  this.GetType() , "\r\n");
 this.WriteObjects("        // implement the user-visible interface\r\n");
 this.WriteObjects("        [XmlIgnore()]\r\n");
@@ -67,18 +66,18 @@ this.WriteObjects("                {\r\n");
 this.WriteObjects("                    List<",  referencedInterface , "> serverList;\r\n");
 this.WriteObjects("                    if (Helper.IsPersistedObject(this))\r\n");
 this.WriteObjects("                    {\r\n");
-#line 47 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ObjectListProperty.cst"
+#line 46 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ObjectListProperty.cst"
 if (eagerLoading) { 
-#line 48 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ObjectListProperty.cst"
+#line 47 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ObjectListProperty.cst"
 this.WriteObjects("						serverList = ",  idsListName , ".Select(id => Context.Find<",  referencedInterface , ">(id)).ToList();\r\n");
 this.WriteObjects("						",  idsListName , " = null; // allow id list to be garbage collected\r\n");
-#line 50 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ObjectListProperty.cst"
+#line 49 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ObjectListProperty.cst"
 } else { 
-#line 51 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ObjectListProperty.cst"
+#line 50 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ObjectListProperty.cst"
 this.WriteObjects("						serverList = Context.GetListOf<",  referencedInterface , ">(this, \"",  name , "\");\r\n");
-#line 52 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ObjectListProperty.cst"
+#line 51 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ObjectListProperty.cst"
 } 
-#line 53 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ObjectListProperty.cst"
+#line 52 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ObjectListProperty.cst"
 this.WriteObjects("					}\r\n");
 this.WriteObjects("                    else\r\n");
 this.WriteObjects("                    {\r\n");
@@ -96,13 +95,13 @@ this.WriteObjects("        }\r\n");
 this.WriteObjects("        \r\n");
 this.WriteObjects("        private ",  wrapperClass , "<",  referencedInterface , "> ",  wrapperName , ";\r\n");
 this.WriteObjects("\r\n");
-#line 71 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ObjectListProperty.cst"
+#line 70 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ObjectListProperty.cst"
 if (eagerLoading)
 	{
 
-#line 74 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ObjectListProperty.cst"
+#line 73 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ObjectListProperty.cst"
 this.WriteObjects("		private List<int> ",  name , "Ids;\r\n");
-#line 76 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ObjectListProperty.cst"
+#line 75 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ObjectListProperty.cst"
 }
 
     AddSerialization(serializationList, name, eagerLoading);

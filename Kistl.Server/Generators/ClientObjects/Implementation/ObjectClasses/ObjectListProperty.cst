@@ -3,7 +3,6 @@
 	ClassName="Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses.ObjectListProperty" 
 	Inherits="Kistl.Server.Generators.KistlCodeTemplate" %>
 <%@ Import Namespace="System" %>
-<%@ Import Namespace="System.Diagnostics" %>
 <%@ Import Namespace="Kistl.API" %>
 <%@ Import Namespace="Kistl.API.Server" %>
 <%@ Import Namespace="Kistl.App.Base" %>

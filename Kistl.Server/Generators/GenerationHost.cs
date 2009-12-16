@@ -8,6 +8,7 @@ using System.Text;
 
 using Arebis.CodeGeneration;
 using Arebis.CodeGenerator.Templated;
+
 using Kistl.API.Utils;
 
 namespace Kistl.Server.Generators
@@ -23,6 +24,8 @@ namespace Kistl.Server.Generators
 #endif
     public class GenerationHost : IGenerationHost, IDisposable
     {
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Server.Generator.Host");
+
         private Dictionary<string, TemplateInfo> templates;
         private List<IFileWriter> fileWriters;
         private NameValueCollection settings;
@@ -171,9 +174,9 @@ namespace Kistl.Server.Generators
             get { return Environment.NewLine; }
         }
 
-        public void Log(string fmt, params object[] args)
+        void IGenerationHost.Log(string fmt, params object[] args)
         {
-            Logging.Log.InfoFormat(fmt, args);
+            Log.InfoFormat(fmt, args);
         }
 
         public void Dispose()

@@ -3,7 +3,6 @@ namespace Kistl.API
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics;
     using System.Linq;
     using System.Text;
     using Kistl.API.Utils;
@@ -92,20 +91,23 @@ namespace Kistl.API
         /// <returns>the initialised frozen context or null</returns>
         private static IKistlContext TryInit()
         {
-            const string frozenAssemblyName="Kistl.DalProvider.Frozen.FrozenContextImplementation, Kistl.Objects.Frozen";
-            if (!_haveTriedLoading)
+            using (Logging.Log.DebugTraceMethodCall())
             {
-                try
+                const string frozenAssemblyName = "Kistl.DalProvider.Frozen.FrozenContextImplementation, Kistl.Objects.Frozen";
+                if (!_haveTriedLoading)
                 {
-                    _haveTriedLoading = true;
-                    Type t = Type.GetType(frozenAssemblyName, true);
-                    _single = (IKistlContext)Activator.CreateInstance(t);
-                    ApplicationContext.Current.LoadFrozenActions(_single);
-                }
-                catch (Exception ex)
-                {
-                    Logging.Log.Warn(string.Format("Error when trying to load frozen context: {0}", frozenAssemblyName), ex);
-                    return null;
+                    try
+                    {
+                        _haveTriedLoading = true;
+                        Type t = Type.GetType(frozenAssemblyName, true);
+                        _single = (IKistlContext)Activator.CreateInstance(t);
+                        ApplicationContext.Current.LoadFrozenActions(_single);
+                    }
+                    catch (Exception ex)
+                    {
+                        Logging.Log.Error(String.Format("Error when trying to load frozen context: [{0}]", frozenAssemblyName), ex);
+                        return null;
+                    }
                 }
             }
 
@@ -113,7 +115,7 @@ namespace Kistl.API
         }
 
         /// <summary>
-        /// Registeres a IKistlContext as fallback which can be used if the frozen context assembly is not available. This is especially useful while bootstrapping.
+        /// Registers a IKistlContext as fallback which can be used if the frozen context assembly is not available. This is especially useful while bootstrapping.
         /// </summary>
         /// <param name="ctx">the context to use as fallback</param>
         public static void RegisterFallback(IKistlContext ctx)

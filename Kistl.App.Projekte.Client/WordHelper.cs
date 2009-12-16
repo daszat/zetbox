@@ -1,11 +1,12 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.IO;
 using System.IO.Packaging;
+using System.Linq;
+using System.Text;
 using System.Xml;
-using System.Collections;
+
 using Kistl.API.Utils;
 
 namespace Kistl.App.Projekte
@@ -31,7 +32,7 @@ namespace Kistl.App.Projekte
             }
             catch (IOException ex)
             {
-                Logging.Log.Warn("An exception was thrown while trying to open file " + filename, ex);
+                Logging.Log.Error(String.Format("An exception was thrown while trying to open file [{0}]", filename), ex);
                 throw ex;
             }
         }

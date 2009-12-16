@@ -1,65 +1,49 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Diagnostics;
-using log4net;
+using System.Linq;
 using System.Reflection;
+using System.Text;
+using log4net;
 
 namespace Kistl.API.Utils
 {
     public static class Logging
     {
-        private static ILog _logger = null;
-        private static ILog _facade = null;
-        private static ILog _linq = null;
+        private readonly static ILog _logger = LogManager.GetLogger("Kistl");
+        private readonly static ILog _facade = LogManager.GetLogger("Kistl.Facade");
+        private readonly static ILog _linq = LogManager.GetLogger("Kistl.Linq");
 
         public static ILog Log
         {
-            get
-            {
-                if (_logger == null)
-                {
-                    _logger = LogManager.GetLogger("");
-                }
-                return _logger;
-            }
+            get { return _logger; }
         }
 
         public static ILog Facade
         {
-            get
-            {
-                if (_facade == null)
-                {
-                    _facade = LogManager.GetLogger("Facade");
-                }
-                return _facade;
-            }
+            get { return _facade; }
         }
 
         public static ILog Linq
         {
-            get
-            {
-                if (_linq == null)
-                {
-                    _linq = LogManager.GetLogger("Linq");
-                }
-                return _linq;
-            }
+            get { return _linq; }
         }
 
         public static void Configure()
         {
             log4net.Config.XmlConfigurator.Configure();
+
+            // initialise pattern contents
+            log4net.GlobalContext.Properties["INDENT"] = String.Empty;
+            log4net.GlobalContext.Properties["NDC"] = String.Empty;
         }
 
         #region TraceMethodCallContext
         /// <summary>
         /// Method Call Context
         /// </summary>
-        public class TraceMethodCallContext : IDisposable
+        private abstract class TraceMethodCallContext
+            : IDisposable
         {
             /// <summary>
             /// Methodname
@@ -74,10 +58,12 @@ namespace Kistl.API.Utils
             /// </summary>
             private Stopwatch watch = new Stopwatch();
 
-            /// <summary>
-            /// Logger
-            /// </summary>
-            protected ILog log;
+            /// <summary>Logger</summary>
+            protected readonly ILog log;
+
+            private IDisposable stack;
+
+            protected abstract void LogFormat(string format, params object[] args);
 
             /// <summary>
             /// Constructs a new TraceMethodCallContext - internal
@@ -88,16 +74,18 @@ namespace Kistl.API.Utils
             internal TraceMethodCallContext(ILog log, string method, string msg)
             {
                 this.log = log;
-                if (this.log.IsDebugEnabled)
-                {
-                    this.Method = method;
-                    this.Message = msg;
-                    if (string.IsNullOrEmpty(Message))
-                        this.log.InfoFormat(">> {0}", Method);
-                    else
-                        this.log.InfoFormat(">> {0}: {1}", Method, Message);
-                    watch.Start();
-                }
+                this.Method = method;
+                this.Message = msg;
+
+                if (String.IsNullOrEmpty(Message))
+                    LogFormat(">> {0}", Method);
+                else
+                    LogFormat(">> {0}: {1}", Method, Message);
+
+                watch.Start();
+
+                // only use the actual method name for NDC
+                stack = log4net.NDC.Push(Method.Split('.').Last());
             }
 
             /// <summary>
@@ -105,14 +93,47 @@ namespace Kistl.API.Utils
             /// </summary>
             public void Dispose()
             {
-                if (log.IsDebugEnabled)
+                if (stack != null)
+                {
+                    stack.Dispose();
+                    stack = null;
+                }
+
+                if (watch != null)
                 {
                     watch.Stop();
                     if (string.IsNullOrEmpty(Message))
-                        log.InfoFormat("<< {0:n0}ms {1}", watch.ElapsedMilliseconds, Method);
+                        LogFormat("<< {0:n0}ms {1}", watch.ElapsedMilliseconds, Method);
                     else
-                        log.InfoFormat("<< {0:n0}ms {1}: {2}", watch.ElapsedMilliseconds, Method, Message);
+                        LogFormat("<< {0:n0}ms {1}: {2}", watch.ElapsedMilliseconds, Method, Message);
+                    watch = null;
                 }
+                else
+                {
+                    Logging.Log.Error("TraceMethodCallContext: disposed a second time!");
+                }
+            }
+        }
+
+        private sealed class DebugTraceMethodCallContext
+            : TraceMethodCallContext
+        {
+            internal DebugTraceMethodCallContext(ILog log, string method, string msg) : base(log, method, msg) { }
+
+            protected override void LogFormat(string format, params object[] args)
+            {
+                log.DebugFormat(format, args);
+            }
+        }
+
+        private sealed class InfoTraceMethodCallContext
+            : TraceMethodCallContext
+        {
+            internal InfoTraceMethodCallContext(ILog log, string method, string msg) : base(log, method, msg) { }
+
+            protected override void LogFormat(string format, params object[] args)
+            {
+                log.InfoFormat(format, args);
             }
         }
         #endregion
@@ -123,98 +144,171 @@ namespace Kistl.API.Utils
         /// <returns>Methodname from the current StackTrace</returns>
         private static string GetCallingMethodName(ILog log)
         {
+            StackTrace stackTrace = new StackTrace();
+            MethodBase mi = stackTrace.GetFrame(2).GetMethod();
+            return mi.DeclaringType.FullName + "." + mi.Name;
+        }
+
+        /// <summary>
+        /// Traces a method call context without a message if the DEBUG level is active.
+        /// Usage: using(Log.DebugTraceMethodCall()) { ... }
+        /// </summary>
+        /// <param name="log">The logger to log to.</param>
+        /// <returns>An IDisposable helper that closes the context when it's disposed.</returns>
+        public static IDisposable DebugTraceMethodCall(this ILog log)
+        {
             if (log.IsDebugEnabled)
             {
-                StackTrace stackTrace = new StackTrace();
-                MethodBase mi = stackTrace.GetFrame(2).GetMethod();
-                return mi.DeclaringType.FullName + "." + mi.Name;
+                try
+                {
+                    return new DebugTraceMethodCallContext(log, GetCallingMethodName(log), String.Empty);
+                }
+                catch
+                {
+                    return new DebugTraceMethodCallContext(log, "<unknown method>", String.Empty);
+                }
             }
             else
             {
-                return "<Method Tracing is disabled, set TraceLevel to verbose>";
+                return null;
             }
         }
 
         /// <summary>
-        /// Traces a Methodcall Context without a Message.
-        /// using(TraceHelper.TraceMethodCall()) { ... }
+        /// Traces a method call context with a message if the DEBUG level is active.
+        /// Usage: using(Log.DebugTraceMethodCall("additional info")) { ... }
         /// </summary>
-        /// <returns>TraceMethodCallContext</returns>
-        public static TraceMethodCallContext TraceMethodCall(this ILog log)
+        /// <param name="log">The logger to log to.</param>
+        /// <param name="msg">The additional message to log.</param>
+        /// <returns>An IDisposable helper that closes the context when it's disposed.</returns>
+        public static IDisposable DebugTraceMethodCall(this ILog log, string msg)
         {
-            try
+            if (log.IsDebugEnabled)
             {
-                if (log.IsDebugEnabled)
+                try
                 {
-                    return new TraceMethodCallContext(log, GetCallingMethodName(log), "");
+                    return new DebugTraceMethodCallContext(log, GetCallingMethodName(log), msg);
                 }
-                else
+                catch
                 {
-                    return null;
+                    return new DebugTraceMethodCallContext(log, "<unknown Method>", msg);
                 }
             }
-            catch
+            else
             {
-                return new TraceMethodCallContext(log, "<unknown Method>", "");
+                return null;
             }
         }
 
         /// <summary>
-        /// Traces a Methodcall Context with a Message.
-        /// using(TraceHelper.TraceMethodCall("Message")) { ... }
+        /// Traces a method call context with a message if the DEBUG level is active.
+        /// Usage: using(Log.DebugTraceMethodCallFormat("foobar=[{0}]", foobar)) { ... }
         /// </summary>
-        /// <param name="log">Logger</param>
-        /// <param name="msg">Message</param>
-        /// <returns>TraceMethodCallContext</returns>
-        public static TraceMethodCallContext TraceMethodCall(this ILog log, string msg)
+        /// <param name="log">The logger to log to.</param>
+        /// <param name="format">The format string for the log message</param>
+        /// <param name="p">the parameters for the log message format</param>
+        /// <returns>An IDisposable helper that closes the context when it's disposed.</returns>
+        public static IDisposable DebugTraceMethodCallFormat(this ILog log, string format, params object[] p)
         {
-            try
+
+            if (log.IsDebugEnabled)
             {
-                if (log.IsDebugEnabled)
+                try
                 {
-                    return new TraceMethodCallContext(log, GetCallingMethodName(log), msg);
+                    return new DebugTraceMethodCallContext(log, GetCallingMethodName(log), String.Format(format, p));
                 }
-                else
+                catch
                 {
-                    return null;
+                    return new DebugTraceMethodCallContext(log, "<unknown Method>", String.Format(format, p));
                 }
             }
-            catch
+            else
             {
-                return new TraceMethodCallContext(log, "<unknown Method>", msg);
+                return null;
             }
         }
 
         /// <summary>
-        /// Traces a Methodcall Context with a Formatstring and Parameter.
-        /// using(TraceHelper.TraceMethodCall("Message {0}", i)) { ... }
+        /// Traces a method call context without a message if the INFO level is active.
+        /// Usage: using(Log.InfoTraceMethodCall()) { ... }
         /// </summary>
-        /// <param name="log">Logger</param>
-        /// <param name="format">Formatstring</param>
-        /// <param name="p">Formatstring Parameter</param>
-        /// <returns>TraceMethodCallContext</returns>
-        public static TraceMethodCallContext TraceMethodCall(this ILog log, string format, params object[] p)
+        /// <param name="log">The logger to log to.</param>
+        /// <returns>An IDisposable helper that closes the context when it's disposed.</returns>
+        public static IDisposable InfoTraceMethodCall(this ILog log)
         {
-            try
+            if (log.IsInfoEnabled)
             {
-                if (log.IsDebugEnabled)
+                try
                 {
-                    return new TraceMethodCallContext(log, GetCallingMethodName(log), string.Format(format, p));
+                    return new InfoTraceMethodCallContext(log, GetCallingMethodName(log), String.Empty);
                 }
-                else
+                catch
                 {
-                    return null;
+                    return new InfoTraceMethodCallContext(log, "<unknown method>", String.Empty);
                 }
             }
-            catch
+            else
             {
-                return new TraceMethodCallContext(log, "<unknown Method>", string.Format(format, p));
+                return null;
             }
         }
 
-        public static void TraceTotalMemory(string msg)
+        /// <summary>
+        /// Traces a method call context with a message if the INFO level is active.
+        /// Usage: using(Log.InfoTraceMethodCall("additional info")) { ... }
+        /// </summary>
+        /// <param name="log">The logger to log to.</param>
+        /// <param name="msg">The additional message to log.</param>
+        /// <returns>An IDisposable helper that closes the context when it's disposed.</returns>
+        public static IDisposable InfoTraceMethodCall(this ILog log, string msg)
         {
-            Log.DebugFormat(msg + ": Consuming {0:0.00} kB Memory", (double)GC.GetTotalMemory(true) / 1024.0);
+            if (log.IsInfoEnabled)
+            {
+                try
+                {
+                    return new InfoTraceMethodCallContext(log, GetCallingMethodName(log), msg);
+                }
+                catch
+                {
+                    return new InfoTraceMethodCallContext(log, "<unknown Method>", msg);
+                }
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Traces a method call context with a message if the INFO level is active.
+        /// Usage: using(Log.InfoTraceMethodCallFormat("foobar=[{0}]", foobar)) { ... }
+        /// </summary>
+        /// <param name="log">The logger to log to.</param>
+        /// <param name="format">The format string for the log message</param>
+        /// <param name="p">the parameters for the log message format</param>
+        /// <returns>An IDisposable helper that closes the context when it's disposed.</returns>
+        public static IDisposable InfoTraceMethodCallFormat(this ILog log, string format, params object[] p)
+        {
+            if (log.IsInfoEnabled)
+            {
+                try
+                {
+                    return new InfoTraceMethodCallContext(log, GetCallingMethodName(log), String.Format(format, p));
+                }
+                catch
+                {
+                    return new InfoTraceMethodCallContext(log, "<unknown Method>", String.Format(format, p));
+                }
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public static void TraceTotalMemory(this ILog log, string msg)
+        {
+            log.DebugFormat(msg + ": Consuming {0:0.00} kB Memory", (double)GC.GetTotalMemory(true) / 1024.0);
         }
     }
 }

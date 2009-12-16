@@ -28,7 +28,7 @@ namespace Kistl.Server
         /// <param name="throwFault">whether or not to throw a <see cref="FaultException"/></param>
         public static void HandleError(Exception ex, bool throwFault)
         {
-            Logging.Log.Error(ex.ToString());
+            Logging.Log.Error("Handling exception", ex);
             if (throwFault)
             {
                 if (ex is System.Data.UpdateException && ex.InnerException != null)

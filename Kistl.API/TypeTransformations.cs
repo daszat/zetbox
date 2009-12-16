@@ -215,7 +215,7 @@ namespace Kistl.API
             // shortcut and warn when trying to resolve an already resolved type
             if (type.IsInterface && typeof(IPersistenceObject).IsAssignableFrom(type))
             {
-                Logging.Log.Warn("Tried to convert an interface type a second time");
+                Logging.Log.Error("Tried to convert an interface type a second time");
                 return type;
             }
 
@@ -247,7 +247,7 @@ namespace Kistl.API
             // shortcut and warn when trying to resolve an already resolved type
             if (type.FullName.Contains(Kistl.API.Helper.ImplementationSuffix) && typeof(IPersistenceObject).IsAssignableFrom(type))
             {
-                Logging.Log.Warn("Tried to convert an implementation type a second time");
+                Logging.Log.Error("Tried to convert an implementation type a second time");
                 return type;
             }
 
