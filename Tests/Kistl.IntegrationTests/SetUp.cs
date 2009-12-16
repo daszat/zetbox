@@ -28,7 +28,7 @@ namespace Kistl.IntegrationTests
 
                 var config = KistlConfig.FromFile("Kistl.IntegrationTests.Config.xml");
 
-                //ResetDatabase(config);
+                ResetDatabase(config);
 
                 manager = new ServerDomainManager();
                 manager.Start(config);
