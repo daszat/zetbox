@@ -13,7 +13,8 @@
                  Text="{Binding InstancesSearchString, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}" />
 
         <ToolBar DockPanel.Dock="Bottom">
-            <Button Click="Open_Click">Open</Button>
+            <Button Click="Open_Click">Open Item</Button>
+            <Button Click="Edit_Click">Edit Class</Button>
             <Button Click="Refresh_Click">Refresh</Button>
         </ToolBar>
         

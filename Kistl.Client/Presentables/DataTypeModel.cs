@@ -125,6 +125,14 @@ namespace Kistl.Client.Presentables
             }
         }
 
+        /// <summary>
+        /// Gets the ID of the modelled DataType.
+        /// </summary>
+        public int TypeId
+        {
+            get { return _type.ID; }
+        }
+
         #endregion
 
         #region Utilities and UI callbacks

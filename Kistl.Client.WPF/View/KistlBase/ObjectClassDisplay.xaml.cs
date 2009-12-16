@@ -17,6 +17,7 @@ namespace Kistl.Client.WPF.View.KistlBase
 
     using Kistl.API.Client;
     using Kistl.Client.Presentables;
+    using Kistl.App.Base;
 
     /// <summary>
     /// Interaction logic for ObjectClassDisplay.xaml
@@ -75,6 +76,20 @@ namespace Kistl.Client.WPF.View.KistlBase
             if (dtm != null)
             {
                 dtm.ReloadInstances();
+            }
+        }
+
+        private void Edit_Click(object sender, RoutedEventArgs e)
+        {
+            var factory = App.Current.AppContext.Factory;
+            var dtm = DataContext as DataTypeModel;
+            if (dtm != null)
+            {
+                var newCtx = KistlContext.GetContext();
+                var objClass = newCtx.Find<DataType>(dtm.TypeId);
+                var newWorkspace = factory.CreateSpecificModel<WorkspaceModel>(newCtx);
+                newWorkspace.ShowForeignModel((DataObjectModel)factory.CreateDefaultModel(newCtx, objClass));
+                factory.ShowModel(newWorkspace, true);
             }
         }
     }
