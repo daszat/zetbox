@@ -739,6 +739,10 @@
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>ObjectListProperty.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Generators\EntityFramework\Implementation\EfModel\Model.ssdl.EntityTypeColumnsRel.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>Model.ssdl.EntityTypeColumnsRel.Designer.cs</LastGenOutput>
+    </None>
     <None Include="Generators\EntityFramework\Implementation\ObjectClasses\ReloadOneReference.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>ReloadOneReference.Designer.cs</LastGenOutput>
@@ -907,6 +911,14 @@
     </None>
     <Compile Include="Generators\ClientObjects\Implementation\ObjectClasses\CollectionSerialization.cs" />
     <Compile Include="Generators\EntityFramework\Implementation\CollectionEntries\ExportGuidProperty.cs" />
+    <Compile Include="Generators\EntityFramework\Implementation\EfModel\Model.ssdl.EntityTypeColumnsRel.cs">
+      <DependentUpon>Model.ssdl.EntityTypeColumnsRel.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Generators\EntityFramework\Implementation\EfModel\Model.ssdl.EntityTypeColumnsRel.Designer.cs">
+      <DependentUpon>Model.ssdl.EntityTypeColumnsRel.cst</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Generators\EntityFramework\Implementation\ObjectClasses\CollectionSerialization.cs" />
     <Compile Include="Generators\EntityFramework\Implementation\ObjectClasses\NotifyingDataProperty.cs" />
     <Compile Include="Generators\Templates\Implementation\CollectionEntries\ExportGuidProperty.cs" />

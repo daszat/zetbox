@@ -96,12 +96,6 @@ namespace Kistl.Server.Generators
         }
 
         [Obsolete]
-        public static string ForeignKeyColumnName(ObjectReferenceProperty prop)
-        {
-            return ForeignKeyColumnName(prop, string.Empty);
-        }
-
-        [Obsolete]
         public static string ForeignKeyColumnName(ObjectReferenceProperty prop, string prefix)
         {
             return ForeignKeyColumnName(NestedColumnName(prop.RelationEnd.GetParent().GetOtherEnd(prop.RelationEnd).RoleName, prefix));

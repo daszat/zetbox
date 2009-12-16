@@ -20,24 +20,39 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.EfModel
             public static IEnumerable<P> RetrieveAndSortPropertiesOfType<P>(IEnumerable<Property> properties, Func<P, bool> predicate)
                 where P : Property
             {
-                return properties.OfType<P>()
+                return properties
+                    .OfType<P>()
                     .OrderBy(p => p.ObjectClass.ClassName)
                     .ThenBy(p => p.PropertyName)
                     .Where(p => predicate(p));
             }
         }
 
-        protected static bool HasStorage(ObjectReferenceProperty p)
+        protected virtual void ApplyEntityTypeColumnDefs(ObjectClass cls)
         {
-            Relation rel = RelationExtensions.Lookup(p.Context, p);
-            RelationEnd relEnd = rel.GetEnd(p);
-            return rel.HasStorage(relEnd.GetRole());
-        }
+            var relevantRelations = ctx.GetQuery<Relation>()
+                .Where(r => (r.A.Type.ID == cls.ID && (int)r.Storage == (int)StorageType.MergeIntoA)
+                            || (r.B.Type.ID == cls.ID && (int)r.Storage == (int)StorageType.MergeIntoB))
+                .ToList()
+                .OrderBy(r => r.GetAssociationName());
 
-        protected virtual void ApplyEntityTypeColumnDefs(IEnumerable properties)
-        {
-            Implementation.EfModel.ModelSsdlEntityTypeColumns.Call(Host, ctx, properties.Cast<Property>(), "");
+            Implementation.EfModel.ModelSsdlEntityTypeColumnsRel.Call(
+                Host,
+                ctx,
+                cls,
+                relevantRelations,
+                String.Empty);
+
+            Implementation.EfModel.ModelSsdlEntityTypeColumns.Call(
+                Host,
+                ctx,
+                ModelSsdlHelper.RetrieveAndSortPropertiesOfType<ValueTypeProperty>(cls.Properties, p => !p.IsList).Cast<Property>(),
+                String.Empty);
+            Implementation.EfModel.ModelSsdlEntityTypeColumns.Call(
+                Host,
+                ctx,
+                ModelSsdlHelper.RetrieveAndSortPropertiesOfType<StructProperty>(cls.Properties, p => !p.IsList).Cast<Property>(),
+                String.Empty);
         }
     }
-
 }

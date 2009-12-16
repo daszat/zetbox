@@ -34,6 +34,14 @@ namespace Kistl.App.Extensions
             return String.Format("FK_{0}_{1}_{2}", rel.A.RoleName, rel.Verb, rel.B.RoleName);
         }
 
+        /// <summary>
+        /// Returns the name for the foreign key <strong>to</strong> the specified role.
+        /// </summary>
+        public static string GetRelationFkNameToEnd(this Relation rel, RelationEnd relEnd)
+        {
+            return String.Format("fk_{0}", relEnd.RoleName);
+        }
+
         public static RelationEndRole GetRole(this RelationEnd relEnd)
         {
             if (relEnd.AParent == null && relEnd.BParent == null)
@@ -71,6 +79,22 @@ namespace Kistl.App.Extensions
                     return rel.A;
                 default:
                     throw new ArgumentOutOfRangeException("role", String.Format("unknown RelationEndRole '{0}'", role));
+            }
+        }
+
+        public static RelationEndRole? GetEndFromClass(this Relation rel, ObjectClass cls)
+        {
+            if (rel.A.Type == cls)
+            {
+                return RelationEndRole.A;
+            }
+            else if (rel.B.Type == cls)
+            {
+                return RelationEndRole.B;
+            }
+            else
+            {
+                return null;
             }
         }
 

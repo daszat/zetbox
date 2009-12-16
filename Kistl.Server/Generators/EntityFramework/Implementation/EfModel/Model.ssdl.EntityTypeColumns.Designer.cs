@@ -45,12 +45,13 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.EfModel
 				((StructProperty)p).StructDefinition.Properties.Cast<Property>().OrderBy(prop => prop.PropertyName),
 				Construct.NestedColumnName(p, prefix));
 		}
+		else if (p is ObjectReferenceProperty)
+		{
+			throw new ArgumentException("properties", String.Format("contains ObjectReferenceProperty {0}, but this template cannot work with that", p));
+		}
 		else
 		{
-			// TODO: Case #1306: SSDL should not rely on NavigationProperties. 
-			string propertyName = (p is ObjectReferenceProperty) 
-				? Construct.ForeignKeyColumnName((ObjectReferenceProperty)p, prefix) 
-				: Construct.NestedColumnName(p, prefix);
+			string propertyName = Construct.NestedColumnName(p, prefix);
 			string sqlTypeName = GetDBType(p);
 			
 			string maxLengthAttr = "";
@@ -67,27 +68,16 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.EfModel
 				nullableAttr = String.Format("Nullable=\"{0}\" ", ((Property)p).IsNullable().ToString().ToLowerInvariant());
 			}
 
-#line 56 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.ssdl.EntityTypeColumns.cst"
+#line 57 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.ssdl.EntityTypeColumns.cst"
 this.WriteObjects("    <Property Name=\"",  propertyName , "\" Type=\"",  sqlTypeName , "\" ",  maxLengthAttr , "",  nullableAttr , "/>\r\n");
-#line 59 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.ssdl.EntityTypeColumns.cst"
-// TODO: Case #1306: SSDL should not rely on NavigationProperties. 
-		    if (p.NeedsPositionColumn())
+#line 60 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.ssdl.EntityTypeColumns.cst"
+if (p.NeedsPositionColumn())
 		    {
-				if(p is ObjectReferenceProperty)
-				{
 
-#line 65 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.ssdl.EntityTypeColumns.cst"
-this.WriteObjects("    <Property Name=\"",  Construct.ListPositionColumnName((ObjectReferenceProperty)p, prefix) , "\" Type=\"int\" Nullable=\"true\" />\r\n");
-#line 67 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.ssdl.EntityTypeColumns.cst"
-}
-				else
-				{
-
-#line 71 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.ssdl.EntityTypeColumns.cst"
+#line 63 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.ssdl.EntityTypeColumns.cst"
 this.WriteObjects("    <Property Name=\"",  Construct.ListPositionColumnName((ValueTypeProperty)p, prefix) , "\" Type=\"int\" Nullable=\"true\" />\r\n");
-#line 73 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.ssdl.EntityTypeColumns.cst"
+#line 65 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.ssdl.EntityTypeColumns.cst"
 }
-			}
 		}
 	}
 
