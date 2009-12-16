@@ -13,22 +13,12 @@ using Kistl.API.Utils;
 
 namespace Kistl.App.Base
 {
-    public partial class CustomCommonActions_KistlBase
+    public static partial class CustomCommonActions_KistlBase
     {
-        private static int instance_counter = 0;
-        /// <summary>
-        /// TODO: Remove after measurement
-        /// </summary>
-        public CustomCommonActions_KistlBase()
-        {
-            instance_counter++;
-            Logging.Log.DebugFormat("{0}: {1} instances", this.GetType(), instance_counter);
-        }
-
         #region ObjectClass
 
         #region CreateDefaultMethods
-        private void CheckDefaultMethod(ObjectClass obj, string methodName)
+        private static void CheckDefaultMethod(ObjectClass obj, string methodName)
         {
             var m = obj.Methods.SingleOrDefault(i => i.MethodName == methodName);
             if (m == null && obj.BaseObjectClass == null)
@@ -44,7 +34,7 @@ namespace Kistl.App.Base
             // TODO: Add Object Level Constraint
         }
 
-        public void OnCreateDefaultMethods_ObjectClass(Kistl.App.Base.ObjectClass obj)
+        public static void OnCreateDefaultMethods_ObjectClass(Kistl.App.Base.ObjectClass obj)
         {
             CheckDefaultMethod(obj, "ToString");
             CheckDefaultMethod(obj, "NotifyPreSave");
@@ -63,28 +53,28 @@ namespace Kistl.App.Base
         }
         #endregion
 
-        public void OnPreSave_ObjectClass(Kistl.App.Base.ObjectClass obj)
+        public static void OnPreSave_ObjectClass(Kistl.App.Base.ObjectClass obj)
         {
             // Do not call CreateDefaultMethods
             // during deploy these Methods are also invoked
             // invoking CreateDefaultMethods leads to multiple instances and unexpected results
         }
 
-        public void OnCreated_ObjectClass(Kistl.App.Base.ObjectClass obj)
+        public static void OnCreated_ObjectClass(Kistl.App.Base.ObjectClass obj)
         {
             // Do not call CreateDefaultMethods
             // during deploy these Methods are also invoked
             // invoking CreateDefaultMethods leads to multiple instances and unexpected results
         }
 
-        public void OnBaseObjectClass_PostSetter_ObjectClass(Kistl.App.Base.ObjectClass obj, PropertyPostSetterEventArgs<Kistl.App.Base.ObjectClass> e)
+        public static void OnBaseObjectClass_PostSetter_ObjectClass(Kistl.App.Base.ObjectClass obj, PropertyPostSetterEventArgs<Kistl.App.Base.ObjectClass> e)
         {
             // Do not call CreateDefaultMethods
             // during deploy these Methods are also invoked
             // invoking CreateDefaultMethods leads to multiple instances and unexpected results
         }
 
-        public void OnCreateRelation_ObjectClass(ObjectClass obj, MethodReturnEventArgs<Relation> e)
+        public static void OnCreateRelation_ObjectClass(ObjectClass obj, MethodReturnEventArgs<Relation> e)
         {
             e.Result = obj.Context.Create<Relation>();
             e.Result.Module = obj.Module;
@@ -101,14 +91,14 @@ namespace Kistl.App.Base
             }
         }
 
-        public void OnCreateMethod_ObjectClass(ObjectClass obj, MethodReturnEventArgs<Method> e)
+        public static void OnCreateMethod_ObjectClass(ObjectClass obj, MethodReturnEventArgs<Method> e)
         {
             e.Result = obj.Context.Create<Method>();
             e.Result.Module = obj.Module;
             e.Result.ObjectClass = obj;
         }
 
-        public void OnCreateMethodInvocation_Method(Kistl.App.Base.Method obj, MethodReturnEventArgs<Kistl.App.Base.MethodInvocation> e)
+        public static void OnCreateMethodInvocation_Method(Kistl.App.Base.Method obj, MethodReturnEventArgs<Kistl.App.Base.MethodInvocation> e)
         {
             e.Result = obj.Context.Create<MethodInvocation>();
             e.Result.InvokeOnObjectClass = obj.ObjectClass;
@@ -120,7 +110,7 @@ namespace Kistl.App.Base
         public static readonly Guid PresentableModelDescriptor_ObjectReferenceModel = new Guid("83aae6fd-0fae-4348-b313-737a6e751027");
         public static readonly Guid PresentableModelDescriptor_ObjectListModel = new Guid("9fce01fe-fd6d-4e21-8b55-08d5e38aea36");
 
-        public void OnCreateNavigator_RelationEnd(RelationEnd obj, MethodReturnEventArgs<ObjectReferenceProperty> e)
+        public static void OnCreateNavigator_RelationEnd(RelationEnd obj, MethodReturnEventArgs<ObjectReferenceProperty> e)
         {
             Relation rel = obj.AParent ?? obj.BParent;
             RelationEnd other = rel != null ? rel.GetOtherEnd(obj) : null;
@@ -151,10 +141,10 @@ namespace Kistl.App.Base
         #endregion
 
         #region PropertyInvocation
-        public void OnGetCodeTemplate_PropertyInvocation(Kistl.App.Base.PropertyInvocation obj, MethodReturnEventArgs<System.String> e)
+        public static void OnGetCodeTemplate_PropertyInvocation(Kistl.App.Base.PropertyInvocation obj, MethodReturnEventArgs<System.String> e)
         {
             StringBuilder sb = new StringBuilder();
-            sb.AppendFormat("public void {0}(", obj.GetMemberName());
+            sb.AppendFormat("public static void {0}(", obj.GetMemberName());
 
             if (obj.InvokeOnProperty != null && obj.InvokeOnProperty.ObjectClass != null && obj.InvokeOnProperty.ObjectClass.Module != null)
             {
@@ -186,7 +176,7 @@ namespace Kistl.App.Base
 
             e.Result = sb.ToString();
         }
-        public void OnGetMemberName_PropertyInvocation(Kistl.App.Base.PropertyInvocation obj, MethodReturnEventArgs<System.String> e)
+        public static void OnGetMemberName_PropertyInvocation(Kistl.App.Base.PropertyInvocation obj, MethodReturnEventArgs<System.String> e)
         {
             StringBuilder sb = new StringBuilder();
 
@@ -202,10 +192,10 @@ namespace Kistl.App.Base
         #endregion
 
         #region MethodInvocation
-        public void OnGetCodeTemplate_MethodInvocation(MethodInvocation mi, MethodReturnEventArgs<string> e)
+        public static void OnGetCodeTemplate_MethodInvocation(MethodInvocation mi, MethodReturnEventArgs<string> e)
         {
             StringBuilder sb = new StringBuilder();
-            sb.AppendFormat("public void {0}(", mi.GetMemberName());
+            sb.AppendFormat("public static void {0}(", mi.GetMemberName());
 
             if (mi.InvokeOnObjectClass != null)
             {
@@ -237,7 +227,7 @@ namespace Kistl.App.Base
             e.Result = sb.ToString();
         }
 
-        public void OnGetMemberName_MethodInvocation(MethodInvocation mi, MethodReturnEventArgs<string> e)
+        public static void OnGetMemberName_MethodInvocation(MethodInvocation mi, MethodReturnEventArgs<string> e)
         {
             StringBuilder sb = new StringBuilder();
 
@@ -251,7 +241,7 @@ namespace Kistl.App.Base
         #endregion
 
         #region GetPropertyTypeString
-        public void OnGetPropertyTypeString_ObjectReferencePlaceholderProperty(ObjectReferencePlaceholderProperty obj, MethodReturnEventArgs<string> e)
+        public static void OnGetPropertyTypeString_ObjectReferencePlaceholderProperty(ObjectReferencePlaceholderProperty obj, MethodReturnEventArgs<string> e)
         {
             if (obj.ReferencedObjectClass == null)
             {

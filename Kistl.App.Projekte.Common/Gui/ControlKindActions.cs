@@ -12,14 +12,14 @@ namespace Kistl.App.Gui.Common
     /// <summary>
     /// The collected default actions for ControlKind
     /// </summary>
-    public class ControlKindActions
+    public static class ControlKindActions
     {
         /// <summary>
         /// Creates the ToString() result for a specified ControlKind.
         /// </summary>
         /// <param name="kind"></param>
         /// <returns></returns>
-        public void OnToString(ControlKind kind, MethodReturnEventArgs<string> e)
+        public static void OnToString(ControlKind kind, MethodReturnEventArgs<string> e)
         {
             if (kind == null)
             {

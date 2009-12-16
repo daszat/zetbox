@@ -11,19 +11,9 @@ namespace Kistl.App.KistlBase.Common
     using Kistl.App.Extensions;
     using Kistl.API.Utils;
 
-    public class RelationActions
+    public static class RelationActions
     {
-        private static int instance_counter = 0;
-        /// <summary>
-        /// TODO: Remove after measurement
-        /// </summary>
-        public RelationActions()
-        {
-            instance_counter++;
-            Logging.Log.DebugFormat("{0}: {1} instances", this.GetType(), instance_counter);
-        }
-
-        public void OnGetOtherEnd(Relation rel, MethodReturnEventArgs<RelationEnd> e, RelationEnd relEnd)
+        public static void OnGetOtherEnd(Relation rel, MethodReturnEventArgs<RelationEnd> e, RelationEnd relEnd)
         {
             if (rel.A == relEnd)
                 e.Result = rel.B;
@@ -33,7 +23,7 @@ namespace Kistl.App.KistlBase.Common
                 e.Result = null;
         }
 
-        public void OnGetEndFromRole(Relation rel, MethodReturnEventArgs<RelationEnd> e, RelationEndRole role)
+        public static void OnGetEndFromRole(Relation rel, MethodReturnEventArgs<RelationEnd> e, RelationEndRole role)
         {
             switch (role)
             {
@@ -48,7 +38,7 @@ namespace Kistl.App.KistlBase.Common
             }
         }
 
-        public void OnGetEnd(Relation rel, MethodReturnEventArgs<RelationEnd> e, ObjectReferenceProperty prop)
+        public static void OnGetEnd(Relation rel, MethodReturnEventArgs<RelationEnd> e, ObjectReferenceProperty prop)
         {
             if (rel.A != null && rel.A.Navigator == prop)
                 e.Result = rel.A;
@@ -58,7 +48,7 @@ namespace Kistl.App.KistlBase.Common
                 e.Result = null;
         }
 
-        public void OnGetRelationType(Relation rel, MethodReturnEventArgs<RelationType> e)
+        public static void OnGetRelationType(Relation rel, MethodReturnEventArgs<RelationType> e)
         {
             if (rel == null)
             {
@@ -92,7 +82,7 @@ namespace Kistl.App.KistlBase.Common
             }
         }
 
-        public void OnNeedsPositionStorage(Relation rel, MethodReturnEventArgs<bool> e, RelationEndRole endRole)
+        public static void OnNeedsPositionStorage(Relation rel, MethodReturnEventArgs<bool> e, RelationEndRole endRole)
         {
             if (rel == null)
             {

@@ -6,7 +6,7 @@ using Kistl.API.Server;
 
 namespace Kistl.App.Projekte
 {
-    public class CustomServerActions_Projekte
+    public static class CustomServerActions_Projekte
     {
         /// <summary>
         /// PreSave für Projekte, beim Projektnamen "_action" hinzufügen.
@@ -14,7 +14,7 @@ namespace Kistl.App.Projekte
         /// </summary>
         /// <param name="ctx"></param>
         /// <param name="obj"></param>
-        public void OnPreSetObject_Projekt(Projekt obj)
+        public static void OnPreSetObject_Projekt(Projekt obj)
         {
             if (obj.ObjectState == Kistl.API.DataObjectState.Modified)
             {
@@ -27,7 +27,7 @@ namespace Kistl.App.Projekte
         /// </summary>
         /// <param name="ctx"></param>
         /// <param name="obj"></param>
-        public void OnPreSetObject_Task(Task obj)
+        public static void OnPreSetObject_Task(Task obj)
         {
             if (obj.Aufwand < 0) throw new ArgumentOutOfRangeException("Ungültiger Aufwand");
             if (obj.DatumBis < obj.DatumVon) throw new ArgumentOutOfRangeException("Falsches Zeitalter");

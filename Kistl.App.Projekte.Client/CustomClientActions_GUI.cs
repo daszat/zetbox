@@ -9,14 +9,14 @@ using Kistl.API.Client;
 
 namespace Kistl.App.GUI
 {
-    public class CustomClientActions_GUI
+    public static class CustomClientActions_GUI
     {
-        public void OnToString_Icon(Icon obj, MethodReturnEventArgs<string> e)
+        public static void OnToString_Icon(Icon obj, MethodReturnEventArgs<string> e)
         {
             e.Result = obj.IconFile;
         }
 
-        public void OnToString_Visual(Visual obj, MethodReturnEventArgs<string> e)
+        public static void OnToString_Visual(Visual obj, MethodReturnEventArgs<string> e)
         {
             if (obj.Method != null)
             {
@@ -32,7 +32,7 @@ namespace Kistl.App.GUI
             }
         }
 
-        public void OnToString_PresentableModelDescriptor(PresentableModelDescriptor obj, MethodReturnEventArgs<string> e)
+        public static void OnToString_PresentableModelDescriptor(PresentableModelDescriptor obj, MethodReturnEventArgs<string> e)
         {
             e.Result = String.Format("{0} (default: {1})",
                 obj.PresentableModelRef == null ? "(no type)" : obj.PresentableModelRef.ToString(),
@@ -40,7 +40,7 @@ namespace Kistl.App.GUI
         }
 
 
-        public void OnPrepareDefault_Template(Template obj, ObjectClass cls)
+        public static void OnPrepareDefault_Template(Template obj, ObjectClass cls)
         {
             var displayedType = cls.GetDataType();
             obj.DisplayedTypeAssembly = obj.Context.GetQuery<Assembly>().Where(assembly => assembly.AssemblyName == displayedType.Assembly.FullName).SingleOrDefault();
@@ -49,7 +49,7 @@ namespace Kistl.App.GUI
             //obj.VisualTree = TemplateHelper.CreateDefaultVisualTree(obj.Context, cls);
         }
 
-        public void OnToString_ViewDescriptor(ViewDescriptor obj, MethodReturnEventArgs<string> e)
+        public static void OnToString_ViewDescriptor(ViewDescriptor obj, MethodReturnEventArgs<string> e)
         {
             e.Result = String.Format("{0}/{1}: {2}",
                 obj.Toolkit,

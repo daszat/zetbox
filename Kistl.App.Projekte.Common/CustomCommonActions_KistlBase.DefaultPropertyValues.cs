@@ -10,15 +10,15 @@ using System.Diagnostics;
 
 namespace Kistl.App.Base
 {
-    public partial class CustomCommonActions_KistlBase
+    public static partial class CustomCommonActions_KistlBase
     {
         #region NewGuidDefaultValue
-        public void OnGetDefaultValue_NewGuidDefaultValue(Kistl.App.Base.NewGuidDefaultValue obj, MethodReturnEventArgs<System.Object> e)
+        public static void OnGetDefaultValue_NewGuidDefaultValue(Kistl.App.Base.NewGuidDefaultValue obj, MethodReturnEventArgs<System.Object> e)
         {
             e.Result = Guid.NewGuid();
         }
 
-        public void OnToString_NewGuidDefaultValue(Kistl.App.Base.NewGuidDefaultValue obj, MethodReturnEventArgs<string> e)
+        public static void OnToString_NewGuidDefaultValue(Kistl.App.Base.NewGuidDefaultValue obj, MethodReturnEventArgs<string> e)
         {
             if (obj.Property != null)
             {

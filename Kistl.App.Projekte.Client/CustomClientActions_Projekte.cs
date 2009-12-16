@@ -11,14 +11,14 @@ using Kistl.App.Base;
 
 namespace Kistl.App.Projekte
 {
-    public class CustomClientActions_Projekte
+    public static class CustomClientActions_Projekte
     {
         /// <summary>
         /// ToString Event überschreiben
         /// </summary>
         /// <param name="obj"></param>
         /// <param name="e"></param>
-        public void OnToString_Projekt(Projekt obj, Kistl.API.MethodReturnEventArgs<string> e)
+        public static void OnToString_Projekt(Projekt obj, Kistl.API.MethodReturnEventArgs<string> e)
         {
             e.Result = obj.Name;
         }
@@ -28,7 +28,7 @@ namespace Kistl.App.Projekte
         /// </summary>
         /// <param name="obj"></param>
         /// <param name="e"></param>
-        public void OnToString_Mitarbeiter(Mitarbeiter obj, Kistl.API.MethodReturnEventArgs<string> e)
+        public static void OnToString_Mitarbeiter(Mitarbeiter obj, Kistl.API.MethodReturnEventArgs<string> e)
         {
             e.Result = obj.Name;
         }
@@ -38,7 +38,7 @@ namespace Kistl.App.Projekte
         /// </summary>
         /// <param name="obj"></param>
         /// <param name="e"></param>
-        public void OnToString_Task(Task obj, Kistl.API.MethodReturnEventArgs<string> e)
+        public static void OnToString_Task(Task obj, Kistl.API.MethodReturnEventArgs<string> e)
         {
             if (obj.DatumVon.HasValue && obj.DatumBis.HasValue)
             {
@@ -52,17 +52,17 @@ namespace Kistl.App.Projekte
             }
         }
 
-        public void OnToString_Auftrag(Auftrag obj, Kistl.API.MethodReturnEventArgs<string> e)
+        public static void OnToString_Auftrag(Auftrag obj, Kistl.API.MethodReturnEventArgs<string> e)
         {
             e.Result = obj.Auftragsname;
         }
 
-        public void OnToString_Kunde(Kunde obj, Kistl.API.MethodReturnEventArgs<string> e)
+        public static void OnToString_Kunde(Kunde obj, Kistl.API.MethodReturnEventArgs<string> e)
         {
             e.Result = obj.Kundenname;
         }
 
-        public void OnRechnungErstellen_Auftrag(Auftrag obj)
+        public static void OnRechnungErstellen_Auftrag(Auftrag obj)
         {
             //RechnungXML xml = new RechnungXML();
 

@@ -6,7 +6,7 @@ using System.Security;
 
 namespace Kistl.App.TimeRecords
 {
-    public class CustomServerActions_TimeRecords
+    public static class CustomServerActions_TimeRecords
     {
         //public void OnPreSave_WorkEffortAccount(Kistl.App.TimeRecords.WorkEffortAccount obj)
         //{

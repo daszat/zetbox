@@ -11,12 +11,12 @@ using Kistl.App.Extensions;
 
 namespace Kistl.App.Base
 {
-    public partial class CustomClientActions_KistlBase
+    public static partial class CustomClientActions_KistlBase
     {
 
         #region Constraint
 
-        public void OnIsValid_Constraint(
+        public static void OnIsValid_Constraint(
             Constraint obj,
             MethodReturnEventArgs<bool> e,
             object constrainedObjectParam,
@@ -30,7 +30,7 @@ namespace Kistl.App.Base
 
         #region NotNullableConstraint
 
-        public void OnIsValid_NotNullableConstraint(
+        public static void OnIsValid_NotNullableConstraint(
             NotNullableConstraint obj,
             MethodReturnEventArgs<bool> e,
             object constrainedObjectParam,
@@ -39,7 +39,7 @@ namespace Kistl.App.Base
             e.Result = constrainedValueParam != null;
         }
 
-        public void OnGetErrorText_NotNullableConstraint(
+        public static void OnGetErrorText_NotNullableConstraint(
             NotNullableConstraint obj,
             MethodReturnEventArgs<string> e,
             object constrainedObjectParam,
@@ -52,7 +52,7 @@ namespace Kistl.App.Base
 
         #region IntegerRangeConstraint
 
-        public void OnIsValid_IntegerRangeConstraint(
+        public static void OnIsValid_IntegerRangeConstraint(
             IntegerRangeConstraint obj,
             MethodReturnEventArgs<bool> e,
             object constrainedObjectParam,
@@ -70,7 +70,7 @@ namespace Kistl.App.Base
             }
         }
 
-        public void OnGetErrorText_IntegerRangeConstraint(
+        public static void OnGetErrorText_IntegerRangeConstraint(
             IntegerRangeConstraint obj,
             MethodReturnEventArgs<string> e,
             object constrainedObjectParam,
@@ -104,7 +104,7 @@ namespace Kistl.App.Base
 
         #region StringRangeConstraint
 
-        public void OnIsValid_StringRangeConstraint(
+        public static void OnIsValid_StringRangeConstraint(
             StringRangeConstraint obj,
             MethodReturnEventArgs<bool> e,
             object constrainedObjectParam,
@@ -114,7 +114,7 @@ namespace Kistl.App.Base
             e.Result = (obj.MinLength <= length) && (length <= obj.MaxLength);
         }
 
-        public void OnGetErrorText_StringRangeConstraint(
+        public static void OnGetErrorText_StringRangeConstraint(
             StringRangeConstraint obj,
             MethodReturnEventArgs<string> e,
             object constrainedObjectParam,
@@ -151,7 +151,7 @@ namespace Kistl.App.Base
 
         #region MethodInvocationConstraint
 
-        public void OnIsValid_MethodInvocationConstraint(
+        public static void OnIsValid_MethodInvocationConstraint(
             MethodInvocationConstraint obj,
             MethodReturnEventArgs<bool> e,
             object constrainedObjectParam,
@@ -163,7 +163,7 @@ namespace Kistl.App.Base
         }
 
 
-        public void OnGetErrorText_MethodInvocationConstraint(
+        public static void OnGetErrorText_MethodInvocationConstraint(
             MethodInvocationConstraint obj,
             MethodReturnEventArgs<string> e,
             object constrainedObjectParam,
@@ -180,7 +180,7 @@ namespace Kistl.App.Base
         #endregion
 
         #region IsValidIdentifierConstraint
-        public void OnIsValid_IsValidIdentifierConstraint(
+        public static void OnIsValid_IsValidIdentifierConstraint(
                     IsValidIdentifierConstraint obj,
                     MethodReturnEventArgs<bool> e,
                     object constrainedObjectParam,
@@ -190,7 +190,7 @@ namespace Kistl.App.Base
                 System.CodeDom.Compiler.CodeGenerator.IsValidLanguageIndependentIdentifier((string)constrainedValueParam);
         }
 
-        public void OnIsValid_IsValidNamespaceConstraint(
+        public static void OnIsValid_IsValidNamespaceConstraint(
                     IsValidNamespaceConstraint obj,
                     MethodReturnEventArgs<bool> e,
                     object constrainedObjectParam,
@@ -209,7 +209,7 @@ namespace Kistl.App.Base
         }
 
 
-        public void OnGetErrorText_IsValidIdentifierConstraint(
+        public static void OnGetErrorText_IsValidIdentifierConstraint(
             IsValidIdentifierConstraint obj,
             MethodReturnEventArgs<string> e,
             object constrainedObjectParam,
@@ -222,7 +222,7 @@ namespace Kistl.App.Base
 
         #region ConsistentNavigatorConstraint
 
-        public void OnIsValid_ConsistentNavigatorConstraint(
+        public static void OnIsValid_ConsistentNavigatorConstraint(
                    ConsistentNavigatorConstraint obj,
                    MethodReturnEventArgs<bool> e,
                    object constrainedObjectParam,
@@ -253,7 +253,7 @@ namespace Kistl.App.Base
             }
         }
 
-        public void OnGetErrorText_ConsistentNavigatorConstraint(
+        public static void OnGetErrorText_ConsistentNavigatorConstraint(
             ConsistentNavigatorConstraint obj,
             MethodReturnEventArgs<string> e,
             object constrainedObjectParam,
