@@ -19,7 +19,7 @@ namespace Kistl.API.AbstractConsumerTests
     /// </summary>
     public abstract class DatabaseResetup
     {
-        protected readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Tests.Api.AbstractConsumer");
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Tests.Api.AbstractConsumer");
 
         protected void ResetDatabase(KistlConfig config)
         {
