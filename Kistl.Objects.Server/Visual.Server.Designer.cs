@@ -227,8 +227,8 @@ namespace Kistl.App.GUI
             set
             {
                 // TODO: NotifyPropertyChanged()
-                // TODO: only accept EF objects from same Context
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if(value != null && value.Context != this.Context) throw new WrongKistlContextExeption();
                 Method__Implementation__ = (Kistl.App.Base.Method__Implementation__)value;
             }
         }
@@ -317,8 +317,8 @@ namespace Kistl.App.GUI
             set
             {
                 // TODO: NotifyPropertyChanged()
-                // TODO: only accept EF objects from same Context
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if(value != null && value.Context != this.Context) throw new WrongKistlContextExeption();
                 Property__Implementation__ = (Kistl.App.Base.Property__Implementation__)value;
             }
         }

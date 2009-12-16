@@ -20,9 +20,11 @@ namespace Kistl.DALProvider.EF
         where INTERFACE : class, IDataObject
     {
         protected EntityCollection<IMPL> underlyingCollection;
+        protected IKistlContext ctx;
 
         public EntityCollectionWrapper(IKistlContext ctx, EntityCollection<IMPL> ec)
         {
+            this.ctx = ctx;
             underlyingCollection = ec;
             foreach (IPersistenceObject obj in underlyingCollection)
             {
@@ -32,6 +34,7 @@ namespace Kistl.DALProvider.EF
 
         public virtual void Add(INTERFACE item)
         {
+            if (ctx != item.Context) throw new WrongKistlContextExeption();
             underlyingCollection.Add((IMPL)item);
         }
 

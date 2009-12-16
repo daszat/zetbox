@@ -179,8 +179,8 @@ namespace Kistl.App.Test
             set
             {
                 // TODO: NotifyPropertyChanged()
-                // TODO: only accept EF objects from same Context
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if(value != null && value.Context != this.Context) throw new WrongKistlContextExeption();
                 MubBlah_Nav__Implementation__ = (Kistl.App.Test.Muhblah__Implementation__)value;
             }
         }
@@ -317,8 +317,8 @@ namespace Kistl.App.Test
             set
             {
                 // TODO: NotifyPropertyChanged()
-                // TODO: only accept EF objects from same Context
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if(value != null && value.Context != this.Context) throw new WrongKistlContextExeption();
                 MuhBlah_One_Nav__Implementation__ = (Kistl.App.Test.Muhblah__Implementation__)value;
             }
         }

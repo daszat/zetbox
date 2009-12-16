@@ -80,8 +80,8 @@ namespace Kistl.App.Base
             set
             {
                 // TODO: NotifyPropertyChanged()
-                // TODO: only accept EF objects from same Context
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if(value != null && value.Context != this.Context) throw new WrongKistlContextExeption();
                 Assembly__Implementation__ = (Kistl.App.Base.Assembly__Implementation__)value;
             }
         }
@@ -170,8 +170,8 @@ namespace Kistl.App.Base
             set
             {
                 // TODO: NotifyPropertyChanged()
-                // TODO: only accept EF objects from same Context
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if(value != null && value.Context != this.Context) throw new WrongKistlContextExeption();
                 ChangedBy__Implementation__ = (Kistl.App.Base.Identity__Implementation__)value;
             }
         }
@@ -311,8 +311,8 @@ namespace Kistl.App.Base
             set
             {
                 // TODO: NotifyPropertyChanged()
-                // TODO: only accept EF objects from same Context
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if(value != null && value.Context != this.Context) throw new WrongKistlContextExeption();
                 CreatedBy__Implementation__ = (Kistl.App.Base.Identity__Implementation__)value;
             }
         }
@@ -613,8 +613,8 @@ namespace Kistl.App.Base
             set
             {
                 // TODO: NotifyPropertyChanged()
-                // TODO: only accept EF objects from same Context
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if(value != null && value.Context != this.Context) throw new WrongKistlContextExeption();
                 Parent__Implementation__ = (Kistl.App.Base.TypeRef__Implementation__)value;
             }
         }

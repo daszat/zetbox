@@ -182,8 +182,8 @@ namespace Kistl.App.Projekte
             set
             {
                 // TODO: NotifyPropertyChanged()
-                // TODO: only accept EF objects from same Context
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if(value != null && value.Context != this.Context) throw new WrongKistlContextExeption();
                 ChangedBy__Implementation__ = (Kistl.App.Base.Identity__Implementation__)value;
             }
         }
@@ -323,8 +323,8 @@ namespace Kistl.App.Projekte
             set
             {
                 // TODO: NotifyPropertyChanged()
-                // TODO: only accept EF objects from same Context
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if(value != null && value.Context != this.Context) throw new WrongKistlContextExeption();
                 CreatedBy__Implementation__ = (Kistl.App.Base.Identity__Implementation__)value;
             }
         }
@@ -464,8 +464,8 @@ namespace Kistl.App.Projekte
             set
             {
                 // TODO: NotifyPropertyChanged()
-                // TODO: only accept EF objects from same Context
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if(value != null && value.Context != this.Context) throw new WrongKistlContextExeption();
                 Kunde__Implementation__ = (Kistl.App.Projekte.Kunde__Implementation__)value;
             }
         }
@@ -554,8 +554,8 @@ namespace Kistl.App.Projekte
             set
             {
                 // TODO: NotifyPropertyChanged()
-                // TODO: only accept EF objects from same Context
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if(value != null && value.Context != this.Context) throw new WrongKistlContextExeption();
                 Mitarbeiter__Implementation__ = (Kistl.App.Projekte.Mitarbeiter__Implementation__)value;
             }
         }
@@ -644,8 +644,8 @@ namespace Kistl.App.Projekte
             set
             {
                 // TODO: NotifyPropertyChanged()
-                // TODO: only accept EF objects from same Context
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if(value != null && value.Context != this.Context) throw new WrongKistlContextExeption();
                 Projekt__Implementation__ = (Kistl.App.Projekte.Projekt__Implementation__)value;
             }
         }

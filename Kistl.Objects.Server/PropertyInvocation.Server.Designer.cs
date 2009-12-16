@@ -80,8 +80,8 @@ namespace Kistl.App.Base
             set
             {
                 // TODO: NotifyPropertyChanged()
-                // TODO: only accept EF objects from same Context
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if(value != null && value.Context != this.Context) throw new WrongKistlContextExeption();
                 ChangedBy__Implementation__ = (Kistl.App.Base.Identity__Implementation__)value;
             }
         }
@@ -221,8 +221,8 @@ namespace Kistl.App.Base
             set
             {
                 // TODO: NotifyPropertyChanged()
-                // TODO: only accept EF objects from same Context
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if(value != null && value.Context != this.Context) throw new WrongKistlContextExeption();
                 CreatedBy__Implementation__ = (Kistl.App.Base.Identity__Implementation__)value;
             }
         }
@@ -424,8 +424,8 @@ namespace Kistl.App.Base
             set
             {
                 // TODO: NotifyPropertyChanged()
-                // TODO: only accept EF objects from same Context
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if(value != null && value.Context != this.Context) throw new WrongKistlContextExeption();
                 Implementor__Implementation__ = (Kistl.App.Base.TypeRef__Implementation__)value;
             }
         }
@@ -581,8 +581,8 @@ namespace Kistl.App.Base
             set
             {
                 // TODO: NotifyPropertyChanged()
-                // TODO: only accept EF objects from same Context
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if(value != null && value.Context != this.Context) throw new WrongKistlContextExeption();
                 InvokeOnProperty__Implementation__ = (Kistl.App.Base.Property__Implementation__)value;
             }
         }

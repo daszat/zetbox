@@ -52,7 +52,7 @@ using System.Xml.Serialization;
         public virtual void AttachToContext(IKistlContext ctx)
         {
             if (this.Context != null && this.Context != ctx)
-                throw new InvalidOperationException("Object cannot be attached to a new Context while attached to another Context.");
+                throw new WrongKistlContextExeption("Object cannot be attached to a new Context while attached to another Context.");
 
             this.Context = ctx;
         }
@@ -64,7 +64,7 @@ using System.Xml.Serialization;
         public virtual void DetachFromContext(IKistlContext ctx)
         {
             if (this.Context != ctx)
-                throw new InvalidOperationException("Object is not attached to the given context.");
+                throw new WrongKistlContextExeption("Object is not attached to the given context.");
 
             this.Context = null;
         }

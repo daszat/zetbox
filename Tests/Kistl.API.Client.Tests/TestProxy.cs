@@ -14,8 +14,6 @@ namespace Kistl.API.Client.Tests
     {
         private int newID = 10;
 
-        #region IProxy Members
-
         public void Generate()
         {
             throw new NotImplementedException();
@@ -23,12 +21,31 @@ namespace Kistl.API.Client.Tests
 
         public IEnumerable<IDataObject> GetList(InterfaceType ifType, int maxListCount, Expression filter, IEnumerable<Expression> orderBy, out List<IStreamable> auxObjects)
         {
-            if (ifType == null) throw new ArgumentNullException("ifType");
-            if (ifType != typeof(TestObjClass)) throw new ArgumentOutOfRangeException("ifType", "Only TestObjClasses are allowed");
+            if (ifType == null) throw new ArgumentNullException("ifType");            
             if (orderBy != null) throw new ArgumentException("OrderBy is not supported yet");
 
             auxObjects = new List<IStreamable>();
+            IEnumerable<IDataObject> result;
 
+            if (ifType == typeof(TestObjClass))
+            {
+                result = GetList_TestObjClass();
+            }
+            else
+            {
+                throw new ArgumentOutOfRangeException("ifType", "Only TestObjClasses are allowed");
+            }
+
+            if (filter != null)
+            {
+                filter = filter.StripQuotes();
+                return result.AsQueryable().AddCast(ifType.Type).AddFilter(filter).Cast<IDataObject>().ToList();
+            }
+            return result.Cast<IDataObject>();
+        }
+
+        private static IEnumerable<IDataObject> GetList_TestObjClass()
+        {
             List<TestObjClass> result = new List<TestObjClass>();
             result.Add(new TestObjClass__Implementation__() { StringProp = "String " + 1 });
             result.Add(new TestObjClass__Implementation__() { StringProp = "String " + 2, fk_Parent = 1 });
@@ -41,19 +58,6 @@ namespace Kistl.API.Client.Tests
             result[2].SetPrivatePropertyValue<int>("ID", 3);
             result[3].SetPrivatePropertyValue<int>("ID", 4);
             result[4].SetPrivatePropertyValue<int>("ID", 5);
-
-            if (filter != null)
-            {
-                filter = filter.StripQuotes();
-                if (filter is LambdaExpression && ((LambdaExpression)filter).Parameters[0].Type == typeof(IDataObject))
-                {
-                    return result.Cast<IDataObject>().AsQueryable<IDataObject>().AddFilter(filter).ToList();
-                }
-                else
-                {
-                    result = result.AsQueryable<TestObjClass>().AddFilter(filter).ToList();
-                }
-            }
             return result.Cast<IDataObject>();
         }
 
@@ -112,8 +116,6 @@ namespace Kistl.API.Client.Tests
             auxObjects = new List<IStreamable>();
             return new List<T>();
         }
-
-        #endregion
 
         #region IDisposable Members
 

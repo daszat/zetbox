@@ -5,9 +5,10 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-using Kistl.API.Client.Mocks;
 
 using NUnit.Framework;
+using Kistl.API.Client;
+using Kistl.DalProvider.ClientObjects.Mocks;
 
 namespace Kistl.DalProvider.ClientObjects.Tests
 {
@@ -18,7 +19,8 @@ namespace Kistl.DalProvider.ClientObjects.Tests
         [SetUp]
         public void Init()
         {
-            var appCtx = new ClientApplicationContextMock();
+            var appCtx = new ClientApiContextMock();
+            Proxy.SetProxy(new ProxyMock());
         }
 
     }

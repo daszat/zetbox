@@ -6,12 +6,39 @@ using System.Text;
 
 namespace Kistl.API
 {
-    public class KistlContextDisposedExeption : Exception
+    public class KistlContextExeption : Exception
+    {
+        public KistlContextExeption()
+            : base()
+        {
+        }
+
+        public KistlContextExeption(string msg)
+            : base(msg)
+        {
+        }
+    }
+
+    public class KistlContextDisposedExeption : KistlContextExeption
     {
         public KistlContextDisposedExeption()
             : base("Context has been disposed. Reusing is not allowed.")
         {
         }
+    }
+
+    public class WrongKistlContextExeption : KistlContextExeption
+    {
+        public WrongKistlContextExeption()
+            : base("Operation on a Context, where the IPersistanceObject does not belong to is not allowed")
+        {
+        }
+
+        public WrongKistlContextExeption(string msg)
+            : base(msg)
+        {
+        }
+
     }
 
     public interface IKistlContextDebugger : IDisposable

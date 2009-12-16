@@ -259,8 +259,8 @@ namespace Kistl.App.Base
             set
             {
                 // TODO: NotifyPropertyChanged()
-                // TODO: only accept EF objects from same Context
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if(value != null && value.Context != this.Context) throw new WrongKistlContextExeption();
                 ReferencedObjectClass__Implementation__ = (Kistl.App.Base.ObjectClass__Implementation__)value;
             }
         }

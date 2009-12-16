@@ -80,8 +80,8 @@ namespace Kistl.App.Base
             set
             {
                 // TODO: NotifyPropertyChanged()
-                // TODO: only accept EF objects from same Context
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if(value != null && value.Context != this.Context) throw new WrongKistlContextExeption();
                 ChangedBy__Implementation__ = (Kistl.App.Base.Identity__Implementation__)value;
             }
         }
@@ -221,8 +221,8 @@ namespace Kistl.App.Base
             set
             {
                 // TODO: NotifyPropertyChanged()
-                // TODO: only accept EF objects from same Context
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if(value != null && value.Context != this.Context) throw new WrongKistlContextExeption();
                 CreatedBy__Implementation__ = (Kistl.App.Base.Identity__Implementation__)value;
             }
         }
@@ -625,8 +625,8 @@ namespace Kistl.App.Base
             set
             {
                 // TODO: NotifyPropertyChanged()
-                // TODO: only accept EF objects from same Context
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if(value != null && value.Context != this.Context) throw new WrongKistlContextExeption();
                 Module__Implementation__ = (Kistl.App.Base.Module__Implementation__)value;
             }
         }
@@ -715,8 +715,8 @@ namespace Kistl.App.Base
             set
             {
                 // TODO: NotifyPropertyChanged()
-                // TODO: only accept EF objects from same Context
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if(value != null && value.Context != this.Context) throw new WrongKistlContextExeption();
                 ObjectClass__Implementation__ = (Kistl.App.Base.DataType__Implementation__)value;
             }
         }

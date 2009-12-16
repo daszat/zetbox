@@ -69,6 +69,7 @@ namespace Kistl.API.Client
         private void DoInsert(T item, int index)
         {
             if (item == null) throw new ArgumentNullException("item", "Cannot add a NULL Object to this collection");
+            if (_parent.Context != item.Context) throw new WrongKistlContextExeption();
             collection.Insert(index, item);
             SetPointerProperty(item, index);
             OnItemAdded(item);
