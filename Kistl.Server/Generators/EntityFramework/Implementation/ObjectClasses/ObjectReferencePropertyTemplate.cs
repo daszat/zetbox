@@ -14,16 +14,16 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
             IKistlContext ctx,
             Templates.Implementation.SerializationMembersList membersToSerialize,
             string propertyName, string collectionEntryAssociationName, string roleName,
-            string relDataTypeString, string relDataTypeStringImpl, bool needsPositionStorage, 
+            string relDataTypeString, string relDataTypeStringImpl, bool needsPositionStorage,
             bool relDataTypeExportable, string moduleNamespace,
-            bool eagerLoading, bool callGetterSetterEvents)
+            bool eagerLoading, bool callGetterSetterEvents, bool isReloadable)
         {
             host.CallTemplate("Implementation.ObjectClasses.ObjectReferencePropertyTemplate", ctx,
                 membersToSerialize,
                 propertyName, collectionEntryAssociationName, roleName,
                 relDataTypeString, relDataTypeStringImpl,
                 needsPositionStorage, relDataTypeExportable, moduleNamespace,
-                eagerLoading, callGetterSetterEvents);
+                eagerLoading, callGetterSetterEvents, isReloadable);
         }
 
         protected virtual void AddSerialization(Templates.Implementation.SerializationMembersList list, string memberName)

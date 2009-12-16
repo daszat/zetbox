@@ -20,6 +20,7 @@
 <%@ Parameter Name="moduleNamespace" Type="string" %>
 <%@ Parameter Name="eagerLoading" Type="bool" %>
 <%@ Parameter Name="callGetterSetterEvents" Type="bool" %>
+<%@ Parameter Name="isReloadable" Type="bool" %>
 <%
 
 	string efName = name + Kistl.API.Helper.ImplementationSuffix;
@@ -48,8 +49,14 @@
         }
         
         private int? <%= fkBackingName %>;
+<%
+        if (isReloadable)
+        {
+%>
         private Guid? <%= fGuidkBackingName %> = null;
 <%
+		}
+		
         AddSerialization(serializationList, name);
 %>
         // EF sees only this property

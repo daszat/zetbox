@@ -3008,7 +3008,6 @@ namespace Kistl.App.Projekte
         }
         
         private int? _fk_A;
-        private Guid? _fk_guid_A = null;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Kunde_value_EMails", "Kunde")]
         public Kunde__Implementation__ A__Implementation__

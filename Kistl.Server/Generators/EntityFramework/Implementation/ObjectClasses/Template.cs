@@ -146,6 +146,7 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
                     otherEnd.Type.ImplementsIExportable(ctx),
                     prop.Module.Namespace,
                     relEnd.Navigator != null && relEnd.Navigator.EagerLoading,
+                    true, 
                     true);
         }
 
