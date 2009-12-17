@@ -1,16 +1,17 @@
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Target Name="Build"> 
-    <!-- remove temp output -->
-    <RemoveDir Directories="bin\CodeGen" />
-    <RemoveDir Directories="bin\Debug" />
-    <RemoveDir Directories="bin\Remove" />
-    <RemoveDir Directories="bin\LogFiles" />
+    <!-- clean temp output -->
+    <RemoveDir Directories="bin" />
+    <MakeDir Directories="bin" />
 	
-	  <!-- Create temp dir for database backup -->
+    <!-- Create temp dir for database backup -->
     <MakeDir Directories="c:\temp" />
 
     <!-- Clean, then rebuild entire solution -->
-    <MSBuild Projects="Kistl.Complete.sln" Targets="Clean;Rebuild" />   
+    <MSBuild Projects="Kistl.Complete.sln"
+        Targets="Clean;Rebuild"
+        BuildInParallel="true"
+        Properties="ArebisMsBuildPath=$(SourceLocation)\..\..\Arebis\Arebis.CodeGeneration.MsBuild\" />   
 
     <!-- Run FxCop analysis -->
     <Exec Command="FxCopCmd.exe /project:$(SourceLocation)\FxCop.FxCop /out:$(SourceLocation)\bin\FxCop.results.xml /s /fo" WorkingDirectory="C:\Program Files\Microsoft FxCop 1.36" />     

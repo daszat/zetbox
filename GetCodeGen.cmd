@@ -19,6 +19,6 @@ rem *********** Assemblies ***********
 rem Do not copy assemblies
 
 rem *********** Build *********** 
-rem rebuild with newly generated code
-C:\Windows\Microsoft.NET\Framework\v3.5\MSBuild.exe /m Kistl.Complete.sln
+rem do not rebuild code as we can't find Arebis
+rem C:\Windows\Microsoft.NET\Framework\v3.5\MSBuild.exe /m Kistl.Complete.sln
 

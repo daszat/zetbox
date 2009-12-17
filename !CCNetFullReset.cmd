@@ -11,7 +11,7 @@ osql -S .\sqlexpress -E -d Kistl -i Kistl.Server\Database\Scripts\DropTables.sql
 IF ERRORLEVEL 1 GOTO FAIL
 
 echo build bootstrapper
-C:\Windows\Microsoft.NET\Framework\v3.5\MSBuild.exe /m Kistl.Complete.sln
+C:\Windows\Microsoft.NET\Framework\v3.5\MSBuild.exe CCNet.msbuild
 IF ERRORLEVEL 1 GOTO FAIL
 
 echo populate database and generate other assemblies
@@ -24,6 +24,10 @@ IF ERRORLEVEL 1 GOTO FAIL
 
 echo refresh local code
 call GetCodeGen.cmd
+IF ERRORLEVEL 1 GOTO FAIL
+
+echo rebuild new code
+C:\Windows\Microsoft.NET\Framework\v3.5\MSBuild.exe CCNet.msbuild
 IF ERRORLEVEL 1 GOTO FAIL
 
 echo ********************************************************************************
@@ -39,4 +43,3 @@ echo Aborting reset.
 
 :EOF
 rem ***** DO NOT PAUSE, CCNet! *****
-
