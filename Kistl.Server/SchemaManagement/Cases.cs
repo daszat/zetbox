@@ -832,13 +832,15 @@ namespace Kistl.Server.SchemaManagement
 
             ObjectClass savedObjClass = savedSchema.FindPersistenceObject<ObjectClass>(objClass.ExportGuid);
             if (savedObjClass == null) return false;
-
             if (savedObjClass.BaseObjectClass == null) return false;
+
             return savedObjClass.BaseObjectClass.ExportGuid != objClass.BaseObjectClass.ExportGuid;
         }
         public void DoChangeObjectClassInheritance(ObjectClass objClass)
         {
-            Log.ErrorFormat("Changing ObjectClass inheritance is not supported yet");
+            Log.InfoFormat("Changing ObjectClass Inheritance: {0} -> {1}", objClass.ClassName, objClass.BaseObjectClass.ClassName);
+            DoRemoveObjectClassInheritance(objClass);
+            DoNewObjectClassInheritance(objClass);
         }
         #endregion
 
@@ -852,7 +854,13 @@ namespace Kistl.Server.SchemaManagement
         }
         public void DoRemoveObjectClassInheritance(ObjectClass objClass)
         {
-            Log.ErrorFormat("Removing ObjectClass inheritance is not supported yet");
+            ObjectClass savedObjClass = savedSchema.FindPersistenceObject<ObjectClass>(objClass.ExportGuid);
+            string assocName = Construct.InheritanceAssociationName(savedObjClass.BaseObjectClass, savedObjClass);
+            string tblName = objClass.TableName;
+
+            Log.InfoFormat("Remove ObjectClass Inheritance: {0} -> {1}: {2}", savedObjClass.ClassName, savedObjClass.BaseObjectClass.ClassName, assocName);
+
+            db.DropFKConstraint(tblName, assocName);
         }
         #endregion
 
