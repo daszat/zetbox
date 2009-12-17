@@ -34,6 +34,9 @@ namespace Kistl.API.Utils
             log4net.Config.XmlConfigurator.Configure();
 
             ResetDefaultProperties();
+
+            // push empty string onto NDC stack to avoid (null) messages in output
+            ThreadContext.Stacks["NDC"].Push(String.Empty);
         }
 
         private static void ResetDefaultProperties()
@@ -43,7 +46,6 @@ namespace Kistl.API.Utils
             SetEmptyIfNull(GlobalContext.Properties, "INDENT");
             SetEmptyIfNull(ThreadContext.Properties, "INDENT");
             SetEmptyIfNull(GlobalContext.Properties, "NDC");
-            SetEmptyIfNull(ThreadContext.Properties, "NDC");
         }
 
         private static void SetEmptyIfNull(log4net.Util.ContextPropertiesBase properties, string p)
