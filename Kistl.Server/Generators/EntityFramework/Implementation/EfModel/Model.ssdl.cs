@@ -31,8 +31,8 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.EfModel
         protected virtual void ApplyEntityTypeColumnDefs(ObjectClass cls)
         {
             var relevantRelations = ctx.GetQuery<Relation>()
-                .Where(r => (r.A.Type.ID == cls.ID && (int)r.Storage == (int)StorageType.MergeIntoA)
-                            || (r.B.Type.ID == cls.ID && (int)r.Storage == (int)StorageType.MergeIntoB))
+                .Where(r => (r.A.Type.ID == cls.ID && r.Storage == StorageType.MergeIntoA)
+                            || (r.B.Type.ID == cls.ID && r.Storage == StorageType.MergeIntoB))
                 .ToList()
                 .OrderBy(r => r.GetAssociationName());
 

@@ -80,7 +80,7 @@ namespace Kistl.Server.SchemaManagement
 
             // Add Relations with sep. Storage
             tableNames.AddRange(schema.GetQuery<Relation>()
-                            .Where(r => (int)r.Storage == (int)StorageType.Separate)
+                            .Where(r => r.Storage == StorageType.Separate)
                             .ToList()
                             .Select(r => r.GetRelationTableName()));
 

@@ -62,7 +62,7 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.EfModel
         internal static IEnumerable<Relation> GetRelationsWithSeparateStorage(IKistlContext ctx)
         {
             return ctx.GetQuery<Relation>()
-                .Where(r => (int)r.Storage == (int)StorageType.Separate)
+                .Where(r => r.Storage == StorageType.Separate)
                 .ToList()
                 .OrderBy(r => r.GetAssociationName());
         }
@@ -70,7 +70,7 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.EfModel
         internal static IEnumerable<Relation> GetRelationsWithoutSeparateStorage(IKistlContext ctx)
         {
             return ctx.GetQuery<Relation>()
-                .Where(r => (int)r.Storage != (int)StorageType.Separate)
+                .Where(r => r.Storage != StorageType.Separate)
                 .ToList()
                 .OrderBy(r => r.GetAssociationName());
         }
