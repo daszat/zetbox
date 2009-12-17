@@ -243,32 +243,11 @@ namespace Kistl.API
     }
 
     /// <summary>
-    /// XML Collection Interface. Used to serialize collection of Objects to XML. Implemented by the Generator.
-    /// </summary>
-    public interface IXmlObjectCollection
-    {
-        /// <summary>
-        /// Gets a list of Objects
-        /// </summary>
-        List<object> Objects { get; }
-    }
-
-    /// <summary>
-    /// XML Object Interface. Used to serialize Objects to XML. Implemented by the Generator.
-    /// </summary>
-    public interface IXmlObject
-    {
-        /// <summary>
-        /// Gets or sets the object to serialize.
-        /// </summary>
-        object Object { get; set; }
-    }
-
-    /// <summary>
     /// Return event arguments for a method call event.
     /// </summary>
     /// <typeparam name="T">the type of the return value</typeparam>
     public class MethodReturnEventArgs<T>
+        : EventArgs
     {
         /// <summary>
         /// Gets or sets the result of the method call. This can be modified multiple times while handling the event.
@@ -291,11 +270,8 @@ namespace Kistl.API
     /// <param name="obj">>Object that has fired this Event.</param>
     public delegate void ObjectEventHandler<T>(T obj) where T : IDataObject;
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <typeparam name="V"></typeparam>
     public class PropertyGetterEventArgs<V>
+        : EventArgs
     {
         public PropertyGetterEventArgs(V orignal)
         {
@@ -303,13 +279,8 @@ namespace Kistl.API
             this.Result = orignal;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
         public V Original { get; private set; }
-        /// <summary>
-        /// 
-        /// </summary>
+
         public V Result { get; set; }
     }
 
@@ -318,6 +289,7 @@ namespace Kistl.API
     /// </summary>
     /// <typeparam name="V"></typeparam>
     public class PropertyPreSetterEventArgs<V>
+        : EventArgs
     {
         public PropertyPreSetterEventArgs(V oldVal, V newVal)
         {
@@ -345,6 +317,7 @@ namespace Kistl.API
     /// </summary>
     /// <typeparam name="V"></typeparam>
     public class PropertyPostSetterEventArgs<V>
+        : EventArgs
     {
         public PropertyPostSetterEventArgs(V oldVal, V newVal)
         {

@@ -60,7 +60,7 @@ namespace Kistl.API.Utils
                 }
             }
 
-            throw new ArgumentException("collection", String.Format("Unable to determine CollectionWrapper for {0}", collection.GetType().FullName));
+            throw new ArgumentException(String.Format("Unable to determine CollectionWrapper for {0}", collection.GetType().FullName), "collection");
         }
 
         public static IList<TResult> WrapAsListHelper<TFrom, TResult>(IList<TFrom> list)
@@ -119,7 +119,7 @@ namespace Kistl.API.Utils
                 // also failed to wrap as collection, ignore this exception and fall through to the final exception
             }
 
-            throw new ArgumentException("potentialList", String.Format("Unable to determine ListWrapper for {0}", potentialList.GetType().FullName));
+            throw new ArgumentException(String.Format("Unable to determine ListWrapper for {0}", potentialList.GetType().FullName), "potentialList");
         }
 
     }
@@ -249,7 +249,7 @@ namespace Kistl.API.Utils
     public class GenericCastingCollectionWrapper<TFrom, TResult> : ICollection<TResult>
         where TFrom : TResult
     {
-        protected ICollection<TFrom> baseCollection;
+        private ICollection<TFrom> baseCollection;
 
         public GenericCastingCollectionWrapper(ICollection<TFrom> baseList)
         {

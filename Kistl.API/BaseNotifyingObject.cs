@@ -20,7 +20,7 @@ namespace Kistl.API
         public object NewValue { get; private set; }
     }
 
-    public delegate void PropertyChangeWithValueEventHandler(object sender, PropertyChangeWithValueEventArgs args);
+    public delegate void PropertyChangeWithValueEventHandler(object sender, PropertyChangeWithValueEventArgs e);
 
     public interface INotifyingObject : INotifyPropertyChanged, INotifyPropertyChanging
     {

@@ -1,9 +1,10 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Linq.Expressions;
 using System.Collections.ObjectModel;
+using System.Diagnostics.CodeAnalysis;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Text;
 
 namespace Kistl.API
 {
@@ -303,6 +304,7 @@ namespace Kistl.API
         /// Visits a New Expression
         /// </summary>
         /// <param name="newExpression">New Expression</param>
+        [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix", Justification = "correct grammar for this method name")]
         protected virtual void VisitNew(NewExpression newExpression)
         {
             VisitExpressionList(newExpression.Arguments);

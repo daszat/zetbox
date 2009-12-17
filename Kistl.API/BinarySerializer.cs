@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -410,6 +411,7 @@ namespace Kistl.API
         /// </summary>
         /// <param name="val">Value to serialize,</param>
         /// <param name="sw">BinaryWriter to serialize to.</param>
+        [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters", Justification="This API is only for IStructs")]
         public static void ToStream(IStruct val, BinaryWriter sw)
         {
             if (sw == null) throw new ArgumentNullException("sw");

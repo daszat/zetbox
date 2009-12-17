@@ -1,9 +1,10 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Linq.Expressions;
 using System.Collections.ObjectModel;
+using System.Diagnostics.CodeAnalysis;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Text;
 
 namespace Kistl.API
 {
@@ -225,6 +226,7 @@ namespace Kistl.API
             return Expression.Lambda(lambda.Type, Visit(lambda.Body), VisitParameterList(lambda.Parameters));
         }
 
+        [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix", Justification = "correct grammar for this method name")]
         protected virtual NewExpression VisitNew(NewExpression newExpression)
         {
             var args = VisitExpressionList(newExpression.Arguments);
