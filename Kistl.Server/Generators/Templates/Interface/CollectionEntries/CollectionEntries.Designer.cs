@@ -39,7 +39,7 @@ this.WriteObjects("using Kistl.API;\r\n");
 this.WriteObjects("\r\n");
 #line 26 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\CollectionEntries\CollectionEntries.cst"
 foreach (var rel in ctx.GetQuery<Relation>()
-	    .Where(r => (int)r.Storage == (int)StorageType.Separate)
+	    .Where(r => r.Storage == StorageType.Separate)
 	    .ToList()
 	    .OrderBy(r => r.GetRelationClassName()))
 	{
