@@ -27,7 +27,7 @@
     <NoWarn>1591</NoWarn>
     <DocumentationFile>..\bin\Debug\bin\Server\Kistl.Server.xml</DocumentationFile>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <ArebisMsBuildPath>..\..\Arebis\Arebis.CodeGeneration.MsBuild\</ArebisMsBuildPath>
+    <ArebisMsBuildPath>..\..\ArebisCGen\Arebis.CodeGeneration.MsBuild\</ArebisMsBuildPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -38,7 +38,7 @@
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>..\bin\Release\bin\Server\Kistl.Server.XML</DocumentationFile>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <ArebisMsBuildPath>..\..\Arebis\Arebis.CodeGeneration.MsBuild\</ArebisMsBuildPath>
+    <ArebisMsBuildPath>..\..\ArebisCGen\Arebis.CodeGeneration.MsBuild\</ArebisMsBuildPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
@@ -52,11 +52,11 @@
   <ItemGroup>
     <Reference Include="Arebis.CodeGeneration, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Arebis\Arebis.CodeGenerator\bin\Release\Arebis.CodeGeneration.dll</HintPath>
+      <HintPath>..\..\ArebisCGen\Arebis.CodeGenerator\bin\Release\Arebis.CodeGeneration.dll</HintPath>
     </Reference>
     <Reference Include="Arebis.CodeGenerator, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Arebis\Arebis.CodeGenerator\bin\Release\Arebis.CodeGenerator.dll</HintPath>
+      <HintPath>..\..\ArebisCGen\Arebis.CodeGenerator\bin\Release\Arebis.CodeGenerator.dll</HintPath>
     </Reference>
     <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

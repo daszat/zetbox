@@ -10,7 +10,7 @@
     <!-- Clean, then rebuild entire solution -->
     <MSBuild Projects="Kistl.Complete.sln"
         Targets="Clean;Rebuild"
-        Properties="ArebisMsBuildPath=$(SourceLocation)\..\..\Arebis\Arebis.CodeGeneration.MsBuild\" />   
+        Properties="ArebisMsBuildPath=$(SourceLocation)\..\ArebisCGen\Arebis.CodeGeneration.MsBuild\" />   
 
     <!-- Run FxCop analysis -->
     <Exec Command="FxCopCmd.exe /project:$(SourceLocation)\FxCop.FxCop /out:$(SourceLocation)\bin\FxCop.results.xml /s /fo" WorkingDirectory="C:\Program Files\Microsoft FxCop 1.36" />     
