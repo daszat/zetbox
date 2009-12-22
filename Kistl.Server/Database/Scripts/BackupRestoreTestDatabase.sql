@@ -52,6 +52,6 @@ SELECT @dbfile = filename FROM Kistl_test.sys.sysfiles where filename like '%.md
 SELECT @logfile = filename FROM Kistl_test.sys.sysfiles where filename like '%.ldf'
 
 RESTORE DATABASE Kistl_test FROM DISK = 'c:\temp\kistl.bak' 
-	WITH REPLACE, 
+	WITH RECOVERY, REPLACE, 
 	MOVE 'Kistl' to @dbfile,
 	MOVE 'Kistl_log' to @logfile
