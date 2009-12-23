@@ -1,7 +1,7 @@
-\chapter{\label{Packaging}Packaging}
-This chapter describes the way how modules (packages) are transfered between Kistl installations.
+\section{\label{Packaging}Packaging}
+This chapter describes the way how modules (packages) are transferred between Kistl installations.
 
-\section{\label{Packaging_Content_of_a_package}Content of a package}
+\subsection{\label{Packaging_Content_of_a_package}Content of a package}
 
 A package contains schema information, meta data, object instances and code. See \ref{content_of_package} for details. 
 A package can contain one or more modules. A package is a zip file that contains one or more XML files containing meta information and/or data and binary files like icons or assemblies.
@@ -14,7 +14,7 @@ A package can contain one or more modules. A package is a zip file that contains
 	\end{center}
 \end{figure}
 
-\subsection{\label{Packaging_Schema}Schema}
+\subsubsection{\label{Packaging_Schema}Schema}
 
 Schema contains all information needed by the SchemaManager \ref{} to create or update the database. Schema objects are:
 
@@ -31,7 +31,7 @@ Schema contains all information needed by the SchemaManager \ref{} to create or 
 Schema is a subset of meta data. See \ref{Packaging_Meta}. Currently there is no way to extract schema information without meta information.
 
 
-\subsection{\label{Packaging_Meta}Meta}
+\subsubsection{\label{Packaging_Meta}Meta}
 
 Meta data contains all information needed to describe a Module. That are \emph{ObjectClasses}, \emph{TypeRefs}, \emph{Module} informations, \emph{icons}, \emph{ViewDescriptors} and so on. 
 Meta data is a superset of schema data \ref{Packaging_Schema}. These objects are:
@@ -55,20 +55,20 @@ Meta data is a superset of schema data \ref{Packaging_Schema}. These objects are
 Additionally all unknown DefaultPropertyValues and Constraints belongs to meta data.
 Meta data can be extracted with the publish command \ref{Packaging_Publish}.
 
-\subsection{\label{Packaging_Data}Data}
+\subsubsection{\label{Packaging_Data}Data}
 
 A package can also contain additional data. Only object classes that implements \emph{IExportable} will be exported. 
 N:M relations between object classes that implements \emph{IExportable} are also exported. 
 Currently all objects of a specific module are exported.
 Data can be extracted with the export command \ref{Packaging_Export}.
 
-\subsection{\label{Packaging_Code}Code}
+\subsubsection{\label{Packaging_Code}Code}
 
 Finally a package consists of code in form of assemblies. These assemblies are referenced by \emph{Assembly} objects.
 
-\section{\label{Packaging_Processes}Processes}
+\subsection{\label{Packaging_Processes}Processes}
 
-\subsection{\label{Packaging_Export}Export}
+\subsubsection{\label{Packaging_Export}Export}
 
 Exporting is the process of saving objects in XML files. Only object classes that implements \emph{IExportable} will be exported. 
 N:M relations between object classes that implements \emph{IExportable} are also exported. 
@@ -97,7 +97,7 @@ This example will export the whole database:
 Kistl.Server -export Export.xml *
 \end{CS}
 
-\subsection{\label{Packaging_Import}Import}
+\subsubsection{\label{Packaging_Import}Import}
 
 Importing is the inverse process of exporting \ref{Packaging_Export}. Objects are imported by the following rules:
 
@@ -112,7 +112,7 @@ Command line for importing objects:
 Kistl.Server <configfile.xml> -import <sourcefile.xml>
 \end{CS}
 
-\subsection{\label{Packaging_Publish}Publish}
+\subsubsection{\label{Packaging_Publish}Publish}
 
 Publishing is a special case of exporting \ref{Packaging_Export}. Only meta data \ref{Packaging_Meta} of a given module will be exported. 
 Additionally only properties of the Kistl.App.Base and Kistl.App.GUI module are published.
@@ -136,7 +136,7 @@ Kistl.Server -publish Meta.xml *
 \end{CS}
 
 
-\subsection{\label{Packaging_Deploy}Deploy}
+\subsubsection{\label{Packaging_Deploy}Deploy}
 
 Deployment is the inverse process of publishing \ref{Packaging_Publish}. It also has different rules (see importing \ref{Packaging_Import}).
 These Rules are:
@@ -154,3 +154,5 @@ Kistl.Server <configfile.xml> -deploy <sourcefile.xml>
 \end{CS}
 
 The database schema is not updated. Also no code is generated. This has to be done in an extra step.
+
+

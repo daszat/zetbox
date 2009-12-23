@@ -1,0 +1,74 @@
+\section{Access Rights}
+
+Managing access to objects has to be fine-grained, flexible, fast and robust.
+To achieve these goals, the Kistl combines an expressive set of rules and
+generated rights tables.
+
+\subsection{Roles}
+
+To decouple users from the specifics of access management, rights are only
+conferred to roles, which in turn are assumed by users through their membership
+in groups and relations. 
+
+As an example, consider the project. The project's manager will always have
+special access rights on the project, regardless of who actually fills this
+role. Formulating access rights relative to such roles makes them more robust
+against changes in the people's responsibilities, since when the project manager
+changes all his rights automatically follow.
+
+\subsubsection{Groups}
+
+The easiest kind of role is the \emph{Group}. Applicability of this role is only
+defined through membership in the group and is independent of any other
+relationships.
+
+\subsubsection{Instance-specific roles}
+
+Instance-specific roles are conferred through specified relationships with
+business objects. One example already mentioned is the project's \emph{Manager}.
+Another the \emph{assigned employees} for a project.
+
+\subsubsection{Transitive roles}
+
+In some cases the role is not directly associated with the business object under
+consideration. Instead the connection spans over one or more navigational
+properties. An example would be access to the set of \emph{Tasks} contained in a
+project, which is granted by virtue of being an assigned employee of the
+project.
+
+\subsubsection{Nested roles}
+
+Finally, roles can be members of groups or roles. This allows for the definition
+of groups like \emph{all project managers}, which for example might be granted
+rights on a special set of documents pertaining to management procedures.
+
+\subsection{Rules}
+
+Rules are the way to specify how rights are assigned to roles. There are global,
+\emph{ObjectClass}-specific and instance-specific rules. 
+
+Global rules can be used for granting blanket administrative access or for
+privileged transfer or analysis processes.
+
+ObjectClass-specific rules are useful for defining class-specific
+administrators, journalling classes (insert only) and other special cases.
+
+Finally, instance-specific rules allow the most flexible and fine-grained access
+control, by defining cascading rights through various mechanisms. All such rules
+specify the set of roles for which the rule is applicable, the set of instances
+which are affected by this rule and the set of granted rights.
+
+\subsubsection{Instance-specific rules}
+
+First, an example: all employees assigned to a project are allowed to edit the
+associated tasks of the project. As an instance-specific rule, this would read:
+"\emph{Project}: Grant READ,WRITE on \emph{Tasks} to \emph{Employees}."
+
+The set of roles can be specified by a navigator from the current instance to a
+single Identity or a set of Identities, by a constant set of groups or as a set
+of necessary access rights to the current instance.
+
+The set of affected instances can be specified by a direct navigator from the
+current instance, or by using the instance itself.
+
+
