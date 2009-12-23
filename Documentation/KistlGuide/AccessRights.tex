@@ -71,4 +71,88 @@ of necessary access rights to the current instance.
 The set of affected instances can be specified by a direct navigator from the
 current instance, or by using the instance itself.
 
+The rules themselves are defined on the ObjectClass and are then evaluated for
+each instance.
 
+\subsection{Implementation}
+
+The goal of the implementation is minimal overhead when reading data from the
+store while providing maintainable and discoverable structures in the underlying
+database. To achieve this goal, the rules and roles are recursively evaluated
+until only bare identity-instance pairs with the appropriate access rights
+remain. This data is subsequently stored in an auxilliary table to each data
+table. When selecting data from the primary table, an inner join with the access
+table only returns those instances that have any granted rights at all.
+Additional filtering can either take place on the SQL level or by passing the
+access flags through a read-only property to the business logic.
+
+The access tables are implemented as materialized views of table-valued
+functions. See \cite{MatViewsWork} for implementation details. Due to the
+structured source of the data all necessary functions, update functions and
+triggers can be generated together with the schema. 
+
+Depending on the specific implementation needs the recursive evaluation can take
+place when instances are changed, when the user first tries to access the
+instance, or off-line as a maintenance task.
+
+\subsection{Extended Example}
+
+Here is an extended example, containing two \emph{Projects} and a few people
+working on them. Every Project has some \emph{Tasks} and working time is
+recorded in \emph{TimeRecords}.
+
+Furthermore, there are the following rules:
+
+\begin{itemize}
+
+\item{global: Admins may ALL on ALL}
+
+\item{Project: Manager may READ,WRITE this}
+\item{Project: Manager may CREATE,DELETE,READ,WRITE Tasks}
+\item{Project: Manager may READ this}
+\item{Project: Employees may READ,WRITE Tasks}
+
+\item{Task: READERS may READ TimeRecords}
+\item{Task: WRITERS may CREATE TimeRecords}
+
+\item{TimeRecord: Owner may READ,WRITE this}
+
+\end{itemize}
+
+\begin{figure}[ht]
+	\begin{center}
+		\includegraphics{images/Roles.pdf}
+		\caption{Project roles}
+		\label{project_roles}
+	\end{center}
+\end{figure}
+
+Figure~\ref{project_roles} shows how the people are distributed on the projects:
+Alice and Dorothy are managers, Bob is working on both projects, while Charly,
+Erich and Franz are only working on one of the projects. Gustav is only an
+administrator.
+
+This leads to the following ultimate access rights for Alice, Bob, Erich and
+Gustav:
+
+\begin{tabular}{l|ll}
+Person & Objects & Rights \\
+\hline
+Alice & Project X & READ,WRITE \\
+	& Tasks of Project X & CREATE,DELETE,READ,WRITE \\
+	& TimeRecords of Project X & CREATE,READ \\
+	& TimeRecords with Owner==Alice & READ,WRITE \\
+\hline
+Bob & Project X and Y & READ,WRITE \\
+	& Tasks of Project X and Y & READ,WRITE \\
+	& TimeRecords of Project X and Y & CREATE,READ \\
+	& TimeRecords with Owner==Bob & READ,WRITE \\
+\hline
+Erich & Project Y & READ,WRITE \\
+	& Tasks of Project Y & READ,WRITE \\
+	& TimeRecords of Project Y & CREATE,READ \\
+	& TimeRecords with Owner==Erich & READ,WRITE \\
+\hline
+Gustav & ALL & ALL \\
+
+\end{tabular}
