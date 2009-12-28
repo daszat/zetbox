@@ -8,11 +8,13 @@ namespace Kistl.API
 
     public static class KistlContextDebugger
     {
+        private readonly static object _lock = new object();
+
         private static IKistlContextDebugger _Current;
 
         public static void SetDebugger(IKistlContextDebugger debugger)
         {
-            lock (typeof(KistlContextDebugger))
+            lock (_lock)
             {
                 if (_Current != null)
                 {
@@ -30,7 +32,7 @@ namespace Kistl.API
 
         public static void Created(IKistlContext ctx)
         {
-            lock (typeof(KistlContextDebugger))
+            lock (_lock)
             {
                 if (_Current != null)
                 {
@@ -41,7 +43,7 @@ namespace Kistl.API
 
         public static void Disposed(IKistlContext ctx)
         {
-            lock (typeof(KistlContextDebugger))
+            lock (_lock)
             {
                 if (_Current != null)
                 {
@@ -52,7 +54,7 @@ namespace Kistl.API
 
         public static void Changed(IKistlContext ctx)
         {
-            lock (typeof(KistlContextDebugger))
+            lock (_lock)
             {
                 if (_Current != null)
                 {

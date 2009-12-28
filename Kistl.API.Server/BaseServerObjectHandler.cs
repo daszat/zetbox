@@ -63,6 +63,9 @@ namespace Kistl.API.Server
     /// </summary>
     public static class ServerObjectHandlerFactory
     {
+        // use a single lock for all three types of ServerObjectHandler for simplicity
+        private readonly static object _lock = new object();
+
         private static Type _ServerObjectHandlerType = null;
         private static Type _ServerObjectSetHandlerType = null;
         private static Type _ServerCollectionHandlerType = null;
@@ -76,7 +79,7 @@ namespace Kistl.API.Server
         {
             if (type == null) throw new ArgumentNullException("type");
 
-            lock (typeof(ServerObjectHandlerFactory))
+            lock (_lock)
             {
                 if (_ServerObjectHandlerType == null)
                 {
@@ -97,7 +100,7 @@ namespace Kistl.API.Server
 
         public static IServerObjectSetHandler GetServerObjectSetHandler()
         {
-            lock (typeof(ServerObjectHandlerFactory))
+            lock (_lock)
             {
                 if (_ServerObjectSetHandlerType == null)
                 {
@@ -121,7 +124,7 @@ namespace Kistl.API.Server
             aType = aType.ToImplementationType();
             bType = bType.ToImplementationType();
 
-            lock (typeof(ServerObjectHandlerFactory))
+            lock (_lock)
             {
                 if (_ServerCollectionHandlerType == null)
                 {

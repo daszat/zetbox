@@ -10,17 +10,18 @@ namespace Kistl.API.Server
         Kistl.App.Base.Identity LoadIdentity(IQueryable<Kistl.App.Base.Identity> query, System.Security.Principal.IIdentity identity);
     }
 
-    public class IdentityProvider
+    public static class IdentityProvider
     {
+        private readonly static object _lock = new object();
         private static Type _ProviderType = null;
 
         /// <summary>
-        /// Creates a new IdentityProvider.
+        /// Creates a new <see cref="IIdentityProvider"/> which is loaded from the current configuration.
         /// </summary>
         /// <returns>A new IIdentityProvider.</returns>
         public static IIdentityProvider GetProvider()
         {
-            lock (typeof(KistlContext))
+            lock (_lock)
             {
                 if (_ProviderType == null)
                 {

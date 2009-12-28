@@ -10,6 +10,7 @@ namespace Kistl.API.Server
     /// </summary>
     public static class KistlContext
     {
+        private readonly static object _lock = new object();
         private static Type _KistlDataContextType = null;
 
         /// <summary>
@@ -23,7 +24,7 @@ namespace Kistl.API.Server
 
         public static IKistlServerContext GetServerContext()
         {
-            lock (typeof(KistlContext))
+            lock (_lock)
             {
                 if (_KistlDataContextType == null)
                 {

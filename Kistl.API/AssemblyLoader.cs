@@ -22,6 +22,7 @@ namespace Kistl.API
     // or Mono.Addins; or push all Assemblies to the GAC to avoid this mess.
     public static class AssemblyLoader
     {
+        private readonly static object _lock = new object();
 
         /// <summary>
         /// Initialises the AssemblyLoader in the <see cref="AppDomain">target AppDomain</see> with a minimal search path
@@ -48,7 +49,7 @@ namespace Kistl.API
 
         internal static void Unload()
         {
-            lock (typeof(AssemblyLoader))
+            lock (_lock)
             {
                 AppDomain.CurrentDomain.AssemblyResolve -= AssemblyLoader.AssemblyResolve;
                 AppDomain.CurrentDomain.ReflectionOnlyAssemblyResolve -= AssemblyLoader.ReflectionOnlyAssemblyResolve;
@@ -58,7 +59,7 @@ namespace Kistl.API
         private static bool _isInitialised = false;
         public static void EnsureInitialisation(KistlConfig config)
         {
-            lock (typeof(AssemblyLoader))
+            lock (_lock)
             {
                 if (_isInitialised) return;
                 _isInitialised = true;
@@ -200,7 +201,7 @@ namespace Kistl.API
         private static Assembly LoadAssemblyByName(string name, bool reflectOnly)
         {
             // Be nice & Thread Save
-            lock (typeof(AssemblyLoader))
+            lock (_lock)
             {
                 AssemblyName assemblyName = new AssemblyName(name);
                 string baseName = assemblyName.Name;

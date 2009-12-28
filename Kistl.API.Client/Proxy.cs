@@ -72,6 +72,7 @@ namespace Kistl.API.Client
         : IProxy
     {
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Client.Proxy");
+        private readonly static object _lock = new object();
 
         private KistlServiceClient _service;
 
@@ -83,7 +84,7 @@ namespace Kistl.API.Client
         {
             get
             {
-                lock (this)
+                lock (_lock)
                 {
                     if (_service == null || _service.State != System.ServiceModel.CommunicationState.Opened)
                     {

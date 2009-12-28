@@ -13,6 +13,7 @@ namespace Kistl.Client
 {
     public sealed class ServerDomainManager : IDisposable
     {
+        private readonly static object _lock = new object();
 
         private IKistlAppDomain serverManager = null;
         private AppDomain serverDomain = null;
@@ -54,7 +55,7 @@ namespace Kistl.Client
 
         public void Stop()
         {
-            lock (typeof(ServerDomainManager))
+            lock (_lock)
             {
                 if (serverManager != null)
                 {
@@ -78,7 +79,6 @@ namespace Kistl.Client
                 serverDomain = null;
             }
         }
-
 
         #region IDisposable Members
 

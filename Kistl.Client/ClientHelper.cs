@@ -18,10 +18,8 @@ namespace Kistl.Client
     /// </summary>
     public static class ClientHelper
     {
-        /// <summary>
-        /// Auch das könnte man besser implementieren
-        /// </summary>
-        /// <param name="ex"></param>
+        private readonly static object _lock = new object();
+
         public static void HandleError(Exception ex)
         {
             //TODO: put exception into DB/Logfile
@@ -42,28 +40,10 @@ namespace Kistl.Client
 
         // TODO: Das muss in "statische" Objekte, oder auch Immutable Objects genannt, umgewandelt werden.
         private static Dictionary<InterfaceType, ObjectClass> _ObjectClasses = null;
-        //private static Dictionary<string, Kistl.App.Base.Module> _Modules = null;
-
-        // TODO: Arthur: Der Context da ist mir ein Dorn im Auge.
-        //private static IKistlContext _fetchContext = KistlContext.GetContext();
-
-        //public static void CleanCaches()
-        //{
-        //    lock (typeof(Helper))
-        //    {
-        //        _ObjectClasses = null;
-        //        _Modules = null;
-        //        if (_fetchContext != null)
-        //        {
-        //            _fetchContext.Dispose();
-        //        }
-        //        _fetchContext = KistlContext.GetContext();
-        //    }
-        //}
 
         private static void FetchObjectClasses()
         {
-            lock (typeof(Helper))
+            lock (_lock)
             {
                 if (_ObjectClasses == null)
                 {
@@ -101,7 +81,6 @@ namespace Kistl.Client
 
     public static class ClientExtensions
     {
-
         /// <summary>
         /// Insert a range of items into an IList at a specified index
         /// </summary>

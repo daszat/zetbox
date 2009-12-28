@@ -32,6 +32,8 @@ namespace Kistl.API.Client
     /// </summary>
     internal class KistlContextImpl : IDebuggingKistlContext, IDisposable
     {
+        private readonly static object _lock = new object();
+
         public KistlContextImpl()
         {
             CreatedAt = new StackTrace(true);
@@ -49,7 +51,7 @@ namespace Kistl.API.Client
         /// </summary>
         public void Dispose()
         {
-            lock (this)
+            lock (_lock)
             {
                 if (!disposed)
                 {
