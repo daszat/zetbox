@@ -23,3 +23,62 @@ R: Gendarme.Rules.BadPractice.AvoidCallingProblematicMethodsRule
 T: System.Delegate XamlGeneratedNamespace.GeneratedInternalTypeHelper
 # infrastructure helper method intended for a very small audience
 T: System.Void Kistl.API.GetSetHasValueExtensions
+
+# Too simple-minded rule.
+R: Gendarme.Rules.Design.Generic.DoNotExposeNestedGenericSignaturesRule
+A: Kistl.API
+A: Kistl.App.Projekte.Common
+A: Kistl.DalProvider.Frozen
+A: TempAppHelpers
+A: Kistl.API.Client
+A: Kistl.App.Projekte.Client
+A: Kistl.Client.ASPNET.Toolkit
+A: Kistl.Client
+A: Kistl.Client.Forms
+A: Kistl.Client.WPF
+A: Kistl.DalProvider.ClientObjects
+A: Kistl.API.Server
+A: Kistl.App.Projekte.Server
+A: Kistl.DALProvider.EF
+A: Kistl.Server
+A: Kistl.Server.Service
+
+# implementing the suggested fix brings only switches the direction of the race-condition:
+# i.e. calling a delegate that doesn't expect to be called any more
+# fixing this requires protection outside of the event calling
+R: Gendarme.Rules.Concurrency.ProtectCallToEventDelegatesRule
+A: Kistl.API
+A: Kistl.App.Projekte.Common
+A: Kistl.DalProvider.Frozen
+A: TempAppHelpers
+A: Kistl.API.Client
+A: Kistl.App.Projekte.Client
+A: Kistl.Client.ASPNET.Toolkit
+A: Kistl.Client
+A: Kistl.Client.Forms
+A: Kistl.Client.WPF
+A: Kistl.DalProvider.ClientObjects
+A: Kistl.API.Server
+A: Kistl.App.Projekte.Server
+A: Kistl.DALProvider.EF
+A: Kistl.Server
+A: Kistl.Server.Service
+
+# Too many false positives with classes that have a reference to an IKistlContext
+R: Gendarme.Rules.Design.TypesWithDisposableFieldsShouldBeDisposableRule
+A: Kistl.API
+A: Kistl.App.Projekte.Common
+A: Kistl.DalProvider.Frozen
+A: TempAppHelpers
+A: Kistl.API.Client
+A: Kistl.App.Projekte.Client
+A: Kistl.Client.ASPNET.Toolkit
+A: Kistl.Client
+A: Kistl.Client.Forms
+A: Kistl.Client.WPF
+A: Kistl.DalProvider.ClientObjects
+A: Kistl.API.Server
+A: Kistl.App.Projekte.Server
+A: Kistl.DALProvider.EF
+A: Kistl.Server
+A: Kistl.Server.Service
