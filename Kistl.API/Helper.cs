@@ -22,22 +22,22 @@ namespace Kistl.API
         /// <summary>
         /// Constant for a invalid ID. Value is 0.
         /// </summary>
-        public const int INVALIDID = 0;
+        public static readonly int INVALIDID = 0;
 
         /// <summary>
         /// = int.MaxValue
         /// </summary>
-        public const int LASTINDEXPOSITION = int.MaxValue;
+        public static readonly int LASTINDEXPOSITION = int.MaxValue;
 
         /// <summary>
         /// Suffix for Interface implementations
         /// </summary>
-        public const string ImplementationSuffix = "__Implementation__";
+        public static readonly string ImplementationSuffix = "__Implementation__";
 
         /// <summary>
         /// Suffix for Position Properties in Lists
         /// </summary>
-        public const string PositionSuffix = "_pos";
+        public static readonly string PositionSuffix = "_pos";
 
         /// <summary>
         /// Newly created objects are not yet saved to the server and therefore handle some data only locally.
@@ -65,7 +65,7 @@ namespace Kistl.API
         /// <summary>
         /// Constant for Max List Count. Value is 500.
         /// </summary>
-        public const int MAXLISTCOUNT = 500;
+        public static readonly int MAXLISTCOUNT = 500;
 
         /// <summary>
         /// Replaces all illigal Path Characters with an '_' char.

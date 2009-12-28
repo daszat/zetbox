@@ -19,7 +19,7 @@ namespace Kistl.Client.ASPNET.Toolkit
     [ToolboxData("<{0}:JavascriptRenderer runat=server></{0}:JavascriptRenderer>")]
     public class JavascriptRenderer : Control, IScriptControl, IPostBackEventHandler
     {
-        public const string actionShowObject = "ShowObject";
+        private const string actionShowObject = "ShowObject";
 
         // HiddenControls
         string hdAction = "";
