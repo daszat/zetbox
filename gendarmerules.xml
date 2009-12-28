@@ -41,10 +41,11 @@
 
   <ruleset name="important">
     <rules include="*" from="Gendarme.Rules.Correctness.dll" />
+    <rules include="*" from="Gendarme.Rules.Exceptions.dll" />
+    <rules include="*" from="Gendarme.Rules.Interoperability.dll"/>
+    <rules include="*" from="Gendarme.Rules.Portability.dll" />
     <rules include="*" from="Gendarme.Rules.Security.dll" />
     <rules include="*" from="Gendarme.Rules.Security.Cas.dll" />
-    <rules include="*" from="Gendarme.Rules.Portability.dll" />
-    <rules include="*" from="Gendarme.Rules.Interoperability.dll"/>
   </ruleset>
   
 	<ruleset name="concurrency">

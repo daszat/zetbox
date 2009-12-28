@@ -125,7 +125,7 @@ namespace Kistl.Server
             catch (Exception error)
             {
                 Log.Error("Unhandled exception while running WCF Server", error);
-                throw error;
+                throw;
             }
         }
 

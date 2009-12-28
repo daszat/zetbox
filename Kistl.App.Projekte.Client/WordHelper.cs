@@ -33,7 +33,7 @@ namespace Kistl.App.Projekte
             catch (IOException ex)
             {
                 Logging.Log.Error(String.Format("An exception was thrown while trying to open file [{0}]", filename), ex);
-                throw ex;
+                throw;
             }
         }
 
