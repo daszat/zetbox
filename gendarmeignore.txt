@@ -17,3 +17,9 @@ T: Kistl.API.ExtensionHelpers
 R: Gendarme.Rules.BadPractice.ConstructorShouldNotCallVirtualMethodsRule
 # private type where the brittle-ness doesn't matter
 T: Kistl.API.Utils.Logging/TraceMethodCallContext
+
+R: Gendarme.Rules.BadPractice.AvoidCallingProblematicMethodsRule
+# automatically generated code
+T: System.Delegate XamlGeneratedNamespace.GeneratedInternalTypeHelper
+# infrastructure helper method intended for a very small audience
+T: System.Void Kistl.API.GetSetHasValueExtensions

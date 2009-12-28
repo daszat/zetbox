@@ -109,32 +109,12 @@ namespace Kistl.API.Tests
         }
 
         [Test]
-        public void SetPrivateFieldValue()
-        {
-            obj.SetPrivateFieldValue<int>("_IntProperty", 2);
-            obj.SetPrivateFieldValue<bool>("_BoolProperty", false);
-            obj.SetPrivateFieldValue<string>("_StringProperty", "Hello");
-
-            Assert.That(obj.IntProperty, Is.EqualTo(2));
-            Assert.That(obj.BoolProperty, Is.EqualTo(false));
-            Assert.That(obj.StringProperty, Is.EqualTo("Hello"));
-        }
-
-        [Test]
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void GetPrivateFieldValue_InvalidPropertyName()
         {
             obj.GetPrivateFieldValue<int>("_TestProperty");
         }
 
-        [Test]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
-        public void SetPrivateFieldValue_InvalidPropertyName()
-        {
-            obj.SetPrivateFieldValue<int>("_TestProperty", 1);
-        }
-
-        /// /////////
         [Test]
         public void GetPrivatePropertyValue()
         {

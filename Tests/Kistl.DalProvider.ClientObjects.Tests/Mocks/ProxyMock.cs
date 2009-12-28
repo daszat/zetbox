@@ -6,6 +6,7 @@ using Kistl.API.Client;
 using Kistl.API;
 using Kistl.App.Test;
 using System.Linq.Expressions;
+using System.Reflection;
 
 namespace Kistl.DalProvider.ClientObjects.Mocks
 {
@@ -156,11 +157,33 @@ namespace Kistl.DalProvider.ClientObjects.Mocks
                         newObj.SetPrivatePropertyValue<int>("ID", ++newID);
                     }
                     result.Add(newObj);
-                    newObj.SetPrivateFieldValue<DataObjectState>("_ObjectState", DataObjectState.Unmodified);
+                    SetPrivateFieldValue<DataObjectState>(newObj, "_ObjectState", DataObjectState.Unmodified);
                 }
             }
 
             return result;
+        }
+
+        /// <summary>
+        /// Set a private Property Value on a given Object. Uses Reflection.
+        /// </summary>
+        /// <typeparam name="T">Type of the Property</typeparam>
+        /// <param name="obj">Object from where the Property Value is returned</param>
+        /// <param name="propName">Propertyname as string.</param>
+        /// <param name="val">the value to set</param>
+        /// <exception cref="ArgumentOutOfRangeException">if the Property is not found</exception>
+        public static void SetPrivateFieldValue<T>(object obj, string propName, T val)
+        {
+            if (obj == null) throw new ArgumentNullException("obj");
+            Type t = obj.GetType();
+            FieldInfo fi = null;
+            while (fi == null && t != null)
+            {
+                fi = t.GetField(propName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+                t = t.BaseType;
+            }
+            if (fi == null) throw new ArgumentOutOfRangeException("propName", string.Format("Field {0} was not found in Type {1}", propName, obj.GetType().FullName));
+            fi.SetValue(obj, val);
         }
 
         public IEnumerable<T> FetchRelation<T>(Guid relationId, RelationEndRole role, IDataObject parent, out List<IStreamable> auxObjects) where T : class, IRelationCollectionEntry
