@@ -7,3 +7,9 @@ R: Gendarme.Rules.Serialization.MarkAllNonSerializableFieldsRule
 # automatically generated code
 T: Kistl.API.Client.KistlService.InternalCache
 T: Kistl.API.Client.KistlService.InternalCacheItem
+
+R: Gendarme.Rules.Design.Linq.AvoidExtensionMethodOnSystemObjectRule
+# These infrastructure methods are only helpers intended for a very small audience
+# so I don't care much about VB.Net in these cases
+T: Kistl.API.GetSetHasValueExtensions
+T: Kistl.API.ExtensionHelpers
