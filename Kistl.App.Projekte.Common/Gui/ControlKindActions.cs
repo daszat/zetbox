@@ -1,5 +1,5 @@
 
-namespace Kistl.App.Gui.Common
+namespace Kistl.App.GUI.Common
 {
     using System;
     using System.Collections.Generic;
@@ -7,7 +7,6 @@ namespace Kistl.App.Gui.Common
     using System.Text;
 
     using Kistl.API;
-    using Kistl.App.GUI;
 
     /// <summary>
     /// The collected default actions for ControlKind

@@ -7994,7 +7994,7 @@
     <KistlBase:Assembly>ac417690-2bab-4e7f-ab1b-b8afefe6aebf</KistlBase:Assembly>
     <KistlBase:ChangedOn>2009-12-14T17:08:05.397Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.397Z</KistlBase:CreatedOn>
-    <KistlBase:FullName>Kistl.App.Gui.Common.ControlKindActions</KistlBase:FullName>
+    <KistlBase:FullName>Kistl.App.GUI.Common.ControlKindActions</KistlBase:FullName>
     <KistlBase:Parent>c51c8086-60b2-410e-96c4-c1a32c1f57ee</KistlBase:Parent>
   </KistlBase:TypeRef>
   <KistlBase:TypeRef ExportGuid="e309effa-0b3c-4bfb-8f63-162cf6f6604a">
