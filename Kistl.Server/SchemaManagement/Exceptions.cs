@@ -1,8 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Runtime.Serialization;
 using System.Security.Permissions;
+using System.Text;
+
+using Kistl.App.Base;
 
 namespace Kistl.Server.SchemaManagement
 {
@@ -13,49 +16,67 @@ namespace Kistl.Server.SchemaManagement
         {
         }
 
-        public DBTypeNotFoundException(Kistl.App.Base.Property prop)
+        public DBTypeNotFoundException(string message)
+            : base(message)
         {
-            ClrType = prop.GetType().Name;
         }
 
-        public DBTypeNotFoundException(Kistl.App.Base.Property prop, Exception ex)
-            : base("", ex)
+        public DBTypeNotFoundException(string message, Exception innerException)
+            : base(message, innerException)
         {
-            ClrType = prop.GetType().Name;
         }
 
-        public string ClrType { get; set; }
-
-        public override string Message
+        private DBTypeNotFoundException(string clrTypeName, string message, Exception innerException)
+            : this(message, innerException)
         {
-            get
-            {
-                if (string.IsNullOrEmpty(ClrType))
-                {
-                    return "Could not resolve CLR Type to Database Type";
-                }
-                else
-                {
-                    return string.Format("Could not resolve CLR Type \"{0}\" to Database Type", ClrType);
-                }
-            }
+            ClrType = clrTypeName;
         }
+
+        public DBTypeNotFoundException(Property prop)
+            : this(PropertyToClrType(prop), PropertyToMessage(prop), null)
+        {
+        }
+
+        public DBTypeNotFoundException(Property prop, Exception ex)
+            : this(PropertyToClrType(prop), PropertyToMessage(prop), ex)
+        {
+        }
+
+        public string ClrType { get; private set; }
 
         #region Serialisation
 
-        protected DBTypeNotFoundException(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context)
+        protected DBTypeNotFoundException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
             ClrType = info.GetString("CLRType");
         }
 
         [SecurityPermission(SecurityAction.Demand, SerializationFormatter = true)]
-        public override void GetObjectData(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context)
+        public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             base.GetObjectData(info, context);
             info.AddValue("CLRType", ClrType);
         }
 
         #endregion
+
+        private static string PropertyToClrType(Property prop)
+        {
+            return prop.GetType().Name;
+        }
+
+        private static string PropertyToMessage(Property prop)
+        {
+            var type = PropertyToClrType(prop);
+            if (string.IsNullOrEmpty(type))
+            {
+                return "Could not resolve CLR Type to Database Type";
+            }
+            else
+            {
+                return string.Format("Could not resolve CLR Type \"{0}\" to Database Type", type);
+            }
+        }
     }
 }

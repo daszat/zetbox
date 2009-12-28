@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 
 namespace Kistl.API
@@ -13,8 +14,18 @@ namespace Kistl.API
         {
         }
 
-        public KistlContextExeption(string msg)
-            : base(msg)
+        public KistlContextExeption(string message)
+            : base(message)
+        {
+        }
+
+        public KistlContextExeption(string message, Exception inner)
+            : base(message, inner)
+        {
+        }
+
+        protected KistlContextExeption(SerializationInfo info, StreamingContext context)
+            : base(info, context)
         {
         }
     }
@@ -23,6 +34,21 @@ namespace Kistl.API
     {
         public KistlContextDisposedExeption()
             : base("Context has been disposed. Reusing is not allowed.")
+        {
+        }
+
+        public KistlContextDisposedExeption(string message)
+            : base(message)
+        {
+        }
+
+        public KistlContextDisposedExeption(string message, Exception inner)
+            : base(message, inner)
+        {
+        }
+
+        protected KistlContextDisposedExeption(SerializationInfo info, StreamingContext context)
+            : base(info, context)
         {
         }
     }
@@ -34,11 +60,20 @@ namespace Kistl.API
         {
         }
 
-        public WrongKistlContextExeption(string msg)
-            : base(msg)
+        public WrongKistlContextExeption(string message)
+            : base(message)
         {
         }
 
+        public WrongKistlContextExeption(string message, Exception inner)
+            : base(message, inner)
+        {
+        }
+
+        protected WrongKistlContextExeption(SerializationInfo info, StreamingContext context)
+            : base(info, context)
+        {
+        }
     }
 
     public interface IKistlContextDebugger : IDisposable

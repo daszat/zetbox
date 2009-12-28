@@ -4,7 +4,9 @@ namespace Kistl.API
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Runtime.Serialization;
     using System.Text;
+
     using Kistl.API.Utils;
 
     /// <summary>
@@ -17,6 +19,33 @@ namespace Kistl.API
         /// </summary>
         public ReadOnlyContextException()
             : base("This context is readonly")
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the ReadOnlyContextException class.
+        /// </summary>
+        /// <param name="message">A custom message to pass along with this exception.</param>
+        public ReadOnlyContextException(string message)
+            : base(message)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the ReadOnlyContextException class.
+        /// </summary>
+        /// <param name="message">A custom message to pass along with this exception.</param>
+        /// <param name="inner">The exception that caused this exception.</param>
+        public ReadOnlyContextException(string message, Exception inner)
+            : base(message, inner)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the ReadOnlyContextException class.
+        /// </summary>
+        protected ReadOnlyContextException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
         {
         }
     }
@@ -33,8 +62,34 @@ namespace Kistl.API
             : base("This object is readonly")
         {
         }
-    }
 
+        /// <summary>
+        /// Initializes a new instance of the ReadOnlyObjectException class.
+        /// </summary>
+        /// <param name="message">A custom message to pass along with this exception.</param>
+        public ReadOnlyObjectException(string message)
+            : base(message)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the ReadOnlyObjectException class.
+        /// </summary>
+        /// <param name="message">A custom message to pass along with this exception.</param>
+        /// <param name="inner">The exception that caused this exception.</param>
+        public ReadOnlyObjectException(string message, Exception inner)
+            : base(message, inner)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the ReadOnlyObjectException class.
+        /// </summary>
+        protected ReadOnlyObjectException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
+        {
+        }
+    }
     /// <summary>
     /// A static class to provide access to the FrozenContext singleton.
     /// </summary>

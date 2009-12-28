@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
-using System.IO;
 
 namespace Kistl.API.Configuration
 {
@@ -16,6 +17,14 @@ namespace Kistl.API.Configuration
         }
         public ConfigurationException(string message)
             : base(message)
+        {
+        }
+        public ConfigurationException(string message, Exception inner)
+            : base(message, inner)
+        {
+        }
+        protected ConfigurationException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
         {
         }
     }
@@ -104,7 +113,7 @@ namespace Kistl.API.Configuration
             /// Root path for log files
             /// </summary>
             [XmlElement(IsNullable = false)]
-            public string CodeGenPath { get; set; }            
+            public string CodeGenPath { get; set; }
 
             [XmlElement(IsNullable = false)]
             public string KistlDataContextType { get; set; }
