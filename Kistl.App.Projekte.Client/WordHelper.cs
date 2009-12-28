@@ -45,15 +45,15 @@ namespace Kistl.App.Projekte
             {
                 pckg.Flush();
                 pckg.Close();
+                ((IDisposable)pckg).Dispose();
+                pckg = null;
             }
 
             if (fs != null)
             {
                 fs.Dispose();
+                fs = null;
             }
-
-            fs = null;
-            pckg = null;
 
             GC.SuppressFinalize(this);
         }

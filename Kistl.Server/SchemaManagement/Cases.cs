@@ -12,7 +12,8 @@ using Kistl.Server.Generators;
 
 namespace Kistl.Server.SchemaManagement
 {
-    internal class Cases : IDisposable
+    internal class Cases 
+        : IDisposable
     {
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Server.Schema.Cases");
 
@@ -39,7 +40,8 @@ namespace Kistl.Server.SchemaManagement
         public void Dispose()
         {
             // Do not dispose "schema" -> passed to this class
-            if (savedSchema != null) savedSchema.Dispose();
+            // Do not dispose "db" -> passed to this class
+            if (_savedSchema != null) _savedSchema.Dispose();
         }
         #endregion
 

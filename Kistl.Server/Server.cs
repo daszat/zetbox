@@ -12,10 +12,10 @@ namespace Kistl.Server
     using Kistl.API;
     using Kistl.API.Configuration;
     using Kistl.API.Server;
+    using Kistl.API.Utils;
     using Kistl.App.Base;
     using Kistl.App.Extensions;
     using Kistl.App.GUI;
-    using Kistl.API.Utils;
 
     /// <summary>
     /// Serversteuerung
@@ -39,11 +39,6 @@ namespace Kistl.Server
         /// Only to signal the server start
         /// </summary>
         private AutoResetEvent serverStarted = new AutoResetEvent(false);
-
-        /// <summary>
-        /// The local Application Context
-        /// </summary>
-        private ServerApplicationContext appCtx;
 
         /// <summary>
         /// Starts the WCF Server in the background. If the server hasn't started successfully within 40 seconds, it is aborted and an InvalidOperationException is thrown.
@@ -70,6 +65,7 @@ namespace Kistl.Server
         /// <param name="config"></param>
         public void Init(KistlConfig config)
         {
+            ServerApplicationContext appCtx;
             // re-use application context if available
             if (ServerApplicationContext.Current == null)
             {
@@ -331,30 +327,27 @@ namespace Kistl.Server
         }
 
         #region IDisposable Members
+
         // TODO: implement Dispose Pattern after 
         // http://msdn2.microsoft.com/en-us/library/ms244737.aspx
         public void Dispose()
         {
             Log.Info("Disposing");
-            //if (disposing)
-            //{
-            //    if (host != null)
-            //    {
-            //        host.Close();
-            //        host = null;
-            //    }
-            //    if (hostStreams != null)
-            //    {
-            //        hostStreams.Close();
-            //        hostStreams = null;
-            //    }
+            {
+                if (host != null)
+                {
+                    host.Close();
+                    ((IDisposable)host).Dispose();
+                    host = null;
+                }
 
-            //    if (serverStarted != null)
-            //    {
-            //        serverStarted.Close();
-            //        serverStarted = null;
-            //    }
-            //}
+                if (serverStarted != null)
+                {
+                    serverStarted.Close();
+                    ((IDisposable)serverStarted).Dispose();
+                    serverStarted = null;
+                }
+            }
         }
 
         #endregion

@@ -194,14 +194,19 @@ namespace Kistl.API.Client
 
         #region IDisposable Members
 
-        // as required on http://msdn2.microsoft.com/en-gb/ms182172.aspx
+        // as recommended on http://msdn2.microsoft.com/en-gb/ms182172.aspx
         protected virtual void Dispose(bool disposing)
         {
             if (disposing)
             {
                 // dispose managed resources
-                Log.Debug("Closing Service");
-                Service.Close();
+                if (_service != null)
+                {
+                    Log.Debug("Closing Service");
+                    _service.Close();
+                    ((IDisposable)_service).Dispose();
+                    _service = null;
+                }
             }
             // free native resources
         }

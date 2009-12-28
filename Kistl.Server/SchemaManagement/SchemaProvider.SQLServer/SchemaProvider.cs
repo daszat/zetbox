@@ -47,11 +47,14 @@ namespace Kistl.Server.SchemaManagement.SchemaProvider.SQLServer
             if (tx != null)
             {
                 tx.Rollback();
+                tx.Dispose();
                 tx = null;
             }
+
             if (db != null)
             {
                 db.Close();
+                db.Dispose();
                 db = null;
             }
         }

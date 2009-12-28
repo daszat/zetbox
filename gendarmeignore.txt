@@ -1,0 +1,4 @@
+R: Gendarme.Rules.Correctness.DisposableFieldsShouldBeDisposedRule
+# these classes have special disposal strategies since they need to hold disposable parts with lifecycles beyond themselves
+T: Kistl.Server.SchemaManagement.Cases
+T: Kistl.Server.SchemaManagement.SchemaManager

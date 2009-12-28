@@ -23,7 +23,7 @@ namespace Kistl.Server.SchemaManagement
         private IKistlContext schema;
         private ISchemaProvider db;
         private bool repair = false;
-        private Cases Case { get; set; }
+        private readonly Cases Case;
         #endregion
 
         #region Constructor
