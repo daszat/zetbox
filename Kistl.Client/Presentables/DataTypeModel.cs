@@ -31,9 +31,6 @@ namespace Kistl.Client.Presentables
             : base(appCtx, dataCtx, type)
         {
             _type = type;
-
-            // refresh Icon
-            UpdateViewCache();
         }
 
         #region Public interface

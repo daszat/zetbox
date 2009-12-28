@@ -40,7 +40,7 @@ namespace Kistl.Client.Presentables
             : CommandModel
         {
             public OpenReferenceCommandModel(IGuiApplicationContext appCtx, IKistlContext dataCtx, ObjectReferenceModel parent)
-                : base(appCtx, dataCtx, "Open reference")
+                : base(appCtx, dataCtx, "Open reference", "Open the referenced object")
             {
                 _parent = parent;
             }
@@ -134,7 +134,7 @@ namespace Kistl.Client.Presentables
             : CommandModel
         {
             public CreateNewItemAndSetValueCommandModel(IGuiApplicationContext appCtx, IKistlContext dataCtx, ObjectReferenceModel parent)
-                : base(appCtx, dataCtx, "Create new item")
+                : base(appCtx, dataCtx, "Create new item", "Create new item")
             {
                 _parent = parent;
             }
@@ -188,7 +188,7 @@ namespace Kistl.Client.Presentables
             : CommandModel
         {
             public SelectValueCommandModel(IGuiApplicationContext appCtx, IKistlContext dataCtx, ObjectReferenceModel parent)
-                : base(appCtx, dataCtx, "Open reference")
+                : base(appCtx, dataCtx, "Open reference", "Open reference")
             {
                 _parent = parent;
             }

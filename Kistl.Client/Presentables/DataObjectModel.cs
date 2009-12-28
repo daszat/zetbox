@@ -21,12 +21,6 @@ namespace Kistl.Client.Presentables
     public class DataObjectModel
         : PresentableModel
     {
-
-        //public static DataObjectModel CreateDesignMock()
-        //{
-        //    return new DataObjectModel(true);
-        //}
-
         public DataObjectModel(
             IGuiApplicationContext appCtx, IKistlContext dataCtx,
             IDataObject obj)
@@ -35,7 +29,7 @@ namespace Kistl.Client.Presentables
             _object = obj;
             _object.PropertyChanged += ObjectPropertyChanged;
             // TODO: Optional machen!
-            UpdateViewCache();
+            InitialiseViewCache();
         }
 
         #region Public Interface
@@ -184,11 +178,16 @@ namespace Kistl.Client.Presentables
             }
         }
 
+        /// <summary>Private backing store for the <see cref="IconPath"/> property. String.Empty means no IconPath, null means not yet fetched.</summary>
         private string _iconPathCache;
         public string IconPath
         {
             get
             {
+                if (_iconPathCache == null)
+                {
+                    UpdateIconPath();
+                }
                 return _iconPathCache;
             }
             set
@@ -332,9 +331,8 @@ namespace Kistl.Client.Presentables
             return result;
         }
 
-        protected void UpdateViewCache()
+        private void InitialiseViewCache()
         {
-
             // update Name
             _toStringCache = String.Format("{0} {1}",
                 _object.ObjectState.ToUserString(),
@@ -342,9 +340,10 @@ namespace Kistl.Client.Presentables
             _longNameCache = String.Format("{0}: {1}",
                 _object.GetInterfaceType().Type.FullName,
                 _toStringCache);
-            OnPropertyChanged("Name");
-            OnPropertyChanged("LongName");
+        }
 
+        private void UpdateIconPath()
+        {
             // update IconPath
             Icon icon = GetIcon();
             if (icon != null)
@@ -356,6 +355,15 @@ namespace Kistl.Client.Presentables
             {
                 IconPath = "";
             }
+        }
+
+        protected void UpdateViewCache()
+        {
+            InitialiseViewCache();
+            OnPropertyChanged("Name");
+            OnPropertyChanged("LongName");
+
+            UpdateIconPath();
         }
 
         /// <summary>

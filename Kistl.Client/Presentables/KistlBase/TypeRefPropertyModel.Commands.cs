@@ -21,10 +21,11 @@ namespace Kistl.Client.Presentables.KistlBase
         /// <param name="appCtx">the application context to use</param>
         /// <param name="dataCtx">the data context to use</param>
         /// <param name="label">a label for this command</param>
+        /// <param name="tooltip">a tooltip for this command</param>
         /// <param name="parent">where to put the Command's result</param>
         /// This constructor is internal to avoid external inheritance of this class.
-        internal LoadTypeRefCommand(IGuiApplicationContext appCtx, IKistlContext dataCtx, string label, TypeRefPropertyModel parent)
-            : base(appCtx, dataCtx, label)
+        internal LoadTypeRefCommand(IGuiApplicationContext appCtx, IKistlContext dataCtx, string label, string tooltip, TypeRefPropertyModel parent)
+            : base(appCtx, dataCtx, label, tooltip)
         {
             this.Parent = parent;
         }
@@ -140,7 +141,7 @@ namespace Kistl.Client.Presentables.KistlBase
         /// <param name="parent">where to put the Command's result</param>
         /// This constructor is internal to avoid external inheritance of this class.
         internal LoadTypeRefFromAssemblyFileCommand(IGuiApplicationContext appCtx, IKistlContext dataCtx, TypeRefPropertyModel parent)
-            : base(appCtx, dataCtx, "Load TypeRef From DLL", parent)
+            : base(appCtx, dataCtx, "Load TypeRef From DLL", "Loads all types from a DLL", parent)
         {
         }
 
@@ -193,7 +194,7 @@ namespace Kistl.Client.Presentables.KistlBase
         /// <param name="parent">where to put the Command's result</param>
         /// This constructor is internal to avoid external inheritance of this class.
         internal LoadTypeRefFromAssemblyRefCommand(IGuiApplicationContext appCtx, IKistlContext dataCtx, TypeRefPropertyModel parent)
-            : base(appCtx, dataCtx, "Select TypeRef by Assembly", parent)
+            : base(appCtx, dataCtx, "Select TypeRef by Assembly", "Loads all types from an Assembly", parent)
         {
         }
 

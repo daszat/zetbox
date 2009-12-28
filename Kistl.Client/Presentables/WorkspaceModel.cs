@@ -218,9 +218,8 @@ namespace Kistl.Client.Presentables
     internal class SaveContextCommand : CommandModel
     {
         public SaveContextCommand(IGuiApplicationContext appCtx, IKistlContext dataCtx)
-            : base(appCtx, dataCtx, "Save")
+            : base(appCtx, dataCtx, "Save", "Saves outstanding changes to the data store.")
         {
-            ToolTip = "Commits outstanding changes to the data store.";
         }
 
         private bool CheckValidity()
@@ -261,7 +260,7 @@ namespace Kistl.Client.Presentables
     internal class CreateNewInstanceCommand : CommandModel
     {
         public CreateNewInstanceCommand(IGuiApplicationContext appCtx, IKistlContext dataCtx, WorkspaceModel parent)
-            : base(appCtx, dataCtx, "New")
+            : base(appCtx, dataCtx, "New", "Create a new instance")
         {
             _parent = parent;
         }
@@ -296,7 +295,7 @@ namespace Kistl.Client.Presentables
     internal class CreateNewInstanceExternallyCommand : CommandModel
     {
         public CreateNewInstanceExternallyCommand(IGuiApplicationContext appCtx, IKistlContext dataCtx)
-            : base(appCtx, dataCtx, "External New ...")
+            : base(appCtx, dataCtx, "External New ...", "Create a new instance of this object class in a new window")
         {
         }
 

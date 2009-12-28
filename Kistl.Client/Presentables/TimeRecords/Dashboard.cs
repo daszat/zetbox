@@ -49,7 +49,7 @@ namespace Kistl.Client.Presentables.TimeRecords
         : CommandModel
     {
         internal OpenRecorderCommand(IGuiApplicationContext appCtx, IKistlContext dataCtx)
-            : base(appCtx, dataCtx, "Start recording")
+            : base(appCtx, dataCtx, "Start recording", "Start recording")
         {
         }
 

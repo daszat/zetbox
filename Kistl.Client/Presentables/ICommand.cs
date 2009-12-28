@@ -68,7 +68,8 @@ namespace Kistl.Client.Presentables
         /// <param name="appCtx">the application context to use</param>
         /// <param name="dataCtx">the data context to use</param>
         /// <param name="label">a label for this command</param>
-        protected CommandModel(IGuiApplicationContext appCtx, IKistlContext dataCtx, string label)
+        /// <param name="tooltip">a tooltip for this command</param>
+        protected CommandModel(IGuiApplicationContext appCtx, IKistlContext dataCtx, string label, string tooltip)
             : base(appCtx, dataCtx)
         {
             if (label == null)
@@ -76,7 +77,8 @@ namespace Kistl.Client.Presentables
                 throw new ArgumentNullException("label");
             }
 
-            this.Label = label;
+            this._labelCache = label;
+            this._toolTipCache = tooltip;
         }
 
         #region ICommand Members

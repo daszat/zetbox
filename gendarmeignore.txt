@@ -13,3 +13,7 @@ R: Gendarme.Rules.Design.Linq.AvoidExtensionMethodOnSystemObjectRule
 # so I don't care much about VB.Net in these cases
 T: Kistl.API.GetSetHasValueExtensions
 T: Kistl.API.ExtensionHelpers
+
+R: Gendarme.Rules.BadPractice.ConstructorShouldNotCallVirtualMethodsRule
+# private type where the brittle-ness doesn't matter
+T: Kistl.API.Utils.Logging/TraceMethodCallContext

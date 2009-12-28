@@ -33,7 +33,7 @@ namespace Kistl.Client.Presentables.GUI
                         .Select(desc => (DataObjectModel)Factory.CreateDefaultModel(DataContext, desc))
                         .ToList()));
 
-            SelectedPresentableModelDescriptor = null;
+            _selectedPresentableModelDescriptor = null;
 
             DefaultViewDescriptors = new Dictionary<Toolkit, DataObjectModel>();
         }
@@ -90,7 +90,6 @@ namespace Kistl.Client.Presentables.GUI
         public Dictionary<Toolkit, DataObjectModel> DefaultViewDescriptors { get; private set; }
 
         public ReadOnlyObservableCollection<DataObjectModel> ApplicableViewDescriptors { get; private set; }
-
 
         public override string Name
         {
