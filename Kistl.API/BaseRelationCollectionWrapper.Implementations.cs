@@ -7,31 +7,31 @@ using System.Text;
 namespace Kistl.API
 {
 
-    public abstract class RelationASideCollectionWrapper<ATYPE, BTYPE, ENTRYTYPE, BASECOLLECTIONTYPE>
-        : BaseRelationCollectionWrapper<ATYPE, BTYPE, BTYPE, ATYPE, ENTRYTYPE, BASECOLLECTIONTYPE>
-        where ATYPE : class, IDataObject
-        where BTYPE : class, IDataObject
-        where ENTRYTYPE : class, IRelationCollectionEntry<ATYPE, BTYPE>
-        where BASECOLLECTIONTYPE : class, ICollection<ENTRYTYPE>
+    public abstract class RelationASideCollectionWrapper<TA, TB, TEntry, TBaseCollection>
+        : BaseRelationCollectionWrapper<TA, TB, TB, TA, TEntry, TBaseCollection>
+        where TA : class, IDataObject
+        where TB : class, IDataObject
+        where TEntry : class, IRelationCollectionEntry<TA, TB>
+        where TBaseCollection : class, ICollection<TEntry>
     {
-        protected RelationASideCollectionWrapper(BTYPE parentObject, BASECOLLECTIONTYPE baseCollection)
+        protected RelationASideCollectionWrapper(TB parentObject, TBaseCollection baseCollection)
             : base(parentObject, baseCollection)
         {
         }
 
-        protected override IEnumerable<ATYPE> GetItems()
+        protected override IEnumerable<TA> GetItems()
         {
             Collection.ForEach(e => e.AttachToContext(ParentObject.Context));
             return Collection.Select(e => e.A);
         }
 
-        protected override ATYPE ItemFromEntry(ENTRYTYPE entry)
+        protected override TA ItemFromEntry(TEntry entry)
         {
             entry.AttachToContext(ParentObject.Context);
             return entry.A;
         }
 
-        protected override ENTRYTYPE InitialiseEntry(ENTRYTYPE entry, ATYPE item)
+        protected override TEntry InitialiseEntry(TEntry entry, TA item)
         {
             entry.B = ParentObject;
             entry.A = item;
@@ -40,36 +40,36 @@ namespace Kistl.API
 
     }
 
-    public abstract class RelationASideListWrapper<ATYPE, BTYPE, ENTRYTYPE, BASECOLLECTIONTYPE>
-        : BaseRelationListWrapper<ATYPE, BTYPE, BTYPE, ATYPE, ENTRYTYPE, BASECOLLECTIONTYPE>
-        where ATYPE : class, IDataObject
-        where BTYPE : class, IDataObject
-        where ENTRYTYPE : class, IRelationListEntry<ATYPE, BTYPE>
-        where BASECOLLECTIONTYPE : class, ICollection<ENTRYTYPE>
+    public abstract class RelationASideListWrapper<TA, TB, TEntry, TBaseCollection>
+        : BaseRelationListWrapper<TA, TB, TB, TA, TEntry, TBaseCollection>
+        where TA : class, IDataObject
+        where TB : class, IDataObject
+        where TEntry : class, IRelationListEntry<TA, TB>
+        where TBaseCollection : class, ICollection<TEntry>
     {
-        protected RelationASideListWrapper(BTYPE parentObject, BASECOLLECTIONTYPE baseCollection)
+        protected RelationASideListWrapper(TB parentObject, TBaseCollection baseCollection)
             : base(parentObject, baseCollection)
         {
         }
 
-        protected override IEnumerable<ATYPE> GetItems()
+        protected override IEnumerable<TA> GetItems()
         {
             Collection.ForEach(e => e.AttachToContext(ParentObject.Context));
             return Collection.Select(e => e.A);
         }
 
-        protected override IEnumerable<ATYPE> GetList()
+        protected override IEnumerable<TA> GetList()
         {
             return Collection.OrderBy(e => e.AIndex).Select(e => ItemFromEntry(e));
         }
 
-        protected override ATYPE ItemFromEntry(ENTRYTYPE entry)
+        protected override TA ItemFromEntry(TEntry entry)
         {
             entry.AttachToContext(ParentObject.Context);
             return entry.A;
         }
 
-        protected override ENTRYTYPE InitialiseEntry(ENTRYTYPE entry, ATYPE item)
+        protected override TEntry InitialiseEntry(TEntry entry, TA item)
         {
             entry.B = ParentObject;
             entry.A = item;
@@ -82,53 +82,53 @@ namespace Kistl.API
         /// Overriden to set the index on the incoming entry
         /// </summary>
         /// <param name="entry"></param>
-        protected override void OnEntryAdded(ENTRYTYPE entry)
+        protected override void OnEntryAdded(TEntry entry)
         {
             base.OnEntryAdded(entry);
             entry.AIndex = Collection.Count - 1;
         }
 
-        protected override int? IndexFromEntry(ENTRYTYPE entry)
+        protected override int? IndexFromEntry(TEntry entry)
         {
             return entry.AIndex;
         }
 
-        protected override void SetIndex(ENTRYTYPE entry, int idx)
+        protected override void SetIndex(TEntry entry, int idx)
         {
             entry.AIndex = idx;
         }
 
-        protected override void SetItem(ENTRYTYPE entry, ATYPE item)
+        protected override void SetItem(TEntry entry, TA item)
         {
             entry.A = item;
         }
     }
 
-    public abstract class RelationBSideCollectionWrapper<ATYPE, BTYPE, ENTRYTYPE, BASECOLLECTIONTYPE>
-        : BaseRelationCollectionWrapper<ATYPE, BTYPE, ATYPE, BTYPE, ENTRYTYPE, BASECOLLECTIONTYPE>
-        where ATYPE : class, IDataObject
-        where BTYPE : class, IDataObject
-        where ENTRYTYPE : class, IRelationCollectionEntry<ATYPE, BTYPE>
-        where BASECOLLECTIONTYPE : class, ICollection<ENTRYTYPE>
+    public abstract class RelationBSideCollectionWrapper<TA, TB, TEntry, TBaseCollection>
+        : BaseRelationCollectionWrapper<TA, TB, TA, TB, TEntry, TBaseCollection>
+        where TA : class, IDataObject
+        where TB : class, IDataObject
+        where TEntry : class, IRelationCollectionEntry<TA, TB>
+        where TBaseCollection : class, ICollection<TEntry>
     {
-        protected RelationBSideCollectionWrapper(ATYPE parentObject, BASECOLLECTIONTYPE baseCollection)
+        protected RelationBSideCollectionWrapper(TA parentObject, TBaseCollection baseCollection)
             : base(parentObject, baseCollection)
         {
         }
 
-        protected override IEnumerable<BTYPE> GetItems()
+        protected override IEnumerable<TB> GetItems()
         {
             Collection.ForEach(e => e.AttachToContext(ParentObject.Context));
             return Collection.Select(e => e.B);
         }
 
-        protected override BTYPE ItemFromEntry(ENTRYTYPE entry)
+        protected override TB ItemFromEntry(TEntry entry)
         {
             entry.AttachToContext(ParentObject.Context);
             return entry.B;
         }
 
-        protected override ENTRYTYPE InitialiseEntry(ENTRYTYPE entry, BTYPE item)
+        protected override TEntry InitialiseEntry(TEntry entry, TB item)
         {
             entry.A = ParentObject;
             entry.B = item;
@@ -138,36 +138,36 @@ namespace Kistl.API
 
     }
 
-    public abstract class RelationBSideListWrapper<ATYPE, BTYPE, ENTRYTYPE, BASECOLLECTIONTYPE>
-        : BaseRelationListWrapper<ATYPE, BTYPE, ATYPE, BTYPE, ENTRYTYPE, BASECOLLECTIONTYPE>
-        where ATYPE : class, IDataObject
-        where BTYPE : class, IDataObject
-        where ENTRYTYPE : class, IRelationListEntry<ATYPE, BTYPE>
-        where BASECOLLECTIONTYPE : class, ICollection<ENTRYTYPE>
+    public abstract class RelationBSideListWrapper<TA, TB, TEntry, TBaseCollection>
+        : BaseRelationListWrapper<TA, TB, TA, TB, TEntry, TBaseCollection>
+        where TA : class, IDataObject
+        where TB : class, IDataObject
+        where TEntry : class, IRelationListEntry<TA, TB>
+        where TBaseCollection : class, ICollection<TEntry>
     {
-        protected RelationBSideListWrapper(ATYPE parentObject, BASECOLLECTIONTYPE baseCollection)
+        protected RelationBSideListWrapper(TA parentObject, TBaseCollection baseCollection)
             : base(parentObject, baseCollection)
         {
         }
 
-        protected override IEnumerable<BTYPE> GetItems()
+        protected override IEnumerable<TB> GetItems()
         {
             Collection.ForEach(e => e.AttachToContext(ParentObject.Context));
             return Collection.Select(e => e.B);
         }
 
-        protected override IEnumerable<BTYPE> GetList()
+        protected override IEnumerable<TB> GetList()
         {
             return Collection.OrderBy(e => e.BIndex).Select(e => ItemFromEntry(e));
         }
 
-        protected override BTYPE ItemFromEntry(ENTRYTYPE entry)
+        protected override TB ItemFromEntry(TEntry entry)
         {
             entry.AttachToContext(ParentObject.Context);
             return entry.B;
         }
 
-        protected override ENTRYTYPE InitialiseEntry(ENTRYTYPE entry, BTYPE item)
+        protected override TEntry InitialiseEntry(TEntry entry, TB item)
         {
             entry.A = ParentObject;
             entry.B = item;
@@ -179,23 +179,23 @@ namespace Kistl.API
         /// Overriden to set the index on the incoming entry
         /// </summary>
         /// <param name="entry"></param>
-        protected override void OnEntryAdded(ENTRYTYPE entry)
+        protected override void OnEntryAdded(TEntry entry)
         {
             base.OnEntryAdded(entry);
             entry.BIndex = Collection.Count - 1;
         }
 
-        protected override int? IndexFromEntry(ENTRYTYPE entry)
+        protected override int? IndexFromEntry(TEntry entry)
         {
             return entry.BIndex;
         }
 
-        protected override void SetIndex(ENTRYTYPE entry, int idx)
+        protected override void SetIndex(TEntry entry, int idx)
         {
             entry.BIndex = idx;
         }
 
-        protected override void SetItem(ENTRYTYPE entry, BTYPE item)
+        protected override void SetItem(TEntry entry, TB item)
         {
             entry.B = item;
         }

@@ -10,23 +10,23 @@ using Kistl.API;
 namespace Kistl.DALProvider.EF
 {
 
-    public sealed class EntityRelationASideCollectionWrapper<ATYPE, BTYPE, ENTRYTYPE>
-        : RelationASideCollectionWrapper<ATYPE, BTYPE, ENTRYTYPE, EntityCollection<ENTRYTYPE>>
-        where ATYPE : class, IDataObject
-        where BTYPE : class, IDataObject
-        where ENTRYTYPE : BaseServerCollectionEntry_EntityFramework, IEntityWithRelationships, IRelationCollectionEntry<ATYPE, BTYPE>, new()
+    public sealed class EntityRelationASideCollectionWrapper<TA, TB, TEntry>
+        : RelationASideCollectionWrapper<TA, TB, TEntry, EntityCollection<TEntry>>
+        where TA : class, IDataObject
+        where TB : class, IDataObject
+        where TEntry : BaseServerCollectionEntry_EntityFramework, IEntityWithRelationships, IRelationCollectionEntry<TA, TB>, new()
     {
-        public EntityRelationASideCollectionWrapper(BTYPE parentObject, EntityCollection<ENTRYTYPE> ec)
+        public EntityRelationASideCollectionWrapper(TB parentObject, EntityCollection<TEntry> ec)
             : base(parentObject, ec)
         {
         }
 
-        protected override ENTRYTYPE CreateEntry(object item)
+        protected override TEntry CreateEntry(object item)
         {
-            return (ENTRYTYPE)ParentObject.Context.CreateRelationCollectionEntry(new ImplementationType(typeof(ENTRYTYPE)).ToInterfaceType());
+            return (TEntry)ParentObject.Context.CreateRelationCollectionEntry(new ImplementationType(typeof(TEntry)).ToInterfaceType());
         }
 
-        protected override void OnEntryRemoved(ENTRYTYPE entry)
+        protected override void OnEntryRemoved(TEntry entry)
         {
             ParentObject.Context.Delete(entry);
             base.OnEntryRemoved(entry);
@@ -34,69 +34,69 @@ namespace Kistl.DALProvider.EF
 
     }
 
-    public sealed class EntityRelationASideListWrapper<ATYPE, BTYPE, ENTRYTYPE>
-        : RelationASideListWrapper<ATYPE, BTYPE, ENTRYTYPE, EntityCollection<ENTRYTYPE>>
-        where ATYPE : class, IDataObject
-        where BTYPE : class, IDataObject
-        where ENTRYTYPE : BaseServerCollectionEntry_EntityFramework, IEntityWithRelationships, IRelationListEntry<ATYPE, BTYPE>, new()
+    public sealed class EntityRelationASideListWrapper<TA, TB, TEntry>
+        : RelationASideListWrapper<TA, TB, TEntry, EntityCollection<TEntry>>
+        where TA : class, IDataObject
+        where TB : class, IDataObject
+        where TEntry : BaseServerCollectionEntry_EntityFramework, IEntityWithRelationships, IRelationListEntry<TA, TB>, new()
     {
-        public EntityRelationASideListWrapper(BTYPE parentObject, EntityCollection<ENTRYTYPE> ec)
+        public EntityRelationASideListWrapper(TB parentObject, EntityCollection<TEntry> ec)
             : base(parentObject, ec)
         {
         }
 
-        protected override ENTRYTYPE CreateEntry(object item)
+        protected override TEntry CreateEntry(object item)
         {
-            return (ENTRYTYPE)ParentObject.Context.CreateRelationCollectionEntry(new ImplementationType(typeof(ENTRYTYPE)).ToInterfaceType());
+            return (TEntry)ParentObject.Context.CreateRelationCollectionEntry(new ImplementationType(typeof(TEntry)).ToInterfaceType());
         }
 
-        protected override void OnEntryRemoved(ENTRYTYPE entry)
+        protected override void OnEntryRemoved(TEntry entry)
         {
             ParentObject.Context.Delete(entry);
             base.OnEntryRemoved(entry);
         }
     }
 
-    public sealed class EntityRelationBSideCollectionWrapper<ATYPE, BTYPE, ENTRYTYPE>
-        : RelationBSideCollectionWrapper<ATYPE, BTYPE, ENTRYTYPE, EntityCollection<ENTRYTYPE>>
-        where ATYPE : class, IDataObject
-        where BTYPE : class, IDataObject
-        where ENTRYTYPE : BaseServerCollectionEntry_EntityFramework, IEntityWithRelationships, IRelationCollectionEntry<ATYPE, BTYPE>, new()
+    public sealed class EntityRelationBSideCollectionWrapper<TA, TB, TEntry>
+        : RelationBSideCollectionWrapper<TA, TB, TEntry, EntityCollection<TEntry>>
+        where TA : class, IDataObject
+        where TB : class, IDataObject
+        where TEntry : BaseServerCollectionEntry_EntityFramework, IEntityWithRelationships, IRelationCollectionEntry<TA, TB>, new()
     {
-        public EntityRelationBSideCollectionWrapper(ATYPE parentObject, EntityCollection<ENTRYTYPE> ec)
+        public EntityRelationBSideCollectionWrapper(TA parentObject, EntityCollection<TEntry> ec)
             : base(parentObject, ec)
         {
         }
 
-        protected override ENTRYTYPE CreateEntry(object item)
+        protected override TEntry CreateEntry(object item)
         {
-            return (ENTRYTYPE)ParentObject.Context.CreateRelationCollectionEntry(new ImplementationType(typeof(ENTRYTYPE)).ToInterfaceType());
+            return (TEntry)ParentObject.Context.CreateRelationCollectionEntry(new ImplementationType(typeof(TEntry)).ToInterfaceType());
         }
 
-        protected override void OnEntryRemoved(ENTRYTYPE entry)
+        protected override void OnEntryRemoved(TEntry entry)
         {
             ParentObject.Context.Delete(entry);
             base.OnEntryRemoved(entry);
         }
     }
 
-    public sealed class EntityRelationBSideListWrapper<ATYPE, BTYPE, ENTRYTYPE>
-        : RelationBSideListWrapper<ATYPE, BTYPE, ENTRYTYPE, EntityCollection<ENTRYTYPE>>
-        where ATYPE : class, IDataObject
-        where BTYPE : class, IDataObject
-        where ENTRYTYPE : BaseServerCollectionEntry_EntityFramework, IEntityWithRelationships, IRelationListEntry<ATYPE, BTYPE>, new()
+    public sealed class EntityRelationBSideListWrapper<TA, TB, TEntry>
+        : RelationBSideListWrapper<TA, TB, TEntry, EntityCollection<TEntry>>
+        where TA : class, IDataObject
+        where TB : class, IDataObject
+        where TEntry : BaseServerCollectionEntry_EntityFramework, IEntityWithRelationships, IRelationListEntry<TA, TB>, new()
     {
-        public EntityRelationBSideListWrapper(ATYPE parentObject, EntityCollection<ENTRYTYPE> ec)
+        public EntityRelationBSideListWrapper(TA parentObject, EntityCollection<TEntry> ec)
             : base(parentObject, ec)
         {
         }
 
-        protected override ENTRYTYPE CreateEntry(object item)
+        protected override TEntry CreateEntry(object item)
         {
-            return (ENTRYTYPE)ParentObject.Context.CreateRelationCollectionEntry(new ImplementationType(typeof(ENTRYTYPE)).ToInterfaceType());
+            return (TEntry)ParentObject.Context.CreateRelationCollectionEntry(new ImplementationType(typeof(TEntry)).ToInterfaceType());
         }
 
-        protected override void OnEntryRemoved(ENTRYTYPE entry)
+        protected override void OnEntryRemoved(TEntry entry)
         {
             ParentObject.Context.Delete(entry);
             base.OnEntryRemoved(entry);

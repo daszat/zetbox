@@ -10,24 +10,24 @@ namespace Kistl.API
     /// <summary>
     /// A wrapper around a Collection of CollectionEntrys to present one "side" as normal collection.
     /// </summary>
-    /// <typeparam name="ATYPE">the type of the A side</typeparam>
-    /// <typeparam name="BTYPE">the type of the B side</typeparam>
-    /// <typeparam name="PARENTTYPE">which type contains the list, one of ATYPE or BTYPE</typeparam>
-    /// <typeparam name="ITEMTYPE">which type is contained in the list, the other one of ATYPE or BTYPE</typeparam>
-    /// <typeparam name="ENTRYTYPE">the wrapped CollectionEntry type</typeparam>
-    /// <typeparam name="BASECOLLECTIONTYPE">the provider's collection type</typeparam>
-    public abstract class BaseRelationCollectionWrapper<ATYPE, BTYPE, PARENTTYPE, ITEMTYPE, ENTRYTYPE, BASECOLLECTIONTYPE>
-        : ICollection<ITEMTYPE>, ICollection, IEnumerable
-        where ATYPE : class, IDataObject
-        where BTYPE : class, IDataObject
-        where PARENTTYPE : class, IDataObject
-        where ENTRYTYPE : class, IRelationCollectionEntry<ATYPE, BTYPE>
-        where BASECOLLECTIONTYPE : class, ICollection<ENTRYTYPE>
+    /// <typeparam name="TA">the type of the A side</typeparam>
+    /// <typeparam name="TB">the type of the B side</typeparam>
+    /// <typeparam name="TParent">which type contains the list, one of ATYPE or BTYPE</typeparam>
+    /// <typeparam name="TItem">which type is contained in the list, the other one of ATYPE or BTYPE</typeparam>
+    /// <typeparam name="TEntry">the wrapped CollectionEntry type</typeparam>
+    /// <typeparam name="TBaseCollection">the provider's collection type</typeparam>
+    public abstract class BaseRelationCollectionWrapper<TA, TB, TParent, TItem, TEntry, TBaseCollection>
+        : ICollection<TItem>, ICollection, IEnumerable
+        where TA : class, IDataObject
+        where TB : class, IDataObject
+        where TParent : class, IDataObject
+        where TEntry : class, IRelationCollectionEntry<TA, TB>
+        where TBaseCollection : class, ICollection<TEntry>
     {
-        protected BASECOLLECTIONTYPE Collection { get; private set; }
-        protected PARENTTYPE ParentObject { get; private set; }
+        protected TBaseCollection Collection { get; private set; }
+        protected TParent ParentObject { get; private set; }
 
-        protected BaseRelationCollectionWrapper(PARENTTYPE parentObject, BASECOLLECTIONTYPE baseCollection)
+        protected BaseRelationCollectionWrapper(TParent parentObject, TBaseCollection baseCollection)
         {
             Collection = baseCollection;
             ParentObject = parentObject;
@@ -38,14 +38,14 @@ namespace Kistl.API
         /// <summary>
         /// returns all items of this collection without a specific order
         /// </summary>
-        protected abstract IEnumerable<ITEMTYPE> GetItems();
+        protected abstract IEnumerable<TItem> GetItems();
 
         /// <summary>
         /// returns all items of this collection in the "right" order.
         /// Inheritors may override this to implement ordering semantics, 
         /// since by default, it uses the "natural" ordering of GetItems().
         /// </summary>
-        protected virtual IEnumerable<ITEMTYPE> GetList()
+        protected virtual IEnumerable<TItem> GetList()
         {
             return GetItems();
         }
@@ -53,7 +53,7 @@ namespace Kistl.API
         /// <summary>
         /// maps an item to an entry, will return a default value if the item is not associated to an entry of this collection
         /// </summary>
-        protected virtual ENTRYTYPE GetEntryOrDefault(ITEMTYPE item)
+        protected virtual TEntry GetEntryOrDefault(TItem item)
         {
             var result = Collection.SingleOrDefault(e => Object.Equals(ItemFromEntry(e), item));
             result.AttachToContext(ParentObject.Context);
@@ -63,24 +63,24 @@ namespace Kistl.API
         /// <summary>
         /// Returns the item referenced by a given entry
         /// </summary>
-        protected abstract ITEMTYPE ItemFromEntry(ENTRYTYPE entry);
+        protected abstract TItem ItemFromEntry(TEntry entry);
 
         /// <summary>
         /// Creates a new entry
         /// </summary>
         /// <returns></returns>
-        protected abstract ENTRYTYPE CreateEntry(object item);
+        protected abstract TEntry CreateEntry(object item);
 
         /// <summary>
         /// Initialises an entry for the given item
         /// </summary>
-        protected abstract ENTRYTYPE InitialiseEntry(ENTRYTYPE entry, ITEMTYPE item);
+        protected abstract TEntry InitialiseEntry(TEntry entry, TItem item);
 
         /// <summary>
         /// called before an entry is added to the list
         /// </summary>
         /// <param name="entry">the new entry</param>
-        protected virtual void OnEntryAdding(ENTRYTYPE entry)
+        protected virtual void OnEntryAdding(TEntry entry)
         {
             entry.AttachToContext(ParentObject.Context);
         }
@@ -89,27 +89,27 @@ namespace Kistl.API
         /// called after an entry is added to the list
         /// </summary>
         /// <param name="entry">the new entry</param>
-        protected virtual void OnEntryAdded(ENTRYTYPE entry) { }
+        protected virtual void OnEntryAdded(TEntry entry) { }
 
         /// <summary>
         /// called before an entry is removed from the list
         /// </summary>
         /// <param name="entry">the removed entry</param>
-        protected virtual void OnEntryRemoving(ENTRYTYPE entry) { }
+        protected virtual void OnEntryRemoving(TEntry entry) { }
 
         /// <summary>
         /// called after an entry is removed from the list
         /// </summary>
         /// <param name="entry">the removed entry</param>
-        protected virtual void OnEntryRemoved(ENTRYTYPE entry) { }
+        protected virtual void OnEntryRemoved(TEntry entry) { }
 
         #endregion
 
-        #region ICollection<VALUE> Members
+        #region ICollection<TItem> Members
 
-        public virtual void Add(ITEMTYPE item)
+        public virtual void Add(TItem item)
         {
-            ENTRYTYPE entry = InitialiseEntry(CreateEntry(item), item);
+            TEntry entry = InitialiseEntry(CreateEntry(item), item);
             OnEntryAdding(entry);
             Collection.Add(entry);
             OnEntryAdded(entry);
@@ -119,23 +119,23 @@ namespace Kistl.API
         {
             // need a clone here
             var entries = Collection.ToList();
-            foreach (ENTRYTYPE entry in entries)
+            foreach (TEntry entry in entries)
             {
                 OnEntryRemoving(entry);
             }
             Collection.Clear();
-            foreach (ENTRYTYPE entry in entries)
+            foreach (TEntry entry in entries)
             {
                 OnEntryRemoved(entry);
             }
         }
 
-        public bool Contains(ITEMTYPE item)
+        public bool Contains(TItem item)
         {
             return GetItems().Contains(item);
         }
 
-        public void CopyTo(ITEMTYPE[] array, int arrayIndex)
+        public void CopyTo(TItem[] array, int arrayIndex)
         {
             foreach (var i in GetList())
             {
@@ -153,9 +153,9 @@ namespace Kistl.API
             get { return Collection.IsReadOnly; }
         }
 
-        public virtual bool Remove(ITEMTYPE item)
+        public virtual bool Remove(TItem item)
         {
-            ENTRYTYPE e = GetEntryOrDefault(item);
+            TEntry e = GetEntryOrDefault(item);
             if (e != null)
             {
                 OnEntryRemoving(e);
@@ -171,9 +171,9 @@ namespace Kistl.API
 
         #endregion
 
-        #region IEnumerable<ITEMTYPE> Members
+        #region IEnumerable<TItem> Members
 
-        public IEnumerator<ITEMTYPE> GetEnumerator()
+        public IEnumerator<TItem> GetEnumerator()
         {
             return GetList().GetEnumerator();
         }
@@ -205,21 +205,21 @@ namespace Kistl.API
     /// <summary>
     /// A wrapper around a List of CollectionEntrys to present one "side" as normal list.
     /// </summary>
-    /// <typeparam name="ATYPE">the type of the A side</typeparam>
-    /// <typeparam name="BTYPE">the type of the B side</typeparam>
-    /// <typeparam name="PARENTTYPE">which type contains the list, one of ATYPE or BTYPE</typeparam>
-    /// <typeparam name="ITEMTYPE">which type is contained in the list, the other one of ATYPE or BTYPE</typeparam>
-    /// <typeparam name="ENTRYTYPE">the wrapped CollectionEntry type</typeparam>
-    /// <typeparam name="BASECOLLECTIONTYPE">the provider's collection type</typeparam>
-    public abstract class BaseRelationListWrapper<ATYPE, BTYPE, PARENTTYPE, ITEMTYPE, ENTRYTYPE, BASECOLLECTIONTYPE>
-        : BaseRelationCollectionWrapper<ATYPE, BTYPE, PARENTTYPE, ITEMTYPE, ENTRYTYPE, BASECOLLECTIONTYPE>, IList<ITEMTYPE>, IList
-        where ATYPE : class, IDataObject
-        where BTYPE : class, IDataObject
-        where PARENTTYPE : class, IDataObject
-        where ENTRYTYPE : class, IRelationListEntry<ATYPE, BTYPE>
-        where BASECOLLECTIONTYPE : class, ICollection<ENTRYTYPE>
+    /// <typeparam name="TA">the type of the A side</typeparam>
+    /// <typeparam name="TB">the type of the B side</typeparam>
+    /// <typeparam name="TParent">which type contains the list, one of ATYPE or BTYPE</typeparam>
+    /// <typeparam name="TItem">which type is contained in the list, the other one of ATYPE or BTYPE</typeparam>
+    /// <typeparam name="TEntry">the wrapped CollectionEntry type</typeparam>
+    /// <typeparam name="TBaseCollection">the provider's collection type</typeparam>
+    public abstract class BaseRelationListWrapper<TA, TB, TParent, TItem, TEntry, TBaseCollection>
+        : BaseRelationCollectionWrapper<TA, TB, TParent, TItem, TEntry, TBaseCollection>, IList<TItem>, IList
+        where TA : class, IDataObject
+        where TB : class, IDataObject
+        where TParent : class, IDataObject
+        where TEntry : class, IRelationListEntry<TA, TB>
+        where TBaseCollection : class, ICollection<TEntry>
     {
-        protected BaseRelationListWrapper(PARENTTYPE parentObject, BASECOLLECTIONTYPE baseCollection)
+        protected BaseRelationListWrapper(TParent parentObject, TBaseCollection baseCollection)
             : base(parentObject, baseCollection)
         {
         }
@@ -229,23 +229,23 @@ namespace Kistl.API
         /// <summary>
         /// Returns the index of a given entry
         /// </summary>
-        protected abstract int? IndexFromEntry(ENTRYTYPE entry);
+        protected abstract int? IndexFromEntry(TEntry entry);
 
         /// <summary>
         /// Sets the index on a given entry
         /// </summary>
-        protected abstract void SetIndex(ENTRYTYPE entry, int idx);
+        protected abstract void SetIndex(TEntry entry, int idx);
 
         /// <summary>
         /// Sets the item on a given entry
         /// </summary>
-        protected abstract void SetItem(ENTRYTYPE entry, ITEMTYPE item);
+        protected abstract void SetItem(TEntry entry, TItem item);
 
         #endregion
 
         #region Index Management
 
-        protected ENTRYTYPE GetAt(int index)
+        protected TEntry GetAt(int index)
         {
             RepairIndexes();
             var result = Collection.SingleOrDefault(e => { var idx = IndexFromEntry(e); return idx.HasValue && idx.Value == index; });
@@ -269,11 +269,11 @@ namespace Kistl.API
 
         #endregion
 
-        #region IList<ITEMTYPE> Members
+        #region IList<TItem> Members
 
-        public int IndexOf(ITEMTYPE item)
+        public int IndexOf(TItem item)
         {
-            ENTRYTYPE entry = GetEntryOrDefault(item);
+            TEntry entry = GetEntryOrDefault(item);
             if (entry == null)
                 return -1;
 
@@ -284,7 +284,7 @@ namespace Kistl.API
             return result.Value;
         }
 
-        public void Insert(int index, ITEMTYPE item)
+        public void Insert(int index, TItem item)
         {
             // allow index==-1 and index==Collection.Count for prepending or appending to list
             if (-1 < index || index > Collection.Count)
@@ -294,7 +294,7 @@ namespace Kistl.API
                 throw new NotSupportedException("List is ReadOnly");
 
             // TODO: Optimize
-            foreach (ENTRYTYPE entry in Collection)
+            foreach (TEntry entry in Collection)
             {
                 int idx = IndexFromEntry(entry) ?? Kistl.API.Helper.LASTINDEXPOSITION;
                 if (idx >= index)
@@ -303,7 +303,7 @@ namespace Kistl.API
                 }
             }
 
-            ENTRYTYPE newEntry = InitialiseEntry(CreateEntry(item), item);
+            TEntry newEntry = InitialiseEntry(CreateEntry(item), item);
             SetIndex(newEntry, index);
 
             OnEntryAdding(newEntry);
@@ -319,14 +319,14 @@ namespace Kistl.API
             if (IsReadOnly)
                 throw new NotSupportedException("List is ReadOnly");
 
-            ENTRYTYPE oldEntry = GetAt(index);
+            TEntry oldEntry = GetAt(index);
             base.Remove(ItemFromEntry(oldEntry));
 
             // not really needed when removing items.
             // TODO: Optimize, check whether other parts can live with holes 
             // in the Position; when inserting exploit holes to shortcut 
             // Position updating
-            foreach (ENTRYTYPE entry in Collection)
+            foreach (TEntry entry in Collection)
             {
                 int idx = IndexFromEntry(entry) ?? Kistl.API.Helper.LASTINDEXPOSITION;
                 if (idx >= index)
@@ -336,17 +336,17 @@ namespace Kistl.API
             }
         }
 
-        public ITEMTYPE this[int index]
+        public TItem this[int index]
         {
             get
             {
-                ENTRYTYPE entry = GetAt(index);
+                TEntry entry = GetAt(index);
                 if (entry == null) throw new ArgumentOutOfRangeException(string.Format("Index {0} not found in collection", index));
                 return ItemFromEntry(entry);
             }
             set
             {
-                ENTRYTYPE entry = GetAt(index);
+                TEntry entry = GetAt(index);
                 if (entry == null) throw new ArgumentOutOfRangeException(string.Format("Index {0} not found in collection", index));
 
                 if (!Object.Equals(ItemFromEntry(entry), value))
@@ -362,28 +362,28 @@ namespace Kistl.API
 
         public int Add(object value)
         {
-            return this.Add((ITEMTYPE)value);
+            return this.Add((TItem)value);
         }
 
         public bool Contains(object value)
         {
-            if (value is ITEMTYPE)
-                return this.Contains((ITEMTYPE)value);
+            if (value is TItem)
+                return this.Contains((TItem)value);
             else
                 return false;
         }
 
         public int IndexOf(object value)
         {
-            if (value is ITEMTYPE)
-                return this.IndexOf((ITEMTYPE)value);
+            if (value is TItem)
+                return this.IndexOf((TItem)value);
             else
                 return -1;
         }
 
         public void Insert(int index, object value)
         {
-            this.Insert(index, (ITEMTYPE)value);
+            this.Insert(index, (TItem)value);
         }
 
         public bool IsFixedSize
@@ -393,8 +393,8 @@ namespace Kistl.API
 
         public void Remove(object value)
         {
-            if (value is ITEMTYPE)
-                this.Remove((ITEMTYPE)value);
+            if (value is TItem)
+                this.Remove((TItem)value);
         }
 
         object IList.this[int index]
@@ -405,7 +405,7 @@ namespace Kistl.API
             }
             set
             {
-                this[index] = (ITEMTYPE)value;
+                this[index] = (TItem)value;
             }
         }
 

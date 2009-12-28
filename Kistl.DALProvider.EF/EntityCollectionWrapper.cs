@@ -13,16 +13,14 @@ namespace Kistl.DALProvider.EF
     /// <summary>
     /// Wraps 1:N Relation, which EF provides via a EntityCollection
     /// </summary>
-    /// <typeparam name="INTERFACE"></typeparam>
-    /// <typeparam name="IMPL"></typeparam>
-    public class EntityCollectionWrapper<INTERFACE, IMPL> : ICollection<INTERFACE>, ICollection
-        where IMPL : class, System.Data.Objects.DataClasses.IEntityWithRelationships, INTERFACE, IDataObject
-        where INTERFACE : class, IDataObject
+    public class EntityCollectionWrapper<TInterface, TImpl> : ICollection<TInterface>, ICollection
+        where TImpl : class, System.Data.Objects.DataClasses.IEntityWithRelationships, TInterface, IDataObject
+        where TInterface : class, IDataObject
     {
-        protected EntityCollection<IMPL> underlyingCollection;
+        protected EntityCollection<TImpl> underlyingCollection;
         protected IKistlContext ctx;
 
-        public EntityCollectionWrapper(IKistlContext ctx, EntityCollection<IMPL> ec)
+        public EntityCollectionWrapper(IKistlContext ctx, EntityCollection<TImpl> ec)
         {
             this.ctx = ctx;
             underlyingCollection = ec;
@@ -32,10 +30,10 @@ namespace Kistl.DALProvider.EF
             }
         }
 
-        public virtual void Add(INTERFACE item)
+        public virtual void Add(TInterface item)
         {
             if (ctx != item.Context) throw new WrongKistlContextException();
-            underlyingCollection.Add((IMPL)item);
+            underlyingCollection.Add((TImpl)item);
         }
 
         public virtual void Clear()
@@ -43,14 +41,14 @@ namespace Kistl.DALProvider.EF
             underlyingCollection.Clear();
         }
 
-        public virtual bool Contains(INTERFACE item)
+        public virtual bool Contains(TInterface item)
         {
-            return underlyingCollection.Contains((IMPL)item);
+            return underlyingCollection.Contains((TImpl)item);
         }
 
-        public virtual void CopyTo(INTERFACE[] array, int arrayIndex)
+        public virtual void CopyTo(TInterface[] array, int arrayIndex)
         {
-            foreach (INTERFACE i in GetEnumerable())
+            foreach (TInterface i in GetEnumerable())
             {
                 array[arrayIndex++] = i;
             }
@@ -66,12 +64,12 @@ namespace Kistl.DALProvider.EF
             get { return underlyingCollection.IsReadOnly; }
         }
 
-        public virtual bool Remove(INTERFACE item)
+        public virtual bool Remove(TInterface item)
         {
-            return underlyingCollection.Remove(item as IMPL);
+            return underlyingCollection.Remove(item as TImpl);
         }
 
-        public virtual IEnumerator<INTERFACE> GetEnumerator()
+        public virtual IEnumerator<TInterface> GetEnumerator()
         {
             return GetEnumerable().GetEnumerator();
         }
@@ -81,9 +79,9 @@ namespace Kistl.DALProvider.EF
             return GetEnumerable().GetEnumerator();
         }
 
-        protected virtual IEnumerable<INTERFACE> GetEnumerable()
+        protected virtual IEnumerable<TInterface> GetEnumerable()
         {
-            return underlyingCollection.Cast<INTERFACE>();
+            return underlyingCollection.Cast<TInterface>();
         }
 
         #region ICollection Members
@@ -103,21 +101,21 @@ namespace Kistl.DALProvider.EF
         #endregion
     }
 
-    public class EntityListWrapper<INTERFACE, IMPL>
-        : EntityCollectionWrapper<INTERFACE, IMPL>, IList<INTERFACE>
-        where IMPL : class, System.Data.Objects.DataClasses.IEntityWithRelationships, INTERFACE, IDataObject
-        where INTERFACE : class, IDataObject
+    public class EntityListWrapper<TInterface, TImpl>
+        : EntityCollectionWrapper<TInterface, TImpl>, IList<TInterface>
+        where TImpl : class, System.Data.Objects.DataClasses.IEntityWithRelationships, TInterface, IDataObject
+        where TInterface : class, IDataObject
     {
         private string _pointerProperty = "";
 
-        public EntityListWrapper(IKistlContext ctx, EntityCollection<IMPL> ec, string pointerProperty)
+        public EntityListWrapper(IKistlContext ctx, EntityCollection<TImpl> ec, string pointerProperty)
             : base(ctx, ec)
         {
             _pointerProperty = pointerProperty;
         }
 
         #region Index Management
-        protected void UpdateIndex(INTERFACE item, int? index)
+        protected void UpdateIndex(TInterface item, int? index)
         {
             // Sets the position Property for a 1:n Relation
             // eg. Method 1-n Parameter
@@ -125,14 +123,14 @@ namespace Kistl.DALProvider.EF
             item.SetPropertyValue<int?>(_pointerProperty + Helper.PositionSuffix, index);
         }
 
-        protected int? GetIndex(INTERFACE item)
+        protected int? GetIndex(TInterface item)
         {
             return item.GetPropertyValue<int?>(_pointerProperty + Helper.PositionSuffix);
         }
 
-        protected INTERFACE GetAt(int index)
+        protected TInterface GetAt(int index)
         {
-            foreach (INTERFACE i in underlyingCollection)
+            foreach (TInterface i in underlyingCollection)
             {
                 int? idx = GetIndex(i);
                 if (idx == null) continue;
@@ -146,7 +144,7 @@ namespace Kistl.DALProvider.EF
         #endregion
 
         #region ICollection Overrides
-        public override void Add(INTERFACE item)
+        public override void Add(TInterface item)
         {
             base.Add(item);
             UpdateIndex(item, underlyingCollection.Count - 1);
@@ -154,20 +152,20 @@ namespace Kistl.DALProvider.EF
 
         public override void Clear()
         {
-            foreach (INTERFACE i in underlyingCollection)
+            foreach (TInterface i in underlyingCollection)
             {
                 UpdateIndex(i, null);
             }
             base.Clear();
         }
 
-        public override bool Remove(INTERFACE item)
+        public override bool Remove(TInterface item)
         {
             UpdateIndex(item, null);
             return base.Remove(item);
         }
 
-        protected override IEnumerable<INTERFACE> GetEnumerable()
+        protected override IEnumerable<TInterface> GetEnumerable()
         {
             return base.GetEnumerable().OrderBy(i => GetIndex(i));
         }
@@ -176,18 +174,18 @@ namespace Kistl.DALProvider.EF
 
         #region IList<INTERFACE> Members
 
-        public int IndexOf(INTERFACE item)
+        public int IndexOf(TInterface item)
         {
             int? result = GetIndex(item);
             if (result == null) throw new InvalidOperationException("Collection is not sorted");
             return result.Value;
         }
 
-        public void Insert(int index, INTERFACE item)
+        public void Insert(int index, TInterface item)
         {
             UpdateIndex(item, index);
             // TODO: Optimize
-            foreach (INTERFACE i in underlyingCollection)
+            foreach (TInterface i in underlyingCollection)
             {
                 int idx = GetIndex(i) ?? Kistl.API.Helper.LASTINDEXPOSITION;
                 if (idx >= index)
@@ -195,17 +193,17 @@ namespace Kistl.DALProvider.EF
                     UpdateIndex(i, idx + 1);
                 }
             }
-            underlyingCollection.Add((IMPL)item);
+            underlyingCollection.Add((TImpl)item);
         }
 
         public void RemoveAt(int index)
         {
-            INTERFACE item = GetAt(index);
+            TInterface item = GetAt(index);
             if (item == null) throw new ArgumentOutOfRangeException(string.Format("Index {0} not found in collection", index));
             base.Remove(item);
 
             // TODO: Optimize
-            foreach (INTERFACE i in underlyingCollection)
+            foreach (TInterface i in underlyingCollection)
             {
                 int idx = GetIndex(i) ?? Kistl.API.Helper.LASTINDEXPOSITION;
                 if (idx >= index)
@@ -215,17 +213,17 @@ namespace Kistl.DALProvider.EF
             }
         }
 
-        public INTERFACE this[int index]
+        public TInterface this[int index]
         {
             get
             {
-                INTERFACE i = GetAt(index);
+                TInterface i = GetAt(index);
                 if (i == null) throw new ArgumentOutOfRangeException(string.Format("Index {0} not found in collection", index));
                 return i;
             }
             set
             {
-                INTERFACE i = GetAt(index);
+                TInterface i = GetAt(index);
                 if (i == null) throw new ArgumentOutOfRangeException(string.Format("Index {0} not found in collection", index));
 
                 if (i != value)

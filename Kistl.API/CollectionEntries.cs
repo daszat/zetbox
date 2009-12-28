@@ -34,29 +34,29 @@ namespace Kistl.API
     /// <summary>
     /// Contains additional properties for typed access to the related objects
     /// </summary>
-    /// <typeparam name="AType">the Type of the A-side</typeparam>
-    /// <typeparam name="BType">the Type of the B-side</typeparam>
-    public interface IRelationCollectionEntry<AType, BType>
+    /// <typeparam name="TA">the Type of the A-side</typeparam>
+    /// <typeparam name="TB">the Type of the B-side</typeparam>
+    public interface IRelationCollectionEntry<TA, TB>
         : IRelationCollectionEntry
-        where AType : IDataObject
-        where BType : IDataObject
+        where TA : IDataObject
+        where TB : IDataObject
     {
         /// <summary>Gets or sets the A-side object.</summary>
-        AType A { get; set; }
+        TA A { get; set; }
         
         /// <summary>Gets or sets the B-side object.</summary>
-        BType B { get; set; }
+        TB B { get; set; }
     }
 
     /// <summary>
     /// Contains additional properties for typed access to the related objects and order information
     /// </summary>
-    /// <typeparam name="AType">the Type of the A-side</typeparam>
-    /// <typeparam name="BType">the Type of the B-side</typeparam>
-    public interface IRelationListEntry<AType, BType>
-        : IRelationCollectionEntry<AType, BType>, IRelationListEntry
-        where AType : IDataObject
-        where BType : IDataObject
+    /// <typeparam name="TA">the Type of the A-side</typeparam>
+    /// <typeparam name="TB">the Type of the B-side</typeparam>
+    public interface IRelationListEntry<TA, TB>
+        : IRelationCollectionEntry<TA, TB>, IRelationListEntry
+        where TA : IDataObject
+        where TB : IDataObject
     {
     }
 

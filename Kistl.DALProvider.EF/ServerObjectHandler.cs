@@ -53,12 +53,12 @@ namespace Kistl.DALProvider.EF
         }
     }
 
-    public class ServerCollectionHandler<A, B, PARENT, CHILD>
+    public class ServerCollectionHandler<TA, TB, TParent, TChild>
         : IServerCollectionHandler
-        where A : BaseServerDataObject_EntityFramework
-        where B : BaseServerDataObject_EntityFramework
-        where PARENT : BaseServerDataObject_EntityFramework
-        where CHILD : BaseServerDataObject_EntityFramework
+        where TA : BaseServerDataObject_EntityFramework
+        where TB : BaseServerDataObject_EntityFramework
+        where TParent : BaseServerDataObject_EntityFramework
+        where TChild : BaseServerDataObject_EntityFramework
     {
 
         public IEnumerable<IRelationCollectionEntry> GetCollectionEntries(
@@ -69,7 +69,7 @@ namespace Kistl.DALProvider.EF
             var rel = ctx.FindPersistenceObject<Relation>(relId);
             var relEnd = rel.GetEndFromRole(endRole);
             var relOtherEnd = rel.GetOtherEnd(relEnd);
-            var parent = ctx.Find(new ImplementationType(typeof(PARENT)).ToInterfaceType(), parentId);
+            var parent = ctx.Find(new ImplementationType(typeof(TParent)).ToInterfaceType(), parentId);
             var ceType = Type.GetType(rel.GetRelationFullName() +
                 Kistl.API.Helper.ImplementationSuffix +
                 ", " + ApplicationContext.Current.ImplementationAssembly);
@@ -80,7 +80,7 @@ namespace Kistl.DALProvider.EF
                 .Invoke(this, new object[] { parent, rel, endRole });
         }
 
-        private IEnumerable<IRelationCollectionEntry> GetCollectionEntriesInternal<IMPL>(PARENT parent, Relation rel, RelationEndRole endRole)
+        private IEnumerable<IRelationCollectionEntry> GetCollectionEntriesInternal<IMPL>(TParent parent, Relation rel, RelationEndRole endRole)
             where IMPL : class, IEntityWithRelationships
         {
             var c = ((IEntityWithRelationships)(parent)).RelationshipManager
