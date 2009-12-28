@@ -82,9 +82,9 @@ namespace Kistl.Client.Presentables
             : base(appCtx, dataCtx)
         {
             if (obj == null)
-                new ArgumentNullException("obj");
+                throw new ArgumentNullException("obj");
             if (bp == null)
-                new ArgumentNullException("bp");
+                throw new ArgumentNullException("bp");
 
             this.Object = obj;
             this.Property = bp;
