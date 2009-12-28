@@ -17,7 +17,7 @@ namespace Kistl.Client.Presentables
         public KistlDebuggerAsModel(IGuiApplicationContext appCtx, IDebuggingKistlContext dataCtx)
             : base(appCtx, dataCtx)
         {
-            KistlContextDebugger.SetDebugger(this);
+            KistlContextDebuggerSingleton.SetDebugger(this);
         }
 
         #region Public Interface

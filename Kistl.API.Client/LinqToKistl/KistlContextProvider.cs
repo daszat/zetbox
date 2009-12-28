@@ -51,7 +51,7 @@ namespace Kistl.API.Client
         internal List<IDataObject> GetListOf(int ID, string propertyName)
         {
             List<IStreamable> auxObjects;
-            List<IDataObject> serviceResult = Proxy.Current.GetListOf(_type, ID, propertyName, out auxObjects).ToList();
+            List<IDataObject> serviceResult = ProxySingleton.Current.GetListOf(_type, ID, propertyName, out auxObjects).ToList();
             List<IDataObject> result = new List<IDataObject>();
 
             foreach (IDataObject obj in serviceResult)
@@ -85,7 +85,7 @@ namespace Kistl.API.Client
 
         private List<IDataObject> CallService(out List<IStreamable> auxObjects)
         {
-            return Proxy.Current.GetList(_type, _maxListCount, _filter, _orderBy, out auxObjects).ToList();
+            return ProxySingleton.Current.GetList(_type, _maxListCount, _filter, _orderBy, out auxObjects).ToList();
         }
 
         private void AddNewLocalObjects(InterfaceType ifType, IList result)

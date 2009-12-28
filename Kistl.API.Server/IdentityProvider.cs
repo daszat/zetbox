@@ -10,7 +10,7 @@ namespace Kistl.API.Server
         Kistl.App.Base.Identity LoadIdentity(IQueryable<Kistl.App.Base.Identity> query, System.Security.Principal.IIdentity identity);
     }
 
-    public static class IdentityProvider
+    public static class IdentityProviderFactory
     {
         private readonly static object _lock = new object();
         private static Type _ProviderType = null;

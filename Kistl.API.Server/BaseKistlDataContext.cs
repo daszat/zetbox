@@ -374,7 +374,7 @@ namespace Kistl.API.Server
             {
                 if (_Identity == null && System.Threading.Thread.CurrentPrincipal != null && System.Threading.Thread.CurrentPrincipal.Identity.IsAuthenticated)
                 {
-                    _Identity = IdentityProvider.GetProvider().LoadIdentity(this.GetQuery<Kistl.App.Base.Identity>(), System.Threading.Thread.CurrentPrincipal.Identity);
+                    _Identity = IdentityProviderFactory.GetProvider().LoadIdentity(this.GetQuery<Kistl.App.Base.Identity>(), System.Threading.Thread.CurrentPrincipal.Identity);
                 }
                 return _Identity;
             }

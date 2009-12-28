@@ -33,7 +33,7 @@ namespace Kistl.API.Client
     /// <summary>
     /// Proxy Singleton
     /// </summary>
-    public static class Proxy
+    public static class ProxySingleton
     {
         /// <summary>
         /// Singleton

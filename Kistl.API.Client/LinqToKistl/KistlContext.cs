@@ -37,7 +37,7 @@ namespace Kistl.API.Client
         public KistlContextImpl()
         {
             CreatedAt = new StackTrace(true);
-            KistlContextDebugger.Created(this);
+            KistlContextDebuggerSingleton.Created(this);
             //_relationshipManager = new RelationshipManager(this);
         }
 
@@ -56,7 +56,7 @@ namespace Kistl.API.Client
                 if (!disposed)
                 {
                     DisposedAt = new StackTrace(true);
-                    KistlContextDebugger.Disposed(this);
+                    KistlContextDebuggerSingleton.Disposed(this);
                 }
                 disposed = true;
             }
@@ -207,7 +207,7 @@ namespace Kistl.API.Client
         public IList<T> FetchRelation<T>(Guid relationId, RelationEndRole role, IDataObject container) where T : class, IRelationCollectionEntry
         {
             List<IStreamable> auxObjects;
-            var serverList = Proxy.Current.FetchRelation<T>(relationId, role, container, out auxObjects);
+            var serverList = ProxySingleton.Current.FetchRelation<T>(relationId, role, container, out auxObjects);
 
             foreach (IPersistenceObject obj in auxObjects)
             {
@@ -359,7 +359,7 @@ namespace Kistl.API.Client
             obj.AttachToContext(this);
 
             // update the debugger last 
-            KistlContextDebugger.Changed(this);
+            KistlContextDebuggerSingleton.Changed(this);
 
             return obj;
         }
@@ -376,7 +376,7 @@ namespace Kistl.API.Client
 
             _objects.Remove(obj);
             obj.DetachFromContext(this);
-            KistlContextDebugger.Changed(this);
+            KistlContextDebuggerSingleton.Changed(this);
         }
 
         /// <summary>
@@ -443,7 +443,7 @@ namespace Kistl.API.Client
             notifySaveList.ForEach(o => o.NotifyPreSave());
 
             // Submit to server
-            var objectsFromServer = Proxy.Current.SetObjects(
+            var objectsFromServer = ProxySingleton.Current.SetObjects(
                 objectsToSubmit
                     .Cast<IPersistenceObject>(),
                 AttachedObjects

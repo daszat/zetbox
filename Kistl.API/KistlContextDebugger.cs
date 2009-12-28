@@ -6,7 +6,7 @@ using System.Text;
 namespace Kistl.API
 {
 
-    public static class KistlContextDebugger
+    public static class KistlContextDebuggerSingleton
     {
         private readonly static object _lock = new object();
 

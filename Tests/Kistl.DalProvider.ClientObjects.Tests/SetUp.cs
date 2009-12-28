@@ -20,7 +20,7 @@ namespace Kistl.DalProvider.ClientObjects.Tests
         public void Init()
         {
             var appCtx = new ClientApiContextMock();
-            Proxy.SetProxy(new ProxyMock());
+            ProxySingleton.SetProxy(new ProxyMock());
         }
 
     }

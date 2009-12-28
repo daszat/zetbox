@@ -16,7 +16,7 @@ namespace Kistl.API.Client.Tests
         public void Init()
         {
             var testCtx = new ClientApplicationContextMock();
-            Proxy.SetProxy(new TestProxy());
+            ProxySingleton.SetProxy(new TestProxy());
         }
     }
 }
