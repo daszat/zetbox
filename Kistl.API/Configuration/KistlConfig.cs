@@ -9,7 +9,9 @@ using System.Xml.Serialization;
 
 namespace Kistl.API.Configuration
 {
-    public class ConfigurationException : Exception
+    [Serializable]
+    public class ConfigurationException
+        : Exception
     {
         public ConfigurationException()
             : base("There was a problem with the configuration")

@@ -132,7 +132,7 @@ namespace Kistl.App.Test
             {
                 // TODO: NotifyPropertyChanged()
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if(value != null && value.Context != this.Context) throw new WrongKistlContextExeption();
+                if(value != null && value.Context != this.Context) throw new WrongKistlContextException();
                 ObjectProp__Implementation__ = (Kistl.App.Projekte.Kunde__Implementation__)value;
             }
         }

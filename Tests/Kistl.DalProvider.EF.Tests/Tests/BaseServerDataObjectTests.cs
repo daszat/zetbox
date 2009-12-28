@@ -181,7 +181,7 @@ namespace Kistl.DalProvider.EF.Tests
         }
 
         [Test]
-        [ExpectedException(typeof(WrongKistlContextExeption))]
+        [ExpectedException(typeof(WrongKistlContextException))]
         public void AttachToContext_Other_fails()
         {
             Assert.That(obj.Context, Is.Null);
@@ -218,7 +218,7 @@ namespace Kistl.DalProvider.EF.Tests
         }
 
         [Test]
-        [ExpectedException(typeof(WrongKistlContextExeption))]
+        [ExpectedException(typeof(WrongKistlContextException))]
         public void DetachFromContext_Other()
         {
             Assert.That(obj.Context, Is.Null);

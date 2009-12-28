@@ -34,7 +34,7 @@ namespace Kistl.DALProvider.EF
 
         public virtual void Add(INTERFACE item)
         {
-            if (ctx != item.Context) throw new WrongKistlContextExeption();
+            if (ctx != item.Context) throw new WrongKistlContextException();
             underlyingCollection.Add((IMPL)item);
         }
 

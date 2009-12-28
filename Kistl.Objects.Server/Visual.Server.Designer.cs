@@ -228,7 +228,7 @@ namespace Kistl.App.GUI
             {
                 // TODO: NotifyPropertyChanged()
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if(value != null && value.Context != this.Context) throw new WrongKistlContextExeption();
+                if(value != null && value.Context != this.Context) throw new WrongKistlContextException();
                 Method__Implementation__ = (Kistl.App.Base.Method__Implementation__)value;
             }
         }
@@ -318,7 +318,7 @@ namespace Kistl.App.GUI
             {
                 // TODO: NotifyPropertyChanged()
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if(value != null && value.Context != this.Context) throw new WrongKistlContextExeption();
+                if(value != null && value.Context != this.Context) throw new WrongKistlContextException();
                 Property__Implementation__ = (Kistl.App.Base.Property__Implementation__)value;
             }
         }

@@ -21,7 +21,7 @@ namespace Kistl.API.AbstractConsumerTests.PersistenceObjects
         }
 
         [Test]
-        [ExpectedException(typeof(WrongKistlContextExeption))]
+        [ExpectedException(typeof(WrongKistlContextException))]
         public void set_1_N_wrong_context()
         {
             var otherCtx = GetContext();
@@ -39,7 +39,7 @@ namespace Kistl.API.AbstractConsumerTests.PersistenceObjects
         }
 
         [Test]
-        [ExpectedException(typeof(WrongKistlContextExeption))]
+        [ExpectedException(typeof(WrongKistlContextException))]
         public void set_N_1_wrong_context()
         {
             var otherCtx = GetContext();
@@ -57,7 +57,7 @@ namespace Kistl.API.AbstractConsumerTests.PersistenceObjects
         }
 
         [Test]
-        [ExpectedException(typeof(WrongKistlContextExeption))]
+        [ExpectedException(typeof(WrongKistlContextException))]
         public void set_N_M_wrong_context()
         {
             var otherCtx = GetContext();
@@ -75,7 +75,7 @@ namespace Kistl.API.AbstractConsumerTests.PersistenceObjects
         }
 
         [Test]
-        [ExpectedException(typeof(WrongKistlContextExeption))]
+        [ExpectedException(typeof(WrongKistlContextException))]
         public void set_1_1_wrong_context()
         {
             var otherCtx = GetContext();

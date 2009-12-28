@@ -7,70 +7,76 @@ using System.Text;
 
 namespace Kistl.API
 {
-    public class KistlContextExeption : Exception
+    [Serializable]
+    public class KistlContextException
+        : Exception
     {
-        public KistlContextExeption()
+        public KistlContextException()
             : base()
         {
         }
 
-        public KistlContextExeption(string message)
+        public KistlContextException(string message)
             : base(message)
         {
         }
 
-        public KistlContextExeption(string message, Exception inner)
+        public KistlContextException(string message, Exception inner)
             : base(message, inner)
         {
         }
 
-        protected KistlContextExeption(SerializationInfo info, StreamingContext context)
+        protected KistlContextException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
         }
     }
 
-    public class KistlContextDisposedExeption : KistlContextExeption
+    [Serializable]
+    public class KistlContextDisposedException
+        : KistlContextException
     {
-        public KistlContextDisposedExeption()
+        public KistlContextDisposedException()
             : base("Context has been disposed. Reusing is not allowed.")
         {
         }
 
-        public KistlContextDisposedExeption(string message)
+        public KistlContextDisposedException(string message)
             : base(message)
         {
         }
 
-        public KistlContextDisposedExeption(string message, Exception inner)
+        public KistlContextDisposedException(string message, Exception inner)
             : base(message, inner)
         {
         }
 
-        protected KistlContextDisposedExeption(SerializationInfo info, StreamingContext context)
+        protected KistlContextDisposedException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
         }
     }
 
-    public class WrongKistlContextExeption : KistlContextExeption
+    [Serializable]
+    public class WrongKistlContextException
+        : KistlContextException
     {
-        public WrongKistlContextExeption()
+        public WrongKistlContextException()
             : base("Operation on a Context, where the IPersistanceObject does not belong to is not allowed")
         {
         }
 
-        public WrongKistlContextExeption(string message)
+        public WrongKistlContextException(string message)
             : base(message)
         {
         }
 
-        public WrongKistlContextExeption(string message, Exception inner)
+        public WrongKistlContextException(string message, Exception inner)
             : base(message, inner)
         {
         }
 
-        protected WrongKistlContextExeption(SerializationInfo info, StreamingContext context)
+        protected WrongKistlContextException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
         }

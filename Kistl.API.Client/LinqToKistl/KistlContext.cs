@@ -81,7 +81,7 @@ namespace Kistl.API.Client
         {
             if (disposed)
             {
-                throw new KistlContextDisposedExeption();
+                throw new KistlContextDisposedException();
             }
         }
 

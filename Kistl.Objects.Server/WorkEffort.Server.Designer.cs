@@ -132,7 +132,7 @@ namespace Kistl.App.TimeRecords
             {
                 // TODO: NotifyPropertyChanged()
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if(value != null && value.Context != this.Context) throw new WrongKistlContextExeption();
+                if(value != null && value.Context != this.Context) throw new WrongKistlContextException();
                 Mitarbeiter__Implementation__ = (Kistl.App.Projekte.Mitarbeiter__Implementation__)value;
             }
         }

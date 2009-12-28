@@ -12,7 +12,9 @@ namespace Kistl.API
     /// <summary>
     /// This exception is thrown when someone tries to modify a read only context.
     /// </summary>
-    public class ReadOnlyContextException : NotSupportedException
+    [Serializable]
+    public class ReadOnlyContextException 
+        : NotSupportedException
     {
         /// <summary>
         /// Initializes a new instance of the ReadOnlyContextException class.
@@ -53,7 +55,9 @@ namespace Kistl.API
     /// <summary>
     /// This exception is thrown when someone tries to modify a read only object.
     /// </summary>
-    public class ReadOnlyObjectException : NotSupportedException
+    [Serializable]
+    public class ReadOnlyObjectException
+        : NotSupportedException
     {
         /// <summary>
         /// Initializes a new instance of the ReadOnlyObjectException class.
@@ -90,6 +94,7 @@ namespace Kistl.API
         {
         }
     }
+
     /// <summary>
     /// A static class to provide access to the FrozenContext singleton.
     /// </summary>

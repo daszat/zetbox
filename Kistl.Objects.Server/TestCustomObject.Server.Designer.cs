@@ -180,7 +180,7 @@ namespace Kistl.App.Test
             {
                 // TODO: NotifyPropertyChanged()
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if(value != null && value.Context != this.Context) throw new WrongKistlContextExeption();
+                if(value != null && value.Context != this.Context) throw new WrongKistlContextException();
                 MubBlah_Nav__Implementation__ = (Kistl.App.Test.Muhblah__Implementation__)value;
             }
         }
@@ -318,7 +318,7 @@ namespace Kistl.App.Test
             {
                 // TODO: NotifyPropertyChanged()
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if(value != null && value.Context != this.Context) throw new WrongKistlContextExeption();
+                if(value != null && value.Context != this.Context) throw new WrongKistlContextException();
                 MuhBlah_One_Nav__Implementation__ = (Kistl.App.Test.Muhblah__Implementation__)value;
             }
         }
