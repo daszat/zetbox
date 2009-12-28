@@ -16,8 +16,8 @@ namespace Kistl.Client.WPF.View.KistlBase
     using System.Windows.Shapes;
 
     using Kistl.API.Client;
-    using Kistl.Client.Presentables;
     using Kistl.App.Base;
+    using Kistl.Client.Presentables;
 
     /// <summary>
     /// Interaction logic for ObjectClassDisplay.xaml
@@ -48,6 +48,12 @@ namespace Kistl.Client.WPF.View.KistlBase
 
             var dataObject = listItem.Content as DataObjectModel;
             if (dataObject == null)
+            {
+                return;
+            }
+
+            // only react to left mouse button double clicks
+            if (e.ChangedButton != MouseButton.Left)
             {
                 return;
             }

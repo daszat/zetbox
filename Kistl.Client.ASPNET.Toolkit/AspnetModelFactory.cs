@@ -5,13 +5,13 @@ namespace Kistl.Client.ASPNET.Toolkit
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-
-    using Kistl.Client.GUI;
-    using Kistl.Client.Presentables;
-    using Kistl.App.Extensions;
     using System.Web;
     using System.Web.UI;
+
+    using Kistl.App.Extensions;
     using Kistl.App.GUI;
+    using Kistl.Client.GUI;
+    using Kistl.Client.Presentables;
 
     [AttributeUsage(AttributeTargets.Class)]
     public class ControlLocation : Attribute
@@ -37,18 +37,18 @@ namespace Kistl.Client.ASPNET.Toolkit
         : ModelFactory
     {
 
-        public AspnetModelFactory(GuiApplicationContext appCtx)
+        public AspnetModelFactory(IGuiApplicationContext appCtx)
             : base(appCtx)
         {
 
         }
 
-        protected override Kistl.App.GUI.Toolkit Toolkit
+        protected override Toolkit Toolkit
         {
-            get { return Kistl.App.GUI.Toolkit.ASPNET; }
+            get { return Toolkit.ASPNET; }
         }
 
-        protected override object CreateView(Kistl.App.GUI.ViewDescriptor vDesc)
+        protected override object CreateView(ViewDescriptor vDesc)
         {
             var type = vDesc.ControlRef.AsType(true);
             var loc = (ControlLocation)type.GetCustomAttributes(typeof(ControlLocation), true).FirstOrDefault();
