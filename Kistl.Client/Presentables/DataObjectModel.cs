@@ -152,29 +152,12 @@ namespace Kistl.Client.Presentables
             }
         }
 
-        private void SetName(string value)
-        {
-            if (value != _toStringCache)
-            {
-                _toStringCache = value;
-                OnPropertyChanged("Name");
-            }
-        }
-
         private string _longNameCache;
         public string LongName
         {
             get
             {
                 return _longNameCache;
-            }
-            private set
-            {
-                if (value != _longNameCache)
-                {
-                    _longNameCache = value;
-                    OnPropertyChanged("LongName");
-                }
             }
         }
 
