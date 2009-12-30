@@ -113,7 +113,7 @@
 			// TODO: check whether __oldValue is loaded before potentially triggering a DB Call
 %>
 					// remove from old list
-					(__oldValue.<%= otherName %> as OneNRelationCollection<<%= ownInterface %>>).RemoveWithoutClearParent(this);
+					(__oldValue.<%= otherName %> as OneNRelationList<<%= ownInterface %>>).RemoveWithoutClearParent(this);
 <%
         }
         else
@@ -133,7 +133,7 @@
         {
 %>
 					// add to new list
-					(__newValue.<%= otherName %> as OneNRelationCollection<<%= ownInterface %>>).AddWithoutSetParent(this);
+					(__newValue.<%= otherName %> as OneNRelationList<<%= ownInterface %>>).AddWithoutSetParent(this);
 <%
         }
         else

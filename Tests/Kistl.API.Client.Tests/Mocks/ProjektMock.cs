@@ -25,7 +25,7 @@ namespace Kistl.App.Projekte
             {
                 if (_AuftraegeWrapper == null)
                 {
-                    _AuftraegeWrapper = new OneNRelationCollection<Kistl.App.Projekte.Auftrag>(
+                    _AuftraegeWrapper = new OneNRelationList<Kistl.App.Projekte.Auftrag>(
                         "Projekt",
                         this,
                         new List<Kistl.App.Projekte.Auftrag>());
@@ -34,7 +34,7 @@ namespace Kistl.App.Projekte
             }
         }
 
-        private OneNRelationCollection<Kistl.App.Projekte.Auftrag> _AuftraegeWrapper;
+        private OneNRelationList<Kistl.App.Projekte.Auftrag> _AuftraegeWrapper;
 
         /// <summary>
         /// 
@@ -147,7 +147,7 @@ namespace Kistl.App.Projekte
                     else
                         serverList = new List<Kistl.App.Projekte.Task>();
 
-                    _TasksWrapper = new OneNRelationCollection<Kistl.App.Projekte.Task>(
+                    _TasksWrapper = new OneNRelationList<Kistl.App.Projekte.Task>(
                         "Projekt",
                         this,
                         serverList);
@@ -156,7 +156,7 @@ namespace Kistl.App.Projekte
             }
         }
 
-        private OneNRelationCollection<Kistl.App.Projekte.Task> _TasksWrapper;
+        private OneNRelationList<Kistl.App.Projekte.Task> _TasksWrapper;
 
         #endregion
 

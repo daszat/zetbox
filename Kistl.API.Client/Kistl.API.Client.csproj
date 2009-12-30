@@ -68,7 +68,7 @@
     <Compile Include="LinqToKistl\ConstantEvaluator.cs" />
     <Compile Include="LinqToKistl\QueryTranslator.cs" />
     <Compile Include="LinqToKistl\RelationshipFilterCollection.cs" />
-    <Compile Include="OneNRelationCollection.cs" />
+    <Compile Include="OneNRelationList.cs" />
     <Compile Include="BaseClientDataObject.cs" />
     <Compile Include="CacheController.cs" />
     <Compile Include="ClientApiContext.cs" />

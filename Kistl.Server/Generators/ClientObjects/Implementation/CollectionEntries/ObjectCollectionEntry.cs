@@ -12,7 +12,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.CollectionEntries
 
     /// <summary>
     /// Client-side template for Object-Object CollectionEntries. Since the 
-    /// client uses lazily loaded OneNRelationCollection, this Template 
+    /// client uses lazily loaded OneNRelationList, this Template 
     /// generates no class definition.
     /// </summary>
     public partial class ObjectCollectionEntry

@@ -9,7 +9,7 @@ using NUnit.Framework;
 namespace Kistl.API.Client.Tests
 {
     [TestFixture]
-    public class OneNRelationCollectionTests
+    public class OneNRelationListTests
     {
 
         public class TestObject : BaseClientDataObject, IDataObject
@@ -52,13 +52,13 @@ namespace Kistl.API.Client.Tests
             //    }
             //}
 
-            public OneNRelationCollection<TestObject> Children { get; private set; }
+            public OneNRelationList<TestObject> Children { get; private set; }
 
             public TestObject()
             {
                 this.ID = ++MaxId;
                 TestObject.Instances[this.ID] = this;
-                Children = new OneNRelationCollection<TestObject>("Parent", this);
+                Children = new OneNRelationList<TestObject>("Parent", this);
             }
 
             public override InterfaceType GetInterfaceType()

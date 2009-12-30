@@ -10,14 +10,13 @@ namespace Kistl.API.Client
 {
 
     // TODO: use delegate instead of SetPropertyValue. May be up to 300x faster.
-    // TODO: rename to ...List
     // TODO: take care of SELECT N+1 problem when modifying collection entries
 
     /// <summary>
     /// 
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class OneNRelationCollection<T> : IList<T>, INotifyCollectionChanged
+    public class OneNRelationList<T> : IList<T>, INotifyCollectionChanged
         where T : class, IDataObject
     {
         private string _propertyName;
@@ -25,20 +24,20 @@ namespace Kistl.API.Client
         private IDataObject _parent;
         List<T> collection;
 
-        public OneNRelationCollection(string propertyName, IDataObject parent)
+        public OneNRelationList(string propertyName, IDataObject parent)
             : this(propertyName, propertyName + Helper.PositionSuffix, parent)
         {
 
         }
 
-        public OneNRelationCollection(string propertyName, IDataObject parent, IEnumerable<T> collection)
+        public OneNRelationList(string propertyName, IDataObject parent, IEnumerable<T> collection)
             : this(propertyName, propertyName + Helper.PositionSuffix, parent, collection)
         {
 
         }
 
         ///// <param name="fkProperty">the name of the fk_Property which does notification, but not collection fixing</param>
-        public OneNRelationCollection(string fkProperty, string posProperty, IDataObject parent)
+        public OneNRelationList(string fkProperty, string posProperty, IDataObject parent)
         {
             _propertyName = fkProperty;
             _posProperty = posProperty;
@@ -47,7 +46,7 @@ namespace Kistl.API.Client
         }
 
         ///// <param name="fkProperty">the name of the fk_Property which does notification, but not collection fixing</param>
-        public OneNRelationCollection(string fkProperty, string posProperty, IDataObject parent, IEnumerable<T> collection)
+        public OneNRelationList(string fkProperty, string posProperty, IDataObject parent, IEnumerable<T> collection)
             : this(fkProperty, posProperty, parent)
         {
             this.collection = new List<T>(collection);
@@ -135,7 +134,7 @@ namespace Kistl.API.Client
             }
         }
 
-        public void ApplyChanges(OneNRelationCollection<T> list)
+        public void ApplyChanges(OneNRelationList<T> list)
         {
             if (list == null) return;
             list.collection = new List<T>(this.collection);
