@@ -1081,6 +1081,7 @@
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="RequestedWidth" Type="float" Nullable="true" />
   </EntityType>
 	
   <EntityType Name="ControlKindClass">

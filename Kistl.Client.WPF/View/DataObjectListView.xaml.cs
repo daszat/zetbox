@@ -84,14 +84,17 @@ namespace Kistl.Client.WPF.View
             {
                 view.Columns.Add(new GridViewColumn() { CellTemplate = (DataTemplate)FindResource("iconCellTemplate") });
             }
+            
             if (cfg.ShowId)
             {
                 view.Columns.Add(new GridViewColumn() { CellTemplate = (DataTemplate)FindResource("idCellTemplate"), Header = "ID" });
             }
+            
             if (cfg.ShowName)
             {
                 view.Columns.Add(new GridViewColumn() { CellTemplate = (DataTemplate)FindResource("nameCellTemplate"), Header = "Name" });
             }
+            
             foreach (var desc in cfg.Columns)
             {
                 // TODO: use default controls after moving labeling to infrastructure
@@ -104,8 +107,10 @@ namespace Kistl.Client.WPF.View
                 cpFef.SetValue(ContentPresenter.ContentTemplateSelectorProperty, FindResource("defaultTemplateSelector"));
                 result.VisualTree = cpFef;
                 col.CellTemplate = result;
+                col.Width = desc.ControlKind.RequestedWidth ?? Double.NaN;
                 view.Columns.Add(col);
             }
+
         }
 
         protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)

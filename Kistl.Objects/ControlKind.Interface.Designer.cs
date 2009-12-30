@@ -13,5 +13,12 @@ namespace Kistl.App.GUI
     public interface ControlKind : IDataObject, Kistl.App.Base.IExportable 
     {
 
+        /// <summary>
+        /// The requested width for displaying this control. May be NULL to request auto-sizing.
+        /// </summary>
+		double? RequestedWidth {
+			get;
+			set;
+		}
     }
 }

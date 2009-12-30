@@ -642,6 +642,7 @@
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
     <Property Name="ExportGuid" Type="Guid" Nullable="false" />
+    <Property Name="RequestedWidth" Type="Double" Nullable="true" />
   </EntityType>
   <EntityType Name="CurrentSchema">
     <Key>

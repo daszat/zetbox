@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2009-12-15T12:33:08.923Z" xmlns="http://dasz.at/Kistl">
+<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2009-12-30T10:46:58.277Z" xmlns="http://dasz.at/Kistl">
   <KistlBase:Module ExportGuid="ef6d5bd8-5826-4ce6-a9ca-c8438ddde773">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.32Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.32Z</KistlBase:CreatedOn>
@@ -9008,6 +9008,18 @@
     <KistlBase:A>ffda4604-1536-43b6-b951-f8753d5092ca</KistlBase:A>
     <KistlBase:B>4ae6616a-eca3-47a5-b502-8e3c3913c2f0</KistlBase:B>
   </KistlBase:ObjectClass_implements_Interface_RelationEntry>
+  <KistlBase:DoubleProperty ExportGuid="2a0d22cd-5538-4a2c-bfb9-287652637708">
+    <KistlBase:CategoryTags>GUI</KistlBase:CategoryTags>
+    <KistlBase:ChangedOn>2009-12-30T10:46:58.277Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2009-12-30T10:45:11.61Z</KistlBase:CreatedOn>
+    <KistlBase:Description>The requested width for displaying this control. May be NULL to request auto-sizing.</KistlBase:Description>
+    <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
+    <KistlBase:ObjectClass>a9166f1e-9233-4d2d-8eb6-be71d724ea14</KistlBase:ObjectClass>
+    <KistlBase:PropertyName>RequestedWidth</KistlBase:PropertyName>
+    <GUI:ValueModelDescriptor>3a3d0c1c-679e-4d4d-adeb-3ab260079ccb</GUI:ValueModelDescriptor>
+    <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
+    <KistlBase:IsList>false</KistlBase:IsList>
+  </KistlBase:DoubleProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="883a2f71-78ae-4978-8d76-904a2237cc25">
     <KistlBase:CategoryTags>DataModel</KistlBase:CategoryTags>
     <KistlBase:ChangedOn>2009-12-14T17:08:05.4Z</KistlBase:ChangedOn>
@@ -13180,7 +13192,9 @@
   <GUI:LabelKind ExportGuid="a3f09ef3-2fac-4d7e-aea8-cbf0eab4de70" />
   <GUI:LauncherKind ExportGuid="90d5ff7f-0c82-4278-bb8d-49c240f6bc2c" />
   <GUI:ObjectListKind ExportGuid="9731f312-8ce4-4c2d-8d95-1923256dc9b8" />
-  <GUI:ObjectRefGridCellKind ExportGuid="d55c9558-4ced-47b0-8eda-81553340fb5b" />
+  <GUI:ObjectRefGridCellKind ExportGuid="d55c9558-4ced-47b0-8eda-81553340fb5b">
+    <GUI:RequestedWidth>200</GUI:RequestedWidth>
+  </GUI:ObjectRefGridCellKind>
   <GUI:ObjectRefKind ExportGuid="b86945ed-9edc-42ca-9ca5-8124fbf47b5c" />
   <GUI:PropertyGroupKind ExportGuid="d9fb7cec-b71f-48f1-a591-216de253c7d1" />
   <GUI:RelationEditorKind ExportGuid="f7cf3060-5fa5-4077-93e9-5fc681f875fe" />
