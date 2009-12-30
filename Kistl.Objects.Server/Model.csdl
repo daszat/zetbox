@@ -267,9 +267,9 @@
       <End Role="List" EntitySet="ControlKind" />
       <End Role="ItemKind" EntitySet="DataType" />
     </AssociationSet>
-    <AssociationSet Name="FK_Method_has_MethodInvokations" Association="Model.FK_Method_has_MethodInvokations" >
+    <AssociationSet Name="FK_Method_has_MethodInvocations" Association="Model.FK_Method_has_MethodInvocations" >
       <End Role="Method" EntitySet="Method" />
-      <End Role="MethodInvokations" EntitySet="MethodInvocation" />
+      <End Role="MethodInvocations" EntitySet="MethodInvocation" />
     </AssociationSet>
     <AssociationSet Name="FK_Method_has_Module" Association="Model.FK_Method_has_Module" >
       <End Role="Method" EntitySet="Method" />
@@ -804,10 +804,10 @@
     <Property Name="Description" Type="String" Nullable="true" MaxLength="200" />
     <Property Name="ExportGuid" Type="Guid" Nullable="false" />
     <Property Name="IsDisplayable" Type="Boolean" Nullable="false" />
-    <NavigationProperty Name="MethodInvokations__Implementation__"
-                        Relationship="Model.FK_Method_has_MethodInvokations"
+    <NavigationProperty Name="MethodInvocations__Implementation__"
+                        Relationship="Model.FK_Method_has_MethodInvocations"
                         FromRole="Method"
-                        ToRole="MethodInvokations" />
+                        ToRole="MethodInvocations" />
     <Property Name="MethodName" Type="String" Nullable="false" MaxLength="100" />
     <NavigationProperty Name="Module__Implementation__"
                         Relationship="Model.FK_Method_has_Module"
@@ -848,8 +848,8 @@
                         ToRole="InvokeOnObjectClass" />
     <Property Name="MemberName" Type="String" Nullable="false" MaxLength="200" />
     <NavigationProperty Name="Method__Implementation__"
-                        Relationship="Model.FK_Method_has_MethodInvokations"
-                        FromRole="MethodInvokations"
+                        Relationship="Model.FK_Method_has_MethodInvocations"
+                        FromRole="MethodInvocations"
                         ToRole="Method" />
     <NavigationProperty Name="Module__Implementation__"
                         Relationship="Model.FK_MethodInvocation_has_Module"
@@ -2211,11 +2211,11 @@
          Type="Model.ControlKindClass" 
          Multiplicity="0..1" />
   </Association>
-  <Association Name="FK_Method_has_MethodInvokations" >
+  <Association Name="FK_Method_has_MethodInvocations" >
     <End Role="Method"
          Type="Model.Method" 
          Multiplicity="0..1" />
-    <End Role="MethodInvokations"
+    <End Role="MethodInvocations"
          Type="Model.MethodInvocation" 
          Multiplicity="*" />
   </Association>

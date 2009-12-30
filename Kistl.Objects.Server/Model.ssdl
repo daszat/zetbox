@@ -688,9 +688,9 @@
       <End Role="List" EntitySet="StringListKind" />
       <End Role="ItemKind" EntitySet="ControlKindClass" />
     </AssociationSet>
-    <AssociationSet Name="FK_Method_has_MethodInvokations" Association="Model.Store.FK_Method_has_MethodInvokations" >
+    <AssociationSet Name="FK_Method_has_MethodInvocations" Association="Model.Store.FK_Method_has_MethodInvocations" >
       <End Role="Method" EntitySet="Method" />
-      <End Role="MethodInvokations" EntitySet="MethodInvocation" />
+      <End Role="MethodInvocations" EntitySet="MethodInvocation" />
     </AssociationSet>
     <AssociationSet Name="FK_Method_has_Module" Association="Model.Store.FK_Method_has_Module" >
       <End Role="Method" EntitySet="Method" />
@@ -2674,15 +2674,15 @@
   </Association>
 
 
-  <Association Name="FK_Method_has_MethodInvokations">
+  <Association Name="FK_Method_has_MethodInvocations">
     <End Role="Method" Type="Model.Store.Method" Multiplicity="0..1" />
     <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
-    <End Role="MethodInvokations" Type="Model.Store.MethodInvocation" Multiplicity="*" />
+    <End Role="MethodInvocations" Type="Model.Store.MethodInvocation" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Method">
         <PropertyRef Name="ID" />
       </Principal>
-      <Dependent Role="MethodInvokations">
+      <Dependent Role="MethodInvocations">
         <PropertyRef Name="fk_Method" />
       </Dependent>
     </ReferentialConstraint>

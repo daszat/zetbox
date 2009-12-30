@@ -87,7 +87,7 @@ namespace Kistl.App.Base
         /// </summary>
         /// <param name="obj"></param>
         /// <param name="e"></param>
-        public static void OnToString_MethodInvokation(MethodInvocation obj, MethodReturnEventArgs<string> e)
+        public static void OnToString_MethodInvocation(MethodInvocation obj, MethodReturnEventArgs<string> e)
         {
             // TODO: IsValid?
             if (Helper.IsPersistedObject(obj))

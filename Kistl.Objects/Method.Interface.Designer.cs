@@ -31,7 +31,7 @@ namespace Kistl.App.Base
         /// Methodenaufrufe implementiert in dieser Objekt Klasse
         /// </summary>
 
-        ICollection<Kistl.App.Base.MethodInvocation> MethodInvokations { get; }
+        ICollection<Kistl.App.Base.MethodInvocation> MethodInvocations { get; }
         /// <summary>
         /// 
         /// </summary>

@@ -1604,18 +1604,18 @@
       <Condition ColumnName="fk_ItemKind" IsNull="false"/>
     </AssociationSetMapping>
     <!--
-    Relation: FK_Method_has_MethodInvokations
+    Relation: FK_Method_has_MethodInvocations
     A: One Method as Method
-    B: ZeroOrMore MethodInvocation as MethodInvokations
+    B: ZeroOrMore MethodInvocation as MethodInvocations
     Preferred Storage: MergeIntoB
     -->
-    <AssociationSetMapping Name="FK_Method_has_MethodInvokations"
-                           TypeName="Model.FK_Method_has_MethodInvokations"
+    <AssociationSetMapping Name="FK_Method_has_MethodInvocations"
+                           TypeName="Model.FK_Method_has_MethodInvocations"
                            StoreEntitySet="MethodInvocation" >
       <EndProperty Name="Method">
         <ScalarProperty Name="ID" ColumnName="fk_Method"/>
       </EndProperty>
-      <EndProperty Name="MethodInvokations">
+      <EndProperty Name="MethodInvocations">
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="fk_Method" IsNull="false"/>

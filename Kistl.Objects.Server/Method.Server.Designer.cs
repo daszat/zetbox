@@ -507,9 +507,9 @@ namespace Kistl.App.Base
         /// Methodenaufrufe implementiert in dieser Objekt Klasse
         /// </summary>
     /*
-    Relation: FK_Method_has_MethodInvokations
+    Relation: FK_Method_has_MethodInvocations
     A: One Method as Method
-    B: ZeroOrMore MethodInvocation as MethodInvokations
+    B: ZeroOrMore MethodInvocation as MethodInvocations
     Preferred Storage: MergeIntoB
     */
         // object list property
@@ -517,28 +517,28 @@ namespace Kistl.App.Base
 	    // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public ICollection<Kistl.App.Base.MethodInvocation> MethodInvokations
+        public ICollection<Kistl.App.Base.MethodInvocation> MethodInvocations
         {
             get
             {
-                if (_MethodInvokationsWrapper == null)
+                if (_MethodInvocationsWrapper == null)
                 {
-                    _MethodInvokationsWrapper = new EntityCollectionWrapper<Kistl.App.Base.MethodInvocation, Kistl.App.Base.MethodInvocation__Implementation__>(
-                            this.Context, MethodInvokations__Implementation__);
+                    _MethodInvocationsWrapper = new EntityCollectionWrapper<Kistl.App.Base.MethodInvocation, Kistl.App.Base.MethodInvocation__Implementation__>(
+                            this.Context, MethodInvocations__Implementation__);
                 }
-                return _MethodInvokationsWrapper;
+                return _MethodInvocationsWrapper;
             }
         }
         
-        [EdmRelationshipNavigationProperty("Model", "FK_Method_has_MethodInvokations", "MethodInvokations")]
-        public EntityCollection<Kistl.App.Base.MethodInvocation__Implementation__> MethodInvokations__Implementation__
+        [EdmRelationshipNavigationProperty("Model", "FK_Method_has_MethodInvocations", "MethodInvocations")]
+        public EntityCollection<Kistl.App.Base.MethodInvocation__Implementation__> MethodInvocations__Implementation__
         {
             get
             {
                 var c = ((IEntityWithRelationships)(this)).RelationshipManager
                     .GetRelatedCollection<Kistl.App.Base.MethodInvocation__Implementation__>(
-                        "Model.FK_Method_has_MethodInvokations",
-                        "MethodInvokations");
+                        "Model.FK_Method_has_MethodInvocations",
+                        "MethodInvocations");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)
                 {
@@ -547,7 +547,7 @@ namespace Kistl.App.Base
                 return c;
             }
         }
-        private EntityCollectionWrapper<Kistl.App.Base.MethodInvocation, Kistl.App.Base.MethodInvocation__Implementation__> _MethodInvokationsWrapper;
+        private EntityCollectionWrapper<Kistl.App.Base.MethodInvocation, Kistl.App.Base.MethodInvocation__Implementation__> _MethodInvocationsWrapper;
 
 
 
@@ -1015,11 +1015,11 @@ namespace Kistl.App.Base
 					
 					return String.Join("; ", errors);
 				}
-				case "MethodInvokations":
+				case "MethodInvocations":
 				{
 					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("dc2bd380-6e63-4a44-bcc3-192780f80606")).Constraints
-						.Where(c => !c.IsValid(this, this.MethodInvokations))
-						.Select(c => c.GetErrorText(this, this.MethodInvokations))
+						.Where(c => !c.IsValid(this, this.MethodInvocations))
+						.Select(c => c.GetErrorText(this, this.MethodInvocations))
 						.ToArray();
 					
 					return String.Join("; ", errors);

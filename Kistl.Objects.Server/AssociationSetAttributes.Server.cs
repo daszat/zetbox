@@ -506,17 +506,17 @@ using Kistl.DALProvider.EF;
 
 
 	/*
-    Relation: FK_Method_has_MethodInvokations
+    Relation: FK_Method_has_MethodInvocations
     A: One Method as Method
-    B: ZeroOrMore MethodInvocation as MethodInvokations
+    B: ZeroOrMore MethodInvocation as MethodInvocations
     Preferred Storage: MergeIntoB
 	*/
 
 // basic association
 [assembly: EdmRelationship(
-    "Model", "FK_Method_has_MethodInvokations",
+    "Model", "FK_Method_has_MethodInvocations",
     "Method", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Method__Implementation__),
-    "MethodInvokations", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.MethodInvocation__Implementation__)
+    "MethodInvocations", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.MethodInvocation__Implementation__)
     )]
 
 

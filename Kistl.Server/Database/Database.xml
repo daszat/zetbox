@@ -1872,7 +1872,7 @@
     <KistlBase:Description>Methodenaufrufe implementiert in dieser Objekt Klasse</KistlBase:Description>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
     <KistlBase:ObjectClass>ef79c0b9-55e0-45ad-8233-1ff8f852661f</KistlBase:ObjectClass>
-    <KistlBase:PropertyName>MethodInvokations</KistlBase:PropertyName>
+    <KistlBase:PropertyName>MethodInvocations</KistlBase:PropertyName>
     <GUI:ValueModelDescriptor>9fce01fe-fd6d-4e21-8b55-08d5e38aea36</GUI:ValueModelDescriptor>
     <KistlBase:EagerLoading>false</KistlBase:EagerLoading>
     <KistlBase:RelationEnd>5da26df1-7cd6-4a2f-bbed-a0bef3d9b399</KistlBase:RelationEnd>
@@ -4292,7 +4292,7 @@
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>3</KistlBase:Multiplicity>
     <KistlBase:Navigator>b9db3b3b-d00d-479f-843f-6d41704eb079</KistlBase:Navigator>
-    <KistlBase:RoleName>MethodInvokations</KistlBase:RoleName>
+    <KistlBase:RoleName>MethodInvocations</KistlBase:RoleName>
     <KistlBase:Type>f6e7bb30-3adf-4d49-a80c-6ea7b589afa7</KistlBase:Type>
   </KistlBase:RelationEnd>
   <KistlBase:RelationEnd ExportGuid="ecad7625-4c0a-49de-a284-0e4161d6bf58">
@@ -6629,7 +6629,7 @@
     <KistlBase:CreatedOn>2009-12-14T17:08:05.373Z</KistlBase:CreatedOn>
     <KistlBase:Implementor>fcf1cca7-0a27-49d7-b3c2-89e32352aa69</KistlBase:Implementor>
     <KistlBase:InvokeOnObjectClass>f6e7bb30-3adf-4d49-a80c-6ea7b589afa7</KistlBase:InvokeOnObjectClass>
-    <KistlBase:MemberName>OnToString_MethodInvokation</KistlBase:MemberName>
+    <KistlBase:MemberName>OnToString_MethodInvocation</KistlBase:MemberName>
     <KistlBase:Method>8aaf37a7-14b3-4118-b17d-24595a0bc008</KistlBase:Method>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
   </KistlBase:MethodInvocation>
