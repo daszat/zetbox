@@ -65,39 +65,28 @@ namespace Kistl.App.Base
 
         public static void OnGetPropertyTypeString_ObjectReferenceProperty(ObjectReferenceProperty obj, MethodReturnEventArgs<string> e)
         {
-            // TODO: IsValid?
-            if (Helper.IsPersistedObject(obj))
+            ObjectClass objClass = obj.GetReferencedObjectClass();
+            if (objClass == null)
             {
-                ObjectClass objClass = obj.GetReferencedObjectClass();
-                if (objClass == null)
-                {
-                    e.Result = "(null)";
-                }
-                else
-                {
-                    e.Result = objClass.Module.Namespace + "." + objClass.ClassName;
-                }
+                e.Result = "a class";
             }
             else
             {
-                e.Result = String.Format("ObjectReferenceProperty {0}: {1}", obj.ID, obj.PropertyName);
+                e.Result = objClass.Module.Namespace + "." + objClass.ClassName;
             }
-
         }
 
         public static void OnGetPropertyTypeString_StructProperty(StructProperty obj, MethodReturnEventArgs<string> e)
         {
-            // TODO: IsValid?
-            if (Helper.IsPersistedObject(obj))
+            DataType objClass = obj.StructDefinition;
+            if (objClass != null && objClass.Module != null)
             {
-                DataType objClass = obj.StructDefinition;
                 e.Result = objClass.Module.Namespace + "." + objClass.ClassName;
             }
             else
             {
-                e.Result = String.Format("StructProperty {0}: {1}", obj.ID, obj.PropertyName);
+                e.Result = "a struct";
             }
-
         }
 
         public static void OnGetPropertyTypeString_StringProperty(StringProperty obj, MethodReturnEventArgs<string> e)
@@ -139,7 +128,7 @@ namespace Kistl.App.Base
             }
             else
             {
-                e.Result = String.Format("EnumerationProperty {0}: {1}", obj.ID, obj.PropertyName);
+                e.Result = String.Format("{0}: {1}", obj.ID, obj.PropertyName);
             }
         }
 
@@ -364,7 +353,7 @@ namespace Kistl.App.Base
                             rel.A.RoleName = string.IsNullOrEmpty(ph.ImplementorRoleName) ? objClass.ClassName : ph.ImplementorRoleName;
 
                             rel.B.Type = ph.ReferencedObjectClass;
-                            rel.B.Multiplicity = ph.IsList ?  Multiplicity.ZeroOrMore : Multiplicity.ZeroOrOne;
+                            rel.B.Multiplicity = ph.IsList ? Multiplicity.ZeroOrMore : Multiplicity.ZeroOrOne;
                             rel.B.RoleName = string.IsNullOrEmpty(ph.ItemRoleName) ? ph.ReferencedObjectClass.ClassName : ph.ItemRoleName;
                         }
                     }

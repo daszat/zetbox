@@ -53,14 +53,26 @@ namespace Kistl.App.Extensions
 
         public static Relation GetParent(this RelationEnd relEnd)
         {
+            // no relEnd, no parent.
+            if (relEnd == null)
+            {
+                return null;
+            }
+
             return relEnd.AParent ?? relEnd.BParent;
         }
 
         public static ObjectClass GetReferencedObjectClass(this ObjectReferenceProperty prop)
         {
             var rel = prop.RelationEnd.GetParent();
+            if (rel == null) { return null; }
+
             var relEnd = prop.RelationEnd;
+            if (relEnd == null) { return null; }
+
             var otherEnd = rel.GetOtherEnd(relEnd);
+            if (otherEnd == null) { return null; }
+
             return otherEnd.Type;
         }
 
