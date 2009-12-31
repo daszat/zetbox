@@ -192,6 +192,8 @@ namespace Kistl.API.Utils
         /// <inheritdoc/>
         public void CopyTo(KeyValuePair<TKey, TValue>[] array, int arrayIndex)
         {
+            if (array == null) { throw new ArgumentNullException("array"); }
+
             for (int i = 0; i < _list.Count; i++)
             {
                 array[i + arrayIndex] = new KeyValuePair<TKey, TValue>(_key(_list[i]), _list[i]);

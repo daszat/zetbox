@@ -11,17 +11,23 @@ namespace Kistl.API
         #region bool
         public static void ToStream(bool val, XmlWriter xml, string name, string ns)
         {
+            if (xml == null) { throw new ArgumentNullException("xml"); }
+
             xml.WriteElementString(name, ns, XmlConvert.ToString(val));
         }
 
         public static void ToStream(bool? val, XmlWriter xml, string name, string ns)
         {
             if (!val.HasValue) return;
+            if (xml == null) { throw new ArgumentNullException("xml"); }
+
             xml.WriteElementString(name, ns, XmlConvert.ToString(val.Value));
         }
 
         public static void FromStream(ref bool val, XmlReader xml, string name, string ns)
         {
+            if (xml == null) { throw new ArgumentNullException("xml"); }
+
             if (xml.LocalName == name && xml.NamespaceURI == ns)
             {
                 val = xml.ReadElementContentAsBoolean();
@@ -29,6 +35,8 @@ namespace Kistl.API
         }
         public static void FromStream(ref bool? val, XmlReader xml, string name, string ns)
         {
+            if (xml == null) { throw new ArgumentNullException("xml"); }
+
             if (xml.LocalName == name && xml.NamespaceURI == ns)
             {
                 val = xml.ReadElementContentAsBoolean();
@@ -39,16 +47,22 @@ namespace Kistl.API
         #region DateTime
         public static void ToStream(DateTime val, XmlWriter xml, string name, string ns)
         {
+            if (xml == null) { throw new ArgumentNullException("xml"); }
+
             xml.WriteElementString(name, ns, XmlConvert.ToString(val, XmlDateTimeSerializationMode.Utc));
         }
         public static void ToStream(DateTime? val, XmlWriter xml, string name, string ns)
         {
             if (!val.HasValue) return;
+            if (xml == null) { throw new ArgumentNullException("xml"); }
+
             xml.WriteElementString(name, ns, XmlConvert.ToString(val.Value, XmlDateTimeSerializationMode.Utc));
         }
 
         public static void FromStream(ref DateTime val, XmlReader xml, string name, string ns)
         {
+            if (xml == null) { throw new ArgumentNullException("xml"); }
+
             if (xml.LocalName == name && xml.NamespaceURI == ns)
             {
                 val = xml.ReadElementContentAsDateTime();
@@ -56,6 +70,8 @@ namespace Kistl.API
         }
         public static void FromStream(ref DateTime? val, XmlReader xml, string name, string ns)
         {
+            if (xml == null) { throw new ArgumentNullException("xml"); }
+
             if (xml.LocalName == name && xml.NamespaceURI == ns)
             {
                 val = xml.ReadElementContentAsDateTime();
@@ -66,16 +82,22 @@ namespace Kistl.API
         #region Guid
         public static void ToStream(Guid val, XmlWriter xml, string name, string ns)
         {
+            if (xml == null) { throw new ArgumentNullException("xml"); }
+
             xml.WriteElementString(name, ns, XmlConvert.ToString(val));
         }
         public static void ToStream(Guid? val, XmlWriter xml, string name, string ns)
         {
             if (!val.HasValue) return;
+            if (xml == null) { throw new ArgumentNullException("xml"); }
+
             xml.WriteElementString(name, ns, XmlConvert.ToString(val.Value));
         }
 
         public static void FromStream(ref Guid val, XmlReader xml, string name, string ns)
         {
+            if (xml == null) { throw new ArgumentNullException("xml"); }
+
             if (xml.LocalName == name && xml.NamespaceURI == ns)
             {
                 val = new Guid(xml.ReadElementContentAsString());
@@ -83,6 +105,8 @@ namespace Kistl.API
         }
         public static void FromStream(ref Guid? val, XmlReader xml, string name, string ns)
         {
+            if (xml == null) { throw new ArgumentNullException("xml"); }
+
             if (xml.LocalName == name && xml.NamespaceURI == ns)
             {
                 val = new Guid(xml.ReadElementContentAsString());
@@ -93,16 +117,22 @@ namespace Kistl.API
         #region double
         public static void ToStream(double val, XmlWriter xml, string name, string ns)
         {
+            if (xml == null) { throw new ArgumentNullException("xml"); }
+
             xml.WriteElementString(name, ns, XmlConvert.ToString(val));
         }
         public static void ToStream(double? val, XmlWriter xml, string name, string ns)
         {
+            if (xml == null) { throw new ArgumentNullException("xml"); }
+
             if (!val.HasValue) return;
             xml.WriteElementString(name, ns, XmlConvert.ToString(val.Value));
         }
 
         public static void FromStream(ref double val, XmlReader xml, string name, string ns)
         {
+            if (xml == null) { throw new ArgumentNullException("xml"); }
+
             if (xml.LocalName == name && xml.NamespaceURI == ns)
             {
                 val = xml.ReadElementContentAsDouble();
@@ -110,6 +140,8 @@ namespace Kistl.API
         }
         public static void FromStream(ref double? val, XmlReader xml, string name, string ns)
         {
+            if (xml == null) { throw new ArgumentNullException("xml"); }
+
             if (xml.LocalName == name && xml.NamespaceURI == ns)
             {
                 val = xml.ReadElementContentAsDouble();
@@ -120,16 +152,22 @@ namespace Kistl.API
         #region float
         public static void ToStream(float val, XmlWriter xml, string name, string ns)
         {
+            if (xml == null) { throw new ArgumentNullException("xml"); }
+
             xml.WriteElementString(name, ns, XmlConvert.ToString(val));
         }
         public static void ToStream(float? val, XmlWriter xml, string name, string ns)
         {
             if (!val.HasValue) return;
+            if (xml == null) { throw new ArgumentNullException("xml"); }
+
             xml.WriteElementString(name, ns, XmlConvert.ToString(val.Value));
         }
 
         public static void FromStream(ref float val, XmlReader xml, string name, string ns)
         {
+            if (xml == null) { throw new ArgumentNullException("xml"); }
+
             if (xml.LocalName == name && xml.NamespaceURI == ns)
             {
                 val = xml.ReadElementContentAsFloat();
@@ -137,6 +175,8 @@ namespace Kistl.API
         }
         public static void FromStream(ref float? val, XmlReader xml, string name, string ns)
         {
+            if (xml == null) { throw new ArgumentNullException("xml"); }
+
             if (xml.LocalName == name && xml.NamespaceURI == ns)
             {
                 val = xml.ReadElementContentAsFloat();
@@ -147,16 +187,22 @@ namespace Kistl.API
         #region int
         public static void ToStream(int val, XmlWriter xml, string name, string ns)
         {
+            if (xml == null) { throw new ArgumentNullException("xml"); }
+
             xml.WriteElementString(name, ns, XmlConvert.ToString(val));
         }
         public static void ToStream(int? val, XmlWriter xml, string name, string ns)
         {
             if (!val.HasValue) return;
+            if (xml == null) { throw new ArgumentNullException("xml"); }
+
             xml.WriteElementString(name, ns, XmlConvert.ToString(val.Value));
         }
 
         public static void FromStream(ref int val, XmlReader xml, string name, string ns)
         {
+            if (xml == null) { throw new ArgumentNullException("xml"); }
+
             if (xml.LocalName == name && xml.NamespaceURI == ns)
             {
                 val = xml.ReadElementContentAsInt();
@@ -164,6 +210,8 @@ namespace Kistl.API
         }
         public static void FromStream(ref int? val, XmlReader xml, string name, string ns)
         {
+            if (xml == null) { throw new ArgumentNullException("xml"); }
+
             if (xml.LocalName == name && xml.NamespaceURI == ns)
             {
                 val = xml.ReadElementContentAsInt();
@@ -171,6 +219,9 @@ namespace Kistl.API
         }
         public static void FromStreamConverter(Action<int> conv, XmlReader xml, string name, string ns)
         {
+            if (conv == null) { throw new ArgumentNullException("conv"); }
+            if (xml == null) { throw new ArgumentNullException("xml"); }
+            
             if (xml.LocalName == name && xml.NamespaceURI == ns)
             {
                 int val = xml.ReadElementContentAsInt();
@@ -183,11 +234,15 @@ namespace Kistl.API
         public static void ToStream(string val, XmlWriter xml, string name, string ns)
         {
             if (val == null) return;
+            if (xml == null) { throw new ArgumentNullException("xml"); }
+
             xml.WriteElementString(name, ns, val);
         }
 
         public static void FromStream(ref string val, XmlReader xml, string name, string ns)
         {
+            if (xml == null) { throw new ArgumentNullException("xml"); }
+
             if (xml.LocalName == name && xml.NamespaceURI == ns)
             {
                 val = xml.ReadElementContentAsString();
@@ -199,6 +254,9 @@ namespace Kistl.API
         public static void ToStreamCollectionEntries<T>(IEnumerable<T> val, XmlWriter xml, string name, string ns)
             where T : IStreamable
         {
+            if (val == null) { throw new ArgumentNullException("val"); }
+            if (xml == null) { throw new ArgumentNullException("xml"); }
+
             xml.WriteStartElement(name, ns);
             foreach (IStreamable obj in val)
             {
@@ -212,7 +270,11 @@ namespace Kistl.API
         public static void FromStreamCollectionEntries<T>(ICollection<T> val, XmlReader xml, string name, string ns)
             where T : IStreamable, new()
         {
+            if (val == null) { throw new ArgumentNullException("val"); }
+            if (xml == null) { throw new ArgumentNullException("xml"); }
+
         }
+
         #endregion
     }
 }

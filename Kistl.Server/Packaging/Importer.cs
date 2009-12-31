@@ -236,7 +236,7 @@ namespace Kistl.Server.Packaging
                 string tn = it.Current.LocalName;
                 if (it.Current.MoveToAttribute("ExportGuid", ""))
                 {
-                    Guid exportGuid = it.Current.Value.ParseGuidValue();
+                    Guid exportGuid = it.Current.Value.TryParseGuidValue();
                     if (exportGuid != Guid.Empty)
                     {
                         string ifTypeName = string.Format("{0}.{1}, {2}", ns, tn, ApplicationContext.Current.InterfaceAssembly);
@@ -275,7 +275,7 @@ namespace Kistl.Server.Packaging
 
         private static IPersistenceObject ImportElement(IKistlContext ctx, Dictionary<Guid, IPersistenceObject> objects, XmlReader xml)
         {
-            Guid exportGuid = xml.GetAttribute("ExportGuid").ParseGuidValue();
+            Guid exportGuid = xml.GetAttribute("ExportGuid").TryParseGuidValue();
             if (exportGuid != Guid.Empty)
             {
                 string ifTypeName = string.Format("{0}.{1}, {2}", xml.NamespaceURI, xml.LocalName, ApplicationContext.Current.InterfaceAssembly);

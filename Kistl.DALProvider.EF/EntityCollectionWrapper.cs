@@ -22,6 +22,9 @@ namespace Kistl.DALProvider.EF
 
         public EntityCollectionWrapper(IKistlContext ctx, EntityCollection<TImpl> ec)
         {
+            if (ctx == null) { throw new ArgumentNullException("ctx"); }
+            if (ec == null) { throw new ArgumentNullException("ec"); }
+
             this.ctx = ctx;
             underlyingCollection = ec;
             foreach (IPersistenceObject obj in underlyingCollection)
@@ -32,8 +35,17 @@ namespace Kistl.DALProvider.EF
 
         public virtual void Add(TInterface item)
         {
-            if (ctx != item.Context) throw new WrongKistlContextException();
-            underlyingCollection.Add((TImpl)item);
+            if (item == null)
+            {
+                underlyingCollection.Add(null);
+                return;
+            }
+            else
+            {
+                if (ctx != item.Context) { throw new WrongKistlContextException(); }
+
+                underlyingCollection.Add((TImpl)item);
+            }
         }
 
         public virtual void Clear()
@@ -43,6 +55,13 @@ namespace Kistl.DALProvider.EF
 
         public virtual bool Contains(TInterface item)
         {
+            if (item == null)
+            {
+                return underlyingCollection.Contains(null);
+            }
+
+            if (ctx != item.Context) { throw new WrongKistlContextException(); }
+
             return underlyingCollection.Contains((TImpl)item);
         }
 
@@ -66,7 +85,14 @@ namespace Kistl.DALProvider.EF
 
         public virtual bool Remove(TInterface item)
         {
-            return underlyingCollection.Remove(item as TImpl);
+            if (item == null)
+            {
+                return underlyingCollection.Remove(null);
+            }
+
+            if (ctx != item.Context) { throw new WrongKistlContextException(); }
+
+            return underlyingCollection.Remove((TImpl)item);
         }
 
         public virtual IEnumerator<TInterface> GetEnumerator()

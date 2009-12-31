@@ -47,6 +47,8 @@ namespace Kistl.Client.ASPNET.Toolkit
 
         public DataObjectModel GetDataObject(IKistlContext ctx)
         {
+            if (ctx == null) { throw new ArgumentNullException("ctx"); }
+
             IDataObject obj;
             
             if (ID <= Helper.INVALIDID)

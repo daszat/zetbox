@@ -19,11 +19,15 @@ namespace Kistl.Client.WPF
 
         public static UndoManager GetSharedUndoScope(DependencyObject obj)
         {
+            if (obj == null) { throw new ArgumentNullException("obj"); }
+
             return (UndoManager)obj.GetValue(SharedUndoScopeProperty);
         }
 
         public static void SetSharedUndoScope(DependencyObject obj, UndoManager value)
         {
+            if (obj == null) { throw new ArgumentNullException("obj"); }
+
             obj.SetValue(SharedUndoScopeProperty, value);
         }
 

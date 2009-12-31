@@ -31,13 +31,19 @@ namespace Kistl.Client.ASPNET.Toolkit
 
         public void Init(HttpApplication context)
         {
+            if (context == null) { throw new ArgumentNullException("context"); }
+
             context.BeginRequest += new EventHandler(context_BeginRequest);
             context.EndRequest += new EventHandler(context_EndRequest);
         }
 
         void context_EndRequest(object sender, EventArgs e)
         {
-            KistlContext.Dispose();
+            if (KistlContext != null)
+            {
+                KistlContext.Dispose();
+                KistlContext = null;
+            }
         }
 
         void context_BeginRequest(object sender, EventArgs e)

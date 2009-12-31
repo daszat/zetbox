@@ -150,6 +150,8 @@ namespace Kistl.API.Server
         #region MethodHelper
         public MethodInfo GetMethodInfo(MethodInfo input)
         {
+            if (input == null) { throw new ArgumentNullException("input"); }
+
             Type MethodType = input.DeclaringType.ToImplementationType();
             string MethodName = input.Name;
 

@@ -73,8 +73,21 @@ namespace Kistl.Client.Presentables.TimeRecords
         /// <summary>Gets or sets the "Mitarbeiter"s value of the underlying WorkEffort, wrapped in a DataObjectModel</summary>
         public DataObjectModel Mitarbeiter
         {
-            get { return (DataObjectModel)this.Factory.CreateDefaultModel(this.DataContext, this._entry.Mitarbeiter); }
-            set { this._entry.Mitarbeiter = (Mitarbeiter)value.Object; }
+            get
+            {
+                return (DataObjectModel)this.Factory.CreateDefaultModel(this.DataContext, this._entry.Mitarbeiter);
+            }
+            set
+            {
+                if (value == null)
+                {
+                    this._entry.Mitarbeiter = null;
+                }
+                else
+                {
+                    this._entry.Mitarbeiter = (Mitarbeiter)value.Object;
+                }
+            }
         }
 
         /// <summary>Gets or sets the "Notizen"s value of the underlying WorkEffort</summary>

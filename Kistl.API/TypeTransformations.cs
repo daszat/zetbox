@@ -208,10 +208,10 @@ namespace Kistl.API
         /// <summary>
         /// Returns the most specific implemented Kistl.Objects interface of a given Type.
         /// </summary>
-        /// <param name="type"></param>
-        /// <returns></returns>
         public static Type ToInterfaceType(this Type type)
         {
+            if (type == null) { throw new ArgumentNullException("type"); }
+
             // shortcut and warn when trying to resolve an already resolved type
             if (type.IsInterface && typeof(IPersistenceObject).IsAssignableFrom(type))
             {
@@ -240,10 +240,10 @@ namespace Kistl.API
         /// <summary>
         /// Returns the Type implementing a given Kistl.Objects interface from the current ImplementationAssembly
         /// </summary>
-        /// <param name="type"></param>
-        /// <returns></returns>
         public static Type ToImplementationType(this Type type)
         {
+            if (type == null) { throw new ArgumentNullException("type"); }
+
             // shortcut and warn when trying to resolve an already resolved type
             if (type.FullName.Contains(Kistl.API.Helper.ImplementationSuffix) && typeof(IPersistenceObject).IsAssignableFrom(type))
             {

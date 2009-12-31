@@ -342,6 +342,7 @@ namespace Kistl.API
         /// <param name="sr"></param>
         public static void FromStreamConverter(Action<int> conv, BinaryReader sr)
         {
+            if (conv == null) throw new ArgumentNullException("conv");
             if (sr == null) throw new ArgumentNullException("sr");
             SerializerTrace("CurrentPos: {0}", sr.BaseStream.Position);
             int val = sr.ReadInt32();
@@ -579,6 +580,7 @@ namespace Kistl.API
         /// <param name="sr"></param>
         public static void FromStreamConverter(Action<string> conv, BinaryReader sr)
         {
+            if (conv == null) throw new ArgumentNullException("conv");
             if (sr == null) throw new ArgumentNullException("sr");
             SerializerTrace("CurrentPos: {0}", sr.BaseStream.Position);
             bool hasValue = sr.ReadBoolean();
@@ -602,11 +604,19 @@ namespace Kistl.API
         /// <summary>
         /// Serialize a ICollectionEntry Collection. Format is: CONTINUE (true/false), ICollectionEntry (if Object is present).
         /// </summary>
-        /// <param name="val">Collection to serialize,</param>
+        /// <param name="val">Collection to serialize. Assumed empty if null.</param>
         /// <param name="sw">BinaryWrite to serialize to.</param>
         public static void ToStreamCollectionEntries<T>(IEnumerable<T> val, BinaryWriter sw)
             where T : IStreamable
         {
+            if (val == null)
+            {
+                SerializerTrace("CurrentPos: {0}", sw.BaseStream.Position);
+                SerializerTrace("writing null collection as empty");
+                ToStream(false, sw);
+                return;
+            }
+
             if (sw == null) throw new ArgumentNullException("sw");
             SerializerTrace("CurrentPos: {0}", sw.BaseStream.Position);
             foreach (IStreamable obj in val)

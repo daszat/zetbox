@@ -196,10 +196,10 @@ namespace Kistl.Client.Presentables
         /// <returns></returns>
         public void ShowForeignModel(DataObjectModel dataObject)
         {
-            var other = dataObject.Object;
-            if (other == null)
+            if (dataObject == null || dataObject.Object == null)
                 return;
-
+            
+            var other = dataObject.Object;
             var here = DataContext.Find(other.GetInterfaceType(), other.ID);
             SelectedItem = AppContext.Factory.CreateDefaultModel(DataContext, here);
             HistoryTouch(SelectedItem);

@@ -173,6 +173,8 @@ namespace Kistl.Client.Presentables
 
         public void AddItem(DataObjectModel item)
         {
+            if (item == null) { throw new ArgumentNullException("item"); }
+
             Object.AddToCollectionQuick(Property.PropertyName, item.Object);
         }
 
@@ -204,17 +206,22 @@ namespace Kistl.Client.Presentables
 
         public void RemoveItem(DataObjectModel item)
         {
+            if (item == null) { throw new ArgumentNullException("item"); }
+
             Object.RemoveFromCollectionQuick(Property.PropertyName, item.Object);
         }
 
         public void DeleteItem(DataObjectModel item)
         {
+            if (item == null) { throw new ArgumentNullException("item"); }
             RemoveItem(item);
             item.Delete();
         }
 
         public void ActivateItem(DataObjectModel item, bool activate)
         {
+            if (item == null) { throw new ArgumentNullException("item"); }
+
             Factory.ShowModel(item, activate);
         }
 

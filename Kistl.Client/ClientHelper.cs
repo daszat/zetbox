@@ -23,6 +23,8 @@ namespace Kistl.Client
         public static void HandleError(Exception ex)
         {
             //TODO: put exception into DB/Logfile
+            if (ex == null) { throw new ArgumentNullException("ex"); }
+
             if (ex is FaultException)
             {
                 GuiApplicationContext.Current.Renderer.ShowMessage((ex as FaultException).Message);
@@ -92,6 +94,9 @@ namespace Kistl.Client
         /// A more sophisticated implementation could test for specific IList implementations to do better.
         public static void InsertRange<T>(this IList<T> list, int index, System.Collections.IList items)
         {
+            if (list == null) { throw new ArgumentNullException("list"); }
+            if (items == null) { return; }
+
             foreach (object i in items)
             {
                 list.Insert(index++, (T)i);

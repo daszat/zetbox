@@ -189,6 +189,8 @@ namespace Kistl.API
 
         public void CopyTo(Array array, int index)
         {
+            if (array == null) { throw new ArgumentNullException("array"); }
+
             foreach (var i in GetList())
             {
                 array.SetValue(i, index++);

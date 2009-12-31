@@ -78,6 +78,10 @@ namespace Kistl.Client.Presentables
         /// <returns>a properly initialised PresentableModel</returns>
         public PresentableModel CreatePropertyValueModel(IKistlContext ctx, IDataObject obj, Property p)
         {
+            if (ctx == null) { throw new ArgumentNullException("ctx"); }
+            if (obj == null) { throw new ArgumentNullException("obj"); }
+            if (p == null) { throw new ArgumentNullException("p"); }
+
             if (p.ValueModelDescriptor != null)
             {
                 return CreateModel(p.ValueModelDescriptor
@@ -125,12 +129,18 @@ namespace Kistl.Client.Presentables
         /// <returns>the configured view</returns>
         public virtual object CreateDefaultView(PresentableModel mdl)
         {
-            PresentableModelDescriptor pmd = mdl.GetType().ToRef(FrozenContext.Single)
+            if (mdl == null) { throw new ArgumentNullException("mdl"); }
+
+            PresentableModelDescriptor pmd = mdl
+                .GetType()
+                .ToRef(FrozenContext.Single)
                 .GetPresentableModelDescriptor();
 
             var vDesc = pmd.GetDefaultViewDescriptor(Toolkit);
-            if (vDesc == null) return null;
-            return CreateView(vDesc);
+
+            return vDesc == null
+                ? null
+                : CreateView(vDesc);
         }
 
         /// <summary>
@@ -151,13 +161,17 @@ namespace Kistl.Client.Presentables
         /// <returns>the configured view</returns>
         public virtual object CreateSpecificView(PresentableModel mdl, ControlKind kind)
         {
+            if (mdl == null) { throw new ArgumentNullException("mdl"); }
+            if (kind == null) { throw new ArgumentNullException("kind"); }
+
             PresentableModelDescriptor pmd = mdl.GetType().ToRef(FrozenContext.Single)
                 .GetPresentableModelDescriptor();
 
             var vDesc = pmd.GetViewDescriptor(Toolkit, kind);
-            if (vDesc == null) return null;
 
-            return CreateView(vDesc);
+            return vDesc == null
+                ? null
+                : CreateView(vDesc);
         }
 
         public void ShowModel(PresentableModel mdl, ControlKind kind, bool activate)

@@ -1,13 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-using System.Xml;
 using System.Xml.Serialization;
 
 using Kistl.API.Utils;
@@ -74,7 +71,7 @@ namespace Kistl.API
         /// <returns></returns>
         public static string GetLegalPathName(string path)
         {
-            System.IO.Path.GetInvalidPathChars().ToList().ForEach(c => path = path.Replace(c, '_'));
+            Path.GetInvalidPathChars().ToList().ForEach(c => path = path.Replace(c, '_'));
 
             return path;
         }
@@ -84,6 +81,7 @@ namespace Kistl.API
     {
         public static bool IsStatic(this Type type)
         {
+            if (type == null) { throw new ArgumentNullException("type"); }
             return type.IsAbstract && type.IsSealed;
         }
     }
@@ -142,6 +140,8 @@ namespace Kistl.API
         /// <returns>PropertyValue</returns>
         public static void SetPrivatePropertyValue<T>(this object obj, string propName, T val)
         {
+            if (obj == null) throw new ArgumentNullException("obj");
+
             Type t = obj.GetType();
             if (t.GetProperty(propName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance) == null)
                 throw new ArgumentOutOfRangeException("propName", string.Format("Property {0} was not found in Type {1}", propName, obj.GetType().FullName));
@@ -162,6 +162,8 @@ namespace Kistl.API
         public static Type GetPropertyType(this object obj, string propName)
         {
             if (obj == null) throw new ArgumentNullException("obj");
+            if (propName == null) throw new ArgumentNullException("propName");
+
             Type result = null;
             object loopObj = obj;
             foreach (string it_p in propName.Split('.'))
@@ -204,6 +206,8 @@ namespace Kistl.API
         public static bool HasProperty(this object obj, string propName)
         {
             if (obj == null) throw new ArgumentNullException("obj");
+            if (propName == null) throw new ArgumentNullException("propName");
+
             object loopObj = obj;
             foreach (string it_p in propName.Split('.'))
             {
@@ -244,6 +248,8 @@ namespace Kistl.API
         public static void SetPropertyValue<T>(this object obj, string propName, T val)
         {
             if (obj == null) throw new ArgumentNullException("obj");
+            if (propName == null) throw new ArgumentNullException("propName");
+
             var propertylist = propName.Split('.');
             object result = obj;
             foreach (string p in propertylist.Take(propertylist.Count() - 1))
@@ -272,6 +278,8 @@ namespace Kistl.API
         public static T GetPropertyValue<T>(this object obj, string propName)
         {
             if (obj == null) throw new ArgumentNullException("obj");
+            if (propName == null) throw new ArgumentNullException("propName");
+
             object result = obj;
             foreach (string it_p in propName.Split('.'))
             {
@@ -326,9 +334,11 @@ namespace Kistl.API
         {
             using (Logging.Log.DebugTraceMethodCall())
             {
+                if (obj == null) { throw new ArgumentNullException("obj"); }
+
                 XmlSerializer xml = new XmlSerializer(obj.GetType());
                 StringBuilder sb = new StringBuilder();
-                xml.Serialize(new System.IO.StringWriter(sb), obj);
+                xml.Serialize(new StringWriter(sb), obj);
                 return sb.ToString();
             }
         }
@@ -337,10 +347,13 @@ namespace Kistl.API
         /// Converts a XML String to a Objekt.
         /// </summary>
         /// <typeparam name="T">Type of the Object.</typeparam>
-        /// <param name="xmlStr">XML string</param>
+        /// <param name="xmlStr">XML string. May not be null.</param>
         /// <returns>Returns a Object or throws an XML-Exception (see MSDN, XmlSerializer)</returns>
-        public static T FromXmlString<T>(this string xmlStr) where T : new()
+        public static T FromXmlString<T>(this string xmlStr)
+            where T : new()
         {
+            if (xmlStr == null) throw new ArgumentNullException("xmlStr");
+
             using (Logging.Log.DebugTraceMethodCallFormat("Size = [{0}]", xmlStr.Length))
             {
                 System.IO.StringReader sr = new System.IO.StringReader(xmlStr);
@@ -357,14 +370,14 @@ namespace Kistl.API
         /// <returns>true, if the Enum is one of the given Values.</returns>
         public static bool In(this Enum e, params object[] p)
         {
+            if (e == null) { throw new ArgumentNullException("e"); }
+
             foreach (object v in p)
             {
                 if (e.Equals(v)) return true;
             }
             return false;
         }
-
-
 
         /// <summary>
         /// Finds the first member of the given type or null if not found.
@@ -375,6 +388,7 @@ namespace Kistl.API
         public static MemberInfo FindFirstOrDefaultMember(this Type t, string memberName)
         {
             if (t == null) throw new ArgumentNullException("t");
+
             MemberInfo mi = t.GetMember(memberName).FirstOrDefault();
             if (mi != null) return mi;
             if (t.BaseType != null)
@@ -398,6 +412,8 @@ namespace Kistl.API
         /// <param name="val">value to add</param>
         public static void AddToCollectionQuick(this IDataObject obj, string propName, object val)
         {
+            if (obj == null) { throw new ArgumentNullException("obj"); }
+
             MagicCollectionFactory.WrapAsCollection<object>(obj.GetPropertyValue<object>(propName)).Add(val);
         }
 
@@ -409,6 +425,8 @@ namespace Kistl.API
         /// <param name="val">value to remove</param>
         public static void RemoveFromCollectionQuick(this IDataObject obj, string propName, object val)
         {
+            if (obj == null) { throw new ArgumentNullException("obj"); }
+
             MagicCollectionFactory.WrapAsCollection<object>(obj.GetPropertyValue<object>(propName)).Remove(val);
         }
 
@@ -421,6 +439,8 @@ namespace Kistl.API
         /// <param name="val">value to add</param>
         public static void AddToCollection<T>(this object obj, string propName, T val)
         {
+            if (obj == null) { throw new ArgumentNullException("obj"); }
+
             AddToCollection<T>(obj, propName, val, false);
         }
 
@@ -434,6 +454,8 @@ namespace Kistl.API
         /// <param name="unique">if the value already exists nothing will be added.</param>
         public static void AddToCollection<T>(this object obj, string propName, T val, bool unique)
         {
+            if (obj == null) { throw new ArgumentNullException("obj"); }
+
             PropertyInfo pi = obj.GetType().GetProperty(propName);
             if (pi == null) throw new ArgumentOutOfRangeException("propName", string.Format("Property {0} was not found in Type {1}", propName, obj.GetType().FullName));
 
@@ -464,6 +486,8 @@ namespace Kistl.API
         /// <param name="val">value to remove</param>
         public static void RemoveFromCollection<T>(this object obj, string propName, T val)
         {
+            if (obj == null) { throw new ArgumentNullException("obj"); }
+
             PropertyInfo pi = obj.GetType().GetProperty(propName);
             if (pi == null) throw new ArgumentOutOfRangeException("propName", string.Format("Property {0} was not found in Type {1}", propName, obj.GetType().FullName));
 
@@ -490,6 +514,7 @@ namespace Kistl.API
         public static TReturn CallMethod<TReturn>(this object obj, string methodName)
         {
             if (obj == null) throw new ArgumentNullException("obj");
+
             Type t = obj.GetType();
             MethodInfo mi = null;
             while (mi == null && t != null)
@@ -510,6 +535,8 @@ namespace Kistl.API
         /// <returns>MethodInfo or null if the method was not found</returns>
         public static MethodInfo FindMethod(this Type type, string methodName, Type[] parameterTypes)
         {
+            if (type == null) { throw new ArgumentNullException("type"); }
+
             if (parameterTypes == null)
             {
                 MethodInfo mi = type.GetMethod(methodName);
@@ -568,6 +595,8 @@ namespace Kistl.API
         /// <returns>MethodInfo or null if the method was not found</returns>
         public static MethodInfo FindGenericMethod(this Type type, string methodName, Type[] typeArguments, Type[] parameterTypes)
         {
+            if (type == null) { throw new ArgumentNullException("type"); }
+
             if (parameterTypes == null)
             {
                 MethodInfo mi = type.GetMethod(methodName);
@@ -657,13 +686,16 @@ namespace Kistl.API
         }
 
         /// <summary>
-        /// Foreach Extension Method for IEnumerable. This Extension does not check if the Enumeration Entry is NULL!
+        /// Foreach Extension Method for IEnumerable.
         /// </summary>
         /// <typeparam name="T">Type of the Objects in the Enumeration.</typeparam>
         /// <param name="lst">Enumeration</param>
         /// <param name="action">Action to perform on each element.</param>
         public static void ForEach<T>(this IEnumerable lst, Action<T> action)
         {
+            if (lst == null) { throw new ArgumentNullException("lst"); }
+            if (action == null) { throw new ArgumentNullException("action"); }
+
             foreach (T obj in lst)
             {
                 action(obj);
@@ -678,6 +710,9 @@ namespace Kistl.API
         /// <param name="action">Action to perform on each element.</param>
         public static void ForEach<T>(this IEnumerable<T> lst, Action<T> action)
         {
+            if (lst == null) { throw new ArgumentNullException("lst"); }
+            if (action == null) { throw new ArgumentNullException("action"); }
+
             foreach (T obj in lst)
             {
                 action(obj);
@@ -692,6 +727,9 @@ namespace Kistl.API
         /// <param name="action">Action to perform on each element.</param>
         public static void ForEach<T>(this IList<T> lst, Action<T> action)
         {
+            if (lst == null) { throw new ArgumentNullException("lst"); }
+            if (action == null) { throw new ArgumentNullException("action"); }
+
             foreach (T obj in lst)
             {
                 action(obj);
@@ -705,6 +743,9 @@ namespace Kistl.API
         /// <param name="action">Action to perform on each element.</param>
         public static void ForEach<T>(this IQueryable<T> lst, Action<T> action)
         {
+            if (lst == null) { throw new ArgumentNullException("lst"); }
+            if (action == null) { throw new ArgumentNullException("action"); }
+
             foreach (T i in lst)
             {
                 action(i);
@@ -717,9 +758,10 @@ namespace Kistl.API
         /// </summary>
         /// <param name="str">String to parse</param>
         /// <returns>Guid or Guid.Empty</returns>
-        public static Guid ParseGuidValue(this string str)
+        public static Guid TryParseGuidValue(this string str)
         {
             if (string.IsNullOrEmpty(str)) return Guid.Empty;
+
             try
             {
                 return new Guid(str);

@@ -15,11 +15,15 @@ namespace Kistl.API.Utils
         public static ICollection<TResult> WrapAsCollectionHelper<TFrom, TResult>(ICollection<TFrom> collection)
             where TFrom : TResult
         {
+            if (collection == null) { throw new ArgumentNullException("collection"); }
+
             return new GenericCastingCollectionWrapper<TFrom, TResult>(collection);
         }
 
         public static object WrapAsCollectionReflectionHelper(Type TFrom, Type TResult, object collection)
         {
+            if (collection == null) { throw new ArgumentNullException("collection"); }
+
             MethodInfo wrapAsCollection = typeof(MagicCollectionFactory).GetMethod("WrapAsCollectionHelper");
             return wrapAsCollection.MakeGenericMethod(TFrom, TResult).Invoke(null, new[] { collection });
         }
@@ -29,6 +33,8 @@ namespace Kistl.API.Utils
         /// </summary>
         public static ICollection<T> WrapAsCollection<T>(object collection)
         {
+            if (collection == null) { throw new ArgumentNullException("collection"); }
+
             if (collection is ICollection<T>)
             {
                 return (ICollection<T>)collection;
@@ -66,11 +72,17 @@ namespace Kistl.API.Utils
         public static IList<TResult> WrapAsListHelper<TFrom, TResult>(IList<TFrom> list)
             where TFrom : TResult
         {
+            if (list == null) { throw new ArgumentNullException("list"); }
+
             return new GenericCastingListWrapper<TFrom, TResult>(list);
         }
 
         public static object WrapAsListReflectionHelper(Type TFrom, Type TResult, object list)
         {
+            if (TFrom == null) { throw new ArgumentNullException("TFrom"); }
+            if (TResult == null) { throw new ArgumentNullException("TResult"); }
+            if (list == null) { throw new ArgumentNullException("list"); }
+
             MethodInfo wrapAsList = typeof(MagicCollectionFactory).GetMethod("WrapAsListHelper");
             return wrapAsList.MakeGenericMethod(TFrom, TResult).Invoke(null, new[] { list });
         }
@@ -81,6 +93,8 @@ namespace Kistl.API.Utils
         /// </summary>
         public static IList<T> WrapAsList<T>(object potentialList)
         {
+            if (potentialList == null) { throw new ArgumentNullException("potentialList"); }
+
             if (potentialList is IList<T>)
             {
                 return (IList<T>)potentialList;

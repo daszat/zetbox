@@ -51,8 +51,15 @@ M: System.Delegate Kistl.Client.WPF.View.KistlBase.TypeRefPropertyView::_CreateD
 M: System.Delegate Kistl.Client.WPF.View.TextValueSelectionView::_CreateDelegate(System.Type,System.String)
 
 
+R: Gendarme.Rules.Correctness.CheckParametersNullityInVisibleMethodsRule
+# MethodInvocation implementors should not have to check for thisobj==null => too many false positives
+A: Kistl.App.Projekte.Common
+A: Kistl.App.Projekte.Client
+A: Kistl.App.Projekte.Server
 
-
+R: Gendarme.Rules.Portability.DoNotHardcodePathsRule
+# Package URIs are FS-independent
+M: System.Void Kistl.App.Projekte.WordHelper::ApplyCustomXml(System.Xml.XmlDocument)
 
 ###############################################################################
 ##  GLOBAL IGNORES  ###########################################################

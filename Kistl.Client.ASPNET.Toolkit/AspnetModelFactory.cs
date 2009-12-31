@@ -98,11 +98,15 @@ namespace Kistl.Client.ASPNET.Toolkit
     {
         public static object CreateDefaultView(this ModelFactory self, PresentableModel mdl, Control container)
         {
+            if (self == null) { throw new ArgumentNullException("self"); }
+
             return AddControl(container, self.CreateDefaultView(mdl));
         }
 
         public static object CreateSpecificView(this ModelFactory self, PresentableModel mdl, ControlKind kind, Control container)
         {
+            if (self == null) { throw new ArgumentNullException("self"); }
+
             return AddControl(container, self.CreateSpecificView(mdl, kind));
         }
 

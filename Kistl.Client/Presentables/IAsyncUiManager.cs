@@ -155,13 +155,19 @@ namespace Kistl.Client.Presentables
         [System.Diagnostics.DebuggerHidden()]
         public void Queue(object ignored, Action asyncTask)
         {
-            asyncTask();
+            if (asyncTask != null)
+            {
+                asyncTask();
+            }
         }
 
         [System.Diagnostics.DebuggerHidden()]
         public void Queue(object ignored, Action<object> asyncTask, object data)
         {
-            asyncTask(data);
+            if (asyncTask != null)
+            {
+                asyncTask(data);
+            }
         }
 
         #endregion

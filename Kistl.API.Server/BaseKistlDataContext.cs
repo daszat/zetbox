@@ -29,6 +29,8 @@ namespace Kistl.API.Server
         /// <returns>Object Attached</returns>
         public virtual IPersistenceObject Attach(IPersistenceObject obj)
         {
+            if (obj == null) { throw new ArgumentNullException("obj"); }
+
             // call Attach on Subitems
             obj.AttachToContext(this);
 
@@ -41,6 +43,8 @@ namespace Kistl.API.Server
         /// <param name="obj">IDataObject</param>
         public virtual void Detach(IPersistenceObject obj)
         {
+            if (obj == null) { throw new ArgumentNullException("obj"); }
+
             obj.DetachFromContext(this);
         }
 
@@ -50,6 +54,8 @@ namespace Kistl.API.Server
         /// <param name="obj">IPersistenceObject</param>
         public virtual void Delete(IPersistenceObject obj)
         {
+            if (obj == null) { throw new ArgumentNullException("obj"); }
+
             OnObjectDeleted(obj);
             if (obj is IDataObject)
             {
@@ -86,7 +92,6 @@ namespace Kistl.API.Server
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
         public abstract IQueryable<IPersistenceObject> GetPersistenceObjectQuery(InterfaceType ifType);
 
-
         /// <summary>
         /// Returns the List referenced by the given PropertyName.
         /// </summary>
@@ -97,6 +102,8 @@ namespace Kistl.API.Server
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
         public virtual List<T> GetListOf<T>(IDataObject obj, string propertyName) where T : class, IDataObject
         {
+            if (obj == null) { throw new ArgumentNullException("obj"); }
+
             return obj.GetPropertyValue<IEnumerable>(propertyName).Cast<T>().ToList();
         }
 

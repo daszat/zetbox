@@ -18,6 +18,9 @@ namespace Kistl.Client.WPF.Converter
         public object Convert(object value, Type targetType,
                             object parameter, System.Globalization.CultureInfo culture)
         {
+            if (value == null) { throw new ArgumentNullException("value"); }
+            if (parameter == null) { throw new ArgumentNullException("parameter"); }
+
             return Double.Parse(value.ToString()) < Double.Parse(parameter.ToString());
         }
 
@@ -38,6 +41,9 @@ namespace Kistl.Client.WPF.Converter
         public object Convert(object value, Type targetType,
                             object parameter, CultureInfo culture)
         {
+            if (value == null) { throw new ArgumentNullException("value"); }
+            if (parameter == null) { throw new ArgumentNullException("parameter"); }
+
             return Double.Parse(value.ToString()) / Double.Parse(parameter.ToString(), CultureInfo.InvariantCulture.NumberFormat);
         }
 
@@ -58,6 +64,9 @@ namespace Kistl.Client.WPF.Converter
         public object Convert(object value, Type targetType,
                             object parameter, System.Globalization.CultureInfo culture)
         {
+            if (value == null) { throw new ArgumentNullException("value"); }
+            if (parameter == null) { throw new ArgumentNullException("parameter"); }
+
             return Double.Parse(value.ToString()) > Double.Parse(parameter.ToString());
         }
 
@@ -91,6 +100,8 @@ namespace Kistl.Client.WPF.Converter
         public object ConvertBack(object value, Type targetType,
                             object parameter, System.Globalization.CultureInfo culture)
         {
+            if (value == null) { throw new ArgumentNullException("value"); }
+
             TypeConverter converter = TypeDescriptor.GetConverter(targetType);
             object targetValue = null;
 

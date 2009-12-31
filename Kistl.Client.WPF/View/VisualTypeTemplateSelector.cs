@@ -3,19 +3,19 @@ namespace Kistl.Client.WPF.View
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Linq;
     using System.Text;
     using System.Windows;
     using System.Windows.Controls;
 
     using Kistl.API;
+    using Kistl.API.Utils;
     using Kistl.App.Base;
     using Kistl.App.Extensions;
     using Kistl.App.GUI;
     using Kistl.Client.GUI;
     using Kistl.Client.Presentables;
-    using System.Diagnostics;
-    using Kistl.API.Utils;
 
     /// <summary>
     /// A <see cref="DataTemplateSelector"/> to choose the appropriate view for a specified <see cref="PresentableModel"/>.
@@ -33,6 +33,8 @@ namespace Kistl.Client.WPF.View
         /// <returns>a DataTemplate capable of displaying the specified model</returns>
         public static DataTemplate SelectTemplate(PresentableModel mdl, string controlKindClassName)
         {
+            if (mdl == null) { throw new ArgumentNullException("mdl"); }
+
             PresentableModelDescriptor pmd = mdl.GetType().ToRef(FrozenContext.Single).GetPresentableModelDescriptor();
             if (pmd == null)
             {
@@ -152,20 +154,6 @@ namespace Kistl.Client.WPF.View
             set;
         }
 
-
-
-        //public object RequestedKind
-        //{
-        //    get { return (object)GetValue(RequestedKindProperty); }
-        //    set { SetValue(RequestedKindProperty, value); }
-        //}
-
-        //// Using a DependencyProperty as the backing store for RequestedKind.  This enables animation, styling, binding, etc...
-        //public static readonly DependencyProperty RequestedKindProperty =
-        //    DependencyProperty.Register("RequestedKind", typeof(object), typeof(VisualTypeTemplateSelector), new UIPropertyMetadata());
-
-
-
         /// <inheritdoc/>
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
@@ -225,18 +213,20 @@ namespace Kistl.Client.WPF.View
 
         public static object GetRequestedKind(DependencyObject obj)
         {
+            if (obj == null) { throw new ArgumentNullException("obj"); }
+
             return (object)obj.GetValue(RequestedKindProperty);
         }
 
         public static void SetRequestedKind(DependencyObject obj, object value)
         {
+            if (obj == null) { throw new ArgumentNullException("obj"); }
+
             obj.SetValue(RequestedKindProperty, value);
         }
 
-        // Using a DependencyProperty as the backing store for RequestedKind.  This enables animation, styling, binding, etc...
+        // default DependencyProperty template
         public static readonly DependencyProperty RequestedKindProperty =
             DependencyProperty.RegisterAttached("RequestedKind", typeof(object), typeof(VisualTypeTemplateSelector), new UIPropertyMetadata());
-
-
     }
 }

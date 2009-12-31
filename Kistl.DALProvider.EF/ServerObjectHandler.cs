@@ -66,6 +66,8 @@ namespace Kistl.DALProvider.EF
             Guid relId, RelationEndRole endRole,
             int parentId)
         {
+            if (ctx == null) { throw new ArgumentNullException("ctx"); }
+
             var rel = ctx.FindPersistenceObject<Relation>(relId);
             var relEnd = rel.GetEndFromRole(endRole);
             var relOtherEnd = rel.GetOtherEnd(relEnd);

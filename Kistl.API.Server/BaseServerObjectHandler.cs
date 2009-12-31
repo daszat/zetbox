@@ -73,8 +73,6 @@ namespace Kistl.API.Server
         /// <summary>
         /// Returns a Object Handler for the given Type
         /// </summary>
-        /// <param name="type"></param>
-        /// <returns></returns>
         public static IServerObjectHandler GetServerObjectHandler(Type type)
         {
             if (type == null) throw new ArgumentNullException("type");
@@ -163,8 +161,8 @@ namespace Kistl.API.Server
     /// können mit Linq auf den Context direkt zugreifen, da die Actions am Objekt &amp; am Context
     /// selbst implementiert sind
     /// </summary>
-    /// <typeparam name="T"></typeparam>
-    public abstract class BaseServerObjectHandler<T> : IServerObjectHandler
+    public abstract class BaseServerObjectHandler<T>
+        : IServerObjectHandler
         where T : class, IDataObject
     {
         /// <summary>
@@ -176,6 +174,10 @@ namespace Kistl.API.Server
 
         public IEnumerable<IStreamable> GetList(IKistlContext ctx, int maxListCount, Expression filter, List<Expression> orderBy)
         {
+            if (ctx == null) { throw new ArgumentNullException("ctx"); }
+            if (filter == null) { throw new ArgumentNullException("filter"); }
+            if (orderBy == null) { throw new ArgumentNullException("orderBy"); }
+
             if (maxListCount > Kistl.API.Helper.MAXLISTCOUNT)
             {
                 maxListCount = Kistl.API.Helper.MAXLISTCOUNT;
@@ -233,13 +235,21 @@ namespace Kistl.API.Server
         }
     }
 
-    public class BaseServerObjectSetHandler : IServerObjectSetHandler
+    public class BaseServerObjectSetHandler 
+        : IServerObjectSetHandler
     {
         /// <summary>
         /// Implements the SetObject command
         /// </summary>
-        public virtual IEnumerable<IPersistenceObject> SetObjects(IKistlContext ctx, IEnumerable<IPersistenceObject> objList, IEnumerable<ObjectNotificationRequest> notificationRequests)
+        public virtual IEnumerable<IPersistenceObject> SetObjects(
+            IKistlContext ctx, 
+            IEnumerable<IPersistenceObject> objList,
+            IEnumerable<ObjectNotificationRequest> notificationRequests)
         {
+            if (ctx == null) { throw new ArgumentNullException("ctx"); }
+            if (objList == null) { throw new ArgumentNullException("objList"); }
+            if (notificationRequests == null) { throw new ArgumentNullException("notificationRequests"); }
+
             var objects = objList.Cast<BaseServerPersistenceObject>().ToList();
             var entityObjects = new Dictionary<IPersistenceObject, IPersistenceObject>();
 

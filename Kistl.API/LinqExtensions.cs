@@ -201,6 +201,8 @@ namespace Kistl.API
         /// <returns>Value of the given Expression</returns>
         public static TYPE GetExpressionValue<TYPE>(this Expression e)
         {
+            if (e == null) { throw new ArgumentNullException("e"); }
+
             if (e is ConstantExpression)
             {
                 return (TYPE)(e as ConstantExpression).Value;
@@ -224,6 +226,8 @@ namespace Kistl.API
 
         public static Expression StripQuotes(this Expression e)
         {
+            if (e == null) { throw new ArgumentNullException("e"); }
+
             while (e.NodeType == ExpressionType.Quote)
                 e = ((UnaryExpression)e).Operand;
             return e;
@@ -231,6 +235,8 @@ namespace Kistl.API
 
         public static bool IsMethodCallExpression(this Expression e, string methodName)
         {
+            if (e == null) { throw new ArgumentNullException("e"); }
+
             return e.NodeType == ExpressionType.Call && 
                 ((MethodCallExpression)e).Method.Name == methodName && 
                 ((MethodCallExpression)e).Method.DeclaringType == typeof(Queryable);
@@ -238,6 +244,8 @@ namespace Kistl.API
 
         public static bool IsMethodCallExpression(this Expression e, string methodName, Type type)
         {
+            if (e == null) { throw new ArgumentNullException("e"); }
+
             return e.NodeType == ExpressionType.Call &&
                 ((MethodCallExpression)e).Method.Name == methodName &&
                 ((MethodCallExpression)e).Method.DeclaringType == type;

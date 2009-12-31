@@ -226,6 +226,8 @@ namespace Kistl.API.Client
 
         public IQueryable CreateQuery(Expression expression)
         {
+            if (expression == null) { throw new ArgumentNullException("expression"); }
+
             Type elementType = expression.Type.FindElementTypes().First();
             return (IQueryable)Activator.CreateInstance(typeof(KistlContextQuery<>)
                 .MakeGenericType(elementType), new object[] { _context, _type, this, expression });

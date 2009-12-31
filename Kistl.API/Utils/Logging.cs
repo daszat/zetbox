@@ -176,20 +176,15 @@ namespace Kistl.API.Utils
         /// <returns>An IDisposable helper that closes the context when it's disposed.</returns>
         public static IDisposable DebugTraceMethodCall(this ILog log)
         {
-            if (log.IsDebugEnabled)
+            if (log == null || !log.IsDebugEnabled) { return null; }
+
+            try
             {
-                try
-                {
-                    return new DebugTraceMethodCallContext(log, GetCallingMethodName(log), String.Empty);
-                }
-                catch
-                {
-                    return new DebugTraceMethodCallContext(log, "<unknown method>", String.Empty);
-                }
+                return new DebugTraceMethodCallContext(log, GetCallingMethodName(log), String.Empty);
             }
-            else
+            catch
             {
-                return null;
+                return new DebugTraceMethodCallContext(log, "<unknown method>", String.Empty);
             }
         }
 
@@ -202,20 +197,15 @@ namespace Kistl.API.Utils
         /// <returns>An IDisposable helper that closes the context when it's disposed.</returns>
         public static IDisposable DebugTraceMethodCall(this ILog log, string msg)
         {
-            if (log.IsDebugEnabled)
+            if (log == null || !log.IsDebugEnabled) { return null; }
+
+            try
             {
-                try
-                {
-                    return new DebugTraceMethodCallContext(log, GetCallingMethodName(log), msg);
-                }
-                catch
-                {
-                    return new DebugTraceMethodCallContext(log, "<unknown Method>", msg);
-                }
+                return new DebugTraceMethodCallContext(log, GetCallingMethodName(log), msg);
             }
-            else
+            catch
             {
-                return null;
+                return new DebugTraceMethodCallContext(log, "<unknown Method>", msg);
             }
         }
 
@@ -229,21 +219,15 @@ namespace Kistl.API.Utils
         /// <returns>An IDisposable helper that closes the context when it's disposed.</returns>
         public static IDisposable DebugTraceMethodCallFormat(this ILog log, string format, params object[] p)
         {
+            if (log == null || !log.IsDebugEnabled) { return null; }
 
-            if (log.IsDebugEnabled)
+            try
             {
-                try
-                {
-                    return new DebugTraceMethodCallContext(log, GetCallingMethodName(log), String.Format(format, p));
-                }
-                catch
-                {
-                    return new DebugTraceMethodCallContext(log, "<unknown Method>", String.Format(format, p));
-                }
+                return new DebugTraceMethodCallContext(log, GetCallingMethodName(log), String.Format(format, p));
             }
-            else
+            catch
             {
-                return null;
+                return new DebugTraceMethodCallContext(log, "<unknown Method>", String.Format(format, p));
             }
         }
 
@@ -255,20 +239,15 @@ namespace Kistl.API.Utils
         /// <returns>An IDisposable helper that closes the context when it's disposed.</returns>
         public static IDisposable InfoTraceMethodCall(this ILog log)
         {
-            if (log.IsInfoEnabled)
+            if (log == null || !log.IsInfoEnabled) { return null; }
+
+            try
             {
-                try
-                {
-                    return new InfoTraceMethodCallContext(log, GetCallingMethodName(log), String.Empty);
-                }
-                catch
-                {
-                    return new InfoTraceMethodCallContext(log, "<unknown method>", String.Empty);
-                }
+                return new InfoTraceMethodCallContext(log, GetCallingMethodName(log), String.Empty);
             }
-            else
+            catch
             {
-                return null;
+                return new InfoTraceMethodCallContext(log, "<unknown method>", String.Empty);
             }
         }
 
@@ -281,20 +260,16 @@ namespace Kistl.API.Utils
         /// <returns>An IDisposable helper that closes the context when it's disposed.</returns>
         public static IDisposable InfoTraceMethodCall(this ILog log, string msg)
         {
-            if (log.IsInfoEnabled)
+            if (log == null || !log.IsInfoEnabled) { return null; }
+
+
+            try
             {
-                try
-                {
-                    return new InfoTraceMethodCallContext(log, GetCallingMethodName(log), msg);
-                }
-                catch
-                {
-                    return new InfoTraceMethodCallContext(log, "<unknown Method>", msg);
-                }
+                return new InfoTraceMethodCallContext(log, GetCallingMethodName(log), msg);
             }
-            else
+            catch
             {
-                return null;
+                return new InfoTraceMethodCallContext(log, "<unknown Method>", msg);
             }
         }
 
@@ -308,25 +283,22 @@ namespace Kistl.API.Utils
         /// <returns>An IDisposable helper that closes the context when it's disposed.</returns>
         public static IDisposable InfoTraceMethodCallFormat(this ILog log, string format, params object[] p)
         {
-            if (log.IsInfoEnabled)
+            if (log == null || !log.IsInfoEnabled) { return null; }
+
+            try
             {
-                try
-                {
-                    return new InfoTraceMethodCallContext(log, GetCallingMethodName(log), String.Format(format, p));
-                }
-                catch
-                {
-                    return new InfoTraceMethodCallContext(log, "<unknown Method>", String.Format(format, p));
-                }
+                return new InfoTraceMethodCallContext(log, GetCallingMethodName(log), String.Format(format, p));
             }
-            else
+            catch
             {
-                return null;
+                return new InfoTraceMethodCallContext(log, "<unknown Method>", String.Format(format, p));
             }
         }
 
         public static void TraceTotalMemory(this ILog log, string msg)
         {
+            if (log == null || !log.IsDebugEnabled) { return; }
+
             log.DebugFormat(msg + ": Consuming {0:0.00} kB Memory", (double)GC.GetTotalMemory(true) / 1024.0);
         }
     }

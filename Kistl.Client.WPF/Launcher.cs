@@ -14,6 +14,8 @@ namespace Kistl.Client.WPF
     {
         public static void Execute(IGuiApplicationContext appCtx, string[] args)
         {
+            if (appCtx == null) { throw new ArgumentNullException("appCtx", "Missing GUI Application Context"); }
+
             bool _timeRecorder = args.Contains("-timerecorder");
 
             //var debugger = AppContext.Factory.CreateSpecificModel<KistlDebuggerAsModel>(KistlContext.GetContext());

@@ -373,6 +373,8 @@ namespace Kistl.DALProvider.EF
         /// <returns>Object Attached</returns>
         public override IPersistenceObject Attach(IPersistenceObject obj)
         {
+            if (obj == null) { throw new ArgumentNullException("obj"); }
+
             var serverObj = (BaseServerPersistenceObject)obj;
             string entityName = GetEntityName(obj.GetType());
 

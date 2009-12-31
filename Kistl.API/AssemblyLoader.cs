@@ -25,12 +25,13 @@ namespace Kistl.API
         private readonly static object _lock = new object();
 
         /// <summary>
-        /// Initialises the AssemblyLoader in the <see cref="AppDomain">target AppDomain</see> with a minimal search path
+        /// Initializes the AssemblyLoader in the <see cref="AppDomain">target AppDomain</see> with a minimal search path.
         /// </summary>
-        /// <param name="domain"></param>
-        /// <param name="config"></param>
         public static void Bootstrap(AppDomain domain, KistlConfig config)
         {
+            if (domain == null) { throw new ArgumentNullException("domain"); }
+            if (config == null) { throw new ArgumentNullException("config"); }
+
             var init = (AssemblyLoaderInitializer)domain.CreateInstanceAndUnwrap(
                 "Kistl.API",
                 "Kistl.API.AssemblyLoaderInitializer");
@@ -40,6 +41,8 @@ namespace Kistl.API
 
         public static void Unload(AppDomain domain)
         {
+            if (domain == null) { throw new ArgumentNullException("domain"); }
+
             var init = (AssemblyLoaderInitializer)domain.CreateInstanceAndUnwrap(
                 "Kistl.API",
                 "Kistl.API.AssemblyLoaderInitializer");
@@ -59,13 +62,15 @@ namespace Kistl.API
         private static bool _isInitialised = false;
         public static void EnsureInitialisation(KistlConfig config)
         {
+            if (config == null) { throw new ArgumentNullException("config"); }
+
             lock (_lock)
             {
                 if (_isInitialised) return;
                 _isInitialised = true;
 
                 InitialiseTargetAssemblyFolder(config);
-                InitialiseSearchPath(config);
+                InitialiseSearchPath(config.SourceFileLocation);
 
                 // Start resolving Assemblies
                 AppDomain.CurrentDomain.AssemblyResolve += AssemblyLoader.AssemblyResolve;
@@ -73,14 +78,15 @@ namespace Kistl.API
             }
         }
 
-        private static void InitialiseSearchPath(KistlConfig config)
+        private static void InitialiseSearchPath(string[] sourcefilelocations)
         {
-            foreach (var path in config.SourceFileLocation)
+            foreach (var path in sourcefilelocations ?? new string[] { })
             {
                 AssemblyLoader.SearchPath.Add(Path.GetFullPath(path));
             }
         }
 
+        /// <param name="config">must not be null</param>
         private static void InitialiseTargetAssemblyFolder(KistlConfig config)
         {
             TargetAssemblyFolder = Path.Combine(config.WorkingFolder, @"bin\");
