@@ -55,7 +55,7 @@ namespace Kistl.Client.Presentables.Relations
             get
             {
                 if (!IsFullyDefined) return string.Empty;
-                return FormatNavigatorDescription(_relation.A.Navigator, _relation.B.Type);
+                return FormatNavigatorDescription(_relation.A, _relation.B.Type);
             }
         }
 
@@ -64,16 +64,17 @@ namespace Kistl.Client.Presentables.Relations
             get
             {
                 if (!IsFullyDefined) return string.Empty;
-                return FormatNavigatorDescription(_relation.B.Navigator, _relation.A.Type);
+                return FormatNavigatorDescription(_relation.B, _relation.A.Type);
             }
         }
 
-        private static string FormatNavigatorDescription(ObjectReferenceProperty prop, ObjectClass refType)
+        private static string FormatNavigatorDescription(RelationEnd relEnd, ObjectClass refType)
         {
-            if (prop == null) return "Navigator is not defined";
+            var prop = relEnd.Navigator;
+            if (prop == null) return string.Format("No Navigator for {0} defined", string.IsNullOrEmpty(relEnd.RoleName) ? (object)relEnd.GetRole() : relEnd.RoleName);
             if (prop.IsList()) return string.Format("Navigator {1}.{2} is a ICollection<{0}>", refType.ClassName, prop.ObjectClass.ClassName, prop.PropertyName);
             if (prop.IsNullable()) return string.Format("Navigator {1}.{2} is a nullable reference to {0}", refType.ClassName, prop.ObjectClass.ClassName, prop.PropertyName);
-            return string.Format("Navigator {1}.{2} is a not nullable reference to {0}", refType.ClassName, prop.ObjectClass.ClassName, prop.PropertyName);
+            return string.Format("Navigator {1}.{2} is a required reference to {0}", refType.ClassName, prop.ObjectClass.ClassName, prop.PropertyName);
         }
 
         public bool IsFullyDefined
