@@ -69,11 +69,11 @@ namespace Kistl.Client.WPF.Converter
         }
     }
 
-    /**
-     * As described on http://learnwpf.com/Posts/Post.aspx?postId=05229e33-fcd4-44d5-9982-a002f2250a64
-     */
+    /// <summary>
+    /// As described on http://learnwpf.com/Posts/Post.aspx?postId=05229e33-fcd4-44d5-9982-a002f2250a64
+    /// </summary>
     [ValueConversion(typeof(object), typeof(string))]
-    class FormattingConverter : IValueConverter
+    public class FormattingConverter : IValueConverter
     {
         public object Convert(object value, Type targetType,
                             object parameter, System.Globalization.CultureInfo culture)

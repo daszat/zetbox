@@ -7,7 +7,7 @@ using System.CodeDom;
 
 namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
 {
-    class IdProperty
+    public class IdProperty
         : Templates.Implementation.ObjectClasses.IdProperty
     {
 
