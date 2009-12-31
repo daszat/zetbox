@@ -13,7 +13,7 @@ namespace Kistl.Server
     /// Utility class to hold everything neccessary to modify the HTTP ACLs before starting the WCF server
     /// </summary>
     /// Originally from http://www.pluralsight.com/community/blogs/keith/archive/2005/10/17/15632.aspx
-    internal static class WcfNamespaceReservation
+    public static class WcfNamespaceReservation
     {
         /// <summary>
         /// Adds or removes an entry in the HTTP ACLs for a given prefix.
@@ -21,7 +21,7 @@ namespace Kistl.Server
         /// <param name="urlPrefix">the prefix whose ACL should be modified</param>
         /// <param name="accountName">the account name to be added or removed from the ACL</param>
         /// <param name="removeReservation">whether access should be granted or denied</param>
-        internal static void ModifyReservation(
+        public static void ModifyReservation(
             string urlPrefix,
             string accountName,
             bool removeReservation)

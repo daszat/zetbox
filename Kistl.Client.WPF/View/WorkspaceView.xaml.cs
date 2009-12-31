@@ -22,18 +22,9 @@ namespace Kistl.Client.WPF.View
     /// </summary>
     public partial class WorkspaceView : Window
     {
-
         public WorkspaceView()
         {
             InitializeComponent();
-        }
-
-        private void DataObjectActivated(object sender, MouseButtonEventArgs e)
-        {
-            var view = (FrameworkElement)sender;
-            var dataModel = (DataObjectModel)view.DataContext;
-            var workspaceModel = (WorkspaceModel)this.DataContext;
-            workspaceModel.HistoryTouch(dataModel);
         }
 
         private void DeleteHandler(object sender, RoutedEventArgs e)
@@ -46,15 +37,5 @@ namespace Kistl.Client.WPF.View
                 workspaceModel.HistoryTouch(item);
             }
         }
-
-        //private void ModuleTreeSelectedItemChangedHandler(object sender, RoutedPropertyChangedEventArgs<object> e)
-        //{
-        //    var workspaceModel = (WorkspaceModel)this.DataContext;
-        //    var item = ModuleTree.SelectedItem as PresentableModel;
-        //    if (item != null)
-        //    {
-        //        workspaceModel.SelectedItem = item;
-        //    }
-        //}
     }
 }

@@ -60,101 +60,41 @@ namespace Kistl.Client.WPF
             }
         }
 
-        private static void MoveClrObjectParameterFullTypeName()
-        {
-            using (Logging.Log.DebugTraceMethodCall("MoveClrObjectParameterFullTypeName"))
-            {
-                using (IKistlContext ctx = KistlContext.GetContext())
-                {
-                    var clrObjectParameters = ctx.GetQuery<CLRObjectParameter>();
-                    foreach (var param in clrObjectParameters)
-                    {
-                        if (param.Type == null)
-                        {
-                            param.Type = param.GuessParameterType().ToRef(ctx);
-                        }
-                    }
-                    ctx.SubmitChanges();
-                }
-            }
-        }
+        //private static void PrintEagerLoadingGraphViz()
+        //{
+        //    using (Logging.Log.DebugTraceMethodCall("PrintEagerLoadingGraphViz"))
+        //    {
+        //        // Create output suitable for graphviz
+        //        Console.WriteLine("---------------------------------------------------------------");
+        //        Console.WriteLine();
+        //        Console.WriteLine("graph A{");
+        //        using (IKistlContext ctx = KistlContext.GetContext())
+        //        {
+        //            var relations = ctx.GetQuery<Relation>();
 
-        /// <summary>
-        /// Prints a list of unreferenced WPF Controls (<see cref="UIElement"/>s).
-        /// Those are potentially dead code and should be audited.
-        /// </summary>
-        private static void CheckUnusedWpfControls()
-        {
-            using (Logging.Log.DebugTraceMethodCall("CheckUnusedWpfControls"))
-            {
-                using (IKistlContext ctx = KistlContext.GetContext())
-                {
-                    var uiElementType = typeof(UIElement);
-                    var assemblyName = typeof(App).Assembly.FullName;
+        //            foreach (var rel in relations.Where(r => r.A.Navigator != null && r.A.Navigator.EagerLoading))
+        //            {
+        //                Console.WriteLine("{0} -> {1};", rel.A.Type.ClassName, rel.B.Type.ClassName);
+        //            }
 
-                    var referencedControlKinds = ctx.GetQuery<PresentableModelDescriptor>()
-                        .ToList()
-                        .SelectMany(pmd => new[] { pmd.DefaultKind, pmd.DefaultGridCellKind }.Concat(pmd.SecondaryControlKinds))
-                        .Where(ck => ck != null)
-                        .ToLookup(ck => ck.GetType());
-
-                    var referencedTypes = ctx.GetQuery<ViewDescriptor>()
-                        .Where(vd => vd.Toolkit == Toolkit.WPF)
-                        .Select(vd => vd.ControlRef)
-                        .ToList()
-                        .Select(tr => tr.AsType(false))
-                        .Where(t => t != null)
-                        .ToLookup(t => t);
-
-                    var unreferencedTypes = typeof(App).Assembly
-                        .GetTypes()
-                        .Where(t => uiElementType.IsAssignableFrom(t) && !referencedTypes.Contains(t));
-
-                    foreach (var t in unreferencedTypes.OrderBy(t => t.FullName))
-                    {
-                        Logging.Log.Warn(String.Format("Found UIElement {0}, which is not referenced from the DataStore", t));
-                    }
-                }
-            }
-        }
-
-        private static void PrintEagerLoadingGraphViz()
-        {
-            using (Logging.Log.DebugTraceMethodCall("PrintEagerLoadingGraphViz"))
-            {
-                // Create output suitable for graphviz
-                Console.WriteLine("---------------------------------------------------------------");
-                Console.WriteLine();
-                Console.WriteLine("graph A{");
-                using (IKistlContext ctx = KistlContext.GetContext())
-                {
-                    var relations = ctx.GetQuery<Relation>();
-
-                    foreach (var rel in relations.Where(r => r.A.Navigator != null && r.A.Navigator.EagerLoading))
-                    {
-                        Console.WriteLine("{0} -> {1};", rel.A.Type.ClassName, rel.B.Type.ClassName);
-                    }
-
-                    relations = ctx.GetQuery<Relation>();
-                    foreach (var rel in relations.Where(r => r.B.Navigator != null && r.B.Navigator.EagerLoading))
-                    {
-                        Console.WriteLine("{0} -> {1};", rel.B.Type.ClassName, rel.A.Type.ClassName);
-                    }
-                }
-                Console.WriteLine("}");
-                Console.WriteLine("");
-                Console.WriteLine("---------------------------------------------------------------");
-            }
-        }
+        //            relations = ctx.GetQuery<Relation>();
+        //            foreach (var rel in relations.Where(r => r.B.Navigator != null && r.B.Navigator.EagerLoading))
+        //            {
+        //                Console.WriteLine("{0} -> {1};", rel.B.Type.ClassName, rel.A.Type.ClassName);
+        //            }
+        //        }
+        //        Console.WriteLine("}");
+        //        Console.WriteLine("");
+        //        Console.WriteLine("---------------------------------------------------------------");
+        //    }
+        //}
 
         /// <summary>
         /// Calls currently needed Database fixes
         /// </summary>
         internal static void FixupDatabase()
         {
-            //MoveClrObjectParameterFullTypeName();
-            //FixupTypeRefParents();
-            //CheckUnusedWpfControls();
+            FixupTypeRefParents();
             //PrintEagerLoadingGraphViz();
         }
     }

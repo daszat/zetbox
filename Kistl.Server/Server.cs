@@ -308,24 +308,6 @@ namespace Kistl.Server
             }
         }
 
-        private static void CreateCkc(IKistlContext ctx, ControlKindClass baseClass, Module guiModule, string className, string description, Type[] supportedTypes)
-        {
-            var roStringKind = ctx.Create<ControlKindClass>();
-            roStringKind.BaseObjectClass = baseClass;
-            roStringKind.ClassName = className;
-            roStringKind.DefaultPresentableModelDescriptor = baseClass.DefaultPresentableModelDescriptor;
-            roStringKind.Description = description;
-            roStringKind.Module = guiModule;
-            roStringKind.ShowIconInLists = baseClass.ShowIconInLists;
-            roStringKind.ShowIdInLists = baseClass.ShowIdInLists;
-            roStringKind.ShowNameInLists = baseClass.ShowNameInLists;
-            foreach (var t in supportedTypes)
-            {
-                roStringKind.SupportedInterfaces.Add(t.ToRef(ctx));
-            }
-            roStringKind.TableName = className + "s";
-        }
-
         #region IDisposable Members
 
         // TODO: implement Dispose Pattern after 

@@ -95,7 +95,7 @@ namespace Kistl.API.Client
             mi.Invoke(this, new object[] { result });
         }
 
-
+        // Helper method which is only called by reflection from AddNewLocalObjects
         private void AddNewLocalObjectsGeneric<T>(IList result) where T : IDataObject
         {
             var list = _context.AttachedObjects.AsQueryable().OfType<T>()

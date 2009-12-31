@@ -24,6 +24,40 @@ T: System.Delegate XamlGeneratedNamespace.GeneratedInternalTypeHelper
 # infrastructure helper method intended for a very small audience
 T: System.Void Kistl.API.GetSetHasValueExtensions
 
+R: Gendarme.Rules.Performance.AvoidUncalledPrivateCodeRule
+# This method is flagged with a ConditionalAttribute
+M: System.Void Kistl.API.BinarySerializer::SerializerTrace(System.String,System.Object[])
+# Helper method which is only called by reflection from AddNewLocalObjects
+M: System.Void Kistl.API.Client.KistlContextProvider::AddNewLocalObjectsGeneric(System.Collections.IList)
+# Helper method which is only called by reflection from GetCollectionEntries
+M: System.Collections.Generic.IEnumerable`1<Kistl.API.IRelationCollectionEntry> Kistl.DALProvider.EF.ServerCollectionHandler`4::GetCollectionEntriesInternal(TParent,Kistl.App.Base.Relation,Kistl.API.RelationEndRole)
+# generated code (wpf)
+M: System.Delegate Kistl.Client.WPF.View.NullableBoolValueView::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Kistl.Client.WPF.View.Relations.RelationView::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Kistl.Client.WPF.View.DataObjectFullView::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Kistl.Client.WPF.View.WorkspaceView::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Kistl.Client.WPF.View.Relations.RelationEndView::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Kistl.Client.WPF.View.WorkspaceDisplay::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Kistl.Client.WPF.View.DataObjectView::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Kistl.Client.WPF.View.KistlBase.StringDisplay::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Kistl.Client.WPF.View.NullablePropertyTextBoxView::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Kistl.Client.WPF.View.LabeledView::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Kistl.Client.WPF.View.TimeRecords.WorkEffortRecorderView::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Kistl.Client.WPF.View.ObjectReferenceView::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Kistl.Client.WPF.View.EnumSelectionView::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Kistl.Client.WPF.View.KistlBase.TypeRefPropertyView::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Kistl.Client.WPF.View.TextValueSelectionView::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Kistl.Client.WPF.View.KistlBase.TypeRefPropertyView::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Kistl.Client.WPF.View.TextValueSelectionView::_CreateDelegate(System.Type,System.String)
+
+
+
+
+
+###############################################################################
+##  GLOBAL IGNORES  ###########################################################
+###############################################################################
+
 # Too simple-minded rule.
 R: Gendarme.Rules.Design.Generic.DoNotExposeNestedGenericSignaturesRule
 A: Kistl.API
@@ -66,6 +100,25 @@ A: Kistl.Server.Service
 
 # Too many false positives with classes that have a reference to an IKistlContext
 R: Gendarme.Rules.Design.TypesWithDisposableFieldsShouldBeDisposableRule
+A: Kistl.API
+A: Kistl.App.Projekte.Common
+A: Kistl.DalProvider.Frozen
+A: TempAppHelpers
+A: Kistl.API.Client
+A: Kistl.App.Projekte.Client
+A: Kistl.Client.ASPNET.Toolkit
+A: Kistl.Client
+A: Kistl.Client.Forms
+A: Kistl.Client.WPF
+A: Kistl.DalProvider.ClientObjects
+A: Kistl.API.Server
+A: Kistl.App.Projekte.Server
+A: Kistl.DALProvider.EF
+A: Kistl.Server
+A: Kistl.Server.Service
+
+# Flags mostly generated code or Presentable models, which generally have little cohesion.
+R: Gendarme.Rules.Maintainability.AvoidLackOfCohesionOfMethodsRule
 A: Kistl.API
 A: Kistl.App.Projekte.Common
 A: Kistl.DalProvider.Frozen

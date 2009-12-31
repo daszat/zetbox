@@ -46,11 +46,6 @@ namespace Kistl.Server.Generators
             return AssociationParentRoleName(obj.ClassName);
         }
 
-        public static string AssociationParentRoleName(DataType obj)
-        {
-            return AssociationParentRoleName(obj.ClassName);
-        }
-
         #endregion
 
         #region AssociationChildRoleName
@@ -65,26 +60,6 @@ namespace Kistl.Server.Generators
             return AssociationChildRoleName(obj.ClassName);
         }
 
-        public static string AssociationChildRoleName(ObjectClass obj)
-        {
-            return AssociationChildRoleName(obj.ClassName);
-        }
-
-        public static string AssociationChildRoleName(Property listProperty)
-        {
-            return AssociationChildRoleName(listProperty.PropertyName);
-        }
-
-        #endregion
-
-        #region a collection entry TypeMoniker
-
-        public static TypeMoniker PropertyCollectionEntryType(Property prop)
-        {
-            return new TypeMoniker(prop.ObjectClass.Module.Namespace,
-                        prop.ObjectClass.ClassName + "_" + prop.PropertyName + "CollectionEntry");
-        }
-
         #endregion
 
         #region Column Names
@@ -93,12 +68,6 @@ namespace Kistl.Server.Generators
         private static string ForeignKeyColumnName(string colName)
         {
             return "fk_" + colName;
-        }
-
-        [Obsolete]
-        public static string ForeignKeyColumnName(ObjectReferenceProperty prop, string prefix)
-        {
-            return ForeignKeyColumnName(NestedColumnName(prop.RelationEnd.GetParent().GetOtherEnd(prop.RelationEnd).RoleName, prefix));
         }
 
         public static string ForeignKeyColumnName(RelationEnd otherEnd)
@@ -122,16 +91,6 @@ namespace Kistl.Server.Generators
         public static string NestedColumnName(Property prop, string parentPropName)
         {
             return NestedColumnName(prop.PropertyName, parentPropName);
-        }
-
-        public static string ListPositionColumnName(ValueTypeProperty prop)
-        {
-            return ListPositionColumnName(prop, string.Empty);
-        }
-
-        public static string ListPositionColumnName(ValueTypeProperty prop, string parentPropName)
-        {
-            return ForeignKeyColumnName(Construct.NestedColumnName(prop, parentPropName)) + "_pos";
         }
 
         public static string ListPositionColumnName(RelationEnd otherEnd)

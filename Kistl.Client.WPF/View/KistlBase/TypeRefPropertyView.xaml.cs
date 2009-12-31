@@ -29,12 +29,6 @@ namespace Kistl.Client.WPF.View.KistlBase
             InitializeComponent();
         }
 
-        private void OpenSelection(object sender, RoutedEventArgs e)
-        {
-            var model = (ObjectReferenceModel)DataContext;
-            model.OpenReference();
-        }
-
         #region IView Members
 
         public void SetModel(PresentableModel mdl)

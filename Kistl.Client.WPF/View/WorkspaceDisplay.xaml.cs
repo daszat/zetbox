@@ -38,7 +38,6 @@ namespace Kistl.Client.WPF.View
             {
                 this.Model.SelectedItem = item;
             }
-
         }
 
         /// <summary>
@@ -47,7 +46,6 @@ namespace Kistl.Client.WPF.View
         private Kistl.Client.Presentables.WorkspaceModel Model
         {
             get { return (Kistl.Client.Presentables.WorkspaceModel)DataContext; }
-            set { DataContext = value; }
         }
     }
 }

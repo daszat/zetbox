@@ -80,6 +80,7 @@ namespace Kistl.DALProvider.EF
                 .Invoke(this, new object[] { parent, rel, endRole });
         }
 
+        // Helper method which is only called by reflection from GetCollectionEntries
         private IEnumerable<IRelationCollectionEntry> GetCollectionEntriesInternal<IMPL>(TParent parent, Relation rel, RelationEndRole endRole)
             where IMPL : class, IEntityWithRelationships
         {

@@ -51,18 +51,6 @@ namespace Kistl.Client.Forms.View
             }
         }
 
-        private Control CreateFullView()
-        {
-            if (!(_dataContextCache.SelectedItem is DataObjectModel))
-            {
-                return null;
-            }
-            var result = new Kistl.Client.Forms.View.DataObjectFullView();
-            result.DataContext = (DataObjectModel)_dataContextCache.SelectedItem;
-            return result;
-
-        }
-
         void Modules_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             SyncModules();
