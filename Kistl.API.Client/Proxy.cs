@@ -100,12 +100,17 @@ namespace Kistl.API.Client
         {
             using (Log.InfoTraceMethodCallFormat("GetList[{0}]", ifType.ToString()))
             {
-                MemoryStream s = Service.GetList(
+                using (MemoryStream s = Service.GetList(
                     new SerializableType(ifType),
                     maxListCount,
                     filter != null ? SerializableExpression.FromExpression(filter) : null,
-                    orderBy != null ? orderBy.Select(o => SerializableExpression.FromExpression(o)).ToArray() : null);
-                return ReceiveObjects(s, out auxObjects).Cast<IDataObject>();
+                    orderBy != null ? orderBy.Select(o => SerializableExpression.FromExpression(o)).ToArray() : null))
+                {
+                    using (var sr = new BinaryReader(s))
+                    {
+                        return ReceiveObjects(sr, out auxObjects).Cast<IDataObject>();
+                    }
+                }
             }
         }
 
@@ -113,9 +118,14 @@ namespace Kistl.API.Client
         {
             using (Log.InfoTraceMethodCallFormat("{0} [{1}].{2}", ifType, ID, property))
             {
-                MemoryStream s = Service.GetListOf(new SerializableType(ifType), ID, property);
-                var result = ReceiveObjects(s, out auxObjects).Cast<IDataObject>();
-                return result;
+                using (MemoryStream s = Service.GetListOf(new SerializableType(ifType), ID, property))
+                {
+                    using (var sr = new BinaryReader(s))
+                    {
+                        var result = ReceiveObjects(sr, out auxObjects).Cast<IDataObject>();
+                        return result;
+                    }
+                }
             }
         }
 
@@ -124,47 +134,55 @@ namespace Kistl.API.Client
             using (Log.InfoTraceMethodCall("SetObjects"))
             {
                 // Serialize
-                MemoryStream ms = new MemoryStream();
-                BinaryWriter sw = new BinaryWriter(ms);
-                foreach (var obj in objects)
+                using (var ms = new MemoryStream())
                 {
-                    BinarySerializer.ToStream(true, sw);
-                    obj.ToStream(sw, new HashSet<IStreamable>());
+                    using (var sw = new BinaryWriter(ms))
+                    {
+                        foreach (var obj in objects)
+                        {
+                            BinarySerializer.ToStream(true, sw);
+                            obj.ToStream(sw, new HashSet<IStreamable>());
+                        }
+                        BinarySerializer.ToStream(false, sw);
+
+                        using (MemoryStream s = Service.SetObjects(ms, notficationRequests.ToArray()))
+                        {
+                            using (var sr = new BinaryReader(s))
+                            {
+                                // merge auxiliary objects into primary set objects result
+                                List<IStreamable> auxObjects;
+                                var receivedObjects = ReceiveObjects(sr, out auxObjects);
+                                var result = receivedObjects.Concat(auxObjects).Cast<IPersistenceObject>();
+                                return result;
+                            }
+                        }
+                    }
                 }
-                BinarySerializer.ToStream(false, sw);
-
-                MemoryStream s = Service.SetObjects(ms, notficationRequests.ToArray());
-
-                // merge auxiliary objects into primary set objects result
-                List<IStreamable> auxObjects;
-                var receivedObjects = ReceiveObjects(s, out auxObjects);
-                var result = receivedObjects.Concat(auxObjects).Cast<IPersistenceObject>();
-                return result;
             }
         }
 
-        private static IEnumerable<IStreamable> ReceiveObjects(MemoryStream s, out List<IStreamable> auxObjects)
+        private static IEnumerable<IStreamable> ReceiveObjects(BinaryReader sr, out List<IStreamable> auxObjects)
         {
-            var result = ReceiveObjectList(s);
-            auxObjects = ReceiveObjectList(s);
+            var result = ReceiveObjectList(sr);
+            auxObjects = ReceiveObjectList(sr);
             Log.DebugFormat("retrieved: {0} objects; {1} auxObjects", result.Count(), auxObjects.Count());
             return result;
         }
 
-        private static List<IStreamable> ReceiveObjectList(MemoryStream s)
+        private static List<IStreamable> ReceiveObjectList(BinaryReader sr)
         {
-            BinaryReader sr = new BinaryReader(s);
+            if (!sr.BaseStream.CanSeek) { throw new ArgumentOutOfRangeException("sr", "can only use BinaryReader with seekable base stream"); }
 
             List<IStreamable> result = new List<IStreamable>();
             bool cont = true;
             BinarySerializer.FromStream(out cont, sr);
             while (cont)
             {
-                long pos = s.Position;
+                long pos = sr.BaseStream.Position;
                 SerializableType objType;
                 BinarySerializer.FromStream(out objType, sr);
 
-                s.Seek(pos, SeekOrigin.Begin);
+                sr.BaseStream.Seek(pos, SeekOrigin.Begin);
 
                 IStreamable obj = (IStreamable)objType.NewObject();
                 obj.FromStream(sr);
@@ -187,9 +205,13 @@ namespace Kistl.API.Client
                     return new List<T>();
                 }
 
-                MemoryStream ms = Service.FetchRelation(relationId, (int)role, parent.ID);
-
-                return ReceiveObjects(ms, out auxObjects).Cast<T>();
+                using (MemoryStream s = Service.FetchRelation(relationId, (int)role, parent.ID))
+                {
+                    using (var sr = new BinaryReader(s))
+                    {
+                        return ReceiveObjects(sr, out auxObjects).Cast<T>();
+                    }
+                }
             }
         }
 

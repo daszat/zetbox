@@ -356,9 +356,11 @@ namespace Kistl.API
 
             using (Logging.Log.DebugTraceMethodCallFormat("Size = [{0}]", xmlStr.Length))
             {
-                System.IO.StringReader sr = new System.IO.StringReader(xmlStr);
-                XmlSerializer xml = new XmlSerializer(typeof(T));
-                return (T)xml.Deserialize(sr);
+                using (var sr = new StringReader(xmlStr))
+                {
+                    XmlSerializer xml = new XmlSerializer(typeof(T));
+                    return (T)xml.Deserialize(sr);
+                }
             }
         }
 
