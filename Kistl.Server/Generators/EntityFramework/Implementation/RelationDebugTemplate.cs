@@ -12,6 +12,8 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation
     {
         public static void Call(IGenerationHost host, IKistlContext ctx, Relation rel)
         {
+            if (host == null) { throw new ArgumentNullException("host"); }
+
             host.CallTemplate("Implementation.RelationDebugTemplate", ctx, rel);
         }
     }

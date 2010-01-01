@@ -11,8 +11,7 @@ using Kistl.Server.Generators.Extensions;
 
 namespace Kistl.Server.Generators.EntityFramework.Implementation
 {
-
-    public class InheritanceStorageAssociationInfo
+    internal class InheritanceStorageAssociationInfo
     {
         public InheritanceStorageAssociationInfo(ObjectClass cls)
         {

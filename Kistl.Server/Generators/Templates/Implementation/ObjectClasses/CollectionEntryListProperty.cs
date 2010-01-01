@@ -25,6 +25,8 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
             Templates.Implementation.SerializationMembersList serializationList,
             Relation rel, RelationEndRole endRole)
         {
+            if (host == null) { throw new ArgumentNullException("host"); }
+
             RelationEnd relEnd = rel.GetEndFromRole(endRole);
             RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
 

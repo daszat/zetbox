@@ -22,8 +22,10 @@ namespace Kistl.Server.Generators.FrozenObjects
 
         public static IDictionary<Type, IEnumerable<IDataObject>> FrozenInstances { get; private set; }
 
-        public override string Generate(Kistl.API.IKistlContext ctx, string basePath)
+        public override string Generate(IKistlContext ctx, string basePath)
         {
+            if (ctx == null) { throw new ArgumentNullException("ctx"); }
+
             var frozenBaseClasses = ctx.GetQuery<ObjectClass>().Where(o => o.BaseObjectClass == null && o.IsFrozenObject);
 
             var instances = new List<IDataObject>();

@@ -61,6 +61,13 @@ R: Gendarme.Rules.Portability.DoNotHardcodePathsRule
 # Package URIs are FS-independent
 M: System.Void Kistl.App.Projekte.WordHelper::ApplyCustomXml(System.Xml.XmlDocument)
 
+R: Gendarme.Rules.Correctness.CheckParametersNullityInVisibleMethodsRule
+# False positives
+M: System.Void Kistl.DALProvider.EF.EntityCollectionWrapper`2::Add(TInterface)
+M: System.Boolean Kistl.DALProvider.EF.EntityCollectionWrapper`2::Contains(TInterface)
+M: System.Boolean Kistl.DALProvider.EF.EntityCollectionWrapper`2::Remove(TInterface)
+M: System.Void Kistl.DALProvider.EF.EntityCollectionWrapper`2::CopyTo(System.Array,System.Int32)
+
 ###############################################################################
 ##  GLOBAL IGNORES  ###########################################################
 ###############################################################################
@@ -142,3 +149,30 @@ A: Kistl.App.Projekte.Server
 A: Kistl.DALProvider.EF
 A: Kistl.Server
 A: Kistl.Server.Service
+
+# too many false positives while developing
+R: Gendarme.Rules.BadPractice.DoNotForgetNotImplementedMethodsRule
+A: Kistl.API
+A: Kistl.App.Projekte.Common
+A: Kistl.DalProvider.Frozen
+A: TempAppHelpers
+A: Kistl.API.Client
+A: Kistl.App.Projekte.Client
+A: Kistl.Client.ASPNET.Toolkit
+A: Kistl.Client
+A: Kistl.Client.Forms
+A: Kistl.Client.WPF
+A: Kistl.DalProvider.ClientObjects
+A: Kistl.API.Server
+A: Kistl.App.Projekte.Server
+A: Kistl.DALProvider.EF
+A: Kistl.Server
+A: Kistl.Server.Service
+
+R: Gendarme.Rules.Portability.MonoCompatibilityReviewRule
+# exclude known not-implemented parts: WPF, EF
+A: Kistl.Client.WPF
+A: Kistl.DALProvider.EF
+# this should be replaced in time for a linux-release, ignore for now
+M: System.Void Kistl.Server.Generators.Generator::GenerateCode()
+

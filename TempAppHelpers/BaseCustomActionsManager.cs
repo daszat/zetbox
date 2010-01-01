@@ -82,9 +82,11 @@ namespace Kistl.App.Extensions
         /// <summary>
         /// Attach static events using Metadata
         /// </summary>
-        /// <param name="t">the object type on which to attach events</param>
-        public virtual void AttachEvents(MethodInfo CLRMethod, EventInfo CLREvent)
+        protected virtual void AttachEvents(MethodInfo CLRMethod, EventInfo CLREvent)
         {
+            if (CLRMethod == null) { throw new ArgumentNullException("CLRMethod"); }
+            if (CLREvent == null) { throw new ArgumentNullException("CLREvent"); }
+
             Delegate newDelegate = Delegate.CreateDelegate(
                 CLREvent.EventHandlerType,
                 CLRMethod);

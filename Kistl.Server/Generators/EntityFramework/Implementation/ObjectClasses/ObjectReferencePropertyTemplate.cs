@@ -18,6 +18,8 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
             bool relDataTypeExportable, string moduleNamespace,
             bool eagerLoading, bool callGetterSetterEvents, bool isReloadable)
         {
+            if (host == null) { throw new ArgumentNullException("host"); }
+
             host.CallTemplate("Implementation.ObjectClasses.ObjectReferencePropertyTemplate", ctx,
                 membersToSerialize,
                 propertyName, collectionEntryAssociationName, roleName,

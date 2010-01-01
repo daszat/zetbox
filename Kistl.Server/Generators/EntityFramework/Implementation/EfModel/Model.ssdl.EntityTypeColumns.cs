@@ -13,6 +13,8 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.EfModel
     {
         public static void Call(IGenerationHost host, IKistlContext ctx, IEnumerable<Property> properties, string prefix)
         {
+            if (host == null) { throw new ArgumentNullException("host"); }
+
             host.CallTemplate("Implementation.EfModel.ModelSsdlEntityTypeColumns", ctx, properties, prefix);
         }
 

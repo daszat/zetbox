@@ -13,6 +13,8 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
             IKistlContext ctx,
             Property p)
         {
+            if (host == null) { throw new ArgumentNullException("host"); }
+
             host.CallTemplate("Implementation.ObjectClasses.PropertyInvocationsTemplate", ctx, p);
         }
     }

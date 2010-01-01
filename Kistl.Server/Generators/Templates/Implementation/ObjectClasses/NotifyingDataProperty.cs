@@ -15,6 +15,8 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
         public static void Call(Arebis.CodeGeneration.IGenerationHost host,
             IKistlContext ctx, SerializationMembersList serializationList, Property prop)
         {
+            if (host == null) { throw new ArgumentNullException("host"); }
+
             host.CallTemplate("Implementation.ObjectClasses.NotifyingDataProperty",
                 ctx, serializationList, prop);
         }

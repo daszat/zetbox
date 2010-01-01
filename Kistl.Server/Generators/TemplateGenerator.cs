@@ -71,6 +71,8 @@ namespace Kistl.Server.Generators
 
         public virtual int ExecuteTemplate(GenerationHost genHost, string templateFilename, string outputFilename, object[] templateParameters)
         {
+            if (genHost == null) { throw new ArgumentNullException("genHost"); }
+
             using (log4net.NDC.Push(templateFilename))
             {
                 try
@@ -85,7 +87,7 @@ namespace Kistl.Server.Generators
                 }
                 catch (CompilationFailedException ex)
                 {
-                    Log.Warn("Compilation failed for file", ex);
+                    Log.Error("Template compilation failed", ex);
                     foreach (CompilerError err in ex.Errors)
                     {
                         Log.WarnFormat("{0} {1}: {2}\r\n  \"{3}\", line #{4}",

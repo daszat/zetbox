@@ -14,8 +14,11 @@ namespace Kistl.App.Extensions
     {
 
         private static ILookup<string, ObjectClass> _frozenClasses;
-        public static ObjectClass GetObjectClass(this IDataObject obj, Kistl.API.IKistlContext ctx)
+        public static ObjectClass GetObjectClass(this IDataObject obj, IKistlContext ctx)
         {
+            if (obj == null) { throw new ArgumentNullException("obj"); }
+            if (ctx == null) { throw new ArgumentNullException("ctx"); }
+
             Type type = obj.GetInterfaceType().Type;
             ObjectClass result;
             if (ctx == FrozenContext.Single)

@@ -19,9 +19,11 @@ namespace Kistl.App.Extensions
         /// <returns>a Kistl TypeRef for a given System.Type</returns>
         public static TypeRef ToRef(this Type t, IKistlContext ctx)
         {
-            if (t == null) throw new ArgumentNullException("t");
+            if (t == null) { throw new ArgumentNullException("t"); }
+            if (ctx == null) { throw new ArgumentNullException("ctx"); }
+
             // TODO: think about and implement naked types (i.e. without arguments)
-            if (t.IsGenericTypeDefinition) throw new ArgumentOutOfRangeException("t");
+            if (t.IsGenericTypeDefinition) { throw new ArgumentOutOfRangeException("t"); }
 
             if (ctx == FrozenContext.Single)
             {
@@ -153,6 +155,9 @@ namespace Kistl.App.Extensions
         /// </summary>
         public static Assembly ToRefOrDefault(this System.Reflection.Assembly ass, IKistlContext ctx)
         {
+            if (ass == null) { throw new ArgumentNullException("ass"); }
+            if (ctx == null) { throw new ArgumentNullException("ctx"); }
+
             // ToList: Workaround Case 1212
             return ctx.GetQuery<Assembly>().ToList().SingleOrDefault(a => a.AssemblyName == ass.FullName);
         }
@@ -162,6 +167,9 @@ namespace Kistl.App.Extensions
         /// </summary>
         public static Assembly ToRef(this System.Reflection.Assembly ass, IKistlContext ctx)
         {
+            if (ass == null) { throw new ArgumentNullException("ass"); }
+            if (ctx == null) { throw new ArgumentNullException("ctx"); }
+
             Assembly result = ass.ToRefOrDefault(ctx);
             if (result == null)
             {

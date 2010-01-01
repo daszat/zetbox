@@ -65,6 +65,8 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
             string thisInterface, string referencedType, string entryType,
             string providerCollectionType, string underlyingCollectionName)
         {
+            if (host == null) { throw new ArgumentNullException("host"); }
+
             host.CallTemplate("Implementation.ObjectClasses.ValueCollectionProperty",
                 ctx, serializationList,
                 name, backingName, backingCollectionType, exposedCollectionInterface,

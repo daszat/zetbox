@@ -19,7 +19,7 @@ namespace Kistl.Client.WPF.Commands
         /// </summary>
         /// <param name="cmd">the command to wrap</param>
         public WrappedKistlCommand(Kistl.Client.Presentables.ICommand cmd)
-            : base(cmd.Label, typeof(WrappedKistlCommand))
+            : base(cmd == null ? String.Empty : cmd.Label, typeof(WrappedKistlCommand))
         {
             if (cmd == null) { throw new ArgumentNullException("cmd", "No command to wrap"); }
 

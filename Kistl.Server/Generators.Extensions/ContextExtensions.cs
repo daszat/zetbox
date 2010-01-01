@@ -15,11 +15,15 @@ namespace Kistl.Server.Generators.Extensions
     {
         public static IQueryable<ObjectClass> GetBaseClasses(this IKistlContext ctx)
         {
+            if (ctx == null) { throw new ArgumentNullException("ctx"); }
+
             return ctx.GetQuery<ObjectClass>().Where(cls => cls.BaseObjectClass == null);
         }
 
         public static IQueryable<ObjectClass> GetDerivedClasses(this IKistlContext ctx)
         {
+            if (ctx == null) { throw new ArgumentNullException("ctx"); }
+
             return ctx.GetQuery<ObjectClass>().Where(cls => cls.BaseObjectClass != null);
         }
     }

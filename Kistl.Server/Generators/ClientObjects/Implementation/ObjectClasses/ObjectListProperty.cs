@@ -87,6 +87,8 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
             string otherName,
             string referencedInterface)
         {
+            if (host == null) { throw new ArgumentNullException("host"); }
+
             host.CallTemplate("Implementation.ObjectClasses.ObjectListProperty",
                 ctx, serializationList,
                 name, wrapperName, wrapperClass, exposedListType,

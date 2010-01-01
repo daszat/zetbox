@@ -16,6 +16,8 @@ namespace Kistl.Server.Generators.FrozenObjects.Implementation.ObjectClasses
     {
         public static void Call(IGenerationHost host, IKistlContext ctx, ObjectClass objClass)
         {
+            if (host == null) { throw new ArgumentNullException("host"); }
+
             host.CallTemplate("Implementation.ObjectClasses.DataStore", ctx, objClass);
         }
 

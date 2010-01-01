@@ -12,6 +12,8 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
     {
         public static void Call(IGenerationHost host, IKistlContext ctx, ObjectClass cls)
         {
+            if (host == null) { throw new ArgumentNullException("host"); }
+
             host.CallTemplate("Implementation.ObjectClasses.GetPropertyErrorTemplate", ctx, cls);
         }
     }

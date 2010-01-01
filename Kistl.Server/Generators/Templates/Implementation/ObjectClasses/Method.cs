@@ -17,6 +17,8 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
     {
         internal static void Call(Arebis.CodeGeneration.IGenerationHost host, IKistlContext ctx, DataType cls, Kistl.App.Base.Method m, int index)
         {
+            if (host == null) { throw new ArgumentNullException("host"); }
+
             host.CallTemplate("Implementation.ObjectClasses.Method", ctx, cls, m, index);
         }
 

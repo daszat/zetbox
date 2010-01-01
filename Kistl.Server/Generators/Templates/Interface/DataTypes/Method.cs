@@ -16,6 +16,8 @@ namespace Kistl.Server.Generators.Templates.Interface.DataTypes
     {
         public static void Call(Arebis.CodeGeneration.IGenerationHost host, IKistlContext ctx, Kistl.App.Base.Method m, int index)
         {
+            if (host == null) { throw new ArgumentNullException("host"); }
+
             host.CallTemplate("Interface.DataTypes.Method", ctx, m, index);
         }
 

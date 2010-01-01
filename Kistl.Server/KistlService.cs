@@ -33,6 +33,8 @@ namespace Kistl.Server
         [Obsolete]
         public MemoryStream GetObject(SerializableType type, int ID)
         {
+            if (type == null) { throw new ArgumentNullException("type"); }
+
             try
             {
                 using (Logging.Facade.DebugTraceMethodCall(type.ToString()))
@@ -58,7 +60,7 @@ namespace Kistl.Server
                 return null;
             }
         }
-
+        
         /// <summary>
         /// Puts a number of changed objects into the database. The resultant objects are sent back to the client.
         /// </summary>
@@ -67,6 +69,8 @@ namespace Kistl.Server
         /// <returns>a streamable list of <see cref="IPersistenceObject"/>s</returns>
         public MemoryStream SetObjects(MemoryStream msg, IEnumerable<ObjectNotificationRequest> notificationRequests)
         {
+            if (msg == null) { throw new ArgumentNullException("msg"); }
+
             try
             {
                 msg.Seek(0, SeekOrigin.Begin);
@@ -98,7 +102,7 @@ namespace Kistl.Server
                         // Set Operation
                         var changedObjects = ServerObjectHandlerFactory
                             .GetServerObjectSetHandler()
-                            .SetObjects(ctx, objects, notificationRequests)
+                            .SetObjects(ctx, objects, notificationRequests ?? new ObjectNotificationRequest[0])
                             .Cast<IStreamable>();
                         return SendObjects(changedObjects);
                     }
@@ -122,6 +126,8 @@ namespace Kistl.Server
         /// <returns>the found objects</returns>
         public MemoryStream GetList(SerializableType type, int maxListCount, SerializableExpression filter, List<SerializableExpression> orderBy)
         {
+            if (type == null) { throw new ArgumentNullException("type"); }
+
             try
             {
                 using (Logging.Facade.DebugTraceMethodCall(type.ToString()))
@@ -213,6 +219,8 @@ namespace Kistl.Server
         [Obsolete]
         public MemoryStream GetListOf(SerializableType type, int ID, string property)
         {
+            if (type == null) { throw new ArgumentNullException("type"); }
+
             try
             {
                 using (Logging.Facade.DebugTraceMethodCall(type.ToString()))

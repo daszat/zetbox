@@ -16,6 +16,8 @@ namespace Kistl.Server.Generators.Templates.Implementation.CollectionEntries
     {
         public static void Call(Arebis.CodeGeneration.IGenerationHost host, IKistlContext ctx, Relation rel)
         {
+            if (host == null) { throw new ArgumentNullException("host"); }
+
             host.CallTemplate("Implementation.CollectionEntries.ObjectCollectionEntry", ctx, rel);
         }
 

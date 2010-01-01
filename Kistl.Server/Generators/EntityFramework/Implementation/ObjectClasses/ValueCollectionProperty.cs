@@ -14,6 +14,8 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
     {
         public static void Call(IGenerationHost host, IKistlContext ctx, Templates.Implementation.SerializationMembersList list, ValueTypeProperty prop)
         {
+            if (host == null) { throw new ArgumentNullException("host"); }
+
             host.CallTemplate("Implementation.ObjectClasses.ValueCollectionProperty", ctx,
                 list, prop);
         }

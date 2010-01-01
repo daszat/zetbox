@@ -16,6 +16,8 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.EfModel
     {
         public static void Call(IGenerationHost host, IKistlContext ctx, ObjectClass obj)
         {
+            if (host == null) { throw new ArgumentNullException("host"); }
+
             host.CallTemplate("Implementation.EfModel.ModelMslEntityTypeMapping", ctx, obj);
         }
 

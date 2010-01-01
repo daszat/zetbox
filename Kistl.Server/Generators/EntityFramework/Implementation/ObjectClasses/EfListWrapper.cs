@@ -13,6 +13,8 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
         public static void Call(IGenerationHost host, IKistlContext ctx, string nameImpl, string relAssociationName, string relEndRoleName,
             string relEndDataTypeStringImpl)
         {
+            if (host == null) { throw new ArgumentNullException("host"); }
+
             host.CallTemplate("Implementation.ObjectClasses.EfListWrapper", ctx,
                 nameImpl,
                 relAssociationName, relEndRoleName, relEndDataTypeStringImpl);

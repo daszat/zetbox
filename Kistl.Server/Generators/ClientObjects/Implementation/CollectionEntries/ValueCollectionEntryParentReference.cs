@@ -13,6 +13,8 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.CollectionEntries
            Templates.Implementation.SerializationMembersList membersToSerialize,
            string className, string propertyName)
         {
+            if (host == null) { throw new ArgumentNullException("host"); }
+
             host.CallTemplate("Implementation.CollectionEntries.ValueCollectionEntryParentReference",
                 ctx, membersToSerialize, className, propertyName);
         }

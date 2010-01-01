@@ -12,6 +12,8 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.EfModel
     {
         public static void Call(IGenerationHost host, IKistlContext ctx, IEnumerable<Property> properties)
         {
+            if (host == null) { throw new ArgumentNullException("host"); }
+
             host.CallTemplate("Implementation.EfModel.ModelCsdlEntityTypeFields", ctx, properties);
         }
     }

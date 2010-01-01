@@ -13,6 +13,8 @@ namespace Kistl.Server.Generators.Templates.Implementation.CollectionEntries
         public static void Call(Arebis.CodeGeneration.IGenerationHost host,
           IKistlContext ctx, SerializationMembersList serializationList)
         {
+            if (host == null) { throw new ArgumentNullException("host"); }
+
             host.CallTemplate("Implementation.CollectionEntries.ExportGuidProperty",
                 ctx, serializationList);
         }

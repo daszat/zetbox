@@ -105,6 +105,8 @@ namespace Kistl.App.Extensions
 
         public static PresentableModelDescriptor GetPresentableModelDescriptor(this TypeRef tr)
         {
+            if (tr == null) { throw new ArgumentNullException("tr"); }
+
             PrimeCaches(null);
 
             PresentableModelDescriptor result = null;

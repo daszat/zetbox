@@ -26,6 +26,8 @@ namespace Kistl.Server.Generators.Extensions
 
         public static string ToCSharpTypeRef(this Type t)
         {
+            if (t == null) { throw new ArgumentNullException("t"); }
+
             if (t.IsGenericType)
             {
                 return String.Format("{0}<{1}>",
@@ -41,6 +43,8 @@ namespace Kistl.Server.Generators.Extensions
 
         public static string ToDbType(this ValueTypeProperty prop)
         {
+            if (prop == null) { throw new ArgumentNullException("prop"); }
+
             if (prop is IntProperty)
                 return "int";
             if (prop is StringProperty)

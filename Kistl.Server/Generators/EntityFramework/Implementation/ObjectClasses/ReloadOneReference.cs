@@ -17,6 +17,8 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
 		    string fkBackingName,
             string fkGuidBackingName)
         {
+            if (host == null) { throw new ArgumentNullException("host"); }
+
             host.CallTemplate("Implementation.ObjectClasses.ReloadOneReference", ctx, referencedInterface, referencedImplementation, 
                 name, efName, fkBackingName, fkGuidBackingName);
         }

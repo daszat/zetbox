@@ -38,13 +38,11 @@ namespace Kistl.Server.Packaging
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="ctx"></param>
-        /// <param name="s"></param>
         public static void Deploy(IKistlContext ctx, Stream s)
         {
+            if (ctx == null) { throw new ArgumentNullException("ctx"); }
+            if (s == null) { throw new ArgumentNullException("s"); }
+
             using (Log.DebugTraceMethodCall())
             {
                 Log.InfoFormat("Starting Deployment from {0}", s is FileStream ? ((FileStream)s).Name : s.GetType().Name);
@@ -149,13 +147,11 @@ namespace Kistl.Server.Packaging
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="ctx"></param>
-        /// <param name="s"></param>
         public static void LoadFromXml(IKistlContext ctx, Stream s)
         {
+            if (ctx == null) { throw new ArgumentNullException("ctx"); }
+            if (s == null) { throw new ArgumentNullException("s"); }
+
             using (Log.DebugTraceMethodCall())
             {
                 Log.InfoFormat("Starting Import from {0}", s is FileStream ? ((FileStream)s).Name : s.GetType().Name);

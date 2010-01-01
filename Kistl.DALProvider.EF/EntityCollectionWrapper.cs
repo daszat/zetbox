@@ -40,12 +40,10 @@ namespace Kistl.DALProvider.EF
                 underlyingCollection.Add(null);
                 return;
             }
-            else
-            {
-                if (ctx != item.Context) { throw new WrongKistlContextException(); }
 
-                underlyingCollection.Add((TImpl)item);
-            }
+            if (ctx != item.Context) { throw new WrongKistlContextException(); }
+
+            underlyingCollection.Add((TImpl)item);
         }
 
         public virtual void Clear()
@@ -67,6 +65,8 @@ namespace Kistl.DALProvider.EF
 
         public virtual void CopyTo(TInterface[] array, int arrayIndex)
         {
+            if (array == null) { throw new ArgumentNullException("array"); }
+
             foreach (TInterface i in GetEnumerable())
             {
                 array[arrayIndex++] = i;

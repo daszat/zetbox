@@ -13,6 +13,8 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
     {
         public static void Call(IGenerationHost host, IKistlContext ctx, Templates.Implementation.SerializationMembersList list, EnumerationProperty prop, bool callGetterSetterEvents)
         {
+            if (host == null) { throw new ArgumentNullException("host"); }
+
             host.CallTemplate("Implementation.ObjectClasses.EnumerationPropertyTemplate", ctx,
                 list, prop, callGetterSetterEvents);
         }

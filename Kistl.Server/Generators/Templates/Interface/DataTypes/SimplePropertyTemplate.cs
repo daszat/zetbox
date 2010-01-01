@@ -16,6 +16,8 @@ namespace Kistl.Server.Generators.Templates.Interface.DataTypes
     {
         public static void Call(IGenerationHost host, IKistlContext ctx, Property p, bool isReadonly)
         {
+            if (host == null) { throw new ArgumentNullException("host"); }
+
             host.CallTemplate("Interface.DataTypes.SimplePropertyTemplate", ctx, p, isReadonly);
         }
     }

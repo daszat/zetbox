@@ -11,10 +11,11 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
 {
     public partial class UpdateParentTemplate
     {
-
         public static void Call(IGenerationHost host, IKistlContext ctx,
             DataType dataType)
         {
+            if (host == null) { throw new ArgumentNullException("host"); }
+
             host.CallTemplate("Implementation.ObjectClasses.UpdateParentTemplate",
                 ctx, dataType);
         }

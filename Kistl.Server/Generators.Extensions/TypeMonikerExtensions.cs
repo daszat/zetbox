@@ -8,7 +8,7 @@ using Kistl.App.Base;
 
 namespace Kistl.Server.Generators.Extensions
 {
-    public static class TypeMonikerExtensions
+    internal static class TypeMonikerExtensions
     {
         public static TypeMoniker GetTypeMoniker(this DataType objClass)
         {

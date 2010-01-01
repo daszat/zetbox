@@ -14,6 +14,8 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
             Templates.Implementation.SerializationMembersList serializationList,
             Relation rel, RelationEndRole endRole)
         {
+            if (host == null) { throw new ArgumentNullException("host"); }
+
             host.CallTemplate("Implementation.ObjectClasses.ObjectListProperty", ctx,
                 serializationList,
                 rel, endRole);

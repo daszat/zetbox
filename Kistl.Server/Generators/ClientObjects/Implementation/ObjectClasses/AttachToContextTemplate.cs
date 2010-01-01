@@ -13,6 +13,8 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
         public static void Call(IGenerationHost host, IKistlContext ctx,
             ObjectClass dataType)
         {
+            if (host == null) { throw new ArgumentNullException("host"); }
+
             host.CallTemplate("Implementation.ObjectClasses.AttachToContextTemplate", ctx,
                 dataType);
         }

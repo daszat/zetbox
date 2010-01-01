@@ -23,20 +23,20 @@ namespace Kistl.Server.Generators
     public static class Generator
     {
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Server.Generator");
-        
+
         public static void GenerateCode()
         {
             using (Log.DebugTraceMethodCall())
             {
                 Log.Info("Generating Code");
-                
+
                 if (string.IsNullOrEmpty(ApplicationContext.Current.Configuration.Server.CodeGenPath))
                 {
                     throw new Kistl.API.Configuration.ConfigurationException("CodeGenPath is not defined in the current configuration file.");
                 }
 
                 Log.InfoFormat("Writing results to [{0}]", ApplicationContext.Current.Configuration.Server.CodeGenPath);
-                
+
                 using (IKistlContext ctx = KistlContext.GetContext())
                 {
                     string serverReferencePath = Path.GetDirectoryName(typeof(Generator).Assembly.Location);
@@ -131,26 +131,35 @@ namespace Kistl.Server.Generators
         }
 
         #region GetLists
-        public static IQueryable<ObjectClass> GetObjectClassList(Kistl.API.IKistlContext ctx)
+
+        public static IQueryable<ObjectClass> GetObjectClassList(IKistlContext ctx)
         {
+            if (ctx == null) { throw new ArgumentNullException("ctx"); }
+
             return from c in ctx.GetQuery<ObjectClass>()
                    select c;
         }
 
-        public static IQueryable<Interface> GetInterfaceList(Kistl.API.IKistlContext ctx)
+        public static IQueryable<Interface> GetInterfaceList(IKistlContext ctx)
         {
+            if (ctx == null) { throw new ArgumentNullException("ctx"); }
+
             return from i in ctx.GetQuery<Interface>()
                    select i;
         }
 
-        public static IQueryable<Enumeration> GetEnumList(Kistl.API.IKistlContext ctx)
+        public static IQueryable<Enumeration> GetEnumList(IKistlContext ctx)
         {
+            if (ctx == null) { throw new ArgumentNullException("ctx"); }
+
             return from e in ctx.GetQuery<Enumeration>()
                    select e;
         }
 
-        public static IQueryable<Struct> GetStructList(Kistl.API.IKistlContext ctx)
+        public static IQueryable<Struct> GetStructList(IKistlContext ctx)
         {
+            if (ctx == null) { throw new ArgumentNullException("ctx"); }
+
             return from s in ctx.GetQuery<Struct>()
                    select s;
         }

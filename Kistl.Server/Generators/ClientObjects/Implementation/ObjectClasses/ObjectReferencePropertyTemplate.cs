@@ -73,6 +73,8 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
             bool hasPositionStorage,
             bool callGetterSetterEvents)
         {
+            if (host == null) { throw new ArgumentNullException("host"); }
+
             host.CallTemplate("Implementation.ObjectClasses.ObjectReferencePropertyTemplate", ctx, serializationList,
                 name, efName, fkBackingName, fkGuidBackingName, ownInterface, referencedInterface, rel, endRole, hasInverseNavigator, hasPositionStorage, callGetterSetterEvents);
         }
