@@ -309,11 +309,14 @@ namespace Kistl.Client.Presentables
         {
             if (CanExecute(data))
             {
-                var objectClass = data as ObjectClassModel;
                 var externalCtx = KistlContext.GetContext();
+                var objectClass = data as ObjectClassModel;
+                
+                // responsibility to externalCtx's disposal passes to newWorkspace
                 var newWorkspace = Factory.CreateSpecificModel<WorkspaceModel>(externalCtx);
                 var newObject = externalCtx.Create(objectClass.GetDescribedInterfaceType());
                 var newModel = (DataObjectModel)Factory.CreateDefaultModel(externalCtx, newObject);
+
                 newWorkspace.HistoryTouch(newModel);
                 newWorkspace.SelectedItem = newModel;
                 Factory.ShowModel(newWorkspace, true);

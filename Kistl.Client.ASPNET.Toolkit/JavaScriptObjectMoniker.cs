@@ -82,41 +82,49 @@ namespace Kistl.Client.ASPNET.Toolkit
         public static string ToJSON(this InterfaceType ifType)
         {
             DataContractJsonSerializer s = new DataContractJsonSerializer(typeof(SerializableType));
-            MemoryStream ms = new MemoryStream();
-            s.WriteObject(ms, new SerializableType(ifType));
-            return GetEncoder().GetString(ms.ToArray());
+            using (var ms = new MemoryStream())
+            {
+                s.WriteObject(ms, new SerializableType(ifType));
+                return GetEncoder().GetString(ms.ToArray());
+            }
         }
 
         public static string ToJSON(this DataObjectModel obj)
         {
             DataContractJsonSerializer s = new DataContractJsonSerializer(typeof(JavaScriptObjectMoniker));
-            MemoryStream ms = new MemoryStream();
-            s.WriteObject(ms, new JavaScriptObjectMoniker(obj));
-            return GetEncoder().GetString(ms.ToArray());
+            using (var ms = new MemoryStream())
+            {
+                s.WriteObject(ms, new JavaScriptObjectMoniker(obj));
+                return GetEncoder().GetString(ms.ToArray());
+            }
         }
 
         public static string ToJSONArray(this IEnumerable<DataObjectModel> list)
         {
             DataContractJsonSerializer s = new DataContractJsonSerializer(typeof(IEnumerable<JavaScriptObjectMoniker>));
-            MemoryStream ms = new MemoryStream();
-            s.WriteObject(ms, list.Select(i => new JavaScriptObjectMoniker(i)));
-            return GetEncoder().GetString(ms.ToArray());
+            using (var ms = new MemoryStream())
+            {
+                s.WriteObject(ms, list.Select(i => new JavaScriptObjectMoniker(i)));
+                return GetEncoder().GetString(ms.ToArray());
+            }
         }
 
         public static IEnumerable<DataObjectModel> FromJSONArray(this string jsonArray, IKistlContext ctx)
         {
             if (string.IsNullOrEmpty(jsonArray)) return new List<DataObjectModel>();
- 
+
             DataContractJsonSerializer s = new DataContractJsonSerializer(typeof(IEnumerable<JavaScriptObjectMoniker>));
-            MemoryStream ms = new MemoryStream(GetEncoder().GetBytes(jsonArray));
-            var result = (IEnumerable<JavaScriptObjectMoniker>)s.ReadObject(ms);
-            if (result == null)
+            using (var ms = new MemoryStream(GetEncoder().GetBytes(jsonArray)))
             {
-                return new List<DataObjectModel>();
-            }
-            else
-            {
-                return result.Select(i => i.GetDataObject(ctx));
+                var result = (IEnumerable<JavaScriptObjectMoniker>)s.ReadObject(ms);
+                if (result == null)
+                {
+                    return new List<DataObjectModel>();
+                }
+                else
+                {
+                    return result.Select(i => i.GetDataObject(ctx));
+                }
             }
         }
 
@@ -125,15 +133,17 @@ namespace Kistl.Client.ASPNET.Toolkit
             if (string.IsNullOrEmpty(json)) return null;
 
             DataContractJsonSerializer s = new DataContractJsonSerializer(typeof(JavaScriptObjectMoniker));
-            MemoryStream ms = new MemoryStream(GetEncoder().GetBytes(json));
-            var result = (JavaScriptObjectMoniker)s.ReadObject(ms);
-            if (result == null)
+            using (var ms = new MemoryStream(GetEncoder().GetBytes(json)))
             {
-                return null;
-            }
-            else
-            {
-                return result.GetDataObject(ctx);
+                var result = (JavaScriptObjectMoniker)s.ReadObject(ms);
+                if (result == null)
+                {
+                    return null;
+                }
+                else
+                {
+                    return result.GetDataObject(ctx);
+                }
             }
         }
     }

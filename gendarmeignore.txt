@@ -100,6 +100,23 @@ M: System.Collections.IEnumerator Kistl.DALProvider.EF.EntityCollectionWrapper`2
 M: System.Collections.IEnumerator Kistl.Server.SchemaManagement.SchemaProvider.SQLServer.SchemaProvider/<GetTableNames>d__0::System.Collections.IEnumerable.GetEnumerator()
 M: System.Collections.IEnumerator Kistl.Server.SchemaManagement.SchemaProvider.SQLServer.SchemaProvider/<GetFKConstraintNames>d__7::System.Collections.IEnumerable.GetEnumerator()
 M: System.Collections.IEnumerator Kistl.Server.SchemaManagement.SchemaProvider.SQLServer.SchemaProvider/<GetTableColumnNames>d__d::System.Collections.IEnumerable.GetEnumerator()
+# false positives when working with ASP.Net's ScriptManager
+M: System.Void Kistl.Client.ASPNET.Toolkit.View.DataObjectReferenceView::OnPreRender(System.EventArgs)
+M: System.Void Kistl.Client.ASPNET.Toolkit.View.LauchnerView::OnPreRender(System.EventArgs)
+M: System.Void Kistl.Client.ASPNET.Toolkit.JavascriptRenderer::OnPreRender(System.EventArgs)
+M: System.Void Kistl.Client.ASPNET.Toolkit.Dialogs.ChooseObjectDialog::OnPreRender(System.EventArgs)
+M: System.Void Kistl.Client.ASPNET.Toolkit.View.WorkspaceView::OnPreRender(System.EventArgs)
+M: System.Void Kistl.Client.ASPNET.Toolkit.View.DataObjectListView::OnPreRender(System.EventArgs)
+# factory method to create this object and pass it on
+M: System.Void Kistl.Client.Presentables.CreateNewInstanceExternallyCommand::DoExecute(System.Object)
+M: System.Void Kistl.Client.ASPNET.Toolkit.KistlContextManagerModule::context_BeginRequest(System.Object,System.EventArgs)
+M: System.Void Kistl.Client.ASPNET.Toolkit.View.WorkspaceView::RecentObjects_CollectionChanged(System.Object,System.Collections.Specialized.NotifyCollectionChangedEventArgs)
+M: System.Object Kistl.Client.ASPNET.Toolkit.AspnetModelFactoryExtensions::AddControl(System.Web.UI.Control,System.Object)
+M: System.Void Kistl.Client.ASPNET.Toolkit.View.DataObjectFullView::repProperties_OnItemDataBound(System.Object,System.Web.UI.WebControls.RepeaterItemEventArgs)
+M: System.Void Kistl.Client.Forms.FormsModelFactory::CreateWorkspace(Kistl.Client.Presentables.WorkspaceModel,System.Boolean)
+M: System.Void Kistl.Client.Forms.View.DataObjectFullView::SyncProperties()
+M: System.Void Kistl.Client.WPF.View.KistlBase.ObjectClassDisplay::Edit_Click(System.Object,System.Windows.RoutedEventArgs)
+
 
 ###############################################################################
 ##  GLOBAL IGNORES  ###########################################################
