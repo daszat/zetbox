@@ -50,7 +50,6 @@ M: System.Delegate Kistl.Client.WPF.View.TextValueSelectionView::_CreateDelegate
 M: System.Delegate Kistl.Client.WPF.View.KistlBase.TypeRefPropertyView::_CreateDelegate(System.Type,System.String)
 M: System.Delegate Kistl.Client.WPF.View.TextValueSelectionView::_CreateDelegate(System.Type,System.String)
 
-
 R: Gendarme.Rules.Correctness.CheckParametersNullityInVisibleMethodsRule
 # MethodInvocation implementors should not have to check for thisobj==null => too many false positives
 A: Kistl.App.Projekte.Common
@@ -67,6 +66,40 @@ M: System.Void Kistl.DALProvider.EF.EntityCollectionWrapper`2::Add(TInterface)
 M: System.Boolean Kistl.DALProvider.EF.EntityCollectionWrapper`2::Contains(TInterface)
 M: System.Boolean Kistl.DALProvider.EF.EntityCollectionWrapper`2::Remove(TInterface)
 M: System.Void Kistl.DALProvider.EF.EntityCollectionWrapper`2::CopyTo(System.Array,System.Int32)
+
+R: Gendarme.Rules.Portability.MonoCompatibilityReviewRule
+# exclude known not-implemented parts: WPF, EF
+A: Kistl.Client.WPF
+A: Kistl.DALProvider.EF
+# this should be replaced in time for a linux-release, ignore for now
+M: System.Void Kistl.Server.Generators.Generator::GenerateCode()
+
+R: Gendarme.Rules.Correctness.EnsureLocalDisposalRule
+# false positives when returning an IEnumerator from GetEnumerator
+M: System.Collections.IEnumerator Kistl.API.BaseRelationCollectionWrapper`6::System.Collections.IEnumerable.GetEnumerator()
+M: System.Collections.IEnumerator Kistl.API.Utils.ReadOnlyProjectedCollection`2::System.Collections.IEnumerable.GetEnumerator()
+M: System.Collections.IEnumerator Kistl.API.Utils.ContextCache::System.Collections.IEnumerable.GetEnumerator()
+M: System.Collections.IEnumerator Kistl.API.Utils.GenericCastingCollectionWrapper`2::System.Collections.IEnumerable.GetEnumerator()
+M: System.Collections.IEnumerator Kistl.API.Utils.SortListFromCollection`2::System.Collections.IEnumerable.GetEnumerator()
+M: System.Collections.IEnumerator Kistl.API.Utils.LookupDictionary`2::System.Collections.IEnumerable.GetEnumerator()
+M: System.Collections.IEnumerator Kistl.API.ValueCollectionWrapper`4::System.Collections.IEnumerable.GetEnumerator()
+M: System.Collections.IEnumerator Kistl.API.Client.BaseRelationshipFilterCollection`1::System.Collections.IEnumerable.GetEnumerator()
+M: System.Collections.IEnumerator Kistl.Client.ASPNET.Toolkit.View.DataObjectReferenceView/<GetScriptDescriptors>d__0::System.Collections.IEnumerable.GetEnumerator()
+M: System.Collections.IEnumerator Kistl.Client.ASPNET.Toolkit.View.DataObjectReferenceView/<GetScriptReferences>d__4::System.Collections.IEnumerable.GetEnumerator()
+M: System.Collections.IEnumerator Kistl.Client.ASPNET.Toolkit.View.LauchnerView/<GetScriptDescriptors>d__0::System.Collections.IEnumerable.GetEnumerator()
+M: System.Collections.IEnumerator Kistl.Client.ASPNET.Toolkit.View.LauchnerView/<GetScriptReferences>d__4::System.Collections.IEnumerable.GetEnumerator()
+M: System.Collections.IEnumerator Kistl.Client.ASPNET.Toolkit.JavascriptRenderer/<GetScriptDescriptors>d__0::System.Collections.IEnumerable.GetEnumerator()
+M: System.Collections.IEnumerator Kistl.Client.ASPNET.Toolkit.JavascriptRenderer/<GetScriptReferences>d__3::System.Collections.IEnumerable.GetEnumerator()
+M: System.Collections.IEnumerator Kistl.Client.ASPNET.Toolkit.Dialogs.ChooseObjectDialog/<GetScriptDescriptors>d__0::System.Collections.IEnumerable.GetEnumerator()
+M: System.Collections.IEnumerator Kistl.Client.ASPNET.Toolkit.Dialogs.ChooseObjectDialog/<GetScriptReferences>d__3::System.Collections.IEnumerable.GetEnumerator()
+M: System.Collections.IEnumerator Kistl.Client.ASPNET.Toolkit.View.WorkspaceView/<GetScriptDescriptors>d__2::System.Collections.IEnumerable.GetEnumerator()
+M: System.Collections.IEnumerator Kistl.Client.ASPNET.Toolkit.View.WorkspaceView/<GetScriptReferences>d__6::System.Collections.IEnumerable.GetEnumerator()
+M: System.Collections.IEnumerator Kistl.Client.ASPNET.Toolkit.View.DataObjectListView/<GetScriptDescriptors>d__4::System.Collections.IEnumerable.GetEnumerator()
+M: System.Collections.IEnumerator Kistl.Client.ASPNET.Toolkit.View.DataObjectListView/<GetScriptReferences>d__8::System.Collections.IEnumerable.GetEnumerator()
+M: System.Collections.IEnumerator Kistl.DALProvider.EF.EntityCollectionWrapper`2::System.Collections.IEnumerable.GetEnumerator()
+M: System.Collections.IEnumerator Kistl.Server.SchemaManagement.SchemaProvider.SQLServer.SchemaProvider/<GetTableNames>d__0::System.Collections.IEnumerable.GetEnumerator()
+M: System.Collections.IEnumerator Kistl.Server.SchemaManagement.SchemaProvider.SQLServer.SchemaProvider/<GetFKConstraintNames>d__7::System.Collections.IEnumerable.GetEnumerator()
+M: System.Collections.IEnumerator Kistl.Server.SchemaManagement.SchemaProvider.SQLServer.SchemaProvider/<GetTableColumnNames>d__d::System.Collections.IEnumerable.GetEnumerator()
 
 ###############################################################################
 ##  GLOBAL IGNORES  ###########################################################
@@ -169,10 +202,23 @@ A: Kistl.DALProvider.EF
 A: Kistl.Server
 A: Kistl.Server.Service
 
-R: Gendarme.Rules.Portability.MonoCompatibilityReviewRule
-# exclude known not-implemented parts: WPF, EF
+# const considered harmful
+R: Gendarme.Rules.Performance.PreferLiteralOverInitOnlyFieldsRule
+A: Kistl.API
+A: Kistl.App.Projekte.Common
+A: Kistl.DalProvider.Frozen
+A: TempAppHelpers
+A: Kistl.API.Client
+A: Kistl.App.Projekte.Client
+A: Kistl.Client.ASPNET.Toolkit
+A: Kistl.Client
+A: Kistl.Client.Forms
 A: Kistl.Client.WPF
+A: Kistl.DalProvider.ClientObjects
+A: Kistl.API.Server
+A: Kistl.App.Projekte.Server
 A: Kistl.DALProvider.EF
-# this should be replaced in time for a linux-release, ignore for now
-M: System.Void Kistl.Server.Generators.Generator::GenerateCode()
+A: Kistl.Server
+A: Kistl.Server.Service
+
 
