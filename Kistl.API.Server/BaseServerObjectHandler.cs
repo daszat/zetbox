@@ -175,8 +175,6 @@ namespace Kistl.API.Server
         public IEnumerable<IStreamable> GetList(IKistlContext ctx, int maxListCount, Expression filter, List<Expression> orderBy)
         {
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
-            if (filter == null) { throw new ArgumentNullException("filter"); }
-            if (orderBy == null) { throw new ArgumentNullException("orderBy"); }
 
             if (maxListCount > Kistl.API.Helper.MAXLISTCOUNT)
             {
