@@ -343,13 +343,13 @@ namespace Kistl.API
             get
             {
                 TEntry entry = GetAt(index);
-                if (entry == null) throw new ArgumentOutOfRangeException(string.Format("Index {0} not found in collection", index));
+                if (entry == null) throw new ArgumentOutOfRangeException("index", String.Format("Index {0} not found in collection", index));
                 return ItemFromEntry(entry);
             }
             set
             {
                 TEntry entry = GetAt(index);
-                if (entry == null) throw new ArgumentOutOfRangeException(string.Format("Index {0} not found in collection", index));
+                if (entry == null) throw new ArgumentOutOfRangeException("index", String.Format("Index {0} not found in collection", index));
 
                 if (!Object.Equals(ItemFromEntry(entry), value))
                 {

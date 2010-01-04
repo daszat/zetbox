@@ -11,7 +11,7 @@ namespace Kistl.Client.ASPNET.Toolkit.View
     public abstract class ModelUserControl<T> : System.Web.UI.UserControl, IView
         where T : class
     {
-        public T Model 
+        public T Model
         {
             get
             {
@@ -25,7 +25,7 @@ namespace Kistl.Client.ASPNET.Toolkit.View
 
         public virtual void SetModel(PresentableModel mdl)
         {
-            if (!(mdl is T)) throw new ArgumentOutOfRangeException("Incompatible Model was set");
+            if (!(mdl is T)) throw new ArgumentOutOfRangeException("mdl", "Incompatible Model was set");
             _Model = mdl;
         }
 

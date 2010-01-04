@@ -150,7 +150,7 @@ namespace Kistl.Server.Generators
             t = t ?? Type.GetType(String.Format("{0}.{1}", this.Settings["basetemplatepath"], templateClass));
 
             if (t == null)
-                throw new ArgumentException("templateClass", String.Format("No class found for {0}", templateClass));
+                throw new ArgumentOutOfRangeException("templateClass", String.Format("No class found for {0}", templateClass));
 
             var template = (KistlCodeTemplate)Activator.CreateInstance(t, new object[] { this }.Concat(parameters).ToArray());
             template.Generate();

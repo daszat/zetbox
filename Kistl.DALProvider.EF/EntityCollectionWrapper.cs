@@ -227,7 +227,7 @@ namespace Kistl.DALProvider.EF
         public void RemoveAt(int index)
         {
             TInterface item = GetAt(index);
-            if (item == null) throw new ArgumentOutOfRangeException(string.Format("Index {0} not found in collection", index));
+            if (item == null) throw new ArgumentOutOfRangeException("index", String.Format("Index {0} not found in collection", index));
             base.Remove(item);
 
             // TODO: Optimize
@@ -246,13 +246,13 @@ namespace Kistl.DALProvider.EF
             get
             {
                 TInterface i = GetAt(index);
-                if (i == null) throw new ArgumentOutOfRangeException(string.Format("Index {0} not found in collection", index));
+                if (i == null) throw new ArgumentOutOfRangeException("index", String.Format("Index {0} not found in collection", index));
                 return i;
             }
             set
             {
                 TInterface i = GetAt(index);
-                if (i == null) throw new ArgumentOutOfRangeException(string.Format("Index {0} not found in collection", index));
+                if (i == null) throw new ArgumentOutOfRangeException("index", String.Format("Index {0} not found in collection", index));
 
                 if (i != value)
                 {

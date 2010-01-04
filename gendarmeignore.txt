@@ -122,6 +122,14 @@ M: System.Void Kistl.Server.Server::Init(Kistl.API.Configuration.KistlConfig)
 M: System.Void Kistl.Server.Service.Program::XmlFallbackInitialisation(System.String)
 M: Kistl.API.Configuration.KistlConfig Kistl.Server.Service.Program::InitApplicationContext(System.String[])
 
+# see https://bugzilla.novell.com/show_bug.cgi?id=567995
+R: Gendarme.Rules.Exceptions.InstantiateArgumentExceptionCorrectlyRule
+M: TItem Kistl.API.BaseRelationListWrapper`6::get_Item(System.Int32)
+M: System.Void Kistl.API.BaseRelationListWrapper`6::set_Item(System.Int32,TItem)
+M: TValue Kistl.API.ValueListWrapper`4::get_Item(System.Int32)
+M: System.Void Kistl.API.ValueListWrapper`4::set_Item(System.Int32,TValue)
+M: TInterface Kistl.DALProvider.EF.EntityListWrapper`2::get_Item(System.Int32)
+M: System.Void Kistl.DALProvider.EF.EntityListWrapper`2::set_Item(System.Int32,TInterface)
 
 ###############################################################################
 ##  GLOBAL IGNORES  ###########################################################

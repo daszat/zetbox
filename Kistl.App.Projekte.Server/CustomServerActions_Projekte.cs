@@ -29,8 +29,8 @@ namespace Kistl.App.Projekte
         /// <param name="obj"></param>
         public static void OnPreSetObject_Task(Task obj)
         {
-            if (obj.Aufwand < 0) throw new ArgumentOutOfRangeException("Ungültiger Aufwand");
-            if (obj.DatumBis < obj.DatumVon) throw new ArgumentOutOfRangeException("Falsches Zeitalter");
+            if (obj.Aufwand < 0) throw new ArgumentOutOfRangeException("obj", "Ungültiger Aufwand");
+            if (obj.DatumBis < obj.DatumVon) throw new ArgumentOutOfRangeException("obj", "Falsches Zeitalter");
         }
     }
 }

@@ -41,7 +41,7 @@ namespace Kistl.Server.Generators.Extensions
             {
                 if ((attrs & MemberAttributes.Final) == MemberAttributes.Final)
                 {
-                    throw new ArgumentException("attrs", "don't know how to handle Final & Override");
+                    throw new ArgumentOutOfRangeException("attrs", "don't know how to handle Final & Override");
                 }
                 modifiers.Add("override");
             }

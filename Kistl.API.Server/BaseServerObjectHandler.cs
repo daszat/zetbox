@@ -91,7 +91,7 @@ namespace Kistl.API.Server
             Type result = _ServerObjectHandlerType.MakeGenericType(type);
 
             IServerObjectHandler obj = Activator.CreateInstance(result) as IServerObjectHandler;
-            if (obj == null) throw new ArgumentOutOfRangeException("Cannot create instance of Type " + type.FullName);
+            if (obj == null) throw new ArgumentOutOfRangeException("type", "Cannot create instance of Type " + type.FullName);
 
             return obj;
         }
@@ -233,14 +233,14 @@ namespace Kistl.API.Server
         }
     }
 
-    public class BaseServerObjectSetHandler 
+    public class BaseServerObjectSetHandler
         : IServerObjectSetHandler
     {
         /// <summary>
         /// Implements the SetObject command
         /// </summary>
         public virtual IEnumerable<IPersistenceObject> SetObjects(
-            IKistlContext ctx, 
+            IKistlContext ctx,
             IEnumerable<IPersistenceObject> objList,
             IEnumerable<ObjectNotificationRequest> notificationRequests)
         {
