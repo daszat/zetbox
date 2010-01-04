@@ -106,16 +106,32 @@ namespace Kistl.API.Configuration
             public string DocumentStore { get; set; }
 
             /// <summary>
-            /// Root path of generated files
+            /// Root path for log files
             /// </summary>
             [XmlElement(IsNullable = false)]
             public string LogFilePath { get; set; }
 
             /// <summary>
-            /// Root path for log files
+            /// Where the Generator will put its files while working. Contents 
+            /// of this directory are nuked on each run.
             /// </summary>
             [XmlElement(IsNullable = false)]
-            public string CodeGenPath { get; set; }
+            public string CodeGenWorkingPath { get; set; }
+
+            /// <summary>
+            /// Where the Generator will store its results when successful. 
+            /// Contents of this directory are replaced on each successful run.
+            /// </summary>
+            [XmlElement(IsNullable = true)]
+            public string CodeGenOutputPath { get; set; }
+
+            /// <summary>
+            /// Where the Generator will store the contents of the 
+            /// <see cref="CodeGenOutputPath"/> before replacing it. Leave 
+            /// this configuration parameter empty to suppress archival.
+            /// </summary>
+            [XmlElement(IsNullable = true)]
+            public string CodeGenArchivePath { get; set; }
 
             [XmlElement(IsNullable = false)]
             public string KistlDataContextType { get; set; }

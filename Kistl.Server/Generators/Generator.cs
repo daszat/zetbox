@@ -11,6 +11,7 @@ namespace Kistl.Server.Generators
     using Arebis.CodeGeneration;
 
     using Kistl.API;
+    using Kistl.API.Configuration;
     using Kistl.API.Server;
     using Kistl.API.Utils;
     using Kistl.App.Base;
@@ -19,6 +20,7 @@ namespace Kistl.Server.Generators
 
     using Microsoft.Build.BuildEngine;
     using Microsoft.Build.Framework;
+    using System.Globalization;
 
     public static class Generator
     {
@@ -28,15 +30,19 @@ namespace Kistl.Server.Generators
         {
             using (Log.DebugTraceMethodCall())
             {
-                Log.Info("Generating Code");
-
-                if (string.IsNullOrEmpty(ApplicationContext.Current.Configuration.Server.CodeGenPath))
+                var workingPath = ApplicationContext.Current.Configuration.Server.CodeGenWorkingPath;
+                if (String.IsNullOrEmpty(workingPath))
                 {
-                    throw new Kistl.API.Configuration.ConfigurationException("CodeGenPath is not defined in the current configuration file.");
+                    throw new ConfigurationException("CodeGenWorkingPath is not defined in the current configuration file.");
                 }
 
-                Log.InfoFormat("Writing results to [{0}]", ApplicationContext.Current.Configuration.Server.CodeGenPath);
+                if (!Directory.Exists(workingPath))
+                {
+                    Log.InfoFormat("Creating destination directory: [{0}]", workingPath);
+                    Directory.CreateDirectory(workingPath);
+                }
 
+                Log.InfoFormat("Generating Code to [{0}]", workingPath);
                 using (IKistlContext ctx = KistlContext.GetContext())
                 {
                     string serverReferencePath = Path.GetDirectoryName(typeof(Generator).Assembly.Location);
@@ -56,7 +62,7 @@ namespace Kistl.Server.Generators
                     if (File.Exists("TemplateCodegenLog.txt"))
                         File.Delete("TemplateCodegenLog.txt");
 
-                    string binPath = Path.Combine(ApplicationContext.Current.Configuration.Server.CodeGenPath, @"bin\Debug");
+                    string binPath = Path.Combine(workingPath, @"bin\Debug");
                     binPath = Path.GetFullPath(binPath); // Ensure that path is an absolute path
 
                     Log.DebugFormat("binPath = [{0}]", binPath);
@@ -68,7 +74,7 @@ namespace Kistl.Server.Generators
                     engine.RegisterLogger(new ConsoleLogger(LoggerVerbosity.Minimal));
 
                     var logger = new FileLogger();
-                    logger.Parameters = String.Format(@"logfile={0}", Path.Combine(ApplicationContext.Current.Configuration.Server.CodeGenPath, "compile.log"));
+                    logger.Parameters = String.Format(@"logfile={0}", Path.Combine(workingPath, "compile.log"));
                     engine.RegisterLogger(logger);
 
                     try
@@ -79,7 +85,7 @@ namespace Kistl.Server.Generators
                             using (log4net.NDC.Push(gen.Caption))
                             {
                                 Log.InfoFormat("Generating");
-                                string projectFileName = gen.Generator.Generate(ctx, ApplicationContext.Current.Configuration.Server.CodeGenPath);
+                                string projectFileName = gen.Generator.Generate(ctx, workingPath);
 
                                 Log.DebugFormat("Loading MsBuild Project");
                                 var proj = new Project(engine);
@@ -107,8 +113,47 @@ namespace Kistl.Server.Generators
                         engine.UnregisterAllLoggers();
                     }
                 }
+                ArchiveOldOutput();
+                PublishOutput();
+                Log.Info("Finished generating Code");
             }
-            Log.Info("Finished generating Code");
+        }
+
+        private static void PublishOutput()
+        {
+            var outputPath = ApplicationContext.Current.Configuration.Server.CodeGenOutputPath;
+            if (!String.IsNullOrEmpty(outputPath))
+            {
+                Log.InfoFormat("Publishing results to [{0}]", outputPath);
+                if (Directory.Exists(outputPath))
+                {
+                    Directory.Delete(outputPath, true);
+                }
+                Directory.Move(ApplicationContext.Current.Configuration.Server.CodeGenWorkingPath, outputPath);
+            }
+        }
+
+        private static void ArchiveOldOutput()
+        {
+            var outputPath = ApplicationContext.Current.Configuration.Server.CodeGenOutputPath;
+            if (String.IsNullOrEmpty(outputPath))
+            {
+                throw new ConfigurationException("CodeGenOutputPath is not defined in the current configuration file, but archival was requested: don't know what to archive.");
+            }
+            var archivePath = ApplicationContext.Current.Configuration.Server.CodeGenArchivePath;
+            if (!String.IsNullOrEmpty(archivePath))
+            {
+                var destDir = Path.Combine(archivePath, DateTime.Now.ToString("'CodeGen'yyyyMMdd'_'HHmmss"));
+                if (Directory.Exists(outputPath))
+                {
+                    Log.InfoFormat("Archiving old results to [{0}]", destDir);
+                    Directory.Move(outputPath, destDir);
+                }
+                else
+                {
+                    Log.InfoFormat("No results found in [{0}]", outputPath);
+                }
+            }
         }
 
         internal static TemplateGenerator GetTemplateGenerator(string providerTemplatePath,

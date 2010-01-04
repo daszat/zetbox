@@ -230,7 +230,7 @@ namespace Kistl.Client.Presentables
 
         private IEnumerable<string> GetErrors()
         {
-            return DataContext.AttachedObjects.OfType<IDataErrorInfo>().Select(o => o.Error).Where(s => !String.IsNullOrEmpty(s));
+            return DataContext.AttachedObjects.Where(po => po.ObjectState != DataObjectState.Unmodified).OfType<IDataErrorInfo>().Select(o => o.Error).Where(s => !String.IsNullOrEmpty(s));
         }
         /// <summary>
         /// Returns true if no data was passed.
