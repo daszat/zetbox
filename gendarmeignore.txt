@@ -84,6 +84,7 @@ M: System.Collections.IEnumerator Kistl.API.Utils.SortListFromCollection`2::Syst
 M: System.Collections.IEnumerator Kistl.API.Utils.LookupDictionary`2::System.Collections.IEnumerable.GetEnumerator()
 M: System.Collections.IEnumerator Kistl.API.ValueCollectionWrapper`4::System.Collections.IEnumerable.GetEnumerator()
 M: System.Collections.IEnumerator Kistl.API.Client.BaseRelationshipFilterCollection`1::System.Collections.IEnumerable.GetEnumerator()
+# the following are compiler generated stuff, sometimes these may change in the d__X part :-/
 M: System.Collections.IEnumerator Kistl.Client.ASPNET.Toolkit.View.DataObjectReferenceView/<GetScriptDescriptors>d__0::System.Collections.IEnumerable.GetEnumerator()
 M: System.Collections.IEnumerator Kistl.Client.ASPNET.Toolkit.View.DataObjectReferenceView/<GetScriptReferences>d__4::System.Collections.IEnumerable.GetEnumerator()
 M: System.Collections.IEnumerator Kistl.Client.ASPNET.Toolkit.View.LauchnerView/<GetScriptDescriptors>d__0::System.Collections.IEnumerable.GetEnumerator()
@@ -98,8 +99,8 @@ M: System.Collections.IEnumerator Kistl.Client.ASPNET.Toolkit.View.DataObjectLis
 M: System.Collections.IEnumerator Kistl.Client.ASPNET.Toolkit.View.DataObjectListView/<GetScriptReferences>d__8::System.Collections.IEnumerable.GetEnumerator()
 M: System.Collections.IEnumerator Kistl.DALProvider.EF.EntityCollectionWrapper`2::System.Collections.IEnumerable.GetEnumerator()
 M: System.Collections.IEnumerator Kistl.Server.SchemaManagement.SchemaProvider.SQLServer.SchemaProvider/<GetTableNames>d__0::System.Collections.IEnumerable.GetEnumerator()
-M: System.Collections.IEnumerator Kistl.Server.SchemaManagement.SchemaProvider.SQLServer.SchemaProvider/<GetFKConstraintNames>d__7::System.Collections.IEnumerable.GetEnumerator()
-M: System.Collections.IEnumerator Kistl.Server.SchemaManagement.SchemaProvider.SQLServer.SchemaProvider/<GetTableColumnNames>d__d::System.Collections.IEnumerable.GetEnumerator()
+M: System.Collections.IEnumerator Kistl.Server.SchemaManagement.SchemaProvider.SQLServer.SchemaProvider/<GetFKConstraintNames>d__8::System.Collections.IEnumerable.GetEnumerator()
+M: System.Collections.IEnumerator Kistl.Server.SchemaManagement.SchemaProvider.SQLServer.SchemaProvider/<GetTableColumnNames>d__f::System.Collections.IEnumerable.GetEnumerator()
 # false positives when working with ASP.Net's ScriptManager
 M: System.Void Kistl.Client.ASPNET.Toolkit.View.DataObjectReferenceView::OnPreRender(System.EventArgs)
 M: System.Void Kistl.Client.ASPNET.Toolkit.View.LauchnerView::OnPreRender(System.EventArgs)

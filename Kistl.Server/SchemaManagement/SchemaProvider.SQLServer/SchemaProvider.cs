@@ -86,15 +86,29 @@ namespace Kistl.Server.SchemaManagement.SchemaProvider.SQLServer
         {
             if (!CheckTableExists("CurrentSchema")) return string.Empty;
 
-            SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM CurrentSchema", db, tx);
-            int count = (int)cmd.ExecuteScalar();
-            if (count > 1)
+            int count = CheckVersionCount();
+            if (count == 0)
             {
-                throw new InvalidOperationException("There is more then one Schema saved in your Database");
+                return String.Empty;
             }
-            if (count == 0) return string.Empty;
-            cmd = new SqlCommand("SELECT [Schema] FROM CurrentSchema", db, tx);
-            return (string)cmd.ExecuteScalar();
+
+            using (var versionCmd = new SqlCommand("SELECT [Schema] FROM CurrentSchema", db, tx))
+            {
+                return (string)versionCmd.ExecuteScalar();
+            }
+        }
+
+        private int CheckVersionCount()
+        {
+            using (var schemaCountCmd = new SqlCommand("SELECT COUNT(*) FROM CurrentSchema", db, tx))
+            {
+                var count = (int)schemaCountCmd.ExecuteScalar();
+                if (count > 1)
+                {
+                    throw new InvalidOperationException("There is more then one Schema saved in your Database");
+                }
+                return count;
+            }
         }
 
         /// <summary>
@@ -105,111 +119,125 @@ namespace Kistl.Server.SchemaManagement.SchemaProvider.SQLServer
         {
             if (!CheckTableExists("CurrentSchema")) throw new InvalidOperationException("Unable to save Schema. Schematable does not exist.");
 
-            SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM [CurrentSchema]", db, tx);
-            int count = (int)cmd.ExecuteScalar();
-            if (count > 1)
+            int count = CheckVersionCount();
+            string commandString = count == 0
+                ? "INSERT INTO [CurrentSchema] ([Version], [Schema]) VALUES(1, @schema)"
+                : "UPDATE [CurrentSchema] SET [Schema] = @schema, [Version] = [Version] + 1";
+
+            using (var cmd = new SqlCommand(commandString, db, tx))
             {
-                throw new InvalidOperationException("There is more then one Schema saved in your Database");
+                cmd.Parameters.AddWithValue("@schema", schema);
+                cmd.ExecuteNonQuery();
             }
-            if (count == 0)
-            {
-                cmd = new SqlCommand("INSERT INTO [CurrentSchema] ([Version], [Schema]) VALUES(1, @schema)", db, tx);
-            }
-            else
-            {
-                cmd = new SqlCommand("UPDATE [CurrentSchema] SET [Schema] = @schema, [Version] = [Version] + 1", db, tx);
-            }
-            cmd.Parameters.AddWithValue("@schema", schema);
-            cmd.ExecuteNonQuery();
         }
 
         public bool CheckTableExists(string tblName)
         {
-            SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM sys.objects WHERE object_id = OBJECT_ID(@table) AND type IN (N'U')", db, tx);
-            cmd.Parameters.AddWithValue("@table", tblName);
-            return (int)cmd.ExecuteScalar() > 0;
+            using (var cmd = new SqlCommand("SELECT COUNT(*) FROM sys.objects WHERE object_id = OBJECT_ID(@table) AND type IN (N'U')", db, tx))
+            {
+                cmd.Parameters.AddWithValue("@table", tblName);
+                return (int)cmd.ExecuteScalar() > 0;
+            }
         }
 
         public bool CheckColumnExists(string tblName, string colName)
         {
-            SqlCommand cmd = new SqlCommand(@"SELECT COUNT(*) FROM sys.objects o INNER JOIN sys.columns c ON c.object_id=o.object_id
+            using (var cmd = new SqlCommand(@"SELECT COUNT(*) FROM sys.objects o INNER JOIN sys.columns c ON c.object_id=o.object_id
 	                                            WHERE o.object_id = OBJECT_ID(@table) 
 		                                            AND o.type IN (N'U')
-		                                            AND c.Name = @column", db, tx);
-            cmd.Parameters.AddWithValue("@table", tblName);
-            cmd.Parameters.AddWithValue("@column", colName);
-            return (int)cmd.ExecuteScalar() > 0;
+		                                            AND c.Name = @column", db, tx))
+            {
+                cmd.Parameters.AddWithValue("@table", tblName);
+                cmd.Parameters.AddWithValue("@column", colName);
+                return (int)cmd.ExecuteScalar() > 0;
+            }
         }
 
         public bool CheckFKConstraintExists(string fkName)
         {
-            SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM sys.objects WHERE object_id = OBJECT_ID(@fk_constraint) AND type IN (N'F')", db, tx);
-            cmd.Parameters.AddWithValue("@fk_constraint", fkName);
-            return (int)cmd.ExecuteScalar() > 0;
+            using (var cmd = new SqlCommand("SELECT COUNT(*) FROM sys.objects WHERE object_id = OBJECT_ID(@fk_constraint) AND type IN (N'F')", db, tx))
+            {
+                cmd.Parameters.AddWithValue("@fk_constraint", fkName);
+                return (int)cmd.ExecuteScalar() > 0;
+            }
         }
 
         public bool CheckTableContainsData(string tblName)
         {
-            SqlCommand cmd = new SqlCommand(string.Format("SELECT COUNT(*) FROM [{0}]", tblName), db, tx);
-            return (int)cmd.ExecuteScalar() > 0;
+            using (var cmd = new SqlCommand(string.Format("SELECT COUNT(*) FROM [{0}]", tblName), db, tx))
+            {
+                return (int)cmd.ExecuteScalar() > 0;
+            }
         }
 
         public bool CheckColumnContainsNulls(string tblName, string colName)
         {
-            SqlCommand cmd = new SqlCommand(string.Format("SELECT COUNT(*) FROM [{0}] WHERE [{1}] IS NULL", tblName, colName), db, tx);
-            return (int)cmd.ExecuteScalar() > 0;
+            using (var cmd = new SqlCommand(string.Format("SELECT COUNT(*) FROM [{0}] WHERE [{1}] IS NULL", tblName, colName), db, tx))
+            {
+                return (int)cmd.ExecuteScalar() > 0;
+            }
         }
 
         public bool GetIsColumnNullable(string tblName, string colName)
         {
-            SqlCommand cmd = new SqlCommand(@"SELECT c.is_nullable FROM sys.objects o INNER JOIN sys.columns c ON c.object_id=o.object_id
+            using (var cmd = new SqlCommand(@"SELECT c.is_nullable FROM sys.objects o INNER JOIN sys.columns c ON c.object_id=o.object_id
 	                                            WHERE o.object_id = OBJECT_ID(@table) 
 		                                            AND o.type IN (N'U')
-		                                            AND c.Name = @column", db, tx);
-            cmd.Parameters.AddWithValue("@table", tblName);
-            cmd.Parameters.AddWithValue("@column", colName);
-            return (bool)cmd.ExecuteScalar();
+		                                            AND c.Name = @column", db, tx))
+            {
+                cmd.Parameters.AddWithValue("@table", tblName);
+                cmd.Parameters.AddWithValue("@column", colName);
+                return (bool)cmd.ExecuteScalar();
+            }
         }
 
         public int GetColumnMaxLength(string tblName, string colName)
         {
             // / 2 -> nvarchar!
-            SqlCommand cmd = new SqlCommand(@"SELECT c.max_length / 2 FROM sys.objects o INNER JOIN sys.columns c ON c.object_id=o.object_id
+            using (var cmd = new SqlCommand(@"SELECT c.max_length / 2 FROM sys.objects o INNER JOIN sys.columns c ON c.object_id=o.object_id
 	                                            WHERE o.object_id = OBJECT_ID(@table) 
 		                                            AND o.type IN (N'U')
-		                                            AND c.Name = @column", db, tx);
-            cmd.Parameters.AddWithValue("@table", tblName);
-            cmd.Parameters.AddWithValue("@column", colName);
-            return (int)cmd.ExecuteScalar();
+		                                            AND c.Name = @column", db, tx))
+            {
+                cmd.Parameters.AddWithValue("@table", tblName);
+                cmd.Parameters.AddWithValue("@column", colName);
+                return (int)cmd.ExecuteScalar();
+            }
         }
 
         public IEnumerable<string> GetTableNames()
         {
-            SqlCommand cmd = new SqlCommand("SELECT name FROM sys.objects WHERE type IN (N'U') AND name <> 'sysdiagrams'", db, tx);
-            using (SqlDataReader rd = cmd.ExecuteReader())
+            using (var cmd = new SqlCommand("SELECT name FROM sys.objects WHERE type IN (N'U') AND name <> 'sysdiagrams'", db, tx))
             {
-                while (rd.Read()) yield return rd.GetString(0);
+                using (SqlDataReader rd = cmd.ExecuteReader())
+                {
+                    while (rd.Read()) yield return rd.GetString(0);
+                }
             }
         }
 
         public IEnumerable<TableConstraintNamePair> GetFKConstraintNames()
         {
-            SqlCommand cmd = new SqlCommand("SELECT c.name, t.name FROM sys.objects c inner join sys.sysobjects t  on t.id = c.parent_object_id WHERE c.type IN (N'F') order by c.name", db, tx);
-            using (SqlDataReader rd = cmd.ExecuteReader())
+            using (var cmd = new SqlCommand("SELECT c.name, t.name FROM sys.objects c inner join sys.sysobjects t  on t.id = c.parent_object_id WHERE c.type IN (N'F') order by c.name", db, tx))
             {
-                while (rd.Read()) yield return new TableConstraintNamePair() { ConstraintName = rd.GetString(0), TableName = rd.GetString(1) };
+                using (SqlDataReader rd = cmd.ExecuteReader())
+                {
+                    while (rd.Read()) yield return new TableConstraintNamePair() { ConstraintName = rd.GetString(0), TableName = rd.GetString(1) };
+                }
             }
         }
 
         public IEnumerable<string> GetTableColumnNames(string tblName)
         {
-            SqlCommand cmd = new SqlCommand(@"SELECT c.name FROM sys.objects o INNER JOIN sys.columns c ON c.object_id=o.object_id
+            using (var cmd = new SqlCommand(@"SELECT c.name FROM sys.objects o INNER JOIN sys.columns c ON c.object_id=o.object_id
 	                                            WHERE o.object_id = OBJECT_ID(@table) 
-		                                            AND o.type IN (N'U')", db, tx);
-            cmd.Parameters.AddWithValue("@table", tblName);
-            using (SqlDataReader rd = cmd.ExecuteReader())
+		                                            AND o.type IN (N'U')", db, tx))
             {
-                while (rd.Read()) yield return rd.GetString(0);
+                cmd.Parameters.AddWithValue("@table", tblName);
+                using (SqlDataReader rd = cmd.ExecuteReader())
+                {
+                    while (rd.Read()) yield return rd.GetString(0);
+                }
             }
         }
 
@@ -230,8 +258,7 @@ namespace Kistl.Server.SchemaManagement.SchemaProvider.SQLServer
             sb.AppendLine();
             sb.Append(")");
 
-            SqlCommand cmd = new SqlCommand(sb.ToString(), db, tx);
-            cmd.ExecuteNonQuery();
+            ExecuteNonQuery(sb.ToString());
         }
 
         public void CreateColumn(string tblName, string colName, System.Data.DbType type, int size, bool isNullable)
@@ -265,51 +292,53 @@ namespace Kistl.Server.SchemaManagement.SchemaProvider.SQLServer
                     isNullable ? "NULL" : "NOT NULL");
             }
 
-            SqlCommand cmd = new SqlCommand(sb.ToString(), db, tx);
-            cmd.ExecuteNonQuery();
+            ExecuteNonQuery(sb.ToString());
         }
 
 
         public void CreateFKConstraint(string tblName, string refTblName, string colName, string constraintName, bool onDeleteCascade)
         {
-            SqlCommand cmd = new SqlCommand(string.Format(@"ALTER TABLE [{0}]  WITH CHECK 
+            ExecuteNonQuery(@"ALTER TABLE [{0}]  WITH CHECK 
                     ADD CONSTRAINT [{1}] FOREIGN KEY([{2}])
                     REFERENCES [{3}] ([ID]){4}",
                    tblName,
                    constraintName,
                    colName,
                    refTblName,
-                   onDeleteCascade ? @" ON DELETE CASCADE" : String.Empty), db, tx); ;
-            cmd.ExecuteNonQuery();
-            cmd = new SqlCommand(string.Format(@"ALTER TABLE [{0}] CHECK CONSTRAINT [{1}]",
+                   onDeleteCascade ? @" ON DELETE CASCADE" : String.Empty);
+
+            ExecuteNonQuery(@"ALTER TABLE [{0}] CHECK CONSTRAINT [{1}]",
                    tblName,
-                   constraintName), db, tx); ;
-            cmd.ExecuteNonQuery();
+                   constraintName);
         }
 
         public void DropTable(string tblName)
         {
-            SqlCommand cmd = new SqlCommand(string.Format("DROP TABLE [{0}]", tblName), db, tx);
-            cmd.ExecuteNonQuery();
+            ExecuteNonQuery("DROP TABLE [{0}]", tblName);
+        }
+
+        private void ExecuteNonQuery(string nonQueryFormat, params object[] args)
+        {
+            using (var cmd = new SqlCommand(String.Format(nonQueryFormat, args), db, tx))
+            {
+                cmd.ExecuteNonQuery();
+            }
         }
 
         public void DropColumn(string tblName, string colName)
         {
-            SqlCommand cmd = new SqlCommand(string.Format("ALTER TABLE [{0}] DROP COLUMN [{1}]", tblName, colName), db, tx);
-            cmd.ExecuteNonQuery();
+            ExecuteNonQuery("ALTER TABLE [{0}] DROP COLUMN [{1}]", tblName, colName);
         }
 
         public void DropFKConstraint(string tblName, string fkName)
         {
-            SqlCommand cmd = new SqlCommand(string.Format("ALTER TABLE [{0}] DROP CONSTRAINT [{1}]", tblName, fkName), db, tx);
-            cmd.ExecuteNonQuery();
+            ExecuteNonQuery("ALTER TABLE [{0}] DROP CONSTRAINT [{1}]", tblName, fkName);
         }
 
         public void CopyColumnData(string srcTblName, string srcColName, string tblName, string colName)
         {
-            SqlCommand cmd = new SqlCommand(string.Format("UPDATE dest SET dest.[{0}] = src.[{1}] FROM [{2}] dest INNER JOIN [{3}] src ON dest.ID = src.ID",
-                colName, srcColName, tblName, srcTblName), db, tx);
-            cmd.ExecuteNonQuery();
+            ExecuteNonQuery("UPDATE dest SET dest.[{0}] = src.[{1}] FROM [{2}] dest INNER JOIN [{3}] src ON dest.ID = src.ID",
+                colName, srcColName, tblName, srcTblName);
         }
     }
 }
