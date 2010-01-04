@@ -184,7 +184,7 @@ namespace Kistl.Client.Presentables
         /// </summary>
         private void ExecuteFilter()
         {
-            if (InstancesSearchString == String.Empty)
+            if (InstancesSearchString.Length == 0)
             {
                 _instancesFiltered = new ReadOnlyObservableCollection<DataObjectModel>(this.Instances);
             }

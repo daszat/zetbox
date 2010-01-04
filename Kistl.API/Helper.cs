@@ -312,7 +312,7 @@ namespace Kistl.API
         {
             if (p.Contains("[") && p.EndsWith("]"))
             {
-                int idx = p.LastIndexOf("[");
+                int idx = p.LastIndexOf('[');
                 dictKey = p.Substring(idx + 1, p.Length - idx - 2);
                 p = p.Substring(0, idx);
             }

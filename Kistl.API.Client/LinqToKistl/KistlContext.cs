@@ -44,7 +44,7 @@ namespace Kistl.API.Client
         //private LinqToKistl.RelationshipManager _relationshipManager;
 
 
-        [SuppressMessage("Microsoft.Performance", "CA1805:DoNotInitializeUnnecessarily", Justification="Clarifies intent of variable")]
+        [SuppressMessage("Microsoft.Performance", "CA1805:DoNotInitializeUnnecessarily", Justification = "Clarifies intent of variable")]
         private bool disposed = false;
         /// <summary>
         /// Dispose this Context.

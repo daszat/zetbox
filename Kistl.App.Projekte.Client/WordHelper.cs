@@ -111,7 +111,7 @@ namespace Kistl.App.Projekte
                                 {
                                     foreach (XmlAttribute attr in cellNode.SelectSingleNode(@".//w:sdt/w:sdtPr/w:dataBinding", nsmgr).Attributes)
                                         if (attr.Name == "w:xpath")
-                                            attr.Value = string.Format(targetXPath, i + 2) + attr.Value.Substring(attr.Value.LastIndexOf("/"));
+                                            attr.Value = string.Format(targetXPath, i + 2) + attr.Value.Substring(attr.Value.LastIndexOf('/'));
                                     cellNode.SelectSingleNode(@".//w:sdt/w:sdtPr", nsmgr).RemoveChild(cellNode.SelectSingleNode(@".//w:sdt/w:sdtPr/w:id", nsmgr));
                                 }
                             }

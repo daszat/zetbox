@@ -11,7 +11,8 @@ using Kistl.API.Utils;
 
 namespace Kistl.Client
 {
-    public sealed class ServerDomainManager : IDisposable
+    public sealed class ServerDomainManager 
+        : IKistlAppDomain, IDisposable
     {
         private readonly static object _lock = new object();
 
