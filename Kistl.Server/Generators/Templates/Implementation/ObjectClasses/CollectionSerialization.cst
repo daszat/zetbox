@@ -19,22 +19,34 @@
 
 	if(ShouldSerialize())
 	{
-		string methodName = direction.ToString().Replace("Xml", String.Empty);
-	    
 		switch(direction)
 		{
 			case SerializerDirection.ToStream:
+%>
+            BinarySerializer.ToStreamCollectionEntries(this.<%= collectionName %>, <%= streamName %>);
+<%
+				break;
 			case SerializerDirection.FromStream:
 %>
-            BinarySerializer.<%= methodName %>CollectionEntries(this.<%= collectionName %>, <%= streamName %>);
+            BinarySerializer.FromStreamCollectionEntries(this.<%= collectionName %>, <%= streamName %>);
 <%
 				break;
 			case SerializerDirection.ToXmlStream:
-			case SerializerDirection.FromXmlStream:
 %>
-            XmlStreamer.<%= methodName %>CollectionEntries(this.<%= collectionName %>, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
+            XmlStreamer.ToStreamCollectionEntries(this.<%= collectionName %>, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
 <%
 				break;
+			case SerializerDirection.FromXmlStream:
+			case SerializerDirection.MergeImport:
+%>
+            XmlStreamer.FromStreamCollectionEntries(this.<%= collectionName %>, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
+<%
+				break;
+		case SerializerDirection.Export:
+%>	
+            if (modules.Contains("*") || modules.Contains("<%= xmlnamespace %>")) XmlStreamer.ToStreamCollectionEntries(this.<%= collectionName %>, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
+<%			
+			break;
 			default:
 				throw new ArgumentOutOfRangeException("direction");
 		}
