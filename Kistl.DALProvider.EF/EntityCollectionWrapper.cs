@@ -22,14 +22,16 @@ namespace Kistl.DALProvider.EF
 
         public EntityCollectionWrapper(IKistlContext ctx, EntityCollection<TImpl> ec)
         {
-            if (ctx == null) { throw new ArgumentNullException("ctx"); }
             if (ec == null) { throw new ArgumentNullException("ec"); }
 
             this.ctx = ctx;
             underlyingCollection = ec;
-            foreach (IPersistenceObject obj in underlyingCollection)
+            if (ctx != null)
             {
-                obj.AttachToContext(ctx);
+                foreach (IPersistenceObject obj in underlyingCollection)
+                {
+                    obj.AttachToContext(ctx);
+                }
             }
         }
 
