@@ -184,7 +184,7 @@ namespace Kistl.Client.Presentables
         {
             get
             {
-                return String.Join("", DebuggingContext.CreatedAt.GetFrames().Take(10).Select(sf => sf.ToString()).ToArray());
+                return String.Join(String.Empty, DebuggingContext.CreatedAt.GetFrames().Take(10).Select(sf => sf.ToString()).ToArray());
             }
         }
 
@@ -198,7 +198,7 @@ namespace Kistl.Client.Presentables
                 }
                 else
                 {
-                    return String.Join("", DebuggingContext.DisposedAt.GetFrames().Take(10).Select(sf => sf.ToString()).ToArray());
+                    return String.Join(String.Empty, DebuggingContext.DisposedAt.GetFrames().Take(10).Select(sf => sf.ToString()).ToArray());
                 }
             }
         }

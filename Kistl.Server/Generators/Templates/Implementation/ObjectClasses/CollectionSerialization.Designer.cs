@@ -37,7 +37,7 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
 #line 20 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CollectionSerialization.cst"
 if(ShouldSerialize())
 	{
-		string methodName = direction.ToString().Replace("Xml", "");
+		string methodName = direction.ToString().Replace("Xml", String.Empty);
 	    
 		switch(direction)
 		{

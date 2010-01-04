@@ -107,7 +107,7 @@ namespace Kistl.Server.SchemaManagement
         {
             Log.Debug("Extra Columns: ");
             List<string> columns = new List<string>();
-            GetExistingColumnNames(objClass, objClass.Properties, "", columns);
+            GetExistingColumnNames(objClass, objClass.Properties, String.Empty, columns);
 
             foreach (string propName in db.GetTableColumnNames(objClass.TableName))
             {
@@ -356,7 +356,7 @@ namespace Kistl.Server.SchemaManagement
                 if (db.CheckTableExists(objClass.TableName))
                 {
                     Log.DebugFormat("  Table: {0}", objClass.TableName);
-                    CheckColumns(objClass, objClass.Properties, "");
+                    CheckColumns(objClass, objClass.Properties, String.Empty);
                     CheckValueTypeCollections(objClass);
                     CheckExtraColumns(objClass);
                 }

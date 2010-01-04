@@ -57,7 +57,7 @@ namespace Kistl.Server.Generators.Templates.Interface.DataTypes
             }
             else
             {
-                return "";
+                return String.Empty;
             }
         }
 

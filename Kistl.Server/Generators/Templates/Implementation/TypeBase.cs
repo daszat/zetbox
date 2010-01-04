@@ -67,7 +67,7 @@ namespace Kistl.Server.Generators.Templates.Implementation
         /// <returns>The base class to inherit from.</returns>
         protected virtual string GetBaseClass()
         {
-            return "";
+            return String.Empty;
         }
 
         /// <returns>The interfaces this class implements</returns>
@@ -99,7 +99,7 @@ namespace Kistl.Server.Generators.Templates.Implementation
             }
             else
             {
-                return "";
+                return String.Empty;
             }
         }
 

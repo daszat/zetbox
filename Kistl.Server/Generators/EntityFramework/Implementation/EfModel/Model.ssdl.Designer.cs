@@ -153,7 +153,7 @@ this.WriteObjects("  <EntityType Name=\"",  cls.ClassName , "\">\r\n");
 this.WriteObjects("    <Key>\r\n");
 this.WriteObjects("      <PropertyRef Name=\"ID\" />\r\n");
 this.WriteObjects("    </Key>\r\n");
-this.WriteObjects("    <Property Name=\"ID\" Type=\"int\" Nullable=\"false\" ",  (cls.BaseObjectClass == null) ? "StoreGeneratedPattern=\"Identity\" " : "" , "/>\r\n");
+this.WriteObjects("    <Property Name=\"ID\" Type=\"int\" Nullable=\"false\" ",  (cls.BaseObjectClass == null) ? "StoreGeneratedPattern=\"Identity\" " : String.Empty , "/>\r\n");
 #line 129 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.ssdl.cst"
 ApplyEntityTypeColumnDefs(cls);
 
@@ -334,7 +334,7 @@ foreach(var prop in ctx.GetQuery<ValueTypeProperty>()
 		// the name of the contained type
 		string itemTypeName = prop.ToDbType();
 		
-		string constraint = "";
+		string constraint = String.Empty;
 		if (prop is StringProperty) {
 			var sProp = (StringProperty)prop;
 			constraint += String.Format("MaxLength=\"{0}\" ", sProp.GetMaxLength());

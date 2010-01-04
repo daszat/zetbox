@@ -288,7 +288,7 @@ namespace Kistl.Server.SchemaManagement.SchemaProvider.SQLServer
             {
                 sb.AppendFormat("ALTER TABLE [{0}] {1}  [{2}] {3}{4} {5}", tblName, addOrAlter, colName,
                     GetSqlTypeString(type),
-                    size > 0 ? string.Format("({0})", size) : "",
+                    size > 0 ? string.Format("({0})", size) : String.Empty,
                     isNullable ? "NULL" : "NOT NULL");
             }
 

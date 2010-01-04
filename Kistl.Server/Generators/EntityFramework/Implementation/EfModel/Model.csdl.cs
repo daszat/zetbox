@@ -32,7 +32,7 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.EfModel
         public static string PlainPropertyDefinitionFromValueType(ValueTypeProperty prop, string name)
         {
             string type = prop.GetPropertyTypeString();
-            string maxlength = "";
+            string maxlength = String.Empty;
 
             if (prop is EnumerationProperty)
             {

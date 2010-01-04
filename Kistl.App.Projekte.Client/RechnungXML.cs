@@ -43,7 +43,7 @@ namespace Kistl.App.Projekte
         {
             xml.Serialize(s, this);
 
-            // System.IO.Packaging.Package word = System.IO.Packaging.Package.Open("");
+            // System.IO.Packaging.Package word = System.IO.Packaging.Package.Open(String.Empty);
         }
 
         /// <summary>

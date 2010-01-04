@@ -366,7 +366,7 @@ namespace Kistl.Server.SchemaManagement
             string assocName = rel.GetAssociationName();
             Log.InfoFormat("Drop 1:N Relation Position Storage: {0}", assocName);
 
-            string tblName = "";
+            string tblName = String.Empty;
             RelationEnd otherEnd;
             if (rel.HasStorage(RelationEndRole.A))
             {
@@ -479,8 +479,8 @@ namespace Kistl.Server.SchemaManagement
             string assocName = rel.GetAssociationName();
             Log.InfoFormat("Deleting 1:N Relation: {0}", assocName);
 
-            string tblName = "";
-            string refTblName = "";
+            string tblName = String.Empty;
+            string refTblName = String.Empty;
             bool isIndexed = false;
             RelationEnd otherEnd;
             if (rel.HasStorage(RelationEndRole.A))

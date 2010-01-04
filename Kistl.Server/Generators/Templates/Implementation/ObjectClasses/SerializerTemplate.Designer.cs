@@ -39,8 +39,8 @@ this.WriteObjects("\r\n");
 string methodName = direction.ToString();
     string argName;
     string argType;
-    string additionalArgs = "";
-    string callBaseWithAdditionalArgs = "";
+    string additionalArgs = String.Empty;
+    string callBaseWithAdditionalArgs = String.Empty;
     SerializerType serType;
     
     switch(direction){

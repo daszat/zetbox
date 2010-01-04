@@ -54,7 +54,7 @@ namespace Kistl.Server.Generators.Templates.Implementation.CollectionEntries
             }
             else
             {
-                return "";
+                return String.Empty;
             }
         }
 

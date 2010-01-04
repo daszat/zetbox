@@ -49,7 +49,7 @@ namespace Kistl.Client.WPF
             }
             else
             {
-                configFilePath = "";
+                configFilePath = String.Empty;
                 result = (string[])args.Clone();
             }
 

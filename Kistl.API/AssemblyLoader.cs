@@ -227,7 +227,7 @@ namespace Kistl.API
                 // the folder should have been cleared on initialisation and once
                 // an assembly is loaded, we cannot re-load the assembly anyways.
                 string targetDll = Path.Combine(TargetAssemblyFolder, baseName + ".dll");
-                Logging.Log.DebugFormat("Loading {0} (from {1}){2}", sourceDll, targetDll, reflectOnly ? " for reflection" : "");
+                Logging.Log.DebugFormat("Loading {0} (from {1}){2}", sourceDll, targetDll, reflectOnly ? " for reflection" : String.Empty);
                 try
                 {
                     if (!File.Exists(targetDll))

@@ -84,7 +84,7 @@ namespace Kistl.Client.WPF
         //            }
         //        }
         //        Console.WriteLine("}");
-        //        Console.WriteLine("");
+        //        Console.WriteLine(String.Empty);
         //        Console.WriteLine("---------------------------------------------------------------");
         //    }
         //}

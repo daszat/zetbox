@@ -37,7 +37,7 @@ namespace Kistl.API.Tests
         [Test]
         public void DefaultLoading()
         {
-            var config = KistlConfig.FromFile("");
+            var config = KistlConfig.FromFile(String.Empty);
 
             Assert.That(config, Is.Not.Null, "Configuration");
             Assert.That(config.ConfigFilePath, Is.Not.Empty, "ConfigFilePath");
@@ -85,7 +85,7 @@ namespace Kistl.API.Tests
             {
                 File.Delete(filename);
             }
-            var config = KistlConfig.FromFile("");
+            var config = KistlConfig.FromFile(String.Empty);
             config.ToFile(filename);
             Assert.That(File.Exists(filename), Is.True);
             Assert.That(new FileInfo(filename).Length, Is.GreaterThan(0));

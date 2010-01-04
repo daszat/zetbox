@@ -43,8 +43,8 @@
 %>
 
 
-		internal <%= cls.BaseObjectClass == null ? "" : "new " %>static Dictionary<int, <%= Template.GetClassName(cls) %>> DataStore = new Dictionary<int, <%= Template.GetClassName(cls) %>>(<%= instanceList.Count() %>);
-		internal <%= cls.BaseObjectClass == null ? "" : "new " %>static void CreateInstances()
+		internal <%= cls.BaseObjectClass == null ? String.Empty : "new " %>static Dictionary<int, <%= Template.GetClassName(cls) %>> DataStore = new Dictionary<int, <%= Template.GetClassName(cls) %>>(<%= instanceList.Count() %>);
+		internal <%= cls.BaseObjectClass == null ? String.Empty : "new " %>static void CreateInstances()
 		{
 <%
 
@@ -75,7 +75,7 @@
 %>
 		}
 
-		internal <%= cls.BaseObjectClass == null ? "" : "new " %>static void FillDataStore() {
+		internal <%= cls.BaseObjectClass == null ? String.Empty : "new " %>static void FillDataStore() {
 <%
 	foreach(var obj in instanceList) 
 	{

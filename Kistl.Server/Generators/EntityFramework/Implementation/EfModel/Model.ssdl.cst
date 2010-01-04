@@ -124,7 +124,7 @@
     <Key>
       <PropertyRef Name="ID" />
     </Key>
-    <Property Name="ID" Type="int" Nullable="false" <%= (cls.BaseObjectClass == null) ? "StoreGeneratedPattern=\"Identity\" " : "" %>/>
+    <Property Name="ID" Type="int" Nullable="false" <%= (cls.BaseObjectClass == null) ? "StoreGeneratedPattern=\"Identity\" " : String.Empty %>/>
 <%
 		ApplyEntityTypeColumnDefs(cls);
 %>
@@ -288,7 +288,7 @@
 		// the name of the contained type
 		string itemTypeName = prop.ToDbType();
 		
-		string constraint = "";
+		string constraint = String.Empty;
 		if (prop is StringProperty) {
 			var sProp = (StringProperty)prop;
 			constraint += String.Format("MaxLength=\"{0}\" ", sProp.GetMaxLength());

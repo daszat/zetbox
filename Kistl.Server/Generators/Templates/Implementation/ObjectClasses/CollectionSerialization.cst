@@ -19,7 +19,7 @@
 
 	if(ShouldSerialize())
 	{
-		string methodName = direction.ToString().Replace("Xml", "");
+		string methodName = direction.ToString().Replace("Xml", String.Empty);
 	    
 		switch(direction)
 		{

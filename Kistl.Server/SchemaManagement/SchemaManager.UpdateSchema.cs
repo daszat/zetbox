@@ -78,8 +78,8 @@ namespace Kistl.Server.SchemaManagement
                     Case.DoRenameObjectClassTable(objClass);
                 }
 
-                UpdateColumns(objClass, objClass.Properties, "");
-                UpdateDeletedColumns(objClass, "");
+                UpdateColumns(objClass, objClass.Properties, String.Empty);
+                UpdateDeletedColumns(objClass, String.Empty);
             }
             Log.Debug(String.Empty);
         }

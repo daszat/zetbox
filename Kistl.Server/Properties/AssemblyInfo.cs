@@ -6,14 +6,14 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Kistl")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Kistl.Server")]
+[assembly: AssemblyDescription("Contains the Server components of Kistl")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("dasz.at OG")]
-[assembly: AssemblyProduct("Kistl")]
+[assembly: AssemblyProduct("Kistl.Server")]
 [assembly: AssemblyCopyright("Copyright © dasz.at OG 2007-2009")]
-[assembly: AssemblyTrademark("")]
-[assembly: AssemblyCulture("")]
+//[assembly: AssemblyTrademark("")]
+//[assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
 // to COM components.  If you need to access a type in this assembly from 

@@ -50,7 +50,7 @@ namespace Kistl.Server.Packaging
                 {
                     // TODO: Das muss ich z.Z. machen, weil die erste Query eine Entity Query ist und noch nix geladen wurde....
                     var testObj = ctx.GetQuery<Kistl.App.Base.ObjectClass>().FirstOrDefault();
-                    Debug.WriteLine(testObj != null ? testObj.ToString() : "");
+                    Debug.WriteLine(testObj != null ? testObj.ToString() : String.Empty);
                 }
                 catch
                 {
@@ -159,7 +159,7 @@ namespace Kistl.Server.Packaging
                 {
                     // TODO: Das muss ich z.Z. machen, weil die erste Query eine Entity Query ist und noch nix geladen wurde....
                     var testObj = ctx.GetQuery<Kistl.App.Base.ObjectClass>().FirstOrDefault();
-                    Debug.WriteLine(testObj != null ? testObj.ToString() : "");
+                    Debug.WriteLine(testObj != null ? testObj.ToString() : String.Empty);
                 }
                 catch
                 {
@@ -230,7 +230,7 @@ namespace Kistl.Server.Packaging
             {
                 string ns = it.Current.NamespaceURI;
                 string tn = it.Current.LocalName;
-                if (it.Current.MoveToAttribute("ExportGuid", ""))
+                if (it.Current.MoveToAttribute("ExportGuid", String.Empty))
                 {
                     Guid exportGuid = it.Current.Value.TryParseGuidValue();
                     if (exportGuid != Guid.Empty)

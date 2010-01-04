@@ -134,7 +134,7 @@ namespace Kistl.DALProvider.EF
         where TImpl : class, System.Data.Objects.DataClasses.IEntityWithRelationships, TInterface, IDataObject
         where TInterface : class, IDataObject
     {
-        private string _pointerProperty = "";
+        private string _pointerProperty = String.Empty;
 
         public EntityListWrapper(IKistlContext ctx, EntityCollection<TImpl> ec, string pointerProperty)
             : base(ctx, ec)

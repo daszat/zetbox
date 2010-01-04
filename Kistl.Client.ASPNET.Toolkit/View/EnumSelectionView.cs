@@ -24,14 +24,14 @@ namespace Kistl.Client.ASPNET.Toolkit.View
             listCtrl.DataValueField = "Key";
             listCtrl.DataSource = Model.PossibleValues;
             listCtrl.DataBind();
-            listCtrl.Items.Insert(0, new ListItem("", ""));
+            listCtrl.Items.Insert(0, new ListItem(String.Empty, String.Empty));
         }
 
         protected override void OnPreRender(EventArgs e)
         {
             base.OnPreRender(e);
 
-            listCtrl.SelectedValue = Model.Value != null ? Model.Value.ToString() : "";
+            listCtrl.SelectedValue = Model.Value != null ? Model.Value.ToString() : String.Empty;
         }
     }
 }

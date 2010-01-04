@@ -26,7 +26,7 @@ namespace Kistl.App.Base
             e.Result = string.Format("{0}{1} {2}",
                 obj.IsReturnParameter
                     ? "[Return] "
-                    : "",
+                    : String.Empty,
                 obj.GetParameterTypeString(),
                 obj.ParameterName);
 
@@ -183,7 +183,7 @@ namespace Kistl.App.Base
                 obj.FullName,
                 obj.GenericArguments.Count > 0
                     ? "<" + String.Join(", ", obj.GenericArguments.Select(tr => tr.ToString()).ToArray()) + ">"
-                    : "",
+                    : String.Empty,
                 obj.Assembly);
 
             FixupFloatingObjectsToString(obj, e);

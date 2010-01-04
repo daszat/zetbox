@@ -63,7 +63,7 @@ namespace Kistl.Client.WPF.Dialogs
         // Using a DependencyProperty as the backing store for FilterString.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty FilterStringProperty =
             DependencyProperty.Register("FilterString", typeof(string), typeof(ChooseObjectDialog),
-            new PropertyMetadata("", new PropertyChangedCallback(FilterStringChanged)));
+            new PropertyMetadata(String.Empty, new PropertyChangedCallback(FilterStringChanged)));
 
         private static void FilterStringChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {

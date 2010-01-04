@@ -31,7 +31,7 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
             }
             else
             {
-                return "";
+                return String.Empty;
             }
         }
 

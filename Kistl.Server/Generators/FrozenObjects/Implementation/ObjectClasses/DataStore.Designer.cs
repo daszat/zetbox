@@ -58,8 +58,8 @@ namespace Kistl.Server.Generators.FrozenObjects.Implementation.ObjectClasses
 #line 44 "P:\Kistl\Kistl.Server\Generators\FrozenObjects\Implementation\ObjectClasses\DataStore.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("\r\n");
-this.WriteObjects("		internal ",  cls.BaseObjectClass == null ? "" : "new " , "static Dictionary<int, ",  Template.GetClassName(cls) , "> DataStore = new Dictionary<int, ",  Template.GetClassName(cls) , ">(",  instanceList.Count() , ");\r\n");
-this.WriteObjects("		internal ",  cls.BaseObjectClass == null ? "" : "new " , "static void CreateInstances()\r\n");
+this.WriteObjects("		internal ",  cls.BaseObjectClass == null ? String.Empty : "new " , "static Dictionary<int, ",  Template.GetClassName(cls) , "> DataStore = new Dictionary<int, ",  Template.GetClassName(cls) , ">(",  instanceList.Count() , ");\r\n");
+this.WriteObjects("		internal ",  cls.BaseObjectClass == null ? String.Empty : "new " , "static void CreateInstances()\r\n");
 this.WriteObjects("		{\r\n");
 #line 51 "P:\Kistl\Kistl.Server\Generators\FrozenObjects\Implementation\ObjectClasses\DataStore.cst"
 string classname = Template.GetClassName(cls);
@@ -92,7 +92,7 @@ this.WriteObjects("\r\n");
 #line 76 "P:\Kistl\Kistl.Server\Generators\FrozenObjects\Implementation\ObjectClasses\DataStore.cst"
 this.WriteObjects("		}\r\n");
 this.WriteObjects("\r\n");
-this.WriteObjects("		internal ",  cls.BaseObjectClass == null ? "" : "new " , "static void FillDataStore() {\r\n");
+this.WriteObjects("		internal ",  cls.BaseObjectClass == null ? String.Empty : "new " , "static void FillDataStore() {\r\n");
 #line 80 "P:\Kistl\Kistl.Server\Generators\FrozenObjects\Implementation\ObjectClasses\DataStore.cst"
 foreach(var obj in instanceList) 
 	{

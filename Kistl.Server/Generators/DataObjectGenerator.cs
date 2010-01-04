@@ -14,7 +14,7 @@ namespace Kistl.Server.Generators
     {
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Server.Generator");
 
-        private string codeBasePath = "";
+        private string codeBasePath = String.Empty;
 
         public virtual string Generate(Kistl.API.IKistlContext ctx, string basePath)
         {

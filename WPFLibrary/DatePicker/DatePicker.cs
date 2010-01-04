@@ -349,7 +349,7 @@ namespace Microsoft.Samples.KMoore.WPFSamples.DateControls
                         "Text",
                         typeof(string),
                         typeof(DatePicker),
-                        new FrameworkPropertyMetadata(""));
+                        new FrameworkPropertyMetadata(String.Empty));
 
         /// <summary>
         /// The DependencyProperty for the Text property.
@@ -501,7 +501,7 @@ namespace Microsoft.Samples.KMoore.WPFSamples.DateControls
                         typeof(string),
                         typeof(DatePicker),
                         new FrameworkPropertyMetadata(
-                                "",
+                                String.Empty,
                                 new PropertyChangedCallback(OnNullValueTextChanged)));
 
         /// <summary>

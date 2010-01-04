@@ -107,7 +107,7 @@ namespace Kistl.API
             {
                 throw new InvalidOperationException(string.Format("Unable to create Type {0}{1}",
                     TypeName,
-                    GenericTypeParameter.Count > 0 ? "<" + string.Join(", ", GenericTypeParameter.Select(t => t.TypeName).ToArray()) + ">" : ""));
+                    GenericTypeParameter.Count > 0 ? "<" + string.Join(", ", GenericTypeParameter.Select(t => t.TypeName).ToArray()) + ">" : String.Empty));
             }
 
             return result;

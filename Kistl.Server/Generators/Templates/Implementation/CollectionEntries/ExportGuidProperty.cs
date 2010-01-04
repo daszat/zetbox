@@ -20,7 +20,7 @@ namespace Kistl.Server.Generators.Templates.Implementation.CollectionEntries
         }
 
         public ExportGuidProperty(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, SerializationMembersList serializationList)
-            : base(_host, ctx, serializationList, "Guid", "ExportGuid", "") // TODO: use proper namespace
+            : base(_host, ctx, serializationList, "Guid", "ExportGuid", String.Empty) // TODO: use proper namespace
         {
         }
 

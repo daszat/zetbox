@@ -158,14 +158,14 @@ namespace Kistl.API.AbstractConsumerTests
         public void AddStringListPropertyContent()
         {
             int ID = Kistl.API.Helper.INVALIDID;
-            string mail = "";
+            string mail = String.Empty;
             using (IKistlContext ctx = GetContext())
             {
                 var k = ctx.GetQuery<Kunde>().First();
                 mail = "UnitTest" + DateTime.Now + "@example.com";
                 ID = k.ID;
                 k.EMails.Add(mail);
-                Assert.That(mail, Is.Not.EqualTo(""));
+                Assert.That(mail, Is.Not.EqualTo(String.Empty));
                 int submitCount = ctx.SubmitChanges();
                 Assert.That(submitCount, Is.GreaterThan(0));
             }
@@ -185,7 +185,7 @@ namespace Kistl.API.AbstractConsumerTests
         public void UpdateStringListPropertyContent()
         {
             int ID = Kistl.API.Helper.INVALIDID;
-            string mail = "";
+            string mail = String.Empty;
             using (IKistlContext ctx = GetContext())
             {
                 var list = ctx.GetQuery<Kunde>();
@@ -199,7 +199,7 @@ namespace Kistl.API.AbstractConsumerTests
                         break;
                     }
                 }
-                Assert.That(mail, Is.Not.EqualTo(""));
+                Assert.That(mail, Is.Not.EqualTo(String.Empty));
                 int submitCount = ctx.SubmitChanges();
                 Assert.That(submitCount, Is.GreaterThan(0));
             }
@@ -219,7 +219,7 @@ namespace Kistl.API.AbstractConsumerTests
         {
             int ID = Kistl.API.Helper.INVALIDID;
             int mailCount = 0;
-            string mail = "";
+            string mail = String.Empty;
             using (IKistlContext ctx = GetContext())
             {
                 var list = ctx.GetQuery<Kunde>();

@@ -116,7 +116,7 @@ namespace Kistl.App.Base
             RelationEnd other = rel != null ? rel.GetOtherEnd(obj) : null;
 
             var nav = obj.Context.Create<ObjectReferenceProperty>();
-            nav.CategoryTags = "";
+            nav.CategoryTags = String.Empty;
             nav.ObjectClass = obj.Type;
             nav.RelationEnd = obj;
             nav.Module = rel != null ? rel.Module : null;
@@ -199,7 +199,7 @@ namespace Kistl.App.Base
 
             if (mi.InvokeOnObjectClass != null)
             {
-                sb.AppendFormat("{0}.{1} obj", mi.InvokeOnObjectClass.Module != null ? mi.InvokeOnObjectClass.Module.Namespace : "", mi.InvokeOnObjectClass.ClassName);
+                sb.AppendFormat("{0}.{1} obj", mi.InvokeOnObjectClass.Module != null ? mi.InvokeOnObjectClass.Module.Namespace : String.Empty, mi.InvokeOnObjectClass.ClassName);
             }
             else
             {

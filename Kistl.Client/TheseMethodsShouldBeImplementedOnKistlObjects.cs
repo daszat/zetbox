@@ -73,7 +73,7 @@ namespace Kistl.Client
                     return "//";
                 case DataObjectState.Unmodified:
                 default:
-                    return "";
+                    return String.Empty;
             }
         }
 

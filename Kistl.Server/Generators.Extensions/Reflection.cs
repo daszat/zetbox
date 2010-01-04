@@ -62,27 +62,27 @@ namespace Kistl.Server.Generators.Extensions
         {
             if (prop is BoolProperty)
             {
-                return "bool" + (prop.IsNullable() ? "?" : "");
+                return "bool" + (prop.IsNullable() ? "?" : String.Empty);
             }
             else if (prop is IntProperty)
             {
-                return "int" + (prop.IsNullable() ? "?" : "");
+                return "int" + (prop.IsNullable() ? "?" : String.Empty);
             }
             else if (prop is DoubleProperty)
             {
-                return "double" + (prop.IsNullable() ? "?" : "");
+                return "double" + (prop.IsNullable() ? "?" : String.Empty);
             }
             else if (prop is DateTimeProperty)
             {
-                return "DateTime" + (prop.IsNullable() ? "?" : "");
+                return "DateTime" + (prop.IsNullable() ? "?" : String.Empty);
             }
             else if (prop is GuidProperty)
             {
-                return "Guid" + (prop.IsNullable() ? "?" : "");
+                return "Guid" + (prop.IsNullable() ? "?" : String.Empty);
             }
             else if (prop is EnumerationProperty)
             {
-                return prop.GetPropertyTypeString() + (prop.IsNullable() ? "?" : "");
+                return prop.GetPropertyTypeString() + (prop.IsNullable() ? "?" : String.Empty);
             }
             else if (prop is StringProperty)
             {

@@ -19,7 +19,7 @@ namespace Kistl.Client.Forms
         [STAThread]
         static void Main()
         {
-            var config = KistlConfig.FromFile("");
+            var config = KistlConfig.FromFile(String.Empty);
             AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
             AppContext = new GuiApplicationContext(config, "TEST");
 

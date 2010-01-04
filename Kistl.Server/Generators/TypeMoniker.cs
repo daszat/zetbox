@@ -9,14 +9,14 @@ namespace Kistl.Server.Generators
     {
         public TypeMoniker()
         {
-            Namespace = "";
-            ClassName = "";
+            Namespace = String.Empty;
+            ClassName = String.Empty;
         }
 
         public TypeMoniker(string type)
         {
-            Namespace = "";
-            ClassName = "";
+            Namespace = String.Empty;
+            ClassName = String.Empty;
 
             string[] segments = type.Split('.');
             ClassName = segments.Last();
@@ -50,7 +50,7 @@ namespace Kistl.Server.Generators
             get
             {
                 if (string.IsNullOrEmpty(Namespace) && string.IsNullOrEmpty(ClassName))
-                    return "";
+                    return String.Empty;
                 else
                     return string.Format("{0}.{1}", Namespace, ClassName);
             }

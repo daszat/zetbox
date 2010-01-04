@@ -22,7 +22,7 @@ namespace Kistl.DALProvider.EF
         /// <summary>
         /// Private Connectionstring
         /// </summary>
-        private static string connectionString = "";
+        private static string connectionString = String.Empty;
 
         public EFObjectContext()
             : base(GetConnectionString(), "Entities")
@@ -344,7 +344,7 @@ namespace Kistl.DALProvider.EF
                     //        Logging.Log.InfoFormat("{0}: {1} -> {2}", msgPair.Label, i.GetType(), i.ToString());
                     //    }
                     //}
-                    // Logging.Log.Info("");
+                    // Logging.Log.Info(String.Empty);
                     #endregion
 
                     Logging.Log.Debug("  Added: " + _ctx.ObjectStateManager.GetObjectStateEntries(EntityState.Added).Count());

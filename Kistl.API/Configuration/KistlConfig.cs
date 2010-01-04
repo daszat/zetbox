@@ -237,7 +237,7 @@ namespace Kistl.API.Configuration
             get
             {
                 string _WorkingFolder = System.Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-                _WorkingFolder += _WorkingFolder.EndsWith(@"\") ? "" : @"\";
+                _WorkingFolder += _WorkingFolder.EndsWith(@"\") ? String.Empty : @"\";
 
                 // TODO: very bad idea because this may change when passing the config between AppDomains
                 _WorkingFolder += @"dasz\Kistl\"

@@ -28,7 +28,7 @@ namespace Kistl.Client.WPF.View
         private void AddNewHandler(object sender, RoutedEventArgs e)
         {
             var model = (IValueListModel<string>)DataContext;
-            model.AddItem("");
+            model.AddItem(String.Empty);
             PART_ItemEditBox.Focus();
         }
 

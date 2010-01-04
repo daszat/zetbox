@@ -92,7 +92,7 @@ namespace Kistl.App.Projekte
             XmlNamespaceManager nsmgr = new XmlNamespaceManager(doc.NameTable);
             nsmgr.AddNamespace("ds", "http://schemas.openxmlformats.org/officeDocument/2006/customXml");
             nsmgr.AddNamespace("w", "http://schemas.openxmlformats.org/wordprocessingml/2006/main");
-            nsmgr.AddNamespace("", string.Empty);
+            nsmgr.AddNamespace(String.Empty, String.Empty);
 
             XmlNodeList tableNodeList = doc.SelectNodes("//w:tbl", nsmgr);
             foreach (XmlNode tableNode in tableNodeList)//iterate through all the tables of the doc

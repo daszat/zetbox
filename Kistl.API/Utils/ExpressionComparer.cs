@@ -143,7 +143,7 @@ namespace Kistl.API.Utils
             {
                 var other = (ConstantExpression)second;
                 int result = CompareBasicProperties(expr, other);
-                result = CompareIfUndecidedDefault(result, (expr.Value ?? "").ToString(), (other.Value ?? "").ToString());
+                result = CompareIfUndecidedDefault(result, (expr.Value ?? String.Empty).ToString(), (other.Value ?? String.Empty).ToString());
                 return result;
             }
 

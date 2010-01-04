@@ -26,7 +26,7 @@ namespace Kistl.App.Base
         {
             if (Helper.IsFloatingObject(obj))
             {
-                e.Result = "";
+                e.Result = String.Empty;
             }
             else
             {

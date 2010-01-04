@@ -137,7 +137,7 @@ namespace Kistl.Server.Service
                             Log.Debug("Prepare for checkschema");
                             DefaultInitialisation();
 
-                            string file = "";
+                            string file = String.Empty;
                             if (arg.Arguments.Count == 0)
                             {
                                 server.CheckSchema(false);
@@ -174,7 +174,7 @@ namespace Kistl.Server.Service
                         else if (arg.Command == "-updateschema")
                         {
                             Log.Debug("Prepare for updateschema");
-                            string file = "";
+                            string file = String.Empty;
                             if (arg.Arguments.Count == 0)
                             {
                                 DefaultInitialisation();
@@ -306,7 +306,7 @@ namespace Kistl.Server.Service
             }
             else
             {
-                configFilePath = "";
+                configFilePath = String.Empty;
             }
             var config = KistlConfig.FromFile(configFilePath);
             var appCtx = new ServerApplicationContext(config);

@@ -22,8 +22,8 @@ namespace Kistl.Client.ASPNET.Toolkit
         private const string actionShowObject = "ShowObject";
 
         // HiddenControls
-        string hdAction = "";
-        string hdArgument = "";
+        string hdAction = String.Empty;
+        string hdArgument = String.Empty;
 
         public JavascriptRenderer()
         {
@@ -32,8 +32,8 @@ namespace Kistl.Client.ASPNET.Toolkit
 
         void JavascriptRenderer_Init(object sender, EventArgs e)
         {
-            hdAction = Page.Request["__JavascriptRenderer_Action"] ?? "";
-            hdArgument = Page.Request["__JavascriptRenderer_Argument"] ?? "";
+            hdAction = Page.Request["__JavascriptRenderer_Action"] ?? String.Empty;
+            hdArgument = Page.Request["__JavascriptRenderer_Argument"] ?? String.Empty;
         }
 
         public IEnumerable<ScriptDescriptor> GetScriptDescriptors()
@@ -59,8 +59,8 @@ namespace Kistl.Client.ASPNET.Toolkit
             }
 
             scriptManager.RegisterScriptControl(this);
-            string script = string.Format("function __JavascriptRenderer_PostBack() {{ {0}; }}\n", 
-                Page.ClientScript.GetPostBackEventReference(this, ""));
+            string script = string.Format("function __JavascriptRenderer_PostBack() {{ {0}; }}\n",
+                Page.ClientScript.GetPostBackEventReference(this, String.Empty));
             Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "PostBackScript", script, true);
         }
 

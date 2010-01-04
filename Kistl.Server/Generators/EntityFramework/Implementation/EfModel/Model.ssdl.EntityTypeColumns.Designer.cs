@@ -54,14 +54,14 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.EfModel
 			string propertyName = Construct.NestedColumnName(p, prefix);
 			string sqlTypeName = GetDBType(p);
 			
-			string maxLengthAttr = "";
+			string maxLengthAttr = String.Empty;
 			if (p is StringProperty)
 			{
 				// must have one space at the end
 				maxLengthAttr = String.Format("MaxLength=\"{0}\" ", ((StringProperty)p).GetMaxLength());
 			}
 			
-			string nullableAttr = "";
+			string nullableAttr = String.Empty;
 			if (p.IsValueTypePropertySingle())
 			{
 				// must have one space at the end

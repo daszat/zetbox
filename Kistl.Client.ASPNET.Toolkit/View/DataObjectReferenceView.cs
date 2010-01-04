@@ -79,12 +79,12 @@ namespace Kistl.Client.ASPNET.Toolkit.View
         {
             base.OnPreRender(e);
 
-            lbItemCtrl.Text = Model.Value != null ? Model.Value.LongName : "";
+            lbItemCtrl.Text = Model.Value != null ? Model.Value.LongName : String.Empty;
 
             btnNewCtrl.Attributes.Add("onclick", string.Format("javascript: Kistl.JavascriptRenderer.showObject(Kistl.JavascriptRenderer.newObject({0}));",
                 Model.ReferencedClass.GetDescribedInterfaceType().ToJSON()));
 
-            _valueCtrl.Value = Model.Value != null ? Model.Value.ToJSON() : "";
+            _valueCtrl.Value = Model.Value != null ? Model.Value.ToJSON() : String.Empty;
 
             ScriptManager scriptManager = ScriptManager.GetCurrent(Page);
             if (scriptManager == null)

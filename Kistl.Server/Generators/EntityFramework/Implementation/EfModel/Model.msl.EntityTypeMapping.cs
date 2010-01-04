@@ -56,12 +56,12 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.EfModel
 
             foreach (var prop in cls.Properties.OfType<ValueTypeProperty>().Where(p => !p.IsList).OrderBy(p => p.PropertyName))
             {
-                ApplyScalarProperty(prop, "");
+                ApplyScalarProperty(prop, String.Empty);
             }
 
             foreach (var prop in cls.Properties.OfType<StructProperty>().Where(p => !p.IsList).OrderBy(p => p.PropertyName))
             {
-                ApplyComplexProperty(prop, "");
+                ApplyComplexProperty(prop, String.Empty);
             }
         }
 

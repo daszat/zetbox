@@ -336,7 +336,7 @@ namespace Kistl.Client.Presentables
             }
             else
             {
-                IconPath = "";
+                IconPath = String.Empty;
             }
         }
 
