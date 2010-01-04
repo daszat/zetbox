@@ -12,6 +12,7 @@ namespace Kistl.Client.Presentables
     using Kistl.App.Extensions;
     using Kistl.App.GUI;
     using Kistl.Client.GUI;
+    using Kistl.API.Utils;
 
     /// <summary>
     /// Abstract base class to provide basic functionality of all model factories. Toolkit-specific implementations of this class will be 
@@ -105,7 +106,15 @@ namespace Kistl.Client.Presentables
 
             if (result == null)
             {
-                result = (PresentableModel)Activator.CreateInstance(requestedType, parameters);
+                try
+                {
+                    result = (PresentableModel)Activator.CreateInstance(requestedType, parameters);
+                }
+                catch (Exception ex)
+                {
+                    Logging.Log.Error(string.Format("Error creating model for requestedType [{0}]", requestedType.FullName), ex);
+                    return null;
+                }
                 _cache.StoreModel(parameters, result);
             }
 

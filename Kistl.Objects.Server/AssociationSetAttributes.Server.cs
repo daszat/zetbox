@@ -1590,3 +1590,11 @@ using Kistl.DALProvider.EF;
     "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.Projekte.Kunde_EMails_CollectionEntry__Implementation__)
     )]
 
+
+// object-value association
+[assembly: EdmRelationship(
+    "Model", "FK_ObjectClass_value_SecurityRules",
+    "ObjectClass", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.ObjectClass__Implementation__),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.ObjectClass_SecurityRules_CollectionEntry__Implementation__)
+    )]
+

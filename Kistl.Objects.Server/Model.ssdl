@@ -940,6 +940,12 @@
       <End Role="CollectionEntry" EntitySet="Kunde_EMails_CollectionEntry" />
     </AssociationSet>
     
+    <EntitySet Name="ObjectClass_SecurityRules_CollectionEntry" EntityType="Model.Store.ObjectClass_SecurityRules_CollectionEntry" Table="ObjectClasses_SecurityRulesCollection" />
+    <AssociationSet Name="FK_ObjectClass_value_SecurityRules" Association="Model.Store.FK_ObjectClass_value_SecurityRules" >
+      <End Role="ObjectClass" EntitySet="ObjectClass" />
+      <End Role="CollectionEntry" EntitySet="ObjectClass_SecurityRules_CollectionEntry" />
+    </AssociationSet>
+    
 
 
   </EntityContainer>
@@ -4214,6 +4220,30 @@
         </Principal>
         <Dependent Role="CollectionEntry">
           <PropertyRef Name="fk_Kunde" />
+        </Dependent>
+      </ReferentialConstraint>
+    </Association>
+
+    <EntityType Name="ObjectClass_SecurityRules_CollectionEntry" >
+      <Key>
+        <PropertyRef Name="ID" />
+      </Key>
+      <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+      <Property Name="fk_ObjectClass" Type="int" Nullable="true" />
+      <Property Name="SecurityRules" Type="nvarchar" MaxLength="4000" />
+    </EntityType>
+
+    <Association Name="FK_ObjectClass_value_SecurityRules">
+      <End Role="ObjectClass" Type="Model.Store.ObjectClass" Multiplicity="0..1">
+        <OnDelete Action="Cascade" />
+      </End>
+      <End Role="CollectionEntry" Type="Model.Store.ObjectClass_SecurityRules_CollectionEntry" Multiplicity="*" />
+      <ReferentialConstraint>
+        <Principal Role="ObjectClass">
+          <PropertyRef Name="ID" />
+        </Principal>
+        <Dependent Role="CollectionEntry">
+          <PropertyRef Name="fk_ObjectClass" />
         </Dependent>
       </ReferentialConstraint>
     </Association>

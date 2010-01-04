@@ -59,9 +59,26 @@ namespace Kistl.Server.Generators.FrozenObjects.Implementation.ObjectClasses
                 }
                 else if (prop is ValueTypeProperty)
                 {
+                    ValueTypeProperty valType = (ValueTypeProperty)prop;
                     if (prop is StringProperty)
                     {
-                        return string.Format(@"@""{0}""", value.ToString().Replace("\"", "\"\""));
+                        if (valType.IsList)
+                        {
+                            StringBuilder sb = new StringBuilder();
+                            var items = (ICollection<string>)value;
+                            sb.AppendFormat("new System.Collections.ObjectModel.ReadOnlyCollection<string>(new List<string>({0}) {{", items.Count);
+                            foreach (var item in items)
+                            {
+                                sb.AppendFormat(@"@""{0}"",", item.ToString().Replace("\"", "\"\""));
+                                sb.AppendLine();
+                            }
+                            sb.Append(" })");
+                            return sb.ToString();
+                        }
+                        else
+                        {
+                            return string.Format(@"@""{0}""", value.ToString().Replace("\"", "\"\""));
+                        }
                     }
                     else if (prop is BoolProperty)
                     {

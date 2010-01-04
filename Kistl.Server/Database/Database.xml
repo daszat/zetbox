@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2009-12-30T10:46:58.277Z" xmlns="http://dasz.at/Kistl">
+<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2010-01-04T15:38:08.827Z" xmlns="http://dasz.at/Kistl">
   <KistlBase:Module ExportGuid="ef6d5bd8-5826-4ce6-a9ca-c8438ddde773">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.32Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.32Z</KistlBase:CreatedOn>
@@ -20,6 +20,7 @@
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
     <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <KistlBase:SecurityRules />
     <KistlBase:TableName>Assemblies</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="63b8e3f7-e663-4fde-a09a-64ca876586bd">
@@ -35,6 +36,7 @@
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
     <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <KistlBase:SecurityRules />
     <KistlBase:TableName>BaseParameters</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="2fe66550-c506-4a60-ac88-19db27bf1f4b">
@@ -51,6 +53,7 @@
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <KistlBase:SecurityRules />
     <KistlBase:TableName>BoolParameters</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="3604a7b6-dffb-44ee-8464-5f292d7a0687">
@@ -67,6 +70,7 @@
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <KistlBase:SecurityRules />
     <KistlBase:TableName>BoolProperties</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="012dfab4-934b-443e-853a-11a5da5b0627">
@@ -83,6 +87,7 @@
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <KistlBase:SecurityRules />
     <KistlBase:TableName>CLRObjectParameters</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="e9c42d4e-78a5-405e-a30f-ad0a665e6e5d">
@@ -99,6 +104,7 @@
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <KistlBase:SecurityRules />
     <KistlBase:TableName>ConsistentNavigatorConstraints</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="ac1d5ac9-d909-438f-a4f5-f64ea6904944">
@@ -113,6 +119,7 @@
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
     <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <KistlBase:SecurityRules />
     <KistlBase:TableName>Constraints</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="b276a0f6-cc89-473d-9dce-2efcf3efdd37">
@@ -128,6 +135,7 @@
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <KistlBase:SecurityRules />
     <KistlBase:TableName>CurrentSchema</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="6f005f31-c09c-45f9-9bcb-44090ebf0d1f">
@@ -143,6 +151,7 @@
     <GUI:DefaultPresentableModelDescriptor>0d3a2e45-9a49-4e29-afea-619baa8d3871</GUI:DefaultPresentableModelDescriptor>
     <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <KistlBase:SecurityRules />
     <KistlBase:TableName>DataTypes</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="cd6e3f93-5a1d-4c56-bec7-59a951d9fed6">
@@ -159,6 +168,7 @@
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <KistlBase:SecurityRules />
     <KistlBase:TableName>DateTimeParameters</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="1caadf11-7b95-4c68-8b42-87ac51b01ea0">
@@ -175,6 +185,7 @@
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <KistlBase:SecurityRules />
     <KistlBase:TableName>DateTimeProperties</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="74785c72-3271-4fb7-95fc-86b0baa09c8e">
@@ -188,6 +199,7 @@
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
     <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <KistlBase:SecurityRules />
     <KistlBase:TableName>DefaultPropertyValues</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <KistlBase:Enumeration ExportGuid="2b0b1986-0337-4d90-ad59-bc9d1ad82b2b">
@@ -215,6 +227,7 @@
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <KistlBase:SecurityRules />
     <KistlBase:TableName>DoubleParameters</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="404782b3-fbbc-4190-9b96-43dad7177090">
@@ -231,6 +244,7 @@
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <KistlBase:SecurityRules />
     <KistlBase:TableName>DoubleProperties</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="ee475de2-d626-49e9-9e40-6bb12cb026d4">
@@ -247,6 +261,7 @@
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <KistlBase:SecurityRules />
     <KistlBase:TableName>Enumerations</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="6365c62d-60a6-4fa3-9c78-370ffcc50478">
@@ -262,6 +277,7 @@
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
     <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>true</GUI:IsSimpleObject>
+    <KistlBase:SecurityRules />
     <KistlBase:TableName>EnumerationEntries</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="19a8d9f0-4de6-4cc9-a75d-c1499e3a103b">
@@ -278,6 +294,7 @@
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <KistlBase:SecurityRules />
     <KistlBase:TableName>EnumerationProperties</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="bd34d049-2b64-47f4-8d79-932008d0cf72">
@@ -294,6 +311,7 @@
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
     <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <KistlBase:SecurityRules />
     <KistlBase:TableName>GuidProperties</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <KistlBase:Interface ExportGuid="a73f2d0a-786b-483d-b474-b9d9df42b8b3">
@@ -320,6 +338,7 @@
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <KistlBase:SecurityRules />
     <KistlBase:TableName>Identities</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <KistlBase:Interface ExportGuid="4ae6616a-eca3-47a5-b502-8e3c3913c2f0">
@@ -355,6 +374,7 @@
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <KistlBase:SecurityRules />
     <KistlBase:TableName>IntegerRangeConstraints</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="7ea88d99-88f0-44a7-b0a3-da725e57595d">
@@ -371,6 +391,7 @@
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <KistlBase:SecurityRules />
     <KistlBase:TableName>Interfaces</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="24fb74a4-0d21-49d5-9c81-2ded8948d4d4">
@@ -387,6 +408,7 @@
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <KistlBase:SecurityRules />
     <KistlBase:TableName>IntParameters</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="6f818a25-4513-4fd3-8ed1-a92429d3910d">
@@ -403,6 +425,7 @@
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <KistlBase:SecurityRules />
     <KistlBase:TableName>IntProperties</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="ed8f30ad-186f-48ee-8dd5-a153d24dfada">
@@ -418,6 +441,7 @@
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <KistlBase:SecurityRules />
     <KistlBase:TableName>IsValidIdentifierConstraints</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="94916227-138b-49e5-b62e-b982a45a5c21">
@@ -433,6 +457,7 @@
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <KistlBase:SecurityRules />
     <KistlBase:TableName>IsValidNamespaceConstraints</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="ef79c0b9-55e0-45ad-8233-1ff8f852661f">
@@ -448,6 +473,7 @@
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
     <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <KistlBase:SecurityRules />
     <KistlBase:TableName>Methods</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="f6e7bb30-3adf-4d49-a80c-6ea7b589afa7">
@@ -463,6 +489,7 @@
     <GUI:DefaultPresentableModelDescriptor>caf3e708-2f31-4084-9957-ca11fccc1374</GUI:DefaultPresentableModelDescriptor>
     <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <KistlBase:SecurityRules />
     <KistlBase:TableName>MethodInvocations</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="2667704b-ea27-44ff-a6b2-0ef42ffccedc">
@@ -478,6 +505,7 @@
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <KistlBase:SecurityRules />
     <KistlBase:TableName>MethodInvocationConstraints</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="8a1ace7c-77f2-4b48-9b0b-bcb68c660d11">
@@ -493,6 +521,7 @@
     <GUI:DefaultPresentableModelDescriptor>84828181-4048-47a7-b526-01508b7a0fd0</GUI:DefaultPresentableModelDescriptor>
     <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <KistlBase:SecurityRules />
     <KistlBase:TableName>Modules</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <KistlBase:Enumeration ExportGuid="4f2b5005-672e-46ef-80ed-94b8cdd053db">
@@ -519,6 +548,7 @@
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <KistlBase:SecurityRules />
     <KistlBase:TableName>NewGuidDefaultValues</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="8604ef0c-f933-4f66-b7df-21d27c9003b2">
@@ -534,6 +564,7 @@
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <KistlBase:SecurityRules />
     <KistlBase:TableName>NotNullableConstraints</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="20888dfc-1fbc-47c8-9f3c-c6a30a5c0048">
@@ -550,6 +581,7 @@
     <GUI:DefaultPresentableModelDescriptor>6b368136-addd-4e86-ad29-3d2158a00de5</GUI:DefaultPresentableModelDescriptor>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <KistlBase:SecurityRules />
     <KistlBase:TableName>ObjectClasses</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="3fb8bf11-cab6-478f-b9b8-3f6d70a70d37">
@@ -566,6 +598,7 @@
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <KistlBase:SecurityRules />
     <KistlBase:TableName>ObjectParameters</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="93241989-0bb0-435f-b6e5-06fdbbf19e5d">
@@ -582,6 +615,7 @@
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
     <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <KistlBase:SecurityRules />
     <KistlBase:TableName>ObjectReferencePlaceholderProperties</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="f1baf69c-a341-4a3a-b321-e782e1458e87">
@@ -598,6 +632,7 @@
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <KistlBase:SecurityRules />
     <KistlBase:TableName>ObjectReferenceProperties</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="e5f93f63-9cb8-40a5-8118-d1d9e479370c">
@@ -613,6 +648,7 @@
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
     <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <KistlBase:SecurityRules />
     <KistlBase:TableName>Properties</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="24defe28-fc33-4f74-bf69-395ffa7a74f5">
@@ -626,6 +662,7 @@
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
     <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <KistlBase:SecurityRules />
     <KistlBase:TableName>PropertyInvocations</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <KistlBase:Enumeration ExportGuid="a05a5bcf-c952-4017-947e-6a63b2464739">
@@ -650,6 +687,7 @@
     <GUI:DefaultPresentableModelDescriptor>225bfb18-82fc-429d-81ff-e1ba738fdbc7</GUI:DefaultPresentableModelDescriptor>
     <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <KistlBase:SecurityRules />
     <KistlBase:TableName>Relations</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="07817322-d4b9-4dd8-8464-bcb6745fef34">
@@ -664,6 +702,7 @@
     <GUI:DefaultPresentableModelDescriptor>d4d5ae35-104d-4445-b0a9-2d49ae5f7716</GUI:DefaultPresentableModelDescriptor>
     <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <KistlBase:SecurityRules />
     <KistlBase:TableName>RelationEnds</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <KistlBase:Enumeration ExportGuid="351a22e8-d047-4878-b6d3-3945489139a0">
@@ -691,6 +730,7 @@
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <KistlBase:SecurityRules />
     <KistlBase:TableName>StringParameters</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="539d6b20-f0cb-461b-b087-a522fec6c838">
@@ -707,6 +747,7 @@
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <KistlBase:SecurityRules />
     <KistlBase:TableName>StringProperties</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="7bb90dc3-2b8c-4cff-ba8e-435ff386a4cf">
@@ -722,6 +763,7 @@
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <KistlBase:SecurityRules />
     <KistlBase:TableName>StringRangeConstraints</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="2cb3f778-dd6a-46c7-ad2b-5f8691313035">
@@ -738,6 +780,7 @@
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <KistlBase:SecurityRules />
     <KistlBase:TableName>Structs</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="7b5ba73f-91f4-4542-9542-4f418b5c109f">
@@ -754,6 +797,7 @@
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <KistlBase:SecurityRules />
     <KistlBase:TableName>StructProperties</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="87766ae2-89a4-4c37-ab25-583a710c55e5">
@@ -769,6 +813,7 @@
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
     <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <KistlBase:SecurityRules />
     <KistlBase:TableName>TypeRefs</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="b0c23c07-950f-47a0-af23-a925dc691b3e">
@@ -785,6 +830,7 @@
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <KistlBase:SecurityRules />
     <KistlBase:TableName>ValueTypeProperties</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass_implements_Interface_RelationEntry ExportGuid="0fba293a-0672-45dd-b828-26bab56f03bb">
@@ -2203,6 +2249,18 @@
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:IsList>false</KistlBase:IsList>
   </KistlBase:BoolProperty>
+  <KistlBase:StringProperty ExportGuid="05c8560f-24b6-48f8-b7b6-00e509285276">
+    <KistlBase:CategoryTags>DataModel</KistlBase:CategoryTags>
+    <KistlBase:ChangedOn>2010-01-04T15:38:08.827Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-01-04T15:38:08.827Z</KistlBase:CreatedOn>
+    <KistlBase:Description>Set of security rules to filter access rights</KistlBase:Description>
+    <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
+    <KistlBase:ObjectClass>20888dfc-1fbc-47c8-9f3c-c6a30a5c0048</KistlBase:ObjectClass>
+    <KistlBase:PropertyName>SecurityRules</KistlBase:PropertyName>
+    <GUI:ValueModelDescriptor>88ce02bf-fc40-4227-a7b5-28f6385efa1b</GUI:ValueModelDescriptor>
+    <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
+    <KistlBase:IsList>true</KistlBase:IsList>
+  </KistlBase:StringProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="0914de6e-966c-46fc-9359-e4da6c3608b1">
     <KistlBase:CategoryTags>DataModel</KistlBase:CategoryTags>
     <KistlBase:ChangedOn>2009-12-14T17:08:05.337Z</KistlBase:ChangedOn>
@@ -8581,6 +8639,7 @@
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
     <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <KistlBase:SecurityRules />
     <KistlBase:TableName>ActionKinds</KistlBase:TableName>
   </GUI:ControlKindClass>
   <GUI:ControlKindClass ExportGuid="b3f3e922-4fce-4c33-824d-40d47381e3cd">
@@ -8597,6 +8656,7 @@
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
     <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <KistlBase:SecurityRules />
     <KistlBase:TableName>CheckboxKinds</KistlBase:TableName>
   </GUI:ControlKindClass>
   <GUI:ControlKindClass ExportGuid="a9166f1e-9233-4d2d-8eb6-be71d724ea14">
@@ -8612,6 +8672,7 @@
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
     <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <KistlBase:SecurityRules />
     <KistlBase:TableName>ControlKinds</KistlBase:TableName>
   </GUI:ControlKindClass>
   <KistlBase:ObjectClass ExportGuid="c0c6369e-90cd-4e14-ad5c-a45e9e782e2f">
@@ -8628,6 +8689,7 @@
     <GUI:DefaultPresentableModelDescriptor>6b368136-addd-4e86-ad29-3d2158a00de5</GUI:DefaultPresentableModelDescriptor>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <KistlBase:SecurityRules />
     <KistlBase:TableName>ControlKindClasses</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <GUI:ControlKindClass ExportGuid="b91f789f-8ecb-44e2-8458-7f0d27ea027a">
@@ -8644,6 +8706,7 @@
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
     <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <KistlBase:SecurityRules />
     <KistlBase:TableName>DataObjectKinds</KistlBase:TableName>
   </GUI:ControlKindClass>
   <GUI:ControlKindClass ExportGuid="c421eb80-883a-4f28-9ba0-25fa19fba103">
@@ -8660,6 +8723,7 @@
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
     <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <KistlBase:SecurityRules />
     <KistlBase:TableName>DataObjectSelectionTaskKinds</KistlBase:TableName>
   </GUI:ControlKindClass>
   <GUI:ControlKindClass ExportGuid="6603c126-83ec-4861-b7d1-d692ec96cc5e">
@@ -8675,6 +8739,7 @@
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <KistlBase:SecurityRules />
     <KistlBase:TableName>DataObjectSummaryKinds</KistlBase:TableName>
   </GUI:ControlKindClass>
   <GUI:ControlKindClass ExportGuid="add058e1-2a72-4663-a0c4-9b79cd1d4537">
@@ -8691,6 +8756,7 @@
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
     <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <KistlBase:SecurityRules />
     <KistlBase:TableName>EnumerationSelectorKinds</KistlBase:TableName>
   </GUI:ControlKindClass>
   <KistlBase:ObjectClass ExportGuid="78b6f354-013b-4129-a390-7f3a5a5e28e9">
@@ -8706,6 +8772,7 @@
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
     <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>true</GUI:IsSimpleObject>
+    <KistlBase:SecurityRules />
     <KistlBase:TableName>Icons</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <KistlBase:Interface ExportGuid="2e93e071-875a-41ee-a768-5d55c2683546">
@@ -8733,6 +8800,7 @@
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
     <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <KistlBase:SecurityRules />
     <KistlBase:TableName>LabelKinds</KistlBase:TableName>
   </GUI:ControlKindClass>
   <GUI:ControlKindClass ExportGuid="a012a762-5d8b-4aec-b396-e262cf30f9f9">
@@ -8749,6 +8817,7 @@
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
     <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <KistlBase:SecurityRules />
     <KistlBase:TableName>LauncherKinds</KistlBase:TableName>
   </GUI:ControlKindClass>
   <GUI:ControlKindClass ExportGuid="0c15ef90-4410-4aec-9eea-5c46b87cb032">
@@ -8765,6 +8834,7 @@
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
     <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <KistlBase:SecurityRules />
     <KistlBase:TableName>ObjectListKinds</KistlBase:TableName>
   </GUI:ControlKindClass>
   <GUI:ControlKindClass ExportGuid="4e6f1445-1d03-465a-b3b6-8ce6966e941c">
@@ -8780,6 +8850,7 @@
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
     <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <KistlBase:SecurityRules />
     <KistlBase:TableName>ObjectRefGridCellKinds</KistlBase:TableName>
   </GUI:ControlKindClass>
   <GUI:ControlKindClass ExportGuid="27e8a0f3-ffff-4bb1-b956-c36a5a28dd14">
@@ -8796,6 +8867,7 @@
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
     <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <KistlBase:SecurityRules />
     <KistlBase:TableName>ObjectRefKinds</KistlBase:TableName>
   </GUI:ControlKindClass>
   <KistlBase:ObjectClass ExportGuid="5d152c6f-6c1e-48b7-b03e-669e30468808">
@@ -8810,6 +8882,7 @@
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
     <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <KistlBase:SecurityRules />
     <KistlBase:TableName>PresentableModelDescriptors</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <GUI:ControlKindClass ExportGuid="68a53f9f-fbdb-4d44-8d58-da9be3812ba7">
@@ -8826,6 +8899,7 @@
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
     <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <KistlBase:SecurityRules />
     <KistlBase:TableName>PropertyGroupKinds</KistlBase:TableName>
   </GUI:ControlKindClass>
   <GUI:ControlKindClass ExportGuid="5624100a-9fed-44c0-822e-d174c4c9cb45">
@@ -8842,6 +8916,7 @@
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
     <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <KistlBase:SecurityRules />
     <KistlBase:TableName>RelationEditorKinds</KistlBase:TableName>
   </GUI:ControlKindClass>
   <GUI:ControlKindClass ExportGuid="bbd088cc-c68c-46de-a89e-6e1e6f768245">
@@ -8858,6 +8933,7 @@
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
     <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <KistlBase:SecurityRules />
     <KistlBase:TableName>SingleLineDataObjectKinds</KistlBase:TableName>
   </GUI:ControlKindClass>
   <GUI:ControlKindClass ExportGuid="a3207646-c6a6-4ecc-89cb-31bf28dbc6ac">
@@ -8873,6 +8949,7 @@
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
     <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <KistlBase:SecurityRules />
     <KistlBase:TableName>StringListKinds</KistlBase:TableName>
   </GUI:ControlKindClass>
   <GUI:ControlKindClass ExportGuid="c6ed9c8e-e7b4-47af-948e-93bef8c7e1f8">
@@ -8889,6 +8966,7 @@
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
     <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <KistlBase:SecurityRules />
     <KistlBase:TableName>StringSelectorKinds</KistlBase:TableName>
   </GUI:ControlKindClass>
   <KistlBase:ObjectClass ExportGuid="c677d3fe-7dfe-4ea5-91e0-d1b0df9118be">
@@ -8903,6 +8981,7 @@
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <KistlBase:SecurityRules />
     <KistlBase:TableName>Templates</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <GUI:ControlKindClass ExportGuid="d3f5a566-3331-4c7b-bed4-ea5166815b67">
@@ -8919,6 +8998,7 @@
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
     <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <KistlBase:SecurityRules />
     <KistlBase:TableName>TextboxKinds</KistlBase:TableName>
   </GUI:ControlKindClass>
   <KistlBase:Enumeration ExportGuid="803fb38d-f0d2-409c-9f15-30da4bdcf576">
@@ -8946,6 +9026,7 @@
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
     <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <KistlBase:SecurityRules />
     <KistlBase:TableName>TypeRefRefKinds</KistlBase:TableName>
   </GUI:ControlKindClass>
   <KistlBase:ObjectClass ExportGuid="ffda4604-1536-43b6-b951-f8753d5092ca">
@@ -8960,6 +9041,7 @@
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
     <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <KistlBase:SecurityRules />
     <KistlBase:TableName>ViewDescriptors</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="98790e5d-808f-4e0b-8a1a-b304839f07ab">
@@ -8974,6 +9056,7 @@
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <KistlBase:SecurityRules />
     <KistlBase:TableName>Visuals</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <GUI:ControlKindClass ExportGuid="4fdf9e9c-a21c-40ab-84c2-16b2c7b7ec5f">
@@ -8990,6 +9073,7 @@
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
     <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <KistlBase:SecurityRules />
     <KistlBase:TableName>WorkspaceKinds</KistlBase:TableName>
   </GUI:ControlKindClass>
   <KistlBase:ObjectClass_implements_Interface_RelationEntry ExportGuid="4aa06967-4cbd-4876-bdb7-235ba6a37a80">
@@ -13242,6 +13326,7 @@
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <KistlBase:SecurityRules />
     <KistlBase:TableName>Auftraege</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="b9ddd097-4f45-40c5-87e9-7331ab58727c">
@@ -13257,6 +13342,7 @@
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <KistlBase:SecurityRules />
     <KistlBase:TableName>Kunden</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="77933a20-338a-4961-b751-62ffa0a75c6a">
@@ -13272,6 +13358,7 @@
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <KistlBase:SecurityRules />
     <KistlBase:TableName>Mitarbeiter</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="885939e8-82e1-4fdf-b80e-5f612d5131d3">
@@ -13287,6 +13374,20 @@
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <KistlBase:SecurityRules>
+      <CollectionEntry ID="1">
+        <KistlBase:A>82</KistlBase:A>
+        <KistlBase:B>R: Mitarbeiter == Identity</KistlBase:B>
+      </CollectionEntry>
+      <CollectionEntry ID="2">
+        <KistlBase:A>82</KistlBase:A>
+        <KistlBase:B>RUD: CreatedBy == Identity</KistlBase:B>
+      </CollectionEntry>
+      <CollectionEntry ID="3">
+        <KistlBase:A>82</KistlBase:A>
+        <KistlBase:B>CRUD: Identity.Role == Admin</KistlBase:B>
+      </CollectionEntry>
+    </KistlBase:SecurityRules>
     <KistlBase:TableName>Projekte</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="3fbb42ca-a084-491d-9135-85ed24f1ef78">
@@ -13302,6 +13403,7 @@
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <KistlBase:SecurityRules />
     <KistlBase:TableName>Tasks</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass_implements_Interface_RelationEntry ExportGuid="8c60753a-addf-4edf-92f8-8ad18157d9a5">
@@ -14708,6 +14810,7 @@
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <KistlBase:SecurityRules />
     <KistlBase:TableName>NewObjectClasses</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="6d00a4e3-75b0-4a56-bc9f-3e9812d9c8fe">
@@ -14722,6 +14825,7 @@
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <KistlBase:SecurityRules />
     <KistlBase:TableName>AnotherTests</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="352a4ade-1dca-4d28-9630-66bbcc1622ea">
@@ -14736,6 +14840,7 @@
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <KistlBase:SecurityRules />
     <KistlBase:TableName>Companies</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <KistlBase:Interface ExportGuid="c8ff9958-dd26-4a92-a049-7fa9d51d8bf2">
@@ -14761,6 +14866,7 @@
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <KistlBase:SecurityRules />
     <KistlBase:TableName>Muhblas</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="de155110-79cc-4dac-89d6-0916608be1fb">
@@ -14775,6 +14881,7 @@
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <KistlBase:SecurityRules />
     <KistlBase:TableName>TestCustomObjects</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <KistlBase:Enumeration ExportGuid="67b48828-e7d2-4432-a942-88e96d74b40a">
@@ -14800,6 +14907,7 @@
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <KistlBase:SecurityRules />
     <KistlBase:TableName>TestObjClasses</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <KistlBase:Struct ExportGuid="2510af08-089f-4252-8a98-ec84cb67bcb9">
@@ -15574,6 +15682,7 @@
     <GUI:DefaultPresentableModelDescriptor>382050bb-706b-4812-b23b-133833d72d55</GUI:DefaultPresentableModelDescriptor>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <KistlBase:SecurityRules />
     <KistlBase:TableName>PresenceRecords</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="dff456e5-f5a6-4da7-afdd-f4ea2a9e7a7a">
@@ -15589,6 +15698,7 @@
     <GUI:DefaultPresentableModelDescriptor>b6dc8994-6930-4cf4-8cb7-7f18efe9ef68</GUI:DefaultPresentableModelDescriptor>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <KistlBase:SecurityRules />
     <KistlBase:TableName>WorkEfforts</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="15268915-6b8f-4884-9b7e-5975e0768301">
@@ -15604,6 +15714,7 @@
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <KistlBase:SecurityRules />
     <KistlBase:TableName>WorkEffortAccounts</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <KistlBase:DateTimeProperty ExportGuid="3833e790-e2f2-43c6-b9c2-79dd4a03c8c6">

@@ -2661,6 +2661,25 @@
       </EndProperty>
       <Condition ColumnName="fk_Kunde" IsNull="false"/>
     </AssociationSetMapping>
+    <EntitySetMapping Name="ObjectClass_SecurityRules_CollectionEntry">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.ObjectClass_SecurityRules_CollectionEntry)">
+        <MappingFragment StoreEntitySet="ObjectClass_SecurityRules_CollectionEntry">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="B" ColumnName="SecurityRules" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="FK_ObjectClass_value_SecurityRules"
+                           TypeName="Model.FK_ObjectClass_value_SecurityRules"
+                           StoreEntitySet="ObjectClass_SecurityRules_CollectionEntry" >
+      <EndProperty Name="ObjectClass">
+        <ScalarProperty Name="ID" ColumnName="fk_ObjectClass"/>
+      </EndProperty>
+      <EndProperty Name="CollectionEntry">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_ObjectClass" IsNull="false"/>
+    </AssociationSetMapping>
 
   </EntityContainerMapping>
 </Mapping>

@@ -137,6 +137,11 @@
       <End Role="Kunde" EntitySet="Kunde" />
       <End Role="CollectionEntry" EntitySet="Kunde_EMails_CollectionEntry" />
     </AssociationSet>
+    <EntitySet Name="ObjectClass_SecurityRules_CollectionEntry" EntityType="Model.ObjectClass_SecurityRules_CollectionEntry" />
+    <AssociationSet Name="FK_ObjectClass_value_SecurityRules" Association="Model.FK_ObjectClass_value_SecurityRules" >
+      <End Role="ObjectClass" EntitySet="DataType" />
+      <End Role="CollectionEntry" EntitySet="ObjectClass_SecurityRules_CollectionEntry" />
+    </AssociationSet>
 
     <!-- AssociationSets for all object-object relations without CollectionEntrys -->
     <AssociationSet Name="FK_Assembly_was_ChangedBy" Association="Model.FK_Assembly_was_ChangedBy" >
@@ -1419,6 +1424,10 @@
                         ToRole="CollectionEntry" />
     <Property Name="IsFrozenObject" Type="Boolean" Nullable="false" />
     <Property Name="IsSimpleObject" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="SecurityRules__Implementation__"
+                        Relationship="Model.FK_ObjectClass_value_SecurityRules"
+                        FromRole="ObjectClass"
+                        ToRole="CollectionEntry" />
     <NavigationProperty Name="SubClasses__Implementation__"
                         Relationship="Model.FK_BaseObjectClass_has_SubClasses"
                         FromRole="BaseObjectClass"
@@ -1951,6 +1960,29 @@
          Multiplicity="0..1" />
     <End Role="CollectionEntry"
          Type="Model.Kunde_EMails_CollectionEntry" 
+         Multiplicity="*" />
+  </Association>
+  <!-- ObjectClass.SecurityRules -->
+  <EntityType Name="ObjectClass_SecurityRules_CollectionEntry" >
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    
+    <!-- A -->
+    <NavigationProperty Name="A__Implementation__"
+                        Relationship="Model.FK_ObjectClass_value_SecurityRules"
+                        FromRole="CollectionEntry"
+                        ToRole="ObjectClass" />
+    <!-- B -->
+    <Property Name="B" Type="String" Nullable="true" MaxLength="4000" />
+  </EntityType>
+  <Association Name="FK_ObjectClass_value_SecurityRules" >
+    <End Role="ObjectClass"
+         Type="Model.ObjectClass" 
+         Multiplicity="0..1" />
+    <End Role="CollectionEntry"
+         Type="Model.ObjectClass_SecurityRules_CollectionEntry" 
          Multiplicity="*" />
   </Association>
 

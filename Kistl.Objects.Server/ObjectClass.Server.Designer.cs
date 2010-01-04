@@ -363,6 +363,48 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.ObjectClass, bool> OnIsSimpleObject_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.ObjectClass, bool> OnIsSimpleObject_PostSetter;
         /// <summary>
+        /// Set of security rules to filter access rights
+        /// </summary>
+        // value list property
+   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.ValueCollectionProperty
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public ICollection<string> SecurityRules
+        {
+            get
+            {
+                if (_SecurityRulesWrapper == null)
+                {
+                    _SecurityRulesWrapper = new EFValueCollectionWrapper<ObjectClass, string, ObjectClass_SecurityRules_CollectionEntry__Implementation__, EntityCollection<ObjectClass_SecurityRules_CollectionEntry__Implementation__>>(
+						this.Context,
+                        this,
+                        SecurityRules__Implementation__);
+                }
+                return _SecurityRulesWrapper;
+            }
+        }
+        
+        [EdmRelationshipNavigationProperty("Model", "FK_ObjectClass_value_SecurityRules", "CollectionEntry")]
+        public EntityCollection<ObjectClass_SecurityRules_CollectionEntry__Implementation__> SecurityRules__Implementation__
+        {
+            get
+            {
+                var c = ((IEntityWithRelationships)(this)).RelationshipManager
+                    .GetRelatedCollection<ObjectClass_SecurityRules_CollectionEntry__Implementation__>(
+                        "Model.FK_ObjectClass_value_SecurityRules",
+                        "CollectionEntry");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !c.IsLoaded)
+                {
+                    c.Load();
+                }
+                return c;
+            }
+        }
+        private EFValueCollectionWrapper<ObjectClass, string, ObjectClass_SecurityRules_CollectionEntry__Implementation__, EntityCollection<ObjectClass_SecurityRules_CollectionEntry__Implementation__>> _SecurityRulesWrapper;
+
+        /// <summary>
         /// Liste der vererbten Klassen
         /// </summary>
     /*
@@ -729,6 +771,15 @@ namespace Kistl.App.Base
 					
 					return String.Join("; ", errors);
 				}
+				case "SecurityRules":
+				{
+					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("05c8560f-24b6-48f8-b7b6-00e509285276")).Constraints
+						.Where(c => !c.IsValid(this, this.SecurityRules))
+						.Select(c => c.GetErrorText(this, this.SecurityRules))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
 				case "SubClasses":
 				{
 					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("0914de6e-966c-46fc-9359-e4da6c3608b1")).Constraints
@@ -786,6 +837,7 @@ namespace Kistl.App.Base
             BinarySerializer.ToStream(DefaultPresentableModelDescriptor != null ? DefaultPresentableModelDescriptor.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._IsFrozenObject, binStream);
             BinarySerializer.ToStream(this._IsSimpleObject, binStream);
+            BinarySerializer.ToStreamCollectionEntries(this.SecurityRules__Implementation__, binStream);
             BinarySerializer.ToStream(this._TableName, binStream);
         }
 
@@ -808,6 +860,7 @@ namespace Kistl.App.Base
             XmlStreamer.ToStream(DefaultPresentableModelDescriptor != null ? DefaultPresentableModelDescriptor.ID : (int?)null, xml, "DefaultPresentableModelDescriptor", "Kistl.App.GUI");
             XmlStreamer.ToStream(this._IsFrozenObject, xml, "IsFrozenObject", "Kistl.App.Base");
             XmlStreamer.ToStream(this._IsSimpleObject, xml, "IsSimpleObject", "Kistl.App.GUI");
+            XmlStreamer.ToStreamCollectionEntries(this.SecurityRules__Implementation__, xml, "SecurityRules", "Kistl.App.Base");
             XmlStreamer.ToStream(this._TableName, xml, "TableName", "Kistl.App.Base");
         }
 
@@ -819,6 +872,7 @@ namespace Kistl.App.Base
             XmlStreamer.FromStream(ref this._fk_DefaultPresentableModelDescriptor, xml, "DefaultPresentableModelDescriptor", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._IsFrozenObject, xml, "IsFrozenObject", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._IsSimpleObject, xml, "IsSimpleObject", "Kistl.App.GUI");
+            XmlStreamer.FromStreamCollectionEntries(this.SecurityRules__Implementation__, xml, "SecurityRules", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._TableName, xml, "TableName", "Kistl.App.Base");
         }
 
@@ -832,6 +886,8 @@ namespace Kistl.App.Base
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._IsFrozenObject, xml, "IsFrozenObject", "Kistl.App.Base");
     
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this._IsSimpleObject, xml, "IsSimpleObject", "Kistl.App.GUI");
+	
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStreamCollectionEntries(this.SecurityRules__Implementation__, xml, "SecurityRules", "Kistl.App.Base");
     
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._TableName, xml, "TableName", "Kistl.App.Base");
         }
@@ -844,6 +900,7 @@ namespace Kistl.App.Base
             XmlStreamer.FromStream(ref this._fk_guid_DefaultPresentableModelDescriptor, xml, "DefaultPresentableModelDescriptor", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._IsFrozenObject, xml, "IsFrozenObject", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._IsSimpleObject, xml, "IsSimpleObject", "Kistl.App.GUI");
+            XmlStreamer.FromStreamCollectionEntries(this.SecurityRules__Implementation__, xml, "SecurityRules", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._TableName, xml, "TableName", "Kistl.App.Base");
         }
 

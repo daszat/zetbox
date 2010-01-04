@@ -3153,3 +3153,209 @@ public string Value { get { return B; } set { B = value; } }
 
     }
 }
+
+namespace Kistl.App.Base
+{
+    [EdmEntityType(NamespaceName="Model", Name="ObjectClass_SecurityRules_CollectionEntry")]    [System.Diagnostics.DebuggerDisplay("ObjectClass_SecurityRules_CollectionEntry__Implementation__")]
+    public class ObjectClass_SecurityRules_CollectionEntry__Implementation__ : BaseServerCollectionEntry_EntityFramework, ObjectClass_SecurityRules_CollectionEntry
+    {
+    
+        [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
+           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.IdProperty
+        public override int ID
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _ID;
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_ID != value)
+                {
+                    var __oldValue = _ID;
+                    var __newValue = value;
+                    NotifyPropertyChanging("ID", __oldValue, __newValue);
+                    _ID = __newValue;
+                    NotifyPropertyChanged("ID", __oldValue, __newValue);
+                }
+            }
+        }
+        private int _ID;
+        public IDataObject ParentObject { get { return Parent; } set { Parent = (ObjectClass)value; } }
+        public object ValueObject { get { return Value; } set { Value = (string)value; } }
+
+        /// <summary>
+        /// Reference to the A-Side member of this CollectionEntry
+        /// </summary>
+   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public ObjectClass A
+        {
+            get
+            {
+                return A__Implementation__;
+            }
+            set
+            {
+                // TODO: NotifyPropertyChanged()
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if(value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                A__Implementation__ = (ObjectClass__Implementation__)value;
+            }
+        }
+        
+        private int? _fk_A;
+        // EF sees only this property
+        [EdmRelationshipNavigationProperty("Model", "FK_ObjectClass_value_SecurityRules", "ObjectClass")]
+        public ObjectClass__Implementation__ A__Implementation__
+        {
+            get
+            {
+                EntityReference<ObjectClass__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<ObjectClass__Implementation__>(
+                        "Model.FK_ObjectClass_value_SecurityRules",
+                        "ObjectClass");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load(); 
+                    if(r.Value != null) r.Value.AttachToContext(this.Context);
+                }
+                var __value = r.Value;
+                return __value;
+            }
+            set
+            {
+                EntityReference<ObjectClass__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<ObjectClass__Implementation__>(
+                        "Model.FK_ObjectClass_value_SecurityRules",
+                        "ObjectClass");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load(); 
+                }
+                ObjectClass __oldValue = (ObjectClass)r.Value;
+                ObjectClass __newValue = (ObjectClass)value;
+
+                r.Value = (ObjectClass__Implementation__)__newValue;
+                                
+            }
+        }
+        
+        
+public ObjectClass Parent { get { return A; } set { A = value; } }
+        /// <summary>
+        /// the B-side value of this CollectionEntry
+        /// </summary>
+        // value type property
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingValueProperty
+        public virtual string B
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _B;
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_B != value)
+                {
+                    var __oldValue = _B;
+                    var __newValue = value;
+                    NotifyPropertyChanging("B", __oldValue, __newValue);
+                    _B = __newValue;
+                    NotifyPropertyChanged("B", __oldValue, __newValue);
+                }
+            }
+        }
+        private string _B;
+public string Value { get { return B; } set { B = value; } }
+
+#region Serializer
+
+
+        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects)
+        {
+            
+            base.ToStream(binStream, auxObjects);
+            BinarySerializer.ToStream(A != null ? A.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(this._B, binStream);
+        }
+
+        public override void FromStream(System.IO.BinaryReader binStream)
+        {
+            
+            base.FromStream(binStream);
+            BinarySerializer.FromStream(out this._fk_A, binStream);
+            {
+                var tmp = this._B;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this._B = tmp;
+            }
+        }
+
+        public override void ToStream(System.Xml.XmlWriter xml)
+        {
+            
+            base.ToStream(xml);
+            XmlStreamer.ToStream(A != null ? A.ID : (int?)null, xml, "A", "Kistl.App.Base");
+            XmlStreamer.ToStream(this._B, xml, "B", "Kistl.App.Base");
+        }
+
+        public override void FromStream(System.Xml.XmlReader xml)
+        {
+            
+            base.FromStream(xml);
+            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.Base");
+            {
+                var tmp = this._B;
+                XmlStreamer.FromStream(ref tmp, xml, "B", "Kistl.App.Base");
+                this._B = tmp;
+            }
+        }
+
+#endregion
+
+		public override InterfaceType GetInterfaceType()
+		{
+			return new InterfaceType(typeof(ObjectClass_SecurityRules_CollectionEntry));
+		}
+	
+		public override void ReloadReferences()
+		{
+			// Do not reload references if the current object has been deleted.
+			// TODO: enable when MemoryContext uses MemoryDataObjects
+			//if (this.ObjectState == DataObjectState.Deleted) return;
+			if (_fk_A.HasValue)
+				A__Implementation__ = (ObjectClass__Implementation__)Context.Find<ObjectClass>(_fk_A.Value);
+			else
+				A__Implementation__ = null;
+	
+		}
+		
+		public override void ApplyChangesFrom(IPersistenceObject obj)
+		{
+			base.ApplyChangesFrom(obj);
+			var other = (ObjectClass_SecurityRules_CollectionEntry__Implementation__)obj;
+			var me = (ObjectClass_SecurityRules_CollectionEntry__Implementation__)this;
+			
+            me.B = other.B;
+		}		
+		
+		
+
+    }
+}

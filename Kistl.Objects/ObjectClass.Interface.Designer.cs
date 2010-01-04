@@ -47,6 +47,11 @@ namespace Kistl.App.Base
 			set;
 		}
         /// <summary>
+        /// Set of security rules to filter access rights
+        /// </summary>
+
+        ICollection<System.String> SecurityRules { get; }
+        /// <summary>
         /// Liste der vererbten Klassen
         /// </summary>
 
