@@ -286,12 +286,14 @@ namespace Kistl.Server.Packaging
 
                 IPersistenceObject obj = FindObject(ctx, objects, exportGuid, ifType);
 
-                var children = xml.ReadSubtree();
-                while (children.Read())
+                using (var children = xml.ReadSubtree())
                 {
-                    if (children.NodeType == XmlNodeType.Element)
+                    while (children.Read())
                     {
-                        ((IExportableInternal)obj).MergeImport(xml);
+                        if (children.NodeType == XmlNodeType.Element)
+                        {
+                            ((IExportableInternal)obj).MergeImport(xml);
+                        }
                     }
                 }
 
