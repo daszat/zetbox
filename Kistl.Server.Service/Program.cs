@@ -78,179 +78,180 @@ namespace Kistl.Server.Service
 
                 Log.TraceTotalMemory("After InitApplicationContext");
 
-                Server server = new Server();
-                bool actiondone = false;
-                foreach (CmdLineArg arg in SplitCommandLine(args))
+                using (var server = new Server())
                 {
-                    if (arg.Command == "-export" && arg.Arguments.Count > 1)
+                    bool actiondone = false;
+                    foreach (CmdLineArg arg in SplitCommandLine(args))
                     {
-                        Log.Debug("Prepare for exporting");
-                        DefaultInitialisation();
-                        string file = arg.Arguments[0];
-                        List<string> namespaceList = new List<string>();
-                        for (int i = 1; i < arg.Arguments.Count; i++)
+                        if (arg.Command == "-export" && arg.Arguments.Count > 1)
                         {
-                            namespaceList.Add(arg.Arguments[i]);
-                        }
-                        var namespaces = namespaceList.ToArray();
-                        server.Export(file, namespaces);
-                        actiondone = true;
-                        Log.Debug("Finished exporting");
-                    }
-                    else if (arg.Command == "-import" && arg.Arguments.Count == 1)
-                    {
-                        Log.Debug("Prepare for importing");
-                        DefaultInitialisation();
-                        string file = arg.Arguments[0];
-                        server.Import(file);
-                        actiondone = true;
-                        Log.Debug("Finished importing");
-                    }
-                    else if (arg.Command == "-publish" && arg.Arguments.Count > 1)
-                    {
-                        Log.Debug("Prepare for publish");
-                        DefaultInitialisation();
-                        string file = arg.Arguments[0];
-                        List<string> namespaces = new List<string>();
-                        for (int i = 1; i < arg.Arguments.Count; i++)
-                        {
-                            namespaces.Add(arg.Arguments[i]);
-                        }
-                        server.Publish(file, namespaces.ToArray());
-                        actiondone = true;
-                        Log.Debug("Finished publish");
-                    }
-                    else if (arg.Command == "-deploy" && arg.Arguments.Count == 1)
-                    {
-                        Log.Debug("Prepare for deploy");
-                        string file = arg.Arguments[0];
-
-                        XmlFallbackInitialisation(file);
-
-                        server.Deploy(file);
-                        actiondone = true;
-                        Log.Debug("Finished deploy");
-                    }
-                    else if (arg.Command == "-checkschema")
-                    {
-                        Log.Debug("Prepare for checkschema");
-                        DefaultInitialisation();
-
-                        string file = "";
-                        if (arg.Arguments.Count == 0)
-                        {
-                            server.CheckSchema(false);
-                        }
-                        else if (arg.Arguments.Count == 1)
-                        {
-                            if (arg.Arguments[0] == "meta")
+                            Log.Debug("Prepare for exporting");
+                            DefaultInitialisation();
+                            string file = arg.Arguments[0];
+                            List<string> namespaceList = new List<string>();
+                            for (int i = 1; i < arg.Arguments.Count; i++)
                             {
-                                server.CheckSchemaFromCurrentMetaData(false);
+                                namespaceList.Add(arg.Arguments[i]);
+                            }
+                            var namespaces = namespaceList.ToArray();
+                            server.Export(file, namespaces);
+                            actiondone = true;
+                            Log.Debug("Finished exporting");
+                        }
+                        else if (arg.Command == "-import" && arg.Arguments.Count == 1)
+                        {
+                            Log.Debug("Prepare for importing");
+                            DefaultInitialisation();
+                            string file = arg.Arguments[0];
+                            server.Import(file);
+                            actiondone = true;
+                            Log.Debug("Finished importing");
+                        }
+                        else if (arg.Command == "-publish" && arg.Arguments.Count > 1)
+                        {
+                            Log.Debug("Prepare for publish");
+                            DefaultInitialisation();
+                            string file = arg.Arguments[0];
+                            List<string> namespaces = new List<string>();
+                            for (int i = 1; i < arg.Arguments.Count; i++)
+                            {
+                                namespaces.Add(arg.Arguments[i]);
+                            }
+                            server.Publish(file, namespaces.ToArray());
+                            actiondone = true;
+                            Log.Debug("Finished publish");
+                        }
+                        else if (arg.Command == "-deploy" && arg.Arguments.Count == 1)
+                        {
+                            Log.Debug("Prepare for deploy");
+                            string file = arg.Arguments[0];
+
+                            XmlFallbackInitialisation(file);
+
+                            server.Deploy(file);
+                            actiondone = true;
+                            Log.Debug("Finished deploy");
+                        }
+                        else if (arg.Command == "-checkschema")
+                        {
+                            Log.Debug("Prepare for checkschema");
+                            DefaultInitialisation();
+
+                            string file = "";
+                            if (arg.Arguments.Count == 0)
+                            {
+                                server.CheckSchema(false);
+                            }
+                            else if (arg.Arguments.Count == 1)
+                            {
+                                if (arg.Arguments[0] == "meta")
+                                {
+                                    server.CheckSchemaFromCurrentMetaData(false);
+                                }
+                                else
+                                {
+                                    file = arg.Arguments[0];
+                                    server.CheckSchema(file, false);
+                                }
                             }
                             else
                             {
-                                file = arg.Arguments[0];
-                                server.CheckSchema(file, false);
+                                PrintHelp();
+                                return 1;
                             }
+                            actiondone = true;
+                            Log.Debug("Finished checkschema");
                         }
-                        else
+                        else if (arg.Command == "-repairschema" && arg.Arguments.Count == 0)
                         {
-                            PrintHelp();
-                            return 1;
-                        }
-                        actiondone = true;
-                        Log.Debug("Finished checkschema");
-                    }
-                    else if (arg.Command == "-repairschema" && arg.Arguments.Count == 0)
-                    {
-                        Log.Debug("Prepare for repairschema");
-                        DefaultInitialisation();
-
-                        server.CheckSchema(true);
-                        actiondone = true;
-                        Log.Debug("Finished repairschema");
-                    }
-                    else if (arg.Command == "-updateschema")
-                    {
-                        Log.Debug("Prepare for updateschema");
-                        string file = "";
-                        if (arg.Arguments.Count == 0)
-                        {
+                            Log.Debug("Prepare for repairschema");
                             DefaultInitialisation();
-                            server.UpdateSchema();
+
+                            server.CheckSchema(true);
+                            actiondone = true;
+                            Log.Debug("Finished repairschema");
                         }
-                        else if (arg.Arguments.Count == 1)
+                        else if (arg.Command == "-updateschema")
                         {
-                            file = arg.Arguments[0];
-                            XmlFallbackInitialisation(file);
-                            server.UpdateSchema(file);
+                            Log.Debug("Prepare for updateschema");
+                            string file = "";
+                            if (arg.Arguments.Count == 0)
+                            {
+                                DefaultInitialisation();
+                                server.UpdateSchema();
+                            }
+                            else if (arg.Arguments.Count == 1)
+                            {
+                                file = arg.Arguments[0];
+                                XmlFallbackInitialisation(file);
+                                server.UpdateSchema(file);
+                            }
+                            else
+                            {
+                                PrintHelp();
+                                return 1;
+                            }
+                            actiondone = true;
+                            Log.Debug("Finished updateschema");
+                        }
+                        else if (arg.Command == "-generate" && arg.Arguments.Count == 0)
+                        {
+                            Log.Debug("Prepare for generate");
+                            DbFallbackInitialisation();
+                            server.GenerateCode();
+                            actiondone = true;
+                            Log.Debug("Finished generate");
+                        }
+                        else if (arg.Command == "-fix" && arg.Arguments.Count == 0)
+                        {
+                            Log.Debug("Prepare for fix");
+                            DefaultInitialisation();
+                            // hidden command to execute ad-hoc fixes against the database
+                            server.RunFixes();
+                            actiondone = true;
+                            Log.Debug("Finished fix");
+                        }
+                        else if (arg.Command == "-wait")
+                        {
+                            Log.Info("will wait for user input before exiting");
+                            waitForKey = true;
                         }
                         else
                         {
+                            Log.FatalFormat("Unrecognised commandline argument [{0}]. Exiting.", arg.Command);
                             PrintHelp();
                             return 1;
                         }
-                        actiondone = true;
-                        Log.Debug("Finished updateschema");
                     }
-                    else if (arg.Command == "-generate" && arg.Arguments.Count == 0)
+
+                    if (actiondone)
                     {
-                        Log.Debug("Prepare for generate");
-                        DbFallbackInitialisation();
-                        server.GenerateCode();
-                        actiondone = true;
-                        Log.Debug("Finished generate");
-                    }
-                    else if (arg.Command == "-fix" && arg.Arguments.Count == 0)
-                    {
-                        Log.Debug("Prepare for fix");
-                        DefaultInitialisation();
-                        // hidden command to execute ad-hoc fixes against the database
-                        server.RunFixes();
-                        actiondone = true;
-                        Log.Debug("Finished fix");
-                    }
-                    else if (arg.Command == "-wait")
-                    {
-                        Log.Info("will wait for user input before exiting");
-                        waitForKey = true;
+                        Log.TraceTotalMemory("After commandline processed");
+
+                        if (waitForKey)
+                        {
+                            Log.Info("Waiting for console input to shutdown");
+                            Console.WriteLine("Hit the anykey to exit");
+                            Console.ReadKey();
+                        }
+                        Log.Info("Shutting down");
                     }
                     else
                     {
-                        Log.FatalFormat("Unrecognised commandline argument [{0}]. Exiting.", arg.Command);
-                        PrintHelp();
-                        return 1;
-                    }
-                }
+                        Log.TraceTotalMemory("Before DefaultInitialisation()");
+                        DefaultInitialisation();
+                        Log.TraceTotalMemory("After DefaultInitialisation()");
 
-                if (actiondone)
-                {
-                    Log.TraceTotalMemory("After commandline processed");
+                        server.Start(config);
 
-                    if (waitForKey)
-                    {
                         Log.Info("Waiting for console input to shutdown");
-                        Console.WriteLine("Hit the anykey to exit");
+                        Console.WriteLine("Server started, press the anykey to exit");
                         Console.ReadKey();
+                        Log.Info("Shutting down");
+
+                        server.Stop();
                     }
-                    Log.Info("Shutting down");
                 }
-                else
-                {
-                    Log.TraceTotalMemory("Before DefaultInitialisation()");
-                    DefaultInitialisation();
-                    Log.TraceTotalMemory("After DefaultInitialisation()");
-
-                    server.Start(config);
-
-                    Log.Info("Waiting for console input to shutdown");
-                    Console.WriteLine("Server started, press the anykey to exit");
-                    Console.ReadKey();
-                    Log.Info("Shutting down");
-
-                    server.Stop();
-                }
-
                 Log.Info("Exiting");
                 return 0;
             }
