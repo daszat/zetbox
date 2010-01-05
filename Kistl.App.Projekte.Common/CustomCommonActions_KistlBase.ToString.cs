@@ -151,16 +151,39 @@ namespace Kistl.App.Base
                 obj.A.Type == null ||
                 obj.B.Type == null)
             {
-                e.Result = "incomplete relation";
+                e.Result = "incomplete relation:";
+                if (obj.A == null)
+                {
+                    e.Result += " A missing";
+                }
+                else
+                {
+                    e.Result += " A.Type missing";
+                }
+
+                if (obj.B == null)
+                {
+                    e.Result += " B missing";
+                }
+                else
+                {
+                    e.Result += " B.Type missing";
+                }
             }
             else
             {
-                e.Result = String.Format("Relation: {0}({1}) {4} {2}({3})",
-                    obj.A.RoleName,
-                    obj.A.Type.ClassName,
-                    obj.B.RoleName,
-                    obj.B.Type.ClassName,
-                    obj.Verb);
+                string aDesc = (obj.A.RoleName ?? String.Empty).Equals(obj.A.Type.ClassName)
+                    ? obj.A.RoleName
+                    : String.Format("{0}({1})", obj.A.RoleName, obj.A.Type.ClassName);
+
+                string bDesc = (obj.B.RoleName ?? String.Empty).Equals(obj.B.Type.ClassName)
+                    ? obj.B.RoleName
+                    : String.Format("{0}({1})", obj.B.RoleName, obj.B.Type.ClassName);
+
+                e.Result = String.Format("Relation: {0} {1} {2}",
+                    aDesc,
+                    obj.Verb,
+                    bDesc);
             }
 
             FixupFloatingObjectsToString(obj, e);
