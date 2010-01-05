@@ -67,6 +67,13 @@
       <End Role="B_BoolProperty" EntitySet="BoolProperty" />
     </AssociationSet>
     
+    <EntitySet Name="CalculatedObjectReferenceProperty" EntityType="Model.Store.CalculatedObjectReferenceProperty" Table="CalculatedObjectReferenceProperties"/>
+    <!-- inherits from Property -->
+    <AssociationSet Name="FK_CalculatedObjectReferenceProperty_Property_ID" Association="Model.Store.FK_CalculatedObjectReferenceProperty_Property_ID" >
+      <End Role="A_Property" EntitySet="Property" />
+      <End Role="B_CalculatedObjectReferenceProperty" EntitySet="CalculatedObjectReferenceProperty" />
+    </AssociationSet>
+    
     <EntitySet Name="CheckboxKind" EntityType="Model.Store.CheckboxKind" Table="CheckboxKinds"/>
     <!-- inherits from ControlKind -->
     <AssociationSet Name="FK_CheckboxKind_ControlKind_ID" Association="Model.Store.FK_CheckboxKind_ControlKind_ID" >
@@ -399,6 +406,22 @@
 
     <!-- EntitySets and AssociationSet for all object-object CollectionEntrys -->
     <!-- 
+    Relation: FK_CalculatedObjectReference_dependsOn_InputProperties
+    A: ZeroOrMore CalculatedObjectReferenceProperty as CalculatedObjectReference
+    B: ZeroOrMore Property as InputProperties
+    Preferred Storage: Separate
+    -->
+    <EntitySet Name="CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntry" EntityType="Model.Store.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntry" Table="CalculatedObjectReference_dependsOn_InputProperties" />
+    <AssociationSet Name="FK_CalculatedObjectReference_dependsOn_InputProperties_A" Association="Model.Store.FK_CalculatedObjectReference_dependsOn_InputProperties_A" >
+      <End Role="CalculatedObjectReference" EntitySet="CalculatedObjectReferenceProperty" />
+      <End Role="CollectionEntry" EntitySet="CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntry" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CalculatedObjectReference_dependsOn_InputProperties_B" Association="Model.Store.FK_CalculatedObjectReference_dependsOn_InputProperties_B" >
+      <End Role="CollectionEntry" EntitySet="CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntry" />
+      <End Role="InputProperties" EntitySet="Property" />
+    </AssociationSet>
+    
+    <!-- 
     Relation: FK_ControlKindClass_supports_SupportedInterfaces
     A: ZeroOrMore ControlKindClass as ControlKindClass
     B: ZeroOrMore TypeRef as SupportedInterfaces
@@ -600,6 +623,14 @@
     <AssociationSet Name="FK_BaseProperty_has_Module" Association="Model.Store.FK_BaseProperty_has_Module" >
       <End Role="BaseProperty" EntitySet="Property" />
       <End Role="Module" EntitySet="Module" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CalculatedReference_calculatedBy_MethodInvocation" Association="Model.Store.FK_CalculatedReference_calculatedBy_MethodInvocation" >
+      <End Role="CalculatedReference" EntitySet="CalculatedObjectReferenceProperty" />
+      <End Role="MethodInvocation" EntitySet="MethodInvocation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CalculatedReference_references_ReferencedClass" Association="Model.Store.FK_CalculatedReference_references_ReferencedClass" >
+      <End Role="CalculatedReference" EntitySet="CalculatedObjectReferenceProperty" />
+      <End Role="ReferencedClass" EntitySet="ObjectClass" />
     </AssociationSet>
     <AssociationSet Name="FK_Child_has_Parent" Association="Model.Store.FK_Child_has_Parent" >
       <End Role="Child" EntitySet="TypeRef" />
@@ -1040,6 +1071,15 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" />
+  </EntityType>
+	
+  <EntityType Name="CalculatedObjectReferenceProperty">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="fk_MethodInvocation" Type="int" />
+    <Property Name="fk_ReferencedClass" Type="int" />
   </EntityType>
 	
   <EntityType Name="CheckboxKind">
@@ -1822,6 +1862,45 @@
 
   <!-- EntityTypes for all object-object CollectionEntrys with their associations -->
 	
+  <EntityType Name="CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntry">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+	<Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="fk_CalculatedObjectReference" Type="int" Nullable="true" />
+    <Property Name="fk_InputProperties" Type="int" Nullable="true" />
+  </EntityType>
+
+  <!-- A to CollectionEntry -->
+  <Association Name="FK_CalculatedObjectReference_dependsOn_InputProperties_A">
+    <End Role="CalculatedObjectReference" Type="Model.Store.CalculatedObjectReferenceProperty" Multiplicity="0..1" />
+    <End Role="CollectionEntry" Type="Model.Store.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CalculatedObjectReference">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CollectionEntry">
+        <PropertyRef Name="fk_CalculatedObjectReference" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+  <!-- B to CollectionEntry -->
+  <Association Name="FK_CalculatedObjectReference_dependsOn_InputProperties_B">
+    <End Role="InputProperties" Type="Model.Store.Property" Multiplicity="0..1" />
+    <End Role="CollectionEntry" Type="Model.Store.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="InputProperties">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CollectionEntry">
+        <PropertyRef Name="fk_InputProperties" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+	
   <EntityType Name="ControlKindClass_supports_TypeRef_RelationEntry">
     <Key>
       <PropertyRef Name="ID" />
@@ -2358,6 +2437,36 @@
       </Principal>
       <Dependent Role="BaseProperty">
         <PropertyRef Name="fk_Module" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_CalculatedReference_calculatedBy_MethodInvocation">
+    <End Role="MethodInvocation" Type="Model.Store.MethodInvocation" Multiplicity="0..1" />
+    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
+    <End Role="CalculatedReference" Type="Model.Store.CalculatedObjectReferenceProperty" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MethodInvocation">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CalculatedReference">
+        <PropertyRef Name="fk_MethodInvocation" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_CalculatedReference_references_ReferencedClass">
+    <End Role="ReferencedClass" Type="Model.Store.ObjectClass" Multiplicity="0..1" />
+    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
+    <End Role="CalculatedReference" Type="Model.Store.CalculatedObjectReferenceProperty" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ReferencedClass">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CalculatedReference">
+        <PropertyRef Name="fk_ReferencedClass" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -3657,6 +3766,18 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="B_BoolProperty">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CalculatedObjectReferenceProperty_Property_ID">
+    <End Role="A_Property" Type="Model.Store.Property" Multiplicity="1" />
+    <End Role="B_CalculatedObjectReferenceProperty" Type="Model.Store.CalculatedObjectReferenceProperty" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="A_Property">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_CalculatedObjectReferenceProperty">
         <PropertyRef Name="ID" />
       </Dependent>
     </ReferentialConstraint>

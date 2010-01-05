@@ -477,6 +477,11 @@
 <ScalarProperty Name="PropertyName" ColumnName="PropertyName" />
 	    </MappingFragment>
       </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.CalculatedObjectReferenceProperty)">
+	    <MappingFragment StoreEntitySet="CalculatedObjectReferenceProperty">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+	    </MappingFragment>
+      </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Model.ObjectReferencePlaceholderProperty)">
 	    <MappingFragment StoreEntitySet="ObjectReferencePlaceholderProperty">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
@@ -675,6 +680,45 @@
 
 
     <!-- EntitySetMappings and AssociationSetMappings for object-object relations with a CollectionEntry -->
+    <!--
+    Relation: FK_CalculatedObjectReference_dependsOn_InputProperties
+    A: ZeroOrMore CalculatedObjectReferenceProperty as CalculatedObjectReference
+    B: ZeroOrMore Property as InputProperties
+    Preferred Storage: Separate
+    -->
+    <EntitySetMapping Name="CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntry">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntry)">
+        <MappingFragment StoreEntitySet="CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntry">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+		  <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <!-- A to CollectionEntry -->
+    <AssociationSetMapping Name="FK_CalculatedObjectReference_dependsOn_InputProperties_A"
+                           TypeName="Model.FK_CalculatedObjectReference_dependsOn_InputProperties_A"
+                           StoreEntitySet="CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntry" >
+      <EndProperty Name="CalculatedObjectReference">
+        <ScalarProperty Name="ID" ColumnName="fk_CalculatedObjectReference"/>
+      </EndProperty>
+      <EndProperty Name="CollectionEntry">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_CalculatedObjectReference" IsNull="false"/>
+    </AssociationSetMapping>
+    <!-- B to CollectionEntry -->
+    <AssociationSetMapping Name="FK_CalculatedObjectReference_dependsOn_InputProperties_B"
+                           TypeName="Model.FK_CalculatedObjectReference_dependsOn_InputProperties_B"
+                           StoreEntitySet="CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntry" >
+      <EndProperty Name="InputProperties">
+        <ScalarProperty Name="ID" ColumnName="fk_InputProperties"/>
+      </EndProperty>
+      <EndProperty Name="CollectionEntry">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_InputProperties" IsNull="false"/>
+    </AssociationSetMapping>
+
     <!--
     Relation: FK_ControlKindClass_supports_SupportedInterfaces
     A: ZeroOrMore ControlKindClass as ControlKindClass
@@ -1235,6 +1279,40 @@
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="fk_Module" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_CalculatedReference_calculatedBy_MethodInvocation
+    A: ZeroOrMore CalculatedObjectReferenceProperty as CalculatedReference
+    B: ZeroOrOne MethodInvocation as MethodInvocation
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_CalculatedReference_calculatedBy_MethodInvocation"
+                           TypeName="Model.FK_CalculatedReference_calculatedBy_MethodInvocation"
+                           StoreEntitySet="CalculatedObjectReferenceProperty" >
+      <EndProperty Name="MethodInvocation">
+        <ScalarProperty Name="ID" ColumnName="fk_MethodInvocation"/>
+      </EndProperty>
+      <EndProperty Name="CalculatedReference">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_MethodInvocation" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_CalculatedReference_references_ReferencedClass
+    A: ZeroOrMore CalculatedObjectReferenceProperty as CalculatedReference
+    B: ZeroOrOne ObjectClass as ReferencedClass
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_CalculatedReference_references_ReferencedClass"
+                           TypeName="Model.FK_CalculatedReference_references_ReferencedClass"
+                           StoreEntitySet="CalculatedObjectReferenceProperty" >
+      <EndProperty Name="ReferencedClass">
+        <ScalarProperty Name="ID" ColumnName="fk_ReferencedClass"/>
+      </EndProperty>
+      <EndProperty Name="CalculatedReference">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_ReferencedClass" IsNull="false"/>
     </AssociationSetMapping>
     <!--
     Relation: FK_Child_has_Parent

@@ -446,6 +446,16 @@ namespace Kistl.App.Base
 			}
 		}
 		
+		/// <summary>List of all CalculatedObjectReferenceProperty</summary>
+		/// a object reference that is calculated from the contents of the containing class
+		public IQueryable<CalculatedObjectReferenceProperty> CalculatedObjectReferenceProperties
+		{ 
+			get
+			{
+				return Context.GetQuery<CalculatedObjectReferenceProperty>();
+			}
+		}
+		
 		/// <summary>List of all BoolProperty</summary>
 		/// Metadefinition Object for Bool Properties.
 		public IQueryable<BoolProperty> BoolProperties

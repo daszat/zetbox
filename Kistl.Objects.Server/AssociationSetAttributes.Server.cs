@@ -158,6 +158,54 @@ using Kistl.DALProvider.EF;
 
 
 	/*
+    Relation: FK_CalculatedObjectReference_dependsOn_InputProperties
+    A: ZeroOrMore CalculatedObjectReferenceProperty as CalculatedObjectReference
+    B: ZeroOrMore Property as InputProperties
+    Preferred Storage: Separate
+	*/
+
+// The association from A to the CollectionEntry
+[assembly: EdmRelationship("Model", "FK_CalculatedObjectReference_dependsOn_InputProperties_A",
+    "CalculatedObjectReference", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.CalculatedObjectReferenceProperty__Implementation__),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntry__Implementation__)
+    )]
+// The association from B to the CollectionEntry
+[assembly: EdmRelationship("Model", "FK_CalculatedObjectReference_dependsOn_InputProperties_B",
+    "InputProperties", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Property__Implementation__),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntry__Implementation__)
+    )]
+
+	/*
+    Relation: FK_CalculatedReference_calculatedBy_MethodInvocation
+    A: ZeroOrMore CalculatedObjectReferenceProperty as CalculatedReference
+    B: ZeroOrOne MethodInvocation as MethodInvocation
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_CalculatedReference_calculatedBy_MethodInvocation",
+    "CalculatedReference", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.CalculatedObjectReferenceProperty__Implementation__),
+    "MethodInvocation", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.MethodInvocation__Implementation__)
+    )]
+
+
+	/*
+    Relation: FK_CalculatedReference_references_ReferencedClass
+    A: ZeroOrMore CalculatedObjectReferenceProperty as CalculatedReference
+    B: ZeroOrOne ObjectClass as ReferencedClass
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_CalculatedReference_references_ReferencedClass",
+    "CalculatedReference", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.CalculatedObjectReferenceProperty__Implementation__),
+    "ReferencedClass", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.ObjectClass__Implementation__)
+    )]
+
+
+	/*
     Relation: FK_Child_has_Parent
     A: ZeroOrMore TypeRef as Child
     B: ZeroOrOne TypeRef as Parent

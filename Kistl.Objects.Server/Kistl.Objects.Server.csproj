@@ -89,6 +89,7 @@
     <Compile Include="BaseParameter.Server.Designer.cs" />
     <Compile Include="BoolParameter.Server.Designer.cs" />
     <Compile Include="BoolProperty.Server.Designer.cs" />
+    <Compile Include="CalculatedObjectReferenceProperty.Server.Designer.cs" />
     <Compile Include="CheckboxKind.Server.Designer.cs" />
     <Compile Include="CLRObjectParameter.Server.Designer.cs" />
     <Compile Include="Company.Server.Designer.cs" />

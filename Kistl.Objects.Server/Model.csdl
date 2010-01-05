@@ -41,6 +41,15 @@
     <EntitySet Name="WorkEffort" EntityType="Model.WorkEffort" />
     <EntitySet Name="WorkEffortAccount" EntityType="Model.WorkEffortAccount" />
     <!-- EntitySets and AssociationSets for all object-object CollectionEntrys -->
+    <EntitySet Name="CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntry" EntityType="Model.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntry" />
+    <AssociationSet Name="FK_CalculatedObjectReference_dependsOn_InputProperties_A" Association="Model.FK_CalculatedObjectReference_dependsOn_InputProperties_A" >
+      <End Role="CalculatedObjectReference" EntitySet="Property" />
+      <End Role="CollectionEntry" EntitySet="CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntry" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CalculatedObjectReference_dependsOn_InputProperties_B" Association="Model.FK_CalculatedObjectReference_dependsOn_InputProperties_B" >
+      <End Role="InputProperties" EntitySet="Property" />
+      <End Role="CollectionEntry" EntitySet="CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntry" />
+    </AssociationSet>
     <EntitySet Name="ControlKindClass_supports_TypeRef_RelationEntry" EntityType="Model.ControlKindClass_supports_TypeRef_RelationEntry" />
     <AssociationSet Name="FK_ControlKindClass_supports_SupportedInterfaces_A" Association="Model.FK_ControlKindClass_supports_SupportedInterfaces_A" >
       <End Role="ControlKindClass" EntitySet="DataType" />
@@ -184,6 +193,14 @@
     <AssociationSet Name="FK_BaseProperty_has_Module" Association="Model.FK_BaseProperty_has_Module" >
       <End Role="BaseProperty" EntitySet="Property" />
       <End Role="Module" EntitySet="Module" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CalculatedReference_calculatedBy_MethodInvocation" Association="Model.FK_CalculatedReference_calculatedBy_MethodInvocation" >
+      <End Role="CalculatedReference" EntitySet="Property" />
+      <End Role="MethodInvocation" EntitySet="MethodInvocation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CalculatedReference_references_ReferencedClass" Association="Model.FK_CalculatedReference_references_ReferencedClass" >
+      <End Role="CalculatedReference" EntitySet="Property" />
+      <End Role="ReferencedClass" EntitySet="DataType" />
     </AssociationSet>
     <AssociationSet Name="FK_Child_has_Parent" Association="Model.FK_Child_has_Parent" >
       <End Role="Child" EntitySet="TypeRef" />
@@ -1350,6 +1367,20 @@
   </EntityType>
   <EntityType Name="BoolProperty" BaseType="Model.ValueTypeProperty" >
   </EntityType>
+  <EntityType Name="CalculatedObjectReferenceProperty" BaseType="Model.Property" >
+    <NavigationProperty Name="Inputs__Implementation__"
+                        Relationship="Model.FK_CalculatedObjectReference_dependsOn_InputProperties_A"
+                        FromRole="CalculatedObjectReference"
+                        ToRole="CollectionEntry" />
+    <NavigationProperty Name="MethodInvocation__Implementation__"
+                        Relationship="Model.FK_CalculatedReference_calculatedBy_MethodInvocation"
+                        FromRole="CalculatedReference"
+                        ToRole="MethodInvocation" />
+    <NavigationProperty Name="ReferencedClass__Implementation__"
+                        Relationship="Model.FK_CalculatedReference_references_ReferencedClass"
+                        FromRole="CalculatedReference"
+                        ToRole="ReferencedClass" />
+  </EntityType>
   <EntityType Name="CheckboxKind" BaseType="Model.ControlKind" >
   </EntityType>
   <EntityType Name="CLRObjectParameter" BaseType="Model.BaseParameter" >
@@ -1523,6 +1554,49 @@
   </EntityType>
 
   <!-- EntityTypes and Associations for all object-object CollectionEntrys -->
+  <!--
+    Relation: FK_CalculatedObjectReference_dependsOn_InputProperties
+    A: ZeroOrMore CalculatedObjectReferenceProperty as CalculatedObjectReference
+    B: ZeroOrMore Property as InputProperties
+    Preferred Storage: Separate
+  -->
+  <EntityType Name="CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntry" >
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+	<Property Name="ExportGuid" Type="Guid" Nullable="false" />
+	
+    
+    <!-- A -->
+    <NavigationProperty Name="A__Implementation__"
+                        Relationship="Model.FK_CalculatedObjectReference_dependsOn_InputProperties_A"
+                        FromRole="CollectionEntry"
+                        ToRole="CalculatedObjectReference" />
+
+    <!-- B -->
+    <NavigationProperty Name="B__Implementation__"
+                        Relationship="Model.FK_CalculatedObjectReference_dependsOn_InputProperties_B"
+                        FromRole="CollectionEntry"
+                        ToRole="InputProperties" />
+  </EntityType>
+  <Association Name="FK_CalculatedObjectReference_dependsOn_InputProperties_A" >
+    <End Role="CalculatedObjectReference"
+         Type="Model.CalculatedObjectReferenceProperty" 
+         Multiplicity="0..1" />
+    <End Role="CollectionEntry"
+         Type="Model.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntry"
+         Multiplicity="*" />
+  </Association>
+  <Association Name="FK_CalculatedObjectReference_dependsOn_InputProperties_B" >
+    <End Role="InputProperties"
+         Type="Model.Property" 
+         Multiplicity="0..1" />
+    <End Role="CollectionEntry"
+         Type="Model.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntry"
+         Multiplicity="*" />
+  </Association>
+  
   <!--
     Relation: FK_ControlKindClass_supports_SupportedInterfaces
     A: ZeroOrMore ControlKindClass as ControlKindClass
@@ -2080,6 +2154,22 @@
          Multiplicity="*" />
     <End Role="Module"
          Type="Model.Module" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_CalculatedReference_calculatedBy_MethodInvocation" >
+    <End Role="CalculatedReference"
+         Type="Model.CalculatedObjectReferenceProperty" 
+         Multiplicity="*" />
+    <End Role="MethodInvocation"
+         Type="Model.MethodInvocation" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_CalculatedReference_references_ReferencedClass" >
+    <End Role="CalculatedReference"
+         Type="Model.CalculatedObjectReferenceProperty" 
+         Multiplicity="*" />
+    <End Role="ReferencedClass"
+         Type="Model.ObjectClass" 
          Multiplicity="0..1" />
   </Association>
   <Association Name="FK_Child_has_Parent" >
