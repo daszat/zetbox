@@ -37,14 +37,18 @@
 <%
 				break;
 			case SerializerDirection.FromXmlStream:
-			case SerializerDirection.MergeImport:
 %>
             XmlStreamer.FromStreamCollectionEntries(this.<%= collectionName %>, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
 <%
 				break;
+			case SerializerDirection.MergeImport:
+%>
+            XmlStreamer.MergeImportCollectionEntries(this.<%= collectionName %>, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
+<%
+				break;
 		case SerializerDirection.Export:
 %>	
-            if (modules.Contains("*") || modules.Contains("<%= xmlnamespace %>")) XmlStreamer.ToStreamCollectionEntries(this.<%= collectionName %>, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
+            if (modules.Contains("*") || modules.Contains("<%= xmlnamespace %>")) XmlStreamer.ExportCollectionEntries(this.<%= collectionName %>, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
 <%			
 			break;
 			default:

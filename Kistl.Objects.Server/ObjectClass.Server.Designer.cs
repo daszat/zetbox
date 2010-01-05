@@ -944,7 +944,7 @@ namespace Kistl.App.Base
     
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this._IsSimpleObject, xml, "IsSimpleObject", "Kistl.App.GUI");
 	
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStreamCollectionEntries(this.SecurityRules__Implementation__, xml, "SecurityRules", "Kistl.App.Base");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ExportCollectionEntries(this.SecurityRules__Implementation__, xml, "SecurityRules", "Kistl.App.Base");
     
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._TableName, xml, "TableName", "Kistl.App.Base");
         }
@@ -957,7 +957,7 @@ namespace Kistl.App.Base
             XmlStreamer.FromStream(ref this._fk_guid_DefaultPresentableModelDescriptor, xml, "DefaultPresentableModelDescriptor", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._IsFrozenObject, xml, "IsFrozenObject", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._IsSimpleObject, xml, "IsSimpleObject", "Kistl.App.GUI");
-            XmlStreamer.FromStreamCollectionEntries(this.SecurityRules__Implementation__, xml, "SecurityRules", "Kistl.App.Base");
+            XmlStreamer.MergeImportCollectionEntries(this.SecurityRules__Implementation__, xml, "SecurityRules", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._TableName, xml, "TableName", "Kistl.App.Base");
         }
 

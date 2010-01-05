@@ -5,6 +5,7 @@ using System.Text;
 
 using Kistl.API;
 using Kistl.App.Base;
+using Kistl.App.Extensions;
 using Kistl.Server.Generators.Extensions;
 
 namespace Kistl.Server.Generators.Templates.Implementation.CollectionEntries
@@ -59,6 +60,20 @@ namespace Kistl.Server.Generators.Templates.Implementation.CollectionEntries
                 this.WriteLine("            me.AIndex = other.AIndex;");
             }
             this.WriteLine("            me.B = other.B;");
+        }
+
+        protected override bool ImplementsIExportable()
+        {
+            if (prop.ObjectClass is ObjectClass)
+            {
+                return ((ObjectClass)prop.ObjectClass).ImplementsIExportable(ctx);
+            }
+            return false;
+        }
+
+        protected override string[] GetIExportableInterfaces()
+        {
+            return new string[] { "Kistl.API.IExportableCollectionEntryInternal" };
         }
     }
 }

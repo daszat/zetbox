@@ -20,7 +20,7 @@ namespace Kistl.Server.Generators.Templates.Implementation.CollectionEntries
 
         protected virtual void ApplyExportGuidPropertyTemplate()
         {
-            ExportGuidProperty.Call(Host, ctx, this.MembersToSerialize);
+            // Will be implemented by relations, not by value collections
         }
 
         protected abstract void ApplyAPropertyTemplate();

@@ -100,10 +100,10 @@ Implementation.ObjectClasses.SerializerTemplate.Call(Host, ctx,
 	if(ImplementsIExportable())
 	{
 		Implementation.ObjectClasses.SerializerTemplate.Call(Host, ctx,
-			Templates.Implementation.SerializerDirection.Export, this.MembersToSerialize, false, true);
+			Templates.Implementation.SerializerDirection.Export, this.MembersToSerialize, false, HasExportGuid());
 	    
 		Implementation.ObjectClasses.SerializerTemplate.Call(Host, ctx,
-			Templates.Implementation.SerializerDirection.MergeImport, this.MembersToSerialize, false, true);
+			Templates.Implementation.SerializerDirection.MergeImport, this.MembersToSerialize, false, HasExportGuid());
 	}
 
 #line 89 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\CollectionEntries\Template.cst"

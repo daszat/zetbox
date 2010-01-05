@@ -80,10 +80,10 @@
 	if(ImplementsIExportable())
 	{
 		Implementation.ObjectClasses.SerializerTemplate.Call(Host, ctx,
-			Templates.Implementation.SerializerDirection.Export, this.MembersToSerialize, false, true);
+			Templates.Implementation.SerializerDirection.Export, this.MembersToSerialize, false, HasExportGuid());
 	    
 		Implementation.ObjectClasses.SerializerTemplate.Call(Host, ctx,
-			Templates.Implementation.SerializerDirection.MergeImport, this.MembersToSerialize, false, true);
+			Templates.Implementation.SerializerDirection.MergeImport, this.MembersToSerialize, false, HasExportGuid());
 	}
 %>
 

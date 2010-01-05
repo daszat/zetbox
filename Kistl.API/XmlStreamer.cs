@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml;
+using System.Collections;
 
 namespace Kistl.API
 {
@@ -221,7 +222,7 @@ namespace Kistl.API
         {
             if (conv == null) { throw new ArgumentNullException("conv"); }
             if (xml == null) { throw new ArgumentNullException("xml"); }
-            
+
             if (xml.LocalName == name && xml.NamespaceURI == ns)
             {
                 int val = xml.ReadElementContentAsInt();
@@ -251,24 +252,49 @@ namespace Kistl.API
         #endregion
 
         #region Collection Entries
+        private delegate void CallXmlFunction<T, X>(T obj, X xml);
+
         public static void ToStreamCollectionEntries<T>(IEnumerable<T> val, XmlWriter xml, string name, string ns)
             where T : IStreamable
+        {
+            WriteCollectionEntries<T>(val, xml, name, ns, (obj, x) => obj.ToStream(x));
+        }
+
+        public static void FromStreamCollectionEntries<T>(ICollection<T> val, XmlReader xml, string name, string ns)
+            where T : IStreamable, new()
+        {
+            ReadCollectionEntries<T>(val, xml, name, ns, (obj, x) => obj.FromStream(x));
+        }
+
+        public static void ExportCollectionEntries<T>(IEnumerable<T> val, XmlWriter xml, string name, string ns)
+            where T : IExportableCollectionEntryInternal
+        {
+            WriteCollectionEntries<T>(val, xml, name, ns, (obj, x) => obj.Export(x, new string[] { "*" }));
+        }
+
+        public static void MergeImportCollectionEntries<T>(ICollection<T> val, XmlReader xml, string name, string ns)
+            where T : IExportableCollectionEntryInternal, new()
+        {
+            ReadCollectionEntries<T>(val, xml, name, ns, (obj, x) => obj.MergeImport(x));
+        }
+
+        private static void WriteCollectionEntries<T>(IEnumerable<T> val, XmlWriter xml, string name, string ns, CallXmlFunction<T, XmlWriter> func)
         {
             if (val == null) { throw new ArgumentNullException("val"); }
             if (xml == null) { throw new ArgumentNullException("xml"); }
 
             xml.WriteStartElement(name, ns);
-            foreach (IStreamable obj in val)
+            foreach (T obj in val)
             {
                 xml.WriteStartElement("CollectionEntry");
-                obj.ToStream(xml);
+                func(obj, xml);
                 xml.WriteEndElement();
             }
             xml.WriteEndElement();
         }
 
-        public static void FromStreamCollectionEntries<T>(ICollection<T> val, XmlReader xml, string name, string ns)
-            where T : IStreamable, new()
+        private static void ReadCollectionEntries<T>(ICollection<T> val, XmlReader xml, string name, string ns, CallXmlFunction<T, XmlReader> func)
+            where T : new()
         {
             if (val == null) { throw new ArgumentNullException("val"); }
             if (xml == null) { throw new ArgumentNullException("xml"); }
@@ -288,7 +314,7 @@ namespace Kistl.API
                                 {
                                     if (children.NodeType == XmlNodeType.Element)
                                     {
-                                        obj.FromStream(children);
+                                        func(obj, children);
                                     }
                                 }
                             }
@@ -298,7 +324,6 @@ namespace Kistl.API
                 }
             }
         }
-
         #endregion
     }
 }

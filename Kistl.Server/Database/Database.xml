@@ -13430,16 +13430,13 @@
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <KistlBase:SecurityRules>
       <CollectionEntry>
-        <KistlBase:A>82</KistlBase:A>
-        <KistlBase:B>CRUD: Identity.Role == Admin</KistlBase:B>
-      </CollectionEntry>
-      <CollectionEntry>
-        <KistlBase:A>82</KistlBase:A>
         <KistlBase:B>R: Mitarbeiter == Identity</KistlBase:B>
       </CollectionEntry>
       <CollectionEntry>
-        <KistlBase:A>82</KistlBase:A>
         <KistlBase:B>RUD: CreatedBy == Identity</KistlBase:B>
+      </CollectionEntry>
+      <CollectionEntry>
+        <KistlBase:B>CRUD: Identity.Role == Admin</KistlBase:B>
       </CollectionEntry>
     </KistlBase:SecurityRules>
     <KistlBase:TableName>Projekte</KistlBase:TableName>

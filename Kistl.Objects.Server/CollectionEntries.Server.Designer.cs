@@ -3021,7 +3021,7 @@ public string Value { get { return B; } set { B = value; } }
 namespace Kistl.App.Base
 {
     [EdmEntityType(NamespaceName="Model", Name="ObjectClass_SecurityRules_CollectionEntry")]    [System.Diagnostics.DebuggerDisplay("ObjectClass_SecurityRules_CollectionEntry__Implementation__")]
-    public class ObjectClass_SecurityRules_CollectionEntry__Implementation__ : BaseServerCollectionEntry_EntityFramework, ObjectClass_SecurityRules_CollectionEntry
+    public class ObjectClass_SecurityRules_CollectionEntry__Implementation__ : BaseServerCollectionEntry_EntityFramework, Kistl.API.IExportableCollectionEntryInternal, ObjectClass_SecurityRules_CollectionEntry
     {
     
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
@@ -3180,6 +3180,17 @@ public string Value { get { return B; } set { B = value; } }
             
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._B, xml, "B", "Kistl.App.Base");
+        }
+
+        public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
+        {
+	
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._B, xml, "B", "Kistl.App.Base");
+        }
+
+        public virtual void MergeImport(System.Xml.XmlReader xml)
+        {
             XmlStreamer.FromStream(ref this._B, xml, "B", "Kistl.App.Base");
         }
 

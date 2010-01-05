@@ -29,6 +29,11 @@ namespace Kistl.Server.Generators.Templates.Implementation.CollectionEntries
             this.rel = rel;
         }
 
+        protected override void ApplyExportGuidPropertyTemplate()
+        {
+            ExportGuidProperty.Call(Host, ctx, this.MembersToSerialize);
+        }
+
         protected override void ApplyRelationIdPropertyTemplate()
         {
             this.WriteLine("        public Guid RelationID {{ get {{ return new Guid(\"{0}\"); }} }}", rel.ExportGuid);
@@ -72,5 +77,14 @@ namespace Kistl.Server.Generators.Templates.Implementation.CollectionEntries
             return rel.A.Type.ImplementsIExportable(ctx) && rel.B.Type.ImplementsIExportable(ctx);
         }
 
+        protected override bool HasExportGuid()
+        {
+            return ImplementsIExportable();
+        }
+
+        protected override string[] GetIExportableInterfaces()
+        {
+            return new string[] { "Kistl.API.IExportableInternal", "Kistl.App.Base.IExportable" };
+        }
     }
 }

@@ -25,12 +25,19 @@ namespace Kistl.Server.Generators.Templates.Implementation.CollectionEntries
             return false;
         }
 
+        protected virtual bool HasExportGuid()
+        {
+            return false;
+        }
+
+        protected abstract string[] GetIExportableInterfaces();
+
         /// <returns>The interfaces this class implements</returns>
         protected virtual string[] GetInterfaces()
         {
             if (ImplementsIExportable())
             {
-                return new string[] { GetCeInterface(), "Kistl.API.IExportableInternal", "Kistl.App.Base.IExportable" };
+                return new string[] { GetCeInterface() }.Concat(GetIExportableInterfaces()).ToArray();
             }
             return new string[] { GetCeInterface() };
         }
