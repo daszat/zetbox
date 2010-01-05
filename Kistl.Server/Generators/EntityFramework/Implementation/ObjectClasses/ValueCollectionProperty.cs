@@ -23,7 +23,7 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
         protected virtual void AddSerialization(Templates.Implementation.SerializationMembersList list, string efName)
         {
             if (list != null)
-                list.Add("Implementation.ObjectClasses.CollectionSerialization", SerializerType.All, this.prop.Module.Namespace, this.prop.PropertyName, efName);
+                list.Add("Implementation.ObjectClasses.CollectionSerialization", SerializerType.All, this.prop.Module.Namespace, this.prop.PropertyName, efName, !prop.HasPersistentOrder);
         }
     }
 }

@@ -949,7 +949,7 @@ namespace Kistl.App.Base
     
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this._IsSimpleObject, xml, "IsSimpleObject", "Kistl.App.GUI");
 	
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ExportCollectionEntries(this.SecurityRules__Implementation__, xml, "SecurityRules", "Kistl.App.Base");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ExportCollectionEntries(this.SecurityRules__Implementation__.OrderBy(i => i.B), xml, "SecurityRules", "Kistl.App.Base");
     
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._TableName, xml, "TableName", "Kistl.App.Base");
         }

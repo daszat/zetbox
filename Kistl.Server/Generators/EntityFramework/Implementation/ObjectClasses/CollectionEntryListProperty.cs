@@ -23,8 +23,6 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
 
         protected virtual void AddSerialization(Templates.Implementation.SerializationMembersList list, string memberName, bool eagerLoading)
         {
-            //if (list != null)
-            //    list.Add("Implementation.ObjectClasses.CollectionSerialization", SerializerType.Xml, memberName);
             if (list != null && eagerLoading)
             {
                 list.Add("Implementation.ObjectClasses.EagerLoadingSerialization", Templates.Implementation.SerializerType.Binary, null, null, memberName, false);

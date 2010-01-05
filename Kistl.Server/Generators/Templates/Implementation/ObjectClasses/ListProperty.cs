@@ -46,8 +46,6 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
 
         protected virtual void AddSerialization(SerializationMembersList list, string name)
         {
-            //if (list != null)
-            //    list.Add("Implementation.ObjectClasses.CollectionSerialization", BackingMemberFromName(name));
         }
 
         protected virtual string GetModifiers()

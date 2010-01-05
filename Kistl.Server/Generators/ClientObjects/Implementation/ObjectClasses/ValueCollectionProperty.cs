@@ -39,7 +39,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
                 host, ctx, serializationList,
                 name, backingName, backingCollectionType, exposedCollectionInterface,
                 thisInterface, referencedType, referencedCollectionEntry,
-                providerCollectionType, underlyingCollectionName);
+                providerCollectionType, underlyingCollectionName, !prop.HasPersistentOrder);
         }
 
         /// <summary>
@@ -57,20 +57,21 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
         /// <param name="entryType">collection entries in this list</param>
         /// <param name="providerCollectionType">the provider type of this collection</param>
         /// <param name="underlyingCollectionName">how the underlying collection is called</param>
+        /// <param name="orderByB">true if the collection sould be ordered during export</param>
         public static void Call(
             Arebis.CodeGeneration.IGenerationHost host,
             IKistlContext ctx,
             Templates.Implementation.SerializationMembersList serializationList,
             string name, string backingName, string backingCollectionType, string exposedCollectionInterface,
             string thisInterface, string referencedType, string entryType,
-            string providerCollectionType, string underlyingCollectionName)
+            string providerCollectionType, string underlyingCollectionName, bool orderByB)
         {
             if (host == null) { throw new ArgumentNullException("host"); }
 
             host.CallTemplate("Implementation.ObjectClasses.ValueCollectionProperty",
                 ctx, serializationList,
                 name, backingName, backingCollectionType, exposedCollectionInterface,
-                thisInterface, referencedType, entryType, providerCollectionType, underlyingCollectionName);
+                thisInterface, referencedType, entryType, providerCollectionType, underlyingCollectionName, orderByB);
         }
 
         protected virtual void AddSerialization(Templates.Implementation.SerializationMembersList list, string underlyingCollectionName)
@@ -78,7 +79,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
             // TODO: XML Namespace
             if (list != null)
             {
-                list.Add("Implementation.ObjectClasses.CollectionSerialization", SerializerType.All, "http://dasz.at/Kistl", name, underlyingCollectionName);
+                list.Add("Implementation.ObjectClasses.CollectionSerialization", SerializerType.All, "http://dasz.at/Kistl", name, underlyingCollectionName, orderByB);
             }
         }
     }

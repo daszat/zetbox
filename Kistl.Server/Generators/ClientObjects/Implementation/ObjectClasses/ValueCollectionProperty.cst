@@ -21,6 +21,7 @@
 <%@ Parameter Name="entryType" Type="string" %>
 <%@ Parameter Name="providerCollectionType" Type="string" %>
 <%@ Parameter Name="underlyingCollectionName" Type="string" %>
+<%@ Parameter Name="orderByB" Type="bool" %>
 <%
 
     AddSerialization(serializationList, underlyingCollectionName);

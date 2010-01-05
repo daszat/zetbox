@@ -24,9 +24,10 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
 		protected string entryType;
 		protected string providerCollectionType;
 		protected string underlyingCollectionName;
+		protected bool orderByB;
 
 
-        public ValueCollectionProperty(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Templates.Implementation.SerializationMembersList serializationList, string name, string backingName, string backingCollectionType, string exposedCollectionInterface, string thisInterface, string referencedType, string entryType, string providerCollectionType, string underlyingCollectionName)
+        public ValueCollectionProperty(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Templates.Implementation.SerializationMembersList serializationList, string name, string backingName, string backingCollectionType, string exposedCollectionInterface, string thisInterface, string referencedType, string entryType, string providerCollectionType, string underlyingCollectionName, bool orderByB)
             : base(_host)
         {
 			this.ctx = ctx;
@@ -40,16 +41,17 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
 			this.entryType = entryType;
 			this.providerCollectionType = providerCollectionType;
 			this.underlyingCollectionName = underlyingCollectionName;
+			this.orderByB = orderByB;
 
         }
         
         public override void Generate()
         {
-#line 26 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ValueCollectionProperty.cst"
+#line 27 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ValueCollectionProperty.cst"
 AddSerialization(serializationList, underlyingCollectionName);
 
 
-#line 29 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ValueCollectionProperty.cst"
+#line 30 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ValueCollectionProperty.cst"
 this.WriteObjects("		// ",  this.GetType() , "\r\n");
 this.WriteObjects("		public ",  exposedCollectionInterface , "<",  referencedType , "> ",  name , "\r\n");
 this.WriteObjects("		{\r\n");

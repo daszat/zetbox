@@ -8,8 +8,8 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
 {
     public class CollectionSerialization : Templates.Implementation.ObjectClasses.CollectionSerialization
     {
-        public CollectionSerialization(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Templates.Implementation.SerializerDirection direction, string streamName, string xmlnamespace, string xmlname, string collectionName)
-            : base(_host, ctx, direction, streamName, xmlnamespace, xmlname, collectionName)
+        public CollectionSerialization(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Templates.Implementation.SerializerDirection direction, string streamName, string xmlnamespace, string xmlname, string collectionName, bool orderByB)
+            : base(_host, ctx, direction, streamName, xmlnamespace, xmlname, collectionName, orderByB)
         {
         }
 
