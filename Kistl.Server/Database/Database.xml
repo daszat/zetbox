@@ -13429,17 +13429,17 @@
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <KistlBase:SecurityRules>
-      <CollectionEntry ID="1">
+      <CollectionEntry>
+        <KistlBase:A>82</KistlBase:A>
+        <KistlBase:B>CRUD: Identity.Role == Admin</KistlBase:B>
+      </CollectionEntry>
+      <CollectionEntry>
         <KistlBase:A>82</KistlBase:A>
         <KistlBase:B>R: Mitarbeiter == Identity</KistlBase:B>
       </CollectionEntry>
-      <CollectionEntry ID="2">
+      <CollectionEntry>
         <KistlBase:A>82</KistlBase:A>
         <KistlBase:B>RUD: CreatedBy == Identity</KistlBase:B>
-      </CollectionEntry>
-      <CollectionEntry ID="3">
-        <KistlBase:A>82</KistlBase:A>
-        <KistlBase:B>CRUD: Identity.Role == Admin</KistlBase:B>
       </CollectionEntry>
     </KistlBase:SecurityRules>
     <KistlBase:TableName>Projekte</KistlBase:TableName>
