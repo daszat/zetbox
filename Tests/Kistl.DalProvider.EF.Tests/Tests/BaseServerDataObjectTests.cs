@@ -77,6 +77,7 @@ namespace Kistl.DalProvider.EF.Tests
         }
 
         [Test]
+        [Ignore("Enable if Case #1359 is fixed")]
         public void should_roundtrip_ObjectClass_attributes_correctly()
         {
             using (IKistlContext ctx = KistlContext.GetContext())

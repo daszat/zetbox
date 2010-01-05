@@ -15,6 +15,9 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
 
         public override bool ShouldSerialize()
         {
+            // Do not serialize colletion entries from client to server
+            // they will be send by the Client KistlContext as seperate objects
+            // from server to client the will be serialized - some kind of eager loading
             return direction != Kistl.Server.Generators.Templates.Implementation.SerializerDirection.ToStream;
         }
     }
