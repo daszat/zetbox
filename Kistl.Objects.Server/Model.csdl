@@ -42,11 +42,11 @@
     <EntitySet Name="WorkEffortAccount" EntityType="Model.WorkEffortAccount" />
     <!-- EntitySets and AssociationSets for all object-object CollectionEntrys -->
     <EntitySet Name="CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntry" EntityType="Model.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntry" />
-    <AssociationSet Name="FK_CalculatedObjectReference_dependsOn_InputProperties_A" Association="Model.FK_CalculatedObjectReference_dependsOn_InputProperties_A" >
-      <End Role="CalculatedObjectReference" EntitySet="Property" />
+    <AssociationSet Name="FK_CalculatedReference_dependsOn_InputProperties_A" Association="Model.FK_CalculatedReference_dependsOn_InputProperties_A" >
+      <End Role="CalculatedReference" EntitySet="Property" />
       <End Role="CollectionEntry" EntitySet="CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntry" />
     </AssociationSet>
-    <AssociationSet Name="FK_CalculatedObjectReference_dependsOn_InputProperties_B" Association="Model.FK_CalculatedObjectReference_dependsOn_InputProperties_B" >
+    <AssociationSet Name="FK_CalculatedReference_dependsOn_InputProperties_B" Association="Model.FK_CalculatedReference_dependsOn_InputProperties_B" >
       <End Role="InputProperties" EntitySet="Property" />
       <End Role="CollectionEntry" EntitySet="CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntry" />
     </AssociationSet>
@@ -193,10 +193,6 @@
     <AssociationSet Name="FK_BaseProperty_has_Module" Association="Model.FK_BaseProperty_has_Module" >
       <End Role="BaseProperty" EntitySet="Property" />
       <End Role="Module" EntitySet="Module" />
-    </AssociationSet>
-    <AssociationSet Name="FK_CalculatedReference_calculatedBy_MethodInvocation" Association="Model.FK_CalculatedReference_calculatedBy_MethodInvocation" >
-      <End Role="CalculatedReference" EntitySet="Property" />
-      <End Role="MethodInvocation" EntitySet="MethodInvocation" />
     </AssociationSet>
     <AssociationSet Name="FK_CalculatedReference_references_ReferencedClass" Association="Model.FK_CalculatedReference_references_ReferencedClass" >
       <End Role="CalculatedReference" EntitySet="Property" />
@@ -1369,13 +1365,9 @@
   </EntityType>
   <EntityType Name="CalculatedObjectReferenceProperty" BaseType="Model.Property" >
     <NavigationProperty Name="Inputs__Implementation__"
-                        Relationship="Model.FK_CalculatedObjectReference_dependsOn_InputProperties_A"
-                        FromRole="CalculatedObjectReference"
-                        ToRole="CollectionEntry" />
-    <NavigationProperty Name="MethodInvocation__Implementation__"
-                        Relationship="Model.FK_CalculatedReference_calculatedBy_MethodInvocation"
+                        Relationship="Model.FK_CalculatedReference_dependsOn_InputProperties_A"
                         FromRole="CalculatedReference"
-                        ToRole="MethodInvocation" />
+                        ToRole="CollectionEntry" />
     <NavigationProperty Name="ReferencedClass__Implementation__"
                         Relationship="Model.FK_CalculatedReference_references_ReferencedClass"
                         FromRole="CalculatedReference"
@@ -1555,8 +1547,8 @@
 
   <!-- EntityTypes and Associations for all object-object CollectionEntrys -->
   <!--
-    Relation: FK_CalculatedObjectReference_dependsOn_InputProperties
-    A: ZeroOrMore CalculatedObjectReferenceProperty as CalculatedObjectReference
+    Relation: FK_CalculatedReference_dependsOn_InputProperties
+    A: ZeroOrMore CalculatedObjectReferenceProperty as CalculatedReference
     B: ZeroOrMore Property as InputProperties
     Preferred Storage: Separate
   -->
@@ -1570,25 +1562,25 @@
     
     <!-- A -->
     <NavigationProperty Name="A__Implementation__"
-                        Relationship="Model.FK_CalculatedObjectReference_dependsOn_InputProperties_A"
+                        Relationship="Model.FK_CalculatedReference_dependsOn_InputProperties_A"
                         FromRole="CollectionEntry"
-                        ToRole="CalculatedObjectReference" />
+                        ToRole="CalculatedReference" />
 
     <!-- B -->
     <NavigationProperty Name="B__Implementation__"
-                        Relationship="Model.FK_CalculatedObjectReference_dependsOn_InputProperties_B"
+                        Relationship="Model.FK_CalculatedReference_dependsOn_InputProperties_B"
                         FromRole="CollectionEntry"
                         ToRole="InputProperties" />
   </EntityType>
-  <Association Name="FK_CalculatedObjectReference_dependsOn_InputProperties_A" >
-    <End Role="CalculatedObjectReference"
+  <Association Name="FK_CalculatedReference_dependsOn_InputProperties_A" >
+    <End Role="CalculatedReference"
          Type="Model.CalculatedObjectReferenceProperty" 
          Multiplicity="0..1" />
     <End Role="CollectionEntry"
          Type="Model.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntry"
          Multiplicity="*" />
   </Association>
-  <Association Name="FK_CalculatedObjectReference_dependsOn_InputProperties_B" >
+  <Association Name="FK_CalculatedReference_dependsOn_InputProperties_B" >
     <End Role="InputProperties"
          Type="Model.Property" 
          Multiplicity="0..1" />
@@ -2154,14 +2146,6 @@
          Multiplicity="*" />
     <End Role="Module"
          Type="Model.Module" 
-         Multiplicity="0..1" />
-  </Association>
-  <Association Name="FK_CalculatedReference_calculatedBy_MethodInvocation" >
-    <End Role="CalculatedReference"
-         Type="Model.CalculatedObjectReferenceProperty" 
-         Multiplicity="*" />
-    <End Role="MethodInvocation"
-         Type="Model.MethodInvocation" 
          Multiplicity="0..1" />
   </Association>
   <Association Name="FK_CalculatedReference_references_ReferencedClass" >

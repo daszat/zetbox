@@ -108,6 +108,7 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.Identity, string> OnDisplayName_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Identity, string> OnDisplayName_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.Identity, string> OnDisplayName_PostSetter;
+
         /// <summary>
         /// Password of a generic identity
         /// </summary>
@@ -159,6 +160,7 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.Identity, string> OnPassword_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Identity, string> OnPassword_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.Identity, string> OnPassword_PostSetter;
+
         /// <summary>
         /// Username of a generic identity
         /// </summary>
@@ -210,6 +212,7 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.Identity, string> OnUserName_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Identity, string> OnUserName_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.Identity, string> OnUserName_PostSetter;
+
         /// <summary>
         /// IdentityName of a WCF Identity (Windows, AD or Samba)
         /// </summary>
@@ -261,6 +264,7 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.Identity, string> OnWCFAccount_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Identity, string> OnWCFAccount_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.Identity, string> OnWCFAccount_PostSetter;
+
 		public override InterfaceType GetInterfaceType()
 		{
 			return new InterfaceType(typeof(Identity));

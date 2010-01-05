@@ -147,6 +147,7 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.MethodInvocation, Kistl.App.Base.Identity> OnChangedBy_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.MethodInvocation, Kistl.App.Base.Identity> OnChangedBy_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.MethodInvocation, Kistl.App.Base.Identity> OnChangedBy_PostSetter;
+
         /// <summary>
         /// Date and time where this object was changed
         /// </summary>
@@ -198,6 +199,7 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.MethodInvocation, DateTime?> OnChangedOn_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.MethodInvocation, DateTime?> OnChangedOn_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.MethodInvocation, DateTime?> OnChangedOn_PostSetter;
+
         /// <summary>
         /// Identity which created this object
         /// </summary>
@@ -288,6 +290,7 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.MethodInvocation, Kistl.App.Base.Identity> OnCreatedBy_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.MethodInvocation, Kistl.App.Base.Identity> OnCreatedBy_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.MethodInvocation, Kistl.App.Base.Identity> OnCreatedBy_PostSetter;
+
         /// <summary>
         /// Date and time where this object was created
         /// </summary>
@@ -339,6 +342,7 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.MethodInvocation, DateTime?> OnCreatedOn_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.MethodInvocation, DateTime?> OnCreatedOn_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.MethodInvocation, DateTime?> OnCreatedOn_PostSetter;
+
         /// <summary>
         /// Export Guid
         /// </summary>
@@ -401,6 +405,7 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.MethodInvocation, Guid> OnExportGuid_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.MethodInvocation, Guid> OnExportGuid_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.MethodInvocation, Guid> OnExportGuid_PostSetter;
+
         /// <summary>
         /// The Type implementing this invocation
         /// </summary>
@@ -491,6 +496,7 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.MethodInvocation, Kistl.App.Base.TypeRef> OnImplementor_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.MethodInvocation, Kistl.App.Base.TypeRef> OnImplementor_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.MethodInvocation, Kistl.App.Base.TypeRef> OnImplementor_PostSetter;
+
         /// <summary>
         /// In dieser Objektklasse implementieren
         /// </summary>
@@ -581,6 +587,7 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.MethodInvocation, Kistl.App.Base.DataType> OnInvokeOnObjectClass_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.MethodInvocation, Kistl.App.Base.DataType> OnInvokeOnObjectClass_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.MethodInvocation, Kistl.App.Base.DataType> OnInvokeOnObjectClass_PostSetter;
+
         /// <summary>
         /// Name des implementierenden Members
         /// </summary>
@@ -632,6 +639,7 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.MethodInvocation, string> OnMemberName_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.MethodInvocation, string> OnMemberName_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.MethodInvocation, string> OnMemberName_PostSetter;
+
         /// <summary>
         /// Methode, die Aufgerufen wird
         /// </summary>
@@ -722,6 +730,7 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.MethodInvocation, Kistl.App.Base.Method> OnMethod_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.MethodInvocation, Kistl.App.Base.Method> OnMethod_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.MethodInvocation, Kistl.App.Base.Method> OnMethod_PostSetter;
+
         /// <summary>
         /// Zugehörig zum Modul
         /// </summary>
@@ -812,6 +821,7 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.MethodInvocation, Kistl.App.Base.Module> OnModule_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.MethodInvocation, Kistl.App.Base.Module> OnModule_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.MethodInvocation, Kistl.App.Base.Module> OnModule_PostSetter;
+
         /// <summary>
         /// 
         /// </summary>

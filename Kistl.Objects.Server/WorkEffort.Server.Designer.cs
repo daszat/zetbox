@@ -108,6 +108,7 @@ namespace Kistl.App.TimeRecords
 		public static event PropertyGetterHandler<Kistl.App.TimeRecords.WorkEffort, DateTime> OnFrom_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.TimeRecords.WorkEffort, DateTime> OnFrom_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.TimeRecords.WorkEffort, DateTime> OnFrom_PostSetter;
+
         /// <summary>
         /// Which employee effected this work effort.
         /// </summary>
@@ -198,6 +199,7 @@ namespace Kistl.App.TimeRecords
 		public static event PropertyGetterHandler<Kistl.App.TimeRecords.WorkEffort, Kistl.App.Projekte.Mitarbeiter> OnMitarbeiter_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.TimeRecords.WorkEffort, Kistl.App.Projekte.Mitarbeiter> OnMitarbeiter_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.TimeRecords.WorkEffort, Kistl.App.Projekte.Mitarbeiter> OnMitarbeiter_PostSetter;
+
         /// <summary>
         /// A short label describing this work effort.
         /// </summary>
@@ -249,6 +251,7 @@ namespace Kistl.App.TimeRecords
 		public static event PropertyGetterHandler<Kistl.App.TimeRecords.WorkEffort, string> OnName_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.TimeRecords.WorkEffort, string> OnName_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.TimeRecords.WorkEffort, string> OnName_PostSetter;
+
         /// <summary>
         /// Space for notes
         /// </summary>
@@ -300,6 +303,7 @@ namespace Kistl.App.TimeRecords
 		public static event PropertyGetterHandler<Kistl.App.TimeRecords.WorkEffort, string> OnNotes_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.TimeRecords.WorkEffort, string> OnNotes_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.TimeRecords.WorkEffort, string> OnNotes_PostSetter;
+
         /// <summary>
         /// Point in time (inclusive) when the work effort ended.
         /// </summary>
@@ -351,6 +355,7 @@ namespace Kistl.App.TimeRecords
 		public static event PropertyGetterHandler<Kistl.App.TimeRecords.WorkEffort, DateTime?> OnThru_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.TimeRecords.WorkEffort, DateTime?> OnThru_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.TimeRecords.WorkEffort, DateTime?> OnThru_PostSetter;
+
 		public override InterfaceType GetInterfaceType()
 		{
 			return new InterfaceType(typeof(WorkEffort));

@@ -118,6 +118,11 @@ namespace Kistl.App.Base
             e.Result = obj.GetReferencedObjectClass().Module.Namespace + "." + obj.GetReferencedObjectClass().ClassName;
         }
 
+        public static void OnGetPropertyTypeString_CalculatedObjectReferenceProperty(Kistl.App.Base.CalculatedObjectReferenceProperty obj, Kistl.API.MethodReturnEventArgs<string> e)
+        {
+            e.Result = obj.ReferencedClass.Module.Namespace + "." + obj.ReferencedClass.ClassName;
+        }
+
         public static void OnGetPropertyTypeString_StructProperty(Kistl.App.Base.StructProperty obj, Kistl.API.MethodReturnEventArgs<string> e)
         {
             DataType objClass = obj.StructDefinition;

@@ -83,7 +83,7 @@
 			foreach(var prop in baseCls.Properties.Cast<Property>().OrderBy(p => p.PropertyName))
 			{
 				string value = GetPropertyValueAsCSharp(obj, prop);
-				if (!String.IsNullOrEmpty(value))
+				if (!String.IsNullOrEmpty(value) && !value.Equals("null"))
 				{
 %>
 			DataStore[<%= obj.ID %>].<%= prop.PropertyName %> = <%= value %>;

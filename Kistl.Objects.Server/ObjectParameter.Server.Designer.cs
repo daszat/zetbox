@@ -122,6 +122,7 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.ObjectParameter, Kistl.App.Base.DataType> OnDataType_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.ObjectParameter, Kistl.App.Base.DataType> OnDataType_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.ObjectParameter, Kistl.App.Base.DataType> OnDataType_PostSetter;
+
         /// <summary>
         /// Returns the resulting Type of this Method-Parameter Meta Object.
         /// </summary>

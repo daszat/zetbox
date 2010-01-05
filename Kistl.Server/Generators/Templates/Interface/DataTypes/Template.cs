@@ -79,6 +79,10 @@ namespace Kistl.Server.Generators.Templates.Interface.DataTypes
             {
                 isList = ((ObjectReferenceProperty)prop).IsList();
             }
+            else if (prop is CalculatedObjectReferenceProperty)
+            {
+                isReadOnly = true;
+            }
 
             if (isList)
             {

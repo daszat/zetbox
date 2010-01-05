@@ -158,42 +158,27 @@ using Kistl.DALProvider.EF;
 
 
 	/*
-    Relation: FK_CalculatedObjectReference_dependsOn_InputProperties
-    A: ZeroOrMore CalculatedObjectReferenceProperty as CalculatedObjectReference
+    Relation: FK_CalculatedReference_dependsOn_InputProperties
+    A: ZeroOrMore CalculatedObjectReferenceProperty as CalculatedReference
     B: ZeroOrMore Property as InputProperties
     Preferred Storage: Separate
 	*/
 
 // The association from A to the CollectionEntry
-[assembly: EdmRelationship("Model", "FK_CalculatedObjectReference_dependsOn_InputProperties_A",
-    "CalculatedObjectReference", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.CalculatedObjectReferenceProperty__Implementation__),
+[assembly: EdmRelationship("Model", "FK_CalculatedReference_dependsOn_InputProperties_A",
+    "CalculatedReference", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.CalculatedObjectReferenceProperty__Implementation__),
     "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntry__Implementation__)
     )]
 // The association from B to the CollectionEntry
-[assembly: EdmRelationship("Model", "FK_CalculatedObjectReference_dependsOn_InputProperties_B",
+[assembly: EdmRelationship("Model", "FK_CalculatedReference_dependsOn_InputProperties_B",
     "InputProperties", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Property__Implementation__),
     "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntry__Implementation__)
     )]
 
 	/*
-    Relation: FK_CalculatedReference_calculatedBy_MethodInvocation
-    A: ZeroOrMore CalculatedObjectReferenceProperty as CalculatedReference
-    B: ZeroOrOne MethodInvocation as MethodInvocation
-    Preferred Storage: MergeIntoA
-	*/
-
-// basic association
-[assembly: EdmRelationship(
-    "Model", "FK_CalculatedReference_calculatedBy_MethodInvocation",
-    "CalculatedReference", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.CalculatedObjectReferenceProperty__Implementation__),
-    "MethodInvocation", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.MethodInvocation__Implementation__)
-    )]
-
-
-	/*
     Relation: FK_CalculatedReference_references_ReferencedClass
     A: ZeroOrMore CalculatedObjectReferenceProperty as CalculatedReference
-    B: ZeroOrOne ObjectClass as ReferencedClass
+    B: One ObjectClass as ReferencedClass
     Preferred Storage: MergeIntoA
 	*/
 

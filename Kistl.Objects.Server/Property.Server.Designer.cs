@@ -108,6 +108,7 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.Property, string> OnCategoryTags_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Property, string> OnCategoryTags_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.Property, string> OnCategoryTags_PostSetter;
+
         /// <summary>
         /// Identity which changed this object
         /// </summary>
@@ -198,6 +199,7 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.Property, Kistl.App.Base.Identity> OnChangedBy_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Property, Kistl.App.Base.Identity> OnChangedBy_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.Property, Kistl.App.Base.Identity> OnChangedBy_PostSetter;
+
         /// <summary>
         /// Date and time where this object was changed
         /// </summary>
@@ -249,6 +251,7 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.Property, DateTime?> OnChangedOn_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Property, DateTime?> OnChangedOn_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.Property, DateTime?> OnChangedOn_PostSetter;
+
         /// <summary>
         /// The list of constraints applying to this Property
         /// </summary>
@@ -387,6 +390,7 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.Property, Kistl.App.Base.Identity> OnCreatedBy_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Property, Kistl.App.Base.Identity> OnCreatedBy_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.Property, Kistl.App.Base.Identity> OnCreatedBy_PostSetter;
+
         /// <summary>
         /// Date and time where this object was created
         /// </summary>
@@ -438,6 +442,7 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.Property, DateTime?> OnCreatedOn_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Property, DateTime?> OnCreatedOn_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.Property, DateTime?> OnCreatedOn_PostSetter;
+
         /// <summary>
         /// Property can have a default value
         /// </summary>
@@ -528,6 +533,7 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.Property, Kistl.App.Base.DefaultPropertyValue> OnDefaultValue_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Property, Kistl.App.Base.DefaultPropertyValue> OnDefaultValue_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.Property, Kistl.App.Base.DefaultPropertyValue> OnDefaultValue_PostSetter;
+
         /// <summary>
         /// Description of this Property
         /// </summary>
@@ -579,6 +585,7 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.Property, string> OnDescription_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Property, string> OnDescription_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.Property, string> OnDescription_PostSetter;
+
         /// <summary>
         /// Export Guid
         /// </summary>
@@ -641,6 +648,7 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.Property, Guid> OnExportGuid_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Property, Guid> OnExportGuid_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.Property, Guid> OnExportGuid_PostSetter;
+
         /// <summary>
         /// 
         /// </summary>
@@ -779,6 +787,7 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.Property, Kistl.App.Base.Module> OnModule_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Property, Kistl.App.Base.Module> OnModule_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.Property, Kistl.App.Base.Module> OnModule_PostSetter;
+
         /// <summary>
         /// 
         /// </summary>
@@ -869,6 +878,7 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.Property, Kistl.App.Base.DataType> OnObjectClass_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Property, Kistl.App.Base.DataType> OnObjectClass_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.Property, Kistl.App.Base.DataType> OnObjectClass_PostSetter;
+
         /// <summary>
         /// 
         /// </summary>
@@ -920,6 +930,7 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.Property, string> OnPropertyName_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Property, string> OnPropertyName_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.Property, string> OnPropertyName_PostSetter;
+
         /// <summary>
         /// The PresentableModel to use for values of this Property
         /// </summary>
@@ -1010,6 +1021,7 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.Property, Kistl.App.GUI.PresentableModelDescriptor> OnValueModelDescriptor_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Property, Kistl.App.GUI.PresentableModelDescriptor> OnValueModelDescriptor_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.Property, Kistl.App.GUI.PresentableModelDescriptor> OnValueModelDescriptor_PostSetter;
+
         /// <summary>
         /// Returns the resulting Type of this Property Meta Object.
         /// </summary>

@@ -100,7 +100,7 @@ foreach(var obj in instanceList)
 			foreach(var prop in baseCls.Properties.Cast<Property>().OrderBy(p => p.PropertyName))
 			{
 				string value = GetPropertyValueAsCSharp(obj, prop);
-				if (!String.IsNullOrEmpty(value))
+				if (!String.IsNullOrEmpty(value) && !value.Equals("null"))
 				{
 
 #line 89 "P:\Kistl\Kistl.Server\Generators\FrozenObjects\Implementation\ObjectClasses\DataStore.cst"

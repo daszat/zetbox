@@ -108,6 +108,7 @@ namespace Kistl.App.Test
 		public static event PropertyGetterHandler<Kistl.App.Test.Company, string> OnName_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Test.Company, string> OnName_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Test.Company, string> OnName_PostSetter;
+
 		public override InterfaceType GetInterfaceType()
 		{
 			return new InterfaceType(typeof(Company));

@@ -108,6 +108,7 @@ namespace Kistl.App.Projekte
 		public static event PropertyGetterHandler<Kistl.App.Projekte.Kunde, string> OnAdresse_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Kunde, string> OnAdresse_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Kunde, string> OnAdresse_PostSetter;
+
         /// <summary>
         /// Identity which changed this object
         /// </summary>
@@ -198,6 +199,7 @@ namespace Kistl.App.Projekte
 		public static event PropertyGetterHandler<Kistl.App.Projekte.Kunde, Kistl.App.Base.Identity> OnChangedBy_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Kunde, Kistl.App.Base.Identity> OnChangedBy_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Kunde, Kistl.App.Base.Identity> OnChangedBy_PostSetter;
+
         /// <summary>
         /// Date and time where this object was changed
         /// </summary>
@@ -249,6 +251,7 @@ namespace Kistl.App.Projekte
 		public static event PropertyGetterHandler<Kistl.App.Projekte.Kunde, DateTime?> OnChangedOn_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Kunde, DateTime?> OnChangedOn_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Kunde, DateTime?> OnChangedOn_PostSetter;
+
         /// <summary>
         /// Identity which created this object
         /// </summary>
@@ -339,6 +342,7 @@ namespace Kistl.App.Projekte
 		public static event PropertyGetterHandler<Kistl.App.Projekte.Kunde, Kistl.App.Base.Identity> OnCreatedBy_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Kunde, Kistl.App.Base.Identity> OnCreatedBy_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Kunde, Kistl.App.Base.Identity> OnCreatedBy_PostSetter;
+
         /// <summary>
         /// Date and time where this object was created
         /// </summary>
@@ -390,6 +394,7 @@ namespace Kistl.App.Projekte
 		public static event PropertyGetterHandler<Kistl.App.Projekte.Kunde, DateTime?> OnCreatedOn_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Kunde, DateTime?> OnCreatedOn_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Kunde, DateTime?> OnCreatedOn_PostSetter;
+
         /// <summary>
         /// EMails des Kunden - können mehrere sein
         /// </summary>
@@ -483,6 +488,7 @@ namespace Kistl.App.Projekte
 		public static event PropertyGetterHandler<Kistl.App.Projekte.Kunde, string> OnKundenname_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Kunde, string> OnKundenname_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Kunde, string> OnKundenname_PostSetter;
+
         /// <summary>
         /// Land
         /// </summary>
@@ -534,6 +540,7 @@ namespace Kistl.App.Projekte
 		public static event PropertyGetterHandler<Kistl.App.Projekte.Kunde, string> OnLand_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Kunde, string> OnLand_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Kunde, string> OnLand_PostSetter;
+
         /// <summary>
         /// Ort
         /// </summary>
@@ -585,6 +592,7 @@ namespace Kistl.App.Projekte
 		public static event PropertyGetterHandler<Kistl.App.Projekte.Kunde, string> OnOrt_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Kunde, string> OnOrt_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Kunde, string> OnOrt_PostSetter;
+
         /// <summary>
         /// Postleitzahl
         /// </summary>
@@ -636,6 +644,7 @@ namespace Kistl.App.Projekte
 		public static event PropertyGetterHandler<Kistl.App.Projekte.Kunde, string> OnPLZ_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Kunde, string> OnPLZ_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Kunde, string> OnPLZ_PostSetter;
+
 		public override InterfaceType GetInterfaceType()
 		{
 			return new InterfaceType(typeof(Kunde));

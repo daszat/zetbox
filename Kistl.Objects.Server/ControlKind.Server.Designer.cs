@@ -119,6 +119,7 @@ namespace Kistl.App.GUI
 		public static event PropertyGetterHandler<Kistl.App.GUI.ControlKind, Guid> OnExportGuid_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.ControlKind, Guid> OnExportGuid_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.ControlKind, Guid> OnExportGuid_PostSetter;
+
         /// <summary>
         /// The requested width for displaying this control. May be NULL to request auto-sizing.
         /// </summary>
@@ -170,6 +171,7 @@ namespace Kistl.App.GUI
 		public static event PropertyGetterHandler<Kistl.App.GUI.ControlKind, double?> OnRequestedWidth_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.ControlKind, double?> OnRequestedWidth_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.ControlKind, double?> OnRequestedWidth_PostSetter;
+
 		public override InterfaceType GetInterfaceType()
 		{
 			return new InterfaceType(typeof(ControlKind));

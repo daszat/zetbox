@@ -19,13 +19,6 @@ namespace Kistl.App.Base
 
         ICollection<Kistl.App.Base.Property> Inputs { get; }
         /// <summary>
-        /// the MethodInvocation to implement the property
-        /// </summary>
-		Kistl.App.Base.MethodInvocation MethodInvocation {
-			get;
-			set;
-		}
-        /// <summary>
         /// the referenced class of objects
         /// </summary>
 		Kistl.App.Base.ObjectClass ReferencedClass {

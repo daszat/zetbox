@@ -78,6 +78,7 @@
     <Compile Include="Tests\PersistenceObjects\when_changed.cs" />
     <Compile Include="Tests\PersistenceObjects\when_loaded.cs" />
     <Compile Include="Tests\Presentables\ObjectReferenceModels\should_present_underlying_property_as_value.cs" />
+    <Compile Include="Tests\RelationDefinitionTests.cs" />
     <Compile Include="Tests\RelationTests.cs" />
     <Compile Include="Tests\Structs\when_changing_a_struct_member.cs" />
     <Compile Include="Tests\Structs\when_initialized.cs" />

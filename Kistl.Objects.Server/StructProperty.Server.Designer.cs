@@ -83,6 +83,7 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.StructProperty, bool> OnHasPersistentOrder_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.StructProperty, bool> OnHasPersistentOrder_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.StructProperty, bool> OnHasPersistentOrder_PostSetter;
+
         /// <summary>
         /// Whether or not this struct property is list valued
         /// </summary>
@@ -134,6 +135,7 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.StructProperty, bool> OnIsList_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.StructProperty, bool> OnIsList_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.StructProperty, bool> OnIsList_PostSetter;
+
         /// <summary>
         /// Definition of this Struct
         /// </summary>
@@ -224,6 +226,7 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.StructProperty, Kistl.App.Base.Struct> OnStructDefinition_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.StructProperty, Kistl.App.Base.Struct> OnStructDefinition_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.StructProperty, Kistl.App.Base.Struct> OnStructDefinition_PostSetter;
+
         /// <summary>
         /// Returns the resulting Type of this Property Meta Object.
         /// </summary>

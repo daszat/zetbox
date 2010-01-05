@@ -57,6 +57,7 @@
     <Compile Include="CustomCommonActions_KistlBase.ToString.cs" />
     <Compile Include="Gui\ControlKindActions.cs" />
     <Compile Include="KistlBase\RelationActions.cs" />
+    <Compile Include="KistlBase\RelationEndActions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

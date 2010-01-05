@@ -751,6 +751,10 @@
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>ReloadOneReference.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Generators\Templates\Implementation\ObjectClasses\CalculatedProperty.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>CalculatedProperty.Designer.cs</LastGenOutput>
+    </None>
     <None Include="Generators\Templates\Implementation\ObjectClasses\NotifyingDataPropertyWithDefaultSerialization.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>NotifyingDataPropertyWithDefaultSerialization.Designer.cs</LastGenOutput>
@@ -927,6 +931,12 @@
     <Compile Include="Generators\EntityFramework\Implementation\ObjectClasses\NotifyingDataProperty.cs" />
     <Compile Include="Generators\FrozenObjects\Logging.cs" />
     <Compile Include="Generators\Templates\Implementation\CollectionEntries\ExportGuidProperty.cs" />
+    <Compile Include="Generators\Templates\Implementation\ObjectClasses\CalculatedProperty.cs" />
+    <Compile Include="Generators\Templates\Implementation\ObjectClasses\CalculatedProperty.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CalculatedProperty.cst</DependentUpon>
+    </Compile>
     <Compile Include="Generators\Templates\Implementation\ObjectClasses\CollectionSerialization.cs" />
     <Compile Include="Generators\Templates\Implementation\ObjectClasses\NotifyingDataPropertyWithDefaultSerialization.Designer.cs">
       <DependentUpon>NotifyingDataPropertyWithDefaultSerialization.cst</DependentUpon>

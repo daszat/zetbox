@@ -83,6 +83,7 @@ namespace Kistl.App.Test
 		public static event PropertyGetterHandler<Kistl.App.Test.TestPhoneStruct, string> OnAreaCode_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Test.TestPhoneStruct, string> OnAreaCode_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Test.TestPhoneStruct, string> OnAreaCode_PostSetter;
+
         /// <summary>
         /// Enter a Number
         /// </summary>
@@ -134,6 +135,7 @@ namespace Kistl.App.Test
 		public static event PropertyGetterHandler<Kistl.App.Test.TestPhoneStruct, string> OnNumber_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Test.TestPhoneStruct, string> OnNumber_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Test.TestPhoneStruct, string> OnNumber_PostSetter;
+
 		public override InterfaceType GetInterfaceType()
 		{
 			return new InterfaceType(typeof(TestPhoneStruct));

@@ -83,6 +83,7 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.StringRangeConstraint, int> OnMaxLength_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.StringRangeConstraint, int> OnMaxLength_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.StringRangeConstraint, int> OnMaxLength_PostSetter;
+
         /// <summary>
         /// The minimal length of this StringProperty
         /// </summary>
@@ -134,6 +135,7 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.StringRangeConstraint, int> OnMinLength_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.StringRangeConstraint, int> OnMinLength_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.StringRangeConstraint, int> OnMinLength_PostSetter;
+
         /// <summary>
         /// 
         /// </summary>

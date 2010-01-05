@@ -23,11 +23,8 @@ namespace Kistl.Server.Generators.FrozenObjects.Implementation.ObjectClasses
 
         public static string GetPropertyValueAsCSharp(IDataObject obj, Property prop)
         {
-            if (obj == null)
-                throw new ArgumentNullException("obj");
-
-            if (prop == null)
-                throw new ArgumentNullException("prop");
+            if (obj == null) { throw new ArgumentNullException("obj"); }
+            if (prop == null) { throw new ArgumentNullException("prop"); }
 
             string propName = prop.PropertyName;
 
@@ -135,6 +132,11 @@ namespace Kistl.Server.Generators.FrozenObjects.Implementation.ObjectClasses
                         // and this method shouldn't be called
                         return null;
                     }
+                }
+                else if (prop is CalculatedObjectReferenceProperty)
+                {
+                    // just ignore
+                    return null;
                 }
                 else
                 {

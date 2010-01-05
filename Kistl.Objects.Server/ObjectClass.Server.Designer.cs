@@ -122,6 +122,7 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.ObjectClass, Kistl.App.Base.ObjectClass> OnBaseObjectClass_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.ObjectClass, Kistl.App.Base.ObjectClass> OnBaseObjectClass_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.ObjectClass, Kistl.App.Base.ObjectClass> OnBaseObjectClass_PostSetter;
+
         /// <summary>
         /// 
         /// </summary>
@@ -260,6 +261,7 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.ObjectClass, Kistl.App.GUI.PresentableModelDescriptor> OnDefaultPresentableModelDescriptor_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.ObjectClass, Kistl.App.GUI.PresentableModelDescriptor> OnDefaultPresentableModelDescriptor_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.ObjectClass, Kistl.App.GUI.PresentableModelDescriptor> OnDefaultPresentableModelDescriptor_PostSetter;
+
         /// <summary>
         /// Interfaces der Objektklasse
         /// </summary>
@@ -359,6 +361,7 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.ObjectClass, bool> OnIsFrozenObject_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.ObjectClass, bool> OnIsFrozenObject_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.ObjectClass, bool> OnIsFrozenObject_PostSetter;
+
         /// <summary>
         /// Setting this to true marks the instances of this class as &quot;simple.&quot; At first this will only mean that they'll be displayed inline.
         /// </summary>
@@ -410,6 +413,7 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.ObjectClass, bool> OnIsSimpleObject_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.ObjectClass, bool> OnIsSimpleObject_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.ObjectClass, bool> OnIsSimpleObject_PostSetter;
+
         /// <summary>
         /// Set of security rules to filter access rights
         /// </summary>
@@ -551,6 +555,7 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.ObjectClass, string> OnTableName_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.ObjectClass, string> OnTableName_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.ObjectClass, string> OnTableName_PostSetter;
+
         /// <summary>
         /// Creates, if needed, all default  Methods
         /// </summary>

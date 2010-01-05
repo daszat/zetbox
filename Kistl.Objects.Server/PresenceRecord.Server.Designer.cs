@@ -108,6 +108,7 @@ namespace Kistl.App.TimeRecords
 		public static event PropertyGetterHandler<Kistl.App.TimeRecords.PresenceRecord, DateTime> OnFrom_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.TimeRecords.PresenceRecord, DateTime> OnFrom_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.TimeRecords.PresenceRecord, DateTime> OnFrom_PostSetter;
+
         /// <summary>
         /// Which employee was present.
         /// </summary>
@@ -198,6 +199,7 @@ namespace Kistl.App.TimeRecords
 		public static event PropertyGetterHandler<Kistl.App.TimeRecords.PresenceRecord, Kistl.App.Projekte.Mitarbeiter> OnMitarbeiter_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.TimeRecords.PresenceRecord, Kistl.App.Projekte.Mitarbeiter> OnMitarbeiter_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.TimeRecords.PresenceRecord, Kistl.App.Projekte.Mitarbeiter> OnMitarbeiter_PostSetter;
+
         /// <summary>
         /// Point in time (inclusive) when the presence ended.
         /// </summary>
@@ -249,6 +251,7 @@ namespace Kistl.App.TimeRecords
 		public static event PropertyGetterHandler<Kistl.App.TimeRecords.PresenceRecord, DateTime?> OnThru_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.TimeRecords.PresenceRecord, DateTime?> OnThru_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.TimeRecords.PresenceRecord, DateTime?> OnThru_PostSetter;
+
 		public override InterfaceType GetInterfaceType()
 		{
 			return new InterfaceType(typeof(PresenceRecord));

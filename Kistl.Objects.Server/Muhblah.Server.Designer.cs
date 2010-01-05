@@ -108,6 +108,7 @@ namespace Kistl.App.Test
 		public static event PropertyGetterHandler<Kistl.App.Test.Muhblah, bool?> OnTestBool_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Test.Muhblah, bool?> OnTestBool_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Test.Muhblah, bool?> OnTestBool_PostSetter;
+
         /// <summary>
         /// 
         /// </summary>
@@ -294,6 +295,7 @@ namespace Kistl.App.Test
 		public static event PropertyGetterHandler<Kistl.App.Test.Muhblah, Kistl.App.Test.TestCustomObject> OnTestCustomObjects_Nav_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Test.Muhblah, Kistl.App.Test.TestCustomObject> OnTestCustomObjects_Nav_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Test.Muhblah, Kistl.App.Test.TestCustomObject> OnTestCustomObjects_Nav_PostSetter;
+
         /// <summary>
         /// 
         /// </summary>
@@ -384,6 +386,7 @@ namespace Kistl.App.Test
 		public static event PropertyGetterHandler<Kistl.App.Test.Muhblah, Kistl.App.Test.TestCustomObject> OnTestCustomObjects_One_Nav_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Test.Muhblah, Kistl.App.Test.TestCustomObject> OnTestCustomObjects_One_Nav_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Test.Muhblah, Kistl.App.Test.TestCustomObject> OnTestCustomObjects_One_Nav_PostSetter;
+
         /// <summary>
         /// 
         /// </summary>
@@ -435,6 +438,7 @@ namespace Kistl.App.Test
 		public static event PropertyGetterHandler<Kistl.App.Test.Muhblah, DateTime?> OnTestDateTime_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Test.Muhblah, DateTime?> OnTestDateTime_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Test.Muhblah, DateTime?> OnTestDateTime_PostSetter;
+
         /// <summary>
         /// 
         /// </summary>
@@ -502,6 +506,7 @@ namespace Kistl.App.Test
 		public static event PropertyGetterHandler<Kistl.App.Test.Muhblah, Kistl.App.Test.TestEnum> OnTestEnum_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Test.Muhblah, Kistl.App.Test.TestEnum> OnTestEnum_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Test.Muhblah, Kistl.App.Test.TestEnum> OnTestEnum_PostSetter;
+
         /// <summary>
         /// 
         /// </summary>
@@ -553,6 +558,7 @@ namespace Kistl.App.Test
 		public static event PropertyGetterHandler<Kistl.App.Test.Muhblah, string> OnTestString_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Test.Muhblah, string> OnTestString_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Test.Muhblah, string> OnTestString_PostSetter;
+
 		public override InterfaceType GetInterfaceType()
 		{
 			return new InterfaceType(typeof(Muhblah));

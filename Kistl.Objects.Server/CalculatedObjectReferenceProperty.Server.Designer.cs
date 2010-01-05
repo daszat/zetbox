@@ -36,8 +36,8 @@ namespace Kistl.App.Base
         /// The properties on which the calculation depends. This is used to propagate change notifications.
         /// </summary>
     /*
-    Relation: FK_CalculatedObjectReference_dependsOn_InputProperties
-    A: ZeroOrMore CalculatedObjectReferenceProperty as CalculatedObjectReference
+    Relation: FK_CalculatedReference_dependsOn_InputProperties
+    A: ZeroOrMore CalculatedObjectReferenceProperty as CalculatedReference
     B: ZeroOrMore Property as InputProperties
     Preferred Storage: Separate
     */
@@ -60,14 +60,14 @@ namespace Kistl.App.Base
             }
         }
         
-        [EdmRelationshipNavigationProperty("Model", "FK_CalculatedObjectReference_dependsOn_InputProperties_A", "CollectionEntry")]
+        [EdmRelationshipNavigationProperty("Model", "FK_CalculatedReference_dependsOn_InputProperties_A", "CollectionEntry")]
         public EntityCollection<Kistl.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntry__Implementation__> Inputs__Implementation__
         {
             get
             {
                 var c = ((IEntityWithRelationships)(this)).RelationshipManager
                     .GetRelatedCollection<Kistl.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntry__Implementation__>(
-                        "Model.FK_CalculatedObjectReference_dependsOn_InputProperties_A",
+                        "Model.FK_CalculatedReference_dependsOn_InputProperties_A",
                         "CollectionEntry");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)
@@ -81,102 +81,12 @@ namespace Kistl.App.Base
 
 
         /// <summary>
-        /// the MethodInvocation to implement the property
-        /// </summary>
-    /*
-    Relation: FK_CalculatedReference_calculatedBy_MethodInvocation
-    A: ZeroOrMore CalculatedObjectReferenceProperty as CalculatedReference
-    B: ZeroOrOne MethodInvocation as MethodInvocation
-    Preferred Storage: MergeIntoA
-    */
-        // object reference property
-   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
-        // implement the user-visible interface
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Base.MethodInvocation MethodInvocation
-        {
-            get
-            {
-                return MethodInvocation__Implementation__;
-            }
-            set
-            {
-                // TODO: NotifyPropertyChanged()
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if(value != null && value.Context != this.Context) throw new WrongKistlContextException();
-                MethodInvocation__Implementation__ = (Kistl.App.Base.MethodInvocation__Implementation__)value;
-            }
-        }
-        
-        private int? _fk_MethodInvocation;
-        private Guid? _fk_guid_MethodInvocation = null;
-        // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_CalculatedReference_calculatedBy_MethodInvocation", "MethodInvocation")]
-        public Kistl.App.Base.MethodInvocation__Implementation__ MethodInvocation__Implementation__
-        {
-            get
-            {
-                EntityReference<Kistl.App.Base.MethodInvocation__Implementation__> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.MethodInvocation__Implementation__>(
-                        "Model.FK_CalculatedReference_calculatedBy_MethodInvocation",
-                        "MethodInvocation");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !r.IsLoaded)
-                {
-                    r.Load(); 
-                    if(r.Value != null) r.Value.AttachToContext(this.Context);
-                }
-                var __value = r.Value;
-				if(OnMethodInvocation_Getter != null)
-				{
-					var e = new PropertyGetterEventArgs<Kistl.App.Base.MethodInvocation>(__value);
-					OnMethodInvocation_Getter(this, e);
-					__value = (Kistl.App.Base.MethodInvocation__Implementation__)e.Result;
-				}
-                return __value;
-            }
-            set
-            {
-                EntityReference<Kistl.App.Base.MethodInvocation__Implementation__> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.MethodInvocation__Implementation__>(
-                        "Model.FK_CalculatedReference_calculatedBy_MethodInvocation",
-                        "MethodInvocation");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !r.IsLoaded)
-                {
-                    r.Load(); 
-                }
-                Kistl.App.Base.MethodInvocation __oldValue = (Kistl.App.Base.MethodInvocation)r.Value;
-                Kistl.App.Base.MethodInvocation __newValue = (Kistl.App.Base.MethodInvocation)value;
-
-                if(OnMethodInvocation_PreSetter != null)
-                {
-					var e = new PropertyPreSetterEventArgs<Kistl.App.Base.MethodInvocation>(__oldValue, __newValue);
-					OnMethodInvocation_PreSetter(this, e);
-					__newValue = e.Result;
-                }
-                r.Value = (Kistl.App.Base.MethodInvocation__Implementation__)__newValue;
-                if(OnMethodInvocation_PostSetter != null)
-                {
-					var e = new PropertyPostSetterEventArgs<Kistl.App.Base.MethodInvocation>(__oldValue, __newValue);
-					OnMethodInvocation_PostSetter(this, e);
-                }
-                                
-            }
-        }
-        
-        
-		public static event PropertyGetterHandler<Kistl.App.Base.CalculatedObjectReferenceProperty, Kistl.App.Base.MethodInvocation> OnMethodInvocation_Getter;
-		public static event PropertyPreSetterHandler<Kistl.App.Base.CalculatedObjectReferenceProperty, Kistl.App.Base.MethodInvocation> OnMethodInvocation_PreSetter;
-		public static event PropertyPostSetterHandler<Kistl.App.Base.CalculatedObjectReferenceProperty, Kistl.App.Base.MethodInvocation> OnMethodInvocation_PostSetter;
-        /// <summary>
         /// the referenced class of objects
         /// </summary>
     /*
     Relation: FK_CalculatedReference_references_ReferencedClass
     A: ZeroOrMore CalculatedObjectReferenceProperty as CalculatedReference
-    B: ZeroOrOne ObjectClass as ReferencedClass
+    B: One ObjectClass as ReferencedClass
     Preferred Storage: MergeIntoA
     */
         // object reference property
@@ -260,6 +170,7 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.CalculatedObjectReferenceProperty, Kistl.App.Base.ObjectClass> OnReferencedClass_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.CalculatedObjectReferenceProperty, Kistl.App.Base.ObjectClass> OnReferencedClass_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.CalculatedObjectReferenceProperty, Kistl.App.Base.ObjectClass> OnReferencedClass_PostSetter;
+
         /// <summary>
         /// Returns the resulting Type of this Property Meta Object.
         /// </summary>
@@ -314,7 +225,6 @@ namespace Kistl.App.Base
 			var otherImpl = (CalculatedObjectReferenceProperty__Implementation__)obj;
 			var me = (CalculatedObjectReferenceProperty)this;
 
-			this._fk_MethodInvocation = otherImpl._fk_MethodInvocation;
 			this._fk_ReferencedClass = otherImpl._fk_ReferencedClass;
 		}
 
@@ -381,15 +291,6 @@ namespace Kistl.App.Base
 					
 					return String.Join("; ", errors);
 				}
-				case "MethodInvocation":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("196955e2-5e02-48b9-8932-71633c5f9a8f")).Constraints
-						.Where(c => !c.IsValid(this, this.MethodInvocation))
-						.Select(c => c.GetErrorText(this, this.MethodInvocation))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
 				case "ReferencedClass":
 				{
 					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("cd62d769-0752-4a72-832f-5935ece1198b")).Constraints
@@ -413,13 +314,6 @@ namespace Kistl.App.Base
 			
 			// fix direct object references
 
-			if (_fk_guid_MethodInvocation.HasValue)
-				MethodInvocation__Implementation__ = (Kistl.App.Base.MethodInvocation__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.MethodInvocation>(_fk_guid_MethodInvocation.Value);
-			else if (_fk_MethodInvocation.HasValue)
-				MethodInvocation__Implementation__ = (Kistl.App.Base.MethodInvocation__Implementation__)Context.Find<Kistl.App.Base.MethodInvocation>(_fk_MethodInvocation.Value);
-			else
-				MethodInvocation__Implementation__ = null;
-
 			if (_fk_guid_ReferencedClass.HasValue)
 				ReferencedClass__Implementation__ = (Kistl.App.Base.ObjectClass__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.ObjectClass>(_fk_guid_ReferencedClass.Value);
 			else if (_fk_ReferencedClass.HasValue)
@@ -442,10 +336,6 @@ namespace Kistl.App.Base
 					}
 				}
 			}
-            BinarySerializer.ToStream(MethodInvocation != null ? MethodInvocation.ID : (int?)null, binStream);
-			if (auxObjects != null) {
-				auxObjects.Add(MethodInvocation);
-			}
             BinarySerializer.ToStream(ReferencedClass != null ? ReferencedClass.ID : (int?)null, binStream);
 			if (auxObjects != null) {
 				auxObjects.Add(ReferencedClass);
@@ -456,7 +346,6 @@ namespace Kistl.App.Base
         {
             
             base.FromStream(binStream);
-            BinarySerializer.FromStream(out this._fk_MethodInvocation, binStream);
             BinarySerializer.FromStream(out this._fk_ReferencedClass, binStream);
         }
 
@@ -464,7 +353,6 @@ namespace Kistl.App.Base
         {
             
             base.ToStream(xml);
-            XmlStreamer.ToStream(MethodInvocation != null ? MethodInvocation.ID : (int?)null, xml, "MethodInvocation", "Kistl.App.Base");
             XmlStreamer.ToStream(ReferencedClass != null ? ReferencedClass.ID : (int?)null, xml, "ReferencedClass", "Kistl.App.Base");
         }
 
@@ -472,7 +360,6 @@ namespace Kistl.App.Base
         {
             
             base.FromStream(xml);
-            XmlStreamer.FromStream(ref this._fk_MethodInvocation, xml, "MethodInvocation", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_ReferencedClass, xml, "ReferencedClass", "Kistl.App.Base");
         }
 
@@ -480,7 +367,6 @@ namespace Kistl.App.Base
         {
             
             base.Export(xml, modules);
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(MethodInvocation != null ? MethodInvocation.ExportGuid : (Guid?)null, xml, "MethodInvocation", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(ReferencedClass != null ? ReferencedClass.ExportGuid : (Guid?)null, xml, "ReferencedClass", "Kistl.App.Base");
         }
 
@@ -488,7 +374,6 @@ namespace Kistl.App.Base
         {
             
             base.MergeImport(xml);
-            XmlStreamer.FromStream(ref this._fk_guid_MethodInvocation, xml, "MethodInvocation", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_guid_ReferencedClass, xml, "ReferencedClass", "Kistl.App.Base");
         }
 

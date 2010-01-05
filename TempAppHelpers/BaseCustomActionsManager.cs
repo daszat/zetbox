@@ -82,16 +82,16 @@ namespace Kistl.App.Extensions
         /// <summary>
         /// Attach static events using Metadata
         /// </summary>
-        protected virtual void AttachEvents(MethodInfo CLRMethod, EventInfo CLREvent)
+        protected virtual void AttachEvents(MethodInfo clrMethod, EventInfo clrEvent)
         {
-            if (CLRMethod == null) { throw new ArgumentNullException("CLRMethod"); }
-            if (CLREvent == null) { throw new ArgumentNullException("CLREvent"); }
+            if (clrMethod == null) { throw new ArgumentNullException("clrMethod"); }
+            if (clrEvent == null) { throw new ArgumentNullException("clrEvent"); }
 
             Delegate newDelegate = Delegate.CreateDelegate(
-                CLREvent.EventHandlerType,
-                CLRMethod);
+                clrEvent.EventHandlerType,
+                clrMethod);
 
-            CLREvent.AddEventHandler(null, newDelegate);
+            clrEvent.AddEventHandler(null, newDelegate);
         }
 
         /// <summary>
@@ -221,7 +221,6 @@ namespace Kistl.App.Extensions
                 }
 
                 EventInfo ei = objType.GetEvent(eventName);
-
                 if (ei == null)
                 {
                     Log.ErrorFormat("CLR Event {0} not found", eventName);

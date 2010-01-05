@@ -406,17 +406,17 @@
 
     <!-- EntitySets and AssociationSet for all object-object CollectionEntrys -->
     <!-- 
-    Relation: FK_CalculatedObjectReference_dependsOn_InputProperties
-    A: ZeroOrMore CalculatedObjectReferenceProperty as CalculatedObjectReference
+    Relation: FK_CalculatedReference_dependsOn_InputProperties
+    A: ZeroOrMore CalculatedObjectReferenceProperty as CalculatedReference
     B: ZeroOrMore Property as InputProperties
     Preferred Storage: Separate
     -->
-    <EntitySet Name="CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntry" EntityType="Model.Store.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntry" Table="CalculatedObjectReference_dependsOn_InputProperties" />
-    <AssociationSet Name="FK_CalculatedObjectReference_dependsOn_InputProperties_A" Association="Model.Store.FK_CalculatedObjectReference_dependsOn_InputProperties_A" >
-      <End Role="CalculatedObjectReference" EntitySet="CalculatedObjectReferenceProperty" />
+    <EntitySet Name="CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntry" EntityType="Model.Store.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntry" Table="CalculatedReference_dependsOn_InputProperties" />
+    <AssociationSet Name="FK_CalculatedReference_dependsOn_InputProperties_A" Association="Model.Store.FK_CalculatedReference_dependsOn_InputProperties_A" >
+      <End Role="CalculatedReference" EntitySet="CalculatedObjectReferenceProperty" />
       <End Role="CollectionEntry" EntitySet="CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntry" />
     </AssociationSet>
-    <AssociationSet Name="FK_CalculatedObjectReference_dependsOn_InputProperties_B" Association="Model.Store.FK_CalculatedObjectReference_dependsOn_InputProperties_B" >
+    <AssociationSet Name="FK_CalculatedReference_dependsOn_InputProperties_B" Association="Model.Store.FK_CalculatedReference_dependsOn_InputProperties_B" >
       <End Role="CollectionEntry" EntitySet="CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntry" />
       <End Role="InputProperties" EntitySet="Property" />
     </AssociationSet>
@@ -623,10 +623,6 @@
     <AssociationSet Name="FK_BaseProperty_has_Module" Association="Model.Store.FK_BaseProperty_has_Module" >
       <End Role="BaseProperty" EntitySet="Property" />
       <End Role="Module" EntitySet="Module" />
-    </AssociationSet>
-    <AssociationSet Name="FK_CalculatedReference_calculatedBy_MethodInvocation" Association="Model.Store.FK_CalculatedReference_calculatedBy_MethodInvocation" >
-      <End Role="CalculatedReference" EntitySet="CalculatedObjectReferenceProperty" />
-      <End Role="MethodInvocation" EntitySet="MethodInvocation" />
     </AssociationSet>
     <AssociationSet Name="FK_CalculatedReference_references_ReferencedClass" Association="Model.Store.FK_CalculatedReference_references_ReferencedClass" >
       <End Role="CalculatedReference" EntitySet="CalculatedObjectReferenceProperty" />
@@ -1078,7 +1074,6 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" />
-    <Property Name="fk_MethodInvocation" Type="int" />
     <Property Name="fk_ReferencedClass" Type="int" />
   </EntityType>
 	
@@ -1868,26 +1863,26 @@
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
 	<Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="fk_CalculatedObjectReference" Type="int" Nullable="true" />
+    <Property Name="fk_CalculatedReference" Type="int" Nullable="true" />
     <Property Name="fk_InputProperties" Type="int" Nullable="true" />
   </EntityType>
 
   <!-- A to CollectionEntry -->
-  <Association Name="FK_CalculatedObjectReference_dependsOn_InputProperties_A">
-    <End Role="CalculatedObjectReference" Type="Model.Store.CalculatedObjectReferenceProperty" Multiplicity="0..1" />
+  <Association Name="FK_CalculatedReference_dependsOn_InputProperties_A">
+    <End Role="CalculatedReference" Type="Model.Store.CalculatedObjectReferenceProperty" Multiplicity="0..1" />
     <End Role="CollectionEntry" Type="Model.Store.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntry" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="CalculatedObjectReference">
+      <Principal Role="CalculatedReference">
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="CollectionEntry">
-        <PropertyRef Name="fk_CalculatedObjectReference" />
+        <PropertyRef Name="fk_CalculatedReference" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
 
   <!-- B to CollectionEntry -->
-  <Association Name="FK_CalculatedObjectReference_dependsOn_InputProperties_B">
+  <Association Name="FK_CalculatedReference_dependsOn_InputProperties_B">
     <End Role="InputProperties" Type="Model.Store.Property" Multiplicity="0..1" />
     <End Role="CollectionEntry" Type="Model.Store.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntry" Multiplicity="*" />
     <ReferentialConstraint>
@@ -2437,21 +2432,6 @@
       </Principal>
       <Dependent Role="BaseProperty">
         <PropertyRef Name="fk_Module" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-
-  <Association Name="FK_CalculatedReference_calculatedBy_MethodInvocation">
-    <End Role="MethodInvocation" Type="Model.Store.MethodInvocation" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
-    <End Role="CalculatedReference" Type="Model.Store.CalculatedObjectReferenceProperty" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="MethodInvocation">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="CalculatedReference">
-        <PropertyRef Name="fk_MethodInvocation" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

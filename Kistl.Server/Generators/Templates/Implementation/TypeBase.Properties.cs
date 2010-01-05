@@ -27,7 +27,7 @@ namespace Kistl.Server.Generators.Templates.Implementation
                 else
                 {
                     ApplyEnumerationPropertyTemplate((EnumerationProperty)p);
-                    ApplyPropertyInvocationsTemplate(p);
+                    ApplyPropertyInvocationsTemplate(p, false);
                 }
             }
             else if (p is ObjectReferenceProperty)
@@ -39,7 +39,19 @@ namespace Kistl.Server.Generators.Templates.Implementation
                 else
                 {
                     ApplyObjectReferencePropertyTemplate((ObjectReferenceProperty)p);
-                    ApplyPropertyInvocationsTemplate(p);
+                    ApplyPropertyInvocationsTemplate(p, false);
+                }
+            }
+            else if (p is CalculatedObjectReferenceProperty)
+            {
+                //if (((CalculatedObjectReferenceProperty)p).IsList)
+                //{
+                //    ApplyObjectReferenceListTemplate((CalculatedObjectReferenceProperty)p);
+                //}
+                //else
+                {
+                    ApplyCalculatedObjectReferencePropertyTemplate((CalculatedObjectReferenceProperty)p);
+                    ApplyPropertyInvocationsTemplate(p, true);
                 }
             }
             else if (p is StructProperty)
@@ -63,7 +75,7 @@ namespace Kistl.Server.Generators.Templates.Implementation
                 else
                 {
                     ApplyValueTypePropertyTemplate((ValueTypeProperty)p);
-                    ApplyPropertyInvocationsTemplate(p);
+                    ApplyPropertyInvocationsTemplate(p, false);
                 }
             }
             else
@@ -72,9 +84,9 @@ namespace Kistl.Server.Generators.Templates.Implementation
             }
         }
 
-        protected virtual void ApplyPropertyInvocationsTemplate(Property p)
+        protected virtual void ApplyPropertyInvocationsTemplate(Property p, bool isReadOnly)
         {
-            Templates.Implementation.ObjectClasses.PropertyInvocationsTemplate.Call(Host, ctx, p);
+            Templates.Implementation.ObjectClasses.PropertyInvocationsTemplate.Call(Host, ctx, p, isReadOnly);
         }
 
         protected virtual void ApplyEnumerationListTemplate(EnumerationProperty prop)
@@ -90,7 +102,6 @@ namespace Kistl.Server.Generators.Templates.Implementation
             this.MembersToSerialize.Add("Implementation.ObjectClasses.EnumBinarySerialization", SerializerType.All, prop.Module.Namespace, prop.PropertyName, prop);
         }
 
-
         protected virtual void ApplyObjectReferenceListTemplate(ObjectReferenceProperty prop)
         {
             this.WriteLine("        // object reference list property");
@@ -103,6 +114,11 @@ namespace Kistl.Server.Generators.Templates.Implementation
             ApplyNotifyingValueProperty(prop, this.MembersToSerialize);
         }
 
+        protected virtual void ApplyCalculatedObjectReferencePropertyTemplate(CalculatedObjectReferenceProperty prop)
+        {
+            this.WriteLine("        // calculated object reference property");
+            ApplyCalculatedProperty(prop, this.MembersToSerialize);
+        }
 
         protected virtual void ApplyStructListTemplate(StructProperty prop)
         {
@@ -116,7 +132,6 @@ namespace Kistl.Server.Generators.Templates.Implementation
             ApplyNotifyingValueProperty(prop, this.MembersToSerialize);
         }
 
-
         protected virtual void ApplyValueTypeListTemplate(ValueTypeProperty prop)
         {
             this.WriteLine("        // value list property");
@@ -129,7 +144,6 @@ namespace Kistl.Server.Generators.Templates.Implementation
             ApplyNotifyingValueProperty(prop, this.MembersToSerialize);
         }
 
-
         protected virtual void ApplyOtherListTemplate(Property prop)
         {
             this.WriteLine("        // other list property");
@@ -141,7 +155,6 @@ namespace Kistl.Server.Generators.Templates.Implementation
             this.WriteLine("        // other property");
             ApplyNotifyingValueProperty(prop, this.MembersToSerialize);
         }
-
 
         protected virtual void ApplyNotifyingValueProperty(Property prop, SerializationMembersList serList)
         {
@@ -158,5 +171,10 @@ namespace Kistl.Server.Generators.Templates.Implementation
                 prop);
         }
 
+        protected virtual void ApplyCalculatedProperty(CalculatedObjectReferenceProperty prop, SerializationMembersList serList)
+        {
+            Templates.Implementation.ObjectClasses.CalculatedProperty.Call(Host, ctx,
+                serList, prop);
+        }
     }
 }

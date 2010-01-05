@@ -49,6 +49,12 @@ namespace Kistl.App.Base
 			set;
 		}
         /// <summary>
+        /// the parent relation
+        /// </summary>
+		Kistl.App.Base.Relation Parent {
+			get;
+		}
+        /// <summary>
         /// This end&apos;s role name in the relation
         /// </summary>
 		string RoleName {

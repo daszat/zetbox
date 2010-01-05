@@ -147,6 +147,7 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.RelationEnd, Kistl.App.Base.Relation> OnAParent_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.RelationEnd, Kistl.App.Base.Relation> OnAParent_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.RelationEnd, Kistl.App.Base.Relation> OnAParent_PostSetter;
+
         /// <summary>
         /// The Relation using this RelationEnd as B
         /// </summary>
@@ -237,6 +238,7 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.RelationEnd, Kistl.App.Base.Relation> OnBParent_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.RelationEnd, Kistl.App.Base.Relation> OnBParent_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.RelationEnd, Kistl.App.Base.Relation> OnBParent_PostSetter;
+
         /// <summary>
         /// Identity which changed this object
         /// </summary>
@@ -327,6 +329,7 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.RelationEnd, Kistl.App.Base.Identity> OnChangedBy_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.RelationEnd, Kistl.App.Base.Identity> OnChangedBy_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.RelationEnd, Kistl.App.Base.Identity> OnChangedBy_PostSetter;
+
         /// <summary>
         /// Date and time where this object was changed
         /// </summary>
@@ -378,6 +381,7 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.RelationEnd, DateTime?> OnChangedOn_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.RelationEnd, DateTime?> OnChangedOn_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.RelationEnd, DateTime?> OnChangedOn_PostSetter;
+
         /// <summary>
         /// Identity which created this object
         /// </summary>
@@ -468,6 +472,7 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.RelationEnd, Kistl.App.Base.Identity> OnCreatedBy_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.RelationEnd, Kistl.App.Base.Identity> OnCreatedBy_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.RelationEnd, Kistl.App.Base.Identity> OnCreatedBy_PostSetter;
+
         /// <summary>
         /// Date and time where this object was created
         /// </summary>
@@ -519,6 +524,7 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.RelationEnd, DateTime?> OnCreatedOn_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.RelationEnd, DateTime?> OnCreatedOn_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.RelationEnd, DateTime?> OnCreatedOn_PostSetter;
+
         /// <summary>
         /// Export Guid
         /// </summary>
@@ -581,6 +587,7 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.RelationEnd, Guid> OnExportGuid_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.RelationEnd, Guid> OnExportGuid_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.RelationEnd, Guid> OnExportGuid_PostSetter;
+
         /// <summary>
         /// Is true, if this RelationEnd persists the order of its elements
         /// </summary>
@@ -632,6 +639,7 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.RelationEnd, bool> OnHasPersistentOrder_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.RelationEnd, bool> OnHasPersistentOrder_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.RelationEnd, bool> OnHasPersistentOrder_PostSetter;
+
         /// <summary>
         /// Specifies how many instances may occur on this end of the relation.
         /// </summary>
@@ -699,6 +707,7 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.RelationEnd, Kistl.App.Base.Multiplicity> OnMultiplicity_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.RelationEnd, Kistl.App.Base.Multiplicity> OnMultiplicity_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.RelationEnd, Kistl.App.Base.Multiplicity> OnMultiplicity_PostSetter;
+
         /// <summary>
         /// The ORP to navigate FROM this end of the relation. MAY be null.
         /// </summary>
@@ -789,6 +798,27 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.RelationEnd, Kistl.App.Base.ObjectReferenceProperty> OnNavigator_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.RelationEnd, Kistl.App.Base.ObjectReferenceProperty> OnNavigator_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.RelationEnd, Kistl.App.Base.ObjectReferenceProperty> OnNavigator_PostSetter;
+
+        /// <summary>
+        /// the parent relation
+        /// </summary>
+        // calculated object reference property
+		public Kistl.App.Base.Relation Parent
+		{
+			get
+			{
+				if(OnParent_Getter == null)
+				{
+					return null;
+				}
+
+				var e = new PropertyGetterEventArgs<Kistl.App.Base.Relation>(null);
+				OnParent_Getter(this, e);
+				return e.Result;
+			}
+		}
+		public static event PropertyGetterHandler<Kistl.App.Base.RelationEnd, Kistl.App.Base.Relation> OnParent_Getter;
+
         /// <summary>
         /// This end&apos;s role name in the relation
         /// </summary>
@@ -840,6 +870,7 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.RelationEnd, string> OnRoleName_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.RelationEnd, string> OnRoleName_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.RelationEnd, string> OnRoleName_PostSetter;
+
         /// <summary>
         /// Specifies which type this End of the relation has. MUST NOT be null.
         /// </summary>
@@ -930,6 +961,7 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.RelationEnd, Kistl.App.Base.ObjectClass> OnType_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.RelationEnd, Kistl.App.Base.ObjectClass> OnType_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.RelationEnd, Kistl.App.Base.ObjectClass> OnType_PostSetter;
+
         /// <summary>
         /// 
         /// </summary>
@@ -1118,6 +1150,15 @@ namespace Kistl.App.Base
 					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("6b25eaab-f746-47ec-a91e-f92ec6fccada")).Constraints
 						.Where(c => !c.IsValid(this, this.Navigator))
 						.Select(c => c.GetErrorText(this, this.Navigator))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "Parent":
+				{
+					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("3273a95a-1156-4ce2-b0d6-8957b4637320")).Constraints
+						.Where(c => !c.IsValid(this, this.Parent))
+						.Select(c => c.GetErrorText(this, this.Parent))
 						.ToArray();
 					
 					return String.Join("; ", errors);

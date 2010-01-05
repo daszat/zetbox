@@ -132,6 +132,19 @@ namespace Kistl.App.Base
             }
         }
 
+        public static void OnGetPropertyTypeString_CalculatedObjectReferenceProperty(CalculatedObjectReferenceProperty obj, MethodReturnEventArgs<string> e)
+        {
+            ObjectClass objClass = obj.ReferencedClass;
+            if (objClass == null)
+            {
+                e.Result = "a class";
+            }
+            else
+            {
+                e.Result = objClass.Module.Namespace + "." + objClass.ClassName;
+            }
+        }
+
         #endregion
 
         #region OnGetParameterType*
@@ -244,33 +257,38 @@ namespace Kistl.App.Base
             var oldTypes = ctx.GetQuery<TypeRef>()
                 .Where(tr => tr.Assembly.ID == assembly.ID)
                 .ToList();
-
-            // load all current references into the context
-            var newTypes = System.Reflection.Assembly
-                .Load(assembly.AssemblyName)
-                .GetExportedTypes()
-                .Where(t => !t.IsGenericTypeDefinition)
-                .Select(t => t.ToRef(ctx))
-                .ToDictionary(tr => tr.ID);
-
-            foreach (var tr in oldTypes)
+            try
             {
-                var type = tr.AsType(false);
-                if (type == null)
+                // load all current references into the context
+                var newTypes = System.Reflection.Assembly
+                    .Load(assembly.AssemblyName)
+                    .GetExportedTypes()
+                    .Where(t => !t.IsGenericTypeDefinition)
+                    .Select(t => t.ToRef(ctx))
+                    .ToDictionary(tr => tr.ID);
+
+                foreach (var tr in oldTypes)
                 {
-                    // TODO: delete+cascade here
-                    Logging.Log.Warn("Should delete " + tr.FullName);
-                    ////ctx.Delete(tr);
-                }
-                else if (!type.IsGenericType)
-                {
-                    if (!newTypes.ContainsKey(tr.ID))
+                    var type = tr.AsType(false);
+                    if (type == null)
                     {
-                        ctx.Delete(tr);
+                        // TODO: delete+cascade here
+                        Logging.Log.Warn("Should delete " + tr.FullName);
+                        ////ctx.Delete(tr);
+                    }
+                    else if (!type.IsGenericType)
+                    {
+                        if (!newTypes.ContainsKey(tr.ID))
+                        {
+                            ctx.Delete(tr);
+                        }
                     }
                 }
             }
-
+            catch (FileNotFoundException ex)
+            {
+                Logging.Log.Warn("Failed to RegenerateTypeRefs", ex);
+            }
         }
 
         public static void OnUpdateParent_TypeRef(TypeRef obj)

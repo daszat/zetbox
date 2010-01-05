@@ -104,15 +104,15 @@ namespace Kistl.App.Base
         private int? _fk_A;
         private Guid? _fk_guid_A = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_CalculatedObjectReference_dependsOn_InputProperties_A", "CalculatedObjectReference")]
+        [EdmRelationshipNavigationProperty("Model", "FK_CalculatedReference_dependsOn_InputProperties_A", "CalculatedReference")]
         public Kistl.App.Base.CalculatedObjectReferenceProperty__Implementation__ A__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Base.CalculatedObjectReferenceProperty__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.CalculatedObjectReferenceProperty__Implementation__>(
-                        "Model.FK_CalculatedObjectReference_dependsOn_InputProperties_A",
-                        "CalculatedObjectReference");
+                        "Model.FK_CalculatedReference_dependsOn_InputProperties_A",
+                        "CalculatedReference");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
                 {
@@ -126,8 +126,8 @@ namespace Kistl.App.Base
             {
                 EntityReference<Kistl.App.Base.CalculatedObjectReferenceProperty__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.CalculatedObjectReferenceProperty__Implementation__>(
-                        "Model.FK_CalculatedObjectReference_dependsOn_InputProperties_A",
-                        "CalculatedObjectReference");
+                        "Model.FK_CalculatedReference_dependsOn_InputProperties_A",
+                        "CalculatedReference");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
                 {
@@ -167,14 +167,14 @@ namespace Kistl.App.Base
         private int? _fk_B;
         private Guid? _fk_guid_B = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_CalculatedObjectReference_dependsOn_InputProperties_B", "InputProperties")]
+        [EdmRelationshipNavigationProperty("Model", "FK_CalculatedReference_dependsOn_InputProperties_B", "InputProperties")]
         public Kistl.App.Base.Property__Implementation__ B__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Base.Property__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Property__Implementation__>(
-                        "Model.FK_CalculatedObjectReference_dependsOn_InputProperties_B",
+                        "Model.FK_CalculatedReference_dependsOn_InputProperties_B",
                         "InputProperties");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -189,7 +189,7 @@ namespace Kistl.App.Base
             {
                 EntityReference<Kistl.App.Base.Property__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Property__Implementation__>(
-                        "Model.FK_CalculatedObjectReference_dependsOn_InputProperties_B",
+                        "Model.FK_CalculatedReference_dependsOn_InputProperties_B",
                         "InputProperties");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
