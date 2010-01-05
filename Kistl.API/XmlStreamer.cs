@@ -273,6 +273,30 @@ namespace Kistl.API
             if (val == null) { throw new ArgumentNullException("val"); }
             if (xml == null) { throw new ArgumentNullException("xml"); }
 
+            if (xml.LocalName == name && xml.NamespaceURI == ns)
+            {
+                using (var entries = xml.ReadSubtree())
+                {
+                    while (entries.Read())
+                    {
+                        if (entries.NodeType == XmlNodeType.Element && entries.LocalName == "CollectionEntry")
+                        {
+                            var obj = new T();
+                            using (var children = xml.ReadSubtree())
+                            {
+                                while (children.Read())
+                                {
+                                    if (children.NodeType == XmlNodeType.Element)
+                                    {
+                                        obj.FromStream(children);
+                                    }
+                                }
+                            }
+                            val.Add(obj);
+                        }
+                    }
+                }
+            }
         }
 
         #endregion

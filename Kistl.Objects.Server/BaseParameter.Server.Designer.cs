@@ -1006,11 +1006,7 @@ namespace Kistl.App.Base
             BinarySerializer.FromStream(out this._IsList, binStream);
             BinarySerializer.FromStream(out this._IsReturnParameter, binStream);
             BinarySerializer.FromStream(out this._fk_Method, binStream);
-            {
-                var tmp = this._Method_pos;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this._Method_pos = tmp;
-            }
+            BinarySerializer.FromStream(out this._Method_pos, binStream);
             BinarySerializer.FromStream(out this._ParameterName, binStream);
         }
 
@@ -1050,11 +1046,7 @@ namespace Kistl.App.Base
             XmlStreamer.FromStream(ref this._IsList, xml, "IsList", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._IsReturnParameter, xml, "IsReturnParameter", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_Method, xml, "Method", "Kistl.App.Base");
-            {
-                var tmp = this._Method_pos;
-                XmlStreamer.FromStream(ref tmp, xml, "Method_pos", "Kistl.App.Base");
-                this._Method_pos = tmp;
-            }
+            XmlStreamer.FromStream(ref this._Method_pos, xml, "Method_pos", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._ParameterName, xml, "ParameterName", "Kistl.App.Base");
         }
 
@@ -1089,11 +1081,7 @@ namespace Kistl.App.Base
             XmlStreamer.FromStream(ref this._IsList, xml, "IsList", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._IsReturnParameter, xml, "IsReturnParameter", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_guid_Method, xml, "Method", "Kistl.App.Base");
-            {
-                var tmp = this._Method_pos;
-                XmlStreamer.FromStream(ref tmp, xml, "Method_pos", "Kistl.App.Base");
-                this._Method_pos = tmp;
-            }
+            XmlStreamer.FromStream(ref this._Method_pos, xml, "Method_pos", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._ParameterName, xml, "ParameterName", "Kistl.App.Base");
         }
 

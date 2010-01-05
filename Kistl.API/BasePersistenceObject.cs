@@ -135,8 +135,6 @@ using System.Xml.Serialization;
         {
             if (xml == null)
                 throw new ArgumentNullException("xml");
-
-            xml.WriteAttributeString("ID", this.ID.ToString());
         }
 
         /// <summary>
@@ -147,22 +145,16 @@ using System.Xml.Serialization;
         {
             if (xml == null)
                 throw new ArgumentNullException("xml");
-
-            xml.WriteAttributeString("ID", this.ID.ToString());
         }
 
         /// <summary>
-        /// Base method for deserializing this Object to XML.
+        /// Base method for deserializing this Object from XML.
         /// </summary>
         /// <param name="xml">Stream to serialize from</param>
         public virtual void FromStream(XmlReader xml)
         {
             if (xml == null)
                 throw new ArgumentNullException("xml");
-
-            // TODO: Da hats was - ist asymetrisch zu FromStream(BinaryReader)
-            if (!this.IsAttached)
-                throw new InvalidOperationException("Xml Deserializing dettached objects is not allowed");
         }
 
         /// <summary>

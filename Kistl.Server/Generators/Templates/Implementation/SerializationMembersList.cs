@@ -83,7 +83,7 @@ namespace Kistl.Server.Generators.Templates.Implementation
         }
 
         /// <summary>
-        /// Add a SimplePropertySerialization entry for this membername
+        /// Add a SimpleFieldSerialization entry for this membername
         /// </summary>
         /// <param name="type"></param>
         /// <param name="xmlns"></param>
@@ -91,7 +91,7 @@ namespace Kistl.Server.Generators.Templates.Implementation
         /// <param name="membername"></param>
         public void Add(SerializerType type, string xmlns, string xmlname, string membername)
         {
-            this.Add(new SerializationMember("Implementation.ObjectClasses.SimplePropertySerialization", type, xmlns, xmlname, membername));
+            this.Add(new SerializationMember("Implementation.ObjectClasses.SimpleFieldSerialization", type, xmlns, xmlname, membername));
         }
     }
 }

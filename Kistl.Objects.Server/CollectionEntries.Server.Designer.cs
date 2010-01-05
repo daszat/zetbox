@@ -223,11 +223,7 @@ namespace Kistl.App.GUI
         {
             
             base.FromStream(binStream);
-            {
-                var tmp = this._ExportGuid;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this._ExportGuid = tmp;
-            }
+            BinarySerializer.FromStream(out this._ExportGuid, binStream);
             BinarySerializer.FromStream(out this._fk_A, binStream);
             BinarySerializer.FromStream(out this._fk_B, binStream);
         }
@@ -245,11 +241,7 @@ namespace Kistl.App.GUI
         {
             
             base.FromStream(xml);
-            {
-                var tmp = this._ExportGuid;
-                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "");
-                this._ExportGuid = tmp;
-            }
+            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "");
             XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.Base");
         }
@@ -264,11 +256,7 @@ namespace Kistl.App.GUI
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
         {
-            {
-                var tmp = this._ExportGuid;
-                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "");
-                this._ExportGuid = tmp;
-            }
+            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "");
             XmlStreamer.FromStream(ref this._fk_guid_A, xml, "A", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._fk_guid_B, xml, "B", "Kistl.App.Base");
         }
@@ -770,11 +758,7 @@ namespace Kistl.App.Base
         {
             
             base.FromStream(binStream);
-            {
-                var tmp = this._ExportGuid;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this._ExportGuid = tmp;
-            }
+            BinarySerializer.FromStream(out this._ExportGuid, binStream);
             BinarySerializer.FromStream(out this._fk_A, binStream);
             BinarySerializer.FromStream(out this._fk_B, binStream);
         }
@@ -792,11 +776,7 @@ namespace Kistl.App.Base
         {
             
             base.FromStream(xml);
-            {
-                var tmp = this._ExportGuid;
-                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "");
-                this._ExportGuid = tmp;
-            }
+            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "");
             XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.Base");
         }
@@ -811,11 +791,7 @@ namespace Kistl.App.Base
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
         {
-            {
-                var tmp = this._ExportGuid;
-                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "");
-                this._ExportGuid = tmp;
-            }
+            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "");
             XmlStreamer.FromStream(ref this._fk_guid_A, xml, "A", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_guid_B, xml, "B", "Kistl.App.Base");
         }
@@ -1074,11 +1050,7 @@ namespace Kistl.App.GUI
         {
             
             base.FromStream(binStream);
-            {
-                var tmp = this._ExportGuid;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this._ExportGuid = tmp;
-            }
+            BinarySerializer.FromStream(out this._ExportGuid, binStream);
             BinarySerializer.FromStream(out this._fk_A, binStream);
             BinarySerializer.FromStream(out this._fk_B, binStream);
         }
@@ -1096,11 +1068,7 @@ namespace Kistl.App.GUI
         {
             
             base.FromStream(xml);
-            {
-                var tmp = this._ExportGuid;
-                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "");
-                this._ExportGuid = tmp;
-            }
+            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "");
             XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.GUI");
         }
@@ -1115,11 +1083,7 @@ namespace Kistl.App.GUI
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
         {
-            {
-                var tmp = this._ExportGuid;
-                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "");
-                this._ExportGuid = tmp;
-            }
+            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "");
             XmlStreamer.FromStream(ref this._fk_guid_A, xml, "A", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._fk_guid_B, xml, "B", "Kistl.App.GUI");
         }
@@ -1416,27 +1380,11 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
             
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._fk_A, binStream);
-            {
-                var tmp = this._A_pos;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this._A_pos = tmp;
-            }
+            BinarySerializer.FromStream(out this._A_pos, binStream);
             BinarySerializer.FromStream(out this._fk_B, binStream);
-            {
-                var tmp = this._B_pos;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this._B_pos = tmp;
-            }
-            {
-                var tmp = this._A_pos;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this._A_pos = tmp;
-            }
-            {
-                var tmp = this._B_pos;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this._B_pos = tmp;
-            }
+            BinarySerializer.FromStream(out this._B_pos, binStream);
+            BinarySerializer.FromStream(out this._A_pos, binStream);
+            BinarySerializer.FromStream(out this._B_pos, binStream);
         }
 
         public override void ToStream(System.Xml.XmlWriter xml)
@@ -1456,27 +1404,11 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
             
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.Projekte");
-            {
-                var tmp = this._A_pos;
-                XmlStreamer.FromStream(ref tmp, xml, "A_pos", "Kistl.App.Projekte");
-                this._A_pos = tmp;
-            }
+            XmlStreamer.FromStream(ref this._A_pos, xml, "A_pos", "Kistl.App.Projekte");
             XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.Projekte");
-            {
-                var tmp = this._B_pos;
-                XmlStreamer.FromStream(ref tmp, xml, "B_pos", "Kistl.App.Projekte");
-                this._B_pos = tmp;
-            }
-            {
-                var tmp = this._A_pos;
-                XmlStreamer.FromStream(ref tmp, xml, "A_pos", "Kistl.App.Projekte");
-                this._A_pos = tmp;
-            }
-            {
-                var tmp = this._B_pos;
-                XmlStreamer.FromStream(ref tmp, xml, "B_pos", "Kistl.App.Projekte");
-                this._B_pos = tmp;
-            }
+            XmlStreamer.FromStream(ref this._B_pos, xml, "B_pos", "Kistl.App.Projekte");
+            XmlStreamer.FromStream(ref this._A_pos, xml, "A_pos", "Kistl.App.Projekte");
+            XmlStreamer.FromStream(ref this._B_pos, xml, "B_pos", "Kistl.App.Projekte");
         }
 
 #endregion
@@ -2049,33 +1981,13 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
         {
             
             base.FromStream(binStream);
-            {
-                var tmp = this._ExportGuid;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this._ExportGuid = tmp;
-            }
+            BinarySerializer.FromStream(out this._ExportGuid, binStream);
             BinarySerializer.FromStream(out this._fk_A, binStream);
-            {
-                var tmp = this._A_pos;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this._A_pos = tmp;
-            }
+            BinarySerializer.FromStream(out this._A_pos, binStream);
             BinarySerializer.FromStream(out this._fk_B, binStream);
-            {
-                var tmp = this._B_pos;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this._B_pos = tmp;
-            }
-            {
-                var tmp = this._A_pos;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this._A_pos = tmp;
-            }
-            {
-                var tmp = this._B_pos;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this._B_pos = tmp;
-            }
+            BinarySerializer.FromStream(out this._B_pos, binStream);
+            BinarySerializer.FromStream(out this._A_pos, binStream);
+            BinarySerializer.FromStream(out this._B_pos, binStream);
         }
 
         public override void ToStream(System.Xml.XmlWriter xml)
@@ -2095,33 +2007,13 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
         {
             
             base.FromStream(xml);
-            {
-                var tmp = this._ExportGuid;
-                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "");
-                this._ExportGuid = tmp;
-            }
+            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "");
             XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.Base");
-            {
-                var tmp = this._A_pos;
-                XmlStreamer.FromStream(ref tmp, xml, "A_pos", "Kistl.App.Base");
-                this._A_pos = tmp;
-            }
+            XmlStreamer.FromStream(ref this._A_pos, xml, "A_pos", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.Base");
-            {
-                var tmp = this._B_pos;
-                XmlStreamer.FromStream(ref tmp, xml, "B_pos", "Kistl.App.Base");
-                this._B_pos = tmp;
-            }
-            {
-                var tmp = this._A_pos;
-                XmlStreamer.FromStream(ref tmp, xml, "A_pos", "Kistl.App.Base");
-                this._A_pos = tmp;
-            }
-            {
-                var tmp = this._B_pos;
-                XmlStreamer.FromStream(ref tmp, xml, "B_pos", "Kistl.App.Base");
-                this._B_pos = tmp;
-            }
+            XmlStreamer.FromStream(ref this._B_pos, xml, "B_pos", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._A_pos, xml, "A_pos", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._B_pos, xml, "B_pos", "Kistl.App.Base");
         }
 
         public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
@@ -2142,33 +2034,13 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
         {
-            {
-                var tmp = this._ExportGuid;
-                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "");
-                this._ExportGuid = tmp;
-            }
+            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "");
             XmlStreamer.FromStream(ref this._fk_guid_A, xml, "A", "Kistl.App.Base");
-            {
-                var tmp = this._A_pos;
-                XmlStreamer.FromStream(ref tmp, xml, "A_pos", "Kistl.App.Base");
-                this._A_pos = tmp;
-            }
+            XmlStreamer.FromStream(ref this._A_pos, xml, "A_pos", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_guid_B, xml, "B", "Kistl.App.Base");
-            {
-                var tmp = this._B_pos;
-                XmlStreamer.FromStream(ref tmp, xml, "B_pos", "Kistl.App.Base");
-                this._B_pos = tmp;
-            }
-            {
-                var tmp = this._A_pos;
-                XmlStreamer.FromStream(ref tmp, xml, "A_pos", "Kistl.App.Base");
-                this._A_pos = tmp;
-            }
-            {
-                var tmp = this._B_pos;
-                XmlStreamer.FromStream(ref tmp, xml, "B_pos", "Kistl.App.Base");
-                this._B_pos = tmp;
-            }
+            XmlStreamer.FromStream(ref this._B_pos, xml, "B_pos", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._A_pos, xml, "A_pos", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._B_pos, xml, "B_pos", "Kistl.App.Base");
         }
 
 #endregion
@@ -3094,11 +2966,7 @@ public string Value { get { return B; } set { B = value; } }
             
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._fk_A, binStream);
-            {
-                var tmp = this._B;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this._B = tmp;
-            }
+            BinarySerializer.FromStream(out this._B, binStream);
         }
 
         public override void ToStream(System.Xml.XmlWriter xml)
@@ -3114,11 +2982,7 @@ public string Value { get { return B; } set { B = value; } }
             
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.Projekte");
-            {
-                var tmp = this._B;
-                XmlStreamer.FromStream(ref tmp, xml, "B", "Kistl.App.Projekte");
-                this._B = tmp;
-            }
+            XmlStreamer.FromStream(ref this._B, xml, "B", "Kistl.App.Projekte");
         }
 
 #endregion
@@ -3300,11 +3164,7 @@ public string Value { get { return B; } set { B = value; } }
             
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._fk_A, binStream);
-            {
-                var tmp = this._B;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this._B = tmp;
-            }
+            BinarySerializer.FromStream(out this._B, binStream);
         }
 
         public override void ToStream(System.Xml.XmlWriter xml)
@@ -3320,11 +3180,7 @@ public string Value { get { return B; } set { B = value; } }
             
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.Base");
-            {
-                var tmp = this._B;
-                XmlStreamer.FromStream(ref tmp, xml, "B", "Kistl.App.Base");
-                this._B = tmp;
-            }
+            XmlStreamer.FromStream(ref this._B, xml, "B", "Kistl.App.Base");
         }
 
 #endregion
