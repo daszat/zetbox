@@ -123,6 +123,54 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.ObjectClass, Kistl.App.Base.ObjectClass> OnBaseObjectClass_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.ObjectClass, Kistl.App.Base.ObjectClass> OnBaseObjectClass_PostSetter;
         /// <summary>
+        /// 
+        /// </summary>
+    /*
+    Relation: FK_Constraint_on_Constrained
+    A: ZeroOrMore InstanceConstraint as Constraint
+    B: ZeroOrOne ObjectClass as Constrained
+    Preferred Storage: MergeIntoA
+    */
+        // object list property
+   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.ObjectListProperty
+	    // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public ICollection<Kistl.App.Base.InstanceConstraint> Constraints
+        {
+            get
+            {
+                if (_ConstraintsWrapper == null)
+                {
+                    _ConstraintsWrapper = new EntityCollectionWrapper<Kistl.App.Base.InstanceConstraint, Kistl.App.Base.InstanceConstraint__Implementation__>(
+                            this.Context, Constraints__Implementation__);
+                }
+                return _ConstraintsWrapper;
+            }
+        }
+        
+        [EdmRelationshipNavigationProperty("Model", "FK_Constraint_on_Constrained", "Constraint")]
+        public EntityCollection<Kistl.App.Base.InstanceConstraint__Implementation__> Constraints__Implementation__
+        {
+            get
+            {
+                var c = ((IEntityWithRelationships)(this)).RelationshipManager
+                    .GetRelatedCollection<Kistl.App.Base.InstanceConstraint__Implementation__>(
+                        "Model.FK_Constraint_on_Constrained",
+                        "Constraint");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !c.IsLoaded)
+                {
+                    c.Load();
+                }
+                return c;
+            }
+        }
+        private EntityCollectionWrapper<Kistl.App.Base.InstanceConstraint, Kistl.App.Base.InstanceConstraint__Implementation__> _ConstraintsWrapper;
+
+
+
+        /// <summary>
         /// The default PresentableModel to use for this ObjectClass
         /// </summary>
     /*
@@ -731,6 +779,15 @@ namespace Kistl.App.Base
 					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("ad060d41-bc7a-41b8-a3e3-ec9302c8c714")).Constraints
 						.Where(c => !c.IsValid(this, this.BaseObjectClass))
 						.Select(c => c.GetErrorText(this, this.BaseObjectClass))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "Constraints":
+				{
+					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("eda15826-7251-4726-9f6b-65e7f24f6ad1")).Constraints
+						.Where(c => !c.IsValid(this, this.Constraints))
+						.Select(c => c.GetErrorText(this, this.Constraints))
 						.ToArray();
 					
 					return String.Join("; ", errors);

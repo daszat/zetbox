@@ -17,6 +17,7 @@
     <EntitySet Name="EnumerationEntry" EntityType="Model.EnumerationEntry" />
     <EntitySet Name="Icon" EntityType="Model.Icon" />
     <EntitySet Name="Identity" EntityType="Model.Identity" />
+    <EntitySet Name="InstanceConstraint" EntityType="Model.InstanceConstraint" />
     <EntitySet Name="Kunde" EntityType="Model.Kunde" />
     <EntitySet Name="Method" EntityType="Model.Method" />
     <EntitySet Name="MethodInvocation" EntityType="Model.MethodInvocation" />
@@ -195,6 +196,10 @@
     <AssociationSet Name="FK_ConstrainedProperty_has_Constraints" Association="Model.FK_ConstrainedProperty_has_Constraints" >
       <End Role="ConstrainedProperty" EntitySet="Property" />
       <End Role="Constraints" EntitySet="Constraint" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Constraint_on_Constrained" Association="Model.FK_Constraint_on_Constrained" >
+      <End Role="Constraint" EntitySet="InstanceConstraint" />
+      <End Role="Constrained" EntitySet="DataType" />
     </AssociationSet>
     <AssociationSet Name="FK_Constraint_was_ChangedBy" Association="Model.FK_Constraint_was_ChangedBy" >
       <End Role="Constraint" EntitySet="Constraint" />
@@ -765,6 +770,12 @@
     <Property Name="Password" Type="String" Nullable="true" MaxLength="100" />
     <Property Name="UserName" Type="String" Nullable="true" MaxLength="100" />
     <Property Name="WCFAccount" Type="String" Nullable="true" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="InstanceConstraint">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="Kunde">
     <Key>
@@ -1414,6 +1425,10 @@
                         Relationship="Model.FK_BaseObjectClass_has_SubClasses"
                         FromRole="SubClasses"
                         ToRole="BaseObjectClass" />
+    <NavigationProperty Name="Constraints__Implementation__"
+                        Relationship="Model.FK_Constraint_on_Constrained"
+                        FromRole="Constrained"
+                        ToRole="Constraint" />
     <NavigationProperty Name="DefaultPresentableModelDescriptor__Implementation__"
                         Relationship="Model.FK_Presentable_has_DefaultPresentableModelDescriptor"
                         FromRole="Presentable"
@@ -2090,6 +2105,14 @@
     <End Role="Constraints"
          Type="Model.Constraint" 
          Multiplicity="*" />
+  </Association>
+  <Association Name="FK_Constraint_on_Constrained" >
+    <End Role="Constraint"
+         Type="Model.InstanceConstraint" 
+         Multiplicity="*" />
+    <End Role="Constrained"
+         Type="Model.ObjectClass" 
+         Multiplicity="0..1" />
   </Association>
   <Association Name="FK_Constraint_was_ChangedBy" >
     <End Role="Constraint"

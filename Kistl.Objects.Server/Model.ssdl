@@ -21,6 +21,7 @@
     <EntitySet Name="EnumerationEntry" EntityType="Model.Store.EnumerationEntry" Table="EnumerationEntries"/>
     <EntitySet Name="Icon" EntityType="Model.Store.Icon" Table="Icons"/>
     <EntitySet Name="Identity" EntityType="Model.Store.Identity" Table="Identities"/>
+    <EntitySet Name="InstanceConstraint" EntityType="Model.Store.InstanceConstraint" Table="InstanceConstraint"/>
     <EntitySet Name="Kunde" EntityType="Model.Store.Kunde" Table="Kunden"/>
     <EntitySet Name="Method" EntityType="Model.Store.Method" Table="Methods"/>
     <EntitySet Name="MethodInvocation" EntityType="Model.Store.MethodInvocation" Table="MethodInvocations"/>
@@ -611,6 +612,10 @@
     <AssociationSet Name="FK_ConstrainedProperty_has_Constraints" Association="Model.Store.FK_ConstrainedProperty_has_Constraints" >
       <End Role="ConstrainedProperty" EntitySet="Property" />
       <End Role="Constraints" EntitySet="Constraint" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Constraint_on_Constrained" Association="Model.Store.FK_Constraint_on_Constrained" >
+      <End Role="Constraint" EntitySet="InstanceConstraint" />
+      <End Role="Constrained" EntitySet="ObjectClass" />
     </AssociationSet>
     <AssociationSet Name="FK_Constraint_was_ChangedBy" Association="Model.Store.FK_Constraint_was_ChangedBy" >
       <End Role="Constraint" EntitySet="Constraint" />
@@ -1251,6 +1256,14 @@
     <Property Name="Password" Type="nvarchar" MaxLength="100" Nullable="true" />
     <Property Name="UserName" Type="nvarchar" MaxLength="100" Nullable="true" />
     <Property Name="WCFAccount" Type="nvarchar" MaxLength="100" Nullable="true" />
+  </EntityType>
+	
+  <EntityType Name="InstanceConstraint">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_Constrained" Type="int" />
   </EntityType>
 	
   <EntityType Name="IntegerRangeConstraint">
@@ -2390,6 +2403,21 @@
       </Principal>
       <Dependent Role="Constraints">
         <PropertyRef Name="fk_ConstrainedProperty" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_Constraint_on_Constrained">
+    <End Role="Constrained" Type="Model.Store.ObjectClass" Multiplicity="0..1" />
+    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
+    <End Role="Constraint" Type="Model.Store.InstanceConstraint" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Constrained">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Constraint">
+        <PropertyRef Name="fk_Constrained" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

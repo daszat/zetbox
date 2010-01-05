@@ -203,6 +203,21 @@ using Kistl.DALProvider.EF;
 
 
 	/*
+    Relation: FK_Constraint_on_Constrained
+    A: ZeroOrMore InstanceConstraint as Constraint
+    B: ZeroOrOne ObjectClass as Constrained
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_Constraint_on_Constrained",
+    "Constraint", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.InstanceConstraint__Implementation__),
+    "Constrained", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.ObjectClass__Implementation__)
+    )]
+
+
+	/*
     Relation: FK_Constraint_was_ChangedBy
     A: ZeroOrMore Constraint as Constraint
     B: ZeroOrOne Identity as ChangedBy

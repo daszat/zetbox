@@ -353,6 +353,13 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="InstanceConstraint">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.InstanceConstraint)">
+	    <MappingFragment StoreEntitySet="InstanceConstraint">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Kunde">
       <EntityTypeMapping TypeName="IsTypeOf(Model.Kunde)">
 	    <MappingFragment StoreEntitySet="Kunde">
@@ -1279,6 +1286,23 @@
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="fk_ConstrainedProperty" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_Constraint_on_Constrained
+    A: ZeroOrMore InstanceConstraint as Constraint
+    B: ZeroOrOne ObjectClass as Constrained
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_Constraint_on_Constrained"
+                           TypeName="Model.FK_Constraint_on_Constrained"
+                           StoreEntitySet="InstanceConstraint" >
+      <EndProperty Name="Constrained">
+        <ScalarProperty Name="ID" ColumnName="fk_Constrained"/>
+      </EndProperty>
+      <EndProperty Name="Constraint">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_Constrained" IsNull="false"/>
     </AssociationSetMapping>
     <!--
     Relation: FK_Constraint_was_ChangedBy

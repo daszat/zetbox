@@ -286,6 +286,16 @@ namespace Kistl.App.Base
 			}
 		}
 		
+		/// <summary>List of all InstanceConstraint</summary>
+		/// 
+		public IQueryable<InstanceConstraint> InstanceConstraint
+		{ 
+			get
+			{
+				return Context.GetQuery<InstanceConstraint>();
+			}
+		}
+		
 		/// <summary>List of all Identity</summary>
 		/// Represents an Identity
 		public IQueryable<Identity> Identities
