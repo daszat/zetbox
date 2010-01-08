@@ -261,6 +261,13 @@ namespace Kistl.DalProvider.Frozen
         /// </summary>
         public virtual void NotifyDeleting() { }
 
+        /// <summary>
+        /// Reflects the current access rights by the current Identity. 
+        /// Returnes allways Full
+        /// </summary>
+        public AccessRights CurrentAccessRights { get { return AccessRights.Full; } }
+
+
         #region IDataErrorInfo Members
 
         /// <summary>

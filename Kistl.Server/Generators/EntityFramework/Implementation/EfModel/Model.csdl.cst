@@ -91,7 +91,16 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
-<% ApplyEntityTypeFieldDefs(cls.Properties.Cast<Property>()); %>
+<% 
+		ApplyEntityTypeFieldDefs(cls.Properties.Cast<Property>());
+		if(cls.HasSecurityRules(false))
+		{
+%>
+    <Property Name="CurrentIdentity<%= Kistl.API.Helper.ImplementationSuffix %>" Type="Int32" Nullable="false" />
+    <Property Name="CurrentAccessRights<%= Kistl.API.Helper.ImplementationSuffix %>" Type="Int32" Nullable="false" />
+<%	
+		}
+%>
   </EntityType>
 <%
     }

@@ -82,6 +82,11 @@ namespace Kistl.API.Server
         /// </summary>
         public virtual void NotifyDeleting() { }
 
+        /// <summary>
+        /// Reflects the current access rights by the current Identity. 
+        /// Base implementations returnes allways Full
+        /// </summary>
+        public virtual AccessRights CurrentAccessRights { get { return AccessRights.Full; } }
     }
 
     /// <summary>

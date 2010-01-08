@@ -61,6 +61,22 @@ namespace Kistl.API
     }
 
     /// <summary>
+    /// Describes access rights
+    /// </summary>
+    [Flags]
+    public enum AccessRights
+    {
+        None    = 0x00,
+        Read    = 0x01,
+        Write   = 0x02,
+        Delete  = 0x04,
+        Create  = 0x08,
+
+        Full    = Read | Write | Delete | Create,
+        Change  = Read | Write,
+    }
+
+    /// <summary>
     /// Interface for Exporting/Importing Objects with XML
     /// </summary>
     public interface IExportableInternal
@@ -233,6 +249,11 @@ namespace Kistl.API
         /// Fires an Event before an Object is deleted.
         /// </summary>
         void NotifyDeleting();
+
+        /// <summary>
+        /// Reflects the current access rights by the current Identity. 
+        /// </summary>
+        AccessRights CurrentAccessRights { get; }
     }
 
     /// <summary>

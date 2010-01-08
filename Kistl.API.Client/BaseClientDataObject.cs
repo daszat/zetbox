@@ -141,6 +141,11 @@ namespace Kistl.API.Client
         {
             throw new MemberAccessException(String.Format("No {0} property in {1}", propertyName, GetInterfaceType().Type.FullName));
         }
+
+        /// <summary>
+        /// Reflects the current access rights by the current Identity. 
+        /// </summary>
+        public AccessRights CurrentAccessRights { get; protected set; }
     }
 
     public abstract class BaseClientCollectionEntry : BaseClientPersistenceObject

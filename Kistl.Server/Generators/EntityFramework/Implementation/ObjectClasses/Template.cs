@@ -171,6 +171,36 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses
         {
             base.ApplyClassTailTemplate();
             Implementation.ObjectClasses.ReloadReferences.Call(Host, ctx, this.DataType);
+
+            ApplySecurityRulesProperties();
+        }
+
+        private void ApplySecurityRulesProperties()
+        {
+            if (this.DataType is ObjectClass)
+            {
+                ObjectClass cls = (ObjectClass)this.DataType;
+
+                if (cls.HasSecurityRules(false))
+                {
+                    if (cls.BaseObjectClass != null)
+                    {
+                        // TODO: Currently only Basesclasses are supported
+                        throw new NotSupportedException("Security Rules for derived classes are not supported yet");
+                    }
+
+                    WriteLine();
+                    WriteLine();
+
+                    WriteLine("        public override AccessRights CurrentAccessRights {{ get {{ return (AccessRights)CurrentAccessRights{0}; }} }}", Kistl.API.Helper.ImplementationSuffix);
+
+                    WriteLine("        [EdmScalarProperty(IsNullable=false)]");
+                    WriteLine("        public int CurrentAccessRights{0} {{ get; set; }}", Kistl.API.Helper.ImplementationSuffix);
+
+                    WriteLine("        [EdmScalarProperty(IsNullable=false)]");
+                    WriteLine("        public int CurrentIdentity{0} {{ get; set; }}", Kistl.API.Helper.ImplementationSuffix);
+                }
+            }
         }
     }
 }

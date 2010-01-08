@@ -27,7 +27,14 @@
 	{
 %>
     <EntitySet Name="<%= cls.ClassName %>" EntityType="Model.Store.<%= cls.ClassName %>" Table="<%= cls.TableName %>"/>
-<%	}
+<%	
+		if(cls.HasSecurityRules(false))
+		{
+%>
+    <EntitySet Name="<%= cls.ClassName %>_Rights" EntityType="Model.Store.<%= cls.ClassName %>_Rights" Table="<%= Construct.SecurityRulesTableName(cls) %>"/>
+<%	
+		}
+	}
 %>
 
     <!-- EntitySets for all derived classes and their inheritance AssociationSets -->
@@ -42,8 +49,14 @@
       <End Role="<%= info.ParentRoleName %>" EntitySet="<%= info.ParentEntitySetName %>" />
       <End Role="<%= info.ChildRoleName %>" EntitySet="<%= info.ChildEntitySetName %>" />
     </AssociationSet>
-    
-<%	}
+<%	
+		if(cls.HasSecurityRules(false))
+		{
+%>
+    <EntitySet Name="<%= cls.ClassName %>_Rights" EntityType="Model.Store.<%= cls.ClassName %>_Rights" Table="<%= Construct.SecurityRulesTableName(cls) %>"/>
+<%	
+		}
+	}
 %>
 
     <!-- EntitySets and AssociationSet for all object-object CollectionEntrys -->
@@ -129,7 +142,21 @@
 		ApplyEntityTypeColumnDefs(cls);
 %>
   </EntityType>
-<%	}
+<%	
+		if(cls.HasSecurityRules(false))
+		{
+%>
+  <EntityType Name="<%= cls.ClassName %>_Rights">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="Identity" Type="int" Nullable="false" />
+    <Property Name="Right" Type="int" Nullable="false" />
+  </EntityType>
+<%	
+		}
+	}
 %>
 
   <!-- EntityTypes for all object-object CollectionEntrys with their associations -->
