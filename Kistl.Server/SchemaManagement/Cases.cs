@@ -62,6 +62,11 @@ namespace Kistl.Server.SchemaManagement
         }
         public void DoDeleteObjectClass(ObjectClass objClass)
         {
+            if (objClass.HasSecurityRules(false))
+            {
+                DoDeleteObjectClassSecurityRules(objClass);
+            }
+
             Log.InfoFormat("Drop Table: {0}", objClass.TableName);
             db.DropTable(objClass.TableName);
         }
@@ -863,6 +868,44 @@ namespace Kistl.Server.SchemaManagement
             Log.InfoFormat("Remove ObjectClass Inheritance: {0} -> {1}: {2}", savedObjClass.ClassName, savedObjClass.BaseObjectClass.ClassName, assocName);
 
             db.DropFKConstraint(tblName, assocName);
+        }
+        #endregion
+
+        #region NewObjectClassSecurityRules
+        public bool IsNewObjectClassSecurityRules(ObjectClass objClass)
+        {
+            if (!objClass.HasSecurityRules(false)) return false;
+            ObjectClass savedObjClass = savedSchema.FindPersistenceObject<ObjectClass>(objClass.ExportGuid);
+            return savedObjClass == null || !savedObjClass.HasSecurityRules(false);
+        }
+        public void DoNewObjectClassSecurityRules(ObjectClass objClass)
+        {
+            Log.InfoFormat("New ObjectClass Security Rules: {0}", objClass.ClassName);
+            string tblName = Construct.SecurityRulesTableName(objClass);
+
+            db.CreateTable(tblName, false, false);
+            db.CreateColumn(tblName, "Identity", System.Data.DbType.Int32, 0, false);
+            db.CreateColumn(tblName, "Right", System.Data.DbType.Int32, 0, false);
+
+            db.CreateIndex(tblName, Construct.SecurityRulesIndexName(objClass), true, true, "ID", "Identity");
+            db.CreateFKConstraint(tblName, objClass.TableName, "ID", Construct.SecurityRulesFKName(objClass), true);
+        }
+        #endregion
+
+        #region DeleteObjectClassSecurityRules
+        public bool IsDeleteObjectClassSecurityRules(ObjectClass objClass)
+        {
+            if (objClass.HasSecurityRules(false)) return false;
+            ObjectClass savedObjClass = savedSchema.FindPersistenceObject<ObjectClass>(objClass.ExportGuid);
+            return savedObjClass != null && savedObjClass.HasSecurityRules(false);
+        }
+        public void DoDeleteObjectClassSecurityRules(ObjectClass objClass)
+        {
+            string tblName = Construct.SecurityRulesTableName(objClass);
+
+            Log.InfoFormat("Delete ObjectClass Security Rules: {0}", objClass.ClassName);
+
+            db.DropTable(tblName);
         }
         #endregion
 

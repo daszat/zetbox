@@ -77,6 +77,14 @@ namespace Kistl.Server.SchemaManagement
                 {
                     Case.DoRenameObjectClassTable(objClass);
                 }
+                if (Case.IsNewObjectClassSecurityRules(objClass))
+                {
+                    Case.DoNewObjectClassSecurityRules(objClass);
+                }
+                if (Case.IsDeleteObjectClassSecurityRules(objClass))
+                {
+                    Case.DoDeleteObjectClassSecurityRules(objClass);
+                }
 
                 UpdateColumns(objClass, objClass.Properties, String.Empty);
                 UpdateDeletedColumns(objClass, String.Empty);

@@ -34,6 +34,7 @@ namespace Kistl.API.Server
         IEnumerable<TableConstraintNamePair> GetFKConstraintNames();
 
         void CreateTable(string tblName, bool idAsIdentityColumn);
+        void CreateTable(string tblName, bool idAsIdentityColumn, bool createPrimaryKey);
         void CreateColumn(string tblName, string colName, System.Data.DbType type, int size, bool isNullable);
         void AlterColumn(string tblName, string colName, System.Data.DbType type, int size, bool isNullable);
         void CreateFKConstraint(string tblName, string refTblName, string colName, string constraintName, bool onDeleteCascade);
@@ -43,5 +44,7 @@ namespace Kistl.API.Server
         void DropFKConstraint(string tblName, string fkName);
 
         void CopyColumnData(string srcTblName, string srcColName, string tblName, string colName);
+
+        void CreateIndex(string tblName, string idxName, bool unique, bool clustered, params string[] columns);
     }
 }

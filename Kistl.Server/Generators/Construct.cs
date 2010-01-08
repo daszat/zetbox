@@ -104,5 +104,21 @@ namespace Kistl.Server.Generators
         }
         #endregion
 
+        #region SecurityRules
+        public static string SecurityRulesTableName(ObjectClass objClass)
+        {
+            return objClass.TableName + "_Rights";
+        }
+
+        public static string SecurityRulesIndexName(ObjectClass objClass)
+        {
+            return "IDX_" + SecurityRulesTableName(objClass);
+        }
+
+        public static string SecurityRulesFKName(ObjectClass objClass)
+        {
+            return "FK_" + SecurityRulesTableName(objClass);
+        }
+        #endregion
     }
 }

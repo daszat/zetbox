@@ -243,18 +243,27 @@ namespace Kistl.Server.SchemaManagement.SchemaProvider.SQLServer
 
         public void CreateTable(string tblName, bool idAsIdentityColumn)
         {
+            CreateTable(tblName, idAsIdentityColumn, true);
+        }
+
+        public void CreateTable(string tblName, bool idAsIdentityColumn, bool createPrimaryKey)
+        {
             StringBuilder sb = new StringBuilder();
             sb.AppendFormat("CREATE TABLE [{0}] ( ", tblName);
             if (idAsIdentityColumn)
             {
-                sb.AppendLine("[ID] [int] IDENTITY(1,1) NOT NULL, ");
+                sb.AppendLine("[ID] [int] IDENTITY(1,1) NOT NULL");
             }
             else
             {
-                sb.AppendLine("[ID] [int] NOT NULL, ");
+                sb.AppendLine("[ID] [int] NOT NULL");
             }
 
-            sb.AppendFormat("CONSTRAINT [PK_{0}] PRIMARY KEY CLUSTERED ( [ID] ASC )", tblName);
+            if (createPrimaryKey)
+            {
+                sb.AppendFormat(", CONSTRAINT [PK_{0}] PRIMARY KEY CLUSTERED ( [ID] ASC )", tblName);
+            }
+
             sb.AppendLine();
             sb.Append(")");
 
@@ -339,6 +348,16 @@ namespace Kistl.Server.SchemaManagement.SchemaProvider.SQLServer
         {
             ExecuteNonQuery("UPDATE dest SET dest.[{0}] = src.[{1}] FROM [{2}] dest INNER JOIN [{3}] src ON dest.ID = src.ID",
                 colName, srcColName, tblName, srcTblName);
+        }
+
+        public void CreateIndex(string tblName, string idxName, bool unique, bool clustered, params string[] columns)
+        {
+            ExecuteNonQuery("CREATE {0} {1} INDEX {2} ON [{3}] ({4})",
+                unique ? "UNIQUE" : string.Empty,
+                clustered ? "CLUSTERED" : string.Empty,
+                idxName,
+                tblName,
+                string.Join(", ", columns.Select(c => "[" + c + "]").ToArray()));
         }
     }
 }

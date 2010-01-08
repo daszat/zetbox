@@ -84,6 +84,11 @@ namespace Kistl.Server.SchemaManagement
                             .ToList()
                             .Select(r => r.GetRelationTableName()));
 
+            // All Security Rules Rights Tables
+            tableNames.AddRange(schema.GetQuery<ObjectClass>().ToList()
+                .Where(o => o.HasSecurityRules(false))
+                .Select(o => Construct.SecurityRulesTableName(o)));
+
             foreach (string tblName in db.GetTableNames())
             {
                 if (!tableNames.Contains(tblName))
@@ -151,6 +156,11 @@ namespace Kistl.Server.SchemaManagement
             foreach (ValueTypeProperty prop in schema.GetQuery<ValueTypeProperty>().Where(p => p.IsList))
             {
                 relationNames.Add(prop.GetAssociationName());
+            }
+
+            foreach (ObjectClass objClass in schema.GetQuery<ObjectClass>().ToList().Where(o => o.HasSecurityRules(false)))
+            {
+                relationNames.Add(Construct.SecurityRulesFKName(objClass));
             }
 
             foreach (var rel in db.GetFKConstraintNames())
@@ -359,10 +369,26 @@ namespace Kistl.Server.SchemaManagement
                     CheckColumns(objClass, objClass.Properties, String.Empty);
                     CheckValueTypeCollections(objClass);
                     CheckExtraColumns(objClass);
+                    CheckTableSecurityRules(objClass);
                 }
                 else
                 {
                     Log.WarnFormat("Table '{0}' is missing", objClass.TableName);
+                }
+            }
+        }
+
+        private void CheckTableSecurityRules(ObjectClass objClass)
+        {
+            if (objClass.HasSecurityRules(false))
+            {
+                if (!db.CheckTableExists(Construct.SecurityRulesTableName(objClass)))
+                {
+                    Log.WarnFormat("Security Rules Table '{0}' is missing", Construct.SecurityRulesTableName(objClass));
+                    if (repair)
+                    {
+                        Case.DoNewObjectClassSecurityRules(objClass);
+                    }
                 }
             }
         }

@@ -91,6 +91,23 @@ namespace Kistl.App.Extensions
             }
             return false;
         }
+        
+        public static bool HasSecurityRules(this ObjectClass cls)
+        {
+            return HasSecurityRules(cls, true);
+        }
+        
+        public static bool HasSecurityRules(this ObjectClass cls, bool lookupInBase)
+        {
+            while (cls != null)
+            {
+                if (cls.SecurityRules.Count > 0)
+                    return true;
+                if (!lookupInBase) return false;
+                cls = cls.BaseObjectClass;
+            }
+            return false;
+        }
 
         public static InterfaceType GetDescribedInterfaceType(this ObjectClass cls)
         {
