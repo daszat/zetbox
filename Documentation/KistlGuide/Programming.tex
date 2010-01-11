@@ -165,6 +165,58 @@ integer slider control should lookup the minimal and maximal allowed
 values in the underlying \emph{IntegerRangeConstraint} while an
 ExtendedYesNoCheckbox has no other place to retrieve the new label.
 
+\subsection{Asynchronous Loading}
+
+\emph{Not yet implemented.}
+
+To facilitate low-latency user interfaces, the ViewModels should implement a
+thin proxy layer to delegate all potential blocking operations onto a worker
+thread. To keep programming this layer easy, there are a few helper classes and
+a few constraints on the available interface mechanisms as well as a consistent
+contract over all compliant ViewModels.
+
+There are only three ways to communicate over the \emph{thread gap}:
+\begin{enumerate}
+\item{accessing a property}
+\item{calling a \emph{void} function (with not \emph{out} or \emph{ref} parameters)}
+\item{having an \emph{EventHandler} called}
+\end{enumerate}
+
+All compliant ViewModels provide a \emph{IsLoading} property that signifies
+whether any background processing is active. While this property is true, any
+value read from a property may be stale and/or about to be replaced. Changes to
+the visible value of a property are always reported via the
+\emph{PropertyChanged} event from the \emph{INotifyPropertyChanged} interface.
+This should suffice for enabling binding frameworks to show current values to
+the user: When reading a value from a property, a cached value is returned
+immediately and optionally a refresh is triggered, which in turn may cause a
+PropertyChanged event a little bit later.
+
+In the case of time-dependent values, the ViewModel has to take care
+to establish a periodic refresh timer\footnote{Todo: such a timer should be
+provided by the infrastructure for platform dependent refreshing} which
+triggers PropertyChanged events when new values arrive.
+
+Similarily, methods called on the ViewModel do not actually do their work
+immediately, but delegate to the background worker thread. Results either show
+up automatically through changed properties and the PropertyChanged event or
+via specialized events.
+
+\subsubsection{Thread Safety}
+
+The ViewModel is designed to be accessed from a single UI thread. Due to the
+low latency of the public interface, this should pose no problem. The ViewModel
+internally takes care of all synchronization with the worker thread. Due to the
+asynchronicity of the underlying data it is quite possible that the values of
+properties change while a method on the UI thread is currently executing.
+
+\subsubsection{Automatic Generation}
+
+Due to the restricted set of operations allowed, the proxy can and should be
+automatically generated, freeing the ViewModel from the intricacies of
+synchronizing and delegating across thread boundaries. Special needs like
+callback parameters and time-dependent values have to be communicated via
+special Attributes.
 
 \section{Core Kistl Development Environment}
 
