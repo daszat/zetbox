@@ -19,7 +19,15 @@ namespace Kistl.App.Extensions
             if (obj == null) { throw new ArgumentNullException("obj"); }
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
 
-            Type type = obj.GetInterfaceType().Type;
+            return GetObjectClass(obj.GetInterfaceType(), ctx);
+        }
+
+        public static ObjectClass GetObjectClass(this InterfaceType ifType, IKistlContext ctx)
+        {
+            if (ifType == null) { throw new ArgumentNullException("obj"); }
+            if (ctx == null) { throw new ArgumentNullException("ctx"); }
+
+            Type type = ifType.Type;
             ObjectClass result;
             if (ctx == FrozenContext.Single)
             {

@@ -153,7 +153,7 @@ namespace Kistl.API
             return Expression.TypeIs(Visit(b.Expression), b.TypeOperand);
         }
 
-        protected virtual ConstantExpression VisitConstant(ConstantExpression c)
+        protected virtual Expression VisitConstant(ConstantExpression c)
         {
             return c;
         }

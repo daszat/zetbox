@@ -8,6 +8,7 @@ using System.Reflection;
 using System.Collections.ObjectModel;
 using Kistl.API;
 using Kistl.API.Utils;
+using Kistl.App.Extensions;
 
 namespace Kistl.API.Server
 {
@@ -235,17 +236,43 @@ namespace Kistl.API.Server
             return Expression.TypeIs(b.Expression, b.TypeOperand.ToImplementationType());
         }
 
-        protected override ConstantExpression VisitConstant(ConstantExpression c)
+        protected override Expression VisitConstant(ConstantExpression c)
         {
-            c = base.VisitConstant(c);
             if (c.Type.IsGenericType && c.Type.GetGenericTypeDefinition() == typeof(QueryTranslator<>))
             {
-                ConstantExpression s = (ConstantExpression)_source.Expression;
-                return Expression.Constant(s.Value, s.Type);
+                Expression result = _source.Expression;
+                result = AddSecurityFilter(result, new InterfaceType(c.Type.GetGenericArguments().Single()));
+                return result;
             }
             else
             {
-                return Expression.Constant(c.Value);
+                return base.VisitConstant(c);
+            }
+        }
+
+        private Expression AddSecurityFilter(Expression e, InterfaceType ifType)
+        {
+            var objClass = ifType.GetObjectClass(FrozenContext.Single);
+            if (objClass.HasSecurityRules())
+            {
+                var identity = IdentityProviderFactory.GetProvider().LoadIdentity(this._ctx.GetQuery<Kistl.App.Base.Identity>(), System.Threading.Thread.CurrentPrincipal.Identity);
+                if (identity == null) throw new System.Security.SecurityException(string.Format("Accessing type '{0}' without an Identity is not allowed", ifType.ToString()));
+
+                ParameterExpression pe = Expression.Parameter(typeof(T), "p");
+                var filter = Expression.Lambda<Func<T, bool>>(
+                            Expression.Equal(
+                                Expression.PropertyOrField(e, "CurrentIdentity" + Kistl.API.Helper.ImplementationSuffix),
+                                Expression.Constant(identity.ID),
+                                false,
+                                typeof(T).GetMethod("op_Equality")),
+                            new ParameterExpression[] { pe });
+
+                var result = Expression.Call(typeof(Queryable), "Where", new Type[] { e.Type }, e, filter);
+                return result;
+            }
+            else
+            {
+                return e;
             }
         }
 
@@ -263,7 +290,7 @@ namespace Kistl.API.Server
         {
             // e might be null if m.Member is a static reference
             Expression e = base.Visit(m.Expression);
-            
+
             string memberName = m.Member.Name;
             Type declaringType;
             if (e is ParameterExpression)
