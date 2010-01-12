@@ -241,7 +241,7 @@ namespace Kistl.API.Server
             if (c.Type.IsGenericType && c.Type.GetGenericTypeDefinition() == typeof(QueryTranslator<>))
             {
                 Expression result = _source.Expression;
-                result = AddSecurityFilter(result, new InterfaceType(c.Type.GetGenericArguments().Single()));
+                //result = AddSecurityFilter(result, new InterfaceType(c.Type.GetGenericArguments().Single()));
                 return result;
             }
             else
