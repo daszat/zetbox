@@ -12,6 +12,7 @@ using Kistl.Client;
 
 using NUnit.Framework;
 using NUnit.Framework.Constraints;
+using System.Reflection;
 
 namespace Kistl.IntegrationTests
 {
@@ -37,8 +38,9 @@ namespace Kistl.IntegrationTests
                     manager.Start(config);
 
                     AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
-                    var testCtx = new GuiApplicationContext(config, "WPF");
-
+                    Assembly interfaces = Assembly.Load("Kistl.Objects");
+                    Assembly implementation = Assembly.Load("Kistl.Objects.Client");
+                    var testCtx = new GuiApplicationContext(config, "WPF", () => new MemoryContext(interfaces, implementation));
                 }
                 catch (Exception error)
                 {

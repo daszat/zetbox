@@ -1,12 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Windows.Forms;
 
+using Kistl.API;
 using Kistl.API.Client;
 using Kistl.API.Configuration;
 using Kistl.Client.Presentables;
-using Kistl.API;
 
 namespace Kistl.Client.Forms
 {
@@ -21,7 +22,9 @@ namespace Kistl.Client.Forms
         {
             var config = KistlConfig.FromFile(String.Empty);
             AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
-            AppContext = new GuiApplicationContext(config, "TEST");
+            Assembly interfaces = Assembly.Load("Kistl.Objects");
+            Assembly implementation = Assembly.Load("Kistl.Objects.Client");
+            AppContext = new GuiApplicationContext(config, "TEST", () => new MemoryContext(interfaces, implementation));
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

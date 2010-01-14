@@ -38,6 +38,10 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac, Version=1.4.5.676, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\AutoFac 1.4\Autofac.dll</HintPath>
+    </Reference>
     <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libs\log4net.dll</HintPath>
@@ -63,12 +67,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseServerDataObject_EntityFramework.cs" />
+    <Compile Include="EfProvider.cs" />
     <Compile Include="EfSerializer.cs" />
     <Compile Include="CollectionWrapperImplementations.cs" />
     <Compile Include="EFValueCollectionWrapper.cs" />
     <Compile Include="EntityCollectionWrapper.cs" />
     <Compile Include="KistlDataContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SchemaProvider.cs" />
     <Compile Include="ServerObjectHandler.cs" />
   </ItemGroup>
   <ItemGroup>

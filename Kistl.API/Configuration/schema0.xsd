@@ -16,8 +16,9 @@
       <xs:element minOccurs="0" maxOccurs="1" name="DocumentStore" type="xs:string" />
       <xs:element minOccurs="0" maxOccurs="1" name="LogFilePath" type="xs:string" />
       <xs:element minOccurs="0" maxOccurs="1" name="CodeGenWorkingPath" type="xs:string" />
-      <xs:element minOccurs="0" maxOccurs="1" name="CodeGenOutputPath" type="xs:string" />
-      <xs:element minOccurs="0" maxOccurs="1" name="CodeGenArchivePath" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="CodeGenOutputPath" nillable="true" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="CodeGenArchivePath" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="StoreProvider" type="xs:string" />
       <xs:element minOccurs="0" maxOccurs="1" name="KistlDataContextType" type="xs:string" />
       <xs:element minOccurs="0" maxOccurs="1" name="ServerObjectHandlerType" type="xs:string" />
       <xs:element minOccurs="0" maxOccurs="1" name="ServerObjectSetHandlerType" type="xs:string" />

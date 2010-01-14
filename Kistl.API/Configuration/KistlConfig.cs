@@ -133,6 +133,12 @@ namespace Kistl.API.Configuration
             [XmlElement(IsNullable = true)]
             public string CodeGenArchivePath { get; set; }
 
+            /// <summary>
+            /// KistlStore Provider Name
+            /// </summary>
+            [XmlElement(IsNullable = false)]
+            public string StoreProvider { get; set; }
+
             [XmlElement(IsNullable = false)]
             public string KistlDataContextType { get; set; }
 

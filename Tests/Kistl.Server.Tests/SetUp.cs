@@ -6,6 +6,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
+using Autofac;
+using Autofac.Builder;
+
 using Kistl.API;
 using Kistl.API.Configuration;
 using Kistl.API.Utils;
@@ -21,6 +24,7 @@ namespace Kistl.Server.Tests
     {
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Tests.Server.SetUp");
 
+        private IContainer container;
         private Server manager;
 
         [SetUp]
@@ -32,7 +36,14 @@ namespace Kistl.Server.Tests
 
                 ResetDatabase(config);
 
-                manager = new Server();
+                var builder = new ContainerBuilder();
+                builder.RegisterModule((IModule)Activator.CreateInstance(Type.GetType(config.Server.StoreProvider)));
+                builder.RegisterModule(new ServerModule());
+
+                container = builder.Build();
+
+                manager = container.Resolve<Server>();
+
                 manager.Start(config);
             }
         }
@@ -48,6 +59,7 @@ namespace Kistl.Server.Tests
                     {
                         manager.Stop();
                         manager = null;
+                        container.Dispose();
                     }
                 }
             }

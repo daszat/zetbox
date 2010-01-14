@@ -27,12 +27,14 @@ namespace Kistl.Server.SchemaManagement
         #endregion
 
         #region Constructor
-        public SchemaManager(IKistlContext schema)
+
+        public SchemaManager(ISchemaProvider provider, IKistlContext schema, MemoryContext.ConfiguringFactory memoryContextFactory)
         {
             this.schema = schema;
-            db = GetProvider();
-            Case = new Cases(schema, db);
+            this.db = provider;
+            this.Case = new Cases(schema, provider, memoryContextFactory);
         }
+
         #endregion
 
         #region IDisposable Members
@@ -47,10 +49,6 @@ namespace Kistl.Server.SchemaManagement
         #endregion
 
         #region Private Functions
-        private static ISchemaProvider GetProvider()
-        {
-            return new SchemaProvider.SQLServer.SchemaProvider();
-        }
 
         private void WriteReportHeader(string reportName)
         {
@@ -59,6 +57,7 @@ namespace Kistl.Server.SchemaManagement
             Log.InfoFormat("Database: {0}", ApplicationContext.Current.Configuration.Server.ConnectionString);
             Log.Info(String.Empty);
         }
+
         #endregion
 
         #region GetDbType
@@ -104,18 +103,15 @@ namespace Kistl.Server.SchemaManagement
         #endregion
 
         #region SavedSchema
-        public static IKistlContext GetSavedSchema()
+        public static IKistlContext GetSavedSchema(ISchemaProvider provider, MemoryContext.ConfiguringFactory memoryContextFactory)
         {
-            IKistlContext ctx = new MemoryContext();
-            using (ISchemaProvider db = GetProvider())
+            IKistlContext ctx = memoryContextFactory();
+            string schema = provider.GetSavedSchema().TrimEnd((char)0); // Trim possible C++/Database/whatever ending 0 char
+            if (!string.IsNullOrEmpty(schema))
             {
-                string schema = db.GetSavedSchema().TrimEnd((char)0); // Trim possible C++/Database/whatever ending 0 char
-                if (!string.IsNullOrEmpty(schema))
+                using (var ms = new MemoryStream(ASCIIEncoding.Default.GetBytes(schema)))
                 {
-                    using (var ms = new MemoryStream(ASCIIEncoding.Default.GetBytes(schema)))
-                    {
-                        Packaging.Importer.LoadFromXml(ctx, ms);
-                    }
+                    Packaging.Importer.LoadFromXml(ctx, ms);
                 }
             }
             return ctx;

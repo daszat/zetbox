@@ -90,6 +90,12 @@ namespace Kistl.API
     }
 
     /// <summary>
+    /// A simple delegate to provide an interface for creating new contexts.
+    /// </summary>
+    /// <returns>A newly intialised <see cref="IKistlContext"/>.</returns>
+    public delegate IKistlContext GetContext();
+
+    /// <summary>
     /// Interface for a LinqToNNN Context.
     /// </summary>
     public interface IKistlContext : IDisposable

@@ -18,8 +18,9 @@ namespace Kistl.Server.SchemaManagement
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Server.Schema.Cases");
 
         #region Fields
-        private IKistlContext schema;
-        private ISchemaProvider db;
+        private readonly IKistlContext schema;
+        private readonly ISchemaProvider db;
+        private readonly MemoryContext.ConfiguringFactory memoryContextFactory;
 
         private IKistlContext _savedSchema;
         public IKistlContext savedSchema
@@ -28,7 +29,7 @@ namespace Kistl.Server.SchemaManagement
             {
                 if (_savedSchema == null)
                 {
-                    _savedSchema = SchemaManager.GetSavedSchema();
+                    _savedSchema = SchemaManager.GetSavedSchema(db, memoryContextFactory);
                 }
 
                 return _savedSchema;
@@ -45,10 +46,11 @@ namespace Kistl.Server.SchemaManagement
         }
         #endregion
 
-        internal Cases(IKistlContext schema, ISchemaProvider db)
+        internal Cases(IKistlContext schema, ISchemaProvider db, MemoryContext.ConfiguringFactory memoryContextFactory)
         {
             this.schema = schema;
             this.db = db;
+            this.memoryContextFactory = memoryContextFactory;
         }
 
         // Add all IsCase_ + DoCase_ Methods

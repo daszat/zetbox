@@ -1,15 +1,41 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Kistl.API.Utils;
 using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
+using System.Linq;
+using System.Reflection;
+using System.Text;
+
+using Kistl.API.Utils;
 
 namespace Kistl.API
 {
-    public class MemoryContext : IKistlContext
+    public class MemoryContext
+        : IKistlContext
     {
+        /// <summary>
+        /// Prototypical MemoryContext factory delegate for IoC.
+        /// </summary>
+        /// <returns>An empty MemoryContext using the configured interface and implementation assembly.</returns>
+        public delegate MemoryContext ConfiguringFactory();
+
+        /// <summary>
+        /// Prototypical MemoryContext factory delegate for IoC.
+        /// </summary>
+        /// <returns>An empty MemoryContext using the specified interface and implementation assembly.</returns>
+        public delegate MemoryContext Factory(Assembly interfaces, Assembly implementations);
+
+        public MemoryContext(Assembly interfaces, Assembly implementations)
+        {
+            if (interfaces == null) { throw new ArgumentNullException("interfaces"); }
+            if (implementations == null) { throw new ArgumentNullException("implementations"); }
+
+            InterfaceAssembly = interfaces;
+            ImplementationAssembly = implementations;
+        }
+
         private ContextCache _objects = new ContextCache();
+
         /// <summary>
         /// Counter for newly created Objects to give them a valid ID
         /// </summary>
@@ -18,7 +44,12 @@ namespace Kistl.API
 
         public IPersistenceObject Attach(IPersistenceObject obj)
         {
-            if (obj == null) throw new ArgumentNullException("obj");
+            if (obj == null) { throw new ArgumentNullException("obj"); }
+            if (!ImplementationAssembly.Equals(obj.GetType().Assembly))
+            {
+                var message = String.Format(CultureInfo.InvariantCulture, "Not from the ImplementationAssembly [{0}]!", ImplementationAssembly);
+                throw new ArgumentOutOfRangeException("obj", message);
+            }
 
             // Handle created Objects
             if (obj.ID == Helper.INVALIDID)
@@ -201,7 +232,6 @@ namespace Kistl.API
             return (IValueCollectionEntry)CreateInternal(ifType);
         }
 
-
         private IPersistenceObject CreateInternal(InterfaceType ifType)
         {
             IPersistenceObject obj = (IPersistenceObject)Activator.CreateInstance(ifType.ToImplementationType().Type);
@@ -298,6 +328,21 @@ namespace Kistl.API
             }
         }
 
-        public virtual void Dispose() { }
+        public Assembly InterfaceAssembly
+        {
+            get;
+            private set;
+        }
+
+        public Assembly ImplementationAssembly
+        {
+            get;
+            private set;
+        }
+
+        public virtual void Dispose()
+        {
+            // nothing to dispose
+        }
     }
 }

@@ -9,6 +9,9 @@ namespace Kistl.Server
     using System.ServiceModel;
     using System.Threading;
 
+    using Autofac;
+    using Autofac.Builder;
+    using Autofac.Configuration;
     using Kistl.API;
     using Kistl.API.Configuration;
     using Kistl.API.Server;
@@ -24,6 +27,11 @@ namespace Kistl.Server
         : MarshalByRefObject, IKistlAppDomain, IDisposable
     {
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Server");
+
+        public Server(IContainer container)
+        {
+            this.container = container;
+        }
 
         /// <summary>
         /// WCF Service Host
@@ -41,8 +49,16 @@ namespace Kistl.Server
         private AutoResetEvent serverStarted = new AutoResetEvent(false);
 
         /// <summary>
-        /// Starts the WCF Server in the background. If the server hasn't started successfully within 40 seconds, it is aborted and an InvalidOperationException is thrown.
+        /// The IoC container used by this Server.
         /// </summary>
+        private IContainer container;
+
+        /// <summary>
+        /// Starts the WCF Server in the background. If the server hasn't 
+        /// started successfully within 40 seconds, it is aborted and an 
+        /// <see cref="InvalidOperationException"/> is thrown.
+        /// </summary>
+        /// <param name="config">the loaded configuration for the Server</param>
         public void Start(KistlConfig config)
         {
             using (Log.InfoTraceMethodCall("Starting Server"))
@@ -62,9 +78,11 @@ namespace Kistl.Server
         /// <summary>
         /// Initialises the configuration of the server.
         /// </summary>
-        /// <param name="config"></param>
+        /// <param name="config">the loaded configuration for the Server</param>
         public void Init(KistlConfig config)
         {
+            if (this.container != null) { throw new InvalidOperationException("tried to initialise server a second time!"); }
+
             ServerApplicationContext appCtx;
             // re-use application context if available
             if (ServerApplicationContext.Current == null)
@@ -182,45 +200,38 @@ namespace Kistl.Server
         public void CheckSchemaFromCurrentMetaData(bool withRepair)
         {
             using (Log.InfoTraceMethodCallFormat("withRepair=[{0}]", withRepair))
+            using (var subContainer = container.CreateInnerContainer())
+            using (IKistlContext ctx = KistlContext.GetContext())
+            using (var mgr = subContainer.Resolve<SchemaManagement.SchemaManager>(new NamedParameter("ctx", ctx)))
             {
-                using (IKistlContext ctx = KistlContext.GetContext())
-                {
-                    using (var mgr = new SchemaManagement.SchemaManager(ctx))
-                    {
-                        mgr.CheckSchema(withRepair);
-                    }
-                }
+                mgr.CheckSchema(withRepair);
             }
         }
 
         public void CheckSchema(bool withRepair)
         {
             using (Log.InfoTraceMethodCallFormat("withRepair=[{0}]", withRepair))
+            using (var subContainer = container.CreateInnerContainer())
+            using (IKistlContext ctx = SchemaManagement.SchemaManager.GetSavedSchema(
+                subContainer.Resolve<ISchemaProvider>(),
+                subContainer.Resolve<MemoryContext.ConfiguringFactory>()))
+            using (var mgr = subContainer.Resolve<SchemaManagement.SchemaManager>(new NamedParameter("ctx", ctx)))
             {
-                using (IKistlContext ctx = SchemaManagement.SchemaManager.GetSavedSchema())
-                {
-                    using (var mgr = new SchemaManagement.SchemaManager(ctx))
-                    {
-                        mgr.CheckSchema(withRepair);
-                    }
-                }
+                mgr.CheckSchema(withRepair);
             }
         }
 
         public void CheckSchema(string file, bool withRepair)
         {
             using (Log.InfoTraceMethodCallFormat("file=[{0}],withRepair=[{1}]", file, withRepair))
+            using (var subContainer = container.CreateInnerContainer())
             {
-                using (IKistlContext ctx = new MemoryContext())
+                IKistlContext ctx = subContainer.Resolve<MemoryContext.ConfiguringFactory>().Invoke();
+                using (FileStream fs = File.OpenRead(file))
                 {
-                    using (FileStream fs = File.OpenRead(file))
-                    {
-                        Packaging.Importer.LoadFromXml(ctx, fs);
-                        using (var mgr = new SchemaManagement.SchemaManager(ctx))
-                        {
-                            mgr.CheckSchema(withRepair);
-                        }
-                    }
+                    Packaging.Importer.LoadFromXml(ctx, fs);
+                    var mgr = subContainer.Resolve<SchemaManagement.SchemaManager>(new NamedParameter("ctx", ctx));
+                    mgr.CheckSchema(withRepair);
                 }
             }
         }
@@ -228,43 +239,38 @@ namespace Kistl.Server
         public void UpdateSchema()
         {
             using (Log.InfoTraceMethodCall())
+            using (var subContainer = container.CreateInnerContainer())
             {
-                using (IKistlContext ctx = new MemoryContext())
-                {
-                    // decouple database context
-                    using (IKistlContext dbctx = KistlContext.GetContext())
-                    {
-                        using (MemoryStream ms = new MemoryStream())
-                        {
-                            Packaging.Exporter.Publish(dbctx, ms, new string[] { "*" });
-                            ms.Seek(0, SeekOrigin.Begin);
-                            Packaging.Importer.LoadFromXml(ctx, ms);
-                        }
-                    }
+                IKistlContext ctx = subContainer.Resolve<MemoryContext.ConfiguringFactory>().Invoke();
 
-                    using (var mgr = new SchemaManagement.SchemaManager(ctx))
+                // decouple database context
+                using (IKistlContext dbctx = KistlContext.GetContext())
+                {
+                    using (MemoryStream ms = new MemoryStream())
                     {
-                        mgr.UpdateSchema();
+                        Packaging.Exporter.Publish(dbctx, ms, new string[] { "*" });
+                        ms.Seek(0, SeekOrigin.Begin);
+                        Packaging.Importer.LoadFromXml(ctx, ms);
                     }
                 }
+
+                var mgr = subContainer.Resolve<SchemaManagement.SchemaManager>(new NamedParameter("ctx", ctx));
+                mgr.UpdateSchema();
             }
         }
 
         public void UpdateSchema(string file)
         {
             using (Log.InfoTraceMethodCallFormat("file=[{0}]", file))
+            using (var subContainer = container.CreateInnerContainer())
             {
-                using (IKistlContext ctx = new MemoryContext())
+                IKistlContext ctx = subContainer.Resolve<MemoryContext.ConfiguringFactory>().Invoke();
+                using (FileStream fs = File.OpenRead(file))
                 {
-                    using (FileStream fs = File.OpenRead(file))
-                    {
-                        Packaging.Importer.LoadFromXml(ctx, fs);
+                    Packaging.Importer.LoadFromXml(ctx, fs);
 
-                        using (var mgr = new SchemaManagement.SchemaManager(ctx))
-                        {
-                            mgr.UpdateSchema();
-                        }
-                    }
+                    var mgr = subContainer.Resolve<SchemaManagement.SchemaManager>(new NamedParameter("ctx", ctx));
+                    mgr.UpdateSchema();
                 }
             }
         }
@@ -328,6 +334,12 @@ namespace Kistl.Server
                     serverStarted.Close();
                     ((IDisposable)serverStarted).Dispose();
                     serverStarted = null;
+                }
+
+                if (container != null)
+                {
+                    container.Dispose();
+                    container = null;
                 }
             }
         }

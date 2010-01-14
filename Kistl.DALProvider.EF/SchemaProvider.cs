@@ -5,14 +5,15 @@ using System.Text;
 using Kistl.API.Server;
 using System.Data.SqlClient;
 
-namespace Kistl.Server.SchemaManagement.SchemaProvider.SQLServer
+namespace Kistl.DALProvider.EF
 {
-    public class SchemaProvider : ISchemaProvider
+    public class SqlServerSchemaProvider 
+        : ISchemaProvider
     {
         protected SqlConnection db;
         protected SqlTransaction tx;
 
-        public SchemaProvider()
+        public SqlServerSchemaProvider()
         {
             db = new SqlConnection(Kistl.API.ApplicationContext.Current.Configuration.Server.ConnectionString);
             db.Open();

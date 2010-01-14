@@ -70,7 +70,7 @@ namespace Kistl.API
         /// the given path. If no path is given, DefaultConfig.xml in the current 
         /// working directory is used.
         /// </summary>
-        /// <param name="type"></param>
+        /// <param name="type">the type of the host application</param>
         /// <param name="config">use this configuration</param>
         protected ApplicationContext(HostType type, Configuration.KistlConfig config)
         {
@@ -82,12 +82,10 @@ namespace Kistl.API
             ApplicationContext.Current = this;
 
             AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, Configuration);
-            // AssemblyLoader.EnsureInitialisation(Configuration);
 
             // Hardcode Interface and Implementation assemblies
             InterfaceAssembly = "Kistl.Objects";
             ImplementationAssembly = "Kistl.Objects." + HostType;
-
         }
 
         #region IDisposable Members

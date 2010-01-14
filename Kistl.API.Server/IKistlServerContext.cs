@@ -13,7 +13,10 @@ namespace Kistl.API.Server
         /// It also does not change any IChanged property.
         /// </summary>
         /// <remarks>
-        /// Only IDataObjects are counded.
+        /// <para>This method is used when restoring data from backups or when importing. 
+        /// In these cases it is important, that the object's live-cycles do not start 
+        /// here, thus no events are triggered.</para>
+        /// <para>Only IDataObjects are counted.</para>
         /// </remarks>
         /// <returns>Number of affected Objects</returns>
         int SubmitRestore();

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Web;
 
@@ -54,7 +55,9 @@ namespace Kistl.Client.ASPNET.Toolkit
 
                 var config = KistlConfig.FromFile(HttpContext.Current.Server.MapPath(ConfigurationManager.AppSettings["configFile"]));
                 AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
-                var appCtx = new GuiApplicationContext(config, "ASPNET");
+                Assembly interfaces = Assembly.Load("Kistl.Objects");
+                Assembly implementation = Assembly.Load("Kistl.Objects.Client");
+                var testCtx = new GuiApplicationContext(config, "ASPNET", () => new MemoryContext(interfaces, implementation));
             }
             KistlContext = Kistl.API.Client.KistlContext.GetContext();
         }

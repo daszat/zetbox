@@ -1,14 +1,20 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Kistl.API.Configuration;
-using Kistl.API.Utils;
-using Kistl.API;
-using Kistl.API.Server;
 
 namespace Kistl.Server.Service
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Reflection;
+    using System.Text;
+
+    using Autofac;
+    using Autofac.Builder;
+    using Autofac.Configuration;
+    using Kistl.API;
+    using Kistl.API.Configuration;
+    using Kistl.API.Server;
+    using Kistl.API.Utils;
+
     /// <summary>
     /// Mainprogramm
     /// </summary>
@@ -76,10 +82,16 @@ namespace Kistl.Server.Service
 
                 var config = InitApplicationContext(args);
 
+                var builder = new ContainerBuilder();
+                builder.RegisterModule((IModule)Activator.CreateInstance(Type.GetType(config.Server.StoreProvider)));
+                builder.RegisterModule(new ServerModule());
+                builder.RegisterModule(new ConfigurationSettingsReader("servercomponents"));
+
+                using (var container = builder.Build())
+                {
                 Log.TraceTotalMemory("After InitApplicationContext");
 
-                using (var server = new Server())
-                {
+                    var server = container.Resolve<Server>();
                     bool actiondone = false;
                     foreach (CmdLineArg arg in SplitCommandLine(args))
                     {
@@ -126,7 +138,7 @@ namespace Kistl.Server.Service
                             Log.Debug("Prepare for deploy");
                             string file = arg.Arguments[0];
 
-                            XmlFallbackInitialisation(file);
+                            XmlFallbackInitialisation(file, container.Resolve<MemoryContext.ConfiguringFactory>());
 
                             server.Deploy(file);
                             actiondone = true;
@@ -137,7 +149,6 @@ namespace Kistl.Server.Service
                             Log.Debug("Prepare for checkschema");
                             DefaultInitialisation();
 
-                            string file = String.Empty;
                             if (arg.Arguments.Count == 0)
                             {
                                 server.CheckSchema(false);
@@ -150,7 +161,7 @@ namespace Kistl.Server.Service
                                 }
                                 else
                                 {
-                                    file = arg.Arguments[0];
+                                    string file = arg.Arguments[0];
                                     server.CheckSchema(file, false);
                                 }
                             }
@@ -174,7 +185,6 @@ namespace Kistl.Server.Service
                         else if (arg.Command == "-updateschema")
                         {
                             Log.Debug("Prepare for updateschema");
-                            string file = String.Empty;
                             if (arg.Arguments.Count == 0)
                             {
                                 DefaultInitialisation();
@@ -182,8 +192,8 @@ namespace Kistl.Server.Service
                             }
                             else if (arg.Arguments.Count == 1)
                             {
-                                file = arg.Arguments[0];
-                                XmlFallbackInitialisation(file);
+                                string file = arg.Arguments[0];
+                                XmlFallbackInitialisation(file, container.Resolve<MemoryContext.ConfiguringFactory>());
                                 server.UpdateSchema(file);
                             }
                             else
@@ -269,12 +279,12 @@ namespace Kistl.Server.Service
             }
         }
 
-
-        private static void XmlFallbackInitialisation(string file)
+        private static void XmlFallbackInitialisation(string file, MemoryContext.ConfiguringFactory createCtx)
         {
             ServerApplicationContext.Current.LoadNoopActionsManager();
 
-            var memCtx = new MemoryContext();
+            var memCtx = createCtx();
+
             // register empty context first, to avoid errors when trying to load defaultvalues
             FrozenContext.RegisterFallback(memCtx);
             Packaging.Importer.LoadFromXml(memCtx, file);

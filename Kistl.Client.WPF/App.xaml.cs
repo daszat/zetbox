@@ -1,10 +1,12 @@
 using System;
 using System.Globalization;
 using System.Linq;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Markup;
 using System.Windows.Threading;
 
+using Autofac;
 using Kistl.API;
 using Kistl.API.Client;
 using Kistl.API.Configuration;
@@ -19,7 +21,6 @@ namespace Kistl.Client.WPF
     /// </summary>
     public partial class App : Application
     {
-
         public GuiApplicationContext AppContext { get; private set; }
 
         public static new App Current { get { return (App)(Application.Current); } }
@@ -62,7 +63,9 @@ namespace Kistl.Client.WPF
             }
 
             AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
-            AppContext = new GuiApplicationContext(config, "WPF");
+            Assembly interfaces = Assembly.Load("Kistl.Objects");
+            Assembly implementation = Assembly.Load("Kistl.Objects.Client");
+            AppContext = new GuiApplicationContext(config, "WPF", () => new MemoryContext(interfaces, implementation));
 
             return result;
         }
