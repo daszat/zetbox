@@ -83,8 +83,10 @@ namespace Kistl.Server.Service
                 var config = InitApplicationContext(args);
 
                 var builder = new ContainerBuilder();
-                builder.RegisterModule((IModule)Activator.CreateInstance(Type.GetType(config.Server.StoreProvider)));
+
+                // register components from most general to most specific source
                 builder.RegisterModule(new ServerModule());
+                builder.RegisterModule((IModule)Activator.CreateInstance(Type.GetType(config.Server.StoreProvider)));
                 builder.RegisterModule(new ConfigurationSettingsReader("servercomponents"));
 
                 using (var container = builder.Build())
