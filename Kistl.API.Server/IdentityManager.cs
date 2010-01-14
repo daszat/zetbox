@@ -1,12 +1,15 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Kistl.App.Base;
-using System.Security.Principal;
 
 namespace Kistl.API.Server
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Security.Principal;
+    using System.Text;
+    using System.Threading;
+
+    using Kistl.App.Base;
+
     public interface IIdentityProvider
     {
         Identity LoadIdentity(IQueryable<Identity> query, IIdentity identity);
@@ -16,20 +19,20 @@ namespace Kistl.API.Server
     {
         private readonly static object _lock = new object();
         private static Type _ProviderType = null;
-        private static Dictionary<string, Identity> _IdentityCache = new Dictionary<string,Identity>();
+        private static Dictionary<string, Identity> _IdentityCache = new Dictionary<string, Identity>();
 
         static IdentityManager()
         {
             // This ensures that the current thread has a valid Principal during startup
-            AppDomain.CurrentDomain.SetPrincipalPolicy(System.Security.Principal.PrincipalPolicy.WindowsPrincipal);
+            AppDomain.CurrentDomain.SetPrincipalPolicy(PrincipalPolicy.WindowsPrincipal);
         }
 
         public static bool IsAuthenticated
         {
             get
             {
-                return System.Threading.Thread.CurrentPrincipal.Identity.IsAuthenticated &&
-                    !string.IsNullOrEmpty(System.Threading.Thread.CurrentPrincipal.Identity.Name);
+                return Thread.CurrentPrincipal.Identity.IsAuthenticated &&
+                    !string.IsNullOrEmpty(Thread.CurrentPrincipal.Identity.Name);
             }
         }
 
@@ -40,12 +43,12 @@ namespace Kistl.API.Server
                 lock (_lock)
                 {
                     if (!IsAuthenticated) return null;
-                    var name = System.Threading.Thread.CurrentPrincipal.Identity.Name;
+                    var name = Thread.CurrentPrincipal.Identity.Name;
                     if (!_IdentityCache.ContainsKey(name))
                     {
                         using (IKistlContext ctx = KistlContext.GetContext())
                         {
-                            var identity = GetProvider().LoadIdentity(ctx.GetQuery<Identity>(), System.Threading.Thread.CurrentPrincipal.Identity);
+                            var identity = GetProvider().LoadIdentity(ctx.GetQuery<Identity>(), Thread.CurrentPrincipal.Identity);
                             if (identity == null) return null;
                             _IdentityCache[name] = identity;
                         }
@@ -58,7 +61,7 @@ namespace Kistl.API.Server
         public static Identity LoadIdentity(IKistlContext ctx)
         {
             if (!IsAuthenticated) return null;
-            return GetProvider().LoadIdentity(ctx.GetQuery<Identity>(), System.Threading.Thread.CurrentPrincipal.Identity);
+            return GetProvider().LoadIdentity(ctx.GetQuery<Identity>(), Thread.CurrentPrincipal.Identity);
         }
 
 

@@ -24,6 +24,7 @@ namespace Kistl.DalProvider.EF
 
             moduleBuilder
                 .Register(c => new KistlDataContext())
+                .As<IKistlServerContext>()
                 .As<IKistlContext>()
                 .FactoryScoped();
 

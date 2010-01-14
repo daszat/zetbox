@@ -31,7 +31,6 @@ namespace Kistl.Server
         /// </summary>
         private AutoResetEvent serverStarted = new AutoResetEvent(false);
 
-
         /// <summary>
         /// Starts the WCF Server in the background. If the server hasn't 
         /// started successfully within 40 seconds, it is aborted and an 

@@ -21,22 +21,6 @@ namespace Kistl.Server.Packaging
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Server.Importer");
 
         #region Public Methods
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="filename"></param>
-        public static void Deploy(string filename)
-        {
-            using (IKistlServerContext ctx = KistlContext.GetServerContext())
-            {
-                using (FileStream fs = File.OpenRead(filename))
-                {
-                    Deploy(ctx, fs);
-                }
-                Log.Info("Submitting changes");
-                ctx.SubmitRestore();
-            }
-        }
 
         public static void Deploy(IKistlContext ctx, Stream s)
         {
@@ -118,24 +102,7 @@ namespace Kistl.Server.Packaging
         }
 
         /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="filename"></param>
-        public static void LoadFromXml(string filename)
-        {
-            using (IKistlServerContext ctx = KistlContext.GetServerContext())
-            {
-                using (FileStream fs = File.OpenRead(filename))
-                {
-                    LoadFromXml(ctx, fs);
-                }
-                Log.Info("Submitting changes");
-                ctx.SubmitRestore();
-            }
-        }
-
-        /// <summary>
-        /// 
+        /// Loads a database from the specified filename into the specified context.
         /// </summary>
         /// <param name="ctx"></param>
         /// <param name="filename"></param>
@@ -147,6 +114,12 @@ namespace Kistl.Server.Packaging
             }
         }
 
+  
+        /// <summary>
+        /// Loads a database from the specified stream into the specified context.
+        /// </summary>
+        /// <param name="ctx"></param>
+        /// <param name="s">a stream containing a database.xml</param>
         public static void LoadFromXml(IKistlContext ctx, Stream s)
         {
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
