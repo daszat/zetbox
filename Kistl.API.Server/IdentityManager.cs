@@ -60,10 +60,11 @@ namespace Kistl.API.Server
 
         public static Identity LoadIdentity(IKistlContext ctx)
         {
+            if (ctx == null) { throw new ArgumentNullException("ctx"); }
             if (!IsAuthenticated) return null;
+
             return GetProvider().LoadIdentity(ctx.GetQuery<Identity>(), Thread.CurrentPrincipal.Identity);
         }
-
 
         /// <summary>
         /// Creates a new <see cref="IIdentityProvider"/> which is loaded from the current configuration.

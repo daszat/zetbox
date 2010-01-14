@@ -72,7 +72,7 @@ R: Gendarme.Rules.Portability.MonoCompatibilityReviewRule
 A: Kistl.Client.WPF
 A: Kistl.DalProvider.EF
 # this should be replaced in time for a linux-release, ignore for now
-M: System.Void Kistl.Server.Generators.Generator::GenerateCode()
+M: System.Void Kistl.Server.Generators.Generator::CompileCode(System.String)
 
 R: Gendarme.Rules.Correctness.EnsureLocalDisposalRule
 # false positives when returning an IEnumerator from GetEnumerator
@@ -98,9 +98,9 @@ M: System.Collections.IEnumerator Kistl.Client.ASPNET.Toolkit.View.WorkspaceView
 M: System.Collections.IEnumerator Kistl.Client.ASPNET.Toolkit.View.DataObjectListView/<GetScriptDescriptors>d__4::System.Collections.IEnumerable.GetEnumerator()
 M: System.Collections.IEnumerator Kistl.Client.ASPNET.Toolkit.View.DataObjectListView/<GetScriptReferences>d__8::System.Collections.IEnumerable.GetEnumerator()
 M: System.Collections.IEnumerator Kistl.DalProvider.EF.EntityCollectionWrapper`2::System.Collections.IEnumerable.GetEnumerator()
-M: System.Collections.IEnumerator Kistl.Server.SchemaManagement.SchemaProvider.SQLServer.SchemaProvider/<GetTableNames>d__0::System.Collections.IEnumerable.GetEnumerator()
-M: System.Collections.IEnumerator Kistl.Server.SchemaManagement.SchemaProvider.SQLServer.SchemaProvider/<GetFKConstraintNames>d__8::System.Collections.IEnumerable.GetEnumerator()
-M: System.Collections.IEnumerator Kistl.Server.SchemaManagement.SchemaProvider.SQLServer.SchemaProvider/<GetTableColumnNames>d__f::System.Collections.IEnumerable.GetEnumerator()
+M: System.Collections.IEnumerator Kistl.DalProvider.EF.SqlServerSchemaProvider/<GetTableNames>d__0::System.Collections.IEnumerable.GetEnumerator()
+M: System.Collections.IEnumerator Kistl.DalProvider.EF.SqlServerSchemaProvider/<GetFKConstraintNames>d__8::System.Collections.IEnumerable.GetEnumerator()
+M: System.Collections.IEnumerator Kistl.DalProvider.EF.SqlServerSchemaProvider/<GetTableColumnNames>d__f::System.Collections.IEnumerable.GetEnumerator()
 # false positives when working with ASP.Net's ScriptManager
 M: System.Void Kistl.Client.ASPNET.Toolkit.View.DataObjectReferenceView::OnPreRender(System.EventArgs)
 M: System.Void Kistl.Client.ASPNET.Toolkit.View.LauchnerView::OnPreRender(System.EventArgs)
@@ -118,7 +118,7 @@ M: System.Void Kistl.Client.Forms.FormsModelFactory::CreateWorkspace(Kistl.Clien
 M: System.Void Kistl.Client.Forms.View.DataObjectFullView::SyncProperties()
 M: System.Void Kistl.Client.WPF.View.KistlBase.ObjectClassDisplay::Edit_Click(System.Object,System.Windows.RoutedEventArgs)
 # object is "bound" to the process' life cycle, no disposal necessary
-M: System.Void Kistl.Server.Server::Init(Kistl.API.Configuration.KistlConfig)
+M: System.Void Kistl.Server.WcfServer::Init(Kistl.API.Configuration.KistlConfig)
 M: System.Void Kistl.Server.Service.Program::XmlFallbackInitialisation(System.String)
 M: Kistl.API.Configuration.KistlConfig Kistl.Server.Service.Program::InitApplicationContext(System.String[])
 

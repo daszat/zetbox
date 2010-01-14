@@ -106,6 +106,9 @@ namespace Kistl.Server.SchemaManagement
 
         public static void LoadSavedSchemaInto(ISchemaProvider provider, IKistlContext targetCtx)
         {
+            if (provider == null) { throw new ArgumentNullException("provider"); }
+            if (targetCtx == null) { throw new ArgumentNullException("targetCtx"); }
+
             string schema = provider.GetSavedSchema().TrimEnd((char)0); // Trim possible C++/Database/whatever ending 0 char
             if (!string.IsNullOrEmpty(schema))
             {

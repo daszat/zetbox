@@ -27,16 +27,25 @@ namespace Kistl.Server.Generators
 
         public static string InheritanceAssociationName(InterfaceType parentClass, InterfaceType childClass)
         {
+            if (parentClass == null) { throw new ArgumentNullException("parentClass"); }
+            if (childClass == null) { throw new ArgumentNullException("childClass"); }
+
             return InheritanceAssociationName(parentClass.Type.Name, childClass.Type.Name);
         }
 
         public static string InheritanceAssociationName(TypeMoniker parentClass, TypeMoniker childClass)
         {
+            if (parentClass == null) { throw new ArgumentNullException("parentClass"); }
+            if (childClass == null) { throw new ArgumentNullException("childClass"); }
+
             return InheritanceAssociationName(parentClass.ClassName, childClass.ClassName);
         }
 
         public static string InheritanceAssociationName(ObjectClass parentClass, ObjectClass childClass)
         {
+            if (parentClass == null) { throw new ArgumentNullException("parentClass"); }
+            if (childClass == null) { throw new ArgumentNullException("childClass"); }
+
             return InheritanceAssociationName(parentClass.ClassName, childClass.ClassName);
         }
 
@@ -51,6 +60,8 @@ namespace Kistl.Server.Generators
 
         public static string AssociationParentRoleName(TypeMoniker obj)
         {
+            if (obj == null) { throw new ArgumentNullException("obj"); }
+
             return AssociationParentRoleName(obj.ClassName);
         }
 
@@ -65,6 +76,8 @@ namespace Kistl.Server.Generators
 
         public static string AssociationChildRoleName(TypeMoniker obj)
         {
+            if (obj == null) { throw new ArgumentNullException("obj"); }
+
             return AssociationChildRoleName(obj.ClassName);
         }
 

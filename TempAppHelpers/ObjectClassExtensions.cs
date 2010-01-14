@@ -12,10 +12,10 @@ namespace Kistl.App.Extensions
     /// </summary>
     public static partial class ObjectClassExtensions
     {
+        private readonly static object _lock = new object();
 
         private static ILookup<string, ObjectClass> _frozenClasses;
         private static bool isInitializing = false;
-        private static string LockObject = "ObjectClassExtensions_Lock";
 
         public static ObjectClass GetObjectClass(this IDataObject obj, IKistlContext ctx)
         {
@@ -27,7 +27,7 @@ namespace Kistl.App.Extensions
 
         public static ObjectClass GetObjectClass(this InterfaceType ifType, IKistlContext ctx)
         {
-            if (ifType == null) { throw new ArgumentNullException("obj"); }
+            if (ifType == null) { throw new ArgumentNullException("ifType"); }
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
 
             Type type = ifType.Type;
@@ -49,7 +49,7 @@ namespace Kistl.App.Extensions
 
         private static void InitializeFrozenCache(Kistl.API.IKistlContext ctx)
         {
-            lock (LockObject)
+            lock (_lock)
             {
                 if (_frozenClasses == null && !isInitializing)
                 {

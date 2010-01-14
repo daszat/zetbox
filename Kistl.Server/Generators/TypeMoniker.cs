@@ -15,6 +15,8 @@ namespace Kistl.Server.Generators
 
         public TypeMoniker(string type)
         {
+            if (type == null) { throw new ArgumentNullException("type"); }
+
             Namespace = String.Empty;
             ClassName = String.Empty;
 

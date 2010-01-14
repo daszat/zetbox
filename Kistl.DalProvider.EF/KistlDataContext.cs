@@ -296,7 +296,7 @@ namespace Kistl.DalProvider.EF
                 throw updex.InnerException;
             }
 
-            NotifyChanged(notifySaveList); 
+            NotifyChanged(notifySaveList);
 
             return result;
         }
@@ -329,20 +329,22 @@ namespace Kistl.DalProvider.EF
         {
             var objClass = obj.GetObjectClass(FrozenContext.Single);
 
-            var cmd = _ctx.Connection.CreateCommand();
-            cmd.CommandText = "RefreshRightsOn_" + objClass.TableName;
-            cmd.CommandType = CommandType.StoredProcedure;
-            var p = cmd.CreateParameter();
-            p.ParameterName = "ID";
-            p.Value = obj.ID; ;
-            p.Direction = ParameterDirection.Input;
-            p.DbType = DbType.Int32;
-            cmd.Parameters.Add(p);
+            using (var cmd = _ctx.Connection.CreateCommand())
+            {
+                cmd.CommandText = "RefreshRightsOn_" + objClass.TableName;
+                cmd.CommandType = CommandType.StoredProcedure;
+                var p = cmd.CreateParameter();
+                p.ParameterName = "ID";
+                p.Value = obj.ID; ;
+                p.Direction = ParameterDirection.Input;
+                p.DbType = DbType.Int32;
+                cmd.Parameters.Add(p);
 
-            cmd.ExecuteNonQuery();
+                cmd.ExecuteNonQuery();
 
-            // This also does not work -> multiple results...
-            // _ctx.Refresh(RefreshMode.StoreWins, obj);
+                // This also does not work -> multiple results...
+                // _ctx.Refresh(RefreshMode.StoreWins, obj);
+            }
         }
 
         private void DebugTraceChangedObjects()

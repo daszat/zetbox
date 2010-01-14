@@ -1,15 +1,16 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Linq.Expressions;
-using System.Reflection;
-using System.Collections.ObjectModel;
-using System.Globalization;
-using System.Collections;
 
 namespace Kistl.API
 {
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Globalization;
+    using System.Linq;
+    using System.Linq.Expressions;
+    using System.Reflection;
+    using System.Text;
+
     /// <summary>
     /// Linq Extensions.
     /// </summary>
@@ -240,8 +241,8 @@ namespace Kistl.API
         {
             if (e == null) { throw new ArgumentNullException("e"); }
 
-            return e.NodeType == ExpressionType.Call && 
-                ((MethodCallExpression)e).Method.Name == methodName && 
+            return e.NodeType == ExpressionType.Call &&
+                ((MethodCallExpression)e).Method.Name == methodName &&
                 ((MethodCallExpression)e).Method.DeclaringType == typeof(Queryable);
         }
 
@@ -263,6 +264,9 @@ namespace Kistl.API
 
         public static void TraceExpression(Expression e, StringBuilder sb, int indent)
         {
+            if (e == null) { throw new ArgumentNullException("e"); }
+            if (sb == null) { throw new ArgumentNullException("sb"); }
+
             Type t = e.GetType();
             string indentString = Kistl.API.Helper.Indent(indent);
             sb.Append(indentString);
@@ -296,7 +300,7 @@ namespace Kistl.API
             if (value != null)
             {
                 if (value.GetType().IsGenericType && value.GetType().GetGenericTypeDefinition() == typeof(ReadOnlyCollection<>))
-                {                    
+                {
                     int count = (int)value.GetType().InvokeMember("get_Count", BindingFlags.InvokeMethod, null, value, null, CultureInfo.InvariantCulture);
                     if (count == 0)
                     {
