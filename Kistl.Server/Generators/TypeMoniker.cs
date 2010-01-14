@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Kistl.Server.Generators
 {
-    internal class TypeMoniker
+    public class TypeMoniker
     {
         public TypeMoniker()
         {

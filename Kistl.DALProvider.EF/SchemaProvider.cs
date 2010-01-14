@@ -5,7 +5,7 @@ using System.Text;
 using Kistl.API.Server;
 using System.Data.SqlClient;
 
-namespace Kistl.DALProvider.EF
+namespace Kistl.DalProvider.EF
 {
     public class SqlServerSchemaProvider 
         : ISchemaProvider

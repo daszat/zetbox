@@ -1,13 +1,15 @@
 
-namespace Kistl.DALProvider.EF
+namespace Kistl.DalProvider.EF
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+
     using Autofac.Builder;
     using Kistl.API;
     using Kistl.API.Server;
+    using Kistl.Server.Generators;
 
     public class EfProvider : Module
     {
@@ -45,6 +47,11 @@ namespace Kistl.DALProvider.EF
             moduleBuilder
                 .RegisterGeneratedFactory<Func<MemoryContext>>()
                 .ContainerScoped();
+
+            moduleBuilder
+                .Register<Generator.EntityFrameworkGenerator>()
+                .As<BaseDataObjectGenerator>()
+                .MemberOf<IEnumerable<BaseDataObjectGenerator>>();
         }
     }
 }

@@ -1,0 +1,26 @@
+﻿<%@ CodeTemplate Language="C#" 
+	Name="Implementation.ObjectClasses.ReloadOneReference"
+	ClassName="Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.ReloadOneReference" 
+	Inherits="Kistl.Server.Generators.KistlCodeTemplate" %>
+<%@ Import Namespace="System" %>
+<%@ Import Namespace="System.Linq" %>
+<%@ Import Namespace="Kistl.API" %>
+<%@ Import Namespace="Kistl.API.Server" %>
+<%@ Import Namespace="Kistl.App.Base" %>
+<%@ Import Namespace="Kistl.App.Extensions" %>
+<%@ Import Namespace="Kistl.Server.Generators" %>
+<%@ Import Namespace="Kistl.Server.Generators.Extensions" %>
+<%@ Parameter Name="ctx" Type="IKistlContext" %>
+<%@ Parameter Name="referencedInterface" Type="string" %>
+<%@ Parameter Name="referencedImplementation" Type="string" %>
+<%@ Parameter Name="name" Type="string" %>
+<%@ Parameter Name="efName" Type="string" %>
+<%@ Parameter Name="fkBackingName" Type="string" %>
+<%@ Parameter Name="fkGuidBackingName" Type="string" %>
+
+			if (<%= fkGuidBackingName %>.HasValue)
+				<%= efName %> = (<%= referencedImplementation %>)Context.FindPersistenceObject<<%= referencedInterface %>>(<%= fkGuidBackingName %>.Value);
+			else if (<%= fkBackingName %>.HasValue)
+				<%= efName %> = (<%= referencedImplementation %>)Context.Find<<%= referencedInterface %>>(<%= fkBackingName %>.Value);
+			else
+				<%= efName %> = null;

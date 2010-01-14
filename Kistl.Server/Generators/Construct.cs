@@ -1,25 +1,33 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Kistl.App.Base;
-using Kistl.App.Extensions;
-using Kistl.Server.Generators.Extensions;
+
 
 namespace Kistl.Server.Generators
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+
+    using Kistl.App.Base;
+    using Kistl.App.Extensions;
+    using Kistl.Server.Generators.Extensions;
+    using Kistl.API;
+
     /// <summary>
     /// TODO: Rename and move to Kistl.API.Server
-    /// When Provider are seperated it will help
+    /// When Provider are separated it will help
     /// </summary>
-    internal static class Construct
+    public static class Construct
     {
-
         #region Association Names
 
         private static string InheritanceAssociationName(string parentClass, string childClass)
         {
             return "FK_" + childClass + "_" + parentClass + "_ID";
+        }
+
+        public static string InheritanceAssociationName(InterfaceType parentClass, InterfaceType childClass)
+        {
+            return InheritanceAssociationName(parentClass.Type.Name, childClass.Type.Name);
         }
 
         public static string InheritanceAssociationName(TypeMoniker parentClass, TypeMoniker childClass)

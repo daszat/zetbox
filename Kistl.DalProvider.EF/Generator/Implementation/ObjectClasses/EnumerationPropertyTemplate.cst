@@ -1,0 +1,113 @@
+﻿<%@ CodeTemplate Language="C#" 
+	Name="Implementation.ObjectClasses.EnumerationPropertyTemplate"
+	ClassName="Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.EnumerationPropertyTemplate" 
+	Inherits="Kistl.Server.Generators.KistlCodeTemplate" %>
+<%@ Import Namespace="System" %>
+<%@ Import Namespace="Kistl.API" %>
+<%@ Import Namespace="Kistl.API.Server" %>
+<%@ Import Namespace="Kistl.App.Base" %>
+<%@ Import Namespace="Kistl.Server.Generators" %>
+<%@ Import Namespace="Kistl.Server.Generators.Extensions" %>
+<%@ Parameter Name="ctx" Type="IKistlContext" %>
+<%@ Parameter Name="serializationList" Type="Kistl.Server.Generators.Templates.Implementation.SerializationMembersList" %>
+<%@ Parameter Name="prop" Type="EnumerationProperty" %>
+<%@ Parameter Name="callGetterSetterEvents" Type="bool" %>
+<%
+
+	string interfaceName = prop.ObjectClass.ClassName;
+
+	string name = prop.PropertyName;
+	string efName = name + Kistl.API.Helper.ImplementationSuffix;
+	string backingName = "_" + name;
+
+	string enumType = prop.ReferencedTypeAsCSharp();
+	string eventName = "On" + name;
+
+%>
+   		// <%= this.GetType() %>
+        // implement the user-visible interface
+        public <%= enumType %> <%= name %>
+        {
+            get
+            {
+<%
+				if(callGetterSetterEvents)
+				{
+%>
+				var __value = <%= backingName %>;
+				if(<%= eventName %>_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<<%= enumType %>>(__value);
+					<%= eventName %>_Getter(this, e);
+					__value = e.Result;
+				}
+                return __value;
+<% 
+				}
+				else
+				{
+%>
+				return <%= backingName %>;
+<%
+				}
+%>            }
+            set
+            {
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (<%= backingName %> != value)
+                {
+					var __oldValue = <%= backingName %>;
+					var __newValue = value;
+<%
+					if(callGetterSetterEvents)
+					{
+%>
+                    if(<%= eventName %>_PreSetter != null)
+                    {
+						var e = new PropertyPreSetterEventArgs<<%= enumType %>>(__oldValue, __newValue);
+						<%= eventName %>_PreSetter(this, e);
+						__newValue = e.Result;
+                    }
+<%
+					}
+%>					
+                    NotifyPropertyChanging("<%= name %>", "<%= efName %>", __oldValue, __newValue);
+                    <%= backingName %> = value;
+                    NotifyPropertyChanged("<%= name %>", "<%= efName %>", __oldValue, __newValue);
+<%
+					if(callGetterSetterEvents)
+					{
+%>
+                    if(<%= eventName %>_PostSetter != null)
+                    {
+						var e = new PropertyPostSetterEventArgs<<%= enumType %>>(__oldValue, __newValue);
+						<%= eventName %>_PostSetter(this, e);
+                    }
+<%
+					}
+%>                    
+                }
+            }
+        }
+        
+        /// <summary>backing store for <%= name %></summary>
+        private <%= enumType %> <%= backingName %>;
+        
+        /// <summary>EF sees only this property, for <%= name %></summary>
+        [XmlIgnore()]
+        [EdmScalarProperty()]
+        public int <%= efName %>
+        {
+            get
+            {
+                return (int)this.<%= name %>;
+            }
+            set
+            {
+                this.<%= name %> = (<%= enumType %>)value;
+            }
+        }
+        
+<%
+    AddSerialization(serializationList);
+%>

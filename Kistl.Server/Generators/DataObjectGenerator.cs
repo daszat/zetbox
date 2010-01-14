@@ -165,25 +165,4 @@ namespace Kistl.Server.Generators
         }
 
     }
-
-    // TODO: load providers from config file
-    public static class DataObjectGeneratorFactory
-    {
-        public static BaseDataObjectGenerator GetInterfaceGenerator()
-        {
-            return new Interfaces.InterfaceGenerator();
-        }
-        public static BaseDataObjectGenerator GetClientGenerator()
-        {
-            return new ClientObjects.ClientObjectGenerator();
-        }
-        public static BaseDataObjectGenerator GetServerGenerator()
-        {
-            return new EntityFramework.EntityFrameworkGenerator();
-        }
-        public static BaseDataObjectGenerator GetFreezingGenerator()
-        {
-            return new FrozenObjects.FreezingGenerator();
-        }
-    }
 }

@@ -24,8 +24,8 @@ namespace Kistl.API
         public InterfaceType(Type type)
             : this()
         {
-            if (!IsValid(type))
-                throw new ArgumentOutOfRangeException("type");
+            if (!IsValid(type)) { throw new ArgumentOutOfRangeException("type"); }
+
             this.Type = type;
         }
 
@@ -40,8 +40,7 @@ namespace Kistl.API
         /// <returns></returns>
         public static bool IsValid(Type type)
         {
-            if (type == null)
-                throw new ArgumentNullException("type");
+            if (type == null) { throw new ArgumentNullException("type"); }
 
             if (type.IsGenericType)
                 return type.GetGenericArguments().All(t => InterfaceType.IsValid(t));
@@ -127,8 +126,8 @@ namespace Kistl.API
         public ImplementationType(Type type)
             : this()
         {
-            if (!IsValid(type))
-                throw new ArgumentOutOfRangeException("type");
+            if (!IsValid(type)) { throw new ArgumentOutOfRangeException("type"); }
+
             this.Type = type;
         }
 
@@ -143,8 +142,7 @@ namespace Kistl.API
         /// <returns></returns>
         public static bool IsValid(Type type)
         {
-            if (type == null)
-                throw new ArgumentNullException("type");
+            if (type == null) { throw new ArgumentNullException("type"); }
 
             if (type.IsGenericType)
                 return type.GetGenericArguments().All(t => ImplementationType.IsValid(t));
@@ -199,7 +197,6 @@ namespace Kistl.API
         {
             return Type.ToString();
         }
-
     }
 
     public static class TypeTransformations

@@ -46,10 +46,7 @@ namespace Kistl.Server
                 .Register<Generators.ClientObjects.ClientObjectGenerator>()
                 .As<Generators.BaseDataObjectGenerator>()
                 .MemberOf<IEnumerable<Generators.BaseDataObjectGenerator>>();
-            moduleBuilder
-                .Register<Generators.EntityFramework.EntityFrameworkGenerator>()
-                .As<Generators.BaseDataObjectGenerator>()
-                .MemberOf<IEnumerable<Generators.BaseDataObjectGenerator>>();
+
             moduleBuilder
                 .Register<Generators.FrozenObjects.FreezingGenerator>()
                 .As<Generators.BaseDataObjectGenerator>()
