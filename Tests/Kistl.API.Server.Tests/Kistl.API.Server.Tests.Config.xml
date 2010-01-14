@@ -4,9 +4,12 @@
   <Server StartServer="false">
     <DatabaseProvider>System.Data.SqlServerCe.3.5</DatabaseProvider>
     <ConnectionString></ConnectionString>
-    <CodeGenPath>bin\CodeGen</CodeGenPath>
-    <LogFilePath>bin\LogFiles</LogFilePath>
     <DocumentStore>DocumentStore\Server\</DocumentStore>
+    <LogFilePath>bin\LogFiles</LogFilePath>
+    <CodeGenWorkingPath>bin\CodeGenNext</CodeGenWorkingPath>
+    <CodeGenOutputPath>bin\CodeGen</CodeGenOutputPath>
+    <CodeGenArchivePath>Backup</CodeGenArchivePath>
+    <StoreProvider></StoreProvider>
     <KistlDataContextType>Kistl.API.Server.Mocks.KistlContextMock, Kistl.API.Server.Tests</KistlDataContextType>
     <ServerObjectHandlerType></ServerObjectHandlerType>
     <ServerObjectSetHandlerType></ServerObjectSetHandlerType>

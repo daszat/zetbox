@@ -4,9 +4,12 @@
   <Server StartServer="false">
     <DatabaseProvider>System.Data.SqlClient</DatabaseProvider>
     <ConnectionString>Data Source=.\SQLEXPRESS;Initial Catalog=Kistl_test;Integrated Security=True;MultipleActiveResultSets=true;</ConnectionString>
-    <CodeGenPath>bin\CodeGen</CodeGenPath>
-    <LogFilePath>bin\LogFiles</LogFilePath>
     <DocumentStore>DocumentStore\Server\</DocumentStore>
+    <LogFilePath>bin\LogFiles</LogFilePath>
+    <CodeGenWorkingPath>bin\CodeGenNext</CodeGenWorkingPath>
+    <CodeGenOutputPath>bin\CodeGen</CodeGenOutputPath>
+    <CodeGenArchivePath>Backup</CodeGenArchivePath>
+    <StoreProvider>Kistl.DalProvider.EF.EfProvider, Kistl.DalProvider.EF</StoreProvider>
     <KistlDataContextType>Kistl.DalProvider.EF.KistlDataContext, Kistl.DalProvider.EF</KistlDataContextType>
     <ServerObjectHandlerType>Kistl.DalProvider.EF.ServerObjectHandler`1, Kistl.DalProvider.EF</ServerObjectHandlerType>
     <ServerObjectSetHandlerType>Kistl.DalProvider.EF.ServerObjectSetHandler, Kistl.DalProvider.EF</ServerObjectSetHandlerType>
