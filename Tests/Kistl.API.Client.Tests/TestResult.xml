@@ -1,101 +1,124 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <!--This file represents the results of running a test suite-->
-<test-results name="P:\Kistl\Tests\Kistl.API.Client.Tests\Kistl.API.Client.Tests.nunit" total="62" failures="0" not-run="1" date="2009-03-18" time="12:21:53">
-  <environment nunit-version="2.4.7.0" clr-version="2.0.50727.3074" os-version="Microsoft Windows NT 6.0.6001 Service Pack 1" platform="Win32NT" cwd="P:\Kistl\Tests\Kistl.API.Client.Tests" machine-name="KISTL" user="david" user-domain="kistl" />
-  <culture-info current-culture="de-AT" current-uiculture="de-DE" />
-  <test-suite name="P:\Kistl\Tests\Kistl.API.Client.Tests\Kistl.API.Client.Tests.nunit" success="True" time="1.198" asserts="0">
+<test-results name="P:\Kistl\Tests\Kistl.API.Client.Tests\Kistl.API.Client.Tests.nunit" total="70" errors="0" failures="0" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2010-01-14" time="21:00:43">
+  <environment nunit-version="2.5.2.9222" clr-version="2.0.50727.4200" os-version="Microsoft Windows NT 6.0.6002 Service Pack 2" platform="Win32NT" cwd="P:\Kistl\Tests\Kistl.API.Client.Tests" machine-name="DAVID-NB" user="david" user-domain="DASZ" />
+  <culture-info current-culture="de-AT" current-uiculture="en-US" />
+  <test-suite name="P:\Kistl\Tests\Kistl.API.Client.Tests\Kistl.API.Client.Tests.nunit" executed="True" success="True" time="1.457" asserts="0">
     <results>
-      <test-suite name="P:\Kistl\Tests\Kistl.API.Client.Tests\bin\Debug\Kistl.API.Client.Tests.exe" success="True" time="1.188" asserts="0">
+      <test-suite name="P:\Kistl\Tests\Kistl.API.Client.Tests\bin\Debug\Kistl.API.Client.Tests.dll" executed="True" success="True" time="1.438" asserts="0">
         <results>
-          <test-suite name="Kistl" success="True" time="1.181" asserts="0">
+          <test-suite name="Kistl" executed="True" success="True" time="1.427" asserts="0">
             <results>
-              <test-suite name="API" success="True" time="1.172" asserts="0">
+              <test-suite name="API" executed="True" success="True" time="1.415" asserts="0">
                 <results>
-                  <test-suite name="Client" success="True" time="1.165" asserts="0">
+                  <test-suite name="Client" executed="True" success="True" time="1.404" asserts="0">
                     <results>
-                      <test-suite name="Tests" success="True" time="1.153" asserts="0">
+                      <test-suite name="Tests" executed="True" success="True" time="1.400" asserts="0">
                         <results>
-                          <test-suite name="BackReferenceCollectionTests" success="True" time="0.032" asserts="0">
+                          <test-suite name="BaseClientCollectionEntryTests" executed="True" success="True" time="0.079" asserts="0">
                             <results>
-                              <test-case name="Kistl.API.Client.Tests.BackReferenceCollectionTests.AddRemoveTest" executed="True" success="True" time="0.026" asserts="12" />
-                            </results>
-                          </test-suite>
-                          <test-suite name="BaseClientCollectionEntryTests" success="True" time="0.510" asserts="0">
-                            <results>
-                              <test-case name="Kistl.API.Client.Tests.BaseClientCollectionEntryTests.fails_on_serializing_from_null_stream" executed="True" success="True" time="0.459" asserts="0" />
-                              <test-case name="Kistl.API.Client.Tests.BaseClientCollectionEntryTests.fails_on_serializing_to_null_stream" executed="True" success="True" time="0.001" asserts="0" />
-                              <test-case name="Kistl.API.Client.Tests.BaseClientCollectionEntryTests.FromStream_of_WrongType_fails" executed="True" success="True" time="0.012" asserts="1" />
-                              <test-case name="Kistl.API.Client.Tests.BaseClientCollectionEntryTests.ObjectState_CreatedObject_Modified" executed="True" success="True" time="0.001" asserts="1" />
-                              <test-case name="Kistl.API.Client.Tests.BaseClientCollectionEntryTests.ObjectState_should_be_New_when_created" executed="True" success="True" time="0.000" asserts="1" />
-                              <test-case name="Kistl.API.Client.Tests.BaseClientCollectionEntryTests.should_be_attached_after_attaching" executed="False">
-                                <reason>
-                                  <message><![CDATA[Cannot get context without Kistl.API.{Client,Server} reference]]></message>
-                                </reason>
-                              </test-case>
-                              <test-case name="Kistl.API.Client.Tests.BaseClientCollectionEntryTests.should_not_be_attached_when_created" executed="True" success="True" time="0.001" asserts="1" />
-                              <test-case name="Kistl.API.Client.Tests.BaseClientCollectionEntryTests.should_roundtrip_IPersistenceObject_correctly" executed="True" success="True" time="0.018" asserts="3" />
+                              <test-case name="Kistl.API.Client.Tests.BaseClientCollectionEntryTests.fails_on_serializing_from_null_stream" executed="True" success="True" time="0.011" asserts="0" />
+                              <test-case name="Kistl.API.Client.Tests.BaseClientCollectionEntryTests.fails_on_serializing_to_null_stream" executed="True" success="True" time="0.003" asserts="0" />
+                              <test-case name="Kistl.API.Client.Tests.BaseClientCollectionEntryTests.FromStream_of_WrongType_fails" executed="True" success="True" time="0.019" asserts="1" />
+                              <test-case name="Kistl.API.Client.Tests.BaseClientCollectionEntryTests.should_not_be_attached_when_created" executed="True" success="True" time="0.002" asserts="1" />
+                              <test-case name="Kistl.API.Client.Tests.BaseClientCollectionEntryTests.should_roundtrip_IPersistenceObject_correctly" executed="True" success="True" time="0.028" asserts="2" />
                               <test-case name="Kistl.API.Client.Tests.BaseClientCollectionEntryTests.should_roundtrip_without_errors" executed="True" success="True" time="0.001" asserts="1" />
                             </results>
                           </test-suite>
-                          <test-suite name="BaseClientDataObjectTests" success="True" time="0.066" asserts="0">
+                          <test-suite name="BaseClientDataObjectTests" executed="True" success="True" time="0.092" asserts="0">
                             <results>
-                              <test-case name="Kistl.API.Client.Tests.BaseClientDataObjectTests.ApplyChanges" executed="True" success="True" time="0.005" asserts="2" />
+                              <test-case name="Kistl.API.Client.Tests.BaseClientDataObjectTests.ApplyChanges" executed="True" success="True" time="0.008" asserts="2" />
                               <test-case name="Kistl.API.Client.Tests.BaseClientDataObjectTests.ApplyChanges_Null" executed="True" success="True" time="0.001" asserts="0" />
-                              <test-case name="Kistl.API.Client.Tests.BaseClientDataObjectTests.AttachToContext" executed="True" success="True" time="0.021" asserts="4" />
-                              <test-case name="Kistl.API.Client.Tests.BaseClientDataObjectTests.AttachToContext_New" executed="True" success="True" time="0.001" asserts="4" />
+                              <test-case name="Kistl.API.Client.Tests.BaseClientDataObjectTests.AttachToContext" executed="True" success="True" time="0.030" asserts="4" />
+                              <test-case name="Kistl.API.Client.Tests.BaseClientDataObjectTests.AttachToContext_New" executed="True" success="True" time="0.002" asserts="4" />
                               <test-case name="Kistl.API.Client.Tests.BaseClientDataObjectTests.AttachToContext_New_InvalidID" executed="True" success="True" time="0.002" asserts="1" />
-                              <test-case name="Kistl.API.Client.Tests.BaseClientDataObjectTests.AttachToContext_Twice" executed="True" success="True" time="0.001" asserts="4" />
+                              <test-case name="Kistl.API.Client.Tests.BaseClientDataObjectTests.AttachToContext_Twice" executed="True" success="True" time="0.002" asserts="4" />
                               <test-case name="Kistl.API.Client.Tests.BaseClientDataObjectTests.DetachFromContext" executed="True" success="True" time="0.002" asserts="5" />
-                              <test-case name="Kistl.API.Client.Tests.BaseClientDataObjectTests.DetachFromContext_NotAttached" executed="True" success="True" time="0.001" asserts="1" />
-                              <test-case name="Kistl.API.Client.Tests.BaseClientDataObjectTests.EventAttached" executed="True" success="True" time="0.004" asserts="1" />
-                              <test-case name="Kistl.API.Client.Tests.BaseClientDataObjectTests.FromStream_Null_StreamReader" executed="True" success="True" time="0.001" asserts="0" />
-                              <test-case name="Kistl.API.Client.Tests.BaseClientDataObjectTests.FromStream_WrongType" executed="True" success="True" time="0.002" asserts="0" />
-                              <test-case name="Kistl.API.Client.Tests.BaseClientDataObjectTests.NotifyChange" executed="True" success="True" time="0.000" asserts="1" />
+                              <test-case name="Kistl.API.Client.Tests.BaseClientDataObjectTests.DetachFromContext_NotAttached" executed="True" success="True" time="0.002" asserts="1" />
+                              <test-case name="Kistl.API.Client.Tests.BaseClientDataObjectTests.FromStream_Null_StreamReader" executed="True" success="True" time="0.002" asserts="0" />
+                              <test-case name="Kistl.API.Client.Tests.BaseClientDataObjectTests.FromStream_WrongType" executed="True" success="True" time="0.003" asserts="0" />
                               <test-case name="Kistl.API.Client.Tests.BaseClientDataObjectTests.NotifyPropertyChanged_ing" executed="True" success="True" time="0.001" asserts="1" />
-                              <test-case name="Kistl.API.Client.Tests.BaseClientDataObjectTests.ObjectState_CreatedObject" executed="True" success="True" time="0.001" asserts="1" />
+                              <test-case name="Kistl.API.Client.Tests.BaseClientDataObjectTests.ObjectState_CreatedObject" executed="True" success="True" time="0.000" asserts="1" />
                               <test-case name="Kistl.API.Client.Tests.BaseClientDataObjectTests.ObjectState_CreatedObject_Modified" executed="True" success="True" time="0.001" asserts="1" />
-                              <test-case name="Kistl.API.Client.Tests.BaseClientDataObjectTests.ObjectState_New_then_UnModified" executed="True" success="True" time="0.000" asserts="2" />
-                              <test-case name="Kistl.API.Client.Tests.BaseClientDataObjectTests.ObjectState_ObjectWithID" executed="True" success="True" time="0.001" asserts="1" />
-                              <test-case name="Kistl.API.Client.Tests.BaseClientDataObjectTests.ObjectState_ObjectWithID_Modified" executed="True" success="True" time="0.001" asserts="1" />
-                              <test-case name="Kistl.API.Client.Tests.BaseClientDataObjectTests.Stream" executed="True" success="True" time="0.002" asserts="5" />
+                              <test-case name="Kistl.API.Client.Tests.BaseClientDataObjectTests.ObjectState_New_then_UnModified" executed="True" success="True" time="0.009" asserts="2" />
+                              <test-case name="Kistl.API.Client.Tests.BaseClientDataObjectTests.ObjectState_ObjectWithID" executed="True" success="True" time="0.000" asserts="1" />
+                              <test-case name="Kistl.API.Client.Tests.BaseClientDataObjectTests.ObjectState_ObjectWithID_Modified" executed="True" success="True" time="0.000" asserts="1" />
+                              <test-case name="Kistl.API.Client.Tests.BaseClientDataObjectTests.Stream" executed="True" success="True" time="0.003" asserts="5" />
                               <test-case name="Kistl.API.Client.Tests.BaseClientDataObjectTests.ToStream_Null" executed="True" success="True" time="0.001" asserts="0" />
                             </results>
                           </test-suite>
-                          <test-suite name="KistlContextTests" success="True" time="0.525" asserts="0">
+                          <test-suite name="BinarySerializers" executed="True" success="True" time="0.010" asserts="0">
                             <results>
-                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.Attach_IDataObject_Existing_Twice_But_Different" executed="True" success="True" time="0.006" asserts="3" />
+                              <test-suite name="should_work_with_BaseClientStructObjects&lt;T&gt;" executed="True" success="True" time="0.008" asserts="0">
+                                <results>
+                                  <test-suite name="should_work_with_BaseClientStructObjects&lt;StructMock__Implementation__&gt;" executed="True" success="True" time="0.007" asserts="0">
+                                    <results>
+                                      <test-case name="Kistl.API.Client.Tests.BinarySerializers.should_work_with_BaseClientStructObjects`1[[Kistl.API.Client.Tests.BinarySerializers.StructMock__Implementation__, Kistl.API.Client.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]].when_deserializing" executed="True" success="True" time="0.005" asserts="0" />
+                                      <test-case name="Kistl.API.Client.Tests.BinarySerializers.should_work_with_BaseClientStructObjects`1[[Kistl.API.Client.Tests.BinarySerializers.StructMock__Implementation__, Kistl.API.Client.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]].when_serializing" executed="True" success="True" time="0.000" asserts="0" />
+                                    </results>
+                                  </test-suite>
+                                </results>
+                              </test-suite>
+                            </results>
+                          </test-suite>
+                          <test-suite name="KistlContextTests" executed="True" success="True" time="0.506" asserts="0">
+                            <results>
+                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.Attach_IDataObject_Existing_Twice_But_Different" executed="True" success="True" time="0.033" asserts="3" />
                               <test-case name="Kistl.API.Client.Tests.KistlContextTests.Attach_IDataObject_New" executed="True" success="True" time="0.002" asserts="2" />
                               <test-case name="Kistl.API.Client.Tests.KistlContextTests.Attach_IDataObject_Null" executed="True" success="True" time="0.001" asserts="0" />
-                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.Attach_IDataObject_Twice" executed="True" success="True" time="0.003" asserts="2" />
-                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.Attach_IDataObject_Twice_Modified" executed="True" success="True" time="0.005" asserts="4" />
-                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.Create_ObjectType" executed="True" success="True" time="0.010" asserts="4" />
+                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.Attach_IDataObject_Twice" executed="True" success="True" time="0.001" asserts="2" />
+                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.Attach_IDataObject_Twice_Modified" executed="True" success="True" time="0.002" asserts="4" />
+                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.Create_ObjectType" executed="True" success="True" time="0.003" asserts="4" />
                               <test-case name="Kistl.API.Client.Tests.KistlContextTests.Create_T" executed="True" success="True" time="0.003" asserts="4" />
-                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.Create_T_Twice" executed="True" success="True" time="0.004" asserts="7" />
-                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.Create_Type" executed="True" success="True" time="0.003" asserts="4" />
-                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.Delete" executed="True" success="True" time="0.184" asserts="2" />
+                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.Create_T_Twice" executed="True" success="True" time="0.002" asserts="7" />
+                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.Create_Type" executed="True" success="True" time="0.001" asserts="4" />
+                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.Delete" executed="True" success="True" time="0.271" asserts="2" />
                               <test-case name="Kistl.API.Client.Tests.KistlContextTests.Delete_Not_Attached" executed="True" success="True" time="0.002" asserts="0" />
                               <test-case name="Kistl.API.Client.Tests.KistlContextTests.Delete_Null" executed="True" success="True" time="0.002" asserts="0" />
                               <test-case name="Kistl.API.Client.Tests.KistlContextTests.Delete_Wrong_Context" executed="True" success="True" time="0.007" asserts="0" />
-                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.Detach" executed="True" success="True" time="0.009" asserts="2" />
-                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.Detach_NotAttached" executed="True" success="True" time="0.003" asserts="0" />
-                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.Detach_Null" executed="True" success="True" time="0.002" asserts="0" />
-                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.Detach_Twice" executed="True" success="True" time="0.009" asserts="2" />
-                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.Find_ObjectType_should_return_correct_item" executed="True" success="True" time="0.010" asserts="5" />
-                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.Find_should_return_the_same_object_on_second_call" executed="True" success="True" time="0.007" asserts="1" />
+                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.Detach" executed="True" success="True" time="0.002" asserts="2" />
+                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.Detach_NotAttached" executed="True" success="True" time="0.002" asserts="0" />
+                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.Detach_Null" executed="True" success="True" time="0.001" asserts="0" />
+                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.Detach_Twice" executed="True" success="True" time="0.002" asserts="2" />
+                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.Find_ObjectType_should_return_correct_item" executed="True" success="True" time="0.008" asserts="5" />
+                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.Find_should_return_the_same_object_on_second_call" executed="True" success="True" time="0.006" asserts="1" />
                               <test-case name="Kistl.API.Client.Tests.KistlContextTests.Find_T_should_return_correct_item" executed="True" success="True" time="0.007" asserts="5" />
-                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.GetList" executed="True" success="True" time="0.026" asserts="17" />
-                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.GetList_GetListOf" executed="True" success="True" time="0.027" asserts="9" />
-                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.GetList_Twice" executed="True" success="True" time="0.038" asserts="19" />
-                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.GetListOf" executed="True" success="True" time="0.009" asserts="8" />
-                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.GetListOf_Twice" executed="True" success="True" time="0.011" asserts="10" />
-                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.GetObject_GetList" executed="True" success="True" time="0.030" asserts="7" />
-                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.GetObject_GetListOf" executed="True" success="True" time="0.013" asserts="7" />
+                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.GetList" executed="True" success="True" time="0.012" asserts="17" />
+                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.GetList_GetListOf" executed="True" success="True" time="0.011" asserts="9" />
+                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.GetList_Twice" executed="True" success="True" time="0.006" asserts="19" />
+                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.GetListOf" executed="True" success="True" time="0.003" asserts="8" />
+                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.GetListOf_Twice" executed="True" success="True" time="0.003" asserts="10" />
+                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.GetObject_GetList" executed="True" success="True" time="0.009" asserts="7" />
+                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.GetObject_GetListOf" executed="True" success="True" time="0.007" asserts="7" />
                               <test-case name="Kistl.API.Client.Tests.KistlContextTests.GetQuery_ObjectType_should_create_query_with_proper_ElementType" executed="True" success="True" time="0.002" asserts="2" />
-                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.GetQuery_T_should_create_query_with_proper_ElementType" executed="True" success="True" time="0.002" asserts="2" />
-                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.SubmitChanges" executed="True" success="True" time="0.016" asserts="6" />
-                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.SubmitChanges_Delete" executed="True" success="True" time="0.015" asserts="5" />
-                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.SubmitChanges_New" executed="True" success="True" time="0.006" asserts="4" />
-                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.SubmitChanges_Nothing" executed="True" success="True" time="0.009" asserts="4" />
+                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.GetQuery_T_should_create_query_with_proper_ElementType" executed="True" success="True" time="0.001" asserts="2" />
+                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.SubmitChanges" executed="True" success="True" time="0.027" asserts="6" />
+                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.SubmitChanges_Delete" executed="True" success="True" time="0.007" asserts="5" />
+                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.SubmitChanges_New" executed="True" success="True" time="0.002" asserts="4" />
+                              <test-case name="Kistl.API.Client.Tests.KistlContextTests.SubmitChanges_Nothing" executed="True" success="True" time="0.006" asserts="4" />
+                            </results>
+                          </test-suite>
+                          <test-suite name="N_to_M_relations" executed="True" success="True" time="0.141" asserts="0">
+                            <results>
+                              <test-suite name="should_synchronize" executed="True" success="True" time="0.137" asserts="0">
+                                <results>
+                                  <test-case name="Kistl.API.Client.Tests.N_to_M_relations.should_synchronize.init_correct" executed="True" success="True" time="0.039" asserts="5" />
+                                  <test-case name="Kistl.API.Client.Tests.N_to_M_relations.should_synchronize.when_setting_both_sides_matrix" executed="True" success="True" time="0.050" asserts="5" />
+                                  <test-case name="Kistl.API.Client.Tests.N_to_M_relations.should_synchronize.when_setting_both_sides_one_item" executed="True" success="True" time="0.003" asserts="3" />
+                                  <test-case name="Kistl.API.Client.Tests.N_to_M_relations.should_synchronize.when_setting_both_sides_two_items" executed="True" success="True" time="0.006" asserts="4" />
+                                  <test-case name="Kistl.API.Client.Tests.N_to_M_relations.should_synchronize.when_setting_M_side_matrix" executed="True" success="True" time="0.007" asserts="5" />
+                                  <test-case name="Kistl.API.Client.Tests.N_to_M_relations.should_synchronize.when_setting_M_side_one_item" executed="True" success="True" time="0.002" asserts="3" />
+                                  <test-case name="Kistl.API.Client.Tests.N_to_M_relations.should_synchronize.when_setting_M_side_two_items" executed="True" success="True" time="0.004" asserts="4" />
+                                  <test-case name="Kistl.API.Client.Tests.N_to_M_relations.should_synchronize.when_setting_N_side_matrix" executed="True" success="True" time="0.006" asserts="5" />
+                                  <test-case name="Kistl.API.Client.Tests.N_to_M_relations.should_synchronize.when_setting_N_side_one_item" executed="True" success="True" time="0.003" asserts="3" />
+                                  <test-case name="Kistl.API.Client.Tests.N_to_M_relations.should_synchronize.when_setting_N_side_two_items" executed="True" success="True" time="0.003" asserts="4" />
+                                </results>
+                              </test-suite>
+                            </results>
+                          </test-suite>
+                          <test-suite name="OneNRelationListTests" executed="True" success="True" time="0.016" asserts="0">
+                            <results>
+                              <test-case name="Kistl.API.Client.Tests.OneNRelationListTests.AddRemoveTest" executed="True" success="True" time="0.015" asserts="12" />
                             </results>
                           </test-suite>
                         </results>
