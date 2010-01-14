@@ -834,6 +834,13 @@ namespace Kistl.App.Projekte
 			else
 				CreatedBy__Implementation__ = null;
 		}
+
+        public override AccessRights CurrentAccessRights { get { return (AccessRights)CurrentAccessRights__Implementation__; } }
+        [EdmScalarProperty(IsNullable=false)]
+        public int CurrentAccessRights__Implementation__ { get; set; }
+        [EdmScalarProperty(IsNullable=false)]
+        public int CurrentIdentity__Implementation__ { get; set; }
+
 #region Serializer
 
 
