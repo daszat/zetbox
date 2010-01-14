@@ -32,7 +32,7 @@ namespace Kistl.App.GUI
         }
 
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
-           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.IdProperty
+           // Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.IdProperty
         public override int ID
         {
             get
@@ -67,7 +67,7 @@ namespace Kistl.App.GUI
     Preferred Storage: MergeIntoA
     */
         // object reference property
-   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
+   		// Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -156,7 +156,7 @@ namespace Kistl.App.GUI
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
-           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingDataProperty
+           // Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.NotifyingDataProperty
         public virtual Guid ExportGuid
         {
             get
@@ -221,7 +221,7 @@ namespace Kistl.App.GUI
     Preferred Storage: MergeIntoA
     */
         // object reference property
-   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
+   		// Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -312,7 +312,7 @@ namespace Kistl.App.GUI
     Preferred Storage: MergeIntoA
     */
         // object reference property
-   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
+   		// Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -397,7 +397,7 @@ namespace Kistl.App.GUI
         /// Which toolkit provides this View
         /// </summary>
         // enumeration property
-   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.EnumerationPropertyTemplate
+   		// Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.EnumerationPropertyTemplate
         // implement the user-visible interface
         public Kistl.App.GUI.Toolkit Toolkit
         {

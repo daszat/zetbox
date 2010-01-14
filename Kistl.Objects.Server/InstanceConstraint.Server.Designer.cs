@@ -32,7 +32,7 @@ namespace Kistl.App.Base
         }
 
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
-           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.IdProperty
+           // Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.IdProperty
         public override int ID
         {
             get

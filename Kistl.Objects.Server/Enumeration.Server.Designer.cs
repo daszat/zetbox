@@ -42,7 +42,7 @@ namespace Kistl.App.Base
     Preferred Storage: MergeIntoB
     */
         // object list property
-   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.ObjectListProperty
+   		// Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.ObjectListProperty
 	    // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]

@@ -42,7 +42,7 @@ namespace Kistl.App.Base
     Preferred Storage: MergeIntoB
     */
         // object reference property
-   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
+   		// Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -133,7 +133,7 @@ namespace Kistl.App.Base
     Preferred Storage: MergeIntoA
     */
         // object list property
-   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.ObjectListProperty
+   		// Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.ObjectListProperty
 	    // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -181,7 +181,7 @@ namespace Kistl.App.Base
     Preferred Storage: MergeIntoA
     */
         // object reference property
-   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
+   		// Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -272,7 +272,7 @@ namespace Kistl.App.Base
     Preferred Storage: Separate
     */
         // collection reference property
-		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.CollectionEntryListProperty
+		// Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.CollectionEntryListProperty
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -317,7 +317,7 @@ namespace Kistl.App.Base
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
-           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingDataProperty
+           // Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.NotifyingDataProperty
         public virtual bool IsFrozenObject
         {
             get
@@ -369,7 +369,7 @@ namespace Kistl.App.Base
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
-           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingDataProperty
+           // Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.NotifyingDataProperty
         public virtual bool IsSimpleObject
         {
             get
@@ -418,7 +418,7 @@ namespace Kistl.App.Base
         /// Set of security rules to filter access rights
         /// </summary>
         // value list property
-   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.ValueCollectionProperty
+   		// Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.ValueCollectionProperty
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -466,7 +466,7 @@ namespace Kistl.App.Base
     Preferred Storage: MergeIntoB
     */
         // object list property
-   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.ObjectListProperty
+   		// Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.ObjectListProperty
 	    // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -511,7 +511,7 @@ namespace Kistl.App.Base
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
-           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingDataProperty
+           // Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.NotifyingDataProperty
         public virtual string TableName
         {
             get

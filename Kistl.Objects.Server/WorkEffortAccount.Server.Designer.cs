@@ -32,7 +32,7 @@ namespace Kistl.App.TimeRecords
         }
 
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
-           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.IdProperty
+           // Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.IdProperty
         public override int ID
         {
             get
@@ -64,7 +64,7 @@ namespace Kistl.App.TimeRecords
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
-           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingDataProperty
+           // Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.NotifyingDataProperty
         public virtual double? BudgetHours
         {
             get
@@ -119,7 +119,7 @@ namespace Kistl.App.TimeRecords
     Preferred Storage: Separate
     */
         // collection reference property
-		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.CollectionEntryListProperty
+		// Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.CollectionEntryListProperty
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -164,7 +164,7 @@ namespace Kistl.App.TimeRecords
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
-           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingDataProperty
+           // Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.NotifyingDataProperty
         public virtual string Name
         {
             get
@@ -216,7 +216,7 @@ namespace Kistl.App.TimeRecords
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
-           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingDataProperty
+           // Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.NotifyingDataProperty
         public virtual string Notes
         {
             get
@@ -268,7 +268,7 @@ namespace Kistl.App.TimeRecords
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
-           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingDataProperty
+           // Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.NotifyingDataProperty
         public virtual double? SpentHours
         {
             get

@@ -32,7 +32,7 @@ namespace Kistl.App.Base
         }
 
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
-           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.IdProperty
+           // Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.IdProperty
         public override int ID
         {
             get
@@ -64,7 +64,7 @@ namespace Kistl.App.Base
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
-           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingDataProperty
+           // Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.NotifyingDataProperty
         public virtual string DisplayName
         {
             get
@@ -116,7 +116,7 @@ namespace Kistl.App.Base
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
-           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingDataProperty
+           // Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.NotifyingDataProperty
         public virtual string Password
         {
             get
@@ -168,7 +168,7 @@ namespace Kistl.App.Base
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
-           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingDataProperty
+           // Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.NotifyingDataProperty
         public virtual string UserName
         {
             get
@@ -220,7 +220,7 @@ namespace Kistl.App.Base
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
-           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingDataProperty
+           // Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.NotifyingDataProperty
         public virtual string WCFAccount
         {
             get

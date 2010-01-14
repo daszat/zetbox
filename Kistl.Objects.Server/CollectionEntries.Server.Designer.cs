@@ -21,7 +21,7 @@ namespace Kistl.App.Base
     {
     
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
-           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.IdProperty
+           // Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.IdProperty
         public override int ID
         {
             get
@@ -48,7 +48,7 @@ namespace Kistl.App.Base
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
-           // Kistl.Server.Generators.EntityFramework.Implementation.CollectionEntries.ExportGuidProperty
+           // Kistl.DalProvider.EF.Generator.Implementation.CollectionEntries.ExportGuidProperty
         public virtual Guid ExportGuid
         {
             get
@@ -82,7 +82,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// Reference to the A-Side member of this CollectionEntry
         /// </summary>
-   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
+   		// Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -145,7 +145,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
-   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
+   		// Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -317,7 +317,7 @@ namespace Kistl.App.GUI
     {
     
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
-           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.IdProperty
+           // Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.IdProperty
         public override int ID
         {
             get
@@ -344,7 +344,7 @@ namespace Kistl.App.GUI
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
-           // Kistl.Server.Generators.EntityFramework.Implementation.CollectionEntries.ExportGuidProperty
+           // Kistl.DalProvider.EF.Generator.Implementation.CollectionEntries.ExportGuidProperty
         public virtual Guid ExportGuid
         {
             get
@@ -378,7 +378,7 @@ namespace Kistl.App.GUI
         /// <summary>
         /// Reference to the A-Side member of this CollectionEntry
         /// </summary>
-   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
+   		// Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -441,7 +441,7 @@ namespace Kistl.App.GUI
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
-   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
+   		// Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -609,7 +609,7 @@ namespace Kistl.App.Test
     {
     
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
-           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.IdProperty
+           // Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.IdProperty
         public override int ID
         {
             get
@@ -640,7 +640,7 @@ namespace Kistl.App.Test
         /// <summary>
         /// Reference to the A-Side member of this CollectionEntry
         /// </summary>
-   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
+   		// Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -703,7 +703,7 @@ namespace Kistl.App.Test
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
-   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
+   		// Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -852,7 +852,7 @@ namespace Kistl.App.Base
     {
     
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
-           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.IdProperty
+           // Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.IdProperty
         public override int ID
         {
             get
@@ -879,7 +879,7 @@ namespace Kistl.App.Base
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
-           // Kistl.Server.Generators.EntityFramework.Implementation.CollectionEntries.ExportGuidProperty
+           // Kistl.DalProvider.EF.Generator.Implementation.CollectionEntries.ExportGuidProperty
         public virtual Guid ExportGuid
         {
             get
@@ -913,7 +913,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// Reference to the A-Side member of this CollectionEntry
         /// </summary>
-   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
+   		// Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -976,7 +976,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
-   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
+   		// Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -1144,7 +1144,7 @@ namespace Kistl.App.GUI
     {
     
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
-           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.IdProperty
+           // Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.IdProperty
         public override int ID
         {
             get
@@ -1171,7 +1171,7 @@ namespace Kistl.App.GUI
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
-           // Kistl.Server.Generators.EntityFramework.Implementation.CollectionEntries.ExportGuidProperty
+           // Kistl.DalProvider.EF.Generator.Implementation.CollectionEntries.ExportGuidProperty
         public virtual Guid ExportGuid
         {
             get
@@ -1205,7 +1205,7 @@ namespace Kistl.App.GUI
         /// <summary>
         /// Reference to the A-Side member of this CollectionEntry
         /// </summary>
-   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
+   		// Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -1268,7 +1268,7 @@ namespace Kistl.App.GUI
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
-   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
+   		// Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -1436,7 +1436,7 @@ namespace Kistl.App.Projekte
     {
     
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
-           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.IdProperty
+           // Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.IdProperty
         public override int ID
         {
             get
@@ -1467,7 +1467,7 @@ namespace Kistl.App.Projekte
         /// <summary>
         /// Reference to the A-Side member of this CollectionEntry
         /// </summary>
-   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
+   		// Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -1529,7 +1529,7 @@ namespace Kistl.App.Projekte
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
-           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingValueProperty
+           // Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual int? A_pos
         {
             get
@@ -1557,7 +1557,7 @@ namespace Kistl.App.Projekte
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
-   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
+   		// Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -1619,7 +1619,7 @@ namespace Kistl.App.Projekte
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
-           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingValueProperty
+           // Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual int? B_pos
         {
             get
@@ -1761,7 +1761,7 @@ namespace Kistl.App.GUI
     {
     
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
-           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.IdProperty
+           // Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.IdProperty
         public override int ID
         {
             get
@@ -1792,7 +1792,7 @@ namespace Kistl.App.GUI
         /// <summary>
         /// Reference to the A-Side member of this CollectionEntry
         /// </summary>
-   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
+   		// Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -1855,7 +1855,7 @@ namespace Kistl.App.GUI
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
-   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
+   		// Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -2004,7 +2004,7 @@ namespace Kistl.App.Base
     {
     
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
-           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.IdProperty
+           // Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.IdProperty
         public override int ID
         {
             get
@@ -2031,7 +2031,7 @@ namespace Kistl.App.Base
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
-           // Kistl.Server.Generators.EntityFramework.Implementation.CollectionEntries.ExportGuidProperty
+           // Kistl.DalProvider.EF.Generator.Implementation.CollectionEntries.ExportGuidProperty
         public virtual Guid ExportGuid
         {
             get
@@ -2065,7 +2065,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// Reference to the A-Side member of this CollectionEntry
         /// </summary>
-   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
+   		// Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -2127,7 +2127,7 @@ namespace Kistl.App.Base
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
-           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingValueProperty
+           // Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual int? A_pos
         {
             get
@@ -2155,7 +2155,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
-   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
+   		// Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -2217,7 +2217,7 @@ namespace Kistl.App.Base
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
-           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingValueProperty
+           // Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual int? B_pos
         {
             get
@@ -2393,7 +2393,7 @@ namespace Kistl.App.GUI
     {
     
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
-           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.IdProperty
+           // Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.IdProperty
         public override int ID
         {
             get
@@ -2424,7 +2424,7 @@ namespace Kistl.App.GUI
         /// <summary>
         /// Reference to the A-Side member of this CollectionEntry
         /// </summary>
-   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
+   		// Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -2487,7 +2487,7 @@ namespace Kistl.App.GUI
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
-   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
+   		// Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -2636,7 +2636,7 @@ namespace Kistl.App.GUI
     {
     
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
-           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.IdProperty
+           // Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.IdProperty
         public override int ID
         {
             get
@@ -2667,7 +2667,7 @@ namespace Kistl.App.GUI
         /// <summary>
         /// Reference to the A-Side member of this CollectionEntry
         /// </summary>
-   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
+   		// Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -2730,7 +2730,7 @@ namespace Kistl.App.GUI
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
-   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
+   		// Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -2880,7 +2880,7 @@ namespace Kistl.App.TimeRecords
     {
     
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
-           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.IdProperty
+           // Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.IdProperty
         public override int ID
         {
             get
@@ -2911,7 +2911,7 @@ namespace Kistl.App.TimeRecords
         /// <summary>
         /// Reference to the A-Side member of this CollectionEntry
         /// </summary>
-   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
+   		// Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -2974,7 +2974,7 @@ namespace Kistl.App.TimeRecords
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
-   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
+   		// Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -3122,7 +3122,7 @@ namespace Kistl.App.Projekte
     {
     
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
-           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.IdProperty
+           // Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.IdProperty
         public override int ID
         {
             get
@@ -3152,7 +3152,7 @@ namespace Kistl.App.Projekte
         /// <summary>
         /// Reference to the A-Side member of this CollectionEntry
         /// </summary>
-   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
+   		// Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -3219,7 +3219,7 @@ public Kunde Parent { get { return A; } set { A = value; } }
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
-           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingValueProperty
+           // Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual string B
         {
             get
@@ -3320,7 +3320,7 @@ namespace Kistl.App.Base
     {
     
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
-           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.IdProperty
+           // Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.IdProperty
         public override int ID
         {
             get
@@ -3350,7 +3350,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// Reference to the A-Side member of this CollectionEntry
         /// </summary>
-   		// Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
+   		// Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -3417,7 +3417,7 @@ public ObjectClass Parent { get { return A; } set { A = value; } }
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
-           // Kistl.Server.Generators.EntityFramework.Implementation.ObjectClasses.NotifyingValueProperty
+           // Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual string B
         {
             get

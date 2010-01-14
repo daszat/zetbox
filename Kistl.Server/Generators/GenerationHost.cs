@@ -146,7 +146,16 @@ namespace Kistl.Server.Generators
 
         private void CallTemplateToContext(string templateClass, params object[] parameters)
         {
-            Type t = Type.GetType(String.Format("{0}.{1}", this.Settings["providertemplatepath"], templateClass));
+            var providerName = String.Format(
+                "{0}.{1}, {2}",
+                this.Settings["providertemplatenamespace"],
+                templateClass,
+                this.Settings["providertemplateassembly"]);
+            Type t = Type.GetType(providerName);
+            if (t == null)
+            {
+                Log.InfoFormat("provided template [{0}] not found", providerName);
+            }
             t = t ?? Type.GetType(String.Format("{0}.{1}", this.Settings["basetemplatepath"], templateClass));
 
             if (t == null)

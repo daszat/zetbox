@@ -16,7 +16,6 @@ namespace Kistl.Server.Generators.FrozenObjects
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Server.Generator.Frozen");
 
         public override string Description { get { return "Frozen"; } }
-        public override string TemplateProviderPath { get { return this.GetType().Namespace; } }
         public override string TargetNameSpace { get { return "Kistl.Objects.Frozen"; } }
         public override string BaseName { get { return "Frozen"; } }
         public override string ProjectGuid { get { return "{CA615374-AEA3-4187-BF73-584CCD082766}"; } }

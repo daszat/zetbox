@@ -11,7 +11,6 @@ namespace Kistl.DalProvider.EF.Generator
         : BaseDataObjectGenerator
     {
         public override string Description { get { return "EfObjects"; } }
-        public override string TemplateProviderPath { get { return this.GetType().Namespace; } }
         public override string TargetNameSpace { get { return "Kistl.Objects.Server"; } }
         public override string BaseName { get { return "Server"; } }
         public override string ProjectGuid { get { return "{62B9344A-87D1-4715-9ABB-EAE0ACC4F523}"; } }

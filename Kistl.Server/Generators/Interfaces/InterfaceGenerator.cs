@@ -12,7 +12,6 @@ namespace Kistl.Server.Generators.Interfaces
         : BaseDataObjectGenerator
     {
         public override string Description { get { return "Interfaces"; } }
-        public override string TemplateProviderPath { get { return this.GetType().Namespace; } }
         public override string TargetNameSpace { get { return "Kistl.Objects"; } }
         public override string BaseName { get { return "Interface"; } }
         public override string ProjectGuid { get { return "{0C9E6E69-309F-46F7-A936-D5762229DEB9}"; } }

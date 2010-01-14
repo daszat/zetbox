@@ -169,18 +169,21 @@ namespace Kistl.Server.Generators
                 }
                 else
                 {
-                    Log.InfoFormat("No results found in [{0}]", outputPath);
+                    Log.InfoFormat("No old results found in [{0}]", outputPath);
                 }
             }
         }
 
-        internal static TemplateGenerator GetTemplateGenerator(string providerTemplatePath,
+        internal static TemplateGenerator GetTemplateGenerator(
+            string providerTemplateNamespace,
+            string providerTemplateAssembly,
             string template, string output, string targetdir, params object[] templateParameter)
         {
             var gen = new TemplateGenerator();
 
             gen.Settings.Add("basetemplatepath", "Kistl.Server.Generators.Templates");
-            gen.Settings.Add("providertemplatepath", providerTemplatePath);
+            gen.Settings.Add("providertemplatenamespace", providerTemplateNamespace);
+            gen.Settings.Add("providertemplateassembly", providerTemplateAssembly);
 
             gen.Settings.Add("template", template);
 

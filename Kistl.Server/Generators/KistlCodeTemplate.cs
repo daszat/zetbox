@@ -20,7 +20,7 @@ namespace Kistl.Server.Generators
 
         protected string ResolveResourceUrl(string template)
         {
-            return "res://kistl.server/" + Settings["providertemplatepath"] + "." + template;
+            return String.Format("res://{0}/{1}.{2}", Settings["providertemplateassembly"], Settings["providertemplatenamespace"], template);
         }
     }
 }
