@@ -28,11 +28,11 @@ namespace Kistl.Server.SchemaManagement
 
         #region Constructor
 
-        public SchemaManager(ISchemaProvider provider, IKistlContext schema, MemoryContext.ConfiguringFactory memoryContextFactory)
+        public SchemaManager(ISchemaProvider provider, IKistlContext schema, IKistlContext savedSchema)
         {
             this.schema = schema;
             this.db = provider;
-            this.Case = new Cases(schema, provider, memoryContextFactory);
+            this.Case = new Cases(schema, provider, savedSchema);
         }
 
         #endregion
@@ -103,18 +103,17 @@ namespace Kistl.Server.SchemaManagement
         #endregion
 
         #region SavedSchema
-        public static IKistlContext GetSavedSchema(ISchemaProvider provider, MemoryContext.ConfiguringFactory memoryContextFactory)
+
+        public static void LoadSavedSchemaInto(ISchemaProvider provider, IKistlContext targetCtx)
         {
-            IKistlContext ctx = memoryContextFactory();
             string schema = provider.GetSavedSchema().TrimEnd((char)0); // Trim possible C++/Database/whatever ending 0 char
             if (!string.IsNullOrEmpty(schema))
             {
                 using (var ms = new MemoryStream(ASCIIEncoding.Default.GetBytes(schema)))
                 {
-                    Packaging.Importer.LoadFromXml(ctx, ms);
+                    Packaging.Importer.LoadFromXml(targetCtx, ms);
                 }
             }
-            return ctx;
         }
 
         private void SaveSchema(IKistlContext schema)

@@ -13,18 +13,6 @@ namespace Kistl.API
     public class MemoryContext
         : IKistlContext
     {
-        /// <summary>
-        /// Prototypical MemoryContext factory delegate for IoC.
-        /// </summary>
-        /// <returns>An empty MemoryContext using the configured interface and implementation assembly.</returns>
-        public delegate MemoryContext ConfiguringFactory();
-
-        /// <summary>
-        /// Prototypical MemoryContext factory delegate for IoC.
-        /// </summary>
-        /// <returns>An empty MemoryContext using the specified interface and implementation assembly.</returns>
-        public delegate MemoryContext Factory(Assembly interfaces, Assembly implementations);
-
         public MemoryContext(Assembly interfaces, Assembly implementations)
         {
             if (interfaces == null) { throw new ArgumentNullException("interfaces"); }

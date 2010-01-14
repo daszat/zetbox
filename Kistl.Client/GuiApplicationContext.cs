@@ -53,7 +53,7 @@ namespace Kistl.Client
         : ClientApiContext, IGuiApplicationContext
     {
         public static new GuiApplicationContext Current { get; private set; }
-        private readonly MemoryContext.ConfiguringFactory MemoryContextFactory;
+        private readonly Func<MemoryContext> MemoryContextFactory;
 
         /// <summary>
         /// 
@@ -65,7 +65,7 @@ namespace Kistl.Client
         /// of the <see cref="AssemblyLoader"/>, which is loaded in 
         /// the same calling method (which is too late).</param>
         /// <param name="memCtxFactory">The transient context will be created from this factory.</param>
-        public GuiApplicationContext(KistlConfig config, string tkName, MemoryContext.ConfiguringFactory memCtxFactory)
+        public GuiApplicationContext(KistlConfig config, string tkName, Func<MemoryContext> memCtxFactory)
             : base(config)
         {
             MemoryContextFactory = memCtxFactory;

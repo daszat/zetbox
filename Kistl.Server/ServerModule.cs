@@ -19,10 +19,14 @@ namespace Kistl.Server
             moduleBuilder
                 .Register((c, p) =>
                 {
+                    IKistlContext ctx = c.Resolve<MemoryContext>();
+                    ISchemaProvider schemaProvider = c.Resolve<ISchemaProvider>();
+                    SchemaManagement.SchemaManager.LoadSavedSchemaInto(schemaProvider, ctx);
+                    
                     return new SchemaManagement.SchemaManager(
-                        c.Resolve<ISchemaProvider>(),
-                        p.Named<IKistlContext>("ctx"),
-                        c.Resolve<MemoryContext.ConfiguringFactory>());
+                        schemaProvider,
+                        p.Named<IKistlContext>("newSchema"),
+                        ctx);
                 })
                 .FactoryScoped();
 

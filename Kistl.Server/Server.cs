@@ -202,7 +202,7 @@ namespace Kistl.Server
             using (Log.InfoTraceMethodCallFormat("withRepair=[{0}]", withRepair))
             using (var subContainer = container.CreateInnerContainer())
             using (IKistlContext ctx = KistlContext.GetContext())
-            using (var mgr = subContainer.Resolve<SchemaManagement.SchemaManager>(new NamedParameter("ctx", ctx)))
+            using (var mgr = subContainer.Resolve<SchemaManagement.SchemaManager>(new NamedParameter("newSchema", ctx)))
             {
                 mgr.CheckSchema(withRepair);
             }
@@ -212,11 +212,12 @@ namespace Kistl.Server
         {
             using (Log.InfoTraceMethodCallFormat("withRepair=[{0}]", withRepair))
             using (var subContainer = container.CreateInnerContainer())
-            using (IKistlContext ctx = SchemaManagement.SchemaManager.GetSavedSchema(
-                subContainer.Resolve<ISchemaProvider>(),
-                subContainer.Resolve<MemoryContext.ConfiguringFactory>()))
-            using (var mgr = subContainer.Resolve<SchemaManagement.SchemaManager>(new NamedParameter("ctx", ctx)))
             {
+                IKistlContext ctx = subContainer.Resolve<MemoryContext>();
+                ISchemaProvider schemaProvider = subContainer.Resolve<ISchemaProvider>();
+                SchemaManagement.SchemaManager.LoadSavedSchemaInto(schemaProvider, ctx);
+
+                var mgr = subContainer.Resolve<SchemaManagement.SchemaManager>(new NamedParameter("newSchema", ctx));
                 mgr.CheckSchema(withRepair);
             }
         }
@@ -226,11 +227,11 @@ namespace Kistl.Server
             using (Log.InfoTraceMethodCallFormat("file=[{0}],withRepair=[{1}]", file, withRepair))
             using (var subContainer = container.CreateInnerContainer())
             {
-                IKistlContext ctx = subContainer.Resolve<MemoryContext.ConfiguringFactory>().Invoke();
+                IKistlContext ctx = subContainer.Resolve<MemoryContext>();
                 using (FileStream fs = File.OpenRead(file))
                 {
                     Packaging.Importer.LoadFromXml(ctx, fs);
-                    var mgr = subContainer.Resolve<SchemaManagement.SchemaManager>(new NamedParameter("ctx", ctx));
+                    var mgr = subContainer.Resolve<SchemaManagement.SchemaManager>(new NamedParameter("newSchema", ctx));
                     mgr.CheckSchema(withRepair);
                 }
             }
@@ -241,20 +242,20 @@ namespace Kistl.Server
             using (Log.InfoTraceMethodCall())
             using (var subContainer = container.CreateInnerContainer())
             {
-                IKistlContext ctx = subContainer.Resolve<MemoryContext.ConfiguringFactory>().Invoke();
+                IKistlContext ctx = subContainer.Resolve<MemoryContext>();
+                IKistlContext dbctx = subContainer.Resolve<IKistlContext>();
 
-                // decouple database context
-                using (IKistlContext dbctx = KistlContext.GetContext())
+                // load database contents into local cache
+                // to be independent of the database when managing 
+                // the schema
+                using (MemoryStream ms = new MemoryStream())
                 {
-                    using (MemoryStream ms = new MemoryStream())
-                    {
-                        Packaging.Exporter.Publish(dbctx, ms, new string[] { "*" });
-                        ms.Seek(0, SeekOrigin.Begin);
-                        Packaging.Importer.LoadFromXml(ctx, ms);
-                    }
+                    Packaging.Exporter.Publish(dbctx, ms, new string[] { "*" });
+                    ms.Seek(0, SeekOrigin.Begin);
+                    Packaging.Importer.LoadFromXml(ctx, ms);
                 }
 
-                var mgr = subContainer.Resolve<SchemaManagement.SchemaManager>(new NamedParameter("ctx", ctx));
+                var mgr = subContainer.Resolve<SchemaManagement.SchemaManager>(new NamedParameter("newSchema", ctx));
                 mgr.UpdateSchema();
             }
         }
@@ -264,12 +265,12 @@ namespace Kistl.Server
             using (Log.InfoTraceMethodCallFormat("file=[{0}]", file))
             using (var subContainer = container.CreateInnerContainer())
             {
-                IKistlContext ctx = subContainer.Resolve<MemoryContext.ConfiguringFactory>().Invoke();
+                IKistlContext ctx = subContainer.Resolve<MemoryContext>(); 
                 using (FileStream fs = File.OpenRead(file))
                 {
                     Packaging.Importer.LoadFromXml(ctx, fs);
 
-                    var mgr = subContainer.Resolve<SchemaManagement.SchemaManager>(new NamedParameter("ctx", ctx));
+                    var mgr = subContainer.Resolve<SchemaManagement.SchemaManager>(new NamedParameter("newSchema", ctx));
                     mgr.UpdateSchema();
                 }
             }

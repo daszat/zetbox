@@ -20,18 +20,12 @@ namespace Kistl.Server.SchemaManagement
         #region Fields
         private readonly IKistlContext schema;
         private readonly ISchemaProvider db;
-        private readonly MemoryContext.ConfiguringFactory memoryContextFactory;
 
-        private IKistlContext _savedSchema;
+        private readonly IKistlContext _savedSchema;
         public IKistlContext savedSchema
         {
             get
             {
-                if (_savedSchema == null)
-                {
-                    _savedSchema = SchemaManager.GetSavedSchema(db, memoryContextFactory);
-                }
-
                 return _savedSchema;
             }
         }
@@ -46,11 +40,11 @@ namespace Kistl.Server.SchemaManagement
         }
         #endregion
 
-        internal Cases(IKistlContext schema, ISchemaProvider db, MemoryContext.ConfiguringFactory memoryContextFactory)
+        internal Cases(IKistlContext schema, ISchemaProvider db, IKistlContext savedSchema)
         {
             this.schema = schema;
             this.db = db;
-            this.memoryContextFactory = memoryContextFactory;
+            this._savedSchema = savedSchema;
         }
 
         // Add all IsCase_ + DoCase_ Methods

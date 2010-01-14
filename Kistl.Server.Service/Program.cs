@@ -138,7 +138,7 @@ namespace Kistl.Server.Service
                             Log.Debug("Prepare for deploy");
                             string file = arg.Arguments[0];
 
-                            XmlFallbackInitialisation(file, container.Resolve<MemoryContext.ConfiguringFactory>());
+                            XmlFallbackInitialisation(file, container.Resolve<Func<MemoryContext>>());
 
                             server.Deploy(file);
                             actiondone = true;
@@ -193,7 +193,7 @@ namespace Kistl.Server.Service
                             else if (arg.Arguments.Count == 1)
                             {
                                 string file = arg.Arguments[0];
-                                XmlFallbackInitialisation(file, container.Resolve<MemoryContext.ConfiguringFactory>());
+                                XmlFallbackInitialisation(file, container.Resolve<Func<MemoryContext>>());
                                 server.UpdateSchema(file);
                             }
                             else
@@ -279,7 +279,7 @@ namespace Kistl.Server.Service
             }
         }
 
-        private static void XmlFallbackInitialisation(string file, MemoryContext.ConfiguringFactory createCtx)
+        private static void XmlFallbackInitialisation(string file, Func<MemoryContext> createCtx)
         {
             ServerApplicationContext.Current.LoadNoopActionsManager();
 

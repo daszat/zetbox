@@ -30,7 +30,7 @@ namespace Kistl.DALProvider.EF
                 .ContainerScoped();
 
             moduleBuilder
-                .Register<MemoryContext.ConfiguringFactory>(c => () =>
+                .Register<MemoryContext>(c =>
                 {
                     // defer loading the assemblies until a memory context is needed to avoid 
                     // initialisation troubles
@@ -40,6 +40,10 @@ namespace Kistl.DALProvider.EF
                     System.Reflection.Assembly implementation = System.Reflection.Assembly.Load("Kistl.Objects.Server");
                     return new MemoryContext(interfaces, implementation);
                 })
+                .FactoryScoped();
+
+            moduleBuilder
+                .RegisterGeneratedFactory<Func<MemoryContext>>()
                 .ContainerScoped();
         }
     }
