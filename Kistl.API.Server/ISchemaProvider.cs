@@ -22,6 +22,9 @@ namespace Kistl.API.Server
 
         bool CheckTableExists(string tblName);
         bool CheckColumnExists(string tblName, string colName);
+        bool CheckViewExists(string viewName);
+        bool CheckTriggerExists(string objName, string triggerName);
+        bool CheckProcedureExists(string procName); 
         bool CheckFKConstraintExists(string fkName);
         bool CheckTableContainsData(string tblName);
         bool CheckColumnContainsNulls(string tblName, string colName);
@@ -42,9 +45,25 @@ namespace Kistl.API.Server
         void DropTable(string tblName);
         void DropColumn(string tblName, string colName);
         void DropFKConstraint(string tblName, string fkName);
+        void DropTrigger(string triggerName);
+        void DropView(string viewName);
+        void DropProcedure(string procName);
 
         void CopyColumnData(string srcTblName, string srcColName, string tblName, string colName);
 
         void CreateIndex(string tblName, string idxName, bool unique, bool clustered, params string[] columns);
+
+        void CreateWithRightsView(string viewName, string tblName, string tblNameRights);
+        void CreateWithRightsViewTrigger(string triggerName, string viewName, string tblName, string tblNameRights);
+        void CreateInsertRightsTrigger(string triggerName, string tblName, string tblNameRights);
+        void CreateUpdateRightsTrigger(string triggerName, string viewUnmaterializedName, string tblName, string tblNameRights);
+        /// <summary>
+        /// TODO: Add more complex logic here
+        /// </summary>
+        /// <param name="viewName"></param>
+        /// <param name="tblName"></param>
+        /// <param name="tblNameRights"></param>
+        void CreateRightsViewUnmaterialized(string viewName, string tblName, string tblNameRights);
+        void CreateRefreshRightsOnProcedure(string procName, string viewUnmaterializedName, string tblName, string tblNameRights);
     }
 }

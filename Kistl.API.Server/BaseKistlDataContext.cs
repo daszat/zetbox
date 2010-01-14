@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Collections;
+using Kistl.App.Extensions;
 
 namespace Kistl.API.Server
 {
@@ -161,6 +162,27 @@ namespace Kistl.API.Server
         /// <returns>Number of affected Objects</returns>
         public abstract int SubmitRestore();
 
+        /// <summary>
+        /// Refresh Rights for a given IDataObject.
+        /// </summary>
+        /// <param name="obj"></param>
+        protected abstract void RefreshRights(IDataObject obj);
+
+        /// <summary>
+        /// Refresh Rights for a given set of IDataObjects.
+        /// </summary>
+        /// <param name="objList"></param>
+        protected virtual void RefreshRights(IEnumerable<IDataObject> objList)
+        {
+            foreach (IDataObject obj in objList)
+            {
+            var objClass = obj.GetObjectClass(FrozenContext.Single);
+            if (objClass.HasSecurityRules())
+            {
+                RefreshRights(obj);
+            }
+            }
+        }
 
         protected virtual void NotifyChanging(IEnumerable<IDataObject> changedOrAdded)
         {
@@ -379,9 +401,9 @@ namespace Kistl.API.Server
         {
             get
             {
-                if (_Identity == null && System.Threading.Thread.CurrentPrincipal != null && System.Threading.Thread.CurrentPrincipal.Identity.IsAuthenticated)
+                if (_Identity == null)
                 {
-                    _Identity = IdentityProviderFactory.GetProvider().LoadIdentity(this.GetQuery<Kistl.App.Base.Identity>(), System.Threading.Thread.CurrentPrincipal.Identity);
+                    _Identity = IdentityManager.LoadIdentity(this);
                 }
                 return _Identity;
             }

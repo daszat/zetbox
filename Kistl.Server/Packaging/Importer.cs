@@ -309,8 +309,8 @@ namespace Kistl.Server.Packaging
         {
             if (!objects.ContainsKey(exportGuid))
             {
-                if (!typeof(IDataObject).IsAssignableFrom(ifType.Type) && 
-                    !typeof(IRelationCollectionEntry).IsAssignableFrom(ifType.Type))
+                if (!ifType.Type.IsIDataObject() &&
+                    !ifType.Type.IsIRelationCollectionEntry())
                 {
                     throw new NotSupportedException("Interfacetype " + ifType + " is not supported");
                 }

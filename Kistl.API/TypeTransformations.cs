@@ -213,7 +213,7 @@ namespace Kistl.API
             if (type == null) { throw new ArgumentNullException("type"); }
 
             // shortcut and warn when trying to resolve an already resolved type
-            if (type.IsInterface && typeof(IPersistenceObject).IsAssignableFrom(type))
+            if (type.IsInterface && type.IsIPersistenceObject())
             {
                 Logging.Log.Error("Tried to convert an interface type a second time");
                 return type;
@@ -228,7 +228,7 @@ namespace Kistl.API
             }
             else if (!type.IsInterface)
             {
-                if (typeof(IPersistenceObject).IsAssignableFrom(type) || typeof(IStruct).IsAssignableFrom(type))
+                if (type.IsIPersistenceObject() || type.IsIStruct())
                 {
                     var parts = type.FullName.Split(new string[] { Helper.ImplementationSuffix }, StringSplitOptions.RemoveEmptyEntries);
                     type = Type.GetType(parts[0] + ", " + ApplicationContext.Current.InterfaceAssembly, true);
@@ -245,7 +245,7 @@ namespace Kistl.API
             if (type == null) { throw new ArgumentNullException("type"); }
 
             // shortcut and warn when trying to resolve an already resolved type
-            if (type.FullName.Contains(Kistl.API.Helper.ImplementationSuffix) && typeof(IPersistenceObject).IsAssignableFrom(type))
+            if (type.FullName.Contains(Kistl.API.Helper.ImplementationSuffix) && type.IsIPersistenceObject())
             {
                 Logging.Log.Error("Tried to convert an implementation type a second time");
                 return type;
@@ -282,7 +282,7 @@ namespace Kistl.API
                 }
                 else if (type.IsInterface)
                 {
-                    if (typeof(IPersistenceObject).IsAssignableFrom(type) || typeof(IStruct).IsAssignableFrom(type))
+                    if (type.IsIPersistenceObject() || type.IsIStruct())
                     {
                         // add ImplementationSuffix
                         string newType = type.FullName + Kistl.API.Helper.ImplementationSuffix + ", " + ApplicationContext.Current.ImplementationAssembly;

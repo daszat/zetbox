@@ -14,6 +14,9 @@ namespace Kistl.App.Extensions
     {
 
         private static ILookup<string, ObjectClass> _frozenClasses;
+        private static bool isInitializing = false;
+        private static string LockObject = "ObjectClassExtensions_Lock";
+
         public static ObjectClass GetObjectClass(this IDataObject obj, IKistlContext ctx)
         {
             if (obj == null) { throw new ArgumentNullException("obj"); }
@@ -33,6 +36,7 @@ namespace Kistl.App.Extensions
             {
                 // cache frozen classes by class name
                 InitializeFrozenCache(ctx);
+                if (_frozenClasses == null) return null; // Case #1363: GetObjectClass can be called by: InitializeFrozenCache -> QueryTranslator -> OfType Visit -> ApplySecurityFilter ->GetObjectClass
                 result = _frozenClasses[type.Name].First(o => o.Module.Namespace == type.Namespace && o.ClassName == type.Name);
             }
             else
@@ -45,9 +49,15 @@ namespace Kistl.App.Extensions
 
         private static void InitializeFrozenCache(Kistl.API.IKistlContext ctx)
         {
-            if (_frozenClasses == null)
+            lock (LockObject)
             {
-                _frozenClasses = ctx.GetQuery<ObjectClass>().ToLookup(cls => cls.ClassName);
+                if (_frozenClasses == null && !isInitializing)
+                {
+                    isInitializing = true;
+                    // Case #1363: GetQuery may call ObjectQueryTranslator which calls GetObjectClass ....
+                    _frozenClasses = ctx.GetQuery<ObjectClass>().ToLookup(cls => cls.ClassName);
+                    isInitializing = false;
+                }
             }
         }
 
@@ -102,18 +112,21 @@ namespace Kistl.App.Extensions
         
         public static bool HasSecurityRules(this ObjectClass cls)
         {
-            return HasSecurityRules(cls, true);
+            // TODO: Enable this when security is implemented correctly
+            return false;
+            //return HasSecurityRules(cls, true);
         }
         
         public static bool HasSecurityRules(this ObjectClass cls, bool lookupInBase)
         {
-            while (cls != null)
-            {
-                if (cls.SecurityRules.Count > 0)
-                    return true;
-                if (!lookupInBase) return false;
-                cls = cls.BaseObjectClass;
-            }
+            // TODO: Enable this when security is implemented correctly
+            //while (cls != null)
+            //{
+            //    if (cls.SecurityRules.Count > 0)
+            //        return true;
+            //    if (!lookupInBase) return false;
+            //    cls = cls.BaseObjectClass;
+            //}
             return false;
         }
 

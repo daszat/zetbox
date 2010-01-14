@@ -110,12 +110,17 @@ namespace Kistl.API.Server
         {
             if (expression == null) throw new ArgumentNullException("expression");
 
-            if (Logging.Linq.IsDebugEnabled)
+            if (Logging.Linq.IsInfoEnabled)
             {
-                Logging.Linq.Debug(expression.ToString());
+                Logging.Linq.Info(expression.ToString());
             }
 
             Expression translated = this.Visit(expression);
+            
+            if (Logging.Linq.IsDebugEnabled)
+            {
+                Logging.Linq.Debug(translated.Trace());
+            }
 
             object result = _source.Provider.Execute(translated);
             if (result != null && result is IPersistenceObject)
@@ -129,12 +134,17 @@ namespace Kistl.API.Server
         {
             if (expression == null) throw new ArgumentNullException("expression");
 
-            if (Logging.Linq.IsDebugEnabled)
+            if (Logging.Linq.IsInfoEnabled)
             {
-                Logging.Linq.Debug(expression.ToString());
+                Logging.Linq.Info(expression.ToString());
             }
 
             Expression translated = this.Visit(expression);
+            
+            if (Logging.Linq.IsDebugEnabled)
+            {
+                Logging.Linq.Debug(translated.Trace());
+            }
 
             IQueryable newQuery = _source.Provider.CreateQuery(translated);
             List<T> result = new List<T>();
@@ -184,28 +194,33 @@ namespace Kistl.API.Server
         #endregion
 
         #region Visits
-        protected override MethodCallExpression VisitMethodCall(MethodCallExpression m)
+        protected override Expression VisitMethodCall(MethodCallExpression m)
         {
             Expression objExp = base.Visit(m.Object);
             MethodInfo newMethod = GetMethodInfo(m.Method);
             ReadOnlyCollection<Expression> args = base.VisitExpressionList(m.Arguments);
-            m = Expression.Call(
+            var result = Expression.Call(
                 objExp,
                 newMethod,
                 args);
 
-            return m;
+            if (result.IsMethodCallExpression("OfType"))
+            {
+                var type = result.Type.FindElementTypes().First();
+                return AddSecurityFilter(result, new InterfaceType(type.ToInterfaceType()));
+            }
+            return result;
         }
 
         protected override Expression VisitUnary(UnaryExpression u)
         {
             // ignore Converts for IExportable objects
-            if (u.NodeType == ExpressionType.Convert && (typeof(Kistl.App.Base.IExportable).IsAssignableFrom(u.Type) || typeof(IExportableInternal).IsAssignableFrom(u.Type)))
+            if (u.NodeType == ExpressionType.Convert && (typeof(Kistl.App.Base.IExportable).IsAssignableFrom(u.Type) || u.Type.IsIExportableInternal()))
             {
                 return base.Visit(u.Operand);
             }
             // ignore Converts for persistence objects
-            else if (u.NodeType == ExpressionType.Convert && typeof(IPersistenceObject).IsAssignableFrom(u.Type))
+            else if (u.NodeType == ExpressionType.Convert && u.Type.IsIPersistenceObject())
             {
                 return base.Visit(u.Operand);
             }
@@ -215,7 +230,7 @@ namespace Kistl.API.Server
             }
         }
 
-        protected override LambdaExpression VisitLambda(LambdaExpression lambda)
+        protected override Expression VisitLambda(LambdaExpression lambda)
         {
             try
             {
@@ -230,49 +245,23 @@ namespace Kistl.API.Server
             }
         }
 
-        protected override TypeBinaryExpression VisitTypeIs(TypeBinaryExpression b)
+        protected override Expression VisitTypeIs(TypeBinaryExpression b)
         {
-            b = base.VisitTypeIs(b);
-            return Expression.TypeIs(b.Expression, b.TypeOperand.ToImplementationType());
+            var type = b.TypeOperand.ToImplementationType();
+            return Expression.TypeIs(Visit(b.Expression), type);
         }
 
         protected override Expression VisitConstant(ConstantExpression c)
         {
             if (c.Type.IsGenericType && c.Type.GetGenericTypeDefinition() == typeof(QueryTranslator<>))
             {
-                Expression result = _source.Expression;
-                //result = AddSecurityFilter(result, new InterfaceType(c.Type.GetGenericArguments().Single()));
-                return result;
+                // Just return the wrapped Linq Source
+                // Security Filter are added during OfType Visits
+                return _source.Expression;
             }
             else
             {
-                return base.VisitConstant(c);
-            }
-        }
-
-        private Expression AddSecurityFilter(Expression e, InterfaceType ifType)
-        {
-            var objClass = ifType.GetObjectClass(FrozenContext.Single);
-            if (objClass.HasSecurityRules())
-            {
-                var identity = IdentityProviderFactory.GetProvider().LoadIdentity(this._ctx.GetQuery<Kistl.App.Base.Identity>(), System.Threading.Thread.CurrentPrincipal.Identity);
-                if (identity == null) throw new System.Security.SecurityException(string.Format("Accessing type '{0}' without an Identity is not allowed", ifType.ToString()));
-
-                ParameterExpression pe = Expression.Parameter(typeof(T), "p");
-                var filter = Expression.Lambda<Func<T, bool>>(
-                            Expression.Equal(
-                                Expression.PropertyOrField(e, "CurrentIdentity" + Kistl.API.Helper.ImplementationSuffix),
-                                Expression.Constant(identity.ID),
-                                false,
-                                typeof(T).GetMethod("op_Equality")),
-                            new ParameterExpression[] { pe });
-
-                var result = Expression.Call(typeof(Queryable), "Where", new Type[] { e.Type }, e, filter);
-                return result;
-            }
-            else
-            {
-                return e;
+                return c;
             }
         }
 
@@ -286,7 +275,7 @@ namespace Kistl.API.Server
             return _Parameter[p.Name];
         }
 
-        protected override MemberExpression VisitMemberAccess(MemberExpression m)
+        protected override Expression VisitMemberAccess(MemberExpression m)
         {
             // e might be null if m.Member is a static reference
             Expression e = base.Visit(m.Expression);
@@ -350,15 +339,43 @@ namespace Kistl.API.Server
             }
         }
 
-        protected override BinaryExpression VisitBinary(BinaryExpression b)
+        protected override Expression VisitBinary(BinaryExpression b)
         {
-            if (b.NodeType == ExpressionType.Equal && typeof(IDataObject).IsAssignableFrom(b.Left.Type) && typeof(IDataObject).IsAssignableFrom(b.Right.Type))
+            if (b.NodeType == ExpressionType.Equal && b.Left.Type.IsIDataObject() && b.Right.Type.IsIDataObject())
             {
                 return Expression.MakeBinary(b.NodeType,
                     Expression.MakeMemberAccess(Visit(b.Left), b.Left.Type.FindFirstOrDefaultMember("ID")),
                     Expression.MakeMemberAccess(Visit(b.Right), b.Right.Type.FindFirstOrDefaultMember("ID")));
             }
             return base.VisitBinary(b);
+        }
+        #endregion
+
+        #region SecuityFilter
+        private Expression AddSecurityFilter(Expression e, InterfaceType ifType)
+        {
+            if (!ifType.Type.IsIDataObject()) return e;
+
+            // Case #1363: May return NULL during initialization
+            var objClass = ifType.GetObjectClass(FrozenContext.Single);
+            if (objClass == null || !objClass.HasSecurityRules()) return e;
+
+            var identity = IdentityManager.Current;
+            if (identity == null) throw new System.Security.SecurityException(string.Format("Accessing type '{0}' without an Identity is not allowed", ifType.ToString()));
+
+            var type = ifType.ToImplementationType().Type;
+
+            ParameterExpression pe = Expression.Parameter(type, "p");
+            var filter = Expression.Lambda(
+                        Expression.Equal(
+                            Expression.PropertyOrField(pe, "CurrentIdentity" + Kistl.API.Helper.ImplementationSuffix),
+                            Expression.Constant(identity.ID),
+                            false,
+                            typeof(int).GetMethod("op_Equality")),
+                        new ParameterExpression[] { pe });
+
+            var result = Expression.Call(typeof(Queryable), "Where", new Type[] { type }, e, filter);
+            return result;
         }
         #endregion
     }

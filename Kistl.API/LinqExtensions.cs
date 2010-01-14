@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Collections.ObjectModel;
+using System.Globalization;
+using System.Collections;
 
 namespace Kistl.API
 {
@@ -249,6 +252,100 @@ namespace Kistl.API
             return e.NodeType == ExpressionType.Call &&
                 ((MethodCallExpression)e).Method.Name == methodName &&
                 ((MethodCallExpression)e).Method.DeclaringType == type;
+        }
+
+        public static StringBuilder Trace(this Expression e)
+        {
+            StringBuilder sb = new StringBuilder();
+            TraceExpression(e, sb, 0);
+            return sb;
+        }
+
+        public static void TraceExpression(Expression e, StringBuilder sb, int indent)
+        {
+            Type t = e.GetType();
+            string indentString = Kistl.API.Helper.Indent(indent);
+            sb.Append(indentString);
+            sb.AppendLine(t.FullName);
+
+            PropertyInfo[] propertyInfos = null;
+            if (t.IsGenericType && t.GetGenericTypeDefinition() == typeof(Expression<>))
+            {
+                propertyInfos = t.BaseType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+            }
+            else
+            {
+                propertyInfos = t.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+            }
+
+            sb.AppendLine(indentString + "{");
+            foreach (PropertyInfo pInfo in propertyInfos)
+            {
+                TraceExpressionAttributes(e, pInfo, sb, indent + 2);
+            }
+            sb.AppendLine(indentString + "}");
+        }
+
+        private static void TraceExpressionAttributes(object obj, PropertyInfo pInfo, StringBuilder sb, int indent)
+        {
+            string indentString = Kistl.API.Helper.Indent(indent);
+            sb.Append(indentString);
+            sb.AppendFormat("[{0}] {1}: ", pInfo.PropertyType.Name, pInfo.Name);
+
+            object value = pInfo.GetValue(obj, null);
+            if (value != null)
+            {
+                if (value.GetType().IsGenericType && value.GetType().GetGenericTypeDefinition() == typeof(ReadOnlyCollection<>))
+                {                    
+                    int count = (int)value.GetType().InvokeMember("get_Count", BindingFlags.InvokeMethod, null, value, null, CultureInfo.InvariantCulture);
+                    if (count == 0)
+                    {
+                        sb.AppendLine("empty");
+                    }
+                    else
+                    {
+                        sb.AppendLine(count.ToString() + " elements");
+                        sb.AppendLine(indentString + "(");
+                        foreach (object e in (IEnumerable)value)
+                        {
+                            if (e is Expression)
+                            {
+                                TraceExpression((Expression)e, sb, indent + 2);
+                            }
+                            else if (e is MemberAssignment)
+                            {
+                                TraceExpression(((MemberAssignment)e).Expression, sb, indent + 2);
+                            }
+                        }
+                        sb.AppendLine(indentString + ")");
+                    }
+                }
+                else if (value is Expression)
+                {
+                    sb.AppendLine(((Expression)value).NodeType.ToString());
+                    sb.AppendLine(indentString + "{");
+                    TraceExpression((Expression)value, sb, indent + 2);
+                    sb.AppendLine(indentString + "}");
+                }
+                else if (value is MethodInfo)
+                {
+                    MethodInfo minfo = value as MethodInfo;
+                    sb.AppendLine("\"" + minfo.Name + "\"");
+                }
+                else if (value is Type)
+                {
+                    Type t = value as Type;
+                    sb.AppendLine("\"" + t.FullName + "\"");
+                }
+                else
+                {
+                    sb.AppendLine("\"" + value.ToString() + "\"");
+                }
+            }
+            else
+            {
+                sb.AppendLine("null");
+            }
         }
     }
 }

@@ -382,13 +382,74 @@ namespace Kistl.Server.SchemaManagement
         {
             if (objClass.HasSecurityRules(false))
             {
-                if (!db.CheckTableExists(Construct.SecurityRulesTableName(objClass)))
+                var tblName = objClass.TableName;
+                var tblRightsName = Construct.SecurityRulesTableName(objClass);
+                var withRightsViewName = Construct.SecurityRulesWithRightsViewName(objClass);
+                var withRightsViewTriggerName = Construct.SecurityRulesWithRightsViewTriggerName(objClass);
+                var insertRightsTriggerName = Construct.SecurityRulesInsertRightsTriggerName(objClass);
+                var updateRightsTriggerName = Construct.SecurityRulesUpdateRightsTriggerName(objClass);
+                var rightsViewUnmaterializedName = Construct.SecurityRulesRightsViewUnmaterializedName(objClass);
+                var refreshRightsOnProcedureName = Construct.SecurityRulesRefreshRightsOnProcedureName(objClass);
+
+                if (!db.CheckTableExists(tblRightsName))
                 {
-                    Log.WarnFormat("Security Rules Table '{0}' is missing", Construct.SecurityRulesTableName(objClass));
+                    Log.WarnFormat("Security Rules Table '{0}' is missing", tblRightsName);
                     if (repair)
                     {
                         Case.DoNewObjectClassSecurityRules(objClass);
                     }
+                }
+                else
+                {
+                    if (!db.CheckViewExists(withRightsViewName))
+                    {
+                        Log.WarnFormat("Security Rules View '{0}' is missing", withRightsViewName);
+                        if (repair)
+                        {
+                            db.CreateWithRightsView(withRightsViewName, tblName, tblRightsName);
+                        }
+                    }
+                    if (!db.CheckTriggerExists(withRightsViewName, withRightsViewTriggerName))
+                    {
+                        Log.WarnFormat("Security Rules View Trigger '{0}' is missing", withRightsViewTriggerName);
+                        if (repair)
+                        {
+                            db.CreateWithRightsViewTrigger(withRightsViewTriggerName, withRightsViewName, tblName, tblRightsName);
+                        }
+                    }
+                    if (!db.CheckTriggerExists(tblName, insertRightsTriggerName))
+                    {
+                        Log.WarnFormat("Security Rules Trigger '{0}' is missing", insertRightsTriggerName);
+                        if (repair)
+                        {
+                            db.CreateInsertRightsTrigger(insertRightsTriggerName, tblName, tblRightsName);
+                        }
+                    }
+                    if (!db.CheckTriggerExists(tblName, updateRightsTriggerName))
+                    {
+                        Log.WarnFormat("Security Rules Trigger '{0}' is missing", updateRightsTriggerName);
+                        if (repair)
+                        {
+                            db.CreateUpdateRightsTrigger(updateRightsTriggerName, rightsViewUnmaterializedName, tblName, tblRightsName);
+                        }
+                    }
+                    if (!db.CheckViewExists(rightsViewUnmaterializedName))
+                    {
+                        Log.WarnFormat("Security Rules unmaterialized View '{0}' is missing", rightsViewUnmaterializedName);
+                        if (repair)
+                        {
+                            db.CreateRightsViewUnmaterialized(rightsViewUnmaterializedName, tblName, tblRightsName);
+                        }
+                    }
+                    if (!db.CheckProcedureExists(refreshRightsOnProcedureName))
+                    {
+                        Log.WarnFormat("Security Rules Refresh Procedure '{0}' is missing", refreshRightsOnProcedureName);
+                        if (repair)
+                        {
+                            db.CreateRefreshRightsOnProcedure(refreshRightsOnProcedureName, rightsViewUnmaterializedName, tblName, tblRightsName);
+                        }
+                    }
+
                 }
             }
         }

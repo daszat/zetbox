@@ -269,6 +269,7 @@ namespace Kistl.Server.Service
             }
         }
 
+
         private static void XmlFallbackInitialisation(string file)
         {
             ServerApplicationContext.Current.LoadNoopActionsManager();

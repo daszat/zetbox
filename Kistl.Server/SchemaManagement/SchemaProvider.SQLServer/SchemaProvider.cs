@@ -162,6 +162,34 @@ namespace Kistl.Server.SchemaManagement.SchemaProvider.SQLServer
             }
         }
 
+        public bool CheckViewExists(string viewName)
+        {
+            using (var cmd = new SqlCommand("SELECT COUNT(*) FROM sys.objects WHERE object_id = OBJECT_ID(@view) AND type IN (N'V')", db, tx))
+            {
+                cmd.Parameters.AddWithValue("@view", viewName);
+                return (int)cmd.ExecuteScalar() > 0;
+            }
+        }
+
+        public bool CheckTriggerExists(string objName, string triggerName)
+        {
+            using (var cmd = new SqlCommand("SELECT COUNT(*) FROM sys.objects WHERE object_id = OBJECT_ID(@trigger) AND parent_object_id = OBJECT_ID(@parent) AND type IN (N'TR')", db, tx))
+            {
+                cmd.Parameters.AddWithValue("@trigger", triggerName);
+                cmd.Parameters.AddWithValue("@parent", objName);
+                return (int)cmd.ExecuteScalar() > 0;
+            }
+        }
+
+        public bool CheckProcedureExists(string procName)
+        {
+            using (var cmd = new SqlCommand("SELECT COUNT(*) FROM sys.objects WHERE object_id = OBJECT_ID(@proc) AND type IN (N'P')", db, tx))
+            {
+                cmd.Parameters.AddWithValue("@proc", procName);
+                return (int)cmd.ExecuteScalar() > 0;
+            }
+        }
+
         public bool CheckTableContainsData(string tblName)
         {
             using (var cmd = new SqlCommand(string.Format("SELECT COUNT(*) FROM [{0}]", tblName), db, tx))
@@ -344,6 +372,21 @@ namespace Kistl.Server.SchemaManagement.SchemaProvider.SQLServer
             ExecuteNonQuery("ALTER TABLE [{0}] DROP CONSTRAINT [{1}]", tblName, fkName);
         }
 
+        public void DropTrigger(string triggerName)
+        {
+            ExecuteNonQuery("DROP TRIGGER [{0}]", triggerName);
+        }
+
+        public void DropView(string viewName)
+        {
+            ExecuteNonQuery("DROP VIEW [{0}]", viewName);
+        }
+
+        public void DropProcedure(string procName)
+        {
+            ExecuteNonQuery("DROP PROCEDURE [{0}]", procName);
+        }
+
         public void CopyColumnData(string srcTblName, string srcColName, string tblName, string colName)
         {
             ExecuteNonQuery("UPDATE dest SET dest.[{0}] = src.[{1}] FROM [{2}] dest INNER JOIN [{3}] src ON dest.ID = src.ID",
@@ -358,6 +401,90 @@ namespace Kistl.Server.SchemaManagement.SchemaProvider.SQLServer
                 idxName,
                 tblName,
                 string.Join(", ", columns.Select(c => "[" + c + "]").ToArray()));
+        }
+
+        public void CreateWithRightsView(string viewName, string tblName, string tblNameRights)
+        {
+            ExecuteNonQuery(@"CREATE VIEW [{0}] AS
+	                SELECT tbl.*, r.[Identity] Rights__CurrentIdentity, r.[Right] Rights__CurrentAccessRights
+	                FROM [{1}] tbl
+	                INNER JOIN {2} r ON tbl.ID = r.ID",
+                viewName,
+                tblName,
+                tblNameRights);
+        }
+
+        public void CreateWithRightsViewTrigger(string triggerName, string viewName, string tblName, string tblNameRights)
+        {
+            ExecuteNonQuery(@"CREATE TRIGGER [{0}]
+                    ON [{1}]
+                    INSTEAD OF DELETE AS
+                    BEGIN
+	                    DELETE FROM {2}
+	                    WHERE ID IN (SELECT ID FROM deleted)
+                    END",
+                triggerName,
+                viewName,
+                tblName);
+        }
+
+        public void CreateInsertRightsTrigger(string triggerName, string tblName, string tblNameRights)
+        {
+            ExecuteNonQuery(@"CREATE TRIGGER [{0}]
+                    ON [{1}]
+                    AFTER INSERT AS
+                    BEGIN
+	                    INSERT INTO [{2}] ([ID], [Identity], [Right])
+	                    SELECT [ID], 0, 0 FROM inserted
+                    END",
+                triggerName,
+                tblName,
+                tblNameRights);
+        }
+
+        public void CreateUpdateRightsTrigger(string triggerName, string viewUnmaterializedName, string tblName, string tblNameRights)
+        {
+            ExecuteNonQuery(@"CREATE TRIGGER [{0}]
+                    ON [{1}]
+                    AFTER UPDATE AS
+                    BEGIN
+	                    DELETE FROM [{2}] WHERE [ID] IN (SELECT [ID] FROM inserted)
+	                    INSERT INTO [{2}] ([ID], [Identity], [Right]) SELECT [ID], [Identity], [Right] FROM [{3}] WHERE [ID] IN (SELECT [ID] FROM inserted)
+                    END",
+                triggerName,
+                tblName,
+                tblNameRights,
+                viewUnmaterializedName);
+        }
+
+        public void CreateRightsViewUnmaterialized(string viewName, string tblName, string tblNameRights)
+        {
+            ExecuteNonQuery(@"CREATE VIEW [{0}] AS
+	                SELECT tbl.[ID] [ID], id.ID [Identity], 0 [Right]
+	                FROM [{1}] tbl
+	                CROSS JOIN Identities id",
+                viewName,
+                tblName);
+        }
+
+        public void CreateRefreshRightsOnProcedure(string procName, string viewUnmaterializedName, string tblName, string tblNameRights)
+        {
+            ExecuteNonQuery(@"CREATE PROCEDURE [{0}] (@ID INT = NULL) AS
+                    BEGIN
+	                    IF (@ID IS NULL)
+		                    BEGIN
+			                    TRUNCATE TABLE [{1}]
+			                    INSERT INTO [{1}] ([ID], [Identity], [Right]) SELECT [ID], [Identity], [Right] FROM [{2}]
+		                    END
+	                    ELSE
+		                    BEGIN
+			                    DELETE FROM [{1}] WHERE ID = @ID
+			                    INSERT INTO [{1}] ([ID], [Identity], [Right]) SELECT [ID], [Identity], [Right] FROM [{2}] WHERE [ID] = @ID
+		                    END
+                    END",
+                procName,
+                tblNameRights,
+                viewUnmaterializedName);
         }
     }
 }

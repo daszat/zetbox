@@ -12,7 +12,7 @@ using Kistl.Server.Generators;
 
 namespace Kistl.Server.SchemaManagement
 {
-    internal class Cases 
+    internal class Cases
         : IDisposable
     {
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Server.Schema.Cases");
@@ -553,7 +553,7 @@ namespace Kistl.Server.SchemaManagement
             string colName = Construct.ForeignKeyColumnName(otherEnd);
             string indexName = Construct.ListPositionColumnName(otherEnd);
 
-            CreateNotNullableColumn(otherEnd, tblName, colName); 
+            CreateNotNullableColumn(otherEnd, tblName, colName);
             db.CreateFKConstraint(tblName, refTblName, colName, assocName, false);
 
             if (isIndexed)
@@ -881,14 +881,29 @@ namespace Kistl.Server.SchemaManagement
         public void DoNewObjectClassSecurityRules(ObjectClass objClass)
         {
             Log.InfoFormat("New ObjectClass Security Rules: {0}", objClass.ClassName);
-            string tblName = Construct.SecurityRulesTableName(objClass);
+            string tblRightsName = Construct.SecurityRulesTableName(objClass);
 
-            db.CreateTable(tblName, false, false);
-            db.CreateColumn(tblName, "Identity", System.Data.DbType.Int32, 0, false);
-            db.CreateColumn(tblName, "Right", System.Data.DbType.Int32, 0, false);
+            db.CreateTable(tblRightsName, false, false);
+            db.CreateColumn(tblRightsName, "Identity", System.Data.DbType.Int32, 0, false);
+            db.CreateColumn(tblRightsName, "Right", System.Data.DbType.Int32, 0, false);
 
-            db.CreateIndex(tblName, Construct.SecurityRulesIndexName(objClass), true, true, "ID", "Identity");
-            db.CreateFKConstraint(tblName, objClass.TableName, "ID", Construct.SecurityRulesFKName(objClass), true);
+            db.CreateIndex(tblRightsName, Construct.SecurityRulesIndexName(objClass), true, true, "ID", "Identity");
+            db.CreateFKConstraint(tblRightsName, objClass.TableName, "ID", Construct.SecurityRulesFKName(objClass), true);
+
+            var tblName = objClass.TableName;
+            var withRightsViewName = Construct.SecurityRulesWithRightsViewName(objClass);
+            var withRightsViewTriggerName = Construct.SecurityRulesWithRightsViewTriggerName(objClass);
+            var insertRightsTriggerName = Construct.SecurityRulesInsertRightsTriggerName(objClass);
+            var updateRightsTriggerName = Construct.SecurityRulesUpdateRightsTriggerName(objClass);
+            var rightsViewUnmaterializedName = Construct.SecurityRulesRightsViewUnmaterializedName(objClass);
+            var refreshRightsOnProcedureName = Construct.SecurityRulesRefreshRightsOnProcedureName(objClass);
+
+            db.CreateWithRightsView(withRightsViewName, tblName, tblRightsName);
+            db.CreateWithRightsViewTrigger(withRightsViewTriggerName, withRightsViewName, tblName, tblRightsName);
+            db.CreateInsertRightsTrigger(insertRightsTriggerName, tblName, tblRightsName);
+            db.CreateUpdateRightsTrigger(updateRightsTriggerName, rightsViewUnmaterializedName, tblName, tblRightsName);
+            db.CreateRightsViewUnmaterialized(rightsViewUnmaterializedName, tblName, tblRightsName);
+            db.CreateRefreshRightsOnProcedure(refreshRightsOnProcedureName, rightsViewUnmaterializedName, tblName, tblRightsName);
         }
         #endregion
 
@@ -901,11 +916,15 @@ namespace Kistl.Server.SchemaManagement
         }
         public void DoDeleteObjectClassSecurityRules(ObjectClass objClass)
         {
-            string tblName = Construct.SecurityRulesTableName(objClass);
+            var tblRightsName = Construct.SecurityRulesTableName(objClass);
+            var withRightsViewName = Construct.SecurityRulesWithRightsViewName(objClass);
+            var refreshRightsOnProcedureName = Construct.SecurityRulesRefreshRightsOnProcedureName(objClass);
 
             Log.InfoFormat("Delete ObjectClass Security Rules: {0}", objClass.ClassName);
 
-            db.DropTable(tblName);
+            db.DropProcedure(refreshRightsOnProcedureName);
+            db.DropView(withRightsViewName);
+            db.DropTable(tblRightsName);
         }
         #endregion
 

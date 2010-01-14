@@ -26,14 +26,8 @@
 	foreach(var cls in ctx.GetBaseClasses().OrderBy(c => c.ClassName))
 	{
 %>
-    <EntitySet Name="<%= cls.ClassName %>" EntityType="Model.Store.<%= cls.ClassName %>" Table="<%= cls.TableName %>"/>
+    <EntitySet Name="<%= cls.ClassName %>" EntityType="Model.Store.<%= cls.ClassName %>" Table="<%= cls.TableName + (cls.HasSecurityRules(false) ? "_with_Rights" : string.Empty) %>"/>
 <%	
-		if(cls.HasSecurityRules(false))
-		{
-%>
-    <EntitySet Name="<%= cls.ClassName %>_Rights" EntityType="Model.Store.<%= cls.ClassName %>_Rights" Table="<%= Construct.SecurityRulesTableName(cls) %>"/>
-<%	
-		}
 	}
 %>
 
@@ -43,19 +37,13 @@
 	{
 		var info = new InheritanceStorageAssociationInfo(cls);
 %>
-    <EntitySet Name="<%= cls.ClassName %>" EntityType="Model.Store.<%= cls.ClassName %>" Table="<%= cls.TableName %>"/>
+    <EntitySet Name="<%= cls.ClassName %>" EntityType="Model.Store.<%= cls.ClassName %>" Table="<%= cls.TableName + (cls.HasSecurityRules(false) ? "_with_Rights" : string.Empty) %>"/>
     <!-- inherits from <%= info.ParentEntitySetName %> -->
     <AssociationSet Name="<%= info.AssociationName %>" Association="Model.Store.<%= info.AssociationName %>" >
       <End Role="<%= info.ParentRoleName %>" EntitySet="<%= info.ParentEntitySetName %>" />
       <End Role="<%= info.ChildRoleName %>" EntitySet="<%= info.ChildEntitySetName %>" />
     </AssociationSet>
 <%	
-		if(cls.HasSecurityRules(false))
-		{
-%>
-    <EntitySet Name="<%= cls.ClassName %>_Rights" EntityType="Model.Store.<%= cls.ClassName %>_Rights" Table="<%= Construct.SecurityRulesTableName(cls) %>"/>
-<%	
-		}
 	}
 %>
 
@@ -140,22 +128,16 @@
     <Property Name="ID" Type="int" Nullable="false" <%= (cls.BaseObjectClass == null) ? "StoreGeneratedPattern=\"Identity\" " : String.Empty %>/>
 <%
 		ApplyEntityTypeColumnDefs(cls);
-%>
-  </EntityType>
-<%	
 		if(cls.HasSecurityRules(false))
 		{
 %>
-  <EntityType Name="<%= cls.ClassName %>_Rights">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
-    <Property Name="Identity" Type="int" Nullable="false" />
-    <Property Name="Right" Type="int" Nullable="false" />
-  </EntityType>
+    <Property Name="Rights__CurrentIdentity" Type="int" Nullable="false" StoreGeneratedPattern="Computed" />
+    <Property Name="Rights__CurrentAccessRights" Type="int" Nullable="false" StoreGeneratedPattern="Computed" />
 <%	
 		}
+%>
+  </EntityType>
+<%	
 	}
 %>
 
@@ -256,7 +238,6 @@
 
   <Association Name="<%= rel.GetAssociationName() %>">
     <End Role="<%= principal.RoleName %>" Type="Model.Store.<%= principal.Type.ClassName %>" Multiplicity="<%= principal.Multiplicity.ToSsdlMultiplicity().ToXmlValue() %>" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="<%= dependent.RoleName %>" Type="Model.Store.<%= dependent.Type.ClassName %>" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="<%= principal.RoleName %>">

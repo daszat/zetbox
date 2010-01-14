@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Data.Objects;
-using Kistl.API.Configuration;
 using System.Data.Objects.DataClasses;
 using System.Collections;
-using Kistl.API;
-using Kistl.API.Server;
 using System.Reflection;
 using System.Diagnostics;
 using System.Data;
+using Kistl.API;
+using Kistl.API.Configuration;
+using Kistl.API.Server;
 using Kistl.API.Utils;
+using Kistl.App.Extensions;
 
 [assembly: global::System.Data.Objects.DataClasses.EdmSchemaAttribute()]
 
@@ -275,12 +276,21 @@ namespace Kistl.DalProvider.EF
                 .OfType<IDataObject>()
                 .ToList();
 
+            var addedList = _ctx.ObjectStateManager
+                .GetObjectStateEntries(EntityState.Added)
+                .Select(e => e.Entity)
+                .OfType<IDataObject>()
+                .ToList();
+
             NotifyChanging(notifySaveList);
 
             int result = 0;
             try
             {
                 result = _ctx.SaveChanges();
+
+                // Refresh Rights
+                RefreshRights(addedList);
             }
             catch (UpdateException updex)
             {
@@ -315,6 +325,26 @@ namespace Kistl.DalProvider.EF
                 Logging.Log.Error("Error during SubmitChanges", updex);
                 throw updex.InnerException;
             }
+        }
+
+        protected override void RefreshRights(IDataObject obj)
+        {
+            var objClass = obj.GetObjectClass(FrozenContext.Single);
+
+            var cmd = _ctx.Connection.CreateCommand();
+            cmd.CommandText = "RefreshRightsOn_" + objClass.TableName;
+            cmd.CommandType = CommandType.StoredProcedure;
+            var p = cmd.CreateParameter();
+            p.ParameterName = "ID";
+            p.Value = obj.ID; ;
+            p.Direction = ParameterDirection.Input;
+            p.DbType = DbType.Int32;
+            cmd.Parameters.Add(p);
+
+            cmd.ExecuteNonQuery();
+
+            // This also does not work -> multiple results...
+            // _ctx.Refresh(RefreshMode.StoreWins, obj);
         }
 
         private void DebugTraceChangedObjects()

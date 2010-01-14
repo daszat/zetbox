@@ -110,6 +110,33 @@ namespace Kistl.Server.Generators
             return objClass.TableName + "_Rights";
         }
 
+        public static string SecurityRulesWithRightsViewName(ObjectClass objClass)
+        {
+            return objClass.TableName + "_with_Rights";
+        }
+
+        public static string SecurityRulesWithRightsViewTriggerName(ObjectClass objClass)
+        {
+            return objClass.TableName + "_with_Rights_Trigger";
+        }
+
+        public static string SecurityRulesInsertRightsTriggerName(ObjectClass objClass)
+        {
+            return objClass.TableName + "_Insert_Rights_Trigger";
+        }
+        public static string SecurityRulesUpdateRightsTriggerName(ObjectClass objClass)
+        {
+            return objClass.TableName + "_Update_Rights_Trigger";
+        }
+        public static string SecurityRulesRightsViewUnmaterializedName(ObjectClass objClass)
+        {
+            return objClass.TableName + "_Rights_unmaterialized";
+        }
+        public static string SecurityRulesRefreshRightsOnProcedureName(ObjectClass objClass)
+        {
+            return "RefreshRightsOn_" + objClass.TableName;
+        }
+
         public static string SecurityRulesIndexName(ObjectClass objClass)
         {
             return "IDX_" + SecurityRulesTableName(objClass);

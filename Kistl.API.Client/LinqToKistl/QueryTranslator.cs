@@ -14,9 +14,9 @@ namespace Kistl.API.Client.LinqToKistl
             return t.Visit(e);
         }
 
-        protected override BinaryExpression VisitBinary(BinaryExpression b)
+        protected override Expression VisitBinary(BinaryExpression b)
         {
-            if (b.NodeType == ExpressionType.Equal && typeof(IDataObject).IsAssignableFrom(b.Left.Type) && typeof(IDataObject).IsAssignableFrom(b.Right.Type))
+            if (b.NodeType == ExpressionType.Equal && b.Left.Type.IsIDataObject() && b.Right.Type.IsIDataObject())
             {
                 return Expression.MakeBinary(b.NodeType,
                     Expression.MakeMemberAccess(Visit(b.Left), b.Left.Type.FindFirstOrDefaultMember("ID")),

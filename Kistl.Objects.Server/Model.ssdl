@@ -52,357 +52,306 @@
       <End Role="A_ControlKind" EntitySet="ControlKind" />
       <End Role="B_ActionKind" EntitySet="ActionKind" />
     </AssociationSet>
-    
     <EntitySet Name="BoolParameter" EntityType="Model.Store.BoolParameter" Table="BoolParameters"/>
     <!-- inherits from BaseParameter -->
     <AssociationSet Name="FK_BoolParameter_BaseParameter_ID" Association="Model.Store.FK_BoolParameter_BaseParameter_ID" >
       <End Role="A_BaseParameter" EntitySet="BaseParameter" />
       <End Role="B_BoolParameter" EntitySet="BoolParameter" />
     </AssociationSet>
-    
     <EntitySet Name="BoolProperty" EntityType="Model.Store.BoolProperty" Table="BoolProperties"/>
     <!-- inherits from ValueTypeProperty -->
     <AssociationSet Name="FK_BoolProperty_ValueTypeProperty_ID" Association="Model.Store.FK_BoolProperty_ValueTypeProperty_ID" >
       <End Role="A_ValueTypeProperty" EntitySet="ValueTypeProperty" />
       <End Role="B_BoolProperty" EntitySet="BoolProperty" />
     </AssociationSet>
-    
     <EntitySet Name="CalculatedObjectReferenceProperty" EntityType="Model.Store.CalculatedObjectReferenceProperty" Table="CalculatedObjectReferenceProperties"/>
     <!-- inherits from Property -->
     <AssociationSet Name="FK_CalculatedObjectReferenceProperty_Property_ID" Association="Model.Store.FK_CalculatedObjectReferenceProperty_Property_ID" >
       <End Role="A_Property" EntitySet="Property" />
       <End Role="B_CalculatedObjectReferenceProperty" EntitySet="CalculatedObjectReferenceProperty" />
     </AssociationSet>
-    
     <EntitySet Name="CheckboxKind" EntityType="Model.Store.CheckboxKind" Table="CheckboxKinds"/>
     <!-- inherits from ControlKind -->
     <AssociationSet Name="FK_CheckboxKind_ControlKind_ID" Association="Model.Store.FK_CheckboxKind_ControlKind_ID" >
       <End Role="A_ControlKind" EntitySet="ControlKind" />
       <End Role="B_CheckboxKind" EntitySet="CheckboxKind" />
     </AssociationSet>
-    
     <EntitySet Name="CLRObjectParameter" EntityType="Model.Store.CLRObjectParameter" Table="CLRObjectParameters"/>
     <!-- inherits from BaseParameter -->
     <AssociationSet Name="FK_CLRObjectParameter_BaseParameter_ID" Association="Model.Store.FK_CLRObjectParameter_BaseParameter_ID" >
       <End Role="A_BaseParameter" EntitySet="BaseParameter" />
       <End Role="B_CLRObjectParameter" EntitySet="CLRObjectParameter" />
     </AssociationSet>
-    
     <EntitySet Name="ConsistentNavigatorConstraint" EntityType="Model.Store.ConsistentNavigatorConstraint" Table="ConsistentNavigatorConstraints"/>
     <!-- inherits from Constraint -->
     <AssociationSet Name="FK_ConsistentNavigatorConstraint_Constraint_ID" Association="Model.Store.FK_ConsistentNavigatorConstraint_Constraint_ID" >
       <End Role="A_Constraint" EntitySet="Constraint" />
       <End Role="B_ConsistentNavigatorConstraint" EntitySet="ConsistentNavigatorConstraint" />
     </AssociationSet>
-    
     <EntitySet Name="ControlKindClass" EntityType="Model.Store.ControlKindClass" Table="ControlKindClasses"/>
     <!-- inherits from ObjectClass -->
     <AssociationSet Name="FK_ControlKindClass_ObjectClass_ID" Association="Model.Store.FK_ControlKindClass_ObjectClass_ID" >
       <End Role="A_ObjectClass" EntitySet="ObjectClass" />
       <End Role="B_ControlKindClass" EntitySet="ControlKindClass" />
     </AssociationSet>
-    
     <EntitySet Name="DataObjectKind" EntityType="Model.Store.DataObjectKind" Table="DataObjectKinds"/>
     <!-- inherits from ControlKind -->
     <AssociationSet Name="FK_DataObjectKind_ControlKind_ID" Association="Model.Store.FK_DataObjectKind_ControlKind_ID" >
       <End Role="A_ControlKind" EntitySet="ControlKind" />
       <End Role="B_DataObjectKind" EntitySet="DataObjectKind" />
     </AssociationSet>
-    
     <EntitySet Name="DataObjectSelectionTaskKind" EntityType="Model.Store.DataObjectSelectionTaskKind" Table="DataObjectSelectionTaskKinds"/>
     <!-- inherits from ControlKind -->
     <AssociationSet Name="FK_DataObjectSelectionTaskKind_ControlKind_ID" Association="Model.Store.FK_DataObjectSelectionTaskKind_ControlKind_ID" >
       <End Role="A_ControlKind" EntitySet="ControlKind" />
       <End Role="B_DataObjectSelectionTaskKind" EntitySet="DataObjectSelectionTaskKind" />
     </AssociationSet>
-    
     <EntitySet Name="DataObjectSummaryKind" EntityType="Model.Store.DataObjectSummaryKind" Table="DataObjectSummaryKinds"/>
     <!-- inherits from ControlKind -->
     <AssociationSet Name="FK_DataObjectSummaryKind_ControlKind_ID" Association="Model.Store.FK_DataObjectSummaryKind_ControlKind_ID" >
       <End Role="A_ControlKind" EntitySet="ControlKind" />
       <End Role="B_DataObjectSummaryKind" EntitySet="DataObjectSummaryKind" />
     </AssociationSet>
-    
     <EntitySet Name="DateTimeParameter" EntityType="Model.Store.DateTimeParameter" Table="DateTimeParameters"/>
     <!-- inherits from BaseParameter -->
     <AssociationSet Name="FK_DateTimeParameter_BaseParameter_ID" Association="Model.Store.FK_DateTimeParameter_BaseParameter_ID" >
       <End Role="A_BaseParameter" EntitySet="BaseParameter" />
       <End Role="B_DateTimeParameter" EntitySet="DateTimeParameter" />
     </AssociationSet>
-    
     <EntitySet Name="DateTimeProperty" EntityType="Model.Store.DateTimeProperty" Table="DateTimeProperties"/>
     <!-- inherits from ValueTypeProperty -->
     <AssociationSet Name="FK_DateTimeProperty_ValueTypeProperty_ID" Association="Model.Store.FK_DateTimeProperty_ValueTypeProperty_ID" >
       <End Role="A_ValueTypeProperty" EntitySet="ValueTypeProperty" />
       <End Role="B_DateTimeProperty" EntitySet="DateTimeProperty" />
     </AssociationSet>
-    
     <EntitySet Name="DoubleParameter" EntityType="Model.Store.DoubleParameter" Table="DoubleParameters"/>
     <!-- inherits from BaseParameter -->
     <AssociationSet Name="FK_DoubleParameter_BaseParameter_ID" Association="Model.Store.FK_DoubleParameter_BaseParameter_ID" >
       <End Role="A_BaseParameter" EntitySet="BaseParameter" />
       <End Role="B_DoubleParameter" EntitySet="DoubleParameter" />
     </AssociationSet>
-    
     <EntitySet Name="DoubleProperty" EntityType="Model.Store.DoubleProperty" Table="DoubleProperties"/>
     <!-- inherits from ValueTypeProperty -->
     <AssociationSet Name="FK_DoubleProperty_ValueTypeProperty_ID" Association="Model.Store.FK_DoubleProperty_ValueTypeProperty_ID" >
       <End Role="A_ValueTypeProperty" EntitySet="ValueTypeProperty" />
       <End Role="B_DoubleProperty" EntitySet="DoubleProperty" />
     </AssociationSet>
-    
     <EntitySet Name="Enumeration" EntityType="Model.Store.Enumeration" Table="Enumerations"/>
     <!-- inherits from DataType -->
     <AssociationSet Name="FK_Enumeration_DataType_ID" Association="Model.Store.FK_Enumeration_DataType_ID" >
       <End Role="A_DataType" EntitySet="DataType" />
       <End Role="B_Enumeration" EntitySet="Enumeration" />
     </AssociationSet>
-    
     <EntitySet Name="EnumerationProperty" EntityType="Model.Store.EnumerationProperty" Table="EnumerationProperties"/>
     <!-- inherits from ValueTypeProperty -->
     <AssociationSet Name="FK_EnumerationProperty_ValueTypeProperty_ID" Association="Model.Store.FK_EnumerationProperty_ValueTypeProperty_ID" >
       <End Role="A_ValueTypeProperty" EntitySet="ValueTypeProperty" />
       <End Role="B_EnumerationProperty" EntitySet="EnumerationProperty" />
     </AssociationSet>
-    
     <EntitySet Name="EnumerationSelectorKind" EntityType="Model.Store.EnumerationSelectorKind" Table="EnumerationSelectorKinds"/>
     <!-- inherits from ControlKind -->
     <AssociationSet Name="FK_EnumerationSelectorKind_ControlKind_ID" Association="Model.Store.FK_EnumerationSelectorKind_ControlKind_ID" >
       <End Role="A_ControlKind" EntitySet="ControlKind" />
       <End Role="B_EnumerationSelectorKind" EntitySet="EnumerationSelectorKind" />
     </AssociationSet>
-    
     <EntitySet Name="GuidProperty" EntityType="Model.Store.GuidProperty" Table="GuidProperties"/>
     <!-- inherits from ValueTypeProperty -->
     <AssociationSet Name="FK_GuidProperty_ValueTypeProperty_ID" Association="Model.Store.FK_GuidProperty_ValueTypeProperty_ID" >
       <End Role="A_ValueTypeProperty" EntitySet="ValueTypeProperty" />
       <End Role="B_GuidProperty" EntitySet="GuidProperty" />
     </AssociationSet>
-    
     <EntitySet Name="IntegerRangeConstraint" EntityType="Model.Store.IntegerRangeConstraint" Table="IntegerRangeConstraints"/>
     <!-- inherits from Constraint -->
     <AssociationSet Name="FK_IntegerRangeConstraint_Constraint_ID" Association="Model.Store.FK_IntegerRangeConstraint_Constraint_ID" >
       <End Role="A_Constraint" EntitySet="Constraint" />
       <End Role="B_IntegerRangeConstraint" EntitySet="IntegerRangeConstraint" />
     </AssociationSet>
-    
     <EntitySet Name="Interface" EntityType="Model.Store.Interface" Table="Interfaces"/>
     <!-- inherits from DataType -->
     <AssociationSet Name="FK_Interface_DataType_ID" Association="Model.Store.FK_Interface_DataType_ID" >
       <End Role="A_DataType" EntitySet="DataType" />
       <End Role="B_Interface" EntitySet="Interface" />
     </AssociationSet>
-    
     <EntitySet Name="IntParameter" EntityType="Model.Store.IntParameter" Table="IntParameters"/>
     <!-- inherits from BaseParameter -->
     <AssociationSet Name="FK_IntParameter_BaseParameter_ID" Association="Model.Store.FK_IntParameter_BaseParameter_ID" >
       <End Role="A_BaseParameter" EntitySet="BaseParameter" />
       <End Role="B_IntParameter" EntitySet="IntParameter" />
     </AssociationSet>
-    
     <EntitySet Name="IntProperty" EntityType="Model.Store.IntProperty" Table="IntProperties"/>
     <!-- inherits from ValueTypeProperty -->
     <AssociationSet Name="FK_IntProperty_ValueTypeProperty_ID" Association="Model.Store.FK_IntProperty_ValueTypeProperty_ID" >
       <End Role="A_ValueTypeProperty" EntitySet="ValueTypeProperty" />
       <End Role="B_IntProperty" EntitySet="IntProperty" />
     </AssociationSet>
-    
     <EntitySet Name="IsValidIdentifierConstraint" EntityType="Model.Store.IsValidIdentifierConstraint" Table="IsValidIdentifierConstraints"/>
     <!-- inherits from Constraint -->
     <AssociationSet Name="FK_IsValidIdentifierConstraint_Constraint_ID" Association="Model.Store.FK_IsValidIdentifierConstraint_Constraint_ID" >
       <End Role="A_Constraint" EntitySet="Constraint" />
       <End Role="B_IsValidIdentifierConstraint" EntitySet="IsValidIdentifierConstraint" />
     </AssociationSet>
-    
     <EntitySet Name="IsValidNamespaceConstraint" EntityType="Model.Store.IsValidNamespaceConstraint" Table="IsValidNamespaceConstraints"/>
     <!-- inherits from IsValidIdentifierConstraint -->
     <AssociationSet Name="FK_IsValidNamespaceConstraint_IsValidIdentifierConstraint_ID" Association="Model.Store.FK_IsValidNamespaceConstraint_IsValidIdentifierConstraint_ID" >
       <End Role="A_IsValidIdentifierConstraint" EntitySet="IsValidIdentifierConstraint" />
       <End Role="B_IsValidNamespaceConstraint" EntitySet="IsValidNamespaceConstraint" />
     </AssociationSet>
-    
     <EntitySet Name="LabelKind" EntityType="Model.Store.LabelKind" Table="LabelKinds"/>
     <!-- inherits from ControlKind -->
     <AssociationSet Name="FK_LabelKind_ControlKind_ID" Association="Model.Store.FK_LabelKind_ControlKind_ID" >
       <End Role="A_ControlKind" EntitySet="ControlKind" />
       <End Role="B_LabelKind" EntitySet="LabelKind" />
     </AssociationSet>
-    
     <EntitySet Name="LauncherKind" EntityType="Model.Store.LauncherKind" Table="LauncherKinds"/>
     <!-- inherits from ControlKind -->
     <AssociationSet Name="FK_LauncherKind_ControlKind_ID" Association="Model.Store.FK_LauncherKind_ControlKind_ID" >
       <End Role="A_ControlKind" EntitySet="ControlKind" />
       <End Role="B_LauncherKind" EntitySet="LauncherKind" />
     </AssociationSet>
-    
     <EntitySet Name="MethodInvocationConstraint" EntityType="Model.Store.MethodInvocationConstraint" Table="MethodInvocationConstraints"/>
     <!-- inherits from Constraint -->
     <AssociationSet Name="FK_MethodInvocationConstraint_Constraint_ID" Association="Model.Store.FK_MethodInvocationConstraint_Constraint_ID" >
       <End Role="A_Constraint" EntitySet="Constraint" />
       <End Role="B_MethodInvocationConstraint" EntitySet="MethodInvocationConstraint" />
     </AssociationSet>
-    
     <EntitySet Name="NewGuidDefaultValue" EntityType="Model.Store.NewGuidDefaultValue" Table="NewGuidDefaultValues"/>
     <!-- inherits from DefaultPropertyValue -->
     <AssociationSet Name="FK_NewGuidDefaultValue_DefaultPropertyValue_ID" Association="Model.Store.FK_NewGuidDefaultValue_DefaultPropertyValue_ID" >
       <End Role="A_DefaultPropertyValue" EntitySet="DefaultPropertyValue" />
       <End Role="B_NewGuidDefaultValue" EntitySet="NewGuidDefaultValue" />
     </AssociationSet>
-    
     <EntitySet Name="NotNullableConstraint" EntityType="Model.Store.NotNullableConstraint" Table="NotNullableConstraints"/>
     <!-- inherits from Constraint -->
     <AssociationSet Name="FK_NotNullableConstraint_Constraint_ID" Association="Model.Store.FK_NotNullableConstraint_Constraint_ID" >
       <End Role="A_Constraint" EntitySet="Constraint" />
       <End Role="B_NotNullableConstraint" EntitySet="NotNullableConstraint" />
     </AssociationSet>
-    
     <EntitySet Name="ObjectClass" EntityType="Model.Store.ObjectClass" Table="ObjectClasses"/>
     <!-- inherits from DataType -->
     <AssociationSet Name="FK_ObjectClass_DataType_ID" Association="Model.Store.FK_ObjectClass_DataType_ID" >
       <End Role="A_DataType" EntitySet="DataType" />
       <End Role="B_ObjectClass" EntitySet="ObjectClass" />
     </AssociationSet>
-    
     <EntitySet Name="ObjectListKind" EntityType="Model.Store.ObjectListKind" Table="ObjectListKinds"/>
     <!-- inherits from ControlKind -->
     <AssociationSet Name="FK_ObjectListKind_ControlKind_ID" Association="Model.Store.FK_ObjectListKind_ControlKind_ID" >
       <End Role="A_ControlKind" EntitySet="ControlKind" />
       <End Role="B_ObjectListKind" EntitySet="ObjectListKind" />
     </AssociationSet>
-    
     <EntitySet Name="ObjectParameter" EntityType="Model.Store.ObjectParameter" Table="ObjectParameters"/>
     <!-- inherits from BaseParameter -->
     <AssociationSet Name="FK_ObjectParameter_BaseParameter_ID" Association="Model.Store.FK_ObjectParameter_BaseParameter_ID" >
       <End Role="A_BaseParameter" EntitySet="BaseParameter" />
       <End Role="B_ObjectParameter" EntitySet="ObjectParameter" />
     </AssociationSet>
-    
     <EntitySet Name="ObjectReferencePlaceholderProperty" EntityType="Model.Store.ObjectReferencePlaceholderProperty" Table="ObjectReferencePlaceholderProperties"/>
     <!-- inherits from Property -->
     <AssociationSet Name="FK_ObjectReferencePlaceholderProperty_Property_ID" Association="Model.Store.FK_ObjectReferencePlaceholderProperty_Property_ID" >
       <End Role="A_Property" EntitySet="Property" />
       <End Role="B_ObjectReferencePlaceholderProperty" EntitySet="ObjectReferencePlaceholderProperty" />
     </AssociationSet>
-    
     <EntitySet Name="ObjectReferenceProperty" EntityType="Model.Store.ObjectReferenceProperty" Table="ObjectReferenceProperties"/>
     <!-- inherits from Property -->
     <AssociationSet Name="FK_ObjectReferenceProperty_Property_ID" Association="Model.Store.FK_ObjectReferenceProperty_Property_ID" >
       <End Role="A_Property" EntitySet="Property" />
       <End Role="B_ObjectReferenceProperty" EntitySet="ObjectReferenceProperty" />
     </AssociationSet>
-    
     <EntitySet Name="ObjectRefGridCellKind" EntityType="Model.Store.ObjectRefGridCellKind" Table="ObjectRefGridCellKinds"/>
     <!-- inherits from ControlKind -->
     <AssociationSet Name="FK_ObjectRefGridCellKind_ControlKind_ID" Association="Model.Store.FK_ObjectRefGridCellKind_ControlKind_ID" >
       <End Role="A_ControlKind" EntitySet="ControlKind" />
       <End Role="B_ObjectRefGridCellKind" EntitySet="ObjectRefGridCellKind" />
     </AssociationSet>
-    
     <EntitySet Name="ObjectRefKind" EntityType="Model.Store.ObjectRefKind" Table="ObjectRefKinds"/>
     <!-- inherits from ControlKind -->
     <AssociationSet Name="FK_ObjectRefKind_ControlKind_ID" Association="Model.Store.FK_ObjectRefKind_ControlKind_ID" >
       <End Role="A_ControlKind" EntitySet="ControlKind" />
       <End Role="B_ObjectRefKind" EntitySet="ObjectRefKind" />
     </AssociationSet>
-    
     <EntitySet Name="PropertyGroupKind" EntityType="Model.Store.PropertyGroupKind" Table="PropertyGroupKinds"/>
     <!-- inherits from ControlKind -->
     <AssociationSet Name="FK_PropertyGroupKind_ControlKind_ID" Association="Model.Store.FK_PropertyGroupKind_ControlKind_ID" >
       <End Role="A_ControlKind" EntitySet="ControlKind" />
       <End Role="B_PropertyGroupKind" EntitySet="PropertyGroupKind" />
     </AssociationSet>
-    
     <EntitySet Name="RelationEditorKind" EntityType="Model.Store.RelationEditorKind" Table="RelationEditorKinds"/>
     <!-- inherits from DataObjectKind -->
     <AssociationSet Name="FK_RelationEditorKind_DataObjectKind_ID" Association="Model.Store.FK_RelationEditorKind_DataObjectKind_ID" >
       <End Role="A_DataObjectKind" EntitySet="DataObjectKind" />
       <End Role="B_RelationEditorKind" EntitySet="RelationEditorKind" />
     </AssociationSet>
-    
     <EntitySet Name="SingleLineDataObjectKind" EntityType="Model.Store.SingleLineDataObjectKind" Table="SingleLineDataObjectKinds"/>
     <!-- inherits from ControlKind -->
     <AssociationSet Name="FK_SingleLineDataObjectKind_ControlKind_ID" Association="Model.Store.FK_SingleLineDataObjectKind_ControlKind_ID" >
       <End Role="A_ControlKind" EntitySet="ControlKind" />
       <End Role="B_SingleLineDataObjectKind" EntitySet="SingleLineDataObjectKind" />
     </AssociationSet>
-    
     <EntitySet Name="StringListKind" EntityType="Model.Store.StringListKind" Table="StringListKinds"/>
     <!-- inherits from ControlKind -->
     <AssociationSet Name="FK_StringListKind_ControlKind_ID" Association="Model.Store.FK_StringListKind_ControlKind_ID" >
       <End Role="A_ControlKind" EntitySet="ControlKind" />
       <End Role="B_StringListKind" EntitySet="StringListKind" />
     </AssociationSet>
-    
     <EntitySet Name="StringParameter" EntityType="Model.Store.StringParameter" Table="StringParameters"/>
     <!-- inherits from BaseParameter -->
     <AssociationSet Name="FK_StringParameter_BaseParameter_ID" Association="Model.Store.FK_StringParameter_BaseParameter_ID" >
       <End Role="A_BaseParameter" EntitySet="BaseParameter" />
       <End Role="B_StringParameter" EntitySet="StringParameter" />
     </AssociationSet>
-    
     <EntitySet Name="StringProperty" EntityType="Model.Store.StringProperty" Table="StringProperties"/>
     <!-- inherits from ValueTypeProperty -->
     <AssociationSet Name="FK_StringProperty_ValueTypeProperty_ID" Association="Model.Store.FK_StringProperty_ValueTypeProperty_ID" >
       <End Role="A_ValueTypeProperty" EntitySet="ValueTypeProperty" />
       <End Role="B_StringProperty" EntitySet="StringProperty" />
     </AssociationSet>
-    
     <EntitySet Name="StringRangeConstraint" EntityType="Model.Store.StringRangeConstraint" Table="StringRangeConstraints"/>
     <!-- inherits from Constraint -->
     <AssociationSet Name="FK_StringRangeConstraint_Constraint_ID" Association="Model.Store.FK_StringRangeConstraint_Constraint_ID" >
       <End Role="A_Constraint" EntitySet="Constraint" />
       <End Role="B_StringRangeConstraint" EntitySet="StringRangeConstraint" />
     </AssociationSet>
-    
     <EntitySet Name="StringSelectorKind" EntityType="Model.Store.StringSelectorKind" Table="StringSelectorKinds"/>
     <!-- inherits from ControlKind -->
     <AssociationSet Name="FK_StringSelectorKind_ControlKind_ID" Association="Model.Store.FK_StringSelectorKind_ControlKind_ID" >
       <End Role="A_ControlKind" EntitySet="ControlKind" />
       <End Role="B_StringSelectorKind" EntitySet="StringSelectorKind" />
     </AssociationSet>
-    
     <EntitySet Name="Struct" EntityType="Model.Store.Struct" Table="Structs"/>
     <!-- inherits from DataType -->
     <AssociationSet Name="FK_Struct_DataType_ID" Association="Model.Store.FK_Struct_DataType_ID" >
       <End Role="A_DataType" EntitySet="DataType" />
       <End Role="B_Struct" EntitySet="Struct" />
     </AssociationSet>
-    
     <EntitySet Name="StructProperty" EntityType="Model.Store.StructProperty" Table="StructProperties"/>
     <!-- inherits from Property -->
     <AssociationSet Name="FK_StructProperty_Property_ID" Association="Model.Store.FK_StructProperty_Property_ID" >
       <End Role="A_Property" EntitySet="Property" />
       <End Role="B_StructProperty" EntitySet="StructProperty" />
     </AssociationSet>
-    
     <EntitySet Name="TextboxKind" EntityType="Model.Store.TextboxKind" Table="TextboxKinds"/>
     <!-- inherits from ControlKind -->
     <AssociationSet Name="FK_TextboxKind_ControlKind_ID" Association="Model.Store.FK_TextboxKind_ControlKind_ID" >
       <End Role="A_ControlKind" EntitySet="ControlKind" />
       <End Role="B_TextboxKind" EntitySet="TextboxKind" />
     </AssociationSet>
-    
     <EntitySet Name="TypeRefRefKind" EntityType="Model.Store.TypeRefRefKind" Table="TypeRefRefKinds"/>
     <!-- inherits from ObjectRefKind -->
     <AssociationSet Name="FK_TypeRefRefKind_ObjectRefKind_ID" Association="Model.Store.FK_TypeRefRefKind_ObjectRefKind_ID" >
       <End Role="A_ObjectRefKind" EntitySet="ObjectRefKind" />
       <End Role="B_TypeRefRefKind" EntitySet="TypeRefRefKind" />
     </AssociationSet>
-    
     <EntitySet Name="ValueTypeProperty" EntityType="Model.Store.ValueTypeProperty" Table="ValueTypeProperties"/>
     <!-- inherits from Property -->
     <AssociationSet Name="FK_ValueTypeProperty_Property_ID" Association="Model.Store.FK_ValueTypeProperty_Property_ID" >
       <End Role="A_Property" EntitySet="Property" />
       <End Role="B_ValueTypeProperty" EntitySet="ValueTypeProperty" />
     </AssociationSet>
-    
     <EntitySet Name="WorkspaceKind" EntityType="Model.Store.WorkspaceKind" Table="WorkspaceKinds"/>
     <!-- inherits from ControlKind -->
     <AssociationSet Name="FK_WorkspaceKind_ControlKind_ID" Association="Model.Store.FK_WorkspaceKind_ControlKind_ID" >
       <End Role="A_ControlKind" EntitySet="ControlKind" />
       <End Role="B_WorkspaceKind" EntitySet="WorkspaceKind" />
     </AssociationSet>
-    
 
     <!-- EntitySets and AssociationSet for all object-object CollectionEntrys -->
     <!-- 
@@ -2289,7 +2238,6 @@
 
   <Association Name="FK_Assembly_was_ChangedBy">
     <End Role="ChangedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="Assembly" Type="Model.Store.Assembly" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ChangedBy">
@@ -2304,7 +2252,6 @@
 
   <Association Name="FK_Assembly_was_CreatedBy">
     <End Role="CreatedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="Assembly" Type="Model.Store.Assembly" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="CreatedBy">
@@ -2319,7 +2266,6 @@
 
   <Association Name="FK_Auftrag_ChangedBy_ChangedBy">
     <End Role="ChangedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="Auftrag" Type="Model.Store.Auftrag" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ChangedBy">
@@ -2334,7 +2280,6 @@
 
   <Association Name="FK_Auftrag_CreatedBy_CreatedBy">
     <End Role="CreatedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="Auftrag" Type="Model.Store.Auftrag" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="CreatedBy">
@@ -2349,7 +2294,6 @@
 
   <Association Name="FK_Auftrag_has_Kunde">
     <End Role="Kunde" Type="Model.Store.Kunde" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="Auftrag" Type="Model.Store.Auftrag" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Kunde">
@@ -2364,7 +2308,6 @@
 
   <Association Name="FK_Auftrag_has_Mitarbeiter">
     <End Role="Mitarbeiter" Type="Model.Store.Mitarbeiter" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="Auftrag" Type="Model.Store.Auftrag" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Mitarbeiter">
@@ -2379,7 +2322,6 @@
 
   <Association Name="FK_BaseObjectClass_has_SubClasses">
     <End Role="BaseObjectClass" Type="Model.Store.ObjectClass" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="SubClasses" Type="Model.Store.ObjectClass" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="BaseObjectClass">
@@ -2394,7 +2336,6 @@
 
   <Association Name="FK_BaseParameter_was_ChangedBy">
     <End Role="ChangedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="BaseParameter" Type="Model.Store.BaseParameter" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ChangedBy">
@@ -2409,7 +2350,6 @@
 
   <Association Name="FK_BaseParameter_was_CreatedBy">
     <End Role="CreatedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="BaseParameter" Type="Model.Store.BaseParameter" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="CreatedBy">
@@ -2424,7 +2364,6 @@
 
   <Association Name="FK_BaseProperty_has_Module">
     <End Role="Module" Type="Model.Store.Module" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="BaseProperty" Type="Model.Store.Property" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Module">
@@ -2439,7 +2378,6 @@
 
   <Association Name="FK_CalculatedReference_references_ReferencedClass">
     <End Role="ReferencedClass" Type="Model.Store.ObjectClass" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="CalculatedReference" Type="Model.Store.CalculatedObjectReferenceProperty" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ReferencedClass">
@@ -2454,7 +2392,6 @@
 
   <Association Name="FK_Child_has_Parent">
     <End Role="Parent" Type="Model.Store.TypeRef" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="Child" Type="Model.Store.TypeRef" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Parent">
@@ -2469,7 +2406,6 @@
 
   <Association Name="FK_ClrObjectParameter_isOf_Type">
     <End Role="Type" Type="Model.Store.TypeRef" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="ClrObjectParameter" Type="Model.Store.CLRObjectParameter" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Type">
@@ -2484,7 +2420,6 @@
 
   <Association Name="FK_ConstrainedProperty_has_Constraints">
     <End Role="ConstrainedProperty" Type="Model.Store.Property" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="Constraints" Type="Model.Store.Constraint" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ConstrainedProperty">
@@ -2499,7 +2434,6 @@
 
   <Association Name="FK_Constraint_on_Constrained">
     <End Role="Constrained" Type="Model.Store.ObjectClass" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="Constraint" Type="Model.Store.InstanceConstraint" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Constrained">
@@ -2514,7 +2448,6 @@
 
   <Association Name="FK_Constraint_was_ChangedBy">
     <End Role="ChangedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="Constraint" Type="Model.Store.Constraint" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ChangedBy">
@@ -2529,7 +2462,6 @@
 
   <Association Name="FK_Constraint_was_CreatedBy">
     <End Role="CreatedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="Constraint" Type="Model.Store.Constraint" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="CreatedBy">
@@ -2544,7 +2476,6 @@
 
   <Association Name="FK_Control_isof_Kind">
     <End Role="Kind" Type="Model.Store.ControlKindClass" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="Control" Type="Model.Store.ViewDescriptor" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Kind">
@@ -2559,7 +2490,6 @@
 
   <Association Name="FK_DataType_has_DefaultIcon">
     <End Role="DefaultIcon" Type="Model.Store.Icon" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="DataType" Type="Model.Store.DataType" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="DefaultIcon">
@@ -2574,7 +2504,6 @@
 
   <Association Name="FK_DataType_was_ChangedBy">
     <End Role="ChangedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="DataType" Type="Model.Store.DataType" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ChangedBy">
@@ -2589,7 +2518,6 @@
 
   <Association Name="FK_DataType_was_CreatedBy">
     <End Role="CreatedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="DataType" Type="Model.Store.DataType" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="CreatedBy">
@@ -2604,7 +2532,6 @@
 
   <Association Name="FK_DefaultPropertyValue_was_ChangedBy">
     <End Role="ChangedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="DefaultPropertyValue" Type="Model.Store.DefaultPropertyValue" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ChangedBy">
@@ -2619,7 +2546,6 @@
 
   <Association Name="FK_DefaultPropertyValue_was_CreatedBy">
     <End Role="CreatedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="DefaultPropertyValue" Type="Model.Store.DefaultPropertyValue" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="CreatedBy">
@@ -2634,7 +2560,6 @@
 
   <Association Name="FK_Descriptor_has_PresentableModelRef">
     <End Role="PresentableModelRef" Type="Model.Store.TypeRef" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="Descriptor" Type="Model.Store.PresentableModelDescriptor" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="PresentableModelRef">
@@ -2649,7 +2574,6 @@
 
   <Association Name="FK_Enumeration_has_EnumerationEntries">
     <End Role="Enumeration" Type="Model.Store.Enumeration" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="EnumerationEntries" Type="Model.Store.EnumerationEntry" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Enumeration">
@@ -2664,7 +2588,6 @@
 
   <Association Name="FK_EnumerationEntry_was_ChangedBy">
     <End Role="ChangedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="EnumerationEntry" Type="Model.Store.EnumerationEntry" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ChangedBy">
@@ -2679,7 +2602,6 @@
 
   <Association Name="FK_EnumerationEntry_was_CreatedBy">
     <End Role="CreatedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="EnumerationEntry" Type="Model.Store.EnumerationEntry" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="CreatedBy">
@@ -2694,7 +2616,6 @@
 
   <Association Name="FK_EnumerationProperty_has_Enumeration">
     <End Role="Enumeration" Type="Model.Store.Enumeration" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="EnumerationProperty" Type="Model.Store.EnumerationProperty" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Enumeration">
@@ -2709,7 +2630,6 @@
 
   <Association Name="FK_Icon_has_Module">
     <End Role="Module" Type="Model.Store.Module" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="Icon" Type="Model.Store.Icon" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Module">
@@ -2724,7 +2644,6 @@
 
   <Association Name="FK_InvokeOnObjectClass_has_MethodInvocations">
     <End Role="InvokeOnObjectClass" Type="Model.Store.DataType" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="MethodInvocations" Type="Model.Store.MethodInvocation" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="InvokeOnObjectClass">
@@ -2739,7 +2658,6 @@
 
   <Association Name="FK_InvokeOnProperty_has_Invocations">
     <End Role="InvokeOnProperty" Type="Model.Store.Property" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="Invocations" Type="Model.Store.PropertyInvocation" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="InvokeOnProperty">
@@ -2754,7 +2672,6 @@
 
   <Association Name="FK_Kunde_was_ChangedBy">
     <End Role="ChangedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="Kunde" Type="Model.Store.Kunde" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ChangedBy">
@@ -2769,7 +2686,6 @@
 
   <Association Name="FK_Kunde_was_CreatedBy">
     <End Role="CreatedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="Kunde" Type="Model.Store.Kunde" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="CreatedBy">
@@ -2784,7 +2700,6 @@
 
   <Association Name="FK_List_has_ItemKind">
     <End Role="ItemKind" Type="Model.Store.ControlKindClass" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="List" Type="Model.Store.StringListKind" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ItemKind">
@@ -2799,7 +2714,6 @@
 
   <Association Name="FK_Method_has_MethodInvocations">
     <End Role="Method" Type="Model.Store.Method" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="MethodInvocations" Type="Model.Store.MethodInvocation" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Method">
@@ -2814,7 +2728,6 @@
 
   <Association Name="FK_Method_has_Module">
     <End Role="Module" Type="Model.Store.Module" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="Method" Type="Model.Store.Method" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Module">
@@ -2829,7 +2742,6 @@
 
   <Association Name="FK_Method_has_Parameter">
     <End Role="Method" Type="Model.Store.Method" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="Parameter" Type="Model.Store.BaseParameter" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Method">
@@ -2844,7 +2756,6 @@
 
   <Association Name="FK_Method_was_ChangedBy">
     <End Role="ChangedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="Method" Type="Model.Store.Method" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ChangedBy">
@@ -2859,7 +2770,6 @@
 
   <Association Name="FK_Method_was_CreatedBy">
     <End Role="CreatedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="Method" Type="Model.Store.Method" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="CreatedBy">
@@ -2874,7 +2784,6 @@
 
   <Association Name="FK_MethodInvocation_has_Implementor">
     <End Role="Implementor" Type="Model.Store.TypeRef" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="MethodInvocation" Type="Model.Store.MethodInvocation" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Implementor">
@@ -2889,7 +2798,6 @@
 
   <Association Name="FK_MethodInvocation_has_Module">
     <End Role="Module" Type="Model.Store.Module" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="MethodInvocation" Type="Model.Store.MethodInvocation" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Module">
@@ -2904,7 +2812,6 @@
 
   <Association Name="FK_MethodInvocation_was_ChangedBy">
     <End Role="ChangedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="MethodInvocation" Type="Model.Store.MethodInvocation" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ChangedBy">
@@ -2919,7 +2826,6 @@
 
   <Association Name="FK_MethodInvocation_was_CreatedBy">
     <End Role="CreatedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="MethodInvocation" Type="Model.Store.MethodInvocation" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="CreatedBy">
@@ -2934,7 +2840,6 @@
 
   <Association Name="FK_Mitarbeiter_was_ChangedBy">
     <End Role="ChangedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="Mitarbeiter" Type="Model.Store.Mitarbeiter" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ChangedBy">
@@ -2949,7 +2854,6 @@
 
   <Association Name="FK_Mitarbeiter_was_CreatedBy">
     <End Role="CreatedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="Mitarbeiter" Type="Model.Store.Mitarbeiter" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="CreatedBy">
@@ -2964,7 +2868,6 @@
 
   <Association Name="FK_Module_has_Assemblies">
     <End Role="Module" Type="Model.Store.Module" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="Assemblies" Type="Model.Store.Assembly" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Module">
@@ -2979,7 +2882,6 @@
 
   <Association Name="FK_Module_has_DataTypes">
     <End Role="Module" Type="Model.Store.Module" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="DataTypes" Type="Model.Store.DataType" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Module">
@@ -2994,7 +2896,6 @@
 
   <Association Name="FK_Module_has_Relation">
     <End Role="Module" Type="Model.Store.Module" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="Relation" Type="Model.Store.Relation" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Module">
@@ -3009,7 +2910,6 @@
 
   <Association Name="FK_Module_was_ChangedBy">
     <End Role="ChangedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="Module" Type="Model.Store.Module" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ChangedBy">
@@ -3024,7 +2924,6 @@
 
   <Association Name="FK_Module_was_CreatedBy">
     <End Role="CreatedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="Module" Type="Model.Store.Module" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="CreatedBy">
@@ -3039,7 +2938,6 @@
 
   <Association Name="FK_MuhBlah_List_Role_hasOther_TestCustomObjects_Role">
     <End Role="TestCustomObjects_Role" Type="Model.Store.TestCustomObject" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="MuhBlah_List_Role" Type="Model.Store.Muhblah" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="TestCustomObjects_Role">
@@ -3054,7 +2952,6 @@
 
   <Association Name="FK_MuhBlah_One_Role_loves_TestCustomObjects_One_Role">
     <End Role="TestCustomObjects_One_Role" Type="Model.Store.TestCustomObject" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="MuhBlah_One_Role" Type="Model.Store.Muhblah" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="TestCustomObjects_One_Role">
@@ -3069,7 +2966,6 @@
 
   <Association Name="FK_MuhBlah_Role_has_TestCustomObjects_List_Role">
     <End Role="MuhBlah_Role" Type="Model.Store.Muhblah" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="TestCustomObjects_List_Role" Type="Model.Store.TestCustomObject" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="MuhBlah_Role">
@@ -3084,7 +2980,6 @@
 
   <Association Name="FK_ObjectClass_has_Methods">
     <End Role="ObjectClass" Type="Model.Store.DataType" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="Methods" Type="Model.Store.Method" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ObjectClass">
@@ -3099,7 +2994,6 @@
 
   <Association Name="FK_ObjectClass_has_Properties">
     <End Role="ObjectClass" Type="Model.Store.DataType" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="Properties" Type="Model.Store.Property" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ObjectClass">
@@ -3114,7 +3008,6 @@
 
   <Association Name="FK_ObjectParameter_has_DataType">
     <End Role="DataType" Type="Model.Store.DataType" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="ObjectParameter" Type="Model.Store.ObjectParameter" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="DataType">
@@ -3129,7 +3022,6 @@
 
   <Association Name="FK_ObjectReferencePlaceholderProperty_ofType_ReferencedObjectClass">
     <End Role="ReferencedObjectClass" Type="Model.Store.ObjectClass" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="ObjectReferencePlaceholderProperty" Type="Model.Store.ObjectReferencePlaceholderProperty" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ReferencedObjectClass">
@@ -3144,7 +3036,6 @@
 
   <Association Name="FK_PresenceRecord_has_Mitarbeiter">
     <End Role="Mitarbeiter" Type="Model.Store.Mitarbeiter" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="PresenceRecord" Type="Model.Store.PresenceRecord" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Mitarbeiter">
@@ -3159,7 +3050,6 @@
 
   <Association Name="FK_Presentable_has_DefaultKind">
     <End Role="DefaultKind" Type="Model.Store.ControlKind" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="Presentable" Type="Model.Store.PresentableModelDescriptor" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="DefaultKind">
@@ -3174,7 +3064,6 @@
 
   <Association Name="FK_Presentable_has_DefaultPresentableModelDescriptor">
     <End Role="DefaultPresentableModelDescriptor" Type="Model.Store.PresentableModelDescriptor" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="Presentable" Type="Model.Store.ObjectClass" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="DefaultPresentableModelDescriptor">
@@ -3189,7 +3078,6 @@
 
   <Association Name="FK_PresentableModelDescriptor_displayedInGridBy_DefaultGridCellKind">
     <End Role="DefaultGridCellKind" Type="Model.Store.ControlKind" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="PresentableModelDescriptor" Type="Model.Store.PresentableModelDescriptor" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="DefaultGridCellKind">
@@ -3204,7 +3092,6 @@
 
   <Association Name="FK_PresentableModelDescriptor_has_Module">
     <End Role="Module" Type="Model.Store.Module" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="PresentableModelDescriptor" Type="Model.Store.PresentableModelDescriptor" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Module">
@@ -3219,7 +3106,6 @@
 
   <Association Name="FK_Projekt_has_Auftraege">
     <End Role="Projekt" Type="Model.Store.Projekt" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="Auftraege" Type="Model.Store.Auftrag" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Projekt">
@@ -3234,7 +3120,6 @@
 
   <Association Name="FK_Projekt_has_Tasks">
     <End Role="Projekt" Type="Model.Store.Projekt" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="Tasks" Type="Model.Store.Task" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Projekt">
@@ -3249,7 +3134,6 @@
 
   <Association Name="FK_Projekt_was_ChangedBy">
     <End Role="ChangedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="Projekt" Type="Model.Store.Projekt" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ChangedBy">
@@ -3264,7 +3148,6 @@
 
   <Association Name="FK_Projekt_was_CreatedBy">
     <End Role="CreatedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="Projekt" Type="Model.Store.Projekt" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="CreatedBy">
@@ -3279,7 +3162,6 @@
 
   <Association Name="FK_Property_has_DefaultValue">
     <End Role="Property" Type="Model.Store.Property" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="DefaultValue" Type="Model.Store.DefaultPropertyValue" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Property">
@@ -3294,7 +3176,6 @@
 
   <Association Name="FK_Property_has_ValueModelDescriptor">
     <End Role="ValueModelDescriptor" Type="Model.Store.PresentableModelDescriptor" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="Property" Type="Model.Store.Property" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ValueModelDescriptor">
@@ -3309,7 +3190,6 @@
 
   <Association Name="FK_Property_was_ChangedBy">
     <End Role="ChangedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="Property" Type="Model.Store.Property" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ChangedBy">
@@ -3324,7 +3204,6 @@
 
   <Association Name="FK_Property_was_CreatedBy">
     <End Role="CreatedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="Property" Type="Model.Store.Property" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="CreatedBy">
@@ -3339,7 +3218,6 @@
 
   <Association Name="FK_PropertyInvocation_has_Implementor">
     <End Role="Implementor" Type="Model.Store.TypeRef" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="PropertyInvocation" Type="Model.Store.PropertyInvocation" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Implementor">
@@ -3354,7 +3232,6 @@
 
   <Association Name="FK_PropertyInvocation_was_ChangedBy">
     <End Role="ChangedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="PropertyInvocation" Type="Model.Store.PropertyInvocation" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ChangedBy">
@@ -3369,7 +3246,6 @@
 
   <Association Name="FK_PropertyInvocation_was_CreatedBy">
     <End Role="CreatedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="PropertyInvocation" Type="Model.Store.PropertyInvocation" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="CreatedBy">
@@ -3384,7 +3260,6 @@
 
   <Association Name="FK_Relation_hasA_A">
     <End Role="A" Type="Model.Store.RelationEnd" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="Relation" Type="Model.Store.Relation" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="A">
@@ -3399,7 +3274,6 @@
 
   <Association Name="FK_Relation_hasB_B">
     <End Role="B" Type="Model.Store.RelationEnd" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="Relation" Type="Model.Store.Relation" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="B">
@@ -3414,7 +3288,6 @@
 
   <Association Name="FK_Relation_was_ChangedBy">
     <End Role="ChangedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="Relation" Type="Model.Store.Relation" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ChangedBy">
@@ -3429,7 +3302,6 @@
 
   <Association Name="FK_Relation_was_CreatedBy">
     <End Role="CreatedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="Relation" Type="Model.Store.Relation" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="CreatedBy">
@@ -3444,7 +3316,6 @@
 
   <Association Name="FK_RelationEnd_has_Navigator">
     <End Role="Navigator" Type="Model.Store.ObjectReferenceProperty" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="RelationEnd" Type="Model.Store.RelationEnd" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Navigator">
@@ -3459,7 +3330,6 @@
 
   <Association Name="FK_RelationEnd_has_Type">
     <End Role="Type" Type="Model.Store.ObjectClass" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="RelationEnd" Type="Model.Store.RelationEnd" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Type">
@@ -3474,7 +3344,6 @@
 
   <Association Name="FK_RelationEnd_was_ChangedBy">
     <End Role="ChangedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="RelationEnd" Type="Model.Store.RelationEnd" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ChangedBy">
@@ -3489,7 +3358,6 @@
 
   <Association Name="FK_RelationEnd_was_CreatedBy">
     <End Role="CreatedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="RelationEnd" Type="Model.Store.RelationEnd" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="CreatedBy">
@@ -3504,7 +3372,6 @@
 
   <Association Name="FK_StructProperty_has_StructDefinition">
     <End Role="StructDefinition" Type="Model.Store.Struct" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="StructProperty" Type="Model.Store.StructProperty" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="StructDefinition">
@@ -3519,7 +3386,6 @@
 
   <Association Name="FK_Task_was_ChangedBy">
     <End Role="ChangedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="Task" Type="Model.Store.Task" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ChangedBy">
@@ -3534,7 +3400,6 @@
 
   <Association Name="FK_Task_was_CreatedBy">
     <End Role="CreatedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="Task" Type="Model.Store.Task" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="CreatedBy">
@@ -3549,7 +3414,6 @@
 
   <Association Name="FK_Template_has_DisplayedTypeAssembly">
     <End Role="DisplayedTypeAssembly" Type="Model.Store.Assembly" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="Template" Type="Model.Store.Template" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="DisplayedTypeAssembly">
@@ -3564,7 +3428,6 @@
 
   <Association Name="FK_Template_has_VisualTree">
     <End Role="VisualTree" Type="Model.Store.Visual" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="Template" Type="Model.Store.Template" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="VisualTree">
@@ -3579,7 +3442,6 @@
 
   <Association Name="FK_TestObjClass_has_ObjectProp">
     <End Role="ObjectProp" Type="Model.Store.Kunde" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="TestObjClass" Type="Model.Store.TestObjClass" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ObjectProp">
@@ -3594,7 +3456,6 @@
 
   <Association Name="FK_TypeRef_has_Assembly">
     <End Role="Assembly" Type="Model.Store.Assembly" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="TypeRef" Type="Model.Store.TypeRef" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Assembly">
@@ -3609,7 +3470,6 @@
 
   <Association Name="FK_TypeRef_was_ChangedBy">
     <End Role="ChangedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="TypeRef" Type="Model.Store.TypeRef" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ChangedBy">
@@ -3624,7 +3484,6 @@
 
   <Association Name="FK_TypeRef_was_CreatedBy">
     <End Role="CreatedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="TypeRef" Type="Model.Store.TypeRef" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="CreatedBy">
@@ -3639,7 +3498,6 @@
 
   <Association Name="FK_View_has_ControlRef">
     <End Role="ControlRef" Type="Model.Store.TypeRef" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="View" Type="Model.Store.ViewDescriptor" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ControlRef">
@@ -3654,7 +3512,6 @@
 
   <Association Name="FK_ViewDescriptor_has_Module">
     <End Role="Module" Type="Model.Store.Module" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="ViewDescriptor" Type="Model.Store.ViewDescriptor" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Module">
@@ -3669,7 +3526,6 @@
 
   <Association Name="FK_Visual_has_Method">
     <End Role="Method" Type="Model.Store.Method" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="Visual" Type="Model.Store.Visual" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Method">
@@ -3684,7 +3540,6 @@
 
   <Association Name="FK_Visual_has_Property">
     <End Role="Property" Type="Model.Store.Property" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="Visual" Type="Model.Store.Visual" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Property">
@@ -3699,7 +3554,6 @@
 
   <Association Name="FK_WorkEffort_has_Mitarbeiter">
     <End Role="Mitarbeiter" Type="Model.Store.Mitarbeiter" Multiplicity="0..1" />
-    <!-- the dependent role always has Multiplicity="*" since 1:1 relations cannot be expressed by EF -->
     <End Role="WorkEffort" Type="Model.Store.WorkEffort" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Mitarbeiter">

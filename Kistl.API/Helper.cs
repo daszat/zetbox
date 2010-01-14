@@ -75,6 +75,16 @@ namespace Kistl.API
 
             return path;
         }
+
+        public static string Indent(int count)
+        {
+            StringBuilder sb = new StringBuilder(count);
+            for (int i = 0; i < count; i++)
+            {
+                sb.Append(' ');
+            }
+            return sb.ToString();
+        }
     }
 
     public static class TypeExtensions
@@ -84,6 +94,27 @@ namespace Kistl.API
             if (type == null) { throw new ArgumentNullException("type"); }
             return type.IsAbstract && type.IsSealed;
         }
+
+        public static bool IsIDataObject(this Type type)
+        {
+            return typeof(IDataObject).IsAssignableFrom(type);
+        }
+        public static bool IsIRelationCollectionEntry(this Type type)
+        {
+            return typeof(IRelationCollectionEntry).IsAssignableFrom(type);
+        }
+        public static bool IsIPersistenceObject(this Type type)
+        {
+            return typeof(IPersistenceObject).IsAssignableFrom(type);
+        }
+        public static bool IsIStruct(this Type type)
+        {
+            return typeof(IStruct).IsAssignableFrom(type);
+        }
+        public static bool IsIExportableInternal(this Type type)
+        {
+            return typeof(IExportableInternal).IsAssignableFrom(type);
+        }        
     }
 
     /// <summary>

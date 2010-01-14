@@ -34,25 +34,19 @@ this.WriteObjects("	    <MappingFragment StoreEntitySet=\"",  cls.ClassName , "\
 this.WriteObjects("	      <ScalarProperty Name=\"ID\" ColumnName=\"ID\" />\r\n");
 #line 21 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.EntityTypeMapping.cst"
 ApplyPropertyMappings();
-
-#line 23 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.EntityTypeMapping.cst"
-this.WriteObjects("	    </MappingFragment>\r\n");
-#line 25 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.EntityTypeMapping.cst"
-if(cls.HasSecurityRules(false))
+		if(cls.HasSecurityRules(false))
 		{
 
+#line 25 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.EntityTypeMapping.cst"
+this.WriteObjects("          <ScalarProperty Name=\"CurrentIdentity",  Kistl.API.Helper.ImplementationSuffix , "\" ColumnName=\"Rights__CurrentIdentity\" />\r\n");
+this.WriteObjects("          <ScalarProperty Name=\"CurrentAccessRights",  Kistl.API.Helper.ImplementationSuffix , "\" ColumnName=\"Rights__CurrentAccessRights\" />\r\n");
 #line 28 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.EntityTypeMapping.cst"
-this.WriteObjects("	    <MappingFragment StoreEntitySet=\"",  cls.ClassName , "_Rights\">\r\n");
-this.WriteObjects("		  <ScalarProperty Name=\"ID\" ColumnName=\"ID\" />\r\n");
-this.WriteObjects("          <ScalarProperty Name=\"CurrentIdentity",  Kistl.API.Helper.ImplementationSuffix , "\" ColumnName=\"Identity\" />\r\n");
-this.WriteObjects("          <ScalarProperty Name=\"CurrentAccessRights",  Kistl.API.Helper.ImplementationSuffix , "\" ColumnName=\"Right\" />\r\n");
-this.WriteObjects("	    </MappingFragment>\r\n");
-#line 34 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.EntityTypeMapping.cst"
 }
 
-#line 36 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.EntityTypeMapping.cst"
+#line 30 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.EntityTypeMapping.cst"
+this.WriteObjects("	    </MappingFragment>\r\n");
 this.WriteObjects("      </EntityTypeMapping>\r\n");
-#line 38 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.EntityTypeMapping.cst"
+#line 33 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\EfModel\Model.msl.EntityTypeMapping.cst"
 foreach(var subCls in cls.SubClasses.OrderBy(c => c.ClassName))
 	{
 		ApplyEntityTypeMapping(subCls);	

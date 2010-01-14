@@ -136,7 +136,7 @@ namespace Kistl.API
             return Expression.MakeUnary(u.NodeType, Visit(u.Operand), u.Type, u.Method);
         }
 
-        protected virtual BinaryExpression VisitBinary(BinaryExpression b)
+        protected virtual Expression VisitBinary(BinaryExpression b)
         {
             Expression left = Visit(b.Left);
             Expression right = Visit(b.Right);
@@ -148,7 +148,7 @@ namespace Kistl.API
                 return Expression.MakeBinary(b.NodeType, left, right, b.IsLiftedToNull, b.Method);
         }
 
-        protected virtual TypeBinaryExpression VisitTypeIs(TypeBinaryExpression b)
+        protected virtual Expression VisitTypeIs(TypeBinaryExpression b)
         {
             return Expression.TypeIs(Visit(b.Expression), b.TypeOperand);
         }
@@ -158,7 +158,7 @@ namespace Kistl.API
             return c;
         }
 
-        protected virtual ConditionalExpression VisitConditional(ConditionalExpression c)
+        protected virtual Expression VisitConditional(ConditionalExpression c)
         {
             return Expression.Condition(Visit(c.Test), Visit(c.IfTrue), Visit(c.IfFalse));
         }
@@ -168,12 +168,12 @@ namespace Kistl.API
             return p;
         }
 
-        protected virtual MemberExpression VisitMemberAccess(MemberExpression m)
+        protected virtual Expression VisitMemberAccess(MemberExpression m)
         {
             return Expression.MakeMemberAccess(Visit(m.Expression), m.Member);
         }
 
-        protected virtual MethodCallExpression VisitMethodCall(MethodCallExpression m)
+        protected virtual Expression VisitMethodCall(MethodCallExpression m)
         {
             return Expression.Call(Visit(m.Object), m.Method, VisitExpressionList(m.Arguments));
         }
@@ -221,7 +221,7 @@ namespace Kistl.API
             return result.AsReadOnly();
         }
 
-        protected virtual LambdaExpression VisitLambda(LambdaExpression lambda)
+        protected virtual Expression VisitLambda(LambdaExpression lambda)
         {
             return Expression.Lambda(lambda.Type, Visit(lambda.Body), VisitParameterList(lambda.Parameters));
         }
@@ -260,7 +260,7 @@ namespace Kistl.API
             }
         }
 
-        protected virtual InvocationExpression VisitInvocation(InvocationExpression iv)
+        protected virtual Expression VisitInvocation(InvocationExpression iv)
         {
             return Expression.Invoke(Visit(iv.Expression), VisitExpressionList(iv.Arguments));
         }

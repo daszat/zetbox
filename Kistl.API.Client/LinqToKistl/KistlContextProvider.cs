@@ -111,9 +111,9 @@ namespace Kistl.API.Client
         /// <returns></returns>
         internal T GetListCall<T>(Expression e)
         {
-            if (Logging.Linq.IsDebugEnabled)
+            if (Logging.Linq.IsInfoEnabled)
             {
-                Logging.Linq.Debug(e.ToString());
+                Logging.Linq.Info(e.ToString());
             }
 
             List<IStreamable> auxObjects;
@@ -165,9 +165,9 @@ namespace Kistl.API.Client
         /// <returns>A Object an Expeption, if the Object was not found.</returns>
         internal T GetObjectCall<T>(Expression e)
         {
-            if (Logging.Linq.IsDebugEnabled)
+            if (Logging.Linq.IsInfoEnabled)
             {
-                Logging.Linq.Debug(e.ToString());
+                Logging.Linq.Info(e.ToString());
             }
 
             // Visit
