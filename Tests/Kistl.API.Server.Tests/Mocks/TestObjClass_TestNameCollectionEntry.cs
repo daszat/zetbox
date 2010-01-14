@@ -21,7 +21,13 @@ namespace Kistl.API.Server.Mocks
         }
     }
 
-    public class TestObjClass_TestNameCollectionEntry__Implementation__ : BaseServerCollectionEntry, IValueCollectionEntry<TestObjClass, string>
+    public interface TestObjClass_TestNameCollectionEntry
+        : IValueCollectionEntry<TestObjClass, string>
+    {
+    }
+
+    public class TestObjClass_TestNameCollectionEntry__Implementation__
+        : BaseServerCollectionEntry, TestObjClass_TestNameCollectionEntry
     {
         /// <summary>
         /// returns the most specific implemented data object interface
