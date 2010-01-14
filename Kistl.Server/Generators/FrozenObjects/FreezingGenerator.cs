@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using Kistl.App.Base;
-using Kistl.App.Extensions;
 using Kistl.API;
 using Kistl.API.Utils;
+using Kistl.App.Base;
+using Kistl.App.Extensions;
 
 namespace Kistl.Server.Generators.FrozenObjects
 {
@@ -15,6 +15,7 @@ namespace Kistl.Server.Generators.FrozenObjects
     {
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Server.Generator.Frozen");
 
+        public override string Description { get { return "Frozen"; } }
         public override string TemplateProviderPath { get { return this.GetType().Namespace; } }
         public override string TargetNameSpace { get { return "Kistl.Objects.Frozen"; } }
         public override string BaseName { get { return "Frozen"; } }
@@ -22,7 +23,7 @@ namespace Kistl.Server.Generators.FrozenObjects
 
         public static IDictionary<Type, IEnumerable<IDataObject>> FrozenInstances { get; private set; }
 
-        public override string Generate(IKistlContext ctx, string basePath)
+        public override void Generate(IKistlContext ctx, string basePath)
         {
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
 
@@ -44,11 +45,9 @@ namespace Kistl.Server.Generators.FrozenObjects
 
             FrozenInstances = instances.GroupBy(o => o.GetInterfaceType().Type).ToDictionary(grp => grp.Key, grp => grp.AsEnumerable());
 
-            var result = base.Generate(ctx, basePath);
+            base.Generate(ctx, basePath);
 
             FrozenInstances = null;
-            
-            return result;
         }
         
         protected override string Generate_ObjectClass(Kistl.API.IKistlContext ctx, ObjectClass objClass)

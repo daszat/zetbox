@@ -160,8 +160,10 @@ namespace Kistl.Server
         public void GenerateCode()
         {
             using (Log.InfoTraceMethodCall())
+            using (var subContainer = container.CreateInnerContainer())
             {
-                Generators.Generator.GenerateCode();
+                var generator = subContainer.Resolve<Generators.Generator>();
+                generator.GenerateCode();
             }
         }
 

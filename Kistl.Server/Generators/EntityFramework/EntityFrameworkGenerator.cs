@@ -8,6 +8,7 @@ namespace Kistl.Server.Generators.EntityFramework
     public class EntityFrameworkGenerator
         : BaseDataObjectGenerator
     {
+        public override string Description { get { return "EfObjects"; } }
         public override string TemplateProviderPath { get { return this.GetType().Namespace; } }
         public override string TargetNameSpace { get { return "Kistl.Objects.Server"; } }
         public override string BaseName { get { return "Server"; } }

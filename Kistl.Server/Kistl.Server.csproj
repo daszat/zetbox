@@ -933,6 +933,7 @@
     <Compile Include="Generators\EntityFramework\Implementation\ObjectClasses\CollectionSerialization.cs" />
     <Compile Include="Generators\EntityFramework\Implementation\ObjectClasses\NotifyingDataProperty.cs" />
     <Compile Include="Generators\FrozenObjects\Logging.cs" />
+    <Compile Include="Generators\KistlCodeTemplate.cs" />
     <Compile Include="Generators\Templates\Implementation\CollectionEntries\ExportGuidProperty.cs" />
     <Compile Include="Generators\Templates\Implementation\ObjectClasses\CalculatedProperty.cs" />
     <Compile Include="Generators\Templates\Implementation\ObjectClasses\CalculatedProperty.Designer.cs">

@@ -5,8 +5,8 @@ using System.Linq;
 using System.Text;
 
 using Kistl.API;
-using Kistl.API.Utils;
 using Kistl.App.Base;
+using Kistl.API.Utils;
 
 namespace Kistl.Server.Generators
 {
@@ -16,7 +16,7 @@ namespace Kistl.Server.Generators
 
         private string codeBasePath = String.Empty;
 
-        public virtual void Generate(Kistl.API.IKistlContext ctx, string basePath)
+        public virtual string Generate(Kistl.API.IKistlContext ctx, string basePath)
         {
             codeBasePath = Path.Combine(basePath, TargetNameSpace);
             Directory.CreateDirectory(codeBasePath);
@@ -30,6 +30,7 @@ namespace Kistl.Server.Generators
 
             var generatedFileNames = new List<string>();
 
+
             Log.Info("  Object Classes");
             foreach (ObjectClass objClass in Generator.GetObjectClassList(ctx).OrderBy(x => x.ClassName))
             {
@@ -39,6 +40,7 @@ namespace Kistl.Server.Generators
 
             Log.Info("  Collection Entries");
             generatedFileNames.Add(Generate_CollectionEntries(ctx));
+
 
             Log.Info("  Interfaces");
             foreach (Interface i in Generator.GetInterfaceList(ctx).OrderBy(x => x.ClassName))
@@ -64,19 +66,21 @@ namespace Kistl.Server.Generators
             Log.Info("  Assemblyinfo");
             generatedFileNames.Add(Generate_AssemblyInfo(ctx));
 
+
             Log.Info("  Other Files");
             generatedFileNames.AddRange(Generate_Other(ctx));
+
 
             Log.Info("  Project File");
             string projectFileName = Generate_ProjectFile(ctx, ProjectGuid, generatedFileNames);
 
-            this.ProjectFileName = Path.Combine(this.codeBasePath, projectFileName);
+            return Path.Combine(this.codeBasePath, projectFileName);
         }
 
         /// <summary>
-        /// A short string describing the generator for logfiles.
+        /// A short string describing this generator for logfiles.
         /// </summary>
-        public abstract string Description { get; }
+        public abstract string Caption { get; }
 
         /// <summary>
         /// the namespace where to lookup the templates of this provider
@@ -98,11 +102,6 @@ namespace Kistl.Server.Generators
         /// Kludge to integrate well into the .sln, in "Registry Format"
         /// </summary>
         public abstract string ProjectGuid { get; }
-
-        /// <summary>
-        /// The name of the generated MsBuild project file. This is only available after generating the source code.
-        /// </summary>
-        public string ProjectFileName { get; private set; }
 
         protected virtual string RunTemplateWithExtension(IKistlContext ctx, string templateName, string baseFilename, string extension, params object[] args)
         {

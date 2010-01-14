@@ -22,7 +22,7 @@ namespace Kistl.Server
                     IKistlContext ctx = c.Resolve<MemoryContext>();
                     ISchemaProvider schemaProvider = c.Resolve<ISchemaProvider>();
                     SchemaManagement.SchemaManager.LoadSavedSchemaInto(schemaProvider, ctx);
-                    
+
                     return new SchemaManagement.SchemaManager(
                         schemaProvider,
                         p.Named<IKistlContext>("newSchema"),
@@ -32,6 +32,31 @@ namespace Kistl.Server
 
             moduleBuilder
                 .Register<Server>()
+                .ContainerScoped();
+
+            moduleBuilder
+                .RegisterCollection<Generators.BaseDataObjectGenerator>()
+                .ContainerScoped();
+
+            moduleBuilder
+                .Register<Generators.Interfaces.InterfaceGenerator>()
+                .As<Generators.BaseDataObjectGenerator>()
+                .MemberOf<IEnumerable<Generators.BaseDataObjectGenerator>>();
+            moduleBuilder
+                .Register<Generators.ClientObjects.ClientObjectGenerator>()
+                .As<Generators.BaseDataObjectGenerator>()
+                .MemberOf<IEnumerable<Generators.BaseDataObjectGenerator>>();
+            moduleBuilder
+                .Register<Generators.EntityFramework.EntityFrameworkGenerator>()
+                .As<Generators.BaseDataObjectGenerator>()
+                .MemberOf<IEnumerable<Generators.BaseDataObjectGenerator>>();
+            moduleBuilder
+                .Register<Generators.FrozenObjects.FreezingGenerator>()
+                .As<Generators.BaseDataObjectGenerator>()
+                .MemberOf<IEnumerable<Generators.BaseDataObjectGenerator>>();
+
+            moduleBuilder
+                .Register<Generators.Generator>()
                 .ContainerScoped();
         }
     }
