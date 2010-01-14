@@ -6,10 +6,10 @@
     <DatabaseProvider>System.Data.SqlClient</DatabaseProvider>
     <ConnectionString>Data Source=.\SQLEXPRESS;Initial Catalog=Kistl_test;Integrated Security=True;MultipleActiveResultSets=true;</ConnectionString>
     <DocumentStore>P:\Kistl\DocumentStore\Server\</DocumentStore>
-    <KistlDataContextType>Kistl.DALProvider.EF.KistlDataContext, Kistl.DALProvider.EF</KistlDataContextType>
-    <ServerObjectHandlerType>Kistl.DALProvider.EF.ServerObjectHandler`1, Kistl.DALProvider.EF</ServerObjectHandlerType>
-    <ServerObjectSetHandlerType>Kistl.DALProvider.EF.ServerObjectSetHandler, Kistl.DALProvider.EF</ServerObjectSetHandlerType>
-    <ServerCollectionHandlerType>Kistl.DALProvider.EF.ServerCollectionHandler`4, Kistl.DALProvider.EF</ServerCollectionHandlerType>
+    <KistlDataContextType>Kistl.DalProvider.EF.KistlDataContext, Kistl.DalProvider.EF</KistlDataContextType>
+    <ServerObjectHandlerType>Kistl.DalProvider.EF.ServerObjectHandler`1, Kistl.DalProvider.EF</ServerObjectHandlerType>
+    <ServerObjectSetHandlerType>Kistl.DalProvider.EF.ServerObjectSetHandler, Kistl.DalProvider.EF</ServerObjectSetHandlerType>
+    <ServerCollectionHandlerType>Kistl.DalProvider.EF.ServerCollectionHandler`4, Kistl.DalProvider.EF</ServerCollectionHandlerType>
   </Server>
   <Client StartClient="false">
     <DocumentStore>P:\Kistl\DocumentStore\Client\</DocumentStore>

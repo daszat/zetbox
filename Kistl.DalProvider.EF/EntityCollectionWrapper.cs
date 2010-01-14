@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 
 using Kistl.API;
-using Kistl.DALProvider.EF;
+using Kistl.DalProvider.EF;
 
-namespace Kistl.DALProvider.EF
+namespace Kistl.DalProvider.EF
 {
     /// <summary>
     /// Wraps 1:N Relation, which EF provides via a EntityCollection

@@ -27,7 +27,7 @@
       <DocumentationSource sourceFile="..\Kistl.Client.Forms\Kistl.Client.Forms.csproj" xmlns="" />
       <DocumentationSource sourceFile="..\Kistl.Client.WPF\Kistl.Client.WPF.csproj" xmlns="" />
       <DocumentationSource sourceFile="..\Kistl.DalProvider.ClientObjects\Kistl.DalProvider.ClientObjects.csproj" xmlns="" />
-      <DocumentationSource sourceFile="..\Kistl.DALProvider.EF\Kistl.DALProvider.EF.csproj" xmlns="" />
+      <DocumentationSource sourceFile="..\Kistl.DalProvider.EF\Kistl.DalProvider.EF.csproj" xmlns="" />
       <DocumentationSource sourceFile="..\Kistl.DalProvider.Frozen\Kistl.DalProvider.Frozen.csproj" xmlns="" />
       <DocumentationSource sourceFile="..\Kistl.Objects\Kistl.Objects.csproj" xmlns="" />
       <DocumentationSource sourceFile="..\Kistl.Server\Kistl.Server.csproj" xmlns="" />

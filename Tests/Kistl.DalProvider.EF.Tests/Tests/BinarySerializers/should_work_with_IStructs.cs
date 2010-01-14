@@ -8,7 +8,7 @@ using System.Text;
 using Kistl.API;
 using Kistl.API.Server;
 using Kistl.App.Test;
-using Kistl.DALProvider.EF;
+using Kistl.DalProvider.EF;
 
 using NUnit.Framework;
 

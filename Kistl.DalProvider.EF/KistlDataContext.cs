@@ -15,7 +15,7 @@ using Kistl.API.Utils;
 
 [assembly: global::System.Data.Objects.DataClasses.EdmSchemaAttribute()]
 
-namespace Kistl.DALProvider.EF
+namespace Kistl.DalProvider.EF
 {
     internal class EFObjectContext : ObjectContext
     {

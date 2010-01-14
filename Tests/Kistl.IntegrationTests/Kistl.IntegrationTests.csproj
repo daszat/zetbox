@@ -131,9 +131,9 @@
       <Project>{3760694D-3B35-41D4-B1A3-41BB288AA19F}</Project>
       <Name>Kistl.DalProvider.ClientObjects</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Kistl.DALProvider.EF\Kistl.DALProvider.EF.csproj">
+    <ProjectReference Include="..\..\Kistl.DalProvider.EF\Kistl.DalProvider.EF.csproj">
       <Project>{52EC8DFB-9C75-4FDB-9EE1-E78847F7F711}</Project>
-      <Name>Kistl.DALProvider.EF</Name>
+      <Name>Kistl.DalProvider.EF</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Kistl.DalProvider.Frozen\Kistl.DalProvider.Frozen.csproj">
       <Project>{F3B74A4A-BE0C-4BC2-BE32-D1A1D179B4F7}</Project>

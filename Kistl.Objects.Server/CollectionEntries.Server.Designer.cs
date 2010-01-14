@@ -9,7 +9,7 @@ using System.Linq;
 
 using Kistl.API;
     using Kistl.API.Server;
-    using Kistl.DALProvider.EF;
+    using Kistl.DalProvider.EF;
     using System.Data.Objects;
     using System.Data.Objects.DataClasses;
 

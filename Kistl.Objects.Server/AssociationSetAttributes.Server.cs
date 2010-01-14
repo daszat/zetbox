@@ -4,7 +4,7 @@ using System.Xml;
 using System.Xml.Serialization;
 
 using Kistl.API;
-using Kistl.DALProvider.EF;
+using Kistl.DalProvider.EF;
 
 
 	/*

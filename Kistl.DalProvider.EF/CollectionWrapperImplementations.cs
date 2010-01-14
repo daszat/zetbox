@@ -7,7 +7,7 @@ using System.Text;
 
 using Kistl.API;
 
-namespace Kistl.DALProvider.EF
+namespace Kistl.DalProvider.EF
 {
 
     public sealed class EntityRelationASideCollectionWrapper<TA, TB, TEntry>

@@ -34,7 +34,7 @@ this.WriteObjects("using System.Xml;\r\n");
 this.WriteObjects("using System.Xml.Serialization;\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("using Kistl.API;\r\n");
-this.WriteObjects("using Kistl.DALProvider.EF;\r\n");
+this.WriteObjects("using Kistl.DalProvider.EF;\r\n");
 this.WriteObjects("\r\n");
 #line 26 "P:\Kistl\Kistl.Server\Generators\EntityFramework\Implementation\ObjectClasses\AssociationSetAttributes.cst"
 foreach (var rel in ctx.GetQuery<Relation>().ToList().OrderBy(r => r.GetAssociationName()))

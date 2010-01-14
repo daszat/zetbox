@@ -10,7 +10,7 @@ using Kistl.API.Server;
 using Kistl.App.Base;
 using Kistl.App.Extensions;
 
-namespace Kistl.DALProvider.EF
+namespace Kistl.DalProvider.EF
 {
     internal interface IEntityStateObject : IEntityWithKey
     {

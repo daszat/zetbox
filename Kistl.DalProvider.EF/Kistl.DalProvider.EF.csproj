@@ -8,8 +8,8 @@
     <ProjectGuid>{52EC8DFB-9C75-4FDB-9EE1-E78847F7F711}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Kistl.DALProvider.EF</RootNamespace>
-    <AssemblyName>Kistl.DALProvider.EF</AssemblyName>
+    <RootNamespace>Kistl.DalProvider.EF</RootNamespace>
+    <AssemblyName>Kistl.DalProvider.EF</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <StartupObject>
@@ -24,7 +24,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <NoWarn>1591</NoWarn>
-    <DocumentationFile>..\bin\Debug\bin\Server\Kistl.DALProvider.EF.xml</DocumentationFile>
+    <DocumentationFile>..\bin\Debug\bin\Server\Kistl.DalProvider.EF.xml</DocumentationFile>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -34,7 +34,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\bin\Release\bin\Server\Kistl.DALProvider.EF.xml</DocumentationFile>
+    <DocumentationFile>..\bin\Release\bin\Server\Kistl.DalProvider.EF.xml</DocumentationFile>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>

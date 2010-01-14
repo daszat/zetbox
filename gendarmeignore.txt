@@ -30,7 +30,7 @@ M: System.Void Kistl.API.BinarySerializer::SerializerTrace(System.String,System.
 # Helper method which is only called by reflection from AddNewLocalObjects
 M: System.Void Kistl.API.Client.KistlContextProvider::AddNewLocalObjectsGeneric(System.Collections.IList)
 # Helper method which is only called by reflection from GetCollectionEntries
-M: System.Collections.Generic.IEnumerable`1<Kistl.API.IRelationCollectionEntry> Kistl.DALProvider.EF.ServerCollectionHandler`4::GetCollectionEntriesInternal(TParent,Kistl.App.Base.Relation,Kistl.API.RelationEndRole)
+M: System.Collections.Generic.IEnumerable`1<Kistl.API.IRelationCollectionEntry> Kistl.DalProvider.EF.ServerCollectionHandler`4::GetCollectionEntriesInternal(TParent,Kistl.App.Base.Relation,Kistl.API.RelationEndRole)
 # generated code (wpf)
 M: System.Delegate Kistl.Client.WPF.View.NullableBoolValueView::_CreateDelegate(System.Type,System.String)
 M: System.Delegate Kistl.Client.WPF.View.Relations.RelationView::_CreateDelegate(System.Type,System.String)
@@ -62,15 +62,15 @@ M: System.Void Kistl.App.Projekte.WordHelper::ApplyCustomXml(System.Xml.XmlDocum
 
 R: Gendarme.Rules.Correctness.CheckParametersNullityInVisibleMethodsRule
 # False positives
-M: System.Void Kistl.DALProvider.EF.EntityCollectionWrapper`2::Add(TInterface)
-M: System.Boolean Kistl.DALProvider.EF.EntityCollectionWrapper`2::Contains(TInterface)
-M: System.Boolean Kistl.DALProvider.EF.EntityCollectionWrapper`2::Remove(TInterface)
-M: System.Void Kistl.DALProvider.EF.EntityCollectionWrapper`2::CopyTo(System.Array,System.Int32)
+M: System.Void Kistl.DalProvider.EF.EntityCollectionWrapper`2::Add(TInterface)
+M: System.Boolean Kistl.DalProvider.EF.EntityCollectionWrapper`2::Contains(TInterface)
+M: System.Boolean Kistl.DalProvider.EF.EntityCollectionWrapper`2::Remove(TInterface)
+M: System.Void Kistl.DalProvider.EF.EntityCollectionWrapper`2::CopyTo(System.Array,System.Int32)
 
 R: Gendarme.Rules.Portability.MonoCompatibilityReviewRule
 # exclude known not-implemented parts: WPF, EF
 A: Kistl.Client.WPF
-A: Kistl.DALProvider.EF
+A: Kistl.DalProvider.EF
 # this should be replaced in time for a linux-release, ignore for now
 M: System.Void Kistl.Server.Generators.Generator::GenerateCode()
 
@@ -97,7 +97,7 @@ M: System.Collections.IEnumerator Kistl.Client.ASPNET.Toolkit.View.WorkspaceView
 M: System.Collections.IEnumerator Kistl.Client.ASPNET.Toolkit.View.WorkspaceView/<GetScriptReferences>d__6::System.Collections.IEnumerable.GetEnumerator()
 M: System.Collections.IEnumerator Kistl.Client.ASPNET.Toolkit.View.DataObjectListView/<GetScriptDescriptors>d__4::System.Collections.IEnumerable.GetEnumerator()
 M: System.Collections.IEnumerator Kistl.Client.ASPNET.Toolkit.View.DataObjectListView/<GetScriptReferences>d__8::System.Collections.IEnumerable.GetEnumerator()
-M: System.Collections.IEnumerator Kistl.DALProvider.EF.EntityCollectionWrapper`2::System.Collections.IEnumerable.GetEnumerator()
+M: System.Collections.IEnumerator Kistl.DalProvider.EF.EntityCollectionWrapper`2::System.Collections.IEnumerable.GetEnumerator()
 M: System.Collections.IEnumerator Kistl.Server.SchemaManagement.SchemaProvider.SQLServer.SchemaProvider/<GetTableNames>d__0::System.Collections.IEnumerable.GetEnumerator()
 M: System.Collections.IEnumerator Kistl.Server.SchemaManagement.SchemaProvider.SQLServer.SchemaProvider/<GetFKConstraintNames>d__8::System.Collections.IEnumerable.GetEnumerator()
 M: System.Collections.IEnumerator Kistl.Server.SchemaManagement.SchemaProvider.SQLServer.SchemaProvider/<GetTableColumnNames>d__f::System.Collections.IEnumerable.GetEnumerator()
@@ -128,8 +128,8 @@ M: TItem Kistl.API.BaseRelationListWrapper`6::get_Item(System.Int32)
 M: System.Void Kistl.API.BaseRelationListWrapper`6::set_Item(System.Int32,TItem)
 M: TValue Kistl.API.ValueListWrapper`4::get_Item(System.Int32)
 M: System.Void Kistl.API.ValueListWrapper`4::set_Item(System.Int32,TValue)
-M: TInterface Kistl.DALProvider.EF.EntityListWrapper`2::get_Item(System.Int32)
-M: System.Void Kistl.DALProvider.EF.EntityListWrapper`2::set_Item(System.Int32,TInterface)
+M: TInterface Kistl.DalProvider.EF.EntityListWrapper`2::get_Item(System.Int32)
+M: System.Void Kistl.DalProvider.EF.EntityListWrapper`2::set_Item(System.Int32,TInterface)
 
 ###############################################################################
 ##  GLOBAL IGNORES  ###########################################################
@@ -150,7 +150,7 @@ A: Kistl.Client.WPF
 A: Kistl.DalProvider.ClientObjects
 A: Kistl.API.Server
 A: Kistl.App.Projekte.Server
-A: Kistl.DALProvider.EF
+A: Kistl.DalProvider.EF
 A: Kistl.Server
 A: Kistl.Server.Service
 
@@ -171,7 +171,7 @@ A: Kistl.Client.WPF
 A: Kistl.DalProvider.ClientObjects
 A: Kistl.API.Server
 A: Kistl.App.Projekte.Server
-A: Kistl.DALProvider.EF
+A: Kistl.DalProvider.EF
 A: Kistl.Server
 A: Kistl.Server.Service
 
@@ -190,7 +190,7 @@ A: Kistl.Client.WPF
 A: Kistl.DalProvider.ClientObjects
 A: Kistl.API.Server
 A: Kistl.App.Projekte.Server
-A: Kistl.DALProvider.EF
+A: Kistl.DalProvider.EF
 A: Kistl.Server
 A: Kistl.Server.Service
 
@@ -209,7 +209,7 @@ A: Kistl.Client.WPF
 A: Kistl.DalProvider.ClientObjects
 A: Kistl.API.Server
 A: Kistl.App.Projekte.Server
-A: Kistl.DALProvider.EF
+A: Kistl.DalProvider.EF
 A: Kistl.Server
 A: Kistl.Server.Service
 
@@ -228,7 +228,7 @@ A: Kistl.Client.WPF
 A: Kistl.DalProvider.ClientObjects
 A: Kistl.API.Server
 A: Kistl.App.Projekte.Server
-A: Kistl.DALProvider.EF
+A: Kistl.DalProvider.EF
 A: Kistl.Server
 A: Kistl.Server.Service
 
@@ -247,7 +247,7 @@ A: Kistl.Client.WPF
 A: Kistl.DalProvider.ClientObjects
 A: Kistl.API.Server
 A: Kistl.App.Projekte.Server
-A: Kistl.DALProvider.EF
+A: Kistl.DalProvider.EF
 A: Kistl.Server
 A: Kistl.Server.Service
 

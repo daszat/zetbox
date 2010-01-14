@@ -6,7 +6,7 @@ using System.Text;
 
 using Kistl.API;
 
-namespace Kistl.DALProvider.EF
+namespace Kistl.DalProvider.EF
 {
     //public static class EfSerializer
     //{

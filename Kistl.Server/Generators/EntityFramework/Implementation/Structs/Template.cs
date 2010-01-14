@@ -26,7 +26,7 @@ namespace Kistl.Server.Generators.EntityFramework.Implementation.Structs
         {
             return base.GetAdditionalImports().Concat(new string[]{
                 "Kistl.API.Server",
-                "Kistl.DALProvider.EF",
+                "Kistl.DalProvider.EF",
                 "System.Data.Objects",
                 "System.Data.Objects.DataClasses" 
             });

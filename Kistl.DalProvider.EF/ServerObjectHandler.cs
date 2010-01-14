@@ -15,7 +15,7 @@ using Kistl.App.Base;
 using Kistl.App.Extensions;
 using Kistl.Server.Generators.Extensions;
 
-namespace Kistl.DALProvider.EF
+namespace Kistl.DalProvider.EF
 {
     public class ServerObjectHandler<T>
         : BaseServerObjectHandler<T>

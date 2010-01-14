@@ -11,7 +11,7 @@ using Kistl.App.Test;
 using Kistl.DalProvider.EF.Mocks;
 
 using NUnit.Framework;
-using Kistl.DALProvider.EF;
+using Kistl.DalProvider.EF;
 
 namespace Kistl.DalProvider.EF.Tests
 {

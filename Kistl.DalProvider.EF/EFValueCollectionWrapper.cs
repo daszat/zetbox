@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Kistl.API;
 
-namespace Kistl.DALProvider.EF
+namespace Kistl.DalProvider.EF
 {
     public class EFValueCollectionWrapper<TParent, TValue, TEntry, TEntryCollection> : ValueCollectionWrapper<TParent, TValue, TEntry, TEntryCollection>
         where TParent : IDataObject
