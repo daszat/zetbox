@@ -23,7 +23,7 @@ namespace Kistl.Client
         private bool unloadAppDomainOnShutDown = true;
 
         /// <summary>
-        /// TODO: This is for NUnit...
+        /// TODO: This is for unit testing and should be made internal.
         /// </summary>
         public void DisableUnloadAppDomainOnShutdown()
         {
@@ -49,8 +49,8 @@ namespace Kistl.Client
                     clientSponsor = new ClientSponsor();
                     clientSponsor.RenewalTime = TimeSpan.FromMinutes(2);
                 }
-                clientSponsor.Register(serverManager as MarshalByRefObject);
 
+                clientSponsor.Register(serverManager as MarshalByRefObject);
             }
         }
 
@@ -77,6 +77,7 @@ namespace Kistl.Client
                 {
                     AppDomain.Unload(serverDomain);
                 }
+
                 serverDomain = null;
             }
         }

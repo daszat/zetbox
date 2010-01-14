@@ -75,8 +75,9 @@ namespace Kistl.Client.WPF
             using (Logging.Log.InfoTraceMethodCall("Starting Client"))
             {
                 var args = HandleCommandline(e.Args);
+
                 // delegate all business logic into another class, which 
-                // allows us to load the Kistl.Objects assemblies _boefore_ 
+                // allows us to load the Kistl.Objects assemblies _before_ 
                 // they are needed.
                 Launcher.Execute(AppContext, args);
             }

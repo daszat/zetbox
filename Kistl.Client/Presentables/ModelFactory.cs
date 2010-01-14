@@ -8,11 +8,11 @@ namespace Kistl.Client.Presentables
     using System.Text;
 
     using Kistl.API;
+    using Kistl.API.Utils;
     using Kistl.App.Base;
     using Kistl.App.Extensions;
     using Kistl.App.GUI;
     using Kistl.Client.GUI;
-    using Kistl.API.Utils;
 
     /// <summary>
     /// Abstract base class to provide basic functionality of all model factories. Toolkit-specific implementations of this class will be 

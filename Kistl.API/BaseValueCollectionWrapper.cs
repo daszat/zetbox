@@ -15,12 +15,16 @@ namespace Kistl.API
         protected TParent parent;
         protected TEntryCollection collection;
         protected IKistlContext ctx;
+        protected readonly ImplementationType tEntryImplementation;
+        protected readonly InterfaceType tEntryInterface;
 
         protected ValueCollectionWrapper(IKistlContext ctx, TParent parent, TEntryCollection collection)
         {
             this.ctx = ctx;
             this.parent = parent;
             this.collection = collection;
+            this.tEntryImplementation = new ImplementationType(typeof(TEntry));
+            this.tEntryInterface = tEntryImplementation.ToInterfaceType();
         }
 
         #region Notifications
@@ -51,7 +55,7 @@ namespace Kistl.API
 
         protected virtual TEntry CreateEntry()
         {
-            return (TEntry)ctx.CreateValueCollectionEntry(new ImplementationType(typeof(TEntry)).ToInterfaceType());
+            return (TEntry)ctx.CreateValueCollectionEntry(tEntryInterface);
         }
 
         protected virtual TEntry InitialiseEntry(TEntry e, TValue value)

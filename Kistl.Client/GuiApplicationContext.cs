@@ -49,7 +49,8 @@ namespace Kistl.Client
         KistlConfig Configuration { get; }
     }
 
-    public class GuiApplicationContext : ClientApiContext, IGuiApplicationContext
+    public class GuiApplicationContext 
+        : ClientApiContext, IGuiApplicationContext
     {
         public static new GuiApplicationContext Current { get; private set; }
 
@@ -57,11 +58,11 @@ namespace Kistl.Client
         /// 
         /// </summary>
         /// <param name="config"></param>
-        /// <param name="tkName">Das muss leider ein String sein, 
-        /// weil die Enum in Kistl.Objects definiert ist. 
-        /// Zum Zeitpunkt des Aufrufs des Constructors könnte 
-        /// aber der Assembly Resolver noch nicht initialisiert 
-        /// sein (z.B. sie werden in der gleichen Methode ausgeführt).</param>
+        /// <param name="tkName">This has to be astring, since the 
+        /// <see cref="Toolkit"/> enum is defined in the Kistl.Objects 
+        /// assembly, which cannot be loaded before initialisation 
+        /// of the <see cref="AssemblyLoader"/>, which is loaded in 
+        /// the same calling method (which is too late).</param>
         public GuiApplicationContext(KistlConfig config, string tkName)
             : base(config)
         {
