@@ -1033,8 +1033,6 @@
                         Relationship="Model.FK_Projekt_has_Tasks"
                         FromRole="Projekt"
                         ToRole="Tasks" />
-    <Property Name="CurrentIdentity__Implementation__" Type="Int32" Nullable="false" />
-    <Property Name="CurrentAccessRights__Implementation__" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="Property">
     <Key>

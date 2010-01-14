@@ -31,7 +31,6 @@
     <EntitySet Name="PresenceRecord" EntityType="Model.Store.PresenceRecord" Table="PresenceRecords"/>
     <EntitySet Name="PresentableModelDescriptor" EntityType="Model.Store.PresentableModelDescriptor" Table="PresentableModelDescriptors"/>
     <EntitySet Name="Projekt" EntityType="Model.Store.Projekt" Table="Projekte"/>
-    <EntitySet Name="Projekt_Rights" EntityType="Model.Store.Projekt_Rights" Table="Projekte_Rights"/>
     <EntitySet Name="Property" EntityType="Model.Store.Property" Table="Properties"/>
     <EntitySet Name="PropertyInvocation" EntityType="Model.Store.PropertyInvocation" Table="PropertyInvocations"/>
     <EntitySet Name="Relation" EntityType="Model.Store.Relation" Table="Relations"/>
@@ -1520,14 +1519,6 @@
     <Property Name="CreatedOn" Type="datetime" Nullable="true" />
     <Property Name="Kundenname" Type="nvarchar" MaxLength="100" Nullable="true" />
     <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="true" />
-  </EntityType>
-  <EntityType Name="Projekt_Rights">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
-    <Property Name="Identity" Type="int" Nullable="false" />
-    <Property Name="Right" Type="int" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="Property">

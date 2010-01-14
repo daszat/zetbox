@@ -463,11 +463,6 @@
 <ScalarProperty Name="Kundenname" ColumnName="Kundenname" />
 <ScalarProperty Name="Name" ColumnName="Name" />
 	    </MappingFragment>
-	    <MappingFragment StoreEntitySet="Projekt_Rights">
-		  <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="CurrentIdentity__Implementation__" ColumnName="Identity" />
-          <ScalarProperty Name="CurrentAccessRights__Implementation__" ColumnName="Right" />
-	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Property">
