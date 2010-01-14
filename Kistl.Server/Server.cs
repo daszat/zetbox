@@ -3,28 +3,21 @@ namespace Kistl.Server
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics;
     using System.IO;
     using System.Linq;
-    using System.ServiceModel;
-    using System.Threading;
+    using System.Text;
 
     using Autofac;
-    using Autofac.Builder;
-    using Autofac.Configuration;
     using Kistl.API;
     using Kistl.API.Configuration;
     using Kistl.API.Server;
     using Kistl.API.Utils;
-    using Kistl.App.Base;
-    using Kistl.App.Extensions;
-    using Kistl.App.GUI;
 
     /// <summary>
     /// Serversteuerung
     /// </summary>
     public class Server
-        : MarshalByRefObject, IKistlAppDomain, IDisposable
+        : IDisposable
     {
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Server");
 
@@ -34,128 +27,9 @@ namespace Kistl.Server
         }
 
         /// <summary>
-        /// WCF Service Host
-        /// </summary>
-        private ServiceHost host = null;
-
-        /// <summary>
-        /// WCF Service Thread
-        /// </summary>
-        private Thread serviceThread = null;
-
-        /// <summary>
-        /// Only to signal the server start
-        /// </summary>
-        private AutoResetEvent serverStarted = new AutoResetEvent(false);
-
-        /// <summary>
         /// The IoC container used by this Server.
         /// </summary>
         private IContainer container;
-
-        /// <summary>
-        /// Starts the WCF Server in the background. If the server hasn't 
-        /// started successfully within 40 seconds, it is aborted and an 
-        /// <see cref="InvalidOperationException"/> is thrown.
-        /// </summary>
-        /// <param name="config">the loaded configuration for the Server</param>
-        public void Start(KistlConfig config)
-        {
-            using (Log.InfoTraceMethodCall("Starting Server"))
-            {
-                Init(config);
-
-                serviceThread = new Thread(new ThreadStart(this.RunWCFServer));
-                serviceThread.Start();
-
-                if (!serverStarted.WaitOne(40 * 1000, false))
-                {
-                    throw new InvalidOperationException("Server did not started within 40 sec.");
-                }
-            }
-        }
-
-        /// <summary>
-        /// Initialises the configuration of the server.
-        /// </summary>
-        /// <param name="config">the loaded configuration for the Server</param>
-        public void Init(KistlConfig config)
-        {
-            if (this.container != null) { throw new InvalidOperationException("tried to initialise server a second time!"); }
-
-            ServerApplicationContext appCtx;
-            // re-use application context if available
-            if (ServerApplicationContext.Current == null)
-            {
-                appCtx = new ServerApplicationContext(config);
-                appCtx.LoadDefaultActionsManager();
-            }
-            appCtx = ServerApplicationContext.Current;
-        }
-
-        /// <summary>
-        /// Stops the WCF Server.
-        /// </summary>
-        public void Stop()
-        {
-            Log.Info("Stopping Server");
-
-            host.Close();
-
-            if (!serviceThread.Join(5000))
-            {
-                Log.Info("Server did not stopped, aborting");
-                serviceThread.Abort();
-            }
-            serviceThread = null;
-            serverStarted.Close();
-
-            Log.Info("Server stopped");
-        }
-
-        /// <summary>
-        /// Führt den eigentlichen WCF Host start asynchron durch und 
-        /// wartet bis er wieder gestopped wird.
-        /// </summary>
-        private void RunWCFServer()
-        {
-            try
-            {
-                using (Log.DebugTraceMethodCall("Starting WCF Server"))
-                {
-                    host = new ServiceHost(typeof(KistlService));
-                    host.UnknownMessageReceived += new EventHandler<UnknownMessageReceivedEventArgs>(host_UnknownMessageReceived);
-                    host.Faulted += new EventHandler(host_Faulted);
-
-                    host.Open();
-                    serverStarted.Set();
-                }
-
-                Log.Info("WCF Server started");
-
-                while (host.State == CommunicationState.Opened)
-                {
-                    Thread.Sleep(100);
-                }
-
-                Log.Info("WCF Server: Hosts closed, exiting WCF thread");
-            }
-            catch (Exception error)
-            {
-                Log.Error("Unhandled exception while running WCF Server", error);
-                throw;
-            }
-        }
-
-        private void host_Faulted(object sender, EventArgs e)
-        {
-            Log.Warn("Host faulted: " + e);
-        }
-
-        private void host_UnknownMessageReceived(object sender, UnknownMessageReceivedEventArgs e)
-        {
-            Log.WarnFormat("UnknownMessageReceived: {0}", e.Message);
-        }
 
         public void GenerateCode()
         {
@@ -267,7 +141,7 @@ namespace Kistl.Server
             using (Log.InfoTraceMethodCallFormat("file=[{0}]", file))
             using (var subContainer = container.CreateInnerContainer())
             {
-                IKistlContext ctx = subContainer.Resolve<MemoryContext>(); 
+                IKistlContext ctx = subContainer.Resolve<MemoryContext>();
                 using (FileStream fs = File.OpenRead(file))
                 {
                     Packaging.Importer.LoadFromXml(ctx, fs);
@@ -325,20 +199,6 @@ namespace Kistl.Server
         {
             Log.Info("Disposing");
             {
-                if (host != null)
-                {
-                    host.Close();
-                    ((IDisposable)host).Dispose();
-                    host = null;
-                }
-
-                if (serverStarted != null)
-                {
-                    serverStarted.Close();
-                    ((IDisposable)serverStarted).Dispose();
-                    serverStarted = null;
-                }
-
                 if (container != null)
                 {
                     container.Dispose();

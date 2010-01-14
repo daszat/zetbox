@@ -91,7 +91,7 @@ namespace Kistl.Server.Service
 
                 using (var container = builder.Build())
                 {
-                Log.TraceTotalMemory("After InitApplicationContext");
+                    Log.TraceTotalMemory("After InitApplicationContext");
 
                     var server = container.Resolve<Server>();
                     bool actiondone = false;
@@ -254,14 +254,15 @@ namespace Kistl.Server.Service
                         DefaultInitialisation();
                         Log.TraceTotalMemory("After DefaultInitialisation()");
 
-                        server.Start(config);
+                        var wcfServer = container.Resolve<IKistlAppDomain>();
+                        wcfServer.Start(config);
 
                         Log.Info("Waiting for console input to shutdown");
                         Console.WriteLine("Server started, press the anykey to exit");
                         Console.ReadKey();
                         Log.Info("Shutting down");
 
-                        server.Stop();
+                        wcfServer.Stop();
                     }
                 }
                 Log.Info("Exiting");

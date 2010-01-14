@@ -35,6 +35,11 @@ namespace Kistl.Server
                 .ContainerScoped();
 
             moduleBuilder
+                .Register<WcfServer>()
+                .As<IKistlAppDomain>()
+                .ContainerScoped();
+
+            moduleBuilder
                 .RegisterCollection<Generators.BaseDataObjectGenerator>()
                 .ContainerScoped();
 

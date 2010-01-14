@@ -45,7 +45,7 @@ namespace Kistl.IntegrationTests
                 catch (Exception error)
                 {
                     Log.ErrorFormat(String.Format("Error while initialising Integration Tests: [{0}]", error.GetType().Name), error);
-                    throw error;
+                    throw;
                 }
             }
         }

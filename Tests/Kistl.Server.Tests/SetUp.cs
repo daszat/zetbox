@@ -25,7 +25,7 @@ namespace Kistl.Server.Tests
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Tests.Server.SetUp");
 
         private IContainer container;
-        private Server manager;
+        private IKistlAppDomain manager;
 
         [SetUp]
         public void Init()
@@ -37,12 +37,13 @@ namespace Kistl.Server.Tests
                 ResetDatabase(config);
 
                 var builder = new ContainerBuilder();
-                builder.RegisterModule((IModule)Activator.CreateInstance(Type.GetType(config.Server.StoreProvider)));
                 builder.RegisterModule(new ServerModule());
+                // TODO: replace this with registering a mocked provider of some kind.
+                builder.RegisterModule((IModule)Activator.CreateInstance(Type.GetType(config.Server.StoreProvider)));
 
                 container = builder.Build();
 
-                manager = container.Resolve<Server>();
+                manager = container.Resolve<IKistlAppDomain>();
 
                 manager.Start(config);
             }

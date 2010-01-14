@@ -1,17 +1,21 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Remoting.Lifetime;
-using System.Text;
-
-using Kistl.API;
-using Kistl.API.Client;
-using Kistl.API.Configuration;
-using Kistl.API.Utils;
 
 namespace Kistl.Client
 {
-    public sealed class ServerDomainManager 
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Runtime.Remoting.Lifetime;
+    using System.Text;
+
+    using Kistl.API;
+    using Kistl.API.Client;
+    using Kistl.API.Configuration;
+    using Kistl.API.Utils;
+
+    /// <summary>
+    /// Delegates the <see cref="IKistlAppDomain"/> interface into a new AppDomain.
+    /// </summary>
+    public sealed class ServerDomainManager
         : IKistlAppDomain, IDisposable
     {
         private readonly static object _lock = new object();
@@ -41,7 +45,7 @@ namespace Kistl.Client
                 AssemblyLoader.Bootstrap(serverDomain, config);
                 serverManager = (IKistlAppDomain)serverDomain.CreateInstanceAndUnwrap(
                     "Kistl.Server",
-                    "Kistl.Server.Server");
+                    "Kistl.Server.WcfServer");
                 serverManager.Start(config);
 
                 if (clientSponsor == null)
