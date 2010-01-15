@@ -13,13 +13,14 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
 {
     public partial class ObjectReferencePropertyTemplate
     {
-
         public static void Call(Arebis.CodeGeneration.IGenerationHost host,
             IKistlContext ctx,
             Templates.Implementation.SerializationMembersList serializationList,
             ObjectReferenceProperty prop, bool callGetterSetterEvents)
         {
-            Debug.Assert(!prop.IsList());
+            if (ctx == null) { throw new ArgumentNullException("ctx"); }
+            if (prop == null) { throw new ArgumentNullException("prop"); }
+            if (!prop.IsList()) { throw new ArgumentNullException("prop", "prop must be a List-valued property"); }
 
             string name = prop.PropertyName;
             string ownInterface = prop.ObjectClass.GetDataTypeString();
@@ -41,6 +42,8 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
             Relation rel,
             RelationEndRole endRole, bool callGetterSetterEvents)
         {
+            if (rel == null) { throw new ArgumentNullException("rel"); }
+            
             RelationEnd relEnd = rel.GetEndFromRole(endRole);
             RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
 
@@ -74,9 +77,11 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
             bool callGetterSetterEvents)
         {
             if (host == null) { throw new ArgumentNullException("host"); }
+            if (rel == null) { throw new ArgumentNullException("rel"); }
 
             host.CallTemplate("Implementation.ObjectClasses.ObjectReferencePropertyTemplate", ctx, serializationList,
-                name, efName, fkBackingName, fkGuidBackingName, ownInterface, referencedInterface, rel, endRole, hasInverseNavigator, hasPositionStorage, callGetterSetterEvents);
+                name, efName, fkBackingName, fkGuidBackingName, ownInterface, referencedInterface, rel, endRole,
+                hasInverseNavigator, hasPositionStorage, callGetterSetterEvents);
         }
 
         protected virtual void AddSerialization(Templates.Implementation.SerializationMembersList list, string memberName)

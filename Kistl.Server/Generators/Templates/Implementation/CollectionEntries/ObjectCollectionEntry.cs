@@ -74,7 +74,7 @@ namespace Kistl.Server.Generators.Templates.Implementation.CollectionEntries
 
         protected override bool ImplementsIExportable()
         {
-            return rel.A.Type.ImplementsIExportable(ctx) && rel.B.Type.ImplementsIExportable(ctx);
+            return rel.A.Type.ImplementsIExportable() && rel.B.Type.ImplementsIExportable();
         }
 
         protected override bool HasExportGuid()

@@ -26,7 +26,7 @@ namespace Kistl.DalProvider.Frozen.Generator.Implementation.ObjectClasses
             });
         }
 
-        public static string GetClassName(ObjectClass cls)
+        internal static string GetClassName(ObjectClass cls)
         {
             return cls.ClassName + Kistl.API.Helper.ImplementationSuffix + "Frozen";
         }

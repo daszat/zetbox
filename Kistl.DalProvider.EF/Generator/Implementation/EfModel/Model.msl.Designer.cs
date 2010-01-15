@@ -67,7 +67,7 @@ this.WriteObjects("      <EntityTypeMapping TypeName=\"IsTypeOf(Model.",  rel.Ge
 this.WriteObjects("        <MappingFragment StoreEntitySet=\"",  rel.GetRelationClassName() , "\">\r\n");
 this.WriteObjects("          <ScalarProperty Name=\"ID\" ColumnName=\"ID\" />\r\n");
 #line 50 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.msl.cst"
-if(rel.A.Type.ImplementsIExportable(ctx) && rel.B.Type.ImplementsIExportable(ctx))
+if(rel.A.Type.ImplementsIExportable() && rel.B.Type.ImplementsIExportable())
 		{
 
 #line 53 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.msl.cst"

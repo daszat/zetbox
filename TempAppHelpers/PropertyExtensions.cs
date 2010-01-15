@@ -15,12 +15,14 @@ namespace Kistl.App.Extensions
         /// </summary>
         public static string GetAssociationName(this ValueTypeProperty prop)
         {
+            if (prop == null) { throw new ArgumentNullException("prop"); }
             if (!prop.IsList) throw new NotSupportedException("GetAssociationName is only valid for Lists");
             return String.Format("FK_{0}_{1}_{2}", prop.ObjectClass.ClassName, "value", prop.PropertyName);
         }
 
         public static bool IsNullable(this Property p)
         {
+            if (p == null) { throw new ArgumentNullException("p"); }
             if (p is ObjectReferenceProperty)
             {
                 return IsNullable((ObjectReferenceProperty)p);
@@ -33,6 +35,7 @@ namespace Kistl.App.Extensions
 
         private static bool IsNullable(this ObjectReferenceProperty p)
         {
+            if (p == null) { throw new ArgumentNullException("p"); }
             var relEnd = p.RelationEnd;
             var rel = relEnd.GetParent();
             var otherEnd = rel.GetOtherEnd(relEnd);
@@ -42,16 +45,19 @@ namespace Kistl.App.Extensions
 
         public static bool HasLengthConstraint(this StringProperty prop)
         {
+            if (prop == null) { throw new ArgumentNullException("prop"); }
             return prop.Constraints.OfType<StringRangeConstraint>().Count() > 0;
         }
 
         public static StringRangeConstraint GetLengthConstraint(this StringProperty prop)
         {
+            if (prop == null) { throw new ArgumentNullException("prop"); }
             return prop.Constraints.OfType<StringRangeConstraint>().FirstOrDefault();
         }
 
         public static int GetMaxLength(this StringProperty prop)
         {
+            if (prop == null) { throw new ArgumentNullException("prop"); }
             StringRangeConstraint constraint = prop.GetLengthConstraint();
             // create unconstrained maxLength if no constrain is specified
             return constraint == null ? 4000 : constraint.MaxLength;
@@ -59,12 +65,12 @@ namespace Kistl.App.Extensions
 
         public static bool IsList(this ObjectReferenceProperty prop)
         {
+            if (prop == null) { throw new ArgumentNullException("prop"); }
             RelationEnd relEnd = prop.RelationEnd;
             Relation rel = relEnd.GetParent();
             RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
 
             return otherEnd.Multiplicity.UpperBound() > 1;
         }
-
     }
 }

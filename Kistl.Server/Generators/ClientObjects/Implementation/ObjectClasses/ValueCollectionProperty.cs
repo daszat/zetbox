@@ -19,8 +19,8 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
             Templates.Implementation.SerializationMembersList serializationList,
             ValueTypeProperty prop)
         {
-            Debug.Assert(prop.IsList);
-
+            if (prop == null) { throw new ArgumentNullException("prop"); }
+            if (!prop.IsList) { throw new ArgumentOutOfRangeException("prop", "prop must be a List-valued property"); }
 
             string name = prop.PropertyName;
             string backingName = "_" + name + "Wrapper";
@@ -67,6 +67,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
             string providerCollectionType, string underlyingCollectionName, bool orderByB)
         {
             if (host == null) { throw new ArgumentNullException("host"); }
+            if (ctx == null) { throw new ArgumentNullException("ctx"); }
 
             host.CallTemplate("Implementation.ObjectClasses.ValueCollectionProperty",
                 ctx, serializationList,

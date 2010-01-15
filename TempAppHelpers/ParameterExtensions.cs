@@ -17,6 +17,8 @@ namespace Kistl.App.Extensions
         /// <returns></returns>
         public static Type GuessParameterType(this BaseParameter param)
         {
+            if (param == null) { throw new ArgumentNullException("param"); }
+
             if (param is BoolParameter && param.IsList)
                 return typeof(IList<bool>);
             else if (param is BoolParameter && !param.IsList)

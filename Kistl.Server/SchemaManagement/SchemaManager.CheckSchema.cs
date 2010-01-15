@@ -347,7 +347,7 @@ namespace Kistl.Server.SchemaManagement
                 }
             }
 
-            if (rel.A.Type.ImplementsIExportable(schema) && rel.B.Type.ImplementsIExportable(schema))
+            if (rel.A.Type.ImplementsIExportable() && rel.B.Type.ImplementsIExportable())
             {
                 CheckColumn(tblName, "ExportGuid", System.Data.DbType.Guid, 0, false);
             }

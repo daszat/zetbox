@@ -7,10 +7,10 @@ namespace Kistl.Server.Generators
     using System.Linq;
     using System.Text;
 
+    using Kistl.API;
     using Kistl.App.Base;
     using Kistl.App.Extensions;
     using Kistl.Server.Generators.Extensions;
-    using Kistl.API;
 
     /// <summary>
     /// TODO: Rename and move to Kistl.API.Server
@@ -98,6 +98,8 @@ namespace Kistl.Server.Generators
 
         public static string ForeignKeyColumnName(RelationEnd otherEnd, string prefix)
         {
+            if (otherEnd == null) { throw new ArgumentNullException("otherEnd"); }
+
             return ForeignKeyColumnName(NestedColumnName(otherEnd.RoleName, prefix));
         }
 
@@ -111,6 +113,8 @@ namespace Kistl.Server.Generators
 
         public static string NestedColumnName(Property prop, string parentPropName)
         {
+            if (prop == null) { throw new ArgumentNullException("prop"); }
+
             return NestedColumnName(prop.PropertyName, parentPropName);
         }
 
@@ -121,6 +125,7 @@ namespace Kistl.Server.Generators
 
         public static string ListPositionColumnName(RelationEnd otherEnd, string parentPropName)
         {
+            if (otherEnd == null) { throw new ArgumentNullException("otherEnd"); }
             return ForeignKeyColumnName(Construct.NestedColumnName(otherEnd.RoleName, parentPropName)) + "_pos";
         }
         #endregion
@@ -128,33 +133,40 @@ namespace Kistl.Server.Generators
         #region SecurityRules
         public static string SecurityRulesTableName(ObjectClass objClass)
         {
+            if (objClass == null) { throw new ArgumentNullException("objClass"); }
             return objClass.TableName + "_Rights";
         }
 
         public static string SecurityRulesWithRightsViewName(ObjectClass objClass)
         {
+            if (objClass == null) { throw new ArgumentNullException("objClass"); }
             return objClass.TableName + "_with_Rights";
         }
 
         public static string SecurityRulesWithRightsViewTriggerName(ObjectClass objClass)
         {
+            if (objClass == null) { throw new ArgumentNullException("objClass"); }
             return objClass.TableName + "_with_Rights_Trigger";
         }
 
         public static string SecurityRulesInsertRightsTriggerName(ObjectClass objClass)
         {
+            if (objClass == null) { throw new ArgumentNullException("objClass"); }
             return objClass.TableName + "_Insert_Rights_Trigger";
         }
         public static string SecurityRulesUpdateRightsTriggerName(ObjectClass objClass)
         {
+            if (objClass == null) { throw new ArgumentNullException("objClass"); }
             return objClass.TableName + "_Update_Rights_Trigger";
         }
         public static string SecurityRulesRightsViewUnmaterializedName(ObjectClass objClass)
         {
+            if (objClass == null) { throw new ArgumentNullException("objClass"); }
             return objClass.TableName + "_Rights_unmaterialized";
         }
         public static string SecurityRulesRefreshRightsOnProcedureName(ObjectClass objClass)
         {
+            if (objClass == null) { throw new ArgumentNullException("objClass"); }
             return "RefreshRightsOn_" + objClass.TableName;
         }
 

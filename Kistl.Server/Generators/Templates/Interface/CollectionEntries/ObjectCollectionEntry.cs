@@ -22,8 +22,14 @@ namespace Kistl.Server.Generators.Templates.Interface.CollectionEntries
 
         protected Relation rel { get; private set; }
 
+        private static Module CheckNullOrReturnNavigatorModule(Relation rel)
+        {
+            if (rel == null) { throw new ArgumentNullException("rel"); }
+            return (rel.A.Navigator ?? rel.B.Navigator).Module;
+        }
+
         public ObjectCollectionEntry(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Relation rel)
-            : base(_host, ctx, (rel.A.Navigator ?? rel.B.Navigator).Module)
+            : base(_host, ctx, CheckNullOrReturnNavigatorModule(rel))
         {
             this.rel = rel;
         }

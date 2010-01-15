@@ -13,6 +13,8 @@ namespace Kistl.App.Extensions
 
         public static object Create(this TypeRef t, params object[] parameter)
         {
+            if (t == null) { throw new ArgumentNullException("t"); }
+
             return Activator.CreateInstance(t.AsType(true), parameter);
         }
 

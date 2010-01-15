@@ -47,7 +47,7 @@
         <MappingFragment StoreEntitySet="<%= rel.GetRelationClassName() %>">
           <ScalarProperty Name="ID" ColumnName="ID" />
 <% 
-		if(rel.A.Type.ImplementsIExportable(ctx) && rel.B.Type.ImplementsIExportable(ctx))
+		if(rel.A.Type.ImplementsIExportable() && rel.B.Type.ImplementsIExportable())
 		{
 %>
 		  <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />

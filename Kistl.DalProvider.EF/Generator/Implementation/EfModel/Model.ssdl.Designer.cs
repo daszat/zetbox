@@ -187,7 +187,7 @@ this.WriteObjects("      <PropertyRef Name=\"ID\" />\r\n");
 this.WriteObjects("    </Key>\r\n");
 this.WriteObjects("    <Property Name=\"ID\" Type=\"int\" Nullable=\"false\" StoreGeneratedPattern=\"Identity\" />\r\n");
 #line 158 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.ssdl.cst"
-if(rel.A.Type.ImplementsIExportable(ctx) && rel.B.Type.ImplementsIExportable(ctx))
+if(rel.A.Type.ImplementsIExportable() && rel.B.Type.ImplementsIExportable())
 		{
 
 #line 161 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.ssdl.cst"

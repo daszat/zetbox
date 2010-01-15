@@ -135,7 +135,7 @@
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
 <% 
-	if(rel.A.Type.ImplementsIExportable(ctx) && rel.B.Type.ImplementsIExportable(ctx))
+	if(rel.A.Type.ImplementsIExportable() && rel.B.Type.ImplementsIExportable())
 	{
 %>
 	<Property Name="ExportGuid" Type="Guid" Nullable="false" />

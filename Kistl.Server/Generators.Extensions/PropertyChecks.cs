@@ -13,6 +13,7 @@ namespace Kistl.Server.Generators.Extensions
     {
         public static bool IsAssociation(this Property prop)
         {
+            if (prop == null) { throw new ArgumentNullException("prop"); }
             return prop.IsObjectReferencePropertyList() || prop.IsObjectReferencePropertySingle() || prop.IsValueTypePropertyList();
         }
 
@@ -58,6 +59,8 @@ namespace Kistl.Server.Generators.Extensions
 
         public static string GetCollectionTypeString(this Property prop)
         {
+            if (prop == null) { throw new ArgumentNullException("prop"); }
+
             bool isIndexed = false;
 
             if (prop is ObjectReferenceProperty)
@@ -89,6 +92,5 @@ namespace Kistl.Server.Generators.Extensions
                 return string.Format("ICollection<{0}>", prop.GetPropertyTypeString());
             }
         }
-
     }
 }

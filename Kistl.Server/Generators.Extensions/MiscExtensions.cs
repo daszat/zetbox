@@ -1,17 +1,17 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Kistl.API;
-using Kistl.App.Base;
-using Kistl.App.Extensions;
 
 namespace Kistl.Server.Generators.Extensions
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+
+    using Kistl.API;
+    using Kistl.App.Base;
+    using Kistl.App.Extensions;
+
     public static class MiscExtensions
     {
-
         public static string ToNameSpace(this TaskEnum task)
         {
             if (task == TaskEnum.Interface)
@@ -62,21 +62,25 @@ namespace Kistl.Server.Generators.Extensions
         #region Relation naming standards
         public static string GetRelationClassName(this Relation rel)
         {
+            if (rel == null) { throw new ArgumentNullException("rel"); }
             return String.Format("{0}_{1}_{2}_RelationEntry", rel.A.Type.ClassName, rel.Verb, rel.B.Type.ClassName);
         }
 
         public static string GetRelationTableName(this Relation rel)
         {
+            if (rel == null) { throw new ArgumentNullException("rel"); }
             return String.Format("{0}_{1}_{2}", rel.A.RoleName, rel.Verb, rel.B.RoleName);
         }
 
         public static string GetRelationFullName(this Relation rel)
         {
+            if (rel == null) { throw new ArgumentNullException("rel"); }
             return String.Format("{0}.{1}", rel.Module.Namespace, rel.GetRelationClassName());
         }
 
         public static string GetRelationFkColumnName(this Relation rel, RelationEndRole endRole)
         {
+            if (rel == null) { throw new ArgumentNullException("rel"); }
             var relEnd = rel.GetEndFromRole(endRole);
             return "fk_" + relEnd.RoleName;
         }
@@ -85,16 +89,19 @@ namespace Kistl.Server.Generators.Extensions
         #region CollectionEntry naming standards
         public static string GetCollectionEntryClassName(this ValueTypeProperty prop)
         {
+            if (prop == null) { throw new ArgumentNullException("prop"); }
             return String.Format("{0}_{1}_CollectionEntry", prop.ObjectClass.ClassName, prop.PropertyName);
         }
 
         public static string GetCollectionEntryTable(this ValueTypeProperty prop)
         {
+            if (prop == null) { throw new ArgumentNullException("prop"); }
             return String.Format("{0}_{1}Collection", ((ObjectClass)prop.ObjectClass).TableName, prop.PropertyName);
         }
 
         public static string GetCollectionEntryFullName(this ValueTypeProperty prop)
         {
+            if (prop == null) { throw new ArgumentNullException("prop"); }
             return String.Format("{0}.{1}", prop.ObjectClass.Module.Namespace, prop.GetCollectionEntryClassName());
         }
         #endregion

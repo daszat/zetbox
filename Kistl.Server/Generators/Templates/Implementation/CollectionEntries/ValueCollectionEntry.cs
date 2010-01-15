@@ -66,7 +66,7 @@ namespace Kistl.Server.Generators.Templates.Implementation.CollectionEntries
         {
             if (prop.ObjectClass is ObjectClass)
             {
-                return ((ObjectClass)prop.ObjectClass).ImplementsIExportable(ctx);
+                return ((ObjectClass)prop.ObjectClass).ImplementsIExportable();
             }
             return false;
         }

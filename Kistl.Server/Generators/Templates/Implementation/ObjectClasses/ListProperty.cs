@@ -1,22 +1,25 @@
-using System;
-using System.CodeDom;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Kistl.Server.Generators.Extensions;
-using Arebis.CodeGeneration;
-using Kistl.API;
-using Kistl.App.Base;
 
 namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
 {
+    using System;
+    using System.CodeDom;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+
+    using Arebis.CodeGeneration;
+    using Kistl.API;
+    using Kistl.App.Base;
+    using Kistl.Server.Generators.Extensions;
+
     public partial class ListProperty
     {
         public static void Call(IGenerationHost host, IKistlContext ctx, Templates.Implementation.SerializationMembersList serList,
             DataType dataType, string propertyName, Property prop)
         {
             if (host == null) { throw new ArgumentNullException("host"); }
+            if (String.IsNullOrEmpty(propertyName)) { throw new ArgumentNullException("propertyName"); }
+            if (prop == null) { throw new ArgumentNullException("prop"); }
 
             host.CallTemplate("Implementation.ObjectClasses.ListProperty", ctx,
                  serList,

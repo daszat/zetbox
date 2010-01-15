@@ -155,7 +155,7 @@
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
 <% 
-		if(rel.A.Type.ImplementsIExportable(ctx) && rel.B.Type.ImplementsIExportable(ctx))
+		if(rel.A.Type.ImplementsIExportable() && rel.B.Type.ImplementsIExportable())
 		{
 %>
 	<Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />

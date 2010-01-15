@@ -26,6 +26,7 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
             Relation rel, RelationEndRole endRole)
         {
             if (host == null) { throw new ArgumentNullException("host"); }
+            if (rel == null) { throw new ArgumentNullException("rel"); }
 
             RelationEnd relEnd = rel.GetEndFromRole(endRole);
             RelationEnd otherEnd = rel.GetOtherEnd(relEnd);

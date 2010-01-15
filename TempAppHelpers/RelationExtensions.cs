@@ -12,7 +12,9 @@ namespace Kistl.App.Extensions
     {
         public static Relation Lookup(IKistlContext ctx, ObjectReferenceProperty prop)
         {
-            if (prop.RelationEnd == null) return null;
+            if (prop == null) { throw new ArgumentNullException("prop"); }
+            if (prop.RelationEnd == null) { return null; }
+
             return prop.RelationEnd.AParent ?? prop.RelationEnd.BParent;
         }
 
@@ -21,6 +23,7 @@ namespace Kistl.App.Extensions
         /// </summary>
         public static string GetRelationAssociationName(this Relation rel, RelationEndRole endRole)
         {
+            if (rel == null) { throw new ArgumentNullException("rel"); }
             RelationEnd relEnd = rel.GetEndFromRole(endRole);
 
             return String.Format("FK_{0}_{1}_{2}_{3}", rel.A.RoleName, rel.Verb, rel.B.RoleName, relEnd.GetRole());
@@ -31,6 +34,7 @@ namespace Kistl.App.Extensions
         /// </summary>
         public static string GetAssociationName(this Relation rel)
         {
+            if (rel == null) { throw new ArgumentNullException("rel"); }
             return String.Format("FK_{0}_{1}_{2}", rel.A.RoleName, rel.Verb, rel.B.RoleName);
         }
 
@@ -39,11 +43,13 @@ namespace Kistl.App.Extensions
         /// </summary>
         public static string GetRelationFkNameToEnd(this Relation rel, RelationEnd relEnd)
         {
+            if (relEnd == null) { throw new ArgumentNullException("relEnd"); }
             return String.Format("fk_{0}", relEnd.RoleName);
         }
 
         public static RelationEndRole GetRole(this RelationEnd relEnd)
         {
+            if (relEnd == null) { throw new ArgumentNullException("relEnd"); }
             if (relEnd.AParent == null && relEnd.BParent == null)
             {
                 throw new ArgumentOutOfRangeException("relEnd", "RelationEnd not connected to any parent");
@@ -54,16 +60,15 @@ namespace Kistl.App.Extensions
         public static Relation GetParent(this RelationEnd relEnd)
         {
             // no relEnd, no parent.
-            if (relEnd == null)
-            {
-                return null;
-            }
+            if (relEnd == null) { return null; }
 
             return relEnd.AParent ?? relEnd.BParent;
         }
 
         public static ObjectClass GetReferencedObjectClass(this ObjectReferenceProperty prop)
         {
+            if (prop == null) { throw new ArgumentNullException("prop"); }
+
             var rel = prop.RelationEnd.GetParent();
             if (rel == null) { return null; }
 
@@ -78,11 +83,15 @@ namespace Kistl.App.Extensions
 
         public static bool IsNullable(this RelationEnd relEnd)
         {
+            if (relEnd == null) { throw new ArgumentNullException("relEnd"); }
+
             return relEnd.Multiplicity.LowerBound() == 0;
         }
 
         public static RelationEnd GetOtherEndFromRole(this Relation rel, RelationEndRole role)
         {
+            if (rel == null) { throw new ArgumentNullException("rel"); }
+     
             switch (role)
             {
                 case RelationEndRole.A:
@@ -96,6 +105,8 @@ namespace Kistl.App.Extensions
 
         public static RelationEndRole? GetEndFromClass(this Relation rel, ObjectClass cls)
         {
+            if (rel == null) { throw new ArgumentNullException("rel"); }
+
             if (rel.A.Type == cls)
             {
                 return RelationEndRole.A;
@@ -112,6 +123,8 @@ namespace Kistl.App.Extensions
 
         public static bool HasStorage(this Relation rel, RelationEndRole role)
         {
+            if (rel == null) { throw new ArgumentNullException("rel"); }
+
             if (rel.Storage == StorageType.Replicate)
                 throw new NotImplementedException();
 

@@ -73,7 +73,7 @@ namespace Kistl.Server.Generators.Templates.Implementation
         /// <returns>The interfaces this class implements</returns>
         protected virtual string[] GetInterfaces()
         {
-            if (DataType is ObjectClass && ((ObjectClass)DataType).ImplementsIExportable(ctx, false))
+            if (DataType is ObjectClass && ((ObjectClass)DataType).ImplementsIExportable(false))
             {
                 return new string[] { this.DataType.ClassName, "Kistl.API.IExportableInternal" };
             }

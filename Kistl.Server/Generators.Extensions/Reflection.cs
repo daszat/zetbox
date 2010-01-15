@@ -60,6 +60,8 @@ namespace Kistl.Server.Generators.Extensions
 
         public static string ReferencedTypeAsCSharp(this Property prop)
         {
+            if (prop == null) { throw new ArgumentNullException("prop"); }
+
             if (prop is BoolProperty)
             {
                 return "bool" + (prop.IsNullable() ? "?" : String.Empty);
@@ -96,6 +98,8 @@ namespace Kistl.Server.Generators.Extensions
 
         public static string ReturnedTypeAsCSharp(this BaseParameter param)
         {
+            if (param == null) { throw new ArgumentNullException("param"); }
+
             string result;
             if (param is BoolParameter)
             {
@@ -129,6 +133,5 @@ namespace Kistl.Server.Generators.Extensions
 
             return result;
         }
-
     }
 }

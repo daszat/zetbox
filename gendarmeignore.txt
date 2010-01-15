@@ -55,17 +55,15 @@ R: Gendarme.Rules.Correctness.CheckParametersNullityInVisibleMethodsRule
 A: Kistl.App.Projekte.Common
 A: Kistl.App.Projekte.Client
 A: Kistl.App.Projekte.Server
-
-R: Gendarme.Rules.Portability.DoNotHardcodePathsRule
-# Package URIs are FS-independent
-M: System.Void Kistl.App.Projekte.WordHelper::ApplyCustomXml(System.Xml.XmlDocument)
-
-R: Gendarme.Rules.Correctness.CheckParametersNullityInVisibleMethodsRule
 # False positives
 M: System.Void Kistl.DalProvider.EF.EntityCollectionWrapper`2::Add(TInterface)
 M: System.Boolean Kistl.DalProvider.EF.EntityCollectionWrapper`2::Contains(TInterface)
 M: System.Boolean Kistl.DalProvider.EF.EntityCollectionWrapper`2::Remove(TInterface)
 M: System.Void Kistl.DalProvider.EF.EntityCollectionWrapper`2::CopyTo(System.Array,System.Int32)
+
+R: Gendarme.Rules.Portability.DoNotHardcodePathsRule
+# Package URIs are FS-independent
+M: System.Void Kistl.App.Projekte.WordHelper::ApplyCustomXml(System.Xml.XmlDocument)
 
 R: Gendarme.Rules.Portability.MonoCompatibilityReviewRule
 # exclude known not-implemented parts: WPF, EF

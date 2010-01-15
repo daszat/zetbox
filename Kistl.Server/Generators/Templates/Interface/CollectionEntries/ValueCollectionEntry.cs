@@ -22,8 +22,14 @@ namespace Kistl.Server.Generators.Templates.Interface.CollectionEntries
 
         protected ValueTypeProperty prop { get; private set; }
 
+        private static Module CheckNullOrReturnModule(ValueTypeProperty prop)
+        {
+            if (prop == null) { throw new ArgumentNullException("prop"); }
+            return prop.Module;
+        }
+
         public ValueCollectionEntry(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, ValueTypeProperty prop)
-            : base(_host, ctx, prop.Module)
+            : base(_host, ctx, CheckNullOrReturnModule(prop))
         {
             this.prop = prop;
         }

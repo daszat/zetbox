@@ -118,8 +118,8 @@ namespace Kistl.Server.Packaging
                         foreach (var rel in ctx.GetQuery<Relation>().Where(r => r.Module.ID == moduleID))
                         {
                             if (rel.GetRelationType() != RelationType.n_m) continue;
-                            if (!rel.A.Type.ImplementsIExportable(ctx)) continue;
-                            if (!rel.B.Type.ImplementsIExportable(ctx)) continue;
+                            if (!rel.A.Type.ImplementsIExportable()) continue;
+                            if (!rel.B.Type.ImplementsIExportable()) continue;
 
                             string ifTypeName = string.Format("{0}, {1}", rel.GetRelationFullName(), ApplicationContext.Current.InterfaceAssembly);
                             Log.InfoFormat("    {0} ", ifTypeName);

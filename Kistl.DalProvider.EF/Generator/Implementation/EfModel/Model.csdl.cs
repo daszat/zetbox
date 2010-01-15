@@ -18,7 +18,7 @@ namespace Kistl.DalProvider.EF.Generator.Implementation.EfModel
         /// </summary>
         /// therefore it can be used both when defining a type (IsList == 
         /// false) and when defining the CollectionEntry (IsList == true)
-        public static string PlainPropertyDefinitionFromValueType(ValueTypeProperty prop)
+        internal static string PlainPropertyDefinitionFromValueType(ValueTypeProperty prop)
         {
             return PlainPropertyDefinitionFromValueType(prop, prop.PropertyName);
         }
@@ -29,7 +29,7 @@ namespace Kistl.DalProvider.EF.Generator.Implementation.EfModel
         /// </summary>
         /// therefore it can be used both when defining a type (IsList == 
         /// false) and when defining the CollectionEntry (IsList == true)
-        public static string PlainPropertyDefinitionFromValueType(ValueTypeProperty prop, string name)
+        internal static string PlainPropertyDefinitionFromValueType(ValueTypeProperty prop, string name)
         {
             string type = prop.GetPropertyTypeString();
             string maxlength = String.Empty;

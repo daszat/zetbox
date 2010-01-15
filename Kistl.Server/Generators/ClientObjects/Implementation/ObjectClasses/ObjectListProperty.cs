@@ -17,7 +17,9 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
             Templates.Implementation.SerializationMembersList serializationList,
             ObjectReferenceProperty prop)
         {
-            Debug.Assert(prop.IsList());
+            if (ctx == null) { throw new ArgumentNullException("ctx"); }
+            if (prop == null) { throw new ArgumentNullException("prop"); }
+            if (!prop.IsList()) { throw new ArgumentNullException("prop", "prop must be a List-valued property"); }
 
             string name = prop.PropertyName;
             string wrapperClass = "OneNRelationList";
@@ -49,6 +51,8 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
             Relation rel,
             RelationEndRole endRole)
         {
+            if (rel == null) { throw new ArgumentNullException("rel"); }
+
             RelationEnd relEnd = rel.GetEndFromRole(endRole);
             RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
 
@@ -88,6 +92,12 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
             string referencedInterface)
         {
             if (host == null) { throw new ArgumentNullException("host"); }
+            if (name == null) { throw new ArgumentNullException("name"); }
+            if (String.IsNullOrEmpty(wrapperName)) { throw new ArgumentNullException("wrapperName"); }
+            if (String.IsNullOrEmpty(wrapperClass)) { throw new ArgumentNullException("wrapperClass"); }
+            if (rel == null) { throw new ArgumentNullException("rel"); }
+            if (String.IsNullOrEmpty(otherName)) { throw new ArgumentNullException("otherName"); }
+            if (String.IsNullOrEmpty(referencedInterface)) { throw new ArgumentNullException("referencedInterface"); }
 
             host.CallTemplate("Implementation.ObjectClasses.ObjectListProperty",
                 ctx, serializationList,

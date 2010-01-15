@@ -143,7 +143,7 @@ namespace Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses
                     otherEnd.Type.GetDataTypeString(),
                     otherEnd.Type.GetDataTypeString() + Kistl.API.Helper.ImplementationSuffix,
                     rel.NeedsPositionStorage(relEnd.GetRole()),
-                    otherEnd.Type.ImplementsIExportable(ctx),
+                    otherEnd.Type.ImplementsIExportable(),
                     prop.Module.Namespace,
                     relEnd.Navigator != null && relEnd.Navigator.EagerLoading,
                     true, 

@@ -646,7 +646,7 @@ namespace Kistl.Server.SchemaManagement
                 db.CreateColumn(tblName, fkBName + Kistl.API.Helper.PositionSuffix, System.Data.DbType.Int32, 0, false);
             }
 
-            if (rel.A.Type.ImplementsIExportable(schema) && rel.B.Type.ImplementsIExportable(schema))
+            if (rel.A.Type.ImplementsIExportable() && rel.B.Type.ImplementsIExportable())
             {
                 db.CreateColumn(tblName, "ExportGuid", System.Data.DbType.Guid, 0, false);
             }

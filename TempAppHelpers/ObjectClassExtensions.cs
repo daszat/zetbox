@@ -49,6 +49,7 @@ namespace Kistl.App.Extensions
 
         private static void InitializeFrozenCache(IReadOnlyKistlContext ctx)
         {
+            if (ctx == null) { throw new ArgumentNullException("ctx"); }
             lock (_lock)
             {
                 if (_frozenClasses == null && !isInitializing)
@@ -61,39 +62,42 @@ namespace Kistl.App.Extensions
             }
         }
 
-        public static ICollection<ObjectClass> GetObjectHierarchie(this ObjectClass objClass)
+        public static ICollection<ObjectClass> GetObjectHierarchie(this ObjectClass cls)
         {
             List<ObjectClass> result = new List<ObjectClass>();
-            while (objClass != null)
+            while (cls != null)
             {
-                result.Add(objClass);
-                objClass = objClass.BaseObjectClass;
+                result.Add(cls);
+                cls = cls.BaseObjectClass;
             }
 
             result.Reverse();
             return result;
         }
 
-        public static ObjectClass GetRootClass(this ObjectClass objClass)
+        public static ObjectClass GetRootClass(this ObjectClass cls)
         {
-            while (objClass.BaseObjectClass != null)
+            if (cls == null) { throw new ArgumentNullException("cls"); }
+
+            while (cls.BaseObjectClass != null)
             {
-                objClass = objClass.BaseObjectClass;
+                cls = cls.BaseObjectClass;
             }
-            return objClass;
+            return cls;
         }
 
-        public static Property GetProperty(this ObjectClass c, string property)
+        public static Property GetProperty(this ObjectClass cls, string property)
         {
-            ObjectClass objClass = c;
-            while (objClass != null)
+            if (cls == null) { throw new ArgumentNullException("cls"); }
+
+            while (cls != null)
             {
-                Property prop = objClass.Properties.SingleOrDefault(p => p.PropertyName == property);
+                Property prop = cls.Properties.SingleOrDefault(p => p.PropertyName == property);
                 if (prop != null)
                 {
                     return prop;
                 }
-                objClass = objClass.BaseObjectClass;
+                cls = cls.BaseObjectClass;
             }
 
             return null;
@@ -101,6 +105,8 @@ namespace Kistl.App.Extensions
 
         public static bool IsFrozen(this ObjectClass cls)
         {
+            if (cls == null) { throw new ArgumentNullException("cls"); }
+
             while (cls != null)
             {
                 if (cls.IsFrozenObject)
@@ -109,14 +115,14 @@ namespace Kistl.App.Extensions
             }
             return false;
         }
-        
+
         public static bool HasSecurityRules(this ObjectClass cls)
         {
             // TODO: Enable this when security is implemented correctly
             return false;
             //return HasSecurityRules(cls, true);
         }
-        
+
         public static bool HasSecurityRules(this ObjectClass cls, bool lookupInBase)
         {
             // TODO: Enable this when security is implemented correctly
@@ -132,18 +138,22 @@ namespace Kistl.App.Extensions
 
         public static InterfaceType GetDescribedInterfaceType(this ObjectClass cls)
         {
+            if (cls == null) { throw new ArgumentNullException("cls"); }
+
             // TODO: During export schema, while creating a new Database, no custom actions are attached (Database is empty)
             // return new InterfaceType(cls.GetDataType());
             return new InterfaceType(Type.GetType(cls.Module.Namespace + "." + cls.ClassName + ", Kistl.Objects", true));
         }
 
-        public static bool ImplementsIExportable(this ObjectClass cls, IKistlContext ctx)
+        public static bool ImplementsIExportable(this ObjectClass cls)
         {
-            return ImplementsIExportable(cls, ctx, true);
+            return ImplementsIExportable(cls, true);
         }
 
-        public static bool ImplementsIExportable(this ObjectClass cls, IKistlContext ctx, bool lookupInBase)
+        public static bool ImplementsIExportable(this ObjectClass cls, bool lookupInBase)
         {
+            if (cls == null) { throw new ArgumentNullException("cls"); }
+
             while (cls != null)
             {
                 if (cls.ImplementsInterfaces.Count(o => o.ClassName == "IExportable" && o.Module.ModuleName == "KistlBase") == 1)
@@ -156,11 +166,15 @@ namespace Kistl.App.Extensions
 
         public static IList<Property> GetAllProperties(this ObjectClass cls)
         {
+            if (cls == null) { throw new ArgumentNullException("cls"); }
+
             return cls.GetInheritedProperties().Concat(cls.Properties).ToList();
         }
 
         public static IList<Property> GetInheritedProperties(this ObjectClass cls)
         {
+            if (cls == null) { throw new ArgumentNullException("cls"); }
+
             var result = new List<Property>().AsEnumerable();
             while (cls.BaseObjectClass != null)
             {
