@@ -20,7 +20,6 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
         {
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
             if (prop == null) { throw new ArgumentNullException("prop"); }
-            if (!prop.IsList()) { throw new ArgumentNullException("prop", "prop must be a List-valued property"); }
 
             string name = prop.PropertyName;
             string ownInterface = prop.ObjectClass.GetDataTypeString();
