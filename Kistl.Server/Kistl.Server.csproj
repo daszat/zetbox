@@ -386,39 +386,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Generators\FrozenObjects\FreezingGenerator.cs" />
-    <Compile Include="Generators\FrozenObjects\Implementation\CollectionEntries\ObjectCollectionEntry.cs" />
-    <Compile Include="Generators\FrozenObjects\Implementation\CollectionEntries\ObjectCollectionEntry.Properties.cs" />
-    <Compile Include="Generators\FrozenObjects\Implementation\CollectionEntries\ValueCollectionEntry.cs" />
-    <Compile Include="Generators\FrozenObjects\Implementation\CollectionEntries\ValueCollectionEntry.Properties.cs" />
-    <Compile Include="Generators\FrozenObjects\Implementation\ObjectClasses\DataStore.cs">
-      <DependentUpon>DataStore.cst</DependentUpon>
-    </Compile>
-    <Compile Include="Generators\FrozenObjects\Implementation\ObjectClasses\DataStore.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DataStore.cst</DependentUpon>
-    </Compile>
-    <Compile Include="Generators\FrozenObjects\Implementation\ObjectClasses\ListProperty.cs" />
-    <Compile Include="Generators\FrozenObjects\Implementation\ObjectClasses\SerializerTemplate.cs" />
-    <Compile Include="Generators\FrozenObjects\Implementation\ObjectClasses\Template.cs" />
-    <Compile Include="Generators\FrozenObjects\Implementation\ProjectFile.cs" />
-    <Compile Include="Generators\FrozenObjects\Implementation\Structs\Template.cs" />
-    <Compile Include="Generators\FrozenObjects\Repositories\FrozenContextImplementation.Designer.cs">
-      <DependentUpon>FrozenContextImplementation.cst</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Generators\FrozenObjects\Repositories\FrozenModuleRepository.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>FrozenModuleRepository.cst</DependentUpon>
-    </Compile>
-    <Compile Include="Generators\FrozenObjects\Repositories\FrozenRepository.Designer.cs">
-      <DependentUpon>FrozenRepository.cst</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <Compile Include="Generators\Interfaces\Implementation\AssemblyInfoTemplate.cs" />
     <Compile Include="Generators\Interfaces\Implementation\ProjectFile.cs" />
     <Compile Include="Generators\Templates\Implementation\CollectionEntries\ObjectCollectionEntry.cs" />
@@ -607,22 +574,6 @@
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>ObjectReferencePropertyTemplate.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Generators\FrozenObjects\Implementation\ObjectClasses\DataStore.cst">
-      <Generator>Arebis Template Processor</Generator>
-      <LastGenOutput>DataStore.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="Generators\FrozenObjects\Repositories\FrozenContextImplementation.cst">
-      <Generator>Arebis Template Processor</Generator>
-      <LastGenOutput>FrozenContextImplementation.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="Generators\FrozenObjects\Repositories\FrozenModuleRepository.cst">
-      <Generator>Arebis Template Processor</Generator>
-      <LastGenOutput>FrozenModuleRepository.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="Generators\FrozenObjects\Repositories\FrozenRepository.cst">
-      <Generator>Arebis Template Processor</Generator>
-      <LastGenOutput>FrozenRepository.Designer.cs</LastGenOutput>
-    </None>
     <None Include="Generators\Templates\Implementation\CollectionEntries\Template.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>Template.Designer.cs</LastGenOutput>
@@ -699,7 +650,6 @@
       <LastGenOutput>Repository.Designer.cs</LastGenOutput>
     </None>
     <Compile Include="Generators\ClientObjects\Implementation\ObjectClasses\CollectionSerialization.cs" />
-    <Compile Include="Generators\FrozenObjects\Logging.cs" />
     <Compile Include="Generators\KistlCodeTemplate.cs" />
     <Compile Include="Generators\Templates\Implementation\CollectionEntries\ExportGuidProperty.cs" />
     <Compile Include="Generators\Templates\Implementation\ObjectClasses\CalculatedProperty.cs" />

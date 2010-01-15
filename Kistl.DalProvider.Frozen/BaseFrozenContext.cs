@@ -10,7 +10,7 @@ namespace Kistl.DalProvider.Frozen
     /// <summary>
     /// The basic implementation of a frozen context.
     /// </summary>
-    public abstract class BaseFrozenContext : IKistlContext
+    public abstract class BaseFrozenContext : IReadOnlyKistlContext
     {
 
         /// <inheritdoc/>
@@ -56,7 +56,7 @@ namespace Kistl.DalProvider.Frozen
         }
 
         /// <inheritdoc/>
-        IPersistenceObject IKistlContext.ContainsObject(InterfaceType type, int ID)
+        IPersistenceObject IReadOnlyKistlContext.ContainsObject(InterfaceType type, int ID)
         {
             return Find(type, ID);
         }
@@ -64,12 +64,7 @@ namespace Kistl.DalProvider.Frozen
         /// <summary>
         /// Gets a value indicating whether or not this Context is disposed. Always false.
         /// </summary>
-        bool IKistlContext.IsDisposed { get { return false; } }
-
-        /// <summary>
-        /// Gets a value indicating whether or not this Context is read only. Always true.
-        /// </summary>
-        bool IKistlContext.IsReadonly { get { return true; } }
+        bool IReadOnlyKistlContext.IsDisposed { get { return false; } }
 
         #region GUID Cache
 
@@ -92,116 +87,64 @@ namespace Kistl.DalProvider.Frozen
         #region not implemented stuff
 
         /// <summary>Not implemented.</summary>
-        IPersistenceObject IKistlContext.Attach(IPersistenceObject obj)
+        IQueryable<T> IReadOnlyKistlContext.GetPersistenceObjectQuery<T>()
         {
             throw new NotImplementedException();
         }
 
         /// <summary>Not implemented.</summary>
-        void IKistlContext.Detach(IPersistenceObject obj)
+        IQueryable<IPersistenceObject> IReadOnlyKistlContext.GetPersistenceObjectQuery(InterfaceType ifType)
         {
             throw new NotImplementedException();
         }
 
         /// <summary>Not implemented.</summary>
-        void IKistlContext.Delete(IPersistenceObject obj)
-        {
-            throw new ReadOnlyContextException();
-        }
-
-        /// <summary>Not implemented.</summary>
-        IQueryable<T> IKistlContext.GetPersistenceObjectQuery<T>()
+        List<T> IReadOnlyKistlContext.GetListOf<T>(IDataObject obj, string propertyName)
         {
             throw new NotImplementedException();
         }
 
         /// <summary>Not implemented.</summary>
-        IQueryable<IPersistenceObject> IKistlContext.GetPersistenceObjectQuery(InterfaceType ifType)
+        List<T> IReadOnlyKistlContext.GetListOf<T>(InterfaceType ifType, int ID, string propertyName)
         {
             throw new NotImplementedException();
         }
 
         /// <summary>Not implemented.</summary>
-        List<T> IKistlContext.GetListOf<T>(IDataObject obj, string propertyName)
+        IList<T> IReadOnlyKistlContext.FetchRelation<T>(Guid relId, RelationEndRole role, IDataObject parent)
         {
             throw new NotImplementedException();
         }
 
         /// <summary>Not implemented.</summary>
-        List<T> IKistlContext.GetListOf<T>(InterfaceType ifType, int ID, string propertyName)
+        T IReadOnlyKistlContext.FindPersistenceObject<T>(int ID)
         {
             throw new NotImplementedException();
         }
 
         /// <summary>Not implemented.</summary>
-        IList<T> IKistlContext.FetchRelation<T>(Guid relId, RelationEndRole role, IDataObject parent)
+        IPersistenceObject IReadOnlyKistlContext.FindPersistenceObject(InterfaceType ifType, int ID)
         {
             throw new NotImplementedException();
         }
 
         /// <summary>Not implemented.</summary>
-        int IKistlContext.SubmitChanges() { throw new NotImplementedException(); }
-
-        /// <summary>Not implemented.</summary>
-        IDataObject IKistlContext.Create(InterfaceType ifType) { throw new ReadOnlyContextException(); }
-        /// <summary>Not implemented.</summary>
-        T IKistlContext.Create<T>() { throw new ReadOnlyContextException(); }
-
-        /// <summary>Not implemented.</summary>
-        IRelationCollectionEntry IKistlContext.CreateRelationCollectionEntry(InterfaceType ifType) { throw new ReadOnlyContextException(); }
-        /// <summary>Not implemented.</summary>
-        T IKistlContext.CreateRelationCollectionEntry<T>() { throw new ReadOnlyContextException(); }
-
-        /// <summary>Not implemented.</summary>
-        IValueCollectionEntry IKistlContext.CreateValueCollectionEntry(InterfaceType ifType) { throw new ReadOnlyContextException(); }
-        /// <summary>Not implemented.</summary>
-        T IKistlContext.CreateValueCollectionEntry<T>() { throw new ReadOnlyContextException(); }
-
-        /// <summary>Not implemented.</summary>
-        IStruct IKistlContext.CreateStruct(InterfaceType ifType) { throw new ReadOnlyContextException(); }
-        /// <summary>Not implemented.</summary>
-        T IKistlContext.CreateStruct<T>() { throw new ReadOnlyContextException(); }
-
-        /// <summary>Not implemented.</summary>
-        T IKistlContext.FindPersistenceObject<T>(int ID)
+        IEnumerable<IPersistenceObject> IReadOnlyKistlContext.FindPersistenceObjects(InterfaceType ifType, IEnumerable<Guid> exportGuids)
         {
             throw new NotImplementedException();
         }
 
         /// <summary>Not implemented.</summary>
-        IPersistenceObject IKistlContext.FindPersistenceObject(InterfaceType ifType, int ID)
+        IEnumerable<T> IReadOnlyKistlContext.FindPersistenceObjects<T>(IEnumerable<Guid> exportGuids)
         {
             throw new NotImplementedException();
         }
 
         /// <summary>Not implemented.</summary>
-        IEnumerable<IPersistenceObject> IKistlContext.FindPersistenceObjects(InterfaceType ifType, IEnumerable<Guid> exportGuids)
+        void IDisposable.Dispose()
         {
-            throw new NotImplementedException();
+            // nothing to dispose
         }
-
-        /// <summary>Not implemented.</summary>
-        IEnumerable<T> IKistlContext.FindPersistenceObjects<T>(IEnumerable<Guid> exportGuids)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>Not implemented.</summary>
-        event GenericEventHandler<IPersistenceObject> IKistlContext.ObjectCreated
-        {
-            add { throw new ReadOnlyContextException(); }
-            remove { throw new ReadOnlyContextException(); }
-        }
-
-        /// <summary>Not implemented.</summary>
-        event GenericEventHandler<IPersistenceObject> IKistlContext.ObjectDeleted
-        {
-            add { throw new ReadOnlyContextException(); }
-            remove { throw new ReadOnlyContextException(); }
-        }
-
-        /// <summary>Not implemented.</summary>
-        void IDisposable.Dispose() { }
 
         #endregion
     }

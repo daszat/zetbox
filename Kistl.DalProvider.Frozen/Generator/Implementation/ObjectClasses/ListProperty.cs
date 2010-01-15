@@ -1,20 +1,26 @@
-using System;
-using System.CodeDom;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 
-using Kistl.API;
-using Kistl.App.Base;
-using Kistl.Server.Generators.Extensions;
-
-namespace Kistl.Server.Generators.FrozenObjects.Implementation.ObjectClasses
+namespace Kistl.DalProvider.Frozen.Generator.Implementation.ObjectClasses
 {
+    using System;
+    using System.CodeDom;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Linq;
+    using System.Text;
+
+    using Kistl.API;
+    using Kistl.App.Base;
+    using Kistl.Server.Generators.Extensions;
+
     public partial class ListProperty
-        : Templates.Implementation.ObjectClasses.ListProperty
+        : Kistl.Server.Generators.Templates.Implementation.ObjectClasses.ListProperty
     {
-        public ListProperty(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Templates.Implementation.SerializationMembersList serializationList, DataType containingType, String name, Property property)
+        public ListProperty(Arebis.CodeGeneration.IGenerationHost _host,
+            IKistlContext ctx,
+            Kistl.Server.Generators.Templates.Implementation.SerializationMembersList serializationList,
+            DataType containingType,
+            string name,
+            Property property)
             : base(_host, ctx, serializationList, containingType, name, property)
         {
         }

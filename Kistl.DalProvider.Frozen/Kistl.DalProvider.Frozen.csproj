@@ -23,6 +23,7 @@
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>..\bin\Debug\bin\Server\Kistl.DalProvider.Frozen.xml</DocumentationFile>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <NoWarn>1591</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -35,6 +36,18 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Arebis.CodeGeneration, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\ArebisCGen\Arebis.CodeGeneration\bin\Release\Arebis.CodeGeneration.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac, Version=1.4.5.676, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\AutoFac 1.4\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -45,6 +58,41 @@
   <ItemGroup>
     <Compile Include="BaseFrozenContext.cs" />
     <Compile Include="BaseFrozenObject.cs" />
+    <Compile Include="FrozenProvider.cs" />
+    <Compile Include="Generator\FreezingGenerator.cs" />
+    <Compile Include="Generator\Implementation\CollectionEntries\ObjectCollectionEntry.cs" />
+    <Compile Include="Generator\Implementation\CollectionEntries\ObjectCollectionEntry.Properties.cs" />
+    <Compile Include="Generator\Implementation\CollectionEntries\ValueCollectionEntry.cs" />
+    <Compile Include="Generator\Implementation\CollectionEntries\ValueCollectionEntry.Properties.cs" />
+    <Compile Include="Generator\Implementation\ObjectClasses\DataStore.cs">
+      <DependentUpon>DataStore.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Generator\Implementation\ObjectClasses\DataStore.Designer.cs">
+      <DependentUpon>DataStore.cst</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Generator\Implementation\ObjectClasses\ListProperty.cs" />
+    <Compile Include="Generator\Implementation\ObjectClasses\SerializerTemplate.cs" />
+    <Compile Include="Generator\Implementation\ObjectClasses\Template.cs" />
+    <Compile Include="Generator\Implementation\ProjectFile.cs" />
+    <Compile Include="Generator\Implementation\Structs\Template.cs" />
+    <Compile Include="Generator\Logging.cs" />
+    <Compile Include="Generator\Repositories\FrozenContextImplementation.Designer.cs">
+      <DependentUpon>FrozenContextImplementation.cst</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Generator\Repositories\FrozenModuleRepository.Designer.cs">
+      <DependentUpon>FrozenModuleRepository.cst</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Generator\Repositories\FrozenRepository.Designer.cs">
+      <DependentUpon>FrozenRepository.cst</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -52,6 +100,36 @@
       <Project>{AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9}</Project>
       <Name>Kistl.API</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Kistl.Objects\Kistl.Objects.csproj">
+      <Project>{0C9E6E69-309F-46F7-A936-D5762229DEB9}</Project>
+      <Name>Kistl.Objects</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Kistl.Server\Kistl.Server.csproj">
+      <Project>{FA2B6CCD-95CB-4927-9CB5-AFE833EB38B7}</Project>
+      <Name>Kistl.Server</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TempAppHelpers\TempAppHelpers.csproj">
+      <Project>{9677AE11-CB92-4F0A-A248-87A21586F0DA}</Project>
+      <Name>TempAppHelpers</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Generator\Implementation\ObjectClasses\DataStore.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>DataStore.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Generator\Repositories\FrozenContextImplementation.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>FrozenContextImplementation.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Generator\Repositories\FrozenModuleRepository.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>FrozenModuleRepository.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Generator\Repositories\FrozenRepository.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>FrozenRepository.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

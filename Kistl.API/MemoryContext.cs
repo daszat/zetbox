@@ -116,7 +116,7 @@ namespace Kistl.API
             return (_objects[ifType] ?? _emptyList).AsQueryable().AddOfType(ifType.Type).Cast<IPersistenceObject>();
         }
 
-        List<T> IKistlContext.GetListOf<T>(IDataObject obj, string propertyName)
+        List<T> IReadOnlyKistlContext.GetListOf<T>(IDataObject obj, string propertyName)
         {
             throw new NotImplementedException();
         }

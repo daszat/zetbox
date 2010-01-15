@@ -1,16 +1,17 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
-using Kistl.API;
-using Kistl.App.Base;
-using Kistl.App.Extensions;
-
-namespace Kistl.Server.Generators.FrozenObjects.Implementation.ObjectClasses
+namespace Kistl.DalProvider.Frozen.Generator.Implementation.ObjectClasses
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+
+    using Kistl.API;
+    using Kistl.App.Base;
+    using Kistl.App.Extensions;
+
     public class Template
-        : Templates.Implementation.ObjectClasses.Template
+        : Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Template
     {
 
         public Template(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, ObjectClass cls)
@@ -47,7 +48,7 @@ namespace Kistl.Server.Generators.FrozenObjects.Implementation.ObjectClasses
             }
         }
 
-        protected override void ApplyListProperty(Property prop, Templates.Implementation.SerializationMembersList serList)
+        protected override void ApplyListProperty(Property prop, Kistl.Server.Generators.Templates.Implementation.SerializationMembersList serList)
         {
             Implementation.ObjectClasses.ListProperty.Call(Host, ctx,
                  serList,

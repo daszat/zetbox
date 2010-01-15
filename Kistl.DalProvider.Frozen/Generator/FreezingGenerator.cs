@@ -1,15 +1,17 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
-using Kistl.API;
-using Kistl.API.Utils;
-using Kistl.App.Base;
-using Kistl.App.Extensions;
-
-namespace Kistl.Server.Generators.FrozenObjects
+namespace Kistl.DalProvider.Frozen.Generator
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+
+    using Kistl.API;
+    using Kistl.API.Utils;
+    using Kistl.App.Base;
+    using Kistl.App.Extensions;
+    using Kistl.Server.Generators;
+
     public class FreezingGenerator
         : BaseDataObjectGenerator
     {
@@ -37,7 +39,8 @@ namespace Kistl.Server.Generators.FrozenObjects
                 }
                 catch (TypeLoadException ex)
                 {
-                    // TODO: Offensichtlich ist der Datentyp neu -> Fehler ignorieren
+                    // this can happen when a class is introduced. Ignore for now.
+                    // TODO: investigate whether there is a better way to handle that.
                     Log.Warn("DataStore, cls.GetDescribedInterfaceType()", ex);
                 }
             }
@@ -48,7 +51,7 @@ namespace Kistl.Server.Generators.FrozenObjects
 
             FrozenInstances = null;
         }
-        
+
         protected override string Generate_ObjectClass(Kistl.API.IKistlContext ctx, ObjectClass objClass)
         {
             if (objClass.IsFrozen())

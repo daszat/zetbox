@@ -32,34 +32,31 @@ namespace Kistl.Server
 
             moduleBuilder
                 .Register<Server>()
-                .ContainerScoped();
+                .SingletonScoped();
 
             moduleBuilder
                 .Register<WcfServer>()
                 .As<IKistlAppDomain>()
-                .ContainerScoped();
+                .SingletonScoped();
 
             moduleBuilder
                 .RegisterCollection<Generators.BaseDataObjectGenerator>()
-                .ContainerScoped();
+                .SingletonScoped();
 
             moduleBuilder
                 .Register<Generators.Interfaces.InterfaceGenerator>()
                 .As<Generators.BaseDataObjectGenerator>()
-                .MemberOf<IEnumerable<Generators.BaseDataObjectGenerator>>();
+                .MemberOf<IEnumerable<Generators.BaseDataObjectGenerator>>()
+                .SingletonScoped();
             moduleBuilder
                 .Register<Generators.ClientObjects.ClientObjectGenerator>()
                 .As<Generators.BaseDataObjectGenerator>()
-                .MemberOf<IEnumerable<Generators.BaseDataObjectGenerator>>();
-
-            moduleBuilder
-                .Register<Generators.FrozenObjects.FreezingGenerator>()
-                .As<Generators.BaseDataObjectGenerator>()
-                .MemberOf<IEnumerable<Generators.BaseDataObjectGenerator>>();
+                .MemberOf<IEnumerable<Generators.BaseDataObjectGenerator>>()
+                .SingletonScoped();
 
             moduleBuilder
                 .Register<Generators.Generator>()
-                .ContainerScoped();
+                .SingletonScoped();
         }
     }
 }

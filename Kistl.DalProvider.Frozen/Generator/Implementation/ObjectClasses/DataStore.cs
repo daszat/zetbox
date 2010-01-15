@@ -10,7 +10,7 @@ using Kistl.App.Base;
 using Kistl.App.Extensions;
 using Arebis.CodeGeneration;
 
-namespace Kistl.Server.Generators.FrozenObjects.Implementation.ObjectClasses
+namespace Kistl.DalProvider.Frozen.Generator.Implementation.ObjectClasses
 {
     public partial class DataStore
     {

@@ -1,15 +1,18 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
-namespace Kistl.Server.Generators.FrozenObjects.Implementation
+namespace Kistl.DalProvider.Frozen.Generator.Implementation
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+
+    using Kistl.API;
+
     public class ProjectFile
-        : Templates.Implementation.ProjectFile
+        : Kistl.Server.Generators.Templates.Implementation.ProjectFile
     {
 
-        public ProjectFile(Arebis.CodeGeneration.IGenerationHost _host, Kistl.API.IKistlContext ctx, string projectGuid, List<string> fileNames)
+        public ProjectFile(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, string projectGuid, List<string> fileNames)
             : base(_host, ctx, projectGuid, fileNames)
         {
         }
@@ -34,8 +37,6 @@ namespace Kistl.Server.Generators.FrozenObjects.Implementation
             this.WriteLine(@"      <HintPath>$(KistlAPIPath)\Kistl.DalProvider.Frozen.dll</HintPath>");
             this.WriteLine(@"      <Private>False</Private>");
             this.WriteLine(@"    </Reference>");
-
         }
-
     }
 }

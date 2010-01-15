@@ -1,6 +1,6 @@
 ﻿<%@ CodeTemplate Language="C#" 
 	Name="Repositories.FrozenContextImplementation"
-	ClassName="Kistl.Server.Generators.FrozenObjects.Repositories.FrozenContextImplementation" 
+	ClassName="Kistl.DalProvider.Frozen.Generator.Repositories.FrozenContextImplementation" 
 	Inherits="Kistl.Server.Generators.KistlCodeTemplate" %>
 <%@ Import Namespace="System" %>
 <%@ Import Namespace="System.Collections.Generic" %>
@@ -17,7 +17,7 @@ using System.Linq;
 
 using Kistl.API;
 
-namespace Kistl.DalProvider.Frozen
+namespace Kistl.Objects.Frozen
 {
 
 	public class FrozenContextImplementation

@@ -1,6 +1,6 @@
 ﻿<%@ CodeTemplate Language="C#" 
 	Name="Repositories.FrozenModuleRepository"
-	ClassName="Kistl.Server.Generators.FrozenObjects.Repositories.FrozenModuleRepository" 
+	ClassName="Kistl.DalProvider.Frozen.Generator.Repositories.FrozenModuleRepository" 
 	Inherits="Kistl.Server.Generators.KistlCodeTemplate" %>
 <%@ Import Namespace="System" %>
 <%@ Import Namespace="System.Collections.Generic" %>

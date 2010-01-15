@@ -8,7 +8,7 @@ using Kistl.App.Base;
 using Kistl.App.Extensions;
 using Kistl.Server.Generators.Templates.Implementation;
 
-namespace Kistl.Server.Generators.FrozenObjects.Implementation.CollectionEntries
+namespace Kistl.DalProvider.Frozen.Generator.Implementation.CollectionEntries
 {
     public partial class ObjectCollectionEntry
     {
@@ -22,7 +22,7 @@ namespace Kistl.Server.Generators.FrozenObjects.Implementation.CollectionEntries
             RelationEnd relEnd = rel.GetEndFromRole(endRole);
             RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
 
-            Templates.Implementation.ObjectClasses.NotifyingValueProperty.Call(Host, ctx,
+            Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty.Call(Host, ctx,
                     this.MembersToSerialize,
                     relEnd.Type.GetDataTypeString(),
                     propertyName, this.rel.A.Type.Module.Namespace);

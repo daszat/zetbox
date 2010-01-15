@@ -1,5 +1,5 @@
 
-namespace Kistl.Server.Generators.FrozenObjects
+namespace Kistl.DalProvider.Frozen.Generator
 {
     internal static class Logging
     {

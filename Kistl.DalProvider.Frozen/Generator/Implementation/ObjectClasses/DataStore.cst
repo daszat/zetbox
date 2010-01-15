@@ -1,6 +1,6 @@
 ﻿<%@ CodeTemplate Language="C#" 
 	Name="Implementation.ObjectClasses.DataStore"
-	ClassName="Kistl.Server.Generators.FrozenObjects.Implementation.ObjectClasses.DataStore" 
+	ClassName="Kistl.DalProvider.Frozen.Generator.Implementation.ObjectClasses.DataStore" 
 	Inherits="Kistl.Server.Generators.KistlCodeTemplate" %>
 <%@ Import Namespace="System" %>
 <%@ Import Namespace="System.Collections.Generic" %>

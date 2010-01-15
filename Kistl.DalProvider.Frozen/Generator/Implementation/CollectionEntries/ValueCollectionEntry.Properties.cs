@@ -7,7 +7,7 @@ using Kistl.API;
 using Kistl.App.Base;
 using Kistl.Server.Generators.Extensions;
 
-namespace Kistl.Server.Generators.FrozenObjects.Implementation.CollectionEntries
+namespace Kistl.DalProvider.Frozen.Generator.Implementation.CollectionEntries
 {
     public partial class ValueCollectionEntry
     {
@@ -19,7 +19,7 @@ namespace Kistl.Server.Generators.FrozenObjects.Implementation.CollectionEntries
 
         protected override void ApplyParentReferencePropertyTemplate(ValueTypeProperty prop, string propertyName)
         {
-            Templates.Implementation.ObjectClasses.NotifyingValueProperty.Call(Host, ctx,
+            Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty.Call(Host, ctx,
                     this.MembersToSerialize,
                     prop.ObjectClass.ClassName,
                     propertyName, this.prop.Module.Namespace);

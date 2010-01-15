@@ -1,16 +1,17 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
-using Kistl.API;
-using Kistl.App.Base;
-using Kistl.Server.Generators.Extensions;
-
-namespace Kistl.Server.Generators.FrozenObjects.Implementation.Structs
+namespace Kistl.DalProvider.Frozen.Generator.Implementation.Structs
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+
+    using Kistl.API;
+    using Kistl.App.Base;
+    using Kistl.Server.Generators.Extensions;
+
     public class Template
-        : Templates.Implementation.Structs.Template
+        : Kistl.Server.Generators.Templates.Implementation.Structs.Template
     {
         public Template(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Struct s)
             : base(_host, ctx, s)
@@ -45,6 +46,5 @@ namespace Kistl.Server.Generators.FrozenObjects.Implementation.Structs
             this.WriteLine();
             this.WriteLine("        { }");
         }
-
     }
 }

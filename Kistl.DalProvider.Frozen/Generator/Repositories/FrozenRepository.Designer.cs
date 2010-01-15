@@ -4,7 +4,7 @@ using Kistl.App.Base;
 using Kistl.App.Extensions;
 
 
-namespace Kistl.Server.Generators.FrozenObjects.Repositories
+namespace Kistl.DalProvider.Frozen.Generator.Repositories
 {
     [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.Server\Generators\FrozenObjects\Repositories\FrozenRepository.cst")]
     public partial class FrozenRepository : Kistl.Server.Generators.KistlCodeTemplate

@@ -82,14 +82,7 @@ namespace Kistl.Server.Service
 
                 var config = InitApplicationContext(args);
 
-                var builder = new ContainerBuilder();
-
-                // register components from most general to most specific source
-                builder.RegisterModule(new ServerModule());
-                builder.RegisterModule((IModule)Activator.CreateInstance(Type.GetType(config.Server.StoreProvider)));
-                builder.RegisterModule(new ConfigurationSettingsReader("servercomponents"));
-
-                using (var container = builder.Build())
+                using (var container = CreateMasterContainer(config))
                 {
                     Log.TraceTotalMemory("After InitApplicationContext");
 
@@ -280,6 +273,24 @@ namespace Kistl.Server.Service
                 }
                 return 1;
             }
+        }
+
+        private static IContainer CreateMasterContainer(KistlConfig config)
+        {
+            var builder = new ContainerBuilder();
+
+            // register components from most general to most specific source
+            // default server stuff
+            builder.RegisterModule(new ServerModule());
+            // register the datastore provider
+            builder.RegisterModule((IModule)Activator.CreateInstance(Type.GetType(config.Server.StoreProvider, true)));
+            // register the provider for frozen objects
+            // if there's a generated frozencontext, this'll override the store's default
+            builder.RegisterModule((IModule)Activator.CreateInstance(Type.GetType(config.FrozenProvider, true)));
+            // register deployment-specific components
+            builder.RegisterModule(new ConfigurationSettingsReader("servercomponents"));
+
+            return builder.Build();
         }
 
         private static void XmlFallbackInitialisation(string file, Func<MemoryContext> createCtx)

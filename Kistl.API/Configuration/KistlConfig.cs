@@ -57,6 +57,12 @@ namespace Kistl.API.Configuration
         public string ConfigName { get; set; }
 
         /// <summary>
+        /// Frozen objects provider
+        /// </summary>
+        [XmlElement(IsNullable = false)]
+        public string FrozenProvider { get; set; }
+
+        /// <summary>
         /// Server Configuration
         /// </summary>
         [XmlElement(IsNullable = true)]

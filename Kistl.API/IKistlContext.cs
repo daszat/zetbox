@@ -95,29 +95,9 @@ namespace Kistl.API
     /// <returns>A newly intialised <see cref="IKistlContext"/>.</returns>
     public delegate IKistlContext GetContext();
 
-    /// <summary>
-    /// Interface for a LinqToNNN Context.
-    /// </summary>
-    public interface IKistlContext : IDisposable
+    public interface IReadOnlyKistlContext
+        : IDisposable
     {
-        /// <summary>
-        /// Attach an IPersistenceObject. This Method checks, if the Object is already in that Context. 
-        /// If so, it returns the Object in that Context.
-        /// </summary>
-        /// <param name="obj">IDataObject</param>
-        /// <returns>The Object in already Context or obj if not</returns>
-        IPersistenceObject Attach(IPersistenceObject obj);
-        /// <summary>
-        /// Detach an IPersistenceObject.
-        /// </summary>
-        /// <param name="obj">IDataObject</param>
-        void Detach(IPersistenceObject obj);
-        /// <summary>
-        /// Delete an IPersistenceObject.
-        /// </summary>
-        /// <param name="obj">IDataObject</param>
-        void Delete(IPersistenceObject obj);
-
         /// <summary>
         /// Returns a Query by T
         /// </summary>
@@ -194,78 +174,6 @@ namespace Kistl.API
         IEnumerable<IPersistenceObject> AttachedObjects { get; }
 
         /// <summary>
-        /// Submits the changes and returns the number of affected Objects.
-        /// </summary>
-        /// <remarks>
-        /// Only IDataObjects are counded.
-        /// </remarks>
-        /// <returns>Number of affected Objects</returns>
-        int SubmitChanges();
-
-        /// <summary>
-        /// IsDisposed can be used to detect whether this IKistlContext was aborted with Dispose()
-        /// </summary>
-        bool IsDisposed { get; }
-
-        bool IsReadonly { get; }
-
-        /// <summary>
-        /// Creates a new IDataObject by Type
-        /// </summary>
-        /// <param name="ifType">Type of the new IDataObject</param>
-        /// <returns>A new IDataObject</returns>
-        IDataObject Create(InterfaceType ifType);
-        /// <summary>
-        /// Creates a new IDataObject.
-        /// </summary>
-        /// <typeparam name="T">Type of the new IDataObject</typeparam>
-        /// <returns>A new IDataObject</returns>
-        T Create<T>() where T : class, IDataObject;
-
-        /// <summary>
-        /// Creates a new ICollectionEntry by Type
-        /// </summary>
-        /// <param name="ifType">Type of the new ICollectionEntry</param>
-        /// <returns>A new ICollectionEntry</returns>
-        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
-        IRelationCollectionEntry CreateRelationCollectionEntry(InterfaceType ifType);
-        /// <summary>
-        /// Creates a new ICollectionEntry.
-        /// </summary>
-        /// <typeparam name="T">Type of the new ICollectionEntry</typeparam>
-        /// <returns>A new ICollectionEntry</returns>
-        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
-        T CreateRelationCollectionEntry<T>() where T : IRelationCollectionEntry;
-
-        /// <summary>
-        /// Creates a new ICollectionEntry by Type
-        /// </summary>
-        /// <param name="ifType">Type of the new ICollectionEntry</param>
-        /// <returns>A new ICollectionEntry</returns>
-        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
-        IValueCollectionEntry CreateValueCollectionEntry(InterfaceType ifType);
-        /// <summary>
-        /// Creates a new ICollectionEntry.
-        /// </summary>
-        /// <typeparam name="T">Type of the new ICollectionEntry</typeparam>
-        /// <returns>A new ICollectionEntry</returns>
-        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
-        T CreateValueCollectionEntry<T>() where T : IValueCollectionEntry;
-
-        /// <summary>
-        /// Creates a new Struct by Type
-        /// </summary>
-        /// <param name="ifType">Type of the new Struct</param>
-        /// <returns>A new Struct</returns>
-        IStruct CreateStruct(InterfaceType ifType);
-        /// <summary>
-        /// Creates a new Struct.
-        /// </summary>
-        /// <typeparam name="T">Type of the new Struct</typeparam>
-        /// <returns>A new Struct</returns>
-        T CreateStruct<T>() where T : IStruct;
-
-        /// <summary>
         /// Find the Object of the given type by ID
         /// TODO: This is quite redundant here as it only uses other IKistlContext Methods.
         /// This could be moved to a common abstract IKistlContextBase
@@ -334,6 +242,103 @@ namespace Kistl.API
         /// <returns>A List of IPersistenceObject.</returns>
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
         IEnumerable<T> FindPersistenceObjects<T>(IEnumerable<Guid> exportGuids) where T : class, IPersistenceObject;
+
+        /// <summary>
+        /// IsDisposed can be used to detect whether this IKistlContext was aborted with Dispose()
+        /// </summary>
+        bool IsDisposed { get; }
+    }
+
+    /// <summary>
+    /// Interface for a LinqToNNN Context.
+    /// </summary>
+    public interface IKistlContext
+        : IReadOnlyKistlContext
+    {
+        /// <summary>
+        /// Attach an IPersistenceObject. This Method checks, if the Object is already in that Context. 
+        /// If so, it returns the Object in that Context.
+        /// </summary>
+        /// <param name="obj">IDataObject</param>
+        /// <returns>The Object in already Context or obj if not</returns>
+        IPersistenceObject Attach(IPersistenceObject obj);
+        /// <summary>
+        /// Detach an IPersistenceObject.
+        /// </summary>
+        /// <param name="obj">IDataObject</param>
+        void Detach(IPersistenceObject obj);
+        /// <summary>
+        /// Delete an IPersistenceObject.
+        /// </summary>
+        /// <param name="obj">IDataObject</param>
+        void Delete(IPersistenceObject obj);
+
+        /// <summary>
+        /// Submits the changes and returns the number of affected Objects.
+        /// </summary>
+        /// <remarks>
+        /// Only IDataObjects are counded.
+        /// </remarks>
+        /// <returns>Number of affected Objects</returns>
+        int SubmitChanges();
+
+        bool IsReadonly { get; }
+
+        /// <summary>
+        /// Creates a new IDataObject by Type
+        /// </summary>
+        /// <param name="ifType">Type of the new IDataObject</param>
+        /// <returns>A new IDataObject</returns>
+        IDataObject Create(InterfaceType ifType);
+        /// <summary>
+        /// Creates a new IDataObject.
+        /// </summary>
+        /// <typeparam name="T">Type of the new IDataObject</typeparam>
+        /// <returns>A new IDataObject</returns>
+        T Create<T>() where T : class, IDataObject;
+
+        /// <summary>
+        /// Creates a new ICollectionEntry by Type
+        /// </summary>
+        /// <param name="ifType">Type of the new ICollectionEntry</param>
+        /// <returns>A new ICollectionEntry</returns>
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
+        IRelationCollectionEntry CreateRelationCollectionEntry(InterfaceType ifType);
+        /// <summary>
+        /// Creates a new ICollectionEntry.
+        /// </summary>
+        /// <typeparam name="T">Type of the new ICollectionEntry</typeparam>
+        /// <returns>A new ICollectionEntry</returns>
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
+        T CreateRelationCollectionEntry<T>() where T : IRelationCollectionEntry;
+
+        /// <summary>
+        /// Creates a new ICollectionEntry by Type
+        /// </summary>
+        /// <param name="ifType">Type of the new ICollectionEntry</param>
+        /// <returns>A new ICollectionEntry</returns>
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
+        IValueCollectionEntry CreateValueCollectionEntry(InterfaceType ifType);
+        /// <summary>
+        /// Creates a new ICollectionEntry.
+        /// </summary>
+        /// <typeparam name="T">Type of the new ICollectionEntry</typeparam>
+        /// <returns>A new ICollectionEntry</returns>
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
+        T CreateValueCollectionEntry<T>() where T : IValueCollectionEntry;
+
+        /// <summary>
+        /// Creates a new Struct by Type
+        /// </summary>
+        /// <param name="ifType">Type of the new Struct</param>
+        /// <returns>A new Struct</returns>
+        IStruct CreateStruct(InterfaceType ifType);
+        /// <summary>
+        /// Creates a new Struct.
+        /// </summary>
+        /// <typeparam name="T">Type of the new Struct</typeparam>
+        /// <returns>A new Struct</returns>
+        T CreateStruct<T>() where T : IStruct;
 
         /// <summary>
         /// Is fired when an object is created in this Context.

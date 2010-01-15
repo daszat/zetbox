@@ -4,10 +4,12 @@ using System.Linq;
 using System.Text;
 using Kistl.API.Server;
 using System.Data.SqlClient;
+using Kistl.API;
+using Kistl.API.Configuration;
 
 namespace Kistl.DalProvider.EF
 {
-    public class SqlServerSchemaProvider 
+    public class SqlServerSchemaProvider
         : ISchemaProvider
     {
         protected SqlConnection db;
@@ -15,7 +17,12 @@ namespace Kistl.DalProvider.EF
 
         public SqlServerSchemaProvider()
         {
-            db = new SqlConnection(Kistl.API.ApplicationContext.Current.Configuration.Server.ConnectionString);
+            var connectionString = ApplicationContext.Current.Configuration.Server.ConnectionString;
+            if (String.IsNullOrEmpty(connectionString))
+            {
+                throw new ConfigurationException("Configuration/Server/ConnectionString empty, cannot connect to database");
+            }
+            db = new SqlConnection(connectionString);
             db.Open();
         }
 

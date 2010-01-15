@@ -1,17 +1,19 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Kistl.API;
-using Kistl.Server.Generators.Templates.Implementation;
 
-namespace Kistl.Server.Generators.FrozenObjects.Implementation.ObjectClasses
+namespace Kistl.DalProvider.Frozen.Generator.Implementation.ObjectClasses
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+
+    using Kistl.API;
+    using Kistl.Server.Generators.Templates.Implementation;
+
     public class SerializerTemplate
-        : Templates.Implementation.ObjectClasses.SerializerTemplate
+        : Kistl.Server.Generators.Templates.Implementation.ObjectClasses.SerializerTemplate
     {
 
-        public SerializerTemplate(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, SerializerDirection direction, SerializationMembersList fields, 
+        public SerializerTemplate(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, SerializerDirection direction, SerializationMembersList fields,
             bool overrideAndCallBase, bool writeExportGuidAttribute)
             : base(_host, ctx, direction, fields, overrideAndCallBase, writeExportGuidAttribute)
         {

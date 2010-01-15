@@ -20,17 +20,18 @@ namespace Kistl.DalProvider.EF
             moduleBuilder
                 .Register(c => new SqlServerSchemaProvider())
                 .As<ISchemaProvider>()
-                .ContainerScoped();
+                .FactoryScoped();
 
             moduleBuilder
                 .Register(c => new KistlDataContext())
                 .As<IKistlServerContext>()
                 .As<IKistlContext>()
+                .As<IReadOnlyKistlContext>()
                 .FactoryScoped();
 
             moduleBuilder
                 .RegisterGeneratedFactory<Func<IKistlContext>>()
-                .ContainerScoped();
+                .SingletonScoped();
 
             moduleBuilder
                 .Register<MemoryContext>(c =>
@@ -47,12 +48,13 @@ namespace Kistl.DalProvider.EF
 
             moduleBuilder
                 .RegisterGeneratedFactory<Func<MemoryContext>>()
-                .ContainerScoped();
+                .SingletonScoped();
 
             moduleBuilder
                 .Register<Generator.EntityFrameworkGenerator>()
                 .As<BaseDataObjectGenerator>()
-                .MemberOf<IEnumerable<BaseDataObjectGenerator>>();
+                .MemberOf<IEnumerable<BaseDataObjectGenerator>>()
+                .SingletonScoped();
         }
     }
 }

@@ -50,7 +50,7 @@ namespace Kistl.Server.Packaging
 
                     foreach (var ns in namespaces)
                     {
-                        Log.InfoFormat("Prefeching objects for {0}", ns);
+                        Log.InfoFormat("Prefetching objects for {0}", ns);
                         var module = ctx.GetQuery<Kistl.App.Base.Module>().FirstOrDefault(m => m.Namespace == ns);
                         if (module != null)
                         {
@@ -130,22 +130,24 @@ namespace Kistl.Server.Packaging
                 Log.InfoFormat("Starting Import from {0}", s is FileStream ? ((FileStream)s).Name : s.GetType().Name);
                 try
                 {
-                    // TODO: Das muss ich z.Z. machen, weil die erste Query eine Entity Query ist und noch nix geladen wurde....
-                    var testObj = ctx.GetQuery<Kistl.App.Base.ObjectClass>().FirstOrDefault();
-                    Debug.WriteLine(testObj != null ? testObj.ToString() : String.Empty);
+                    using (Log.DebugTraceMethodCall("initialisation query"))
+                    {
+                        // the entity framework needs to be initialised by executing any "plain" query first
+                        // TODO: repair the ef provider so it doesn't need this special casing.
+                        var testObj = ctx.GetQuery<Kistl.App.Base.ObjectClass>().FirstOrDefault();
+                        Log.DebugFormat("query result: [{0}]", testObj);
+                    }
                 }
-                catch
+                catch (Exception ex)
                 {
-                    // Ignore
+                    Log.Warn("Error while initialising, trying to proceed anyways", ex);
                 }
 
                 Dictionary<Guid, IPersistenceObject> objects = new Dictionary<Guid, IPersistenceObject>();
                 using (XmlReader xml = XmlReader.Create(s, new XmlReaderSettings() { CloseInput = false }))
                 {
-                    Log.Info("Loading Export Guids");
                     Dictionary<Type, List<Guid>> guids = LoadGuids(xml);
 
-                    Log.Info("Prefeching Objects");
                     PreFetchObjects(ctx, objects, guids);
                 }
                 s.Seek(0, SeekOrigin.Begin);
@@ -193,11 +195,12 @@ namespace Kistl.Server.Packaging
 
         private static Dictionary<Type, List<Guid>> LoadGuids(XmlReader xml)
         {
+            Log.Info("Loading Export Guids");
+
             Dictionary<Type, List<Guid>> guids = new Dictionary<Type, List<Guid>>();
             XPathDocument doc = new XPathDocument(xml);
             XPathNavigator nav = doc.CreateNavigator();
             XPathNodeIterator it = nav.Select("//*[@ExportGuid]");
-
 
             while (it.MoveNext())
             {
