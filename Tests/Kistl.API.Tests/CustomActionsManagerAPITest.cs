@@ -5,9 +5,9 @@ using System.Text;
 
 namespace Kistl.API.Tests
 {
-    public class CustomActionsManagerAPITest : Kistl.API.ICustomActionsManager
+    public class CustomActionsManagerAPITest : ICustomActionsManager
     {
-        public void Init(IKistlContext ctx)
+        public void Init(IReadOnlyKistlContext ctx)
         {
             // Do nothing!
         }

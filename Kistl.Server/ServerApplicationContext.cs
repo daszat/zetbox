@@ -42,7 +42,7 @@ namespace Kistl.Server
             this.SetCustomActionsManager(cams);
         }
 
-        public void LoadActionsManager(IKistlContext ctx)
+        public void LoadActionsManager(IReadOnlyKistlContext ctx)
         {
             var cams = new CustomActionsManagerServer();
             cams.Init(ctx);
@@ -54,7 +54,7 @@ namespace Kistl.Server
             this.SetCustomActionsManager(new NoopActionsManager());
         }
 
-        public override void LoadFrozenActions(IKistlContext ctx)
+        public override void LoadFrozenActions(IReadOnlyKistlContext ctx)
         {
             var fam = new FrozenActionsManagerServer();
             fam.Init(ctx);

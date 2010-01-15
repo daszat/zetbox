@@ -13,7 +13,7 @@ namespace Kistl.API.Client.Mocks
         {
         }
 
-        public void Init(IKistlContext ctx)
+        public void Init(IReadOnlyKistlContext ctx)
         {
             Reset();
         }

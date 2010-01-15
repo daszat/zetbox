@@ -103,12 +103,12 @@ namespace Kistl.API
         /// <summary>
         /// The private backing store for the Single property.
         /// </summary>
-        private static IKistlContext _single = null;
+        private static IReadOnlyKistlContext _single = null;
 
         /// <summary>
         /// A fallback context, if the Frozen assembly is not available.
         /// </summary>
-        private static IKistlContext _fallback = null;
+        private static IReadOnlyKistlContext _fallback = null;
 
         /// <summary>
         /// A value indicating whether loading the frozen context was already tried.
@@ -121,7 +121,7 @@ namespace Kistl.API
         /// registered fallback is used instead. If neither is available, an 
         /// InvalidOperationException is thrown.
         /// </summary>
-        public static IKistlContext Single
+        public static IReadOnlyKistlContext Single
         {
             get
             {
@@ -149,7 +149,7 @@ namespace Kistl.API
         /// Tries to initialise the FrozenContext singleton.
         /// </summary>
         /// <returns>the initialised frozen context or null</returns>
-        private static IKistlContext TryInit()
+        private static IReadOnlyKistlContext TryInit()
         {
             using (Logging.Log.DebugTraceMethodCall())
             {
@@ -160,7 +160,7 @@ namespace Kistl.API
                     {
                         _haveTriedLoading = true;
                         Type t = Type.GetType(frozenAssemblyName, true);
-                        _single = (IKistlContext)Activator.CreateInstance(t);
+                        _single = (IReadOnlyKistlContext)Activator.CreateInstance(t);
                         ApplicationContext.Current.LoadFrozenActions(_single);
                     }
                     catch (Exception ex)
@@ -178,7 +178,7 @@ namespace Kistl.API
         /// Registers a IKistlContext as fallback which can be used if the frozen context assembly is not available. This is especially useful while bootstrapping.
         /// </summary>
         /// <param name="ctx">the context to use as fallback</param>
-        public static void RegisterFallback(IKistlContext ctx)
+        public static void RegisterFallback(IReadOnlyKistlContext ctx)
         {
             if (ctx == null)
             {

@@ -61,7 +61,7 @@ namespace Kistl.App.Extensions
         /// <summary>
         /// Initializes this CustomActionsManager
         /// </summary>
-        public virtual void Init(IKistlContext ctx)
+        public virtual void Init(IReadOnlyKistlContext ctx)
         {
             if (initialized) return;
             try
@@ -100,7 +100,7 @@ namespace Kistl.App.Extensions
         /// <param name="metaCtx">the context used to access the meta data</param>
         /// <param name="extraSuffix">an extra suffix to put into the created implementation class names</param>
         /// <param name="assemblyName">the name of the assembly to load implementation classes from</param>
-        private void CreateInvokeInfosForObjectClasses(IKistlContext metaCtx, string extraSuffix, string assemblyName, Func<ObjectClass, bool> filter)
+        private void CreateInvokeInfosForObjectClasses(IReadOnlyKistlContext metaCtx, string extraSuffix, string assemblyName, Func<ObjectClass, bool> filter)
         {
             if (filter == null) { throw new ArgumentNullException("filter"); }
             if (metaCtx == null) { throw new ArgumentNullException("metaCtx"); }
@@ -264,7 +264,7 @@ namespace Kistl.App.Extensions
         }
 
         /// <inheritdoc/>
-        public override void Init(IKistlContext ctx)
+        public override void Init(IReadOnlyKistlContext ctx)
         {
             if (!IsInitialised)
             {

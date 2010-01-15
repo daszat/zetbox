@@ -17,7 +17,7 @@ namespace Kistl.App.Extensions
         private static ILookup<string, ObjectClass> _frozenClasses;
         private static bool isInitializing = false;
 
-        public static ObjectClass GetObjectClass(this IDataObject obj, IKistlContext ctx)
+        public static ObjectClass GetObjectClass(this IDataObject obj, IReadOnlyKistlContext ctx)
         {
             if (obj == null) { throw new ArgumentNullException("obj"); }
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
@@ -25,7 +25,7 @@ namespace Kistl.App.Extensions
             return GetObjectClass(obj.GetInterfaceType(), ctx);
         }
 
-        public static ObjectClass GetObjectClass(this InterfaceType ifType, IKistlContext ctx)
+        public static ObjectClass GetObjectClass(this InterfaceType ifType, IReadOnlyKistlContext ctx)
         {
             if (ifType == null) { throw new ArgumentNullException("ifType"); }
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
@@ -47,7 +47,7 @@ namespace Kistl.App.Extensions
             return result;
         }
 
-        private static void InitializeFrozenCache(Kistl.API.IKistlContext ctx)
+        private static void InitializeFrozenCache(IReadOnlyKistlContext ctx)
         {
             lock (_lock)
             {

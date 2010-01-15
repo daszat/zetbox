@@ -15,9 +15,9 @@ namespace Kistl.Client
     public interface IGuiApplicationContext
     {
         /// <summary>
-        /// A read-only <see cref="IKistlContext"/> to access meta data
+        /// A read-only <see cref="IReadOnlyKistlContext"/> to access meta data
         /// </summary>
-        IKistlContext MetaContext { get; }
+        IReadOnlyKistlContext MetaContext { get; }
 
         /// <summary>
         /// A non-persisted <see cref="IKistlContext"/> for transient objects
@@ -115,7 +115,7 @@ namespace Kistl.Client
         }
 
         /// <inheritdoc />
-        public override void LoadFrozenActions(IKistlContext ctx)
+        public override void LoadFrozenActions(IReadOnlyKistlContext ctx)
         {
             var fam = new FrozenActionsManagerClient();
             fam.Init(ctx);
@@ -123,10 +123,8 @@ namespace Kistl.Client
 
         public IRenderer Renderer { get; private set; }
 
-        /// <summary>
-        /// A <see cref="IKistlContext"/> for the GUI internals
-        /// </summary>
-        public IKistlContext MetaContext
+        /// <inheritdoc />
+        public IReadOnlyKistlContext MetaContext
         {
             get
             {

@@ -15,7 +15,7 @@ namespace Kistl.API
         /// Should load Metadata, create an Instance and cache Metadata for future use.
         /// </summary>
         /// <param name="ctx">the context to use for looking up MethodInvocations</param>
-        void Init(IKistlContext ctx);
+        void Init(IReadOnlyKistlContext ctx);
     }
 
     /// <summary>
@@ -30,7 +30,7 @@ namespace Kistl.API
         /// Does nothing.
         /// </summary>
         /// <param name="ctx">ignored</param>
-        public void Init(IKistlContext ctx) { }
+        public void Init(IReadOnlyKistlContext ctx) { }
 
         #endregion
     }

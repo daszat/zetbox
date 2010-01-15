@@ -21,7 +21,7 @@ namespace Kistl.Objects.Frozen
 {
 
 	public class FrozenContextImplementation
-		: BaseFrozenContext
+		: Kistl.DalProvider.Frozen.BaseFrozenContext
 	{
 		static FrozenContextImplementation()
 		{

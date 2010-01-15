@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 
+using Kistl.API;
 using Kistl.API.Configuration;
 using Kistl.API.Server;
 
@@ -19,7 +20,7 @@ namespace Kistl.DalProvider.EF.Mocks
             ImplementationAssembly = Assembly.GetAssembly(typeof(Kistl.App.Base.Assembly__Implementation__)).FullName;
         }
 
-        public override void LoadFrozenActions(Kistl.API.IKistlContext ctx)
+        public override void LoadFrozenActions(IReadOnlyKistlContext ctx)
         {
             throw new NotImplementedException();
         }

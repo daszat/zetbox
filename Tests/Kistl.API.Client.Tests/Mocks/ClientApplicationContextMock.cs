@@ -33,7 +33,7 @@ namespace Kistl.API.Client.Mocks
             InterfaceAssembly = Assembly.GetAssembly(this.GetType()).FullName;
         }
 
-        public override void LoadFrozenActions(IKistlContext ctx)
+        public override void LoadFrozenActions(IReadOnlyKistlContext ctx)
         {
             throw new NotImplementedException();
         }

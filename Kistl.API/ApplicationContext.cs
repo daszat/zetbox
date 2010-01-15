@@ -63,7 +63,7 @@ namespace Kistl.API
         /// Loads an appropriate frozen custom actions manager for this IKistlContext.
         /// </summary>
         /// <param name="ctx"></param>
-        public abstract void LoadFrozenActions(IKistlContext ctx);
+        public abstract void LoadFrozenActions(IReadOnlyKistlContext ctx);
 
         /// <summary>
         /// Create a context with the given HostType and load the configuration from 

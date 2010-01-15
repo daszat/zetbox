@@ -33,7 +33,7 @@ namespace Kistl.DalProvider.ClientObjects.Mocks
             CustomActionsManager.Init(FrozenContext.Single);
         }
 
-        public override void LoadFrozenActions(Kistl.API.IKistlContext ctx)
+        public override void LoadFrozenActions(IReadOnlyKistlContext ctx)
         {
             var fam = new FrozenActionsManagerClient();
             fam.Init(ctx);

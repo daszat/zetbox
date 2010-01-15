@@ -14,20 +14,6 @@ namespace Kistl.DalProvider.Frozen.Tests
     [TestFixture]
     public class FrozenContextTests
     {
-
-        [Test]
-        public void should_have_IsReadonly_set()
-        {
-            Assert.That(FrozenContext.Single.IsReadonly, Is.True);
-        }
-
-        [Test]
-        [ExpectedException(typeof(ReadOnlyContextException))]
-        public void should_forbid_Create()
-        {
-            var obj = FrozenContext.Single.Create<ObjectClass>();
-        }
-
         [Test]
         public void should_only_hand_out_objects_with_IsReadonly_set()
         {

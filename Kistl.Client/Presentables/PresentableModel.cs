@@ -39,9 +39,9 @@ namespace Kistl.Client.Presentables
         protected IThreadManager Async { get { return AppContext.AsyncThread; } }
 
         /// <summary>
-        /// A read-only <see cref="IKistlContext"/> to access meta data
+        /// An <see cref="IReadOnlyKistlContext"/> to access meta data
         /// </summary>
-        protected IKistlContext MetaContext { get { return AppContext.MetaContext; } }
+        protected IReadOnlyKistlContext MetaContext { get { return AppContext.MetaContext; } }
 
         /// <summary>
         /// The factory from where new models should be created
@@ -150,7 +150,7 @@ namespace Kistl.Client.Presentables
     {
         #region IGuiApplicationContext Members
 
-        public IKistlContext MetaContext
+        public IReadOnlyKistlContext MetaContext
         {
             get { throw new InvalidOperationException("No data access operations allowed in Design mode"); }
         }

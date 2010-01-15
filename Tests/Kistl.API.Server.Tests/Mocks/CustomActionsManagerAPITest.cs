@@ -7,13 +7,13 @@ using Kistl.API;
 
 namespace Kistl.API.Server.Mocks
 {
-    public class CustomActionsManagerAPITest : Kistl.API.ICustomActionsManager
+    public class CustomActionsManagerAPITest : ICustomActionsManager
     {
         public void Reset()
         {
         }
 
-        public void Init(IKistlContext ctx)
+        public void Init(IReadOnlyKistlContext ctx)
         {
             Reset();
         }

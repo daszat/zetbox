@@ -37,7 +37,7 @@ this.WriteObjects("namespace Kistl.Objects.Frozen\r\n");
 this.WriteObjects("{\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("	public class FrozenContextImplementation\r\n");
-this.WriteObjects("		: BaseFrozenContext\r\n");
+this.WriteObjects("		: Kistl.DalProvider.Frozen.BaseFrozenContext\r\n");
 this.WriteObjects("	{\r\n");
 this.WriteObjects("		static FrozenContextImplementation()\r\n");
 this.WriteObjects("		{\r\n");

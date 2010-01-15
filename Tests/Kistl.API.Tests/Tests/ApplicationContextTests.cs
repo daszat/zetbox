@@ -17,7 +17,7 @@ namespace Kistl.API.Tests
 
         }
 
-        public override void LoadFrozenActions(IKistlContext ctx)
+        public override void LoadFrozenActions(IReadOnlyKistlContext ctx)
         {
             throw new NotImplementedException();
         }
@@ -35,7 +35,7 @@ namespace Kistl.API.Tests
             base.SetCustomActionsManager(m);
         }
 
-        public override void LoadFrozenActions(IKistlContext ctx)
+        public override void LoadFrozenActions(IReadOnlyKistlContext ctx)
         {
             throw new NotImplementedException();
         }
@@ -57,7 +57,7 @@ namespace Kistl.API.Tests
         internal void SetBsoType(Type t) { this.BaseStructObjectType = t; }
         internal void SetBceType(Type t) { this.BaseCollectionEntryType = t; }
 
-        public override void LoadFrozenActions(IKistlContext ctx)
+        public override void LoadFrozenActions(IReadOnlyKistlContext ctx)
         {
             throw new NotImplementedException();
         }

@@ -17,6 +17,29 @@ namespace Kistl.App.Extensions
         }
 
         /// <returns>a Kistl TypeRef for a given System.Type</returns>
+        public static TypeRef ToRef(this Type t, IReadOnlyKistlContext ctx)
+        {
+            if (t == null) { throw new ArgumentNullException("t"); }
+            if (ctx == null) { throw new ArgumentNullException("ctx"); }
+
+            // TODO: think about and implement naked types (i.e. without arguments)
+            if (t.IsGenericTypeDefinition) { throw new ArgumentOutOfRangeException("t"); }
+
+            if (ctx == FrozenContext.Single)
+            {
+                return ToFrozenRef(t);
+            }
+            var result = LookupByType(ctx, ctx.GetQuery<TypeRef>(), t);
+
+            if (result == null)
+            {
+                throw new ReadOnlyContextException(String.Format("Type [{0}] not available and context is read-only", t));
+            }
+
+            return result;
+        }
+
+        /// <returns>a Kistl TypeRef for a given System.Type</returns>
         public static TypeRef ToRef(this Type t, IKistlContext ctx)
         {
             if (t == null) { throw new ArgumentNullException("t"); }
@@ -75,7 +98,7 @@ namespace Kistl.App.Extensions
             }
         }
 
-        private static TypeRef LookupByType(IKistlContext ctx, IQueryable<TypeRef> source, Type t)
+        private static TypeRef LookupByType(IReadOnlyKistlContext ctx, IQueryable<TypeRef> source, Type t)
         {
             // TODO: think about and implement naked types (i.e. without arguments)
             if (t.IsGenericTypeDefinition) throw new ArgumentOutOfRangeException("t");
@@ -113,7 +136,7 @@ namespace Kistl.App.Extensions
         }
 
         // clone of LookupByType(IKistlContext, IQueryable<TypeRef>, Type) since this function takes 5ms per call when called with an IQueryable
-        private static TypeRef LookupByType(IKistlContext ctx, IEnumerable<TypeRef> source, Type t)
+        private static TypeRef LookupByType(IReadOnlyKistlContext ctx, IEnumerable<TypeRef> source, Type t)
         {
             // TODO: think about and implement naked types (i.e. without arguments)
             if (t.IsGenericTypeDefinition) throw new ArgumentOutOfRangeException("t");
