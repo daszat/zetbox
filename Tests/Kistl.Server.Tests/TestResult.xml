@@ -1,156 +1,113 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <!--This file represents the results of running a test suite-->
-<test-results name="P:\Kistl\Tests\Kistl.Server.Tests\Kistl.ServerTests.nunit" total="50" errors="1" failures="4" not-run="9" ignored="9" skipped="0" invalid="0" date="2009-03-20" time="14:37:31">
-  <environment nunit-version="2.5.0.9015" clr-version="2.0.50727.3074" os-version="Microsoft Windows NT 6.0.6001 Service Pack 1" platform="Win32NT" cwd="P:\Kistl\Tests\Kistl.Server.Tests" machine-name="KISTL" user="david" user-domain="kistl" />
-  <culture-info current-culture="de-AT" current-uiculture="de-DE" />
-  <test-suite name="P:\Kistl\Tests\Kistl.Server.Tests\Kistl.ServerTests.nunit" executed="True" success="False" time="18.943" asserts="0">
+<test-results name="P:\Kistl\Tests\Kistl.Server.Tests\Kistl.Server.Tests.nunit" total="49" errors="0" failures="0" not-run="10" inconclusive="0" ignored="10" skipped="0" invalid="0" date="2010-01-16" time="15:49:10">
+  <environment nunit-version="2.5.2.9222" clr-version="2.0.50727.4200" os-version="Microsoft Windows NT 6.0.6002 Service Pack 2" platform="Win32NT" cwd="P:\Kistl\Tests\Kistl.Server.Tests" machine-name="DAVID-NB" user="david" user-domain="DASZ" />
+  <culture-info current-culture="de-AT" current-uiculture="en-US" />
+  <test-suite name="P:\Kistl\Tests\Kistl.Server.Tests\Kistl.Server.Tests.nunit" executed="True" success="True" time="67.720" asserts="0">
     <results>
-      <test-suite name="P:\Kistl\Tests\Kistl.Server.Tests\bin\Debug\Kistl.Server.Tests.dll" executed="True" success="False" time="18.842" asserts="0">
+      <test-suite name="P:\Kistl\Tests\Kistl.Server.Tests\bin\Debug\Kistl.Server.Tests.dll" executed="True" success="True" time="67.707" asserts="0">
         <results>
-          <test-suite name="Kistl" executed="True" success="False" time="18.831" asserts="0">
+          <test-suite name="Kistl" executed="True" success="True" time="67.697" asserts="0">
             <results>
-              <test-suite name="Server" executed="True" success="False" time="18.823" asserts="0">
+              <test-suite name="Server" executed="True" success="True" time="67.688" asserts="0">
                 <results>
-                  <test-suite name="Tests" executed="True" success="False" time="18.822" asserts="0">
+                  <test-suite name="Tests" executed="True" success="True" time="67.688" asserts="0">
                     <results>
-                      <test-suite name="GeneratorTests" executed="True" success="True" time="0.011" asserts="0">
+                      <test-suite name="GetListTests" executed="True" success="True" time="17.428" asserts="1">
                         <results>
-                          <test-case name="Kistl.Server.Tests.GeneratorTests.Generate" executed="True" success="True" time="0.005" asserts="0" />
-                        </results>
-                      </test-suite>
-                      <test-suite name="GetListOfTests" executed="True" success="False" time="0.184" asserts="0">
-                        <results>
-                          <test-case name="Kistl.Server.Tests.GetListOfTests.GetListOf" executed="True" success="True" time="0.121" asserts="1" />
-                          <test-case name="Kistl.Server.Tests.GetListOfTests.GetListOf_GetObject" executed="True" success="True" time="0.024" asserts="1" />
-                          <test-case name="Kistl.Server.Tests.GetListOfTests.GetListOf_Twice" executed="True" success="True" time="0.012" asserts="3" />
-                          <test-case name="Kistl.Server.Tests.GetListOfTests.GetObject_GetListOf" executed="True" success="False" time="0.024" asserts="0">
-                            <failure>
-                              <message><![CDATA[System.NullReferenceException : Der Objektverweis wurde nicht auf eine Objektinstanz festgelegt.]]></message>
-                              <stack-trace><![CDATA[bei lambda_method(ExecutionScope , Task )
-bei System.Linq.Enumerable.WhereEnumerableIterator`1.MoveNext()
-bei System.Linq.Enumerable.First[TSource](IEnumerable`1 source)
-bei lambda_method(ExecutionScope )
-bei System.Linq.EnumerableExecutor`1.Execute()
-bei System.Linq.EnumerableQuery`1.System.Linq.IQueryProvider.Execute[S](Expression expression)
-bei System.Linq.Queryable.First[TSource](IQueryable`1 source)
-bei Kistl.Server.Tests.GetListOfTests.GetObject_GetListOf() in P:\Kistl\Tests\Kistl.Server.Tests\Tests\GetListOfTests.cs:Zeile 61.
-]]></stack-trace>
-                            </failure>
-                          </test-case>
-                        </results>
-                      </test-suite>
-                      <test-suite name="GetListTests" executed="True" success="False" time="1.597" asserts="0">
-                        <results>
-                          <test-case name="Kistl.Server.Tests.GetListTests.GetList" executed="True" success="True" time="0.048" asserts="1" />
-                          <test-case name="Kistl.Server.Tests.GetListTests.GetList_GetObject" executed="True" success="True" time="0.972" asserts="3" />
-                          <test-case name="Kistl.Server.Tests.GetListTests.GetList_Twice" executed="True" success="True" time="0.062" asserts="187" />
+                          <test-case name="Kistl.Server.Tests.GetListTests.GetList" executed="True" success="True" time="10.698" asserts="1" />
+                          <test-case name="Kistl.Server.Tests.GetListTests.GetList_GetObject" executed="True" success="True" time="4.108" asserts="3" />
+                          <test-case name="Kistl.Server.Tests.GetListTests.GetList_Twice" executed="True" success="True" time="0.173" asserts="268" />
                           <test-case name="Kistl.Server.Tests.GetListTests.GetListByTypeWithOrderBy" executed="False">
                             <reason>
                               <message><![CDATA[Case 617]]></message>
                             </reason>
                           </test-case>
-                          <test-case name="Kistl.Server.Tests.GetListTests.GetListFirst" executed="True" success="True" time="0.010" asserts="1" />
-                          <test-case name="Kistl.Server.Tests.GetListTests.GetListSingle" executed="True" success="False" time="0.009" asserts="1">
-                            <failure>
-                              <message><![CDATA[An Exception was expected]]></message>
-                              <stack-trace />
-                            </failure>
-                          </test-case>
-                          <test-case name="Kistl.Server.Tests.GetListTests.GetListWithFirst" executed="True" success="True" time="0.007" asserts="1" />
-                          <test-case name="Kistl.Server.Tests.GetListTests.GetListWithOrderBy" executed="True" success="True" time="0.037" asserts="1" />
-                          <test-case name="Kistl.Server.Tests.GetListTests.GetListWithOrderByAndWhere" executed="True" success="True" time="0.038" asserts="1" />
+                          <test-case name="Kistl.Server.Tests.GetListTests.GetListFirst" executed="True" success="True" time="0.083" asserts="1" />
+                          <test-case name="Kistl.Server.Tests.GetListTests.GetListSingle" executed="True" success="True" time="0.016" asserts="0" />
+                          <test-case name="Kistl.Server.Tests.GetListTests.GetListWithFirst" executed="True" success="True" time="0.032" asserts="1" />
+                          <test-case name="Kistl.Server.Tests.GetListTests.GetListWithOrderBy" executed="True" success="True" time="0.169" asserts="1" />
+                          <test-case name="Kistl.Server.Tests.GetListTests.GetListWithOrderByAndWhere" executed="True" success="True" time="0.169" asserts="1" />
                           <test-case name="Kistl.Server.Tests.GetListTests.GetListWithOrderByThenOrderBy" executed="False">
                             <reason>
                               <message><![CDATA[Case 634]]></message>
                             </reason>
                           </test-case>
-                          <test-case name="Kistl.Server.Tests.GetListTests.GetListWithParameterIllegal" executed="False">
+                          <test-case name="Kistl.Server.Tests.GetListTests.GetListWithParameterLegal" executed="True" success="True" time="0.081" asserts="1" />
+                          <test-case name="Kistl.Server.Tests.GetListTests.GetListWithProjection" executed="True" success="True" time="0.092" asserts="0" />
+                          <test-case name="Kistl.Server.Tests.GetListTests.GetListWithPropertyAccessor" executed="True" success="True" time="0.092" asserts="2" />
+                          <test-case name="Kistl.Server.Tests.GetListTests.GetListWithPropertyObjectAccessor" executed="True" success="True" time="0.098" asserts="2" />
+                          <test-case name="Kistl.Server.Tests.GetListTests.GetListWithSingle" executed="True" success="True" time="0.016" asserts="0" />
+                          <test-case name="Kistl.Server.Tests.GetListTests.GetListWithTake" executed="True" success="True" time="0.086" asserts="1" />
+                          <test-case name="Kistl.Server.Tests.GetListTests.GetListWithTakeAndWhere" executed="True" success="True" time="0.101" asserts="1" />
+                          <test-case name="Kistl.Server.Tests.GetListTests.GetObject_GetList" executed="True" success="True" time="1.375" asserts="6" />
+                        </results>
+                      </test-suite>
+                      <test-suite name="InheritanceTests" executed="True" success="True" time="1.383" asserts="0">
+                        <results>
+                          <test-case name="Kistl.Server.Tests.InheritanceTests.GetListOfInheritedObjects" executed="True" success="True" time="1.379" asserts="3" />
+                          <test-case name="Kistl.Server.Tests.InheritanceTests.UpdateInheritedObject" executed="False">
                             <reason>
-                              <message><![CDATA[System.InvalidOperationException : The operands for operator 'GreaterThan' do not match the parameters of method 'op_GreaterThan'.]]></message>
+                              <message><![CDATA[no test class available]]></message>
                             </reason>
                           </test-case>
-                          <test-case name="Kistl.Server.Tests.GetListTests.GetListWithParameterLegal" executed="True" success="True" time="0.014" asserts="1" />
-                          <test-case name="Kistl.Server.Tests.GetListTests.GetListWithProjection" executed="True" success="True" time="0.095" asserts="0" />
-                          <test-case name="Kistl.Server.Tests.GetListTests.GetListWithPropertyAccessor" executed="True" success="True" time="0.014" asserts="2" />
-                          <test-case name="Kistl.Server.Tests.GetListTests.GetListWithPropertyObjectAccessor" executed="True" success="True" time="0.035" asserts="2" />
-                          <test-case name="Kistl.Server.Tests.GetListTests.GetListWithSingle" executed="True" success="False" time="0.007" asserts="1">
-                            <failure>
-                              <message><![CDATA[An Exception was expected]]></message>
-                              <stack-trace />
-                            </failure>
-                          </test-case>
-                          <test-case name="Kistl.Server.Tests.GetListTests.GetListWithTake" executed="True" success="True" time="0.034" asserts="1" />
-                          <test-case name="Kistl.Server.Tests.GetListTests.GetListWithTakeAndWhere" executed="True" success="True" time="0.033" asserts="1" />
-                          <test-case name="Kistl.Server.Tests.GetListTests.GetObject_GetList" executed="True" success="True" time="0.151" asserts="6" />
                         </results>
                       </test-suite>
-                      <test-suite name="InheritanceTests" executed="True" success="True" time="2.510" asserts="0">
+                      <test-suite name="ListPropertiesTests" executed="True" success="True" time="11.949" asserts="0">
                         <results>
-                          <test-case name="Kistl.Server.Tests.InheritanceTests.GetListOfInheritedObjects" executed="True" success="True" time="0.446" asserts="3" />
-                          <test-case name="Kistl.Server.Tests.InheritanceTests.UpdateInheritedObject" executed="True" success="True" time="2.062" asserts="4" />
-                        </results>
-                      </test-suite>
-                      <test-suite name="ListPropertiesTests" executed="True" success="False" time="0.328" asserts="0">
-                        <results>
-                          <test-case name="Kistl.Server.Tests.ListPropertiesTests.AddStringListPropertyContent" executed="True" success="False" time="0.156" asserts="2">
-                            <failure>
-                              <message><![CDATA[  Expected: 1
-  But was:  2
-]]></message>
-                              <stack-trace><![CDATA[bei Kistl.API.AbstractConsumerTests.AbstractListPropertiesTests.AddStringListPropertyContent() in P:\Kistl\Tests\Kistl.API.AbstractConsumerTests\AbstractListPropertiesTests.cs:Zeile 68.
-]]></stack-trace>
-                            </failure>
+                          <test-case name="Kistl.Server.Tests.ListPropertiesTests.AddStringListPropertyContent" executed="True" success="True" time="6.015" asserts="5" />
+                          <test-case name="Kistl.Server.Tests.ListPropertiesTests.DeleteStringListPropertyContent" executed="True" success="True" time="0.389" asserts="5" />
+                          <test-case name="Kistl.Server.Tests.ListPropertiesTests.list_and_query_should_yield_consistent_results" executed="True" success="True" time="0.409" asserts="2" />
+                          <test-case name="Kistl.Server.Tests.ListPropertiesTests.list_should_be_sorted_correctly" executed="True" success="True" time="0.921" asserts="6" />
+                          <test-case name="Kistl.Server.Tests.ListPropertiesTests.navigating_a_fk_list_property_should_yield_related_objects" executed="True" success="True" time="1.646" asserts="1" />
+                          <test-case name="Kistl.Server.Tests.ListPropertiesTests.navigating_a_nm_list_property_should_yield_related_objects" executed="False">
+                            <reason>
+                              <message><![CDATA[Needs N:M relation between frozen objects with navigators in both directions]]></message>
+                            </reason>
                           </test-case>
-                          <test-case name="Kistl.Server.Tests.ListPropertiesTests.DeleteStringListPropertyContent" executed="True" success="False" time="0.045" asserts="1">
-                            <failure>
-                              <message><![CDATA[  Expected: 1
-  But was:  2
-]]></message>
-                              <stack-trace><![CDATA[bei Kistl.API.AbstractConsumerTests.AbstractListPropertiesTests.DeleteStringListPropertyContent() in P:\Kistl\Tests\Kistl.API.AbstractConsumerTests\AbstractListPropertiesTests.cs:Zeile 136.
-]]></stack-trace>
-                            </failure>
-                          </test-case>
-                          <test-case name="Kistl.Server.Tests.ListPropertiesTests.GetPointerListPropertyContent" executed="True" success="True" time="0.108" asserts="9" />
-                          <test-case name="Kistl.Server.Tests.ListPropertiesTests.GetStringListPropertyContent" executed="True" success="True" time="0.007" asserts="1" />
+                          <test-case name="Kistl.Server.Tests.ListPropertiesTests.object_lists_should_have_elements" executed="True" success="True" time="1.226" asserts="41" />
+                          <test-case name="Kistl.Server.Tests.ListPropertiesTests.retrieving_a_fk_list_twice_should_yield_same_list" executed="True" success="True" time="0.494" asserts="1" />
+                          <test-case name="Kistl.Server.Tests.ListPropertiesTests.retrieving_a_nm_list_twice_should_yield_same_list" executed="True" success="True" time="0.459" asserts="1" />
                           <test-case name="Kistl.Server.Tests.ListPropertiesTests.UpdateStringListPropertyContent" executed="False">
                             <reason>
-                              <message><![CDATA[Implement IsSorted on Kunde.EMails]]></message>
+                              <message><![CDATA[Set IsSorted on Kunde.EMails]]></message>
                             </reason>
                           </test-case>
+                          <test-case name="Kistl.Server.Tests.ListPropertiesTests.value_lists_should_have_elements" executed="True" success="True" time="0.370" asserts="1" />
                         </results>
                       </test-suite>
-                      <test-suite name="ObjectTests" executed="True" success="True" time="0.208" asserts="0">
+                      <test-suite name="ObjectTests" executed="True" success="True" time="1.634" asserts="0">
                         <results>
-                          <test-case name="Kistl.Server.Tests.ObjectTests.GetListOf" executed="True" success="True" time="0.011" asserts="1" />
-                          <test-case name="Kistl.Server.Tests.ObjectTests.GetListOf_List" executed="True" success="True" time="0.016" asserts="1" />
-                          <test-case name="Kistl.Server.Tests.ObjectTests.GetObject" executed="True" success="True" time="0.032" asserts="1" />
-                          <test-case name="Kistl.Server.Tests.ObjectTests.GetObject_Twice" executed="True" success="True" time="0.049" asserts="3" />
-                          <test-case name="Kistl.Server.Tests.ObjectTests.NewObject" executed="True" success="True" time="0.038" asserts="4" />
-                          <test-case name="Kistl.Server.Tests.ObjectTests.SetObject" executed="True" success="True" time="0.055" asserts="3" />
+                          <test-case name="Kistl.Server.Tests.ObjectTests.GetListOf" executed="True" success="True" time="0.230" asserts="1" />
+                          <test-case name="Kistl.Server.Tests.ObjectTests.GetListOf_List" executed="True" success="True" time="0.232" asserts="1" />
+                          <test-case name="Kistl.Server.Tests.ObjectTests.GetObject" executed="True" success="True" time="0.288" asserts="1" />
+                          <test-case name="Kistl.Server.Tests.ObjectTests.GetObject_Twice" executed="True" success="True" time="0.314" asserts="3" />
+                          <test-case name="Kistl.Server.Tests.ObjectTests.NewObject" executed="True" success="True" time="0.289" asserts="4" />
+                          <test-case name="Kistl.Server.Tests.ObjectTests.SetObject" executed="True" success="True" time="0.272" asserts="3" />
                         </results>
                       </test-suite>
-                      <test-suite name="RelationTests" executed="True" success="True" time="0.609" asserts="0">
+                      <test-suite name="RelationTests" executed="True" success="True" time="3.482" asserts="0">
                         <results>
-                          <test-case name="Kistl.Server.Tests.RelationTests.Change_Relation_1_n_Set_1" executed="True" success="True" time="0.004" asserts="7" />
-                          <test-case name="Kistl.Server.Tests.RelationTests.Change_Relation_1_n_Set_n_By_Index" executed="True" success="True" time="0.018" asserts="7" />
-                          <test-case name="Kistl.Server.Tests.RelationTests.Change_Relation_1_n_Set_n_With_Clear" executed="True" success="True" time="0.006" asserts="7" />
-                          <test-case name="Kistl.Server.Tests.RelationTests.Change_Relation_1_n_Set_n_With_Remove" executed="True" success="True" time="0.005" asserts="7" />
-                          <test-case name="Kistl.Server.Tests.RelationTests.Change_Relation_n_m_Set_m_By_Index" executed="True" success="True" time="0.016" asserts="9" />
-                          <test-case name="Kistl.Server.Tests.RelationTests.Change_Relation_n_m_Set_m_With_Clear" executed="True" success="True" time="0.008" asserts="9" />
-                          <test-case name="Kistl.Server.Tests.RelationTests.Change_Relation_n_m_Set_m_With_Remove" executed="True" success="True" time="0.005" asserts="9" />
-                          <test-case name="Kistl.Server.Tests.RelationTests.Change_Relation_n_m_Set_n_By_Index" executed="True" success="True" time="0.006" asserts="9" />
-                          <test-case name="Kistl.Server.Tests.RelationTests.Change_Relation_n_m_Set_n_With_Clear" executed="True" success="True" time="0.005" asserts="9" />
-                          <test-case name="Kistl.Server.Tests.RelationTests.Change_Relation_n_m_Set_n_With_Remove" executed="True" success="True" time="0.004" asserts="9" />
-                          <test-case name="Kistl.Server.Tests.RelationTests.Relation_1_n_Set_1" executed="True" success="True" time="0.004" asserts="6" />
-                          <test-case name="Kistl.Server.Tests.RelationTests.Relation_1_n_Set_n" executed="True" success="True" time="0.003" asserts="6" />
-                          <test-case name="Kistl.Server.Tests.RelationTests.Relation_n_m_Set_m" executed="True" success="True" time="0.004" asserts="8" />
-                          <test-case name="Kistl.Server.Tests.RelationTests.Relation_n_m_Set_n" executed="True" success="True" time="0.003" asserts="8" />
-                          <test-case name="Kistl.Server.Tests.RelationTests.Sort_Relation_1_n" executed="True" success="True" time="0.394" asserts="1" />
-                          <test-case name="Kistl.Server.Tests.RelationTests.Sort_Relation_n_m_m" executed="True" success="True" time="0.057" asserts="3" />
-                          <test-case name="Kistl.Server.Tests.RelationTests.Sort_Relation_n_m_n" executed="True" success="True" time="0.046" asserts="3" />
+                          <test-case name="Kistl.Server.Tests.RelationTests.Change_Relation_1_n_Set_1" executed="True" success="True" time="0.145" asserts="7" />
+                          <test-case name="Kistl.Server.Tests.RelationTests.Change_Relation_1_n_Set_n_By_Index" executed="True" success="True" time="0.159" asserts="7" />
+                          <test-case name="Kistl.Server.Tests.RelationTests.Change_Relation_1_n_Set_n_With_Clear" executed="True" success="True" time="0.146" asserts="7" />
+                          <test-case name="Kistl.Server.Tests.RelationTests.Change_Relation_1_n_Set_n_With_Remove" executed="True" success="True" time="0.152" asserts="7" />
+                          <test-case name="Kistl.Server.Tests.RelationTests.Change_Relation_n_m_Set_m_By_Index" executed="True" success="True" time="0.169" asserts="9" />
+                          <test-case name="Kistl.Server.Tests.RelationTests.Change_Relation_n_m_Set_m_With_Clear" executed="True" success="True" time="0.151" asserts="9" />
+                          <test-case name="Kistl.Server.Tests.RelationTests.Change_Relation_n_m_Set_m_With_Remove" executed="True" success="True" time="0.157" asserts="9" />
+                          <test-case name="Kistl.Server.Tests.RelationTests.Change_Relation_n_m_Set_n_By_Index" executed="True" success="True" time="0.159" asserts="9" />
+                          <test-case name="Kistl.Server.Tests.RelationTests.Change_Relation_n_m_Set_n_With_Clear" executed="True" success="True" time="0.156" asserts="9" />
+                          <test-case name="Kistl.Server.Tests.RelationTests.Change_Relation_n_m_Set_n_With_Remove" executed="True" success="True" time="0.172" asserts="9" />
+                          <test-case name="Kistl.Server.Tests.RelationTests.Relation_1_n_Set_1" executed="True" success="True" time="0.169" asserts="6" />
+                          <test-case name="Kistl.Server.Tests.RelationTests.Relation_1_n_Set_n" executed="True" success="True" time="0.186" asserts="6" />
+                          <test-case name="Kistl.Server.Tests.RelationTests.Relation_n_m_Set_m" executed="True" success="True" time="0.173" asserts="8" />
+                          <test-case name="Kistl.Server.Tests.RelationTests.Relation_n_m_Set_n" executed="True" success="True" time="0.200" asserts="8" />
+                          <test-case name="Kistl.Server.Tests.RelationTests.Sort_Relation_1_n" executed="True" success="True" time="0.534" asserts="1" />
+                          <test-case name="Kistl.Server.Tests.RelationTests.Sort_Relation_n_m_m" executed="True" success="True" time="0.303" asserts="2" />
+                          <test-case name="Kistl.Server.Tests.RelationTests.Sort_Relation_n_m_n" executed="True" success="True" time="0.323" asserts="2" />
                         </results>
                       </test-suite>
-                      <test-suite name="StructTests" executed="True" success="False" time="0.006" asserts="0">
+                      <test-suite name="StructTests" executed="True" success="False" time="0.005" asserts="0">
                         <results>
                           <test-case name="Kistl.Server.Tests.StructTests.ChangeObjectWithStruct" executed="False">
                             <reason>

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 
 using Kistl.API;
@@ -12,7 +13,6 @@ using Kistl.Client;
 
 using NUnit.Framework;
 using NUnit.Framework.Constraints;
-using System.Reflection;
 
 namespace Kistl.IntegrationTests
 {

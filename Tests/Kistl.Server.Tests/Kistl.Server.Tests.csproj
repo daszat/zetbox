@@ -42,6 +42,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libs\AutoFac 1.4\Autofac.dll</HintPath>
     </Reference>
+    <Reference Include="Autofac.Integration.Wcf, Version=1.4.5.676, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libs\AutoFac 1.4\Autofac.Integration.Wcf.dll</HintPath>
+    </Reference>
     <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libs\log4net.dll</HintPath>
@@ -50,6 +54,9 @@
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.ServiceModel">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -77,11 +84,11 @@
     <Content Include="Kistl.Server.Tests.Config.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Kistl.ServerTests.PartCoverSettings.xml" />
+    <Content Include="Kistl.Server.Tests.PartCoverSettings.xml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Kistl.ServerTests.nunit">
+    <None Include="Kistl.Server.Tests.nunit">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

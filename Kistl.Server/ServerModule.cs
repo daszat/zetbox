@@ -66,7 +66,6 @@ namespace Kistl.Server
 
             moduleBuilder
                 .Register<KistlService>()
-                //.As<IKistlService>()
                 .FactoryScoped();
         }
     }

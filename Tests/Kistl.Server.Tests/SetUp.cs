@@ -8,6 +8,7 @@ using System.Text;
 
 using Autofac;
 using Autofac.Builder;
+using Autofac.Integration.Wcf;
 
 using Kistl.API;
 using Kistl.API.Configuration;
@@ -33,15 +34,18 @@ namespace Kistl.Server.Tests
             using (Log.InfoTraceMethodCall("Starting up"))
             {
                 var config = KistlConfig.FromFile("Kistl.Server.Tests.Config.xml");
-
-                ResetDatabase(config);
+                
+                AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
 
                 var builder = new ContainerBuilder();
                 builder.RegisterModule(new ServerModule());
                 // TODO: replace this with registering a mocked provider of some kind.
-                builder.RegisterModule((IModule)Activator.CreateInstance(Type.GetType(config.Server.StoreProvider)));
+                builder.RegisterModule((IModule)Activator.CreateInstance(Type.GetType(config.Server.StoreProvider, true)));
 
                 container = builder.Build();
+                AutofacServiceHostFactory.Container = container;
+
+                ResetDatabase(config);
 
                 manager = container.Resolve<IKistlAppDomain>();
 
