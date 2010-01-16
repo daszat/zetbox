@@ -276,7 +276,7 @@ namespace Kistl.Server.Service
             }
         }
 
-        private static IContainer CreateMasterContainer(KistlConfig config)
+        internal static IContainer CreateMasterContainer(KistlConfig config)
         {
             var builder = new ContainerBuilder();
 
@@ -316,7 +316,7 @@ namespace Kistl.Server.Service
             ServerApplicationContext.Current.LoadDefaultActionsManager();
         }
 
-        private static void DefaultInitialisation()
+        internal static void DefaultInitialisation()
         {
             // TODO: Remove the fallback registration after Case 1211 is fixed
             ServerApplicationContext.Current.LoadNoopActionsManager();

@@ -43,9 +43,10 @@ namespace Kistl.Client
                     AppDomain.CurrentDomain.SetupInformation);
 
                 AssemblyLoader.Bootstrap(serverDomain, config);
+
                 serverManager = (IKistlAppDomain)serverDomain.CreateInstanceAndUnwrap(
-                    "Kistl.Server",
-                    "Kistl.Server.WcfServer");
+                    "Kistl.Server.Service",
+                    "Kistl.Server.Service.ServerManager");
                 serverManager.Start(config);
 
                 if (clientSponsor == null)
