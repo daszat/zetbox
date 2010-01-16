@@ -29,14 +29,15 @@ namespace Kistl.Server
         /// <param name="type">Type of Object</param>
         /// <param name="ID">ID of Object</param>
         /// <returns>a memory stream containing the serialized object, rewound to the beginning</returns>
+        /// <exception cref="ArgumentNullException">when the specified type is null</exception>
         /// <exception cref="ArgumentOutOfRangeException">when the specified object was not found</exception>
         [Obsolete]
         public MemoryStream GetObject(SerializableType type, int ID)
         {
-            if (type == null) { throw new ArgumentNullException("type"); }
-
             try
             {
+                if (type == null) { throw new ArgumentNullException("type"); }
+
                 using (Logging.Facade.DebugTraceMethodCall(type.ToString()))
                 {
                     DebugLogIdentity();
@@ -60,7 +61,7 @@ namespace Kistl.Server
                 return null;
             }
         }
-        
+
         /// <summary>
         /// Puts a number of changed objects into the database. The resultant objects are sent back to the client.
         /// </summary>
@@ -69,10 +70,10 @@ namespace Kistl.Server
         /// <returns>a streamable list of <see cref="IPersistenceObject"/>s</returns>
         public MemoryStream SetObjects(MemoryStream msg, IEnumerable<ObjectNotificationRequest> notificationRequests)
         {
-            if (msg == null) { throw new ArgumentNullException("msg"); }
-
             try
             {
+                if (msg == null) { throw new ArgumentNullException("msg"); }
+
                 msg.Seek(0, SeekOrigin.Begin);
                 using (Logging.Facade.DebugTraceMethodCall())
                 {
@@ -126,10 +127,10 @@ namespace Kistl.Server
         /// <returns>the found objects</returns>
         public MemoryStream GetList(SerializableType type, int maxListCount, SerializableExpression filter, List<SerializableExpression> orderBy)
         {
-            if (type == null) { throw new ArgumentNullException("type"); }
-
             try
             {
+                if (type == null) { throw new ArgumentNullException("type"); }
+
                 using (Logging.Facade.DebugTraceMethodCall(type.ToString()))
                 {
                     DebugLogIdentity();
@@ -219,10 +220,10 @@ namespace Kistl.Server
         [Obsolete]
         public MemoryStream GetListOf(SerializableType type, int ID, string property)
         {
-            if (type == null) { throw new ArgumentNullException("type"); }
-
             try
             {
+                if (type == null) { throw new ArgumentNullException("type"); }
+
                 using (Logging.Facade.DebugTraceMethodCall(type.ToString()))
                 {
                     DebugLogIdentity();
@@ -284,6 +285,5 @@ namespace Kistl.Server
                 return null;
             }
         }
-
     }
 }

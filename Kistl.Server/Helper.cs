@@ -1,21 +1,19 @@
-using System;
-using System.Collections.Generic;
-using System.ServiceModel;
-using System.Linq;
-using Kistl.API.Server;
-using Kistl.App.Base;
-using Kistl.API;
-using System.Diagnostics;
-using Kistl.API.Utils;
 
 namespace Kistl.Server
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.ServiceModel;
+    using System.Text;
+
+    using Kistl.API.Utils;
+
     /// <summary>
     /// Server Helper
     /// </summary>
     public static class Helper
     {
-
         public static void HandleError(Exception ex)
         {
             HandleError(ex, false);
@@ -31,18 +29,18 @@ namespace Kistl.Server
             Logging.Log.Error("Handling exception", ex);
             if (throwFault)
             {
+#if DEBUG
                 if (ex is System.Data.UpdateException && ex.InnerException != null)
                 {
                     throw new FaultException(ex.InnerException.Message);
                 }
                 else
                 {
-#if DEBUG
                     throw new FaultException(ex.Message);
-#else
-                    throw new FaultException("An Error ocurred while processing this request.");
-#endif
                 }
+#else
+                throw new FaultException("An error ocurred while processing this request.");
+#endif
             }
         }
     }
