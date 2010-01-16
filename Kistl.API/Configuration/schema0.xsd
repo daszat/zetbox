@@ -21,9 +21,6 @@
       <xs:element minOccurs="1" maxOccurs="1" name="CodeGenArchivePath" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" maxOccurs="1" name="StoreProvider" type="xs:string" />
       <xs:element minOccurs="0" maxOccurs="1" name="KistlDataContextType" type="xs:string" />
-      <xs:element minOccurs="0" maxOccurs="1" name="ServerObjectHandlerType" type="xs:string" />
-      <xs:element minOccurs="0" maxOccurs="1" name="ServerObjectSetHandlerType" type="xs:string" />
-      <xs:element minOccurs="0" maxOccurs="1" name="ServerCollectionHandlerType" type="xs:string" />
       <xs:element minOccurs="0" maxOccurs="1" name="IdentityProviderType" type="xs:string" />
     </xs:sequence>
     <xs:attribute name="StartServer" type="xs:boolean" use="required" />

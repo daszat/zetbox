@@ -10,6 +10,7 @@ namespace Kistl.Server.Service
     using Autofac;
     using Autofac.Builder;
     using Autofac.Configuration;
+    using Autofac.Integration.Wcf;
     using Kistl.API;
     using Kistl.API.Configuration;
     using Kistl.API.Server;
@@ -290,7 +291,9 @@ namespace Kistl.Server.Service
             // register deployment-specific components
             builder.RegisterModule(new ConfigurationSettingsReader("servercomponents"));
 
-            return builder.Build();
+            var container = builder.Build();
+            AutofacServiceHostFactory.Container = container;
+            return container;
         }
 
         private static void XmlFallbackInitialisation(string file, Func<MemoryContext> createCtx)

@@ -11,11 +11,9 @@
     <CodeGenArchivePath>Backup</CodeGenArchivePath>
     <StoreProvider></StoreProvider>
     <KistlDataContextType>Kistl.API.Server.Mocks.KistlContextMock, Kistl.API.Server.Tests</KistlDataContextType>
-    <ServerObjectHandlerType></ServerObjectHandlerType>
-    <ServerObjectSetHandlerType></ServerObjectSetHandlerType>
-    <ServerCollectionHandlerType></ServerCollectionHandlerType>
     <IdentityProviderType></IdentityProviderType>
   </Server>
+  <Client StartClient="false" ThrowErrors="false"/>
   <SourceFileLocation>
     <!-- default probe path -->
     <string>P:\Kistl\bin\CodeGen\bin\Debug</string>

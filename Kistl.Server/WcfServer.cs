@@ -7,6 +7,9 @@ namespace Kistl.Server
     using System.ServiceModel;
     using System.Text;
     using System.Threading;
+
+    using Autofac.Integration.Wcf;
+
     using Kistl.API;
     using Kistl.API.Configuration;
     using Kistl.API.Utils;
@@ -19,7 +22,7 @@ namespace Kistl.Server
         /// <summary>
         /// WCF Service Host
         /// </summary>
-        private ServiceHost host = null;
+        private readonly ServiceHostBase _host = null;
 
         /// <summary>
         /// WCF Service Thread
@@ -30,6 +33,13 @@ namespace Kistl.Server
         /// Only to signal the server start
         /// </summary>
         private AutoResetEvent serverStarted = new AutoResetEvent(false);
+
+        public WcfServer(AutofacServiceHostFactory factory)
+        {
+            _host = factory.CreateServiceHost(typeof(KistlService).AssemblyQualifiedName, new[] { new Uri("http://localhost:6666/KistlService") });
+            _host.UnknownMessageReceived += new EventHandler<UnknownMessageReceivedEventArgs>(host_UnknownMessageReceived);
+            _host.Faulted += new EventHandler(host_Faulted);
+        }
 
         /// <summary>
         /// Starts the WCF Server in the background. If the server hasn't 
@@ -76,7 +86,7 @@ namespace Kistl.Server
         {
             Log.Info("Stopping Server");
 
-            host.Close();
+            _host.Close();
 
             if (!serviceThread.Join(5000))
             {
@@ -98,17 +108,13 @@ namespace Kistl.Server
             {
                 using (Log.DebugTraceMethodCall("Starting WCF Server"))
                 {
-                    host = new ServiceHost(typeof(KistlService));
-                    host.UnknownMessageReceived += new EventHandler<UnknownMessageReceivedEventArgs>(host_UnknownMessageReceived);
-                    host.Faulted += new EventHandler(host_Faulted);
-
-                    host.Open();
+                    _host.Open();
                     serverStarted.Set();
                 }
 
                 Log.Info("WCF Server started");
 
-                while (host.State == CommunicationState.Opened)
+                while (_host.State == CommunicationState.Opened)
                 {
                     Thread.Sleep(100);
                 }
@@ -138,21 +144,19 @@ namespace Kistl.Server
         // http://msdn2.microsoft.com/en-us/library/ms244737.aspx
         public void Dispose()
         {
-            Log.Info("Disposing");
-            {
-                if (host != null)
-                {
-                    host.Close();
-                    ((IDisposable)host).Dispose();
-                    host = null;
-                }
+            Log.Info("Disposing WcfServer");
 
-                if (serverStarted != null)
-                {
-                    serverStarted.Close();
-                    ((IDisposable)serverStarted).Dispose();
-                    serverStarted = null;
-                }
+            if (_host != null && _host.State != CommunicationState.Closed)
+            {
+                _host.Close();
+                ((IDisposable)_host).Dispose();
+            }
+
+            if (serverStarted != null)
+            {
+                serverStarted.Close();
+                ((IDisposable)serverStarted).Dispose();
+                serverStarted = null;
             }
         }
 

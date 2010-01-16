@@ -58,108 +58,11 @@ namespace Kistl.API.Server
     }
 
     /// <summary>
-    /// Factory for Server Object Handlers
+    /// Basic server "business" logic. This handles mapping from the service to the actual provider.
     /// </summary>
-    public static class ServerObjectHandlerFactory
-    {
-        // use a single lock for all three types of ServerObjectHandler for simplicity
-        private readonly static object _lock = new object();
-
-        private static Type _ServerObjectHandlerType = null;
-        private static Type _ServerObjectSetHandlerType = null;
-        private static Type _ServerCollectionHandlerType = null;
-
-        /// <summary>
-        /// Returns a Object Handler for the given Type
-        /// </summary>
-        public static IServerObjectHandler GetServerObjectHandler(Type type)
-        {
-            if (type == null) throw new ArgumentNullException("type");
-
-            lock (_lock)
-            {
-                if (_ServerObjectHandlerType == null)
-                {
-                    _ServerObjectHandlerType = Type.GetType(ApplicationContext.Current.Configuration.Server.ServerObjectHandlerType);
-                    if (_ServerObjectHandlerType == null)
-                    {
-                        throw new Configuration.ConfigurationException(string.Format("Unable to load Type '{0}' for IServerObjectHandler. Check your Configuration '/Server/ServerObjectHandlerType'.", ApplicationContext.Current.Configuration.Server.ServerObjectHandlerType));
-                    }
-                }
-            }
-            Type result = _ServerObjectHandlerType.MakeGenericType(type);
-
-            IServerObjectHandler obj = Activator.CreateInstance(result) as IServerObjectHandler;
-            if (obj == null) throw new ArgumentOutOfRangeException("type", "Cannot create instance of Type " + type.FullName);
-
-            return obj;
-        }
-
-        public static IServerObjectSetHandler GetServerObjectSetHandler()
-        {
-            lock (_lock)
-            {
-                if (_ServerObjectSetHandlerType == null)
-                {
-                    _ServerObjectSetHandlerType = Type.GetType(ApplicationContext.Current.Configuration.Server.ServerObjectSetHandlerType);
-                    if (_ServerObjectSetHandlerType == null)
-                    {
-                        throw new Configuration.ConfigurationException(string.Format("Unable to load Type '{0}' for IServerObjectSetHandler. Check your Configuration '/Server/ServerObjectSetHandlerType'.", ApplicationContext.Current.Configuration.Server.ServerObjectSetHandlerType));
-                    }
-                }
-            }
-            object obj = Activator.CreateInstance(_ServerObjectSetHandlerType);
-            if (!(obj is IServerObjectSetHandler))
-            {
-                throw new Configuration.ConfigurationException(string.Format("Type '{0}' is not a IServerObjectSetHandler object. Check your Configuration '/Server/ServerObjectSetHandlerType'.", ApplicationContext.Current.Configuration.Server.ServerObjectSetHandlerType));
-            }
-            return (IServerObjectSetHandler)obj;
-        }
-
-        public static IServerCollectionHandler GetServerCollectionHandler(Type aType, Type bType, RelationEndRole endRole)
-        {
-            aType = aType.ToImplementationType();
-            bType = bType.ToImplementationType();
-
-            lock (_lock)
-            {
-                if (_ServerCollectionHandlerType == null)
-                {
-                    _ServerCollectionHandlerType = Type.GetType(ApplicationContext.Current.Configuration.Server.ServerCollectionHandlerType);
-                    if (_ServerCollectionHandlerType == null)
-                    {
-                        throw new Configuration.ConfigurationException(string.Format("Unable to load Type '{0}' for IServerCollectionHandler. Check your Configuration '/Server/ServerCollectionHandlerType'.", ApplicationContext.Current.Configuration.Server.ServerCollectionHandlerType));
-                    }
-                }
-            }
-
-            // dynamically translate generic types into provider-known types
-            Type[] genericArgs;
-            if (endRole == RelationEndRole.A)
-            {
-                genericArgs = new Type[] { aType, bType, aType, bType };
-            }
-            else
-            {
-                genericArgs = new Type[] { aType, bType, bType, aType };
-            }
-
-            Type result = _ServerCollectionHandlerType.MakeGenericType(genericArgs);
-            object obj = Activator.CreateInstance(result);
-            if (!(obj is IServerCollectionHandler))
-            {
-                throw new Configuration.ConfigurationException(string.Format("Type '{0}' is not a IKistlContext object. Check your Configuration '/Server/ServerCollectionHandlerType'.", ApplicationContext.Current.Configuration.Server.ServerCollectionHandlerType));
-            }
-            return (IServerCollectionHandler)obj;
-        }
-    }
-
-    /// <summary>
-    /// Basis Objekt für die generische Server BL. Implementiert Linq
-    /// Das ist nur für den generischen Teil gedacht, alle anderen Custom Actions
-    /// können mit Linq auf den Context direkt zugreifen, da die Actions am Objekt &amp; am Context
-    /// selbst implementiert sind
-    /// </summary>
+    /// <remarks>
+    /// More specific actions can be implemented by attaching actions to objects and contexts.
+    /// </remarks>
     public abstract class BaseServerObjectHandler<T>
         : IServerObjectHandler
         where T : class, IDataObject

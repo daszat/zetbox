@@ -149,15 +149,6 @@ namespace Kistl.API.Configuration
             public string KistlDataContextType { get; set; }
 
             [XmlElement(IsNullable = false)]
-            public string ServerObjectHandlerType { get; set; }
-
-            [XmlElement(IsNullable = false)]
-            public string ServerObjectSetHandlerType { get; set; }
-
-            [XmlElement(IsNullable = false)]
-            public string ServerCollectionHandlerType { get; set; }
-
-            [XmlElement(IsNullable = false)]
             public string IdentityProviderType { get; set; }
 
             public string GetLogFilePath(string name)

@@ -55,6 +55,13 @@ namespace Kistl.DalProvider.EF
                 .As<BaseDataObjectGenerator>()
                 .MemberOf<IEnumerable<BaseDataObjectGenerator>>()
                 .SingletonScoped();
+
+            moduleBuilder
+                .Register(c => new ServerObjectHandlerFactory(
+                    typeof(ServerCollectionHandler<,,,>),
+                    typeof(ServerObjectHandler<>),
+                    typeof(ServerObjectSetHandler)))
+                .As(typeof(IServerObjectHandlerFactory));
         }
     }
 }

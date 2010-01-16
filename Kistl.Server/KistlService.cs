@@ -9,8 +9,8 @@ namespace Kistl.Server
 
     using Kistl.API;
     using Kistl.API.Server;
-    using Kistl.App.Base;
     using Kistl.API.Utils;
+    using Kistl.App.Base;
 
     /// <summary>
     /// Implements the main WCF interface.
@@ -18,6 +18,13 @@ namespace Kistl.Server
     public class KistlService
         : IKistlService
     {
+        private readonly IServerObjectHandlerFactory _factory;
+
+        public KistlService(IServerObjectHandlerFactory factory)
+        {
+            _factory = factory;
+        }
+
         private static void DebugLogIdentity()
         {
             Logging.Facade.DebugFormat("Called IsAuthenticated = {0}, Identity = {1}", System.Threading.Thread.CurrentPrincipal.Identity.IsAuthenticated, System.Threading.Thread.CurrentPrincipal.Identity.Name);
@@ -43,7 +50,7 @@ namespace Kistl.Server
                     DebugLogIdentity();
                     using (IKistlContext ctx = KistlContext.GetContext())
                     {
-                        IDataObject obj = ServerObjectHandlerFactory.GetServerObjectHandler(type.GetInterfaceType().Type).GetObject(ctx, ID);
+                        IDataObject obj = _factory.GetServerObjectHandler(type.GetInterfaceType().Type).GetObject(ctx, ID);
                         if (obj == null)
                             throw new ArgumentOutOfRangeException("ID", string.Format("Object with ID {0} not found", ID));
 
@@ -101,7 +108,7 @@ namespace Kistl.Server
                     using (IKistlContext ctx = KistlContext.GetContext())
                     {
                         // Set Operation
-                        var changedObjects = ServerObjectHandlerFactory
+                        var changedObjects = _factory
                             .GetServerObjectSetHandler()
                             .SetObjects(ctx, objects, notificationRequests ?? new ObjectNotificationRequest[0])
                             .Cast<IStreamable>();
@@ -137,7 +144,8 @@ namespace Kistl.Server
 
                     using (IKistlContext ctx = KistlContext.GetContext())
                     {
-                        IEnumerable<IStreamable> lst = ServerObjectHandlerFactory.GetServerObjectHandler(type.GetInterfaceType().Type)
+                        IEnumerable<IStreamable> lst = _factory
+                            .GetServerObjectHandler(type.GetInterfaceType().Type)
                             .GetList(ctx, maxListCount,
                                 filter != null ? SerializableExpression.ToExpression(filter) : null,
                                 orderBy != null ? orderBy.Select(o => SerializableExpression.ToExpression(o)).ToList() : null);
@@ -230,7 +238,7 @@ namespace Kistl.Server
 
                     using (IKistlContext ctx = KistlContext.GetContext())
                     {
-                        IEnumerable<IStreamable> lst = ServerObjectHandlerFactory
+                        IEnumerable<IStreamable> lst = _factory
                             .GetServerObjectHandler(type.GetInterfaceType().Type)
                             .GetListOf(ctx, ID, property);
                         return SendObjects(lst);
@@ -270,7 +278,7 @@ namespace Kistl.Server
                         var ifType = typeof(IRelationCollectionEntry<,>);
                         var ceType = ifType.MakeGenericType(rel.A.Type.GetDataType(), rel.B.Type.GetDataType());
 
-                        var lst = ServerObjectHandlerFactory
+                        var lst = _factory
                             .GetServerCollectionHandler(rel.A.Type.GetDataType(), rel.B.Type.GetDataType(), endRole)
                             .GetCollectionEntries(ctx, relId, endRole, parentObjID);
 
