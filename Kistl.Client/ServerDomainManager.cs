@@ -58,14 +58,18 @@ namespace Kistl.Client
                     try
                     {
                         clientSponsor.Unregister(serverManager as MarshalByRefObject);
+                        clientSponsor.Close();
                         serverManager.Stop();
                         AssemblyLoader.Unload(serverDomain);
                     }
                     catch (Exception ex)
                     {
                         Logging.Log.Warn("Error during shutdown", ex);
+                        throw;
                     }
                 }
+                
+                clientSponsor = null;
                 serverManager = null;
 
                 if (serverDomain != null)
