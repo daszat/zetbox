@@ -59,7 +59,7 @@ namespace Kistl.IntegrationTests
                 {
                     using (Log.InfoTraceMethodCall("Shutting down"))
                     {
-                        manager.DisableUnloadAppDomainOnShutdown();
+                        //manager.DisableUnloadAppDomainOnShutdown();
                         manager.Stop();
                         manager = null;
                         Log.Info("Shutting down Kistl finished");

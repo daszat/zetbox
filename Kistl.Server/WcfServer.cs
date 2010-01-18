@@ -58,7 +58,7 @@ namespace Kistl.Server
 
                 if (!serverStarted.WaitOne(40 * 1000, false))
                 {
-                    throw new InvalidOperationException("Server did not started within 40 sec.");
+                    throw new InvalidOperationException("Server did not start within 40 sec.");
                 }
             }
         }
@@ -90,7 +90,7 @@ namespace Kistl.Server
 
             if (!serviceThread.Join(5000))
             {
-                Log.Info("Server did not stopped, aborting");
+                Log.Info("Server did not stop after 5s, aborting");
                 serviceThread.Abort();
             }
             serviceThread = null;
