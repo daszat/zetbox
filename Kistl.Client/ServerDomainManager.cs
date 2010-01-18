@@ -24,16 +24,6 @@ namespace Kistl.Client
         private AppDomain serverDomain = null;
         private ClientSponsor clientSponsor;
 
-        private bool unloadAppDomainOnShutDown = true;
-
-        /// <summary>
-        /// TODO: This is for unit testing and should be made internal.
-        /// </summary>
-        public void DisableUnloadAppDomainOnShutdown()
-        {
-            unloadAppDomainOnShutDown = false;
-        }
-
         public void Start(KistlConfig config)
         {
             using (Logging.Log.DebugTraceMethodCall("Starting AppDomain for Server"))
@@ -78,7 +68,7 @@ namespace Kistl.Client
                 }
                 serverManager = null;
 
-                if (serverDomain != null && unloadAppDomainOnShutDown)
+                if (serverDomain != null)
                 {
                     AppDomain.Unload(serverDomain);
                 }
