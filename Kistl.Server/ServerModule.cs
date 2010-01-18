@@ -9,6 +9,7 @@ using Autofac.Builder;
 using Autofac.Integration.Wcf;
 using Kistl.API;
 using Kistl.API.Server;
+using System.ServiceModel.Activation;
 
 namespace Kistl.Server
 {
@@ -62,6 +63,7 @@ namespace Kistl.Server
 
             moduleBuilder
                 .Register(c => new AutofacServiceHostFactory())
+                .As<ServiceHostFactoryBase>()
                 .SingletonScoped();
 
             moduleBuilder
