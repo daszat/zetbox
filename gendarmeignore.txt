@@ -119,6 +119,7 @@ M: System.Void Kistl.Client.WPF.View.KistlBase.ObjectClassDisplay::Edit_Click(Sy
 M: System.Void Kistl.Server.WcfServer::Init(Kistl.API.Configuration.KistlConfig)
 M: System.Void Kistl.Server.Service.Program::XmlFallbackInitialisation(System.String)
 M: Kistl.API.Configuration.KistlConfig Kistl.Server.Service.Program::InitApplicationContext(System.String[])
+M: System.Void Kistl.Server.Service.ServerManager::Start(Kistl.API.Configuration.KistlConfig)
 
 # see https://bugzilla.novell.com/show_bug.cgi?id=567995
 R: Gendarme.Rules.Exceptions.InstantiateArgumentExceptionCorrectlyRule

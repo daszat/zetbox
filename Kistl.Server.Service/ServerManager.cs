@@ -38,13 +38,13 @@ namespace Kistl.Server.Service
         public void Stop()
         {
             if (wcfServer != null) { throw new InvalidOperationException("not yet started"); }
-            wcfServer.Stop();
-            if (container != null) { container.Dispose(); }
+            Dispose();
         }
 
         public void Dispose()
         {
-            Stop();
+            if (wcfServer != null) { wcfServer.Stop(); }
+            if (container != null) { container.Dispose(); }
         }
     }
 }

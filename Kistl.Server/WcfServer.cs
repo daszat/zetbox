@@ -5,10 +5,9 @@ namespace Kistl.Server
     using System.Collections.Generic;
     using System.Linq;
     using System.ServiceModel;
+    using System.ServiceModel.Activation;
     using System.Text;
     using System.Threading;
-
-    using Autofac.Integration.Wcf;
 
     using Kistl.API;
     using Kistl.API.Configuration;
@@ -34,8 +33,10 @@ namespace Kistl.Server
         /// </summary>
         private AutoResetEvent serverStarted = new AutoResetEvent(false);
 
-        public WcfServer(AutofacServiceHostFactory factory)
+        public WcfServer(ServiceHostFactoryBase factory)
         {
+            if (factory == null) { throw new ArgumentNullException("factory"); }
+
             _host = factory.CreateServiceHost(typeof(KistlService).AssemblyQualifiedName, new[] { new Uri("http://localhost:6666/KistlService") });
             _host.UnknownMessageReceived += new EventHandler<UnknownMessageReceivedEventArgs>(host_UnknownMessageReceived);
             _host.Faulted += new EventHandler(host_Faulted);
