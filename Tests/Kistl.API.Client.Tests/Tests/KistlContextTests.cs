@@ -14,7 +14,6 @@ namespace Kistl.API.Client.Tests
     public class KistlContextTests
     {
         private IKistlContext ctx;
-        private CustomActionsManagerAPITest currentCustomActionsManager;
 
         [SetUp]
         public void SetUp()
@@ -22,9 +21,6 @@ namespace Kistl.API.Client.Tests
             Logging.Log.Info("KistlContextTests.SetUp() is called");
 
             var testCtx = new ClientApplicationContextMock();
-
-            currentCustomActionsManager = (CustomActionsManagerAPITest)testCtx.CustomActionsManager;
-            currentCustomActionsManager.Reset();
 
             ctx = KistlContext.GetContext();
             //CacheController<Kistl.API.IDataObject>.Current.Clear();

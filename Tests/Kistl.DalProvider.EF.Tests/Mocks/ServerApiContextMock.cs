@@ -15,7 +15,6 @@ namespace Kistl.DalProvider.EF.Mocks
         public ServerApiContextMock()
             : base(KistlConfig.FromFile("Kistl.DalProvider.EF.Tests.Config.xml"))
         {
-            SetCustomActionsManager(new CustomActionsManagerAPITest());
             InterfaceAssembly = Assembly.GetAssembly(typeof(Kistl.App.Base.Assembly)).FullName;
             ImplementationAssembly = Assembly.GetAssembly(typeof(Kistl.App.Base.Assembly__Implementation__)).FullName;
         }

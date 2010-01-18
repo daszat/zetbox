@@ -15,15 +15,11 @@ namespace Kistl.API.Server.Tests
     public class BaseServerDataObjectTests
     {
         private TestObjClass__Implementation__ obj;
-        private CustomActionsManagerAPITest currentCustomActionsManager;
 
         [SetUp]
         public void SetUp()
         {
             var testCtx = new ServerApiContextMock();
-
-            currentCustomActionsManager = (CustomActionsManagerAPITest)ApplicationContext.Current.CustomActionsManager;
-            currentCustomActionsManager.Reset();
 
             obj = new TestObjClass__Implementation__();
         }

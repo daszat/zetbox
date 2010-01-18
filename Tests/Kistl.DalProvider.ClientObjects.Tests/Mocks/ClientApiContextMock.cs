@@ -29,8 +29,6 @@ namespace Kistl.DalProvider.ClientObjects.Mocks
         public ClientApiContextMock()
             : base(KistlConfig.FromFile("Kistl.DalProvider.ClientObjects.Tests.Config.xml"))
         {
-            SetCustomActionsManager(new MyCustomActionsManagerClient());
-            CustomActionsManager.Init(FrozenContext.Single);
         }
 
         public override void LoadFrozenActions(IReadOnlyKistlContext ctx)

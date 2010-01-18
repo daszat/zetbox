@@ -39,19 +39,16 @@ namespace Kistl.Server
         {
             var cams = new CustomActionsManagerServer();
             cams.Init(FrozenContext.Single);
-            this.SetCustomActionsManager(cams);
         }
 
         public void LoadActionsManager(IReadOnlyKistlContext ctx)
         {
             var cams = new CustomActionsManagerServer();
             cams.Init(ctx);
-            this.SetCustomActionsManager(cams);
         }
 
         public void LoadNoopActionsManager()
         {
-            this.SetCustomActionsManager(new NoopActionsManager());
         }
 
         public override void LoadFrozenActions(IReadOnlyKistlContext ctx)

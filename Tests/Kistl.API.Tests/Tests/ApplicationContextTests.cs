@@ -29,12 +29,6 @@ namespace Kistl.API.Tests
             : base(HostType.None, KistlConfig.FromFile(configfilename))
         { }
 
-        // export protected function for tests
-        internal new void SetCustomActionsManager(ICustomActionsManager m)
-        {
-            base.SetCustomActionsManager(m);
-        }
-
         public override void LoadFrozenActions(IReadOnlyKistlContext ctx)
         {
             throw new NotImplementedException();
@@ -67,7 +61,6 @@ namespace Kistl.API.Tests
     [TestFixture]
     public partial class ApplicationContextTests
     {
-
         readonly static string ConfigFile = "Kistl.API.Tests.Config.xml";
 
         [Test]
@@ -78,42 +71,6 @@ namespace Kistl.API.Tests
 
             Assert.IsNotNull(ApplicationContext.Current);
             Assert.AreSame(config, ApplicationContext.Current.Configuration);
-        }
-
-        [Test]
-        public void SetCustomActionsManagerAcceptNull()
-        {
-            var testCtx = new CustomActionsTestApplicationContext(ConfigFile);
-            testCtx.SetCustomActionsManager(null);
-        }
-
-        [Test]
-        public void SetCustomActionsManagerDoNotCallsInit()
-        {
-            using (var m = new Mockery())
-            {
-                var mock = m.NewMock<ICustomActionsManager>();
-                Expect.Never.On(mock).Method("Init").WithNoArguments();
-                var testCtx = new CustomActionsTestApplicationContext(ConfigFile);
-                testCtx.SetCustomActionsManager(mock);
-                Assert.AreSame(mock, testCtx.CustomActionsManager);
-            }
-        }
-
-        [Test]
-        public void SetCustomActionsManagerAcceptTwice()
-        {
-            using (var m = new Mockery())
-            {
-                var firstMock = m.NewMock<ICustomActionsManager>();
-                Stub.On(firstMock).Method("Init").WithNoArguments();
-                var secondMock = m.NewMock<ICustomActionsManager>();
-                Expect.Never.On(secondMock).Method("Init");
-                var testCtx = new CustomActionsTestApplicationContext(ConfigFile);
-
-                testCtx.SetCustomActionsManager(firstMock);
-                testCtx.SetCustomActionsManager(secondMock);
-            }
         }
 
         [Test]
@@ -129,8 +86,6 @@ namespace Kistl.API.Tests
             Assert.AreEqual(typeof(double), testCtx.BaseDataObjectType);
             Assert.AreEqual(typeof(Predicate<int>), testCtx.BasePersistenceObjectType);
             Assert.AreEqual(typeof(string), testCtx.BaseStructObjectType);
-
         }
     }
-
 }

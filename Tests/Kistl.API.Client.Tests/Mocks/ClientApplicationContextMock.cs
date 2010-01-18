@@ -15,8 +15,6 @@ namespace Kistl.API.Client.Mocks
         public ClientApplicationContextMock()
             : base(KistlConfig.FromFile("Kistl.API.Client.Tests.Config.xml"))
         {
-            SetCustomActionsManager(new CustomActionsManagerAPITest());
-
             ImplementationAssembly = Assembly.GetAssembly(this.GetType()).FullName;
             SetInterfaceAssembly_This();
 
@@ -34,6 +32,11 @@ namespace Kistl.API.Client.Mocks
         }
 
         public override void LoadFrozenActions(IReadOnlyKistlContext ctx)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal void ResetActionManager()
         {
             throw new NotImplementedException();
         }

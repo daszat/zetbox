@@ -49,10 +49,13 @@ namespace Kistl.Client
         KistlConfig Configuration { get; }
     }
 
-    public class GuiApplicationContext 
+    public class GuiApplicationContext
         : ClientApiContext, IGuiApplicationContext
     {
         public static new GuiApplicationContext Current { get; private set; }
+
+        public ICustomActionsManager CustomActionsManager { get; private set; }
+
         private readonly Func<MemoryContext> MemoryContextFactory;
 
         /// <summary>
@@ -72,7 +75,7 @@ namespace Kistl.Client
 
             GuiApplicationContext.Current = this;
 
-            SetCustomActionsManager(new CustomActionsManagerClient());
+            CustomActionsManager = new CustomActionsManagerClient();
             CustomActionsManager.Init(FrozenContext.Single);
 
             Toolkit tk = (Toolkit)Enum.Parse(typeof(Toolkit), tkName, true);
@@ -162,5 +165,10 @@ namespace Kistl.Client
         /// A <see cref="IThreadManager"/> for asynchronous Tasks
         /// </summary>
         public IThreadManager AsyncThread { get; private set; }
+
+        public void SetCustomActionsManager(ICustomActionsManager manager)
+        {
+            this.CustomActionsManager = manager;
+        }
     }
 }

@@ -46,19 +46,6 @@ namespace Kistl.API
 
         public KistlConfig Configuration { get; private set; }
 
-        public ICustomActionsManager CustomActionsManager { get; private set; }
-
-        /// <summary>
-        /// Sets the initialised ICustomsActionManager, which shall be used 
-        /// for the database context.
-        /// </summary>
-        /// <param name="manager">the new manager to use</param>
-        protected void SetCustomActionsManager(ICustomActionsManager manager)
-        {
-            // Reinitializaton is needed for execution of multiple commands in the same process
-            this.CustomActionsManager = manager;
-        }
-
         /// <summary>
         /// Loads an appropriate frozen custom actions manager for this IKistlContext.
         /// </summary>

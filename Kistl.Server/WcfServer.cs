@@ -75,7 +75,7 @@ namespace Kistl.Server
             if (ServerApplicationContext.Current == null)
             {
                 appCtx = new ServerApplicationContext(config);
-                appCtx.LoadDefaultActionsManager();
+                appCtx.LoadActionsManager(FrozenContext.Single);
             }
             appCtx = ServerApplicationContext.Current;
         }

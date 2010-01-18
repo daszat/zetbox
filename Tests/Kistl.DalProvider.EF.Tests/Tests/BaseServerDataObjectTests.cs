@@ -19,16 +19,10 @@ namespace Kistl.DalProvider.EF.Tests
     public class BaseServerDataObjectTests 
         : IDataObjectTests<ObjectClass__Implementation__>
     {
-        private CustomActionsManagerAPITest currentCustomActionsManager;
-
         [SetUp]
         public override void SetUp()
         {
-            currentCustomActionsManager = (CustomActionsManagerAPITest)ApplicationContext.Current.CustomActionsManager;
-            currentCustomActionsManager.Reset();
-
             base.SetUp();
-
         }
 
         public void InitialiseObject(IKistlContext ctx, ObjectClass obj)

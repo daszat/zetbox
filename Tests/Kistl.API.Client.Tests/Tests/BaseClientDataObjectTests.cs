@@ -14,15 +14,12 @@ namespace Kistl.API.Client.Tests
     public class BaseClientDataObjectTests
     {
         private BaseClientDataObjectMock__Implementation__ obj;
-        private CustomActionsManagerAPITest currentCustomActionsManager;
         private bool PropertyChangedCalled = false;
 
         [SetUp]
         public void SetUp()
         {
             var testCtx = new ClientApplicationContextMock();
-            currentCustomActionsManager = (CustomActionsManagerAPITest)testCtx.CustomActionsManager;
-            currentCustomActionsManager.Reset();
 
             PropertyChangedCalled = false;
 
