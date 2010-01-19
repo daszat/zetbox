@@ -37,6 +37,10 @@ namespace Kistl.API.Tests
         [Test]
         public void DefaultLoading()
         {
+            if (!File.Exists("DefaultConfig.xml"))
+            {
+                File.Copy(ConfigFile, "DefaultConfig.xml");
+            }
             var config = KistlConfig.FromFile(String.Empty);
 
             Assert.That(config, Is.Not.Null, "Configuration");
