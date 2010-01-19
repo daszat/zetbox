@@ -58,60 +58,60 @@ namespace Kistl.API.Utils.Tests
         {
             object p = null;
             Utils.AssertException(typeof(ArgumentNullException),
-                    "Argument cannot be null.\nParameter name: prototype",
+                    "Value cannot be null.\r\nParameter name: prototype",
                     p, v => { new DefaultOption(null, null); });
             Utils.AssertException(typeof(ArgumentException),
-                    "Cannot be the empty string.\nParameter name: prototype",
+                    "Cannot be the empty string.\r\nParameter name: prototype",
                     p, v => { new DefaultOption("", null); });
             Utils.AssertException(typeof(ArgumentException),
-                    "Empty option names are not supported.\nParameter name: prototype",
+                    "Empty option names are not supported.\r\nParameter name: prototype",
                     p, v => { new DefaultOption("a|b||c=", null); });
             Utils.AssertException(typeof(ArgumentException),
-                    "Conflicting option types: '=' vs. ':'.\nParameter name: prototype",
+                    "Conflicting option types: '=' vs. ':'.\r\nParameter name: prototype",
                     p, v => { new DefaultOption("a=|b:", null); });
             Utils.AssertException(typeof(ArgumentException),
-                    "The default option handler '<>' cannot require values.\nParameter name: prototype",
+                    "The default option handler '<>' cannot require values.\r\nParameter name: prototype",
                     p, v => { new DefaultOption("<>=", null); });
             Utils.AssertException(typeof(ArgumentException),
-                    "The default option handler '<>' cannot require values.\nParameter name: prototype",
+                    "The default option handler '<>' cannot require values.\r\nParameter name: prototype",
                     p, v => { new DefaultOption("<>:", null); });
             Utils.AssertException(null, null,
                     p, v => { new DefaultOption("t|<>=", null, 1); });
             Utils.AssertException(typeof(ArgumentException),
-                    "The default option handler '<>' cannot require values.\nParameter name: prototype",
+                    "The default option handler '<>' cannot require values.\r\nParameter name: prototype",
                     p, v => { new DefaultOption("t|<>=", null, 2); });
             Utils.AssertException(null, null,
                     p, v => { new DefaultOption("a|b=", null, 2); });
             Utils.AssertException(typeof(ArgumentOutOfRangeException),
-                    "Argument is out of range.\nParameter name: maxValueCount",
+                    "Specified argument was out of the range of valid values.\r\nParameter name: maxValueCount",
                     p, v => { new DefaultOption("a", null, -1); });
             Utils.AssertException(typeof(ArgumentException),
                     "Cannot provide maxValueCount of 0 for OptionValueType.Required or " +
-                        "OptionValueType.Optional.\nParameter name: maxValueCount",
+                        "OptionValueType.Optional.\r\nParameter name: maxValueCount",
                     p, v => { new DefaultOption("a=", null, 0); });
             Utils.AssertException(typeof(ArgumentException),
-                    "Ill-formed name/value separator found in \"a={\".\nParameter name: prototype",
+                    "Ill-formed name/value separator found in \"a={\".\r\nParameter name: prototype",
                     p, v => { new DefaultOption("a={", null); });
             Utils.AssertException(typeof(ArgumentException),
-                    "Ill-formed name/value separator found in \"a=}\".\nParameter name: prototype",
+                    "Ill-formed name/value separator found in \"a=}\".\r\nParameter name: prototype",
                     p, v => { new DefaultOption("a=}", null); });
             Utils.AssertException(typeof(ArgumentException),
-                    "Ill-formed name/value separator found in \"a={{}}\".\nParameter name: prototype",
+                    "Ill-formed name/value separator found in \"a={{}}\".\r\nParameter name: prototype",
                     p, v => { new DefaultOption("a={{}}", null); });
             Utils.AssertException(typeof(ArgumentException),
-                    "Ill-formed name/value separator found in \"a={}}\".\nParameter name: prototype",
+                    "Ill-formed name/value separator found in \"a={}}\".\r\nParameter name: prototype",
                     p, v => { new DefaultOption("a={}}", null); });
             Utils.AssertException(typeof(ArgumentException),
-                    "Ill-formed name/value separator found in \"a={}{\".\nParameter name: prototype",
+                    "Ill-formed name/value separator found in \"a={}{\".\r\nParameter name: prototype",
                     p, v => { new DefaultOption("a={}{", null); });
             Utils.AssertException(typeof(ArgumentException),
-                    "Cannot provide key/value separators for Options taking 1 value(s).\nParameter name: prototype",
+                    "Cannot provide key/value separators for Options taking 1 value(s).\r\nParameter name: prototype",
                     p, v => { new DefaultOption("a==", null); });
             Utils.AssertException(typeof(ArgumentException),
-                    "Cannot provide key/value separators for Options taking 1 value(s).\nParameter name: prototype",
+                    "Cannot provide key/value separators for Options taking 1 value(s).\r\nParameter name: prototype",
                     p, v => { new DefaultOption("a={}", null); });
             Utils.AssertException(typeof(ArgumentException),
-                    "Cannot provide key/value separators for Options taking 1 value(s).\nParameter name: prototype",
+                    "Cannot provide key/value separators for Options taking 1 value(s).\r\nParameter name: prototype",
                     p, v => { new DefaultOption("a=+-*/", null); });
             Utils.AssertException(null, null,
                     p, v => { new DefaultOption("a", null, 0); });

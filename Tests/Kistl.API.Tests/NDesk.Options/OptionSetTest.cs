@@ -240,7 +240,7 @@ namespace Kistl.API.Utils.Tests
                     p, v => { v.Parse(_("-a", "-b")); });
             Assert.AreEqual(a, "-b");
             Utils.AssertException(typeof(ArgumentNullException),
-                    "Argument cannot be null.\nParameter name: option",
+                    "Value cannot be null.\r\nParameter name: option",
                     p, v => { v.Add(null); });
 
             // bad type
@@ -257,10 +257,10 @@ namespace Kistl.API.Utils.Tests
                     p, v => { v.Parse(_("-cz", "extra")); });
 
             Utils.AssertException(typeof(ArgumentNullException),
-                    "Argument cannot be null.\nParameter name: action",
+                    "Value cannot be null.\r\nParameter name: action",
                     p, v => { v.Add("foo", (Action<string>)null); });
             Utils.AssertException(typeof(ArgumentException),
-                    "Cannot provide maxValueCount of 2 for OptionValueType.None.\nParameter name: maxValueCount",
+                    "Cannot provide maxValueCount of 2 for OptionValueType.None.\r\nParameter name: maxValueCount",
                     p, v => { v.Add("foo", (k, val) => {/* ignore */}); });
         }
 
@@ -542,12 +542,12 @@ namespace Kistl.API.Utils.Tests
 
             Assert.AreEqual(p["h"], p[0]);
             Assert.AreEqual(p["help"], p[0]);
-            Assert.AreEqual(p["invalid"], null);
+            Assert.Throws(Is.AssignableTo(typeof(KeyNotFoundException)), () => { var tmp = p["invalid"]; });
 
             Utils.AssertException(typeof(ArgumentException), "prototypes must be null!",
                     p, v => { v.Add("N|NUM=", (int n) => { }); });
             Utils.AssertException(typeof(ArgumentNullException),
-                    "Argument cannot be null.\nParameter name: option",
+                    "Value cannot be null.\r\nParameter name: key",
                     p, v => { var tmp = v[null]; });
         }
 

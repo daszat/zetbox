@@ -47,7 +47,7 @@ namespace Kistl.API.Utils.Tests
                     c, v => { string ignore = v.OptionValues[0]; });
             c.Option = p[0];
             Utils.AssertException(typeof(ArgumentOutOfRangeException),
-                    "Argument is out of range.\nParameter name: index",
+                    "Specified argument was out of the range of valid values.\r\nParameter name: index",
                     c, v => { string ignore = v.OptionValues[2]; });
             c.OptionName = "-a";
             Utils.AssertException(typeof(OptionException),
