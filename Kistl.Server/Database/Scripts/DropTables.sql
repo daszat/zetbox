@@ -27,11 +27,11 @@ deallocate fk_cursor
 
 print 'Dropping Tables'
 
-declare fk_tbl cursor for 
+declare tbl_cursor cursor for 
 SELECT t.name FROM sys.sysobjects t WHERE t.type IN (N'U') order by t.name
-open fk_tbl
+open tbl_cursor
 
-fetch next from fk_tbl
+fetch next from tbl_cursor
 into @tbl
 
 while @@FETCH_STATUS = 0
@@ -40,9 +40,53 @@ begin
 	print @sql
 	exec sp_executesql @sql
 	
-	fetch next from fk_tbl
+	fetch next from tbl_cursor
 	into @tbl
 end
 
-close fk_tbl
-deallocate fk_tbl
+close tbl_cursor
+deallocate tbl_cursor
+
+print 'Dropping Views'
+
+declare view_cursor cursor for 
+SELECT t.name FROM sys.sysobjects t WHERE t.type IN (N'V') order by t.name
+open view_cursor
+
+fetch next from view_cursor
+into @tbl
+
+while @@FETCH_STATUS = 0
+begin
+	select @sql = N'drop view ' + @tbl
+	print @sql
+	exec sp_executesql @sql
+	
+	fetch next from view_cursor
+	into @tbl
+end
+
+close view_cursor
+deallocate view_cursor
+
+print 'Dropping Stored Procedures'
+
+declare s_cursor cursor for 
+SELECT t.name FROM sys.sysobjects t WHERE t.type IN (N'P') order by t.name
+open s_cursor
+
+fetch next from s_cursor
+into @tbl
+
+while @@FETCH_STATUS = 0
+begin
+	select @sql = N'drop procedure ' + @tbl
+	print @sql
+	exec sp_executesql @sql
+	
+	fetch next from s_cursor
+	into @tbl
+end
+
+close s_cursor
+deallocate s_cursor
