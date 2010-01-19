@@ -101,11 +101,6 @@ namespace Kistl.API.Server.Mocks
             throw new NotImplementedException();
         }
 
-        protected override void RefreshRights(IDataObject obj)
-        {
-            throw new NotImplementedException();
-        }
-
         public override IDataObject Find(InterfaceType ifType, int ID)
         {
             throw new NotImplementedException();

@@ -411,50 +411,11 @@ namespace Kistl.DalProvider.EF
                 string.Join(", ", columns.Select(c => "[" + c + "]").ToArray()));
         }
 
-        public void CreateWithRightsView(string viewName, string tblName, string tblNameRights)
-        {
-            ExecuteNonQuery(@"CREATE VIEW [{0}] AS
-	                SELECT tbl.*, r.[Identity] Rights__CurrentIdentity, r.[Right] Rights__CurrentAccessRights
-	                FROM [{1}] tbl
-	                INNER JOIN {2} r ON tbl.ID = r.ID",
-                viewName,
-                tblName,
-                tblNameRights);
-        }
-
-        public void CreateWithRightsViewTrigger(string triggerName, string viewName, string tblName, string tblNameRights)
-        {
-            ExecuteNonQuery(@"CREATE TRIGGER [{0}]
-                    ON [{1}]
-                    INSTEAD OF DELETE AS
-                    BEGIN
-	                    DELETE FROM {2}
-	                    WHERE ID IN (SELECT ID FROM deleted)
-                    END",
-                triggerName,
-                viewName,
-                tblName);
-        }
-
-        public void CreateInsertRightsTrigger(string triggerName, string tblName, string tblNameRights)
-        {
-            ExecuteNonQuery(@"CREATE TRIGGER [{0}]
-                    ON [{1}]
-                    AFTER INSERT AS
-                    BEGIN
-	                    INSERT INTO [{2}] ([ID], [Identity], [Right])
-	                    SELECT [ID], 0, 0 FROM inserted
-                    END",
-                triggerName,
-                tblName,
-                tblNameRights);
-        }
-
         public void CreateUpdateRightsTrigger(string triggerName, string viewUnmaterializedName, string tblName, string tblNameRights)
         {
             ExecuteNonQuery(@"CREATE TRIGGER [{0}]
                     ON [{1}]
-                    AFTER UPDATE AS
+                    AFTER UPDATE, INSERT AS
                     BEGIN
 	                    DELETE FROM [{2}] WHERE [ID] IN (SELECT [ID] FROM inserted)
 	                    INSERT INTO [{2}] ([ID], [Identity], [Right]) SELECT [ID], [Identity], [Right] FROM [{3}] WHERE [ID] IN (SELECT [ID] FROM inserted)

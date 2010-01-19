@@ -202,6 +202,22 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Generator\Implementation\ObjectClasses\SecurityRulesClass.cs" >
+      <DependentUpon>SecurityRulesClass.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Generator\Implementation\ObjectClasses\SecurityRulesClass.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SecurityRulesClass.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Generator\Implementation\ObjectClasses\SecurityRulesProperties.cs">
+      <DependentUpon>SecurityRulesProperties.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Generator\Implementation\ObjectClasses\SecurityRulesProperties.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SecurityRulesProperties.cst</DependentUpon>
+    </Compile>
     <Compile Include="Generator\Implementation\ObjectClasses\StructPropertyTemplate.cs">
       <DependentUpon>StructPropertyTemplate.cst</DependentUpon>
     </Compile>
@@ -318,6 +334,14 @@
     <None Include="Generator\Implementation\ObjectClasses\ReloadReferences.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>ReloadReferences.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Generator\Implementation\ObjectClasses\SecurityRulesClass.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>SecurityRulesClass.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Generator\Implementation\ObjectClasses\SecurityRulesProperties.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>SecurityRulesProperties.Designer.cs</LastGenOutput>
     </None>
     <None Include="Generator\Implementation\ObjectClasses\StructPropertyTemplate.cst">
       <Generator>Arebis Template Processor</Generator>

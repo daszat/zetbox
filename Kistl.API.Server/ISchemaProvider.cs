@@ -53,9 +53,6 @@ namespace Kistl.API.Server
 
         void CreateIndex(string tblName, string idxName, bool unique, bool clustered, params string[] columns);
 
-        void CreateWithRightsView(string viewName, string tblName, string tblNameRights);
-        void CreateWithRightsViewTrigger(string triggerName, string viewName, string tblName, string tblNameRights);
-        void CreateInsertRightsTrigger(string triggerName, string tblName, string tblNameRights);
         void CreateUpdateRightsTrigger(string triggerName, string viewUnmaterializedName, string tblName, string tblNameRights);
         /// <summary>
         /// TODO: Add more complex logic here

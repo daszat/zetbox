@@ -286,9 +286,6 @@ namespace Kistl.DalProvider.EF
             try
             {
                 result = _ctx.SaveChanges();
-
-                // Refresh Rights
-                RefreshRights(addedList);
             }
             catch (UpdateException updex)
             {
@@ -322,28 +319,6 @@ namespace Kistl.DalProvider.EF
             {
                 Logging.Log.Error("Error during SubmitChanges", updex);
                 throw updex.InnerException;
-            }
-        }
-
-        protected override void RefreshRights(IDataObject obj)
-        {
-            var objClass = obj.GetObjectClass(FrozenContext.Single);
-
-            using (var cmd = _ctx.Connection.CreateCommand())
-            {
-                cmd.CommandText = "RefreshRightsOn_" + objClass.TableName;
-                cmd.CommandType = CommandType.StoredProcedure;
-                var p = cmd.CreateParameter();
-                p.ParameterName = "ID";
-                p.Value = obj.ID; ;
-                p.Direction = ParameterDirection.Input;
-                p.DbType = DbType.Int32;
-                cmd.Parameters.Add(p);
-
-                cmd.ExecuteNonQuery();
-
-                // This also does not work -> multiple results...
-                // _ctx.Refresh(RefreshMode.StoreWins, obj);
             }
         }
 

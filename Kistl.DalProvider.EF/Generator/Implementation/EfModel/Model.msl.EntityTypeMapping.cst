@@ -19,13 +19,6 @@
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <%
 		ApplyPropertyMappings();
-		if(cls.HasSecurityRules(false))
-		{
-%>
-          <ScalarProperty Name="CurrentIdentity<%= Kistl.API.Helper.ImplementationSuffix %>" ColumnName="Rights__CurrentIdentity" />
-          <ScalarProperty Name="CurrentAccessRights<%= Kistl.API.Helper.ImplementationSuffix %>" ColumnName="Rights__CurrentAccessRights" />
-<%	
-		}
 %>
 	    </MappingFragment>
       </EntityTypeMapping>

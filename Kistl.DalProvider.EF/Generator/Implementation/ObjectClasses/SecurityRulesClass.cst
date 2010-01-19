@@ -1,0 +1,69 @@
+﻿<%@ CodeTemplate Language="C#" 
+	Name="Implementation.ObjectClasses.SecurityRulesClass"
+	ClassName="Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.SecurityRulesClass" 
+	Inherits="Kistl.Server.Generators.KistlCodeTemplate" %>
+<%@ Import Namespace="System" %>
+<%@ Import Namespace="System.Linq" %>
+<%@ Import Namespace="Kistl.API" %>
+<%@ Import Namespace="Kistl.API.Server" %>
+<%@ Import Namespace="Kistl.App.Base" %>
+<%@ Import Namespace="Kistl.App.Extensions" %>
+<%@ Import Namespace="Kistl.Server.Generators" %>
+<%@ Import Namespace="Kistl.Server.Generators.Extensions" %>
+<%@ Parameter Name="ctx" Type="IKistlContext" %>
+<%@ Parameter Name="cls" Type="ObjectClass" %>
+<%@ Parameter Name="assocName" Type="string" %>
+<%@ Parameter Name="targetRoleName" Type="string" %>
+<%@ Parameter Name="referencedImplementation" Type="string" %>
+
+    [System.Data.Objects.DataClasses.EdmEntityTypeAttribute(NamespaceName="Model", Name="<%= targetRoleName %>")]
+    public class <%= referencedImplementation %> : System.Data.Objects.DataClasses.EntityObject
+    {
+        [System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        public int ID
+        {
+            get
+            {
+                return this._ID;
+            }
+            set
+            {
+                this.ReportPropertyChanging("ID");
+                this._ID = value;
+                this.ReportPropertyChanged("ID");
+            }
+        }
+        private int _ID;
+
+        [System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        public int Identity
+        {
+            get
+            {
+                return this._Identity;
+            }
+            set
+            {
+                this.ReportPropertyChanging("Identity");
+                this._Identity = value;
+                this.ReportPropertyChanged("Identity");
+            }
+        }
+        private int _Identity;
+
+        [System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
+        public int Right
+        {
+            get
+            {
+                return this._Right;
+            }
+            set
+            {
+                this.ReportPropertyChanging("Right");
+                this._Right = value;
+                this.ReportPropertyChanged("Right");
+            }
+        }
+        private int _Right;
+    }

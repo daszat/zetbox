@@ -109,6 +109,27 @@ this.WriteObjects("\r\n");
 #line 90 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\AssociationSetAttributes.cst"
 }
 
+#line 92 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\AssociationSetAttributes.cst"
+this.WriteObjects("\r\n");
+#line 94 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\AssociationSetAttributes.cst"
+foreach (var cls in ctx.GetQuery<ObjectClass>().Where(c => c.BaseObjectClass == null)
+		.OrderBy(c => c.ClassName))
+	{
+		if(cls.HasSecurityRules(false))
+		{
+
+#line 100 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\AssociationSetAttributes.cst"
+this.WriteObjects("[assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute(\"Model\", \"",  Construct.SecurityRulesFKName(cls) , "\", \r\n");
+this.WriteObjects("	\"",  cls.ClassName , "\", \r\n");
+this.WriteObjects("	global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, \r\n");
+this.WriteObjects("	typeof(",  cls.Module.Namespace + "." + cls.ClassName + Kistl.API.Helper.ImplementationSuffix , "), \r\n");
+this.WriteObjects("	\"",  Construct.SecurityRulesClassName(cls) , "\", \r\n");
+this.WriteObjects("	global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, \r\n");
+this.WriteObjects("	typeof(",  cls.Module.Namespace + "." + Construct.SecurityRulesClassName(cls) + Kistl.API.Helper.ImplementationSuffix , "))]\r\n");
+#line 108 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\AssociationSetAttributes.cst"
+}
+	}
+
 
         }
 

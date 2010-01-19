@@ -27,6 +27,11 @@
     <EntitySet Name="PresenceRecord" EntityType="Model.PresenceRecord" />
     <EntitySet Name="PresentableModelDescriptor" EntityType="Model.PresentableModelDescriptor" />
     <EntitySet Name="Projekt" EntityType="Model.Projekt" />
+    <EntitySet Name="Projekt_Rights" EntityType="Model.Projekt_Rights" />
+    <AssociationSet Name="FK_Projekte_Rights" Association="Model.FK_Projekte_Rights">
+      <End Role="Projekt" EntitySet="Projekt" />
+      <End Role="Projekt_Rights" EntitySet="Projekt_Rights" />
+    </AssociationSet>
     <EntitySet Name="Property" EntityType="Model.Property" />
     <EntitySet Name="PropertyInvocation" EntityType="Model.PropertyInvocation" />
     <EntitySet Name="Relation" EntityType="Model.Relation" />
@@ -1033,7 +1038,29 @@
                         Relationship="Model.FK_Projekt_has_Tasks"
                         FromRole="Projekt"
                         ToRole="Tasks" />
+    <NavigationProperty Name="SecurityRightsCollection__Implementation__" Relationship="Model.FK_Projekte_Rights" FromRole="Projekt" ToRole="Projekt_Rights" />
   </EntityType>
+  <EntityType Name="Projekt_Rights">
+    <Key>
+	  <PropertyRef Name="ID" />
+	  <PropertyRef Name="Identity" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Identity" Type="Int32" Nullable="false" />
+    <Property Name="Right" Type="Int32" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Projekte_Rights">
+    <End Role="Projekt" Type="Model.Projekt" Multiplicity="1" />
+    <End Role="Projekt_Rights" Type="Model.Projekt_Rights" Multiplicity="*" />
+    <ReferentialConstraint>
+	  <Principal Role="Projekt">
+	    <PropertyRef Name="ID" />
+	  </Principal>
+	  <Dependent Role="Projekt_Rights">
+	    <PropertyRef Name="ID" />
+	  </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityType Name="Property">
     <Key>
       <PropertyRef Name="ID" />

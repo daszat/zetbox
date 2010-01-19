@@ -118,21 +118,18 @@ namespace Kistl.App.Extensions
 
         public static bool HasSecurityRules(this ObjectClass cls)
         {
-            // TODO: Enable this when security is implemented correctly
-            return false;
-            //return HasSecurityRules(cls, true);
+            return HasSecurityRules(cls, true);
         }
 
         public static bool HasSecurityRules(this ObjectClass cls, bool lookupInBase)
         {
-            // TODO: Enable this when security is implemented correctly
-            //while (cls != null)
-            //{
-            //    if (cls.SecurityRules.Count > 0)
-            //        return true;
-            //    if (!lookupInBase) return false;
-            //    cls = cls.BaseObjectClass;
-            //}
+            while (cls != null)
+            {
+                if (cls.SecurityRules.Count > 0)
+                    return true;
+                if (!lookupInBase) return false;
+                cls = cls.BaseObjectClass;
+            }
             return false;
         }
 

@@ -887,16 +887,10 @@ namespace Kistl.Server.SchemaManagement
             db.CreateFKConstraint(tblRightsName, objClass.TableName, "ID", Construct.SecurityRulesFKName(objClass), true);
 
             var tblName = objClass.TableName;
-            var withRightsViewName = Construct.SecurityRulesWithRightsViewName(objClass);
-            var withRightsViewTriggerName = Construct.SecurityRulesWithRightsViewTriggerName(objClass);
-            var insertRightsTriggerName = Construct.SecurityRulesInsertRightsTriggerName(objClass);
             var updateRightsTriggerName = Construct.SecurityRulesUpdateRightsTriggerName(objClass);
             var rightsViewUnmaterializedName = Construct.SecurityRulesRightsViewUnmaterializedName(objClass);
             var refreshRightsOnProcedureName = Construct.SecurityRulesRefreshRightsOnProcedureName(objClass);
 
-            db.CreateWithRightsView(withRightsViewName, tblName, tblRightsName);
-            db.CreateWithRightsViewTrigger(withRightsViewTriggerName, withRightsViewName, tblName, tblRightsName);
-            db.CreateInsertRightsTrigger(insertRightsTriggerName, tblName, tblRightsName);
             db.CreateUpdateRightsTrigger(updateRightsTriggerName, rightsViewUnmaterializedName, tblName, tblRightsName);
             db.CreateRightsViewUnmaterialized(rightsViewUnmaterializedName, tblName, tblRightsName);
             db.CreateRefreshRightsOnProcedure(refreshRightsOnProcedureName, rightsViewUnmaterializedName, tblName, tblRightsName);
@@ -913,13 +907,13 @@ namespace Kistl.Server.SchemaManagement
         public void DoDeleteObjectClassSecurityRules(ObjectClass objClass)
         {
             var tblRightsName = Construct.SecurityRulesTableName(objClass);
-            var withRightsViewName = Construct.SecurityRulesWithRightsViewName(objClass);
+            var rightsViewUnmaterializedName = Construct.SecurityRulesRightsViewUnmaterializedName(objClass);
             var refreshRightsOnProcedureName = Construct.SecurityRulesRefreshRightsOnProcedureName(objClass);
 
             Log.InfoFormat("Delete ObjectClass Security Rules: {0}", objClass.ClassName);
 
             db.DropProcedure(refreshRightsOnProcedureName);
-            db.DropView(withRightsViewName);
+            db.DropView(rightsViewUnmaterializedName);
             db.DropTable(tblRightsName);
         }
         #endregion

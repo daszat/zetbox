@@ -137,23 +137,12 @@ namespace Kistl.Server.Generators
             return objClass.TableName + "_Rights";
         }
 
-        public static string SecurityRulesWithRightsViewName(ObjectClass objClass)
+        public static string SecurityRulesClassName(ObjectClass objClass)
         {
             if (objClass == null) { throw new ArgumentNullException("objClass"); }
-            return objClass.TableName + "_with_Rights";
+            return objClass.ClassName + "_Rights";
         }
 
-        public static string SecurityRulesWithRightsViewTriggerName(ObjectClass objClass)
-        {
-            if (objClass == null) { throw new ArgumentNullException("objClass"); }
-            return objClass.TableName + "_with_Rights_Trigger";
-        }
-
-        public static string SecurityRulesInsertRightsTriggerName(ObjectClass objClass)
-        {
-            if (objClass == null) { throw new ArgumentNullException("objClass"); }
-            return objClass.TableName + "_Insert_Rights_Trigger";
-        }
         public static string SecurityRulesUpdateRightsTriggerName(ObjectClass objClass)
         {
             if (objClass == null) { throw new ArgumentNullException("objClass"); }

@@ -162,28 +162,6 @@ namespace Kistl.API.Server
         /// <returns>Number of affected Objects</returns>
         public abstract int SubmitRestore();
 
-        /// <summary>
-        /// Refresh Rights for a given IDataObject.
-        /// </summary>
-        /// <param name="obj"></param>
-        protected abstract void RefreshRights(IDataObject obj);
-
-        /// <summary>
-        /// Refresh Rights for a given set of IDataObjects.
-        /// </summary>
-        /// <param name="objList"></param>
-        protected virtual void RefreshRights(IEnumerable<IDataObject> objList)
-        {
-            foreach (IDataObject obj in objList)
-            {
-            var objClass = obj.GetObjectClass(FrozenContext.Single);
-            if (objClass.HasSecurityRules())
-            {
-                RefreshRights(obj);
-            }
-            }
-        }
-
         protected virtual void NotifyChanging(IEnumerable<IDataObject> changedOrAdded)
         {
             foreach (IDataObject obj in changedOrAdded)

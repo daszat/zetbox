@@ -41,6 +41,7 @@ namespace Kistl.Server.Service
             Log.Info("                  -checkschema [meta | <schema.xml>]");
             Log.Info("                  -repairschema");
             Log.Info("                  -updateschema [<schema.xml>]");
+            Log.Info("                  -syncidentities");
         }
 
         private class CmdLineArg
@@ -166,6 +167,9 @@ namespace Kistl.Server.Service
                             v => {
                                 waitForKey = (v != null);
                             }},
+                        { "syncidentities", "synchronices local and domain users with Kistl Identities",
+                            v => { if (v != null) { actions.Add((c, args) => c.Resolve<Server>().SyncIdentities()); } }
+                            },
                     };
 
                 List<string> extraArguments;

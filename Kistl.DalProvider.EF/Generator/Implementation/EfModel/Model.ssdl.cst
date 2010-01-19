@@ -26,8 +26,18 @@
 	foreach(var cls in ctx.GetBaseClasses().OrderBy(c => c.ClassName))
 	{
 %>
-    <EntitySet Name="<%= cls.ClassName %>" EntityType="Model.Store.<%= cls.ClassName %>" Table="<%= cls.TableName + (cls.HasSecurityRules(false) ? "_with_Rights" : string.Empty) %>"/>
+    <EntitySet Name="<%= cls.ClassName %>" EntityType="Model.Store.<%= cls.ClassName %>" Table="<%= cls.TableName %>"/>
 <%	
+		if(cls.HasSecurityRules(false))
+		{
+%>
+    <EntitySet Name="<%= Construct.SecurityRulesClassName(cls) %>" EntityType="Model.Store.<%= Construct.SecurityRulesClassName(cls) %>" Table="<%= Construct.SecurityRulesTableName(cls) %>"/>
+    <AssociationSet Name="<%= Construct.SecurityRulesFKName(cls) %>" Association="Model.Store.<%= Construct.SecurityRulesFKName(cls) %>">
+      <End Role="<%= cls.ClassName %>" EntitySet="<%= cls.ClassName %>" />
+      <End Role="<%= Construct.SecurityRulesClassName(cls) %>" EntitySet="<%= Construct.SecurityRulesClassName(cls) %>" />
+    </AssociationSet>
+<%	
+		}
 	}
 %>
 
@@ -37,7 +47,7 @@
 	{
 		var info = new InheritanceStorageAssociationInfo(cls);
 %>
-    <EntitySet Name="<%= cls.ClassName %>" EntityType="Model.Store.<%= cls.ClassName %>" Table="<%= cls.TableName + (cls.HasSecurityRules(false) ? "_with_Rights" : string.Empty) %>"/>
+    <EntitySet Name="<%= cls.ClassName %>" EntityType="Model.Store.<%= cls.ClassName %>" Table="<%= cls.TableName %>"/>
     <!-- inherits from <%= info.ParentEntitySetName %> -->
     <AssociationSet Name="<%= info.AssociationName %>" Association="Model.Store.<%= info.AssociationName %>" >
       <End Role="<%= info.ParentRoleName %>" EntitySet="<%= info.ParentEntitySetName %>" />
@@ -128,16 +138,36 @@
     <Property Name="ID" Type="int" Nullable="false" <%= (cls.BaseObjectClass == null) ? "StoreGeneratedPattern=\"Identity\" " : String.Empty %>/>
 <%
 		ApplyEntityTypeColumnDefs(cls);
-		if(cls.HasSecurityRules(false))
-		{
-%>
-    <Property Name="Rights__CurrentIdentity" Type="int" Nullable="false" StoreGeneratedPattern="Computed" />
-    <Property Name="Rights__CurrentAccessRights" Type="int" Nullable="false" StoreGeneratedPattern="Computed" />
-<%	
-		}
 %>
   </EntityType>
 <%	
+		if(cls.HasSecurityRules(false))
+		{
+%>
+    <EntityType Name="<%= Construct.SecurityRulesClassName(cls) %>">
+      <Key>
+        <PropertyRef Name="ID" />
+        <PropertyRef Name="Identity" />
+      </Key>
+      <Property Name="ID" Type="int" Nullable="false" />
+      <Property Name="Identity" Type="int" Nullable="false" />
+      <Property Name="Right" Type="int" Nullable="false" />
+    </EntityType>
+    <Association Name="<%= Construct.SecurityRulesFKName(cls) %>">
+      <End Role="<%= cls.ClassName %>" Type="Model.Store.<%= cls.ClassName %>" Multiplicity="1" />
+      <End Role="<%= Construct.SecurityRulesClassName(cls) %>" Type="Model.Store.<%= Construct.SecurityRulesClassName(cls) %>" Multiplicity="*" />
+      <ReferentialConstraint>
+        <Principal Role="<%= cls.ClassName %>">
+          <PropertyRef Name="ID" />
+        </Principal>
+        <Dependent Role="<%= Construct.SecurityRulesClassName(cls) %>">
+          <PropertyRef Name="ID" />
+        </Dependent>
+      </ReferentialConstraint>
+    </Association>
+<%	
+		}
+
 	}
 %>
 

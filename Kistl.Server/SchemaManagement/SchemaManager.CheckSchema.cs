@@ -384,9 +384,6 @@ namespace Kistl.Server.SchemaManagement
             {
                 var tblName = objClass.TableName;
                 var tblRightsName = Construct.SecurityRulesTableName(objClass);
-                var withRightsViewName = Construct.SecurityRulesWithRightsViewName(objClass);
-                var withRightsViewTriggerName = Construct.SecurityRulesWithRightsViewTriggerName(objClass);
-                var insertRightsTriggerName = Construct.SecurityRulesInsertRightsTriggerName(objClass);
                 var updateRightsTriggerName = Construct.SecurityRulesUpdateRightsTriggerName(objClass);
                 var rightsViewUnmaterializedName = Construct.SecurityRulesRightsViewUnmaterializedName(objClass);
                 var refreshRightsOnProcedureName = Construct.SecurityRulesRefreshRightsOnProcedureName(objClass);
@@ -401,30 +398,6 @@ namespace Kistl.Server.SchemaManagement
                 }
                 else
                 {
-                    if (!db.CheckViewExists(withRightsViewName))
-                    {
-                        Log.WarnFormat("Security Rules View '{0}' is missing", withRightsViewName);
-                        if (repair)
-                        {
-                            db.CreateWithRightsView(withRightsViewName, tblName, tblRightsName);
-                        }
-                    }
-                    if (!db.CheckTriggerExists(withRightsViewName, withRightsViewTriggerName))
-                    {
-                        Log.WarnFormat("Security Rules View Trigger '{0}' is missing", withRightsViewTriggerName);
-                        if (repair)
-                        {
-                            db.CreateWithRightsViewTrigger(withRightsViewTriggerName, withRightsViewName, tblName, tblRightsName);
-                        }
-                    }
-                    if (!db.CheckTriggerExists(tblName, insertRightsTriggerName))
-                    {
-                        Log.WarnFormat("Security Rules Trigger '{0}' is missing", insertRightsTriggerName);
-                        if (repair)
-                        {
-                            db.CreateInsertRightsTrigger(insertRightsTriggerName, tblName, tblRightsName);
-                        }
-                    }
                     if (!db.CheckTriggerExists(tblName, updateRightsTriggerName))
                     {
                         Log.WarnFormat("Security Rules Trigger '{0}' is missing", updateRightsTriggerName);
@@ -449,7 +422,6 @@ namespace Kistl.Server.SchemaManagement
                             db.CreateRefreshRightsOnProcedure(refreshRightsOnProcedureName, rightsViewUnmaterializedName, tblName, tblRightsName);
                         }
                     }
-
                 }
             }
         }

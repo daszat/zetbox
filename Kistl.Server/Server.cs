@@ -12,6 +12,7 @@ namespace Kistl.Server
     using Kistl.API.Configuration;
     using Kistl.API.Server;
     using Kistl.API.Utils;
+    using System.DirectoryServices;
 
     /// <summary>
     /// Serversteuerung
@@ -154,6 +155,52 @@ namespace Kistl.Server
                 mgr.UpdateSchema();
             }
         }
+        
+        public void SyncIdentities()
+        {
+            using (Log.InfoTraceMethodCall())
+            {
+                using (IKistlContext ctx = KistlContext.GetContext())
+                {
+                    var userList = new Dictionary<string, string>();
+                    ReadUsers(Environment.UserDomainName, userList);
+                    ReadUsers(Environment.MachineName, userList);
+
+                    var identities = ctx.GetQuery<Kistl.App.Base.Identity>().ToLookup(k => k.WCFAccount.ToUpper());
+
+                    foreach (var user in userList)
+                    {
+                        if (!identities.Contains(user.Key.ToUpper()))
+                        {
+                            var id = ctx.Create<Kistl.App.Base.Identity>();
+                            id.WCFAccount = user.Key;
+                            id.UserName = user.Value;
+                            Log.InfoFormat("Adding Identity {0} ({1})", id.UserName, id.WCFAccount);
+                        }
+                    }
+
+                    ctx.SubmitChanges();
+                }
+            }
+        }
+
+        private void ReadUsers(string machine, Dictionary<string, string> userList)
+        {
+            try
+            {
+                DirectoryEntry root = new DirectoryEntry("WinNT://" + machine);
+                root.Children.SchemaFilter.Add("User");
+                foreach (DirectoryEntry d in root.Children)
+                {
+                    var login = machine + "\\" + d.Name;
+                    userList[login] = (d.Properties["FullName"].Value ?? login).ToString();
+                }
+            }
+            catch(Exception ex)
+            {
+                Log.Error("Error reading users from " + machine, ex);
+            }
+        }
 
         public void RunFixes()
         {
@@ -161,6 +208,13 @@ namespace Kistl.Server
             {
                 using (IKistlContext ctx = KistlContext.GetContext())
                 {
+                    // Test Projects
+                    //var prjList = ctx.GetQuery<Kistl.App.Projekte.Projekt>();
+                    //foreach (var p in prjList)
+                    //{
+                    //    Console.WriteLine("{0}: {1}", p.Name, p.CurrentAccessRights);
+                    //}
+
                     //var baseClass = ctx.GetQuery<ControlKindClass>().Where(cls => cls.ClassName == "ControlKind").ToList().Single();
                     //var guiModule = ctx.GetQuery<Module>().Where(mod => mod.ModuleName == "GUI").ToList().Single();
                     //var trModule = ctx.GetQuery<Module>().Where(mod => mod.ModuleName == "TimeRecords").ToList().Single();

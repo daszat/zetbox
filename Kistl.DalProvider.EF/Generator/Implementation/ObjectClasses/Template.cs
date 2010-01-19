@@ -8,6 +8,7 @@ using Kistl.API;
 using Kistl.App.Base;
 using Kistl.App.Extensions;
 using Kistl.Server.Generators.Extensions;
+using Kistl.Server.Generators;
 
 namespace Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses
 {
@@ -172,10 +173,23 @@ namespace Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses
             base.ApplyClassTailTemplate();
             Implementation.ObjectClasses.ReloadReferences.Call(Host, ctx, this.DataType);
 
-            ApplySecurityRulesProperties();
+            if (HasSecurityRules())
+            {
+                SecurityRulesProperties.Call(Host, ctx, (ObjectClass)this.DataType);
+            }
         }
 
-        private void ApplySecurityRulesProperties()
+        protected override void ApplyNamespaceTailTemplate()
+        {
+            base.ApplyNamespaceTailTemplate();
+
+            if (HasSecurityRules())
+            {
+                SecurityRulesClass.Call(Host, ctx, (ObjectClass)this.DataType);
+            }
+        }
+
+        private bool HasSecurityRules()
         {
             if (this.DataType is ObjectClass)
             {
@@ -188,19 +202,10 @@ namespace Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses
                         // TODO: Currently only Basesclasses are supported
                         throw new NotSupportedException("Security Rules for derived classes are not supported yet");
                     }
-
-                    WriteLine();
-                    WriteLine();
-
-                    WriteLine("        public override AccessRights CurrentAccessRights {{ get {{ return (AccessRights)CurrentAccessRights{0}; }} }}", Kistl.API.Helper.ImplementationSuffix);
-
-                    WriteLine("        [EdmScalarProperty(IsNullable=false)]");
-                    WriteLine("        public int CurrentAccessRights{0} {{ get; set; }}", Kistl.API.Helper.ImplementationSuffix);
-
-                    WriteLine("        [EdmScalarProperty(IsNullable=false)]");
-                    WriteLine("        public int CurrentIdentity{0} {{ get; set; }}", Kistl.API.Helper.ImplementationSuffix);
+                    return true;
                 }
             }
+            return false;
         }
     }
 }

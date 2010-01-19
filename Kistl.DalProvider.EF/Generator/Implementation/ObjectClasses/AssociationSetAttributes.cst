@@ -89,3 +89,22 @@ using Kistl.DalProvider.EF;
 <%
 	}
 %>
+
+<%
+	foreach (var cls in ctx.GetQuery<ObjectClass>().Where(c => c.BaseObjectClass == null)
+		.OrderBy(c => c.ClassName))
+	{
+		if(cls.HasSecurityRules(false))
+		{
+%>
+[assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "<%= Construct.SecurityRulesFKName(cls) %>", 
+	"<%= cls.ClassName %>", 
+	global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, 
+	typeof(<%= cls.Module.Namespace + "." + cls.ClassName + Kistl.API.Helper.ImplementationSuffix %>), 
+	"<%= Construct.SecurityRulesClassName(cls) %>", 
+	global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, 
+	typeof(<%= cls.Module.Namespace + "." + Construct.SecurityRulesClassName(cls) + Kistl.API.Helper.ImplementationSuffix %>))]
+<%
+		}
+	}
+%>

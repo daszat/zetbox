@@ -10,6 +10,7 @@
 <%@ Import Namespace="Kistl.API.Server" %>
 <%@ Import Namespace="Kistl.App.Base" %>
 <%@ Import Namespace="Kistl.App.Extensions" %>
+<%@ Import Namespace="Kistl.Server.Generators" %>
 <%@ Import Namespace="Kistl.Server.Generators.Extensions" %>
 <%@ Parameter Name="ctx" Type="IKistlContext" %>
 <?xml version="1.0" encoding="utf-8"?>
@@ -18,12 +19,22 @@
   
     <!-- EntitySets for all classes -->
 <%
-    foreach(var name in ctx.GetBaseClasses().Select(cls => cls.ClassName).OrderBy(s => s))
+    foreach(var cls in ctx.GetBaseClasses().OrderBy(c => c.ClassName))
     {
 %>
-    <EntitySet Name="<%= name %>" EntityType="Model.<%= name %>" />
-<%    }
-
+    <EntitySet Name="<%= cls.ClassName %>" EntityType="Model.<%= cls.ClassName %>" />
+<%  
+		if(cls.HasSecurityRules(false))
+		{
+%>
+    <EntitySet Name="<%= Construct.SecurityRulesClassName(cls) %>" EntityType="Model.<%= Construct.SecurityRulesClassName(cls) %>" />
+    <AssociationSet Name="<%= Construct.SecurityRulesFKName(cls) %>" Association="Model.<%= Construct.SecurityRulesFKName(cls) %>">
+      <End Role="<%= cls.ClassName %>" EntitySet="<%= cls.ClassName %>" />
+      <End Role="<%= Construct.SecurityRulesClassName(cls) %>" EntitySet="<%= Construct.SecurityRulesClassName(cls) %>" />
+    </AssociationSet>
+<%	
+		}
+    }
 %>
     <!-- EntitySets and AssociationSets for all object-object CollectionEntrys -->
 <%
@@ -96,13 +107,38 @@
 		if(cls.HasSecurityRules(false))
 		{
 %>
-    <Property Name="CurrentIdentity<%= Kistl.API.Helper.ImplementationSuffix %>" Type="Int32" Nullable="false" />
-    <Property Name="CurrentAccessRights<%= Kistl.API.Helper.ImplementationSuffix %>" Type="Int32" Nullable="false" />
-<%	
+    <NavigationProperty Name="SecurityRightsCollection<%= Kistl.API.Helper.ImplementationSuffix%>" Relationship="Model.<%= Construct.SecurityRulesFKName(cls) %>" FromRole="<%= cls.ClassName %>" ToRole="<%= Construct.SecurityRulesClassName(cls) %>" />
+<%
 		}
 %>
   </EntityType>
 <%
+		if(cls.HasSecurityRules(false))
+		{
+%>
+  <EntityType Name="<%= Construct.SecurityRulesClassName(cls) %>">
+    <Key>
+	  <PropertyRef Name="ID" />
+	  <PropertyRef Name="Identity" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Identity" Type="Int32" Nullable="false" />
+    <Property Name="Right" Type="Int32" Nullable="false" />
+  </EntityType>
+  <Association Name="<%= Construct.SecurityRulesFKName(cls) %>">
+    <End Role="<%= cls.ClassName %>" Type="Model.<%= cls.ClassName %>" Multiplicity="1" />
+    <End Role="<%= Construct.SecurityRulesClassName(cls) %>" Type="Model.<%= Construct.SecurityRulesClassName(cls) %>" Multiplicity="*" />
+    <ReferentialConstraint>
+	  <Principal Role="<%= cls.ClassName %>">
+	    <PropertyRef Name="ID" />
+	  </Principal>
+	  <Dependent Role="<%= Construct.SecurityRulesClassName(cls) %>">
+	    <PropertyRef Name="ID" />
+	  </Dependent>
+    </ReferentialConstraint>
+  </Association>
+<%	
+		}
     }
 %>
 

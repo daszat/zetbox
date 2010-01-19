@@ -465,6 +465,24 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Projekt_Rights">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Projekt_Rights)">
+        <MappingFragment StoreEntitySet="Projekt_Rights">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Identity" ColumnName="Identity" />
+          <ScalarProperty Name="Right" ColumnName="Right" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="FK_Projekte_Rights" TypeName="Model.FK_Projekte_Rights" StoreEntitySet="Projekt_Rights">
+      <EndProperty Name="Projekt">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+      <EndProperty Name="Projekt_Rights">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+        <ScalarProperty Name="Identity" ColumnName="Identity" />
+      </EndProperty>
+    </AssociationSetMapping>
     <EntitySetMapping Name="Property">
       <EntityTypeMapping TypeName="IsTypeOf(Model.Property)">
 	    <MappingFragment StoreEntitySet="Property">

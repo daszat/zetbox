@@ -26,6 +26,29 @@
 <% ApplyEntityTypeMapping(cls); %>
     </EntitySetMapping>
 <%
+		if(cls.HasSecurityRules(false))
+		{
+%>
+    <EntitySetMapping Name="<%= Construct.SecurityRulesClassName(cls) %>">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.<%= Construct.SecurityRulesClassName(cls) %>)">
+        <MappingFragment StoreEntitySet="<%= Construct.SecurityRulesClassName(cls) %>">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Identity" ColumnName="Identity" />
+          <ScalarProperty Name="Right" ColumnName="Right" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="<%= Construct.SecurityRulesFKName(cls) %>" TypeName="Model.<%= Construct.SecurityRulesFKName(cls) %>" StoreEntitySet="<%= Construct.SecurityRulesClassName(cls) %>">
+      <EndProperty Name="<%= cls.ClassName %>">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+      <EndProperty Name="<%= Construct.SecurityRulesClassName(cls) %>">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+        <ScalarProperty Name="Identity" ColumnName="Identity" />
+      </EndProperty>
+    </AssociationSetMapping>
+<%
+		}
     }
 %>
 

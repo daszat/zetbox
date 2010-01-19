@@ -1646,3 +1646,11 @@ using Kistl.DalProvider.EF;
     "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.ObjectClass_SecurityRules_CollectionEntry__Implementation__)
     )]
 
+
+[assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_Projekte_Rights", 
+	"Projekt", 
+	global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, 
+	typeof(Kistl.App.Projekte.Projekt__Implementation__), 
+	"Projekt_Rights", 
+	global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, 
+	typeof(Kistl.App.Projekte.Projekt_Rights__Implementation__))]
