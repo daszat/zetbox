@@ -27,8 +27,6 @@ namespace Kistl.Server.Service
 
             container = Program.CreateMasterContainer(config, null);
 
-            var appCtx = new ServerApplicationContext(config);
-
             Program.DefaultInitialisation(null, container);
 
             wcfServer = container.Resolve<IKistlAppDomain>();

@@ -185,17 +185,7 @@ namespace Kistl.Server.Service
                 {
                     registerXmlFallback = container =>
                     {
-                        container.Register(c =>
-                        {
-                            var memCtx = c.Resolve<MemoryContext>();
-                            // register empty context first, to avoid errors when trying to load defaultvalues
-                            // TODO: remove, this should not be needed when using the container.
-                            FrozenContext.RegisterFallback(memCtx);
-                            Packaging.Importer.LoadFromXml(memCtx, dataSourceXmlFile);
-                            return memCtx;
-                        })
-                        .As<IReadOnlyKistlContext>()
-                        .SingletonScoped();
+
                     };
                 }
 
@@ -205,7 +195,7 @@ namespace Kistl.Server.Service
 
                 Log.TraceTotalMemory("After InitApplicationContext");
 
-                using (var container = CreateMasterContainer(config, registerXmlFallback))
+                using (var container = CreateMasterContainer(config, dataSourceXmlFile))
                 {
                     DefaultInitialisation(dataSourceXmlFile, container);
 
@@ -275,8 +265,10 @@ namespace Kistl.Server.Service
             Log.TraceTotalMemory("After DefaultInitialisation()");
         }
 
-        internal static IContainer CreateMasterContainer(KistlConfig config, Action<ContainerBuilder> additionalRegistration)
+        internal static IContainer CreateMasterContainer(KistlConfig config, string dataSourceXmlFile)
         {
+            AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
+
             var builder = new ContainerBuilder();
 
             // register the configuration
@@ -292,10 +284,20 @@ namespace Kistl.Server.Service
             // register the provider for frozen objects
             // if there's a generated frozencontext, this'll override the store's default
             builder.RegisterModule((IModule)Activator.CreateInstance(Type.GetType(config.FrozenProvider, true)));
-            // register last-minute overrides
-            if (additionalRegistration != null)
+            // if there is a data source xml file, use it instead of a (possibly missing) frozen context
+            if (dataSourceXmlFile != null)
             {
-                additionalRegistration(builder);
+                builder.Register(c =>
+                    {
+                        var memCtx = c.Resolve<MemoryContext>();
+                        // register empty context first, to avoid errors when trying to load defaultvalues
+                        // TODO: remove, this should not be needed when using the container.
+                        FrozenContext.RegisterFallback(memCtx);
+                        Packaging.Importer.LoadFromXml(memCtx, dataSourceXmlFile);
+                        return memCtx;
+                    })
+                    .As<IReadOnlyKistlContext>()
+                    .SingletonScoped();
             }
             // register deployment-specific components
             builder.RegisterModule(new ConfigurationSettingsReader("servercomponents"));
