@@ -16,7 +16,6 @@ namespace Kistl.Server.Service
     using Kistl.API.Server;
     using Kistl.API.Utils;
     using Kistl.App.Extensions;
-    using NDesk.Options;
 
     /// <summary>
     /// Mainprogramm
