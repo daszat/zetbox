@@ -4,6 +4,7 @@ namespace Kistl.DalProvider.EF
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Reflection;
     using System.Text;
 
     using Autofac.Builder;
@@ -11,12 +12,31 @@ namespace Kistl.DalProvider.EF
     using Kistl.API.Server;
     using Kistl.Server.Generators;
 
-    public class EfProvider : Module
+    public class EfProvider 
+        : Autofac.Builder.Module
     {
         protected override void Load(ContainerBuilder moduleBuilder)
         {
             base.Load(moduleBuilder);
 
+            var interfaceAssembly = Assembly.Load("Kistl.Objects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null");
+            if (interfaceAssembly == null)
+                throw new InvalidOperationException("Unable to load Kistl.Objects Assembly, no Entity Framework Metadata will be loaded");
+            var serverAssembly = Assembly.Load("Kistl.Objects.Server, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null");
+            if (serverAssembly == null)
+                throw new InvalidOperationException("Unable to load Kistl.Objects.Server Assembly, no Entity Framework Metadata will be loaded");
+
+            // force-load a few assemblies to the reflection-only context so the DAL provider can find them
+            // this uses the AssemblyLoader directly because Assembly.ReflectionOnlyLoad doesn't go through all 
+            // the moves of resolving AssemblyNames to files. See http://stackoverflow.com/questions/570117/
+            var reflectedInterfaceAssembly = AssemblyLoader.ReflectionOnlyLoadFrom("Kistl.Objects");
+            if (reflectedInterfaceAssembly == null)
+                throw new InvalidOperationException("Unable to load Kistl.Objects Assembly for reflection, no Entity Framework Metadata will be loaded");
+            var reflectedServerAssembly = AssemblyLoader.ReflectionOnlyLoadFrom("Kistl.Objects.Server");
+            if (reflectedServerAssembly == null)
+                throw new InvalidOperationException("Unable to load Kistl.Objects.Server Assembly for reflection, no Entity Framework Metadata will be loaded");
+
+            // TODO: move to separate MSSQL-specific assembly, since the SQL-Schema should be independent of the DalProvider
             moduleBuilder
                 .Register(c => new SqlServerSchemaProvider())
                 .As<ISchemaProvider>()

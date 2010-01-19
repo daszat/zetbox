@@ -8,7 +8,9 @@ namespace Kistl.DalProvider.Frozen
 
     using Autofac.Builder;
     using Kistl.API;
+    using Kistl.Server;
     using Kistl.Server.Generators;
+    using Kistl.API.Utils;
 
     public class FrozenProvider 
         : Module
@@ -19,12 +21,17 @@ namespace Kistl.DalProvider.Frozen
 
             // register the frozen context only when it's available
             // TODO: also check the version?
-            var frozenContext = Type.GetType("Kistl.Objects.Frozen.FrozenContextImplementation, Kistl.Objects.Frozen", false);
-            if (frozenContext != null)
+            var frozenContextType = Type.GetType("Kistl.Objects.Frozen.FrozenContextImplementation, Kistl.Objects.Frozen", false);
+            if (frozenContextType != null)
             {
                 moduleBuilder
-                    .Register(frozenContext)
+                    .Register(frozenContextType)
                     .As<IReadOnlyKistlContext>()
+                    .OnActivating((sender, args) => {
+                        Logging.Log.Error("Initialising FrozenActionsManagerServer");
+                        var fams = new FrozenActionsManagerServer();
+                        fams.Init((IReadOnlyKistlContext)args.Instance);
+                    })
                     .SingletonScoped();
             }
 

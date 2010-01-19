@@ -13,7 +13,7 @@ namespace Kistl.API
     /// This exception is thrown when someone tries to modify a read only context.
     /// </summary>
     [Serializable]
-    public class ReadOnlyContextException 
+    public class ReadOnlyContextException
         : NotSupportedException
     {
         /// <summary>

@@ -2,14 +2,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
+using System.ServiceModel.Activation;
 using System.Text;
 
 using Autofac;
 using Autofac.Builder;
 using Autofac.Integration.Wcf;
 using Kistl.API;
+using Kistl.API.Configuration;
 using Kistl.API.Server;
-using System.ServiceModel.Activation;
+using Kistl.App.Extensions;
 
 namespace Kistl.Server
 {
@@ -69,6 +71,23 @@ namespace Kistl.Server
             moduleBuilder
                 .Register<KistlService>()
                 .FactoryScoped();
+
+            moduleBuilder
+                .Register(c =>
+                {
+                    var ctx = c.Resolve<IReadOnlyKistlContext>();
+
+                    var cams = new CustomActionsManagerServer();
+                    cams.Init(ctx);
+
+                    return cams;
+                })
+                .As<BaseCustomActionsManager>()
+                .SingletonScoped();
+
+            moduleBuilder
+                .Register(c => new ServerApplicationContext(c.Resolve<KistlConfig>()))
+                .SingletonScoped();
         }
     }
 }

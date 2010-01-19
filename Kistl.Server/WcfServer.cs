@@ -33,7 +33,7 @@ namespace Kistl.Server
         /// </summary>
         private AutoResetEvent serverStarted = new AutoResetEvent(false);
 
-        public WcfServer(ServiceHostFactoryBase factory)
+        public WcfServer(ServiceHostFactoryBase factory, ServerApplicationContext appCtx)
         {
             if (factory == null) { throw new ArgumentNullException("factory"); }
 
@@ -52,8 +52,6 @@ namespace Kistl.Server
         {
             using (Log.InfoTraceMethodCall("Starting Server"))
             {
-                Init(config);
-
                 serviceThread = new Thread(new ThreadStart(this.RunWCFServer));
                 serviceThread.Start();
 
@@ -62,22 +60,6 @@ namespace Kistl.Server
                     throw new InvalidOperationException("Server did not start within 40 sec.");
                 }
             }
-        }
-
-        /// <summary>
-        /// Initialises the configuration of the server.
-        /// </summary>
-        /// <param name="config">the loaded configuration for the Server</param>
-        public void Init(KistlConfig config)
-        {
-            ServerApplicationContext appCtx;
-            // re-use application context if available
-            if (ServerApplicationContext.Current == null)
-            {
-                appCtx = new ServerApplicationContext(config);
-                appCtx.LoadActionsManager(FrozenContext.Single);
-            }
-            appCtx = ServerApplicationContext.Current;
         }
 
         /// <summary>

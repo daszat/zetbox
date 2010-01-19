@@ -15,6 +15,8 @@ namespace Kistl.Server.Service
     using Kistl.API.Configuration;
     using Kistl.API.Server;
     using Kistl.API.Utils;
+    using Kistl.App.Extensions;
+    using NDesk.Options;
 
     /// <summary>
     /// Mainprogramm
@@ -22,6 +24,12 @@ namespace Kistl.Server.Service
     public static class Program
     {
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Server.Service");
+
+        private static void PrintHelpAndExit()
+        {
+            PrintHelp();
+            Environment.Exit(1);
+        }
 
         private static void PrintHelp()
         {
@@ -70,168 +78,151 @@ namespace Kistl.Server.Service
             return result;
         }
 
-        static int Main(string[] args)
+        static int Main(string[] arguments)
         {
             Logging.Configure();
 
-            Log.InfoFormat("Starting Kistl Server with args [{0}]", String.Join(" ", args));
+            Log.InfoFormat("Starting Kistl Server with args [{0}]", String.Join(" ", arguments));
 
             bool waitForKey = false;
             try
             {
+                List<Action<IContainer, List<string>>> actions = new List<Action<IContainer, List<string>>>();
+                string dataSourceXmlFile = null;
+
+                var optionParser = new OptionSet()
+                    {
+                        { "export=", "export the database to the specified xml file", 
+                            v => { if (v != null) { actions.Add((c, args) => c.Resolve<Server>().Export(v, args.ToArray())); } }
+                            },
+                        { "import=", "import the database from the specified xml file",
+                            v => {
+                                if (v == null) { return; }
+
+                                if (dataSourceXmlFile != null && !dataSourceXmlFile.Equals(v))
+                                { 
+                                    Log.Fatal("Inconsistent XML Source found on command line");
+                                    PrintHelpAndExit(); 
+                                }
+                                dataSourceXmlFile = v;
+                                actions.Add((c, args) => c.Resolve<Server>().Import(v));
+                            }},
+                        { "publish=", "publish the specified modules to this xml file",
+                            v => { if (v != null) { actions.Add((c, args) => c.Resolve<Server>().Publish(v, args.ToArray())); } }
+                            },
+                        { "deploy=", "deploy the database frpm the specified xml file",
+                            v => {
+                                if (v == null) { return; }
+
+                                if (dataSourceXmlFile != null && !dataSourceXmlFile.Equals(v))
+                                { 
+                                    Log.Fatal("Inconsistent XML Source found on command line");
+                                    PrintHelpAndExit(); 
+                                }
+                                dataSourceXmlFile = v;
+                                actions.Add((c, args) => c.Resolve<Server>().Deploy(v));
+                            }},
+                        { "checkdeployedschema", "checks the sql schema against the deployed schema",
+                            v => { if (v != null) { actions.Add((c, args) => c.Resolve<Server>().CheckSchema(false)); } } 
+                            },
+                        { "checkschema=", "checks the sql schema against the metadata (parameter 'meta') or a specified xml file",
+                            v => {
+                                if (v == null) { return; }
+                                
+                                if (v.Equals("meta"))
+                                {
+                                    actions.Add((c, args) => c.Resolve<Server>().CheckSchemaFromCurrentMetaData(false));
+                                } 
+                                else 
+                                {
+                                    actions.Add((c, args) => c.Resolve<Server>().CheckSchema(v, false));
+                                }
+                            }},
+                        { "repairschema=", "checks the schema against the deployed schema and tries to correct it",
+                            v => { if (v != null) { actions.Add((c, args) => c.Resolve<Server>().CheckSchema(true)); } }
+                            },
+                        { "updatedeployedschema", "updates the schema to the current metadata",
+                            v => { if (v != null) { actions.Add((c, args) => c.Resolve<Server>().UpdateSchema()); } }
+                            },
+                        { "updateschema=", "updates the schema to the specified xml file",
+                            v => {
+                                if (v != null) 
+                                {
+                                    if (dataSourceXmlFile != null && !dataSourceXmlFile.Equals(v))
+                                    { 
+                                        Log.Fatal("Inconsistent XML Source found on command line");
+                                        PrintHelpAndExit(); 
+                                    }
+                                    dataSourceXmlFile = v;
+                                    actions.Add((c, args) => c.Resolve<Server>().UpdateSchema(v));
+                                }
+                            }},
+                        { "generate", "generates and compiles new data classes",
+                            v => { if (v != null) { actions.Add((c, args) => c.Resolve<Server>().GenerateCode()); } }
+                            },
+                        { "fix", "[DEVEL] run ad-hoc fixes against the database",
+                            v => { if (v != null) { actions.Add((c, args) => c.Resolve<Server>().RunFixes()); } }
+                            },
+                        { "wait", "let the process wait for user input before exiting",
+                            v => {
+                                waitForKey = (v != null);
+                            }},
+                    };
+
+                List<string> extraArguments;
+                try
+                {
+                    extraArguments = optionParser.Parse(arguments);
+                }
+                catch (OptionException e)
+                {
+                    Log.Fatal("Error in commandline", e);
+                    return 1;
+                }
+
+                Action<ContainerBuilder> registerXmlFallback = null;
+                if (dataSourceXmlFile != null)
+                {
+                    registerXmlFallback = container =>
+                    {
+                        container.Register(c =>
+                        {
+                            var memCtx = c.Resolve<MemoryContext>();
+                            // register empty context first, to avoid errors when trying to load defaultvalues
+                            // TODO: remove, this should not be needed when using the container.
+                            FrozenContext.RegisterFallback(memCtx);
+                            Packaging.Importer.LoadFromXml(memCtx, dataSourceXmlFile);
+                            return memCtx;
+                        })
+                        .As<IReadOnlyKistlContext>()
+                        .SingletonScoped();
+                    };
+                }
+
                 Log.TraceTotalMemory("Before InitApplicationContext");
 
-                var config = InitApplicationContext(args);
+                var config = InitApplicationContext(extraArguments);
 
-                using (var container = CreateMasterContainer(config))
+                Log.TraceTotalMemory("After InitApplicationContext");
+
+                using (var container = CreateMasterContainer(config, registerXmlFallback))
                 {
-                    Log.TraceTotalMemory("After InitApplicationContext");
+                    DefaultInitialisation(dataSourceXmlFile, container);
 
-                    var server = container.Resolve<Server>();
-                    bool actiondone = false;
-                    foreach (CmdLineArg arg in SplitCommandLine(args))
+                    // process command line
+                    if (actions.Count > 0)
                     {
-                        if (arg.Command == "-export" && arg.Arguments.Count > 1)
-                        {
-                            Log.Debug("Prepare for exporting");
-                            DefaultInitialisation();
-                            string file = arg.Arguments[0];
-                            List<string> namespaceList = new List<string>();
-                            for (int i = 1; i < arg.Arguments.Count; i++)
-                            {
-                                namespaceList.Add(arg.Arguments[i]);
-                            }
-                            var namespaces = namespaceList.ToArray();
-                            server.Export(file, namespaces);
-                            actiondone = true;
-                            Log.Debug("Finished exporting");
-                        }
-                        else if (arg.Command == "-import" && arg.Arguments.Count == 1)
-                        {
-                            Log.Debug("Prepare for importing");
-                            DefaultInitialisation();
-                            string file = arg.Arguments[0];
-                            server.Import(file);
-                            actiondone = true;
-                            Log.Debug("Finished importing");
-                        }
-                        else if (arg.Command == "-publish" && arg.Arguments.Count > 1)
-                        {
-                            Log.Debug("Prepare for publish");
-                            DefaultInitialisation();
-                            string file = arg.Arguments[0];
-                            List<string> namespaces = new List<string>();
-                            for (int i = 1; i < arg.Arguments.Count; i++)
-                            {
-                                namespaces.Add(arg.Arguments[i]);
-                            }
-                            server.Publish(file, namespaces.ToArray());
-                            actiondone = true;
-                            Log.Debug("Finished publish");
-                        }
-                        else if (arg.Command == "-deploy" && arg.Arguments.Count == 1)
-                        {
-                            Log.Debug("Prepare for deploy");
-                            string file = arg.Arguments[0];
+                        // skip config file
+                        extraArguments = extraArguments.Skip(1).ToList();
 
-                            XmlFallbackInitialisation(file, container.Resolve<Func<MemoryContext>>());
+                        foreach (var action in actions)
+                        {
+                            using (var innerContainer = container.CreateInnerContainer())
+                            {
+                                action(innerContainer, extraArguments);
+                            }
+                        }
 
-                            server.Deploy(file);
-                            actiondone = true;
-                            Log.Debug("Finished deploy");
-                        }
-                        else if (arg.Command == "-checkschema")
-                        {
-                            Log.Debug("Prepare for checkschema");
-                            DefaultInitialisation();
-
-                            if (arg.Arguments.Count == 0)
-                            {
-                                server.CheckSchema(false);
-                            }
-                            else if (arg.Arguments.Count == 1)
-                            {
-                                if (arg.Arguments[0] == "meta")
-                                {
-                                    server.CheckSchemaFromCurrentMetaData(false);
-                                }
-                                else
-                                {
-                                    string file = arg.Arguments[0];
-                                    server.CheckSchema(file, false);
-                                }
-                            }
-                            else
-                            {
-                                PrintHelp();
-                                return 1;
-                            }
-                            actiondone = true;
-                            Log.Debug("Finished checkschema");
-                        }
-                        else if (arg.Command == "-repairschema" && arg.Arguments.Count == 0)
-                        {
-                            Log.Debug("Prepare for repairschema");
-                            DefaultInitialisation();
-
-                            server.CheckSchema(true);
-                            actiondone = true;
-                            Log.Debug("Finished repairschema");
-                        }
-                        else if (arg.Command == "-updateschema")
-                        {
-                            Log.Debug("Prepare for updateschema");
-                            if (arg.Arguments.Count == 0)
-                            {
-                                DefaultInitialisation();
-                                server.UpdateSchema();
-                            }
-                            else if (arg.Arguments.Count == 1)
-                            {
-                                string file = arg.Arguments[0];
-                                XmlFallbackInitialisation(file, container.Resolve<Func<MemoryContext>>());
-                                server.UpdateSchema(file);
-                            }
-                            else
-                            {
-                                PrintHelp();
-                                return 1;
-                            }
-                            actiondone = true;
-                            Log.Debug("Finished updateschema");
-                        }
-                        else if (arg.Command == "-generate" && arg.Arguments.Count == 0)
-                        {
-                            Log.Debug("Prepare for generate");
-                            DbFallbackInitialisation();
-                            server.GenerateCode();
-                            actiondone = true;
-                            Log.Debug("Finished generate");
-                        }
-                        else if (arg.Command == "-fix" && arg.Arguments.Count == 0)
-                        {
-                            Log.Debug("Prepare for fix");
-                            DefaultInitialisation();
-                            // hidden command to execute ad-hoc fixes against the database
-                            server.RunFixes();
-                            actiondone = true;
-                            Log.Debug("Finished fix");
-                        }
-                        else if (arg.Command == "-wait")
-                        {
-                            Log.Info("will wait for user input before exiting");
-                            waitForKey = true;
-                        }
-                        else
-                        {
-                            Log.FatalFormat("Unrecognised commandline argument [{0}]. Exiting.", arg.Command);
-                            PrintHelp();
-                            return 1;
-                        }
-                    }
-
-                    if (actiondone)
-                    {
                         Log.TraceTotalMemory("After commandline processed");
 
                         if (waitForKey)
@@ -240,14 +231,11 @@ namespace Kistl.Server.Service
                             Console.WriteLine("Hit the anykey to exit");
                             Console.ReadKey();
                         }
+
                         Log.Info("Shutting down");
                     }
                     else
                     {
-                        Log.TraceTotalMemory("Before DefaultInitialisation()");
-                        DefaultInitialisation();
-                        Log.TraceTotalMemory("After DefaultInitialisation()");
-
                         var wcfServer = container.Resolve<IKistlAppDomain>();
                         wcfServer.Start(config);
 
@@ -276,10 +264,26 @@ namespace Kistl.Server.Service
             }
         }
 
-        internal static IContainer CreateMasterContainer(KistlConfig config)
+        internal static void DefaultInitialisation(string dataSourceXmlFile, IContainer container)
+        {
+            Log.TraceTotalMemory("Before DefaultInitialisation()");
+            // TODO: remove, this should be default when using the container.
+            if (dataSourceXmlFile == null) { FrozenContext.RegisterFallback(container.Resolve<IReadOnlyKistlContext>()); }
+
+            // initialise custom actions manager
+            var cams = container.Resolve<BaseCustomActionsManager>();
+            Log.TraceTotalMemory("After DefaultInitialisation()");
+        }
+
+        internal static IContainer CreateMasterContainer(KistlConfig config, Action<ContainerBuilder> additionalRegistration)
         {
             var builder = new ContainerBuilder();
 
+            // register the configuration
+            builder
+                .Register(config)
+                .ExternallyOwned()
+                .SingletonScoped();
             // register components from most general to most specific source
             // default server stuff
             builder.RegisterModule(new ServerModule());
@@ -288,6 +292,11 @@ namespace Kistl.Server.Service
             // register the provider for frozen objects
             // if there's a generated frozencontext, this'll override the store's default
             builder.RegisterModule((IModule)Activator.CreateInstance(Type.GetType(config.FrozenProvider, true)));
+            // register last-minute overrides
+            if (additionalRegistration != null)
+            {
+                additionalRegistration(builder);
+            }
             // register deployment-specific components
             builder.RegisterModule(new ConfigurationSettingsReader("servercomponents"));
 
@@ -296,39 +305,10 @@ namespace Kistl.Server.Service
             return container;
         }
 
-        private static void XmlFallbackInitialisation(string file, Func<MemoryContext> createCtx)
-        {
-            ServerApplicationContext.Current.LoadNoopActionsManager();
-
-            var memCtx = createCtx();
-
-            // register empty context first, to avoid errors when trying to load defaultvalues
-            FrozenContext.RegisterFallback(memCtx);
-            Packaging.Importer.LoadFromXml(memCtx, file);
-
-            ServerApplicationContext.Current.LoadDefaultActionsManager();
-        }
-
-        private static void DbFallbackInitialisation()
-        {
-            ServerApplicationContext.Current.LoadNoopActionsManager();
-            FrozenContext.RegisterFallback(KistlContext.GetContext());
-            ServerApplicationContext.Current.LoadDefaultActionsManager();
-        }
-
-        internal static void DefaultInitialisation()
-        {
-            // TODO: Remove the fallback registration after Case 1211 is fixed
-            ServerApplicationContext.Current.LoadNoopActionsManager();
-            FrozenContext.RegisterFallback(KistlContext.GetContext());
-            // end-TODO
-            ServerApplicationContext.Current.LoadDefaultActionsManager();
-        }
-
-        private static KistlConfig InitApplicationContext(string[] args)
+        private static KistlConfig InitApplicationContext(List<string> args)
         {
             string configFilePath;
-            if (args.Length > 0 && !args[0].StartsWith("-"))
+            if (args.Count > 0 && !args[0].StartsWith("-"))
             {
                 configFilePath = args[0];
             }

@@ -25,11 +25,11 @@ namespace Kistl.Server.Service
             
             Logging.Configure();
 
-            container = Program.CreateMasterContainer(config);
+            container = Program.CreateMasterContainer(config, null);
 
             var appCtx = new ServerApplicationContext(config);
 
-            Program.DefaultInitialisation();
+            Program.DefaultInitialisation(null, container);
 
             wcfServer = container.Resolve<IKistlAppDomain>();
             wcfServer.Start(config);
