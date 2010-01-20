@@ -24,6 +24,8 @@ namespace Kistl.Server.Service
     {
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Server.Service");
 
+        private static OptionSet options;
+
         private static void PrintHelpAndExit()
         {
             PrintHelp();
@@ -32,16 +34,14 @@ namespace Kistl.Server.Service
 
         private static void PrintHelp()
         {
-            Log.Info("Use: Kistl.Server <configfile.xml>");
-            Log.Info("                  -generate");
-            Log.Info("                  -publish <destfile.xml> <namespace> [<namespace> ...]");
-            Log.Info("                  -deploy <sourcefile.xml");
-            Log.Info("                  -export <destfile.xml> <namespace> [<namespace> ...]");
-            Log.Info("                  -import <sourcefile.xml>");
-            Log.Info("                  -checkschema [meta | <schema.xml>]");
-            Log.Info("                  -repairschema");
-            Log.Info("                  -updateschema [<schema.xml>]");
-            Log.Info("                  -syncidentities");
+            if (options != null)
+            {
+                options.WriteOptionDescriptions(Console.Out);
+            }
+            else
+            {
+                Log.Fatal("Error while generating commandline help");
+            }
         }
 
         private class CmdLineArg
@@ -90,7 +90,7 @@ namespace Kistl.Server.Service
                 List<Action<IContainer, List<string>>> actions = new List<Action<IContainer, List<string>>>();
                 string dataSourceXmlFile = null;
 
-                var optionParser = new OptionSet()
+                options = new OptionSet()
                     {
                         { "export=", "export the database to the specified xml file", 
                             v => { if (v != null) { actions.Add((c, args) => c.Resolve<Server>().Export(v, args.ToArray())); } }
@@ -138,7 +138,7 @@ namespace Kistl.Server.Service
                                     actions.Add((c, args) => c.Resolve<Server>().CheckSchema(v, false));
                                 }
                             }},
-                        { "repairschema=", "checks the schema against the deployed schema and tries to correct it",
+                        { "repairschema", "checks the schema against the deployed schema and tries to correct it",
                             v => { if (v != null) { actions.Add((c, args) => c.Resolve<Server>().CheckSchema(true)); } }
                             },
                         { "updatedeployedschema", "updates the schema to the current metadata",
@@ -170,12 +170,15 @@ namespace Kistl.Server.Service
                         { "syncidentities", "synchronices local and domain users with Kistl Identities",
                             v => { if (v != null) { actions.Add((c, args) => c.Resolve<Server>().SyncIdentities()); } }
                             },
+                        { "help", "prints this help", 
+                            v => { if ( v != null) { PrintHelpAndExit(); } } 
+                            },
                     };
 
                 List<string> extraArguments;
                 try
                 {
-                    extraArguments = optionParser.Parse(arguments);
+                    extraArguments = options.Parse(arguments);
                 }
                 catch (OptionException e)
                 {
