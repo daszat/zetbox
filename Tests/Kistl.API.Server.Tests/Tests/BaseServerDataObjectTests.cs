@@ -112,11 +112,8 @@ namespace Kistl.API.Server.Tests
         [ExpectedException(typeof(ArgumentNullException))]
         public void FromStream_Null_StreamReader_fails()
         {
-            using (IKistlContext ctx = Kistl.API.Server.KistlContext.GetContext())
-            {
-                TestObjClass result = new TestObjClass__Implementation__();
-                result.FromStream((BinaryReader)null);
-            }
+            TestObjClass result = new TestObjClass__Implementation__();
+            result.FromStream((BinaryReader)null);
         }
 
         [Test]
@@ -130,12 +127,9 @@ namespace Kistl.API.Server.Tests
             SerializableType wrongType = new SerializableType(new InterfaceType(typeof(string)));
             BinarySerializer.ToStream(wrongType, sw);
 
-            using (IKistlContext ctx = Kistl.API.Server.KistlContext.GetContext())
-            {
-                ms.Seek(0, SeekOrigin.Begin);
-                TestObjClass result = new TestObjClass__Implementation__();
-                result.FromStream(sr);
-            }
+            ms.Seek(0, SeekOrigin.Begin);
+            TestObjClass result = new TestObjClass__Implementation__();
+            result.FromStream(sr);
         }
 
         [Test]
@@ -152,16 +146,10 @@ namespace Kistl.API.Server.Tests
 
             ms.Seek(0, SeekOrigin.Begin);
 
-            using (IKistlContext ctx = Kistl.API.Server.KistlContext.GetContext())
-            {
-                TestObjClass result = ctx.Create<TestObjClass>();
-                result.FromStream(sr);
-
-                Assert.That(result.GetType(), Is.EqualTo(obj.GetType()));
-                Assert.That(result.ID, Is.EqualTo(obj.ID));
-                //[Ignore("Obsolete, DAL Provider will manage ObjectState")]
-                //Assert.That(result.ObjectState, Is.EqualTo(obj.ObjectState));
-            }
+            var ctxMock = new KistlContextMock();
+            TestObjClass result = ctxMock.Create<TestObjClass>();
+            Assert.That(result.IsAttached, Is.True);
+            result.FromStream(sr);
         }
 
         [Test]
@@ -178,6 +166,6 @@ namespace Kistl.API.Server.Tests
             BinarySerializer.FromStream(out t, sr);
             Assert.That(t, Is.EqualTo(new SerializableType(new InterfaceType(typeof(TestObjClass)))));
         }
-	
+
     }
 }

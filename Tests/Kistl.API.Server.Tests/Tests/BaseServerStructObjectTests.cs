@@ -51,25 +51,19 @@ namespace Kistl.API.Server.Tests
 
             ms.Seek(0, SeekOrigin.Begin);
 
-            using (IKistlContext ctx = Kistl.API.Server.KistlContext.GetContext())
-            {
-                TestStruct result = new TestStruct();
-                result.FromStream(sr);
+            TestStruct result = new TestStruct();
+            result.FromStream(sr);
 
-                Assert.That(result.TestInt, Is.EqualTo(obj.TestInt));
-                Assert.That(result.TestString, Is.EqualTo(obj.TestString));
-            }
+            Assert.That(result.TestInt, Is.EqualTo(obj.TestInt));
+            Assert.That(result.TestString, Is.EqualTo(obj.TestString));
         }
 
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
         public void FromStream_Null_StreamReader()
         {
-            using (IKistlContext ctx = Kistl.API.Server.KistlContext.GetContext())
-            {
-                TestStruct result = new TestStruct();
-                result.FromStream((BinaryReader)null);
-            }
+            TestStruct result = new TestStruct();
+            result.FromStream((BinaryReader)null);
         }
 
         [Test]
@@ -109,7 +103,7 @@ namespace Kistl.API.Server.Tests
             BinarySerializer.FromStream(out t, sr);
             Assert.That(t, Is.EqualTo(new SerializableType(new InterfaceType(typeof(IStruct)))));
         }
-	
+
 
     }
 }
