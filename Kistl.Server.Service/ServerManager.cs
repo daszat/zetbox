@@ -35,7 +35,7 @@ namespace Kistl.Server.Service
 
         public void Stop()
         {
-            if (wcfServer != null) { throw new InvalidOperationException("not yet started"); }
+            if (wcfServer == null) { throw new InvalidOperationException("not yet started"); }
             Dispose();
         }
 

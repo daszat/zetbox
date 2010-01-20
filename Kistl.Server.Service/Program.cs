@@ -260,11 +260,16 @@ namespace Kistl.Server.Service
         internal static void DefaultInitialisation(string dataSourceXmlFile, IContainer container)
         {
             Log.TraceTotalMemory("Before DefaultInitialisation()");
+
             // TODO: remove, this should be default when using the container.
-            if (dataSourceXmlFile == null) { FrozenContext.RegisterFallback(container.Resolve<IReadOnlyKistlContext>()); }
+            {
+                container.Resolve<ServerApplicationContext>();
+                if (dataSourceXmlFile == null) { FrozenContext.RegisterFallback(container.Resolve<IReadOnlyKistlContext>()); }
+            }
 
             // initialise custom actions manager
             var cams = container.Resolve<BaseCustomActionsManager>();
+
             Log.TraceTotalMemory("After DefaultInitialisation()");
         }
 
