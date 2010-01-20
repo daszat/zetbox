@@ -51,8 +51,8 @@ namespace Kistl.Server.Tests
         public void TearDown()
         {
             var deleteCtx = container.Resolve<IKistlContext>();
-            deleteCtx.GetQuery<Mitarbeiter>().ForEach(obj => ctx.Delete(obj));
-            deleteCtx.GetQuery<Projekt>().ForEach(obj => ctx.Delete(obj));
+            deleteCtx.GetQuery<Mitarbeiter>().ForEach(obj => deleteCtx.Delete(obj));
+            deleteCtx.GetQuery<Projekt>().ForEach(obj => { obj.Mitarbeiter.Clear(); deleteCtx.Delete(obj); });
 
             if (container != null)
             {
