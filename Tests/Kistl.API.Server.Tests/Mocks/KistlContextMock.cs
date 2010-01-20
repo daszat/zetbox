@@ -8,9 +8,9 @@ namespace Kistl.API.Server.Mocks
 {
     public class KistlContextMock : BaseKistlDataContext
     {
-
         public Dictionary<int, TestObjClass__Implementation__> TestObjClasses = new Dictionary<int, TestObjClass__Implementation__>();
         public KistlContextMock()
+            : base(null)
         {
             TestObjClasses[1] = new TestObjClass__Implementation__() { ID = 1 };
             TestObjClasses[3] = new TestObjClass__Implementation__() { ID = 3 };

@@ -5,7 +5,11 @@ using System.Text;
 
 namespace Kistl.API.Server
 {
-    public interface IKistlServerContext : IKistlContext
+    /// <summary>
+    /// A data context without identity, which is useful for various administrative tasks.
+    /// </summary>
+    public interface IKistlServerContext 
+        : IKistlContext
     {
         /// <summary>
         /// Submits the changes and returns the number of affected Objects.

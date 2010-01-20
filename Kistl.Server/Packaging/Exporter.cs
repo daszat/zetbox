@@ -22,19 +22,16 @@ namespace Kistl.Server.Packaging
     {
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Server.Exporter");
 
-        public static void Publish(string filename, string[] moduleNamespaces)
+        public static void PublishFromContext(IKistlContext ctx, string filename, string[] moduleNamespaces)
         {
-            using (IKistlContext ctx = KistlContext.GetContext())
+            using (FileStream fs = File.OpenWrite(filename))
             {
-                using (FileStream fs = File.OpenWrite(filename))
-                {
-                    fs.SetLength(0);
-                    Publish(ctx, fs, moduleNamespaces);
-                }
+                fs.SetLength(0);
+                PublishFromContext(ctx, fs, moduleNamespaces);
             }
         }
 
-        public static void Publish(IKistlContext ctx, Stream s, string[] moduleNamespaces)
+        public static void PublishFromContext(IKistlContext ctx, Stream s, string[] moduleNamespaces)
         {
             using (Log.DebugTraceMethodCall())
             {
@@ -79,19 +76,16 @@ namespace Kistl.Server.Packaging
             }
         }
 
-        public static void Export(string filename, string[] moduleNamespaces)
+        public static void ExportFromContext(IKistlContext ctx, string filename, string[] moduleNamespaces)
         {
-            using (IKistlContext ctx = KistlContext.GetContext())
+            using (FileStream fs = File.OpenWrite(filename))
             {
-                using (FileStream fs = File.OpenWrite(filename))
-                {
-                    fs.SetLength(0);
-                    Export(ctx, fs, moduleNamespaces);
-                }
+                fs.SetLength(0);
+                ExportFromContext(ctx, fs, moduleNamespaces);
             }
         }
 
-        public static void Export(IKistlContext ctx, Stream s, string[] moduleNamespaces)
+        public static void ExportFromContext(IKistlContext ctx, Stream s, string[] moduleNamespaces)
         {
             using (Log.DebugTraceMethodCall())
             {

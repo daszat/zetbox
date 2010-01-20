@@ -102,18 +102,5 @@ namespace Kistl.API.AbstractConsumerTests
                 ctx.SubmitChanges();
             }
         }
-
-        /// <summary>
-        /// Deletes all remaining test data.
-        /// </summary>
-        [TearDown]
-        public void TearDown()
-        {
-            using (var ctx = GetContext())
-            {
-                DeleteData(ctx);
-                ctx.SubmitChanges();
-            }
-        }
     }
 }

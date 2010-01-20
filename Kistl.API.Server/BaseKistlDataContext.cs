@@ -1,14 +1,29 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Collections;
-using Kistl.App.Extensions;
 
 namespace Kistl.API.Server
 {
-    public abstract class BaseKistlDataContext : IKistlServerContext, IDisposable
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+
+    using Kistl.App.Base;
+    using Kistl.App.Extensions;
+
+    public abstract class BaseKistlDataContext
+        : IKistlServerContext, IDisposable
     {
+        protected readonly Identity identity;
+
+        /// <summary>
+        /// Initializes a new instance of the BaseKistlDataContext class using the specified <see cref="Identity"/>.
+        /// </summary>
+        /// <param name="identity">the identity of this context. if this is null, the context does no security checks</param>
+        protected BaseKistlDataContext(Identity identity)
+        {
+            this.identity = identity;
+        }
+
         // TODO: implement proper IDisposable pattern
         public virtual void Dispose()
         {
@@ -174,10 +189,10 @@ namespace Kistl.API.Server
                     {
                         // If cb.CreatedOn where null when DataObjectState is Modified we do not update CreatedBy.
                         // We dont have the information who was creating this object.
-                        cb.CreatedBy = this.Identity;
+                        cb.CreatedBy = this.identity;
                         cb.CreatedOn = now;
                     }
-                    cb.ChangedBy = this.Identity;
+                    cb.ChangedBy = this.identity;
                     cb.ChangedOn = now;
                 }
 
@@ -371,19 +386,6 @@ namespace Kistl.API.Server
             if (ObjectDeleted != null)
             {
                 ObjectDeleted(this, new GenericEventArgs<IPersistenceObject>() { Data = obj });
-            }
-        }
-
-        private Kistl.App.Base.Identity _Identity = null;
-        protected Kistl.App.Base.Identity Identity
-        {
-            get
-            {
-                if (_Identity == null)
-                {
-                    _Identity = IdentityManager.LoadIdentity(this);
-                }
-                return _Identity;
             }
         }
     }

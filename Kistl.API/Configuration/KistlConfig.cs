@@ -148,9 +148,6 @@ namespace Kistl.API.Configuration
             [XmlElement(IsNullable = false)]
             public string KistlDataContextType { get; set; }
 
-            [XmlElement(IsNullable = false)]
-            public string IdentityProviderType { get; set; }
-
             public string GetLogFilePath(string name)
             {
                 Directory.CreateDirectory(ApplicationContext.Current.Configuration.Server.LogFilePath);

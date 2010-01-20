@@ -8,9 +8,11 @@ using System.Reflection;
 using System.Text;
 
 using Kistl.API;
+using Kistl.API.Configuration;
 using Kistl.API.Server;
 using Kistl.API.Utils;
 using Kistl.App.Extensions;
+using Kistl.App.Base;
 
 [assembly: global::System.Data.Objects.DataClasses.EdmSchemaAttribute()]
 
@@ -23,8 +25,8 @@ namespace Kistl.DalProvider.EF
         /// </summary>
         private static string connectionString = String.Empty;
 
-        public EFObjectContext()
-            : base(GetConnectionString(), "Entities")
+        public EFObjectContext(KistlConfig config)
+            : base(GetConnectionString(config), "Entities")
         {
         }
 
@@ -33,7 +35,7 @@ namespace Kistl.DalProvider.EF
         /// <remarks>Format is: metadata=res://*;provider={provider};provider connection string='{Provider Connectionstring}'</remarks>
         /// </summary>
         /// <returns></returns>
-        private static string GetConnectionString()
+        private static string GetConnectionString(KistlConfig config)
         {
             // Build connectionString
             // metadata=res://*;provider=System.Data.SqlClient;provider connection string='Data Source=.\SQLEXPRESS;Initial Catalog=Kistl;Integrated Security=True;MultipleActiveResultSets=true;'
@@ -41,8 +43,8 @@ namespace Kistl.DalProvider.EF
             {
                 StringBuilder sb = new StringBuilder();
                 sb.Append("metadata=res://*;");
-                sb.AppendFormat("provider={0};", ApplicationContext.Current.Configuration.Server.DatabaseProvider);
-                sb.AppendFormat("provider connection string='{0}'", ApplicationContext.Current.Configuration.Server.ConnectionString);
+                sb.AppendFormat("provider={0};", config.Server.DatabaseProvider);
+                sb.AppendFormat("provider connection string='{0}'", config.Server.ConnectionString);
 
                 connectionString = sb.ToString();
             }
@@ -53,9 +55,10 @@ namespace Kistl.DalProvider.EF
     /// <summary>
     /// Entityframework IKistlContext implementation
     /// </summary>
-    public class KistlDataContext : BaseKistlDataContext, IKistlContext, IDisposable
+    public sealed class KistlDataContext : BaseKistlDataContext, IKistlContext, IDisposable
     {
-        private EFObjectContext _ctx;
+        private readonly EFObjectContext _ctx;
+        private readonly IMetaDataResolver _metaDataResolver;
 
         /// <summary>
         /// For Clean Up Session
@@ -63,16 +66,19 @@ namespace Kistl.DalProvider.EF
         public override void Dispose()
         {
             base.Dispose();
-            if (_ctx != null) _ctx.Dispose();
-            _ctx = null;
+            if (_ctx != null) { _ctx.Dispose(); }
         }
 
         /// <summary>
         /// Internal Constructor
         /// </summary>
-        public KistlDataContext()
+        public KistlDataContext(KistlConfig config, IMetaDataResolver metaDataResolver, Identity identity)
+            : base(identity)
         {
-            _ctx = new EFObjectContext();
+            if (metaDataResolver == null) { throw new ArgumentNullException("metaDataResolver"); }
+            
+            _metaDataResolver = metaDataResolver;
+            _ctx = new EFObjectContext(config);
         }
 
         internal ObjectContext ObjectContext { get { return _ctx; } }
@@ -183,6 +189,7 @@ namespace Kistl.DalProvider.EF
             if (!_table.ContainsKey(type))
             {
                 _table[type] = new QueryTranslator<T>(
+                    _metaDataResolver, this.identity,
                     _ctx.CreateQuery<BaseServerDataObject_EntityFramework>("[" + GetEntityName(type) + "]"), this);
             }
 
@@ -201,6 +208,7 @@ namespace Kistl.DalProvider.EF
             if (!_table.ContainsKey(type))
             {
                 _table[type] = new QueryTranslator<T>(
+                    _metaDataResolver, this.identity,
                     _ctx.CreateQuery<BaseServerDataObject_EntityFramework>("[" + GetEntityName(type) + "]"), this);
             }
 
@@ -567,7 +575,7 @@ namespace Kistl.DalProvider.EF
                 // TODO: Case #1174
                 var tmp = GetPersistenceObjectQuery<Kistl.App.Base.ObjectClass>().FirstOrDefault();
                 string sql = string.Format("SELECT VALUE e FROM Entities.{0} AS e WHERE e.ExportGuid = @guid", GetEntityName(typeof(T).ToImplementationType()));
-                result = _ctx.CreateQuery<T>(sql, new ObjectParameter("guid", exportGuid)).FirstOrDefault();
+                result = _ctx.CreateQuery<T>(sql, new System.Data.Objects.ObjectParameter("guid", exportGuid)).FirstOrDefault();
                 if (result != null) result.AttachToContext(this);
             }
             return result;

@@ -16,7 +16,7 @@ namespace Kistl.DalProvider.EF.Tests.one_to_N_relations
     {
         protected override IKistlContext GetContext()
         {
-            return Kistl.API.Server.KistlContext.GetContext();
+            return KistlContext.GetContext();
         }
     }
 

@@ -20,7 +20,7 @@ namespace Kistl.DalProvider.ClientObjects
         /// <inheritdoc />
         public override bool IsValid()
         {
-            ObjectClass oc = this.GetObjectClass(FrozenContext.Single);
+            ObjectClass oc = this.GetInterfaceType().GetObjectClass(FrozenContext.Single);
             return oc.Properties.Aggregate(
                 true,
                 (acc, prop) =>

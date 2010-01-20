@@ -9,6 +9,7 @@ using System.Collections.ObjectModel;
 using Kistl.API;
 using Kistl.API.Utils;
 using Kistl.App.Extensions;
+using Kistl.App.Base;
 
 namespace Kistl.API.Server
 {
@@ -22,22 +23,22 @@ namespace Kistl.API.Server
     // http://blogs.msdn.com/mattwar/archive/2007/07/30/linq-building-an-iqueryable-provider-part-i.aspx
 
     #region QueryTranslator
-    public class QueryTranslator<T> : IOrderedQueryable<T>
+    public sealed class QueryTranslator<T> : IOrderedQueryable<T>
     {
         private Expression _expression = null;
         private QueryTranslatorProvider<T> _provider = null;
 
-        public QueryTranslator(IQueryable source, IKistlContext ctx)
+        public QueryTranslator(IMetaDataResolver metaDataResolver, Identity identity, IQueryable source, IKistlContext ctx)
         {
             _expression = Expression.Constant(this);
-            _provider = new QueryTranslatorProvider<T>(source, ctx);
+            _provider = new QueryTranslatorProvider<T>(metaDataResolver, identity, source, ctx);
         }
 
-        public QueryTranslator(IQueryable source, IKistlContext ctx, Expression e)
+        public QueryTranslator(IMetaDataResolver metaDataResolver, Identity identity, IQueryable source, IKistlContext ctx, Expression e)
+            : this(metaDataResolver, identity, source, ctx)
         {
             if (e == null) throw new ArgumentNullException("e");
             _expression = e;
-            _provider = new QueryTranslatorProvider<T>(source, ctx);
         }
 
         public IEnumerator<T> GetEnumerator()
@@ -68,15 +69,23 @@ namespace Kistl.API.Server
     #endregion
 
     #region QueryTranslatorProvider
-    public class QueryTranslatorProvider<T> : ExpressionTreeTranslator, IQueryProvider
+    public sealed class QueryTranslatorProvider<T> : ExpressionTreeTranslator, IQueryProvider
     {
-        IQueryable _source;
-        IKistlContext _ctx = null;
+        private readonly IMetaDataResolver _metaDataResolver;
+        private readonly Identity _identity;
+        private readonly IQueryable _source;
+        private readonly IKistlContext _ctx = null;
 
-        public QueryTranslatorProvider(IQueryable source, IKistlContext ctx)
+        public QueryTranslatorProvider(IMetaDataResolver metaDataResolver, Identity identity, IQueryable source, IKistlContext ctx)
         {
-            if (source == null) throw new ArgumentNullException("source");
-            if (ctx == null) throw new ArgumentNullException("ctx");
+            if (metaDataResolver == null) { throw new ArgumentNullException("metaDataResolver"); }
+            // identity == null => privileged operations
+            // if (identity == null) { throw new ArgumentNullException("identity"); }
+            if (source == null) { throw new ArgumentNullException("source"); }
+            if (ctx == null) { throw new ArgumentNullException("ctx"); }
+
+            _metaDataResolver = metaDataResolver;
+            _identity = identity;
             _source = source;
             _ctx = ctx;
         }
@@ -86,7 +95,7 @@ namespace Kistl.API.Server
         public IQueryable<TElement> CreateQuery<TElement>(Expression expression)
         {
             if (expression == null) throw new ArgumentNullException("expression");
-            return new QueryTranslator<TElement>(_source, _ctx, expression) as IQueryable<TElement>;
+            return new QueryTranslator<TElement>(_metaDataResolver, _identity, _source, _ctx, expression) as IQueryable<TElement>;
         }
 
         public IQueryable CreateQuery(Expression expression)
@@ -95,7 +104,7 @@ namespace Kistl.API.Server
 
             Type elementType = expression.Type.FindElementTypes().First();
             IQueryable result = (IQueryable)Activator.CreateInstance(typeof(QueryTranslator<>).MakeGenericType(elementType),
-                new object[] { _source, _ctx, expression });
+                new object[] { _metaDataResolver, _identity, _source, _ctx, expression });
             return result;
         }
 
@@ -116,7 +125,7 @@ namespace Kistl.API.Server
             }
 
             Expression translated = this.Visit(expression);
-            
+
             if (Logging.Linq.IsDebugEnabled)
             {
                 Logging.Linq.Debug(translated.Trace());
@@ -140,7 +149,7 @@ namespace Kistl.API.Server
             }
 
             Expression translated = this.Visit(expression);
-            
+
             if (Logging.Linq.IsDebugEnabled)
             {
                 Logging.Linq.Debug(translated.Trace());
@@ -357,11 +366,8 @@ namespace Kistl.API.Server
             if (!ifType.Type.IsIDataObject()) return e;
 
             // Case #1363: May return NULL during initialization
-            var objClass = ifType.GetObjectClass(FrozenContext.Single);
-            if (objClass == null || !objClass.HasSecurityRules()) return e;
-
-            var identity = IdentityManager.Current;
-            if (identity == null) throw new System.Security.SecurityException(string.Format("Accessing type '{0}' without an Identity is not allowed", ifType.ToString()));
+            var objClass = _metaDataResolver.GetObjectClass(ifType);
+            if (objClass == null || !objClass.HasSecurityRules() || _identity == null) return e;
 
             var type = ifType.ToImplementationType().Type;
             var rights_type = Type.GetType(ifType.Type.FullName + "_Rights" + Kistl.API.Helper.ImplementationSuffix + ", " + type.Assembly.FullName);
@@ -374,7 +380,7 @@ namespace Kistl.API.Server
             // r.Identity == 12
             var eq_identity = Expression.Equal(
                             Expression.PropertyOrField(pe_r, "Identity"),
-                            Expression.Constant(identity.ID),
+                            Expression.Constant(_identity.ID),
                             false,
                             typeof(int).GetMethod("op_Equality"));
 
@@ -383,7 +389,7 @@ namespace Kistl.API.Server
 
             // o.Projekte_Rights
             var count_src = Expression.PropertyOrField(pe_o, "SecurityRightsCollection" + Kistl.API.Helper.ImplementationSuffix);
-            
+
             // o.Projekte_Rights.Count(r => r.Identity == 12)
             var count = Expression.Call(typeof(System.Linq.Enumerable), "Count", new Type[] { rights_type },
                 count_src,
@@ -395,7 +401,7 @@ namespace Kistl.API.Server
                             Expression.Constant(1),
                             false,
                             typeof(int).GetMethod("op_Equality"));
-            
+
             // (o => o.Projekte_Rights.Count(r => r.Identity == 12) == 1)
             var filter = Expression.Lambda(eq_count, new ParameterExpression[] { pe_o });
 

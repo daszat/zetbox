@@ -11,6 +11,7 @@ namespace Kistl.DalProvider.Frozen
     using Kistl.Server;
     using Kistl.Server.Generators;
     using Kistl.API.Utils;
+    using Kistl.API.Configuration;
 
     public class FrozenProvider 
         : Module

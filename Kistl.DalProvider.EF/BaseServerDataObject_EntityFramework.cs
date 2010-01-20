@@ -174,7 +174,7 @@ namespace Kistl.DalProvider.EF
 
         public override bool IsValid()
         {
-            ObjectClass oc = this.GetObjectClass(this.Context);
+            ObjectClass oc = this.GetInterfaceType().GetObjectClass(this.Context);
             return oc.Properties.Aggregate(true, (acc, prop) =>
                 acc && prop.Constraints.All(c =>
                     c.IsValid(this, this.GetPropertyValue<object>(prop.PropertyName))));

@@ -15,7 +15,7 @@ namespace Kistl.DalProvider.EF.Tests
     {
         protected override Kistl.API.IKistlContext GetContext()
         {
-            return Kistl.API.Server.KistlContext.GetContext();
+            return KistlContext.GetContext();
         }
     }
 }

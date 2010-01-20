@@ -1,12 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 
 using Kistl.API.Server.Mocks;
 
 using NUnit.Framework;
-using System.Linq.Expressions;
 
 namespace Kistl.API.Server.Tests
 {
@@ -25,7 +25,7 @@ namespace Kistl.API.Server.Tests
         public void should_keep_Convert_nodes_on_primitive_data()
         {
             var q = ctx.GetQuery<TestObjClass>();
-            var subject = new QueryTranslatorProvider<TestObjClass>(q, ctx);
+            var subject = new QueryTranslatorProvider<TestObjClass>(new MetaDataResolverMock(), null, q, ctx);
 
             var obj = Expression.MakeBinary(
                 ExpressionType.Equal,

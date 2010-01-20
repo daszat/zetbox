@@ -76,7 +76,7 @@ namespace Kistl.App.Extensions
         {
             PrimeCaches(tk);
 
-            var candidates = _viewCaches[tk].GetDescriptors(ck.GetObjectClass(FrozenContext.Single));
+            var candidates = _viewCaches[tk].GetDescriptors(ck.GetInterfaceType().GetObjectClass(FrozenContext.Single));
             // TODO: resolve ambiguities from config if candidates.Count > 1
             return candidates.FirstOrDefault();
         }

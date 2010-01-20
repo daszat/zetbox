@@ -7,12 +7,15 @@ namespace Kistl.DalProvider.EF
     using System.Reflection;
     using System.Text;
 
+    using Autofac;
     using Autofac.Builder;
+
     using Kistl.API;
+    using Kistl.API.Configuration;
     using Kistl.API.Server;
     using Kistl.Server.Generators;
 
-    public class EfProvider 
+    public class EfProvider
         : Autofac.Builder.Module
     {
         protected override void Load(ContainerBuilder moduleBuilder)
@@ -43,15 +46,21 @@ namespace Kistl.DalProvider.EF
                 .FactoryScoped();
 
             moduleBuilder
-                .Register(c => new KistlDataContext())
+                .Register(c =>
+                {
+                    return new KistlDataContext(c.Resolve<KistlConfig>(), c.Resolve<IMetaDataResolver>(), null);
+                })
                 .As<IKistlServerContext>()
-                .As<IKistlContext>()
-                .As<IReadOnlyKistlContext>()
                 .FactoryScoped();
 
             moduleBuilder
-                .RegisterGeneratedFactory<Func<IKistlContext>>()
-                .SingletonScoped();
+                .Register(c =>
+                {
+                    return new KistlDataContext(c.Resolve<KistlConfig>(), c.Resolve<IMetaDataResolver>(), c.Resolve<IIdentityResolver>().GetCurrent());
+                })
+                .As<IKistlContext>()
+                .As<IReadOnlyKistlContext>()
+                .FactoryScoped();
 
             moduleBuilder
                 .Register<MemoryContext>(c =>

@@ -1,25 +1,38 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.ServiceModel;
-using System.ServiceModel.Activation;
-using System.Text;
-
-using Autofac;
-using Autofac.Builder;
-using Autofac.Integration.Wcf;
-using Kistl.API;
-using Kistl.API.Configuration;
-using Kistl.API.Server;
-using Kistl.App.Extensions;
 
 namespace Kistl.Server
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.ServiceModel;
+    using System.ServiceModel.Activation;
+    using System.Text;
+
+    using Autofac;
+    using Autofac.Builder;
+    using Autofac.Integration.Wcf;
+    using Kistl.API;
+    using Kistl.API.Configuration;
+    using Kistl.API.Server;
+    using Kistl.App.Extensions;
+
     public class ServerModule : Module
     {
         protected override void Load(ContainerBuilder moduleBuilder)
         {
             base.Load(moduleBuilder);
+
+            moduleBuilder
+                .RegisterGeneratedFactory<Func<IReadOnlyKistlContext>>()
+                .SingletonScoped();
+
+            moduleBuilder
+                .RegisterGeneratedFactory<Func<IKistlContext>>()
+                .SingletonScoped();
+
+            moduleBuilder
+                .RegisterGeneratedFactory<Func<IKistlServerContext>>()
+                .SingletonScoped();
 
             moduleBuilder
                 .Register((c, p) =>
@@ -87,6 +100,17 @@ namespace Kistl.Server
 
             moduleBuilder
                 .Register(c => new ServerApplicationContext(c.Resolve<KistlConfig>()))
+                .SingletonScoped();
+
+            moduleBuilder
+                .Register<CachingMetaDataResolver>()
+                .As<IMetaDataResolver>()
+                .OnActivated(ActivatedHandler.InjectUnsetProperties)
+                .SingletonScoped();
+
+            moduleBuilder
+                .Register<WcfIdentityResolver>()
+                .As<IIdentityResolver>()
                 .SingletonScoped();
         }
     }

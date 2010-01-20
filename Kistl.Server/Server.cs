@@ -45,8 +45,9 @@ namespace Kistl.Server
         public void Export(string file, string[] namespaces)
         {
             using (Log.InfoTraceMethodCallFormat("file=[{0}],namespaces=[{1}]", file, String.Join(";", namespaces ?? new string[] { })))
+            using (var subContainer = container.CreateInnerContainer())
             {
-                Packaging.Exporter.Export(file, namespaces);
+                Packaging.Exporter.ExportFromContext(subContainer.Resolve<IKistlContext>(), file, namespaces);
             }
         }
 
@@ -65,8 +66,9 @@ namespace Kistl.Server
         public void Publish(string file, string[] namespaces)
         {
             using (Log.InfoTraceMethodCallFormat("file=[{0}],namespaces=[{1}]", file, String.Join(";", namespaces ?? new string[] { })))
+            using (var subContainer = container.CreateInnerContainer())
             {
-                Packaging.Exporter.Publish(file, namespaces);
+                Packaging.Exporter.PublishFromContext(subContainer.Resolve<IKistlContext>(), file, namespaces);
             }
         }
 
@@ -133,7 +135,7 @@ namespace Kistl.Server
                 // the schema
                 using (MemoryStream ms = new MemoryStream())
                 {
-                    Packaging.Exporter.Publish(dbctx, ms, new string[] { "*" });
+                    Packaging.Exporter.PublishFromContext(dbctx, ms, new string[] { "*" });
                     ms.Seek(0, SeekOrigin.Begin);
                     Packaging.Importer.LoadFromXml(ctx, ms);
                 }
@@ -155,32 +157,31 @@ namespace Kistl.Server
                 mgr.UpdateSchema();
             }
         }
-        
+
         public void SyncIdentities()
         {
             using (Log.InfoTraceMethodCall())
+            using (var subContainer = container.CreateInnerContainer())
             {
-                using (IKistlContext ctx = KistlContext.GetContext())
+                IKistlContext ctx = subContainer.Resolve<IKistlContext>();
+                var userList = new Dictionary<string, string>();
+                ReadUsers(Environment.UserDomainName, userList);
+                ReadUsers(Environment.MachineName, userList);
+
+                var identities = ctx.GetQuery<Kistl.App.Base.Identity>().ToLookup(k => k.WCFAccount.ToUpper());
+
+                foreach (var user in userList)
                 {
-                    var userList = new Dictionary<string, string>();
-                    ReadUsers(Environment.UserDomainName, userList);
-                    ReadUsers(Environment.MachineName, userList);
-
-                    var identities = ctx.GetQuery<Kistl.App.Base.Identity>().ToLookup(k => k.WCFAccount.ToUpper());
-
-                    foreach (var user in userList)
+                    if (!identities.Contains(user.Key.ToUpper()))
                     {
-                        if (!identities.Contains(user.Key.ToUpper()))
-                        {
-                            var id = ctx.Create<Kistl.App.Base.Identity>();
-                            id.WCFAccount = user.Key;
-                            id.UserName = user.Value;
-                            Log.InfoFormat("Adding Identity {0} ({1})", id.UserName, id.WCFAccount);
-                        }
+                        var id = ctx.Create<Kistl.App.Base.Identity>();
+                        id.WCFAccount = user.Key;
+                        id.UserName = user.Value;
+                        Log.InfoFormat("Adding Identity {0} ({1})", id.UserName, id.WCFAccount);
                     }
-
-                    ctx.SubmitChanges();
                 }
+
+                ctx.SubmitChanges();
             }
         }
 
@@ -196,7 +197,7 @@ namespace Kistl.Server
                     userList[login] = (d.Properties["FullName"].Value ?? login).ToString();
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Log.Error("Error reading users from " + machine, ex);
             }
@@ -206,45 +207,6 @@ namespace Kistl.Server
         {
             using (Log.InfoTraceMethodCall())
             {
-                using (IKistlContext ctx = KistlContext.GetContext())
-                {
-                    // Test Projects
-                    //var prjList = ctx.GetQuery<Kistl.App.Projekte.Projekt>();
-                    //foreach (var p in prjList)
-                    //{
-                    //    Console.WriteLine("{0}: {1}", p.Name, p.CurrentAccessRights);
-                    //}
-
-                    //var baseClass = ctx.GetQuery<ControlKindClass>().Where(cls => cls.ClassName == "ControlKind").ToList().Single();
-                    //var guiModule = ctx.GetQuery<Module>().Where(mod => mod.ModuleName == "GUI").ToList().Single();
-                    //var trModule = ctx.GetQuery<Module>().Where(mod => mod.ModuleName == "TimeRecords").ToList().Single();
-
-                    //CreateCkc(ctx, baseClass, guiModule, "KistlDebuggerKind", "Displays assorted debugging related informations about the datastore and processes",
-                    //    new[] { typeof(Kistl.Client.Presentables.KistlDebuggerAsModel) });
-
-                    //CreateCkc(ctx, baseClass, guiModule, "MenuItemKind", "A command used in a menu",
-                    //    new[] { typeof(Kistl.Client.Presentables.ActionModel) });
-
-                    //CreateCkc(ctx, baseClass, trModule, "TimeRecordsDashboardKind", "A dashboard for the TimeRecords module",
-                    //    new[] { typeof(Kistl.Client.Presentables.TimeRecords.Dashboard) });
-
-                    //CreateCkc(ctx, baseClass, trModule, "WorkEffortKind", "A specialized control for WorkEfforts",
-                    //    new[] { typeof(Kistl.Client.Presentables.TimeRecords.WorkEffortModel) });
-
-                    //CreateCkc(ctx, baseClass, guiModule, "GuiDashboardKind", "A dashboard for the GUI module",
-                    //    new[] { typeof(Kistl.Client.Presentables.GUI.DashboardModel) });
-
-                    //CreateCkc(ctx, baseClass, guiModule, "RelationKind", "A specialized control for Relations",
-                    //    new[] { typeof(Kistl.Client.Presentables.Relations.RelationModel) });
-
-                    //CreateCkc(ctx, baseClass, guiModule, "KistlDebuggerKind", "Displays assorted debugging related informations about the datastore and processes",
-                    //    new[] { typeof(Kistl.Client.Presentables.KistlDebuggerAsModel) });
-
-                    //CreateCkc(ctx, baseClass, guiModule, "KistlDebuggerKind", "Displays assorted debugging related informations about the datastore and processes",
-                    //    new[] { typeof(Kistl.Client.Presentables.KistlDebuggerAsModel) });
-
-                    ctx.SubmitChanges();
-                }
             }
         }
 

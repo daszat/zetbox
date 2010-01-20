@@ -125,7 +125,7 @@ namespace Kistl.Server.SchemaManagement
             {
                 using (var ms = new MemoryStream())
                 {
-                    Packaging.Exporter.Publish(schema, ms, new string[] { "*" });
+                    Packaging.Exporter.PublishFromContext(schema, ms, new string[] { "*" });
                     string schemaStr = ASCIIEncoding.Default.GetString(ms.GetBuffer());
                     db.SaveSchema(schemaStr);
                 }

@@ -10,7 +10,6 @@
     <CodeGenArchivePath>Backup</CodeGenArchivePath>
     <StoreProvider>Kistl.DalProvider.EF.EfProvider, Kistl.DalProvider.EF</StoreProvider>
     <KistlDataContextType>Kistl.DalProvider.EF.KistlDataContext, Kistl.DalProvider.EF</KistlDataContextType>
-    <IdentityProviderType>Kistl.Server.WCFIdentityProvider, Kistl.Server</IdentityProviderType>
   </Server>
   <Client StartClient="false" ThrowErrors="false"/>
   <SourceFileLocation>

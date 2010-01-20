@@ -693,7 +693,7 @@
     <Compile Include="SchemaManagement\SchemaManager.UpdateSchema.cs" />
     <Compile Include="Server.cs" />
     <Compile Include="ServerModule.cs" />
-    <Compile Include="WCFIdentityProvider.cs" />
+    <Compile Include="WcfIdentityResolver.cs" />
     <Compile Include="WcfServer.cs" />
   </ItemGroup>
   <ItemGroup>

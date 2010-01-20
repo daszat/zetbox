@@ -18,11 +18,13 @@ namespace Kistl.Server
     public class KistlService
         : IKistlService
     {
-        private readonly IServerObjectHandlerFactory _factory;
+        private readonly IServerObjectHandlerFactory _sohFactory;
+        private readonly Func<IKistlContext> _ctxFactory;
 
-        public KistlService(IServerObjectHandlerFactory factory)
+        public KistlService(IServerObjectHandlerFactory sohFactory, Func<IKistlContext> ctxFactory)
         {
-            _factory = factory;
+            _sohFactory = sohFactory;
+            _ctxFactory = ctxFactory;
         }
 
         private static void DebugLogIdentity()
@@ -48,9 +50,9 @@ namespace Kistl.Server
                 using (Logging.Facade.DebugTraceMethodCall(type.ToString()))
                 {
                     DebugLogIdentity();
-                    using (IKistlContext ctx = KistlContext.GetContext())
+                    using (IKistlContext ctx = _ctxFactory())
                     {
-                        IDataObject obj = _factory.GetServerObjectHandler(type.GetInterfaceType().Type).GetObject(ctx, ID);
+                        IDataObject obj = _sohFactory.GetServerObjectHandler(type.GetInterfaceType().Type).GetObject(ctx, ID);
                         if (obj == null)
                             throw new ArgumentOutOfRangeException("ID", string.Format("Object with ID {0} not found", ID));
 
@@ -105,10 +107,10 @@ namespace Kistl.Server
                         BinarySerializer.FromStream(out @continue, sr);
                     }
 
-                    using (IKistlContext ctx = KistlContext.GetContext())
+                    using (IKistlContext ctx = _ctxFactory())
                     {
                         // Set Operation
-                        var changedObjects = _factory
+                        var changedObjects = _sohFactory
                             .GetServerObjectSetHandler()
                             .SetObjects(ctx, objects, notificationRequests ?? new ObjectNotificationRequest[0])
                             .Cast<IStreamable>();
@@ -142,9 +144,9 @@ namespace Kistl.Server
                 {
                     DebugLogIdentity();
 
-                    using (IKistlContext ctx = KistlContext.GetContext())
+                    using (IKistlContext ctx = _ctxFactory())
                     {
-                        IEnumerable<IStreamable> lst = _factory
+                        IEnumerable<IStreamable> lst = _sohFactory
                             .GetServerObjectHandler(type.GetInterfaceType().Type)
                             .GetList(ctx, maxListCount,
                                 filter != null ? SerializableExpression.ToExpression(filter) : null,
@@ -236,9 +238,9 @@ namespace Kistl.Server
                 {
                     DebugLogIdentity();
 
-                    using (IKistlContext ctx = KistlContext.GetContext())
+                    using (IKistlContext ctx = _ctxFactory())
                     {
-                        IEnumerable<IStreamable> lst = _factory
+                        IEnumerable<IStreamable> lst = _sohFactory
                             .GetServerObjectHandler(type.GetInterfaceType().Type)
                             .GetListOf(ctx, ID, property);
                         return SendObjects(lst);
@@ -270,7 +272,7 @@ namespace Kistl.Server
                 {
                     DebugLogIdentity();
 
-                    using (IKistlContext ctx = KistlContext.GetContext())
+                    using (IKistlContext ctx = _ctxFactory())
                     {
                         var endRole = (RelationEndRole)serializableRole;
                         Relation rel = ctx.FindPersistenceObject<Relation>(relId);
@@ -278,7 +280,7 @@ namespace Kistl.Server
                         var ifType = typeof(IRelationCollectionEntry<,>);
                         var ceType = ifType.MakeGenericType(rel.A.Type.GetDataType(), rel.B.Type.GetDataType());
 
-                        var lst = _factory
+                        var lst = _sohFactory
                             .GetServerCollectionHandler(rel.A.Type.GetDataType(), rel.B.Type.GetDataType(), endRole)
                             .GetCollectionEntries(ctx, relId, endRole, parentObjID);
 
