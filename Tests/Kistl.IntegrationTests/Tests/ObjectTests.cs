@@ -69,7 +69,8 @@ namespace Kistl.IntegrationTests
         {
             using (IKistlContext ctx = KistlContext.GetContext())
             {
-                ctx.GetQuery<Projekt>().ForEach(obj => ctx.Delete(obj));
+                // TODO: remove obj.Mitarbeiter.Clear() after fixing Case 1369 and marking the Mitarbeiter RelationEnd properly
+                ctx.GetQuery<Projekt>().ForEach(obj => { obj.Mitarbeiter.Clear(); ctx.Delete(obj); });
                 ctx.GetQuery<Task>().ForEach(obj => ctx.Delete(obj));
                 ctx.SubmitChanges();
             }
