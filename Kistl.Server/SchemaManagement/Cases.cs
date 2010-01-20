@@ -294,11 +294,11 @@ namespace Kistl.Server.SchemaManagement
         #endregion
 
         #region NewValueTypePropertyList
-        public bool IsNewValueTypePropertyList(ValueTypeProperty prop)
+        public bool IsNewValueTypePropertyList(Property prop)
         {
-            return savedSchema.FindPersistenceObject<ValueTypeProperty>(prop.ExportGuid) == null;
+            return savedSchema.FindPersistenceObject<Property>(prop.ExportGuid) == null;
         }
-        public void DoNewValueTypePropertyList(ObjectClass objClass, ValueTypeProperty prop)
+        public void DoNewValueTypePropertyList(ObjectClass objClass, Property prop)
         {
             Log.InfoFormat("New ValueType Property List: {0}", prop.PropertyName);
             string tblName = prop.GetCollectionEntryTable();
@@ -306,12 +306,26 @@ namespace Kistl.Server.SchemaManagement
             string valPropName = prop.PropertyName;
             string valPropIndexName = prop.PropertyName + "Index";
             string assocName = prop.GetAssociationName();
+            bool hasPersistentOrder = prop is ValueTypeProperty ? ((ValueTypeProperty)prop).HasPersistentOrder : ((StructProperty)prop).HasPersistentOrder;
 
             db.CreateTable(tblName, true);
 
             db.CreateColumn(tblName, fkName, System.Data.DbType.Int32, 0, false);
-            db.CreateColumn(tblName, valPropName, SchemaManager.GetDbType(prop), prop is StringProperty ? ((StringProperty)prop).GetMaxLength() : 0, false);
-            if (prop.HasPersistentOrder)
+            if (prop is StructProperty)
+            {
+                // TODO: Support neested structs
+                StructProperty sProp = (StructProperty)prop;
+                foreach (ValueTypeProperty p in sProp.StructDefinition.Properties)
+                {
+                    db.CreateColumn(tblName, valPropName + "_" + p.PropertyName, SchemaManager.GetDbType(p), p is StringProperty ? ((StringProperty)p).GetMaxLength() : 0, true);
+                }
+            }
+            else
+            {
+                db.CreateColumn(tblName, valPropName, SchemaManager.GetDbType(prop), prop is StringProperty ? ((StringProperty)prop).GetMaxLength() : 0, false);
+            }
+
+            if(hasPersistentOrder)
             {
                 db.CreateColumn(tblName, valPropIndexName, System.Data.DbType.Int32, 0, false);
             }

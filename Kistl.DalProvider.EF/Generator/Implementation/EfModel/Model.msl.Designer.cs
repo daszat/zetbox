@@ -194,7 +194,7 @@ this.WriteObjects("    </AssociationSetMapping>\r\n");
 
 #line 167 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.msl.cst"
 this.WriteObjects("\r\n");
-this.WriteObjects("    <!-- EntitySetMappings and AssociationSetMappings for ValueType lists -->\r\n");
+this.WriteObjects("    <!-- EntitySetMappings and AssociationSetMappings for object-value CollectionEntrys -->\r\n");
 #line 170 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.msl.cst"
 foreach(var prop in ctx.GetQuery<ValueTypeProperty>()
         .Where(p => p.IsList)
@@ -237,6 +237,52 @@ this.WriteObjects("    </AssociationSetMapping>\r\n");
     
 
 #line 207 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.msl.cst"
+this.WriteObjects("\r\n");
+this.WriteObjects("    <!-- EntitySetMappings and AssociationSetMappings for object-struct CollectionEntrys -->\r\n");
+#line 210 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.msl.cst"
+foreach(var prop in ctx.GetQuery<StructProperty>()
+        .Where(p => p.IsList)
+        .OrderBy(p => p.ObjectClass.ClassName)
+        .ThenBy(p => p.PropertyName))
+    { 
+
+#line 216 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.msl.cst"
+this.WriteObjects("    <EntitySetMapping Name=\"",  prop.GetCollectionEntryClassName() , "\">\r\n");
+this.WriteObjects("      <EntityTypeMapping TypeName=\"IsTypeOf(Model.",  prop.GetCollectionEntryClassName() , ")\">\r\n");
+this.WriteObjects("        <MappingFragment StoreEntitySet=\"",  prop.GetCollectionEntryClassName() , "\">\r\n");
+this.WriteObjects("          <ScalarProperty Name=\"ID\" ColumnName=\"ID\" />\r\n");
+this.WriteObjects("          ");
+#line 220 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.msl.cst"
+ModelMslEntityTypeMappingComplexProperty.Call(Host, ctx, prop, "B", string.Empty); 
+#line 222 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.msl.cst"
+if (prop.HasPersistentOrder)
+		{
+
+#line 225 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.msl.cst"
+this.WriteObjects("          <ScalarProperty Name=\"B",  Kistl.API.Helper.PositionSuffix , "\" ColumnName=\"BIndex\" />\r\n");
+#line 227 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.msl.cst"
+}
+
+#line 229 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.msl.cst"
+this.WriteObjects("        </MappingFragment>\r\n");
+this.WriteObjects("      </EntityTypeMapping>\r\n");
+this.WriteObjects("    </EntitySetMapping>\r\n");
+this.WriteObjects("    <AssociationSetMapping Name=\"",  prop.GetAssociationName() , "\"\r\n");
+this.WriteObjects("                           TypeName=\"Model.",  prop.GetAssociationName() , "\"\r\n");
+this.WriteObjects("                           StoreEntitySet=\"",  prop.GetCollectionEntryClassName() , "\" >\r\n");
+this.WriteObjects("      <EndProperty Name=\"",  prop.ObjectClass.ClassName , "\">\r\n");
+this.WriteObjects("        <ScalarProperty Name=\"ID\" ColumnName=\"fk_",  prop.ObjectClass.ClassName , "\"/>\r\n");
+this.WriteObjects("      </EndProperty>\r\n");
+this.WriteObjects("      <EndProperty Name=\"CollectionEntry\">\r\n");
+this.WriteObjects("        <ScalarProperty Name=\"ID\" ColumnName=\"ID\"/>\r\n");
+this.WriteObjects("      </EndProperty>\r\n");
+this.WriteObjects("      <Condition ColumnName=\"fk_",  prop.ObjectClass.ClassName , "\" IsNull=\"false\"/>\r\n");
+this.WriteObjects("    </AssociationSetMapping>\r\n");
+#line 244 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.msl.cst"
+}
+    
+
+#line 247 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.msl.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("  </EntityContainerMapping>\r\n");
 this.WriteObjects("</Mapping>");

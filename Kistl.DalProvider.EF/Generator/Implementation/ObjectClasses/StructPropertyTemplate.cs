@@ -10,18 +10,18 @@ namespace Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses
 {
     public partial class StructPropertyTemplate
     {
-        public static void Call(IGenerationHost host, IKistlContext ctx, Kistl.Server.Generators.Templates.Implementation.SerializationMembersList list, StructProperty prop)
+        public static void Call(IGenerationHost host, IKistlContext ctx, Kistl.Server.Generators.Templates.Implementation.SerializationMembersList list, StructProperty prop, string propName)
         {
             if (host == null) { throw new ArgumentNullException("host"); }
 
             host.CallTemplate("Implementation.ObjectClasses.StructPropertyTemplate", ctx,
-                list, prop);
+                list, prop, propName);
         }
 
         protected virtual void AddSerialization(Kistl.Server.Generators.Templates.Implementation.SerializationMembersList list, string memberName)
         {
             if (list != null)
-                list.Add("Implementation.ObjectClasses.StructSerialization", Kistl.Server.Generators.Templates.Implementation.SerializerType.All, this.prop.Module.Namespace, this.prop.PropertyName, memberName);
+                list.Add("Implementation.ObjectClasses.StructSerialization", Kistl.Server.Generators.Templates.Implementation.SerializerType.All, this.prop.Module.Namespace, memberName, memberName);
         }
     }
 }

@@ -12,7 +12,7 @@ namespace Kistl.DalProvider.EF.Generator.Implementation.CollectionEntries
 {
     public partial class ValueCollectionEntry
     {
-        protected override void ApplyParentReferencePropertyTemplate(ValueTypeProperty prop, string propertyName)
+        protected override void ApplyParentReferencePropertyTemplate(Property prop, string propertyName)
         {
             Implementation.ObjectClasses.ObjectReferencePropertyTemplate.Call(Host, ctx,
                 MembersToSerialize,
@@ -41,5 +41,9 @@ namespace Kistl.DalProvider.EF.Generator.Implementation.CollectionEntries
             this.WriteLine();
         }
 
+        protected override void ApplyStructPropertyTemplate(StructProperty prop, string propertyName)
+        {
+            Implementation.ObjectClasses.StructPropertyTemplate.Call(Host, ctx, MembersToSerialize, prop, propertyName);
+        }
     }
 }

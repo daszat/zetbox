@@ -158,6 +158,13 @@
       <End Role="CollectionEntry" EntitySet="ObjectClass_SecurityRules_CollectionEntry" />
     </AssociationSet>
 
+    <!-- EntitySets and AssociationSets for all object-struct CollectionEntrys -->
+    <EntitySet Name="TestCustomObject_PhoneNumbersOther_CollectionEntry" EntityType="Model.TestCustomObject_PhoneNumbersOther_CollectionEntry" />
+    <AssociationSet Name="FK_TestCustomObject_value_PhoneNumbersOther" Association="Model.FK_TestCustomObject_value_PhoneNumbersOther" >
+      <End Role="TestCustomObject" EntitySet="TestCustomObject" />
+      <End Role="CollectionEntry" EntitySet="TestCustomObject_PhoneNumbersOther_CollectionEntry" />
+    </AssociationSet>
+
     <!-- AssociationSets for all object-object relations without CollectionEntrys -->
     <AssociationSet Name="FK_Assembly_was_ChangedBy" Association="Model.FK_Assembly_was_ChangedBy" >
       <End Role="Assembly" EntitySet="Assembly" />
@@ -1267,6 +1274,16 @@
                         FromRole="TestCustomObjects_One_Role"
                         ToRole="MuhBlah_One_Role" />
     <Property Name="PersonName" Type="String" Nullable="false" MaxLength="200" />
+    <Property Name="PhoneNumberMobile__Implementation__"
+              Type="Model.TestPhoneStruct"
+              Nullable="false" />
+    <Property Name="PhoneNumberOffice__Implementation__"
+              Type="Model.TestPhoneStruct"
+              Nullable="false" />
+    <NavigationProperty Name="PhoneNumbersOther__Implementation__"
+                        Relationship="Model.FK_TestCustomObject_value_PhoneNumbersOther"
+                        FromRole="TestCustomObject"
+                        ToRole="CollectionEntry" />
   </EntityType>
   <EntityType Name="TestObjClass">
     <Key>
@@ -2091,6 +2108,33 @@
          Multiplicity="0..1" />
     <End Role="CollectionEntry"
          Type="Model.ObjectClass_SecurityRules_CollectionEntry" 
+         Multiplicity="*" />
+  </Association>
+
+<!-- EntityTypes and Associations for all object-struct CollectionEntrys -->
+  <!-- TestCustomObject.PhoneNumbersOther -->
+  <EntityType Name="TestCustomObject_PhoneNumbersOther_CollectionEntry" >
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    
+    <!-- A -->
+    <NavigationProperty Name="A__Implementation__"
+                        Relationship="Model.FK_TestCustomObject_value_PhoneNumbersOther"
+                        FromRole="CollectionEntry"
+                        ToRole="TestCustomObject" />
+    <!-- B -->
+    <Property Name="B__Implementation__"
+              Type="Model.TestPhoneStruct"
+              Nullable="false" />
+  </EntityType>
+  <Association Name="FK_TestCustomObject_value_PhoneNumbersOther" >
+    <End Role="TestCustomObject"
+         Type="Model.TestCustomObject" 
+         Multiplicity="0..1" />
+    <End Role="CollectionEntry"
+         Type="Model.TestCustomObject_PhoneNumbersOther_CollectionEntry" 
          Multiplicity="*" />
   </Association>
 

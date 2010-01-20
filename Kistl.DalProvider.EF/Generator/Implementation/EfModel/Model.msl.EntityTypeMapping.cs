@@ -58,61 +58,61 @@ namespace Kistl.DalProvider.EF.Generator.Implementation.EfModel
 
             foreach (var prop in cls.Properties.OfType<ValueTypeProperty>().Where(p => !p.IsList).OrderBy(p => p.PropertyName))
             {
-                ApplyScalarProperty(prop, String.Empty);
+                ModelMslEntityTypeMappingScalarProperty.Call(Host, ctx, prop, prop.PropertyName, String.Empty);
             }
 
             foreach (var prop in cls.Properties.OfType<StructProperty>().Where(p => !p.IsList).OrderBy(p => p.PropertyName))
             {
-                ApplyComplexProperty(prop, String.Empty);
+                ModelMslEntityTypeMappingComplexProperty.Call(Host, ctx, prop, prop.PropertyName, String.Empty);
             }
         }
 
-        protected virtual void ApplyScalarProperty(Property prop, string parentName)
-        {
-            string propertyName = prop.PropertyName;
-            string columnName;
+        //protected virtual void ApplyScalarProperty(Property prop, string parentName)
+        //{
+        //    string propertyName = prop.PropertyName;
+        //    string columnName;
 
-            if (prop is EnumerationProperty)
-            {
-                columnName = Construct.NestedColumnName(prop, parentName);
-                propertyName += Kistl.API.Helper.ImplementationSuffix;
-            }
-            else if (prop is ValueTypeProperty)
-            {
-                columnName = Construct.NestedColumnName(prop, parentName);
-            }
-            else if (prop is ObjectReferenceProperty)
-            {
-                throw new ArgumentOutOfRangeException("prop", "cannot apply ObjectReferenceProperty as scalar");
-            }
-            else
-            {
-                return;
-            }
+        //    if (prop is EnumerationProperty)
+        //    {
+        //        columnName = Construct.NestedColumnName(prop, parentName);
+        //        propertyName += Kistl.API.Helper.ImplementationSuffix;
+        //    }
+        //    else if (prop is ValueTypeProperty)
+        //    {
+        //        columnName = Construct.NestedColumnName(prop, parentName);
+        //    }
+        //    else if (prop is ObjectReferenceProperty)
+        //    {
+        //        throw new ArgumentOutOfRangeException("prop", "cannot apply ObjectReferenceProperty as scalar");
+        //    }
+        //    else
+        //    {
+        //        return;
+        //    }
 
-            this.WriteLine("<ScalarProperty Name=\"{0}\" ColumnName=\"{1}\" />", propertyName, columnName);
-        }
+        //    this.WriteLine("<ScalarProperty Name=\"{0}\" ColumnName=\"{1}\" />", propertyName, columnName);
+        //}
 
-        protected virtual void ApplyComplexProperty(StructProperty prop, string parentName)
-        {
-            this.WriteLine("<ComplexProperty Name=\"{0}{1}\" TypeName=\"Model.{2}\">",
-                prop.PropertyName,
-                Kistl.API.Helper.ImplementationSuffix,
-                prop.StructDefinition.ClassName
-                );
+        //protected virtual void ApplyComplexProperty(StructProperty prop, string parentName)
+        //{
+        //    this.WriteLine("<ComplexProperty Name=\"{0}{1}\" TypeName=\"Model.{2}\">",
+        //        prop.PropertyName,
+        //        Kistl.API.Helper.ImplementationSuffix,
+        //        prop.StructDefinition.ClassName
+        //        );
 
-            string newParent = Construct.NestedColumnName(prop, parentName);
-            foreach (var subProp in prop.StructDefinition.Properties.OfType<ValueTypeProperty>().Where(p => !p.IsList).OrderBy(p => p.PropertyName))
-            {
-                ApplyScalarProperty(subProp, newParent);
-            }
+        //    string newParent = Construct.NestedColumnName(prop, parentName);
+        //    foreach (var subProp in prop.StructDefinition.Properties.OfType<ValueTypeProperty>().Where(p => !p.IsList).OrderBy(p => p.PropertyName))
+        //    {
+        //        ModelMslEntityTypeMappingScalarProperty.Call(Host, ctx, subProp, subProp.PropertyName, newParent);
+        //    }
 
-            foreach (var subProp in prop.StructDefinition.Properties.OfType<StructProperty>().Where(p => !p.IsList).OrderBy(p => p.PropertyName))
-            {
-                ApplyComplexProperty(subProp, newParent);
-            }
+        //    foreach (var subProp in prop.StructDefinition.Properties.OfType<StructProperty>().Where(p => !p.IsList).OrderBy(p => p.PropertyName))
+        //    {
+        //        ApplyComplexProperty(subProp, newParent);
+        //    }
 
-            this.WriteLine("</ComplexProperty>");
-        }
+        //    this.WriteLine("</ComplexProperty>");
+        //}
     }
 }

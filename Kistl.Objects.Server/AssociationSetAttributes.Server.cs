@@ -1647,6 +1647,15 @@ using Kistl.DalProvider.EF;
     )]
 
 
+
+// object-struct association
+[assembly: EdmRelationship(
+    "Model", "FK_TestCustomObject_value_PhoneNumbersOther",
+    "TestCustomObject", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Test.TestCustomObject__Implementation__),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.Test.TestCustomObject_PhoneNumbersOther_CollectionEntry__Implementation__)
+    )]
+
+
 [assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_Projekte_Rights", 
 	"Projekt", 
 	global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, 

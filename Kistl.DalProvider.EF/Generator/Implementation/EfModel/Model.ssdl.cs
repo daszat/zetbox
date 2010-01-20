@@ -54,5 +54,14 @@ namespace Kistl.DalProvider.EF.Generator.Implementation.EfModel
                 ModelSsdlHelper.RetrieveAndSortPropertiesOfType<StructProperty>(cls.Properties, p => !p.IsList).Cast<Property>(),
                 String.Empty);
         }
+
+        protected virtual void ApplyEntityTypeColumnDefs(StructProperty prop)
+        {
+            Implementation.EfModel.ModelSsdlEntityTypeColumns.Call(
+                Host,
+                ctx,
+                new Property[] { prop },
+                String.Empty);
+        }
     }
 }

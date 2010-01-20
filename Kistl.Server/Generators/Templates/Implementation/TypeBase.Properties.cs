@@ -44,15 +44,8 @@ namespace Kistl.Server.Generators.Templates.Implementation
             }
             else if (p is CalculatedObjectReferenceProperty)
             {
-                //if (((CalculatedObjectReferenceProperty)p).IsList)
-                //{
-                //    ApplyObjectReferenceListTemplate((CalculatedObjectReferenceProperty)p);
-                //}
-                //else
-                {
-                    ApplyCalculatedObjectReferencePropertyTemplate((CalculatedObjectReferenceProperty)p);
-                    ApplyPropertyInvocationsTemplate(p, true);
-                }
+                ApplyCalculatedObjectReferencePropertyTemplate((CalculatedObjectReferenceProperty)p);
+                ApplyPropertyInvocationsTemplate(p, true);
             }
             else if (p is StructProperty)
             {

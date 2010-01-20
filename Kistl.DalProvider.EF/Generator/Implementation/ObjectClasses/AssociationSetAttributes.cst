@@ -91,6 +91,25 @@ using Kistl.DalProvider.EF;
 %>
 
 <%
+	foreach (var prop in ctx.GetQuery<StructProperty>()
+		.Where(p => p.IsList)
+		.OrderBy(p => p.ObjectClass.ClassName)
+		.ThenBy(p => p.PropertyName))
+	{
+%>
+
+// object-struct association
+[assembly: EdmRelationship(
+    "Model", "<%= prop.GetAssociationName() %>",
+    "<%= prop.ObjectClass.ClassName %>", RelationshipMultiplicity.ZeroOrOne, typeof(<%= prop.ObjectClass.Module.Namespace + "." + prop.ObjectClass.ClassName + Kistl.API.Helper.ImplementationSuffix %>),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(<%= prop.GetCollectionEntryFullName() + Kistl.API.Helper.ImplementationSuffix %>)
+    )]
+
+<%
+	}
+%>
+
+<%
 	foreach (var cls in ctx.GetQuery<ObjectClass>().Where(c => c.BaseObjectClass == null)
 		.OrderBy(c => c.ClassName))
 	{

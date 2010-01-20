@@ -96,14 +96,28 @@ this.WriteObjects("    ",  ModelCsdl.PlainPropertyDefinitionFromValueType((Value
 		}
 		else if (p is StructProperty)
 		{
+			var prop = (StructProperty)p;
+			if (prop.IsList)
+			{
+
+#line 86 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.csdl.EntityTypeFields.cst"
+this.WriteObjects("    <NavigationProperty Name=\"",  prop.PropertyName + Kistl.API.Helper.ImplementationSuffix , "\"\r\n");
+this.WriteObjects("                        Relationship=\"Model.",  prop.GetAssociationName() , "\"\r\n");
+this.WriteObjects("                        FromRole=\"",  prop.ObjectClass.ClassName , "\"\r\n");
+this.WriteObjects("                        ToRole=\"CollectionEntry\" />\r\n");
+#line 91 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.csdl.EntityTypeFields.cst"
+}
+			else
+			{
 			// Nullable Complex types are not supported by EF
 
-#line 84 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.csdl.EntityTypeFields.cst"
+#line 96 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.csdl.EntityTypeFields.cst"
 this.WriteObjects("    <Property Name=\"",  p.PropertyName + Kistl.API.Helper.ImplementationSuffix , "\"\r\n");
-this.WriteObjects("              Type=\"Model.",  ((StructProperty)p).StructDefinition.ClassName , "\"\r\n");
+this.WriteObjects("              Type=\"Model.",  prop.StructDefinition.ClassName , "\"\r\n");
 this.WriteObjects("              Nullable=\"false\" />\r\n");
-#line 88 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.csdl.EntityTypeFields.cst"
-}	
+#line 100 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.csdl.EntityTypeFields.cst"
+}
+		}	
 	}
 
 

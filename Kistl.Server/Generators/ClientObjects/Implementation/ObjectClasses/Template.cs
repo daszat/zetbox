@@ -59,7 +59,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
         protected override void ApplyStructPropertyTemplate(StructProperty prop)
         {
             this.WriteLine("        // struct property");
-            Implementation.ObjectClasses.StructPropertyTemplate.Call(Host, ctx, MembersToSerialize, prop);
+            Implementation.ObjectClasses.StructPropertyTemplate.Call(Host, ctx, MembersToSerialize, prop, prop.PropertyName);
         }
 
         protected override void ApplyObjectListPropertyTemplate(Relation rel, RelationEndRole endRole)
@@ -78,19 +78,19 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
         protected override void ApplyConstructorTemplate()
         {
             base.ApplyConstructorTemplate();
-            this.WriteObjects("            {");
-            this.WriteLine();
-            foreach (var prop in DataType.Properties.OfType<StructProperty>())
-            {
-                string name = prop.PropertyName;
-                string backingName = "_" + name;
-                string structType = prop.GetPropertyTypeString();
-                string structImplementationType = structType + Kistl.API.Helper.ImplementationSuffix;
-                this.WriteObjects("                ", backingName, " = new ", structImplementationType, "(this, \"", name, "\");");
-                this.WriteLine();
-            }
-            this.WriteObjects("            }");
-            this.WriteLine();
+            //this.WriteObjects("            {");
+            //this.WriteLine();
+            //foreach (var prop in DataType.Properties.OfType<StructProperty>())
+            //{
+            //    string name = prop.PropertyName;
+            //    string backingName = "_" + name;
+            //    string structType = prop.GetPropertyTypeString();
+            //    string structImplementationType = structType + Kistl.API.Helper.ImplementationSuffix;
+            //    this.WriteObjects("                ", backingName, " = new ", structImplementationType, "(this, \"", name, "\");");
+            //    this.WriteLine();
+            //}
+            //this.WriteObjects("            }");
+            //this.WriteLine();
         }
 
         protected override void ApplyAttachToContextMethod()

@@ -13,18 +13,18 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
     {
         public static void Call(IGenerationHost host, IKistlContext ctx,
             Templates.Implementation.SerializationMembersList serializationList,
-            StructProperty prop)
+            StructProperty prop, string propName)
         {
             if (host == null) { throw new ArgumentNullException("host"); }
 
             host.CallTemplate("Implementation.ObjectClasses.StructPropertyTemplate", ctx,
-                serializationList, prop);
+                serializationList, prop, propName);
         }
 
         protected virtual void AddSerialization(Templates.Implementation.SerializationMembersList list, string memberName)
         {
             if (list != null)
-                list.Add("Implementation.ObjectClasses.StructSerialization", SerializerType.All, this.prop.Module.Namespace, this.prop.PropertyName, memberName);
+                list.Add("Implementation.ObjectClasses.StructSerialization", SerializerType.All, this.prop.Module.Namespace, memberName, memberName);
         }
     }
 }

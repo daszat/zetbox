@@ -11,12 +11,14 @@ namespace Kistl.App.Extensions
     public static class PropertyExtensions
     {
         /// <summary>
-        /// Returns the association name for the given ValueTypeProperty
+        /// Returns the association name for the given ValueTypeProperty or StructProperty
         /// </summary>
-        public static string GetAssociationName(this ValueTypeProperty prop)
+        public static string GetAssociationName(this Property prop)
         {
             if (prop == null) { throw new ArgumentNullException("prop"); }
-            if (!prop.IsList) throw new NotSupportedException("GetAssociationName is only valid for Lists");
+            if (!(prop is ValueTypeProperty || prop is StructProperty)) throw new NotSupportedException("Property must be either a ValueTypeProperty or StructProperty");
+            if (!(prop is ValueTypeProperty ? ((ValueTypeProperty)prop).IsList : ((StructProperty)prop).IsList)) 
+                throw new NotSupportedException("GetAssociationName is only valid for Lists");
             return String.Format("FK_{0}_{1}_{2}", prop.ObjectClass.ClassName, "value", prop.PropertyName);
         }
 

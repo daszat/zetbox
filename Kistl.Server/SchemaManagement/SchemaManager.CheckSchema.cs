@@ -74,8 +74,12 @@ namespace Kistl.Server.SchemaManagement
             // All ObjectClasses
             List<string> tableNames = schema.GetQuery<ObjectClass>().Select(o => o.TableName).ToList();
 
-            // Add ValueTypeProperties
+            // Add ValueTypeListProperties
             tableNames.AddRange(schema.GetQuery<ValueTypeProperty>().Where(p => p.IsList).ToList()
+                .Select(p => p.GetCollectionEntryTable()));
+
+            // Add StructListProperties
+            tableNames.AddRange(schema.GetQuery<StructProperty>().Where(p => p.IsList).ToList()
                 .Select(p => p.GetCollectionEntryTable()));
 
             // Add Relations with sep. Storage
@@ -154,6 +158,11 @@ namespace Kistl.Server.SchemaManagement
             }
 
             foreach (ValueTypeProperty prop in schema.GetQuery<ValueTypeProperty>().Where(p => p.IsList))
+            {
+                relationNames.Add(prop.GetAssociationName());
+            }
+
+            foreach (StructProperty prop in schema.GetQuery<StructProperty>().Where(p => p.IsList))
             {
                 relationNames.Add(prop.GetAssociationName());
             }
@@ -429,9 +438,17 @@ namespace Kistl.Server.SchemaManagement
         private void CheckValueTypeCollections(ObjectClass objClass)
         {
             Log.Debug("ValueType Collections: ");
-            foreach (ValueTypeProperty prop in objClass.Properties.OfType<ValueTypeProperty>()
+            var properties = new List<Property>();
+
+            properties.AddRange(objClass.Properties.OfType<ValueTypeProperty>()
+            .Where(p => p.IsList)
+            .OrderBy(p => p.Module.Namespace).ThenBy(p => p.PropertyName).Cast<Property>());
+
+            properties.AddRange(objClass.Properties.OfType<StructProperty>()
                 .Where(p => p.IsList)
-                .OrderBy(p => p.Module.Namespace).ThenBy(p => p.PropertyName))
+                .OrderBy(p => p.Module.Namespace).ThenBy(p => p.PropertyName).Cast<Property>());
+
+            foreach (Property prop in properties)
             {
                 string tblName = prop.GetCollectionEntryTable();
                 string fkName = "fk_" + prop.ObjectClass.ClassName;
@@ -439,16 +456,29 @@ namespace Kistl.Server.SchemaManagement
                 string valPropIndexName = prop.PropertyName + "Index";
                 string assocName = prop.GetAssociationName();
                 string refTblName = objClass.TableName;
+                bool hasPersistentOrder = prop is ValueTypeProperty ? ((ValueTypeProperty)prop).HasPersistentOrder : ((StructProperty)prop).HasPersistentOrder;
                 if (db.CheckTableExists(tblName))
                 {
                     Log.DebugFormat("{0}", prop.PropertyName);
                     CheckColumn(tblName, fkName, System.Data.DbType.Int32, 0, false);
-                    CheckColumn(tblName, valPropName, GetDbType(prop), prop is StringProperty ? ((StringProperty)prop).GetMaxLength() : 0, false);
-                    if (prop.HasPersistentOrder)
+                    if (prop is StructProperty)
+                    {
+                        // TODO: Support neested structs
+                        StructProperty sProp = (StructProperty)prop;
+                        foreach (ValueTypeProperty p in sProp.StructDefinition.Properties)
+                        {
+                            CheckColumn(tblName, valPropName + "_" + p.PropertyName, SchemaManager.GetDbType(p), p is StringProperty ? ((StringProperty)p).GetMaxLength() : 0, true);
+                        }
+                    }
+                    else
+                    {
+                        CheckColumn(tblName, valPropName, GetDbType(prop), prop is StringProperty ? ((StringProperty)prop).GetMaxLength() : 0, false);
+                    }
+                    if (hasPersistentOrder)
                     {
                         CheckColumn(tblName, valPropIndexName, System.Data.DbType.Int32, 0, false);
                     }
-                    if (!prop.HasPersistentOrder && db.CheckColumnExists(tblName, valPropIndexName))
+                    if (!hasPersistentOrder && db.CheckColumnExists(tblName, valPropIndexName))
                     {
                         Log.WarnFormat("Index Column '{0}' exists but property is not indexed", valPropIndexName);
                     }
@@ -488,13 +518,12 @@ namespace Kistl.Server.SchemaManagement
                     {
                         if (isNullable || (!isNullable && !db.CheckColumnContainsNulls(tblName, colName)))
                         {
-                            // not calling case because we already have all neccessary information
                             db.AlterColumn(tblName, colName, type, size, isNullable);
                             Log.Info("Fixed");
                         }
                         else if (!isNullable && db.CheckColumnContainsNulls(tblName, colName))
                         {
-                            Log.WarnFormat("column '{0}.{1}' contains NULL values, cannot set NOT NULLABLE", tblName, colName);
+                            Log.WarnFormat("Column '{0}.{1}' contains NULL values, cannot set NOT NULLABLE", tblName, colName);
                         }
                     }
                 }
@@ -515,6 +544,19 @@ namespace Kistl.Server.SchemaManagement
             else
             {
                 Log.WarnFormat("Column '{0}'.'{1}' is missing", tblName, colName);
+                if (repair)
+                {
+                    Log.Info("Fixing");
+                    if (!isNullable && db.CheckTableContainsData(tblName))
+                    {
+                        Log.WarnFormat("Table '{0}' contains data, cannot create NOT NULLABLE column '{1}'", tblName, colName);
+                        db.CreateColumn(tblName, colName, type, size, true);
+                    }
+                    else
+                    {
+                        db.CreateColumn(tblName, colName, type, size, isNullable);
+                    }
+                }
             }
         }
 

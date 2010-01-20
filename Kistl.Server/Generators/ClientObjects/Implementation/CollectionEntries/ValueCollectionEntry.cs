@@ -12,7 +12,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.CollectionEntries
     public partial class ValueCollectionEntry
         : Templates.Implementation.CollectionEntries.ValueCollectionEntry
     {
-        public ValueCollectionEntry(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, ValueTypeProperty prop)
+        public ValueCollectionEntry(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Property prop)
             : base(_host, ctx, prop)
         {
         }

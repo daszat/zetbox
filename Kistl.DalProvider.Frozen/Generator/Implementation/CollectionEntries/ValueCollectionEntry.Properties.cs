@@ -17,7 +17,7 @@ namespace Kistl.DalProvider.Frozen.Generator.Implementation.CollectionEntries
             // nothing todo, inherited from BaseFrozenObject
         }
 
-        protected override void ApplyParentReferencePropertyTemplate(ValueTypeProperty prop, string propertyName)
+        protected override void ApplyParentReferencePropertyTemplate(Property prop, string propertyName)
         {
             Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty.Call(Host, ctx,
                     this.MembersToSerialize,

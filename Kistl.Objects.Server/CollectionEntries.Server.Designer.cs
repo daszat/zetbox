@@ -3521,3 +3521,221 @@ public string Value { get { return B; } set { B = value; } }
 
     }
 }
+
+namespace Kistl.App.Test
+{
+    [EdmEntityType(NamespaceName="Model", Name="TestCustomObject_PhoneNumbersOther_CollectionEntry")]    [System.Diagnostics.DebuggerDisplay("TestCustomObject_PhoneNumbersOther_CollectionEntry__Implementation__")]
+    public class TestCustomObject_PhoneNumbersOther_CollectionEntry__Implementation__ : BaseServerCollectionEntry_EntityFramework, TestCustomObject_PhoneNumbersOther_CollectionEntry
+    {
+    
+        [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
+           // Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.IdProperty
+        public override int ID
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _ID;
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_ID != value)
+                {
+                    var __oldValue = _ID;
+                    var __newValue = value;
+                    NotifyPropertyChanging("ID", __oldValue, __newValue);
+                    _ID = __newValue;
+                    NotifyPropertyChanged("ID", __oldValue, __newValue);
+                }
+            }
+        }
+        private int _ID;
+        public IDataObject ParentObject { get { return Parent; } set { Parent = (TestCustomObject)value; } }
+        public object ValueObject { get { return Value; } set { Value = (Kistl.App.Test.TestPhoneStruct)value; } }
+
+        /// <summary>
+        /// Reference to the A-Side member of this CollectionEntry
+        /// </summary>
+   		// Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public TestCustomObject A
+        {
+            get
+            {
+                return A__Implementation__;
+            }
+            set
+            {
+                // TODO: NotifyPropertyChanged()
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if(value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                A__Implementation__ = (TestCustomObject__Implementation__)value;
+            }
+        }
+        
+        private int? _fk_A;
+        // EF sees only this property
+        [EdmRelationshipNavigationProperty("Model", "FK_TestCustomObject_value_PhoneNumbersOther", "TestCustomObject")]
+        public TestCustomObject__Implementation__ A__Implementation__
+        {
+            get
+            {
+                EntityReference<TestCustomObject__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<TestCustomObject__Implementation__>(
+                        "Model.FK_TestCustomObject_value_PhoneNumbersOther",
+                        "TestCustomObject");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load(); 
+                    if(r.Value != null) r.Value.AttachToContext(this.Context);
+                }
+                var __value = r.Value;
+                return __value;
+            }
+            set
+            {
+                EntityReference<TestCustomObject__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<TestCustomObject__Implementation__>(
+                        "Model.FK_TestCustomObject_value_PhoneNumbersOther",
+                        "TestCustomObject");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load(); 
+                }
+                TestCustomObject __oldValue = (TestCustomObject)r.Value;
+                TestCustomObject __newValue = (TestCustomObject)value;
+
+                r.Value = (TestCustomObject__Implementation__)__newValue;
+                                
+            }
+        }
+        
+        
+public TestCustomObject Parent { get { return A; } set { A = value; } }
+        /// <summary>
+        /// the B-side value of this CollectionEntry
+        /// </summary>
+   		// Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.StructPropertyTemplate
+        // implement the user-visible interface
+        public Kistl.App.Test.TestPhoneStruct B
+        {
+            get { return B__Implementation__; }
+            set { B__Implementation__ = (Kistl.App.Test.TestPhoneStruct__Implementation__)value; }
+        }
+        
+        /// <summary>backing store for B</summary>
+        private Kistl.App.Test.TestPhoneStruct__Implementation__ _B;
+        
+        /// <summary>backing property for B, takes care of attaching/detaching the values, mapped via EF</summary>
+        [XmlIgnore()]
+        [EdmComplexProperty()]
+        public Kistl.App.Test.TestPhoneStruct__Implementation__ B__Implementation__
+        {
+            get
+            {
+                return _B;
+            }
+            set
+            {
+                if (value == null)
+					throw new ArgumentNullException("value");
+                
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (!object.Equals(_B, value))
+                {
+					var __oldValue = _B;
+                    NotifyPropertyChanging("B", "B__Implementation__", __oldValue, value);
+                    if (_B != null)
+                    {
+						_B.DetachFromObject(this, "B");
+					}
+                    _B = (Kistl.App.Test.TestPhoneStruct__Implementation__)value;
+					_B.AttachToObject(this, "B");
+                    NotifyPropertyChanged("B", "B__Implementation__", __oldValue, value);
+                }
+            }
+        }
+
+
+  public Kistl.App.Test.TestPhoneStruct Value { get { return B; } set { B = value; } }
+
+#region Serializer
+
+
+        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects)
+        {
+            
+            base.ToStream(binStream, auxObjects);
+            BinarySerializer.ToStream(A != null ? A.ID : (int?)null, binStream);
+			BinarySerializer.ToStream(this.B__Implementation__, binStream);
+        }
+
+        public override void FromStream(System.IO.BinaryReader binStream)
+        {
+            
+            base.FromStream(binStream);
+            BinarySerializer.FromStream(out this._fk_A, binStream);
+			{
+				// trick compiler into generating correct temporary variable
+				var tmp = this.B__Implementation__;
+				BinarySerializer.FromStream(out tmp, binStream);
+				// use setter to de-/attach everything correctly
+	            this.B__Implementation__ = tmp;
+	        }
+        }
+
+        public override void ToStream(System.Xml.XmlWriter xml)
+        {
+            
+            base.ToStream(xml);
+            XmlStreamer.ToStream(A != null ? A.ID : (int?)null, xml, "A", "Kistl.App.Test");
+			// TODO: Add XML Serializer here
+        }
+
+        public override void FromStream(System.Xml.XmlReader xml)
+        {
+            
+            base.FromStream(xml);
+            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.Test");
+			// TODO: Add XML Serializer here
+        }
+
+#endregion
+
+		public override InterfaceType GetInterfaceType()
+		{
+			return new InterfaceType(typeof(TestCustomObject_PhoneNumbersOther_CollectionEntry));
+		}
+	
+		public override void ReloadReferences()
+		{
+			// Do not reload references if the current object has been deleted.
+			// TODO: enable when MemoryContext uses MemoryDataObjects
+			//if (this.ObjectState == DataObjectState.Deleted) return;
+			if (_fk_A.HasValue)
+				A__Implementation__ = (TestCustomObject__Implementation__)Context.Find<TestCustomObject>(_fk_A.Value);
+			else
+				A__Implementation__ = null;
+	
+		}
+		
+		public override void ApplyChangesFrom(IPersistenceObject obj)
+		{
+			base.ApplyChangesFrom(obj);
+			var other = (TestCustomObject_PhoneNumbersOther_CollectionEntry__Implementation__)obj;
+			var me = (TestCustomObject_PhoneNumbersOther_CollectionEntry__Implementation__)this;
+			
+            me.B = other.B;
+		}		
+		
+		
+
+    }
+}

@@ -13,16 +13,16 @@ namespace Kistl.Server.Generators.Templates.Implementation.CollectionEntries
     public abstract partial class ValueCollectionEntry
         : Template
     {
-        public static void Call(Arebis.CodeGeneration.IGenerationHost host, IKistlContext ctx, ValueTypeProperty prop)
+        public static void Call(Arebis.CodeGeneration.IGenerationHost host, IKistlContext ctx, Property prop)
         {
             if (host == null) { throw new ArgumentNullException("host"); }
 
             host.CallTemplate("Implementation.CollectionEntries.ValueCollectionEntry", ctx, prop);
         }
 
-        protected ValueTypeProperty prop { get; private set; }
+        protected Property prop { get; private set; }
 
-        public ValueCollectionEntry(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, ValueTypeProperty prop)
+        public ValueCollectionEntry(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Property prop)
             : base(_host, ctx)
         {
             this.prop = prop;
@@ -50,7 +50,7 @@ namespace Kistl.Server.Generators.Templates.Implementation.CollectionEntries
 
         protected override bool IsOrdered()
         {
-            return prop.HasPersistentOrder;
+            return prop is ValueTypeProperty ? ((ValueTypeProperty)prop).HasPersistentOrder : ((StructProperty)prop).HasPersistentOrder;
         }
 
         protected override void ApplyChangesFromBody()

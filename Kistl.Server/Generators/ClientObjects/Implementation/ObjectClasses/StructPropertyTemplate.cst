@@ -11,9 +11,9 @@
 <%@ Parameter Name="ctx" Type="IKistlContext" %>
 <%@ Parameter Name="serializationList" Type="Templates.Implementation.SerializationMembersList" %>
 <%@ Parameter Name="prop" Type="StructProperty" %>
+<%@ Parameter Name="name" Type="string" %>
 <%
 
-	string name = prop.PropertyName;
 	string backingPropertyName = "_" + name;
 	string backingStoreName = "_" + name + "Store";
 	
@@ -26,6 +26,7 @@
         public <%= structType %> <%= name %>
         {
             get { return <%= backingPropertyName %>; }
+            set { <%= backingPropertyName %> = (<%= structImplementationType %>)value; }
         }
         
         /// <summary>backing store for <%= name %></summary>

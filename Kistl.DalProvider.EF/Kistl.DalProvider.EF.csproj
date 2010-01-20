@@ -202,7 +202,7 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Generator\Implementation\ObjectClasses\SecurityRulesClass.cs" >
+    <Compile Include="Generator\Implementation\ObjectClasses\SecurityRulesClass.cs">
       <DependentUpon>SecurityRulesClass.cst</DependentUpon>
     </Compile>
     <Compile Include="Generator\Implementation\ObjectClasses\SecurityRulesClass.Designer.cs">
@@ -303,6 +303,8 @@
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>Model.ssdl.EntityTypeColumnsRel.Designer.cs</LastGenOutput>
     </None>
+    <Compile Include="Generator\Implementation\EfModel\ModelMslEntityTypeMapping.ComplexProperty.cs" />
+    <Compile Include="Generator\Implementation\EfModel\ModelMslEntityTypeMapping.ScalarProperty.cs" />
     <None Include="Generator\Implementation\ObjectClasses\AssociationSetAttributes.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>AssociationSetAttributes.Designer.cs</LastGenOutput>

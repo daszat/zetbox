@@ -53,9 +53,27 @@ namespace <%= rel.A.Type.Module.Namespace %>
 }
 <%
 	}
-
-
+%>
+<%
 	foreach (var prop in ctx.GetQuery<ValueTypeProperty>()
+        .Where(p => p.IsList)
+        .OrderBy(p => p.ObjectClass.ClassName)
+        .ThenBy(p => p.PropertyName))
+	{
+
+%>
+
+namespace <%= prop.ObjectClass.Module.Namespace %>
+{
+<%
+		Implementation.CollectionEntries.ValueCollectionEntry.Call(Host, ctx, prop);
+%>
+}
+<%
+	}
+%>
+<%
+	foreach (var prop in ctx.GetQuery<StructProperty>()
         .Where(p => p.IsList)
         .OrderBy(p => p.ObjectClass.ClassName)
         .ThenBy(p => p.PropertyName))

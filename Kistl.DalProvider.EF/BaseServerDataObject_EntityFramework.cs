@@ -125,18 +125,6 @@ namespace Kistl.DalProvider.EF
         }
 
         /// <summary>
-        /// Special NotifyPropertyChanging implementation. Use this if the 
-        /// underlying EF-Property name doesn't match the public property
-        /// name.
-        /// </summary>
-        /// <param name="property">the official name of the property</param>
-        /// <param name="efProperty">the EF name of the property</param>
-        public void NotifyPropertyChanging(string property, string efProperty)
-        {
-            NotifyPropertyChanging(property, efProperty, null, null);
-        }
-
-        /// <summary>
         /// Special NotifyPropertyChanged implementation. Use this if the 
         /// underlying EF-Property name doesn't match the public property
         /// name.
@@ -289,19 +277,59 @@ namespace Kistl.DalProvider.EF
 
         public override void NotifyPropertyChanging(string property, object oldValue, object newValue)
         {
-            base.NotifyPropertyChanging(property, oldValue, newValue);
-            if (_changeTracker != null)
-            {
-                _changeTracker.EntityMemberChanging(property);
-            }
+            NotifyPropertyChanging(property, property, oldValue, newValue);
         }
 
         public override void NotifyPropertyChanged(string property, object oldValue, object newValue)
         {
+            NotifyPropertyChanged(property, property, oldValue, newValue);
+        }
+
+        /// <summary>
+        /// Special NotifyPropertyChanging implementation. Use this if the 
+        /// underlying EF-Property name doesn't match the public property
+        /// name.
+        /// </summary>
+        /// <param name="property">the official name of the property</param>
+        /// <param name="efProperty">the EF name of the property</param>
+        public void NotifyPropertyChanging(string property, string efProperty)
+        {
+            NotifyPropertyChanging(property, efProperty, null, null);
+        }
+
+        /// <summary>
+        /// Special NotifyPropertyChanged implementation. Use this if the 
+        /// underlying EF-Property name doesn't match the public property
+        /// name.
+        /// </summary>
+        /// <param name="property">the official name of the property</param>
+        /// <param name="efProperty">the EF name of the property</param>
+        /// <param name="oldValue">the old value of the property</param>
+        /// <param name="newValue">the new value of the property</param>
+        public void NotifyPropertyChanged(string property, string efProperty, object oldValue, object newValue)
+        {
             base.NotifyPropertyChanged(property, oldValue, newValue);
             if (_changeTracker != null)
             {
-                _changeTracker.EntityMemberChanged(property);
+                _changeTracker.EntityMemberChanged(efProperty);
+            }
+        }
+
+        /// <summary>
+        /// Special NotifyPropertyChanging implementation. Use this if the 
+        /// underlying EF-Property name doesn't match the public property
+        /// name.
+        /// </summary>
+        /// <param name="property">the official name of the property</param>
+        /// <param name="efProperty">the EF name of the property</param>
+        /// <param name="oldValue">the old value of the property</param>
+        /// <param name="newValue">the new value of the property</param>
+        public void NotifyPropertyChanging(string property, string efProperty, object oldValue, object newValue)
+        {
+            base.NotifyPropertyChanging(property, oldValue, newValue);
+            if (_changeTracker != null)
+            {
+                _changeTracker.EntityMemberChanging(efProperty);
             }
         }
 

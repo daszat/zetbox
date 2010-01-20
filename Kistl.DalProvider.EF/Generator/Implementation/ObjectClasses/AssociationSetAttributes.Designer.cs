@@ -112,13 +112,34 @@ this.WriteObjects("\r\n");
 #line 92 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\AssociationSetAttributes.cst"
 this.WriteObjects("\r\n");
 #line 94 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\AssociationSetAttributes.cst"
+foreach (var prop in ctx.GetQuery<StructProperty>()
+		.Where(p => p.IsList)
+		.OrderBy(p => p.ObjectClass.ClassName)
+		.ThenBy(p => p.PropertyName))
+	{
+
+#line 100 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\AssociationSetAttributes.cst"
+this.WriteObjects("\r\n");
+this.WriteObjects("// object-struct association\r\n");
+this.WriteObjects("[assembly: EdmRelationship(\r\n");
+this.WriteObjects("    \"Model\", \"",  prop.GetAssociationName() , "\",\r\n");
+this.WriteObjects("    \"",  prop.ObjectClass.ClassName , "\", RelationshipMultiplicity.ZeroOrOne, typeof(",  prop.ObjectClass.Module.Namespace + "." + prop.ObjectClass.ClassName + Kistl.API.Helper.ImplementationSuffix , "),\r\n");
+this.WriteObjects("    \"CollectionEntry\", RelationshipMultiplicity.Many, typeof(",  prop.GetCollectionEntryFullName() + Kistl.API.Helper.ImplementationSuffix , ")\r\n");
+this.WriteObjects("    )]\r\n");
+this.WriteObjects("\r\n");
+#line 109 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\AssociationSetAttributes.cst"
+}
+
+#line 111 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\AssociationSetAttributes.cst"
+this.WriteObjects("\r\n");
+#line 113 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\AssociationSetAttributes.cst"
 foreach (var cls in ctx.GetQuery<ObjectClass>().Where(c => c.BaseObjectClass == null)
 		.OrderBy(c => c.ClassName))
 	{
 		if(cls.HasSecurityRules(false))
 		{
 
-#line 100 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\AssociationSetAttributes.cst"
+#line 119 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\AssociationSetAttributes.cst"
 this.WriteObjects("[assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute(\"Model\", \"",  Construct.SecurityRulesFKName(cls) , "\", \r\n");
 this.WriteObjects("	\"",  cls.ClassName , "\", \r\n");
 this.WriteObjects("	global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, \r\n");
@@ -126,7 +147,7 @@ this.WriteObjects("	typeof(",  cls.Module.Namespace + "." + cls.ClassName + Kist
 this.WriteObjects("	\"",  Construct.SecurityRulesClassName(cls) , "\", \r\n");
 this.WriteObjects("	global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, \r\n");
 this.WriteObjects("	typeof(",  cls.Module.Namespace + "." + Construct.SecurityRulesClassName(cls) + Kistl.API.Helper.ImplementationSuffix , "))]\r\n");
-#line 108 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\AssociationSetAttributes.cst"
+#line 127 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\AssociationSetAttributes.cst"
 }
 	}
 

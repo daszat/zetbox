@@ -122,6 +122,26 @@
 	}
 %>
 
+    <!-- EntitySets and AssociationSet for all object-struct CollectionEntrys -->
+<%
+	foreach(var prop in ctx.GetQuery<StructProperty>()
+		.Where(p => p.IsList)
+		.OrderBy(p => p.ObjectClass.ClassName)
+		.ThenBy(p => p.PropertyName))
+	{
+		string assocName = prop.GetAssociationName();
+		string esName = prop.GetCollectionEntryClassName();
+%>
+    <EntitySet Name="<%= esName %>" EntityType="Model.Store.<%= esName %>" Table="<%= prop.GetCollectionEntryTable() %>" />
+    <AssociationSet Name="<%= assocName %>" Association="Model.Store.<%= assocName %>" >
+      <End Role="<%= prop.ObjectClass.ClassName %>" EntitySet="<%= prop.ObjectClass.ClassName %>" />
+      <End Role="CollectionEntry" EntitySet="<%= esName %>" />
+    </AssociationSet>
+    
+<%
+	}
+%>
+
 
   </EntityContainer>
 
@@ -369,5 +389,56 @@
 	}
 %>
 
+    <!-- EntityTypes and Associations for all object-struct CollectionEntrys -->
+<%
+	foreach(var prop in ctx.GetQuery<StructProperty>()
+		.Where(p => p.IsList)
+		.OrderBy(p => p.ObjectClass.ClassName)
+		.ThenBy(p => p.PropertyName))
+	{
+		string assocName = prop.GetAssociationName();
+		
+		// the name of the class containing this list
+		string containerTypeName = prop.ObjectClass.ClassName;
+		// the name of the CollectionEntry class
+		string entryTypeName = prop.GetCollectionEntryClassName();
+%>
+    <EntityType Name="<%= entryTypeName %>" >
+      <Key>
+        <PropertyRef Name="ID" />
+      </Key>
+      <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+      <Property Name="fk_<%= containerTypeName %>" Type="int" Nullable="true" />
+<%
+		ApplyEntityTypeColumnDefs(prop);
+%>
+<%
+		if (prop.HasPersistentOrder)
+		{
+%>
+    <Property Name="<%= prop.PropertyName %>Index" Type="int" Nullable="true" />
+<%
+		}
+%>
+    </EntityType>
+
+    <Association Name="<%= prop.GetAssociationName() %>">
+      <End Role="<%= containerTypeName %>" Type="Model.Store.<%= containerTypeName %>" Multiplicity="0..1">
+        <OnDelete Action="Cascade" />
+      </End>
+      <End Role="CollectionEntry" Type="Model.Store.<%= entryTypeName %>" Multiplicity="*" />
+      <ReferentialConstraint>
+        <Principal Role="<%= containerTypeName %>">
+          <PropertyRef Name="ID" />
+        </Principal>
+        <Dependent Role="CollectionEntry">
+          <PropertyRef Name="fk_<%= containerTypeName %>" />
+        </Dependent>
+      </ReferentialConstraint>
+    </Association>
+
+<%
+	}
+%>
 
 </Schema>

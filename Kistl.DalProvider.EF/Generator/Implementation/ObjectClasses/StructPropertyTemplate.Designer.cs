@@ -14,22 +14,23 @@ namespace Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses
 		protected IKistlContext ctx;
 		protected Kistl.Server.Generators.Templates.Implementation.SerializationMembersList serializationList;
 		protected StructProperty prop;
+		protected string name;
 
 
-        public StructPropertyTemplate(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Kistl.Server.Generators.Templates.Implementation.SerializationMembersList serializationList, StructProperty prop)
+        public StructPropertyTemplate(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Kistl.Server.Generators.Templates.Implementation.SerializationMembersList serializationList, StructProperty prop, string name)
             : base(_host)
         {
 			this.ctx = ctx;
 			this.serializationList = serializationList;
 			this.prop = prop;
+			this.name = name;
 
         }
         
         public override void Generate()
         {
-#line 16 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\StructPropertyTemplate.cst"
-string name = prop.PropertyName;
-	string efName = name + Kistl.API.Helper.ImplementationSuffix;
+#line 17 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\StructPropertyTemplate.cst"
+string efName = name + Kistl.API.Helper.ImplementationSuffix;
 	string backingName = "_" + name;
 
 	string structType = prop.GetPropertyTypeString();
@@ -41,10 +42,8 @@ this.WriteObjects("   		// ",  this.GetType() , "\r\n");
 this.WriteObjects("        // implement the user-visible interface\r\n");
 this.WriteObjects("        public ",  structType , " ",  name , "\r\n");
 this.WriteObjects("        {\r\n");
-this.WriteObjects("            get\r\n");
-this.WriteObjects("            {\r\n");
-this.WriteObjects("                return ",  efName , ";\r\n");
-this.WriteObjects("            }\r\n");
+this.WriteObjects("            get { return ",  efName , "; }\r\n");
+this.WriteObjects("            set { ",  efName , " = (",  structImplementationType , ")value; }\r\n");
 this.WriteObjects("        }\r\n");
 this.WriteObjects("        \r\n");
 this.WriteObjects("        /// <summary>backing store for ",  name , "</summary>\r\n");
@@ -81,10 +80,10 @@ this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("\r\n");
-#line 69 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\StructPropertyTemplate.cst"
+#line 67 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\StructPropertyTemplate.cst"
 AddSerialization(serializationList, efName);
 
-#line 70 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\StructPropertyTemplate.cst"
+#line 68 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\StructPropertyTemplate.cst"
 this.WriteObjects("  ");
 
         }

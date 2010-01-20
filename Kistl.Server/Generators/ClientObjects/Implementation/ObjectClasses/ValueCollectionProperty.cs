@@ -17,16 +17,17 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
         public static void Call(Arebis.CodeGeneration.IGenerationHost host,
             IKistlContext ctx,
             Templates.Implementation.SerializationMembersList serializationList,
-            ValueTypeProperty prop)
+            Property prop)
         {
             if (prop == null) { throw new ArgumentNullException("prop"); }
-            if (!prop.IsList) { throw new ArgumentOutOfRangeException("prop", "prop must be a List-valued property"); }
+            if (!(prop is ValueTypeProperty ? ((ValueTypeProperty)prop).IsList : ((StructProperty)prop).IsList)) { throw new ArgumentOutOfRangeException("prop", "prop must be a List-valued property"); }
+            bool hasPersistentOrder = prop is ValueTypeProperty ? ((ValueTypeProperty)prop).HasPersistentOrder : ((StructProperty)prop).HasPersistentOrder;
 
             string name = prop.PropertyName;
             string backingName = "_" + name + "Wrapper";
-            string backingCollectionType = (prop.HasPersistentOrder ? "ClientValueListWrapper" : "ClientValueCollectionWrapper");
+            string backingCollectionType = (hasPersistentOrder ? "ClientValueListWrapper" : "ClientValueCollectionWrapper");
 
-            string exposedCollectionInterface = prop.HasPersistentOrder ? "IList" : "ICollection";
+            string exposedCollectionInterface = hasPersistentOrder ? "IList" : "ICollection";
 
             string thisInterface = prop.ObjectClass.ClassName;
             string referencedType = prop.ReferencedTypeAsCSharp();
@@ -39,7 +40,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
                 host, ctx, serializationList,
                 name, backingName, backingCollectionType, exposedCollectionInterface,
                 thisInterface, referencedType, referencedCollectionEntry,
-                providerCollectionType, underlyingCollectionName, !prop.HasPersistentOrder);
+                providerCollectionType, underlyingCollectionName, !hasPersistentOrder);
         }
 
         /// <summary>

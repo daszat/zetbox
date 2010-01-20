@@ -27,7 +27,7 @@ namespace Kistl.Server.Generators.Templates.Implementation.CollectionEntries
             this.WriteLine("public {0} Value {{ get {{ return B; }} set {{ B = value; }} }}", this.prop.ReferencedTypeAsCSharp());
         }
 
-        protected abstract void ApplyParentReferencePropertyTemplate(ValueTypeProperty prop, string propertyName);
+        protected abstract void ApplyParentReferencePropertyTemplate(Property prop, string propertyName);
 
         protected virtual void ApplyValuePropertyTemplate(Property p, string propertyName)
         {

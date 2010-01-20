@@ -11,9 +11,9 @@
 <%@ Parameter Name="ctx" Type="IKistlContext" %>
 <%@ Parameter Name="serializationList" Type="Kistl.Server.Generators.Templates.Implementation.SerializationMembersList" %>
 <%@ Parameter Name="prop" Type="StructProperty" %>
+<%@ Parameter Name="name" Type="string" %>
 <%
 
-	string name = prop.PropertyName;
 	string efName = name + Kistl.API.Helper.ImplementationSuffix;
 	string backingName = "_" + name;
 
@@ -25,10 +25,8 @@
         // implement the user-visible interface
         public <%= structType %> <%= name %>
         {
-            get
-            {
-                return <%= efName %>;
-            }
+            get { return <%= efName %>; }
+            set { <%= efName %> = (<%= structImplementationType %>)value; }
         }
         
         /// <summary>backing store for <%= name %></summary>

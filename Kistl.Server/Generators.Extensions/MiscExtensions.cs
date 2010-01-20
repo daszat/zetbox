@@ -87,19 +87,19 @@ namespace Kistl.Server.Generators.Extensions
         #endregion
 
         #region CollectionEntry naming standards
-        public static string GetCollectionEntryClassName(this ValueTypeProperty prop)
+        public static string GetCollectionEntryClassName(this Property prop)
         {
             if (prop == null) { throw new ArgumentNullException("prop"); }
             return String.Format("{0}_{1}_CollectionEntry", prop.ObjectClass.ClassName, prop.PropertyName);
         }
 
-        public static string GetCollectionEntryTable(this ValueTypeProperty prop)
+        public static string GetCollectionEntryTable(this Property prop)
         {
             if (prop == null) { throw new ArgumentNullException("prop"); }
             return String.Format("{0}_{1}Collection", ((ObjectClass)prop.ObjectClass).TableName, prop.PropertyName);
         }
 
-        public static string GetCollectionEntryFullName(this ValueTypeProperty prop)
+        public static string GetCollectionEntryFullName(this Property prop)
         {
             if (prop == null) { throw new ArgumentNullException("prop"); }
             return String.Format("{0}.{1}", prop.ObjectClass.Module.Namespace, prop.GetCollectionEntryClassName());

@@ -933,6 +933,14 @@
     </AssociationSet>
     
 
+    <!-- EntitySets and AssociationSet for all object-struct CollectionEntrys -->
+    <EntitySet Name="TestCustomObject_PhoneNumbersOther_CollectionEntry" EntityType="Model.Store.TestCustomObject_PhoneNumbersOther_CollectionEntry" Table="TestCustomObjects_PhoneNumbersOtherCollection" />
+    <AssociationSet Name="FK_TestCustomObject_value_PhoneNumbersOther" Association="Model.Store.FK_TestCustomObject_value_PhoneNumbersOther" >
+      <End Role="TestCustomObject" EntitySet="TestCustomObject" />
+      <End Role="CollectionEntry" EntitySet="TestCustomObject_PhoneNumbersOther_CollectionEntry" />
+    </AssociationSet>
+    
+
 
   </EntityContainer>
 
@@ -1727,6 +1735,10 @@
     <Property Name="fk_MuhBlah_Role" Type="int" />
     <Property Name="Birthday" Type="datetime" Nullable="true" />
     <Property Name="PersonName" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="PhoneNumberMobile_AreaCode" Type="nvarchar" MaxLength="50" Nullable="true" />
+    <Property Name="PhoneNumberMobile_Number" Type="nvarchar" MaxLength="50" Nullable="true" />
+    <Property Name="PhoneNumberOffice_AreaCode" Type="nvarchar" MaxLength="50" Nullable="true" />
+    <Property Name="PhoneNumberOffice_Number" Type="nvarchar" MaxLength="50" Nullable="true" />
   </EntityType>
 	
   <EntityType Name="TestObjClass">
@@ -4257,6 +4269,32 @@
       </ReferentialConstraint>
     </Association>
 
+
+    <!-- EntityTypes and Associations for all object-struct CollectionEntrys -->
+    <EntityType Name="TestCustomObject_PhoneNumbersOther_CollectionEntry" >
+      <Key>
+        <PropertyRef Name="ID" />
+      </Key>
+      <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+      <Property Name="fk_TestCustomObject" Type="int" Nullable="true" />
+    <Property Name="PhoneNumbersOther_AreaCode" Type="nvarchar" MaxLength="50" Nullable="true" />
+    <Property Name="PhoneNumbersOther_Number" Type="nvarchar" MaxLength="50" Nullable="true" />
+    </EntityType>
+
+    <Association Name="FK_TestCustomObject_value_PhoneNumbersOther">
+      <End Role="TestCustomObject" Type="Model.Store.TestCustomObject" Multiplicity="0..1">
+        <OnDelete Action="Cascade" />
+      </End>
+      <End Role="CollectionEntry" Type="Model.Store.TestCustomObject_PhoneNumbersOther_CollectionEntry" Multiplicity="*" />
+      <ReferentialConstraint>
+        <Principal Role="TestCustomObject">
+          <PropertyRef Name="ID" />
+        </Principal>
+        <Dependent Role="CollectionEntry">
+          <PropertyRef Name="fk_TestCustomObject" />
+        </Dependent>
+      </ReferentialConstraint>
+    </Association>
 
 
 </Schema>

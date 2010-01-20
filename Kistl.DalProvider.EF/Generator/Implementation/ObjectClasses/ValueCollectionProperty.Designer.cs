@@ -16,10 +16,10 @@ namespace Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses
     {
 		protected IKistlContext ctx;
 		protected Kistl.Server.Generators.Templates.Implementation.SerializationMembersList serializationList;
-		protected ValueTypeProperty prop;
+		protected Property prop;
 
 
-        public ValueCollectionProperty(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Kistl.Server.Generators.Templates.Implementation.SerializationMembersList serializationList, ValueTypeProperty prop)
+        public ValueCollectionProperty(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Kistl.Server.Generators.Templates.Implementation.SerializationMembersList serializationList, Property prop)
             : base(_host)
         {
 			this.ctx = ctx;
@@ -31,8 +31,8 @@ namespace Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses
         public override void Generate()
         {
 #line 19 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\ValueCollectionProperty.cst"
-Debug.Assert(prop.IsList);
-
+Debug.Assert(prop is ValueTypeProperty ? ((ValueTypeProperty)prop).IsList : ((StructProperty)prop).IsList);
+	bool hasPersistentOrder = prop is ValueTypeProperty ? ((ValueTypeProperty)prop).HasPersistentOrder : ((StructProperty)prop).HasPersistentOrder;
 
 	// the name of the property to create
 	string name = prop.PropertyName;
@@ -41,14 +41,14 @@ Debug.Assert(prop.IsList);
 	// the name of the private backing store for the conversion wrapper list
 	string wrapperName = "_" + name + "Wrapper";
 	// the name of the wrapper class for wrapping the EntityCollection
-	string wrapperClass = (prop.HasPersistentOrder ? "EFValueListWrapper" : "EFValueCollectionWrapper");
+	string wrapperClass = (hasPersistentOrder ? "EFValueListWrapper" : "EFValueCollectionWrapper");
 	
 	// the name of the EF association
 	string assocName = prop.GetAssociationName();
 	string targetRoleName = "CollectionEntry";
 
 	// which generic interface to use for the collection
-	string exposedListType = prop.HasPersistentOrder ? "IList" : "ICollection";
+	string exposedListType = hasPersistentOrder ? "IList" : "ICollection";
 
 	// which Kistl interface this is 
 	string thisInterface = prop.ObjectClass.ClassName;

@@ -51,5 +51,22 @@ namespace Kistl.App.Test
 			get;
 			set;
 		}
+        /// <summary>
+        /// 
+        /// </summary>
+		Kistl.App.Test.TestPhoneStruct PhoneNumberMobile {
+			get;
+		}
+        /// <summary>
+        /// 
+        /// </summary>
+		Kistl.App.Test.TestPhoneStruct PhoneNumberOffice {
+			get;
+		}
+        /// <summary>
+        /// 
+        /// </summary>
+
+        ICollection<Kistl.App.Test.TestPhoneStruct> PhoneNumbersOther { get; }
     }
 }

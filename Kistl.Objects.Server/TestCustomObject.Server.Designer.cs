@@ -439,6 +439,142 @@ namespace Kistl.App.Test
 		public static event PropertyPreSetterHandler<Kistl.App.Test.TestCustomObject, string> OnPersonName_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Test.TestCustomObject, string> OnPersonName_PostSetter;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        // struct property
+   		// Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.StructPropertyTemplate
+        // implement the user-visible interface
+        public Kistl.App.Test.TestPhoneStruct PhoneNumberMobile
+        {
+            get { return PhoneNumberMobile__Implementation__; }
+            set { PhoneNumberMobile__Implementation__ = (Kistl.App.Test.TestPhoneStruct__Implementation__)value; }
+        }
+        
+        /// <summary>backing store for PhoneNumberMobile</summary>
+        private Kistl.App.Test.TestPhoneStruct__Implementation__ _PhoneNumberMobile;
+        
+        /// <summary>backing property for PhoneNumberMobile, takes care of attaching/detaching the values, mapped via EF</summary>
+        [XmlIgnore()]
+        [EdmComplexProperty()]
+        public Kistl.App.Test.TestPhoneStruct__Implementation__ PhoneNumberMobile__Implementation__
+        {
+            get
+            {
+                return _PhoneNumberMobile;
+            }
+            set
+            {
+                if (value == null)
+					throw new ArgumentNullException("value");
+                
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (!object.Equals(_PhoneNumberMobile, value))
+                {
+					var __oldValue = _PhoneNumberMobile;
+                    NotifyPropertyChanging("PhoneNumberMobile", "PhoneNumberMobile__Implementation__", __oldValue, value);
+                    if (_PhoneNumberMobile != null)
+                    {
+						_PhoneNumberMobile.DetachFromObject(this, "PhoneNumberMobile");
+					}
+                    _PhoneNumberMobile = (Kistl.App.Test.TestPhoneStruct__Implementation__)value;
+					_PhoneNumberMobile.AttachToObject(this, "PhoneNumberMobile");
+                    NotifyPropertyChanged("PhoneNumberMobile", "PhoneNumberMobile__Implementation__", __oldValue, value);
+                }
+            }
+        }
+
+
+  
+        /// <summary>
+        /// 
+        /// </summary>
+        // struct property
+   		// Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.StructPropertyTemplate
+        // implement the user-visible interface
+        public Kistl.App.Test.TestPhoneStruct PhoneNumberOffice
+        {
+            get { return PhoneNumberOffice__Implementation__; }
+            set { PhoneNumberOffice__Implementation__ = (Kistl.App.Test.TestPhoneStruct__Implementation__)value; }
+        }
+        
+        /// <summary>backing store for PhoneNumberOffice</summary>
+        private Kistl.App.Test.TestPhoneStruct__Implementation__ _PhoneNumberOffice;
+        
+        /// <summary>backing property for PhoneNumberOffice, takes care of attaching/detaching the values, mapped via EF</summary>
+        [XmlIgnore()]
+        [EdmComplexProperty()]
+        public Kistl.App.Test.TestPhoneStruct__Implementation__ PhoneNumberOffice__Implementation__
+        {
+            get
+            {
+                return _PhoneNumberOffice;
+            }
+            set
+            {
+                if (value == null)
+					throw new ArgumentNullException("value");
+                
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (!object.Equals(_PhoneNumberOffice, value))
+                {
+					var __oldValue = _PhoneNumberOffice;
+                    NotifyPropertyChanging("PhoneNumberOffice", "PhoneNumberOffice__Implementation__", __oldValue, value);
+                    if (_PhoneNumberOffice != null)
+                    {
+						_PhoneNumberOffice.DetachFromObject(this, "PhoneNumberOffice");
+					}
+                    _PhoneNumberOffice = (Kistl.App.Test.TestPhoneStruct__Implementation__)value;
+					_PhoneNumberOffice.AttachToObject(this, "PhoneNumberOffice");
+                    NotifyPropertyChanged("PhoneNumberOffice", "PhoneNumberOffice__Implementation__", __oldValue, value);
+                }
+            }
+        }
+
+
+  
+        /// <summary>
+        /// 
+        /// </summary>
+        // struct list property
+   		// Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.ValueCollectionProperty
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public ICollection<Kistl.App.Test.TestPhoneStruct> PhoneNumbersOther
+        {
+            get
+            {
+                if (_PhoneNumbersOtherWrapper == null)
+                {
+                    _PhoneNumbersOtherWrapper = new EFValueCollectionWrapper<TestCustomObject, Kistl.App.Test.TestPhoneStruct, TestCustomObject_PhoneNumbersOther_CollectionEntry__Implementation__, EntityCollection<TestCustomObject_PhoneNumbersOther_CollectionEntry__Implementation__>>(
+						this.Context,
+                        this,
+                        PhoneNumbersOther__Implementation__);
+                }
+                return _PhoneNumbersOtherWrapper;
+            }
+        }
+        
+        [EdmRelationshipNavigationProperty("Model", "FK_TestCustomObject_value_PhoneNumbersOther", "CollectionEntry")]
+        public EntityCollection<TestCustomObject_PhoneNumbersOther_CollectionEntry__Implementation__> PhoneNumbersOther__Implementation__
+        {
+            get
+            {
+                var c = ((IEntityWithRelationships)(this)).RelationshipManager
+                    .GetRelatedCollection<TestCustomObject_PhoneNumbersOther_CollectionEntry__Implementation__>(
+                        "Model.FK_TestCustomObject_value_PhoneNumbersOther",
+                        "CollectionEntry");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !c.IsLoaded)
+                {
+                    c.Load();
+                }
+                return c;
+            }
+        }
+        private EFValueCollectionWrapper<TestCustomObject, Kistl.App.Test.TestPhoneStruct, TestCustomObject_PhoneNumbersOther_CollectionEntry__Implementation__, EntityCollection<TestCustomObject_PhoneNumbersOther_CollectionEntry__Implementation__>> _PhoneNumbersOtherWrapper;
+
 		public override InterfaceType GetInterfaceType()
 		{
 			return new InterfaceType(typeof(TestCustomObject));
@@ -565,6 +701,33 @@ namespace Kistl.App.Test
 					
 					return String.Join("; ", errors);
 				}
+				case "PhoneNumberMobile":
+				{
+					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("05e41070-e88a-4270-ab1c-94cd2e7d41d1")).Constraints
+						.Where(c => !c.IsValid(this, this.PhoneNumberMobile))
+						.Select(c => c.GetErrorText(this, this.PhoneNumberMobile))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "PhoneNumberOffice":
+				{
+					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("465e10ec-4e5e-4e8f-831f-44562dd0d68b")).Constraints
+						.Where(c => !c.IsValid(this, this.PhoneNumberOffice))
+						.Select(c => c.GetErrorText(this, this.PhoneNumberOffice))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "PhoneNumbersOther":
+				{
+					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("0c0c1101-118a-4ce2-806c-d30a03b19dde")).Constraints
+						.Where(c => !c.IsValid(this, this.PhoneNumbersOther))
+						.Select(c => c.GetErrorText(this, this.PhoneNumbersOther))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
 				default:
 					return base.GetPropertyError(propertyName);
 			}
@@ -602,6 +765,9 @@ namespace Kistl.App.Test
             BinarySerializer.ToStream(MubBlah_Nav != null ? MubBlah_Nav.ID : (int?)null, binStream);
             BinarySerializer.ToStream(MuhBlah_One_Nav != null ? MuhBlah_One_Nav.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._PersonName, binStream);
+			BinarySerializer.ToStream(this.PhoneNumberMobile__Implementation__, binStream);
+			BinarySerializer.ToStream(this.PhoneNumberOffice__Implementation__, binStream);
+            BinarySerializer.ToStreamCollectionEntries(this.PhoneNumbersOther__Implementation__, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
@@ -612,6 +778,20 @@ namespace Kistl.App.Test
             BinarySerializer.FromStream(out this._fk_MubBlah_Nav, binStream);
             BinarySerializer.FromStream(out this._fk_MuhBlah_One_Nav, binStream);
             BinarySerializer.FromStream(out this._PersonName, binStream);
+			{
+				// trick compiler into generating correct temporary variable
+				var tmp = this.PhoneNumberMobile__Implementation__;
+				BinarySerializer.FromStream(out tmp, binStream);
+				// use setter to de-/attach everything correctly
+	            this.PhoneNumberMobile__Implementation__ = tmp;
+	        }
+			{
+				// trick compiler into generating correct temporary variable
+				var tmp = this.PhoneNumberOffice__Implementation__;
+				BinarySerializer.FromStream(out tmp, binStream);
+				// use setter to de-/attach everything correctly
+	            this.PhoneNumberOffice__Implementation__ = tmp;
+	        }
         }
 
         public override void ToStream(System.Xml.XmlWriter xml)
@@ -622,6 +802,9 @@ namespace Kistl.App.Test
             XmlStreamer.ToStream(MubBlah_Nav != null ? MubBlah_Nav.ID : (int?)null, xml, "MubBlah_Nav", "Kistl.App.Test");
             XmlStreamer.ToStream(MuhBlah_One_Nav != null ? MuhBlah_One_Nav.ID : (int?)null, xml, "MuhBlah_One_Nav", "Kistl.App.Test");
             XmlStreamer.ToStream(this._PersonName, xml, "PersonName", "Kistl.App.Test");
+			// TODO: Add XML Serializer here
+			// TODO: Add XML Serializer here
+            XmlStreamer.ToStreamCollectionEntries(this.PhoneNumbersOther__Implementation__, xml, "PhoneNumbersOther", "Kistl.App.Test");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
@@ -632,6 +815,9 @@ namespace Kistl.App.Test
             XmlStreamer.FromStream(ref this._fk_MubBlah_Nav, xml, "MubBlah_Nav", "Kistl.App.Test");
             XmlStreamer.FromStream(ref this._fk_MuhBlah_One_Nav, xml, "MuhBlah_One_Nav", "Kistl.App.Test");
             XmlStreamer.FromStream(ref this._PersonName, xml, "PersonName", "Kistl.App.Test");
+			// TODO: Add XML Serializer here
+			// TODO: Add XML Serializer here
+            XmlStreamer.FromStreamCollectionEntries(this.PhoneNumbersOther__Implementation__, xml, "PhoneNumbersOther", "Kistl.App.Test");
         }
 
 #endregion

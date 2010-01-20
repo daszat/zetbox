@@ -79,12 +79,25 @@
 		}
 		else if (p is StructProperty)
 		{
+			var prop = (StructProperty)p;
+			if (prop.IsList)
+			{
+%>
+    <NavigationProperty Name="<%= prop.PropertyName + Kistl.API.Helper.ImplementationSuffix %>"
+                        Relationship="Model.<%= prop.GetAssociationName() %>"
+                        FromRole="<%= prop.ObjectClass.ClassName %>"
+                        ToRole="CollectionEntry" />
+<%
+			}
+			else
+			{
 			// Nullable Complex types are not supported by EF
 %>
     <Property Name="<%= p.PropertyName + Kistl.API.Helper.ImplementationSuffix %>"
-              Type="Model.<%= ((StructProperty)p).StructDefinition.ClassName %>"
+              Type="Model.<%= prop.StructDefinition.ClassName %>"
               Nullable="false" />
 <%
+			}
 		}	
 	}
 %>

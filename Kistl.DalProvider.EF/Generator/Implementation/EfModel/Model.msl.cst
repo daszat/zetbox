@@ -165,7 +165,7 @@
     
 %>
 
-    <!-- EntitySetMappings and AssociationSetMappings for ValueType lists -->
+    <!-- EntitySetMappings and AssociationSetMappings for object-value CollectionEntrys -->
 <%
     foreach(var prop in ctx.GetQuery<ValueTypeProperty>()
         .Where(p => p.IsList)
@@ -178,6 +178,46 @@
         <MappingFragment StoreEntitySet="<%= prop.GetCollectionEntryClassName() %>">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="B" ColumnName="<%= prop.PropertyName %>" />
+<%
+		if (prop.HasPersistentOrder)
+		{
+%>
+          <ScalarProperty Name="B<%= Kistl.API.Helper.PositionSuffix %>" ColumnName="BIndex" />
+<%
+		}
+%>
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="<%= prop.GetAssociationName() %>"
+                           TypeName="Model.<%= prop.GetAssociationName() %>"
+                           StoreEntitySet="<%= prop.GetCollectionEntryClassName() %>" >
+      <EndProperty Name="<%= prop.ObjectClass.ClassName %>">
+        <ScalarProperty Name="ID" ColumnName="fk_<%= prop.ObjectClass.ClassName %>"/>
+      </EndProperty>
+      <EndProperty Name="CollectionEntry">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_<%= prop.ObjectClass.ClassName %>" IsNull="false"/>
+    </AssociationSetMapping>
+<%
+    }
+    
+%>
+
+    <!-- EntitySetMappings and AssociationSetMappings for object-struct CollectionEntrys -->
+<%
+    foreach(var prop in ctx.GetQuery<StructProperty>()
+        .Where(p => p.IsList)
+        .OrderBy(p => p.ObjectClass.ClassName)
+        .ThenBy(p => p.PropertyName))
+    { 
+%>
+    <EntitySetMapping Name="<%= prop.GetCollectionEntryClassName() %>">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.<%= prop.GetCollectionEntryClassName() %>)">
+        <MappingFragment StoreEntitySet="<%= prop.GetCollectionEntryClassName() %>">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <% ModelMslEntityTypeMappingComplexProperty.Call(Host, ctx, prop, "B", string.Empty); %>
 <%
 		if (prop.HasPersistentOrder)
 		{

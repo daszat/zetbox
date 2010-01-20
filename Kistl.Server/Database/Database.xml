@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2010-01-05T14:54:31.833Z" xmlns="http://dasz.at/Kistl">
+<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2010-01-20T12:34:58.54Z" xmlns="http://dasz.at/Kistl">
   <KistlBase:Module ExportGuid="ef6d5bd8-5826-4ce6-a9ca-c8438ddde773">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.32Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.32Z</KistlBase:CreatedOn>
@@ -15335,6 +15335,42 @@
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:IsList>false</KistlBase:IsList>
   </KistlBase:StringProperty>
+  <KistlBase:StructProperty ExportGuid="05e41070-e88a-4270-ab1c-94cd2e7d41d1">
+    <KistlBase:CategoryTags>Structs</KistlBase:CategoryTags>
+    <KistlBase:ChangedOn>2010-01-20T12:32:40.987Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-01-20T12:32:40.987Z</KistlBase:CreatedOn>
+    <KistlBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</KistlBase:Module>
+    <KistlBase:ObjectClass>de155110-79cc-4dac-89d6-0916608be1fb</KistlBase:ObjectClass>
+    <KistlBase:PropertyName>PhoneNumberMobile</KistlBase:PropertyName>
+    <GUI:ValueModelDescriptor>ac2f4c88-333a-4917-a0b5-a39ad7ea991a</GUI:ValueModelDescriptor>
+    <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
+    <KistlBase:IsList>false</KistlBase:IsList>
+    <KistlBase:StructDefinition>2510af08-089f-4252-8a98-ec84cb67bcb9</KistlBase:StructDefinition>
+  </KistlBase:StructProperty>
+  <KistlBase:StructProperty ExportGuid="465e10ec-4e5e-4e8f-831f-44562dd0d68b">
+    <KistlBase:CategoryTags>Structs</KistlBase:CategoryTags>
+    <KistlBase:ChangedOn>2010-01-20T12:33:30.38Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-01-20T12:33:30.38Z</KistlBase:CreatedOn>
+    <KistlBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</KistlBase:Module>
+    <KistlBase:ObjectClass>de155110-79cc-4dac-89d6-0916608be1fb</KistlBase:ObjectClass>
+    <KistlBase:PropertyName>PhoneNumberOffice</KistlBase:PropertyName>
+    <GUI:ValueModelDescriptor>ac2f4c88-333a-4917-a0b5-a39ad7ea991a</GUI:ValueModelDescriptor>
+    <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
+    <KistlBase:IsList>false</KistlBase:IsList>
+    <KistlBase:StructDefinition>2510af08-089f-4252-8a98-ec84cb67bcb9</KistlBase:StructDefinition>
+  </KistlBase:StructProperty>
+  <KistlBase:StructProperty ExportGuid="0c0c1101-118a-4ce2-806c-d30a03b19dde">
+    <KistlBase:CategoryTags>Structs</KistlBase:CategoryTags>
+    <KistlBase:ChangedOn>2010-01-20T12:34:58.54Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-01-20T12:34:58.54Z</KistlBase:CreatedOn>
+    <KistlBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</KistlBase:Module>
+    <KistlBase:ObjectClass>de155110-79cc-4dac-89d6-0916608be1fb</KistlBase:ObjectClass>
+    <KistlBase:PropertyName>PhoneNumbersOther</KistlBase:PropertyName>
+    <GUI:ValueModelDescriptor>ac2f4c88-333a-4917-a0b5-a39ad7ea991a</GUI:ValueModelDescriptor>
+    <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
+    <KistlBase:IsList>true</KistlBase:IsList>
+    <KistlBase:StructDefinition>2510af08-089f-4252-8a98-ec84cb67bcb9</KistlBase:StructDefinition>
+  </KistlBase:StructProperty>
   <KistlBase:IntProperty ExportGuid="29c0242b-cd1c-42b4-8ca0-be0a209afcbf">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.423Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.423Z</KistlBase:CreatedOn>

@@ -14,22 +14,23 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
 		protected IKistlContext ctx;
 		protected Templates.Implementation.SerializationMembersList serializationList;
 		protected StructProperty prop;
+		protected string name;
 
 
-        public StructPropertyTemplate(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Templates.Implementation.SerializationMembersList serializationList, StructProperty prop)
+        public StructPropertyTemplate(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Templates.Implementation.SerializationMembersList serializationList, StructProperty prop, string name)
             : base(_host)
         {
 			this.ctx = ctx;
 			this.serializationList = serializationList;
 			this.prop = prop;
+			this.name = name;
 
         }
         
         public override void Generate()
         {
-#line 16 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\StructPropertyTemplate.cst"
-string name = prop.PropertyName;
-	string backingPropertyName = "_" + name;
+#line 17 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\StructPropertyTemplate.cst"
+string backingPropertyName = "_" + name;
 	string backingStoreName = "_" + name + "Store";
 	
 	string structType = prop.GetPropertyTypeString();
@@ -42,6 +43,7 @@ this.WriteObjects("        // implement the user-visible interface\r\n");
 this.WriteObjects("        public ",  structType , " ",  name , "\r\n");
 this.WriteObjects("        {\r\n");
 this.WriteObjects("            get { return ",  backingPropertyName , "; }\r\n");
+this.WriteObjects("            set { ",  backingPropertyName , " = (",  structImplementationType , ")value; }\r\n");
 this.WriteObjects("        }\r\n");
 this.WriteObjects("        \r\n");
 this.WriteObjects("        /// <summary>backing store for ",  name , "</summary>\r\n");
@@ -59,10 +61,10 @@ this.WriteObjects("                ",  backingStoreName , " = (",  structImpleme
 this.WriteObjects("                ",  backingStoreName , ".AttachToObject(this, \"",  name , "\");\r\n");
 this.WriteObjects("            }\r\n");
 this.WriteObjects("		}\r\n");
-#line 47 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\StructPropertyTemplate.cst"
+#line 48 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\StructPropertyTemplate.cst"
 AddSerialization(serializationList, backingPropertyName);
 
-#line 48 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\StructPropertyTemplate.cst"
+#line 49 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\StructPropertyTemplate.cst"
 this.WriteObjects("  ");
 
         }

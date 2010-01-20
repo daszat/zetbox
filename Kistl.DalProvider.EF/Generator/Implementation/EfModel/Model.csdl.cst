@@ -76,6 +76,25 @@
     }
 %>
 
+    <!-- EntitySets and AssociationSets for all object-struct CollectionEntrys -->
+<%
+    foreach(var prop in ctx.GetQuery<StructProperty>()
+        .Where(p => p.IsList)
+        .OrderBy(p => p.ObjectClass.ClassName)
+        .ThenBy(p => p.PropertyName))
+    {
+        string assocName = prop.GetAssociationName();
+        string entityName = prop.GetCollectionEntryClassName();
+%>
+    <EntitySet Name="<%= entityName %>" EntityType="Model.<%= entityName %>" />
+    <AssociationSet Name="<%= assocName %>" Association="Model.<%= assocName %>" >
+      <End Role="<%= prop.ObjectClass.ClassName %>" EntitySet="<%= ((ObjectClass)prop.ObjectClass).GetRootClass().ClassName %>" />
+      <End Role="CollectionEntry" EntitySet="<%= entityName %>" />
+    </AssociationSet>
+<%
+    }
+%>
+
     <!-- AssociationSets for all object-object relations without CollectionEntrys -->
 <%
     foreach(var rel in GetRelationsWithoutSeparateStorage(ctx))
@@ -252,6 +271,52 @@
                         ToRole="<%= prop.ObjectClass.ClassName %>" />
     <!-- B -->
     <%= PlainPropertyDefinitionFromValueType(prop, "B") %>
+<%
+        if (prop.HasPersistentOrder)
+        {
+%>
+    <Property Name="B<%= Kistl.API.Helper.PositionSuffix %>" Type="Int32" Nullable="false" />
+<%
+        }
+%>
+  </EntityType>
+  <Association Name="<%= prop.GetAssociationName() %>" >
+    <End Role="<%= prop.ObjectClass.ClassName %>"
+         Type="Model.<%= prop.ObjectClass.ClassName %>" 
+         Multiplicity="0..1" />
+    <End Role="CollectionEntry"
+         Type="Model.<%= prop.GetCollectionEntryClassName() %>" 
+         Multiplicity="*" />
+  </Association>
+<%
+    }
+%>
+
+<!-- EntityTypes and Associations for all object-struct CollectionEntrys -->
+<%
+    foreach(var prop in ctx.GetQuery<StructProperty>()
+        .Where(p => p.IsList)
+        .OrderBy(p => p.ObjectClass.ClassName)
+        .ThenBy(p => p.PropertyName))
+    {
+
+%>
+  <!-- <%= prop.ObjectClass.ClassName %>.<%= prop.PropertyName %> -->
+  <EntityType Name="<%= prop.GetCollectionEntryClassName() %>" >
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    
+    <!-- A -->
+    <NavigationProperty Name="A<%= Kistl.API.Helper.ImplementationSuffix %>"
+                        Relationship="Model.<%= prop.GetAssociationName() %>"
+                        FromRole="CollectionEntry"
+                        ToRole="<%= prop.ObjectClass.ClassName %>" />
+    <!-- B -->
+    <Property Name="B<%= Kistl.API.Helper.ImplementationSuffix %>"
+              Type="Model.<%= prop.StructDefinition.ClassName %>"
+              Nullable="false" />
 <%
         if (prop.HasPersistentOrder)
         {
