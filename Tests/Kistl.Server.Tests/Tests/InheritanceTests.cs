@@ -3,7 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Autofac;
+
+using Kistl.API;
 using Kistl.API.Server;
+using Kistl.App.Base;
 
 using NUnit.Framework;
 using NUnit.Framework.Constraints;
@@ -13,38 +17,50 @@ namespace Kistl.Server.Tests
     [TestFixture]
     public class InheritanceTests
     {
+        private IContainer container;
+        private IReadOnlyKistlContext ctx;
+
         [SetUp]
         public void SetUp()
         {
             //CacheController<Kistl.API.IDataObject>.Current.Clear();
+            container = Kistl.Server.Tests.SetUp.CreateInnerContainer();
+            ctx = container.Resolve<IReadOnlyKistlContext>();
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            if (container != null)
+            {
+                container.Dispose();
+                container = null;
+            }
         }
 
         [Test]
         public void GetListOfInheritedObjects()
         {
-            using (Kistl.API.IKistlContext ctx = KistlContext.GetContext())
+            bool intFound = false;
+            bool stringFound = false;
+
+            var list = ctx.GetQuery<Property>().ToList();
+            Assert.That(list.Count, Is.GreaterThan(0));
+
+            foreach (Property bp in list)
             {
-                bool intFound = false;
-                bool stringFound = false;
-
-                var list = ctx.GetQuery<Kistl.App.Base.Property>().ToList();
-                Assert.That(list.Count, Is.GreaterThan(0));
-
-                foreach (Kistl.App.Base.Property bp in list)
+                if (bp is IntProperty)
                 {
-                    if (bp is Kistl.App.Base.IntProperty)
-                    {
-                        intFound = true;
-                    }
-                    if (bp is Kistl.App.Base.StringProperty)
-                    {
-                        stringFound = true;
-                    }
+                    intFound = true;
                 }
-
-                Assert.That(intFound, Is.True);
-                Assert.That(stringFound, Is.True);
+                if (bp is StringProperty)
+                {
+                    stringFound = true;
+                }
             }
+
+            Assert.That(intFound, Is.True);
+            Assert.That(stringFound, Is.True);
         }
 
         [Test]

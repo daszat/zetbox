@@ -25,8 +25,13 @@ namespace Kistl.Server.Tests
     {
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Tests.Server.SetUp");
 
-        private IContainer container;
+        private static IContainer container;
         private IKistlAppDomain manager;
+
+        internal static IContainer CreateInnerContainer()
+        {
+            return container.CreateInnerContainer();
+        }
 
         [SetUp]
         public void Init()
@@ -34,10 +39,11 @@ namespace Kistl.Server.Tests
             using (Log.InfoTraceMethodCall("Starting up"))
             {
                 var config = KistlConfig.FromFile("Kistl.Server.Tests.Config.xml");
-                
+
                 AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
 
                 var builder = new ContainerBuilder();
+                builder.Register(config).ExternallyOwned().SingletonScoped();
                 builder.RegisterModule(new ServerModule());
                 // TODO: replace this with registering a mocked provider of some kind.
                 builder.RegisterModule((IModule)Activator.CreateInstance(Type.GetType(config.Server.StoreProvider, true)));
@@ -65,6 +71,7 @@ namespace Kistl.Server.Tests
                         manager.Stop();
                         manager = null;
                         container.Dispose();
+                        container = null;
                     }
                 }
             }
