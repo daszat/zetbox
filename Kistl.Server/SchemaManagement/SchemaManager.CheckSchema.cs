@@ -377,6 +377,7 @@ namespace Kistl.Server.SchemaManagement
                     Log.DebugFormat("  Table: {0}", objClass.TableName);
                     CheckColumns(objClass, objClass.Properties, String.Empty);
                     CheckValueTypeCollections(objClass);
+                    CheckStructCollections(objClass);
                     CheckExtraColumns(objClass);
                     CheckTableSecurityRules(objClass);
                 }
@@ -438,17 +439,10 @@ namespace Kistl.Server.SchemaManagement
         private void CheckValueTypeCollections(ObjectClass objClass)
         {
             Log.Debug("ValueType Collections: ");
-            var properties = new List<Property>();
 
-            properties.AddRange(objClass.Properties.OfType<ValueTypeProperty>()
+            foreach (ValueTypeProperty prop in objClass.Properties.OfType<ValueTypeProperty>()
             .Where(p => p.IsList)
-            .OrderBy(p => p.Module.Namespace).ThenBy(p => p.PropertyName).Cast<Property>());
-
-            properties.AddRange(objClass.Properties.OfType<StructProperty>()
-                .Where(p => p.IsList)
-                .OrderBy(p => p.Module.Namespace).ThenBy(p => p.PropertyName).Cast<Property>());
-
-            foreach (Property prop in properties)
+            .OrderBy(p => p.Module.Namespace).ThenBy(p => p.PropertyName))
             {
                 string tblName = prop.GetCollectionEntryTable();
                 string fkName = "fk_" + prop.ObjectClass.ClassName;
@@ -456,24 +450,13 @@ namespace Kistl.Server.SchemaManagement
                 string valPropIndexName = prop.PropertyName + "Index";
                 string assocName = prop.GetAssociationName();
                 string refTblName = objClass.TableName;
-                bool hasPersistentOrder = prop is ValueTypeProperty ? ((ValueTypeProperty)prop).HasPersistentOrder : ((StructProperty)prop).HasPersistentOrder;
+                bool hasPersistentOrder = prop.HasPersistentOrder;
                 if (db.CheckTableExists(tblName))
                 {
                     Log.DebugFormat("{0}", prop.PropertyName);
                     CheckColumn(tblName, fkName, System.Data.DbType.Int32, 0, false);
-                    if (prop is StructProperty)
-                    {
-                        // TODO: Support neested structs
-                        StructProperty sProp = (StructProperty)prop;
-                        foreach (ValueTypeProperty p in sProp.StructDefinition.Properties)
-                        {
-                            CheckColumn(tblName, valPropName + "_" + p.PropertyName, SchemaManager.GetDbType(p), p is StringProperty ? ((StringProperty)p).GetMaxLength() : 0, true);
-                        }
-                    }
-                    else
-                    {
-                        CheckColumn(tblName, valPropName, GetDbType(prop), prop is StringProperty ? ((StringProperty)prop).GetMaxLength() : 0, false);
-                    }
+                    CheckColumn(tblName, valPropName, GetDbType(prop), prop is StringProperty ? ((StringProperty)prop).GetMaxLength() : 0, false);
+
                     if (hasPersistentOrder)
                     {
                         CheckColumn(tblName, valPropIndexName, System.Data.DbType.Int32, 0, false);
@@ -497,6 +480,58 @@ namespace Kistl.Server.SchemaManagement
                     if (repair)
                     {
                         Case.DoNewValueTypePropertyList(objClass, prop);
+                    }
+                }
+            }
+        }
+
+        private void CheckStructCollections(ObjectClass objClass)
+        {
+            Log.Debug("Struct Collections: ");
+
+            foreach (StructProperty prop in objClass.Properties.OfType<StructProperty>()
+            .Where(p => p.IsList)
+            .OrderBy(p => p.Module.Namespace).ThenBy(p => p.PropertyName))
+            {
+                string tblName = prop.GetCollectionEntryTable();
+                string fkName = "fk_" + prop.ObjectClass.ClassName;
+                string valPropName = prop.PropertyName;
+                string valPropIndexName = prop.PropertyName + "Index";
+                string assocName = prop.GetAssociationName();
+                string refTblName = objClass.TableName;
+                bool hasPersistentOrder = prop.HasPersistentOrder;
+                if (db.CheckTableExists(tblName))
+                {
+                    Log.DebugFormat("{0}", prop.PropertyName);
+                    CheckColumn(tblName, fkName, System.Data.DbType.Int32, 0, false);
+                    // TODO: Support neested structs
+                    foreach (ValueTypeProperty p in prop.StructDefinition.Properties)
+                    {
+                        CheckColumn(tblName, valPropName + "_" + p.PropertyName, SchemaManager.GetDbType(p), p is StringProperty ? ((StringProperty)p).GetMaxLength() : 0, true);
+                    }
+                    if (hasPersistentOrder)
+                    {
+                        CheckColumn(tblName, valPropIndexName, System.Data.DbType.Int32, 0, false);
+                    }
+                    if (!hasPersistentOrder && db.CheckColumnExists(tblName, valPropIndexName))
+                    {
+                        Log.WarnFormat("Index Column '{0}' exists but property is not indexed", valPropIndexName);
+                    }
+                    if (!db.CheckFKConstraintExists(assocName))
+                    {
+                        Log.WarnFormat("FK Constraint is missing", prop.PropertyName);
+                        if (repair)
+                        {
+                            db.CreateFKConstraint(tblName, refTblName, fkName, assocName, true);
+                        }
+                    }
+                }
+                else
+                {
+                    Log.WarnFormat("Table '{0}' for Property '{1}' is missing", tblName, prop.PropertyName);
+                    if (repair)
+                    {
+                        Case.DoNewStructPropertyList(objClass, prop);
                     }
                 }
             }

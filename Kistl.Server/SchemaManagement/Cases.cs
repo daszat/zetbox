@@ -294,11 +294,11 @@ namespace Kistl.Server.SchemaManagement
         #endregion
 
         #region NewValueTypePropertyList
-        public bool IsNewValueTypePropertyList(Property prop)
+        public bool IsNewValueTypePropertyList(ValueTypeProperty prop)
         {
             return savedSchema.FindPersistenceObject<Property>(prop.ExportGuid) == null;
         }
-        public void DoNewValueTypePropertyList(ObjectClass objClass, Property prop)
+        public void DoNewValueTypePropertyList(ObjectClass objClass, ValueTypeProperty prop)
         {
             Log.InfoFormat("New ValueType Property List: {0}", prop.PropertyName);
             string tblName = prop.GetCollectionEntryTable();
@@ -306,32 +306,81 @@ namespace Kistl.Server.SchemaManagement
             string valPropName = prop.PropertyName;
             string valPropIndexName = prop.PropertyName + "Index";
             string assocName = prop.GetAssociationName();
-            bool hasPersistentOrder = prop is ValueTypeProperty ? ((ValueTypeProperty)prop).HasPersistentOrder : ((StructProperty)prop).HasPersistentOrder;
+            bool hasPersistentOrder = prop.HasPersistentOrder;
 
             db.CreateTable(tblName, true);
-
             db.CreateColumn(tblName, fkName, System.Data.DbType.Int32, 0, false);
-            if (prop is StructProperty)
-            {
-                // TODO: Support neested structs
-                StructProperty sProp = (StructProperty)prop;
-                foreach (ValueTypeProperty p in sProp.StructDefinition.Properties)
-                {
-                    db.CreateColumn(tblName, valPropName + "_" + p.PropertyName, SchemaManager.GetDbType(p), p is StringProperty ? ((StringProperty)p).GetMaxLength() : 0, true);
-                }
-            }
-            else
-            {
-                db.CreateColumn(tblName, valPropName, SchemaManager.GetDbType(prop), prop is StringProperty ? ((StringProperty)prop).GetMaxLength() : 0, false);
-            }
 
-            if(hasPersistentOrder)
+            db.CreateColumn(tblName, valPropName, SchemaManager.GetDbType(prop), prop is StringProperty ? ((StringProperty)prop).GetMaxLength() : 0, false);
+
+            if (hasPersistentOrder)
             {
                 db.CreateColumn(tblName, valPropIndexName, System.Data.DbType.Int32, 0, false);
             }
             db.CreateFKConstraint(tblName, objClass.TableName, fkName, prop.GetAssociationName(), true);
         }
         #endregion
+
+        #region NewStructPropertyList
+        public bool IsNewStructPropertyList(StructProperty prop)
+        {
+            return savedSchema.FindPersistenceObject<Property>(prop.ExportGuid) == null;
+        }
+        public void DoNewStructPropertyList(ObjectClass objClass, StructProperty prop)
+        {
+            Log.InfoFormat("New Struct Property List: {0}", prop.PropertyName);
+            string tblName = prop.GetCollectionEntryTable();
+            string fkName = "fk_" + prop.ObjectClass.ClassName;
+            string valPropName = prop.PropertyName;
+            string valPropIndexName = prop.PropertyName + "Index";
+            string assocName = prop.GetAssociationName();
+            bool hasPersistentOrder = prop.HasPersistentOrder;
+
+            db.CreateTable(tblName, true);
+            db.CreateColumn(tblName, fkName, System.Data.DbType.Int32, 0, false);
+
+            // TODO: Support neested structs
+            foreach (ValueTypeProperty p in prop.StructDefinition.Properties)
+            {
+                db.CreateColumn(tblName, valPropName + "_" + p.PropertyName, SchemaManager.GetDbType(p), p is StringProperty ? ((StringProperty)p).GetMaxLength() : 0, true);
+            }
+
+            if (hasPersistentOrder)
+            {
+                db.CreateColumn(tblName, valPropIndexName, System.Data.DbType.Int32, 0, false);
+            }
+            db.CreateFKConstraint(tblName, objClass.TableName, fkName, prop.GetAssociationName(), true);
+        }
+        #endregion
+
+        #region RenameStructPropertyListName
+        public bool IsRenameStructPropertyListName(StructProperty prop)
+        {
+            var saved = savedSchema.FindPersistenceObject<StructProperty>(prop.ExportGuid);
+            if (saved == null) return false;
+            return saved.PropertyName != prop.PropertyName;
+        }
+        public void DoRenameStructPropertyListName(ObjectClass objClass, StructProperty prop)
+        {
+            var saved = savedSchema.FindPersistenceObject<StructProperty>(prop.ExportGuid);
+            Log.ErrorFormat("renaming a Property from '{0}' to '{1}' is not supported yet", saved.PropertyName, prop.PropertyName);
+        }
+        #endregion
+
+        #region MoveStructPropertyList
+        public bool IsMoveStructPropertyList(StructProperty prop)
+        {
+            var saved = savedSchema.FindPersistenceObject<StructProperty>(prop.ExportGuid);
+            if (saved == null) return false;
+            return saved.ObjectClass.ExportGuid != prop.ObjectClass.ExportGuid;
+        }
+        public void DoMoveStructPropertyList(ObjectClass objClass, StructProperty prop)
+        {
+            var saved = savedSchema.FindPersistenceObject<StructProperty>(prop.ExportGuid);
+            Log.ErrorFormat("moving a Property from '{0}' to '{1}' is not supported yet", saved.ObjectClass.ClassName, prop.ObjectClass.ClassName);
+        }
+        #endregion
+
 
         #region 1_N_RelationChange_FromNotIndexed_To_Indexed
         public bool Is_1_N_RelationChange_FromNotIndexed_To_Indexed(Relation rel)

@@ -142,6 +142,22 @@ namespace Kistl.Server.SchemaManagement
                     Case.DoMoveValueTypePropertyList(objClass, prop);
                 }
             }
+
+            foreach (StructProperty prop in properties.OfType<StructProperty>().Where(p => p.IsList))
+            {
+                if (Case.IsNewStructPropertyList(prop))
+                {
+                    Case.DoNewStructPropertyList(objClass, prop);
+                }
+                if (Case.IsRenameStructPropertyListName(prop))
+                {
+                    Case.DoRenameStructPropertyListName(objClass, prop);
+                }
+                if (Case.IsMoveStructPropertyList(prop))
+                {
+                    Case.DoMoveStructPropertyList(objClass, prop);
+                }
+            }
         }
 
         private void UpdateDeletedColumns(ObjectClass objClass, string prefix)
