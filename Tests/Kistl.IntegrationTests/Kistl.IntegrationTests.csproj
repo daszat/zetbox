@@ -96,7 +96,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <Content Include="Kistl.IntegrationTests.PartCoverSettings.xml" />
-    <Content Include="TestResult.xml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Kistl.API.Client\Kistl.API.Client.csproj">

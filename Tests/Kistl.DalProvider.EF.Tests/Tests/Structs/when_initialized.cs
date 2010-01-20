@@ -11,7 +11,6 @@ using Kistl.App.Test;
 
 namespace Kistl.DalProvider.EF.Tests.Structs
 {
-    
     [TestFixture]
     public class when_initialized
         : Kistl.API.AbstractConsumerTests.Structs.when_initialized
@@ -24,10 +23,10 @@ namespace Kistl.DalProvider.EF.Tests.Structs
                 obj.Birthday = DateTime.Today;
                 obj.PersonName = "Person";
 
-                //obj.PhoneNumberMobile.AreaCode = "43 664";
-                //obj.PhoneNumberMobile.Number = "12345";
-                //obj.PhoneNumberOffice.AreaCode = "43 1";
-                //obj.PhoneNumberOffice.Number = "12345";
+                obj.PhoneNumberMobile.AreaCode = "43 664";
+                obj.PhoneNumberMobile.Number = "12345";
+                obj.PhoneNumberOffice.AreaCode = "43 1";
+                obj.PhoneNumberOffice.Number = "12345";
 
                 ctx.SubmitChanges();
             }
@@ -50,5 +49,4 @@ namespace Kistl.DalProvider.EF.Tests.Structs
             return KistlContext.GetContext();
         }
     }
-
 }

@@ -12,27 +12,22 @@ namespace Kistl.API.AbstractConsumerTests.Structs
     public abstract class when_initialized
         : StructFixture
     {
-
         [Test]
-        [Ignore("Struct are not implemented yet")]
         public void should_exist()
         {
-            // Assert.That(obj.PhoneNumberMobile , Is.Not.Null);
+            Assert.That(obj.PhoneNumberMobile , Is.Not.Null);
         }
 
         [Test]
-        [Ignore("Struct are not implemented yet")]
         public void should_be_attached_to_their_parent()
         {
-            //Assert.That((obj.PhoneNumberMobile as BaseStructObject).ParentObject, Is.SameAs(obj));
+            Assert.That((obj.PhoneNumberMobile as BaseStructObject).ParentObject, Is.SameAs(obj));
         }
 
         [Test]
-        [Ignore("Struct are not implemented yet")]
         public void should_have_right_property_name_set()
         {
-            //Assert.That((obj.PhoneNumberMobile as BaseStructObject).ParentProperty, Is.EqualTo("PhoneNumberMobile"));
+            Assert.That((obj.PhoneNumberMobile as BaseStructObject).ParentProperty, Is.EqualTo("PhoneNumberMobile"));
         }
-
     }
 }

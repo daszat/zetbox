@@ -29,22 +29,22 @@ namespace Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses
         protected override void ApplyConstructorTemplate()
         {
             base.ApplyConstructorTemplate();
-            //if (DataType.Properties.OfType<StructProperty>().Count() > 0)
-            //{
-            //    this.WriteObjects("\t\t\t{");
-            //    this.WriteLine();
-            //    foreach (var prop in DataType.Properties.OfType<StructProperty>().OrderBy(p => p.PropertyName))
-            //    {
-            //        string name = prop.PropertyName;
-            //        string backingName = "_" + name;
-            //        string structType = prop.GetPropertyTypeString();
-            //        string structImplementationType = structType + Kistl.API.Helper.ImplementationSuffix;
-            //        this.WriteObjects("\t\t\t\t", backingName, " = new ", structImplementationType, "(this, \"", name, "\");");
-            //        this.WriteLine();
-            //    }
-            //    this.WriteObjects("\t\t\t}");
-            //    this.WriteLine();
-            //}
+            if (DataType.Properties.OfType<StructProperty>().Count() > 0)
+            {
+                this.WriteObjects("\t\t\t{");
+                this.WriteLine();
+                foreach (var prop in DataType.Properties.OfType<StructProperty>().Where(p => !p.IsList).OrderBy(p => p.PropertyName))
+                {
+                    string name = prop.PropertyName;
+                    string backingName = "_" + name;
+                    string structType = prop.GetPropertyTypeString();
+                    string structImplementationType = structType + Kistl.API.Helper.ImplementationSuffix;
+                    this.WriteObjects("\t\t\t\t", backingName, " = new ", structImplementationType, "(this, \"", name, "\");");
+                    this.WriteLine();
+                }
+                this.WriteObjects("\t\t\t}");
+                this.WriteLine();
+            }
         }
 
         protected override void ApplyIDPropertyTemplate()

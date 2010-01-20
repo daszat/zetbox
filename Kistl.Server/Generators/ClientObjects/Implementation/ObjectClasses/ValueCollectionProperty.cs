@@ -17,11 +17,26 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
         public static void Call(Arebis.CodeGeneration.IGenerationHost host,
             IKistlContext ctx,
             Templates.Implementation.SerializationMembersList serializationList,
-            Property prop)
+            StructProperty prop)
+        {
+            Call(host, ctx, serializationList, prop, prop.HasPersistentOrder, prop.IsList);
+        }
+
+        public static void Call(Arebis.CodeGeneration.IGenerationHost host,
+            IKistlContext ctx,
+            Templates.Implementation.SerializationMembersList serializationList,
+            ValueTypeProperty prop)
+        {
+            Call(host, ctx, serializationList, prop, prop.HasPersistentOrder, prop.IsList);
+        }
+
+        private static void Call(Arebis.CodeGeneration.IGenerationHost host,
+            IKistlContext ctx,
+            Templates.Implementation.SerializationMembersList serializationList,
+            Property prop, bool hasPersistentOrder, bool isList)
         {
             if (prop == null) { throw new ArgumentNullException("prop"); }
-            if (!(prop is ValueTypeProperty ? ((ValueTypeProperty)prop).IsList : ((StructProperty)prop).IsList)) { throw new ArgumentOutOfRangeException("prop", "prop must be a List-valued property"); }
-            bool hasPersistentOrder = prop is ValueTypeProperty ? ((ValueTypeProperty)prop).HasPersistentOrder : ((StructProperty)prop).HasPersistentOrder;
+            if (!isList) { throw new ArgumentOutOfRangeException("prop", "prop must be a List-valued property"); }
 
             string name = prop.PropertyName;
             string backingName = "_" + name + "Wrapper";

@@ -13,9 +13,7 @@ using Kistl.API.Client;
 
 namespace Kistl.IntegrationTests.Structs
 {
-
     [TestFixture]
-    [Ignore("To be implemented")]    
     public class when_changing_a_struct_member
         : Kistl.API.AbstractConsumerTests.Structs.when_changing_a_struct_member
     {
@@ -27,10 +25,10 @@ namespace Kistl.IntegrationTests.Structs
                 obj.Birthday = DateTime.Today;
                 obj.PersonName = "Person";
 
-                //obj.PhoneNumberMobile.AreaCode = "43 664";
-                //obj.PhoneNumberMobile.Number = "12345";
-                //obj.PhoneNumberOffice.AreaCode = "43 1";
-                //obj.PhoneNumberOffice.Number = "12345";
+                obj.PhoneNumberMobile.AreaCode = "43 664";
+                obj.PhoneNumberMobile.Number = "12345";
+                obj.PhoneNumberOffice.AreaCode = "43 1";
+                obj.PhoneNumberOffice.Number = "12345";
 
                 ctx.SubmitChanges();
             }
@@ -54,5 +52,4 @@ namespace Kistl.IntegrationTests.Structs
         }
 
     }
-
 }
