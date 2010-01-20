@@ -185,14 +185,15 @@ namespace Kistl.API.Server
                 {
                     var now = DateTime.Now;
                     var cb = (Kistl.App.Base.IChangedBy)obj;
+                    var localIdentity = this.identity.Context == this ? this.identity : this.GetQuery<Identity>().First(id => id.ID == this.identity.ID);
                     if (obj.ObjectState == DataObjectState.New)
                     {
                         // If cb.CreatedOn where null when DataObjectState is Modified we do not update CreatedBy.
                         // We dont have the information who was creating this object.
-                        cb.CreatedBy = this.identity;
+                        cb.CreatedBy = localIdentity;
                         cb.CreatedOn = now;
                     }
-                    cb.ChangedBy = this.identity;
+                    cb.ChangedBy = localIdentity;
                     cb.ChangedOn = now;
                 }
 
