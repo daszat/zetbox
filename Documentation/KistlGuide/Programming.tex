@@ -76,6 +76,7 @@ class Person
 \begin{itemize}
 	\item{If a compound object property is not nullable then the content of the property is always a valid reference.}
 	\item{If a compound object property is  nullable then the content of the property may be null.}
+	\item{When a compound object property is set the given compound object will be copied.}
 \end{itemize}
 
 \begin{CS}
@@ -95,8 +96,7 @@ n.Number = "87654321"; // changes p.Tel.Number
 n = p.Fax; // may be null
 n.Number = "87654321"; // changes p.Fax.Number or throws NullReferenceException if Fax is null
 
-p.Fax = p.Tel; // sets p.Fax equals to p.Tel - same reference
-p.Fax = (PhoneNumber)p.Tel.Clone(); // sets p.Fax to a copy of p.Tel
+p.Fax = p.Tel; // creates a copy of p.Tel
 p.Fax.Number = "87654321"; // changes p.Fax.Number but does not change p.Tel.Number
 
 p.Tel = null; // throws a ArgumentNullException
@@ -104,9 +104,9 @@ p.Fax = null; // sets Fax to null
 
 n = ctx.CreateStruct<PhoneNumber>(); // creates a new PhoneNumber Struct;
 n.Number = "12345678";
-p.Tel = n; // sets p.Tel to n
-p.Tel.Number = "18273645"; // changes p.Tel.Number and n.Number
-n.Number = "87654321"; // changes n.Number and p.Tel.Number
+p.Tel = n; // creates a copy of n
+p.Tel.Number = "18273645"; // changes p.Tel.Number but does not change n.Number
+n.Number = "87654321"; // changes n.Number but does not change p.Tel.Number
 \end{CS}
 
 \section{Enhancing Kistl's inner workings}
