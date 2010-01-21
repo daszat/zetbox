@@ -72,7 +72,6 @@ namespace Kistl.Server.Generators.Templates.Interface.DataTypes
             }
             else if (prop is CompoundObjectProperty)
             {
-                isReadOnly = true;
                 isList = ((CompoundObjectProperty)prop).IsList;
             }
             else if (prop is ObjectReferenceProperty)

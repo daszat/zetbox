@@ -45,15 +45,23 @@ this.WriteObjects("			me.",  prop.PropertyName , " = other.",  prop.PropertyName
 #line 29 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\ApplyChangesFromMethod.cst"
 }
 
-			foreach(var prop in cls.Properties.OfType<ObjectReferenceProperty>().Where(p => !p.IsList()).OrderBy(p => p.PropertyName))
+			foreach(var prop in cls.Properties.OfType<CompoundObjectProperty>().Where(p => !p.IsList).OrderBy(p => p.PropertyName))
 			{
 
 #line 34 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\ApplyChangesFromMethod.cst"
-this.WriteObjects("			this._fk_",  prop.PropertyName , " = otherImpl._fk_",  prop.PropertyName , ";\r\n");
+this.WriteObjects("			me.",  prop.PropertyName , " = (",  prop.GetPropertyTypeString() , ")other.",  prop.PropertyName , ".Clone();\r\n");
 #line 36 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\ApplyChangesFromMethod.cst"
 }
 
-#line 38 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\ApplyChangesFromMethod.cst"
+			foreach(var prop in cls.Properties.OfType<ObjectReferenceProperty>().Where(p => !p.IsList()).OrderBy(p => p.PropertyName))
+			{
+
+#line 41 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\ApplyChangesFromMethod.cst"
+this.WriteObjects("			this._fk_",  prop.PropertyName , " = otherImpl._fk_",  prop.PropertyName , ";\r\n");
+#line 43 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\ApplyChangesFromMethod.cst"
+}
+
+#line 45 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\ApplyChangesFromMethod.cst"
 this.WriteObjects("		}\r\n");
 
         }

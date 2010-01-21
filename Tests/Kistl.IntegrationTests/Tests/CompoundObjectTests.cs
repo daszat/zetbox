@@ -9,12 +9,18 @@ using Kistl.App.Test;
 using Kistl.Client;
 
 using NUnit.Framework;
+using Kistl.API.AbstractConsumerTests.CompoundObjects;
 
 namespace Kistl.IntegrationTests
 {
     [TestFixture]
-    public class CompoundObjectTests
+    public class CompoundObjectTests : CompoundObjectFixture
     {
+        public override IKistlContext GetContext()
+        {
+            return KistlContext.GetContext();
+        }
+
         Random rnd = new Random();
         string number;
 
@@ -27,7 +33,7 @@ namespace Kistl.IntegrationTests
         [Test]
         public void GetObjectWithCompoundObject()
         {
-            using (IKistlContext ctx = KistlContext.GetContext())
+            using (IKistlContext ctx = GetContext())
             {
                 var objList = ctx.GetQuery<TestCustomObject>();
                 foreach (var obj in objList)
@@ -67,7 +73,7 @@ namespace Kistl.IntegrationTests
         {
             int ID = Kistl.API.Helper.INVALIDID;
 
-            using (var ctx = KistlContext.GetContext())
+            using (var ctx = GetContext())
             {
                 var obj = fact.Factory(ctx);
 
@@ -85,7 +91,7 @@ namespace Kistl.IntegrationTests
                 ID = obj.ID;
             }
 
-            using (var ctx = KistlContext.GetContext())
+            using (var ctx = GetContext())
             {
                 var obj = ctx.Find<TestCustomObject>(ID);
                 Assert.That(obj, Is.Not.Null);
@@ -97,5 +103,6 @@ namespace Kistl.IntegrationTests
                 Assert.That(obj.PhoneNumberOffice.Number, Is.EqualTo(number + "no"));
             }
         }
+
     }
 }

@@ -129,6 +129,18 @@ namespace Kistl.API
         /// <returns></returns>
         public abstract InterfaceType GetInterfaceType();
 
+        protected override void OnPropertyChanging(string property, object oldValue, object newValue)
+        {
+            base.OnPropertyChanging(property, oldValue, newValue);
+            // Notifing parent is done in provider implementation
+        }
+
+        protected override void OnPropertyChanged(string property, object oldValue, object newValue)
+        {
+            base.OnPropertyChanged(property, oldValue, newValue);
+            // Notifing parent is done in provider implementation
+        }
+
         protected override void SetModified()
         {
             // don't care

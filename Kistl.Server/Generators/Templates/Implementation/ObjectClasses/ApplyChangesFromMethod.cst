@@ -28,6 +28,13 @@
 <%
 			}
 
+			foreach(var prop in cls.Properties.OfType<CompoundObjectProperty>().Where(p => !p.IsList).OrderBy(p => p.PropertyName))
+			{
+%>
+			me.<%= prop.PropertyName %> = (<%= prop.GetPropertyTypeString() %>)other.<%= prop.PropertyName %>.Clone();
+<%
+			}
+
 			foreach(var prop in cls.Properties.OfType<ObjectReferenceProperty>().Where(p => !p.IsList()).OrderBy(p => p.PropertyName))
 			{
 %>

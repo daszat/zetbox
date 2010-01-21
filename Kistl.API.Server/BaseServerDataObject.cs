@@ -119,5 +119,18 @@ namespace Kistl.API.Server
     /// <summary>
     /// local proxy
     /// </summary>
-    public abstract class BaseServerCompoundObject : BaseCompoundObject { }
+    public abstract class BaseServerCompoundObject : BaseCompoundObject 
+    {
+        protected override void OnPropertyChanging(string property, object oldValue, object newValue)
+        {
+            base.OnPropertyChanging(property, oldValue, newValue);
+            // Notifing parent is done in provider implementation
+        }
+
+        protected override void OnPropertyChanged(string property, object oldValue, object newValue)
+        {
+            base.OnPropertyChanged(property, oldValue, newValue);
+            // Notifing parent is done in provider implementation
+        }
+    }
 }

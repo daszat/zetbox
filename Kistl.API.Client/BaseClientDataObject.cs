@@ -173,6 +173,18 @@ namespace Kistl.API.Client
     /// <summary>
     /// local proxy
     /// </summary>
-    public abstract class BaseClientCompoundObject : BaseCompoundObject { }
+    public abstract class BaseClientCompoundObject : BaseCompoundObject 
+    {
+        protected override void OnPropertyChanging(string property, object oldValue, object newValue)
+        {
+            base.OnPropertyChanging(property, oldValue, newValue);
+            if (ParentObject != null) ParentObject.NotifyPropertyChanging(ParentProperty, null, null);
+        }
 
+        protected override void OnPropertyChanged(string property, object oldValue, object newValue)
+        {
+            base.OnPropertyChanged(property, oldValue, newValue);
+            if (ParentObject != null) ParentObject.NotifyPropertyChanged(ParentProperty, null, null);
+        }
+    }
 }

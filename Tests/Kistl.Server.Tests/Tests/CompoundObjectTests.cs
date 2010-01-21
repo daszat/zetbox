@@ -9,12 +9,13 @@ using NUnit.Framework;
 using NUnit.Framework.Constraints;
 using Kistl.API;
 using Autofac;
+using Kistl.API.AbstractConsumerTests.CompoundObjects;
 
 
 namespace Kistl.Server.Tests
 {
     [TestFixture]
-    public class CompoundObjectTests
+    public class CompoundObjectTests : CompoundObjectFixture
     {
         private IContainer container;
         private IContainer GetContainer()
@@ -26,9 +27,9 @@ namespace Kistl.Server.Tests
             return container;
         }
 
-        [TearDown]
-        public void TearDownContainer()
+        public override void DisposeContext()
         {
+            base.DisposeContext();
             if (container != null)
             {
                 container.Dispose();
@@ -36,7 +37,7 @@ namespace Kistl.Server.Tests
             }
         }
 
-        protected IKistlContext GetContext()
+        public override IKistlContext GetContext()
         {
             return GetContainer().Resolve<IKistlContext>();
         }
@@ -60,8 +61,8 @@ namespace Kistl.Server.Tests
                 obj.PersonName = "TestPerson " + rnd.Next();
                 obj.Birthday = DateTime.Now;
 
-                Assert.That(obj.PhoneNumberMobile, Is.Null);
-                Assert.That(obj.PhoneNumberOffice, Is.Null);
+                Assert.That(obj.PhoneNumberMobile, Is.Not.Null);
+                Assert.That(obj.PhoneNumberOffice, Is.Not.Null);
 
                 obj.PhoneNumberMobile.AreaCode = "1";
                 obj.PhoneNumberMobile.Number = number;
@@ -196,6 +197,12 @@ namespace Kistl.Server.Tests
                 }
 
                 Assert.That(testObject, Is.Not.Null);
+
+                testObject.PhoneNumberMobile = null;
+                testObject.PhoneNumberOffice = null;
+
+                Assert.That(testObject.PhoneNumberMobile, Is.Null);
+                Assert.That(testObject.PhoneNumberOffice, Is.Null);
 
                 Assert.That(ctx.SubmitChanges(), Is.EqualTo(1));
 

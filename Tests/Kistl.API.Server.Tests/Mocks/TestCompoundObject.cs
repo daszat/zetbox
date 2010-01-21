@@ -7,6 +7,12 @@ namespace Kistl.API.Server.Mocks
 {
     public class TestCompoundObject : BaseServerCompoundObject
     {
+        public TestCompoundObject()
+        {
+            var obj = new TestObjClass__Implementation__();
+            base.AttachToObject(obj, "Test");
+        }
+
         public int TestInt { get; set; }
         public string TestString { get; set; }
 

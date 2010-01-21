@@ -56,12 +56,14 @@ namespace Kistl.App.Test
         /// </summary>
 		Kistl.App.Test.TestPhoneCompoundObject PhoneNumberMobile {
 			get;
+			set;
 		}
         /// <summary>
         /// 
         /// </summary>
 		Kistl.App.Test.TestPhoneCompoundObject PhoneNumberOffice {
 			get;
+			set;
 		}
         /// <summary>
         /// 

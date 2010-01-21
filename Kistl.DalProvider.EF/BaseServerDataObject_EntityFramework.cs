@@ -358,7 +358,7 @@ namespace Kistl.DalProvider.EF
     {
         protected override void OnPropertyChanging(string property, object oldValue, object newValue)
         {
-            //base.OnNotifyPropertyChanging(property);
+            base.OnPropertyChanging(property, oldValue, newValue);
             if (ParentObject != null)
                 (ParentObject as BaseServerDataObject_EntityFramework)
                     .NotifyPropertyChanging(this.ParentProperty, this.ParentProperty + Kistl.API.Helper.ImplementationSuffix, null, null);
@@ -366,7 +366,7 @@ namespace Kistl.DalProvider.EF
 
         protected override void OnPropertyChanged(string property, object oldValue, object newValue)
         {
-            //base.OnNotifyPropertyChanged(property);
+            base.OnPropertyChanged(property, oldValue, newValue);
             if (ParentObject != null)
                 (ParentObject as BaseServerDataObject_EntityFramework)
                     .NotifyPropertyChanged(this.ParentProperty, this.ParentProperty + Kistl.API.Helper.ImplementationSuffix, null, null);

@@ -225,7 +225,7 @@ namespace Kistl.API.AbstractConsumerTests
                 var list = ctx.GetQuery<Kunde>();
                 foreach (Kunde k in list)
                 {
-                    if (k.EMails.Count > 0)
+                    if (k.EMails.Count > 2)
                     {
                         mail = k.EMails.First();
                         k.EMails.Remove(mail);
@@ -243,9 +243,9 @@ namespace Kistl.API.AbstractConsumerTests
                 var kunde = ctx.Find<Kunde>(ID);
                 Assert.That(kunde, Is.Not.Null);
                 Assert.That(kunde.EMails.Count, Is.GreaterThan(0));
+                Assert.That(kunde.EMails.Count, Is.EqualTo(mailCount));
 
                 var result = kunde.EMails.SingleOrDefault(m => m == mail);
-                Assert.That(kunde.EMails.Count, Is.EqualTo(mailCount));
                 Assert.That(result, Is.Null);
             }
         }

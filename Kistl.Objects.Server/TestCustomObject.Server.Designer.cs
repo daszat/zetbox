@@ -593,6 +593,8 @@ namespace Kistl.App.Test
 
 			me.Birthday = other.Birthday;
 			me.PersonName = other.PersonName;
+			me.PhoneNumberMobile = (Kistl.App.Test.TestPhoneCompoundObject)other.PhoneNumberMobile.Clone();
+			me.PhoneNumberOffice = (Kistl.App.Test.TestPhoneCompoundObject)other.PhoneNumberOffice.Clone();
 			this._fk_MubBlah_Nav = otherImpl._fk_MubBlah_Nav;
 			this._fk_MuhBlah_One_Nav = otherImpl._fk_MuhBlah_One_Nav;
 		}
