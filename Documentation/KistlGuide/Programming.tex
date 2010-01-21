@@ -46,6 +46,73 @@ placed.
 
 \section{Modules}
 
+\section{Structs}
+Structs are compound objects. They do not behave like C\# structs. This section describes their behaviour.
+\par
+Lets say there is a \emph{PhoneNumber} Struct
+\begin{CS}
+struct PhoneNumber
+{
+	string CountryCode;
+	string AreaCode;
+	string Number;
+	string Extension;
+}
+\end{CS}
+
+A Person has two phone numbers:
+
+\begin{CS}
+class Person
+{
+	string Name;
+	...
+	PhoneNumber  Tel;
+	PhoneNumber? Fax;
+}
+\end{CS}
+\emph{Tel} is not nullabe, \emph{Fax} is nullable.
+
+\subsection{Accessing Structs}
+
+\begin{itemize}
+	\item{If a struct property is not nullable then the content of the property is always a valid reference.}
+	\item{If a struct property is  nullable then the content of the property may be null.}
+	\item{Unlike in C\# a struct property does not return a copy of the struct in the getter.}
+	\item{When a struct property is set the given struct will be copied.}
+\end{itemize}
+
+\begin{CS}
+Person p;
+string number;
+
+number = p.Tel.Number;
+number = p.Fax.Number; // Throws NullReferenceException if Fax is null
+
+p.Tel.Number = "12345678";
+p.Fax.Number = "12345678"; // Throws NullReferenceException if Fax is null
+
+PhoneNumber n;
+
+n = p.Tel; // Does not create a copy
+n.Number = "87654321"; // changes p.Tel.Number
+n = p.Fax; // May be null
+n.Number = "87654321"; // changes p.Fax.Number or throws NullReferenceException if Fax is null
+
+p.Fax = p.Tel; // Creates a copy of p.Tel
+p.Fax.Number = "87654321"; // does not change p.Tel.Number
+
+p.Tel = null; // Throws a ArgumentNullException
+p.Fax = null; // Sets Fax to null
+
+n = ctx.CreateStruct<PhoneNumber>(); // Creates a new PhoneNumber Struct;
+n.Number = "12345678";
+p.Tel = n; // Creates a copy of n
+p.Tel.Number = "18273645"; // does not change n.Number
+n.Number = "87654321"; // does not change p.Tel.Number
+\end{CS}
+
+
 \section{Enhancing Kistl's inner workings}
 
 \subsection{Database Providers}
