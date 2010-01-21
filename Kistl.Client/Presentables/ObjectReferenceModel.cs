@@ -24,6 +24,15 @@ namespace Kistl.Client.Presentables
             ReferencedClass = prop.GetReferencedObjectClass();
         }
 
+        public ObjectReferenceModel(
+           IGuiApplicationContext appCtx, IKistlContext dataCtx,
+           IDataObject referenceHolder, CalculatedObjectReferenceProperty prop)
+            : base(appCtx, dataCtx, referenceHolder, prop)
+        {
+            AllowNullInput = prop.IsNullable();
+            ReferencedClass = prop.ReferencedClass;
+        }
+
         #region Public Interface
 
         public ObjectClass ReferencedClass

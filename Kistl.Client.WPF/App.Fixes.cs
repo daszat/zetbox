@@ -18,47 +18,47 @@ namespace Kistl.Client.WPF
     /// <content>Contains various and temporary fixes needed to clean the database</content>
     public partial class App
     {
-        /// <summary>
-        /// Fix broken TypeRefs.
-        /// </summary>
-        private static void FixupTypeRefParents()
-        {
-            using (Logging.Log.DebugTraceMethodCall("FixupTypeRefParents"))
-            {
-                using (IKistlContext ctx = KistlContext.GetContext())
-                {
-                    var typeRefs = ctx.GetQuery<TypeRef>();
-                    foreach (var tr in typeRefs)
-                    {
-                        if (tr.Parent != null)
-                        {
-                            continue;
-                        }
+        ///// <summary>
+        ///// Fix broken TypeRefs.
+        ///// </summary>
+        //private static void FixupTypeRefParents()
+        //{
+        //    using (Logging.Log.DebugTraceMethodCall("FixupTypeRefParents"))
+        //    {
+        //        using (IKistlContext ctx = KistlContext.GetContext())
+        //        {
+        //            var typeRefs = ctx.GetQuery<TypeRef>();
+        //            foreach (var tr in typeRefs)
+        //            {
+        //                if (tr.Parent != null)
+        //                {
+        //                    continue;
+        //                }
 
-                        UpdateParent(ctx, tr);
-                        ctx.SubmitChanges();
-                    }
-                }
-            }
-        }
+        //                UpdateParent(ctx, tr);
+        //                ctx.SubmitChanges();
+        //            }
+        //        }
+        //    }
+        //}
 
-        /// <summary>
-        /// Creates the parent chain for a given TypeRef.
-        /// </summary>
-        /// <param name="ctx">the context to use</param>
-        /// <param name="tr">the <see cref="TypeRef"/> to fix</param>
-        private static void UpdateParent(IKistlContext ctx, TypeRef tr)
-        {
-            var type = tr.AsType(false);
-            if (type != null
-                && type != typeof(object)
-                && !type.IsGenericTypeDefinition
-                && type.BaseType != null)
-            {
-                tr.Parent = type.BaseType.ToRef(ctx);
-                UpdateParent(ctx, tr.Parent);
-            }
-        }
+        ///// <summary>
+        ///// Creates the parent chain for a given TypeRef.
+        ///// </summary>
+        ///// <param name="ctx">the context to use</param>
+        ///// <param name="tr">the <see cref="TypeRef"/> to fix</param>
+        //private static void UpdateParent(IKistlContext ctx, TypeRef tr)
+        //{
+        //    var type = tr.AsType(false);
+        //    if (type != null
+        //        && type != typeof(object)
+        //        && !type.IsGenericTypeDefinition
+        //        && type.BaseType != null)
+        //    {
+        //        tr.Parent = type.BaseType.ToRef(ctx);
+        //        UpdateParent(ctx, tr.Parent);
+        //    }
+        //}
 
         //private static void PrintEagerLoadingGraphViz()
         //{
@@ -94,7 +94,7 @@ namespace Kistl.Client.WPF
         /// </summary>
         internal static void FixupDatabase()
         {
-            FixupTypeRefParents();
+            //FixupTypeRefParents();
             //PrintEagerLoadingGraphViz();
         }
     }
