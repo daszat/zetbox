@@ -13,11 +13,12 @@
                  Text="{Binding InstancesSearchString, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}" />
 
         <ToolBar DockPanel.Dock="Bottom">
+            <Button Click="New_Click">New Item</Button>
             <Button Click="Open_Click">Open Item</Button>
             <Button Click="Edit_Click">Edit Class</Button>
             <Button Click="Refresh_Click">Refresh</Button>
         </ToolBar>
-        
+
         <ListView x:Name="ClassList"
                   Margin="10"
                   BorderThickness="0"

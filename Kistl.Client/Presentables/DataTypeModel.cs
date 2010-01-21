@@ -130,6 +130,14 @@ namespace Kistl.Client.Presentables
             get { return _type.ID; }
         }
 
+        public InterfaceType InterfaceType
+        {
+            get
+            {
+                return new InterfaceType(_type.GetDataType());
+            }
+        }
+
         #endregion
 
         #region Utilities and UI callbacks

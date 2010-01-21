@@ -98,5 +98,18 @@ namespace Kistl.Client.WPF.View.KistlBase
                 factory.ShowModel(newWorkspace, true);
             }
         }
+
+        private void New_Click(object sender, RoutedEventArgs e)
+        {
+            var factory = App.Current.AppContext.Factory;
+            var dtm = DataContext as DataTypeModel;
+            if (dtm != null)
+            {
+                var newCtx = KistlContext.GetContext();
+                var newWorkspace = factory.CreateSpecificModel<WorkspaceModel>(newCtx);
+                newWorkspace.ShowForeignModel((DataObjectModel)factory.CreateDefaultModel(newCtx, newCtx.Create(dtm.InterfaceType)));
+                factory.ShowModel(newWorkspace, true);
+            }
+        }
     }
 }
