@@ -9,6 +9,7 @@
     <!-- EntitySets for all Base Classes -->
     <EntitySet Name="ANewObjectClass" EntityType="Model.Store.ANewObjectClass" Table="NewObjectClasses"/>
     <EntitySet Name="AnotherTest" EntityType="Model.Store.AnotherTest" Table="AnotherTests"/>
+    <EntitySet Name="Antwort" EntityType="Model.Store.Antwort" Table="Antworten"/>
     <EntitySet Name="Assembly" EntityType="Model.Store.Assembly" Table="Assemblies"/>
     <EntitySet Name="Auftrag" EntityType="Model.Store.Auftrag" Table="Auftraege"/>
     <EntitySet Name="BaseParameter" EntityType="Model.Store.BaseParameter" Table="BaseParameters"/>
@@ -19,6 +20,7 @@
     <EntitySet Name="DataType" EntityType="Model.Store.DataType" Table="DataTypes"/>
     <EntitySet Name="DefaultPropertyValue" EntityType="Model.Store.DefaultPropertyValue" Table="DefaultPropertyValues"/>
     <EntitySet Name="EnumerationEntry" EntityType="Model.Store.EnumerationEntry" Table="EnumerationEntries"/>
+    <EntitySet Name="Fragebogen" EntityType="Model.Store.Fragebogen" Table="Fragebögen"/>
     <EntitySet Name="Icon" EntityType="Model.Store.Icon" Table="Icons"/>
     <EntitySet Name="Identity" EntityType="Model.Store.Identity" Table="Identities"/>
     <EntitySet Name="InstanceConstraint" EntityType="Model.Store.InstanceConstraint" Table="InstanceConstraint"/>
@@ -654,6 +656,10 @@
       <End Role="EnumerationProperty" EntitySet="EnumerationProperty" />
       <End Role="Enumeration" EntitySet="Enumeration" />
     </AssociationSet>
+    <AssociationSet Name="FK_Fragebogen_enthält_Antworten" Association="Model.Store.FK_Fragebogen_enthält_Antworten" >
+      <End Role="Fragebogen" EntitySet="Fragebogen" />
+      <End Role="Antworten" EntitySet="Antwort" />
+    </AssociationSet>
     <AssociationSet Name="FK_Icon_has_Module" Association="Model.Store.FK_Icon_has_Module" >
       <End Role="Icon" EntitySet="Icon" />
       <End Role="Module" EntitySet="Module" />
@@ -968,6 +974,18 @@
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
   </EntityType>
 	
+  <EntityType Name="Antwort">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_Fragebogen" Type="int" />
+    <Property Name="fk_Fragebogen_pos" Type="int" Nullable="true" />
+    <Property Name="Frage" Type="nvarchar" MaxLength="4000" Nullable="false" />
+    <Property Name="FragenNummer" Type="int" Nullable="false" />
+    <Property Name="GegebeneAntwort" Type="int" Nullable="true" />
+  </EntityType>
+	
   <EntityType Name="Assembly">
     <Key>
       <PropertyRef Name="ID" />
@@ -1242,6 +1260,14 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" />
+  </EntityType>
+	
+  <EntityType Name="Fragebogen">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="BogenNummer" Type="int" Nullable="true" />
   </EntityType>
 	
   <EntityType Name="GuidProperty">
@@ -2675,6 +2701,20 @@
       </Principal>
       <Dependent Role="EnumerationProperty">
         <PropertyRef Name="fk_Enumeration" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_Fragebogen_enthält_Antworten">
+    <End Role="Fragebogen" Type="Model.Store.Fragebogen" Multiplicity="0..1" />
+    <End Role="Antworten" Type="Model.Store.Antwort" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Fragebogen">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Antworten">
+        <PropertyRef Name="fk_Fragebogen" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

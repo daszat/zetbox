@@ -479,6 +479,21 @@ using Kistl.DalProvider.EF;
 
 
 	/*
+    Relation: FK_Fragebogen_enthält_Antworten
+    A: One Fragebogen as Fragebogen
+    B: ZeroOrMore Antwort as Antworten
+    Preferred Storage: MergeIntoB
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_Fragebogen_enthält_Antworten",
+    "Fragebogen", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Test.Fragebogen__Implementation__),
+    "Antworten", RelationshipMultiplicity.Many, typeof(Kistl.App.Test.Antwort__Implementation__)
+    )]
+
+
+	/*
     Relation: FK_Icon_has_Module
     A: ZeroOrMore Icon as Icon
     B: ZeroOrOne Module as Module

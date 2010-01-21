@@ -18,6 +18,17 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Antwort">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Antwort)">
+	    <MappingFragment StoreEntitySet="Antwort">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="Fragebogen_pos" ColumnName="fk_Fragebogen_pos" />
+<ScalarProperty Name="Frage" ColumnName="Frage" />
+<ScalarProperty Name="FragenNummer" ColumnName="FragenNummer" />
+<ScalarProperty Name="GegebeneAntwort" ColumnName="GegebeneAntwort" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Assembly">
       <EntityTypeMapping TypeName="IsTypeOf(Model.Assembly)">
 	    <MappingFragment StoreEntitySet="Assembly">
@@ -330,6 +341,14 @@
 <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
 <ScalarProperty Name="Name" ColumnName="Name" />
 <ScalarProperty Name="Value" ColumnName="Value" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Fragebogen">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Fragebogen)">
+	    <MappingFragment StoreEntitySet="Fragebogen">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="BogenNummer" ColumnName="BogenNummer" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1628,6 +1647,23 @@
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="fk_Enumeration" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_Fragebogen_enthält_Antworten
+    A: One Fragebogen as Fragebogen
+    B: ZeroOrMore Antwort as Antworten
+    Preferred Storage: MergeIntoB
+    -->
+    <AssociationSetMapping Name="FK_Fragebogen_enthält_Antworten"
+                           TypeName="Model.FK_Fragebogen_enthält_Antworten"
+                           StoreEntitySet="Antwort" >
+      <EndProperty Name="Fragebogen">
+        <ScalarProperty Name="ID" ColumnName="fk_Fragebogen"/>
+      </EndProperty>
+      <EndProperty Name="Antworten">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_Fragebogen" IsNull="false"/>
     </AssociationSetMapping>
     <!--
     Relation: FK_Icon_has_Module

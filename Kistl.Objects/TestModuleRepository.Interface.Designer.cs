@@ -46,6 +46,16 @@ namespace Kistl.App.Test
 			}
 		}
 		
+		/// <summary>List of all Fragebogen</summary>
+		/// 
+		public IQueryable<Fragebogen> Fragebögen
+		{ 
+			get
+			{
+				return Context.GetQuery<Fragebogen>();
+			}
+		}
+		
 		/// <summary>List of all Company</summary>
 		/// Describes a Company
 		public IQueryable<Company> Companies
@@ -53,6 +63,16 @@ namespace Kistl.App.Test
 			get
 			{
 				return Context.GetQuery<Company>();
+			}
+		}
+		
+		/// <summary>List of all Antwort</summary>
+		/// 
+		public IQueryable<Antwort> Antworten
+		{ 
+			get
+			{
+				return Context.GetQuery<Antwort>();
 			}
 		}
 		

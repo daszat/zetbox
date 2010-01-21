@@ -5,6 +5,7 @@
     <!-- EntitySets for all classes -->
     <EntitySet Name="ANewObjectClass" EntityType="Model.ANewObjectClass" />
     <EntitySet Name="AnotherTest" EntityType="Model.AnotherTest" />
+    <EntitySet Name="Antwort" EntityType="Model.Antwort" />
     <EntitySet Name="Assembly" EntityType="Model.Assembly" />
     <EntitySet Name="Auftrag" EntityType="Model.Auftrag" />
     <EntitySet Name="BaseParameter" EntityType="Model.BaseParameter" />
@@ -15,6 +16,7 @@
     <EntitySet Name="DataType" EntityType="Model.DataType" />
     <EntitySet Name="DefaultPropertyValue" EntityType="Model.DefaultPropertyValue" />
     <EntitySet Name="EnumerationEntry" EntityType="Model.EnumerationEntry" />
+    <EntitySet Name="Fragebogen" EntityType="Model.Fragebogen" />
     <EntitySet Name="Icon" EntityType="Model.Icon" />
     <EntitySet Name="Identity" EntityType="Model.Identity" />
     <EntitySet Name="InstanceConstraint" EntityType="Model.InstanceConstraint" />
@@ -281,6 +283,10 @@
     <AssociationSet Name="FK_EnumerationProperty_has_Enumeration" Association="Model.FK_EnumerationProperty_has_Enumeration" >
       <End Role="EnumerationProperty" EntitySet="Property" />
       <End Role="Enumeration" EntitySet="DataType" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Fragebogen_enthält_Antworten" Association="Model.FK_Fragebogen_enthält_Antworten" >
+      <End Role="Fragebogen" EntitySet="Fragebogen" />
+      <End Role="Antworten" EntitySet="Antwort" />
     </AssociationSet>
     <AssociationSet Name="FK_Icon_has_Module" Association="Model.FK_Icon_has_Module" >
       <End Role="Icon" EntitySet="Icon" />
@@ -563,6 +569,20 @@
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
   </EntityType>
+  <EntityType Name="Antwort">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Frage" Type="String" Nullable="false" MaxLength="4000" />
+    <NavigationProperty Name="Fragebogen__Implementation__"
+                        Relationship="Model.FK_Fragebogen_enthält_Antworten"
+                        FromRole="Antworten"
+                        ToRole="Fragebogen" />
+    <Property Name="Fragebogen_pos" Type="Int32" Nullable="true" />
+    <Property Name="FragenNummer" Type="Int32" Nullable="false" />
+    <Property Name="GegebeneAntwort" Type="Int32" Nullable="true" />
+  </EntityType>
   <EntityType Name="Assembly">
     <Key>
       <PropertyRef Name="ID" />
@@ -773,6 +793,17 @@
     <Property Name="ExportGuid" Type="Guid" Nullable="false" />
     <Property Name="Name" Type="String" Nullable="false" MaxLength="200" />
     <Property Name="Value" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Fragebogen">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Antworten__Implementation__"
+                        Relationship="Model.FK_Fragebogen_enthält_Antworten"
+                        FromRole="Fragebogen"
+                        ToRole="Antworten" />
+    <Property Name="BogenNummer" Type="Int32" Nullable="true" />
   </EntityType>
   <EntityType Name="Icon">
     <Key>
@@ -2370,6 +2401,14 @@
     <End Role="Enumeration"
          Type="Model.Enumeration" 
          Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_Fragebogen_enthält_Antworten" >
+    <End Role="Fragebogen"
+         Type="Model.Fragebogen" 
+         Multiplicity="0..1" />
+    <End Role="Antworten"
+         Type="Model.Antwort" 
+         Multiplicity="*" />
   </Association>
   <Association Name="FK_Icon_has_Module" >
     <End Role="Icon"

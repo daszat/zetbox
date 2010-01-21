@@ -84,6 +84,7 @@
     <Compile Include="ActionKind.Server.Designer.cs" />
     <Compile Include="ANewObjectClass.Server.Designer.cs" />
     <Compile Include="AnotherTest.Server.Designer.cs" />
+    <Compile Include="Antwort.Server.Designer.cs" />
     <Compile Include="Assembly.Server.Designer.cs" />
     <Compile Include="Auftrag.Server.Designer.cs" />
     <Compile Include="BaseParameter.Server.Designer.cs" />
@@ -113,6 +114,7 @@
     <Compile Include="EnumerationEntry.Server.Designer.cs" />
     <Compile Include="EnumerationProperty.Server.Designer.cs" />
     <Compile Include="EnumerationSelectorKind.Server.Designer.cs" />
+    <Compile Include="Fragebogen.Server.Designer.cs" />
     <Compile Include="GuidProperty.Server.Designer.cs" />
     <Compile Include="Icon.Server.Designer.cs" />
     <Compile Include="Identity.Server.Designer.cs" />

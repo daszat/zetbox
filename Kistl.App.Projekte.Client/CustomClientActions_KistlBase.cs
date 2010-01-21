@@ -9,11 +9,19 @@ using Kistl.API;
 using Kistl.App.Extensions;
 using System.Diagnostics;
 using Kistl.API.Utils;
+using Kistl.App.GUI;
 
 namespace Kistl.App.Base
 {
     public static partial class CustomClientActions_KistlBase
     {
+        internal static readonly Guid DataObjectModelDescriptor = new Guid("d8e95ac5-d46a-4dfa-a574-12ea299eadc4");
+
+        public static void OnCreated_ObjectClass(ObjectClass obj)
+        {
+            obj.DefaultPresentableModelDescriptor = obj.Context.FindPersistenceObject<PresentableModelDescriptor>(DataObjectModelDescriptor);
+        }
+
         public static void OnGetDataType_DataType(DataType obj, MethodReturnEventArgs<System.Type> e)
         {
             // TODO: remove this bad test-hack
@@ -24,9 +32,9 @@ namespace Kistl.App.Base
 
         public static void OnGetDataTypeString_DataType(DataType obj, MethodReturnEventArgs<string> e)
         {
-            if (Helper.IsFloatingObject(obj))
+            if (obj.Module == null)
             {
-                e.Result = String.Empty;
+                e.Result = obj.ClassName;
             }
             else
             {
