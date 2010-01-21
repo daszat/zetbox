@@ -29,6 +29,8 @@ namespace Kistl.IntegrationTests
         [SetUp]
         public void SetUp()
         {
+            DeleteObjects();
+
             using (IKistlContext ctx = KistlContext.GetContext())
             {
                 Projekt prj1 = ctx.Create<Projekt>();
@@ -66,6 +68,11 @@ namespace Kistl.IntegrationTests
 
         [TearDown]
         public void TearDown()
+        {
+            DeleteObjects();
+        }
+
+        private static void DeleteObjects()
         {
             using (IKistlContext ctx = KistlContext.GetContext())
             {
