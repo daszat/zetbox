@@ -112,6 +112,12 @@ namespace Kistl.Server
                 .Register<WcfIdentityResolver>()
                 .As<IIdentityResolver>()
                 .SingletonScoped();
+
+            // TODO: move to separate MSSQL-specific assembly, since the SQL-Schema should be independent of the DalProvider
+            moduleBuilder
+                .Register(c => new Kistl.Server.SchemaManagement.SqlProvider.SqlServer())
+                .As<ISchemaProvider>()
+                .FactoryScoped();
         }
     }
 }

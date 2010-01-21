@@ -1,21 +1,23 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Kistl.API.Server;
-using System.Data.SqlClient;
-using Kistl.API;
-using Kistl.API.Configuration;
 
-namespace Kistl.DalProvider.EF
+namespace Kistl.Server.SchemaManagement.SqlProvider
 {
-    public class SqlServerSchemaProvider
+    using System;
+    using System.Collections.Generic;
+    using System.Data.SqlClient;
+    using System.Linq;
+    using System.Text;
+
+    using Kistl.API;
+    using Kistl.API.Configuration;
+    using Kistl.API.Server;
+
+    public class SqlServer
         : ISchemaProvider
     {
         protected SqlConnection db;
         protected SqlTransaction tx;
 
-        public SqlServerSchemaProvider()
+        public SqlServer()
         {
             var connectionString = ApplicationContext.Current.Configuration.Server.ConnectionString;
             if (String.IsNullOrEmpty(connectionString))

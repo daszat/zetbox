@@ -39,12 +39,6 @@ namespace Kistl.DalProvider.EF
             if (reflectedServerAssembly == null)
                 throw new InvalidOperationException("Unable to load Kistl.Objects.Server Assembly for reflection, no Entity Framework Metadata will be loaded");
 
-            // TODO: move to separate MSSQL-specific assembly, since the SQL-Schema should be independent of the DalProvider
-            moduleBuilder
-                .Register(c => new SqlServerSchemaProvider())
-                .As<ISchemaProvider>()
-                .FactoryScoped();
-
             moduleBuilder
                 .Register(c =>
                 {

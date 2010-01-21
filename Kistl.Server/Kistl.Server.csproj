@@ -691,6 +691,7 @@
     <Compile Include="Packaging\PackagingHelper.cs" />
     <Compile Include="SchemaManagement\SchemaManager.CheckSchema.cs" />
     <Compile Include="SchemaManagement\SchemaManager.UpdateSchema.cs" />
+    <Compile Include="SchemaManagement\SqlProvider\SqlServer.cs" />
     <Compile Include="Server.cs" />
     <Compile Include="ServerModule.cs" />
     <Compile Include="WcfIdentityResolver.cs" />
