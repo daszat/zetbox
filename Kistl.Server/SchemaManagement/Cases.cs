@@ -321,14 +321,14 @@ namespace Kistl.Server.SchemaManagement
         }
         #endregion
 
-        #region NewStructPropertyList
-        public bool IsNewStructPropertyList(StructProperty prop)
+        #region NewCompoundObjectPropertyList
+        public bool IsNewCompoundObjectPropertyList(CompoundObjectProperty prop)
         {
             return savedSchema.FindPersistenceObject<Property>(prop.ExportGuid) == null;
         }
-        public void DoNewStructPropertyList(ObjectClass objClass, StructProperty prop)
+        public void DoNewCompoundObjectPropertyList(ObjectClass objClass, CompoundObjectProperty prop)
         {
-            Log.InfoFormat("New Struct Property List: {0}", prop.PropertyName);
+            Log.InfoFormat("New CompoundObject Property List: {0}", prop.PropertyName);
             string tblName = prop.GetCollectionEntryTable();
             string fkName = "fk_" + prop.ObjectClass.ClassName;
             string valPropName = prop.PropertyName;
@@ -339,8 +339,8 @@ namespace Kistl.Server.SchemaManagement
             db.CreateTable(tblName, true);
             db.CreateColumn(tblName, fkName, System.Data.DbType.Int32, 0, false);
 
-            // TODO: Support neested structs
-            foreach (ValueTypeProperty p in prop.StructDefinition.Properties)
+            // TODO: Support neested CompoundObject
+            foreach (ValueTypeProperty p in prop.CompoundObjectDefinition.Properties)
             {
                 db.CreateColumn(tblName, valPropName + "_" + p.PropertyName, SchemaManager.GetDbType(p), p is StringProperty ? ((StringProperty)p).GetMaxLength() : 0, true);
             }
@@ -353,30 +353,30 @@ namespace Kistl.Server.SchemaManagement
         }
         #endregion
 
-        #region RenameStructPropertyListName
-        public bool IsRenameStructPropertyListName(StructProperty prop)
+        #region RenameCompoundObjectPropertyListName
+        public bool IsRenameCompoundObjectPropertyListName(CompoundObjectProperty prop)
         {
-            var saved = savedSchema.FindPersistenceObject<StructProperty>(prop.ExportGuid);
+            var saved = savedSchema.FindPersistenceObject<CompoundObjectProperty>(prop.ExportGuid);
             if (saved == null) return false;
             return saved.PropertyName != prop.PropertyName;
         }
-        public void DoRenameStructPropertyListName(ObjectClass objClass, StructProperty prop)
+        public void DoRenameCompoundObjectPropertyListName(ObjectClass objClass, CompoundObjectProperty prop)
         {
-            var saved = savedSchema.FindPersistenceObject<StructProperty>(prop.ExportGuid);
+            var saved = savedSchema.FindPersistenceObject<CompoundObjectProperty>(prop.ExportGuid);
             Log.ErrorFormat("renaming a Property from '{0}' to '{1}' is not supported yet", saved.PropertyName, prop.PropertyName);
         }
         #endregion
 
-        #region MoveStructPropertyList
-        public bool IsMoveStructPropertyList(StructProperty prop)
+        #region MoveCompoundObjectPropertyList
+        public bool IsMoveCompoundObjectPropertyList(CompoundObjectProperty prop)
         {
-            var saved = savedSchema.FindPersistenceObject<StructProperty>(prop.ExportGuid);
+            var saved = savedSchema.FindPersistenceObject<CompoundObjectProperty>(prop.ExportGuid);
             if (saved == null) return false;
             return saved.ObjectClass.ExportGuid != prop.ObjectClass.ExportGuid;
         }
-        public void DoMoveStructPropertyList(ObjectClass objClass, StructProperty prop)
+        public void DoMoveCompoundObjectPropertyList(ObjectClass objClass, CompoundObjectProperty prop)
         {
-            var saved = savedSchema.FindPersistenceObject<StructProperty>(prop.ExportGuid);
+            var saved = savedSchema.FindPersistenceObject<CompoundObjectProperty>(prop.ExportGuid);
             Log.ErrorFormat("moving a Property from '{0}' to '{1}' is not supported yet", saved.ObjectClass.ClassName, prop.ObjectClass.ClassName);
         }
         #endregion

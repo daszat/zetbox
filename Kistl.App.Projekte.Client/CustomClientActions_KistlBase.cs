@@ -76,16 +76,16 @@ namespace Kistl.App.Base
             }
         }
 
-        public static void OnGetPropertyTypeString_StructProperty(StructProperty obj, MethodReturnEventArgs<string> e)
+        public static void OnGetPropertyTypeString_CompoundObjectProperty(CompoundObjectProperty obj, MethodReturnEventArgs<string> e)
         {
-            DataType objClass = obj.StructDefinition;
+            DataType objClass = obj.CompoundObjectDefinition;
             if (objClass != null && objClass.Module != null)
             {
                 e.Result = objClass.Module.Namespace + "." + objClass.ClassName;
             }
             else
             {
-                e.Result = "a struct";
+                e.Result = "a CompoundObject";
             }
         }
 
@@ -302,7 +302,7 @@ namespace Kistl.App.Base
 
             foreach (var iface in objClass.ImplementsInterfaces)
             {
-                // TODO: implement structs too
+                // TODO: implement CompoundObject too
                 foreach (var prop in iface.Properties)
                 {
                     if (!objClass.Properties.Select(p => p.PropertyName).Contains(prop.PropertyName))
@@ -319,7 +319,7 @@ namespace Kistl.App.Base
                         }
                         else
                         {
-                            // TODO: Add structs
+                            // TODO: Add CompoundObject
                             continue;
                         }
                         objClass.Properties.Add(newProp);

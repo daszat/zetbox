@@ -19,7 +19,7 @@ namespace Kistl.API.Server
             BaseDataObjectType = typeof(BaseServerDataObject);
             BasePersistenceObjectType = typeof(BaseServerPersistenceObject);
             BaseCollectionEntryType = typeof(BaseServerCollectionEntry);
-            BaseStructObjectType = typeof(BaseServerStructObject);
+            BaseCompoundObjectType = typeof(BaseServerCompoundObject);
         }
     }
 }

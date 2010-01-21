@@ -78,7 +78,7 @@
 
     <!-- EntitySets and AssociationSets for all object-struct CollectionEntrys -->
 <%
-    foreach(var prop in ctx.GetQuery<StructProperty>()
+    foreach(var prop in ctx.GetQuery<CompoundObjectProperty>()
         .Where(p => p.IsList)
         .OrderBy(p => p.ObjectClass.ClassName)
         .ThenBy(p => p.PropertyName))
@@ -292,9 +292,9 @@
     }
 %>
 
-<!-- EntityTypes and Associations for all object-struct CollectionEntrys -->
+<!-- EntityTypes and Associations for all object-CompoundObject CollectionEntrys -->
 <%
-    foreach(var prop in ctx.GetQuery<StructProperty>()
+    foreach(var prop in ctx.GetQuery<CompoundObjectProperty>()
         .Where(p => p.IsList)
         .OrderBy(p => p.ObjectClass.ClassName)
         .ThenBy(p => p.PropertyName))
@@ -315,7 +315,7 @@
                         ToRole="<%= prop.ObjectClass.ClassName %>" />
     <!-- B -->
     <Property Name="B<%= Kistl.API.Helper.ImplementationSuffix %>"
-              Type="Model.<%= prop.StructDefinition.ClassName %>"
+              Type="Model.<%= prop.CompoundObjectDefinition.ClassName %>"
               Nullable="false" />
 <%
         if (prop.HasPersistentOrder)
@@ -356,9 +356,9 @@
 %>
 
 
-  <!-- ComplexTypes for all structs -->
+  <!-- ComplexTypes for all CompoundObjects -->
 <%
-    foreach(var cls in ctx.GetQuery<Struct>().OrderBy(s => s.ClassName))
+    foreach(var cls in ctx.GetQuery<CompoundObject>().OrderBy(s => s.ClassName))
     {
 %>
   <ComplexType Name="<%= cls.ClassName %>" >

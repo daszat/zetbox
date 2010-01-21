@@ -405,29 +405,29 @@ namespace Kistl.API
 
         #endregion
 
-        #region IStruct
+        #region ICompoundObject
 
         /// <summary>
-        /// Serialize a struct. Format is: NULL (true/false), Value (if not null).
+        /// Serialize a CompoundObject. Format is: NULL (true/false), Value (if not null).
         /// </summary>
         /// <param name="val">Value to serialize,</param>
         /// <param name="sw">BinaryWriter to serialize to.</param>
-        [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters", Justification="This API is only for IStructs")]
-        public static void ToStream(IStruct val, BinaryWriter sw)
+        [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters", Justification = "This API is only for ICompoundObject")]
+        public static void ToStream(ICompoundObject val, BinaryWriter sw)
         {
             if (sw == null) throw new ArgumentNullException("sw");
             SerializerTrace("CurrentPos: {0}", sw.BaseStream.Position);
-            SerializerTrace("Writing IStruct {0}", val);
+            SerializerTrace("Writing ICompoundObject {0}", val);
             if (val != null) { sw.Write(true); val.ToStream(sw, null); } else sw.Write(false);
         }
 
         /// <summary>
-        /// Deserialize a struct, expected format: NULL (true/false), Value (if not null).
+        /// Deserialize a CompoundObject, expected format: NULL (true/false), Value (if not null).
         /// </summary>
         /// <param name="val">Destination Value.</param>
         /// <param name="sr">BinaryReader to deserialize from.</param>
         public static void FromStream<T>(out T val, BinaryReader sr)
-            where T : class, IStruct, new()
+            where T : class, ICompoundObject, new()
         {
             if (sr == null) throw new ArgumentNullException("sr");
             SerializerTrace("CurrentPos: {0}", sr.BaseStream.Position);

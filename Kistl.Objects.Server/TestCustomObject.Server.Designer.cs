@@ -30,8 +30,8 @@ namespace Kistl.App.Test
 		public TestCustomObject__Implementation__()
 		{
 			{
-				_PhoneNumberMobile = new Kistl.App.Test.TestPhoneStruct__Implementation__(this, "PhoneNumberMobile");
-				_PhoneNumberOffice = new Kistl.App.Test.TestPhoneStruct__Implementation__(this, "PhoneNumberOffice");
+				_PhoneNumberMobile = new Kistl.App.Test.TestPhoneCompoundObject__Implementation__(this, "PhoneNumberMobile");
+				_PhoneNumberOffice = new Kistl.App.Test.TestPhoneCompoundObject__Implementation__(this, "PhoneNumberOffice");
 			}
         }
 
@@ -446,22 +446,22 @@ namespace Kistl.App.Test
         /// <summary>
         /// 
         /// </summary>
-        // struct property
-   		// Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.StructPropertyTemplate
+        // CompoundObject property
+   		// Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.CompoundObjectPropertyTemplate
         // implement the user-visible interface
-        public Kistl.App.Test.TestPhoneStruct PhoneNumberMobile
+        public Kistl.App.Test.TestPhoneCompoundObject PhoneNumberMobile
         {
             get { return PhoneNumberMobile__Implementation__; }
-            set { PhoneNumberMobile__Implementation__ = (Kistl.App.Test.TestPhoneStruct__Implementation__)value; }
+            set { PhoneNumberMobile__Implementation__ = (Kistl.App.Test.TestPhoneCompoundObject__Implementation__)value; }
         }
         
         /// <summary>backing store for PhoneNumberMobile</summary>
-        private Kistl.App.Test.TestPhoneStruct__Implementation__ _PhoneNumberMobile;
+        private Kistl.App.Test.TestPhoneCompoundObject__Implementation__ _PhoneNumberMobile;
         
         /// <summary>backing property for PhoneNumberMobile, takes care of attaching/detaching the values, mapped via EF</summary>
         [XmlIgnore()]
         [EdmComplexProperty()]
-        public Kistl.App.Test.TestPhoneStruct__Implementation__ PhoneNumberMobile__Implementation__
+        public Kistl.App.Test.TestPhoneCompoundObject__Implementation__ PhoneNumberMobile__Implementation__
         {
             get
             {
@@ -481,7 +481,7 @@ namespace Kistl.App.Test
                     {
 						_PhoneNumberMobile.DetachFromObject(this, "PhoneNumberMobile");
 					}
-                    _PhoneNumberMobile = (Kistl.App.Test.TestPhoneStruct__Implementation__)value;
+                    _PhoneNumberMobile = (Kistl.App.Test.TestPhoneCompoundObject__Implementation__)value;
 					_PhoneNumberMobile.AttachToObject(this, "PhoneNumberMobile");
                     NotifyPropertyChanged("PhoneNumberMobile", "PhoneNumberMobile__Implementation__", __oldValue, value);
                 }
@@ -493,22 +493,22 @@ namespace Kistl.App.Test
         /// <summary>
         /// 
         /// </summary>
-        // struct property
-   		// Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.StructPropertyTemplate
+        // CompoundObject property
+   		// Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.CompoundObjectPropertyTemplate
         // implement the user-visible interface
-        public Kistl.App.Test.TestPhoneStruct PhoneNumberOffice
+        public Kistl.App.Test.TestPhoneCompoundObject PhoneNumberOffice
         {
             get { return PhoneNumberOffice__Implementation__; }
-            set { PhoneNumberOffice__Implementation__ = (Kistl.App.Test.TestPhoneStruct__Implementation__)value; }
+            set { PhoneNumberOffice__Implementation__ = (Kistl.App.Test.TestPhoneCompoundObject__Implementation__)value; }
         }
         
         /// <summary>backing store for PhoneNumberOffice</summary>
-        private Kistl.App.Test.TestPhoneStruct__Implementation__ _PhoneNumberOffice;
+        private Kistl.App.Test.TestPhoneCompoundObject__Implementation__ _PhoneNumberOffice;
         
         /// <summary>backing property for PhoneNumberOffice, takes care of attaching/detaching the values, mapped via EF</summary>
         [XmlIgnore()]
         [EdmComplexProperty()]
-        public Kistl.App.Test.TestPhoneStruct__Implementation__ PhoneNumberOffice__Implementation__
+        public Kistl.App.Test.TestPhoneCompoundObject__Implementation__ PhoneNumberOffice__Implementation__
         {
             get
             {
@@ -528,7 +528,7 @@ namespace Kistl.App.Test
                     {
 						_PhoneNumberOffice.DetachFromObject(this, "PhoneNumberOffice");
 					}
-                    _PhoneNumberOffice = (Kistl.App.Test.TestPhoneStruct__Implementation__)value;
+                    _PhoneNumberOffice = (Kistl.App.Test.TestPhoneCompoundObject__Implementation__)value;
 					_PhoneNumberOffice.AttachToObject(this, "PhoneNumberOffice");
                     NotifyPropertyChanged("PhoneNumberOffice", "PhoneNumberOffice__Implementation__", __oldValue, value);
                 }
@@ -540,18 +540,18 @@ namespace Kistl.App.Test
         /// <summary>
         /// 
         /// </summary>
-        // struct list property
+        // CompoundObject list property
    		// Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.ValueCollectionProperty
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public ICollection<Kistl.App.Test.TestPhoneStruct> PhoneNumbersOther
+        public ICollection<Kistl.App.Test.TestPhoneCompoundObject> PhoneNumbersOther
         {
             get
             {
                 if (_PhoneNumbersOtherWrapper == null)
                 {
-                    _PhoneNumbersOtherWrapper = new EFValueCollectionWrapper<TestCustomObject, Kistl.App.Test.TestPhoneStruct, TestCustomObject_PhoneNumbersOther_CollectionEntry__Implementation__, EntityCollection<TestCustomObject_PhoneNumbersOther_CollectionEntry__Implementation__>>(
+                    _PhoneNumbersOtherWrapper = new EFValueCollectionWrapper<TestCustomObject, Kistl.App.Test.TestPhoneCompoundObject, TestCustomObject_PhoneNumbersOther_CollectionEntry__Implementation__, EntityCollection<TestCustomObject_PhoneNumbersOther_CollectionEntry__Implementation__>>(
 						this.Context,
                         this,
                         PhoneNumbersOther__Implementation__);
@@ -577,7 +577,7 @@ namespace Kistl.App.Test
                 return c;
             }
         }
-        private EFValueCollectionWrapper<TestCustomObject, Kistl.App.Test.TestPhoneStruct, TestCustomObject_PhoneNumbersOther_CollectionEntry__Implementation__, EntityCollection<TestCustomObject_PhoneNumbersOther_CollectionEntry__Implementation__>> _PhoneNumbersOtherWrapper;
+        private EFValueCollectionWrapper<TestCustomObject, Kistl.App.Test.TestPhoneCompoundObject, TestCustomObject_PhoneNumbersOther_CollectionEntry__Implementation__, EntityCollection<TestCustomObject_PhoneNumbersOther_CollectionEntry__Implementation__>> _PhoneNumbersOtherWrapper;
 
 		public override InterfaceType GetInterfaceType()
 		{

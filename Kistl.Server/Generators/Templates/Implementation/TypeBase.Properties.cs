@@ -47,16 +47,16 @@ namespace Kistl.Server.Generators.Templates.Implementation
                 ApplyCalculatedObjectReferencePropertyTemplate((CalculatedObjectReferenceProperty)p);
                 ApplyPropertyInvocationsTemplate(p, true);
             }
-            else if (p is StructProperty)
+            else if (p is CompoundObjectProperty)
             {
-                if (((StructProperty)p).IsList)
+                if (((CompoundObjectProperty)p).IsList)
                 {
-                    ApplyStructListTemplate((StructProperty)p);
+                    ApplyCompoundObjectListTemplate((CompoundObjectProperty)p);
                 }
                 else
                 {
-                    ApplyStructPropertyTemplate((StructProperty)p);
-                    // no PropertyInvocationsTemplate for structs
+                    ApplyCompoundObjectPropertyTemplate((CompoundObjectProperty)p);
+                    // no PropertyInvocationsTemplate for CompoundObject
                 }
             }
             else if (p is ValueTypeProperty)
@@ -113,15 +113,15 @@ namespace Kistl.Server.Generators.Templates.Implementation
             ApplyCalculatedProperty(prop, this.MembersToSerialize);
         }
 
-        protected virtual void ApplyStructListTemplate(StructProperty prop)
+        protected virtual void ApplyCompoundObjectListTemplate(CompoundObjectProperty prop)
         {
-            this.WriteLine("        // struct list property");
+            this.WriteLine("        // CompoundObject list property");
             ApplyListProperty(prop, this.MembersToSerialize);
         }
 
-        protected virtual void ApplyStructPropertyTemplate(StructProperty prop)
+        protected virtual void ApplyCompoundObjectPropertyTemplate(CompoundObjectProperty prop)
         {
-            this.WriteLine("        // struct property");
+            this.WriteLine("        // CompoundObject property");
             ApplyNotifyingValueProperty(prop, this.MembersToSerialize);
         }
 

@@ -18,7 +18,7 @@ namespace Kistl.API.Client
             BaseDataObjectType = typeof(BaseClientDataObject);
             BasePersistenceObjectType = typeof(BaseClientPersistenceObject);
             BaseCollectionEntryType = typeof(BaseClientCollectionEntry);
-            BaseStructObjectType = typeof(BaseClientStructObject);
+            BaseCompoundObjectType = typeof(BaseClientCompoundObject);
         }
     }
 }

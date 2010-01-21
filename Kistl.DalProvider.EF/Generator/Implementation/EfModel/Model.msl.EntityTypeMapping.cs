@@ -61,7 +61,7 @@ namespace Kistl.DalProvider.EF.Generator.Implementation.EfModel
                 ModelMslEntityTypeMappingScalarProperty.Call(Host, ctx, prop, prop.PropertyName, String.Empty);
             }
 
-            foreach (var prop in cls.Properties.OfType<StructProperty>().Where(p => !p.IsList).OrderBy(p => p.PropertyName))
+            foreach (var prop in cls.Properties.OfType<CompoundObjectProperty>().Where(p => !p.IsList).OrderBy(p => p.PropertyName))
             {
                 ModelMslEntityTypeMappingComplexProperty.Call(Host, ctx, prop, prop.PropertyName, String.Empty);
             }

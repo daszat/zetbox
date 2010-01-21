@@ -299,27 +299,27 @@ namespace Kistl.DalProvider.Frozen
     /// <summary>
     /// 
     /// </summary>
-    public abstract class BaseFrozenStruct
-        : BaseFrozenObject, IStruct
+    public abstract class BaseFrozenCompoundObject
+        : BaseFrozenObject, ICompoundObject
     {
         /// <summary>
         /// 
         /// </summary>
-        protected BaseFrozenStruct()
+        protected BaseFrozenCompoundObject()
         {
-            throw new InvalidOperationException("BaseFrozenStruct constructor without id called");
+            throw new InvalidOperationException("BaseFrozenCompoundObject constructor without id called");
         }
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="id"></param>
-        protected BaseFrozenStruct(int id)
+        protected BaseFrozenCompoundObject(int id)
             : base(id)
         {
         }
 
-        #region IStruct Members
+        #region ICompoundObject Members
         /// <summary>
         /// 
         /// </summary>

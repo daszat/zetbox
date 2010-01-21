@@ -199,7 +199,7 @@ namespace Kistl.App.Test
     /// <summary>
     /// ValueCollectionEntry for 
     /// </summary>
-    public interface TestCustomObject_PhoneNumbersOther_CollectionEntry : IValueCollectionEntry<TestCustomObject, Kistl.App.Test.TestPhoneStruct> 
+    public interface TestCustomObject_PhoneNumbersOther_CollectionEntry : IValueCollectionEntry<TestCustomObject, Kistl.App.Test.TestPhoneCompoundObject> 
     {
 
     }

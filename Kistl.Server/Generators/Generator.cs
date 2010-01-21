@@ -222,11 +222,11 @@ namespace Kistl.Server.Generators
                    select e;
         }
 
-        public static IQueryable<Struct> GetStructList(IKistlContext ctx)
+        public static IQueryable<CompoundObject> GetCompoundObjectList(IKistlContext ctx)
         {
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
 
-            return from s in ctx.GetQuery<Struct>()
+            return from s in ctx.GetQuery<CompoundObject>()
                    select s;
         }
 

@@ -65,7 +65,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Tests\BinarySerializers\should_work_with_IStructs.cs" />
+    <Compile Include="Tests\BinarySerializers\should_work_with_ICompoundObjects.cs" />
     <Compile Include="Tests\GetListTests.cs" />
     <Compile Include="Tests\InheritanceTests.cs" />
     <Compile Include="Tests\ListPropertiesTests.cs" />
@@ -80,9 +80,9 @@
     <Compile Include="Tests\Presentables\ObjectReferenceModels\should_present_underlying_property_as_value.cs" />
     <Compile Include="Tests\RelationDefinitionTests.cs" />
     <Compile Include="Tests\RelationTests.cs" />
-    <Compile Include="Tests\Structs\when_changing_a_struct_member.cs" />
-    <Compile Include="Tests\Structs\when_initialized.cs" />
-    <Compile Include="Tests\StructTests.cs" />
+    <Compile Include="Tests\CompoundObjects\when_changing_a_CompoundObject_member.cs" />
+    <Compile Include="Tests\CompoundObjects\when_initialized.cs" />
+    <Compile Include="Tests\CompoundObjectTests.cs" />
     <Compile Include="Tests\TypeRefs\should_convert_types_correctly.cs" />
   </ItemGroup>
   <ItemGroup>

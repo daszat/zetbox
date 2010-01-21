@@ -91,7 +91,7 @@ namespace Kistl.DalProvider.EF
         public virtual void SetChangeTracker(IEntityChangeTracker changeTracker)
         {
             _changeTracker = changeTracker;
-            // Set struct change tracker
+            // Set CompoundObject change tracker
         }
         #endregion
 
@@ -350,11 +350,11 @@ namespace Kistl.DalProvider.EF
     }
 
     /// <summary>
-    /// Implementing a change tracker is not required because Structs are attached to their 
+    /// Implementing a change tracker is not required because CompoundObjects are attached to their 
     /// parent objects. Every change will notify the parent also.
     /// </summary>
-    public abstract class BaseServerStructObject_EntityFramework
-        : BaseServerStructObject
+    public abstract class BaseServerCompoundObject_EntityFramework
+        : BaseServerCompoundObject
     {
         protected override void OnPropertyChanging(string property, object oldValue, object newValue)
         {

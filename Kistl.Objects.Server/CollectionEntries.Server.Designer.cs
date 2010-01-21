@@ -3554,7 +3554,7 @@ namespace Kistl.App.Test
         }
         private int _ID;
         public IDataObject ParentObject { get { return Parent; } set { Parent = (TestCustomObject)value; } }
-        public object ValueObject { get { return Value; } set { Value = (Kistl.App.Test.TestPhoneStruct)value; } }
+        public object ValueObject { get { return Value; } set { Value = (Kistl.App.Test.TestPhoneCompoundObject)value; } }
 
         /// <summary>
         /// Reference to the A-Side member of this CollectionEntry
@@ -3622,21 +3622,21 @@ public TestCustomObject Parent { get { return A; } set { A = value; } }
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
-   		// Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.StructPropertyTemplate
+   		// Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.CompoundObjectPropertyTemplate
         // implement the user-visible interface
-        public Kistl.App.Test.TestPhoneStruct B
+        public Kistl.App.Test.TestPhoneCompoundObject B
         {
             get { return B__Implementation__; }
-            set { B__Implementation__ = (Kistl.App.Test.TestPhoneStruct__Implementation__)value; }
+            set { B__Implementation__ = (Kistl.App.Test.TestPhoneCompoundObject__Implementation__)value; }
         }
         
         /// <summary>backing store for B</summary>
-        private Kistl.App.Test.TestPhoneStruct__Implementation__ _B;
+        private Kistl.App.Test.TestPhoneCompoundObject__Implementation__ _B;
         
         /// <summary>backing property for B, takes care of attaching/detaching the values, mapped via EF</summary>
         [XmlIgnore()]
         [EdmComplexProperty()]
-        public Kistl.App.Test.TestPhoneStruct__Implementation__ B__Implementation__
+        public Kistl.App.Test.TestPhoneCompoundObject__Implementation__ B__Implementation__
         {
             get
             {
@@ -3656,7 +3656,7 @@ public TestCustomObject Parent { get { return A; } set { A = value; } }
                     {
 						_B.DetachFromObject(this, "B");
 					}
-                    _B = (Kistl.App.Test.TestPhoneStruct__Implementation__)value;
+                    _B = (Kistl.App.Test.TestPhoneCompoundObject__Implementation__)value;
 					_B.AttachToObject(this, "B");
                     NotifyPropertyChanged("B", "B__Implementation__", __oldValue, value);
                 }
@@ -3664,7 +3664,7 @@ public TestCustomObject Parent { get { return A; } set { A = value; } }
         }
 
 
-  public Kistl.App.Test.TestPhoneStruct Value { get { return B; } set { B = value; } }
+  public Kistl.App.Test.TestPhoneCompoundObject Value { get { return B; } set { B = value; } }
 
 #region Serializer
 

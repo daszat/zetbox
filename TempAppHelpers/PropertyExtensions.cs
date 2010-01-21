@@ -16,8 +16,8 @@ namespace Kistl.App.Extensions
         public static string GetAssociationName(this Property prop)
         {
             if (prop == null) { throw new ArgumentNullException("prop"); }
-            if (!(prop is ValueTypeProperty || prop is StructProperty)) throw new NotSupportedException("Property must be either a ValueTypeProperty or StructProperty");
-            if (!(prop is ValueTypeProperty ? ((ValueTypeProperty)prop).IsList : ((StructProperty)prop).IsList)) 
+            if (!(prop is ValueTypeProperty || prop is CompoundObjectProperty)) throw new NotSupportedException("Property must be either a ValueTypeProperty or StructProperty");
+            if (!(prop is ValueTypeProperty ? ((ValueTypeProperty)prop).IsList : ((CompoundObjectProperty)prop).IsList)) 
                 throw new NotSupportedException("GetAssociationName is only valid for Lists");
             return String.Format("FK_{0}_{1}_{2}", prop.ObjectClass.ClassName, "value", prop.PropertyName);
         }

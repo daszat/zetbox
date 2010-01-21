@@ -86,7 +86,7 @@ namespace Kistl.Client.Presentables
             }
             set
             {
-                // TODO: check whether that works for all structs
+                // TODO: check whether that works for all CompoundObject
                 if (!System.Object.Equals(_selectedItem, value))
                 {
                     _selectedItem = value;

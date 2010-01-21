@@ -17,7 +17,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
         public static void Call(Arebis.CodeGeneration.IGenerationHost host,
             IKistlContext ctx,
             Templates.Implementation.SerializationMembersList serializationList,
-            StructProperty prop)
+            CompoundObjectProperty prop)
         {
             Call(host, ctx, serializationList, prop, prop.HasPersistentOrder, prop.IsList);
         }

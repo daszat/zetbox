@@ -32,9 +32,9 @@ namespace Kistl.Server.Generators.Templates.Interface.DataTypes
                     return new string[] { "IDataObject" }.Concat(interfaces).ToArray();
                 }
             }
-            else if (dataType is Struct)
+            else if (dataType is CompoundObject)
             {
-                return new string[] { "IStruct" };
+                return new string[] { "ICompoundObject" };
             }
             else if (dataType is Kistl.App.Base.Interface)
             {
@@ -70,10 +70,10 @@ namespace Kistl.Server.Generators.Templates.Interface.DataTypes
             {
                 isList = ((ValueTypeProperty)prop).IsList;
             }
-            else if (prop is StructProperty)
+            else if (prop is CompoundObjectProperty)
             {
                 isReadOnly = true;
-                isList = ((StructProperty)prop).IsList;
+                isList = ((CompoundObjectProperty)prop).IsList;
             }
             else if (prop is ObjectReferenceProperty)
             {

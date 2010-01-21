@@ -54,19 +54,19 @@ namespace Kistl.App.Test
         /// <summary>
         /// 
         /// </summary>
-		Kistl.App.Test.TestPhoneStruct PhoneNumberMobile {
+		Kistl.App.Test.TestPhoneCompoundObject PhoneNumberMobile {
 			get;
 		}
         /// <summary>
         /// 
         /// </summary>
-		Kistl.App.Test.TestPhoneStruct PhoneNumberOffice {
+		Kistl.App.Test.TestPhoneCompoundObject PhoneNumberOffice {
 			get;
 		}
         /// <summary>
         /// 
         /// </summary>
 
-        ICollection<Kistl.App.Test.TestPhoneStruct> PhoneNumbersOther { get; }
+        ICollection<Kistl.App.Test.TestPhoneCompoundObject> PhoneNumbersOther { get; }
     }
 }

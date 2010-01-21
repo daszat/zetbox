@@ -41,7 +41,7 @@ namespace Kistl.API
 
         public Type BasePersistenceObjectType { get; protected set; }
         public Type BaseDataObjectType { get; protected set; }
-        public Type BaseStructObjectType { get; protected set; }
+        public Type BaseCompoundObjectType { get; protected set; }
         public Type BaseCollectionEntryType { get; protected set; }
 
         public KistlConfig Configuration { get; private set; }

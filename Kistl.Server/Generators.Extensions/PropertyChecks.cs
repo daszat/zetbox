@@ -47,14 +47,14 @@ namespace Kistl.Server.Generators.Extensions
             return prop is ObjectReferenceProperty && ((ObjectReferenceProperty)prop).IsList();
         }
 
-        public static bool IsStructPropertySingle(this Property prop)
+        public static bool IsCompoundObjectPropertySingle(this Property prop)
         {
-            return prop is StructProperty && !((StructProperty)prop).IsList;
+            return prop is CompoundObjectProperty && !((CompoundObjectProperty)prop).IsList;
         }
 
-        public static bool IsStructPropertyPropertyList(this Property prop)
+        public static bool IsCompoundObjectPropertyPropertyList(this Property prop)
         {
-            return prop is StructProperty && ((StructProperty)prop).IsList;
+            return prop is CompoundObjectProperty && ((CompoundObjectProperty)prop).IsList;
         }
 
         public static string GetCollectionTypeString(this Property prop)
@@ -78,9 +78,9 @@ namespace Kistl.Server.Generators.Extensions
             {
                 isIndexed = ((ValueTypeProperty)prop).HasPersistentOrder;
             }
-            else if (prop is StructProperty)
+            else if (prop is CompoundObjectProperty)
             {
-                isIndexed = ((StructProperty)prop).HasPersistentOrder;
+                isIndexed = ((CompoundObjectProperty)prop).HasPersistentOrder;
             }
 
             if (isIndexed)

@@ -69,6 +69,8 @@
     <Compile Include="CheckboxKind.Interface.Designer.cs" />
     <Compile Include="CLRObjectParameter.Interface.Designer.cs" />
     <Compile Include="Company.Interface.Designer.cs" />
+    <Compile Include="CompoundObject.Interface.Designer.cs" />
+    <Compile Include="CompoundObjectProperty.Interface.Designer.cs" />
     <Compile Include="ConsistentNavigatorConstraint.Interface.Designer.cs" />
     <Compile Include="Constraint.Interface.Designer.cs" />
     <Compile Include="ControlKind.Interface.Designer.cs" />
@@ -130,8 +132,6 @@
     <Compile Include="StringProperty.Interface.Designer.cs" />
     <Compile Include="StringRangeConstraint.Interface.Designer.cs" />
     <Compile Include="StringSelectorKind.Interface.Designer.cs" />
-    <Compile Include="Struct.Interface.Designer.cs" />
-    <Compile Include="StructProperty.Interface.Designer.cs" />
     <Compile Include="Task.Interface.Designer.cs" />
     <Compile Include="Template.Interface.Designer.cs" />
     <Compile Include="TestCustomObject.Interface.Designer.cs" />
@@ -157,7 +157,7 @@
     <Compile Include="StorageType.Interface.Designer.cs" />
     <Compile Include="TestEnum.Interface.Designer.cs" />
     <Compile Include="Toolkit.Interface.Designer.cs" />
-    <Compile Include="TestPhoneStruct.Interface.Designer.cs" />
+    <Compile Include="TestPhoneCompoundObject.Interface.Designer.cs" />
     <Compile Include="AssemblyInfo.Interface.cs" />
     <Compile Include="ModuleRepository.Interface.Designer.cs" />
     <Compile Include="GUIRepository.Interface.Designer.cs" />

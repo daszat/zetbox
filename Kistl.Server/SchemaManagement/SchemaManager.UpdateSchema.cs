@@ -122,9 +122,9 @@ namespace Kistl.Server.SchemaManagement
                 }
             }
 
-            foreach (StructProperty sprop in properties.OfType<StructProperty>().Where(p => !p.IsList))
+            foreach (CompoundObjectProperty sprop in properties.OfType<CompoundObjectProperty>().Where(p => !p.IsList))
             {
-                UpdateColumns(objClass, sprop.StructDefinition.Properties, Construct.NestedColumnName(sprop, prefix));
+                UpdateColumns(objClass, sprop.CompoundObjectDefinition.Properties, Construct.NestedColumnName(sprop, prefix));
             }
 
             foreach (ValueTypeProperty prop in properties.OfType<ValueTypeProperty>().Where(p => p.IsList))
@@ -143,19 +143,19 @@ namespace Kistl.Server.SchemaManagement
                 }
             }
 
-            foreach (StructProperty prop in properties.OfType<StructProperty>().Where(p => p.IsList))
+            foreach (CompoundObjectProperty prop in properties.OfType<CompoundObjectProperty>().Where(p => p.IsList))
             {
-                if (Case.IsNewStructPropertyList(prop))
+                if (Case.IsNewCompoundObjectPropertyList(prop))
                 {
-                    Case.DoNewStructPropertyList(objClass, prop);
+                    Case.DoNewCompoundObjectPropertyList(objClass, prop);
                 }
-                if (Case.IsRenameStructPropertyListName(prop))
+                if (Case.IsRenameCompoundObjectPropertyListName(prop))
                 {
-                    Case.DoRenameStructPropertyListName(objClass, prop);
+                    Case.DoRenameCompoundObjectPropertyListName(objClass, prop);
                 }
-                if (Case.IsMoveStructPropertyList(prop))
+                if (Case.IsMoveCompoundObjectPropertyList(prop))
                 {
-                    Case.DoMoveStructPropertyList(objClass, prop);
+                    Case.DoMoveCompoundObjectPropertyList(objClass, prop);
                 }
             }
         }

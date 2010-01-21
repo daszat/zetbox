@@ -240,7 +240,7 @@ this.WriteObjects("    </AssociationSetMapping>\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("    <!-- EntitySetMappings and AssociationSetMappings for object-struct CollectionEntrys -->\r\n");
 #line 210 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.msl.cst"
-foreach(var prop in ctx.GetQuery<StructProperty>()
+foreach(var prop in ctx.GetQuery<CompoundObjectProperty>()
         .Where(p => p.IsList)
         .OrderBy(p => p.ObjectClass.ClassName)
         .ThenBy(p => p.PropertyName))

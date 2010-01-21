@@ -64,6 +64,7 @@
     <Compile Include="Generator\Implementation\CollectionEntries\ObjectCollectionEntry.Properties.cs" />
     <Compile Include="Generator\Implementation\CollectionEntries\ValueCollectionEntry.cs" />
     <Compile Include="Generator\Implementation\CollectionEntries\ValueCollectionEntry.Properties.cs" />
+    <Compile Include="Generator\Implementation\CompoundObjects\Template.cs" />
     <Compile Include="Generator\Implementation\ObjectClasses\DataStore.cs">
       <DependentUpon>DataStore.cst</DependentUpon>
     </Compile>
@@ -76,7 +77,6 @@
     <Compile Include="Generator\Implementation\ObjectClasses\SerializerTemplate.cs" />
     <Compile Include="Generator\Implementation\ObjectClasses\Template.cs" />
     <Compile Include="Generator\Implementation\ProjectFile.cs" />
-    <Compile Include="Generator\Implementation\Structs\Template.cs" />
     <Compile Include="Generator\Logging.cs" />
     <Compile Include="Generator\Repositories\FrozenContextImplementation.Designer.cs">
       <DependentUpon>FrozenContextImplementation.cst</DependentUpon>

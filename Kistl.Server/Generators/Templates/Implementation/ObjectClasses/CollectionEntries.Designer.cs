@@ -94,7 +94,7 @@ this.WriteObjects("}\r\n");
 }
 
 #line 76 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CollectionEntries.cst"
-foreach (var prop in ctx.GetQuery<StructProperty>()
+foreach (var prop in ctx.GetQuery<CompoundObjectProperty>()
         .Where(p => p.IsList)
         .OrderBy(p => p.ObjectClass.ClassName)
         .ThenBy(p => p.PropertyName))

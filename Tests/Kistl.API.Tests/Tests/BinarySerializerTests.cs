@@ -600,33 +600,33 @@ namespace Kistl.API.Tests
         }
 
         [TestFixture]
-        public class when_serializing_Structs
+        public class when_serializing_CompoundObjects
             : BinarySerializerTests
         {
             [Test]
-            public void IStruct()
+            public void ICompoundObject()
             {
                 const string testString = "muh";
-                TestStruct__Implementation__ toval = new TestStruct__Implementation__() { TestProperty = testString };
+                TestCompoundObject__Implementation__ toval = new TestCompoundObject__Implementation__() { TestProperty = testString };
 
                 BinarySerializer.ToStream(toval, sw);
                 ms.Seek(0, SeekOrigin.Begin);
 
-                TestStruct__Implementation__ fromval;
-                BinarySerializer.FromStream<TestStruct__Implementation__>(out fromval, sr);
+                TestCompoundObject__Implementation__ fromval;
+                BinarySerializer.FromStream<TestCompoundObject__Implementation__>(out fromval, sr);
                 Assert.That(fromval.TestProperty, Is.EqualTo(fromval.TestProperty));
             }
 
             [Test]
-            public void IStructNull()
+            public void ICompoundObjectNull()
             {
-                TestStruct__Implementation__ toval = null;
+                TestCompoundObject__Implementation__ toval = null;
 
                 BinarySerializer.ToStream(toval, sw);
                 ms.Seek(0, SeekOrigin.Begin);
 
-                TestStruct__Implementation__ fromval;
-                BinarySerializer.FromStream<TestStruct__Implementation__>(out fromval, sr);
+                TestCompoundObject__Implementation__ fromval;
+                BinarySerializer.FromStream<TestCompoundObject__Implementation__>(out fromval, sr);
                 Assert.That(fromval, Is.Null);
             }
 

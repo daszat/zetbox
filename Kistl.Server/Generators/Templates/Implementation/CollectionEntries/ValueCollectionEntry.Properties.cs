@@ -35,9 +35,9 @@ namespace Kistl.Server.Generators.Templates.Implementation.CollectionEntries
             {
                 ApplyEnumerationPropertyTemplate((EnumerationProperty)p, propertyName);
             }
-            else if (p is StructProperty)
+            else if (p is CompoundObjectProperty)
             {
-                ApplyStructPropertyTemplate((StructProperty)p, propertyName);
+                ApplyCompoundObjectPropertyTemplate((CompoundObjectProperty)p, propertyName);
             }
             else if (p is ValueTypeProperty)
             {
@@ -51,9 +51,9 @@ namespace Kistl.Server.Generators.Templates.Implementation.CollectionEntries
             ApplyNotifyingValueProperty(this.MembersToSerialize, prop.ReferencedTypeAsCSharp(), propertyName);
         }
 
-        protected virtual void ApplyStructPropertyTemplate(StructProperty prop, string propertyName)
+        protected virtual void ApplyCompoundObjectPropertyTemplate(CompoundObjectProperty prop, string propertyName)
         {
-            this.WriteLine("        // struct property");
+            this.WriteLine("        // CompoundObject property");
             ApplyNotifyingValueProperty(this.MembersToSerialize, prop.ReferencedTypeAsCSharp(), propertyName);
         }
 

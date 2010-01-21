@@ -8,7 +8,7 @@ namespace Kistl.App.Base
     using Kistl.API;
 
     /// <summary>
-    /// Base Metadefinition Object for Objectclasses, Interfaces, Structs and Enumerations.
+    /// Base Metadefinition Object for Objectclasses, Interfaces, CompoundObjects and Enumerations.
     /// </summary>
     public interface DataType : IDataObject, Kistl.App.Base.IChangedBy, Kistl.App.Base.IExportable 
     {

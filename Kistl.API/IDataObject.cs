@@ -257,10 +257,10 @@ namespace Kistl.API
     }
 
     /// <summary>
-    /// An IStruct is a simple bag of named values.
+    /// An ICompoundObject is a simple bag of named values.
     /// </summary>
-    /// Supports <see cref="ICloneable"/>, because structs don't have a independent identity and thus can be copied freely.
-    public interface IStruct : INotifyingObject, IStreamable, ICloneable
+    /// Supports <see cref="ICloneable"/>, because CompoundObject don't have a independent identity and thus can be copied freely.
+    public interface ICompoundObject : INotifyingObject, IStreamable, ICloneable
     {
         /// <summary>
         /// Gets a value indicating whether values of this object can be set. This mostly depends on the state of the containing object.
@@ -268,14 +268,14 @@ namespace Kistl.API
         bool IsReadonly { get; }
 
         /// <summary>
-        /// Attaches this struct to the specified object on the specified property.
+        /// Attaches this CompoundObject to the specified object on the specified property.
         /// </summary>
         /// <param name="obj">the object to attach to</param>
         /// <param name="property">the property to attach to</param>
         void AttachToObject(IPersistenceObject obj, string property);
 
         /// <summary>
-        /// Detaches this struct from the specified object on the specified property.
+        /// Detaches this CompoundObject from the specified object on the specified property.
         /// </summary>
         /// <param name="obj">the object to detach from</param>
         /// <param name="property">the property to detach from</param>
@@ -378,7 +378,7 @@ namespace Kistl.API
     /// <summary>
     /// 
     /// </summary>
-    /// <remarks>No Template restictions. Can be called on a Class or Struct</remarks>
+    /// <remarks>No Template restictions. Can be called on a Class or CompoundObject</remarks>
     /// <typeparam name="T"></typeparam>
     /// <typeparam name="V"></typeparam>
     /// <param name="obj"></param>
@@ -387,7 +387,7 @@ namespace Kistl.API
     /// <summary>
     /// 
     /// </summary>
-    /// <remarks>No Template restictions. Can be called on a Class or Struct</remarks>
+    /// <remarks>No Template restictions. Can be called on a Class or CompoundObject</remarks>
     /// <typeparam name="T"></typeparam>
     /// <typeparam name="V"></typeparam>
     /// <param name="obj"></param>
@@ -396,7 +396,7 @@ namespace Kistl.API
     /// <summary>
     /// 
     /// </summary>
-    /// <remarks>No Template restictions. Can be called on a Class or Struct</remarks>
+    /// <remarks>No Template restictions. Can be called on a Class or CompoundObject</remarks>
     /// <typeparam name="T"></typeparam>
     /// <typeparam name="V"></typeparam>
     /// <param name="obj"></param>

@@ -70,7 +70,7 @@ namespace Kistl.App.Projekte.Gui
             obj.ValueModelDescriptor = obj.Context.FindPersistenceObject<PresentableModelDescriptor>(PresentableModelDescriptor_ReferencePropertyModel_String);
         }
 
-        public static void OnNotifyCreated_StructProperty(Kistl.App.Base.StructProperty obj)
+        public static void OnNotifyCreated_CompoundObjectProperty(Kistl.App.Base.CompoundObjectProperty obj)
         {
             // TODO:
         }

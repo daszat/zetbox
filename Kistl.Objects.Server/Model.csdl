@@ -218,6 +218,10 @@
       <End Role="ClrObjectParameter" EntitySet="BaseParameter" />
       <End Role="Type" EntitySet="TypeRef" />
     </AssociationSet>
+    <AssociationSet Name="FK_CompoundObjectProperty_has_CompoundObjectDefinition" Association="Model.FK_CompoundObjectProperty_has_CompoundObjectDefinition" >
+      <End Role="CompoundObjectProperty" EntitySet="Property" />
+      <End Role="CompoundObjectDefinition" EntitySet="DataType" />
+    </AssociationSet>
     <AssociationSet Name="FK_ConstrainedProperty_has_Constraints" Association="Model.FK_ConstrainedProperty_has_Constraints" >
       <End Role="ConstrainedProperty" EntitySet="Property" />
       <End Role="Constraints" EntitySet="Constraint" />
@@ -489,10 +493,6 @@
     <AssociationSet Name="FK_RelationEnd_was_CreatedBy" Association="Model.FK_RelationEnd_was_CreatedBy" >
       <End Role="RelationEnd" EntitySet="RelationEnd" />
       <End Role="CreatedBy" EntitySet="Identity" />
-    </AssociationSet>
-    <AssociationSet Name="FK_StructProperty_has_StructDefinition" Association="Model.FK_StructProperty_has_StructDefinition" >
-      <End Role="StructProperty" EntitySet="Property" />
-      <End Role="StructDefinition" EntitySet="DataType" />
     </AssociationSet>
     <AssociationSet Name="FK_Task_was_ChangedBy" Association="Model.FK_Task_was_ChangedBy" >
       <End Role="Task" EntitySet="Task" />
@@ -1275,10 +1275,10 @@
                         ToRole="MuhBlah_One_Role" />
     <Property Name="PersonName" Type="String" Nullable="false" MaxLength="200" />
     <Property Name="PhoneNumberMobile__Implementation__"
-              Type="Model.TestPhoneStruct"
+              Type="Model.TestPhoneCompoundObject"
               Nullable="false" />
     <Property Name="PhoneNumberOffice__Implementation__"
-              Type="Model.TestPhoneStruct"
+              Type="Model.TestPhoneCompoundObject"
               Nullable="false" />
     <NavigationProperty Name="PhoneNumbersOther__Implementation__"
                         Relationship="Model.FK_TestCustomObject_value_PhoneNumbersOther"
@@ -1425,6 +1425,16 @@
                         FromRole="ClrObjectParameter"
                         ToRole="Type" />
   </EntityType>
+  <EntityType Name="CompoundObject" BaseType="Model.DataType" >
+  </EntityType>
+  <EntityType Name="CompoundObjectProperty" BaseType="Model.Property" >
+    <NavigationProperty Name="CompoundObjectDefinition__Implementation__"
+                        Relationship="Model.FK_CompoundObjectProperty_has_CompoundObjectDefinition"
+                        FromRole="CompoundObjectProperty"
+                        ToRole="CompoundObjectDefinition" />
+    <Property Name="HasPersistentOrder" Type="Boolean" Nullable="false" />
+    <Property Name="IsList" Type="Boolean" Nullable="false" />
+  </EntityType>
   <EntityType Name="ConsistentNavigatorConstraint" BaseType="Model.Constraint" >
   </EntityType>
   <EntityType Name="ControlKindClass" BaseType="Model.ObjectClass" >
@@ -1567,16 +1577,6 @@
     <Property Name="MinLength" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="StringSelectorKind" BaseType="Model.ControlKind" >
-  </EntityType>
-  <EntityType Name="Struct" BaseType="Model.DataType" >
-  </EntityType>
-  <EntityType Name="StructProperty" BaseType="Model.Property" >
-    <Property Name="HasPersistentOrder" Type="Boolean" Nullable="false" />
-    <Property Name="IsList" Type="Boolean" Nullable="false" />
-    <NavigationProperty Name="StructDefinition__Implementation__"
-                        Relationship="Model.FK_StructProperty_has_StructDefinition"
-                        FromRole="StructProperty"
-                        ToRole="StructDefinition" />
   </EntityType>
   <EntityType Name="TextboxKind" BaseType="Model.ControlKind" >
   </EntityType>
@@ -2111,7 +2111,7 @@
          Multiplicity="*" />
   </Association>
 
-<!-- EntityTypes and Associations for all object-struct CollectionEntrys -->
+<!-- EntityTypes and Associations for all object-CompoundObject CollectionEntrys -->
   <!-- TestCustomObject.PhoneNumbersOther -->
   <EntityType Name="TestCustomObject_PhoneNumbersOther_CollectionEntry" >
     <Key>
@@ -2126,7 +2126,7 @@
                         ToRole="TestCustomObject" />
     <!-- B -->
     <Property Name="B__Implementation__"
-              Type="Model.TestPhoneStruct"
+              Type="Model.TestPhoneCompoundObject"
               Nullable="false" />
   </EntityType>
   <Association Name="FK_TestCustomObject_value_PhoneNumbersOther" >
@@ -2241,6 +2241,14 @@
          Multiplicity="*" />
     <End Role="Type"
          Type="Model.TypeRef" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_CompoundObjectProperty_has_CompoundObjectDefinition" >
+    <End Role="CompoundObjectProperty"
+         Type="Model.CompoundObjectProperty" 
+         Multiplicity="*" />
+    <End Role="CompoundObjectDefinition"
+         Type="Model.CompoundObject" 
          Multiplicity="0..1" />
   </Association>
   <Association Name="FK_ConstrainedProperty_has_Constraints" >
@@ -2787,14 +2795,6 @@
          Type="Model.Identity" 
          Multiplicity="0..1" />
   </Association>
-  <Association Name="FK_StructProperty_has_StructDefinition" >
-    <End Role="StructProperty"
-         Type="Model.StructProperty" 
-         Multiplicity="*" />
-    <End Role="StructDefinition"
-         Type="Model.Struct" 
-         Multiplicity="0..1" />
-  </Association>
   <Association Name="FK_Task_was_ChangedBy" >
     <End Role="Task"
          Type="Model.Task" 
@@ -2901,8 +2901,8 @@
   </Association>
 
 
-  <!-- ComplexTypes for all structs -->
-  <ComplexType Name="TestPhoneStruct" >
+  <!-- ComplexTypes for all CompoundObjects -->
+  <ComplexType Name="TestPhoneCompoundObject" >
     <Property Name="AreaCode" Type="String" Nullable="true" MaxLength="50" />
     <Property Name="Number" Type="String" Nullable="true" MaxLength="50" />
   </ComplexType>

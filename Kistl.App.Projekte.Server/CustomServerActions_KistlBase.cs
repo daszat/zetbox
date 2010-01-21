@@ -123,9 +123,9 @@ namespace Kistl.App.Base
             e.Result = obj.ReferencedClass.Module.Namespace + "." + obj.ReferencedClass.ClassName;
         }
 
-        public static void OnGetPropertyTypeString_StructProperty(Kistl.App.Base.StructProperty obj, Kistl.API.MethodReturnEventArgs<string> e)
+        public static void OnGetPropertyTypeString_CompoundObjectProperty(Kistl.App.Base.CompoundObjectProperty obj, Kistl.API.MethodReturnEventArgs<string> e)
         {
-            DataType objClass = obj.StructDefinition;
+            DataType objClass = obj.CompoundObjectDefinition;
             e.Result = objClass.Module.Namespace + "." + objClass.ClassName;
         }
 

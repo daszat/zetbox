@@ -352,16 +352,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ObjectReferencePropertySerialization.cst</DependentUpon>
     </Compile>
-    <Compile Include="Generators\Templates\Implementation\ObjectClasses\StructSerialization.Designer.cs">
-      <DependentUpon>StructSerialization.cst</DependentUpon>
+    <Compile Include="Generators\Templates\Implementation\ObjectClasses\CompoundObjectSerialization.Designer.cs">
+      <DependentUpon>CompoundObjectSerialization.cst</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Generators\ClientObjects\Implementation\ObjectClasses\StructPropertyTemplate.cs">
-      <DependentUpon>StructPropertyTemplate.cst</DependentUpon>
+    <Compile Include="Generators\ClientObjects\Implementation\ObjectClasses\CompoundObjectPropertyTemplate.cs">
+      <DependentUpon>CompoundObjectPropertyTemplate.cst</DependentUpon>
     </Compile>
-    <Compile Include="Generators\ClientObjects\Implementation\ObjectClasses\StructPropertyTemplate.Designer.cs">
-      <DependentUpon>StructPropertyTemplate.cst</DependentUpon>
+    <Compile Include="Generators\ClientObjects\Implementation\ObjectClasses\CompoundObjectPropertyTemplate.Designer.cs">
+      <DependentUpon>CompoundObjectPropertyTemplate.cst</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
@@ -382,7 +382,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Generators\ClientObjects\Implementation\ProjectFile.cs" />
-    <Compile Include="Generators\ClientObjects\Implementation\Structs\Template.cs" />
+    <Compile Include="Generators\ClientObjects\Implementation\CompoundObjects\Template.cs" />
     <Compile Include="Generators\ClientObjects\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cs">
       <DependentUpon>ObjectReferencePropertyTemplate.cst</DependentUpon>
     </Compile>
@@ -464,7 +464,7 @@
     <Compile Include="Generators\Templates\Implementation\SerializerDirection.cs" />
     <Compile Include="Generators\Templates\Implementation\ObjectClasses\Template.cs" />
     <Compile Include="Generators\Templates\Implementation\SerializationMembersList.cs" />
-    <Compile Include="Generators\Templates\Implementation\Structs\Template.cs" />
+    <Compile Include="Generators\Templates\Implementation\CompoundObjects\Template.cs" />
     <Compile Include="Generators\Templates\Implementation\TypeBase.cs">
       <DependentUpon>TypeBase.cst</DependentUpon>
     </Compile>
@@ -563,13 +563,13 @@
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>PropertyInvocationsTemplate.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Generators\Templates\Implementation\ObjectClasses\StructSerialization.cst">
+    <None Include="Generators\Templates\Implementation\ObjectClasses\CompoundObjectSerialization.cst">
       <Generator>Arebis Template Processor</Generator>
-      <LastGenOutput>StructSerialization.Designer.cs</LastGenOutput>
+      <LastGenOutput>CompoundObjectSerialization.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Generators\ClientObjects\Implementation\ObjectClasses\StructPropertyTemplate.cst">
+    <None Include="Generators\ClientObjects\Implementation\ObjectClasses\CompoundObjectPropertyTemplate.cst">
       <Generator>Arebis Template Processor</Generator>
-      <LastGenOutput>StructPropertyTemplate.Designer.cs</LastGenOutput>
+      <LastGenOutput>CompoundObjectPropertyTemplate.Designer.cs</LastGenOutput>
     </None>
     <None Include="Generators\ClientObjects\Implementation\ObjectClasses\ValueCollectionProperty.cst">
       <Generator>Arebis Template Processor</Generator>

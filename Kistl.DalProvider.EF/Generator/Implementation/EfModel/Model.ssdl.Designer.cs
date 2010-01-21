@@ -150,7 +150,7 @@ this.WriteObjects("    \r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("    <!-- EntitySets and AssociationSet for all object-struct CollectionEntrys -->\r\n");
 #line 127 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.ssdl.cst"
-foreach(var prop in ctx.GetQuery<StructProperty>()
+foreach(var prop in ctx.GetQuery<CompoundObjectProperty>()
 		.Where(p => p.IsList)
 		.OrderBy(p => p.ObjectClass.ClassName)
 		.ThenBy(p => p.PropertyName))
@@ -442,7 +442,7 @@ this.WriteObjects("\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("    <!-- EntityTypes and Associations for all object-struct CollectionEntrys -->\r\n");
 #line 394 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.ssdl.cst"
-foreach(var prop in ctx.GetQuery<StructProperty>()
+foreach(var prop in ctx.GetQuery<CompoundObjectProperty>()
 		.Where(p => p.IsList)
 		.OrderBy(p => p.ObjectClass.ClassName)
 		.ThenBy(p => p.PropertyName))

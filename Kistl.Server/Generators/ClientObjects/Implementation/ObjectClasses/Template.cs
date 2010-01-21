@@ -56,10 +56,10 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
                 prop, true);
         }
 
-        protected override void ApplyStructPropertyTemplate(StructProperty prop)
+        protected override void ApplyCompoundObjectPropertyTemplate(CompoundObjectProperty prop)
         {
-            this.WriteLine("        // struct property");
-            Implementation.ObjectClasses.StructPropertyTemplate.Call(Host, ctx, MembersToSerialize, prop, prop.PropertyName);
+            this.WriteLine("        // CompoundObject property");
+            Implementation.ObjectClasses.CompoundObjectPropertyTemplate.Call(Host, ctx, MembersToSerialize, prop, prop.PropertyName);
         }
 
         protected override void ApplyObjectListPropertyTemplate(Relation rel, RelationEndRole endRole)
@@ -80,13 +80,13 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
             base.ApplyConstructorTemplate();
             this.WriteObjects("            {");
             this.WriteLine();
-            foreach (var prop in DataType.Properties.OfType<StructProperty>().Where(p => !p.IsList).OrderBy(p => p.PropertyName))
+            foreach (var prop in DataType.Properties.OfType<CompoundObjectProperty>().Where(p => !p.IsList).OrderBy(p => p.PropertyName))
             {
                 string name = prop.PropertyName;
                 string backingName = "_" + name;
-                string structType = prop.GetPropertyTypeString();
-                string structImplementationType = structType + Kistl.API.Helper.ImplementationSuffix;
-                this.WriteObjects("                ", backingName, " = new ", structImplementationType, "(this, \"", name, "\");");
+                string coType = prop.GetPropertyTypeString();
+                string coImplementationType = coType + Kistl.API.Helper.ImplementationSuffix;
+                this.WriteObjects("                ", backingName, " = new ", coImplementationType, "(this, \"", name, "\");");
                 this.WriteLine();
             }
             this.WriteObjects("            }");

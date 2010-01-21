@@ -112,7 +112,7 @@ this.WriteObjects("\r\n");
 #line 92 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\AssociationSetAttributes.cst"
 this.WriteObjects("\r\n");
 #line 94 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\AssociationSetAttributes.cst"
-foreach (var prop in ctx.GetQuery<StructProperty>()
+foreach (var prop in ctx.GetQuery<CompoundObjectProperty>()
 		.Where(p => p.IsList)
 		.OrderBy(p => p.ObjectClass.ClassName)
 		.ThenBy(p => p.PropertyName))

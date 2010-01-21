@@ -276,6 +276,11 @@
 <ScalarProperty Name="ShowNameInLists" ColumnName="ShowNameInLists" />
 	    </MappingFragment>
       </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.CompoundObject)">
+	    <MappingFragment StoreEntitySet="CompoundObject">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+	    </MappingFragment>
+      </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Model.Enumeration)">
 	    <MappingFragment StoreEntitySet="Enumeration">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
@@ -296,11 +301,6 @@
       </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Model.ControlKindClass)">
 	    <MappingFragment StoreEntitySet="ControlKindClass">
-	      <ScalarProperty Name="ID" ColumnName="ID" />
-	    </MappingFragment>
-      </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.Struct)">
-	    <MappingFragment StoreEntitySet="Struct">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 	    </MappingFragment>
       </EntityTypeMapping>
@@ -500,6 +500,13 @@
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 	    </MappingFragment>
       </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.CompoundObjectProperty)">
+	    <MappingFragment StoreEntitySet="CompoundObjectProperty">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="HasPersistentOrder" ColumnName="HasPersistentOrder" />
+<ScalarProperty Name="IsList" ColumnName="IsList" />
+	    </MappingFragment>
+      </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Model.ObjectReferencePlaceholderProperty)">
 	    <MappingFragment StoreEntitySet="ObjectReferencePlaceholderProperty">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
@@ -514,13 +521,6 @@
 	    <MappingFragment StoreEntitySet="ObjectReferenceProperty">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="EagerLoading" ColumnName="EagerLoading" />
-	    </MappingFragment>
-      </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.StructProperty)">
-	    <MappingFragment StoreEntitySet="StructProperty">
-	      <ScalarProperty Name="ID" ColumnName="ID" />
-<ScalarProperty Name="HasPersistentOrder" ColumnName="HasPersistentOrder" />
-<ScalarProperty Name="IsList" ColumnName="IsList" />
 	    </MappingFragment>
       </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Model.ValueTypeProperty)">
@@ -632,11 +632,11 @@
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="Birthday" ColumnName="Birthday" />
 <ScalarProperty Name="PersonName" ColumnName="PersonName" />
-<ComplexProperty Name="PhoneNumberMobile__Implementation__" TypeName="Model.TestPhoneStruct">
+<ComplexProperty Name="PhoneNumberMobile__Implementation__" TypeName="Model.TestPhoneCompoundObject">
 <ScalarProperty Name="AreaCode" ColumnName="PhoneNumberMobile_AreaCode" />
 <ScalarProperty Name="Number" ColumnName="PhoneNumberMobile_Number" />
 </ComplexProperty>
-<ComplexProperty Name="PhoneNumberOffice__Implementation__" TypeName="Model.TestPhoneStruct">
+<ComplexProperty Name="PhoneNumberOffice__Implementation__" TypeName="Model.TestPhoneCompoundObject">
 <ScalarProperty Name="AreaCode" ColumnName="PhoneNumberOffice_AreaCode" />
 <ScalarProperty Name="Number" ColumnName="PhoneNumberOffice_Number" />
 </ComplexProperty>
@@ -1356,6 +1356,23 @@
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="fk_Type" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_CompoundObjectProperty_has_CompoundObjectDefinition
+    A: ZeroOrMore CompoundObjectProperty as CompoundObjectProperty
+    B: ZeroOrOne CompoundObject as CompoundObjectDefinition
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_CompoundObjectProperty_has_CompoundObjectDefinition"
+                           TypeName="Model.FK_CompoundObjectProperty_has_CompoundObjectDefinition"
+                           StoreEntitySet="CompoundObjectProperty" >
+      <EndProperty Name="CompoundObjectDefinition">
+        <ScalarProperty Name="ID" ColumnName="fk_CompoundObjectDefinition"/>
+      </EndProperty>
+      <EndProperty Name="CompoundObjectProperty">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_CompoundObjectDefinition" IsNull="false"/>
     </AssociationSetMapping>
     <!--
     Relation: FK_ConstrainedProperty_has_Constraints
@@ -2514,23 +2531,6 @@
       <Condition ColumnName="fk_CreatedBy" IsNull="false"/>
     </AssociationSetMapping>
     <!--
-    Relation: FK_StructProperty_has_StructDefinition
-    A: ZeroOrMore StructProperty as StructProperty
-    B: ZeroOrOne Struct as StructDefinition
-    Preferred Storage: MergeIntoA
-    -->
-    <AssociationSetMapping Name="FK_StructProperty_has_StructDefinition"
-                           TypeName="Model.FK_StructProperty_has_StructDefinition"
-                           StoreEntitySet="StructProperty" >
-      <EndProperty Name="StructDefinition">
-        <ScalarProperty Name="ID" ColumnName="fk_StructDefinition"/>
-      </EndProperty>
-      <EndProperty Name="StructProperty">
-        <ScalarProperty Name="ID" ColumnName="ID"/>
-      </EndProperty>
-      <Condition ColumnName="fk_StructDefinition" IsNull="false"/>
-    </AssociationSetMapping>
-    <!--
     Relation: FK_Task_was_ChangedBy
     A: ZeroOrMore Task as Task
     B: ZeroOrOne Identity as ChangedBy
@@ -2797,7 +2797,7 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.TestCustomObject_PhoneNumbersOther_CollectionEntry)">
         <MappingFragment StoreEntitySet="TestCustomObject_PhoneNumbersOther_CollectionEntry">
           <ScalarProperty Name="ID" ColumnName="ID" />
-          <ComplexProperty Name="B__Implementation__" TypeName="Model.TestPhoneStruct">
+          <ComplexProperty Name="B__Implementation__" TypeName="Model.TestPhoneCompoundObject">
 <ScalarProperty Name="AreaCode" ColumnName="PhoneNumbersOther_AreaCode" />
 <ScalarProperty Name="Number" ColumnName="PhoneNumbersOther_Number" />
 </ComplexProperty>

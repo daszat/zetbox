@@ -43,12 +43,12 @@ namespace Kistl.API.Tests
 
         // public Type BasePersistenceObjectType { get; protected set; }
         // public Type BaseDataObjectType { get; protected set; }
-        // public Type BaseStructObjectType { get; protected set; }
+        // public Type BaseCompoundObjectType { get; protected set; }
         // public Type BaseCollectionEntryType { get; protected set; }
 
         internal void SetBpoType(Type t) { this.BasePersistenceObjectType = t; }
         internal void SetBdoType(Type t) { this.BaseDataObjectType = t; }
-        internal void SetBsoType(Type t) { this.BaseStructObjectType = t; }
+        internal void SetBsoType(Type t) { this.BaseCompoundObjectType = t; }
         internal void SetBceType(Type t) { this.BaseCollectionEntryType = t; }
 
         public override void LoadFrozenActions(IReadOnlyKistlContext ctx)
@@ -85,7 +85,7 @@ namespace Kistl.API.Tests
             Assert.AreEqual(typeof(char), testCtx.BaseCollectionEntryType);
             Assert.AreEqual(typeof(double), testCtx.BaseDataObjectType);
             Assert.AreEqual(typeof(Predicate<int>), testCtx.BasePersistenceObjectType);
-            Assert.AreEqual(typeof(string), testCtx.BaseStructObjectType);
+            Assert.AreEqual(typeof(string), testCtx.BaseCompoundObjectType);
         }
     }
 }

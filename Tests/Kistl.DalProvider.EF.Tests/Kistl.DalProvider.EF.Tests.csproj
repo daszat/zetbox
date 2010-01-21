@@ -86,7 +86,7 @@
     <Compile Include="Tests\BaseServerDataObjects\navigator_context_checks.cs" />
     <Compile Include="Tests\BaseServerDataObjects\when_changed.cs" />
     <Compile Include="Tests\BaseServerDataObjects\when_loaded.cs" />
-    <Compile Include="Tests\BinarySerializers\should_work_with_IStructs.cs" />
+    <Compile Include="Tests\BinarySerializers\should_work_with_ICompoundObjects.cs" />
     <Compile Include="Tests\Linq.cs" />
     <Compile Include="Tests\ListPropertiesTests.cs" />
     <Compile Include="Tests\N_to_M_relations\should_synchronize.cs" />
@@ -95,10 +95,10 @@
     <Compile Include="Tests\QueryTranslatorTests.cs" />
     <Compile Include="Tests\ServerCollectionEntry_EF.cs" />
     <Compile Include="Tests\BaseServerDataObjectTests.cs" />
-    <Compile Include="Tests\BaseServerStructObjectTests.cs" />
+    <Compile Include="Tests\BaseServerCompoundObjectTests.cs" />
     <Compile Include="Tests\ContextTests.cs" />
-    <Compile Include="Tests\Structs\when_changing_a_struct_member.cs" />
-    <Compile Include="Tests\Structs\when_initialized.cs" />
+    <Compile Include="Tests\CompoundObject\when_changing_a_CompoundObject_member.cs" />
+    <Compile Include="Tests\CompoundObject\when_initialized.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Kistl.DalProvider.EF.Tests.Config.xml">

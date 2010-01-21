@@ -173,6 +173,6 @@ namespace Kistl.API.Client
     /// <summary>
     /// local proxy
     /// </summary>
-    public abstract class BaseClientStructObject : BaseStructObject { }
+    public abstract class BaseClientCompoundObject : BaseCompoundObject { }
 
 }

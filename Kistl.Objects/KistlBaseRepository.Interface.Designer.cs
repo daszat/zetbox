@@ -36,26 +36,6 @@ namespace Kistl.App.Base
 			}
 		}
 		
-		/// <summary>List of all StructProperty</summary>
-		/// Metadefinition Object for Struct Properties.
-		public IQueryable<StructProperty> StructProperties
-		{ 
-			get
-			{
-				return Context.GetQuery<StructProperty>();
-			}
-		}
-		
-		/// <summary>List of all Struct</summary>
-		/// Metadefinition Object for Structs.
-		public IQueryable<Struct> Structs
-		{ 
-			get
-			{
-				return Context.GetQuery<Struct>();
-			}
-		}
-		
 		/// <summary>List of all StringRangeConstraint</summary>
 		/// 
 		public IQueryable<StringRangeConstraint> StringRangeConstraints
@@ -397,7 +377,7 @@ namespace Kistl.App.Base
 		}
 		
 		/// <summary>List of all DataType</summary>
-		/// Base Metadefinition Object for Objectclasses, Interfaces, Structs and Enumerations.
+		/// Base Metadefinition Object for Objectclasses, Interfaces, CompoundObjects and Enumerations.
 		public IQueryable<DataType> DataTypes
 		{ 
 			get
@@ -433,6 +413,26 @@ namespace Kistl.App.Base
 			get
 			{
 				return Context.GetQuery<ConsistentNavigatorConstraint>();
+			}
+		}
+		
+		/// <summary>List of all CompoundObjectProperty</summary>
+		/// Metadefinition Object for Compound Object Properties.
+		public IQueryable<CompoundObjectProperty> CompoundObjectProperties
+		{ 
+			get
+			{
+				return Context.GetQuery<CompoundObjectProperty>();
+			}
+		}
+		
+		/// <summary>List of all CompoundObject</summary>
+		/// Metadefinition Object for Compound Objects.
+		public IQueryable<CompoundObject> CompoundObjects
+		{ 
+			get
+			{
+				return Context.GetQuery<CompoundObject>();
 			}
 		}
 		

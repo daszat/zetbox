@@ -218,11 +218,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SecurityRulesProperties.cst</DependentUpon>
     </Compile>
-    <Compile Include="Generator\Implementation\ObjectClasses\StructPropertyTemplate.cs">
-      <DependentUpon>StructPropertyTemplate.cst</DependentUpon>
+    <Compile Include="Generator\Implementation\ObjectClasses\CompoundObjectPropertyTemplate.cs">
+      <DependentUpon>CompoundObjectPropertyTemplate.cst</DependentUpon>
     </Compile>
-    <Compile Include="Generator\Implementation\ObjectClasses\StructPropertyTemplate.Designer.cs">
-      <DependentUpon>StructPropertyTemplate.cst</DependentUpon>
+    <Compile Include="Generator\Implementation\ObjectClasses\CompoundObjectPropertyTemplate.Designer.cs">
+      <DependentUpon>CompoundObjectPropertyTemplate.cst</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
@@ -245,7 +245,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Generator\Implementation\RelationExtensions.cs" />
-    <Compile Include="Generator\Implementation\Structs\Template.cs" />
+    <Compile Include="Generator\Implementation\CompoundObject\Template.cs" />
     <Compile Include="KistlDataContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SchemaProvider.cs" />
@@ -345,9 +345,9 @@
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>SecurityRulesProperties.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Generator\Implementation\ObjectClasses\StructPropertyTemplate.cst">
+    <None Include="Generator\Implementation\ObjectClasses\CompoundObjectPropertyTemplate.cst">
       <Generator>Arebis Template Processor</Generator>
-      <LastGenOutput>StructPropertyTemplate.Designer.cs</LastGenOutput>
+      <LastGenOutput>CompoundObjectPropertyTemplate.Designer.cs</LastGenOutput>
     </None>
     <None Include="Generator\Implementation\ObjectClasses\ValueCollectionProperty.cst">
       <Generator>Arebis Template Processor</Generator>

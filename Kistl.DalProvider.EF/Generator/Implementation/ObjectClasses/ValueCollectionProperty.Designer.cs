@@ -31,8 +31,8 @@ namespace Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses
         public override void Generate()
         {
 #line 19 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\ValueCollectionProperty.cst"
-Debug.Assert(prop is ValueTypeProperty ? ((ValueTypeProperty)prop).IsList : ((StructProperty)prop).IsList);
-	bool hasPersistentOrder = prop is ValueTypeProperty ? ((ValueTypeProperty)prop).HasPersistentOrder : ((StructProperty)prop).HasPersistentOrder;
+Debug.Assert(prop is ValueTypeProperty ? ((ValueTypeProperty)prop).IsList : ((CompoundObjectProperty)prop).IsList);
+	bool hasPersistentOrder = prop is ValueTypeProperty ? ((ValueTypeProperty)prop).HasPersistentOrder : ((CompoundObjectProperty)prop).HasPersistentOrder;
 
 	// the name of the property to create
 	string name = prop.PropertyName;

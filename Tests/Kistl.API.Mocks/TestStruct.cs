@@ -6,12 +6,12 @@ using System.Text;
 
 namespace Kistl.API.Mocks
 {
-    public interface TestStruct : IStruct
+    public interface TestCompoundObject : ICompoundObject
     {
         string TestProperty { get; set; }
     }
 
-    public class TestStruct__Implementation__ : BaseStructObject, TestStruct
+    public class TestCompoundObject__Implementation__ : BaseCompoundObject, TestCompoundObject
     {
 
         public override void ToStream(BinaryWriter sw)
@@ -28,7 +28,7 @@ namespace Kistl.API.Mocks
             TestProperty = _tmp;
         }
 
-        #region TestStruct Members
+        #region TestCompoundObject Members
 
         public string TestProperty { get; set; }
 
@@ -36,7 +36,7 @@ namespace Kistl.API.Mocks
 
         public override InterfaceType GetInterfaceType()
         {
-            return new InterfaceType(typeof(TestStruct));
+            return new InterfaceType(typeof(TestCompoundObject));
         }
     }
 }

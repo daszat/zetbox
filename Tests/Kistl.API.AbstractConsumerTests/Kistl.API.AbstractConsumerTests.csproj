@@ -54,7 +54,7 @@
   <ItemGroup>
     <Compile Include="AbstractContextTests.cs" />
     <Compile Include="AbstractListPropertiesTests.cs" />
-    <Compile Include="BinarySerializers\should_work_with_IStructs.cs" />
+    <Compile Include="BinarySerializers\should_work_with_ICompoundObjects.cs" />
     <Compile Include="DatabaseResetup.cs" />
     <Compile Include="N_to_M_relations\should_synchronize.cs" />
     <Compile Include="one_to_N_relations\should_obey_order.cs" />
@@ -65,9 +65,9 @@
     <Compile Include="PersistenceObjects\when_loaded.cs" />
     <Compile Include="ProjectDataFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Structs\StructFixture.cs" />
-    <Compile Include="Structs\when_changing_a_struct_member.cs" />
-    <Compile Include="Structs\when_initialized.cs" />
+    <Compile Include="CompoundObjects\CompoundObjectFixture.cs" />
+    <Compile Include="CompoundObjects\when_changing_a_CompoundObject_member.cs" />
+    <Compile Include="CompoundObjects\when_initialized.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Kistl.API\Kistl.API.csproj">

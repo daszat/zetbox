@@ -94,9 +94,9 @@ this.WriteObjects("    ",  ModelCsdl.PlainPropertyDefinitionFromValueType((Value
 #line 78 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.csdl.EntityTypeFields.cst"
 }
 		}
-		else if (p is StructProperty)
+		else if (p is CompoundObjectProperty)
 		{
-			var prop = (StructProperty)p;
+			var prop = (CompoundObjectProperty)p;
 			if (prop.IsList)
 			{
 
@@ -113,7 +113,7 @@ this.WriteObjects("                        ToRole=\"CollectionEntry\" />\r\n");
 
 #line 96 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.csdl.EntityTypeFields.cst"
 this.WriteObjects("    <Property Name=\"",  p.PropertyName + Kistl.API.Helper.ImplementationSuffix , "\"\r\n");
-this.WriteObjects("              Type=\"Model.",  prop.StructDefinition.ClassName , "\"\r\n");
+this.WriteObjects("              Type=\"Model.",  prop.CompoundObjectDefinition.ClassName , "\"\r\n");
 this.WriteObjects("              Nullable=\"false\" />\r\n");
 #line 100 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.csdl.EntityTypeFields.cst"
 }

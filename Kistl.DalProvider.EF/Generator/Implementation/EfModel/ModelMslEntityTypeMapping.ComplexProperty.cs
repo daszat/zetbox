@@ -12,7 +12,7 @@ namespace Kistl.DalProvider.EF.Generator.Implementation.EfModel
     public class ModelMslEntityTypeMappingComplexProperty : Kistl.Server.Generators.KistlCodeTemplate
     {
         protected IKistlContext ctx;
-        protected StructProperty prop;
+        protected CompoundObjectProperty prop;
         protected string propertyName;
         protected string parentName;
 
@@ -23,7 +23,7 @@ namespace Kistl.DalProvider.EF.Generator.Implementation.EfModel
             host.CallTemplate("Implementation.EfModel.ModelMslEntityTypeMappingComplexProperty", ctx, prop, propertyName, parentName);
         }
 
-        public ModelMslEntityTypeMappingComplexProperty(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, StructProperty prop, string propertyName, string parentName)
+        public ModelMslEntityTypeMappingComplexProperty(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, CompoundObjectProperty prop, string propertyName, string parentName)
             : base(_host)
         {
             this.ctx = ctx;
@@ -37,16 +37,16 @@ namespace Kistl.DalProvider.EF.Generator.Implementation.EfModel
             this.WriteLine("<ComplexProperty Name=\"{0}{1}\" TypeName=\"Model.{2}\">",
                 propertyName,
                 Kistl.API.Helper.ImplementationSuffix,
-                prop.StructDefinition.ClassName
+                prop.CompoundObjectDefinition.ClassName
                 );
 
             string newParent = Construct.NestedColumnName(prop, parentName);
-            foreach (var subProp in prop.StructDefinition.Properties.OfType<ValueTypeProperty>().Where(p => !p.IsList).OrderBy(p => p.PropertyName))
+            foreach (var subProp in prop.CompoundObjectDefinition.Properties.OfType<ValueTypeProperty>().Where(p => !p.IsList).OrderBy(p => p.PropertyName))
             {
                 ModelMslEntityTypeMappingScalarProperty.Call(Host, ctx, subProp, subProp.PropertyName, newParent);
             }
 
-            foreach (var subProp in prop.StructDefinition.Properties.OfType<StructProperty>().Where(p => !p.IsList).OrderBy(p => p.PropertyName))
+            foreach (var subProp in prop.CompoundObjectDefinition.Properties.OfType<CompoundObjectProperty>().Where(p => !p.IsList).OrderBy(p => p.PropertyName))
             {
                 ModelMslEntityTypeMappingComplexProperty.Call(Host, ctx, subProp, subProp.PropertyName, newParent);
             }

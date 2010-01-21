@@ -13,7 +13,7 @@ namespace Kistl.IntegrationTests.TypeRefs
     public class should_convert_types_correctly
     {
         // These are important TypeRefs for the GUI which must exist
-        // using int for "struct" types, string for "class" types
+        // using int for "CompoundObject" types, string for "class" types
         [Datapoints]
         public static Type[] TestTypes = new[] { typeof(int), typeof(int?), typeof(string), typeof(ICollection<int>), typeof(ICollection<int?>), typeof(ICollection<string>) };
 

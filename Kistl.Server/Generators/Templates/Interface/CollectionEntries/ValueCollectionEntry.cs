@@ -49,7 +49,7 @@ namespace Kistl.Server.Generators.Templates.Interface.CollectionEntries
 
         protected override bool IsOrdered()
         {
-            return prop is ValueTypeProperty ? ((ValueTypeProperty)prop).HasPersistentOrder : ((StructProperty)prop).HasPersistentOrder;
+            return prop is ValueTypeProperty ? ((ValueTypeProperty)prop).HasPersistentOrder : ((CompoundObjectProperty)prop).HasPersistentOrder;
         }
 
         protected override string GetDescription()

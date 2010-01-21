@@ -107,9 +107,9 @@ namespace Kistl.API
         {
             return typeof(IPersistenceObject).IsAssignableFrom(type);
         }
-        public static bool IsIStruct(this Type type)
+        public static bool IsICompoundObject(this Type type)
         {
-            return typeof(IStruct).IsAssignableFrom(type);
+            return typeof(ICompoundObject).IsAssignableFrom(type);
         }
         public static bool IsIExportableInternal(this Type type)
         {

@@ -29,11 +29,11 @@ namespace Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses
         protected override void ApplyConstructorTemplate()
         {
             base.ApplyConstructorTemplate();
-            if (DataType.Properties.OfType<StructProperty>().Count() > 0)
+            if (DataType.Properties.OfType<CompoundObjectProperty>().Count() > 0)
             {
                 this.WriteObjects("\t\t\t{");
                 this.WriteLine();
-                foreach (var prop in DataType.Properties.OfType<StructProperty>().Where(p => !p.IsList).OrderBy(p => p.PropertyName))
+                foreach (var prop in DataType.Properties.OfType<CompoundObjectProperty>().Where(p => !p.IsList).OrderBy(p => p.PropertyName))
                 {
                     string name = prop.PropertyName;
                     string backingName = "_" + name;
@@ -102,18 +102,18 @@ namespace Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses
                 prop, true);
         }
 
-        protected override void ApplyStructPropertyTemplate(StructProperty prop)
+        protected override void ApplyCompoundObjectPropertyTemplate(CompoundObjectProperty prop)
         {
-            this.WriteLine("        // struct property");
-            Implementation.ObjectClasses.StructPropertyTemplate.Call(Host, ctx,
+            this.WriteLine("        // CompoundObject property");
+            Implementation.ObjectClasses.CompoundObjectPropertyTemplate.Call(Host, ctx,
                 this.MembersToSerialize,
                 prop, 
                 prop.PropertyName);
         }
 
-        protected override void ApplyStructListTemplate(StructProperty prop)
+        protected override void ApplyCompoundObjectListTemplate(CompoundObjectProperty prop)
         {
-            this.WriteLine("        // struct list property");
+            this.WriteLine("        // CompoundObject list property");
             Implementation.ObjectClasses.ValueCollectionProperty.Call(Host, ctx,
                 this.MembersToSerialize,
                 prop);            

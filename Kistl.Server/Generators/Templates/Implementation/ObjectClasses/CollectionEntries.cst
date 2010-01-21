@@ -73,7 +73,7 @@ namespace <%= prop.ObjectClass.Module.Namespace %>
 	}
 %>
 <%
-	foreach (var prop in ctx.GetQuery<StructProperty>()
+	foreach (var prop in ctx.GetQuery<CompoundObjectProperty>()
         .Where(p => p.IsList)
         .OrderBy(p => p.ObjectClass.ClassName)
         .ThenBy(p => p.PropertyName))

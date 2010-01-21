@@ -221,6 +221,21 @@ using Kistl.DalProvider.EF;
 
 
 	/*
+    Relation: FK_CompoundObjectProperty_has_CompoundObjectDefinition
+    A: ZeroOrMore CompoundObjectProperty as CompoundObjectProperty
+    B: ZeroOrOne CompoundObject as CompoundObjectDefinition
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_CompoundObjectProperty_has_CompoundObjectDefinition",
+    "CompoundObjectProperty", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.CompoundObjectProperty__Implementation__),
+    "CompoundObjectDefinition", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.CompoundObject__Implementation__)
+    )]
+
+
+	/*
     Relation: FK_ConstrainedProperty_has_Constraints
     A: One Property as ConstrainedProperty
     B: ZeroOrMore Constraint as Constraints
@@ -1327,21 +1342,6 @@ using Kistl.DalProvider.EF;
     "Model", "FK_RelationEnd_was_CreatedBy",
     "RelationEnd", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.RelationEnd__Implementation__),
     "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Identity__Implementation__)
-    )]
-
-
-	/*
-    Relation: FK_StructProperty_has_StructDefinition
-    A: ZeroOrMore StructProperty as StructProperty
-    B: ZeroOrOne Struct as StructDefinition
-    Preferred Storage: MergeIntoA
-	*/
-
-// basic association
-[assembly: EdmRelationship(
-    "Model", "FK_StructProperty_has_StructDefinition",
-    "StructProperty", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.StructProperty__Implementation__),
-    "StructDefinition", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Struct__Implementation__)
     )]
 
 

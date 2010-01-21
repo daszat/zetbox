@@ -78,8 +78,8 @@ namespace Kistl.Server.SchemaManagement
             tableNames.AddRange(schema.GetQuery<ValueTypeProperty>().Where(p => p.IsList).ToList()
                 .Select(p => p.GetCollectionEntryTable()));
 
-            // Add StructListProperties
-            tableNames.AddRange(schema.GetQuery<StructProperty>().Where(p => p.IsList).ToList()
+            // Add CompoundObjectListProperties
+            tableNames.AddRange(schema.GetQuery<CompoundObjectProperty>().Where(p => p.IsList).ToList()
                 .Select(p => p.GetCollectionEntryTable()));
 
             // Add Relations with sep. Storage
@@ -106,9 +106,9 @@ namespace Kistl.Server.SchemaManagement
         {
             columns.AddRange(properties.OfType<ValueTypeProperty>().Where(p => !p.IsList).Select(p => Construct.NestedColumnName(p, prefix)).ToArray());
 
-            foreach (StructProperty sprop in properties.OfType<StructProperty>().Where(p => !p.IsList))
+            foreach (CompoundObjectProperty sprop in properties.OfType<CompoundObjectProperty>().Where(p => !p.IsList))
             {
-                GetExistingColumnNames(objClass, sprop.StructDefinition.Properties, Construct.NestedColumnName(sprop, prefix), columns);
+                GetExistingColumnNames(objClass, sprop.CompoundObjectDefinition.Properties, Construct.NestedColumnName(sprop, prefix), columns);
             }
         }
 
@@ -162,7 +162,7 @@ namespace Kistl.Server.SchemaManagement
                 relationNames.Add(prop.GetAssociationName());
             }
 
-            foreach (StructProperty prop in schema.GetQuery<StructProperty>().Where(p => p.IsList))
+            foreach (CompoundObjectProperty prop in schema.GetQuery<CompoundObjectProperty>().Where(p => p.IsList))
             {
                 relationNames.Add(prop.GetAssociationName());
             }
@@ -377,7 +377,7 @@ namespace Kistl.Server.SchemaManagement
                     Log.DebugFormat("  Table: {0}", objClass.TableName);
                     CheckColumns(objClass, objClass.Properties, String.Empty);
                     CheckValueTypeCollections(objClass);
-                    CheckStructCollections(objClass);
+                    CheckCompoundObjectCollections(objClass);
                     CheckExtraColumns(objClass);
                     CheckTableSecurityRules(objClass);
                 }
@@ -485,11 +485,11 @@ namespace Kistl.Server.SchemaManagement
             }
         }
 
-        private void CheckStructCollections(ObjectClass objClass)
+        private void CheckCompoundObjectCollections(ObjectClass objClass)
         {
-            Log.Debug("Struct Collections: ");
+            Log.Debug("CompoundObject Collections: ");
 
-            foreach (StructProperty prop in objClass.Properties.OfType<StructProperty>()
+            foreach (CompoundObjectProperty prop in objClass.Properties.OfType<CompoundObjectProperty>()
             .Where(p => p.IsList)
             .OrderBy(p => p.Module.Namespace).ThenBy(p => p.PropertyName))
             {
@@ -504,8 +504,8 @@ namespace Kistl.Server.SchemaManagement
                 {
                     Log.DebugFormat("{0}", prop.PropertyName);
                     CheckColumn(tblName, fkName, System.Data.DbType.Int32, 0, false);
-                    // TODO: Support neested structs
-                    foreach (ValueTypeProperty p in prop.StructDefinition.Properties)
+                    // TODO: Support neested CompoundObject
+                    foreach (ValueTypeProperty p in prop.CompoundObjectDefinition.Properties)
                     {
                         CheckColumn(tblName, valPropName + "_" + p.PropertyName, SchemaManager.GetDbType(p), p is StringProperty ? ((StringProperty)p).GetMaxLength() : 0, true);
                     }
@@ -531,7 +531,7 @@ namespace Kistl.Server.SchemaManagement
                     Log.WarnFormat("Table '{0}' for Property '{1}' is missing", tblName, prop.PropertyName);
                     if (repair)
                     {
-                        Case.DoNewStructPropertyList(objClass, prop);
+                        Case.DoNewCompoundObjectPropertyList(objClass, prop);
                     }
                 }
             }
@@ -608,9 +608,9 @@ namespace Kistl.Server.SchemaManagement
                 CheckColumn(tblName, colName, GetDbType(prop), prop is StringProperty ? ((StringProperty)prop).GetMaxLength() : 0, prop.IsNullable());
             }
 
-            foreach (StructProperty sprop in properties.OfType<StructProperty>().Where(p => !p.IsList))
+            foreach (CompoundObjectProperty sprop in properties.OfType<CompoundObjectProperty>().Where(p => !p.IsList))
             {
-                CheckColumns(objClass, sprop.StructDefinition.Properties, Construct.NestedColumnName(sprop, prefix));
+                CheckColumns(objClass, sprop.CompoundObjectDefinition.Properties, Construct.NestedColumnName(sprop, prefix));
             }
         }
     }

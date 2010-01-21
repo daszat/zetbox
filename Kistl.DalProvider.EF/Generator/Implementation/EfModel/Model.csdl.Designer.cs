@@ -99,7 +99,7 @@ this.WriteObjects("    </AssociationSet>\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("    <!-- EntitySets and AssociationSets for all object-struct CollectionEntrys -->\r\n");
 #line 81 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.csdl.cst"
-foreach(var prop in ctx.GetQuery<StructProperty>()
+foreach(var prop in ctx.GetQuery<CompoundObjectProperty>()
         .Where(p => p.IsList)
         .OrderBy(p => p.ObjectClass.ClassName)
         .ThenBy(p => p.PropertyName))
@@ -340,9 +340,9 @@ this.WriteObjects("  </Association>\r\n");
 
 #line 294 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.csdl.cst"
 this.WriteObjects("\r\n");
-this.WriteObjects("<!-- EntityTypes and Associations for all object-struct CollectionEntrys -->\r\n");
+this.WriteObjects("<!-- EntityTypes and Associations for all object-CompoundObject CollectionEntrys -->\r\n");
 #line 297 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.csdl.cst"
-foreach(var prop in ctx.GetQuery<StructProperty>()
+foreach(var prop in ctx.GetQuery<CompoundObjectProperty>()
         .Where(p => p.IsList)
         .OrderBy(p => p.ObjectClass.ClassName)
         .ThenBy(p => p.PropertyName))
@@ -364,7 +364,7 @@ this.WriteObjects("                        FromRole=\"CollectionEntry\"\r\n");
 this.WriteObjects("                        ToRole=\"",  prop.ObjectClass.ClassName , "\" />\r\n");
 this.WriteObjects("    <!-- B -->\r\n");
 this.WriteObjects("    <Property Name=\"B",  Kistl.API.Helper.ImplementationSuffix , "\"\r\n");
-this.WriteObjects("              Type=\"Model.",  prop.StructDefinition.ClassName , "\"\r\n");
+this.WriteObjects("              Type=\"Model.",  prop.CompoundObjectDefinition.ClassName , "\"\r\n");
 this.WriteObjects("              Nullable=\"false\" />\r\n");
 #line 321 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.csdl.cst"
 if (prop.HasPersistentOrder)
@@ -410,9 +410,9 @@ this.WriteObjects("  </Association>\r\n");
 #line 357 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.csdl.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("\r\n");
-this.WriteObjects("  <!-- ComplexTypes for all structs -->\r\n");
+this.WriteObjects("  <!-- ComplexTypes for all CompoundObjects -->\r\n");
 #line 361 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.csdl.cst"
-foreach(var cls in ctx.GetQuery<Struct>().OrderBy(s => s.ClassName))
+foreach(var cls in ctx.GetQuery<CompoundObject>().OrderBy(s => s.ClassName))
     {
 
 #line 364 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.csdl.cst"

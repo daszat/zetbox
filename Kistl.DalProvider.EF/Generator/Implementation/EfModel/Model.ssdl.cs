@@ -51,11 +51,11 @@ namespace Kistl.DalProvider.EF.Generator.Implementation.EfModel
             Implementation.EfModel.ModelSsdlEntityTypeColumns.Call(
                 Host,
                 ctx,
-                ModelSsdlHelper.RetrieveAndSortPropertiesOfType<StructProperty>(cls.Properties, p => !p.IsList).Cast<Property>(),
+                ModelSsdlHelper.RetrieveAndSortPropertiesOfType<CompoundObjectProperty>(cls.Properties, p => !p.IsList).Cast<Property>(),
                 String.Empty);
         }
 
-        protected virtual void ApplyEntityTypeColumnDefs(StructProperty prop)
+        protected virtual void ApplyEntityTypeColumnDefs(CompoundObjectProperty prop)
         {
             Implementation.EfModel.ModelSsdlEntityTypeColumns.Call(
                 Host,

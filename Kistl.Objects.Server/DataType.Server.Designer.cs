@@ -20,7 +20,7 @@ namespace Kistl.App.Base
     using System.Data.Objects.DataClasses;
 
     /// <summary>
-    /// Base Metadefinition Object for Objectclasses, Interfaces, Structs and Enumerations.
+    /// Base Metadefinition Object for Objectclasses, Interfaces, CompoundObjects and Enumerations.
     /// </summary>
     [EdmEntityType(NamespaceName="Model", Name="DataType")]
     [System.Diagnostics.DebuggerDisplay("DataType")]

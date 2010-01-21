@@ -74,11 +74,11 @@
     <Compile Include="SetUp.cs" />
     <Compile Include="Mocks\TestObjClass_TestNameCollectionEntry.cs" />
     <Compile Include="Mocks\TestObjClassImpl.cs" />
-    <Compile Include="Mocks\TestStruct.cs" />
+    <Compile Include="Mocks\TestCompoundObject.cs" />
     <Compile Include="Tests\BaseServerCollectionEntryTests.cs" />
     <Compile Include="Tests\BaseServerDataObjectTests.cs" />
-    <Compile Include="Tests\BaseServerStructObjectTests.cs" />
-    <Compile Include="Tests\BinarySerializers\should_work_with_IStructs.cs" />
+    <Compile Include="Tests\BaseServerCompoundObjectTests.cs" />
+    <Compile Include="Tests\BinarySerializers\should_work_with_ICompoundObjects.cs" />
     <Compile Include="Tests\QueryTranslatorTests.cs" />
   </ItemGroup>
   <ItemGroup>

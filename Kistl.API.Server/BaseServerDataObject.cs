@@ -119,5 +119,5 @@ namespace Kistl.API.Server
     /// <summary>
     /// local proxy
     /// </summary>
-    public abstract class BaseServerStructObject : BaseStructObject { }
+    public abstract class BaseServerCompoundObject : BaseCompoundObject { }
 }

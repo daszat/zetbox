@@ -87,6 +87,18 @@
       <End Role="A_BaseParameter" EntitySet="BaseParameter" />
       <End Role="B_CLRObjectParameter" EntitySet="CLRObjectParameter" />
     </AssociationSet>
+    <EntitySet Name="CompoundObject" EntityType="Model.Store.CompoundObject" Table="CompoundObjects"/>
+    <!-- inherits from DataType -->
+    <AssociationSet Name="FK_CompoundObject_DataType_ID" Association="Model.Store.FK_CompoundObject_DataType_ID" >
+      <End Role="A_DataType" EntitySet="DataType" />
+      <End Role="B_CompoundObject" EntitySet="CompoundObject" />
+    </AssociationSet>
+    <EntitySet Name="CompoundObjectProperty" EntityType="Model.Store.CompoundObjectProperty" Table="CompoundObjectProperties"/>
+    <!-- inherits from Property -->
+    <AssociationSet Name="FK_CompoundObjectProperty_Property_ID" Association="Model.Store.FK_CompoundObjectProperty_Property_ID" >
+      <End Role="A_Property" EntitySet="Property" />
+      <End Role="B_CompoundObjectProperty" EntitySet="CompoundObjectProperty" />
+    </AssociationSet>
     <EntitySet Name="ConsistentNavigatorConstraint" EntityType="Model.Store.ConsistentNavigatorConstraint" Table="ConsistentNavigatorConstraints"/>
     <!-- inherits from Constraint -->
     <AssociationSet Name="FK_ConsistentNavigatorConstraint_Constraint_ID" Association="Model.Store.FK_ConsistentNavigatorConstraint_Constraint_ID" >
@@ -320,18 +332,6 @@
     <AssociationSet Name="FK_StringSelectorKind_ControlKind_ID" Association="Model.Store.FK_StringSelectorKind_ControlKind_ID" >
       <End Role="A_ControlKind" EntitySet="ControlKind" />
       <End Role="B_StringSelectorKind" EntitySet="StringSelectorKind" />
-    </AssociationSet>
-    <EntitySet Name="Struct" EntityType="Model.Store.Struct" Table="Structs"/>
-    <!-- inherits from DataType -->
-    <AssociationSet Name="FK_Struct_DataType_ID" Association="Model.Store.FK_Struct_DataType_ID" >
-      <End Role="A_DataType" EntitySet="DataType" />
-      <End Role="B_Struct" EntitySet="Struct" />
-    </AssociationSet>
-    <EntitySet Name="StructProperty" EntityType="Model.Store.StructProperty" Table="StructProperties"/>
-    <!-- inherits from Property -->
-    <AssociationSet Name="FK_StructProperty_Property_ID" Association="Model.Store.FK_StructProperty_Property_ID" >
-      <End Role="A_Property" EntitySet="Property" />
-      <End Role="B_StructProperty" EntitySet="StructProperty" />
     </AssociationSet>
     <EntitySet Name="TextboxKind" EntityType="Model.Store.TextboxKind" Table="TextboxKinds"/>
     <!-- inherits from ControlKind -->
@@ -589,6 +589,10 @@
     <AssociationSet Name="FK_ClrObjectParameter_isOf_Type" Association="Model.Store.FK_ClrObjectParameter_isOf_Type" >
       <End Role="ClrObjectParameter" EntitySet="CLRObjectParameter" />
       <End Role="Type" EntitySet="TypeRef" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CompoundObjectProperty_has_CompoundObjectDefinition" Association="Model.Store.FK_CompoundObjectProperty_has_CompoundObjectDefinition" >
+      <End Role="CompoundObjectProperty" EntitySet="CompoundObjectProperty" />
+      <End Role="CompoundObjectDefinition" EntitySet="CompoundObject" />
     </AssociationSet>
     <AssociationSet Name="FK_ConstrainedProperty_has_Constraints" Association="Model.Store.FK_ConstrainedProperty_has_Constraints" >
       <End Role="ConstrainedProperty" EntitySet="Property" />
@@ -862,10 +866,6 @@
       <End Role="RelationEnd" EntitySet="RelationEnd" />
       <End Role="CreatedBy" EntitySet="Identity" />
     </AssociationSet>
-    <AssociationSet Name="FK_StructProperty_has_StructDefinition" Association="Model.Store.FK_StructProperty_has_StructDefinition" >
-      <End Role="StructProperty" EntitySet="StructProperty" />
-      <End Role="StructDefinition" EntitySet="Struct" />
-    </AssociationSet>
     <AssociationSet Name="FK_Task_was_ChangedBy" Association="Model.Store.FK_Task_was_ChangedBy" >
       <End Role="Task" EntitySet="Task" />
       <End Role="ChangedBy" EntitySet="Identity" />
@@ -1060,6 +1060,23 @@
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="nvarchar" MaxLength="4000" Nullable="false" />
+  </EntityType>
+	
+  <EntityType Name="CompoundObject">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+  </EntityType>
+	
+  <EntityType Name="CompoundObjectProperty">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="fk_CompoundObjectDefinition" Type="int" />
+    <Property Name="HasPersistentOrder" Type="bit" Nullable="false" />
+    <Property Name="IsList" Type="bit" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="ConsistentNavigatorConstraint">
@@ -1681,23 +1698,6 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" />
-  </EntityType>
-	
-  <EntityType Name="Struct">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
-  </EntityType>
-	
-  <EntityType Name="StructProperty">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
-    <Property Name="fk_StructDefinition" Type="int" />
-    <Property Name="HasPersistentOrder" Type="bit" Nullable="false" />
-    <Property Name="IsList" Type="bit" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="Task">
@@ -2451,6 +2451,20 @@
       </Principal>
       <Dependent Role="ClrObjectParameter">
         <PropertyRef Name="fk_Type" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_CompoundObjectProperty_has_CompoundObjectDefinition">
+    <End Role="CompoundObjectDefinition" Type="Model.Store.CompoundObject" Multiplicity="0..1" />
+    <End Role="CompoundObjectProperty" Type="Model.Store.CompoundObjectProperty" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CompoundObjectDefinition">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CompoundObjectProperty">
+        <PropertyRef Name="fk_CompoundObjectDefinition" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -3408,20 +3422,6 @@
   </Association>
 
 
-  <Association Name="FK_StructProperty_has_StructDefinition">
-    <End Role="StructDefinition" Type="Model.Store.Struct" Multiplicity="0..1" />
-    <End Role="StructProperty" Type="Model.Store.StructProperty" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="StructDefinition">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="StructProperty">
-        <PropertyRef Name="fk_StructDefinition" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-
   <Association Name="FK_Task_was_ChangedBy">
     <End Role="ChangedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
     <End Role="Task" Type="Model.Store.Task" Multiplicity="*" />
@@ -3674,6 +3674,30 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="B_CLRObjectParameter">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CompoundObject_DataType_ID">
+    <End Role="A_DataType" Type="Model.Store.DataType" Multiplicity="1" />
+    <End Role="B_CompoundObject" Type="Model.Store.CompoundObject" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="A_DataType">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_CompoundObject">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CompoundObjectProperty_Property_ID">
+    <End Role="A_Property" Type="Model.Store.Property" Multiplicity="1" />
+    <End Role="B_CompoundObjectProperty" Type="Model.Store.CompoundObjectProperty" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="A_Property">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_CompoundObjectProperty">
         <PropertyRef Name="ID" />
       </Dependent>
     </ReferentialConstraint>
@@ -4142,30 +4166,6 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="B_StringSelectorKind">
-        <PropertyRef Name="ID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Struct_DataType_ID">
-    <End Role="A_DataType" Type="Model.Store.DataType" Multiplicity="1" />
-    <End Role="B_Struct" Type="Model.Store.Struct" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="A_DataType">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="B_Struct">
-        <PropertyRef Name="ID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_StructProperty_Property_ID">
-    <End Role="A_Property" Type="Model.Store.Property" Multiplicity="1" />
-    <End Role="B_StructProperty" Type="Model.Store.StructProperty" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="A_Property">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="B_StructProperty">
         <PropertyRef Name="ID" />
       </Dependent>
     </ReferentialConstraint>

@@ -225,7 +225,7 @@ namespace Kistl.API
             }
             else if (!type.IsInterface)
             {
-                if (type.IsIPersistenceObject() || type.IsIStruct())
+                if (type.IsIPersistenceObject() || type.IsICompoundObject())
                 {
                     var parts = type.FullName.Split(new string[] { Helper.ImplementationSuffix }, StringSplitOptions.RemoveEmptyEntries);
                     type = Type.GetType(parts[0] + ", " + ApplicationContext.Current.InterfaceAssembly, true);
@@ -265,9 +265,9 @@ namespace Kistl.API
                 {
                     return ApplicationContext.Current.BasePersistenceObjectType;
                 }
-                else if (type == typeof(IStruct))
+                else if (type == typeof(ICompoundObject))
                 {
-                    return ApplicationContext.Current.BaseStructObjectType;
+                    return ApplicationContext.Current.BaseCompoundObjectType;
                 }
                 else if (type == typeof(IRelationCollectionEntry))
                 {
@@ -279,7 +279,7 @@ namespace Kistl.API
                 }
                 else if (type.IsInterface)
                 {
-                    if (type.IsIPersistenceObject() || type.IsIStruct())
+                    if (type.IsIPersistenceObject() || type.IsICompoundObject())
                     {
                         // add ImplementationSuffix
                         string newType = type.FullName + Kistl.API.Helper.ImplementationSuffix + ", " + ApplicationContext.Current.ImplementationAssembly;

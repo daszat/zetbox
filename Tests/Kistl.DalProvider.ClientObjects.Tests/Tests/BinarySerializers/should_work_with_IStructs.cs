@@ -14,11 +14,11 @@ using NUnit.Framework;
 namespace Kistl.DalProvider.ClientObjects.Tests.BinarySerializers
 {
 
-    //[TestFixture(typeof(TestPhoneStruct__Implementation__))]
-    //public class should_work_with_ClientStructs<T>
-    //    : Kistl.API.AbstractConsumerTests.BinarySerializers.should_work_with_IStructs<T>
-    //    where T : class, IStruct, new()
-    //{
-    //}
+    [TestFixture(typeof(TestPhoneCompoundObject))]
+    public class should_work_with_ClientCompoundObject<T>
+        : Kistl.API.AbstractConsumerTests.BinarySerializers.should_work_with_ICompoundObjects<T>
+        where T : class, ICompoundObject, new()
+    {
+    }
 
 }

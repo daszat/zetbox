@@ -23,7 +23,7 @@ namespace Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses
         {
             if (list != null)
             {
-                bool hasPersistentOrder = prop is ValueTypeProperty ? ((ValueTypeProperty)prop).HasPersistentOrder : ((StructProperty)prop).HasPersistentOrder;
+                bool hasPersistentOrder = prop is ValueTypeProperty ? ((ValueTypeProperty)prop).HasPersistentOrder : ((CompoundObjectProperty)prop).HasPersistentOrder;
                 list.Add("Implementation.ObjectClasses.CollectionSerialization", Kistl.Server.Generators.Templates.Implementation.SerializerType.All, this.prop.Module.Namespace, this.prop.PropertyName, efName, !hasPersistentOrder);
             }
         }

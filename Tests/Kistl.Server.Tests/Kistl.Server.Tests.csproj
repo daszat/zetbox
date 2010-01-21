@@ -78,7 +78,7 @@
     <Compile Include="Tests\ListPropertiesTests.cs" />
     <Compile Include="Tests\ObjectTests.cs" />
     <Compile Include="Tests\RelationTests.cs" />
-    <Compile Include="Tests\StructTests.cs" />
+    <Compile Include="Tests\CompoundObjectTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Kistl.Server.Tests.Config.xml">

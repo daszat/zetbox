@@ -328,17 +328,17 @@ namespace Kistl.API
         T CreateValueCollectionEntry<T>() where T : IValueCollectionEntry;
 
         /// <summary>
-        /// Creates a new Struct by Type
+        /// Creates a new CompoundObject by Type
         /// </summary>
-        /// <param name="ifType">Type of the new Struct</param>
-        /// <returns>A new Struct</returns>
-        IStruct CreateStruct(InterfaceType ifType);
+        /// <param name="ifType">Type of the new CompoundObject</param>
+        /// <returns>A new CompoundObject</returns>
+        ICompoundObject CreateCompoundObject(InterfaceType ifType);
         /// <summary>
-        /// Creates a new Struct.
+        /// Creates a new CompoundObject.
         /// </summary>
-        /// <typeparam name="T">Type of the new Struct</typeparam>
-        /// <returns>A new Struct</returns>
-        T CreateStruct<T>() where T : IStruct;
+        /// <typeparam name="T">Type of the new CompoundObject</typeparam>
+        /// <returns>A new CompoundObject</returns>
+        T CreateCompoundObject<T>() where T : ICompoundObject;
 
         /// <summary>
         /// Is fired when an object is created in this Context.

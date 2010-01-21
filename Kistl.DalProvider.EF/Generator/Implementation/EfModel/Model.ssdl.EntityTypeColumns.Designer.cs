@@ -39,10 +39,10 @@ namespace Kistl.DalProvider.EF.Generator.Implementation.EfModel
 	{
 		// TODO: implement IsNullable everywhere
 		
-		if (p is StructProperty)
+		if (p is CompoundObjectProperty)
 		{
 			ApplyEntityTypeColumnDefs(
-				((StructProperty)p).StructDefinition.Properties.Cast<Property>().OrderBy(prop => prop.PropertyName),
+				((CompoundObjectProperty)p).CompoundObjectDefinition.Properties.Cast<Property>().OrderBy(prop => prop.PropertyName),
 				Construct.NestedColumnName(p, prefix));
 		}
 		else if (p is ObjectReferenceProperty)

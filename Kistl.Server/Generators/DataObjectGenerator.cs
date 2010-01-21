@@ -54,10 +54,10 @@ namespace Kistl.Server.Generators
                 Log.Debug("    " + e.ClassName);
             }
 
-            Log.Info("  Structs");
-            foreach (Struct s in Generator.GetStructList(ctx).OrderBy(x => x.ClassName))
+            Log.Info("  CompoundObjects");
+            foreach (CompoundObject s in Generator.GetCompoundObjectList(ctx).OrderBy(x => x.ClassName))
             {
-                generatedFileNames.Add(Generate_Struct(ctx, s));
+                generatedFileNames.Add(Generate_CompoundObject(ctx, s));
                 Log.Debug("    " + s.ClassName);                
             }
 
@@ -149,9 +149,9 @@ namespace Kistl.Server.Generators
             return null;
         }
 
-        protected virtual string Generate_Struct(IKistlContext ctx, Struct s)
+        protected virtual string Generate_CompoundObject(IKistlContext ctx, CompoundObject s)
         {
-            return RunTemplateWithExtension(ctx, "Implementation.Structs.Template", s.ClassName, "Designer.cs", s);
+            return RunTemplateWithExtension(ctx, "Implementation.CompoundObjects.Template", s.ClassName, "Designer.cs", s);
         }
 
         protected virtual string Generate_Interface(IKistlContext ctx, Interface i)

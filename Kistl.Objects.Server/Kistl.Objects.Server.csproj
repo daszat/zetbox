@@ -93,6 +93,8 @@
     <Compile Include="CheckboxKind.Server.Designer.cs" />
     <Compile Include="CLRObjectParameter.Server.Designer.cs" />
     <Compile Include="Company.Server.Designer.cs" />
+    <Compile Include="CompoundObject.Server.Designer.cs" />
+    <Compile Include="CompoundObjectProperty.Server.Designer.cs" />
     <Compile Include="ConsistentNavigatorConstraint.Server.Designer.cs" />
     <Compile Include="Constraint.Server.Designer.cs" />
     <Compile Include="ControlKind.Server.Designer.cs" />
@@ -154,8 +156,6 @@
     <Compile Include="StringProperty.Server.Designer.cs" />
     <Compile Include="StringRangeConstraint.Server.Designer.cs" />
     <Compile Include="StringSelectorKind.Server.Designer.cs" />
-    <Compile Include="Struct.Server.Designer.cs" />
-    <Compile Include="StructProperty.Server.Designer.cs" />
     <Compile Include="Task.Server.Designer.cs" />
     <Compile Include="Template.Server.Designer.cs" />
     <Compile Include="TestCustomObject.Server.Designer.cs" />
@@ -170,7 +170,7 @@
     <Compile Include="WorkEffortAccount.Server.Designer.cs" />
     <Compile Include="WorkspaceKind.Server.Designer.cs" />
     <Compile Include="CollectionEntries.Server.Designer.cs" />
-    <Compile Include="TestPhoneStruct.Server.Designer.cs" />
+    <Compile Include="TestPhoneCompoundObject.Server.Designer.cs" />
     <Compile Include="AssemblyInfo.Server.cs" />
     <Compile Include="AssociationSetAttributes.Server.cs" />
   </ItemGroup>

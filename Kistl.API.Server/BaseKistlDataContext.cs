@@ -284,23 +284,23 @@ namespace Kistl.API.Server
         }
 
         /// <summary>
-        /// Creates a new Struct by Type
+        /// Creates a new CompoundObject by Type
         /// </summary>
-        /// <param name="ifType">Type of the new IDataObject</param>
-        /// <returns>A new Struct</returns>
-        public virtual IStruct CreateStruct(InterfaceType ifType)
+        /// <param name="ifType">Type of the new CompoundObject</param>
+        /// <returns>A new CompoundObject</returns>
+        public virtual ICompoundObject CreateCompoundObject(InterfaceType ifType)
         {
-            IStruct obj = (IStruct)Activator.CreateInstance(ifType.ToImplementationType().Type);
+            ICompoundObject obj = (ICompoundObject)Activator.CreateInstance(ifType.ToImplementationType().Type);
             return obj;
         }
         /// <summary>
-        /// Creates a new Struct.
+        /// Creates a new CompoundObject.
         /// </summary>
-        /// <typeparam name="T">Type of the new Struct</typeparam>
-        /// <returns>A new Struct</returns>
-        public virtual T CreateStruct<T>() where T : IStruct
+        /// <typeparam name="T">Type of the new CompoundObject</typeparam>
+        /// <returns>A new CompoundObject</returns>
+        public virtual T CreateCompoundObject<T>() where T : ICompoundObject
         {
-            return (T)CreateStruct(new InterfaceType(typeof(T)));
+            return (T)CreateCompoundObject(new InterfaceType(typeof(T)));
         }
 
         /// <summary>

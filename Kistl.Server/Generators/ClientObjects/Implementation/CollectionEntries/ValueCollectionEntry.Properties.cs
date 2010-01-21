@@ -15,9 +15,9 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.CollectionEntries
                 MembersToSerialize, prop.ObjectClass.ClassName, propertyName);
         }
 
-        protected override void ApplyStructPropertyTemplate(StructProperty prop, string propertyName)
+        protected override void ApplyCompoundObjectPropertyTemplate(CompoundObjectProperty prop, string propertyName)
         {
-            Implementation.ObjectClasses.StructPropertyTemplate.Call(Host, ctx, MembersToSerialize, prop, propertyName);
+            Implementation.ObjectClasses.CompoundObjectPropertyTemplate.Call(Host, ctx, MembersToSerialize, prop, propertyName);
         }
     }
 }

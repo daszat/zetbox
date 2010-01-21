@@ -111,12 +111,12 @@ namespace Kistl.API.Mocks
         }
 
 
-        public IStruct CreateStruct(InterfaceType ifType)
+        public ICompoundObject CreateCompoundObject(InterfaceType ifType)
         {
             throw new NotImplementedException();
         }
 
-        public T CreateStruct<T>() where T : IStruct
+        public T CreateCompoundObject<T>() where T : ICompoundObject
         {
             throw new NotImplementedException();
         }

@@ -31,7 +31,7 @@ namespace Kistl.Server.Generators.Interfaces
             return RunTemplateWithExtension(ctx, "Interface.Enumerations.Template", e.ClassName, "Designer.cs", e);
         }
 
-        protected override string Generate_Struct(IKistlContext ctx, Struct s)
+        protected override string Generate_CompoundObject(IKistlContext ctx, CompoundObject s)
         {
             return RunTemplateWithExtension(ctx, "Interface.DataTypes.Template", s.ClassName, "Designer.cs", s);
         }

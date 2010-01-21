@@ -11,22 +11,22 @@ using NUnit.Framework;
 
 namespace Kistl.API.Client.Tests.BinarySerializers
 {
-    public interface StructMock : IStruct
+    public interface CompoundObjectMock : ICompoundObject
     {
     }
 
-    public class StructMock__Implementation__ : BaseClientStructObject
+    public class CompoundObjectMock__Implementation__ : BaseClientCompoundObject
     {
         public override InterfaceType GetInterfaceType()
         {
-            return new InterfaceType(typeof(StructMock));
+            return new InterfaceType(typeof(CompoundObjectMock));
         }
     }
 
-    [TestFixture(typeof(StructMock__Implementation__))]
-    public class should_work_with_BaseClientStructObjects<T>
-        : Kistl.API.AbstractConsumerTests.BinarySerializers.should_work_with_IStructs<T>
-        where T : class, IStruct, new()
+    [TestFixture(typeof(CompoundObjectMock__Implementation__))]
+    public class should_work_with_BaseClientCompoundObjects<T>
+        : Kistl.API.AbstractConsumerTests.BinarySerializers.should_work_with_ICompoundObjects<T>
+        where T : class, ICompoundObject, new()
     {
     }
 }
