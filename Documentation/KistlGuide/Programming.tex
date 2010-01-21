@@ -46,12 +46,10 @@ placed.
 
 \section{Modules}
 
-\section{Structs}
-Structs are compound objects. They do not behave like C\# structs. This section describes their behaviour.
-\par
-Lets say there is a \emph{PhoneNumber} Struct
+\section{Compound Objects}
+Lets say there is a \emph{PhoneNumber} Compound Object.
 \begin{CS}
-struct PhoneNumber
+class PhoneNumber
 {
 	string CountryCode;
 	string AreaCode;
@@ -73,13 +71,12 @@ class Person
 \end{CS}
 \emph{Tel} is not nullabe, \emph{Fax} is nullable.
 
-\subsection{Accessing Structs}
+\subsection{Accessing Compound Objects}
 
 \begin{itemize}
-	\item{If a struct property is not nullable then the content of the property is always a valid reference.}
-	\item{If a struct property is  nullable then the content of the property may be null.}
-	\item{Unlike in C\# a struct property does not return a copy of the struct in the getter.}
-	\item{When a struct property is set the given struct will be copied.}
+	\item{If a compound object property is not nullable then the content of the property is always a valid reference.}
+	\item{If a compound object property is  nullable then the content of the property may be null.}
+	\item{When a compound object property is set the given compound object will be copied.}
 \end{itemize}
 
 \begin{CS}
@@ -87,31 +84,30 @@ Person p;
 string number;
 
 number = p.Tel.Number;
-number = p.Fax.Number; // Throws NullReferenceException if Fax is null
+number = p.Fax.Number; // throws NullReferenceException if Fax is null
 
 p.Tel.Number = "12345678";
-p.Fax.Number = "12345678"; // Throws NullReferenceException if Fax is null
+p.Fax.Number = "12345678"; // throws NullReferenceException if Fax is null
 
 PhoneNumber n;
 
-n = p.Tel; // Does not create a copy
+n = p.Tel; // returnes a reference of the compound object
 n.Number = "87654321"; // changes p.Tel.Number
-n = p.Fax; // May be null
+n = p.Fax; // may be null
 n.Number = "87654321"; // changes p.Fax.Number or throws NullReferenceException if Fax is null
 
-p.Fax = p.Tel; // Creates a copy of p.Tel
-p.Fax.Number = "87654321"; // does not change p.Tel.Number
+p.Fax = p.Tel; // creates a copy of p.Tel
+p.Fax.Number = "87654321"; // changes p.Fax.Number but does not change p.Tel.Number
 
-p.Tel = null; // Throws a ArgumentNullException
-p.Fax = null; // Sets Fax to null
+p.Tel = null; // throws a ArgumentNullException
+p.Fax = null; // sets Fax to null
 
-n = ctx.CreateStruct<PhoneNumber>(); // Creates a new PhoneNumber Struct;
+n = ctx.CreateStruct<PhoneNumber>(); // creates a new PhoneNumber Struct;
 n.Number = "12345678";
-p.Tel = n; // Creates a copy of n
-p.Tel.Number = "18273645"; // does not change n.Number
-n.Number = "87654321"; // does not change p.Tel.Number
+p.Tel = n; // creates a copy of n
+p.Tel.Number = "18273645"; // changes p.Tel.Number but does not change n.Number
+n.Number = "87654321"; // changes n.Number but does not change p.Tel.Number
 \end{CS}
-
 
 \section{Enhancing Kistl's inner workings}
 
