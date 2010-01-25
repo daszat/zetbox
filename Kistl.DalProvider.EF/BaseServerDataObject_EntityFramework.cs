@@ -356,6 +356,10 @@ namespace Kistl.DalProvider.EF
     public abstract class BaseServerCompoundObject_EntityFramework
         : BaseServerCompoundObject
     {
+        protected BaseServerCompoundObject_EntityFramework()
+        {
+        }
+
         protected override void OnPropertyChanging(string property, object oldValue, object newValue)
         {
             base.OnPropertyChanging(property, oldValue, newValue);

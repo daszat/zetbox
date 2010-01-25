@@ -15,15 +15,9 @@ namespace Kistl.API.AbstractConsumerTests.CompoundObjects
     {
         public abstract IKistlContext GetContext();
 
-        public TestCustomObject GetObject()
-        {
-            return ctx.GetQuery<TestCustomObject>().First();
-        }
 
         protected IKistlContext ctx;
         protected TestCustomObject obj;
-
-
 
         [SetUp]
         public void InitTestObjects()
@@ -32,18 +26,19 @@ namespace Kistl.API.AbstractConsumerTests.CompoundObjects
             CreateTestData();
 
             ctx = GetContext();
-            obj = GetObject();
+            obj = ctx.GetQuery<TestCustomObject>().First();
         }
 
-        private void DeleteTestData()
+        protected virtual void DeleteTestData()
         {
             using (IKistlContext ctx = GetContext())
             {
                 ctx.GetQuery<TestCustomObject>().ForEach(obj => ctx.Delete(obj));
+                ctx.SubmitChanges();
             }
         }
 
-        private void CreateTestData()
+        protected virtual void CreateTestData()
         {
             using (IKistlContext ctx = GetContext())
             {
@@ -52,6 +47,7 @@ namespace Kistl.API.AbstractConsumerTests.CompoundObjects
                 i = ctx.Create<TestCustomObject>();
                 i.Birthday = DateTime.Now;
                 i.PersonName = "First Person";
+                i.PhoneNumberMobile = ctx.CreateCompoundObject<TestPhoneCompoundObject>();
                 i.PhoneNumberMobile.AreaCode = "1";
                 i.PhoneNumberMobile.Number = "11111111";
                 i.PhoneNumberOffice.AreaCode = "o1";
@@ -60,6 +56,7 @@ namespace Kistl.API.AbstractConsumerTests.CompoundObjects
                 i = ctx.Create<TestCustomObject>();
                 i.Birthday = DateTime.Now;
                 i.PersonName = "Second Person";
+                i.PhoneNumberMobile = ctx.CreateCompoundObject<TestPhoneCompoundObject>();
                 i.PhoneNumberMobile.AreaCode = "2";
                 i.PhoneNumberMobile.Number = "22222222";
                 i.PhoneNumberOffice.AreaCode = "o1";
@@ -68,6 +65,7 @@ namespace Kistl.API.AbstractConsumerTests.CompoundObjects
                 i = ctx.Create<TestCustomObject>();
                 i.Birthday = DateTime.Now;
                 i.PersonName = "Third Person";
+                i.PhoneNumberMobile = ctx.CreateCompoundObject<TestPhoneCompoundObject>();
                 i.PhoneNumberMobile.AreaCode = "3";
                 i.PhoneNumberMobile.Number = "3333333";
                 i.PhoneNumberOffice.AreaCode = "o3";

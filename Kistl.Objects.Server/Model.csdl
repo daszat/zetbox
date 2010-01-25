@@ -2942,6 +2942,7 @@
 
   <!-- ComplexTypes for all CompoundObjects -->
   <ComplexType Name="TestPhoneCompoundObject" >
+    <Property Name="CompoundObject_IsNull" Type="Boolean" Nullable="false" />
     <Property Name="AreaCode" Type="String" Nullable="true" MaxLength="50" />
     <Property Name="Number" Type="String" Nullable="true" MaxLength="50" />
   </ComplexType>

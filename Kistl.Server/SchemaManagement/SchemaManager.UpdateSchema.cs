@@ -124,7 +124,15 @@ namespace Kistl.Server.SchemaManagement
 
             foreach (CompoundObjectProperty sprop in properties.OfType<CompoundObjectProperty>().Where(p => !p.IsList))
             {
-                UpdateColumns(objClass, sprop.CompoundObjectDefinition.Properties, Construct.NestedColumnName(sprop, prefix));
+                if (Case.IsNewCompoundObjectProperty(sprop))
+                {
+                    Case.DoNewCompoundObjectProperty(objClass, sprop, prefix);
+                }
+                else
+                {
+                    // See if the CompoundObject self has changed
+                    UpdateColumns(objClass, sprop.CompoundObjectDefinition.Properties, Construct.NestedColumnName(sprop, prefix));
+                }
             }
 
             foreach (ValueTypeProperty prop in properties.OfType<ValueTypeProperty>().Where(p => p.IsList))

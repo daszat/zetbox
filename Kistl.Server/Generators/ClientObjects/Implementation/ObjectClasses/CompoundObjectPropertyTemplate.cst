@@ -6,6 +6,7 @@
 <%@ Import Namespace="Kistl.API" %>
 <%@ Import Namespace="Kistl.API.Server" %>
 <%@ Import Namespace="Kistl.App.Base" %>
+<%@ Import Namespace="Kistl.App.Extensions" %>
 <%@ Import Namespace="Kistl.Server.Generators" %>
 <%@ Import Namespace="Kistl.Server.Generators.Extensions" %>
 <%@ Parameter Name="ctx" Type="IKistlContext" %>
@@ -36,12 +37,23 @@
         private <%= coImplementationType %> <%= backingPropertyName %> {
             get { return <%= backingStoreName %>; }
             set {
+<%				if(!prop.IsNullable())
+				{
+%>				            
+                if (value == null)
+					throw new ArgumentNullException("value");
+<%
+				}                
+%>
 				if (<%= backingStoreName %> != null)
 				{
 	                <%= backingStoreName %>.DetachFromObject(this, "<%= name %>");
 				}
                 <%= backingStoreName %> = (<%= coImplementationType %>)value;
-                <%= backingStoreName %>.AttachToObject(this, "<%= name %>");
+				if (<%= backingStoreName %> != null)
+				{
+	                <%= backingStoreName %>.AttachToObject(this, "<%= name %>");
+	            }
             }
 		}
 <%

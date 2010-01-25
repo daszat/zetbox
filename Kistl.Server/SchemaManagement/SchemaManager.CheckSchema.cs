@@ -108,6 +108,7 @@ namespace Kistl.Server.SchemaManagement
 
             foreach (CompoundObjectProperty sprop in properties.OfType<CompoundObjectProperty>().Where(p => !p.IsList))
             {
+                columns.Add(Construct.NestedColumnName(sprop, prefix));
                 GetExistingColumnNames(objClass, sprop.CompoundObjectDefinition.Properties, Construct.NestedColumnName(sprop, prefix), columns);
             }
         }
@@ -503,6 +504,12 @@ namespace Kistl.Server.SchemaManagement
                 if (db.CheckTableExists(tblName))
                 {
                     Log.DebugFormat("{0}", prop.PropertyName);
+
+                    // Check isnull column
+                    // TODO: Support neested CompoundObject
+                    string colName = Construct.NestedColumnName(prop, string.Empty);
+                    CheckColumn(tblName, colName, System.Data.DbType.Boolean, 0, false);
+
                     CheckColumn(tblName, fkName, System.Data.DbType.Int32, 0, false);
                     // TODO: Support neested CompoundObject
                     foreach (ValueTypeProperty p in prop.CompoundObjectDefinition.Properties)
@@ -610,6 +617,13 @@ namespace Kistl.Server.SchemaManagement
 
             foreach (CompoundObjectProperty sprop in properties.OfType<CompoundObjectProperty>().Where(p => !p.IsList))
             {
+                // Check isnull column
+                string tblName = objClass.TableName;
+                string colName = Construct.NestedColumnName(sprop, prefix);
+                Log.DebugFormat("    {0}", colName);
+                CheckColumn(tblName, colName, System.Data.DbType.Boolean, 0, false);
+
+                // Check other columns
                 CheckColumns(objClass, sprop.CompoundObjectDefinition.Properties, Construct.NestedColumnName(sprop, prefix));
             }
         }

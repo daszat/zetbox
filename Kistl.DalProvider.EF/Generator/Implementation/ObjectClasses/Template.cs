@@ -39,7 +39,7 @@ namespace Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses
                     string backingName = "_" + name;
                     string structType = prop.GetPropertyTypeString();
                     string structImplementationType = structType + Kistl.API.Helper.ImplementationSuffix;
-                    this.WriteObjects("\t\t\t\t", backingName, " = new ", structImplementationType, "(this, \"", name, "\");");
+                    this.WriteObjects("\t\t\t\t", backingName, " = new ", structImplementationType, "(", prop.IsNullable() ? "true" : "false", ", this, \"", name, "\");");
                     this.WriteLine();
                 }
                 this.WriteObjects("\t\t\t}");

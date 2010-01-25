@@ -30,8 +30,8 @@ namespace Kistl.App.Test
 		public TestCustomObject__Implementation__()
 		{
 			{
-				_PhoneNumberMobile = new Kistl.App.Test.TestPhoneCompoundObject__Implementation__(this, "PhoneNumberMobile");
-				_PhoneNumberOffice = new Kistl.App.Test.TestPhoneCompoundObject__Implementation__(this, "PhoneNumberOffice");
+				_PhoneNumberMobile = new Kistl.App.Test.TestPhoneCompoundObject__Implementation__(true, this, "PhoneNumberMobile");
+				_PhoneNumberOffice = new Kistl.App.Test.TestPhoneCompoundObject__Implementation__(false, this, "PhoneNumberOffice");
 			}
         }
 
@@ -451,7 +451,7 @@ namespace Kistl.App.Test
         // implement the user-visible interface
         public Kistl.App.Test.TestPhoneCompoundObject PhoneNumberMobile
         {
-            get { return PhoneNumberMobile__Implementation__; }
+            get { return PhoneNumberMobile__Implementation__.CompoundObject_IsNull ? null : PhoneNumberMobile__Implementation__; }
             set { PhoneNumberMobile__Implementation__ = (Kistl.App.Test.TestPhoneCompoundObject__Implementation__)value; }
         }
         
@@ -469,9 +469,6 @@ namespace Kistl.App.Test
             }
             set
             {
-                if (value == null)
-					throw new ArgumentNullException("value");
-                
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (!object.Equals(_PhoneNumberMobile, value))
                 {
@@ -481,8 +478,15 @@ namespace Kistl.App.Test
                     {
 						_PhoneNumberMobile.DetachFromObject(this, "PhoneNumberMobile");
 					}
-                    _PhoneNumberMobile = (Kistl.App.Test.TestPhoneCompoundObject__Implementation__)value;
-					_PhoneNumberMobile.AttachToObject(this, "PhoneNumberMobile");
+                    if(value == null)
+                    {
+						_PhoneNumberMobile = new Kistl.App.Test.TestPhoneCompoundObject__Implementation__(true, this, "PhoneNumberMobile");
+                    }
+                    else
+                    {
+						_PhoneNumberMobile = (Kistl.App.Test.TestPhoneCompoundObject__Implementation__)value;
+						_PhoneNumberMobile.AttachToObject(this, "PhoneNumberMobile");
+					}
                     NotifyPropertyChanged("PhoneNumberMobile", "PhoneNumberMobile__Implementation__", __oldValue, value);
                 }
             }
@@ -498,7 +502,7 @@ namespace Kistl.App.Test
         // implement the user-visible interface
         public Kistl.App.Test.TestPhoneCompoundObject PhoneNumberOffice
         {
-            get { return PhoneNumberOffice__Implementation__; }
+            get { return PhoneNumberOffice__Implementation__.CompoundObject_IsNull ? null : PhoneNumberOffice__Implementation__; }
             set { PhoneNumberOffice__Implementation__ = (Kistl.App.Test.TestPhoneCompoundObject__Implementation__)value; }
         }
         
@@ -516,10 +520,10 @@ namespace Kistl.App.Test
             }
             set
             {
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+				            
                 if (value == null)
 					throw new ArgumentNullException("value");
-                
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (!object.Equals(_PhoneNumberOffice, value))
                 {
 					var __oldValue = _PhoneNumberOffice;
@@ -528,8 +532,15 @@ namespace Kistl.App.Test
                     {
 						_PhoneNumberOffice.DetachFromObject(this, "PhoneNumberOffice");
 					}
-                    _PhoneNumberOffice = (Kistl.App.Test.TestPhoneCompoundObject__Implementation__)value;
-					_PhoneNumberOffice.AttachToObject(this, "PhoneNumberOffice");
+                    if(value == null)
+                    {
+						_PhoneNumberOffice = new Kistl.App.Test.TestPhoneCompoundObject__Implementation__(true, this, "PhoneNumberOffice");
+                    }
+                    else
+                    {
+						_PhoneNumberOffice = (Kistl.App.Test.TestPhoneCompoundObject__Implementation__)value;
+						_PhoneNumberOffice.AttachToObject(this, "PhoneNumberOffice");
+					}
                     NotifyPropertyChanged("PhoneNumberOffice", "PhoneNumberOffice__Implementation__", __oldValue, value);
                 }
             }

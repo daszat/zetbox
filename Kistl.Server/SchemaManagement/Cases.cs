@@ -340,6 +340,9 @@ namespace Kistl.Server.SchemaManagement
             db.CreateColumn(tblName, fkName, System.Data.DbType.Int32, 0, false);
 
             // TODO: Support neested CompoundObject
+            string colName = Construct.NestedColumnName(prop, string.Empty);
+            db.CreateColumn(objClass.TableName, colName, System.Data.DbType.Boolean, 0, false);
+            // TODO: Support neested CompoundObject
             foreach (ValueTypeProperty p in prop.CompoundObjectDefinition.Properties)
             {
                 db.CreateColumn(tblName, valPropName + "_" + p.PropertyName, SchemaManager.GetDbType(p), p is StringProperty ? ((StringProperty)p).GetMaxLength() : 0, true);
@@ -995,6 +998,30 @@ namespace Kistl.Server.SchemaManagement
             db.DropColumn(tblName, colName);
         }
         #endregion
+
+        #region NewValueTypeProperty nullable
+        public bool IsNewCompoundObjectProperty(CompoundObjectProperty prop)
+        {
+            return savedSchema.FindPersistenceObject<CompoundObjectProperty>(prop.ExportGuid) == null;
+        }
+        public void DoNewCompoundObjectProperty(ObjectClass objClass, CompoundObjectProperty sprop, string prefix)
+        {
+            string colName = Construct.NestedColumnName(sprop, prefix);
+            Log.InfoFormat("New is null column for CompoundObject Property: '{0}' ('{1}')", sprop.PropertyName, colName);
+            db.CreateColumn(objClass.TableName, colName, System.Data.DbType.Boolean, 0, false);
+
+            foreach (var valProp in sprop.CompoundObjectDefinition.Properties.OfType<ValueTypeProperty>())
+            {
+                colName = Construct.NestedColumnName(valProp, prefix);
+                Log.InfoFormat("New nullable ValueType Property: '{0}' ('{1}')", valProp.PropertyName, colName);
+                db.CreateColumn(objClass.TableName, colName, SchemaManager.GetDbType(valProp),
+                    valProp is StringProperty ? ((StringProperty)valProp).GetMaxLength() : 0, valProp.IsNullable());
+            }
+
+            // TODO: Add neested CompoundObjectProperty
+        }
+        #endregion
+
 
         #endregion
     }

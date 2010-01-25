@@ -417,15 +417,16 @@ foreach(var cls in ctx.GetQuery<CompoundObject>().OrderBy(s => s.ClassName))
 
 #line 364 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.csdl.cst"
 this.WriteObjects("  <ComplexType Name=\"",  cls.ClassName , "\" >\r\n");
-#line 365 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.csdl.cst"
-ApplyEntityTypeFieldDefs(cls.Properties.Cast<Property>()); 
+this.WriteObjects("    <Property Name=\"CompoundObject_IsNull\" Type=\"Boolean\" Nullable=\"false\" />\r\n");
 #line 366 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.csdl.cst"
-this.WriteObjects("  </ComplexType>\r\n");
+ApplyEntityTypeFieldDefs(cls.Properties.Cast<Property>()); 
 #line 367 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.csdl.cst"
+this.WriteObjects("  </ComplexType>\r\n");
+#line 368 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.csdl.cst"
 }
 
 
-#line 370 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.csdl.cst"
+#line 371 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.csdl.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("</Schema>\r\n");
 

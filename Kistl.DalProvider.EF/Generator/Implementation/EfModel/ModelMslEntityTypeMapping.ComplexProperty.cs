@@ -40,6 +40,8 @@ namespace Kistl.DalProvider.EF.Generator.Implementation.EfModel
                 prop.CompoundObjectDefinition.ClassName
                 );
 
+            this.WriteLine("  <ScalarProperty Name=\"CompoundObject_IsNull\" ColumnName=\"{0}\" />", Construct.NestedColumnName(prop, parentName));
+
             string newParent = Construct.NestedColumnName(prop, parentName);
             foreach (var subProp in prop.CompoundObjectDefinition.Properties.OfType<ValueTypeProperty>().Where(p => !p.IsList).OrderBy(p => p.PropertyName))
             {

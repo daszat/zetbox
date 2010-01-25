@@ -3626,7 +3626,7 @@ public TestCustomObject Parent { get { return A; } set { A = value; } }
         // implement the user-visible interface
         public Kistl.App.Test.TestPhoneCompoundObject B
         {
-            get { return B__Implementation__; }
+            get { return B__Implementation__.CompoundObject_IsNull ? null : B__Implementation__; }
             set { B__Implementation__ = (Kistl.App.Test.TestPhoneCompoundObject__Implementation__)value; }
         }
         
@@ -3644,9 +3644,6 @@ public TestCustomObject Parent { get { return A; } set { A = value; } }
             }
             set
             {
-                if (value == null)
-					throw new ArgumentNullException("value");
-                
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (!object.Equals(_B, value))
                 {
@@ -3656,8 +3653,15 @@ public TestCustomObject Parent { get { return A; } set { A = value; } }
                     {
 						_B.DetachFromObject(this, "B");
 					}
-                    _B = (Kistl.App.Test.TestPhoneCompoundObject__Implementation__)value;
-					_B.AttachToObject(this, "B");
+                    if(value == null)
+                    {
+						_B = new Kistl.App.Test.TestPhoneCompoundObject__Implementation__(true, this, "B");
+                    }
+                    else
+                    {
+						_B = (Kistl.App.Test.TestPhoneCompoundObject__Implementation__)value;
+						_B.AttachToObject(this, "B");
+					}
                     NotifyPropertyChanged("B", "B__Implementation__", __oldValue, value);
                 }
             }

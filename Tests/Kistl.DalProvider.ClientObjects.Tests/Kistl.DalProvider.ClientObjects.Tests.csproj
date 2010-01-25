@@ -56,8 +56,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SetUp.cs" />
     <Compile Include="Tests\BinarySerializers\should_work_with_IStructs.cs" />
+    <Compile Include="Tests\CompoundObjects\when_changing.cs" />
     <Compile Include="Tests\CompoundObjects\when_changing_a_CompoundObject_member.cs" />
     <Compile Include="Tests\CompoundObjects\when_initialized.cs" />
+    <Compile Include="Tests\CompoundObjects\when_roundtrip.cs" />
     <Compile Include="Tests\PersistenceObjects\navigator_context_checks.cs" />
     <Compile Include="Tests\PersistenceObjects\when_changed.cs" />
     <Compile Include="Tests\PersistenceObjects\when_loaded.cs" />

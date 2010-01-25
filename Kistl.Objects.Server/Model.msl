@@ -652,10 +652,12 @@
 <ScalarProperty Name="Birthday" ColumnName="Birthday" />
 <ScalarProperty Name="PersonName" ColumnName="PersonName" />
 <ComplexProperty Name="PhoneNumberMobile__Implementation__" TypeName="Model.TestPhoneCompoundObject">
+  <ScalarProperty Name="CompoundObject_IsNull" ColumnName="PhoneNumberMobile" />
 <ScalarProperty Name="AreaCode" ColumnName="PhoneNumberMobile_AreaCode" />
 <ScalarProperty Name="Number" ColumnName="PhoneNumberMobile_Number" />
 </ComplexProperty>
 <ComplexProperty Name="PhoneNumberOffice__Implementation__" TypeName="Model.TestPhoneCompoundObject">
+  <ScalarProperty Name="CompoundObject_IsNull" ColumnName="PhoneNumberOffice" />
 <ScalarProperty Name="AreaCode" ColumnName="PhoneNumberOffice_AreaCode" />
 <ScalarProperty Name="Number" ColumnName="PhoneNumberOffice_Number" />
 </ComplexProperty>
@@ -2834,6 +2836,7 @@
         <MappingFragment StoreEntitySet="TestCustomObject_PhoneNumbersOther_CollectionEntry">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ComplexProperty Name="B__Implementation__" TypeName="Model.TestPhoneCompoundObject">
+  <ScalarProperty Name="CompoundObject_IsNull" ColumnName="PhoneNumbersOther" />
 <ScalarProperty Name="AreaCode" ColumnName="PhoneNumbersOther_AreaCode" />
 <ScalarProperty Name="Number" ColumnName="PhoneNumbersOther_Number" />
 </ComplexProperty>

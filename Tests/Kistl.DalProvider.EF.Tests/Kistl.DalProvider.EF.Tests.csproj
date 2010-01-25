@@ -87,6 +87,8 @@
     <Compile Include="Tests\BaseServerDataObjects\when_changed.cs" />
     <Compile Include="Tests\BaseServerDataObjects\when_loaded.cs" />
     <Compile Include="Tests\BinarySerializers\should_work_with_ICompoundObjects.cs" />
+    <Compile Include="Tests\CompoundObject\when_changing.cs" />
+    <Compile Include="Tests\CompoundObject\when_roundtrip.cs" />
     <Compile Include="Tests\Linq.cs" />
     <Compile Include="Tests\ListPropertiesTests.cs" />
     <Compile Include="Tests\N_to_M_relations\should_synchronize.cs" />

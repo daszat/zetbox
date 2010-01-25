@@ -6,6 +6,7 @@
 <%@ Import Namespace="Kistl.API" %>
 <%@ Import Namespace="Kistl.API.Server" %>
 <%@ Import Namespace="Kistl.App.Base" %>
+<%@ Import Namespace="Kistl.App.Extensions" %>
 <%@ Import Namespace="Kistl.Server.Generators" %>
 <%@ Import Namespace="Kistl.Server.Generators.Extensions" %>
 <%@ Parameter Name="ctx" Type="IKistlContext" %>
@@ -25,7 +26,7 @@
         // implement the user-visible interface
         public <%= structType %> <%= name %>
         {
-            get { return <%= efName %>; }
+            get { return <%= efName %>.CompoundObject_IsNull ? null : <%= efName %>; }
             set { <%= efName %> = (<%= structImplementationType %>)value; }
         }
         
@@ -43,10 +44,15 @@
             }
             set
             {
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+<%				if(!prop.IsNullable())
+				{
+%>				            
                 if (value == null)
 					throw new ArgumentNullException("value");
-                
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+<%
+				}                
+%>
                 if (!object.Equals(<%= backingName %>, value))
                 {
 					var __oldValue = <%= backingName %>;
@@ -55,8 +61,15 @@
                     {
 						<%= backingName %>.DetachFromObject(this, "<%= name %>");
 					}
-                    <%= backingName %> = (<%= structImplementationType %>)value;
-					<%= backingName %>.AttachToObject(this, "<%= name %>");
+                    if(value == null)
+                    {
+						<%= backingName %> = new <%= structImplementationType %>(true, this, "<%= name %>");
+                    }
+                    else
+                    {
+						<%= backingName %> = (<%= structImplementationType %>)value;
+						<%= backingName %>.AttachToObject(this, "<%= name %>");
+					}
                     NotifyPropertyChanged("<%= name %>", "<%= efName %>", __oldValue, value);
                 }
             }

@@ -82,6 +82,8 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
             this.WriteLine();
             foreach (var prop in DataType.Properties.OfType<CompoundObjectProperty>().Where(p => !p.IsList).OrderBy(p => p.PropertyName))
             {
+                if (prop.IsNullable()) continue;
+
                 string name = prop.PropertyName;
                 string backingName = "_" + name;
                 string coType = prop.GetPropertyTypeString();

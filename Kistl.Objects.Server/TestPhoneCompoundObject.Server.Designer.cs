@@ -140,10 +140,13 @@ namespace Kistl.App.Test
 		{
 			return new InterfaceType(typeof(TestPhoneCompoundObject));
 		}
-        public TestPhoneCompoundObject__Implementation__(IPersistenceObject parent, string property)
+        public TestPhoneCompoundObject__Implementation__(bool isNull, IPersistenceObject parent, string property)
         {
             AttachToObject(parent, property);
+            CompoundObject_IsNull = isNull;
         }
+        [EdmScalarProperty(IsNullable = false)]
+        public bool CompoundObject_IsNull { get; set; }
 
 #region Serializer
 

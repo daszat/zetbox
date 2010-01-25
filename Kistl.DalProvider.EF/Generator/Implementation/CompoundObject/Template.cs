@@ -49,15 +49,21 @@ namespace Kistl.DalProvider.EF.Generator.Implementation.CompoundObjects
 
             string clsName = this.GetTypeName();
 
-            this.WriteObjects("        public ", clsName, "(IPersistenceObject parent, string property)");
+            this.WriteObjects("        public ", clsName, "(bool isNull, IPersistenceObject parent, string property)");
             this.WriteLine();
             this.WriteObjects("        {");
             this.WriteLine();
             this.WriteObjects("            AttachToObject(parent, property);");
             this.WriteLine();
+            this.WriteObjects("            CompoundObject_IsNull = isNull;");
+            this.WriteLine();
             this.WriteObjects("        }");
             this.WriteLine();
 
+            this.WriteObjects("        [EdmScalarProperty(IsNullable = false)]");
+            this.WriteLine();
+            this.WriteObjects("        public bool CompoundObject_IsNull { get; set; }");
+            this.WriteLine();
         }
 
     }

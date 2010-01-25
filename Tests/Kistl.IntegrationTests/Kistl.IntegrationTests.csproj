@@ -66,6 +66,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Tests\BinarySerializers\should_work_with_ICompoundObjects.cs" />
+    <Compile Include="Tests\CompoundObjects\when_changing.cs" />
+    <Compile Include="Tests\CompoundObjects\when_roundtrip.cs" />
     <Compile Include="Tests\GetListTests.cs" />
     <Compile Include="Tests\InheritanceTests.cs" />
     <Compile Include="Tests\ListPropertiesTests.cs" />
@@ -82,7 +84,6 @@
     <Compile Include="Tests\RelationTests.cs" />
     <Compile Include="Tests\CompoundObjects\when_changing_a_CompoundObject_member.cs" />
     <Compile Include="Tests\CompoundObjects\when_initialized.cs" />
-    <Compile Include="Tests\CompoundObjectTests.cs" />
     <Compile Include="Tests\TypeRefs\should_convert_types_correctly.cs" />
   </ItemGroup>
   <ItemGroup>

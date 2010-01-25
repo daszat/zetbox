@@ -298,6 +298,7 @@ namespace Kistl.DalProvider.EF
             catch (UpdateException updex)
             {
                 Logging.Log.Error("Error during SubmitChanges", updex);
+                if (updex.InnerException == null) throw updex;
                 throw updex.InnerException;
             }
 

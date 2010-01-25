@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2010-01-21T14:43:25.763Z" xmlns="http://dasz.at/Kistl">
+<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2010-01-25T12:02:48.03Z" xmlns="http://dasz.at/Kistl">
   <KistlBase:Module ExportGuid="ef6d5bd8-5826-4ce6-a9ca-c8438ddde773">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.32Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.32Z</KistlBase:CreatedOn>
@@ -16043,6 +16043,12 @@
     <KistlBase:MaxLength>200</KistlBase:MaxLength>
     <KistlBase:MinLength>0</KistlBase:MinLength>
   </KistlBase:StringRangeConstraint>
+  <KistlBase:NotNullableConstraint ExportGuid="48a78427-8ffa-4671-84a2-c2f7c2acdbfd">
+    <KistlBase:ChangedOn>2010-01-25T12:02:48.03Z</KistlBase:ChangedOn>
+    <KistlBase:ConstrainedProperty>465e10ec-4e5e-4e8f-831f-44562dd0d68b</KistlBase:ConstrainedProperty>
+    <KistlBase:CreatedOn>2010-01-25T12:02:48.03Z</KistlBase:CreatedOn>
+    <KistlBase:Reason>Every Customer has to have a Phone Number</KistlBase:Reason>
+  </KistlBase:NotNullableConstraint>
   <KistlBase:NotNullableConstraint ExportGuid="d0b1d81b-55fd-4054-8c72-469a81dc7b00">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.427Z</KistlBase:ChangedOn>
     <KistlBase:ConstrainedProperty>e93b3fc2-2fc9-4577-9a93-a51ed2a4190f</KistlBase:ConstrainedProperty>

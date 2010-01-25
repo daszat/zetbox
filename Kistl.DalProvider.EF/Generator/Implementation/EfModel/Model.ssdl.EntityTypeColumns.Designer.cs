@@ -41,7 +41,12 @@ namespace Kistl.DalProvider.EF.Generator.Implementation.EfModel
 		
 		if (p is CompoundObjectProperty)
 		{
-			ApplyEntityTypeColumnDefs(
+
+#line 30 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.ssdl.EntityTypeColumns.cst"
+this.WriteObjects("		\r\n");
+this.WriteObjects("    <Property Name=\"",  Construct.NestedColumnName(p, prefix) , "\" Type=\"bit\" Nullable=\"false\" />\r\n");
+#line 33 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.ssdl.EntityTypeColumns.cst"
+ApplyEntityTypeColumnDefs(
 				((CompoundObjectProperty)p).CompoundObjectDefinition.Properties.Cast<Property>().OrderBy(prop => prop.PropertyName),
 				Construct.NestedColumnName(p, prefix));
 		}
@@ -68,9 +73,9 @@ namespace Kistl.DalProvider.EF.Generator.Implementation.EfModel
 				nullableAttr = String.Format("Nullable=\"{0}\" ", ((Property)p).IsNullable().ToString().ToLowerInvariant());
 			}
 
-#line 57 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.ssdl.EntityTypeColumns.cst"
+#line 60 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.ssdl.EntityTypeColumns.cst"
 this.WriteObjects("    <Property Name=\"",  propertyName , "\" Type=\"",  sqlTypeName , "\" ",  maxLengthAttr , "",  nullableAttr , "/>\r\n");
-#line 59 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.ssdl.EntityTypeColumns.cst"
+#line 62 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.ssdl.EntityTypeColumns.cst"
 }
 	}
 

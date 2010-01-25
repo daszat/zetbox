@@ -2,6 +2,7 @@ using System;
 using Kistl.API;
 using Kistl.API.Server;
 using Kistl.App.Base;
+using Kistl.App.Extensions;
 using Kistl.Server.Generators;
 using Kistl.Server.Generators.Extensions;
 
@@ -29,7 +30,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
         
         public override void Generate()
         {
-#line 17 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\CompoundObjectPropertyTemplate.cst"
+#line 18 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\CompoundObjectPropertyTemplate.cst"
 string backingPropertyName = "_" + name;
 	string backingStoreName = "_" + name + "Store";
 	
@@ -37,7 +38,7 @@ string backingPropertyName = "_" + name;
 	string coImplementationType = coType + Kistl.API.Helper.ImplementationSuffix;
 
 
-#line 24 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\CompoundObjectPropertyTemplate.cst"
+#line 25 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\CompoundObjectPropertyTemplate.cst"
 this.WriteObjects("		// ",  this.GetType() , "\r\n");
 this.WriteObjects("        // implement the user-visible interface\r\n");
 this.WriteObjects("        public ",  coType , " ",  name , "\r\n");
@@ -53,18 +54,33 @@ this.WriteObjects("        /// <summary>backing property for ",  name , ", takes
 this.WriteObjects("        private ",  coImplementationType , " ",  backingPropertyName , " {\r\n");
 this.WriteObjects("            get { return ",  backingStoreName , "; }\r\n");
 this.WriteObjects("            set {\r\n");
+#line 40 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\CompoundObjectPropertyTemplate.cst"
+if(!prop.IsNullable())
+				{
+
+#line 42 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\CompoundObjectPropertyTemplate.cst"
+this.WriteObjects("				            \r\n");
+this.WriteObjects("                if (value == null)\r\n");
+this.WriteObjects("					throw new ArgumentNullException(\"value\");\r\n");
+#line 46 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\CompoundObjectPropertyTemplate.cst"
+}                
+
+#line 48 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\CompoundObjectPropertyTemplate.cst"
 this.WriteObjects("				if (",  backingStoreName , " != null)\r\n");
 this.WriteObjects("				{\r\n");
 this.WriteObjects("	                ",  backingStoreName , ".DetachFromObject(this, \"",  name , "\");\r\n");
 this.WriteObjects("				}\r\n");
 this.WriteObjects("                ",  backingStoreName , " = (",  coImplementationType , ")value;\r\n");
-this.WriteObjects("                ",  backingStoreName , ".AttachToObject(this, \"",  name , "\");\r\n");
+this.WriteObjects("				if (",  backingStoreName , " != null)\r\n");
+this.WriteObjects("				{\r\n");
+this.WriteObjects("	                ",  backingStoreName , ".AttachToObject(this, \"",  name , "\");\r\n");
+this.WriteObjects("	            }\r\n");
 this.WriteObjects("            }\r\n");
 this.WriteObjects("		}\r\n");
-#line 48 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\CompoundObjectPropertyTemplate.cst"
+#line 60 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\CompoundObjectPropertyTemplate.cst"
 AddSerialization(serializationList, backingPropertyName);
 
-#line 49 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\CompoundObjectPropertyTemplate.cst"
+#line 61 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\CompoundObjectPropertyTemplate.cst"
 this.WriteObjects("  ");
 
         }
