@@ -148,6 +148,8 @@ namespace Kistl.Server.Generators
                     Directory.Delete(outputPath, true);
                 }
                 Directory.Move(ApplicationContext.Current.Configuration.Server.CodeGenWorkingPath, outputPath);
+                // Case #1382: Recompile to regenerate PDB's
+                // CompileCode(outputPath);
             }
         }
 

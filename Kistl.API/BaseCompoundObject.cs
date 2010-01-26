@@ -37,7 +37,6 @@ namespace Kistl.API
         }
 
         public virtual bool IsReadonly { get { return ParentObject != null ? ParentObject.IsReadonly : false; } }
-
         #endregion
 
         #region IStreamable Members

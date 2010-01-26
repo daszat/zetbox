@@ -484,7 +484,7 @@ namespace Kistl.App.Test
                     }
                     else
                     {
-						_PhoneNumberMobile = (Kistl.App.Test.TestPhoneCompoundObject__Implementation__)value;
+						_PhoneNumberMobile = (Kistl.App.Test.TestPhoneCompoundObject__Implementation__)value.Clone();
 						_PhoneNumberMobile.AttachToObject(this, "PhoneNumberMobile");
 					}
                     NotifyPropertyChanged("PhoneNumberMobile", "PhoneNumberMobile__Implementation__", __oldValue, value);
@@ -538,7 +538,7 @@ namespace Kistl.App.Test
                     }
                     else
                     {
-						_PhoneNumberOffice = (Kistl.App.Test.TestPhoneCompoundObject__Implementation__)value;
+						_PhoneNumberOffice = (Kistl.App.Test.TestPhoneCompoundObject__Implementation__)value.Clone();
 						_PhoneNumberOffice.AttachToObject(this, "PhoneNumberOffice");
 					}
                     NotifyPropertyChanged("PhoneNumberOffice", "PhoneNumberOffice__Implementation__", __oldValue, value);
@@ -604,8 +604,8 @@ namespace Kistl.App.Test
 
 			me.Birthday = other.Birthday;
 			me.PersonName = other.PersonName;
-			me.PhoneNumberMobile = (Kistl.App.Test.TestPhoneCompoundObject)other.PhoneNumberMobile.Clone();
-			me.PhoneNumberOffice = (Kistl.App.Test.TestPhoneCompoundObject)other.PhoneNumberOffice.Clone();
+			me.PhoneNumberMobile = other.PhoneNumberMobile != null ? (Kistl.App.Test.TestPhoneCompoundObject)other.PhoneNumberMobile.Clone() : null;
+			me.PhoneNumberOffice = other.PhoneNumberOffice != null ? (Kistl.App.Test.TestPhoneCompoundObject)other.PhoneNumberOffice.Clone() : null;
 			this._fk_MubBlah_Nav = otherImpl._fk_MubBlah_Nav;
 			this._fk_MuhBlah_One_Nav = otherImpl._fk_MuhBlah_One_Nav;
 		}
@@ -782,8 +782,8 @@ namespace Kistl.App.Test
             BinarySerializer.ToStream(MubBlah_Nav != null ? MubBlah_Nav.ID : (int?)null, binStream);
             BinarySerializer.ToStream(MuhBlah_One_Nav != null ? MuhBlah_One_Nav.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._PersonName, binStream);
-			BinarySerializer.ToStream(this.PhoneNumberMobile__Implementation__, binStream);
-			BinarySerializer.ToStream(this.PhoneNumberOffice__Implementation__, binStream);
+			BinarySerializer.ToStream(this.PhoneNumberMobile, binStream);
+			BinarySerializer.ToStream(this.PhoneNumberOffice, binStream);
             BinarySerializer.ToStreamCollectionEntries(this.PhoneNumbersOther__Implementation__, binStream);
         }
 

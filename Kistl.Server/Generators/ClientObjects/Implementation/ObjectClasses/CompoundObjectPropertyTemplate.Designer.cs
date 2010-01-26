@@ -31,7 +31,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
         public override void Generate()
         {
 #line 18 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\CompoundObjectPropertyTemplate.cst"
-string backingPropertyName = "_" + name;
+string backingPropertyName = name + Kistl.API.Helper.ImplementationSuffix;
 	string backingStoreName = "_" + name + "Store";
 	
 	string coType = prop.GetPropertyTypeString();
@@ -66,21 +66,22 @@ this.WriteObjects("					throw new ArgumentNullException(\"value\");\r\n");
 }                
 
 #line 48 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\CompoundObjectPropertyTemplate.cst"
-this.WriteObjects("				if (",  backingStoreName , " != null)\r\n");
-this.WriteObjects("				{\r\n");
-this.WriteObjects("	                ",  backingStoreName , ".DetachFromObject(this, \"",  name , "\");\r\n");
-this.WriteObjects("				}\r\n");
-this.WriteObjects("                ",  backingStoreName , " = (",  coImplementationType , ")value;\r\n");
-this.WriteObjects("				if (",  backingStoreName , " != null)\r\n");
-this.WriteObjects("				{\r\n");
-this.WriteObjects("	                ",  backingStoreName , ".AttachToObject(this, \"",  name , "\");\r\n");
-this.WriteObjects("	            }\r\n");
+this.WriteObjects("                var __oldValue = ",  backingStoreName , ";\r\n");
+this.WriteObjects("                var __newValue = value;\r\n");
+this.WriteObjects("\r\n");
+this.WriteObjects("                NotifyPropertyChanging(\"",  name , "\", __oldValue, __newValue);\r\n");
+this.WriteObjects("                \r\n");
+this.WriteObjects("				if (",  backingStoreName , " != null) ",  backingStoreName , ".DetachFromObject(this, \"",  name , "\");\r\n");
+this.WriteObjects("                ",  backingStoreName , " = value != null ? (",  coImplementationType , ")value.Clone() : null;\r\n");
+this.WriteObjects("				if (",  backingStoreName , " != null) ",  backingStoreName , ".AttachToObject(this, \"",  name , "\");\r\n");
+this.WriteObjects("\r\n");
+this.WriteObjects("                NotifyPropertyChanged(\"",  name , "\", __oldValue, __newValue);\r\n");
 this.WriteObjects("            }\r\n");
 this.WriteObjects("		}\r\n");
-#line 60 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\CompoundObjectPropertyTemplate.cst"
-AddSerialization(serializationList, backingPropertyName);
-
 #line 61 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\CompoundObjectPropertyTemplate.cst"
+AddSerialization(serializationList, name);
+
+#line 62 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\CompoundObjectPropertyTemplate.cst"
 this.WriteObjects("  ");
 
         }

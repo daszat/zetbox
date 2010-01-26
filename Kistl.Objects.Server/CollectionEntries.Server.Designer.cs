@@ -3659,7 +3659,7 @@ public TestCustomObject Parent { get { return A; } set { A = value; } }
                     }
                     else
                     {
-						_B = (Kistl.App.Test.TestPhoneCompoundObject__Implementation__)value;
+						_B = (Kistl.App.Test.TestPhoneCompoundObject__Implementation__)value.Clone();
 						_B.AttachToObject(this, "B");
 					}
                     NotifyPropertyChanged("B", "B__Implementation__", __oldValue, value);
@@ -3678,7 +3678,7 @@ public TestCustomObject Parent { get { return A; } set { A = value; } }
             
             base.ToStream(binStream, auxObjects);
             BinarySerializer.ToStream(A != null ? A.ID : (int?)null, binStream);
-			BinarySerializer.ToStream(this.B__Implementation__, binStream);
+			BinarySerializer.ToStream(this.B, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)

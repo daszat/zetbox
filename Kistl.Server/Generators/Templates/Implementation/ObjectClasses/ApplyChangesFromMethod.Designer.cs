@@ -49,7 +49,7 @@ this.WriteObjects("			me.",  prop.PropertyName , " = other.",  prop.PropertyName
 			{
 
 #line 34 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\ApplyChangesFromMethod.cst"
-this.WriteObjects("			me.",  prop.PropertyName , " = (",  prop.GetPropertyTypeString() , ")other.",  prop.PropertyName , ".Clone();\r\n");
+this.WriteObjects("			me.",  prop.PropertyName , " = other.",  prop.PropertyName , " != null ? (",  prop.GetPropertyTypeString() , ")other.",  prop.PropertyName , ".Clone() : null;\r\n");
 #line 36 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\ApplyChangesFromMethod.cst"
 }
 

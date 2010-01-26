@@ -331,6 +331,8 @@ namespace Kistl.Server.SchemaManagement
             Log.InfoFormat("New CompoundObject Property List: {0}", prop.PropertyName);
             string tblName = prop.GetCollectionEntryTable();
             string fkName = "fk_" + prop.ObjectClass.ClassName;
+
+            // TODO: Support neested CompoundObject
             string valPropName = prop.PropertyName;
             string valPropIndexName = prop.PropertyName + "Index";
             string assocName = prop.GetAssociationName();
@@ -339,9 +341,7 @@ namespace Kistl.Server.SchemaManagement
             db.CreateTable(tblName, true);
             db.CreateColumn(tblName, fkName, System.Data.DbType.Int32, 0, false);
 
-            // TODO: Support neested CompoundObject
-            string colName = Construct.NestedColumnName(prop, string.Empty);
-            db.CreateColumn(objClass.TableName, colName, System.Data.DbType.Boolean, 0, false);
+            db.CreateColumn(tblName, valPropName, System.Data.DbType.Boolean, 0, false);
             // TODO: Support neested CompoundObject
             foreach (ValueTypeProperty p in prop.CompoundObjectDefinition.Properties)
             {
@@ -1006,13 +1006,13 @@ namespace Kistl.Server.SchemaManagement
         }
         public void DoNewCompoundObjectProperty(ObjectClass objClass, CompoundObjectProperty sprop, string prefix)
         {
-            string colName = Construct.NestedColumnName(sprop, prefix);
-            Log.InfoFormat("New is null column for CompoundObject Property: '{0}' ('{1}')", sprop.PropertyName, colName);
-            db.CreateColumn(objClass.TableName, colName, System.Data.DbType.Boolean, 0, false);
+            string colName_IsNull = Construct.NestedColumnName(sprop, prefix);
+            Log.InfoFormat("New is null column for CompoundObject Property: '{0}' ('{1}')", sprop.PropertyName, colName_IsNull);
+            db.CreateColumn(objClass.TableName, colName_IsNull, System.Data.DbType.Boolean, 0, false);
 
             foreach (var valProp in sprop.CompoundObjectDefinition.Properties.OfType<ValueTypeProperty>())
             {
-                colName = Construct.NestedColumnName(valProp, prefix);
+                var colName = Construct.NestedColumnName(valProp, colName_IsNull);
                 Log.InfoFormat("New nullable ValueType Property: '{0}' ('{1}')", valProp.PropertyName, colName);
                 db.CreateColumn(objClass.TableName, colName, SchemaManager.GetDbType(valProp),
                     valProp is StringProperty ? ((StringProperty)valProp).GetMaxLength() : 0, valProp.IsNullable());

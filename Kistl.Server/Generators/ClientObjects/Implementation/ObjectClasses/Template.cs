@@ -85,7 +85,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
                 if (prop.IsNullable()) continue;
 
                 string name = prop.PropertyName;
-                string backingName = "_" + name;
+                string backingName = name + Kistl.API.Helper.ImplementationSuffix;
                 string coType = prop.GetPropertyTypeString();
                 string coImplementationType = coType + Kistl.API.Helper.ImplementationSuffix;
                 this.WriteObjects("                ", backingName, " = new ", coImplementationType, "(this, \"", name, "\");");

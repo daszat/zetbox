@@ -88,7 +88,7 @@ this.WriteObjects("						",  backingName , " = new ",  structImplementationType 
 this.WriteObjects("                    }\r\n");
 this.WriteObjects("                    else\r\n");
 this.WriteObjects("                    {\r\n");
-this.WriteObjects("						",  backingName , " = (",  structImplementationType , ")value;\r\n");
+this.WriteObjects("						",  backingName , " = (",  structImplementationType , ")value.Clone();\r\n");
 this.WriteObjects("						",  backingName , ".AttachToObject(this, \"",  name , "\");\r\n");
 this.WriteObjects("					}\r\n");
 this.WriteObjects("                    NotifyPropertyChanged(\"",  name , "\", \"",  efName , "\", __oldValue, value);\r\n");
@@ -98,7 +98,7 @@ this.WriteObjects("        }\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("\r\n");
 #line 80 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\CompoundObjectPropertyTemplate.cst"
-AddSerialization(serializationList, efName);
+AddSerialization(serializationList, name);
 
 #line 81 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\CompoundObjectPropertyTemplate.cst"
 this.WriteObjects("  ");

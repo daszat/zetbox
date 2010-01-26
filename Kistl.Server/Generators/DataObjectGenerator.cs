@@ -14,10 +14,12 @@ namespace Kistl.Server.Generators
     {
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Server.Generator");
 
+        // Case #1382?
         private string codeBasePath = String.Empty;
 
         public virtual void Generate(Kistl.API.IKistlContext ctx, string basePath)
         {
+            // Case #1382?
             codeBasePath = Path.Combine(basePath, TargetNameSpace);
             Directory.CreateDirectory(codeBasePath);
 
@@ -70,6 +72,7 @@ namespace Kistl.Server.Generators
             Log.Info("  Project File");
             string projectFileName = Generate_ProjectFile(ctx, ProjectGuid, generatedFileNames);
 
+            // Case #1382
             this.ProjectFileName = Path.Combine(this.codeBasePath, projectFileName);
         }
 

@@ -15,7 +15,7 @@
 <%@ Parameter Name="name" Type="string" %>
 <%
 
-	string backingPropertyName = "_" + name;
+	string backingPropertyName = name + Kistl.API.Helper.ImplementationSuffix;
 	string backingStoreName = "_" + name + "Store";
 	
 	string coType = prop.GetPropertyTypeString();
@@ -45,17 +45,18 @@
 <%
 				}                
 %>
-				if (<%= backingStoreName %> != null)
-				{
-	                <%= backingStoreName %>.DetachFromObject(this, "<%= name %>");
-				}
-                <%= backingStoreName %> = (<%= coImplementationType %>)value;
-				if (<%= backingStoreName %> != null)
-				{
-	                <%= backingStoreName %>.AttachToObject(this, "<%= name %>");
-	            }
+                var __oldValue = <%= backingStoreName %>;
+                var __newValue = value;
+
+                NotifyPropertyChanging("<%= name %>", __oldValue, __newValue);
+                
+				if (<%= backingStoreName %> != null) <%= backingStoreName %>.DetachFromObject(this, "<%= name %>");
+                <%= backingStoreName %> = value != null ? (<%= coImplementationType %>)value.Clone() : null;
+				if (<%= backingStoreName %> != null) <%= backingStoreName %>.AttachToObject(this, "<%= name %>");
+
+                NotifyPropertyChanged("<%= name %>", __oldValue, __newValue);
             }
 		}
 <%
-        AddSerialization(serializationList, backingPropertyName);
+        AddSerialization(serializationList, name);
 %>  

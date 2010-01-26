@@ -36,7 +36,7 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
         public override void Generate()
         {
 #line 20 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CompoundObjectSerialization.cst"
-string backingName = "_" + memberName;
+string backingName = memberName + Kistl.API.Helper.ImplementationSuffix;
 	
 	if (direction == SerializerDirection.ToStream)
 	{
@@ -51,10 +51,10 @@ this.WriteObjects("			BinarySerializer.ToStream(this.",  memberName , ", ",  str
 #line 31 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CompoundObjectSerialization.cst"
 this.WriteObjects("			{\r\n");
 this.WriteObjects("				// trick compiler into generating correct temporary variable\r\n");
-this.WriteObjects("				var tmp = this.",  memberName , ";\r\n");
+this.WriteObjects("				var tmp = this.",  backingName , ";\r\n");
 this.WriteObjects("				BinarySerializer.FromStream(out tmp, ",  streamName , ");\r\n");
 this.WriteObjects("				// use setter to de-/attach everything correctly\r\n");
-this.WriteObjects("	            this.",  memberName , " = tmp;\r\n");
+this.WriteObjects("	            this.",  backingName , " = tmp;\r\n");
 this.WriteObjects("	        }\r\n");
 #line 39 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CompoundObjectSerialization.cst"
 }
