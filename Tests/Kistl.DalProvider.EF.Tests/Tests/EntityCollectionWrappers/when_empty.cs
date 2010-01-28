@@ -7,16 +7,16 @@ namespace Kistl.DalProvider.EF.Tests.EntityCollectionWrappers
     using System.Text;
 
     using Kistl.API;
-    using Kistl.App.Projekte;
+    using Kistl.App.Base;
 
     using NUnit.Framework;
 
-    [TestFixture]
-    public class when_empty
-        : WrapperFixture
+    [TestFixture(TypeArgs = new[] { typeof(EntityCollectionWrapper<Property, Property__Implementation__>) })]
+    public class when_empty<TWrapper>
+        : WrapperFixture<TWrapper>
+        where TWrapper : EntityCollectionWrapper<Property, Property__Implementation__>
     {
-        protected override void InitCollection() { }
-        protected override void InitWrapper() { }
+        protected override void InitItems() { }
 
         [Test]
         public void should_be_empty()
@@ -54,7 +54,7 @@ namespace Kistl.DalProvider.EF.Tests.EntityCollectionWrappers
                 {
                     if (arrayIndex < length) // only legal calls
                     {
-                        var array = new Projekt[length];
+                        var array = new Property[length];
                         Assert.That(() => wrapper.CopyTo(array, arrayIndex), Throws.Nothing);
                         for (int i = 0; i < length; i++)
                         {

@@ -7,24 +7,21 @@ namespace Kistl.DalProvider.EF.Tests.EntityCollectionWrappers
     using System.Text;
 
     using Kistl.API;
-    using Kistl.App.Projekte;
+    using Kistl.App.Base;
 
     using NUnit.Framework;
 
-    [TestFixture]
-    public class when_having_a_item
-        : WrapperFixture
+    [TestFixture(TypeArgs = new[] { typeof(EntityCollectionWrapper<Property, Property__Implementation__>) })]
+    public class when_having_a_item<TWrapper>
+        : WrapperFixture<TWrapper>
+        where TWrapper : EntityCollectionWrapper<Property, Property__Implementation__>
     {
-        private Projekt__Implementation__ containedItem;
+        private Property__Implementation__ containedItem;
 
-        protected override void InitCollection()
+        protected override void InitItems()
         {
-            containedItem = new Projekt__Implementation__();
+            containedItem = new Property__Implementation__();
             underlyingCollection.Add(containedItem);
-        }
-
-        protected override void InitWrapper()
-        {
         }
 
         [Test]
@@ -71,7 +68,7 @@ namespace Kistl.DalProvider.EF.Tests.EntityCollectionWrappers
                 {
                     if (arrayIndex + 1 < length) // only legal calls
                     {
-                        var array = new Projekt[length];
+                        var array = new Property[length];
                         Assert.That(() => wrapper.CopyTo(array, arrayIndex), Throws.Nothing);
                         Assert.That(array[arrayIndex], Is.SameAs(containedItem));
                     }

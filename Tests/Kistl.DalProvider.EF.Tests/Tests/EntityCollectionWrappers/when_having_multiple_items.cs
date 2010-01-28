@@ -7,29 +7,26 @@ namespace Kistl.DalProvider.EF.Tests.EntityCollectionWrappers
     using System.Text;
 
     using Kistl.API;
-    using Kistl.App.Projekte;
+    using Kistl.App.Base;
 
     using NUnit.Framework;
 
-    [TestFixture]
-    public class when_having_multiple_items
-        : WrapperFixture
+    [TestFixture(TypeArgs = new[] { typeof(EntityCollectionWrapper<Property, Property__Implementation__>) })]
+    public class when_having_multiple_items<TWrapper>
+        : WrapperFixture<TWrapper>
+        where TWrapper : EntityCollectionWrapper<Property, Property__Implementation__>
     {
-        private Projekt__Implementation__[] items;
+        private Property__Implementation__[] items;
 
-        protected override void InitCollection()
+        protected override void InitItems()
         {
             items = new[] { 
-                new Projekt__Implementation__(),
-                new Projekt__Implementation__(),
-                new Projekt__Implementation__(),
-                new Projekt__Implementation__(),
-                new Projekt__Implementation__() };
+                new Property__Implementation__(),
+                new Property__Implementation__(),
+                new Property__Implementation__(),
+                new Property__Implementation__(),
+                new Property__Implementation__() };
             underlyingCollection.AddRange(items);
-        }
-
-        protected override void InitWrapper()
-        {
         }
 
         [Test]
@@ -68,9 +65,9 @@ namespace Kistl.DalProvider.EF.Tests.EntityCollectionWrappers
                 {
                     if (arrayIndex + items.Length < length) // only legal calls
                     {
-                        var array = new Projekt[length];
+                        var array = new Property[length];
                         Assert.That(() => wrapper.CopyTo(array, arrayIndex), Throws.Nothing);
-                        var results = new Projekt[items.Length];
+                        var results = new Property[items.Length];
                         Array.Copy(array, arrayIndex, results, 0, results.Length);
                         Assert.That(results.OrderBy(o => o.GetHashCode()), Is.EquivalentTo(items.OrderBy(o => o.GetHashCode())));
                     }

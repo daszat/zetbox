@@ -7,33 +7,35 @@ namespace Kistl.DalProvider.EF.Tests.EntityCollectionWrappers
     using System.Text;
 
     using Kistl.API;
-    using Kistl.App.Projekte;
+    using Kistl.App.Base;
 
     using NUnit.Framework;
 
-    [TestFixture]
-    public abstract class WrapperFixture
+    public abstract class WrapperFixture<TWrapper>
+        where TWrapper : EntityCollectionWrapper<Property, Property__Implementation__>
     {
-        protected List<Projekt__Implementation__> underlyingCollection;
-        protected EntityCollectionWrapper<Projekt, Projekt__Implementation__> wrapper;
+        protected List<Property__Implementation__> underlyingCollection;
+        protected TWrapper wrapper;
 
         /// <summary>
         /// Is called before each test to initialize the new collection before passing it to the wrapper
         /// </summary>
-        protected abstract void InitCollection();
+        protected abstract void InitItems();
 
         /// <summary>
-        /// Is called before each test to initialize the new wrapper fixture
+        /// Is called before each test to create the new wrapper fixture from the <see cref="underlyingCollection"/>
         /// </summary>
-        protected abstract void InitWrapper();
+        protected virtual TWrapper CreateWrapper()
+        {
+            return (TWrapper)new EntityCollectionWrapper<Property, Property__Implementation__>(null, underlyingCollection);
+        }
 
         [SetUp]
         public void Setup()
         {
-            underlyingCollection = new List<Projekt__Implementation__>();
-            InitCollection();
-            wrapper = new EntityCollectionWrapper<Projekt, Projekt__Implementation__>(null, underlyingCollection);
-            InitWrapper();
+            underlyingCollection = new List<Property__Implementation__>();
+            InitItems();
+            wrapper = CreateWrapper();
         }
 
         [Test]
@@ -52,7 +54,7 @@ namespace Kistl.DalProvider.EF.Tests.EntityCollectionWrappers
         public void should_add_item()
         {
             var originalList = underlyingCollection.ToList();
-            var item = new Projekt__Implementation__();
+            var item = new Property__Implementation__();
 
             wrapper.Add(item);
             originalList.Add(item);
@@ -72,7 +74,7 @@ namespace Kistl.DalProvider.EF.Tests.EntityCollectionWrappers
         [Test]
         public void should_return_false_on_contains_otherItem()
         {
-            var item = new Projekt__Implementation__();
+            var item = new Property__Implementation__();
             Assert.That(wrapper.Contains(item), Is.False);
         }
 
@@ -85,13 +87,13 @@ namespace Kistl.DalProvider.EF.Tests.EntityCollectionWrappers
         [Test]
         public void copyTo_should_check_for_negative_index()
         {
-            Assert.That(() => wrapper.CopyTo(new Projekt[10], -11), Throws.InstanceOf(typeof(ArgumentOutOfRangeException)));
+            Assert.That(() => wrapper.CopyTo(new Property[10], -11), Throws.InstanceOf(typeof(ArgumentOutOfRangeException)));
         }
 
         [Test]
         public void copyTo_should_check_for_overflow()
         {
-            var array = new Projekt[10];
+            var array = new Property[10];
             Assert.That(() => wrapper.CopyTo(array, array.Length), Throws.InstanceOf(typeof(ArgumentException)));
             Assert.That(() => wrapper.CopyTo(array, array.Length + 10), Throws.InstanceOf(typeof(ArgumentException)));
         }
@@ -99,7 +101,7 @@ namespace Kistl.DalProvider.EF.Tests.EntityCollectionWrappers
         [Test]
         public void should_return_false_on_remove_other_item()
         {
-            var item = new Projekt__Implementation__();
+            var item = new Property__Implementation__();
             Assert.That(wrapper.Remove(item), Is.False);
         }
     }
