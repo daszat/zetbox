@@ -1,1 +1,14 @@
-set-executionpolicy -executionPolicy RemoteSigned
+Due to major paranoia around executing powershell scripts, the execution policy
+has to be changed before being able to build the solution.
+
+This can be done either with 
+
+  set-executionpolicy -executionPolicy RemoteSigned
+
+in a powershell runing as administrator or by merging one or both of
+
+  powershell.executionpolicy.reg
+  powershell.executionpolicy.wow6432.reg
+
+depending on the bit-ness of your windows and the bit-ness of the shell your
+want to use.

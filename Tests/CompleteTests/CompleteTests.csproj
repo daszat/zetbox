@@ -118,7 +118,11 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>powershell -command $(SolutionDir)gendarmeXML.ps1 -SolutionDir:$(SolutionDir)
+    <PostBuildEvent>echo *************************************************************
+echo **** Read gendarme-powershell-policy.txt if this errors! ****
+echo *************************************************************
+
+powershell -command $(SolutionDir)gendarmeXML.ps1 -SolutionDir:$(SolutionDir)
 type $(SolutionDir)bin\gendarme.txt</PostBuildEvent>
   </PropertyGroup>
 </Project>
