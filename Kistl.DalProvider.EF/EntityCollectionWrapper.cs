@@ -260,7 +260,6 @@ namespace Kistl.DalProvider.EF
         public void RemoveAt(int index)
         {
             TInterface item = _orderedItems[index];
-            if (item == null) throw new IndexOutOfRangeException(String.Format("Index [{0}] not found in collection", index));
             base.Remove(item);
         }
 
@@ -269,13 +268,11 @@ namespace Kistl.DalProvider.EF
             get
             {
                 TInterface i = _orderedItems[index];
-                if (i == null) throw new IndexOutOfRangeException(String.Format("Index {0} not found in collection", index));
                 return i;
             }
             set
             {
                 TInterface i = _orderedItems[index];
-                if (i == null) throw new IndexOutOfRangeException(String.Format("Index {0} not found in collection", index));
 
                 if (i != value)
                 {
