@@ -3305,6 +3305,7 @@ public string Value { get { return B; } set { B = value; } }
 			var other = (Kunde_EMails_CollectionEntry__Implementation__)obj;
 			var me = (Kunde_EMails_CollectionEntry__Implementation__)this;
 			
+            me._fk_A = other._fk_A;
             me.B = other.B;
 		}		
 		
@@ -3514,6 +3515,7 @@ public string Value { get { return B; } set { B = value; } }
 			var other = (ObjectClass_SecurityRules_CollectionEntry__Implementation__)obj;
 			var me = (ObjectClass_SecurityRules_CollectionEntry__Implementation__)this;
 			
+            me._fk_A = other._fk_A;
             me.B = other.B;
 		}		
 		
@@ -3736,6 +3738,7 @@ public TestCustomObject Parent { get { return A; } set { A = value; } }
 			var other = (TestCustomObject_PhoneNumbersOther_CollectionEntry__Implementation__)obj;
 			var me = (TestCustomObject_PhoneNumbersOther_CollectionEntry__Implementation__)this;
 			
+            me._fk_A = other._fk_A;
             me.B = other.B;
 		}		
 		

@@ -55,6 +55,7 @@ namespace Kistl.Server.Generators.Templates.Implementation.CollectionEntries
 
         protected override void ApplyChangesFromBody()
         {
+            this.WriteLine("            me._fk_A = other._fk_A;");
             if (IsOrdered())
             {
                 this.WriteLine("            me.AIndex = other.AIndex;");

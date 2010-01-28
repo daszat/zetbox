@@ -44,7 +44,7 @@ namespace Kistl.API.AbstractConsumerTests.one_to_N_relations
                     method.Parameter.Add(p);
                 }
 
-                ctx.SubmitChanges();
+                Assert.That(ctx.SubmitChanges(), Is.GreaterThan(0));
             }
 
             using (IKistlContext ctx = GetContext())

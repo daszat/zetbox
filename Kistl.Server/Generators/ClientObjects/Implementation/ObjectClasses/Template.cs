@@ -61,6 +61,13 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
             this.WriteLine("        // CompoundObject property");
             Implementation.ObjectClasses.CompoundObjectPropertyTemplate.Call(Host, ctx, MembersToSerialize, prop, prop.PropertyName);
         }
+        protected override void ApplyCompoundObjectListTemplate(CompoundObjectProperty prop)
+        {
+            this.WriteLine("        // CompoundObject list property");
+            Implementation.ObjectClasses.ValueCollectionProperty.Call(Host, ctx,
+                this.MembersToSerialize,
+                prop);
+        }
 
         protected override void ApplyObjectListPropertyTemplate(Relation rel, RelationEndRole endRole)
         {

@@ -22,5 +22,12 @@
 			_<%= prop.PropertyName %>.ForEach<IValueCollectionEntry>(i => ctx.Attach(i));
 <%
 			}
+
+			foreach(var prop in cls.Properties.OfType<CompoundObjectProperty>().Where(p => p.IsList).OrderBy(p => p.PropertyName))
+			{
+%>
+			_<%= prop.PropertyName %>.ForEach<IValueCollectionEntry>(i => ctx.Attach(i));
+<%
+			}
 %>
 		}

@@ -66,6 +66,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Tests\BinarySerializers\should_work_with_ICompoundObjects.cs" />
+    <Compile Include="Tests\CompoundObjects\when_changing_a_compoundobject_list.cs" />
     <Compile Include="Tests\CompoundObjects\when_changing.cs" />
     <Compile Include="Tests\CompoundObjects\when_roundtrip.cs" />
     <Compile Include="Tests\GetListTests.cs" />

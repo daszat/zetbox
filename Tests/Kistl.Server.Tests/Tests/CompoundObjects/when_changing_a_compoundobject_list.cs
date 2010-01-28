@@ -13,8 +13,8 @@ using Autofac;
 namespace Kistl.Server.Tests.CompoundObjects
 {
     [TestFixture]
-    public class when_changing_a_compoundobject_member
-        : Kistl.API.AbstractConsumerTests.CompoundObjects.when_changing_a_compoundobject_member
+    public class when_changing_a_compoundobject_list
+        : Kistl.API.AbstractConsumerTests.CompoundObjects.when_changing_a_compoundobject_list
     {
         private IContainer container;
         private IContainer GetContainer()

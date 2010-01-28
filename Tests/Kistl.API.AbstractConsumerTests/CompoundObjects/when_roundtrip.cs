@@ -9,15 +9,6 @@ namespace Kistl.API.AbstractConsumerTests.CompoundObjects
 {
     public abstract class when_roundtrip : CompoundObjectFixture
     {
-        Random rnd = new Random();
-        string number;
-
-        [SetUp]
-        public void SetUp()
-        {
-            number = rnd.Next().ToString();
-        }
-
         [Test]
         public void should_getobject()
         {
@@ -46,10 +37,10 @@ namespace Kistl.API.AbstractConsumerTests.CompoundObjects
 
                 obj.PhoneNumberMobile = ctx.CreateCompoundObject<TestPhoneCompoundObject>();
                 obj.PhoneNumberMobile.AreaCode = "1";
-                obj.PhoneNumberMobile.Number = number;
+                obj.PhoneNumberMobile.Number = testNumber;
 
                 obj.PhoneNumberOffice.AreaCode = "1";
-                obj.PhoneNumberOffice.Number = number;
+                obj.PhoneNumberOffice.Number = testNumber;
 
                 Assert.That(ctx.SubmitChanges(), Is.EqualTo(1));
 
@@ -62,8 +53,8 @@ namespace Kistl.API.AbstractConsumerTests.CompoundObjects
                 Assert.That(obj, Is.Not.Null);
                 Assert.That(obj.PhoneNumberMobile, Is.Not.Null);
                 Assert.That(obj.PhoneNumberOffice, Is.Not.Null);
-                Assert.That(obj.PhoneNumberMobile.Number, Is.EqualTo(number));
-                Assert.That(obj.PhoneNumberOffice.Number, Is.EqualTo(number));
+                Assert.That(obj.PhoneNumberMobile.Number, Is.EqualTo(testNumber));
+                Assert.That(obj.PhoneNumberOffice.Number, Is.EqualTo(testNumber));
             }
         }
 
@@ -81,7 +72,7 @@ namespace Kistl.API.AbstractConsumerTests.CompoundObjects
                 Assert.That(obj.PhoneNumberOffice, Is.Not.Null);
 
                 obj.PhoneNumberOffice.AreaCode = "2";
-                obj.PhoneNumberOffice.Number = number;
+                obj.PhoneNumberOffice.Number = testNumber;
 
                 Assert.That(ctx.SubmitChanges(), Is.EqualTo(1));
 
@@ -94,7 +85,7 @@ namespace Kistl.API.AbstractConsumerTests.CompoundObjects
                 Assert.That(obj, Is.Not.Null);
                 Assert.That(obj.PhoneNumberMobile, Is.Null);
                 Assert.That(obj.PhoneNumberOffice, Is.Not.Null);
-                Assert.That(obj.PhoneNumberOffice.Number, Is.EqualTo(number));
+                Assert.That(obj.PhoneNumberOffice.Number, Is.EqualTo(testNumber));
             }
         }
 
@@ -110,11 +101,11 @@ namespace Kistl.API.AbstractConsumerTests.CompoundObjects
                 obj.PersonName = "TestPerson " + rnd.Next();
                 obj.Birthday = DateTime.Now;
 
-                obj.PhoneNumberMobile.AreaCode = number + "am";
-                obj.PhoneNumberMobile.Number = number + "nm";
+                obj.PhoneNumberMobile.AreaCode = testNumber + "am";
+                obj.PhoneNumberMobile.Number = testNumber + "nm";
 
-                obj.PhoneNumberOffice.AreaCode = number + "ao";
-                obj.PhoneNumberOffice.Number = number + "no";
+                obj.PhoneNumberOffice.AreaCode = testNumber + "ao";
+                obj.PhoneNumberOffice.Number = testNumber + "no";
 
                 Assert.That(ctx.SubmitChanges(), Is.GreaterThan(0), "no changes were submitted");
 
@@ -127,10 +118,10 @@ namespace Kistl.API.AbstractConsumerTests.CompoundObjects
                 Assert.That(obj, Is.Not.Null);
                 Assert.That(obj.PhoneNumberMobile, Is.Not.Null);
                 Assert.That(obj.PhoneNumberOffice, Is.Not.Null);
-                Assert.That(obj.PhoneNumberMobile.AreaCode, Is.EqualTo(number + "am"));
-                Assert.That(obj.PhoneNumberOffice.AreaCode, Is.EqualTo(number + "ao"));
-                Assert.That(obj.PhoneNumberMobile.Number, Is.EqualTo(number + "nm"));
-                Assert.That(obj.PhoneNumberOffice.Number, Is.EqualTo(number + "no"));
+                Assert.That(obj.PhoneNumberMobile.AreaCode, Is.EqualTo(testNumber + "am"));
+                Assert.That(obj.PhoneNumberOffice.AreaCode, Is.EqualTo(testNumber + "ao"));
+                Assert.That(obj.PhoneNumberMobile.Number, Is.EqualTo(testNumber + "nm"));
+                Assert.That(obj.PhoneNumberOffice.Number, Is.EqualTo(testNumber + "no"));
             }
         }
 
@@ -140,7 +131,7 @@ namespace Kistl.API.AbstractConsumerTests.CompoundObjects
             Assert.That(obj.PhoneNumberMobile, Is.Not.Null);
             obj.PhoneNumberMobile = null;
             Assert.That(obj.PhoneNumberMobile, Is.Null);
-            ctx.SubmitChanges();
+            Assert.That(ctx.SubmitChanges(), Is.GreaterThan(0));
             Assert.That(obj.PhoneNumberMobile, Is.Null);
 
             using (var testCtx = GetContext())
@@ -148,6 +139,89 @@ namespace Kistl.API.AbstractConsumerTests.CompoundObjects
                 var testObj = testCtx.GetQuery<TestCustomObject>().First(i => i.ID == obj.ID);
                 Assert.That(testObj.ID == obj.ID);
                 Assert.That(testObj.PhoneNumberMobile, Is.Null);
+            }
+        }
+
+        [Test]
+        public void should_add_to_list()
+        {
+            Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.Unmodified));
+            Assert.That(obj.PhoneNumbersOther.Count, Is.GreaterThanOrEqualTo(MINLISTCOUNT));
+            int count = obj.PhoneNumbersOther.Count;
+
+            var c = ctx.CreateCompoundObject<TestPhoneCompoundObject>();
+            c.AreaCode = "123";
+            c.Number = testNumber;
+            obj.PhoneNumbersOther.Add(c);
+
+            Assert.That(obj.PhoneNumbersOther.Count, Is.EqualTo(count + 1));
+            Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.Unmodified));
+
+            Assert.That(ctx.SubmitChanges(), Is.GreaterThan(0));
+
+            Assert.That(obj.PhoneNumbersOther.Count, Is.EqualTo(count + 1));
+            Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.Unmodified));
+
+            using (var testCtx = GetContext())
+            {
+                var testObj = testCtx.GetQuery<TestCustomObject>().First(i => i.ID == obj.ID);
+                Assert.That(testObj.ID == obj.ID);
+                Assert.That(obj.PhoneNumbersOther.Count, Is.EqualTo(count + 1));
+                Assert.That(obj.PhoneNumbersOther.Count(i => i.Number == testNumber), Is.EqualTo(1));
+            }
+        }
+
+        [Test]
+        public void should_remove_from_list()
+        {
+            Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.Unmodified));
+            Assert.That(obj.PhoneNumbersOther.Count, Is.GreaterThanOrEqualTo(MINLISTCOUNT));
+            int count = obj.PhoneNumbersOther.Count;
+
+            var c = obj.PhoneNumbersOther.Skip(2).First();
+            obj.PhoneNumbersOther.Remove(c);
+
+            Assert.That(obj.PhoneNumbersOther.Count, Is.EqualTo(count - 1));
+            Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.Unmodified));
+
+            Assert.That(ctx.SubmitChanges(), Is.GreaterThan(0));
+
+            Assert.That(obj.PhoneNumbersOther.Count, Is.EqualTo(count - 1));
+            Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.Unmodified));
+
+            using (var testCtx = GetContext())
+            {
+                var testObj = testCtx.GetQuery<TestCustomObject>().First(i => i.ID == obj.ID);
+                Assert.That(testObj.ID == obj.ID);
+                Assert.That(obj.PhoneNumbersOther.Count, Is.EqualTo(count - 1));
+                Assert.That(obj.PhoneNumbersOther.Count(i => i.Number == testNumber), Is.EqualTo(0));
+            }
+        }
+
+        [Test]
+        public void should_change_a_list()
+        {
+            Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.Unmodified));
+            Assert.That(obj.PhoneNumbersOther.Count, Is.GreaterThanOrEqualTo(MINLISTCOUNT));
+            int count = obj.PhoneNumbersOther.Count;
+
+            var c = obj.PhoneNumbersOther.Skip(2).First();
+            c.Number = testNumber;
+
+            Assert.That(obj.PhoneNumbersOther.Count, Is.EqualTo(count));
+            Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.Unmodified));
+
+            Assert.That(ctx.SubmitChanges(), Is.GreaterThan(0));
+
+            Assert.That(obj.PhoneNumbersOther.Count, Is.EqualTo(count));
+            Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.Unmodified));
+
+            using (var testCtx = GetContext())
+            {
+                var testObj = testCtx.GetQuery<TestCustomObject>().First(i => i.ID == obj.ID);
+                Assert.That(testObj.ID == obj.ID);
+                Assert.That(obj.PhoneNumbersOther.Count, Is.EqualTo(count));
+                Assert.That(obj.PhoneNumbersOther.Count(i => i.Number == testNumber), Is.EqualTo(1));
             }
         }
     }

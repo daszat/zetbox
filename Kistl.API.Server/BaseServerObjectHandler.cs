@@ -171,7 +171,7 @@ namespace Kistl.API.Server
                 var ctxObj = ctx.FindPersistenceObject(obj.GetInterfaceType(), obj.ID);
                 ((BasePersistenceObject)ctxObj).RecordNotifications();
                 ctxObj.ApplyChangesFrom(obj);
-                entityObjects[obj] = obj;
+                entityObjects[ctxObj] = ctxObj;
             }
 
             // then update references
@@ -180,7 +180,7 @@ namespace Kistl.API.Server
                 var ctxObj = ctx.FindPersistenceObject(obj.GetInterfaceType(), obj.ID);
                 ((BasePersistenceObject)ctxObj).RecordNotifications();
                 ctxObj.ReloadReferences();
-                entityObjects[obj] = obj;
+                entityObjects[ctxObj] = ctxObj;
             }
 
             // then delete objects

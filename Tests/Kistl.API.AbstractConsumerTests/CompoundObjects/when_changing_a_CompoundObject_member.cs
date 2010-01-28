@@ -13,22 +13,9 @@ using NUnit.Framework;
 namespace Kistl.API.AbstractConsumerTests.CompoundObjects
 {
 
-    public abstract class when_changing_a_CompoundObject_member
+    public abstract class when_changing_a_compoundobject_member
         : CompoundObjectFixture
     {
-        Random rnd = new Random();
-        string testNumber;
-
-        [SetUp]
-        public void InitTestValue()
-        {
-            testNumber = rnd.NextDouble().ToString(CultureInfo.InvariantCulture);
-            if (testNumber == obj.PhoneNumberOffice.Number)
-            {
-                testNumber += rnd.NextDouble().ToString(CultureInfo.InvariantCulture);
-            }
-        }
-
         private void TestChangeNotification<TNOTIFIER>(TNOTIFIER notifier, string expectedPropertyName)
             where TNOTIFIER : INotifyPropertyChanging, INotifyPropertyChanged
         {

@@ -57,6 +57,7 @@
     <Compile Include="SetUp.cs" />
     <Compile Include="Tests\BinarySerializers\should_work_with_IStructs.cs" />
     <Compile Include="Tests\CompoundObjects\when_changing.cs" />
+    <Compile Include="Tests\CompoundObjects\when_changing_a_compoundobject_list.cs" />
     <Compile Include="Tests\CompoundObjects\when_changing_a_CompoundObject_member.cs" />
     <Compile Include="Tests\CompoundObjects\when_initialized.cs" />
     <Compile Include="Tests\CompoundObjects\when_roundtrip.cs" />

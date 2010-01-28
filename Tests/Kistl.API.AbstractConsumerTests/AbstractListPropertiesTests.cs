@@ -166,8 +166,7 @@ namespace Kistl.API.AbstractConsumerTests
                 ID = k.ID;
                 k.EMails.Add(mail);
                 Assert.That(mail, Is.Not.EqualTo(String.Empty));
-                int submitCount = ctx.SubmitChanges();
-                Assert.That(submitCount, Is.GreaterThan(0));
+                Assert.That(ctx.SubmitChanges(), Is.GreaterThan(0));
             }
 
             using (IKistlContext ctx = GetContext())
@@ -200,8 +199,7 @@ namespace Kistl.API.AbstractConsumerTests
                     }
                 }
                 Assert.That(mail, Is.Not.EqualTo(String.Empty));
-                int submitCount = ctx.SubmitChanges();
-                Assert.That(submitCount, Is.GreaterThan(0));
+                Assert.That(ctx.SubmitChanges(), Is.GreaterThan(0));
             }
 
             using (IKistlContext ctx = GetContext())
@@ -234,8 +232,7 @@ namespace Kistl.API.AbstractConsumerTests
                         break;
                     }
                 }
-                int submitCount = ctx.SubmitChanges();
-                Assert.That(submitCount, Is.GreaterThan(0));
+                Assert.That(ctx.SubmitChanges(), Is.GreaterThan(0));
             }
 
             using (IKistlContext ctx = GetContext())

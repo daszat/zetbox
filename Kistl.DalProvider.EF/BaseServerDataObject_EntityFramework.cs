@@ -17,8 +17,14 @@ namespace Kistl.DalProvider.EF
         System.Data.EntityState EntityState { get; }
     }
 
+    internal interface IEntityFrameworkNotifyingObject
+    {
+        void NotifyPropertyChanged(string property, string efProperty, object oldValue, object newValue);
+        void NotifyPropertyChanging(string property, string efProperty, object oldValue, object newValue);
+    }
+
     public abstract class BaseServerDataObject_EntityFramework
-        : BaseServerDataObject, IEntityWithKey, IEntityWithRelationships, IEntityWithChangeTracker, IEntityStateObject
+        : BaseServerDataObject, IEntityWithKey, IEntityWithRelationships, IEntityWithChangeTracker, IEntityStateObject, IEntityFrameworkNotifyingObject
     {
         public override DataObjectState ObjectState
         {
@@ -175,7 +181,7 @@ namespace Kistl.DalProvider.EF
     }
 
     public abstract class BaseServerCollectionEntry_EntityFramework
-        : BaseServerCollectionEntry, IEntityWithKey, IEntityWithRelationships, IEntityWithChangeTracker, IEntityStateObject
+        : BaseServerCollectionEntry, IEntityWithKey, IEntityWithRelationships, IEntityWithChangeTracker, IEntityStateObject, IEntityFrameworkNotifyingObject
     {
         public override DataObjectState ObjectState
         {
@@ -364,16 +370,20 @@ namespace Kistl.DalProvider.EF
         {
             base.OnPropertyChanging(property, oldValue, newValue);
             if (ParentObject != null)
-                (ParentObject as BaseServerDataObject_EntityFramework)
+            {
+                ((IEntityFrameworkNotifyingObject)ParentObject)
                     .NotifyPropertyChanging(this.ParentProperty, this.ParentProperty + Kistl.API.Helper.ImplementationSuffix, null, null);
+            }
         }
 
         protected override void OnPropertyChanged(string property, object oldValue, object newValue)
         {
             base.OnPropertyChanged(property, oldValue, newValue);
             if (ParentObject != null)
-                (ParentObject as BaseServerDataObject_EntityFramework)
+            {
+                ((IEntityFrameworkNotifyingObject)ParentObject)
                     .NotifyPropertyChanged(this.ParentProperty, this.ParentProperty + Kistl.API.Helper.ImplementationSuffix, null, null);
+            }
         }
 
     }
