@@ -19,5 +19,4 @@ namespace Kistl.DalProvider.EF.Tests.one_to_N_relations
             return KistlContext.GetContext();
         }
     }
-
 }

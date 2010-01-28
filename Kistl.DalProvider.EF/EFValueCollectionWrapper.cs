@@ -1,12 +1,15 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Kistl.API;
 
 namespace Kistl.DalProvider.EF
 {
-    public class EFValueCollectionWrapper<TParent, TValue, TEntry, TEntryCollection> : ValueCollectionWrapper<TParent, TValue, TEntry, TEntryCollection>
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+ 
+    using Kistl.API;
+    
+    public class EFValueCollectionWrapper<TParent, TValue, TEntry, TEntryCollection> 
+        : ValueCollectionWrapper<TParent, TValue, TEntry, TEntryCollection>
         where TParent : IDataObject
         where TEntry : class, IValueCollectionEntry<TParent, TValue>
         where TEntryCollection : ICollection<TEntry>
@@ -17,7 +20,8 @@ namespace Kistl.DalProvider.EF
         }
     }
 
-    public class EFValueListWrapper<TParent, TValue, TEntry, TEntryCollection> : ValueListWrapper<TParent, TValue, TEntry, TEntryCollection>
+    public class EFValueListWrapper<TParent, TValue, TEntry, TEntryCollection> 
+        : ValueListWrapper<TParent, TValue, TEntry, TEntryCollection>
         where TParent : IDataObject
         where TEntry : class, IValueListEntry<TParent, TValue>
         where TEntryCollection : IList<TEntry>

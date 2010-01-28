@@ -1,14 +1,13 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Data.Objects.DataClasses;
-using System.Linq;
-using System.Text;
-
-using Kistl.API;
-
 namespace Kistl.DalProvider.EF
 {
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Data.Objects.DataClasses;
+    using System.Linq;
+    using System.Text;
+
+    using Kistl.API;
 
     public sealed class EntityRelationASideCollectionWrapper<TA, TB, TEntry>
         : RelationASideCollectionWrapper<TA, TB, TEntry, EntityCollection<TEntry>>
@@ -102,5 +101,4 @@ namespace Kistl.DalProvider.EF
             base.OnEntryRemoved(entry);
         }
     }
-
 }

@@ -1,17 +1,18 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Kistl.API;
-using Kistl.App.Base;
-using Kistl.App.Projekte;
-
-using NUnit.Framework;
 
 namespace Kistl.API.AbstractConsumerTests
 {
-    public abstract class AbstractReadonlyListPropertiesTests 
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+
+    using Kistl.API;
+    using Kistl.App.Base;
+    using Kistl.App.Projekte;
+
+    using NUnit.Framework;
+
+    public abstract class AbstractReadonlyListPropertiesTests
         : ProjectDataFixture
     {
         [Test]
@@ -153,7 +154,6 @@ namespace Kistl.API.AbstractConsumerTests
 
     public abstract class AbstractListPropertiesTests : AbstractReadonlyListPropertiesTests
     {
-
         [Test]
         public void AddStringListPropertyContent()
         {
@@ -180,7 +180,6 @@ namespace Kistl.API.AbstractConsumerTests
         }
 
         [Test]
-        [Ignore("Set IsSorted on Kunde.EMails")]
         public void UpdateStringListPropertyContent()
         {
             int ID = Kistl.API.Helper.INVALIDID;
@@ -188,16 +187,22 @@ namespace Kistl.API.AbstractConsumerTests
             using (IKistlContext ctx = GetContext())
             {
                 var list = ctx.GetQuery<Kunde>();
+                bool set = false;
                 foreach (Kunde k in list)
                 {
                     if (k.EMails.Count > 0)
                     {
                         mail = "UnitTest" + DateTime.Now + "@example.com";
+                        // TODO: Set IsSorted on Kunde.EMails
                         //k.EMails[0] = mail;
+                        k.EMails.Clear();
+                        k.EMails.Add(mail);
                         ID = k.ID;
+                        set = true;
                         break;
                     }
                 }
+                Assert.That(set, "No usable test object found");
                 Assert.That(mail, Is.Not.EqualTo(String.Empty));
                 Assert.That(ctx.SubmitChanges(), Is.GreaterThan(0));
             }
@@ -246,6 +251,5 @@ namespace Kistl.API.AbstractConsumerTests
                 Assert.That(result, Is.Null);
             }
         }
-
     }
 }

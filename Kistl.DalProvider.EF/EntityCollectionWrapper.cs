@@ -1,26 +1,32 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Data.Objects.DataClasses;
-using System.Linq;
-using System.Text;
-
-using Kistl.API;
-using Kistl.DalProvider.EF;
 
 namespace Kistl.DalProvider.EF
 {
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Data.Objects.DataClasses;
+    using System.Diagnostics;
+    using System.Linq;
+    using System.Text;
+
+    using Kistl.API;
+
     /// <summary>
     /// Wraps 1:N Relation, which EF provides via a EntityCollection
     /// </summary>
     public class EntityCollectionWrapper<TInterface, TImpl> : ICollection<TInterface>, ICollection
-        where TImpl : class, System.Data.Objects.DataClasses.IEntityWithRelationships, TInterface, IDataObject
         where TInterface : class, IDataObject
+        where TImpl : class, System.Data.Objects.DataClasses.IEntityWithRelationships, TInterface, IDataObject
     {
-        protected EntityCollection<TImpl> underlyingCollection;
+        protected ICollection<TImpl> underlyingCollection;
         protected IKistlContext ctx;
 
-        public EntityCollectionWrapper(IKistlContext ctx, EntityCollection<TImpl> ec)
+        /// <summary>
+        /// Initializes a new instance of the EntityCollectionWrapper class using the specified context and <see cref="EntityCollection{TImpl}"/>
+        /// </summary>
+        /// <param name="ctx">the parent data context (optional)</param>
+        /// <param name="ec">the <see cref="EntityCollection{TImpl}"/> that should be wrapped</param>
+        public EntityCollectionWrapper(IKistlContext ctx, ICollection<TImpl> ec)
         {
             if (ec == null) { throw new ArgumentNullException("ec"); }
 
@@ -68,6 +74,18 @@ namespace Kistl.DalProvider.EF
         public virtual void CopyTo(TInterface[] array, int arrayIndex)
         {
             if (array == null) { throw new ArgumentNullException("array"); }
+            if (arrayIndex < 0) { throw new ArgumentOutOfRangeException("arrayIndex", "arrayIndex must be non-negative"); }
+            if (arrayIndex >= array.Length)
+            {
+                var msg = String.Format("arrayIndex={0} must be less than array.Length={1}", arrayIndex, array.Length);
+                throw new ArgumentOutOfRangeException("arrayIndex", msg);
+            }
+
+            if (arrayIndex + underlyingCollection.Count > array.Length)
+            {
+                var msg = String.Format("items do not fit idx={0} + #item={1} >= len={2}", arrayIndex, underlyingCollection.Count, array.Length);
+                throw new ArgumentOutOfRangeException("arrayIndex", msg);
+            }
 
             foreach (TInterface i in GetEnumerable())
             {
@@ -134,40 +152,55 @@ namespace Kistl.DalProvider.EF
         where TImpl : class, System.Data.Objects.DataClasses.IEntityWithRelationships, TInterface, IDataObject
         where TInterface : class, IDataObject
     {
-        private string _pointerProperty = String.Empty;
+        private readonly string _pointerProperty;
+        private List<TImpl> _orderedItems;
 
-        public EntityListWrapper(IKistlContext ctx, EntityCollection<TImpl> ec, string pointerProperty)
+        public EntityListWrapper(IKistlContext ctx, ICollection<TImpl> ec, string pointerProperty)
             : base(ctx, ec)
         {
+            if (String.IsNullOrEmpty(pointerProperty)) { throw new ArgumentOutOfRangeException("pointerProperty"); }
+
             _pointerProperty = pointerProperty;
+            ResetOrderedItems();
+        }
+
+        private void ResetOrderedItems()
+        {
+            _orderedItems = new List<TImpl>(underlyingCollection.OrderBy(item => GetIndexProperty(item) ?? Kistl.API.Helper.LASTINDEXPOSITION));
+            FixIndices();
+        }
+
+        /// <summary>
+        /// Assure that all indices are strictly monotonous rising (i.e. n.Index &lt; (n+1).Index) according to their order in <see cref="_orderedItems"/>.
+        /// </summary>
+        private void FixIndices()
+        {
+            int maxIdx = -1;
+            for (int i = 0; i < _orderedItems.Count; i++)
+            {
+                var item = _orderedItems[i];
+                int? idx = GetIndexProperty(item);
+                if (!idx.HasValue || idx <= maxIdx || idx == Kistl.API.Helper.LASTINDEXPOSITION)
+                {
+                    idx = maxIdx + 1;
+                    UpdateIndexProperty(item, idx);
+                }
+                maxIdx = idx.Value;
+            }
         }
 
         #region Index Management
-        protected void UpdateIndex(TInterface item, int? index)
+        protected void UpdateIndexProperty(TInterface item, int? index)
         {
             // Sets the position Property for a 1:n Relation
             // eg. Method 1-n Parameter
-            // Sets Parameter.Method__Position__
+            // Sets Parameter.Method_pos
             item.SetPropertyValue<int?>(_pointerProperty + Helper.PositionSuffix, index);
         }
 
-        protected int? GetIndex(TInterface item)
+        protected int? GetIndexProperty(TInterface item)
         {
             return item.GetPropertyValue<int?>(_pointerProperty + Helper.PositionSuffix);
-        }
-
-        protected TInterface GetAt(int index)
-        {
-            foreach (TInterface i in underlyingCollection)
-            {
-                int? idx = GetIndex(i);
-                if (idx == null) continue;
-                if (idx.Value == index)
-                {
-                    return i;
-                }
-            }
-            return null;
         }
         #endregion
 
@@ -175,27 +208,34 @@ namespace Kistl.DalProvider.EF
         public override void Add(TInterface item)
         {
             base.Add(item);
-            UpdateIndex(item, underlyingCollection.Count - 1);
+            _orderedItems.Add((TImpl)item);
+            UpdateIndexProperty(item, underlyingCollection.Count - 1);
         }
 
         public override void Clear()
         {
             foreach (TInterface i in underlyingCollection)
             {
-                UpdateIndex(i, null);
+                UpdateIndexProperty(i, null);
             }
             base.Clear();
+            _orderedItems.Clear();
         }
 
         public override bool Remove(TInterface item)
         {
-            UpdateIndex(item, null);
-            return base.Remove(item);
+            var result = base.Remove(item);
+            if (result)
+            {
+                _orderedItems.Remove((TImpl)item);
+                UpdateIndexProperty(item, null);
+            }
+            return result;
         }
 
         protected override IEnumerable<TInterface> GetEnumerable()
         {
-            return base.GetEnumerable().OrderBy(i => GetIndex(i));
+            return _orderedItems.Cast<TInterface>();
         }
 
         #endregion
@@ -204,55 +244,38 @@ namespace Kistl.DalProvider.EF
 
         public int IndexOf(TInterface item)
         {
-            int? result = GetIndex(item);
-            if (result == null) throw new InvalidOperationException("Collection is not sorted");
-            return result.Value;
+            return _orderedItems.IndexOf((TImpl)item);
         }
 
         public void Insert(int index, TInterface item)
         {
-            UpdateIndex(item, index);
-            // TODO: Optimize
-            foreach (TInterface i in underlyingCollection)
-            {
-                int idx = GetIndex(i) ?? Kistl.API.Helper.LASTINDEXPOSITION;
-                if (idx >= index)
-                {
-                    UpdateIndex(i, idx + 1);
-                }
-            }
+            // insert item without index and rely on FixIndices
+            // to set the proper index and propagate changes
+            UpdateIndexProperty(item, null);
+            _orderedItems.Insert(index, (TImpl)item);
+            FixIndices();
             underlyingCollection.Add((TImpl)item);
         }
 
         public void RemoveAt(int index)
         {
-            TInterface item = GetAt(index);
-            if (item == null) throw new ArgumentOutOfRangeException("index", String.Format("Index {0} not found in collection", index));
+            TInterface item = _orderedItems[index];
+            if (item == null) throw new IndexOutOfRangeException(String.Format("Index [{0}] not found in collection", index));
             base.Remove(item);
-
-            // TODO: Optimize
-            foreach (TInterface i in underlyingCollection)
-            {
-                int idx = GetIndex(i) ?? Kistl.API.Helper.LASTINDEXPOSITION;
-                if (idx >= index)
-                {
-                    UpdateIndex(i, idx - 1);
-                }
-            }
         }
 
         public TInterface this[int index]
         {
             get
             {
-                TInterface i = GetAt(index);
-                if (i == null) throw new ArgumentOutOfRangeException("index", String.Format("Index {0} not found in collection", index));
+                TInterface i = _orderedItems[index];
+                if (i == null) throw new IndexOutOfRangeException(String.Format("Index {0} not found in collection", index));
                 return i;
             }
             set
             {
-                TInterface i = GetAt(index);
-                if (i == null) throw new ArgumentOutOfRangeException("index", String.Format("Index {0} not found in collection", index));
+                TInterface i = _orderedItems[index];
+                if (i == null) throw new IndexOutOfRangeException(String.Format("Index {0} not found in collection", index));
 
                 if (i != value)
                 {
@@ -261,8 +284,6 @@ namespace Kistl.DalProvider.EF
                 }
             }
         }
-
         #endregion
     }
-
 }

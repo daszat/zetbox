@@ -1,12 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Collections;
 
 namespace Kistl.API
 {
-    public abstract class ValueCollectionWrapper<TParent, TValue, TEntry, TEntryCollection> 
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+
+    public abstract class ValueCollectionWrapper<TParent, TValue, TEntry, TEntryCollection>
         : ICollection<TValue>
         where TParent : IDataObject
         where TEntry : class, IValueCollectionEntry<TParent, TValue>
@@ -155,7 +156,7 @@ namespace Kistl.API
         #endregion
     }
 
-    public abstract class ValueListWrapper<TParent, TValue, TEntry, TEntryCollection> 
+    public abstract class ValueListWrapper<TParent, TValue, TEntry, TEntryCollection>
         : ValueCollectionWrapper<TParent, TValue, TEntry, TEntryCollection>, IList<TValue>
         where TParent : IDataObject
         where TEntry : class, IValueListEntry<TParent, TValue>
@@ -186,6 +187,13 @@ namespace Kistl.API
             {
                 entry.Index = i++;
             }
+            Kistl.API.Utils.Logging.Log.Warn("RepairIndexes");
+        }
+
+        protected override void OnEntryAdded(TEntry entry)
+        {
+            base.OnEntryAdded(entry);
+            RepairIndexes();
         }
 
         #endregion
@@ -229,7 +237,7 @@ namespace Kistl.API
 
             OnEntryAdding(newEntry);
             collection.Add(newEntry);
-            OnEntryAdded(newEntry);            
+            OnEntryAdded(newEntry);
         }
 
         public void RemoveAt(int index)

@@ -90,6 +90,10 @@
     <Compile Include="Tests\CompoundObject\when_changing_a_compoundobject_list.cs" />
     <Compile Include="Tests\CompoundObject\when_changing.cs" />
     <Compile Include="Tests\CompoundObject\when_roundtrip.cs" />
+    <Compile Include="Tests\EntityCollectionWrappers\when_having_a_item.cs" />
+    <Compile Include="Tests\EntityCollectionWrappers\when_empty.cs" />
+    <Compile Include="Tests\EntityCollectionWrappers\when_having_multiple_items.cs" />
+    <Compile Include="Tests\EntityCollectionWrappers\WrapperFixture.cs" />
     <Compile Include="Tests\Linq.cs" />
     <Compile Include="Tests\ListPropertiesTests.cs" />
     <Compile Include="Tests\N_to_M_relations\should_synchronize.cs" />
@@ -146,6 +150,9 @@
       <Project>{171546DC-5AFF-43BF-B8E6-EA6AC96C9C61}</Project>
       <Name>Kistl.API.Tests</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Tests\EntityListWrappers\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

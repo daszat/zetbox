@@ -1,23 +1,24 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Objects;
-using System.Linq;
-using System.Reflection;
-using System.Text;
 
-using Kistl.API;
-using Kistl.API.Configuration;
-using Kistl.API.Server;
-using Kistl.API.Utils;
-using Kistl.App.Extensions;
-using Kistl.App.Base;
-
-[assembly: global::System.Data.Objects.DataClasses.EdmSchemaAttribute()]
+[assembly: global::System.Data.Objects.DataClasses.EdmSchema]
 
 namespace Kistl.DalProvider.EF
 {
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Data;
+    using System.Data.Objects;
+    using System.Linq;
+    using System.Reflection;
+    using System.Text;
+
+    using Kistl.API;
+    using Kistl.API.Configuration;
+    using Kistl.API.Server;
+    using Kistl.API.Utils;
+    using Kistl.App.Extensions;
+    using Kistl.App.Base;
+
     internal class EFObjectContext : ObjectContext
     {
         /// <summary>
@@ -76,7 +77,7 @@ namespace Kistl.DalProvider.EF
             : base(identity)
         {
             if (metaDataResolver == null) { throw new ArgumentNullException("metaDataResolver"); }
-            
+
             _metaDataResolver = metaDataResolver;
             _ctx = new EFObjectContext(config);
         }
@@ -294,6 +295,7 @@ namespace Kistl.DalProvider.EF
             try
             {
                 result = _ctx.SaveChanges();
+                Logging.Log.InfoFormat("[{0}] changes submitted.", result);
             }
             catch (UpdateException updex)
             {
@@ -322,7 +324,9 @@ namespace Kistl.DalProvider.EF
 
             try
             {
-                return _ctx.SaveChanges();
+                var result = _ctx.SaveChanges();
+                Logging.Log.InfoFormat("[{0}] changes submitted without Notifications.", result);
+                return result;
             }
             catch (UpdateException updex)
             {
@@ -375,7 +379,7 @@ namespace Kistl.DalProvider.EF
             }
             else
             {
-                Logging.Log.Info("Changes submitted successfully");
+                Logging.Log.Info("Submitting changes");
             }
         }
 

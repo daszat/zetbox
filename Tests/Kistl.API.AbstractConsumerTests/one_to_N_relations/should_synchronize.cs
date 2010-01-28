@@ -1,16 +1,16 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Kistl.API;
-using Kistl.App.Base;
-using Kistl.App.Projekte;
-
-using NUnit.Framework;
 
 namespace Kistl.API.AbstractConsumerTests.one_to_N_relations
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+
+    using Kistl.API;
+    using Kistl.App.Base;
+    using Kistl.App.Projekte;
+
+    using NUnit.Framework;
 
     public abstract class should_synchronize
     {

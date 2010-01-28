@@ -42,7 +42,7 @@ namespace Kistl.DalProvider.EF.Tests
 
             KistlContext.Container = container;
 
-            ResetDatabase(config);
+            //ResetDatabase(config);
         }
     }
 }
