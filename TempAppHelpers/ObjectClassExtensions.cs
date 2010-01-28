@@ -123,6 +123,7 @@ namespace Kistl.App.Extensions
 
         public static bool HasSecurityRules(this ObjectClass cls, bool lookupInBase)
         {
+            if (cls == null) throw new ArgumentNullException("cls");
             while (cls != null)
             {
                 if (cls.SecurityRules.Count > 0)

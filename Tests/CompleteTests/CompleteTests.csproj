@@ -117,4 +117,8 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <PropertyGroup>
+    <PostBuildEvent>powershell -command $(SolutionDir)gendarmeXML.ps1 -SolutionDir:$(SolutionDir)
+type $(SolutionDir)bin\gendarme.txt</PostBuildEvent>
+  </PropertyGroup>
 </Project>

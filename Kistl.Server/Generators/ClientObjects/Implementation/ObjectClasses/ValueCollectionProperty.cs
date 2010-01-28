@@ -19,6 +19,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
             Templates.Implementation.SerializationMembersList serializationList,
             CompoundObjectProperty prop)
         {
+            if (prop == null) throw new ArgumentNullException("prop");
             Call(host, ctx, serializationList, prop, prop.HasPersistentOrder, prop.IsList);
         }
 
@@ -27,6 +28,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
             Templates.Implementation.SerializationMembersList serializationList,
             ValueTypeProperty prop)
         {
+            if (prop == null) throw new ArgumentNullException("prop");
             Call(host, ctx, serializationList, prop, prop.HasPersistentOrder, prop.IsList);
         }
 
