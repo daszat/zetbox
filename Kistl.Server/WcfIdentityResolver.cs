@@ -29,6 +29,8 @@ namespace Kistl.Server
 
         public Identity Resolve(IIdentity identity)
         {
+            if (identity == null) throw new ArgumentNullException("identity");
+
             string id = identity.Name.ToLower();
             return _resolverCtx.GetQuery<Identity>().Where(i => i.WCFAccount.ToLower() == id).FirstOrDefault();
         }

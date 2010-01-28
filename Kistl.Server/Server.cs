@@ -189,12 +189,14 @@ namespace Kistl.Server
         {
             try
             {
-                DirectoryEntry root = new DirectoryEntry("WinNT://" + machine);
-                root.Children.SchemaFilter.Add("User");
-                foreach (DirectoryEntry d in root.Children)
+                using (DirectoryEntry root = new DirectoryEntry("WinNT://" + machine))
                 {
-                    var login = machine + "\\" + d.Name;
-                    userList[login] = (d.Properties["FullName"].Value ?? login).ToString();
+                    root.Children.SchemaFilter.Add("User");
+                    foreach (DirectoryEntry d in root.Children)
+                    {
+                        var login = machine + "\\" + d.Name;
+                        userList[login] = (d.Properties["FullName"].Value ?? login).ToString();
+                    }
                 }
             }
             catch (Exception ex)

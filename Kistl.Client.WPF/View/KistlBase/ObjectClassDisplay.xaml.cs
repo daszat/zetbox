@@ -105,10 +105,12 @@ namespace Kistl.Client.WPF.View.KistlBase
             var dtm = DataContext as DataTypeModel;
             if (dtm != null)
             {
-                var newCtx = KistlContext.GetContext();
-                var newWorkspace = factory.CreateSpecificModel<WorkspaceModel>(newCtx);
-                newWorkspace.ShowForeignModel((DataObjectModel)factory.CreateDefaultModel(newCtx, newCtx.Create(dtm.InterfaceType)));
-                factory.ShowModel(newWorkspace, true);
+                using (var newCtx = KistlContext.GetContext())
+                {
+                    var newWorkspace = factory.CreateSpecificModel<WorkspaceModel>(newCtx);
+                    newWorkspace.ShowForeignModel((DataObjectModel)factory.CreateDefaultModel(newCtx, newCtx.Create(dtm.InterfaceType)));
+                    factory.ShowModel(newWorkspace, true);
+                }
             }
         }
     }

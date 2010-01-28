@@ -12,7 +12,7 @@ using Kistl.API.Utils;
 
 namespace Kistl.Client.ASPNET.Toolkit
 {
-    public class KistlContextManagerModule : IHttpModule
+    public class KistlContextManagerModule : IHttpModule, IDisposable
     {
         public static IKistlContext KistlContext
         {

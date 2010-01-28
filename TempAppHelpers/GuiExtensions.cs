@@ -74,6 +74,8 @@ namespace Kistl.App.Extensions
             Toolkit tk,
             ControlKind ck)
         {
+            if (ck == null) throw new ArgumentNullException("ck");
+
             PrimeCaches(tk);
 
             var candidates = _viewCaches[tk].GetDescriptors(ck.GetInterfaceType().GetObjectClass(FrozenContext.Single));

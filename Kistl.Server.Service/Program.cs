@@ -56,28 +56,6 @@ namespace Kistl.Server.Service
             public IList<string> Arguments { get; private set; }
         }
 
-        private static IEnumerable<CmdLineArg> SplitCommandLine(string[] args)
-        {
-            List<CmdLineArg> result = new List<CmdLineArg>();
-
-            CmdLineArg current = null;
-            foreach (string a in args)
-            {
-                if (a.StartsWith("-"))
-                {
-                    if (current != null) result.Add(current);
-                    current = new CmdLineArg(a);
-                }
-                else if (current != null)
-                {
-                    current.Arguments.Add(a);
-                }
-            }
-            if (current != null) result.Add(current);
-
-            return result;
-        }
-
         static int Main(string[] arguments)
         {
             Logging.Configure();
@@ -318,6 +296,8 @@ namespace Kistl.Server.Service
             return container;
         }
 
+        private static ServerApplicationContext _appCtx;
+
         private static KistlConfig InitApplicationContext(List<string> args)
         {
             string configFilePath;
@@ -330,7 +310,7 @@ namespace Kistl.Server.Service
                 configFilePath = String.Empty;
             }
             var config = KistlConfig.FromFile(configFilePath);
-            var appCtx = new ServerApplicationContext(config);
+            _appCtx = new ServerApplicationContext(config);
             return config;
         }
     }

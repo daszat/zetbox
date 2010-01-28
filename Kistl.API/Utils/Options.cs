@@ -429,16 +429,14 @@ namespace Kistl.API.Utils
                 {
                     case '{':
                         if (start != -1)
-                            throw new ArgumentException(
-                                    string.Format("Ill-formed name/value separator found in \"{0}\".", name),
-                                    "prototype");
+                            throw new IllFormedSeparatorException(
+                                    string.Format("Ill-formed name/value separator found in \"{0}\".", name));
                         start = i + 1;
                         break;
                     case '}':
                         if (start == -1)
-                            throw new ArgumentException(
-                                    string.Format("Ill-formed name/value separator found in \"{0}\".", name),
-                                    "prototype");
+                            throw new IllFormedSeparatorException(
+                                    string.Format("Ill-formed name/value separator found in \"{0}\".", name));
                         seps.Add(name.Substring(start, i - start));
                         start = -1;
                         break;
@@ -449,9 +447,8 @@ namespace Kistl.API.Utils
                 }
             }
             if (start != -1)
-                throw new ArgumentException(
-                        string.Format("Ill-formed name/value separator found in \"{0}\".", name),
-                        "prototype");
+                throw new IllFormedSeparatorException(
+                        string.Format("Ill-formed name/value separator found in \"{0}\".", name));
         }
 
         public void Invoke(OptionContext c)
@@ -467,6 +464,29 @@ namespace Kistl.API.Utils
         public override string ToString()
         {
             return Prototype;
+        }
+    }
+
+    [Serializable]
+    public class IllFormedSeparatorException : Exception
+    {
+        public IllFormedSeparatorException()
+        {
+        }
+
+        public IllFormedSeparatorException(string message)
+            : base(message)
+        {
+        }
+
+        public IllFormedSeparatorException(string message, Exception innerException)
+            : base(message, innerException)
+        {
+        }
+
+        protected IllFormedSeparatorException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
+        {
         }
     }
 
@@ -534,7 +554,7 @@ namespace Kistl.API.Utils
         protected override string GetKeyForItem(Option item)
         {
             if (item == null)
-                throw new ArgumentNullException("option");
+                throw new ArgumentNullException("item");
             if (item.Names != null && item.Names.Length > 0)
                 return item.Names[0];
             // This should never happen, as it's invalid for Option to be
@@ -751,6 +771,8 @@ namespace Kistl.API.Utils
 #else
         public List<string> Parse(IEnumerable<string> arguments)
         {
+            if (arguments == null) throw new ArgumentNullException("arguments");
+
             OptionContext c = CreateOptionContext();
             c.OptionIndex = -1;
             bool process = true;
