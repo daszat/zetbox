@@ -75,7 +75,7 @@ namespace Kistl.Server.SchemaManagement
         }
         public void DoNewObjectClass(ObjectClass objClass)
         {
-            Log.InfoFormat("  New Table: {0}", objClass.TableName);
+            Log.InfoFormat("New Table: {0}", objClass.TableName);
             db.CreateTable(objClass.TableName, objClass.BaseObjectClass == null);
         }
         #endregion
@@ -416,7 +416,9 @@ namespace Kistl.Server.SchemaManagement
             }
 
             string tblName = relEnd.Type.TableName;
-            db.CreateColumn(tblName, Construct.ListPositionColumnName(otherEnd), System.Data.DbType.Int32, 0, otherEnd.IsNullable());
+            string colName = Construct.ListPositionColumnName(otherEnd);
+            // always allow nulls for items missing a definite order
+            db.CreateColumn(tblName, colName, System.Data.DbType.Int32, 0, true);
         }
         #endregion
 
@@ -620,7 +622,8 @@ namespace Kistl.Server.SchemaManagement
 
             if (isIndexed)
             {
-                db.CreateColumn(tblName, indexName, System.Data.DbType.Int32, 0, otherEnd.IsNullable());
+                Log.InfoFormat("Creating position column '{0}.{1}'", tblName, indexName);
+                db.CreateColumn(tblName, indexName, System.Data.DbType.Int32, 0, true);
             }
         }
         #endregion

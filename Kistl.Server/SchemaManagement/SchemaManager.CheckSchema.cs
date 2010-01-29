@@ -272,7 +272,7 @@ namespace Kistl.Server.SchemaManagement
             CheckColumn(tblName, colName, System.Data.DbType.Int32, 0, otherEnd.IsNullable());
             if (isIndexed)
             {
-                CheckColumn(tblName, indexName, System.Data.DbType.Int32, 0, otherEnd.IsNullable());
+                CheckColumn(tblName, indexName, System.Data.DbType.Int32, 0, true);
             }
             if (!isIndexed && db.CheckColumnExists(tblName, indexName))
             {
