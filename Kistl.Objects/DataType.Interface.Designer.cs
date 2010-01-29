@@ -55,7 +55,7 @@ namespace Kistl.App.Base
         /// Eigenschaften der Objektklasse
         /// </summary>
 
-        ICollection<Kistl.App.Base.Property> Properties { get; }
+        IList<Kistl.App.Base.Property> Properties { get; }
         /// <summary>
         /// 
         /// </summary>

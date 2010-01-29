@@ -506,6 +506,7 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.Property)">
 	    <MappingFragment StoreEntitySet="Property">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="ObjectClass_pos" ColumnName="fk_ObjectClass_pos" />
 <ScalarProperty Name="CategoryTags" ColumnName="CategoryTags" />
 <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />

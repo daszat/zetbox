@@ -874,6 +874,33 @@ namespace Kistl.App.Base
             }
         }
         
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+           // Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.NotifyingValueProperty
+        public virtual int? ObjectClass_pos
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _ObjectClass_pos;
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_ObjectClass_pos != value)
+                {
+                    var __oldValue = _ObjectClass_pos;
+                    var __newValue = value;
+                    NotifyPropertyChanging("ObjectClass_pos", __oldValue, __newValue);
+                    _ObjectClass_pos = __newValue;
+                    NotifyPropertyChanged("ObjectClass_pos", __oldValue, __newValue);
+                }
+            }
+        }
+        private int? _ObjectClass_pos;
         
 		public static event PropertyGetterHandler<Kistl.App.Base.Property, Kistl.App.Base.DataType> OnObjectClass_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Property, Kistl.App.Base.DataType> OnObjectClass_PreSetter;
@@ -1349,6 +1376,7 @@ namespace Kistl.App.Base
             }
             BinarySerializer.ToStream(Module != null ? Module.ID : (int?)null, binStream);
             BinarySerializer.ToStream(ObjectClass != null ? ObjectClass.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(this._ObjectClass_pos, binStream);
             BinarySerializer.ToStream(this._PropertyName, binStream);
             BinarySerializer.ToStream(ValueModelDescriptor != null ? ValueModelDescriptor.ID : (int?)null, binStream);
         }
@@ -1370,6 +1398,7 @@ namespace Kistl.App.Base
             }
             BinarySerializer.FromStream(out this._fk_Module, binStream);
             BinarySerializer.FromStream(out this._fk_ObjectClass, binStream);
+            BinarySerializer.FromStream(out this._ObjectClass_pos, binStream);
             BinarySerializer.FromStream(out this._PropertyName, binStream);
             BinarySerializer.FromStream(out this._fk_ValueModelDescriptor, binStream);
         }
@@ -1391,6 +1420,7 @@ namespace Kistl.App.Base
             }
             XmlStreamer.ToStream(Module != null ? Module.ID : (int?)null, xml, "Module", "Kistl.App.Base");
             XmlStreamer.ToStream(ObjectClass != null ? ObjectClass.ID : (int?)null, xml, "ObjectClass", "Kistl.App.Base");
+            XmlStreamer.ToStream(this._ObjectClass_pos, xml, "ObjectClass_pos", "Kistl.App.Base");
             XmlStreamer.ToStream(this._PropertyName, xml, "PropertyName", "Kistl.App.Base");
             XmlStreamer.ToStream(ValueModelDescriptor != null ? ValueModelDescriptor.ID : (int?)null, xml, "ValueModelDescriptor", "Kistl.App.GUI");
         }
@@ -1412,6 +1442,7 @@ namespace Kistl.App.Base
             }
             XmlStreamer.FromStream(ref this._fk_Module, xml, "Module", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_ObjectClass, xml, "ObjectClass", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._ObjectClass_pos, xml, "ObjectClass_pos", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._PropertyName, xml, "PropertyName", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_ValueModelDescriptor, xml, "ValueModelDescriptor", "Kistl.App.GUI");
         }
@@ -1431,6 +1462,8 @@ namespace Kistl.App.Base
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._Description, xml, "Description", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(Module != null ? Module.ExportGuid : (Guid?)null, xml, "Module", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(ObjectClass != null ? ObjectClass.ExportGuid : (Guid?)null, xml, "ObjectClass", "Kistl.App.Base");
+	
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._ObjectClass_pos, xml, "ObjectClass_pos", "Kistl.App.Base");
     
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._PropertyName, xml, "PropertyName", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(ValueModelDescriptor != null ? ValueModelDescriptor.ExportGuid : (Guid?)null, xml, "ValueModelDescriptor", "Kistl.App.GUI");
@@ -1447,6 +1480,7 @@ namespace Kistl.App.Base
             this._isExportGuidSet = true;
             XmlStreamer.FromStream(ref this._fk_guid_Module, xml, "Module", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_guid_ObjectClass, xml, "ObjectClass", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._ObjectClass_pos, xml, "ObjectClass_pos", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._PropertyName, xml, "PropertyName", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_guid_ValueModelDescriptor, xml, "ValueModelDescriptor", "Kistl.App.GUI");
         }

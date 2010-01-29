@@ -4749,9 +4749,9 @@
   </KistlBase:RelationEnd>
   <KistlBase:RelationEnd ExportGuid="f6a0541f-8f37-4599-ab35-15b6360185b0">
     <KistlBase:BParent>f7e487a4-6922-40bf-a404-24ce6accbb83</KistlBase:BParent>
-    <KistlBase:ChangedOn>2009-12-14T17:08:05.35Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2010-01-21T16:37:42.853Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.35Z</KistlBase:CreatedOn>
-    <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
+    <KistlBase:HasPersistentOrder>true</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>3</KistlBase:Multiplicity>
     <KistlBase:Navigator>bdaacacd-c8cb-45cf-a329-28f942337273</KistlBase:Navigator>
     <KistlBase:RoleName>Properties</KistlBase:RoleName>

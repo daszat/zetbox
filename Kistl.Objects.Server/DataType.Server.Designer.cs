@@ -804,14 +804,14 @@ namespace Kistl.App.Base
 	    // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public ICollection<Kistl.App.Base.Property> Properties
+        public IList<Kistl.App.Base.Property> Properties
         {
             get
             {
                 if (_PropertiesWrapper == null)
                 {
-                    _PropertiesWrapper = new EntityCollectionWrapper<Kistl.App.Base.Property, Kistl.App.Base.Property__Implementation__>(
-                            this.Context, Properties__Implementation__);
+                    _PropertiesWrapper = new EntityListWrapper<Kistl.App.Base.Property, Kistl.App.Base.Property__Implementation__>(
+                            this.Context, Properties__Implementation__, "ObjectClass");
                 }
                 return _PropertiesWrapper;
             }
@@ -834,7 +834,7 @@ namespace Kistl.App.Base
                 return c;
             }
         }
-        private EntityCollectionWrapper<Kistl.App.Base.Property, Kistl.App.Base.Property__Implementation__> _PropertiesWrapper;
+        private EntityListWrapper<Kistl.App.Base.Property, Kistl.App.Base.Property__Implementation__> _PropertiesWrapper;
 
 		private List<int> PropertiesIds;
 

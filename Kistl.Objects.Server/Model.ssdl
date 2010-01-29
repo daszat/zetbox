@@ -1605,6 +1605,7 @@
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="fk_Module" Type="int" />
     <Property Name="fk_ObjectClass" Type="int" />
+    <Property Name="fk_ObjectClass_pos" Type="int" Nullable="true" />
     <Property Name="fk_ValueModelDescriptor" Type="int" />
     <Property Name="fk_ChangedBy" Type="int" />
     <Property Name="fk_CreatedBy" Type="int" />
