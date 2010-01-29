@@ -21,11 +21,12 @@ namespace Kistl.DalProvider.EF.Tests.EntityCollectionWrappers
         protected override void InitItems()
         {
             items = new[] { 
-                new Property__Implementation__(),
-                new Property__Implementation__(),
-                new Property__Implementation__(),
-                new Property__Implementation__(),
-                new Property__Implementation__() };
+                new Property__Implementation__() { Description="First" },
+                new Property__Implementation__() { Description="Second" },
+                new Property__Implementation__() { Description="Third" },
+                new Property__Implementation__() { Description="Fourth" },
+                new Property__Implementation__() { Description="Fifth" },
+            };
             underlyingCollection.AddRange(items);
         }
 

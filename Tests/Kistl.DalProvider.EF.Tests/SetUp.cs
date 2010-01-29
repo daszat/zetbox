@@ -9,11 +9,12 @@ using Kistl.API.Configuration;
 using Kistl.Server;
 
 using NUnit.Framework;
+using Kistl.App.Base;
 
 namespace Kistl.DalProvider.EF.Tests
 {
     [SetUpFixture]
-    public class SetUp 
+    public class SetUp
         : Kistl.API.AbstractConsumerTests.DatabaseResetup
     {
         private static IContainer container;
@@ -29,7 +30,7 @@ namespace Kistl.DalProvider.EF.Tests
             var config = KistlConfig.FromFile("Kistl.DalProvider.EF.Tests.Config.xml");
 
             AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
-            
+
             var appCtx = new ServerApplicationContext(config);
 
             var builder = new ContainerBuilder();
@@ -43,6 +44,9 @@ namespace Kistl.DalProvider.EF.Tests
             KistlContext.Container = container;
 
             //ResetDatabase(config);
+
+            Property__Implementation__.OnToString_Property 
+                += (obj, args) => { args.Result = String.Format("Property implementation, [{0}]", obj.Description); };
         }
     }
 }

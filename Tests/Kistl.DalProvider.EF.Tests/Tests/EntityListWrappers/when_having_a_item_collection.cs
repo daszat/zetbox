@@ -12,7 +12,7 @@ namespace Kistl.DalProvider.EF.Tests.EntityListWrappers
     using NUnit.Framework;
 
     [TestFixture]
-    public class when_having_a_item
+    public class when_having_a_item_collection
         : Kistl.DalProvider.EF.Tests.EntityCollectionWrappers.when_having_a_item<EntityListWrapper<Property, Property__Implementation__>>
     {
         protected override EntityListWrapper<Property, Property__Implementation__> CreateWrapper()

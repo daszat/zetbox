@@ -97,6 +97,10 @@
     <Compile Include="Tests\EntityListWrappers\when_empty.cs" />
     <Compile Include="Tests\EntityListWrappers\when_having_a_item.cs" />
     <Compile Include="Tests\EntityListWrappers\when_having_multiple_items.cs" />
+    <Compile Include="Tests\EntityListWrappers\when_empty_collection.cs" />
+    <Compile Include="Tests\EntityListWrappers\when_having_a_item_collection.cs" />
+    <Compile Include="Tests\EntityListWrappers\when_having_multiple_items_collection.cs" />
+    <Compile Include="Tests\EntityListWrappers\WrapperFixture.cs" />
     <Compile Include="Tests\Linq.cs" />
     <Compile Include="Tests\ListPropertiesTests.cs" />
     <Compile Include="Tests\N_to_M_relations\should_synchronize.cs" />

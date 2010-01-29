@@ -20,7 +20,7 @@ namespace Kistl.DalProvider.EF.Tests.EntityCollectionWrappers
 
         protected override void InitItems()
         {
-            containedItem = new Property__Implementation__();
+            containedItem = new Property__Implementation__() { Description = "containedItem" };
             underlyingCollection.Add(containedItem);
         }
 

@@ -12,8 +12,8 @@ namespace Kistl.DalProvider.EF.Tests.EntityListWrappers
     using NUnit.Framework;
 
     [TestFixture]
-    public class when_having_multiple_items
-        : Kistl.DalProvider.EF.Tests.EntityCollectionWrappers.when_having_multiple_items<EntityListWrapper<Property, Property__Implementation__>>
+    public class when_empty_collection
+        : Kistl.DalProvider.EF.Tests.EntityCollectionWrappers.when_empty<EntityListWrapper<Property, Property__Implementation__>>
     {
         protected override EntityListWrapper<Property, Property__Implementation__> CreateWrapper()
         {

@@ -54,10 +54,10 @@ namespace Kistl.DalProvider.EF.Tests.EntityCollectionWrappers
         public void should_add_item()
         {
             var originalList = underlyingCollection.ToList();
-            var item = new Property__Implementation__();
+            var newItem = new Property__Implementation__() { Description = "newItem" };
 
-            wrapper.Add(item);
-            originalList.Add(item);
+            wrapper.Add(newItem);
+            originalList.Add(newItem);
 
             Assert.That(wrapper, Is.EquivalentTo(originalList));
             Assert.That(underlyingCollection, Is.EquivalentTo(originalList));
@@ -74,8 +74,8 @@ namespace Kistl.DalProvider.EF.Tests.EntityCollectionWrappers
         [Test]
         public void should_return_false_on_contains_otherItem()
         {
-            var item = new Property__Implementation__();
-            Assert.That(wrapper.Contains(item), Is.False);
+            var otherItem = new Property__Implementation__() { Description = "otherItem" };
+            Assert.That(wrapper.Contains(otherItem), Is.False);
         }
 
         [Test]
@@ -101,8 +101,8 @@ namespace Kistl.DalProvider.EF.Tests.EntityCollectionWrappers
         [Test]
         public void should_return_false_on_remove_other_item()
         {
-            var item = new Property__Implementation__();
-            Assert.That(wrapper.Remove(item), Is.False);
+            var otherItem = new Property__Implementation__() { Description = "otherItem" };
+            Assert.That(wrapper.Remove(otherItem), Is.False);
         }
     }
 }
