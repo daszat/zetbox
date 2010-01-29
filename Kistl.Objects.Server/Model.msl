@@ -352,6 +352,15 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Group">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Group)">
+	    <MappingFragment StoreEntitySet="Group">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+<ScalarProperty Name="Name" ColumnName="Name" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Icon">
       <EntityTypeMapping TypeName="IsTypeOf(Model.Icon)">
 	    <MappingFragment StoreEntitySet="Icon">
@@ -368,7 +377,6 @@
 <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
 <ScalarProperty Name="Password" ColumnName="Password" />
 <ScalarProperty Name="UserName" ColumnName="UserName" />
-<ScalarProperty Name="WCFAccount" ColumnName="WCFAccount" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -804,6 +812,44 @@
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="fk_SupportedInterfaces" IsNull="false"/>
+    </AssociationSetMapping>
+
+    <!--
+    Relation: FK_Identities_memberOf_Groups
+    A: ZeroOrMore Identity as Identities
+    B: ZeroOrMore Group as Groups
+    Preferred Storage: Separate
+    -->
+    <EntitySetMapping Name="Identity_memberOf_Group_RelationEntry">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Identity_memberOf_Group_RelationEntry)">
+        <MappingFragment StoreEntitySet="Identity_memberOf_Group_RelationEntry">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <!-- A to CollectionEntry -->
+    <AssociationSetMapping Name="FK_Identities_memberOf_Groups_A"
+                           TypeName="Model.FK_Identities_memberOf_Groups_A"
+                           StoreEntitySet="Identity_memberOf_Group_RelationEntry" >
+      <EndProperty Name="Identities">
+        <ScalarProperty Name="ID" ColumnName="fk_Identities"/>
+      </EndProperty>
+      <EndProperty Name="CollectionEntry">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_Identities" IsNull="false"/>
+    </AssociationSetMapping>
+    <!-- B to CollectionEntry -->
+    <AssociationSetMapping Name="FK_Identities_memberOf_Groups_B"
+                           TypeName="Model.FK_Identities_memberOf_Groups_B"
+                           StoreEntitySet="Identity_memberOf_Group_RelationEntry" >
+      <EndProperty Name="Groups">
+        <ScalarProperty Name="ID" ColumnName="fk_Groups"/>
+      </EndProperty>
+      <EndProperty Name="CollectionEntry">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_Groups" IsNull="false"/>
     </AssociationSetMapping>
 
     <!--
@@ -1314,7 +1360,7 @@
     <!--
     Relation: FK_BaseProperty_has_Module
     A: ZeroOrMore Property as BaseProperty
-    B: ZeroOrOne Module as Module
+    B: One Module as Module
     Preferred Storage: MergeIntoA
     -->
     <AssociationSetMapping Name="FK_BaseProperty_has_Module"
@@ -1667,6 +1713,40 @@
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="fk_Fragebogen" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_Group_has_Module
+    A: ZeroOrMore Group as Group
+    B: ZeroOrOne Module as Module
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_Group_has_Module"
+                           TypeName="Model.FK_Group_has_Module"
+                           StoreEntitySet="Group" >
+      <EndProperty Name="Module">
+        <ScalarProperty Name="ID" ColumnName="fk_Module"/>
+      </EndProperty>
+      <EndProperty Name="Group">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_Module" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_Group_has_ParentGroup
+    A: ZeroOrMore Group as Group
+    B: ZeroOrOne Group as ParentGroup
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_Group_has_ParentGroup"
+                           TypeName="Model.FK_Group_has_ParentGroup"
+                           StoreEntitySet="Group" >
+      <EndProperty Name="ParentGroup">
+        <ScalarProperty Name="ID" ColumnName="fk_ParentGroup"/>
+      </EndProperty>
+      <EndProperty Name="Group">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_ParentGroup" IsNull="false"/>
     </AssociationSetMapping>
     <!--
     Relation: FK_Icon_has_Module

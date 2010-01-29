@@ -21,6 +21,7 @@
     <EntitySet Name="DefaultPropertyValue" EntityType="Model.Store.DefaultPropertyValue" Table="DefaultPropertyValues"/>
     <EntitySet Name="EnumerationEntry" EntityType="Model.Store.EnumerationEntry" Table="EnumerationEntries"/>
     <EntitySet Name="Fragebogen" EntityType="Model.Store.Fragebogen" Table="Fragebögen"/>
+    <EntitySet Name="Group" EntityType="Model.Store.Group" Table="Groups"/>
     <EntitySet Name="Icon" EntityType="Model.Store.Icon" Table="Icons"/>
     <EntitySet Name="Identity" EntityType="Model.Store.Identity" Table="Identities"/>
     <EntitySet Name="InstanceConstraint" EntityType="Model.Store.InstanceConstraint" Table="InstanceConstraint"/>
@@ -394,6 +395,22 @@
     </AssociationSet>
     
     <!-- 
+    Relation: FK_Identities_memberOf_Groups
+    A: ZeroOrMore Identity as Identities
+    B: ZeroOrMore Group as Groups
+    Preferred Storage: Separate
+    -->
+    <EntitySet Name="Identity_memberOf_Group_RelationEntry" EntityType="Model.Store.Identity_memberOf_Group_RelationEntry" Table="Identities_memberOf_Groups" />
+    <AssociationSet Name="FK_Identities_memberOf_Groups_A" Association="Model.Store.FK_Identities_memberOf_Groups_A" >
+      <End Role="Identities" EntitySet="Identity" />
+      <End Role="CollectionEntry" EntitySet="Identity_memberOf_Group_RelationEntry" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Identities_memberOf_Groups_B" Association="Model.Store.FK_Identities_memberOf_Groups_B" >
+      <End Role="CollectionEntry" EntitySet="Identity_memberOf_Group_RelationEntry" />
+      <End Role="Groups" EntitySet="Group" />
+    </AssociationSet>
+    
+    <!-- 
     Relation: FK_MuhBlah_ManyList_Role_has_TestCustomObjects_ManyList_Role
     A: ZeroOrMore Muhblah as MuhBlah_ManyList_Role
     B: ZeroOrMore TestCustomObject as TestCustomObjects_ManyList_Role
@@ -659,6 +676,14 @@
     <AssociationSet Name="FK_Fragebogen_enthält_Antworten" Association="Model.Store.FK_Fragebogen_enthält_Antworten" >
       <End Role="Fragebogen" EntitySet="Fragebogen" />
       <End Role="Antworten" EntitySet="Antwort" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Group_has_Module" Association="Model.Store.FK_Group_has_Module" >
+      <End Role="Group" EntitySet="Group" />
+      <End Role="Module" EntitySet="Module" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Group_has_ParentGroup" Association="Model.Store.FK_Group_has_ParentGroup" >
+      <End Role="Group" EntitySet="Group" />
+      <End Role="ParentGroup" EntitySet="Group" />
     </AssociationSet>
     <AssociationSet Name="FK_Icon_has_Module" Association="Model.Store.FK_Icon_has_Module" >
       <End Role="Icon" EntitySet="Icon" />
@@ -1270,6 +1295,17 @@
     <Property Name="BogenNummer" Type="int" Nullable="true" />
   </EntityType>
 	
+  <EntityType Name="Group">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_Module" Type="int" />
+    <Property Name="fk_ParentGroup" Type="int" />
+    <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="4000" Nullable="false" />
+  </EntityType>
+	
   <EntityType Name="GuidProperty">
     <Key>
       <PropertyRef Name="ID" />
@@ -1295,7 +1331,6 @@
     <Property Name="DisplayName" Type="nvarchar" MaxLength="200" Nullable="true" />
     <Property Name="Password" Type="nvarchar" MaxLength="100" Nullable="true" />
     <Property Name="UserName" Type="nvarchar" MaxLength="100" Nullable="true" />
-    <Property Name="WCFAccount" Type="nvarchar" MaxLength="100" Nullable="true" />
   </EntityType>
 	
   <EntityType Name="InstanceConstraint">
@@ -1948,6 +1983,44 @@
       </Principal>
       <Dependent Role="CollectionEntry">
         <PropertyRef Name="fk_SupportedInterfaces" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+	
+  <EntityType Name="Identity_memberOf_Group_RelationEntry">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_Identities" Type="int" Nullable="true" />
+    <Property Name="fk_Groups" Type="int" Nullable="true" />
+  </EntityType>
+
+  <!-- A to CollectionEntry -->
+  <Association Name="FK_Identities_memberOf_Groups_A">
+    <End Role="Identities" Type="Model.Store.Identity" Multiplicity="0..1" />
+    <End Role="CollectionEntry" Type="Model.Store.Identity_memberOf_Group_RelationEntry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Identities">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CollectionEntry">
+        <PropertyRef Name="fk_Identities" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+  <!-- B to CollectionEntry -->
+  <Association Name="FK_Identities_memberOf_Groups_B">
+    <End Role="Groups" Type="Model.Store.Group" Multiplicity="0..1" />
+    <End Role="CollectionEntry" Type="Model.Store.Identity_memberOf_Group_RelationEntry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Groups">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CollectionEntry">
+        <PropertyRef Name="fk_Groups" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -2720,6 +2793,34 @@
       </Principal>
       <Dependent Role="Antworten">
         <PropertyRef Name="fk_Fragebogen" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_Group_has_Module">
+    <End Role="Module" Type="Model.Store.Module" Multiplicity="0..1" />
+    <End Role="Group" Type="Model.Store.Group" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Module">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Group">
+        <PropertyRef Name="fk_Module" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_Group_has_ParentGroup">
+    <End Role="ParentGroup" Type="Model.Store.Group" Multiplicity="0..1" />
+    <End Role="Group" Type="Model.Store.Group" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ParentGroup">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Group">
+        <PropertyRef Name="fk_ParentGroup" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

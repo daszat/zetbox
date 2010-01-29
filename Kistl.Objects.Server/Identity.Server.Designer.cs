@@ -110,6 +110,54 @@ namespace Kistl.App.Base
 		public static event PropertyPostSetterHandler<Kistl.App.Base.Identity, string> OnDisplayName_PostSetter;
 
         /// <summary>
+        /// Identites are member of groups
+        /// </summary>
+    /*
+    Relation: FK_Identities_memberOf_Groups
+    A: ZeroOrMore Identity as Identities
+    B: ZeroOrMore Group as Groups
+    Preferred Storage: Separate
+    */
+        // collection reference property
+		// Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.CollectionEntryListProperty
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public ICollection<Kistl.App.Base.Group> Groups
+        {
+            get
+            {
+                if (_GroupsWrapper == null)
+                {
+                    _GroupsWrapper = new EntityRelationBSideCollectionWrapper<Kistl.App.Base.Identity, Kistl.App.Base.Group, Kistl.App.Base.Identity_memberOf_Group_RelationEntry__Implementation__>(
+                            this,
+                            Groups__Implementation__);
+                }
+                return _GroupsWrapper;
+            }
+        }
+        
+        [EdmRelationshipNavigationProperty("Model", "FK_Identities_memberOf_Groups_A", "CollectionEntry")]
+        public EntityCollection<Kistl.App.Base.Identity_memberOf_Group_RelationEntry__Implementation__> Groups__Implementation__
+        {
+            get
+            {
+                var c = ((IEntityWithRelationships)(this)).RelationshipManager
+                    .GetRelatedCollection<Kistl.App.Base.Identity_memberOf_Group_RelationEntry__Implementation__>(
+                        "Model.FK_Identities_memberOf_Groups_A",
+                        "CollectionEntry");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !c.IsLoaded)
+                {
+                    c.Load();
+                }
+                return c;
+            }
+        }
+        private EntityRelationBSideCollectionWrapper<Kistl.App.Base.Identity, Kistl.App.Base.Group, Kistl.App.Base.Identity_memberOf_Group_RelationEntry__Implementation__> _GroupsWrapper;
+
+
+        /// <summary>
         /// Password of a generic identity
         /// </summary>
         // value type property
@@ -213,58 +261,6 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Identity, string> OnUserName_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.Identity, string> OnUserName_PostSetter;
 
-        /// <summary>
-        /// IdentityName of a WCF Identity (Windows, AD or Samba)
-        /// </summary>
-        // value type property
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-           // Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.NotifyingDataProperty
-        public virtual string WCFAccount
-        {
-            get
-            {
-                // create local variable to create single point of return
-                // for the benefit of down-stream templates
-                var __result = _WCFAccount;
-                if (OnWCFAccount_Getter != null)
-                {
-                    var __e = new PropertyGetterEventArgs<string>(__result);
-                    OnWCFAccount_Getter(this, __e);
-                    __result = __e.Result;
-                }
-                return __result;
-            }
-            set
-            {
-                if (this.IsReadonly) throw new ReadOnlyObjectException();
-                if (_WCFAccount != value)
-                {
-                    var __oldValue = _WCFAccount;
-                    var __newValue = value;
-                    if(OnWCFAccount_PreSetter != null)
-                    {
-                        var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
-                        OnWCFAccount_PreSetter(this, __e);
-                        __newValue = __e.Result;
-                    }
-                    NotifyPropertyChanging("WCFAccount", __oldValue, __newValue);
-                    _WCFAccount = __newValue;
-                    NotifyPropertyChanged("WCFAccount", __oldValue, __newValue);
-                    if(OnWCFAccount_PostSetter != null)
-                    {
-                        var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
-                        OnWCFAccount_PostSetter(this, __e);
-                    }
-                }
-            }
-        }
-        private string _WCFAccount;
-		public static event PropertyGetterHandler<Kistl.App.Base.Identity, string> OnWCFAccount_Getter;
-		public static event PropertyPreSetterHandler<Kistl.App.Base.Identity, string> OnWCFAccount_PreSetter;
-		public static event PropertyPostSetterHandler<Kistl.App.Base.Identity, string> OnWCFAccount_PostSetter;
-
 		public override InterfaceType GetInterfaceType()
 		{
 			return new InterfaceType(typeof(Identity));
@@ -280,7 +276,6 @@ namespace Kistl.App.Base
 			me.DisplayName = other.DisplayName;
 			me.Password = other.Password;
 			me.UserName = other.UserName;
-			me.WCFAccount = other.WCFAccount;
 		}
 
         // tail template
@@ -346,6 +341,15 @@ namespace Kistl.App.Base
 					
 					return String.Join("; ", errors);
 				}
+				case "Groups":
+				{
+					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("5f534204-f0d5-4d6f-8efa-7ff248580ba3")).Constraints
+						.Where(c => !c.IsValid(this, this.Groups))
+						.Select(c => c.GetErrorText(this, this.Groups))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
 				case "Password":
 				{
 					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("0d499610-99e3-42cc-b71b-49ed1a356355")).Constraints
@@ -360,15 +364,6 @@ namespace Kistl.App.Base
 					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("a4ce1f5f-311b-4510-8817-4cca40f0bf0f")).Constraints
 						.Where(c => !c.IsValid(this, this.UserName))
 						.Select(c => c.GetErrorText(this, this.UserName))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "WCFAccount":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("07c80009-e343-4d46-9a32-662d9a3a5fff")).Constraints
-						.Where(c => !c.IsValid(this, this.WCFAccount))
-						.Select(c => c.GetErrorText(this, this.WCFAccount))
 						.ToArray();
 					
 					return String.Join("; ", errors);
@@ -395,7 +390,6 @@ namespace Kistl.App.Base
             BinarySerializer.ToStream(this._DisplayName, binStream);
             BinarySerializer.ToStream(this._Password, binStream);
             BinarySerializer.ToStream(this._UserName, binStream);
-            BinarySerializer.ToStream(this._WCFAccount, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
@@ -405,7 +399,6 @@ namespace Kistl.App.Base
             BinarySerializer.FromStream(out this._DisplayName, binStream);
             BinarySerializer.FromStream(out this._Password, binStream);
             BinarySerializer.FromStream(out this._UserName, binStream);
-            BinarySerializer.FromStream(out this._WCFAccount, binStream);
         }
 
         public override void ToStream(System.Xml.XmlWriter xml)
@@ -415,7 +408,6 @@ namespace Kistl.App.Base
             XmlStreamer.ToStream(this._DisplayName, xml, "DisplayName", "Kistl.App.Base");
             XmlStreamer.ToStream(this._Password, xml, "Password", "Kistl.App.Base");
             XmlStreamer.ToStream(this._UserName, xml, "UserName", "Kistl.App.Base");
-            XmlStreamer.ToStream(this._WCFAccount, xml, "WCFAccount", "Kistl.App.Base");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
@@ -425,7 +417,6 @@ namespace Kistl.App.Base
             XmlStreamer.FromStream(ref this._DisplayName, xml, "DisplayName", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._Password, xml, "Password", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._UserName, xml, "UserName", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._WCFAccount, xml, "WCFAccount", "Kistl.App.Base");
         }
 
 #endregion

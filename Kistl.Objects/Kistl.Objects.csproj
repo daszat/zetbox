@@ -91,6 +91,7 @@
     <Compile Include="EnumerationProperty.Interface.Designer.cs" />
     <Compile Include="EnumerationSelectorKind.Interface.Designer.cs" />
     <Compile Include="Fragebogen.Interface.Designer.cs" />
+    <Compile Include="Group.Interface.Designer.cs" />
     <Compile Include="GuidProperty.Interface.Designer.cs" />
     <Compile Include="Icon.Interface.Designer.cs" />
     <Compile Include="Identity.Interface.Designer.cs" />

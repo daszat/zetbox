@@ -32,7 +32,7 @@ namespace Kistl.Server
             if (identity == null) throw new ArgumentNullException("identity");
 
             string id = identity.Name.ToLower();
-            return _resolverCtx.GetQuery<Identity>().Where(i => i.WCFAccount.ToLower() == id).FirstOrDefault();
+            return _resolverCtx.GetQuery<Identity>().Where(i => i.UserName.ToLower() == id).FirstOrDefault();
         }
     }
 }

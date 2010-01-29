@@ -115,6 +115,7 @@
     <Compile Include="EnumerationProperty.Server.Designer.cs" />
     <Compile Include="EnumerationSelectorKind.Server.Designer.cs" />
     <Compile Include="Fragebogen.Server.Designer.cs" />
+    <Compile Include="Group.Server.Designer.cs" />
     <Compile Include="GuidProperty.Server.Designer.cs" />
     <Compile Include="Icon.Server.Designer.cs" />
     <Compile Include="Identity.Server.Designer.cs" />

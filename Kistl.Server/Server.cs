@@ -168,16 +168,16 @@ namespace Kistl.Server
                 ReadUsers(Environment.UserDomainName, userList);
                 ReadUsers(Environment.MachineName, userList);
 
-                var identities = ctx.GetQuery<Kistl.App.Base.Identity>().ToLookup(k => k.WCFAccount.ToUpper());
+                var identities = ctx.GetQuery<Kistl.App.Base.Identity>().ToLookup(k => k.UserName.ToUpper());
 
                 foreach (var user in userList)
                 {
                     if (!identities.Contains(user.Key.ToUpper()))
                     {
                         var id = ctx.Create<Kistl.App.Base.Identity>();
-                        id.WCFAccount = user.Key;
-                        id.UserName = user.Value;
-                        Log.InfoFormat("Adding Identity {0} ({1})", id.UserName, id.WCFAccount);
+                        id.UserName = user.Key;
+                        id.DisplayName = user.Value;
+                        Log.InfoFormat("Adding Identity {0} ({1})", id.DisplayName, id.UserName);
                     }
                 }
 

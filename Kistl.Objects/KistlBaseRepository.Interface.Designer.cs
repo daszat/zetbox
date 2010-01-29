@@ -296,6 +296,16 @@ namespace Kistl.App.Base
 			}
 		}
 		
+		/// <summary>List of all Group</summary>
+		/// 
+		public IQueryable<Group> Groups
+		{ 
+			get
+			{
+				return Context.GetQuery<Group>();
+			}
+		}
+		
 		/// <summary>List of all EnumerationProperty</summary>
 		/// Metadefinition Object for Enumeration Properties.
 		public IQueryable<EnumerationProperty> EnumerationProperties

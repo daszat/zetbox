@@ -703,7 +703,7 @@ namespace Kistl.App.Base
     /*
     Relation: FK_BaseProperty_has_Module
     A: ZeroOrMore Property as BaseProperty
-    B: ZeroOrOne Module as Module
+    B: One Module as Module
     Preferred Storage: MergeIntoA
     */
         // object reference property

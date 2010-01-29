@@ -145,7 +145,7 @@ using Kistl.DalProvider.EF;
 	/*
     Relation: FK_BaseProperty_has_Module
     A: ZeroOrMore Property as BaseProperty
-    B: ZeroOrOne Module as Module
+    B: One Module as Module
     Preferred Storage: MergeIntoA
 	*/
 
@@ -494,6 +494,36 @@ using Kistl.DalProvider.EF;
 
 
 	/*
+    Relation: FK_Group_has_Module
+    A: ZeroOrMore Group as Group
+    B: ZeroOrOne Module as Module
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_Group_has_Module",
+    "Group", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.Group__Implementation__),
+    "Module", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Module__Implementation__)
+    )]
+
+
+	/*
+    Relation: FK_Group_has_ParentGroup
+    A: ZeroOrMore Group as Group
+    B: ZeroOrOne Group as ParentGroup
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_Group_has_ParentGroup",
+    "Group", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.Group__Implementation__),
+    "ParentGroup", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Group__Implementation__)
+    )]
+
+
+	/*
     Relation: FK_Icon_has_Module
     A: ZeroOrMore Icon as Icon
     B: ZeroOrOne Module as Module
@@ -507,6 +537,24 @@ using Kistl.DalProvider.EF;
     "Module", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Module__Implementation__)
     )]
 
+
+	/*
+    Relation: FK_Identities_memberOf_Groups
+    A: ZeroOrMore Identity as Identities
+    B: ZeroOrMore Group as Groups
+    Preferred Storage: Separate
+	*/
+
+// The association from A to the CollectionEntry
+[assembly: EdmRelationship("Model", "FK_Identities_memberOf_Groups_A",
+    "Identities", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Identity__Implementation__),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.Identity_memberOf_Group_RelationEntry__Implementation__)
+    )]
+// The association from B to the CollectionEntry
+[assembly: EdmRelationship("Model", "FK_Identities_memberOf_Groups_B",
+    "Groups", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Group__Implementation__),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.Identity_memberOf_Group_RelationEntry__Implementation__)
+    )]
 
 	/*
     Relation: FK_InvokeOnObjectClass_has_MethodInvocations

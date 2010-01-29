@@ -21,6 +21,11 @@ namespace Kistl.App.Base
 			set;
 		}
         /// <summary>
+        /// Identites are member of groups
+        /// </summary>
+
+        ICollection<Kistl.App.Base.Group> Groups { get; }
+        /// <summary>
         /// Password of a generic identity
         /// </summary>
 		string Password {
@@ -31,13 +36,6 @@ namespace Kistl.App.Base
         /// Username of a generic identity
         /// </summary>
 		string UserName {
-			get;
-			set;
-		}
-        /// <summary>
-        /// IdentityName of a WCF Identity (Windows, AD or Samba)
-        /// </summary>
-		string WCFAccount {
 			get;
 			set;
 		}
