@@ -1,10 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Kistl.API.Server
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Linq;
+    using System.Text;
+
     public class TableConstraintNamePair
     {
         public string TableName { get; set; }
@@ -24,10 +26,13 @@ namespace Kistl.API.Server
         bool CheckColumnExists(string tblName, string colName);
         bool CheckViewExists(string viewName);
         bool CheckTriggerExists(string objName, string triggerName);
-        bool CheckProcedureExists(string procName); 
+        bool CheckProcedureExists(string procName);
         bool CheckFKConstraintExists(string fkName);
         bool CheckTableContainsData(string tblName);
         bool CheckColumnContainsNulls(string tblName, string colName);
+
+        bool CheckPositionColumnValidity(string tblName, string positionColumnName);
+        bool RepairPositionColumn(string tblName, string positionColumnName);
 
         bool GetIsColumnNullable(string tblName, string colName);
         int GetColumnMaxLength(string tblName, string colName);
@@ -62,5 +67,11 @@ namespace Kistl.API.Server
         /// <param name="tblNameRights"></param>
         void CreateRightsViewUnmaterialized(string viewName, string tblName, string tblNameRights);
         void CreateRefreshRightsOnProcedure(string procName, string viewUnmaterializedName, string tblName, string tblNameRights);
+
+        /// <summary>
+        /// Creates a procedure to check position columns for their validity.
+        /// </summary>
+        /// <param name="refSpecs">a lookup by table name into lists of (fkColumnName, referencedTableName) pairs</param>
+        void CreatePositionColumnValidCheckProcedures(ILookup<string, KeyValuePair<string, string>> refSpecs);
     }
 }

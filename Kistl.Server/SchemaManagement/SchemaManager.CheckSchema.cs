@@ -272,7 +272,7 @@ namespace Kistl.Server.SchemaManagement
             CheckColumn(tblName, colName, System.Data.DbType.Int32, 0, otherEnd.IsNullable());
             if (isIndexed)
             {
-                CheckColumn(tblName, indexName, System.Data.DbType.Int32, 0, true);
+                CheckOrderColumn(tblName, indexName);
             }
             if (!isIndexed && db.CheckColumnExists(tblName, indexName))
             {
@@ -599,6 +599,28 @@ namespace Kistl.Server.SchemaManagement
                         db.CreateColumn(tblName, colName, type, size, isNullable);
                     }
                 }
+            }
+        }
+
+        private void CheckOrderColumn(string tblName, string indexName)
+        {
+            CheckColumn(tblName, indexName, System.Data.DbType.Int32, 0, true);
+            if (repair)
+            {
+                using (Log.InfoTraceMethodCallFormat(
+                    "checking and repairing [{0}].[{1}]",
+                    tblName,
+                    indexName))
+                {
+                    db.RepairPositionColumn(tblName, indexName);
+                }
+            }
+            else if (!db.CheckPositionColumnValidity(tblName, indexName))
+            {
+                Log.WarnFormat(
+                    "Column [{0}][{1}] contains invalid position column entries",
+                    tblName,
+                    indexName);
             }
         }
 

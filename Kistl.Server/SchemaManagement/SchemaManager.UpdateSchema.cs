@@ -30,6 +30,8 @@ namespace Kistl.Server.SchemaManagement
                     UpdateDeletedRelations();
                     UpdateDeletedTables();
 
+                    UpdateProcedures();
+
                     SaveSchema(schema);
 
                     db.CommitTransaction();
@@ -42,6 +44,47 @@ namespace Kistl.Server.SchemaManagement
                     throw;
                 }
             }
+        }
+
+        private void UpdateProcedures()
+        {
+            Log.Info("Updating Procedures");
+            Log.Debug("-------------------");
+
+            var refSpecsASide = schema.GetQuery<RelationEnd>()
+                .Where(relEnd =>
+                    relEnd.Multiplicity == Multiplicity.ZeroOrMore
+                    && relEnd.HasPersistentOrder
+                    && relEnd.AParent != null
+                    && (relEnd.AParent.B.Multiplicity == Multiplicity.One
+                        || relEnd.AParent.B.Multiplicity == Multiplicity.ZeroOrOne))
+                .Select(relEnd => new
+                {
+                    OtherEnd = relEnd.AParent.B,
+                    tblName = relEnd.Type.TableName,
+                    refTableName = relEnd.AParent.B.Type.TableName,
+                })
+                .ToList();
+
+            var refSpecsBSide = schema.GetQuery<RelationEnd>()
+                .Where(relEnd =>
+                    relEnd.Multiplicity == Multiplicity.ZeroOrMore
+                    && relEnd.HasPersistentOrder
+                    && relEnd.BParent != null
+                    && (relEnd.BParent.A.Multiplicity == Multiplicity.One
+                        || relEnd.BParent.A.Multiplicity == Multiplicity.ZeroOrOne))
+                .Select(relEnd => new
+                {
+                    OtherEnd = relEnd.BParent.A,
+                    tblName = relEnd.Type.TableName,
+                    refTableName = relEnd.BParent.A.Type.TableName,
+                })
+                .ToList();
+
+            var refSpecs = refSpecsASide.Concat(refSpecsBSide)
+                .ToLookup(refSpec => refSpec.tblName, refSpec => new KeyValuePair<string, string>(refSpec.refTableName, Construct.ForeignKeyColumnName(refSpec.OtherEnd)));
+
+            db.CreatePositionColumnValidCheckProcedures(refSpecs);
         }
 
         private void UpdateDeletedTables()

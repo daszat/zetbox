@@ -11,6 +11,8 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
     using Kistl.API.Configuration;
     using Kistl.API.Server;
     using Kistl.API.Utils;
+    using System.IO;
+    using System.Text.RegularExpressions;
 
     public class SqlServer
         : ISchemaProvider
@@ -227,10 +229,45 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
 
         public bool CheckColumnContainsNulls(string tblName, string colName)
         {
-            using (var cmd = new SqlCommand(string.Format("SELECT COUNT(*) FROM [{0}] WHERE [{1}] IS NULL", tblName, colName), db, tx))
+            using (var cmd = new SqlCommand(string.Format("SELECT COUNT(*) FROM (SELECT TOP 1 [{1}] FROM [{0}] WHERE [{1}] IS NULL) AS nulls", tblName, colName), db, tx))
             {
                 QueryLog.Debug(cmd.CommandText);
                 return (int)cmd.ExecuteScalar() > 0;
+            }
+        }
+
+        public bool CheckPositionColumnValidity(string tblName, string posName)
+        {
+            var failed = CheckColumnContainsNulls(tblName, posName);
+            if (failed)
+            {
+                Log.WarnFormat("Order Column [{0}].[{1}] contains NULLs.", tblName, posName);
+                return false;
+            }
+
+            return CallRepairPositionColumn(false, tblName, posName);
+        }
+
+        public bool RepairPositionColumn(string tblName, string posName)
+        {
+            return CallRepairPositionColumn(true, tblName, posName);
+        }
+
+        private bool CallRepairPositionColumn(bool repair, string tblName, string indexName)
+        {
+            using (var cmd = new SqlCommand("RepairPositionColumnValidityByTable", db, tx))
+            {
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@repair", repair);
+                cmd.Parameters.AddWithValue("@tblName", tblName);
+                cmd.Parameters.AddWithValue("@colName", indexName);
+                cmd.Parameters.Add("@result", System.Data.SqlDbType.Bit).Direction = System.Data.ParameterDirection.Output;
+
+                QueryLog.Debug(cmd.CommandText);
+                cmd.ExecuteNonQuery();
+                
+                return (bool)cmd.Parameters["@result"].Value;
             }
         }
 
@@ -433,7 +470,7 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
 
         public void DropProcedure(string procName)
         {
-            Log.DebugFormat("Dropping procedure [{0}].[{1}]", procName);
+            Log.DebugFormat("Dropping procedure [{0}]", procName);
             ExecuteNonQuery("DROP PROCEDURE [{0}]", procName);
         }
 
@@ -504,6 +541,78 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
                 procName,
                 tblNameRights,
                 viewUnmaterializedName);
+        }
+
+        public void CreatePositionColumnValidCheckProcedures(ILookup<string, KeyValuePair<string, string>> refSpecs)
+        {
+            if (refSpecs == null) { throw new ArgumentNullException("refSpecs"); }
+
+            var procName = "RepairPositionColumnValidity";
+            var tableProcName = procName + "ByTable";
+
+            foreach (var name in new[] { procName, tableProcName })
+            {
+                if (CheckProcedureExists(name))
+                {
+                    DropProcedure(name);
+                }
+            }
+
+            ExecuteScriptFromResource(String.Format(@"Kistl.Server.Database.Scripts.{0}.sql", procName));
+
+            var createTableProcQuery = new StringBuilder();
+            createTableProcQuery.AppendFormat("CREATE PROCEDURE [{0}] (@repair BIT, @tblName NVARCHAR(255), @colName NVARCHAR(255), @result BIT OUTPUT) AS", tableProcName);
+            createTableProcQuery.AppendLine();
+            createTableProcQuery.AppendLine("SET @result = 0");
+            foreach (var tbl in refSpecs)
+            {
+                createTableProcQuery.AppendFormat("IF @tblName IS NULL OR @tblName = '{0}' BEGIN", tbl.Key);
+                createTableProcQuery.AppendLine();
+                createTableProcQuery.Append("\t");
+                foreach (var refSpec in tbl)
+                {
+                    createTableProcQuery.AppendFormat("IF @colName IS NULL OR @colName = '{0}{1}' BEGIN", refSpec.Value, Kistl.API.Helper.PositionSuffix);
+                    createTableProcQuery.AppendLine();
+                    createTableProcQuery.AppendFormat(
+                        "\t\tEXECUTE RepairPositionColumnValidity @repair=@repair, @tblName='{0}', @refTblName='{1}', @fkColumnName='{2}', @fkPositionName='{2}{3}', @result = @result OUTPUT",
+                        tbl.Key,
+                        refSpec.Key,
+                        refSpec.Value,
+                        Kistl.API.Helper.PositionSuffix);
+                    createTableProcQuery.AppendLine();
+                    createTableProcQuery.AppendLine("\t\tIF @repair = 0 AND @result = 1 RETURN");
+                    createTableProcQuery.AppendFormat("\tEND ELSE ", tbl.Key);
+                }
+                createTableProcQuery.AppendLine("BEGIN");
+
+                // see http://msdn.microsoft.com/en-us/library/ms177497.aspx
+                // no sensible advice about the "severity" found, thus using a nice random 17.
+                // this also allows client code to use TRY/CATCH on this error
+                createTableProcQuery.AppendLine("\t\tRAISERROR (N'Column [%s].[%s] not found', 17, 1, @tblName, @colName)");
+                createTableProcQuery.AppendLine("\tEND");
+
+                createTableProcQuery.AppendFormat("END ELSE ", tbl.Key);
+            }
+            createTableProcQuery.AppendLine("BEGIN");
+
+            // see http://msdn.microsoft.com/en-us/library/ms177497.aspx
+            // no sensible advice about the "severity" found, thus using a nice random 17.
+            // this also allows client code to use TRY/CATCH on this error
+            createTableProcQuery.AppendLine("\tRAISERROR (N'Table [%s] not found', 17, 1, @tblName)");
+            createTableProcQuery.AppendLine("END");
+            ExecuteNonQuery(createTableProcQuery.ToString());
+        }
+
+        private void ExecuteScriptFromResource(string scriptResourceName)
+        {
+            using (var scriptStream = new StreamReader(this.GetType().Assembly.GetManifestResourceStream(scriptResourceName)))
+            {
+                var databaseScript = scriptStream.ReadToEnd();
+                foreach (var cmdString in Regex.Split(databaseScript, "\r?\nGO\r?\n").Where(s => !String.IsNullOrEmpty(s)))
+                {
+                    ExecuteNonQuery(cmdString);
+                }
+            }
         }
     }
 }
