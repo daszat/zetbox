@@ -260,6 +260,7 @@ namespace Kistl.DalProvider.EF
         public void RemoveAt(int index)
         {
             TInterface item = _orderedItems[index];
+            _orderedItems.RemoveAt(index);
             base.Remove(item);
         }
 
