@@ -208,7 +208,11 @@ namespace Kistl.Server
         public void RunFixes()
         {
             using (Log.InfoTraceMethodCall())
+            using (var subContainer = container.CreateInnerContainer())
             {
+                var ctx = subContainer.Resolve<IKistlServerContext>();
+                Log.Info("Currently no fixes to do");
+                ctx.SubmitChanges();
             }
         }
 
