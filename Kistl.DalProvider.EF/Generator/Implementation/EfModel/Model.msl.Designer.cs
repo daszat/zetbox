@@ -43,7 +43,7 @@ ApplyEntityTypeMapping(cls);
 #line 27 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.msl.cst"
 this.WriteObjects("    </EntitySetMapping>\r\n");
 #line 29 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.msl.cst"
-if(cls.HasSecurityRules(false))
+if(cls.HasAccessControlList(false))
 		{
 
 #line 32 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.msl.cst"

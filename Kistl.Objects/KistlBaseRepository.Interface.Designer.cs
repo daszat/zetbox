@@ -66,6 +66,16 @@ namespace Kistl.App.Base
 			}
 		}
 		
+		/// <summary>List of all RoleMembership</summary>
+		/// 
+		public IQueryable<RoleMembership> RoleMemberships
+		{ 
+			get
+			{
+				return Context.GetQuery<RoleMembership>();
+			}
+		}
+		
 		/// <summary>List of all RelationEnd</summary>
 		/// Describes one end of a relation between two object classes
 		public IQueryable<RelationEnd> RelationEnds
@@ -296,6 +306,16 @@ namespace Kistl.App.Base
 			}
 		}
 		
+		/// <summary>List of all GroupMembership</summary>
+		/// 
+		public IQueryable<GroupMembership> GroupMemberships
+		{ 
+			get
+			{
+				return Context.GetQuery<GroupMembership>();
+			}
+		}
+		
 		/// <summary>List of all Group</summary>
 		/// 
 		public IQueryable<Group> Groups
@@ -503,6 +523,16 @@ namespace Kistl.App.Base
 			get
 			{
 				return Context.GetQuery<Assembly>();
+			}
+		}
+		
+		/// <summary>List of all AccessControl</summary>
+		/// 
+		public IQueryable<AccessControl> AccessControls
+		{ 
+			get
+			{
+				return Context.GetQuery<AccessControl>();
 			}
 		}
 		

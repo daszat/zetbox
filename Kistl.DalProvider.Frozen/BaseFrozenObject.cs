@@ -266,7 +266,7 @@ namespace Kistl.DalProvider.Frozen
         /// Reflects the current access rights by the current Identity. 
         /// Returnes allways Full
         /// </summary>
-        public AccessRights CurrentAccessRights { get { return AccessRights.Full; } }
+        public Kistl.API.AccessRights CurrentAccessRights { get { return Kistl.API.AccessRights.Full; } }
 
 
         #region IDataErrorInfo Members

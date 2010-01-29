@@ -367,7 +367,7 @@ namespace Kistl.API.Server
 
             // Case #1363: May return NULL during initialization
             var objClass = _metaDataResolver.GetObjectClass(ifType);
-            if (objClass == null || !objClass.HasSecurityRules() || _identity == null) return e;
+            if (objClass == null || !objClass.HasAccessControlList() || _identity == null) return e;
 
             var type = ifType.ToImplementationType().Type;
             var rights_type = Type.GetType(ifType.Type.FullName + "_Rights" + Kistl.API.Helper.ImplementationSuffix + ", " + type.Assembly.FullName);

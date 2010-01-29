@@ -20,6 +20,14 @@ namespace <%= e.Module.Namespace %>
     /// <summary>
     /// <%= e.Description %>
     /// </summary>
+<%
+	if(e.AreFlags)
+	{	
+%>
+    [System.Flags]
+<%
+	}
+%>
     public enum <%= e.ClassName %>
     {
 <%

@@ -204,7 +204,7 @@ namespace Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses
             {
                 ObjectClass cls = (ObjectClass)this.DataType;
 
-                if (cls.HasSecurityRules(false))
+                if (cls.HasAccessControlList(false))
                 {
                     if (cls.BaseObjectClass != null)
                     {

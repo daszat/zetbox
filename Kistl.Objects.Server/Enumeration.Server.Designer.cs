@@ -33,6 +33,58 @@ namespace Kistl.App.Base
 
 
         /// <summary>
+        /// Enumeration Entries are Flags
+        /// </summary>
+        // value type property
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+           // Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.NotifyingDataProperty
+        public virtual bool AreFlags
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _AreFlags;
+                if (OnAreFlags_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<bool>(__result);
+                    OnAreFlags_Getter(this, __e);
+                    __result = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_AreFlags != value)
+                {
+                    var __oldValue = _AreFlags;
+                    var __newValue = value;
+                    if(OnAreFlags_PreSetter != null)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<bool>(__oldValue, __newValue);
+                        OnAreFlags_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("AreFlags", __oldValue, __newValue);
+                    _AreFlags = __newValue;
+                    NotifyPropertyChanged("AreFlags", __oldValue, __newValue);
+                    if(OnAreFlags_PostSetter != null)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<bool>(__oldValue, __newValue);
+                        OnAreFlags_PostSetter(this, __e);
+                    }
+                }
+            }
+        }
+        private bool _AreFlags;
+		public static event PropertyGetterHandler<Kistl.App.Base.Enumeration, bool> OnAreFlags_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.Enumeration, bool> OnAreFlags_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.Enumeration, bool> OnAreFlags_PostSetter;
+
+        /// <summary>
         /// Einträge der Enumeration
         /// </summary>
     /*
@@ -134,6 +186,7 @@ namespace Kistl.App.Base
 			var otherImpl = (Enumeration__Implementation__)obj;
 			var me = (Enumeration)this;
 
+			me.AreFlags = other.AreFlags;
 		}
 
         // tail template
@@ -190,6 +243,15 @@ namespace Kistl.App.Base
 		{
 			switch(propertyName)
 			{
+				case "AreFlags":
+				{
+					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("1ef92eea-d8b3-4f95-a694-9ca09ceff0e5")).Constraints
+						.Where(c => !c.IsValid(this, this.AreFlags))
+						.Select(c => c.GetErrorText(this, this.AreFlags))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
 				case "EnumerationEntries":
 				{
 					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("1619c8a7-b969-4c05-851c-7a2545cda484")).Constraints
@@ -220,36 +282,43 @@ namespace Kistl.App.Base
         {
             
             base.ToStream(binStream, auxObjects);
+            BinarySerializer.ToStream(this._AreFlags, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             
             base.FromStream(binStream);
+            BinarySerializer.FromStream(out this._AreFlags, binStream);
         }
 
         public override void ToStream(System.Xml.XmlWriter xml)
         {
             
             base.ToStream(xml);
+            XmlStreamer.ToStream(this._AreFlags, xml, "AreFlags", "Kistl.App.Base");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
             
             base.FromStream(xml);
+            XmlStreamer.FromStream(ref this._AreFlags, xml, "AreFlags", "Kistl.App.Base");
         }
 
         public override void Export(System.Xml.XmlWriter xml, string[] modules)
         {
             
             base.Export(xml, modules);
+    
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._AreFlags, xml, "AreFlags", "Kistl.App.Base");
         }
 
         public override void MergeImport(System.Xml.XmlReader xml)
         {
             
             base.MergeImport(xml);
+            XmlStreamer.FromStream(ref this._AreFlags, xml, "AreFlags", "Kistl.App.Base");
         }
 
 #endregion

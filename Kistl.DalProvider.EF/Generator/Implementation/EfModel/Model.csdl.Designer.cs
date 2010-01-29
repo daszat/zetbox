@@ -39,7 +39,7 @@ foreach(var cls in ctx.GetBaseClasses().OrderBy(c => c.ClassName))
 #line 25 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.csdl.cst"
 this.WriteObjects("    <EntitySet Name=\"",  cls.ClassName , "\" EntityType=\"Model.",  cls.ClassName , "\" />\r\n");
 #line 27 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.csdl.cst"
-if(cls.HasSecurityRules(false))
+if(cls.HasAccessControlList(false))
 		{
 
 #line 30 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.csdl.cst"
@@ -149,7 +149,7 @@ this.WriteObjects("    </Key>\r\n");
 this.WriteObjects("    <Property Name=\"ID\" Type=\"Int32\" Nullable=\"false\" />\r\n");
 #line 125 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.csdl.cst"
 ApplyEntityTypeFieldDefs(cls.Properties.Cast<Property>());
-		if(cls.HasSecurityRules(false))
+		if(cls.HasAccessControlList(false))
 		{
 
 #line 129 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.csdl.cst"
@@ -160,7 +160,7 @@ this.WriteObjects("    <NavigationProperty Name=\"SecurityRightsCollection",  Ki
 #line 133 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.csdl.cst"
 this.WriteObjects("  </EntityType>\r\n");
 #line 135 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.csdl.cst"
-if(cls.HasSecurityRules(false))
+if(cls.HasAccessControlList(false))
 		{
 
 #line 138 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.csdl.cst"

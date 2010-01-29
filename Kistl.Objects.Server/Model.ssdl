@@ -7,6 +7,7 @@
   <EntityContainer Name="dbo">
 
     <!-- EntitySets for all Base Classes -->
+    <EntitySet Name="AccessControl" EntityType="Model.Store.AccessControl" Table="AccessControls"/>
     <EntitySet Name="ANewObjectClass" EntityType="Model.Store.ANewObjectClass" Table="NewObjectClasses"/>
     <EntitySet Name="AnotherTest" EntityType="Model.Store.AnotherTest" Table="AnotherTests"/>
     <EntitySet Name="Antwort" EntityType="Model.Store.Antwort" Table="Antworten"/>
@@ -174,6 +175,12 @@
       <End Role="A_ControlKind" EntitySet="ControlKind" />
       <End Role="B_EnumerationSelectorKind" EntitySet="EnumerationSelectorKind" />
     </AssociationSet>
+    <EntitySet Name="GroupMembership" EntityType="Model.Store.GroupMembership" Table="GroupMemberships"/>
+    <!-- inherits from AccessControl -->
+    <AssociationSet Name="FK_GroupMembership_AccessControl_ID" Association="Model.Store.FK_GroupMembership_AccessControl_ID" >
+      <End Role="A_AccessControl" EntitySet="AccessControl" />
+      <End Role="B_GroupMembership" EntitySet="GroupMembership" />
+    </AssociationSet>
     <EntitySet Name="GuidProperty" EntityType="Model.Store.GuidProperty" Table="GuidProperties"/>
     <!-- inherits from ValueTypeProperty -->
     <AssociationSet Name="FK_GuidProperty_ValueTypeProperty_ID" Association="Model.Store.FK_GuidProperty_ValueTypeProperty_ID" >
@@ -299,6 +306,12 @@
     <AssociationSet Name="FK_RelationEditorKind_DataObjectKind_ID" Association="Model.Store.FK_RelationEditorKind_DataObjectKind_ID" >
       <End Role="A_DataObjectKind" EntitySet="DataObjectKind" />
       <End Role="B_RelationEditorKind" EntitySet="RelationEditorKind" />
+    </AssociationSet>
+    <EntitySet Name="RoleMembership" EntityType="Model.Store.RoleMembership" Table="RoleMemberships"/>
+    <!-- inherits from AccessControl -->
+    <AssociationSet Name="FK_RoleMembership_AccessControl_ID" Association="Model.Store.FK_RoleMembership_AccessControl_ID" >
+      <End Role="A_AccessControl" EntitySet="AccessControl" />
+      <End Role="B_RoleMembership" EntitySet="RoleMembership" />
     </AssociationSet>
     <EntitySet Name="SingleLineDataObjectKind" EntityType="Model.Store.SingleLineDataObjectKind" Table="SingleLineDataObjectKinds"/>
     <!-- inherits from ControlKind -->
@@ -475,6 +488,22 @@
     </AssociationSet>
     
     <!-- 
+    Relation: FK_RoleMembership_resolves_Relations
+    A: ZeroOrMore RoleMembership as RoleMembership
+    B: ZeroOrMore Relation as Relations
+    Preferred Storage: Separate
+    -->
+    <EntitySet Name="RoleMembership_resolves_Relation_RelationEntry" EntityType="Model.Store.RoleMembership_resolves_Relation_RelationEntry" Table="RoleMembership_resolves_Relations" />
+    <AssociationSet Name="FK_RoleMembership_resolves_Relations_A" Association="Model.Store.FK_RoleMembership_resolves_Relations_A" >
+      <End Role="RoleMembership" EntitySet="RoleMembership" />
+      <End Role="CollectionEntry" EntitySet="RoleMembership_resolves_Relation_RelationEntry" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RoleMembership_resolves_Relations_B" Association="Model.Store.FK_RoleMembership_resolves_Relations_B" >
+      <End Role="CollectionEntry" EntitySet="RoleMembership_resolves_Relation_RelationEntry" />
+      <End Role="Relations" EntitySet="Relation" />
+    </AssociationSet>
+    
+    <!-- 
     Relation: FK_Template_hasMenu_Menu
     A: ZeroOrMore Template as Template
     B: ZeroOrMore Visual as Menu
@@ -557,6 +586,18 @@
 
 
     <!-- AssociationSets for all object-object relations which do not need CollectionEntrys -->
+    <AssociationSet Name="FK_AccessControl_has_Module" Association="Model.Store.FK_AccessControl_has_Module" >
+      <End Role="AccessControl" EntitySet="AccessControl" />
+      <End Role="Module" EntitySet="Module" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AccessControl_was_ChangedBy" Association="Model.Store.FK_AccessControl_was_ChangedBy" >
+      <End Role="AccessControl" EntitySet="AccessControl" />
+      <End Role="ChangedBy" EntitySet="Identity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AccessControl_was_CreatedBy" Association="Model.Store.FK_AccessControl_was_CreatedBy" >
+      <End Role="AccessControl" EntitySet="AccessControl" />
+      <End Role="CreatedBy" EntitySet="Identity" />
+    </AssociationSet>
     <AssociationSet Name="FK_Assembly_was_ChangedBy" Association="Model.Store.FK_Assembly_was_ChangedBy" >
       <End Role="Assembly" EntitySet="Assembly" />
       <End Role="ChangedBy" EntitySet="Identity" />
@@ -685,6 +726,10 @@
       <End Role="Group" EntitySet="Group" />
       <End Role="ParentGroup" EntitySet="Group" />
     </AssociationSet>
+    <AssociationSet Name="FK_GroupMembership_has_Group" Association="Model.Store.FK_GroupMembership_has_Group" >
+      <End Role="GroupMembership" EntitySet="GroupMembership" />
+      <End Role="Group" EntitySet="Group" />
+    </AssociationSet>
     <AssociationSet Name="FK_Icon_has_Module" Association="Model.Store.FK_Icon_has_Module" >
       <End Role="Icon" EntitySet="Icon" />
       <End Role="Module" EntitySet="Module" />
@@ -784,6 +829,10 @@
     <AssociationSet Name="FK_MuhBlah_Role_has_TestCustomObjects_List_Role" Association="Model.Store.FK_MuhBlah_Role_has_TestCustomObjects_List_Role" >
       <End Role="MuhBlah_Role" EntitySet="Muhblah" />
       <End Role="TestCustomObjects_List_Role" EntitySet="TestCustomObject" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ObjectClass_has_AccessControlList" Association="Model.Store.FK_ObjectClass_has_AccessControlList" >
+      <End Role="ObjectClass" EntitySet="ObjectClass" />
+      <End Role="AccessControlList" EntitySet="AccessControl" />
     </AssociationSet>
     <AssociationSet Name="FK_ObjectClass_has_Methods" Association="Model.Store.FK_ObjectClass_has_Methods" >
       <End Role="ObjectClass" EntitySet="DataType" />
@@ -957,12 +1006,6 @@
       <End Role="CollectionEntry" EntitySet="Kunde_EMails_CollectionEntry" />
     </AssociationSet>
     
-    <EntitySet Name="ObjectClass_SecurityRules_CollectionEntry" EntityType="Model.Store.ObjectClass_SecurityRules_CollectionEntry" Table="ObjectClasses_SecurityRulesCollection" />
-    <AssociationSet Name="FK_ObjectClass_value_SecurityRules" Association="Model.Store.FK_ObjectClass_value_SecurityRules" >
-      <End Role="ObjectClass" EntitySet="ObjectClass" />
-      <End Role="CollectionEntry" EntitySet="ObjectClass_SecurityRules_CollectionEntry" />
-    </AssociationSet>
-    
 
     <!-- EntitySets and AssociationSet for all object-struct CollectionEntrys -->
     <EntitySet Name="TestCustomObject_PhoneNumbersOther_CollectionEntry" EntityType="Model.Store.TestCustomObject_PhoneNumbersOther_CollectionEntry" Table="TestCustomObjects_PhoneNumbersOtherCollection" />
@@ -977,6 +1020,23 @@
 
   <!-- EntityTypes for all classes -->
 	
+  <EntityType Name="AccessControl">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_Module" Type="int" />
+    <Property Name="fk_ChangedBy" Type="int" />
+    <Property Name="fk_CreatedBy" Type="int" />
+    <Property Name="fk_ObjectClass" Type="int" />
+    <Property Name="ChangedOn" Type="datetime" Nullable="true" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="true" />
+    <Property Name="Description" Type="nvarchar" MaxLength="1000" Nullable="true" />
+    <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Rights" Type="int" Nullable="true" />
+  </EntityType>
+	
   <EntityType Name="ActionKind">
     <Key>
       <PropertyRef Name="ID" />
@@ -989,7 +1049,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="TestString" Type="nvarchar" MaxLength="4000" Nullable="true" />
+    <Property Name="TestString" Type="nvarchar" MaxLength="1000" Nullable="true" />
   </EntityType>
 	
   <EntityType Name="AnotherTest">
@@ -1006,7 +1066,7 @@
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="fk_Fragebogen" Type="int" />
     <Property Name="fk_Fragebogen_pos" Type="int" Nullable="true" />
-    <Property Name="Frage" Type="nvarchar" MaxLength="4000" Nullable="false" />
+    <Property Name="Frage" Type="nvarchar" MaxLength="1000" Nullable="false" />
     <Property Name="FragenNummer" Type="int" Nullable="false" />
     <Property Name="GegebeneAntwort" Type="int" Nullable="true" />
   </EntityType>
@@ -1102,7 +1162,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="Name" Type="nvarchar" MaxLength="4000" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="1000" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="CompoundObject">
@@ -1164,7 +1224,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="Schema" Type="nvarchar" MaxLength="4000" Nullable="false" />
+    <Property Name="Schema" Type="nvarchar" MaxLength="1000" Nullable="false" />
     <Property Name="Version" Type="int" Nullable="false" />
   </EntityType>
 	
@@ -1254,6 +1314,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="AreFlags" Type="bit" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="EnumerationEntry">
@@ -1303,7 +1364,15 @@
     <Property Name="fk_Module" Type="int" />
     <Property Name="fk_ParentGroup" Type="int" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="Name" Type="nvarchar" MaxLength="4000" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="1000" Nullable="false" />
+  </EntityType>
+	
+  <EntityType Name="GroupMembership">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="fk_Group" Type="int" />
   </EntityType>
 	
   <EntityType Name="GuidProperty">
@@ -1496,7 +1565,7 @@
     <Property Name="TestBool" Type="bit" Nullable="true" />
     <Property Name="TestDateTime" Type="datetime" Nullable="true" />
     <Property Name="TestEnum" Type="int" Nullable="false" />
-    <Property Name="TestString" Type="nvarchar" MaxLength="4000" Nullable="true" />
+    <Property Name="TestString" Type="nvarchar" MaxLength="1000" Nullable="true" />
   </EntityType>
 	
   <EntityType Name="NewGuidDefaultValue">
@@ -1547,10 +1616,10 @@
     <Property Name="ID" Type="int" Nullable="false" />
     <Property Name="fk_ReferencedObjectClass" Type="int" />
     <Property Name="HasPersistentOrder" Type="bit" Nullable="false" />
-    <Property Name="ImplementorRoleName" Type="nvarchar" MaxLength="4000" Nullable="true" />
+    <Property Name="ImplementorRoleName" Type="nvarchar" MaxLength="1000" Nullable="true" />
     <Property Name="IsList" Type="bit" Nullable="false" />
-    <Property Name="ItemRoleName" Type="nvarchar" MaxLength="4000" Nullable="true" />
-    <Property Name="Verb" Type="nvarchar" MaxLength="4000" Nullable="true" />
+    <Property Name="ItemRoleName" Type="nvarchar" MaxLength="1000" Nullable="true" />
+    <Property Name="Verb" Type="nvarchar" MaxLength="1000" Nullable="true" />
   </EntityType>
 	
   <EntityType Name="ObjectReferenceProperty">
@@ -1715,6 +1784,13 @@
     <Property Name="HasPersistentOrder" Type="bit" Nullable="false" />
     <Property Name="Multiplicity" Type="int" Nullable="false" />
     <Property Name="RoleName" Type="nvarchar" MaxLength="200" Nullable="false" />
+  </EntityType>
+	
+  <EntityType Name="RoleMembership">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="SingleLineDataObjectKind">
@@ -2182,6 +2258,45 @@
   </Association>
 
 	
+  <EntityType Name="RoleMembership_resolves_Relation_RelationEntry">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+	<Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="fk_RoleMembership" Type="int" Nullable="true" />
+    <Property Name="fk_Relations" Type="int" Nullable="true" />
+  </EntityType>
+
+  <!-- A to CollectionEntry -->
+  <Association Name="FK_RoleMembership_resolves_Relations_A">
+    <End Role="RoleMembership" Type="Model.Store.RoleMembership" Multiplicity="0..1" />
+    <End Role="CollectionEntry" Type="Model.Store.RoleMembership_resolves_Relation_RelationEntry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RoleMembership">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CollectionEntry">
+        <PropertyRef Name="fk_RoleMembership" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+  <!-- B to CollectionEntry -->
+  <Association Name="FK_RoleMembership_resolves_Relations_B">
+    <End Role="Relations" Type="Model.Store.Relation" Multiplicity="0..1" />
+    <End Role="CollectionEntry" Type="Model.Store.RoleMembership_resolves_Relation_RelationEntry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Relations">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CollectionEntry">
+        <PropertyRef Name="fk_Relations" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+	
   <EntityType Name="Template_hasMenu_Visual_RelationEntry">
     <Key>
       <PropertyRef Name="ID" />
@@ -2377,6 +2492,48 @@
 
 
   <!-- Associations for all object-object relations without CollectionEntry (1:1, 1:N) -->
+
+  <Association Name="FK_AccessControl_has_Module">
+    <End Role="Module" Type="Model.Store.Module" Multiplicity="0..1" />
+    <End Role="AccessControl" Type="Model.Store.AccessControl" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Module">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="AccessControl">
+        <PropertyRef Name="fk_Module" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_AccessControl_was_ChangedBy">
+    <End Role="ChangedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
+    <End Role="AccessControl" Type="Model.Store.AccessControl" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ChangedBy">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="AccessControl">
+        <PropertyRef Name="fk_ChangedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_AccessControl_was_CreatedBy">
+    <End Role="CreatedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
+    <End Role="AccessControl" Type="Model.Store.AccessControl" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CreatedBy">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="AccessControl">
+        <PropertyRef Name="fk_CreatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
 
   <Association Name="FK_Assembly_was_ChangedBy">
     <End Role="ChangedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
@@ -2826,6 +2983,20 @@
   </Association>
 
 
+  <Association Name="FK_GroupMembership_has_Group">
+    <End Role="Group" Type="Model.Store.Group" Multiplicity="0..1" />
+    <End Role="GroupMembership" Type="Model.Store.GroupMembership" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Group">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="GroupMembership">
+        <PropertyRef Name="fk_Group" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
   <Association Name="FK_Icon_has_Module">
     <End Role="Module" Type="Model.Store.Module" Multiplicity="0..1" />
     <End Role="Icon" Type="Model.Store.Icon" Multiplicity="*" />
@@ -3171,6 +3342,20 @@
       </Principal>
       <Dependent Role="TestCustomObjects_List_Role">
         <PropertyRef Name="fk_MuhBlah_Role" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_ObjectClass_has_AccessControlList">
+    <End Role="ObjectClass" Type="Model.Store.ObjectClass" Multiplicity="0..1" />
+    <End Role="AccessControlList" Type="Model.Store.AccessControl" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ObjectClass">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="AccessControlList">
+        <PropertyRef Name="fk_ObjectClass" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -3992,6 +4177,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_GroupMembership_AccessControl_ID">
+    <End Role="A_AccessControl" Type="Model.Store.AccessControl" Multiplicity="1" />
+    <End Role="B_GroupMembership" Type="Model.Store.GroupMembership" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="A_AccessControl">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_GroupMembership">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_GuidProperty_ValueTypeProperty_ID">
     <End Role="A_ValueTypeProperty" Type="Model.Store.ValueTypeProperty" Multiplicity="1" />
     <End Role="B_GuidProperty" Type="Model.Store.GuidProperty" Multiplicity="0..1" />
@@ -4244,6 +4441,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_RoleMembership_AccessControl_ID">
+    <End Role="A_AccessControl" Type="Model.Store.AccessControl" Multiplicity="1" />
+    <End Role="B_RoleMembership" Type="Model.Store.RoleMembership" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="A_AccessControl">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_RoleMembership">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_SingleLineDataObjectKind_ControlKind_ID">
     <End Role="A_ControlKind" Type="Model.Store.ControlKind" Multiplicity="1" />
     <End Role="B_SingleLineDataObjectKind" Type="Model.Store.SingleLineDataObjectKind" Multiplicity="0..1" />
@@ -4387,30 +4596,6 @@
         </Principal>
         <Dependent Role="CollectionEntry">
           <PropertyRef Name="fk_Kunde" />
-        </Dependent>
-      </ReferentialConstraint>
-    </Association>
-
-    <EntityType Name="ObjectClass_SecurityRules_CollectionEntry" >
-      <Key>
-        <PropertyRef Name="ID" />
-      </Key>
-      <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-      <Property Name="fk_ObjectClass" Type="int" Nullable="true" />
-      <Property Name="SecurityRules" Type="nvarchar" MaxLength="4000" />
-    </EntityType>
-
-    <Association Name="FK_ObjectClass_value_SecurityRules">
-      <End Role="ObjectClass" Type="Model.Store.ObjectClass" Multiplicity="0..1">
-        <OnDelete Action="Cascade" />
-      </End>
-      <End Role="CollectionEntry" Type="Model.Store.ObjectClass_SecurityRules_CollectionEntry" Multiplicity="*" />
-      <ReferentialConstraint>
-        <Principal Role="ObjectClass">
-          <PropertyRef Name="ID" />
-        </Principal>
-        <Dependent Role="CollectionEntry">
-          <PropertyRef Name="fk_ObjectClass" />
         </Dependent>
       </ReferentialConstraint>
     </Association>

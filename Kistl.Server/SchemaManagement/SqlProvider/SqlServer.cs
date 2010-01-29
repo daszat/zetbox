@@ -353,7 +353,7 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
             string nullable = isNullable ? "NULL" : "NOT NULL";
 
             // TODO: Trick 17, temporäre Lösung
-            if (type == System.Data.DbType.String && size > 1000)
+            if (type == System.Data.DbType.String && size > Kistl.API.Helper.Temp_UnlimitedMaxStringLengthLimit)
             {
                 Log.DebugFormat("[{0}] table [{1}] column [{2}] ntext [{3}]", addOrAlter, tblName, colName, nullable);
                 sb.AppendFormat("ALTER TABLE [{0}] {1} [{2}] {3} {4}", tblName, addOrAlter, colName,

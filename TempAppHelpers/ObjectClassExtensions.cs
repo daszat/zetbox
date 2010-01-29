@@ -116,23 +116,22 @@ namespace Kistl.App.Extensions
             return false;
         }
 
-        public static bool HasSecurityRules(this ObjectClass cls)
+        public static bool HasAccessControlList(this ObjectClass cls)
         {
-            return HasSecurityRules(cls, true);
+            return HasAccessControlList(cls, true);
         }
 
-        public static bool HasSecurityRules(this ObjectClass cls, bool lookupInBase)
+        public static bool HasAccessControlList(this ObjectClass cls, bool lookupInBase)
         {
             if (cls == null) throw new ArgumentNullException("cls");
-            return cls.ClassName == "Projekt";
-            //while (cls != null)
-            //{
-            //    if (cls.SecurityRules.Count > 0)
-            //        return true;
-            //    if (!lookupInBase) return false;
-            //    cls = cls.BaseObjectClass;
-            //}
-            //return false;
+            while (cls != null)
+            {
+                if (cls.AccessControlList.Count > 0)
+                    return true;
+                if (!lookupInBase) return false;
+                cls = cls.BaseObjectClass;
+            }
+            return false;
         }
 
         public static InterfaceType GetDescribedInterfaceType(this ObjectClass cls)

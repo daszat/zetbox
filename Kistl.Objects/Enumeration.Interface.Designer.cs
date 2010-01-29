@@ -14,6 +14,13 @@ namespace Kistl.App.Base
     {
 
         /// <summary>
+        /// Enumeration Entries are Flags
+        /// </summary>
+		bool AreFlags {
+			get;
+			set;
+		}
+        /// <summary>
         /// Einträge der Enumeration
         /// </summary>
 

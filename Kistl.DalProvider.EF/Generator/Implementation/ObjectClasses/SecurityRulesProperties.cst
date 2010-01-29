@@ -17,11 +17,11 @@
 <%@ Parameter Name="referencedImplementation" Type="string" %>
 <%@ Parameter Name="efNameRightsPropertyName" Type="string" %>
 
-		public override AccessRights CurrentAccessRights 
+		public override Kistl.API.AccessRights CurrentAccessRights 
 		{ 
 			get 
 			{ 
-				return (AccessRights)<%= efNameRightsPropertyName %>.First().Right; 
+				return (Kistl.API.AccessRights)<%= efNameRightsPropertyName %>.First().Right; 
 			} 
 		}
 

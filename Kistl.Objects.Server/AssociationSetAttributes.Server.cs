@@ -8,6 +8,51 @@ using Kistl.DalProvider.EF;
 
 
 	/*
+    Relation: FK_AccessControl_has_Module
+    A: ZeroOrMore AccessControl as AccessControl
+    B: ZeroOrOne Module as Module
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_AccessControl_has_Module",
+    "AccessControl", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.AccessControl__Implementation__),
+    "Module", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Module__Implementation__)
+    )]
+
+
+	/*
+    Relation: FK_AccessControl_was_ChangedBy
+    A: ZeroOrMore AccessControl as AccessControl
+    B: ZeroOrOne Identity as ChangedBy
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_AccessControl_was_ChangedBy",
+    "AccessControl", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.AccessControl__Implementation__),
+    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Identity__Implementation__)
+    )]
+
+
+	/*
+    Relation: FK_AccessControl_was_CreatedBy
+    A: ZeroOrMore AccessControl as AccessControl
+    B: ZeroOrOne Identity as CreatedBy
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_AccessControl_was_CreatedBy",
+    "AccessControl", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.AccessControl__Implementation__),
+    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Identity__Implementation__)
+    )]
+
+
+	/*
     Relation: FK_Assembly_was_ChangedBy
     A: ZeroOrMore Assembly as Assembly
     B: ZeroOrOne Identity as ChangedBy
@@ -524,6 +569,21 @@ using Kistl.DalProvider.EF;
 
 
 	/*
+    Relation: FK_GroupMembership_has_Group
+    A: ZeroOrMore GroupMembership as GroupMembership
+    B: One Group as Group
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_GroupMembership_has_Group",
+    "GroupMembership", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.GroupMembership__Implementation__),
+    "Group", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Group__Implementation__)
+    )]
+
+
+	/*
     Relation: FK_Icon_has_Module
     A: ZeroOrMore Icon as Icon
     B: ZeroOrOne Module as Module
@@ -931,6 +991,21 @@ using Kistl.DalProvider.EF;
     "Model", "FK_MuhBlah_Role_has_TestCustomObjects_List_Role",
     "MuhBlah_Role", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Test.Muhblah__Implementation__),
     "TestCustomObjects_List_Role", RelationshipMultiplicity.Many, typeof(Kistl.App.Test.TestCustomObject__Implementation__)
+    )]
+
+
+	/*
+    Relation: FK_ObjectClass_has_AccessControlList
+    A: One ObjectClass as ObjectClass
+    B: ZeroOrMore AccessControl as AccessControlList
+    Preferred Storage: MergeIntoB
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_ObjectClass_has_AccessControlList",
+    "ObjectClass", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.ObjectClass__Implementation__),
+    "AccessControlList", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.AccessControl__Implementation__)
     )]
 
 
@@ -1409,6 +1484,24 @@ using Kistl.DalProvider.EF;
 
 
 	/*
+    Relation: FK_RoleMembership_resolves_Relations
+    A: ZeroOrMore RoleMembership as RoleMembership
+    B: ZeroOrMore Relation as Relations
+    Preferred Storage: Separate
+	*/
+
+// The association from A to the CollectionEntry
+[assembly: EdmRelationship("Model", "FK_RoleMembership_resolves_Relations_A",
+    "RoleMembership", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.RoleMembership__Implementation__),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.RoleMembership_resolves_Relation_RelationEntry__Implementation__)
+    )]
+// The association from B to the CollectionEntry
+[assembly: EdmRelationship("Model", "FK_RoleMembership_resolves_Relations_B",
+    "Relations", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Relation__Implementation__),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.RoleMembership_resolves_Relation_RelationEntry__Implementation__)
+    )]
+
+	/*
     Relation: FK_Task_was_ChangedBy
     A: ZeroOrMore Task as Task
     B: ZeroOrOne Identity as ChangedBy
@@ -1699,14 +1792,6 @@ using Kistl.DalProvider.EF;
     "Model", "FK_Kunde_value_EMails",
     "Kunde", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Projekte.Kunde__Implementation__),
     "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.Projekte.Kunde_EMails_CollectionEntry__Implementation__)
-    )]
-
-
-// object-value association
-[assembly: EdmRelationship(
-    "Model", "FK_ObjectClass_value_SecurityRules",
-    "ObjectClass", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.ObjectClass__Implementation__),
-    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.ObjectClass_SecurityRules_CollectionEntry__Implementation__)
     )]
 
 

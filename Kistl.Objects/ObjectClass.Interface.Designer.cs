@@ -14,6 +14,11 @@ namespace Kistl.App.Base
     {
 
         /// <summary>
+        /// 
+        /// </summary>
+
+        ICollection<Kistl.App.Base.AccessControl> AccessControlList { get; }
+        /// <summary>
         /// Pointer auf die Basisklasse
         /// </summary>
 		Kistl.App.Base.ObjectClass BaseObjectClass {
@@ -51,11 +56,6 @@ namespace Kistl.App.Base
 			get;
 			set;
 		}
-        /// <summary>
-        /// Set of security rules to filter access rights
-        /// </summary>
-
-        ICollection<System.String> SecurityRules { get; }
         /// <summary>
         /// Liste der vererbten Klassen
         /// </summary>

@@ -145,7 +145,7 @@ namespace Kistl.API.Client
         /// <summary>
         /// Reflects the current access rights by the current Identity. 
         /// </summary>
-        public AccessRights CurrentAccessRights { get; protected set; }
+        public Kistl.API.AccessRights CurrentAccessRights { get; protected set; }
     }
 
     public abstract class BaseClientCollectionEntry : BaseClientPersistenceObject

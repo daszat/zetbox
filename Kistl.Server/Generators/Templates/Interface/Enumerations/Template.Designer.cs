@@ -35,22 +35,32 @@ this.WriteObjects("\r\n");
 this.WriteObjects("    /// <summary>\r\n");
 this.WriteObjects("    /// ",  e.Description , "\r\n");
 this.WriteObjects("    /// </summary>\r\n");
+#line 24 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\Enumerations\Template.cst"
+if(e.AreFlags)
+	{	
+
+#line 27 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\Enumerations\Template.cst"
+this.WriteObjects("    [System.Flags]\r\n");
+#line 29 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\Enumerations\Template.cst"
+}
+
+#line 31 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\Enumerations\Template.cst"
 this.WriteObjects("    public enum ",  e.ClassName , "\r\n");
 this.WriteObjects("    {\r\n");
-#line 26 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\Enumerations\Template.cst"
+#line 34 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\Enumerations\Template.cst"
 foreach(EnumerationEntry entry in e.EnumerationEntries.OrderBy(ee => ee.Value))
     {
 
-#line 29 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\Enumerations\Template.cst"
+#line 37 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\Enumerations\Template.cst"
 this.WriteObjects("		/// <summary>\r\n");
 this.WriteObjects("		/// ",  entry.Description , "\r\n");
 this.WriteObjects("		/// </summary>\r\n");
 this.WriteObjects("		",  entry.Name , " = ",  entry.Value , ",\r\n");
 this.WriteObjects("\r\n");
-#line 35 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\Enumerations\Template.cst"
+#line 43 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\Enumerations\Template.cst"
 }
 
-#line 37 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\Enumerations\Template.cst"
+#line 45 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\Enumerations\Template.cst"
 this.WriteObjects("	}\r\n");
 this.WriteObjects("}");
 

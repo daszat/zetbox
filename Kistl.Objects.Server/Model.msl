@@ -3,6 +3,29 @@
   <EntityContainerMapping StorageEntityContainer="dbo" CdmEntityContainer="Entities">
     
     <!-- EntitySetMappings for classes -->
+    <EntitySetMapping Name="AccessControl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.AccessControl)">
+	    <MappingFragment StoreEntitySet="AccessControl">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+<ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+<ScalarProperty Name="Description" ColumnName="Description" />
+<ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+<ScalarProperty Name="Name" ColumnName="Name" />
+<ScalarProperty Name="Rights__Implementation__" ColumnName="Rights" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.GroupMembership)">
+	    <MappingFragment StoreEntitySet="GroupMembership">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.RoleMembership)">
+	    <MappingFragment StoreEntitySet="RoleMembership">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="ANewObjectClass">
       <EntityTypeMapping TypeName="IsTypeOf(Model.ANewObjectClass)">
 	    <MappingFragment StoreEntitySet="ANewObjectClass">
@@ -295,6 +318,7 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.Enumeration)">
 	    <MappingFragment StoreEntitySet="Enumeration">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="AreFlags" ColumnName="AreFlags" />
 	    </MappingFragment>
       </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Model.Interface)">
@@ -1009,6 +1033,45 @@
     </AssociationSetMapping>
 
     <!--
+    Relation: FK_RoleMembership_resolves_Relations
+    A: ZeroOrMore RoleMembership as RoleMembership
+    B: ZeroOrMore Relation as Relations
+    Preferred Storage: Separate
+    -->
+    <EntitySetMapping Name="RoleMembership_resolves_Relation_RelationEntry">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.RoleMembership_resolves_Relation_RelationEntry)">
+        <MappingFragment StoreEntitySet="RoleMembership_resolves_Relation_RelationEntry">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+		  <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <!-- A to CollectionEntry -->
+    <AssociationSetMapping Name="FK_RoleMembership_resolves_Relations_A"
+                           TypeName="Model.FK_RoleMembership_resolves_Relations_A"
+                           StoreEntitySet="RoleMembership_resolves_Relation_RelationEntry" >
+      <EndProperty Name="RoleMembership">
+        <ScalarProperty Name="ID" ColumnName="fk_RoleMembership"/>
+      </EndProperty>
+      <EndProperty Name="CollectionEntry">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_RoleMembership" IsNull="false"/>
+    </AssociationSetMapping>
+    <!-- B to CollectionEntry -->
+    <AssociationSetMapping Name="FK_RoleMembership_resolves_Relations_B"
+                           TypeName="Model.FK_RoleMembership_resolves_Relations_B"
+                           StoreEntitySet="RoleMembership_resolves_Relation_RelationEntry" >
+      <EndProperty Name="Relations">
+        <ScalarProperty Name="ID" ColumnName="fk_Relations"/>
+      </EndProperty>
+      <EndProperty Name="CollectionEntry">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_Relations" IsNull="false"/>
+    </AssociationSetMapping>
+
+    <!--
     Relation: FK_Template_hasMenu_Menu
     A: ZeroOrMore Template as Template
     B: ZeroOrMore Visual as Menu
@@ -1204,6 +1267,57 @@
 
 
     <!-- AssociationSetMappings for direct object-object relations without a CollectionEntry -->
+    <!--
+    Relation: FK_AccessControl_has_Module
+    A: ZeroOrMore AccessControl as AccessControl
+    B: ZeroOrOne Module as Module
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_AccessControl_has_Module"
+                           TypeName="Model.FK_AccessControl_has_Module"
+                           StoreEntitySet="AccessControl" >
+      <EndProperty Name="Module">
+        <ScalarProperty Name="ID" ColumnName="fk_Module"/>
+      </EndProperty>
+      <EndProperty Name="AccessControl">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_Module" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_AccessControl_was_ChangedBy
+    A: ZeroOrMore AccessControl as AccessControl
+    B: ZeroOrOne Identity as ChangedBy
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_AccessControl_was_ChangedBy"
+                           TypeName="Model.FK_AccessControl_was_ChangedBy"
+                           StoreEntitySet="AccessControl" >
+      <EndProperty Name="ChangedBy">
+        <ScalarProperty Name="ID" ColumnName="fk_ChangedBy"/>
+      </EndProperty>
+      <EndProperty Name="AccessControl">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_ChangedBy" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_AccessControl_was_CreatedBy
+    A: ZeroOrMore AccessControl as AccessControl
+    B: ZeroOrOne Identity as CreatedBy
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_AccessControl_was_CreatedBy"
+                           TypeName="Model.FK_AccessControl_was_CreatedBy"
+                           StoreEntitySet="AccessControl" >
+      <EndProperty Name="CreatedBy">
+        <ScalarProperty Name="ID" ColumnName="fk_CreatedBy"/>
+      </EndProperty>
+      <EndProperty Name="AccessControl">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_CreatedBy" IsNull="false"/>
+    </AssociationSetMapping>
     <!--
     Relation: FK_Assembly_was_ChangedBy
     A: ZeroOrMore Assembly as Assembly
@@ -1749,6 +1863,23 @@
       <Condition ColumnName="fk_ParentGroup" IsNull="false"/>
     </AssociationSetMapping>
     <!--
+    Relation: FK_GroupMembership_has_Group
+    A: ZeroOrMore GroupMembership as GroupMembership
+    B: One Group as Group
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_GroupMembership_has_Group"
+                           TypeName="Model.FK_GroupMembership_has_Group"
+                           StoreEntitySet="GroupMembership" >
+      <EndProperty Name="Group">
+        <ScalarProperty Name="ID" ColumnName="fk_Group"/>
+      </EndProperty>
+      <EndProperty Name="GroupMembership">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_Group" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
     Relation: FK_Icon_has_Module
     A: ZeroOrMore Icon as Icon
     B: ZeroOrOne Module as Module
@@ -2172,6 +2303,23 @@
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="fk_MuhBlah_Role" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_ObjectClass_has_AccessControlList
+    A: One ObjectClass as ObjectClass
+    B: ZeroOrMore AccessControl as AccessControlList
+    Preferred Storage: MergeIntoB
+    -->
+    <AssociationSetMapping Name="FK_ObjectClass_has_AccessControlList"
+                           TypeName="Model.FK_ObjectClass_has_AccessControlList"
+                           StoreEntitySet="AccessControl" >
+      <EndProperty Name="ObjectClass">
+        <ScalarProperty Name="ID" ColumnName="fk_ObjectClass"/>
+      </EndProperty>
+      <EndProperty Name="AccessControlList">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_ObjectClass" IsNull="false"/>
     </AssociationSetMapping>
     <!--
     Relation: FK_ObjectClass_has_Methods
@@ -2890,25 +3038,6 @@
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="fk_Kunde" IsNull="false"/>
-    </AssociationSetMapping>
-    <EntitySetMapping Name="ObjectClass_SecurityRules_CollectionEntry">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.ObjectClass_SecurityRules_CollectionEntry)">
-        <MappingFragment StoreEntitySet="ObjectClass_SecurityRules_CollectionEntry">
-          <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="B" ColumnName="SecurityRules" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <AssociationSetMapping Name="FK_ObjectClass_value_SecurityRules"
-                           TypeName="Model.FK_ObjectClass_value_SecurityRules"
-                           StoreEntitySet="ObjectClass_SecurityRules_CollectionEntry" >
-      <EndProperty Name="ObjectClass">
-        <ScalarProperty Name="ID" ColumnName="fk_ObjectClass"/>
-      </EndProperty>
-      <EndProperty Name="CollectionEntry">
-        <ScalarProperty Name="ID" ColumnName="ID"/>
-      </EndProperty>
-      <Condition ColumnName="fk_ObjectClass" IsNull="false"/>
     </AssociationSetMapping>
 
     <!-- EntitySetMappings and AssociationSetMappings for object-struct CollectionEntrys -->

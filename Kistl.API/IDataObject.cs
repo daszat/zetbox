@@ -63,7 +63,7 @@ namespace Kistl.API
     /// <summary>
     /// Describes access rights
     /// </summary>
-    [Flags]
+    [System.Flags]
     public enum AccessRights
     {
         None    = 0x00,

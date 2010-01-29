@@ -136,7 +136,7 @@ this.WriteObjects("\r\n");
 foreach (var cls in ctx.GetQuery<ObjectClass>().Where(c => c.BaseObjectClass == null)
 		.OrderBy(c => c.ClassName))
 	{
-		if(cls.HasSecurityRules(false))
+		if(cls.HasAccessControlList(false))
 		{
 
 #line 119 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\AssociationSetAttributes.cst"

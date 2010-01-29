@@ -834,11 +834,11 @@ namespace Kistl.App.Projekte
 			else
 				CreatedBy__Implementation__ = null;
 		}
-		public override AccessRights CurrentAccessRights 
+		public override Kistl.API.AccessRights CurrentAccessRights 
 		{ 
 			get 
 			{ 
-				return (AccessRights)SecurityRightsCollection__Implementation__.First().Right; 
+				return (Kistl.API.AccessRights)SecurityRightsCollection__Implementation__.First().Right; 
 			} 
 		}
 

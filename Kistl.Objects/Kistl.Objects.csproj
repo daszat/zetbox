@@ -57,6 +57,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccessControl.Interface.Designer.cs" />
     <Compile Include="ActionKind.Interface.Designer.cs" />
     <Compile Include="ANewObjectClass.Interface.Designer.cs" />
     <Compile Include="AnotherTest.Interface.Designer.cs" />
@@ -92,6 +93,7 @@
     <Compile Include="EnumerationSelectorKind.Interface.Designer.cs" />
     <Compile Include="Fragebogen.Interface.Designer.cs" />
     <Compile Include="Group.Interface.Designer.cs" />
+    <Compile Include="GroupMembership.Interface.Designer.cs" />
     <Compile Include="GuidProperty.Interface.Designer.cs" />
     <Compile Include="Icon.Interface.Designer.cs" />
     <Compile Include="Identity.Interface.Designer.cs" />
@@ -129,6 +131,7 @@
     <Compile Include="Relation.Interface.Designer.cs" />
     <Compile Include="RelationEditorKind.Interface.Designer.cs" />
     <Compile Include="RelationEnd.Interface.Designer.cs" />
+    <Compile Include="RoleMembership.Interface.Designer.cs" />
     <Compile Include="SingleLineDataObjectKind.Interface.Designer.cs" />
     <Compile Include="StringListKind.Interface.Designer.cs" />
     <Compile Include="StringParameter.Interface.Designer.cs" />
@@ -154,6 +157,7 @@
     <Compile Include="IInvocation.Interface.Designer.cs" />
     <Compile Include="IRenderer.Interface.Designer.cs" />
     <Compile Include="ITestInterface.Interface.Designer.cs" />
+    <Compile Include="AccessRights.Interface.Designer.cs" />
     <Compile Include="DeploymentRestriction.Interface.Designer.cs" />
     <Compile Include="Multiplicity.Interface.Designer.cs" />
     <Compile Include="PropertyInvocationType.Interface.Designer.cs" />

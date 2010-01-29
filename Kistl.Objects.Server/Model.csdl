@@ -3,6 +3,7 @@
   <EntityContainer Name="Entities">
   
     <!-- EntitySets for all classes -->
+    <EntitySet Name="AccessControl" EntityType="Model.AccessControl" />
     <EntitySet Name="ANewObjectClass" EntityType="Model.ANewObjectClass" />
     <EntitySet Name="AnotherTest" EntityType="Model.AnotherTest" />
     <EntitySet Name="Antwort" EntityType="Model.Antwort" />
@@ -112,6 +113,15 @@
       <End Role="Mitarbeiter" EntitySet="Mitarbeiter" />
       <End Role="CollectionEntry" EntitySet="Projekt_haben_Mitarbeiter_RelationEntry" />
     </AssociationSet>
+    <EntitySet Name="RoleMembership_resolves_Relation_RelationEntry" EntityType="Model.RoleMembership_resolves_Relation_RelationEntry" />
+    <AssociationSet Name="FK_RoleMembership_resolves_Relations_A" Association="Model.FK_RoleMembership_resolves_Relations_A" >
+      <End Role="RoleMembership" EntitySet="AccessControl" />
+      <End Role="CollectionEntry" EntitySet="RoleMembership_resolves_Relation_RelationEntry" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RoleMembership_resolves_Relations_B" Association="Model.FK_RoleMembership_resolves_Relations_B" >
+      <End Role="Relations" EntitySet="Relation" />
+      <End Role="CollectionEntry" EntitySet="RoleMembership_resolves_Relation_RelationEntry" />
+    </AssociationSet>
     <EntitySet Name="Template_hasMenu_Visual_RelationEntry" EntityType="Model.Template_hasMenu_Visual_RelationEntry" />
     <AssociationSet Name="FK_Template_hasMenu_Menu_A" Association="Model.FK_Template_hasMenu_Menu_A" >
       <End Role="Template" EntitySet="Template" />
@@ -164,11 +174,6 @@
       <End Role="Kunde" EntitySet="Kunde" />
       <End Role="CollectionEntry" EntitySet="Kunde_EMails_CollectionEntry" />
     </AssociationSet>
-    <EntitySet Name="ObjectClass_SecurityRules_CollectionEntry" EntityType="Model.ObjectClass_SecurityRules_CollectionEntry" />
-    <AssociationSet Name="FK_ObjectClass_value_SecurityRules" Association="Model.FK_ObjectClass_value_SecurityRules" >
-      <End Role="ObjectClass" EntitySet="DataType" />
-      <End Role="CollectionEntry" EntitySet="ObjectClass_SecurityRules_CollectionEntry" />
-    </AssociationSet>
 
     <!-- EntitySets and AssociationSets for all object-struct CollectionEntrys -->
     <EntitySet Name="TestCustomObject_PhoneNumbersOther_CollectionEntry" EntityType="Model.TestCustomObject_PhoneNumbersOther_CollectionEntry" />
@@ -178,6 +183,18 @@
     </AssociationSet>
 
     <!-- AssociationSets for all object-object relations without CollectionEntrys -->
+    <AssociationSet Name="FK_AccessControl_has_Module" Association="Model.FK_AccessControl_has_Module" >
+      <End Role="AccessControl" EntitySet="AccessControl" />
+      <End Role="Module" EntitySet="Module" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AccessControl_was_ChangedBy" Association="Model.FK_AccessControl_was_ChangedBy" >
+      <End Role="AccessControl" EntitySet="AccessControl" />
+      <End Role="ChangedBy" EntitySet="Identity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AccessControl_was_CreatedBy" Association="Model.FK_AccessControl_was_CreatedBy" >
+      <End Role="AccessControl" EntitySet="AccessControl" />
+      <End Role="CreatedBy" EntitySet="Identity" />
+    </AssociationSet>
     <AssociationSet Name="FK_Assembly_was_ChangedBy" Association="Model.FK_Assembly_was_ChangedBy" >
       <End Role="Assembly" EntitySet="Assembly" />
       <End Role="ChangedBy" EntitySet="Identity" />
@@ -306,6 +323,10 @@
       <End Role="Group" EntitySet="Group" />
       <End Role="ParentGroup" EntitySet="Group" />
     </AssociationSet>
+    <AssociationSet Name="FK_GroupMembership_has_Group" Association="Model.FK_GroupMembership_has_Group" >
+      <End Role="GroupMembership" EntitySet="AccessControl" />
+      <End Role="Group" EntitySet="Group" />
+    </AssociationSet>
     <AssociationSet Name="FK_Icon_has_Module" Association="Model.FK_Icon_has_Module" >
       <End Role="Icon" EntitySet="Icon" />
       <End Role="Module" EntitySet="Module" />
@@ -405,6 +426,10 @@
     <AssociationSet Name="FK_MuhBlah_Role_has_TestCustomObjects_List_Role" Association="Model.FK_MuhBlah_Role_has_TestCustomObjects_List_Role" >
       <End Role="MuhBlah_Role" EntitySet="Muhblah" />
       <End Role="TestCustomObjects_List_Role" EntitySet="TestCustomObject" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ObjectClass_has_AccessControlList" Association="Model.FK_ObjectClass_has_AccessControlList" >
+      <End Role="ObjectClass" EntitySet="DataType" />
+      <End Role="AccessControlList" EntitySet="AccessControl" />
     </AssociationSet>
     <AssociationSet Name="FK_ObjectClass_has_Methods" Association="Model.FK_ObjectClass_has_Methods" >
       <End Role="ObjectClass" EntitySet="DataType" />
@@ -574,12 +599,40 @@
   </EntityContainer>
   
   <!-- EntityTypes for all base classes -->
+  <EntityType Name="AccessControl">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ChangedBy__Implementation__"
+                        Relationship="Model.FK_AccessControl_was_ChangedBy"
+                        FromRole="AccessControl"
+                        ToRole="ChangedBy" />
+    <Property Name="ChangedOn" Type="DateTime" Nullable="true" />
+    <NavigationProperty Name="CreatedBy__Implementation__"
+                        Relationship="Model.FK_AccessControl_was_CreatedBy"
+                        FromRole="AccessControl"
+                        ToRole="CreatedBy" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="true" />
+    <Property Name="Description" Type="String" Nullable="true" MaxLength="1000" />
+    <Property Name="ExportGuid" Type="Guid" Nullable="false" />
+    <NavigationProperty Name="Module__Implementation__"
+                        Relationship="Model.FK_AccessControl_has_Module"
+                        FromRole="AccessControl"
+                        ToRole="Module" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="100" />
+    <NavigationProperty Name="ObjectClass__Implementation__"
+                        Relationship="Model.FK_ObjectClass_has_AccessControlList"
+                        FromRole="AccessControlList"
+                        ToRole="ObjectClass" />
+    <Property Name="Rights__Implementation__" Type="Int32" Nullable="true" />
+  </EntityType>
   <EntityType Name="ANewObjectClass">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="TestString" Type="String" Nullable="true" MaxLength="4000" />
+    <Property Name="TestString" Type="String" Nullable="true" MaxLength="1000" />
   </EntityType>
   <EntityType Name="AnotherTest">
     <Key>
@@ -592,7 +645,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="Frage" Type="String" Nullable="false" MaxLength="4000" />
+    <Property Name="Frage" Type="String" Nullable="false" MaxLength="1000" />
     <NavigationProperty Name="Fragebogen__Implementation__"
                         Relationship="Model.FK_Fragebogen_enthält_Antworten"
                         FromRole="Antworten"
@@ -685,7 +738,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="Name" Type="String" Nullable="false" MaxLength="4000" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="1000" />
   </EntityType>
   <EntityType Name="Constraint">
     <Key>
@@ -722,7 +775,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="Schema" Type="String" Nullable="false" MaxLength="4000" />
+    <Property Name="Schema" Type="String" Nullable="false" MaxLength="1000" />
     <Property Name="Version" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="DataType">
@@ -841,7 +894,7 @@
                         Relationship="Model.FK_Group_has_Module"
                         FromRole="Group"
                         ToRole="Module" />
-    <Property Name="Name" Type="String" Nullable="false" MaxLength="4000" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="1000" />
     <NavigationProperty Name="ParentGroup__Implementation__"
                         Relationship="Model.FK_Group_has_ParentGroup"
                         FromRole="Group"
@@ -1049,7 +1102,7 @@
                         ToRole="TestCustomObjects_One_Role" />
     <Property Name="TestDateTime" Type="DateTime" Nullable="true" />
     <Property Name="TestEnum__Implementation__" Type="Int32" Nullable="false" />
-    <Property Name="TestString" Type="String" Nullable="true" MaxLength="4000" />
+    <Property Name="TestString" Type="String" Nullable="true" MaxLength="1000" />
   </EntityType>
   <EntityType Name="PresenceRecord">
     <Key>
@@ -1535,6 +1588,7 @@
   <EntityType Name="DoubleProperty" BaseType="Model.ValueTypeProperty" >
   </EntityType>
   <EntityType Name="Enumeration" BaseType="Model.DataType" >
+    <Property Name="AreFlags" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="EnumerationEntries__Implementation__"
                         Relationship="Model.FK_Enumeration_has_EnumerationEntries"
                         FromRole="Enumeration"
@@ -1547,6 +1601,12 @@
                         ToRole="Enumeration" />
   </EntityType>
   <EntityType Name="EnumerationSelectorKind" BaseType="Model.ControlKind" >
+  </EntityType>
+  <EntityType Name="GroupMembership" BaseType="Model.AccessControl" >
+    <NavigationProperty Name="Group__Implementation__"
+                        Relationship="Model.FK_GroupMembership_has_Group"
+                        FromRole="GroupMembership"
+                        ToRole="Group" />
   </EntityType>
   <EntityType Name="GuidProperty" BaseType="Model.ValueTypeProperty" >
   </EntityType>
@@ -1575,6 +1635,10 @@
   <EntityType Name="NotNullableConstraint" BaseType="Model.Constraint" >
   </EntityType>
   <EntityType Name="ObjectClass" BaseType="Model.DataType" >
+    <NavigationProperty Name="AccessControlList__Implementation__"
+                        Relationship="Model.FK_ObjectClass_has_AccessControlList"
+                        FromRole="ObjectClass"
+                        ToRole="AccessControlList" />
     <NavigationProperty Name="BaseObjectClass__Implementation__"
                         Relationship="Model.FK_BaseObjectClass_has_SubClasses"
                         FromRole="SubClasses"
@@ -1593,10 +1657,6 @@
                         ToRole="CollectionEntry" />
     <Property Name="IsFrozenObject" Type="Boolean" Nullable="false" />
     <Property Name="IsSimpleObject" Type="Boolean" Nullable="false" />
-    <NavigationProperty Name="SecurityRules__Implementation__"
-                        Relationship="Model.FK_ObjectClass_value_SecurityRules"
-                        FromRole="ObjectClass"
-                        ToRole="CollectionEntry" />
     <NavigationProperty Name="SubClasses__Implementation__"
                         Relationship="Model.FK_BaseObjectClass_has_SubClasses"
                         FromRole="BaseObjectClass"
@@ -1613,14 +1673,14 @@
   </EntityType>
   <EntityType Name="ObjectReferencePlaceholderProperty" BaseType="Model.Property" >
     <Property Name="HasPersistentOrder" Type="Boolean" Nullable="false" />
-    <Property Name="ImplementorRoleName" Type="String" Nullable="true" MaxLength="4000" />
+    <Property Name="ImplementorRoleName" Type="String" Nullable="true" MaxLength="1000" />
     <Property Name="IsList" Type="Boolean" Nullable="false" />
-    <Property Name="ItemRoleName" Type="String" Nullable="true" MaxLength="4000" />
+    <Property Name="ItemRoleName" Type="String" Nullable="true" MaxLength="1000" />
     <NavigationProperty Name="ReferencedObjectClass__Implementation__"
                         Relationship="Model.FK_ObjectReferencePlaceholderProperty_ofType_ReferencedObjectClass"
                         FromRole="ObjectReferencePlaceholderProperty"
                         ToRole="ReferencedObjectClass" />
-    <Property Name="Verb" Type="String" Nullable="true" MaxLength="4000" />
+    <Property Name="Verb" Type="String" Nullable="true" MaxLength="1000" />
   </EntityType>
   <EntityType Name="ObjectReferenceProperty" BaseType="Model.Property" >
     <Property Name="EagerLoading" Type="Boolean" Nullable="false" />
@@ -1636,6 +1696,12 @@
   <EntityType Name="PropertyGroupKind" BaseType="Model.ControlKind" >
   </EntityType>
   <EntityType Name="RelationEditorKind" BaseType="Model.DataObjectKind" >
+  </EntityType>
+  <EntityType Name="RoleMembership" BaseType="Model.AccessControl" >
+    <NavigationProperty Name="Relations__Implementation__"
+                        Relationship="Model.FK_RoleMembership_resolves_Relations_A"
+                        FromRole="RoleMembership"
+                        ToRole="CollectionEntry" />
   </EntityType>
   <EntityType Name="SingleLineDataObjectKind" BaseType="Model.ControlKind" >
   </EntityType>
@@ -1968,6 +2034,49 @@
   </Association>
   
   <!--
+    Relation: FK_RoleMembership_resolves_Relations
+    A: ZeroOrMore RoleMembership as RoleMembership
+    B: ZeroOrMore Relation as Relations
+    Preferred Storage: Separate
+  -->
+  <EntityType Name="RoleMembership_resolves_Relation_RelationEntry" >
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+	<Property Name="ExportGuid" Type="Guid" Nullable="false" />
+	
+    
+    <!-- A -->
+    <NavigationProperty Name="A__Implementation__"
+                        Relationship="Model.FK_RoleMembership_resolves_Relations_A"
+                        FromRole="CollectionEntry"
+                        ToRole="RoleMembership" />
+
+    <!-- B -->
+    <NavigationProperty Name="B__Implementation__"
+                        Relationship="Model.FK_RoleMembership_resolves_Relations_B"
+                        FromRole="CollectionEntry"
+                        ToRole="Relations" />
+  </EntityType>
+  <Association Name="FK_RoleMembership_resolves_Relations_A" >
+    <End Role="RoleMembership"
+         Type="Model.RoleMembership" 
+         Multiplicity="0..1" />
+    <End Role="CollectionEntry"
+         Type="Model.RoleMembership_resolves_Relation_RelationEntry"
+         Multiplicity="*" />
+  </Association>
+  <Association Name="FK_RoleMembership_resolves_Relations_B" >
+    <End Role="Relations"
+         Type="Model.Relation" 
+         Multiplicity="0..1" />
+    <End Role="CollectionEntry"
+         Type="Model.RoleMembership_resolves_Relation_RelationEntry"
+         Multiplicity="*" />
+  </Association>
+  
+  <!--
     Relation: FK_Template_hasMenu_Menu
     A: ZeroOrMore Template as Template
     B: ZeroOrMore Visual as Menu
@@ -2206,29 +2315,6 @@
          Type="Model.Kunde_EMails_CollectionEntry" 
          Multiplicity="*" />
   </Association>
-  <!-- ObjectClass.SecurityRules -->
-  <EntityType Name="ObjectClass_SecurityRules_CollectionEntry" >
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-    
-    <!-- A -->
-    <NavigationProperty Name="A__Implementation__"
-                        Relationship="Model.FK_ObjectClass_value_SecurityRules"
-                        FromRole="CollectionEntry"
-                        ToRole="ObjectClass" />
-    <!-- B -->
-    <Property Name="B" Type="String" Nullable="true" MaxLength="4000" />
-  </EntityType>
-  <Association Name="FK_ObjectClass_value_SecurityRules" >
-    <End Role="ObjectClass"
-         Type="Model.ObjectClass" 
-         Multiplicity="0..1" />
-    <End Role="CollectionEntry"
-         Type="Model.ObjectClass_SecurityRules_CollectionEntry" 
-         Multiplicity="*" />
-  </Association>
 
 <!-- EntityTypes and Associations for all object-CompoundObject CollectionEntrys -->
   <!-- TestCustomObject.PhoneNumbersOther -->
@@ -2258,6 +2344,30 @@
   </Association>
 
   <!-- Associations for all object-object relations without CollectionEntrys -->
+  <Association Name="FK_AccessControl_has_Module" >
+    <End Role="AccessControl"
+         Type="Model.AccessControl" 
+         Multiplicity="*" />
+    <End Role="Module"
+         Type="Model.Module" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_AccessControl_was_ChangedBy" >
+    <End Role="AccessControl"
+         Type="Model.AccessControl" 
+         Multiplicity="*" />
+    <End Role="ChangedBy"
+         Type="Model.Identity" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_AccessControl_was_CreatedBy" >
+    <End Role="AccessControl"
+         Type="Model.AccessControl" 
+         Multiplicity="*" />
+    <End Role="CreatedBy"
+         Type="Model.Identity" 
+         Multiplicity="0..1" />
+  </Association>
   <Association Name="FK_Assembly_was_ChangedBy" >
     <End Role="Assembly"
          Type="Model.Assembly" 
@@ -2514,6 +2624,14 @@
          Type="Model.Group" 
          Multiplicity="0..1" />
   </Association>
+  <Association Name="FK_GroupMembership_has_Group" >
+    <End Role="GroupMembership"
+         Type="Model.GroupMembership" 
+         Multiplicity="*" />
+    <End Role="Group"
+         Type="Model.Group" 
+         Multiplicity="0..1" />
+  </Association>
   <Association Name="FK_Icon_has_Module" >
     <End Role="Icon"
          Type="Model.Icon" 
@@ -2712,6 +2830,14 @@
          Multiplicity="0..1" />
     <End Role="TestCustomObjects_List_Role"
          Type="Model.TestCustomObject" 
+         Multiplicity="*" />
+  </Association>
+  <Association Name="FK_ObjectClass_has_AccessControlList" >
+    <End Role="ObjectClass"
+         Type="Model.ObjectClass" 
+         Multiplicity="0..1" />
+    <End Role="AccessControlList"
+         Type="Model.AccessControl" 
          Multiplicity="*" />
   </Association>
   <Association Name="FK_ObjectClass_has_Methods" >

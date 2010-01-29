@@ -62,7 +62,7 @@ namespace Kistl.App.Extensions
             if (prop == null) { throw new ArgumentNullException("prop"); }
             StringRangeConstraint constraint = prop.GetLengthConstraint();
             // create unconstrained maxLength if no constrain is specified
-            return constraint == null ? 4000 : constraint.MaxLength;
+            return constraint == null ? Kistl.API.Helper.Temp_UnlimitedMaxStringLengthLimit : constraint.MaxLength;
         }
 
         public static bool IsList(this ObjectReferenceProperty prop)

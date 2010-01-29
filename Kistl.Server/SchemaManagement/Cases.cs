@@ -58,7 +58,7 @@ namespace Kistl.Server.SchemaManagement
         }
         public void DoDeleteObjectClass(ObjectClass objClass)
         {
-            if (objClass.HasSecurityRules(false))
+            if (objClass.HasAccessControlList(false))
             {
                 DoDeleteObjectClassSecurityRules(objClass);
             }
@@ -939,9 +939,9 @@ namespace Kistl.Server.SchemaManagement
         #region NewObjectClassSecurityRules
         public bool IsNewObjectClassSecurityRules(ObjectClass objClass)
         {
-            if (!objClass.HasSecurityRules(false)) return false;
+            if (!objClass.HasAccessControlList(false)) return false;
             ObjectClass savedObjClass = savedSchema.FindPersistenceObject<ObjectClass>(objClass.ExportGuid);
-            return savedObjClass == null || !savedObjClass.HasSecurityRules(false);
+            return savedObjClass == null || !savedObjClass.HasAccessControlList(false);
         }
         public void DoNewObjectClassSecurityRules(ObjectClass objClass)
         {
@@ -969,9 +969,9 @@ namespace Kistl.Server.SchemaManagement
         #region DeleteObjectClassSecurityRules
         public bool IsDeleteObjectClassSecurityRules(ObjectClass objClass)
         {
-            if (objClass.HasSecurityRules(false)) return false;
+            if (objClass.HasAccessControlList(false)) return false;
             ObjectClass savedObjClass = savedSchema.FindPersistenceObject<ObjectClass>(objClass.ExportGuid);
-            return savedObjClass != null && savedObjClass.HasSecurityRules(false);
+            return savedObjClass != null && savedObjClass.HasAccessControlList(false);
         }
         public void DoDeleteObjectClassSecurityRules(ObjectClass objClass)
         {

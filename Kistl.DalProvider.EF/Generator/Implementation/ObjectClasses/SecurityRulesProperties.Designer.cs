@@ -37,11 +37,11 @@ namespace Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses
         {
 #line 19 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\SecurityRulesProperties.cst"
 this.WriteObjects("\r\n");
-this.WriteObjects("		public override AccessRights CurrentAccessRights \r\n");
+this.WriteObjects("		public override Kistl.API.AccessRights CurrentAccessRights \r\n");
 this.WriteObjects("		{ \r\n");
 this.WriteObjects("			get \r\n");
 this.WriteObjects("			{ \r\n");
-this.WriteObjects("				return (AccessRights)",  efNameRightsPropertyName , ".First().Right; \r\n");
+this.WriteObjects("				return (Kistl.API.AccessRights)",  efNameRightsPropertyName , ".First().Right; \r\n");
 this.WriteObjects("			} \r\n");
 this.WriteObjects("		}\r\n");
 this.WriteObjects("\r\n");

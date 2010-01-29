@@ -33,7 +33,7 @@ using System.Xml.Serialization;
 
         private int PrivateIntProperty { get; set; }
 
-        public AccessRights CurrentAccessRights { get { return AccessRights.Full; } }
+        public Kistl.API.AccessRights CurrentAccessRights { get { return AccessRights.Full; } }
 
 
         public string TestField;
