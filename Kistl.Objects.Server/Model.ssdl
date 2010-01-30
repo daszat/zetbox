@@ -790,6 +790,10 @@
       <End Role="MethodInvocation" EntitySet="MethodInvocation" />
       <End Role="CreatedBy" EntitySet="Identity" />
     </AssociationSet>
+    <AssociationSet Name="FK_Mitarbeiter_is_a_Identity" Association="Model.Store.FK_Mitarbeiter_is_a_Identity" >
+      <End Role="Mitarbeiter" EntitySet="Mitarbeiter" />
+      <End Role="Identity" EntitySet="Identity" />
+    </AssociationSet>
     <AssociationSet Name="FK_Mitarbeiter_was_ChangedBy" Association="Model.Store.FK_Mitarbeiter_was_ChangedBy" >
       <End Role="Mitarbeiter" EntitySet="Mitarbeiter" />
       <End Role="ChangedBy" EntitySet="Identity" />
@@ -1530,6 +1534,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_Identity" Type="int" />
     <Property Name="fk_ChangedBy" Type="int" />
     <Property Name="fk_CreatedBy" Type="int" />
     <Property Name="ChangedOn" Type="datetime" Nullable="true" />
@@ -3202,6 +3207,20 @@
       </Principal>
       <Dependent Role="MethodInvocation">
         <PropertyRef Name="fk_CreatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_Mitarbeiter_is_a_Identity">
+    <End Role="Identity" Type="Model.Store.Identity" Multiplicity="0..1" />
+    <End Role="Mitarbeiter" Type="Model.Store.Mitarbeiter" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Identity">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Mitarbeiter">
+        <PropertyRef Name="fk_Identity" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

@@ -2135,6 +2135,23 @@
       <Condition ColumnName="fk_CreatedBy" IsNull="false"/>
     </AssociationSetMapping>
     <!--
+    Relation: FK_Mitarbeiter_is_a_Identity
+    A: ZeroOrOne Mitarbeiter as Mitarbeiter
+    B: ZeroOrOne Identity as Identity
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_Mitarbeiter_is_a_Identity"
+                           TypeName="Model.FK_Mitarbeiter_is_a_Identity"
+                           StoreEntitySet="Mitarbeiter" >
+      <EndProperty Name="Identity">
+        <ScalarProperty Name="ID" ColumnName="fk_Identity"/>
+      </EndProperty>
+      <EndProperty Name="Mitarbeiter">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_Identity" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
     Relation: FK_Mitarbeiter_was_ChangedBy
     A: ZeroOrMore Mitarbeiter as Mitarbeiter
     B: ZeroOrOne Identity as ChangedBy

@@ -73,6 +73,8 @@ namespace Kistl.Server.Packaging
                 .OrderBy(i => i.Name).ThenBy(i => i.ExportGuid));
             AddMetaObjects(result, ctx.GetQuery<AccessControl>().Where(i => i.Module.ID == moduleID)
                 .OrderBy(i => i.Name).ThenBy(i => i.ExportGuid));
+            AddMetaObjects(result, ctx.GetPersistenceObjectQuery<RoleMembership_resolves_Relation_RelationEntry>().Where(i => i.A.Module.ID == moduleID)
+                .ToList().AsQueryable().OrderBy(i => i.A.ExportGuid).ThenBy(i => i.B.ExportGuid));
 
             if (module.ModuleName == "GUI")
             {

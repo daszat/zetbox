@@ -827,6 +827,21 @@ using Kistl.DalProvider.EF;
 
 
 	/*
+    Relation: FK_Mitarbeiter_is_a_Identity
+    A: ZeroOrOne Mitarbeiter as Mitarbeiter
+    B: ZeroOrOne Identity as Identity
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_Mitarbeiter_is_a_Identity",
+    "Mitarbeiter", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Projekte.Mitarbeiter__Implementation__),
+    "Identity", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Identity__Implementation__)
+    )]
+
+
+	/*
     Relation: FK_Mitarbeiter_was_ChangedBy
     A: ZeroOrMore Mitarbeiter as Mitarbeiter
     B: ZeroOrOne Identity as ChangedBy

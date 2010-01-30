@@ -387,6 +387,10 @@
       <End Role="MethodInvocation" EntitySet="MethodInvocation" />
       <End Role="CreatedBy" EntitySet="Identity" />
     </AssociationSet>
+    <AssociationSet Name="FK_Mitarbeiter_is_a_Identity" Association="Model.FK_Mitarbeiter_is_a_Identity" >
+      <End Role="Mitarbeiter" EntitySet="Mitarbeiter" />
+      <End Role="Identity" EntitySet="Identity" />
+    </AssociationSet>
     <AssociationSet Name="FK_Mitarbeiter_was_ChangedBy" Association="Model.FK_Mitarbeiter_was_ChangedBy" >
       <End Role="Mitarbeiter" EntitySet="Mitarbeiter" />
       <End Role="ChangedBy" EntitySet="Identity" />
@@ -1042,6 +1046,10 @@
                         ToRole="CreatedBy" />
     <Property Name="CreatedOn" Type="DateTime" Nullable="true" />
     <Property Name="Geburtstag" Type="DateTime" Nullable="true" />
+    <NavigationProperty Name="Identity__Implementation__"
+                        Relationship="Model.FK_Mitarbeiter_is_a_Identity"
+                        FromRole="Mitarbeiter"
+                        ToRole="Identity" />
     <Property Name="Name" Type="String" Nullable="true" MaxLength="100" />
     <NavigationProperty Name="Projekte__Implementation__"
                         Relationship="Model.FK_Projekte_haben_Mitarbeiter_B"
@@ -2749,6 +2757,14 @@
          Type="Model.MethodInvocation" 
          Multiplicity="*" />
     <End Role="CreatedBy"
+         Type="Model.Identity" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_Mitarbeiter_is_a_Identity" >
+    <End Role="Mitarbeiter"
+         Type="Model.Mitarbeiter" 
+         Multiplicity="0..1" />
+    <End Role="Identity"
          Type="Model.Identity" 
          Multiplicity="0..1" />
   </Association>

@@ -396,6 +396,97 @@ namespace Kistl.App.Projekte
 		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Mitarbeiter, DateTime?> OnGeburtstag_PostSetter;
 
         /// <summary>
+        /// 
+        /// </summary>
+    /*
+    Relation: FK_Mitarbeiter_is_a_Identity
+    A: ZeroOrOne Mitarbeiter as Mitarbeiter
+    B: ZeroOrOne Identity as Identity
+    Preferred Storage: MergeIntoA
+    */
+        // object reference property
+   		// Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public Kistl.App.Base.Identity Identity
+        {
+            get
+            {
+                return Identity__Implementation__;
+            }
+            set
+            {
+                // TODO: NotifyPropertyChanged()
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if(value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                Identity__Implementation__ = (Kistl.App.Base.Identity__Implementation__)value;
+            }
+        }
+        
+        private int? _fk_Identity;
+        private Guid? _fk_guid_Identity = null;
+        // EF sees only this property
+        [EdmRelationshipNavigationProperty("Model", "FK_Mitarbeiter_is_a_Identity", "Identity")]
+        public Kistl.App.Base.Identity__Implementation__ Identity__Implementation__
+        {
+            get
+            {
+                EntityReference<Kistl.App.Base.Identity__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Identity__Implementation__>(
+                        "Model.FK_Mitarbeiter_is_a_Identity",
+                        "Identity");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load(); 
+                    if(r.Value != null) r.Value.AttachToContext(this.Context);
+                }
+                var __value = r.Value;
+				if(OnIdentity_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<Kistl.App.Base.Identity>(__value);
+					OnIdentity_Getter(this, e);
+					__value = (Kistl.App.Base.Identity__Implementation__)e.Result;
+				}
+                return __value;
+            }
+            set
+            {
+                EntityReference<Kistl.App.Base.Identity__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Identity__Implementation__>(
+                        "Model.FK_Mitarbeiter_is_a_Identity",
+                        "Identity");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load(); 
+                }
+                Kistl.App.Base.Identity __oldValue = (Kistl.App.Base.Identity)r.Value;
+                Kistl.App.Base.Identity __newValue = (Kistl.App.Base.Identity)value;
+
+                if(OnIdentity_PreSetter != null)
+                {
+					var e = new PropertyPreSetterEventArgs<Kistl.App.Base.Identity>(__oldValue, __newValue);
+					OnIdentity_PreSetter(this, e);
+					__newValue = e.Result;
+                }
+                r.Value = (Kistl.App.Base.Identity__Implementation__)__newValue;
+                if(OnIdentity_PostSetter != null)
+                {
+					var e = new PropertyPostSetterEventArgs<Kistl.App.Base.Identity>(__oldValue, __newValue);
+					OnIdentity_PostSetter(this, e);
+                }
+                                
+            }
+        }
+        
+        
+		public static event PropertyGetterHandler<Kistl.App.Projekte.Mitarbeiter, Kistl.App.Base.Identity> OnIdentity_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Mitarbeiter, Kistl.App.Base.Identity> OnIdentity_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Mitarbeiter, Kistl.App.Base.Identity> OnIdentity_PostSetter;
+
+        /// <summary>
         /// Vorname Nachname
         /// </summary>
         // value type property
@@ -641,6 +732,7 @@ namespace Kistl.App.Projekte
 			me.TelefonNummer = other.TelefonNummer;
 			this._fk_ChangedBy = otherImpl._fk_ChangedBy;
 			this._fk_CreatedBy = otherImpl._fk_CreatedBy;
+			this._fk_Identity = otherImpl._fk_Identity;
 		}
 
         // tail template
@@ -742,6 +834,15 @@ namespace Kistl.App.Projekte
 					
 					return String.Join("; ", errors);
 				}
+				case "Identity":
+				{
+					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("5e148730-ec8a-4349-bcf7-e59cef2ce29f")).Constraints
+						.Where(c => !c.IsValid(this, this.Identity))
+						.Select(c => c.GetErrorText(this, this.Identity))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
 				case "Name":
 				{
 					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("5aab79fd-3083-4ce1-a558-ed1449ecddce")).Constraints
@@ -803,6 +904,13 @@ namespace Kistl.App.Projekte
 				CreatedBy__Implementation__ = (Kistl.App.Base.Identity__Implementation__)Context.Find<Kistl.App.Base.Identity>(_fk_CreatedBy.Value);
 			else
 				CreatedBy__Implementation__ = null;
+
+			if (_fk_guid_Identity.HasValue)
+				Identity__Implementation__ = (Kistl.App.Base.Identity__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.Identity>(_fk_guid_Identity.Value);
+			else if (_fk_Identity.HasValue)
+				Identity__Implementation__ = (Kistl.App.Base.Identity__Implementation__)Context.Find<Kistl.App.Base.Identity>(_fk_Identity.Value);
+			else
+				Identity__Implementation__ = null;
 		}
 #region Serializer
 
@@ -816,6 +924,7 @@ namespace Kistl.App.Projekte
             BinarySerializer.ToStream(CreatedBy != null ? CreatedBy.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._CreatedOn, binStream);
             BinarySerializer.ToStream(this._Geburtstag, binStream);
+            BinarySerializer.ToStream(Identity != null ? Identity.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._Name, binStream);
             BinarySerializer.ToStream(this._SVNr, binStream);
             BinarySerializer.ToStream(this._TelefonNummer, binStream);
@@ -830,6 +939,7 @@ namespace Kistl.App.Projekte
             BinarySerializer.FromStream(out this._fk_CreatedBy, binStream);
             BinarySerializer.FromStream(out this._CreatedOn, binStream);
             BinarySerializer.FromStream(out this._Geburtstag, binStream);
+            BinarySerializer.FromStream(out this._fk_Identity, binStream);
             BinarySerializer.FromStream(out this._Name, binStream);
             BinarySerializer.FromStream(out this._SVNr, binStream);
             BinarySerializer.FromStream(out this._TelefonNummer, binStream);
@@ -844,6 +954,7 @@ namespace Kistl.App.Projekte
             XmlStreamer.ToStream(CreatedBy != null ? CreatedBy.ID : (int?)null, xml, "CreatedBy", "Kistl.App.Projekte");
             XmlStreamer.ToStream(this._CreatedOn, xml, "CreatedOn", "Kistl.App.Projekte");
             XmlStreamer.ToStream(this._Geburtstag, xml, "Geburtstag", "Kistl.App.Projekte");
+            XmlStreamer.ToStream(Identity != null ? Identity.ID : (int?)null, xml, "Identity", "Kistl.App.Projekte");
             XmlStreamer.ToStream(this._Name, xml, "Name", "Kistl.App.Projekte");
             XmlStreamer.ToStream(this._SVNr, xml, "SVNr", "Kistl.App.Projekte");
             XmlStreamer.ToStream(this._TelefonNummer, xml, "TelefonNummer", "Kistl.App.Projekte");
@@ -858,6 +969,7 @@ namespace Kistl.App.Projekte
             XmlStreamer.FromStream(ref this._fk_CreatedBy, xml, "CreatedBy", "Kistl.App.Projekte");
             XmlStreamer.FromStream(ref this._CreatedOn, xml, "CreatedOn", "Kistl.App.Projekte");
             XmlStreamer.FromStream(ref this._Geburtstag, xml, "Geburtstag", "Kistl.App.Projekte");
+            XmlStreamer.FromStream(ref this._fk_Identity, xml, "Identity", "Kistl.App.Projekte");
             XmlStreamer.FromStream(ref this._Name, xml, "Name", "Kistl.App.Projekte");
             XmlStreamer.FromStream(ref this._SVNr, xml, "SVNr", "Kistl.App.Projekte");
             XmlStreamer.FromStream(ref this._TelefonNummer, xml, "TelefonNummer", "Kistl.App.Projekte");

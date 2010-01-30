@@ -21,6 +21,13 @@ namespace Kistl.App.Projekte
 			set;
 		}
         /// <summary>
+        /// 
+        /// </summary>
+		Kistl.App.Base.Identity Identity {
+			get;
+			set;
+		}
+        /// <summary>
         /// Vorname Nachname
         /// </summary>
 		string Name {
