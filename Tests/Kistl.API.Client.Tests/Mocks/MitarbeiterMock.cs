@@ -126,15 +126,6 @@ namespace Kistl.App.Projekte
         }
         private string _TelefonNummer;
 
-        /// <summary>
-        /// 
-        /// </summary>
-
-        #endregion
-
-        #region Mitarbeiter Members
-
-
         public DateTime TestMethodForParameter(bool TestBool, Guid TestCLRObjectParameter, DateTime TestDateTime, double TestDouble, int TestInt, Auftrag TestObjectParameter, string TestString)
         {
             var e = new MethodReturnEventArgs<DateTime>();
@@ -150,6 +141,18 @@ namespace Kistl.App.Projekte
         }
         public delegate void TestMethodForParameter_Handler<T>(T obj, MethodReturnEventArgs<DateTime> ret, bool TestBool, Guid TestCLRObjectParameter, DateTime TestDateTime, double TestDouble, int TestInt, Auftrag TestObjectParameter, string TestString);
         public event TestMethodForParameter_Handler<Mitarbeiter> OnTestMethodForParameter_Mitarbeiter;
+
+        public Kistl.App.Base.Identity Identity
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
 
         #endregion
 
