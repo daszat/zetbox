@@ -2,13 +2,13 @@ param($SolutionDir)
 
 function Convert-WithXslt($xmlFilePath, $xsltFilePath, $outputFilePath) 
 {
-   $xsltFilePath = resolve-path $xsltFilePath
-   $xmlFilePath = resolve-path $xmlFilePath
-   $outputFilePath = resolve-path $outputFilePath
+	$xsltFilePath = resolve-path $xsltFilePath
+	$xmlFilePath = resolve-path $xmlFilePath
+	$outputFilePath = resolve-path $outputFilePath
 
-   $xslt = new-object system.xml.xsl.xslcompiledtransform
-   $xslt.load( $xsltFilePath )
-   $xslt.Transform( $xmlFilePath, $outputFilePath )
+	$xslt = new-object system.xml.xsl.xslcompiledtransform
+	$xslt.load( $xsltFilePath )
+	$xslt.Transform( $xmlFilePath, $outputFilePath )
 }
 
 if(-not $SolutionDir) 
@@ -19,5 +19,5 @@ if(-not $SolutionDir)
 "." > $SolutionDir\bin\gendarme.txt
 gendarme -config $SolutionDir\gendarmerules.xml --xml $SolutionDir\bin\gendarme.xml --ignore $SolutionDir\gendarmeignore.txt --severity high+ $SolutionDir\bin\Debug\bin\Client\Kistl.API.dll $SolutionDir\bin\Debug\bin\Client\Kistl.App.Projekte.Common.dll $SolutionDir\bin\Debug\bin\Client\Kistl.DalProvider.Frozen.dll $SolutionDir\bin\Debug\bin\Client\TempAppHelpers.dll $SolutionDir\bin\Debug\bin\Client\Kistl.API.Client.dll $SolutionDir\bin\Debug\bin\Client\Kistl.App.Projekte.Client.dll $SolutionDir\bin\Debug\bin\Client\Kistl.Client.ASPNET.Toolkit.dll $SolutionDir\bin\Debug\bin\Client\Kistl.Client.dll $SolutionDir\bin\Debug\bin\Client\Kistl.Client.Forms.exe $SolutionDir\bin\Debug\bin\Client\Kistl.Client.WPF.exe $SolutionDir\bin\Debug\bin\Client\Kistl.DalProvider.ClientObjects.dll $SolutionDir\bin\Debug\bin\Server\Kistl.API.Server.dll $SolutionDir\bin\Debug\bin\Server\Kistl.App.Projekte.Server.dll $SolutionDir\bin\Debug\bin\Server\Kistl.DalProvider.EF.dll $SolutionDir\bin\Debug\bin\Server\Kistl.Server.dll $SolutionDir\bin\Debug\bin\Server\Kistl.Server.Service.exe
 convert-withxslt $SolutionDir\bin\gendarme.xml $SolutionDir\gendarme-visualstudio.xslt $SolutionDir\bin\gendarme.txt
-(get-content $SolutionDir\bin\gendarme.txt) -replace "\(.(.+)\)", ' ($1,1)' | set-content $SolutionDir\bin\gendarme.txt
+(get-content $SolutionDir\bin\gendarme.txt) -replace '\(\D?(\d+)\)', ' ($1,1)' | set-content $SolutionDir\bin\gendarme.txt
 exit 0
