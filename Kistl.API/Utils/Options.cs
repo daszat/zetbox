@@ -430,13 +430,15 @@ namespace Kistl.API.Utils
                     case '{':
                         if (start != -1)
                             throw new IllFormedSeparatorException(
-                                    string.Format("Ill-formed name/value separator found in \"{0}\".", name));
+                                    string.Format("Ill-formed name/value separator found in \"{0}\".", name),
+                                    "prototype");
                         start = i + 1;
                         break;
                     case '}':
                         if (start == -1)
                             throw new IllFormedSeparatorException(
-                                    string.Format("Ill-formed name/value separator found in \"{0}\".", name));
+                                    string.Format("Ill-formed name/value separator found in \"{0}\".", name),
+                                    "prototype");
                         seps.Add(name.Substring(start, i - start));
                         start = -1;
                         break;
@@ -446,9 +448,13 @@ namespace Kistl.API.Utils
                         break;
                 }
             }
+         
             if (start != -1)
+            {
                 throw new IllFormedSeparatorException(
-                        string.Format("Ill-formed name/value separator found in \"{0}\".", name));
+                    string.Format("Ill-formed name/value separator found in \"{0}\".", name),
+                    "prototype");
+            }
         }
 
         public void Invoke(OptionContext c)
@@ -468,19 +474,19 @@ namespace Kistl.API.Utils
     }
 
     [Serializable]
-    public class IllFormedSeparatorException : Exception
+    public class IllFormedSeparatorException : ArgumentException
     {
         public IllFormedSeparatorException()
         {
         }
 
-        public IllFormedSeparatorException(string message)
-            : base(message)
+        public IllFormedSeparatorException(string message, string paramName)
+            : base(message, paramName)
         {
         }
 
-        public IllFormedSeparatorException(string message, Exception innerException)
-            : base(message, innerException)
+        public IllFormedSeparatorException(string message, string paramName, Exception innerException)
+            : base(message, paramName, innerException)
         {
         }
 

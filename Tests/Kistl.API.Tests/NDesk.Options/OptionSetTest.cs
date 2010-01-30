@@ -240,7 +240,7 @@ namespace Kistl.API.Utils.Tests
                     p, v => { v.Parse(_("-a", "-b")); });
             Assert.AreEqual(a, "-b");
             Utils.AssertException(typeof(ArgumentNullException),
-                    "Value cannot be null.\r\nParameter name: option",
+                    "Value cannot be null.\r\nParameter name: item",
                     p, v => { v.Add(null); });
 
             // bad type
