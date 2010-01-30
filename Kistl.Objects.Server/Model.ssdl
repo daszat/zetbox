@@ -1224,7 +1224,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="Schema" Type="nvarchar" MaxLength="1000" Nullable="false" />
+    <Property Name="Schema" Type="nvarchar" Nullable="false" />
     <Property Name="Version" Type="int" Nullable="false" />
   </EntityType>
 	
@@ -1827,7 +1827,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" />
-    <Property Name="MaxLength" Type="int" Nullable="false" />
+    <Property Name="MaxLength" Type="int" Nullable="true" />
     <Property Name="MinLength" Type="int" Nullable="false" />
   </EntityType>
 	

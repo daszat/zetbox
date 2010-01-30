@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2010-01-29T19:25:00.923Z" xmlns="http://dasz.at/Kistl">
+<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2010-01-30T13:29:20.17Z" xmlns="http://dasz.at/Kistl">
   <KistlBase:Module ExportGuid="ef6d5bd8-5826-4ce6-a9ca-c8438ddde773">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.32Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.32Z</KistlBase:CreatedOn>
@@ -1483,7 +1483,8 @@
     <KistlBase:IsList>false</KistlBase:IsList>
   </KistlBase:DateTimeProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="438b9307-fb40-4afe-a66f-a5762c41e14b">
-    <KistlBase:ChangedOn>2009-12-14T17:08:05.333Z</KistlBase:ChangedOn>
+    <KistlBase:CategoryTags>Constraint</KistlBase:CategoryTags>
+    <KistlBase:ChangedOn>2010-01-30T13:29:20.147Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.333Z</KistlBase:CreatedOn>
     <KistlBase:Description>The property to be constrained</KistlBase:Description>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
@@ -1531,7 +1532,8 @@
     <KistlBase:IsList>false</KistlBase:IsList>
   </KistlBase:GuidProperty>
   <KistlBase:StringProperty ExportGuid="49f759b3-de60-4cee-be06-c712e901c24e">
-    <KistlBase:ChangedOn>2009-12-14T17:08:05.333Z</KistlBase:ChangedOn>
+    <KistlBase:CategoryTags>Summary</KistlBase:CategoryTags>
+    <KistlBase:ChangedOn>2010-01-30T13:29:20.17Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.333Z</KistlBase:CreatedOn>
     <KistlBase:Description>The reason of this constraint</KistlBase:Description>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
@@ -3309,9 +3311,10 @@
     <KistlBase:RelationEnd>6f145ef1-b514-4e6f-a6a8-67187b37c98d</KistlBase:RelationEnd>
   </KistlBase:ObjectReferenceProperty>
   <KistlBase:IntProperty ExportGuid="17aa679d-72d0-480e-9bd9-b37f4eba1d68">
-    <KistlBase:ChangedOn>2009-12-14T17:08:05.34Z</KistlBase:ChangedOn>
+    <KistlBase:CategoryTags>Summary</KistlBase:CategoryTags>
+    <KistlBase:ChangedOn>2010-01-30T13:29:20.127Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.34Z</KistlBase:CreatedOn>
-    <KistlBase:Description>The maximal length of this StringProperty</KistlBase:Description>
+    <KistlBase:Description>The maximal length of this StringProperty or null for unlimited length</KistlBase:Description>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
     <KistlBase:ObjectClass>7bb90dc3-2b8c-4cff-ba8e-435ff386a4cf</KistlBase:ObjectClass>
     <KistlBase:PropertyName>MaxLength</KistlBase:PropertyName>
@@ -3320,7 +3323,8 @@
     <KistlBase:IsList>false</KistlBase:IsList>
   </KistlBase:IntProperty>
   <KistlBase:IntProperty ExportGuid="8d3e24f7-c8c8-4bb3-931e-d0452e7ee5b6">
-    <KistlBase:ChangedOn>2009-12-14T17:08:05.34Z</KistlBase:ChangedOn>
+    <KistlBase:CategoryTags>Summary</KistlBase:CategoryTags>
+    <KistlBase:ChangedOn>2010-01-30T13:29:20.1Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.34Z</KistlBase:CreatedOn>
     <KistlBase:Description>The minimal length of this StringProperty</KistlBase:Description>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
@@ -8073,6 +8077,12 @@
     <KistlBase:ConstrainedProperty>175143b9-dd09-4b49-a633-e9cdb508c4c5</KistlBase:ConstrainedProperty>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.383Z</KistlBase:CreatedOn>
   </KistlBase:NotNullableConstraint>
+  <KistlBase:StringRangeConstraint ExportGuid="d60d377c-6b59-428e-b2e8-174e0fd4b383">
+    <KistlBase:ChangedOn>2010-01-30T13:27:34.873Z</KistlBase:ChangedOn>
+    <KistlBase:ConstrainedProperty>175143b9-dd09-4b49-a633-e9cdb508c4c5</KistlBase:ConstrainedProperty>
+    <KistlBase:CreatedOn>2010-01-30T13:27:34.873Z</KistlBase:CreatedOn>
+    <KistlBase:MinLength>0</KistlBase:MinLength>
+  </KistlBase:StringRangeConstraint>
   <KistlBase:NotNullableConstraint ExportGuid="0cd3c17f-6d8d-4685-8908-fd103d4f91a5">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.383Z</KistlBase:ChangedOn>
     <KistlBase:ConstrainedProperty>193c24c4-5a42-418e-8ed8-6e1689beca50</KistlBase:ConstrainedProperty>
@@ -8587,11 +8597,6 @@
     <KistlBase:Max>4000</KistlBase:Max>
     <KistlBase:Min>0</KistlBase:Min>
   </KistlBase:IntegerRangeConstraint>
-  <KistlBase:NotNullableConstraint ExportGuid="cd7613ed-8809-4892-bb92-7d02a11438bb">
-    <KistlBase:ChangedOn>2009-12-14T17:08:05.383Z</KistlBase:ChangedOn>
-    <KistlBase:ConstrainedProperty>17aa679d-72d0-480e-9bd9-b37f4eba1d68</KistlBase:ConstrainedProperty>
-    <KistlBase:CreatedOn>2009-12-14T17:08:05.383Z</KistlBase:CreatedOn>
-  </KistlBase:NotNullableConstraint>
   <KistlBase:IntegerRangeConstraint ExportGuid="967f623c-dd56-4224-9544-322128b292d7">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.383Z</KistlBase:ChangedOn>
     <KistlBase:ConstrainedProperty>8d3e24f7-c8c8-4bb3-931e-d0452e7ee5b6</KistlBase:ConstrainedProperty>

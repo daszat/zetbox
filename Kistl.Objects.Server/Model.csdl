@@ -775,7 +775,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="Schema" Type="String" Nullable="false" MaxLength="1000" />
+    <Property Name="Schema" Type="String" Nullable="false" MaxLength="2147483647" />
     <Property Name="Version" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="DataType">
@@ -1716,7 +1716,7 @@
   <EntityType Name="StringProperty" BaseType="Model.ValueTypeProperty" >
   </EntityType>
   <EntityType Name="StringRangeConstraint" BaseType="Model.Constraint" >
-    <Property Name="MaxLength" Type="Int32" Nullable="false" />
+    <Property Name="MaxLength" Type="Int32" Nullable="true" />
     <Property Name="MinLength" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="StringSelectorKind" BaseType="Model.ControlKind" >

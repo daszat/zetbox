@@ -62,8 +62,12 @@ ApplyEntityTypeColumnDefs(
 			string maxLengthAttr = String.Empty;
 			if (p is StringProperty)
 			{
-				// must have one space at the end
-				maxLengthAttr = String.Format("MaxLength=\"{0}\" ", ((StringProperty)p).GetMaxLength());
+				int maxLength = ((StringProperty)p).GetMaxLength();
+				if(maxLength != int.MaxValue)
+				{
+					// must have one space at the end
+					maxLengthAttr = String.Format("MaxLength=\"{0}\" ", maxLength);
+				}
 			}
 			
 			string nullableAttr = String.Empty;
@@ -73,9 +77,9 @@ ApplyEntityTypeColumnDefs(
 				nullableAttr = String.Format("Nullable=\"{0}\" ", ((Property)p).IsNullable().ToString().ToLowerInvariant());
 			}
 
-#line 60 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.ssdl.EntityTypeColumns.cst"
+#line 64 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.ssdl.EntityTypeColumns.cst"
 this.WriteObjects("    <Property Name=\"",  propertyName , "\" Type=\"",  sqlTypeName , "\" ",  maxLengthAttr , "",  nullableAttr , "/>\r\n");
-#line 62 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.ssdl.EntityTypeColumns.cst"
+#line 66 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.ssdl.EntityTypeColumns.cst"
 }
 	}
 

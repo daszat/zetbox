@@ -111,7 +111,7 @@ namespace Kistl.App.Base
             object constrainedValueParam)
         {
             int length = (constrainedValueParam ?? String.Empty).ToString().Length;
-            e.Result = (obj.MinLength <= length) && (length <= obj.MaxLength);
+            e.Result = (obj.MinLength <= length) && (length <= (obj.MaxLength ?? int.MaxValue));
         }
 
         public static void OnGetErrorText_StringRangeConstraint(
@@ -132,7 +132,7 @@ namespace Kistl.App.Base
                 StringBuilder result = new StringBuilder();
                 if (length < obj.MinLength)
                     result.AppendFormat("{0} should be at least {1} characters long", obj.ConstrainedProperty.PropertyName, obj.MinLength);
-                if (length > obj.MaxLength)
+                if (obj.MaxLength != null && length > obj.MaxLength)
                     result.AppendFormat("{0} should be at most {1} characters long", obj.ConstrainedProperty.PropertyName, obj.MaxLength);
 
                 if (!String.IsNullOrEmpty(obj.Reason))

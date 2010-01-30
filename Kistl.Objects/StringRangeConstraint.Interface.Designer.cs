@@ -14,9 +14,9 @@ namespace Kistl.App.Base
     {
 
         /// <summary>
-        /// The maximal length of this StringProperty
+        /// The maximal length of this StringProperty or null for unlimited length
         /// </summary>
-		int MaxLength {
+		int? MaxLength {
 			get;
 			set;
 		}

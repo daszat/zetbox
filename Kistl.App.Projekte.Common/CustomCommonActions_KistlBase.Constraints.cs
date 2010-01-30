@@ -32,6 +32,7 @@ namespace Kistl.App.Base
         
         public static void OnToString_StringRangeConstraint(StringRangeConstraint obj, Kistl.API.MethodReturnEventArgs<string> e)
         {
+            string maxLength = obj.MaxLength != null ? obj.MaxLength.ToString() : "unlimited";
             // Only display min if there is an actual restriction.
             if (obj.MinLength > 0)
             {
@@ -40,7 +41,7 @@ namespace Kistl.App.Base
                         ? "a property"
                         : obj.ConstrainedProperty.PropertyName,
                     obj.MinLength,
-                    obj.MaxLength);
+                    maxLength);
             }
             else
             {
@@ -48,7 +49,7 @@ namespace Kistl.App.Base
                     obj.ConstrainedProperty == null
                         ? "a property"
                         : obj.ConstrainedProperty.PropertyName,
-                    obj.MaxLength);
+                    maxLength);
             }
         }
 

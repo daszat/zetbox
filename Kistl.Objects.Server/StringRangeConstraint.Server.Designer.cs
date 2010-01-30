@@ -33,14 +33,14 @@ namespace Kistl.App.Base
 
 
         /// <summary>
-        /// The maximal length of this StringProperty
+        /// The maximal length of this StringProperty or null for unlimited length
         /// </summary>
         // value type property
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
            // Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.NotifyingDataProperty
-        public virtual int MaxLength
+        public virtual int? MaxLength
         {
             get
             {
@@ -49,7 +49,7 @@ namespace Kistl.App.Base
                 var __result = _MaxLength;
                 if (OnMaxLength_Getter != null)
                 {
-                    var __e = new PropertyGetterEventArgs<int>(__result);
+                    var __e = new PropertyGetterEventArgs<int?>(__result);
                     OnMaxLength_Getter(this, __e);
                     __result = __e.Result;
                 }
@@ -64,7 +64,7 @@ namespace Kistl.App.Base
                     var __newValue = value;
                     if(OnMaxLength_PreSetter != null)
                     {
-                        var __e = new PropertyPreSetterEventArgs<int>(__oldValue, __newValue);
+                        var __e = new PropertyPreSetterEventArgs<int?>(__oldValue, __newValue);
                         OnMaxLength_PreSetter(this, __e);
                         __newValue = __e.Result;
                     }
@@ -73,16 +73,16 @@ namespace Kistl.App.Base
                     NotifyPropertyChanged("MaxLength", __oldValue, __newValue);
                     if(OnMaxLength_PostSetter != null)
                     {
-                        var __e = new PropertyPostSetterEventArgs<int>(__oldValue, __newValue);
+                        var __e = new PropertyPostSetterEventArgs<int?>(__oldValue, __newValue);
                         OnMaxLength_PostSetter(this, __e);
                     }
                 }
             }
         }
-        private int _MaxLength;
-		public static event PropertyGetterHandler<Kistl.App.Base.StringRangeConstraint, int> OnMaxLength_Getter;
-		public static event PropertyPreSetterHandler<Kistl.App.Base.StringRangeConstraint, int> OnMaxLength_PreSetter;
-		public static event PropertyPostSetterHandler<Kistl.App.Base.StringRangeConstraint, int> OnMaxLength_PostSetter;
+        private int? _MaxLength;
+		public static event PropertyGetterHandler<Kistl.App.Base.StringRangeConstraint, int?> OnMaxLength_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.StringRangeConstraint, int?> OnMaxLength_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.StringRangeConstraint, int?> OnMaxLength_PostSetter;
 
         /// <summary>
         /// The minimal length of this StringProperty

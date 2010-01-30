@@ -37,9 +37,9 @@ namespace Kistl.API
         public static readonly string PositionSuffix = "_pos";
 
         /// <summary>
-        /// TODO: Replace this with a better handling of StringRangeConstraint
+        /// Default length if StringRangeConstraint is missing
         /// </summary>
-        public static readonly int Temp_UnlimitedMaxStringLengthLimit = 1000;
+        public static readonly int DefaultStringPropertyLength = 1000;
 
         /// <summary>
         /// Newly created objects are not yet saved to the server and therefore handle some data only locally.

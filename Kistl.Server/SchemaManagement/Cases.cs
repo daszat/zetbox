@@ -384,7 +384,6 @@ namespace Kistl.Server.SchemaManagement
         }
         #endregion
 
-
         #region 1_N_RelationChange_FromNotIndexed_To_Indexed
         public bool Is_1_N_RelationChange_FromNotIndexed_To_Indexed(Relation rel)
         {

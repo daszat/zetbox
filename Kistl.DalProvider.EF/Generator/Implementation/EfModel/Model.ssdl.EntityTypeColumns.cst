@@ -46,8 +46,12 @@
 			string maxLengthAttr = String.Empty;
 			if (p is StringProperty)
 			{
-				// must have one space at the end
-				maxLengthAttr = String.Format("MaxLength=\"{0}\" ", ((StringProperty)p).GetMaxLength());
+				int maxLength = ((StringProperty)p).GetMaxLength();
+				if(maxLength != int.MaxValue)
+				{
+					// must have one space at the end
+					maxLengthAttr = String.Format("MaxLength=\"{0}\" ", maxLength);
+				}
 			}
 			
 			string nullableAttr = String.Empty;
