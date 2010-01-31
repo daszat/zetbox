@@ -46,13 +46,13 @@ namespace Kistl.App.Base
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public ICollection<Kistl.App.Base.Relation> Relations
+        public IList<Kistl.App.Base.Relation> Relations
         {
             get
             {
                 if (_RelationsWrapper == null)
                 {
-                    _RelationsWrapper = new EntityRelationBSideCollectionWrapper<Kistl.App.Base.RoleMembership, Kistl.App.Base.Relation, Kistl.App.Base.RoleMembership_resolves_Relation_RelationEntry__Implementation__>(
+                    _RelationsWrapper = new EntityRelationBSideListWrapper<Kistl.App.Base.RoleMembership, Kistl.App.Base.Relation, Kistl.App.Base.RoleMembership_resolves_Relation_RelationEntry__Implementation__>(
                             this,
                             Relations__Implementation__);
                 }
@@ -77,7 +77,7 @@ namespace Kistl.App.Base
                 return c;
             }
         }
-        private EntityRelationBSideCollectionWrapper<Kistl.App.Base.RoleMembership, Kistl.App.Base.Relation, Kistl.App.Base.RoleMembership_resolves_Relation_RelationEntry__Implementation__> _RelationsWrapper;
+        private EntityRelationBSideListWrapper<Kistl.App.Base.RoleMembership, Kistl.App.Base.Relation, Kistl.App.Base.RoleMembership_resolves_Relation_RelationEntry__Implementation__> _RelationsWrapper;
 
 
 		public override InterfaceType GetInterfaceType()

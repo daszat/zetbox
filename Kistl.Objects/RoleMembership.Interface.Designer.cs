@@ -17,6 +17,6 @@ namespace Kistl.App.Base
         /// 
         /// </summary>
 
-        ICollection<Kistl.App.Base.Relation> Relations { get; }
+        IList<Kistl.App.Base.Relation> Relations { get; }
     }
 }

@@ -422,7 +422,7 @@ namespace Kistl.Server.SchemaManagement
                         Log.WarnFormat("Security Rules unmaterialized View '{0}' is missing", rightsViewUnmaterializedName);
                         if (repair)
                         {
-                            db.CreateRightsViewUnmaterialized(rightsViewUnmaterializedName, tblName, tblRightsName);
+                            Case.DoCreateRightsViewUnmaterialized(objClass);
                         }
                     }
                     if (!db.CheckProcedureExists(refreshRightsOnProcedureName))

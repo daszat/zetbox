@@ -2060,12 +2060,14 @@
                         Relationship="Model.FK_RoleMembership_resolves_Relations_A"
                         FromRole="CollectionEntry"
                         ToRole="RoleMembership" />
+    <Property Name="A_pos" Type="Int32" Nullable="false" />
 
     <!-- B -->
     <NavigationProperty Name="B__Implementation__"
                         Relationship="Model.FK_RoleMembership_resolves_Relations_B"
                         FromRole="CollectionEntry"
                         ToRole="Relations" />
+    <Property Name="B_pos" Type="Int32" Nullable="false" />
   </EntityType>
   <Association Name="FK_RoleMembership_resolves_Relations_A" >
     <End Role="RoleMembership"

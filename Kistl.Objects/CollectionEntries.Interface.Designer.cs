@@ -117,7 +117,7 @@ namespace Kistl.App.Base
     /// <summary>
     /// ObjectCollectionEntry for RoleMembership needs Relations to resolve Roles
     /// </summary>
-    public interface RoleMembership_resolves_Relation_RelationEntry : IRelationCollectionEntry<RoleMembership, Relation> 
+    public interface RoleMembership_resolves_Relation_RelationEntry : IRelationListEntry<RoleMembership, Relation> 
     {
 
     }

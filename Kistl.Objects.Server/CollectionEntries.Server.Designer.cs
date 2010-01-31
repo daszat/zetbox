@@ -2124,6 +2124,33 @@ namespace Kistl.App.Base
             }
         }
         
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+           // Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.NotifyingValueProperty
+        public virtual int? A_pos
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _A_pos;
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_A_pos != value)
+                {
+                    var __oldValue = _A_pos;
+                    var __newValue = value;
+                    NotifyPropertyChanging("A_pos", __oldValue, __newValue);
+                    _A_pos = __newValue;
+                    NotifyPropertyChanged("A_pos", __oldValue, __newValue);
+                }
+            }
+        }
+        private int? _A_pos;
         
         /// <summary>
         /// the B-side value of this CollectionEntry
@@ -2187,8 +2214,45 @@ namespace Kistl.App.Base
             }
         }
         
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+           // Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.NotifyingValueProperty
+        public virtual int? B_pos
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _B_pos;
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_B_pos != value)
+                {
+                    var __oldValue = _B_pos;
+                    var __newValue = value;
+                    NotifyPropertyChanging("B_pos", __oldValue, __newValue);
+                    _B_pos = __newValue;
+                    NotifyPropertyChanged("B_pos", __oldValue, __newValue);
+                }
+            }
+        }
+        private int? _B_pos;
         
 
+
+
+        /// <summary>
+        /// Index into the A-side list of this relation
+        /// </summary>
+public int? AIndex { get { return A_pos; } set { A_pos = value; } }
+        /// <summary>
+        /// Index into the B-side list of this relation
+        /// </summary>
+public int? BIndex { get { return B_pos; } set { B_pos = value; } }
 #region Serializer
 
 
@@ -2198,7 +2262,11 @@ namespace Kistl.App.Base
             base.ToStream(binStream, auxObjects);
             BinarySerializer.ToStream(this._ExportGuid, binStream);
             BinarySerializer.ToStream(A != null ? A.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(this._A_pos, binStream);
             BinarySerializer.ToStream(B != null ? B.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(this._B_pos, binStream);
+            BinarySerializer.ToStream(this._A_pos, binStream);
+            BinarySerializer.ToStream(this._B_pos, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
@@ -2207,7 +2275,11 @@ namespace Kistl.App.Base
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._ExportGuid, binStream);
             BinarySerializer.FromStream(out this._fk_A, binStream);
+            BinarySerializer.FromStream(out this._A_pos, binStream);
             BinarySerializer.FromStream(out this._fk_B, binStream);
+            BinarySerializer.FromStream(out this._B_pos, binStream);
+            BinarySerializer.FromStream(out this._A_pos, binStream);
+            BinarySerializer.FromStream(out this._B_pos, binStream);
         }
 
         public override void ToStream(System.Xml.XmlWriter xml)
@@ -2216,7 +2288,11 @@ namespace Kistl.App.Base
             base.ToStream(xml);
             XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "");
             XmlStreamer.ToStream(A != null ? A.ID : (int?)null, xml, "A", "Kistl.App.Base");
+            XmlStreamer.ToStream(this._A_pos, xml, "A_pos", "Kistl.App.Base");
             XmlStreamer.ToStream(B != null ? B.ID : (int?)null, xml, "B", "Kistl.App.Base");
+            XmlStreamer.ToStream(this._B_pos, xml, "B_pos", "Kistl.App.Base");
+            XmlStreamer.ToStream(this._A_pos, xml, "A_pos", "Kistl.App.Base");
+            XmlStreamer.ToStream(this._B_pos, xml, "B_pos", "Kistl.App.Base");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
@@ -2225,7 +2301,11 @@ namespace Kistl.App.Base
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "");
             XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._A_pos, xml, "A_pos", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._B_pos, xml, "B_pos", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._A_pos, xml, "A_pos", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._B_pos, xml, "B_pos", "Kistl.App.Base");
         }
 
         public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
@@ -2233,14 +2313,26 @@ namespace Kistl.App.Base
             
             xml.WriteAttributeString("ExportGuid", this._ExportGuid.ToString());
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(A != null ? A.ExportGuid : (Guid?)null, xml, "A", "Kistl.App.Base");
+	
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._A_pos, xml, "A_pos", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(B != null ? B.ExportGuid : (Guid?)null, xml, "B", "Kistl.App.Base");
+	
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._B_pos, xml, "B_pos", "Kistl.App.Base");
+	
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._A_pos, xml, "A_pos", "Kistl.App.Base");
+	
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._B_pos, xml, "B_pos", "Kistl.App.Base");
         }
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
         {
             XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "");
             XmlStreamer.FromStream(ref this._fk_guid_A, xml, "A", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._A_pos, xml, "A_pos", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_guid_B, xml, "B", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._B_pos, xml, "B_pos", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._A_pos, xml, "A_pos", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._B_pos, xml, "B_pos", "Kistl.App.Base");
         }
 
 #endregion
@@ -2279,6 +2371,8 @@ namespace Kistl.App.Base
 			var other = (RoleMembership_resolves_Relation_RelationEntry__Implementation__)obj;
 			var me = (RoleMembership_resolves_Relation_RelationEntry__Implementation__)this;
 			
+            me.AIndex = other.AIndex;
+            me.BIndex = other.BIndex;
             me._fk_A = other._fk_A;
             me._fk_B = other._fk_B;
 		}		

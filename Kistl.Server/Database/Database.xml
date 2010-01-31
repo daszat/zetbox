@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2010-01-30T14:32:16.713Z" xmlns="http://dasz.at/Kistl">
+<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2010-01-31T14:21:54.03Z" xmlns="http://dasz.at/Kistl">
   <KistlBase:Module ExportGuid="ef6d5bd8-5826-4ce6-a9ca-c8438ddde773">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.32Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.32Z</KistlBase:CreatedOn>
@@ -5653,9 +5653,9 @@
   </KistlBase:RelationEnd>
   <KistlBase:RelationEnd ExportGuid="6f145ef1-b514-4e6f-a6a8-67187b37c98d">
     <KistlBase:AParent>f74d425f-e733-4cba-baca-f4a05fbc0a80</KistlBase:AParent>
-    <KistlBase:ChangedOn>2010-01-29T16:56:35.657Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2010-01-31T14:21:54.03Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2010-01-29T16:56:35.657Z</KistlBase:CreatedOn>
-    <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
+    <KistlBase:HasPersistentOrder>true</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>3</KistlBase:Multiplicity>
     <KistlBase:Navigator>fb799900-1a5b-4b62-a445-5dae8febdd28</KistlBase:Navigator>
     <KistlBase:RoleName>RoleMembership</KistlBase:RoleName>
@@ -15880,6 +15880,15 @@
     <KistlBase:ConstrainedProperty>5545ba8a-3e89-4b22-bd66-c12f3622ace0</KistlBase:ConstrainedProperty>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.423Z</KistlBase:CreatedOn>
   </KistlBase:NotNullableConstraint>
+  <KistlBase:RoleMembership ExportGuid="1126a629-7fa7-4e5a-9e59-53a703f8e908">
+    <KistlBase:ChangedOn>2010-01-30T15:03:53.613Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-01-30T15:03:53.613Z</KistlBase:CreatedOn>
+    <KistlBase:Description>Creator may delete Projetcts</KistlBase:Description>
+    <KistlBase:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</KistlBase:Module>
+    <KistlBase:Name>Creator</KistlBase:Name>
+    <KistlBase:ObjectClass>885939e8-82e1-4fdf-b80e-5f612d5131d3</KistlBase:ObjectClass>
+    <KistlBase:Rights>15</KistlBase:Rights>
+  </KistlBase:RoleMembership>
   <KistlBase:RoleMembership ExportGuid="3f419c0f-df37-44d4-a035-5b19020ec261">
     <KistlBase:ChangedOn>2010-01-29T18:49:06.047Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2010-01-29T18:49:06.047Z</KistlBase:CreatedOn>
@@ -15888,13 +15897,29 @@
     <KistlBase:ObjectClass>885939e8-82e1-4fdf-b80e-5f612d5131d3</KistlBase:ObjectClass>
     <KistlBase:Rights>3</KistlBase:Rights>
   </KistlBase:RoleMembership>
+  <KistlBase:RoleMembership_resolves_Relation_RelationEntry ExportGuid="cb6f2ed0-bc2d-417f-a795-b5748d2131e4">
+    <KistlBase:A>1126a629-7fa7-4e5a-9e59-53a703f8e908</KistlBase:A>
+    <KistlBase:A_pos>1</KistlBase:A_pos>
+    <KistlBase:B>035db8da-a9f4-4529-9f50-29afd9e6f043</KistlBase:B>
+    <KistlBase:B_pos>1</KistlBase:B_pos>
+    <KistlBase:A_pos>1</KistlBase:A_pos>
+    <KistlBase:B_pos>1</KistlBase:B_pos>
+  </KistlBase:RoleMembership_resolves_Relation_RelationEntry>
   <KistlBase:RoleMembership_resolves_Relation_RelationEntry ExportGuid="221d7d73-7b99-49f9-babc-e8f33cbccc80">
     <KistlBase:A>3f419c0f-df37-44d4-a035-5b19020ec261</KistlBase:A>
+    <KistlBase:A_pos>2</KistlBase:A_pos>
     <KistlBase:B>29d161a2-e532-4d94-860b-b9f66c351d8a</KistlBase:B>
+    <KistlBase:B_pos>2</KistlBase:B_pos>
+    <KistlBase:A_pos>2</KistlBase:A_pos>
+    <KistlBase:B_pos>2</KistlBase:B_pos>
   </KistlBase:RoleMembership_resolves_Relation_RelationEntry>
   <KistlBase:RoleMembership_resolves_Relation_RelationEntry ExportGuid="c27f9d36-453b-4959-b9ce-768250f50010">
     <KistlBase:A>3f419c0f-df37-44d4-a035-5b19020ec261</KistlBase:A>
+    <KistlBase:A_pos>1</KistlBase:A_pos>
     <KistlBase:B>c7b3cf10-cdc8-454c-826c-04a0f7e5ef3e</KistlBase:B>
+    <KistlBase:B_pos>1</KistlBase:B_pos>
+    <KistlBase:A_pos>1</KistlBase:A_pos>
+    <KistlBase:B_pos>1</KistlBase:B_pos>
   </KistlBase:RoleMembership_resolves_Relation_RelationEntry>
   <KistlBase:Module ExportGuid="81e8ce31-65eb-46fe-ba86-de7452692d5b">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.423Z</KistlBase:ChangedOn>

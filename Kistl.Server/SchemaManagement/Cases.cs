@@ -960,9 +960,93 @@ namespace Kistl.Server.SchemaManagement
             var refreshRightsOnProcedureName = Construct.SecurityRulesRefreshRightsOnProcedureName(objClass);
 
             db.CreateUpdateRightsTrigger(updateRightsTriggerName, rightsViewUnmaterializedName, tblName, tblRightsName);
-            db.CreateRightsViewUnmaterialized(rightsViewUnmaterializedName, tblName, tblRightsName);
+            DoCreateRightsViewUnmaterialized(objClass);
             db.CreateRefreshRightsOnProcedure(refreshRightsOnProcedureName, rightsViewUnmaterializedName, tblName, tblRightsName);
         }
+
+        public void DoCreateRightsViewUnmaterialized(ObjectClass objClass)
+        {
+            if (objClass.AccessControlList.Count == 0)
+            {
+                Log.ErrorFormat("Unable to create RightsViewUnmaterialized: ObjectClass '{0}' has an empty AccessControlList", objClass.ClassName);
+                return;
+            }
+
+            var tblName = objClass.TableName;
+            string tblRightsName = Construct.SecurityRulesTableName(objClass);
+            var rightsViewUnmaterializedName = Construct.SecurityRulesRightsViewUnmaterializedName(objClass);
+
+            List<ACL> viewAcls = new List<ACL>();
+            foreach (var acl in objClass.AccessControlList.OfType<RoleMembership>())
+            {
+                if (acl.Relations.Count == 0)
+                {
+                    Log.ErrorFormat("Unable to create RightsViewUnmaterialized: RoleMembership '{0}' has no relations", acl.Name);
+                    return;
+                }
+
+                var viewAcl = new ACL();
+                viewAcls.Add(viewAcl);
+
+                string lastColumName = "ID";
+                ObjectClass lastType = objClass;
+
+                viewAcl.Right = (Kistl.API.AccessRights)acl.Rights;
+                foreach (var rel in acl.Relations)
+                {
+                    RelationEnd lastRelEnd;
+                    RelationEnd nextRelEnd;
+
+                    if (rel.A.Type == lastType)
+                    {
+                        lastRelEnd = rel.A;
+                        nextRelEnd = rel.B;
+                    }
+                    else if (rel.B.Type == lastType)
+                    {
+                        lastRelEnd = rel.B;
+                        nextRelEnd = rel.A;
+                    }
+                    else
+                    {
+                        Log.ErrorFormat("Unable to create RightsViewUnmaterialized: Unable to navigate from '{0}' over '{1}' to next type", lastType.ClassName, rel.ToString());
+                        return;
+                    }
+
+                    if (rel.GetRelationType() == RelationType.n_m)
+                    {
+                        var viewRel = new ACLRelation();
+                        viewAcl.Relations.Add(viewRel);
+                        viewRel.JoinTableName = rel.GetRelationTableName();
+                        viewRel.JoinColumnName = Construct.ForeignKeyColumnName(lastRelEnd);
+                        viewRel.FKColumnName = lastColumName;
+
+                        viewRel = new ACLRelation();
+                        viewAcl.Relations.Add(viewRel);
+                        viewRel.JoinTableName = nextRelEnd.Type.TableName;
+                        viewRel.JoinColumnName = "ID";
+                        viewRel.FKColumnName = Construct.ForeignKeyColumnName(nextRelEnd);
+
+                        lastColumName = viewRel.FKColumnName;
+                    }
+                    else
+                    {
+                        var viewRel = new ACLRelation();
+                        viewAcl.Relations.Add(viewRel);
+                        viewRel.JoinTableName = nextRelEnd.Type.TableName;
+                        viewRel.JoinColumnName = "ID";
+                        viewRel.FKColumnName = Construct.ForeignKeyColumnName(nextRelEnd);
+
+                        lastColumName = viewRel.FKColumnName;
+                    }
+
+                    lastType = nextRelEnd.Type;
+                }
+            }
+
+            db.CreateRightsViewUnmaterialized(rightsViewUnmaterializedName, tblName, tblRightsName, viewAcls);
+        }
+
         #endregion
 
         #region DeleteObjectClassSecurityRules

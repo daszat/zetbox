@@ -266,7 +266,7 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
 
                 QueryLog.Debug(cmd.CommandText);
                 cmd.ExecuteNonQuery();
-                
+
                 return (bool)cmd.Parameters["@result"].Value;
             }
         }
@@ -511,15 +511,49 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
                 viewUnmaterializedName);
         }
 
-        public void CreateRightsViewUnmaterialized(string viewName, string tblName, string tblNameRights)
+        public void CreateRightsViewUnmaterialized(string viewName, string tblName, string tblNameRights, IList<ACL> acls)
         {
+            if (acls == null) throw new ArgumentNullException("acls");
             Log.DebugFormat("Creating unmaterialized rights view for [{0}]", tblName);
-            ExecuteNonQuery(@"CREATE VIEW [{0}] AS
-	                SELECT tbl.[ID] [ID], id.ID [Identity], 0 [Right]
-	                FROM [{1}] tbl
-	                CROSS JOIN Identities id",
-                viewName,
-                tblName);
+
+            StringBuilder view = new StringBuilder();
+            view.AppendFormat(@"CREATE VIEW [{0}] AS
+SELECT	[ID], [Identity], 
+		(case SUM([Right] & 1) when 0 then 0 else 1 end) +
+		(case SUM([Right] & 2) when 0 then 0 else 2 end) +
+		(case SUM([Right] & 4) when 0 then 0 else 4 end) +
+		(case SUM([Right] & 8) when 0 then 0 else 8 end) [Right] 
+FROM (", viewName);
+            view.AppendLine();
+
+            foreach (var acl in acls)
+            {
+                view.AppendFormat(@"  SELECT t1.[ID] [ID], t{0}.[{1}] [Identity], {2} [Right]",
+                    acl.Relations.Count,
+                    acl.Relations.Last().FKColumnName,
+                    (int)acl.Right);
+                view.AppendLine();
+                view.AppendFormat(@"  FROM [{0}] t1", tblName);
+                view.AppendLine();
+
+                int idx = 2;
+                foreach (var rel in acl.Relations.Take(acl.Relations.Count - 1))
+                {
+                    view.AppendFormat(@"  INNER JOIN [{0}] t{1} ON t{1}.[{2}] = t{3}.[{4}]", rel.JoinTableName, idx, rel.JoinColumnName, idx - 1, rel.FKColumnName);
+                    view.AppendLine();
+                    idx++;
+                }
+                view.AppendFormat(@"  WHERE t{0}.[{1}] IS NOT NULL",
+                    acl.Relations.Count,
+                    acl.Relations.Last().FKColumnName);
+                view.AppendLine();
+                view.AppendLine("  UNION ALL");
+            }
+            view.Remove(view.Length - 12, 12);
+
+            view.AppendLine(@") unmaterialized GROUP BY [ID], [Identity]");
+
+            ExecuteNonQuery(view.ToString());
         }
 
         public void CreateRefreshRightsOnProcedure(string procName, string viewUnmaterializedName, string tblName, string tblNameRights)

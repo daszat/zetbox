@@ -2270,7 +2270,9 @@
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
 	<Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
     <Property Name="fk_RoleMembership" Type="int" Nullable="true" />
+    <Property Name="fk_RoleMembership_pos" Type="int" Nullable="true" />
     <Property Name="fk_Relations" Type="int" Nullable="true" />
+    <Property Name="fk_Relations_pos" Type="int" Nullable="true" />
   </EntityType>
 
   <!-- A to CollectionEntry -->

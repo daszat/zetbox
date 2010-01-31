@@ -1043,6 +1043,8 @@
         <MappingFragment StoreEntitySet="RoleMembership_resolves_Relation_RelationEntry">
           <ScalarProperty Name="ID" ColumnName="ID" />
 		  <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+          <ScalarProperty Name="A_pos" ColumnName="fk_RoleMembership_pos" />
+          <ScalarProperty Name="B_pos" ColumnName="fk_Relations_pos" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
