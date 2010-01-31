@@ -26,6 +26,7 @@ namespace Kistl.Server.SchemaManagement
                     UpdateTables();
                     UpdateRelations();
                     UpdateInheritance();
+                    UpdateSecurityTables();
 
                     UpdateDeletedRelations();
                     UpdateDeletedTables();
@@ -103,6 +104,23 @@ namespace Kistl.Server.SchemaManagement
             Log.Debug(String.Empty);
         }
 
+        private void UpdateSecurityTables()
+        {
+            Log.Info("Updating Security Tables");
+            Log.Debug("-------------------------");
+
+            foreach (ObjectClass objClass in schema.GetQuery<ObjectClass>().OrderBy(o => o.Module.Namespace).ThenBy(o => o.ClassName))
+            {
+                if (Case.IsNewObjectClassSecurityRules(objClass))
+                {
+                    Case.DoNewObjectClassSecurityRules(objClass);
+                }
+                if (Case.IsDeleteObjectClassSecurityRules(objClass))
+                {
+                    Case.DoDeleteObjectClassSecurityRules(objClass);
+                }
+            }
+        }
 
         private void UpdateTables()
         {
@@ -119,14 +137,6 @@ namespace Kistl.Server.SchemaManagement
                 if (Case.IsRenameObjectClassTable(objClass))
                 {
                     Case.DoRenameObjectClassTable(objClass);
-                }
-                if (Case.IsNewObjectClassSecurityRules(objClass))
-                {
-                    Case.DoNewObjectClassSecurityRules(objClass);
-                }
-                if (Case.IsDeleteObjectClassSecurityRules(objClass))
-                {
-                    Case.DoDeleteObjectClassSecurityRules(objClass);
                 }
 
                 UpdateColumns(objClass, objClass.Properties, String.Empty);
