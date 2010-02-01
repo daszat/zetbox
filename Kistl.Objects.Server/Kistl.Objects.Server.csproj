@@ -115,8 +115,11 @@
     <Compile Include="EnumerationEntry.Server.Designer.cs" />
     <Compile Include="EnumerationProperty.Server.Designer.cs" />
     <Compile Include="EnumerationSelectorKind.Server.Designer.cs" />
+    <Compile Include="Exam.Server.Designer.cs" />
+    <Compile Include="Exercise.Server.Designer.cs" />
     <Compile Include="Fragebogen.Server.Designer.cs" />
     <Compile Include="Group.Server.Designer.cs" />
+    <Compile Include="GroupExcercise.Server.Designer.cs" />
     <Compile Include="GroupMembership.Server.Designer.cs" />
     <Compile Include="GuidProperty.Server.Designer.cs" />
     <Compile Include="Icon.Server.Designer.cs" />
@@ -156,12 +159,15 @@
     <Compile Include="RelationEditorKind.Server.Designer.cs" />
     <Compile Include="RelationEnd.Server.Designer.cs" />
     <Compile Include="RoleMembership.Server.Designer.cs" />
+    <Compile Include="Semester.Server.Designer.cs" />
     <Compile Include="SingleLineDataObjectKind.Server.Designer.cs" />
     <Compile Include="StringListKind.Server.Designer.cs" />
     <Compile Include="StringParameter.Server.Designer.cs" />
     <Compile Include="StringProperty.Server.Designer.cs" />
     <Compile Include="StringRangeConstraint.Server.Designer.cs" />
     <Compile Include="StringSelectorKind.Server.Designer.cs" />
+    <Compile Include="Student.Server.Designer.cs" />
+    <Compile Include="StudentExam.Server.Designer.cs" />
     <Compile Include="Task.Server.Designer.cs" />
     <Compile Include="Template.Server.Designer.cs" />
     <Compile Include="TestCustomObject.Server.Designer.cs" />

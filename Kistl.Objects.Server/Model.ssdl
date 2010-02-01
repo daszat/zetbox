@@ -21,8 +21,11 @@
     <EntitySet Name="DataType" EntityType="Model.Store.DataType" Table="DataTypes"/>
     <EntitySet Name="DefaultPropertyValue" EntityType="Model.Store.DefaultPropertyValue" Table="DefaultPropertyValues"/>
     <EntitySet Name="EnumerationEntry" EntityType="Model.Store.EnumerationEntry" Table="EnumerationEntries"/>
+    <EntitySet Name="Exam" EntityType="Model.Store.Exam" Table="Exams"/>
+    <EntitySet Name="Exercise" EntityType="Model.Store.Exercise" Table="Exercises"/>
     <EntitySet Name="Fragebogen" EntityType="Model.Store.Fragebogen" Table="Fragebögen"/>
     <EntitySet Name="Group" EntityType="Model.Store.Group" Table="Groups"/>
+    <EntitySet Name="GroupExcercise" EntityType="Model.Store.GroupExcercise" Table="GroupExcercises"/>
     <EntitySet Name="Icon" EntityType="Model.Store.Icon" Table="Icons"/>
     <EntitySet Name="Identity" EntityType="Model.Store.Identity" Table="Identities"/>
     <EntitySet Name="InstanceConstraint" EntityType="Model.Store.InstanceConstraint" Table="InstanceConstraint"/>
@@ -44,6 +47,9 @@
     <EntitySet Name="PropertyInvocation" EntityType="Model.Store.PropertyInvocation" Table="PropertyInvocations"/>
     <EntitySet Name="Relation" EntityType="Model.Store.Relation" Table="Relations"/>
     <EntitySet Name="RelationEnd" EntityType="Model.Store.RelationEnd" Table="RelationEnds"/>
+    <EntitySet Name="Semester" EntityType="Model.Store.Semester" Table="Semesters"/>
+    <EntitySet Name="Student" EntityType="Model.Store.Student" Table="Students"/>
+    <EntitySet Name="StudentExam" EntityType="Model.Store.StudentExam" Table="StudentExams"/>
     <EntitySet Name="Task" EntityType="Model.Store.Task" Table="Tasks"/>
     <EntitySet Name="Template" EntityType="Model.Store.Template" Table="Templates"/>
     <EntitySet Name="TestCustomObject" EntityType="Model.Store.TestCustomObject" Table="TestCustomObjects"/>
@@ -408,6 +414,22 @@
     </AssociationSet>
     
     <!-- 
+    Relation: FK_GroupExcercise_accomplished_by_Students
+    A: ZeroOrMore GroupExcercise as GroupExcercise
+    B: ZeroOrMore Student as Students
+    Preferred Storage: Separate
+    -->
+    <EntitySet Name="GroupExcercise_accomplished_by_Student_RelationEntry" EntityType="Model.Store.GroupExcercise_accomplished_by_Student_RelationEntry" Table="GroupExcercise_accomplished_by_Students" />
+    <AssociationSet Name="FK_GroupExcercise_accomplished_by_Students_A" Association="Model.Store.FK_GroupExcercise_accomplished_by_Students_A" >
+      <End Role="GroupExcercise" EntitySet="GroupExcercise" />
+      <End Role="CollectionEntry" EntitySet="GroupExcercise_accomplished_by_Student_RelationEntry" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GroupExcercise_accomplished_by_Students_B" Association="Model.Store.FK_GroupExcercise_accomplished_by_Students_B" >
+      <End Role="CollectionEntry" EntitySet="GroupExcercise_accomplished_by_Student_RelationEntry" />
+      <End Role="Students" EntitySet="Student" />
+    </AssociationSet>
+    
+    <!-- 
     Relation: FK_Identities_memberOf_Groups
     A: ZeroOrMore Identity as Identities
     B: ZeroOrMore Group as Groups
@@ -501,6 +523,22 @@
     <AssociationSet Name="FK_RoleMembership_resolves_Relations_B" Association="Model.Store.FK_RoleMembership_resolves_Relations_B" >
       <End Role="CollectionEntry" EntitySet="RoleMembership_resolves_Relation_RelationEntry" />
       <End Role="Relations" EntitySet="Relation" />
+    </AssociationSet>
+    
+    <!-- 
+    Relation: FK_Students_attend_Semesters
+    A: ZeroOrMore Student as Students
+    B: ZeroOrMore Semester as Semesters
+    Preferred Storage: Separate
+    -->
+    <EntitySet Name="Student_attend_Semester_RelationEntry" EntityType="Model.Store.Student_attend_Semester_RelationEntry" Table="Students_attend_Semesters" />
+    <AssociationSet Name="FK_Students_attend_Semesters_A" Association="Model.Store.FK_Students_attend_Semesters_A" >
+      <End Role="Students" EntitySet="Student" />
+      <End Role="CollectionEntry" EntitySet="Student_attend_Semester_RelationEntry" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Students_attend_Semesters_B" Association="Model.Store.FK_Students_attend_Semesters_B" >
+      <End Role="CollectionEntry" EntitySet="Student_attend_Semester_RelationEntry" />
+      <End Role="Semesters" EntitySet="Semester" />
     </AssociationSet>
     
     <!-- 
@@ -714,6 +752,14 @@
       <End Role="EnumerationProperty" EntitySet="EnumerationProperty" />
       <End Role="Enumeration" EntitySet="Enumeration" />
     </AssociationSet>
+    <AssociationSet Name="FK_Exam_happens_in_Semester" Association="Model.Store.FK_Exam_happens_in_Semester" >
+      <End Role="Exam" EntitySet="Exam" />
+      <End Role="Semester" EntitySet="Semester" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Excercise_happens_in_Semester" Association="Model.Store.FK_Excercise_happens_in_Semester" >
+      <End Role="Excercise" EntitySet="Exercise" />
+      <End Role="Semester" EntitySet="Semester" />
+    </AssociationSet>
     <AssociationSet Name="FK_Fragebogen_enthält_Antworten" Association="Model.Store.FK_Fragebogen_enthält_Antworten" >
       <End Role="Fragebogen" EntitySet="Fragebogen" />
       <End Role="Antworten" EntitySet="Antwort" />
@@ -725,6 +771,10 @@
     <AssociationSet Name="FK_Group_has_ParentGroup" Association="Model.Store.FK_Group_has_ParentGroup" >
       <End Role="Group" EntitySet="Group" />
       <End Role="ParentGroup" EntitySet="Group" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GroupExcercise_passes_Excercise" Association="Model.Store.FK_GroupExcercise_passes_Excercise" >
+      <End Role="GroupExcercise" EntitySet="GroupExcercise" />
+      <End Role="Excercise" EntitySet="Exercise" />
     </AssociationSet>
     <AssociationSet Name="FK_GroupMembership_has_Group" Association="Model.Store.FK_GroupMembership_has_Group" >
       <End Role="GroupMembership" EntitySet="GroupMembership" />
@@ -949,6 +999,14 @@
     <AssociationSet Name="FK_RelationEnd_was_CreatedBy" Association="Model.Store.FK_RelationEnd_was_CreatedBy" >
       <End Role="RelationEnd" EntitySet="RelationEnd" />
       <End Role="CreatedBy" EntitySet="Identity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StudentExam_passes_Exam" Association="Model.Store.FK_StudentExam_passes_Exam" >
+      <End Role="StudentExam" EntitySet="StudentExam" />
+      <End Role="Exam" EntitySet="Exam" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StudentExam_writtenby_Student" Association="Model.Store.FK_StudentExam_writtenby_Student" >
+      <End Role="StudentExam" EntitySet="StudentExam" />
+      <End Role="Student" EntitySet="Student" />
     </AssociationSet>
     <AssociationSet Name="FK_Task_was_ChangedBy" Association="Model.Store.FK_Task_was_ChangedBy" >
       <End Role="Task" EntitySet="Task" />
@@ -1352,6 +1410,28 @@
     <Property Name="ID" Type="int" Nullable="false" />
   </EntityType>
 	
+  <EntityType Name="Exam">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_Semester" Type="int" />
+    <Property Name="Date" Type="datetime" Nullable="true" />
+    <Property Name="MaxScores" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="1000" Nullable="false" />
+  </EntityType>
+	
+  <EntityType Name="Exercise">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_Semester" Type="int" />
+    <Property Name="Date" Type="datetime" Nullable="true" />
+    <Property Name="MaxScores" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="1000" Nullable="true" />
+  </EntityType>
+	
   <EntityType Name="Fragebogen">
     <Key>
       <PropertyRef Name="ID" />
@@ -1369,6 +1449,15 @@
     <Property Name="fk_ParentGroup" Type="int" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
     <Property Name="Name" Type="nvarchar" MaxLength="1000" Nullable="false" />
+  </EntityType>
+	
+  <EntityType Name="GroupExcercise">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_Excercise" Type="int" />
+    <Property Name="Score" Type="int" Nullable="true" />
   </EntityType>
 	
   <EntityType Name="GroupMembership">
@@ -1798,6 +1887,16 @@
     <Property Name="ID" Type="int" Nullable="false" />
   </EntityType>
 	
+  <EntityType Name="Semester">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="CourseName" Type="nvarchar" MaxLength="1000" Nullable="false" />
+    <Property Name="Period" Type="int" Nullable="true" />
+    <Property Name="Year" Type="int" Nullable="true" />
+  </EntityType>
+	
   <EntityType Name="SingleLineDataObjectKind">
     <Key>
       <PropertyRef Name="ID" />
@@ -1841,6 +1940,25 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" />
+  </EntityType>
+	
+  <EntityType Name="Student">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="MatriculationNumber" Type="nvarchar" MaxLength="1000" Nullable="true" />
+    <Property Name="Name" Type="nvarchar" MaxLength="1000" Nullable="false" />
+  </EntityType>
+	
+  <EntityType Name="StudentExam">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_Exam" Type="int" />
+    <Property Name="fk_Student" Type="int" />
+    <Property Name="Score" Type="int" Nullable="true" />
   </EntityType>
 	
   <EntityType Name="Task">
@@ -2064,6 +2182,44 @@
       </Principal>
       <Dependent Role="CollectionEntry">
         <PropertyRef Name="fk_SupportedInterfaces" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+	
+  <EntityType Name="GroupExcercise_accomplished_by_Student_RelationEntry">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_GroupExcercise" Type="int" Nullable="true" />
+    <Property Name="fk_Students" Type="int" Nullable="true" />
+  </EntityType>
+
+  <!-- A to CollectionEntry -->
+  <Association Name="FK_GroupExcercise_accomplished_by_Students_A">
+    <End Role="GroupExcercise" Type="Model.Store.GroupExcercise" Multiplicity="0..1" />
+    <End Role="CollectionEntry" Type="Model.Store.GroupExcercise_accomplished_by_Student_RelationEntry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GroupExcercise">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CollectionEntry">
+        <PropertyRef Name="fk_GroupExcercise" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+  <!-- B to CollectionEntry -->
+  <Association Name="FK_GroupExcercise_accomplished_by_Students_B">
+    <End Role="Students" Type="Model.Store.Student" Multiplicity="0..1" />
+    <End Role="CollectionEntry" Type="Model.Store.GroupExcercise_accomplished_by_Student_RelationEntry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Students">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CollectionEntry">
+        <PropertyRef Name="fk_Students" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -2299,6 +2455,44 @@
       </Principal>
       <Dependent Role="CollectionEntry">
         <PropertyRef Name="fk_Relations" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+	
+  <EntityType Name="Student_attend_Semester_RelationEntry">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_Students" Type="int" Nullable="true" />
+    <Property Name="fk_Semesters" Type="int" Nullable="true" />
+  </EntityType>
+
+  <!-- A to CollectionEntry -->
+  <Association Name="FK_Students_attend_Semesters_A">
+    <End Role="Students" Type="Model.Store.Student" Multiplicity="0..1" />
+    <End Role="CollectionEntry" Type="Model.Store.Student_attend_Semester_RelationEntry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Students">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CollectionEntry">
+        <PropertyRef Name="fk_Students" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+  <!-- B to CollectionEntry -->
+  <Association Name="FK_Students_attend_Semesters_B">
+    <End Role="Semesters" Type="Model.Store.Semester" Multiplicity="0..1" />
+    <End Role="CollectionEntry" Type="Model.Store.Student_attend_Semester_RelationEntry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Semesters">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CollectionEntry">
+        <PropertyRef Name="fk_Semesters" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -2948,6 +3142,34 @@
   </Association>
 
 
+  <Association Name="FK_Exam_happens_in_Semester">
+    <End Role="Semester" Type="Model.Store.Semester" Multiplicity="0..1" />
+    <End Role="Exam" Type="Model.Store.Exam" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Semester">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Exam">
+        <PropertyRef Name="fk_Semester" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_Excercise_happens_in_Semester">
+    <End Role="Semester" Type="Model.Store.Semester" Multiplicity="0..1" />
+    <End Role="Excercise" Type="Model.Store.Exercise" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Semester">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Excercise">
+        <PropertyRef Name="fk_Semester" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
   <Association Name="FK_Fragebogen_enthält_Antworten">
     <End Role="Fragebogen" Type="Model.Store.Fragebogen" Multiplicity="0..1" />
     <End Role="Antworten" Type="Model.Store.Antwort" Multiplicity="*" />
@@ -2985,6 +3207,20 @@
       </Principal>
       <Dependent Role="Group">
         <PropertyRef Name="fk_ParentGroup" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_GroupExcercise_passes_Excercise">
+    <End Role="Excercise" Type="Model.Store.Exercise" Multiplicity="0..1" />
+    <End Role="GroupExcercise" Type="Model.Store.GroupExcercise" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Excercise">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="GroupExcercise">
+        <PropertyRef Name="fk_Excercise" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -3769,6 +4005,34 @@
       </Principal>
       <Dependent Role="RelationEnd">
         <PropertyRef Name="fk_CreatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_StudentExam_passes_Exam">
+    <End Role="Exam" Type="Model.Store.Exam" Multiplicity="0..1" />
+    <End Role="StudentExam" Type="Model.Store.StudentExam" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Exam">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="StudentExam">
+        <PropertyRef Name="fk_Exam" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_StudentExam_writtenby_Student">
+    <End Role="Student" Type="Model.Store.Student" Multiplicity="0..1" />
+    <End Role="StudentExam" Type="Model.Store.StudentExam" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="StudentExam">
+        <PropertyRef Name="fk_Student" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

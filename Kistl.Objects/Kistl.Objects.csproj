@@ -91,8 +91,11 @@
     <Compile Include="EnumerationEntry.Interface.Designer.cs" />
     <Compile Include="EnumerationProperty.Interface.Designer.cs" />
     <Compile Include="EnumerationSelectorKind.Interface.Designer.cs" />
+    <Compile Include="Exam.Interface.Designer.cs" />
+    <Compile Include="Exercise.Interface.Designer.cs" />
     <Compile Include="Fragebogen.Interface.Designer.cs" />
     <Compile Include="Group.Interface.Designer.cs" />
+    <Compile Include="GroupExcercise.Interface.Designer.cs" />
     <Compile Include="GroupMembership.Interface.Designer.cs" />
     <Compile Include="GuidProperty.Interface.Designer.cs" />
     <Compile Include="Icon.Interface.Designer.cs" />
@@ -132,12 +135,15 @@
     <Compile Include="RelationEditorKind.Interface.Designer.cs" />
     <Compile Include="RelationEnd.Interface.Designer.cs" />
     <Compile Include="RoleMembership.Interface.Designer.cs" />
+    <Compile Include="Semester.Interface.Designer.cs" />
     <Compile Include="SingleLineDataObjectKind.Interface.Designer.cs" />
     <Compile Include="StringListKind.Interface.Designer.cs" />
     <Compile Include="StringParameter.Interface.Designer.cs" />
     <Compile Include="StringProperty.Interface.Designer.cs" />
     <Compile Include="StringRangeConstraint.Interface.Designer.cs" />
     <Compile Include="StringSelectorKind.Interface.Designer.cs" />
+    <Compile Include="Student.Interface.Designer.cs" />
+    <Compile Include="StudentExam.Interface.Designer.cs" />
     <Compile Include="Task.Interface.Designer.cs" />
     <Compile Include="Template.Interface.Designer.cs" />
     <Compile Include="TestCustomObject.Interface.Designer.cs" />
@@ -160,6 +166,7 @@
     <Compile Include="AccessRights.Interface.Designer.cs" />
     <Compile Include="DeploymentRestriction.Interface.Designer.cs" />
     <Compile Include="Multiplicity.Interface.Designer.cs" />
+    <Compile Include="Periods.Interface.Designer.cs" />
     <Compile Include="PropertyInvocationType.Interface.Designer.cs" />
     <Compile Include="StorageType.Interface.Designer.cs" />
     <Compile Include="TestEnum.Interface.Designer.cs" />
@@ -167,6 +174,7 @@
     <Compile Include="TestPhoneCompoundObject.Interface.Designer.cs" />
     <Compile Include="AssemblyInfo.Interface.cs" />
     <Compile Include="ModuleRepository.Interface.Designer.cs" />
+    <Compile Include="CourseOrganiserRepository.Interface.Designer.cs" />
     <Compile Include="GUIRepository.Interface.Designer.cs" />
     <Compile Include="KistlBaseRepository.Interface.Designer.cs" />
     <Compile Include="ProjekteRepository.Interface.Designer.cs" />

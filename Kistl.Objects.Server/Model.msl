@@ -368,6 +368,26 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Exam">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Exam)">
+	    <MappingFragment StoreEntitySet="Exam">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="Date" ColumnName="Date" />
+<ScalarProperty Name="MaxScores" ColumnName="MaxScores" />
+<ScalarProperty Name="Name" ColumnName="Name" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Exercise">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Exercise)">
+	    <MappingFragment StoreEntitySet="Exercise">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="Date" ColumnName="Date" />
+<ScalarProperty Name="MaxScores" ColumnName="MaxScores" />
+<ScalarProperty Name="Name" ColumnName="Name" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Fragebogen">
       <EntityTypeMapping TypeName="IsTypeOf(Model.Fragebogen)">
 	    <MappingFragment StoreEntitySet="Fragebogen">
@@ -382,6 +402,14 @@
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
 <ScalarProperty Name="Name" ColumnName="Name" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GroupExcercise">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.GroupExcercise)">
+	    <MappingFragment StoreEntitySet="GroupExcercise">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="Score" ColumnName="Score" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -656,6 +684,33 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Semester">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Semester)">
+	    <MappingFragment StoreEntitySet="Semester">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="CourseName" ColumnName="CourseName" />
+<ScalarProperty Name="Period__Implementation__" ColumnName="Period" />
+<ScalarProperty Name="Year" ColumnName="Year" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Student">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Student)">
+	    <MappingFragment StoreEntitySet="Student">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="MatriculationNumber" ColumnName="MatriculationNumber" />
+<ScalarProperty Name="Name" ColumnName="Name" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StudentExam">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.StudentExam)">
+	    <MappingFragment StoreEntitySet="StudentExam">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="Score" ColumnName="Score" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Task">
       <EntityTypeMapping TypeName="IsTypeOf(Model.Task)">
 	    <MappingFragment StoreEntitySet="Task">
@@ -836,6 +891,44 @@
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="fk_SupportedInterfaces" IsNull="false"/>
+    </AssociationSetMapping>
+
+    <!--
+    Relation: FK_GroupExcercise_accomplished_by_Students
+    A: ZeroOrMore GroupExcercise as GroupExcercise
+    B: ZeroOrMore Student as Students
+    Preferred Storage: Separate
+    -->
+    <EntitySetMapping Name="GroupExcercise_accomplished_by_Student_RelationEntry">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.GroupExcercise_accomplished_by_Student_RelationEntry)">
+        <MappingFragment StoreEntitySet="GroupExcercise_accomplished_by_Student_RelationEntry">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <!-- A to CollectionEntry -->
+    <AssociationSetMapping Name="FK_GroupExcercise_accomplished_by_Students_A"
+                           TypeName="Model.FK_GroupExcercise_accomplished_by_Students_A"
+                           StoreEntitySet="GroupExcercise_accomplished_by_Student_RelationEntry" >
+      <EndProperty Name="GroupExcercise">
+        <ScalarProperty Name="ID" ColumnName="fk_GroupExcercise"/>
+      </EndProperty>
+      <EndProperty Name="CollectionEntry">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_GroupExcercise" IsNull="false"/>
+    </AssociationSetMapping>
+    <!-- B to CollectionEntry -->
+    <AssociationSetMapping Name="FK_GroupExcercise_accomplished_by_Students_B"
+                           TypeName="Model.FK_GroupExcercise_accomplished_by_Students_B"
+                           StoreEntitySet="GroupExcercise_accomplished_by_Student_RelationEntry" >
+      <EndProperty Name="Students">
+        <ScalarProperty Name="ID" ColumnName="fk_Students"/>
+      </EndProperty>
+      <EndProperty Name="CollectionEntry">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_Students" IsNull="false"/>
     </AssociationSetMapping>
 
     <!--
@@ -1071,6 +1164,44 @@
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="fk_Relations" IsNull="false"/>
+    </AssociationSetMapping>
+
+    <!--
+    Relation: FK_Students_attend_Semesters
+    A: ZeroOrMore Student as Students
+    B: ZeroOrMore Semester as Semesters
+    Preferred Storage: Separate
+    -->
+    <EntitySetMapping Name="Student_attend_Semester_RelationEntry">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Student_attend_Semester_RelationEntry)">
+        <MappingFragment StoreEntitySet="Student_attend_Semester_RelationEntry">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <!-- A to CollectionEntry -->
+    <AssociationSetMapping Name="FK_Students_attend_Semesters_A"
+                           TypeName="Model.FK_Students_attend_Semesters_A"
+                           StoreEntitySet="Student_attend_Semester_RelationEntry" >
+      <EndProperty Name="Students">
+        <ScalarProperty Name="ID" ColumnName="fk_Students"/>
+      </EndProperty>
+      <EndProperty Name="CollectionEntry">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_Students" IsNull="false"/>
+    </AssociationSetMapping>
+    <!-- B to CollectionEntry -->
+    <AssociationSetMapping Name="FK_Students_attend_Semesters_B"
+                           TypeName="Model.FK_Students_attend_Semesters_B"
+                           StoreEntitySet="Student_attend_Semester_RelationEntry" >
+      <EndProperty Name="Semesters">
+        <ScalarProperty Name="ID" ColumnName="fk_Semesters"/>
+      </EndProperty>
+      <EndProperty Name="CollectionEntry">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_Semesters" IsNull="false"/>
     </AssociationSetMapping>
 
     <!--
@@ -1814,6 +1945,40 @@
       <Condition ColumnName="fk_Enumeration" IsNull="false"/>
     </AssociationSetMapping>
     <!--
+    Relation: FK_Exam_happens_in_Semester
+    A: ZeroOrMore Exam as Exam
+    B: One Semester as Semester
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_Exam_happens_in_Semester"
+                           TypeName="Model.FK_Exam_happens_in_Semester"
+                           StoreEntitySet="Exam" >
+      <EndProperty Name="Semester">
+        <ScalarProperty Name="ID" ColumnName="fk_Semester"/>
+      </EndProperty>
+      <EndProperty Name="Exam">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_Semester" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_Excercise_happens_in_Semester
+    A: ZeroOrMore Exercise as Excercise
+    B: One Semester as Semester
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_Excercise_happens_in_Semester"
+                           TypeName="Model.FK_Excercise_happens_in_Semester"
+                           StoreEntitySet="Exercise" >
+      <EndProperty Name="Semester">
+        <ScalarProperty Name="ID" ColumnName="fk_Semester"/>
+      </EndProperty>
+      <EndProperty Name="Excercise">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_Semester" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
     Relation: FK_Fragebogen_enthält_Antworten
     A: One Fragebogen as Fragebogen
     B: ZeroOrMore Antwort as Antworten
@@ -1863,6 +2028,23 @@
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="fk_ParentGroup" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_GroupExcercise_passes_Excercise
+    A: ZeroOrMore GroupExcercise as GroupExcercise
+    B: One Exercise as Excercise
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_GroupExcercise_passes_Excercise"
+                           TypeName="Model.FK_GroupExcercise_passes_Excercise"
+                           StoreEntitySet="GroupExcercise" >
+      <EndProperty Name="Excercise">
+        <ScalarProperty Name="ID" ColumnName="fk_Excercise"/>
+      </EndProperty>
+      <EndProperty Name="GroupExcercise">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_Excercise" IsNull="false"/>
     </AssociationSetMapping>
     <!--
     Relation: FK_GroupMembership_has_Group
@@ -2815,6 +2997,40 @@
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="fk_CreatedBy" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_StudentExam_passes_Exam
+    A: ZeroOrMore StudentExam as StudentExam
+    B: One Exam as Exam
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_StudentExam_passes_Exam"
+                           TypeName="Model.FK_StudentExam_passes_Exam"
+                           StoreEntitySet="StudentExam" >
+      <EndProperty Name="Exam">
+        <ScalarProperty Name="ID" ColumnName="fk_Exam"/>
+      </EndProperty>
+      <EndProperty Name="StudentExam">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_Exam" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_StudentExam_writtenby_Student
+    A: ZeroOrMore StudentExam as StudentExam
+    B: One Student as Student
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_StudentExam_writtenby_Student"
+                           TypeName="Model.FK_StudentExam_writtenby_Student"
+                           StoreEntitySet="StudentExam" >
+      <EndProperty Name="Student">
+        <ScalarProperty Name="ID" ColumnName="fk_Student"/>
+      </EndProperty>
+      <EndProperty Name="StudentExam">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_Student" IsNull="false"/>
     </AssociationSetMapping>
     <!--
     Relation: FK_Task_was_ChangedBy

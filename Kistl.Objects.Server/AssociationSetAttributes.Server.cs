@@ -524,6 +524,36 @@ using Kistl.DalProvider.EF;
 
 
 	/*
+    Relation: FK_Exam_happens_in_Semester
+    A: ZeroOrMore Exam as Exam
+    B: One Semester as Semester
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_Exam_happens_in_Semester",
+    "Exam", RelationshipMultiplicity.Many, typeof(at.dasz.CourseOrganiser.Exam__Implementation__),
+    "Semester", RelationshipMultiplicity.ZeroOrOne, typeof(at.dasz.CourseOrganiser.Semester__Implementation__)
+    )]
+
+
+	/*
+    Relation: FK_Excercise_happens_in_Semester
+    A: ZeroOrMore Exercise as Excercise
+    B: One Semester as Semester
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_Excercise_happens_in_Semester",
+    "Excercise", RelationshipMultiplicity.Many, typeof(at.dasz.CourseOrganiser.Exercise__Implementation__),
+    "Semester", RelationshipMultiplicity.ZeroOrOne, typeof(at.dasz.CourseOrganiser.Semester__Implementation__)
+    )]
+
+
+	/*
     Relation: FK_Fragebogen_enthält_Antworten
     A: One Fragebogen as Fragebogen
     B: ZeroOrMore Antwort as Antworten
@@ -565,6 +595,39 @@ using Kistl.DalProvider.EF;
     "Model", "FK_Group_has_ParentGroup",
     "Group", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.Group__Implementation__),
     "ParentGroup", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Group__Implementation__)
+    )]
+
+
+	/*
+    Relation: FK_GroupExcercise_accomplished_by_Students
+    A: ZeroOrMore GroupExcercise as GroupExcercise
+    B: ZeroOrMore Student as Students
+    Preferred Storage: Separate
+	*/
+
+// The association from A to the CollectionEntry
+[assembly: EdmRelationship("Model", "FK_GroupExcercise_accomplished_by_Students_A",
+    "GroupExcercise", RelationshipMultiplicity.ZeroOrOne, typeof(at.dasz.CourseOrganiser.GroupExcercise__Implementation__),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(at.dasz.CourseOrganiser.GroupExcercise_accomplished_by_Student_RelationEntry__Implementation__)
+    )]
+// The association from B to the CollectionEntry
+[assembly: EdmRelationship("Model", "FK_GroupExcercise_accomplished_by_Students_B",
+    "Students", RelationshipMultiplicity.ZeroOrOne, typeof(at.dasz.CourseOrganiser.Student__Implementation__),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(at.dasz.CourseOrganiser.GroupExcercise_accomplished_by_Student_RelationEntry__Implementation__)
+    )]
+
+	/*
+    Relation: FK_GroupExcercise_passes_Excercise
+    A: ZeroOrMore GroupExcercise as GroupExcercise
+    B: One Exercise as Excercise
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_GroupExcercise_passes_Excercise",
+    "GroupExcercise", RelationshipMultiplicity.Many, typeof(at.dasz.CourseOrganiser.GroupExcercise__Implementation__),
+    "Excercise", RelationshipMultiplicity.ZeroOrOne, typeof(at.dasz.CourseOrganiser.Exercise__Implementation__)
     )]
 
 
@@ -1514,6 +1577,54 @@ using Kistl.DalProvider.EF;
 [assembly: EdmRelationship("Model", "FK_RoleMembership_resolves_Relations_B",
     "Relations", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Relation__Implementation__),
     "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.RoleMembership_resolves_Relation_RelationEntry__Implementation__)
+    )]
+
+	/*
+    Relation: FK_StudentExam_passes_Exam
+    A: ZeroOrMore StudentExam as StudentExam
+    B: One Exam as Exam
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_StudentExam_passes_Exam",
+    "StudentExam", RelationshipMultiplicity.Many, typeof(at.dasz.CourseOrganiser.StudentExam__Implementation__),
+    "Exam", RelationshipMultiplicity.ZeroOrOne, typeof(at.dasz.CourseOrganiser.Exam__Implementation__)
+    )]
+
+
+	/*
+    Relation: FK_StudentExam_writtenby_Student
+    A: ZeroOrMore StudentExam as StudentExam
+    B: One Student as Student
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_StudentExam_writtenby_Student",
+    "StudentExam", RelationshipMultiplicity.Many, typeof(at.dasz.CourseOrganiser.StudentExam__Implementation__),
+    "Student", RelationshipMultiplicity.ZeroOrOne, typeof(at.dasz.CourseOrganiser.Student__Implementation__)
+    )]
+
+
+	/*
+    Relation: FK_Students_attend_Semesters
+    A: ZeroOrMore Student as Students
+    B: ZeroOrMore Semester as Semesters
+    Preferred Storage: Separate
+	*/
+
+// The association from A to the CollectionEntry
+[assembly: EdmRelationship("Model", "FK_Students_attend_Semesters_A",
+    "Students", RelationshipMultiplicity.ZeroOrOne, typeof(at.dasz.CourseOrganiser.Student__Implementation__),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(at.dasz.CourseOrganiser.Student_attend_Semester_RelationEntry__Implementation__)
+    )]
+// The association from B to the CollectionEntry
+[assembly: EdmRelationship("Model", "FK_Students_attend_Semesters_B",
+    "Semesters", RelationshipMultiplicity.ZeroOrOne, typeof(at.dasz.CourseOrganiser.Semester__Implementation__),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(at.dasz.CourseOrganiser.Student_attend_Semester_RelationEntry__Implementation__)
     )]
 
 	/*

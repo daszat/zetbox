@@ -14,6 +14,16 @@ namespace Kistl.App
 		
 		public IKistlContext Context { get; private set; }
 	
+		/// <summary>Repository for CourseOrganiser</summary>
+		/// CourseOrganiser for teachers
+		public at.dasz.CourseOrganiser.CourseOrganiserRepository CourseOrganiser
+		{
+			get
+			{
+				return new at.dasz.CourseOrganiser.CourseOrganiserRepository(Context);
+			}
+		}
+		
 		/// <summary>Repository for GUI</summary>
 		/// 
 		public Kistl.App.GUI.GUIRepository GUI

@@ -17,8 +17,11 @@
     <EntitySet Name="DataType" EntityType="Model.DataType" />
     <EntitySet Name="DefaultPropertyValue" EntityType="Model.DefaultPropertyValue" />
     <EntitySet Name="EnumerationEntry" EntityType="Model.EnumerationEntry" />
+    <EntitySet Name="Exam" EntityType="Model.Exam" />
+    <EntitySet Name="Exercise" EntityType="Model.Exercise" />
     <EntitySet Name="Fragebogen" EntityType="Model.Fragebogen" />
     <EntitySet Name="Group" EntityType="Model.Group" />
+    <EntitySet Name="GroupExcercise" EntityType="Model.GroupExcercise" />
     <EntitySet Name="Icon" EntityType="Model.Icon" />
     <EntitySet Name="Identity" EntityType="Model.Identity" />
     <EntitySet Name="InstanceConstraint" EntityType="Model.InstanceConstraint" />
@@ -40,6 +43,9 @@
     <EntitySet Name="PropertyInvocation" EntityType="Model.PropertyInvocation" />
     <EntitySet Name="Relation" EntityType="Model.Relation" />
     <EntitySet Name="RelationEnd" EntityType="Model.RelationEnd" />
+    <EntitySet Name="Semester" EntityType="Model.Semester" />
+    <EntitySet Name="Student" EntityType="Model.Student" />
+    <EntitySet Name="StudentExam" EntityType="Model.StudentExam" />
     <EntitySet Name="Task" EntityType="Model.Task" />
     <EntitySet Name="Template" EntityType="Model.Template" />
     <EntitySet Name="TestCustomObject" EntityType="Model.TestCustomObject" />
@@ -67,6 +73,15 @@
     <AssociationSet Name="FK_ControlKindClass_supports_SupportedInterfaces_B" Association="Model.FK_ControlKindClass_supports_SupportedInterfaces_B" >
       <End Role="SupportedInterfaces" EntitySet="TypeRef" />
       <End Role="CollectionEntry" EntitySet="ControlKindClass_supports_TypeRef_RelationEntry" />
+    </AssociationSet>
+    <EntitySet Name="GroupExcercise_accomplished_by_Student_RelationEntry" EntityType="Model.GroupExcercise_accomplished_by_Student_RelationEntry" />
+    <AssociationSet Name="FK_GroupExcercise_accomplished_by_Students_A" Association="Model.FK_GroupExcercise_accomplished_by_Students_A" >
+      <End Role="GroupExcercise" EntitySet="GroupExcercise" />
+      <End Role="CollectionEntry" EntitySet="GroupExcercise_accomplished_by_Student_RelationEntry" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GroupExcercise_accomplished_by_Students_B" Association="Model.FK_GroupExcercise_accomplished_by_Students_B" >
+      <End Role="Students" EntitySet="Student" />
+      <End Role="CollectionEntry" EntitySet="GroupExcercise_accomplished_by_Student_RelationEntry" />
     </AssociationSet>
     <EntitySet Name="Identity_memberOf_Group_RelationEntry" EntityType="Model.Identity_memberOf_Group_RelationEntry" />
     <AssociationSet Name="FK_Identities_memberOf_Groups_A" Association="Model.FK_Identities_memberOf_Groups_A" >
@@ -121,6 +136,15 @@
     <AssociationSet Name="FK_RoleMembership_resolves_Relations_B" Association="Model.FK_RoleMembership_resolves_Relations_B" >
       <End Role="Relations" EntitySet="Relation" />
       <End Role="CollectionEntry" EntitySet="RoleMembership_resolves_Relation_RelationEntry" />
+    </AssociationSet>
+    <EntitySet Name="Student_attend_Semester_RelationEntry" EntityType="Model.Student_attend_Semester_RelationEntry" />
+    <AssociationSet Name="FK_Students_attend_Semesters_A" Association="Model.FK_Students_attend_Semesters_A" >
+      <End Role="Students" EntitySet="Student" />
+      <End Role="CollectionEntry" EntitySet="Student_attend_Semester_RelationEntry" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Students_attend_Semesters_B" Association="Model.FK_Students_attend_Semesters_B" >
+      <End Role="Semesters" EntitySet="Semester" />
+      <End Role="CollectionEntry" EntitySet="Student_attend_Semester_RelationEntry" />
     </AssociationSet>
     <EntitySet Name="Template_hasMenu_Visual_RelationEntry" EntityType="Model.Template_hasMenu_Visual_RelationEntry" />
     <AssociationSet Name="FK_Template_hasMenu_Menu_A" Association="Model.FK_Template_hasMenu_Menu_A" >
@@ -311,6 +335,14 @@
       <End Role="EnumerationProperty" EntitySet="Property" />
       <End Role="Enumeration" EntitySet="DataType" />
     </AssociationSet>
+    <AssociationSet Name="FK_Exam_happens_in_Semester" Association="Model.FK_Exam_happens_in_Semester" >
+      <End Role="Exam" EntitySet="Exam" />
+      <End Role="Semester" EntitySet="Semester" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Excercise_happens_in_Semester" Association="Model.FK_Excercise_happens_in_Semester" >
+      <End Role="Excercise" EntitySet="Exercise" />
+      <End Role="Semester" EntitySet="Semester" />
+    </AssociationSet>
     <AssociationSet Name="FK_Fragebogen_enthält_Antworten" Association="Model.FK_Fragebogen_enthält_Antworten" >
       <End Role="Fragebogen" EntitySet="Fragebogen" />
       <End Role="Antworten" EntitySet="Antwort" />
@@ -322,6 +354,10 @@
     <AssociationSet Name="FK_Group_has_ParentGroup" Association="Model.FK_Group_has_ParentGroup" >
       <End Role="Group" EntitySet="Group" />
       <End Role="ParentGroup" EntitySet="Group" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GroupExcercise_passes_Excercise" Association="Model.FK_GroupExcercise_passes_Excercise" >
+      <End Role="GroupExcercise" EntitySet="GroupExcercise" />
+      <End Role="Excercise" EntitySet="Exercise" />
     </AssociationSet>
     <AssociationSet Name="FK_GroupMembership_has_Group" Association="Model.FK_GroupMembership_has_Group" >
       <End Role="GroupMembership" EntitySet="AccessControl" />
@@ -546,6 +582,14 @@
     <AssociationSet Name="FK_RelationEnd_was_CreatedBy" Association="Model.FK_RelationEnd_was_CreatedBy" >
       <End Role="RelationEnd" EntitySet="RelationEnd" />
       <End Role="CreatedBy" EntitySet="Identity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StudentExam_passes_Exam" Association="Model.FK_StudentExam_passes_Exam" >
+      <End Role="StudentExam" EntitySet="StudentExam" />
+      <End Role="Exam" EntitySet="Exam" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StudentExam_writtenby_Student" Association="Model.FK_StudentExam_writtenby_Student" >
+      <End Role="StudentExam" EntitySet="StudentExam" />
+      <End Role="Student" EntitySet="Student" />
     </AssociationSet>
     <AssociationSet Name="FK_Task_was_ChangedBy" Association="Model.FK_Task_was_ChangedBy" >
       <End Role="Task" EntitySet="Task" />
@@ -869,6 +913,36 @@
     <Property Name="Name" Type="String" Nullable="false" MaxLength="200" />
     <Property Name="Value" Type="Int32" Nullable="false" />
   </EntityType>
+  <EntityType Name="Exam">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Nullable="true" />
+    <Property Name="MaxScores" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="1000" />
+    <NavigationProperty Name="Semester__Implementation__"
+                        Relationship="Model.FK_Exam_happens_in_Semester"
+                        FromRole="Exam"
+                        ToRole="Semester" />
+  </EntityType>
+  <EntityType Name="Exercise">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Nullable="true" />
+    <NavigationProperty Name="GroupExcercise__Implementation__"
+                        Relationship="Model.FK_GroupExcercise_passes_Excercise"
+                        FromRole="Excercise"
+                        ToRole="GroupExcercise" />
+    <Property Name="MaxScores" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="true" MaxLength="1000" />
+    <NavigationProperty Name="Semester__Implementation__"
+                        Relationship="Model.FK_Excercise_happens_in_Semester"
+                        FromRole="Excercise"
+                        ToRole="Semester" />
+  </EntityType>
   <EntityType Name="Fragebogen">
     <Key>
       <PropertyRef Name="ID" />
@@ -903,6 +977,21 @@
                         Relationship="Model.FK_Group_has_ParentGroup"
                         FromRole="Group"
                         ToRole="ParentGroup" />
+  </EntityType>
+  <EntityType Name="GroupExcercise">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Excercise__Implementation__"
+                        Relationship="Model.FK_GroupExcercise_passes_Excercise"
+                        FromRole="GroupExcercise"
+                        ToRole="Excercise" />
+    <Property Name="Score" Type="Int32" Nullable="true" />
+    <NavigationProperty Name="Students__Implementation__"
+                        Relationship="Model.FK_GroupExcercise_accomplished_by_Students_A"
+                        FromRole="GroupExcercise"
+                        ToRole="CollectionEntry" />
   </EntityType>
   <EntityType Name="Icon">
     <Key>
@@ -1344,6 +1433,62 @@
                         Relationship="Model.FK_RelationEnd_has_Type"
                         FromRole="RelationEnd"
                         ToRole="Type" />
+  </EntityType>
+  <EntityType Name="Semester">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="CourseName" Type="String" Nullable="false" MaxLength="1000" />
+    <NavigationProperty Name="Exam__Implementation__"
+                        Relationship="Model.FK_Exam_happens_in_Semester"
+                        FromRole="Semester"
+                        ToRole="Exam" />
+    <NavigationProperty Name="Excercise__Implementation__"
+                        Relationship="Model.FK_Excercise_happens_in_Semester"
+                        FromRole="Semester"
+                        ToRole="Excercise" />
+    <Property Name="Period__Implementation__" Type="Int32" Nullable="true" />
+    <NavigationProperty Name="Students__Implementation__"
+                        Relationship="Model.FK_Students_attend_Semesters_B"
+                        FromRole="Semesters"
+                        ToRole="CollectionEntry" />
+    <Property Name="Year" Type="Int32" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Student">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="GroupExcercise__Implementation__"
+                        Relationship="Model.FK_GroupExcercise_accomplished_by_Students_B"
+                        FromRole="Students"
+                        ToRole="CollectionEntry" />
+    <Property Name="MatriculationNumber" Type="String" Nullable="true" MaxLength="1000" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="1000" />
+    <NavigationProperty Name="Semesters__Implementation__"
+                        Relationship="Model.FK_Students_attend_Semesters_A"
+                        FromRole="Students"
+                        ToRole="CollectionEntry" />
+    <NavigationProperty Name="StudentExam__Implementation__"
+                        Relationship="Model.FK_StudentExam_writtenby_Student"
+                        FromRole="Student"
+                        ToRole="StudentExam" />
+  </EntityType>
+  <EntityType Name="StudentExam">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Exam__Implementation__"
+                        Relationship="Model.FK_StudentExam_passes_Exam"
+                        FromRole="StudentExam"
+                        ToRole="Exam" />
+    <Property Name="Score" Type="Int32" Nullable="true" />
+    <NavigationProperty Name="Student__Implementation__"
+                        Relationship="Model.FK_StudentExam_writtenby_Student"
+                        FromRole="StudentExam"
+                        ToRole="Student" />
   </EntityType>
   <EntityType Name="Task">
     <Key>
@@ -1828,6 +1973,48 @@
   </Association>
   
   <!--
+    Relation: FK_GroupExcercise_accomplished_by_Students
+    A: ZeroOrMore GroupExcercise as GroupExcercise
+    B: ZeroOrMore Student as Students
+    Preferred Storage: Separate
+  -->
+  <EntityType Name="GroupExcercise_accomplished_by_Student_RelationEntry" >
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+	
+    
+    <!-- A -->
+    <NavigationProperty Name="A__Implementation__"
+                        Relationship="Model.FK_GroupExcercise_accomplished_by_Students_A"
+                        FromRole="CollectionEntry"
+                        ToRole="GroupExcercise" />
+
+    <!-- B -->
+    <NavigationProperty Name="B__Implementation__"
+                        Relationship="Model.FK_GroupExcercise_accomplished_by_Students_B"
+                        FromRole="CollectionEntry"
+                        ToRole="Students" />
+  </EntityType>
+  <Association Name="FK_GroupExcercise_accomplished_by_Students_A" >
+    <End Role="GroupExcercise"
+         Type="Model.GroupExcercise" 
+         Multiplicity="0..1" />
+    <End Role="CollectionEntry"
+         Type="Model.GroupExcercise_accomplished_by_Student_RelationEntry"
+         Multiplicity="*" />
+  </Association>
+  <Association Name="FK_GroupExcercise_accomplished_by_Students_B" >
+    <End Role="Students"
+         Type="Model.Student" 
+         Multiplicity="0..1" />
+    <End Role="CollectionEntry"
+         Type="Model.GroupExcercise_accomplished_by_Student_RelationEntry"
+         Multiplicity="*" />
+  </Association>
+  
+  <!--
     Relation: FK_Identities_memberOf_Groups
     A: ZeroOrMore Identity as Identities
     B: ZeroOrMore Group as Groups
@@ -2083,6 +2270,48 @@
          Multiplicity="0..1" />
     <End Role="CollectionEntry"
          Type="Model.RoleMembership_resolves_Relation_RelationEntry"
+         Multiplicity="*" />
+  </Association>
+  
+  <!--
+    Relation: FK_Students_attend_Semesters
+    A: ZeroOrMore Student as Students
+    B: ZeroOrMore Semester as Semesters
+    Preferred Storage: Separate
+  -->
+  <EntityType Name="Student_attend_Semester_RelationEntry" >
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+	
+    
+    <!-- A -->
+    <NavigationProperty Name="A__Implementation__"
+                        Relationship="Model.FK_Students_attend_Semesters_A"
+                        FromRole="CollectionEntry"
+                        ToRole="Students" />
+
+    <!-- B -->
+    <NavigationProperty Name="B__Implementation__"
+                        Relationship="Model.FK_Students_attend_Semesters_B"
+                        FromRole="CollectionEntry"
+                        ToRole="Semesters" />
+  </EntityType>
+  <Association Name="FK_Students_attend_Semesters_A" >
+    <End Role="Students"
+         Type="Model.Student" 
+         Multiplicity="0..1" />
+    <End Role="CollectionEntry"
+         Type="Model.Student_attend_Semester_RelationEntry"
+         Multiplicity="*" />
+  </Association>
+  <Association Name="FK_Students_attend_Semesters_B" >
+    <End Role="Semesters"
+         Type="Model.Semester" 
+         Multiplicity="0..1" />
+    <End Role="CollectionEntry"
+         Type="Model.Student_attend_Semester_RelationEntry"
          Multiplicity="*" />
   </Association>
   
@@ -2610,6 +2839,22 @@
          Type="Model.Enumeration" 
          Multiplicity="0..1" />
   </Association>
+  <Association Name="FK_Exam_happens_in_Semester" >
+    <End Role="Exam"
+         Type="Model.Exam" 
+         Multiplicity="*" />
+    <End Role="Semester"
+         Type="Model.Semester" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_Excercise_happens_in_Semester" >
+    <End Role="Excercise"
+         Type="Model.Exercise" 
+         Multiplicity="*" />
+    <End Role="Semester"
+         Type="Model.Semester" 
+         Multiplicity="0..1" />
+  </Association>
   <Association Name="FK_Fragebogen_enthält_Antworten" >
     <End Role="Fragebogen"
          Type="Model.Fragebogen" 
@@ -2632,6 +2877,14 @@
          Multiplicity="*" />
     <End Role="ParentGroup"
          Type="Model.Group" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_GroupExcercise_passes_Excercise" >
+    <End Role="GroupExcercise"
+         Type="Model.GroupExcercise" 
+         Multiplicity="*" />
+    <End Role="Excercise"
+         Type="Model.Exercise" 
          Multiplicity="0..1" />
   </Association>
   <Association Name="FK_GroupMembership_has_Group" >
@@ -3080,6 +3333,22 @@
          Multiplicity="*" />
     <End Role="CreatedBy"
          Type="Model.Identity" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_StudentExam_passes_Exam" >
+    <End Role="StudentExam"
+         Type="Model.StudentExam" 
+         Multiplicity="*" />
+    <End Role="Exam"
+         Type="Model.Exam" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_StudentExam_writtenby_Student" >
+    <End Role="StudentExam"
+         Type="Model.StudentExam" 
+         Multiplicity="*" />
+    <End Role="Student"
+         Type="Model.Student" 
          Multiplicity="0..1" />
   </Association>
   <Association Name="FK_Task_was_ChangedBy" >

@@ -601,6 +601,249 @@ namespace Kistl.App.GUI
     }
 }
 
+namespace at.dasz.CourseOrganiser
+{
+    [EdmEntityType(NamespaceName="Model", Name="GroupExcercise_accomplished_by_Student_RelationEntry")]
+    [System.Diagnostics.DebuggerDisplay("GroupExcercise_accomplished_by_Student_RelationEntry__Implementation__")]
+    public class GroupExcercise_accomplished_by_Student_RelationEntry__Implementation__ : BaseServerCollectionEntry_EntityFramework, GroupExcercise_accomplished_by_Student_RelationEntry
+    {
+    
+        [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
+           // Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.IdProperty
+        public override int ID
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _ID;
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_ID != value)
+                {
+                    var __oldValue = _ID;
+                    var __newValue = value;
+                    NotifyPropertyChanging("ID", __oldValue, __newValue);
+                    _ID = __newValue;
+                    NotifyPropertyChanged("ID", __oldValue, __newValue);
+                }
+            }
+        }
+        private int _ID;
+        public Guid RelationID { get { return new Guid("464d1407-fbdb-44f1-896e-b6dedad82ce2"); } }
+        public IDataObject AObject { get { return A; } set { A = (at.dasz.CourseOrganiser.GroupExcercise)value; } }
+        public IDataObject BObject { get { return B; } set { B = (at.dasz.CourseOrganiser.Student)value; } }
+
+        /// <summary>
+        /// Reference to the A-Side member of this CollectionEntry
+        /// </summary>
+   		// Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public at.dasz.CourseOrganiser.GroupExcercise A
+        {
+            get
+            {
+                return A__Implementation__;
+            }
+            set
+            {
+                // TODO: NotifyPropertyChanged()
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if(value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                A__Implementation__ = (at.dasz.CourseOrganiser.GroupExcercise__Implementation__)value;
+            }
+        }
+        
+        private int? _fk_A;
+        private Guid? _fk_guid_A = null;
+        // EF sees only this property
+        [EdmRelationshipNavigationProperty("Model", "FK_GroupExcercise_accomplished_by_Students_A", "GroupExcercise")]
+        public at.dasz.CourseOrganiser.GroupExcercise__Implementation__ A__Implementation__
+        {
+            get
+            {
+                EntityReference<at.dasz.CourseOrganiser.GroupExcercise__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<at.dasz.CourseOrganiser.GroupExcercise__Implementation__>(
+                        "Model.FK_GroupExcercise_accomplished_by_Students_A",
+                        "GroupExcercise");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load(); 
+                    if(r.Value != null) r.Value.AttachToContext(this.Context);
+                }
+                var __value = r.Value;
+                return __value;
+            }
+            set
+            {
+                EntityReference<at.dasz.CourseOrganiser.GroupExcercise__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<at.dasz.CourseOrganiser.GroupExcercise__Implementation__>(
+                        "Model.FK_GroupExcercise_accomplished_by_Students_A",
+                        "GroupExcercise");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load(); 
+                }
+                at.dasz.CourseOrganiser.GroupExcercise __oldValue = (at.dasz.CourseOrganiser.GroupExcercise)r.Value;
+                at.dasz.CourseOrganiser.GroupExcercise __newValue = (at.dasz.CourseOrganiser.GroupExcercise)value;
+
+                r.Value = (at.dasz.CourseOrganiser.GroupExcercise__Implementation__)__newValue;
+                                
+            }
+        }
+        
+        
+        /// <summary>
+        /// the B-side value of this CollectionEntry
+        /// </summary>
+   		// Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public at.dasz.CourseOrganiser.Student B
+        {
+            get
+            {
+                return B__Implementation__;
+            }
+            set
+            {
+                // TODO: NotifyPropertyChanged()
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if(value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                B__Implementation__ = (at.dasz.CourseOrganiser.Student__Implementation__)value;
+            }
+        }
+        
+        private int? _fk_B;
+        private Guid? _fk_guid_B = null;
+        // EF sees only this property
+        [EdmRelationshipNavigationProperty("Model", "FK_GroupExcercise_accomplished_by_Students_B", "Students")]
+        public at.dasz.CourseOrganiser.Student__Implementation__ B__Implementation__
+        {
+            get
+            {
+                EntityReference<at.dasz.CourseOrganiser.Student__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<at.dasz.CourseOrganiser.Student__Implementation__>(
+                        "Model.FK_GroupExcercise_accomplished_by_Students_B",
+                        "Students");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load(); 
+                    if(r.Value != null) r.Value.AttachToContext(this.Context);
+                }
+                var __value = r.Value;
+                return __value;
+            }
+            set
+            {
+                EntityReference<at.dasz.CourseOrganiser.Student__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<at.dasz.CourseOrganiser.Student__Implementation__>(
+                        "Model.FK_GroupExcercise_accomplished_by_Students_B",
+                        "Students");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load(); 
+                }
+                at.dasz.CourseOrganiser.Student __oldValue = (at.dasz.CourseOrganiser.Student)r.Value;
+                at.dasz.CourseOrganiser.Student __newValue = (at.dasz.CourseOrganiser.Student)value;
+
+                r.Value = (at.dasz.CourseOrganiser.Student__Implementation__)__newValue;
+                                
+            }
+        }
+        
+        
+
+#region Serializer
+
+
+        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects)
+        {
+            
+            base.ToStream(binStream, auxObjects);
+            BinarySerializer.ToStream(A != null ? A.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(B != null ? B.ID : (int?)null, binStream);
+        }
+
+        public override void FromStream(System.IO.BinaryReader binStream)
+        {
+            
+            base.FromStream(binStream);
+            BinarySerializer.FromStream(out this._fk_A, binStream);
+            BinarySerializer.FromStream(out this._fk_B, binStream);
+        }
+
+        public override void ToStream(System.Xml.XmlWriter xml)
+        {
+            
+            base.ToStream(xml);
+            XmlStreamer.ToStream(A != null ? A.ID : (int?)null, xml, "A", "at.dasz.CourseOrganiser");
+            XmlStreamer.ToStream(B != null ? B.ID : (int?)null, xml, "B", "at.dasz.CourseOrganiser");
+        }
+
+        public override void FromStream(System.Xml.XmlReader xml)
+        {
+            
+            base.FromStream(xml);
+            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "at.dasz.CourseOrganiser");
+            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "at.dasz.CourseOrganiser");
+        }
+
+#endregion
+
+		public override InterfaceType GetInterfaceType()
+		{
+			return new InterfaceType(typeof(GroupExcercise_accomplished_by_Student_RelationEntry));
+		}
+	
+		public override void ReloadReferences()
+		{
+			// Do not reload references if the current object has been deleted.
+			// TODO: enable when MemoryContext uses MemoryDataObjects
+			//if (this.ObjectState == DataObjectState.Deleted) return;
+
+			if (_fk_guid_A.HasValue)
+				A__Implementation__ = (at.dasz.CourseOrganiser.GroupExcercise__Implementation__)Context.FindPersistenceObject<at.dasz.CourseOrganiser.GroupExcercise>(_fk_guid_A.Value);
+			else if (_fk_A.HasValue)
+				A__Implementation__ = (at.dasz.CourseOrganiser.GroupExcercise__Implementation__)Context.Find<at.dasz.CourseOrganiser.GroupExcercise>(_fk_A.Value);
+			else
+				A__Implementation__ = null;
+
+
+			if (_fk_guid_B.HasValue)
+				B__Implementation__ = (at.dasz.CourseOrganiser.Student__Implementation__)Context.FindPersistenceObject<at.dasz.CourseOrganiser.Student>(_fk_guid_B.Value);
+			else if (_fk_B.HasValue)
+				B__Implementation__ = (at.dasz.CourseOrganiser.Student__Implementation__)Context.Find<at.dasz.CourseOrganiser.Student>(_fk_B.Value);
+			else
+				B__Implementation__ = null;
+	
+		}
+		
+		public override void ApplyChangesFrom(IPersistenceObject obj)
+		{
+			base.ApplyChangesFrom(obj);
+			var other = (GroupExcercise_accomplished_by_Student_RelationEntry__Implementation__)obj;
+			var me = (GroupExcercise_accomplished_by_Student_RelationEntry__Implementation__)this;
+			
+            me._fk_A = other._fk_A;
+            me._fk_B = other._fk_B;
+		}		
+		
+		
+
+    }
+}
+
 namespace Kistl.App.Base
 {
     [EdmEntityType(NamespaceName="Model", Name="Identity_memberOf_Group_RelationEntry")]
@@ -2373,6 +2616,249 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
 			
             me.AIndex = other.AIndex;
             me.BIndex = other.BIndex;
+            me._fk_A = other._fk_A;
+            me._fk_B = other._fk_B;
+		}		
+		
+		
+
+    }
+}
+
+namespace at.dasz.CourseOrganiser
+{
+    [EdmEntityType(NamespaceName="Model", Name="Student_attend_Semester_RelationEntry")]
+    [System.Diagnostics.DebuggerDisplay("Student_attend_Semester_RelationEntry__Implementation__")]
+    public class Student_attend_Semester_RelationEntry__Implementation__ : BaseServerCollectionEntry_EntityFramework, Student_attend_Semester_RelationEntry
+    {
+    
+        [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
+           // Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.IdProperty
+        public override int ID
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _ID;
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_ID != value)
+                {
+                    var __oldValue = _ID;
+                    var __newValue = value;
+                    NotifyPropertyChanging("ID", __oldValue, __newValue);
+                    _ID = __newValue;
+                    NotifyPropertyChanged("ID", __oldValue, __newValue);
+                }
+            }
+        }
+        private int _ID;
+        public Guid RelationID { get { return new Guid("e10ddd77-ead7-41f8-8ef7-20ebaaeee705"); } }
+        public IDataObject AObject { get { return A; } set { A = (at.dasz.CourseOrganiser.Student)value; } }
+        public IDataObject BObject { get { return B; } set { B = (at.dasz.CourseOrganiser.Semester)value; } }
+
+        /// <summary>
+        /// Reference to the A-Side member of this CollectionEntry
+        /// </summary>
+   		// Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public at.dasz.CourseOrganiser.Student A
+        {
+            get
+            {
+                return A__Implementation__;
+            }
+            set
+            {
+                // TODO: NotifyPropertyChanged()
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if(value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                A__Implementation__ = (at.dasz.CourseOrganiser.Student__Implementation__)value;
+            }
+        }
+        
+        private int? _fk_A;
+        private Guid? _fk_guid_A = null;
+        // EF sees only this property
+        [EdmRelationshipNavigationProperty("Model", "FK_Students_attend_Semesters_A", "Students")]
+        public at.dasz.CourseOrganiser.Student__Implementation__ A__Implementation__
+        {
+            get
+            {
+                EntityReference<at.dasz.CourseOrganiser.Student__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<at.dasz.CourseOrganiser.Student__Implementation__>(
+                        "Model.FK_Students_attend_Semesters_A",
+                        "Students");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load(); 
+                    if(r.Value != null) r.Value.AttachToContext(this.Context);
+                }
+                var __value = r.Value;
+                return __value;
+            }
+            set
+            {
+                EntityReference<at.dasz.CourseOrganiser.Student__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<at.dasz.CourseOrganiser.Student__Implementation__>(
+                        "Model.FK_Students_attend_Semesters_A",
+                        "Students");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load(); 
+                }
+                at.dasz.CourseOrganiser.Student __oldValue = (at.dasz.CourseOrganiser.Student)r.Value;
+                at.dasz.CourseOrganiser.Student __newValue = (at.dasz.CourseOrganiser.Student)value;
+
+                r.Value = (at.dasz.CourseOrganiser.Student__Implementation__)__newValue;
+                                
+            }
+        }
+        
+        
+        /// <summary>
+        /// the B-side value of this CollectionEntry
+        /// </summary>
+   		// Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public at.dasz.CourseOrganiser.Semester B
+        {
+            get
+            {
+                return B__Implementation__;
+            }
+            set
+            {
+                // TODO: NotifyPropertyChanged()
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if(value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                B__Implementation__ = (at.dasz.CourseOrganiser.Semester__Implementation__)value;
+            }
+        }
+        
+        private int? _fk_B;
+        private Guid? _fk_guid_B = null;
+        // EF sees only this property
+        [EdmRelationshipNavigationProperty("Model", "FK_Students_attend_Semesters_B", "Semesters")]
+        public at.dasz.CourseOrganiser.Semester__Implementation__ B__Implementation__
+        {
+            get
+            {
+                EntityReference<at.dasz.CourseOrganiser.Semester__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<at.dasz.CourseOrganiser.Semester__Implementation__>(
+                        "Model.FK_Students_attend_Semesters_B",
+                        "Semesters");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load(); 
+                    if(r.Value != null) r.Value.AttachToContext(this.Context);
+                }
+                var __value = r.Value;
+                return __value;
+            }
+            set
+            {
+                EntityReference<at.dasz.CourseOrganiser.Semester__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<at.dasz.CourseOrganiser.Semester__Implementation__>(
+                        "Model.FK_Students_attend_Semesters_B",
+                        "Semesters");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load(); 
+                }
+                at.dasz.CourseOrganiser.Semester __oldValue = (at.dasz.CourseOrganiser.Semester)r.Value;
+                at.dasz.CourseOrganiser.Semester __newValue = (at.dasz.CourseOrganiser.Semester)value;
+
+                r.Value = (at.dasz.CourseOrganiser.Semester__Implementation__)__newValue;
+                                
+            }
+        }
+        
+        
+
+#region Serializer
+
+
+        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects)
+        {
+            
+            base.ToStream(binStream, auxObjects);
+            BinarySerializer.ToStream(A != null ? A.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(B != null ? B.ID : (int?)null, binStream);
+        }
+
+        public override void FromStream(System.IO.BinaryReader binStream)
+        {
+            
+            base.FromStream(binStream);
+            BinarySerializer.FromStream(out this._fk_A, binStream);
+            BinarySerializer.FromStream(out this._fk_B, binStream);
+        }
+
+        public override void ToStream(System.Xml.XmlWriter xml)
+        {
+            
+            base.ToStream(xml);
+            XmlStreamer.ToStream(A != null ? A.ID : (int?)null, xml, "A", "at.dasz.CourseOrganiser");
+            XmlStreamer.ToStream(B != null ? B.ID : (int?)null, xml, "B", "at.dasz.CourseOrganiser");
+        }
+
+        public override void FromStream(System.Xml.XmlReader xml)
+        {
+            
+            base.FromStream(xml);
+            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "at.dasz.CourseOrganiser");
+            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "at.dasz.CourseOrganiser");
+        }
+
+#endregion
+
+		public override InterfaceType GetInterfaceType()
+		{
+			return new InterfaceType(typeof(Student_attend_Semester_RelationEntry));
+		}
+	
+		public override void ReloadReferences()
+		{
+			// Do not reload references if the current object has been deleted.
+			// TODO: enable when MemoryContext uses MemoryDataObjects
+			//if (this.ObjectState == DataObjectState.Deleted) return;
+
+			if (_fk_guid_A.HasValue)
+				A__Implementation__ = (at.dasz.CourseOrganiser.Student__Implementation__)Context.FindPersistenceObject<at.dasz.CourseOrganiser.Student>(_fk_guid_A.Value);
+			else if (_fk_A.HasValue)
+				A__Implementation__ = (at.dasz.CourseOrganiser.Student__Implementation__)Context.Find<at.dasz.CourseOrganiser.Student>(_fk_A.Value);
+			else
+				A__Implementation__ = null;
+
+
+			if (_fk_guid_B.HasValue)
+				B__Implementation__ = (at.dasz.CourseOrganiser.Semester__Implementation__)Context.FindPersistenceObject<at.dasz.CourseOrganiser.Semester>(_fk_guid_B.Value);
+			else if (_fk_B.HasValue)
+				B__Implementation__ = (at.dasz.CourseOrganiser.Semester__Implementation__)Context.Find<at.dasz.CourseOrganiser.Semester>(_fk_B.Value);
+			else
+				B__Implementation__ = null;
+	
+		}
+		
+		public override void ApplyChangesFrom(IPersistenceObject obj)
+		{
+			base.ApplyChangesFrom(obj);
+			var other = (Student_attend_Semester_RelationEntry__Implementation__)obj;
+			var me = (Student_attend_Semester_RelationEntry__Implementation__)this;
+			
             me._fk_A = other._fk_A;
             me._fk_B = other._fk_B;
 		}		
