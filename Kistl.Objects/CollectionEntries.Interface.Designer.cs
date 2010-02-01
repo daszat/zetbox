@@ -101,7 +101,7 @@ namespace Kistl.App.Projekte
     using Kistl.App.Projekte;
 
     /// <summary>
-    /// ObjectCollectionEntry for 
+    /// ObjectCollectionEntry for Projekte werden von Mitarbeitern durchgeführt
     /// </summary>
     public interface Projekt_haben_Mitarbeiter_RelationEntry : IRelationListEntry<Projekt, Mitarbeiter> 
     {

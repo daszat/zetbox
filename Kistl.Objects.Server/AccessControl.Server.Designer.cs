@@ -464,7 +464,7 @@ namespace Kistl.App.Base
     /*
     Relation: FK_AccessControl_has_Module
     A: ZeroOrMore AccessControl as AccessControl
-    B: ZeroOrOne Module as Module
+    B: One Module as Module
     Preferred Storage: MergeIntoA
     */
         // object reference property

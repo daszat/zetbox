@@ -10,7 +10,7 @@ using Kistl.DalProvider.EF;
 	/*
     Relation: FK_AccessControl_has_Module
     A: ZeroOrMore AccessControl as AccessControl
-    B: ZeroOrOne Module as Module
+    B: One Module as Module
     Preferred Storage: MergeIntoA
 	*/
 
@@ -541,7 +541,7 @@ using Kistl.DalProvider.EF;
 	/*
     Relation: FK_Group_has_Module
     A: ZeroOrMore Group as Group
-    B: ZeroOrOne Module as Module
+    B: One Module as Module
     Preferred Storage: MergeIntoA
 	*/
 
