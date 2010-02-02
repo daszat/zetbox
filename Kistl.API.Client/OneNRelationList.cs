@@ -1,13 +1,13 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
 
 namespace Kistl.API.Client
 {
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Collections.Specialized;
+    using System.ComponentModel;
+    using System.Linq;
+    using System.Text;
 
     // TODO: use delegate instead of SetPropertyValue. May be up to 300x faster.
     // TODO: take care of SELECT N+1 problem when modifying collection entries
@@ -16,7 +16,7 @@ namespace Kistl.API.Client
     /// 
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class OneNRelationList<T> : IList<T>, INotifyCollectionChanged
+    public class OneNRelationList<T> : IList<T>, IList, INotifyCollectionChanged
         where T : class, IDataObject
     {
         private string _propertyName;
@@ -25,30 +25,21 @@ namespace Kistl.API.Client
         List<T> collection;
 
         public OneNRelationList(string propertyName, IDataObject parent)
-            : this(propertyName, propertyName + Helper.PositionSuffix, parent)
-        {
-
-        }
+            : this(propertyName, propertyName + Helper.PositionSuffix, parent) { }
 
         public OneNRelationList(string propertyName, IDataObject parent, IEnumerable<T> collection)
-            : this(propertyName, propertyName + Helper.PositionSuffix, parent, collection)
-        {
-
-        }
+            : this(propertyName, propertyName + Helper.PositionSuffix, parent, collection) { }
 
         ///// <param name="fkProperty">the name of the fk_Property which does notification, but not collection fixing</param>
         public OneNRelationList(string fkProperty, string posProperty, IDataObject parent)
+            : this(fkProperty, posProperty, parent, new List<T>()) { }
+
+        ///// <param name="fkProperty">the name of the fk_Property which does notification, but not collection fixing</param>
+        public OneNRelationList(string fkProperty, string posProperty, IDataObject parent, IEnumerable<T> collection)
         {
             _propertyName = fkProperty;
             _posProperty = posProperty;
             _parent = parent;
-            collection = new List<T>();
-        }
-
-        ///// <param name="fkProperty">the name of the fk_Property which does notification, but not collection fixing</param>
-        public OneNRelationList(string fkProperty, string posProperty, IDataObject parent, IEnumerable<T> collection)
-            : this(fkProperty, posProperty, parent)
-        {
             this.collection = new List<T>(collection);
         }
 
@@ -259,6 +250,99 @@ namespace Kistl.API.Client
             if (CollectionChanged != null)
                 CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
         }
+        #endregion
+
+        #region IList Members
+
+        int IList.Add(object value)
+        {
+            Add((T)value);
+            return this.Count - 1;
+        }
+
+        bool IList.Contains(object value)
+        {
+            var t = value as T;
+            if (t == null)
+            {
+                return false;
+            }
+            else
+            {
+                return this.Contains(t);
+            }
+        }
+
+        int IList.IndexOf(object value)
+        {
+            var t = value as T;
+            if (t == null)
+            {
+                return -1;
+            }
+            else
+            {
+                return this.IndexOf(t);
+            }
+        }
+
+        void IList.Insert(int index, object value)
+        {
+            this.Insert(index, (T)value);
+        }
+
+        bool IList.IsFixedSize
+        {
+            get { return false; }
+        }
+
+        void IList.Remove(object value)
+        {
+            var t = value as T;
+            if (t != null)
+            {
+                this.Remove(t);
+            }
+        }
+
+        object IList.this[int index]
+        {
+            get
+            {
+                return this[index];
+            }
+            set
+            {
+                this[index] = (T)value;
+            }
+        }
+
+        #endregion
+
+        #region ICollection Members
+
+        void ICollection.CopyTo(Array array, int index)
+        {
+            if (array == null) { throw new ArgumentNullException("array"); }
+            if (!array.GetType().GetElementType().IsAssignableFrom(typeof(T)))
+            {
+                var msg = String.Format("Mismatch between source and destination type: [{0}] not assignable from [{1}]", array.GetType().GetElementType(), typeof(T));
+                throw new ArgumentException(msg, "array");
+            }
+
+            ((ICollection)collection).CopyTo(array, index);
+        }
+
+        bool ICollection.IsSynchronized
+        {
+            get { return false; }
+        }
+
+        object ICollection.SyncRoot
+        {
+            get { return this; }
+        }
+
         #endregion
     }
 }
