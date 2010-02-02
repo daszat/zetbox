@@ -9,11 +9,11 @@ namespace Kistl.API.Tests
 
     using NUnit.Framework;
 
-    public abstract class IListTests<TCollection, TItem>
-        : ICollectionTests<TCollection, TItem>
-        where TCollection : IList
+    public abstract class GenericListTests<TList, TItem>
+        : GenericCollectionTests<TList, TItem>
+        where TList : IList<TItem>
     {
-        protected IListTests(int items)
+        protected GenericListTests(int items)
             : base(items) { }
 
         protected override void AssertInvariants(List<TItem> expectedItems)
@@ -25,25 +25,11 @@ namespace Kistl.API.Tests
         #region IList tests
 
         [Test]
-        public void isfixedsize_should_not_be_set()
-        {
-            Assert.That(collection.IsFixedSize, Is.False);
-            AssertInvariants(initialItems);
-        }
-
-        [Test]
-        public void isreadonly_should_not_be_set()
-        {
-            Assert.That(collection.IsReadOnly, Is.False);
-            AssertInvariants(initialItems);
-        }
-
-        [Test]
         public void indexer_should_check_negative_index_on_get(
             [Range(-5, -1)] int index)
         {
             Assert.That(
-                () => collection[index],
+                () => { var ignored = collection[index]; },
                 Throws.InstanceOf<ArgumentOutOfRangeException>());
             AssertInvariants(initialItems);
         }
@@ -118,31 +104,6 @@ namespace Kistl.API.Tests
         }
 
         [Test]
-        public void add_should_insert_items_at_the_end([Range(1, 100, 10)]int numItems)
-        {
-            var expectedItems = new List<TItem>(initialItems);
-            for (int i = 0; i < numItems; i++)
-            {
-                var newItem = NewItem();
-
-                var index = collection.Add(newItem);
-                expectedItems.Add(newItem);
-
-                Assert.That(index, Is.EqualTo(initialItems.Count + i));
-                Assert.That(collection, Has.Member(newItem));
-            }
-            AssertInvariants(expectedItems);
-        }
-
-        [Test]
-        public void clear_should_remove_all_items()
-        {
-            collection.Clear();
-            Assert.That(collection, Is.Empty);
-            AssertInvariants(new List<TItem>(0));
-        }
-
-        [Test]
         public void indexOf_should_return_index()
         {
             for (int i = 0; i < initialItems.Count; i++)
@@ -191,39 +152,38 @@ namespace Kistl.API.Tests
         }
 
         [Test]
-        public void remove_should_remove_contained_object_from_beginning(
-             [Range(0, 5)]int index)
+        public void removeat_should_remove_item([Range(0, 5)]int index)
         {
             Assume.That(index, Is.GreaterThanOrEqualTo(0));
             Assume.That(index, Is.LessThan(initialItems.Count));
 
-            var item = initialItems[index];
-            TestDelegate remover = () => collection.Remove(item);
-            Assert.That(remover, Throws.Nothing, String.Format("i={0}, count={1}", index, initialItems.Count));
-            Assert.That(collection, Has.Count.EqualTo(initialItems.Count - 1));
-            Assert.That(collection, Has.No.Member(item));
-
             var expectedItems = new List<TItem>(initialItems);
-            expectedItems.Remove(item);
+            expectedItems.RemoveAt(index);
+
+            collection.RemoveAt(index);
+
             AssertInvariants(expectedItems);
         }
 
         [Test]
-        public void remove_should_remove_contained_object_from_end(
-             [Range(0, 5)]int offset)
+        public void removeat_should_remove_item_at_end([Range(0, 5)]int offset)
         {
-            remove_should_remove_contained_object_from_beginning(initialItems.Count - offset);
+            removeat_should_remove_item(initialItems.Count - offset);
         }
 
         [Test]
-        public void remove_should_ignore_other_item()
+        public void removeat_should_throw_on_negative_index([Range(-5, -1)]int index)
         {
-            var otherItem = NewItem();
-            TestDelegate remover = () => collection.Remove(otherItem);
-            Assert.That(remover, Throws.Nothing);
-            Assert.That(collection, Has.Count.EqualTo(initialItems.Count));
-            Assert.That(collection, Has.No.Member(otherItem));
+            TestDelegate remover = () => collection.RemoveAt(index);
+            Assert.That(remover, Throws.InstanceOf<ArgumentOutOfRangeException>());
+            AssertInvariants(initialItems);
+        }
 
+        [Test]
+        public void removeat_should_throw_on_index_greater_or_equal_count([Range(0, 5)]int offset)
+        {
+            TestDelegate remover = () => collection.RemoveAt(initialItems.Count + offset);
+            Assert.That(remover, Throws.InstanceOf<ArgumentOutOfRangeException>());
             AssertInvariants(initialItems);
         }
 

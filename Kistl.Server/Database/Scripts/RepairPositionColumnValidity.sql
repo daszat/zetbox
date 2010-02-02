@@ -74,7 +74,7 @@ BEGIN
 	-- but the positions can still be null. Set them all to Zero now
 	DECLARE @setZeroStatement nvarchar(4000) = N'
 UPDATE [' + @tblName + '] SET [' + @fkPositionName + '] = 0
-WHERE [' + @fkPositionName + '] IS NULL'
+WHERE [' + @fkPositionName + '] IS NULL AND [' + @fkColumnName + '] IS NOT NULL'
 	EXECUTE sp_executesql @setZeroStatement
 END
 	

@@ -16,9 +16,9 @@ namespace Kistl.DalProvider.EF
     /// </summary>
     public class EntityCollectionWrapper<TInterface, TImpl> : ICollection<TInterface>, ICollection
         where TInterface : class, IDataObject
-        where TImpl : class, System.Data.Objects.DataClasses.IEntityWithRelationships, TInterface, IDataObject
+        where TImpl : class, IEntityWithRelationships, TInterface, IDataObject
     {
-        protected ICollection<TImpl> underlyingCollection;
+        protected EntityCollection<TImpl> underlyingCollection;
         protected IKistlContext ctx;
 
         /// <summary>
@@ -26,7 +26,7 @@ namespace Kistl.DalProvider.EF
         /// </summary>
         /// <param name="ctx">the parent data context (optional)</param>
         /// <param name="ec">the <see cref="EntityCollection{TImpl}"/> that should be wrapped</param>
-        public EntityCollectionWrapper(IKistlContext ctx, ICollection<TImpl> ec)
+        public EntityCollectionWrapper(IKistlContext ctx, EntityCollection<TImpl> ec)
         {
             if (ec == null) { throw new ArgumentNullException("ec"); }
 
@@ -78,13 +78,13 @@ namespace Kistl.DalProvider.EF
             if (arrayIndex >= array.Length)
             {
                 var msg = String.Format("arrayIndex={0} must be less than array.Length={1}", arrayIndex, array.Length);
-                throw new ArgumentOutOfRangeException("arrayIndex", msg);
+                throw new ArgumentException(msg, "arrayIndex");
             }
 
             if (arrayIndex + underlyingCollection.Count > array.Length)
             {
                 var msg = String.Format("items do not fit idx={0} + #item={1} >= len={2}", arrayIndex, underlyingCollection.Count, array.Length);
-                throw new ArgumentOutOfRangeException("arrayIndex", msg);
+                throw new ArgumentException(msg, "arrayIndex");
             }
 
             foreach (TInterface i in GetEnumerable())
@@ -132,12 +132,17 @@ namespace Kistl.DalProvider.EF
 
         #region ICollection Members
 
-        public void CopyTo(Array array, int arrayIndex)
+        void ICollection.CopyTo(Array array, int arrayIndex)
         {
-            foreach (var i in GetEnumerable())
+            if (array == null) { throw new ArgumentNullException("array"); }
+            if (!array.GetType().GetElementType().IsAssignableFrom(typeof(TImpl)))
             {
-                array.SetValue(i, arrayIndex++);
+                var msg = String.Format("Mismatch between source and destination type: [{0}] not assignable from [{1}]", array.GetType().GetElementType(), typeof(TImpl));
+                throw new ArgumentException(msg, "array");
             }
+
+            var items = GetEnumerable().ToList();
+            ((ICollection)items).CopyTo(array, arrayIndex);
         }
 
         public bool IsSynchronized { get { return false; } }
@@ -148,14 +153,14 @@ namespace Kistl.DalProvider.EF
     }
 
     public class EntityListWrapper<TInterface, TImpl>
-        : EntityCollectionWrapper<TInterface, TImpl>, IList<TInterface>
-        where TImpl : class, System.Data.Objects.DataClasses.IEntityWithRelationships, TInterface, IDataObject
+        : EntityCollectionWrapper<TInterface, TImpl>, IList<TInterface>, IList
+        where TImpl : class, IEntityWithRelationships, TInterface, IDataObject
         where TInterface : class, IDataObject
     {
         private readonly string _pointerProperty;
         private List<TImpl> _orderedItems;
 
-        public EntityListWrapper(IKistlContext ctx, ICollection<TImpl> ec, string pointerProperty)
+        public EntityListWrapper(IKistlContext ctx, EntityCollection<TImpl> ec, string pointerProperty)
             : base(ctx, ec)
         {
             if (String.IsNullOrEmpty(pointerProperty)) { throw new ArgumentOutOfRangeException("pointerProperty"); }
@@ -251,6 +256,7 @@ namespace Kistl.DalProvider.EF
         {
             TInterface item = _orderedItems[index];
             _orderedItems.RemoveAt(index);
+            UpdateIndexProperty(item, null);
             base.Remove(item);
         }
 
@@ -272,6 +278,73 @@ namespace Kistl.DalProvider.EF
                 }
             }
         }
+        #endregion
+
+        #region IList Members
+
+        int IList.Add(object value)
+        {
+            Add((TImpl)value);
+            return this.Count - 1;
+        }
+
+        bool IList.Contains(object value)
+        {
+            var t = value as TImpl;
+            if (t == null)
+            {
+                return false;
+            }
+            else
+            {
+                return this.Contains(t);
+            }
+        }
+
+        int IList.IndexOf(object value)
+        {
+            var t = value as TImpl;
+            if (t == null)
+            {
+                return -1;
+            }
+            else
+            {
+                return this.IndexOf(t);
+            }
+        }
+
+        void IList.Insert(int index, object value)
+        {
+            this.Insert(index, (TImpl)value);
+        }
+
+        bool IList.IsFixedSize
+        {
+            get { return false; }
+        }
+
+        void IList.Remove(object value)
+        {
+            var t = value as TImpl;
+            if (t != null)
+            {
+                this.Remove(t);
+            }
+        }
+
+        object IList.this[int index]
+        {
+            get
+            {
+                return this[index];
+            }
+            set
+            {
+                this[index] = (TImpl)value;
+            }
+        }
+
         #endregion
     }
 }

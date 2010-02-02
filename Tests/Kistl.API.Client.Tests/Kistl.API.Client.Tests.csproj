@@ -79,10 +79,10 @@
     <Compile Include="TestObjClass.cs" />
     <Compile Include="TestObjClass_TestNameCollectionEntry.cs" />
     <Compile Include="TestProxy.cs" />
-    <Compile Include="Tests\OneNRelationListTests.cs" />
     <Compile Include="Tests\BaseClientCollectionEntryTests.cs" />
     <Compile Include="Tests\BaseClientDataObjectTests.cs" />
     <Compile Include="Tests\BinarySerializers\should_work_with_IStructs.cs" />
+    <Compile Include="Tests\GenericOneNRelationTests.cs" />
     <Compile Include="Tests\KistlContextTests.cs" />
     <Compile Include="Tests\N_to_M_relations\should_synchronize.cs" />
     <Compile Include="Tests\OneNRelationTests.cs" />
