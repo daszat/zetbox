@@ -182,6 +182,7 @@ namespace Kistl.DalProvider.EF
                 int? idx = GetIndexProperty(item);
                 if (!idx.HasValue || idx <= maxIdx || idx == Kistl.API.Helper.LASTINDEXPOSITION)
                 {
+                    // TODO: try to space out items better
                     idx = maxIdx + 1;
                     UpdateIndexProperty(item, idx);
                 }
