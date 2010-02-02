@@ -44,6 +44,7 @@ namespace Kistl.DalProvider.EF.Tests.EntityCollectionWrappers
             {
                 Assert.That(first, Is.True, "wrapper yielded second object [{0}]", i);
                 Assert.That(i, Is.SameAs(containedItem));
+                first = false;
             }
         }
 
