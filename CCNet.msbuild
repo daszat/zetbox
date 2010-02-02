@@ -20,6 +20,8 @@
     <Exec Command="bin\debug\bin\Server\Kistl.Server.Service.exe Kistl.Server.Service\DefaultConfig.xml -updateschema Kistl.Server\Database\Database.xml" />
     <Message Importance="high" Text="deploy and check schema" />
     <Exec Command="bin\debug\bin\Server\Kistl.Server.Service.exe Kistl.Server.Service\DefaultConfig.xml -deploy Kistl.Server\Database\Database.xml -checkdeployedschema" />
+    <Message Importance="high" Text="apply potential fixes to database" />
+    <Exec Command="bin\debug\bin\Server\Kistl.Server.Service.exe Kistl.Server.Service\DefaultConfig.xml -repairschema" />
     <Message Importance="high" Text="generate new objects" />
     <Exec Command="bin\debug\bin\Server\Kistl.Server.Service.exe Kistl.Server.Service\DefaultConfig.xml -generate" />
     <Message Importance="high" Text="sync identities" />

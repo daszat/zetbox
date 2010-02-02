@@ -67,3 +67,14 @@ BEGIN
 	FETCH NEXT FROM @idsToCheck
 	INTO @fk
 END
+
+IF @repair = 1
+BEGIN
+	-- due to the @duplicateStatement check, collections with only a single item are not checked (they have always unique position)
+	-- but the positions can still be null. Set them all to Zero now
+	DECLARE @setZeroStatement nvarchar(4000) = N'
+UPDATE [' + @tblName + '] SET [' + @fkPositionName + '] = 0
+WHERE [' + @fkPositionName + '] IS NULL'
+	EXECUTE sp_executesql @setZeroStatement
+END
+	

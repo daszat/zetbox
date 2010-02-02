@@ -134,6 +134,7 @@
     <KistlBase:CreatedOn>2010-02-01T16:22:27.93Z</KistlBase:CreatedOn>
     <KistlBase:Module>110acbc0-652a-4adc-9de5-8baabfcf3637</KistlBase:Module>
     <KistlBase:ObjectClass>bff02442-11ec-4cac-9105-39853e729e0f</KistlBase:ObjectClass>
+    <KistlBase:ObjectClass_pos>0</KistlBase:ObjectClass_pos>
     <KistlBase:PropertyName>Semester</KistlBase:PropertyName>
     <GUI:ValueModelDescriptor>83aae6fd-0fae-4348-b313-737a6e751027</GUI:ValueModelDescriptor>
     <KistlBase:EagerLoading>false</KistlBase:EagerLoading>
@@ -2100,6 +2101,7 @@
     <KistlBase:CreatedOn>2009-12-14T17:08:05.333Z</KistlBase:CreatedOn>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
     <KistlBase:ObjectClass>012dfab4-934b-443e-853a-11a5da5b0627</KistlBase:ObjectClass>
+    <KistlBase:ObjectClass_pos>0</KistlBase:ObjectClass_pos>
     <KistlBase:PropertyName>Type</KistlBase:PropertyName>
     <GUI:ValueModelDescriptor>83aae6fd-0fae-4348-b313-737a6e751027</GUI:ValueModelDescriptor>
     <KistlBase:EagerLoading>false</KistlBase:EagerLoading>
@@ -2518,6 +2520,7 @@
     <KistlBase:Description>Einträge der Enumeration</KistlBase:Description>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
     <KistlBase:ObjectClass>ee475de2-d626-49e9-9e40-6bb12cb026d4</KistlBase:ObjectClass>
+    <KistlBase:ObjectClass_pos>0</KistlBase:ObjectClass_pos>
     <KistlBase:PropertyName>EnumerationEntries</KistlBase:PropertyName>
     <GUI:ValueModelDescriptor>9fce01fe-fd6d-4e21-8b55-08d5e38aea36</GUI:ValueModelDescriptor>
     <KistlBase:EagerLoading>false</KistlBase:EagerLoading>
@@ -2643,6 +2646,7 @@
     <KistlBase:Description>Enumeration der Eigenschaft</KistlBase:Description>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
     <KistlBase:ObjectClass>19a8d9f0-4de6-4cc9-a75d-c1499e3a103b</KistlBase:ObjectClass>
+    <KistlBase:ObjectClass_pos>0</KistlBase:ObjectClass_pos>
     <KistlBase:PropertyName>Enumeration</KistlBase:PropertyName>
     <GUI:ValueModelDescriptor>83aae6fd-0fae-4348-b313-737a6e751027</GUI:ValueModelDescriptor>
     <KistlBase:EagerLoading>false</KistlBase:EagerLoading>
@@ -2731,6 +2735,7 @@
     <KistlBase:CreatedOn>2010-01-29T16:58:28.89Z</KistlBase:CreatedOn>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
     <KistlBase:ObjectClass>acf18a64-5fc0-4610-b083-9893eea0776c</KistlBase:ObjectClass>
+    <KistlBase:ObjectClass_pos>0</KistlBase:ObjectClass_pos>
     <KistlBase:PropertyName>Group</KistlBase:PropertyName>
     <GUI:ValueModelDescriptor>83aae6fd-0fae-4348-b313-737a6e751027</GUI:ValueModelDescriptor>
     <KistlBase:EagerLoading>false</KistlBase:EagerLoading>
@@ -2868,6 +2873,7 @@
     <KistlBase:Description>Export Guid</KistlBase:Description>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
     <KistlBase:ObjectClass>4ae6616a-eca3-47a5-b502-8e3c3913c2f0</KistlBase:ObjectClass>
+    <KistlBase:ObjectClass_pos>0</KistlBase:ObjectClass_pos>
     <KistlBase:PropertyName>ExportGuid</KistlBase:PropertyName>
     <GUI:ValueModelDescriptor>2b6fb70f-a382-4057-a139-cc33333d619d</GUI:ValueModelDescriptor>
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
@@ -3425,6 +3431,7 @@
     <KistlBase:Description>Kistl-Typ des Parameters</KistlBase:Description>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
     <KistlBase:ObjectClass>3fb8bf11-cab6-478f-b9b8-3f6d70a70d37</KistlBase:ObjectClass>
+    <KistlBase:ObjectClass_pos>0</KistlBase:ObjectClass_pos>
     <KistlBase:PropertyName>DataType</KistlBase:PropertyName>
     <GUI:ValueModelDescriptor>83aae6fd-0fae-4348-b313-737a6e751027</GUI:ValueModelDescriptor>
     <KistlBase:EagerLoading>false</KistlBase:EagerLoading>
@@ -4138,6 +4145,7 @@
     <KistlBase:CreatedOn>2010-01-29T16:56:35.613Z</KistlBase:CreatedOn>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
     <KistlBase:ObjectClass>3b79d759-2943-4caa-bf6f-5e89955f7f91</KistlBase:ObjectClass>
+    <KistlBase:ObjectClass_pos>0</KistlBase:ObjectClass_pos>
     <KistlBase:PropertyName>Relations</KistlBase:PropertyName>
     <GUI:ValueModelDescriptor>9fce01fe-fd6d-4e21-8b55-08d5e38aea36</GUI:ValueModelDescriptor>
     <KistlBase:EagerLoading>false</KistlBase:EagerLoading>
@@ -10768,6 +10776,7 @@
     <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
     <KistlBase:ObjectClass>c0c6369e-90cd-4e14-ad5c-a45e9e782e2f</KistlBase:ObjectClass>
+    <KistlBase:ObjectClass_pos>0</KistlBase:ObjectClass_pos>
     <KistlBase:PropertyName>SupportedInterfaces</KistlBase:PropertyName>
     <GUI:ValueModelDescriptor>9fce01fe-fd6d-4e21-8b55-08d5e38aea36</GUI:ValueModelDescriptor>
     <KistlBase:EagerLoading>false</KistlBase:EagerLoading>
@@ -10852,6 +10861,7 @@
     <KistlBase:Description>The Toolkit used by this Renderer</KistlBase:Description>
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
     <KistlBase:ObjectClass>2e93e071-875a-41ee-a768-5d55c2683546</KistlBase:ObjectClass>
+    <KistlBase:ObjectClass_pos>0</KistlBase:ObjectClass_pos>
     <KistlBase:PropertyName>Platform</KistlBase:PropertyName>
     <GUI:ValueModelDescriptor>a6ff986c-a485-4c4d-947c-e59d14112ec2</GUI:ValueModelDescriptor>
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
@@ -11006,6 +11016,7 @@
     <KistlBase:CreatedOn>2009-12-15T11:46:27.623Z</KistlBase:CreatedOn>
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
     <KistlBase:ObjectClass>a3207646-c6a6-4ecc-89cb-31bf28dbc6ac</KistlBase:ObjectClass>
+    <KistlBase:ObjectClass_pos>0</KistlBase:ObjectClass_pos>
     <KistlBase:PropertyName>ItemKind</KistlBase:PropertyName>
     <GUI:ValueModelDescriptor>83aae6fd-0fae-4348-b313-737a6e751027</GUI:ValueModelDescriptor>
     <KistlBase:EagerLoading>false</KistlBase:EagerLoading>
@@ -16757,6 +16768,7 @@
     <KistlBase:CreatedOn>2009-12-14T17:08:05.423Z</KistlBase:CreatedOn>
     <KistlBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</KistlBase:Module>
     <KistlBase:ObjectClass>798887f9-2d21-4d02-a143-bf1cbe07469b</KistlBase:ObjectClass>
+    <KistlBase:ObjectClass_pos>0</KistlBase:ObjectClass_pos>
     <KistlBase:PropertyName>TestString</KistlBase:PropertyName>
     <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
@@ -16817,6 +16829,7 @@
     <KistlBase:Description>Company name</KistlBase:Description>
     <KistlBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</KistlBase:Module>
     <KistlBase:ObjectClass>352a4ade-1dca-4d28-9630-66bbcc1622ea</KistlBase:ObjectClass>
+    <KistlBase:ObjectClass_pos>0</KistlBase:ObjectClass_pos>
     <KistlBase:PropertyName>Name</KistlBase:PropertyName>
     <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
