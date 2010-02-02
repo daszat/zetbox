@@ -75,6 +75,24 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Auftrag_Rights">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Auftrag_Rights)">
+        <MappingFragment StoreEntitySet="Auftrag_Rights">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Identity" ColumnName="Identity" />
+          <ScalarProperty Name="Right" ColumnName="Right" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="FK_Auftraege_Rights" TypeName="Model.FK_Auftraege_Rights" StoreEntitySet="Auftrag_Rights">
+      <EndProperty Name="Auftrag">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+      <EndProperty Name="Auftrag_Rights">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+        <ScalarProperty Name="Identity" ColumnName="Identity" />
+      </EndProperty>
+    </AssociationSetMapping>
     <EntitySetMapping Name="BaseParameter">
       <EntityTypeMapping TypeName="IsTypeOf(Model.BaseParameter)">
 	    <MappingFragment StoreEntitySet="BaseParameter">
@@ -724,6 +742,24 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Task_Rights">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Task_Rights)">
+        <MappingFragment StoreEntitySet="Task_Rights">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Identity" ColumnName="Identity" />
+          <ScalarProperty Name="Right" ColumnName="Right" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="FK_Tasks_Rights" TypeName="Model.FK_Tasks_Rights" StoreEntitySet="Task_Rights">
+      <EndProperty Name="Task">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+      <EndProperty Name="Task_Rights">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+        <ScalarProperty Name="Identity" ColumnName="Identity" />
+      </EndProperty>
+    </AssociationSetMapping>
     <EntitySetMapping Name="Template">
       <EntityTypeMapping TypeName="IsTypeOf(Model.Template)">
 	    <MappingFragment StoreEntitySet="Template">

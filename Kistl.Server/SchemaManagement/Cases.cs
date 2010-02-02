@@ -935,14 +935,14 @@ namespace Kistl.Server.SchemaManagement
         }
         #endregion
 
-        #region NewObjectClassSecurityRules
-        public bool IsNewObjectClassSecurityRules(ObjectClass objClass)
+        #region NewObjectClassACL
+        public bool IsNewObjectClassACL(ObjectClass objClass)
         {
             if (!objClass.HasAccessControlList(false)) return false;
             ObjectClass savedObjClass = savedSchema.FindPersistenceObject<ObjectClass>(objClass.ExportGuid);
             return savedObjClass == null || !savedObjClass.HasAccessControlList(false);
         }
-        public void DoNewObjectClassSecurityRules(ObjectClass objClass)
+        public void DoNewObjectClassACL(ObjectClass objClass)
         {
             Log.InfoFormat("New ObjectClass Security Rules: {0}", objClass.ClassName);
             string tblRightsName = Construct.SecurityRulesTableName(objClass);
@@ -962,26 +962,30 @@ namespace Kistl.Server.SchemaManagement
             db.CreateUpdateRightsTrigger(updateRightsTriggerName, rightsViewUnmaterializedName, tblName, tblRightsName);
             DoCreateRightsViewUnmaterialized(objClass);
             db.CreateRefreshRightsOnProcedure(refreshRightsOnProcedureName, rightsViewUnmaterializedName, tblName, tblRightsName);
+            db.ExecRefreshRightsOnProcedure(refreshRightsOnProcedureName);
         }
 
         public void DoCreateRightsViewUnmaterialized(ObjectClass objClass)
         {
-            if (objClass.AccessControlList.Count == 0)
-            {
-                Log.ErrorFormat("Unable to create RightsViewUnmaterialized: ObjectClass '{0}' has an empty AccessControlList", objClass.ClassName);
-                return;
-            }
-
             var tblName = objClass.TableName;
             string tblRightsName = Construct.SecurityRulesTableName(objClass);
             var rightsViewUnmaterializedName = Construct.SecurityRulesRightsViewUnmaterializedName(objClass);
 
-            List<ACL> viewAcls = new List<ACL>();
-            foreach (var acl in objClass.AccessControlList.OfType<RoleMembership>())
+            if (objClass.AccessControlList.Count == 0)
             {
-                if (acl.Relations.Count == 0)
+                Log.ErrorFormat("Unable to create RightsViewUnmaterialized: ObjectClass '{0}' has an empty AccessControlList", objClass.ClassName);
+                db.CreateEmptyRightsViewUnmaterialized(rightsViewUnmaterializedName);
+                return;
+            }
+
+
+            List<ACL> viewAcls = new List<ACL>();
+            foreach (var ac in objClass.AccessControlList.OfType<RoleMembership>())
+            {
+                if (ac.Relations.Count == 0)
                 {
-                    Log.ErrorFormat("Unable to create RightsViewUnmaterialized: RoleMembership '{0}' has no relations", acl.Name);
+                    Log.ErrorFormat("Unable to create RightsViewUnmaterialized: RoleMembership '{0}' has no relations", ac.Name);
+                    db.CreateEmptyRightsViewUnmaterialized(rightsViewUnmaterializedName);
                     return;
                 }
 
@@ -991,8 +995,8 @@ namespace Kistl.Server.SchemaManagement
                 string lastColumName = "ID";
                 ObjectClass lastType = objClass;
 
-                viewAcl.Right = (Kistl.API.AccessRights)acl.Rights;
-                foreach (var rel in acl.Relations)
+                viewAcl.Right = (Kistl.API.AccessRights)ac.Rights;
+                foreach (var rel in ac.Relations)
                 {
                     RelationEnd lastRelEnd;
                     RelationEnd nextRelEnd;
@@ -1010,6 +1014,7 @@ namespace Kistl.Server.SchemaManagement
                     else
                     {
                         Log.ErrorFormat("Unable to create RightsViewUnmaterialized: Unable to navigate from '{0}' over '{1}' to next type", lastType.ClassName, rel.ToString());
+                        db.CreateEmptyRightsViewUnmaterialized(rightsViewUnmaterializedName);
                         return;
                     }
 
@@ -1037,7 +1042,7 @@ namespace Kistl.Server.SchemaManagement
                         viewRel.JoinColumnName = "ID";
                         viewRel.FKColumnName = Construct.ForeignKeyColumnName(nextRelEnd);
 
-                        lastColumName = viewRel.FKColumnName;
+                        lastColumName = "ID";
                     }
 
                     lastType = nextRelEnd.Type;
@@ -1047,6 +1052,50 @@ namespace Kistl.Server.SchemaManagement
             db.CreateRightsViewUnmaterialized(rightsViewUnmaterializedName, tblName, tblRightsName, viewAcls);
         }
 
+        #endregion
+
+        #region ChangeObjectClassACL
+        public bool IsChangeObjectClassACL(ObjectClass objClass)
+        {
+            if (objClass == null) throw new ArgumentNullException("objClass");
+
+            // Basic checks
+            if (!objClass.HasAccessControlList(false)) return false;
+            ObjectClass savedObjClass = savedSchema.FindPersistenceObject<ObjectClass>(objClass.ExportGuid);
+            if (savedObjClass == null) return false;
+            if (!savedObjClass.HasAccessControlList(false)) return false;
+
+            // Check each AccessControl
+            var acl = objClass.AccessControlList;
+            var savedAcl = savedObjClass.AccessControlList;
+
+            if (acl.Count != savedAcl.Count) return true;
+            
+            foreach(var ac in acl.OfType<RoleMembership>())
+            {
+                var sac = savedAcl.OfType<RoleMembership>().FirstOrDefault(i => i.ExportGuid == ac.ExportGuid);
+                if (sac == null) return true;
+
+                if (ac.Relations.Count != sac.Relations.Count) return true;
+
+                for(int i=0;i<ac.Relations.Count;i++)
+                {
+                    if (ac.Relations[i].ExportGuid != sac.Relations[i].ExportGuid) return true;
+                }
+            }
+
+            return false;
+        }
+
+        public void DoChangeObjectClassACL(ObjectClass objClass)
+        {
+            var rightsViewUnmaterializedName = Construct.SecurityRulesRightsViewUnmaterializedName(objClass);
+            var refreshRightsOnProcedureName = Construct.SecurityRulesRefreshRightsOnProcedureName(objClass);
+
+            db.DropView(rightsViewUnmaterializedName);
+            DoCreateRightsViewUnmaterialized(objClass);
+            db.ExecRefreshRightsOnProcedure(refreshRightsOnProcedureName);
+        }
         #endregion
 
         #region DeleteObjectClassSecurityRules
@@ -1107,7 +1156,6 @@ namespace Kistl.Server.SchemaManagement
             // TODO: Add neested CompoundObjectProperty
         }
         #endregion
-
 
         #endregion
     }

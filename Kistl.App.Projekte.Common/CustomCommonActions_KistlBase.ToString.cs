@@ -13,7 +13,6 @@ namespace Kistl.App.Base
     public static partial class CustomCommonActions_KistlBase
     {
         #region ToString
-
         public static void OnToString_Assembly(Assembly obj, MethodReturnEventArgs<string> e)
         {
             e.Result = obj.AssemblyName;
@@ -214,7 +213,21 @@ namespace Kistl.App.Base
 
         public static void OnToString_Identity(Kistl.App.Base.Identity obj, MethodReturnEventArgs<string> e)
         {
-            e.Result = obj.DisplayName;
+            e.Result = (obj.DisplayName ?? string.Empty) + " (" + (obj.UserName ?? string.Empty) + ")";
+
+            FixupFloatingObjectsToString(obj, e);
+        }
+
+        public static void OnToString_Group(Kistl.App.Base.Group obj, MethodReturnEventArgs<string> e)
+        {
+            e.Result = obj.Name;
+
+            FixupFloatingObjectsToString(obj, e);
+        }
+
+        public static void OnToString_AccessControl(Kistl.App.Base.AccessControl obj, MethodReturnEventArgs<string> e)
+        {
+            e.Result = (obj.Name ?? string.Empty) + " (" + (obj.Rights ?? AccessRights.None) + ") " + (obj.Description ?? string.Empty);
 
             FixupFloatingObjectsToString(obj, e);
         }

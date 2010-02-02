@@ -78,7 +78,9 @@ namespace Kistl.API.Server
 
         void CreateUpdateRightsTrigger(string triggerName, string viewUnmaterializedName, string tblName, string tblNameRights);
         void CreateRightsViewUnmaterialized(string viewName, string tblName, string tblNameRights, IList<ACL> acls);
+        void CreateEmptyRightsViewUnmaterialized(string viewName);
         void CreateRefreshRightsOnProcedure(string procName, string viewUnmaterializedName, string tblName, string tblNameRights);
+        void ExecRefreshRightsOnProcedure(string procName);
 
         /// <summary>
         /// Creates a procedure to check position columns for their validity.

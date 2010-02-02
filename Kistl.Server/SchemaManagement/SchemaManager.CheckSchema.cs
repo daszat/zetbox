@@ -404,7 +404,7 @@ namespace Kistl.Server.SchemaManagement
                     Log.WarnFormat("Security Rules Table '{0}' is missing", tblRightsName);
                     if (repair)
                     {
-                        Case.DoNewObjectClassSecurityRules(objClass);
+                        Case.DoNewObjectClassACL(objClass);
                     }
                 }
                 else

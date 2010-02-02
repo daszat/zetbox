@@ -111,9 +111,13 @@ namespace Kistl.Server.SchemaManagement
 
             foreach (ObjectClass objClass in schema.GetQuery<ObjectClass>().OrderBy(o => o.Module.Namespace).ThenBy(o => o.ClassName))
             {
-                if (Case.IsNewObjectClassSecurityRules(objClass))
+                if (Case.IsNewObjectClassACL(objClass))
                 {
-                    Case.DoNewObjectClassSecurityRules(objClass);
+                    Case.DoNewObjectClassACL(objClass);
+                }
+                if (Case.IsChangeObjectClassACL(objClass))
+                {
+                    Case.DoChangeObjectClassACL(objClass);
                 }
                 if (Case.IsDeleteObjectClassSecurityRules(objClass))
                 {

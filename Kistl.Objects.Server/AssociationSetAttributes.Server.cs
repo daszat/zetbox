@@ -1930,6 +1930,13 @@ using Kistl.DalProvider.EF;
     )]
 
 
+[assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_Auftraege_Rights", 
+	"Auftrag", 
+	global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, 
+	typeof(Kistl.App.Projekte.Auftrag__Implementation__), 
+	"Auftrag_Rights", 
+	global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, 
+	typeof(Kistl.App.Projekte.Auftrag_Rights__Implementation__))]
 [assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_Projekte_Rights", 
 	"Projekt", 
 	global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, 
@@ -1937,3 +1944,10 @@ using Kistl.DalProvider.EF;
 	"Projekt_Rights", 
 	global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, 
 	typeof(Kistl.App.Projekte.Projekt_Rights__Implementation__))]
+[assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_Tasks_Rights", 
+	"Task", 
+	global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, 
+	typeof(Kistl.App.Projekte.Task__Implementation__), 
+	"Task_Rights", 
+	global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, 
+	typeof(Kistl.App.Projekte.Task_Rights__Implementation__))]

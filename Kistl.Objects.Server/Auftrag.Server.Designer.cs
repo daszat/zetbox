@@ -946,6 +946,32 @@ namespace Kistl.App.Projekte
 			else
 				Projekt__Implementation__ = null;
 		}
+		public override Kistl.API.AccessRights CurrentAccessRights 
+		{ 
+			get 
+			{ 
+				return (Kistl.API.AccessRights)SecurityRightsCollection__Implementation__.First().Right; 
+			} 
+		}
+
+        [EdmRelationshipNavigationProperty("Model", "FK_Auftraege_Rights", "Auftrag_Rights")]
+        public EntityCollection<Auftrag_Rights__Implementation__> SecurityRightsCollection__Implementation__
+        {
+            get
+            {
+                var c = ((IEntityWithRelationships)(this)).RelationshipManager
+                    .GetRelatedCollection<Auftrag_Rights__Implementation__>(
+                        "Model.FK_Auftraege_Rights",
+                        "Auftrag_Rights");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !c.IsLoaded)
+                {
+                    c.Load();
+                }
+                return c;
+            }
+        }
+
 #region Serializer
 
 
@@ -1014,4 +1040,55 @@ namespace Kistl.App.Projekte
     }
 
 
+    [System.Data.Objects.DataClasses.EdmEntityTypeAttribute(NamespaceName="Model", Name="Auftrag_Rights")]
+    public class Auftrag_Rights__Implementation__ : System.Data.Objects.DataClasses.EntityObject
+    {
+        [System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        public int ID
+        {
+            get
+            {
+                return this._ID;
+            }
+            set
+            {
+                this.ReportPropertyChanging("ID");
+                this._ID = value;
+                this.ReportPropertyChanged("ID");
+            }
+        }
+        private int _ID;
+
+        [System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        public int Identity
+        {
+            get
+            {
+                return this._Identity;
+            }
+            set
+            {
+                this.ReportPropertyChanging("Identity");
+                this._Identity = value;
+                this.ReportPropertyChanged("Identity");
+            }
+        }
+        private int _Identity;
+
+        [System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
+        public int Right
+        {
+            get
+            {
+                return this._Right;
+            }
+            set
+            {
+                this.ReportPropertyChanging("Right");
+                this._Right = value;
+                this.ReportPropertyChanged("Right");
+            }
+        }
+        private int _Right;
+    }
 }

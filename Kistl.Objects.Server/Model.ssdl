@@ -13,6 +13,11 @@
     <EntitySet Name="Antwort" EntityType="Model.Store.Antwort" Table="Antworten"/>
     <EntitySet Name="Assembly" EntityType="Model.Store.Assembly" Table="Assemblies"/>
     <EntitySet Name="Auftrag" EntityType="Model.Store.Auftrag" Table="Auftraege"/>
+    <EntitySet Name="Auftrag_Rights" EntityType="Model.Store.Auftrag_Rights" Table="Auftraege_Rights"/>
+    <AssociationSet Name="FK_Auftraege_Rights" Association="Model.Store.FK_Auftraege_Rights">
+      <End Role="Auftrag" EntitySet="Auftrag" />
+      <End Role="Auftrag_Rights" EntitySet="Auftrag_Rights" />
+    </AssociationSet>
     <EntitySet Name="BaseParameter" EntityType="Model.Store.BaseParameter" Table="BaseParameters"/>
     <EntitySet Name="Company" EntityType="Model.Store.Company" Table="Companies"/>
     <EntitySet Name="Constraint" EntityType="Model.Store.Constraint" Table="Constraints"/>
@@ -51,6 +56,11 @@
     <EntitySet Name="Student" EntityType="Model.Store.Student" Table="Students"/>
     <EntitySet Name="StudentExam" EntityType="Model.Store.StudentExam" Table="StudentExams"/>
     <EntitySet Name="Task" EntityType="Model.Store.Task" Table="Tasks"/>
+    <EntitySet Name="Task_Rights" EntityType="Model.Store.Task_Rights" Table="Tasks_Rights"/>
+    <AssociationSet Name="FK_Tasks_Rights" Association="Model.Store.FK_Tasks_Rights">
+      <End Role="Task" EntitySet="Task" />
+      <End Role="Task_Rights" EntitySet="Task_Rights" />
+    </AssociationSet>
     <EntitySet Name="Template" EntityType="Model.Store.Template" Table="Templates"/>
     <EntitySet Name="TestCustomObject" EntityType="Model.Store.TestCustomObject" Table="TestCustomObjects"/>
     <EntitySet Name="TestObjClass" EntityType="Model.Store.TestObjClass" Table="TestObjClasses"/>
@@ -1163,6 +1173,27 @@
     <Property Name="ChangedOn" Type="datetime" Nullable="true" />
     <Property Name="CreatedOn" Type="datetime" Nullable="true" />
   </EntityType>
+    <EntityType Name="Auftrag_Rights">
+      <Key>
+        <PropertyRef Name="ID" />
+        <PropertyRef Name="Identity" />
+      </Key>
+      <Property Name="ID" Type="int" Nullable="false" />
+      <Property Name="Identity" Type="int" Nullable="false" />
+      <Property Name="Right" Type="int" Nullable="false" />
+    </EntityType>
+    <Association Name="FK_Auftraege_Rights">
+      <End Role="Auftrag" Type="Model.Store.Auftrag" Multiplicity="1" />
+      <End Role="Auftrag_Rights" Type="Model.Store.Auftrag_Rights" Multiplicity="*" />
+      <ReferentialConstraint>
+        <Principal Role="Auftrag">
+          <PropertyRef Name="ID" />
+        </Principal>
+        <Dependent Role="Auftrag_Rights">
+          <PropertyRef Name="ID" />
+        </Dependent>
+      </ReferentialConstraint>
+    </Association>
 	
   <EntityType Name="BaseParameter">
     <Key>
@@ -1976,6 +2007,27 @@
     <Property Name="DatumVon" Type="datetime" Nullable="true" />
     <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="true" />
   </EntityType>
+    <EntityType Name="Task_Rights">
+      <Key>
+        <PropertyRef Name="ID" />
+        <PropertyRef Name="Identity" />
+      </Key>
+      <Property Name="ID" Type="int" Nullable="false" />
+      <Property Name="Identity" Type="int" Nullable="false" />
+      <Property Name="Right" Type="int" Nullable="false" />
+    </EntityType>
+    <Association Name="FK_Tasks_Rights">
+      <End Role="Task" Type="Model.Store.Task" Multiplicity="1" />
+      <End Role="Task_Rights" Type="Model.Store.Task_Rights" Multiplicity="*" />
+      <ReferentialConstraint>
+        <Principal Role="Task">
+          <PropertyRef Name="ID" />
+        </Principal>
+        <Dependent Role="Task_Rights">
+          <PropertyRef Name="ID" />
+        </Dependent>
+      </ReferentialConstraint>
+    </Association>
 	
   <EntityType Name="Template">
     <Key>

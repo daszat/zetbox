@@ -511,6 +511,12 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
                 viewUnmaterializedName);
         }
 
+        public void CreateEmptyRightsViewUnmaterialized(string viewName)
+        {
+            Log.DebugFormat("Creating *empty* unmaterialized rights view [{0}]", viewName);
+            ExecuteNonQuery(@"SELECT 0 [ID], 0 [Identity], 0 [Right] WHERE 0 = 1");
+        }
+
         public void CreateRightsViewUnmaterialized(string viewName, string tblName, string tblNameRights, IList<ACL> acls)
         {
             if (acls == null) throw new ArgumentNullException("acls");
@@ -575,6 +581,12 @@ FROM (", viewName);
                 procName,
                 tblNameRights,
                 viewUnmaterializedName);
+        }
+
+        public void ExecRefreshRightsOnProcedure(string procName)
+        {
+            Log.DebugFormat("Refreshing rights for [{0}]", procName);
+            ExecuteNonQuery(@"EXEC [{0}]", procName);
         }
 
         public void CreatePositionColumnValidCheckProcedures(ILookup<string, KeyValuePair<string, string>> refSpecs)
