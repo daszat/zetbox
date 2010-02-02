@@ -43,7 +43,7 @@ namespace Kistl.DalProvider.EF.Tests
 
             KistlContext.Container = container;
 
-            //ResetDatabase(config);
+            ResetDatabase(config);
 
             Property__Implementation__.OnToString_Property 
                 += (obj, args) => { args.Result = String.Format("Property implementation, [{0}]", obj.Description); };
