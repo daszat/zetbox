@@ -68,6 +68,10 @@
     <Compile Include="Mocks\CustomActionsManagerAPITest.cs" />
     <Compile Include="Mocks\ClientApplicationContextMock.cs" />
     <Compile Include="Mocks\MitarbeiterMock.cs" />
+    <Compile Include="Mocks\OneNLists\INSide.cs" />
+    <Compile Include="Mocks\OneNLists\IOneSide.cs" />
+    <Compile Include="Mocks\OneNLists\NSide.cs" />
+    <Compile Include="Mocks\OneNLists\OneSide.cs" />
     <Compile Include="Mocks\ProjektMock.cs" />
     <Compile Include="Mocks\Projekt_haben_Mitarbeiter_RelationEntry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -81,6 +85,7 @@
     <Compile Include="Tests\BinarySerializers\should_work_with_IStructs.cs" />
     <Compile Include="Tests\KistlContextTests.cs" />
     <Compile Include="Tests\N_to_M_relations\should_synchronize.cs" />
+    <Compile Include="Tests\OneNRelationTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Kistl.API.Client.Tests.Config.xml">

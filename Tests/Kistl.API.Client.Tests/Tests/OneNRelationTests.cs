@@ -36,13 +36,29 @@ namespace Kistl.API.Client.Tests
 
         protected override OneNRelationList<INSide> CreateCollection(List<INSide> items)
         {
-            obj = new OneSide(items);
+            obj = new OneSide(items.Cast<INSide>().ToList());
+            for (int i = 0; i < items.Count; i++)
+            {
+                var item = (NSide)items[i];
+                item.OneSide = obj;
+                item.OneSide_pos = i * 10;
+            }
             return wrapper;
         }
 
         protected override void AssertInvariants(List<INSide> expectedItems)
         {
             base.AssertInvariants(expectedItems);
+            // we also expect the collection to be stable, i.e. not change the order of the items
+            Assert.That(collection, Is.EquivalentTo(expectedItems));
+
+            foreach (var expected in expectedItems.Cast<NSide>())
+            {
+                Assert.That(expected.OneSide, Is.SameAs(obj));
+                Assert.That(expected.OneSide_pos, Is.Not.Null);
+            }
+
+            Assert.That(expectedItems.OfType<NSide>().Select(ns => ns.OneSide_pos), Is.Ordered);
         }
     }
 }

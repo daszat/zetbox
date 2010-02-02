@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Kistl.API.Client.Mocks.OneNLists
 {
-    class NSide : BaseClientDataObject, INSide
+    public class NSide : BaseClientDataObject, INSide
     {
         private int? _fk_OneSide;
         private IOneSide _oneSide;
