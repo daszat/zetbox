@@ -1,32 +1,46 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-
-using Kistl.Client.GUI;
-using Kistl.Client.Presentables;
 
 namespace Kistl.Client.WPF.View
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Windows;
+    using System.Windows.Controls;
+    using System.Windows.Data;
+    using System.Windows.Documents;
+    using System.Windows.Input;
+    using System.Windows.Media;
+    using System.Windows.Media.Imaging;
+    using System.Windows.Navigation;
+    using System.Windows.Shapes;
+
+    using Kistl.Client.GUI;
+    using Kistl.Client.Presentables;
+using Kistl.Client.WPF.Commands;
+    
     /// <summary>
     /// Interaction logic for DataObjectListView.xaml
     /// </summary>
-    public partial class DataObjectListView : PropertyView
+    public partial class DataObjectListView
+        : PropertyView
     {
-
         public DataObjectListView()
         {
             InitializeComponent();
         }
+
+        //private RelayCommand _moveUpCommand;
+        //public System.Windows.Input.ICommand MoveUpCommand
+        //{
+        //    get
+        //    {
+        //        if (_moveUpCommand == null)
+        //        {
+        //            _moveUpCommand = new RelayCommand(
+        //        }
+        //    }
+        //}
 
         private void AddNewHandler(object sender, RoutedEventArgs e)
         {

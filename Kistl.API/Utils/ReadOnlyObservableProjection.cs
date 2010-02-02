@@ -123,7 +123,7 @@ namespace Kistl.API.Utils
     }
 
     public class ReadOnlyObservableProjectedList<TInput, TOutput>
-        : ReadOnlyProjectedList<TInput, TOutput>, IReadOnlyObservableCollection<TOutput>, INotifyPropertyChanged
+        : ReadOnlyProjectedList<TInput, TOutput>, IReadOnlyObservableList<TOutput>, INotifyPropertyChanged
     {
         public ReadOnlyObservableProjectedList(ObservableCollection<TInput> list, Func<TInput, TOutput> select, Func<TOutput, TInput> inverter)
             : base(list, select, inverter)
@@ -223,7 +223,7 @@ namespace Kistl.API.Utils
     /// </summary>
     /// <typeparam name="TValue">The Type of the elements of this collection.</typeparam>
     public class ReadOnlyObservableCollectionWrapper<TValue>
-        : ReadOnlyObservableCollection<TValue>, IReadOnlyObservableCollection<TValue>
+        : ReadOnlyObservableCollection<TValue>, IReadOnlyObservableList<TValue>
     {
 
         public ReadOnlyObservableCollectionWrapper(ObservableCollection<TValue> list)

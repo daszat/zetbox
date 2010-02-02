@@ -89,28 +89,28 @@ namespace Kistl.Client.WPF
         //    }
         //}
 
-        private static void CreateTestFragebögen()
-        {
-            using (Logging.Log.DebugTraceMethodCall("FixupTypeRefParents"))
-            using (IKistlContext ctx = KistlContext.GetContext())
-            {
-                ctx.GetQuery<Kistl.App.Test.Antwort>().ForEach(a => ctx.Delete(a));
-                ctx.GetQuery<Kistl.App.Test.Fragebogen>().ForEach(a => ctx.Delete(a));
+        //private static void CreateTestFragebögen()
+        //{
+        //    using (Logging.Log.DebugTraceMethodCall("FixupTypeRefParents"))
+        //    using (IKistlContext ctx = KistlContext.GetContext())
+        //    {
+        //        ctx.GetQuery<Kistl.App.Test.Antwort>().ForEach(a => ctx.Delete(a));
+        //        ctx.GetQuery<Kistl.App.Test.Fragebogen>().ForEach(a => ctx.Delete(a));
 
-                var fb1 = ctx.Create<Kistl.App.Test.Fragebogen>();
-                fb1.BogenNummer = 1;
-                fb1.Antworten.Add(ctx.Create<Kistl.App.Test.Antwort>());
-                fb1.Antworten[0].Frage = "Erste Frage";
-                fb1.Antworten[0].FragenNummer = 1;
-                fb1.Antworten[0].GegebeneAntwort = 2;
-                fb1.Antworten.Add(ctx.Create<Kistl.App.Test.Antwort>());
-                fb1.Antworten[1].Frage = "Zweite Frage";
-                fb1.Antworten[1].FragenNummer = 2;
-                fb1.Antworten[1].GegebeneAntwort = 4;
+        //        var fb1 = ctx.Create<Kistl.App.Test.Fragebogen>();
+        //        fb1.BogenNummer = 1;
+        //        fb1.Antworten.Add(ctx.Create<Kistl.App.Test.Antwort>());
+        //        fb1.Antworten[0].Frage = "Erste Frage";
+        //        fb1.Antworten[0].FragenNummer = 1;
+        //        fb1.Antworten[0].GegebeneAntwort = 2;
+        //        fb1.Antworten.Add(ctx.Create<Kistl.App.Test.Antwort>());
+        //        fb1.Antworten[1].Frage = "Zweite Frage";
+        //        fb1.Antworten[1].FragenNummer = 2;
+        //        fb1.Antworten[1].GegebeneAntwort = 4;
 
-                ctx.SubmitChanges();
-            }
-        }
+        //        ctx.SubmitChanges();
+        //    }
+        //}
 
         /// <summary>
         /// Calls currently needed Database fixes
@@ -119,7 +119,7 @@ namespace Kistl.Client.WPF
         {
             // FixupTypeRefParents();
             // PrintEagerLoadingGraphViz();
-            CreateTestFragebögen();
+            // CreateTestFragebögen();
         }
     }
 }

@@ -1,34 +1,36 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Collections.Specialized;
-using System.Linq;
-using System.Text;
-
-using Kistl.API;
-using Kistl.API.Utils;
-using Kistl.App.Base;
-using Kistl.App.Extensions;
 
 namespace Kistl.Client.Presentables
 {
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Collections.Specialized;
+    using System.Linq;
+    using System.Text;
+
+    using Kistl.API;
+    using Kistl.API.Utils;
+    using Kistl.App.Base;
+    using Kistl.App.Extensions;
+
     /// <summary>
-    /// Actually only models a Collection.
     /// </summary>
     public class ObjectListModel
-        : PropertyModel<ICollection<DataObjectModel>>, IValueListModel<DataObjectModel>
+        : PropertyModel<IList<DataObjectModel>>, IValueListModel<DataObjectModel>
     {
+        private readonly ObjectReferenceProperty _property;
 
         public ObjectListModel(
             IGuiApplicationContext appCtx, IKistlContext dataCtx,
             IDataObject referenceHolder, ObjectReferenceProperty prop)
             : base(appCtx, dataCtx, referenceHolder, prop)
         {
-            if (!prop.IsList())
-                throw new ArgumentOutOfRangeException("prop", "ObjectReferenceProperty must be a list");
+            if (!prop.IsList()) { throw new ArgumentOutOfRangeException("prop", "ObjectReferenceProperty must be a list"); }
 
-            ReferencedClass = prop.GetReferencedObjectClass();
+            _property = prop;
+
+            ReferencedClass = _property.GetReferencedObjectClass();
         }
 
         #region Public interface and IReadOnlyValueModel<IReadOnlyObservableCollection<DataObjectModel>> Members
@@ -43,14 +45,14 @@ namespace Kistl.Client.Presentables
             get { return false; }
         }
 
-        private ReadOnlyObservableProjectedCollection<IDataObject, DataObjectModel> _valueCache;
-        public IReadOnlyObservableCollection<DataObjectModel> Value
+        private ReadOnlyObservableProjectedList<IDataObject, DataObjectModel> _valueCache;
+        public IReadOnlyObservableList<DataObjectModel> Value
         {
             get
             {
                 if (_valueCache == null)
                 {
-                    _valueCache = new ReadOnlyObservableProjectedCollection<IDataObject, DataObjectModel>(
+                    _valueCache = new ReadOnlyObservableProjectedList<IDataObject, DataObjectModel>(
                         Object.GetPropertyValue<INotifyCollectionChanged>(Property.PropertyName),
                         obj => (DataObjectModel)Factory.CreateDefaultModel(DataContext, obj),
                         mdl => mdl.Object);
@@ -80,13 +82,30 @@ namespace Kistl.Client.Presentables
                     .Where(p => (p.CategoryTags ?? String.Empty).Split(',', ' ').Contains("Summary"));
                 if (group.Count() == 0)
                 {
-                    group = this.ReferencedClass.GetAllProperties();
+                    group = this.ReferencedClass.GetAllProperties().Where(p =>
+                    {
+                        var orp = p as ObjectReferenceProperty;
+                        if (orp == null) { return true; }
+
+                        switch (orp.RelationEnd.Parent.GetRelationType())
+                        {
+                            case RelationType.n_m:
+                                return false; // don't display lists in grids
+                            case RelationType.one_n:
+                                return orp.RelationEnd.Multiplicity.UpperBound() > 1; // if we're "n", the navigator is a pointer, not a list
+                            case RelationType.one_one:
+                                return true; // can always display
+                            default:
+                                return false; // something went wrong
+                        }
+                    });
                 }
 
                 result.Columns = group
-                    .Select(p => new ColumnDisplayModel() { 
-                        Header = p.PropertyName, 
-                        PropertyName = p.PropertyName, 
+                    .Select(p => new ColumnDisplayModel()
+                    {
+                        Header = p.PropertyName,
+                        PropertyName = p.PropertyName,
                         ControlKind = p.ValueModelDescriptor.GetDefaultGridCellKind()
                     })
                     .ToList();
@@ -108,6 +127,14 @@ namespace Kistl.Client.Presentables
                     _selectedItem = value;
                     OnPropertyChanged("SelectedItem");
                 }
+            }
+        }
+
+        public bool HasPersistentOrder
+        {
+            get
+            {
+                return _property.RelationEnd.HasPersistentOrder;
             }
         }
 

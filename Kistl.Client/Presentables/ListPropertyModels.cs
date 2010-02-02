@@ -15,8 +15,17 @@ using Kistl.App.Base;
 namespace Kistl.Client.Presentables
 {
     public interface IValueListModel<TElement>
-        : IReadOnlyValueModel<IReadOnlyObservableCollection<TElement>>
+        : IReadOnlyValueModel<IReadOnlyObservableList<TElement>>
     {
+        /// <summary>
+        /// Gets a value whether or not this list has a persistent order. 
+        /// </summary>
+        /// <remarks>
+        /// While lists on the client always have a definite order, the order 
+        /// is only persisted if the underlying datamodel actually supports 
+        /// this.
+        /// </remarks>
+        bool HasPersistentOrder { get; }
 
         /// <summary>
         /// Adds the given item to the underlying value. Triggers <see cref="INotifyCollectionChanged.CollectionChanged"/>
@@ -57,11 +66,15 @@ namespace Kistl.Client.Presentables
     public abstract class ReferenceListPropertyModel<TElementModel, TElement>
         : PropertyModel<ICollection<TElementModel>>, IValueListModel<TElementModel>
     {
+        private readonly ValueTypeProperty _property;
         protected ReferenceListPropertyModel(
             IGuiApplicationContext appCtx, IKistlContext dataCtx,
             IDataObject obj, ValueTypeProperty prop)
             : base(appCtx, dataCtx, obj, prop)
         {
+            if (!prop.IsList) { throw new ArgumentOutOfRangeException("prop", "ObjectReferenceProperty must be a list"); }
+
+            _property = prop;
             //AllowNullInput = prop.IsNullable();
         }
 
@@ -75,6 +88,14 @@ namespace Kistl.Client.Presentables
         public bool IsNull
         {
             get { return false; }
+        }
+
+        public bool HasPersistentOrder
+        {
+            get
+            {
+                return _property.HasPersistentOrder;
+            }
         }
 
         private TElementModel _selectedItem;
@@ -96,7 +117,7 @@ namespace Kistl.Client.Presentables
         }
 
         private ReadOnlyObservableProjectedList<TElement, TElementModel> _valueCache;
-        public IReadOnlyObservableCollection<TElementModel> Value
+        public IReadOnlyObservableList<TElementModel> Value
         {
             get
             {
@@ -157,11 +178,16 @@ namespace Kistl.Client.Presentables
     public class StringListPropertyModel
         : PropertyModel<ICollection<string>>, IValueListModel<string>
     {
+        private readonly StringProperty _property;
+
         public StringListPropertyModel(
             IGuiApplicationContext appCtx, IKistlContext dataCtx,
             IDataObject obj, StringProperty prop)
             : base(appCtx, dataCtx, obj, prop)
         {
+            if (!prop.IsList) { throw new ArgumentOutOfRangeException("prop", "ObjectReferenceProperty must be a list"); }
+
+            _property = prop;
             UpdatePropertyValueCore();
         }
 
@@ -183,6 +209,14 @@ namespace Kistl.Client.Presentables
         }
 
         #region IValueListModel<string> Members
+
+        public bool HasPersistentOrder
+        {
+            get
+            {
+                return _property.HasPersistentOrder;
+            }
+        }
 
         public void AddItem(string item)
         {
@@ -272,7 +306,7 @@ namespace Kistl.Client.Presentables
             get { return !HasValue; }
         }
 
-        public IReadOnlyObservableCollection<string> Value
+        public IReadOnlyObservableList<string> Value
         {
             get { return _valueView; }
         }
