@@ -59,7 +59,6 @@ namespace Kistl.DalProvider.EF
     public sealed class KistlDataContext : BaseKistlDataContext, IKistlContext, IDisposable
     {
         private readonly EFObjectContext _ctx;
-        private readonly IMetaDataResolver _metaDataResolver;
 
         /// <summary>
         /// For Clean Up Session
@@ -74,11 +73,8 @@ namespace Kistl.DalProvider.EF
         /// Internal Constructor
         /// </summary>
         public KistlDataContext(KistlConfig config, IMetaDataResolver metaDataResolver, Identity identity)
-            : base(identity)
+            : base(metaDataResolver, identity)
         {
-            if (metaDataResolver == null) { throw new ArgumentNullException("metaDataResolver"); }
-
-            _metaDataResolver = metaDataResolver;
             _ctx = new EFObjectContext(config);
         }
 
@@ -190,7 +186,7 @@ namespace Kistl.DalProvider.EF
             if (!_table.ContainsKey(type))
             {
                 _table[type] = new QueryTranslator<T>(
-                    _metaDataResolver, this.identity,
+                    metaDataResolver, this.identity,
                     _ctx.CreateQuery<BaseServerDataObject_EntityFramework>("[" + GetEntityName(type) + "]"), this);
             }
 
@@ -209,7 +205,7 @@ namespace Kistl.DalProvider.EF
             if (!_table.ContainsKey(type))
             {
                 _table[type] = new QueryTranslator<T>(
-                    _metaDataResolver, this.identity,
+                    metaDataResolver, this.identity,
                     _ctx.CreateQuery<BaseServerDataObject_EntityFramework>("[" + GetEntityName(type) + "]"), this);
             }
 

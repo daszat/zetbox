@@ -116,22 +116,53 @@ namespace Kistl.App.Extensions
             return false;
         }
 
+        /// <summary>
+        /// Checks if a ObjectClass has an AccessControl list. This Method is used to append security filter
+        /// </summary>
+        /// <param name="cls">ObjectClass to test</param>
+        /// <returns>true if a ACL is defined</returns>
         public static bool HasAccessControlList(this ObjectClass cls)
-        {
-            return HasAccessControlList(cls, true);
-        }
-
-        public static bool HasAccessControlList(this ObjectClass cls, bool lookupInBase)
         {
             if (cls == null) throw new ArgumentNullException("cls");
             while (cls != null)
             {
                 if (cls.AccessControlList.Count > 0)
                     return true;
-                if (!lookupInBase) return false;
                 cls = cls.BaseObjectClass;
             }
             return false;
+        }
+
+        /// <summary>
+        /// Checks if this ObjectClass needs a Rights Table. Lookup is done only in current class, not in base classes.
+        /// Only RoleMembership ACLs would need a Rights Table. GroupMemberShip ACLs are resolved directly at the server.
+        /// </summary>
+        /// <param name="cls">ObjectClass to test</param>
+        /// <returns>true if the class needs a Rights Table</returns>
+        public static bool NeedsRightsTable(this ObjectClass cls)
+        {
+            if (cls == null) throw new ArgumentNullException("cls");
+            return cls.AccessControlList.OfType<RoleMembership>().Count() > 0;
+        }
+
+        public static Kistl.App.Base.AccessRights GetGroupAccessRights(this ObjectClass cls, Identity id)
+        {
+            if (cls == null) throw new ArgumentNullException("cls");
+            if (id == null) throw new ArgumentNullException("id");
+            cls = cls.GetRootClass();
+            var groups = id.GetGroups().ToLookup(i => i.ExportGuid);
+
+            var result = Kistl.App.Base.AccessRights.None;
+
+            foreach (var gm in cls.AccessControlList.OfType<GroupMembership>())
+            {
+                if (groups.Contains(gm.Group.ExportGuid))
+                {
+                    result |= (gm.Rights ?? Kistl.App.Base.AccessRights.None);
+                }
+            }
+
+            return result;
         }
 
         public static InterfaceType GetDescribedInterfaceType(this ObjectClass cls)

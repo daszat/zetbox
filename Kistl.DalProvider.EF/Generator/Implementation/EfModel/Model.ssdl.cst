@@ -28,7 +28,7 @@
 %>
     <EntitySet Name="<%= cls.ClassName %>" EntityType="Model.Store.<%= cls.ClassName %>" Table="<%= cls.TableName %>"/>
 <%	
-		if(cls.HasSecurityRules(false))
+		if(cls.NeedsRightsTable())
 		{
 %>
     <EntitySet Name="<%= Construct.SecurityRulesClassName(cls) %>" EntityType="Model.Store.<%= Construct.SecurityRulesClassName(cls) %>" Table="<%= Construct.SecurityRulesTableName(cls) %>"/>
@@ -124,7 +124,7 @@
 
     <!-- EntitySets and AssociationSet for all object-struct CollectionEntrys -->
 <%
-	foreach(var prop in ctx.GetQuery<StructProperty>()
+	foreach(var prop in ctx.GetQuery<CompoundObjectProperty>()
 		.Where(p => p.IsList)
 		.OrderBy(p => p.ObjectClass.ClassName)
 		.ThenBy(p => p.PropertyName))
@@ -161,7 +161,7 @@
 %>
   </EntityType>
 <%	
-		if(cls.HasSecurityRules(false))
+		if(cls.NeedsRightsTable())
 		{
 %>
     <EntityType Name="<%= Construct.SecurityRulesClassName(cls) %>">
@@ -391,7 +391,7 @@
 
     <!-- EntityTypes and Associations for all object-struct CollectionEntrys -->
 <%
-	foreach(var prop in ctx.GetQuery<StructProperty>()
+	foreach(var prop in ctx.GetQuery<CompoundObjectProperty>()
 		.Where(p => p.IsList)
 		.OrderBy(p => p.ObjectClass.ClassName)
 		.ThenBy(p => p.PropertyName))

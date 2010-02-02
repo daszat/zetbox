@@ -43,7 +43,7 @@ foreach(var cls in ctx.GetBaseClasses().OrderBy(c => c.ClassName))
 #line 29 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.ssdl.cst"
 this.WriteObjects("    <EntitySet Name=\"",  cls.ClassName , "\" EntityType=\"Model.Store.",  cls.ClassName , "\" Table=\"",  cls.TableName , "\"/>\r\n");
 #line 31 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.ssdl.cst"
-if(cls.HasAccessControlList(false))
+if(cls.NeedsRightsTable())
 		{
 
 #line 34 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.ssdl.cst"
@@ -192,7 +192,7 @@ ApplyEntityTypeColumnDefs(cls);
 #line 162 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.ssdl.cst"
 this.WriteObjects("  </EntityType>\r\n");
 #line 164 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.ssdl.cst"
-if(cls.HasAccessControlList(false))
+if(cls.NeedsRightsTable())
 		{
 
 #line 167 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.ssdl.cst"

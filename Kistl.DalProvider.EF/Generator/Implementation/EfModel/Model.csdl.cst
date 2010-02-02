@@ -24,7 +24,7 @@
 %>
     <EntitySet Name="<%= cls.ClassName %>" EntityType="Model.<%= cls.ClassName %>" />
 <%  
-		if(cls.HasSecurityRules(false))
+		if(cls.NeedsRightsTable())
 		{
 %>
     <EntitySet Name="<%= Construct.SecurityRulesClassName(cls) %>" EntityType="Model.<%= Construct.SecurityRulesClassName(cls) %>" />
@@ -123,7 +123,7 @@
     <Property Name="ID" Type="Int32" Nullable="false" />
 <% 
 		ApplyEntityTypeFieldDefs(cls.Properties.Cast<Property>());
-		if(cls.HasSecurityRules(false))
+		if(cls.NeedsRightsTable())
 		{
 %>
     <NavigationProperty Name="SecurityRightsCollection<%= Kistl.API.Helper.ImplementationSuffix%>" Relationship="Model.<%= Construct.SecurityRulesFKName(cls) %>" FromRole="<%= cls.ClassName %>" ToRole="<%= Construct.SecurityRulesClassName(cls) %>" />
@@ -132,7 +132,7 @@
 %>
   </EntityType>
 <%
-		if(cls.HasSecurityRules(false))
+		if(cls.NeedsRightsTable())
 		{
 %>
   <EntityType Name="<%= Construct.SecurityRulesClassName(cls) %>">

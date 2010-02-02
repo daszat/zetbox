@@ -182,7 +182,7 @@ namespace Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses
             base.ApplyClassTailTemplate();
             Implementation.ObjectClasses.ReloadReferences.Call(Host, ctx, this.DataType);
 
-            if (HasSecurityRules())
+            if (NeedsRightsTable())
             {
                 SecurityRulesProperties.Call(Host, ctx, (ObjectClass)this.DataType);
             }
@@ -192,19 +192,19 @@ namespace Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses
         {
             base.ApplyNamespaceTailTemplate();
 
-            if (HasSecurityRules())
+            if (NeedsRightsTable())
             {
                 SecurityRulesClass.Call(Host, ctx, (ObjectClass)this.DataType);
             }
         }
 
-        private bool HasSecurityRules()
+        private bool NeedsRightsTable()
         {
             if (this.DataType is ObjectClass)
             {
                 ObjectClass cls = (ObjectClass)this.DataType;
 
-                if (cls.HasAccessControlList(false))
+                if (cls.NeedsRightsTable())
                 {
                     if (cls.BaseObjectClass != null)
                     {

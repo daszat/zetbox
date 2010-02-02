@@ -14,14 +14,19 @@ namespace Kistl.API.Server
         : IKistlServerContext, IDisposable
     {
         protected readonly Identity identity;
+        protected readonly IMetaDataResolver metaDataResolver;
 
         /// <summary>
         /// Initializes a new instance of the BaseKistlDataContext class using the specified <see cref="Identity"/>.
         /// </summary>
+        /// <param name="metaDataResolver">the IMetaDataResolver for this context.</param>
         /// <param name="identity">the identity of this context. if this is null, the context does no security checks</param>
-        protected BaseKistlDataContext(Identity identity)
+        protected BaseKistlDataContext(IMetaDataResolver metaDataResolver, Identity identity)
         {
+            if (metaDataResolver == null) { throw new ArgumentNullException("metaDataResolver"); }
+
             this.identity = identity;
+            this.metaDataResolver = metaDataResolver;
         }
 
         // TODO: implement proper IDisposable pattern
@@ -230,6 +235,11 @@ namespace Kistl.API.Server
         /// <returns>A new IPersistenceObject</returns>
         public virtual IDataObject Create(InterfaceType ifType)
         {
+            ObjectClass cls = metaDataResolver.GetObjectClass(ifType).GetRootClass();
+            if (identity != null && cls.HasAccessControlList() && (cls.GetGroupAccessRights(identity) & AccessRights.Create) != AccessRights.Create)
+            {
+                throw new System.Security.SecurityException(string.Format("The current identity has no rights to create an Object of type '{0}'", ifType.Type.FullName));
+            }
             return (IDataObject)CreateInternal(ifType);
         }
 

@@ -90,7 +90,7 @@ namespace Kistl.Server.SchemaManagement
 
             // All Security Rules Rights Tables
             tableNames.AddRange(schema.GetQuery<ObjectClass>().ToList()
-                .Where(o => o.HasAccessControlList(false))
+                .Where(o => o.NeedsRightsTable())
                 .Select(o => Construct.SecurityRulesTableName(o)));
 
             foreach (string tblName in db.GetTableNames())
@@ -168,7 +168,7 @@ namespace Kistl.Server.SchemaManagement
                 relationNames.Add(prop.GetAssociationName());
             }
 
-            foreach (ObjectClass objClass in schema.GetQuery<ObjectClass>().ToList().Where(o => o.HasAccessControlList(false)))
+            foreach (ObjectClass objClass in schema.GetQuery<ObjectClass>().ToList().Where(o => o.NeedsRightsTable()))
             {
                 relationNames.Add(Construct.SecurityRulesFKName(objClass));
             }
@@ -391,7 +391,7 @@ namespace Kistl.Server.SchemaManagement
 
         private void CheckTableSecurityRules(ObjectClass objClass)
         {
-            if (objClass.HasAccessControlList(false))
+            if (objClass.NeedsRightsTable())
             {
                 var tblName = objClass.TableName;
                 var tblRightsName = Construct.SecurityRulesTableName(objClass);

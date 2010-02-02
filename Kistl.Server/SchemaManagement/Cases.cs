@@ -58,7 +58,7 @@ namespace Kistl.Server.SchemaManagement
         }
         public void DoDeleteObjectClass(ObjectClass objClass)
         {
-            if (objClass.HasAccessControlList(false))
+            if (objClass.NeedsRightsTable())
             {
                 DoDeleteObjectClassSecurityRules(objClass);
             }
@@ -938,9 +938,9 @@ namespace Kistl.Server.SchemaManagement
         #region NewObjectClassACL
         public bool IsNewObjectClassACL(ObjectClass objClass)
         {
-            if (!objClass.HasAccessControlList(false)) return false;
+            if (!objClass.NeedsRightsTable()) return false;
             ObjectClass savedObjClass = savedSchema.FindPersistenceObject<ObjectClass>(objClass.ExportGuid);
-            return savedObjClass == null || !savedObjClass.HasAccessControlList(false);
+            return savedObjClass == null || !savedObjClass.NeedsRightsTable();
         }
         public void DoNewObjectClassACL(ObjectClass objClass)
         {
@@ -1060,10 +1060,10 @@ namespace Kistl.Server.SchemaManagement
             if (objClass == null) throw new ArgumentNullException("objClass");
 
             // Basic checks
-            if (!objClass.HasAccessControlList(false)) return false;
+            if (!objClass.NeedsRightsTable()) return false;
             ObjectClass savedObjClass = savedSchema.FindPersistenceObject<ObjectClass>(objClass.ExportGuid);
             if (savedObjClass == null) return false;
-            if (!savedObjClass.HasAccessControlList(false)) return false;
+            if (!savedObjClass.NeedsRightsTable()) return false;
 
             // Check each AccessControl
             var acl = objClass.AccessControlList;
@@ -1101,9 +1101,9 @@ namespace Kistl.Server.SchemaManagement
         #region DeleteObjectClassSecurityRules
         public bool IsDeleteObjectClassSecurityRules(ObjectClass objClass)
         {
-            if (objClass.HasAccessControlList(false)) return false;
+            if (objClass.NeedsRightsTable()) return false;
             ObjectClass savedObjClass = savedSchema.FindPersistenceObject<ObjectClass>(objClass.ExportGuid);
-            return savedObjClass != null && savedObjClass.HasAccessControlList(false);
+            return savedObjClass != null && savedObjClass.NeedsRightsTable();
         }
         public void DoDeleteObjectClassSecurityRules(ObjectClass objClass)
         {

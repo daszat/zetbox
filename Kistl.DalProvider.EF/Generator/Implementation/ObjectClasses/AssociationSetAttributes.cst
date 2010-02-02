@@ -91,7 +91,7 @@ using Kistl.DalProvider.EF;
 %>
 
 <%
-	foreach (var prop in ctx.GetQuery<StructProperty>()
+	foreach (var prop in ctx.GetQuery<CompoundObjectProperty>()
 		.Where(p => p.IsList)
 		.OrderBy(p => p.ObjectClass.ClassName)
 		.ThenBy(p => p.PropertyName))
@@ -113,7 +113,7 @@ using Kistl.DalProvider.EF;
 	foreach (var cls in ctx.GetQuery<ObjectClass>().Where(c => c.BaseObjectClass == null)
 		.OrderBy(c => c.ClassName))
 	{
-		if(cls.HasSecurityRules(false))
+		if(cls.NeedsRightsTable())
 		{
 %>
 [assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "<%= Construct.SecurityRulesFKName(cls) %>", 

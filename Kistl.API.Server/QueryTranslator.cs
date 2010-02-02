@@ -363,50 +363,77 @@ namespace Kistl.API.Server
         #region SecuityFilter
         private Expression AddSecurityFilter(Expression e, InterfaceType ifType)
         {
-            if (!ifType.Type.IsIDataObject()) return e;
+            // _identity == null - privileged operations
+            // !IsIDataObject - no ACL's defined
+            if (_identity == null || !ifType.Type.IsIDataObject()) return e;
 
             // Case #1363: May return NULL during initialization
             var objClass = _metaDataResolver.GetObjectClass(ifType);
-            if (objClass == null || !objClass.HasAccessControlList() || _identity == null) return e;
+            if(objClass == null ) return e;
 
-            var type = ifType.ToImplementationType().Type;
-            var rights_type = Type.GetType(ifType.Type.FullName + "_Rights" + Kistl.API.Helper.ImplementationSuffix + ", " + type.Assembly.FullName);
+            // Only ACL's on Root classes are allowed
+            var rootClass = objClass.GetRootClass();
 
-            // .Where(o => o.Projekte_Rights.Count(r => r.Identity == 12) == 1)
+            // No AccessControlList - no need to filter
+            if (!rootClass.HasAccessControlList()) return e;
 
-            ParameterExpression pe_o = Expression.Parameter(type, "o");
-            ParameterExpression pe_r = Expression.Parameter(rights_type, "r");
+            // Identity is a Administrator - is alowed to read everything
+            if (_identity.IsAdmininistrator()) return e;
 
-            // r.Identity == 12
-            var eq_identity = Expression.Equal(
-                            Expression.PropertyOrField(pe_r, "Identity"),
-                            Expression.Constant(_identity.ID),
-                            false,
-                            typeof(int).GetMethod("op_Equality"));
+            if (rootClass.GetGroupAccessRights(_identity) != Kistl.App.Base.AccessRights.None)
+            {
+                // Identity has a group membership - no need to filter
+                return e;
+            }
+            else if (rootClass.NeedsRightsTable())
+            {
+                // original expression type
+                var type = ifType.ToImplementationType().Type;
 
-            // r => r.Identity == 12
-            var eq_identity_lambda = Expression.Lambda(eq_identity, pe_r);
+                var baseIfType = rootClass.GetDescribedInterfaceType();
+                var rights_type = Type.GetType(baseIfType.Type.FullName + "_Rights" + Kistl.API.Helper.ImplementationSuffix + ", " + type.Assembly.FullName, true);
 
-            // o.Projekte_Rights
-            var count_src = Expression.PropertyOrField(pe_o, "SecurityRightsCollection" + Kistl.API.Helper.ImplementationSuffix);
+                // .Where(o => o.Projekte_Rights.Count(r => r.Identity == 12) == 1)
+                ParameterExpression pe_o = Expression.Parameter(type, "o");
+                ParameterExpression pe_r = Expression.Parameter(rights_type, "r");
 
-            // o.Projekte_Rights.Count(r => r.Identity == 12)
-            var count = Expression.Call(typeof(System.Linq.Enumerable), "Count", new Type[] { rights_type },
-                count_src,
-                eq_identity_lambda);
+                // r.Identity == 12
+                var eq_identity = Expression.Equal(
+                                Expression.PropertyOrField(pe_r, "Identity"),
+                                Expression.Constant(_identity.ID),
+                                false,
+                                typeof(int).GetMethod("op_Equality"));
 
-            // o.Projekte_Rights.Count(r => r.Identity == 12) == 1
-            var eq_count = Expression.Equal(
-                            count,
-                            Expression.Constant(1),
-                            false,
-                            typeof(int).GetMethod("op_Equality"));
+                // r => r.Identity == 12
+                var eq_identity_lambda = Expression.Lambda(eq_identity, pe_r);
 
-            // (o => o.Projekte_Rights.Count(r => r.Identity == 12) == 1)
-            var filter = Expression.Lambda(eq_count, new ParameterExpression[] { pe_o });
+                // o.Projekte_Rights
+                var count_src = Expression.PropertyOrField(pe_o, "SecurityRightsCollection" + Kistl.API.Helper.ImplementationSuffix);
 
-            var result = Expression.Call(typeof(Queryable), "Where", new Type[] { type }, e, filter);
-            return result;
+                // o.Projekte_Rights.Count(r => r.Identity == 12)
+                var count = Expression.Call(typeof(System.Linq.Enumerable), "Count", new Type[] { rights_type },
+                    count_src,
+                    eq_identity_lambda);
+
+                // o.Projekte_Rights.Count(r => r.Identity == 12) == 1
+                var eq_count = Expression.Equal(
+                                count,
+                                Expression.Constant(1),
+                                false,
+                                typeof(int).GetMethod("op_Equality"));
+
+                // (o => o.Projekte_Rights.Count(r => r.Identity == 12) == 1)
+                var filter = Expression.Lambda(eq_count, new ParameterExpression[] { pe_o });
+
+                // e.Where(o => o.Projekte_Rights.Count(r => r.Identity == 12) == 1)
+                var result = Expression.Call(typeof(Queryable), "Where", new Type[] { type }, e, filter);
+                return result;
+            }
+            else
+            {
+                // No Group Membership, no rights table - no rights
+                throw new System.Security.SecurityException(string.Format("Identity has no rights to query '{0}'", ifType.Type.FullName));
+            }
         }
         #endregion
     }

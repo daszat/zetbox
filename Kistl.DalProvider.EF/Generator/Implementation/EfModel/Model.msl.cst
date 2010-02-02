@@ -26,7 +26,7 @@
 <% ApplyEntityTypeMapping(cls); %>
     </EntitySetMapping>
 <%
-		if(cls.HasSecurityRules(false))
+		if(cls.NeedsRightsTable())
 		{
 %>
     <EntitySetMapping Name="<%= Construct.SecurityRulesClassName(cls) %>">
@@ -207,7 +207,7 @@
 
     <!-- EntitySetMappings and AssociationSetMappings for object-struct CollectionEntrys -->
 <%
-    foreach(var prop in ctx.GetQuery<StructProperty>()
+    foreach(var prop in ctx.GetQuery<CompoundObjectProperty>()
         .Where(p => p.IsList)
         .OrderBy(p => p.ObjectClass.ClassName)
         .ThenBy(p => p.PropertyName))
