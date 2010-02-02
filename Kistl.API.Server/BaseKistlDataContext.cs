@@ -52,6 +52,18 @@ namespace Kistl.API.Server
         {
             if (obj == null) { throw new ArgumentNullException("obj"); }
 
+            // Do not only check in IKistlContext.Create for creation rights, also here
+            // Object might be created by SerializableType
+            if (obj is IDataObject && obj.ObjectState == DataObjectState.New)
+            {
+                var ifType = obj.GetInterfaceType();
+                ObjectClass cls = metaDataResolver.GetObjectClass(ifType).GetRootClass();
+                if (identity != null && cls.HasAccessControlList() && (cls.GetGroupAccessRights(identity) & AccessRights.Create) != AccessRights.Create)
+                {
+                    throw new System.Security.SecurityException(string.Format("The current identity has no rights to create an Object of type '{0}'", ifType.Type.FullName));
+                }
+            }
+
             // call Attach on Subitems
             obj.AttachToContext(this);
 

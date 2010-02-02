@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2010-02-02T13:14:50.72Z" xmlns="http://dasz.at/Kistl">
+<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2010-02-02T19:06:08.673Z" xmlns="http://dasz.at/Kistl">
   <KistlBase:Module ExportGuid="110acbc0-652a-4adc-9de5-8baabfcf3637">
     <KistlBase:ChangedOn>2010-02-01T16:07:00.49Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2010-02-01T15:23:35.247Z</KistlBase:CreatedOn>
@@ -1014,7 +1014,7 @@
     <KistlBase:TableName>EnumerationProperties</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="01a06aef-8fe4-4cb6-b348-ee4bcd11f5af">
-    <KistlBase:ChangedOn>2010-01-29T11:00:16.267Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2010-02-02T19:06:08.673Z</KistlBase:ChangedOn>
     <KistlBase:ClassName>Group</KistlBase:ClassName>
     <KistlBase:CreatedOn>2010-01-29T11:00:16.267Z</KistlBase:CreatedOn>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
@@ -1022,7 +1022,7 @@
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
     <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
-    <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
+    <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <KistlBase:TableName>Groups</KistlBase:TableName>
   </KistlBase:ObjectClass>
@@ -16688,6 +16688,36 @@
     <KistlBase:ConstrainedProperty>5545ba8a-3e89-4b22-bd66-c12f3622ace0</KistlBase:ConstrainedProperty>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.423Z</KistlBase:CreatedOn>
   </KistlBase:NotNullableConstraint>
+  <KistlBase:GroupMembership ExportGuid="ff0e2b1a-0e1e-49a2-90bb-391e880c04f3">
+    <KistlBase:ChangedOn>2010-02-02T18:09:26.913Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-02-02T18:09:26.913Z</KistlBase:CreatedOn>
+    <KistlBase:Description>Every one is allowed to create</KistlBase:Description>
+    <KistlBase:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</KistlBase:Module>
+    <KistlBase:Name>Create</KistlBase:Name>
+    <KistlBase:ObjectClass>885939e8-82e1-4fdf-b80e-5f612d5131d3</KistlBase:ObjectClass>
+    <KistlBase:Rights>8</KistlBase:Rights>
+    <KistlBase:Group>76d43cf2-4ddf-4a3a-9ad6-28cabfdddff1</KistlBase:Group>
+  </KistlBase:GroupMembership>
+  <KistlBase:GroupMembership ExportGuid="b96e9be2-c9dc-494c-8762-b1e0f43b33b2">
+    <KistlBase:ChangedOn>2010-02-02T18:13:20.37Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-02-02T18:13:20.37Z</KistlBase:CreatedOn>
+    <KistlBase:Description>Everyone is allowed to create</KistlBase:Description>
+    <KistlBase:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</KistlBase:Module>
+    <KistlBase:Name>Create</KistlBase:Name>
+    <KistlBase:ObjectClass>f6e11d1d-a832-413a-bf1d-5ecf5f7bc79d</KistlBase:ObjectClass>
+    <KistlBase:Rights>8</KistlBase:Rights>
+    <KistlBase:Group>76d43cf2-4ddf-4a3a-9ad6-28cabfdddff1</KistlBase:Group>
+  </KistlBase:GroupMembership>
+  <KistlBase:GroupMembership ExportGuid="b4abcf53-5464-4942-a36b-bbc124315df2">
+    <KistlBase:ChangedOn>2010-02-02T18:12:00.853Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-02-02T18:12:00.853Z</KistlBase:CreatedOn>
+    <KistlBase:Description>Everyone is allowed to create</KistlBase:Description>
+    <KistlBase:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</KistlBase:Module>
+    <KistlBase:Name>Create</KistlBase:Name>
+    <KistlBase:ObjectClass>3fbb42ca-a084-491d-9135-85ed24f1ef78</KistlBase:ObjectClass>
+    <KistlBase:Rights>8</KistlBase:Rights>
+    <KistlBase:Group>76d43cf2-4ddf-4a3a-9ad6-28cabfdddff1</KistlBase:Group>
+  </KistlBase:GroupMembership>
   <KistlBase:RoleMembership ExportGuid="2710dcb0-8e0f-43db-95c5-02e18c01f40f">
     <KistlBase:ChangedOn>2010-02-02T10:51:49.677Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2010-02-02T10:51:49.677Z</KistlBase:CreatedOn>

@@ -29,7 +29,7 @@ namespace Kistl.API.Server.Mocks
 
         public override DataObjectState ObjectState
         {
-            get { throw new NotImplementedException(); }
+            get { return DataObjectState.Unmodified; }
         }
 
         public int fk_BaseTestObjClass = -1;

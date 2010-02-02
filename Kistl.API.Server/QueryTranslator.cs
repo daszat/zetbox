@@ -380,7 +380,7 @@ namespace Kistl.API.Server
             // Identity is a Administrator - is alowed to read everything
             if (_identity.IsAdmininistrator()) return e;
 
-            if (rootClass.GetGroupAccessRights(_identity) != Kistl.App.Base.AccessRights.None)
+            if ((rootClass.GetGroupAccessRights(_identity) & Kistl.App.Base.AccessRights.Read) != Kistl.App.Base.AccessRights.Read)
             {
                 // Identity has a group membership - no need to filter
                 return e;
