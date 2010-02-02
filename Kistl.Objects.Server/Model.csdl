@@ -84,6 +84,15 @@
       <End Role="SupportedInterfaces" EntitySet="TypeRef" />
       <End Role="CollectionEntry" EntitySet="ControlKindClass_supports_TypeRef_RelationEntry" />
     </AssociationSet>
+    <EntitySet Name="Group_memberOf_Group_RelationEntry" EntityType="Model.Group_memberOf_Group_RelationEntry" />
+    <AssociationSet Name="FK_Group_memberOf_ParentGroup_A" Association="Model.FK_Group_memberOf_ParentGroup_A" >
+      <End Role="Group" EntitySet="Group" />
+      <End Role="CollectionEntry" EntitySet="Group_memberOf_Group_RelationEntry" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Group_memberOf_ParentGroup_B" Association="Model.FK_Group_memberOf_ParentGroup_B" >
+      <End Role="ParentGroup" EntitySet="Group" />
+      <End Role="CollectionEntry" EntitySet="Group_memberOf_Group_RelationEntry" />
+    </AssociationSet>
     <EntitySet Name="GroupExcercise_accomplished_by_Student_RelationEntry" EntityType="Model.GroupExcercise_accomplished_by_Student_RelationEntry" />
     <AssociationSet Name="FK_GroupExcercise_accomplished_by_Students_A" Association="Model.FK_GroupExcercise_accomplished_by_Students_A" >
       <End Role="GroupExcercise" EntitySet="GroupExcercise" />
@@ -360,10 +369,6 @@
     <AssociationSet Name="FK_Group_has_Module" Association="Model.FK_Group_has_Module" >
       <End Role="Group" EntitySet="Group" />
       <End Role="Module" EntitySet="Module" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Group_has_ParentGroup" Association="Model.FK_Group_has_ParentGroup" >
-      <End Role="Group" EntitySet="Group" />
-      <End Role="ParentGroup" EntitySet="Group" />
     </AssociationSet>
     <AssociationSet Name="FK_GroupExcercise_passes_Excercise" Association="Model.FK_GroupExcercise_passes_Excercise" >
       <End Role="GroupExcercise" EntitySet="GroupExcercise" />
@@ -992,9 +997,9 @@
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
     <NavigationProperty Name="ChildGroups__Implementation__"
-                        Relationship="Model.FK_Group_has_ParentGroup"
+                        Relationship="Model.FK_Group_memberOf_ParentGroup_B"
                         FromRole="ParentGroup"
-                        ToRole="Group" />
+                        ToRole="CollectionEntry" />
     <Property Name="ExportGuid" Type="Guid" Nullable="false" />
     <NavigationProperty Name="Member__Implementation__"
                         Relationship="Model.FK_Identities_memberOf_Groups_B"
@@ -1005,10 +1010,10 @@
                         FromRole="Group"
                         ToRole="Module" />
     <Property Name="Name" Type="String" Nullable="false" MaxLength="1000" />
-    <NavigationProperty Name="ParentGroup__Implementation__"
-                        Relationship="Model.FK_Group_has_ParentGroup"
+    <NavigationProperty Name="ParentGroups__Implementation__"
+                        Relationship="Model.FK_Group_memberOf_ParentGroup_A"
                         FromRole="Group"
-                        ToRole="ParentGroup" />
+                        ToRole="CollectionEntry" />
   </EntityType>
   <EntityType Name="GroupExcercise">
     <Key>
@@ -2027,6 +2032,49 @@
   </Association>
   
   <!--
+    Relation: FK_Group_memberOf_ParentGroup
+    A: ZeroOrMore Group as Group
+    B: ZeroOrMore Group as ParentGroup
+    Preferred Storage: Separate
+  -->
+  <EntityType Name="Group_memberOf_Group_RelationEntry" >
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+	<Property Name="ExportGuid" Type="Guid" Nullable="false" />
+	
+    
+    <!-- A -->
+    <NavigationProperty Name="A__Implementation__"
+                        Relationship="Model.FK_Group_memberOf_ParentGroup_A"
+                        FromRole="CollectionEntry"
+                        ToRole="Group" />
+
+    <!-- B -->
+    <NavigationProperty Name="B__Implementation__"
+                        Relationship="Model.FK_Group_memberOf_ParentGroup_B"
+                        FromRole="CollectionEntry"
+                        ToRole="ParentGroup" />
+  </EntityType>
+  <Association Name="FK_Group_memberOf_ParentGroup_A" >
+    <End Role="Group"
+         Type="Model.Group" 
+         Multiplicity="0..1" />
+    <End Role="CollectionEntry"
+         Type="Model.Group_memberOf_Group_RelationEntry"
+         Multiplicity="*" />
+  </Association>
+  <Association Name="FK_Group_memberOf_ParentGroup_B" >
+    <End Role="ParentGroup"
+         Type="Model.Group" 
+         Multiplicity="0..1" />
+    <End Role="CollectionEntry"
+         Type="Model.Group_memberOf_Group_RelationEntry"
+         Multiplicity="*" />
+  </Association>
+  
+  <!--
     Relation: FK_GroupExcercise_accomplished_by_Students
     A: ZeroOrMore GroupExcercise as GroupExcercise
     B: ZeroOrMore Student as Students
@@ -2923,14 +2971,6 @@
          Multiplicity="*" />
     <End Role="Module"
          Type="Model.Module" 
-         Multiplicity="0..1" />
-  </Association>
-  <Association Name="FK_Group_has_ParentGroup" >
-    <End Role="Group"
-         Type="Model.Group" 
-         Multiplicity="*" />
-    <End Role="ParentGroup"
-         Type="Model.Group" 
          Multiplicity="0..1" />
   </Association>
   <Association Name="FK_GroupExcercise_passes_Excercise" >

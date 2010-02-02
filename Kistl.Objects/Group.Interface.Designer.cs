@@ -40,9 +40,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// A Group can have a parent group
         /// </summary>
-		Kistl.App.Base.Group ParentGroup {
-			get;
-			set;
-		}
+
+        ICollection<Kistl.App.Base.Group> ParentGroups { get; }
     }
 }

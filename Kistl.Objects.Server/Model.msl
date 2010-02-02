@@ -930,6 +930,45 @@
     </AssociationSetMapping>
 
     <!--
+    Relation: FK_Group_memberOf_ParentGroup
+    A: ZeroOrMore Group as Group
+    B: ZeroOrMore Group as ParentGroup
+    Preferred Storage: Separate
+    -->
+    <EntitySetMapping Name="Group_memberOf_Group_RelationEntry">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Group_memberOf_Group_RelationEntry)">
+        <MappingFragment StoreEntitySet="Group_memberOf_Group_RelationEntry">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+		  <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <!-- A to CollectionEntry -->
+    <AssociationSetMapping Name="FK_Group_memberOf_ParentGroup_A"
+                           TypeName="Model.FK_Group_memberOf_ParentGroup_A"
+                           StoreEntitySet="Group_memberOf_Group_RelationEntry" >
+      <EndProperty Name="Group">
+        <ScalarProperty Name="ID" ColumnName="fk_Group"/>
+      </EndProperty>
+      <EndProperty Name="CollectionEntry">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_Group" IsNull="false"/>
+    </AssociationSetMapping>
+    <!-- B to CollectionEntry -->
+    <AssociationSetMapping Name="FK_Group_memberOf_ParentGroup_B"
+                           TypeName="Model.FK_Group_memberOf_ParentGroup_B"
+                           StoreEntitySet="Group_memberOf_Group_RelationEntry" >
+      <EndProperty Name="ParentGroup">
+        <ScalarProperty Name="ID" ColumnName="fk_ParentGroup"/>
+      </EndProperty>
+      <EndProperty Name="CollectionEntry">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_ParentGroup" IsNull="false"/>
+    </AssociationSetMapping>
+
+    <!--
     Relation: FK_GroupExcercise_accomplished_by_Students
     A: ZeroOrMore GroupExcercise as GroupExcercise
     B: ZeroOrMore Student as Students
@@ -2047,23 +2086,6 @@
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="fk_Module" IsNull="false"/>
-    </AssociationSetMapping>
-    <!--
-    Relation: FK_Group_has_ParentGroup
-    A: ZeroOrMore Group as Group
-    B: ZeroOrOne Group as ParentGroup
-    Preferred Storage: MergeIntoA
-    -->
-    <AssociationSetMapping Name="FK_Group_has_ParentGroup"
-                           TypeName="Model.FK_Group_has_ParentGroup"
-                           StoreEntitySet="Group" >
-      <EndProperty Name="ParentGroup">
-        <ScalarProperty Name="ID" ColumnName="fk_ParentGroup"/>
-      </EndProperty>
-      <EndProperty Name="Group">
-        <ScalarProperty Name="ID" ColumnName="ID"/>
-      </EndProperty>
-      <Condition ColumnName="fk_ParentGroup" IsNull="false"/>
     </AssociationSetMapping>
     <!--
     Relation: FK_GroupExcercise_passes_Excercise

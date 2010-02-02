@@ -61,14 +61,14 @@ namespace Kistl.App.Base
         /// 
         /// </summary>
     /*
-    Relation: FK_Group_has_ParentGroup
+    Relation: FK_Group_memberOf_ParentGroup
     A: ZeroOrMore Group as Group
-    B: ZeroOrOne Group as ParentGroup
-    Preferred Storage: MergeIntoA
+    B: ZeroOrMore Group as ParentGroup
+    Preferred Storage: Separate
     */
-        // object list property
-   		// Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.ObjectListProperty
-	    // implement the user-visible interface
+        // collection reference property
+		// Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.CollectionEntryListProperty
+        // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public ICollection<Kistl.App.Base.Group> ChildGroups
@@ -77,22 +77,23 @@ namespace Kistl.App.Base
             {
                 if (_ChildGroupsWrapper == null)
                 {
-                    _ChildGroupsWrapper = new EntityCollectionWrapper<Kistl.App.Base.Group, Kistl.App.Base.Group__Implementation__>(
-                            this.Context, ChildGroups__Implementation__);
+                    _ChildGroupsWrapper = new EntityRelationASideCollectionWrapper<Kistl.App.Base.Group, Kistl.App.Base.Group, Kistl.App.Base.Group_memberOf_Group_RelationEntry__Implementation__>(
+                            this,
+                            ChildGroups__Implementation__);
                 }
                 return _ChildGroupsWrapper;
             }
         }
         
-        [EdmRelationshipNavigationProperty("Model", "FK_Group_has_ParentGroup", "Group")]
-        public EntityCollection<Kistl.App.Base.Group__Implementation__> ChildGroups__Implementation__
+        [EdmRelationshipNavigationProperty("Model", "FK_Group_memberOf_ParentGroup_B", "CollectionEntry")]
+        public EntityCollection<Kistl.App.Base.Group_memberOf_Group_RelationEntry__Implementation__> ChildGroups__Implementation__
         {
             get
             {
                 var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<Kistl.App.Base.Group__Implementation__>(
-                        "Model.FK_Group_has_ParentGroup",
-                        "Group");
+                    .GetRelatedCollection<Kistl.App.Base.Group_memberOf_Group_RelationEntry__Implementation__>(
+                        "Model.FK_Group_memberOf_ParentGroup_B",
+                        "CollectionEntry");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)
                 {
@@ -101,8 +102,7 @@ namespace Kistl.App.Base
                 return c;
             }
         }
-        private EntityCollectionWrapper<Kistl.App.Base.Group, Kistl.App.Base.Group__Implementation__> _ChildGroupsWrapper;
-
+        private EntityRelationASideCollectionWrapper<Kistl.App.Base.Group, Kistl.App.Base.Group, Kistl.App.Base.Group_memberOf_Group_RelationEntry__Implementation__> _ChildGroupsWrapper;
 
 
         /// <summary>
@@ -363,92 +363,49 @@ namespace Kistl.App.Base
         /// A Group can have a parent group
         /// </summary>
     /*
-    Relation: FK_Group_has_ParentGroup
+    Relation: FK_Group_memberOf_ParentGroup
     A: ZeroOrMore Group as Group
-    B: ZeroOrOne Group as ParentGroup
-    Preferred Storage: MergeIntoA
+    B: ZeroOrMore Group as ParentGroup
+    Preferred Storage: Separate
     */
-        // object reference property
-   		// Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
+        // collection reference property
+		// Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.CollectionEntryListProperty
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Base.Group ParentGroup
+        public ICollection<Kistl.App.Base.Group> ParentGroups
         {
             get
             {
-                return ParentGroup__Implementation__;
-            }
-            set
-            {
-                // TODO: NotifyPropertyChanged()
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if(value != null && value.Context != this.Context) throw new WrongKistlContextException();
-                ParentGroup__Implementation__ = (Kistl.App.Base.Group__Implementation__)value;
+                if (_ParentGroupsWrapper == null)
+                {
+                    _ParentGroupsWrapper = new EntityRelationBSideCollectionWrapper<Kistl.App.Base.Group, Kistl.App.Base.Group, Kistl.App.Base.Group_memberOf_Group_RelationEntry__Implementation__>(
+                            this,
+                            ParentGroups__Implementation__);
+                }
+                return _ParentGroupsWrapper;
             }
         }
         
-        private int? _fk_ParentGroup;
-        private Guid? _fk_guid_ParentGroup = null;
-        // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_Group_has_ParentGroup", "ParentGroup")]
-        public Kistl.App.Base.Group__Implementation__ ParentGroup__Implementation__
+        [EdmRelationshipNavigationProperty("Model", "FK_Group_memberOf_ParentGroup_A", "CollectionEntry")]
+        public EntityCollection<Kistl.App.Base.Group_memberOf_Group_RelationEntry__Implementation__> ParentGroups__Implementation__
         {
             get
             {
-                EntityReference<Kistl.App.Base.Group__Implementation__> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Group__Implementation__>(
-                        "Model.FK_Group_has_ParentGroup",
-                        "ParentGroup");
+                var c = ((IEntityWithRelationships)(this)).RelationshipManager
+                    .GetRelatedCollection<Kistl.App.Base.Group_memberOf_Group_RelationEntry__Implementation__>(
+                        "Model.FK_Group_memberOf_ParentGroup_A",
+                        "CollectionEntry");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !r.IsLoaded)
+                    && !c.IsLoaded)
                 {
-                    r.Load(); 
-                    if(r.Value != null) r.Value.AttachToContext(this.Context);
+                    c.Load();
                 }
-                var __value = r.Value;
-				if(OnParentGroup_Getter != null)
-				{
-					var e = new PropertyGetterEventArgs<Kistl.App.Base.Group>(__value);
-					OnParentGroup_Getter(this, e);
-					__value = (Kistl.App.Base.Group__Implementation__)e.Result;
-				}
-                return __value;
+                return c;
             }
-            set
-            {
-                EntityReference<Kistl.App.Base.Group__Implementation__> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Group__Implementation__>(
-                        "Model.FK_Group_has_ParentGroup",
-                        "ParentGroup");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !r.IsLoaded)
-                {
-                    r.Load(); 
-                }
-                Kistl.App.Base.Group __oldValue = (Kistl.App.Base.Group)r.Value;
-                Kistl.App.Base.Group __newValue = (Kistl.App.Base.Group)value;
+        }
+        private EntityRelationBSideCollectionWrapper<Kistl.App.Base.Group, Kistl.App.Base.Group, Kistl.App.Base.Group_memberOf_Group_RelationEntry__Implementation__> _ParentGroupsWrapper;
 
-                if(OnParentGroup_PreSetter != null)
-                {
-					var e = new PropertyPreSetterEventArgs<Kistl.App.Base.Group>(__oldValue, __newValue);
-					OnParentGroup_PreSetter(this, e);
-					__newValue = e.Result;
-                }
-                r.Value = (Kistl.App.Base.Group__Implementation__)__newValue;
-                if(OnParentGroup_PostSetter != null)
-                {
-					var e = new PropertyPostSetterEventArgs<Kistl.App.Base.Group>(__oldValue, __newValue);
-					OnParentGroup_PostSetter(this, e);
-                }
-                                
-            }
-        }
-        
-        
-		public static event PropertyGetterHandler<Kistl.App.Base.Group, Kistl.App.Base.Group> OnParentGroup_Getter;
-		public static event PropertyPreSetterHandler<Kistl.App.Base.Group, Kistl.App.Base.Group> OnParentGroup_PreSetter;
-		public static event PropertyPostSetterHandler<Kistl.App.Base.Group, Kistl.App.Base.Group> OnParentGroup_PostSetter;
 
 		public override InterfaceType GetInterfaceType()
 		{
@@ -465,7 +422,6 @@ namespace Kistl.App.Base
 			me.ExportGuid = other.ExportGuid;
 			me.Name = other.Name;
 			this._fk_Module = otherImpl._fk_Module;
-			this._fk_ParentGroup = otherImpl._fk_ParentGroup;
 		}
 
         // tail template
@@ -567,11 +523,11 @@ namespace Kistl.App.Base
 					
 					return String.Join("; ", errors);
 				}
-				case "ParentGroup":
+				case "ParentGroups":
 				{
 					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("257a1f6e-86cf-45a0-bce5-f75cd901c28d")).Constraints
-						.Where(c => !c.IsValid(this, this.ParentGroup))
-						.Select(c => c.GetErrorText(this, this.ParentGroup))
+						.Where(c => !c.IsValid(this, this.ParentGroups))
+						.Select(c => c.GetErrorText(this, this.ParentGroups))
 						.ToArray();
 					
 					return String.Join("; ", errors);
@@ -594,13 +550,6 @@ namespace Kistl.App.Base
 				Module__Implementation__ = (Kistl.App.Base.Module__Implementation__)Context.Find<Kistl.App.Base.Module>(_fk_Module.Value);
 			else
 				Module__Implementation__ = null;
-
-			if (_fk_guid_ParentGroup.HasValue)
-				ParentGroup__Implementation__ = (Kistl.App.Base.Group__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.Group>(_fk_guid_ParentGroup.Value);
-			else if (_fk_ParentGroup.HasValue)
-				ParentGroup__Implementation__ = (Kistl.App.Base.Group__Implementation__)Context.Find<Kistl.App.Base.Group>(_fk_ParentGroup.Value);
-			else
-				ParentGroup__Implementation__ = null;
 		}
 #region Serializer
 
@@ -615,7 +564,6 @@ namespace Kistl.App.Base
             }
             BinarySerializer.ToStream(Module != null ? Module.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._Name, binStream);
-            BinarySerializer.ToStream(ParentGroup != null ? ParentGroup.ID : (int?)null, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
@@ -628,7 +576,6 @@ namespace Kistl.App.Base
             }
             BinarySerializer.FromStream(out this._fk_Module, binStream);
             BinarySerializer.FromStream(out this._Name, binStream);
-            BinarySerializer.FromStream(out this._fk_ParentGroup, binStream);
         }
 
         public override void ToStream(System.Xml.XmlWriter xml)
@@ -641,7 +588,6 @@ namespace Kistl.App.Base
             }
             XmlStreamer.ToStream(Module != null ? Module.ID : (int?)null, xml, "Module", "Kistl.App.Base");
             XmlStreamer.ToStream(this._Name, xml, "Name", "Kistl.App.Base");
-            XmlStreamer.ToStream(ParentGroup != null ? ParentGroup.ID : (int?)null, xml, "ParentGroup", "Kistl.App.Base");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
@@ -654,7 +600,6 @@ namespace Kistl.App.Base
             }
             XmlStreamer.FromStream(ref this._fk_Module, xml, "Module", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._Name, xml, "Name", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._fk_ParentGroup, xml, "ParentGroup", "Kistl.App.Base");
         }
 
         public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
@@ -664,7 +609,6 @@ namespace Kistl.App.Base
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(Module != null ? Module.ExportGuid : (Guid?)null, xml, "Module", "Kistl.App.Base");
     
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._Name, xml, "Name", "Kistl.App.Base");
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(ParentGroup != null ? ParentGroup.ExportGuid : (Guid?)null, xml, "ParentGroup", "Kistl.App.Base");
         }
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
@@ -673,7 +617,6 @@ namespace Kistl.App.Base
             this._isExportGuidSet = true;
             XmlStreamer.FromStream(ref this._fk_guid_Module, xml, "Module", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._Name, xml, "Name", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._fk_guid_ParentGroup, xml, "ParentGroup", "Kistl.App.Base");
         }
 
 #endregion

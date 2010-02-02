@@ -584,19 +584,22 @@ using Kistl.DalProvider.EF;
 
 
 	/*
-    Relation: FK_Group_has_ParentGroup
+    Relation: FK_Group_memberOf_ParentGroup
     A: ZeroOrMore Group as Group
-    B: ZeroOrOne Group as ParentGroup
-    Preferred Storage: MergeIntoA
+    B: ZeroOrMore Group as ParentGroup
+    Preferred Storage: Separate
 	*/
 
-// basic association
-[assembly: EdmRelationship(
-    "Model", "FK_Group_has_ParentGroup",
-    "Group", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.Group__Implementation__),
-    "ParentGroup", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Group__Implementation__)
+// The association from A to the CollectionEntry
+[assembly: EdmRelationship("Model", "FK_Group_memberOf_ParentGroup_A",
+    "Group", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Group__Implementation__),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.Group_memberOf_Group_RelationEntry__Implementation__)
     )]
-
+// The association from B to the CollectionEntry
+[assembly: EdmRelationship("Model", "FK_Group_memberOf_ParentGroup_B",
+    "ParentGroup", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Group__Implementation__),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.Group_memberOf_Group_RelationEntry__Implementation__)
+    )]
 
 	/*
     Relation: FK_GroupExcercise_accomplished_by_Students

@@ -424,6 +424,22 @@
     </AssociationSet>
     
     <!-- 
+    Relation: FK_Group_memberOf_ParentGroup
+    A: ZeroOrMore Group as Group
+    B: ZeroOrMore Group as ParentGroup
+    Preferred Storage: Separate
+    -->
+    <EntitySet Name="Group_memberOf_Group_RelationEntry" EntityType="Model.Store.Group_memberOf_Group_RelationEntry" Table="Group_memberOf_ParentGroup" />
+    <AssociationSet Name="FK_Group_memberOf_ParentGroup_A" Association="Model.Store.FK_Group_memberOf_ParentGroup_A" >
+      <End Role="Group" EntitySet="Group" />
+      <End Role="CollectionEntry" EntitySet="Group_memberOf_Group_RelationEntry" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Group_memberOf_ParentGroup_B" Association="Model.Store.FK_Group_memberOf_ParentGroup_B" >
+      <End Role="CollectionEntry" EntitySet="Group_memberOf_Group_RelationEntry" />
+      <End Role="ParentGroup" EntitySet="Group" />
+    </AssociationSet>
+    
+    <!-- 
     Relation: FK_GroupExcercise_accomplished_by_Students
     A: ZeroOrMore GroupExcercise as GroupExcercise
     B: ZeroOrMore Student as Students
@@ -777,10 +793,6 @@
     <AssociationSet Name="FK_Group_has_Module" Association="Model.Store.FK_Group_has_Module" >
       <End Role="Group" EntitySet="Group" />
       <End Role="Module" EntitySet="Module" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Group_has_ParentGroup" Association="Model.Store.FK_Group_has_ParentGroup" >
-      <End Role="Group" EntitySet="Group" />
-      <End Role="ParentGroup" EntitySet="Group" />
     </AssociationSet>
     <AssociationSet Name="FK_GroupExcercise_passes_Excercise" Association="Model.Store.FK_GroupExcercise_passes_Excercise" >
       <End Role="GroupExcercise" EntitySet="GroupExcercise" />
@@ -1477,7 +1489,6 @@
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="fk_Module" Type="int" />
-    <Property Name="fk_ParentGroup" Type="int" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
     <Property Name="Name" Type="nvarchar" MaxLength="1000" Nullable="false" />
   </EntityType>
@@ -2234,6 +2245,45 @@
       </Principal>
       <Dependent Role="CollectionEntry">
         <PropertyRef Name="fk_SupportedInterfaces" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+	
+  <EntityType Name="Group_memberOf_Group_RelationEntry">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+	<Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="fk_Group" Type="int" Nullable="true" />
+    <Property Name="fk_ParentGroup" Type="int" Nullable="true" />
+  </EntityType>
+
+  <!-- A to CollectionEntry -->
+  <Association Name="FK_Group_memberOf_ParentGroup_A">
+    <End Role="Group" Type="Model.Store.Group" Multiplicity="0..1" />
+    <End Role="CollectionEntry" Type="Model.Store.Group_memberOf_Group_RelationEntry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Group">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CollectionEntry">
+        <PropertyRef Name="fk_Group" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+  <!-- B to CollectionEntry -->
+  <Association Name="FK_Group_memberOf_ParentGroup_B">
+    <End Role="ParentGroup" Type="Model.Store.Group" Multiplicity="0..1" />
+    <End Role="CollectionEntry" Type="Model.Store.Group_memberOf_Group_RelationEntry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ParentGroup">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CollectionEntry">
+        <PropertyRef Name="fk_ParentGroup" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -3245,20 +3295,6 @@
       </Principal>
       <Dependent Role="Group">
         <PropertyRef Name="fk_Module" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-
-  <Association Name="FK_Group_has_ParentGroup">
-    <End Role="ParentGroup" Type="Model.Store.Group" Multiplicity="0..1" />
-    <End Role="Group" Type="Model.Store.Group" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ParentGroup">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="Group">
-        <PropertyRef Name="fk_ParentGroup" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
