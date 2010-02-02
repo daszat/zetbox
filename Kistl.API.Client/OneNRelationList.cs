@@ -61,7 +61,11 @@ namespace Kistl.API.Client
             if (item == null) throw new ArgumentNullException("item", "Cannot add a NULL Object to this collection");
             if (_parent.Context != item.Context) throw new WrongKistlContextException();
             collection.Insert(index, item);
-            SetPointerProperty(item, index);
+            SetPointerProperty(item);
+            if (item.HasProperty(_posProperty))
+            {
+                Kistl.API.Helper.FixIndices(collection, GetPosition, SetPosition);
+            }
             OnItemAdded(item);
         }
 
@@ -93,20 +97,26 @@ namespace Kistl.API.Client
             OnCollectionReset();
         }
 
-        private void SetPointerProperty(T item, int index)
+        private int? GetPosition(T item)
+        {
+            return item.GetPropertyValue<int?>(_posProperty);
+        }
+
+        private void SetPointerProperty(T item)
         {
             if (item.GetPrivateFieldValue<int?>("_fk_" + _propertyName) != _parent.ID)
             {
                 (item as BaseClientDataObject).UpdateParent(_propertyName, _parent.ID);
             }
+        }
+
+        private void SetPosition(T item, int index)
+        {
             // TODO: Optimize in Generator
             // Sets the position Property for a 1:n Relation
             // eg. Method 1-n Parameter
             // Sets Parameter.Method__Position__
-            if (item.HasProperty(_posProperty))
-            {
-                item.SetPropertyValue<int?>(_posProperty, index);
-            }
+            item.SetPropertyValue<int?>(_posProperty, index);
         }
 
         private void ClearPointerProperty(T item)

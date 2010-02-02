@@ -8,7 +8,7 @@ namespace Kistl.API.Client.Mocks.OneNLists
     class OneSide : IOneSide
     {
         private static int _maxId = 0;
-        
+
         public static int NextId()
         {
             _maxId += 1;

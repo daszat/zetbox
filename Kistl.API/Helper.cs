@@ -90,6 +90,30 @@ namespace Kistl.API
             }
             return sb.ToString();
         }
+
+        /// <summary>
+        /// Assure that all indices are strictly monotonous rising (i.e. n.Index &lt; (n+1).Index) according to their order in <paramref name="orderedItems"/>
+        /// </summary>
+        public static void FixIndices<TItem>(List<TItem> orderedItems, Func<TItem, int?> getIndex, Action<TItem, int> setIndex)
+        {
+            if (orderedItems == null) { throw new ArgumentNullException("orderedItems"); }
+            if (getIndex == null) { throw new ArgumentNullException("getIndex"); }
+            if (setIndex == null) { throw new ArgumentNullException("setIndex"); }
+
+            int maxIdx = -1;
+            for (int i = 0; i < orderedItems.Count; i++)
+            {
+                var item = orderedItems[i];
+                int? idx = getIndex(item);
+                if (!idx.HasValue || idx <= maxIdx || idx == Kistl.API.Helper.LASTINDEXPOSITION)
+                {
+                    // TODO: try to space out items better
+                    idx = maxIdx + 1;
+                    setIndex(item, idx.Value);
+                }
+                maxIdx = idx.Value;
+            }
+        }
     }
 
     public static class TypeExtensions
@@ -119,7 +143,7 @@ namespace Kistl.API
         public static bool IsIExportableInternal(this Type type)
         {
             return typeof(IExportableInternal).IsAssignableFrom(type);
-        }        
+        }
     }
 
     /// <summary>

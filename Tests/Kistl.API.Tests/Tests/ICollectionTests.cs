@@ -47,8 +47,7 @@ namespace Kistl.API.Tests
         protected abstract TItem NewItem();
 
         protected List<TItem> initialItems;
-        protected ICollection collection;
-        protected TCollection originalCollection;
+        protected TCollection collection;
 
         /// <summary>
         /// Create the actual collection from the specified items

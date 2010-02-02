@@ -21,7 +21,7 @@ namespace Kistl.API.Client.Tests
     [TestFixture(10)]
     [TestFixture(50)]
     public class OneNRelationTests
-        : ICollectionTests<OneNRelationList<INSide>, INSide>
+        : IListTests<OneNRelationList<INSide>, INSide>
     {
         public OneNRelationTests(int items)
             : base(items) { }
@@ -31,7 +31,8 @@ namespace Kistl.API.Client.Tests
 
         protected override INSide NewItem()
         {
-            return new NSide() { Description = "item#" + NewItemNumber() };
+            var id = NewItemNumber();
+            return new NSide() { ID = id, Description = "item#" + id };
         }
 
         protected override OneNRelationList<INSide> CreateCollection(List<INSide> items)
@@ -49,16 +50,18 @@ namespace Kistl.API.Client.Tests
         protected override void AssertInvariants(List<INSide> expectedItems)
         {
             base.AssertInvariants(expectedItems);
+
             // we also expect the collection to be stable, i.e. not change the order of the items
             Assert.That(collection, Is.EquivalentTo(expectedItems));
 
             foreach (var expected in expectedItems.Cast<NSide>())
             {
-                Assert.That(expected.OneSide, Is.SameAs(obj));
+                //Assert.That(expected.OneSide, Is.SameAs(obj));
+                Assert.That(expected.LastParentId, Is.EqualTo(obj.ID));
                 Assert.That(expected.OneSide_pos, Is.Not.Null);
             }
 
-            Assert.That(expectedItems.OfType<NSide>().Select(ns => ns.OneSide_pos), Is.Ordered);
+            Assert.That(collection.OfType<NSide>().Select(ns => ns.OneSide_pos).ToArray(), Is.Ordered);
         }
     }
 }

@@ -35,6 +35,8 @@ namespace Kistl.API.Client.Mocks.OneNLists
             }
         }
 
+        public int? LastParentId { get { return _fk_OneSide; } }
+
         public string Description { get; set; }
 
         public override void UpdateParent(string propertyName, int? id)

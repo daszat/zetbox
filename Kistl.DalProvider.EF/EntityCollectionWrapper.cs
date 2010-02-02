@@ -175,22 +175,11 @@ namespace Kistl.DalProvider.EF
         /// </summary>
         private void FixIndices()
         {
-            int maxIdx = -1;
-            for (int i = 0; i < _orderedItems.Count; i++)
-            {
-                var item = _orderedItems[i];
-                int? idx = GetIndexProperty(item);
-                if (!idx.HasValue || idx <= maxIdx || idx == Kistl.API.Helper.LASTINDEXPOSITION)
-                {
-                    // TODO: try to space out items better
-                    idx = maxIdx + 1;
-                    UpdateIndexProperty(item, idx);
-                }
-                maxIdx = idx.Value;
-            }
+            Kistl.API.Helper.FixIndices<TImpl>(_orderedItems, GetIndexProperty, (item, i) => UpdateIndexProperty(item, i));
         }
 
         #region Index Management
+
         protected void UpdateIndexProperty(TInterface item, int? index)
         {
             // Sets the position Property for a 1:n Relation

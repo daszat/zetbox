@@ -89,7 +89,8 @@
     <Compile Include="Tests\HelperTest.cs" />
     <Compile Include="Tests\ExpressionTreeVisitorTests.cs" />
     <Compile Include="Tests\ICollectionTests.cs" />
-    <Compile Include="Tests\ICollectionTestsBaseline.cs" />
+    <Compile Include="Tests\IListTestsBaseline.cs" />
+    <Compile Include="Tests\IListTests.cs" />
     <Compile Include="Tests\KistlConfigTests.cs" />
     <Compile Include="Tests\ExpressionFilterTest.cs" />
     <Compile Include="Tests\ExtensionHelpersTest.cs" />
