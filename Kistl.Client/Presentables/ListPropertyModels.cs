@@ -34,6 +34,18 @@ namespace Kistl.Client.Presentables
         void AddItem(TElement item);
 
         /// <summary>
+        /// Moves the given item one item up in the list. Triggers <see cref="INotifyCollectionChanged.CollectionChanged"/>
+        /// on the underlying <see cref="IReadOnlyValueModel{TValue}.Value"/> property when the change has propagated.
+        /// </summary>
+        void MoveItemUp(TElement item);
+
+        /// <summary>
+        /// Moves the given item one item down in the list. Triggers <see cref="INotifyCollectionChanged.CollectionChanged"/>
+        /// on the underlying <see cref="IReadOnlyValueModel{TValue}.Value"/> property when the change has propagated.
+        /// </summary>
+        void MoveItemDown(TElement item);
+
+        /// <summary>
         /// Remove the given item from the underlying value. Triggers <see cref="INotifyCollectionChanged.CollectionChanged"/>
         /// on the underlying <see cref="IReadOnlyValueModel{TValue}.Value"/> property when the change has propagated.
         /// </summary>
@@ -136,6 +148,16 @@ namespace Kistl.Client.Presentables
             Object.AddToCollectionQuick(Property.PropertyName, GetItem(mdl));
         }
 
+        public void MoveItemUp(TElementModel item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void MoveItemDown(TElementModel item)
+        {
+            throw new NotImplementedException();
+        }
+
         public void RemoveItem(TElementModel mdl)
         {
             Object.RemoveFromCollectionQuick(Property.PropertyName, GetItem(mdl));
@@ -230,6 +252,16 @@ namespace Kistl.Client.Presentables
                 UpdatePropertyValue();
                 throw;
             }
+        }
+
+        public void MoveItemUp(string item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void MoveItemDown(string item)
+        {
+            throw new NotImplementedException();
         }
 
         public void RemoveItem(string item)

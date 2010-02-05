@@ -20,6 +20,8 @@ namespace Kistl.Client.Presentables
         : PropertyModel<IList<DataObjectModel>>, IValueListModel<DataObjectModel>
     {
         private readonly ObjectReferenceProperty _property;
+        private readonly ICollection _collectionWrapper;
+        private readonly IList _listWrapper;
 
         public ObjectListModel(
             IGuiApplicationContext appCtx, IKistlContext dataCtx,
@@ -29,7 +31,15 @@ namespace Kistl.Client.Presentables
             if (!prop.IsList()) { throw new ArgumentOutOfRangeException("prop", "ObjectReferenceProperty must be a list"); }
 
             _property = prop;
-
+            _collectionWrapper = Object.GetPropertyValue<ICollection>(Property.PropertyName);
+            if (_property.RelationEnd.HasPersistentOrder)
+            {
+                _listWrapper = (IList)_collectionWrapper;
+            }
+            else
+            {
+                _listWrapper = null;
+            }
             ReferencedClass = _property.GetReferencedObjectClass();
         }
 
@@ -229,6 +239,14 @@ namespace Kistl.Client.Presentables
                             SelectedItem = chosen;
                         }
                     })), true);
+        }
+
+        public void MoveItemUp(DataObjectModel item)
+        {
+        }
+
+        public void MoveItemDown(DataObjectModel item)
+        {
         }
 
         public void RemoveItem(DataObjectModel item)

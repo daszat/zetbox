@@ -17,8 +17,8 @@ namespace Kistl.Client.WPF.View
 
     using Kistl.Client.GUI;
     using Kistl.Client.Presentables;
-using Kistl.Client.WPF.Commands;
-    
+    using Kistl.Client.WPF.Commands;
+
     /// <summary>
     /// Interaction logic for DataObjectListView.xaml
     /// </summary>
@@ -30,17 +30,30 @@ using Kistl.Client.WPF.Commands;
             InitializeComponent();
         }
 
-        //private RelayCommand _moveUpCommand;
-        //public System.Windows.Input.ICommand MoveUpCommand
-        //{
-        //    get
-        //    {
-        //        if (_moveUpCommand == null)
-        //        {
-        //            _moveUpCommand = new RelayCommand(
-        //        }
-        //    }
-        //}
+        private RelayCommand _moveUpCommand;
+        public System.Windows.Input.ICommand MoveUpCommand
+        {
+            get
+            {
+                if (_moveUpCommand == null)
+                {
+                    _moveUpCommand = new RelayCommand(param =>
+                    {
+                        var model = (ObjectListModel)DataContext;
+                        if (model.SelectedItem != null)
+                        {
+                            model.MoveItemUp(model.SelectedItem);
+                        }
+                    },
+                    param =>
+                    {
+                        var model = (ObjectListModel)DataContext;
+                        return model.SelectedItem != null;
+                    });
+                }
+                return _moveUpCommand;
+            }
+        }
 
         private void AddNewHandler(object sender, RoutedEventArgs e)
         {
@@ -87,7 +100,7 @@ using Kistl.Client.WPF.Commands;
             {
                 model.ActivateItem(model.SelectedItem, true);
             }
-        }        
+        }
 
         private void RefreshGridView(ObjectListModel model)
         {
@@ -98,17 +111,17 @@ using Kistl.Client.WPF.Commands;
             {
                 view.Columns.Add(new GridViewColumn() { CellTemplate = (DataTemplate)FindResource("iconCellTemplate") });
             }
-            
+
             if (cfg.ShowId)
             {
                 view.Columns.Add(new GridViewColumn() { CellTemplate = (DataTemplate)FindResource("idCellTemplate"), Header = "ID" });
             }
-            
+
             if (cfg.ShowName)
             {
                 view.Columns.Add(new GridViewColumn() { CellTemplate = (DataTemplate)FindResource("nameCellTemplate"), Header = "Name" });
             }
-            
+
             foreach (var desc in cfg.Columns)
             {
                 // TODO: use default controls after moving labeling to infrastructure
