@@ -38,19 +38,15 @@ namespace Kistl.API.Tests
         //}
 
         [Test]
-        [ExpectedException(typeof(FileNotFoundException))]
         public void AssemblyResolve()
         {
-            Assembly a = Assembly.Load("test");
-            Assert.That(a, Is.Null);
+        	Assert.That(() => Assembly.Load("test"), Throws.InstanceOf<FileNotFoundException>());
         }
 
         [Test]
-        [ExpectedException(typeof(FileNotFoundException))]
         public void AssemblyResolveReflection()
         {
-            Assembly a = Assembly.ReflectionOnlyLoad("test");
-            Assert.That(a, Is.Null);
+        	Assert.That(() => Assembly.ReflectionOnlyLoad("test"), Throws.InstanceOf<FileNotFoundException>());
         }
     }
 }

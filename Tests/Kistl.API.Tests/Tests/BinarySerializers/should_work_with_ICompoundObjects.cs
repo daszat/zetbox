@@ -11,10 +11,9 @@ using NUnit.Framework;
 
 namespace Kistl.API.Tests.BinarySerializers
 {
-    [TestFixture(typeof(TestCompoundObject__Implementation__))]
-    public sealed class should_work_with_MockedCompoundObjects<T>
-        : Kistl.API.AbstractConsumerTests.BinarySerializers.should_work_with_ICompoundObjects<T>
-        where T : class, ICompoundObject, new()
+    [TestFixture]
+    public sealed class should_work_with_MockedCompoundObjects
+        : Kistl.API.AbstractConsumerTests.BinarySerializers.should_work_with_ICompoundObjects<TestCompoundObject__Implementation__>
     {
     }
 }

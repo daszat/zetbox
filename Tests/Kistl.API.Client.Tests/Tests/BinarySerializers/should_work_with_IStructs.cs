@@ -23,10 +23,9 @@ namespace Kistl.API.Client.Tests.BinarySerializers
         }
     }
 
-    [TestFixture(typeof(CompoundObjectMock__Implementation__))]
-    public class should_work_with_BaseClientCompoundObjects<T>
-        : Kistl.API.AbstractConsumerTests.BinarySerializers.should_work_with_ICompoundObjects<T>
-        where T : class, ICompoundObject, new()
+    [TestFixture]
+    public class should_work_with_BaseClientCompoundObjects
+        : Kistl.API.AbstractConsumerTests.BinarySerializers.should_work_with_ICompoundObjects<CompoundObjectMock__Implementation__>
     {
     }
 }
