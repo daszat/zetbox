@@ -57,9 +57,7 @@ namespace Kistl.API.Utils.Tests
         public void Exceptions()
         {
             object p = null;
-            Utils.AssertException(typeof(ArgumentNullException),
-                    "Value cannot be null.\r\nParameter name: prototype",
-                    p, v => { new DefaultOption(null, null); });
+            Assert.That( () => new DefaultOption(null, null), Throws.InstanceOf<ArgumentNullException>());
             Utils.AssertException(typeof(ArgumentException),
                     "Cannot be the empty string.\r\nParameter name: prototype",
                     p, v => { new DefaultOption("", null); });

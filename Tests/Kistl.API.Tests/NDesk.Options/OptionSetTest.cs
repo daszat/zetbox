@@ -239,9 +239,7 @@ namespace Kistl.API.Utils.Tests
             Utils.AssertException(null, null,
                     p, v => { v.Parse(_("-a", "-b")); });
             Assert.AreEqual(a, "-b");
-            Utils.AssertException(typeof(ArgumentNullException),
-                    "Value cannot be null.\r\nParameter name: item",
-                    p, v => { v.Add(null); });
+            Assert.That(() => p.Add(null), Throws.InstanceOf<ArgumentNullException>());
 
             // bad type
             Utils.AssertException(typeof(OptionException),
@@ -256,12 +254,8 @@ namespace Kistl.API.Utils.Tests
                     "Cannot bundle unregistered option '-z'.",
                     p, v => { v.Parse(_("-cz", "extra")); });
 
-            Utils.AssertException(typeof(ArgumentNullException),
-                    "Value cannot be null.\r\nParameter name: action",
-                    p, v => { v.Add("foo", (Action<string>)null); });
-            Utils.AssertException(typeof(ArgumentException),
-                    "Cannot provide maxValueCount of 2 for OptionValueType.None.\r\nParameter name: maxValueCount",
-                    p, v => { v.Add("foo", (k, val) => {/* ignore */}); });
+            Assert.That(()=>p.Add("foo", (Action<string>)null), Throws.InstanceOf<ArgumentNullException>());
+            Assert.That(()=>p.Add("foo", (k, val) => {/* ignore */}), Throws.ArgumentException);
         }
 
         [Test]
@@ -546,9 +540,7 @@ namespace Kistl.API.Utils.Tests
 
             Utils.AssertException(typeof(ArgumentException), "prototypes must be null!",
                     p, v => { v.Add("N|NUM=", (int n) => { }); });
-            Utils.AssertException(typeof(ArgumentNullException),
-                    "Value cannot be null.\r\nParameter name: key",
-                    p, v => { var tmp = v[null]; });
+            Assert.That(() => { var ignore = p[null]; } , Throws.InstanceOf<ArgumentNullException>());
         }
 
         [Test]

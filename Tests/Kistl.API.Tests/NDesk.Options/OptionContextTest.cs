@@ -46,9 +46,7 @@ namespace Kistl.API.Utils.Tests
                     "OptionContext.Option is null.",
                     c, v => { string ignore = v.OptionValues[0]; });
             c.Option = p[0];
-            Utils.AssertException(typeof(ArgumentOutOfRangeException),
-                    "Specified argument was out of the range of valid values.\r\nParameter name: index",
-                    c, v => { string ignore = v.OptionValues[2]; });
+            Assert.That (()=>c.OptionValues[2], Throws.InstanceOf<ArgumentOutOfRangeException>());
             c.OptionName = "-a";
             Utils.AssertException(typeof(OptionException),
                     "Missing required value for option '-a'.",
