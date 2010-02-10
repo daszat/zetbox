@@ -99,7 +99,7 @@ namespace Kistl.API.Utils
             {
                 return (IList<T>)potentialList;
             }
-            else
+            else if (potentialList is IList)
             {
                 var elementTypes = potentialList.GetType().FindElementTypes().Where(t => typeof(T).IsAssignableFrom(t)).ToArray();
 
@@ -116,7 +116,7 @@ namespace Kistl.API.Utils
                 {
                     return (IList<T>)WrapAsListReflectionHelper(elementTypes.Single(), typeof(T), potentialList);
                 }
-                else if (potentialList is IList)
+                else
                 {
                     return new CastingListWrapper<T>((IList)potentialList);
                 }

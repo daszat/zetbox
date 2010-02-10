@@ -243,10 +243,26 @@ namespace Kistl.Client.Presentables
 
         public void MoveItemUp(DataObjectModel item)
         {
+            if (item == null) { return; }
+            
+            var idx = _listWrapper.IndexOf(item.Object);
+            if (idx > 0)
+            {
+                _listWrapper.RemoveAt(idx);
+                _listWrapper.Insert(idx - 1, item.Object);
+            }
         }
 
         public void MoveItemDown(DataObjectModel item)
         {
+            if (item == null) { return; }
+
+            var idx = _listWrapper.IndexOf(item.Object);
+            if (idx != -1 && idx + 1 < _listWrapper.Count )
+            {
+                _listWrapper.RemoveAt(idx);
+                _listWrapper.Insert(idx + 1, item.Object);
+            }
         }
 
         public void RemoveItem(DataObjectModel item)
