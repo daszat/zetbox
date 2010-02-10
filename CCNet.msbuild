@@ -7,15 +7,13 @@
     <Message Importance="high" Text="Create temp dir for database backup" />
     <MakeDir Directories="c:\temp" />
 
-    <Message Importance="high" Text="cleaning solutions" />
-    <MSBuild Projects="Libs\ArebisCGen\CGen.sln" Targets="Clean" />
+    <Message Importance="high" Text="cleaning solution" />
     <MSBuild Projects="Kistl.Complete.sln" Targets="Clean" />
 
     <Message Importance="high" Text="drop database contents" />
     <Exec Command="osql -S .\sqlexpress -E -d Kistl -i Kistl.Server\Database\Scripts\DropTables.sql" />
 
     <Message Importance="high" Text="rebuild entire solution" />
-    <MSBuild Projects="Libs\ArebisCGen\CGen.sln" Targets="Rebuild" Properties="Configuration=Release" />
     <MSBuild Projects="Kistl.Complete.sln" Targets="Rebuild" />
 
     <Message Importance="high" Text="update schema from xml" />

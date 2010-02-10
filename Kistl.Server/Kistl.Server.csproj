@@ -52,11 +52,11 @@
   <ItemGroup>
     <Reference Include="Arebis.CodeGeneration, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\ArebisCGen\Arebis.CodeGenerator\bin\Release\Arebis.CodeGeneration.dll</HintPath>
+      <HintPath>$(AREBISROOT)\Arebis.CodeGeneration.dll</HintPath>
     </Reference>
     <Reference Include="Arebis.CodeGenerator, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\ArebisCGen\Arebis.CodeGenerator\bin\Release\Arebis.CodeGenerator.dll</HintPath>
+      <HintPath>$(AREBISROOT)\Arebis.CodeGenerator.dll</HintPath>
     </Reference>
     <Reference Include="Autofac, Version=1.4.5.676, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -731,7 +731,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <Import Project="$(ArebisMsBuildPath)\ArebisGenTask.targets" />
+  <Import Project="$(AREBISROOT)\ArebisGenTask.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
