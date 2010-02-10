@@ -324,7 +324,7 @@ namespace Kistl.Server.SchemaManagement
             CheckColumn(tblName, fkAName, System.Data.DbType.Int32, 0, false);
             if (rel.NeedsPositionStorage(RelationEndRole.A))
             {
-                CheckColumn(tblName, fkAIndex, System.Data.DbType.Int32, 0, false);
+                CheckColumn(tblName, fkAIndex, System.Data.DbType.Int32, 0, true);
                 if (repair)
                 {
                     // TODO: Call case
@@ -342,7 +342,7 @@ namespace Kistl.Server.SchemaManagement
             CheckColumn(tblName, fkBName, System.Data.DbType.Int32, 0, false);
             if (rel.NeedsPositionStorage(RelationEndRole.B))
             {
-                CheckColumn(tblName, fkBIndex, System.Data.DbType.Int32, 0, false);
+                CheckColumn(tblName, fkBIndex, System.Data.DbType.Int32, 0, true);
                 if (repair)
                 {
                     // TODO: Call case
@@ -460,7 +460,7 @@ namespace Kistl.Server.SchemaManagement
 
                     if (hasPersistentOrder)
                     {
-                        CheckColumn(tblName, valPropIndexName, System.Data.DbType.Int32, 0, false);
+                        CheckColumn(tblName, valPropIndexName, System.Data.DbType.Int32, 0, true);
                     }
                     if (!hasPersistentOrder && db.CheckColumnExists(tblName, valPropIndexName))
                     {
@@ -518,7 +518,7 @@ namespace Kistl.Server.SchemaManagement
                     }
                     if (hasPersistentOrder)
                     {
-                        CheckColumn(tblName, valPropIndexName, System.Data.DbType.Int32, 0, false);
+                        CheckColumn(tblName, valPropIndexName, System.Data.DbType.Int32, 0, true);
                     }
                     if (!hasPersistentOrder && db.CheckColumnExists(tblName, valPropIndexName))
                     {
