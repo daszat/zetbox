@@ -309,7 +309,7 @@ namespace Kistl.Server.SchemaManagement
                 Log.WarnFormat("FK Constraint '{0}' for A is missing for [{1}]", assocAName, assocName);
                 if (repair)
                 {
-                    db.CreateFKConstraint(tblName, rel.A.Type.TableName, fkAName, assocAName, false);
+                    db.CreateFKConstraint(tblName, rel.A.Type.TableName, fkAName, assocAName, true);
                 }
             }
             if (!db.CheckFKConstraintExists(assocBName))
@@ -317,7 +317,7 @@ namespace Kistl.Server.SchemaManagement
                 Log.WarnFormat("FK Constraint '{0}' for B is missing for [{1}]", assocBName, assocName);
                 if (repair)
                 {
-                    db.CreateFKConstraint(tblName, rel.B.Type.TableName, fkBName, assocBName, false);
+                    db.CreateFKConstraint(tblName, rel.B.Type.TableName, fkBName, assocBName, true);
                 }
             }
 

@@ -705,13 +705,13 @@ namespace Kistl.Server.SchemaManagement
             db.CreateColumn(tblName, fkAName, System.Data.DbType.Int32, 0, false);
             if (rel.NeedsPositionStorage(RelationEndRole.A))
             {
-                db.CreateColumn(tblName, fkAName + Kistl.API.Helper.PositionSuffix, System.Data.DbType.Int32, 0, false);
+                db.CreateColumn(tblName, fkAName + Kistl.API.Helper.PositionSuffix, System.Data.DbType.Int32, 0, true);
             }
 
             db.CreateColumn(tblName, fkBName, System.Data.DbType.Int32, 0, false);
             if (rel.NeedsPositionStorage(RelationEndRole.B))
             {
-                db.CreateColumn(tblName, fkBName + Kistl.API.Helper.PositionSuffix, System.Data.DbType.Int32, 0, false);
+                db.CreateColumn(tblName, fkBName + Kistl.API.Helper.PositionSuffix, System.Data.DbType.Int32, 0, true);
             }
 
             if (rel.A.Type.ImplementsIExportable() && rel.B.Type.ImplementsIExportable())
