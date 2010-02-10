@@ -1,11 +1,11 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Kistl.API
 {
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
 
     /// <summary>
     /// A wrapper around a Collection of CollectionEntrys to present one "side" as normal collection.
@@ -41,13 +41,13 @@ namespace Kistl.API
         protected abstract IEnumerable<TItem> GetItems();
 
         /// <summary>
-        /// returns all items of this collection in the "right" order.
+        /// returns all entries of this collection in the "right" order.
         /// Inheritors may override this to implement ordering semantics, 
-        /// since by default, it uses the "natural" ordering of GetItems().
+        /// since by default, it uses the "natural" ordering of <see cref="Collection"/>.
         /// </summary>
-        protected virtual IEnumerable<TItem> GetList()
+        protected virtual IEnumerable<TEntry> GetSortedEntries()
         {
-            return GetItems();
+            return Collection;
         }
 
         /// <summary>
@@ -56,7 +56,10 @@ namespace Kistl.API
         protected virtual TEntry GetEntryOrDefault(TItem item)
         {
             var result = Collection.SingleOrDefault(e => Object.Equals(ItemFromEntry(e), item));
-            result.AttachToContext(ParentObject.Context);
+            if (result != null && ParentObject.Context != null)
+            {
+                result.AttachToContext(ParentObject.Context);
+            }
             return result;
         }
 
@@ -137,9 +140,16 @@ namespace Kistl.API
 
         public void CopyTo(TItem[] array, int arrayIndex)
         {
-            foreach (var i in GetList())
+            if (array == null) { throw new ArgumentNullException("array"); }
+            if (!array.GetType().GetElementType().IsAssignableFrom(typeof(TItem)))
             {
-                array[arrayIndex++] = i;
+                var msg = String.Format("Mismatch between source and destination type: [{0}] not assignable from [{1}]", array.GetType().GetElementType(), typeof(TItem));
+                throw new ArgumentException(msg, "array");
+            }
+
+            foreach (var e in GetSortedEntries())
+            {
+                array[arrayIndex++] = ItemFromEntry(e);
             }
         }
 
@@ -175,26 +185,29 @@ namespace Kistl.API
 
         public IEnumerator<TItem> GetEnumerator()
         {
-            return GetList().GetEnumerator();
+            return GetSortedEntries().Select(e => ItemFromEntry(e)).GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return GetList().GetEnumerator();
+            return GetSortedEntries().Select(e => ItemFromEntry(e)).GetEnumerator();
         }
 
         #endregion
 
         #region ICollection Members
 
-        public void CopyTo(Array array, int index)
+        void ICollection.CopyTo(Array array, int index)
         {
             if (array == null) { throw new ArgumentNullException("array"); }
-
-            foreach (var i in GetList())
+            if (!array.GetType().GetElementType().IsAssignableFrom(typeof(TItem)))
             {
-                array.SetValue(i, index++);
+                var msg = String.Format("Mismatch between source and destination type: [{0}] not assignable from [{1}]", array.GetType().GetElementType(), typeof(TItem));
+                throw new ArgumentException(msg, "array");
             }
+
+            var items = GetSortedEntries().Select(e => ItemFromEntry(e)).ToList();
+            ((ICollection)items).CopyTo(array, index);
         }
 
         public bool IsSynchronized { get { return false; } }
@@ -249,24 +262,10 @@ namespace Kistl.API
 
         protected TEntry GetAt(int index)
         {
-            RepairIndexes();
-            var result = Collection.SingleOrDefault(e => { var idx = IndexFromEntry(e); return idx.HasValue && idx.Value == index; });
-            result.AttachToContext(ParentObject.Context);
-            return result;
-        }
+            if (index < 0 || index >= Collection.Count) { return null; }
 
-        /// <summary>
-        /// Repairs all index values on the entries. This is currently needed sometimes, 
-        /// because entries could have been added/modified/removed by the "other" side, without us knowing.
-        /// Then the IndexFromEntry() is set to LASTINDEXPOSITION or holes exist which confuse the rest.
-        /// </summary>
-        protected void RepairIndexes()
-        {
-            int i = 0;
-            foreach (var entry in Collection.OrderBy(e => IndexFromEntry(e) ?? Kistl.API.Helper.LASTINDEXPOSITION))
-            {
-                SetIndex(entry, i++);
-            }
+            var list = GetSortedEntries().ToList();
+            return list[index];
         }
 
         #endregion
@@ -279,34 +278,28 @@ namespace Kistl.API
             if (entry == null)
                 return -1;
 
-            int? result = IndexFromEntry(entry);
-            if (result == null || result.Value == Kistl.API.Helper.LASTINDEXPOSITION)
-                throw new InvalidOperationException("Collection is not sorted");
-
-            return result.Value;
+            var list = GetSortedEntries().ToList();
+            return list.IndexOf(entry);
         }
 
         public void Insert(int index, TItem item)
         {
-            // allow index==-1 and index==Collection.Count for prepending or appending to list
-            if (-1 < index || index > Collection.Count)
+            if (index < 0 || index > Collection.Count)
                 throw new ArgumentOutOfRangeException("index", "is not a valid index");
 
             if (IsReadOnly)
                 throw new NotSupportedException("List is ReadOnly");
 
-            // TODO: Optimize
-            foreach (TEntry entry in Collection)
-            {
-                int idx = IndexFromEntry(entry) ?? Kistl.API.Helper.LASTINDEXPOSITION;
-                if (idx >= index)
-                {
-                    SetIndex(entry, idx + 1);
-                }
-            }
-
             TEntry newEntry = InitialiseEntry(CreateEntry(item), item);
-            SetIndex(newEntry, index);
+
+            var list = GetSortedEntries().ToList();
+            // some providers may automatically insert
+            // entries on initialisation. To avoid double entries
+            // and wrong order, remove this first.
+            list.Remove(newEntry);
+            list.Insert(index, newEntry);
+
+            Kistl.API.Helper.FixIndices(list, IndexFromEntry, SetIndex);
 
             OnEntryAdding(newEntry);
             Collection.Add(newEntry);
@@ -323,19 +316,6 @@ namespace Kistl.API
 
             TEntry oldEntry = GetAt(index);
             base.Remove(ItemFromEntry(oldEntry));
-
-            // not really needed when removing items.
-            // TODO: Optimize, check whether other parts can live with holes 
-            // in the Position; when inserting exploit holes to shortcut 
-            // Position updating
-            foreach (TEntry entry in Collection)
-            {
-                int idx = IndexFromEntry(entry) ?? Kistl.API.Helper.LASTINDEXPOSITION;
-                if (idx >= index)
-                {
-                    SetIndex(entry, idx - 1);
-                }
-            }
         }
 
         public TItem this[int index]
@@ -362,12 +342,13 @@ namespace Kistl.API
 
         #region IList Members
 
-        public int Add(object value)
+        int IList.Add(object value)
         {
-            return this.Add((TItem)value);
+            this.Add((TItem)value);
+            return this.Count - 1;
         }
 
-        public bool Contains(object value)
+        bool IList.Contains(object value)
         {
             if (value is TItem)
                 return this.Contains((TItem)value);
@@ -375,7 +356,7 @@ namespace Kistl.API
                 return false;
         }
 
-        public int IndexOf(object value)
+        int IList.IndexOf(object value)
         {
             if (value is TItem)
                 return this.IndexOf((TItem)value);
@@ -383,17 +364,17 @@ namespace Kistl.API
                 return -1;
         }
 
-        public void Insert(int index, object value)
+        void IList.Insert(int index, object value)
         {
             this.Insert(index, (TItem)value);
         }
 
-        public bool IsFixedSize
+        bool IList.IsFixedSize
         {
             get { return false; }
         }
 
-        public void Remove(object value)
+        void IList.Remove(object value)
         {
             if (value is TItem)
                 this.Remove((TItem)value);

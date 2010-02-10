@@ -187,5 +187,10 @@ namespace Kistl.App.Projekte
         }
 
         #endregion
+
+        public override InterfaceType GetInterfaceType()
+        {
+            return new InterfaceType(typeof(Kistl.App.Projekte.Projekt));
+        }
     }
 }

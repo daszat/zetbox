@@ -1,18 +1,20 @@
-using System;
-using System.Collections.Generic;
-
-using Autofac;
-using Autofac.Builder;
-
-using Kistl.API;
-using Kistl.API.Configuration;
-using Kistl.Server;
-
-using NUnit.Framework;
-using Kistl.App.Base;
 
 namespace Kistl.DalProvider.EF.Tests
 {
+    using System;
+    using System.Collections.Generic;
+
+    using Autofac;
+    using Autofac.Builder;
+
+    using Kistl.API;
+    using Kistl.API.Configuration;
+    using Kistl.App.Base;
+    using Kistl.App.Projekte;
+    using Kistl.Server;
+
+    using NUnit.Framework;
+
     [SetUpFixture]
     public class SetUp
         : Kistl.API.AbstractConsumerTests.DatabaseResetup
@@ -45,8 +47,12 @@ namespace Kistl.DalProvider.EF.Tests
 
             ResetDatabase(config);
 
-            Property__Implementation__.OnToString_Property 
-                += (obj, args) => { args.Result = String.Format("Property implementation, [{0}]", obj.Description); };
+            Property__Implementation__.OnToString_Property
+                += (obj, args) => { args.Result = String.Format("Prop, [{0}]", obj.Description); };
+            Mitarbeiter__Implementation__.OnToString_Mitarbeiter
+                += (obj, args) => { args.Result = String.Format("MA, [{0}]", obj.Name); };
+            Projekt__Implementation__.OnToString_Projekt
+                += (obj, args) => { args.Result = String.Format("Proj, [{0}]", obj.Name); };
         }
     }
 }

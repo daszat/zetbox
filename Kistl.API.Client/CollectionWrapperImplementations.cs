@@ -1,14 +1,14 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Linq;
-using System.Text;
-
-using Kistl.API;
 
 namespace Kistl.API.Client
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.Specialized;
+    using System.Linq;
+    using System.Text;
+
+    using Kistl.API;
+
     public sealed class ClientRelationASideCollectionWrapper<TA, TB, TEntry>
         : RelationASideCollectionWrapper<TA, TB, TEntry, ICollection<TEntry>>/*, IList<ATYPE>*/, INotifyCollectionChanged
         where TA : class, IDataObject

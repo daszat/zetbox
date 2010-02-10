@@ -63,7 +63,7 @@ namespace Kistl.API.Tests
         {
             for (int i = 0; i < initialItems.Count; i++)
             {
-                Assert.That(collection[i], Is.SameAs(initialItems[i]));
+                Assert.That(collection[i], Is.SameAs(initialItems[i]), String.Format("i={0}", i));
             }
             AssertInvariants(initialItems);
         }

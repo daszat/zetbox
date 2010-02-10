@@ -1,11 +1,11 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Kistl.API
 {
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
 
     public abstract class RelationASideCollectionWrapper<TA, TB, TEntry, TBaseCollection>
         : BaseRelationCollectionWrapper<TA, TB, TB, TA, TEntry, TBaseCollection>
@@ -58,9 +58,9 @@ namespace Kistl.API
             return Collection.Select(e => e.A);
         }
 
-        protected override IEnumerable<TA> GetList()
+        protected override IEnumerable<TEntry> GetSortedEntries()
         {
-            return Collection.OrderBy(e => e.AIndex).Select(e => ItemFromEntry(e));
+            return Collection.OrderBy(e => e.AIndex);
         }
 
         protected override TA ItemFromEntry(TEntry entry)
@@ -73,10 +73,10 @@ namespace Kistl.API
         {
             entry.B = ParentObject;
             entry.A = item;
+            entry.AIndex = Kistl.API.Helper.LASTINDEXPOSITION;
             entry.BIndex = Kistl.API.Helper.LASTINDEXPOSITION;
             return entry;
         }
-
 
         /// <summary>
         /// Overriden to set the index on the incoming entry
@@ -85,7 +85,10 @@ namespace Kistl.API
         protected override void OnEntryAdded(TEntry entry)
         {
             base.OnEntryAdded(entry);
-            entry.AIndex = Collection.Count - 1;
+            if (!entry.AIndex.HasValue || entry.AIndex == Kistl.API.Helper.LASTINDEXPOSITION)
+            {
+                Kistl.API.Helper.FixIndices(GetSortedEntries().ToList(), IndexFromEntry, SetIndex);
+            }
         }
 
         protected override int? IndexFromEntry(TEntry entry)
@@ -134,8 +137,6 @@ namespace Kistl.API
             entry.B = item;
             return entry;
         }
-
-
     }
 
     public abstract class RelationBSideListWrapper<TA, TB, TEntry, TBaseCollection>
@@ -156,9 +157,9 @@ namespace Kistl.API
             return Collection.Select(e => e.B);
         }
 
-        protected override IEnumerable<TB> GetList()
+        protected override IEnumerable<TEntry> GetSortedEntries()
         {
-            return Collection.OrderBy(e => e.BIndex).Select(e => ItemFromEntry(e));
+            return Collection.OrderBy(e => e.BIndex);
         }
 
         protected override TB ItemFromEntry(TEntry entry)
@@ -172,6 +173,7 @@ namespace Kistl.API
             entry.A = ParentObject;
             entry.B = item;
             entry.AIndex = Kistl.API.Helper.LASTINDEXPOSITION;
+            entry.BIndex = Kistl.API.Helper.LASTINDEXPOSITION;
             return entry;
         }
 
@@ -182,7 +184,10 @@ namespace Kistl.API
         protected override void OnEntryAdded(TEntry entry)
         {
             base.OnEntryAdded(entry);
-            entry.BIndex = Collection.Count - 1;
+            if (!entry.BIndex.HasValue || entry.BIndex == Kistl.API.Helper.LASTINDEXPOSITION)
+            {
+                Kistl.API.Helper.FixIndices(GetSortedEntries().ToList(), IndexFromEntry, SetIndex);
+            }
         }
 
         protected override int? IndexFromEntry(TEntry entry)
