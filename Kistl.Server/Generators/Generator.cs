@@ -6,24 +6,28 @@ namespace Kistl.Server.Generators
     using System.IO;
     using System.Linq;
     using System.Text;
+    using System.Threading;
+
+    using Autofac;
 
     using Kistl.API;
     using Kistl.API.Configuration;
     using Kistl.API.Server;
     using Kistl.API.Utils;
     using Kistl.App.Base;
+
     using Microsoft.Build.BuildEngine;
     using Microsoft.Build.Framework;
 
     public class Generator
     {
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Server.Generator");
-        private readonly IKistlContext _sourceCtx;
+        private readonly IContainer _container;
         private readonly IEnumerable<BaseDataObjectGenerator> _generatorProviders;
 
-        public Generator(IKistlContext sourceCtx, IEnumerable<BaseDataObjectGenerator> generatorProviders)
+        public Generator(IContainer container, IEnumerable<BaseDataObjectGenerator> generatorProviders)
         {
-            _sourceCtx = sourceCtx;
+            _container = container;
             _generatorProviders = generatorProviders;
         }
 
@@ -60,13 +64,25 @@ namespace Kistl.Server.Generators
         private void GenerateTo(string workingPath)
         {
             Log.InfoFormat("Generating Code to [{0}]", workingPath);
-            // generate source code
+            var threads = new List<Thread>();
             foreach (var gen in _generatorProviders)
             {
-                using (log4net.NDC.Push("Generating " + gen.Description))
+                // decouple from loop variable
+                var generator = gen;
+                var genThread = new Thread(() =>
                 {
-                    gen.Generate(_sourceCtx, workingPath);
-                }
+                    using (var innerContainer = _container.CreateInnerContainer())
+                    {
+                        generator.Generate(innerContainer.Resolve<IKistlContext>(), workingPath);
+                    }
+                });
+                genThread.Name = gen.BaseName;
+                genThread.Start();
+                threads.Add(genThread);
+            }
+            foreach (var t in threads)
+            {
+                t.Join();
             }
         }
 
@@ -90,7 +106,7 @@ namespace Kistl.Server.Generators
             Directory.CreateDirectory(binPath);
 
             var engine = new Engine(ToolsetDefinitionLocations.Registry);
-
+            
             engine.RegisterLogger(new ConsoleLogger(LoggerVerbosity.Minimal));
 
             var logger = new FileLogger();
@@ -122,9 +138,6 @@ namespace Kistl.Server.Generators
                         Log.DebugFormat("Compiling");
                         if (!engine.BuildProject(proj))
                         {
-                            // TODO: fix dll name here
-                            //File.Delete(Path.Combine(binPath, "Kistl.Objects.dll"));
-                            //File.Delete(Path.Combine(binPath, "Kistl.Objects.pdb"));
                             throw new ApplicationException(String.Format("Failed to compile {0}", gen.Description));
                         }
                     }
