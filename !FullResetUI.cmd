@@ -1,6 +1,6 @@
 @echo off
 
-C:\Windows\Microsoft.NET\Framework\v3.5\MSBuild.exe CCNet.msbuild /p:SourceLocation=P:\Kistl /p:ArebisMsBuildPath=P:\Kistl\Libs\ArebisCGen\Arebis.CodeGeneration.MsBuild
+C:\Windows\Microsoft.NET\Framework\v3.5\MSBuild.exe CCNet.msbuild /p:SourceLocation=P:\Kistl /p:ArebisMsBuildPath=P:\Kistl\Libs\ArebisCGen\Arebis.CodeGeneration.MsBuild /m
 IF ERRORLEVEL 1 GOTO FAIL
 
 rem regenerate Database.xml to prove roundtrippability
