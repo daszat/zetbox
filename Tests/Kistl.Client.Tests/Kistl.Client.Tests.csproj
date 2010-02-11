@@ -43,7 +43,7 @@
   <ItemGroup>
     <Reference Include="Moq, Version=4.0.812.4, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Temp\Moq.4.0.812.4-src\Source\bin\Debug\Moq.dll</HintPath>
+      <HintPath>..\..\Libs\Moq-4.0\Moq.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework" />
     <Reference Include="System" />
