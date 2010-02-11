@@ -1,17 +1,20 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-
-using Kistl.API;
-using Kistl.App.Base;
-using Kistl.App.Extensions;
-using Arebis.CodeGeneration;
 
 namespace Kistl.DalProvider.Frozen.Generator.Implementation.ObjectClasses
 {
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Reflection;
+    using System.Text;
+
+    using Arebis.CodeGeneration;
+
+    using Kistl.API;
+    using Kistl.App.Base;
+    using Kistl.App.Extensions;
+    using Kistl.Server.Generators.Extensions;
+
     public partial class DataStore
     {
         public static void Call(IGenerationHost host, IKistlContext ctx, ObjectClass objClass)

@@ -1,15 +1,17 @@
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-
-using Kistl.API;
-using Kistl.App.Base;
-using Kistl.App.Extensions;
 
 namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Linq;
+    using System.Text;
+
+    using Kistl.API;
+    using Kistl.App.Base;
+    using Kistl.App.Extensions;
+    using Kistl.Server.Generators.Extensions;
+
     public partial class ObjectListProperty
     {
         public static void Call(Arebis.CodeGeneration.IGenerationHost host,
