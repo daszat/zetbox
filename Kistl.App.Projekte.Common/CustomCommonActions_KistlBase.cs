@@ -123,7 +123,7 @@ namespace Kistl.App.Base
 
             if (other != null)
             {
-                if (nav.IsList())
+                if (nav.GetIsList())
                 {
                     nav.ValueModelDescriptor = obj.Context.FindPersistenceObject<PresentableModelDescriptor>(PresentableModelDescriptor_ObjectListModel);
                 }

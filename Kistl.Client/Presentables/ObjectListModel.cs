@@ -20,27 +20,25 @@ namespace Kistl.Client.Presentables
         : PropertyModel<IList<DataObjectModel>>, IValueListModel<DataObjectModel>
     {
         private readonly ObjectReferenceProperty _property;
-        private readonly ICollection _collectionWrapper;
-        private readonly IList _listWrapper;
+        private readonly ObjectClass _referencedClass;
+        private readonly ICollection _collection;
+        private readonly IList _list;
+        private readonly INotifyCollectionChanged _notifier;
 
         public ObjectListModel(
             IGuiApplicationContext appCtx, IKistlContext dataCtx,
             IDataObject referenceHolder, ObjectReferenceProperty prop)
             : base(appCtx, dataCtx, referenceHolder, prop)
         {
-            if (!prop.IsList()) { throw new ArgumentOutOfRangeException("prop", "ObjectReferenceProperty must be a list"); }
+            if (!prop.GetIsList()) { throw new ArgumentOutOfRangeException("prop", "ObjectReferenceProperty must be a list"); }
 
             _property = prop;
-            _collectionWrapper = Object.GetPropertyValue<ICollection>(Property.PropertyName);
-            if (_property.RelationEnd.HasPersistentOrder)
-            {
-                _listWrapper = (IList)_collectionWrapper;
-            }
-            else
-            {
-                _listWrapper = null;
-            }
-            ReferencedClass = _property.GetReferencedObjectClass();
+            _referencedClass = _property.GetReferencedObjectClass();
+
+            _collection = Object.GetPropertyValue<ICollection>(Property.PropertyName);
+            _notifier = _collection as INotifyCollectionChanged;
+            // extract special references if available.
+            _list = _collection as IList;
         }
 
         #region Public interface and IReadOnlyValueModel<IReadOnlyObservableCollection<DataObjectModel>> Members
@@ -73,8 +71,7 @@ namespace Kistl.Client.Presentables
 
         public ObjectClass ReferencedClass
         {
-            get;
-            protected set;
+            get { return _referencedClass; }
         }
 
         public GridDisplayConfiguration DisplayedColumns
@@ -244,12 +241,12 @@ namespace Kistl.Client.Presentables
         public void MoveItemUp(DataObjectModel item)
         {
             if (item == null) { return; }
-            
-            var idx = _listWrapper.IndexOf(item.Object);
+
+            var idx = _list.IndexOf(item.Object);
             if (idx > 0)
             {
-                _listWrapper.RemoveAt(idx);
-                _listWrapper.Insert(idx - 1, item.Object);
+                _list.RemoveAt(idx);
+                _list.Insert(idx - 1, item.Object);
             }
         }
 
@@ -257,11 +254,11 @@ namespace Kistl.Client.Presentables
         {
             if (item == null) { return; }
 
-            var idx = _listWrapper.IndexOf(item.Object);
-            if (idx != -1 && idx + 1 < _listWrapper.Count )
+            var idx = _list.IndexOf(item.Object);
+            if (idx != -1 && idx + 1 < _list.Count)
             {
-                _listWrapper.RemoveAt(idx);
-                _listWrapper.Insert(idx + 1, item.Object);
+                _list.RemoveAt(idx);
+                _list.Insert(idx + 1, item.Object);
             }
         }
 

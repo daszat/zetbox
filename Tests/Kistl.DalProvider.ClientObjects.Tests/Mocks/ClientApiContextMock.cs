@@ -1,16 +1,18 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Kistl.API.Client;
-using Kistl.Client;
-using Kistl.API;
-using Kistl.API.Configuration;
-using Kistl.App.Extensions;
-using Kistl.App.Base;
 
 namespace Kistl.DalProvider.ClientObjects.Mocks
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+
+    using Kistl.API;
+    using Kistl.API.Client;
+    using Kistl.API.Configuration;
+    using Kistl.App.Base;
+    using Kistl.App.Extensions;
+    using Kistl.Client;
+
     public class MyCustomActionsManagerClient : BaseCustomActionsManager
     {
         public MyCustomActionsManagerClient()

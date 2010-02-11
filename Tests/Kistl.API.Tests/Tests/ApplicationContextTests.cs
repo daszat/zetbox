@@ -1,14 +1,15 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using NMock2;
-using NUnit.Framework;
-using Kistl.API.Configuration;
 
 namespace Kistl.API.Tests
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    
+    using Kistl.API.Configuration;
+    
+    using NUnit.Framework;
+
     public class ConfigTestApplicationContext : ApplicationContext
     {
         public ConfigTestApplicationContext(KistlConfig config)

@@ -92,5 +92,15 @@ namespace Kistl.Server.Generators.Extensions
                 return string.Format("ICollection<{0}>", prop.GetPropertyTypeString());
             }
         }
+
+        public static bool IsList(this ObjectReferenceProperty prop)
+        {
+            if (prop == null) { throw new ArgumentNullException("prop"); }
+            RelationEnd relEnd = prop.RelationEnd;
+            Relation rel = relEnd.GetParent();
+            RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
+
+            return otherEnd.Multiplicity.UpperBound() > 1;
+        }
     }
 }

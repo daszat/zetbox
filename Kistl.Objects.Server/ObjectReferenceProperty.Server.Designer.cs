@@ -176,6 +176,28 @@ namespace Kistl.App.Base
 		public static event PropertyPostSetterHandler<Kistl.App.Base.ObjectReferenceProperty, Kistl.App.Base.RelationEnd> OnRelationEnd_PostSetter;
 
         /// <summary>
+        /// 
+        /// </summary>
+		[EventBasedMethod("OnGetIsList_ObjectReferenceProperty")]
+		public virtual bool GetIsList() 
+        {
+            var e = new MethodReturnEventArgs<bool>();
+            if (OnGetIsList_ObjectReferenceProperty != null)
+            {
+                OnGetIsList_ObjectReferenceProperty(this, e);
+            }
+            else
+            {
+                throw new NotImplementedException("No handler registered on ObjectReferenceProperty.GetIsList");
+            }
+            return e.Result;
+        }
+		public delegate void GetIsList_Handler<T>(T obj, MethodReturnEventArgs<bool> ret);
+		public static event GetIsList_Handler<ObjectReferenceProperty> OnGetIsList_ObjectReferenceProperty;
+
+
+
+        /// <summary>
         /// Returns the resulting Type of this Property Meta Object.
         /// </summary>
 		[EventBasedMethod("OnGetPropertyType_ObjectReferenceProperty")]

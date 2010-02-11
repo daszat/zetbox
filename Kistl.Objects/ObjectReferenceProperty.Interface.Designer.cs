@@ -27,5 +27,9 @@ namespace Kistl.App.Base
 			get;
 			set;
 		}
+        /// <summary>
+        /// 
+        /// </summary>
+		 bool GetIsList() ;
     }
 }

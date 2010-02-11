@@ -64,15 +64,5 @@ namespace Kistl.App.Extensions
             // create unconstrained maxLength if no constrain is specified
             return constraint == null ? Kistl.API.Helper.DefaultStringPropertyLength : (constraint.MaxLength ?? int.MaxValue);
         }
-
-        public static bool IsList(this ObjectReferenceProperty prop)
-        {
-            if (prop == null) { throw new ArgumentNullException("prop"); }
-            RelationEnd relEnd = prop.RelationEnd;
-            Relation rel = relEnd.GetParent();
-            RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
-
-            return otherEnd.Multiplicity.UpperBound() > 1;
-        }
     }
 }
