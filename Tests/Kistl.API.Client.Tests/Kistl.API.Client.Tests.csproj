@@ -46,10 +46,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libs\log4net.dll</HintPath>
     </Reference>
-    <Reference Include="NMock2, Version=1.0.3182.30573, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\NMock2\bin\Debug\NMock2.dll</HintPath>
-    </Reference>
     <Reference Include="nunit.framework" />
     <Reference Include="System" />
     <Reference Include="System.Core">
