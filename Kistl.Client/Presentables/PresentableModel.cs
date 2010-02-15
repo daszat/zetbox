@@ -46,7 +46,7 @@ namespace Kistl.Client.Presentables
         /// <summary>
         /// The factory from where new models should be created
         /// </summary>
-        public ModelFactory Factory { get { return AppContext.Factory; } }
+        public IModelFactory Factory { get { return AppContext.Factory; } }
 
         /// <summary>
         /// A <see cref="IKistlContext"/> to access the current user's data
@@ -160,7 +160,7 @@ namespace Kistl.Client.Presentables
             get { throw new InvalidOperationException("No transient data operations allowed in Design mode"); }
         }
 
-        public ModelFactory Factory
+        public IModelFactory Factory
         {
             get { throw new NotImplementedException(); }
         }

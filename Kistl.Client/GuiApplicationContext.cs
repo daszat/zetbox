@@ -27,7 +27,7 @@ namespace Kistl.Client
         /// <summary>
         /// The <see cref="ModelFactory"/> of this GUI.
         /// </summary>
-        ModelFactory Factory { get; }
+        IModelFactory Factory { get; }
 
         ///// <summary>
         ///// This context's <see cref="Toolkit"/>
@@ -154,7 +154,7 @@ namespace Kistl.Client
         /// <summary>
         /// The <see cref="ModelFactory"/> of this GUI.
         /// </summary>
-        public ModelFactory Factory { get; private set; }
+        public IModelFactory Factory { get; private set; }
 
         /// <summary>
         /// A <see cref="IThreadManager"/> for the UI Thread

@@ -11,37 +11,53 @@ namespace Kistl.Client.Mocks
     using Kistl.App.GUI;
 
     using Moq;
+    using Kistl.Client.Presentables;
 
     public static class KistlMockFactory
     {
         public static Mock<ObjectReferenceProperty> CreateObjectReferenceProperty(
-            string propertyName
+            string propertyName,
+            bool isList
             )
         {
-            var mock = new Mock<ObjectReferenceProperty>();
+            var result = new Mock<ObjectReferenceProperty>();
 
-            mock.SetupAllProperties();
-            mock.Setup(orp => orp.GetPropertyTypeString()).Returns(typeof(ObjectReferenceProperty).FullName);
-            mock.Setup(orp => orp.PropertyName).Returns(propertyName);
+            result.SetupAllProperties();
+            result.Setup(orp => orp.GetPropertyTypeString()).Returns(typeof(ObjectReferenceProperty).FullName);
+            result.Setup(orp => orp.PropertyName).Returns(propertyName);
+            result.Setup(orp => orp.GetIsList()).Returns(isList);
 
-            return mock;
+            return result;
         }
 
         public static Mock<TestObject> CreateTestObject()
         {
             var result = new Mock<TestObject>();
-
-            // TODO: Stub IDataObject here.
-
+            result.Setup(obj => obj.GetInterfaceType()).Returns(new InterfaceType(typeof(TestObject)));
             return result;
         }
 
         public static Mock<IKistlContext> CreateContext()
         {
             var result = new Mock<IKistlContext>();
+            return result;
+        }
 
+        public static Mock<IModelFactory> CreateFactory(Dictionary<IDataObject, PresentableModel> backingStore)
+        {
+            var result = new Mock<IModelFactory>();
+            result.Setup(mf => mf.CreateDefaultModel(It.IsAny<IKistlContext>(), It.IsAny<IDataObject>(), It.Is<object>(o => o == null))).Returns((IKistlContext ctx, IDataObject obj, object nothing) =>
+            {
+                if (backingStore.ContainsKey(obj))
+                {
+                    return backingStore[obj];
+                }
+                else
+                {
+                    return (backingStore[obj] = new DataObjectModel(null, ctx, obj));
+                }
+            });
             return result;
         }
     }
-
 }

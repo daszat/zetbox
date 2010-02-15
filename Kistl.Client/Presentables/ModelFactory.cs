@@ -18,7 +18,7 @@ namespace Kistl.Client.Presentables
     /// Abstract base class to provide basic functionality of all model factories. Toolkit-specific implementations of this class will be 
     /// used by the rendering infrastructure to create PresentableModels and Views.
     /// </summary>
-    public abstract class ModelFactory
+    public abstract class ModelFactory : Kistl.Client.Presentables.IModelFactory
     {
         /// <summary>
         /// Gets this application's global context. A helper.

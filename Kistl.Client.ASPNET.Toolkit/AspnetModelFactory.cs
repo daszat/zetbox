@@ -96,14 +96,14 @@ namespace Kistl.Client.ASPNET.Toolkit
 
     public static class AspnetModelFactoryExtensions
     {
-        public static object CreateDefaultView(this ModelFactory self, PresentableModel mdl, Control container)
+        public static object CreateDefaultView(this IModelFactory self, PresentableModel mdl, Control container)
         {
             if (self == null) { throw new ArgumentNullException("self"); }
 
             return AddControl(container, self.CreateDefaultView(mdl));
         }
 
-        public static object CreateSpecificView(this ModelFactory self, PresentableModel mdl, ControlKind kind, Control container)
+        public static object CreateSpecificView(this IModelFactory self, PresentableModel mdl, ControlKind kind, Control container)
         {
             if (self == null) { throw new ArgumentNullException("self"); }
 

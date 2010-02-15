@@ -65,7 +65,6 @@
     <Compile Include="Kistl.Client.Tests\ObjectListModelTests.cs" />
     <Compile Include="Kistl.Client.Tests\PresenterModelTests.cs" />
     <Compile Include="Kistl.Client.Tests\SynchronousThreadManagerTests.cs" />
-    <Compile Include="MockeryTestFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -84,7 +83,10 @@
     <ProjectReference Include="..\..\Kistl.Objects\Kistl.Objects.csproj">
       <Project>{0C9E6E69-309F-46F7-A936-D5762229DEB9}</Project>
       <Name>Kistl.Objects</Name>
-      <Private>True</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\Kistl.API.Mocks\Kistl.API.Mocks.csproj">
+      <Project>{95E39A40-35BC-4214-86E5-EE451C138EE1}</Project>
+      <Name>Kistl.API.Mocks</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
