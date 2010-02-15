@@ -247,6 +247,7 @@ namespace Kistl.Client.Presentables
             {
                 _list.RemoveAt(idx);
                 _list.Insert(idx - 1, item.Object);
+                SelectedItem = item;
             }
         }
 
@@ -259,6 +260,7 @@ namespace Kistl.Client.Presentables
             {
                 _list.RemoveAt(idx);
                 _list.Insert(idx + 1, item.Object);
+                SelectedItem = item;
             }
         }
 
