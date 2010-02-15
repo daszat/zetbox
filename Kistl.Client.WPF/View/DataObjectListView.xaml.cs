@@ -55,6 +55,31 @@ namespace Kistl.Client.WPF.View
             }
         }
 
+        private RelayCommand _moveDownCommand;
+        public System.Windows.Input.ICommand MoveDownCommand
+        {
+            get
+            {
+                if (_moveDownCommand == null)
+                {
+                    _moveDownCommand = new RelayCommand(param =>
+                    {
+                        var model = (ObjectListModel)DataContext;
+                        if (model.SelectedItem != null)
+                        {
+                            model.MoveItemDown(model.SelectedItem);
+                        }
+                    },
+                    param =>
+                    {
+                        var model = (ObjectListModel)DataContext;
+                        return model.SelectedItem != null;
+                    });
+                }
+                return _moveDownCommand;
+            }
+        }
+
         private void AddNewHandler(object sender, RoutedEventArgs e)
         {
             var model = (ObjectListModel)DataContext;
