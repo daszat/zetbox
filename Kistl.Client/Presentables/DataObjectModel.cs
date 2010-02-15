@@ -35,7 +35,7 @@ namespace Kistl.Client.Presentables
         #region Public Interface
 
         private IDataObject _object;
-        internal IDataObject Object { get { return _object; } }
+        public IDataObject Object { get { return _object; } }
 
         public int ID
         {
