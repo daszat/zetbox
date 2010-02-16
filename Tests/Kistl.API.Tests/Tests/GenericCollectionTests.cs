@@ -73,11 +73,26 @@ namespace Kistl.API.Tests
         }
 
 
+        /// <summary>
+        /// Asserts that the collection has changed. Can be called multiple times in a test. Use this to test notifications and similiar things.
+        /// </summary>
+        protected virtual void AssertCollectionIsChanged()
+        {
+        }
+
+        /// <summary>
+        /// Asserts that the collection has not changed. Can be called multiple times in a test. Use this to test notifications and similiar things.
+        /// </summary>
+        protected virtual void AssertCollectionIsUnchanged()
+        {
+        }
+
         [SetUp]
         public void SetUp()
         {
             initialItems = InitialItems();
             collection = CreateCollection(initialItems);
+            AssertCollectionIsUnchanged();
             AssertInvariants(initialItems);
         }
 
@@ -87,6 +102,7 @@ namespace Kistl.API.Tests
         public void count_should_have_initial_number_of_items()
         {
             Assert.That(collection.Count, Is.EqualTo(initialItems.Count));
+            AssertCollectionIsUnchanged();
             AssertInvariants(initialItems);
         }
 
@@ -94,6 +110,7 @@ namespace Kistl.API.Tests
         public void isreadonly_should_not_be_set()
         {
             Assert.That(collection.IsReadOnly, Is.False);
+            AssertCollectionIsUnchanged();
             AssertInvariants(initialItems);
         }
 
@@ -109,6 +126,7 @@ namespace Kistl.API.Tests
                 expectedItems.Add(newItem);
 
                 Assert.That(collection, Has.Member(newItem));
+                AssertCollectionIsChanged();
             }
             AssertInvariants(expectedItems);
         }
@@ -118,6 +136,7 @@ namespace Kistl.API.Tests
         {
             collection.Clear();
             Assert.That(collection, Is.Empty);
+            AssertCollectionIsChanged();
             AssertInvariants(new List<TItem>(0));
         }
 
@@ -127,6 +146,7 @@ namespace Kistl.API.Tests
             foreach (var item in initialItems)
             {
                 Assert.That(collection.Contains(item), Is.True);
+                AssertCollectionIsUnchanged();
             }
             AssertInvariants(initialItems);
         }
@@ -136,12 +156,15 @@ namespace Kistl.API.Tests
         {
             var otherItem = NewItem();
             Assert.That(collection.Contains(otherItem), Is.False);
+            AssertCollectionIsUnchanged();
+            AssertInvariants(initialItems);
         }
 
         [Test]
         public void copyto_should_check_array_for_null()
         {
             Assert.That(() => collection.CopyTo(null, 0), Throws.InstanceOf<ArgumentNullException>());
+            AssertCollectionIsUnchanged();
             AssertInvariants(initialItems);
         }
 
@@ -149,6 +172,7 @@ namespace Kistl.API.Tests
         public void copyto_should_check_index_nonnegative()
         {
             Assert.That(() => collection.CopyTo(new TItem[10], -1), Throws.InstanceOf<ArgumentOutOfRangeException>());
+            AssertCollectionIsUnchanged();
             AssertInvariants(initialItems);
         }
 
@@ -170,6 +194,7 @@ namespace Kistl.API.Tests
 
             // index is equal to or greater than the length of array
             Assert.That(() => { collection.CopyTo(destination, destinationIndex); return null; }, Throws.ArgumentException, msg);
+            AssertCollectionIsUnchanged();
             AssertInvariants(initialItems);
         }
 
@@ -192,6 +217,7 @@ namespace Kistl.API.Tests
             Assert.That(() => collection.CopyTo(destination, destinationIndex),
                 Throws.ArgumentException);
 
+            AssertCollectionIsUnchanged();
             AssertInvariants(initialItems);
         }
 
@@ -211,6 +237,7 @@ namespace Kistl.API.Tests
             Assert.That(destination.Skip(offset).Take(initialItems.Count).OrderBy(o => o.GetHashCode()),
                 Is.EquivalentTo(initialItems.OrderBy(o => o.GetHashCode())));
 
+            AssertCollectionIsUnchanged();
             AssertInvariants(initialItems);
         }
 
@@ -222,8 +249,10 @@ namespace Kistl.API.Tests
 
             var item = initialItems[index];
             Assert.That(collection.Remove(item), Is.True);
-            
-            var expectedItems = new List<TItem>( initialItems);
+
+            AssertCollectionIsChanged();
+
+            var expectedItems = new List<TItem>(initialItems);
             expectedItems.Remove(item);
             AssertInvariants(expectedItems);
         }
@@ -240,11 +269,11 @@ namespace Kistl.API.Tests
         {
             var otherItem = NewItem();
             Assert.That(collection.Remove(otherItem), Is.False);
+            AssertCollectionIsUnchanged();
             AssertInvariants(initialItems);
         }
 
         #endregion
-
 
         #region IEnumerator tests
 
@@ -255,6 +284,7 @@ namespace Kistl.API.Tests
             foreach (var item in (IEnumerable)collection)
             {
                 test.Add((TItem)item);
+                AssertCollectionIsUnchanged();
             }
 
             Assert.That(test.OrderBy(o => o.GetHashCode()),

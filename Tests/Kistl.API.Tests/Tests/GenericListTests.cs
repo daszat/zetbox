@@ -31,6 +31,7 @@ namespace Kistl.API.Tests
             Assert.That(
                 () => { var ignored = collection[index]; },
                 Throws.InstanceOf<ArgumentOutOfRangeException>());
+            AssertCollectionIsUnchanged();
             AssertInvariants(initialItems);
         }
 
@@ -41,6 +42,7 @@ namespace Kistl.API.Tests
             Assert.That(
                 () => collection[initialItems.Count + offset],
                 Throws.InstanceOf<ArgumentOutOfRangeException>());
+            AssertCollectionIsUnchanged();
             AssertInvariants(initialItems);
         }
 
@@ -50,6 +52,7 @@ namespace Kistl.API.Tests
             for (int i = 0; i < initialItems.Count; i++)
             {
                 Assert.That(collection[i], Is.SameAs(initialItems[i]));
+                AssertCollectionIsUnchanged();
             }
             AssertInvariants(initialItems);
         }
@@ -61,6 +64,7 @@ namespace Kistl.API.Tests
             Assert.That(
                 () => collection[index] = NewItem(),
                 Throws.InstanceOf<ArgumentOutOfRangeException>());
+            AssertCollectionIsUnchanged();
             AssertInvariants(initialItems);
         }
 
@@ -71,6 +75,7 @@ namespace Kistl.API.Tests
             Assert.That(
                 () => collection[initialItems.Count + offset] = NewItem(),
                 Throws.InstanceOf<ArgumentOutOfRangeException>());
+            AssertCollectionIsUnchanged();
             AssertInvariants(initialItems);
         }
 
@@ -86,6 +91,8 @@ namespace Kistl.API.Tests
             Assert.That(() => { collection[index] = newItem; }, Throws.Nothing);
             Assert.That(collection, Has.Member(newItem));
             Assert.That(collection, Has.No.Member(oldItem));
+            
+            AssertCollectionIsChanged();
 
             var expectedItems = new List<TItem>(initialItems);
             expectedItems[index] = newItem;
@@ -109,6 +116,7 @@ namespace Kistl.API.Tests
             for (int i = 0; i < initialItems.Count; i++)
             {
                 Assert.That(collection.IndexOf(initialItems[i]), Is.EqualTo(i));
+                AssertCollectionIsUnchanged();
             }
             AssertInvariants(initialItems);
         }
@@ -118,6 +126,7 @@ namespace Kistl.API.Tests
         {
             var otherItem = NewItem();
             Assert.That(collection.IndexOf(otherItem), Is.EqualTo(-1));
+            AssertCollectionIsUnchanged();
             AssertInvariants(initialItems);
         }
 
@@ -134,6 +143,8 @@ namespace Kistl.API.Tests
             Assert.That(collection, Has.Count.EqualTo(initialItems.Count + 1));
             Assert.That(collection, Has.Member(newItem));
             Assert.That(collection[index], Is.SameAs(newItem));
+
+            AssertCollectionIsChanged();
 
             var expectedItems = new List<TItem>(initialItems);
             expectedItems.Insert(index, newItem);
@@ -157,11 +168,12 @@ namespace Kistl.API.Tests
             Assume.That(index, Is.GreaterThanOrEqualTo(0));
             Assume.That(index, Is.LessThan(initialItems.Count));
 
-            var expectedItems = new List<TItem>(initialItems);
-            expectedItems.RemoveAt(index);
-
             collection.RemoveAt(index);
 
+            AssertCollectionIsChanged();
+
+            var expectedItems = new List<TItem>(initialItems);
+            expectedItems.RemoveAt(index);
             AssertInvariants(expectedItems);
         }
 
@@ -176,6 +188,7 @@ namespace Kistl.API.Tests
         {
             TestDelegate remover = () => collection.RemoveAt(index);
             Assert.That(remover, Throws.InstanceOf<ArgumentOutOfRangeException>());
+            AssertCollectionIsUnchanged();
             AssertInvariants(initialItems);
         }
 
@@ -184,6 +197,7 @@ namespace Kistl.API.Tests
         {
             TestDelegate remover = () => collection.RemoveAt(initialItems.Count + offset);
             Assert.That(remover, Throws.InstanceOf<ArgumentOutOfRangeException>());
+            AssertCollectionIsUnchanged();
             AssertInvariants(initialItems);
         }
 

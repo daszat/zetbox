@@ -23,15 +23,11 @@ namespace Kistl.API.Tests
     [TestFixture(1, TypeArgs = new[] { typeof(List<Item>) })]
     [TestFixture(10, TypeArgs = new[] { typeof(List<Item>) })]
     [TestFixture(50, TypeArgs = new[] { typeof(List<Item>) })]
-    [TestFixture(0, TypeArgs = new[] { typeof(ObservableCollection<Item>) })]
-    [TestFixture(1, TypeArgs = new[] { typeof(ObservableCollection<Item>) })]
-    [TestFixture(10, TypeArgs = new[] { typeof(ObservableCollection<Item>) })]
-    [TestFixture(50, TypeArgs = new[] { typeof(ObservableCollection<Item>) })]
-    public class IListTestsBaseline<TCollection>
-        : IListTests<TCollection, Item>
+    public sealed class BasicListTestsBaseline<TCollection>
+        : BasicListTests<TCollection, Item>
         where TCollection : ICollection<Item>, IList, new()
     {
-        public IListTestsBaseline(int items)
+        public BasicListTestsBaseline(int items)
             : base(items) { }
 
         protected override Item NewItem()

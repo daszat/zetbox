@@ -1,20 +1,16 @@
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.IO;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Reflection;
-using System.Text;
-
-using Kistl.API.Mocks;
-
-using NUnit.Framework;
-using NUnit.Framework.Constraints;
 
 namespace Kistl.API.Tests
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.Linq;
+    using System.Text;
+
+    using Kistl.API.Mocks;
+
+    using NUnit.Framework;
+
     [TestFixture]
     public class NotifyingObservableCollectionTests
     {

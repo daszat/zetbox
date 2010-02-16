@@ -14,10 +14,6 @@ namespace Kistl.API.Tests
     [TestFixture(1, TypeArgs = new[] { typeof(List<Item>) })]
     [TestFixture(10, TypeArgs = new[] { typeof(List<Item>) })]
     [TestFixture(50, TypeArgs = new[] { typeof(List<Item>) })]
-    [TestFixture(0, TypeArgs = new[] { typeof(ObservableCollection<Item>) })]
-    [TestFixture(1, TypeArgs = new[] { typeof(ObservableCollection<Item>) })]
-    [TestFixture(10, TypeArgs = new[] { typeof(ObservableCollection<Item>) })]
-    [TestFixture(50, TypeArgs = new[] { typeof(ObservableCollection<Item>) })]
     public class GenericListTestsBaseline<TCollection>
         : GenericListTests<TCollection, Item>
         where TCollection : IList<Item>, new()
