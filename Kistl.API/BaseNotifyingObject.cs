@@ -39,7 +39,7 @@ namespace Kistl.API
         public event PropertyChangeWithValueEventHandler PropertyChangingWithValue;
 
         /// <summary>
-        /// Notifies that a property is beeing changing
+        /// Notifies that a property will be changed
         /// </summary>
         /// <param name="property">Propertyname</param>
         /// <param name="oldValue">old value of the changing property</param>
