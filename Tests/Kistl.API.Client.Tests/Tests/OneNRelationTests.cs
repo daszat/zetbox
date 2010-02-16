@@ -21,7 +21,7 @@ namespace Kistl.API.Client.Tests
     [TestFixture(10)]
     [TestFixture(50)]
     public class OneNRelationTests
-        : IListTests<OneNRelationList<INSide>, INSide>
+        : BasicListTests<OneNRelationList<INSide>, INSide>
     {
         public OneNRelationTests(int items)
             : base(items) { }

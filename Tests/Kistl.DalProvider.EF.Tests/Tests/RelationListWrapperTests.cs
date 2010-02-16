@@ -20,7 +20,7 @@ namespace Kistl.DalProvider.EF.Tests
     [TestFixture(10)]
     [TestFixture(50)]
     public class RelationListWrapperTests
-        : IListTests<EntityRelationBSideListWrapper<Projekt, Mitarbeiter, Projekt_haben_Mitarbeiter_RelationEntry__Implementation__>, Mitarbeiter>
+        : BasicListTests<EntityRelationBSideListWrapper<Projekt, Mitarbeiter, Projekt_haben_Mitarbeiter_RelationEntry__Implementation__>, Mitarbeiter>
     {
         protected EntityCollection<Projekt_haben_Mitarbeiter_RelationEntry__Implementation__> wrappedCollection;
 

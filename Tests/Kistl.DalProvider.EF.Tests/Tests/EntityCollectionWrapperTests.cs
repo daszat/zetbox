@@ -20,7 +20,7 @@ namespace Kistl.DalProvider.EF.Tests
     [TestFixture(10)]
     [TestFixture(50)]
     public class EntityCollectionWrapperTests
-        : ICollectionTests<EntityCollectionWrapper<ObjectClass, ObjectClass__Implementation__>, ObjectClass>
+        : BasicCollectionTests<EntityCollectionWrapper<ObjectClass, ObjectClass__Implementation__>, ObjectClass>
     {
         protected EntityCollection<ObjectClass__Implementation__> wrappedCollection;
 

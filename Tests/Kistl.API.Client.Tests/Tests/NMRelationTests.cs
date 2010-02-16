@@ -18,7 +18,7 @@ namespace Kistl.API.Client.Tests
     [TestFixture(10)]
     [TestFixture(50)]
     public class NMRelationBSideTests
-        : IListTests<ClientRelationBSideListWrapper<Projekt, Mitarbeiter, Projekt_haben_Mitarbeiter_RelationEntry__Implementation__>, Mitarbeiter>
+        : BasicListTests<ClientRelationBSideListWrapper<Projekt, Mitarbeiter, Projekt_haben_Mitarbeiter_RelationEntry__Implementation__>, Mitarbeiter>
     {
         private IKistlContext ctx;
         private Projekt__Implementation__ parent;
