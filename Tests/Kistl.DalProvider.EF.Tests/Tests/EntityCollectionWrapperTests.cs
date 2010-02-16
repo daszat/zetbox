@@ -60,7 +60,7 @@ namespace Kistl.DalProvider.EF.Tests
         {
             EnsureContainer();
             var result = ctx.Create<ObjectClass>();
-            result.Description = "item#" + NewItemNumber();
+            result.Description = "item#" + result.ID;
             return result;
         }
 

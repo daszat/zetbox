@@ -16,6 +16,7 @@ namespace Kistl.API
     {
         private IDataObject _Parent;
         private int _UpdateCounter = 0;
+        private bool _hasChangedInUpdate;
 
         private string _PropertyName;
 
@@ -57,6 +58,11 @@ namespace Kistl.API
         public void EndUpdate()
         {
             _UpdateCounter--;
+            if (_UpdateCounter == 0 && _hasChangedInUpdate)
+            {
+                NotifyParent();
+                _hasChangedInUpdate = false;
+            }
         }
 
         /// <summary>
@@ -67,6 +73,10 @@ namespace Kistl.API
             if (_UpdateCounter == 0)
             {
                 _Parent.NotifyPropertyChanged(_PropertyName, null, null);
+            }
+            else
+            {
+                _hasChangedInUpdate = true;
             }
         }
 
@@ -88,7 +98,7 @@ namespace Kistl.API
         protected override void InsertItem(int index, T item)
         {
             base.InsertItem(index, item);
-            item.PropertyChanged += new PropertyChangedEventHandler(item_PropertyChanged);
+            item.PropertyChanged += item_PropertyChanged;
         }
 
         /// <summary>
@@ -98,8 +108,26 @@ namespace Kistl.API
         /// <param name="item">Item</param>
         protected override void SetItem(int index, T item)
         {
+            var oldItem = this[index];
+            oldItem.PropertyChanged -= item_PropertyChanged;
             base.SetItem(index, item);
-            item.PropertyChanged += new PropertyChangedEventHandler(item_PropertyChanged);
+            item.PropertyChanged += item_PropertyChanged;
+        }
+
+        protected override void ClearItems()
+        {
+            foreach (var oldItem in this)
+            {
+                oldItem.PropertyChanged -= item_PropertyChanged;
+            }
+            base.ClearItems();
+        }
+
+        protected override void RemoveItem(int index)
+        {
+            var oldItem = this[index];
+            oldItem.PropertyChanged -= item_PropertyChanged;
+            base.RemoveItem(index);
         }
 
         void item_PropertyChanged(object sender, PropertyChangedEventArgs e)

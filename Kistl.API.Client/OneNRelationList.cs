@@ -17,29 +17,38 @@ namespace Kistl.API.Client
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public class OneNRelationList<T> : IList<T>, IList, INotifyCollectionChanged
-        where T : class, IDataObject
+        where T : class, INotifyingObject, IDataObject
     {
-        private string _propertyName;
-        private string _posProperty;
-        private IDataObject _parent;
-        List<T> collection;
+        private readonly string _propertyName;
+        private readonly string _posProperty;
+        private readonly IDataObject _owner;
+        private readonly Action _ownerNotifier;
+        private List<T> collection; // can change
 
-        public OneNRelationList(string propertyName, IDataObject parent)
-            : this(propertyName, propertyName + Helper.PositionSuffix, parent) { }
+        // obsolete
+        public OneNRelationList(string propertyName, IDataObject owner)
+            : this(propertyName, propertyName + Helper.PositionSuffix, owner, null) { }
+        public OneNRelationList(string propertyName, IDataObject owner, IEnumerable<T> collection)
+            : this(propertyName, propertyName + Helper.PositionSuffix, owner, null, collection) { }
 
-        public OneNRelationList(string propertyName, IDataObject parent, IEnumerable<T> collection)
-            : this(propertyName, propertyName + Helper.PositionSuffix, parent, collection) { }
+
+        public OneNRelationList(string propertyName, IDataObject owner, Action ownerNotifier)
+            : this(propertyName, propertyName + Helper.PositionSuffix, owner, ownerNotifier) { }
+
+        public OneNRelationList(string propertyName, IDataObject owner, Action ownerNotifier, IEnumerable<T> collection)
+            : this(propertyName, propertyName + Helper.PositionSuffix, owner, ownerNotifier, collection) { }
 
         ///// <param name="fkProperty">the name of the fk_Property which does notification, but not collection fixing</param>
-        public OneNRelationList(string fkProperty, string posProperty, IDataObject parent)
-            : this(fkProperty, posProperty, parent, new List<T>()) { }
+        public OneNRelationList(string fkProperty, string posProperty, IDataObject owner, Action ownerNotifier)
+            : this(fkProperty, posProperty, owner, ownerNotifier, new List<T>()) { }
 
         ///// <param name="fkProperty">the name of the fk_Property which does notification, but not collection fixing</param>
-        public OneNRelationList(string fkProperty, string posProperty, IDataObject parent, IEnumerable<T> collection)
+        public OneNRelationList(string fkProperty, string posProperty, IDataObject owner, Action ownerNotifier, IEnumerable<T> collection)
         {
             _propertyName = fkProperty;
             _posProperty = posProperty;
-            _parent = parent;
+            _owner = owner;
+            _ownerNotifier = ownerNotifier;
             this.collection = new List<T>(collection);
         }
 
@@ -59,7 +68,7 @@ namespace Kistl.API.Client
         private void DoInsert(T item, int index)
         {
             if (item == null) throw new ArgumentNullException("item", "Cannot add a NULL Object to this collection");
-            if (_parent.Context != item.Context) throw new WrongKistlContextException();
+            if (_owner.Context != item.Context) throw new WrongKistlContextException();
             collection.Insert(index, item);
             SetPointerProperty(item);
             if (item.HasProperty(_posProperty))
@@ -104,9 +113,9 @@ namespace Kistl.API.Client
 
         private void SetPointerProperty(T item)
         {
-            if (item.GetPrivateFieldValue<int?>("_fk_" + _propertyName) != _parent.ID)
+            if (item.GetPrivateFieldValue<int?>("_fk_" + _propertyName) != _owner.ID)
             {
-                (item as BaseClientDataObject).UpdateParent(_propertyName, _parent.ID);
+                (item as BaseClientDataObject).UpdateParent(_propertyName, _owner.ID);
             }
         }
 
@@ -245,21 +254,31 @@ namespace Kistl.API.Client
 
         protected virtual void OnItemAdded(T newItem)
         {
+            if (_ownerNotifier != null)
+                _ownerNotifier();
+
             if (CollectionChanged != null)
                 CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, newItem));
         }
 
         protected virtual void OnItemRemoved(T removedItem, int index)
         {
+            if (_ownerNotifier != null)
+                _ownerNotifier();
+
             if (CollectionChanged != null)
                 CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, removedItem, index));
         }
 
         protected virtual void OnCollectionReset()
         {
+            if (_ownerNotifier != null)
+                _ownerNotifier();
+
             if (CollectionChanged != null)
                 CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
         }
+
         #endregion
 
         #region IList Members

@@ -17,49 +17,87 @@ namespace Kistl.IntegrationTests.ObjectListModels
 
     public class when_moving_items
     {
-        private IKistlContext ctx;
 
         [SetUp]
         public void SetUp()
         {
-            ctx = KistlContext.GetContext();
         }
 
         [TearDown]
         public void TearDown()
         {
-            if (ctx != null)
-            {
-                ctx.Dispose();
-                ctx = null;
-            }
         }
 
         [Test]
         public void should_persist_changes()
         {
-            var objectClass = ctx.GetQuery<ObjectClass>().Single(oc => oc.ClassName == "ObjectClass");
-            Assert.That(objectClass.Properties.Select(p => p.GetPrivateFieldValue<int>("_ObjectClass_pos")), Is.Ordered);
-            var factory = new WpfModelFactory(GuiApplicationContext.Current);
-            var classModel = (DataObjectModel)factory.CreateDefaultModel(ctx, objectClass);
-            var listModel = (ObjectListModel)classModel.PropertyModelsByName["Properties"];
-            var origList = listModel.Value.ToList();
-            listModel.MoveItemUp(listModel.Value[3]);
-            //Assert.That(listModel.Value[2], Is.SameAs(origList[3]));
-            //Assert.That(listModel.Value[3], Is.SameAs(origList[2]));
-            var tmp = origList[2];
-            origList[2] = origList[3];
-            origList[3] = tmp;
+            Property[] propList;
 
-            Assert.That(listModel.Value, Is.EquivalentTo(origList));
-            Assert.That(objectClass.Properties.Select(p => p.GetPrivateFieldValue<int>("_ObjectClass_pos")), Is.Ordered);
+            using (var ctx = KistlContext.GetContext())
+            {
+                var objectClass = ctx.GetQuery<ObjectClass>().Single(oc => oc.ClassName == "ObjectClass");
 
-            ctx.SubmitChanges();
+                Console.WriteLine("========================");
+                foreach (var p in objectClass.Properties)
+                {
+                    Console.WriteLine("ID=[{0}], name=[{1}], pos=[{2}]", p.ID, p.PropertyName, p.GetPrivateFieldValue<int>("_ObjectClass_pos"));
+                }
 
+                Assert.That(objectClass.Properties.Select(p => p.GetPrivateFieldValue<int>("_ObjectClass_pos")), Is.Ordered);
+                var factory = new WpfModelFactory(GuiApplicationContext.Current);
+                var classModel = (DataObjectModel)factory.CreateDefaultModel(ctx, objectClass);
+                var listModel = (ObjectListModel)classModel.PropertyModelsByName["Properties"];
+                propList = objectClass.Properties.ToArray();
+                var mdlList = listModel.Value.ToArray();
+                listModel.MoveItemUp(listModel.Value[3]);
+
+                var tmpMdl = mdlList[2];
+                mdlList[2] = mdlList[3];
+                mdlList[3] = tmpMdl;
+                var tmpProp = propList[2];
+                propList[2] = propList[3];
+                propList[3] = tmpProp;
+
+                Assert.That(listModel.Value, Is.EquivalentTo(mdlList));
+                Assert.That(objectClass.Properties, Is.EquivalentTo(propList));
+                Assert.That(objectClass.Properties.Select(p => p.GetPrivateFieldValue<int>("_ObjectClass_pos")), Is.Ordered);
+
+                // at least one of the properties has to change
+                Assert.That(new[] { propList[2].ObjectState, propList[3].ObjectState }.Count(dos => dos == DataObjectState.Modified), Is.GreaterThanOrEqualTo(1));
+                // the parent object should be marked as modified too
+                Assert.That(objectClass.ObjectState, Is.EqualTo(DataObjectState.Modified));
+
+                Console.WriteLine("========================");
+                foreach (var p in objectClass.Properties)
+                {
+                    Console.WriteLine("ID=[{0}], name=[{1}], pos=[{2}]", p.ID, p.PropertyName, p.GetPrivateFieldValue<int>("_ObjectClass_pos"));
+                }
+
+                // at least one object has changed
+                Assert.That(ctx.SubmitChanges(), Is.GreaterThanOrEqualTo(1));
+
+                Console.WriteLine("========================");
+                foreach (var p in objectClass.Properties)
+                {
+                    Console.WriteLine("ID=[{0}], name=[{1}], pos=[{2}]", p.ID, p.PropertyName, p.GetPrivateFieldValue<int>("_ObjectClass_pos"));
+                }
+
+                CheckPropertyList(propList);
+            }
+        }
+
+        private static void CheckPropertyList(Property[] propList)
+        {
             using (var checkCtx = KistlContext.GetContext())
             {
-                var checkObjectClass = ctx.GetQuery<ObjectClass>().Single(oc => oc.ClassName == "ObjectClass");
-                Assert.That(checkObjectClass.Properties.Select(p => p.ID), Is.EquivalentTo(origList.Select(dom => dom.Object.ID)));
+                var checkObjectClass = checkCtx.GetQuery<ObjectClass>().Single(oc => oc.ClassName == "ObjectClass");
+                Assert.That(checkObjectClass.Properties, Is.EquivalentTo(propList));
+                Assert.That(checkObjectClass.Properties.Select(p => p.GetPrivateFieldValue<int>("_ObjectClass_pos")), Is.Ordered);
+                Console.WriteLine("========================");
+                foreach (var p in checkObjectClass.Properties)
+                {
+                    Console.WriteLine("ID=[{0}], name=[{1}], pos=[{2}]", p.ID, p.PropertyName, p.GetPrivateFieldValue<int>("_ObjectClass_pos"));
+                }
             }
         }
     }

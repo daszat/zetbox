@@ -60,7 +60,7 @@ namespace Kistl.DalProvider.EF.Tests
         {
             EnsureContainer();
             var result = ctx.Create<Mitarbeiter>();
-            result.Name = "item#" + NewItemNumber();
+            result.Name = "item#" + result.ID;
             return result;
         }
 
@@ -68,7 +68,7 @@ namespace Kistl.DalProvider.EF.Tests
         {
             EnsureContainer();
             parent = (Projekt__Implementation__)ctx.Create<Projekt>();
-            parent.Name = "proj#" + NewItemNumber();
+            parent.Name = "proj#" + parent.ID;
             wrappedCollection = parent.Mitarbeiter__Implementation__;
             foreach (var item in items)
             {

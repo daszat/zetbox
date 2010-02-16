@@ -87,6 +87,7 @@ this.WriteObjects("                        \r\n");
 this.WriteObjects("                    ",  wrapperName , " = new ",  wrapperClass , "<",  referencedInterface , ">(\r\n");
 this.WriteObjects("                        \"",  otherName , "\",\r\n");
 this.WriteObjects("                        this,\r\n");
+this.WriteObjects("                        ",  name , ",\r\n");
 this.WriteObjects("                        serverList);\r\n");
 this.WriteObjects("                }\r\n");
 this.WriteObjects("                return ",  wrapperName , ";\r\n");
@@ -95,13 +96,13 @@ this.WriteObjects("        }\r\n");
 this.WriteObjects("        \r\n");
 this.WriteObjects("        private ",  wrapperClass , "<",  referencedInterface , "> ",  wrapperName , ";\r\n");
 this.WriteObjects("\r\n");
-#line 70 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ObjectListProperty.cst"
+#line 71 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ObjectListProperty.cst"
 if (eagerLoading)
 	{
 
-#line 73 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ObjectListProperty.cst"
+#line 74 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ObjectListProperty.cst"
 this.WriteObjects("		private List<int> ",  name , "Ids;\r\n");
-#line 75 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ObjectListProperty.cst"
+#line 76 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ObjectListProperty.cst"
 }
 
     AddSerialization(serializationList, name, eagerLoading);

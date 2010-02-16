@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.ComponentModel;
 
 namespace Kistl.API.Client.Mocks.OneNLists
 {
@@ -17,7 +18,7 @@ namespace Kistl.API.Client.Mocks.OneNLists
 
         public OneSide(List<INSide> initialObjects)
         {
-            _list = new OneNRelationList<INSide>("OneSide", this, initialObjects);
+            _list = new OneNRelationList<INSide>("OneSide", this, () => OnPropertyChanged("NSide"), initialObjects);
         }
 
         private int _id = NextId();
@@ -51,6 +52,20 @@ namespace Kistl.API.Client.Mocks.OneNLists
         {
             get { return null; }
         }
+
+        #region INotifyPropertyChanged Members
+
+        private void OnPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        #endregion
 
         #region unimplemented
 
@@ -141,16 +156,6 @@ namespace Kistl.API.Client.Mocks.OneNLists
         }
 
         event PropertyChangeWithValueEventHandler INotifyingObject.PropertyChangingWithValue
-        {
-            add { throw new NotImplementedException(); }
-            remove { throw new NotImplementedException(); }
-        }
-
-        #endregion
-
-        #region INotifyPropertyChanged Members
-
-        event System.ComponentModel.PropertyChangedEventHandler System.ComponentModel.INotifyPropertyChanged.PropertyChanged
         {
             add { throw new NotImplementedException(); }
             remove { throw new NotImplementedException(); }

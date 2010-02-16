@@ -58,6 +58,7 @@
                     <%= wrapperName %> = new <%= wrapperClass %><<%= referencedInterface %>>(
                         "<%= otherName %>",
                         this,
+                        <%= name %>,
                         serverList);
                 }
                 return <%= wrapperName %>;

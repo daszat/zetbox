@@ -49,7 +49,7 @@ namespace Kistl.API.Client.Tests
         {
             EnsureContext();
             var result = ctx.Create<Mitarbeiter>();
-            result.Name = "item#" + NewItemNumber();
+            result.Name = "item#" + result.ID;
             return result;
         }
 
@@ -57,7 +57,7 @@ namespace Kistl.API.Client.Tests
         {
             EnsureContext();
             parent = (Projekt__Implementation__)ctx.Create<Projekt>();
-            parent.Name = "proj#" + NewItemNumber();
+            parent.Name = "proj#" + parent.ID;
             foreach (var item in items)
             {
                 parent.Mitarbeiter.Add(item);
