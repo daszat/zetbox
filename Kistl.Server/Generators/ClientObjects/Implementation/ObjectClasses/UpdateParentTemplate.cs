@@ -15,29 +15,40 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
             DataType dataType)
         {
             if (host == null) { throw new ArgumentNullException("host"); }
+            if (dataType == null) { throw new ArgumentNullException("dataType"); }
+
+            var props = dataType
+                .Properties
+                .OfType<ObjectReferenceProperty>()
+                .OrderBy(p => p.PropertyName)
+                .Where(p =>
+                {
+                    Relation rel = RelationExtensions.Lookup(ctx, p);
+                    RelationEnd relEnd = rel.GetEnd(p);
+
+                    return (rel.Storage == StorageType.MergeIntoA && rel.A.Navigator == p)
+                        || (rel.Storage == StorageType.MergeIntoB && rel.B.Navigator == p);
+                }).ToList();
 
             host.CallTemplate("Implementation.ObjectClasses.UpdateParentTemplate",
-                ctx, dataType);
+                ctx, props);
         }
 
-        public void ApplyCase(ObjectReferenceProperty prop)
+        private void ApplyCase(ObjectReferenceProperty prop)
         {
-            Relation rel = RelationExtensions.Lookup(ctx, prop);
-            RelationEnd relEnd = rel.GetEnd(prop);
+            string name = prop.PropertyName;
+            string fkBackingName = "_fk_" + name;
 
-            if ((rel.Storage == StorageType.MergeIntoA && rel.A.Navigator == prop)
-                || (rel.Storage == StorageType.MergeIntoB && rel.B.Navigator == prop))
-            {
-                string name = prop.PropertyName;
-                string fkBackingName = "_fk_" + name;
-
-                this.WriteObjects("                case \"", name, "\":");
-                this.WriteLine();
-                this.WriteObjects("                    ", fkBackingName, " = id;");
-                this.WriteLine();
-                this.WriteObjects("                    break;");
-                this.WriteLine();
-            }
+            this.WriteObjects("                case \"", name, "\":");
+            this.WriteLine();
+            this.WriteObjects("                    __oldValue = ", fkBackingName, ";");
+            this.WriteLine();
+            this.WriteObjects("                    NotifyPropertyChanging(\"", name, "\", __oldValue, __newValue);\r\n");
+            this.WriteObjects("                    ", fkBackingName, " = __newValue;");
+            this.WriteObjects("                    NotifyPropertyChanged(\"", name, "\", __oldValue, __newValue);\r\n");
+            this.WriteLine();
+            this.WriteObjects("                    break;");
+            this.WriteLine();
         }
     }
 }

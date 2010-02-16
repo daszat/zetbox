@@ -3,6 +3,7 @@
 	ClassName="Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses.UpdateParentTemplate" 
 	Inherits="Kistl.Server.Generators.KistlCodeTemplate" %>
 <%@ Import Namespace="System" %>
+<%@ Import Namespace="System.Collections.Generic" %>
 <%@ Import Namespace="System.Diagnostics" %>
 <%@ Import Namespace="System.Linq" %>
 <%@ Import Namespace="Kistl.API" %>
@@ -12,14 +13,20 @@
 <%@ Import Namespace="Kistl.Server.Generators" %>
 <%@ Import Namespace="Kistl.Server.Generators.Extensions" %>
 <%@ Parameter Name="ctx" Type="IKistlContext" %>
-<%@ Parameter Name="cls" Type="ObjectClass" %>
+<%@ Parameter Name="props" Type="List<ObjectReferenceProperty>" %>
 
+<%
+if (props.Count > 0)
+{
+%>
 		public override void UpdateParent(string propertyName, int? id)
 		{
+			int? __oldValue, __newValue = id;
+			
 			switch(propertyName)
 			{
 <%
-	foreach(var prop in cls.Properties.OfType<ObjectReferenceProperty>().OrderBy(p => p.PropertyName))
+	foreach(var prop in props)
 	{
 		ApplyCase(prop);
 	}
@@ -29,3 +36,6 @@
 					break;
 			}
 		}
+<%
+}
+%>
