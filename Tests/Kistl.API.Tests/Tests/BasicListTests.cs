@@ -149,6 +149,9 @@ namespace Kistl.API.Tests
         {
             collection.Clear();
             Assert.That(collection, Is.Empty);
+            // The ObservableCollection does fire a notification 
+            // even if the collection is empty; therefore we too 
+            // require a change notification in all cases.
             AssertCollectionIsChanged();
             AssertInvariants(new List<TItem>(0));
         }

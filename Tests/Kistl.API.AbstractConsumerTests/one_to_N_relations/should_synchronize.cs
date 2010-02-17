@@ -28,8 +28,12 @@ namespace Kistl.API.AbstractConsumerTests.one_to_N_relations
             ctx = GetContext();
             proj1 = ctx.Create<Projekt>();
             proj2 = ctx.Create<Projekt>();
+            var proj = ctx.Create<Projekt>();
             task1 = ctx.Create<Task>();
+            task1.Projekt = proj;
             task2 = ctx.Create<Task>();
+            task2.Projekt = proj;
+            ctx.SubmitChanges();
         }
 
         [TearDown]
@@ -43,8 +47,10 @@ namespace Kistl.API.AbstractConsumerTests.one_to_N_relations
         {
             Assert.That(proj1.Tasks, Is.Empty, "new project should not have tasks");
             Assert.That(proj2.Tasks, Is.Empty, "new project should not have tasks");
-            Assert.That(task1.Projekt, Is.Null, "new task should not have project");
-            Assert.That(task2.Projekt, Is.Null, "new task should not have project");
+            Assert.That(task1.Projekt, Is.Not.SameAs(proj1), "new task should not have project");
+            Assert.That(task1.Projekt, Is.Not.SameAs(proj2), "new task should not have project");
+            Assert.That(task2.Projekt, Is.Not.SameAs(proj1), "new task should not have project");
+            Assert.That(task2.Projekt, Is.Not.SameAs(proj2), "new task should not have project");
         }
 
         [Test]
@@ -54,6 +60,9 @@ namespace Kistl.API.AbstractConsumerTests.one_to_N_relations
 
             Assert.That(task1.Projekt, Is.SameAs(proj1), "strange reference after setting project");
             Assert.That(proj1.Tasks.ToArray(), Is.EquivalentTo(new[] { task1 }));
+
+            Assert.That(proj1.ObjectState, Is.EqualTo(DataObjectState.Modified));
+            Assert.That(task1.ObjectState, Is.EqualTo(DataObjectState.Modified));
         }
 
         [Test]
@@ -63,6 +72,9 @@ namespace Kistl.API.AbstractConsumerTests.one_to_N_relations
 
             Assert.That(task1.Projekt, Is.SameAs(proj1), "strange reference after setting project");
             Assert.That(proj1.Tasks.ToArray(), Is.EquivalentTo(new[] { task1 }));
+
+            Assert.That(proj1.ObjectState, Is.EqualTo(DataObjectState.Modified));
+            Assert.That(task1.ObjectState, Is.EqualTo(DataObjectState.Modified));
         }
 
         [Test]
@@ -78,6 +90,10 @@ namespace Kistl.API.AbstractConsumerTests.one_to_N_relations
             Assert.That(task1.Projekt, Is.SameAs(proj2), "Setting the second property destroyed the object reference");
             Assert.That(proj1.Tasks, Is.Empty, "first Task list was not cleared");
             Assert.That(proj2.Tasks.ToArray(), Is.EquivalentTo(new[] { task1 }), "second task list not correct");
+
+            Assert.That(proj1.ObjectState, Is.EqualTo(DataObjectState.Modified));
+            Assert.That(proj2.ObjectState, Is.EqualTo(DataObjectState.Modified));
+            Assert.That(task1.ObjectState, Is.EqualTo(DataObjectState.Modified));
         }
 
 
@@ -85,8 +101,13 @@ namespace Kistl.API.AbstractConsumerTests.one_to_N_relations
         public void when_setting_N_side_via_index()
         {
             var m = ctx.Create<Method>();
+            m.MethodName = "TestMethod";
             var p1 = ctx.Create<StringParameter>();
+            p1.ParameterName = "p1";
             var p2 = ctx.Create<StringParameter>();
+            p1.ParameterName = "p1";
+
+            ctx.SubmitChanges();
 
             m.Parameter.Add(p1);
 
@@ -98,24 +119,40 @@ namespace Kistl.API.AbstractConsumerTests.one_to_N_relations
             Assert.That(p1.Method, Is.Null, "first Parent not reset");
             Assert.That(p2.Method, Is.SameAs(m), "second Parent wrong");
             Assert.That(m.Parameter.ToArray(), Is.EquivalentTo(new[] { p2 }), "second Parameter collection wrong");
+
+            Assert.That(m.ObjectState, Is.EqualTo(DataObjectState.Modified));
+            Assert.That(p1.ObjectState, Is.EqualTo(DataObjectState.Modified));
+            Assert.That(p2.ObjectState, Is.EqualTo(DataObjectState.Modified));
         }
 
         [Test]
         public void when_setting_N_side_with_remove()
         {
+            Console.WriteLine("proj1.State={0}, task1.State={1}, task2.State={2}", proj1.ObjectState, task1.ObjectState, task2.ObjectState);
             proj1.Tasks.Add(task1);
+            Console.WriteLine("proj1.State={0}, task1.State={1}, task2.State={2}", proj1.ObjectState, task1.ObjectState, task2.ObjectState);
 
             Assert.That(task1.Projekt, Is.SameAs(proj1), "first parent: strange reference");
             Assert.That(proj1.Tasks.ToArray(), Is.EquivalentTo(new[] { task1 }), "collection wrong after first Add");
+            Assert.That(proj1.ObjectState, Is.EqualTo(DataObjectState.Modified));
+            Assert.That(task1.ObjectState, Is.EqualTo(DataObjectState.Modified));
+            Assert.That(task2.ObjectState, Is.EqualTo(DataObjectState.Unmodified));
 
             proj1.Tasks.Remove(task1);
             Assert.That(proj1.Tasks.ToArray(), Is.Empty, "collection not empty after Remove()");
+            Assert.That(proj1.ObjectState, Is.EqualTo(DataObjectState.Modified));
+            Assert.That(task1.ObjectState, Is.EqualTo(DataObjectState.Modified));
+            Assert.That(task2.ObjectState, Is.EqualTo(DataObjectState.Unmodified));
 
             proj1.Tasks.Add(task2);
 
             Assert.That(task1.Projekt, Is.Null, "first parent not reset");
             Assert.That(task2.Projekt, Is.SameAs(proj1), "second parent: strange reference");
             Assert.That(proj1.Tasks.ToArray(), Is.EquivalentTo(new[] { task2 }), "collection wrong after second Add");
+        
+            Assert.That(proj1.ObjectState, Is.EqualTo(DataObjectState.Modified));
+            Assert.That(task1.ObjectState, Is.EqualTo(DataObjectState.Modified));
+            Assert.That(task2.ObjectState, Is.EqualTo(DataObjectState.Modified));
         }
 
         [Test]
@@ -134,8 +171,10 @@ namespace Kistl.API.AbstractConsumerTests.one_to_N_relations
             Assert.That(task1.Projekt, Is.Null, "first parent not reset");
             Assert.That(task2.Projekt, Is.SameAs(proj1), "second parent: strange reference");
             Assert.That(proj1.Tasks.ToArray(), Is.EquivalentTo(new[] { task2 }), "collection wrong after second Add");
+        
+            Assert.That(proj1.ObjectState, Is.EqualTo(DataObjectState.Modified));
+            Assert.That(task1.ObjectState, Is.EqualTo(DataObjectState.Modified));
+            Assert.That(task2.ObjectState, Is.EqualTo(DataObjectState.Modified));
         }
-
     }
-
 }

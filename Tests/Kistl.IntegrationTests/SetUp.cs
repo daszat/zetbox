@@ -41,6 +41,11 @@ namespace Kistl.IntegrationTests
                     Assembly interfaces = Assembly.Load("Kistl.Objects");
                     Assembly implementation = Assembly.Load("Kistl.Objects.Client");
                     var testCtx = new GuiApplicationContext(config, "WPF", () => new MemoryContext(interfaces, implementation));
+                    using (var initCtx = Kistl.API.Client.KistlContext.GetContext()) {
+                    	// load up all infrastructure from the DalProvider
+                    	// TODO: remove ToList() call!
+                    	Console.WriteLine(initCtx.GetQuery<Kistl.App.Base.ObjectClass>().ToList().Count());
+                    }
                 }
                 catch (Exception error)
                 {

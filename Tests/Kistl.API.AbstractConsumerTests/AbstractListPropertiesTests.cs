@@ -152,7 +152,8 @@ namespace Kistl.API.AbstractConsumerTests
 
     }
 
-    public abstract class AbstractListPropertiesTests : AbstractReadonlyListPropertiesTests
+    public abstract class AbstractListPropertiesTests 
+        : AbstractReadonlyListPropertiesTests
     {
         [Test]
         public void AddStringListPropertyContent()
@@ -162,9 +163,11 @@ namespace Kistl.API.AbstractConsumerTests
             using (IKistlContext ctx = GetContext())
             {
                 var k = ctx.GetQuery<Kunde>().First();
+                Assert.That(k.ObjectState, Is.EqualTo(DataObjectState.Unmodified));
                 mail = "UnitTest" + DateTime.Now + "@example.com";
                 ID = k.ID;
                 k.EMails.Add(mail);
+                Assert.That(k.ObjectState, Is.EqualTo(DataObjectState.Modified));
                 Assert.That(mail, Is.Not.EqualTo(String.Empty));
                 Assert.That(ctx.SubmitChanges(), Is.GreaterThan(0));
             }
@@ -192,6 +195,7 @@ namespace Kistl.API.AbstractConsumerTests
                 {
                     if (k.EMails.Count > 0)
                     {
+                        Assert.That(k.ObjectState, Is.EqualTo(DataObjectState.Unmodified));
                         mail = "UnitTest" + DateTime.Now + "@example.com";
                         // TODO: Set IsSorted on Kunde.EMails
                         //k.EMails[0] = mail;
@@ -199,6 +203,7 @@ namespace Kistl.API.AbstractConsumerTests
                         k.EMails.Add(mail);
                         ID = k.ID;
                         set = true;
+                        Assert.That(k.ObjectState, Is.EqualTo(DataObjectState.Modified));
                         break;
                     }
                 }
@@ -230,10 +235,12 @@ namespace Kistl.API.AbstractConsumerTests
                 {
                     if (k.EMails.Count > 2)
                     {
+                        Assert.That(k.ObjectState, Is.EqualTo(DataObjectState.Unmodified));
                         mail = k.EMails.First();
                         k.EMails.Remove(mail);
                         mailCount = k.EMails.Count;
                         ID = k.ID;
+                        Assert.That(k.ObjectState, Is.EqualTo(DataObjectState.Modified));
                         break;
                     }
                 }

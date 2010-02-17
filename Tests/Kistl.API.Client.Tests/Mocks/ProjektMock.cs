@@ -28,6 +28,7 @@ namespace Kistl.App.Projekte
                     _AuftraegeWrapper = new OneNRelationList<Kistl.App.Projekte.Auftrag>(
                         "Projekt",
                         this,
+                        () => NotifyPropertyChanged("Auftraege", null, null),
                         new List<Kistl.App.Projekte.Auftrag>());
                 }
                 return _AuftraegeWrapper;
@@ -150,6 +151,7 @@ namespace Kistl.App.Projekte
                     _TasksWrapper = new OneNRelationList<Kistl.App.Projekte.Task>(
                         "Projekt",
                         this,
+                        () => NotifyPropertyChanged("Tasks", null, null),
                         serverList);
                 }
                 return _TasksWrapper;

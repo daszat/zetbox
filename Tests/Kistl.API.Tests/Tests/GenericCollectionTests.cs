@@ -90,11 +90,28 @@ namespace Kistl.API.Tests
         [SetUp]
         public void SetUp()
         {
+            PreSetup();
             initialItems = InitialItems();
             collection = CreateCollection(initialItems);
             AssertCollectionIsUnchanged();
             AssertInvariants(initialItems);
         }
+
+        [TearDown]
+        public void TearDown()
+        {
+            PostTeardown();
+        }
+
+        /// <summary>
+        /// Called before anything else in a Test.
+        /// </summary>
+        protected virtual void PreSetup() { }
+
+        /// <summary>
+        /// Called as the last thing in a Test.
+        /// </summary>
+        protected virtual void PostTeardown() { }
 
         #region ICollection tests
 

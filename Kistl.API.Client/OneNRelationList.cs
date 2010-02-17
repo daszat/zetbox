@@ -25,13 +25,6 @@ namespace Kistl.API.Client
         private readonly Action _ownerNotifier;
         private List<T> collection; // can change
 
-        // obsolete
-        public OneNRelationList(string propertyName, IDataObject owner)
-            : this(propertyName, propertyName + Helper.PositionSuffix, owner, null) { }
-        public OneNRelationList(string propertyName, IDataObject owner, IEnumerable<T> collection)
-            : this(propertyName, propertyName + Helper.PositionSuffix, owner, null, collection) { }
-
-
         public OneNRelationList(string propertyName, IDataObject owner, Action ownerNotifier)
             : this(propertyName, propertyName + Helper.PositionSuffix, owner, ownerNotifier) { }
 

@@ -58,7 +58,7 @@
                     <%= wrapperName %> = new <%= wrapperClass %><<%= referencedInterface %>>(
                         "<%= otherName %>",
                         this,
-                        <%= name %>,
+                        () => this.NotifyPropertyChanged("<%= name %>", null, null),
                         serverList);
                 }
                 return <%= wrapperName %>;

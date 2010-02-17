@@ -66,7 +66,7 @@ namespace Kistl.API.Client.Tests
         {
             get
             {
-                if (_Children == null) _Children = new OneNRelationList<TestObjClass>("Parent", this, Context.GetListOf<TestObjClass>(this, "Children"));
+                if (_Children == null) _Children = new OneNRelationList<TestObjClass>("Parent", this, () => NotifyPropertyChanged("Children", null, null), Context.GetListOf<TestObjClass>(this, "Children"));
                 return _Children;
             }
         }
@@ -153,7 +153,7 @@ namespace Kistl.API.Client.Tests
         public override void AttachToContext(IKistlContext ctx)
         {
             base.AttachToContext(ctx);
-            if (_Children != null) _Children = new OneNRelationList<TestObjClass>("Parent", this, _Children.Select(i => ctx.Attach(i)).OfType<TestObjClass>());
+            if (_Children != null) _Children = new OneNRelationList<TestObjClass>("Parent", this, () => NotifyPropertyChanged("Children", null, null), _Children.Select(i => ctx.Attach(i)).OfType<TestObjClass>());
         }
 
         public override void ApplyChangesFrom(IPersistenceObject obj)

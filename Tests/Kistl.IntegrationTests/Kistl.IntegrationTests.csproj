@@ -77,6 +77,7 @@
     <Compile Include="Tests\ObjectTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SetUp.cs" />
+    <Compile Include="Tests\OneNRelationTests.cs" />
     <Compile Include="Tests\one_to_N_relations\should_obey_order.cs" />
     <Compile Include="Tests\one_to_N_relations\should_synchronize.cs" />
     <Compile Include="Tests\PersistenceObjects\when_changed.cs" />
@@ -87,6 +88,10 @@
     <Compile Include="Tests\CompoundObjects\when_changing_a_CompoundObject_member.cs" />
     <Compile Include="Tests\CompoundObjects\when_initialized.cs" />
     <Compile Include="Tests\TypeRefs\should_convert_types_correctly.cs" />
+    <Content Include="ProfilingSessions\Session20100217_120210.sdps" />
+    <Content Include="ProfilingSessions\Session20100217_123903.sdps" />
+    <Content Include="ProfilingSessions\Session20100217_124620.sdps" />
+    <Content Include="ProfilingSessions\Session20100217_134452.sdps" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

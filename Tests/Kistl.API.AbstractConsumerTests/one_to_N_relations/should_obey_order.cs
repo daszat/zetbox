@@ -1,15 +1,15 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Kistl.API;
-using Kistl.App.Base;
-
-using NUnit.Framework;
 
 namespace Kistl.API.AbstractConsumerTests.one_to_N_relations
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+
+    using Kistl.API;
+    using Kistl.App.Base;
+
+    using NUnit.Framework;
 
     public abstract class should_obey_order
     {
@@ -39,6 +39,8 @@ namespace Kistl.API.AbstractConsumerTests.one_to_N_relations
                 var parameters = method.Parameter.ToList();
                 method.Parameter.Clear();
 
+                Assert.That(method.ObjectState, Is.EqualTo(DataObjectState.Modified));
+
                 foreach (BaseParameter p in CanonicalOrdering(parameters))
                 {
                     method.Parameter.Add(p);
@@ -55,6 +57,5 @@ namespace Kistl.API.AbstractConsumerTests.one_to_N_relations
                 Assert.That(parameters, Is.EquivalentTo(CanonicalOrdering(parameters)), "mismatch in retrieved parameters");
             }
         }
-
     }
 }
