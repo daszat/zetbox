@@ -18,6 +18,8 @@ namespace Kistl.DalProvider.EF
     public class EfProvider
         : Autofac.Builder.Module
     {
+        private static readonly object _lock = new object();
+
         protected override void Load(ContainerBuilder moduleBuilder)
         {
             base.Load(moduleBuilder);
@@ -42,7 +44,11 @@ namespace Kistl.DalProvider.EF
             moduleBuilder
                 .Register(c =>
                 {
-                    return new KistlDataContext(c.Resolve<KistlConfig>(), c.Resolve<IMetaDataResolver>(), null);
+                    // EF's meta data initialization is not thread-safe
+                    lock (_lock)
+                    {
+                        return new KistlDataContext(c.Resolve<KistlConfig>(), c.Resolve<IMetaDataResolver>(), null);
+                    }
                 })
                 .As<IKistlServerContext>()
                 .FactoryScoped();
@@ -50,7 +56,11 @@ namespace Kistl.DalProvider.EF
             moduleBuilder
                 .Register(c =>
                 {
-                    return new KistlDataContext(c.Resolve<KistlConfig>(), c.Resolve<IMetaDataResolver>(), c.Resolve<IIdentityResolver>().GetCurrent());
+                    // EF's meta data initialization is not thread-safe
+                    lock (_lock)
+                    {
+                        return new KistlDataContext(c.Resolve<KistlConfig>(), c.Resolve<IMetaDataResolver>(), c.Resolve<IIdentityResolver>().GetCurrent());
+                    }
                 })
                 .As<IKistlContext>()
                 .As<IReadOnlyKistlContext>()
