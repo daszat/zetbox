@@ -4,6 +4,7 @@ namespace Kistl.API.Tests
     using System;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Linq;
     using System.Text;
 
@@ -151,9 +152,20 @@ namespace Kistl.API.Tests
         [Test]
         public void clear_should_remove_all_items()
         {
+            var count = collection.Count;
             collection.Clear();
             Assert.That(collection, Is.Empty);
-            AssertCollectionIsChanged();
+            // The ObservableCollection does fire a notification 
+            // even if the collection is empty; Since we don't 
+            // actually want this, we workaround here:
+            if (count > 0 || (typeof(TCollection).IsGenericType && typeof(ObservableCollection<>).IsAssignableFrom(typeof(TCollection).GetGenericTypeDefinition())))
+            {
+                AssertCollectionIsChanged();
+            }
+            else
+            {
+                AssertCollectionIsUnchanged();
+            }
             AssertInvariants(new List<TItem>(0));
         }
 

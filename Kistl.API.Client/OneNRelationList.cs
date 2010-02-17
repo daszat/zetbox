@@ -91,6 +91,11 @@ namespace Kistl.API.Client
 
         private void DoClear()
         {
+            // do nothing if collection is empty
+            // this runs contrary to what ObservableCollection<> does,
+            // but it's stupid to notify if nothing has changed
+            if (collection.Count == 0) { return; }
+
             foreach (var item in collection)
             {
                 ClearPointerProperty(item);

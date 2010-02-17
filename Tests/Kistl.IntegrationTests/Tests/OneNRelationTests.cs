@@ -14,6 +14,7 @@ namespace Kistl.IntegrationTests
 
     using NUnit.Framework;
 
+    [Ignore("takes way too long")]
     [TestFixture(0)]
     [TestFixture(1)]
     [TestFixture(10)]
@@ -25,7 +26,7 @@ namespace Kistl.IntegrationTests
         private Guid _fixtureGuid;
         private Guid _moduleGuid;
         private Guid _valueDescGuid;
-
+        private Guid _otherClassGuid;
 
         private IKistlContext ctx;
         private ObjectClass _parent;
@@ -35,41 +36,43 @@ namespace Kistl.IntegrationTests
         public BasicOneNRelationTests(int items)
             : base(items) { }
 
-        [TestFixtureSetUp]
-        public void SetupFixtureObject()
+        private void SetupFixtureObject()
         {
             using (var initCtx = KistlContext.GetContext())
             {
                 _moduleGuid = initCtx.GetQuery<Module>().Single(m => m.ModuleName == "KistlBase").ExportGuid;
                 _valueDescGuid = initCtx.GetQuery<PresentableModelDescriptor>().First().ExportGuid;
 
-                var fixtureOC = initCtx.GetQuery<ObjectClass>().FirstOrDefault(oc => oc.Properties.Count == items);
-                if (fixtureOC == null)
-                {
-                    fixtureOC = initCtx.FindPersistenceObject<ObjectClass>(TestObjClassGuid);
-                }
+                var fixtureOC = initCtx.GetQuery<ObjectClass>().FirstOrDefault(oc => oc.Properties.Count == items)
+                    ?? initCtx.GetQuery<ObjectClass>().FirstOrDefault(oc => oc.Properties.Count > items)
+                    ?? initCtx.FindPersistenceObject<ObjectClass>(TestObjClassGuid);
+
+                _fixtureGuid = fixtureOC.ExportGuid;
+                var otherClass = initCtx.GetQuery<ObjectClass>().First(oc => oc.ExportGuid != _fixtureGuid);
+                _otherClassGuid = otherClass.ExportGuid;
 
                 while (fixtureOC.Properties.Count < items)
                 {
                     fixtureOC.Properties.Add(CreateProperty(initCtx, NewItemNumber()));
                 }
+
                 while (fixtureOC.Properties.Count > items)
                 {
-                    fixtureOC.Properties.RemoveAt(fixtureOC.Properties.Count - 1);
+                    fixtureOC.Properties[fixtureOC.Properties.Count - 1].ObjectClass = otherClass;
                 }
 
                 Assert.That(fixtureOC.Properties.Count, Is.EqualTo(items));
                 initCtx.SubmitChanges();
-
-                _fixtureGuid = fixtureOC.ExportGuid;
             }
         }
 
         protected override void PreSetup()
         {
+            SetupFixtureObject();
+
             ctx = KistlContext.GetContext();
             Assert.That(ctx.AttachedObjects, Is.Empty);
-            
+
             _parent = ctx.FindPersistenceObject<ObjectClass>(_fixtureGuid);
             Assert.That(_parent.Properties.Count, Is.EqualTo(items));
 
@@ -159,9 +162,30 @@ namespace Kistl.IntegrationTests
             }
 
             Assert.That(collection.Select(p => p.GetPrivateFieldValue<int?>("_ObjectClass_pos")).ToArray(), Is.Ordered);
+
+            ////////////////////// test roundtripping //////////////////////////////////
+
+            var otherClass = ctx.FindPersistenceObject<ObjectClass>(_otherClassGuid);
+            // first shunt unattached properties to another object class to get a valid data model
+            foreach (var prop in ctx.AttachedObjects.OfType<Property>().Where(p => p.ObjectClass == null))
+            {
+                prop.ObjectClass = otherClass;
+            }
+
+            // then, save the stuff to the database
+            ctx.SubmitChanges();
+
+            // finally, check remaining properties for them being properly roundtripped
+            var propertyNames = collection.Select(p => p.PropertyName).ToArray();
+            using (var checkCtx = KistlContext.GetContext())
+            {
+                var checkParent = checkCtx.FindPersistenceObject<ObjectClass>(_fixtureGuid);
+                Assert.That(checkParent.Properties.Select(p => p.PropertyName).ToArray(), Is.EquivalentTo(propertyNames));
+            }
         }
     }
 
+    [Ignore("takes way too long")]
     [TestFixture(0)]
     [TestFixture(1)]
     [TestFixture(10)]
@@ -173,7 +197,7 @@ namespace Kistl.IntegrationTests
         private Guid _fixtureGuid;
         private Guid _moduleGuid;
         private Guid _valueDescGuid;
-
+        private Guid _otherClassGuid;
 
         private IKistlContext ctx;
         private ObjectClass _parent;
@@ -183,8 +207,7 @@ namespace Kistl.IntegrationTests
         public GenericOneNRelationTests(int items)
             : base(items) { }
 
-        [TestFixtureSetUp]
-        public void SetupFixtureObject()
+        private void SetupFixtureObject()
         {
             using (var initCtx = KistlContext.GetContext())
             {
@@ -201,6 +224,7 @@ namespace Kistl.IntegrationTests
                 {
                     fixtureOC.Properties.Add(CreateProperty(initCtx, NewItemNumber()));
                 }
+
                 while (fixtureOC.Properties.Count > items)
                 {
                     fixtureOC.Properties.RemoveAt(fixtureOC.Properties.Count - 1);
@@ -210,11 +234,14 @@ namespace Kistl.IntegrationTests
                 initCtx.SubmitChanges();
 
                 _fixtureGuid = fixtureOC.ExportGuid;
+                _otherClassGuid = initCtx.GetQuery<ObjectClass>().First(oc => oc.ExportGuid != _fixtureGuid).ExportGuid;
             }
         }
 
         protected override void PreSetup()
         {
+            SetupFixtureObject();
+
             ctx = KistlContext.GetContext();
             Assert.That(ctx.AttachedObjects, Is.Empty);
 
@@ -307,6 +334,26 @@ namespace Kistl.IntegrationTests
             }
 
             Assert.That(collection.Select(p => p.GetPrivateFieldValue<int?>("_ObjectClass_pos")).ToArray(), Is.Ordered);
+
+            ////////////////////// test roundtripping //////////////////////////////////
+
+            var otherClass = ctx.FindPersistenceObject<ObjectClass>(_otherClassGuid);
+            // first shunt unattached properties to another object class to get a valid data model
+            foreach (var prop in ctx.AttachedObjects.OfType<Property>().Where(p => p.ObjectClass == null))
+            {
+                prop.ObjectClass = otherClass;
+            }
+
+            // then, save the stuff to the database
+            ctx.SubmitChanges();
+
+            // finally, check remaining properties for them being properly roundtripped
+            var propertyNames = collection.Select(p => p.PropertyName).ToArray();
+            using (var checkCtx = KistlContext.GetContext())
+            {
+                var checkParent = checkCtx.FindPersistenceObject<ObjectClass>(_fixtureGuid);
+                Assert.That(checkParent.Properties.Select(p => p.PropertyName).ToArray(), Is.EquivalentTo(propertyNames));
+            }
         }
     }
 }
