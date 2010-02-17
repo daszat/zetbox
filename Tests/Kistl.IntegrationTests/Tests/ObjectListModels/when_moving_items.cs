@@ -91,8 +91,9 @@ namespace Kistl.IntegrationTests.ObjectListModels
             using (var checkCtx = KistlContext.GetContext())
             {
                 var checkObjectClass = checkCtx.GetQuery<ObjectClass>().Single(oc => oc.ClassName == "ObjectClass");
-                Assert.That(checkObjectClass.Properties, Is.EquivalentTo(propList));
-                Assert.That(checkObjectClass.Properties.Select(p => p.GetPrivateFieldValue<int>("_ObjectClass_pos")), Is.Ordered);
+                // compare by PropertyName, since we got new instances from the checkCtx
+                Assert.That(checkObjectClass.Properties.Select(p => p.PropertyName).ToArray(), Is.EquivalentTo(propList.Select(p => p.PropertyName).ToArray()));
+                Assert.That(checkObjectClass.Properties.Select(p => p.GetPrivateFieldValue<int>("_ObjectClass_pos")).ToArray(), Is.Ordered);
                 Console.WriteLine("========================");
                 foreach (var p in checkObjectClass.Properties)
                 {
