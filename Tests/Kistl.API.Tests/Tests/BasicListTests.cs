@@ -153,16 +153,30 @@ namespace Kistl.API.Tests
             Assert.That(collection, Is.Empty);
             // The ObservableCollection does fire a notification 
             // even if the collection is empty; Since we don't 
-            // actually want this, we workaround here:
-            if (count > 0 || (typeof(TCollection).IsGenericType && typeof(ObservableCollection<>).IsAssignableFrom(typeof(TCollection).GetGenericTypeDefinition())))
-            {
-                AssertCollectionIsChanged();
-            }
-            else
+            // actually want this, but need to properly test it,
+            // we special case it here:
+            if (count == 0 && !IsObservableCollection(typeof(TCollection)))
             {
                 AssertCollectionIsUnchanged();
             }
+            else
+            {
+                AssertCollectionIsChanged();
+            }
             AssertInvariants(new List<TItem>(0));
+        }
+
+        private static bool IsObservableCollection(Type t)
+        {
+            while (t != null)
+            {
+                if (t.IsGenericType && typeof(ObservableCollection<>).IsAssignableFrom(t.GetGenericTypeDefinition()))
+                {
+                    return true;
+                }
+                t = t.BaseType;
+            }
+            return false;
         }
 
         [Test]
