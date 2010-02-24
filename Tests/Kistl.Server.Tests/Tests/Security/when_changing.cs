@@ -11,6 +11,7 @@ namespace Kistl.Server.Tests.Security
     public class when_changing : SecurityDataFixture
     {
         [Test]
+        [Ignore("Not implemented yet")]
         public void should_refresh_rights_on_add_mitarbeiter()
         {
             Assert.That(id2Ctx.GetQuery<Projekt>().Count(), Is.EqualTo(id2ProjectCount));
@@ -25,6 +26,7 @@ namespace Kistl.Server.Tests.Security
         }
 
         [Test]
+        [Ignore("Not implemented yet")]
         public void should_refresh_rights_on_remove_mitarbeiter()
         {
             // Add

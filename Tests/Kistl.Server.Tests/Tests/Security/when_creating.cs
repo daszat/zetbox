@@ -38,8 +38,8 @@ namespace Kistl.Server.Tests.Security
             newProj.Name = "Test";
             srvCtx.SubmitChanges();
 
-            Assert.That(srvCtx.GetQuery<Projekt>().Count(), Is.EqualTo(projectCount));
-            Assert.That(id1Ctx.GetQuery<Projekt>().Count(), Is.EqualTo(id1ProjectCount + 1));
+            Assert.That(srvCtx.GetQuery<Projekt>().Count(), Is.EqualTo(projectCount + 1));
+            Assert.That(id1Ctx.GetQuery<Projekt>().Count(), Is.EqualTo(id1ProjectCount));
             Assert.That(id2Ctx.GetQuery<Projekt>().Count(), Is.EqualTo(id2ProjectCount));
             Assert.That(id3Ctx_low.GetQuery<Projekt>().Count(), Is.EqualTo(0));
         }
