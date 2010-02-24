@@ -499,12 +499,13 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
         {
             Log.DebugFormat("Creating trigger to update rights for [{0}]", tblName);
             ExecuteNonQuery(@"CREATE TRIGGER [{0}]
-                    ON [{1}]
-                    AFTER UPDATE, INSERT AS
-                    BEGIN
-	                    DELETE FROM [{2}] WHERE [ID] IN (SELECT [ID] FROM inserted)
-	                    INSERT INTO [{2}] ([ID], [Identity], [Right]) SELECT [ID], [Identity], [Right] FROM [{3}] WHERE [ID] IN (SELECT [ID] FROM inserted)
-                    END",
+ON [{1}]
+AFTER UPDATE, INSERT, DELETE AS
+BEGIN
+    DELETE FROM [{2}] WHERE [ID] IN (SELECT [ID] FROM inserted)
+    DELETE FROM [{2}] WHERE [ID] IN (SELECT [ID] FROM deleted)
+    INSERT INTO [{2}] ([ID], [Identity], [Right]) SELECT [ID], [Identity], [Right] FROM [{3}] WHERE [ID] IN (SELECT [ID] FROM inserted)
+END",
                 triggerName,
                 tblName,
                 tblNameRights,
