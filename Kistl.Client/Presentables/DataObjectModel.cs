@@ -63,12 +63,16 @@ namespace Kistl.Client.Presentables
                 return _propertyModels;
             }
         }
-
-        public LookupDictionary<string, PresentableModel> PropertyModelsByName
+        private LookupDictionary<string, Property, PresentableModel> _propertyModelsByName;
+        public LookupDictionary<string, Property, PresentableModel> PropertyModelsByName
         {
             get
             {
-                return new LookupDictionary<string, PresentableModel>(PropertyModels, mdl => ((IPropertyValueModel)mdl).Label);
+                if (_propertyModelsByName == null)
+                {
+                    _propertyModelsByName = new LookupDictionary<string, Property, PresentableModel>(FetchPropertyList().ToList(), prop => prop.PropertyName, prop => Factory.CreatePropertyValueModel(DataContext, Object, prop));
+                }
+                return _propertyModelsByName;
             }
         }
 
@@ -135,11 +139,11 @@ namespace Kistl.Client.Presentables
             }
         }
 
-        public LookupDictionary<string, PropertyGroupModel> PropertyGroupsByName
+        public LookupDictionary<string, PropertyGroupModel, PropertyGroupModel> PropertyGroupsByName
         {
             get
             {
-                return new LookupDictionary<string, PropertyGroupModel>(PropertyGroups, mdl => mdl.Title);
+                return new LookupDictionary<string, PropertyGroupModel, PropertyGroupModel>(PropertyGroups, mdl => mdl.Title, mdl => mdl);
             }
         }
 

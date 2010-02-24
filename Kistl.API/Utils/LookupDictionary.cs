@@ -12,37 +12,40 @@ namespace Kistl.API.Utils
     /// through the underlying list on access. This is needed when the underlying list is mutable.
     /// </summary>
     /// <typeparam name="TKey">the type of values used as lookup key</typeparam>
-    /// <typeparam name="TValue">the type of stored objects</typeparam>
-    public sealed class LookupDictionary<TKey, TValue>
+    /// <typeparam name="TUnderlyingValue">the type of stored objects</typeparam>
+    /// <typeparam name="TValue">the type of presented objects</typeparam>
+    public sealed class LookupDictionary<TKey, TUnderlyingValue, TValue>
             : IDictionary<TKey, TValue>, System.Collections.IDictionary
     {
         /// <summary>
         /// The backing store of this ListDictionary. This list is searched when looking up stuff.
         /// </summary>
-        private IList<TValue> _list;
+        private readonly IList<TUnderlyingValue> _list;
 
         /// <summary>
         /// The function to get a key from an item.
         /// </summary>
-        private Func<TValue, TKey> _key;
+        private readonly Func<TUnderlyingValue, TKey> _key;
+
+        /// <summary>
+        /// The function to get a value from an item.
+        /// </summary>
+        private readonly Func<TUnderlyingValue, TValue> _value;
 
         /// <summary>
         /// Initialises a new instance of the ListDictionary class.
         /// </summary>
         /// <param name="list">the list to use as underlying storage</param>
         /// <param name="key">the function to create keys for lookups</param>
-        public LookupDictionary(IList<TValue> list, Func<TValue, TKey> key)
+        /// <param name="value">the function to create values from items</param>
+        public LookupDictionary(IList<TUnderlyingValue> list, Func<TUnderlyingValue, TKey> key, Func<TUnderlyingValue, TValue> value)
         {
-            if (list == null)
-            {
-                throw new ArgumentNullException("list");
-            }
-            if (key == null)
-            {
-                throw new ArgumentNullException("key");
-            }
+            if (list == null) { throw new ArgumentNullException("list"); }
+            if (key == null) { throw new ArgumentNullException("key"); }
+            if (value == null) { throw new ArgumentNullException("value"); }
             _list = list;
             _key = key;
+            _value = value;
         }
 
         /// <summary>
@@ -75,18 +78,14 @@ namespace Kistl.API.Utils
         #region IDictionary<TKey,TValue> Members
 
         /// <summary>
-        /// Adds an object to the underlying list, if the key matches.
+        /// The LookupDictionary cannot be modified.
         /// </summary>
         /// <param name="key">the key value</param>
         /// <param name="value">the object to store.</param>
-        /// <exception cref="ArgumentOutOfRangeException">if the key doesn't match the value</exception>
-        public void Add(TKey key, TValue value)
+        /// <exception cref="InvalidOperationException">always</exception>
+        void IDictionary<TKey, TValue>.Add(TKey key, TValue value)
         {
-            if (!Object.Equals(key, _key(value)))
-            {
-                throw new ArgumentOutOfRangeException("key");
-            }
-            _list.Add(value);
+            throw new InvalidOperationException("LookupDictionary cannot be modified");
         }
 
         /// <inheritdoc/>
@@ -101,17 +100,14 @@ namespace Kistl.API.Utils
             get { return KeysEnumerable.ToList(); }
         }
 
-        /// <inheritdoc/>
-        public bool Remove(TKey key)
+        /// <summary>
+        /// The LookupDictionary cannot be modified.
+        /// </summary>
+        /// <param name="key">the key value</param>
+        /// <exception cref="InvalidOperationException">always</exception>
+        bool IDictionary<TKey, TValue>.Remove(TKey key)
         {
-            int idx = IndexOf(key);
-            if (idx == -1)
-            {
-                return false;
-            }
-
-            _list.RemoveAt(idx);
-            return true;
+            throw new InvalidOperationException("LookupDictionary cannot be modified");
         }
 
         /// <summary>
@@ -129,7 +125,7 @@ namespace Kistl.API.Utils
                 return false;
             }
 
-            value = _list[idx];
+            value = _value(_list[idx]);
             return true;
         }
 
@@ -138,7 +134,7 @@ namespace Kistl.API.Utils
         /// </summary>
         public ICollection<TValue> Values
         {
-            get { return _list; }
+            get { return _list.Select(i => _value(i)).ToList(); }
         }
 
         /// <summary>
@@ -163,7 +159,7 @@ namespace Kistl.API.Utils
             }
             set
             {
-                Add(key, value);
+                throw new InvalidOperationException("LookupDictionary cannot be modified");
             }
         }
 
@@ -172,21 +168,21 @@ namespace Kistl.API.Utils
         #region ICollection<KeyValuePair<TKey,TValue>> Members
 
         /// <inheritdoc/>
-        public void Add(KeyValuePair<TKey, TValue> item)
+        void ICollection<KeyValuePair<TKey, TValue>>.Add(KeyValuePair<TKey, TValue> item)
         {
-            Add(item.Key, item.Value);
+            throw new InvalidOperationException("LookupDictionary cannot be modified");
         }
 
         /// <inheritdoc/>
-        public void Clear()
+        void ICollection<KeyValuePair<TKey, TValue>>.Clear()
         {
-            _list.Clear();
+            throw new InvalidOperationException("LookupDictionary cannot be modified");
         }
 
         /// <inheritdoc/>
         public bool Contains(KeyValuePair<TKey, TValue> item)
         {
-            return _list.Contains(item.Value);
+            return _list.Any(i => _value(i).Equals(item.Value));
         }
 
         /// <inheritdoc/>
@@ -196,7 +192,7 @@ namespace Kistl.API.Utils
 
             for (int i = 0; i < _list.Count; i++)
             {
-                array[i + arrayIndex] = new KeyValuePair<TKey, TValue>(_key(_list[i]), _list[i]);
+                array[i + arrayIndex] = new KeyValuePair<TKey, TValue>(_key(_list[i]), _value(_list[i]));
             }
         }
 
@@ -213,9 +209,9 @@ namespace Kistl.API.Utils
         }
 
         /// <inheritdoc/>
-        public bool Remove(KeyValuePair<TKey, TValue> item)
+        bool ICollection<KeyValuePair<TKey, TValue>>.Remove(KeyValuePair<TKey, TValue> item)
         {
-            return Remove(item.Key);
+            throw new InvalidOperationException("LookupDictionary cannot be modified");
         }
 
         #endregion
@@ -225,7 +221,7 @@ namespace Kistl.API.Utils
         /// <inheritdoc/>
         public IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator()
         {
-            return _list.Select(item => new KeyValuePair<TKey, TValue>(_key(item), item)).GetEnumerator();
+            return _list.Select(item => new KeyValuePair<TKey, TValue>(_key(item), _value(item))).GetEnumerator();
         }
 
         #endregion
@@ -244,12 +240,12 @@ namespace Kistl.API.Utils
 
         void System.Collections.IDictionary.Add(object key, object value)
         {
-            this.Add((TKey)key, (TValue)value);
+            throw new InvalidOperationException("LookupDictionary cannot be modified");
         }
 
         void System.Collections.IDictionary.Clear()
         {
-            this.Clear();
+            throw new InvalidOperationException("LookupDictionary cannot be modified");
         }
 
         bool System.Collections.IDictionary.Contains(object key)
@@ -269,7 +265,7 @@ namespace Kistl.API.Utils
 
         bool System.Collections.IDictionary.IsReadOnly
         {
-            get { return this.IsReadOnly; }
+            get { return true; }
         }
 
         System.Collections.ICollection System.Collections.IDictionary.Keys
@@ -279,7 +275,7 @@ namespace Kistl.API.Utils
 
         void System.Collections.IDictionary.Remove(object key)
         {
-            this.Remove((TKey)key);
+            throw new InvalidOperationException("LookupDictionary cannot be modified");
         }
 
         System.Collections.ICollection System.Collections.IDictionary.Values
@@ -291,7 +287,7 @@ namespace Kistl.API.Utils
         {
             get
             {
-               return this[(TKey)key];
+                return this[(TKey)key];
             }
             set
             {
@@ -307,7 +303,7 @@ namespace Kistl.API.Utils
         {
             for (int i = 0; i < _list.Count; i++)
             {
-                array.SetValue(new KeyValuePair<TKey, TValue>(_key(_list[i]), _list[i]), i + index);
+                array.SetValue(new KeyValuePair<TKey, TValue>(_key(_list[i]), _value(_list[i])), i + index);
             }
         }
 

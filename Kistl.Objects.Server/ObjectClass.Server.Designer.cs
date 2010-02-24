@@ -217,6 +217,7 @@ namespace Kistl.App.Base
         }
         private EntityCollectionWrapper<Kistl.App.Base.InstanceConstraint, Kistl.App.Base.InstanceConstraint__Implementation__> _ConstraintsWrapper;
 
+		private List<int> ConstraintsIds;
 
 
         /// <summary>
@@ -902,6 +903,16 @@ namespace Kistl.App.Base
             
             base.ToStream(binStream, auxObjects);
             BinarySerializer.ToStream(BaseObjectClass != null ? BaseObjectClass.ID : (int?)null, binStream);
+			{
+				BinarySerializer.ToStream(Constraints.Count, binStream);
+				foreach(var obj in Constraints)
+				{
+					if (auxObjects != null) {
+						auxObjects.Add(obj);
+					}
+					BinarySerializer.ToStream(obj.ID, binStream);
+				}
+			}
             BinarySerializer.ToStream(DefaultPresentableModelDescriptor != null ? DefaultPresentableModelDescriptor.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._IsFrozenObject, binStream);
             BinarySerializer.ToStream(this._IsSimpleObject, binStream);
@@ -913,6 +924,18 @@ namespace Kistl.App.Base
             
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._fk_BaseObjectClass, binStream);
+			{
+				int numElements;
+				BinarySerializer.FromStream(out numElements, binStream);
+				ConstraintsIds = new List<int>(numElements);
+				while (numElements-- > 0) 
+				{
+					int id;
+					BinarySerializer.FromStream(out id, binStream);
+					ConstraintsIds.Add(id);
+				}
+			}
+
             BinarySerializer.FromStream(out this._fk_DefaultPresentableModelDescriptor, binStream);
             BinarySerializer.FromStream(out this._IsFrozenObject, binStream);
             BinarySerializer.FromStream(out this._IsSimpleObject, binStream);
