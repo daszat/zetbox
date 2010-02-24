@@ -1115,6 +1115,7 @@ namespace Kistl.App.Base
 			this._fk_CreatedBy = otherImpl._fk_CreatedBy;
 			this._fk_DefaultValue = otherImpl._fk_DefaultValue;
 			this._fk_Module = otherImpl._fk_Module;
+			this.ObjectClass_pos = otherImpl.ObjectClass_pos;
 			this._fk_ObjectClass = otherImpl._fk_ObjectClass;
 			this._fk_ValueModelDescriptor = otherImpl._fk_ValueModelDescriptor;
 		}

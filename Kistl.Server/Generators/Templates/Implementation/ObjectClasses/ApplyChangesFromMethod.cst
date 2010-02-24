@@ -37,6 +37,11 @@
 
 			foreach(var prop in cls.Properties.OfType<ObjectReferenceProperty>().Where(p => !p.IsList()).OrderBy(p => p.PropertyName))
 			{
+				if (prop.RelationEnd.HasPersistentOrder) {
+%>
+			this.<%= prop.PropertyName %><%= Kistl.API.Helper.PositionSuffix %> = otherImpl.<%= prop.PropertyName %><%= Kistl.API.Helper.PositionSuffix %>;
+<%
+				}
 %>
 			this._fk_<%= prop.PropertyName %> = otherImpl._fk_<%= prop.PropertyName %>;
 <%

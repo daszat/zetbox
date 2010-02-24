@@ -797,6 +797,7 @@ namespace Kistl.App.Base
 			me.ParameterName = other.ParameterName;
 			this._fk_ChangedBy = otherImpl._fk_ChangedBy;
 			this._fk_CreatedBy = otherImpl._fk_CreatedBy;
+			this.Method_pos = otherImpl.Method_pos;
 			this._fk_Method = otherImpl._fk_Method;
 		}
 

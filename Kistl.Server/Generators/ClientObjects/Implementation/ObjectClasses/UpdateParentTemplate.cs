@@ -43,9 +43,11 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
             this.WriteLine();
             this.WriteObjects("                    __oldValue = ", fkBackingName, ";");
             this.WriteLine();
-            this.WriteObjects("                    NotifyPropertyChanging(\"", name, "\", __oldValue, __newValue);\r\n");
+            this.WriteObjects("                    NotifyPropertyChanging(\"", name, "\", __oldValue, __newValue);");
+            this.WriteLine();
             this.WriteObjects("                    ", fkBackingName, " = __newValue;");
-            this.WriteObjects("                    NotifyPropertyChanged(\"", name, "\", __oldValue, __newValue);\r\n");
+            this.WriteLine();
+            this.WriteObjects("                    NotifyPropertyChanged(\"", name, "\", __oldValue, __newValue);");
             this.WriteLine();
             this.WriteObjects("                    break;");
             this.WriteLine();

@@ -346,6 +346,7 @@ namespace Kistl.App.Test
 			me.Frage = other.Frage;
 			me.FragenNummer = other.FragenNummer;
 			me.GegebeneAntwort = other.GegebeneAntwort;
+			this.Fragebogen_pos = otherImpl.Fragebogen_pos;
 			this._fk_Fragebogen = otherImpl._fk_Fragebogen;
 		}
 
