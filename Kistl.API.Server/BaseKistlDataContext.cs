@@ -10,6 +10,15 @@ namespace Kistl.API.Server
     using Kistl.App.Base;
     using Kistl.App.Extensions;
 
+    public static class AutoFacContainerExtensions
+    {
+        public static IKistlContext GetKistlContext(this Autofac.IContainer container, Identity identity)
+        {
+            if (container == null) throw new ArgumentNullException("container");
+            return container.Resolve<IKistlContext>(new Autofac.PositionalParameter(0, identity));
+        }
+    }
+
     public abstract class BaseKistlDataContext
         : IKistlServerContext, IDisposable
     {
@@ -194,6 +203,7 @@ namespace Kistl.API.Server
         /// <returns>Number of affected Objects</returns>
         public abstract int SubmitRestore();
 
+        Identity localIdentity = null;
         protected virtual void NotifyChanging(IEnumerable<IDataObject> changedOrAdded)
         {
             foreach (IDataObject obj in changedOrAdded)
@@ -210,7 +220,11 @@ namespace Kistl.API.Server
 
                     if (this.identity != null)
                     {
-                        var localIdentity = this.identity.Context == this ? this.identity : this.GetQuery<Identity>().First(id => id.ID == this.identity.ID);
+                        if(localIdentity == null)
+                        {
+                            localIdentity = this.identity.Context == this ? this.identity : this.GetQuery<Identity>().First(id => id.ID == this.identity.ID);
+                        }
+
                         if (obj.ObjectState == DataObjectState.New)
                         {
                             cb.CreatedBy = localIdentity;

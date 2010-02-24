@@ -695,7 +695,7 @@
     <Compile Include="SchemaManagement\SqlProvider\SqlServer.cs" />
     <Compile Include="Server.cs" />
     <Compile Include="ServerModule.cs" />
-    <Compile Include="WcfIdentityResolver.cs" />
+    <Compile Include="ThreadPrincipalResolver.cs" />
     <Compile Include="WcfServer.cs" />
   </ItemGroup>
   <ItemGroup>

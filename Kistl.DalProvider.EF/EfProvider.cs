@@ -54,12 +54,15 @@ namespace Kistl.DalProvider.EF
                 .FactoryScoped();
 
             moduleBuilder
-                .Register(c =>
+                .Register((c,p) =>
                 {
                     // EF's meta data initialization is not thread-safe
                     lock (_lock)
                     {
-                        return new KistlDataContext(c.Resolve<KistlConfig>(), c.Resolve<IMetaDataResolver>(), c.Resolve<IIdentityResolver>().GetCurrent());
+                        var param = p.OfType<ConstantParameter>().FirstOrDefault();
+                        return new KistlDataContext(c.Resolve<KistlConfig>(), 
+                            c.Resolve<IMetaDataResolver>(),
+                            param != null ? (Kistl.App.Base.Identity)param.Value : c.Resolve<IIdentityResolver>().GetCurrent());
                     }
                 })
                 .As<IKistlContext>()

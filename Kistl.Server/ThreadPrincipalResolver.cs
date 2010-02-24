@@ -12,12 +12,12 @@ namespace Kistl.Server
     using Kistl.API.Server;
     using Kistl.App.Base;
 
-    public class WcfIdentityResolver
+    public class ThreadPrincipalResolver
         : IIdentityResolver
     {
         private readonly IKistlServerContext _resolverCtx;
 
-        public WcfIdentityResolver(IKistlServerContext resolverCtx)
+        public ThreadPrincipalResolver(IKistlServerContext resolverCtx)
         {
             _resolverCtx = resolverCtx;
         }

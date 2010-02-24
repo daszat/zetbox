@@ -83,6 +83,10 @@
     <Compile Include="Tests\ListPropertiesTests.cs" />
     <Compile Include="Tests\ObjectTests.cs" />
     <Compile Include="Tests\RelationTests.cs" />
+    <Compile Include="Tests\Security\SecurityDataFixture.cs" />
+    <Compile Include="Tests\Security\when_changing.cs" />
+    <Compile Include="Tests\Security\when_creating.cs" />
+    <Compile Include="Tests\Security\when_selected.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Kistl.Server.Tests.Config.xml">

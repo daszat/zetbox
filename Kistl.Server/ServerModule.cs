@@ -109,7 +109,7 @@ namespace Kistl.Server
                 .SingletonScoped();
 
             moduleBuilder
-                .Register<WcfIdentityResolver>()
+                .Register<ThreadPrincipalResolver>()
                 .As<IIdentityResolver>()
                 .ContainerScoped();
 
