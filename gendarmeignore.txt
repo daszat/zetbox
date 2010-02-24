@@ -80,7 +80,7 @@ M: System.Collections.IEnumerator Kistl.API.Utils.ReadOnlyProjectedCollection`2:
 M: System.Collections.IEnumerator Kistl.API.Utils.ContextCache::System.Collections.IEnumerable.GetEnumerator()
 M: System.Collections.IEnumerator Kistl.API.Utils.GenericCastingCollectionWrapper`2::System.Collections.IEnumerable.GetEnumerator()
 M: System.Collections.IEnumerator Kistl.API.Utils.SortListFromCollection`2::System.Collections.IEnumerable.GetEnumerator()
-M: System.Collections.IEnumerator Kistl.API.Utils.LookupDictionary`2::System.Collections.IEnumerable.GetEnumerator()
+M: System.Collections.IEnumerator Kistl.API.Utils.LookupDictionary`3::System.Collections.IEnumerable.GetEnumerator()
 M: System.Collections.IEnumerator Kistl.API.ValueCollectionWrapper`4::System.Collections.IEnumerable.GetEnumerator()
 M: System.Collections.IEnumerator Kistl.API.Client.BaseRelationshipFilterCollection`1::System.Collections.IEnumerable.GetEnumerator()
 # the following are compiler generated stuff, sometimes these may change in the d__X part :-/
