@@ -38,6 +38,7 @@
 				        = new <%= backingCollectionType %><<%= thisInterface %>, <%= referencedType %>, <%= entryType %>, <%= providerCollectionType %>>(
 							this.Context,
 				            this, 
+				            () => this.NotifyPropertyChanged("<%= name %>", null, null),
 				            <%= underlyingCollectionName %>);
 				}
 				return <%= backingName %>;

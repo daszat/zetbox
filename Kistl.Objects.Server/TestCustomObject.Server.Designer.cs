@@ -565,7 +565,8 @@ namespace Kistl.App.Test
                     _PhoneNumbersOtherWrapper = new EFValueCollectionWrapper<TestCustomObject, Kistl.App.Test.TestPhoneCompoundObject, TestCustomObject_PhoneNumbersOther_CollectionEntry__Implementation__, EntityCollection<TestCustomObject_PhoneNumbersOther_CollectionEntry__Implementation__>>(
 						this.Context,
                         this,
-                        PhoneNumbersOther__Implementation__);
+              			// () => this.NotifyPropertyChanged("PhoneNumbersOther", "PhoneNumbersOther__Implementation__", null, null),
+          	            PhoneNumbersOther__Implementation__);
                 }
                 return _PhoneNumbersOtherWrapper;
             }

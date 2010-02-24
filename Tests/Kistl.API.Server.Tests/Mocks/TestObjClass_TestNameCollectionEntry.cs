@@ -11,7 +11,7 @@ namespace Kistl.API.Server.Mocks
         : ValueCollectionWrapper<TestObjClass, string, TestObjClass_TestNameCollectionEntry__Implementation__, List<TestObjClass_TestNameCollectionEntry__Implementation__>>
     {
         public TestNameCollectionWrapper(IKistlContext ctx, TestObjClass__Implementation__ parent, List<TestObjClass_TestNameCollectionEntry__Implementation__> baselist)
-            : base(ctx, parent, baselist)
+            : base(ctx, parent, null, baselist)
         {
         }
 

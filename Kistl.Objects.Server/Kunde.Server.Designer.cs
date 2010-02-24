@@ -412,7 +412,8 @@ namespace Kistl.App.Projekte
                     _EMailsWrapper = new EFValueCollectionWrapper<Kunde, string, Kunde_EMails_CollectionEntry__Implementation__, EntityCollection<Kunde_EMails_CollectionEntry__Implementation__>>(
 						this.Context,
                         this,
-                        EMails__Implementation__);
+              			// () => this.NotifyPropertyChanged("EMails", "EMails__Implementation__", null, null),
+          	            EMails__Implementation__);
                 }
                 return _EMailsWrapper;
             }

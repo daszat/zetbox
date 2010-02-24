@@ -55,3 +55,12 @@ RESTORE DATABASE Kistl_test FROM DISK = 'c:\temp\kistl.bak'
 	WITH RECOVERY, REPLACE, 
 	MOVE 'Kistl' to @dbfile,
 	MOVE 'Kistl_log' to @logfile
+	
+-- for example:
+-- SELECT filename FROM Kistl.sys.sysfiles where filename like '%.mdf'
+-- SELECT  filename FROM Kistl.sys.sysfiles where filename like '%.ldf'
+
+-- RESTORE DATABASE Kistl_test FROM DISK = 'c:\temp\kistl.bak' 
+-- 	WITH RECOVERY, REPLACE, 
+-- 	MOVE 'Kistl' to 'C:\ProgramData\MSSQL10.SQLEXPRESS\MSSQL\DATA\kistl_test.mdf',
+-- 	MOVE 'Kistl_log' to 'C:\ProgramData\MSSQL10.SQLEXPRESS\MSSQL\DATA\kistl_test_log.ldf'

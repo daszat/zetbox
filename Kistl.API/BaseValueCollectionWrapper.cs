@@ -13,16 +13,18 @@ namespace Kistl.API
         where TEntry : class, IValueCollectionEntry<TParent, TValue>
         where TEntryCollection : ICollection<TEntry>
     {
-        protected TParent parent;
-        protected TEntryCollection collection;
-        protected IKistlContext ctx;
+        protected readonly TParent parent;
+        protected readonly Action parentNotifier;
+        protected readonly TEntryCollection collection;
+        protected readonly IKistlContext ctx;
         protected readonly ImplementationType tEntryImplementation;
         protected readonly InterfaceType tEntryInterface;
 
-        protected ValueCollectionWrapper(IKistlContext ctx, TParent parent, TEntryCollection collection)
+        protected ValueCollectionWrapper(IKistlContext ctx, TParent parent, Action parentNotifier, TEntryCollection collection)
         {
             this.ctx = ctx;
             this.parent = parent;
+            this.parentNotifier = parentNotifier;
             this.collection = collection;
             this.tEntryImplementation = new ImplementationType(typeof(TEntry));
             this.tEntryInterface = tEntryImplementation.ToInterfaceType();
@@ -39,7 +41,13 @@ namespace Kistl.API
         /// called after an entry is added to the list
         /// </summary>
         /// <param name="entry">the new entry</param>
-        protected virtual void OnEntryAdded(TEntry entry) { }
+        protected virtual void OnEntryAdded(TEntry entry)
+        {
+            if (parentNotifier != null)
+            {
+                parentNotifier();
+            }
+        }
 
         /// <summary>
         /// called before an entry is removed from the list
@@ -162,8 +170,8 @@ namespace Kistl.API
         where TEntry : class, IValueListEntry<TParent, TValue>
         where TEntryCollection : IList<TEntry>
     {
-        protected ValueListWrapper(IKistlContext ctx, TParent parent, TEntryCollection collection)
-            : base(ctx, parent, collection)
+        protected ValueListWrapper(IKistlContext ctx, TParent parent, Action parentNotifier, TEntryCollection collection)
+            : base(ctx, parent, parentNotifier, collection)
         {
         }
 

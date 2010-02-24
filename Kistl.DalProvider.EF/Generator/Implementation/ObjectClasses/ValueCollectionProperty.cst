@@ -16,8 +16,8 @@
 <%@ Parameter Name="prop" Type="Property" %>
 <%
 
-    Debug.Assert(prop is ValueTypeProperty ? ((ValueTypeProperty)prop).IsList : ((StructProperty)prop).IsList);
-	bool hasPersistentOrder = prop is ValueTypeProperty ? ((ValueTypeProperty)prop).HasPersistentOrder : ((StructProperty)prop).HasPersistentOrder;
+    Debug.Assert(prop is ValueTypeProperty ? ((ValueTypeProperty)prop).IsList : ((CompoundObjectProperty)prop).IsList);
+	bool hasPersistentOrder = prop is ValueTypeProperty ? ((ValueTypeProperty)prop).HasPersistentOrder : ((CompoundObjectProperty)prop).HasPersistentOrder;
 
 	// the name of the property to create
 	string name = prop.PropertyName;
@@ -58,7 +58,8 @@
                     <%= wrapperName %> = new <%= wrapperClass %><<%= thisInterface %>, <%= referencedType %>, <%= referencedCollectionEntry %>, EntityCollection<<%= referencedCollectionEntry %>>>(
 						this.Context,
                         this,
-                        <%= efName %>);
+              			// () => this.NotifyPropertyChanged("<%= name %>", "<%= efName %>", null, null),
+          	            <%= efName %>);
                 }
                 return <%= wrapperName %>;
             }

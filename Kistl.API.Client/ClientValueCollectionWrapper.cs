@@ -6,16 +6,22 @@ namespace Kistl.API.Client
     using System.Collections.Specialized;
     using System.Linq;
     using System.Text;
+
     using Kistl.API;
 
-    public class ClientValueCollectionWrapper<TParent, TValue, TEntry, TEntryCollection> 
+    public class ClientValueCollectionWrapper<TParent, TValue, TEntry, TEntryCollection>
         : ValueCollectionWrapper<TParent, TValue, TEntry, TEntryCollection>, INotifyCollectionChanged
         where TParent : IDataObject
         where TEntry : class, IValueCollectionEntry<TParent, TValue>
         where TEntryCollection : ICollection<TEntry>
     {
+        public ClientValueCollectionWrapper(IKistlContext ctx, TParent parent, Action parentNotifier, TEntryCollection collection)
+            : base(ctx, parent, parentNotifier, collection)
+        {
+        }
+
         public ClientValueCollectionWrapper(IKistlContext ctx, TParent parent, TEntryCollection collection)
-            : base(ctx, parent, collection)
+            : base(ctx, parent, null, collection)
         {
         }
 
@@ -28,7 +34,7 @@ namespace Kistl.API.Client
             base.OnEntryAdded(entry);
             if (CollectionChanged != null)
             {
-                CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, entry)); 
+                CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, entry));
             }
         }
 
@@ -48,8 +54,13 @@ namespace Kistl.API.Client
         where TEntry : class, IValueListEntry<TParent, TValue>
         where TEntryCollection : IList<TEntry>
     {
+        public ClientValueListWrapper(IKistlContext ctx, TParent parent, Action parentNotifier, TEntryCollection collection)
+            : base(ctx, parent, parentNotifier, collection)
+        {
+        }
+
         public ClientValueListWrapper(IKistlContext ctx, TParent parent, TEntryCollection collection)
-            : base(ctx, parent, collection)
+            : base(ctx, parent, null, collection)
         {
         }
     }
