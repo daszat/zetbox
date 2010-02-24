@@ -37,32 +37,54 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
-                <ListView x:Name="PropertyList"
+                <TabControl x:Name="PropertyGroupTabs"
                           Grid.Row="0"
                           ItemsSource="{Binding PropertyGroups}"
                           BorderThickness="0"
-                          ItemTemplateSelector="{StaticResource defaultTemplateSelector}"
                           HorizontalContentAlignment="Stretch">
 
-                    <!-- use the whole horizontal space, but no more -->
-                    <ListView.ItemContainerStyle>
-                        <Style>
-                            <Setter Property="DockPanel.Dock"
-                                    Value="Top" />
-                        </Style>
-                    </ListView.ItemContainerStyle>
+                    <TabControl.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Title}"/>
+                        </DataTemplate>
+                    </TabControl.ItemTemplate>
 
-                    <ListView.Template>
-                        <ControlTemplate>
-                            <DockPanel IsItemsHost="True"
-                                       LastChildFill="False" />
-                        </ControlTemplate>
-                    </ListView.Template>
-                </ListView>
+                    <TabControl.ContentTemplate>
+                        <DataTemplate>
+                            <ListView ItemsSource="{Binding PropertyModels}"
+                                  BorderThickness="0"
+                                  HorizontalContentAlignment="Stretch">
+
+                                <!-- use the whole horizontal space, but no more -->
+                                <ListView.ItemContainerStyle>
+                                    <Style>
+                                        <Setter Property="DockPanel.Dock"
+                                                Value="Top" />
+                                    </Style>
+                                </ListView.ItemContainerStyle>
+
+                                <ListView.Template>
+                                    <ControlTemplate>
+                                        <DockPanel IsItemsHost="True"
+                                                   LastChildFill="False" />
+                                    </ControlTemplate>
+                                </ListView.Template>
+
+                                <ListView.ItemTemplate>
+                                    <DataTemplate DataType="{x:Type client:PresentableModel}">
+                                        <view:LabeledView />
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </DataTemplate>
+                    </TabControl.ContentTemplate>
+                </TabControl>
+
                 <ListView x:Name="ResultList"
-                          Grid.Row="1"
+                          Grid.Row="2"
                           ItemsSource="{Binding MethodResults}"
                           BorderThickness="0"
                           ItemTemplateSelector="{StaticResource defaultTemplateSelector}"
