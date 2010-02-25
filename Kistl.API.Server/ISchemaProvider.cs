@@ -17,18 +17,31 @@ namespace Kistl.API.Server
     {
         public ACL()
         {
-            this.Relations = new List<ACLRelation>();
+            this.Relations = new List<Joins>();
         }
 
         public AccessRights Right { get; set; }
-        public IList<ACLRelation> Relations { get; private set; }
+        public IList<Joins> Relations { get; private set; }
     }
 
-    public class ACLRelation
+    public class Joins
     {
         public string JoinTableName { get; set; }
         public string JoinColumnName { get; set; }
         public string FKColumnName { get; set; }
+    }
+
+    public class RightsTrigger
+    {
+        public RightsTrigger()
+        {
+            this.Relations = new List<Joins>();
+        }
+
+        public string ViewUnmaterializedName { get; set; }
+        public string TblNameRights { get; set; }
+
+        public IList<Joins> Relations { get; private set; }
     }
 
     public interface ISchemaProvider : IDisposable
@@ -76,7 +89,7 @@ namespace Kistl.API.Server
 
         void CreateIndex(string tblName, string idxName, bool unique, bool clustered, params string[] columns);
 
-        void CreateUpdateRightsTrigger(string triggerName, string viewUnmaterializedName, string tblName, string tblNameRights);
+        void CreateUpdateRightsTrigger(string triggerName, string tblName, List<RightsTrigger> tblList);
         void CreateRightsViewUnmaterialized(string viewName, string tblName, string tblNameRights, IList<ACL> acls);
         void CreateEmptyRightsViewUnmaterialized(string viewName);
         void CreateRefreshRightsOnProcedure(string procName, string viewUnmaterializedName, string tblName, string tblNameRights);

@@ -495,21 +495,47 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
                 colSpec);
         }
 
-        public void CreateUpdateRightsTrigger(string triggerName, string viewUnmaterializedName, string tblName, string tblNameRights)
+        public void CreateUpdateRightsTrigger(string triggerName, string tblName, List<RightsTrigger> tblList)
         {
-            Log.DebugFormat("Creating trigger to update rights for [{0}]", tblName);
-            ExecuteNonQuery(@"CREATE TRIGGER [{0}]
+            if (tblList == null) throw new ArgumentNullException("tblList");
+
+            Log.DebugFormat("Creating trigger to update rights [{0}]", triggerName);
+
+            StringBuilder sb = new StringBuilder();
+            sb.AppendFormat(@"CREATE TRIGGER [{0}]
 ON [{1}]
 AFTER UPDATE, INSERT, DELETE AS
-BEGIN
-    DELETE FROM [{2}] WHERE [ID] IN (SELECT [ID] FROM inserted)
-    DELETE FROM [{2}] WHERE [ID] IN (SELECT [ID] FROM deleted)
-    INSERT INTO [{2}] ([ID], [Identity], [Right]) SELECT [ID], [Identity], [Right] FROM [{3}] WHERE [ID] IN (SELECT [ID] FROM inserted)
-END",
-                triggerName,
-                tblName,
-                tblNameRights,
-                viewUnmaterializedName);
+BEGIN", triggerName, tblName);
+            sb.AppendLine();
+
+            foreach (var tbl in tblList)
+            {
+                if (tbl.Relations.Count == 0)
+                {
+                    // Directly this table
+                    sb.AppendFormat(@"DELETE FROM [{0}] WHERE [ID] IN (SELECT [ID] FROM inserted)
+DELETE FROM [{0}] WHERE [ID] IN (SELECT [ID] FROM deleted)
+INSERT INTO [{0}] ([ID], [Identity], [Right]) SELECT [ID], [Identity], [Right] FROM [{1}] WHERE [ID] IN (SELECT [ID] FROM inserted)",
+                        tbl.TblNameRights, tbl.ViewUnmaterializedName);
+                    sb.AppendLine();
+                }
+            }
+
+            sb.AppendLine("END");
+            ExecuteNonQuery(sb.ToString());
+
+            //            ExecuteNonQuery(@"CREATE TRIGGER [{0}]
+            //ON [{1}]
+            //AFTER UPDATE, INSERT, DELETE AS
+            //BEGIN
+            //    DELETE FROM [{2}] WHERE [ID] IN (SELECT [ID] FROM inserted)
+            //    DELETE FROM [{2}] WHERE [ID] IN (SELECT [ID] FROM deleted)
+            //    INSERT INTO [{2}] ([ID], [Identity], [Right]) SELECT [ID], [Identity], [Right] FROM [{3}] WHERE [ID] IN (SELECT [ID] FROM inserted)
+            //END",
+            //                triggerName,
+            //                tblName,
+            //                tblNameRights,
+            //                viewUnmaterializedName);
         }
 
         public void CreateEmptyRightsViewUnmaterialized(string viewName)

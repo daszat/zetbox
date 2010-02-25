@@ -959,7 +959,8 @@ namespace Kistl.Server.SchemaManagement
             var rightsViewUnmaterializedName = Construct.SecurityRulesRightsViewUnmaterializedName(objClass);
             var refreshRightsOnProcedureName = Construct.SecurityRulesRefreshRightsOnProcedureName(objClass);
 
-            db.CreateUpdateRightsTrigger(updateRightsTriggerName, rightsViewUnmaterializedName, tblName, tblRightsName);
+            // TODO: Remove
+            // db.CreateUpdateRightsTrigger(updateRightsTriggerName, rightsViewUnmaterializedName, tblName, tblRightsName);
             DoCreateRightsViewUnmaterialized(objClass);
             db.CreateRefreshRightsOnProcedure(refreshRightsOnProcedureName, rightsViewUnmaterializedName, tblName, tblRightsName);
             db.ExecRefreshRightsOnProcedure(refreshRightsOnProcedureName);
@@ -1020,13 +1021,13 @@ namespace Kistl.Server.SchemaManagement
 
                     if (rel.GetRelationType() == RelationType.n_m)
                     {
-                        var viewRel = new ACLRelation();
+                        var viewRel = new Joins();
                         viewAcl.Relations.Add(viewRel);
                         viewRel.JoinTableName = rel.GetRelationTableName();
                         viewRel.JoinColumnName = Construct.ForeignKeyColumnName(lastRelEnd);
                         viewRel.FKColumnName = lastColumName;
 
-                        viewRel = new ACLRelation();
+                        viewRel = new Joins();
                         viewAcl.Relations.Add(viewRel);
                         viewRel.JoinTableName = nextRelEnd.Type.TableName;
                         viewRel.JoinColumnName = "ID";
@@ -1036,7 +1037,7 @@ namespace Kistl.Server.SchemaManagement
                     }
                     else
                     {
-                        var viewRel = new ACLRelation();
+                        var viewRel = new Joins();
                         viewAcl.Relations.Add(viewRel);
                         viewRel.JoinTableName = nextRelEnd.Type.TableName;
                         viewRel.JoinColumnName = "ID";
