@@ -15,7 +15,7 @@ namespace Kistl.API.AbstractConsumerTests.one_to_N_relations
     public abstract class should_synchronize
     {
         protected abstract IKistlContext GetContext();
-        
+
         IKistlContext ctx;
         Projekt proj1;
         Projekt proj2;
@@ -100,27 +100,34 @@ namespace Kistl.API.AbstractConsumerTests.one_to_N_relations
         [Test]
         public void when_setting_N_side_via_index()
         {
-            var m = ctx.Create<Method>();
-            m.MethodName = "TestMethod";
+            var cls = ctx.GetQuery<ObjectClass>().First();
+            var m1 = ctx.Create<Method>();
+            m1.MethodName = "TestMethod1";
+            m1.ObjectClass = cls;
+            m1.Module = cls.Module;
+            var m2 = ctx.Create<Method>();
+            m2.MethodName = "TestMethod2";
+            m2.ObjectClass = cls;
+            m2.Module = cls.Module;
             var p1 = ctx.Create<StringParameter>();
             p1.ParameterName = "p1";
+            p1.Method = m1;
             var p2 = ctx.Create<StringParameter>();
-            p1.ParameterName = "p1";
+            p2.ParameterName = "p1";
+            p2.Method = m2;
 
             ctx.SubmitChanges();
 
-            m.Parameter.Add(p1);
+            Assert.That(p1.Method, Is.SameAs(m1), "first Parent wrong");
+            Assert.That(m1.Parameter.ToArray(), Is.EquivalentTo(new[] { p1 }), "first Parameter collection wrong");
 
-            Assert.That(p1.Method, Is.SameAs(m), "first Parent wrong");
-            Assert.That(m.Parameter.ToArray(), Is.EquivalentTo(new[] { p1 }), "first Parameter collection wrong");
-
-            m.Parameter[0] = p2;
+            m1.Parameter[0] = p2;
 
             Assert.That(p1.Method, Is.Null, "first Parent not reset");
-            Assert.That(p2.Method, Is.SameAs(m), "second Parent wrong");
-            Assert.That(m.Parameter.ToArray(), Is.EquivalentTo(new[] { p2 }), "second Parameter collection wrong");
+            Assert.That(p2.Method, Is.SameAs(m1), "second Parent wrong");
+            Assert.That(m1.Parameter.ToArray(), Is.EquivalentTo(new[] { p2 }), "second Parameter collection wrong");
 
-            Assert.That(m.ObjectState, Is.EqualTo(DataObjectState.Modified));
+            Assert.That(m1.ObjectState, Is.EqualTo(DataObjectState.Modified));
             Assert.That(p1.ObjectState, Is.EqualTo(DataObjectState.Modified));
             Assert.That(p2.ObjectState, Is.EqualTo(DataObjectState.Modified));
         }
@@ -149,7 +156,7 @@ namespace Kistl.API.AbstractConsumerTests.one_to_N_relations
             Assert.That(task1.Projekt, Is.Null, "first parent not reset");
             Assert.That(task2.Projekt, Is.SameAs(proj1), "second parent: strange reference");
             Assert.That(proj1.Tasks.ToArray(), Is.EquivalentTo(new[] { task2 }), "collection wrong after second Add");
-        
+
             Assert.That(proj1.ObjectState, Is.EqualTo(DataObjectState.Modified));
             Assert.That(task1.ObjectState, Is.EqualTo(DataObjectState.Modified));
             Assert.That(task2.ObjectState, Is.EqualTo(DataObjectState.Modified));
@@ -171,7 +178,7 @@ namespace Kistl.API.AbstractConsumerTests.one_to_N_relations
             Assert.That(task1.Projekt, Is.Null, "first parent not reset");
             Assert.That(task2.Projekt, Is.SameAs(proj1), "second parent: strange reference");
             Assert.That(proj1.Tasks.ToArray(), Is.EquivalentTo(new[] { task2 }), "collection wrong after second Add");
-        
+
             Assert.That(proj1.ObjectState, Is.EqualTo(DataObjectState.Modified));
             Assert.That(task1.ObjectState, Is.EqualTo(DataObjectState.Modified));
             Assert.That(task2.ObjectState, Is.EqualTo(DataObjectState.Modified));
