@@ -54,11 +54,27 @@ namespace Kistl.Server.Generators
                 }
 
                 GenerateTo(workingPath);
-                CompileCode(workingPath);
+                GenerateCodeOnStaThread(workingPath);
                 ArchiveOldOutput();
                 PublishOutput();
                 Log.Info("Finished generating Code");
             }
+        }
+
+        private void GenerateCodeOnStaThread(string workingPath)
+        {
+            var staThread = new Thread(() => CompileCode(workingPath));
+            if (staThread.TrySetApartmentState(ApartmentState.STA))
+            {
+                Log.Info("Successfully set STA on compile thread");
+            }
+            else
+            {
+                Log.Info("Successfully set STA on compile thread");
+            }
+            staThread.Name = "Compile";
+            staThread.Start();
+            staThread.Join();
         }
 
         private void GenerateTo(string workingPath)
@@ -106,7 +122,7 @@ namespace Kistl.Server.Generators
             Directory.CreateDirectory(binPath);
 
             var engine = new Engine(ToolsetDefinitionLocations.Registry);
-            
+
             engine.RegisterLogger(new ConsoleLogger(LoggerVerbosity.Minimal));
 
             var logger = new FileLogger();
