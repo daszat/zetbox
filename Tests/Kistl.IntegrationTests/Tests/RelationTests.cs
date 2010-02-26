@@ -229,6 +229,7 @@ namespace Kistl.IntegrationTests
         #region Sort Relation
 
         [Test]
+        [Ignore("Use another DataFixture - ProjectDataFixture contains only one Project")]
         public void Sort_Relation_n_m_n()
         {
             int prjID = 0;
@@ -264,6 +265,7 @@ namespace Kistl.IntegrationTests
         }
 
         [Test]
+        [Ignore("Use another DataFixture - ProjectDataFixture contains only one Project")]
         public void Sort_Relation_n_m_m()
         {
             int maID = 0;
