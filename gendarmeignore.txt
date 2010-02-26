@@ -131,6 +131,10 @@ M: System.Void Kistl.API.ValueListWrapper`4::set_Item(System.Int32,TValue)
 M: TInterface Kistl.DalProvider.EF.EntityListWrapper`2::get_Item(System.Int32)
 M: System.Void Kistl.DalProvider.EF.EntityListWrapper`2::set_Item(System.Int32,TInterface)
 
+R: Gendarme.Rules.Correctness.ProvideCorrectArgumentsToFormattingMethodsRule
+# Format string build during runtime
+M: System.Void Kistl.Server.SchemaManagement.SqlProvider.SqlServer::CreateUpdateRightsTrigger(System.String,System.String,System.Collections.Generic.List`1<Kistl.API.Server.RightsTrigger>)
+
 ###############################################################################
 ##  GLOBAL IGNORES  ###########################################################
 ###############################################################################

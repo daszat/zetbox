@@ -458,13 +458,13 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
 
         public void DropTrigger(string triggerName)
         {
-            Log.DebugFormat("Dropping trigger [{0}].[{1}]", triggerName);
+            Log.DebugFormat("Dropping trigger [{0}]", triggerName);
             ExecuteNonQuery("DROP TRIGGER [{0}]", triggerName);
         }
 
         public void DropView(string viewName)
         {
-            Log.DebugFormat("Dropping view [{0}].[{1}]", viewName);
+            Log.DebugFormat("Dropping view [{0}]", viewName);
             ExecuteNonQuery("DROP VIEW [{0}]", viewName);
         }
 
@@ -510,13 +510,36 @@ BEGIN", triggerName, tblName);
 
             foreach (var tbl in tblList)
             {
+                StringBuilder select = new StringBuilder();
                 if (tbl.Relations.Count == 0)
                 {
-                    // Directly this table
-                    sb.AppendFormat(@"DELETE FROM [{0}] WHERE [ID] IN (SELECT [ID] FROM inserted)
-DELETE FROM [{0}] WHERE [ID] IN (SELECT [ID] FROM deleted)
-INSERT INTO [{0}] ([ID], [Identity], [Right]) SELECT [ID], [Identity], [Right] FROM [{1}] WHERE [ID] IN (SELECT [ID] FROM inserted)",
+                    sb.AppendFormat(@"    DELETE FROM [{0}] WHERE [ID] IN (SELECT [ID] FROM inserted)
+    DELETE FROM [{0}] WHERE [ID] IN (SELECT [ID] FROM deleted)
+    INSERT INTO [{0}] ([ID], [Identity], [Right]) SELECT [ID], [Identity], [Right] FROM [{1}] WHERE [ID] IN (SELECT [ID] FROM inserted)",
                         tbl.TblNameRights, tbl.ViewUnmaterializedName);
+                    sb.AppendLine();
+                    sb.AppendLine();
+                }
+                else
+                {
+                    select.AppendFormat("SELECT t1.[ID] FROM [{0}] t1", tbl.TblName);
+                    int idx = 2;
+                    var lastRel = tbl.Relations.Last();
+                    foreach (var rel in tbl.Relations)
+                    {
+                        var joinTbl = rel == lastRel ? "{0}" : rel.JoinTableName;
+                        select.AppendLine();
+                        select.AppendFormat(@"      INNER JOIN [{0}] t{1} ON t{1}.[{2}] = t{3}.[{4}]", joinTbl, idx, rel.JoinColumnName, idx - 1, rel.FKColumnName);
+                        idx++;
+                    }
+                    string selectFormat = select.ToString();
+                    sb.AppendFormat(@"    DELETE FROM [{0}] WHERE [ID] IN ({1})", tbl.TblNameRights, string.Format(selectFormat, "inserted"));
+                    sb.AppendLine();
+                    sb.AppendFormat(@"    DELETE FROM [{0}] WHERE [ID] IN ({1})", tbl.TblNameRights, string.Format(selectFormat, "deleted"));
+                    sb.AppendLine();
+                    sb.AppendFormat(@"    INSERT INTO [{0}] ([ID], [Identity], [Right]) SELECT [ID], [Identity], [Right] FROM [{2}] WHERE [ID] IN ({1})",
+                        tbl.TblNameRights, string.Format(selectFormat, "inserted"), tbl.ViewUnmaterializedName);
+                    sb.AppendLine();
                     sb.AppendLine();
                 }
             }

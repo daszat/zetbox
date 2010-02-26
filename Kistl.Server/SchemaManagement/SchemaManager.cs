@@ -11,6 +11,7 @@ using Kistl.App.Base;
 using Kistl.App.Extensions;
 using Kistl.Server.Generators;
 using Kistl.Server.Generators.Extensions;
+using System.Runtime.Serialization;
 
 namespace Kistl.Server.SchemaManagement
 {
@@ -58,6 +59,96 @@ namespace Kistl.Server.SchemaManagement
             Log.Info(String.Empty);
         }
 
+        #endregion
+
+        #region CreateJoinList
+        [Serializable]
+        public class JoinListException : Exception
+        {
+            public JoinListException()
+            {                
+            }
+
+            public JoinListException(string message)
+                : base(message)
+            {
+            }
+
+            public JoinListException(string message, Exception innerException)
+                : base(message, innerException)
+            {
+            }
+            protected JoinListException(SerializationInfo info, StreamingContext context)
+                : base(info, context)
+            {
+            }
+        }
+        
+        public static IList<Join> CreateJoinList(ObjectClass objClass, IEnumerable<Relation> relations)
+        {
+            return CreateJoinList(objClass, relations, null);
+        }
+
+        public static IList<Join> CreateJoinList(ObjectClass objClass, IEnumerable<Relation> relations, Relation until)
+        {
+            if (objClass == null) throw new ArgumentNullException("objClass");
+            if (relations == null) throw new ArgumentNullException("relations");
+
+            List<Join> result = new List<Join>();
+            string lastColumName = "ID";
+            ObjectClass lastType = objClass;
+            foreach (var rel in relations)
+            {
+                RelationEnd lastRelEnd;
+                RelationEnd nextRelEnd;
+
+                if (rel.A.Type == lastType)
+                {
+                    lastRelEnd = rel.A;
+                    nextRelEnd = rel.B;
+                }
+                else if (rel.B.Type == lastType)
+                {
+                    lastRelEnd = rel.B;
+                    nextRelEnd = rel.A;
+                }
+                else
+                {
+                    throw new JoinListException(string.Format("Unable to create JoinList: Unable to navigate from '{0}' over '{1}' to next type", lastType.ClassName, rel.ToString()));
+                }
+
+                if (rel.GetRelationType() == RelationType.n_m)
+                {
+                    var viewRel = new Join();
+                    result.Add(viewRel);
+                    viewRel.JoinTableName = rel.GetRelationTableName();
+                    viewRel.JoinColumnName = Construct.ForeignKeyColumnName(lastRelEnd);
+                    viewRel.FKColumnName = lastColumName;
+
+                    viewRel = new Join();
+                    result.Add(viewRel);
+                    viewRel.JoinTableName = nextRelEnd.Type.TableName;
+                    viewRel.JoinColumnName = "ID";
+                    viewRel.FKColumnName = Construct.ForeignKeyColumnName(nextRelEnd);
+
+                    lastColumName = viewRel.FKColumnName;
+                }
+                else
+                {
+                    var viewRel = new Join();
+                    result.Add(viewRel);
+                    viewRel.JoinTableName = nextRelEnd.Type.TableName;
+                    viewRel.JoinColumnName = "ID";
+                    viewRel.FKColumnName = Construct.ForeignKeyColumnName(nextRelEnd);
+
+                    lastColumName = "ID";
+                }
+
+                lastType = nextRelEnd.Type;
+                if (rel == until) return result;
+            }
+            return result;
+        }        
         #endregion
 
         #region GetDbType

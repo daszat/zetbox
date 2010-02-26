@@ -148,6 +148,11 @@ namespace Kistl.Server.Generators
             if (objClass == null) { throw new ArgumentNullException("objClass"); }
             return objClass.TableName + "_Update_Rights_Trigger";
         }
+        public static string SecurityRulesUpdateRightsTriggerName(Relation rel)
+        {
+            if (rel == null) { throw new ArgumentNullException("rel"); }
+            return rel.GetRelationTableName() + "_Update_Rights_Trigger";
+        }
         public static string SecurityRulesRightsViewUnmaterializedName(ObjectClass objClass)
         {
             if (objClass == null) { throw new ArgumentNullException("objClass"); }

@@ -992,67 +992,103 @@ namespace Kistl.Server.SchemaManagement
 
                 var viewAcl = new ACL();
                 viewAcls.Add(viewAcl);
-
-                string lastColumName = "ID";
-                ObjectClass lastType = objClass;
-
                 viewAcl.Right = (Kistl.API.AccessRights)ac.Rights;
-                foreach (var rel in ac.Relations)
+                try
                 {
-                    RelationEnd lastRelEnd;
-                    RelationEnd nextRelEnd;
-
-                    if (rel.A.Type == lastType)
-                    {
-                        lastRelEnd = rel.A;
-                        nextRelEnd = rel.B;
-                    }
-                    else if (rel.B.Type == lastType)
-                    {
-                        lastRelEnd = rel.B;
-                        nextRelEnd = rel.A;
-                    }
-                    else
-                    {
-                        Log.ErrorFormat("Unable to create RightsViewUnmaterialized: Unable to navigate from '{0}' over '{1}' to next type", lastType.ClassName, rel.ToString());
-                        db.CreateEmptyRightsViewUnmaterialized(rightsViewUnmaterializedName);
-                        return;
-                    }
-
-                    if (rel.GetRelationType() == RelationType.n_m)
-                    {
-                        var viewRel = new Joins();
-                        viewAcl.Relations.Add(viewRel);
-                        viewRel.JoinTableName = rel.GetRelationTableName();
-                        viewRel.JoinColumnName = Construct.ForeignKeyColumnName(lastRelEnd);
-                        viewRel.FKColumnName = lastColumName;
-
-                        viewRel = new Joins();
-                        viewAcl.Relations.Add(viewRel);
-                        viewRel.JoinTableName = nextRelEnd.Type.TableName;
-                        viewRel.JoinColumnName = "ID";
-                        viewRel.FKColumnName = Construct.ForeignKeyColumnName(nextRelEnd);
-
-                        lastColumName = viewRel.FKColumnName;
-                    }
-                    else
-                    {
-                        var viewRel = new Joins();
-                        viewAcl.Relations.Add(viewRel);
-                        viewRel.JoinTableName = nextRelEnd.Type.TableName;
-                        viewRel.JoinColumnName = "ID";
-                        viewRel.FKColumnName = Construct.ForeignKeyColumnName(nextRelEnd);
-
-                        lastColumName = "ID";
-                    }
-
-                    lastType = nextRelEnd.Type;
+                    viewAcl.Relations.AddRange(SchemaManager.CreateJoinList(objClass, ac.Relations));
+                }
+                catch (SchemaManager.JoinListException ex)
+                {
+                    Log.ErrorFormat(ex.Message);
+                    db.CreateEmptyRightsViewUnmaterialized(rightsViewUnmaterializedName);
+                    return;
                 }
             }
 
             db.CreateRightsViewUnmaterialized(rightsViewUnmaterializedName, tblName, tblRightsName, viewAcls);
         }
 
+        public void DoCreateUpdateRightsTrigger(ObjectClass objClass)
+        {
+            var updateRightsTriggerName = Construct.SecurityRulesUpdateRightsTriggerName(objClass);
+            var tblName = objClass.TableName;
+            if (db.CheckTriggerExists(tblName, updateRightsTriggerName)) db.DropTrigger(updateRightsTriggerName);
+
+            var tblList = new List<RightsTrigger>();
+            tblList.Add(new RightsTrigger()
+            {
+                TblName = objClass.TableName,
+                TblNameRights = Construct.SecurityRulesTableName(objClass),
+                ViewUnmaterializedName = Construct.SecurityRulesRightsViewUnmaterializedName(objClass)
+            });
+
+            // Get all ObjectClasses that depends on current object class
+            var list = schema.GetQuery<ObjectClass>()
+                .Where(o => o.AccessControlList.OfType<RoleMembership>()
+                    .Where(rm => rm.Relations
+                        .Where(r => r.A.Type == objClass || r.B.Type == objClass).Count() > 0).Count() > 0)
+                .Distinct().ToList().Where(o => o.NeedsRightsTable() && o != objClass);
+            foreach (var dep in list)
+            {
+                Log.DebugFormat("  Additional update Table: {0}", dep.TableName);
+                foreach (var ac in dep.AccessControlList.OfType<RoleMembership>())
+                {
+                    var rel = ac.Relations.FirstOrDefault(r => r.A.Type == objClass || r.B.Type == objClass);
+                    if (rel != null)
+                    {
+                        var rt = new RightsTrigger()
+                        {
+                            TblName = dep.TableName,
+                            TblNameRights = Construct.SecurityRulesTableName(dep),
+                            ViewUnmaterializedName = Construct.SecurityRulesRightsViewUnmaterializedName(dep),
+                        };
+                        rt.Relations.AddRange(SchemaManager.CreateJoinList(dep, ac.Relations, rel));
+                        tblList.Add(rt);
+                    }
+                }
+            }
+
+            db.CreateUpdateRightsTrigger(updateRightsTriggerName, tblName, tblList);
+        }
+
+        public void DoCreateUpdateRightsTrigger(Relation rel)
+        {
+            var updateRightsTriggerName = Construct.SecurityRulesUpdateRightsTriggerName(rel);
+            var tblName = rel.GetRelationTableName();
+            if (db.CheckTriggerExists(tblName, updateRightsTriggerName)) db.DropTrigger(updateRightsTriggerName);
+
+            var tblList = new List<RightsTrigger>();
+
+            // Get all ObjectClasses that depends on current relation
+            var list = schema.GetQuery<ObjectClass>()
+                .Where(o => o.AccessControlList.OfType<RoleMembership>()
+                    .Where(rm => rm.Relations
+                        .Where(r => r == rel).Count() > 0).Count() > 0)
+                .Distinct().ToList().Where(o => o.NeedsRightsTable());
+
+            foreach (var dep in list)
+            {
+                Log.DebugFormat("  Additional update Table: {0}", dep.TableName);
+                foreach (var ac in dep.AccessControlList.OfType<RoleMembership>())
+                {
+                    if (ac.Relations.Contains(rel))
+                    {
+                        var rt = new RightsTrigger()
+                        {
+                            TblName = dep.TableName,
+                            TblNameRights = Construct.SecurityRulesTableName(dep),
+                            ViewUnmaterializedName = Construct.SecurityRulesRightsViewUnmaterializedName(dep),
+                        };
+                        // Ignore last one - this is our n:m end
+                        var joinList = SchemaManager.CreateJoinList(dep, ac.Relations, rel);
+                        rt.Relations.AddRange(joinList.Take(joinList.Count -1 ));
+                        tblList.Add(rt);
+                    }
+                }
+            }
+
+            db.CreateUpdateRightsTrigger(updateRightsTriggerName, tblName, tblList);
+        }
         #endregion
 
         #region ChangeObjectClassACL
@@ -1071,15 +1107,15 @@ namespace Kistl.Server.SchemaManagement
             var savedAcl = savedObjClass.AccessControlList;
 
             if (acl.Count != savedAcl.Count) return true;
-            
-            foreach(var ac in acl.OfType<RoleMembership>())
+
+            foreach (var ac in acl.OfType<RoleMembership>())
             {
                 var sac = savedAcl.OfType<RoleMembership>().FirstOrDefault(i => i.ExportGuid == ac.ExportGuid);
                 if (sac == null) return true;
 
                 if (ac.Relations.Count != sac.Relations.Count) return true;
 
-                for(int i=0;i<ac.Relations.Count;i++)
+                for (int i = 0; i < ac.Relations.Count; i++)
                 {
                     if (ac.Relations[i].ExportGuid != sac.Relations[i].ExportGuid) return true;
                 }

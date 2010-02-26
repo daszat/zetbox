@@ -17,31 +17,37 @@ namespace Kistl.API.Server
     {
         public ACL()
         {
-            this.Relations = new List<Joins>();
+            this.Relations = new List<Join>();
         }
 
         public AccessRights Right { get; set; }
-        public IList<Joins> Relations { get; private set; }
+        public List<Join> Relations { get; private set; }
     }
 
-    public class Joins
+    public class Join
     {
         public string JoinTableName { get; set; }
         public string JoinColumnName { get; set; }
         public string FKColumnName { get; set; }
+
+        public override string ToString()
+        {
+            return string.Format("JOIN {0} ON {1} = {2}", JoinTableName, JoinColumnName, FKColumnName);
+        }
     }
 
     public class RightsTrigger
     {
         public RightsTrigger()
         {
-            this.Relations = new List<Joins>();
+            this.Relations = new List<Join>();
         }
 
         public string ViewUnmaterializedName { get; set; }
         public string TblNameRights { get; set; }
+        public string TblName { get; set; }
 
-        public IList<Joins> Relations { get; private set; }
+        public List<Join> Relations { get; private set; }
     }
 
     public interface ISchemaProvider : IDisposable

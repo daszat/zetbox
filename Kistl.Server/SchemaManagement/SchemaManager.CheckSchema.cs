@@ -54,40 +54,20 @@ namespace Kistl.Server.SchemaManagement
             // Select all ObjectClasses with ACL
             foreach (var objClass in schema.GetQuery<ObjectClass>().ToList().Where(o => o.NeedsRightsTable()).OrderBy(o => o.Module.Namespace).ThenBy(o => o.ClassName))
             {
-                var updateRightsTriggerName = Construct.SecurityRulesUpdateRightsTriggerName(objClass);
-                var tblName = objClass.TableName;
+                Log.InfoFormat("Table: {0}", objClass.TableName);
                 if (repair)
                 {
-                    var tblList = new List<RightsTrigger>();
-                    tblList.Add(new RightsTrigger()
-                    {
-                        TblNameRights = Construct.SecurityRulesTableName(objClass),
-                        ViewUnmaterializedName = Construct.SecurityRulesRightsViewUnmaterializedName(objClass)
-                    });
-
-                    Log.InfoFormat("Table: {0}", objClass.TableName);
-                    // Get all ObjectClasses that depends on current object class
-                    var list = schema.GetQuery<ObjectClass>()
-                        .Where(o => o.AccessControlList.OfType<RoleMembership>()
-                            .Where(rm => rm.Relations
-                                .Where(r => r.A.Type == objClass || r.B.Type == objClass).Count() > 0).Count() > 0)
-                        .Distinct().ToList().Where(o => o.NeedsRightsTable() && o != objClass);
-                    foreach (var dep in list)
-                    {
-                        Log.DebugFormat("  Additional update Table: {0}", dep.TableName);
-                    }
-
-                    if (db.CheckTriggerExists(tblName, updateRightsTriggerName)) db.DropTrigger(updateRightsTriggerName);
-                    db.CreateUpdateRightsTrigger(updateRightsTriggerName, tblName, tblList);
+                    Case.DoCreateUpdateRightsTrigger(objClass);
                 }
                 else
                 {
+                    var updateRightsTriggerName = Construct.SecurityRulesUpdateRightsTriggerName(objClass);
+                    var tblName = objClass.TableName;
                     if (!db.CheckTriggerExists(tblName, updateRightsTriggerName))
                     {
                         Log.WarnFormat("Security Rules Trigger '{0}' is missing", updateRightsTriggerName);
                     }
                 }
-
             }
 
             // Select all n:m Relations that are in a ACL selector
@@ -95,15 +75,19 @@ namespace Kistl.Server.SchemaManagement
                 .Where(r => r.GetRelationType() == RelationType.n_m && schema.GetQuery<RoleMembership>().Where(rm => rm.Relations.Contains(r)).Count() > 0))
             {
                 Log.InfoFormat("Relation: {0}, {1} <-> {2}", rel.Description, rel.A.Type.TableName, rel.B.Type.TableName);
-                // Get all ObjectClasses that depends on current relation
-                var list = schema.GetQuery<ObjectClass>()
-                    .Where(o => o.AccessControlList.OfType<RoleMembership>()
-                        .Where(rm => rm.Relations
-                            .Where(r => r == rel).Count() > 0).Count() > 0)
-                    .Distinct().ToList().Where(o => o.NeedsRightsTable());
-                foreach (var dep in list)
+
+                if (repair)
                 {
-                    Log.DebugFormat("  Additional update Table: {0}", dep.TableName);
+                    Case.DoCreateUpdateRightsTrigger(rel);
+                }
+                else
+                {
+                    var updateRightsTriggerName = Construct.SecurityRulesUpdateRightsTriggerName(rel);
+                    var tblName =  rel.GetRelationTableName();
+                    if (!db.CheckTriggerExists(tblName, updateRightsTriggerName))
+                    {
+                        Log.WarnFormat("Security Rules Trigger '{0}' is missing", updateRightsTriggerName);
+                    }
                 }
             }
         }
