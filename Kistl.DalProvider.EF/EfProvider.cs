@@ -96,7 +96,8 @@ namespace Kistl.DalProvider.EF
                 .Register(c => new ServerObjectHandlerFactory(
                     typeof(ServerCollectionHandler<,,,>),
                     typeof(ServerObjectHandler<>),
-                    typeof(ServerObjectSetHandler)))
+                    typeof(ServerObjectSetHandler),
+                    typeof(ServerDocumentHandler)))
                 .As(typeof(IServerObjectHandlerFactory));
         }
     }

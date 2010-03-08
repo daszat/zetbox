@@ -76,34 +76,34 @@ namespace Kistl.API.Client.KistlService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="InternalCacheItem", Namespace="http://schemas.datacontract.org/2004/07/System.Reflection.Cache")]
     [System.SerializableAttribute()]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.IO.MemoryStream))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.IO.Stream))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(int[]))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Kistl.API.SerializableType))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Kistl.API.SerializableType[]))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Kistl.API.Client.KistlService.InternalCache))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Kistl.API.Client.KistlService.InternalCacheItem[]))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Kistl.API.Client.KistlService.CacheObjType))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Kistl.API.ObjectNotificationRequest[]))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Kistl.API.ObjectNotificationRequest))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Kistl.API.SerializableType))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Kistl.API.SerializableType[]))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Kistl.API.SerializableExpression))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Kistl.API.SerializableMemberExpression))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Kistl.API.SerializableCompoundExpression))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Kistl.API.SerializableExpression[]))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Kistl.API.SerializableUnaryExpression))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Kistl.API.SerializableConditionalExpression))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Kistl.API.SerializableParameterExpression))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Kistl.API.SerializableBinaryExpression))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Kistl.API.SerializableConstantExpression))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Kistl.API.SerializableLambdaExpression))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Kistl.API.SerializableMethodCallExpression))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Kistl.API.SerializableConstantExpression))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Kistl.API.SerializableParameterExpression))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Kistl.API.SerializableUnaryExpression))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Kistl.API.SerializableNewExpression))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.MarshalByRefObject))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.Exception))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Kistl.API.SerializableLambdaExpression))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Kistl.API.SerializableBinaryExpression))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Kistl.API.SerializableConditionalExpression))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(int[]))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.Reflection.MemberInfo[]))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.Reflection.MemberInfo))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.Reflection.ConstructorInfo))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.Reflection.MethodBase))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Kistl.API.Client.KistlService.InternalCache))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Kistl.API.Client.KistlService.InternalCacheItem[]))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Kistl.API.Client.KistlService.CacheObjType))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.IO.MemoryStream))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.IO.Stream))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.MarshalByRefObject))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.Exception))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.Linq.Expressions.ExpressionType))]
     public partial struct InternalCacheItem : System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -198,10 +198,6 @@ namespace Kistl.API.Client.KistlService {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="KistlService.IKistlService")]
     public interface IKistlService {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IKistlService/GetObject", ReplyAction="http://tempuri.org/IKistlService/GetObjectResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(System.Exception), Action="http://tempuri.org/IKistlService/GetObjectExceptionFault", Name="Exception", Namespace="http://schemas.datacontract.org/2004/07/System")]
-        System.IO.MemoryStream GetObject(Kistl.API.SerializableType type, int ID);
-        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IKistlService/SetObjects", ReplyAction="http://tempuri.org/IKistlService/SetObjectsResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(System.Exception), Action="http://tempuri.org/IKistlService/SetObjectsExceptionFault", Name="Exception", Namespace="http://schemas.datacontract.org/2004/07/System")]
         System.IO.MemoryStream SetObjects(System.IO.MemoryStream msg, Kistl.API.ObjectNotificationRequest[] notificationRequests);
@@ -210,14 +206,14 @@ namespace Kistl.API.Client.KistlService {
         [System.ServiceModel.FaultContractAttribute(typeof(System.Exception), Action="http://tempuri.org/IKistlService/GetListExceptionFault", Name="Exception", Namespace="http://schemas.datacontract.org/2004/07/System")]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Kistl.API.SerializableCompoundExpression))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Kistl.API.SerializableMemberExpression))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Kistl.API.SerializableUnaryExpression))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Kistl.API.SerializableBinaryExpression))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Kistl.API.SerializableLambdaExpression))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Kistl.API.SerializableMethodCallExpression))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Kistl.API.SerializableUnaryExpression))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Kistl.API.SerializableNewExpression))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Kistl.API.SerializableConditionalExpression))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Kistl.API.SerializableParameterExpression))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Kistl.API.SerializableLambdaExpression))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Kistl.API.SerializableBinaryExpression))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Kistl.API.SerializableConstantExpression))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Kistl.API.SerializableParameterExpression))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Kistl.API.SerializableConditionalExpression))]
         System.IO.MemoryStream GetList(Kistl.API.SerializableType type, int maxListCount, Kistl.API.SerializableExpression filter, Kistl.API.SerializableExpression[] orderBy);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IKistlService/GetListOf", ReplyAction="http://tempuri.org/IKistlService/GetListOfResponse")]
@@ -227,6 +223,14 @@ namespace Kistl.API.Client.KistlService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IKistlService/FetchRelation", ReplyAction="http://tempuri.org/IKistlService/FetchRelationResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(System.Exception), Action="http://tempuri.org/IKistlService/FetchRelationExceptionFault", Name="Exception", Namespace="http://schemas.datacontract.org/2004/07/System")]
         System.IO.MemoryStream FetchRelation(System.Guid relId, int role, int ID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IKistlService/GetDocumentStream", ReplyAction="http://tempuri.org/IKistlService/GetDocumentStreamResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(System.Exception), Action="http://tempuri.org/IKistlService/GetDocumentStreamExceptionFault", Name="Exception", Namespace="http://schemas.datacontract.org/2004/07/System")]
+        System.IO.MemoryStream GetDocumentStream(int ID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IKistlService/SetDocumentStream", ReplyAction="http://tempuri.org/IKistlService/SetDocumentStreamResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(System.Exception), Action="http://tempuri.org/IKistlService/SetDocumentStreamExceptionFault", Name="Exception", Namespace="http://schemas.datacontract.org/2004/07/System")]
+        void SetDocumentStream(int ID, System.IO.MemoryStream document);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
@@ -256,10 +260,6 @@ namespace Kistl.API.Client.KistlService {
                 base(binding, remoteAddress) {
         }
         
-        public System.IO.MemoryStream GetObject(Kistl.API.SerializableType type, int ID) {
-            return base.Channel.GetObject(type, ID);
-        }
-        
         public System.IO.MemoryStream SetObjects(System.IO.MemoryStream msg, Kistl.API.ObjectNotificationRequest[] notificationRequests) {
             return base.Channel.SetObjects(msg, notificationRequests);
         }
@@ -274,6 +274,14 @@ namespace Kistl.API.Client.KistlService {
         
         public System.IO.MemoryStream FetchRelation(System.Guid relId, int role, int ID) {
             return base.Channel.FetchRelation(relId, role, ID);
+        }
+        
+        public System.IO.MemoryStream GetDocumentStream(int ID) {
+            return base.Channel.GetDocumentStream(ID);
+        }
+        
+        public void SetDocumentStream(int ID, System.IO.MemoryStream document) {
+            base.Channel.SetDocumentStream(ID, document);
         }
     }
 }

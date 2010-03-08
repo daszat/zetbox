@@ -106,63 +106,6 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="KistlService_Endpoint_GetObject_Input_policy">
-    <wsp:ExactlyOne>
-      <wsp:All>
-        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
-          <sp:Body />
-          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
-        </sp:SignedParts>
-        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
-          <sp:Body />
-        </sp:EncryptedParts>
-      </wsp:All>
-    </wsp:ExactlyOne>
-  </wsp:Policy>
-  <wsp:Policy wsu:Id="KistlService_Endpoint_GetObject_output_policy">
-    <wsp:ExactlyOne>
-      <wsp:All>
-        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
-          <sp:Body />
-          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
-        </sp:SignedParts>
-        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
-          <sp:Body />
-        </sp:EncryptedParts>
-      </wsp:All>
-    </wsp:ExactlyOne>
-  </wsp:Policy>
-  <wsp:Policy wsu:Id="KistlService_Endpoint_GetObject_ExceptionFault_Fault">
-    <wsp:ExactlyOne>
-      <wsp:All>
-        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
-          <sp:Body />
-          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
-        </sp:SignedParts>
-        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
-          <sp:Body />
-        </sp:EncryptedParts>
-      </wsp:All>
-    </wsp:ExactlyOne>
-  </wsp:Policy>
   <wsp:Policy wsu:Id="KistlService_Endpoint_SetObjects_Input_policy">
     <wsp:ExactlyOne>
       <wsp:All>
@@ -391,28 +334,133 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
+  <wsp:Policy wsu:Id="KistlService_Endpoint_GetDocumentStream_Input_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="KistlService_Endpoint_GetDocumentStream_output_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="KistlService_Endpoint_GetDocumentStream_ExceptionFault_Fault">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="KistlService_Endpoint_SetDocumentStream_Input_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="KistlService_Endpoint_SetDocumentStream_output_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="KistlService_Endpoint_SetDocumentStream_ExceptionFault_Fault">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://localhost:6666/KistlService?xsd=xsd0" namespace="http://tempuri.org/" />
-      <xsd:import schemaLocation="http://localhost:6666/KistlService?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/System" />
+      <xsd:import schemaLocation="http://localhost:6666/KistlService?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/System" />
       <xsd:import schemaLocation="http://localhost:6666/KistlService?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-      <xsd:import schemaLocation="http://localhost:6666/KistlService?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Kistl.API" />
-      <xsd:import schemaLocation="http://localhost:6666/KistlService?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/System.IO" />
+      <xsd:import schemaLocation="http://localhost:6666/KistlService?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/System.IO" />
+      <xsd:import schemaLocation="http://localhost:6666/KistlService?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/Kistl.API" />
       <xsd:import schemaLocation="http://localhost:6666/KistlService?xsd=xsd5" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
       <xsd:import schemaLocation="http://localhost:6666/KistlService?xsd=xsd6" namespace="http://schemas.datacontract.org/2004/07/System.Linq.Expressions" />
       <xsd:import schemaLocation="http://localhost:6666/KistlService?xsd=xsd7" namespace="http://schemas.datacontract.org/2004/07/System.Reflection" />
       <xsd:import schemaLocation="http://localhost:6666/KistlService?xsd=xsd8" namespace="http://schemas.datacontract.org/2004/07/System.Reflection.Cache" />
     </xsd:schema>
   </wsdl:types>
-  <wsdl:message name="IKistlService_GetObject_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetObject" />
-  </wsdl:message>
-  <wsdl:message name="IKistlService_GetObject_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetObjectResponse" />
-  </wsdl:message>
-  <wsdl:message name="IKistlService_GetObject_ExceptionFault_FaultMessage">
-    <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/System" name="detail" element="q1:Exception" />
-  </wsdl:message>
   <wsdl:message name="IKistlService_SetObjects_InputMessage">
     <wsdl:part name="parameters" element="tns:SetObjects" />
   </wsdl:message>
@@ -420,7 +468,7 @@
     <wsdl:part name="parameters" element="tns:SetObjectsResponse" />
   </wsdl:message>
   <wsdl:message name="IKistlService_SetObjects_ExceptionFault_FaultMessage">
-    <wsdl:part xmlns:q2="http://schemas.datacontract.org/2004/07/System" name="detail" element="q2:Exception" />
+    <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/System" name="detail" element="q1:Exception" />
   </wsdl:message>
   <wsdl:message name="IKistlService_GetList_InputMessage">
     <wsdl:part name="parameters" element="tns:GetList" />
@@ -429,7 +477,7 @@
     <wsdl:part name="parameters" element="tns:GetListResponse" />
   </wsdl:message>
   <wsdl:message name="IKistlService_GetList_ExceptionFault_FaultMessage">
-    <wsdl:part xmlns:q3="http://schemas.datacontract.org/2004/07/System" name="detail" element="q3:Exception" />
+    <wsdl:part xmlns:q2="http://schemas.datacontract.org/2004/07/System" name="detail" element="q2:Exception" />
   </wsdl:message>
   <wsdl:message name="IKistlService_GetListOf_InputMessage">
     <wsdl:part name="parameters" element="tns:GetListOf" />
@@ -438,7 +486,7 @@
     <wsdl:part name="parameters" element="tns:GetListOfResponse" />
   </wsdl:message>
   <wsdl:message name="IKistlService_GetListOf_ExceptionFault_FaultMessage">
-    <wsdl:part xmlns:q4="http://schemas.datacontract.org/2004/07/System" name="detail" element="q4:Exception" />
+    <wsdl:part xmlns:q3="http://schemas.datacontract.org/2004/07/System" name="detail" element="q3:Exception" />
   </wsdl:message>
   <wsdl:message name="IKistlService_FetchRelation_InputMessage">
     <wsdl:part name="parameters" element="tns:FetchRelation" />
@@ -447,14 +495,27 @@
     <wsdl:part name="parameters" element="tns:FetchRelationResponse" />
   </wsdl:message>
   <wsdl:message name="IKistlService_FetchRelation_ExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q4="http://schemas.datacontract.org/2004/07/System" name="detail" element="q4:Exception" />
+  </wsdl:message>
+  <wsdl:message name="IKistlService_GetDocumentStream_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDocumentStream" />
+  </wsdl:message>
+  <wsdl:message name="IKistlService_GetDocumentStream_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDocumentStreamResponse" />
+  </wsdl:message>
+  <wsdl:message name="IKistlService_GetDocumentStream_ExceptionFault_FaultMessage">
     <wsdl:part xmlns:q5="http://schemas.datacontract.org/2004/07/System" name="detail" element="q5:Exception" />
   </wsdl:message>
+  <wsdl:message name="IKistlService_SetDocumentStream_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetDocumentStream" />
+  </wsdl:message>
+  <wsdl:message name="IKistlService_SetDocumentStream_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetDocumentStreamResponse" />
+  </wsdl:message>
+  <wsdl:message name="IKistlService_SetDocumentStream_ExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q6="http://schemas.datacontract.org/2004/07/System" name="detail" element="q6:Exception" />
+  </wsdl:message>
   <wsdl:portType name="IKistlService">
-    <wsdl:operation name="GetObject">
-      <wsdl:input wsaw:Action="http://tempuri.org/IKistlService/GetObject" message="tns:IKistlService_GetObject_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IKistlService/GetObjectResponse" message="tns:IKistlService_GetObject_OutputMessage" />
-      <wsdl:fault wsaw:Action="http://tempuri.org/IKistlService/GetObjectExceptionFault" name="ExceptionFault" message="tns:IKistlService_GetObject_ExceptionFault_FaultMessage" />
-    </wsdl:operation>
     <wsdl:operation name="SetObjects">
       <wsdl:input wsaw:Action="http://tempuri.org/IKistlService/SetObjects" message="tns:IKistlService_SetObjects_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IKistlService/SetObjectsResponse" message="tns:IKistlService_SetObjects_OutputMessage" />
@@ -475,25 +536,20 @@
       <wsdl:output wsaw:Action="http://tempuri.org/IKistlService/FetchRelationResponse" message="tns:IKistlService_FetchRelation_OutputMessage" />
       <wsdl:fault wsaw:Action="http://tempuri.org/IKistlService/FetchRelationExceptionFault" name="ExceptionFault" message="tns:IKistlService_FetchRelation_ExceptionFault_FaultMessage" />
     </wsdl:operation>
+    <wsdl:operation name="GetDocumentStream">
+      <wsdl:input wsaw:Action="http://tempuri.org/IKistlService/GetDocumentStream" message="tns:IKistlService_GetDocumentStream_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IKistlService/GetDocumentStreamResponse" message="tns:IKistlService_GetDocumentStream_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IKistlService/GetDocumentStreamExceptionFault" name="ExceptionFault" message="tns:IKistlService_GetDocumentStream_ExceptionFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetDocumentStream">
+      <wsdl:input wsaw:Action="http://tempuri.org/IKistlService/SetDocumentStream" message="tns:IKistlService_SetDocumentStream_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IKistlService/SetDocumentStreamResponse" message="tns:IKistlService_SetDocumentStream_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IKistlService/SetDocumentStreamExceptionFault" name="ExceptionFault" message="tns:IKistlService_SetDocumentStream_ExceptionFault_FaultMessage" />
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="KistlService_Endpoint" type="tns:IKistlService">
     <wsp:PolicyReference URI="#KistlService_Endpoint_policy" />
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="GetObject">
-      <soap12:operation soapAction="http://tempuri.org/IKistlService/GetObject" style="document" />
-      <wsdl:input>
-        <wsp:PolicyReference URI="#KistlService_Endpoint_GetObject_Input_policy" />
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <wsp:PolicyReference URI="#KistlService_Endpoint_GetObject_output_policy" />
-        <soap12:body use="literal" />
-      </wsdl:output>
-      <wsdl:fault name="ExceptionFault">
-        <wsp:PolicyReference URI="#KistlService_Endpoint_GetObject_ExceptionFault_Fault" />
-        <soap12:fault use="literal" name="ExceptionFault" namespace="" />
-      </wsdl:fault>
-    </wsdl:operation>
     <wsdl:operation name="SetObjects">
       <soap12:operation soapAction="http://tempuri.org/IKistlService/SetObjects" style="document" />
       <wsdl:input>
@@ -554,6 +610,36 @@
         <soap12:fault use="literal" name="ExceptionFault" namespace="" />
       </wsdl:fault>
     </wsdl:operation>
+    <wsdl:operation name="GetDocumentStream">
+      <soap12:operation soapAction="http://tempuri.org/IKistlService/GetDocumentStream" style="document" />
+      <wsdl:input>
+        <wsp:PolicyReference URI="#KistlService_Endpoint_GetDocumentStream_Input_policy" />
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <wsp:PolicyReference URI="#KistlService_Endpoint_GetDocumentStream_output_policy" />
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ExceptionFault">
+        <wsp:PolicyReference URI="#KistlService_Endpoint_GetDocumentStream_ExceptionFault_Fault" />
+        <soap12:fault use="literal" name="ExceptionFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="SetDocumentStream">
+      <soap12:operation soapAction="http://tempuri.org/IKistlService/SetDocumentStream" style="document" />
+      <wsdl:input>
+        <wsp:PolicyReference URI="#KistlService_Endpoint_SetDocumentStream_Input_policy" />
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <wsp:PolicyReference URI="#KistlService_Endpoint_SetDocumentStream_output_policy" />
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ExceptionFault">
+        <wsp:PolicyReference URI="#KistlService_Endpoint_SetDocumentStream_ExceptionFault_Fault" />
+        <soap12:fault use="literal" name="ExceptionFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="KistlService">
     <wsdl:port name="KistlService_Endpoint" binding="tns:KistlService_Endpoint">
@@ -561,7 +647,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>http://localhost:6666/KistlService</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>DASZ\david</Upn>
+          <Upn>DASZ\arthur</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>

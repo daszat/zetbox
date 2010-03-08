@@ -17,24 +17,11 @@ namespace Kistl.API
     /// <summary>
     /// Kist Stream Service Contract
     /// TODO: Add FaultContracts
-    /// TODO: Remove GetObject
     /// TODO: Remove GetListOf
     /// </summary>
     [ServiceContract]
     public interface IKistlService
     {
-        /// <summary>
-        /// Gets a single object from the datastore. This method is superseded by using GetList with a (o => o.ID == $id) filter.
-        /// </summary>
-        /// <param name="type">Type of Object</param>
-        /// <param name="ID">ID of Object</param>
-        /// <returns>a memory stream containing the serialized object, rewound to the beginning</returns>
-        /// <exception cref="ArgumentOutOfRangeException">when the specified object was not found</exception>
-        [Obsolete]
-        [OperationContract]
-        [FaultContract(typeof(Exception))]
-        MemoryStream GetObject(SerializableType type, int ID);
-
         /// <summary>
         /// Puts a number of changed objects into the database. The resultant objects are sent back to the client.
         /// </summary>
@@ -81,6 +68,24 @@ namespace Kistl.API
         [OperationContract]
         [FaultContract(typeof(Exception))]
         MemoryStream FetchRelation(Guid relId, int role, int ID);
+
+        /// <summary>
+        /// Gets the content stream of the given Document instance ID
+        /// </summary>
+        /// <param name="ID">ID of an valid Document instance</param>
+        /// <returns>Stream containing the Document content</returns>
+        [OperationContract]
+        [FaultContract(typeof(Exception))]
+        MemoryStream GetDocumentStream(int ID);
+
+        /// <summary>
+        /// Sets the content stream of the given Document instance ID
+        /// </summary>
+        /// <param name="ID">ID of an valid Document instance</param>
+        /// <param name="document">Stream containing the Document content</param>
+        [OperationContract]
+        [FaultContract(typeof(Exception))]
+        void SetDocumentStream(int ID, MemoryStream document);
     }
 
     [DataContract]

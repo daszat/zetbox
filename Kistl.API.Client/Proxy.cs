@@ -27,6 +27,9 @@ namespace Kistl.API.Client
 
         IEnumerable<T> FetchRelation<T>(Guid relationId, RelationEndRole role, IDataObject parent, out List<IStreamable> auxObjects)
             where T : class, IRelationCollectionEntry;
+
+        Stream GetDocumentStream(int ID);
+        void SetDocumentStream(int ID, Stream document);
     }
 
 
@@ -240,5 +243,20 @@ namespace Kistl.API.Client
             GC.SuppressFinalize(this);
         }
         #endregion
+
+        public Stream GetDocumentStream(int ID)
+        {
+            return Service.GetDocumentStream(ID);
+        }
+
+        public void SetDocumentStream(int ID, Stream document)
+        {
+            // TODO: Convert Service Interface to Streaming Service interface
+            using (MemoryStream s = new MemoryStream())
+            {
+                document.CopyTo(s);
+                Service.SetDocumentStream(ID, s);
+            }
+        }
     }
 }

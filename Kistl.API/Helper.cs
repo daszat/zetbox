@@ -114,6 +114,19 @@ namespace Kistl.API
                 maxIdx = idx.Value;
             }
         }
+
+        public static void CopyTo(this System.IO.Stream src, System.IO.Stream dest)
+        {
+            if (src == null) throw new ArgumentNullException("src");
+            if (dest == null) throw new ArgumentNullException("dest");
+
+            var buffer = new byte[4096];
+            int cnt;
+            while((cnt = src.Read(buffer, 0, buffer.Length)) > 0)
+            {
+                dest.Write(buffer, 0, cnt);
+            }
+        }
     }
 
     public static class TypeExtensions

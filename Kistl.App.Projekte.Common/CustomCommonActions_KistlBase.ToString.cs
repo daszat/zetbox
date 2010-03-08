@@ -231,6 +231,13 @@ namespace Kistl.App.Base
 
             FixupFloatingObjectsToString(obj, e);
         }
+
+        public static void OnToString_Document(Kistl.App.Base.Document obj, MethodReturnEventArgs<System.String> e)
+        {
+            e.Result = obj.Name;
+
+            FixupFloatingObjectsToString(obj, e);
+        }
         #endregion
 
         /// <summary>

@@ -376,6 +376,16 @@ namespace Kistl.App.Base
 			}
 		}
 		
+		/// <summary>List of all Document</summary>
+		/// Represents a Document
+		public IQueryable<Document> Documents
+		{ 
+			get
+			{
+				return Context.GetQuery<Document>();
+			}
+		}
+		
 		/// <summary>List of all DefaultPropertyValue</summary>
 		/// 
 		public IQueryable<DefaultPropertyValue> DefaultPropertyValues

@@ -6,6 +6,7 @@ using System.Text;
 using Kistl.API.Server;
 using Kistl.App.Extensions;
 using Kistl.API.Utils;
+using Kistl.API;
 
 namespace Kistl.App.Base
 {
@@ -23,7 +24,7 @@ namespace Kistl.App.Base
             // TODO: replace with constraint
             if (obj.Method != null && obj.Method.Parameter.Count(p => p.IsReturnParameter) > 1)
             {
-                throw new ArgumentException(string.Format("Method {0}.{1}.{2} has more then one Return Parameter", 
+                throw new ArgumentException(string.Format("Method {0}.{1}.{2} has more then one Return Parameter",
                     obj.Method.ObjectClass.Module.Namespace,
                     obj.Method.ObjectClass.ClassName,
                     obj.Method.MethodName));
@@ -173,6 +174,39 @@ namespace Kistl.App.Base
         {
             e.Result = obj.Type.FullName;
         }
+        #endregion
+
+        #region Document Management
+        public static void OnIntializeStoragePath_Document(Kistl.App.Base.Document obj)
+        {
+            if (!string.IsNullOrEmpty(obj.StoragePath)) throw new InvalidOperationException("StoragePath already set");
+            if (string.IsNullOrEmpty(obj.Name)) throw new InvalidOperationException("Name is empty");
+
+            DateTime today = DateTime.Today;
+            obj.StoragePath = string.Format(@"\{0}\{1}\{2}\({3}) - {4}", today.Year, today.Month, today.Day, Guid.NewGuid(), obj.Name);
+        }
+
+        public static void OnGetStream_Document(Kistl.App.Base.Document obj, MethodReturnEventArgs<System.IO.Stream> e)
+        {
+            if (string.IsNullOrEmpty(obj.StoragePath)) throw new InvalidOperationException("StoragePath is empty");
+
+            string path = System.IO.Path.Combine(ApplicationContext.Current.Configuration.Server.DocumentStore, obj.StoragePath);
+            e.Result = new System.IO.FileStream(path, System.IO.FileMode.Open, System.IO.FileAccess.Read);
+        }
+
+        public static void OnSaveStream_Document(Kistl.App.Base.Document obj, System.IO.Stream stream)
+        {
+            if (string.IsNullOrEmpty(obj.StoragePath)) throw new InvalidOperationException("StoragePath is empty");
+            
+            string path = System.IO.Path.Combine(ApplicationContext.Current.Configuration.Server.DocumentStore, obj.StoragePath);
+            System.IO.Directory.CreateDirectory(System.IO.Path.GetDirectoryName(path));
+            using (var file = new System.IO.FileStream(path, System.IO.FileMode.Create, System.IO.FileAccess.Write))
+            {
+                file.SetLength(0);
+                stream.CopyTo(file);
+            }
+        }
+
         #endregion
 
         //public static void OnIsValid_Constraint(Kistl.App.Base.Constraint obj, Kistl.API.MethodReturnEventArgs<bool> e, object value)

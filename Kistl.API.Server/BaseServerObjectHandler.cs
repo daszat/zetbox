@@ -9,6 +9,7 @@ namespace Kistl.API.Server
 
     using Kistl.API;
     using Kistl.API.Utils;
+using System.IO;
 
     /// <summary>
     /// This describes the common interface from the server frontend to the provider for servicing the common "Get" operations.
@@ -34,14 +35,6 @@ namespace Kistl.API.Server
         /// <param name="property">the name of the referencing property</param>
         /// <returns>the list of objects</returns>
         IEnumerable<IStreamable> GetListOf(IKistlContext ctx, int ID, string property);
-
-        /// <summary>
-        /// return the specified object
-        /// </summary>
-        /// <param name="ctx">the server context to use for loading the objects</param>
-        /// <param name="ID">the ID of the requested object</param>
-        /// <returns>the found object</returns>
-        IDataObject GetObject(IKistlContext ctx, int ID);
     }
 
     public interface IServerObjectSetHandler
@@ -55,6 +48,12 @@ namespace Kistl.API.Server
     public interface IServerCollectionHandler
     {
         IEnumerable<IRelationCollectionEntry> GetCollectionEntries(IKistlContext ctx, Guid relId, RelationEndRole endRole, int parentId);
+    }
+
+    public interface IServerDocumentHandler
+    {
+        MemoryStream GetDocumentStream(IKistlContext ctx, int ID);
+        void SetDocumentStream(IKistlContext ctx, int ID, MemoryStream document);
     }
 
     /// <summary>
@@ -125,14 +124,6 @@ namespace Kistl.API.Server
         /// </summary>
         /// <returns>a typed object</returns>
         protected abstract T GetObjectInstance(IKistlContext ctx, int ID);
-
-        /// <summary>
-        /// Implementiert den GetObject Befehl.
-        /// </summary>
-        public IDataObject GetObject(IKistlContext ctx, int ID)
-        {
-            return GetObjectInstance(ctx, ID);
-        }
     }
 
     public class BaseServerObjectSetHandler
@@ -214,6 +205,36 @@ namespace Kistl.API.Server
                     }
                 });
             return entityObjects.Values.Concat(requestedObjects);
+        }
+    }
+
+    public class ServerDocumentHandler : IServerDocumentHandler
+    {
+        public MemoryStream GetDocumentStream(IKistlContext ctx, int ID)
+        {
+            if (ctx == null) { throw new ArgumentNullException("ctx"); }
+
+            var doc = ctx.Find<Kistl.App.Base.Document>(ID);
+            var result = new MemoryStream();
+            using(var s = doc.GetStream())
+            {
+                s.CopyTo(result);
+            }
+            return result;
+        }
+
+        public void SetDocumentStream(IKistlContext ctx, int ID, MemoryStream document)
+        {
+            if (ctx == null) { throw new ArgumentNullException("ctx"); }
+            if (document == null) { throw new ArgumentNullException("document"); }
+
+            var doc = ctx.Find<Kistl.App.Base.Document>(ID);
+            if (string.IsNullOrEmpty(doc.StoragePath))
+            {
+                doc.IntializeStoragePath();
+            }
+            doc.SaveStream(document);
+            ctx.SubmitChanges();
         }
     }
 }

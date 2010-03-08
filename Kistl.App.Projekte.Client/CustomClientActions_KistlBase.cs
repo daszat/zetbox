@@ -208,7 +208,18 @@ namespace Kistl.App.Base
 
         public static void OnGetParameterTypeString_CLRObjectParameter(CLRObjectParameter obj, MethodReturnEventArgs<string> e)
         {
-            e.Result = String.Format("{0}, {1}", obj.Type.FullName, obj.Type.Assembly.AssemblyName);
+            if (obj.Type == null)
+            {
+                e.Result = string.Empty;
+            }
+            else if (obj.Type.Assembly == null)
+            {
+                e.Result = String.Format("{0}", obj.Type.FullName);
+            }
+            else
+            {
+                e.Result = String.Format("{0}, {1}", obj.Type.FullName, obj.Type.Assembly.AssemblyName);
+            }
         }
 
         #endregion
@@ -419,5 +430,18 @@ namespace Kistl.App.Base
             obj.A = obj.Context.Create<RelationEnd>();
             obj.B = obj.Context.Create<RelationEnd>();
         }
+
+        #region Document Management
+        public static void OnGetStream_Document(Kistl.App.Base.Document obj, MethodReturnEventArgs<System.IO.Stream> e)
+        {
+            e.Result = Kistl.API.Client.ProxySingleton.Current.GetDocumentStream(obj.ID);
+        }
+
+        public static void OnSaveStream_Document(Kistl.App.Base.Document obj, System.IO.Stream stream)
+        {
+            Kistl.API.Client.ProxySingleton.Current.SetDocumentStream(obj.ID, stream);
+        }
+        #endregion
+
     }
 }

@@ -18,6 +18,7 @@ namespace Kistl.API.Server
         private readonly Type _collectionHandlerType = null;
         private readonly Type _objectHandlerType = null;
         private readonly Type _objectSetHandlerType = null;
+        private readonly Type _documentHandlerType = null;
 
         /// <summary>
         /// Initialises a new instance of the ServerObjectHandlerFactory 
@@ -27,11 +28,13 @@ namespace Kistl.API.Server
         /// <param name="collectionHandler"></param>
         /// <param name="objectHandler"></param>
         /// <param name="objectSetHandler"></param>
-        public ServerObjectHandlerFactory(Type collectionHandler, Type objectHandler, Type objectSetHandler)
+        /// <param name="documentHandlerType"></param>
+        public ServerObjectHandlerFactory(Type collectionHandler, Type objectHandler, Type objectSetHandler, Type documentHandlerType)
         {
             _collectionHandlerType = collectionHandler;
             _objectHandlerType = objectHandler;
             _objectSetHandlerType = objectSetHandler;
+            _documentHandlerType = documentHandlerType;
         }
 
         /// <inheritdoc/>
@@ -97,6 +100,19 @@ namespace Kistl.API.Server
                     bType,
                     endRole);
                 Log.Error(msg, ex);
+                throw;
+            }
+        }
+
+        public IServerDocumentHandler GetServerDocumentHandler()
+        {
+            try
+            {
+                return (IServerDocumentHandler)Activator.CreateInstance(_documentHandlerType);
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Failed to create IServerDocumentHandler", ex);
                 throw;
             }
         }

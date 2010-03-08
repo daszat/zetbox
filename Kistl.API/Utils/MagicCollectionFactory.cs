@@ -448,8 +448,11 @@ namespace Kistl.API.Utils
 
         public void Add(TValue item)
         {
-            _baseCollection.Add(item);
+            // Order of inserting is important
+            // _sortedList does not fire Events, _baseCollection does
+            // if _baseCollection fires an update event, _sortedList must be prepeard already
             _sortedList.Add(_keyFromItem(item), item);
+            _baseCollection.Add(item);
         }
 
         public void Clear()

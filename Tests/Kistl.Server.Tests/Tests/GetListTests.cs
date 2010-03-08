@@ -84,7 +84,7 @@ namespace Kistl.Server.Tests
         }
 
         [Test]
-        public void GetList_GetObject()
+        public void GetList_GetOneObject()
         {
             var list_objclass = ctx.GetQuery<Kistl.App.Base.ObjectClass>().ToList();
             Assert.That(list_objclass.Count, Is.GreaterThan(0));

@@ -1,59 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://localhost:6666/KistlService?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Kistl.API" />
-  <xs:import schemaLocation="http://localhost:6666/KistlService?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/System.IO" />
+  <xs:import schemaLocation="http://localhost:6666/KistlService?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/System.IO" />
+  <xs:import schemaLocation="http://localhost:6666/KistlService?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/Kistl.API" />
   <xs:import schemaLocation="http://localhost:6666/KistlService?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-  <xs:element name="GetObject">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Kistl.API" minOccurs="0" name="type" nillable="true" type="q1:SerializableType" />
-        <xs:element minOccurs="0" name="ID" type="xs:int" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetObjectResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/System.IO" minOccurs="0" name="GetObjectResult" nillable="true" type="q2:MemoryStream" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
   <xs:element name="SetObjects">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/System.IO" minOccurs="0" name="msg" nillable="true" type="q3:MemoryStream" />
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Kistl.API" minOccurs="0" name="notificationRequests" nillable="true" type="q4:ArrayOfObjectNotificationRequest" />
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/System.IO" minOccurs="0" name="msg" nillable="true" type="q1:MemoryStream" />
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Kistl.API" minOccurs="0" name="notificationRequests" nillable="true" type="q2:ArrayOfObjectNotificationRequest" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SetObjectsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/System.IO" minOccurs="0" name="SetObjectsResult" nillable="true" type="q5:MemoryStream" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/System.IO" minOccurs="0" name="SetObjectsResult" nillable="true" type="q3:MemoryStream" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetList">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Kistl.API" minOccurs="0" name="type" nillable="true" type="q6:SerializableType" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Kistl.API" minOccurs="0" name="type" nillable="true" type="q4:SerializableType" />
         <xs:element minOccurs="0" name="maxListCount" type="xs:int" />
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Kistl.API" minOccurs="0" name="filter" nillable="true" type="q7:SerializableExpression" />
-        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/Kistl.API" minOccurs="0" name="orderBy" nillable="true" type="q8:ArrayOfSerializableExpression" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Kistl.API" minOccurs="0" name="filter" nillable="true" type="q5:SerializableExpression" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Kistl.API" minOccurs="0" name="orderBy" nillable="true" type="q6:ArrayOfSerializableExpression" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetListResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/System.IO" minOccurs="0" name="GetListResult" nillable="true" type="q9:MemoryStream" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/System.IO" minOccurs="0" name="GetListResult" nillable="true" type="q7:MemoryStream" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetListOf">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/Kistl.API" minOccurs="0" name="type" nillable="true" type="q10:SerializableType" />
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/Kistl.API" minOccurs="0" name="type" nillable="true" type="q8:SerializableType" />
         <xs:element minOccurs="0" name="ID" type="xs:int" />
         <xs:element minOccurs="0" name="property" nillable="true" type="xs:string" />
       </xs:sequence>
@@ -62,14 +47,14 @@
   <xs:element name="GetListOfResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/System.IO" minOccurs="0" name="GetListOfResult" nillable="true" type="q11:MemoryStream" />
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/System.IO" minOccurs="0" name="GetListOfResult" nillable="true" type="q9:MemoryStream" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="FetchRelation">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q12="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="relId" type="q12:guid" />
+        <xs:element xmlns:q10="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="relId" type="q10:guid" />
         <xs:element minOccurs="0" name="role" type="xs:int" />
         <xs:element minOccurs="0" name="ID" type="xs:int" />
       </xs:sequence>
@@ -78,8 +63,35 @@
   <xs:element name="FetchRelationResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/System.IO" minOccurs="0" name="FetchRelationResult" nillable="true" type="q13:MemoryStream" />
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/System.IO" minOccurs="0" name="FetchRelationResult" nillable="true" type="q11:MemoryStream" />
       </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetDocumentStream">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ID" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetDocumentStreamResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/System.IO" minOccurs="0" name="GetDocumentStreamResult" nillable="true" type="q12:MemoryStream" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetDocumentStream">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ID" type="xs:int" />
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/System.IO" minOccurs="0" name="document" nillable="true" type="q13:MemoryStream" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetDocumentStreamResponse">
+    <xs:complexType>
+      <xs:sequence />
     </xs:complexType>
   </xs:element>
 </xs:schema>

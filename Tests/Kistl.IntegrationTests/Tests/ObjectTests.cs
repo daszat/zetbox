@@ -84,7 +84,7 @@ namespace Kistl.IntegrationTests
         }
 
         [Test]
-        public void GetObject()
+        public void GetOneObject()
         {
             using (IKistlContext ctx = KistlContext.GetContext())
             {

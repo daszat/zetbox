@@ -201,5 +201,15 @@ namespace Kistl.DalProvider.ClientObjects.Mocks
 
         #endregion
 
+
+        public System.IO.Stream GetDocumentStream(int ID)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SetDocumentStream(int ID, System.IO.Stream document)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

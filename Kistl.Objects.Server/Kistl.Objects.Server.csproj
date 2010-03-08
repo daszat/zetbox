@@ -109,6 +109,7 @@
     <Compile Include="DateTimeParameter.Server.Designer.cs" />
     <Compile Include="DateTimeProperty.Server.Designer.cs" />
     <Compile Include="DefaultPropertyValue.Server.Designer.cs" />
+    <Compile Include="Document.Server.Designer.cs" />
     <Compile Include="DoubleParameter.Server.Designer.cs" />
     <Compile Include="DoubleProperty.Server.Designer.cs" />
     <Compile Include="Enumeration.Server.Designer.cs" />

@@ -26,5 +26,11 @@ namespace Kistl.API.Server
         /// </summary>
         /// <returns>A newly initialised <see cref="IServerObjectSetHandler"/>.</returns>
         IServerObjectSetHandler GetServerObjectSetHandler();
+
+        /// <summary>
+        /// Creates an <see cref="IServerDocumentHandler"/>.
+        /// </summary>
+        /// <returns>A newly initialised <see cref="IServerDocumentHandler"/>.</returns>
+        IServerDocumentHandler GetServerDocumentHandler();
     }
 }

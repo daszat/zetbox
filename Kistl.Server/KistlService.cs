@@ -33,45 +33,6 @@ namespace Kistl.Server
         }
 
         /// <summary>
-        /// Gets a single object from the datastore.
-        /// </summary>
-        /// <param name="type">Type of Object</param>
-        /// <param name="ID">ID of Object</param>
-        /// <returns>a memory stream containing the serialized object, rewound to the beginning</returns>
-        /// <exception cref="ArgumentNullException">when the specified type is null</exception>
-        /// <exception cref="ArgumentOutOfRangeException">when the specified object was not found</exception>
-        [Obsolete]
-        public MemoryStream GetObject(SerializableType type, int ID)
-        {
-            try
-            {
-                if (type == null) { throw new ArgumentNullException("type"); }
-
-                using (Logging.Facade.DebugTraceMethodCall(type.ToString()))
-                {
-                    DebugLogIdentity();
-                    using (IKistlContext ctx = _ctxFactory())
-                    {
-                        IDataObject obj = _sohFactory.GetServerObjectHandler(type.GetInterfaceType().Type).GetObject(ctx, ID);
-                        if (obj == null)
-                            throw new ArgumentOutOfRangeException("ID", string.Format("Object with ID {0} not found", ID));
-
-                        MemoryStream result = new MemoryStream();
-                        BinaryWriter sw = new BinaryWriter(result);
-
-                        return SendObjects(new[] { obj }.AsEnumerable<IStreamable>());
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Helper.HandleError(ex, true);
-                // Never called, Handle errors throws an Exception
-                return null;
-            }
-        }
-
-        /// <summary>
         /// Puts a number of changed objects into the database. The resultant objects are sent back to the client.
         /// </summary>
         /// <param name="msg">a streamable list of <see cref="IPersistenceObject"/>s</param>
@@ -293,6 +254,62 @@ namespace Kistl.Server
                 Helper.HandleError(ex, true);
                 // Never called, Handle errors throws an Exception
                 return null;
+            }
+        }
+
+        /// <summary>
+        /// Gets the content stream of the given Document instance ID
+        /// </summary>
+        /// <param name="ID">ID of an valid Document instance</param>
+        /// <returns>Stream containing the Document content</returns>
+        public MemoryStream GetDocumentStream(int ID)
+        {
+            try
+            {
+                using (Logging.Facade.DebugTraceMethodCall(ID.ToString()))
+                {
+                    DebugLogIdentity();
+
+                    using (IKistlContext ctx = _ctxFactory())
+                    {
+                        return _sohFactory
+                            .GetServerDocumentHandler()
+                            .GetDocumentStream(ctx, ID);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.HandleError(ex, true);
+                // Never called, Handle errors throws an Exception
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Sets the content stream of the given Document instance ID
+        /// </summary>
+        /// <param name="ID">ID of an valid Document instance</param>
+        /// <param name="document">Stream containing the Document content</param>
+        public void SetDocumentStream(int ID, MemoryStream document)
+        {
+            try
+            {
+                using (Logging.Facade.DebugTraceMethodCall(ID.ToString()))
+                {
+                    DebugLogIdentity();
+
+                    using (IKistlContext ctx = _ctxFactory())
+                    {
+                        _sohFactory
+                            .GetServerDocumentHandler()
+                            .SetDocumentStream(ctx, ID, document);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.HandleError(ex, true);
             }
         }
     }

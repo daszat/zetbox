@@ -1,147 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Kistl.API" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Kistl.API" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://localhost:6666/KistlService?xsd=xsd5" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-  <xs:import schemaLocation="http://localhost:6666/KistlService?xsd=xsd6" namespace="http://schemas.datacontract.org/2004/07/System.Linq.Expressions" />
-  <xs:import schemaLocation="http://localhost:6666/KistlService?xsd=xsd7" namespace="http://schemas.datacontract.org/2004/07/System.Reflection" />
-  <xs:complexType name="SerializableType">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="AssemblyQualifiedName" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="GenericTypeParameter" nillable="true" type="tns:ArrayOfSerializableType" />
-      <xs:element minOccurs="0" name="TypeName" nillable="true" type="xs:string" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="SerializableType" nillable="true" type="tns:SerializableType" />
-  <xs:complexType name="ArrayOfSerializableType">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="SerializableType" nillable="true" type="tns:SerializableType" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfSerializableType" nillable="true" type="tns:ArrayOfSerializableType" />
-  <xs:complexType name="ArrayOfObjectNotificationRequest">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="ObjectNotificationRequest" nillable="true" type="tns:ObjectNotificationRequest" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfObjectNotificationRequest" nillable="true" type="tns:ArrayOfObjectNotificationRequest" />
-  <xs:complexType name="ObjectNotificationRequest">
-    <xs:sequence>
-      <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="IDs" nillable="true" type="q1:ArrayOfint" />
-      <xs:element minOccurs="0" name="Type" nillable="true" type="tns:SerializableType" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ObjectNotificationRequest" nillable="true" type="tns:ObjectNotificationRequest" />
-  <xs:complexType name="SerializableExpression">
-    <xs:sequence>
-      <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/System.Linq.Expressions" minOccurs="0" name="NodeType" type="q2:ExpressionType" />
-      <xs:element minOccurs="0" name="SerializableType" nillable="true" type="tns:SerializableType" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="SerializableExpression" nillable="true" type="tns:SerializableExpression" />
-  <xs:complexType name="SerializableMemberExpression">
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/System.IO" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/System.IO" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:6666/KistlService?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/System" />
+  <xs:complexType name="MemoryStream">
     <xs:complexContent mixed="false">
-      <xs:extension base="tns:SerializableCompoundExpression">
+      <xs:extension base="tns:Stream">
         <xs:sequence>
-          <xs:element name="_x003C_MemberName_x003E_k__BackingField" nillable="true" type="xs:string" />
+          <xs:element name="_buffer" nillable="true" type="xs:base64Binary" />
+          <xs:element name="_capacity" type="xs:int" />
+          <xs:element name="_expandable" type="xs:boolean" />
+          <xs:element name="_exposable" type="xs:boolean" />
+          <xs:element name="_isOpen" type="xs:boolean" />
+          <xs:element name="_length" type="xs:int" />
+          <xs:element name="_origin" type="xs:int" />
+          <xs:element name="_position" type="xs:int" />
+          <xs:element name="_writable" type="xs:boolean" />
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element name="SerializableMemberExpression" nillable="true" type="tns:SerializableMemberExpression" />
-  <xs:complexType name="SerializableCompoundExpression">
+  <xs:element name="MemoryStream" nillable="true" type="tns:MemoryStream" />
+  <xs:complexType name="Stream">
     <xs:complexContent mixed="false">
-      <xs:extension base="tns:SerializableExpression">
-        <xs:sequence>
-          <xs:element name="_x003C_Children_x003E_k__BackingField" nillable="true" type="tns:ArrayOfSerializableExpression" />
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name="SerializableCompoundExpression" nillable="true" type="tns:SerializableCompoundExpression" />
-  <xs:complexType name="ArrayOfSerializableExpression">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="SerializableExpression" nillable="true" type="tns:SerializableExpression" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfSerializableExpression" nillable="true" type="tns:ArrayOfSerializableExpression" />
-  <xs:complexType name="SerializableUnaryExpression">
-    <xs:complexContent mixed="false">
-      <xs:extension base="tns:SerializableCompoundExpression">
+      <xs:extension xmlns:q1="http://schemas.datacontract.org/2004/07/System" base="q1:MarshalByRefObject">
         <xs:sequence />
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element name="SerializableUnaryExpression" nillable="true" type="tns:SerializableUnaryExpression" />
-  <xs:complexType name="SerializableConditionalExpression">
-    <xs:complexContent mixed="false">
-      <xs:extension base="tns:SerializableExpression">
-        <xs:sequence>
-          <xs:element name="_x003C_IfFalse_x003E_k__BackingField" nillable="true" type="tns:SerializableExpression" />
-          <xs:element name="_x003C_IfTrue_x003E_k__BackingField" nillable="true" type="tns:SerializableExpression" />
-          <xs:element name="_x003C_Test_x003E_k__BackingField" nillable="true" type="tns:SerializableExpression" />
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name="SerializableConditionalExpression" nillable="true" type="tns:SerializableConditionalExpression" />
-  <xs:complexType name="SerializableParameterExpression">
-    <xs:complexContent mixed="false">
-      <xs:extension base="tns:SerializableExpression">
-        <xs:sequence>
-          <xs:element name="_x003C_Name_x003E_k__BackingField" nillable="true" type="xs:string" />
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name="SerializableParameterExpression" nillable="true" type="tns:SerializableParameterExpression" />
-  <xs:complexType name="SerializableBinaryExpression">
-    <xs:complexContent mixed="false">
-      <xs:extension base="tns:SerializableCompoundExpression">
-        <xs:sequence />
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name="SerializableBinaryExpression" nillable="true" type="tns:SerializableBinaryExpression" />
-  <xs:complexType name="SerializableConstantExpression">
-    <xs:complexContent mixed="false">
-      <xs:extension base="tns:SerializableExpression">
-        <xs:sequence>
-          <xs:element name="_x003C_Value_x003E_k__BackingField" nillable="true" type="xs:anyType" />
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name="SerializableConstantExpression" nillable="true" type="tns:SerializableConstantExpression" />
-  <xs:complexType name="SerializableLambdaExpression">
-    <xs:complexContent mixed="false">
-      <xs:extension base="tns:SerializableCompoundExpression">
-        <xs:sequence />
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name="SerializableLambdaExpression" nillable="true" type="tns:SerializableLambdaExpression" />
-  <xs:complexType name="SerializableMethodCallExpression">
-    <xs:complexContent mixed="false">
-      <xs:extension base="tns:SerializableCompoundExpression">
-        <xs:sequence>
-          <xs:element name="_x003C_GenericArguments_x003E_k__BackingField" nillable="true" type="tns:ArrayOfSerializableType" />
-          <xs:element name="_x003C_MethodName_x003E_k__BackingField" nillable="true" type="xs:string" />
-          <xs:element name="_x003C_ObjectExpression_x003E_k__BackingField" nillable="true" type="tns:SerializableExpression" />
-          <xs:element name="_x003C_ParameterTypes_x003E_k__BackingField" nillable="true" type="tns:ArrayOfSerializableType" />
-          <xs:element name="_x003C_SerializableMethodType_x003E_k__BackingField" nillable="true" type="tns:SerializableType" />
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name="SerializableMethodCallExpression" nillable="true" type="tns:SerializableMethodCallExpression" />
-  <xs:complexType name="SerializableNewExpression">
-    <xs:complexContent mixed="false">
-      <xs:extension base="tns:SerializableCompoundExpression">
-        <xs:sequence>
-          <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/System.Reflection" name="Members" nillable="true" type="q3:ArrayOfMemberInfo" />
-          <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/System.Reflection" name="_x003C_Constructor_x003E_k__BackingField" nillable="true" type="q4:ConstructorInfo" />
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name="SerializableNewExpression" nillable="true" type="tns:SerializableNewExpression" />
+  <xs:element name="Stream" nillable="true" type="tns:Stream" />
 </xs:schema>
