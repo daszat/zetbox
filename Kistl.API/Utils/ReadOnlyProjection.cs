@@ -46,6 +46,11 @@ namespace Kistl.API.Utils
 
         #region Utilities
 
+        public ICollection<TInput> Collection
+        {
+            get { return _collection; }
+        }
+
         protected Func<TInput, TOutput> Selector { get { return _selector; } }
 
         protected Func<TOutput, TInput> Inverter { get { return _inverter; } }

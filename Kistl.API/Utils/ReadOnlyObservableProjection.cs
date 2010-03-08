@@ -124,6 +124,7 @@ namespace Kistl.API.Utils
 
     public class ReadOnlyObservableProjectedList<TInput, TOutput>
         : ReadOnlyProjectedList<TInput, TOutput>, IReadOnlyObservableList<TOutput>, INotifyPropertyChanged
+        where TInput : IDataObject
     {
         public ReadOnlyObservableProjectedList(ObservableCollection<TInput> list, Func<TInput, TOutput> select, Func<TOutput, TInput> inverter)
             : base(list, select, inverter)

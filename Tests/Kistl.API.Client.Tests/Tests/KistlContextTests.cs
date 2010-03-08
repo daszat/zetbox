@@ -1,15 +1,16 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Kistl.API.Client.Mocks;
-
-using NUnit.Framework;
-using Kistl.API.Utils;
 
 namespace Kistl.API.Client.Tests
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    
+    using Kistl.API.Client.Mocks;
+    using Kistl.API.Utils;
+
+    using NUnit.Framework;
+
     [TestFixture]
     public class KistlContextTests
     {

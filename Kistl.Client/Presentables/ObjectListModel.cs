@@ -58,14 +58,19 @@ namespace Kistl.Client.Presentables
         {
             get
             {
-                if (_valueCache == null)
-                {
-                    _valueCache = new ReadOnlyObservableProjectedList<IDataObject, DataObjectModel>(
-                        Object.GetPropertyValue<INotifyCollectionChanged>(Property.PropertyName),
-                        obj => (DataObjectModel)Factory.CreateDefaultModel(DataContext, obj),
-                        mdl => mdl.Object);
-                }
+                EnsureValueCache();
                 return _valueCache;
+            }
+        }
+
+        private void EnsureValueCache()
+        {
+            if (_valueCache == null)
+            {
+                _valueCache = new ReadOnlyObservableProjectedList<IDataObject, DataObjectModel>(
+                    Object.GetPropertyValue<INotifyCollectionChanged>(Property.PropertyName),
+                    obj => (DataObjectModel)Factory.CreateDefaultModel(DataContext, obj),
+                    mdl => mdl.Object);
             }
         }
 
@@ -209,7 +214,8 @@ namespace Kistl.Client.Presentables
         {
             if (item == null) { throw new ArgumentNullException("item"); }
 
-            Object.AddToCollectionQuick(Property.PropertyName, item.Object);
+            EnsureValueCache();
+            _valueCache.Collection.Add(item.Object);
         }
 
         /// <summary>
@@ -268,13 +274,16 @@ namespace Kistl.Client.Presentables
         {
             if (item == null) { throw new ArgumentNullException("item"); }
 
-            Object.RemoveFromCollectionQuick(Property.PropertyName, item.Object);
+            EnsureValueCache();
+            _valueCache.Collection.Remove(item.Object);
         }
 
         public void DeleteItem(DataObjectModel item)
         {
             if (item == null) { throw new ArgumentNullException("item"); }
-            RemoveItem(item);
+
+            EnsureValueCache();
+            _valueCache.Collection.Remove(item.Object);
             item.Delete();
         }
 
@@ -312,6 +321,5 @@ namespace Kistl.Client.Presentables
         }
 
         #endregion
-
     }
 }
