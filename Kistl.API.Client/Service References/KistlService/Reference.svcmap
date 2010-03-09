@@ -29,6 +29,7 @@
     <MetadataFile FileName="KistlService1.wsdl" MetadataType="Wsdl" ID="0b481b3a-f1e6-4d37-919a-f99e54ab4a48" SourceId="1" SourceUrl="http://localhost:6666/KistlService" />
     <MetadataFile FileName="KistlService.xsd" MetadataType="Schema" ID="37984299-f1d6-4031-a32e-7e4c2ea3bd9e" SourceId="1" SourceUrl="http://localhost:6666/KistlService?xsd=xsd2" />
     <MetadataFile FileName="KistlService3.xsd" MetadataType="Schema" ID="dbdfb965-e729-4ba1-b65d-568fc0390cff" SourceId="1" SourceUrl="http://localhost:6666/KistlService?xsd=xsd3" />
+    <MetadataFile FileName="KistlService7.xsd" MetadataType="Schema" ID="f3390661-e006-4785-b089-a840df2b6ea3" SourceId="1" SourceUrl="http://localhost:6666/KistlService?xsd=xsd9" />
     <MetadataFile FileName="KistlService62.xsd" MetadataType="Schema" ID="ec41611c-a71c-4082-b651-4569d336e057" SourceId="1" SourceUrl="http://localhost:6666/KistlService?xsd=xsd6" />
   </Metadata>
   <Extensions>

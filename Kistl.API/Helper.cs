@@ -120,6 +120,8 @@ namespace Kistl.API
             if (src == null) throw new ArgumentNullException("src");
             if (dest == null) throw new ArgumentNullException("dest");
 
+            if(src.CanSeek) src.Seek(0, SeekOrigin.Begin);
+
             var buffer = new byte[4096];
             int cnt;
             while((cnt = src.Read(buffer, 0, buffer.Length)) > 0)

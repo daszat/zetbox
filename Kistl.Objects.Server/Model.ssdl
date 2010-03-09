@@ -19,13 +19,13 @@
       <End Role="Auftrag_Rights" EntitySet="Auftrag_Rights" />
     </AssociationSet>
     <EntitySet Name="BaseParameter" EntityType="Model.Store.BaseParameter" Table="BaseParameters"/>
+    <EntitySet Name="Blob" EntityType="Model.Store.Blob" Table="Blobs"/>
     <EntitySet Name="Company" EntityType="Model.Store.Company" Table="Companies"/>
     <EntitySet Name="Constraint" EntityType="Model.Store.Constraint" Table="Constraints"/>
     <EntitySet Name="ControlKind" EntityType="Model.Store.ControlKind" Table="ControlKinds"/>
     <EntitySet Name="CurrentSchema" EntityType="Model.Store.CurrentSchema" Table="CurrentSchema"/>
     <EntitySet Name="DataType" EntityType="Model.Store.DataType" Table="DataTypes"/>
     <EntitySet Name="DefaultPropertyValue" EntityType="Model.Store.DefaultPropertyValue" Table="DefaultPropertyValues"/>
-    <EntitySet Name="Document" EntityType="Model.Store.Document" Table="Documents"/>
     <EntitySet Name="EnumerationEntry" EntityType="Model.Store.EnumerationEntry" Table="EnumerationEntries"/>
     <EntitySet Name="Exam" EntityType="Model.Store.Exam" Table="Exams"/>
     <EntitySet Name="Exercise" EntityType="Model.Store.Exercise" Table="Exercises"/>
@@ -764,11 +764,11 @@
       <End Role="PresentableModelRef" EntitySet="TypeRef" />
     </AssociationSet>
     <AssociationSet Name="FK_Document_was_ChangedBy" Association="Model.Store.FK_Document_was_ChangedBy" >
-      <End Role="Document" EntitySet="Document" />
+      <End Role="Document" EntitySet="Blob" />
       <End Role="ChangedBy" EntitySet="Identity" />
     </AssociationSet>
     <AssociationSet Name="FK_Document_was_CreatedBy" Association="Model.Store.FK_Document_was_CreatedBy" >
-      <End Role="Document" EntitySet="Document" />
+      <End Role="Document" EntitySet="Blob" />
       <End Role="CreatedBy" EntitySet="Identity" />
     </AssociationSet>
     <AssociationSet Name="FK_Enumeration_has_EnumerationEntries" Association="Model.Store.FK_Enumeration_has_EnumerationEntries" >
@@ -1234,6 +1234,21 @@
     <Property Name="ParameterName" Type="nvarchar" MaxLength="100" Nullable="false" />
   </EntityType>
 	
+  <EntityType Name="Blob">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_ChangedBy" Type="int" />
+    <Property Name="fk_CreatedBy" Type="int" />
+    <Property Name="ChangedOn" Type="datetime" Nullable="true" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="true" />
+    <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="MimeType" Type="nvarchar" MaxLength="1000" Nullable="false" />
+    <Property Name="OriginalName" Type="nvarchar" MaxLength="1000" Nullable="false" />
+    <Property Name="StoragePath" Type="nvarchar" MaxLength="1000" Nullable="false" />
+  </EntityType>
+	
   <EntityType Name="BoolParameter">
     <Key>
       <PropertyRef Name="ID" />
@@ -1407,20 +1422,6 @@
     <Property Name="ChangedOn" Type="datetime" Nullable="true" />
     <Property Name="CreatedOn" Type="datetime" Nullable="true" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
-  </EntityType>
-	
-  <EntityType Name="Document">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="fk_ChangedBy" Type="int" />
-    <Property Name="fk_CreatedBy" Type="int" />
-    <Property Name="ChangedOn" Type="datetime" Nullable="true" />
-    <Property Name="CreatedOn" Type="datetime" Nullable="true" />
-    <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="Name" Type="nvarchar" MaxLength="1000" Nullable="false" />
-    <Property Name="StoragePath" Type="nvarchar" MaxLength="1000" Nullable="true" />
   </EntityType>
 	
   <EntityType Name="DoubleParameter">
@@ -3213,7 +3214,7 @@
 
   <Association Name="FK_Document_was_ChangedBy">
     <End Role="ChangedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
-    <End Role="Document" Type="Model.Store.Document" Multiplicity="*" />
+    <End Role="Document" Type="Model.Store.Blob" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ChangedBy">
         <PropertyRef Name="ID" />
@@ -3227,7 +3228,7 @@
 
   <Association Name="FK_Document_was_CreatedBy">
     <End Role="CreatedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
-    <End Role="Document" Type="Model.Store.Document" Multiplicity="*" />
+    <End Role="Document" Type="Model.Store.Blob" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="CreatedBy">
         <PropertyRef Name="ID" />

@@ -65,6 +65,7 @@
     <Compile Include="Assembly.Interface.Designer.cs" />
     <Compile Include="Auftrag.Interface.Designer.cs" />
     <Compile Include="BaseParameter.Interface.Designer.cs" />
+    <Compile Include="Blob.Interface.Designer.cs" />
     <Compile Include="BoolParameter.Interface.Designer.cs" />
     <Compile Include="BoolProperty.Interface.Designer.cs" />
     <Compile Include="CalculatedObjectReferenceProperty.Interface.Designer.cs" />
@@ -85,7 +86,6 @@
     <Compile Include="DateTimeParameter.Interface.Designer.cs" />
     <Compile Include="DateTimeProperty.Interface.Designer.cs" />
     <Compile Include="DefaultPropertyValue.Interface.Designer.cs" />
-    <Compile Include="Document.Interface.Designer.cs" />
     <Compile Include="DoubleParameter.Interface.Designer.cs" />
     <Compile Include="DoubleProperty.Interface.Designer.cs" />
     <Compile Include="Enumeration.Interface.Designer.cs" />

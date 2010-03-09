@@ -52,8 +52,8 @@ using System.IO;
 
     public interface IServerDocumentHandler
     {
-        MemoryStream GetDocumentStream(IKistlContext ctx, int ID);
-        void SetDocumentStream(IKistlContext ctx, int ID, MemoryStream document);
+        Stream GetBlobStream(IKistlContext ctx, int ID);
+        IDataObject SetBlobStream(IKistlContext ctx, Stream blob, string filename, string mimetype);
     }
 
     /// <summary>
@@ -210,31 +210,21 @@ using System.IO;
 
     public class ServerDocumentHandler : IServerDocumentHandler
     {
-        public MemoryStream GetDocumentStream(IKistlContext ctx, int ID)
+        public Stream GetBlobStream(IKistlContext ctx, int ID)
         {
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
-
-            var doc = ctx.Find<Kistl.App.Base.Document>(ID);
-            var result = new MemoryStream();
-            using(var s = doc.GetStream())
-            {
-                s.CopyTo(result);
-            }
-            return result;
+            return ctx.GetStream(ID);
         }
 
-        public void SetDocumentStream(IKistlContext ctx, int ID, MemoryStream document)
+        public IDataObject SetBlobStream(IKistlContext ctx, Stream blob, string filename, string mimetype)
         {
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
-            if (document == null) { throw new ArgumentNullException("document"); }
+            if (blob == null) { throw new ArgumentNullException("blob"); }
 
-            var doc = ctx.Find<Kistl.App.Base.Document>(ID);
-            if (string.IsNullOrEmpty(doc.StoragePath))
-            {
-                doc.IntializeStoragePath();
-            }
-            doc.SaveStream(document);
+            var id = ctx.CreateBlob(blob, filename, mimetype);
+            var obj = ctx.Find<Kistl.App.Base.Blob>(id);
             ctx.SubmitChanges();
+            return obj;
         }
     }
 }

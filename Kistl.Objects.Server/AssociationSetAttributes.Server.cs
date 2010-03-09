@@ -465,7 +465,7 @@ using Kistl.DalProvider.EF;
 
 	/*
     Relation: FK_Document_was_ChangedBy
-    A: ZeroOrMore Document as Document
+    A: ZeroOrMore Blob as Document
     B: ZeroOrOne Identity as ChangedBy
     Preferred Storage: MergeIntoA
 	*/
@@ -473,14 +473,14 @@ using Kistl.DalProvider.EF;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_Document_was_ChangedBy",
-    "Document", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.Document__Implementation__),
+    "Document", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.Blob__Implementation__),
     "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Identity__Implementation__)
     )]
 
 
 	/*
     Relation: FK_Document_was_CreatedBy
-    A: ZeroOrMore Document as Document
+    A: ZeroOrMore Blob as Document
     B: ZeroOrOne Identity as CreatedBy
     Preferred Storage: MergeIntoA
 	*/
@@ -488,7 +488,7 @@ using Kistl.DalProvider.EF;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_Document_was_CreatedBy",
-    "Document", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.Document__Implementation__),
+    "Document", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.Blob__Implementation__),
     "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Identity__Implementation__)
     )]
 

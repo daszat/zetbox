@@ -262,7 +262,7 @@ namespace Kistl.Server
         /// </summary>
         /// <param name="ID">ID of an valid Document instance</param>
         /// <returns>Stream containing the Document content</returns>
-        public MemoryStream GetDocumentStream(int ID)
+        public Stream GetBlobStream(int ID)
         {
             try
             {
@@ -274,7 +274,7 @@ namespace Kistl.Server
                     {
                         return _sohFactory
                             .GetServerDocumentHandler()
-                            .GetDocumentStream(ctx, ID);
+                            .GetBlobStream(ctx, ID);
                     }
                 }
             }
@@ -289,27 +289,34 @@ namespace Kistl.Server
         /// <summary>
         /// Sets the content stream of the given Document instance ID
         /// </summary>
-        /// <param name="ID">ID of an valid Document instance</param>
-        /// <param name="document">Stream containing the Document content</param>
-        public void SetDocumentStream(int ID, MemoryStream document)
+        /// <param name="blob">Information about the given blob</param>
+        /// <returns>the newly created Blob instance</returns>
+        public BlobResponse SetBlobStream(BlobMessage blob)
         {
+            if (blob == null) throw new ArgumentNullException("blob");
             try
             {
-                using (Logging.Facade.DebugTraceMethodCall(ID.ToString()))
+                using (Logging.Facade.DebugTraceMethodCall())
                 {
                     DebugLogIdentity();
 
                     using (IKistlContext ctx = _ctxFactory())
                     {
-                        _sohFactory
+                        var result = _sohFactory
                             .GetServerDocumentHandler()
-                            .SetDocumentStream(ctx, ID, document);
+                            .SetBlobStream(ctx, blob.Stream, blob.FileName, blob.MimeType);
+                        BlobResponse resp = new BlobResponse();
+                        resp.ID = result.ID;
+                        resp.BlobInstance = SendObjects(new IDataObject[] { result });
+                        return resp;
                     }
                 }
             }
             catch (Exception ex)
             {
                 Helper.HandleError(ex, true);
+                // Never called, Handle errors throws an Exception
+                return null;
             }
         }
     }

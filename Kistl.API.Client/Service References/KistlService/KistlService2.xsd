@@ -3,6 +3,7 @@
   <xs:import schemaLocation="http://localhost:6666/KistlService?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/System.IO" />
   <xs:import schemaLocation="http://localhost:6666/KistlService?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/Kistl.API" />
   <xs:import schemaLocation="http://localhost:6666/KistlService?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:import schemaLocation="http://localhost:6666/KistlService?xsd=xsd9" namespace="http://schemas.microsoft.com/Message" />
   <xs:element name="SetObjects">
     <xs:complexType>
       <xs:sequence>
@@ -67,31 +68,35 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetDocumentStream">
+  <xs:element name="GetBlobStream">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="ID" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetDocumentStreamResponse">
+  <xs:element name="GetBlobStreamResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/System.IO" minOccurs="0" name="GetDocumentStreamResult" nillable="true" type="q12:MemoryStream" />
+        <xs:element xmlns:q12="http://schemas.microsoft.com/Message" name="GetBlobStreamResult" type="q12:StreamBody" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="SetDocumentStream">
+  <xs:element name="BlobMessage">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="ID" type="xs:int" />
-        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/System.IO" minOccurs="0" name="document" nillable="true" type="q13:MemoryStream" />
+        <xs:element xmlns:q13="http://schemas.microsoft.com/Message" name="Stream" type="q13:StreamBody" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="SetDocumentStreamResponse">
+  <xs:element name="FileName" nillable="true" type="xs:string" />
+  <xs:element name="MimeType" nillable="true" type="xs:string" />
+  <xs:element name="BlobResponse">
     <xs:complexType>
-      <xs:sequence />
+      <xs:sequence>
+        <xs:element xmlns:q14="http://schemas.microsoft.com/Message" name="BlobInstance" type="q14:StreamBody" />
+      </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="ID" type="xs:int" />
 </xs:schema>

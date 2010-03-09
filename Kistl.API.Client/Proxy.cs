@@ -28,8 +28,8 @@ namespace Kistl.API.Client
         IEnumerable<T> FetchRelation<T>(Guid relationId, RelationEndRole role, IDataObject parent, out List<IStreamable> auxObjects)
             where T : class, IRelationCollectionEntry;
 
-        Stream GetDocumentStream(int ID);
-        void SetDocumentStream(int ID, Stream document);
+        Stream GetBlobStream(int ID);
+        Kistl.App.Base.Blob SetBlobStream(Stream stream, string filename, string mimetype);
     }
 
 
@@ -244,18 +244,25 @@ namespace Kistl.API.Client
         }
         #endregion
 
-        public Stream GetDocumentStream(int ID)
+        public Stream GetBlobStream(int ID)
         {
-            return Service.GetDocumentStream(ID);
+            return Service.GetBlobStream(ID);
         }
 
-        public void SetDocumentStream(int ID, Stream document)
+        public Kistl.App.Base.Blob SetBlobStream(Stream stream, string filename, string mimetype)
         {
-            // TODO: Convert Service Interface to Streaming Service interface
-            using (MemoryStream s = new MemoryStream())
+            Stream result;
+            int id = Service.SetBlobStream(filename, mimetype, stream, out result);
+            try
             {
-                document.CopyTo(s);
-                Service.SetDocumentStream(ID, s);
+                using (var sr = new BinaryReader(result))
+                {
+                    return ReceiveObjectList(sr).Cast<Kistl.App.Base.Blob>().Single();
+                }
+            }
+            finally
+            {
+                result.Dispose();
             }
         }
     }

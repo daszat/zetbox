@@ -201,15 +201,19 @@ namespace Kistl.DalProvider.ClientObjects.Mocks
 
         #endregion
 
+        #region IProxy Members
 
-        public System.IO.Stream GetDocumentStream(int ID)
+
+        public System.IO.Stream GetBlobStream(int ID)
         {
             throw new NotImplementedException();
         }
 
-        public void SetDocumentStream(int ID, System.IO.Stream document)
+        public Kistl.App.Base.Blob SetBlobStream(System.IO.Stream stream, string filename, string mimetype)
         {
             throw new NotImplementedException();
         }
+
+        #endregion
     }
 }

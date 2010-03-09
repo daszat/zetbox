@@ -89,6 +89,7 @@
     <Compile Include="Assembly.Server.Designer.cs" />
     <Compile Include="Auftrag.Server.Designer.cs" />
     <Compile Include="BaseParameter.Server.Designer.cs" />
+    <Compile Include="Blob.Server.Designer.cs" />
     <Compile Include="BoolParameter.Server.Designer.cs" />
     <Compile Include="BoolProperty.Server.Designer.cs" />
     <Compile Include="CalculatedObjectReferenceProperty.Server.Designer.cs" />
@@ -109,7 +110,6 @@
     <Compile Include="DateTimeParameter.Server.Designer.cs" />
     <Compile Include="DateTimeProperty.Server.Designer.cs" />
     <Compile Include="DefaultPropertyValue.Server.Designer.cs" />
-    <Compile Include="Document.Server.Designer.cs" />
     <Compile Include="DoubleParameter.Server.Designer.cs" />
     <Compile Include="DoubleProperty.Server.Designer.cs" />
     <Compile Include="Enumeration.Server.Designer.cs" />

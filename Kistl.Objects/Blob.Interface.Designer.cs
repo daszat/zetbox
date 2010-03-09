@@ -10,13 +10,20 @@ namespace Kistl.App.Base
     /// <summary>
     /// Represents a Document
     /// </summary>
-    public interface Document : IDataObject, Kistl.App.Base.IChangedBy, Kistl.App.Base.IExportable 
+    public interface Blob : IDataObject, Kistl.App.Base.IChangedBy, Kistl.App.Base.IExportable 
     {
 
         /// <summary>
-        /// Document name
+        /// MimeType of this Blob
         /// </summary>
-		string Name {
+		string MimeType {
+			get;
+			set;
+		}
+        /// <summary>
+        /// Original file name of this blob
+        /// </summary>
+		string OriginalName {
 			get;
 			set;
 		}
@@ -32,12 +39,8 @@ namespace Kistl.App.Base
         /// </summary>
 		 System.IO.Stream GetStream() ;
         /// <summary>
-        /// 
+        /// Opens the document
         /// </summary>
-		 void IntializeStoragePath() ;
-        /// <summary>
-        /// Save the given stream
-        /// </summary>
-		 void SaveStream(System.IO.Stream stream) ;
+		 void Open() ;
     }
 }

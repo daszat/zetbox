@@ -243,6 +243,9 @@ namespace Kistl.API
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
         IEnumerable<T> FindPersistenceObjects<T>(IEnumerable<Guid> exportGuids) where T : class, IPersistenceObject;
 
+        System.IO.Stream GetStream(int ID);
+        System.IO.FileInfo GetFileInfo(int ID);
+
         /// <summary>
         /// IsDisposed can be used to detect whether this IKistlContext was aborted with Dispose()
         /// </summary>
@@ -339,6 +342,9 @@ namespace Kistl.API
         /// <typeparam name="T">Type of the new CompoundObject</typeparam>
         /// <returns>A new CompoundObject</returns>
         T CreateCompoundObject<T>() where T : ICompoundObject;
+
+        int CreateBlob(System.IO.Stream s, string filename, string mimetype);
+        int CreateBlob(System.IO.FileInfo fi, string mimetype);
 
         /// <summary>
         /// Is fired when an object is created in this Context.

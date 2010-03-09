@@ -432,15 +432,38 @@ namespace Kistl.App.Base
         }
 
         #region Document Management
-        public static void OnGetStream_Document(Kistl.App.Base.Document obj, MethodReturnEventArgs<System.IO.Stream> e)
+        public static void OnGetStream_Document(Kistl.App.Base.Blob obj, MethodReturnEventArgs<System.IO.Stream> e)
         {
-            e.Result = Kistl.API.Client.ProxySingleton.Current.GetDocumentStream(obj.ID);
+            e.Result = obj.Context.GetStream(obj.ID);
         }
 
-        public static void OnSaveStream_Document(Kistl.App.Base.Document obj, System.IO.Stream stream)
+        public static void OnOpen_Document(Kistl.App.Base.Blob obj)
         {
-            Kistl.API.Client.ProxySingleton.Current.SetDocumentStream(obj.ID, stream);
+            ShellExecute(obj.Context.GetFileInfo(obj.ID).FullName);
         }
+        #region ShellExecute
+        private static void ShellExecute(string filename)
+        {
+            ShellExecute(filename, "");
+        }
+
+        private static void ShellExecute(string filename, string verb)
+        {
+            System.Diagnostics.ProcessStartInfo si = new System.Diagnostics.ProcessStartInfo();
+            si.UseShellExecute = true;
+            si.FileName = filename;
+            si.Verb = verb;
+            System.Diagnostics.Process.Start(si);
+        }
+
+        //private static string[] GetFileVerbs(string filename)
+        //{
+        //    System.Diagnostics.ProcessStartInfo si = new System.Diagnostics.ProcessStartInfo();
+        //    si.UseShellExecute = true;
+        //    si.FileName = filename;
+        //    return si.Verbs;
+        //}        
+        #endregion
         #endregion
 
     }

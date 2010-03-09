@@ -332,5 +332,25 @@ namespace Kistl.API
         {
             // nothing to dispose
         }
+
+        public int CreateBlob(System.IO.Stream s, string filename, string mimetype)
+        {
+            throw new NotSupportedException();
+        }
+
+        public int CreateBlob(System.IO.FileInfo fi, string mimetype)
+        {
+            throw new NotSupportedException();
+        }
+
+        public System.IO.Stream GetStream(int ID)
+        {
+            throw new NotSupportedException();
+        }
+
+        public System.IO.FileInfo GetFileInfo(int ID)
+        {
+            throw new NotSupportedException();
+        }
     }
 }

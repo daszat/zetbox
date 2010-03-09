@@ -261,6 +261,9 @@ namespace Kistl.API.Server
         /// <returns>A new IPersistenceObject</returns>
         public virtual IDataObject Create(InterfaceType ifType)
         {
+            if (ifType == null) throw new ArgumentNullException("ifType");
+            if (ifType.Type == typeof(Kistl.App.Base.Blob)) throw new InvalidOperationException("Creating a Blob is not supported. Use CreateBlob() instead");
+
             ObjectClass cls = metaDataResolver.GetObjectClass(ifType).GetRootClass();
             if (identity != null && cls.HasAccessControlList() && (cls.GetGroupAccessRights(identity) & AccessRights.Create) != AccessRights.Create)
             {
@@ -410,6 +413,49 @@ namespace Kistl.API.Server
         /// <returns>A List of IPersistenceObject.</returns>
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
         public abstract IEnumerable<T> FindPersistenceObjects<T>(IEnumerable<Guid> exportGuids) where T : class, IPersistenceObject;
+
+        public int CreateBlob(System.IO.Stream s, string filename, string mimetype)
+        {
+            if (s == null) throw new ArgumentNullException("s");
+            if (string.IsNullOrEmpty(filename)) throw new ArgumentNullException("filename");
+            if (string.IsNullOrEmpty(mimetype)) throw new ArgumentNullException("mimetype");
+
+            var blob = (Kistl.App.Base.Blob)this.CreateInternal(new InterfaceType(typeof(Kistl.App.Base.Blob)));
+            DateTime today = DateTime.Today;
+            blob.StoragePath = string.Format(@"{0:0000}\{1:00}\{2:00}\({3}) - {4}", today.Year, today.Month, today.Day, Guid.NewGuid(), filename);
+            blob.OriginalName = filename;
+            blob.MimeType = mimetype;
+
+            string path = System.IO.Path.Combine(ApplicationContext.Current.Configuration.Client.DocumentStore, blob.StoragePath);
+            using (var file = System.IO.File.Open(path, System.IO.FileMode.Create, System.IO.FileAccess.Write))
+            {
+                file.SetLength(0);
+                s.CopyTo(file);
+            }
+
+            return blob.ID;
+        }
+
+        public int CreateBlob(System.IO.FileInfo fi, string mimetype)
+        {
+            if (fi == null) throw new ArgumentNullException("fi");
+            using (var s = fi.OpenRead())
+            {
+                return CreateBlob(s, fi.Name, mimetype);
+            }
+        }
+
+        public System.IO.Stream GetStream(int ID)
+        {
+            return GetFileInfo(ID).OpenRead();
+        }
+
+        public System.IO.FileInfo GetFileInfo(int ID)
+        {
+            var blob = this.Find<Kistl.App.Base.Blob>(ID);
+            string path = System.IO.Path.Combine(ApplicationContext.Current.Configuration.Client.DocumentStore, blob.StoragePath);
+            return new System.IO.FileInfo(path);
+        }
 
         public event GenericEventHandler<IPersistenceObject> ObjectCreated;
 

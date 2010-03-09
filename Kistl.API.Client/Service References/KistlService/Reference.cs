@@ -84,17 +84,17 @@ namespace Kistl.API.Client.KistlService {
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Kistl.API.SerializableType))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Kistl.API.SerializableType[]))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Kistl.API.SerializableExpression))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Kistl.API.SerializableMemberExpression))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Kistl.API.SerializableNewExpression))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Kistl.API.SerializableCompoundExpression))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Kistl.API.SerializableExpression[]))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Kistl.API.SerializableMethodCallExpression))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Kistl.API.SerializableConstantExpression))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Kistl.API.SerializableLambdaExpression))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Kistl.API.SerializableParameterExpression))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Kistl.API.SerializableUnaryExpression))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Kistl.API.SerializableNewExpression))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Kistl.API.SerializableLambdaExpression))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Kistl.API.SerializableMethodCallExpression))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Kistl.API.SerializableMemberExpression))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Kistl.API.SerializableBinaryExpression))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Kistl.API.SerializableConditionalExpression))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Kistl.API.SerializableConstantExpression))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(int[]))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.Reflection.MemberInfo[]))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.Reflection.MemberInfo))]
@@ -205,15 +205,15 @@ namespace Kistl.API.Client.KistlService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IKistlService/GetList", ReplyAction="http://tempuri.org/IKistlService/GetListResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(System.Exception), Action="http://tempuri.org/IKistlService/GetListExceptionFault", Name="Exception", Namespace="http://schemas.datacontract.org/2004/07/System")]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Kistl.API.SerializableCompoundExpression))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Kistl.API.SerializableMemberExpression))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Kistl.API.SerializableMethodCallExpression))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Kistl.API.SerializableUnaryExpression))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Kistl.API.SerializableNewExpression))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Kistl.API.SerializableLambdaExpression))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Kistl.API.SerializableUnaryExpression))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Kistl.API.SerializableMethodCallExpression))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Kistl.API.SerializableMemberExpression))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Kistl.API.SerializableBinaryExpression))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Kistl.API.SerializableConstantExpression))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Kistl.API.SerializableParameterExpression))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Kistl.API.SerializableConditionalExpression))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Kistl.API.SerializableConstantExpression))]
         System.IO.MemoryStream GetList(Kistl.API.SerializableType type, int maxListCount, Kistl.API.SerializableExpression filter, Kistl.API.SerializableExpression[] orderBy);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IKistlService/GetListOf", ReplyAction="http://tempuri.org/IKistlService/GetListOfResponse")]
@@ -224,13 +224,58 @@ namespace Kistl.API.Client.KistlService {
         [System.ServiceModel.FaultContractAttribute(typeof(System.Exception), Action="http://tempuri.org/IKistlService/FetchRelationExceptionFault", Name="Exception", Namespace="http://schemas.datacontract.org/2004/07/System")]
         System.IO.MemoryStream FetchRelation(System.Guid relId, int role, int ID);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IKistlService/GetDocumentStream", ReplyAction="http://tempuri.org/IKistlService/GetDocumentStreamResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(System.Exception), Action="http://tempuri.org/IKistlService/GetDocumentStreamExceptionFault", Name="Exception", Namespace="http://schemas.datacontract.org/2004/07/System")]
-        System.IO.MemoryStream GetDocumentStream(int ID);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IKistlService/GetBlobStream", ReplyAction="http://tempuri.org/IKistlService/GetBlobStreamResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(System.Exception), Action="http://tempuri.org/IKistlService/GetBlobStreamExceptionFault", Name="Exception", Namespace="http://schemas.datacontract.org/2004/07/System")]
+        System.IO.Stream GetBlobStream(int ID);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IKistlService/SetDocumentStream", ReplyAction="http://tempuri.org/IKistlService/SetDocumentStreamResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(System.Exception), Action="http://tempuri.org/IKistlService/SetDocumentStreamExceptionFault", Name="Exception", Namespace="http://schemas.datacontract.org/2004/07/System")]
-        void SetDocumentStream(int ID, System.IO.MemoryStream document);
+        // CODEGEN: Generating message contract since the wrapper name (BlobMessage) of message BlobMessage does not match the default value (SetBlobStream)
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IKistlService/SetBlobStream", ReplyAction="http://tempuri.org/IKistlService/SetBlobStreamResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(System.Exception), Action="http://tempuri.org/IKistlService/SetBlobStreamExceptionFault", Name="Exception", Namespace="http://schemas.datacontract.org/2004/07/System")]
+        Kistl.API.Client.KistlService.BlobResponse SetBlobStream(Kistl.API.Client.KistlService.BlobMessage request);
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="BlobMessage", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class BlobMessage {
+        
+        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://tempuri.org/")]
+        public string FileName;
+        
+        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://tempuri.org/")]
+        public string MimeType;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        public System.IO.Stream Stream;
+        
+        public BlobMessage() {
+        }
+        
+        public BlobMessage(string FileName, string MimeType, System.IO.Stream Stream) {
+            this.FileName = FileName;
+            this.MimeType = MimeType;
+            this.Stream = Stream;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="BlobResponse", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class BlobResponse {
+        
+        [System.ServiceModel.MessageHeaderAttribute(Namespace="http://tempuri.org/")]
+        public int ID;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        public System.IO.Stream BlobInstance;
+        
+        public BlobResponse() {
+        }
+        
+        public BlobResponse(int ID, System.IO.Stream BlobInstance) {
+            this.ID = ID;
+            this.BlobInstance = BlobInstance;
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
@@ -276,12 +321,23 @@ namespace Kistl.API.Client.KistlService {
             return base.Channel.FetchRelation(relId, role, ID);
         }
         
-        public System.IO.MemoryStream GetDocumentStream(int ID) {
-            return base.Channel.GetDocumentStream(ID);
+        public System.IO.Stream GetBlobStream(int ID) {
+            return base.Channel.GetBlobStream(ID);
         }
         
-        public void SetDocumentStream(int ID, System.IO.MemoryStream document) {
-            base.Channel.SetDocumentStream(ID, document);
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Kistl.API.Client.KistlService.BlobResponse Kistl.API.Client.KistlService.IKistlService.SetBlobStream(Kistl.API.Client.KistlService.BlobMessage request) {
+            return base.Channel.SetBlobStream(request);
+        }
+        
+        public int SetBlobStream(string FileName, string MimeType, System.IO.Stream Stream, out System.IO.Stream BlobInstance) {
+            Kistl.API.Client.KistlService.BlobMessage inValue = new Kistl.API.Client.KistlService.BlobMessage();
+            inValue.FileName = FileName;
+            inValue.MimeType = MimeType;
+            inValue.Stream = Stream;
+            Kistl.API.Client.KistlService.BlobResponse retVal = ((Kistl.API.Client.KistlService.IKistlService)(this)).SetBlobStream(inValue);
+            BlobInstance = retVal.BlobInstance;
+            return retVal.ID;
         }
     }
 }

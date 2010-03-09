@@ -22,12 +22,12 @@ namespace Kistl.App.Base
     /// <summary>
     /// Represents a Document
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="Document")]
-    [System.Diagnostics.DebuggerDisplay("Document")]
-    public class Document__Implementation__ : BaseServerDataObject_EntityFramework, Document, Kistl.API.IExportableInternal
+    [EdmEntityType(NamespaceName="Model", Name="Blob")]
+    [System.Diagnostics.DebuggerDisplay("Blob")]
+    public class Blob__Implementation__ : BaseServerDataObject_EntityFramework, Blob, Kistl.API.IExportableInternal
     {
     
-		public Document__Implementation__()
+		public Blob__Implementation__()
 		{
         }
 
@@ -62,7 +62,7 @@ namespace Kistl.App.Base
         /// </summary>
     /*
     Relation: FK_Document_was_ChangedBy
-    A: ZeroOrMore Document as Document
+    A: ZeroOrMore Blob as Document
     B: ZeroOrOne Identity as ChangedBy
     Preferred Storage: MergeIntoA
     */
@@ -144,9 +144,9 @@ namespace Kistl.App.Base
         }
         
         
-		public static event PropertyGetterHandler<Kistl.App.Base.Document, Kistl.App.Base.Identity> OnChangedBy_Getter;
-		public static event PropertyPreSetterHandler<Kistl.App.Base.Document, Kistl.App.Base.Identity> OnChangedBy_PreSetter;
-		public static event PropertyPostSetterHandler<Kistl.App.Base.Document, Kistl.App.Base.Identity> OnChangedBy_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.Blob, Kistl.App.Base.Identity> OnChangedBy_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.Blob, Kistl.App.Base.Identity> OnChangedBy_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.Blob, Kistl.App.Base.Identity> OnChangedBy_PostSetter;
 
         /// <summary>
         /// Date and time where this object was changed
@@ -196,16 +196,16 @@ namespace Kistl.App.Base
             }
         }
         private DateTime? _ChangedOn;
-		public static event PropertyGetterHandler<Kistl.App.Base.Document, DateTime?> OnChangedOn_Getter;
-		public static event PropertyPreSetterHandler<Kistl.App.Base.Document, DateTime?> OnChangedOn_PreSetter;
-		public static event PropertyPostSetterHandler<Kistl.App.Base.Document, DateTime?> OnChangedOn_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.Blob, DateTime?> OnChangedOn_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.Blob, DateTime?> OnChangedOn_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.Blob, DateTime?> OnChangedOn_PostSetter;
 
         /// <summary>
         /// Identity which created this object
         /// </summary>
     /*
     Relation: FK_Document_was_CreatedBy
-    A: ZeroOrMore Document as Document
+    A: ZeroOrMore Blob as Document
     B: ZeroOrOne Identity as CreatedBy
     Preferred Storage: MergeIntoA
     */
@@ -287,9 +287,9 @@ namespace Kistl.App.Base
         }
         
         
-		public static event PropertyGetterHandler<Kistl.App.Base.Document, Kistl.App.Base.Identity> OnCreatedBy_Getter;
-		public static event PropertyPreSetterHandler<Kistl.App.Base.Document, Kistl.App.Base.Identity> OnCreatedBy_PreSetter;
-		public static event PropertyPostSetterHandler<Kistl.App.Base.Document, Kistl.App.Base.Identity> OnCreatedBy_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.Blob, Kistl.App.Base.Identity> OnCreatedBy_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.Blob, Kistl.App.Base.Identity> OnCreatedBy_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.Blob, Kistl.App.Base.Identity> OnCreatedBy_PostSetter;
 
         /// <summary>
         /// Date and time where this object was created
@@ -339,9 +339,9 @@ namespace Kistl.App.Base
             }
         }
         private DateTime? _CreatedOn;
-		public static event PropertyGetterHandler<Kistl.App.Base.Document, DateTime?> OnCreatedOn_Getter;
-		public static event PropertyPreSetterHandler<Kistl.App.Base.Document, DateTime?> OnCreatedOn_PreSetter;
-		public static event PropertyPostSetterHandler<Kistl.App.Base.Document, DateTime?> OnCreatedOn_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.Blob, DateTime?> OnCreatedOn_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.Blob, DateTime?> OnCreatedOn_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.Blob, DateTime?> OnCreatedOn_PostSetter;
 
         /// <summary>
         /// Export Guid
@@ -365,7 +365,7 @@ namespace Kistl.App.Base
                         _isExportGuidSet = true;
                         __result = this._ExportGuid = (Guid)__p.DefaultValue.GetDefaultValue();
                     } else {
-                        Kistl.API.Utils.Logging.Log.Warn("Unable to get default value for property 'Document.ExportGuid'");
+                        Kistl.API.Utils.Logging.Log.Warn("Unable to get default value for property 'Blob.ExportGuid'");
                     }
                 }
                 if (OnExportGuid_Getter != null)
@@ -402,29 +402,29 @@ namespace Kistl.App.Base
             }
         }
         private Guid _ExportGuid;
-		public static event PropertyGetterHandler<Kistl.App.Base.Document, Guid> OnExportGuid_Getter;
-		public static event PropertyPreSetterHandler<Kistl.App.Base.Document, Guid> OnExportGuid_PreSetter;
-		public static event PropertyPostSetterHandler<Kistl.App.Base.Document, Guid> OnExportGuid_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.Blob, Guid> OnExportGuid_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.Blob, Guid> OnExportGuid_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.Blob, Guid> OnExportGuid_PostSetter;
 
         /// <summary>
-        /// Document name
+        /// MimeType of this Blob
         /// </summary>
         // value type property
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
            // Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.NotifyingDataProperty
-        public virtual string Name
+        public virtual string MimeType
         {
             get
             {
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
-                var __result = _Name;
-                if (OnName_Getter != null)
+                var __result = _MimeType;
+                if (OnMimeType_Getter != null)
                 {
                     var __e = new PropertyGetterEventArgs<string>(__result);
-                    OnName_Getter(this, __e);
+                    OnMimeType_Getter(this, __e);
                     __result = __e.Result;
                 }
                 return __result;
@@ -432,31 +432,83 @@ namespace Kistl.App.Base
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
-                if (_Name != value)
+                if (_MimeType != value)
                 {
-                    var __oldValue = _Name;
+                    var __oldValue = _MimeType;
                     var __newValue = value;
-                    if(OnName_PreSetter != null)
+                    if(OnMimeType_PreSetter != null)
                     {
                         var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
-                        OnName_PreSetter(this, __e);
+                        OnMimeType_PreSetter(this, __e);
                         __newValue = __e.Result;
                     }
-                    NotifyPropertyChanging("Name", __oldValue, __newValue);
-                    _Name = __newValue;
-                    NotifyPropertyChanged("Name", __oldValue, __newValue);
-                    if(OnName_PostSetter != null)
+                    NotifyPropertyChanging("MimeType", __oldValue, __newValue);
+                    _MimeType = __newValue;
+                    NotifyPropertyChanged("MimeType", __oldValue, __newValue);
+                    if(OnMimeType_PostSetter != null)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
-                        OnName_PostSetter(this, __e);
+                        OnMimeType_PostSetter(this, __e);
                     }
                 }
             }
         }
-        private string _Name;
-		public static event PropertyGetterHandler<Kistl.App.Base.Document, string> OnName_Getter;
-		public static event PropertyPreSetterHandler<Kistl.App.Base.Document, string> OnName_PreSetter;
-		public static event PropertyPostSetterHandler<Kistl.App.Base.Document, string> OnName_PostSetter;
+        private string _MimeType;
+		public static event PropertyGetterHandler<Kistl.App.Base.Blob, string> OnMimeType_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.Blob, string> OnMimeType_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.Blob, string> OnMimeType_PostSetter;
+
+        /// <summary>
+        /// Original file name of this blob
+        /// </summary>
+        // value type property
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+           // Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.NotifyingDataProperty
+        public virtual string OriginalName
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _OriginalName;
+                if (OnOriginalName_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<string>(__result);
+                    OnOriginalName_Getter(this, __e);
+                    __result = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_OriginalName != value)
+                {
+                    var __oldValue = _OriginalName;
+                    var __newValue = value;
+                    if(OnOriginalName_PreSetter != null)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
+                        OnOriginalName_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("OriginalName", __oldValue, __newValue);
+                    _OriginalName = __newValue;
+                    NotifyPropertyChanged("OriginalName", __oldValue, __newValue);
+                    if(OnOriginalName_PostSetter != null)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
+                        OnOriginalName_PostSetter(this, __e);
+                    }
+                }
+            }
+        }
+        private string _OriginalName;
+		public static event PropertyGetterHandler<Kistl.App.Base.Blob, string> OnOriginalName_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.Blob, string> OnOriginalName_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.Blob, string> OnOriginalName_PostSetter;
 
         /// <summary>
         /// Relative Path + Filename to the client/server document storage location. Readonly on client side.
@@ -506,90 +558,70 @@ namespace Kistl.App.Base
             }
         }
         private string _StoragePath;
-		public static event PropertyGetterHandler<Kistl.App.Base.Document, string> OnStoragePath_Getter;
-		public static event PropertyPreSetterHandler<Kistl.App.Base.Document, string> OnStoragePath_PreSetter;
-		public static event PropertyPostSetterHandler<Kistl.App.Base.Document, string> OnStoragePath_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.Blob, string> OnStoragePath_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.Blob, string> OnStoragePath_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.Blob, string> OnStoragePath_PostSetter;
 
         /// <summary>
         /// Returnes the document stream
         /// </summary>
-		[EventBasedMethod("OnGetStream_Document")]
+		[EventBasedMethod("OnGetStream_Blob")]
 		public virtual System.IO.Stream GetStream() 
         {
             var e = new MethodReturnEventArgs<System.IO.Stream>();
-            if (OnGetStream_Document != null)
+            if (OnGetStream_Blob != null)
             {
-                OnGetStream_Document(this, e);
+                OnGetStream_Blob(this, e);
             }
             else
             {
-                throw new NotImplementedException("No handler registered on Document.GetStream");
+                throw new NotImplementedException("No handler registered on Blob.GetStream");
             }
             return e.Result;
         }
 		public delegate void GetStream_Handler<T>(T obj, MethodReturnEventArgs<System.IO.Stream> ret);
-		public static event GetStream_Handler<Document> OnGetStream_Document;
+		public static event GetStream_Handler<Blob> OnGetStream_Blob;
 
 
 
         /// <summary>
-        /// 
+        /// Opens the document
         /// </summary>
-		[EventBasedMethod("OnIntializeStoragePath_Document")]
-		public virtual void IntializeStoragePath() 
+		[EventBasedMethod("OnOpen_Blob")]
+		public virtual void Open() 
 		{
-            // base.IntializeStoragePath();
-            if (OnIntializeStoragePath_Document != null)
+            // base.Open();
+            if (OnOpen_Blob != null)
             {
-				OnIntializeStoragePath_Document(this);
+				OnOpen_Blob(this);
 			}
 			else
 			{
-                throw new NotImplementedException("No handler registered on Document.IntializeStoragePath");
+                throw new NotImplementedException("No handler registered on Blob.Open");
 			}
         }
-		public delegate void IntializeStoragePath_Handler<T>(T obj);
-		public static event IntializeStoragePath_Handler<Document> OnIntializeStoragePath_Document;
-
-
-
-        /// <summary>
-        /// Save the given stream
-        /// </summary>
-		[EventBasedMethod("OnSaveStream_Document")]
-		public virtual void SaveStream(System.IO.Stream stream) 
-		{
-            // base.SaveStream();
-            if (OnSaveStream_Document != null)
-            {
-				OnSaveStream_Document(this, stream);
-			}
-			else
-			{
-                throw new NotImplementedException("No handler registered on Document.SaveStream");
-			}
-        }
-		public delegate void SaveStream_Handler<T>(T obj, System.IO.Stream stream);
-		public static event SaveStream_Handler<Document> OnSaveStream_Document;
+		public delegate void Open_Handler<T>(T obj);
+		public static event Open_Handler<Blob> OnOpen_Blob;
 
 
 
 		public override InterfaceType GetInterfaceType()
 		{
-			return new InterfaceType(typeof(Document));
+			return new InterfaceType(typeof(Blob));
 		}
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{
 			base.ApplyChangesFrom(obj);
-			var other = (Document)obj;
-			var otherImpl = (Document__Implementation__)obj;
-			var me = (Document)this;
+			var other = (Blob)obj;
+			var otherImpl = (Blob__Implementation__)obj;
+			var me = (Blob)this;
 
 			me.ChangedOn = other.ChangedOn;
 			me.CreatedOn = other.CreatedOn;
 			me.ExportGuid = other.ExportGuid;
-			me.Name = other.Name;
+			me.MimeType = other.MimeType;
+			me.OriginalName = other.OriginalName;
 			me.StoragePath = other.StoragePath;
 			this._fk_ChangedBy = otherImpl._fk_ChangedBy;
 			this._fk_CreatedBy = otherImpl._fk_CreatedBy;
@@ -599,50 +631,50 @@ namespace Kistl.App.Base
    		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
         [System.Diagnostics.DebuggerHidden()]
-        [EventBasedMethod("OnToString_Document")]
+        [EventBasedMethod("OnToString_Blob")]
         public override string ToString()
         {
             MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
             e.Result = base.ToString();
-            if (OnToString_Document != null)
+            if (OnToString_Blob != null)
             {
-                OnToString_Document(this, e);
+                OnToString_Blob(this, e);
             }
             return e.Result;
         }
-        public static event ToStringHandler<Document> OnToString_Document;
+        public static event ToStringHandler<Blob> OnToString_Blob;
 
-        [EventBasedMethod("OnPreSave_Document")]
+        [EventBasedMethod("OnPreSave_Blob")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_Document != null) OnPreSave_Document(this);
+            if (OnPreSave_Blob != null) OnPreSave_Blob(this);
         }
-        public static event ObjectEventHandler<Document> OnPreSave_Document;
+        public static event ObjectEventHandler<Blob> OnPreSave_Blob;
 
-        [EventBasedMethod("OnPostSave_Document")]
+        [EventBasedMethod("OnPostSave_Blob")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_Document != null) OnPostSave_Document(this);
+            if (OnPostSave_Blob != null) OnPostSave_Blob(this);
         }
-        public static event ObjectEventHandler<Document> OnPostSave_Document;
+        public static event ObjectEventHandler<Blob> OnPostSave_Blob;
 
-        [EventBasedMethod("OnCreated_Document")]
+        [EventBasedMethod("OnCreated_Blob")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_Document != null) OnCreated_Document(this);
+            if (OnCreated_Blob != null) OnCreated_Blob(this);
         }
-        public static event ObjectEventHandler<Document> OnCreated_Document;
+        public static event ObjectEventHandler<Blob> OnCreated_Blob;
 
-        [EventBasedMethod("OnDeleting_Document")]
+        [EventBasedMethod("OnDeleting_Blob")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_Document != null) OnDeleting_Document(this);
+            if (OnDeleting_Blob != null) OnDeleting_Blob(this);
         }
-        public static event ObjectEventHandler<Document> OnDeleting_Document;
+        public static event ObjectEventHandler<Blob> OnDeleting_Blob;
 
 
 		protected override string GetPropertyError(string propertyName) 
@@ -694,11 +726,20 @@ namespace Kistl.App.Base
 					
 					return String.Join("; ", errors);
 				}
-				case "Name":
+				case "MimeType":
+				{
+					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("182a7118-5123-4d5f-b623-205e38573e8e")).Constraints
+						.Where(c => !c.IsValid(this, this.MimeType))
+						.Select(c => c.GetErrorText(this, this.MimeType))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "OriginalName":
 				{
 					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("c1f449e2-9532-4093-8667-6ba5f7372892")).Constraints
-						.Where(c => !c.IsValid(this, this.Name))
-						.Select(c => c.GetErrorText(this, this.Name))
+						.Where(c => !c.IsValid(this, this.OriginalName))
+						.Select(c => c.GetErrorText(this, this.OriginalName))
 						.ToArray();
 					
 					return String.Join("; ", errors);
@@ -753,7 +794,8 @@ namespace Kistl.App.Base
             if (this._isExportGuidSet) {
                 BinarySerializer.ToStream(this._ExportGuid, binStream);
             }
-            BinarySerializer.ToStream(this._Name, binStream);
+            BinarySerializer.ToStream(this._MimeType, binStream);
+            BinarySerializer.ToStream(this._OriginalName, binStream);
             BinarySerializer.ToStream(this._StoragePath, binStream);
         }
 
@@ -769,7 +811,8 @@ namespace Kistl.App.Base
             if (this._isExportGuidSet) {
                 BinarySerializer.FromStream(out this._ExportGuid, binStream);
             }
-            BinarySerializer.FromStream(out this._Name, binStream);
+            BinarySerializer.FromStream(out this._MimeType, binStream);
+            BinarySerializer.FromStream(out this._OriginalName, binStream);
             BinarySerializer.FromStream(out this._StoragePath, binStream);
         }
 
@@ -785,7 +828,8 @@ namespace Kistl.App.Base
             if (this._isExportGuidSet) {
                 XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
             }
-            XmlStreamer.ToStream(this._Name, xml, "Name", "Kistl.App.Base");
+            XmlStreamer.ToStream(this._MimeType, xml, "MimeType", "Kistl.App.Base");
+            XmlStreamer.ToStream(this._OriginalName, xml, "OriginalName", "Kistl.App.Base");
             XmlStreamer.ToStream(this._StoragePath, xml, "StoragePath", "Kistl.App.Base");
         }
 
@@ -801,7 +845,8 @@ namespace Kistl.App.Base
             if (this._isExportGuidSet) {
                 XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
             }
-            XmlStreamer.FromStream(ref this._Name, xml, "Name", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._MimeType, xml, "MimeType", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._OriginalName, xml, "OriginalName", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._StoragePath, xml, "StoragePath", "Kistl.App.Base");
         }
 
@@ -814,7 +859,9 @@ namespace Kistl.App.Base
     
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._CreatedOn, xml, "CreatedOn", "Kistl.App.Base");
     
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._Name, xml, "Name", "Kistl.App.Base");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._MimeType, xml, "MimeType", "Kistl.App.Base");
+    
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._OriginalName, xml, "OriginalName", "Kistl.App.Base");
     
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._StoragePath, xml, "StoragePath", "Kistl.App.Base");
         }
@@ -825,7 +872,8 @@ namespace Kistl.App.Base
             XmlStreamer.FromStream(ref this._CreatedOn, xml, "CreatedOn", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
             this._isExportGuidSet = true;
-            XmlStreamer.FromStream(ref this._Name, xml, "Name", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._MimeType, xml, "MimeType", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._OriginalName, xml, "OriginalName", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._StoragePath, xml, "StoragePath", "Kistl.App.Base");
         }
 

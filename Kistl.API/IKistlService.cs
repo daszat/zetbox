@@ -70,23 +70,44 @@ namespace Kistl.API
         MemoryStream FetchRelation(Guid relId, int role, int ID);
 
         /// <summary>
-        /// Gets the content stream of the given Document instance ID
+        /// Gets the content stream of the given Blob instance ID
         /// </summary>
-        /// <param name="ID">ID of an valid Document instance</param>
-        /// <returns>Stream containing the Document content</returns>
+        /// <param name="ID">ID of an valid Blob instance</param>
+        /// <returns>Stream containing the Blob content</returns>
         [OperationContract]
         [FaultContract(typeof(Exception))]
-        MemoryStream GetDocumentStream(int ID);
+        Stream GetBlobStream(int ID);
 
         /// <summary>
-        /// Sets the content stream of the given Document instance ID
+        /// Sets the content stream and creates a new Blob instance
         /// </summary>
-        /// <param name="ID">ID of an valid Document instance</param>
-        /// <param name="document">Stream containing the Document content</param>
+        /// <param name="blob">Information about the given blob</param>
+        /// <returns>the newly created Blob instance</returns>
         [OperationContract]
         [FaultContract(typeof(Exception))]
-        void SetDocumentStream(int ID, MemoryStream document);
+        BlobResponse SetBlobStream(BlobMessage blob);
     }
+
+    [MessageContract]
+    public class BlobMessage
+    {
+        [MessageHeader]
+        public string FileName { get; set; }
+        [MessageHeader]
+        public string MimeType { get; set; }
+        [MessageBodyMember]
+        public System.IO.Stream Stream { get; set; }
+    }
+
+    [MessageContract]
+    public class BlobResponse
+    {
+        [MessageHeader]
+        public int ID { get; set; }
+        [MessageBodyMember]
+        public System.IO.Stream BlobInstance { get; set; }
+    }
+
 
     [DataContract]
     [DebuggerDisplay("{IDs.Length} reqs for {Type.TypeName}")]

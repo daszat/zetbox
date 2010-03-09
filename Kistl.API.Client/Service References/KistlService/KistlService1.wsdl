@@ -334,7 +334,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="KistlService_Endpoint_GetDocumentStream_Input_policy">
+  <wsp:Policy wsu:Id="KistlService_Endpoint_GetBlobStream_Input_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
@@ -353,7 +353,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="KistlService_Endpoint_GetDocumentStream_output_policy">
+  <wsp:Policy wsu:Id="KistlService_Endpoint_GetBlobStream_output_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
@@ -372,7 +372,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="KistlService_Endpoint_GetDocumentStream_ExceptionFault_Fault">
+  <wsp:Policy wsu:Id="KistlService_Endpoint_GetBlobStream_ExceptionFault_Fault">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
@@ -391,11 +391,13 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="KistlService_Endpoint_SetDocumentStream_Input_policy">
+  <wsp:Policy wsu:Id="KistlService_Endpoint_SetBlobStream_Input_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
           <sp:Body />
+          <sp:Header Name="FileName" Namespace="http://tempuri.org/" />
+          <sp:Header Name="MimeType" Namespace="http://tempuri.org/" />
           <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
           <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
           <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
@@ -406,15 +408,18 @@
         </sp:SignedParts>
         <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
           <sp:Body />
+          <sp:Header Name="FileName" Namespace="http://tempuri.org/" />
+          <sp:Header Name="MimeType" Namespace="http://tempuri.org/" />
         </sp:EncryptedParts>
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="KistlService_Endpoint_SetDocumentStream_output_policy">
+  <wsp:Policy wsu:Id="KistlService_Endpoint_SetBlobStream_output_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
           <sp:Body />
+          <sp:Header Name="ID" Namespace="http://tempuri.org/" />
           <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
           <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
           <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
@@ -425,11 +430,12 @@
         </sp:SignedParts>
         <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
           <sp:Body />
+          <sp:Header Name="ID" Namespace="http://tempuri.org/" />
         </sp:EncryptedParts>
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="KistlService_Endpoint_SetDocumentStream_ExceptionFault_Fault">
+  <wsp:Policy wsu:Id="KistlService_Endpoint_SetBlobStream_ExceptionFault_Fault">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
@@ -459,6 +465,7 @@
       <xsd:import schemaLocation="http://localhost:6666/KistlService?xsd=xsd6" namespace="http://schemas.datacontract.org/2004/07/System.Linq.Expressions" />
       <xsd:import schemaLocation="http://localhost:6666/KistlService?xsd=xsd7" namespace="http://schemas.datacontract.org/2004/07/System.Reflection" />
       <xsd:import schemaLocation="http://localhost:6666/KistlService?xsd=xsd8" namespace="http://schemas.datacontract.org/2004/07/System.Reflection.Cache" />
+      <xsd:import schemaLocation="http://localhost:6666/KistlService?xsd=xsd9" namespace="http://schemas.microsoft.com/Message" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IKistlService_SetObjects_InputMessage">
@@ -497,22 +504,29 @@
   <wsdl:message name="IKistlService_FetchRelation_ExceptionFault_FaultMessage">
     <wsdl:part xmlns:q4="http://schemas.datacontract.org/2004/07/System" name="detail" element="q4:Exception" />
   </wsdl:message>
-  <wsdl:message name="IKistlService_GetDocumentStream_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetDocumentStream" />
+  <wsdl:message name="IKistlService_GetBlobStream_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetBlobStream" />
   </wsdl:message>
-  <wsdl:message name="IKistlService_GetDocumentStream_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetDocumentStreamResponse" />
+  <wsdl:message name="IKistlService_GetBlobStream_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetBlobStreamResponse" />
   </wsdl:message>
-  <wsdl:message name="IKistlService_GetDocumentStream_ExceptionFault_FaultMessage">
+  <wsdl:message name="IKistlService_GetBlobStream_ExceptionFault_FaultMessage">
     <wsdl:part xmlns:q5="http://schemas.datacontract.org/2004/07/System" name="detail" element="q5:Exception" />
   </wsdl:message>
-  <wsdl:message name="IKistlService_SetDocumentStream_InputMessage">
-    <wsdl:part name="parameters" element="tns:SetDocumentStream" />
+  <wsdl:message name="BlobMessage">
+    <wsdl:part name="parameters" element="tns:BlobMessage" />
   </wsdl:message>
-  <wsdl:message name="IKistlService_SetDocumentStream_OutputMessage">
-    <wsdl:part name="parameters" element="tns:SetDocumentStreamResponse" />
+  <wsdl:message name="BlobMessage_Headers">
+    <wsdl:part name="FileName" element="tns:FileName" />
+    <wsdl:part name="MimeType" element="tns:MimeType" />
   </wsdl:message>
-  <wsdl:message name="IKistlService_SetDocumentStream_ExceptionFault_FaultMessage">
+  <wsdl:message name="BlobResponse">
+    <wsdl:part name="parameters" element="tns:BlobResponse" />
+  </wsdl:message>
+  <wsdl:message name="BlobResponse_Headers">
+    <wsdl:part name="ID" element="tns:ID" />
+  </wsdl:message>
+  <wsdl:message name="IKistlService_SetBlobStream_ExceptionFault_FaultMessage">
     <wsdl:part xmlns:q6="http://schemas.datacontract.org/2004/07/System" name="detail" element="q6:Exception" />
   </wsdl:message>
   <wsdl:portType name="IKistlService">
@@ -536,15 +550,15 @@
       <wsdl:output wsaw:Action="http://tempuri.org/IKistlService/FetchRelationResponse" message="tns:IKistlService_FetchRelation_OutputMessage" />
       <wsdl:fault wsaw:Action="http://tempuri.org/IKistlService/FetchRelationExceptionFault" name="ExceptionFault" message="tns:IKistlService_FetchRelation_ExceptionFault_FaultMessage" />
     </wsdl:operation>
-    <wsdl:operation name="GetDocumentStream">
-      <wsdl:input wsaw:Action="http://tempuri.org/IKistlService/GetDocumentStream" message="tns:IKistlService_GetDocumentStream_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IKistlService/GetDocumentStreamResponse" message="tns:IKistlService_GetDocumentStream_OutputMessage" />
-      <wsdl:fault wsaw:Action="http://tempuri.org/IKistlService/GetDocumentStreamExceptionFault" name="ExceptionFault" message="tns:IKistlService_GetDocumentStream_ExceptionFault_FaultMessage" />
+    <wsdl:operation name="GetBlobStream">
+      <wsdl:input wsaw:Action="http://tempuri.org/IKistlService/GetBlobStream" message="tns:IKistlService_GetBlobStream_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IKistlService/GetBlobStreamResponse" message="tns:IKistlService_GetBlobStream_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IKistlService/GetBlobStreamExceptionFault" name="ExceptionFault" message="tns:IKistlService_GetBlobStream_ExceptionFault_FaultMessage" />
     </wsdl:operation>
-    <wsdl:operation name="SetDocumentStream">
-      <wsdl:input wsaw:Action="http://tempuri.org/IKistlService/SetDocumentStream" message="tns:IKistlService_SetDocumentStream_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IKistlService/SetDocumentStreamResponse" message="tns:IKistlService_SetDocumentStream_OutputMessage" />
-      <wsdl:fault wsaw:Action="http://tempuri.org/IKistlService/SetDocumentStreamExceptionFault" name="ExceptionFault" message="tns:IKistlService_SetDocumentStream_ExceptionFault_FaultMessage" />
+    <wsdl:operation name="SetBlobStream">
+      <wsdl:input wsaw:Action="http://tempuri.org/IKistlService/SetBlobStream" name="BlobMessage" message="tns:BlobMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IKistlService/SetBlobStreamResponse" name="BlobResponse" message="tns:BlobResponse" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IKistlService/SetBlobStreamExceptionFault" name="ExceptionFault" message="tns:IKistlService_SetBlobStream_ExceptionFault_FaultMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="KistlService_Endpoint" type="tns:IKistlService">
@@ -610,33 +624,36 @@
         <soap12:fault use="literal" name="ExceptionFault" namespace="" />
       </wsdl:fault>
     </wsdl:operation>
-    <wsdl:operation name="GetDocumentStream">
-      <soap12:operation soapAction="http://tempuri.org/IKistlService/GetDocumentStream" style="document" />
+    <wsdl:operation name="GetBlobStream">
+      <soap12:operation soapAction="http://tempuri.org/IKistlService/GetBlobStream" style="document" />
       <wsdl:input>
-        <wsp:PolicyReference URI="#KistlService_Endpoint_GetDocumentStream_Input_policy" />
+        <wsp:PolicyReference URI="#KistlService_Endpoint_GetBlobStream_Input_policy" />
         <soap12:body use="literal" />
       </wsdl:input>
       <wsdl:output>
-        <wsp:PolicyReference URI="#KistlService_Endpoint_GetDocumentStream_output_policy" />
+        <wsp:PolicyReference URI="#KistlService_Endpoint_GetBlobStream_output_policy" />
         <soap12:body use="literal" />
       </wsdl:output>
       <wsdl:fault name="ExceptionFault">
-        <wsp:PolicyReference URI="#KistlService_Endpoint_GetDocumentStream_ExceptionFault_Fault" />
+        <wsp:PolicyReference URI="#KistlService_Endpoint_GetBlobStream_ExceptionFault_Fault" />
         <soap12:fault use="literal" name="ExceptionFault" namespace="" />
       </wsdl:fault>
     </wsdl:operation>
-    <wsdl:operation name="SetDocumentStream">
-      <soap12:operation soapAction="http://tempuri.org/IKistlService/SetDocumentStream" style="document" />
-      <wsdl:input>
-        <wsp:PolicyReference URI="#KistlService_Endpoint_SetDocumentStream_Input_policy" />
+    <wsdl:operation name="SetBlobStream">
+      <soap12:operation soapAction="http://tempuri.org/IKistlService/SetBlobStream" style="document" />
+      <wsdl:input name="BlobMessage">
+        <wsp:PolicyReference URI="#KistlService_Endpoint_SetBlobStream_Input_policy" />
+        <soap12:header message="tns:BlobMessage_Headers" part="FileName" use="literal" />
+        <soap12:header message="tns:BlobMessage_Headers" part="MimeType" use="literal" />
         <soap12:body use="literal" />
       </wsdl:input>
-      <wsdl:output>
-        <wsp:PolicyReference URI="#KistlService_Endpoint_SetDocumentStream_output_policy" />
+      <wsdl:output name="BlobResponse">
+        <wsp:PolicyReference URI="#KistlService_Endpoint_SetBlobStream_output_policy" />
+        <soap12:header message="tns:BlobResponse_Headers" part="ID" use="literal" />
         <soap12:body use="literal" />
       </wsdl:output>
       <wsdl:fault name="ExceptionFault">
-        <wsp:PolicyReference URI="#KistlService_Endpoint_SetDocumentStream_ExceptionFault_Fault" />
+        <wsp:PolicyReference URI="#KistlService_Endpoint_SetBlobStream_ExceptionFault_Fault" />
         <soap12:fault use="literal" name="ExceptionFault" namespace="" />
       </wsdl:fault>
     </wsdl:operation>

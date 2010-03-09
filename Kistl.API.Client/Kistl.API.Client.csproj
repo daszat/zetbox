@@ -131,6 +131,7 @@
     <None Include="Service References\KistlService\KistlService6.xsd" />
     <None Include="Service References\KistlService\KistlService61.xsd" />
     <None Include="Service References\KistlService\KistlService62.xsd" />
+    <None Include="Service References\KistlService\KistlService7.xsd" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

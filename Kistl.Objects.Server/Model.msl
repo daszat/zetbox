@@ -143,6 +143,19 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Blob">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Blob)">
+	    <MappingFragment StoreEntitySet="Blob">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+<ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+<ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+<ScalarProperty Name="MimeType" ColumnName="MimeType" />
+<ScalarProperty Name="OriginalName" ColumnName="OriginalName" />
+<ScalarProperty Name="StoragePath" ColumnName="StoragePath" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Company">
       <EntityTypeMapping TypeName="IsTypeOf(Model.Company)">
 	    <MappingFragment StoreEntitySet="Company">
@@ -370,18 +383,6 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.NewGuidDefaultValue)">
 	    <MappingFragment StoreEntitySet="NewGuidDefaultValue">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
-	    </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Document">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.Document)">
-	    <MappingFragment StoreEntitySet="Document">
-	      <ScalarProperty Name="ID" ColumnName="ID" />
-<ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
-<ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-<ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
-<ScalarProperty Name="Name" ColumnName="Name" />
-<ScalarProperty Name="StoragePath" ColumnName="StoragePath" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1965,13 +1966,13 @@
     </AssociationSetMapping>
     <!--
     Relation: FK_Document_was_ChangedBy
-    A: ZeroOrMore Document as Document
+    A: ZeroOrMore Blob as Document
     B: ZeroOrOne Identity as ChangedBy
     Preferred Storage: MergeIntoA
     -->
     <AssociationSetMapping Name="FK_Document_was_ChangedBy"
                            TypeName="Model.FK_Document_was_ChangedBy"
-                           StoreEntitySet="Document" >
+                           StoreEntitySet="Blob" >
       <EndProperty Name="ChangedBy">
         <ScalarProperty Name="ID" ColumnName="fk_ChangedBy"/>
       </EndProperty>
@@ -1982,13 +1983,13 @@
     </AssociationSetMapping>
     <!--
     Relation: FK_Document_was_CreatedBy
-    A: ZeroOrMore Document as Document
+    A: ZeroOrMore Blob as Document
     B: ZeroOrOne Identity as CreatedBy
     Preferred Storage: MergeIntoA
     -->
     <AssociationSetMapping Name="FK_Document_was_CreatedBy"
                            TypeName="Model.FK_Document_was_CreatedBy"
-                           StoreEntitySet="Document" >
+                           StoreEntitySet="Blob" >
       <EndProperty Name="CreatedBy">
         <ScalarProperty Name="ID" ColumnName="fk_CreatedBy"/>
       </EndProperty>

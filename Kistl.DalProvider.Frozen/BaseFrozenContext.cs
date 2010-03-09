@@ -147,5 +147,20 @@ namespace Kistl.DalProvider.Frozen
         }
 
         #endregion
+
+        #region IReadOnlyKistlContext Members
+
+
+        public System.IO.Stream GetStream(int ID)
+        {
+            throw new NotSupportedException();
+        }
+
+        public System.IO.FileInfo GetFileInfo(int ID)
+        {
+            throw new NotSupportedException();
+        }
+
+        #endregion
     }
 }

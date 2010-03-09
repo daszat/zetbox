@@ -278,6 +278,8 @@ namespace Kistl.API.Client
         private IPersistenceObject CreateInternal(InterfaceType ifType)
         {
             CheckDisposed();
+            if (ifType.Type == typeof(Kistl.App.Base.Blob)) throw new InvalidOperationException("Creating a Blob is not supported. Use CreateBlob() instead");
+
             IPersistenceObject obj = (IPersistenceObject)Activator.CreateInstance(ifType.ToImplementationType().Type);
             Attach(obj);
             OnObjectCreated(obj);
@@ -646,6 +648,46 @@ namespace Kistl.API.Client
             {
                 ObjectDeleted(this, new GenericEventArgs<IPersistenceObject>() { Data = obj });
             }
+        }
+
+        public int CreateBlob(System.IO.Stream s, string filename, string mimetype)
+        {
+            var blob = ProxySingleton.Current.SetBlobStream(s, filename, mimetype);
+            Attach(blob);
+            return blob.ID;
+        }
+
+        public int CreateBlob(System.IO.FileInfo fi, string mimetype)
+        {
+            using (var s = fi.OpenRead())
+            {
+                return CreateBlob(s, fi.Name, mimetype);
+            }
+        }
+
+        public System.IO.Stream GetStream(int ID)
+        {
+            return GetFileInfo(ID).OpenRead();
+        }
+
+        public System.IO.FileInfo GetFileInfo(int ID)
+        {
+            var blob = this.Find<Kistl.App.Base.Blob>(ID);
+
+            string path = System.IO.Path.Combine(ApplicationContext.Current.Configuration.Client.DocumentStore, blob.StoragePath);
+            System.IO.Directory.CreateDirectory(System.IO.Path.GetDirectoryName(path));
+
+            if (!System.IO.File.Exists(path))
+            {
+                using (var stream = ProxySingleton.Current.GetBlobStream(ID))
+                using (var file = new System.IO.FileStream(path, System.IO.FileMode.Create, System.IO.FileAccess.Write))
+                {
+                    file.SetLength(0);
+                    stream.CopyTo(file);
+                }
+            }
+
+            return new System.IO.FileInfo(path);
         }
 
         #region IDebuggingKistlContext Members

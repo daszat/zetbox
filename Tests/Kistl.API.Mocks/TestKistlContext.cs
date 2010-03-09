@@ -187,5 +187,35 @@ namespace Kistl.API.Mocks
         }
 
         #endregion
+
+        #region IKistlContext Members
+
+
+        public int CreateBlob(System.IO.Stream s, string filename, string mimetype)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int CreateBlob(System.IO.FileInfo fi, string mimetype)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
+
+        #region IReadOnlyKistlContext Members
+
+
+        public System.IO.Stream GetStream(int ID)
+        {
+            throw new NotImplementedException();
+        }
+
+        public System.IO.FileInfo GetFileInfo(int ID)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
     }
 }
