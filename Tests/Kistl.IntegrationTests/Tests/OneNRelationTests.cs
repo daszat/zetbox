@@ -96,7 +96,7 @@ namespace Kistl.IntegrationTests
 
         private Property CreateProperty(IKistlContext ctx, int unique)
         {
-            var result = ctx.Create<Property>();
+            var result = ctx.Create<IntProperty>();
             result.Module = ctx.FindPersistenceObject<Module>(_moduleGuid);
             result.PropertyName = "property" + unique;
             result.ValueModelDescriptor = ctx.FindPersistenceObject<PresentableModelDescriptor>(_valueDescGuid);
@@ -268,7 +268,7 @@ namespace Kistl.IntegrationTests
 
         private Property CreateProperty(IKistlContext ctx, int unique)
         {
-            var result = ctx.Create<Property>();
+            var result = ctx.Create<IntProperty>();
             result.Module = ctx.FindPersistenceObject<Module>(_moduleGuid);
             result.PropertyName = "property" + unique;
             result.ValueModelDescriptor = ctx.FindPersistenceObject<PresentableModelDescriptor>(_valueDescGuid);

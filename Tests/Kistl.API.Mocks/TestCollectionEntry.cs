@@ -57,6 +57,7 @@ namespace Kistl.API.Mocks
 
         public void ToStream(BinaryWriter sw, HashSet<IStreamable> auxObjects)
         {
+            BinarySerializer.ToStream(new SerializableType(new InterfaceType(typeof(IRelationCollectionEntry))), sw);
             BinarySerializer.ToStream(ID, sw);
             BinarySerializer.ToStream(TestName, sw);
         }

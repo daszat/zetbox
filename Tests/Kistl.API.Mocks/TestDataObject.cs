@@ -71,8 +71,6 @@ using System.Xml.Serialization;
 
         public void FromStream(BinaryReader sr)
         {
-            SerializableType type;
-            BinarySerializer.FromStream(out type, sr);
             BinarySerializer.FromStream(out _ID, sr);
             BinarySerializer.FromStream(out _StringProperty, sr);
             BinarySerializer.FromStream(out _IntProperty, sr);

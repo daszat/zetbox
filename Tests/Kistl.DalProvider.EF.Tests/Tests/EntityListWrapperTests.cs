@@ -59,7 +59,7 @@ namespace Kistl.DalProvider.EF.Tests
         protected override Property NewItem()
         {
             EnsureContainer();
-            var result = ctx.Create<Property>();
+            var result = ctx.Create<IntProperty>();
             result.Description = "item#" + result.ID;
             return result;
         }

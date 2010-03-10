@@ -116,12 +116,6 @@ using System.Xml.Serialization;
             if (this.IsAttached)
                 throw new InvalidOperationException("Deserializing attached objects is not allowed");
 
-            SerializableType t;
-            BinarySerializer.FromStream(out t, sr);
-
-            if (this.GetInterfaceType() != t.GetSystemType())
-                throw new InvalidOperationException(string.Format("Unable to deserialize Object of Type {0} from Type {1}", GetType(), t));
-
             BinarySerializer.FromStreamConverter(i => this.ID = i, sr);
         }
 

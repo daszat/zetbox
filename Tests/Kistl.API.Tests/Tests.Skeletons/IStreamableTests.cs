@@ -53,30 +53,16 @@ namespace Kistl.API.Tests.Skeletons
 
             ms.Seek(0, SeekOrigin.Begin);
 
+            if (!typeof(T).IsICompoundObject())
+            {
+                SerializableType t;
+                BinarySerializer.FromStream(out t, sr);
+            }
+
             T result = new T();
             result.FromStream(sr);
             return result;
         }
-
-        [Test]
-        [ExpectedException(typeof(InvalidOperationException))]
-        public void FromStream_of_WrongType_fails()
-        {
-            MemoryStream ms = new MemoryStream();
-            BinaryWriter sw = new BinaryWriter(ms);
-            BinaryReader sr = new BinaryReader(ms);
-
-            SerializableType wrongType = new SerializableType(new InterfaceType(typeof(string)));
-            BinarySerializer.ToStream(wrongType, sw);
-
-            Assert.That(ms.Length, Is.GreaterThan(0));
-
-            ms.Seek(0, SeekOrigin.Begin);
-
-            T result = new T();
-            result.FromStream(sr);
-        }
-
     }
 
 }

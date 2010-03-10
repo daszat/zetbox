@@ -51,8 +51,6 @@ namespace Kistl.API
         {
             if (sw == null)
                 throw new ArgumentNullException("sw");
-
-            BinarySerializer.ToStream(new SerializableType(this.GetInterfaceType()), sw);
         }
 
         /// <summary>
@@ -75,12 +73,6 @@ namespace Kistl.API
         {
             if (sr == null)
                 throw new ArgumentNullException("sr");
-
-            SerializableType t;
-            BinarySerializer.FromStream(out t, sr);
-
-            if (this.GetInterfaceType() != t.GetSystemType())
-                throw new InvalidOperationException(string.Format("Unable to deserialize Object of Type {0} from Type {1}", GetType(), t));
         }
 
         [Obsolete]

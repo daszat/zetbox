@@ -377,34 +377,6 @@ namespace Kistl.API
 
 		#endregion
 
-		#region IPersistenceObject
-
-		/// <summary>
-		/// Serializes a Reference to this obj
-		/// </summary>
-		/// <param name="obj"></param>
-		/// <param name="sw"></param>
-		/// TODO: See Case 805
-		public static void ToStream(IPersistenceObject obj, BinaryWriter sw)
-		{
-			if (obj == null) throw new ArgumentNullException("obj");
-			if (sw == null) throw new ArgumentNullException("sw");
-			SerializerTrace("CurrentPos: {0}", sw.BaseStream.Position);
-			SerializerTrace("Writing IPersistenceObject #{0}", obj.ID);
-
-			//if (obj == null)
-			//{
-			//    sw.Write(false);
-			//}
-			//else
-			//{
-			//    sw.Write(true);
-			sw.Write(obj.ID);
-			//}
-		}
-
-		#endregion
-
 		#region ICompoundObject
 
 		/// <summary>
@@ -434,7 +406,7 @@ namespace Kistl.API
 			val = null;
 			if (sr.ReadBoolean())
 			{
-				val = new T();
+                val = new T();
 				val.FromStream(sr);
 			}
 			
@@ -647,6 +619,11 @@ namespace Kistl.API
 			while (sr.ReadBoolean())
 			{
 				SerializerTrace("CurrentPos: {0}", sr.BaseStream.Position);
+
+                // Read type
+                SerializableType t;
+                BinarySerializer.FromStream(out t, sr);
+
 				T obj = new T();
 				obj.FromStream(sr);
 				val.Add(obj);

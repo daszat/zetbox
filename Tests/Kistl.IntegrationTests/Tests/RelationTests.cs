@@ -25,7 +25,7 @@ namespace Kistl.IntegrationTests
         {
             using (IKistlContext ctx = KistlContext.GetContext())
             {
-                var prop = ctx.Create<Kistl.App.Base.Property>();
+                var prop = ctx.Create<Kistl.App.Base.IntProperty>();
                 Assert.That(prop.DefaultValue, Is.Null);
 
                 var dv = ctx.Create<Kistl.App.Base.NewGuidDefaultValue>();
@@ -43,7 +43,7 @@ namespace Kistl.IntegrationTests
         {
             using (IKistlContext ctx = KistlContext.GetContext())
             {
-                var prop = ctx.Create<Kistl.App.Base.Property>();
+                var prop = ctx.Create<Kistl.App.Base.IntProperty>();
                 Assert.That(prop.DefaultValue, Is.Null);
 
                 var dv = ctx.Create<Kistl.App.Base.NewGuidDefaultValue>();

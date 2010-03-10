@@ -56,11 +56,8 @@ namespace Kistl.Server
                     while (@continue)
                     {
                         // Deserialize
-                        long pos = msg.Position;
                         SerializableType objType;
                         BinarySerializer.FromStream(out objType, sr);
-
-                        msg.Seek(pos, SeekOrigin.Begin);
 
                         var obj = (IPersistenceObject)objType.NewObject();
                         obj.FromStream(sr);

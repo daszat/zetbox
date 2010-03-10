@@ -181,11 +181,8 @@ namespace Kistl.API.Client
             BinarySerializer.FromStream(out cont, sr);
             while (cont)
             {
-                long pos = sr.BaseStream.Position;
                 SerializableType objType;
                 BinarySerializer.FromStream(out objType, sr);
-
-                sr.BaseStream.Seek(pos, SeekOrigin.Begin);
 
                 IStreamable obj = (IStreamable)objType.NewObject();
                 obj.FromStream(sr);

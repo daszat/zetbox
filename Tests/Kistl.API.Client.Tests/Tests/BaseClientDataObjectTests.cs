@@ -118,6 +118,9 @@ namespace Kistl.API.Client.Tests
 
             using (IKistlContext ctx = KistlContext.GetContext())
             {
+                SerializableType t;
+                BinarySerializer.FromStream(out t, sr);
+
                 BaseClientDataObjectMock__Implementation__ result = new BaseClientDataObjectMock__Implementation__();
                 result.FromStream(sr);
 
@@ -136,25 +139,6 @@ namespace Kistl.API.Client.Tests
             {
                 BaseClientDataObjectMock__Implementation__ result = new BaseClientDataObjectMock__Implementation__();
                 result.FromStream((BinaryReader)null);
-            }
-        }
-
-        [Test]
-        [ExpectedException(typeof(InvalidOperationException))]
-        public void FromStream_WrongType()
-        {
-            MemoryStream ms = new MemoryStream();
-            BinaryWriter sw = new BinaryWriter(ms);
-            BinaryReader sr = new BinaryReader(ms);
-
-            SerializableType wrongType = new SerializableType(new InterfaceType(typeof(string)));
-            BinarySerializer.ToStream(wrongType, sw);
-
-            using (IKistlContext ctx = KistlContext.GetContext())
-            {
-                ms.Seek(0, SeekOrigin.Begin);
-                BaseClientDataObjectMock__Implementation__ result = new BaseClientDataObjectMock__Implementation__();
-                result.FromStream(sr);
             }
         }
 

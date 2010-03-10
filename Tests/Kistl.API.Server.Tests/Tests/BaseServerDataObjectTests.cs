@@ -103,6 +103,9 @@ namespace Kistl.API.Server.Tests
             Assert.That(ms.Length, Is.GreaterThan(0));
             ms.Seek(0, SeekOrigin.Begin);
 
+            SerializableType t;
+            BinarySerializer.FromStream(out t, sr);
+
             obj.FromStream(sr);
 
             TestObjClassSerializationMock.AssertCorrectContentsEnum<TestObjClass>(obj);
@@ -114,22 +117,6 @@ namespace Kistl.API.Server.Tests
         {
             TestObjClass result = new TestObjClass__Implementation__();
             result.FromStream((BinaryReader)null);
-        }
-
-        [Test]
-        [ExpectedException(typeof(InvalidOperationException))]
-        public void FromStream_WrongType()
-        {
-            MemoryStream ms = new MemoryStream();
-            BinaryWriter sw = new BinaryWriter(ms);
-            BinaryReader sr = new BinaryReader(ms);
-
-            SerializableType wrongType = new SerializableType(new InterfaceType(typeof(string)));
-            BinarySerializer.ToStream(wrongType, sw);
-
-            ms.Seek(0, SeekOrigin.Begin);
-            TestObjClass result = new TestObjClass__Implementation__();
-            result.FromStream(sr);
         }
 
         [Test]

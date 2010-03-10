@@ -43,6 +43,7 @@ namespace Kistl.API.Tests.BaseCompoundObjects
         {
             test.ToStream(sw);
             RewindStreams();
+
             Assert.DoesNotThrow(() =>
             {
                 test.FromStream(sr);
@@ -59,7 +60,6 @@ namespace Kistl.API.Tests.BaseCompoundObjects
             test.TestProperty = null;
             
             RewindStreams();
-
             test.FromStream(sr);
 
             Assert.That(test.TestProperty, Is.EqualTo(val), "To/FromStream of the mock didn't transport TestProperty");
