@@ -56,6 +56,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomClientActions_DocumentManagement.cs" />
     <Compile Include="CustomClientActions_KistlBase.Constraints.cs" />
     <Compile Include="CustomClientActions_KistlBase.cs" />
     <Compile Include="CustomClientActions_GUI.cs" />

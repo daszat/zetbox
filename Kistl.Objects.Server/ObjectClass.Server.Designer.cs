@@ -360,6 +360,58 @@ namespace Kistl.App.Base
 
 
         /// <summary>
+        /// Class is abstract
+        /// </summary>
+        // value type property
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+           // Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.NotifyingDataProperty
+        public virtual bool IsAbstract
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _IsAbstract;
+                if (OnIsAbstract_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<bool>(__result);
+                    OnIsAbstract_Getter(this, __e);
+                    __result = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_IsAbstract != value)
+                {
+                    var __oldValue = _IsAbstract;
+                    var __newValue = value;
+                    if(OnIsAbstract_PreSetter != null)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<bool>(__oldValue, __newValue);
+                        OnIsAbstract_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("IsAbstract", __oldValue, __newValue);
+                    _IsAbstract = __newValue;
+                    NotifyPropertyChanged("IsAbstract", __oldValue, __newValue);
+                    if(OnIsAbstract_PostSetter != null)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<bool>(__oldValue, __newValue);
+                        OnIsAbstract_PostSetter(this, __e);
+                    }
+                }
+            }
+        }
+        private bool _IsAbstract;
+		public static event PropertyGetterHandler<Kistl.App.Base.ObjectClass, bool> OnIsAbstract_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.ObjectClass, bool> OnIsAbstract_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.ObjectClass, bool> OnIsAbstract_PostSetter;
+
+        /// <summary>
         /// if true then all Instances appear in FozenContext.
         /// </summary>
         // value type property
@@ -725,6 +777,7 @@ namespace Kistl.App.Base
 			var otherImpl = (ObjectClass__Implementation__)obj;
 			var me = (ObjectClass)this;
 
+			me.IsAbstract = other.IsAbstract;
 			me.IsFrozenObject = other.IsFrozenObject;
 			me.IsSimpleObject = other.IsSimpleObject;
 			me.TableName = other.TableName;
@@ -831,6 +884,15 @@ namespace Kistl.App.Base
 					
 					return String.Join("; ", errors);
 				}
+				case "IsAbstract":
+				{
+					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("e9d1402e-3580-4084-8836-c44844683191")).Constraints
+						.Where(c => !c.IsValid(this, this.IsAbstract))
+						.Select(c => c.GetErrorText(this, this.IsAbstract))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
 				case "IsFrozenObject":
 				{
 					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("13c33710-ea02-4621-ad50-294a1f36b07d")).Constraints
@@ -914,6 +976,7 @@ namespace Kistl.App.Base
 				}
 			}
             BinarySerializer.ToStream(DefaultPresentableModelDescriptor != null ? DefaultPresentableModelDescriptor.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(this._IsAbstract, binStream);
             BinarySerializer.ToStream(this._IsFrozenObject, binStream);
             BinarySerializer.ToStream(this._IsSimpleObject, binStream);
             BinarySerializer.ToStream(this._TableName, binStream);
@@ -937,6 +1000,7 @@ namespace Kistl.App.Base
 			}
 
             BinarySerializer.FromStream(out this._fk_DefaultPresentableModelDescriptor, binStream);
+            BinarySerializer.FromStream(out this._IsAbstract, binStream);
             BinarySerializer.FromStream(out this._IsFrozenObject, binStream);
             BinarySerializer.FromStream(out this._IsSimpleObject, binStream);
             BinarySerializer.FromStream(out this._TableName, binStream);
@@ -948,6 +1012,7 @@ namespace Kistl.App.Base
             base.ToStream(xml);
             XmlStreamer.ToStream(BaseObjectClass != null ? BaseObjectClass.ID : (int?)null, xml, "BaseObjectClass", "Kistl.App.Base");
             XmlStreamer.ToStream(DefaultPresentableModelDescriptor != null ? DefaultPresentableModelDescriptor.ID : (int?)null, xml, "DefaultPresentableModelDescriptor", "Kistl.App.GUI");
+            XmlStreamer.ToStream(this._IsAbstract, xml, "IsAbstract", "Kistl.App.Base");
             XmlStreamer.ToStream(this._IsFrozenObject, xml, "IsFrozenObject", "Kistl.App.Base");
             XmlStreamer.ToStream(this._IsSimpleObject, xml, "IsSimpleObject", "Kistl.App.GUI");
             XmlStreamer.ToStream(this._TableName, xml, "TableName", "Kistl.App.Base");
@@ -959,6 +1024,7 @@ namespace Kistl.App.Base
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._fk_BaseObjectClass, xml, "BaseObjectClass", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_DefaultPresentableModelDescriptor, xml, "DefaultPresentableModelDescriptor", "Kistl.App.GUI");
+            XmlStreamer.FromStream(ref this._IsAbstract, xml, "IsAbstract", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._IsFrozenObject, xml, "IsFrozenObject", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._IsSimpleObject, xml, "IsSimpleObject", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._TableName, xml, "TableName", "Kistl.App.Base");
@@ -970,6 +1036,8 @@ namespace Kistl.App.Base
             base.Export(xml, modules);
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(BaseObjectClass != null ? BaseObjectClass.ExportGuid : (Guid?)null, xml, "BaseObjectClass", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(DefaultPresentableModelDescriptor != null ? DefaultPresentableModelDescriptor.ExportGuid : (Guid?)null, xml, "DefaultPresentableModelDescriptor", "Kistl.App.GUI");
+    
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._IsAbstract, xml, "IsAbstract", "Kistl.App.Base");
     
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._IsFrozenObject, xml, "IsFrozenObject", "Kistl.App.Base");
     
@@ -984,6 +1052,7 @@ namespace Kistl.App.Base
             base.MergeImport(xml);
             XmlStreamer.FromStream(ref this._fk_guid_BaseObjectClass, xml, "BaseObjectClass", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_guid_DefaultPresentableModelDescriptor, xml, "DefaultPresentableModelDescriptor", "Kistl.App.GUI");
+            XmlStreamer.FromStream(ref this._IsAbstract, xml, "IsAbstract", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._IsFrozenObject, xml, "IsFrozenObject", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._IsSimpleObject, xml, "IsSimpleObject", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._TableName, xml, "TableName", "Kistl.App.Base");

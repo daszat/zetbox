@@ -25,6 +25,7 @@
     <EntitySet Name="EnumerationEntry" EntityType="Model.EnumerationEntry" />
     <EntitySet Name="Exam" EntityType="Model.Exam" />
     <EntitySet Name="Exercise" EntityType="Model.Exercise" />
+    <EntitySet Name="File" EntityType="Model.File" />
     <EntitySet Name="Fragebogen" EntityType="Model.Fragebogen" />
     <EntitySet Name="Group" EntityType="Model.Group" />
     <EntitySet Name="GroupExcercise" EntityType="Model.GroupExcercise" />
@@ -370,6 +371,18 @@
     <AssociationSet Name="FK_Excercise_happens_in_Semester" Association="Model.FK_Excercise_happens_in_Semester" >
       <End Role="Excercise" EntitySet="Exercise" />
       <End Role="Semester" EntitySet="Semester" />
+    </AssociationSet>
+    <AssociationSet Name="FK_File_has_Blob" Association="Model.FK_File_has_Blob" >
+      <End Role="File" EntitySet="File" />
+      <End Role="Blob" EntitySet="Blob" />
+    </AssociationSet>
+    <AssociationSet Name="FK_File_was_ChangedBy" Association="Model.FK_File_was_ChangedBy" >
+      <End Role="File" EntitySet="File" />
+      <End Role="ChangedBy" EntitySet="Identity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_File_was_CreatedBy" Association="Model.FK_File_was_CreatedBy" >
+      <End Role="File" EntitySet="File" />
+      <End Role="CreatedBy" EntitySet="Identity" />
     </AssociationSet>
     <AssociationSet Name="FK_Fragebogen_enthält_Antworten" Association="Model.FK_Fragebogen_enthält_Antworten" >
       <End Role="Fragebogen" EntitySet="Fragebogen" />
@@ -801,7 +814,7 @@
 	  </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityType Name="BaseParameter">
+  <EntityType Name="BaseParameter" Abstract="true">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
@@ -892,7 +905,7 @@
     <Property Name="Schema" Type="String" Nullable="false" MaxLength="2147483647" />
     <Property Name="Version" Type="Int32" Nullable="false" />
   </EntityType>
-  <EntityType Name="DataType">
+  <EntityType Name="DataType" Abstract="true">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
@@ -1008,6 +1021,28 @@
                         Relationship="Model.FK_Excercise_happens_in_Semester"
                         FromRole="Excercise"
                         ToRole="Semester" />
+  </EntityType>
+  <EntityType Name="File" Abstract="true">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Blob__Implementation__"
+                        Relationship="Model.FK_File_has_Blob"
+                        FromRole="File"
+                        ToRole="Blob" />
+    <NavigationProperty Name="ChangedBy__Implementation__"
+                        Relationship="Model.FK_File_was_ChangedBy"
+                        FromRole="File"
+                        ToRole="ChangedBy" />
+    <Property Name="ChangedOn" Type="DateTime" Nullable="true" />
+    <NavigationProperty Name="CreatedBy__Implementation__"
+                        Relationship="Model.FK_File_was_CreatedBy"
+                        FromRole="File"
+                        ToRole="CreatedBy" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="true" />
+    <Property Name="ExportGuid" Type="Guid" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="true" MaxLength="1000" />
   </EntityType>
   <EntityType Name="Fragebogen">
     <Key>
@@ -1360,7 +1395,7 @@
 	  </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityType Name="Property">
+  <EntityType Name="Property" Abstract="true">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
@@ -1772,13 +1807,13 @@
   </EntityType>
 
   <!-- EntityTypes for all other classes -->
-  <EntityType Name="ActionKind" BaseType="Model.ControlKind" >
+  <EntityType Name="ActionKind" BaseType="Model.ControlKind">
   </EntityType>
-  <EntityType Name="BoolParameter" BaseType="Model.BaseParameter" >
+  <EntityType Name="BoolParameter" BaseType="Model.BaseParameter">
   </EntityType>
-  <EntityType Name="BoolProperty" BaseType="Model.ValueTypeProperty" >
+  <EntityType Name="BoolProperty" BaseType="Model.ValueTypeProperty">
   </EntityType>
-  <EntityType Name="CalculatedObjectReferenceProperty" BaseType="Model.Property" >
+  <EntityType Name="CalculatedObjectReferenceProperty" BaseType="Model.Property">
     <NavigationProperty Name="Inputs__Implementation__"
                         Relationship="Model.FK_CalculatedReference_dependsOn_InputProperties_A"
                         FromRole="CalculatedReference"
@@ -1788,17 +1823,17 @@
                         FromRole="CalculatedReference"
                         ToRole="ReferencedClass" />
   </EntityType>
-  <EntityType Name="CheckboxKind" BaseType="Model.ControlKind" >
+  <EntityType Name="CheckboxKind" BaseType="Model.ControlKind">
   </EntityType>
-  <EntityType Name="CLRObjectParameter" BaseType="Model.BaseParameter" >
+  <EntityType Name="CLRObjectParameter" BaseType="Model.BaseParameter">
     <NavigationProperty Name="Type__Implementation__"
                         Relationship="Model.FK_ClrObjectParameter_isOf_Type"
                         FromRole="ClrObjectParameter"
                         ToRole="Type" />
   </EntityType>
-  <EntityType Name="CompoundObject" BaseType="Model.DataType" >
+  <EntityType Name="CompoundObject" BaseType="Model.DataType">
   </EntityType>
-  <EntityType Name="CompoundObjectProperty" BaseType="Model.Property" >
+  <EntityType Name="CompoundObjectProperty" BaseType="Model.Property">
     <NavigationProperty Name="CompoundObjectDefinition__Implementation__"
                         Relationship="Model.FK_CompoundObjectProperty_has_CompoundObjectDefinition"
                         FromRole="CompoundObjectProperty"
@@ -1806,76 +1841,78 @@
     <Property Name="HasPersistentOrder" Type="Boolean" Nullable="false" />
     <Property Name="IsList" Type="Boolean" Nullable="false" />
   </EntityType>
-  <EntityType Name="ConsistentNavigatorConstraint" BaseType="Model.Constraint" >
+  <EntityType Name="ConsistentNavigatorConstraint" BaseType="Model.Constraint">
   </EntityType>
-  <EntityType Name="ControlKindClass" BaseType="Model.ObjectClass" >
+  <EntityType Name="ControlKindClass" BaseType="Model.ObjectClass">
     <NavigationProperty Name="SupportedInterfaces__Implementation__"
                         Relationship="Model.FK_ControlKindClass_supports_SupportedInterfaces_A"
                         FromRole="ControlKindClass"
                         ToRole="CollectionEntry" />
   </EntityType>
-  <EntityType Name="DataObjectKind" BaseType="Model.ControlKind" >
+  <EntityType Name="DataObjectKind" BaseType="Model.ControlKind">
   </EntityType>
-  <EntityType Name="DataObjectSelectionTaskKind" BaseType="Model.ControlKind" >
+  <EntityType Name="DataObjectSelectionTaskKind" BaseType="Model.ControlKind">
   </EntityType>
-  <EntityType Name="DataObjectSummaryKind" BaseType="Model.ControlKind" >
+  <EntityType Name="DataObjectSummaryKind" BaseType="Model.ControlKind">
   </EntityType>
-  <EntityType Name="DateTimeParameter" BaseType="Model.BaseParameter" >
+  <EntityType Name="DateTimeParameter" BaseType="Model.BaseParameter">
   </EntityType>
-  <EntityType Name="DateTimeProperty" BaseType="Model.ValueTypeProperty" >
+  <EntityType Name="DateTimeProperty" BaseType="Model.ValueTypeProperty">
   </EntityType>
-  <EntityType Name="DoubleParameter" BaseType="Model.BaseParameter" >
+  <EntityType Name="DoubleParameter" BaseType="Model.BaseParameter">
   </EntityType>
-  <EntityType Name="DoubleProperty" BaseType="Model.ValueTypeProperty" >
+  <EntityType Name="DoubleProperty" BaseType="Model.ValueTypeProperty">
   </EntityType>
-  <EntityType Name="Enumeration" BaseType="Model.DataType" >
+  <EntityType Name="DynamicFile" BaseType="Model.File">
+  </EntityType>
+  <EntityType Name="Enumeration" BaseType="Model.DataType">
     <Property Name="AreFlags" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="EnumerationEntries__Implementation__"
                         Relationship="Model.FK_Enumeration_has_EnumerationEntries"
                         FromRole="Enumeration"
                         ToRole="EnumerationEntries" />
   </EntityType>
-  <EntityType Name="EnumerationProperty" BaseType="Model.ValueTypeProperty" >
+  <EntityType Name="EnumerationProperty" BaseType="Model.ValueTypeProperty">
     <NavigationProperty Name="Enumeration__Implementation__"
                         Relationship="Model.FK_EnumerationProperty_has_Enumeration"
                         FromRole="EnumerationProperty"
                         ToRole="Enumeration" />
   </EntityType>
-  <EntityType Name="EnumerationSelectorKind" BaseType="Model.ControlKind" >
+  <EntityType Name="EnumerationSelectorKind" BaseType="Model.ControlKind">
   </EntityType>
-  <EntityType Name="GroupMembership" BaseType="Model.AccessControl" >
+  <EntityType Name="GroupMembership" BaseType="Model.AccessControl">
     <NavigationProperty Name="Group__Implementation__"
                         Relationship="Model.FK_GroupMembership_has_Group"
                         FromRole="GroupMembership"
                         ToRole="Group" />
   </EntityType>
-  <EntityType Name="GuidProperty" BaseType="Model.ValueTypeProperty" >
+  <EntityType Name="GuidProperty" BaseType="Model.ValueTypeProperty">
   </EntityType>
-  <EntityType Name="IntegerRangeConstraint" BaseType="Model.Constraint" >
+  <EntityType Name="IntegerRangeConstraint" BaseType="Model.Constraint">
     <Property Name="Max" Type="Int32" Nullable="false" />
     <Property Name="Min" Type="Int32" Nullable="false" />
   </EntityType>
-  <EntityType Name="Interface" BaseType="Model.DataType" >
+  <EntityType Name="Interface" BaseType="Model.DataType">
   </EntityType>
-  <EntityType Name="IntParameter" BaseType="Model.BaseParameter" >
+  <EntityType Name="IntParameter" BaseType="Model.BaseParameter">
   </EntityType>
-  <EntityType Name="IntProperty" BaseType="Model.ValueTypeProperty" >
+  <EntityType Name="IntProperty" BaseType="Model.ValueTypeProperty">
   </EntityType>
-  <EntityType Name="IsValidIdentifierConstraint" BaseType="Model.Constraint" >
+  <EntityType Name="IsValidIdentifierConstraint" BaseType="Model.Constraint">
   </EntityType>
-  <EntityType Name="IsValidNamespaceConstraint" BaseType="Model.IsValidIdentifierConstraint" >
+  <EntityType Name="IsValidNamespaceConstraint" BaseType="Model.IsValidIdentifierConstraint">
   </EntityType>
-  <EntityType Name="LabelKind" BaseType="Model.ControlKind" >
+  <EntityType Name="LabelKind" BaseType="Model.ControlKind">
   </EntityType>
-  <EntityType Name="LauncherKind" BaseType="Model.ControlKind" >
+  <EntityType Name="LauncherKind" BaseType="Model.ControlKind">
   </EntityType>
-  <EntityType Name="MethodInvocationConstraint" BaseType="Model.Constraint" >
+  <EntityType Name="MethodInvocationConstraint" BaseType="Model.Constraint">
   </EntityType>
-  <EntityType Name="NewGuidDefaultValue" BaseType="Model.DefaultPropertyValue" >
+  <EntityType Name="NewGuidDefaultValue" BaseType="Model.DefaultPropertyValue">
   </EntityType>
-  <EntityType Name="NotNullableConstraint" BaseType="Model.Constraint" >
+  <EntityType Name="NotNullableConstraint" BaseType="Model.Constraint">
   </EntityType>
-  <EntityType Name="ObjectClass" BaseType="Model.DataType" >
+  <EntityType Name="ObjectClass" BaseType="Model.DataType">
     <NavigationProperty Name="AccessControlList__Implementation__"
                         Relationship="Model.FK_ObjectClass_has_AccessControlList"
                         FromRole="ObjectClass"
@@ -1896,6 +1933,7 @@
                         Relationship="Model.FK_ObjectClass_implements_ImplementsInterfaces_A"
                         FromRole="ObjectClass"
                         ToRole="CollectionEntry" />
+    <Property Name="IsAbstract" Type="Boolean" Nullable="false" />
     <Property Name="IsFrozenObject" Type="Boolean" Nullable="false" />
     <Property Name="IsSimpleObject" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="SubClasses__Implementation__"
@@ -1904,15 +1942,15 @@
                         ToRole="SubClasses" />
     <Property Name="TableName" Type="String" Nullable="false" MaxLength="100" />
   </EntityType>
-  <EntityType Name="ObjectListKind" BaseType="Model.ControlKind" >
+  <EntityType Name="ObjectListKind" BaseType="Model.ControlKind">
   </EntityType>
-  <EntityType Name="ObjectParameter" BaseType="Model.BaseParameter" >
+  <EntityType Name="ObjectParameter" BaseType="Model.BaseParameter">
     <NavigationProperty Name="DataType__Implementation__"
                         Relationship="Model.FK_ObjectParameter_has_DataType"
                         FromRole="ObjectParameter"
                         ToRole="DataType" />
   </EntityType>
-  <EntityType Name="ObjectReferencePlaceholderProperty" BaseType="Model.Property" >
+  <EntityType Name="ObjectReferencePlaceholderProperty" BaseType="Model.Property">
     <Property Name="HasPersistentOrder" Type="Boolean" Nullable="false" />
     <Property Name="ImplementorRoleName" Type="String" Nullable="true" MaxLength="1000" />
     <Property Name="IsList" Type="Boolean" Nullable="false" />
@@ -1923,54 +1961,54 @@
                         ToRole="ReferencedObjectClass" />
     <Property Name="Verb" Type="String" Nullable="true" MaxLength="1000" />
   </EntityType>
-  <EntityType Name="ObjectReferenceProperty" BaseType="Model.Property" >
+  <EntityType Name="ObjectReferenceProperty" BaseType="Model.Property">
     <Property Name="EagerLoading" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="RelationEnd__Implementation__"
                         Relationship="Model.FK_RelationEnd_has_Navigator"
                         FromRole="Navigator"
                         ToRole="RelationEnd" />
   </EntityType>
-  <EntityType Name="ObjectRefGridCellKind" BaseType="Model.ControlKind" >
+  <EntityType Name="ObjectRefGridCellKind" BaseType="Model.ControlKind">
   </EntityType>
-  <EntityType Name="ObjectRefKind" BaseType="Model.ControlKind" >
+  <EntityType Name="ObjectRefKind" BaseType="Model.ControlKind">
   </EntityType>
-  <EntityType Name="PropertyGroupKind" BaseType="Model.ControlKind" >
+  <EntityType Name="PropertyGroupKind" BaseType="Model.ControlKind">
   </EntityType>
-  <EntityType Name="RelationEditorKind" BaseType="Model.DataObjectKind" >
+  <EntityType Name="RelationEditorKind" BaseType="Model.DataObjectKind">
   </EntityType>
-  <EntityType Name="RoleMembership" BaseType="Model.AccessControl" >
+  <EntityType Name="RoleMembership" BaseType="Model.AccessControl">
     <NavigationProperty Name="Relations__Implementation__"
                         Relationship="Model.FK_RoleMembership_resolves_Relations_A"
                         FromRole="RoleMembership"
                         ToRole="CollectionEntry" />
   </EntityType>
-  <EntityType Name="SingleLineDataObjectKind" BaseType="Model.ControlKind" >
+  <EntityType Name="SingleLineDataObjectKind" BaseType="Model.ControlKind">
   </EntityType>
-  <EntityType Name="StringListKind" BaseType="Model.ControlKind" >
+  <EntityType Name="StringListKind" BaseType="Model.ControlKind">
     <NavigationProperty Name="ItemKind__Implementation__"
                         Relationship="Model.FK_List_has_ItemKind"
                         FromRole="List"
                         ToRole="ItemKind" />
   </EntityType>
-  <EntityType Name="StringParameter" BaseType="Model.BaseParameter" >
+  <EntityType Name="StringParameter" BaseType="Model.BaseParameter">
   </EntityType>
-  <EntityType Name="StringProperty" BaseType="Model.ValueTypeProperty" >
+  <EntityType Name="StringProperty" BaseType="Model.ValueTypeProperty">
   </EntityType>
-  <EntityType Name="StringRangeConstraint" BaseType="Model.Constraint" >
+  <EntityType Name="StringRangeConstraint" BaseType="Model.Constraint">
     <Property Name="MaxLength" Type="Int32" Nullable="true" />
     <Property Name="MinLength" Type="Int32" Nullable="false" />
   </EntityType>
-  <EntityType Name="StringSelectorKind" BaseType="Model.ControlKind" >
+  <EntityType Name="StringSelectorKind" BaseType="Model.ControlKind">
   </EntityType>
-  <EntityType Name="TextboxKind" BaseType="Model.ControlKind" >
+  <EntityType Name="TextboxKind" BaseType="Model.ControlKind">
   </EntityType>
-  <EntityType Name="TypeRefRefKind" BaseType="Model.ObjectRefKind" >
+  <EntityType Name="TypeRefRefKind" BaseType="Model.ObjectRefKind">
   </EntityType>
-  <EntityType Name="ValueTypeProperty" BaseType="Model.Property" >
+  <EntityType Name="ValueTypeProperty" BaseType="Model.Property" Abstract="true">
     <Property Name="HasPersistentOrder" Type="Boolean" Nullable="false" />
     <Property Name="IsList" Type="Boolean" Nullable="false" />
   </EntityType>
-  <EntityType Name="WorkspaceKind" BaseType="Model.ControlKind" >
+  <EntityType Name="WorkspaceKind" BaseType="Model.ControlKind">
   </EntityType>
 
   <!-- EntityTypes and Associations for all object-object CollectionEntrys -->
@@ -3000,6 +3038,30 @@
          Multiplicity="*" />
     <End Role="Semester"
          Type="Model.Semester" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_File_has_Blob" >
+    <End Role="File"
+         Type="Model.File" 
+         Multiplicity="*" />
+    <End Role="Blob"
+         Type="Model.Blob" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_File_was_ChangedBy" >
+    <End Role="File"
+         Type="Model.File" 
+         Multiplicity="*" />
+    <End Role="ChangedBy"
+         Type="Model.Identity" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_File_was_CreatedBy" >
+    <End Role="File"
+         Type="Model.File" 
+         Multiplicity="*" />
+    <End Role="CreatedBy"
+         Type="Model.Identity" 
          Multiplicity="0..1" />
   </Association>
   <Association Name="FK_Fragebogen_enthält_Antworten" >

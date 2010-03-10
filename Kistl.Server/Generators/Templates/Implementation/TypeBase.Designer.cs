@@ -73,7 +73,7 @@ var mungedClassName = GetTypeName();
 
 #line 57 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
 this.WriteObjects("    [System.Diagnostics.DebuggerDisplay(\"",  DataType.ClassName , "\")]\r\n");
-this.WriteObjects("    public class ",  mungedClassName , " ",  GetInheritance() , "\r\n");
+this.WriteObjects("    public",  GetClassModifiers() , " class ",  mungedClassName , " ",  GetInheritance() , "\r\n");
 this.WriteObjects("    {\r\n");
 this.WriteObjects("    \r\n");
 this.WriteObjects("		public ",  mungedClassName , "()\r\n");

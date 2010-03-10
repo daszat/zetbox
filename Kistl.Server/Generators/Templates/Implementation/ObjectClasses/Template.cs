@@ -35,6 +35,11 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
             }
         }
 
+        protected override string GetClassModifiers()
+        {
+            return ObjectClass.IsAbstract ? " abstract" : string.Empty;
+        }
+
         protected override void ApplyObjectReferenceListTemplate(ObjectReferenceProperty prop)
         {
             var rel = RelationExtensions.Lookup(ctx, prop);

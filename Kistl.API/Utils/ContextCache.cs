@@ -35,7 +35,7 @@ namespace Kistl.API.Utils
         private static Type GetRootImplType(ImplementationType t)
         {
             Type result = t.Type;
-            while (result != null && result.BaseType != null && !result.BaseType.IsAbstract)
+            while (result != null && result.BaseType != null && result.BaseType.Name.EndsWith(Helper.ImplementationSuffix))
             {
                 result = result.BaseType;
             }

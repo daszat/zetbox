@@ -24,7 +24,7 @@ namespace Kistl.App.Base
     /// </summary>
     [EdmEntityType(NamespaceName="Model", Name="Property")]
     [System.Diagnostics.DebuggerDisplay("Property")]
-    public class Property__Implementation__ : BaseServerDataObject_EntityFramework, Kistl.API.IExportableInternal, Property
+    public abstract class Property__Implementation__ : BaseServerDataObject_EntityFramework, Kistl.API.IExportableInternal, Property
     {
     
 		public Property__Implementation__()

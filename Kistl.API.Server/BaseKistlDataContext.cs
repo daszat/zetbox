@@ -426,12 +426,15 @@ namespace Kistl.API.Server
             blob.OriginalName = filename;
             blob.MimeType = mimetype;
 
-            string path = System.IO.Path.Combine(ApplicationContext.Current.Configuration.Client.DocumentStore, blob.StoragePath);
+            string path = System.IO.Path.Combine(ApplicationContext.Current.Configuration.Server.DocumentStore, blob.StoragePath);
+            System.IO.Directory.CreateDirectory(System.IO.Path.GetDirectoryName(path));
+
             using (var file = System.IO.File.Open(path, System.IO.FileMode.Create, System.IO.FileAccess.Write))
             {
                 file.SetLength(0);
                 s.CopyTo(file);
             }
+            System.IO.File.SetAttributes(path, System.IO.FileAttributes.ReadOnly);
 
             return blob.ID;
         }

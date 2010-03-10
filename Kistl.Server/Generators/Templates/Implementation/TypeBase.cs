@@ -25,6 +25,8 @@ namespace Kistl.Server.Generators.Templates.Implementation
 
         protected virtual string MungeClassName(string name) { return name; }
 
+        protected virtual string GetClassModifiers() { return string.Empty; }
+
         /// <summary>
         /// is called to apply a optional preamble in the global scope
         /// </summary>

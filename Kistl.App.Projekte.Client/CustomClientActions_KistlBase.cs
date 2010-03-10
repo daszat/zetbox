@@ -439,31 +439,8 @@ namespace Kistl.App.Base
 
         public static void OnOpen_Document(Kistl.App.Base.Blob obj)
         {
-            ShellExecute(obj.Context.GetFileInfo(obj.ID).FullName);
+            obj.Context.GetFileInfo(obj.ID).ShellExecute();
         }
-        #region ShellExecute
-        private static void ShellExecute(string filename)
-        {
-            ShellExecute(filename, "");
-        }
-
-        private static void ShellExecute(string filename, string verb)
-        {
-            System.Diagnostics.ProcessStartInfo si = new System.Diagnostics.ProcessStartInfo();
-            si.UseShellExecute = true;
-            si.FileName = filename;
-            si.Verb = verb;
-            System.Diagnostics.Process.Start(si);
-        }
-
-        //private static string[] GetFileVerbs(string filename)
-        //{
-        //    System.Diagnostics.ProcessStartInfo si = new System.Diagnostics.ProcessStartInfo();
-        //    si.UseShellExecute = true;
-        //    si.FileName = filename;
-        //    return si.Verbs;
-        //}        
-        #endregion
         #endregion
 
     }

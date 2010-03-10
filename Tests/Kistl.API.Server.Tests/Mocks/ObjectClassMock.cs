@@ -347,5 +347,22 @@ namespace Kistl.API.Server.Mocks
         }
 
         #endregion
+
+        #region ObjectClass Members
+
+
+        public bool IsAbstract
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        #endregion
     }
 }

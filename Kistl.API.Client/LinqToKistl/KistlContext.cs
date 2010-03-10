@@ -685,6 +685,7 @@ namespace Kistl.API.Client
                     file.SetLength(0);
                     stream.CopyTo(file);
                 }
+                System.IO.File.SetAttributes(path, System.IO.FileAttributes.ReadOnly);
             }
 
             return new System.IO.FileInfo(path);

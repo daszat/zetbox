@@ -850,6 +850,51 @@ namespace Kistl.API
         }
     }
 
+    public static class FileExtensions
+    {
+        public static void ShellExecute(this System.IO.FileInfo file)
+        {
+            ShellExecute(file, "");
+        }
+
+        public static void ShellExecute(this System.IO.FileInfo file, string verb)
+        {
+            if (file == null) throw new ArgumentNullException("file");
+
+            System.Diagnostics.ProcessStartInfo si = new System.Diagnostics.ProcessStartInfo();
+            si.UseShellExecute = true;
+            si.FileName = file.FullName;
+            si.Verb = verb;
+            System.Diagnostics.Process.Start(si);
+        }
+
+        public static string[] GetFileVerbs(this System.IO.FileInfo file)
+        {
+            if (file == null) throw new ArgumentNullException("file");
+
+            System.Diagnostics.ProcessStartInfo si = new System.Diagnostics.ProcessStartInfo();
+            si.UseShellExecute = true;
+            si.FileName = file.FullName;
+            return si.Verbs;
+        }
+
+        public static string GetMimeType(this System.IO.FileInfo file)
+        {
+            if (file == null) throw new ArgumentNullException("file");
+
+            var mimeType = "application/unknown";
+            var ext = System.IO.Path.GetExtension(file.FullName).ToLower();
+            using (Microsoft.Win32.RegistryKey regKey = Microsoft.Win32.Registry.ClassesRoot.OpenSubKey(ext))
+            {
+                if (regKey != null)
+                {
+                    mimeType = regKey.GetValue("Content Type", mimeType).ToString();
+                }
+            }
+            return mimeType;
+        }
+    }
+
     /// <summary>
     /// Provides a generic way to pass Data around in the event of an event.
     /// </summary>

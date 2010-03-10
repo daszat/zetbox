@@ -59,6 +59,11 @@ namespace Kistl.DalProvider.EF.Generator.Implementation.EfModel
             Implementation.EfModel.ModelCsdlEntityTypeFields.Call(Host, ctx, properties);
         }
 
+        protected virtual string GetAbstractModifier(ObjectClass cls)
+        {
+            return cls.IsAbstract ? " Abstract=\"true\"" : string.Empty;
+        }
+
         internal static IEnumerable<Relation> GetRelationsWithSeparateStorage(IKistlContext ctx)
         {
             return ctx.GetQuery<Relation>()

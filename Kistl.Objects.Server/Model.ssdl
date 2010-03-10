@@ -29,6 +29,7 @@
     <EntitySet Name="EnumerationEntry" EntityType="Model.Store.EnumerationEntry" Table="EnumerationEntries"/>
     <EntitySet Name="Exam" EntityType="Model.Store.Exam" Table="Exams"/>
     <EntitySet Name="Exercise" EntityType="Model.Store.Exercise" Table="Exercises"/>
+    <EntitySet Name="File" EntityType="Model.Store.File" Table="Files"/>
     <EntitySet Name="Fragebogen" EntityType="Model.Store.Fragebogen" Table="Fragebögen"/>
     <EntitySet Name="Group" EntityType="Model.Store.Group" Table="Groups"/>
     <EntitySet Name="GroupExcercise" EntityType="Model.Store.GroupExcercise" Table="GroupExcercises"/>
@@ -173,6 +174,12 @@
     <AssociationSet Name="FK_DoubleProperty_ValueTypeProperty_ID" Association="Model.Store.FK_DoubleProperty_ValueTypeProperty_ID" >
       <End Role="A_ValueTypeProperty" EntitySet="ValueTypeProperty" />
       <End Role="B_DoubleProperty" EntitySet="DoubleProperty" />
+    </AssociationSet>
+    <EntitySet Name="DynamicFile" EntityType="Model.Store.DynamicFile" Table="DynamicFiles"/>
+    <!-- inherits from File -->
+    <AssociationSet Name="FK_DynamicFile_File_ID" Association="Model.Store.FK_DynamicFile_File_ID" >
+      <End Role="A_File" EntitySet="File" />
+      <End Role="B_DynamicFile" EntitySet="DynamicFile" />
     </AssociationSet>
     <EntitySet Name="Enumeration" EntityType="Model.Store.Enumeration" Table="Enumerations"/>
     <!-- inherits from DataType -->
@@ -794,6 +801,18 @@
     <AssociationSet Name="FK_Excercise_happens_in_Semester" Association="Model.Store.FK_Excercise_happens_in_Semester" >
       <End Role="Excercise" EntitySet="Exercise" />
       <End Role="Semester" EntitySet="Semester" />
+    </AssociationSet>
+    <AssociationSet Name="FK_File_has_Blob" Association="Model.Store.FK_File_has_Blob" >
+      <End Role="File" EntitySet="File" />
+      <End Role="Blob" EntitySet="Blob" />
+    </AssociationSet>
+    <AssociationSet Name="FK_File_was_ChangedBy" Association="Model.Store.FK_File_was_ChangedBy" >
+      <End Role="File" EntitySet="File" />
+      <End Role="ChangedBy" EntitySet="Identity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_File_was_CreatedBy" Association="Model.Store.FK_File_was_CreatedBy" >
+      <End Role="File" EntitySet="File" />
+      <End Role="CreatedBy" EntitySet="Identity" />
     </AssociationSet>
     <AssociationSet Name="FK_Fragebogen_enthält_Antworten" Association="Model.Store.FK_Fragebogen_enthält_Antworten" >
       <End Role="Fragebogen" EntitySet="Fragebogen" />
@@ -1438,6 +1457,13 @@
     <Property Name="ID" Type="int" Nullable="false" />
   </EntityType>
 	
+  <EntityType Name="DynamicFile">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+  </EntityType>
+	
   <EntityType Name="Enumeration">
     <Key>
       <PropertyRef Name="ID" />
@@ -1496,6 +1522,20 @@
     <Property Name="fk_Semester" Type="int" />
     <Property Name="Date" Type="datetime" Nullable="true" />
     <Property Name="MaxScores" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="1000" Nullable="true" />
+  </EntityType>
+	
+  <EntityType Name="File">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_Blob" Type="int" />
+    <Property Name="fk_ChangedBy" Type="int" />
+    <Property Name="fk_CreatedBy" Type="int" />
+    <Property Name="ChangedOn" Type="datetime" Nullable="true" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="true" />
+    <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
     <Property Name="Name" Type="nvarchar" MaxLength="1000" Nullable="true" />
   </EntityType>
 	
@@ -1749,6 +1789,7 @@
     <Property Name="ID" Type="int" Nullable="false" />
     <Property Name="fk_BaseObjectClass" Type="int" />
     <Property Name="fk_DefaultPresentableModelDescriptor" Type="int" />
+    <Property Name="IsAbstract" Type="bit" Nullable="false" />
     <Property Name="IsFrozenObject" Type="bit" Nullable="false" />
     <Property Name="IsSimpleObject" Type="bit" Nullable="false" />
     <Property Name="TableName" Type="nvarchar" MaxLength="100" Nullable="false" />
@@ -3324,6 +3365,48 @@
   </Association>
 
 
+  <Association Name="FK_File_has_Blob">
+    <End Role="Blob" Type="Model.Store.Blob" Multiplicity="0..1" />
+    <End Role="File" Type="Model.Store.File" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Blob">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="File">
+        <PropertyRef Name="fk_Blob" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_File_was_ChangedBy">
+    <End Role="ChangedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
+    <End Role="File" Type="Model.Store.File" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ChangedBy">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="File">
+        <PropertyRef Name="fk_ChangedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_File_was_CreatedBy">
+    <End Role="CreatedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
+    <End Role="File" Type="Model.Store.File" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CreatedBy">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="File">
+        <PropertyRef Name="fk_CreatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
   <Association Name="FK_Fragebogen_enthält_Antworten">
     <End Role="Fragebogen" Type="Model.Store.Fragebogen" Multiplicity="0..1" />
     <End Role="Antworten" Type="Model.Store.Antwort" Multiplicity="*" />
@@ -4562,6 +4645,18 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="B_DoubleProperty">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DynamicFile_File_ID">
+    <End Role="A_File" Type="Model.Store.File" Multiplicity="1" />
+    <End Role="B_DynamicFile" Type="Model.Store.DynamicFile" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="A_File">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_DynamicFile">
         <PropertyRef Name="ID" />
       </Dependent>
     </ReferentialConstraint>

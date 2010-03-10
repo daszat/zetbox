@@ -24,6 +24,16 @@ namespace Kistl.App
 			}
 		}
 		
+		/// <summary>Repository for DocumentManagement</summary>
+		/// Module for managing Files and Documents
+		public at.dasz.DocumentManagement.DocumentManagementRepository DocumentManagement
+		{
+			get
+			{
+				return new at.dasz.DocumentManagement.DocumentManagementRepository(Context);
+			}
+		}
+		
 		/// <summary>Repository for GUI</summary>
 		/// 
 		public Kistl.App.GUI.GUIRepository GUI

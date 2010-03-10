@@ -43,6 +43,13 @@ namespace Kistl.App.Base
 
         ICollection<Kistl.App.Base.Interface> ImplementsInterfaces { get; }
         /// <summary>
+        /// Class is abstract
+        /// </summary>
+		bool IsAbstract {
+			get;
+			set;
+		}
+        /// <summary>
         /// if true then all Instances appear in FozenContext.
         /// </summary>
 		bool IsFrozenObject {

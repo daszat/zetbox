@@ -55,7 +55,7 @@ namespace <%= DataType.Module.Namespace %>
     ApplyClassAttributeTemplate();
 %>
     [System.Diagnostics.DebuggerDisplay("<%= DataType.ClassName %>")]
-    public class <%= mungedClassName %> <%= GetInheritance() %>
+    public<%= GetClassModifiers() %> class <%= mungedClassName %> <%= GetInheritance() %>
     {
     
 		public <%= mungedClassName %>()

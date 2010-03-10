@@ -142,7 +142,7 @@ foreach(var cls in ctx.GetBaseClasses().OrderBy(c => c.ClassName))
     {
 
 #line 119 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.csdl.cst"
-this.WriteObjects("  <EntityType Name=\"",  cls.ClassName , "\">\r\n");
+this.WriteObjects("  <EntityType Name=\"",  cls.ClassName , "\"",  GetAbstractModifier(cls) , ">\r\n");
 this.WriteObjects("    <Key>\r\n");
 this.WriteObjects("      <PropertyRef Name=\"ID\" />\r\n");
 this.WriteObjects("    </Key>\r\n");
@@ -197,7 +197,7 @@ foreach(var cls in ctx.GetDerivedClasses().OrderBy(c => c.ClassName))
     {
 
 #line 169 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.csdl.cst"
-this.WriteObjects("  <EntityType Name=\"",  cls.ClassName , "\" BaseType=\"Model.",  cls.BaseObjectClass.ClassName , "\" >\r\n");
+this.WriteObjects("  <EntityType Name=\"",  cls.ClassName , "\" BaseType=\"Model.",  cls.BaseObjectClass.ClassName , "\"",  GetAbstractModifier(cls) , ">\r\n");
 #line 170 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.csdl.cst"
 ApplyEntityTypeFieldDefs(cls.Properties.Cast<Property>()); 
 #line 171 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.csdl.cst"

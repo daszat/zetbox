@@ -24,7 +24,7 @@ namespace Kistl.App.Base
     /// </summary>
     [EdmEntityType(NamespaceName="Model", Name="BaseParameter")]
     [System.Diagnostics.DebuggerDisplay("BaseParameter")]
-    public class BaseParameter__Implementation__ : BaseServerDataObject_EntityFramework, BaseParameter, Kistl.API.IExportableInternal
+    public abstract class BaseParameter__Implementation__ : BaseServerDataObject_EntityFramework, BaseParameter, Kistl.API.IExportableInternal
     {
     
 		public BaseParameter__Implementation__()

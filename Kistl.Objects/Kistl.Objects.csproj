@@ -88,12 +88,14 @@
     <Compile Include="DefaultPropertyValue.Interface.Designer.cs" />
     <Compile Include="DoubleParameter.Interface.Designer.cs" />
     <Compile Include="DoubleProperty.Interface.Designer.cs" />
+    <Compile Include="DynamicFile.Interface.Designer.cs" />
     <Compile Include="Enumeration.Interface.Designer.cs" />
     <Compile Include="EnumerationEntry.Interface.Designer.cs" />
     <Compile Include="EnumerationProperty.Interface.Designer.cs" />
     <Compile Include="EnumerationSelectorKind.Interface.Designer.cs" />
     <Compile Include="Exam.Interface.Designer.cs" />
     <Compile Include="Exercise.Interface.Designer.cs" />
+    <Compile Include="File.Interface.Designer.cs" />
     <Compile Include="Fragebogen.Interface.Designer.cs" />
     <Compile Include="Group.Interface.Designer.cs" />
     <Compile Include="GroupExcercise.Interface.Designer.cs" />
@@ -176,6 +178,7 @@
     <Compile Include="AssemblyInfo.Interface.cs" />
     <Compile Include="ModuleRepository.Interface.Designer.cs" />
     <Compile Include="CourseOrganiserRepository.Interface.Designer.cs" />
+    <Compile Include="DocumentManagementRepository.Interface.Designer.cs" />
     <Compile Include="GUIRepository.Interface.Designer.cs" />
     <Compile Include="KistlBaseRepository.Interface.Designer.cs" />
     <Compile Include="ProjekteRepository.Interface.Designer.cs" />

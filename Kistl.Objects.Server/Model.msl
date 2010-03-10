@@ -360,6 +360,7 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.ObjectClass)">
 	    <MappingFragment StoreEntitySet="ObjectClass">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="IsAbstract" ColumnName="IsAbstract" />
 <ScalarProperty Name="IsFrozenObject" ColumnName="IsFrozenObject" />
 <ScalarProperty Name="IsSimpleObject" ColumnName="IsSimpleObject" />
 <ScalarProperty Name="TableName" ColumnName="TableName" />
@@ -416,6 +417,22 @@
 <ScalarProperty Name="Date" ColumnName="Date" />
 <ScalarProperty Name="MaxScores" ColumnName="MaxScores" />
 <ScalarProperty Name="Name" ColumnName="Name" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="File">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.File)">
+	    <MappingFragment StoreEntitySet="File">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+<ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+<ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+<ScalarProperty Name="Name" ColumnName="Name" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.DynamicFile)">
+	    <MappingFragment StoreEntitySet="DynamicFile">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -2099,6 +2116,57 @@
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="fk_Semester" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_File_has_Blob
+    A: ZeroOrMore File as File
+    B: One Blob as Blob
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_File_has_Blob"
+                           TypeName="Model.FK_File_has_Blob"
+                           StoreEntitySet="File" >
+      <EndProperty Name="Blob">
+        <ScalarProperty Name="ID" ColumnName="fk_Blob"/>
+      </EndProperty>
+      <EndProperty Name="File">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_Blob" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_File_was_ChangedBy
+    A: ZeroOrMore File as File
+    B: ZeroOrOne Identity as ChangedBy
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_File_was_ChangedBy"
+                           TypeName="Model.FK_File_was_ChangedBy"
+                           StoreEntitySet="File" >
+      <EndProperty Name="ChangedBy">
+        <ScalarProperty Name="ID" ColumnName="fk_ChangedBy"/>
+      </EndProperty>
+      <EndProperty Name="File">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_ChangedBy" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_File_was_CreatedBy
+    A: ZeroOrMore File as File
+    B: ZeroOrOne Identity as CreatedBy
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_File_was_CreatedBy"
+                           TypeName="Model.FK_File_was_CreatedBy"
+                           StoreEntitySet="File" >
+      <EndProperty Name="CreatedBy">
+        <ScalarProperty Name="ID" ColumnName="fk_CreatedBy"/>
+      </EndProperty>
+      <EndProperty Name="File">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_CreatedBy" IsNull="false"/>
     </AssociationSetMapping>
     <!--
     Relation: FK_Fragebogen_enthält_Antworten

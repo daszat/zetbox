@@ -24,7 +24,7 @@ namespace Kistl.App.Base
     /// </summary>
     [EdmEntityType(NamespaceName="Model", Name="DataType")]
     [System.Diagnostics.DebuggerDisplay("DataType")]
-    public class DataType__Implementation__ : BaseServerDataObject_EntityFramework, DataType, Kistl.API.IExportableInternal
+    public abstract class DataType__Implementation__ : BaseServerDataObject_EntityFramework, DataType, Kistl.API.IExportableInternal
     {
     
 		public DataType__Implementation__()

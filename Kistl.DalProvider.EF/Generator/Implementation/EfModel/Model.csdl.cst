@@ -116,7 +116,7 @@
     foreach(var cls in ctx.GetBaseClasses().OrderBy(c => c.ClassName))
     {
 %>
-  <EntityType Name="<%= cls.ClassName %>">
+  <EntityType Name="<%= cls.ClassName %>"<%= GetAbstractModifier(cls) %>>
     <Key>
       <PropertyRef Name="ID" />
     </Key>
@@ -166,7 +166,7 @@
     foreach(var cls in ctx.GetDerivedClasses().OrderBy(c => c.ClassName))
     {
 %>
-  <EntityType Name="<%= cls.ClassName %>" BaseType="Model.<%= cls.BaseObjectClass.ClassName %>" >
+  <EntityType Name="<%= cls.ClassName %>" BaseType="Model.<%= cls.BaseObjectClass.ClassName %>"<%= GetAbstractModifier(cls) %>>
 <% ApplyEntityTypeFieldDefs(cls.Properties.Cast<Property>()); %>
   </EntityType>
 <%

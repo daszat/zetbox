@@ -584,6 +584,51 @@ using Kistl.DalProvider.EF;
 
 
 	/*
+    Relation: FK_File_has_Blob
+    A: ZeroOrMore File as File
+    B: One Blob as Blob
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_File_has_Blob",
+    "File", RelationshipMultiplicity.Many, typeof(at.dasz.DocumentManagement.File__Implementation__),
+    "Blob", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Blob__Implementation__)
+    )]
+
+
+	/*
+    Relation: FK_File_was_ChangedBy
+    A: ZeroOrMore File as File
+    B: ZeroOrOne Identity as ChangedBy
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_File_was_ChangedBy",
+    "File", RelationshipMultiplicity.Many, typeof(at.dasz.DocumentManagement.File__Implementation__),
+    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Identity__Implementation__)
+    )]
+
+
+	/*
+    Relation: FK_File_was_CreatedBy
+    A: ZeroOrMore File as File
+    B: ZeroOrOne Identity as CreatedBy
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_File_was_CreatedBy",
+    "File", RelationshipMultiplicity.Many, typeof(at.dasz.DocumentManagement.File__Implementation__),
+    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Identity__Implementation__)
+    )]
+
+
+	/*
     Relation: FK_Fragebogen_enthält_Antworten
     A: One Fragebogen as Fragebogen
     B: ZeroOrMore Antwort as Antworten
