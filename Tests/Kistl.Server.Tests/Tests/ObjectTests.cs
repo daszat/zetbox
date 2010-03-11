@@ -75,18 +75,18 @@ namespace Kistl.Server.Tests
         [Test]
         public void GetObject()
         {
-            var obj = ctx.GetQuery<Kistl.App.Base.ObjectClass>().First(o => o.ID == 2);
-            Assert.That(obj.ID, Is.EqualTo(2));
+            var obj = ctx.GetQuery<Kistl.App.Projekte.Projekt>().First(o => o.Name == "blubb");
+            Assert.That(obj.Name, Is.EqualTo("blubb"));
         }
 
         [Test]
         public void GetObject_Twice()
         {
-            var obj1 = ctx.GetQuery<Kistl.App.Base.ObjectClass>().First(o => o.ID == 2);
-            Assert.That(obj1.ID, Is.EqualTo(2));
+            var obj1 = ctx.GetQuery<Kistl.App.Projekte.Projekt>().First(o => o.Name == "blubb");
+            Assert.That(obj1.Name, Is.EqualTo("blubb"));
 
-            var obj2 = ctx.GetQuery<Kistl.App.Base.ObjectClass>().First(o => o.ID == 2);
-            Assert.That(obj2.ID, Is.EqualTo(2));
+            var obj2 = ctx.GetQuery<Kistl.App.Projekte.Projekt>().First(o => o.Name == "blubb");
+            Assert.That(obj2.Name, Is.EqualTo("blubb"));
 
             Assert.That(object.ReferenceEquals(obj1, obj2), "Obj1 & Obj2 are different Objects");
         }
