@@ -582,6 +582,20 @@ namespace Kistl.Server.SchemaManagement
         }
         #endregion
 
+        #region ChangeRelationType
+        public bool IsChangeRelationType(Relation rel)
+        {
+            var saved = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
+            if (saved == null) return false;
+            return saved.GetRelationType() != rel.GetRelationType();
+        }
+        public void DoChangeRelationType(Relation rel)
+        {
+            var saved = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
+            Log.ErrorFormat("changing a relation type from '{0}' to '{1}' on relation '{2}' is not supported yet", saved.GetRelationType(), rel.GetRelationType(), rel.GetAssociationName());
+        }
+        #endregion
+
         #region New_1_N_Relation
         public bool IsNew_1_N_Relation(Relation rel)
         {

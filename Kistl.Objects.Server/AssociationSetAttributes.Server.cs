@@ -464,6 +464,24 @@ using Kistl.DalProvider.EF;
 
 
 	/*
+    Relation: FK_Document_has_Revisions
+    A: ZeroOrMore Document as Document
+    B: ZeroOrMore Blob as Revisions
+    Preferred Storage: Separate
+	*/
+
+// The association from A to the CollectionEntry
+[assembly: EdmRelationship("Model", "FK_Document_has_Revisions_A",
+    "Document", RelationshipMultiplicity.ZeroOrOne, typeof(at.dasz.DocumentManagement.Document__Implementation__),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(at.dasz.DocumentManagement.Document_has_Blob_RelationEntry__Implementation__)
+    )]
+// The association from B to the CollectionEntry
+[assembly: EdmRelationship("Model", "FK_Document_has_Revisions_B",
+    "Revisions", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Blob__Implementation__),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(at.dasz.DocumentManagement.Document_has_Blob_RelationEntry__Implementation__)
+    )]
+
+	/*
     Relation: FK_Document_was_ChangedBy
     A: ZeroOrMore Blob as Document
     B: ZeroOrOne Identity as ChangedBy

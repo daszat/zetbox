@@ -25,6 +25,7 @@ namespace at.dasz.DocumentManagement
                 var fi = new System.IO.FileInfo(path);
                 int id = obj.Context.CreateBlob(fi, fi.GetMimeType());
                 obj.Blob = obj.Context.Find<Kistl.App.Base.Blob>(id);
+                obj.Name = obj.Blob.OriginalName;
             }
         }
     }

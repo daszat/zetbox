@@ -601,6 +601,393 @@ namespace Kistl.App.GUI
     }
 }
 
+namespace at.dasz.DocumentManagement
+{
+	using Kistl.App.Base;
+    [EdmEntityType(NamespaceName="Model", Name="Document_has_Blob_RelationEntry")]
+    [System.Diagnostics.DebuggerDisplay("Document_has_Blob_RelationEntry__Implementation__")]
+    public class Document_has_Blob_RelationEntry__Implementation__ : BaseServerCollectionEntry_EntityFramework, Document_has_Blob_RelationEntry, Kistl.API.IExportableInternal, Kistl.App.Base.IExportable
+    {
+    
+        [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
+           // Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.IdProperty
+        public override int ID
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _ID;
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_ID != value)
+                {
+                    var __oldValue = _ID;
+                    var __newValue = value;
+                    NotifyPropertyChanging("ID", __oldValue, __newValue);
+                    _ID = __newValue;
+                    NotifyPropertyChanged("ID", __oldValue, __newValue);
+                }
+            }
+        }
+        private int _ID;
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+           // Kistl.DalProvider.EF.Generator.Implementation.CollectionEntries.ExportGuidProperty
+        public virtual Guid ExportGuid
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _ExportGuid;
+                if (_ExportGuid == Guid.Empty) {
+                    __result = _ExportGuid = Guid.NewGuid();
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_ExportGuid != value)
+                {
+                    var __oldValue = _ExportGuid;
+                    var __newValue = value;
+                    NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
+                    _ExportGuid = __newValue;
+                    NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+                }
+            }
+        }
+        private Guid _ExportGuid;
+        public Guid RelationID { get { return new Guid("69d27812-e981-443b-a94b-dfe1a95f3aad"); } }
+        public IDataObject AObject { get { return A; } set { A = (at.dasz.DocumentManagement.Document)value; } }
+        public IDataObject BObject { get { return B; } set { B = (Kistl.App.Base.Blob)value; } }
+
+        /// <summary>
+        /// Reference to the A-Side member of this CollectionEntry
+        /// </summary>
+   		// Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public at.dasz.DocumentManagement.Document A
+        {
+            get
+            {
+                return A__Implementation__;
+            }
+            set
+            {
+                // TODO: NotifyPropertyChanged()
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if(value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                A__Implementation__ = (at.dasz.DocumentManagement.Document__Implementation__)value;
+            }
+        }
+        
+        private int? _fk_A;
+        private Guid? _fk_guid_A = null;
+        // EF sees only this property
+        [EdmRelationshipNavigationProperty("Model", "FK_Document_has_Revisions_A", "Document")]
+        public at.dasz.DocumentManagement.Document__Implementation__ A__Implementation__
+        {
+            get
+            {
+                EntityReference<at.dasz.DocumentManagement.Document__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<at.dasz.DocumentManagement.Document__Implementation__>(
+                        "Model.FK_Document_has_Revisions_A",
+                        "Document");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load(); 
+                    if(r.Value != null) r.Value.AttachToContext(this.Context);
+                }
+                var __value = r.Value;
+                return __value;
+            }
+            set
+            {
+                EntityReference<at.dasz.DocumentManagement.Document__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<at.dasz.DocumentManagement.Document__Implementation__>(
+                        "Model.FK_Document_has_Revisions_A",
+                        "Document");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load(); 
+                }
+                at.dasz.DocumentManagement.Document __oldValue = (at.dasz.DocumentManagement.Document)r.Value;
+                at.dasz.DocumentManagement.Document __newValue = (at.dasz.DocumentManagement.Document)value;
+
+                r.Value = (at.dasz.DocumentManagement.Document__Implementation__)__newValue;
+                                
+            }
+        }
+        
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+           // Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.NotifyingValueProperty
+        public virtual int? A_pos
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _A_pos;
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_A_pos != value)
+                {
+                    var __oldValue = _A_pos;
+                    var __newValue = value;
+                    NotifyPropertyChanging("A_pos", __oldValue, __newValue);
+                    _A_pos = __newValue;
+                    NotifyPropertyChanged("A_pos", __oldValue, __newValue);
+                }
+            }
+        }
+        private int? _A_pos;
+        
+        /// <summary>
+        /// the B-side value of this CollectionEntry
+        /// </summary>
+   		// Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public Kistl.App.Base.Blob B
+        {
+            get
+            {
+                return B__Implementation__;
+            }
+            set
+            {
+                // TODO: NotifyPropertyChanged()
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if(value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                B__Implementation__ = (Kistl.App.Base.Blob__Implementation__)value;
+            }
+        }
+        
+        private int? _fk_B;
+        private Guid? _fk_guid_B = null;
+        // EF sees only this property
+        [EdmRelationshipNavigationProperty("Model", "FK_Document_has_Revisions_B", "Revisions")]
+        public Kistl.App.Base.Blob__Implementation__ B__Implementation__
+        {
+            get
+            {
+                EntityReference<Kistl.App.Base.Blob__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Blob__Implementation__>(
+                        "Model.FK_Document_has_Revisions_B",
+                        "Revisions");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load(); 
+                    if(r.Value != null) r.Value.AttachToContext(this.Context);
+                }
+                var __value = r.Value;
+                return __value;
+            }
+            set
+            {
+                EntityReference<Kistl.App.Base.Blob__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Blob__Implementation__>(
+                        "Model.FK_Document_has_Revisions_B",
+                        "Revisions");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load(); 
+                }
+                Kistl.App.Base.Blob __oldValue = (Kistl.App.Base.Blob)r.Value;
+                Kistl.App.Base.Blob __newValue = (Kistl.App.Base.Blob)value;
+
+                r.Value = (Kistl.App.Base.Blob__Implementation__)__newValue;
+                                
+            }
+        }
+        
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+           // Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.NotifyingValueProperty
+        public virtual int? B_pos
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _B_pos;
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_B_pos != value)
+                {
+                    var __oldValue = _B_pos;
+                    var __newValue = value;
+                    NotifyPropertyChanging("B_pos", __oldValue, __newValue);
+                    _B_pos = __newValue;
+                    NotifyPropertyChanged("B_pos", __oldValue, __newValue);
+                }
+            }
+        }
+        private int? _B_pos;
+        
+
+
+
+        /// <summary>
+        /// Index into the A-side list of this relation
+        /// </summary>
+public int? AIndex { get { return A_pos; } set { A_pos = value; } }
+        /// <summary>
+        /// Index into the B-side list of this relation
+        /// </summary>
+public int? BIndex { get { return B_pos; } set { B_pos = value; } }
+#region Serializer
+
+
+        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects)
+        {
+            
+            base.ToStream(binStream, auxObjects);
+            BinarySerializer.ToStream(this._ExportGuid, binStream);
+            BinarySerializer.ToStream(A != null ? A.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(this._A_pos, binStream);
+            BinarySerializer.ToStream(B != null ? B.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(this._B_pos, binStream);
+            BinarySerializer.ToStream(this._A_pos, binStream);
+            BinarySerializer.ToStream(this._B_pos, binStream);
+        }
+
+        public override void FromStream(System.IO.BinaryReader binStream)
+        {
+            
+            base.FromStream(binStream);
+            BinarySerializer.FromStream(out this._ExportGuid, binStream);
+            BinarySerializer.FromStream(out this._fk_A, binStream);
+            BinarySerializer.FromStream(out this._A_pos, binStream);
+            BinarySerializer.FromStream(out this._fk_B, binStream);
+            BinarySerializer.FromStream(out this._B_pos, binStream);
+            BinarySerializer.FromStream(out this._A_pos, binStream);
+            BinarySerializer.FromStream(out this._B_pos, binStream);
+        }
+
+        public override void ToStream(System.Xml.XmlWriter xml)
+        {
+            
+            base.ToStream(xml);
+            XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "");
+            XmlStreamer.ToStream(A != null ? A.ID : (int?)null, xml, "A", "at.dasz.DocumentManagement");
+            XmlStreamer.ToStream(this._A_pos, xml, "A_pos", "at.dasz.DocumentManagement");
+            XmlStreamer.ToStream(B != null ? B.ID : (int?)null, xml, "B", "Kistl.App.Base");
+            XmlStreamer.ToStream(this._B_pos, xml, "B_pos", "Kistl.App.Base");
+            XmlStreamer.ToStream(this._A_pos, xml, "A_pos", "at.dasz.DocumentManagement");
+            XmlStreamer.ToStream(this._B_pos, xml, "B_pos", "Kistl.App.Base");
+        }
+
+        public override void FromStream(System.Xml.XmlReader xml)
+        {
+            
+            base.FromStream(xml);
+            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "");
+            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "at.dasz.DocumentManagement");
+            XmlStreamer.FromStream(ref this._A_pos, xml, "A_pos", "at.dasz.DocumentManagement");
+            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._B_pos, xml, "B_pos", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._A_pos, xml, "A_pos", "at.dasz.DocumentManagement");
+            XmlStreamer.FromStream(ref this._B_pos, xml, "B_pos", "Kistl.App.Base");
+        }
+
+        public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
+        {
+            
+            xml.WriteAttributeString("ExportGuid", this._ExportGuid.ToString());
+            if (modules.Contains("*") || modules.Contains("at.dasz.DocumentManagement")) XmlStreamer.ToStream(A != null ? A.ExportGuid : (Guid?)null, xml, "A", "at.dasz.DocumentManagement");
+	
+            if (modules.Contains("*") || modules.Contains("at.dasz.DocumentManagement")) XmlStreamer.ToStream(this._A_pos, xml, "A_pos", "at.dasz.DocumentManagement");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(B != null ? B.ExportGuid : (Guid?)null, xml, "B", "Kistl.App.Base");
+	
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._B_pos, xml, "B_pos", "Kistl.App.Base");
+	
+            if (modules.Contains("*") || modules.Contains("at.dasz.DocumentManagement")) XmlStreamer.ToStream(this._A_pos, xml, "A_pos", "at.dasz.DocumentManagement");
+	
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._B_pos, xml, "B_pos", "Kistl.App.Base");
+        }
+
+        public virtual void MergeImport(System.Xml.XmlReader xml)
+        {
+            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "");
+            XmlStreamer.FromStream(ref this._fk_guid_A, xml, "A", "at.dasz.DocumentManagement");
+            XmlStreamer.FromStream(ref this._A_pos, xml, "A_pos", "at.dasz.DocumentManagement");
+            XmlStreamer.FromStream(ref this._fk_guid_B, xml, "B", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._B_pos, xml, "B_pos", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._A_pos, xml, "A_pos", "at.dasz.DocumentManagement");
+            XmlStreamer.FromStream(ref this._B_pos, xml, "B_pos", "Kistl.App.Base");
+        }
+
+#endregion
+
+		public override InterfaceType GetInterfaceType()
+		{
+			return new InterfaceType(typeof(Document_has_Blob_RelationEntry));
+		}
+	
+		public override void ReloadReferences()
+		{
+			// Do not reload references if the current object has been deleted.
+			// TODO: enable when MemoryContext uses MemoryDataObjects
+			//if (this.ObjectState == DataObjectState.Deleted) return;
+
+			if (_fk_guid_A.HasValue)
+				A__Implementation__ = (at.dasz.DocumentManagement.Document__Implementation__)Context.FindPersistenceObject<at.dasz.DocumentManagement.Document>(_fk_guid_A.Value);
+			else if (_fk_A.HasValue)
+				A__Implementation__ = (at.dasz.DocumentManagement.Document__Implementation__)Context.Find<at.dasz.DocumentManagement.Document>(_fk_A.Value);
+			else
+				A__Implementation__ = null;
+
+
+			if (_fk_guid_B.HasValue)
+				B__Implementation__ = (Kistl.App.Base.Blob__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.Blob>(_fk_guid_B.Value);
+			else if (_fk_B.HasValue)
+				B__Implementation__ = (Kistl.App.Base.Blob__Implementation__)Context.Find<Kistl.App.Base.Blob>(_fk_B.Value);
+			else
+				B__Implementation__ = null;
+	
+		}
+		
+		public override void ApplyChangesFrom(IPersistenceObject obj)
+		{
+			base.ApplyChangesFrom(obj);
+			var other = (Document_has_Blob_RelationEntry__Implementation__)obj;
+			var me = (Document_has_Blob_RelationEntry__Implementation__)this;
+			
+            me.AIndex = other.AIndex;
+            me.BIndex = other.BIndex;
+            me._fk_A = other._fk_A;
+            me._fk_B = other._fk_B;
+		}		
+		
+		
+
+    }
+}
+
 namespace Kistl.App.Base
 {
     [EdmEntityType(NamespaceName="Model", Name="Group_memberOf_Group_RelationEntry")]

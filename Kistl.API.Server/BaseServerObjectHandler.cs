@@ -53,7 +53,7 @@ using System.IO;
     public interface IServerDocumentHandler
     {
         Stream GetBlobStream(IKistlContext ctx, int ID);
-        IDataObject SetBlobStream(IKistlContext ctx, Stream blob, string filename, string mimetype);
+        Kistl.App.Base.Blob SetBlobStream(IKistlContext ctx, Stream blob, string filename, string mimetype);
     }
 
     /// <summary>
@@ -216,7 +216,7 @@ using System.IO;
             return ctx.GetStream(ID);
         }
 
-        public IDataObject SetBlobStream(IKistlContext ctx, Stream blob, string filename, string mimetype)
+        public Kistl.App.Base.Blob SetBlobStream(IKistlContext ctx, Stream blob, string filename, string mimetype)
         {
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
             if (blob == null) { throw new ArgumentNullException("blob"); }

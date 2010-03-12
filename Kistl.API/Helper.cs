@@ -728,6 +728,27 @@ namespace Kistl.API
         }
 
         /// <summary>
+        /// Searches a type hierarchie for a event
+        /// </summary>
+        /// <param name="t">type to search</param>
+        /// <param name="name">name of the event to search for</param>
+        /// <returns>EventInfo or null if not found</returns>
+        public static EventInfo FindEvent(this Type t, string name)
+        {
+            if (t == null) throw new ArgumentNullException("t");
+            if (string.IsNullOrEmpty(name)) throw new ArgumentNullException("name");
+
+            while (t != null)
+            {
+                var result = t.GetEvent(name);
+                if (result != null) return result;
+                t = t.BaseType;
+            }
+
+            return null;
+        }
+
+        /// <summary>
         /// Finds all implemented IEnumerables of the given Type
         /// </summary>
         public static IQueryable<Type> FindIEnumerables(this Type seqType)

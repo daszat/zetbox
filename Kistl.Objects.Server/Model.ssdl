@@ -163,6 +163,12 @@
       <End Role="A_ValueTypeProperty" EntitySet="ValueTypeProperty" />
       <End Role="B_DateTimeProperty" EntitySet="DateTimeProperty" />
     </AssociationSet>
+    <EntitySet Name="Document" EntityType="Model.Store.Document" Table="Documents"/>
+    <!-- inherits from File -->
+    <AssociationSet Name="FK_Document_File_ID" Association="Model.Store.FK_Document_File_ID" >
+      <End Role="A_File" EntitySet="File" />
+      <End Role="B_Document" EntitySet="Document" />
+    </AssociationSet>
     <EntitySet Name="DoubleParameter" EntityType="Model.Store.DoubleParameter" Table="DoubleParameters"/>
     <!-- inherits from BaseParameter -->
     <AssociationSet Name="FK_DoubleParameter_BaseParameter_ID" Association="Model.Store.FK_DoubleParameter_BaseParameter_ID" >
@@ -343,6 +349,12 @@
       <End Role="A_ControlKind" EntitySet="ControlKind" />
       <End Role="B_SingleLineDataObjectKind" EntitySet="SingleLineDataObjectKind" />
     </AssociationSet>
+    <EntitySet Name="StaticFile" EntityType="Model.Store.StaticFile" Table="StaticFiles"/>
+    <!-- inherits from File -->
+    <AssociationSet Name="FK_StaticFile_File_ID" Association="Model.Store.FK_StaticFile_File_ID" >
+      <End Role="A_File" EntitySet="File" />
+      <End Role="B_StaticFile" EntitySet="StaticFile" />
+    </AssociationSet>
     <EntitySet Name="StringListKind" EntityType="Model.Store.StringListKind" Table="StringListKinds"/>
     <!-- inherits from ControlKind -->
     <AssociationSet Name="FK_StringListKind_ControlKind_ID" Association="Model.Store.FK_StringListKind_ControlKind_ID" >
@@ -429,6 +441,22 @@
     <AssociationSet Name="FK_ControlKindClass_supports_SupportedInterfaces_B" Association="Model.Store.FK_ControlKindClass_supports_SupportedInterfaces_B" >
       <End Role="CollectionEntry" EntitySet="ControlKindClass_supports_TypeRef_RelationEntry" />
       <End Role="SupportedInterfaces" EntitySet="TypeRef" />
+    </AssociationSet>
+    
+    <!-- 
+    Relation: FK_Document_has_Revisions
+    A: ZeroOrMore Document as Document
+    B: ZeroOrMore Blob as Revisions
+    Preferred Storage: Separate
+    -->
+    <EntitySet Name="Document_has_Blob_RelationEntry" EntityType="Model.Store.Document_has_Blob_RelationEntry" Table="Document_has_Revisions" />
+    <AssociationSet Name="FK_Document_has_Revisions_A" Association="Model.Store.FK_Document_has_Revisions_A" >
+      <End Role="Document" EntitySet="Document" />
+      <End Role="CollectionEntry" EntitySet="Document_has_Blob_RelationEntry" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Document_has_Revisions_B" Association="Model.Store.FK_Document_has_Revisions_B" >
+      <End Role="CollectionEntry" EntitySet="Document_has_Blob_RelationEntry" />
+      <End Role="Revisions" EntitySet="Blob" />
     </AssociationSet>
     
     <!-- 
@@ -1443,6 +1471,13 @@
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
   </EntityType>
 	
+  <EntityType Name="Document">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+  </EntityType>
+	
   <EntityType Name="DoubleParameter">
     <Key>
       <PropertyRef Name="ID" />
@@ -2012,6 +2047,13 @@
     <Property Name="ID" Type="int" Nullable="false" />
   </EntityType>
 	
+  <EntityType Name="StaticFile">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+  </EntityType>
+	
   <EntityType Name="StringListKind">
     <Key>
       <PropertyRef Name="ID" />
@@ -2311,6 +2353,47 @@
       </Principal>
       <Dependent Role="CollectionEntry">
         <PropertyRef Name="fk_SupportedInterfaces" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+	
+  <EntityType Name="Document_has_Blob_RelationEntry">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+	<Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="fk_Document" Type="int" Nullable="true" />
+    <Property Name="fk_Document_pos" Type="int" Nullable="true" />
+    <Property Name="fk_Revisions" Type="int" Nullable="true" />
+    <Property Name="fk_Revisions_pos" Type="int" Nullable="true" />
+  </EntityType>
+
+  <!-- A to CollectionEntry -->
+  <Association Name="FK_Document_has_Revisions_A">
+    <End Role="Document" Type="Model.Store.Document" Multiplicity="0..1" />
+    <End Role="CollectionEntry" Type="Model.Store.Document_has_Blob_RelationEntry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Document">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CollectionEntry">
+        <PropertyRef Name="fk_Document" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+  <!-- B to CollectionEntry -->
+  <Association Name="FK_Document_has_Revisions_B">
+    <End Role="Revisions" Type="Model.Store.Blob" Multiplicity="0..1" />
+    <End Role="CollectionEntry" Type="Model.Store.Document_has_Blob_RelationEntry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Revisions">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CollectionEntry">
+        <PropertyRef Name="fk_Revisions" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -4626,6 +4709,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Document_File_ID">
+    <End Role="A_File" Type="Model.Store.File" Multiplicity="1" />
+    <End Role="B_Document" Type="Model.Store.Document" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="A_File">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_Document">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_DoubleParameter_BaseParameter_ID">
     <End Role="A_BaseParameter" Type="Model.Store.BaseParameter" Multiplicity="1" />
     <End Role="B_DoubleParameter" Type="Model.Store.DoubleParameter" Multiplicity="0..1" />
@@ -4982,6 +5077,18 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="B_SingleLineDataObjectKind">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StaticFile_File_ID">
+    <End Role="A_File" Type="Model.Store.File" Multiplicity="1" />
+    <End Role="B_StaticFile" Type="Model.Store.StaticFile" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="A_File">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_StaticFile">
         <PropertyRef Name="ID" />
       </Dependent>
     </ReferentialConstraint>

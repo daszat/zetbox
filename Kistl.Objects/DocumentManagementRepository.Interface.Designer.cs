@@ -16,6 +16,16 @@ namespace at.dasz.DocumentManagement
 		
 		public IKistlContext Context { get; private set; }
 		
+		/// <summary>List of all StaticFile</summary>
+		/// Static file. Content cannot be changed
+		public IQueryable<StaticFile> StaticFiles
+		{ 
+			get
+			{
+				return Context.GetQuery<StaticFile>();
+			}
+		}
+		
 		/// <summary>List of all File</summary>
 		/// Abstract Baseclass for File Types
 		public IQueryable<File> Files
@@ -33,6 +43,16 @@ namespace at.dasz.DocumentManagement
 			get
 			{
 				return Context.GetQuery<DynamicFile>();
+			}
+		}
+		
+		/// <summary>List of all Document</summary>
+		/// Document with revisions
+		public IQueryable<Document> Documents
+		{ 
+			get
+			{
+				return Context.GetQuery<Document>();
 			}
 		}
 		

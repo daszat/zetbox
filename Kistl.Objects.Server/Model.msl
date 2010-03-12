@@ -430,8 +430,18 @@
 <ScalarProperty Name="Name" ColumnName="Name" />
 	    </MappingFragment>
       </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Document)">
+	    <MappingFragment StoreEntitySet="Document">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+	    </MappingFragment>
+      </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Model.DynamicFile)">
 	    <MappingFragment StoreEntitySet="DynamicFile">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.StaticFile)">
+	    <MappingFragment StoreEntitySet="StaticFile">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 	    </MappingFragment>
       </EntityTypeMapping>
@@ -958,6 +968,47 @@
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="fk_SupportedInterfaces" IsNull="false"/>
+    </AssociationSetMapping>
+
+    <!--
+    Relation: FK_Document_has_Revisions
+    A: ZeroOrMore Document as Document
+    B: ZeroOrMore Blob as Revisions
+    Preferred Storage: Separate
+    -->
+    <EntitySetMapping Name="Document_has_Blob_RelationEntry">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Document_has_Blob_RelationEntry)">
+        <MappingFragment StoreEntitySet="Document_has_Blob_RelationEntry">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+		  <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+          <ScalarProperty Name="A_pos" ColumnName="fk_Document_pos" />
+          <ScalarProperty Name="B_pos" ColumnName="fk_Revisions_pos" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <!-- A to CollectionEntry -->
+    <AssociationSetMapping Name="FK_Document_has_Revisions_A"
+                           TypeName="Model.FK_Document_has_Revisions_A"
+                           StoreEntitySet="Document_has_Blob_RelationEntry" >
+      <EndProperty Name="Document">
+        <ScalarProperty Name="ID" ColumnName="fk_Document"/>
+      </EndProperty>
+      <EndProperty Name="CollectionEntry">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_Document" IsNull="false"/>
+    </AssociationSetMapping>
+    <!-- B to CollectionEntry -->
+    <AssociationSetMapping Name="FK_Document_has_Revisions_B"
+                           TypeName="Model.FK_Document_has_Revisions_B"
+                           StoreEntitySet="Document_has_Blob_RelationEntry" >
+      <EndProperty Name="Revisions">
+        <ScalarProperty Name="ID" ColumnName="fk_Revisions"/>
+      </EndProperty>
+      <EndProperty Name="CollectionEntry">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_Revisions" IsNull="false"/>
     </AssociationSetMapping>
 
     <!--

@@ -348,6 +348,10 @@ namespace Kistl.Server.SchemaManagement
             if (!db.CheckTableExists(tblName))
             {
                 Log.WarnFormat("Relation table '{0}' is missing for [{1}]", tblName, assocName);
+                if (repair)
+                {
+                    Case.DoNew_N_M_Relation(rel);
+                }
                 return;
             }
 

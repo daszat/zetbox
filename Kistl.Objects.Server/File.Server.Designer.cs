@@ -550,6 +550,28 @@ namespace at.dasz.DocumentManagement
 		public static event PropertyPostSetterHandler<at.dasz.DocumentManagement.File, string> OnName_PostSetter;
 
         /// <summary>
+        /// Handles the change of the current blob
+        /// </summary>
+		[EventBasedMethod("OnHandleBlobChange_File")]
+		public virtual Kistl.App.Base.Blob HandleBlobChange(Kistl.App.Base.Blob oldBlob, Kistl.App.Base.Blob newBlob) 
+        {
+            var e = new MethodReturnEventArgs<Kistl.App.Base.Blob>();
+            if (OnHandleBlobChange_File != null)
+            {
+                OnHandleBlobChange_File(this, e, oldBlob, newBlob);
+            }
+            else
+            {
+                throw new NotImplementedException("No handler registered on File.HandleBlobChange");
+            }
+            return e.Result;
+        }
+		public delegate void HandleBlobChange_Handler<T>(T obj, MethodReturnEventArgs<Kistl.App.Base.Blob> ret, Kistl.App.Base.Blob oldBlob, Kistl.App.Base.Blob newBlob);
+		public static event HandleBlobChange_Handler<File> OnHandleBlobChange_File;
+
+
+
+        /// <summary>
         /// Opens the Content readonly
         /// </summary>
 		[EventBasedMethod("OnOpen_File")]

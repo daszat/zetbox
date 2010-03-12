@@ -86,6 +86,15 @@
       <End Role="SupportedInterfaces" EntitySet="TypeRef" />
       <End Role="CollectionEntry" EntitySet="ControlKindClass_supports_TypeRef_RelationEntry" />
     </AssociationSet>
+    <EntitySet Name="Document_has_Blob_RelationEntry" EntityType="Model.Document_has_Blob_RelationEntry" />
+    <AssociationSet Name="FK_Document_has_Revisions_A" Association="Model.FK_Document_has_Revisions_A" >
+      <End Role="Document" EntitySet="File" />
+      <End Role="CollectionEntry" EntitySet="Document_has_Blob_RelationEntry" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Document_has_Revisions_B" Association="Model.FK_Document_has_Revisions_B" >
+      <End Role="Revisions" EntitySet="Blob" />
+      <End Role="CollectionEntry" EntitySet="Document_has_Blob_RelationEntry" />
+    </AssociationSet>
     <EntitySet Name="Group_memberOf_Group_RelationEntry" EntityType="Model.Group_memberOf_Group_RelationEntry" />
     <AssociationSet Name="FK_Group_memberOf_ParentGroup_A" Association="Model.FK_Group_memberOf_ParentGroup_A" >
       <End Role="Group" EntitySet="Group" />
@@ -1860,6 +1869,12 @@
   </EntityType>
   <EntityType Name="DateTimeProperty" BaseType="Model.ValueTypeProperty">
   </EntityType>
+  <EntityType Name="Document" BaseType="Model.File">
+    <NavigationProperty Name="Revisions__Implementation__"
+                        Relationship="Model.FK_Document_has_Revisions_A"
+                        FromRole="Document"
+                        ToRole="CollectionEntry" />
+  </EntityType>
   <EntityType Name="DoubleParameter" BaseType="Model.BaseParameter">
   </EntityType>
   <EntityType Name="DoubleProperty" BaseType="Model.ValueTypeProperty">
@@ -1985,6 +2000,8 @@
   </EntityType>
   <EntityType Name="SingleLineDataObjectKind" BaseType="Model.ControlKind">
   </EntityType>
+  <EntityType Name="StaticFile" BaseType="Model.File">
+  </EntityType>
   <EntityType Name="StringListKind" BaseType="Model.ControlKind">
     <NavigationProperty Name="ItemKind__Implementation__"
                         Relationship="Model.FK_List_has_ItemKind"
@@ -2096,6 +2113,51 @@
          Multiplicity="0..1" />
     <End Role="CollectionEntry"
          Type="Model.ControlKindClass_supports_TypeRef_RelationEntry"
+         Multiplicity="*" />
+  </Association>
+  
+  <!--
+    Relation: FK_Document_has_Revisions
+    A: ZeroOrMore Document as Document
+    B: ZeroOrMore Blob as Revisions
+    Preferred Storage: Separate
+  -->
+  <EntityType Name="Document_has_Blob_RelationEntry" >
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+	<Property Name="ExportGuid" Type="Guid" Nullable="false" />
+	
+    
+    <!-- A -->
+    <NavigationProperty Name="A__Implementation__"
+                        Relationship="Model.FK_Document_has_Revisions_A"
+                        FromRole="CollectionEntry"
+                        ToRole="Document" />
+    <Property Name="A_pos" Type="Int32" Nullable="false" />
+
+    <!-- B -->
+    <NavigationProperty Name="B__Implementation__"
+                        Relationship="Model.FK_Document_has_Revisions_B"
+                        FromRole="CollectionEntry"
+                        ToRole="Revisions" />
+    <Property Name="B_pos" Type="Int32" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Document_has_Revisions_A" >
+    <End Role="Document"
+         Type="Model.Document" 
+         Multiplicity="0..1" />
+    <End Role="CollectionEntry"
+         Type="Model.Document_has_Blob_RelationEntry"
+         Multiplicity="*" />
+  </Association>
+  <Association Name="FK_Document_has_Revisions_B" >
+    <End Role="Revisions"
+         Type="Model.Blob" 
+         Multiplicity="0..1" />
+    <End Role="CollectionEntry"
+         Type="Model.Document_has_Blob_RelationEntry"
          Multiplicity="*" />
   </Association>
   

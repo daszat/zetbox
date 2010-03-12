@@ -28,6 +28,10 @@ namespace at.dasz.DocumentManagement
 			set;
 		}
         /// <summary>
+        /// Handles the change of the current blob
+        /// </summary>
+		 Kistl.App.Base.Blob HandleBlobChange(Kistl.App.Base.Blob oldBlob, Kistl.App.Base.Blob newBlob) ;
+        /// <summary>
         /// Opens the Content readonly
         /// </summary>
 		 void Open() ;

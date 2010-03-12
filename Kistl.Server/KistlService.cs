@@ -174,6 +174,11 @@ namespace Kistl.Server
 
             SendAuxiliaryObjects(sw, auxObjects, sentObjects);
 
+            // https://connect.microsoft.com/VisualStudio/feedback/details/541494/wcf-streaming-issue
+            BinarySerializer.ToStream(false, sw);
+            BinarySerializer.ToStream(false, sw);
+            BinarySerializer.ToStream(false, sw);
+
             result.Seek(0, SeekOrigin.Begin);
             return result;
         }

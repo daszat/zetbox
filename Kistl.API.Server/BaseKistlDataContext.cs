@@ -456,7 +456,7 @@ namespace Kistl.API.Server
         public System.IO.FileInfo GetFileInfo(int ID)
         {
             var blob = this.Find<Kistl.App.Base.Blob>(ID);
-            string path = System.IO.Path.Combine(ApplicationContext.Current.Configuration.Client.DocumentStore, blob.StoragePath);
+            string path = System.IO.Path.Combine(ApplicationContext.Current.Configuration.Server.DocumentStore, blob.StoragePath);
             return new System.IO.FileInfo(path);
         }
 

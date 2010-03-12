@@ -110,6 +110,7 @@
     <Compile Include="DateTimeParameter.Server.Designer.cs" />
     <Compile Include="DateTimeProperty.Server.Designer.cs" />
     <Compile Include="DefaultPropertyValue.Server.Designer.cs" />
+    <Compile Include="Document.Server.Designer.cs" />
     <Compile Include="DoubleParameter.Server.Designer.cs" />
     <Compile Include="DoubleProperty.Server.Designer.cs" />
     <Compile Include="DynamicFile.Server.Designer.cs" />
@@ -164,6 +165,7 @@
     <Compile Include="RoleMembership.Server.Designer.cs" />
     <Compile Include="Semester.Server.Designer.cs" />
     <Compile Include="SingleLineDataObjectKind.Server.Designer.cs" />
+    <Compile Include="StaticFile.Server.Designer.cs" />
     <Compile Include="StringListKind.Server.Designer.cs" />
     <Compile Include="StringParameter.Server.Designer.cs" />
     <Compile Include="StringProperty.Server.Designer.cs" />

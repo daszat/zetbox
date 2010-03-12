@@ -86,6 +86,7 @@
     <Compile Include="DateTimeParameter.Interface.Designer.cs" />
     <Compile Include="DateTimeProperty.Interface.Designer.cs" />
     <Compile Include="DefaultPropertyValue.Interface.Designer.cs" />
+    <Compile Include="Document.Interface.Designer.cs" />
     <Compile Include="DoubleParameter.Interface.Designer.cs" />
     <Compile Include="DoubleProperty.Interface.Designer.cs" />
     <Compile Include="DynamicFile.Interface.Designer.cs" />
@@ -140,6 +141,7 @@
     <Compile Include="RoleMembership.Interface.Designer.cs" />
     <Compile Include="Semester.Interface.Designer.cs" />
     <Compile Include="SingleLineDataObjectKind.Interface.Designer.cs" />
+    <Compile Include="StaticFile.Interface.Designer.cs" />
     <Compile Include="StringListKind.Interface.Designer.cs" />
     <Compile Include="StringParameter.Interface.Designer.cs" />
     <Compile Include="StringProperty.Interface.Designer.cs" />

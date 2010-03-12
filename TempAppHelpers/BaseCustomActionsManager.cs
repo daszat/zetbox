@@ -105,13 +105,13 @@ namespace Kistl.App.Extensions
             if (filter == null) { throw new ArgumentNullException("filter"); }
             if (metaCtx == null) { throw new ArgumentNullException("metaCtx"); }
 
-            foreach (ObjectClass baseObjClass in metaCtx.GetQuery<ObjectClass>())
+            foreach (ObjectClass objClass in metaCtx.GetQuery<ObjectClass>())
             {
                 try
                 {
-                    if (filter == null || filter(baseObjClass))
+                    if (filter == null || filter(objClass))
                     {
-                        CreateInvokeInfosForAssembly(baseObjClass, extraSuffix, assemblyName);
+                        CreateInvokeInfosForAssembly(objClass, extraSuffix, assemblyName);
                     }
                 }
                 catch (Exception ex)
@@ -123,19 +123,19 @@ namespace Kistl.App.Extensions
 
         #region Walk through objectclass and create InvocationInfos
 
-        private void CreateInvokeInfosForAssembly(ObjectClass baseObjClass, string extraSuffix, string assemblyName)
+        private void CreateInvokeInfosForAssembly(ObjectClass objClass, string extraSuffix, string assemblyName)
         {
             // baseObjClass.GetDataType(); is not possible here, because this
             // Method is currently attaching
-            var implTypeName = baseObjClass.Module.Namespace
-                + "." + baseObjClass.ClassName
+            var implTypeName = objClass.Module.Namespace
+                + "." + objClass.ClassName
                 + Kistl.API.Helper.ImplementationSuffix
                 + extraSuffix
                 + ", " + assemblyName;
             var implType = Type.GetType(implTypeName);
             if (implType != null)
             {
-                CreateInvokeInfos(baseObjClass, implType);
+                CreateInvokeInfos(objClass, implType);
             }
             else
             {
@@ -143,17 +143,17 @@ namespace Kistl.App.Extensions
             }
         }
 
-        private void CreateInvokeInfos(ObjectClass baseObjClass, Type objType)
+        private void CreateInvokeInfos(ObjectClass objObjClass, Type objType)
         {
             if (objType == null)
             {
                 throw new ArgumentNullException("objType");
             }
 
-            foreach (ObjectClass objClass in baseObjClass.GetObjectHierarchie())
+            foreach (ObjectClass baseObjClass in objObjClass.GetObjectHierarchie())
             {
                 // Method invocations
-                foreach (MethodInvocation mi in objClass.MethodInvocations)
+                foreach (MethodInvocation mi in baseObjClass.MethodInvocations)
                 {
                     Type[] paramTypes = mi.Method.Parameter
                         .Where(p => !p.IsReturnParameter)
@@ -174,14 +174,13 @@ namespace Kistl.App.Extensions
                         CreateInvokeInfo(objType, mi, attr.EventName);
                     }
                 }
-
-                // PropertyInvocations
-                foreach (Property prop in objClass.Properties)
+            }
+            // PropertyInvocations
+            foreach (Property prop in objObjClass.Properties)
+            {
+                foreach (PropertyInvocation pi in prop.Invocations)
                 {
-                    foreach (PropertyInvocation pi in prop.Invocations)
-                    {
-                        CreateInvokeInfo(objType, pi, "On" + prop.PropertyName + "_" + pi.InvocationType);
-                    }
+                    CreateInvokeInfo(objType, pi, "On" + prop.PropertyName + "_" + pi.InvocationType);
                 }
             }
         }
@@ -220,7 +219,7 @@ namespace Kistl.App.Extensions
                     return;
                 }
 
-                EventInfo ei = objType.GetEvent(eventName);
+                EventInfo ei = objType.FindEvent(eventName);
                 if (ei == null)
                 {
                     Log.ErrorFormat("CLR Event {0} not found", eventName);

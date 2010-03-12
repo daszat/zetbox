@@ -174,8 +174,6 @@ namespace Kistl.API.Client
 
         private static List<IStreamable> ReceiveObjectList(BinaryReader sr)
         {
-            if (!sr.BaseStream.CanSeek) { throw new ArgumentOutOfRangeException("sr", "can only use BinaryReader with seekable base stream"); }
-
             List<IStreamable> result = new List<IStreamable>();
             bool cont = true;
             BinarySerializer.FromStream(out cont, sr);

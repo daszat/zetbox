@@ -279,7 +279,11 @@ namespace Kistl.Server.SchemaManagement
             {
                 Log.DebugFormat("Relation: {0} ({1})", rel.GetAssociationName(), rel.GetRelationType());
 
-                if (rel.GetRelationType() == RelationType.one_n)
+                if (Case.IsChangeRelationType(rel))
+                {
+                    Case.DoChangeRelationType(rel);
+                }
+                else if (rel.GetRelationType() == RelationType.one_n)
                 {
                     if (Case.IsNew_1_N_Relation(rel))
                     {

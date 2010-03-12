@@ -20,14 +20,14 @@ namespace at.dasz.DocumentManagement
     using System.Data.Objects.DataClasses;
 
     /// <summary>
-    /// File with changeable content
+    /// Static file. Content cannot be changed
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="DynamicFile")]
-    [System.Diagnostics.DebuggerDisplay("DynamicFile")]
-    public class DynamicFile__Implementation__ : at.dasz.DocumentManagement.File__Implementation__, DynamicFile
+    [EdmEntityType(NamespaceName="Model", Name="StaticFile")]
+    [System.Diagnostics.DebuggerDisplay("StaticFile")]
+    public class StaticFile__Implementation__ : at.dasz.DocumentManagement.File__Implementation__, StaticFile
     {
     
-		public DynamicFile__Implementation__()
+		public StaticFile__Implementation__()
 		{
         }
 
@@ -35,13 +35,13 @@ namespace at.dasz.DocumentManagement
         /// <summary>
         /// Handles the change of the current blob
         /// </summary>
-		[EventBasedMethod("OnHandleBlobChange_DynamicFile")]
+		[EventBasedMethod("OnHandleBlobChange_StaticFile")]
 		public override Kistl.App.Base.Blob HandleBlobChange(Kistl.App.Base.Blob oldBlob, Kistl.App.Base.Blob newBlob) 
         {
             var e = new MethodReturnEventArgs<Kistl.App.Base.Blob>();
-            if (OnHandleBlobChange_DynamicFile != null)
+            if (OnHandleBlobChange_StaticFile != null)
             {
-                OnHandleBlobChange_DynamicFile(this, e, oldBlob, newBlob);
+                OnHandleBlobChange_StaticFile(this, e, oldBlob, newBlob);
             }
             else
             {
@@ -49,61 +49,61 @@ namespace at.dasz.DocumentManagement
             }
             return e.Result;
         }
-		public static event HandleBlobChange_Handler<DynamicFile> OnHandleBlobChange_DynamicFile;
+		public static event HandleBlobChange_Handler<StaticFile> OnHandleBlobChange_StaticFile;
 
 
 
         /// <summary>
         /// Opens the Content readonly
         /// </summary>
-		[EventBasedMethod("OnOpen_DynamicFile")]
+		[EventBasedMethod("OnOpen_StaticFile")]
 		public override void Open() 
 		{
             // base.Open();
-            if (OnOpen_DynamicFile != null)
+            if (OnOpen_StaticFile != null)
             {
-				OnOpen_DynamicFile(this);
+				OnOpen_StaticFile(this);
 			}
 			else
 			{
 			    base.Open();
 			}
         }
-		public static event Open_Handler<DynamicFile> OnOpen_DynamicFile;
+		public static event Open_Handler<StaticFile> OnOpen_StaticFile;
 
 
 
         /// <summary>
         /// Uploads a new Content
         /// </summary>
-		[EventBasedMethod("OnUpload_DynamicFile")]
+		[EventBasedMethod("OnUpload_StaticFile")]
 		public override void Upload() 
 		{
             // base.Upload();
-            if (OnUpload_DynamicFile != null)
+            if (OnUpload_StaticFile != null)
             {
-				OnUpload_DynamicFile(this);
+				OnUpload_StaticFile(this);
 			}
 			else
 			{
 			    base.Upload();
 			}
         }
-		public static event Upload_Handler<DynamicFile> OnUpload_DynamicFile;
+		public static event Upload_Handler<StaticFile> OnUpload_StaticFile;
 
 
 
 		public override InterfaceType GetInterfaceType()
 		{
-			return new InterfaceType(typeof(DynamicFile));
+			return new InterfaceType(typeof(StaticFile));
 		}
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{
 			base.ApplyChangesFrom(obj);
-			var other = (DynamicFile)obj;
-			var otherImpl = (DynamicFile__Implementation__)obj;
-			var me = (DynamicFile)this;
+			var other = (StaticFile)obj;
+			var otherImpl = (StaticFile__Implementation__)obj;
+			var me = (StaticFile)this;
 
 		}
 
@@ -111,50 +111,50 @@ namespace at.dasz.DocumentManagement
    		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
         [System.Diagnostics.DebuggerHidden()]
-        [EventBasedMethod("OnToString_DynamicFile")]
+        [EventBasedMethod("OnToString_StaticFile")]
         public override string ToString()
         {
             MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
             e.Result = base.ToString();
-            if (OnToString_DynamicFile != null)
+            if (OnToString_StaticFile != null)
             {
-                OnToString_DynamicFile(this, e);
+                OnToString_StaticFile(this, e);
             }
             return e.Result;
         }
-        public static event ToStringHandler<DynamicFile> OnToString_DynamicFile;
+        public static event ToStringHandler<StaticFile> OnToString_StaticFile;
 
-        [EventBasedMethod("OnPreSave_DynamicFile")]
+        [EventBasedMethod("OnPreSave_StaticFile")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_DynamicFile != null) OnPreSave_DynamicFile(this);
+            if (OnPreSave_StaticFile != null) OnPreSave_StaticFile(this);
         }
-        public static event ObjectEventHandler<DynamicFile> OnPreSave_DynamicFile;
+        public static event ObjectEventHandler<StaticFile> OnPreSave_StaticFile;
 
-        [EventBasedMethod("OnPostSave_DynamicFile")]
+        [EventBasedMethod("OnPostSave_StaticFile")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_DynamicFile != null) OnPostSave_DynamicFile(this);
+            if (OnPostSave_StaticFile != null) OnPostSave_StaticFile(this);
         }
-        public static event ObjectEventHandler<DynamicFile> OnPostSave_DynamicFile;
+        public static event ObjectEventHandler<StaticFile> OnPostSave_StaticFile;
 
-        [EventBasedMethod("OnCreated_DynamicFile")]
+        [EventBasedMethod("OnCreated_StaticFile")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_DynamicFile != null) OnCreated_DynamicFile(this);
+            if (OnCreated_StaticFile != null) OnCreated_StaticFile(this);
         }
-        public static event ObjectEventHandler<DynamicFile> OnCreated_DynamicFile;
+        public static event ObjectEventHandler<StaticFile> OnCreated_StaticFile;
 
-        [EventBasedMethod("OnDeleting_DynamicFile")]
+        [EventBasedMethod("OnDeleting_StaticFile")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_DynamicFile != null) OnDeleting_DynamicFile(this);
+            if (OnDeleting_StaticFile != null) OnDeleting_StaticFile(this);
         }
-        public static event ObjectEventHandler<DynamicFile> OnDeleting_DynamicFile;
+        public static event ObjectEventHandler<StaticFile> OnDeleting_StaticFile;
 
 
 
