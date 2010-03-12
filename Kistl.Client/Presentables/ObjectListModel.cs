@@ -160,7 +160,7 @@ namespace Kistl.Client.Presentables
         {
             get
             {
-                return _property.RelationEnd.HasPersistentOrder;
+                return _property.RelationEnd.Parent.GetOtherEnd(_property.RelationEnd).HasPersistentOrder;
             }
         }
 
