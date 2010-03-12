@@ -383,6 +383,74 @@ namespace Kistl.App.Base
 		public static event PropertyPostSetterHandler<Kistl.App.Base.Relation, DateTime?> OnChangedOn_PostSetter;
 
         /// <summary>
+        /// The ContainmentSpecification of this Relation.
+        /// </summary>
+        // enumeration property
+   		// Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.EnumerationPropertyTemplate
+        // implement the user-visible interface
+        public Kistl.App.Base.ContainmentSpecification Containment
+        {
+            get
+            {
+				var __value = _Containment;
+				if(OnContainment_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<Kistl.App.Base.ContainmentSpecification>(__value);
+					OnContainment_Getter(this, e);
+					__value = e.Result;
+				}
+                return __value;
+            }
+            set
+            {
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (_Containment != value)
+                {
+					var __oldValue = _Containment;
+					var __newValue = value;
+                    if(OnContainment_PreSetter != null)
+                    {
+						var e = new PropertyPreSetterEventArgs<Kistl.App.Base.ContainmentSpecification>(__oldValue, __newValue);
+						OnContainment_PreSetter(this, e);
+						__newValue = e.Result;
+                    }
+					
+                    NotifyPropertyChanging("Containment", "Containment__Implementation__", __oldValue, __newValue);
+                    _Containment = value;
+                    NotifyPropertyChanged("Containment", "Containment__Implementation__", __oldValue, __newValue);
+                    if(OnContainment_PostSetter != null)
+                    {
+						var e = new PropertyPostSetterEventArgs<Kistl.App.Base.ContainmentSpecification>(__oldValue, __newValue);
+						OnContainment_PostSetter(this, e);
+                    }
+                    
+                }
+            }
+        }
+        
+        /// <summary>backing store for Containment</summary>
+        private Kistl.App.Base.ContainmentSpecification _Containment;
+        
+        /// <summary>EF sees only this property, for Containment</summary>
+        [XmlIgnore()]
+        [EdmScalarProperty()]
+        public int Containment__Implementation__
+        {
+            get
+            {
+                return (int)this.Containment;
+            }
+            set
+            {
+                this.Containment = (Kistl.App.Base.ContainmentSpecification)value;
+            }
+        }
+        
+		public static event PropertyGetterHandler<Kistl.App.Base.Relation, Kistl.App.Base.ContainmentSpecification> OnContainment_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.Relation, Kistl.App.Base.ContainmentSpecification> OnContainment_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.Relation, Kistl.App.Base.ContainmentSpecification> OnContainment_PostSetter;
+
+        /// <summary>
         /// Identity which created this object
         /// </summary>
     /*
@@ -974,6 +1042,7 @@ namespace Kistl.App.Base
 			var me = (Relation)this;
 
 			me.ChangedOn = other.ChangedOn;
+			me.Containment = other.Containment;
 			me.CreatedOn = other.CreatedOn;
 			me.Description = other.Description;
 			me.ExportGuid = other.ExportGuid;
@@ -1072,6 +1141,15 @@ namespace Kistl.App.Base
 					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("4629cba1-9162-4d9f-a815-0b0ed96f95be")).Constraints
 						.Where(c => !c.IsValid(this, this.ChangedOn))
 						.Select(c => c.GetErrorText(this, this.ChangedOn))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "Containment":
+				{
+					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("eed9955a-11a3-4c25-b0bb-e01ecd14b26f")).Constraints
+						.Where(c => !c.IsValid(this, this.Containment))
+						.Select(c => c.GetErrorText(this, this.Containment))
 						.ToArray();
 					
 					return String.Join("; ", errors);
@@ -1203,6 +1281,7 @@ namespace Kistl.App.Base
 			}
             BinarySerializer.ToStream(ChangedBy != null ? ChangedBy.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._ChangedOn, binStream);
+            BinarySerializer.ToStream((int?)((Relation)this).Containment, binStream);
             BinarySerializer.ToStream(CreatedBy != null ? CreatedBy.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._CreatedOn, binStream);
             BinarySerializer.ToStream(this._Description, binStream);
@@ -1211,7 +1290,7 @@ namespace Kistl.App.Base
                 BinarySerializer.ToStream(this._ExportGuid, binStream);
             }
             BinarySerializer.ToStream(Module != null ? Module.ID : (int?)null, binStream);
-            BinarySerializer.ToStream((int)((Relation)this).Storage, binStream);
+            BinarySerializer.ToStream((int?)((Relation)this).Storage, binStream);
             BinarySerializer.ToStream(this._Verb, binStream);
         }
 
@@ -1223,6 +1302,11 @@ namespace Kistl.App.Base
             BinarySerializer.FromStream(out this._fk_B, binStream);
             BinarySerializer.FromStream(out this._fk_ChangedBy, binStream);
             BinarySerializer.FromStream(out this._ChangedOn, binStream);
+			{
+				int? baseValue;
+				BinarySerializer.FromStream(out baseValue, binStream);
+				((Relation)this).Containment = (Kistl.App.Base.ContainmentSpecification)baseValue;
+			}
             BinarySerializer.FromStream(out this._fk_CreatedBy, binStream);
             BinarySerializer.FromStream(out this._CreatedOn, binStream);
             BinarySerializer.FromStream(out this._Description, binStream);
@@ -1231,7 +1315,11 @@ namespace Kistl.App.Base
                 BinarySerializer.FromStream(out this._ExportGuid, binStream);
             }
             BinarySerializer.FromStream(out this._fk_Module, binStream);
-            BinarySerializer.FromStreamConverter(v => ((Relation)this).Storage = (Kistl.App.Base.StorageType)v, binStream);
+			{
+				int? baseValue;
+				BinarySerializer.FromStream(out baseValue, binStream);
+				((Relation)this).Storage = (Kistl.App.Base.StorageType)baseValue;
+			}
             BinarySerializer.FromStream(out this._Verb, binStream);
         }
 
@@ -1243,6 +1331,7 @@ namespace Kistl.App.Base
             XmlStreamer.ToStream(B != null ? B.ID : (int?)null, xml, "B", "Kistl.App.Base");
             XmlStreamer.ToStream(ChangedBy != null ? ChangedBy.ID : (int?)null, xml, "ChangedBy", "Kistl.App.Base");
             XmlStreamer.ToStream(this._ChangedOn, xml, "ChangedOn", "Kistl.App.Base");
+            XmlStreamer.ToStream((int?)this.Containment, xml, "Containment", "Kistl.App.Base");
             XmlStreamer.ToStream(CreatedBy != null ? CreatedBy.ID : (int?)null, xml, "CreatedBy", "Kistl.App.Base");
             XmlStreamer.ToStream(this._CreatedOn, xml, "CreatedOn", "Kistl.App.Base");
             XmlStreamer.ToStream(this._Description, xml, "Description", "Kistl.App.Base");
@@ -1251,7 +1340,7 @@ namespace Kistl.App.Base
                 XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
             }
             XmlStreamer.ToStream(Module != null ? Module.ID : (int?)null, xml, "Module", "Kistl.App.Base");
-            XmlStreamer.ToStream((int)this.Storage, xml, "Storage", "Kistl.App.Base");
+            XmlStreamer.ToStream((int?)this.Storage, xml, "Storage", "Kistl.App.Base");
             XmlStreamer.ToStream(this._Verb, xml, "Verb", "Kistl.App.Base");
         }
 
@@ -1263,6 +1352,7 @@ namespace Kistl.App.Base
             XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_ChangedBy, xml, "ChangedBy", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._ChangedOn, xml, "ChangedOn", "Kistl.App.Base");
+            XmlStreamer.FromStreamConverter(v => ((Relation)this).Containment = (Kistl.App.Base.ContainmentSpecification)v, xml, "Containment", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_CreatedBy, xml, "CreatedBy", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._CreatedOn, xml, "CreatedOn", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._Description, xml, "Description", "Kistl.App.Base");
@@ -1283,12 +1373,13 @@ namespace Kistl.App.Base
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(B != null ? B.ExportGuid : (Guid?)null, xml, "B", "Kistl.App.Base");
     
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._ChangedOn, xml, "ChangedOn", "Kistl.App.Base");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream((int?)this.Containment, xml, "Containment", "Kistl.App.Base");
     
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._CreatedOn, xml, "CreatedOn", "Kistl.App.Base");
     
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._Description, xml, "Description", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(Module != null ? Module.ExportGuid : (Guid?)null, xml, "Module", "Kistl.App.Base");
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream((int)this.Storage, xml, "Storage", "Kistl.App.Base");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream((int?)this.Storage, xml, "Storage", "Kistl.App.Base");
     
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._Verb, xml, "Verb", "Kistl.App.Base");
         }
@@ -1298,6 +1389,7 @@ namespace Kistl.App.Base
             XmlStreamer.FromStream(ref this._fk_guid_A, xml, "A", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_guid_B, xml, "B", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._ChangedOn, xml, "ChangedOn", "Kistl.App.Base");
+            XmlStreamer.FromStreamConverter(v => ((Relation)this).Containment = (Kistl.App.Base.ContainmentSpecification)v, xml, "Containment", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._CreatedOn, xml, "CreatedOn", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._Description, xml, "Description", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");

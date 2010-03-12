@@ -831,7 +831,7 @@ namespace Kistl.App.Base
             BinarySerializer.ToStream(this._ChangedOn, binStream);
             BinarySerializer.ToStream(CreatedBy != null ? CreatedBy.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._CreatedOn, binStream);
-            BinarySerializer.ToStream((int)((Assembly)this).DeploymentRestrictions, binStream);
+            BinarySerializer.ToStream((int?)((Assembly)this).DeploymentRestrictions, binStream);
             BinarySerializer.ToStream(this._isExportGuidSet, binStream);
             if (this._isExportGuidSet) {
                 BinarySerializer.ToStream(this._ExportGuid, binStream);
@@ -848,7 +848,11 @@ namespace Kistl.App.Base
             BinarySerializer.FromStream(out this._ChangedOn, binStream);
             BinarySerializer.FromStream(out this._fk_CreatedBy, binStream);
             BinarySerializer.FromStream(out this._CreatedOn, binStream);
-            BinarySerializer.FromStreamConverter(v => ((Assembly)this).DeploymentRestrictions = (Kistl.App.Base.DeploymentRestriction)v, binStream);
+			{
+				int? baseValue;
+				BinarySerializer.FromStream(out baseValue, binStream);
+				((Assembly)this).DeploymentRestrictions = (Kistl.App.Base.DeploymentRestriction)baseValue;
+			}
             BinarySerializer.FromStream(out this._isExportGuidSet, binStream);
             if (this._isExportGuidSet) {
                 BinarySerializer.FromStream(out this._ExportGuid, binStream);
@@ -865,7 +869,7 @@ namespace Kistl.App.Base
             XmlStreamer.ToStream(this._ChangedOn, xml, "ChangedOn", "Kistl.App.Base");
             XmlStreamer.ToStream(CreatedBy != null ? CreatedBy.ID : (int?)null, xml, "CreatedBy", "Kistl.App.Base");
             XmlStreamer.ToStream(this._CreatedOn, xml, "CreatedOn", "Kistl.App.Base");
-            XmlStreamer.ToStream((int)this.DeploymentRestrictions, xml, "DeploymentRestrictions", "Kistl.App.Base");
+            XmlStreamer.ToStream((int?)this.DeploymentRestrictions, xml, "DeploymentRestrictions", "Kistl.App.Base");
             XmlStreamer.ToStream(this._isExportGuidSet, xml, "IsExportGuidSet", "Kistl.App.Base");
             if (this._isExportGuidSet) {
                 XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
@@ -900,7 +904,7 @@ namespace Kistl.App.Base
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._ChangedOn, xml, "ChangedOn", "Kistl.App.Base");
     
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._CreatedOn, xml, "CreatedOn", "Kistl.App.Base");
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream((int)this.DeploymentRestrictions, xml, "DeploymentRestrictions", "Kistl.App.Base");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream((int?)this.DeploymentRestrictions, xml, "DeploymentRestrictions", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(Module != null ? Module.ExportGuid : (Guid?)null, xml, "Module", "Kistl.App.Base");
         }
 

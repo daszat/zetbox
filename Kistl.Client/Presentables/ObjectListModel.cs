@@ -41,9 +41,9 @@ namespace Kistl.Client.Presentables
             _list = _collection as IList;
 
             var relEnd = _property.RelationEnd;
-            var rel = _property.RelationEnd.Parent;
+            var rel = _property.RelationEnd.AParent ?? _property.RelationEnd.BParent;
             var otherEnd = rel.GetOtherEnd(relEnd);
-            if (otherEnd.Multiplicity.UpperBound() > 1)
+            if (otherEnd.Multiplicity.UpperBound() > 1 && rel.Containment != ContainmentSpecification.Independent)
             {
                 _allowAddExisting = false;
             }

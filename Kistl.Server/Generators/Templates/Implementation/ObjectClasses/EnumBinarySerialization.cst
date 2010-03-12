@@ -22,20 +22,28 @@
     string enumName =  prop.Enumeration.Module.Namespace + "." +  prop.Enumeration.ClassName;
 	string methodName = direction.ToString();
 	
+	////
+	////  This class always serializes as int? to avoid complicating the code
+	////
+	
 	switch(direction){
 		case SerializerDirection.ToStream:
 %>
-            BinarySerializer.<%= methodName %>((int)((<%= interfaceName %>)this).<%= memberName %>, <%= streamName %>);
+            BinarySerializer.<%= methodName %>((int?)((<%= interfaceName %>)this).<%= memberName %>, <%= streamName %>);
 <%
 			break;
 		case SerializerDirection.FromStream:
 %>
-            BinarySerializer.<%= methodName %>Converter(v => ((<%= interfaceName %>)this).<%= memberName %> = (<%= enumName %>)v, <%= streamName %>);
+			{
+				int? baseValue;
+				BinarySerializer.<%= methodName %>(out baseValue, <%= streamName %>);
+				((<%= interfaceName %>)this).<%= memberName %> = (<%= enumName %>)baseValue;
+			}
 <%
 			break;
 		case SerializerDirection.ToXmlStream:
 %>
-            XmlStreamer.ToStream((int)this.<%= memberName %>, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
+            XmlStreamer.ToStream((int?)this.<%= memberName %>, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
 <%
             break;
 		case SerializerDirection.FromXmlStream:
@@ -46,7 +54,7 @@
             break;
 		case SerializerDirection.Export:
 %>
-            if (modules.Contains("*") || modules.Contains("<%= xmlnamespace %>")) XmlStreamer.ToStream((int)this.<%= memberName %>, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
+            if (modules.Contains("*") || modules.Contains("<%= xmlnamespace %>")) XmlStreamer.ToStream((int?)this.<%= memberName %>, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
 <%
             break;
 		default:

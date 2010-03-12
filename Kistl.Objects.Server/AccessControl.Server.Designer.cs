@@ -744,11 +744,11 @@ namespace Kistl.App.Base
         /// <summary>EF sees only this property, for Rights</summary>
         [XmlIgnore()]
         [EdmScalarProperty()]
-        public int Rights__Implementation__
+        public int? Rights__Implementation__
         {
             get
             {
-                return (int)this.Rights;
+                return (int?)this.Rights;
             }
             set
             {
@@ -987,7 +987,7 @@ namespace Kistl.App.Base
             BinarySerializer.ToStream(Module != null ? Module.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._Name, binStream);
             BinarySerializer.ToStream(ObjectClass != null ? ObjectClass.ID : (int?)null, binStream);
-            BinarySerializer.ToStream((int)((AccessControl)this).Rights, binStream);
+            BinarySerializer.ToStream((int?)((AccessControl)this).Rights, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
@@ -1006,7 +1006,11 @@ namespace Kistl.App.Base
             BinarySerializer.FromStream(out this._fk_Module, binStream);
             BinarySerializer.FromStream(out this._Name, binStream);
             BinarySerializer.FromStream(out this._fk_ObjectClass, binStream);
-            BinarySerializer.FromStreamConverter(v => ((AccessControl)this).Rights = (Kistl.App.Base.AccessRights)v, binStream);
+			{
+				int? baseValue;
+				BinarySerializer.FromStream(out baseValue, binStream);
+				((AccessControl)this).Rights = (Kistl.App.Base.AccessRights)baseValue;
+			}
         }
 
         public override void ToStream(System.Xml.XmlWriter xml)
@@ -1025,7 +1029,7 @@ namespace Kistl.App.Base
             XmlStreamer.ToStream(Module != null ? Module.ID : (int?)null, xml, "Module", "Kistl.App.Base");
             XmlStreamer.ToStream(this._Name, xml, "Name", "Kistl.App.Base");
             XmlStreamer.ToStream(ObjectClass != null ? ObjectClass.ID : (int?)null, xml, "ObjectClass", "Kistl.App.Base");
-            XmlStreamer.ToStream((int)this.Rights, xml, "Rights", "Kistl.App.Base");
+            XmlStreamer.ToStream((int?)this.Rights, xml, "Rights", "Kistl.App.Base");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
@@ -1061,7 +1065,7 @@ namespace Kistl.App.Base
     
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._Name, xml, "Name", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(ObjectClass != null ? ObjectClass.ExportGuid : (Guid?)null, xml, "ObjectClass", "Kistl.App.Base");
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream((int)this.Rights, xml, "Rights", "Kistl.App.Base");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream((int?)this.Rights, xml, "Rights", "Kistl.App.Base");
         }
 
         public virtual void MergeImport(System.Xml.XmlReader xml)

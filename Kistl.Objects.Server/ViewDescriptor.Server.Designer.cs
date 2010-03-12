@@ -629,7 +629,7 @@ namespace Kistl.App.GUI
 				auxObjects.Add(Kind);
 			}
             BinarySerializer.ToStream(Module != null ? Module.ID : (int?)null, binStream);
-            BinarySerializer.ToStream((int)((ViewDescriptor)this).Toolkit, binStream);
+            BinarySerializer.ToStream((int?)((ViewDescriptor)this).Toolkit, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
@@ -643,7 +643,11 @@ namespace Kistl.App.GUI
             }
             BinarySerializer.FromStream(out this._fk_Kind, binStream);
             BinarySerializer.FromStream(out this._fk_Module, binStream);
-            BinarySerializer.FromStreamConverter(v => ((ViewDescriptor)this).Toolkit = (Kistl.App.GUI.Toolkit)v, binStream);
+			{
+				int? baseValue;
+				BinarySerializer.FromStream(out baseValue, binStream);
+				((ViewDescriptor)this).Toolkit = (Kistl.App.GUI.Toolkit)baseValue;
+			}
         }
 
         public override void ToStream(System.Xml.XmlWriter xml)
@@ -657,7 +661,7 @@ namespace Kistl.App.GUI
             }
             XmlStreamer.ToStream(Kind != null ? Kind.ID : (int?)null, xml, "Kind", "Kistl.App.GUI");
             XmlStreamer.ToStream(Module != null ? Module.ID : (int?)null, xml, "Module", "Kistl.App.GUI");
-            XmlStreamer.ToStream((int)this.Toolkit, xml, "Toolkit", "Kistl.App.GUI");
+            XmlStreamer.ToStream((int?)this.Toolkit, xml, "Toolkit", "Kistl.App.GUI");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
@@ -681,7 +685,7 @@ namespace Kistl.App.GUI
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(ControlRef != null ? ControlRef.ExportGuid : (Guid?)null, xml, "ControlRef", "Kistl.App.GUI");
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(Kind != null ? Kind.ExportGuid : (Guid?)null, xml, "Kind", "Kistl.App.GUI");
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(Module != null ? Module.ExportGuid : (Guid?)null, xml, "Module", "Kistl.App.GUI");
-            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream((int)this.Toolkit, xml, "Toolkit", "Kistl.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream((int?)this.Toolkit, xml, "Toolkit", "Kistl.App.GUI");
         }
 
         public virtual void MergeImport(System.Xml.XmlReader xml)

@@ -257,11 +257,11 @@ namespace at.dasz.CourseOrganiser
         /// <summary>EF sees only this property, for Period</summary>
         [XmlIgnore()]
         [EdmScalarProperty()]
-        public int Period__Implementation__
+        public int? Period__Implementation__
         {
             get
             {
-                return (int)this.Period;
+                return (int?)this.Period;
             }
             set
             {
@@ -518,7 +518,7 @@ namespace at.dasz.CourseOrganiser
             
             base.ToStream(binStream, auxObjects);
             BinarySerializer.ToStream(this._CourseName, binStream);
-            BinarySerializer.ToStream((int)((Semester)this).Period, binStream);
+            BinarySerializer.ToStream((int?)((Semester)this).Period, binStream);
             BinarySerializer.ToStream(this._Year, binStream);
         }
 
@@ -527,7 +527,11 @@ namespace at.dasz.CourseOrganiser
             
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._CourseName, binStream);
-            BinarySerializer.FromStreamConverter(v => ((Semester)this).Period = (at.dasz.CourseOrganiser.Periods)v, binStream);
+			{
+				int? baseValue;
+				BinarySerializer.FromStream(out baseValue, binStream);
+				((Semester)this).Period = (at.dasz.CourseOrganiser.Periods)baseValue;
+			}
             BinarySerializer.FromStream(out this._Year, binStream);
         }
 
@@ -536,7 +540,7 @@ namespace at.dasz.CourseOrganiser
             
             base.ToStream(xml);
             XmlStreamer.ToStream(this._CourseName, xml, "CourseName", "at.dasz.CourseOrganiser");
-            XmlStreamer.ToStream((int)this.Period, xml, "Period", "at.dasz.CourseOrganiser");
+            XmlStreamer.ToStream((int?)this.Period, xml, "Period", "at.dasz.CourseOrganiser");
             XmlStreamer.ToStream(this._Year, xml, "Year", "at.dasz.CourseOrganiser");
         }
 

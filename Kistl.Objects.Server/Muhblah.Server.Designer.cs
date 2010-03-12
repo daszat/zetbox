@@ -742,7 +742,7 @@ namespace Kistl.App.Test
             BinarySerializer.ToStream(TestCustomObjects_Nav != null ? TestCustomObjects_Nav.ID : (int?)null, binStream);
             BinarySerializer.ToStream(TestCustomObjects_One_Nav != null ? TestCustomObjects_One_Nav.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._TestDateTime, binStream);
-            BinarySerializer.ToStream((int)((Muhblah)this).TestEnum, binStream);
+            BinarySerializer.ToStream((int?)((Muhblah)this).TestEnum, binStream);
             BinarySerializer.ToStream(this._TestString, binStream);
         }
 
@@ -754,7 +754,11 @@ namespace Kistl.App.Test
             BinarySerializer.FromStream(out this._fk_TestCustomObjects_Nav, binStream);
             BinarySerializer.FromStream(out this._fk_TestCustomObjects_One_Nav, binStream);
             BinarySerializer.FromStream(out this._TestDateTime, binStream);
-            BinarySerializer.FromStreamConverter(v => ((Muhblah)this).TestEnum = (Kistl.App.Test.TestEnum)v, binStream);
+			{
+				int? baseValue;
+				BinarySerializer.FromStream(out baseValue, binStream);
+				((Muhblah)this).TestEnum = (Kistl.App.Test.TestEnum)baseValue;
+			}
             BinarySerializer.FromStream(out this._TestString, binStream);
         }
 
@@ -766,7 +770,7 @@ namespace Kistl.App.Test
             XmlStreamer.ToStream(TestCustomObjects_Nav != null ? TestCustomObjects_Nav.ID : (int?)null, xml, "TestCustomObjects_Nav", "Kistl.App.Test");
             XmlStreamer.ToStream(TestCustomObjects_One_Nav != null ? TestCustomObjects_One_Nav.ID : (int?)null, xml, "TestCustomObjects_One_Nav", "Kistl.App.Test");
             XmlStreamer.ToStream(this._TestDateTime, xml, "TestDateTime", "Kistl.App.Test");
-            XmlStreamer.ToStream((int)this.TestEnum, xml, "TestEnum", "Kistl.App.Test");
+            XmlStreamer.ToStream((int?)this.TestEnum, xml, "TestEnum", "Kistl.App.Test");
             XmlStreamer.ToStream(this._TestString, xml, "TestString", "Kistl.App.Test");
         }
 

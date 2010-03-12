@@ -1956,6 +1956,7 @@
     <Property Name="fk_ChangedBy" Type="int" />
     <Property Name="fk_CreatedBy" Type="int" />
     <Property Name="ChangedOn" Type="datetime" Nullable="true" />
+    <Property Name="Containment" Type="int" Nullable="false" />
     <Property Name="CreatedOn" Type="datetime" Nullable="true" />
     <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="true" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />

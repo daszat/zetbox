@@ -41,37 +41,45 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
     string enumName =  prop.Enumeration.Module.Namespace + "." +  prop.Enumeration.ClassName;
 	string methodName = direction.ToString();
 	
+	////
+	////  This class always serializes as int? to avoid complicating the code
+	////
+	
 	switch(direction){
 		case SerializerDirection.ToStream:
 
-#line 28 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\EnumBinarySerialization.cst"
-this.WriteObjects("            BinarySerializer.",  methodName , "((int)((",  interfaceName , ")this).",  memberName , ", ",  streamName , ");\r\n");
-#line 30 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\EnumBinarySerialization.cst"
+#line 32 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\EnumBinarySerialization.cst"
+this.WriteObjects("            BinarySerializer.",  methodName , "((int?)((",  interfaceName , ")this).",  memberName , ", ",  streamName , ");\r\n");
+#line 34 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\EnumBinarySerialization.cst"
 break;
 		case SerializerDirection.FromStream:
 
-#line 33 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\EnumBinarySerialization.cst"
-this.WriteObjects("            BinarySerializer.",  methodName , "Converter(v => ((",  interfaceName , ")this).",  memberName , " = (",  enumName , ")v, ",  streamName , ");\r\n");
-#line 35 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\EnumBinarySerialization.cst"
+#line 37 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\EnumBinarySerialization.cst"
+this.WriteObjects("			{\r\n");
+this.WriteObjects("				int? baseValue;\r\n");
+this.WriteObjects("				BinarySerializer.",  methodName , "(out baseValue, ",  streamName , ");\r\n");
+this.WriteObjects("				((",  interfaceName , ")this).",  memberName , " = (",  enumName , ")baseValue;\r\n");
+this.WriteObjects("			}\r\n");
+#line 43 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\EnumBinarySerialization.cst"
 break;
 		case SerializerDirection.ToXmlStream:
 
-#line 38 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\EnumBinarySerialization.cst"
-this.WriteObjects("            XmlStreamer.ToStream((int)this.",  memberName , ", ",  streamName , ", \"",  xmlname , "\", \"",  xmlnamespace , "\");\r\n");
-#line 40 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\EnumBinarySerialization.cst"
+#line 46 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\EnumBinarySerialization.cst"
+this.WriteObjects("            XmlStreamer.ToStream((int?)this.",  memberName , ", ",  streamName , ", \"",  xmlname , "\", \"",  xmlnamespace , "\");\r\n");
+#line 48 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\EnumBinarySerialization.cst"
 break;
 		case SerializerDirection.FromXmlStream:
 		case SerializerDirection.MergeImport:
 
-#line 44 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\EnumBinarySerialization.cst"
+#line 52 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\EnumBinarySerialization.cst"
 this.WriteObjects("            XmlStreamer.FromStreamConverter(v => ((",  interfaceName , ")this).",  memberName , " = (",  enumName , ")v, ",  streamName , ", \"",  xmlname , "\", \"",  xmlnamespace , "\");\r\n");
-#line 46 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\EnumBinarySerialization.cst"
+#line 54 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\EnumBinarySerialization.cst"
 break;
 		case SerializerDirection.Export:
 
-#line 49 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\EnumBinarySerialization.cst"
-this.WriteObjects("            if (modules.Contains(\"*\") || modules.Contains(\"",  xmlnamespace , "\")) XmlStreamer.ToStream((int)this.",  memberName , ", ",  streamName , ", \"",  xmlname , "\", \"",  xmlnamespace , "\");\r\n");
-#line 51 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\EnumBinarySerialization.cst"
+#line 57 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\EnumBinarySerialization.cst"
+this.WriteObjects("            if (modules.Contains(\"*\") || modules.Contains(\"",  xmlnamespace , "\")) XmlStreamer.ToStream((int?)this.",  memberName , ", ",  streamName , ", \"",  xmlname , "\", \"",  xmlnamespace , "\");\r\n");
+#line 59 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\EnumBinarySerialization.cst"
 break;
 		default:
 			throw new ArgumentOutOfRangeException("direction");

@@ -1485,6 +1485,7 @@
                         FromRole="Relation"
                         ToRole="ChangedBy" />
     <Property Name="ChangedOn" Type="DateTime" Nullable="true" />
+    <Property Name="Containment__Implementation__" Type="Int32" Nullable="false" />
     <NavigationProperty Name="CreatedBy__Implementation__"
                         Relationship="Model.FK_Relation_was_CreatedBy"
                         FromRole="Relation"

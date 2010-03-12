@@ -41,6 +41,10 @@
                         <view:LabeledView DockPanel.Dock="Top"
                                           Margin="5,0,5,0"
                                           DataContext="{Binding PropertyModelsByName[Storage]}" />
+                    
+                        <view:LabeledView DockPanel.Dock="Top"
+                                          Margin="5,0,5,0"
+                                          DataContext="{Binding PropertyModelsByName[Containment]}" />
                     </DockPanel>
                 </GroupBox>
 

@@ -3,6 +3,7 @@
 	ClassName="Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.EnumerationPropertyTemplate" 
 	Inherits="Kistl.Server.Generators.KistlCodeTemplate" %>
 <%@ Import Namespace="System" %>
+<%@ Import Namespace="System.Linq" %>
 <%@ Import Namespace="Kistl.API" %>
 <%@ Import Namespace="Kistl.API.Server" %>
 <%@ Import Namespace="Kistl.App.Base" %>
@@ -20,6 +21,7 @@
 	string efName = name + Kistl.API.Helper.ImplementationSuffix;
 	string backingName = "_" + name;
 
+	bool isNullable = prop.Constraints.OfType<NotNullableConstraint>().Count() == 0;
 	string enumType = prop.ReferencedTypeAsCSharp();
 	string eventName = "On" + name;
 
@@ -96,11 +98,11 @@
         /// <summary>EF sees only this property, for <%= name %></summary>
         [XmlIgnore()]
         [EdmScalarProperty()]
-        public int <%= efName %>
+        public int<%= isNullable ? "?" : String.Empty %> <%= efName %>
         {
             get
             {
-                return (int)this.<%= name %>;
+                return (int<%= isNullable ? "?" : String.Empty %>)this.<%= name %>;
             }
             set
             {

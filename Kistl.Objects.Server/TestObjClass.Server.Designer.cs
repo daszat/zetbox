@@ -478,7 +478,7 @@ namespace Kistl.App.Test
             BinarySerializer.ToStream(this._MyIntProperty, binStream);
             BinarySerializer.ToStream(ObjectProp != null ? ObjectProp.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._StringProp, binStream);
-            BinarySerializer.ToStream((int)((TestObjClass)this).TestEnumProp, binStream);
+            BinarySerializer.ToStream((int?)((TestObjClass)this).TestEnumProp, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
@@ -488,7 +488,11 @@ namespace Kistl.App.Test
             BinarySerializer.FromStream(out this._MyIntProperty, binStream);
             BinarySerializer.FromStream(out this._fk_ObjectProp, binStream);
             BinarySerializer.FromStream(out this._StringProp, binStream);
-            BinarySerializer.FromStreamConverter(v => ((TestObjClass)this).TestEnumProp = (Kistl.App.Test.TestEnum)v, binStream);
+			{
+				int? baseValue;
+				BinarySerializer.FromStream(out baseValue, binStream);
+				((TestObjClass)this).TestEnumProp = (Kistl.App.Test.TestEnum)baseValue;
+			}
         }
 
         public override void ToStream(System.Xml.XmlWriter xml)
@@ -498,7 +502,7 @@ namespace Kistl.App.Test
             XmlStreamer.ToStream(this._MyIntProperty, xml, "MyIntProperty", "Kistl.App.Test");
             XmlStreamer.ToStream(ObjectProp != null ? ObjectProp.ID : (int?)null, xml, "ObjectProp", "Kistl.App.Test");
             XmlStreamer.ToStream(this._StringProp, xml, "StringProp", "Kistl.App.Test");
-            XmlStreamer.ToStream((int)this.TestEnumProp, xml, "TestEnumProp", "Kistl.App.Test");
+            XmlStreamer.ToStream((int?)this.TestEnumProp, xml, "TestEnumProp", "Kistl.App.Test");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)

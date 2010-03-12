@@ -966,7 +966,7 @@ namespace Kistl.App.Base
                 BinarySerializer.ToStream(this._ExportGuid, binStream);
             }
             BinarySerializer.ToStream(Implementor != null ? Implementor.ID : (int?)null, binStream);
-            BinarySerializer.ToStream((int)((PropertyInvocation)this).InvocationType, binStream);
+            BinarySerializer.ToStream((int?)((PropertyInvocation)this).InvocationType, binStream);
             BinarySerializer.ToStream(InvokeOnProperty != null ? InvokeOnProperty.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._MemberName, binStream);
         }
@@ -984,7 +984,11 @@ namespace Kistl.App.Base
                 BinarySerializer.FromStream(out this._ExportGuid, binStream);
             }
             BinarySerializer.FromStream(out this._fk_Implementor, binStream);
-            BinarySerializer.FromStreamConverter(v => ((PropertyInvocation)this).InvocationType = (Kistl.App.Base.PropertyInvocationType)v, binStream);
+			{
+				int? baseValue;
+				BinarySerializer.FromStream(out baseValue, binStream);
+				((PropertyInvocation)this).InvocationType = (Kistl.App.Base.PropertyInvocationType)baseValue;
+			}
             BinarySerializer.FromStream(out this._fk_InvokeOnProperty, binStream);
             BinarySerializer.FromStream(out this._MemberName, binStream);
         }
@@ -1002,7 +1006,7 @@ namespace Kistl.App.Base
                 XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
             }
             XmlStreamer.ToStream(Implementor != null ? Implementor.ID : (int?)null, xml, "Implementor", "Kistl.App.Base");
-            XmlStreamer.ToStream((int)this.InvocationType, xml, "InvocationType", "Kistl.App.Base");
+            XmlStreamer.ToStream((int?)this.InvocationType, xml, "InvocationType", "Kistl.App.Base");
             XmlStreamer.ToStream(InvokeOnProperty != null ? InvokeOnProperty.ID : (int?)null, xml, "InvokeOnProperty", "Kistl.App.Base");
             XmlStreamer.ToStream(this._MemberName, xml, "MemberName", "Kistl.App.Base");
         }
@@ -1034,7 +1038,7 @@ namespace Kistl.App.Base
     
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._CreatedOn, xml, "CreatedOn", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(Implementor != null ? Implementor.ExportGuid : (Guid?)null, xml, "Implementor", "Kistl.App.Base");
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream((int)this.InvocationType, xml, "InvocationType", "Kistl.App.Base");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream((int?)this.InvocationType, xml, "InvocationType", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(InvokeOnProperty != null ? InvokeOnProperty.ExportGuid : (Guid?)null, xml, "InvokeOnProperty", "Kistl.App.Base");
     
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._MemberName, xml, "MemberName", "Kistl.App.Base");

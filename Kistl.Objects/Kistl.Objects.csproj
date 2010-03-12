@@ -167,6 +167,7 @@
     <Compile Include="IRenderer.Interface.Designer.cs" />
     <Compile Include="ITestInterface.Interface.Designer.cs" />
     <Compile Include="AccessRights.Interface.Designer.cs" />
+    <Compile Include="ContainmentSpecification.Interface.Designer.cs" />
     <Compile Include="DeploymentRestriction.Interface.Designer.cs" />
     <Compile Include="Multiplicity.Interface.Designer.cs" />
     <Compile Include="Periods.Interface.Designer.cs" />

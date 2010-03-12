@@ -28,6 +28,13 @@ namespace Kistl.App.Base
 			set;
 		}
         /// <summary>
+        /// The ContainmentSpecification of this Relation.
+        /// </summary>
+		Kistl.App.Base.ContainmentSpecification Containment {
+			get;
+			set;
+		}
+        /// <summary>
         /// Description of this Relation
         /// </summary>
 		string Description {

@@ -1253,7 +1253,7 @@ namespace Kistl.App.Base
                 BinarySerializer.ToStream(this._ExportGuid, binStream);
             }
             BinarySerializer.ToStream(this._HasPersistentOrder, binStream);
-            BinarySerializer.ToStream((int)((RelationEnd)this).Multiplicity, binStream);
+            BinarySerializer.ToStream((int?)((RelationEnd)this).Multiplicity, binStream);
             BinarySerializer.ToStream(Navigator != null ? Navigator.ID : (int?)null, binStream);
 			if (auxObjects != null) {
 				auxObjects.Add(Navigator);
@@ -1277,7 +1277,11 @@ namespace Kistl.App.Base
                 BinarySerializer.FromStream(out this._ExportGuid, binStream);
             }
             BinarySerializer.FromStream(out this._HasPersistentOrder, binStream);
-            BinarySerializer.FromStreamConverter(v => ((RelationEnd)this).Multiplicity = (Kistl.App.Base.Multiplicity)v, binStream);
+			{
+				int? baseValue;
+				BinarySerializer.FromStream(out baseValue, binStream);
+				((RelationEnd)this).Multiplicity = (Kistl.App.Base.Multiplicity)baseValue;
+			}
             BinarySerializer.FromStream(out this._fk_Navigator, binStream);
             BinarySerializer.FromStream(out this._RoleName, binStream);
             BinarySerializer.FromStream(out this._fk_Type, binStream);
@@ -1298,7 +1302,7 @@ namespace Kistl.App.Base
                 XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
             }
             XmlStreamer.ToStream(this._HasPersistentOrder, xml, "HasPersistentOrder", "Kistl.App.Base");
-            XmlStreamer.ToStream((int)this.Multiplicity, xml, "Multiplicity", "Kistl.App.Base");
+            XmlStreamer.ToStream((int?)this.Multiplicity, xml, "Multiplicity", "Kistl.App.Base");
             XmlStreamer.ToStream(Navigator != null ? Navigator.ID : (int?)null, xml, "Navigator", "Kistl.App.Base");
             XmlStreamer.ToStream(this._RoleName, xml, "RoleName", "Kistl.App.Base");
             XmlStreamer.ToStream(Type != null ? Type.ID : (int?)null, xml, "Type", "Kistl.App.Base");
@@ -1337,7 +1341,7 @@ namespace Kistl.App.Base
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._CreatedOn, xml, "CreatedOn", "Kistl.App.Base");
     
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._HasPersistentOrder, xml, "HasPersistentOrder", "Kistl.App.Base");
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream((int)this.Multiplicity, xml, "Multiplicity", "Kistl.App.Base");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream((int?)this.Multiplicity, xml, "Multiplicity", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(Navigator != null ? Navigator.ExportGuid : (Guid?)null, xml, "Navigator", "Kistl.App.Base");
     
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._RoleName, xml, "RoleName", "Kistl.App.Base");

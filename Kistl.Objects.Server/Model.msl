@@ -711,6 +711,7 @@
 	    <MappingFragment StoreEntitySet="Relation">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+<ScalarProperty Name="Containment__Implementation__" ColumnName="Containment" />
 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
 <ScalarProperty Name="Description" ColumnName="Description" />
 <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
