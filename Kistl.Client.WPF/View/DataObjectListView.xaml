@@ -37,8 +37,8 @@
         <WrapPanel DockPanel.Dock="Top"
                    Orientation="Horizontal">
             <ctrls:LoadingIndicator />
-            <Button Click="AddNewHandler">Add new ...</Button>
-            <Button Click="AddExistingItemHandler">Add existing ...</Button>
+            <Button Click="AddExistingItemHandler" Visibility="{Binding AllowAddExisting, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}">Add existing ...</Button>
+            <Button Click="AddNewHandler" Visibility="{Binding AllowAddNew, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}">Add new ...</Button>
             <Button Click="RemoveHandler">Remove selection from list</Button>
             <Button Click="DeleteHandler">Delete selection from data store</Button>
         </WrapPanel>

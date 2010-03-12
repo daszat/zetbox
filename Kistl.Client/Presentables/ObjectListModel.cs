@@ -39,6 +39,14 @@ namespace Kistl.Client.Presentables
             _notifier = _collection as INotifyCollectionChanged;
             // extract special references if available.
             _list = _collection as IList;
+
+            var relEnd = _property.RelationEnd;
+            var rel = _property.RelationEnd.Parent;
+            var otherEnd = rel.GetOtherEnd(relEnd);
+            if (otherEnd.Multiplicity.UpperBound() > 1)
+            {
+                _allowAddExisting = false;
+            }
         }
 
         #region Public interface and IReadOnlyValueModel<IReadOnlyObservableCollection<DataObjectModel>> Members
@@ -147,6 +155,40 @@ namespace Kistl.Client.Presentables
             get
             {
                 return _property.RelationEnd.HasPersistentOrder;
+            }
+        }
+
+        private bool _allowAddNew = true;
+        public bool AllowAddNew
+        {
+            get
+            {
+                return _allowAddNew;
+            }
+            set
+            {
+                if (_allowAddNew != value)
+                {
+                    _allowAddNew = value;
+                    OnPropertyChanged("AllowAddNew");
+                }
+            }
+        }
+
+        private bool _allowAddExisting = true;
+        public bool AllowAddExisting
+        {
+            get
+            {
+                return _allowAddExisting;
+            }
+            set
+            {
+                if (_allowAddExisting != value)
+                {
+                    _allowAddExisting = value;
+                    OnPropertyChanged("AllowAddExisting");
+                }
             }
         }
 
