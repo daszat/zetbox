@@ -31,6 +31,8 @@ namespace Kistl.IntegrationTests
                 try
                 {
                     var config = KistlConfig.FromFile("Kistl.IntegrationTests.Config.xml");
+                    config.Server.DocumentStore = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "Server");
+                    config.Client.DocumentStore = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "Client");
 
                     ResetDatabase(config);
 

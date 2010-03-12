@@ -208,6 +208,11 @@ namespace Kistl.API.Server
         {
             foreach (IDataObject obj in changedOrAdded)
             {
+                if (obj is Kistl.App.Base.Blob && obj.ObjectState == DataObjectState.Modified)
+                {
+                    throw new InvalidOperationException("Modifing a Kistl.App.Base.Blob is not allowed. Upload a new Blob instead.");
+                }
+
                 if (obj is Kistl.App.Base.IChangedBy)
                 {
                     var cb = (Kistl.App.Base.IChangedBy)obj;

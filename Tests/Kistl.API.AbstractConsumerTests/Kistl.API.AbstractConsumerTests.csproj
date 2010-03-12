@@ -55,6 +55,8 @@
     <Compile Include="AbstractContextTests.cs" />
     <Compile Include="AbstractListPropertiesTests.cs" />
     <Compile Include="BinarySerializers\should_work_with_ICompoundObjects.cs" />
+    <Compile Include="Blobs\BlobFixture.cs" />
+    <Compile Include="Blobs\when_using.cs" />
     <Compile Include="CompoundObjects\when_changing_a_compoundobject_list.cs" />
     <Compile Include="CompoundObjects\when_changing.cs" />
     <Compile Include="CompoundObjects\when_roundtrip.cs" />

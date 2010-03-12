@@ -39,6 +39,7 @@ namespace Kistl.Server.Tests
             using (Log.InfoTraceMethodCall("Starting up"))
             {
                 var config = KistlConfig.FromFile("Kistl.Server.Tests.Config.xml");
+                config.Server.DocumentStore = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "Server");
 
                 AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
 

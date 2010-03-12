@@ -30,6 +30,7 @@ namespace Kistl.DalProvider.EF.Tests
         public void Init()
         {
             var config = KistlConfig.FromFile("Kistl.DalProvider.EF.Tests.Config.xml");
+            config.Server.DocumentStore = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "Server");
 
             AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
 
