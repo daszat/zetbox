@@ -62,8 +62,8 @@ namespace Kistl.App.Base
         /// </summary>
     /*
     Relation: FK_Relation_hasA_A
-    A: ZeroOrOne Relation as Relation
-    B: ZeroOrOne RelationEnd as A
+    A: One Relation as Relation
+    B: One RelationEnd as A
     Preferred Storage: MergeIntoA
     */
         // object reference property
@@ -153,8 +153,8 @@ namespace Kistl.App.Base
         /// </summary>
     /*
     Relation: FK_Relation_hasB_B
-    A: ZeroOrOne Relation as Relation
-    B: ZeroOrOne RelationEnd as B
+    A: One Relation as Relation
+    B: One RelationEnd as B
     Preferred Storage: MergeIntoA
     */
         // object reference property

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2010-03-15T12:20:40.167Z" xmlns="http://dasz.at/Kistl">
+<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2010-03-15T12:47:18.347Z" xmlns="http://dasz.at/Kistl">
   <KistlBase:Module ExportGuid="110acbc0-652a-4adc-9de5-8baabfcf3637">
     <KistlBase:ChangedOn>2010-02-01T16:07:00.49Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2010-02-01T15:23:35.247Z</KistlBase:CreatedOn>
@@ -7313,20 +7313,20 @@
   </KistlBase:RelationEnd>
   <KistlBase:RelationEnd ExportGuid="c9a3cd17-11a9-487e-b9af-c8e88c9e51de">
     <KistlBase:AParent>918ea3af-d3da-4c67-b89f-c60915c65553</KistlBase:AParent>
-    <KistlBase:ChangedOn>2009-12-14T17:08:05.35Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2010-03-15T12:46:38.59Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.35Z</KistlBase:CreatedOn>
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
-    <KistlBase:Multiplicity>1</KistlBase:Multiplicity>
+    <KistlBase:Multiplicity>2</KistlBase:Multiplicity>
     <KistlBase:Navigator>d4429d3c-8fd1-468e-88d5-17abfd658d04</KistlBase:Navigator>
     <KistlBase:RoleName>Relation</KistlBase:RoleName>
     <KistlBase:Type>1c0e894f-4eb4-422f-8094-3095735b4917</KistlBase:Type>
   </KistlBase:RelationEnd>
   <KistlBase:RelationEnd ExportGuid="148a4638-801e-4fe8-ac83-cea08114076e">
     <KistlBase:AParent>b33de3e9-c788-43f9-acb8-5306ec869684</KistlBase:AParent>
-    <KistlBase:ChangedOn>2009-12-14T17:08:05.35Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2010-03-15T12:47:18.347Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.35Z</KistlBase:CreatedOn>
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
-    <KistlBase:Multiplicity>1</KistlBase:Multiplicity>
+    <KistlBase:Multiplicity>2</KistlBase:Multiplicity>
     <KistlBase:Navigator>20331803-079e-471e-ae45-f4d004aef48e</KistlBase:Navigator>
     <KistlBase:RoleName>Relation</KistlBase:RoleName>
     <KistlBase:Type>1c0e894f-4eb4-422f-8094-3095735b4917</KistlBase:Type>
@@ -7352,20 +7352,20 @@
   </KistlBase:RelationEnd>
   <KistlBase:RelationEnd ExportGuid="385711ad-5e97-40e9-9d1e-27dc1a60c8c5">
     <KistlBase:BParent>918ea3af-d3da-4c67-b89f-c60915c65553</KistlBase:BParent>
-    <KistlBase:ChangedOn>2009-12-14T17:08:05.35Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2010-03-15T12:46:38.593Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.35Z</KistlBase:CreatedOn>
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
-    <KistlBase:Multiplicity>1</KistlBase:Multiplicity>
+    <KistlBase:Multiplicity>2</KistlBase:Multiplicity>
     <KistlBase:Navigator>dd6057d0-78bb-4242-9670-ec6c09bd4d92</KistlBase:Navigator>
     <KistlBase:RoleName>A</KistlBase:RoleName>
     <KistlBase:Type>07817322-d4b9-4dd8-8464-bcb6745fef34</KistlBase:Type>
   </KistlBase:RelationEnd>
   <KistlBase:RelationEnd ExportGuid="944c5542-0371-4839-b66c-7f15ba291f7e">
     <KistlBase:BParent>b33de3e9-c788-43f9-acb8-5306ec869684</KistlBase:BParent>
-    <KistlBase:ChangedOn>2009-12-14T17:08:05.35Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2010-03-15T12:47:18.347Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.35Z</KistlBase:CreatedOn>
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
-    <KistlBase:Multiplicity>1</KistlBase:Multiplicity>
+    <KistlBase:Multiplicity>2</KistlBase:Multiplicity>
     <KistlBase:Navigator>521ea0ba-ae3b-4a60-ae28-f366b3ee78f1</KistlBase:Navigator>
     <KistlBase:RoleName>B</KistlBase:RoleName>
     <KistlBase:Type>07817322-d4b9-4dd8-8464-bcb6745fef34</KistlBase:Type>
@@ -11138,6 +11138,16 @@
     <KistlBase:MaxLength>200</KistlBase:MaxLength>
     <KistlBase:MinLength>0</KistlBase:MinLength>
   </KistlBase:StringRangeConstraint>
+  <KistlBase:NotNullableConstraint ExportGuid="7f9c6bc6-7fa1-47df-82c1-dc7f31b98361">
+    <KistlBase:ChangedOn>2010-03-15T12:46:38.547Z</KistlBase:ChangedOn>
+    <KistlBase:ConstrainedProperty>d4429d3c-8fd1-468e-88d5-17abfd658d04</KistlBase:ConstrainedProperty>
+    <KistlBase:CreatedOn>2010-03-15T12:46:38.547Z</KistlBase:CreatedOn>
+  </KistlBase:NotNullableConstraint>
+  <KistlBase:NotNullableConstraint ExportGuid="564f19e8-a42c-4e44-a55e-5e33693a070d">
+    <KistlBase:ChangedOn>2010-03-15T12:47:18.347Z</KistlBase:ChangedOn>
+    <KistlBase:ConstrainedProperty>20331803-079e-471e-ae45-f4d004aef48e</KistlBase:ConstrainedProperty>
+    <KistlBase:CreatedOn>2010-03-15T12:47:18.347Z</KistlBase:CreatedOn>
+  </KistlBase:NotNullableConstraint>
   <KistlBase:NotNullableConstraint ExportGuid="2313fdc5-5373-41eb-bc2d-ff2a394c0342">
     <KistlBase:ChangedOn>2010-03-12T11:51:21.437Z</KistlBase:ChangedOn>
     <KistlBase:ConstrainedProperty>eed9955a-11a3-4c25-b0bb-e01ecd14b26f</KistlBase:ConstrainedProperty>
@@ -11179,6 +11189,16 @@
     <KistlBase:MaxLength>200</KistlBase:MaxLength>
     <KistlBase:MinLength>0</KistlBase:MinLength>
   </KistlBase:StringRangeConstraint>
+  <KistlBase:NotNullableConstraint ExportGuid="a1b529e0-d538-4636-b91e-4e2c188aca99">
+    <KistlBase:ChangedOn>2010-03-15T12:46:38.59Z</KistlBase:ChangedOn>
+    <KistlBase:ConstrainedProperty>dd6057d0-78bb-4242-9670-ec6c09bd4d92</KistlBase:ConstrainedProperty>
+    <KistlBase:CreatedOn>2010-03-15T12:46:38.59Z</KistlBase:CreatedOn>
+  </KistlBase:NotNullableConstraint>
+  <KistlBase:NotNullableConstraint ExportGuid="79d0e24d-9581-44be-819b-8245118141d4">
+    <KistlBase:ChangedOn>2010-03-15T12:47:18.313Z</KistlBase:ChangedOn>
+    <KistlBase:ConstrainedProperty>521ea0ba-ae3b-4a60-ae28-f366b3ee78f1</KistlBase:ConstrainedProperty>
+    <KistlBase:CreatedOn>2010-03-15T12:47:18.313Z</KistlBase:CreatedOn>
+  </KistlBase:NotNullableConstraint>
   <KistlBase:NotNullableConstraint ExportGuid="0e338ebb-7e79-493a-bc14-23ed42af79f5">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.383Z</KistlBase:ChangedOn>
     <KistlBase:ConstrainedProperty>4bbe4a44-dc99-4455-9c03-ae78903fcee2</KistlBase:ConstrainedProperty>
