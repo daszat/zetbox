@@ -18,7 +18,7 @@ namespace Kistl.API.AbstractConsumerTests.one_to_N_relations
         private static List<BaseParameter> CanonicalOrdering(IEnumerable<BaseParameter> input)
         {
             return input.OrderBy(p => p.IsReturnParameter)
-                    .ThenBy(p => p.ParameterName).ToList();
+                    .ThenBy(p => p.Name).ToList();
         }
 
         [Test]

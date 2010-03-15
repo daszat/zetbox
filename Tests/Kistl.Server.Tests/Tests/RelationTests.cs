@@ -427,7 +427,7 @@ namespace Kistl.Server.Tests
             var tmpParameter = method.Parameter.ToList();
             method.Parameter.Clear();
             foreach (Kistl.App.Base.BaseParameter p in tmpParameter
-                .OrderBy(p => p.IsReturnParameter).ThenBy(p => p.ParameterName))
+                .OrderBy(p => p.IsReturnParameter).ThenBy(p => p.Name))
             {
                 method.Parameter.Add(p);
             }
@@ -441,7 +441,7 @@ namespace Kistl.Server.Tests
             Assert.That(
                 checkParameter
                     .OrderBy(p => p.IsReturnParameter)
-                    .ThenBy(p => p.ParameterName)
+                    .ThenBy(p => p.Name)
                     .ToList(),
                 Is.EquivalentTo(checkParameter)
                 );

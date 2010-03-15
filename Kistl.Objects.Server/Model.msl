@@ -104,7 +104,7 @@
 <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
 <ScalarProperty Name="IsList" ColumnName="IsList" />
 <ScalarProperty Name="IsReturnParameter" ColumnName="IsReturnParameter" />
-<ScalarProperty Name="ParameterName" ColumnName="ParameterName" />
+<ScalarProperty Name="Name" ColumnName="Name" />
 	    </MappingFragment>
       </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Model.BoolParameter)">

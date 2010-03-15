@@ -110,10 +110,10 @@ namespace Kistl.API.AbstractConsumerTests.one_to_N_relations
             m2.ObjectClass = cls;
             m2.Module = cls.Module;
             var p1 = ctx.Create<StringParameter>();
-            p1.ParameterName = "p1";
+            p1.Name = "p1";
             p1.Method = m1;
             var p2 = ctx.Create<StringParameter>();
-            p2.ParameterName = "p1";
+            p2.Name = "p1";
             p2.Method = m2;
 
             ctx.SubmitChanges();

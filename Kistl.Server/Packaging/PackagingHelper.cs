@@ -36,7 +36,7 @@ namespace Kistl.Server.Packaging
             AddMetaObjects(result, ctx.GetQuery<Method>().Where(i => i.Module.ID == moduleID)
                 .OrderBy(i => i.ObjectClass.Name).ThenBy(i => i.MethodName).ThenBy(i => i.ExportGuid));
             AddMetaObjects(result, ctx.GetQuery<BaseParameter>().Where(i => i.Method.Module.ID == moduleID)
-                .OrderBy(i => i.Method.ObjectClass.Name).ThenBy(i => i.Method.MethodName).ThenBy(i => i.ParameterName).ThenBy(i => i.ExportGuid));
+                .OrderBy(i => i.Method.ObjectClass.Name).ThenBy(i => i.Method.MethodName).ThenBy(i => i.Name).ThenBy(i => i.ExportGuid));
             AddMetaObjects(result, ctx.GetQuery<MethodInvocation>().Where(i => i.Module.ID == moduleID)
                 .OrderBy(i => i.InvokeOnObjectClass.Name).ThenBy(i => i.Method.MethodName).ThenBy(i => i.Implementor.FullName).ThenBy(i => i.MemberName).ThenBy(i => i.ExportGuid));
             AddMetaObjects(result, ctx.GetQuery<PropertyInvocation>().Where(i => i.InvokeOnProperty.Module.ID == moduleID)

@@ -44,7 +44,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// Name des Parameter
         /// </summary>
-		string ParameterName {
+		string Name {
 			get;
 			set;
 		}

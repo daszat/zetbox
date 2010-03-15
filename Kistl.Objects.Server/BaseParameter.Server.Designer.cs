@@ -688,17 +688,17 @@ namespace Kistl.App.Base
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
            // Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.NotifyingDataProperty
-        public virtual string ParameterName
+        public virtual string Name
         {
             get
             {
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
-                var __result = _ParameterName;
-                if (OnParameterName_Getter != null)
+                var __result = _Name;
+                if (OnName_Getter != null)
                 {
                     var __e = new PropertyGetterEventArgs<string>(__result);
-                    OnParameterName_Getter(this, __e);
+                    OnName_Getter(this, __e);
                     __result = __e.Result;
                 }
                 return __result;
@@ -706,31 +706,31 @@ namespace Kistl.App.Base
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
-                if (_ParameterName != value)
+                if (_Name != value)
                 {
-                    var __oldValue = _ParameterName;
+                    var __oldValue = _Name;
                     var __newValue = value;
-                    if(OnParameterName_PreSetter != null)
+                    if(OnName_PreSetter != null)
                     {
                         var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
-                        OnParameterName_PreSetter(this, __e);
+                        OnName_PreSetter(this, __e);
                         __newValue = __e.Result;
                     }
-                    NotifyPropertyChanging("ParameterName", __oldValue, __newValue);
-                    _ParameterName = __newValue;
-                    NotifyPropertyChanged("ParameterName", __oldValue, __newValue);
-                    if(OnParameterName_PostSetter != null)
+                    NotifyPropertyChanging("Name", __oldValue, __newValue);
+                    _Name = __newValue;
+                    NotifyPropertyChanged("Name", __oldValue, __newValue);
+                    if(OnName_PostSetter != null)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
-                        OnParameterName_PostSetter(this, __e);
+                        OnName_PostSetter(this, __e);
                     }
                 }
             }
         }
-        private string _ParameterName;
-		public static event PropertyGetterHandler<Kistl.App.Base.BaseParameter, string> OnParameterName_Getter;
-		public static event PropertyPreSetterHandler<Kistl.App.Base.BaseParameter, string> OnParameterName_PreSetter;
-		public static event PropertyPostSetterHandler<Kistl.App.Base.BaseParameter, string> OnParameterName_PostSetter;
+        private string _Name;
+		public static event PropertyGetterHandler<Kistl.App.Base.BaseParameter, string> OnName_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.BaseParameter, string> OnName_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.BaseParameter, string> OnName_PostSetter;
 
         /// <summary>
         /// Returns the resulting Type of this Method-Parameter Meta Object.
@@ -794,7 +794,7 @@ namespace Kistl.App.Base
 			me.ExportGuid = other.ExportGuid;
 			me.IsList = other.IsList;
 			me.IsReturnParameter = other.IsReturnParameter;
-			me.ParameterName = other.ParameterName;
+			me.Name = other.Name;
 			this._fk_ChangedBy = otherImpl._fk_ChangedBy;
 			this._fk_CreatedBy = otherImpl._fk_CreatedBy;
 			this.Method_pos = otherImpl.Method_pos;
@@ -936,11 +936,11 @@ namespace Kistl.App.Base
 					
 					return String.Join("; ", errors);
 				}
-				case "ParameterName":
+				case "Name":
 				{
 					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("25c82fbd-cf5d-4021-b549-fccb46e166b3")).Constraints
-						.Where(c => !c.IsValid(this, this.ParameterName))
-						.Select(c => c.GetErrorText(this, this.ParameterName))
+						.Where(c => !c.IsValid(this, this.Name))
+						.Select(c => c.GetErrorText(this, this.Name))
 						.ToArray();
 					
 					return String.Join("; ", errors);
@@ -998,7 +998,7 @@ namespace Kistl.App.Base
             BinarySerializer.ToStream(this._IsReturnParameter, binStream);
             BinarySerializer.ToStream(Method != null ? Method.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._Method_pos, binStream);
-            BinarySerializer.ToStream(this._ParameterName, binStream);
+            BinarySerializer.ToStream(this._Name, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
@@ -1018,7 +1018,7 @@ namespace Kistl.App.Base
             BinarySerializer.FromStream(out this._IsReturnParameter, binStream);
             BinarySerializer.FromStream(out this._fk_Method, binStream);
             BinarySerializer.FromStream(out this._Method_pos, binStream);
-            BinarySerializer.FromStream(out this._ParameterName, binStream);
+            BinarySerializer.FromStream(out this._Name, binStream);
         }
 
         public override void ToStream(System.Xml.XmlWriter xml)
@@ -1038,7 +1038,7 @@ namespace Kistl.App.Base
             XmlStreamer.ToStream(this._IsReturnParameter, xml, "IsReturnParameter", "Kistl.App.Base");
             XmlStreamer.ToStream(Method != null ? Method.ID : (int?)null, xml, "Method", "Kistl.App.Base");
             XmlStreamer.ToStream(this._Method_pos, xml, "Method_pos", "Kistl.App.Base");
-            XmlStreamer.ToStream(this._ParameterName, xml, "ParameterName", "Kistl.App.Base");
+            XmlStreamer.ToStream(this._Name, xml, "Name", "Kistl.App.Base");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
@@ -1058,7 +1058,7 @@ namespace Kistl.App.Base
             XmlStreamer.FromStream(ref this._IsReturnParameter, xml, "IsReturnParameter", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_Method, xml, "Method", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._Method_pos, xml, "Method_pos", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._ParameterName, xml, "ParameterName", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._Name, xml, "Name", "Kistl.App.Base");
         }
 
         public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
@@ -1079,7 +1079,7 @@ namespace Kistl.App.Base
 	
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._Method_pos, xml, "Method_pos", "Kistl.App.Base");
     
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._ParameterName, xml, "ParameterName", "Kistl.App.Base");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._Name, xml, "Name", "Kistl.App.Base");
         }
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
@@ -1093,7 +1093,7 @@ namespace Kistl.App.Base
             XmlStreamer.FromStream(ref this._IsReturnParameter, xml, "IsReturnParameter", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_guid_Method, xml, "Method", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._Method_pos, xml, "Method_pos", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._ParameterName, xml, "ParameterName", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._Name, xml, "Name", "Kistl.App.Base");
         }
 
 #endregion

@@ -202,7 +202,7 @@ namespace Kistl.App.Base
             }
             else
             {
-                e.Result = String.Format("ObjectParameter {0}: {1}", obj.ID, obj.ParameterName);
+                e.Result = String.Format("ObjectParameter {0}: {1}", obj.ID, obj.Name);
             }
         }
 
@@ -415,7 +415,7 @@ namespace Kistl.App.Base
                             var newParam = (BaseParameter)ctx.Create(param.GetInterfaceType());
                             newMeth.Parameter.Add(newParam);
 
-                            newParam.ParameterName = param.ParameterName;
+                            newParam.Name = param.Name;
                             newParam.Description = param.Description;
                             newParam.IsList = param.IsList;
                             newParam.IsReturnParameter = param.IsReturnParameter;

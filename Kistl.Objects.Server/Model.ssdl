@@ -1278,7 +1278,7 @@
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
     <Property Name="IsList" Type="bit" Nullable="false" />
     <Property Name="IsReturnParameter" Type="bit" Nullable="false" />
-    <Property Name="ParameterName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="Blob">

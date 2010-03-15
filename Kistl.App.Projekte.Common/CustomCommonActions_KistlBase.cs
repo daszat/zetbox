@@ -47,7 +47,7 @@ namespace Kistl.App.Base
             {
                 var p = obj.Context.Create<StringParameter>();
                 p.IsReturnParameter = true;
-                p.ParameterName = "retVal";
+                p.Name = "retVal";
                 toStr.Parameter.Add(p);
             }
         }
@@ -216,7 +216,7 @@ namespace Kistl.App.Base
 
                 foreach (var param in mi.Method.Parameter.Where(p => !p.IsReturnParameter))
                 {
-                    sb.AppendFormat(", {0} {1}", param.GetParameterTypeString(), param.ParameterName);
+                    sb.AppendFormat(", {0} {1}", param.GetParameterTypeString(), param.Name);
                 }
             }
 

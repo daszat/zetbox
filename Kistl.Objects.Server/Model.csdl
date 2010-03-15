@@ -847,7 +847,7 @@
                         FromRole="Parameter"
                         ToRole="Method" />
     <Property Name="Method_pos" Type="Int32" Nullable="true" />
-    <Property Name="ParameterName" Type="String" Nullable="false" MaxLength="100" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="100" />
   </EntityType>
   <EntityType Name="Blob">
     <Key>

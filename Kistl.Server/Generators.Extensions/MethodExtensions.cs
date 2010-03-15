@@ -45,7 +45,7 @@ namespace Kistl.Server.Generators.Extensions
         {
             if (param == null) { throw new ArgumentNullException("param"); }
 
-            return String.Format("{0} {1}", param.GetParameterTypeString(), param.ParameterName);
+            return String.Format("{0} {1}", param.GetParameterTypeString(), param.Name);
         }
 
         public static string GetArguments(this Method method)
@@ -63,7 +63,7 @@ namespace Kistl.Server.Generators.Extensions
         {
             if (param == null) { throw new ArgumentNullException("param"); }
 
-            return param.ParameterName;
+            return param.Name;
         }
 
         public static IOrderedEnumerable<Method> OrderByDefault(this IEnumerable<Method> methods)

@@ -146,8 +146,8 @@ namespace Kistl.API.AbstractConsumerTests
         private static void AssertThatIsCorrectParameterOrder(IList<BaseParameter> parameter)
         {
             Assert.That(parameter[0].IsReturnParameter, Is.True, "return parameter should be first");
-            Assert.That(parameter[1].ParameterName, Is.EqualTo("constrainedObject"));
-            Assert.That(parameter[2].ParameterName, Is.EqualTo("constrainedValue"));
+            Assert.That(parameter[1].Name, Is.EqualTo("constrainedObject"));
+            Assert.That(parameter[2].Name, Is.EqualTo("constrainedValue"));
         }
 
     }

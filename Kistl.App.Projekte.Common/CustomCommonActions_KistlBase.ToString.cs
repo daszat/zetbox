@@ -27,7 +27,7 @@ namespace Kistl.App.Base
                     ? "[Return] "
                     : String.Empty,
                 obj.GetParameterTypeString(),
-                obj.ParameterName);
+                obj.Name);
 
             FixupFloatingObjectsToString(obj, e);
         }

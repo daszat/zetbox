@@ -16,9 +16,9 @@ namespace Kistl.App.Base
         #region Save
         public static void OnPreSave_BaseParameter(Kistl.App.Base.BaseParameter obj)
         {
-            if (!System.CodeDom.Compiler.CodeGenerator.IsValidLanguageIndependentIdentifier(obj.ParameterName))
+            if (!System.CodeDom.Compiler.CodeGenerator.IsValidLanguageIndependentIdentifier(obj.Name))
             {
-                throw new ArgumentException(string.Format("ParameterName {0} has some illegal chars", obj.ParameterName));
+                throw new ArgumentException(string.Format("Name {0} has some illegal chars", obj.Name));
             }
 
             // TODO: replace with constraint
