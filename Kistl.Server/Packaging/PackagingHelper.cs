@@ -18,7 +18,7 @@ namespace Kistl.Server.Packaging
             IList<IPersistenceObject> result = new List<IPersistenceObject>();
             int moduleID = module.ID;
 
-            AddMetaObjects(result, ctx.GetQuery<Module>().Where(i => i.ID == moduleID).OrderBy(m => m.ModuleName).ThenBy(i => i.ExportGuid));
+            AddMetaObjects(result, ctx.GetQuery<Module>().Where(i => i.ID == moduleID).OrderBy(m => m.Name).ThenBy(i => i.ExportGuid));
 
             AddMetaObjects(result, ctx.GetQuery<DataType>().Where(i => i.Module.ID == moduleID)
                 .OrderBy(i => i.Name).ThenBy(i => i.ExportGuid));
@@ -76,7 +76,7 @@ namespace Kistl.Server.Packaging
             AddMetaObjects(result, ctx.GetPersistenceObjectQuery<RoleMembership_resolves_Relation_RelationEntry>().Where(i => i.A.Module.ID == moduleID)
                 .ToList().AsQueryable().OrderBy(i => i.A.ExportGuid).ThenBy(i => i.B.ExportGuid));
 
-            if (module.ModuleName == "GUI")
+            if (module.Name == "GUI")
             {
                 AddMetaObjects(result, ctx.GetQuery<ControlKind>()// TODO: .Where(i => i.Module.ID == moduleID)
                     .ToList().AsQueryable() // TODO: remove this workaround for GetInterfaceType()

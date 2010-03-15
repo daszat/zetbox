@@ -4,7 +4,7 @@
     <KistlBase:ChangedOn>2010-02-01T16:07:00.49Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2010-02-01T15:23:35.247Z</KistlBase:CreatedOn>
     <KistlBase:Description>CourseOrganiser for teachers</KistlBase:Description>
-    <KistlBase:ModuleName>CourseOrganiser</KistlBase:ModuleName>
+    <KistlBase:Name>CourseOrganiser</KistlBase:Name>
     <KistlBase:Namespace>at.dasz.CourseOrganiser</KistlBase:Namespace>
   </KistlBase:Module>
   <KistlBase:ObjectClass ExportGuid="bff02442-11ec-4cac-9105-39853e729e0f">
@@ -973,7 +973,7 @@
     <KistlBase:ChangedOn>2010-03-10T13:14:05.017Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2010-03-10T13:14:05.017Z</KistlBase:CreatedOn>
     <KistlBase:Description>Module for managing Files and Documents</KistlBase:Description>
-    <KistlBase:ModuleName>DocumentManagement</KistlBase:ModuleName>
+    <KistlBase:Name>DocumentManagement</KistlBase:Name>
     <KistlBase:Namespace>at.dasz.DocumentManagement</KistlBase:Namespace>
   </KistlBase:Module>
   <KistlBase:ObjectClass ExportGuid="3f496de2-bef4-4059-8c3e-c25db38bd3c2">
@@ -1398,7 +1398,7 @@
     <KistlBase:ChangedOn>2009-12-14T17:08:05.32Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.32Z</KistlBase:CreatedOn>
     <KistlBase:Description />
-    <KistlBase:ModuleName>KistlBase</KistlBase:ModuleName>
+    <KistlBase:Name>KistlBase</KistlBase:Name>
     <KistlBase:Namespace>Kistl.App.Base</KistlBase:Namespace>
   </KistlBase:Module>
   <KistlBase:ObjectClass ExportGuid="f1c37bfb-e45f-4964-b6ba-672c1ec81b60">
@@ -4247,7 +4247,7 @@
     <KistlBase:CreatedOn>2009-12-14T17:08:05.337Z</KistlBase:CreatedOn>
     <KistlBase:Description>Name des Moduls</KistlBase:Description>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
-    <KistlBase:Name>ModuleName</KistlBase:Name>
+    <KistlBase:Name>Name</KistlBase:Name>
     <KistlBase:ObjectClass>8a1ace7c-77f2-4b48-9b0b-bcb68c660d11</KistlBase:ObjectClass>
     <KistlBase:ObjectClass_pos>600</KistlBase:ObjectClass_pos>
     <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
@@ -12001,7 +12001,7 @@
     <KistlBase:ChangedOn>2009-12-14T17:08:05.397Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.397Z</KistlBase:CreatedOn>
     <KistlBase:Description />
-    <KistlBase:ModuleName>GUI</KistlBase:ModuleName>
+    <KistlBase:Name>GUI</KistlBase:Name>
     <KistlBase:Namespace>Kistl.App.GUI</KistlBase:Namespace>
   </KistlBase:Module>
   <GUI:ControlKindClass ExportGuid="98aeb643-d367-46e6-a961-4c627cdf7387">
@@ -16875,7 +16875,7 @@
     <KistlBase:ChangedOn>2009-12-14T17:08:05.417Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.417Z</KistlBase:CreatedOn>
     <KistlBase:Description />
-    <KistlBase:ModuleName>Projekte</KistlBase:ModuleName>
+    <KistlBase:Name>Projekte</KistlBase:Name>
     <KistlBase:Namespace>Kistl.App.Projekte</KistlBase:Namespace>
   </KistlBase:Module>
   <KistlBase:ObjectClass ExportGuid="f6e11d1d-a832-413a-bf1d-5ecf5f7bc79d">
@@ -18749,7 +18749,7 @@
     <KistlBase:ChangedOn>2009-12-14T17:08:05.423Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.423Z</KistlBase:CreatedOn>
     <KistlBase:Description />
-    <KistlBase:ModuleName>TestModule</KistlBase:ModuleName>
+    <KistlBase:Name>TestModule</KistlBase:Name>
     <KistlBase:Namespace>Kistl.App.Test</KistlBase:Namespace>
   </KistlBase:Module>
   <KistlBase:ObjectClass ExportGuid="798887f9-2d21-4d02-a143-bf1cbe07469b">
@@ -20069,7 +20069,7 @@
     <KistlBase:ChangedOn>2009-12-14T17:08:05.427Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.427Z</KistlBase:CreatedOn>
     <KistlBase:Description />
-    <KistlBase:ModuleName>TimeRecords</KistlBase:ModuleName>
+    <KistlBase:Name>TimeRecords</KistlBase:Name>
     <KistlBase:Namespace>Kistl.App.TimeRecords</KistlBase:Namespace>
   </KistlBase:Module>
   <KistlBase:ObjectClass ExportGuid="b22c93cd-75c6-4fa9-8b06-9c4b3f5c818f">

@@ -13,7 +13,7 @@ namespace Kistl.App.Extensions
         {
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
 
-            return ctx.GetQuery<Kistl.App.Base.Interface>().First(o => o.Name == "IExportable" && o.Module.ModuleName == "KistlBase"); 
+            return ctx.GetQuery<Kistl.App.Base.Interface>().First(o => o.Name == "IExportable" && o.Module.Name == "KistlBase"); 
         }
     }
 }

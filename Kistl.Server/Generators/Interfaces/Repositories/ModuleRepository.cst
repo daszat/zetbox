@@ -26,13 +26,13 @@ namespace Kistl.App
 	foreach(var module in modules)
 	{
 %>
-		/// <summary>Repository for <%= module.ModuleName %></summary>
+		/// <summary>Repository for <%= module.Name %></summary>
 		/// <%= module.Description %>
-		public <%= module.Namespace %>.<%= module.ModuleName %>Repository <%= module.ModuleName %>
+		public <%= module.Namespace %>.<%= module.Name %>Repository <%= module.Name %>
 		{
 			get
 			{
-				return new <%= module.Namespace %>.<%= module.ModuleName %>Repository(Context);
+				return new <%= module.Namespace %>.<%= module.Name %>Repository(Context);
 			}
 		}
 		

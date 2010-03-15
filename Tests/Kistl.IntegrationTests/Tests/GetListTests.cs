@@ -112,7 +112,7 @@ namespace Kistl.IntegrationTests
         {
             using (IKistlContext ctx = KistlContext.GetContext())
             {
-                var list = ctx.GetQuery<ObjectClass>().Where(o => o.Module.ModuleName == "KistlBase").Take(10).ToList();
+                var list = ctx.GetQuery<ObjectClass>().Where(o => o.Module.Name == "KistlBase").Take(10).ToList();
                 Assert.That(list.Count, Is.EqualTo(10));
             }
         }
@@ -166,7 +166,7 @@ namespace Kistl.IntegrationTests
         {
             using (IKistlContext ctx = KistlContext.GetContext())
             {
-                var list = ctx.GetQuery<ObjectClass>().Where(o => o.Module.ModuleName == "KistlBase").OrderBy(o => o.Name).ToList();
+                var list = ctx.GetQuery<ObjectClass>().Where(o => o.Module.Name == "KistlBase").OrderBy(o => o.Name).ToList();
                 Assert.That(list.Count, Is.GreaterThan(0));
                 List<ObjectClass> result = list.ToList();
                 List<ObjectClass> sorted = list.OrderBy(o => o.Name).ToList();
@@ -187,10 +187,10 @@ namespace Kistl.IntegrationTests
         {
             using (IKistlContext ctx = KistlContext.GetContext())
             {
-                var list = ctx.GetQuery<ObjectClass>().OrderBy(o => o.Module.ModuleName).ThenBy(o => o.Name).ToList();
+                var list = ctx.GetQuery<ObjectClass>().OrderBy(o => o.Module.Name).ThenBy(o => o.Name).ToList();
                 Assert.That(list.Count, Is.GreaterThan(0));
                 List<ObjectClass> result = list.ToList();
-                List<ObjectClass> sorted = list.OrderBy(o => o.Module.ModuleName).ThenBy(o => o.Name).ToList();
+                List<ObjectClass> sorted = list.OrderBy(o => o.Module.Name).ThenBy(o => o.Name).ToList();
 
                 for (int i = 0; i < result.Count; i++)
                 {
@@ -210,15 +210,15 @@ namespace Kistl.IntegrationTests
             {
                 var test = (from m in ctx.GetQuery<Module>()
                             where
-                                m.ModuleName.StartsWith("K")
+                                m.Name.StartsWith("K")
                                 && m.Namespace.Length > 1
-                                && m.ModuleName == "KistlBase"
-                                && m.ModuleName.EndsWith("e")
+                                && m.Name == "KistlBase"
+                                && m.Name.EndsWith("e")
                             select m).ToList();
                 Assert.That(test.Count, Is.EqualTo(1));
                 foreach (var t in test)
                 {
-                    Log.DebugFormat("GetListWithParameterLegal: {0}", t.ModuleName);
+                    Log.DebugFormat("GetListWithParameterLegal: {0}", t.Name);
                 }
             }
         }
@@ -273,7 +273,7 @@ namespace Kistl.IntegrationTests
         {
             using (IKistlContext ctx = KistlContext.GetContext())
             {
-                var guiModule = ctx.GetQuery<Module>().Where(m => m.ModuleName == "GUI").Single();
+                var guiModule = ctx.GetQuery<Module>().Where(m => m.Name == "GUI").Single();
                 Assert.That(guiModule, Is.Not.Null);
             }
         }
@@ -283,7 +283,7 @@ namespace Kistl.IntegrationTests
         {
             using (IKistlContext ctx = KistlContext.GetContext())
             {
-                var guiModule = ctx.GetQuery<Module>().Single(m => m.ModuleName == "GUI");
+                var guiModule = ctx.GetQuery<Module>().Single(m => m.Name == "GUI");
                 Assert.That(guiModule, Is.Not.Null);
             }
         }
@@ -293,7 +293,7 @@ namespace Kistl.IntegrationTests
         {
             using (IKistlContext ctx = KistlContext.GetContext())
             {
-                var guiModule = ctx.GetQuery<Module>().Where(m => m.ModuleName == "GUI").First();
+                var guiModule = ctx.GetQuery<Module>().Where(m => m.Name == "GUI").First();
                 Assert.That(guiModule, Is.Not.Null);
             }
         }
@@ -303,7 +303,7 @@ namespace Kistl.IntegrationTests
         {
             using (IKistlContext ctx = KistlContext.GetContext())
             {
-                var guiModule = ctx.GetQuery<Module>().First(m => m.ModuleName == "GUI");
+                var guiModule = ctx.GetQuery<Module>().First(m => m.Name == "GUI");
                 Assert.That(guiModule, Is.Not.Null);
             }
         }
@@ -354,7 +354,7 @@ namespace Kistl.IntegrationTests
         {
             using (IKistlContext ctx = KistlContext.GetContext())
             {
-                var module = ctx.GetQuery<Module>().Where(m => m.ModuleName == "KistlBase").Single();
+                var module = ctx.GetQuery<Module>().Where(m => m.Name == "KistlBase").Single();
                 Assert.That(module, Is.Not.Null);
                 var result = ctx.GetQuery<ObjectClass>().Where(c => c.Module == module).ToList();
                 Assert.That(result, Is.Not.Null);

@@ -46,7 +46,7 @@ foreach(var module in modulesWithFrozenClasses)
 	{
 
 #line 32 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Repositories\FrozenContextImplementation.cst"
-this.WriteObjects("			",  module.Namespace , ".Frozen",  module.ModuleName , "Repository.CreateInstances();\r\n");
+this.WriteObjects("			",  module.Namespace , ".Frozen",  module.Name , "Repository.CreateInstances();\r\n");
 #line 34 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Repositories\FrozenContextImplementation.cst"
 }
 
@@ -57,7 +57,7 @@ foreach(var module in modulesWithFrozenClasses)
 	{
 
 #line 41 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Repositories\FrozenContextImplementation.cst"
-this.WriteObjects("			",  module.Namespace , ".Frozen",  module.ModuleName , "Repository.FillDataStore();\r\n");
+this.WriteObjects("			",  module.Namespace , ".Frozen",  module.Name , "Repository.FillDataStore();\r\n");
 #line 43 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Repositories\FrozenContextImplementation.cst"
 }
 

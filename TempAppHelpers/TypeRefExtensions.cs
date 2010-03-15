@@ -200,7 +200,7 @@ namespace Kistl.App.Extensions
             {
                 result = ctx.Create<Assembly>();
                 result.Name = ass.FullName;
-                result.Module = ctx.GetQuery<Module>().Single(m => m.ModuleName == "KistlBase");
+                result.Module = ctx.GetQuery<Module>().Single(m => m.Name == "KistlBase");
                 result.DeploymentRestrictions = DeploymentRestriction.ClientOnly;
             }
             return result;

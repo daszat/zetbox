@@ -420,7 +420,7 @@ namespace Kistl.Server.Tests
         public void Sort_Relation_1_n()
         {
             int methodID = 0;
-            var method = ctx.GetQuery<Kistl.App.Base.Method>().ToList().Where(m => m.Module.ModuleName == "Projekte")
+            var method = ctx.GetQuery<Kistl.App.Base.Method>().ToList().Where(m => m.Module.Name == "Projekte")
                 .OrderByDescending(m => m.Parameter.Count).First();
             methodID = method.ID;
 

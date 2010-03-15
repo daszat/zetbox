@@ -15,7 +15,7 @@ With LINQ, this can always be used as a starting point for queries.
     repo.Assemblies.Where(a => a.IsClientAssembly);
 
 
-To avoid name clashes, there is one Repository interface per Module, called `I{ModuleName}Repository` and one `IModuleRepository` listing all modules:
+To avoid name clashes, there is one Repository interface per Module, called `I{Name}Repository` and one `IModuleRepository` listing all modules:
 
 public interface ModuleRepository 
 {

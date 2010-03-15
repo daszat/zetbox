@@ -16,9 +16,9 @@ using Kistl.API;
 namespace <%= module.Namespace %>
 {
 
-	public class <%= module.ModuleName %>Repository
+	public class <%= module.Name %>Repository
 	{
-		public <%= module.ModuleName %>Repository(IKistlContext ctx)
+		public <%= module.Name %>Repository(IKistlContext ctx)
 		{
 			this.Context = ctx;
 		}

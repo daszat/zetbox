@@ -28,7 +28,7 @@ namespace Kistl.API.AbstractConsumerTests.one_to_N_relations
 
             using (IKistlContext ctx = GetContext())
             {
-                var method = ctx.GetQuery<Method>().ToList().Where(m => m.Module.ModuleName == "Projekte")
+                var method = ctx.GetQuery<Method>().ToList().Where(m => m.Module.Name == "Projekte")
                     .OrderByDescending(m => m.Parameter.Count).First();
 
                 // needs more than one Parameter to test ordering

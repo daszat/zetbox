@@ -50,7 +50,7 @@ namespace Kistl.Server.Packaging
 
                     foreach (var module in moduleList)
                     {
-                        Log.DebugFormat("Publishing objects for module {0}", module.ModuleName);
+                        Log.DebugFormat("Publishing objects for module {0}", module.Name);
                         var objects = PackagingHelper.GetMetaObjects(ctx, module);
 
                         Stopwatch watch = new Stopwatch();
@@ -98,7 +98,7 @@ namespace Kistl.Server.Packaging
                     var iexpIf = ctx.GetIExportableInterface();
                     foreach (var module in moduleList)
                     {
-                        Log.InfoFormat("  exporting {0}", module.ModuleName);
+                        Log.InfoFormat("  exporting {0}", module.Name);
                         foreach (var objClass in module.DataTypes.OfType<ObjectClass>().Where(o => o.ImplementsInterfaces.Contains(iexpIf)))
                         {
                             Log.InfoFormat("    {0} ", objClass.Name);
@@ -159,7 +159,7 @@ namespace Kistl.Server.Packaging
             xml.WriteStartElement("KistlPackaging", "http://dasz.at/Kistl");
             foreach (var module in moduleList)
             {
-                xml.WriteAttributeString("xmlns", module.ModuleName, null, module.Namespace);
+                xml.WriteAttributeString("xmlns", module.Name, null, module.Namespace);
             }
 
             DateTime? lastChanged = new DateTime?[] { 

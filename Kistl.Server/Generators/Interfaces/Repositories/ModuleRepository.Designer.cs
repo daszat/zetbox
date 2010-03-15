@@ -43,13 +43,13 @@ foreach(var module in modules)
 	{
 
 #line 29 "P:\Kistl\Kistl.Server\Generators\Interfaces\Repositories\ModuleRepository.cst"
-this.WriteObjects("		/// <summary>Repository for ",  module.ModuleName , "</summary>\r\n");
+this.WriteObjects("		/// <summary>Repository for ",  module.Name , "</summary>\r\n");
 this.WriteObjects("		/// ",  module.Description , "\r\n");
-this.WriteObjects("		public ",  module.Namespace , ".",  module.ModuleName , "Repository ",  module.ModuleName , "\r\n");
+this.WriteObjects("		public ",  module.Namespace , ".",  module.Name , "Repository ",  module.Name , "\r\n");
 this.WriteObjects("		{\r\n");
 this.WriteObjects("			get\r\n");
 this.WriteObjects("			{\r\n");
-this.WriteObjects("				return new ",  module.Namespace , ".",  module.ModuleName , "Repository(Context);\r\n");
+this.WriteObjects("				return new ",  module.Namespace , ".",  module.Name , "Repository(Context);\r\n");
 this.WriteObjects("			}\r\n");
 this.WriteObjects("		}\r\n");
 this.WriteObjects("		\r\n");

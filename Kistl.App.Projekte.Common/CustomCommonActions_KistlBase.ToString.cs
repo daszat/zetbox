@@ -111,7 +111,7 @@ namespace Kistl.App.Base
 
         public static void OnToString_Module(Module obj, MethodReturnEventArgs<string> e)
         {
-            e.Result = obj.ModuleName;
+            e.Result = obj.Name;
 
             FixupFloatingObjectsToString(obj, e);
         }

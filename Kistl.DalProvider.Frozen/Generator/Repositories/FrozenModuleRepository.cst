@@ -26,13 +26,13 @@ namespace Kistl.App
 	foreach(var module in modulesWithFrozenClasses)
 	{
 %>
-		/// <summary>Frozen Repository for <%= module.ModuleName %></summary>
+		/// <summary>Frozen Repository for <%= module.Name %></summary>
 		/// <%= module.Description %>
-		public <%= module.Namespace %>.Frozen<%= module.ModuleName %>Repository <%= module.ModuleName %>
+		public <%= module.Namespace %>.Frozen<%= module.Name %>Repository <%= module.Name %>
 		{
 			get
 			{
-				return new <%= module.Namespace %>.Frozen<%= module.ModuleName %>Repository();
+				return new <%= module.Namespace %>.Frozen<%= module.Name %>Repository();
 			}
 		}
 		
@@ -47,7 +47,7 @@ namespace Kistl.App
 	foreach(var module in modulesWithFrozenClasses)
 	{
 %>
-				<%= module.Namespace %>.Frozen<%= module.ModuleName %>Repository.FillDataStore();
+				<%= module.Namespace %>.Frozen<%= module.Name %>Repository.FillDataStore();
 <%
 	}
 %>

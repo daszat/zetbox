@@ -169,7 +169,7 @@ Finally the various parts have to be defined in the EDMX:
 				<MappingFragment StoreEntitySet="Module">
 					<ScalarProperty Name="ID" ColumnName="ID" />
 					<ScalarProperty Name="Namespace" ColumnName="Namespace" />
-					<ScalarProperty Name="ModuleName" ColumnName="ModuleName" />
+					<ScalarProperty Name="Name" ColumnName="Name" />
 					<ScalarProperty Name="Description" ColumnName="Description" />
 				</MappingFragment>
 			</EntityTypeMapping>

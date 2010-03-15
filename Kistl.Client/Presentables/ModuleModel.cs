@@ -60,7 +60,7 @@ namespace Kistl.Client.Presentables
         {
             switch (args.PropertyName)
             {
-                case "ModuleName": OnPropertyChanged("Name"); break;
+                case "Name": OnPropertyChanged("Name"); break;
             }
         }
 

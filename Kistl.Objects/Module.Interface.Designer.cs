@@ -33,7 +33,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// Name des Moduls
         /// </summary>
-		string ModuleName {
+		string Name {
 			get;
 			set;
 		}

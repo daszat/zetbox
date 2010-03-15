@@ -42,13 +42,13 @@ foreach(var module in modulesWithFrozenClasses)
 	{
 
 #line 29 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Repositories\FrozenModuleRepository.cst"
-this.WriteObjects("		/// <summary>Frozen Repository for ",  module.ModuleName , "</summary>\r\n");
+this.WriteObjects("		/// <summary>Frozen Repository for ",  module.Name , "</summary>\r\n");
 this.WriteObjects("		/// ",  module.Description , "\r\n");
-this.WriteObjects("		public ",  module.Namespace , ".Frozen",  module.ModuleName , "Repository ",  module.ModuleName , "\r\n");
+this.WriteObjects("		public ",  module.Namespace , ".Frozen",  module.Name , "Repository ",  module.Name , "\r\n");
 this.WriteObjects("		{\r\n");
 this.WriteObjects("			get\r\n");
 this.WriteObjects("			{\r\n");
-this.WriteObjects("				return new ",  module.Namespace , ".Frozen",  module.ModuleName , "Repository();\r\n");
+this.WriteObjects("				return new ",  module.Namespace , ".Frozen",  module.Name , "Repository();\r\n");
 this.WriteObjects("			}\r\n");
 this.WriteObjects("		}\r\n");
 this.WriteObjects("		\r\n");
@@ -65,7 +65,7 @@ this.WriteObjects("		{\r\n");
 	{
 
 #line 50 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Repositories\FrozenModuleRepository.cst"
-this.WriteObjects("				",  module.Namespace , ".Frozen",  module.ModuleName , "Repository.FillDataStore();\r\n");
+this.WriteObjects("				",  module.Namespace , ".Frozen",  module.Name , "Repository.FillDataStore();\r\n");
 #line 52 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Repositories\FrozenModuleRepository.cst"
 }
 

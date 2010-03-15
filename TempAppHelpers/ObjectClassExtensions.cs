@@ -185,7 +185,7 @@ namespace Kistl.App.Extensions
 
             while (cls != null)
             {
-                if (cls.ImplementsInterfaces.Count(o => o.Name == "IExportable" && o.Module.ModuleName == "KistlBase") == 1)
+                if (cls.ImplementsInterfaces.Count(o => o.Name == "IExportable" && o.Module.Name == "KistlBase") == 1)
                     return true;
                 if (!lookupInBase) return false;
                 cls = cls.BaseObjectClass;

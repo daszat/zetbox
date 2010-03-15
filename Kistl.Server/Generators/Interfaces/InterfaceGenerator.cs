@@ -45,11 +45,11 @@ namespace Kistl.Server.Generators.Interfaces
         {
             var otherFileNames = new List<string>();
 
-            var modules = ctx.GetQuery<Module>().OrderBy(m => m.ModuleName).ToList();
+            var modules = ctx.GetQuery<Module>().OrderBy(m => m.Name).ToList();
             otherFileNames.Add(RunTemplateWithExtension(ctx, "Interface.Repositories.ModuleRepository", "ModuleRepository", "Designer.cs", modules));
             foreach (var m in modules)
             {
-                otherFileNames.Add(RunTemplateWithExtension(ctx, "Interface.Repositories.Repository", m.ModuleName + "Repository", "Designer.cs", m));
+                otherFileNames.Add(RunTemplateWithExtension(ctx, "Interface.Repositories.Repository", m.Name + "Repository", "Designer.cs", m));
             }
 
             return base.Generate_Other(ctx).Concat(otherFileNames);

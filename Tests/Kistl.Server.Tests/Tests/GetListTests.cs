@@ -109,7 +109,7 @@ namespace Kistl.Server.Tests
         [Test]
         public void GetListWithTakeAndWhere()
         {
-            var list = ctx.GetQuery<Kistl.App.Base.ObjectClass>().Where(o => o.Module.ModuleName == "KistlBase").Take(10).ToList();
+            var list = ctx.GetQuery<Kistl.App.Base.ObjectClass>().Where(o => o.Module.Name == "KistlBase").Take(10).ToList();
             Assert.That(list.Count, Is.EqualTo(10));
         }
 
@@ -155,7 +155,7 @@ namespace Kistl.Server.Tests
         [Test]
         public void GetListWithOrderByAndWhere()
         {
-            var list = ctx.GetQuery<Kistl.App.Base.ObjectClass>().Where(o => o.Module.ModuleName == "KistlBase").OrderBy(o => o.Name).ToList();
+            var list = ctx.GetQuery<Kistl.App.Base.ObjectClass>().Where(o => o.Module.Name == "KistlBase").OrderBy(o => o.Name).ToList();
             Assert.That(list.Count, Is.GreaterThan(0));
             List<Kistl.App.Base.ObjectClass> result = list.ToList();
             List<Kistl.App.Base.ObjectClass> sorted = list.OrderBy(o => o.Name).ToList();
@@ -174,10 +174,10 @@ namespace Kistl.Server.Tests
         [Ignore("Case 634")]
         public void GetListWithOrderByThenOrderBy()
         {
-            var list = ctx.GetQuery<Kistl.App.Base.ObjectClass>().OrderBy(o => o.Module.ModuleName).ThenBy(o => o.Name).ToList();
+            var list = ctx.GetQuery<Kistl.App.Base.ObjectClass>().OrderBy(o => o.Module.Name).ThenBy(o => o.Name).ToList();
             Assert.That(list.Count, Is.GreaterThan(0));
             List<Kistl.App.Base.ObjectClass> result = list.ToList();
-            List<Kistl.App.Base.ObjectClass> sorted = list.OrderBy(o => o.Module.ModuleName).ThenBy(o => o.Name).ToList();
+            List<Kistl.App.Base.ObjectClass> sorted = list.OrderBy(o => o.Module.Name).ThenBy(o => o.Name).ToList();
 
             for (int i = 0; i < result.Count; i++)
             {
@@ -194,15 +194,15 @@ namespace Kistl.Server.Tests
         {
             var test = (from m in ctx.GetQuery<Kistl.App.Base.Module>()
                         where
-                            m.ModuleName.StartsWith("K")
+                            m.Name.StartsWith("K")
                             && m.Namespace.Length > 1
-                            && m.ModuleName == "KistlBase"
-                            && m.ModuleName.EndsWith("e")
+                            && m.Name == "KistlBase"
+                            && m.Name.EndsWith("e")
                         select m).ToList();
             Assert.That(test.Count, Is.EqualTo(1));
             foreach (var t in test)
             {
-                Log.DebugFormat("GetListWithParameterLegal: {0}", t.ModuleName);
+                Log.DebugFormat("GetListWithParameterLegal: {0}", t.Name);
             }
         }
 
@@ -221,7 +221,7 @@ namespace Kistl.Server.Tests
         [ExpectedException]
         public void GetListWithSingle()
         {
-            var guiModule = ctx.GetQuery<Kistl.App.Base.Module>().Where(m => m.ModuleName == "GUI").Single();
+            var guiModule = ctx.GetQuery<Kistl.App.Base.Module>().Where(m => m.Name == "GUI").Single();
             Assert.That(guiModule, Is.Not.Null);
         }
 
@@ -229,21 +229,21 @@ namespace Kistl.Server.Tests
         [ExpectedException]
         public void GetListSingle()
         {
-            var guiModule = ctx.GetQuery<Kistl.App.Base.Module>().Single(m => m.ModuleName == "GUI");
+            var guiModule = ctx.GetQuery<Kistl.App.Base.Module>().Single(m => m.Name == "GUI");
             Assert.That(guiModule, Is.Not.Null);
         }
 
         [Test]
         public void GetListWithFirst()
         {
-            var guiModule = ctx.GetQuery<Kistl.App.Base.Module>().Where(m => m.ModuleName == "GUI").First();
+            var guiModule = ctx.GetQuery<Kistl.App.Base.Module>().Where(m => m.Name == "GUI").First();
             Assert.That(guiModule, Is.Not.Null);
         }
 
         [Test]
         public void GetListFirst()
         {
-            var guiModule = ctx.GetQuery<Kistl.App.Base.Module>().First(m => m.ModuleName == "GUI");
+            var guiModule = ctx.GetQuery<Kistl.App.Base.Module>().First(m => m.Name == "GUI");
             Assert.That(guiModule, Is.Not.Null);
         }
 

@@ -90,7 +90,7 @@ namespace Kistl.DalProvider.EF.Tests
         {
             using (IKistlContext ctx = KistlContext.GetContext())
             {
-                var module = ctx.GetQuery<Module>().Where(m => m.ModuleName == "KistlBase").First();
+                var module = ctx.GetQuery<Module>().Where(m => m.Name == "KistlBase").First();
                 Assert.That(module, Is.Not.Null);
                 var result = ctx.GetQuery<ObjectClass>().Where(c => c.Module == module).ToList();
                 Assert.That(result, Is.Not.Null);

@@ -67,13 +67,13 @@ namespace Kistl.DalProvider.Frozen.Generator
             // TODO: IsFrozenObject doesn't contain enough information, should check parents too
             var modulesWithFrozenClasses = ctx.GetQuery<Module>()
                 .Where(m => m.DataTypes.OfType<ObjectClass>().Any(cls => cls.IsFrozenObject))
-                .OrderBy(m => m.ModuleName)
+                .OrderBy(m => m.Name)
                 .ToList();
 
             otherFileNames.Add(RunTemplateWithExtension(ctx, "Repositories.FrozenContextImplementation", "FrozenContextImplementation", "Designer.cs", modulesWithFrozenClasses));
             foreach (var m in modulesWithFrozenClasses)
             {
-                otherFileNames.Add(RunTemplateWithExtension(ctx, "Repositories.FrozenRepository", "Frozen" + m.ModuleName + "Repository", "Designer.cs", m));
+                otherFileNames.Add(RunTemplateWithExtension(ctx, "Repositories.FrozenRepository", "Frozen" + m.Name + "Repository", "Designer.cs", m));
             }
 
             return base.Generate_Other(ctx).Concat(otherFileNames);

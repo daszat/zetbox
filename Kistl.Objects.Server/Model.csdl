@@ -1282,7 +1282,7 @@
                         ToRole="DataTypes" />
     <Property Name="Description" Type="String" Nullable="true" MaxLength="200" />
     <Property Name="ExportGuid" Type="Guid" Nullable="false" />
-    <Property Name="ModuleName" Type="String" Nullable="false" MaxLength="200" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="200" />
     <Property Name="Namespace" Type="String" Nullable="false" MaxLength="200" />
   </EntityType>
   <EntityType Name="Muhblah">

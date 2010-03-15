@@ -556,7 +556,7 @@
 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
 <ScalarProperty Name="Description" ColumnName="Description" />
 <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
-<ScalarProperty Name="ModuleName" ColumnName="ModuleName" />
+<ScalarProperty Name="Name" ColumnName="Name" />
 <ScalarProperty Name="Namespace" ColumnName="Namespace" />
 	    </MappingFragment>
       </EntityTypeMapping>
