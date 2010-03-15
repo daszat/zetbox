@@ -753,7 +753,6 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="AssemblyName" Type="String" Nullable="false" MaxLength="200" />
     <NavigationProperty Name="ChangedBy__Implementation__"
                         Relationship="Model.FK_Assembly_was_ChangedBy"
                         FromRole="Assembly"
@@ -770,6 +769,7 @@
                         Relationship="Model.FK_Module_has_Assemblies"
                         FromRole="Assemblies"
                         ToRole="Module" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="200" />
   </EntityType>
   <EntityType Name="Auftrag">
     <Key>

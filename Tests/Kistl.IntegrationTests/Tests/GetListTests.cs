@@ -327,7 +327,7 @@ namespace Kistl.IntegrationTests
                 Test t = new Test();
                 t.TestProp = "foo";
                 var result = ctx.GetQuery<Assembly>()
-                    .Where(a => a.AssemblyName == t.TestProp).ToList();
+                    .Where(a => a.Name == t.TestProp).ToList();
                 Assert.That(result, Is.Not.Null);
                 Assert.That(result.Count, Is.EqualTo(0));
             }

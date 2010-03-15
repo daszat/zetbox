@@ -34,7 +34,7 @@ namespace Kistl.Client.Presentables.KistlBase
                 if (_typeList == null)
                 {
                     _typeList = new ReadOnlyProjectedList<Type, SystemTypeModel>(
-                        System.Reflection.Assembly.ReflectionOnlyLoad(_assembly.AssemblyName).GetTypes(),
+                        System.Reflection.Assembly.ReflectionOnlyLoad(_assembly.Name).GetTypes(),
                         t => Factory.CreateSpecificModel<SystemTypeModel>(DataContext, t),
                         mdl => mdl.Value);
                 }

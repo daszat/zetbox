@@ -15,7 +15,7 @@ namespace Kistl.App.Base
         #region ToString
         public static void OnToString_Assembly(Assembly obj, MethodReturnEventArgs<string> e)
         {
-            e.Result = obj.AssemblyName;
+            e.Result = obj.Name;
 
             FixupFloatingObjectsToString(obj, e);
         }

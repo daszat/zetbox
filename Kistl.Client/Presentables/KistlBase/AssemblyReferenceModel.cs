@@ -32,11 +32,11 @@ namespace Kistl.Client.Presentables.KistlBase
         {
             string assemblyFileName = Factory.GetSourceFileNameFromUser("Assembly files|*.dll;*.exe", "All files|*.*");
             var assembly = System.Reflection.Assembly.ReflectionOnlyLoadFrom(assemblyFileName);
-            var assemblyDescriptor = DataContext.GetQuery<Assembly>().SingleOrDefault(a => a.AssemblyName == assembly.FullName);
+            var assemblyDescriptor = DataContext.GetQuery<Assembly>().SingleOrDefault(a => a.Name == assembly.FullName);
             if (assemblyDescriptor == null)
             {
                 assemblyDescriptor = DataContext.Create<Assembly>();
-                assemblyDescriptor.AssemblyName = assembly.FullName;
+                assemblyDescriptor.Name = assembly.FullName;
             }
 
             this.Value = (DataObjectModel)Factory.CreateDefaultModel(DataContext, assemblyDescriptor);

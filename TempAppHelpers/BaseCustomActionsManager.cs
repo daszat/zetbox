@@ -199,16 +199,16 @@ namespace Kistl.App.Extensions
                 // attached yet, so TypeRef.AsType() 
                 // and TypeRef.ToString() would be 
                 // nice, but aren't available yet.
-                Type t = Type.GetType(invoke.Implementor.FullName + ", " + invoke.Implementor.Assembly.AssemblyName);
+                Type t = Type.GetType(invoke.Implementor.FullName + ", " + invoke.Implementor.Assembly.Name);
                 if (t == null)
                 {
-                    Log.ErrorFormat("Type {0}, {1} not found", invoke.Implementor.FullName, invoke.Implementor.Assembly.AssemblyName);
+                    Log.ErrorFormat("Type {0}, {1} not found", invoke.Implementor.FullName, invoke.Implementor.Assembly.Name);
                     return;
                 }
 
                 if (!t.IsStatic())
                 {
-                    Log.ErrorFormat("Type {0}, {1} is not static", invoke.Implementor.FullName, invoke.Implementor.Assembly.AssemblyName);
+                    Log.ErrorFormat("Type {0}, {1} is not static", invoke.Implementor.FullName, invoke.Implementor.Assembly.Name);
                     return;
                 }
 

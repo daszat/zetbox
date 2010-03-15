@@ -105,14 +105,14 @@ namespace Kistl.Client.WPF
             string aName)
         {
             Assembly result = ctx.GetQuery<Assembly>()
-                .Where(a => a.AssemblyName == aName)
+                .Where(a => a.Name == aName)
                 .ToList()
                 .SingleOrDefault();
 
             if (result == null)
             {
                 result = ctx.Create<Assembly>();
-                result.AssemblyName = aName;
+                result.Name = aName;
                 result.Module = guiModule;
             }
 

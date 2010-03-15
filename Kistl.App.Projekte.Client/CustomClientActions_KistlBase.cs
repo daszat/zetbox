@@ -218,7 +218,7 @@ namespace Kistl.App.Base
             }
             else
             {
-                e.Result = String.Format("{0}, {1}", obj.Type.FullName, obj.Type.Assembly.AssemblyName);
+                e.Result = String.Format("{0}, {1}", obj.Type.FullName, obj.Type.Assembly.Name);
             }
         }
 
@@ -245,7 +245,7 @@ namespace Kistl.App.Base
 
         public static void OnAsType_TypeRef(TypeRef obj, MethodReturnEventArgs<Type> e, bool throwOnError)
         {
-            e.Result = Type.GetType(String.Format("{0}, {1}", obj.FullName, obj.Assembly.AssemblyName), throwOnError);
+            e.Result = Type.GetType(String.Format("{0}, {1}", obj.FullName, obj.Assembly.Name), throwOnError);
             if (e.Result == null)
             {
                 return;
@@ -280,7 +280,7 @@ namespace Kistl.App.Base
             {
                 // load all current references into the context
                 var newTypes = System.Reflection.Assembly
-                    .Load(assembly.AssemblyName)
+                    .Load(assembly.Name)
                     .GetExportedTypes()
                     .Where(t => !t.IsGenericTypeDefinition)
                     .Select(t => t.ToRef(ctx))

@@ -1219,11 +1219,11 @@
     <Property Name="fk_ChangedBy" Type="int" />
     <Property Name="fk_CreatedBy" Type="int" />
     <Property Name="fk_Module" Type="int" />
-    <Property Name="AssemblyName" Type="nvarchar" MaxLength="200" Nullable="false" />
     <Property Name="ChangedOn" Type="datetime" Nullable="true" />
     <Property Name="CreatedOn" Type="datetime" Nullable="true" />
     <Property Name="DeploymentRestrictions" Type="int" Nullable="false" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="Auftrag">

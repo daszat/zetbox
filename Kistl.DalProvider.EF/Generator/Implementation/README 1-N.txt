@@ -178,7 +178,7 @@ Finally the various parts have to be defined in the EDMX:
 			<EntityTypeMapping TypeName="IsTypeOf(Model.Assembly)">
 				<MappingFragment StoreEntitySet="Assembly">
 					<ScalarProperty Name="ID" ColumnName="ID" />
-					<ScalarProperty Name="AssemblyName" ColumnName="AssemblyName" />
+					<ScalarProperty Name="Name" ColumnName="Name" />
 					<ScalarProperty Name="IsClientAssembly" ColumnName="IsClientAssembly" />
 				</MappingFragment>
 			</EntityTypeMapping>

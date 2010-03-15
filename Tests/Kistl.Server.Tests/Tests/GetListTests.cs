@@ -264,7 +264,7 @@ namespace Kistl.Server.Tests
             Test t = new Test();
             t.TestProp = "foo";
             var result = ctx.GetQuery<Kistl.App.Base.Assembly>()
-                .Where(a => a.AssemblyName == t.TestProp).ToList();
+                .Where(a => a.Name == t.TestProp).ToList();
             Assert.That(result, Is.Not.Null);
             Assert.That(result.Count, Is.EqualTo(0));
         }

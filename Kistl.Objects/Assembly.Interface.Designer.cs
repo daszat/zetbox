@@ -14,13 +14,6 @@ namespace Kistl.App.Base
     {
 
         /// <summary>
-        /// Full Assemblyname eg. MyActions, Version=1.0.0.0
-        /// </summary>
-		string AssemblyName {
-			get;
-			set;
-		}
-        /// <summary>
         /// Deployment restrictions for this assembly
         /// </summary>
 		Kistl.App.Base.DeploymentRestriction DeploymentRestrictions {
@@ -31,6 +24,13 @@ namespace Kistl.App.Base
         /// Module
         /// </summary>
 		Kistl.App.Base.Module Module {
+			get;
+			set;
+		}
+        /// <summary>
+        /// Full Assemblyname eg. MyActions, Version=1.0.0.0
+        /// </summary>
+		string Name {
 			get;
 			set;
 		}

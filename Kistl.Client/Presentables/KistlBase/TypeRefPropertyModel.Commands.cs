@@ -42,7 +42,7 @@ namespace Kistl.Client.Presentables.KistlBase
         /// <returns>a system assembly loaded in the reflection only application context.</returns>
         protected System.Reflection.Assembly ReflectionFromRef(Kistl.App.Base.Assembly kistlAssembly)
         {
-            return System.Reflection.Assembly.ReflectionOnlyLoad(kistlAssembly.AssemblyName);
+            return System.Reflection.Assembly.ReflectionOnlyLoad(kistlAssembly.Name);
         }
 
         /// <summary>
@@ -52,11 +52,11 @@ namespace Kistl.Client.Presentables.KistlBase
         /// <returns>a system assembly loaded in the reflection only application context.</returns>
         protected Kistl.App.Base.Assembly RefFromReflection(System.Reflection.Assembly systemAssembly)
         {
-            var assemblyDescriptor = DataContext.GetQuery<Assembly>().SingleOrDefault(a => a.AssemblyName == systemAssembly.FullName);
+            var assemblyDescriptor = DataContext.GetQuery<Assembly>().SingleOrDefault(a => a.Name == systemAssembly.FullName);
             if (assemblyDescriptor == null)
             {
                 assemblyDescriptor = DataContext.Create<Assembly>();
-                assemblyDescriptor.AssemblyName = systemAssembly.FullName;
+                assemblyDescriptor.Name = systemAssembly.FullName;
             }
 
             return assemblyDescriptor;
@@ -87,7 +87,7 @@ namespace Kistl.Client.Presentables.KistlBase
             var selectionTask = Factory.CreateSpecificModel<DataObjectSelectionTaskModel>(
                 DataContext,
                 DataContext.GetQuery<Kistl.App.Base.Assembly>()
-                    .OrderBy(a => a.AssemblyName)
+                    .OrderBy(a => a.Name)
                     .Select(a => (DataObjectModel)Factory.CreateDefaultModel(DataContext, a))
                     .ToList(),
                 new Action<DataObjectModel>(delegate(DataObjectModel chosen)

@@ -58,58 +58,6 @@ namespace Kistl.App.Base
         private int _ID;
 
         /// <summary>
-        /// Full Assemblyname eg. MyActions, Version=1.0.0.0
-        /// </summary>
-        // value type property
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-           // Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.NotifyingDataProperty
-        public virtual string AssemblyName
-        {
-            get
-            {
-                // create local variable to create single point of return
-                // for the benefit of down-stream templates
-                var __result = _AssemblyName;
-                if (OnAssemblyName_Getter != null)
-                {
-                    var __e = new PropertyGetterEventArgs<string>(__result);
-                    OnAssemblyName_Getter(this, __e);
-                    __result = __e.Result;
-                }
-                return __result;
-            }
-            set
-            {
-                if (this.IsReadonly) throw new ReadOnlyObjectException();
-                if (_AssemblyName != value)
-                {
-                    var __oldValue = _AssemblyName;
-                    var __newValue = value;
-                    if(OnAssemblyName_PreSetter != null)
-                    {
-                        var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
-                        OnAssemblyName_PreSetter(this, __e);
-                        __newValue = __e.Result;
-                    }
-                    NotifyPropertyChanging("AssemblyName", __oldValue, __newValue);
-                    _AssemblyName = __newValue;
-                    NotifyPropertyChanged("AssemblyName", __oldValue, __newValue);
-                    if(OnAssemblyName_PostSetter != null)
-                    {
-                        var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
-                        OnAssemblyName_PostSetter(this, __e);
-                    }
-                }
-            }
-        }
-        private string _AssemblyName;
-		public static event PropertyGetterHandler<Kistl.App.Base.Assembly, string> OnAssemblyName_Getter;
-		public static event PropertyPreSetterHandler<Kistl.App.Base.Assembly, string> OnAssemblyName_PreSetter;
-		public static event PropertyPostSetterHandler<Kistl.App.Base.Assembly, string> OnAssemblyName_PostSetter;
-
-        /// <summary>
         /// Identity which changed this object
         /// </summary>
     /*
@@ -618,6 +566,58 @@ namespace Kistl.App.Base
 		public static event PropertyPostSetterHandler<Kistl.App.Base.Assembly, Kistl.App.Base.Module> OnModule_PostSetter;
 
         /// <summary>
+        /// Full Assemblyname eg. MyActions, Version=1.0.0.0
+        /// </summary>
+        // value type property
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+           // Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.NotifyingDataProperty
+        public virtual string Name
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _Name;
+                if (OnName_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<string>(__result);
+                    OnName_Getter(this, __e);
+                    __result = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_Name != value)
+                {
+                    var __oldValue = _Name;
+                    var __newValue = value;
+                    if(OnName_PreSetter != null)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
+                        OnName_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("Name", __oldValue, __newValue);
+                    _Name = __newValue;
+                    NotifyPropertyChanged("Name", __oldValue, __newValue);
+                    if(OnName_PostSetter != null)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
+                        OnName_PostSetter(this, __e);
+                    }
+                }
+            }
+        }
+        private string _Name;
+		public static event PropertyGetterHandler<Kistl.App.Base.Assembly, string> OnName_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.Assembly, string> OnName_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.Assembly, string> OnName_PostSetter;
+
+        /// <summary>
         /// Regenerates the stored list of TypeRefs from the loaded assembly
         /// </summary>
 		[EventBasedMethod("OnRegenerateTypeRefs_Assembly")]
@@ -650,11 +650,11 @@ namespace Kistl.App.Base
 			var otherImpl = (Assembly__Implementation__)obj;
 			var me = (Assembly)this;
 
-			me.AssemblyName = other.AssemblyName;
 			me.ChangedOn = other.ChangedOn;
 			me.CreatedOn = other.CreatedOn;
 			me.DeploymentRestrictions = other.DeploymentRestrictions;
 			me.ExportGuid = other.ExportGuid;
+			me.Name = other.Name;
 			this._fk_ChangedBy = otherImpl._fk_ChangedBy;
 			this._fk_CreatedBy = otherImpl._fk_CreatedBy;
 			this._fk_Module = otherImpl._fk_Module;
@@ -714,15 +714,6 @@ namespace Kistl.App.Base
 		{
 			switch(propertyName)
 			{
-				case "AssemblyName":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("9a9dbd59-6816-4d25-9ef2-da84b96bf454")).Constraints
-						.Where(c => !c.IsValid(this, this.AssemblyName))
-						.Select(c => c.GetErrorText(this, this.AssemblyName))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
 				case "ChangedBy":
 				{
 					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("cb31759a-597a-4277-a963-c914a07312e7")).Constraints
@@ -786,6 +777,15 @@ namespace Kistl.App.Base
 					
 					return String.Join("; ", errors);
 				}
+				case "Name":
+				{
+					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("9a9dbd59-6816-4d25-9ef2-da84b96bf454")).Constraints
+						.Where(c => !c.IsValid(this, this.Name))
+						.Select(c => c.GetErrorText(this, this.Name))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
 				default:
 					return base.GetPropertyError(propertyName);
 			}
@@ -826,7 +826,6 @@ namespace Kistl.App.Base
         {
             
             base.ToStream(binStream, auxObjects);
-            BinarySerializer.ToStream(this._AssemblyName, binStream);
             BinarySerializer.ToStream(ChangedBy != null ? ChangedBy.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._ChangedOn, binStream);
             BinarySerializer.ToStream(CreatedBy != null ? CreatedBy.ID : (int?)null, binStream);
@@ -837,13 +836,13 @@ namespace Kistl.App.Base
                 BinarySerializer.ToStream(this._ExportGuid, binStream);
             }
             BinarySerializer.ToStream(Module != null ? Module.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(this._Name, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             
             base.FromStream(binStream);
-            BinarySerializer.FromStream(out this._AssemblyName, binStream);
             BinarySerializer.FromStream(out this._fk_ChangedBy, binStream);
             BinarySerializer.FromStream(out this._ChangedOn, binStream);
             BinarySerializer.FromStream(out this._fk_CreatedBy, binStream);
@@ -858,13 +857,13 @@ namespace Kistl.App.Base
                 BinarySerializer.FromStream(out this._ExportGuid, binStream);
             }
             BinarySerializer.FromStream(out this._fk_Module, binStream);
+            BinarySerializer.FromStream(out this._Name, binStream);
         }
 
         public override void ToStream(System.Xml.XmlWriter xml)
         {
             
             base.ToStream(xml);
-            XmlStreamer.ToStream(this._AssemblyName, xml, "AssemblyName", "Kistl.App.Base");
             XmlStreamer.ToStream(ChangedBy != null ? ChangedBy.ID : (int?)null, xml, "ChangedBy", "Kistl.App.Base");
             XmlStreamer.ToStream(this._ChangedOn, xml, "ChangedOn", "Kistl.App.Base");
             XmlStreamer.ToStream(CreatedBy != null ? CreatedBy.ID : (int?)null, xml, "CreatedBy", "Kistl.App.Base");
@@ -875,13 +874,13 @@ namespace Kistl.App.Base
                 XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
             }
             XmlStreamer.ToStream(Module != null ? Module.ID : (int?)null, xml, "Module", "Kistl.App.Base");
+            XmlStreamer.ToStream(this._Name, xml, "Name", "Kistl.App.Base");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
             
             base.FromStream(xml);
-            XmlStreamer.FromStream(ref this._AssemblyName, xml, "AssemblyName", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_ChangedBy, xml, "ChangedBy", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._ChangedOn, xml, "ChangedOn", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_CreatedBy, xml, "CreatedBy", "Kistl.App.Base");
@@ -892,6 +891,7 @@ namespace Kistl.App.Base
                 XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
             }
             XmlStreamer.FromStream(ref this._fk_Module, xml, "Module", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._Name, xml, "Name", "Kistl.App.Base");
         }
 
         public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
@@ -899,24 +899,24 @@ namespace Kistl.App.Base
             
             xml.WriteAttributeString("ExportGuid", this._ExportGuid.ToString());
     
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._AssemblyName, xml, "AssemblyName", "Kistl.App.Base");
-    
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._ChangedOn, xml, "ChangedOn", "Kistl.App.Base");
     
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._CreatedOn, xml, "CreatedOn", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream((int?)this.DeploymentRestrictions, xml, "DeploymentRestrictions", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(Module != null ? Module.ExportGuid : (Guid?)null, xml, "Module", "Kistl.App.Base");
+    
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._Name, xml, "Name", "Kistl.App.Base");
         }
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
         {
-            XmlStreamer.FromStream(ref this._AssemblyName, xml, "AssemblyName", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._ChangedOn, xml, "ChangedOn", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._CreatedOn, xml, "CreatedOn", "Kistl.App.Base");
             XmlStreamer.FromStreamConverter(v => ((Assembly)this).DeploymentRestrictions = (Kistl.App.Base.DeploymentRestriction)v, xml, "DeploymentRestrictions", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
             this._isExportGuidSet = true;
             XmlStreamer.FromStream(ref this._fk_guid_Module, xml, "Module", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._Name, xml, "Name", "Kistl.App.Base");
         }
 
 #endregion

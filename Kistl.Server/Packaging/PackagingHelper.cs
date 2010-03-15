@@ -51,12 +51,12 @@ namespace Kistl.Server.Packaging
                 .OrderBy(i => i.Property.ObjectClass.Name).ThenBy(i => i.Property.Name).ThenBy(i => i.ExportGuid));
 
             AddMetaObjects(result, ctx.GetQuery<Assembly>().Where(i => i.Module.ID == moduleID)
-                .OrderBy(i => i.AssemblyName).ThenBy(i => i.ExportGuid));
+                .OrderBy(i => i.Name).ThenBy(i => i.ExportGuid));
             AddMetaObjects(result, ctx.GetQuery<TypeRef>().Where(i => i.Assembly.Module.ID == moduleID)
-                .OrderBy(i => i.Assembly.AssemblyName).ThenBy(i => i.FullName).ThenBy(i => i.ExportGuid));
+                .OrderBy(i => i.Assembly.Name).ThenBy(i => i.FullName).ThenBy(i => i.ExportGuid));
             AddMetaObjects(result, ctx.GetPersistenceObjectQuery<TypeRef_hasGenericArguments_TypeRef_RelationEntry>().Where(i => i.A.Assembly.Module.ID == moduleID || i.B.Assembly.Module.ID == moduleID)
                 .ToList().AsQueryable() // client side sorting!
-                .OrderBy(i => i.A.Assembly.AssemblyName).ThenBy(i => i.B.Assembly.AssemblyName)
+                .OrderBy(i => i.A.Assembly.Name).ThenBy(i => i.B.Assembly.Name)
                 .ThenBy(i => i.A.FullName).ThenBy(i => i.B.FullName)
                 .ThenBy(i => i.AIndex).ThenBy(i => i.BIndex)
                 .ThenBy(i => i.A.ExportGuid).ThenBy(i => i.B.ExportGuid));
@@ -64,9 +64,9 @@ namespace Kistl.Server.Packaging
             AddMetaObjects(result, ctx.GetQuery<Icon>().Where(i => i.Module.ID == moduleID)
                 .OrderBy(i => i.IconFile).ThenBy(i => i.ExportGuid));
             AddMetaObjects(result, ctx.GetQuery<PresentableModelDescriptor>().Where(i => i.Module.ID == moduleID)
-                .OrderBy(i => i.PresentableModelRef.Assembly.AssemblyName).ThenBy(i => i.PresentableModelRef.FullName).ThenBy(i => i.ExportGuid));
+                .OrderBy(i => i.PresentableModelRef.Assembly.Name).ThenBy(i => i.PresentableModelRef.FullName).ThenBy(i => i.ExportGuid));
             AddMetaObjects(result, ctx.GetQuery<ViewDescriptor>().Where(i => i.Module.ID == moduleID)
-                .OrderBy(i => i.ControlRef.Assembly.AssemblyName).ThenBy(i => i.ControlRef.FullName).ThenBy(i => i.ExportGuid));
+                .OrderBy(i => i.ControlRef.Assembly.Name).ThenBy(i => i.ControlRef.FullName).ThenBy(i => i.ExportGuid));
 
             // Security
             AddMetaObjects(result, ctx.GetQuery<Group>().Where(i => i.Module.ID == moduleID)
@@ -83,7 +83,7 @@ namespace Kistl.Server.Packaging
                     .OrderBy(i => i.GetInterfaceType().Type.FullName).ThenBy(i => i.ExportGuid));
                 AddMetaObjects(result, ctx.GetPersistenceObjectQuery<PresentableModelDescriptor_displayedBy_ControlKind_RelationEntry>()
                     .ToList().AsQueryable() // TODO: remove this workaround for GetType()
-                    .OrderBy(i => i.A.PresentableModelRef.Assembly.AssemblyName).ThenBy(i => i.A.PresentableModelRef.FullName)
+                    .OrderBy(i => i.A.PresentableModelRef.Assembly.Name).ThenBy(i => i.A.PresentableModelRef.FullName)
                     .ThenBy(i => i.B.GetType().FullName)
                     .ThenBy(i => i.A.ExportGuid).ThenBy(i => i.B.ExportGuid));
             }

@@ -43,7 +43,7 @@ namespace Kistl.App.GUI
         public static void OnPrepareDefault_Template(Template obj, ObjectClass cls)
         {
             var displayedType = cls.GetDataType();
-            obj.DisplayedTypeAssembly = obj.Context.GetQuery<Assembly>().Where(assembly => assembly.AssemblyName == displayedType.Assembly.FullName).SingleOrDefault();
+            obj.DisplayedTypeAssembly = obj.Context.GetQuery<Assembly>().Where(assembly => assembly.Name == displayedType.Assembly.FullName).SingleOrDefault();
             obj.DisplayedTypeFullName = displayedType.FullName;
             obj.DisplayName = String.Format("Default Template for {0}", displayedType.Name);
             //obj.VisualTree = TemplateHelper.CreateDefaultVisualTree(obj.Context, cls);

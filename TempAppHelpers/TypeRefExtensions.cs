@@ -111,7 +111,7 @@ namespace Kistl.App.Extensions
                 var args = t.GetGenericArguments().Select(arg => arg.ToRef(ctx)).ToArray();
                 var argsCount = args.Count();
                 foreach (var tRef in source.Where(tRef
-                    => tRef.Assembly.AssemblyName == t.Assembly.FullName
+                    => tRef.Assembly.Name == t.Assembly.FullName
                     && tRef.FullName == fullName
                     && tRef.GenericArguments.Count == argsCount))
                 {
@@ -131,7 +131,7 @@ namespace Kistl.App.Extensions
             {
                 // ToList: Workaround Case 1212
                 return source.ToList().SingleOrDefault(tRef
-                    => tRef.Assembly.AssemblyName == t.Assembly.FullName
+                    => tRef.Assembly.Name == t.Assembly.FullName
                     && tRef.FullName == t.FullName
                     && tRef.GenericArguments.Count == 0);
             }
@@ -149,7 +149,7 @@ namespace Kistl.App.Extensions
                 var args = t.GetGenericArguments().Select(arg => arg.ToRef(ctx)).ToArray();
                 var argsCount = args.Count();
                 foreach (var tRef in source.Where(tRef
-                    => tRef.Assembly.AssemblyName == t.Assembly.FullName
+                    => tRef.Assembly.Name == t.Assembly.FullName
                     && tRef.FullName == fullName
                     && tRef.GenericArguments.Count == argsCount))
                 {
@@ -168,7 +168,7 @@ namespace Kistl.App.Extensions
             else
             {
                 return source.SingleOrDefault(tRef
-                    => tRef.Assembly.AssemblyName == t.Assembly.FullName
+                    => tRef.Assembly.Name == t.Assembly.FullName
                     && tRef.FullName == t.FullName
                     && tRef.GenericArguments.Count == 0);
             }
@@ -184,7 +184,7 @@ namespace Kistl.App.Extensions
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
 
             // ToList: Workaround Case 1212
-            return ctx.GetQuery<Assembly>().ToList().SingleOrDefault(a => a.AssemblyName == ass.FullName);
+            return ctx.GetQuery<Assembly>().ToList().SingleOrDefault(a => a.Name == ass.FullName);
         }
 
         /// <summary>
@@ -199,7 +199,7 @@ namespace Kistl.App.Extensions
             if (result == null)
             {
                 result = ctx.Create<Assembly>();
-                result.AssemblyName = ass.FullName;
+                result.Name = ass.FullName;
                 result.Module = ctx.GetQuery<Module>().Single(m => m.ModuleName == "KistlBase");
                 result.DeploymentRestrictions = DeploymentRestriction.ClientOnly;
             }
