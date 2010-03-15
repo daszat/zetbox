@@ -24,7 +24,7 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
             host.CallTemplate("Implementation.ObjectClasses.ListProperty", ctx,
                  serList,
                  dataType,
-                 prop.PropertyName,
+                 prop.Name,
                  prop);
         }
 

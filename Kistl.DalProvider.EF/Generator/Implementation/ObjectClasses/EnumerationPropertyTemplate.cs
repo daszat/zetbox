@@ -29,7 +29,7 @@ namespace Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses
         protected virtual void AddSerialization(SerializationMembersList list)
         {
             if (list != null)
-                list.Add("Implementation.ObjectClasses.EnumBinarySerialization", SerializerType.All, this.prop.Module.Namespace, this.prop.PropertyName, this.prop);
+                list.Add("Implementation.ObjectClasses.EnumBinarySerialization", SerializerType.All, this.prop.Module.Namespace, this.prop.Name, this.prop);
         }
     }
 }

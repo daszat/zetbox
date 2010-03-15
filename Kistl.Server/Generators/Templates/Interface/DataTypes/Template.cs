@@ -103,7 +103,7 @@ namespace Kistl.Server.Generators.Templates.Interface.DataTypes
             if (prop.ObjectClass is ObjectClass)
             {
                 ObjectClass cls = (ObjectClass)prop.ObjectClass;
-                if (cls.ImplementsInterfaces.FirstOrDefault(c => c.Properties.FirstOrDefault(p => p.PropertyName == prop.PropertyName) != null) != null)
+                if (cls.ImplementsInterfaces.FirstOrDefault(c => c.Properties.FirstOrDefault(p => p.Name == prop.Name) != null) != null)
                 {
                     return true;
                 }

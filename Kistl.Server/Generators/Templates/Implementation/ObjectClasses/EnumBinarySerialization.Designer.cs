@@ -37,7 +37,7 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
 #line 19 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\EnumBinarySerialization.cst"
 // always use the interface to get the "right" property
 	string interfaceName = prop.ObjectClass.Name;
-    string memberName = prop.PropertyName;
+    string memberName = prop.Name;
     string enumName =  prop.Enumeration.Module.Namespace + "." +  prop.Enumeration.Name;
 	string methodName = direction.ToString();
 	

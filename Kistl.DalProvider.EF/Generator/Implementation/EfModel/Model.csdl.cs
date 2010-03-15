@@ -20,7 +20,7 @@ namespace Kistl.DalProvider.EF.Generator.Implementation.EfModel
         /// false) and when defining the CollectionEntry (IsList == true)
         internal static string PlainPropertyDefinitionFromValueType(ValueTypeProperty prop)
         {
-            return PlainPropertyDefinitionFromValueType(prop, prop.PropertyName);
+            return PlainPropertyDefinitionFromValueType(prop, prop.Name);
         }
 
         /// <summary>

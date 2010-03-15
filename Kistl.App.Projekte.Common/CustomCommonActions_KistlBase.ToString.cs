@@ -128,14 +128,14 @@ namespace Kistl.App.Base
         {
             if (obj.ObjectClass == null)
             {
-                e.Result = String.Join(" ", new[] { "unattached", obj.PropertyName });
+                e.Result = String.Join(" ", new[] { "unattached", obj.Name });
             }
             else
             {
                 e.Result = String.Format("{0} {1}.{2}",
                     obj.GetPropertyTypeString(),
                     obj.ObjectClass.Name,
-                    obj.PropertyName);
+                    obj.Name);
             }
 
             // TODO: fix in overrides for struct/valuetype and objectreference*

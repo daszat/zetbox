@@ -28,7 +28,7 @@ namespace Kistl.Server.Generators.Templates.Interface.DataTypes
         public override void Generate()
         {
 #line 15 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\DataTypes\SimplePropertyTemplate.cst"
-string name = prop.PropertyName;
+string name = prop.Name;
 	string type = prop.ReferencedTypeAsCSharp();
 
 #line 18 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\DataTypes\SimplePropertyTemplate.cst"

@@ -99,12 +99,12 @@ namespace Kistl.Server.SchemaManagement
         {
             var saved = savedSchema.FindPersistenceObject<ValueTypeProperty>(prop.ExportGuid);
             if (saved == null) return false;
-            return saved.PropertyName != prop.PropertyName;
+            return saved.Name != prop.Name;
         }
         public void DoRenameValueTypePropertyName(ObjectClass objClass, ValueTypeProperty prop, string prefix)
         {
             var saved = savedSchema.FindPersistenceObject<ValueTypeProperty>(prop.ExportGuid);
-            Log.ErrorFormat("renaming a property from '{0}' to '{1}' is not supported yet", saved.PropertyName, prop.PropertyName);
+            Log.ErrorFormat("renaming a property from '{0}' to '{1}' is not supported yet", saved.Name, prop.Name);
         }
         #endregion
 
@@ -132,7 +132,7 @@ namespace Kistl.Server.SchemaManagement
 
             if (movedUp)
             {
-                Log.InfoFormat("Moving property '{0}' from '{1}' up to '{2}'", prop.PropertyName, saved.ObjectClass.Name, objClass.Name);
+                Log.InfoFormat("Moving property '{0}' from '{1}' up to '{2}'", prop.Name, saved.ObjectClass.Name, objClass.Name);
                 db.CreateColumn(tblName, colName, dbType, size, true);
 
                 db.CopyColumnData(srcTblName, srcColName, tblName, colName);
@@ -153,7 +153,7 @@ namespace Kistl.Server.SchemaManagement
             }
             else if (movedDown)
             {
-                Log.InfoFormat("Moving property '{0}' from '{1}' down to '{2}' (dataloss possible)", prop.PropertyName, saved.ObjectClass.Name, objClass.Name);
+                Log.InfoFormat("Moving property '{0}' from '{1}' down to '{2}' (dataloss possible)", prop.Name, saved.ObjectClass.Name, objClass.Name);
                 db.CreateColumn(tblName, colName, dbType, size, true);
 
                 db.CopyColumnData(srcTblName, srcColName, tblName, colName);
@@ -194,7 +194,7 @@ namespace Kistl.Server.SchemaManagement
         public void DoNewValueTypePropertyNullable(ObjectClass objClass, ValueTypeProperty prop, string prefix)
         {
             string colName = Construct.NestedColumnName(prop, prefix);
-            Log.InfoFormat("New nullable ValueType Property: '{0}' ('{1}')", prop.PropertyName, colName);
+            Log.InfoFormat("New nullable ValueType Property: '{0}' ('{1}')", prop.Name, colName);
             db.CreateColumn(objClass.TableName, colName, SchemaManager.GetDbType(prop),
                 prop is StringProperty ? ((StringProperty)prop).GetMaxLength() : 0, true);
         }
@@ -211,7 +211,7 @@ namespace Kistl.Server.SchemaManagement
             string colName = Construct.NestedColumnName(prop, prefix);
             var dbType = SchemaManager.GetDbType(prop);
             var size = prop is StringProperty ? ((StringProperty)prop).GetMaxLength() : 0;
-            Log.InfoFormat("New not nullable ValueType Property: [{0}.{1}] (col:{2})", prop.ObjectClass.Name, prop.PropertyName, colName);
+            Log.InfoFormat("New not nullable ValueType Property: [{0}.{1}] (col:{2})", prop.ObjectClass.Name, prop.Name, colName);
             if (!db.CheckTableContainsData(tblName))
             {
                 db.CreateColumn(tblName, colName, dbType, size, false);
@@ -270,12 +270,12 @@ namespace Kistl.Server.SchemaManagement
         {
             var saved = savedSchema.FindPersistenceObject<ValueTypeProperty>(prop.ExportGuid);
             if (saved == null) return false;
-            return saved.PropertyName != prop.PropertyName;
+            return saved.Name != prop.Name;
         }
         public void DoRenameValueTypePropertyListName(ObjectClass objClass, ValueTypeProperty prop)
         {
             var saved = savedSchema.FindPersistenceObject<ValueTypeProperty>(prop.ExportGuid);
-            Log.ErrorFormat("renaming a Property from '{0}' to '{1}' is not supported yet", saved.PropertyName, prop.PropertyName);
+            Log.ErrorFormat("renaming a Property from '{0}' to '{1}' is not supported yet", saved.Name, prop.Name);
         }
         #endregion
 
@@ -300,11 +300,11 @@ namespace Kistl.Server.SchemaManagement
         }
         public void DoNewValueTypePropertyList(ObjectClass objClass, ValueTypeProperty prop)
         {
-            Log.InfoFormat("New ValueType Property List: {0}", prop.PropertyName);
+            Log.InfoFormat("New ValueType Property List: {0}", prop.Name);
             string tblName = prop.GetCollectionEntryTable();
             string fkName = "fk_" + prop.ObjectClass.Name;
-            string valPropName = prop.PropertyName;
-            string valPropIndexName = prop.PropertyName + "Index";
+            string valPropName = prop.Name;
+            string valPropIndexName = prop.Name + "Index";
             string assocName = prop.GetAssociationName();
             bool hasPersistentOrder = prop.HasPersistentOrder;
 
@@ -328,13 +328,13 @@ namespace Kistl.Server.SchemaManagement
         }
         public void DoNewCompoundObjectPropertyList(ObjectClass objClass, CompoundObjectProperty prop)
         {
-            Log.InfoFormat("New CompoundObject Property List: {0}", prop.PropertyName);
+            Log.InfoFormat("New CompoundObject Property List: {0}", prop.Name);
             string tblName = prop.GetCollectionEntryTable();
             string fkName = "fk_" + prop.ObjectClass.Name;
 
             // TODO: Support neested CompoundObject
-            string valPropName = prop.PropertyName;
-            string valPropIndexName = prop.PropertyName + "Index";
+            string valPropName = prop.Name;
+            string valPropIndexName = prop.Name + "Index";
             string assocName = prop.GetAssociationName();
             bool hasPersistentOrder = prop.HasPersistentOrder;
 
@@ -345,7 +345,7 @@ namespace Kistl.Server.SchemaManagement
             // TODO: Support neested CompoundObject
             foreach (ValueTypeProperty p in prop.CompoundObjectDefinition.Properties)
             {
-                db.CreateColumn(tblName, valPropName + "_" + p.PropertyName, SchemaManager.GetDbType(p), p is StringProperty ? ((StringProperty)p).GetMaxLength() : 0, true);
+                db.CreateColumn(tblName, valPropName + "_" + p.Name, SchemaManager.GetDbType(p), p is StringProperty ? ((StringProperty)p).GetMaxLength() : 0, true);
             }
 
             if (hasPersistentOrder)
@@ -361,12 +361,12 @@ namespace Kistl.Server.SchemaManagement
         {
             var saved = savedSchema.FindPersistenceObject<CompoundObjectProperty>(prop.ExportGuid);
             if (saved == null) return false;
-            return saved.PropertyName != prop.PropertyName;
+            return saved.Name != prop.Name;
         }
         public void DoRenameCompoundObjectPropertyListName(ObjectClass objClass, CompoundObjectProperty prop)
         {
             var saved = savedSchema.FindPersistenceObject<CompoundObjectProperty>(prop.ExportGuid);
-            Log.ErrorFormat("renaming a Property from '{0}' to '{1}' is not supported yet", saved.PropertyName, prop.PropertyName);
+            Log.ErrorFormat("renaming a Property from '{0}' to '{1}' is not supported yet", saved.Name, prop.Name);
         }
         #endregion
 
@@ -1193,13 +1193,13 @@ namespace Kistl.Server.SchemaManagement
         public void DoNewCompoundObjectProperty(ObjectClass objClass, CompoundObjectProperty sprop, string prefix)
         {
             string colName_IsNull = Construct.NestedColumnName(sprop, prefix);
-            Log.InfoFormat("New is null column for CompoundObject Property: '{0}' ('{1}')", sprop.PropertyName, colName_IsNull);
+            Log.InfoFormat("New is null column for CompoundObject Property: '{0}' ('{1}')", sprop.Name, colName_IsNull);
             db.CreateColumn(objClass.TableName, colName_IsNull, System.Data.DbType.Boolean, 0, false);
 
             foreach (var valProp in sprop.CompoundObjectDefinition.Properties.OfType<ValueTypeProperty>())
             {
                 var colName = Construct.NestedColumnName(valProp, colName_IsNull);
-                Log.InfoFormat("New nullable ValueType Property: '{0}' ('{1}')", valProp.PropertyName, colName);
+                Log.InfoFormat("New nullable ValueType Property: '{0}' ('{1}')", valProp.Name, colName);
                 db.CreateColumn(objClass.TableName, colName, SchemaManager.GetDbType(valProp),
                     valProp is StringProperty ? ((StringProperty)valProp).GetMaxLength() : 0, valProp.IsNullable());
             }

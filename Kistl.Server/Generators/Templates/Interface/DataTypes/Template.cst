@@ -26,7 +26,7 @@ namespace <%= dataType.Module.Namespace %>
     public interface <%= dataType.Name %> <%= GetInheritance() %> 
     {
 <%
-    foreach(Property p in dataType.Properties.OrderBy(p => p.PropertyName))
+    foreach(Property p in dataType.Properties.OrderBy(p => p.Name))
     {
 		if(!IsDeclaredInImplementsInterface(p))
 		{

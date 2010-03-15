@@ -131,7 +131,7 @@ this.WriteObjects("    <!-- EntitySets and AssociationSet for all object-value C
 foreach(var prop in ctx.GetQuery<ValueTypeProperty>()
 		.Where(p => p.IsList)
 		.OrderBy(p => p.ObjectClass.Name)
-		.ThenBy(p => p.PropertyName))
+		.ThenBy(p => p.Name))
 	{
 		string assocName = prop.GetAssociationName();
 		string esName = prop.GetCollectionEntryClassName();
@@ -153,7 +153,7 @@ this.WriteObjects("    <!-- EntitySets and AssociationSet for all object-struct 
 foreach(var prop in ctx.GetQuery<CompoundObjectProperty>()
 		.Where(p => p.IsList)
 		.OrderBy(p => p.ObjectClass.Name)
-		.ThenBy(p => p.PropertyName))
+		.ThenBy(p => p.Name))
 	{
 		string assocName = prop.GetAssociationName();
 		string esName = prop.GetCollectionEntryClassName();
@@ -382,7 +382,7 @@ this.WriteObjects("    <!-- EntityTypes and Associations for all object-value Co
 foreach(var prop in ctx.GetQuery<ValueTypeProperty>()
 		.Where(p => p.IsList)
 		.OrderBy(p => p.ObjectClass.Name)
-		.ThenBy(p => p.PropertyName))
+		.ThenBy(p => p.Name))
 	{
 		string assocName = prop.GetAssociationName();
 		
@@ -407,13 +407,13 @@ this.WriteObjects("        <PropertyRef Name=\"ID\" />\r\n");
 this.WriteObjects("      </Key>\r\n");
 this.WriteObjects("      <Property Name=\"ID\" Type=\"int\" Nullable=\"false\" StoreGeneratedPattern=\"Identity\" />\r\n");
 this.WriteObjects("      <Property Name=\"fk_",  containerTypeName , "\" Type=\"int\" Nullable=\"true\" />\r\n");
-this.WriteObjects("      <Property Name=\"",  prop.PropertyName , "\" Type=\"",  itemTypeName , "\" ",  constraint , "/>\r\n");
+this.WriteObjects("      <Property Name=\"",  prop.Name , "\" Type=\"",  itemTypeName , "\" ",  constraint , "/>\r\n");
 #line 364 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.ssdl.cst"
 if (prop.HasPersistentOrder)
 		{
 
 #line 367 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.ssdl.cst"
-this.WriteObjects("    <Property Name=\"",  prop.PropertyName , "Index\" Type=\"int\" Nullable=\"true\" />\r\n");
+this.WriteObjects("    <Property Name=\"",  prop.Name , "Index\" Type=\"int\" Nullable=\"true\" />\r\n");
 #line 369 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.ssdl.cst"
 }
 
@@ -445,7 +445,7 @@ this.WriteObjects("    <!-- EntityTypes and Associations for all object-struct C
 foreach(var prop in ctx.GetQuery<CompoundObjectProperty>()
 		.Where(p => p.IsList)
 		.OrderBy(p => p.ObjectClass.Name)
-		.ThenBy(p => p.PropertyName))
+		.ThenBy(p => p.Name))
 	{
 		string assocName = prop.GetAssociationName();
 		
@@ -469,7 +469,7 @@ if (prop.HasPersistentOrder)
 		{
 
 #line 419 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.ssdl.cst"
-this.WriteObjects("    <Property Name=\"",  prop.PropertyName , "Index\" Type=\"int\" Nullable=\"true\" />\r\n");
+this.WriteObjects("    <Property Name=\"",  prop.Name , "Index\" Type=\"int\" Nullable=\"true\" />\r\n");
 #line 421 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.ssdl.cst"
 }
 

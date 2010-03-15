@@ -199,7 +199,7 @@ this.WriteObjects("    <!-- EntitySetMappings and AssociationSetMappings for obj
 foreach(var prop in ctx.GetQuery<ValueTypeProperty>()
         .Where(p => p.IsList)
         .OrderBy(p => p.ObjectClass.Name)
-        .ThenBy(p => p.PropertyName))
+        .ThenBy(p => p.Name))
     { 
 
 #line 176 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.msl.cst"
@@ -207,7 +207,7 @@ this.WriteObjects("    <EntitySetMapping Name=\"",  prop.GetCollectionEntryClass
 this.WriteObjects("      <EntityTypeMapping TypeName=\"IsTypeOf(Model.",  prop.GetCollectionEntryClassName() , ")\">\r\n");
 this.WriteObjects("        <MappingFragment StoreEntitySet=\"",  prop.GetCollectionEntryClassName() , "\">\r\n");
 this.WriteObjects("          <ScalarProperty Name=\"ID\" ColumnName=\"ID\" />\r\n");
-this.WriteObjects("          <ScalarProperty Name=\"B\" ColumnName=\"",  prop.PropertyName , "\" />\r\n");
+this.WriteObjects("          <ScalarProperty Name=\"B\" ColumnName=\"",  prop.Name , "\" />\r\n");
 #line 182 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.msl.cst"
 if (prop.HasPersistentOrder)
 		{
@@ -243,7 +243,7 @@ this.WriteObjects("    <!-- EntitySetMappings and AssociationSetMappings for obj
 foreach(var prop in ctx.GetQuery<CompoundObjectProperty>()
         .Where(p => p.IsList)
         .OrderBy(p => p.ObjectClass.Name)
-        .ThenBy(p => p.PropertyName))
+        .ThenBy(p => p.Name))
     { 
 
 #line 216 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.msl.cst"

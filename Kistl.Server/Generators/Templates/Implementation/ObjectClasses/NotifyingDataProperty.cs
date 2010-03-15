@@ -24,7 +24,7 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
         private Property _prop;
 
         public NotifyingDataProperty(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, SerializationMembersList serializationList, Property prop)
-            : base(_host, ctx, serializationList, prop.ReferencedTypeAsCSharp(), prop.PropertyName, prop.Module.Namespace)
+            : base(_host, ctx, serializationList, prop.ReferencedTypeAsCSharp(), prop.Name, prop.Module.Namespace)
         {
             _prop = prop;
         }
@@ -64,7 +64,7 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
                 this.WriteObjects("                        ", IsSetFlagName, " = true;\r\n");
                 this.WriteObjects("                        __result = this.", BackingMemberFromName(name), " = (", type, ")__p.DefaultValue.GetDefaultValue();\r\n");
                 this.WriteObjects("                    } else {\r\n");
-                this.WriteObjects("                        Kistl.API.Utils.Logging.Log.Warn(\"Unable to get default value for property '", _prop.ObjectClass.Name, ".", _prop.PropertyName, "'\");\r\n");
+                this.WriteObjects("                        Kistl.API.Utils.Logging.Log.Warn(\"Unable to get default value for property '", _prop.ObjectClass.Name, ".", _prop.Name, "'\");\r\n");
                 this.WriteObjects("                    }\r\n");
                 this.WriteObjects("                }\r\n");
             }

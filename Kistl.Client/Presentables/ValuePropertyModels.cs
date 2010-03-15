@@ -102,7 +102,7 @@ namespace Kistl.Client.Presentables
         {
             get
             {
-                return IsInDesignMode ? "Some Label" : Property.PropertyName;
+                return IsInDesignMode ? "Some Label" : Property.Name;
             }
         }
 
@@ -151,7 +151,7 @@ namespace Kistl.Client.Presentables
         /// </summary> 
         protected void CheckConstraints()
         {
-            this.ValueError = Object[Property.PropertyName];
+            this.ValueError = Object[Property.Name];
         }
 
         #endregion
@@ -160,7 +160,7 @@ namespace Kistl.Client.Presentables
 
         private void ObjectPropertyChangedHandler(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == Property.PropertyName)
+            if (e.PropertyName == Property.Name)
             {
                 this.UpdatePropertyValue();
             }
@@ -173,7 +173,7 @@ namespace Kistl.Client.Presentables
         {
             switch (e.PropertyName)
             {
-                case "PropertyName":
+                case "Name":
                     OnPropertyChanged("Label");
                     break;
                 case "Description":
@@ -362,7 +362,7 @@ namespace Kistl.Client.Presentables
         /// <returns></returns>
         protected virtual TValue? GetPropertyValue()
         {
-            return Object.GetPropertyValue<Nullable<TValue>>(Property.PropertyName);
+            return Object.GetPropertyValue<Nullable<TValue>>(Property.Name);
         }
 
         /// <summary>
@@ -371,7 +371,7 @@ namespace Kistl.Client.Presentables
         /// <returns></returns>
         protected virtual void SetPropertyValue(TValue? val)
         {
-            Object.SetPropertyValue<Nullable<TValue>>(Property.PropertyName, val);
+            Object.SetPropertyValue<Nullable<TValue>>(Property.Name, val);
         }
 
         #endregion
@@ -456,9 +456,9 @@ namespace Kistl.Client.Presentables
             {
                 _valueCache = value;
 
-                if (!object.Equals(Object.GetPropertyValue<TValue>(Property.PropertyName), value))
+                if (!object.Equals(Object.GetPropertyValue<TValue>(Property.Name), value))
                 {
-                    Object.SetPropertyValue<TValue>(Property.PropertyName, value);
+                    Object.SetPropertyValue<TValue>(Property.Name, value);
                     CheckConstraints();
 
                     OnPropertyChanged("Value");
@@ -474,7 +474,7 @@ namespace Kistl.Client.Presentables
 
         protected override void UpdatePropertyValue()
         {
-            this.Value = Object.GetPropertyValue<TValue>(Property.PropertyName);
+            this.Value = Object.GetPropertyValue<TValue>(Property.Name);
         }
 
         #endregion
@@ -542,7 +542,7 @@ namespace Kistl.Client.Presentables
         protected override int? GetPropertyValue()
         {
             // Work around the fact that the conversion from enumeration to int? is not possible.
-            object val = Object.GetPropertyValue<object>(Property.PropertyName);
+            object val = Object.GetPropertyValue<object>(Property.Name);
             if (val == null)
             {
                 return null;
@@ -558,11 +558,11 @@ namespace Kistl.Client.Presentables
             // Work around the fact that the conversion from enumeration to int? is not possible.
             if (val == null)
             {
-                Object.SetPropertyValue<object>(Property.PropertyName, null);
+                Object.SetPropertyValue<object>(Property.Name, null);
             }
             else
             {
-                Object.SetPropertyValue<object>(Property.PropertyName, Enum.ToObject(((EnumerationProperty)Property).Enumeration.GetDataType(), val));
+                Object.SetPropertyValue<object>(Property.Name, Enum.ToObject(((EnumerationProperty)Property).Enumeration.GetDataType(), val));
             } 
         }
 

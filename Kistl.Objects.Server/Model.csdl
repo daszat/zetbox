@@ -1438,12 +1438,12 @@
                         Relationship="Model.FK_BaseProperty_has_Module"
                         FromRole="BaseProperty"
                         ToRole="Module" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="100" />
     <NavigationProperty Name="ObjectClass__Implementation__"
                         Relationship="Model.FK_ObjectClass_has_Properties"
                         FromRole="Properties"
                         ToRole="ObjectClass" />
     <Property Name="ObjectClass_pos" Type="Int32" Nullable="true" />
-    <Property Name="PropertyName" Type="String" Nullable="false" MaxLength="100" />
     <NavigationProperty Name="ValueModelDescriptor__Implementation__"
                         Relationship="Model.FK_Property_has_ValueModelDescriptor"
                         FromRole="Property"

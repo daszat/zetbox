@@ -21,7 +21,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
             if (prop == null) { throw new ArgumentNullException("prop"); }
 
-            string name = prop.PropertyName;
+            string name = prop.Name;
             string ownInterface = prop.ObjectClass.GetDataTypeString();
             string referencedInterface = prop.GetReferencedObjectClass().Module.Namespace + "." + prop.GetReferencedObjectClass().Name;
 

@@ -20,7 +20,7 @@ cls.Name = "ObjectClass";
 cls.TableName = "ObjectClasses";
 
 var impl = ctx.Create<ObjectReferenceProperty>();
-impl.PropertyName = "ImplementsInterfaces";
+impl.Name = "ImplementsInterfaces";
 impl.GetReferencedObjectClass() = interf;
 impl.ObjectClass = cls;
 impl.IsIndexed = false;

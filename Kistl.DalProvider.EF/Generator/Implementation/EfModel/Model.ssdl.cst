@@ -107,7 +107,7 @@
 	foreach(var prop in ctx.GetQuery<ValueTypeProperty>()
 		.Where(p => p.IsList)
 		.OrderBy(p => p.ObjectClass.Name)
-		.ThenBy(p => p.PropertyName))
+		.ThenBy(p => p.Name))
 	{
 		string assocName = prop.GetAssociationName();
 		string esName = prop.GetCollectionEntryClassName();
@@ -127,7 +127,7 @@
 	foreach(var prop in ctx.GetQuery<CompoundObjectProperty>()
 		.Where(p => p.IsList)
 		.OrderBy(p => p.ObjectClass.Name)
-		.ThenBy(p => p.PropertyName))
+		.ThenBy(p => p.Name))
 	{
 		string assocName = prop.GetAssociationName();
 		string esName = prop.GetCollectionEntryClassName();
@@ -335,7 +335,7 @@
 	foreach(var prop in ctx.GetQuery<ValueTypeProperty>()
 		.Where(p => p.IsList)
 		.OrderBy(p => p.ObjectClass.Name)
-		.ThenBy(p => p.PropertyName))
+		.ThenBy(p => p.Name))
 	{
 		string assocName = prop.GetAssociationName();
 		
@@ -359,12 +359,12 @@
       </Key>
       <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
       <Property Name="fk_<%= containerTypeName %>" Type="int" Nullable="true" />
-      <Property Name="<%= prop.PropertyName %>" Type="<%= itemTypeName %>" <%= constraint %>/>
+      <Property Name="<%= prop.Name %>" Type="<%= itemTypeName %>" <%= constraint %>/>
 <%
 		if (prop.HasPersistentOrder)
 		{
 %>
-    <Property Name="<%= prop.PropertyName %>Index" Type="int" Nullable="true" />
+    <Property Name="<%= prop.Name %>Index" Type="int" Nullable="true" />
 <%
 		}
 %>
@@ -394,7 +394,7 @@
 	foreach(var prop in ctx.GetQuery<CompoundObjectProperty>()
 		.Where(p => p.IsList)
 		.OrderBy(p => p.ObjectClass.Name)
-		.ThenBy(p => p.PropertyName))
+		.ThenBy(p => p.Name))
 	{
 		string assocName = prop.GetAssociationName();
 		
@@ -416,7 +416,7 @@
 		if (prop.HasPersistentOrder)
 		{
 %>
-    <Property Name="<%= prop.PropertyName %>Index" Type="int" Nullable="true" />
+    <Property Name="<%= prop.Name %>Index" Type="int" Nullable="true" />
 <%
 		}
 %>

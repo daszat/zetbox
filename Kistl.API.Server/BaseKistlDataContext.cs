@@ -135,7 +135,7 @@ namespace Kistl.API.Server
         public abstract IQueryable<IPersistenceObject> GetPersistenceObjectQuery(InterfaceType ifType);
 
         /// <summary>
-        /// Returns the List referenced by the given PropertyName.
+        /// Returns the List referenced by the given Name.
         /// </summary>
         /// <typeparam name="T">List Type of the ObjectReferenceProperty</typeparam>
         /// <param name="obj">Object which holds the ObjectReferenceProperty</param>
@@ -150,7 +150,7 @@ namespace Kistl.API.Server
         }
 
         /// <summary>
-        /// Returns the List referenced by the given Type, ID and PropertyName.
+        /// Returns the List referenced by the given Type, ID and Name.
         /// </summary>
         /// <typeparam name="T">List Type of the ObjectReferenceProperty</typeparam>
         /// <param name="type">Type of the Object which holds the ObjectReferenceProperty</param>

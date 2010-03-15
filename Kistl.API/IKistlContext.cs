@@ -127,7 +127,7 @@ namespace Kistl.API
         IQueryable<IPersistenceObject> GetPersistenceObjectQuery(InterfaceType ifType);
 
         /// <summary>
-        /// Returns the List referenced by the given PropertyName.
+        /// Returns the List referenced by the given Name.
         /// </summary>
         /// <typeparam name="T">List Type of the ObjectReferenceProperty</typeparam>
         /// <param name="obj">Object which holds the ObjectReferenceProperty</param>
@@ -136,7 +136,7 @@ namespace Kistl.API
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
         List<T> GetListOf<T>(IDataObject obj, string propertyName) where T : class, IDataObject;
         /// <summary>
-        /// Returns the List referenced by the given Type, ID and PropertyName.
+        /// Returns the List referenced by the given type, ID and property name.
         /// </summary>
         /// <typeparam name="T">List Type of the ObjectReferenceProperty</typeparam>
         /// <param name="ifType">Type of the Object which holds the ObjectReferenceProperty</param>

@@ -170,14 +170,14 @@
     foreach(var prop in ctx.GetQuery<ValueTypeProperty>()
         .Where(p => p.IsList)
         .OrderBy(p => p.ObjectClass.Name)
-        .ThenBy(p => p.PropertyName))
+        .ThenBy(p => p.Name))
     { 
 %>
     <EntitySetMapping Name="<%= prop.GetCollectionEntryClassName() %>">
       <EntityTypeMapping TypeName="IsTypeOf(Model.<%= prop.GetCollectionEntryClassName() %>)">
         <MappingFragment StoreEntitySet="<%= prop.GetCollectionEntryClassName() %>">
           <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="B" ColumnName="<%= prop.PropertyName %>" />
+          <ScalarProperty Name="B" ColumnName="<%= prop.Name %>" />
 <%
 		if (prop.HasPersistentOrder)
 		{
@@ -210,7 +210,7 @@
     foreach(var prop in ctx.GetQuery<CompoundObjectProperty>()
         .Where(p => p.IsList)
         .OrderBy(p => p.ObjectClass.Name)
-        .ThenBy(p => p.PropertyName))
+        .ThenBy(p => p.Name))
     { 
 %>
     <EntitySetMapping Name="<%= prop.GetCollectionEntryClassName() %>">

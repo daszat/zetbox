@@ -18,7 +18,7 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
             if (host == null) { throw new ArgumentNullException("host"); }
             if (prop == null) { throw new ArgumentNullException("prop"); }
 
-            string eventName = "On" + prop.PropertyName;
+            string eventName = "On" + prop.Name;
             string propType = prop.ReferencedTypeAsCSharp();
             string objType = prop.ObjectClass.GetDataTypeString();
 

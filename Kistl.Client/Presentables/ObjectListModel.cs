@@ -35,7 +35,7 @@ namespace Kistl.Client.Presentables
             _property = prop;
             _referencedClass = _property.GetReferencedObjectClass();
 
-            _collection = Object.GetPropertyValue<ICollection>(Property.PropertyName);
+            _collection = Object.GetPropertyValue<ICollection>(Property.Name);
             _notifier = _collection as INotifyCollectionChanged;
             // extract special references if available.
             _list = _collection as IList;
@@ -82,7 +82,7 @@ namespace Kistl.Client.Presentables
             if (_valueCache == null)
             {
                 _valueCache = new ReadOnlyObservableProjectedList<IDataObject, DataObjectModel>(
-                    Object.GetPropertyValue<INotifyCollectionChanged>(Property.PropertyName),
+                    Object.GetPropertyValue<INotifyCollectionChanged>(Property.Name),
                     obj => (DataObjectModel)Factory.CreateDefaultModel(DataContext, obj),
                     mdl => mdl.Object);
             }
@@ -130,8 +130,8 @@ namespace Kistl.Client.Presentables
                 result.Columns = group
                     .Select(p => new ColumnDisplayModel()
                     {
-                        Header = p.PropertyName,
-                        PropertyName = p.PropertyName,
+                        Header = p.Name,
+                        Name = p.Name,
                         ControlKind = p.ValueModelDescriptor.GetDefaultGridCellKind()
                     })
                     .ToList();

@@ -180,7 +180,7 @@ namespace Kistl.App.Extensions
             {
                 foreach (PropertyInvocation pi in prop.Invocations)
                 {
-                    CreateInvokeInfo(objType, pi, "On" + prop.PropertyName + "_" + pi.InvocationType);
+                    CreateInvokeInfo(objType, pi, "On" + prop.Name + "_" + pi.InvocationType);
                 }
             }
         }

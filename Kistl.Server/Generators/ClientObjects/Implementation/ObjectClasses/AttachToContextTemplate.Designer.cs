@@ -32,19 +32,19 @@ this.WriteObjects("        public override void AttachToContext(IKistlContext ct
 this.WriteObjects("        {\r\n");
 this.WriteObjects("            base.AttachToContext(ctx);\r\n");
 #line 19 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\AttachToContextTemplate.cst"
-foreach(var prop in cls.Properties.OfType<ValueTypeProperty>().Where(p => p.IsList).OrderBy(p => p.PropertyName))
+foreach(var prop in cls.Properties.OfType<ValueTypeProperty>().Where(p => p.IsList).OrderBy(p => p.Name))
 			{
 
 #line 22 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\AttachToContextTemplate.cst"
-this.WriteObjects("			_",  prop.PropertyName , ".ForEach<IValueCollectionEntry>(i => ctx.Attach(i));\r\n");
+this.WriteObjects("			_",  prop.Name , ".ForEach<IValueCollectionEntry>(i => ctx.Attach(i));\r\n");
 #line 24 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\AttachToContextTemplate.cst"
 }
 
-			foreach(var prop in cls.Properties.OfType<CompoundObjectProperty>().Where(p => p.IsList).OrderBy(p => p.PropertyName))
+			foreach(var prop in cls.Properties.OfType<CompoundObjectProperty>().Where(p => p.IsList).OrderBy(p => p.Name))
 			{
 
 #line 29 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\AttachToContextTemplate.cst"
-this.WriteObjects("			_",  prop.PropertyName , ".ForEach<IValueCollectionEntry>(i => ctx.Attach(i));\r\n");
+this.WriteObjects("			_",  prop.Name , ".ForEach<IValueCollectionEntry>(i => ctx.Attach(i));\r\n");
 #line 31 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\AttachToContextTemplate.cst"
 }
 

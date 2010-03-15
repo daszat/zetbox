@@ -44,7 +44,7 @@ namespace Kistl.Client.Tests
         //    int stateChangeCount = 0;
         //    PropertyChangedEventHandler expectStateChanged = delegate(object sender, PropertyChangedEventArgs args)
         //    {
-        //        Assert.AreEqual("State", args.PropertyName);
+        //        Assert.AreEqual("State", args.Name);
         //        stateChangeCount += 1;
         //    };
 

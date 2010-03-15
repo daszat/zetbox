@@ -54,14 +54,14 @@ namespace Kistl.App.Base
         /// <summary>
         /// 
         /// </summary>
-		Kistl.App.Base.DataType ObjectClass {
+		string Name {
 			get;
 			set;
 		}
         /// <summary>
         /// 
         /// </summary>
-		string PropertyName {
+		Kistl.App.Base.DataType ObjectClass {
 			get;
 			set;
 		}

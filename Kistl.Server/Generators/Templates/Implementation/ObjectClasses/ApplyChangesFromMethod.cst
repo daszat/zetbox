@@ -21,29 +21,29 @@
 			var me = (<%= cls.Name %>)this;
 
 <%			
-			foreach(var prop in cls.Properties.OfType<ValueTypeProperty>().Where(p => !p.IsList).OrderBy(p => p.PropertyName))
+			foreach(var prop in cls.Properties.OfType<ValueTypeProperty>().Where(p => !p.IsList).OrderBy(p => p.Name))
 			{
 %>
-			me.<%= prop.PropertyName %> = other.<%= prop.PropertyName %>;
+			me.<%= prop.Name %> = other.<%= prop.Name %>;
 <%
 			}
 
-			foreach(var prop in cls.Properties.OfType<CompoundObjectProperty>().Where(p => !p.IsList).OrderBy(p => p.PropertyName))
+			foreach(var prop in cls.Properties.OfType<CompoundObjectProperty>().Where(p => !p.IsList).OrderBy(p => p.Name))
 			{
 %>
-			me.<%= prop.PropertyName %> = other.<%= prop.PropertyName %> != null ? (<%= prop.GetPropertyTypeString() %>)other.<%= prop.PropertyName %>.Clone() : null;
+			me.<%= prop.Name %> = other.<%= prop.Name %> != null ? (<%= prop.GetPropertyTypeString() %>)other.<%= prop.Name %>.Clone() : null;
 <%
 			}
 
-			foreach(var prop in cls.Properties.OfType<ObjectReferenceProperty>().Where(p => !p.IsList()).OrderBy(p => p.PropertyName))
+			foreach(var prop in cls.Properties.OfType<ObjectReferenceProperty>().Where(p => !p.IsList()).OrderBy(p => p.Name))
 			{
 				if (prop.RelationEnd.HasPersistentOrder) {
 %>
-			this.<%= prop.PropertyName %><%= Kistl.API.Helper.PositionSuffix %> = otherImpl.<%= prop.PropertyName %><%= Kistl.API.Helper.PositionSuffix %>;
+			this.<%= prop.Name %><%= Kistl.API.Helper.PositionSuffix %> = otherImpl.<%= prop.Name %><%= Kistl.API.Helper.PositionSuffix %>;
 <%
 				}
 %>
-			this._fk_<%= prop.PropertyName %> = otherImpl._fk_<%= prop.PropertyName %>;
+			this._fk_<%= prop.Name %> = otherImpl._fk_<%= prop.Name %>;
 <%
 			}
 %>

@@ -49,7 +49,7 @@ this.WriteObjects("			// fix direct object references\r\n");
 foreach(var prop in cls.Properties.OfType<ObjectReferenceProperty>()
 		.Where(orp => !orp.IsList())
 		.OrderBy(orp => orp.ObjectClass.Name)
-		.ThenBy(orp => orp.PropertyName))
+		.ThenBy(orp => orp.Name))
 	{
 		Relation rel = Kistl.App.Extensions.RelationExtensions.Lookup(ctx, prop);
 		RelationEnd relEnd = rel.GetEnd(prop);
@@ -57,7 +57,7 @@ foreach(var prop in cls.Properties.OfType<ObjectReferenceProperty>()
         
         string referencedInterface = otherEnd.Type.GetDataTypeString();
         string referencedImplementation = otherEnd.Type.GetDataTypeString() + Kistl.API.Helper.ImplementationSuffix;
-        string name = prop.PropertyName;
+        string name = prop.Name;
 		string efName = name + Kistl.API.Helper.ImplementationSuffix;
 		string fkBackingName = "_fk_" + name;
 		string fkGuidBackingName = "_fk_guid_" + name;

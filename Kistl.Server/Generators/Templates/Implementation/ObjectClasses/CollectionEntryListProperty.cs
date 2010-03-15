@@ -31,7 +31,7 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
             RelationEnd relEnd = rel.GetEndFromRole(endRole);
             RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
 
-            string name = relEnd.Navigator.PropertyName;
+            string name = relEnd.Navigator.Name;
             string exposedCollectionInterface = rel.NeedsPositionStorage(otherEnd.GetRole()) ? "IList" : "ICollection";
             string referencedInterface = otherEnd.Type.GetDataTypeString();
             string backingName = "_" + name;

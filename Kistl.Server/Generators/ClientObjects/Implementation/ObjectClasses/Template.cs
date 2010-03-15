@@ -59,7 +59,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
         protected override void ApplyCompoundObjectPropertyTemplate(CompoundObjectProperty prop)
         {
             this.WriteLine("        // CompoundObject property");
-            Implementation.ObjectClasses.CompoundObjectPropertyTemplate.Call(Host, ctx, MembersToSerialize, prop, prop.PropertyName);
+            Implementation.ObjectClasses.CompoundObjectPropertyTemplate.Call(Host, ctx, MembersToSerialize, prop, prop.Name);
         }
         protected override void ApplyCompoundObjectListTemplate(CompoundObjectProperty prop)
         {
@@ -87,11 +87,11 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
             base.ApplyConstructorTemplate();
             this.WriteObjects("            {");
             this.WriteLine();
-            foreach (var prop in DataType.Properties.OfType<CompoundObjectProperty>().Where(p => !p.IsList).OrderBy(p => p.PropertyName))
+            foreach (var prop in DataType.Properties.OfType<CompoundObjectProperty>().Where(p => !p.IsList).OrderBy(p => p.Name))
             {
                 if (prop.IsNullable()) continue;
 
-                string name = prop.PropertyName;
+                string name = prop.Name;
                 string backingName = name + Kistl.API.Helper.ImplementationSuffix;
                 string coType = prop.GetPropertyTypeString();
                 string coImplementationType = coType + Kistl.API.Helper.ImplementationSuffix;

@@ -33,9 +33,9 @@ namespace Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses
             {
                 this.WriteObjects("\t\t\t{");
                 this.WriteLine();
-                foreach (var prop in DataType.Properties.OfType<CompoundObjectProperty>().Where(p => !p.IsList).OrderBy(p => p.PropertyName))
+                foreach (var prop in DataType.Properties.OfType<CompoundObjectProperty>().Where(p => !p.IsList).OrderBy(p => p.Name))
                 {
-                    string name = prop.PropertyName;
+                    string name = prop.Name;
                     string backingName = "_" + name;
                     string structType = prop.GetPropertyTypeString();
                     string structImplementationType = structType + Kistl.API.Helper.ImplementationSuffix;
@@ -108,7 +108,7 @@ namespace Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses
             Implementation.ObjectClasses.CompoundObjectPropertyTemplate.Call(Host, ctx,
                 this.MembersToSerialize,
                 prop, 
-                prop.PropertyName);
+                prop.Name);
         }
 
         protected override void ApplyCompoundObjectListTemplate(CompoundObjectProperty prop)
@@ -148,7 +148,7 @@ namespace Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses
             this.WriteLine("        // object reference property");
             Implementation.ObjectClasses.ObjectReferencePropertyTemplate.Call(Host, ctx,
                     this.MembersToSerialize,
-                    prop.PropertyName,
+                    prop.Name,
                     rel.GetAssociationName(), otherEnd.RoleName,
                     otherEnd.Type.GetDataTypeString(),
                     otherEnd.Type.GetDataTypeString() + Kistl.API.Helper.ImplementationSuffix,

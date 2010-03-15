@@ -18,7 +18,7 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
         {
             if (prop == null) { throw new ArgumentNullException("prop"); }
 
-            Call(host, ctx, prop.ObjectClass.GetDataTypeString(), prop.ReferencedClass.GetDataTypeString(), prop.PropertyName, "On" + prop.PropertyName + "_Getter");
+            Call(host, ctx, prop.ObjectClass.GetDataTypeString(), prop.ReferencedClass.GetDataTypeString(), prop.Name, "On" + prop.Name + "_Getter");
         }
 
         public static void Call(Arebis.CodeGeneration.IGenerationHost host,

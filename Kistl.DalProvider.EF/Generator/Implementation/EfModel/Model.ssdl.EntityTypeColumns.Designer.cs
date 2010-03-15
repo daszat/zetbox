@@ -47,7 +47,7 @@ this.WriteObjects("		\r\n");
 this.WriteObjects("    <Property Name=\"",  Construct.NestedColumnName(p, prefix) , "\" Type=\"bit\" Nullable=\"false\" />\r\n");
 #line 33 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.ssdl.EntityTypeColumns.cst"
 ApplyEntityTypeColumnDefs(
-				((CompoundObjectProperty)p).CompoundObjectDefinition.Properties.Cast<Property>().OrderBy(prop => prop.PropertyName),
+				((CompoundObjectProperty)p).CompoundObjectDefinition.Properties.Cast<Property>().OrderBy(prop => prop.Name),
 				Construct.NestedColumnName(p, prefix));
 		}
 		else if (p is ObjectReferenceProperty)

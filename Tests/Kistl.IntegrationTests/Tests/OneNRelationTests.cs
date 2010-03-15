@@ -98,7 +98,7 @@ namespace Kistl.IntegrationTests
         {
             var result = ctx.Create<IntProperty>();
             result.Module = ctx.FindPersistenceObject<Module>(_moduleGuid);
-            result.PropertyName = "property" + unique;
+            result.Name = "property" + unique;
             result.ValueModelDescriptor = ctx.FindPersistenceObject<PresentableModelDescriptor>(_valueDescGuid);
             return result;
         }
@@ -176,11 +176,11 @@ namespace Kistl.IntegrationTests
             ctx.SubmitChanges();
 
             // finally, check remaining properties for them being properly roundtripped
-            var propertyNames = collection.Select(p => p.PropertyName).ToArray();
+            var propertyNames = collection.Select(p => p.Name).ToArray();
             using (var checkCtx = KistlContext.GetContext())
             {
                 var checkParent = checkCtx.FindPersistenceObject<ObjectClass>(_fixtureGuid);
-                Assert.That(checkParent.Properties.Select(p => p.PropertyName).ToArray(), Is.EquivalentTo(propertyNames));
+                Assert.That(checkParent.Properties.Select(p => p.Name).ToArray(), Is.EquivalentTo(propertyNames));
             }
         }
     }
@@ -270,7 +270,7 @@ namespace Kistl.IntegrationTests
         {
             var result = ctx.Create<IntProperty>();
             result.Module = ctx.FindPersistenceObject<Module>(_moduleGuid);
-            result.PropertyName = "property" + unique;
+            result.Name = "property" + unique;
             result.ValueModelDescriptor = ctx.FindPersistenceObject<PresentableModelDescriptor>(_valueDescGuid);
             return result;
         }
@@ -348,11 +348,11 @@ namespace Kistl.IntegrationTests
             ctx.SubmitChanges();
 
             // finally, check remaining properties for them being properly roundtripped
-            var propertyNames = collection.Select(p => p.PropertyName).ToArray();
+            var propertyNames = collection.Select(p => p.Name).ToArray();
             using (var checkCtx = KistlContext.GetContext())
             {
                 var checkParent = checkCtx.FindPersistenceObject<ObjectClass>(_fixtureGuid);
-                Assert.That(checkParent.Properties.Select(p => p.PropertyName).ToArray(), Is.EquivalentTo(propertyNames));
+                Assert.That(checkParent.Properties.Select(p => p.Name).ToArray(), Is.EquivalentTo(propertyNames));
             }
         }
     }

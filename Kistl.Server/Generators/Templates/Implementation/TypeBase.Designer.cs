@@ -87,8 +87,8 @@ this.WriteObjects("\r\n");
 #line 69 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
 ApplyIDPropertyTemplate();
 
-		// TODO: decouple serializing format from PropertyName order
-        foreach(Property p in DataType.Properties.OrderBy(p => p.PropertyName))
+		// TODO: decouple serializing format from Name order
+        foreach(Property p in DataType.Properties.OrderBy(p => p.Name))
         {
 
 #line 75 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"

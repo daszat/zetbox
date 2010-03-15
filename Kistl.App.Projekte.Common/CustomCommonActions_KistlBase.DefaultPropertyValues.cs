@@ -22,7 +22,7 @@ namespace Kistl.App.Base
         {
             if (obj.Property != null)
             {
-                e.Result = string.Format("{0} will be initialized with a new Guid", obj.Property.PropertyName);
+                e.Result = string.Format("{0} will be initialized with a new Guid", obj.Property.Name);
             }
             else
             {

@@ -115,7 +115,7 @@ namespace Kistl.Server.Generators
         {
             if (prop == null) { throw new ArgumentNullException("prop"); }
 
-            return NestedColumnName(prop.PropertyName, parentPropName);
+            return NestedColumnName(prop.Name, parentPropName);
         }
 
         public static string ListPositionColumnName(RelationEnd otherEnd)

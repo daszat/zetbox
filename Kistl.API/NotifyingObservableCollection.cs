@@ -23,7 +23,7 @@ namespace Kistl.API
         /// <summary>
         /// Propertyname of the parent Object that holds the Collection
         /// </summary>
-        public string PropertyName
+        public string Name
         {
             get
             {

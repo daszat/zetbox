@@ -90,13 +90,13 @@ namespace Kistl.Server.Generators.Extensions
         public static string GetCollectionEntryClassName(this Property prop)
         {
             if (prop == null) { throw new ArgumentNullException("prop"); }
-            return String.Format("{0}_{1}_CollectionEntry", prop.ObjectClass.Name, prop.PropertyName);
+            return String.Format("{0}_{1}_CollectionEntry", prop.ObjectClass.Name, prop.Name);
         }
 
         public static string GetCollectionEntryTable(this Property prop)
         {
             if (prop == null) { throw new ArgumentNullException("prop"); }
-            return String.Format("{0}_{1}Collection", ((ObjectClass)prop.ObjectClass).TableName, prop.PropertyName);
+            return String.Format("{0}_{1}Collection", ((ObjectClass)prop.ObjectClass).TableName, prop.Name);
         }
 
         public static string GetCollectionEntryFullName(this Property prop)

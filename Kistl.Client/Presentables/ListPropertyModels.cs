@@ -88,7 +88,7 @@ namespace Kistl.Client.Presentables
 
         private void UpdatePropertyValueCore()
         {
-            _valueCache = Object.GetPropertyValue<ICollection<string>>(Property.PropertyName);
+            _valueCache = Object.GetPropertyValue<ICollection<string>>(Property.Name);
             _observableValueCache = new ObservableCollection<string>(_valueCache);
             _valueView = new ReadOnlyObservableCollectionWrapper<string>(_observableValueCache);
         }

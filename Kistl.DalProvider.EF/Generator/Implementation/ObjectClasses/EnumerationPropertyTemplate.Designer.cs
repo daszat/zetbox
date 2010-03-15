@@ -33,7 +33,7 @@ namespace Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses
 #line 18 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\EnumerationPropertyTemplate.cst"
 string interfaceName = prop.ObjectClass.Name;
 
-	string name = prop.PropertyName;
+	string name = prop.Name;
 	string efName = name + Kistl.API.Helper.ImplementationSuffix;
 	string backingName = "_" + name;
 

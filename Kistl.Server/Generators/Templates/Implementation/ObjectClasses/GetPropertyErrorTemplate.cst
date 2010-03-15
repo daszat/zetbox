@@ -13,7 +13,7 @@
 <%@ Parameter Name="cls" Type="ObjectClass" %>
 
 <%
-	var properties = cls.Properties.OrderBy(p => p.PropertyName).ToList();
+	var properties = cls.Properties.OrderBy(p => p.Name).ToList();
 	if (properties.Count > 0) {
 %>
 		protected override string GetPropertyError(string propertyName) 
@@ -23,7 +23,7 @@
 <%
 		foreach(var property in properties)
 		{
-			string propertyName = property.PropertyName;
+			string propertyName = property.Name;
 			
 %>
 				case "<%= propertyName %>":

@@ -97,14 +97,14 @@ this.WriteObjects("		internal ",  cls.BaseObjectClass == null ? String.Empty : "
 foreach(var obj in instanceList) 
 	{
 		foreach(var baseCls in cls.GetObjectHierarchie()) {
-			foreach(var prop in baseCls.Properties.Cast<Property>().OrderBy(p => p.PropertyName))
+			foreach(var prop in baseCls.Properties.Cast<Property>().OrderBy(p => p.Name))
 			{
 				string value = GetPropertyValueAsCSharp(obj, prop);
 				if (!String.IsNullOrEmpty(value) && !value.Equals("null"))
 				{
 
 #line 89 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Implementation\ObjectClasses\DataStore.cst"
-this.WriteObjects("			DataStore[",  obj.ID , "].",  prop.PropertyName , " = ",  value , ";\r\n");
+this.WriteObjects("			DataStore[",  obj.ID , "].",  prop.Name , " = ",  value , ";\r\n");
 #line 91 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Implementation\ObjectClasses\DataStore.cst"
 }
 			}

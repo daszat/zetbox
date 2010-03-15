@@ -50,7 +50,7 @@ foreach (var rel in ctx.GetQuery<Relation>()
 	foreach (var prop in ctx.GetQuery<ValueTypeProperty>()
         .Where(p => p.IsList)
         .OrderBy(p => p.ObjectClass.Name)
-        .ThenBy(p => p.PropertyName))
+        .ThenBy(p => p.Name))
 	{
 
 		Interface.CollectionEntries.ValueCollectionEntry.Call(Host, ctx, prop);
@@ -59,7 +59,7 @@ foreach (var rel in ctx.GetQuery<Relation>()
 	foreach (var prop in ctx.GetQuery<CompoundObjectProperty>()
         .Where(p => p.IsList)
         .OrderBy(p => p.ObjectClass.Name)
-        .ThenBy(p => p.PropertyName))
+        .ThenBy(p => p.Name))
 	{
 
 		Interface.CollectionEntries.ValueCollectionEntry.Call(Host, ctx, prop);

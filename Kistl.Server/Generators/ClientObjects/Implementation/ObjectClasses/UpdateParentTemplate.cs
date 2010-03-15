@@ -20,7 +20,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
             var props = dataType
                 .Properties
                 .OfType<ObjectReferenceProperty>()
-                .OrderBy(p => p.PropertyName)
+                .OrderBy(p => p.Name)
                 .Where(p =>
                 {
                     Relation rel = RelationExtensions.Lookup(ctx, p);
@@ -36,7 +36,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
 
         private void ApplyCase(ObjectReferenceProperty prop)
         {
-            string name = prop.PropertyName;
+            string name = prop.Name;
             string fkBackingName = "_fk_" + name;
 
             this.WriteObjects("                case \"", name, "\":");

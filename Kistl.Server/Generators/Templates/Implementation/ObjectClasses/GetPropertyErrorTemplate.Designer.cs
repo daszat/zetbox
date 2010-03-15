@@ -29,7 +29,7 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
 #line 14 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\GetPropertyErrorTemplate.cst"
 this.WriteObjects("\r\n");
 #line 16 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\GetPropertyErrorTemplate.cst"
-var properties = cls.Properties.OrderBy(p => p.PropertyName).ToList();
+var properties = cls.Properties.OrderBy(p => p.Name).ToList();
 	if (properties.Count > 0) {
 
 #line 19 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\GetPropertyErrorTemplate.cst"
@@ -40,7 +40,7 @@ this.WriteObjects("			{\r\n");
 #line 24 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\GetPropertyErrorTemplate.cst"
 foreach(var property in properties)
 		{
-			string propertyName = property.PropertyName;
+			string propertyName = property.Name;
 			
 
 #line 29 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\GetPropertyErrorTemplate.cst"

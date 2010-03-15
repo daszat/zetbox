@@ -81,7 +81,7 @@ this.WriteObjects("    <!-- EntitySets and AssociationSets for all object-value 
 foreach(var prop in ctx.GetQuery<ValueTypeProperty>()
         .Where(p => p.IsList)
         .OrderBy(p => p.ObjectClass.Name)
-        .ThenBy(p => p.PropertyName))
+        .ThenBy(p => p.Name))
     {
         string assocName = prop.GetAssociationName();
         string entityName = prop.GetCollectionEntryClassName();
@@ -102,7 +102,7 @@ this.WriteObjects("    <!-- EntitySets and AssociationSets for all object-struct
 foreach(var prop in ctx.GetQuery<CompoundObjectProperty>()
         .Where(p => p.IsList)
         .OrderBy(p => p.ObjectClass.Name)
-        .ThenBy(p => p.PropertyName))
+        .ThenBy(p => p.Name))
     {
         string assocName = prop.GetAssociationName();
         string entityName = prop.GetCollectionEntryClassName();
@@ -297,12 +297,12 @@ this.WriteObjects("  <!-- EntityTypes and Associations for all object-value Coll
 foreach(var prop in ctx.GetQuery<ValueTypeProperty>()
         .Where(p => p.IsList)
         .OrderBy(p => p.ObjectClass.Name)
-        .ThenBy(p => p.PropertyName))
+        .ThenBy(p => p.Name))
     {
 
 
 #line 260 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.csdl.cst"
-this.WriteObjects("  <!-- ",  prop.ObjectClass.Name , ".",  prop.PropertyName , " -->\r\n");
+this.WriteObjects("  <!-- ",  prop.ObjectClass.Name , ".",  prop.Name , " -->\r\n");
 this.WriteObjects("  <EntityType Name=\"",  prop.GetCollectionEntryClassName() , "\" >\r\n");
 this.WriteObjects("    <Key>\r\n");
 this.WriteObjects("      <PropertyRef Name=\"ID\" />\r\n");
@@ -345,12 +345,12 @@ this.WriteObjects("<!-- EntityTypes and Associations for all object-CompoundObje
 foreach(var prop in ctx.GetQuery<CompoundObjectProperty>()
         .Where(p => p.IsList)
         .OrderBy(p => p.ObjectClass.Name)
-        .ThenBy(p => p.PropertyName))
+        .ThenBy(p => p.Name))
     {
 
 
 #line 304 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.csdl.cst"
-this.WriteObjects("  <!-- ",  prop.ObjectClass.Name , ".",  prop.PropertyName , " -->\r\n");
+this.WriteObjects("  <!-- ",  prop.ObjectClass.Name , ".",  prop.Name , " -->\r\n");
 this.WriteObjects("  <EntityType Name=\"",  prop.GetCollectionEntryClassName() , "\" >\r\n");
 this.WriteObjects("    <Key>\r\n");
 this.WriteObjects("      <PropertyRef Name=\"ID\" />\r\n");

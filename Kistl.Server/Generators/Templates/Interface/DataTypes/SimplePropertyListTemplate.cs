@@ -29,7 +29,7 @@ namespace Kistl.Server.Generators.Templates.Interface.DataTypes
 
         protected virtual string GetPropertyName()
         {
-            return prop.PropertyName;
+            return prop.Name;
         }
     }
 }

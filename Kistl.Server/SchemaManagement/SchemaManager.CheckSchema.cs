@@ -486,18 +486,18 @@ namespace Kistl.Server.SchemaManagement
 
             foreach (ValueTypeProperty prop in objClass.Properties.OfType<ValueTypeProperty>()
             .Where(p => p.IsList)
-            .OrderBy(p => p.Module.Namespace).ThenBy(p => p.PropertyName))
+            .OrderBy(p => p.Module.Namespace).ThenBy(p => p.Name))
             {
                 string tblName = prop.GetCollectionEntryTable();
                 string fkName = "fk_" + prop.ObjectClass.Name;
-                string valPropName = prop.PropertyName;
-                string valPropIndexName = prop.PropertyName + "Index";
+                string valPropName = prop.Name;
+                string valPropIndexName = prop.Name + "Index";
                 string assocName = prop.GetAssociationName();
                 string refTblName = objClass.TableName;
                 bool hasPersistentOrder = prop.HasPersistentOrder;
                 if (db.CheckTableExists(tblName))
                 {
-                    Log.DebugFormat("{0}", prop.PropertyName);
+                    Log.DebugFormat("{0}", prop.Name);
                     CheckColumn(tblName, fkName, System.Data.DbType.Int32, 0, false);
                     CheckColumn(tblName, valPropName, GetDbType(prop), prop is StringProperty ? ((StringProperty)prop).GetMaxLength() : 0, false);
 
@@ -511,7 +511,7 @@ namespace Kistl.Server.SchemaManagement
                     }
                     if (!db.CheckFKConstraintExists(assocName))
                     {
-                        Log.WarnFormat("FK Constraint is missing", prop.PropertyName);
+                        Log.WarnFormat("FK Constraint is missing", prop.Name);
                         if (repair)
                         {
                             db.CreateFKConstraint(tblName, refTblName, fkName, assocName, true);
@@ -520,7 +520,7 @@ namespace Kistl.Server.SchemaManagement
                 }
                 else
                 {
-                    Log.WarnFormat("Table '{0}' for Property '{1}' is missing", tblName, prop.PropertyName);
+                    Log.WarnFormat("Table '{0}' for Property '{1}' is missing", tblName, prop.Name);
                     if (repair)
                     {
                         Case.DoNewValueTypePropertyList(objClass, prop);
@@ -535,18 +535,18 @@ namespace Kistl.Server.SchemaManagement
 
             foreach (CompoundObjectProperty prop in objClass.Properties.OfType<CompoundObjectProperty>()
             .Where(p => p.IsList)
-            .OrderBy(p => p.Module.Namespace).ThenBy(p => p.PropertyName))
+            .OrderBy(p => p.Module.Namespace).ThenBy(p => p.Name))
             {
                 string tblName = prop.GetCollectionEntryTable();
                 string fkName = "fk_" + prop.ObjectClass.Name;
-                string valPropName = prop.PropertyName;
-                string valPropIndexName = prop.PropertyName + "Index";
+                string valPropName = prop.Name;
+                string valPropIndexName = prop.Name + "Index";
                 string assocName = prop.GetAssociationName();
                 string refTblName = objClass.TableName;
                 bool hasPersistentOrder = prop.HasPersistentOrder;
                 if (db.CheckTableExists(tblName))
                 {
-                    Log.DebugFormat("{0}", prop.PropertyName);
+                    Log.DebugFormat("{0}", prop.Name);
 
                     // Check isnull column
                     // TODO: Support neested CompoundObject
@@ -557,7 +557,7 @@ namespace Kistl.Server.SchemaManagement
                     // TODO: Support neested CompoundObject
                     foreach (ValueTypeProperty p in prop.CompoundObjectDefinition.Properties)
                     {
-                        CheckColumn(tblName, valPropName + "_" + p.PropertyName, SchemaManager.GetDbType(p), p is StringProperty ? ((StringProperty)p).GetMaxLength() : 0, true);
+                        CheckColumn(tblName, valPropName + "_" + p.Name, SchemaManager.GetDbType(p), p is StringProperty ? ((StringProperty)p).GetMaxLength() : 0, true);
                     }
                     if (hasPersistentOrder)
                     {
@@ -569,7 +569,7 @@ namespace Kistl.Server.SchemaManagement
                     }
                     if (!db.CheckFKConstraintExists(assocName))
                     {
-                        Log.WarnFormat("FK Constraint is missing", prop.PropertyName);
+                        Log.WarnFormat("FK Constraint is missing", prop.Name);
                         if (repair)
                         {
                             db.CreateFKConstraint(tblName, refTblName, fkName, assocName, true);
@@ -578,7 +578,7 @@ namespace Kistl.Server.SchemaManagement
                 }
                 else
                 {
-                    Log.WarnFormat("Table '{0}' for Property '{1}' is missing", tblName, prop.PropertyName);
+                    Log.WarnFormat("Table '{0}' for Property '{1}' is missing", tblName, prop.Name);
                     if (repair)
                     {
                         Case.DoNewCompoundObjectPropertyList(objClass, prop);
@@ -672,7 +672,7 @@ namespace Kistl.Server.SchemaManagement
             Log.Debug("  Columns: ");
             foreach (ValueTypeProperty prop in properties.OfType<ValueTypeProperty>()
                 .Where(p => !p.IsList)
-                .OrderBy(p => p.Module.Namespace).ThenBy(p => p.PropertyName))
+                .OrderBy(p => p.Module.Namespace).ThenBy(p => p.Name))
             {
                 string tblName = objClass.TableName;
                 string colName = Construct.NestedColumnName(prop, prefix);

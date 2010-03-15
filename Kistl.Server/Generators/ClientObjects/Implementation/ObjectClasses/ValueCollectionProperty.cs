@@ -40,7 +40,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
             if (prop == null) { throw new ArgumentNullException("prop"); }
             if (!isList) { throw new ArgumentOutOfRangeException("prop", "prop must be a List-valued property"); }
 
-            string name = prop.PropertyName;
+            string name = prop.Name;
             string backingName = "_" + name + "Wrapper";
             string backingCollectionType = (hasPersistentOrder ? "ClientValueListWrapper" : "ClientValueCollectionWrapper");
 

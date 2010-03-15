@@ -80,13 +80,13 @@
 	foreach(var obj in instanceList) 
 	{
 		foreach(var baseCls in cls.GetObjectHierarchie()) {
-			foreach(var prop in baseCls.Properties.Cast<Property>().OrderBy(p => p.PropertyName))
+			foreach(var prop in baseCls.Properties.Cast<Property>().OrderBy(p => p.Name))
 			{
 				string value = GetPropertyValueAsCSharp(obj, prop);
 				if (!String.IsNullOrEmpty(value) && !value.Equals("null"))
 				{
 %>
-			DataStore[<%= obj.ID %>].<%= prop.PropertyName %> = <%= value %>;
+			DataStore[<%= obj.ID %>].<%= prop.Name %> = <%= value %>;
 <%
 				}
 			}

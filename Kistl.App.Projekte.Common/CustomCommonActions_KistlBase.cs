@@ -132,7 +132,7 @@ namespace Kistl.App.Base
                     nav.ValueModelDescriptor = obj.Context.FindPersistenceObject<PresentableModelDescriptor>(PresentableModelDescriptor_ObjectReferenceModel);
                 }
 
-                nav.PropertyName = other.RoleName;
+                nav.Name = other.RoleName;
             }
 
             e.Result = nav;
@@ -181,7 +181,7 @@ namespace Kistl.App.Base
             StringBuilder sb = new StringBuilder();
 
             sb.Append("On");
-            sb.Append(obj.InvokeOnProperty != null ? obj.InvokeOnProperty.PropertyName : "<<PROPERTYNAME>>");
+            sb.Append(obj.InvokeOnProperty != null ? obj.InvokeOnProperty.Name : "<<PROPERTYNAME>>");
             sb.Append("_");
             sb.Append(obj.InvocationType.ToString());
             sb.Append("_");

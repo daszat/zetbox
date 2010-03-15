@@ -22,7 +22,7 @@ namespace Kistl.IntegrationTests.Presentables.ObjectReferenceModels
 				var typeRefClass = ctx.GetQuery<ObjectClass>()
 					.Single(oc => oc.Name == "TypeRef");
 				var assemblyProperty = ctx.GetQuery<ObjectReferenceProperty>()
-					.Single(p => p.ObjectClass.ID == typeRefClass.ID && p.PropertyName == "Assembly");
+					.Single(p => p.ObjectClass.ID == typeRefClass.ID && p.Name == "Assembly");
 				var orm = new ObjectReferenceModel(
 					GuiApplicationContext.Current, ctx,
 					obj, assemblyProperty);

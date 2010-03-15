@@ -88,9 +88,9 @@ namespace Kistl.Client.Presentables
 
                 var newPropertyValue = _valueCache == null ? null : _valueCache.Object;
 
-                if (!object.Equals(Object.GetPropertyValue<IDataObject>(Property.PropertyName), newPropertyValue))
+                if (!object.Equals(Object.GetPropertyValue<IDataObject>(Property.Name), newPropertyValue))
                 {
-                    Object.SetPropertyValue<IDataObject>(Property.PropertyName, newPropertyValue);
+                    Object.SetPropertyValue<IDataObject>(Property.Name, newPropertyValue);
                     CheckConstraints();
 
                     OnPropertyChanged("Value");
@@ -110,7 +110,7 @@ namespace Kistl.Client.Presentables
 
         protected override void UpdatePropertyValue()
         {
-            IDataObject newValue = Object.GetPropertyValue<IDataObject>(Property.PropertyName);
+            IDataObject newValue = Object.GetPropertyValue<IDataObject>(Property.Name);
             var newModel = newValue == null ? null : (DataObjectModel)Factory.CreateDefaultModel(DataContext, newValue);
             if (Value != newModel)
             {

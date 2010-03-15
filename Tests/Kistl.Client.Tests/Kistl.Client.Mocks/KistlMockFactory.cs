@@ -24,7 +24,7 @@ namespace Kistl.Client.Mocks
 
             result.SetupAllProperties();
             result.Setup(orp => orp.GetPropertyTypeString()).Returns(typeof(ObjectReferenceProperty).FullName);
-            result.Setup(orp => orp.PropertyName).Returns(propertyName);
+            result.Setup(orp => orp.Name).Returns(propertyName);
             result.Setup(orp => orp.GetIsList()).Returns(isList);
 
             return result;

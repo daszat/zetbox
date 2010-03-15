@@ -92,7 +92,7 @@ namespace Kistl.App.Extensions
 
             while (cls != null)
             {
-                Property prop = cls.Properties.SingleOrDefault(p => p.PropertyName == property);
+                Property prop = cls.Properties.SingleOrDefault(p => p.Name == property);
                 if (prop != null)
                 {
                     return prop;

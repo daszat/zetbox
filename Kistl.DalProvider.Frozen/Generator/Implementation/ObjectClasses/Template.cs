@@ -53,7 +53,7 @@ namespace Kistl.DalProvider.Frozen.Generator.Implementation.ObjectClasses
             Implementation.ObjectClasses.ListProperty.Call(Host, ctx,
                  serList,
                  this.DataType,
-                 prop.PropertyName,
+                 prop.Name,
                  prop);
         }
 

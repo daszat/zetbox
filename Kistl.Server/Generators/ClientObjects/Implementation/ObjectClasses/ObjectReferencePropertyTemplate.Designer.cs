@@ -128,7 +128,7 @@ this.WriteObjects("				\r\n");
 if (hasInverseNavigator)
     {
         var otherProp = otherEnd.Navigator;
-        string otherName = otherProp.PropertyName;
+        string otherName = otherProp.Name;
 
 
 #line 103 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"

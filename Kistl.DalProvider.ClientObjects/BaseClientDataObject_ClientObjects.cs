@@ -25,7 +25,7 @@ namespace Kistl.DalProvider.ClientObjects
                 true,
                 (acc, prop) =>
                     acc && prop.Constraints.All(c =>
-                        c.IsValid(this, this.GetPropertyValue<object>(prop.PropertyName))));
+                        c.IsValid(this, this.GetPropertyValue<object>(prop.Name))));
         }
 
         /// <summary>

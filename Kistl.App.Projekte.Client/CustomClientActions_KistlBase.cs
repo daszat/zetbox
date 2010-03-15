@@ -136,7 +136,7 @@ namespace Kistl.App.Base
             }
             else
             {
-                e.Result = String.Format("{0}: {1}", obj.ID, obj.PropertyName);
+                e.Result = String.Format("{0}: {1}", obj.ID, obj.Name);
             }
         }
 
@@ -324,7 +324,7 @@ namespace Kistl.App.Base
                 // TODO: implement CompoundObject too
                 foreach (var prop in iface.Properties)
                 {
-                    if (!objClass.Properties.Select(p => p.PropertyName).Contains(prop.PropertyName))
+                    if (!objClass.Properties.Select(p => p.Name).Contains(prop.Name))
                     {
                         // Add Property
                         Property newProp;
@@ -344,7 +344,7 @@ namespace Kistl.App.Base
                         objClass.Properties.Add(newProp);
 
                         // Default Values
-                        newProp.PropertyName = prop.PropertyName;
+                        newProp.Name = prop.Name;
                         newProp.CategoryTags = prop.CategoryTags;
                         newProp.Description = prop.Description;
                         if (prop is ValueTypeProperty)

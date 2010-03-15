@@ -70,7 +70,7 @@ namespace Kistl.Client.Presentables
             {
                 if (_propertyModelsByName == null)
                 {
-                    _propertyModelsByName = new LookupDictionary<string, Property, PresentableModel>(FetchPropertyList().ToList(), prop => prop.PropertyName, prop => Factory.CreatePropertyValueModel(DataContext, Object, prop));
+                    _propertyModelsByName = new LookupDictionary<string, Property, PresentableModel>(FetchPropertyList().ToList(), prop => prop.Name, prop => Factory.CreatePropertyValueModel(DataContext, Object, prop));
                 }
                 return _propertyModelsByName;
             }

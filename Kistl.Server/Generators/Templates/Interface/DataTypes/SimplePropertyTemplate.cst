@@ -12,7 +12,7 @@
 <%@ Parameter Name="prop" Type="Property" %>
 <%@ Parameter Name="isReadonly" Type="bool" %>
 <%
-	string name = prop.PropertyName;
+	string name = prop.Name;
 	string type = prop.ReferencedTypeAsCSharp();
 %>
 		<%= type %> <%= name %> {

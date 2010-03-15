@@ -77,7 +77,7 @@ this.WriteObjects("}\r\n");
 foreach (var prop in ctx.GetQuery<ValueTypeProperty>()
         .Where(p => p.IsList)
         .OrderBy(p => p.ObjectClass.Name)
-        .ThenBy(p => p.PropertyName))
+        .ThenBy(p => p.Name))
 	{
 
 
@@ -97,7 +97,7 @@ this.WriteObjects("}\r\n");
 foreach (var prop in ctx.GetQuery<CompoundObjectProperty>()
         .Where(p => p.IsList)
         .OrderBy(p => p.ObjectClass.Name)
-        .ThenBy(p => p.PropertyName))
+        .ThenBy(p => p.Name))
 	{
 
 

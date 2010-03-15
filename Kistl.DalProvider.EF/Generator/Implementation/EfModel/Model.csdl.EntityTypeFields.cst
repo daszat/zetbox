@@ -21,7 +21,7 @@
 	 * TODO: Actually, all this should die and become a bunch of polymorphic calls.
 	 */
 
-	foreach(var p in properties.OrderBy(p => p.PropertyName))
+	foreach(var p in properties.OrderBy(p => p.Name))
 	{
 		// TODO: implement IsNullable everywhere
 		if (p is ObjectReferenceProperty)
@@ -35,7 +35,7 @@
 			{
 				Debug.Assert(relEnd != null);
 %>
-    <NavigationProperty Name="<%= p.PropertyName + Kistl.API.Helper.ImplementationSuffix %>"
+    <NavigationProperty Name="<%= p.Name + Kistl.API.Helper.ImplementationSuffix %>"
                         Relationship="Model.<%= rel.GetRelationAssociationName(relEnd.GetRole()) %>"
                         FromRole="<%= relEnd.RoleName %>"
                         ToRole="CollectionEntry" />
@@ -44,7 +44,7 @@
 			else
 			{
 %>
-    <NavigationProperty Name="<%= p.PropertyName + Kistl.API.Helper.ImplementationSuffix %>"
+    <NavigationProperty Name="<%= p.Name + Kistl.API.Helper.ImplementationSuffix %>"
                         Relationship="Model.<%= rel.GetAssociationName() %>"
                         FromRole="<%= relEnd.RoleName %>"
                         ToRole="<%= otherEnd.RoleName %>" />
@@ -53,7 +53,7 @@
 				if (rel.NeedsPositionStorage(relEnd.GetRole()))
 				{
 %>
-    <Property Name="<%= p.PropertyName + Kistl.API.Helper.PositionSuffix %>" Type="Int32" Nullable="true" />
+    <Property Name="<%= p.Name + Kistl.API.Helper.PositionSuffix %>" Type="Int32" Nullable="true" />
 <%
 				}
 			}
@@ -64,7 +64,7 @@
 			if (prop.IsList)
 			{
 %>
-    <NavigationProperty Name="<%= prop.PropertyName + Kistl.API.Helper.ImplementationSuffix %>"
+    <NavigationProperty Name="<%= prop.Name + Kistl.API.Helper.ImplementationSuffix %>"
                         Relationship="Model.<%= prop.GetAssociationName() %>"
                         FromRole="<%= prop.ObjectClass.Name %>"
                         ToRole="CollectionEntry" />
@@ -83,7 +83,7 @@
 			if (prop.IsList)
 			{
 %>
-    <NavigationProperty Name="<%= prop.PropertyName + Kistl.API.Helper.ImplementationSuffix %>"
+    <NavigationProperty Name="<%= prop.Name + Kistl.API.Helper.ImplementationSuffix %>"
                         Relationship="Model.<%= prop.GetAssociationName() %>"
                         FromRole="<%= prop.ObjectClass.Name %>"
                         ToRole="CollectionEntry" />
@@ -93,7 +93,7 @@
 			{
 			// Nullable Complex types are not supported by EF
 %>
-    <Property Name="<%= p.PropertyName + Kistl.API.Helper.ImplementationSuffix %>"
+    <Property Name="<%= p.Name + Kistl.API.Helper.ImplementationSuffix %>"
               Type="Model.<%= prop.CompoundObjectDefinition.Name %>"
               Nullable="false" />
 <%

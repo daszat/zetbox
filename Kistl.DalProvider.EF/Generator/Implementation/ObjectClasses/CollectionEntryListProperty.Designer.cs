@@ -37,7 +37,7 @@ RelationEnd relEnd = rel.GetEndFromRole(endRole);
 	// the name of the property to create
 	// TODO: Case #1168
 	// Interface & Client Assembly generation uses the navigation property, EntityFramework Implementation uses the role name
-	string name = relEnd.Navigator.PropertyName;
+	string name = relEnd.Navigator.Name;
 	// the ef-visible property's name
 	string efName = name + Kistl.API.Helper.ImplementationSuffix;
 	// the name of the IDs list

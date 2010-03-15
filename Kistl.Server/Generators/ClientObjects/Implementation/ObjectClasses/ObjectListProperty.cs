@@ -23,7 +23,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
             if (prop == null) { throw new ArgumentNullException("prop"); }
             if (!prop.IsList()) { throw new ArgumentNullException("prop", "prop must be a List-valued property"); }
 
-            string name = prop.PropertyName;
+            string name = prop.Name;
             string wrapperClass = "OneNRelationList";
             var rel = RelationExtensions.Lookup(ctx, prop);
             var relEnd = rel.GetEnd(prop);
@@ -60,7 +60,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
 
             string wrapperName = "_" + name + "Wrapper";
 
-            var otherName = otherEnd.Navigator == null ? relEnd.RoleName : otherEnd.Navigator.PropertyName;
+            var otherName = otherEnd.Navigator == null ? relEnd.RoleName : otherEnd.Navigator.Name;
 
             string referencedInterface = otherEnd.Type.GetDataTypeString();
 

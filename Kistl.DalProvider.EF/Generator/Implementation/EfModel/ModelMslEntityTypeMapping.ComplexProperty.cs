@@ -43,14 +43,14 @@ namespace Kistl.DalProvider.EF.Generator.Implementation.EfModel
             this.WriteLine("  <ScalarProperty Name=\"CompoundObject_IsNull\" ColumnName=\"{0}\" />", Construct.NestedColumnName(prop, parentName));
 
             string newParent = Construct.NestedColumnName(prop, parentName);
-            foreach (var subProp in prop.CompoundObjectDefinition.Properties.OfType<ValueTypeProperty>().Where(p => !p.IsList).OrderBy(p => p.PropertyName))
+            foreach (var subProp in prop.CompoundObjectDefinition.Properties.OfType<ValueTypeProperty>().Where(p => !p.IsList).OrderBy(p => p.Name))
             {
-                ModelMslEntityTypeMappingScalarProperty.Call(Host, ctx, subProp, subProp.PropertyName, newParent);
+                ModelMslEntityTypeMappingScalarProperty.Call(Host, ctx, subProp, subProp.Name, newParent);
             }
 
-            foreach (var subProp in prop.CompoundObjectDefinition.Properties.OfType<CompoundObjectProperty>().Where(p => !p.IsList).OrderBy(p => p.PropertyName))
+            foreach (var subProp in prop.CompoundObjectDefinition.Properties.OfType<CompoundObjectProperty>().Where(p => !p.IsList).OrderBy(p => p.Name))
             {
-                ModelMslEntityTypeMappingComplexProperty.Call(Host, ctx, subProp, subProp.PropertyName, newParent);
+                ModelMslEntityTypeMappingComplexProperty.Call(Host, ctx, subProp, subProp.Name, newParent);
             }
 
             this.WriteLine("</ComplexProperty>");

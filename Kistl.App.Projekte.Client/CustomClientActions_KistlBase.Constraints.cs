@@ -85,9 +85,9 @@ namespace Kistl.App.Base
             {
                 StringBuilder result = new StringBuilder();
                 if (v < obj.Min)
-                    result.AppendFormat("{0} should be equal or greater than {1}", obj.ConstrainedProperty.PropertyName, obj.Min);
+                    result.AppendFormat("{0} should be equal or greater than {1}", obj.ConstrainedProperty.Name, obj.Min);
                 if (v > obj.Max)
-                    result.AppendFormat("{0} should be equal or less than {1}", obj.ConstrainedProperty.PropertyName, obj.Max);
+                    result.AppendFormat("{0} should be equal or less than {1}", obj.ConstrainedProperty.Name, obj.Max);
 
                 if (!String.IsNullOrEmpty(obj.Reason))
                 {
@@ -131,9 +131,9 @@ namespace Kistl.App.Base
                 int length = constrainedValueParam.ToString().Length;
                 StringBuilder result = new StringBuilder();
                 if (length < obj.MinLength)
-                    result.AppendFormat("{0} should be at least {1} characters long", obj.ConstrainedProperty.PropertyName, obj.MinLength);
+                    result.AppendFormat("{0} should be at least {1} characters long", obj.ConstrainedProperty.Name, obj.MinLength);
                 if (obj.MaxLength != null && length > obj.MaxLength)
-                    result.AppendFormat("{0} should be at most {1} characters long", obj.ConstrainedProperty.PropertyName, obj.MaxLength);
+                    result.AppendFormat("{0} should be at most {1} characters long", obj.ConstrainedProperty.Name, obj.MaxLength);
 
                 if (!String.IsNullOrEmpty(obj.Reason))
                 {

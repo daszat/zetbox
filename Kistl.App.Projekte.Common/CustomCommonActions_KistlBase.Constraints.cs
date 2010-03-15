@@ -21,13 +21,13 @@ namespace Kistl.App.Base
             }
             else
             {
-                e.Result = String.Format("{0} should not be NULL", obj.ConstrainedProperty.PropertyName);
+                e.Result = String.Format("{0} should not be NULL", obj.ConstrainedProperty.Name);
             }
         }
 
         public static void OnToString_IntegerRangeConstraint(IntegerRangeConstraint obj, MethodReturnEventArgs<string> e)
         {
-            e.Result = String.Format("{0} <= {1} <= {2}", obj.Min, obj.ConstrainedProperty == null ? "(no property)" : obj.ConstrainedProperty.PropertyName, obj.Max);
+            e.Result = String.Format("{0} <= {1} <= {2}", obj.Min, obj.ConstrainedProperty == null ? "(no property)" : obj.ConstrainedProperty.Name, obj.Max);
         }
         
         public static void OnToString_StringRangeConstraint(StringRangeConstraint obj, Kistl.API.MethodReturnEventArgs<string> e)
@@ -39,7 +39,7 @@ namespace Kistl.App.Base
                 e.Result = String.Format("{0} should have at least {1} and at most {2} characters",
                     obj.ConstrainedProperty == null
                         ? "a property"
-                        : obj.ConstrainedProperty.PropertyName,
+                        : obj.ConstrainedProperty.Name,
                     obj.MinLength,
                     maxLength);
             }
@@ -48,7 +48,7 @@ namespace Kistl.App.Base
                 e.Result = String.Format("{0} should have at most {1} characters",
                     obj.ConstrainedProperty == null
                         ? "a property"
-                        : obj.ConstrainedProperty.PropertyName,
+                        : obj.ConstrainedProperty.Name,
                     maxLength);
             }
         }

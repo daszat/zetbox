@@ -26,7 +26,7 @@ Entities are created for each class, for each class of collection entry (one per
     ctx.GetQuery<ValueTypeProperty>()
         .Where(p => p.IsList)
         .OrderBy(p => p.ObjectClass.Name)
-        .ThenBy(p => p.PropertyName)
+        .ThenBy(p => p.Name)
 
 
 

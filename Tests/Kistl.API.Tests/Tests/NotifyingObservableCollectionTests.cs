@@ -107,7 +107,7 @@ namespace Kistl.API.Tests
 
         protected override void AssertInvariants(List<TestDataObject> expectedItems)
         {
-            Assert.That(collection.PropertyName, Is.EqualTo("ParentProperty"));
+            Assert.That(collection.Name, Is.EqualTo("ParentProperty"));
             if (_withBeginUpdate)
             {
                 collection.EndUpdate();
@@ -223,7 +223,7 @@ namespace Kistl.API.Tests
 
         protected override void AssertInvariants(List<TestDataObject> expectedItems)
         {
-            Assert.That(collection.PropertyName, Is.EqualTo("ParentProperty"));
+            Assert.That(collection.Name, Is.EqualTo("ParentProperty"));
             if (_withBeginUpdate)
             {
                 collection.EndUpdate();

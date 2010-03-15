@@ -29,7 +29,7 @@ namespace Kistl.Client.Presentables
         private void UpdateMemberNamePossibilities()
         {
             if (_memberNameProperty == null)
-                _memberNameProperty = Object.GetObjectClass(MetaContext).Properties.Single(p => p.PropertyName == "MemberName");
+                _memberNameProperty = Object.GetObjectClass(MetaContext).Properties.Single(p => p.Name == "MemberName");
 
             if (_memberNameModel == null)
                 // fetches already generated model from cache

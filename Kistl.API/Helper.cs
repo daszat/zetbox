@@ -229,7 +229,7 @@ namespace Kistl.API
         /// <summary>
         /// Returns the Type of the named property's values
         /// Uses Reflection.
-        /// Supports extended access syntax PropertyName.NeestedProperty[DictKey1].PropertyName2
+        /// Supports extended access syntax Propertyname.NeestedProperty[DictKey1].Propertyname2
         /// </summary>
         /// <param name="obj">Object where the type of a property should be checked</param>
         /// <param name="propName">Propertyname as string.</param>
@@ -273,7 +273,7 @@ namespace Kistl.API
         /// Checks if a Property exists.
         /// Does not throw exceptions.
         /// Uses Reflection.
-        /// Supports extended access syntax PropertyName.NeestedProperty[DictKey1].PropertyName2
+        /// Supports extended access syntax Name.NeestedProperty[DictKey1].PropertyName2
         /// </summary>
         /// <param name="obj">Object where the existens of a property should be checked</param>
         /// <param name="propName">Propertyname as string.</param>
@@ -344,7 +344,7 @@ namespace Kistl.API
         /// <summary>
         /// Returns a Property Value from a given Object. Uses Reflection.
         /// Throws a ArgumentOutOfRangeException if the Property is not found.
-        /// Supports extended access syntax PropertyName.NeestedProperty[DictKey1].PropertyName2
+        /// Supports extended access syntax Name.NeestedProperty[DictKey1].PropertyName2
         /// </summary>
         /// <typeparam name="T">Type of the Property</typeparam>
         /// <param name="obj">Object from where the Property Value is returned</param>

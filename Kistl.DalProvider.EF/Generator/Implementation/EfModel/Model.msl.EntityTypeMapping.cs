@@ -43,33 +43,33 @@ namespace Kistl.DalProvider.EF.Generator.Implementation.EfModel
 
                 if (rel.A.Type == cls && rel.NeedsPositionStorage(RelationEndRole.A) && rel.A.Navigator != null)
                 {
-                    propertyName = rel.A.Navigator.PropertyName + Kistl.API.Helper.PositionSuffix;
+                    propertyName = rel.A.Navigator.Name + Kistl.API.Helper.PositionSuffix;
                     columnName = Construct.ListPositionColumnName(rel.B, String.Empty);
                     this.WriteLine("<ScalarProperty Name=\"{0}\" ColumnName=\"{1}\" />", propertyName, columnName);
                 }
 
                 if (rel.B.Type == cls && rel.NeedsPositionStorage(RelationEndRole.B) && rel.B.Navigator != null)
                 {
-                    propertyName = rel.B.Navigator.PropertyName + Kistl.API.Helper.PositionSuffix;
+                    propertyName = rel.B.Navigator.Name + Kistl.API.Helper.PositionSuffix;
                     columnName = Construct.ListPositionColumnName(rel.A, String.Empty);
                     this.WriteLine("<ScalarProperty Name=\"{0}\" ColumnName=\"{1}\" />", propertyName, columnName);
                 }
             }
 
-            foreach (var prop in cls.Properties.OfType<ValueTypeProperty>().Where(p => !p.IsList).OrderBy(p => p.PropertyName))
+            foreach (var prop in cls.Properties.OfType<ValueTypeProperty>().Where(p => !p.IsList).OrderBy(p => p.Name))
             {
-                ModelMslEntityTypeMappingScalarProperty.Call(Host, ctx, prop, prop.PropertyName, String.Empty);
+                ModelMslEntityTypeMappingScalarProperty.Call(Host, ctx, prop, prop.Name, String.Empty);
             }
 
-            foreach (var prop in cls.Properties.OfType<CompoundObjectProperty>().Where(p => !p.IsList).OrderBy(p => p.PropertyName))
+            foreach (var prop in cls.Properties.OfType<CompoundObjectProperty>().Where(p => !p.IsList).OrderBy(p => p.Name))
             {
-                ModelMslEntityTypeMappingComplexProperty.Call(Host, ctx, prop, prop.PropertyName, String.Empty);
+                ModelMslEntityTypeMappingComplexProperty.Call(Host, ctx, prop, prop.Name, String.Empty);
             }
         }
 
         //protected virtual void ApplyScalarProperty(Property prop, string parentName)
         //{
-        //    string propertyName = prop.PropertyName;
+        //    string propertyName = prop.Name;
         //    string columnName;
 
         //    if (prop is EnumerationProperty)
@@ -96,18 +96,18 @@ namespace Kistl.DalProvider.EF.Generator.Implementation.EfModel
         //protected virtual void ApplyComplexProperty(StructProperty prop, string parentName)
         //{
         //    this.WriteLine("<ComplexProperty Name=\"{0}{1}\" TypeName=\"Model.{2}\">",
-        //        prop.PropertyName,
+        //        prop.Name,
         //        Kistl.API.Helper.ImplementationSuffix,
         //        prop.StructDefinition.Name
         //        );
 
         //    string newParent = Construct.NestedColumnName(prop, parentName);
-        //    foreach (var subProp in prop.StructDefinition.Properties.OfType<ValueTypeProperty>().Where(p => !p.IsList).OrderBy(p => p.PropertyName))
+        //    foreach (var subProp in prop.StructDefinition.Properties.OfType<ValueTypeProperty>().Where(p => !p.IsList).OrderBy(p => p.Name))
         //    {
-        //        ModelMslEntityTypeMappingScalarProperty.Call(Host, ctx, subProp, subProp.PropertyName, newParent);
+        //        ModelMslEntityTypeMappingScalarProperty.Call(Host, ctx, subProp, subProp.Name, newParent);
         //    }
 
-        //    foreach (var subProp in prop.StructDefinition.Properties.OfType<StructProperty>().Where(p => !p.IsList).OrderBy(p => p.PropertyName))
+        //    foreach (var subProp in prop.StructDefinition.Properties.OfType<StructProperty>().Where(p => !p.IsList).OrderBy(p => p.Name))
         //    {
         //        ApplyComplexProperty(subProp, newParent);
         //    }

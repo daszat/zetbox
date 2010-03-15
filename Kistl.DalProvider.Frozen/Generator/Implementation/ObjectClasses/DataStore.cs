@@ -29,7 +29,7 @@ namespace Kistl.DalProvider.Frozen.Generator.Implementation.ObjectClasses
             if (obj == null) { throw new ArgumentNullException("obj"); }
             if (prop == null) { throw new ArgumentNullException("prop"); }
 
-            string propName = prop.PropertyName;
+            string propName = prop.Name;
 
             PropertyInfo pi = obj.GetType().GetProperty(propName);
 

@@ -94,7 +94,7 @@ this.WriteObjects("\r\n");
 foreach (var prop in ctx.GetQuery<ValueTypeProperty>()
 		.Where(p => p.IsList)
 		.OrderBy(p => p.ObjectClass.Name)
-		.ThenBy(p => p.PropertyName))
+		.ThenBy(p => p.Name))
 	{
 
 #line 81 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\AssociationSetAttributes.cst"
@@ -115,7 +115,7 @@ this.WriteObjects("\r\n");
 foreach (var prop in ctx.GetQuery<CompoundObjectProperty>()
 		.Where(p => p.IsList)
 		.OrderBy(p => p.ObjectClass.Name)
-		.ThenBy(p => p.PropertyName))
+		.ThenBy(p => p.Name))
 	{
 
 #line 100 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\AssociationSetAttributes.cst"

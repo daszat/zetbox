@@ -23,7 +23,7 @@ namespace Kistl.DalProvider.EF.Generator.Implementation.EfModel
                 return properties
                     .OfType<P>()
                     .OrderBy(p => p.ObjectClass.Name)
-                    .ThenBy(p => p.PropertyName)
+                    .ThenBy(p => p.Name)
                     .Where(p => predicate(p));
             }
         }
