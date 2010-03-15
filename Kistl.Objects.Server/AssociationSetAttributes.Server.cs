@@ -253,7 +253,7 @@ using Kistl.DalProvider.EF;
 	/*
     Relation: FK_ClrObjectParameter_isOf_Type
     A: ZeroOrMore CLRObjectParameter as ClrObjectParameter
-    B: ZeroOrOne TypeRef as Type
+    B: One TypeRef as Type
     Preferred Storage: MergeIntoA
 	*/
 
@@ -268,7 +268,7 @@ using Kistl.DalProvider.EF;
 	/*
     Relation: FK_CompoundObjectProperty_has_CompoundObjectDefinition
     A: ZeroOrMore CompoundObjectProperty as CompoundObjectProperty
-    B: ZeroOrOne CompoundObject as CompoundObjectDefinition
+    B: One CompoundObject as CompoundObjectDefinition
     Preferred Storage: MergeIntoA
 	*/
 
@@ -343,7 +343,7 @@ using Kistl.DalProvider.EF;
 	/*
     Relation: FK_Control_isof_Kind
     A: ZeroOrMore ViewDescriptor as Control
-    B: ZeroOrOne ControlKindClass as Kind
+    B: One ControlKindClass as Kind
     Preferred Storage: MergeIntoA
 	*/
 
@@ -559,7 +559,7 @@ using Kistl.DalProvider.EF;
 	/*
     Relation: FK_EnumerationProperty_has_Enumeration
     A: ZeroOrMore EnumerationProperty as EnumerationProperty
-    B: ZeroOrOne Enumeration as Enumeration
+    B: One Enumeration as Enumeration
     Preferred Storage: MergeIntoA
 	*/
 
@@ -745,7 +745,7 @@ using Kistl.DalProvider.EF;
 	/*
     Relation: FK_Icon_has_Module
     A: ZeroOrMore Icon as Icon
-    B: ZeroOrOne Module as Module
+    B: One Module as Module
     Preferred Storage: MergeIntoA
 	*/
 
@@ -868,7 +868,7 @@ using Kistl.DalProvider.EF;
 	/*
     Relation: FK_Method_has_Module
     A: ZeroOrMore Method as Method
-    B: ZeroOrOne Module as Module
+    B: One Module as Module
     Preferred Storage: MergeIntoA
 	*/
 
@@ -928,7 +928,7 @@ using Kistl.DalProvider.EF;
 	/*
     Relation: FK_MethodInvocation_has_Implementor
     A: ZeroOrMore MethodInvocation as MethodInvocation
-    B: ZeroOrOne TypeRef as Implementor
+    B: One TypeRef as Implementor
     Preferred Storage: MergeIntoA
 	*/
 
@@ -943,7 +943,7 @@ using Kistl.DalProvider.EF;
 	/*
     Relation: FK_MethodInvocation_has_Module
     A: ZeroOrMore MethodInvocation as MethodInvocation
-    B: ZeroOrOne Module as Module
+    B: One Module as Module
     Preferred Storage: MergeIntoA
 	*/
 
@@ -1234,7 +1234,7 @@ using Kistl.DalProvider.EF;
 	/*
     Relation: FK_ObjectParameter_has_DataType
     A: ZeroOrMore ObjectParameter as ObjectParameter
-    B: ZeroOrOne DataType as DataType
+    B: One DataType as DataType
     Preferred Storage: MergeIntoA
 	*/
 
@@ -1342,7 +1342,7 @@ using Kistl.DalProvider.EF;
 	/*
     Relation: FK_PresentableModelDescriptor_has_Module
     A: ZeroOrMore PresentableModelDescriptor as PresentableModelDescriptor
-    B: ZeroOrOne Module as Module
+    B: One Module as Module
     Preferred Storage: MergeIntoA
 	*/
 
@@ -1615,7 +1615,7 @@ using Kistl.DalProvider.EF;
 	/*
     Relation: FK_RelationEnd_has_Type
     A: ZeroOrMore RelationEnd as RelationEnd
-    B: ZeroOrOne ObjectClass as Type
+    B: One ObjectClass as Type
     Preferred Storage: MergeIntoA
 	*/
 
@@ -1819,7 +1819,7 @@ using Kistl.DalProvider.EF;
 	/*
     Relation: FK_TypeRef_has_Assembly
     A: ZeroOrMore TypeRef as TypeRef
-    B: ZeroOrOne Assembly as Assembly
+    B: One Assembly as Assembly
     Preferred Storage: MergeIntoA
 	*/
 
@@ -1897,7 +1897,7 @@ using Kistl.DalProvider.EF;
 	/*
     Relation: FK_ViewDescriptor_has_Module
     A: ZeroOrMore ViewDescriptor as ViewDescriptor
-    B: ZeroOrOne Module as Module
+    B: One Module as Module
     Preferred Storage: MergeIntoA
 	*/
 

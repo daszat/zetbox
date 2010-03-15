@@ -360,7 +360,7 @@ namespace Kistl.App.GUI
     /*
     Relation: FK_PresentableModelDescriptor_has_Module
     A: ZeroOrMore PresentableModelDescriptor as PresentableModelDescriptor
-    B: ZeroOrOne Module as Module
+    B: One Module as Module
     Preferred Storage: MergeIntoA
     */
         // object reference property

@@ -63,7 +63,7 @@ namespace Kistl.App.Base
     /*
     Relation: FK_TypeRef_has_Assembly
     A: ZeroOrMore TypeRef as TypeRef
-    B: ZeroOrOne Assembly as Assembly
+    B: One Assembly as Assembly
     Preferred Storage: MergeIntoA
     */
         // object reference property

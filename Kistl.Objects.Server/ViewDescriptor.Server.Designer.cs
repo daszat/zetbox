@@ -217,7 +217,7 @@ namespace Kistl.App.GUI
     /*
     Relation: FK_Control_isof_Kind
     A: ZeroOrMore ViewDescriptor as Control
-    B: ZeroOrOne ControlKindClass as Kind
+    B: One ControlKindClass as Kind
     Preferred Storage: MergeIntoA
     */
         // object reference property
@@ -308,7 +308,7 @@ namespace Kistl.App.GUI
     /*
     Relation: FK_ViewDescriptor_has_Module
     A: ZeroOrMore ViewDescriptor as ViewDescriptor
-    B: ZeroOrOne Module as Module
+    B: One Module as Module
     Preferred Storage: MergeIntoA
     */
         // object reference property

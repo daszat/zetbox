@@ -38,7 +38,7 @@ namespace Kistl.App.Base
     /*
     Relation: FK_CompoundObjectProperty_has_CompoundObjectDefinition
     A: ZeroOrMore CompoundObjectProperty as CompoundObjectProperty
-    B: ZeroOrOne CompoundObject as CompoundObjectDefinition
+    B: One CompoundObject as CompoundObjectDefinition
     Preferred Storage: MergeIntoA
     */
         // object reference property

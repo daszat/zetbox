@@ -877,7 +877,7 @@ namespace Kistl.App.Base
     /*
     Relation: FK_RelationEnd_has_Type
     A: ZeroOrMore RelationEnd as RelationEnd
-    B: ZeroOrOne ObjectClass as Type
+    B: One ObjectClass as Type
     Preferred Storage: MergeIntoA
     */
         // object reference property

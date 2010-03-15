@@ -616,7 +616,7 @@ namespace Kistl.App.Base
     /*
     Relation: FK_Method_has_Module
     A: ZeroOrMore Method as Method
-    B: ZeroOrOne Module as Module
+    B: One Module as Module
     Preferred Storage: MergeIntoA
     */
         // object reference property

@@ -178,7 +178,7 @@ namespace Kistl.App.GUI
     /*
     Relation: FK_Icon_has_Module
     A: ZeroOrMore Icon as Icon
-    B: ZeroOrOne Module as Module
+    B: One Module as Module
     Preferred Storage: MergeIntoA
     */
         // object reference property

@@ -38,7 +38,7 @@ namespace Kistl.App.Base
     /*
     Relation: FK_ClrObjectParameter_isOf_Type
     A: ZeroOrMore CLRObjectParameter as ClrObjectParameter
-    B: ZeroOrOne TypeRef as Type
+    B: One TypeRef as Type
     Preferred Storage: MergeIntoA
     */
         // object reference property

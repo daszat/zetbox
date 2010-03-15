@@ -38,7 +38,7 @@ namespace Kistl.App.Base
     /*
     Relation: FK_ObjectParameter_has_DataType
     A: ZeroOrMore ObjectParameter as ObjectParameter
-    B: ZeroOrOne DataType as DataType
+    B: One DataType as DataType
     Preferred Storage: MergeIntoA
     */
         // object reference property

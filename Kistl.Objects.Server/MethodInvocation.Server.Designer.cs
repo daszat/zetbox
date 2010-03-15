@@ -412,7 +412,7 @@ namespace Kistl.App.Base
     /*
     Relation: FK_MethodInvocation_has_Implementor
     A: ZeroOrMore MethodInvocation as MethodInvocation
-    B: ZeroOrOne TypeRef as Implementor
+    B: One TypeRef as Implementor
     Preferred Storage: MergeIntoA
     */
         // object reference property
@@ -737,7 +737,7 @@ namespace Kistl.App.Base
     /*
     Relation: FK_MethodInvocation_has_Module
     A: ZeroOrMore MethodInvocation as MethodInvocation
-    B: ZeroOrOne Module as Module
+    B: One Module as Module
     Preferred Storage: MergeIntoA
     */
         // object reference property

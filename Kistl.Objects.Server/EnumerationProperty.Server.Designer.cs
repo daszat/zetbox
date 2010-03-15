@@ -38,7 +38,7 @@ namespace Kistl.App.Base
     /*
     Relation: FK_EnumerationProperty_has_Enumeration
     A: ZeroOrMore EnumerationProperty as EnumerationProperty
-    B: ZeroOrOne Enumeration as Enumeration
+    B: One Enumeration as Enumeration
     Preferred Storage: MergeIntoA
     */
         // object reference property
