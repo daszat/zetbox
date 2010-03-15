@@ -76,11 +76,11 @@ this.WriteObjects("		{\r\n");
 foreach(var module in modulesWithFrozenClasses)
 	{
 	    // TODO: remove ToList when IsFrozenObject correctly inherits across meta-data
-		foreach(var frozenCls in module.DataTypes.OfType<ObjectClass>().ToList().Where(cls => cls.IsFrozen()).OrderBy(c => c.ClassName))
+		foreach(var frozenCls in module.DataTypes.OfType<ObjectClass>().ToList().Where(cls => cls.IsFrozen()).OrderBy(c => c.Name))
 		{
 
 #line 62 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Repositories\FrozenContextImplementation.cst"
-this.WriteObjects("			if (ifType == typeof(",  frozenCls.Module.Namespace , ".",  frozenCls.ClassName , "))\r\n");
+this.WriteObjects("			if (ifType == typeof(",  frozenCls.Module.Namespace , ".",  frozenCls.Name , "))\r\n");
 this.WriteObjects("				return ",  frozenCls.Module.Namespace , ".",  Implementation.ObjectClasses.Template.GetClassName(frozenCls) , ".DataStore.Values.AsQueryable().Cast<IDataObject>();\r\n");
 #line 65 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Repositories\FrozenContextImplementation.cst"
 }
@@ -104,7 +104,7 @@ this.WriteObjects("			return new List<IPersistenceObject>(0)\r\n");
 foreach(var module in modulesWithFrozenClasses)
 	{
 		// TODO: remove ToList when IsFrozenObject correctly inherits across meta-data
-        foreach(var frozenCls in module.DataTypes.OfType<ObjectClass>().ToList().Where(cls => cls.IsFrozen()).OrderBy(c => c.ClassName))
+        foreach(var frozenCls in module.DataTypes.OfType<ObjectClass>().ToList().Where(cls => cls.IsFrozen()).OrderBy(c => c.Name))
 		{
 
 #line 88 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Repositories\FrozenContextImplementation.cst"
@@ -123,11 +123,11 @@ this.WriteObjects("		{\r\n");
 foreach(var module in modulesWithFrozenClasses)
 	{
 		// TODO: remove ToList when IsFrozenObject correctly inherits across meta-data
-		foreach(var frozenCls in module.DataTypes.OfType<ObjectClass>().ToList().Where(cls => cls.IsFrozen()).OrderBy(c => c.ClassName))
+		foreach(var frozenCls in module.DataTypes.OfType<ObjectClass>().ToList().Where(cls => cls.IsFrozen()).OrderBy(c => c.Name))
 		{
 
 #line 105 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Repositories\FrozenContextImplementation.cst"
-this.WriteObjects("			if (ifType == typeof(",  frozenCls.Module.Namespace , ".",  frozenCls.ClassName , "))\r\n");
+this.WriteObjects("			if (ifType == typeof(",  frozenCls.Module.Namespace , ".",  frozenCls.Name , "))\r\n");
 this.WriteObjects("				return ",  frozenCls.Module.Namespace , ".",  Implementation.ObjectClasses.Template.GetClassName(frozenCls) , ".DataStore[ID];\r\n");
 #line 108 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Repositories\FrozenContextImplementation.cst"
 }

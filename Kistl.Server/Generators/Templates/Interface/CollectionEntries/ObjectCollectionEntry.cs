@@ -43,8 +43,8 @@ namespace Kistl.Server.Generators.Templates.Interface.CollectionEntries
         {
             return String.Format("{0}<{1}, {2}>",
                 IsOrdered() ? "IRelationListEntry" : "IRelationCollectionEntry",
-                rel.A.Type.ClassName,
-                rel.B.Type.ClassName);
+                rel.A.Type.Name,
+                rel.B.Type.Name);
         }
 
         protected override bool IsOrdered()

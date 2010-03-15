@@ -45,7 +45,7 @@ namespace Kistl.Client.Presentables
         {
             var datatypes = DataContext.GetQuery<DataType>()
                 .Where(dt => dt.Module.ID == _module.ID && (dt as ObjectClass != null ? !(dt as ObjectClass).IsSimpleObject : true))
-                .OrderBy(dt => dt.ClassName);
+                .OrderBy(dt => dt.Name);
             foreach (var dt in datatypes)
             {
                 ObjectClasses.Add((DataObjectModel)Factory.CreateDefaultModel(DataContext, dt));

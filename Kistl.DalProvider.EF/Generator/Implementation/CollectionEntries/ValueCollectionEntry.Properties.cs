@@ -16,8 +16,8 @@ namespace Kistl.DalProvider.EF.Generator.Implementation.CollectionEntries
         {
             Implementation.ObjectClasses.ObjectReferencePropertyTemplate.Call(Host, ctx,
                 MembersToSerialize,
-                propertyName, prop.GetAssociationName(), prop.ObjectClass.ClassName,
-                prop.ObjectClass.ClassName, prop.ObjectClass.ClassName + Kistl.API.Helper.ImplementationSuffix,
+                propertyName, prop.GetAssociationName(), prop.ObjectClass.Name,
+                prop.ObjectClass.Name, prop.ObjectClass.Name + Kistl.API.Helper.ImplementationSuffix,
                 false, false, prop.Module.Namespace,
                 false, false, false);
 
@@ -30,9 +30,9 @@ namespace Kistl.DalProvider.EF.Generator.Implementation.CollectionEntries
             this.WriteObjects("\t\t\tif (_fk_A.HasValue)");
             this.WriteLine();
             this.WriteObjects("\t\t\t\tA__Implementation__ = (",
-                    prop.ObjectClass.ClassName + Kistl.API.Helper.ImplementationSuffix,
+                    prop.ObjectClass.Name + Kistl.API.Helper.ImplementationSuffix,
                     ")Context.Find<",
-                    prop.ObjectClass.ClassName,
+                    prop.ObjectClass.Name,
                     ">(_fk_A.Value);");
             this.WriteLine();
             this.WriteObjects("\t\t\telse");

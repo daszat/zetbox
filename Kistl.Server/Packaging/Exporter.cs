@@ -101,7 +101,7 @@ namespace Kistl.Server.Packaging
                         Log.InfoFormat("  exporting {0}", module.ModuleName);
                         foreach (var objClass in module.DataTypes.OfType<ObjectClass>().Where(o => o.ImplementsInterfaces.Contains(iexpIf)))
                         {
-                            Log.InfoFormat("    {0} ", objClass.ClassName);
+                            Log.InfoFormat("    {0} ", objClass.Name);
                             foreach (var obj in ctx.GetQuery(objClass.GetDescribedInterfaceType()).OrderBy(obj => ((IExportable)obj).ExportGuid))
                             {
                                 ExportObject(xml, obj, moduleNamespaces);

@@ -234,7 +234,7 @@ namespace Kistl.Client.Presentables
                 // sort by name, create models
                 // TODO: filter non-instantiable classes
                 var childModels = children
-                    .OrderBy(oc => oc.ClassName)
+                    .OrderBy(oc => oc.Name)
                     .Select(oc => (DataObjectModel)Factory.CreateSpecificModel<ObjectClassModel>(DataContext, oc))
                     .ToList();
 

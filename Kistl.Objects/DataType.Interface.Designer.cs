@@ -14,13 +14,6 @@ namespace Kistl.App.Base
     {
 
         /// <summary>
-        /// Der Name der Objektklasse
-        /// </summary>
-		string ClassName {
-			get;
-			set;
-		}
-        /// <summary>
         /// Standard Icon wenn IIcon nicht implementiert ist
         /// </summary>
 		Kistl.App.GUI.Icon DefaultIcon {
@@ -48,6 +41,13 @@ namespace Kistl.App.Base
         /// Modul der Objektklasse
         /// </summary>
 		Kistl.App.Base.Module Module {
+			get;
+			set;
+		}
+        /// <summary>
+        /// Der Name der Objektklasse
+        /// </summary>
+		string Name {
 			get;
 			set;
 		}

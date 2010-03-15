@@ -122,10 +122,10 @@ namespace Kistl.IntegrationTests
         {
             using (IKistlContext ctx = KistlContext.GetContext())
             {
-                var list = ctx.GetQuery<ObjectClass>().OrderBy(o => o.ClassName).ToList();
+                var list = ctx.GetQuery<ObjectClass>().OrderBy(o => o.Name).ToList();
                 Assert.That(list.Count, Is.GreaterThan(0));
                 List<ObjectClass> result = list.ToList();
-                List<ObjectClass> sorted = list.OrderBy(o => o.ClassName).ToList();
+                List<ObjectClass> sorted = list.OrderBy(o => o.Name).ToList();
 
                 for (int i = 0; i < result.Count; i++)
                 {
@@ -144,11 +144,11 @@ namespace Kistl.IntegrationTests
             using (IKistlContext ctx = KistlContext.GetContext())
             {
                 var list = ctx.GetQuery(new InterfaceType(typeof(ObjectClass))).Cast<ObjectClass>()
-                    .OrderBy(o => o.ClassName)
+                    .OrderBy(o => o.Name)
                     .ToList().Cast<ObjectClass>();
                 Assert.That(list.Count(), Is.GreaterThan(0));
                 List<ObjectClass> result = list.ToList();
-                List<ObjectClass> sorted = list.ToList().OrderBy(o => o.ClassName).ToList();
+                List<ObjectClass> sorted = list.ToList().OrderBy(o => o.Name).ToList();
 
                 for (int i = 0; i < result.Count; i++)
                 {
@@ -166,10 +166,10 @@ namespace Kistl.IntegrationTests
         {
             using (IKistlContext ctx = KistlContext.GetContext())
             {
-                var list = ctx.GetQuery<ObjectClass>().Where(o => o.Module.ModuleName == "KistlBase").OrderBy(o => o.ClassName).ToList();
+                var list = ctx.GetQuery<ObjectClass>().Where(o => o.Module.ModuleName == "KistlBase").OrderBy(o => o.Name).ToList();
                 Assert.That(list.Count, Is.GreaterThan(0));
                 List<ObjectClass> result = list.ToList();
-                List<ObjectClass> sorted = list.OrderBy(o => o.ClassName).ToList();
+                List<ObjectClass> sorted = list.OrderBy(o => o.Name).ToList();
 
                 for (int i = 0; i < result.Count; i++)
                 {
@@ -187,10 +187,10 @@ namespace Kistl.IntegrationTests
         {
             using (IKistlContext ctx = KistlContext.GetContext())
             {
-                var list = ctx.GetQuery<ObjectClass>().OrderBy(o => o.Module.ModuleName).ThenBy(o => o.ClassName).ToList();
+                var list = ctx.GetQuery<ObjectClass>().OrderBy(o => o.Module.ModuleName).ThenBy(o => o.Name).ToList();
                 Assert.That(list.Count, Is.GreaterThan(0));
                 List<ObjectClass> result = list.ToList();
-                List<ObjectClass> sorted = list.OrderBy(o => o.Module.ModuleName).ThenBy(o => o.ClassName).ToList();
+                List<ObjectClass> sorted = list.OrderBy(o => o.Module.ModuleName).ThenBy(o => o.Name).ToList();
 
                 for (int i = 0; i < result.Count; i++)
                 {

@@ -132,7 +132,7 @@ namespace Kistl.Server.SchemaManagement
 
             if (movedUp)
             {
-                Log.InfoFormat("Moving property '{0}' from '{1}' up to '{2}'", prop.PropertyName, saved.ObjectClass.ClassName, objClass.ClassName);
+                Log.InfoFormat("Moving property '{0}' from '{1}' up to '{2}'", prop.PropertyName, saved.ObjectClass.Name, objClass.Name);
                 db.CreateColumn(tblName, colName, dbType, size, true);
 
                 db.CopyColumnData(srcTblName, srcColName, tblName, colName);
@@ -153,7 +153,7 @@ namespace Kistl.Server.SchemaManagement
             }
             else if (movedDown)
             {
-                Log.InfoFormat("Moving property '{0}' from '{1}' down to '{2}' (dataloss possible)", prop.PropertyName, saved.ObjectClass.ClassName, objClass.ClassName);
+                Log.InfoFormat("Moving property '{0}' from '{1}' down to '{2}' (dataloss possible)", prop.PropertyName, saved.ObjectClass.Name, objClass.Name);
                 db.CreateColumn(tblName, colName, dbType, size, true);
 
                 db.CopyColumnData(srcTblName, srcColName, tblName, colName);
@@ -167,7 +167,7 @@ namespace Kistl.Server.SchemaManagement
             }
             else
             {
-                Log.ErrorFormat("moving a Property from '{0}' to '{1}' is not supported. ObjectClasses are not in the same hierarchy.", saved.ObjectClass.ClassName, prop.ObjectClass.ClassName);
+                Log.ErrorFormat("moving a Property from '{0}' to '{1}' is not supported. ObjectClasses are not in the same hierarchy.", saved.ObjectClass.Name, prop.ObjectClass.Name);
             }
         }
 
@@ -211,7 +211,7 @@ namespace Kistl.Server.SchemaManagement
             string colName = Construct.NestedColumnName(prop, prefix);
             var dbType = SchemaManager.GetDbType(prop);
             var size = prop is StringProperty ? ((StringProperty)prop).GetMaxLength() : 0;
-            Log.InfoFormat("New not nullable ValueType Property: [{0}.{1}] (col:{2})", prop.ObjectClass.ClassName, prop.PropertyName, colName);
+            Log.InfoFormat("New not nullable ValueType Property: [{0}.{1}] (col:{2})", prop.ObjectClass.Name, prop.PropertyName, colName);
             if (!db.CheckTableContainsData(tblName))
             {
                 db.CreateColumn(tblName, colName, dbType, size, false);
@@ -289,7 +289,7 @@ namespace Kistl.Server.SchemaManagement
         public void DoMoveValueTypePropertyList(ObjectClass objClass, ValueTypeProperty prop)
         {
             var saved = savedSchema.FindPersistenceObject<ValueTypeProperty>(prop.ExportGuid);
-            Log.ErrorFormat("moving a Property from '{0}' to '{1}' is not supported yet", saved.ObjectClass.ClassName, prop.ObjectClass.ClassName);
+            Log.ErrorFormat("moving a Property from '{0}' to '{1}' is not supported yet", saved.ObjectClass.Name, prop.ObjectClass.Name);
         }
         #endregion
 
@@ -302,7 +302,7 @@ namespace Kistl.Server.SchemaManagement
         {
             Log.InfoFormat("New ValueType Property List: {0}", prop.PropertyName);
             string tblName = prop.GetCollectionEntryTable();
-            string fkName = "fk_" + prop.ObjectClass.ClassName;
+            string fkName = "fk_" + prop.ObjectClass.Name;
             string valPropName = prop.PropertyName;
             string valPropIndexName = prop.PropertyName + "Index";
             string assocName = prop.GetAssociationName();
@@ -330,7 +330,7 @@ namespace Kistl.Server.SchemaManagement
         {
             Log.InfoFormat("New CompoundObject Property List: {0}", prop.PropertyName);
             string tblName = prop.GetCollectionEntryTable();
-            string fkName = "fk_" + prop.ObjectClass.ClassName;
+            string fkName = "fk_" + prop.ObjectClass.Name;
 
             // TODO: Support neested CompoundObject
             string valPropName = prop.PropertyName;
@@ -380,7 +380,7 @@ namespace Kistl.Server.SchemaManagement
         public void DoMoveCompoundObjectPropertyList(ObjectClass objClass, CompoundObjectProperty prop)
         {
             var saved = savedSchema.FindPersistenceObject<CompoundObjectProperty>(prop.ExportGuid);
-            Log.ErrorFormat("moving a Property from '{0}' to '{1}' is not supported yet", saved.ObjectClass.ClassName, prop.ObjectClass.ClassName);
+            Log.ErrorFormat("moving a Property from '{0}' to '{1}' is not supported yet", saved.ObjectClass.Name, prop.ObjectClass.Name);
         }
         #endregion
 
@@ -898,7 +898,7 @@ namespace Kistl.Server.SchemaManagement
             string assocName = Construct.InheritanceAssociationName(objClass.BaseObjectClass, objClass);
             string tblName = objClass.TableName;
 
-            Log.InfoFormat("New ObjectClass Inheritance: {0} -> {1}: {2}", objClass.ClassName, objClass.BaseObjectClass.ClassName, assocName);
+            Log.InfoFormat("New ObjectClass Inheritance: {0} -> {1}: {2}", objClass.Name, objClass.BaseObjectClass.Name, assocName);
 
             if (db.CheckTableContainsData(tblName))
             {
@@ -923,7 +923,7 @@ namespace Kistl.Server.SchemaManagement
         }
         public void DoChangeObjectClassInheritance(ObjectClass objClass)
         {
-            Log.InfoFormat("Changing ObjectClass Inheritance: {0} -> {1}", objClass.ClassName, objClass.BaseObjectClass.ClassName);
+            Log.InfoFormat("Changing ObjectClass Inheritance: {0} -> {1}", objClass.Name, objClass.BaseObjectClass.Name);
             DoRemoveObjectClassInheritance(objClass);
             DoNewObjectClassInheritance(objClass);
         }
@@ -943,7 +943,7 @@ namespace Kistl.Server.SchemaManagement
             string assocName = Construct.InheritanceAssociationName(savedObjClass.BaseObjectClass, savedObjClass);
             string tblName = objClass.TableName;
 
-            Log.InfoFormat("Remove ObjectClass Inheritance: {0} -> {1}: {2}", savedObjClass.ClassName, savedObjClass.BaseObjectClass.ClassName, assocName);
+            Log.InfoFormat("Remove ObjectClass Inheritance: {0} -> {1}: {2}", savedObjClass.Name, savedObjClass.BaseObjectClass.Name, assocName);
 
             db.DropFKConstraint(tblName, assocName);
         }
@@ -958,7 +958,7 @@ namespace Kistl.Server.SchemaManagement
         }
         public void DoNewObjectClassACL(ObjectClass objClass)
         {
-            Log.InfoFormat("New ObjectClass Security Rules: {0}", objClass.ClassName);
+            Log.InfoFormat("New ObjectClass Security Rules: {0}", objClass.Name);
             string tblRightsName = Construct.SecurityRulesTableName(objClass);
 
             db.CreateTable(tblRightsName, false, false);
@@ -988,7 +988,7 @@ namespace Kistl.Server.SchemaManagement
 
             if (objClass.AccessControlList.Count == 0)
             {
-                Log.ErrorFormat("Unable to create RightsViewUnmaterialized: ObjectClass '{0}' has an empty AccessControlList", objClass.ClassName);
+                Log.ErrorFormat("Unable to create RightsViewUnmaterialized: ObjectClass '{0}' has an empty AccessControlList", objClass.Name);
                 db.CreateEmptyRightsViewUnmaterialized(rightsViewUnmaterializedName);
                 return;
             }
@@ -1162,7 +1162,7 @@ namespace Kistl.Server.SchemaManagement
             var rightsViewUnmaterializedName = Construct.SecurityRulesRightsViewUnmaterializedName(objClass);
             var refreshRightsOnProcedureName = Construct.SecurityRulesRefreshRightsOnProcedureName(objClass);
 
-            Log.InfoFormat("Delete ObjectClass Security Rules: {0}", objClass.ClassName);
+            Log.InfoFormat("Delete ObjectClass Security Rules: {0}", objClass.Name);
 
             db.DropProcedure(refreshRightsOnProcedureName);
             db.DropView(rightsViewUnmaterializedName);

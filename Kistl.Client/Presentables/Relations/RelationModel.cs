@@ -77,10 +77,10 @@ namespace Kistl.Client.Presentables.Relations
             if (prop == null) return string.Format("No Navigator for {0} defined", string.IsNullOrEmpty(relEnd.RoleName) ? (object)relEnd.GetRole() : relEnd.RoleName);
             if (prop.GetIsList())
             {
-                return string.Format("Navigator {1}.{2} is a {3}<{0}>", refType.ClassName, prop.ObjectClass.ClassName, prop.PropertyName, rel.NeedsPositionStorage(otherEnd.GetRole()) ? "IList" : "ICollection");
+                return string.Format("Navigator {1}.{2} is a {3}<{0}>", refType.Name, prop.ObjectClass.Name, prop.PropertyName, rel.NeedsPositionStorage(otherEnd.GetRole()) ? "IList" : "ICollection");
             }
-            if (prop.IsNullable()) return string.Format("Navigator {1}.{2} is a nullable reference to {0}", refType.ClassName, prop.ObjectClass.ClassName, prop.PropertyName);
-            return string.Format("Navigator {1}.{2} is a required reference to {0}", refType.ClassName, prop.ObjectClass.ClassName, prop.PropertyName);
+            if (prop.IsNullable()) return string.Format("Navigator {1}.{2} is a nullable reference to {0}", refType.Name, prop.ObjectClass.Name, prop.PropertyName);
+            return string.Format("Navigator {1}.{2} is a required reference to {0}", refType.Name, prop.ObjectClass.Name, prop.PropertyName);
         }
 
         public bool IsFullyDefined

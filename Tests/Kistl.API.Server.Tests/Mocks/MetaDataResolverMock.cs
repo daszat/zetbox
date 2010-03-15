@@ -11,7 +11,7 @@ namespace Kistl.API.Server.Mocks
 
         public Kistl.App.Base.ObjectClass GetObjectClass(InterfaceType ifType)
         {
-            return new ObjectClassMock() { ClassName = ifType.Type.Name, ExportGuid = Guid.NewGuid(), TableName = ifType.Type.Name, IsFrozenObject = true };
+            return new ObjectClassMock() { Name = ifType.Type.Name, ExportGuid = Guid.NewGuid(), TableName = ifType.Type.Name, IsFrozenObject = true };
         }
 
         #endregion

@@ -16,7 +16,7 @@ namespace Kistl.Server.Generators.Templates.Implementation.CollectionEntries
             ApplyParentReferencePropertyTemplate(this.prop, "A");
 
             // TODO: Move to implementation
-            this.WriteLine("public {0} Parent {{ get {{ return A; }} set {{ A = value; }} }}", this.prop.ObjectClass.ClassName);
+            this.WriteLine("public {0} Parent {{ get {{ return A; }} set {{ A = value; }} }}", this.prop.ObjectClass.Name);
         }
 
         protected override void ApplyBPropertyTemplate()

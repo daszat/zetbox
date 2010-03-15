@@ -54,7 +54,7 @@ namespace <%= DataType.Module.Namespace %>
 
     ApplyClassAttributeTemplate();
 %>
-    [System.Diagnostics.DebuggerDisplay("<%= DataType.ClassName %>")]
+    [System.Diagnostics.DebuggerDisplay("<%= DataType.Name %>")]
     public<%= GetClassModifiers() %> class <%= mungedClassName %> <%= GetInheritance() %>
     {
     
@@ -98,7 +98,7 @@ namespace <%= DataType.Module.Namespace %>
 
 		public override InterfaceType GetInterfaceType()
 		{
-			return new InterfaceType(typeof(<%= DataType.ClassName %>));
+			return new InterfaceType(typeof(<%= DataType.Name %>));
 		}
 <%
 		ApplyApplyChangesFromMethod();

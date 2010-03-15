@@ -38,7 +38,7 @@ namespace Kistl.Server.Generators
             if (parentClass == null) { throw new ArgumentNullException("parentClass"); }
             if (childClass == null) { throw new ArgumentNullException("childClass"); }
 
-            return InheritanceAssociationName(parentClass.ClassName, childClass.ClassName);
+            return InheritanceAssociationName(parentClass.Name, childClass.Name);
         }
 
         public static string InheritanceAssociationName(ObjectClass parentClass, ObjectClass childClass)
@@ -46,7 +46,7 @@ namespace Kistl.Server.Generators
             if (parentClass == null) { throw new ArgumentNullException("parentClass"); }
             if (childClass == null) { throw new ArgumentNullException("childClass"); }
 
-            return InheritanceAssociationName(parentClass.ClassName, childClass.ClassName);
+            return InheritanceAssociationName(parentClass.Name, childClass.Name);
         }
 
         #endregion
@@ -62,7 +62,7 @@ namespace Kistl.Server.Generators
         {
             if (obj == null) { throw new ArgumentNullException("obj"); }
 
-            return AssociationParentRoleName(obj.ClassName);
+            return AssociationParentRoleName(obj.Name);
         }
 
         #endregion
@@ -78,7 +78,7 @@ namespace Kistl.Server.Generators
         {
             if (obj == null) { throw new ArgumentNullException("obj"); }
 
-            return AssociationChildRoleName(obj.ClassName);
+            return AssociationChildRoleName(obj.Name);
         }
 
         #endregion
@@ -140,7 +140,7 @@ namespace Kistl.Server.Generators
         public static string SecurityRulesClassName(ObjectClass objClass)
         {
             if (objClass == null) { throw new ArgumentNullException("objClass"); }
-            return objClass.ClassName + "_Rights";
+            return objClass.Name + "_Rights";
         }
 
         public static string SecurityRulesUpdateRightsTriggerName(ObjectClass objClass)

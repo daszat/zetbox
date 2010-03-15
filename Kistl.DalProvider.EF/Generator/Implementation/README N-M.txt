@@ -12,11 +12,11 @@ ObjectClass'es.
 Confusingly, the next example uses the "real" ObjectClass from the database to describe the (different) ObjectClass of the example.
 
 var interf = ctx.Create<ObjectClass>();
-interf.ClassName = "Interface";
+interf.Name = "Interface";
 interf.TableName = "Interfaces";
 
 var cls = ctx.Create<ObjectClass>();
-cls.ClassName = "ObjectClass";
+cls.Name = "ObjectClass";
 cls.TableName = "ObjectClasses";
 
 var impl = ctx.Create<ObjectReferenceProperty>();

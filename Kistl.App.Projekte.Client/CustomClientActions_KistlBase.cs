@@ -34,11 +34,11 @@ namespace Kistl.App.Base
         {
             if (obj.Module == null)
             {
-                e.Result = obj.ClassName;
+                e.Result = obj.Name;
             }
             else
             {
-                e.Result = obj.Module.Namespace + "." + obj.ClassName;
+                e.Result = obj.Module.Namespace + "." + obj.Name;
             }
         }
 
@@ -80,7 +80,7 @@ namespace Kistl.App.Base
             }
             else
             {
-                e.Result = objClass.Module.Namespace + "." + objClass.ClassName;
+                e.Result = objClass.Module.Namespace + "." + objClass.Name;
             }
         }
 
@@ -89,7 +89,7 @@ namespace Kistl.App.Base
             DataType objClass = obj.CompoundObjectDefinition;
             if (objClass != null && objClass.Module != null)
             {
-                e.Result = objClass.Module.Namespace + "." + objClass.ClassName;
+                e.Result = objClass.Module.Namespace + "." + objClass.Name;
             }
             else
             {
@@ -132,7 +132,7 @@ namespace Kistl.App.Base
             // TODO: IsValid?
             if (Helper.IsPersistedObject(obj))
             {
-                e.Result = obj.Enumeration.Module.Namespace + "." + obj.Enumeration.ClassName;
+                e.Result = obj.Enumeration.Module.Namespace + "." + obj.Enumeration.Name;
             }
             else
             {
@@ -149,7 +149,7 @@ namespace Kistl.App.Base
             }
             else
             {
-                e.Result = objClass.Module.Namespace + "." + objClass.ClassName;
+                e.Result = objClass.Module.Namespace + "." + objClass.Name;
             }
         }
 
@@ -387,11 +387,11 @@ namespace Kistl.App.Base
                             rel.A.Type = objClass;
                             rel.A.Multiplicity = Multiplicity.ZeroOrMore;
                             rel.A.HasPersistentOrder = ph.HasPersistentOrder;
-                            rel.A.RoleName = string.IsNullOrEmpty(ph.ImplementorRoleName) ? objClass.ClassName : ph.ImplementorRoleName;
+                            rel.A.RoleName = string.IsNullOrEmpty(ph.ImplementorRoleName) ? objClass.Name : ph.ImplementorRoleName;
 
                             rel.B.Type = ph.ReferencedObjectClass;
                             rel.B.Multiplicity = ph.IsList ? Multiplicity.ZeroOrMore : Multiplicity.ZeroOrOne;
-                            rel.B.RoleName = string.IsNullOrEmpty(ph.ItemRoleName) ? ph.ReferencedObjectClass.ClassName : ph.ItemRoleName;
+                            rel.B.RoleName = string.IsNullOrEmpty(ph.ItemRoleName) ? ph.ReferencedObjectClass.Name : ph.ItemRoleName;
                         }
                     }
                 }

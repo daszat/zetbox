@@ -332,10 +332,10 @@
 	    <MappingFragment StoreEntitySet="DataType">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
-<ScalarProperty Name="ClassName" ColumnName="ClassName" />
 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
 <ScalarProperty Name="Description" ColumnName="Description" />
 <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+<ScalarProperty Name="Name" ColumnName="Name" />
 <ScalarProperty Name="ShowIconInLists" ColumnName="ShowIconInLists" />
 <ScalarProperty Name="ShowIdInLists" ColumnName="ShowIdInLists" />
 <ScalarProperty Name="ShowNameInLists" ColumnName="ShowNameInLists" />

@@ -33,11 +33,11 @@ this.WriteObjects("  <EntityContainer Name=\"Entities\">\r\n");
 this.WriteObjects("  \r\n");
 this.WriteObjects("    <!-- EntitySets for all classes -->\r\n");
 #line 22 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.csdl.cst"
-foreach(var cls in ctx.GetBaseClasses().OrderBy(c => c.ClassName))
+foreach(var cls in ctx.GetBaseClasses().OrderBy(c => c.Name))
     {
 
 #line 25 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.csdl.cst"
-this.WriteObjects("    <EntitySet Name=\"",  cls.ClassName , "\" EntityType=\"Model.",  cls.ClassName , "\" />\r\n");
+this.WriteObjects("    <EntitySet Name=\"",  cls.Name , "\" EntityType=\"Model.",  cls.Name , "\" />\r\n");
 #line 27 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.csdl.cst"
 if(cls.NeedsRightsTable())
 		{
@@ -45,7 +45,7 @@ if(cls.NeedsRightsTable())
 #line 30 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.csdl.cst"
 this.WriteObjects("    <EntitySet Name=\"",  Construct.SecurityRulesClassName(cls) , "\" EntityType=\"Model.",  Construct.SecurityRulesClassName(cls) , "\" />\r\n");
 this.WriteObjects("    <AssociationSet Name=\"",  Construct.SecurityRulesFKName(cls) , "\" Association=\"Model.",  Construct.SecurityRulesFKName(cls) , "\">\r\n");
-this.WriteObjects("      <End Role=\"",  cls.ClassName , "\" EntitySet=\"",  cls.ClassName , "\" />\r\n");
+this.WriteObjects("      <End Role=\"",  cls.Name , "\" EntitySet=\"",  cls.Name , "\" />\r\n");
 this.WriteObjects("      <End Role=\"",  Construct.SecurityRulesClassName(cls) , "\" EntitySet=\"",  Construct.SecurityRulesClassName(cls) , "\" />\r\n");
 this.WriteObjects("    </AssociationSet>\r\n");
 #line 36 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.csdl.cst"
@@ -64,11 +64,11 @@ foreach(var rel in GetRelationsWithSeparateStorage(ctx))
 #line 47 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.csdl.cst"
 this.WriteObjects("    <EntitySet Name=\"",  entityName , "\" EntityType=\"Model.",  entityName , "\" />\r\n");
 this.WriteObjects("    <AssociationSet Name=\"",  assocNameA , "\" Association=\"Model.",  assocNameA , "\" >\r\n");
-this.WriteObjects("      <End Role=\"",  rel.A.RoleName , "\" EntitySet=\"",  rel.A.Type.GetRootClass().ClassName , "\" />\r\n");
+this.WriteObjects("      <End Role=\"",  rel.A.RoleName , "\" EntitySet=\"",  rel.A.Type.GetRootClass().Name , "\" />\r\n");
 this.WriteObjects("      <End Role=\"CollectionEntry\" EntitySet=\"",  entityName , "\" />\r\n");
 this.WriteObjects("    </AssociationSet>\r\n");
 this.WriteObjects("    <AssociationSet Name=\"",  assocNameB , "\" Association=\"Model.",  assocNameB , "\" >\r\n");
-this.WriteObjects("      <End Role=\"",  rel.B.RoleName , "\" EntitySet=\"",  rel.B.Type.GetRootClass().ClassName , "\" />\r\n");
+this.WriteObjects("      <End Role=\"",  rel.B.RoleName , "\" EntitySet=\"",  rel.B.Type.GetRootClass().Name , "\" />\r\n");
 this.WriteObjects("      <End Role=\"CollectionEntry\" EntitySet=\"",  entityName , "\" />\r\n");
 this.WriteObjects("    </AssociationSet>\r\n");
 #line 57 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.csdl.cst"
@@ -80,7 +80,7 @@ this.WriteObjects("    <!-- EntitySets and AssociationSets for all object-value 
 #line 62 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.csdl.cst"
 foreach(var prop in ctx.GetQuery<ValueTypeProperty>()
         .Where(p => p.IsList)
-        .OrderBy(p => p.ObjectClass.ClassName)
+        .OrderBy(p => p.ObjectClass.Name)
         .ThenBy(p => p.PropertyName))
     {
         string assocName = prop.GetAssociationName();
@@ -89,7 +89,7 @@ foreach(var prop in ctx.GetQuery<ValueTypeProperty>()
 #line 70 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.csdl.cst"
 this.WriteObjects("    <EntitySet Name=\"",  entityName , "\" EntityType=\"Model.",  entityName , "\" />\r\n");
 this.WriteObjects("    <AssociationSet Name=\"",  assocName , "\" Association=\"Model.",  assocName , "\" >\r\n");
-this.WriteObjects("      <End Role=\"",  prop.ObjectClass.ClassName , "\" EntitySet=\"",  ((ObjectClass)prop.ObjectClass).GetRootClass().ClassName , "\" />\r\n");
+this.WriteObjects("      <End Role=\"",  prop.ObjectClass.Name , "\" EntitySet=\"",  ((ObjectClass)prop.ObjectClass).GetRootClass().Name , "\" />\r\n");
 this.WriteObjects("      <End Role=\"CollectionEntry\" EntitySet=\"",  entityName , "\" />\r\n");
 this.WriteObjects("    </AssociationSet>\r\n");
 #line 76 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.csdl.cst"
@@ -101,7 +101,7 @@ this.WriteObjects("    <!-- EntitySets and AssociationSets for all object-struct
 #line 81 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.csdl.cst"
 foreach(var prop in ctx.GetQuery<CompoundObjectProperty>()
         .Where(p => p.IsList)
-        .OrderBy(p => p.ObjectClass.ClassName)
+        .OrderBy(p => p.ObjectClass.Name)
         .ThenBy(p => p.PropertyName))
     {
         string assocName = prop.GetAssociationName();
@@ -110,7 +110,7 @@ foreach(var prop in ctx.GetQuery<CompoundObjectProperty>()
 #line 89 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.csdl.cst"
 this.WriteObjects("    <EntitySet Name=\"",  entityName , "\" EntityType=\"Model.",  entityName , "\" />\r\n");
 this.WriteObjects("    <AssociationSet Name=\"",  assocName , "\" Association=\"Model.",  assocName , "\" >\r\n");
-this.WriteObjects("      <End Role=\"",  prop.ObjectClass.ClassName , "\" EntitySet=\"",  ((ObjectClass)prop.ObjectClass).GetRootClass().ClassName , "\" />\r\n");
+this.WriteObjects("      <End Role=\"",  prop.ObjectClass.Name , "\" EntitySet=\"",  ((ObjectClass)prop.ObjectClass).GetRootClass().Name , "\" />\r\n");
 this.WriteObjects("      <End Role=\"CollectionEntry\" EntitySet=\"",  entityName , "\" />\r\n");
 this.WriteObjects("    </AssociationSet>\r\n");
 #line 95 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.csdl.cst"
@@ -126,8 +126,8 @@ foreach(var rel in GetRelationsWithoutSeparateStorage(ctx))
 
 #line 104 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.csdl.cst"
 this.WriteObjects("    <AssociationSet Name=\"",  assocName , "\" Association=\"Model.",  assocName , "\" >\r\n");
-this.WriteObjects("      <End Role=\"",  rel.A.RoleName , "\" EntitySet=\"",  rel.A.Type.GetRootClass().ClassName , "\" />\r\n");
-this.WriteObjects("      <End Role=\"",  rel.B.RoleName , "\" EntitySet=\"",  rel.B.Type.GetRootClass().ClassName , "\" />\r\n");
+this.WriteObjects("      <End Role=\"",  rel.A.RoleName , "\" EntitySet=\"",  rel.A.Type.GetRootClass().Name , "\" />\r\n");
+this.WriteObjects("      <End Role=\"",  rel.B.RoleName , "\" EntitySet=\"",  rel.B.Type.GetRootClass().Name , "\" />\r\n");
 this.WriteObjects("    </AssociationSet>\r\n");
 #line 109 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.csdl.cst"
 }
@@ -138,11 +138,11 @@ this.WriteObjects("  </EntityContainer>\r\n");
 this.WriteObjects("  \r\n");
 this.WriteObjects("  <!-- EntityTypes for all base classes -->\r\n");
 #line 116 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.csdl.cst"
-foreach(var cls in ctx.GetBaseClasses().OrderBy(c => c.ClassName))
+foreach(var cls in ctx.GetBaseClasses().OrderBy(c => c.Name))
     {
 
 #line 119 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.csdl.cst"
-this.WriteObjects("  <EntityType Name=\"",  cls.ClassName , "\"",  GetAbstractModifier(cls) , ">\r\n");
+this.WriteObjects("  <EntityType Name=\"",  cls.Name , "\"",  GetAbstractModifier(cls) , ">\r\n");
 this.WriteObjects("    <Key>\r\n");
 this.WriteObjects("      <PropertyRef Name=\"ID\" />\r\n");
 this.WriteObjects("    </Key>\r\n");
@@ -153,7 +153,7 @@ ApplyEntityTypeFieldDefs(cls.Properties.Cast<Property>());
 		{
 
 #line 129 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.csdl.cst"
-this.WriteObjects("    <NavigationProperty Name=\"SecurityRightsCollection",  Kistl.API.Helper.ImplementationSuffix, "\" Relationship=\"Model.",  Construct.SecurityRulesFKName(cls) , "\" FromRole=\"",  cls.ClassName , "\" ToRole=\"",  Construct.SecurityRulesClassName(cls) , "\" />\r\n");
+this.WriteObjects("    <NavigationProperty Name=\"SecurityRightsCollection",  Kistl.API.Helper.ImplementationSuffix, "\" Relationship=\"Model.",  Construct.SecurityRulesFKName(cls) , "\" FromRole=\"",  cls.Name , "\" ToRole=\"",  Construct.SecurityRulesClassName(cls) , "\" />\r\n");
 #line 131 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.csdl.cst"
 }
 
@@ -174,10 +174,10 @@ this.WriteObjects("    <Property Name=\"Identity\" Type=\"Int32\" Nullable=\"fal
 this.WriteObjects("    <Property Name=\"Right\" Type=\"Int32\" Nullable=\"false\" />\r\n");
 this.WriteObjects("  </EntityType>\r\n");
 this.WriteObjects("  <Association Name=\"",  Construct.SecurityRulesFKName(cls) , "\">\r\n");
-this.WriteObjects("    <End Role=\"",  cls.ClassName , "\" Type=\"Model.",  cls.ClassName , "\" Multiplicity=\"1\" />\r\n");
+this.WriteObjects("    <End Role=\"",  cls.Name , "\" Type=\"Model.",  cls.Name , "\" Multiplicity=\"1\" />\r\n");
 this.WriteObjects("    <End Role=\"",  Construct.SecurityRulesClassName(cls) , "\" Type=\"Model.",  Construct.SecurityRulesClassName(cls) , "\" Multiplicity=\"*\" />\r\n");
 this.WriteObjects("    <ReferentialConstraint>\r\n");
-this.WriteObjects("	  <Principal Role=\"",  cls.ClassName , "\">\r\n");
+this.WriteObjects("	  <Principal Role=\"",  cls.Name , "\">\r\n");
 this.WriteObjects("	    <PropertyRef Name=\"ID\" />\r\n");
 this.WriteObjects("	  </Principal>\r\n");
 this.WriteObjects("	  <Dependent Role=\"",  Construct.SecurityRulesClassName(cls) , "\">\r\n");
@@ -193,11 +193,11 @@ this.WriteObjects("  </Association>\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("  <!-- EntityTypes for all other classes -->\r\n");
 #line 166 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.csdl.cst"
-foreach(var cls in ctx.GetDerivedClasses().OrderBy(c => c.ClassName))
+foreach(var cls in ctx.GetDerivedClasses().OrderBy(c => c.Name))
     {
 
 #line 169 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.csdl.cst"
-this.WriteObjects("  <EntityType Name=\"",  cls.ClassName , "\" BaseType=\"Model.",  cls.BaseObjectClass.ClassName , "\"",  GetAbstractModifier(cls) , ">\r\n");
+this.WriteObjects("  <EntityType Name=\"",  cls.Name , "\" BaseType=\"Model.",  cls.BaseObjectClass.Name , "\"",  GetAbstractModifier(cls) , ">\r\n");
 #line 170 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.csdl.cst"
 ApplyEntityTypeFieldDefs(cls.Properties.Cast<Property>()); 
 #line 171 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.csdl.cst"
@@ -271,7 +271,7 @@ this.WriteObjects("    <Property Name=\"B",  Kistl.API.Helper.PositionSuffix , "
 this.WriteObjects("  </EntityType>\r\n");
 this.WriteObjects("  <Association Name=\"",  rel.GetRelationAssociationName(RelationEndRole.A) , "\" >\r\n");
 this.WriteObjects("    <End Role=\"",  rel.A.RoleName , "\"\r\n");
-this.WriteObjects("         Type=\"Model.",  rel.A.Type.ClassName , "\" \r\n");
+this.WriteObjects("         Type=\"Model.",  rel.A.Type.Name , "\" \r\n");
 this.WriteObjects("         Multiplicity=\"0..1\" />\r\n");
 this.WriteObjects("    <End Role=\"CollectionEntry\"\r\n");
 this.WriteObjects("         Type=\"Model.",  rel.GetRelationClassName() , "\"\r\n");
@@ -279,7 +279,7 @@ this.WriteObjects("         Multiplicity=\"*\" />\r\n");
 this.WriteObjects("  </Association>\r\n");
 this.WriteObjects("  <Association Name=\"",  rel.GetRelationAssociationName(RelationEndRole.B) , "\" >\r\n");
 this.WriteObjects("    <End Role=\"",  rel.B.RoleName , "\"\r\n");
-this.WriteObjects("         Type=\"Model.",  rel.B.Type.ClassName , "\" \r\n");
+this.WriteObjects("         Type=\"Model.",  rel.B.Type.Name , "\" \r\n");
 this.WriteObjects("         Multiplicity=\"0..1\" />\r\n");
 this.WriteObjects("    <End Role=\"CollectionEntry\"\r\n");
 this.WriteObjects("         Type=\"Model.",  rel.GetRelationClassName() , "\"\r\n");
@@ -296,13 +296,13 @@ this.WriteObjects("  <!-- EntityTypes and Associations for all object-value Coll
 #line 253 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.csdl.cst"
 foreach(var prop in ctx.GetQuery<ValueTypeProperty>()
         .Where(p => p.IsList)
-        .OrderBy(p => p.ObjectClass.ClassName)
+        .OrderBy(p => p.ObjectClass.Name)
         .ThenBy(p => p.PropertyName))
     {
 
 
 #line 260 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.csdl.cst"
-this.WriteObjects("  <!-- ",  prop.ObjectClass.ClassName , ".",  prop.PropertyName , " -->\r\n");
+this.WriteObjects("  <!-- ",  prop.ObjectClass.Name , ".",  prop.PropertyName , " -->\r\n");
 this.WriteObjects("  <EntityType Name=\"",  prop.GetCollectionEntryClassName() , "\" >\r\n");
 this.WriteObjects("    <Key>\r\n");
 this.WriteObjects("      <PropertyRef Name=\"ID\" />\r\n");
@@ -313,7 +313,7 @@ this.WriteObjects("    <!-- A -->\r\n");
 this.WriteObjects("    <NavigationProperty Name=\"A",  Kistl.API.Helper.ImplementationSuffix , "\"\r\n");
 this.WriteObjects("                        Relationship=\"Model.",  prop.GetAssociationName() , "\"\r\n");
 this.WriteObjects("                        FromRole=\"CollectionEntry\"\r\n");
-this.WriteObjects("                        ToRole=\"",  prop.ObjectClass.ClassName , "\" />\r\n");
+this.WriteObjects("                        ToRole=\"",  prop.ObjectClass.Name , "\" />\r\n");
 this.WriteObjects("    <!-- B -->\r\n");
 this.WriteObjects("    ",  PlainPropertyDefinitionFromValueType(prop, "B") , "\r\n");
 #line 275 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.csdl.cst"
@@ -328,8 +328,8 @@ this.WriteObjects("    <Property Name=\"B",  Kistl.API.Helper.PositionSuffix , "
 #line 282 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.csdl.cst"
 this.WriteObjects("  </EntityType>\r\n");
 this.WriteObjects("  <Association Name=\"",  prop.GetAssociationName() , "\" >\r\n");
-this.WriteObjects("    <End Role=\"",  prop.ObjectClass.ClassName , "\"\r\n");
-this.WriteObjects("         Type=\"Model.",  prop.ObjectClass.ClassName , "\" \r\n");
+this.WriteObjects("    <End Role=\"",  prop.ObjectClass.Name , "\"\r\n");
+this.WriteObjects("         Type=\"Model.",  prop.ObjectClass.Name , "\" \r\n");
 this.WriteObjects("         Multiplicity=\"0..1\" />\r\n");
 this.WriteObjects("    <End Role=\"CollectionEntry\"\r\n");
 this.WriteObjects("         Type=\"Model.",  prop.GetCollectionEntryClassName() , "\" \r\n");
@@ -344,13 +344,13 @@ this.WriteObjects("<!-- EntityTypes and Associations for all object-CompoundObje
 #line 297 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.csdl.cst"
 foreach(var prop in ctx.GetQuery<CompoundObjectProperty>()
         .Where(p => p.IsList)
-        .OrderBy(p => p.ObjectClass.ClassName)
+        .OrderBy(p => p.ObjectClass.Name)
         .ThenBy(p => p.PropertyName))
     {
 
 
 #line 304 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.csdl.cst"
-this.WriteObjects("  <!-- ",  prop.ObjectClass.ClassName , ".",  prop.PropertyName , " -->\r\n");
+this.WriteObjects("  <!-- ",  prop.ObjectClass.Name , ".",  prop.PropertyName , " -->\r\n");
 this.WriteObjects("  <EntityType Name=\"",  prop.GetCollectionEntryClassName() , "\" >\r\n");
 this.WriteObjects("    <Key>\r\n");
 this.WriteObjects("      <PropertyRef Name=\"ID\" />\r\n");
@@ -361,10 +361,10 @@ this.WriteObjects("    <!-- A -->\r\n");
 this.WriteObjects("    <NavigationProperty Name=\"A",  Kistl.API.Helper.ImplementationSuffix , "\"\r\n");
 this.WriteObjects("                        Relationship=\"Model.",  prop.GetAssociationName() , "\"\r\n");
 this.WriteObjects("                        FromRole=\"CollectionEntry\"\r\n");
-this.WriteObjects("                        ToRole=\"",  prop.ObjectClass.ClassName , "\" />\r\n");
+this.WriteObjects("                        ToRole=\"",  prop.ObjectClass.Name , "\" />\r\n");
 this.WriteObjects("    <!-- B -->\r\n");
 this.WriteObjects("    <Property Name=\"B",  Kistl.API.Helper.ImplementationSuffix , "\"\r\n");
-this.WriteObjects("              Type=\"Model.",  prop.CompoundObjectDefinition.ClassName , "\"\r\n");
+this.WriteObjects("              Type=\"Model.",  prop.CompoundObjectDefinition.Name , "\"\r\n");
 this.WriteObjects("              Nullable=\"false\" />\r\n");
 #line 321 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.csdl.cst"
 if (prop.HasPersistentOrder)
@@ -378,8 +378,8 @@ this.WriteObjects("    <Property Name=\"B",  Kistl.API.Helper.PositionSuffix , "
 #line 328 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.csdl.cst"
 this.WriteObjects("  </EntityType>\r\n");
 this.WriteObjects("  <Association Name=\"",  prop.GetAssociationName() , "\" >\r\n");
-this.WriteObjects("    <End Role=\"",  prop.ObjectClass.ClassName , "\"\r\n");
-this.WriteObjects("         Type=\"Model.",  prop.ObjectClass.ClassName , "\" \r\n");
+this.WriteObjects("    <End Role=\"",  prop.ObjectClass.Name , "\"\r\n");
+this.WriteObjects("         Type=\"Model.",  prop.ObjectClass.Name , "\" \r\n");
 this.WriteObjects("         Multiplicity=\"0..1\" />\r\n");
 this.WriteObjects("    <End Role=\"CollectionEntry\"\r\n");
 this.WriteObjects("         Type=\"Model.",  prop.GetCollectionEntryClassName() , "\" \r\n");
@@ -398,10 +398,10 @@ foreach(var rel in GetRelationsWithoutSeparateStorage(ctx))
 #line 346 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.csdl.cst"
 this.WriteObjects("  <Association Name=\"",  rel.GetAssociationName() , "\" >\r\n");
 this.WriteObjects("    <End Role=\"",  rel.A.RoleName , "\"\r\n");
-this.WriteObjects("         Type=\"Model.",  rel.A.Type.ClassName , "\" \r\n");
+this.WriteObjects("         Type=\"Model.",  rel.A.Type.Name , "\" \r\n");
 this.WriteObjects("         Multiplicity=\"",  rel.A.Multiplicity.ToCsdlRelationshipMultiplicity().ToXmlValue() , "\" />\r\n");
 this.WriteObjects("    <End Role=\"",  rel.B.RoleName , "\"\r\n");
-this.WriteObjects("         Type=\"Model.",  rel.B.Type.ClassName , "\" \r\n");
+this.WriteObjects("         Type=\"Model.",  rel.B.Type.Name , "\" \r\n");
 this.WriteObjects("         Multiplicity=\"",  rel.B.Multiplicity.ToCsdlRelationshipMultiplicity().ToXmlValue() , "\" />\r\n");
 this.WriteObjects("  </Association>\r\n");
 #line 355 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.csdl.cst"
@@ -412,11 +412,11 @@ this.WriteObjects("\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("  <!-- ComplexTypes for all CompoundObjects -->\r\n");
 #line 361 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.csdl.cst"
-foreach(var cls in ctx.GetQuery<CompoundObject>().OrderBy(s => s.ClassName))
+foreach(var cls in ctx.GetQuery<CompoundObject>().OrderBy(s => s.Name))
     {
 
 #line 364 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.csdl.cst"
-this.WriteObjects("  <ComplexType Name=\"",  cls.ClassName , "\" >\r\n");
+this.WriteObjects("  <ComplexType Name=\"",  cls.Name , "\" >\r\n");
 this.WriteObjects("    <Property Name=\"CompoundObject_IsNull\" Type=\"Boolean\" Nullable=\"false\" />\r\n");
 #line 366 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.csdl.cst"
 ApplyEntityTypeFieldDefs(cls.Properties.Cast<Property>()); 

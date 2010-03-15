@@ -46,13 +46,13 @@ foreach(var cls in module.DataTypes.OfType<ObjectClass>())
 	{
 
 #line 32 "P:\Kistl\Kistl.Server\Generators\Interfaces\Repositories\Repository.cst"
-this.WriteObjects("		/// <summary>List of all ",  cls.ClassName , "</summary>\r\n");
+this.WriteObjects("		/// <summary>List of all ",  cls.Name , "</summary>\r\n");
 this.WriteObjects("		/// ",  cls.Description , "\r\n");
-this.WriteObjects("		public IQueryable<",  cls.ClassName , "> ",  cls.TableName , "\r\n");
+this.WriteObjects("		public IQueryable<",  cls.Name , "> ",  cls.TableName , "\r\n");
 this.WriteObjects("		{ \r\n");
 this.WriteObjects("			get\r\n");
 this.WriteObjects("			{\r\n");
-this.WriteObjects("				return Context.GetQuery<",  cls.ClassName , ">();\r\n");
+this.WriteObjects("				return Context.GetQuery<",  cls.Name , ">();\r\n");
 this.WriteObjects("			}\r\n");
 this.WriteObjects("		}\r\n");
 this.WriteObjects("		\r\n");

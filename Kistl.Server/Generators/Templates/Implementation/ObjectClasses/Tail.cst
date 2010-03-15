@@ -16,50 +16,50 @@
    		// <%= this.GetType() %>
 
         [System.Diagnostics.DebuggerHidden()]
-        [EventBasedMethod("OnToString_<%= cls.ClassName %>")]
+        [EventBasedMethod("OnToString_<%= cls.Name %>")]
         public override string ToString()
         {
             MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
             e.Result = base.ToString();
-            if (OnToString_<%= cls.ClassName %> != null)
+            if (OnToString_<%= cls.Name %> != null)
             {
-                OnToString_<%= cls.ClassName %>(this, e);
+                OnToString_<%= cls.Name %>(this, e);
             }
             return e.Result;
         }
-        public static event ToStringHandler<<%= cls.ClassName %>> OnToString_<%= cls.ClassName %>;
+        public static event ToStringHandler<<%= cls.Name %>> OnToString_<%= cls.Name %>;
 
-        [EventBasedMethod("OnPreSave_<%= cls.ClassName %>")]
+        [EventBasedMethod("OnPreSave_<%= cls.Name %>")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_<%= cls.ClassName %> != null) OnPreSave_<%= cls.ClassName %>(this);
+            if (OnPreSave_<%= cls.Name %> != null) OnPreSave_<%= cls.Name %>(this);
         }
-        public static event ObjectEventHandler<<%= cls.ClassName %>> OnPreSave_<%= cls.ClassName %>;
+        public static event ObjectEventHandler<<%= cls.Name %>> OnPreSave_<%= cls.Name %>;
 
-        [EventBasedMethod("OnPostSave_<%= cls.ClassName %>")]
+        [EventBasedMethod("OnPostSave_<%= cls.Name %>")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_<%= cls.ClassName %> != null) OnPostSave_<%= cls.ClassName %>(this);
+            if (OnPostSave_<%= cls.Name %> != null) OnPostSave_<%= cls.Name %>(this);
         }
-        public static event ObjectEventHandler<<%= cls.ClassName %>> OnPostSave_<%= cls.ClassName %>;
+        public static event ObjectEventHandler<<%= cls.Name %>> OnPostSave_<%= cls.Name %>;
 
-        [EventBasedMethod("OnCreated_<%= cls.ClassName %>")]
+        [EventBasedMethod("OnCreated_<%= cls.Name %>")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_<%= cls.ClassName %> != null) OnCreated_<%= cls.ClassName %>(this);
+            if (OnCreated_<%= cls.Name %> != null) OnCreated_<%= cls.Name %>(this);
         }
-        public static event ObjectEventHandler<<%= cls.ClassName %>> OnCreated_<%= cls.ClassName %>;
+        public static event ObjectEventHandler<<%= cls.Name %>> OnCreated_<%= cls.Name %>;
 
-        [EventBasedMethod("OnDeleting_<%= cls.ClassName %>")]
+        [EventBasedMethod("OnDeleting_<%= cls.Name %>")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_<%= cls.ClassName %> != null) OnDeleting_<%= cls.ClassName %>(this);
+            if (OnDeleting_<%= cls.Name %> != null) OnDeleting_<%= cls.Name %>(this);
         }
-        public static event ObjectEventHandler<<%= cls.ClassName %>> OnDeleting_<%= cls.ClassName %>;
+        public static event ObjectEventHandler<<%= cls.Name %>> OnDeleting_<%= cls.Name %>;
 
 <%
 	Implementation.ObjectClasses.GetPropertyErrorTemplate.Call(Host, ctx, cls);

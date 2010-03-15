@@ -26,7 +26,7 @@ namespace Kistl.App.Base
             {
                 throw new ArgumentException(string.Format("Method {0}.{1}.{2} has more then one Return Parameter",
                     obj.Method.ObjectClass.Module.Namespace,
-                    obj.Method.ObjectClass.ClassName,
+                    obj.Method.ObjectClass.Name,
                     obj.Method.MethodName));
             }
         }
@@ -49,7 +49,7 @@ namespace Kistl.App.Base
 
         public static void OnGetDataTypeString_DataType(Kistl.App.Base.DataType obj, Kistl.API.MethodReturnEventArgs<string> e)
         {
-            e.Result = obj.Module.Namespace + "." + obj.ClassName;
+            e.Result = obj.Module.Namespace + "." + obj.Name;
         }
 
         public static void OnGetPropertyType_Property(Kistl.App.Base.Property obj, Kistl.API.MethodReturnEventArgs<System.Type> e)
@@ -110,24 +110,24 @@ namespace Kistl.App.Base
 
         public static void OnGetPropertyTypeString_EnumerationProperty(Kistl.App.Base.EnumerationProperty obj, Kistl.API.MethodReturnEventArgs<string> e)
         {
-            e.Result = obj.Enumeration.Module.Namespace + "." + obj.Enumeration.ClassName;
+            e.Result = obj.Enumeration.Module.Namespace + "." + obj.Enumeration.Name;
             // e.Result = "System.Int32";
         }
 
         public static void OnGetPropertyTypeString_ObjectReferenceProperty(Kistl.App.Base.ObjectReferenceProperty obj, Kistl.API.MethodReturnEventArgs<string> e)
         {
-            e.Result = obj.GetReferencedObjectClass().Module.Namespace + "." + obj.GetReferencedObjectClass().ClassName;
+            e.Result = obj.GetReferencedObjectClass().Module.Namespace + "." + obj.GetReferencedObjectClass().Name;
         }
 
         public static void OnGetPropertyTypeString_CalculatedObjectReferenceProperty(Kistl.App.Base.CalculatedObjectReferenceProperty obj, Kistl.API.MethodReturnEventArgs<string> e)
         {
-            e.Result = obj.ReferencedClass.Module.Namespace + "." + obj.ReferencedClass.ClassName;
+            e.Result = obj.ReferencedClass.Module.Namespace + "." + obj.ReferencedClass.Name;
         }
 
         public static void OnGetPropertyTypeString_CompoundObjectProperty(Kistl.App.Base.CompoundObjectProperty obj, Kistl.API.MethodReturnEventArgs<string> e)
         {
             DataType objClass = obj.CompoundObjectDefinition;
-            e.Result = objClass.Module.Namespace + "." + objClass.ClassName;
+            e.Result = objClass.Module.Namespace + "." + objClass.Name;
         }
 
         // Parameter
@@ -167,7 +167,7 @@ namespace Kistl.App.Base
 
         public static void OnGetParameterTypeString_ObjectParameter(Kistl.App.Base.ObjectParameter obj, Kistl.API.MethodReturnEventArgs<string> e)
         {
-            e.Result = obj.DataType.Module.Namespace + "." + obj.DataType.ClassName;
+            e.Result = obj.DataType.Module.Namespace + "." + obj.DataType.Name;
         }
 
         public static void OnGetParameterTypeString_CLRObjectParameter(Kistl.App.Base.CLRObjectParameter obj, Kistl.API.MethodReturnEventArgs<string> e)

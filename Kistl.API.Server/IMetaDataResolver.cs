@@ -41,7 +41,7 @@ namespace Kistl.API.Server
         private void Init(IReadOnlyKistlContext ctx)
         {
             _ctx = ctx;
-            _cache = ctx.GetQuery<ObjectClass>().ToLookup(cls => cls.ClassName);
+            _cache = ctx.GetQuery<ObjectClass>().ToLookup(cls => cls.Name);
         }
 
         /// <inheritdoc/>
@@ -49,7 +49,7 @@ namespace Kistl.API.Server
         {
             if (_cache == null) { return null; }
 
-            return _cache[ifType.Type.Name].First(o => o.Module.Namespace == ifType.Type.Namespace && o.ClassName == ifType.Type.Name);
+            return _cache[ifType.Type.Name].First(o => o.Module.Namespace == ifType.Type.Namespace && o.Name == ifType.Type.Name);
         }
     }
 }

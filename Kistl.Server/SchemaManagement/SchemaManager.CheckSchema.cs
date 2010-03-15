@@ -52,7 +52,7 @@ namespace Kistl.Server.SchemaManagement
         {
             Log.DebugFormat("CheckUpdateRightsTrigger");
             // Select all ObjectClasses with ACL
-            foreach (var objClass in schema.GetQuery<ObjectClass>().ToList().Where(o => o.NeedsRightsTable()).OrderBy(o => o.Module.Namespace).ThenBy(o => o.ClassName))
+            foreach (var objClass in schema.GetQuery<ObjectClass>().ToList().Where(o => o.NeedsRightsTable()).OrderBy(o => o.Module.Namespace).ThenBy(o => o.Name))
             {
                 Log.InfoFormat("Table: {0}", objClass.TableName);
                 if (repair)
@@ -97,13 +97,13 @@ namespace Kistl.Server.SchemaManagement
             Log.Info("Checking Inheritance");
             Log.Debug("--------------------");
 
-            foreach (ObjectClass objClass in schema.GetQuery<ObjectClass>().Where(o => o.BaseObjectClass != null).OrderBy(o => o.Module.Namespace).ThenBy(o => o.ClassName))
+            foreach (ObjectClass objClass in schema.GetQuery<ObjectClass>().Where(o => o.BaseObjectClass != null).OrderBy(o => o.Module.Namespace).ThenBy(o => o.Name))
             {
-                Log.DebugFormat("Objectclass: {0}.{1}", objClass.Module.Namespace, objClass.ClassName);
+                Log.DebugFormat("Objectclass: {0}.{1}", objClass.Module.Namespace, objClass.Name);
                 string assocName = Construct.InheritanceAssociationName(objClass.BaseObjectClass, objClass);
                 if (!db.CheckFKConstraintExists(assocName))
                 {
-                    Log.WarnFormat("FK Contraint to BaseClass is missing on Objectclass: {0}.{1}", objClass.Module.Namespace, objClass.ClassName);
+                    Log.WarnFormat("FK Contraint to BaseClass is missing on Objectclass: {0}.{1}", objClass.Module.Namespace, objClass.Name);
                     if (repair)
                     {
                         Case.DoNewObjectClassInheritance(objClass);
@@ -240,7 +240,7 @@ namespace Kistl.Server.SchemaManagement
             foreach (Relation rel in schema.GetQuery<Relation>())
             {
                 string assocName = rel.GetAssociationName();
-                Log.DebugFormat("Relation: \"{0}\" \"{1} - {2}\"", assocName, rel.A.Type.ClassName, rel.B.Type.ClassName);
+                Log.DebugFormat("Relation: \"{0}\" \"{1} - {2}\"", assocName, rel.A.Type.Name, rel.B.Type.Name);
                 switch (rel.GetRelationType())
                 {
                     case RelationType.one_one:
@@ -420,9 +420,9 @@ namespace Kistl.Server.SchemaManagement
             Log.Debug("-------------------------");
 
             // Checking Tables
-            foreach (ObjectClass objClass in schema.GetQuery<ObjectClass>().OrderBy(o => o.Module.Namespace).ThenBy(o => o.ClassName))
+            foreach (ObjectClass objClass in schema.GetQuery<ObjectClass>().OrderBy(o => o.Module.Namespace).ThenBy(o => o.Name))
             {
-                Log.DebugFormat("Objectclass: {0}.{1}", objClass.Module.Namespace, objClass.ClassName);
+                Log.DebugFormat("Objectclass: {0}.{1}", objClass.Module.Namespace, objClass.Name);
 
                 if (db.CheckTableExists(objClass.TableName))
                 {
@@ -489,7 +489,7 @@ namespace Kistl.Server.SchemaManagement
             .OrderBy(p => p.Module.Namespace).ThenBy(p => p.PropertyName))
             {
                 string tblName = prop.GetCollectionEntryTable();
-                string fkName = "fk_" + prop.ObjectClass.ClassName;
+                string fkName = "fk_" + prop.ObjectClass.Name;
                 string valPropName = prop.PropertyName;
                 string valPropIndexName = prop.PropertyName + "Index";
                 string assocName = prop.GetAssociationName();
@@ -538,7 +538,7 @@ namespace Kistl.Server.SchemaManagement
             .OrderBy(p => p.Module.Namespace).ThenBy(p => p.PropertyName))
             {
                 string tblName = prop.GetCollectionEntryTable();
-                string fkName = "fk_" + prop.ObjectClass.ClassName;
+                string fkName = "fk_" + prop.ObjectClass.Name;
                 string valPropName = prop.PropertyName;
                 string valPropIndexName = prop.PropertyName + "Index";
                 string assocName = prop.GetAssociationName();

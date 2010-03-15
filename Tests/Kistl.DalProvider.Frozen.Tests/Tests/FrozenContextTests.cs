@@ -28,7 +28,7 @@ namespace Kistl.DalProvider.Frozen.Tests
         public void should_forbid_setting_simple_properties()
         {
             var obj = FrozenContext.Single.GetQuery<ObjectClass>().First();
-            obj.ClassName = "test";
+            obj.Name = "test";
         }
 
         [Test]

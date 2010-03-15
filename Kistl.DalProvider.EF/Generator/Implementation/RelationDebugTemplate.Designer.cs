@@ -27,8 +27,8 @@ namespace Kistl.DalProvider.EF.Generator.Implementation
         {
 #line 14 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\RelationDebugTemplate.cst"
 this.WriteObjects("    Relation: ",  rel.GetAssociationName() , "\r\n");
-this.WriteObjects("    A: ",  rel.A.Multiplicity , " ",  rel.A.Type.ClassName , " as ",  rel.A.RoleName , "\r\n");
-this.WriteObjects("    B: ",  rel.B.Multiplicity , " ",  rel.B.Type.ClassName , " as ",  rel.B.RoleName , "\r\n");
+this.WriteObjects("    A: ",  rel.A.Multiplicity , " ",  rel.A.Type.Name , " as ",  rel.A.RoleName , "\r\n");
+this.WriteObjects("    B: ",  rel.B.Multiplicity , " ",  rel.B.Type.Name , " as ",  rel.B.RoleName , "\r\n");
 this.WriteObjects("    Preferred Storage: ",  rel.Storage , "\r\n");
 
         }

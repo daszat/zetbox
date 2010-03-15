@@ -49,7 +49,7 @@ foreach (var rel in ctx.GetQuery<Relation>()
 
 	foreach (var prop in ctx.GetQuery<ValueTypeProperty>()
         .Where(p => p.IsList)
-        .OrderBy(p => p.ObjectClass.ClassName)
+        .OrderBy(p => p.ObjectClass.Name)
         .ThenBy(p => p.PropertyName))
 	{
 
@@ -58,7 +58,7 @@ foreach (var rel in ctx.GetQuery<Relation>()
 	
 	foreach (var prop in ctx.GetQuery<CompoundObjectProperty>()
         .Where(p => p.IsList)
-        .OrderBy(p => p.ObjectClass.ClassName)
+        .OrderBy(p => p.ObjectClass.Name)
         .ThenBy(p => p.PropertyName))
 	{
 

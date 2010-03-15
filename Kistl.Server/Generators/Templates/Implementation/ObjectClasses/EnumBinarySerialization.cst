@@ -17,9 +17,9 @@
 <%@ Parameter Name="prop" Type="EnumerationProperty" %>
 <%
 	// always use the interface to get the "right" property
-	string interfaceName = prop.ObjectClass.ClassName;
+	string interfaceName = prop.ObjectClass.Name;
     string memberName = prop.PropertyName;
-    string enumName =  prop.Enumeration.Module.Namespace + "." +  prop.Enumeration.ClassName;
+    string enumName =  prop.Enumeration.Module.Namespace + "." +  prop.Enumeration.Name;
 	string methodName = direction.ToString();
 	
 	////

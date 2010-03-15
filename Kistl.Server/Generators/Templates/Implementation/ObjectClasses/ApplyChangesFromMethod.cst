@@ -16,9 +16,9 @@
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{
 			base.ApplyChangesFrom(obj);
-			var other = (<%= cls.ClassName %>)obj;
-			var otherImpl = (<%= cls.ClassName + Kistl.API.Helper.ImplementationSuffix %>)obj;
-			var me = (<%= cls.ClassName %>)this;
+			var other = (<%= cls.Name %>)obj;
+			var otherImpl = (<%= cls.Name + Kistl.API.Helper.ImplementationSuffix %>)obj;
+			var me = (<%= cls.Name %>)this;
 
 <%			
 			foreach(var prop in cls.Properties.OfType<ValueTypeProperty>().Where(p => !p.IsList).OrderBy(p => p.PropertyName))

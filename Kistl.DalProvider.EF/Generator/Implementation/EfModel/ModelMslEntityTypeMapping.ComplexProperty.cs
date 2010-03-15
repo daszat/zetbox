@@ -37,7 +37,7 @@ namespace Kistl.DalProvider.EF.Generator.Implementation.EfModel
             this.WriteLine("<ComplexProperty Name=\"{0}{1}\" TypeName=\"Model.{2}\">",
                 propertyName,
                 Kistl.API.Helper.ImplementationSuffix,
-                prop.CompoundObjectDefinition.ClassName
+                prop.CompoundObjectDefinition.Name
                 );
 
             this.WriteLine("  <ScalarProperty Name=\"CompoundObject_IsNull\" ColumnName=\"{0}\" />", Construct.NestedColumnName(prop, parentName));

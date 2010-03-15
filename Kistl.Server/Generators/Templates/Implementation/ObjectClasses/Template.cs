@@ -27,7 +27,7 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
             var baseClass = this.ObjectClass.BaseObjectClass;
             if (baseClass != null)
             {
-                return baseClass.Module.Namespace + "." + baseClass.ClassName;
+                return baseClass.Module.Namespace + "." + baseClass.Name;
             }
             else
             {

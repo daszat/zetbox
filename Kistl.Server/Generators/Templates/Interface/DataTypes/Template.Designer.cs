@@ -39,7 +39,7 @@ this.WriteObjects("\r\n");
 this.WriteObjects("    /// <summary>\r\n");
 this.WriteObjects("    /// ",  dataType.Description , "\r\n");
 this.WriteObjects("    /// </summary>\r\n");
-this.WriteObjects("    public interface ",  dataType.ClassName , " ",  GetInheritance() , " \r\n");
+this.WriteObjects("    public interface ",  dataType.Name , " ",  GetInheritance() , " \r\n");
 this.WriteObjects("    {\r\n");
 #line 29 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\DataTypes\Template.cst"
 foreach(Property p in dataType.Properties.OrderBy(p => p.PropertyName))

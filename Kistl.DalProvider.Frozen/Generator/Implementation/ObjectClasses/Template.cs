@@ -28,7 +28,7 @@ namespace Kistl.DalProvider.Frozen.Generator.Implementation.ObjectClasses
 
         internal static string GetClassName(ObjectClass cls)
         {
-            return cls.ClassName + Kistl.API.Helper.ImplementationSuffix + "Frozen";
+            return cls.Name + Kistl.API.Helper.ImplementationSuffix + "Frozen";
         }
 
         protected override string MungeClassName(string name)

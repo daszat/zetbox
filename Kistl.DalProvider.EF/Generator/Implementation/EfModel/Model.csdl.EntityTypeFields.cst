@@ -66,7 +66,7 @@
 %>
     <NavigationProperty Name="<%= prop.PropertyName + Kistl.API.Helper.ImplementationSuffix %>"
                         Relationship="Model.<%= prop.GetAssociationName() %>"
-                        FromRole="<%= prop.ObjectClass.ClassName %>"
+                        FromRole="<%= prop.ObjectClass.Name %>"
                         ToRole="CollectionEntry" />
 <%
 			}
@@ -77,15 +77,15 @@
 <%
 			}
 		}
-		else if (p is StructProperty)
+		else if (p is CompoundObjectProperty)
 		{
-			var prop = (StructProperty)p;
+			var prop = (CompoundObjectProperty)p;
 			if (prop.IsList)
 			{
 %>
     <NavigationProperty Name="<%= prop.PropertyName + Kistl.API.Helper.ImplementationSuffix %>"
                         Relationship="Model.<%= prop.GetAssociationName() %>"
-                        FromRole="<%= prop.ObjectClass.ClassName %>"
+                        FromRole="<%= prop.ObjectClass.Name %>"
                         ToRole="CollectionEntry" />
 <%
 			}
@@ -94,7 +94,7 @@
 			// Nullable Complex types are not supported by EF
 %>
     <Property Name="<%= p.PropertyName + Kistl.API.Helper.ImplementationSuffix %>"
-              Type="Model.<%= prop.StructDefinition.ClassName %>"
+              Type="Model.<%= prop.CompoundObjectDefinition.Name %>"
               Nullable="false" />
 <%
 			}

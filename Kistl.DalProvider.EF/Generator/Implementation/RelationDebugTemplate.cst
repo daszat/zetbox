@@ -12,6 +12,6 @@
 <%@ Parameter Name="ctx" Type="IKistlContext" %>
 <%@ Parameter Name="rel" Type="Relation" %>
     Relation: <%= rel.GetAssociationName() %>
-    A: <%= rel.A.Multiplicity %> <%= rel.A.Type.ClassName %> as <%= rel.A.RoleName %>
-    B: <%= rel.B.Multiplicity %> <%= rel.B.Type.ClassName %> as <%= rel.B.RoleName %>
+    A: <%= rel.A.Multiplicity %> <%= rel.A.Type.Name %> as <%= rel.A.RoleName %>
+    B: <%= rel.B.Multiplicity %> <%= rel.B.Type.Name %> as <%= rel.B.RoleName %>
     Preferred Storage: <%= rel.Storage %>

@@ -33,34 +33,34 @@ namespace Kistl.Server.Generators
             var generatedFileNames = new List<string>();
 
             Log.Info("  Object Classes");
-            foreach (ObjectClass objClass in Generator.GetObjectClassList(ctx).OrderBy(x => x.ClassName))
+            foreach (ObjectClass objClass in Generator.GetObjectClassList(ctx).OrderBy(x => x.Name))
             {
                 generatedFileNames.Add(Generate_ObjectClass(ctx, objClass));
-                Log.Debug("    " + objClass.ClassName);
+                Log.Debug("    " + objClass.Name);
             }
 
             Log.Info("  Collection Entries");
             generatedFileNames.Add(Generate_CollectionEntries(ctx));
 
             Log.Info("  Interfaces");
-            foreach (Interface i in Generator.GetInterfaceList(ctx).OrderBy(x => x.ClassName))
+            foreach (Interface i in Generator.GetInterfaceList(ctx).OrderBy(x => x.Name))
             {
                 generatedFileNames.Add(Generate_Interface(ctx, i));
-                Log.Debug("    " + i.ClassName);
+                Log.Debug("    " + i.Name);
             }
 
             Log.Info("  Enums");
-            foreach (Enumeration e in Generator.GetEnumList(ctx).OrderBy(x => x.ClassName))
+            foreach (Enumeration e in Generator.GetEnumList(ctx).OrderBy(x => x.Name))
             {
                 generatedFileNames.Add(Generate_Enumeration(ctx, e));
-                Log.Debug("    " + e.ClassName);
+                Log.Debug("    " + e.Name);
             }
 
             Log.Info("  CompoundObjects");
-            foreach (CompoundObject s in Generator.GetCompoundObjectList(ctx).OrderBy(x => x.ClassName))
+            foreach (CompoundObject s in Generator.GetCompoundObjectList(ctx).OrderBy(x => x.Name))
             {
                 generatedFileNames.Add(Generate_CompoundObject(ctx, s));
-                Log.Debug("    " + s.ClassName);                
+                Log.Debug("    " + s.Name);                
             }
 
             Log.Info("  Assemblyinfo");
@@ -138,7 +138,7 @@ namespace Kistl.Server.Generators
 
         protected virtual string Generate_ObjectClass(IKistlContext ctx, ObjectClass objClass)
         {
-            return RunTemplateWithExtension(ctx, "Implementation.ObjectClasses.Template", objClass.ClassName, "Designer.cs", objClass);
+            return RunTemplateWithExtension(ctx, "Implementation.ObjectClasses.Template", objClass.Name, "Designer.cs", objClass);
         }
 
         protected virtual string Generate_CollectionEntries(IKistlContext ctx)
@@ -154,7 +154,7 @@ namespace Kistl.Server.Generators
 
         protected virtual string Generate_CompoundObject(IKistlContext ctx, CompoundObject s)
         {
-            return RunTemplateWithExtension(ctx, "Implementation.CompoundObjects.Template", s.ClassName, "Designer.cs", s);
+            return RunTemplateWithExtension(ctx, "Implementation.CompoundObjects.Template", s.Name, "Designer.cs", s);
         }
 
         protected virtual string Generate_Interface(IKistlContext ctx, Interface i)

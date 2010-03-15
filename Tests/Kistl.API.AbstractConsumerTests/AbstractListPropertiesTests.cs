@@ -54,7 +54,7 @@ namespace Kistl.API.AbstractConsumerTests
         {
             using (IKistlContext ctx = GetContext())
             {
-                var cls = ctx.GetQuery<ObjectClass>().Where(o => o.ClassName == "TestObjClass").First();
+                var cls = ctx.GetQuery<ObjectClass>().Where(o => o.Name == "TestObjClass").First();
                 var navigatedList = cls.Properties;
 
                 Assume.That(navigatedList.Count, Is.GreaterThan(0));
@@ -70,7 +70,7 @@ namespace Kistl.API.AbstractConsumerTests
         {
             using (IKistlContext ctx = GetContext())
             {
-                var cls = ctx.GetQuery<ObjectClass>().Where(o => o.ClassName == "TestObjClass").First();
+                var cls = ctx.GetQuery<ObjectClass>().Where(o => o.Name == "TestObjClass").First();
                 var navigatedList = cls.ImplementsInterfaces;
 
                 Assume.That(navigatedList.Count, Is.GreaterThan(0));
@@ -85,11 +85,11 @@ namespace Kistl.API.AbstractConsumerTests
         {
             using (IKistlContext ctx = GetContext())
             {
-                var prj1 = ctx.GetQuery<ObjectClass>().Where(o => o.ClassName == "TestObjClass").ToList().Single();
+                var prj1 = ctx.GetQuery<ObjectClass>().Where(o => o.Name == "TestObjClass").ToList().Single();
                 var list1 = prj1.Properties;
                 Assume.That(list1.Count, Is.GreaterThan(0));
 
-                var prj2 = ctx.GetQuery<ObjectClass>().Where(o => o.ClassName == "TestObjClass").ToList().Single();
+                var prj2 = ctx.GetQuery<ObjectClass>().Where(o => o.Name == "TestObjClass").ToList().Single();
                 var list2 = prj2.Properties;
 
                 Assert.That(list2, Is.SameAs(list1));
@@ -101,11 +101,11 @@ namespace Kistl.API.AbstractConsumerTests
         {
             using (IKistlContext ctx = GetContext())
             {
-                var prj1 = ctx.GetQuery<ObjectClass>().Where(o => o.ClassName == "TestObjClass").ToList().Single();
+                var prj1 = ctx.GetQuery<ObjectClass>().Where(o => o.Name == "TestObjClass").ToList().Single();
                 var list1 = prj1.ImplementsInterfaces;
                 Assume.That(list1.Count, Is.GreaterThan(0));
 
-                var prj2 = ctx.GetQuery<ObjectClass>().Where(o => o.ClassName == "TestObjClass").ToList().Single();
+                var prj2 = ctx.GetQuery<ObjectClass>().Where(o => o.Name == "TestObjClass").ToList().Single();
                 var list2 = prj2.ImplementsInterfaces;
 
                 Assert.That(list2, Is.SameAs(list1));
@@ -133,7 +133,7 @@ namespace Kistl.API.AbstractConsumerTests
         {
             using (IKistlContext ctx = GetContext())
             {
-                ObjectClass cls = ctx.GetQuery<ObjectClass>().Where(c => c.ClassName == "Constraint").ToList().Single();
+                ObjectClass cls = ctx.GetQuery<ObjectClass>().Where(c => c.Name == "Constraint").ToList().Single();
                 Method isValid = cls.Methods.Where(m => m.MethodName == "IsValid").ToList().Single();
 
                 AssertThatIsCorrectParameterOrder(isValid.Parameter);

@@ -55,7 +55,7 @@ namespace Kistl.DalProvider.Frozen.Generator.Implementation.ObjectClasses
                 if (prop is EnumerationProperty)
                 {
                     var enumProp = (EnumerationProperty)prop;
-                    return string.Format("({0}){1}", enumProp.Enumeration.ClassName, (int)value);
+                    return string.Format("({0}){1}", enumProp.Enumeration.Name, (int)value);
                 }
                 else if (prop is ValueTypeProperty)
                 {
@@ -104,7 +104,7 @@ namespace Kistl.DalProvider.Frozen.Generator.Implementation.ObjectClasses
                     if (orp.GetReferencedObjectClass().IsFrozen())
                     {
                         string referencedType = String.Format("{0}.{1}", orp.GetReferencedObjectClass().Module.Namespace, Template.GetClassName(orp.GetReferencedObjectClass()));
-                        string referencedInterface = String.Format("{0}.{1}", orp.GetReferencedObjectClass().Module.Namespace, orp.GetReferencedObjectClass().ClassName);
+                        string referencedInterface = String.Format("{0}.{1}", orp.GetReferencedObjectClass().Module.Namespace, orp.GetReferencedObjectClass().Name);
                         if (orp.IsList())
                         {
                             // TODO: sort this list either by persistent order or ID to get consistent ordering across generations

@@ -148,11 +148,11 @@ namespace Kistl.App.Base
 
             if (obj.InvokeOnProperty != null && obj.InvokeOnProperty.ObjectClass != null && obj.InvokeOnProperty.ObjectClass.Module != null)
             {
-                sb.AppendFormat("{0}.{1} obj", obj.InvokeOnProperty.ObjectClass.Module.Namespace, obj.InvokeOnProperty.ObjectClass.ClassName);
+                sb.AppendFormat("{0}.{1} obj", obj.InvokeOnProperty.ObjectClass.Module.Namespace, obj.InvokeOnProperty.ObjectClass.Name);
             }
             else
             {
-                sb.AppendFormat("<<TYPE>> obj", obj.InvokeOnProperty.ObjectClass.Module.Namespace, obj.InvokeOnProperty.ObjectClass.ClassName);
+                sb.AppendFormat("<<TYPE>> obj", obj.InvokeOnProperty.ObjectClass.Module.Namespace, obj.InvokeOnProperty.ObjectClass.Name);
             }
 
             string propType = obj.InvokeOnProperty != null ? obj.InvokeOnProperty.GetPropertyTypeString() : "<<TYPE>>";
@@ -185,7 +185,7 @@ namespace Kistl.App.Base
             sb.Append("_");
             sb.Append(obj.InvocationType.ToString());
             sb.Append("_");
-            sb.Append(obj.InvokeOnProperty != null && obj.InvokeOnProperty.ObjectClass != null ? obj.InvokeOnProperty.ObjectClass.ClassName : "<<OBJECTCLASSNAME>>");
+            sb.Append(obj.InvokeOnProperty != null && obj.InvokeOnProperty.ObjectClass != null ? obj.InvokeOnProperty.ObjectClass.Name : "<<OBJECTCLASSNAME>>");
 
             e.Result = sb.ToString();
         }
@@ -199,7 +199,7 @@ namespace Kistl.App.Base
 
             if (mi.InvokeOnObjectClass != null)
             {
-                sb.AppendFormat("{0}.{1} obj", mi.InvokeOnObjectClass.Module != null ? mi.InvokeOnObjectClass.Module.Namespace : String.Empty, mi.InvokeOnObjectClass.ClassName);
+                sb.AppendFormat("{0}.{1} obj", mi.InvokeOnObjectClass.Module != null ? mi.InvokeOnObjectClass.Module.Namespace : String.Empty, mi.InvokeOnObjectClass.Name);
             }
             else
             {
@@ -234,7 +234,7 @@ namespace Kistl.App.Base
             sb.Append("On");
             sb.Append(mi.Method != null ? mi.Method.MethodName : "<<METHODNAME>>");
             sb.Append("_");
-            sb.Append(mi.InvokeOnObjectClass != null ? mi.InvokeOnObjectClass.ClassName : "<<OBJECTCLASSNAME>>");
+            sb.Append(mi.InvokeOnObjectClass != null ? mi.InvokeOnObjectClass.Name : "<<OBJECTCLASSNAME>>");
 
             e.Result = sb.ToString();
         }
@@ -255,7 +255,7 @@ namespace Kistl.App.Base
                 return;
             }
 
-            e.Result = obj.ReferencedObjectClass.Module.Namespace + "." + obj.ReferencedObjectClass.ClassName;
+            e.Result = obj.ReferencedObjectClass.Module.Namespace + "." + obj.ReferencedObjectClass.Name;
         }
         #endregion
     }

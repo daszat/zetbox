@@ -128,7 +128,7 @@ namespace Kistl.App.Extensions
             // baseObjClass.GetDataType(); is not possible here, because this
             // Method is currently attaching
             var implTypeName = objClass.Module.Namespace
-                + "." + objClass.ClassName
+                + "." + objClass.Name
                 + Kistl.API.Helper.ImplementationSuffix
                 + extraSuffix
                 + ", " + assemblyName;
@@ -164,7 +164,7 @@ namespace Kistl.App.Extensions
                     {
                         Log.WarnFormat(
                             "Couldn't find method '{0}.{1}' with parameters: {2}\n",
-                            mi.InvokeOnObjectClass.ClassName,
+                            mi.InvokeOnObjectClass.Name,
                             mi.Method.MethodName,
                             String.Join(", ", paramTypes.Select(t => t == null ? "null" : t.FullName).ToArray()));
                     }

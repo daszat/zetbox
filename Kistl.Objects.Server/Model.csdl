@@ -924,7 +924,6 @@
                         FromRole="DataType"
                         ToRole="ChangedBy" />
     <Property Name="ChangedOn" Type="DateTime" Nullable="true" />
-    <Property Name="ClassName" Type="String" Nullable="false" MaxLength="51" />
     <NavigationProperty Name="CreatedBy__Implementation__"
                         Relationship="Model.FK_DataType_was_CreatedBy"
                         FromRole="DataType"
@@ -948,6 +947,7 @@
                         Relationship="Model.FK_Module_has_DataTypes"
                         FromRole="DataTypes"
                         ToRole="Module" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="51" />
     <NavigationProperty Name="Properties__Implementation__"
                         Relationship="Model.FK_ObjectClass_has_Properties"
                         FromRole="ObjectClass"

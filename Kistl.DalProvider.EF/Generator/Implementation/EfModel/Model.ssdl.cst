@@ -23,17 +23,17 @@
 
     <!-- EntitySets for all Base Classes -->
 <%	
-	foreach(var cls in ctx.GetBaseClasses().OrderBy(c => c.ClassName))
+	foreach(var cls in ctx.GetBaseClasses().OrderBy(c => c.Name))
 	{
 %>
-    <EntitySet Name="<%= cls.ClassName %>" EntityType="Model.Store.<%= cls.ClassName %>" Table="<%= cls.TableName %>"/>
+    <EntitySet Name="<%= cls.Name %>" EntityType="Model.Store.<%= cls.Name %>" Table="<%= cls.TableName %>"/>
 <%	
 		if(cls.NeedsRightsTable())
 		{
 %>
     <EntitySet Name="<%= Construct.SecurityRulesClassName(cls) %>" EntityType="Model.Store.<%= Construct.SecurityRulesClassName(cls) %>" Table="<%= Construct.SecurityRulesTableName(cls) %>"/>
     <AssociationSet Name="<%= Construct.SecurityRulesFKName(cls) %>" Association="Model.Store.<%= Construct.SecurityRulesFKName(cls) %>">
-      <End Role="<%= cls.ClassName %>" EntitySet="<%= cls.ClassName %>" />
+      <End Role="<%= cls.Name %>" EntitySet="<%= cls.Name %>" />
       <End Role="<%= Construct.SecurityRulesClassName(cls) %>" EntitySet="<%= Construct.SecurityRulesClassName(cls) %>" />
     </AssociationSet>
 <%	
@@ -43,11 +43,11 @@
 
     <!-- EntitySets for all derived classes and their inheritance AssociationSets -->
 <%	
-	foreach(var cls in ctx.GetDerivedClasses().OrderBy(c => c.ClassName))
+	foreach(var cls in ctx.GetDerivedClasses().OrderBy(c => c.Name))
 	{
 		var info = new InheritanceStorageAssociationInfo(cls);
 %>
-    <EntitySet Name="<%= cls.ClassName %>" EntityType="Model.Store.<%= cls.ClassName %>" Table="<%= cls.TableName %>"/>
+    <EntitySet Name="<%= cls.Name %>" EntityType="Model.Store.<%= cls.Name %>" Table="<%= cls.TableName %>"/>
     <!-- inherits from <%= info.ParentEntitySetName %> -->
     <AssociationSet Name="<%= info.AssociationName %>" Association="Model.Store.<%= info.AssociationName %>" >
       <End Role="<%= info.ParentRoleName %>" EntitySet="<%= info.ParentEntitySetName %>" />
@@ -74,12 +74,12 @@
     -->
     <EntitySet Name="<%= esName %>" EntityType="Model.Store.<%= esName %>" Table="<%= esTableName %>" />
     <AssociationSet Name="<%= assocNameA %>" Association="Model.Store.<%= assocNameA %>" >
-      <End Role="<%= rel.A.RoleName %>" EntitySet="<%= rel.A.Type.ClassName %>" />
+      <End Role="<%= rel.A.RoleName %>" EntitySet="<%= rel.A.Type.Name %>" />
       <End Role="CollectionEntry" EntitySet="<%= esName %>" />
     </AssociationSet>
     <AssociationSet Name="<%= assocNameB %>" Association="Model.Store.<%= assocNameB %>" >
       <End Role="CollectionEntry" EntitySet="<%= esName %>" />
-      <End Role="<%= rel.B.RoleName %>" EntitySet="<%= rel.B.Type.ClassName %>" />
+      <End Role="<%= rel.B.RoleName %>" EntitySet="<%= rel.B.Type.Name %>" />
     </AssociationSet>
     
 <%
@@ -95,8 +95,8 @@
 		
 %>
     <AssociationSet Name="<%= assocName %>" Association="Model.Store.<%= assocName %>" >
-      <End Role="<%= rel.A.RoleName %>" EntitySet="<%= rel.A.Type.ClassName %>" />
-      <End Role="<%= rel.B.RoleName %>" EntitySet="<%= rel.B.Type.ClassName %>" />
+      <End Role="<%= rel.A.RoleName %>" EntitySet="<%= rel.A.Type.Name %>" />
+      <End Role="<%= rel.B.RoleName %>" EntitySet="<%= rel.B.Type.Name %>" />
     </AssociationSet>
 <%
 	}
@@ -106,7 +106,7 @@
 <%
 	foreach(var prop in ctx.GetQuery<ValueTypeProperty>()
 		.Where(p => p.IsList)
-		.OrderBy(p => p.ObjectClass.ClassName)
+		.OrderBy(p => p.ObjectClass.Name)
 		.ThenBy(p => p.PropertyName))
 	{
 		string assocName = prop.GetAssociationName();
@@ -114,7 +114,7 @@
 %>
     <EntitySet Name="<%= esName %>" EntityType="Model.Store.<%= esName %>" Table="<%= prop.GetCollectionEntryTable() %>" />
     <AssociationSet Name="<%= assocName %>" Association="Model.Store.<%= assocName %>" >
-      <End Role="<%= prop.ObjectClass.ClassName %>" EntitySet="<%= prop.ObjectClass.ClassName %>" />
+      <End Role="<%= prop.ObjectClass.Name %>" EntitySet="<%= prop.ObjectClass.Name %>" />
       <End Role="CollectionEntry" EntitySet="<%= esName %>" />
     </AssociationSet>
     
@@ -126,7 +126,7 @@
 <%
 	foreach(var prop in ctx.GetQuery<CompoundObjectProperty>()
 		.Where(p => p.IsList)
-		.OrderBy(p => p.ObjectClass.ClassName)
+		.OrderBy(p => p.ObjectClass.Name)
 		.ThenBy(p => p.PropertyName))
 	{
 		string assocName = prop.GetAssociationName();
@@ -134,7 +134,7 @@
 %>
     <EntitySet Name="<%= esName %>" EntityType="Model.Store.<%= esName %>" Table="<%= prop.GetCollectionEntryTable() %>" />
     <AssociationSet Name="<%= assocName %>" Association="Model.Store.<%= assocName %>" >
-      <End Role="<%= prop.ObjectClass.ClassName %>" EntitySet="<%= prop.ObjectClass.ClassName %>" />
+      <End Role="<%= prop.ObjectClass.Name %>" EntitySet="<%= prop.ObjectClass.Name %>" />
       <End Role="CollectionEntry" EntitySet="<%= esName %>" />
     </AssociationSet>
     
@@ -148,10 +148,10 @@
   <!-- EntityTypes for all classes -->
 <%
 	foreach(var cls in ctx.GetQuery<ObjectClass>()
-		.OrderBy(cls => cls.ClassName))
+		.OrderBy(cls => cls.Name))
 	{
 %>	
-  <EntityType Name="<%= cls.ClassName %>">
+  <EntityType Name="<%= cls.Name %>">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
@@ -174,10 +174,10 @@
       <Property Name="Right" Type="int" Nullable="false" />
     </EntityType>
     <Association Name="<%= Construct.SecurityRulesFKName(cls) %>">
-      <End Role="<%= cls.ClassName %>" Type="Model.Store.<%= cls.ClassName %>" Multiplicity="1" />
+      <End Role="<%= cls.Name %>" Type="Model.Store.<%= cls.Name %>" Multiplicity="1" />
       <End Role="<%= Construct.SecurityRulesClassName(cls) %>" Type="Model.Store.<%= Construct.SecurityRulesClassName(cls) %>" Multiplicity="*" />
       <ReferentialConstraint>
-        <Principal Role="<%= cls.ClassName %>">
+        <Principal Role="<%= cls.Name %>">
           <PropertyRef Name="ID" />
         </Principal>
         <Dependent Role="<%= Construct.SecurityRulesClassName(cls) %>">
@@ -234,7 +234,7 @@
 
   <!-- A to CollectionEntry -->
   <Association Name="<%= rel.GetRelationAssociationName(RelationEndRole.A) %>">
-    <End Role="<%= rel.A.RoleName %>" Type="Model.Store.<%= rel.A.Type.ClassName %>" Multiplicity="0..1" />
+    <End Role="<%= rel.A.RoleName %>" Type="Model.Store.<%= rel.A.Type.Name %>" Multiplicity="0..1" />
     <End Role="CollectionEntry" Type="Model.Store.<%= ceName %>" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="<%= rel.A.RoleName %>">
@@ -248,7 +248,7 @@
 
   <!-- B to CollectionEntry -->
   <Association Name="<%= rel.GetRelationAssociationName(RelationEndRole.B) %>">
-    <End Role="<%= rel.B.RoleName %>" Type="Model.Store.<%= rel.B.Type.ClassName %>" Multiplicity="0..1" />
+    <End Role="<%= rel.B.RoleName %>" Type="Model.Store.<%= rel.B.Type.Name %>" Multiplicity="0..1" />
     <End Role="CollectionEntry" Type="Model.Store.<%= ceName %>" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="<%= rel.B.RoleName %>">
@@ -287,8 +287,8 @@
 %>
 
   <Association Name="<%= rel.GetAssociationName() %>">
-    <End Role="<%= principal.RoleName %>" Type="Model.Store.<%= principal.Type.ClassName %>" Multiplicity="<%= principal.Multiplicity.ToSsdlMultiplicity().ToXmlValue() %>" />
-    <End Role="<%= dependent.RoleName %>" Type="Model.Store.<%= dependent.Type.ClassName %>" Multiplicity="*" />
+    <End Role="<%= principal.RoleName %>" Type="Model.Store.<%= principal.Type.Name %>" Multiplicity="<%= principal.Multiplicity.ToSsdlMultiplicity().ToXmlValue() %>" />
+    <End Role="<%= dependent.RoleName %>" Type="Model.Store.<%= dependent.Type.Name %>" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="<%= principal.RoleName %>">
         <PropertyRef Name="ID" />
@@ -306,7 +306,7 @@
 
   <!-- derived->base ObjectClass references -->
 <%
-	foreach(var cls in ctx.GetDerivedClasses().OrderBy(c => c.ClassName))
+	foreach(var cls in ctx.GetDerivedClasses().OrderBy(c => c.Name))
 	{
 		TypeMoniker parentType = cls.BaseObjectClass.GetTypeMoniker();
 		TypeMoniker childType = cls.GetTypeMoniker();
@@ -315,8 +315,8 @@
 		string childRoleName = Construct.AssociationChildRoleName(childType);
 %>
   <Association Name="<%= Construct.InheritanceAssociationName(parentType, childType) %>">
-    <End Role="<%= parentRoleName %>" Type="Model.Store.<%= parentType.ClassName %>" Multiplicity="1" />
-    <End Role="<%= childRoleName %>" Type="Model.Store.<%= childType.ClassName %>" Multiplicity="0..1" />
+    <End Role="<%= parentRoleName %>" Type="Model.Store.<%= parentType.Name %>" Multiplicity="1" />
+    <End Role="<%= childRoleName %>" Type="Model.Store.<%= childType.Name %>" Multiplicity="0..1" />
     <ReferentialConstraint>
       <Principal Role="<%= parentRoleName %>">
         <PropertyRef Name="ID" />
@@ -334,13 +334,13 @@
 <%
 	foreach(var prop in ctx.GetQuery<ValueTypeProperty>()
 		.Where(p => p.IsList)
-		.OrderBy(p => p.ObjectClass.ClassName)
+		.OrderBy(p => p.ObjectClass.Name)
 		.ThenBy(p => p.PropertyName))
 	{
 		string assocName = prop.GetAssociationName();
 		
 		// the name of the class containing this list
-		string containerTypeName = prop.ObjectClass.ClassName;
+		string containerTypeName = prop.ObjectClass.Name;
 		// the name of the CollectionEntry class
 		string entryTypeName = prop.GetCollectionEntryClassName();
 		// the name of the contained type
@@ -393,13 +393,13 @@
 <%
 	foreach(var prop in ctx.GetQuery<CompoundObjectProperty>()
 		.Where(p => p.IsList)
-		.OrderBy(p => p.ObjectClass.ClassName)
+		.OrderBy(p => p.ObjectClass.Name)
 		.ThenBy(p => p.PropertyName))
 	{
 		string assocName = prop.GetAssociationName();
 		
 		// the name of the class containing this list
-		string containerTypeName = prop.ObjectClass.ClassName;
+		string containerTypeName = prop.ObjectClass.Name;
 		// the name of the CollectionEntry class
 		string entryTypeName = prop.GetCollectionEntryClassName();
 %>

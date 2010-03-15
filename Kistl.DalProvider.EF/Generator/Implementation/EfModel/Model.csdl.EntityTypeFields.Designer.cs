@@ -82,7 +82,7 @@ this.WriteObjects("    <Property Name=\"",  p.PropertyName + Kistl.API.Helper.Po
 #line 67 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.csdl.EntityTypeFields.cst"
 this.WriteObjects("    <NavigationProperty Name=\"",  prop.PropertyName + Kistl.API.Helper.ImplementationSuffix , "\"\r\n");
 this.WriteObjects("                        Relationship=\"Model.",  prop.GetAssociationName() , "\"\r\n");
-this.WriteObjects("                        FromRole=\"",  prop.ObjectClass.ClassName , "\"\r\n");
+this.WriteObjects("                        FromRole=\"",  prop.ObjectClass.Name , "\"\r\n");
 this.WriteObjects("                        ToRole=\"CollectionEntry\" />\r\n");
 #line 72 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.csdl.EntityTypeFields.cst"
 }
@@ -103,7 +103,7 @@ this.WriteObjects("    ",  ModelCsdl.PlainPropertyDefinitionFromValueType((Value
 #line 86 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.csdl.EntityTypeFields.cst"
 this.WriteObjects("    <NavigationProperty Name=\"",  prop.PropertyName + Kistl.API.Helper.ImplementationSuffix , "\"\r\n");
 this.WriteObjects("                        Relationship=\"Model.",  prop.GetAssociationName() , "\"\r\n");
-this.WriteObjects("                        FromRole=\"",  prop.ObjectClass.ClassName , "\"\r\n");
+this.WriteObjects("                        FromRole=\"",  prop.ObjectClass.Name , "\"\r\n");
 this.WriteObjects("                        ToRole=\"CollectionEntry\" />\r\n");
 #line 91 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.csdl.EntityTypeFields.cst"
 }
@@ -113,7 +113,7 @@ this.WriteObjects("                        ToRole=\"CollectionEntry\" />\r\n");
 
 #line 96 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.csdl.EntityTypeFields.cst"
 this.WriteObjects("    <Property Name=\"",  p.PropertyName + Kistl.API.Helper.ImplementationSuffix , "\"\r\n");
-this.WriteObjects("              Type=\"Model.",  prop.CompoundObjectDefinition.ClassName , "\"\r\n");
+this.WriteObjects("              Type=\"Model.",  prop.CompoundObjectDefinition.Name , "\"\r\n");
 this.WriteObjects("              Nullable=\"false\" />\r\n");
 #line 100 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.csdl.EntityTypeFields.cst"
 }

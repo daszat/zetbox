@@ -116,10 +116,10 @@ namespace Kistl.Server.Tests
         [Test]
         public void GetListWithOrderBy()
         {
-            var list = ctx.GetQuery<Kistl.App.Base.ObjectClass>().OrderBy(o => o.ClassName).ToList();
+            var list = ctx.GetQuery<Kistl.App.Base.ObjectClass>().OrderBy(o => o.Name).ToList();
             Assert.That(list.Count, Is.GreaterThan(0));
             List<Kistl.App.Base.ObjectClass> result = list.ToList();
-            List<Kistl.App.Base.ObjectClass> sorted = list.OrderBy(o => o.ClassName).ToList();
+            List<Kistl.App.Base.ObjectClass> sorted = list.OrderBy(o => o.Name).ToList();
 
             for (int i = 0; i < result.Count; i++)
             {
@@ -136,11 +136,11 @@ namespace Kistl.Server.Tests
         public void GetListByTypeWithOrderBy()
         {
             var list = ctx.GetQuery(new InterfaceType(typeof(ObjectClass)))
-                .OrderBy<IDataObject, string>(o => ((ObjectClass)o).ClassName)
+                .OrderBy<IDataObject, string>(o => ((ObjectClass)o).Name)
                 .ToList().Cast<ObjectClass>();
             Assert.That(list.Count(), Is.GreaterThan(0));
             List<Kistl.App.Base.ObjectClass> result = list.ToList();
-            List<Kistl.App.Base.ObjectClass> sorted = list.ToList().OrderBy(o => o.ClassName).ToList();
+            List<Kistl.App.Base.ObjectClass> sorted = list.ToList().OrderBy(o => o.Name).ToList();
 
             for (int i = 0; i < result.Count; i++)
             {
@@ -155,10 +155,10 @@ namespace Kistl.Server.Tests
         [Test]
         public void GetListWithOrderByAndWhere()
         {
-            var list = ctx.GetQuery<Kistl.App.Base.ObjectClass>().Where(o => o.Module.ModuleName == "KistlBase").OrderBy(o => o.ClassName).ToList();
+            var list = ctx.GetQuery<Kistl.App.Base.ObjectClass>().Where(o => o.Module.ModuleName == "KistlBase").OrderBy(o => o.Name).ToList();
             Assert.That(list.Count, Is.GreaterThan(0));
             List<Kistl.App.Base.ObjectClass> result = list.ToList();
-            List<Kistl.App.Base.ObjectClass> sorted = list.OrderBy(o => o.ClassName).ToList();
+            List<Kistl.App.Base.ObjectClass> sorted = list.OrderBy(o => o.Name).ToList();
 
             for (int i = 0; i < result.Count; i++)
             {
@@ -174,10 +174,10 @@ namespace Kistl.Server.Tests
         [Ignore("Case 634")]
         public void GetListWithOrderByThenOrderBy()
         {
-            var list = ctx.GetQuery<Kistl.App.Base.ObjectClass>().OrderBy(o => o.Module.ModuleName).ThenBy(o => o.ClassName).ToList();
+            var list = ctx.GetQuery<Kistl.App.Base.ObjectClass>().OrderBy(o => o.Module.ModuleName).ThenBy(o => o.Name).ToList();
             Assert.That(list.Count, Is.GreaterThan(0));
             List<Kistl.App.Base.ObjectClass> result = list.ToList();
-            List<Kistl.App.Base.ObjectClass> sorted = list.OrderBy(o => o.Module.ModuleName).ThenBy(o => o.ClassName).ToList();
+            List<Kistl.App.Base.ObjectClass> sorted = list.OrderBy(o => o.Module.ModuleName).ThenBy(o => o.Name).ToList();
 
             for (int i = 0; i < result.Count; i++)
             {

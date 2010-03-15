@@ -28,7 +28,7 @@ namespace <%= e.Module.Namespace %>
 <%
 	}
 %>
-    public enum <%= e.ClassName %>
+    public enum <%= e.Name %>
     {
 <%
     foreach(EnumerationEntry entry in e.EnumerationEntries.OrderBy(ee => ee.Value))

@@ -32,9 +32,9 @@ this.WriteObjects("\r\n");
 this.WriteObjects("		public override void ApplyChangesFrom(IPersistenceObject obj)\r\n");
 this.WriteObjects("		{\r\n");
 this.WriteObjects("			base.ApplyChangesFrom(obj);\r\n");
-this.WriteObjects("			var other = (",  cls.ClassName , ")obj;\r\n");
-this.WriteObjects("			var otherImpl = (",  cls.ClassName + Kistl.API.Helper.ImplementationSuffix , ")obj;\r\n");
-this.WriteObjects("			var me = (",  cls.ClassName , ")this;\r\n");
+this.WriteObjects("			var other = (",  cls.Name , ")obj;\r\n");
+this.WriteObjects("			var otherImpl = (",  cls.Name + Kistl.API.Helper.ImplementationSuffix , ")obj;\r\n");
+this.WriteObjects("			var me = (",  cls.Name , ")this;\r\n");
 this.WriteObjects("\r\n");
 #line 24 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\ApplyChangesFromMethod.cst"
 foreach(var prop in cls.Properties.OfType<ValueTypeProperty>().Where(p => !p.IsList).OrderBy(p => p.PropertyName))

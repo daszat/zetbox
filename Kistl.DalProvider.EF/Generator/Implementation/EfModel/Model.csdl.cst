@@ -19,17 +19,17 @@
   
     <!-- EntitySets for all classes -->
 <%
-    foreach(var cls in ctx.GetBaseClasses().OrderBy(c => c.ClassName))
+    foreach(var cls in ctx.GetBaseClasses().OrderBy(c => c.Name))
     {
 %>
-    <EntitySet Name="<%= cls.ClassName %>" EntityType="Model.<%= cls.ClassName %>" />
+    <EntitySet Name="<%= cls.Name %>" EntityType="Model.<%= cls.Name %>" />
 <%  
 		if(cls.NeedsRightsTable())
 		{
 %>
     <EntitySet Name="<%= Construct.SecurityRulesClassName(cls) %>" EntityType="Model.<%= Construct.SecurityRulesClassName(cls) %>" />
     <AssociationSet Name="<%= Construct.SecurityRulesFKName(cls) %>" Association="Model.<%= Construct.SecurityRulesFKName(cls) %>">
-      <End Role="<%= cls.ClassName %>" EntitySet="<%= cls.ClassName %>" />
+      <End Role="<%= cls.Name %>" EntitySet="<%= cls.Name %>" />
       <End Role="<%= Construct.SecurityRulesClassName(cls) %>" EntitySet="<%= Construct.SecurityRulesClassName(cls) %>" />
     </AssociationSet>
 <%	
@@ -46,11 +46,11 @@
 %>
     <EntitySet Name="<%= entityName %>" EntityType="Model.<%= entityName %>" />
     <AssociationSet Name="<%= assocNameA %>" Association="Model.<%= assocNameA %>" >
-      <End Role="<%= rel.A.RoleName %>" EntitySet="<%= rel.A.Type.GetRootClass().ClassName %>" />
+      <End Role="<%= rel.A.RoleName %>" EntitySet="<%= rel.A.Type.GetRootClass().Name %>" />
       <End Role="CollectionEntry" EntitySet="<%= entityName %>" />
     </AssociationSet>
     <AssociationSet Name="<%= assocNameB %>" Association="Model.<%= assocNameB %>" >
-      <End Role="<%= rel.B.RoleName %>" EntitySet="<%= rel.B.Type.GetRootClass().ClassName %>" />
+      <End Role="<%= rel.B.RoleName %>" EntitySet="<%= rel.B.Type.GetRootClass().Name %>" />
       <End Role="CollectionEntry" EntitySet="<%= entityName %>" />
     </AssociationSet>
 <%
@@ -61,7 +61,7 @@
 <%
     foreach(var prop in ctx.GetQuery<ValueTypeProperty>()
         .Where(p => p.IsList)
-        .OrderBy(p => p.ObjectClass.ClassName)
+        .OrderBy(p => p.ObjectClass.Name)
         .ThenBy(p => p.PropertyName))
     {
         string assocName = prop.GetAssociationName();
@@ -69,7 +69,7 @@
 %>
     <EntitySet Name="<%= entityName %>" EntityType="Model.<%= entityName %>" />
     <AssociationSet Name="<%= assocName %>" Association="Model.<%= assocName %>" >
-      <End Role="<%= prop.ObjectClass.ClassName %>" EntitySet="<%= ((ObjectClass)prop.ObjectClass).GetRootClass().ClassName %>" />
+      <End Role="<%= prop.ObjectClass.Name %>" EntitySet="<%= ((ObjectClass)prop.ObjectClass).GetRootClass().Name %>" />
       <End Role="CollectionEntry" EntitySet="<%= entityName %>" />
     </AssociationSet>
 <%
@@ -80,7 +80,7 @@
 <%
     foreach(var prop in ctx.GetQuery<CompoundObjectProperty>()
         .Where(p => p.IsList)
-        .OrderBy(p => p.ObjectClass.ClassName)
+        .OrderBy(p => p.ObjectClass.Name)
         .ThenBy(p => p.PropertyName))
     {
         string assocName = prop.GetAssociationName();
@@ -88,7 +88,7 @@
 %>
     <EntitySet Name="<%= entityName %>" EntityType="Model.<%= entityName %>" />
     <AssociationSet Name="<%= assocName %>" Association="Model.<%= assocName %>" >
-      <End Role="<%= prop.ObjectClass.ClassName %>" EntitySet="<%= ((ObjectClass)prop.ObjectClass).GetRootClass().ClassName %>" />
+      <End Role="<%= prop.ObjectClass.Name %>" EntitySet="<%= ((ObjectClass)prop.ObjectClass).GetRootClass().Name %>" />
       <End Role="CollectionEntry" EntitySet="<%= entityName %>" />
     </AssociationSet>
 <%
@@ -102,8 +102,8 @@
         string assocName = rel.GetAssociationName();
 %>
     <AssociationSet Name="<%= assocName %>" Association="Model.<%= assocName %>" >
-      <End Role="<%= rel.A.RoleName %>" EntitySet="<%= rel.A.Type.GetRootClass().ClassName %>" />
-      <End Role="<%= rel.B.RoleName %>" EntitySet="<%= rel.B.Type.GetRootClass().ClassName %>" />
+      <End Role="<%= rel.A.RoleName %>" EntitySet="<%= rel.A.Type.GetRootClass().Name %>" />
+      <End Role="<%= rel.B.RoleName %>" EntitySet="<%= rel.B.Type.GetRootClass().Name %>" />
     </AssociationSet>
 <%
     }
@@ -113,10 +113,10 @@
   
   <!-- EntityTypes for all base classes -->
 <%
-    foreach(var cls in ctx.GetBaseClasses().OrderBy(c => c.ClassName))
+    foreach(var cls in ctx.GetBaseClasses().OrderBy(c => c.Name))
     {
 %>
-  <EntityType Name="<%= cls.ClassName %>"<%= GetAbstractModifier(cls) %>>
+  <EntityType Name="<%= cls.Name %>"<%= GetAbstractModifier(cls) %>>
     <Key>
       <PropertyRef Name="ID" />
     </Key>
@@ -126,7 +126,7 @@
 		if(cls.NeedsRightsTable())
 		{
 %>
-    <NavigationProperty Name="SecurityRightsCollection<%= Kistl.API.Helper.ImplementationSuffix%>" Relationship="Model.<%= Construct.SecurityRulesFKName(cls) %>" FromRole="<%= cls.ClassName %>" ToRole="<%= Construct.SecurityRulesClassName(cls) %>" />
+    <NavigationProperty Name="SecurityRightsCollection<%= Kistl.API.Helper.ImplementationSuffix%>" Relationship="Model.<%= Construct.SecurityRulesFKName(cls) %>" FromRole="<%= cls.Name %>" ToRole="<%= Construct.SecurityRulesClassName(cls) %>" />
 <%
 		}
 %>
@@ -145,10 +145,10 @@
     <Property Name="Right" Type="Int32" Nullable="false" />
   </EntityType>
   <Association Name="<%= Construct.SecurityRulesFKName(cls) %>">
-    <End Role="<%= cls.ClassName %>" Type="Model.<%= cls.ClassName %>" Multiplicity="1" />
+    <End Role="<%= cls.Name %>" Type="Model.<%= cls.Name %>" Multiplicity="1" />
     <End Role="<%= Construct.SecurityRulesClassName(cls) %>" Type="Model.<%= Construct.SecurityRulesClassName(cls) %>" Multiplicity="*" />
     <ReferentialConstraint>
-	  <Principal Role="<%= cls.ClassName %>">
+	  <Principal Role="<%= cls.Name %>">
 	    <PropertyRef Name="ID" />
 	  </Principal>
 	  <Dependent Role="<%= Construct.SecurityRulesClassName(cls) %>">
@@ -163,10 +163,10 @@
 
   <!-- EntityTypes for all other classes -->
 <%
-    foreach(var cls in ctx.GetDerivedClasses().OrderBy(c => c.ClassName))
+    foreach(var cls in ctx.GetDerivedClasses().OrderBy(c => c.Name))
     {
 %>
-  <EntityType Name="<%= cls.ClassName %>" BaseType="Model.<%= cls.BaseObjectClass.ClassName %>"<%= GetAbstractModifier(cls) %>>
+  <EntityType Name="<%= cls.Name %>" BaseType="Model.<%= cls.BaseObjectClass.Name %>"<%= GetAbstractModifier(cls) %>>
 <% ApplyEntityTypeFieldDefs(cls.Properties.Cast<Property>()); %>
   </EntityType>
 <%
@@ -228,7 +228,7 @@
   </EntityType>
   <Association Name="<%= rel.GetRelationAssociationName(RelationEndRole.A) %>" >
     <End Role="<%= rel.A.RoleName %>"
-         Type="Model.<%= rel.A.Type.ClassName %>" 
+         Type="Model.<%= rel.A.Type.Name %>" 
          Multiplicity="0..1" />
     <End Role="CollectionEntry"
          Type="Model.<%= rel.GetRelationClassName() %>"
@@ -236,7 +236,7 @@
   </Association>
   <Association Name="<%= rel.GetRelationAssociationName(RelationEndRole.B) %>" >
     <End Role="<%= rel.B.RoleName %>"
-         Type="Model.<%= rel.B.Type.ClassName %>" 
+         Type="Model.<%= rel.B.Type.Name %>" 
          Multiplicity="0..1" />
     <End Role="CollectionEntry"
          Type="Model.<%= rel.GetRelationClassName() %>"
@@ -252,12 +252,12 @@
 <%
     foreach(var prop in ctx.GetQuery<ValueTypeProperty>()
         .Where(p => p.IsList)
-        .OrderBy(p => p.ObjectClass.ClassName)
+        .OrderBy(p => p.ObjectClass.Name)
         .ThenBy(p => p.PropertyName))
     {
 
 %>
-  <!-- <%= prop.ObjectClass.ClassName %>.<%= prop.PropertyName %> -->
+  <!-- <%= prop.ObjectClass.Name %>.<%= prop.PropertyName %> -->
   <EntityType Name="<%= prop.GetCollectionEntryClassName() %>" >
     <Key>
       <PropertyRef Name="ID" />
@@ -268,7 +268,7 @@
     <NavigationProperty Name="A<%= Kistl.API.Helper.ImplementationSuffix %>"
                         Relationship="Model.<%= prop.GetAssociationName() %>"
                         FromRole="CollectionEntry"
-                        ToRole="<%= prop.ObjectClass.ClassName %>" />
+                        ToRole="<%= prop.ObjectClass.Name %>" />
     <!-- B -->
     <%= PlainPropertyDefinitionFromValueType(prop, "B") %>
 <%
@@ -281,8 +281,8 @@
 %>
   </EntityType>
   <Association Name="<%= prop.GetAssociationName() %>" >
-    <End Role="<%= prop.ObjectClass.ClassName %>"
-         Type="Model.<%= prop.ObjectClass.ClassName %>" 
+    <End Role="<%= prop.ObjectClass.Name %>"
+         Type="Model.<%= prop.ObjectClass.Name %>" 
          Multiplicity="0..1" />
     <End Role="CollectionEntry"
          Type="Model.<%= prop.GetCollectionEntryClassName() %>" 
@@ -296,12 +296,12 @@
 <%
     foreach(var prop in ctx.GetQuery<CompoundObjectProperty>()
         .Where(p => p.IsList)
-        .OrderBy(p => p.ObjectClass.ClassName)
+        .OrderBy(p => p.ObjectClass.Name)
         .ThenBy(p => p.PropertyName))
     {
 
 %>
-  <!-- <%= prop.ObjectClass.ClassName %>.<%= prop.PropertyName %> -->
+  <!-- <%= prop.ObjectClass.Name %>.<%= prop.PropertyName %> -->
   <EntityType Name="<%= prop.GetCollectionEntryClassName() %>" >
     <Key>
       <PropertyRef Name="ID" />
@@ -312,10 +312,10 @@
     <NavigationProperty Name="A<%= Kistl.API.Helper.ImplementationSuffix %>"
                         Relationship="Model.<%= prop.GetAssociationName() %>"
                         FromRole="CollectionEntry"
-                        ToRole="<%= prop.ObjectClass.ClassName %>" />
+                        ToRole="<%= prop.ObjectClass.Name %>" />
     <!-- B -->
     <Property Name="B<%= Kistl.API.Helper.ImplementationSuffix %>"
-              Type="Model.<%= prop.CompoundObjectDefinition.ClassName %>"
+              Type="Model.<%= prop.CompoundObjectDefinition.Name %>"
               Nullable="false" />
 <%
         if (prop.HasPersistentOrder)
@@ -327,8 +327,8 @@
 %>
   </EntityType>
   <Association Name="<%= prop.GetAssociationName() %>" >
-    <End Role="<%= prop.ObjectClass.ClassName %>"
-         Type="Model.<%= prop.ObjectClass.ClassName %>" 
+    <End Role="<%= prop.ObjectClass.Name %>"
+         Type="Model.<%= prop.ObjectClass.Name %>" 
          Multiplicity="0..1" />
     <End Role="CollectionEntry"
          Type="Model.<%= prop.GetCollectionEntryClassName() %>" 
@@ -345,10 +345,10 @@
 %>
   <Association Name="<%= rel.GetAssociationName() %>" >
     <End Role="<%= rel.A.RoleName %>"
-         Type="Model.<%= rel.A.Type.ClassName %>" 
+         Type="Model.<%= rel.A.Type.Name %>" 
          Multiplicity="<%= rel.A.Multiplicity.ToCsdlRelationshipMultiplicity().ToXmlValue() %>" />
     <End Role="<%= rel.B.RoleName %>"
-         Type="Model.<%= rel.B.Type.ClassName %>" 
+         Type="Model.<%= rel.B.Type.Name %>" 
          Multiplicity="<%= rel.B.Multiplicity.ToCsdlRelationshipMultiplicity().ToXmlValue() %>" />
   </Association>
 <%
@@ -358,10 +358,10 @@
 
   <!-- ComplexTypes for all CompoundObjects -->
 <%
-    foreach(var cls in ctx.GetQuery<CompoundObject>().OrderBy(s => s.ClassName))
+    foreach(var cls in ctx.GetQuery<CompoundObject>().OrderBy(s => s.Name))
     {
 %>
-  <ComplexType Name="<%= cls.ClassName %>" >
+  <ComplexType Name="<%= cls.Name %>" >
     <Property Name="CompoundObject_IsNull" Type="Boolean" Nullable="false" />
 <% ApplyEntityTypeFieldDefs(cls.Properties.Cast<Property>()); %>
   </ComplexType>

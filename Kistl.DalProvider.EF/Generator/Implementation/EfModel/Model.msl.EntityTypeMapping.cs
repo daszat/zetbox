@@ -98,7 +98,7 @@ namespace Kistl.DalProvider.EF.Generator.Implementation.EfModel
         //    this.WriteLine("<ComplexProperty Name=\"{0}{1}\" TypeName=\"Model.{2}\">",
         //        prop.PropertyName,
         //        Kistl.API.Helper.ImplementationSuffix,
-        //        prop.StructDefinition.ClassName
+        //        prop.StructDefinition.Name
         //        );
 
         //    string newParent = Construct.NestedColumnName(prop, parentName);

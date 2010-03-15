@@ -34,7 +34,7 @@ namespace Kistl.Server.Generators.Templates.Implementation.CollectionEntries
 
         protected override void ApplyObjectGetterTemplate()
         {
-            this.WriteLine("        public IDataObject ParentObject {{ get {{ return Parent; }} set {{ Parent = ({0})value; }} }}", prop.ObjectClass.ClassName);
+            this.WriteLine("        public IDataObject ParentObject {{ get {{ return Parent; }} set {{ Parent = ({0})value; }} }}", prop.ObjectClass.Name);
             this.WriteLine("        public object ValueObject {{ get {{ return Value; }} set {{ Value = ({0})value; }} }}", prop.ReferencedTypeAsCSharp());
         }
 

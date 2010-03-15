@@ -29,7 +29,7 @@ namespace Kistl.DalProvider.EF.Tests
         {
             ctx.Attach(obj);
             obj.BaseObjectClass = null;
-            obj.ClassName = "testclassname";
+            obj.Name = "testclassname";
             obj.DefaultIcon = null;
             obj.Description = "testclassdescription";
             obj.ImplementsInterfaces.Clear();
@@ -66,7 +66,7 @@ namespace Kistl.DalProvider.EF.Tests
         public void NotifyPropertyChanged_ing()
         {
             obj.NotifyPropertyChanging("StringProp", null, null);
-            obj.ClassName = "test";
+            obj.Name = "test";
             obj.NotifyPropertyChanged("StringProp", null, null);
         }
 
@@ -85,7 +85,7 @@ namespace Kistl.DalProvider.EF.Tests
                 var result = SerializationRoundtrip(obj);
 
                 Assert.That(result.BaseObjectClass, Is.EqualTo(obj.BaseObjectClass));
-                Assert.That(result.ClassName, Is.EqualTo(obj.ClassName));
+                Assert.That(result.Name, Is.EqualTo(obj.Name));
                 Assert.That(result.DefaultIcon, Is.EqualTo(obj.DefaultIcon));
                 Assert.That(result.Description, Is.EqualTo(obj.Description));
                 Assert.That((ICollection)result.ImplementsInterfaces, Is.EquivalentTo((ICollection)obj.ImplementsInterfaces));

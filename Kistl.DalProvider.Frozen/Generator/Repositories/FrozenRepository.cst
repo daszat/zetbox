@@ -13,7 +13,7 @@
 <%
 	string classname = "Frozen" + module.ModuleName + "Repository";
     // TODO: remove ToList when IsFrozenObject correctly inherits across meta-data
-	var frozenClasses = module.DataTypes.OfType<ObjectClass>().ToList().Where(cls => cls.IsFrozen()).OrderBy(c => c.ClassName);
+	var frozenClasses = module.DataTypes.OfType<ObjectClass>().ToList().Where(cls => cls.IsFrozen()).OrderBy(c => c.Name);
 %>
 using System;
 using System.Collections.Generic;
@@ -32,13 +32,13 @@ namespace <%= module.Namespace %>
 	{
 		string implementationName = Implementation.ObjectClasses.Template.GetClassName(cls);
 %>
-		/// <summary>Frozen List of all <%= cls.ClassName %></summary>
+		/// <summary>Frozen List of all <%= cls.Name %></summary>
 		/// <%= cls.Description %>
-		public static IQueryable<<%= cls.ClassName %>> <%= cls.TableName %>
+		public static IQueryable<<%= cls.Name %>> <%= cls.TableName %>
 		{ 
 			get
 			{
-				return <%= implementationName %>.DataStore.Values.AsQueryable().Cast<<%= cls.ClassName %>>();
+				return <%= implementationName %>.DataStore.Values.AsQueryable().Cast<<%= cls.Name %>>();
 			}
 		}
 		

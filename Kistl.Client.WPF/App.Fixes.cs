@@ -74,13 +74,13 @@ namespace Kistl.Client.WPF
 
         //            foreach (var rel in relations.Where(r => r.A.Navigator != null && r.A.Navigator.EagerLoading))
         //            {
-        //                Console.WriteLine("{0} -> {1};", rel.A.Type.ClassName, rel.B.Type.ClassName);
+        //                Console.WriteLine("{0} -> {1};", rel.A.Type.Name, rel.B.Type.Name);
         //            }
 
         //            relations = ctx.GetQuery<Relation>();
         //            foreach (var rel in relations.Where(r => r.B.Navigator != null && r.B.Navigator.EagerLoading))
         //            {
-        //                Console.WriteLine("{0} -> {1};", rel.B.Type.ClassName, rel.A.Type.ClassName);
+        //                Console.WriteLine("{0} -> {1};", rel.B.Type.Name, rel.A.Type.Name);
         //            }
         //        }
         //        Console.WriteLine("}");

@@ -43,7 +43,7 @@ namespace Kistl.App.Base
                 obj.Module == null
                     ? "[no module]"
                     : obj.Module.Namespace,
-                obj.ClassName);
+                obj.Name);
 
             FixupFloatingObjectsToString(obj, e);
         }
@@ -55,7 +55,7 @@ namespace Kistl.App.Base
         /// <param name="e"></param>
         public static void OnToString_Enumeration(Enumeration obj, MethodReturnEventArgs<string> e)
         {
-            e.Result = obj.ClassName;
+            e.Result = obj.Name;
 
             FixupFloatingObjectsToString(obj, e);
         }
@@ -85,7 +85,7 @@ namespace Kistl.App.Base
                     : "unknown",
                 obj.InvokeOnObjectClass == null
                     ? "unattached"
-                    : obj.InvokeOnObjectClass.ClassName,
+                    : obj.InvokeOnObjectClass.Name,
                 obj.Method == null
                     ? "unattached"
                     : obj.Method.MethodName);
@@ -99,7 +99,7 @@ namespace Kistl.App.Base
             if (obj.ObjectClass != null && obj.ObjectClass.Module != null)
             {
                 e.Result = obj.ObjectClass.Module.Namespace + "." +
-                                obj.ObjectClass.ClassName + "." + obj.MethodName;
+                                obj.ObjectClass.Name + "." + obj.MethodName;
 
                 FixupFloatingObjectsToString(obj, e);
             }
@@ -134,7 +134,7 @@ namespace Kistl.App.Base
             {
                 e.Result = String.Format("{0} {1}.{2}",
                     obj.GetPropertyTypeString(),
-                    obj.ObjectClass.ClassName,
+                    obj.ObjectClass.Name,
                     obj.PropertyName);
             }
 
@@ -171,13 +171,13 @@ namespace Kistl.App.Base
             }
             else
             {
-                string aDesc = (obj.A.RoleName ?? String.Empty).Equals(obj.A.Type.ClassName)
+                string aDesc = (obj.A.RoleName ?? String.Empty).Equals(obj.A.Type.Name)
                     ? obj.A.RoleName
-                    : String.Format("{0}({1})", obj.A.RoleName, obj.A.Type.ClassName);
+                    : String.Format("{0}({1})", obj.A.RoleName, obj.A.Type.Name);
 
-                string bDesc = (obj.B.RoleName ?? String.Empty).Equals(obj.B.Type.ClassName)
+                string bDesc = (obj.B.RoleName ?? String.Empty).Equals(obj.B.Type.Name)
                     ? obj.B.RoleName
-                    : String.Format("{0}({1})", obj.B.RoleName, obj.B.Type.ClassName);
+                    : String.Format("{0}({1})", obj.B.RoleName, obj.B.Type.Name);
 
                 e.Result = String.Format("Relation: {0} {1} {2}",
                     aDesc,
@@ -194,7 +194,7 @@ namespace Kistl.App.Base
                 obj.RoleName,
                 obj.Type == null
                     ? "no type"
-                    : obj.Type.ClassName);
+                    : obj.Type.Name);
 
             FixupFloatingObjectsToString(obj, e);
         }

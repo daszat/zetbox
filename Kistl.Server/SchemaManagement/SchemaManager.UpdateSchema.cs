@@ -93,9 +93,9 @@ namespace Kistl.Server.SchemaManagement
             Log.Info("Updating deleted Tables");
             Log.Debug("-----------------------");
 
-            foreach (ObjectClass objClass in Case.savedSchema.GetQuery<ObjectClass>().OrderBy(o => o.Module.Namespace).ThenBy(o => o.ClassName))
+            foreach (ObjectClass objClass in Case.savedSchema.GetQuery<ObjectClass>().OrderBy(o => o.Module.Namespace).ThenBy(o => o.Name))
             {
-                Log.DebugFormat("Objectclass: {0}.{1}", objClass.Module.Namespace, objClass.ClassName);
+                Log.DebugFormat("Objectclass: {0}.{1}", objClass.Module.Namespace, objClass.Name);
                 if (Case.IsDeleteObjectClass(objClass))
                 {
                     Case.DoDeleteObjectClass(objClass);
@@ -109,7 +109,7 @@ namespace Kistl.Server.SchemaManagement
             Log.Info("Updating Security Tables");
             Log.Debug("-------------------------");
 
-            foreach (ObjectClass objClass in schema.GetQuery<ObjectClass>().OrderBy(o => o.Module.Namespace).ThenBy(o => o.ClassName))
+            foreach (ObjectClass objClass in schema.GetQuery<ObjectClass>().OrderBy(o => o.Module.Namespace).ThenBy(o => o.Name))
             {
                 if (Case.IsNewObjectClassACL(objClass))
                 {
@@ -131,9 +131,9 @@ namespace Kistl.Server.SchemaManagement
             Log.Info("Updating Tables & Columns");
             Log.Debug("-------------------------");
 
-            foreach (ObjectClass objClass in schema.GetQuery<ObjectClass>().OrderBy(o => o.Module.Namespace).ThenBy(o => o.ClassName))
+            foreach (ObjectClass objClass in schema.GetQuery<ObjectClass>().OrderBy(o => o.Module.Namespace).ThenBy(o => o.Name))
             {
-                Log.DebugFormat("Objectclass: {0}.{1}", objClass.Module.Namespace, objClass.ClassName);
+                Log.DebugFormat("Objectclass: {0}.{1}", objClass.Module.Namespace, objClass.Name);
                 if (Case.IsNewObjectClass(objClass))
                 {
                     Case.DoNewObjectClass(objClass);
@@ -363,9 +363,9 @@ namespace Kistl.Server.SchemaManagement
             Log.Info("Updating Inheritance");
             Log.Debug("--------------------");
 
-            foreach (ObjectClass objClass in schema.GetQuery<ObjectClass>().OrderBy(o => o.Module.Namespace).ThenBy(o => o.ClassName))
+            foreach (ObjectClass objClass in schema.GetQuery<ObjectClass>().OrderBy(o => o.Module.Namespace).ThenBy(o => o.Name))
             {
-                Log.DebugFormat("Objectclass: {0}.{1}", objClass.Module.Namespace, objClass.ClassName);
+                Log.DebugFormat("Objectclass: {0}.{1}", objClass.Module.Namespace, objClass.Name);
                 if (Case.IsNewObjectClassInheritance(objClass))
                 {
                     Case.DoNewObjectClassInheritance(objClass);

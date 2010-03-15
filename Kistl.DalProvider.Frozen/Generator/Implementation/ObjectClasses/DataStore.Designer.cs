@@ -51,7 +51,7 @@ namespace Kistl.DalProvider.Frozen.Generator.Implementation.ObjectClasses
 	catch(TypeLoadException ex)
 	{
 		// presumably the type was new and thus unknown, ignore the error for now.
-		Logging.Log.Warn(String.Format("TypeLoadException for [{0}]", cls.ClassName), ex);
+		Logging.Log.Warn(String.Format("TypeLoadException for [{0}]", cls.Name), ex);
 		instanceList = new List<IDataObject>();
 	}
 

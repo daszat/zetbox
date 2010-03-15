@@ -14,8 +14,8 @@
 <%@ Import Namespace="Kistl.Server.Generators.Extensions" %>
 <%@ Parameter Name="ctx" Type="IKistlContext" %>
 <%@ Parameter Name="cls" Type="ObjectClass" %>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.<%= cls.ClassName %>)">
-	    <MappingFragment StoreEntitySet="<%= cls.ClassName %>">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.<%= cls.Name %>)">
+	    <MappingFragment StoreEntitySet="<%= cls.Name %>">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <%
 		ApplyPropertyMappings();
@@ -23,7 +23,7 @@
 	    </MappingFragment>
       </EntityTypeMapping>
 <%
-	foreach(var subCls in cls.SubClasses.OrderBy(c => c.ClassName))
+	foreach(var subCls in cls.SubClasses.OrderBy(c => c.Name))
 	{
 		ApplyEntityTypeMapping(subCls);	
 	}

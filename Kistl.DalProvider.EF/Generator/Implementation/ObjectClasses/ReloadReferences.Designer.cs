@@ -48,7 +48,7 @@ this.WriteObjects("			// fix direct object references\r\n");
 #line 31 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\ReloadReferences.cst"
 foreach(var prop in cls.Properties.OfType<ObjectReferenceProperty>()
 		.Where(orp => !orp.IsList())
-		.OrderBy(orp => orp.ObjectClass.ClassName)
+		.OrderBy(orp => orp.ObjectClass.Name)
 		.ThenBy(orp => orp.PropertyName))
 	{
 		Relation rel = Kistl.App.Extensions.RelationExtensions.Lookup(ctx, prop);

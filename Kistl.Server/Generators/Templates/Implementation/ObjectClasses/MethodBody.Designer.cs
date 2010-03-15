@@ -35,7 +35,7 @@ this.WriteObjects("\r\n");
 #line 19 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\MethodBody.cst"
 string indexSuffix = index == 0 ? String.Empty : index.ToString();
 	string delegateName = m.MethodName + indexSuffix + "_Handler";
-	string eventName = "On" + m.MethodName + indexSuffix + "_" + dt.ClassName;
+	string eventName = "On" + m.MethodName + indexSuffix + "_" + dt.Name;
 	var returnParam = m.Parameter.SingleOrDefault(parameter => parameter.IsReturnParameter);
 
 	string parameterDefs = m.GetParameterDefinitions();
@@ -70,7 +70,7 @@ if (m.ObjectClass == dt || !(dt is ObjectClass))
         {
 
 #line 54 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\MethodBody.cst"
-this.WriteObjects("                throw new NotImplementedException(\"No handler registered on ",  m.ObjectClass.ClassName , ".",  m.MethodName , "\");\r\n");
+this.WriteObjects("                throw new NotImplementedException(\"No handler registered on ",  m.ObjectClass.Name , ".",  m.MethodName , "\");\r\n");
 #line 56 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\MethodBody.cst"
 }
         else
@@ -113,7 +113,7 @@ if (m.ObjectClass == dt || !(dt is ObjectClass))
         {
 
 #line 92 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\MethodBody.cst"
-this.WriteObjects("                throw new NotImplementedException(\"No handler registered on ",  m.ObjectClass.ClassName , ".",  m.MethodName , "\");\r\n");
+this.WriteObjects("                throw new NotImplementedException(\"No handler registered on ",  m.ObjectClass.Name , ".",  m.MethodName , "\");\r\n");
 #line 94 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\MethodBody.cst"
 }
         else
@@ -141,7 +141,7 @@ this.WriteObjects("		public delegate void ",  delegateName , "<T>(T obj, ",  ret
 
 
 #line 117 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\MethodBody.cst"
-this.WriteObjects("		public static event ",  delegateName , "<",  dt.ClassName , "> ",  eventName , ";\r\n");
+this.WriteObjects("		public static event ",  delegateName , "<",  dt.Name , "> ",  eventName , ";\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("\r\n");
 

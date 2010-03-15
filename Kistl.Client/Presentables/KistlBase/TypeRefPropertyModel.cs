@@ -19,7 +19,7 @@ namespace Kistl.Client.Presentables.KistlBase
             : base(appCtx, dataCtx, referenceHolder, prop)
         {
             // TODO: use a static reference here
-            if (prop.GetReferencedObjectClass().ClassName != "TypeRef")
+            if (prop.GetReferencedObjectClass().Name != "TypeRef")
             {
                 throw new ArgumentOutOfRangeException("prop", "Can only handle TypeRef References");
             }

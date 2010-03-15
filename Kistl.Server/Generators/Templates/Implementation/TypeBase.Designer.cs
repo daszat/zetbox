@@ -72,7 +72,7 @@ var mungedClassName = GetTypeName();
     ApplyClassAttributeTemplate();
 
 #line 57 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
-this.WriteObjects("    [System.Diagnostics.DebuggerDisplay(\"",  DataType.ClassName , "\")]\r\n");
+this.WriteObjects("    [System.Diagnostics.DebuggerDisplay(\"",  DataType.Name , "\")]\r\n");
 this.WriteObjects("    public",  GetClassModifiers() , " class ",  mungedClassName , " ",  GetInheritance() , "\r\n");
 this.WriteObjects("    {\r\n");
 this.WriteObjects("    \r\n");
@@ -120,7 +120,7 @@ ApplyMethodTemplate(m, index++);
 this.WriteObjects("\r\n");
 this.WriteObjects("		public override InterfaceType GetInterfaceType()\r\n");
 this.WriteObjects("		{\r\n");
-this.WriteObjects("			return new InterfaceType(typeof(",  DataType.ClassName , "));\r\n");
+this.WriteObjects("			return new InterfaceType(typeof(",  DataType.Name , "));\r\n");
 this.WriteObjects("		}\r\n");
 #line 104 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
 ApplyApplyChangesFromMethod();

@@ -74,7 +74,7 @@ using Kistl.DalProvider.EF;
 <%
 	foreach (var prop in ctx.GetQuery<ValueTypeProperty>()
 		.Where(p => p.IsList)
-		.OrderBy(p => p.ObjectClass.ClassName)
+		.OrderBy(p => p.ObjectClass.Name)
 		.ThenBy(p => p.PropertyName))
 	{
 %>
@@ -82,7 +82,7 @@ using Kistl.DalProvider.EF;
 // object-value association
 [assembly: EdmRelationship(
     "Model", "<%= prop.GetAssociationName() %>",
-    "<%= prop.ObjectClass.ClassName %>", RelationshipMultiplicity.ZeroOrOne, typeof(<%= prop.ObjectClass.Module.Namespace + "." + prop.ObjectClass.ClassName + Kistl.API.Helper.ImplementationSuffix %>),
+    "<%= prop.ObjectClass.Name %>", RelationshipMultiplicity.ZeroOrOne, typeof(<%= prop.ObjectClass.Module.Namespace + "." + prop.ObjectClass.Name + Kistl.API.Helper.ImplementationSuffix %>),
     "CollectionEntry", RelationshipMultiplicity.Many, typeof(<%= prop.GetCollectionEntryFullName() + Kistl.API.Helper.ImplementationSuffix %>)
     )]
 
@@ -93,7 +93,7 @@ using Kistl.DalProvider.EF;
 <%
 	foreach (var prop in ctx.GetQuery<CompoundObjectProperty>()
 		.Where(p => p.IsList)
-		.OrderBy(p => p.ObjectClass.ClassName)
+		.OrderBy(p => p.ObjectClass.Name)
 		.ThenBy(p => p.PropertyName))
 	{
 %>
@@ -101,7 +101,7 @@ using Kistl.DalProvider.EF;
 // object-struct association
 [assembly: EdmRelationship(
     "Model", "<%= prop.GetAssociationName() %>",
-    "<%= prop.ObjectClass.ClassName %>", RelationshipMultiplicity.ZeroOrOne, typeof(<%= prop.ObjectClass.Module.Namespace + "." + prop.ObjectClass.ClassName + Kistl.API.Helper.ImplementationSuffix %>),
+    "<%= prop.ObjectClass.Name %>", RelationshipMultiplicity.ZeroOrOne, typeof(<%= prop.ObjectClass.Module.Namespace + "." + prop.ObjectClass.Name + Kistl.API.Helper.ImplementationSuffix %>),
     "CollectionEntry", RelationshipMultiplicity.Many, typeof(<%= prop.GetCollectionEntryFullName() + Kistl.API.Helper.ImplementationSuffix %>)
     )]
 
@@ -111,15 +111,15 @@ using Kistl.DalProvider.EF;
 
 <%
 	foreach (var cls in ctx.GetQuery<ObjectClass>().Where(c => c.BaseObjectClass == null)
-		.OrderBy(c => c.ClassName))
+		.OrderBy(c => c.Name))
 	{
 		if(cls.NeedsRightsTable())
 		{
 %>
 [assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "<%= Construct.SecurityRulesFKName(cls) %>", 
-	"<%= cls.ClassName %>", 
+	"<%= cls.Name %>", 
 	global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, 
-	typeof(<%= cls.Module.Namespace + "." + cls.ClassName + Kistl.API.Helper.ImplementationSuffix %>), 
+	typeof(<%= cls.Module.Namespace + "." + cls.Name + Kistl.API.Helper.ImplementationSuffix %>), 
 	"<%= Construct.SecurityRulesClassName(cls) %>", 
 	global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, 
 	typeof(<%= cls.Module.Namespace + "." + Construct.SecurityRulesClassName(cls) + Kistl.API.Helper.ImplementationSuffix %>))]

@@ -46,7 +46,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
 
             string exposedCollectionInterface = hasPersistentOrder ? "IList" : "ICollection";
 
-            string thisInterface = prop.ObjectClass.ClassName;
+            string thisInterface = prop.ObjectClass.Name;
             string referencedType = prop.ReferencedTypeAsCSharp();
             string referencedCollectionEntry = prop.GetCollectionEntryClassName() + Kistl.API.Helper.ImplementationSuffix;
 

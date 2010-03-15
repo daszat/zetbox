@@ -21,7 +21,7 @@ namespace Kistl.DalProvider.Frozen.Generator.Implementation.CollectionEntries
         {
             Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty.Call(Host, ctx,
                     this.MembersToSerialize,
-                    prop.ObjectClass.ClassName,
+                    prop.ObjectClass.Name,
                     propertyName, this.prop.Module.Namespace);
 
             // HACK

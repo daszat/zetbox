@@ -12,7 +12,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.CollectionEntries
         protected override void ApplyParentReferencePropertyTemplate(Property prop, string propertyName)
         {
             Implementation.CollectionEntries.ValueCollectionEntryParentReference.Call(Host, ctx, 
-                MembersToSerialize, prop.ObjectClass.ClassName, propertyName);
+                MembersToSerialize, prop.ObjectClass.Name, propertyName);
         }
 
         protected override void ApplyCompoundObjectPropertyTemplate(CompoundObjectProperty prop, string propertyName)

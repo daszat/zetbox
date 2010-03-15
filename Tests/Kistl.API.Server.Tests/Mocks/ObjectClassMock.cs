@@ -87,7 +87,7 @@ namespace Kistl.API.Server.Mocks
 
         #region DataType Members
 
-        public string ClassName
+        public string Name
         {
             get;
             set;

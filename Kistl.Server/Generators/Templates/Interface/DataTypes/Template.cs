@@ -21,11 +21,11 @@ namespace Kistl.Server.Generators.Templates.Interface.DataTypes
             if (dataType is Kistl.App.Base.ObjectClass)
             {
                 ObjectClass cls = (ObjectClass)dataType;
-                string[] interfaces = cls.ImplementsInterfaces.Select(i => i.Module.Namespace + "." + i.ClassName).ToArray();
+                string[] interfaces = cls.ImplementsInterfaces.Select(i => i.Module.Namespace + "." + i.Name).ToArray();
                 var baseClass = (dataType as Kistl.App.Base.ObjectClass).BaseObjectClass;
                 if (baseClass != null)
                 {
-                    return new string[] { baseClass.Module.Namespace + "." + baseClass.ClassName }.Concat(interfaces).ToArray();
+                    return new string[] { baseClass.Module.Namespace + "." + baseClass.Name }.Concat(interfaces).ToArray();
                 }
                 else
                 {

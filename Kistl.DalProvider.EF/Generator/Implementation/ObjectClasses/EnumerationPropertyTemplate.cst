@@ -15,7 +15,7 @@
 <%@ Parameter Name="callGetterSetterEvents" Type="bool" %>
 <%
 
-	string interfaceName = prop.ObjectClass.ClassName;
+	string interfaceName = prop.ObjectClass.Name;
 
 	string name = prop.PropertyName;
 	string efName = name + Kistl.API.Helper.ImplementationSuffix;

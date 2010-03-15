@@ -25,11 +25,11 @@ namespace Kistl.DalProvider.EF.Generator.Implementation
 
             AssociationName = Construct.InheritanceAssociationName(Parent, Child);
 
-            ParentRoleName = "A_" + Parent.ClassName;
-            ChildRoleName = "B_" + Child.ClassName;
+            ParentRoleName = "A_" + Parent.Name;
+            ChildRoleName = "B_" + Child.Name;
 
-            ParentEntitySetName = Parent.ClassName;
-            ChildEntitySetName = Child.ClassName;
+            ParentEntitySetName = Parent.Name;
+            ChildEntitySetName = Child.Name;
         }
 
         public ObjectClass Class { get; private set; }

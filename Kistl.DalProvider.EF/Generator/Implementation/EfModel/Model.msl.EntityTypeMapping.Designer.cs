@@ -29,8 +29,8 @@ namespace Kistl.DalProvider.EF.Generator.Implementation.EfModel
         public override void Generate()
         {
 #line 17 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.msl.EntityTypeMapping.cst"
-this.WriteObjects("      <EntityTypeMapping TypeName=\"IsTypeOf(Model.",  cls.ClassName , ")\">\r\n");
-this.WriteObjects("	    <MappingFragment StoreEntitySet=\"",  cls.ClassName , "\">\r\n");
+this.WriteObjects("      <EntityTypeMapping TypeName=\"IsTypeOf(Model.",  cls.Name , ")\">\r\n");
+this.WriteObjects("	    <MappingFragment StoreEntitySet=\"",  cls.Name , "\">\r\n");
 this.WriteObjects("	      <ScalarProperty Name=\"ID\" ColumnName=\"ID\" />\r\n");
 #line 21 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.msl.EntityTypeMapping.cst"
 ApplyPropertyMappings();
@@ -39,7 +39,7 @@ ApplyPropertyMappings();
 this.WriteObjects("	    </MappingFragment>\r\n");
 this.WriteObjects("      </EntityTypeMapping>\r\n");
 #line 26 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.msl.EntityTypeMapping.cst"
-foreach(var subCls in cls.SubClasses.OrderBy(c => c.ClassName))
+foreach(var subCls in cls.SubClasses.OrderBy(c => c.Name))
 	{
 		ApplyEntityTypeMapping(subCls);	
 	}

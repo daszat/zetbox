@@ -63,7 +63,7 @@ namespace Kistl.Server.Generators.Extensions
         public static string GetRelationClassName(this Relation rel)
         {
             if (rel == null) { throw new ArgumentNullException("rel"); }
-            return String.Format("{0}_{1}_{2}_RelationEntry", rel.A.Type.ClassName, rel.Verb, rel.B.Type.ClassName);
+            return String.Format("{0}_{1}_{2}_RelationEntry", rel.A.Type.Name, rel.Verb, rel.B.Type.Name);
         }
 
         public static string GetRelationTableName(this Relation rel)
@@ -90,7 +90,7 @@ namespace Kistl.Server.Generators.Extensions
         public static string GetCollectionEntryClassName(this Property prop)
         {
             if (prop == null) { throw new ArgumentNullException("prop"); }
-            return String.Format("{0}_{1}_CollectionEntry", prop.ObjectClass.ClassName, prop.PropertyName);
+            return String.Format("{0}_{1}_CollectionEntry", prop.ObjectClass.Name, prop.PropertyName);
         }
 
         public static string GetCollectionEntryTable(this Property prop)

@@ -20,7 +20,7 @@ namespace Kistl.Server.Generators.Templates.Implementation
 
         protected string GetTypeName()
         {
-            return MungeClassName(DataType.ClassName);
+            return MungeClassName(DataType.Name);
         }
 
         protected virtual string MungeClassName(string name) { return name; }
@@ -77,9 +77,9 @@ namespace Kistl.Server.Generators.Templates.Implementation
         {
             if (DataType is ObjectClass && ((ObjectClass)DataType).ImplementsIExportable(false))
             {
-                return new string[] { this.DataType.ClassName, "Kistl.API.IExportableInternal" };
+                return new string[] { this.DataType.Name, "Kistl.API.IExportableInternal" };
             }
-            return new string[] { this.DataType.ClassName };
+            return new string[] { this.DataType.Name };
         }
 
         /// <returns>a string defining the inheritance relations of this class</returns>

@@ -52,7 +52,7 @@ namespace Kistl.App.Extensions
             else if (param is ObjectParameter)
             {
                 var p = param as ObjectParameter;
-                Type t = Type.GetType(p.DataType.Module.Namespace + "." + p.DataType.ClassName + ", Kistl.Objects", true);
+                Type t = Type.GetType(p.DataType.Module.Namespace + "." + p.DataType.Name + ", Kistl.Objects", true);
                 if (param.IsList)
                     t = typeof(IList<>).MakeGenericType(t);
 

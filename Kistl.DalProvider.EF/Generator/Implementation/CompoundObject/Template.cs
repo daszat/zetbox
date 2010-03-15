@@ -19,7 +19,7 @@ namespace Kistl.DalProvider.EF.Generator.Implementation.CompoundObjects
 
         protected override void ApplyClassAttributeTemplate()
         {
-            WriteLine("    [EdmComplexType(NamespaceName=\"Model\", Name=\"{0}\")]", this.CompoundObjectType.ClassName);
+            WriteLine("    [EdmComplexType(NamespaceName=\"Model\", Name=\"{0}\")]", this.CompoundObjectType.Name);
         }
 
         protected override IEnumerable<string> GetAdditionalImports()

@@ -19,10 +19,10 @@
     
     <!-- EntitySetMappings for classes -->
 <%
-    foreach(var cls in ctx.GetBaseClasses().OrderBy(c => c.ClassName))
+    foreach(var cls in ctx.GetBaseClasses().OrderBy(c => c.Name))
     {
 %>
-    <EntitySetMapping Name="<%= cls.ClassName %>">
+    <EntitySetMapping Name="<%= cls.Name %>">
 <% ApplyEntityTypeMapping(cls); %>
     </EntitySetMapping>
 <%
@@ -39,7 +39,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <AssociationSetMapping Name="<%= Construct.SecurityRulesFKName(cls) %>" TypeName="Model.<%= Construct.SecurityRulesFKName(cls) %>" StoreEntitySet="<%= Construct.SecurityRulesClassName(cls) %>">
-      <EndProperty Name="<%= cls.ClassName %>">
+      <EndProperty Name="<%= cls.Name %>">
         <ScalarProperty Name="ID" ColumnName="ID" />
       </EndProperty>
       <EndProperty Name="<%= Construct.SecurityRulesClassName(cls) %>">
@@ -151,7 +151,7 @@
     -->
     <AssociationSetMapping Name="<%= rel.GetAssociationName() %>"
                            TypeName="Model.<%= rel.GetAssociationName() %>"
-                           StoreEntitySet="<%= dependent.Type.ClassName %>" >
+                           StoreEntitySet="<%= dependent.Type.Name %>" >
       <EndProperty Name="<%= principal.RoleName %>">
         <ScalarProperty Name="ID" ColumnName="fk_<%= principal.RoleName %>"/>
       </EndProperty>
@@ -169,7 +169,7 @@
 <%
     foreach(var prop in ctx.GetQuery<ValueTypeProperty>()
         .Where(p => p.IsList)
-        .OrderBy(p => p.ObjectClass.ClassName)
+        .OrderBy(p => p.ObjectClass.Name)
         .ThenBy(p => p.PropertyName))
     { 
 %>
@@ -192,13 +192,13 @@
     <AssociationSetMapping Name="<%= prop.GetAssociationName() %>"
                            TypeName="Model.<%= prop.GetAssociationName() %>"
                            StoreEntitySet="<%= prop.GetCollectionEntryClassName() %>" >
-      <EndProperty Name="<%= prop.ObjectClass.ClassName %>">
-        <ScalarProperty Name="ID" ColumnName="fk_<%= prop.ObjectClass.ClassName %>"/>
+      <EndProperty Name="<%= prop.ObjectClass.Name %>">
+        <ScalarProperty Name="ID" ColumnName="fk_<%= prop.ObjectClass.Name %>"/>
       </EndProperty>
       <EndProperty Name="CollectionEntry">
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
-      <Condition ColumnName="fk_<%= prop.ObjectClass.ClassName %>" IsNull="false"/>
+      <Condition ColumnName="fk_<%= prop.ObjectClass.Name %>" IsNull="false"/>
     </AssociationSetMapping>
 <%
     }
@@ -209,7 +209,7 @@
 <%
     foreach(var prop in ctx.GetQuery<CompoundObjectProperty>()
         .Where(p => p.IsList)
-        .OrderBy(p => p.ObjectClass.ClassName)
+        .OrderBy(p => p.ObjectClass.Name)
         .ThenBy(p => p.PropertyName))
     { 
 %>
@@ -232,13 +232,13 @@
     <AssociationSetMapping Name="<%= prop.GetAssociationName() %>"
                            TypeName="Model.<%= prop.GetAssociationName() %>"
                            StoreEntitySet="<%= prop.GetCollectionEntryClassName() %>" >
-      <EndProperty Name="<%= prop.ObjectClass.ClassName %>">
-        <ScalarProperty Name="ID" ColumnName="fk_<%= prop.ObjectClass.ClassName %>"/>
+      <EndProperty Name="<%= prop.ObjectClass.Name %>">
+        <ScalarProperty Name="ID" ColumnName="fk_<%= prop.ObjectClass.Name %>"/>
       </EndProperty>
       <EndProperty Name="CollectionEntry">
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
-      <Condition ColumnName="fk_<%= prop.ObjectClass.ClassName %>" IsNull="false"/>
+      <Condition ColumnName="fk_<%= prop.ObjectClass.Name %>" IsNull="false"/>
     </AssociationSetMapping>
 <%
     }

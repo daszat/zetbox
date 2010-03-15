@@ -56,10 +56,10 @@ namespace Kistl.Objects.Frozen
 	foreach(var module in modulesWithFrozenClasses)
 	{
 	    // TODO: remove ToList when IsFrozenObject correctly inherits across meta-data
-		foreach(var frozenCls in module.DataTypes.OfType<ObjectClass>().ToList().Where(cls => cls.IsFrozen()).OrderBy(c => c.ClassName))
+		foreach(var frozenCls in module.DataTypes.OfType<ObjectClass>().ToList().Where(cls => cls.IsFrozen()).OrderBy(c => c.Name))
 		{
 %>
-			if (ifType == typeof(<%= frozenCls.Module.Namespace %>.<%= frozenCls.ClassName %>))
+			if (ifType == typeof(<%= frozenCls.Module.Namespace %>.<%= frozenCls.Name %>))
 				return <%= frozenCls.Module.Namespace %>.<%= Implementation.ObjectClasses.Template.GetClassName(frozenCls) %>.DataStore.Values.AsQueryable().Cast<IDataObject>();
 <%
 		}
@@ -82,7 +82,7 @@ namespace Kistl.Objects.Frozen
 	foreach(var module in modulesWithFrozenClasses)
 	{
 		// TODO: remove ToList when IsFrozenObject correctly inherits across meta-data
-        foreach(var frozenCls in module.DataTypes.OfType<ObjectClass>().ToList().Where(cls => cls.IsFrozen()).OrderBy(c => c.ClassName))
+        foreach(var frozenCls in module.DataTypes.OfType<ObjectClass>().ToList().Where(cls => cls.IsFrozen()).OrderBy(c => c.Name))
 		{
 %>
 				.Concat(<%= frozenCls.Module.Namespace %>.<%= Implementation.ObjectClasses.Template.GetClassName(frozenCls) %>.DataStore.Values.AsQueryable().Cast<IPersistenceObject>())
@@ -99,10 +99,10 @@ namespace Kistl.Objects.Frozen
 	foreach(var module in modulesWithFrozenClasses)
 	{
 		// TODO: remove ToList when IsFrozenObject correctly inherits across meta-data
-		foreach(var frozenCls in module.DataTypes.OfType<ObjectClass>().ToList().Where(cls => cls.IsFrozen()).OrderBy(c => c.ClassName))
+		foreach(var frozenCls in module.DataTypes.OfType<ObjectClass>().ToList().Where(cls => cls.IsFrozen()).OrderBy(c => c.Name))
 		{
 %>
-			if (ifType == typeof(<%= frozenCls.Module.Namespace %>.<%= frozenCls.ClassName %>))
+			if (ifType == typeof(<%= frozenCls.Module.Namespace %>.<%= frozenCls.Name %>))
 				return <%= frozenCls.Module.Namespace %>.<%= Implementation.ObjectClasses.Template.GetClassName(frozenCls) %>.DataStore[ID];
 <%
 		}

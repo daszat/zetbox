@@ -37,11 +37,11 @@ namespace Kistl.App.Extensions
                 // cache frozen classes by class name
                 InitializeFrozenCache(ctx);
                 if (_frozenClasses == null) return null; // Case #1363: GetObjectClass can be called by: InitializeFrozenCache -> QueryTranslator -> OfType Visit -> ApplySecurityFilter ->GetObjectClass
-                result = _frozenClasses[type.Name].First(o => o.Module.Namespace == type.Namespace && o.ClassName == type.Name);
+                result = _frozenClasses[type.Name].First(o => o.Module.Namespace == type.Namespace && o.Name == type.Name);
             }
             else
             {
-                result = ctx.GetQuery<ObjectClass>().First(o => o.Module.Namespace == type.Namespace && o.ClassName == type.Name);
+                result = ctx.GetQuery<ObjectClass>().First(o => o.Module.Namespace == type.Namespace && o.Name == type.Name);
             }
 
             return result;
@@ -56,7 +56,7 @@ namespace Kistl.App.Extensions
                 {
                     isInitializing = true;
                     // Case #1363: GetQuery may call ObjectQueryTranslator which calls GetObjectClass ....
-                    _frozenClasses = ctx.GetQuery<ObjectClass>().ToLookup(cls => cls.ClassName);
+                    _frozenClasses = ctx.GetQuery<ObjectClass>().ToLookup(cls => cls.Name);
                     isInitializing = false;
                 }
             }
@@ -171,7 +171,7 @@ namespace Kistl.App.Extensions
 
             // TODO: During export schema, while creating a new Database, no custom actions are attached (Database is empty)
             // return new InterfaceType(cls.GetDataType());
-            return new InterfaceType(Type.GetType(cls.Module.Namespace + "." + cls.ClassName + ", Kistl.Objects", true));
+            return new InterfaceType(Type.GetType(cls.Module.Namespace + "." + cls.Name + ", Kistl.Objects", true));
         }
 
         public static bool ImplementsIExportable(this ObjectClass cls)
@@ -185,7 +185,7 @@ namespace Kistl.App.Extensions
 
             while (cls != null)
             {
-                if (cls.ImplementsInterfaces.Count(o => o.ClassName == "IExportable" && o.Module.ModuleName == "KistlBase") == 1)
+                if (cls.ImplementsInterfaces.Count(o => o.Name == "IExportable" && o.Module.ModuleName == "KistlBase") == 1)
                     return true;
                 if (!lookupInBase) return false;
                 cls = cls.BaseObjectClass;

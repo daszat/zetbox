@@ -18,7 +18,7 @@
 
 	string indexSuffix = index == 0 ? String.Empty : index.ToString();
 	string delegateName = m.MethodName + indexSuffix + "_Handler";
-	string eventName = "On" + m.MethodName + indexSuffix + "_" + dt.ClassName;
+	string eventName = "On" + m.MethodName + indexSuffix + "_" + dt.Name;
 	var returnParam = m.Parameter.SingleOrDefault(parameter => parameter.IsReturnParameter);
 
 	string parameterDefs = m.GetParameterDefinitions();
@@ -51,7 +51,7 @@
         if (m.ObjectClass == dt || !(dt is ObjectClass))
         {
 %>
-                throw new NotImplementedException("No handler registered on <%= m.ObjectClass.ClassName %>.<%= m.MethodName %>");
+                throw new NotImplementedException("No handler registered on <%= m.ObjectClass.Name %>.<%= m.MethodName %>");
 <%
         }
         else
@@ -89,7 +89,7 @@
         if (m.ObjectClass == dt || !(dt is ObjectClass))
         {
 %>
-                throw new NotImplementedException("No handler registered on <%= m.ObjectClass.ClassName %>.<%= m.MethodName %>");
+                throw new NotImplementedException("No handler registered on <%= m.ObjectClass.Name %>.<%= m.MethodName %>");
 <%
         }
         else
@@ -114,6 +114,6 @@
 	}
 
 %>
-		public static event <%= delegateName %><<%= dt.ClassName %>> <%= eventName %>;
+		public static event <%= delegateName %><<%= dt.Name %>> <%= eventName %>;
 
 

@@ -9,9 +9,9 @@
   </KistlBase:Module>
   <KistlBase:ObjectClass ExportGuid="bff02442-11ec-4cac-9105-39853e729e0f">
     <KistlBase:ChangedOn>2010-02-01T15:49:55.107Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>Exam</KistlBase:ClassName>
     <KistlBase:CreatedOn>2010-02-01T15:49:55.107Z</KistlBase:CreatedOn>
     <KistlBase:Module>110acbc0-652a-4adc-9de5-8baabfcf3637</KistlBase:Module>
+    <KistlBase:Name>Exam</KistlBase:Name>
     <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
@@ -23,9 +23,9 @@
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="d56148a5-f283-4ceb-8c01-0a0c30bc0800">
     <KistlBase:ChangedOn>2010-02-01T15:49:03.123Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>Exercise</KistlBase:ClassName>
     <KistlBase:CreatedOn>2010-02-01T15:49:03.123Z</KistlBase:CreatedOn>
     <KistlBase:Module>110acbc0-652a-4adc-9de5-8baabfcf3637</KistlBase:Module>
+    <KistlBase:Name>Exercise</KistlBase:Name>
     <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
@@ -37,9 +37,9 @@
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="a0f7713e-a47b-4598-b907-a554b3aad44a">
     <KistlBase:ChangedOn>2010-02-01T16:25:35.333Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>GroupExcercise</KistlBase:ClassName>
     <KistlBase:CreatedOn>2010-02-01T16:24:03.493Z</KistlBase:CreatedOn>
     <KistlBase:Module>110acbc0-652a-4adc-9de5-8baabfcf3637</KistlBase:Module>
+    <KistlBase:Name>GroupExcercise</KistlBase:Name>
     <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
@@ -51,9 +51,9 @@
   </KistlBase:ObjectClass>
   <KistlBase:Enumeration ExportGuid="2688f156-2fde-47e0-8cc2-b92affaf1afc">
     <KistlBase:ChangedOn>2010-02-01T15:47:23.587Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>Periods</KistlBase:ClassName>
     <KistlBase:CreatedOn>2010-02-01T15:47:23.587Z</KistlBase:CreatedOn>
     <KistlBase:Module>110acbc0-652a-4adc-9de5-8baabfcf3637</KistlBase:Module>
+    <KistlBase:Name>Periods</KistlBase:Name>
     <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
@@ -61,9 +61,9 @@
   </KistlBase:Enumeration>
   <KistlBase:ObjectClass ExportGuid="2ddf848e-b4e4-4164-b4a2-f47b0c71939c">
     <KistlBase:ChangedOn>2010-02-01T15:33:14.37Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>Semester</KistlBase:ClassName>
     <KistlBase:CreatedOn>2010-02-01T15:33:14.37Z</KistlBase:CreatedOn>
     <KistlBase:Module>110acbc0-652a-4adc-9de5-8baabfcf3637</KistlBase:Module>
+    <KistlBase:Name>Semester</KistlBase:Name>
     <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
@@ -75,9 +75,9 @@
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="a48efa3d-1036-49e2-b29b-7df1c50a7712">
     <KistlBase:ChangedOn>2010-02-01T15:48:33.437Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>Student</KistlBase:ClassName>
     <KistlBase:CreatedOn>2010-02-01T15:48:33.437Z</KistlBase:CreatedOn>
     <KistlBase:Module>110acbc0-652a-4adc-9de5-8baabfcf3637</KistlBase:Module>
+    <KistlBase:Name>Student</KistlBase:Name>
     <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
@@ -89,9 +89,9 @@
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="4d83453d-70da-4ccc-a1f6-0a3e8f15c99d">
     <KistlBase:ChangedOn>2010-02-01T16:24:46.177Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>StudentExam</KistlBase:ClassName>
     <KistlBase:CreatedOn>2010-02-01T16:24:46.177Z</KistlBase:CreatedOn>
     <KistlBase:Module>110acbc0-652a-4adc-9de5-8baabfcf3637</KistlBase:Module>
+    <KistlBase:Name>StudentExam</KistlBase:Name>
     <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
@@ -978,11 +978,11 @@
   </KistlBase:Module>
   <KistlBase:ObjectClass ExportGuid="3f496de2-bef4-4059-8c3e-c25db38bd3c2">
     <KistlBase:ChangedOn>2010-03-12T13:38:49.123Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>Document</KistlBase:ClassName>
     <KistlBase:CreatedOn>2010-03-12T13:35:18.04Z</KistlBase:CreatedOn>
     <GUI:DefaultIcon>267ce6ec-7982-46d3-b1bc-2e1ea6adf815</GUI:DefaultIcon>
     <KistlBase:Description>Document with revisions</KistlBase:Description>
     <KistlBase:Module>21dcfc7c-ab5c-4d04-8a41-9759b23907f9</KistlBase:Module>
+    <KistlBase:Name>Document</KistlBase:Name>
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
@@ -995,11 +995,11 @@
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="e1556c0b-cdb9-4174-a9e5-07efba58ef05">
     <KistlBase:ChangedOn>2010-03-10T13:38:16.94Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>DynamicFile</KistlBase:ClassName>
     <KistlBase:CreatedOn>2010-03-10T13:38:16.94Z</KistlBase:CreatedOn>
     <GUI:DefaultIcon>267ce6ec-7982-46d3-b1bc-2e1ea6adf815</GUI:DefaultIcon>
     <KistlBase:Description>File with changeable content</KistlBase:Description>
     <KistlBase:Module>21dcfc7c-ab5c-4d04-8a41-9759b23907f9</KistlBase:Module>
+    <KistlBase:Name>DynamicFile</KistlBase:Name>
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
@@ -1012,11 +1012,11 @@
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="8043ccd8-6ff1-4b45-b04b-e0a0f19ce1b6">
     <KistlBase:ChangedOn>2010-03-10T13:20:34.21Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>File</KistlBase:ClassName>
     <KistlBase:CreatedOn>2010-03-10T13:14:04.983Z</KistlBase:CreatedOn>
     <GUI:DefaultIcon>267ce6ec-7982-46d3-b1bc-2e1ea6adf815</GUI:DefaultIcon>
     <KistlBase:Description>Abstract Baseclass for File Types</KistlBase:Description>
     <KistlBase:Module>21dcfc7c-ab5c-4d04-8a41-9759b23907f9</KistlBase:Module>
+    <KistlBase:Name>File</KistlBase:Name>
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
@@ -1028,11 +1028,11 @@
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="5aaabfe9-081d-445d-a543-53e0253feeb8">
     <KistlBase:ChangedOn>2010-03-12T13:37:59.5Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>StaticFile</KistlBase:ClassName>
     <KistlBase:CreatedOn>2010-03-12T13:33:23.29Z</KistlBase:CreatedOn>
     <GUI:DefaultIcon>267ce6ec-7982-46d3-b1bc-2e1ea6adf815</GUI:DefaultIcon>
     <KistlBase:Description>Static file. Content cannot be changed</KistlBase:Description>
     <KistlBase:Module>21dcfc7c-ab5c-4d04-8a41-9759b23907f9</KistlBase:Module>
+    <KistlBase:Name>StaticFile</KistlBase:Name>
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
@@ -1403,9 +1403,9 @@
   </KistlBase:Module>
   <KistlBase:ObjectClass ExportGuid="f1c37bfb-e45f-4964-b6ba-672c1ec81b60">
     <KistlBase:ChangedOn>2010-02-02T12:07:09.097Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>AccessControl</KistlBase:ClassName>
     <KistlBase:CreatedOn>2010-01-29T13:11:51.1Z</KistlBase:CreatedOn>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
+    <KistlBase:Name>AccessControl</KistlBase:Name>
     <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
@@ -1417,9 +1417,9 @@
   </KistlBase:ObjectClass>
   <KistlBase:Enumeration ExportGuid="1d067873-d5e7-448e-a46a-4377a1a16ece">
     <KistlBase:ChangedOn>2010-01-29T16:54:15.59Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>AccessRights</KistlBase:ClassName>
     <KistlBase:CreatedOn>2010-01-29T16:54:15.59Z</KistlBase:CreatedOn>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
+    <KistlBase:Name>AccessRights</KistlBase:Name>
     <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
@@ -1427,11 +1427,11 @@
   </KistlBase:Enumeration>
   <KistlBase:ObjectClass ExportGuid="a590a975-66e5-421c-aa97-7ab3169e0e9b">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.323Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>Assembly</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.323Z</KistlBase:CreatedOn>
     <GUI:DefaultIcon>1b618ac3-cd62-4425-8bb3-4dba99172b1a</GUI:DefaultIcon>
     <KistlBase:Description />
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
+    <KistlBase:Name>Assembly</KistlBase:Name>
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
@@ -1443,11 +1443,11 @@
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="63b8e3f7-e663-4fde-a09a-64ca876586bd">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.327Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>BaseParameter</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.327Z</KistlBase:CreatedOn>
     <GUI:DefaultIcon>267ce6ec-7982-46d3-b1bc-2e1ea6adf815</GUI:DefaultIcon>
     <KistlBase:Description>Metadefinition Object for Parameter. This class is abstract.</KistlBase:Description>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
+    <KistlBase:Name>BaseParameter</KistlBase:Name>
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
@@ -1459,11 +1459,11 @@
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="afd99ba6-f150-4ed4-ad1f-4ef57b14728b">
     <KistlBase:ChangedOn>2010-03-09T15:17:02.253Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>Blob</KistlBase:ClassName>
     <KistlBase:CreatedOn>2010-03-03T17:47:46.76Z</KistlBase:CreatedOn>
     <GUI:DefaultIcon>267ce6ec-7982-46d3-b1bc-2e1ea6adf815</GUI:DefaultIcon>
     <KistlBase:Description>Represents a Document</KistlBase:Description>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
+    <KistlBase:Name>Blob</KistlBase:Name>
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
@@ -1475,11 +1475,11 @@
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="2fe66550-c506-4a60-ac88-19db27bf1f4b">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.327Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>BoolParameter</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.327Z</KistlBase:CreatedOn>
     <GUI:DefaultIcon>267ce6ec-7982-46d3-b1bc-2e1ea6adf815</GUI:DefaultIcon>
     <KistlBase:Description>Metadefinition Object for Bool Parameter.</KistlBase:Description>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
+    <KistlBase:Name>BoolParameter</KistlBase:Name>
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
@@ -1492,11 +1492,11 @@
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="3604a7b6-dffb-44ee-8464-5f292d7a0687">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.327Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>BoolProperty</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.327Z</KistlBase:CreatedOn>
     <GUI:DefaultIcon>82552e60-5677-439e-af81-5eafb194f784</GUI:DefaultIcon>
     <KistlBase:Description>Metadefinition Object for Bool Properties.</KistlBase:Description>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
+    <KistlBase:Name>BoolProperty</KistlBase:Name>
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
@@ -1509,10 +1509,10 @@
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="8708c578-6e55-4349-ba24-ede46ca6f585">
     <KistlBase:ChangedOn>2010-01-05T13:31:48.033Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>CalculatedObjectReferenceProperty</KistlBase:ClassName>
     <KistlBase:CreatedOn>2010-01-05T13:25:04.103Z</KistlBase:CreatedOn>
     <KistlBase:Description>a object reference that is calculated from the contents of the containing class</KistlBase:Description>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
+    <KistlBase:Name>CalculatedObjectReferenceProperty</KistlBase:Name>
     <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
@@ -1525,11 +1525,11 @@
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="012dfab4-934b-443e-853a-11a5da5b0627">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.327Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>CLRObjectParameter</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.327Z</KistlBase:CreatedOn>
     <GUI:DefaultIcon>267ce6ec-7982-46d3-b1bc-2e1ea6adf815</GUI:DefaultIcon>
     <KistlBase:Description>Metadefinition Object for CLR Object Parameter.</KistlBase:Description>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
+    <KistlBase:Name>CLRObjectParameter</KistlBase:Name>
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
@@ -1542,11 +1542,11 @@
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="2cb3f778-dd6a-46c7-ad2b-5f8691313035">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.33Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>CompoundObject</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.33Z</KistlBase:CreatedOn>
     <GUI:DefaultIcon>965f1565-ab16-480f-9bcc-178b0a0d6fec</GUI:DefaultIcon>
     <KistlBase:Description>Metadefinition Object for Compound Objects.</KistlBase:Description>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
+    <KistlBase:Name>CompoundObject</KistlBase:Name>
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
@@ -1559,11 +1559,11 @@
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="7b5ba73f-91f4-4542-9542-4f418b5c109f">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.33Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>CompoundObjectProperty</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.33Z</KistlBase:CreatedOn>
     <GUI:DefaultIcon>82552e60-5677-439e-af81-5eafb194f784</GUI:DefaultIcon>
     <KistlBase:Description>Metadefinition Object for Compound Object Properties.</KistlBase:Description>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
+    <KistlBase:Name>CompoundObjectProperty</KistlBase:Name>
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
@@ -1576,11 +1576,11 @@
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="e9c42d4e-78a5-405e-a30f-ad0a665e6e5d">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.327Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>ConsistentNavigatorConstraint</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.327Z</KistlBase:CreatedOn>
     <GUI:DefaultIcon>1b618ac3-cd62-4425-8bb3-4dba99172b1a</GUI:DefaultIcon>
     <KistlBase:Description>Checks whether a Navigator on a RelationEnd is consistent with the Relation's definition</KistlBase:Description>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
+    <KistlBase:Name>ConsistentNavigatorConstraint</KistlBase:Name>
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
@@ -1593,10 +1593,10 @@
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="ac1d5ac9-d909-438f-a4f5-f64ea6904944">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.327Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>Constraint</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.327Z</KistlBase:CreatedOn>
     <KistlBase:Description />
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
+    <KistlBase:Name>Constraint</KistlBase:Name>
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
@@ -1608,9 +1608,9 @@
   </KistlBase:ObjectClass>
   <KistlBase:Enumeration ExportGuid="89eea80f-b5fd-4972-9163-9bbfef61c747">
     <KistlBase:ChangedOn>2010-03-12T10:01:52.953Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>ContainmentSpecification</KistlBase:ClassName>
     <KistlBase:CreatedOn>2010-03-12T10:01:52.953Z</KistlBase:CreatedOn>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
+    <KistlBase:Name>ContainmentSpecification</KistlBase:Name>
     <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
@@ -1618,11 +1618,11 @@
   </KistlBase:Enumeration>
   <KistlBase:ObjectClass ExportGuid="b276a0f6-cc89-473d-9dce-2efcf3efdd37">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.327Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>CurrentSchema</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.327Z</KistlBase:CreatedOn>
     <GUI:DefaultIcon>1b618ac3-cd62-4425-8bb3-4dba99172b1a</GUI:DefaultIcon>
     <KistlBase:Description>Describes the currently loaded physical database schema</KistlBase:Description>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
+    <KistlBase:Name>CurrentSchema</KistlBase:Name>
     <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
@@ -1634,11 +1634,11 @@
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="6f005f31-c09c-45f9-9bcb-44090ebf0d1f">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.327Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>DataType</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.327Z</KistlBase:CreatedOn>
     <GUI:DefaultIcon>965f1565-ab16-480f-9bcc-178b0a0d6fec</GUI:DefaultIcon>
     <KistlBase:Description>Base Metadefinition Object for Objectclasses, Interfaces, CompoundObjects and Enumerations.</KistlBase:Description>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
+    <KistlBase:Name>DataType</KistlBase:Name>
     <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
@@ -1650,11 +1650,11 @@
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="cd6e3f93-5a1d-4c56-bec7-59a951d9fed6">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.327Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>DateTimeParameter</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.327Z</KistlBase:CreatedOn>
     <GUI:DefaultIcon>267ce6ec-7982-46d3-b1bc-2e1ea6adf815</GUI:DefaultIcon>
     <KistlBase:Description>Metadefinition Object for DateTime Parameter.</KistlBase:Description>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
+    <KistlBase:Name>DateTimeParameter</KistlBase:Name>
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
@@ -1667,11 +1667,11 @@
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="1caadf11-7b95-4c68-8b42-87ac51b01ea0">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.327Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>DateTimeProperty</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.327Z</KistlBase:CreatedOn>
     <GUI:DefaultIcon>82552e60-5677-439e-af81-5eafb194f784</GUI:DefaultIcon>
     <KistlBase:Description>Metadefinition Object for DateTime Properties.</KistlBase:Description>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
+    <KistlBase:Name>DateTimeProperty</KistlBase:Name>
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
@@ -1684,9 +1684,9 @@
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="74785c72-3271-4fb7-95fc-86b0baa09c8e">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.327Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>DefaultPropertyValue</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.327Z</KistlBase:CreatedOn>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
+    <KistlBase:Name>DefaultPropertyValue</KistlBase:Name>
     <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
@@ -1698,11 +1698,11 @@
   </KistlBase:ObjectClass>
   <KistlBase:Enumeration ExportGuid="2b0b1986-0337-4d90-ad59-bc9d1ad82b2b">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.327Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>DeploymentRestriction</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.327Z</KistlBase:CreatedOn>
     <GUI:DefaultIcon>1b618ac3-cd62-4425-8bb3-4dba99172b1a</GUI:DefaultIcon>
     <KistlBase:Description>Deployment restriction for items</KistlBase:Description>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
+    <KistlBase:Name>DeploymentRestriction</KistlBase:Name>
     <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
@@ -1710,11 +1710,11 @@
   </KistlBase:Enumeration>
   <KistlBase:ObjectClass ExportGuid="74aa31e4-4dcf-46d5-a8b4-aa02b82bd2df">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.327Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>DoubleParameter</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.327Z</KistlBase:CreatedOn>
     <GUI:DefaultIcon>267ce6ec-7982-46d3-b1bc-2e1ea6adf815</GUI:DefaultIcon>
     <KistlBase:Description>Metadefinition Object for Double Parameter.</KistlBase:Description>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
+    <KistlBase:Name>DoubleParameter</KistlBase:Name>
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
@@ -1727,11 +1727,11 @@
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="404782b3-fbbc-4190-9b96-43dad7177090">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.327Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>DoubleProperty</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.327Z</KistlBase:CreatedOn>
     <GUI:DefaultIcon>82552e60-5677-439e-af81-5eafb194f784</GUI:DefaultIcon>
     <KistlBase:Description>Metadefinition Object for Double Properties.</KistlBase:Description>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
+    <KistlBase:Name>DoubleProperty</KistlBase:Name>
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
@@ -1744,11 +1744,11 @@
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="ee475de2-d626-49e9-9e40-6bb12cb026d4">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.327Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>Enumeration</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.327Z</KistlBase:CreatedOn>
     <GUI:DefaultIcon>0f4acffa-6dc8-4d87-89ee-2d21cfa3d088</GUI:DefaultIcon>
     <KistlBase:Description>Metadefinition Object for Enumerations.</KistlBase:Description>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
+    <KistlBase:Name>Enumeration</KistlBase:Name>
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
@@ -1761,11 +1761,11 @@
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="6365c62d-60a6-4fa3-9c78-370ffcc50478">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.327Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>EnumerationEntry</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.327Z</KistlBase:CreatedOn>
     <GUI:DefaultIcon>0f4acffa-6dc8-4d87-89ee-2d21cfa3d088</GUI:DefaultIcon>
     <KistlBase:Description>Metadefinition Object for an Enumeration Entry.</KistlBase:Description>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
+    <KistlBase:Name>EnumerationEntry</KistlBase:Name>
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
@@ -1777,11 +1777,11 @@
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="19a8d9f0-4de6-4cc9-a75d-c1499e3a103b">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.327Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>EnumerationProperty</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.327Z</KistlBase:CreatedOn>
     <GUI:DefaultIcon>82552e60-5677-439e-af81-5eafb194f784</GUI:DefaultIcon>
     <KistlBase:Description>Metadefinition Object for Enumeration Properties.</KistlBase:Description>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
+    <KistlBase:Name>EnumerationProperty</KistlBase:Name>
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
@@ -1794,9 +1794,9 @@
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="01a06aef-8fe4-4cb6-b348-ee4bcd11f5af">
     <KistlBase:ChangedOn>2010-02-02T19:06:08.673Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>Group</KistlBase:ClassName>
     <KistlBase:CreatedOn>2010-01-29T11:00:16.267Z</KistlBase:CreatedOn>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
+    <KistlBase:Name>Group</KistlBase:Name>
     <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
@@ -1808,9 +1808,9 @@
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="acf18a64-5fc0-4610-b083-9893eea0776c">
     <KistlBase:ChangedOn>2010-01-29T16:58:28.797Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>GroupMembership</KistlBase:ClassName>
     <KistlBase:CreatedOn>2010-01-29T16:58:28.797Z</KistlBase:CreatedOn>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
+    <KistlBase:Name>GroupMembership</KistlBase:Name>
     <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
@@ -1823,11 +1823,11 @@
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="bd34d049-2b64-47f4-8d79-932008d0cf72">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.327Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>GuidProperty</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.327Z</KistlBase:CreatedOn>
     <GUI:DefaultIcon>82552e60-5677-439e-af81-5eafb194f784</GUI:DefaultIcon>
     <KistlBase:Description>Guid Property</KistlBase:Description>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
+    <KistlBase:Name>GuidProperty</KistlBase:Name>
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
@@ -1840,22 +1840,22 @@
   </KistlBase:ObjectClass>
   <KistlBase:Interface ExportGuid="a73f2d0a-786b-483d-b474-b9d9df42b8b3">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.327Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>IChangedBy</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.327Z</KistlBase:CreatedOn>
     <GUI:DefaultIcon>5750d096-cf4d-4757-9228-62df7697d758</GUI:DefaultIcon>
     <KistlBase:Description>IChangedBy</KistlBase:Description>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
+    <KistlBase:Name>IChangedBy</KistlBase:Name>
     <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
   </KistlBase:Interface>
   <KistlBase:ObjectClass ExportGuid="31d8890a-67fc-4a78-9d35-9ff0b9e09b4c">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.327Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>Identity</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.327Z</KistlBase:CreatedOn>
     <GUI:DefaultIcon>8e37eb7b-f38d-4229-96c5-5a593fe8db56</GUI:DefaultIcon>
     <KistlBase:Description>Represents an Identity</KistlBase:Description>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
+    <KistlBase:Name>Identity</KistlBase:Name>
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
@@ -1867,29 +1867,29 @@
   </KistlBase:ObjectClass>
   <KistlBase:Interface ExportGuid="4ae6616a-eca3-47a5-b502-8e3c3913c2f0">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.327Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>IExportable</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.327Z</KistlBase:CreatedOn>
     <GUI:DefaultIcon>5750d096-cf4d-4757-9228-62df7697d758</GUI:DefaultIcon>
     <KistlBase:Description>Marks a DataType as exportable</KistlBase:Description>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
+    <KistlBase:Name>IExportable</KistlBase:Name>
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
   </KistlBase:Interface>
   <KistlBase:Interface ExportGuid="0999effb-c645-45e1-b3c2-5654530d0acb">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.327Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>IInvocation</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.327Z</KistlBase:CreatedOn>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
+    <KistlBase:Name>IInvocation</KistlBase:Name>
     <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
   </KistlBase:Interface>
   <KistlBase:ObjectClass ExportGuid="25a83f49-3cff-4baf-850d-8d185bb329ec">
     <KistlBase:ChangedOn>2010-01-05T10:37:36.07Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>InstanceConstraint</KistlBase:ClassName>
     <KistlBase:CreatedOn>2010-01-05T10:37:36.07Z</KistlBase:CreatedOn>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
+    <KistlBase:Name>InstanceConstraint</KistlBase:Name>
     <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
@@ -1901,10 +1901,10 @@
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="31b03f62-b0d6-49ab-81e9-f912077d4e49">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.327Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>IntegerRangeConstraint</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.327Z</KistlBase:CreatedOn>
     <KistlBase:Description />
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
+    <KistlBase:Name>IntegerRangeConstraint</KistlBase:Name>
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
@@ -1917,11 +1917,11 @@
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="7ea88d99-88f0-44a7-b0a3-da725e57595d">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.327Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>Interface</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.327Z</KistlBase:CreatedOn>
     <GUI:DefaultIcon>965f1565-ab16-480f-9bcc-178b0a0d6fec</GUI:DefaultIcon>
     <KistlBase:Description>Metadefinition Object for Interfaces.</KistlBase:Description>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
+    <KistlBase:Name>Interface</KistlBase:Name>
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
@@ -1934,11 +1934,11 @@
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="24fb74a4-0d21-49d5-9c81-2ded8948d4d4">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.327Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>IntParameter</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.327Z</KistlBase:CreatedOn>
     <GUI:DefaultIcon>267ce6ec-7982-46d3-b1bc-2e1ea6adf815</GUI:DefaultIcon>
     <KistlBase:Description>Metadefinition Object for Int Parameter.</KistlBase:Description>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
+    <KistlBase:Name>IntParameter</KistlBase:Name>
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
@@ -1951,11 +1951,11 @@
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="6f818a25-4513-4fd3-8ed1-a92429d3910d">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.327Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>IntProperty</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.327Z</KistlBase:CreatedOn>
     <GUI:DefaultIcon>82552e60-5677-439e-af81-5eafb194f784</GUI:DefaultIcon>
     <KistlBase:Description>Metadefinition Object for Int Properties.</KistlBase:Description>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
+    <KistlBase:Name>IntProperty</KistlBase:Name>
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
@@ -1968,10 +1968,10 @@
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="ed8f30ad-186f-48ee-8dd5-a153d24dfada">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.327Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>IsValidIdentifierConstraint</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.327Z</KistlBase:CreatedOn>
     <KistlBase:Description />
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
+    <KistlBase:Name>IsValidIdentifierConstraint</KistlBase:Name>
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
@@ -1984,10 +1984,10 @@
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="94916227-138b-49e5-b62e-b982a45a5c21">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.327Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>IsValidNamespaceConstraint</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.327Z</KistlBase:CreatedOn>
     <KistlBase:Description />
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
+    <KistlBase:Name>IsValidNamespaceConstraint</KistlBase:Name>
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
@@ -2000,11 +2000,11 @@
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="ef79c0b9-55e0-45ad-8233-1ff8f852661f">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.327Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>Method</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.327Z</KistlBase:CreatedOn>
     <GUI:DefaultIcon>ab326b2e-6cbb-421e-ba3a-0b40ae09c002</GUI:DefaultIcon>
     <KistlBase:Description>Metadefinition Object for Methods.</KistlBase:Description>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
+    <KistlBase:Name>Method</KistlBase:Name>
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
@@ -2016,11 +2016,11 @@
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="f6e7bb30-3adf-4d49-a80c-6ea7b589afa7">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.327Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>MethodInvocation</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.327Z</KistlBase:CreatedOn>
     <GUI:DefaultIcon>ab326b2e-6cbb-421e-ba3a-0b40ae09c002</GUI:DefaultIcon>
     <KistlBase:Description>Metadefinition Object for a MethodInvocation on a Method of a DataType.</KistlBase:Description>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
+    <KistlBase:Name>MethodInvocation</KistlBase:Name>
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
@@ -2032,10 +2032,10 @@
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="2667704b-ea27-44ff-a6b2-0ef42ffccedc">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.327Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>MethodInvocationConstraint</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.327Z</KistlBase:CreatedOn>
     <KistlBase:Description />
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
+    <KistlBase:Name>MethodInvocationConstraint</KistlBase:Name>
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
@@ -2048,11 +2048,11 @@
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="8a1ace7c-77f2-4b48-9b0b-bcb68c660d11">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.327Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>Module</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.327Z</KistlBase:CreatedOn>
     <GUI:DefaultIcon>fdbaa130-0be2-400b-9a4d-94d2ccaf00b7</GUI:DefaultIcon>
     <KistlBase:Description>Metadefinition Object for Modules.</KistlBase:Description>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
+    <KistlBase:Name>Module</KistlBase:Name>
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
@@ -2064,10 +2064,10 @@
   </KistlBase:ObjectClass>
   <KistlBase:Enumeration ExportGuid="4f2b5005-672e-46ef-80ed-94b8cdd053db">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.327Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>Multiplicity</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.327Z</KistlBase:CreatedOn>
     <KistlBase:Description>Describes the multiplicities of objects on RelationEnds</KistlBase:Description>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
+    <KistlBase:Name>Multiplicity</KistlBase:Name>
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
@@ -2075,11 +2075,11 @@
   </KistlBase:Enumeration>
   <KistlBase:ObjectClass ExportGuid="a9fc1ec8-a91e-4569-b311-ec85c22a15c3">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.327Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>NewGuidDefaultValue</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.327Z</KistlBase:CreatedOn>
     <GUI:DefaultIcon>1b618ac3-cd62-4425-8bb3-4dba99172b1a</GUI:DefaultIcon>
     <KistlBase:Description>Creates a new Guid</KistlBase:Description>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
+    <KistlBase:Name>NewGuidDefaultValue</KistlBase:Name>
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
@@ -2092,10 +2092,10 @@
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="8604ef0c-f933-4f66-b7df-21d27c9003b2">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.327Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>NotNullableConstraint</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.327Z</KistlBase:CreatedOn>
     <KistlBase:Description />
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
+    <KistlBase:Name>NotNullableConstraint</KistlBase:Name>
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
@@ -2108,11 +2108,11 @@
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="20888dfc-1fbc-47c8-9f3c-c6a30a5c0048">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.327Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>ObjectClass</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.327Z</KistlBase:CreatedOn>
     <GUI:DefaultIcon>965f1565-ab16-480f-9bcc-178b0a0d6fec</GUI:DefaultIcon>
     <KistlBase:Description>Metadefinition Object for ObjectClasses.</KistlBase:Description>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
+    <KistlBase:Name>ObjectClass</KistlBase:Name>
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
@@ -2125,11 +2125,11 @@
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="3fb8bf11-cab6-478f-b9b8-3f6d70a70d37">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.33Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>ObjectParameter</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.33Z</KistlBase:CreatedOn>
     <GUI:DefaultIcon>267ce6ec-7982-46d3-b1bc-2e1ea6adf815</GUI:DefaultIcon>
     <KistlBase:Description>Metadefinition Object for Object Parameter.</KistlBase:Description>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
+    <KistlBase:Name>ObjectParameter</KistlBase:Name>
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
@@ -2142,11 +2142,11 @@
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="93241989-0bb0-435f-b6e5-06fdbbf19e5d">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.33Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>ObjectReferencePlaceholderProperty</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.33Z</KistlBase:CreatedOn>
     <GUI:DefaultIcon>82552e60-5677-439e-af81-5eafb194f784</GUI:DefaultIcon>
     <KistlBase:Description>A placeholder for data object references in interfaces</KistlBase:Description>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
+    <KistlBase:Name>ObjectReferencePlaceholderProperty</KistlBase:Name>
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
@@ -2159,11 +2159,11 @@
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="f1baf69c-a341-4a3a-b321-e782e1458e87">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.33Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>ObjectReferenceProperty</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.33Z</KistlBase:CreatedOn>
     <GUI:DefaultIcon>82552e60-5677-439e-af81-5eafb194f784</GUI:DefaultIcon>
     <KistlBase:Description>Metadefinition Object for ObjectReference Properties.</KistlBase:Description>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
+    <KistlBase:Name>ObjectReferenceProperty</KistlBase:Name>
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
@@ -2176,11 +2176,11 @@
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="e5f93f63-9cb8-40a5-8118-d1d9e479370c">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.33Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>Property</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.33Z</KistlBase:CreatedOn>
     <GUI:DefaultIcon>82552e60-5677-439e-af81-5eafb194f784</GUI:DefaultIcon>
     <KistlBase:Description>Metadefinition Object for Properties. This class is abstract.</KistlBase:Description>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
+    <KistlBase:Name>Property</KistlBase:Name>
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
@@ -2192,9 +2192,9 @@
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="24defe28-fc33-4f74-bf69-395ffa7a74f5">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.33Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>PropertyInvocation</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.33Z</KistlBase:CreatedOn>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
+    <KistlBase:Name>PropertyInvocation</KistlBase:Name>
     <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
@@ -2206,9 +2206,9 @@
   </KistlBase:ObjectClass>
   <KistlBase:Enumeration ExportGuid="a05a5bcf-c952-4017-947e-6a63b2464739">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.33Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>PropertyInvocationType</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.33Z</KistlBase:CreatedOn>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
+    <KistlBase:Name>PropertyInvocationType</KistlBase:Name>
     <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
@@ -2216,11 +2216,11 @@
   </KistlBase:Enumeration>
   <KistlBase:ObjectClass ExportGuid="1c0e894f-4eb4-422f-8094-3095735b4917">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.33Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>Relation</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.33Z</KistlBase:CreatedOn>
     <GUI:DefaultIcon>965f1565-ab16-480f-9bcc-178b0a0d6fec</GUI:DefaultIcon>
     <KistlBase:Description>Describes a Relation between two Object Classes</KistlBase:Description>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
+    <KistlBase:Name>Relation</KistlBase:Name>
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
@@ -2232,10 +2232,10 @@
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="07817322-d4b9-4dd8-8464-bcb6745fef34">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.33Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>RelationEnd</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.33Z</KistlBase:CreatedOn>
     <KistlBase:Description>Describes one end of a relation between two object classes</KistlBase:Description>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
+    <KistlBase:Name>RelationEnd</KistlBase:Name>
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
@@ -2247,9 +2247,9 @@
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="3b79d759-2943-4caa-bf6f-5e89955f7f91">
     <KistlBase:ChangedOn>2010-01-29T16:54:15.567Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>RoleMembership</KistlBase:ClassName>
     <KistlBase:CreatedOn>2010-01-29T16:54:15.567Z</KistlBase:CreatedOn>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
+    <KistlBase:Name>RoleMembership</KistlBase:Name>
     <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
@@ -2262,11 +2262,11 @@
   </KistlBase:ObjectClass>
   <KistlBase:Enumeration ExportGuid="351a22e8-d047-4878-b6d3-3945489139a0">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.33Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>StorageType</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.33Z</KistlBase:CreatedOn>
     <GUI:DefaultIcon>5750d096-cf4d-4757-9228-62df7697d758</GUI:DefaultIcon>
     <KistlBase:Description>Storage Type of a 1:1 Releation.</KistlBase:Description>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
+    <KistlBase:Name>StorageType</KistlBase:Name>
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
@@ -2274,11 +2274,11 @@
   </KistlBase:Enumeration>
   <KistlBase:ObjectClass ExportGuid="d3eee1cb-313d-465a-8a06-732ac119bc75">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.33Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>StringParameter</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.33Z</KistlBase:CreatedOn>
     <GUI:DefaultIcon>267ce6ec-7982-46d3-b1bc-2e1ea6adf815</GUI:DefaultIcon>
     <KistlBase:Description>Metadefinition Object for String Parameter.</KistlBase:Description>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
+    <KistlBase:Name>StringParameter</KistlBase:Name>
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
@@ -2291,11 +2291,11 @@
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="539d6b20-f0cb-461b-b087-a522fec6c838">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.33Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>StringProperty</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.33Z</KistlBase:CreatedOn>
     <GUI:DefaultIcon>82552e60-5677-439e-af81-5eafb194f784</GUI:DefaultIcon>
     <KistlBase:Description>Metadefinition Object for String Properties.</KistlBase:Description>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
+    <KistlBase:Name>StringProperty</KistlBase:Name>
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
@@ -2308,10 +2308,10 @@
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="7bb90dc3-2b8c-4cff-ba8e-435ff386a4cf">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.33Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>StringRangeConstraint</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.33Z</KistlBase:CreatedOn>
     <KistlBase:Description />
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
+    <KistlBase:Name>StringRangeConstraint</KistlBase:Name>
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
@@ -2324,11 +2324,11 @@
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="87766ae2-89a4-4c37-ab25-583a710c55e5">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.33Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>TypeRef</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.33Z</KistlBase:CreatedOn>
     <GUI:DefaultIcon>ab326b2e-6cbb-421e-ba3a-0b40ae09c002</GUI:DefaultIcon>
     <KistlBase:Description>This class models a reference to a specific, concrete Type. Generic Types have all parameters filled.</KistlBase:Description>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
+    <KistlBase:Name>TypeRef</KistlBase:Name>
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
@@ -2340,11 +2340,11 @@
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="b0c23c07-950f-47a0-af23-a925dc691b3e">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.33Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>ValueTypeProperty</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.33Z</KistlBase:CreatedOn>
     <GUI:DefaultIcon>82552e60-5677-439e-af81-5eafb194f784</GUI:DefaultIcon>
     <KistlBase:Description>Metadefinition Object for ValueType Properties. This class is abstract.</KistlBase:Description>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
+    <KistlBase:Name>ValueTypeProperty</KistlBase:Name>
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
@@ -3235,19 +3235,6 @@
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:IsList>false</KistlBase:IsList>
   </KistlBase:DateTimeProperty>
-  <KistlBase:StringProperty ExportGuid="083bbf12-aac6-4f5f-802a-d3701550bc84">
-    <KistlBase:CategoryTags>Summary</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2009-12-14T17:08:05.337Z</KistlBase:ChangedOn>
-    <KistlBase:CreatedOn>2009-12-14T17:08:05.337Z</KistlBase:CreatedOn>
-    <KistlBase:Description>Der Name der Objektklasse</KistlBase:Description>
-    <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
-    <KistlBase:ObjectClass>6f005f31-c09c-45f9-9bcb-44090ebf0d1f</KistlBase:ObjectClass>
-    <KistlBase:ObjectClass_pos>1300</KistlBase:ObjectClass_pos>
-    <KistlBase:PropertyName>ClassName</KistlBase:PropertyName>
-    <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
-    <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
-    <KistlBase:IsList>false</KistlBase:IsList>
-  </KistlBase:StringProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="5c2ec701-9e7e-4340-a463-4fc2b8204f5d">
     <KistlBase:CategoryTags>Changed</KistlBase:CategoryTags>
     <KistlBase:ChangedOn>2009-12-14T17:08:05.337Z</KistlBase:ChangedOn>
@@ -3340,6 +3327,19 @@
     <KistlBase:EagerLoading>true</KistlBase:EagerLoading>
     <KistlBase:RelationEnd>8b2ca723-0ce5-43b3-9ee0-d09c7edb776c</KistlBase:RelationEnd>
   </KistlBase:ObjectReferenceProperty>
+  <KistlBase:StringProperty ExportGuid="083bbf12-aac6-4f5f-802a-d3701550bc84">
+    <KistlBase:CategoryTags>Summary</KistlBase:CategoryTags>
+    <KistlBase:ChangedOn>2009-12-14T17:08:05.337Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2009-12-14T17:08:05.337Z</KistlBase:CreatedOn>
+    <KistlBase:Description>Der Name der Objektklasse</KistlBase:Description>
+    <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
+    <KistlBase:ObjectClass>6f005f31-c09c-45f9-9bcb-44090ebf0d1f</KistlBase:ObjectClass>
+    <KistlBase:ObjectClass_pos>1300</KistlBase:ObjectClass_pos>
+    <KistlBase:PropertyName>Name</KistlBase:PropertyName>
+    <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
+    <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
+    <KistlBase:IsList>false</KistlBase:IsList>
+  </KistlBase:StringProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="e7d91162-0aa8-4fe3-9e29-d0519781ceb7">
     <KistlBase:CategoryTags>DataModel</KistlBase:CategoryTags>
     <KistlBase:ChangedOn>2009-12-14T17:08:05.337Z</KistlBase:ChangedOn>
@@ -10701,24 +10701,6 @@
     <KistlBase:ConstrainedProperty>193c24c4-5a42-418e-8ed8-6e1689beca50</KistlBase:ConstrainedProperty>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.383Z</KistlBase:CreatedOn>
   </KistlBase:NotNullableConstraint>
-  <KistlBase:IsValidIdentifierConstraint ExportGuid="c0facd37-aec9-4716-b969-339b2fc361d5">
-    <KistlBase:ChangedOn>2009-12-14T17:08:05.383Z</KistlBase:ChangedOn>
-    <KistlBase:ConstrainedProperty>083bbf12-aac6-4f5f-802a-d3701550bc84</KistlBase:ConstrainedProperty>
-    <KistlBase:CreatedOn>2009-12-14T17:08:05.383Z</KistlBase:CreatedOn>
-  </KistlBase:IsValidIdentifierConstraint>
-  <KistlBase:NotNullableConstraint ExportGuid="4bf7cf4b-bc50-4a2d-8686-6f9b2480cee7">
-    <KistlBase:ChangedOn>2009-12-14T17:08:05.383Z</KistlBase:ChangedOn>
-    <KistlBase:ConstrainedProperty>083bbf12-aac6-4f5f-802a-d3701550bc84</KistlBase:ConstrainedProperty>
-    <KistlBase:CreatedOn>2009-12-14T17:08:05.383Z</KistlBase:CreatedOn>
-  </KistlBase:NotNullableConstraint>
-  <KistlBase:StringRangeConstraint ExportGuid="4b7fea07-8714-4280-96dc-33bdededc0b2">
-    <KistlBase:ChangedOn>2009-12-14T17:08:05.383Z</KistlBase:ChangedOn>
-    <KistlBase:ConstrainedProperty>083bbf12-aac6-4f5f-802a-d3701550bc84</KistlBase:ConstrainedProperty>
-    <KistlBase:CreatedOn>2009-12-14T17:08:05.383Z</KistlBase:CreatedOn>
-    <KistlBase:Reason>Classes should have a non-empty name. Names longer than 51 become unwieldy.</KistlBase:Reason>
-    <KistlBase:MaxLength>51</KistlBase:MaxLength>
-    <KistlBase:MinLength>1</KistlBase:MinLength>
-  </KistlBase:StringRangeConstraint>
   <KistlBase:StringRangeConstraint ExportGuid="b7bb2f92-c1e4-405f-bcb3-6de8969d134d">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.383Z</KistlBase:ChangedOn>
     <KistlBase:ConstrainedProperty>2cffd4f2-cb84-4f39-9bd1-19fd2e160bad</KistlBase:ConstrainedProperty>
@@ -10741,6 +10723,24 @@
     <KistlBase:ConstrainedProperty>4e1fb30b-e528-4968-95b0-f3a38eafe643</KistlBase:ConstrainedProperty>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.383Z</KistlBase:CreatedOn>
   </KistlBase:NotNullableConstraint>
+  <KistlBase:IsValidIdentifierConstraint ExportGuid="c0facd37-aec9-4716-b969-339b2fc361d5">
+    <KistlBase:ChangedOn>2009-12-14T17:08:05.383Z</KistlBase:ChangedOn>
+    <KistlBase:ConstrainedProperty>083bbf12-aac6-4f5f-802a-d3701550bc84</KistlBase:ConstrainedProperty>
+    <KistlBase:CreatedOn>2009-12-14T17:08:05.383Z</KistlBase:CreatedOn>
+  </KistlBase:IsValidIdentifierConstraint>
+  <KistlBase:NotNullableConstraint ExportGuid="4bf7cf4b-bc50-4a2d-8686-6f9b2480cee7">
+    <KistlBase:ChangedOn>2009-12-14T17:08:05.383Z</KistlBase:ChangedOn>
+    <KistlBase:ConstrainedProperty>083bbf12-aac6-4f5f-802a-d3701550bc84</KistlBase:ConstrainedProperty>
+    <KistlBase:CreatedOn>2009-12-14T17:08:05.383Z</KistlBase:CreatedOn>
+  </KistlBase:NotNullableConstraint>
+  <KistlBase:StringRangeConstraint ExportGuid="4b7fea07-8714-4280-96dc-33bdededc0b2">
+    <KistlBase:ChangedOn>2009-12-14T17:08:05.383Z</KistlBase:ChangedOn>
+    <KistlBase:ConstrainedProperty>083bbf12-aac6-4f5f-802a-d3701550bc84</KistlBase:ConstrainedProperty>
+    <KistlBase:CreatedOn>2009-12-14T17:08:05.383Z</KistlBase:CreatedOn>
+    <KistlBase:Reason>Classes should have a non-empty name. Names longer than 51 become unwieldy.</KistlBase:Reason>
+    <KistlBase:MaxLength>51</KistlBase:MaxLength>
+    <KistlBase:MinLength>1</KistlBase:MinLength>
+  </KistlBase:StringRangeConstraint>
   <KistlBase:NotNullableConstraint ExportGuid="5a5cbd0e-f788-4c35-ad91-22c36f8708eb">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.383Z</KistlBase:ChangedOn>
     <KistlBase:ConstrainedProperty>e672de1a-e0f4-4613-9d1f-121ba543c2ec</KistlBase:ConstrainedProperty>
@@ -12006,11 +12006,11 @@
   </KistlBase:Module>
   <GUI:ControlKindClass ExportGuid="98aeb643-d367-46e6-a961-4c627cdf7387">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.397Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>ActionKind</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.397Z</KistlBase:CreatedOn>
     <GUI:DefaultIcon>82552e60-5677-439e-af81-5eafb194f784</GUI:DefaultIcon>
     <KistlBase:Description>Represent an user action or menu item</KistlBase:Description>
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
+    <KistlBase:Name>ActionKind</KistlBase:Name>
     <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
@@ -12023,11 +12023,11 @@
   </GUI:ControlKindClass>
   <GUI:ControlKindClass ExportGuid="b3f3e922-4fce-4c33-824d-40d47381e3cd">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.4Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>CheckboxKind</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>
     <GUI:DefaultIcon>965f1565-ab16-480f-9bcc-178b0a0d6fec</GUI:DefaultIcon>
     <KistlBase:Description>Select a boolean value with a checkbox</KistlBase:Description>
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
+    <KistlBase:Name>CheckboxKind</KistlBase:Name>
     <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
@@ -12040,11 +12040,11 @@
   </GUI:ControlKindClass>
   <GUI:ControlKindClass ExportGuid="a9166f1e-9233-4d2d-8eb6-be71d724ea14">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.4Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>ControlKind</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>
     <GUI:DefaultIcon>965f1565-ab16-480f-9bcc-178b0a0d6fec</GUI:DefaultIcon>
     <KistlBase:Description>The ControlKind specifies the toolkit-independent kind or type of control that should display a given Presentable.</KistlBase:Description>
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
+    <KistlBase:Name>ControlKind</KistlBase:Name>
     <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
@@ -12056,11 +12056,11 @@
   </GUI:ControlKindClass>
   <KistlBase:ObjectClass ExportGuid="c0c6369e-90cd-4e14-ad5c-a45e9e782e2f">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.4Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>ControlKindClass</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>
     <GUI:DefaultIcon>1cb8d37f-c885-4cf0-8845-8e7333696505</GUI:DefaultIcon>
     <KistlBase:Description>Extended MetaClass for defining supported interfaces of ControlKinds</KistlBase:Description>
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
+    <KistlBase:Name>ControlKindClass</KistlBase:Name>
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
@@ -12073,11 +12073,11 @@
   </KistlBase:ObjectClass>
   <GUI:ControlKindClass ExportGuid="b91f789f-8ecb-44e2-8458-7f0d27ea027a">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.4Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>DataObjectKind</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>
     <GUI:DefaultIcon>965f1565-ab16-480f-9bcc-178b0a0d6fec</GUI:DefaultIcon>
     <KistlBase:Description>Displays a complete DataObject with all its properties</KistlBase:Description>
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
+    <KistlBase:Name>DataObjectKind</KistlBase:Name>
     <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
@@ -12090,11 +12090,11 @@
   </GUI:ControlKindClass>
   <GUI:ControlKindClass ExportGuid="c421eb80-883a-4f28-9ba0-25fa19fba103">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.4Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>DataObjectSelectionTaskKind</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>
     <GUI:DefaultIcon>965f1565-ab16-480f-9bcc-178b0a0d6fec</GUI:DefaultIcon>
     <KistlBase:Description>Choose a data object from a set of values</KistlBase:Description>
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
+    <KistlBase:Name>DataObjectSelectionTaskKind</KistlBase:Name>
     <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
@@ -12107,10 +12107,10 @@
   </GUI:ControlKindClass>
   <GUI:ControlKindClass ExportGuid="6603c126-83ec-4861-b7d1-d692ec96cc5e">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.4Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>DataObjectSummaryKind</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>
     <GUI:DefaultIcon>0f4acffa-6dc8-4d87-89ee-2d21cfa3d088</GUI:DefaultIcon>
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
+    <KistlBase:Name>DataObjectSummaryKind</KistlBase:Name>
     <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
@@ -12123,11 +12123,11 @@
   </GUI:ControlKindClass>
   <GUI:ControlKindClass ExportGuid="add058e1-2a72-4663-a0c4-9b79cd1d4537">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.4Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>EnumerationSelectorKind</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>
     <GUI:DefaultIcon>965f1565-ab16-480f-9bcc-178b0a0d6fec</GUI:DefaultIcon>
     <KistlBase:Description>Select a value fron an Enumeration</KistlBase:Description>
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
+    <KistlBase:Name>EnumerationSelectorKind</KistlBase:Name>
     <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
@@ -12140,11 +12140,11 @@
   </GUI:ControlKindClass>
   <KistlBase:ObjectClass ExportGuid="78b6f354-013b-4129-a390-7f3a5a5e28e9">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.4Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>Icon</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>
     <GUI:DefaultIcon>1cb8d37f-c885-4cf0-8845-8e7333696505</GUI:DefaultIcon>
     <KistlBase:Description />
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
+    <KistlBase:Name>Icon</KistlBase:Name>
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
@@ -12156,22 +12156,22 @@
   </KistlBase:ObjectClass>
   <KistlBase:Interface ExportGuid="2e93e071-875a-41ee-a768-5d55c2683546">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.4Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>IRenderer</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>
     <GUI:DefaultIcon>ab326b2e-6cbb-421e-ba3a-0b40ae09c002</GUI:DefaultIcon>
     <KistlBase:Description />
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
+    <KistlBase:Name>IRenderer</KistlBase:Name>
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
   </KistlBase:Interface>
   <GUI:ControlKindClass ExportGuid="e39e18d2-c7a7-4ed6-9542-4d76177c7521">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.4Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>LabelKind</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>
     <GUI:DefaultIcon>965f1565-ab16-480f-9bcc-178b0a0d6fec</GUI:DefaultIcon>
     <KistlBase:Description>A simple read-only label</KistlBase:Description>
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
+    <KistlBase:Name>LabelKind</KistlBase:Name>
     <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
@@ -12184,11 +12184,11 @@
   </GUI:ControlKindClass>
   <GUI:ControlKindClass ExportGuid="a012a762-5d8b-4aec-b396-e262cf30f9f9">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.4Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>LauncherKind</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>
     <GUI:DefaultIcon>965f1565-ab16-480f-9bcc-178b0a0d6fec</GUI:DefaultIcon>
     <KistlBase:Description>The first openend window where applications can be selected and the object tree browsed</KistlBase:Description>
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
+    <KistlBase:Name>LauncherKind</KistlBase:Name>
     <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
@@ -12201,11 +12201,11 @@
   </GUI:ControlKindClass>
   <GUI:ControlKindClass ExportGuid="0c15ef90-4410-4aec-9eea-5c46b87cb032">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.4Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>ObjectListKind</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>
     <GUI:DefaultIcon>965f1565-ab16-480f-9bcc-178b0a0d6fec</GUI:DefaultIcon>
     <KistlBase:Description>A control managing a list of objects</KistlBase:Description>
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
+    <KistlBase:Name>ObjectListKind</KistlBase:Name>
     <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
@@ -12218,10 +12218,10 @@
   </GUI:ControlKindClass>
   <GUI:ControlKindClass ExportGuid="4e6f1445-1d03-465a-b3b6-8ce6966e941c">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.4Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>ObjectRefGridCellKind</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>
     <GUI:DefaultIcon>965f1565-ab16-480f-9bcc-178b0a0d6fec</GUI:DefaultIcon>
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
+    <KistlBase:Name>ObjectRefGridCellKind</KistlBase:Name>
     <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
@@ -12234,11 +12234,11 @@
   </GUI:ControlKindClass>
   <GUI:ControlKindClass ExportGuid="27e8a0f3-ffff-4bb1-b956-c36a5a28dd14">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.4Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>ObjectRefKind</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>
     <GUI:DefaultIcon>965f1565-ab16-480f-9bcc-178b0a0d6fec</GUI:DefaultIcon>
     <KistlBase:Description>A control managing a reference to an object</KistlBase:Description>
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
+    <KistlBase:Name>ObjectRefKind</KistlBase:Name>
     <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
@@ -12251,10 +12251,10 @@
   </GUI:ControlKindClass>
   <KistlBase:ObjectClass ExportGuid="5d152c6f-6c1e-48b7-b03e-669e30468808">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.4Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>PresentableModelDescriptor</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>
     <KistlBase:Description />
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
+    <KistlBase:Name>PresentableModelDescriptor</KistlBase:Name>
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
@@ -12266,11 +12266,11 @@
   </KistlBase:ObjectClass>
   <GUI:ControlKindClass ExportGuid="68a53f9f-fbdb-4d44-8d58-da9be3812ba7">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.4Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>PropertyGroupKind</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>
     <GUI:DefaultIcon>965f1565-ab16-480f-9bcc-178b0a0d6fec</GUI:DefaultIcon>
     <KistlBase:Description>Displays a group of properties from a data object</KistlBase:Description>
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
+    <KistlBase:Name>PropertyGroupKind</KistlBase:Name>
     <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
@@ -12283,11 +12283,11 @@
   </GUI:ControlKindClass>
   <GUI:ControlKindClass ExportGuid="5624100a-9fed-44c0-822e-d174c4c9cb45">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.4Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>RelationEditorKind</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>
     <GUI:DefaultIcon>59c6ef01-66e7-411e-8326-c16f593ec5e7</GUI:DefaultIcon>
     <KistlBase:Description>A special editor for relations</KistlBase:Description>
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
+    <KistlBase:Name>RelationEditorKind</KistlBase:Name>
     <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
@@ -12300,11 +12300,11 @@
   </GUI:ControlKindClass>
   <GUI:ControlKindClass ExportGuid="bbd088cc-c68c-46de-a89e-6e1e6f768245">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.4Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>SingleLineDataObjectKind</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>
     <GUI:DefaultIcon>965f1565-ab16-480f-9bcc-178b0a0d6fec</GUI:DefaultIcon>
     <KistlBase:Description>Presents a data object in a single line</KistlBase:Description>
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
+    <KistlBase:Name>SingleLineDataObjectKind</KistlBase:Name>
     <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
@@ -12317,10 +12317,10 @@
   </GUI:ControlKindClass>
   <GUI:ControlKindClass ExportGuid="a3207646-c6a6-4ecc-89cb-31bf28dbc6ac">
     <KistlBase:ChangedOn>2009-12-15T11:39:03.85Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>StringListKind</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-15T11:39:03.85Z</KistlBase:CreatedOn>
     <GUI:DefaultIcon>0f4acffa-6dc8-4d87-89ee-2d21cfa3d088</GUI:DefaultIcon>
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
+    <KistlBase:Name>StringListKind</KistlBase:Name>
     <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
@@ -12333,11 +12333,11 @@
   </GUI:ControlKindClass>
   <GUI:ControlKindClass ExportGuid="c6ed9c8e-e7b4-47af-948e-93bef8c7e1f8">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.4Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>StringSelectorKind</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>
     <GUI:DefaultIcon>965f1565-ab16-480f-9bcc-178b0a0d6fec</GUI:DefaultIcon>
     <KistlBase:Description>Select a string fron a set of values</KistlBase:Description>
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
+    <KistlBase:Name>StringSelectorKind</KistlBase:Name>
     <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
@@ -12350,10 +12350,10 @@
   </GUI:ControlKindClass>
   <KistlBase:ObjectClass ExportGuid="c677d3fe-7dfe-4ea5-91e0-d1b0df9118be">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.4Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>Template</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>
     <KistlBase:Description />
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
+    <KistlBase:Name>Template</KistlBase:Name>
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
@@ -12365,11 +12365,11 @@
   </KistlBase:ObjectClass>
   <GUI:ControlKindClass ExportGuid="d3f5a566-3331-4c7b-bed4-ea5166815b67">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.4Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>TextboxKind</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>
     <GUI:DefaultIcon>965f1565-ab16-480f-9bcc-178b0a0d6fec</GUI:DefaultIcon>
     <KistlBase:Description>A textbox-like control</KistlBase:Description>
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
+    <KistlBase:Name>TextboxKind</KistlBase:Name>
     <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
@@ -12382,11 +12382,11 @@
   </GUI:ControlKindClass>
   <KistlBase:Enumeration ExportGuid="803fb38d-f0d2-409c-9f15-30da4bdcf576">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.4Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>Toolkit</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>
     <GUI:DefaultIcon>1cb8d37f-c885-4cf0-8845-8e7333696505</GUI:DefaultIcon>
     <KistlBase:Description />
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
+    <KistlBase:Name>Toolkit</KistlBase:Name>
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
@@ -12394,11 +12394,11 @@
   </KistlBase:Enumeration>
   <GUI:ControlKindClass ExportGuid="b474f8f2-99d2-4ae5-ac1a-203c5e51a770">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.4Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>TypeRefRefKind</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>
     <GUI:DefaultIcon>ab326b2e-6cbb-421e-ba3a-0b40ae09c002</GUI:DefaultIcon>
     <KistlBase:Description>A specifc ObjectRefKind for selecting TypeRefs</KistlBase:Description>
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
+    <KistlBase:Name>TypeRefRefKind</KistlBase:Name>
     <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
@@ -12411,10 +12411,10 @@
   </GUI:ControlKindClass>
   <KistlBase:ObjectClass ExportGuid="ffda4604-1536-43b6-b951-f8753d5092ca">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.4Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>ViewDescriptor</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>
     <KistlBase:Description />
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
+    <KistlBase:Name>ViewDescriptor</KistlBase:Name>
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
@@ -12426,10 +12426,10 @@
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="98790e5d-808f-4e0b-8a1a-b304839f07ab">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.4Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>Visual</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>
     <KistlBase:Description />
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
+    <KistlBase:Name>Visual</KistlBase:Name>
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
@@ -12441,11 +12441,11 @@
   </KistlBase:ObjectClass>
   <GUI:ControlKindClass ExportGuid="4fdf9e9c-a21c-40ab-84c2-16b2c7b7ec5f">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.4Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>WorkspaceKind</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>
     <GUI:DefaultIcon>965f1565-ab16-480f-9bcc-178b0a0d6fec</GUI:DefaultIcon>
     <KistlBase:Description>The basic workspace where multiple objects can be edited</KistlBase:Description>
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
+    <KistlBase:Name>WorkspaceKind</KistlBase:Name>
     <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
@@ -16880,11 +16880,11 @@
   </KistlBase:Module>
   <KistlBase:ObjectClass ExportGuid="f6e11d1d-a832-413a-bf1d-5ecf5f7bc79d">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.417Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>Auftrag</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.417Z</KistlBase:CreatedOn>
     <GUI:DefaultIcon>0f4acffa-6dc8-4d87-89ee-2d21cfa3d088</GUI:DefaultIcon>
     <KistlBase:Description />
     <KistlBase:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</KistlBase:Module>
+    <KistlBase:Name>Auftrag</KistlBase:Name>
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
@@ -16896,11 +16896,11 @@
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="b9ddd097-4f45-40c5-87e9-7331ab58727c">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.417Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>Kunde</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.417Z</KistlBase:CreatedOn>
     <GUI:DefaultIcon>59c6ef01-66e7-411e-8326-c16f593ec5e7</GUI:DefaultIcon>
     <KistlBase:Description />
     <KistlBase:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</KistlBase:Module>
+    <KistlBase:Name>Kunde</KistlBase:Name>
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
@@ -16912,11 +16912,11 @@
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="77933a20-338a-4961-b751-62ffa0a75c6a">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.417Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>Mitarbeiter</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.417Z</KistlBase:CreatedOn>
     <GUI:DefaultIcon>8e37eb7b-f38d-4229-96c5-5a593fe8db56</GUI:DefaultIcon>
     <KistlBase:Description />
     <KistlBase:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</KistlBase:Module>
+    <KistlBase:Name>Mitarbeiter</KistlBase:Name>
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
@@ -16928,11 +16928,11 @@
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="885939e8-82e1-4fdf-b80e-5f612d5131d3">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.417Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>Projekt</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.417Z</KistlBase:CreatedOn>
     <GUI:DefaultIcon>1710903b-aa64-4a26-a9fe-cd97fa91d67f</GUI:DefaultIcon>
     <KistlBase:Description />
     <KistlBase:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</KistlBase:Module>
+    <KistlBase:Name>Projekt</KistlBase:Name>
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
@@ -16944,11 +16944,11 @@
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="3fbb42ca-a084-491d-9135-85ed24f1ef78">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.417Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>Task</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.417Z</KistlBase:CreatedOn>
     <GUI:DefaultIcon>ed2d3e60-d89b-4fce-92e5-0686a742e2ee</GUI:DefaultIcon>
     <KistlBase:Description />
     <KistlBase:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</KistlBase:Module>
+    <KistlBase:Name>Task</KistlBase:Name>
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
@@ -18754,10 +18754,10 @@
   </KistlBase:Module>
   <KistlBase:ObjectClass ExportGuid="798887f9-2d21-4d02-a143-bf1cbe07469b">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.423Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>ANewObjectClass</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.423Z</KistlBase:CreatedOn>
     <GUI:DefaultIcon>1b618ac3-cd62-4425-8bb3-4dba99172b1a</GUI:DefaultIcon>
     <KistlBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</KistlBase:Module>
+    <KistlBase:Name>ANewObjectClass</KistlBase:Name>
     <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
@@ -18769,10 +18769,10 @@
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="6d00a4e3-75b0-4a56-bc9f-3e9812d9c8fe">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.423Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>AnotherTest</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.423Z</KistlBase:CreatedOn>
     <KistlBase:Description />
     <KistlBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</KistlBase:Module>
+    <KistlBase:Name>AnotherTest</KistlBase:Name>
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
@@ -18784,9 +18784,9 @@
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="e5577f89-58d1-4983-ab35-60e6624780df">
     <KistlBase:ChangedOn>2010-01-21T13:34:11.367Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>Antwort</KistlBase:ClassName>
     <KistlBase:CreatedOn>2010-01-21T13:34:11.367Z</KistlBase:CreatedOn>
     <KistlBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</KistlBase:Module>
+    <KistlBase:Name>Antwort</KistlBase:Name>
     <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
@@ -18798,10 +18798,10 @@
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="352a4ade-1dca-4d28-9630-66bbcc1622ea">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.423Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>Company</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.423Z</KistlBase:CreatedOn>
     <KistlBase:Description>Describes a Company</KistlBase:Description>
     <KistlBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</KistlBase:Module>
+    <KistlBase:Name>Company</KistlBase:Name>
     <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
@@ -18813,9 +18813,9 @@
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="a78ff235-4511-431b-8437-939f7fecded4">
     <KistlBase:ChangedOn>2010-01-21T13:34:11.353Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>Fragebogen</KistlBase:ClassName>
     <KistlBase:CreatedOn>2010-01-21T13:34:11.353Z</KistlBase:CreatedOn>
     <KistlBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</KistlBase:Module>
+    <KistlBase:Name>Fragebogen</KistlBase:Name>
     <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
@@ -18827,21 +18827,21 @@
   </KistlBase:ObjectClass>
   <KistlBase:Interface ExportGuid="c8ff9958-dd26-4a92-a049-7fa9d51d8bf2">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.423Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>ITestInterface</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.423Z</KistlBase:CreatedOn>
     <GUI:DefaultIcon>fdbaa130-0be2-400b-9a4d-94d2ccaf00b7</GUI:DefaultIcon>
     <KistlBase:Description>A Test Interface</KistlBase:Description>
     <KistlBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</KistlBase:Module>
+    <KistlBase:Name>ITestInterface</KistlBase:Name>
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
   </KistlBase:Interface>
   <KistlBase:ObjectClass ExportGuid="fd357e42-2c2c-4bef-8110-69a466d09af0">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.423Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>Muhblah</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.423Z</KistlBase:CreatedOn>
     <KistlBase:Description />
     <KistlBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</KistlBase:Module>
+    <KistlBase:Name>Muhblah</KistlBase:Name>
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
@@ -18853,10 +18853,10 @@
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="de155110-79cc-4dac-89d6-0916608be1fb">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.423Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>TestCustomObject</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.423Z</KistlBase:CreatedOn>
     <KistlBase:Description />
     <KistlBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</KistlBase:Module>
+    <KistlBase:Name>TestCustomObject</KistlBase:Name>
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
@@ -18868,10 +18868,10 @@
   </KistlBase:ObjectClass>
   <KistlBase:Enumeration ExportGuid="67b48828-e7d2-4432-a942-88e96d74b40a">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.423Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>TestEnum</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.423Z</KistlBase:CreatedOn>
     <KistlBase:Description>A TestEnum</KistlBase:Description>
     <KistlBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</KistlBase:Module>
+    <KistlBase:Name>TestEnum</KistlBase:Name>
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
@@ -18879,11 +18879,11 @@
   </KistlBase:Enumeration>
   <KistlBase:ObjectClass ExportGuid="19f38f05-e88e-44c6-bfdf-d502b3632028">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.423Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>TestObjClass</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.423Z</KistlBase:CreatedOn>
     <GUI:DefaultIcon>8e37eb7b-f38d-4229-96c5-5a593fe8db56</GUI:DefaultIcon>
     <KistlBase:Description />
     <KistlBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</KistlBase:Module>
+    <KistlBase:Name>TestObjClass</KistlBase:Name>
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
@@ -18895,10 +18895,10 @@
   </KistlBase:ObjectClass>
   <KistlBase:CompoundObject ExportGuid="2510af08-089f-4252-8a98-ec84cb67bcb9">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.423Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>TestPhoneCompoundObject</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.423Z</KistlBase:CreatedOn>
     <KistlBase:Description />
     <KistlBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</KistlBase:Module>
+    <KistlBase:Name>TestPhoneCompoundObject</KistlBase:Name>
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
@@ -20074,11 +20074,11 @@
   </KistlBase:Module>
   <KistlBase:ObjectClass ExportGuid="b22c93cd-75c6-4fa9-8b06-9c4b3f5c818f">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.427Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>PresenceRecord</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.427Z</KistlBase:CreatedOn>
     <GUI:DefaultIcon>1b618ac3-cd62-4425-8bb3-4dba99172b1a</GUI:DefaultIcon>
     <KistlBase:Description />
     <KistlBase:Module>fb309065-8f8a-4f95-8794-9767c6b08f6c</KistlBase:Module>
+    <KistlBase:Name>PresenceRecord</KistlBase:Name>
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
@@ -20090,11 +20090,11 @@
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="dff456e5-f5a6-4da7-afdd-f4ea2a9e7a7a">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.427Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>WorkEffort</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.427Z</KistlBase:CreatedOn>
     <GUI:DefaultIcon>ed2d3e60-d89b-4fce-92e5-0686a742e2ee</GUI:DefaultIcon>
     <KistlBase:Description>A defined work effort of an employee.</KistlBase:Description>
     <KistlBase:Module>fb309065-8f8a-4f95-8794-9767c6b08f6c</KistlBase:Module>
+    <KistlBase:Name>WorkEffort</KistlBase:Name>
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
@@ -20106,11 +20106,11 @@
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="15268915-6b8f-4884-9b7e-5975e0768301">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.427Z</KistlBase:ChangedOn>
-    <KistlBase:ClassName>WorkEffortAccount</KistlBase:ClassName>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.427Z</KistlBase:CreatedOn>
     <GUI:DefaultIcon>267ce6ec-7982-46d3-b1bc-2e1ea6adf815</GUI:DefaultIcon>
     <KistlBase:Description>An account of work efforts. May be used to limit the hours being expended.</KistlBase:Description>
     <KistlBase:Module>fb309065-8f8a-4f95-8794-9767c6b08f6c</KistlBase:Module>
+    <KistlBase:Name>WorkEffortAccount</KistlBase:Name>
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>

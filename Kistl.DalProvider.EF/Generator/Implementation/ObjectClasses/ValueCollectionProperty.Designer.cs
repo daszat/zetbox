@@ -51,7 +51,7 @@ Debug.Assert(prop is ValueTypeProperty ? ((ValueTypeProperty)prop).IsList : ((Co
 	string exposedListType = hasPersistentOrder ? "IList" : "ICollection";
 
 	// which Kistl interface this is 
-	string thisInterface = prop.ObjectClass.ClassName;
+	string thisInterface = prop.ObjectClass.Name;
 	// which type this list contains
 	string referencedType = prop.ReferencedTypeAsCSharp();
 	// collection entries in this list

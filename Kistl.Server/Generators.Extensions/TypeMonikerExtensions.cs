@@ -15,7 +15,7 @@ namespace Kistl.Server.Generators.Extensions
         {
             if (objClass == null) { throw new ArgumentNullException("objClass"); }
             
-            return new TypeMoniker(objClass.Module.Namespace, objClass.ClassName);
+            return new TypeMoniker(objClass.Module.Namespace, objClass.Name);
         }
     }
 }

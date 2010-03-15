@@ -114,7 +114,7 @@ namespace Kistl.Server.SchemaManagement
                 }
                 else
                 {
-                    throw new JoinListException(string.Format("Unable to create JoinList: Unable to navigate from '{0}' over '{1}' to next type", lastType.ClassName, rel.ToString()));
+                    throw new JoinListException(string.Format("Unable to create JoinList: Unable to navigate from '{0}' over '{1}' to next type", lastType.Name, rel.ToString()));
                 }
 
                 if (rel.GetRelationType() == RelationType.n_m)

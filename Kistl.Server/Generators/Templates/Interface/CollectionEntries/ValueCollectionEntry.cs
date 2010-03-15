@@ -43,7 +43,7 @@ namespace Kistl.Server.Generators.Templates.Interface.CollectionEntries
         {
             return String.Format("{0}<{1}, {2}>",
                 IsOrdered() ? "IValueListEntry" : "IValueCollectionEntry",
-                this.prop.ObjectClass.ClassName,
+                this.prop.ObjectClass.Name,
                 this.prop.GetPropertyTypeString());
         }
 

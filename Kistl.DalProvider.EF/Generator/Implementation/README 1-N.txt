@@ -9,12 +9,12 @@ explain it this example is used: A `Module` has many `Assembly`s, but an
 
 //29
 var assemblyCls = ctx.Create<ObjectClass>();
-assemblyCls.ClassName = "Assembly";
+assemblyCls.Name = "Assembly";
 assemblyCls.TableName = "Assemblies";
 
 // 18
 var moduleCls = ctx.Create<ObjectClass>();
-moduleCls.ClassName = "Module";
+moduleCls.Name = "Module";
 moduleCls.TableName = "Modules";
 
 // 82

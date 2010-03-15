@@ -31,7 +31,7 @@ namespace Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses
         public override void Generate()
         {
 #line 18 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\EnumerationPropertyTemplate.cst"
-string interfaceName = prop.ObjectClass.ClassName;
+string interfaceName = prop.ObjectClass.Name;
 
 	string name = prop.PropertyName;
 	string efName = name + Kistl.API.Helper.ImplementationSuffix;

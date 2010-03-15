@@ -23,7 +23,7 @@ namespace Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses
 
         protected override void ApplyClassAttributeTemplate()
         {
-            WriteLine("    [EdmEntityType(NamespaceName=\"Model\", Name=\"{0}\")]", this.DataType.ClassName);
+            WriteLine("    [EdmEntityType(NamespaceName=\"Model\", Name=\"{0}\")]", this.DataType.Name);
         }
 
         protected override void ApplyConstructorTemplate()

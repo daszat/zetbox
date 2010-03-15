@@ -33,11 +33,11 @@ this.WriteObjects("  <EntityContainerMapping StorageEntityContainer=\"dbo\" CdmE
 this.WriteObjects("    \r\n");
 this.WriteObjects("    <!-- EntitySetMappings for classes -->\r\n");
 #line 22 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.msl.cst"
-foreach(var cls in ctx.GetBaseClasses().OrderBy(c => c.ClassName))
+foreach(var cls in ctx.GetBaseClasses().OrderBy(c => c.Name))
     {
 
 #line 25 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.msl.cst"
-this.WriteObjects("    <EntitySetMapping Name=\"",  cls.ClassName , "\">\r\n");
+this.WriteObjects("    <EntitySetMapping Name=\"",  cls.Name , "\">\r\n");
 #line 26 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.msl.cst"
 ApplyEntityTypeMapping(cls); 
 #line 27 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.msl.cst"
@@ -57,7 +57,7 @@ this.WriteObjects("        </MappingFragment>\r\n");
 this.WriteObjects("      </EntityTypeMapping>\r\n");
 this.WriteObjects("    </EntitySetMapping>\r\n");
 this.WriteObjects("    <AssociationSetMapping Name=\"",  Construct.SecurityRulesFKName(cls) , "\" TypeName=\"Model.",  Construct.SecurityRulesFKName(cls) , "\" StoreEntitySet=\"",  Construct.SecurityRulesClassName(cls) , "\">\r\n");
-this.WriteObjects("      <EndProperty Name=\"",  cls.ClassName , "\">\r\n");
+this.WriteObjects("      <EndProperty Name=\"",  cls.Name , "\">\r\n");
 this.WriteObjects("        <ScalarProperty Name=\"ID\" ColumnName=\"ID\" />\r\n");
 this.WriteObjects("      </EndProperty>\r\n");
 this.WriteObjects("      <EndProperty Name=\"",  Construct.SecurityRulesClassName(cls) , "\">\r\n");
@@ -179,7 +179,7 @@ Implementation.RelationDebugTemplate.Call(Host, ctx, rel);
 this.WriteObjects("    -->\r\n");
 this.WriteObjects("    <AssociationSetMapping Name=\"",  rel.GetAssociationName() , "\"\r\n");
 this.WriteObjects("                           TypeName=\"Model.",  rel.GetAssociationName() , "\"\r\n");
-this.WriteObjects("                           StoreEntitySet=\"",  dependent.Type.ClassName , "\" >\r\n");
+this.WriteObjects("                           StoreEntitySet=\"",  dependent.Type.Name , "\" >\r\n");
 this.WriteObjects("      <EndProperty Name=\"",  principal.RoleName , "\">\r\n");
 this.WriteObjects("        <ScalarProperty Name=\"ID\" ColumnName=\"fk_",  principal.RoleName , "\"/>\r\n");
 this.WriteObjects("      </EndProperty>\r\n");
@@ -198,7 +198,7 @@ this.WriteObjects("    <!-- EntitySetMappings and AssociationSetMappings for obj
 #line 170 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.msl.cst"
 foreach(var prop in ctx.GetQuery<ValueTypeProperty>()
         .Where(p => p.IsList)
-        .OrderBy(p => p.ObjectClass.ClassName)
+        .OrderBy(p => p.ObjectClass.Name)
         .ThenBy(p => p.PropertyName))
     { 
 
@@ -224,13 +224,13 @@ this.WriteObjects("    </EntitySetMapping>\r\n");
 this.WriteObjects("    <AssociationSetMapping Name=\"",  prop.GetAssociationName() , "\"\r\n");
 this.WriteObjects("                           TypeName=\"Model.",  prop.GetAssociationName() , "\"\r\n");
 this.WriteObjects("                           StoreEntitySet=\"",  prop.GetCollectionEntryClassName() , "\" >\r\n");
-this.WriteObjects("      <EndProperty Name=\"",  prop.ObjectClass.ClassName , "\">\r\n");
-this.WriteObjects("        <ScalarProperty Name=\"ID\" ColumnName=\"fk_",  prop.ObjectClass.ClassName , "\"/>\r\n");
+this.WriteObjects("      <EndProperty Name=\"",  prop.ObjectClass.Name , "\">\r\n");
+this.WriteObjects("        <ScalarProperty Name=\"ID\" ColumnName=\"fk_",  prop.ObjectClass.Name , "\"/>\r\n");
 this.WriteObjects("      </EndProperty>\r\n");
 this.WriteObjects("      <EndProperty Name=\"CollectionEntry\">\r\n");
 this.WriteObjects("        <ScalarProperty Name=\"ID\" ColumnName=\"ID\"/>\r\n");
 this.WriteObjects("      </EndProperty>\r\n");
-this.WriteObjects("      <Condition ColumnName=\"fk_",  prop.ObjectClass.ClassName , "\" IsNull=\"false\"/>\r\n");
+this.WriteObjects("      <Condition ColumnName=\"fk_",  prop.ObjectClass.Name , "\" IsNull=\"false\"/>\r\n");
 this.WriteObjects("    </AssociationSetMapping>\r\n");
 #line 204 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.msl.cst"
 }
@@ -242,7 +242,7 @@ this.WriteObjects("    <!-- EntitySetMappings and AssociationSetMappings for obj
 #line 210 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.msl.cst"
 foreach(var prop in ctx.GetQuery<CompoundObjectProperty>()
         .Where(p => p.IsList)
-        .OrderBy(p => p.ObjectClass.ClassName)
+        .OrderBy(p => p.ObjectClass.Name)
         .ThenBy(p => p.PropertyName))
     { 
 
@@ -270,13 +270,13 @@ this.WriteObjects("    </EntitySetMapping>\r\n");
 this.WriteObjects("    <AssociationSetMapping Name=\"",  prop.GetAssociationName() , "\"\r\n");
 this.WriteObjects("                           TypeName=\"Model.",  prop.GetAssociationName() , "\"\r\n");
 this.WriteObjects("                           StoreEntitySet=\"",  prop.GetCollectionEntryClassName() , "\" >\r\n");
-this.WriteObjects("      <EndProperty Name=\"",  prop.ObjectClass.ClassName , "\">\r\n");
-this.WriteObjects("        <ScalarProperty Name=\"ID\" ColumnName=\"fk_",  prop.ObjectClass.ClassName , "\"/>\r\n");
+this.WriteObjects("      <EndProperty Name=\"",  prop.ObjectClass.Name , "\">\r\n");
+this.WriteObjects("        <ScalarProperty Name=\"ID\" ColumnName=\"fk_",  prop.ObjectClass.Name , "\"/>\r\n");
 this.WriteObjects("      </EndProperty>\r\n");
 this.WriteObjects("      <EndProperty Name=\"CollectionEntry\">\r\n");
 this.WriteObjects("        <ScalarProperty Name=\"ID\" ColumnName=\"ID\"/>\r\n");
 this.WriteObjects("      </EndProperty>\r\n");
-this.WriteObjects("      <Condition ColumnName=\"fk_",  prop.ObjectClass.ClassName , "\" IsNull=\"false\"/>\r\n");
+this.WriteObjects("      <Condition ColumnName=\"fk_",  prop.ObjectClass.Name , "\" IsNull=\"false\"/>\r\n");
 this.WriteObjects("    </AssociationSetMapping>\r\n");
 #line 244 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.msl.cst"
 }

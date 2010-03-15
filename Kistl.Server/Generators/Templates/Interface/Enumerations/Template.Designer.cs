@@ -45,7 +45,7 @@ this.WriteObjects("    [System.Flags]\r\n");
 }
 
 #line 31 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\Enumerations\Template.cst"
-this.WriteObjects("    public enum ",  e.ClassName , "\r\n");
+this.WriteObjects("    public enum ",  e.Name , "\r\n");
 this.WriteObjects("    {\r\n");
 #line 34 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\Enumerations\Template.cst"
 foreach(EnumerationEntry entry in e.EnumerationEntries.OrderBy(ee => ee.Value))
