@@ -90,7 +90,7 @@ namespace Kistl.Server.SchemaManagement
         public void DoRenameObjectClassTable(ObjectClass objClass)
         {
             var saved = savedSchema.FindPersistenceObject<ObjectClass>(objClass.ExportGuid);
-            Log.ErrorFormat("renaming a table from '{0}' to '{1}' is not supported yet", saved.TableName, objClass.TableName);
+            db.RenameTable(saved.TableName, objClass.TableName);
         }
         #endregion
 
@@ -104,7 +104,8 @@ namespace Kistl.Server.SchemaManagement
         public void DoRenameValueTypePropertyName(ObjectClass objClass, ValueTypeProperty prop, string prefix)
         {
             var saved = savedSchema.FindPersistenceObject<ValueTypeProperty>(prop.ExportGuid);
-            Log.ErrorFormat("renaming a property from '{0}' to '{1}' is not supported yet", saved.Name, prop.Name);
+            // TODO: What if prefix has changed
+            db.RenameColumn(objClass.TableName, Construct.NestedColumnName(saved, prefix), Construct.NestedColumnName(prop, prefix));
         }
         #endregion
 

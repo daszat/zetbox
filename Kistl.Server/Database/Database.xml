@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2010-03-15T12:47:18.347Z" xmlns="http://dasz.at/Kistl">
+<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2010-03-15T17:35:05.433Z" xmlns="http://dasz.at/Kistl">
   <KistlBase:Module ExportGuid="110acbc0-652a-4adc-9de5-8baabfcf3637">
     <KistlBase:ChangedOn>2010-02-01T16:07:00.49Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2010-02-01T15:23:35.247Z</KistlBase:CreatedOn>
@@ -18812,7 +18812,7 @@
     <KistlBase:TableName>Companies</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="a78ff235-4511-431b-8437-939f7fecded4">
-    <KistlBase:ChangedOn>2010-01-21T13:34:11.353Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2010-03-15T17:21:05.637Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2010-01-21T13:34:11.353Z</KistlBase:CreatedOn>
     <KistlBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</KistlBase:Module>
     <KistlBase:Name>Fragebogen</KistlBase:Name>
@@ -18823,7 +18823,7 @@
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
-    <KistlBase:TableName>Fragebögen</KistlBase:TableName>
+    <KistlBase:TableName>Frageboegen</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <KistlBase:Interface ExportGuid="c8ff9958-dd26-4a92-a049-7fa9d51d8bf2">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.423Z</KistlBase:ChangedOn>
@@ -18993,7 +18993,7 @@
   </KistlBase:ObjectReferenceProperty>
   <KistlBase:IntProperty ExportGuid="b65f1a91-e063-4054-a2e7-d5dc0292e3fc">
     <KistlBase:CategoryTags>Summary</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2010-01-21T14:34:23.497Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2010-03-15T17:35:05.433Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2010-01-21T14:30:51.257Z</KistlBase:CreatedOn>
     <KistlBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</KistlBase:Module>
     <KistlBase:Name>BogenNummer</KistlBase:Name>

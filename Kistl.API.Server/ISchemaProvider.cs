@@ -84,6 +84,9 @@ namespace Kistl.API.Server
         void AlterColumn(string tblName, string colName, System.Data.DbType type, int size, bool isNullable);
         void CreateFKConstraint(string tblName, string refTblName, string colName, string constraintName, bool onDeleteCascade);
 
+        void RenameTable(string oldTblName, string newTblName);
+        void RenameColumn(string tblName, string oldColName, string newColName);
+
         void DropTable(string tblName);
         void DropColumn(string tblName, string colName);
         void DropFKConstraint(string tblName, string fkName);

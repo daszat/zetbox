@@ -48,7 +48,7 @@ namespace Kistl.App.Test
 		
 		/// <summary>List of all Fragebogen</summary>
 		/// 
-		public IQueryable<Fragebogen> Fragebögen
+		public IQueryable<Fragebogen> Frageboegen
 		{ 
 			get
 			{

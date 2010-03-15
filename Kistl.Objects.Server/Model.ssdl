@@ -30,7 +30,7 @@
     <EntitySet Name="Exam" EntityType="Model.Store.Exam" Table="Exams"/>
     <EntitySet Name="Exercise" EntityType="Model.Store.Exercise" Table="Exercises"/>
     <EntitySet Name="File" EntityType="Model.Store.File" Table="Files"/>
-    <EntitySet Name="Fragebogen" EntityType="Model.Store.Fragebogen" Table="Fragebögen"/>
+    <EntitySet Name="Fragebogen" EntityType="Model.Store.Fragebogen" Table="Frageboegen"/>
     <EntitySet Name="Group" EntityType="Model.Store.Group" Table="Groups"/>
     <EntitySet Name="GroupExcercise" EntityType="Model.Store.GroupExcercise" Table="GroupExcercises"/>
     <EntitySet Name="Icon" EntityType="Model.Store.Icon" Table="Icons"/>

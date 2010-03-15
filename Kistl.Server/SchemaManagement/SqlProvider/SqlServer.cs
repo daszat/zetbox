@@ -710,5 +710,17 @@ FROM (", viewName);
                 }
             }
         }
+
+        public void RenameTable(string oldTblName, string newTblName)
+        {
+            // Do not qualify new name as it will be part of the name
+            ExecuteNonQuery("EXEC sp_rename '[{0}]', '{1}'", oldTblName, newTblName);
+        }
+
+        public void RenameColumn(string tblName, string oldColName, string newColName)
+        {
+            // Do not qualify new name as it will be part of the name
+            ExecuteNonQuery("EXEC sp_rename '[{0}].[{1}]', '{2}', 'COLUMN'", tblName, oldColName, newColName);
+        }
     }
 }
