@@ -86,6 +86,7 @@ namespace Kistl.API.Server
 
         void RenameTable(string oldTblName, string newTblName);
         void RenameColumn(string tblName, string oldColName, string newColName);
+        void RenameFKConstraint(string oldConstraintName, string newConstraintName);
 
         void DropTable(string tblName);
         void DropColumn(string tblName, string colName);

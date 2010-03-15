@@ -113,9 +113,9 @@ namespace Kistl.App.Test
         /// Workaround for Case 1376
         /// </summary>
     /*
-    Relation: FK_Fragebogen_enthält_Antworten
-    A: One Fragebogen as Fragebogen
-    B: ZeroOrMore Antwort as Antworten
+    Relation: FK_Ein_Fragebogen_enthaelt_gute_Antworten
+    A: One Fragebogen as Ein_Fragebogen
+    B: ZeroOrMore Antwort as gute_Antworten
     Preferred Storage: MergeIntoB
     */
         // object reference property
@@ -141,15 +141,15 @@ namespace Kistl.App.Test
         private int? _fk_Fragebogen;
         private Guid? _fk_guid_Fragebogen = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_Fragebogen_enthält_Antworten", "Fragebogen")]
+        [EdmRelationshipNavigationProperty("Model", "FK_Ein_Fragebogen_enthaelt_gute_Antworten", "Ein_Fragebogen")]
         public Kistl.App.Test.Fragebogen__Implementation__ Fragebogen__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Test.Fragebogen__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Test.Fragebogen__Implementation__>(
-                        "Model.FK_Fragebogen_enthält_Antworten",
-                        "Fragebogen");
+                        "Model.FK_Ein_Fragebogen_enthaelt_gute_Antworten",
+                        "Ein_Fragebogen");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
                 {
@@ -169,8 +169,8 @@ namespace Kistl.App.Test
             {
                 EntityReference<Kistl.App.Test.Fragebogen__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Test.Fragebogen__Implementation__>(
-                        "Model.FK_Fragebogen_enthält_Antworten",
-                        "Fragebogen");
+                        "Model.FK_Ein_Fragebogen_enthaelt_gute_Antworten",
+                        "Ein_Fragebogen");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
                 {

@@ -722,5 +722,11 @@ FROM (", viewName);
             // Do not qualify new name as it will be part of the name
             ExecuteNonQuery("EXEC sp_rename '[{0}].[{1}]', '{2}', 'COLUMN'", tblName, oldColName, newColName);
         }
+
+        public void RenameFKConstraint(string oldConstraintName, string newConstraintName)
+        {
+            // Do not qualify new name as it will be part of the name
+            ExecuteNonQuery("EXEC sp_rename '[{0}]', '{1}', 'OBJECT'", oldConstraintName, newConstraintName);
+        }
     }
 }

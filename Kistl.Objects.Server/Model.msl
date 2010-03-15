@@ -45,7 +45,7 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.Antwort)">
 	    <MappingFragment StoreEntitySet="Antwort">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
-<ScalarProperty Name="Fragebogen_pos" ColumnName="fk_Fragebogen_pos" />
+<ScalarProperty Name="Fragebogen_pos" ColumnName="fk_Ein_Fragebogen_pos" />
 <ScalarProperty Name="Frage" ColumnName="Frage" />
 <ScalarProperty Name="FragenNummer" ColumnName="FragenNummer" />
 <ScalarProperty Name="GegebeneAntwort" ColumnName="GegebeneAntwort" />
@@ -2068,6 +2068,23 @@
       <Condition ColumnName="fk_CreatedBy" IsNull="false"/>
     </AssociationSetMapping>
     <!--
+    Relation: FK_Ein_Fragebogen_enthaelt_gute_Antworten
+    A: One Fragebogen as Ein_Fragebogen
+    B: ZeroOrMore Antwort as gute_Antworten
+    Preferred Storage: MergeIntoB
+    -->
+    <AssociationSetMapping Name="FK_Ein_Fragebogen_enthaelt_gute_Antworten"
+                           TypeName="Model.FK_Ein_Fragebogen_enthaelt_gute_Antworten"
+                           StoreEntitySet="Antwort" >
+      <EndProperty Name="Ein_Fragebogen">
+        <ScalarProperty Name="ID" ColumnName="fk_Ein_Fragebogen"/>
+      </EndProperty>
+      <EndProperty Name="gute_Antworten">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_Ein_Fragebogen" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
     Relation: FK_Enumeration_has_EnumerationEntries
     A: One Enumeration as Enumeration
     B: ZeroOrMore EnumerationEntry as EnumerationEntries
@@ -2219,23 +2236,6 @@
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="fk_CreatedBy" IsNull="false"/>
-    </AssociationSetMapping>
-    <!--
-    Relation: FK_Fragebogen_enthält_Antworten
-    A: One Fragebogen as Fragebogen
-    B: ZeroOrMore Antwort as Antworten
-    Preferred Storage: MergeIntoB
-    -->
-    <AssociationSetMapping Name="FK_Fragebogen_enthält_Antworten"
-                           TypeName="Model.FK_Fragebogen_enthält_Antworten"
-                           StoreEntitySet="Antwort" >
-      <EndProperty Name="Fragebogen">
-        <ScalarProperty Name="ID" ColumnName="fk_Fragebogen"/>
-      </EndProperty>
-      <EndProperty Name="Antworten">
-        <ScalarProperty Name="ID" ColumnName="ID"/>
-      </EndProperty>
-      <Condition ColumnName="fk_Fragebogen" IsNull="false"/>
     </AssociationSetMapping>
     <!--
     Relation: FK_Group_has_Module

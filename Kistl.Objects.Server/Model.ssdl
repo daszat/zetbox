@@ -806,6 +806,10 @@
       <End Role="Document" EntitySet="Blob" />
       <End Role="CreatedBy" EntitySet="Identity" />
     </AssociationSet>
+    <AssociationSet Name="FK_Ein_Fragebogen_enthaelt_gute_Antworten" Association="Model.Store.FK_Ein_Fragebogen_enthaelt_gute_Antworten" >
+      <End Role="Ein_Fragebogen" EntitySet="Fragebogen" />
+      <End Role="gute_Antworten" EntitySet="Antwort" />
+    </AssociationSet>
     <AssociationSet Name="FK_Enumeration_has_EnumerationEntries" Association="Model.Store.FK_Enumeration_has_EnumerationEntries" >
       <End Role="Enumeration" EntitySet="Enumeration" />
       <End Role="EnumerationEntries" EntitySet="EnumerationEntry" />
@@ -841,10 +845,6 @@
     <AssociationSet Name="FK_File_was_CreatedBy" Association="Model.Store.FK_File_was_CreatedBy" >
       <End Role="File" EntitySet="File" />
       <End Role="CreatedBy" EntitySet="Identity" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Fragebogen_enthält_Antworten" Association="Model.Store.FK_Fragebogen_enthält_Antworten" >
-      <End Role="Fragebogen" EntitySet="Fragebogen" />
-      <End Role="Antworten" EntitySet="Antwort" />
     </AssociationSet>
     <AssociationSet Name="FK_Group_has_Module" Association="Model.Store.FK_Group_has_Module" >
       <End Role="Group" EntitySet="Group" />
@@ -1204,8 +1204,8 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="fk_Fragebogen" Type="int" />
-    <Property Name="fk_Fragebogen_pos" Type="int" Nullable="true" />
+    <Property Name="fk_Ein_Fragebogen" Type="int" />
+    <Property Name="fk_Ein_Fragebogen_pos" Type="int" Nullable="true" />
     <Property Name="Frage" Type="nvarchar" MaxLength="1000" Nullable="false" />
     <Property Name="FragenNummer" Type="int" Nullable="false" />
     <Property Name="GegebeneAntwort" Type="int" Nullable="true" />
@@ -3365,6 +3365,20 @@
   </Association>
 
 
+  <Association Name="FK_Ein_Fragebogen_enthaelt_gute_Antworten">
+    <End Role="Ein_Fragebogen" Type="Model.Store.Fragebogen" Multiplicity="0..1" />
+    <End Role="gute_Antworten" Type="Model.Store.Antwort" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ein_Fragebogen">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="gute_Antworten">
+        <PropertyRef Name="fk_Ein_Fragebogen" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
   <Association Name="FK_Enumeration_has_EnumerationEntries">
     <End Role="Enumeration" Type="Model.Store.Enumeration" Multiplicity="0..1" />
     <End Role="EnumerationEntries" Type="Model.Store.EnumerationEntry" Multiplicity="*" />
@@ -3486,20 +3500,6 @@
       </Principal>
       <Dependent Role="File">
         <PropertyRef Name="fk_CreatedBy" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-
-  <Association Name="FK_Fragebogen_enthält_Antworten">
-    <End Role="Fragebogen" Type="Model.Store.Fragebogen" Multiplicity="0..1" />
-    <End Role="Antworten" Type="Model.Store.Antwort" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Fragebogen">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="Antworten">
-        <PropertyRef Name="fk_Fragebogen" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

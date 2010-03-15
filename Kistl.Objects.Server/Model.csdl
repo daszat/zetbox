@@ -357,6 +357,10 @@
       <End Role="Document" EntitySet="Blob" />
       <End Role="CreatedBy" EntitySet="Identity" />
     </AssociationSet>
+    <AssociationSet Name="FK_Ein_Fragebogen_enthaelt_gute_Antworten" Association="Model.FK_Ein_Fragebogen_enthaelt_gute_Antworten" >
+      <End Role="Ein_Fragebogen" EntitySet="Fragebogen" />
+      <End Role="gute_Antworten" EntitySet="Antwort" />
+    </AssociationSet>
     <AssociationSet Name="FK_Enumeration_has_EnumerationEntries" Association="Model.FK_Enumeration_has_EnumerationEntries" >
       <End Role="Enumeration" EntitySet="DataType" />
       <End Role="EnumerationEntries" EntitySet="EnumerationEntry" />
@@ -392,10 +396,6 @@
     <AssociationSet Name="FK_File_was_CreatedBy" Association="Model.FK_File_was_CreatedBy" >
       <End Role="File" EntitySet="File" />
       <End Role="CreatedBy" EntitySet="Identity" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Fragebogen_enthält_Antworten" Association="Model.FK_Fragebogen_enthält_Antworten" >
-      <End Role="Fragebogen" EntitySet="Fragebogen" />
-      <End Role="Antworten" EntitySet="Antwort" />
     </AssociationSet>
     <AssociationSet Name="FK_Group_has_Module" Association="Model.FK_Group_has_Module" >
       <End Role="Group" EntitySet="Group" />
@@ -741,9 +741,9 @@
     <Property Name="ID" Type="Int32" Nullable="false" />
     <Property Name="Frage" Type="String" Nullable="false" MaxLength="1000" />
     <NavigationProperty Name="Fragebogen__Implementation__"
-                        Relationship="Model.FK_Fragebogen_enthält_Antworten"
-                        FromRole="Antworten"
-                        ToRole="Fragebogen" />
+                        Relationship="Model.FK_Ein_Fragebogen_enthaelt_gute_Antworten"
+                        FromRole="gute_Antworten"
+                        ToRole="Ein_Fragebogen" />
     <Property Name="Fragebogen_pos" Type="Int32" Nullable="true" />
     <Property Name="FragenNummer" Type="Int32" Nullable="false" />
     <Property Name="GegebeneAntwort" Type="Int32" Nullable="true" />
@@ -1059,9 +1059,9 @@
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Antworten__Implementation__"
-                        Relationship="Model.FK_Fragebogen_enthält_Antworten"
-                        FromRole="Fragebogen"
-                        ToRole="Antworten" />
+                        Relationship="Model.FK_Ein_Fragebogen_enthaelt_gute_Antworten"
+                        FromRole="Ein_Fragebogen"
+                        ToRole="gute_Antworten" />
     <Property Name="BogenNummer" Type="Int32" Nullable="true" />
   </EntityType>
   <EntityType Name="Group">
@@ -3055,6 +3055,14 @@
          Type="Model.Identity" 
          Multiplicity="0..1" />
   </Association>
+  <Association Name="FK_Ein_Fragebogen_enthaelt_gute_Antworten" >
+    <End Role="Ein_Fragebogen"
+         Type="Model.Fragebogen" 
+         Multiplicity="0..1" />
+    <End Role="gute_Antworten"
+         Type="Model.Antwort" 
+         Multiplicity="*" />
+  </Association>
   <Association Name="FK_Enumeration_has_EnumerationEntries" >
     <End Role="Enumeration"
          Type="Model.Enumeration" 
@@ -3126,14 +3134,6 @@
     <End Role="CreatedBy"
          Type="Model.Identity" 
          Multiplicity="0..1" />
-  </Association>
-  <Association Name="FK_Fragebogen_enthält_Antworten" >
-    <End Role="Fragebogen"
-         Type="Model.Fragebogen" 
-         Multiplicity="0..1" />
-    <End Role="Antworten"
-         Type="Model.Antwort" 
-         Multiplicity="*" />
   </Association>
   <Association Name="FK_Group_has_Module" >
     <End Role="Group"

@@ -61,9 +61,9 @@ namespace Kistl.App.Test
         /// 
         /// </summary>
     /*
-    Relation: FK_Fragebogen_enthält_Antworten
-    A: One Fragebogen as Fragebogen
-    B: ZeroOrMore Antwort as Antworten
+    Relation: FK_Ein_Fragebogen_enthaelt_gute_Antworten
+    A: One Fragebogen as Ein_Fragebogen
+    B: ZeroOrMore Antwort as gute_Antworten
     Preferred Storage: MergeIntoB
     */
         // object list property
@@ -78,21 +78,21 @@ namespace Kistl.App.Test
                 if (_AntwortenWrapper == null)
                 {
                     _AntwortenWrapper = new EntityListWrapper<Kistl.App.Test.Antwort, Kistl.App.Test.Antwort__Implementation__>(
-                            this.Context, Antworten__Implementation__, "Fragebogen");
+                            this.Context, Antworten__Implementation__, "Ein_Fragebogen");
                 }
                 return _AntwortenWrapper;
             }
         }
         
-        [EdmRelationshipNavigationProperty("Model", "FK_Fragebogen_enthält_Antworten", "Antworten")]
+        [EdmRelationshipNavigationProperty("Model", "FK_Ein_Fragebogen_enthaelt_gute_Antworten", "gute_Antworten")]
         public EntityCollection<Kistl.App.Test.Antwort__Implementation__> Antworten__Implementation__
         {
             get
             {
                 var c = ((IEntityWithRelationships)(this)).RelationshipManager
                     .GetRelatedCollection<Kistl.App.Test.Antwort__Implementation__>(
-                        "Model.FK_Fragebogen_enthält_Antworten",
-                        "Antworten");
+                        "Model.FK_Ein_Fragebogen_enthaelt_gute_Antworten",
+                        "gute_Antworten");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)
                 {

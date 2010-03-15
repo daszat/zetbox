@@ -354,6 +354,11 @@ namespace Kistl.Server.SchemaManagement
                         Case.Do1_1_RelationChange_FromNullable_To_NotNullable(rel, RelationEndRole.B);
                     }
                 }
+
+                if (Case.IsChangeRelationName(rel))
+                {
+                    Case.DoChangeRelationName(rel);
+                }
             }
             Log.Debug(String.Empty);
         }

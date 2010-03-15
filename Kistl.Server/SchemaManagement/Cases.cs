@@ -597,6 +597,20 @@ namespace Kistl.Server.SchemaManagement
         }
         #endregion
 
+        #region ChangeRelationName
+        public bool IsChangeRelationName(Relation rel)
+        {
+            var saved = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
+            if (saved == null) return false;
+            return saved.GetAssociationName() != rel.GetAssociationName();
+        }
+        public void DoChangeRelationName(Relation rel)
+        {
+            var saved = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
+            db.RenameFKConstraint(saved.GetAssociationName(), rel.GetAssociationName());
+        }
+        #endregion
+
         #region New_1_N_Relation
         public bool IsNew_1_N_Relation(Relation rel)
         {

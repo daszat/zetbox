@@ -512,6 +512,21 @@ using Kistl.DalProvider.EF;
 
 
 	/*
+    Relation: FK_Ein_Fragebogen_enthaelt_gute_Antworten
+    A: One Fragebogen as Ein_Fragebogen
+    B: ZeroOrMore Antwort as gute_Antworten
+    Preferred Storage: MergeIntoB
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_Ein_Fragebogen_enthaelt_gute_Antworten",
+    "Ein_Fragebogen", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Test.Fragebogen__Implementation__),
+    "gute_Antworten", RelationshipMultiplicity.Many, typeof(Kistl.App.Test.Antwort__Implementation__)
+    )]
+
+
+	/*
     Relation: FK_Enumeration_has_EnumerationEntries
     A: One Enumeration as Enumeration
     B: ZeroOrMore EnumerationEntry as EnumerationEntries
@@ -643,21 +658,6 @@ using Kistl.DalProvider.EF;
     "Model", "FK_File_was_CreatedBy",
     "File", RelationshipMultiplicity.Many, typeof(at.dasz.DocumentManagement.File__Implementation__),
     "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Identity__Implementation__)
-    )]
-
-
-	/*
-    Relation: FK_Fragebogen_enthält_Antworten
-    A: One Fragebogen as Fragebogen
-    B: ZeroOrMore Antwort as Antworten
-    Preferred Storage: MergeIntoB
-	*/
-
-// basic association
-[assembly: EdmRelationship(
-    "Model", "FK_Fragebogen_enthält_Antworten",
-    "Fragebogen", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Test.Fragebogen__Implementation__),
-    "Antworten", RelationshipMultiplicity.Many, typeof(Kistl.App.Test.Antwort__Implementation__)
     )]
 
 
