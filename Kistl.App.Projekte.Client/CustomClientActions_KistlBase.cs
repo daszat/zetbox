@@ -401,11 +401,11 @@ namespace Kistl.App.Base
                     // TODO: Wenn das sortieren von Parametern funktioniert müssen auch die Parameter
                     // der Methode geprüft werden
                     // TODO: evtl. IsDeclaredInImplementsInterface aus dem Generator verallgemeinern & benutzen
-                    if (!objClass.Methods.Select(m => m.MethodName).Contains(meth.MethodName))
+                    if (!objClass.Methods.Select(m => m.Name).Contains(meth.Name))
                     {
                         Method newMeth = (Method)ctx.Create(meth.GetInterfaceType());
                         objClass.Methods.Add(newMeth);
-                        newMeth.MethodName = meth.MethodName;
+                        newMeth.Name = meth.Name;
                         newMeth.IsDisplayable = meth.IsDisplayable;
                         // put the new method into the module of the class
                         newMeth.Module = objClass.Module;

@@ -100,7 +100,7 @@ this.WriteObjects("        /// </summary>\r\n");
 ApplyPropertyTemplate(p);
         }
 
-        foreach(var mg in MethodsToGenerate().GroupBy(m => m.MethodName).OrderBy(mg => mg.Key))
+        foreach(var mg in MethodsToGenerate().GroupBy(m => m.Name).OrderBy(mg => mg.Key))
         {
 			int index = 0;
 			foreach(var m in mg.OrderByDefault())

@@ -559,58 +559,6 @@ namespace Kistl.App.Base
 
 
         /// <summary>
-        /// 
-        /// </summary>
-        // value type property
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-           // Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.NotifyingDataProperty
-        public virtual string MethodName
-        {
-            get
-            {
-                // create local variable to create single point of return
-                // for the benefit of down-stream templates
-                var __result = _MethodName;
-                if (OnMethodName_Getter != null)
-                {
-                    var __e = new PropertyGetterEventArgs<string>(__result);
-                    OnMethodName_Getter(this, __e);
-                    __result = __e.Result;
-                }
-                return __result;
-            }
-            set
-            {
-                if (this.IsReadonly) throw new ReadOnlyObjectException();
-                if (_MethodName != value)
-                {
-                    var __oldValue = _MethodName;
-                    var __newValue = value;
-                    if(OnMethodName_PreSetter != null)
-                    {
-                        var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
-                        OnMethodName_PreSetter(this, __e);
-                        __newValue = __e.Result;
-                    }
-                    NotifyPropertyChanging("MethodName", __oldValue, __newValue);
-                    _MethodName = __newValue;
-                    NotifyPropertyChanged("MethodName", __oldValue, __newValue);
-                    if(OnMethodName_PostSetter != null)
-                    {
-                        var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
-                        OnMethodName_PostSetter(this, __e);
-                    }
-                }
-            }
-        }
-        private string _MethodName;
-		public static event PropertyGetterHandler<Kistl.App.Base.Method, string> OnMethodName_Getter;
-		public static event PropertyPreSetterHandler<Kistl.App.Base.Method, string> OnMethodName_PreSetter;
-		public static event PropertyPostSetterHandler<Kistl.App.Base.Method, string> OnMethodName_PostSetter;
-
-        /// <summary>
         /// Zugehörig zum Modul
         /// </summary>
     /*
@@ -700,6 +648,58 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.Method, Kistl.App.Base.Module> OnModule_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Method, Kistl.App.Base.Module> OnModule_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.Method, Kistl.App.Base.Module> OnModule_PostSetter;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        // value type property
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+           // Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.NotifyingDataProperty
+        public virtual string Name
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _Name;
+                if (OnName_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<string>(__result);
+                    OnName_Getter(this, __e);
+                    __result = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_Name != value)
+                {
+                    var __oldValue = _Name;
+                    var __newValue = value;
+                    if(OnName_PreSetter != null)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
+                        OnName_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("Name", __oldValue, __newValue);
+                    _Name = __newValue;
+                    NotifyPropertyChanged("Name", __oldValue, __newValue);
+                    if(OnName_PostSetter != null)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
+                        OnName_PostSetter(this, __e);
+                    }
+                }
+            }
+        }
+        private string _Name;
+		public static event PropertyGetterHandler<Kistl.App.Base.Method, string> OnName_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.Method, string> OnName_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.Method, string> OnName_PostSetter;
 
         /// <summary>
         /// 
@@ -901,7 +901,7 @@ namespace Kistl.App.Base
 			me.Description = other.Description;
 			me.ExportGuid = other.ExportGuid;
 			me.IsDisplayable = other.IsDisplayable;
-			me.MethodName = other.MethodName;
+			me.Name = other.Name;
 			this._fk_ChangedBy = otherImpl._fk_ChangedBy;
 			this._fk_CreatedBy = otherImpl._fk_CreatedBy;
 			this._fk_Module = otherImpl._fk_Module;
@@ -1034,20 +1034,20 @@ namespace Kistl.App.Base
 					
 					return String.Join("; ", errors);
 				}
-				case "MethodName":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("88de8421-488e-452e-8289-33074054b22f")).Constraints
-						.Where(c => !c.IsValid(this, this.MethodName))
-						.Select(c => c.GetErrorText(this, this.MethodName))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
 				case "Module":
 				{
 					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("51640f6f-b2ae-4f26-915e-fda5a2c060a6")).Constraints
 						.Where(c => !c.IsValid(this, this.Module))
 						.Select(c => c.GetErrorText(this, this.Module))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
+				case "Name":
+				{
+					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("88de8421-488e-452e-8289-33074054b22f")).Constraints
+						.Where(c => !c.IsValid(this, this.Name))
+						.Select(c => c.GetErrorText(this, this.Name))
 						.ToArray();
 					
 					return String.Join("; ", errors);
@@ -1127,8 +1127,8 @@ namespace Kistl.App.Base
                 BinarySerializer.ToStream(this._ExportGuid, binStream);
             }
             BinarySerializer.ToStream(this._IsDisplayable, binStream);
-            BinarySerializer.ToStream(this._MethodName, binStream);
             BinarySerializer.ToStream(Module != null ? Module.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(this._Name, binStream);
             BinarySerializer.ToStream(ObjectClass != null ? ObjectClass.ID : (int?)null, binStream);
         }
 
@@ -1146,8 +1146,8 @@ namespace Kistl.App.Base
                 BinarySerializer.FromStream(out this._ExportGuid, binStream);
             }
             BinarySerializer.FromStream(out this._IsDisplayable, binStream);
-            BinarySerializer.FromStream(out this._MethodName, binStream);
             BinarySerializer.FromStream(out this._fk_Module, binStream);
+            BinarySerializer.FromStream(out this._Name, binStream);
             BinarySerializer.FromStream(out this._fk_ObjectClass, binStream);
         }
 
@@ -1165,8 +1165,8 @@ namespace Kistl.App.Base
                 XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
             }
             XmlStreamer.ToStream(this._IsDisplayable, xml, "IsDisplayable", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this._MethodName, xml, "MethodName", "Kistl.App.Base");
             XmlStreamer.ToStream(Module != null ? Module.ID : (int?)null, xml, "Module", "Kistl.App.Base");
+            XmlStreamer.ToStream(this._Name, xml, "Name", "Kistl.App.Base");
             XmlStreamer.ToStream(ObjectClass != null ? ObjectClass.ID : (int?)null, xml, "ObjectClass", "Kistl.App.Base");
         }
 
@@ -1184,8 +1184,8 @@ namespace Kistl.App.Base
                 XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
             }
             XmlStreamer.FromStream(ref this._IsDisplayable, xml, "IsDisplayable", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._MethodName, xml, "MethodName", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_Module, xml, "Module", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._Name, xml, "Name", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_ObjectClass, xml, "ObjectClass", "Kistl.App.Base");
         }
 
@@ -1201,9 +1201,9 @@ namespace Kistl.App.Base
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._Description, xml, "Description", "Kistl.App.Base");
     
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this._IsDisplayable, xml, "IsDisplayable", "Kistl.App.GUI");
-    
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._MethodName, xml, "MethodName", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(Module != null ? Module.ExportGuid : (Guid?)null, xml, "Module", "Kistl.App.Base");
+    
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._Name, xml, "Name", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(ObjectClass != null ? ObjectClass.ExportGuid : (Guid?)null, xml, "ObjectClass", "Kistl.App.Base");
         }
 
@@ -1215,8 +1215,8 @@ namespace Kistl.App.Base
             XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
             this._isExportGuidSet = true;
             XmlStreamer.FromStream(ref this._IsDisplayable, xml, "IsDisplayable", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._MethodName, xml, "MethodName", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_guid_Module, xml, "Module", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._Name, xml, "Name", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_guid_ObjectClass, xml, "ObjectClass", "Kistl.App.Base");
         }
 

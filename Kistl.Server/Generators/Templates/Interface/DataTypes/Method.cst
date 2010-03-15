@@ -21,4 +21,4 @@
 <%
 	}
 %>
-		<%= GetModifiers() %> <%= GetReturnType() %> <%= m.MethodName %>(<%= GetParameterDefinitions() %>) <% ApplyBodyTemplate(); %>
+		<%= GetModifiers() %> <%= GetReturnType() %> <%= m.Name %>(<%= GetParameterDefinitions() %>) <% ApplyBodyTemplate(); %>

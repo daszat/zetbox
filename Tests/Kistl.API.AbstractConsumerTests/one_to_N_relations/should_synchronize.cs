@@ -102,11 +102,11 @@ namespace Kistl.API.AbstractConsumerTests.one_to_N_relations
         {
             var cls = ctx.GetQuery<ObjectClass>().First();
             var m1 = ctx.Create<Method>();
-            m1.MethodName = "TestMethod1";
+            m1.Name = "TestMethod1";
             m1.ObjectClass = cls;
             m1.Module = cls.Module;
             var m2 = ctx.Create<Method>();
-            m2.MethodName = "TestMethod2";
+            m2.Name = "TestMethod2";
             m2.ObjectClass = cls;
             m2.Module = cls.Module;
             var p1 = ctx.Create<StringParameter>();

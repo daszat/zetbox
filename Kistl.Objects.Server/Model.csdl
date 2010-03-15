@@ -1181,11 +1181,11 @@
                         Relationship="Model.FK_Method_has_MethodInvocations"
                         FromRole="Method"
                         ToRole="MethodInvocations" />
-    <Property Name="MethodName" Type="String" Nullable="false" MaxLength="100" />
     <NavigationProperty Name="Module__Implementation__"
                         Relationship="Model.FK_Method_has_Module"
                         FromRole="Method"
                         ToRole="Module" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="100" />
     <NavigationProperty Name="ObjectClass__Implementation__"
                         Relationship="Model.FK_ObjectClass_has_Methods"
                         FromRole="Methods"

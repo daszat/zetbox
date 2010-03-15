@@ -38,7 +38,7 @@ this.WriteObjects("		",  attr , "\r\n");
 }
 
 #line 24 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\DataTypes\Method.cst"
-this.WriteObjects("		",  GetModifiers() , " ",  GetReturnType() , " ",  m.MethodName , "(",  GetParameterDefinitions() , ") ");
+this.WriteObjects("		",  GetModifiers() , " ",  GetReturnType() , " ",  m.Name , "(",  GetParameterDefinitions() , ") ");
 #line 24 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\DataTypes\Method.cst"
 ApplyBodyTemplate(); 
 

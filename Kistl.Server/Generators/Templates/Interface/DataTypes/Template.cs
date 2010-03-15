@@ -124,7 +124,7 @@ namespace Kistl.Server.Generators.Templates.Interface.DataTypes
                 List<Kistl.App.Base.Method> methods = new List<Kistl.App.Base.Method>();
                 foreach (var c in cls.ImplementsInterfaces)
                 {
-                    methods.AddRange(c.Methods.Where(m => m.MethodName == method.MethodName));
+                    methods.AddRange(c.Methods.Where(m => m.Name == method.Name));
                 }
                 foreach (var m in methods)
                 {

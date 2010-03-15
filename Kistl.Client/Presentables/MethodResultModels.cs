@@ -29,7 +29,7 @@ namespace Kistl.Client.Presentables
         #region Public Interface
 
         // TODO: proxying implementations might block on that
-        public string Label { get { return Method.MethodName; } }
+        public string Label { get { return Method.Name; } }
         // TODO: proxying implementations might block on that
         public string ToolTip { get { return Method.Description; } }
 
@@ -49,7 +49,7 @@ namespace Kistl.Client.Presentables
         /// </summary>
         protected void GetResult()
         {
-            Value = Object.CallMethod<TValue>(Method.MethodName);
+            Value = Object.CallMethod<TValue>(Method.Name);
         }
 
         /// <summary>
@@ -75,7 +75,7 @@ namespace Kistl.Client.Presentables
         {
             switch (e.PropertyName)
             {
-                case "MethodName": OnPropertyChanged("Label"); break;
+                case "Name": OnPropertyChanged("Label"); break;
                 case "Description": OnPropertyChanged("ToolTip"); break;
             }
         }

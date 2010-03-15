@@ -17,8 +17,8 @@
 <%
 
 	string indexSuffix = index == 0 ? String.Empty : index.ToString();
-	string delegateName = m.MethodName + indexSuffix + "_Handler";
-	string eventName = "On" + m.MethodName + indexSuffix + "_" + dt.Name;
+	string delegateName = m.Name + indexSuffix + "_Handler";
+	string eventName = "On" + m.Name + indexSuffix + "_" + dt.Name;
 	var returnParam = m.Parameter.SingleOrDefault(parameter => parameter.IsReturnParameter);
 
 	string parameterDefs = m.GetParameterDefinitions();
@@ -40,7 +40,7 @@
 	{
 %>
 		{
-            // base.<%= m.MethodName %>();
+            // base.<%= m.Name %>();
             if (<%= eventName %> != null)
             {
 				<%= eventName %>(this<%= argumentDefs %>);
@@ -51,13 +51,13 @@
         if (m.ObjectClass == dt || !(dt is ObjectClass))
         {
 %>
-                throw new NotImplementedException("No handler registered on <%= m.ObjectClass.Name %>.<%= m.MethodName %>");
+                throw new NotImplementedException("No handler registered on <%= m.ObjectClass.Name %>.<%= m.Name %>");
 <%
         }
         else
         {
 %>
-			    base.<%= m.MethodName %>(<%= m.GetArguments() %>);
+			    base.<%= m.Name %>(<%= m.GetArguments() %>);
 <%
         }
 %>
@@ -89,13 +89,13 @@
         if (m.ObjectClass == dt || !(dt is ObjectClass))
         {
 %>
-                throw new NotImplementedException("No handler registered on <%= m.ObjectClass.Name %>.<%= m.MethodName %>");
+                throw new NotImplementedException("No handler registered on <%= m.ObjectClass.Name %>.<%= m.Name %>");
 <%
         }
         else
         {
 %>
-                e.Result = base.<%= m.MethodName %>(<%= m.GetArguments() %>);
+                e.Result = base.<%= m.Name %>(<%= m.GetArguments() %>);
 <%
         }
 %>

@@ -20,12 +20,12 @@ namespace Kistl.App.Base
         #region CreateDefaultMethods
         private static void CheckDefaultMethod(ObjectClass obj, string methodName)
         {
-            var m = obj.Methods.SingleOrDefault(i => i.MethodName == methodName);
+            var m = obj.Methods.SingleOrDefault(i => i.Name == methodName);
             if (m == null && obj.BaseObjectClass == null)
             {
                 // Only for BaseClasses
                 m = obj.Context.Create<Method>();
-                m.MethodName = methodName;
+                m.Name = methodName;
                 m.Module = obj.Module;
                 obj.Methods.Add(m);
             }
@@ -42,7 +42,7 @@ namespace Kistl.App.Base
             CheckDefaultMethod(obj, "NotifyCreated");
             CheckDefaultMethod(obj, "NotifyDeleting");
 
-            var toStr = obj.Methods.SingleOrDefault(i => i.MethodName == "ToString");
+            var toStr = obj.Methods.SingleOrDefault(i => i.Name == "ToString");
             if (toStr != null && toStr.Parameter.Count == 0)
             {
                 var p = obj.Context.Create<StringParameter>();
@@ -232,7 +232,7 @@ namespace Kistl.App.Base
             StringBuilder sb = new StringBuilder();
 
             sb.Append("On");
-            sb.Append(mi.Method != null ? mi.Method.MethodName : "<<METHODNAME>>");
+            sb.Append(mi.Method != null ? mi.Method.Name : "<<METHODNAME>>");
             sb.Append("_");
             sb.Append(mi.InvokeOnObjectClass != null ? mi.InvokeOnObjectClass.Name : "<<OBJECTCLASSNAME>>");
 

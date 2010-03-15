@@ -17,7 +17,7 @@ namespace Kistl.Server.Generators.Extensions
         {
             if (method == null) { throw new ArgumentNullException("method"); }
 
-            switch (method.MethodName)
+            switch (method.Name)
             {
                 case "ToString":
                 case "NotifyPreSave":
@@ -71,7 +71,7 @@ namespace Kistl.Server.Generators.Extensions
             if (methods == null) { throw new ArgumentNullException("methods"); }
 
             return methods
-                .OrderBy(m => m.MethodName)
+                .OrderBy(m => m.Name)
                 .ThenBy(m => m.Parameter.Count)
                 .ThenBy(m => String.Join("|", m.Parameter.Select(p => p.GetParameterTypeString()).ToArray()));
         }

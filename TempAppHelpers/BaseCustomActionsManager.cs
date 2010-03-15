@@ -159,13 +159,13 @@ namespace Kistl.App.Extensions
                         .Where(p => !p.IsReturnParameter)
                         .Select(p => p.GuessParameterType())
                         .ToArray();
-                    MethodInfo methodInfo = objType.FindMethod(mi.Method.MethodName, paramTypes);
+                    MethodInfo methodInfo = objType.FindMethod(mi.Method.Name, paramTypes);
                     if (methodInfo == null)
                     {
                         Log.WarnFormat(
                             "Couldn't find method '{0}.{1}' with parameters: {2}\n",
                             mi.InvokeOnObjectClass.Name,
-                            mi.Method.MethodName,
+                            mi.Method.Name,
                             String.Join(", ", paramTypes.Select(t => t == null ? "null" : t.FullName).ToArray()));
                     }
                     else

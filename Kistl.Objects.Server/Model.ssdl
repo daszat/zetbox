@@ -1732,7 +1732,7 @@
     <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="true" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
     <Property Name="IsDisplayable" Type="bit" Nullable="false" />
-    <Property Name="MethodName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="MethodInvocation">

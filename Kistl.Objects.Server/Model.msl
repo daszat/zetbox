@@ -520,7 +520,7 @@
 <ScalarProperty Name="Description" ColumnName="Description" />
 <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
 <ScalarProperty Name="IsDisplayable" ColumnName="IsDisplayable" />
-<ScalarProperty Name="MethodName" ColumnName="MethodName" />
+<ScalarProperty Name="Name" ColumnName="Name" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

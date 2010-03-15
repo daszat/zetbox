@@ -254,7 +254,7 @@ namespace Kistl.Client.Presentables
                         && (m.Parameter.Count == 0
                         || (m.Parameter.Count == 1
                             && m.Parameter.Single().IsReturnParameter
-                            && m.MethodName.StartsWith("Create")))));
+                            && m.Name.StartsWith("Create")))));
 
                 cls = cls.BaseObjectClass;
             }

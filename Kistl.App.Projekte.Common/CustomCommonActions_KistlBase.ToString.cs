@@ -88,7 +88,7 @@ namespace Kistl.App.Base
                     : obj.InvokeOnObjectClass.Name,
                 obj.Method == null
                     ? "unattached"
-                    : obj.Method.MethodName);
+                    : obj.Method.Name);
 
             FixupFloatingObjectsToString(obj, e);
         }
@@ -99,13 +99,13 @@ namespace Kistl.App.Base
             if (obj.ObjectClass != null && obj.ObjectClass.Module != null)
             {
                 e.Result = obj.ObjectClass.Module.Namespace + "." +
-                                obj.ObjectClass.Name + "." + obj.MethodName;
+                                obj.ObjectClass.Name + "." + obj.Name;
 
                 FixupFloatingObjectsToString(obj, e);
             }
             else
             {
-                e.Result = String.Format("new Method #{0}: {1}", obj.ID, obj.MethodName);
+                e.Result = String.Format("new Method #{0}: {1}", obj.ID, obj.Name);
             }
         }
 

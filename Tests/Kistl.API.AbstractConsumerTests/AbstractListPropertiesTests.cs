@@ -134,7 +134,7 @@ namespace Kistl.API.AbstractConsumerTests
             using (IKistlContext ctx = GetContext())
             {
                 ObjectClass cls = ctx.GetQuery<ObjectClass>().Where(c => c.Name == "Constraint").ToList().Single();
-                Method isValid = cls.Methods.Where(m => m.MethodName == "IsValid").ToList().Single();
+                Method isValid = cls.Methods.Where(m => m.Name == "IsValid").ToList().Single();
 
                 AssertThatIsCorrectParameterOrder(isValid.Parameter);
 

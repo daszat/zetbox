@@ -33,16 +33,16 @@ namespace Kistl.App.Base
 
         ICollection<Kistl.App.Base.MethodInvocation> MethodInvocations { get; }
         /// <summary>
-        /// 
+        /// Zugehörig zum Modul
         /// </summary>
-		string MethodName {
+		Kistl.App.Base.Module Module {
 			get;
 			set;
 		}
         /// <summary>
-        /// Zugehörig zum Modul
+        /// 
         /// </summary>
-		Kistl.App.Base.Module Module {
+		string Name {
 			get;
 			set;
 		}
