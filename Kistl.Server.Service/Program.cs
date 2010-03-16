@@ -141,6 +141,12 @@ namespace Kistl.Server.Service
                         { "fix", "[DEVEL] run ad-hoc fixes against the database",
                             v => { if (v != null) { actions.Add((c, args) => c.Resolve<Server>().RunFixes()); } }
                             },
+                        { "benchmark", "[DEVEL] run ad-hoc benchmarks against the database",
+                            v => { if (v != null) {
+                				actions.Add((c, args) => c.Resolve<Server>().RunBenchmarks());
+                				waitForKey = true;
+                			} }
+                            },
                         { "wait", "let the process wait for user input before exiting",
                             v => {
                                 waitForKey = (v != null);
@@ -240,18 +246,20 @@ namespace Kistl.Server.Service
 
         internal static void DefaultInitialisation(string dataSourceXmlFile, IContainer container)
         {
-            Log.TraceTotalMemory("Before DefaultInitialisation()");
+        	using(Log.InfoTraceMethodCall()) {
+        		Log.TraceTotalMemory("Before DefaultInitialisation()");
 
-            // TODO: remove, this should be default when using the container.
-            {
-                container.Resolve<ServerApplicationContext>();
-                if (dataSourceXmlFile == null) { FrozenContext.RegisterFallback(container.Resolve<IReadOnlyKistlContext>()); }
-            }
+        		// TODO: remove, this should be default when using the container.
+        		{
+        			container.Resolve<ServerApplicationContext>();
+        			if (dataSourceXmlFile == null) { FrozenContext.RegisterFallback(container.Resolve<IReadOnlyKistlContext>()); }
+        		}
 
-            // initialise custom actions manager
-            var cams = container.Resolve<BaseCustomActionsManager>();
+        		// initialise custom actions manager
+        		var cams = container.Resolve<BaseCustomActionsManager>();
 
-            Log.TraceTotalMemory("After DefaultInitialisation()");
+        		Log.TraceTotalMemory("After DefaultInitialisation()");
+        	}
         }
 
         internal static IContainer CreateMasterContainer(KistlConfig config, string dataSourceXmlFile)

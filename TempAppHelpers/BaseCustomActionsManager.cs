@@ -100,6 +100,7 @@ namespace Kistl.App.Extensions
         /// <param name="metaCtx">the context used to access the meta data</param>
         /// <param name="extraSuffix">an extra suffix to put into the created implementation class names</param>
         /// <param name="assemblyName">the name of the assembly to load implementation classes from</param>
+        /// <param name="filter"></param>
         private void CreateInvokeInfosForObjectClasses(IReadOnlyKistlContext metaCtx, string extraSuffix, string assemblyName, Func<ObjectClass, bool> filter)
         {
             if (filter == null) { throw new ArgumentNullException("filter"); }

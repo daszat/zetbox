@@ -20,12 +20,14 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Kistl.API;
+using Kistl.API.Utils;
 
 namespace <%= module.Namespace %>
 {
 
 	public static class <%= classname %>
 	{
+		private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Provider.Frozen");
 		
 <%
 	foreach(var cls in frozenClasses)
@@ -48,6 +50,8 @@ namespace <%= module.Namespace %>
 
 		internal static void CreateInstances()
 		{
+			using (Log.InfoTraceMethodCall())
+			{
 <%
 	foreach(var cls in frozenClasses)
 	{
@@ -57,11 +61,14 @@ namespace <%= module.Namespace %>
 <%
 	}
 %>
+			}
 		}
 
 
 		internal static void FillDataStore()
 		{
+			using (Log.InfoTraceMethodCall())
+			{
 <%
 	foreach(var cls in frozenClasses)
 	{
@@ -71,7 +78,7 @@ namespace <%= module.Namespace %>
 <%
 	}
 %>
+			}
 		}
 	}
-	
 }

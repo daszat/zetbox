@@ -37,19 +37,21 @@ this.WriteObjects("using System.Collections.Generic;\r\n");
 this.WriteObjects("using System.Linq;\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("using Kistl.API;\r\n");
+this.WriteObjects("using Kistl.API.Utils;\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("namespace ",  module.Namespace , "\r\n");
 this.WriteObjects("{\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("	public static class ",  classname , "\r\n");
 this.WriteObjects("	{\r\n");
+this.WriteObjects("		private readonly static log4net.ILog Log = log4net.LogManager.GetLogger(\"Kistl.Provider.Frozen\");\r\n");
 this.WriteObjects("		\r\n");
-#line 31 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Repositories\FrozenRepository.cst"
+#line 33 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Repositories\FrozenRepository.cst"
 foreach(var cls in frozenClasses)
 	{
 		string implementationName = Implementation.ObjectClasses.Template.GetClassName(cls);
 
-#line 35 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Repositories\FrozenRepository.cst"
+#line 37 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Repositories\FrozenRepository.cst"
 this.WriteObjects("		/// <summary>Frozen List of all ",  cls.Name , "</summary>\r\n");
 this.WriteObjects("		/// ",  cls.Description , "\r\n");
 this.WriteObjects("		public static IQueryable<",  cls.Name , "> ",  cls.TableName , "\r\n");
@@ -60,43 +62,48 @@ this.WriteObjects("				return ",  implementationName , ".DataStore.Values.AsQuer
 this.WriteObjects("			}\r\n");
 this.WriteObjects("		}\r\n");
 this.WriteObjects("		\r\n");
-#line 46 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Repositories\FrozenRepository.cst"
+#line 48 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Repositories\FrozenRepository.cst"
 }
 
-#line 48 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Repositories\FrozenRepository.cst"
+#line 50 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Repositories\FrozenRepository.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("		internal static void CreateInstances()\r\n");
 this.WriteObjects("		{\r\n");
-#line 52 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Repositories\FrozenRepository.cst"
+this.WriteObjects("			using (Log.InfoTraceMethodCall())\r\n");
+this.WriteObjects("			{\r\n");
+#line 56 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Repositories\FrozenRepository.cst"
 foreach(var cls in frozenClasses)
 	{
 		string implementationName = Implementation.ObjectClasses.Template.GetClassName(cls);
 
-#line 56 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Repositories\FrozenRepository.cst"
+#line 60 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Repositories\FrozenRepository.cst"
 this.WriteObjects("				",  implementationName , ".CreateInstances();\r\n");
-#line 58 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Repositories\FrozenRepository.cst"
+#line 62 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Repositories\FrozenRepository.cst"
 }
 
-#line 60 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Repositories\FrozenRepository.cst"
+#line 64 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Repositories\FrozenRepository.cst"
+this.WriteObjects("			}\r\n");
 this.WriteObjects("		}\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("		internal static void FillDataStore()\r\n");
 this.WriteObjects("		{\r\n");
-#line 66 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Repositories\FrozenRepository.cst"
+this.WriteObjects("			using (Log.InfoTraceMethodCall())\r\n");
+this.WriteObjects("			{\r\n");
+#line 73 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Repositories\FrozenRepository.cst"
 foreach(var cls in frozenClasses)
 	{
 		string implementationName = Implementation.ObjectClasses.Template.GetClassName(cls);
 
-#line 70 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Repositories\FrozenRepository.cst"
+#line 77 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Repositories\FrozenRepository.cst"
 this.WriteObjects("				",  implementationName , ".FillDataStore();\r\n");
-#line 72 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Repositories\FrozenRepository.cst"
+#line 79 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Repositories\FrozenRepository.cst"
 }
 
-#line 74 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Repositories\FrozenRepository.cst"
+#line 81 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Repositories\FrozenRepository.cst"
+this.WriteObjects("			}\r\n");
 this.WriteObjects("		}\r\n");
 this.WriteObjects("	}\r\n");
-this.WriteObjects("	\r\n");
 this.WriteObjects("}");
 
         }

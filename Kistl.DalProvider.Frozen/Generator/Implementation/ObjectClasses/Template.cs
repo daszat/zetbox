@@ -22,7 +22,8 @@ namespace Kistl.DalProvider.Frozen.Generator.Implementation.ObjectClasses
         protected override IEnumerable<string> GetAdditionalImports()
         {
             return base.GetAdditionalImports().Concat(new string[]{
-                "Kistl.DalProvider.Frozen"
+                "Kistl.DalProvider.Frozen",
+                "Kistl.API.Utils"
             });
         }
 

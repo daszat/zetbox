@@ -140,6 +140,11 @@ namespace Kistl.Server.Generators
                         proj.Load(gen.ProjectFileName);
                         var defaultPropertyGroup = proj.AddNewPropertyGroup(false);
                         defaultPropertyGroup.AddNewProperty("OutputPath", binPath, true);
+#if DEBUG
+                        defaultPropertyGroup.AddNewProperty("Configuration", "Debug", true);
+#else
+                        defaultPropertyGroup.AddNewProperty("Configuration", "Release", true);
+#endif
                         // Fix XML Path
                         defaultPropertyGroup.AddNewProperty("DocumentationFile", "$(OutputPath)\\$(AssemblyName).xml", false);
                         if (gen.BaseName == "Client")

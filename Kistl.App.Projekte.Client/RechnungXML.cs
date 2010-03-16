@@ -49,7 +49,6 @@ namespace Kistl.App.Projekte
         /// <summary>
         /// Serialize this Object to a File
         /// </summary>
-        /// <param name="s"></param>
         public void ToFile(string filename)
         {
             using (XmlTextWriter w = new XmlTextWriter(filename, Encoding.Unicode))

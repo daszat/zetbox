@@ -16,8 +16,6 @@ namespace Kistl.App.GUI.Common
         /// <summary>
         /// Creates the ToString() result for a specified ControlKind.
         /// </summary>
-        /// <param name="kind"></param>
-        /// <returns></returns>
         public static void OnToString(ControlKind kind, MethodReturnEventArgs<string> e)
         {
             if (kind == null)

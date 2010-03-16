@@ -42,10 +42,13 @@
 	}
 %>
 
+		private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Provider.Frozen");
 
 		internal <%= cls.BaseObjectClass == null ? String.Empty : "new " %>static Dictionary<int, <%= Template.GetClassName(cls) %>> DataStore = new Dictionary<int, <%= Template.GetClassName(cls) %>>(<%= instanceList.Count() %>);
 		internal <%= cls.BaseObjectClass == null ? String.Empty : "new " %>static void CreateInstances()
 		{
+			using (Log.DebugTraceMethodCall())
+			{
 <%
 
 	string classname = Template.GetClassName(cls);
@@ -73,12 +76,19 @@
 <%
 	}
 %>
+			}
 		}
 
-		internal <%= cls.BaseObjectClass == null ? String.Empty : "new " %>static void FillDataStore() {
+		public <%= cls.BaseObjectClass == null ? String.Empty : "new " %>static void FillDataStore() {
+			using (Log.DebugTraceMethodCall())
+			{
 <%
 	foreach(var obj in instanceList) 
 	{
+%>
+			{
+				var item = DataStore[<%= obj.ID %>];
+<%
 		foreach(var baseCls in cls.GetObjectHierarchie()) {
 			foreach(var prop in baseCls.Properties.Cast<Property>().OrderBy(p => p.Name))
 			{
@@ -86,15 +96,16 @@
 				if (!String.IsNullOrEmpty(value) && !value.Equals("null"))
 				{
 %>
-			DataStore[<%= obj.ID %>].<%= prop.Name %> = <%= value %>;
+				item.<%= prop.Name %> = <%= value %>;
 <%
 				}
 			}
 		}
 %>
-			DataStore[<%= obj.ID %>].Seal();
+				item.Seal();
+			}
 <%
 	}
 %>
-	
+			}
 		}
