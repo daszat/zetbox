@@ -51,7 +51,8 @@ namespace Kistl.IntegrationTests
                 }
                 catch (Exception error)
                 {
-                    Log.ErrorFormat(String.Format("Error while initialising Integration Tests: [{0}]", error.GetType().Name), error);
+                    Log.Error("Error while initialising Integration Tests", error);
+                    DisposeManager();
                     throw;
                 }
             }
@@ -62,14 +63,19 @@ namespace Kistl.IntegrationTests
         {
             lock (typeof(SetUp))
             {
-                if (manager != null)
+                DisposeManager();
+            }
+        }
+
+        private void DisposeManager()
+        {
+            if (manager != null)
+            {
+                using (Log.InfoTraceMethodCall("Shutting down"))
                 {
-                    using (Log.InfoTraceMethodCall("Shutting down"))
-                    {
-                        manager.Stop();
-                        manager = null;
-                        Log.Info("Shutting down Kistl finished");
-                    }
+                    manager.Stop();
+                    manager = null;
+                    Log.Info("Shutting down Kistl finished");
                 }
             }
         }
