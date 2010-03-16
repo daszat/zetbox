@@ -50,11 +50,11 @@ namespace Kistl.Server.SchemaManagement
 
         private void CheckUpdateRightsTrigger()
         {
-            Log.DebugFormat("CheckUpdateRightsTrigger");
+            Log.InfoFormat("Checking UpdateRightsTrigger");
             // Select all ObjectClasses with ACL
             foreach (var objClass in schema.GetQuery<ObjectClass>().ToList().Where(o => o.NeedsRightsTable()).OrderBy(o => o.Module.Namespace).ThenBy(o => o.Name))
             {
-                Log.InfoFormat("Table: {0}", objClass.TableName);
+                Log.DebugFormat("Table: {0}", objClass.TableName);
                 if (repair)
                 {
                     Case.DoCreateUpdateRightsTrigger(objClass);
@@ -74,7 +74,7 @@ namespace Kistl.Server.SchemaManagement
             foreach (Relation rel in schema.GetQuery<Relation>().ToList()
                 .Where(r => r.GetRelationType() == RelationType.n_m && schema.GetQuery<RoleMembership>().Where(rm => rm.Relations.Contains(r)).Count() > 0))
             {
-                Log.InfoFormat("Relation: {0}, {1} <-> {2}", rel.Description, rel.A.Type.TableName, rel.B.Type.TableName);
+                Log.DebugFormat("Relation: {0}, {1} <-> {2}", rel.Description, rel.A.Type.TableName, rel.B.Type.TableName);
 
                 if (repair)
                 {
@@ -159,20 +159,34 @@ namespace Kistl.Server.SchemaManagement
                 GetExistingColumnNames(objClass, sprop.CompoundObjectDefinition.Properties, Construct.NestedColumnName(sprop, prefix), columns);
             }
         }
+        private void GetRelationColumnNames(ObjectClass objClass, List<string> columns)
+        {
+            foreach (var relEnd in schema.GetQuery<RelationEnd>().Where(e => e.Type == objClass))
+            {
+                if (relEnd.Parent.HasStorage(relEnd.GetRole()))
+                {
+                    columns.Add(Construct.ForeignKeyColumnName(relEnd.Parent.GetOtherEnd(relEnd)));
+                    if (relEnd.Parent.NeedsPositionStorage(relEnd.GetRole()))
+                    {
+                        columns.Add(Construct.ListPositionColumnName(relEnd.Parent.GetOtherEnd(relEnd)));
+                    }
+                }
+            }
+        }
 
         private void CheckExtraColumns(ObjectClass objClass)
         {
             Log.Debug("Extra Columns: ");
             List<string> columns = new List<string>();
             GetExistingColumnNames(objClass, objClass.Properties, String.Empty, columns);
+            GetRelationColumnNames(objClass, columns);
 
             foreach (string propName in db.GetTableColumnNames(objClass.TableName))
             {
                 if (propName == "ID") continue;
-                if (propName.StartsWith("fk_")) continue;
                 if (!columns.Contains(propName))
                 {
-                    Log.WarnFormat("Column '{0}' found in database but no Property was defined", propName);
+                    Log.WarnFormat("Column '[{0}].[{1}]' found in database but no Property was defined", objClass.TableName, propName);
                 }
             }
         }
@@ -259,7 +273,7 @@ namespace Kistl.Server.SchemaManagement
 
         private void Check_1_1_RelationColumns(Relation rel, RelationEnd relEnd, RelationEndRole role)
         {
-            if (relEnd.Navigator != null && rel.HasStorage(role))
+            if (rel.HasStorage(role))
             {
                 string tblName = relEnd.Type.TableName;
                 RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
@@ -267,6 +281,7 @@ namespace Kistl.Server.SchemaManagement
                 string colName = Construct.ForeignKeyColumnName(otherEnd);
                 string assocName = rel.GetRelationAssociationName(role);
 
+                CheckColumn(relEnd.Type.TableName, Construct.ForeignKeyColumnName(otherEnd), System.Data.DbType.Int32, 0, otherEnd.IsNullable());
                 if (!db.CheckFKConstraintExists(assocName))
                 {
                     Log.WarnFormat("FK Constraint '{0}' is missing", assocName);
@@ -275,7 +290,6 @@ namespace Kistl.Server.SchemaManagement
                         db.CreateFKConstraint(tblName, refTblName, colName, assocName, false);
                     }
                 }
-                CheckColumn(relEnd.Type.TableName, Construct.ForeignKeyColumnName(otherEnd), System.Data.DbType.Int32, 0, otherEnd.IsNullable());
             }
         }
 
@@ -307,6 +321,8 @@ namespace Kistl.Server.SchemaManagement
             string colName = Construct.ForeignKeyColumnName(otherEnd);
             string indexName = Construct.ListPositionColumnName(otherEnd);
 
+            CheckColumn(tblName, colName, System.Data.DbType.Int32, 0, otherEnd.IsNullable());
+
             if (!db.CheckFKConstraintExists(assocName))
             {
                 Log.WarnFormat("FK Constraint '{0}' is missing", assocName);
@@ -316,7 +332,6 @@ namespace Kistl.Server.SchemaManagement
                 }
             }
 
-            CheckColumn(tblName, colName, System.Data.DbType.Int32, 0, otherEnd.IsNullable());
             if (isIndexed)
             {
                 CheckOrderColumn(tblName, indexName);
@@ -354,6 +369,8 @@ namespace Kistl.Server.SchemaManagement
                 }
                 return;
             }
+            CheckColumn(tblName, fkAName, System.Data.DbType.Int32, 0, false);
+            CheckColumn(tblName, fkBName, System.Data.DbType.Int32, 0, false);
 
             if (!db.CheckFKConstraintExists(assocAName))
             {
@@ -372,7 +389,6 @@ namespace Kistl.Server.SchemaManagement
                 }
             }
 
-            CheckColumn(tblName, fkAName, System.Data.DbType.Int32, 0, false);
             if (rel.NeedsPositionStorage(RelationEndRole.A))
             {
                 CheckColumn(tblName, fkAIndex, System.Data.DbType.Int32, 0, true);
@@ -390,7 +406,6 @@ namespace Kistl.Server.SchemaManagement
                 }
             }
 
-            CheckColumn(tblName, fkBName, System.Data.DbType.Int32, 0, false);
             if (rel.NeedsPositionStorage(RelationEndRole.B))
             {
                 CheckColumn(tblName, fkBIndex, System.Data.DbType.Int32, 0, true);

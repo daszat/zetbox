@@ -164,7 +164,7 @@ namespace Kistl.App.Test
     /*
     Relation: FK_Student_füllt_aus_Testbogen
     A: One TestStudent as Student
-    B: ZeroOrOne Fragebogen as Testbogen
+    B: ZeroOrMore Fragebogen as Testbogen
     Preferred Storage: MergeIntoB
     */
         // object reference property

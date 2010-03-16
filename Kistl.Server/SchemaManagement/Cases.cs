@@ -735,7 +735,98 @@ namespace Kistl.Server.SchemaManagement
         }
         public void DoChangeRelationType_from_1_n_to_1_1(Relation rel)
         {
+            string srcAssocName = rel.GetAssociationName();
+            var saved = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
 
+            RelationEnd relEnd, otherEnd;
+
+            switch (saved.Storage)
+            {
+                case StorageType.MergeIntoA:
+                    relEnd = saved.A;
+                    otherEnd = saved.B;
+                    break;
+                case StorageType.MergeIntoB:
+                    otherEnd = saved.A;
+                    relEnd = saved.B;
+                    break;
+                default:
+                    Log.ErrorFormat("Relation '{0}' has unsupported Storage set: {1}, skipped", srcAssocName, rel.Storage);
+                    return;
+            }
+
+            string srcTblName = relEnd.Type.TableName;
+            string srcColName = Construct.ForeignKeyColumnName(otherEnd);
+            bool srcIsIndexed = rel.NeedsPositionStorage(relEnd.GetRole());
+            string srcIndexName = Construct.ListPositionColumnName(otherEnd);
+
+            if (!db.CheckColumnContainsUniqueValues(srcTblName, srcColName))
+            {
+                Log.ErrorFormat("Unable to change Relation '{0}' from 1:n to 1:1. Data is not unique", srcAssocName);
+                return;
+            }
+
+            db.DropFKConstraint(srcTblName, srcAssocName);
+            if (srcIsIndexed)
+            {
+                db.DropColumn(srcTblName, srcIndexName);
+            }
+
+            bool aCreated = false;
+            bool bCreated = false;
+
+            // Difference to 1:N. 1:1 may have storage 'Replicate'
+            // First try to migrate columns
+            // And only migrate because the source data might be used twice
+            if (rel.HasStorage(RelationEndRole.A))
+            {
+                var destTblName = rel.A.Type.TableName;
+                var destColName = Construct.ForeignKeyColumnName(rel.B);
+                if (destTblName != srcTblName)
+                {
+                    New_1_1_Relation_CreateColumns(rel, rel.A, rel.B, RelationEndRole.A);
+                    db.MigrateFKs(srcTblName, srcColName, destTblName, destColName);
+                    aCreated = true;
+                }
+            }
+            if (rel.HasStorage(RelationEndRole.B))
+            {
+                var destTblName = rel.B.Type.TableName;
+                var destColName = Construct.ForeignKeyColumnName(rel.A);
+                if (destTblName != srcTblName)
+                {
+                    New_1_1_Relation_CreateColumns(rel, rel.B, rel.A, RelationEndRole.B);
+                    db.MigrateFKs(srcTblName, srcColName, destTblName, destColName);
+                    bCreated = true;
+                }
+            }
+            // Then try to rename columns
+            if (rel.HasStorage(RelationEndRole.A) && !aCreated)
+            {
+                var destTblName = rel.A.Type.TableName;
+                var destColName = Construct.ForeignKeyColumnName(rel.B);
+                if (destTblName == srcTblName && destColName != srcColName)
+                {
+                    db.RenameColumn(destTblName, srcColName, destColName);
+                }
+                var assocName = rel.GetRelationAssociationName(RelationEndRole.A);
+                var refTblName = rel.B.Type.TableName;
+                db.CreateFKConstraint(destTblName, refTblName, destColName, assocName, false);
+            }
+            if (rel.HasStorage(RelationEndRole.B) && !bCreated)
+            {
+                var destTblName = rel.B.Type.TableName;
+                var destColName = Construct.ForeignKeyColumnName(rel.A);
+                if (destTblName == srcTblName && destColName != srcColName)
+                {
+                    db.RenameColumn(destTblName, srcColName, destColName);
+                }
+                var assocName = rel.GetRelationAssociationName(RelationEndRole.B);
+                var refTblName = rel.A.Type.TableName;
+                db.CreateFKConstraint(destTblName, refTblName, destColName, assocName, false);
+            }
+
+            db.DropColumn(srcTblName, srcColName);
         }
         #endregion
 
@@ -791,12 +882,59 @@ namespace Kistl.Server.SchemaManagement
         {
             var saved = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
             if (saved == null) return false;
-            return saved.GetAssociationName() != rel.GetAssociationName();
+            // GetAssociationName and GetRelationAssociationName contains both ARoleName, Verb and BRoleName
+            return saved.GetAssociationName() != rel.GetAssociationName(); 
         }
         public void DoChangeRelationName(Relation rel)
         {
             var saved = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
-            db.RenameFKConstraint(saved.GetAssociationName(), rel.GetAssociationName());
+
+            if (rel.GetRelationType() == RelationType.n_m)
+            {
+                db.RenameFKConstraint(saved.GetRelationAssociationName(RelationEndRole.A), rel.GetRelationAssociationName(RelationEndRole.A));
+                db.RenameFKConstraint(saved.GetRelationAssociationName(RelationEndRole.B), rel.GetRelationAssociationName(RelationEndRole.B));
+                
+                var srcRelTbl = saved.GetRelationTableName();
+                var destRelTbl = rel.GetRelationTableName();
+                db.RenameTable(srcRelTbl, destRelTbl);
+                
+                db.RenameColumn(destRelTbl, saved.GetRelationFkColumnName(RelationEndRole.A), rel.GetRelationFkColumnName(RelationEndRole.A));
+                db.RenameColumn(destRelTbl, saved.GetRelationFkColumnName(RelationEndRole.B), rel.GetRelationFkColumnName(RelationEndRole.B));
+            }
+            else if(rel.GetRelationType() == RelationType.one_n)
+            {
+                db.RenameFKConstraint(saved.GetAssociationName(), rel.GetAssociationName());
+
+                if (saved.HasStorage(RelationEndRole.A) &&
+                    Construct.ForeignKeyColumnName(saved.B) != Construct.ForeignKeyColumnName(rel.B))
+                {
+                    db.RenameColumn(rel.A.Type.TableName, Construct.ForeignKeyColumnName(saved.B), Construct.ForeignKeyColumnName(rel.B));
+                }
+                if (saved.HasStorage(RelationEndRole.B) &&
+                    Construct.ForeignKeyColumnName(saved.A) != Construct.ForeignKeyColumnName(rel.A))
+                {
+                    db.RenameColumn(rel.B.Type.TableName, Construct.ForeignKeyColumnName(saved.A), Construct.ForeignKeyColumnName(rel.A));
+                }
+            }
+            else if (rel.GetRelationType() == RelationType.one_one)
+            {
+                if (saved.HasStorage(RelationEndRole.A))
+                {
+                    db.RenameFKConstraint(saved.GetRelationAssociationName(RelationEndRole.A), rel.GetRelationAssociationName(RelationEndRole.A));
+                    if (Construct.ForeignKeyColumnName(saved.B) != Construct.ForeignKeyColumnName(rel.B))
+                    {
+                        db.RenameColumn(rel.A.Type.TableName, Construct.ForeignKeyColumnName(saved.B), Construct.ForeignKeyColumnName(rel.B));
+                    }
+                }
+                if (saved.HasStorage(RelationEndRole.B))
+                {
+                    db.RenameFKConstraint(saved.GetRelationAssociationName(RelationEndRole.B), rel.GetRelationAssociationName(RelationEndRole.B));
+                    if (Construct.ForeignKeyColumnName(saved.A) != Construct.ForeignKeyColumnName(rel.A))
+                    {
+                        db.RenameColumn(rel.B.Type.TableName, Construct.ForeignKeyColumnName(saved.A), Construct.ForeignKeyColumnName(rel.A));
+                    }
+                }
+            }
         }
         #endregion
 

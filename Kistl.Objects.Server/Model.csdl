@@ -3627,7 +3627,7 @@
          Multiplicity="0..1" />
     <End Role="Testbogen"
          Type="Model.Fragebogen" 
-         Multiplicity="0..1" />
+         Multiplicity="*" />
   </Association>
   <Association Name="FK_StudentExam_passes_Exam" >
     <End Role="StudentExam"

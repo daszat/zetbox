@@ -23,9 +23,7 @@ namespace Kistl.App.Test
         /// <summary>
         /// 
         /// </summary>
-		Kistl.App.Test.Fragebogen Testbogen {
-			get;
-			set;
-		}
+
+        ICollection<Kistl.App.Test.Fragebogen> Testbogen { get; }
     }
 }

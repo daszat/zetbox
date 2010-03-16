@@ -1678,7 +1678,7 @@ using Kistl.DalProvider.EF;
 	/*
     Relation: FK_Student_füllt_aus_Testbogen
     A: One TestStudent as Student
-    B: ZeroOrOne Fragebogen as Testbogen
+    B: ZeroOrMore Fragebogen as Testbogen
     Preferred Storage: MergeIntoB
 	*/
 
@@ -1686,7 +1686,7 @@ using Kistl.DalProvider.EF;
 [assembly: EdmRelationship(
     "Model", "FK_Student_füllt_aus_Testbogen",
     "Student", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Test.TestStudent__Implementation__),
-    "Testbogen", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Test.Fragebogen__Implementation__)
+    "Testbogen", RelationshipMultiplicity.Many, typeof(Kistl.App.Test.Fragebogen__Implementation__)
     )]
 
 

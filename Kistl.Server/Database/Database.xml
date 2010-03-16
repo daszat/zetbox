@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2010-03-16T14:16:19.157Z" xmlns="http://dasz.at/Kistl">
+<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2010-03-16T14:23:19.643Z" xmlns="http://dasz.at/Kistl">
   <KistlBase:Module ExportGuid="110acbc0-652a-4adc-9de5-8baabfcf3637">
     <KistlBase:ChangedOn>2010-02-01T16:07:00.49Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2010-02-01T15:23:35.247Z</KistlBase:CreatedOn>
@@ -19420,7 +19420,7 @@
     <KistlBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</KistlBase:Module>
     <KistlBase:Name>Name</KistlBase:Name>
     <KistlBase:ObjectClass>9efc763c-9cdf-41e3-930c-7505fc4ac840</KistlBase:ObjectClass>
-    <KistlBase:ObjectClass_pos>200</KistlBase:ObjectClass_pos>
+    <KistlBase:ObjectClass_pos>100</KistlBase:ObjectClass_pos>
     <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:IsList>false</KistlBase:IsList>
@@ -19432,7 +19432,7 @@
     <KistlBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</KistlBase:Module>
     <KistlBase:Name>Testbogen</KistlBase:Name>
     <KistlBase:ObjectClass>9efc763c-9cdf-41e3-930c-7505fc4ac840</KistlBase:ObjectClass>
-    <KistlBase:ObjectClass_pos>100</KistlBase:ObjectClass_pos>
+    <KistlBase:ObjectClass_pos>200</KistlBase:ObjectClass_pos>
     <GUI:ValueModelDescriptor>83aae6fd-0fae-4348-b313-737a6e751027</GUI:ValueModelDescriptor>
     <KistlBase:EagerLoading>false</KistlBase:EagerLoading>
     <KistlBase:RelationEnd>c6fb54fe-d967-46b8-b2b0-10e0c26ede93</KistlBase:RelationEnd>
@@ -19500,7 +19500,7 @@
   <KistlBase:Relation ExportGuid="6819ca86-571c-4d59-bc30-cc1fb0decc9e">
     <KistlBase:A>c6fb54fe-d967-46b8-b2b0-10e0c26ede93</KistlBase:A>
     <KistlBase:B>cfb842fe-5559-4724-8ece-cfd0956bfa92</KistlBase:B>
-    <KistlBase:ChangedOn>2010-03-16T11:20:50.807Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2010-03-16T14:23:19.643Z</KistlBase:ChangedOn>
     <KistlBase:Containment>0</KistlBase:Containment>
     <KistlBase:CreatedOn>2010-03-16T11:20:50.807Z</KistlBase:CreatedOn>
     <KistlBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</KistlBase:Module>
@@ -19529,10 +19529,10 @@
   </KistlBase:RelationEnd>
   <KistlBase:RelationEnd ExportGuid="cfb842fe-5559-4724-8ece-cfd0956bfa92">
     <KistlBase:BParent>6819ca86-571c-4d59-bc30-cc1fb0decc9e</KistlBase:BParent>
-    <KistlBase:ChangedOn>2010-03-16T11:20:50.81Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2010-03-16T14:23:19.613Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2010-03-16T11:20:50.81Z</KistlBase:CreatedOn>
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
-    <KistlBase:Multiplicity>1</KistlBase:Multiplicity>
+    <KistlBase:Multiplicity>3</KistlBase:Multiplicity>
     <KistlBase:Navigator>3a91e745-0dd2-4f31-864e-eaf657ddb577</KistlBase:Navigator>
     <KistlBase:RoleName>Testbogen</KistlBase:RoleName>
     <KistlBase:Type>a78ff235-4511-431b-8437-939f7fecded4</KistlBase:Type>

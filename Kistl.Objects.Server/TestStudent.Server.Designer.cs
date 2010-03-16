@@ -115,90 +115,47 @@ namespace Kistl.App.Test
     /*
     Relation: FK_Student_füllt_aus_Testbogen
     A: One TestStudent as Student
-    B: ZeroOrOne Fragebogen as Testbogen
+    B: ZeroOrMore Fragebogen as Testbogen
     Preferred Storage: MergeIntoB
     */
-        // object reference property
-   		// Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
-        // implement the user-visible interface
+        // object list property
+   		// Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.ObjectListProperty
+	    // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Test.Fragebogen Testbogen
+        public ICollection<Kistl.App.Test.Fragebogen> Testbogen
         {
             get
             {
-                return Testbogen__Implementation__;
-            }
-            set
-            {
-                // TODO: NotifyPropertyChanged()
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if(value != null && value.Context != this.Context) throw new WrongKistlContextException();
-                Testbogen__Implementation__ = (Kistl.App.Test.Fragebogen__Implementation__)value;
+                if (_TestbogenWrapper == null)
+                {
+                    _TestbogenWrapper = new EntityCollectionWrapper<Kistl.App.Test.Fragebogen, Kistl.App.Test.Fragebogen__Implementation__>(
+                            this.Context, Testbogen__Implementation__);
+                }
+                return _TestbogenWrapper;
             }
         }
         
-        private int? _fk_Testbogen;
-        private Guid? _fk_guid_Testbogen = null;
-        // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Student_füllt_aus_Testbogen", "Testbogen")]
-        public Kistl.App.Test.Fragebogen__Implementation__ Testbogen__Implementation__
+        public EntityCollection<Kistl.App.Test.Fragebogen__Implementation__> Testbogen__Implementation__
         {
             get
             {
-                EntityReference<Kistl.App.Test.Fragebogen__Implementation__> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Test.Fragebogen__Implementation__>(
+                var c = ((IEntityWithRelationships)(this)).RelationshipManager
+                    .GetRelatedCollection<Kistl.App.Test.Fragebogen__Implementation__>(
                         "Model.FK_Student_füllt_aus_Testbogen",
                         "Testbogen");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !r.IsLoaded)
+                    && !c.IsLoaded)
                 {
-                    r.Load(); 
-                    if(r.Value != null) r.Value.AttachToContext(this.Context);
+                    c.Load();
                 }
-                var __value = r.Value;
-				if(OnTestbogen_Getter != null)
-				{
-					var e = new PropertyGetterEventArgs<Kistl.App.Test.Fragebogen>(__value);
-					OnTestbogen_Getter(this, e);
-					__value = (Kistl.App.Test.Fragebogen__Implementation__)e.Result;
-				}
-                return __value;
-            }
-            set
-            {
-                EntityReference<Kistl.App.Test.Fragebogen__Implementation__> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Test.Fragebogen__Implementation__>(
-                        "Model.FK_Student_füllt_aus_Testbogen",
-                        "Testbogen");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !r.IsLoaded)
-                {
-                    r.Load(); 
-                }
-                Kistl.App.Test.Fragebogen __oldValue = (Kistl.App.Test.Fragebogen)r.Value;
-                Kistl.App.Test.Fragebogen __newValue = (Kistl.App.Test.Fragebogen)value;
-
-                if(OnTestbogen_PreSetter != null)
-                {
-					var e = new PropertyPreSetterEventArgs<Kistl.App.Test.Fragebogen>(__oldValue, __newValue);
-					OnTestbogen_PreSetter(this, e);
-					__newValue = e.Result;
-                }
-                r.Value = (Kistl.App.Test.Fragebogen__Implementation__)__newValue;
-                if(OnTestbogen_PostSetter != null)
-                {
-					var e = new PropertyPostSetterEventArgs<Kistl.App.Test.Fragebogen>(__oldValue, __newValue);
-					OnTestbogen_PostSetter(this, e);
-                }
-                                
+                return c;
             }
         }
-        
-        
-		public static event PropertyGetterHandler<Kistl.App.Test.TestStudent, Kistl.App.Test.Fragebogen> OnTestbogen_Getter;
-		public static event PropertyPreSetterHandler<Kistl.App.Test.TestStudent, Kistl.App.Test.Fragebogen> OnTestbogen_PreSetter;
-		public static event PropertyPostSetterHandler<Kistl.App.Test.TestStudent, Kistl.App.Test.Fragebogen> OnTestbogen_PostSetter;
+        private EntityCollectionWrapper<Kistl.App.Test.Fragebogen, Kistl.App.Test.Fragebogen__Implementation__> _TestbogenWrapper;
+
+
 
 		public override InterfaceType GetInterfaceType()
 		{
@@ -213,7 +170,6 @@ namespace Kistl.App.Test
 			var me = (TestStudent)this;
 
 			me.Name = other.Name;
-			this._fk_Testbogen = otherImpl._fk_Testbogen;
 		}
 
         // tail template
@@ -299,13 +255,6 @@ namespace Kistl.App.Test
 			// TODO: enable when MemoryContext uses MemoryDataObjects
 			//if (this.ObjectState == DataObjectState.Deleted) return;
 			// fix direct object references
-
-			if (_fk_guid_Testbogen.HasValue)
-				Testbogen__Implementation__ = (Kistl.App.Test.Fragebogen__Implementation__)Context.FindPersistenceObject<Kistl.App.Test.Fragebogen>(_fk_guid_Testbogen.Value);
-			else if (_fk_Testbogen.HasValue)
-				Testbogen__Implementation__ = (Kistl.App.Test.Fragebogen__Implementation__)Context.Find<Kistl.App.Test.Fragebogen>(_fk_Testbogen.Value);
-			else
-				Testbogen__Implementation__ = null;
 		}
 #region Serializer
 
@@ -315,7 +264,6 @@ namespace Kistl.App.Test
             
             base.ToStream(binStream, auxObjects);
             BinarySerializer.ToStream(this._Name, binStream);
-            BinarySerializer.ToStream(Testbogen != null ? Testbogen.ID : (int?)null, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
@@ -323,7 +271,6 @@ namespace Kistl.App.Test
             
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._Name, binStream);
-            BinarySerializer.FromStream(out this._fk_Testbogen, binStream);
         }
 
         public override void ToStream(System.Xml.XmlWriter xml)
@@ -331,7 +278,6 @@ namespace Kistl.App.Test
             
             base.ToStream(xml);
             XmlStreamer.ToStream(this._Name, xml, "Name", "Kistl.App.Test");
-            XmlStreamer.ToStream(Testbogen != null ? Testbogen.ID : (int?)null, xml, "Testbogen", "Kistl.App.Test");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
@@ -339,7 +285,6 @@ namespace Kistl.App.Test
             
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._Name, xml, "Name", "Kistl.App.Test");
-            XmlStreamer.FromStream(ref this._fk_Testbogen, xml, "Testbogen", "Kistl.App.Test");
         }
 
 #endregion

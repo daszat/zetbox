@@ -67,6 +67,7 @@ namespace Kistl.API.Server
         bool CheckFKConstraintExists(string fkName);
         bool CheckTableContainsData(string tblName);
         bool CheckColumnContainsNulls(string tblName, string colName);
+        bool CheckColumnContainsUniqueValues(string tblName, string colName);
 
         bool CheckPositionColumnValidity(string tblName, string positionColumnName);
         bool RepairPositionColumn(string tblName, string positionColumnName);
