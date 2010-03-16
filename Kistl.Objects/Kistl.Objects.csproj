@@ -153,6 +153,7 @@
     <Compile Include="Template.Interface.Designer.cs" />
     <Compile Include="TestCustomObject.Interface.Designer.cs" />
     <Compile Include="TestObjClass.Interface.Designer.cs" />
+    <Compile Include="TestStudent.Interface.Designer.cs" />
     <Compile Include="TextboxKind.Interface.Designer.cs" />
     <Compile Include="TypeRef.Interface.Designer.cs" />
     <Compile Include="TypeRefRefKind.Interface.Designer.cs" />

@@ -281,83 +281,113 @@ namespace Kistl.Server.SchemaManagement
 
                 if (Case.IsChangeRelationType(rel))
                 {
-                    Case.DoChangeRelationType(rel);
-                }
-                else if (rel.GetRelationType() == RelationType.one_n)
-                {
-                    if (Case.IsNew_1_N_Relation(rel))
+                    if (Case.IsChangeRelationType_from_1_1_to_1_n(rel))
                     {
-                        Case.DoNew_1_N_Relation(rel);
+                        Case.DoChangeRelationType_from_1_1_to_1_n(rel);
                     }
-                    if (Case.Is_1_N_RelationChange_FromIndexed_To_NotIndexed(rel))
+                    else if (Case.IsChangeRelationType_from_1_1_to_n_m(rel))
                     {
-                        Case.Do_1_N_RelationChange_FromIndexed_To_NotIndexed(rel);
+                        Case.DoChangeRelationType_from_1_1_to_n_m(rel);
                     }
-                    if (Case.Is_1_N_RelationChange_FromNotIndexed_To_Indexed(rel))
+                    else if (Case.IsChangeRelationType_from_1_n_to_1_1(rel))
                     {
-                        Case.Do_1_N_RelationChange_FromNotIndexed_To_Indexed(rel);
+                        Case.DoChangeRelationType_from_1_n_to_1_1(rel);
                     }
-                    if (Case.Is_1_N_RelationChange_FromNullable_To_NotNullable(rel))
+                    else if (Case.IsChangeRelationType_from_1_n_to_n_m(rel))
                     {
-                        Case.Do_1_N_RelationChange_FromNullable_To_NotNullable(rel);
+                        Case.DoChangeRelationType_from_1_n_to_n_m(rel);
                     }
-                    if (Case.Is_1_N_RelationChange_FromNotNullable_To_Nullable(rel))
+                    else if (Case.IsChangeRelationType_from_n_m_to_1_1(rel))
                     {
-                        Case.Do_1_N_RelationChange_FromNotNullable_To_Nullable(rel);
+                        Case.DoChangeRelationType_from_n_m_to_1_1(rel);
                     }
-                }
-                else if (rel.GetRelationType() == RelationType.n_m)
-                {
-                    if (Case.IsNew_N_M_Relation(rel))
+                    else if (Case.IsChangeRelationType_from_n_m_to_1_n(rel))
                     {
-                        Case.DoNew_N_M_Relation(rel);
-                    }
-                    if (Case.Is_N_M_RelationChange_FromIndexed_To_NotIndexed(rel, RelationEndRole.A))
-                    {
-                        Case.Do_N_M_RelationChange_FromIndexed_To_NotIndexed(rel, RelationEndRole.A);
-                    }
-                    if (Case.Is_N_M_RelationChange_FromIndexed_To_NotIndexed(rel, RelationEndRole.B))
-                    {
-                        Case.Do_N_M_RelationChange_FromIndexed_To_NotIndexed(rel, RelationEndRole.B);
-                    }
-                    if (Case.Is_N_M_RelationChange_FromNotIndexed_To_Indexed(rel, RelationEndRole.A))
-                    {
-                        Case.Do_N_M_RelationChange_FromNotIndexed_To_Indexed(rel, RelationEndRole.A);
-                    }
-                    if (Case.Is_N_M_RelationChange_FromNotIndexed_To_Indexed(rel, RelationEndRole.B))
-                    {
-                        Case.Do_N_M_RelationChange_FromNotIndexed_To_Indexed(rel, RelationEndRole.B);
+                        Case.DoChangeRelationType_from_n_m_to_1_n(rel);
                     }
                 }
-                else if (rel.GetRelationType() == RelationType.one_one)
+                else
                 {
-                    if (Case.IsNew_1_1_Relation(rel))
+                    if (rel.GetRelationType() == RelationType.one_n)
                     {
-                        Case.DoNew_1_1_Relation(rel);
+                        if (Case.IsNew_1_N_Relation(rel))
+                        {
+                            Case.DoNew_1_N_Relation(rel);
+                        }
+                        if (Case.Is_1_N_RelationChange_FromIndexed_To_NotIndexed(rel))
+                        {
+                            Case.Do_1_N_RelationChange_FromIndexed_To_NotIndexed(rel);
+                        }
+                        if (Case.Is_1_N_RelationChange_FromNotIndexed_To_Indexed(rel))
+                        {
+                            Case.Do_1_N_RelationChange_FromNotIndexed_To_Indexed(rel);
+                        }
+                        if (Case.Is_1_N_RelationChange_FromNullable_To_NotNullable(rel))
+                        {
+                            Case.Do_1_N_RelationChange_FromNullable_To_NotNullable(rel);
+                        }
+                        if (Case.Is_1_N_RelationChange_FromNotNullable_To_Nullable(rel))
+                        {
+                            Case.Do_1_N_RelationChange_FromNotNullable_To_Nullable(rel);
+                        }
+                    }
+                    else if (rel.GetRelationType() == RelationType.n_m)
+                    {
+                        if (Case.IsNew_N_M_Relation(rel))
+                        {
+                            Case.DoNew_N_M_Relation(rel);
+                        }
+                        if (Case.Is_N_M_RelationChange_FromIndexed_To_NotIndexed(rel, RelationEndRole.A))
+                        {
+                            Case.Do_N_M_RelationChange_FromIndexed_To_NotIndexed(rel, RelationEndRole.A);
+                        }
+                        if (Case.Is_N_M_RelationChange_FromIndexed_To_NotIndexed(rel, RelationEndRole.B))
+                        {
+                            Case.Do_N_M_RelationChange_FromIndexed_To_NotIndexed(rel, RelationEndRole.B);
+                        }
+                        if (Case.Is_N_M_RelationChange_FromNotIndexed_To_Indexed(rel, RelationEndRole.A))
+                        {
+                            Case.Do_N_M_RelationChange_FromNotIndexed_To_Indexed(rel, RelationEndRole.A);
+                        }
+                        if (Case.Is_N_M_RelationChange_FromNotIndexed_To_Indexed(rel, RelationEndRole.B))
+                        {
+                            Case.Do_N_M_RelationChange_FromNotIndexed_To_Indexed(rel, RelationEndRole.B);
+                        }
+                    }
+                    else if (rel.GetRelationType() == RelationType.one_one)
+                    {
+                        if (Case.IsNew_1_1_Relation(rel))
+                        {
+                            Case.DoNew_1_1_Relation(rel);
+                        }
+                        if (Case.IsChange_1_1_Storage(rel))
+                        {
+                            Case.DoChange_1_1_Storage(rel);
+                        }
+
+                        if (Case.Is1_1_RelationChange_FromNotNullable_To_Nullable(rel, RelationEndRole.A))
+                        {
+                            Case.Do1_1_RelationChange_FromNotNullable_To_Nullable(rel, RelationEndRole.A);
+                        }
+                        if (Case.Is1_1_RelationChange_FromNotNullable_To_Nullable(rel, RelationEndRole.B))
+                        {
+                            Case.Do1_1_RelationChange_FromNotNullable_To_Nullable(rel, RelationEndRole.B);
+                        }
+
+                        if (Case.Is1_1_RelationChange_FromNullable_To_NotNullable(rel, RelationEndRole.A))
+                        {
+                            Case.Do1_1_RelationChange_FromNullable_To_NotNullable(rel, RelationEndRole.A);
+                        }
+                        if (Case.Is1_1_RelationChange_FromNullable_To_NotNullable(rel, RelationEndRole.B))
+                        {
+                            Case.Do1_1_RelationChange_FromNullable_To_NotNullable(rel, RelationEndRole.B);
+                        }
                     }
 
-                    if (Case.Is1_1_RelationChange_FromNotNullable_To_Nullable(rel, RelationEndRole.A))
+                    if (Case.IsChangeRelationName(rel))
                     {
-                        Case.Do1_1_RelationChange_FromNotNullable_To_Nullable(rel, RelationEndRole.A);
+                        Case.DoChangeRelationName(rel);
                     }
-                    if (Case.Is1_1_RelationChange_FromNotNullable_To_Nullable(rel, RelationEndRole.B))
-                    {
-                        Case.Do1_1_RelationChange_FromNotNullable_To_Nullable(rel, RelationEndRole.B);
-                    }
-
-                    if (Case.Is1_1_RelationChange_FromNullable_To_NotNullable(rel, RelationEndRole.A))
-                    {
-                        Case.Do1_1_RelationChange_FromNullable_To_NotNullable(rel, RelationEndRole.A);
-                    }
-                    if (Case.Is1_1_RelationChange_FromNullable_To_NotNullable(rel, RelationEndRole.B))
-                    {
-                        Case.Do1_1_RelationChange_FromNullable_To_NotNullable(rel, RelationEndRole.B);
-                    }
-                }
-
-                if (Case.IsChangeRelationName(rel))
-                {
-                    Case.DoChangeRelationName(rel);
                 }
             }
             Log.Debug(String.Empty);

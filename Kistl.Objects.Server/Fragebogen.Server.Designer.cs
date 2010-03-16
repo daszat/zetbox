@@ -158,6 +158,97 @@ namespace Kistl.App.Test
 		public static event PropertyPreSetterHandler<Kistl.App.Test.Fragebogen, int?> OnBogenNummer_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Test.Fragebogen, int?> OnBogenNummer_PostSetter;
 
+        /// <summary>
+        /// 
+        /// </summary>
+    /*
+    Relation: FK_Student_füllt_aus_Testbogen
+    A: One TestStudent as Student
+    B: ZeroOrOne Fragebogen as Testbogen
+    Preferred Storage: MergeIntoB
+    */
+        // object reference property
+   		// Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public Kistl.App.Test.TestStudent Student
+        {
+            get
+            {
+                return Student__Implementation__;
+            }
+            set
+            {
+                // TODO: NotifyPropertyChanged()
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if(value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                Student__Implementation__ = (Kistl.App.Test.TestStudent__Implementation__)value;
+            }
+        }
+        
+        private int? _fk_Student;
+        private Guid? _fk_guid_Student = null;
+        // EF sees only this property
+        [EdmRelationshipNavigationProperty("Model", "FK_Student_füllt_aus_Testbogen", "Student")]
+        public Kistl.App.Test.TestStudent__Implementation__ Student__Implementation__
+        {
+            get
+            {
+                EntityReference<Kistl.App.Test.TestStudent__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Test.TestStudent__Implementation__>(
+                        "Model.FK_Student_füllt_aus_Testbogen",
+                        "Student");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load(); 
+                    if(r.Value != null) r.Value.AttachToContext(this.Context);
+                }
+                var __value = r.Value;
+				if(OnStudent_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<Kistl.App.Test.TestStudent>(__value);
+					OnStudent_Getter(this, e);
+					__value = (Kistl.App.Test.TestStudent__Implementation__)e.Result;
+				}
+                return __value;
+            }
+            set
+            {
+                EntityReference<Kistl.App.Test.TestStudent__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Test.TestStudent__Implementation__>(
+                        "Model.FK_Student_füllt_aus_Testbogen",
+                        "Student");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load(); 
+                }
+                Kistl.App.Test.TestStudent __oldValue = (Kistl.App.Test.TestStudent)r.Value;
+                Kistl.App.Test.TestStudent __newValue = (Kistl.App.Test.TestStudent)value;
+
+                if(OnStudent_PreSetter != null)
+                {
+					var e = new PropertyPreSetterEventArgs<Kistl.App.Test.TestStudent>(__oldValue, __newValue);
+					OnStudent_PreSetter(this, e);
+					__newValue = e.Result;
+                }
+                r.Value = (Kistl.App.Test.TestStudent__Implementation__)__newValue;
+                if(OnStudent_PostSetter != null)
+                {
+					var e = new PropertyPostSetterEventArgs<Kistl.App.Test.TestStudent>(__oldValue, __newValue);
+					OnStudent_PostSetter(this, e);
+                }
+                                
+            }
+        }
+        
+        
+		public static event PropertyGetterHandler<Kistl.App.Test.Fragebogen, Kistl.App.Test.TestStudent> OnStudent_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Test.Fragebogen, Kistl.App.Test.TestStudent> OnStudent_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Test.Fragebogen, Kistl.App.Test.TestStudent> OnStudent_PostSetter;
+
 		public override InterfaceType GetInterfaceType()
 		{
 			return new InterfaceType(typeof(Fragebogen));
@@ -171,6 +262,7 @@ namespace Kistl.App.Test
 			var me = (Fragebogen)this;
 
 			me.BogenNummer = other.BogenNummer;
+			this._fk_Student = otherImpl._fk_Student;
 		}
 
         // tail template
@@ -245,6 +337,15 @@ namespace Kistl.App.Test
 					
 					return String.Join("; ", errors);
 				}
+				case "Student":
+				{
+					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("3a91e745-0dd2-4f31-864e-eaf657ddb577")).Constraints
+						.Where(c => !c.IsValid(this, this.Student))
+						.Select(c => c.GetErrorText(this, this.Student))
+						.ToArray();
+					
+					return String.Join("; ", errors);
+				}
 				default:
 					return base.GetPropertyError(propertyName);
 			}
@@ -256,6 +357,13 @@ namespace Kistl.App.Test
 			// TODO: enable when MemoryContext uses MemoryDataObjects
 			//if (this.ObjectState == DataObjectState.Deleted) return;
 			// fix direct object references
+
+			if (_fk_guid_Student.HasValue)
+				Student__Implementation__ = (Kistl.App.Test.TestStudent__Implementation__)Context.FindPersistenceObject<Kistl.App.Test.TestStudent>(_fk_guid_Student.Value);
+			else if (_fk_Student.HasValue)
+				Student__Implementation__ = (Kistl.App.Test.TestStudent__Implementation__)Context.Find<Kistl.App.Test.TestStudent>(_fk_Student.Value);
+			else
+				Student__Implementation__ = null;
 		}
 #region Serializer
 
@@ -275,6 +383,7 @@ namespace Kistl.App.Test
 				}
 			}
             BinarySerializer.ToStream(this._BogenNummer, binStream);
+            BinarySerializer.ToStream(Student != null ? Student.ID : (int?)null, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
@@ -294,6 +403,7 @@ namespace Kistl.App.Test
 			}
 
             BinarySerializer.FromStream(out this._BogenNummer, binStream);
+            BinarySerializer.FromStream(out this._fk_Student, binStream);
         }
 
         public override void ToStream(System.Xml.XmlWriter xml)
@@ -301,6 +411,7 @@ namespace Kistl.App.Test
             
             base.ToStream(xml);
             XmlStreamer.ToStream(this._BogenNummer, xml, "BogenNummer", "Kistl.App.Test");
+            XmlStreamer.ToStream(Student != null ? Student.ID : (int?)null, xml, "Student", "Kistl.App.Test");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
@@ -308,6 +419,7 @@ namespace Kistl.App.Test
             
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._BogenNummer, xml, "BogenNummer", "Kistl.App.Test");
+            XmlStreamer.FromStream(ref this._fk_Student, xml, "Student", "Kistl.App.Test");
         }
 
 #endregion

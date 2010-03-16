@@ -177,6 +177,7 @@
     <Compile Include="Template.Server.Designer.cs" />
     <Compile Include="TestCustomObject.Server.Designer.cs" />
     <Compile Include="TestObjClass.Server.Designer.cs" />
+    <Compile Include="TestStudent.Server.Designer.cs" />
     <Compile Include="TextboxKind.Server.Designer.cs" />
     <Compile Include="TypeRef.Server.Designer.cs" />
     <Compile Include="TypeRefRefKind.Server.Designer.cs" />

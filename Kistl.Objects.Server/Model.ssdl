@@ -66,6 +66,7 @@
     <EntitySet Name="Template" EntityType="Model.Store.Template" Table="Templates"/>
     <EntitySet Name="TestCustomObject" EntityType="Model.Store.TestCustomObject" Table="TestCustomObjects"/>
     <EntitySet Name="TestObjClass" EntityType="Model.Store.TestObjClass" Table="TestObjClasses"/>
+    <EntitySet Name="TestStudent" EntityType="Model.Store.TestStudent" Table="TestStudenten"/>
     <EntitySet Name="TypeRef" EntityType="Model.Store.TypeRef" Table="TypeRefs"/>
     <EntitySet Name="ViewDescriptor" EntityType="Model.Store.ViewDescriptor" Table="ViewDescriptors"/>
     <EntitySet Name="Visual" EntityType="Model.Store.Visual" Table="Visuals"/>
@@ -930,11 +931,11 @@
       <End Role="Mitarbeiter" EntitySet="Mitarbeiter" />
       <End Role="CreatedBy" EntitySet="Identity" />
     </AssociationSet>
-    <AssociationSet Name="FK_Module_has_Assemblies" Association="Model.Store.FK_Module_has_Assemblies" >
+    <AssociationSet Name="FK_Module_contains_Assemblies" Association="Model.Store.FK_Module_contains_Assemblies" >
       <End Role="Module" EntitySet="Module" />
       <End Role="Assemblies" EntitySet="Assembly" />
     </AssociationSet>
-    <AssociationSet Name="FK_Module_has_DataTypes" Association="Model.Store.FK_Module_has_DataTypes" >
+    <AssociationSet Name="FK_Module_contains_DataTypes" Association="Model.Store.FK_Module_contains_DataTypes" >
       <End Role="Module" EntitySet="Module" />
       <End Role="DataTypes" EntitySet="DataType" />
     </AssociationSet>
@@ -1077,6 +1078,10 @@
     <AssociationSet Name="FK_RelationEnd_was_CreatedBy" Association="Model.Store.FK_RelationEnd_was_CreatedBy" >
       <End Role="RelationEnd" EntitySet="RelationEnd" />
       <End Role="CreatedBy" EntitySet="Identity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Student_füllt_aus_Testbogen" Association="Model.Store.FK_Student_füllt_aus_Testbogen" >
+      <End Role="Student" EntitySet="TestStudent" />
+      <End Role="Testbogen" EntitySet="Fragebogen" />
     </AssociationSet>
     <AssociationSet Name="FK_StudentExam_passes_Exam" Association="Model.Store.FK_StudentExam_passes_Exam" >
       <End Role="StudentExam" EntitySet="StudentExam" />
@@ -1579,6 +1584,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_Student" Type="int" />
     <Property Name="BogenNummer" Type="int" Nullable="true" />
   </EntityType>
 	
@@ -2186,6 +2192,14 @@
     <Property Name="MyIntProperty" Type="int" Nullable="true" />
     <Property Name="StringProp" Type="nvarchar" MaxLength="200" Nullable="false" />
     <Property Name="TestEnumProp" Type="int" Nullable="false" />
+  </EntityType>
+	
+  <EntityType Name="TestStudent">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="nvarchar" MaxLength="1000" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="TextboxKind">
@@ -3799,7 +3813,7 @@
   </Association>
 
 
-  <Association Name="FK_Module_has_Assemblies">
+  <Association Name="FK_Module_contains_Assemblies">
     <End Role="Module" Type="Model.Store.Module" Multiplicity="0..1" />
     <End Role="Assemblies" Type="Model.Store.Assembly" Multiplicity="*" />
     <ReferentialConstraint>
@@ -3813,7 +3827,7 @@
   </Association>
 
 
-  <Association Name="FK_Module_has_DataTypes">
+  <Association Name="FK_Module_contains_DataTypes">
     <End Role="Module" Type="Model.Store.Module" Multiplicity="0..1" />
     <End Role="DataTypes" Type="Model.Store.DataType" Multiplicity="*" />
     <ReferentialConstraint>
@@ -4312,6 +4326,20 @@
       </Principal>
       <Dependent Role="RelationEnd">
         <PropertyRef Name="fk_CreatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_Student_füllt_aus_Testbogen">
+    <End Role="Student" Type="Model.Store.TestStudent" Multiplicity="0..1" />
+    <End Role="Testbogen" Type="Model.Store.Fragebogen" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Testbogen">
+        <PropertyRef Name="fk_Student" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

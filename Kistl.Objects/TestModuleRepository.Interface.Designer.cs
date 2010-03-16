@@ -16,6 +16,16 @@ namespace Kistl.App.Test
 		
 		public IKistlContext Context { get; private set; }
 		
+		/// <summary>List of all TestStudent</summary>
+		/// 
+		public IQueryable<TestStudent> TestStudenten
+		{ 
+			get
+			{
+				return Context.GetQuery<TestStudent>();
+			}
+		}
+		
 		/// <summary>List of all TestObjClass</summary>
 		/// 
 		public IQueryable<TestObjClass> TestObjClasses

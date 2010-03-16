@@ -590,11 +590,200 @@ namespace Kistl.Server.SchemaManagement
             if (saved == null) return false;
             return saved.GetRelationType() != rel.GetRelationType();
         }
-        public void DoChangeRelationType(Relation rel)
+
+        // public void DoChangeRelationType(Relation rel) { no implementaion }
+
+        #region ChangeRelationType_from_1_1_to_1_n
+        public bool IsChangeRelationType_from_1_1_to_1_n(Relation rel)
         {
             var saved = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
-            Log.ErrorFormat("changing a relation type from '{0}' to '{1}' on relation '{2}' is not supported yet", saved.GetRelationType(), rel.GetRelationType(), rel.GetAssociationName());
+            if (saved == null) return false;
+            return 
+                saved.GetRelationType() == RelationType.one_one && 
+                rel.GetRelationType() == RelationType.one_n;
         }
+        public void DoChangeRelationType_from_1_1_to_1_n(Relation rel)
+        {
+            var saved = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
+
+            string destAssocName = rel.GetAssociationName();
+            Log.InfoFormat("Changing 1:1 Relation to 1:N: {0}", destAssocName);
+
+            RelationEnd relEnd, otherEnd;
+
+            switch (rel.Storage)
+            {
+                case StorageType.MergeIntoA:
+                    relEnd = rel.A;
+                    otherEnd = rel.B;
+                    break;
+                case StorageType.MergeIntoB:
+                    otherEnd = rel.A;
+                    relEnd = rel.B;
+                    break;
+                default:
+                    Log.ErrorFormat("Relation '{0}' has unsupported Storage set: {1}, skipped", destAssocName, rel.Storage);
+                    return;
+            }
+
+            string destTblName = relEnd.Type.TableName;
+            string destRefTblName = otherEnd.Type.TableName;
+            bool isIndexed = rel.NeedsPositionStorage(relEnd.GetRole());
+
+            string destColName = Construct.ForeignKeyColumnName(otherEnd);
+            string destIndexName = Construct.ListPositionColumnName(otherEnd);
+
+            string srcTblName = "";
+            string srcColName = "";
+
+            // Difference to 1:N. 1:1 may have storage 'Replicate'
+            // use best matching
+            if (saved.HasStorage(RelationEndRole.A))
+            {
+                srcTblName = saved.A.Type.TableName;
+                srcColName = Construct.ForeignKeyColumnName(saved.B);
+            }
+            if (saved.HasStorage(RelationEndRole.B) && (string.IsNullOrEmpty(srcTblName) || srcTblName != destTblName))
+            {
+                srcTblName = saved.B.Type.TableName;
+                srcColName = Construct.ForeignKeyColumnName(saved.A);
+            }
+
+            if (srcTblName == destTblName && srcColName == destColName)
+            {
+                // Do nothing
+            }
+            else if (srcTblName == destTblName && srcColName != destColName)
+            {
+                db.RenameColumn(srcTblName, srcColName, destColName);
+            }
+            else
+            {
+                db.CreateColumn(destTblName, destColName, System.Data.DbType.Int32, 0, true);
+                db.MigrateFKs(srcTblName, srcColName, destTblName, destColName);
+                if (!otherEnd.IsNullable())
+                {
+                    if (!db.CheckColumnContainsNulls(destTblName, destColName))
+                    {
+                        db.AlterColumn(destTblName, destColName, System.Data.DbType.Int32, 0, false);
+                    }
+                    else
+                    {
+                        Log.ErrorFormat("Unable to alter NOT NULL column, since table contains data. Leaving nullable column instead");
+                    }
+                }
+            }
+
+            db.CreateFKConstraint(destTblName, destRefTblName, destColName, destAssocName, false);
+            if (isIndexed)
+            {
+                Log.InfoFormat("Creating position column '{0}.{1}'", destTblName, destIndexName);
+                db.CreateColumn(destTblName, destIndexName, System.Data.DbType.Int32, 0, true);
+            }
+
+            // Cleanup
+            if (saved.HasStorage(RelationEndRole.A))
+            {
+                srcTblName = saved.A.Type.TableName;
+                srcColName = Construct.ForeignKeyColumnName(saved.B);
+                var srcAssocName = saved.GetRelationAssociationName(RelationEndRole.A);
+                
+                db.DropFKConstraint(srcTblName, srcAssocName);
+                if (srcTblName != destTblName || srcColName != destColName)
+                {
+                    db.DropColumn(srcTblName, srcColName);
+                }
+            }
+            if (saved.HasStorage(RelationEndRole.B))
+            {
+                srcTblName = saved.B.Type.TableName;
+                srcColName = Construct.ForeignKeyColumnName(saved.A);
+                var srcAssocName = saved.GetRelationAssociationName(RelationEndRole.B);
+
+                db.DropFKConstraint(srcTblName, srcAssocName);
+                if (srcTblName != destTblName || srcColName != destColName)
+                {
+                    db.DropColumn(srcTblName, srcColName);
+                }
+            }
+        }
+        #endregion
+
+        #region ChangeRelationType_from_1_1_to_n_m
+        public bool IsChangeRelationType_from_1_1_to_n_m(Relation rel)
+        {
+            var saved = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
+            if (saved == null) return false;
+            return
+                saved.GetRelationType() == RelationType.one_one &&
+                rel.GetRelationType() == RelationType.n_m;
+        }
+        public void DoChangeRelationType_from_1_1_to_n_m(Relation rel)
+        {
+
+        }
+        #endregion
+
+        #region ChangeRelationType_from_1_n_to_1_1
+        public bool IsChangeRelationType_from_1_n_to_1_1(Relation rel)
+        {
+            var saved = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
+            if (saved == null) return false;
+            return
+                saved.GetRelationType() == RelationType.one_n &&
+                rel.GetRelationType() == RelationType.one_one;
+        }
+        public void DoChangeRelationType_from_1_n_to_1_1(Relation rel)
+        {
+
+        }
+        #endregion
+
+        #region ChangeRelationType_from_1_n_to_n_m
+        public bool IsChangeRelationType_from_1_n_to_n_m(Relation rel)
+        {
+            var saved = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
+            if (saved == null) return false;
+            return
+                saved.GetRelationType() == RelationType.one_n &&
+                rel.GetRelationType() == RelationType.n_m;
+        }
+        public void DoChangeRelationType_from_1_n_to_n_m(Relation rel)
+        {
+
+        }
+        #endregion
+
+        #region ChangeRelationType_from_n_m_to_1_1
+        public bool IsChangeRelationType_from_n_m_to_1_1(Relation rel)
+        {
+            var saved = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
+            if (saved == null) return false;
+            return
+                saved.GetRelationType() == RelationType.n_m &&
+                rel.GetRelationType() == RelationType.one_one;
+        }
+        public void DoChangeRelationType_from_n_m_to_1_1(Relation rel)
+        {
+
+        }
+        #endregion
+
+        #region ChangeRelationType_from_n_m_to_1_n
+        public bool IsChangeRelationType_from_n_m_to_1_n(Relation rel)
+        {
+            var saved = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
+            if (saved == null) return false;
+            return
+                saved.GetRelationType() == RelationType.n_m &&
+                rel.GetRelationType() == RelationType.one_n;
+        }
+        public void DoChangeRelationType_from_n_m_to_1_n(Relation rel)
+        {
+
+        }
+        #endregion
+
         #endregion
 
         #region ChangeRelationName
@@ -839,6 +1028,84 @@ namespace Kistl.Server.SchemaManagement
             {
                 db.CreateColumn(tblName, colName, System.Data.DbType.Int32, 0, true);
                 Log.ErrorFormat("Unable to create NOT NULL column, since table contains data. Created nullable column instead");
+            }
+        }
+        #endregion
+
+        #region Change_1_1_Storage
+        public bool IsChange_1_1_Storage(Relation rel)
+        {
+            var saved = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
+            if (saved == null) return false;
+            return rel.Storage != saved.Storage;
+        }
+        public void DoChange_1_1_Storage(Relation rel)
+        {
+            Log.InfoFormat("Chaning 1:1 Relation Storage: {0}", rel.GetAssociationName());
+            var saved = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
+
+            if (saved.Storage == StorageType.Replicate)
+            {
+                // To MergeIntoA or MergeIntoB
+                if (rel.HasStorage(RelationEndRole.B))
+                {
+                    Delete_1_1_Relation_DropColumns(saved, saved.A, saved.B, RelationEndRole.A);
+                }
+                else if (rel.HasStorage(RelationEndRole.A))
+                {
+                    Delete_1_1_Relation_DropColumns(saved, saved.B, saved.A, RelationEndRole.B);
+                }
+            }
+            else
+            {
+                RelationEnd relEnd;
+                RelationEnd otherEnd;
+                RelationEndRole role;
+                RelationEndRole otherRole;
+                if (saved.Storage == StorageType.MergeIntoA)
+                {
+                    // To MergeIntoB or Replicate
+                    relEnd = rel.B;
+                    otherEnd = rel.A;
+                    role = RelationEndRole.B;
+                    otherRole = RelationEndRole.A;
+
+                }
+                else if (saved.Storage == StorageType.MergeIntoB)
+                {
+                    // To MergeIntoA or Replicate
+                    relEnd = rel.A;
+                    otherEnd = rel.B;
+                    role = RelationEndRole.A;
+                    otherRole = RelationEndRole.B;
+                }
+                else
+                {
+                    throw new InvalidOperationException("Unexpected saved stroage type " + saved.Storage);
+                }
+
+                New_1_1_Relation_CreateColumns(rel, relEnd, otherEnd, role);
+                var srcTbl = otherEnd.Type.TableName;
+                var srcCol = Construct.ForeignKeyColumnName(relEnd);
+                var destTbl = relEnd.Type.TableName;
+                var destCol = Construct.ForeignKeyColumnName(otherEnd);
+                db.MigrateFKs(srcTbl, srcCol, destTbl, destCol);
+                if (!relEnd.IsNullable())
+                {
+                    if (!db.CheckColumnContainsNulls(destTbl, destCol))
+                    {
+                        db.AlterColumn(destTbl, destCol, System.Data.DbType.Int32, 0, false);
+                    }
+                    else
+                    {
+                        Log.ErrorFormat("Unable to alter NOT NULL column, since table contains data. Leaving nullable column instead");
+                    }
+                }
+
+                if (rel.Storage != StorageType.Replicate)
+                {
+                    Delete_1_1_Relation_DropColumns(rel, otherEnd, relEnd, otherRole);
+                }
             }
         }
         #endregion

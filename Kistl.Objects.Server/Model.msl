@@ -839,6 +839,14 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="TestStudent">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.TestStudent)">
+	    <MappingFragment StoreEntitySet="TestStudent">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="Name" ColumnName="Name" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="TypeRef">
       <EntityTypeMapping TypeName="IsTypeOf(Model.TypeRef)">
 	    <MappingFragment StoreEntitySet="TypeRef">
@@ -2595,13 +2603,13 @@
       <Condition ColumnName="fk_CreatedBy" IsNull="false"/>
     </AssociationSetMapping>
     <!--
-    Relation: FK_Module_has_Assemblies
+    Relation: FK_Module_contains_Assemblies
     A: One Module as Module
     B: ZeroOrMore Assembly as Assemblies
     Preferred Storage: MergeIntoB
     -->
-    <AssociationSetMapping Name="FK_Module_has_Assemblies"
-                           TypeName="Model.FK_Module_has_Assemblies"
+    <AssociationSetMapping Name="FK_Module_contains_Assemblies"
+                           TypeName="Model.FK_Module_contains_Assemblies"
                            StoreEntitySet="Assembly" >
       <EndProperty Name="Module">
         <ScalarProperty Name="ID" ColumnName="fk_Module"/>
@@ -2612,13 +2620,13 @@
       <Condition ColumnName="fk_Module" IsNull="false"/>
     </AssociationSetMapping>
     <!--
-    Relation: FK_Module_has_DataTypes
+    Relation: FK_Module_contains_DataTypes
     A: One Module as Module
     B: ZeroOrMore DataType as DataTypes
     Preferred Storage: MergeIntoB
     -->
-    <AssociationSetMapping Name="FK_Module_has_DataTypes"
-                           TypeName="Model.FK_Module_has_DataTypes"
+    <AssociationSetMapping Name="FK_Module_contains_DataTypes"
+                           TypeName="Model.FK_Module_contains_DataTypes"
                            StoreEntitySet="DataType" >
       <EndProperty Name="Module">
         <ScalarProperty Name="ID" ColumnName="fk_Module"/>
@@ -3222,6 +3230,23 @@
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="fk_CreatedBy" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_Student_füllt_aus_Testbogen
+    A: One TestStudent as Student
+    B: ZeroOrOne Fragebogen as Testbogen
+    Preferred Storage: MergeIntoB
+    -->
+    <AssociationSetMapping Name="FK_Student_füllt_aus_Testbogen"
+                           TypeName="Model.FK_Student_füllt_aus_Testbogen"
+                           StoreEntitySet="Fragebogen" >
+      <EndProperty Name="Student">
+        <ScalarProperty Name="ID" ColumnName="fk_Student"/>
+      </EndProperty>
+      <EndProperty Name="Testbogen">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_Student" IsNull="false"/>
     </AssociationSetMapping>
     <!--
     Relation: FK_StudentExam_passes_Exam

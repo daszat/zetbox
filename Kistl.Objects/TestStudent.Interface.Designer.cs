@@ -10,25 +10,20 @@ namespace Kistl.App.Test
     /// <summary>
     /// 
     /// </summary>
-    public interface Fragebogen : IDataObject 
+    public interface TestStudent : IDataObject 
     {
 
         /// <summary>
         /// 
         /// </summary>
-
-        IList<Kistl.App.Test.Antwort> Antworten { get; }
-        /// <summary>
-        /// 
-        /// </summary>
-		int? BogenNummer {
+		string Name {
 			get;
 			set;
 		}
         /// <summary>
         /// 
         /// </summary>
-		Kistl.App.Test.TestStudent Student {
+		Kistl.App.Test.Fragebogen Testbogen {
 			get;
 			set;
 		}

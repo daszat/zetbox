@@ -96,6 +96,7 @@ namespace Kistl.API.Server
         void DropProcedure(string procName);
 
         void CopyColumnData(string srcTblName, string srcColName, string tblName, string colName);
+        void MigrateFKs(string srcTblName, string srcColName, string tblName, string colName);
 
         void CreateIndex(string tblName, string idxName, bool unique, bool clustered, params string[] columns);
 

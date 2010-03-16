@@ -481,6 +481,13 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
                 colName, srcColName, tblName, srcTblName);
         }
 
+        public void MigrateFKs(string srcTblName, string srcColName, string tblName, string colName)
+        {
+            Log.DebugFormat("Migrating FK data from [{0}].[{1}] to [{2}].[{3}]", srcTblName, srcColName, tblName, colName);
+            ExecuteNonQuery("UPDATE dest SET dest.[{0}] = src.[ID] FROM [{2}] dest INNER JOIN [{3}] src ON dest.ID = src.[{1}]",
+                colName, srcColName, tblName, srcTblName);
+        }
+
         public void CreateIndex(string tblName, string idxName, bool unique, bool clustered, params string[] columns)
         {
             string colSpec = string.Join(", ", columns.Select(c => "[" + c + "]").ToArray());

@@ -62,6 +62,7 @@
     <EntitySet Name="Template" EntityType="Model.Template" />
     <EntitySet Name="TestCustomObject" EntityType="Model.TestCustomObject" />
     <EntitySet Name="TestObjClass" EntityType="Model.TestObjClass" />
+    <EntitySet Name="TestStudent" EntityType="Model.TestStudent" />
     <EntitySet Name="TypeRef" EntityType="Model.TypeRef" />
     <EntitySet Name="ViewDescriptor" EntityType="Model.ViewDescriptor" />
     <EntitySet Name="Visual" EntityType="Model.Visual" />
@@ -481,11 +482,11 @@
       <End Role="Mitarbeiter" EntitySet="Mitarbeiter" />
       <End Role="CreatedBy" EntitySet="Identity" />
     </AssociationSet>
-    <AssociationSet Name="FK_Module_has_Assemblies" Association="Model.FK_Module_has_Assemblies" >
+    <AssociationSet Name="FK_Module_contains_Assemblies" Association="Model.FK_Module_contains_Assemblies" >
       <End Role="Module" EntitySet="Module" />
       <End Role="Assemblies" EntitySet="Assembly" />
     </AssociationSet>
-    <AssociationSet Name="FK_Module_has_DataTypes" Association="Model.FK_Module_has_DataTypes" >
+    <AssociationSet Name="FK_Module_contains_DataTypes" Association="Model.FK_Module_contains_DataTypes" >
       <End Role="Module" EntitySet="Module" />
       <End Role="DataTypes" EntitySet="DataType" />
     </AssociationSet>
@@ -629,6 +630,10 @@
       <End Role="RelationEnd" EntitySet="RelationEnd" />
       <End Role="CreatedBy" EntitySet="Identity" />
     </AssociationSet>
+    <AssociationSet Name="FK_Student_füllt_aus_Testbogen" Association="Model.FK_Student_füllt_aus_Testbogen" >
+      <End Role="Student" EntitySet="TestStudent" />
+      <End Role="Testbogen" EntitySet="Fragebogen" />
+    </AssociationSet>
     <AssociationSet Name="FK_StudentExam_passes_Exam" Association="Model.FK_StudentExam_passes_Exam" >
       <End Role="StudentExam" EntitySet="StudentExam" />
       <End Role="Exam" EntitySet="Exam" />
@@ -766,7 +771,7 @@
     <Property Name="DeploymentRestrictions__Implementation__" Type="Int32" Nullable="false" />
     <Property Name="ExportGuid" Type="Guid" Nullable="false" />
     <NavigationProperty Name="Module__Implementation__"
-                        Relationship="Model.FK_Module_has_Assemblies"
+                        Relationship="Model.FK_Module_contains_Assemblies"
                         FromRole="Assemblies"
                         ToRole="Module" />
     <Property Name="Name" Type="String" Nullable="false" MaxLength="200" />
@@ -944,7 +949,7 @@
                         FromRole="ObjectClass"
                         ToRole="Methods" />
     <NavigationProperty Name="Module__Implementation__"
-                        Relationship="Model.FK_Module_has_DataTypes"
+                        Relationship="Model.FK_Module_contains_DataTypes"
                         FromRole="DataTypes"
                         ToRole="Module" />
     <Property Name="Name" Type="String" Nullable="false" MaxLength="51" />
@@ -1063,6 +1068,10 @@
                         FromRole="Ein_Fragebogen"
                         ToRole="gute_Antworten" />
     <Property Name="BogenNummer" Type="Int32" Nullable="true" />
+    <NavigationProperty Name="Student__Implementation__"
+                        Relationship="Model.FK_Student_füllt_aus_Testbogen"
+                        FromRole="Testbogen"
+                        ToRole="Student" />
   </EntityType>
   <EntityType Name="Group">
     <Key>
@@ -1263,7 +1272,7 @@
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Assemblies__Implementation__"
-                        Relationship="Model.FK_Module_has_Assemblies"
+                        Relationship="Model.FK_Module_contains_Assemblies"
                         FromRole="Module"
                         ToRole="Assemblies" />
     <NavigationProperty Name="ChangedBy__Implementation__"
@@ -1277,7 +1286,7 @@
                         ToRole="CreatedBy" />
     <Property Name="CreatedOn" Type="DateTime" Nullable="true" />
     <NavigationProperty Name="DataTypes__Implementation__"
-                        Relationship="Model.FK_Module_has_DataTypes"
+                        Relationship="Model.FK_Module_contains_DataTypes"
                         FromRole="Module"
                         ToRole="DataTypes" />
     <Property Name="Description" Type="String" Nullable="true" MaxLength="200" />
@@ -1713,6 +1722,17 @@
                         ToRole="ObjectProp" />
     <Property Name="StringProp" Type="String" Nullable="false" MaxLength="200" />
     <Property Name="TestEnumProp__Implementation__" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TestStudent">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="1000" />
+    <NavigationProperty Name="Testbogen__Implementation__"
+                        Relationship="Model.FK_Student_füllt_aus_Testbogen"
+                        FromRole="Student"
+                        ToRole="Testbogen" />
   </EntityType>
   <EntityType Name="TypeRef">
     <Key>
@@ -3303,7 +3323,7 @@
          Type="Model.Identity" 
          Multiplicity="0..1" />
   </Association>
-  <Association Name="FK_Module_has_Assemblies" >
+  <Association Name="FK_Module_contains_Assemblies" >
     <End Role="Module"
          Type="Model.Module" 
          Multiplicity="0..1" />
@@ -3311,7 +3331,7 @@
          Type="Model.Assembly" 
          Multiplicity="*" />
   </Association>
-  <Association Name="FK_Module_has_DataTypes" >
+  <Association Name="FK_Module_contains_DataTypes" >
     <End Role="Module"
          Type="Model.Module" 
          Multiplicity="0..1" />
@@ -3597,6 +3617,14 @@
          Multiplicity="*" />
     <End Role="CreatedBy"
          Type="Model.Identity" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_Student_füllt_aus_Testbogen" >
+    <End Role="Student"
+         Type="Model.TestStudent" 
+         Multiplicity="0..1" />
+    <End Role="Testbogen"
+         Type="Model.Fragebogen" 
          Multiplicity="0..1" />
   </Association>
   <Association Name="FK_StudentExam_passes_Exam" >

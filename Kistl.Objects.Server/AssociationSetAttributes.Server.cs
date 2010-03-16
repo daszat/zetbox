@@ -1031,7 +1031,7 @@ using Kistl.DalProvider.EF;
 
 
 	/*
-    Relation: FK_Module_has_Assemblies
+    Relation: FK_Module_contains_Assemblies
     A: One Module as Module
     B: ZeroOrMore Assembly as Assemblies
     Preferred Storage: MergeIntoB
@@ -1039,14 +1039,14 @@ using Kistl.DalProvider.EF;
 
 // basic association
 [assembly: EdmRelationship(
-    "Model", "FK_Module_has_Assemblies",
+    "Model", "FK_Module_contains_Assemblies",
     "Module", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Module__Implementation__),
     "Assemblies", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.Assembly__Implementation__)
     )]
 
 
 	/*
-    Relation: FK_Module_has_DataTypes
+    Relation: FK_Module_contains_DataTypes
     A: One Module as Module
     B: ZeroOrMore DataType as DataTypes
     Preferred Storage: MergeIntoB
@@ -1054,7 +1054,7 @@ using Kistl.DalProvider.EF;
 
 // basic association
 [assembly: EdmRelationship(
-    "Model", "FK_Module_has_DataTypes",
+    "Model", "FK_Module_contains_DataTypes",
     "Module", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Module__Implementation__),
     "DataTypes", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.DataType__Implementation__)
     )]
@@ -1674,6 +1674,21 @@ using Kistl.DalProvider.EF;
     "Relations", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Relation__Implementation__),
     "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.RoleMembership_resolves_Relation_RelationEntry__Implementation__)
     )]
+
+	/*
+    Relation: FK_Student_füllt_aus_Testbogen
+    A: One TestStudent as Student
+    B: ZeroOrOne Fragebogen as Testbogen
+    Preferred Storage: MergeIntoB
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_Student_füllt_aus_Testbogen",
+    "Student", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Test.TestStudent__Implementation__),
+    "Testbogen", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Test.Fragebogen__Implementation__)
+    )]
+
 
 	/*
     Relation: FK_StudentExam_passes_Exam

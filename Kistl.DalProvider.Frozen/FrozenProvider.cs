@@ -29,7 +29,7 @@ namespace Kistl.DalProvider.Frozen
                     .Register(frozenContextType)
                     .As<IReadOnlyKistlContext>()
                     .OnActivating((sender, args) => {
-                        Logging.Log.Error("Initialising FrozenActionsManagerServer");
+                        Logging.Log.Info("Initialising FrozenActionsManagerServer");
                         var fams = new FrozenActionsManagerServer();
                         fams.Init((IReadOnlyKistlContext)args.Instance);
                     })

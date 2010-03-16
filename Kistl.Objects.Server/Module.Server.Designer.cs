@@ -61,7 +61,7 @@ namespace Kistl.App.Base
         /// Assemblies des Moduls
         /// </summary>
     /*
-    Relation: FK_Module_has_Assemblies
+    Relation: FK_Module_contains_Assemblies
     A: One Module as Module
     B: ZeroOrMore Assembly as Assemblies
     Preferred Storage: MergeIntoB
@@ -84,14 +84,14 @@ namespace Kistl.App.Base
             }
         }
         
-        [EdmRelationshipNavigationProperty("Model", "FK_Module_has_Assemblies", "Assemblies")]
+        [EdmRelationshipNavigationProperty("Model", "FK_Module_contains_Assemblies", "Assemblies")]
         public EntityCollection<Kistl.App.Base.Assembly__Implementation__> Assemblies__Implementation__
         {
             get
             {
                 var c = ((IEntityWithRelationships)(this)).RelationshipManager
                     .GetRelatedCollection<Kistl.App.Base.Assembly__Implementation__>(
-                        "Model.FK_Module_has_Assemblies",
+                        "Model.FK_Module_contains_Assemblies",
                         "Assemblies");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)
@@ -395,7 +395,7 @@ namespace Kistl.App.Base
         /// Datentypendes Modules
         /// </summary>
     /*
-    Relation: FK_Module_has_DataTypes
+    Relation: FK_Module_contains_DataTypes
     A: One Module as Module
     B: ZeroOrMore DataType as DataTypes
     Preferred Storage: MergeIntoB
@@ -418,14 +418,14 @@ namespace Kistl.App.Base
             }
         }
         
-        [EdmRelationshipNavigationProperty("Model", "FK_Module_has_DataTypes", "DataTypes")]
+        [EdmRelationshipNavigationProperty("Model", "FK_Module_contains_DataTypes", "DataTypes")]
         public EntityCollection<Kistl.App.Base.DataType__Implementation__> DataTypes__Implementation__
         {
             get
             {
                 var c = ((IEntityWithRelationships)(this)).RelationshipManager
                     .GetRelatedCollection<Kistl.App.Base.DataType__Implementation__>(
-                        "Model.FK_Module_has_DataTypes",
+                        "Model.FK_Module_contains_DataTypes",
                         "DataTypes");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)
