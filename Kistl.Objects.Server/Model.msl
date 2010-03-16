@@ -257,6 +257,11 @@
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 	    </MappingFragment>
       </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.ErrorListKind)">
+	    <MappingFragment StoreEntitySet="ErrorListKind">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+	    </MappingFragment>
+      </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Model.LabelKind)">
 	    <MappingFragment StoreEntitySet="LabelKind">
 	      <ScalarProperty Name="ID" ColumnName="ID" />

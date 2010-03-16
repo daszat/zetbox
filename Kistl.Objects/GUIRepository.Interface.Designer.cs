@@ -196,6 +196,16 @@ namespace Kistl.App.GUI
 			}
 		}
 		
+		/// <summary>List of all ErrorListKind</summary>
+		/// 
+		public IQueryable<ErrorListKind> ErrorListKinds
+		{ 
+			get
+			{
+				return Context.GetQuery<ErrorListKind>();
+			}
+		}
+		
 		/// <summary>List of all EnumerationSelectorKind</summary>
 		/// Select a value fron an Enumeration
 		public IQueryable<EnumerationSelectorKind> EnumerationSelectorKinds

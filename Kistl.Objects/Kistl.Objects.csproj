@@ -94,6 +94,7 @@
     <Compile Include="EnumerationEntry.Interface.Designer.cs" />
     <Compile Include="EnumerationProperty.Interface.Designer.cs" />
     <Compile Include="EnumerationSelectorKind.Interface.Designer.cs" />
+    <Compile Include="ErrorListKind.Interface.Designer.cs" />
     <Compile Include="Exam.Interface.Designer.cs" />
     <Compile Include="Exercise.Interface.Designer.cs" />
     <Compile Include="File.Interface.Designer.cs" />

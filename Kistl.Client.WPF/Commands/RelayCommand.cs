@@ -9,7 +9,7 @@ namespace Kistl.Client.WPF.Commands
     using System.Windows.Input;
 
     /// <summary>
-    /// Adaptiert von http://msdn.microsoft.com/en-us/magazine/dd419663.aspx#id0090051
+    /// Adapted from http://msdn.microsoft.com/en-us/magazine/dd419663.aspx#id0090030 , "Relaying Command Logic"
     /// </summary>
     public class RelayCommand
         : ICommand

@@ -1,20 +1,22 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-
-using Kistl.Client.Presentables;
 
 namespace Kistl.Client.WPF.View
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Windows;
+    using System.Windows.Controls;
+    using System.Windows.Data;
+    using System.Windows.Documents;
+    using System.Windows.Input;
+    using System.Windows.Media;
+    using System.Windows.Media.Imaging;
+    using System.Windows.Shapes;
+
+    using Kistl.Client.Presentables;
+    using Kistl.Client.WPF.Commands;
+
     /// <summary>
     /// Interaction logic for DesktopView.xaml
     /// </summary>
@@ -26,6 +28,7 @@ namespace Kistl.Client.WPF.View
         #region SaveCommand
 
         public static readonly RoutedUICommand Save = new RoutedUICommand("Save", "save", typeof(WorkspaceView));
+        public static readonly RoutedUICommand Verify = new RoutedUICommand("Verify", "verify", typeof(WorkspaceView));
 
         static WorkspaceView()
         {
@@ -34,7 +37,13 @@ namespace Kistl.Client.WPF.View
                 new CommandBinding(
                     Save,
                     SaveExecuted,
-                    SaveCanExecute));
+                    SaveCanExecute)); 
+            
+            CommandManager.RegisterClassCommandBinding(
+                typeof(WorkspaceView),
+                new CommandBinding(
+                    Verify,
+                    VerifyExecuted));
         }
 
         private static void SaveCanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -49,6 +58,29 @@ namespace Kistl.Client.WPF.View
         {
             var workspaceModel = (WorkspaceModel)e.Parameter;
             workspaceModel.SaveCommand.Execute(null);
+        }
+
+        private static void VerifyExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            var workspaceModel = (WorkspaceModel)e.Parameter;
+            workspaceModel.VerifyContextCommand.Execute(null);
+        }
+
+        #endregion
+
+        #region VerifyContextCommand
+
+        private RelayCommand _verifyContextCommand;
+        public System.Windows.Input.ICommand VerifyContextCommand
+        {
+            get
+            {
+                if (_verifyContextCommand == null)
+                {
+                    _verifyContextCommand = new RelayCommand(param => MessageBox.Show("Checking constraints"));
+                }
+                return _verifyContextCommand;
+            }
         }
 
         #endregion

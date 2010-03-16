@@ -118,6 +118,7 @@
     <Compile Include="EnumerationEntry.Server.Designer.cs" />
     <Compile Include="EnumerationProperty.Server.Designer.cs" />
     <Compile Include="EnumerationSelectorKind.Server.Designer.cs" />
+    <Compile Include="ErrorListKind.Server.Designer.cs" />
     <Compile Include="Exam.Server.Designer.cs" />
     <Compile Include="Exercise.Server.Designer.cs" />
     <Compile Include="File.Server.Designer.cs" />

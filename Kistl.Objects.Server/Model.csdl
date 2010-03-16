@@ -1916,6 +1916,8 @@
   </EntityType>
   <EntityType Name="EnumerationSelectorKind" BaseType="Model.ControlKind">
   </EntityType>
+  <EntityType Name="ErrorListKind" BaseType="Model.ControlKind">
+  </EntityType>
   <EntityType Name="GroupMembership" BaseType="Model.AccessControl">
     <NavigationProperty Name="Group__Implementation__"
                         Relationship="Model.FK_GroupMembership_has_Group"

@@ -168,6 +168,25 @@ namespace Kistl.Client.Presentables
 
         #endregion
 
+        #region Verify Context
+
+        private VerifyContextCommand _verifyCommand;
+        /// <summary>
+        /// This command checks whether all constraints of the attached objects are satisfied.
+        /// </summary>
+        public ICommand VerifyContextCommand
+        {
+            get
+            {
+                if (_verifyCommand == null)
+                    _verifyCommand = Factory.CreateSpecificModel<VerifyContextCommand>(DataContext);
+
+                return _verifyCommand;
+            }
+        }
+
+        #endregion
+
         #endregion
 
         #region Utilities and UI callbacks
@@ -198,7 +217,7 @@ namespace Kistl.Client.Presentables
         {
             if (dataObject == null || dataObject.Object == null)
                 return;
-            
+
             var other = dataObject.Object;
             var here = DataContext.Find(other.GetInterfaceType(), other.ID);
             SelectedItem = AppContext.Factory.CreateDefaultModel(DataContext, here);
@@ -208,6 +227,33 @@ namespace Kistl.Client.Presentables
         public override string Name
         {
             get { return "Workspace"; }
+        }
+    }
+
+    /// <summary>
+    /// </summary>
+    internal class VerifyContextCommand : CommandModel
+    {
+        public VerifyContextCommand(IGuiApplicationContext appCtx, IKistlContext dataCtx)
+            : base(appCtx, dataCtx, "Verify", "Verifies that all constraints are met.")
+        {
+        }
+
+        /// <summary>
+        /// Returns true.
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public override bool CanExecute(object data)
+        {
+            return true;
+        }
+
+        protected override void DoExecute(object data)
+        {
+            var elm = Factory.CreateSpecificModel<ErrorListModel>(DataContext);
+            elm.RefreshErrors();
+            Factory.ShowModel(elm,  true);
         }
     }
 
@@ -311,7 +357,7 @@ namespace Kistl.Client.Presentables
             {
                 var externalCtx = KistlContext.GetContext();
                 var objectClass = data as ObjectClassModel;
-                
+
                 // responsibility to externalCtx's disposal passes to newWorkspace
                 var newWorkspace = Factory.CreateSpecificModel<WorkspaceModel>(externalCtx);
                 var newObject = externalCtx.Create(objectClass.GetDescribedInterfaceType());

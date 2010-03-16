@@ -206,6 +206,12 @@
       <End Role="A_ControlKind" EntitySet="ControlKind" />
       <End Role="B_EnumerationSelectorKind" EntitySet="EnumerationSelectorKind" />
     </AssociationSet>
+    <EntitySet Name="ErrorListKind" EntityType="Model.Store.ErrorListKind" Table="ErrorListKinds"/>
+    <!-- inherits from ControlKind -->
+    <AssociationSet Name="FK_ErrorListKind_ControlKind_ID" Association="Model.Store.FK_ErrorListKind_ControlKind_ID" >
+      <End Role="A_ControlKind" EntitySet="ControlKind" />
+      <End Role="B_ErrorListKind" EntitySet="ErrorListKind" />
+    </AssociationSet>
     <EntitySet Name="GroupMembership" EntityType="Model.Store.GroupMembership" Table="GroupMemberships"/>
     <!-- inherits from AccessControl -->
     <AssociationSet Name="FK_GroupMembership_AccessControl_ID" Association="Model.Store.FK_GroupMembership_AccessControl_ID" >
@@ -1537,6 +1543,13 @@
   </EntityType>
 	
   <EntityType Name="EnumerationSelectorKind">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+  </EntityType>
+	
+  <EntityType Name="ErrorListKind">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
@@ -4817,6 +4830,18 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="B_EnumerationSelectorKind">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ErrorListKind_ControlKind_ID">
+    <End Role="A_ControlKind" Type="Model.Store.ControlKind" Multiplicity="1" />
+    <End Role="B_ErrorListKind" Type="Model.Store.ErrorListKind" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="A_ControlKind">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_ErrorListKind">
         <PropertyRef Name="ID" />
       </Dependent>
     </ReferentialConstraint>
