@@ -497,6 +497,13 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
                 colName, srcColName, tblName, srcTblName);
         }
 
+        public void InsertFKs(string srcTblName, string srcColName, string tblName, string colName, string fkColName)
+        {
+            Log.DebugFormat("Inserting FK data from [{0}]([{1}]) to [{2}]([{3}],[{4}])", srcTblName, srcColName, tblName, colName, fkColName);
+            ExecuteNonQuery("INSERT INTO [{0}] ([{1}], [{2}]) SELECT [ID], [{3}] FROM [{4}] WHERE [{3}] IS NOT NULL",
+                tblName, colName, fkColName, srcColName, srcTblName);
+        }
+
         public void CreateIndex(string tblName, string idxName, bool unique, bool clustered, params string[] columns)
         {
             string colSpec = string.Join(", ", columns.Select(c => "[" + c + "]").ToArray());

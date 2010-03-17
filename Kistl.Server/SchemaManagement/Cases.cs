@@ -841,7 +841,38 @@ namespace Kistl.Server.SchemaManagement
         }
         public void DoChangeRelationType_from_1_n_to_n_m(Relation rel)
         {
+            string srcAssocName = rel.GetAssociationName();
+            var saved = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
 
+            RelationEnd relEnd, otherEnd;
+
+            switch (saved.Storage)
+            {
+                case StorageType.MergeIntoA:
+                    relEnd = saved.A;
+                    otherEnd = saved.B;
+                    break;
+                case StorageType.MergeIntoB:
+                    otherEnd = saved.A;
+                    relEnd = saved.B;
+                    break;
+                default:
+                    Log.ErrorFormat("Relation '{0}' has unsupported Storage set: {1}, skipped", srcAssocName, rel.Storage);
+                    return;
+            }
+
+            string srcTblName = relEnd.Type.TableName;
+            string srcColName = Construct.ForeignKeyColumnName(otherEnd);
+            bool srcIsIndexed = rel.NeedsPositionStorage(relEnd.GetRole());
+            string srcIndexName = Construct.ListPositionColumnName(otherEnd);            
+            
+            string destTbl = rel.GetRelationTableName();
+            string destCol = rel.GetRelationFkColumnName(relEnd.GetRole());
+            string destFKCol = rel.GetRelationFkColumnName(otherEnd.GetRole());
+            
+            DoNew_N_M_Relation(rel);
+            db.InsertFKs(srcTblName, srcColName, destTbl, destCol, destFKCol);
+            DoDelete_1_N_Relation(saved);
         }
         #endregion
 
