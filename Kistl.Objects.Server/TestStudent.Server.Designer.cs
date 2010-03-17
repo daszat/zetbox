@@ -222,32 +222,26 @@ namespace Kistl.App.Test
         public static event ObjectEventHandler<TestStudent> OnDeleting_TestStudent;
 
 
-		protected override string GetPropertyError(string propertyName) 
+		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
+			new CustomPropertyDescriptor<TestStudent, string>(
+				new Guid("190b4492-c1cb-40a2-8941-84b8ff3ac141"),
+				"Name",
+				null,
+				obj => obj.Name,
+				(obj, val) => obj.Name = val),
+			new CustomPropertyDescriptor<TestStudent, ICollection<Kistl.App.Test.Fragebogen>>(
+				new Guid("f330d95b-372d-4302-b4d1-73afc5fa71de"),
+				"Testbogen",
+				null,
+				obj => obj.Testbogen,
+				null), // lists are read-only properties
+		};
+		
+		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
 		{
-			switch(propertyName)
-			{
-				case "Name":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("190b4492-c1cb-40a2-8941-84b8ff3ac141")).Constraints
-						.Where(c => !c.IsValid(this, this.Name))
-						.Select(c => c.GetErrorText(this, this.Name))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "Testbogen":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("f330d95b-372d-4302-b4d1-73afc5fa71de")).Constraints
-						.Where(c => !c.IsValid(this, this.Testbogen))
-						.Select(c => c.GetErrorText(this, this.Testbogen))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				default:
-					return base.GetPropertyError(propertyName);
-			}
+			props.AddRange(_properties);
 		}
+	
 
 		public override void ReloadReferences()
 		{

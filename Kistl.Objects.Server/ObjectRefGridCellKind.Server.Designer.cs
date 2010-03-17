@@ -96,6 +96,7 @@ namespace Kistl.App.GUI
         public static event ObjectEventHandler<ObjectRefGridCellKind> OnDeleting_ObjectRefGridCellKind;
 
 
+	
 
 		public override void ReloadReferences()
 		{

@@ -96,6 +96,7 @@ namespace Kistl.App.GUI
         public static event ObjectEventHandler<WorkspaceKind> OnDeleting_WorkspaceKind;
 
 
+	
 
 		public override void ReloadReferences()
 		{

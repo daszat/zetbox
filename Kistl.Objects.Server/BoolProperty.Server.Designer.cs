@@ -138,6 +138,7 @@ namespace Kistl.App.Base
         public static event ObjectEventHandler<BoolProperty> OnDeleting_BoolProperty;
 
 
+	
 
 		public override void ReloadReferences()
 		{

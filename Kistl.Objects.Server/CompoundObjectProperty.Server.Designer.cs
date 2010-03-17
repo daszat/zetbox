@@ -336,41 +336,32 @@ namespace Kistl.App.Base
         public static event ObjectEventHandler<CompoundObjectProperty> OnDeleting_CompoundObjectProperty;
 
 
-		protected override string GetPropertyError(string propertyName) 
+		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
+			new CustomPropertyDescriptor<CompoundObjectProperty, Kistl.App.Base.CompoundObject>(
+				new Guid("0d78c157-c106-4728-9af2-7992da7c935d"),
+				"CompoundObjectDefinition",
+				null,
+				obj => obj.CompoundObjectDefinition,
+				(obj, val) => obj.CompoundObjectDefinition = val),
+			new CustomPropertyDescriptor<CompoundObjectProperty, bool>(
+				new Guid("7c806f25-d85e-4d9f-b082-0cdaa7b60790"),
+				"HasPersistentOrder",
+				null,
+				obj => obj.HasPersistentOrder,
+				(obj, val) => obj.HasPersistentOrder = val),
+			new CustomPropertyDescriptor<CompoundObjectProperty, bool>(
+				new Guid("8a861113-a48a-40c5-bdec-6ceafef86f48"),
+				"IsList",
+				null,
+				obj => obj.IsList,
+				(obj, val) => obj.IsList = val),
+		};
+		
+		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
 		{
-			switch(propertyName)
-			{
-				case "CompoundObjectDefinition":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("0d78c157-c106-4728-9af2-7992da7c935d")).Constraints
-						.Where(c => !c.IsValid(this, this.CompoundObjectDefinition))
-						.Select(c => c.GetErrorText(this, this.CompoundObjectDefinition))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "HasPersistentOrder":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("7c806f25-d85e-4d9f-b082-0cdaa7b60790")).Constraints
-						.Where(c => !c.IsValid(this, this.HasPersistentOrder))
-						.Select(c => c.GetErrorText(this, this.HasPersistentOrder))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "IsList":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("8a861113-a48a-40c5-bdec-6ceafef86f48")).Constraints
-						.Where(c => !c.IsValid(this, this.IsList))
-						.Select(c => c.GetErrorText(this, this.IsList))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				default:
-					return base.GetPropertyError(propertyName);
-			}
+			props.AddRange(_properties);
 		}
+	
 
 		public override void ReloadReferences()
 		{

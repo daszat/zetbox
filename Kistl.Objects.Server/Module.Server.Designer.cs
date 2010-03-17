@@ -730,104 +730,74 @@ namespace Kistl.App.Base
         public static event ObjectEventHandler<Module> OnDeleting_Module;
 
 
-		protected override string GetPropertyError(string propertyName) 
+		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
+			new CustomPropertyDescriptor<Module, ICollection<Kistl.App.Base.Assembly>>(
+				new Guid("cab23a85-a179-475c-a70f-77789e2a2907"),
+				"Assemblies",
+				null,
+				obj => obj.Assemblies,
+				null), // lists are read-only properties
+			new CustomPropertyDescriptor<Module, Kistl.App.Base.Identity>(
+				new Guid("d1cad06b-040e-417c-8e43-67fa2e861649"),
+				"ChangedBy",
+				null,
+				obj => obj.ChangedBy,
+				(obj, val) => obj.ChangedBy = val),
+			new CustomPropertyDescriptor<Module, DateTime?>(
+				new Guid("75aedd67-e42d-461d-9263-c301d15b54f0"),
+				"ChangedOn",
+				null,
+				obj => obj.ChangedOn,
+				(obj, val) => obj.ChangedOn = val),
+			new CustomPropertyDescriptor<Module, Kistl.App.Base.Identity>(
+				new Guid("7b76322d-c8cd-4845-9cb4-b77f572692be"),
+				"CreatedBy",
+				null,
+				obj => obj.CreatedBy,
+				(obj, val) => obj.CreatedBy = val),
+			new CustomPropertyDescriptor<Module, DateTime?>(
+				new Guid("c6370ff5-115a-441d-a688-28297c9e46f8"),
+				"CreatedOn",
+				null,
+				obj => obj.CreatedOn,
+				(obj, val) => obj.CreatedOn = val),
+			new CustomPropertyDescriptor<Module, ICollection<Kistl.App.Base.DataType>>(
+				new Guid("a1711984-5263-4407-ac67-6e4123954976"),
+				"DataTypes",
+				null,
+				obj => obj.DataTypes,
+				null), // lists are read-only properties
+			new CustomPropertyDescriptor<Module, string>(
+				new Guid("79408b86-1731-42ad-89b2-ed5c567fbf8a"),
+				"Description",
+				null,
+				obj => obj.Description,
+				(obj, val) => obj.Description = val),
+			new CustomPropertyDescriptor<Module, Guid>(
+				new Guid("75e3db82-220c-474e-973a-ceb65fd8386d"),
+				"ExportGuid",
+				null,
+				obj => obj.ExportGuid,
+				(obj, val) => obj.ExportGuid = val),
+			new CustomPropertyDescriptor<Module, string>(
+				new Guid("63facb30-d8f7-42f6-8c14-85933d5f94b8"),
+				"Name",
+				null,
+				obj => obj.Name,
+				(obj, val) => obj.Name = val),
+			new CustomPropertyDescriptor<Module, string>(
+				new Guid("36d2b9e7-d6b9-4a9c-a363-7e059a637919"),
+				"Namespace",
+				null,
+				obj => obj.Namespace,
+				(obj, val) => obj.Namespace = val),
+		};
+		
+		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
 		{
-			switch(propertyName)
-			{
-				case "Assemblies":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("cab23a85-a179-475c-a70f-77789e2a2907")).Constraints
-						.Where(c => !c.IsValid(this, this.Assemblies))
-						.Select(c => c.GetErrorText(this, this.Assemblies))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "ChangedBy":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("d1cad06b-040e-417c-8e43-67fa2e861649")).Constraints
-						.Where(c => !c.IsValid(this, this.ChangedBy))
-						.Select(c => c.GetErrorText(this, this.ChangedBy))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "ChangedOn":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("75aedd67-e42d-461d-9263-c301d15b54f0")).Constraints
-						.Where(c => !c.IsValid(this, this.ChangedOn))
-						.Select(c => c.GetErrorText(this, this.ChangedOn))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "CreatedBy":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("7b76322d-c8cd-4845-9cb4-b77f572692be")).Constraints
-						.Where(c => !c.IsValid(this, this.CreatedBy))
-						.Select(c => c.GetErrorText(this, this.CreatedBy))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "CreatedOn":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("c6370ff5-115a-441d-a688-28297c9e46f8")).Constraints
-						.Where(c => !c.IsValid(this, this.CreatedOn))
-						.Select(c => c.GetErrorText(this, this.CreatedOn))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "DataTypes":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("a1711984-5263-4407-ac67-6e4123954976")).Constraints
-						.Where(c => !c.IsValid(this, this.DataTypes))
-						.Select(c => c.GetErrorText(this, this.DataTypes))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "Description":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("79408b86-1731-42ad-89b2-ed5c567fbf8a")).Constraints
-						.Where(c => !c.IsValid(this, this.Description))
-						.Select(c => c.GetErrorText(this, this.Description))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "ExportGuid":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("75e3db82-220c-474e-973a-ceb65fd8386d")).Constraints
-						.Where(c => !c.IsValid(this, this.ExportGuid))
-						.Select(c => c.GetErrorText(this, this.ExportGuid))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "Name":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("63facb30-d8f7-42f6-8c14-85933d5f94b8")).Constraints
-						.Where(c => !c.IsValid(this, this.Name))
-						.Select(c => c.GetErrorText(this, this.Name))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "Namespace":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("36d2b9e7-d6b9-4a9c-a363-7e059a637919")).Constraints
-						.Where(c => !c.IsValid(this, this.Namespace))
-						.Select(c => c.GetErrorText(this, this.Namespace))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				default:
-					return base.GetPropertyError(propertyName);
-			}
+			props.AddRange(_properties);
 		}
+	
 
 		public override void ReloadReferences()
 		{

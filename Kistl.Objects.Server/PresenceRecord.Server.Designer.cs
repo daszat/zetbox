@@ -319,41 +319,32 @@ namespace Kistl.App.TimeRecords
         public static event ObjectEventHandler<PresenceRecord> OnDeleting_PresenceRecord;
 
 
-		protected override string GetPropertyError(string propertyName) 
+		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
+			new CustomPropertyDescriptor<PresenceRecord, DateTime>(
+				new Guid("3833e790-e2f2-43c6-b9c2-79dd4a03c8c6"),
+				"From",
+				null,
+				obj => obj.From,
+				(obj, val) => obj.From = val),
+			new CustomPropertyDescriptor<PresenceRecord, Kistl.App.Projekte.Mitarbeiter>(
+				new Guid("b67880d2-37b0-436f-8628-6637fbe19e31"),
+				"Mitarbeiter",
+				null,
+				obj => obj.Mitarbeiter,
+				(obj, val) => obj.Mitarbeiter = val),
+			new CustomPropertyDescriptor<PresenceRecord, DateTime?>(
+				new Guid("17dabad9-a47e-46b8-a72e-b7616af0ceae"),
+				"Thru",
+				null,
+				obj => obj.Thru,
+				(obj, val) => obj.Thru = val),
+		};
+		
+		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
 		{
-			switch(propertyName)
-			{
-				case "From":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("3833e790-e2f2-43c6-b9c2-79dd4a03c8c6")).Constraints
-						.Where(c => !c.IsValid(this, this.From))
-						.Select(c => c.GetErrorText(this, this.From))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "Mitarbeiter":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("b67880d2-37b0-436f-8628-6637fbe19e31")).Constraints
-						.Where(c => !c.IsValid(this, this.Mitarbeiter))
-						.Select(c => c.GetErrorText(this, this.Mitarbeiter))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "Thru":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("17dabad9-a47e-46b8-a72e-b7616af0ceae")).Constraints
-						.Where(c => !c.IsValid(this, this.Thru))
-						.Select(c => c.GetErrorText(this, this.Thru))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				default:
-					return base.GetPropertyError(propertyName);
-			}
+			props.AddRange(_properties);
 		}
+	
 
 		public override void ReloadReferences()
 		{

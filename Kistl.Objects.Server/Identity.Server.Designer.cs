@@ -328,50 +328,38 @@ namespace Kistl.App.Base
         public static event ObjectEventHandler<Identity> OnDeleting_Identity;
 
 
-		protected override string GetPropertyError(string propertyName) 
+		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
+			new CustomPropertyDescriptor<Identity, string>(
+				new Guid("f93e6dbb-a704-460c-8183-ce8b1c2c47a2"),
+				"DisplayName",
+				null,
+				obj => obj.DisplayName,
+				(obj, val) => obj.DisplayName = val),
+			new CustomPropertyDescriptor<Identity, ICollection<Kistl.App.Base.Group>>(
+				new Guid("5f534204-f0d5-4d6f-8efa-7ff248580ba3"),
+				"Groups",
+				null,
+				obj => obj.Groups,
+				null), // lists are read-only properties
+			new CustomPropertyDescriptor<Identity, string>(
+				new Guid("0d499610-99e3-42cc-b71b-49ed1a356355"),
+				"Password",
+				null,
+				obj => obj.Password,
+				(obj, val) => obj.Password = val),
+			new CustomPropertyDescriptor<Identity, string>(
+				new Guid("a4ce1f5f-311b-4510-8817-4cca40f0bf0f"),
+				"UserName",
+				null,
+				obj => obj.UserName,
+				(obj, val) => obj.UserName = val),
+		};
+		
+		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
 		{
-			switch(propertyName)
-			{
-				case "DisplayName":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("f93e6dbb-a704-460c-8183-ce8b1c2c47a2")).Constraints
-						.Where(c => !c.IsValid(this, this.DisplayName))
-						.Select(c => c.GetErrorText(this, this.DisplayName))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "Groups":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("5f534204-f0d5-4d6f-8efa-7ff248580ba3")).Constraints
-						.Where(c => !c.IsValid(this, this.Groups))
-						.Select(c => c.GetErrorText(this, this.Groups))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "Password":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("0d499610-99e3-42cc-b71b-49ed1a356355")).Constraints
-						.Where(c => !c.IsValid(this, this.Password))
-						.Select(c => c.GetErrorText(this, this.Password))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "UserName":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("a4ce1f5f-311b-4510-8817-4cca40f0bf0f")).Constraints
-						.Where(c => !c.IsValid(this, this.UserName))
-						.Select(c => c.GetErrorText(this, this.UserName))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				default:
-					return base.GetPropertyError(propertyName);
-			}
+			props.AddRange(_properties);
 		}
+	
 
 		public override void ReloadReferences()
 		{

@@ -121,6 +121,7 @@ namespace Kistl.App.Test
         public static event ObjectEventHandler<AnotherTest> OnDeleting_AnotherTest;
 
 
+	
 
 		public override void ReloadReferences()
 		{

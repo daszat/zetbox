@@ -315,41 +315,32 @@ namespace Kistl.App.Test
         public static event ObjectEventHandler<Fragebogen> OnDeleting_Fragebogen;
 
 
-		protected override string GetPropertyError(string propertyName) 
+		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
+			new CustomPropertyDescriptor<Fragebogen, IList<Kistl.App.Test.Antwort>>(
+				new Guid("e8f20c02-abea-4c91-850f-c321adfd46f0"),
+				"Antworten",
+				null,
+				obj => obj.Antworten,
+				null), // lists are read-only properties
+			new CustomPropertyDescriptor<Fragebogen, int?>(
+				new Guid("b65f1a91-e063-4054-a2e7-d5dc0292e3fc"),
+				"BogenNummer",
+				null,
+				obj => obj.BogenNummer,
+				(obj, val) => obj.BogenNummer = val),
+			new CustomPropertyDescriptor<Fragebogen, Kistl.App.Test.TestStudent>(
+				new Guid("3a91e745-0dd2-4f31-864e-eaf657ddb577"),
+				"Student",
+				null,
+				obj => obj.Student,
+				(obj, val) => obj.Student = val),
+		};
+		
+		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
 		{
-			switch(propertyName)
-			{
-				case "Antworten":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("e8f20c02-abea-4c91-850f-c321adfd46f0")).Constraints
-						.Where(c => !c.IsValid(this, this.Antworten))
-						.Select(c => c.GetErrorText(this, this.Antworten))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "BogenNummer":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("b65f1a91-e063-4054-a2e7-d5dc0292e3fc")).Constraints
-						.Where(c => !c.IsValid(this, this.BogenNummer))
-						.Select(c => c.GetErrorText(this, this.BogenNummer))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "Student":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("3a91e745-0dd2-4f31-864e-eaf657ddb577")).Constraints
-						.Where(c => !c.IsValid(this, this.Student))
-						.Select(c => c.GetErrorText(this, this.Student))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				default:
-					return base.GetPropertyError(propertyName);
-			}
+			props.AddRange(_properties);
 		}
+	
 
 		public override void ReloadReferences()
 		{

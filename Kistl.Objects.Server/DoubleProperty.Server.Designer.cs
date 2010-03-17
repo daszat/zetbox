@@ -138,6 +138,7 @@ namespace Kistl.App.Base
         public static event ObjectEventHandler<DoubleProperty> OnDeleting_DoubleProperty;
 
 
+	
 
 		public override void ReloadReferences()
 		{

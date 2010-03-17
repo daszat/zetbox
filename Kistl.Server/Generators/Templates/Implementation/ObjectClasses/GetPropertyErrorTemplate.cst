@@ -16,32 +16,50 @@
 	var properties = cls.Properties.OrderBy(p => p.Name).ToList();
 	if (properties.Count > 0) {
 %>
-		protected override string GetPropertyError(string propertyName) 
-		{
-			switch(propertyName)
-			{
+		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
 <%
 		foreach(var property in properties)
 		{
 			string propertyName = property.Name;
-			
+			if (property.IsAssociation() && !property.IsObjectReferencePropertySingle())
+			{
 %>
-				case "<%= propertyName %>":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("<%= property.ExportGuid %>")).Constraints
-						.Where(c => !c.IsValid(this, this.<%= propertyName %>))
-						.Select(c => c.GetErrorText(this, this.<%= propertyName %>))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
+			new CustomPropertyDescriptor<<%= cls.Name %>, <%= property.GetCollectionTypeString() %>>(
+				new Guid("<%= property.ExportGuid %>"),
+				"<%= propertyName %>",
+				null,
+				obj => obj.<%= propertyName %>,
+				null), // lists are read-only properties
 <%
+			}
+			else if (property is CalculatedObjectReferenceProperty) {
+%>
+			new CustomPropertyDescriptor<<%= cls.Name %>, <%= property.ReferencedTypeAsCSharp() %>>(
+				new Guid("<%= property.ExportGuid %>"),
+				"<%= propertyName %>",
+				null,
+				obj => obj.<%= propertyName %>,
+				null), // CalculatedObjectReferenceProperty is a read-only property
+<%
+			} else {
+%>
+			new CustomPropertyDescriptor<<%= cls.Name %>, <%= property.ReferencedTypeAsCSharp() %>>(
+				new Guid("<%= property.ExportGuid %>"),
+				"<%= propertyName %>",
+				null,
+				obj => obj.<%= propertyName %>,
+				(obj, val) => obj.<%= propertyName %> = val),
+<%
+			}
 		}
 %>
-				default:
-					return base.GetPropertyError(propertyName);
-			}
+		};
+		
+		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
+		{
+			props.AddRange(_properties);
 		}
 <%
 	}
 %>
+	

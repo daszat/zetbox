@@ -157,7 +157,7 @@ namespace Kistl.API
     /// <summary>
     /// Interface for all persistent objects.
     /// </summary>
-    public interface IPersistenceObject : INotifyingObject, IStreamable
+    public interface IPersistenceObject : INotifyingObject, IStreamable, ICustomTypeDescriptor
     {
         /// <summary>
         /// Gets the primary key of this object. By convention all persistent objects have to have this synthesised primary key.

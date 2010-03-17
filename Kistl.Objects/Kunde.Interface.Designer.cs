@@ -24,7 +24,7 @@ namespace Kistl.App.Projekte
         /// EMails des Kunden - können mehrere sein
         /// </summary>
 
-        ICollection<System.String> EMails { get; }
+        ICollection<string> EMails { get; }
         /// <summary>
         /// Name des Kunden
         /// </summary>

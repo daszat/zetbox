@@ -230,23 +230,20 @@ namespace Kistl.App.Base
         public static event ObjectEventHandler<EnumerationProperty> OnDeleting_EnumerationProperty;
 
 
-		protected override string GetPropertyError(string propertyName) 
+		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
+			new CustomPropertyDescriptor<EnumerationProperty, Kistl.App.Base.Enumeration>(
+				new Guid("1144c061-3610-495f-b8b4-951058bb0c23"),
+				"Enumeration",
+				null,
+				obj => obj.Enumeration,
+				(obj, val) => obj.Enumeration = val),
+		};
+		
+		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
 		{
-			switch(propertyName)
-			{
-				case "Enumeration":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("1144c061-3610-495f-b8b4-951058bb0c23")).Constraints
-						.Where(c => !c.IsValid(this, this.Enumeration))
-						.Select(c => c.GetErrorText(this, this.Enumeration))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				default:
-					return base.GetPropertyError(propertyName);
-			}
+			props.AddRange(_properties);
 		}
+	
 
 		public override void ReloadReferences()
 		{

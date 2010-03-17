@@ -138,6 +138,7 @@ namespace Kistl.App.Base
         public static event ObjectEventHandler<GuidProperty> OnDeleting_GuidProperty;
 
 
+	
 
 		public override void ReloadReferences()
 		{

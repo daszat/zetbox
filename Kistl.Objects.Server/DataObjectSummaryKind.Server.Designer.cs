@@ -96,6 +96,7 @@ namespace Kistl.App.GUI
         public static event ObjectEventHandler<DataObjectSummaryKind> OnDeleting_DataObjectSummaryKind;
 
 
+	
 
 		public override void ReloadReferences()
 		{

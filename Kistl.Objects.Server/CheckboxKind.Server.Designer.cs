@@ -96,6 +96,7 @@ namespace Kistl.App.GUI
         public static event ObjectEventHandler<CheckboxKind> OnDeleting_CheckboxKind;
 
 
+	
 
 		public override void ReloadReferences()
 		{

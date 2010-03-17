@@ -371,59 +371,44 @@ namespace at.dasz.CourseOrganiser
         public static event ObjectEventHandler<Student> OnDeleting_Student;
 
 
-		protected override string GetPropertyError(string propertyName) 
+		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
+			new CustomPropertyDescriptor<Student, ICollection<at.dasz.CourseOrganiser.GroupExcercise>>(
+				new Guid("6c9bed6d-1ce1-4260-8e25-d864ffb85463"),
+				"GroupExcercise",
+				null,
+				obj => obj.GroupExcercise,
+				null), // lists are read-only properties
+			new CustomPropertyDescriptor<Student, string>(
+				new Guid("d65a724a-85eb-49f4-89ce-a050aec5d7f8"),
+				"MatriculationNumber",
+				null,
+				obj => obj.MatriculationNumber,
+				(obj, val) => obj.MatriculationNumber = val),
+			new CustomPropertyDescriptor<Student, string>(
+				new Guid("0090bd59-0e0e-49cb-be92-935eae1276ca"),
+				"Name",
+				null,
+				obj => obj.Name,
+				(obj, val) => obj.Name = val),
+			new CustomPropertyDescriptor<Student, ICollection<at.dasz.CourseOrganiser.Semester>>(
+				new Guid("f95b44bb-edd0-4e81-82b6-4e1b2476190e"),
+				"Semesters",
+				null,
+				obj => obj.Semesters,
+				null), // lists are read-only properties
+			new CustomPropertyDescriptor<Student, ICollection<at.dasz.CourseOrganiser.StudentExam>>(
+				new Guid("b99355b0-540a-4585-9453-bbe16255b164"),
+				"StudentExam",
+				null,
+				obj => obj.StudentExam,
+				null), // lists are read-only properties
+		};
+		
+		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
 		{
-			switch(propertyName)
-			{
-				case "GroupExcercise":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("6c9bed6d-1ce1-4260-8e25-d864ffb85463")).Constraints
-						.Where(c => !c.IsValid(this, this.GroupExcercise))
-						.Select(c => c.GetErrorText(this, this.GroupExcercise))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "MatriculationNumber":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("d65a724a-85eb-49f4-89ce-a050aec5d7f8")).Constraints
-						.Where(c => !c.IsValid(this, this.MatriculationNumber))
-						.Select(c => c.GetErrorText(this, this.MatriculationNumber))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "Name":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("0090bd59-0e0e-49cb-be92-935eae1276ca")).Constraints
-						.Where(c => !c.IsValid(this, this.Name))
-						.Select(c => c.GetErrorText(this, this.Name))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "Semesters":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("f95b44bb-edd0-4e81-82b6-4e1b2476190e")).Constraints
-						.Where(c => !c.IsValid(this, this.Semesters))
-						.Select(c => c.GetErrorText(this, this.Semesters))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "StudentExam":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("b99355b0-540a-4585-9453-bbe16255b164")).Constraints
-						.Where(c => !c.IsValid(this, this.StudentExam))
-						.Select(c => c.GetErrorText(this, this.StudentExam))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				default:
-					return base.GetPropertyError(propertyName);
-			}
+			props.AddRange(_properties);
 		}
+	
 
 		public override void ReloadReferences()
 		{

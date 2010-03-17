@@ -244,32 +244,26 @@ namespace Kistl.App.Base
         public static event ObjectEventHandler<ValueTypeProperty> OnDeleting_ValueTypeProperty;
 
 
-		protected override string GetPropertyError(string propertyName) 
+		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
+			new CustomPropertyDescriptor<ValueTypeProperty, bool>(
+				new Guid("b62c7fee-bb67-46a6-b481-81554e788aa0"),
+				"HasPersistentOrder",
+				null,
+				obj => obj.HasPersistentOrder,
+				(obj, val) => obj.HasPersistentOrder = val),
+			new CustomPropertyDescriptor<ValueTypeProperty, bool>(
+				new Guid("b2bd1528-c22f-4e12-b80f-f8234a2c0831"),
+				"IsList",
+				null,
+				obj => obj.IsList,
+				(obj, val) => obj.IsList = val),
+		};
+		
+		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
 		{
-			switch(propertyName)
-			{
-				case "HasPersistentOrder":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("b62c7fee-bb67-46a6-b481-81554e788aa0")).Constraints
-						.Where(c => !c.IsValid(this, this.HasPersistentOrder))
-						.Select(c => c.GetErrorText(this, this.HasPersistentOrder))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "IsList":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("b2bd1528-c22f-4e12-b80f-f8234a2c0831")).Constraints
-						.Where(c => !c.IsValid(this, this.IsList))
-						.Select(c => c.GetErrorText(this, this.IsList))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				default:
-					return base.GetPropertyError(propertyName);
-			}
+			props.AddRange(_properties);
 		}
+	
 
 		public override void ReloadReferences()
 		{

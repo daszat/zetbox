@@ -96,6 +96,7 @@ namespace Kistl.App.GUI
         public static event ObjectEventHandler<PropertyGroupKind> OnDeleting_PropertyGroupKind;
 
 
+	
 
 		public override void ReloadReferences()
 		{

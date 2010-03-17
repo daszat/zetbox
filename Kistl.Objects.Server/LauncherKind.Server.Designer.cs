@@ -96,6 +96,7 @@ namespace Kistl.App.GUI
         public static event ObjectEventHandler<LauncherKind> OnDeleting_LauncherKind;
 
 
+	
 
 		public override void ReloadReferences()
 		{

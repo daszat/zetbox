@@ -59,6 +59,7 @@
   <ItemGroup>
     <Compile Include="BaseFrozenContext.cs" />
     <Compile Include="BaseFrozenObject.cs" />
+    <Compile Include="CustomPropertyDescriptor.cs" />
     <Compile Include="FrozenProvider.cs" />
     <Compile Include="Generator\FreezingGenerator.cs" />
     <Compile Include="Generator\Implementation\CollectionEntries\ObjectCollectionEntry.cs" />

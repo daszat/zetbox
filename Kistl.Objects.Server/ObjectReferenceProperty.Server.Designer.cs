@@ -305,32 +305,26 @@ namespace Kistl.App.Base
         public static event ObjectEventHandler<ObjectReferenceProperty> OnDeleting_ObjectReferenceProperty;
 
 
-		protected override string GetPropertyError(string propertyName) 
+		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
+			new CustomPropertyDescriptor<ObjectReferenceProperty, bool>(
+				new Guid("373f0036-42d6-41e2-a2a4-74462537f426"),
+				"EagerLoading",
+				null,
+				obj => obj.EagerLoading,
+				(obj, val) => obj.EagerLoading = val),
+			new CustomPropertyDescriptor<ObjectReferenceProperty, Kistl.App.Base.RelationEnd>(
+				new Guid("63ba109d-92c6-4ced-980b-0a52aabfaec0"),
+				"RelationEnd",
+				null,
+				obj => obj.RelationEnd,
+				(obj, val) => obj.RelationEnd = val),
+		};
+		
+		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
 		{
-			switch(propertyName)
-			{
-				case "EagerLoading":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("373f0036-42d6-41e2-a2a4-74462537f426")).Constraints
-						.Where(c => !c.IsValid(this, this.EagerLoading))
-						.Select(c => c.GetErrorText(this, this.EagerLoading))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "RelationEnd":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("63ba109d-92c6-4ced-980b-0a52aabfaec0")).Constraints
-						.Where(c => !c.IsValid(this, this.RelationEnd))
-						.Select(c => c.GetErrorText(this, this.RelationEnd))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				default:
-					return base.GetPropertyError(propertyName);
-			}
+			props.AddRange(_properties);
 		}
+	
 
 		public override void ReloadReferences()
 		{

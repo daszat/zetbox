@@ -96,6 +96,7 @@ namespace Kistl.App.GUI
         public static event ObjectEventHandler<TypeRefRefKind> OnDeleting_TypeRefRefKind;
 
 
+	
 
 		public override void ReloadReferences()
 		{

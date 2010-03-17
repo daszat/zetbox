@@ -230,23 +230,20 @@ namespace Kistl.App.Base
         public static event ObjectEventHandler<ObjectParameter> OnDeleting_ObjectParameter;
 
 
-		protected override string GetPropertyError(string propertyName) 
+		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
+			new CustomPropertyDescriptor<ObjectParameter, Kistl.App.Base.DataType>(
+				new Guid("9bd64c60-7282-47f0-8069-528a175fcc92"),
+				"DataType",
+				null,
+				obj => obj.DataType,
+				(obj, val) => obj.DataType = val),
+		};
+		
+		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
 		{
-			switch(propertyName)
-			{
-				case "DataType":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("9bd64c60-7282-47f0-8069-528a175fcc92")).Constraints
-						.Where(c => !c.IsValid(this, this.DataType))
-						.Select(c => c.GetErrorText(this, this.DataType))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				default:
-					return base.GetPropertyError(propertyName);
-			}
+			props.AddRange(_properties);
 		}
+	
 
 		public override void ReloadReferences()
 		{

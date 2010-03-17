@@ -144,23 +144,20 @@ namespace Kistl.App.Base
         public static event ObjectEventHandler<RoleMembership> OnDeleting_RoleMembership;
 
 
-		protected override string GetPropertyError(string propertyName) 
+		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
+			new CustomPropertyDescriptor<RoleMembership, IList<Kistl.App.Base.Relation>>(
+				new Guid("fb799900-1a5b-4b62-a445-5dae8febdd28"),
+				"Relations",
+				null,
+				obj => obj.Relations,
+				null), // lists are read-only properties
+		};
+		
+		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
 		{
-			switch(propertyName)
-			{
-				case "Relations":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("fb799900-1a5b-4b62-a445-5dae8febdd28")).Constraints
-						.Where(c => !c.IsValid(this, this.Relations))
-						.Select(c => c.GetErrorText(this, this.Relations))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				default:
-					return base.GetPropertyError(propertyName);
-			}
+			props.AddRange(_properties);
 		}
+	
 
 		public override void ReloadReferences()
 		{

@@ -96,6 +96,7 @@ namespace Kistl.App.GUI
         public static event ObjectEventHandler<DataObjectSelectionTaskKind> OnDeleting_DataObjectSelectionTaskKind;
 
 
+	
 
 		public override void ReloadReferences()
 		{

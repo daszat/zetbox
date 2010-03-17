@@ -96,6 +96,7 @@ namespace Kistl.App.GUI
         public static event ObjectEventHandler<RelationEditorKind> OnDeleting_RelationEditorKind;
 
 
+	
 
 		public override void ReloadReferences()
 		{

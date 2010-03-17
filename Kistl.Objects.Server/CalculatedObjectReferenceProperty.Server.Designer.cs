@@ -278,32 +278,26 @@ namespace Kistl.App.Base
         public static event ObjectEventHandler<CalculatedObjectReferenceProperty> OnDeleting_CalculatedObjectReferenceProperty;
 
 
-		protected override string GetPropertyError(string propertyName) 
+		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
+			new CustomPropertyDescriptor<CalculatedObjectReferenceProperty, ICollection<Kistl.App.Base.Property>>(
+				new Guid("bfda6511-087d-4381-9780-1f76f3abcffe"),
+				"Inputs",
+				null,
+				obj => obj.Inputs,
+				null), // lists are read-only properties
+			new CustomPropertyDescriptor<CalculatedObjectReferenceProperty, Kistl.App.Base.ObjectClass>(
+				new Guid("cd62d769-0752-4a72-832f-5935ece1198b"),
+				"ReferencedClass",
+				null,
+				obj => obj.ReferencedClass,
+				(obj, val) => obj.ReferencedClass = val),
+		};
+		
+		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
 		{
-			switch(propertyName)
-			{
-				case "Inputs":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("bfda6511-087d-4381-9780-1f76f3abcffe")).Constraints
-						.Where(c => !c.IsValid(this, this.Inputs))
-						.Select(c => c.GetErrorText(this, this.Inputs))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "ReferencedClass":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("cd62d769-0752-4a72-832f-5935ece1198b")).Constraints
-						.Where(c => !c.IsValid(this, this.ReferencedClass))
-						.Select(c => c.GetErrorText(this, this.ReferencedClass))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				default:
-					return base.GetPropertyError(propertyName);
-			}
+			props.AddRange(_properties);
 		}
+	
 
 		public override void ReloadReferences()
 		{

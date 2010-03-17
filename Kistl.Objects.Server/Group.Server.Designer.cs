@@ -474,68 +474,50 @@ namespace Kistl.App.Base
         public static event ObjectEventHandler<Group> OnDeleting_Group;
 
 
-		protected override string GetPropertyError(string propertyName) 
+		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
+			new CustomPropertyDescriptor<Group, ICollection<Kistl.App.Base.Group>>(
+				new Guid("8bf923e1-1e2c-4fec-bd18-098b1ca4ff20"),
+				"ChildGroups",
+				null,
+				obj => obj.ChildGroups,
+				null), // lists are read-only properties
+			new CustomPropertyDescriptor<Group, Guid>(
+				new Guid("c776e87f-2b95-466e-848e-0ce195f4bd73"),
+				"ExportGuid",
+				null,
+				obj => obj.ExportGuid,
+				(obj, val) => obj.ExportGuid = val),
+			new CustomPropertyDescriptor<Group, ICollection<Kistl.App.Base.Identity>>(
+				new Guid("f60308a5-a502-4641-aa19-f895e701778c"),
+				"Member",
+				null,
+				obj => obj.Member,
+				null), // lists are read-only properties
+			new CustomPropertyDescriptor<Group, Kistl.App.Base.Module>(
+				new Guid("8da2dab4-81c9-4659-9f25-c6b5177ba26d"),
+				"Module",
+				null,
+				obj => obj.Module,
+				(obj, val) => obj.Module = val),
+			new CustomPropertyDescriptor<Group, string>(
+				new Guid("99c320b1-0003-4e2d-aa98-9a215d80988b"),
+				"Name",
+				null,
+				obj => obj.Name,
+				(obj, val) => obj.Name = val),
+			new CustomPropertyDescriptor<Group, ICollection<Kistl.App.Base.Group>>(
+				new Guid("257a1f6e-86cf-45a0-bce5-f75cd901c28d"),
+				"ParentGroups",
+				null,
+				obj => obj.ParentGroups,
+				null), // lists are read-only properties
+		};
+		
+		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
 		{
-			switch(propertyName)
-			{
-				case "ChildGroups":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("8bf923e1-1e2c-4fec-bd18-098b1ca4ff20")).Constraints
-						.Where(c => !c.IsValid(this, this.ChildGroups))
-						.Select(c => c.GetErrorText(this, this.ChildGroups))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "ExportGuid":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("c776e87f-2b95-466e-848e-0ce195f4bd73")).Constraints
-						.Where(c => !c.IsValid(this, this.ExportGuid))
-						.Select(c => c.GetErrorText(this, this.ExportGuid))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "Member":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("f60308a5-a502-4641-aa19-f895e701778c")).Constraints
-						.Where(c => !c.IsValid(this, this.Member))
-						.Select(c => c.GetErrorText(this, this.Member))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "Module":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("8da2dab4-81c9-4659-9f25-c6b5177ba26d")).Constraints
-						.Where(c => !c.IsValid(this, this.Module))
-						.Select(c => c.GetErrorText(this, this.Module))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "Name":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("99c320b1-0003-4e2d-aa98-9a215d80988b")).Constraints
-						.Where(c => !c.IsValid(this, this.Name))
-						.Select(c => c.GetErrorText(this, this.Name))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "ParentGroups":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("257a1f6e-86cf-45a0-bce5-f75cd901c28d")).Constraints
-						.Where(c => !c.IsValid(this, this.ParentGroups))
-						.Select(c => c.GetErrorText(this, this.ParentGroups))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				default:
-					return base.GetPropertyError(propertyName);
-			}
+			props.AddRange(_properties);
 		}
+	
 
 		public override void ReloadReferences()
 		{

@@ -364,5 +364,69 @@ namespace Kistl.API.Server.Mocks
         }
 
         #endregion
+
+        #region ICustomTypeDescriptor Members
+
+        public System.ComponentModel.AttributeCollection GetAttributes()
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetClassName()
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetComponentName()
+        {
+            throw new NotImplementedException();
+        }
+
+        public System.ComponentModel.TypeConverter GetConverter()
+        {
+            throw new NotImplementedException();
+        }
+
+        public System.ComponentModel.EventDescriptor GetDefaultEvent()
+        {
+            throw new NotImplementedException();
+        }
+
+        public System.ComponentModel.PropertyDescriptor GetDefaultProperty()
+        {
+            throw new NotImplementedException();
+        }
+
+        public object GetEditor(Type editorBaseType)
+        {
+            throw new NotImplementedException();
+        }
+
+        public System.ComponentModel.EventDescriptorCollection GetEvents(Attribute[] attributes)
+        {
+            throw new NotImplementedException();
+        }
+
+        public System.ComponentModel.EventDescriptorCollection GetEvents()
+        {
+            throw new NotImplementedException();
+        }
+
+        public System.ComponentModel.PropertyDescriptorCollection GetProperties(Attribute[] attributes)
+        {
+            throw new NotImplementedException();
+        }
+
+        public System.ComponentModel.PropertyDescriptorCollection GetProperties()
+        {
+            throw new NotImplementedException();
+        }
+
+        public object GetPropertyOwner(System.ComponentModel.PropertyDescriptor pd)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
     }
 }

@@ -239,32 +239,26 @@ namespace Kistl.App.Base
         public static event ObjectEventHandler<Enumeration> OnDeleting_Enumeration;
 
 
-		protected override string GetPropertyError(string propertyName) 
+		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
+			new CustomPropertyDescriptor<Enumeration, bool>(
+				new Guid("1ef92eea-d8b3-4f95-a694-9ca09ceff0e5"),
+				"AreFlags",
+				null,
+				obj => obj.AreFlags,
+				(obj, val) => obj.AreFlags = val),
+			new CustomPropertyDescriptor<Enumeration, ICollection<Kistl.App.Base.EnumerationEntry>>(
+				new Guid("1619c8a7-b969-4c05-851c-7a2545cda484"),
+				"EnumerationEntries",
+				null,
+				obj => obj.EnumerationEntries,
+				null), // lists are read-only properties
+		};
+		
+		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
 		{
-			switch(propertyName)
-			{
-				case "AreFlags":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("1ef92eea-d8b3-4f95-a694-9ca09ceff0e5")).Constraints
-						.Where(c => !c.IsValid(this, this.AreFlags))
-						.Select(c => c.GetErrorText(this, this.AreFlags))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "EnumerationEntries":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("1619c8a7-b969-4c05-851c-7a2545cda484")).Constraints
-						.Where(c => !c.IsValid(this, this.EnumerationEntries))
-						.Select(c => c.GetErrorText(this, this.EnumerationEntries))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				default:
-					return base.GetPropertyError(propertyName);
-			}
+			props.AddRange(_properties);
 		}
+	
 
 		public override void ReloadReferences()
 		{

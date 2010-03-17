@@ -96,6 +96,7 @@ namespace Kistl.App.GUI
         public static event ObjectEventHandler<ObjectListKind> OnDeleting_ObjectListKind;
 
 
+	
 
 		public override void ReloadReferences()
 		{

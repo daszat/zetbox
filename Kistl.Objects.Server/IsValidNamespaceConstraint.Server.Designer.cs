@@ -138,6 +138,7 @@ namespace Kistl.App.Base
         public static event ObjectEventHandler<IsValidNamespaceConstraint> OnDeleting_IsValidNamespaceConstraint;
 
 
+	
 
 		public override void ReloadReferences()
 		{

@@ -244,32 +244,26 @@ namespace Kistl.App.Base
         public static event ObjectEventHandler<IntegerRangeConstraint> OnDeleting_IntegerRangeConstraint;
 
 
-		protected override string GetPropertyError(string propertyName) 
+		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
+			new CustomPropertyDescriptor<IntegerRangeConstraint, int>(
+				new Guid("dff43695-5b93-4378-a01d-94a82d29dcef"),
+				"Max",
+				null,
+				obj => obj.Max,
+				(obj, val) => obj.Max = val),
+			new CustomPropertyDescriptor<IntegerRangeConstraint, int>(
+				new Guid("8afdbf66-c979-4c09-8872-1a44aa1dbf72"),
+				"Min",
+				null,
+				obj => obj.Min,
+				(obj, val) => obj.Min = val),
+		};
+		
+		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
 		{
-			switch(propertyName)
-			{
-				case "Max":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("dff43695-5b93-4378-a01d-94a82d29dcef")).Constraints
-						.Where(c => !c.IsValid(this, this.Max))
-						.Select(c => c.GetErrorText(this, this.Max))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "Min":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("8afdbf66-c979-4c09-8872-1a44aa1dbf72")).Constraints
-						.Where(c => !c.IsValid(this, this.Min))
-						.Select(c => c.GetErrorText(this, this.Min))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				default:
-					return base.GetPropertyError(propertyName);
-			}
+			props.AddRange(_properties);
 		}
+	
 
 		public override void ReloadReferences()
 		{

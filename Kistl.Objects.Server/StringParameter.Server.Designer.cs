@@ -138,6 +138,7 @@ namespace Kistl.App.Base
         public static event ObjectEventHandler<StringParameter> OnDeleting_StringParameter;
 
 
+	
 
 		public override void ReloadReferences()
 		{

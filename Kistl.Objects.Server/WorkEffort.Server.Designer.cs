@@ -425,59 +425,44 @@ namespace Kistl.App.TimeRecords
         public static event ObjectEventHandler<WorkEffort> OnDeleting_WorkEffort;
 
 
-		protected override string GetPropertyError(string propertyName) 
+		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
+			new CustomPropertyDescriptor<WorkEffort, DateTime>(
+				new Guid("b169f505-9b5f-4e4e-ae25-a46bc9926c87"),
+				"From",
+				null,
+				obj => obj.From,
+				(obj, val) => obj.From = val),
+			new CustomPropertyDescriptor<WorkEffort, Kistl.App.Projekte.Mitarbeiter>(
+				new Guid("720f5bcf-5654-4114-8fba-f57fb7bd48ea"),
+				"Mitarbeiter",
+				null,
+				obj => obj.Mitarbeiter,
+				(obj, val) => obj.Mitarbeiter = val),
+			new CustomPropertyDescriptor<WorkEffort, string>(
+				new Guid("a96df76c-c45c-4d21-8221-8c7deaac4814"),
+				"Name",
+				null,
+				obj => obj.Name,
+				(obj, val) => obj.Name = val),
+			new CustomPropertyDescriptor<WorkEffort, string>(
+				new Guid("1744a31b-a1c3-4e7c-834c-504521240478"),
+				"Notes",
+				null,
+				obj => obj.Notes,
+				(obj, val) => obj.Notes = val),
+			new CustomPropertyDescriptor<WorkEffort, DateTime?>(
+				new Guid("553440f1-3b22-402b-ba5b-355f21cc31d9"),
+				"Thru",
+				null,
+				obj => obj.Thru,
+				(obj, val) => obj.Thru = val),
+		};
+		
+		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
 		{
-			switch(propertyName)
-			{
-				case "From":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("b169f505-9b5f-4e4e-ae25-a46bc9926c87")).Constraints
-						.Where(c => !c.IsValid(this, this.From))
-						.Select(c => c.GetErrorText(this, this.From))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "Mitarbeiter":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("720f5bcf-5654-4114-8fba-f57fb7bd48ea")).Constraints
-						.Where(c => !c.IsValid(this, this.Mitarbeiter))
-						.Select(c => c.GetErrorText(this, this.Mitarbeiter))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "Name":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("a96df76c-c45c-4d21-8221-8c7deaac4814")).Constraints
-						.Where(c => !c.IsValid(this, this.Name))
-						.Select(c => c.GetErrorText(this, this.Name))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "Notes":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("1744a31b-a1c3-4e7c-834c-504521240478")).Constraints
-						.Where(c => !c.IsValid(this, this.Notes))
-						.Select(c => c.GetErrorText(this, this.Notes))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "Thru":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("553440f1-3b22-402b-ba5b-355f21cc31d9")).Constraints
-						.Where(c => !c.IsValid(this, this.Thru))
-						.Select(c => c.GetErrorText(this, this.Thru))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				default:
-					return base.GetPropertyError(propertyName);
-			}
+			props.AddRange(_properties);
 		}
+	
 
 		public override void ReloadReferences()
 		{

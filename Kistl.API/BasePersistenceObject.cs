@@ -1,18 +1,20 @@
 namespace Kistl.API
 {
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel;
-    using System.IO;
-    using System.Xml;
     using System.Diagnostics;
-using System.Collections.Generic;
-using System.Xml.Serialization;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Xml;
+    using System.Xml.Serialization;
 
     /// <summary>
     /// Implement basic functionality needed by all persistent objects.
     /// </summary>
     public abstract class BasePersistenceObject
-        : BaseNotifyingObject, IPersistenceObject, IDataErrorInfo
+        : BaseNotifyingObject, IPersistenceObject, IDataErrorInfo, ICustomTypeDescriptor
     {
         /// <summary>
         /// Gets or sets the primary key of this object. By convention all persistent objects have to have this synthesised primary key.
@@ -174,7 +176,19 @@ using System.Xml.Serialization;
         /// <param name="prop">The name of the property whose error message to get.</param>
         /// <returns>The error message for the property. Returns 
         /// <value>String.Empty</value> if there is nothing to report.</returns>
-        protected abstract string GetPropertyError(string prop);
+        protected virtual string GetPropertyError(string prop)
+        {
+            // TODO: implement proper interface here
+            var cpd = GetProperties()[prop] as IValidatingPropertyDescriptor;
+            if (cpd != null)
+            {
+                return String.Join("; ", cpd.GetValidationErrors(this));
+            }
+            else
+            {
+                return null;
+            }
+        }
 
         /// <summary>
         /// Gets an error message indicating what is wrong with this object. Returns 
@@ -217,5 +231,126 @@ using System.Xml.Serialization;
 
         #endregion
 
+        #region ICustomTypeDescriptor Members
+
+        protected virtual string GetName() { return this.GetType().FullName; }
+
+        protected virtual PropertyDescriptor[] AccessPropertyDescriptors() { return _properties; }
+
+        string ICustomTypeDescriptor.GetClassName() { return GetName(); }
+
+        string ICustomTypeDescriptor.GetComponentName() { return GetName(); }
+
+        TypeConverter ICustomTypeDescriptor.GetConverter() { return null; }
+
+        EventDescriptor ICustomTypeDescriptor.GetDefaultEvent() { return null; }
+
+        PropertyDescriptor ICustomTypeDescriptor.GetDefaultProperty() { return null; }
+
+        object ICustomTypeDescriptor.GetEditor(Type editorBaseType) { return null; }
+
+        object ICustomTypeDescriptor.GetPropertyOwner(PropertyDescriptor pd) { return this; }
+
+        #region Attributes
+
+        private static readonly Attribute[] _attributes = new Attribute[] { };
+
+        protected virtual void CollectAttributes(List<Attribute> attrs)
+        {
+            attrs.AddRange(_attributes);
+        }
+
+        private static AttributeCollection _attributeCollection;
+        AttributeCollection ICustomTypeDescriptor.GetAttributes()
+        {
+            if (_attributeCollection == null)
+            {
+                var attrs = new List<Attribute>();
+                CollectAttributes(attrs);
+                _attributeCollection = new AttributeCollection(attrs.ToArray());
+            }
+
+            return _attributeCollection;
+        }
+
+        #endregion
+
+        #region Events
+
+        private static readonly EventDescriptor[] _events = new EventDescriptor[] { };
+
+        protected virtual void CollectEvents(List<EventDescriptor> events)
+        {
+            events.AddRange(_events);
+        }
+
+        private static EventDescriptorCollection _eventDescriptorCollection = null;
+
+        EventDescriptorCollection ICustomTypeDescriptor.GetEvents()
+        {
+            if (_eventDescriptorCollection == null)
+            {
+                var events = new List<EventDescriptor>();
+                CollectEvents(events);
+                _eventDescriptorCollection = new EventDescriptorCollection(events.ToArray(), true);
+            }
+
+            return _eventDescriptorCollection;
+        }
+
+        EventDescriptorCollection ICustomTypeDescriptor.GetEvents(Attribute[] attributes)
+        {
+            return new EventDescriptorCollection(
+                ((ICustomTypeDescriptor)this)
+                    .GetEvents()
+                    .OfType<EventDescriptor>()
+                    .Where(ev => ev.Attributes.Matches(attributes))
+                    .ToArray());
+        }
+
+        #endregion
+
+        #region Properties
+
+        private static readonly PropertyDescriptor[] _properties = new PropertyDescriptor[] {
+            new BaseCustomPropertyDescriptor<IDataObject, int>(
+                "ID",
+                null,
+                obj => obj.ID,
+                null)
+        };
+
+        protected virtual void CollectProperties(List<PropertyDescriptor> props)
+        {
+            props.AddRange(_properties);
+        }
+
+        private static PropertyDescriptorCollection _propertyDescriptorCollection = null;
+
+        public PropertyDescriptorCollection GetProperties()
+        {
+            if (_propertyDescriptorCollection == null)
+            {
+                var props = new List<PropertyDescriptor>();
+                CollectProperties(props);
+                _propertyDescriptorCollection = new PropertyDescriptorCollection(props.ToArray(), true);
+            }
+
+            return _propertyDescriptorCollection;
+        }
+
+        PropertyDescriptorCollection ICustomTypeDescriptor.GetProperties(Attribute[] attributes)
+        {
+            return new PropertyDescriptorCollection(
+                ((ICustomTypeDescriptor)this)
+                    .GetProperties()
+                    .OfType<PropertyDescriptor>()
+                    .Where(ev => ev.Attributes.Matches(attributes))
+                    .ToArray());
+        }
+
+        #endregion
+
+        #endregion
     }
 }

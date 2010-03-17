@@ -289,23 +289,20 @@ namespace Kistl.App.GUI
         public static event ObjectEventHandler<ControlKindClass> OnDeleting_ControlKindClass;
 
 
-		protected override string GetPropertyError(string propertyName) 
+		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
+			new CustomPropertyDescriptor<ControlKindClass, ICollection<Kistl.App.Base.TypeRef>>(
+				new Guid("883a2f71-78ae-4978-8d76-904a2237cc25"),
+				"SupportedInterfaces",
+				null,
+				obj => obj.SupportedInterfaces,
+				null), // lists are read-only properties
+		};
+		
+		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
 		{
-			switch(propertyName)
-			{
-				case "SupportedInterfaces":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("883a2f71-78ae-4978-8d76-904a2237cc25")).Constraints
-						.Where(c => !c.IsValid(this, this.SupportedInterfaces))
-						.Select(c => c.GetErrorText(this, this.SupportedInterfaces))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				default:
-					return base.GetPropertyError(propertyName);
-			}
+			props.AddRange(_properties);
 		}
+	
 
 		public override void ReloadReferences()
 		{

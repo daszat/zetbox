@@ -174,23 +174,20 @@ namespace Kistl.App.Test
         public static event ObjectEventHandler<ANewObjectClass> OnDeleting_ANewObjectClass;
 
 
-		protected override string GetPropertyError(string propertyName) 
+		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
+			new CustomPropertyDescriptor<ANewObjectClass, string>(
+				new Guid("e7371fa9-cd18-4cdc-91c3-a73c0984a019"),
+				"TestString",
+				null,
+				obj => obj.TestString,
+				(obj, val) => obj.TestString = val),
+		};
+		
+		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
 		{
-			switch(propertyName)
-			{
-				case "TestString":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("e7371fa9-cd18-4cdc-91c3-a73c0984a019")).Constraints
-						.Where(c => !c.IsValid(this, this.TestString))
-						.Select(c => c.GetErrorText(this, this.TestString))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				default:
-					return base.GetPropertyError(propertyName);
-			}
+			props.AddRange(_properties);
 		}
+	
 
 		public override void ReloadReferences()
 		{

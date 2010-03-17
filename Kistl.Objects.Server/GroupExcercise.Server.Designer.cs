@@ -314,41 +314,32 @@ namespace at.dasz.CourseOrganiser
         public static event ObjectEventHandler<GroupExcercise> OnDeleting_GroupExcercise;
 
 
-		protected override string GetPropertyError(string propertyName) 
+		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
+			new CustomPropertyDescriptor<GroupExcercise, at.dasz.CourseOrganiser.Exercise>(
+				new Guid("844509ba-ace7-4ce5-a5a0-ec52110d0203"),
+				"Excercise",
+				null,
+				obj => obj.Excercise,
+				(obj, val) => obj.Excercise = val),
+			new CustomPropertyDescriptor<GroupExcercise, int?>(
+				new Guid("04f84c64-4d2d-41c3-8007-024ba5f71b08"),
+				"Score",
+				null,
+				obj => obj.Score,
+				(obj, val) => obj.Score = val),
+			new CustomPropertyDescriptor<GroupExcercise, ICollection<at.dasz.CourseOrganiser.Student>>(
+				new Guid("f8257ff0-7693-4a11-bb2b-6f6db4666dfa"),
+				"Students",
+				null,
+				obj => obj.Students,
+				null), // lists are read-only properties
+		};
+		
+		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
 		{
-			switch(propertyName)
-			{
-				case "Excercise":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("844509ba-ace7-4ce5-a5a0-ec52110d0203")).Constraints
-						.Where(c => !c.IsValid(this, this.Excercise))
-						.Select(c => c.GetErrorText(this, this.Excercise))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "Score":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("04f84c64-4d2d-41c3-8007-024ba5f71b08")).Constraints
-						.Where(c => !c.IsValid(this, this.Score))
-						.Select(c => c.GetErrorText(this, this.Score))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "Students":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("f8257ff0-7693-4a11-bb2b-6f6db4666dfa")).Constraints
-						.Where(c => !c.IsValid(this, this.Students))
-						.Select(c => c.GetErrorText(this, this.Students))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				default:
-					return base.GetPropertyError(propertyName);
-			}
+			props.AddRange(_properties);
 		}
+	
 
 		public override void ReloadReferences()
 		{

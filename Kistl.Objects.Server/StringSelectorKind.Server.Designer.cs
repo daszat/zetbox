@@ -96,6 +96,7 @@ namespace Kistl.App.GUI
         public static event ObjectEventHandler<StringSelectorKind> OnDeleting_StringSelectorKind;
 
 
+	
 
 		public override void ReloadReferences()
 		{

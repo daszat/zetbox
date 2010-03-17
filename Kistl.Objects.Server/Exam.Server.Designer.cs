@@ -372,50 +372,38 @@ namespace at.dasz.CourseOrganiser
         public static event ObjectEventHandler<Exam> OnDeleting_Exam;
 
 
-		protected override string GetPropertyError(string propertyName) 
+		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
+			new CustomPropertyDescriptor<Exam, DateTime?>(
+				new Guid("bfbc9284-3d72-4966-9b03-2f9f5f628e42"),
+				"Date",
+				null,
+				obj => obj.Date,
+				(obj, val) => obj.Date = val),
+			new CustomPropertyDescriptor<Exam, int>(
+				new Guid("9223d17a-d22d-4419-8c47-83414de4ae28"),
+				"MaxScores",
+				null,
+				obj => obj.MaxScores,
+				(obj, val) => obj.MaxScores = val),
+			new CustomPropertyDescriptor<Exam, string>(
+				new Guid("7a257582-b2cc-43bc-b76f-03eee27c5a7c"),
+				"Name",
+				null,
+				obj => obj.Name,
+				(obj, val) => obj.Name = val),
+			new CustomPropertyDescriptor<Exam, at.dasz.CourseOrganiser.Semester>(
+				new Guid("7b83aa6f-84f3-4c62-8dd8-ce4d1020935a"),
+				"Semester",
+				null,
+				obj => obj.Semester,
+				(obj, val) => obj.Semester = val),
+		};
+		
+		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
 		{
-			switch(propertyName)
-			{
-				case "Date":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("bfbc9284-3d72-4966-9b03-2f9f5f628e42")).Constraints
-						.Where(c => !c.IsValid(this, this.Date))
-						.Select(c => c.GetErrorText(this, this.Date))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "MaxScores":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("9223d17a-d22d-4419-8c47-83414de4ae28")).Constraints
-						.Where(c => !c.IsValid(this, this.MaxScores))
-						.Select(c => c.GetErrorText(this, this.MaxScores))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "Name":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("7a257582-b2cc-43bc-b76f-03eee27c5a7c")).Constraints
-						.Where(c => !c.IsValid(this, this.Name))
-						.Select(c => c.GetErrorText(this, this.Name))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "Semester":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("7b83aa6f-84f3-4c62-8dd8-ce4d1020935a")).Constraints
-						.Where(c => !c.IsValid(this, this.Semester))
-						.Select(c => c.GetErrorText(this, this.Semester))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				default:
-					return base.GetPropertyError(propertyName);
-			}
+			props.AddRange(_properties);
 		}
+	
 
 		public override void ReloadReferences()
 		{

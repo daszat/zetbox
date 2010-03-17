@@ -96,6 +96,7 @@ namespace Kistl.App.GUI
         public static event ObjectEventHandler<EnumerationSelectorKind> OnDeleting_EnumerationSelectorKind;
 
 
+	
 
 		public override void ReloadReferences()
 		{

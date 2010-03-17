@@ -96,6 +96,7 @@ namespace Kistl.App.GUI
         public static event ObjectEventHandler<ErrorListKind> OnDeleting_ErrorListKind;
 
 
+	
 
 		public override void ReloadReferences()
 		{

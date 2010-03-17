@@ -629,86 +629,62 @@ namespace Kistl.App.Test
         public static event ObjectEventHandler<Muhblah> OnDeleting_Muhblah;
 
 
-		protected override string GetPropertyError(string propertyName) 
+		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
+			new CustomPropertyDescriptor<Muhblah, bool?>(
+				new Guid("9206e71e-85ea-4d74-85ea-59ee2484ed2a"),
+				"TestBool",
+				null,
+				obj => obj.TestBool,
+				(obj, val) => obj.TestBool = val),
+			new CustomPropertyDescriptor<Muhblah, ICollection<Kistl.App.Test.TestCustomObject>>(
+				new Guid("1f944324-673f-4f14-94c8-dc570ea3022d"),
+				"TestCustomObjects_List_Nav",
+				null,
+				obj => obj.TestCustomObjects_List_Nav,
+				null), // lists are read-only properties
+			new CustomPropertyDescriptor<Muhblah, ICollection<Kistl.App.Test.TestCustomObject>>(
+				new Guid("a3ad7340-4dc1-488c-bc9a-29ac931b1f0d"),
+				"TestCustomObjects_ManyList_Nav",
+				null,
+				obj => obj.TestCustomObjects_ManyList_Nav,
+				null), // lists are read-only properties
+			new CustomPropertyDescriptor<Muhblah, Kistl.App.Test.TestCustomObject>(
+				new Guid("aabd7cb7-c45e-43c9-97fd-76e50c310ab3"),
+				"TestCustomObjects_Nav",
+				null,
+				obj => obj.TestCustomObjects_Nav,
+				(obj, val) => obj.TestCustomObjects_Nav = val),
+			new CustomPropertyDescriptor<Muhblah, Kistl.App.Test.TestCustomObject>(
+				new Guid("42c6bc2f-0428-488a-b928-539c4c6e3e65"),
+				"TestCustomObjects_One_Nav",
+				null,
+				obj => obj.TestCustomObjects_One_Nav,
+				(obj, val) => obj.TestCustomObjects_One_Nav = val),
+			new CustomPropertyDescriptor<Muhblah, DateTime?>(
+				new Guid("c5a66e0b-1fdb-45e4-b9e4-2ae4ee35a201"),
+				"TestDateTime",
+				null,
+				obj => obj.TestDateTime,
+				(obj, val) => obj.TestDateTime = val),
+			new CustomPropertyDescriptor<Muhblah, Kistl.App.Test.TestEnum>(
+				new Guid("1a5484e4-4be0-4641-9c25-1aa30d1c0e7a"),
+				"TestEnum",
+				null,
+				obj => obj.TestEnum,
+				(obj, val) => obj.TestEnum = val),
+			new CustomPropertyDescriptor<Muhblah, string>(
+				new Guid("e9516350-fa66-426b-808a-bd8a5f432427"),
+				"TestString",
+				null,
+				obj => obj.TestString,
+				(obj, val) => obj.TestString = val),
+		};
+		
+		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
 		{
-			switch(propertyName)
-			{
-				case "TestBool":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("9206e71e-85ea-4d74-85ea-59ee2484ed2a")).Constraints
-						.Where(c => !c.IsValid(this, this.TestBool))
-						.Select(c => c.GetErrorText(this, this.TestBool))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "TestCustomObjects_List_Nav":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("1f944324-673f-4f14-94c8-dc570ea3022d")).Constraints
-						.Where(c => !c.IsValid(this, this.TestCustomObjects_List_Nav))
-						.Select(c => c.GetErrorText(this, this.TestCustomObjects_List_Nav))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "TestCustomObjects_ManyList_Nav":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("a3ad7340-4dc1-488c-bc9a-29ac931b1f0d")).Constraints
-						.Where(c => !c.IsValid(this, this.TestCustomObjects_ManyList_Nav))
-						.Select(c => c.GetErrorText(this, this.TestCustomObjects_ManyList_Nav))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "TestCustomObjects_Nav":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("aabd7cb7-c45e-43c9-97fd-76e50c310ab3")).Constraints
-						.Where(c => !c.IsValid(this, this.TestCustomObjects_Nav))
-						.Select(c => c.GetErrorText(this, this.TestCustomObjects_Nav))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "TestCustomObjects_One_Nav":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("42c6bc2f-0428-488a-b928-539c4c6e3e65")).Constraints
-						.Where(c => !c.IsValid(this, this.TestCustomObjects_One_Nav))
-						.Select(c => c.GetErrorText(this, this.TestCustomObjects_One_Nav))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "TestDateTime":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("c5a66e0b-1fdb-45e4-b9e4-2ae4ee35a201")).Constraints
-						.Where(c => !c.IsValid(this, this.TestDateTime))
-						.Select(c => c.GetErrorText(this, this.TestDateTime))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "TestEnum":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("1a5484e4-4be0-4641-9c25-1aa30d1c0e7a")).Constraints
-						.Where(c => !c.IsValid(this, this.TestEnum))
-						.Select(c => c.GetErrorText(this, this.TestEnum))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "TestString":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("e9516350-fa66-426b-808a-bd8a5f432427")).Constraints
-						.Where(c => !c.IsValid(this, this.TestString))
-						.Select(c => c.GetErrorText(this, this.TestString))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				default:
-					return base.GetPropertyError(propertyName);
-			}
+			props.AddRange(_properties);
 		}
+	
 
 		public override void ReloadReferences()
 		{

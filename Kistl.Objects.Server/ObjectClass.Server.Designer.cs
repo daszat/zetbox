@@ -835,104 +835,74 @@ namespace Kistl.App.Base
         public static event ObjectEventHandler<ObjectClass> OnDeleting_ObjectClass;
 
 
-		protected override string GetPropertyError(string propertyName) 
+		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
+			new CustomPropertyDescriptor<ObjectClass, ICollection<Kistl.App.Base.AccessControl>>(
+				new Guid("4514093c-0a1f-4644-b4a6-3389f1ca7aa8"),
+				"AccessControlList",
+				null,
+				obj => obj.AccessControlList,
+				null), // lists are read-only properties
+			new CustomPropertyDescriptor<ObjectClass, Kistl.App.Base.ObjectClass>(
+				new Guid("ad060d41-bc7a-41b8-a3e3-ec9302c8c714"),
+				"BaseObjectClass",
+				null,
+				obj => obj.BaseObjectClass,
+				(obj, val) => obj.BaseObjectClass = val),
+			new CustomPropertyDescriptor<ObjectClass, ICollection<Kistl.App.Base.InstanceConstraint>>(
+				new Guid("eda15826-7251-4726-9f6b-65e7f24f6ad1"),
+				"Constraints",
+				null,
+				obj => obj.Constraints,
+				null), // lists are read-only properties
+			new CustomPropertyDescriptor<ObjectClass, Kistl.App.GUI.PresentableModelDescriptor>(
+				new Guid("11adedb9-d32a-4da9-b986-0534e65df760"),
+				"DefaultPresentableModelDescriptor",
+				null,
+				obj => obj.DefaultPresentableModelDescriptor,
+				(obj, val) => obj.DefaultPresentableModelDescriptor = val),
+			new CustomPropertyDescriptor<ObjectClass, ICollection<Kistl.App.Base.Interface>>(
+				new Guid("a9ec04c2-0807-4d6c-a96a-824d13e5c571"),
+				"ImplementsInterfaces",
+				null,
+				obj => obj.ImplementsInterfaces,
+				null), // lists are read-only properties
+			new CustomPropertyDescriptor<ObjectClass, bool>(
+				new Guid("e9d1402e-3580-4084-8836-c44844683191"),
+				"IsAbstract",
+				null,
+				obj => obj.IsAbstract,
+				(obj, val) => obj.IsAbstract = val),
+			new CustomPropertyDescriptor<ObjectClass, bool>(
+				new Guid("13c33710-ea02-4621-ad50-294a1f36b07d"),
+				"IsFrozenObject",
+				null,
+				obj => obj.IsFrozenObject,
+				(obj, val) => obj.IsFrozenObject = val),
+			new CustomPropertyDescriptor<ObjectClass, bool>(
+				new Guid("edc853d3-0d02-4492-9159-c548c7713e9b"),
+				"IsSimpleObject",
+				null,
+				obj => obj.IsSimpleObject,
+				(obj, val) => obj.IsSimpleObject = val),
+			new CustomPropertyDescriptor<ObjectClass, ICollection<Kistl.App.Base.ObjectClass>>(
+				new Guid("0914de6e-966c-46fc-9359-e4da6c3608b1"),
+				"SubClasses",
+				null,
+				obj => obj.SubClasses,
+				null), // lists are read-only properties
+			new CustomPropertyDescriptor<ObjectClass, string>(
+				new Guid("2a5e5111-199c-4dce-8369-ce35ee741568"),
+				"TableName",
+				null,
+				obj => obj.TableName,
+				(obj, val) => obj.TableName = val),
+		};
+		
+		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
 		{
-			switch(propertyName)
-			{
-				case "AccessControlList":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("4514093c-0a1f-4644-b4a6-3389f1ca7aa8")).Constraints
-						.Where(c => !c.IsValid(this, this.AccessControlList))
-						.Select(c => c.GetErrorText(this, this.AccessControlList))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "BaseObjectClass":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("ad060d41-bc7a-41b8-a3e3-ec9302c8c714")).Constraints
-						.Where(c => !c.IsValid(this, this.BaseObjectClass))
-						.Select(c => c.GetErrorText(this, this.BaseObjectClass))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "Constraints":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("eda15826-7251-4726-9f6b-65e7f24f6ad1")).Constraints
-						.Where(c => !c.IsValid(this, this.Constraints))
-						.Select(c => c.GetErrorText(this, this.Constraints))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "DefaultPresentableModelDescriptor":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("11adedb9-d32a-4da9-b986-0534e65df760")).Constraints
-						.Where(c => !c.IsValid(this, this.DefaultPresentableModelDescriptor))
-						.Select(c => c.GetErrorText(this, this.DefaultPresentableModelDescriptor))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "ImplementsInterfaces":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("a9ec04c2-0807-4d6c-a96a-824d13e5c571")).Constraints
-						.Where(c => !c.IsValid(this, this.ImplementsInterfaces))
-						.Select(c => c.GetErrorText(this, this.ImplementsInterfaces))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "IsAbstract":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("e9d1402e-3580-4084-8836-c44844683191")).Constraints
-						.Where(c => !c.IsValid(this, this.IsAbstract))
-						.Select(c => c.GetErrorText(this, this.IsAbstract))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "IsFrozenObject":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("13c33710-ea02-4621-ad50-294a1f36b07d")).Constraints
-						.Where(c => !c.IsValid(this, this.IsFrozenObject))
-						.Select(c => c.GetErrorText(this, this.IsFrozenObject))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "IsSimpleObject":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("edc853d3-0d02-4492-9159-c548c7713e9b")).Constraints
-						.Where(c => !c.IsValid(this, this.IsSimpleObject))
-						.Select(c => c.GetErrorText(this, this.IsSimpleObject))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "SubClasses":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("0914de6e-966c-46fc-9359-e4da6c3608b1")).Constraints
-						.Where(c => !c.IsValid(this, this.SubClasses))
-						.Select(c => c.GetErrorText(this, this.SubClasses))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "TableName":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("2a5e5111-199c-4dce-8369-ce35ee741568")).Constraints
-						.Where(c => !c.IsValid(this, this.TableName))
-						.Select(c => c.GetErrorText(this, this.TableName))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				default:
-					return base.GetPropertyError(propertyName);
-			}
+			props.AddRange(_properties);
 		}
+	
 
 		public override void ReloadReferences()
 		{

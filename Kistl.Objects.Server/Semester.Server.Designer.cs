@@ -440,68 +440,50 @@ namespace at.dasz.CourseOrganiser
         public static event ObjectEventHandler<Semester> OnDeleting_Semester;
 
 
-		protected override string GetPropertyError(string propertyName) 
+		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
+			new CustomPropertyDescriptor<Semester, string>(
+				new Guid("7b0ead0e-dbd2-4474-8048-36e5e768ca54"),
+				"CourseName",
+				null,
+				obj => obj.CourseName,
+				(obj, val) => obj.CourseName = val),
+			new CustomPropertyDescriptor<Semester, ICollection<at.dasz.CourseOrganiser.Exam>>(
+				new Guid("7f06bb42-4ec6-496e-8ff8-e4a15d21f544"),
+				"Exam",
+				null,
+				obj => obj.Exam,
+				null), // lists are read-only properties
+			new CustomPropertyDescriptor<Semester, ICollection<at.dasz.CourseOrganiser.Exercise>>(
+				new Guid("be7c24bf-b8c9-440c-ac42-d0856a3200ac"),
+				"Excercise",
+				null,
+				obj => obj.Excercise,
+				null), // lists are read-only properties
+			new CustomPropertyDescriptor<Semester, at.dasz.CourseOrganiser.Periods?>(
+				new Guid("0c554fc0-6f57-4b5d-a546-0fada5e11fde"),
+				"Period",
+				null,
+				obj => obj.Period,
+				(obj, val) => obj.Period = val),
+			new CustomPropertyDescriptor<Semester, ICollection<at.dasz.CourseOrganiser.Student>>(
+				new Guid("eaefbcaa-ce9f-43cc-876d-efb6b0c5796c"),
+				"Students",
+				null,
+				obj => obj.Students,
+				null), // lists are read-only properties
+			new CustomPropertyDescriptor<Semester, int?>(
+				new Guid("61b3a7f4-2995-4d2f-90bf-98b38deeba4b"),
+				"Year",
+				null,
+				obj => obj.Year,
+				(obj, val) => obj.Year = val),
+		};
+		
+		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
 		{
-			switch(propertyName)
-			{
-				case "CourseName":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("7b0ead0e-dbd2-4474-8048-36e5e768ca54")).Constraints
-						.Where(c => !c.IsValid(this, this.CourseName))
-						.Select(c => c.GetErrorText(this, this.CourseName))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "Exam":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("7f06bb42-4ec6-496e-8ff8-e4a15d21f544")).Constraints
-						.Where(c => !c.IsValid(this, this.Exam))
-						.Select(c => c.GetErrorText(this, this.Exam))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "Excercise":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("be7c24bf-b8c9-440c-ac42-d0856a3200ac")).Constraints
-						.Where(c => !c.IsValid(this, this.Excercise))
-						.Select(c => c.GetErrorText(this, this.Excercise))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "Period":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("0c554fc0-6f57-4b5d-a546-0fada5e11fde")).Constraints
-						.Where(c => !c.IsValid(this, this.Period))
-						.Select(c => c.GetErrorText(this, this.Period))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "Students":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("eaefbcaa-ce9f-43cc-876d-efb6b0c5796c")).Constraints
-						.Where(c => !c.IsValid(this, this.Students))
-						.Select(c => c.GetErrorText(this, this.Students))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "Year":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("61b3a7f4-2995-4d2f-90bf-98b38deeba4b")).Constraints
-						.Where(c => !c.IsValid(this, this.Year))
-						.Select(c => c.GetErrorText(this, this.Year))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				default:
-					return base.GetPropertyError(propertyName);
-			}
+			props.AddRange(_properties);
 		}
+	
 
 		public override void ReloadReferences()
 		{

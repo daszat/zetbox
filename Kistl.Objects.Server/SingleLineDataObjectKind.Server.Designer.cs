@@ -96,6 +96,7 @@ namespace Kistl.App.GUI
         public static event ObjectEventHandler<SingleLineDataObjectKind> OnDeleting_SingleLineDataObjectKind;
 
 
+	
 
 		public override void ReloadReferences()
 		{

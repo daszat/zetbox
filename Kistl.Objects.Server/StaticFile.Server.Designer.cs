@@ -157,6 +157,7 @@ namespace at.dasz.DocumentManagement
         public static event ObjectEventHandler<StaticFile> OnDeleting_StaticFile;
 
 
+	
 
 		public override void ReloadReferences()
 		{

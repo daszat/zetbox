@@ -66,6 +66,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClientValueCollectionWrapper.cs" />
+    <Compile Include="CustomPropertyDescriptor.cs" />
     <Compile Include="LinqToKistl\ConstantEvaluator.cs" />
     <Compile Include="LinqToKistl\QueryTranslator.cs" />
     <Compile Include="LinqToKistl\RelationshipFilterCollection.cs" />

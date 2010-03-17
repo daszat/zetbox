@@ -330,41 +330,32 @@ namespace Kistl.App.GUI
         public static event ObjectEventHandler<Icon> OnDeleting_Icon;
 
 
-		protected override string GetPropertyError(string propertyName) 
+		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
+			new CustomPropertyDescriptor<Icon, Guid>(
+				new Guid("6ce563d7-28e8-4806-bdd1-84c220a6c3ca"),
+				"ExportGuid",
+				null,
+				obj => obj.ExportGuid,
+				(obj, val) => obj.ExportGuid = val),
+			new CustomPropertyDescriptor<Icon, string>(
+				new Guid("cdbdfc01-5faa-416b-960f-2eb220f268fe"),
+				"IconFile",
+				null,
+				obj => obj.IconFile,
+				(obj, val) => obj.IconFile = val),
+			new CustomPropertyDescriptor<Icon, Kistl.App.Base.Module>(
+				new Guid("052273ac-706a-446b-bb86-83c726ee66d6"),
+				"Module",
+				null,
+				obj => obj.Module,
+				(obj, val) => obj.Module = val),
+		};
+		
+		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
 		{
-			switch(propertyName)
-			{
-				case "ExportGuid":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("6ce563d7-28e8-4806-bdd1-84c220a6c3ca")).Constraints
-						.Where(c => !c.IsValid(this, this.ExportGuid))
-						.Select(c => c.GetErrorText(this, this.ExportGuid))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "IconFile":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("cdbdfc01-5faa-416b-960f-2eb220f268fe")).Constraints
-						.Where(c => !c.IsValid(this, this.IconFile))
-						.Select(c => c.GetErrorText(this, this.IconFile))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "Module":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("052273ac-706a-446b-bb86-83c726ee66d6")).Constraints
-						.Where(c => !c.IsValid(this, this.Module))
-						.Select(c => c.GetErrorText(this, this.Module))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				default:
-					return base.GetPropertyError(propertyName);
-			}
+			props.AddRange(_properties);
 		}
+	
 
 		public override void ReloadReferences()
 		{

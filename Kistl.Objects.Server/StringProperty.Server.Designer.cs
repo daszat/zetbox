@@ -138,6 +138,7 @@ namespace Kistl.App.Base
         public static event ObjectEventHandler<StringProperty> OnDeleting_StringProperty;
 
 
+	
 
 		public override void ReloadReferences()
 		{

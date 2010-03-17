@@ -67,6 +67,7 @@
   <ItemGroup>
     <Compile Include="BaseKistlDataContext.cs" />
     <Compile Include="BaseServerDataObject.cs" />
+    <Compile Include="CustomPropertyDescriptor.cs" />
     <Compile Include="IdentityManager.cs" />
     <Compile Include="IKistlServerContext.cs" />
     <Compile Include="IMetaDataResolver.cs" />

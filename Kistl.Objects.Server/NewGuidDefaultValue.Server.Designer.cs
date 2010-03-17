@@ -117,6 +117,7 @@ namespace Kistl.App.Base
         public static event ObjectEventHandler<NewGuidDefaultValue> OnDeleting_NewGuidDefaultValue;
 
 
+	
 
 		public override void ReloadReferences()
 		{

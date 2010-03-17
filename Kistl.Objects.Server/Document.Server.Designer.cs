@@ -205,23 +205,20 @@ namespace at.dasz.DocumentManagement
         public static event ObjectEventHandler<Document> OnDeleting_Document;
 
 
-		protected override string GetPropertyError(string propertyName) 
+		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
+			new CustomPropertyDescriptor<Document, IList<Kistl.App.Base.Blob>>(
+				new Guid("ec544fe0-8189-4bb2-a3d1-3cb61d815aa5"),
+				"Revisions",
+				null,
+				obj => obj.Revisions,
+				null), // lists are read-only properties
+		};
+		
+		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
 		{
-			switch(propertyName)
-			{
-				case "Revisions":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("ec544fe0-8189-4bb2-a3d1-3cb61d815aa5")).Constraints
-						.Where(c => !c.IsValid(this, this.Revisions))
-						.Select(c => c.GetErrorText(this, this.Revisions))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				default:
-					return base.GetPropertyError(propertyName);
-			}
+			props.AddRange(_properties);
 		}
+	
 
 		public override void ReloadReferences()
 		{

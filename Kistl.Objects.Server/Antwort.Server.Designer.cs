@@ -400,50 +400,38 @@ namespace Kistl.App.Test
         public static event ObjectEventHandler<Antwort> OnDeleting_Antwort;
 
 
-		protected override string GetPropertyError(string propertyName) 
+		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
+			new CustomPropertyDescriptor<Antwort, string>(
+				new Guid("311cb474-be7d-4e6b-b803-379e6523720c"),
+				"Frage",
+				null,
+				obj => obj.Frage,
+				(obj, val) => obj.Frage = val),
+			new CustomPropertyDescriptor<Antwort, Kistl.App.Test.Fragebogen>(
+				new Guid("ae20c23b-0cfa-422a-9f8d-797e9f70bf82"),
+				"Fragebogen",
+				null,
+				obj => obj.Fragebogen,
+				(obj, val) => obj.Fragebogen = val),
+			new CustomPropertyDescriptor<Antwort, int>(
+				new Guid("87a005fa-6249-4aab-b90e-b50c97487c09"),
+				"FragenNummer",
+				null,
+				obj => obj.FragenNummer,
+				(obj, val) => obj.FragenNummer = val),
+			new CustomPropertyDescriptor<Antwort, int?>(
+				new Guid("bbddff1f-943e-48cb-b097-377040280f0a"),
+				"GegebeneAntwort",
+				null,
+				obj => obj.GegebeneAntwort,
+				(obj, val) => obj.GegebeneAntwort = val),
+		};
+		
+		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
 		{
-			switch(propertyName)
-			{
-				case "Frage":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("311cb474-be7d-4e6b-b803-379e6523720c")).Constraints
-						.Where(c => !c.IsValid(this, this.Frage))
-						.Select(c => c.GetErrorText(this, this.Frage))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "Fragebogen":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("ae20c23b-0cfa-422a-9f8d-797e9f70bf82")).Constraints
-						.Where(c => !c.IsValid(this, this.Fragebogen))
-						.Select(c => c.GetErrorText(this, this.Fragebogen))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "FragenNummer":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("87a005fa-6249-4aab-b90e-b50c97487c09")).Constraints
-						.Where(c => !c.IsValid(this, this.FragenNummer))
-						.Select(c => c.GetErrorText(this, this.FragenNummer))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "GegebeneAntwort":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("bbddff1f-943e-48cb-b097-377040280f0a")).Constraints
-						.Where(c => !c.IsValid(this, this.GegebeneAntwort))
-						.Select(c => c.GetErrorText(this, this.GegebeneAntwort))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				default:
-					return base.GetPropertyError(propertyName);
-			}
+			props.AddRange(_properties);
 		}
+	
 
 		public override void ReloadReferences()
 		{

@@ -96,6 +96,7 @@ namespace Kistl.App.GUI
         public static event ObjectEventHandler<LabelKind> OnDeleting_LabelKind;
 
 
+	
 
 		public override void ReloadReferences()
 		{

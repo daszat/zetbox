@@ -227,32 +227,26 @@ namespace Kistl.App.Base
         public static event ObjectEventHandler<CurrentSchema> OnDeleting_CurrentSchema;
 
 
-		protected override string GetPropertyError(string propertyName) 
+		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
+			new CustomPropertyDescriptor<CurrentSchema, string>(
+				new Guid("175143b9-dd09-4b49-a633-e9cdb508c4c5"),
+				"Schema",
+				null,
+				obj => obj.Schema,
+				(obj, val) => obj.Schema = val),
+			new CustomPropertyDescriptor<CurrentSchema, int>(
+				new Guid("193c24c4-5a42-418e-8ed8-6e1689beca50"),
+				"Version",
+				null,
+				obj => obj.Version,
+				(obj, val) => obj.Version = val),
+		};
+		
+		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
 		{
-			switch(propertyName)
-			{
-				case "Schema":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("175143b9-dd09-4b49-a633-e9cdb508c4c5")).Constraints
-						.Where(c => !c.IsValid(this, this.Schema))
-						.Select(c => c.GetErrorText(this, this.Schema))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "Version":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("193c24c4-5a42-418e-8ed8-6e1689beca50")).Constraints
-						.Where(c => !c.IsValid(this, this.Version))
-						.Select(c => c.GetErrorText(this, this.Version))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				default:
-					return base.GetPropertyError(propertyName);
-			}
+			props.AddRange(_properties);
 		}
+	
 
 		public override void ReloadReferences()
 		{

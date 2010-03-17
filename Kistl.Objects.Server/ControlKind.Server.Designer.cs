@@ -238,32 +238,26 @@ namespace Kistl.App.GUI
         public static event ObjectEventHandler<ControlKind> OnDeleting_ControlKind;
 
 
-		protected override string GetPropertyError(string propertyName) 
+		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
+			new CustomPropertyDescriptor<ControlKind, Guid>(
+				new Guid("758d8eba-b458-4cd4-98a8-e08713912654"),
+				"ExportGuid",
+				null,
+				obj => obj.ExportGuid,
+				(obj, val) => obj.ExportGuid = val),
+			new CustomPropertyDescriptor<ControlKind, double?>(
+				new Guid("2a0d22cd-5538-4a2c-bfb9-287652637708"),
+				"RequestedWidth",
+				null,
+				obj => obj.RequestedWidth,
+				(obj, val) => obj.RequestedWidth = val),
+		};
+		
+		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
 		{
-			switch(propertyName)
-			{
-				case "ExportGuid":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("758d8eba-b458-4cd4-98a8-e08713912654")).Constraints
-						.Where(c => !c.IsValid(this, this.ExportGuid))
-						.Select(c => c.GetErrorText(this, this.ExportGuid))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "RequestedWidth":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("2a0d22cd-5538-4a2c-bfb9-287652637708")).Constraints
-						.Where(c => !c.IsValid(this, this.RequestedWidth))
-						.Select(c => c.GetErrorText(this, this.RequestedWidth))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				default:
-					return base.GetPropertyError(propertyName);
-			}
+			props.AddRange(_properties);
 		}
+	
 
 		public override void ReloadReferences()
 		{

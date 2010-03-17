@@ -661,95 +661,68 @@ namespace Kistl.App.Test
         public static event ObjectEventHandler<TestCustomObject> OnDeleting_TestCustomObject;
 
 
-		protected override string GetPropertyError(string propertyName) 
+		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
+			new CustomPropertyDescriptor<TestCustomObject, DateTime?>(
+				new Guid("bdcf86b8-4c47-4c50-b340-d9323344c7f0"),
+				"Birthday",
+				null,
+				obj => obj.Birthday,
+				(obj, val) => obj.Birthday = val),
+			new CustomPropertyDescriptor<TestCustomObject, ICollection<Kistl.App.Test.Muhblah>>(
+				new Guid("4a929ef5-f211-47b4-92c3-4961da6d5173"),
+				"MubBlah_List_Nav",
+				null,
+				obj => obj.MubBlah_List_Nav,
+				null), // lists are read-only properties
+			new CustomPropertyDescriptor<TestCustomObject, Kistl.App.Test.Muhblah>(
+				new Guid("3251497d-5214-4e42-976e-f36c3d9541de"),
+				"MubBlah_Nav",
+				null,
+				obj => obj.MubBlah_Nav,
+				(obj, val) => obj.MubBlah_Nav = val),
+			new CustomPropertyDescriptor<TestCustomObject, ICollection<Kistl.App.Test.Muhblah>>(
+				new Guid("9c4217f2-47d8-47b5-a324-7601ecabc7b0"),
+				"MuhBlah_ManyList_Nav",
+				null,
+				obj => obj.MuhBlah_ManyList_Nav,
+				null), // lists are read-only properties
+			new CustomPropertyDescriptor<TestCustomObject, Kistl.App.Test.Muhblah>(
+				new Guid("e7b207d3-5d25-4716-85b3-564f10eac210"),
+				"MuhBlah_One_Nav",
+				null,
+				obj => obj.MuhBlah_One_Nav,
+				(obj, val) => obj.MuhBlah_One_Nav = val),
+			new CustomPropertyDescriptor<TestCustomObject, string>(
+				new Guid("bd501a1f-a0a3-4ddf-b6c2-8fdc9ffdfabd"),
+				"PersonName",
+				null,
+				obj => obj.PersonName,
+				(obj, val) => obj.PersonName = val),
+			new CustomPropertyDescriptor<TestCustomObject, Kistl.App.Test.TestPhoneCompoundObject>(
+				new Guid("05e41070-e88a-4270-ab1c-94cd2e7d41d1"),
+				"PhoneNumberMobile",
+				null,
+				obj => obj.PhoneNumberMobile,
+				(obj, val) => obj.PhoneNumberMobile = val),
+			new CustomPropertyDescriptor<TestCustomObject, Kistl.App.Test.TestPhoneCompoundObject>(
+				new Guid("465e10ec-4e5e-4e8f-831f-44562dd0d68b"),
+				"PhoneNumberOffice",
+				null,
+				obj => obj.PhoneNumberOffice,
+				(obj, val) => obj.PhoneNumberOffice = val),
+			new CustomPropertyDescriptor<TestCustomObject, ICollection<Kistl.App.Test.TestPhoneCompoundObject>>(
+				new Guid("0c0c1101-118a-4ce2-806c-d30a03b19dde"),
+				"PhoneNumbersOther",
+				null,
+				obj => obj.PhoneNumbersOther,
+				null), // lists are read-only properties
+		};
+		
+		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
 		{
-			switch(propertyName)
-			{
-				case "Birthday":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("bdcf86b8-4c47-4c50-b340-d9323344c7f0")).Constraints
-						.Where(c => !c.IsValid(this, this.Birthday))
-						.Select(c => c.GetErrorText(this, this.Birthday))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "MubBlah_List_Nav":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("4a929ef5-f211-47b4-92c3-4961da6d5173")).Constraints
-						.Where(c => !c.IsValid(this, this.MubBlah_List_Nav))
-						.Select(c => c.GetErrorText(this, this.MubBlah_List_Nav))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "MubBlah_Nav":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("3251497d-5214-4e42-976e-f36c3d9541de")).Constraints
-						.Where(c => !c.IsValid(this, this.MubBlah_Nav))
-						.Select(c => c.GetErrorText(this, this.MubBlah_Nav))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "MuhBlah_ManyList_Nav":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("9c4217f2-47d8-47b5-a324-7601ecabc7b0")).Constraints
-						.Where(c => !c.IsValid(this, this.MuhBlah_ManyList_Nav))
-						.Select(c => c.GetErrorText(this, this.MuhBlah_ManyList_Nav))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "MuhBlah_One_Nav":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("e7b207d3-5d25-4716-85b3-564f10eac210")).Constraints
-						.Where(c => !c.IsValid(this, this.MuhBlah_One_Nav))
-						.Select(c => c.GetErrorText(this, this.MuhBlah_One_Nav))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "PersonName":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("bd501a1f-a0a3-4ddf-b6c2-8fdc9ffdfabd")).Constraints
-						.Where(c => !c.IsValid(this, this.PersonName))
-						.Select(c => c.GetErrorText(this, this.PersonName))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "PhoneNumberMobile":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("05e41070-e88a-4270-ab1c-94cd2e7d41d1")).Constraints
-						.Where(c => !c.IsValid(this, this.PhoneNumberMobile))
-						.Select(c => c.GetErrorText(this, this.PhoneNumberMobile))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "PhoneNumberOffice":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("465e10ec-4e5e-4e8f-831f-44562dd0d68b")).Constraints
-						.Where(c => !c.IsValid(this, this.PhoneNumberOffice))
-						.Select(c => c.GetErrorText(this, this.PhoneNumberOffice))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "PhoneNumbersOther":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("0c0c1101-118a-4ce2-806c-d30a03b19dde")).Constraints
-						.Where(c => !c.IsValid(this, this.PhoneNumbersOther))
-						.Select(c => c.GetErrorText(this, this.PhoneNumbersOther))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				default:
-					return base.GetPropertyError(propertyName);
-			}
+			props.AddRange(_properties);
 		}
+	
 
 		public override void ReloadReferences()
 		{

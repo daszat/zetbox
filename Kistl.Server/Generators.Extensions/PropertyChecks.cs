@@ -14,7 +14,10 @@ namespace Kistl.Server.Generators.Extensions
         public static bool IsAssociation(this Property prop)
         {
             if (prop == null) { throw new ArgumentNullException("prop"); }
-            return prop.IsObjectReferencePropertyList() || prop.IsObjectReferencePropertySingle() || prop.IsValueTypePropertyList();
+            return prop.IsObjectReferencePropertyList()
+                || prop.IsObjectReferencePropertySingle()
+                || prop.IsValueTypePropertyList()
+                || prop.IsCompoundObjectPropertyList();
         }
 
         public static bool IsValueTypePropertySingle(this Property prop)
@@ -32,7 +35,7 @@ namespace Kistl.Server.Generators.Extensions
             return prop is EnumerationProperty && !((ValueTypeProperty)prop).IsList;
         }
 
-        public static bool IsEnumerationPropertyPropertyList(this Property prop)
+        public static bool IsEnumerationPropertyList(this Property prop)
         {
             return prop is EnumerationProperty && ((ValueTypeProperty)prop).IsList;
         }
@@ -52,7 +55,7 @@ namespace Kistl.Server.Generators.Extensions
             return prop is CompoundObjectProperty && !((CompoundObjectProperty)prop).IsList;
         }
 
-        public static bool IsCompoundObjectPropertyPropertyList(this Property prop)
+        public static bool IsCompoundObjectPropertyList(this Property prop)
         {
             return prop is CompoundObjectProperty && ((CompoundObjectProperty)prop).IsList;
         }
@@ -85,11 +88,11 @@ namespace Kistl.Server.Generators.Extensions
 
             if (isIndexed)
             {
-                return string.Format("IList<{0}>", prop.GetPropertyTypeString());
+                return string.Format("IList<{0}>", prop.ReferencedTypeAsCSharp());
             }
             else
             {
-                return string.Format("ICollection<{0}>", prop.GetPropertyTypeString());
+                return string.Format("ICollection<{0}>", prop.ReferencedTypeAsCSharp());
             }
         }
 

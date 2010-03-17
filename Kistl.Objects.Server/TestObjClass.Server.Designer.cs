@@ -409,50 +409,38 @@ namespace Kistl.App.Test
         public static event ObjectEventHandler<TestObjClass> OnDeleting_TestObjClass;
 
 
-		protected override string GetPropertyError(string propertyName) 
+		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
+			new CustomPropertyDescriptor<TestObjClass, int?>(
+				new Guid("29c0242b-cd1c-42b4-8ca0-be0a209afcbf"),
+				"MyIntProperty",
+				null,
+				obj => obj.MyIntProperty,
+				(obj, val) => obj.MyIntProperty = val),
+			new CustomPropertyDescriptor<TestObjClass, Kistl.App.Projekte.Kunde>(
+				new Guid("e93b3fc2-2fc9-4577-9a93-a51ed2a4190f"),
+				"ObjectProp",
+				null,
+				obj => obj.ObjectProp,
+				(obj, val) => obj.ObjectProp = val),
+			new CustomPropertyDescriptor<TestObjClass, string>(
+				new Guid("c9a3769e-7a53-4e1d-b894-72dc1b4e9aea"),
+				"StringProp",
+				null,
+				obj => obj.StringProp,
+				(obj, val) => obj.StringProp = val),
+			new CustomPropertyDescriptor<TestObjClass, Kistl.App.Test.TestEnum>(
+				new Guid("89470dda-4ac6-4bb4-9221-d16f80f8d95a"),
+				"TestEnumProp",
+				null,
+				obj => obj.TestEnumProp,
+				(obj, val) => obj.TestEnumProp = val),
+		};
+		
+		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
 		{
-			switch(propertyName)
-			{
-				case "MyIntProperty":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("29c0242b-cd1c-42b4-8ca0-be0a209afcbf")).Constraints
-						.Where(c => !c.IsValid(this, this.MyIntProperty))
-						.Select(c => c.GetErrorText(this, this.MyIntProperty))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "ObjectProp":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("e93b3fc2-2fc9-4577-9a93-a51ed2a4190f")).Constraints
-						.Where(c => !c.IsValid(this, this.ObjectProp))
-						.Select(c => c.GetErrorText(this, this.ObjectProp))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "StringProp":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("c9a3769e-7a53-4e1d-b894-72dc1b4e9aea")).Constraints
-						.Where(c => !c.IsValid(this, this.StringProp))
-						.Select(c => c.GetErrorText(this, this.StringProp))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "TestEnumProp":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("89470dda-4ac6-4bb4-9221-d16f80f8d95a")).Constraints
-						.Where(c => !c.IsValid(this, this.TestEnumProp))
-						.Select(c => c.GetErrorText(this, this.TestEnumProp))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				default:
-					return base.GetPropertyError(propertyName);
-			}
+			props.AddRange(_properties);
 		}
+	
 
 		public override void ReloadReferences()
 		{

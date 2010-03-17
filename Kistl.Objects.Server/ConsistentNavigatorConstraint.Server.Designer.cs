@@ -138,6 +138,7 @@ namespace Kistl.App.Base
         public static event ObjectEventHandler<ConsistentNavigatorConstraint> OnDeleting_ConsistentNavigatorConstraint;
 
 
+	
 
 		public override void ReloadReferences()
 		{

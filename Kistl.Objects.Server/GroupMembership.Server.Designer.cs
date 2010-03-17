@@ -188,23 +188,20 @@ namespace Kistl.App.Base
         public static event ObjectEventHandler<GroupMembership> OnDeleting_GroupMembership;
 
 
-		protected override string GetPropertyError(string propertyName) 
+		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
+			new CustomPropertyDescriptor<GroupMembership, Kistl.App.Base.Group>(
+				new Guid("da080b07-15d2-4cdf-bc1c-df776e094a75"),
+				"Group",
+				null,
+				obj => obj.Group,
+				(obj, val) => obj.Group = val),
+		};
+		
+		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
 		{
-			switch(propertyName)
-			{
-				case "Group":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("da080b07-15d2-4cdf-bc1c-df776e094a75")).Constraints
-						.Where(c => !c.IsValid(this, this.Group))
-						.Select(c => c.GetErrorText(this, this.Group))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				default:
-					return base.GetPropertyError(propertyName);
-			}
+			props.AddRange(_properties);
 		}
+	
 
 		public override void ReloadReferences()
 		{

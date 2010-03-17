@@ -157,6 +157,7 @@ namespace at.dasz.DocumentManagement
         public static event ObjectEventHandler<DynamicFile> OnDeleting_DynamicFile;
 
 
+	
 
 		public override void ReloadReferences()
 		{

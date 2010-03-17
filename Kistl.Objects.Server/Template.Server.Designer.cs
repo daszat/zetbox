@@ -480,59 +480,44 @@ namespace Kistl.App.GUI
         public static event ObjectEventHandler<Template> OnDeleting_Template;
 
 
-		protected override string GetPropertyError(string propertyName) 
+		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
+			new CustomPropertyDescriptor<Template, Kistl.App.Base.Assembly>(
+				new Guid("c81105da-97e4-4685-af88-792c68e55a17"),
+				"DisplayedTypeAssembly",
+				null,
+				obj => obj.DisplayedTypeAssembly,
+				(obj, val) => obj.DisplayedTypeAssembly = val),
+			new CustomPropertyDescriptor<Template, string>(
+				new Guid("4b683aa1-45a9-4c5e-80e7-0ff30f5b798c"),
+				"DisplayedTypeFullName",
+				null,
+				obj => obj.DisplayedTypeFullName,
+				(obj, val) => obj.DisplayedTypeFullName = val),
+			new CustomPropertyDescriptor<Template, string>(
+				new Guid("4fc51781-b0fe-495c-91a1-90e484345515"),
+				"DisplayName",
+				null,
+				obj => obj.DisplayName,
+				(obj, val) => obj.DisplayName = val),
+			new CustomPropertyDescriptor<Template, ICollection<Kistl.App.GUI.Visual>>(
+				new Guid("5e9612d5-019a-416b-a2e2-dfc9674a50f6"),
+				"Menu",
+				null,
+				obj => obj.Menu,
+				null), // lists are read-only properties
+			new CustomPropertyDescriptor<Template, Kistl.App.GUI.Visual>(
+				new Guid("5d2880a4-716a-4bdc-aaa9-379c006e7ed4"),
+				"VisualTree",
+				null,
+				obj => obj.VisualTree,
+				(obj, val) => obj.VisualTree = val),
+		};
+		
+		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
 		{
-			switch(propertyName)
-			{
-				case "DisplayedTypeAssembly":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("c81105da-97e4-4685-af88-792c68e55a17")).Constraints
-						.Where(c => !c.IsValid(this, this.DisplayedTypeAssembly))
-						.Select(c => c.GetErrorText(this, this.DisplayedTypeAssembly))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "DisplayedTypeFullName":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("4b683aa1-45a9-4c5e-80e7-0ff30f5b798c")).Constraints
-						.Where(c => !c.IsValid(this, this.DisplayedTypeFullName))
-						.Select(c => c.GetErrorText(this, this.DisplayedTypeFullName))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "DisplayName":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("4fc51781-b0fe-495c-91a1-90e484345515")).Constraints
-						.Where(c => !c.IsValid(this, this.DisplayName))
-						.Select(c => c.GetErrorText(this, this.DisplayName))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "Menu":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("5e9612d5-019a-416b-a2e2-dfc9674a50f6")).Constraints
-						.Where(c => !c.IsValid(this, this.Menu))
-						.Select(c => c.GetErrorText(this, this.Menu))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "VisualTree":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("5d2880a4-716a-4bdc-aaa9-379c006e7ed4")).Constraints
-						.Where(c => !c.IsValid(this, this.VisualTree))
-						.Select(c => c.GetErrorText(this, this.VisualTree))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				default:
-					return base.GetPropertyError(propertyName);
-			}
+			props.AddRange(_properties);
 		}
+	
 
 		public override void ReloadReferences()
 		{

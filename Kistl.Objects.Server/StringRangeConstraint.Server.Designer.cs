@@ -244,32 +244,26 @@ namespace Kistl.App.Base
         public static event ObjectEventHandler<StringRangeConstraint> OnDeleting_StringRangeConstraint;
 
 
-		protected override string GetPropertyError(string propertyName) 
+		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
+			new CustomPropertyDescriptor<StringRangeConstraint, int?>(
+				new Guid("17aa679d-72d0-480e-9bd9-b37f4eba1d68"),
+				"MaxLength",
+				null,
+				obj => obj.MaxLength,
+				(obj, val) => obj.MaxLength = val),
+			new CustomPropertyDescriptor<StringRangeConstraint, int>(
+				new Guid("8d3e24f7-c8c8-4bb3-931e-d0452e7ee5b6"),
+				"MinLength",
+				null,
+				obj => obj.MinLength,
+				(obj, val) => obj.MinLength = val),
+		};
+		
+		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
 		{
-			switch(propertyName)
-			{
-				case "MaxLength":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("17aa679d-72d0-480e-9bd9-b37f4eba1d68")).Constraints
-						.Where(c => !c.IsValid(this, this.MaxLength))
-						.Select(c => c.GetErrorText(this, this.MaxLength))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				case "MinLength":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("8d3e24f7-c8c8-4bb3-931e-d0452e7ee5b6")).Constraints
-						.Where(c => !c.IsValid(this, this.MinLength))
-						.Select(c => c.GetErrorText(this, this.MinLength))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				default:
-					return base.GetPropertyError(propertyName);
-			}
+			props.AddRange(_properties);
 		}
+	
 
 		public override void ReloadReferences()
 		{

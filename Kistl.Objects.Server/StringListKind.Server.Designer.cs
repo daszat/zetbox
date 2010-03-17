@@ -188,23 +188,20 @@ namespace Kistl.App.GUI
         public static event ObjectEventHandler<StringListKind> OnDeleting_StringListKind;
 
 
-		protected override string GetPropertyError(string propertyName) 
+		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
+			new CustomPropertyDescriptor<StringListKind, Kistl.App.GUI.ControlKindClass>(
+				new Guid("14270073-da33-4c5e-b6ef-c4e71e3ccee0"),
+				"ItemKind",
+				null,
+				obj => obj.ItemKind,
+				(obj, val) => obj.ItemKind = val),
+		};
+		
+		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
 		{
-			switch(propertyName)
-			{
-				case "ItemKind":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("14270073-da33-4c5e-b6ef-c4e71e3ccee0")).Constraints
-						.Where(c => !c.IsValid(this, this.ItemKind))
-						.Select(c => c.GetErrorText(this, this.ItemKind))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				default:
-					return base.GetPropertyError(propertyName);
-			}
+			props.AddRange(_properties);
 		}
+	
 
 		public override void ReloadReferences()
 		{

@@ -230,23 +230,20 @@ namespace Kistl.App.Base
         public static event ObjectEventHandler<CLRObjectParameter> OnDeleting_CLRObjectParameter;
 
 
-		protected override string GetPropertyError(string propertyName) 
+		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
+			new CustomPropertyDescriptor<CLRObjectParameter, Kistl.App.Base.TypeRef>(
+				new Guid("137292ce-4493-451d-a7fa-1b7cc7df03dd"),
+				"Type",
+				null,
+				obj => obj.Type,
+				(obj, val) => obj.Type = val),
+		};
+		
+		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
 		{
-			switch(propertyName)
-			{
-				case "Type":
-				{
-					var errors = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("137292ce-4493-451d-a7fa-1b7cc7df03dd")).Constraints
-						.Where(c => !c.IsValid(this, this.Type))
-						.Select(c => c.GetErrorText(this, this.Type))
-						.ToArray();
-					
-					return String.Join("; ", errors);
-				}
-				default:
-					return base.GetPropertyError(propertyName);
-			}
+			props.AddRange(_properties);
 		}
+	
 
 		public override void ReloadReferences()
 		{

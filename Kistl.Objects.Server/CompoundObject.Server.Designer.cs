@@ -138,6 +138,7 @@ namespace Kistl.App.Base
         public static event ObjectEventHandler<CompoundObject> OnDeleting_CompoundObject;
 
 
+	
 
 		public override void ReloadReferences()
 		{
