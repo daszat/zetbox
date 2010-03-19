@@ -21,7 +21,10 @@ namespace Kistl.API.Server
             Action<TComponent, TProperty> setter)
             : base(name, attrs, getter, setter)
         {
-            _property = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(propertyGuid);
+            if (FrozenContext.Single != null)
+            {
+                _property = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(propertyGuid);
+            }
         }
 
         public override string[] GetValidationErrors(object component)
