@@ -28,9 +28,7 @@ namespace Kistl.App.Test
         /// <summary>
         /// 
         /// </summary>
-		Kistl.App.Test.TestStudent Student {
-			get;
-			set;
-		}
+
+        ICollection<Kistl.App.Test.TestStudent> Student { get; }
     }
 }

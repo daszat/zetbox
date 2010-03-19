@@ -168,6 +168,15 @@
       <End Role="Relations" EntitySet="Relation" />
       <End Role="CollectionEntry" EntitySet="RoleMembership_resolves_Relation_RelationEntry" />
     </AssociationSet>
+    <EntitySet Name="TestStudent_füllt_aus_Fragebogen_RelationEntry" EntityType="Model.TestStudent_füllt_aus_Fragebogen_RelationEntry" />
+    <AssociationSet Name="FK_Student_füllt_aus_Testbogen_A" Association="Model.FK_Student_füllt_aus_Testbogen_A" >
+      <End Role="Student" EntitySet="TestStudent" />
+      <End Role="CollectionEntry" EntitySet="TestStudent_füllt_aus_Fragebogen_RelationEntry" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Student_füllt_aus_Testbogen_B" Association="Model.FK_Student_füllt_aus_Testbogen_B" >
+      <End Role="Testbogen" EntitySet="Fragebogen" />
+      <End Role="CollectionEntry" EntitySet="TestStudent_füllt_aus_Fragebogen_RelationEntry" />
+    </AssociationSet>
     <EntitySet Name="Student_attend_Semester_RelationEntry" EntityType="Model.Student_attend_Semester_RelationEntry" />
     <AssociationSet Name="FK_Students_attend_Semesters_A" Association="Model.FK_Students_attend_Semesters_A" >
       <End Role="Students" EntitySet="Student" />
@@ -630,10 +639,6 @@
       <End Role="RelationEnd" EntitySet="RelationEnd" />
       <End Role="CreatedBy" EntitySet="Identity" />
     </AssociationSet>
-    <AssociationSet Name="FK_Student_füllt_aus_Testbogen" Association="Model.FK_Student_füllt_aus_Testbogen" >
-      <End Role="Student" EntitySet="TestStudent" />
-      <End Role="Testbogen" EntitySet="Fragebogen" />
-    </AssociationSet>
     <AssociationSet Name="FK_StudentExam_passes_Exam" Association="Model.FK_StudentExam_passes_Exam" >
       <End Role="StudentExam" EntitySet="StudentExam" />
       <End Role="Exam" EntitySet="Exam" />
@@ -1069,9 +1074,9 @@
                         ToRole="gute_Antworten" />
     <Property Name="BogenNummer" Type="Int32" Nullable="true" />
     <NavigationProperty Name="Student__Implementation__"
-                        Relationship="Model.FK_Student_füllt_aus_Testbogen"
+                        Relationship="Model.FK_Student_füllt_aus_Testbogen_B"
                         FromRole="Testbogen"
-                        ToRole="Student" />
+                        ToRole="CollectionEntry" />
   </EntityType>
   <EntityType Name="Group">
     <Key>
@@ -1730,9 +1735,9 @@
     <Property Name="ID" Type="Int32" Nullable="false" />
     <Property Name="Name" Type="String" Nullable="false" MaxLength="1000" />
     <NavigationProperty Name="Testbogen__Implementation__"
-                        Relationship="Model.FK_Student_füllt_aus_Testbogen"
+                        Relationship="Model.FK_Student_füllt_aus_Testbogen_A"
                         FromRole="Student"
-                        ToRole="Testbogen" />
+                        ToRole="CollectionEntry" />
   </EntityType>
   <EntityType Name="TypeRef">
     <Key>
@@ -2524,6 +2529,48 @@
          Multiplicity="0..1" />
     <End Role="CollectionEntry"
          Type="Model.RoleMembership_resolves_Relation_RelationEntry"
+         Multiplicity="*" />
+  </Association>
+  
+  <!--
+    Relation: FK_Student_füllt_aus_Testbogen
+    A: ZeroOrMore TestStudent as Student
+    B: ZeroOrMore Fragebogen as Testbogen
+    Preferred Storage: Separate
+  -->
+  <EntityType Name="TestStudent_füllt_aus_Fragebogen_RelationEntry" >
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+	
+    
+    <!-- A -->
+    <NavigationProperty Name="A__Implementation__"
+                        Relationship="Model.FK_Student_füllt_aus_Testbogen_A"
+                        FromRole="CollectionEntry"
+                        ToRole="Student" />
+
+    <!-- B -->
+    <NavigationProperty Name="B__Implementation__"
+                        Relationship="Model.FK_Student_füllt_aus_Testbogen_B"
+                        FromRole="CollectionEntry"
+                        ToRole="Testbogen" />
+  </EntityType>
+  <Association Name="FK_Student_füllt_aus_Testbogen_A" >
+    <End Role="Student"
+         Type="Model.TestStudent" 
+         Multiplicity="0..1" />
+    <End Role="CollectionEntry"
+         Type="Model.TestStudent_füllt_aus_Fragebogen_RelationEntry"
+         Multiplicity="*" />
+  </Association>
+  <Association Name="FK_Student_füllt_aus_Testbogen_B" >
+    <End Role="Testbogen"
+         Type="Model.Fragebogen" 
+         Multiplicity="0..1" />
+    <End Role="CollectionEntry"
+         Type="Model.TestStudent_füllt_aus_Fragebogen_RelationEntry"
          Multiplicity="*" />
   </Association>
   
@@ -3620,14 +3667,6 @@
     <End Role="CreatedBy"
          Type="Model.Identity" 
          Multiplicity="0..1" />
-  </Association>
-  <Association Name="FK_Student_füllt_aus_Testbogen" >
-    <End Role="Student"
-         Type="Model.TestStudent" 
-         Multiplicity="0..1" />
-    <End Role="Testbogen"
-         Type="Model.Fragebogen" 
-         Multiplicity="*" />
   </Association>
   <Association Name="FK_StudentExam_passes_Exam" >
     <End Role="StudentExam"

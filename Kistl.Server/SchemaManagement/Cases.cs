@@ -720,7 +720,54 @@ namespace Kistl.Server.SchemaManagement
         }
         public void DoChangeRelationType_from_1_1_to_n_m(Relation rel)
         {
+            var saved = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
+            string srcAssocName = saved.GetAssociationName();
 
+            RelationEnd relEnd, otherEnd;
+
+            switch (saved.Storage)
+            {
+                case StorageType.Replicate:
+                case StorageType.MergeIntoA:
+                    relEnd = saved.A;
+                    otherEnd = saved.B;
+                    break;
+                case StorageType.MergeIntoB:
+                    otherEnd = saved.A;
+                    relEnd = saved.B;
+                    break;
+                default:
+                    Log.ErrorFormat("Relation '{0}' has unsupported Storage set: {1}, skipped", srcAssocName, rel.Storage);
+                    return;
+            }
+
+            string srcTblName = relEnd.Type.TableName;
+            string srcColName = Construct.ForeignKeyColumnName(otherEnd);
+            bool srcIsIndexed = rel.NeedsPositionStorage(relEnd.GetRole());
+            string srcIndexName = Construct.ListPositionColumnName(otherEnd);
+
+            string destTbl = rel.GetRelationTableName();
+            string destCol = rel.GetRelationFkColumnName(relEnd.GetRole());
+            string destFKCol = rel.GetRelationFkColumnName(otherEnd.GetRole());
+
+            // Drop relations first as 1:1 and n:m relations share the same names
+            var srcAssocA = saved.GetRelationAssociationName(RelationEndRole.A);
+            if (db.CheckFKConstraintExists(srcAssocA)) db.DropFKConstraint(rel.A.Type.TableName, srcAssocA);
+            var srcAssocB = saved.GetRelationAssociationName(RelationEndRole.B);
+            if (db.CheckFKConstraintExists(srcAssocB)) db.DropFKConstraint(rel.B.Type.TableName, srcAssocB);
+
+            DoNew_N_M_Relation(rel);
+            db.InsertFKs(srcTblName, srcColName, destTbl, destCol, destFKCol);
+
+            // Drop columns
+            if (saved.Storage == StorageType.MergeIntoA || saved.Storage == StorageType.Replicate)
+            {
+                db.DropColumn(saved.A.Type.TableName, Construct.ForeignKeyColumnName(saved.B));
+            }
+            if (saved.Storage == StorageType.MergeIntoB || saved.Storage == StorageType.Replicate)
+            {
+                db.DropColumn(saved.B.Type.TableName, Construct.ForeignKeyColumnName(saved.A));
+            }
         }
         #endregion
 
@@ -735,8 +782,8 @@ namespace Kistl.Server.SchemaManagement
         }
         public void DoChangeRelationType_from_1_n_to_1_1(Relation rel)
         {
-            string srcAssocName = rel.GetAssociationName();
             var saved = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
+            string srcAssocName = saved.GetAssociationName();
 
             RelationEnd relEnd, otherEnd;
 
@@ -800,6 +847,7 @@ namespace Kistl.Server.SchemaManagement
                     bCreated = true;
                 }
             }
+            bool srcColWasReused = false;
             // Then try to rename columns
             if (rel.HasStorage(RelationEndRole.A) && !aCreated)
             {
@@ -812,6 +860,7 @@ namespace Kistl.Server.SchemaManagement
                 var assocName = rel.GetRelationAssociationName(RelationEndRole.A);
                 var refTblName = rel.B.Type.TableName;
                 db.CreateFKConstraint(destTblName, refTblName, destColName, assocName, false);
+                srcColWasReused = true;
             }
             if (rel.HasStorage(RelationEndRole.B) && !bCreated)
             {
@@ -824,9 +873,10 @@ namespace Kistl.Server.SchemaManagement
                 var assocName = rel.GetRelationAssociationName(RelationEndRole.B);
                 var refTblName = rel.A.Type.TableName;
                 db.CreateFKConstraint(destTblName, refTblName, destColName, assocName, false);
+                srcColWasReused = true;
             }
 
-            db.DropColumn(srcTblName, srcColName);
+            if(!srcColWasReused) db.DropColumn(srcTblName, srcColName);
         }
         #endregion
 

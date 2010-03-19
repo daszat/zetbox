@@ -1337,6 +1337,44 @@
     </AssociationSetMapping>
 
     <!--
+    Relation: FK_Student_füllt_aus_Testbogen
+    A: ZeroOrMore TestStudent as Student
+    B: ZeroOrMore Fragebogen as Testbogen
+    Preferred Storage: Separate
+    -->
+    <EntitySetMapping Name="TestStudent_füllt_aus_Fragebogen_RelationEntry">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.TestStudent_füllt_aus_Fragebogen_RelationEntry)">
+        <MappingFragment StoreEntitySet="TestStudent_füllt_aus_Fragebogen_RelationEntry">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <!-- A to CollectionEntry -->
+    <AssociationSetMapping Name="FK_Student_füllt_aus_Testbogen_A"
+                           TypeName="Model.FK_Student_füllt_aus_Testbogen_A"
+                           StoreEntitySet="TestStudent_füllt_aus_Fragebogen_RelationEntry" >
+      <EndProperty Name="Student">
+        <ScalarProperty Name="ID" ColumnName="fk_Student"/>
+      </EndProperty>
+      <EndProperty Name="CollectionEntry">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_Student" IsNull="false"/>
+    </AssociationSetMapping>
+    <!-- B to CollectionEntry -->
+    <AssociationSetMapping Name="FK_Student_füllt_aus_Testbogen_B"
+                           TypeName="Model.FK_Student_füllt_aus_Testbogen_B"
+                           StoreEntitySet="TestStudent_füllt_aus_Fragebogen_RelationEntry" >
+      <EndProperty Name="Testbogen">
+        <ScalarProperty Name="ID" ColumnName="fk_Testbogen"/>
+      </EndProperty>
+      <EndProperty Name="CollectionEntry">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_Testbogen" IsNull="false"/>
+    </AssociationSetMapping>
+
+    <!--
     Relation: FK_Students_attend_Semesters
     A: ZeroOrMore Student as Students
     B: ZeroOrMore Semester as Semesters
@@ -3235,23 +3273,6 @@
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="fk_CreatedBy" IsNull="false"/>
-    </AssociationSetMapping>
-    <!--
-    Relation: FK_Student_füllt_aus_Testbogen
-    A: One TestStudent as Student
-    B: ZeroOrMore Fragebogen as Testbogen
-    Preferred Storage: MergeIntoB
-    -->
-    <AssociationSetMapping Name="FK_Student_füllt_aus_Testbogen"
-                           TypeName="Model.FK_Student_füllt_aus_Testbogen"
-                           StoreEntitySet="Fragebogen" >
-      <EndProperty Name="Student">
-        <ScalarProperty Name="ID" ColumnName="fk_Student"/>
-      </EndProperty>
-      <EndProperty Name="Testbogen">
-        <ScalarProperty Name="ID" ColumnName="ID"/>
-      </EndProperty>
-      <Condition ColumnName="fk_Student" IsNull="false"/>
     </AssociationSetMapping>
     <!--
     Relation: FK_StudentExam_passes_Exam

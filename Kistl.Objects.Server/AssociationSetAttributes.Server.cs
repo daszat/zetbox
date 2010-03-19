@@ -1677,18 +1677,21 @@ using Kistl.DalProvider.EF;
 
 	/*
     Relation: FK_Student_füllt_aus_Testbogen
-    A: One TestStudent as Student
+    A: ZeroOrMore TestStudent as Student
     B: ZeroOrMore Fragebogen as Testbogen
-    Preferred Storage: MergeIntoB
+    Preferred Storage: Separate
 	*/
 
-// basic association
-[assembly: EdmRelationship(
-    "Model", "FK_Student_füllt_aus_Testbogen",
+// The association from A to the CollectionEntry
+[assembly: EdmRelationship("Model", "FK_Student_füllt_aus_Testbogen_A",
     "Student", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Test.TestStudent__Implementation__),
-    "Testbogen", RelationshipMultiplicity.Many, typeof(Kistl.App.Test.Fragebogen__Implementation__)
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntry__Implementation__)
     )]
-
+// The association from B to the CollectionEntry
+[assembly: EdmRelationship("Model", "FK_Student_füllt_aus_Testbogen_B",
+    "Testbogen", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Test.Fragebogen__Implementation__),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntry__Implementation__)
+    )]
 
 	/*
     Relation: FK_StudentExam_passes_Exam

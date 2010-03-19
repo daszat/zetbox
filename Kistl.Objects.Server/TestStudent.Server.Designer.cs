@@ -114,13 +114,13 @@ namespace Kistl.App.Test
         /// </summary>
     /*
     Relation: FK_Student_füllt_aus_Testbogen
-    A: One TestStudent as Student
+    A: ZeroOrMore TestStudent as Student
     B: ZeroOrMore Fragebogen as Testbogen
-    Preferred Storage: MergeIntoB
+    Preferred Storage: Separate
     */
-        // object list property
-   		// Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.ObjectListProperty
-	    // implement the user-visible interface
+        // collection reference property
+		// Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.CollectionEntryListProperty
+        // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public ICollection<Kistl.App.Test.Fragebogen> Testbogen
@@ -129,22 +129,23 @@ namespace Kistl.App.Test
             {
                 if (_TestbogenWrapper == null)
                 {
-                    _TestbogenWrapper = new EntityCollectionWrapper<Kistl.App.Test.Fragebogen, Kistl.App.Test.Fragebogen__Implementation__>(
-                            this.Context, Testbogen__Implementation__);
+                    _TestbogenWrapper = new EntityRelationBSideCollectionWrapper<Kistl.App.Test.TestStudent, Kistl.App.Test.Fragebogen, Kistl.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntry__Implementation__>(
+                            this,
+                            Testbogen__Implementation__);
                 }
                 return _TestbogenWrapper;
             }
         }
         
-        [EdmRelationshipNavigationProperty("Model", "FK_Student_füllt_aus_Testbogen", "Testbogen")]
-        public EntityCollection<Kistl.App.Test.Fragebogen__Implementation__> Testbogen__Implementation__
+        [EdmRelationshipNavigationProperty("Model", "FK_Student_füllt_aus_Testbogen_A", "CollectionEntry")]
+        public EntityCollection<Kistl.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntry__Implementation__> Testbogen__Implementation__
         {
             get
             {
                 var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<Kistl.App.Test.Fragebogen__Implementation__>(
-                        "Model.FK_Student_füllt_aus_Testbogen",
-                        "Testbogen");
+                    .GetRelatedCollection<Kistl.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntry__Implementation__>(
+                        "Model.FK_Student_füllt_aus_Testbogen_A",
+                        "CollectionEntry");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)
                 {
@@ -153,8 +154,7 @@ namespace Kistl.App.Test
                 return c;
             }
         }
-        private EntityCollectionWrapper<Kistl.App.Test.Fragebogen, Kistl.App.Test.Fragebogen__Implementation__> _TestbogenWrapper;
-
+        private EntityRelationBSideCollectionWrapper<Kistl.App.Test.TestStudent, Kistl.App.Test.Fragebogen, Kistl.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntry__Implementation__> _TestbogenWrapper;
 
 
 		public override InterfaceType GetInterfaceType()

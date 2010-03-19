@@ -3790,6 +3790,249 @@ namespace Kistl.App.GUI
     }
 }
 
+namespace Kistl.App.Test
+{
+    [EdmEntityType(NamespaceName="Model", Name="TestStudent_füllt_aus_Fragebogen_RelationEntry")]
+    [System.Diagnostics.DebuggerDisplay("TestStudent_füllt_aus_Fragebogen_RelationEntry__Implementation__")]
+    public class TestStudent_füllt_aus_Fragebogen_RelationEntry__Implementation__ : BaseServerCollectionEntry_EntityFramework, TestStudent_füllt_aus_Fragebogen_RelationEntry
+    {
+    
+        [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
+           // Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.IdProperty
+        public override int ID
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _ID;
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_ID != value)
+                {
+                    var __oldValue = _ID;
+                    var __newValue = value;
+                    NotifyPropertyChanging("ID", __oldValue, __newValue);
+                    _ID = __newValue;
+                    NotifyPropertyChanged("ID", __oldValue, __newValue);
+                }
+            }
+        }
+        private int _ID;
+        public Guid RelationID { get { return new Guid("6819ca86-571c-4d59-bc30-cc1fb0decc9e"); } }
+        public IDataObject AObject { get { return A; } set { A = (Kistl.App.Test.TestStudent)value; } }
+        public IDataObject BObject { get { return B; } set { B = (Kistl.App.Test.Fragebogen)value; } }
+
+        /// <summary>
+        /// Reference to the A-Side member of this CollectionEntry
+        /// </summary>
+   		// Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public Kistl.App.Test.TestStudent A
+        {
+            get
+            {
+                return A__Implementation__;
+            }
+            set
+            {
+                // TODO: NotifyPropertyChanged()
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if(value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                A__Implementation__ = (Kistl.App.Test.TestStudent__Implementation__)value;
+            }
+        }
+        
+        private int? _fk_A;
+        private Guid? _fk_guid_A = null;
+        // EF sees only this property
+        [EdmRelationshipNavigationProperty("Model", "FK_Student_füllt_aus_Testbogen_A", "Student")]
+        public Kistl.App.Test.TestStudent__Implementation__ A__Implementation__
+        {
+            get
+            {
+                EntityReference<Kistl.App.Test.TestStudent__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Test.TestStudent__Implementation__>(
+                        "Model.FK_Student_füllt_aus_Testbogen_A",
+                        "Student");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load(); 
+                    if(r.Value != null) r.Value.AttachToContext(this.Context);
+                }
+                var __value = r.Value;
+                return __value;
+            }
+            set
+            {
+                EntityReference<Kistl.App.Test.TestStudent__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Test.TestStudent__Implementation__>(
+                        "Model.FK_Student_füllt_aus_Testbogen_A",
+                        "Student");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load(); 
+                }
+                Kistl.App.Test.TestStudent __oldValue = (Kistl.App.Test.TestStudent)r.Value;
+                Kistl.App.Test.TestStudent __newValue = (Kistl.App.Test.TestStudent)value;
+
+                r.Value = (Kistl.App.Test.TestStudent__Implementation__)__newValue;
+                                
+            }
+        }
+        
+        
+        /// <summary>
+        /// the B-side value of this CollectionEntry
+        /// </summary>
+   		// Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public Kistl.App.Test.Fragebogen B
+        {
+            get
+            {
+                return B__Implementation__;
+            }
+            set
+            {
+                // TODO: NotifyPropertyChanged()
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if(value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                B__Implementation__ = (Kistl.App.Test.Fragebogen__Implementation__)value;
+            }
+        }
+        
+        private int? _fk_B;
+        private Guid? _fk_guid_B = null;
+        // EF sees only this property
+        [EdmRelationshipNavigationProperty("Model", "FK_Student_füllt_aus_Testbogen_B", "Testbogen")]
+        public Kistl.App.Test.Fragebogen__Implementation__ B__Implementation__
+        {
+            get
+            {
+                EntityReference<Kistl.App.Test.Fragebogen__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Test.Fragebogen__Implementation__>(
+                        "Model.FK_Student_füllt_aus_Testbogen_B",
+                        "Testbogen");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load(); 
+                    if(r.Value != null) r.Value.AttachToContext(this.Context);
+                }
+                var __value = r.Value;
+                return __value;
+            }
+            set
+            {
+                EntityReference<Kistl.App.Test.Fragebogen__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Test.Fragebogen__Implementation__>(
+                        "Model.FK_Student_füllt_aus_Testbogen_B",
+                        "Testbogen");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load(); 
+                }
+                Kistl.App.Test.Fragebogen __oldValue = (Kistl.App.Test.Fragebogen)r.Value;
+                Kistl.App.Test.Fragebogen __newValue = (Kistl.App.Test.Fragebogen)value;
+
+                r.Value = (Kistl.App.Test.Fragebogen__Implementation__)__newValue;
+                                
+            }
+        }
+        
+        
+
+#region Serializer
+
+
+        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects)
+        {
+            
+            base.ToStream(binStream, auxObjects);
+            BinarySerializer.ToStream(A != null ? A.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(B != null ? B.ID : (int?)null, binStream);
+        }
+
+        public override void FromStream(System.IO.BinaryReader binStream)
+        {
+            
+            base.FromStream(binStream);
+            BinarySerializer.FromStream(out this._fk_A, binStream);
+            BinarySerializer.FromStream(out this._fk_B, binStream);
+        }
+
+        public override void ToStream(System.Xml.XmlWriter xml)
+        {
+            
+            base.ToStream(xml);
+            XmlStreamer.ToStream(A != null ? A.ID : (int?)null, xml, "A", "Kistl.App.Test");
+            XmlStreamer.ToStream(B != null ? B.ID : (int?)null, xml, "B", "Kistl.App.Test");
+        }
+
+        public override void FromStream(System.Xml.XmlReader xml)
+        {
+            
+            base.FromStream(xml);
+            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.Test");
+            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.Test");
+        }
+
+#endregion
+
+		public override InterfaceType GetInterfaceType()
+		{
+			return new InterfaceType(typeof(TestStudent_füllt_aus_Fragebogen_RelationEntry));
+		}
+	
+		public override void ReloadReferences()
+		{
+			// Do not reload references if the current object has been deleted.
+			// TODO: enable when MemoryContext uses MemoryDataObjects
+			//if (this.ObjectState == DataObjectState.Deleted) return;
+
+			if (_fk_guid_A.HasValue)
+				A__Implementation__ = (Kistl.App.Test.TestStudent__Implementation__)Context.FindPersistenceObject<Kistl.App.Test.TestStudent>(_fk_guid_A.Value);
+			else if (_fk_A.HasValue)
+				A__Implementation__ = (Kistl.App.Test.TestStudent__Implementation__)Context.Find<Kistl.App.Test.TestStudent>(_fk_A.Value);
+			else
+				A__Implementation__ = null;
+
+
+			if (_fk_guid_B.HasValue)
+				B__Implementation__ = (Kistl.App.Test.Fragebogen__Implementation__)Context.FindPersistenceObject<Kistl.App.Test.Fragebogen>(_fk_guid_B.Value);
+			else if (_fk_B.HasValue)
+				B__Implementation__ = (Kistl.App.Test.Fragebogen__Implementation__)Context.Find<Kistl.App.Test.Fragebogen>(_fk_B.Value);
+			else
+				B__Implementation__ = null;
+	
+		}
+		
+		public override void ApplyChangesFrom(IPersistenceObject obj)
+		{
+			base.ApplyChangesFrom(obj);
+			var other = (TestStudent_füllt_aus_Fragebogen_RelationEntry__Implementation__)obj;
+			var me = (TestStudent_füllt_aus_Fragebogen_RelationEntry__Implementation__)this;
+			
+            me._fk_A = other._fk_A;
+            me._fk_B = other._fk_B;
+		}		
+		
+		
+
+    }
+}
+
 namespace Kistl.App.Base
 {
     [EdmEntityType(NamespaceName="Model", Name="TypeRef_hasGenericArguments_TypeRef_RelationEntry")]
