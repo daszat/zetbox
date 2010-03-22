@@ -69,9 +69,18 @@ namespace Kistl.DalProvider.EF.Generator.Implementation
             this.WriteLine(@"    <EmbeddedResource Include=""Model.csdl"" />");
             this.WriteLine(@"    <EmbeddedResource Include=""Model.ssdl"" />");
             this.WriteLine(@"    <EmbeddedResource Include=""Model.msl"" />");
+            this.WriteLine(@"    <Compile Include=""Model.Views.cs"" />");
             this.WriteLine(@"  </ItemGroup>");
 
         }
 
+        protected override void ApplyAdditionalPropertyGroups()
+        {
+            base.ApplyAdditionalPropertyGroups();
+
+            this.WriteLine(@"  <PropertyGroup>");
+            this.WriteLine(@"    <PreBuildEvent>""%25windir%25\Microsoft.NET\Framework\v3.5\EdmGen.exe"" /nologo /language:CSharp /mode:ViewGeneration ""/inssdl:$(ProjectDir)Model.ssdl"" ""/incsdl:$(ProjectDir)Model.csdl"" ""/inmsl:$(ProjectDir)Model.msl"" ""/outviews:$(ProjectDir)Model.Views.cs""</PreBuildEvent>");
+            this.WriteLine(@"  </PropertyGroup>");
+        }
     }
 }

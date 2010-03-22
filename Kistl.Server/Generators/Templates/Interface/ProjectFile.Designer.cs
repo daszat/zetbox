@@ -114,6 +114,11 @@ this.WriteObjects("  </Target>\r\n");
 this.WriteObjects("  -->\r\n");
 this.WriteObjects("  <Target Name=\"AfterBuild\">\r\n");
 this.WriteObjects("  </Target>\r\n");
+this.WriteObjects("  ");
+#line 95 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\ProjectFile.cst"
+ApplyAdditionalPropertyGroups();
+  
+#line 97 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\ProjectFile.cst"
 this.WriteObjects("</Project>");
 
         }

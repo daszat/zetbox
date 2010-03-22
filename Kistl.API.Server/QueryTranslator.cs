@@ -119,50 +119,56 @@ namespace Kistl.API.Server
         {
             if (expression == null) throw new ArgumentNullException("expression");
 
-            if (Logging.Linq.IsInfoEnabled)
+            using (Logging.Linq.DebugTraceMethodCall())
             {
-                Logging.Linq.Info(expression.ToString());
-            }
+                if (Logging.Linq.IsInfoEnabled)
+                {
+                    Logging.Linq.Info(expression.ToString());
+                }
 
-            Expression translated = this.Visit(expression);
+                Expression translated = this.Visit(expression);
 
-            if (Logging.Linq.IsDebugEnabled)
-            {
-                Logging.Linq.Debug(translated.Trace());
-            }
+                if (Logging.LinqQuery.IsDebugEnabled)
+                {
+                    Logging.LinqQuery.Debug(translated.Trace());
+                }
 
-            object result = _source.Provider.Execute(translated);
-            if (result != null && result is IPersistenceObject)
-            {
-                ((IPersistenceObject)result).AttachToContext(_ctx);
+                object result = _source.Provider.Execute(translated);
+                if (result != null && result is IPersistenceObject)
+                {
+                    ((IPersistenceObject)result).AttachToContext(_ctx);
+                }
+                return result;
             }
-            return result;
         }
 
         internal IEnumerable ExecuteEnumerable(Expression expression)
         {
             if (expression == null) throw new ArgumentNullException("expression");
 
-            if (Logging.Linq.IsInfoEnabled)
+            using (Logging.Linq.DebugTraceMethodCall())
             {
-                Logging.Linq.Info(expression.ToString());
-            }
+                if (Logging.Linq.IsInfoEnabled)
+                {
+                    Logging.Linq.Info(expression.ToString());
+                }
 
-            Expression translated = this.Visit(expression);
+                Expression translated = this.Visit(expression);
 
-            if (Logging.Linq.IsDebugEnabled)
-            {
-                Logging.Linq.Debug(translated.Trace());
-            }
+                if (Logging.LinqQuery.IsDebugEnabled)
+                {
+                    Logging.LinqQuery.Debug(translated.Trace());
+                }
 
-            IQueryable newQuery = _source.Provider.CreateQuery(translated);
-            List<T> result = new List<T>();
-            foreach (T item in newQuery)
-            {
-                if (item is IPersistenceObject) ((IPersistenceObject)item).AttachToContext(_ctx);
-                result.Add(item);
+                IQueryable newQuery = _source.Provider.CreateQuery(translated);
+                List<T> result = new List<T>();
+                foreach (T item in newQuery)
+                {
+                    if (item is IPersistenceObject) ((IPersistenceObject)item).AttachToContext(_ctx);
+                    result.Add(item);
+                }
+                return result;
             }
-            return result;
         }
 
         #endregion

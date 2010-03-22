@@ -13,6 +13,7 @@ namespace Kistl.API.Utils
         private readonly static ILog _logger = LogManager.GetLogger("Kistl");
         private readonly static ILog _facade = LogManager.GetLogger("Kistl.Facade");
         private readonly static ILog _linq = LogManager.GetLogger("Kistl.Linq");
+        private readonly static ILog _linqquery = LogManager.GetLogger("Kistl.Linq.Query");
 
         public static ILog Log
         {
@@ -27,6 +28,10 @@ namespace Kistl.API.Utils
         public static ILog Linq
         {
             get { return _linq; }
+        }
+        public static ILog LinqQuery
+        {
+            get { return _linqquery; }
         }
 
         public static void Configure()

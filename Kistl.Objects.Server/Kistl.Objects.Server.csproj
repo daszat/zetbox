@@ -198,6 +198,7 @@
     <EmbeddedResource Include="Model.csdl" />
     <EmbeddedResource Include="Model.ssdl" />
     <EmbeddedResource Include="Model.msl" />
+    <Compile Include="Model.Views.cs" />
   </ItemGroup>
   
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
@@ -208,4 +209,7 @@
   -->
   <Target Name="AfterBuild">
   </Target>
+    <PropertyGroup>
+    <PreBuildEvent>"%25windir%25\Microsoft.NET\Framework\v3.5\EdmGen.exe" /nologo /language:CSharp /mode:ViewGeneration "/inssdl:$(ProjectDir)Model.ssdl" "/incsdl:$(ProjectDir)Model.csdl" "/inmsl:$(ProjectDir)Model.msl" "/outviews:$(ProjectDir)Model.Views.cs"</PreBuildEvent>
+  </PropertyGroup>
 </Project>

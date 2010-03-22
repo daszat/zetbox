@@ -27,5 +27,10 @@ namespace Kistl.Server.Generators.Templates.Interface
         /// Override this to add one or more &lt;ItemGroup/>s to the project file
         /// </summary>
         protected virtual void ApplyAdditionalItemGroups() { }
+
+        /// <summary>
+        /// Override this to add one or more &lt;PropertyGroup/>s to the project file
+        /// </summary>
+        protected virtual void ApplyAdditionalPropertyGroups() { }
     }
 }
