@@ -62,5 +62,5 @@
         public static event ObjectEventHandler<<%= cls.Name %>> OnDeleting_<%= cls.Name %>;
 
 <%
-	Implementation.ObjectClasses.GetPropertyErrorTemplate.Call(Host, ctx, cls);
+	Implementation.ObjectClasses.CustomTypeDescriptor.Call(Host, ctx, cls);
 %>

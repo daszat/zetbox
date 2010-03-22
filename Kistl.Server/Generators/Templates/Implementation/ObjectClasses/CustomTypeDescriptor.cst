@@ -1,6 +1,6 @@
 ﻿<%@ CodeTemplate Language="C#" 
-	Name="Implementation.ObjectClasses.GetPropertyErrorTemplate"
-	ClassName="Kistl.Server.Generators.Templates.Implementation.ObjectClasses.GetPropertyErrorTemplate" 
+	Name="Implementation.ObjectClasses.CustomTypeDescriptor"
+	ClassName="Kistl.Server.Generators.Templates.Implementation.ObjectClasses.CustomTypeDescriptor" 
 	Inherits="Kistl.Server.Generators.KistlCodeTemplate" %>
 <%@ Import Namespace="System" %>
 <%@ Import Namespace="System.Linq" %>

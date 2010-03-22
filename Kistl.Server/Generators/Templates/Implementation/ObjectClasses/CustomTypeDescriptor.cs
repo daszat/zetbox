@@ -9,13 +9,13 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
     using Kistl.API;
     using Kistl.App.Base;
 
-    public partial class GetPropertyErrorTemplate
+    public partial class CustomTypeDescriptor
     {
         public static void Call(Arebis.CodeGeneration.IGenerationHost host, IKistlContext ctx, ObjectClass cls)
         {
             if (host == null) { throw new ArgumentNullException("host"); }
 
-            host.CallTemplate("Implementation.ObjectClasses.GetPropertyErrorTemplate", ctx, cls);
+            host.CallTemplate("Implementation.ObjectClasses.CustomTypeDescriptor", ctx, cls);
         }
     }
 }

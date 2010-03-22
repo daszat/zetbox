@@ -78,7 +78,7 @@ this.WriteObjects("        }\r\n");
 this.WriteObjects("        public static event ObjectEventHandler<",  cls.Name , "> OnDeleting_",  cls.Name , ";\r\n");
 this.WriteObjects("\r\n");
 #line 65 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\Tail.cst"
-Implementation.ObjectClasses.GetPropertyErrorTemplate.Call(Host, ctx, cls);
+Implementation.ObjectClasses.CustomTypeDescriptor.Call(Host, ctx, cls);
 
 
         }

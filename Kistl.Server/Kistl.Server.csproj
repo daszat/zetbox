@@ -338,13 +338,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>EagerObjectLoadingSerialization.cst</DependentUpon>
     </Compile>
-    <Compile Include="Generators\Templates\Implementation\ObjectClasses\GetPropertyErrorTemplate.cs">
-      <DependentUpon>GetPropertyErrorTemplate.cst</DependentUpon>
+    <Compile Include="Generators\Templates\Implementation\ObjectClasses\CustomTypeDescriptor.cs">
+      <DependentUpon>CustomTypeDescriptor.cst</DependentUpon>
     </Compile>
-    <Compile Include="Generators\Templates\Implementation\ObjectClasses\GetPropertyErrorTemplate.Designer.cs">
+    <Compile Include="Generators\Templates\Implementation\ObjectClasses\CustomTypeDescriptor.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>GetPropertyErrorTemplate.cst</DependentUpon>
+      <DependentUpon>CustomTypeDescriptor.cst</DependentUpon>
     </Compile>
     <Compile Include="Generators\Templates\Implementation\ObjectClasses\MethodBody.cs" />
     <Compile Include="Generators\Templates\Implementation\ObjectClasses\ObjectListProperty.cs" />
@@ -615,9 +615,9 @@
     </None>
     <Content Include="Database\Database.xml" />
     <Content Include="Generators\Interfaces\Repositories\README.txt" />
-    <None Include="Generators\Templates\Implementation\ObjectClasses\GetPropertyErrorTemplate.cst">
+    <None Include="Generators\Templates\Implementation\ObjectClasses\CustomTypeDescriptor.cst">
       <Generator>Arebis Template Processor</Generator>
-      <LastGenOutput>GetPropertyErrorTemplate.Designer.cs</LastGenOutput>
+      <LastGenOutput>CustomTypeDescriptor.Designer.cs</LastGenOutput>
     </None>
     <None Include="Generators\Templates\Implementation\ObjectClasses\EagerObjectLoadingSerialization.cst">
       <Generator>Arebis Template Processor</Generator>
