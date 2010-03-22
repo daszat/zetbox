@@ -58,13 +58,21 @@ namespace Kistl.Client.WPF
 
             if (config.Server != null && config.Server.StartServer)
             {
+                SplashScreen.SetInfo("Starting Server");
                 serverDomain = new ServerDomainManager();
                 serverDomain.Start(config);
             }
+            else
+            {
+                SplashScreen.SetInfo("No server start required");
+            }
 
+            SplashScreen.SetInfo("Bootstraping Assembly Resolver");
             AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
             Assembly interfaces = Assembly.Load("Kistl.Objects");
             Assembly implementation = Assembly.Load("Kistl.Objects.Client");
+
+            SplashScreen.SetInfo("Initializing Application Context");
             AppContext = new GuiApplicationContext(config, "WPF", () => new MemoryContext(interfaces, implementation));
 
             return result;
@@ -73,17 +81,20 @@ namespace Kistl.Client.WPF
         private void Application_Startup(object sender, StartupEventArgs e)
         {
             Logging.Configure();
-            //SplashScreen.ShowSplashScreen("Kistl is starting...", "Init application", 5);
+            SplashScreen.ShowSplashScreen("Kistl is starting...", "Init application", 5);
 
             using (Logging.Log.InfoTraceMethodCall("Starting Client"))
             {
                 var args = HandleCommandline(e.Args);
 
+                SplashScreen.SetInfo("Initializing Launcher");
                 // delegate all business logic into another class, which 
                 // allows us to load the Kistl.Objects assemblies _before_ 
                 // they are needed.
                 Launcher.Execute(AppContext, args);
             }
+
+            SplashScreen.HideSplashScreen();
         }
 
         private void Application_Exit(object sender, ExitEventArgs e)
