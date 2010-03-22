@@ -11,8 +11,8 @@ namespace Kistl.API.Client
     public class CustomPropertyDescriptor<TComponent, TProperty>
         : BaseCustomPropertyDescriptor<TComponent, TProperty>
     {
-        private readonly Guid? _propertyGuid;
-        private Property _property;
+        private static readonly string[] NoErrors = new string[] { };
+        private readonly Property _property;
 
         public CustomPropertyDescriptor(
             Guid? propertyGuid,
@@ -22,24 +22,32 @@ namespace Kistl.API.Client
             Action<TComponent, TProperty> setter)
             : base(name, attrs, getter, setter)
         {
-            _propertyGuid = propertyGuid;
+            if (propertyGuid.HasValue)
+            {
+                _property = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(propertyGuid.Value);
+            }
+            else
+            {
+                _property = null;
+            }
         }
 
         public override string[] GetValidationErrors(object component)
         {
-
-            if (_property == null && _propertyGuid != null && FrozenContext.Single != null)
+            if (_property != null)
             {
-                _property = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(_propertyGuid.Value);
+                var self = (TComponent)component;
+                var val = getter(self);
+                return _property
+                    .Constraints
+                    .Where(c => !c.IsValid(self, val))
+                    .Select(c => c.GetErrorText(self, val))
+                    .ToArray();
             }
-
-            var self = (TComponent)component;
-            var val = getter(self);
-            return _property
-                .Constraints
-                .Where(c => !c.IsValid(self, val))
-                .Select(c => c.GetErrorText(self, val))
-                .ToArray();
+            else
+            {
+                return NoErrors;
+            }
         }
     }
 }

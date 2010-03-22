@@ -67,22 +67,5 @@ namespace Kistl.Client.WPF.View
         }
 
         #endregion
-
-        #region VerifyContextCommand
-
-        private RelayCommand _verifyContextCommand;
-        public System.Windows.Input.ICommand VerifyContextCommand
-        {
-            get
-            {
-                if (_verifyContextCommand == null)
-                {
-                    _verifyContextCommand = new RelayCommand(param => MessageBox.Show("Checking constraints"));
-                }
-                return _verifyContextCommand;
-            }
-        }
-
-        #endregion
     }
 }

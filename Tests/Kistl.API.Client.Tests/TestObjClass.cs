@@ -32,8 +32,6 @@ namespace Kistl.API.Client.Tests
         {
         }
 
-
-
         public string StringProp
         {
             get
@@ -208,5 +206,4 @@ namespace Kistl.API.Client.Tests
             throw new NotImplementedException();
         }
     }
-
 }

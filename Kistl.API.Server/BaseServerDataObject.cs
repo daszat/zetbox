@@ -19,7 +19,7 @@ namespace Kistl.API.Server
             if (ApplicationContext.Current.HostType != HostType.Server) throw new InvalidOperationException("A BaseServerPersistenceObject can only exist on a server");
             ClientObjectState = DataObjectState.NotDeserialized;
             var trace = new System.Diagnostics.StackTrace(true);
-            _constructTrace = String.Join("\n", 
+            _constructTrace = String.Join("\n",
                 trace
                 .GetFrames()
                 .Select(frm => String.Format(
@@ -119,7 +119,7 @@ namespace Kistl.API.Server
     /// <summary>
     /// local proxy
     /// </summary>
-    public abstract class BaseServerCompoundObject : BaseCompoundObject 
+    public abstract class BaseServerCompoundObject : BaseCompoundObject
     {
         protected override void OnPropertyChanging(string property, object oldValue, object newValue)
         {

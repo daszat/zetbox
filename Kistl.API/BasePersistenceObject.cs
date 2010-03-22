@@ -168,14 +168,17 @@ namespace Kistl.API
         /// Returns a value indicating whether or not this object is in a valid configuration.
         /// </summary>
         /// <returns>a value indicating whether or not this object is in a valid configuration.</returns>
-        public abstract bool IsValid();
+        public virtual bool IsValid()
+        {
+            return String.IsNullOrEmpty(((IDataErrorInfo)this).Error);
+        }
 
         /// <summary>
         /// Gets the error message for the property with the given name.
         /// </summary>
         /// <param name="prop">The name of the property whose error message to get.</param>
         /// <returns>The error message for the property. Returns 
-        /// <value>String.Empty</value> if there is nothing to report.</returns>
+        /// <value>null</value> if there is nothing to report.</returns>
         protected virtual string GetPropertyError(string prop)
         {
             // TODO: implement proper interface here
@@ -200,15 +203,22 @@ namespace Kistl.API
         {
             get
             {
-                if (this.IsValid())
-                {
-                    return String.Empty;
-                }
-                else
-                {
-                    // TODO: implement a way to get all error messages from all properties of this object.
-                    return "This object has errors.";
-                }
+                var errors = GetProperties()
+                    .OfType<IValidatingPropertyDescriptor>()
+                    .Select(vpd =>
+                    {
+                        var errorStrings = vpd.GetValidationErrors(this);
+                        if (errorStrings == null || errorStrings.Length == 0)
+                        {
+                            return null;
+                        }
+
+                        var error = String.Join(",", errorStrings);
+                        return vpd.UnderlyingDescriptor.Name + ": " + error;
+                    })
+                    .Where(err => !String.IsNullOrEmpty(err))
+                    .ToArray();
+                return String.Join("\n", errors);
             }
         }
 
@@ -325,7 +335,8 @@ namespace Kistl.API
             props.AddRange(_properties);
         }
 
-        private static PropertyDescriptorCollection _propertyDescriptorCollection = null;
+        // TODO: make this per-actual-Type instead of per-Instance
+        private PropertyDescriptorCollection _propertyDescriptorCollection = null;
 
         public PropertyDescriptorCollection GetProperties()
         {

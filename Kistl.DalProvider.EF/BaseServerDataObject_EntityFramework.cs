@@ -165,19 +165,6 @@ namespace Kistl.DalProvider.EF
                 _changeTracker.EntityMemberChanging(efProperty);
             }
         }
-
-        public override bool IsValid()
-        {
-            ObjectClass oc = this.GetInterfaceType().GetObjectClass(this.Context);
-            return oc.Properties.Aggregate(true, (acc, prop) =>
-                acc && prop.Constraints.All(c =>
-                    c.IsValid(this, this.GetPropertyValue<object>(prop.Name))));
-        }
-
-        protected override string GetPropertyError(string prop)
-        {
-            throw new NotImplementedException();
-        }
     }
 
     public abstract class BaseServerCollectionEntry_EntityFramework
@@ -343,15 +330,6 @@ namespace Kistl.DalProvider.EF
         public ObjectContext GetEFContext()
         {
             return _relationships.GetPrivatePropertyValue<ObjectContext>("Context");
-        }
-
-        public override bool IsValid()
-        {
-            throw new NotImplementedException();
-        }
-        protected override string GetPropertyError(string prop)
-        {
-            throw new NotImplementedException();
         }
     }
 

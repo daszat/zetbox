@@ -731,6 +731,7 @@ namespace Kistl.App.Test
 		
 		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
 		{
+			base.CollectProperties(props);
 			props.AddRange(_properties);
 		}
 	

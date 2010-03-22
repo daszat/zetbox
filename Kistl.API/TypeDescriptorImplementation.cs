@@ -7,6 +7,7 @@ namespace Kistl.API
     public interface IValidatingPropertyDescriptor
     {
         string[] GetValidationErrors(object component);
+        PropertyDescriptor UnderlyingDescriptor { get; }
     }
 
     public class BaseCustomPropertyDescriptor<TComponent, TProperty>
@@ -74,6 +75,11 @@ namespace Kistl.API
         public virtual string[] GetValidationErrors(object component)
         {
             return null;
+        }
+
+        public PropertyDescriptor UnderlyingDescriptor
+        {
+            get { return this; }
         }
 
         #endregion

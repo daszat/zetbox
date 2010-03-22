@@ -132,12 +132,13 @@ this.WriteObjects("		};\r\n");
 this.WriteObjects("		\r\n");
 this.WriteObjects("		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)\r\n");
 this.WriteObjects("		{\r\n");
+this.WriteObjects("			base.CollectProperties(props);\r\n");
 this.WriteObjects("			props.AddRange(_properties);\r\n");
 this.WriteObjects("		}\r\n");
-#line 113 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CustomTypeDescriptor.cst"
+#line 114 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CustomTypeDescriptor.cst"
 }
 
-#line 115 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CustomTypeDescriptor.cst"
+#line 116 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CustomTypeDescriptor.cst"
 this.WriteObjects("	\r\n");
 
         }

@@ -217,6 +217,7 @@ namespace at.dasz.DocumentManagement
 		
 		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
 		{
+			base.CollectProperties(props);
 			props.AddRange(_properties);
 		}
 	

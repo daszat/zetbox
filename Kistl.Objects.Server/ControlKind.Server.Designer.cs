@@ -258,6 +258,7 @@ namespace Kistl.App.GUI
 		
 		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
 		{
+			base.CollectProperties(props);
 			props.AddRange(_properties);
 		}
 	

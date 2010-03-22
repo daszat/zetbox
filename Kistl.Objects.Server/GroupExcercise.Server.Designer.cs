@@ -341,6 +341,7 @@ namespace at.dasz.CourseOrganiser
 		
 		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
 		{
+			base.CollectProperties(props);
 			props.AddRange(_properties);
 		}
 	
