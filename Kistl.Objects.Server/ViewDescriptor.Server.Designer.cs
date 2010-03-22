@@ -614,6 +614,9 @@ namespace Kistl.App.GUI
             
             base.ToStream(binStream, auxObjects);
             BinarySerializer.ToStream(ControlRef != null ? ControlRef.ID : (int?)null, binStream);
+			if (auxObjects != null) {
+				auxObjects.Add(ControlRef);
+			}
             BinarySerializer.ToStream(this._isExportGuidSet, binStream);
             if (this._isExportGuidSet) {
                 BinarySerializer.ToStream(this._ExportGuid, binStream);

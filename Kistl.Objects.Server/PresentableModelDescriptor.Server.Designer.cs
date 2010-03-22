@@ -775,6 +775,9 @@ namespace Kistl.App.GUI
             }
             BinarySerializer.ToStream(Module != null ? Module.ID : (int?)null, binStream);
             BinarySerializer.ToStream(PresentableModelRef != null ? PresentableModelRef.ID : (int?)null, binStream);
+			if (auxObjects != null) {
+				auxObjects.Add(PresentableModelRef);
+			}
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2010-03-19T17:46:36.747Z" xmlns="http://dasz.at/Kistl">
+<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2010-03-22T16:32:35.58Z" xmlns="http://dasz.at/Kistl">
   <KistlBase:Module ExportGuid="110acbc0-652a-4adc-9de5-8baabfcf3637">
     <KistlBase:ChangedOn>2010-02-01T16:07:00.49Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2010-02-01T15:23:35.247Z</KistlBase:CreatedOn>
@@ -12705,7 +12705,7 @@
   </KistlBase:ObjectReferenceProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="554288d1-f5f4-4b22-908b-01525a1d0f9b">
     <KistlBase:CategoryTags>Main</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2009-12-14T17:08:05.4Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2010-03-22T16:31:55.37Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>
     <KistlBase:Description>The described CLR class&amp;apos; reference</KistlBase:Description>
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
@@ -12713,7 +12713,7 @@
     <KistlBase:ObjectClass>5d152c6f-6c1e-48b7-b03e-669e30468808</KistlBase:ObjectClass>
     <KistlBase:Properties_pos>700</KistlBase:Properties_pos>
     <GUI:ValueModelDescriptor>d96d030e-eebe-4b7f-8b55-dca30cbd4bde</GUI:ValueModelDescriptor>
-    <KistlBase:EagerLoading>false</KistlBase:EagerLoading>
+    <KistlBase:EagerLoading>true</KistlBase:EagerLoading>
     <KistlBase:RelationEnd>eccb7be2-6c54-4fbb-83f4-dceed3825b65</KistlBase:RelationEnd>
   </KistlBase:ObjectReferenceProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="5e2e007c-2e90-4ba6-9c9d-46e62b662ff9">
@@ -12815,7 +12815,7 @@
   </KistlBase:ObjectReferenceProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="eff6276d-975b-4a0d-bd3c-ad76af2189c3">
     <KistlBase:CategoryTags>Main</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2009-12-14T17:08:05.4Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2010-03-22T16:32:35.58Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>
     <KistlBase:Description>The control implementing this View</KistlBase:Description>
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
@@ -12823,7 +12823,7 @@
     <KistlBase:ObjectClass>ffda4604-1536-43b6-b951-f8753d5092ca</KistlBase:ObjectClass>
     <KistlBase:Properties_pos>500</KistlBase:Properties_pos>
     <GUI:ValueModelDescriptor>d96d030e-eebe-4b7f-8b55-dca30cbd4bde</GUI:ValueModelDescriptor>
-    <KistlBase:EagerLoading>false</KistlBase:EagerLoading>
+    <KistlBase:EagerLoading>true</KistlBase:EagerLoading>
     <KistlBase:RelationEnd>cd048a20-cd26-4a12-8208-362a86ed0762</KistlBase:RelationEnd>
   </KistlBase:ObjectReferenceProperty>
   <KistlBase:GuidProperty ExportGuid="94140a56-9fed-4d65-8c2c-cb8e658dff96">
