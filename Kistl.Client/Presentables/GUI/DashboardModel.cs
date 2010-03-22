@@ -26,16 +26,17 @@ namespace Kistl.Client.Presentables.GUI
             : base(appCtx, dataCtx)
         {
             // TODO: react to ctx.Create<PresentableModelDescriptor>()/ctx.Delete<PresentableModelDescriptor>()
-            PresentableModelDescriptors = new ReadOnlyObservableCollection<DataObjectModel>(
-                new ObservableCollection<DataObjectModel>(
-                    DataContext
-                        .GetQuery<PresentableModelDescriptor>()
-                        .Select(desc => (DataObjectModel)Factory.CreateDefaultModel(DataContext, desc))
-                        .ToList()));
+            // TODO: Reactivate
+            //PresentableModelDescriptors = new ReadOnlyObservableCollection<DataObjectModel>(
+            //    new ObservableCollection<DataObjectModel>(
+            //        DataContext
+            //            .GetQuery<PresentableModelDescriptor>()
+            //            .Select(desc => (DataObjectModel)Factory.CreateDefaultModel(DataContext, desc))
+            //            .ToList()));
 
-            _selectedPresentableModelDescriptor = null;
+            //_selectedPresentableModelDescriptor = null;
 
-            DefaultViewDescriptors = new Dictionary<Toolkit, DataObjectModel>();
+            //DefaultViewDescriptors = new Dictionary<Toolkit, DataObjectModel>();
         }
 
         public ReadOnlyObservableCollection<DataObjectModel> PresentableModelDescriptors { get; private set; }

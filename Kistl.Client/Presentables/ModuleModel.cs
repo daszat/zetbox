@@ -43,8 +43,8 @@ namespace Kistl.Client.Presentables
 
         private void LoadObjectClasses()
         {
-            var datatypes = DataContext.GetQuery<DataType>()
-                .Where(dt => dt.Module.ID == _module.ID && (dt as ObjectClass != null ? !(dt as ObjectClass).IsSimpleObject : true))
+            var datatypes = DataContext.GetQuery<ObjectClass>()
+                .Where(dt => dt.Module.ID == _module.ID && !dt.IsSimpleObject)
                 .OrderBy(dt => dt.Name);
             foreach (var dt in datatypes)
             {

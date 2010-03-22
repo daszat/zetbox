@@ -3,8 +3,9 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     Title="Kistl" Height="150" Width="300" WindowStyle="None" Topmost="True"
     x:Name="MyCtrl"
+    Background="Transparent" AllowsTransparency="True"
     ResizeMode="NoResize" WindowStartupLocation="CenterScreen" ShowInTaskbar="False">
-    <Border CornerRadius="10,10,10,10" BorderThickness="1" BorderBrush="Navy">
+    <Border CornerRadius="10,10,10,10" BorderThickness="1" BorderBrush="Navy" Background="White">
         <StackPanel>
             <TextBlock HorizontalAlignment="Center" Margin="0,30,0,0" FontWeight="Bold" 
                    Text="{Binding  ElementName=MyCtrl, Path=Message}" />
