@@ -18,7 +18,7 @@ namespace Kistl.DalProvider.EF.Generator.Implementation.CollectionEntries
         {
             RelationEnd relEnd = rel.GetEndFromRole(endRole);
             RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
-            bool eagerLoading = relEnd.Navigator != null && relEnd.Navigator.EagerLoading;
+            bool eagerLoading = otherEnd.Navigator != null && otherEnd.Navigator.EagerLoading;
 
             Implementation.ObjectClasses.ObjectReferencePropertyTemplate.Call(Host, ctx,
                 this.MembersToSerialize,

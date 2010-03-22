@@ -215,10 +215,10 @@ namespace Kistl.App.Base
             base.ToStream(binStream, auxObjects);
             BinarySerializer.ToStream(this._ExportGuid, binStream);
             BinarySerializer.ToStream(A != null ? A.ID : (int?)null, binStream);
-			if (auxObjects != null) {
-				auxObjects.Add(A);
-			}
             BinarySerializer.ToStream(B != null ? B.ID : (int?)null, binStream);
+			if (auxObjects != null) {
+				auxObjects.Add(B);
+			}
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
@@ -4299,11 +4299,11 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
             base.ToStream(binStream, auxObjects);
             BinarySerializer.ToStream(this._ExportGuid, binStream);
             BinarySerializer.ToStream(A != null ? A.ID : (int?)null, binStream);
-			if (auxObjects != null) {
-				auxObjects.Add(A);
-			}
             BinarySerializer.ToStream(this._A_pos, binStream);
             BinarySerializer.ToStream(B != null ? B.ID : (int?)null, binStream);
+			if (auxObjects != null) {
+				auxObjects.Add(B);
+			}
             BinarySerializer.ToStream(this._B_pos, binStream);
             BinarySerializer.ToStream(this._A_pos, binStream);
             BinarySerializer.ToStream(this._B_pos, binStream);
