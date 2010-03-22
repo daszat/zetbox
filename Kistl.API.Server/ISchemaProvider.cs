@@ -99,6 +99,7 @@ namespace Kistl.API.Server
         void CopyColumnData(string srcTblName, string srcColName, string tblName, string colName);
         void MigrateFKs(string srcTblName, string srcColName, string tblName, string colName);
         void InsertFKs(string srcTblName, string srcColName, string tblName, string colName, string fkColName);
+        void CopyFKs(string srcTblName, string srcColName, string destTblName, string destColName, string srcFKColName);
 
         void CreateIndex(string tblName, string idxName, bool unique, bool clustered, params string[] columns);
 

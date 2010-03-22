@@ -937,7 +937,49 @@ namespace Kistl.Server.SchemaManagement
         }
         public void DoChangeRelationType_from_n_m_to_1_1(Relation rel)
         {
+            string destAssocName = rel.GetAssociationName();
+            var saved = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
 
+            var srcTblName = saved.GetRelationTableName();
+
+            // Drop relations first as 1:1 and n:m relations share the same names
+            var srcAssocA = saved.GetRelationAssociationName(RelationEndRole.A);
+            db.DropFKConstraint(srcTblName, srcAssocA);
+            var srcAssocB = saved.GetRelationAssociationName(RelationEndRole.B);
+            db.DropFKConstraint(srcTblName, srcAssocB);
+
+            DoNew_1_1_Relation(rel);
+
+            if (rel.HasStorage(RelationEndRole.A))
+            {
+                var destTblName = rel.A.Type.TableName;
+                var destColName = Construct.ForeignKeyColumnName(rel.B);
+                var srcColName = rel.GetRelationFkColumnName(RelationEndRole.B);
+                var srcFKColName = rel.GetRelationFkColumnName(RelationEndRole.A);
+
+                if (!db.CheckColumnContainsUniqueValues(srcTblName, srcColName))
+                {
+                    Log.ErrorFormat("Unable to change Relation '{0}' from n:m to 1:1. Data is not unique", destAssocName);
+                    return;
+                }
+                db.CopyFKs(srcTblName, srcColName, destTblName, destColName, srcFKColName);
+            }
+            if (rel.HasStorage(RelationEndRole.B))
+            {
+                var destTblName = rel.B.Type.TableName;
+                var destColName = Construct.ForeignKeyColumnName(rel.A);
+                var srcColName = rel.GetRelationFkColumnName(RelationEndRole.A);
+                var srcFKColName = rel.GetRelationFkColumnName(RelationEndRole.B);
+
+                if (!db.CheckColumnContainsUniqueValues(srcTblName, srcColName))
+                {
+                    Log.ErrorFormat("Unable to change Relation '{0}' from n:m to 1:1. Data is not unique", destAssocName);
+                    return;
+                }
+                db.CopyFKs(srcTblName, srcColName, destTblName, destColName, srcFKColName);
+            }
+
+            db.DropTable(srcTblName);
         }
         #endregion
 
@@ -952,7 +994,45 @@ namespace Kistl.Server.SchemaManagement
         }
         public void DoChangeRelationType_from_n_m_to_1_n(Relation rel)
         {
+            string destAssocName = rel.GetAssociationName();
 
+            RelationEnd relEnd, otherEnd;
+
+            switch (rel.Storage)
+            {
+                case StorageType.MergeIntoA:
+                    relEnd = rel.A;
+                    otherEnd = rel.B;
+                    break;
+                case StorageType.MergeIntoB:
+                    otherEnd = rel.A;
+                    relEnd = rel.B;
+                    break;
+                default:
+                    Log.ErrorFormat("Relation '{0}' has unsupported Storage set: {1}, skipped", destAssocName, rel.Storage);
+                    return;
+            }
+
+            var saved = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
+
+            string srcTbl = saved.GetRelationTableName();
+            string srcCol = saved.GetRelationFkColumnName(otherEnd.GetRole());
+            string srcFKCol = saved.GetRelationFkColumnName(relEnd.GetRole());
+
+            if (!db.CheckColumnContainsUniqueValues(srcTbl, srcCol))
+            {
+                Log.ErrorFormat("Unable to change Relation '{0}' from n:m to 1:n. Data is not unique", destAssocName);
+                return;
+            }
+
+            string destTblName = relEnd.Type.TableName;
+            string destColName = Construct.ForeignKeyColumnName(otherEnd);
+            bool destIsIndexed = rel.NeedsPositionStorage(relEnd.GetRole());
+            string destIndexName = Construct.ListPositionColumnName(otherEnd);
+
+            DoNew_1_N_Relation(rel);
+            db.CopyFKs(srcTbl, srcCol, destTblName, destColName, srcFKCol);
+            DoDelete_N_M_Relation(saved);
         }
         #endregion
 

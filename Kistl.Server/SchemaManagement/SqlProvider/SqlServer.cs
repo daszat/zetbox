@@ -503,6 +503,13 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
             ExecuteNonQuery("INSERT INTO [{0}] ([{1}], [{2}]) SELECT [ID], [{3}] FROM [{4}] WHERE [{3}] IS NOT NULL",
                 tblName, colName, fkColName, srcColName, srcTblName);
         }
+        
+        public void CopyFKs(string srcTblName, string srcColName, string destTblName, string destColName, string srcFKColName)
+        {
+            Log.DebugFormat("Copy FK data from [{0}]([{1}]) to [{2}]([{3}])", srcTblName, srcColName, destTblName, destColName);
+            ExecuteNonQuery("UPDATE dest SET dest.[{0}] = src.[{1}] FROM [{2}] dest  INNER JOIN [{3}] src ON src.[{4}] = dest.[ID]",
+                destColName, srcColName, destTblName, srcTblName, srcFKColName);
+        }
 
         public void CreateIndex(string tblName, string idxName, bool unique, bool clustered, params string[] columns)
         {
