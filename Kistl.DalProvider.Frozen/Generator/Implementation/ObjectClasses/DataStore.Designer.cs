@@ -4,6 +4,7 @@ using System.Linq;
 using Kistl.API;
 using Kistl.App.Base;
 using Kistl.App.Extensions;
+using Kistl.Server.Generators.Extensions;
 
 
 namespace Kistl.DalProvider.Frozen.Generator.Implementation.ObjectClasses
@@ -25,7 +26,7 @@ namespace Kistl.DalProvider.Frozen.Generator.Implementation.ObjectClasses
         
         public override void Generate()
         {
-#line 15 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Implementation\ObjectClasses\DataStore.cst"
+#line 16 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Implementation\ObjectClasses\DataStore.cst"
 // list of all instances of exactly this class
 	//var instanceList = ctx.GetQuery(t)
 	//    .ToList() // remove this, if possible
@@ -55,7 +56,7 @@ namespace Kistl.DalProvider.Frozen.Generator.Implementation.ObjectClasses
 		instanceList = new List<IDataObject>();
 	}
 
-#line 44 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Implementation\ObjectClasses\DataStore.cst"
+#line 45 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Implementation\ObjectClasses\DataStore.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("		private readonly static log4net.ILog Log = log4net.LogManager.GetLogger(\"Kistl.Provider.Frozen\");\r\n");
 this.WriteObjects("\r\n");
@@ -64,7 +65,7 @@ this.WriteObjects("		internal ",  cls.BaseObjectClass == null ? String.Empty : "
 this.WriteObjects("		{\r\n");
 this.WriteObjects("			using (Log.DebugTraceMethodCall())\r\n");
 this.WriteObjects("			{\r\n");
-#line 54 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Implementation\ObjectClasses\DataStore.cst"
+#line 55 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Implementation\ObjectClasses\DataStore.cst"
 string classname = Template.GetClassName(cls);
 	foreach(var obj in instanceList) 
 	{
@@ -81,53 +82,85 @@ string classname = Template.GetClassName(cls);
 		foreach(var parent in parents)
 		{
 
-#line 70 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Implementation\ObjectClasses\DataStore.cst"
+#line 71 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Implementation\ObjectClasses\DataStore.cst"
 this.WriteObjects("			",  parent.Module.Namespace , ".",  Template.GetClassName(parent) , ".DataStore[",  obj.ID , "] = \r\n");
-#line 72 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Implementation\ObjectClasses\DataStore.cst"
+#line 73 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Implementation\ObjectClasses\DataStore.cst"
 }
 
-#line 74 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Implementation\ObjectClasses\DataStore.cst"
+#line 75 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Implementation\ObjectClasses\DataStore.cst"
 this.WriteObjects("			DataStore[",  obj.ID , "] = new ",  classname , "(",  obj.ID , ");\r\n");
 this.WriteObjects("\r\n");
-#line 77 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Implementation\ObjectClasses\DataStore.cst"
+#line 78 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Implementation\ObjectClasses\DataStore.cst"
 }
 
-#line 79 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Implementation\ObjectClasses\DataStore.cst"
+#line 80 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Implementation\ObjectClasses\DataStore.cst"
 this.WriteObjects("			}\r\n");
+this.WriteObjects("		}\r\n");
+this.WriteObjects("\r\n");
+this.WriteObjects("		private static void __FillInstance(\r\n");
+this.WriteObjects("			",  classname , " item\r\n");
+#line 86 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Implementation\ObjectClasses\DataStore.cst"
+var properties = cls.GetObjectHierarchie()
+			.SelectMany(baseCls => baseCls
+				.Properties
+				.Cast<Property>()
+				.Where(p => !(p is CalculatedObjectReferenceProperty))
+				.OrderBy(p => p.Name))
+			.ToList();
+			
+		foreach(var prop in properties)
+		{
+
+#line 97 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Implementation\ObjectClasses\DataStore.cst"
+this.WriteObjects("			, ",  prop.InterfaceTypeAsCSharp() , " ",  prop.Name , "\r\n");
+#line 99 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Implementation\ObjectClasses\DataStore.cst"
+}
+
+#line 101 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Implementation\ObjectClasses\DataStore.cst"
+this.WriteObjects("		)\r\n");
+this.WriteObjects("		{\r\n");
+#line 104 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Implementation\ObjectClasses\DataStore.cst"
+foreach(var prop in properties)
+		{
+
+#line 107 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Implementation\ObjectClasses\DataStore.cst"
+this.WriteObjects("			item.",  prop.Name , " = ",  prop.Name , ";\r\n");
+#line 109 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Implementation\ObjectClasses\DataStore.cst"
+}
+
+#line 111 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Implementation\ObjectClasses\DataStore.cst"
 this.WriteObjects("		}\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("		public ",  cls.BaseObjectClass == null ? String.Empty : "new " , "static void FillDataStore() {\r\n");
 this.WriteObjects("			using (Log.DebugTraceMethodCall())\r\n");
 this.WriteObjects("			{\r\n");
-#line 86 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Implementation\ObjectClasses\DataStore.cst"
+#line 117 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Implementation\ObjectClasses\DataStore.cst"
 foreach(var obj in instanceList) 
 	{
 
-#line 89 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Implementation\ObjectClasses\DataStore.cst"
+#line 120 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Implementation\ObjectClasses\DataStore.cst"
 this.WriteObjects("			{\r\n");
 this.WriteObjects("				var item = DataStore[",  obj.ID , "];\r\n");
-#line 92 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Implementation\ObjectClasses\DataStore.cst"
-foreach(var baseCls in cls.GetObjectHierarchie()) {
-			foreach(var prop in baseCls.Properties.Cast<Property>().OrderBy(p => p.Name))
-			{
-				string value = GetPropertyValueAsCSharp(obj, prop);
-				if (!String.IsNullOrEmpty(value) && !value.Equals("null"))
-				{
+this.WriteObjects("				",  classname , ".__FillInstance(\r\n");
+this.WriteObjects("					item\r\n");
+#line 125 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Implementation\ObjectClasses\DataStore.cst"
+foreach(var prop in properties)
+		{
+			string value = GetPropertyValueAsCSharp(obj, prop);
 
-#line 99 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Implementation\ObjectClasses\DataStore.cst"
-this.WriteObjects("				item.",  prop.Name , " = ",  value , ";\r\n");
-#line 101 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Implementation\ObjectClasses\DataStore.cst"
+#line 129 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Implementation\ObjectClasses\DataStore.cst"
+this.WriteObjects("					, ",  String.IsNullOrEmpty(value) ? "null" : value , "\r\n");
+#line 131 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Implementation\ObjectClasses\DataStore.cst"
 }
-			}
-		}
 
-#line 105 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Implementation\ObjectClasses\DataStore.cst"
+#line 133 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Implementation\ObjectClasses\DataStore.cst"
+this.WriteObjects("				);\r\n");
 this.WriteObjects("				item.Seal();\r\n");
 this.WriteObjects("			}\r\n");
-#line 108 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Implementation\ObjectClasses\DataStore.cst"
+#line 137 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Implementation\ObjectClasses\DataStore.cst"
 }
 
-#line 110 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Implementation\ObjectClasses\DataStore.cst"
+#line 139 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Implementation\ObjectClasses\DataStore.cst"
 this.WriteObjects("			}\r\n");
 this.WriteObjects("		}");
 

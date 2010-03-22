@@ -8,6 +8,7 @@
 <%@ Import Namespace="Kistl.API" %>
 <%@ Import Namespace="Kistl.App.Base" %>
 <%@ Import Namespace="Kistl.App.Extensions" %>
+<%@ Import Namespace="Kistl.Server.Generators.Extensions" %>
 <%@ Parameter Name="ctx" Type="Kistl.API.IKistlContext" %>
 <%@ Parameter Name="cls" Type="ObjectClass" %>
 <%
@@ -79,6 +80,36 @@
 			}
 		}
 
+		private static void __FillInstance(
+			<%= classname %> item
+<%
+		var properties = cls.GetObjectHierarchie()
+			.SelectMany(baseCls => baseCls
+				.Properties
+				.Cast<Property>()
+				.Where(p => !(p is CalculatedObjectReferenceProperty))
+				.OrderBy(p => p.Name))
+			.ToList();
+			
+		foreach(var prop in properties)
+		{
+%>
+			, <%= prop.InterfaceTypeAsCSharp() %> <%= prop.Name %>
+<%
+		}
+%>
+		)
+		{
+<%
+		foreach(var prop in properties)
+		{
+%>
+			item.<%= prop.Name %> = <%= prop.Name %>;
+<%
+		}
+%>
+		}
+
 		public <%= cls.BaseObjectClass == null ? String.Empty : "new " %>static void FillDataStore() {
 			using (Log.DebugTraceMethodCall())
 			{
@@ -88,20 +119,18 @@
 %>
 			{
 				var item = DataStore[<%= obj.ID %>];
+				<%= classname %>.__FillInstance(
+					item
 <%
-		foreach(var baseCls in cls.GetObjectHierarchie()) {
-			foreach(var prop in baseCls.Properties.Cast<Property>().OrderBy(p => p.Name))
-			{
-				string value = GetPropertyValueAsCSharp(obj, prop);
-				if (!String.IsNullOrEmpty(value) && !value.Equals("null"))
-				{
+		foreach(var prop in properties)
+		{
+			string value = GetPropertyValueAsCSharp(obj, prop);
 %>
-				item.<%= prop.Name %> = <%= value %>;
+					, <%= String.IsNullOrEmpty(value) ? "null" : value %>
 <%
-				}
-			}
 		}
 %>
+				);
 				item.Seal();
 			}
 <%

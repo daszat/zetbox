@@ -96,6 +96,39 @@ namespace Kistl.Server.Generators.Extensions
             }
         }
 
+        public static string InterfaceTypeAsCSharp(this Property prop)
+        {
+            if (prop == null) { throw new ArgumentNullException("prop"); }
+
+            bool isList = false;
+            bool isValueType = false;
+
+            if (prop is ValueTypeProperty)
+            {
+                isList = ((ValueTypeProperty)prop).IsList;
+                isValueType = true;
+            }
+            else if (prop is CompoundObjectProperty)
+            {
+                isList = ((CompoundObjectProperty)prop).IsList;
+            }
+            else if (prop is ObjectReferenceProperty)
+            {
+                isList = ((ObjectReferenceProperty)prop).IsList();
+            }
+
+            string result = isList
+                ? prop.GetCollectionTypeString()
+                : prop.GetPropertyTypeString();
+
+            if (isValueType && prop.IsNullable() && !(prop is StringProperty))
+            {
+                result += "?";
+            }
+
+            return result;
+        }
+
         public static string ReturnedTypeAsCSharp(this BaseParameter param)
         {
             if (param == null) { throw new ArgumentNullException("param"); }
@@ -103,15 +136,15 @@ namespace Kistl.Server.Generators.Extensions
             string result;
             if (param is BoolParameter)
             {
-                result = "bool"; 
+                result = "bool";
             }
             else if (param is IntParameter)
             {
-                result = "int"; 
+                result = "int";
             }
             else if (param is DoubleParameter)
             {
-                result = "double"; 
+                result = "double";
             }
             else if (param is DateTimeParameter)
             {
