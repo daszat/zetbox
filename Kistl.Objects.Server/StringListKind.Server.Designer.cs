@@ -189,12 +189,14 @@ namespace Kistl.App.GUI
 
 
 		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			new CustomPropertyDescriptor<StringListKind, Kistl.App.GUI.ControlKindClass>(
+			// else
+			new CustomPropertyDescriptor<StringListKind__Implementation__, Kistl.App.GUI.ControlKindClass>(
 				new Guid("14270073-da33-4c5e-b6ef-c4e71e3ccee0"),
 				"ItemKind",
 				null,
 				obj => obj.ItemKind,
 				(obj, val) => obj.ItemKind = val),
+			// rel: List has ItemKind (c05b892d-dccf-440b-89d1-9943fa8eae52)
 		};
 		
 		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)

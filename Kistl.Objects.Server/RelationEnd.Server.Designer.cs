@@ -1061,84 +1061,100 @@ namespace Kistl.App.Base
 
 
 		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			new CustomPropertyDescriptor<RelationEnd, Kistl.App.Base.Relation>(
+			// else
+			new CustomPropertyDescriptor<RelationEnd__Implementation__, Kistl.App.Base.Relation>(
 				new Guid("dd6057d0-78bb-4242-9670-ec6c09bd4d92"),
 				"AParent",
 				null,
 				obj => obj.AParent,
 				(obj, val) => obj.AParent = val),
-			new CustomPropertyDescriptor<RelationEnd, Kistl.App.Base.Relation>(
+			// else
+			new CustomPropertyDescriptor<RelationEnd__Implementation__, Kistl.App.Base.Relation>(
 				new Guid("521ea0ba-ae3b-4a60-ae28-f366b3ee78f1"),
 				"BParent",
 				null,
 				obj => obj.BParent,
 				(obj, val) => obj.BParent = val),
-			new CustomPropertyDescriptor<RelationEnd, Kistl.App.Base.Identity>(
+			// else
+			new CustomPropertyDescriptor<RelationEnd__Implementation__, Kistl.App.Base.Identity>(
 				new Guid("c399fef1-ad60-47a1-9639-76cec4ee8ca2"),
 				"ChangedBy",
 				null,
 				obj => obj.ChangedBy,
 				(obj, val) => obj.ChangedBy = val),
-			new CustomPropertyDescriptor<RelationEnd, DateTime?>(
+			// else
+			new CustomPropertyDescriptor<RelationEnd__Implementation__, DateTime?>(
 				new Guid("7bd41ad1-05c8-4822-a620-0883eb62516d"),
 				"ChangedOn",
 				null,
 				obj => obj.ChangedOn,
 				(obj, val) => obj.ChangedOn = val),
-			new CustomPropertyDescriptor<RelationEnd, Kistl.App.Base.Identity>(
+			// else
+			new CustomPropertyDescriptor<RelationEnd__Implementation__, Kistl.App.Base.Identity>(
 				new Guid("21b529c8-f295-4950-be49-a17c88ce6d8d"),
 				"CreatedBy",
 				null,
 				obj => obj.CreatedBy,
 				(obj, val) => obj.CreatedBy = val),
-			new CustomPropertyDescriptor<RelationEnd, DateTime?>(
+			// else
+			new CustomPropertyDescriptor<RelationEnd__Implementation__, DateTime?>(
 				new Guid("ea92fd80-01b6-49b9-8426-77257b2bd37b"),
 				"CreatedOn",
 				null,
 				obj => obj.CreatedOn,
 				(obj, val) => obj.CreatedOn = val),
-			new CustomPropertyDescriptor<RelationEnd, Guid>(
+			// else
+			new CustomPropertyDescriptor<RelationEnd__Implementation__, Guid>(
 				new Guid("4bbe4a44-dc99-4455-9c03-ae78903fcee2"),
 				"ExportGuid",
 				null,
 				obj => obj.ExportGuid,
 				(obj, val) => obj.ExportGuid = val),
-			new CustomPropertyDescriptor<RelationEnd, bool>(
+			// else
+			new CustomPropertyDescriptor<RelationEnd__Implementation__, bool>(
 				new Guid("edd8d122-7b58-4bbb-bf00-33caa8b69cc2"),
 				"HasPersistentOrder",
 				null,
 				obj => obj.HasPersistentOrder,
 				(obj, val) => obj.HasPersistentOrder = val),
-			new CustomPropertyDescriptor<RelationEnd, Kistl.App.Base.Multiplicity>(
+			// else
+			new CustomPropertyDescriptor<RelationEnd__Implementation__, Kistl.App.Base.Multiplicity>(
 				new Guid("cdbcada8-4deb-4c4f-a7a4-24716b0a0ccd"),
 				"Multiplicity",
 				null,
 				obj => obj.Multiplicity,
 				(obj, val) => obj.Multiplicity = val),
-			new CustomPropertyDescriptor<RelationEnd, Kistl.App.Base.ObjectReferenceProperty>(
+			// else
+			new CustomPropertyDescriptor<RelationEnd__Implementation__, Kistl.App.Base.ObjectReferenceProperty>(
 				new Guid("6b25eaab-f746-47ec-a91e-f92ec6fccada"),
 				"Navigator",
 				null,
 				obj => obj.Navigator,
 				(obj, val) => obj.Navigator = val),
-			new CustomPropertyDescriptor<RelationEnd, Kistl.App.Base.Relation>(
+			// property is CalculatedObjectReferenceProperty
+			new CustomPropertyDescriptor<RelationEnd__Implementation__, Kistl.App.Base.Relation>(
 				new Guid("3273a95a-1156-4ce2-b0d6-8957b4637320"),
 				"Parent",
 				null,
 				obj => obj.Parent,
 				null), // CalculatedObjectReferenceProperty is a read-only property
-			new CustomPropertyDescriptor<RelationEnd, string>(
+			// else
+			new CustomPropertyDescriptor<RelationEnd__Implementation__, string>(
 				new Guid("b32efbfc-5212-44e7-b25f-f4724b63cbee"),
 				"RoleName",
 				null,
 				obj => obj.RoleName,
 				(obj, val) => obj.RoleName = val),
-			new CustomPropertyDescriptor<RelationEnd, Kistl.App.Base.ObjectClass>(
+			// else
+			new CustomPropertyDescriptor<RelationEnd__Implementation__, Kistl.App.Base.ObjectClass>(
 				new Guid("d4bfc4e0-6b57-49f0-91fd-b0de428484e0"),
 				"Type",
 				null,
 				obj => obj.Type,
 				(obj, val) => obj.Type = val),
+			// rel: RelationEnd was ChangedBy (7be8f809-6b85-40e1-bfce-7de8909a03d9)
+			// rel: RelationEnd has Type (1d8d8e0b-cb0d-4746-a4c5-85c8f399e00a)
+			// rel: RelationEnd was CreatedBy (f474544e-8537-4dce-a8b4-9ec0b5f4150e)
 		};
 		
 		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)

@@ -239,18 +239,21 @@ namespace Kistl.App.GUI
 
 
 		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			new CustomPropertyDescriptor<ControlKind, Guid>(
+			// else
+			new CustomPropertyDescriptor<ControlKind__Implementation__, Guid>(
 				new Guid("758d8eba-b458-4cd4-98a8-e08713912654"),
 				"ExportGuid",
 				null,
 				obj => obj.ExportGuid,
 				(obj, val) => obj.ExportGuid = val),
-			new CustomPropertyDescriptor<ControlKind, double?>(
+			// else
+			new CustomPropertyDescriptor<ControlKind__Implementation__, double?>(
 				new Guid("2a0d22cd-5538-4a2c-bfb9-287652637708"),
 				"RequestedWidth",
 				null,
 				obj => obj.RequestedWidth,
 				(obj, val) => obj.RequestedWidth = val),
+			// rel: PresentableModelDescriptor displayedInGridBy DefaultGridCellKind (0a03215f-1c1a-4a44-892d-86642eefe9f1)
 		};
 		
 		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)

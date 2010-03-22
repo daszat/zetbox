@@ -199,29 +199,29 @@ namespace Kistl.App.Test
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
            // Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.NotifyingValueProperty
-        public virtual int? Fragebogen_pos
+        public virtual int? gute_Antworten_pos
         {
             get
             {
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
-                var __result = _Fragebogen_pos;
+                var __result = _gute_Antworten_pos;
                 return __result;
             }
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
-                if (_Fragebogen_pos != value)
+                if (_gute_Antworten_pos != value)
                 {
-                    var __oldValue = _Fragebogen_pos;
+                    var __oldValue = _gute_Antworten_pos;
                     var __newValue = value;
-                    NotifyPropertyChanging("Fragebogen_pos", __oldValue, __newValue);
-                    _Fragebogen_pos = __newValue;
-                    NotifyPropertyChanged("Fragebogen_pos", __oldValue, __newValue);
+                    NotifyPropertyChanging("gute_Antworten_pos", __oldValue, __newValue);
+                    _gute_Antworten_pos = __newValue;
+                    NotifyPropertyChanged("gute_Antworten_pos", __oldValue, __newValue);
                 }
             }
         }
-        private int? _Fragebogen_pos;
+        private int? _gute_Antworten_pos;
         
 		public static event PropertyGetterHandler<Kistl.App.Test.Antwort, Kistl.App.Test.Fragebogen> OnFragebogen_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Test.Antwort, Kistl.App.Test.Fragebogen> OnFragebogen_PreSetter;
@@ -346,7 +346,7 @@ namespace Kistl.App.Test
 			me.Frage = other.Frage;
 			me.FragenNummer = other.FragenNummer;
 			me.GegebeneAntwort = other.GegebeneAntwort;
-			this.Fragebogen_pos = otherImpl.Fragebogen_pos;
+			this.gute_Antworten_pos = otherImpl.gute_Antworten_pos;
 			this._fk_Fragebogen = otherImpl._fk_Fragebogen;
 		}
 
@@ -401,30 +401,42 @@ namespace Kistl.App.Test
 
 
 		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			new CustomPropertyDescriptor<Antwort, string>(
+			// else
+			new CustomPropertyDescriptor<Antwort__Implementation__, string>(
 				new Guid("311cb474-be7d-4e6b-b803-379e6523720c"),
 				"Frage",
 				null,
 				obj => obj.Frage,
 				(obj, val) => obj.Frage = val),
-			new CustomPropertyDescriptor<Antwort, Kistl.App.Test.Fragebogen>(
+			// else
+			new CustomPropertyDescriptor<Antwort__Implementation__, Kistl.App.Test.Fragebogen>(
 				new Guid("ae20c23b-0cfa-422a-9f8d-797e9f70bf82"),
 				"Fragebogen",
 				null,
 				obj => obj.Fragebogen,
 				(obj, val) => obj.Fragebogen = val),
-			new CustomPropertyDescriptor<Antwort, int>(
+			// else
+			new CustomPropertyDescriptor<Antwort__Implementation__, int>(
 				new Guid("87a005fa-6249-4aab-b90e-b50c97487c09"),
 				"FragenNummer",
 				null,
 				obj => obj.FragenNummer,
 				(obj, val) => obj.FragenNummer = val),
-			new CustomPropertyDescriptor<Antwort, int?>(
+			// else
+			new CustomPropertyDescriptor<Antwort__Implementation__, int?>(
 				new Guid("bbddff1f-943e-48cb-b097-377040280f0a"),
 				"GegebeneAntwort",
 				null,
 				obj => obj.GegebeneAntwort,
 				(obj, val) => obj.GegebeneAntwort = val),
+			// rel: Ein_Fragebogen enthaelt gute_Antworten (0f425937-0d1e-4887-ae65-a162b45fc93e)
+			// rel.B.Type == cls && rel.B.HasPersistentOrder
+			new CustomPropertyDescriptor<Antwort__Implementation__, int?>(
+				null,
+				"gute_Antworten_pos",
+				null,
+				obj => obj.gute_Antworten_pos,
+				(obj, val) => obj.gute_Antworten_pos = val),
 		};
 		
 		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
@@ -456,7 +468,7 @@ namespace Kistl.App.Test
             base.ToStream(binStream, auxObjects);
             BinarySerializer.ToStream(this._Frage, binStream);
             BinarySerializer.ToStream(Fragebogen != null ? Fragebogen.ID : (int?)null, binStream);
-            BinarySerializer.ToStream(this._Fragebogen_pos, binStream);
+            BinarySerializer.ToStream(this._gute_Antworten_pos, binStream);
             BinarySerializer.ToStream(this._FragenNummer, binStream);
             BinarySerializer.ToStream(this._GegebeneAntwort, binStream);
         }
@@ -467,7 +479,7 @@ namespace Kistl.App.Test
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._Frage, binStream);
             BinarySerializer.FromStream(out this._fk_Fragebogen, binStream);
-            BinarySerializer.FromStream(out this._Fragebogen_pos, binStream);
+            BinarySerializer.FromStream(out this._gute_Antworten_pos, binStream);
             BinarySerializer.FromStream(out this._FragenNummer, binStream);
             BinarySerializer.FromStream(out this._GegebeneAntwort, binStream);
         }
@@ -478,7 +490,7 @@ namespace Kistl.App.Test
             base.ToStream(xml);
             XmlStreamer.ToStream(this._Frage, xml, "Frage", "Kistl.App.Test");
             XmlStreamer.ToStream(Fragebogen != null ? Fragebogen.ID : (int?)null, xml, "Fragebogen", "Kistl.App.Test");
-            XmlStreamer.ToStream(this._Fragebogen_pos, xml, "Fragebogen_pos", "Kistl.App.Test");
+            XmlStreamer.ToStream(this._gute_Antworten_pos, xml, "gute_Antworten_pos", "Kistl.App.Test");
             XmlStreamer.ToStream(this._FragenNummer, xml, "FragenNummer", "Kistl.App.Test");
             XmlStreamer.ToStream(this._GegebeneAntwort, xml, "GegebeneAntwort", "Kistl.App.Test");
         }
@@ -489,7 +501,7 @@ namespace Kistl.App.Test
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._Frage, xml, "Frage", "Kistl.App.Test");
             XmlStreamer.FromStream(ref this._fk_Fragebogen, xml, "Fragebogen", "Kistl.App.Test");
-            XmlStreamer.FromStream(ref this._Fragebogen_pos, xml, "Fragebogen_pos", "Kistl.App.Test");
+            XmlStreamer.FromStream(ref this._gute_Antworten_pos, xml, "gute_Antworten_pos", "Kistl.App.Test");
             XmlStreamer.FromStream(ref this._FragenNummer, xml, "FragenNummer", "Kistl.App.Test");
             XmlStreamer.FromStream(ref this._GegebeneAntwort, xml, "GegebeneAntwort", "Kistl.App.Test");
         }

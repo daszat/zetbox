@@ -40,10 +40,10 @@ namespace Kistl.IntegrationTests.ObjectListModels
                 Console.WriteLine("========================");
                 foreach (var p in objectClass.Properties)
                 {
-                    Console.WriteLine("ID=[{0}], name=[{1}], pos=[{2}]", p.ID, p.Name, p.GetPrivateFieldValue<int>("_ObjectClass_pos"));
+                    Console.WriteLine("ID=[{0}], name=[{1}], pos=[{2}]", p.ID, p.Name, p.GetPrivateFieldValue<int>("_Properties_pos"));
                 }
 
-                Assert.That(objectClass.Properties.Select(p => p.GetPrivateFieldValue<int>("_ObjectClass_pos")), Is.Ordered);
+                Assert.That(objectClass.Properties.Select(p => p.GetPrivateFieldValue<int>("_Properties_pos")), Is.Ordered);
                 var factory = new WpfModelFactory(GuiApplicationContext.Current);
                 var classModel = (DataObjectModel)factory.CreateDefaultModel(ctx, objectClass);
                 var listModel = (ObjectListModel)classModel.PropertyModelsByName["Properties"];
@@ -60,7 +60,7 @@ namespace Kistl.IntegrationTests.ObjectListModels
 
                 Assert.That(listModel.Value, Is.EquivalentTo(mdlList));
                 Assert.That(objectClass.Properties, Is.EquivalentTo(propList));
-                Assert.That(objectClass.Properties.Select(p => p.GetPrivateFieldValue<int>("_ObjectClass_pos")), Is.Ordered);
+                Assert.That(objectClass.Properties.Select(p => p.GetPrivateFieldValue<int>("_Properties_pos")).ToArray(), Is.Ordered);
 
                 // at least one of the properties has to change
                 Assert.That(new[] { propList[2].ObjectState, propList[3].ObjectState }.Count(dos => dos == DataObjectState.Modified), Is.GreaterThanOrEqualTo(1));
@@ -70,7 +70,7 @@ namespace Kistl.IntegrationTests.ObjectListModels
                 Console.WriteLine("========================");
                 foreach (var p in objectClass.Properties)
                 {
-                    Console.WriteLine("ID=[{0}], name=[{1}], pos=[{2}]", p.ID, p.Name, p.GetPrivateFieldValue<int>("_ObjectClass_pos"));
+                    Console.WriteLine("ID=[{0}], name=[{1}], pos=[{2}]", p.ID, p.Name, p.GetPrivateFieldValue<int>("_Properties_pos"));
                 }
 
                 // at least one object has changed
@@ -79,7 +79,7 @@ namespace Kistl.IntegrationTests.ObjectListModels
                 Console.WriteLine("========================");
                 foreach (var p in objectClass.Properties)
                 {
-                    Console.WriteLine("ID=[{0}], name=[{1}], pos=[{2}]", p.ID, p.Name, p.GetPrivateFieldValue<int>("_ObjectClass_pos"));
+                    Console.WriteLine("ID=[{0}], name=[{1}], pos=[{2}]", p.ID, p.Name, p.GetPrivateFieldValue<int>("_Properties_pos"));
                 }
 
                 CheckPropertyList(propList);
@@ -93,11 +93,11 @@ namespace Kistl.IntegrationTests.ObjectListModels
                 var checkObjectClass = checkCtx.GetQuery<ObjectClass>().Single(oc => oc.Name == "ObjectClass");
                 // compare by Name, since we got new instances from the checkCtx
                 Assert.That(checkObjectClass.Properties.Select(p => p.Name).ToArray(), Is.EquivalentTo(propList.Select(p => p.Name).ToArray()));
-                Assert.That(checkObjectClass.Properties.Select(p => p.GetPrivateFieldValue<int>("_ObjectClass_pos")).ToArray(), Is.Ordered);
+                Assert.That(checkObjectClass.Properties.Select(p => p.GetPrivateFieldValue<int>("_Properties_pos")).ToArray(), Is.Ordered);
                 Console.WriteLine("========================");
                 foreach (var p in checkObjectClass.Properties)
                 {
-                    Console.WriteLine("ID=[{0}], name=[{1}], pos=[{2}]", p.ID, p.Name, p.GetPrivateFieldValue<int>("_ObjectClass_pos"));
+                    Console.WriteLine("ID=[{0}], name=[{1}], pos=[{2}]", p.ID, p.Name, p.GetPrivateFieldValue<int>("_Properties_pos"));
                 }
             }
         }

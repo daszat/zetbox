@@ -79,7 +79,7 @@ namespace Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses
 
         protected override string MungeClassName(string name)
         {
-            return base.MungeClassName(name) + "__Implementation__";
+            return base.MungeClassName(name) + Kistl.API.Helper.ImplementationSuffix;
         }
 
         protected override string GetBaseClass()
@@ -153,6 +153,7 @@ namespace Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses
                     otherEnd.Type.GetDataTypeString(),
                     otherEnd.Type.GetDataTypeString() + Kistl.API.Helper.ImplementationSuffix,
                     rel.NeedsPositionStorage(relEnd.GetRole()),
+                    Construct.ListPositionPropertyName(relEnd),
                     otherEnd.Type.ImplementsIExportable(),
                     prop.Module.Namespace,
                     relEnd.Navigator != null && relEnd.Navigator.EagerLoading,

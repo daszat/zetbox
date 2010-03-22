@@ -158,10 +158,10 @@ namespace Kistl.IntegrationTests
             {
                 //Assert.That(expected.OneSide, Is.SameAs(obj));
                 Assert.That(expected.GetPrivateFieldValue<int?>("_fk_ObjectClass"), Is.EqualTo(_parent.ID));
-                Assert.That(expected.GetPrivateFieldValue<int?>("_ObjectClass_pos"), Is.Not.Null);
+                Assert.That(expected.GetPrivateFieldValue<int?>("_Properties_pos"), Is.Not.Null);
             }
 
-            Assert.That(collection.Select(p => p.GetPrivateFieldValue<int?>("_ObjectClass_pos")).ToArray(), Is.Ordered);
+            Assert.That(collection.Select(p => p.GetPrivateFieldValue<int?>("_Properties_pos")).ToArray(), Is.Ordered);
 
             ////////////////////// test roundtripping //////////////////////////////////
 
@@ -330,10 +330,10 @@ namespace Kistl.IntegrationTests
             {
                 //Assert.That(expected.OneSide, Is.SameAs(obj));
                 Assert.That(expected.GetPrivateFieldValue<int?>("_fk_ObjectClass"), Is.EqualTo(_parent.ID));
-                Assert.That(expected.GetPrivateFieldValue<int?>("_ObjectClass_pos"), Is.Not.Null);
+                Assert.That(expected.GetPrivateFieldValue<int?>("_Properties_pos"), Is.Not.Null);
             }
 
-            Assert.That(collection.Select(p => p.GetPrivateFieldValue<int?>("_ObjectClass_pos")).ToArray(), Is.Ordered);
+            Assert.That(collection.Select(p => p.GetPrivateFieldValue<int?>("_Properties_pos")).ToArray(), Is.Ordered);
 
             ////////////////////// test roundtripping //////////////////////////////////
 

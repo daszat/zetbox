@@ -685,48 +685,58 @@ namespace at.dasz.DocumentManagement
 
 
 		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			new CustomPropertyDescriptor<File, Kistl.App.Base.Blob>(
+			// else
+			new CustomPropertyDescriptor<File__Implementation__, Kistl.App.Base.Blob>(
 				new Guid("ef5addda-340f-4a87-83c9-3ee419519343"),
 				"Blob",
 				null,
 				obj => obj.Blob,
 				(obj, val) => obj.Blob = val),
-			new CustomPropertyDescriptor<File, Kistl.App.Base.Identity>(
+			// else
+			new CustomPropertyDescriptor<File__Implementation__, Kistl.App.Base.Identity>(
 				new Guid("c22516f3-b897-4827-a025-27d1515aadcd"),
 				"ChangedBy",
 				null,
 				obj => obj.ChangedBy,
 				(obj, val) => obj.ChangedBy = val),
-			new CustomPropertyDescriptor<File, DateTime?>(
+			// else
+			new CustomPropertyDescriptor<File__Implementation__, DateTime?>(
 				new Guid("c144678d-632d-4a83-8041-280d674f4453"),
 				"ChangedOn",
 				null,
 				obj => obj.ChangedOn,
 				(obj, val) => obj.ChangedOn = val),
-			new CustomPropertyDescriptor<File, Kistl.App.Base.Identity>(
+			// else
+			new CustomPropertyDescriptor<File__Implementation__, Kistl.App.Base.Identity>(
 				new Guid("dc8da15a-a432-43fd-b93f-9b3530ce3144"),
 				"CreatedBy",
 				null,
 				obj => obj.CreatedBy,
 				(obj, val) => obj.CreatedBy = val),
-			new CustomPropertyDescriptor<File, DateTime?>(
+			// else
+			new CustomPropertyDescriptor<File__Implementation__, DateTime?>(
 				new Guid("e1892507-375b-4b52-ab20-16095dfc3514"),
 				"CreatedOn",
 				null,
 				obj => obj.CreatedOn,
 				(obj, val) => obj.CreatedOn = val),
-			new CustomPropertyDescriptor<File, Guid>(
+			// else
+			new CustomPropertyDescriptor<File__Implementation__, Guid>(
 				new Guid("91566b41-879d-4e72-b48b-9677cc156649"),
 				"ExportGuid",
 				null,
 				obj => obj.ExportGuid,
 				(obj, val) => obj.ExportGuid = val),
-			new CustomPropertyDescriptor<File, string>(
+			// else
+			new CustomPropertyDescriptor<File__Implementation__, string>(
 				new Guid("1c5f2bea-9915-4634-8ff9-5fd6f0871704"),
 				"Name",
 				null,
 				obj => obj.Name,
 				(obj, val) => obj.Name = val),
+			// rel: File has Blob (d93a4ed6-3b8b-44f7-b839-f528d1c06abd)
+			// rel: File was CreatedBy (1f543299-93ce-4441-a3d7-6d95e8546350)
+			// rel: File was ChangedBy (2ff68641-0051-4f2e-a8ee-5f50b9d507f3)
 		};
 		
 		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)

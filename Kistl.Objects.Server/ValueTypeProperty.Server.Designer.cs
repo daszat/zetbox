@@ -245,13 +245,15 @@ namespace Kistl.App.Base
 
 
 		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			new CustomPropertyDescriptor<ValueTypeProperty, bool>(
+			// else
+			new CustomPropertyDescriptor<ValueTypeProperty__Implementation__, bool>(
 				new Guid("b62c7fee-bb67-46a6-b481-81554e788aa0"),
 				"HasPersistentOrder",
 				null,
 				obj => obj.HasPersistentOrder,
 				(obj, val) => obj.HasPersistentOrder = val),
-			new CustomPropertyDescriptor<ValueTypeProperty, bool>(
+			// else
+			new CustomPropertyDescriptor<ValueTypeProperty__Implementation__, bool>(
 				new Guid("b2bd1528-c22f-4e12-b80f-f8234a2c0831"),
 				"IsList",
 				null,

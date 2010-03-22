@@ -329,30 +329,78 @@ namespace Kistl.App.Base
 
 
 		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			new CustomPropertyDescriptor<Identity, string>(
+			// else
+			new CustomPropertyDescriptor<Identity__Implementation__, string>(
 				new Guid("f93e6dbb-a704-460c-8183-ce8b1c2c47a2"),
 				"DisplayName",
 				null,
 				obj => obj.DisplayName,
 				(obj, val) => obj.DisplayName = val),
-			new CustomPropertyDescriptor<Identity, ICollection<Kistl.App.Base.Group>>(
+			// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
+			new CustomPropertyDescriptor<Identity__Implementation__, ICollection<Kistl.App.Base.Group>>(
 				new Guid("5f534204-f0d5-4d6f-8efa-7ff248580ba3"),
 				"Groups",
 				null,
 				obj => obj.Groups,
 				null), // lists are read-only properties
-			new CustomPropertyDescriptor<Identity, string>(
+			// else
+			new CustomPropertyDescriptor<Identity__Implementation__, string>(
 				new Guid("0d499610-99e3-42cc-b71b-49ed1a356355"),
 				"Password",
 				null,
 				obj => obj.Password,
 				(obj, val) => obj.Password = val),
-			new CustomPropertyDescriptor<Identity, string>(
+			// else
+			new CustomPropertyDescriptor<Identity__Implementation__, string>(
 				new Guid("a4ce1f5f-311b-4510-8817-4cca40f0bf0f"),
 				"UserName",
 				null,
 				obj => obj.UserName,
 				(obj, val) => obj.UserName = val),
+			// rel: Relation was CreatedBy (84a74390-2386-465d-b9a5-83f9b60a006f)
+			// rel: TypeRef was CreatedBy (18ca9bcf-98f8-42b1-8280-649401dec9de)
+			// rel: Property was ChangedBy (88098240-78f7-43eb-8c0d-746c8dfeba63)
+			// rel: Mitarbeiter was CreatedBy (3c7ef80e-07a3-4cb0-93be-9163650abc9a)
+			// rel: Projekt was CreatedBy (035db8da-a9f4-4529-9f50-29afd9e6f043)
+			// rel: RelationEnd was ChangedBy (7be8f809-6b85-40e1-bfce-7de8909a03d9)
+			// rel: Module was CreatedBy (5c8dd58e-cf1d-484f-af64-ff84ea4c3ee9)
+			// rel: Module was ChangedBy (9d108dc6-7caa-4597-95d4-82cf52da5638)
+			// rel: Property was CreatedBy (3c085354-3ef4-49b2-bb95-80d5295519f1)
+			// rel: DefaultPropertyValue was CreatedBy (2cec73a2-76e5-4b98-bf49-16e873d4bf67)
+			// rel: AccessControl was ChangedBy (89cba0a2-2515-45d8-90e5-fa96db0cc4b3)
+			// rel: EnumerationEntry was ChangedBy (20d04b3c-9357-440f-96e9-7056736d6ca3)
+			// rel: DefaultPropertyValue was ChangedBy (7f9ecbb7-c962-4f95-9d89-3cb86857886f)
+			// rel: AccessControl was CreatedBy (a6a5dcbf-0751-4911-9a0a-5fb1a59d2a45)
+			// rel: BaseParameter was ChangedBy (50657ede-910f-4552-a58b-b58832b7db8d)
+			// rel: DataType was CreatedBy (b7d1b442-4364-4979-b81c-66392fbe69fd)
+			// rel: File was CreatedBy (1f543299-93ce-4441-a3d7-6d95e8546350)
+			// rel: File was ChangedBy (2ff68641-0051-4f2e-a8ee-5f50b9d507f3)
+			// rel: Assembly was CreatedBy (56b41a57-e179-4cd3-8706-8c6871f0fc58)
+			// rel: Task was CreatedBy (d3b22699-c804-4443-bf4d-5d083cb0d313)
+			// rel: PropertyInvocation was CreatedBy (dc1d4aa8-0253-48da-9ed0-d3c9b8d2746e)
+			// rel: Task was ChangedBy (79cfa49b-e629-492f-a8d7-d4467d3a55c0)
+			// rel: Relation was ChangedBy (ba46e16e-5659-4e29-b770-1222d7b0acc1)
+			// rel: PropertyInvocation was ChangedBy (a3de8754-433e-4cd5-b463-7b2708b18e66)
+			// rel: Auftrag ChangedBy ChangedBy (f12a4d5c-dcb0-416c-b1fa-1f6fc163bdac)
+			// rel: BaseParameter was CreatedBy (e98d475b-1a3f-4ffb-ac5a-4ecbebb2e6ce)
+			// rel: Assembly was ChangedBy (98612719-3882-45a2-ae30-b5329524e744)
+			// rel: Auftrag CreatedBy CreatedBy (a6ed6bc7-2eb3-4e43-97f3-ec8aca0e120b)
+			// rel: MethodInvocation was CreatedBy (062cc504-2191-4e6b-87e1-08747acd350c)
+			// rel: Document was CreatedBy (40257114-de1a-493c-998e-18484521fb8c)
+			// rel: EnumerationEntry was CreatedBy (c4b36682-947b-4c4a-802f-7618e3b0c3c3)
+			// rel: DataType was ChangedBy (cf88221e-3474-4de1-8692-abd65d052e8b)
+			// rel: Method was CreatedBy (c2f4906d-2841-47df-bd91-6228f2f4285a)
+			// rel: RelationEnd was CreatedBy (f474544e-8537-4dce-a8b4-9ec0b5f4150e)
+			// rel: Constraint was ChangedBy (6b1b0216-b3cf-4a5f-ae59-e6f46fda9331)
+			// rel: Mitarbeiter was ChangedBy (aeca0771-5b0f-48a7-9ff9-02a56d6fe758)
+			// rel: MethodInvocation was ChangedBy (7ad6ee5a-550e-444e-b568-998bbf1a1994)
+			// rel: Kunde was CreatedBy (5daf8db8-be8b-4ac7-a887-9217442fa7f4)
+			// rel: Projekt was ChangedBy (bc2a3fdc-68d7-4ba1-9c16-03fd74c43bb0)
+			// rel: TypeRef was ChangedBy (b027e54e-632d-43ef-a83f-9d017717a9da)
+			// rel: Method was ChangedBy (30768fac-3c40-46e7-94fd-a2ab73447cd7)
+			// rel: Document was ChangedBy (5b930212-f85a-4be9-9882-437cca6ffe0d)
+			// rel: Constraint was CreatedBy (f7eab863-c425-4819-b435-10394cf1ca5a)
+			// rel: Kunde was ChangedBy (2a33407e-beeb-4919-b4c1-9aa264286151)
 		};
 		
 		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)

@@ -15,7 +15,7 @@ namespace Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses
             IKistlContext ctx,
             Kistl.Server.Generators.Templates.Implementation.SerializationMembersList membersToSerialize,
             string propertyName, string collectionEntryAssociationName, string roleName,
-            string relDataTypeString, string relDataTypeStringImpl, bool needsPositionStorage,
+            string relDataTypeString, string relDataTypeStringImpl, bool needsPositionStorage, string positionPropertyName,
             bool relDataTypeExportable, string moduleNamespace,
             bool eagerLoading, bool callGetterSetterEvents, bool isReloadable)
         {
@@ -25,7 +25,7 @@ namespace Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses
                 membersToSerialize,
                 propertyName, collectionEntryAssociationName, roleName,
                 relDataTypeString, relDataTypeStringImpl,
-                needsPositionStorage, relDataTypeExportable, moduleNamespace,
+                needsPositionStorage, positionPropertyName, relDataTypeExportable, moduleNamespace,
                 eagerLoading, callGetterSetterEvents, isReloadable);
         }
 

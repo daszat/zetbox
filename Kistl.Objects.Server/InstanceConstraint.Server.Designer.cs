@@ -121,6 +121,14 @@ namespace Kistl.App.Base
         public static event ObjectEventHandler<InstanceConstraint> OnDeleting_InstanceConstraint;
 
 
+		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
+			// rel: Constraint on Constrained (e2b66b79-ab7a-43c0-a229-16dddf4b8934)
+		};
+		
+		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
+		{
+			props.AddRange(_properties);
+		}
 	
 
 		public override void ReloadReferences()

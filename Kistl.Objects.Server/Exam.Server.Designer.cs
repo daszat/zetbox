@@ -373,30 +373,36 @@ namespace at.dasz.CourseOrganiser
 
 
 		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			new CustomPropertyDescriptor<Exam, DateTime?>(
+			// else
+			new CustomPropertyDescriptor<Exam__Implementation__, DateTime?>(
 				new Guid("bfbc9284-3d72-4966-9b03-2f9f5f628e42"),
 				"Date",
 				null,
 				obj => obj.Date,
 				(obj, val) => obj.Date = val),
-			new CustomPropertyDescriptor<Exam, int>(
+			// else
+			new CustomPropertyDescriptor<Exam__Implementation__, int>(
 				new Guid("9223d17a-d22d-4419-8c47-83414de4ae28"),
 				"MaxScores",
 				null,
 				obj => obj.MaxScores,
 				(obj, val) => obj.MaxScores = val),
-			new CustomPropertyDescriptor<Exam, string>(
+			// else
+			new CustomPropertyDescriptor<Exam__Implementation__, string>(
 				new Guid("7a257582-b2cc-43bc-b76f-03eee27c5a7c"),
 				"Name",
 				null,
 				obj => obj.Name,
 				(obj, val) => obj.Name = val),
-			new CustomPropertyDescriptor<Exam, at.dasz.CourseOrganiser.Semester>(
+			// else
+			new CustomPropertyDescriptor<Exam__Implementation__, at.dasz.CourseOrganiser.Semester>(
 				new Guid("7b83aa6f-84f3-4c62-8dd8-ce4d1020935a"),
 				"Semester",
 				null,
 				obj => obj.Semester,
 				(obj, val) => obj.Semester = val),
+			// rel: StudentExam passes Exam (3e15530a-1753-4e97-9390-7235192a1a9e)
+			// rel: Exam happens_in Semester (af26d91c-68a2-4c18-aca7-4fc56d3b519a)
 		};
 		
 		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)

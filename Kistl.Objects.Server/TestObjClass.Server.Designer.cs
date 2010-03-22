@@ -410,30 +410,35 @@ namespace Kistl.App.Test
 
 
 		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			new CustomPropertyDescriptor<TestObjClass, int?>(
+			// else
+			new CustomPropertyDescriptor<TestObjClass__Implementation__, int?>(
 				new Guid("29c0242b-cd1c-42b4-8ca0-be0a209afcbf"),
 				"MyIntProperty",
 				null,
 				obj => obj.MyIntProperty,
 				(obj, val) => obj.MyIntProperty = val),
-			new CustomPropertyDescriptor<TestObjClass, Kistl.App.Projekte.Kunde>(
+			// else
+			new CustomPropertyDescriptor<TestObjClass__Implementation__, Kistl.App.Projekte.Kunde>(
 				new Guid("e93b3fc2-2fc9-4577-9a93-a51ed2a4190f"),
 				"ObjectProp",
 				null,
 				obj => obj.ObjectProp,
 				(obj, val) => obj.ObjectProp = val),
-			new CustomPropertyDescriptor<TestObjClass, string>(
+			// else
+			new CustomPropertyDescriptor<TestObjClass__Implementation__, string>(
 				new Guid("c9a3769e-7a53-4e1d-b894-72dc1b4e9aea"),
 				"StringProp",
 				null,
 				obj => obj.StringProp,
 				(obj, val) => obj.StringProp = val),
-			new CustomPropertyDescriptor<TestObjClass, Kistl.App.Test.TestEnum>(
+			// else
+			new CustomPropertyDescriptor<TestObjClass__Implementation__, Kistl.App.Test.TestEnum>(
 				new Guid("89470dda-4ac6-4bb4-9221-d16f80f8d95a"),
 				"TestEnumProp",
 				null,
 				obj => obj.TestEnumProp,
 				(obj, val) => obj.TestEnumProp = val),
+			// rel: TestObjClass has ObjectProp (9d44eac8-2470-4373-a2bf-df3bc16d3454)
 		};
 		
 		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)

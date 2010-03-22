@@ -25,12 +25,6 @@ namespace Kistl.API.Client
         private readonly Action _ownerNotifier;
         private List<T> collection; // can change
 
-        public OneNRelationList(string propertyName, IDataObject owner, Action ownerNotifier)
-            : this(propertyName, propertyName + Helper.PositionSuffix, owner, ownerNotifier) { }
-
-        public OneNRelationList(string propertyName, IDataObject owner, Action ownerNotifier, IEnumerable<T> collection)
-            : this(propertyName, propertyName + Helper.PositionSuffix, owner, ownerNotifier, collection) { }
-
         ///// <param name="fkProperty">the name of the fk_Property which does notification, but not collection fixing</param>
         public OneNRelationList(string fkProperty, string posProperty, IDataObject owner, Action ownerNotifier)
             : this(fkProperty, posProperty, owner, ownerNotifier, new List<T>()) { }
@@ -64,7 +58,7 @@ namespace Kistl.API.Client
             if (_owner.Context != item.Context) throw new WrongKistlContextException();
             collection.Insert(index, item);
             SetPointerProperty(item);
-            if (item.HasProperty(_posProperty))
+            if (!String.IsNullOrEmpty(_posProperty))
             {
                 Kistl.API.Helper.FixIndices(collection, GetPosition, SetPosition);
             }
@@ -136,7 +130,7 @@ namespace Kistl.API.Client
             // Clears the position Property for a 1:n Relation
             // eg. Method 1-n Parameter
             // Clears Parameter.Method__Position__
-            if (item.HasProperty(_posProperty))
+            if (!String.IsNullOrEmpty(_posProperty))
             {
                 item.SetPropertyValue<int?>(_posProperty, null);
             }

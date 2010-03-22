@@ -331,24 +331,29 @@ namespace Kistl.App.GUI
 
 
 		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			new CustomPropertyDescriptor<Icon, Guid>(
+			// else
+			new CustomPropertyDescriptor<Icon__Implementation__, Guid>(
 				new Guid("6ce563d7-28e8-4806-bdd1-84c220a6c3ca"),
 				"ExportGuid",
 				null,
 				obj => obj.ExportGuid,
 				(obj, val) => obj.ExportGuid = val),
-			new CustomPropertyDescriptor<Icon, string>(
+			// else
+			new CustomPropertyDescriptor<Icon__Implementation__, string>(
 				new Guid("cdbdfc01-5faa-416b-960f-2eb220f268fe"),
 				"IconFile",
 				null,
 				obj => obj.IconFile,
 				(obj, val) => obj.IconFile = val),
-			new CustomPropertyDescriptor<Icon, Kistl.App.Base.Module>(
+			// else
+			new CustomPropertyDescriptor<Icon__Implementation__, Kistl.App.Base.Module>(
 				new Guid("052273ac-706a-446b-bb86-83c726ee66d6"),
 				"Module",
 				null,
 				obj => obj.Module,
 				(obj, val) => obj.Module = val),
+			// rel: Icon has Module (a1360ce2-ecd5-4660-9b4d-3a2dc3919344)
+			// rel: DataType has DefaultIcon (eb852cc4-3977-42b9-9fcd-3a8c60aa49ac)
 		};
 		
 		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)

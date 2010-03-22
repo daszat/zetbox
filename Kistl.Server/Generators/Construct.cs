@@ -126,7 +126,13 @@ namespace Kistl.Server.Generators
         public static string ListPositionColumnName(RelationEnd otherEnd, string parentPropName)
         {
             if (otherEnd == null) { throw new ArgumentNullException("otherEnd"); }
-            return ForeignKeyColumnName(Construct.NestedColumnName(otherEnd.RoleName, parentPropName)) + "_pos";
+            return ForeignKeyColumnName(Construct.NestedColumnName(otherEnd.RoleName, parentPropName)) + Kistl.API.Helper.PositionSuffix;
+        }
+
+        public static string ListPositionPropertyName(RelationEnd relEnd)
+        {
+            if (relEnd == null) { throw new ArgumentNullException("relEnd"); }
+            return relEnd.RoleName + Kistl.API.Helper.PositionSuffix;
         }
         #endregion
 

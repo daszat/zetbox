@@ -13,7 +13,7 @@ namespace Kistl.DalProvider.Frozen
         : BaseCustomPropertyDescriptor<TComponent, TProperty>
     {
         public CustomPropertyDescriptor(
-            Guid propertyGuid,
+            Guid? propertyGuid,
             string name,
             Attribute[] attrs,
             Func<TComponent, TProperty> getter,

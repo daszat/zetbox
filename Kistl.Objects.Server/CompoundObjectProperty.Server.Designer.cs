@@ -337,24 +337,28 @@ namespace Kistl.App.Base
 
 
 		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			new CustomPropertyDescriptor<CompoundObjectProperty, Kistl.App.Base.CompoundObject>(
+			// else
+			new CustomPropertyDescriptor<CompoundObjectProperty__Implementation__, Kistl.App.Base.CompoundObject>(
 				new Guid("0d78c157-c106-4728-9af2-7992da7c935d"),
 				"CompoundObjectDefinition",
 				null,
 				obj => obj.CompoundObjectDefinition,
 				(obj, val) => obj.CompoundObjectDefinition = val),
-			new CustomPropertyDescriptor<CompoundObjectProperty, bool>(
+			// else
+			new CustomPropertyDescriptor<CompoundObjectProperty__Implementation__, bool>(
 				new Guid("7c806f25-d85e-4d9f-b082-0cdaa7b60790"),
 				"HasPersistentOrder",
 				null,
 				obj => obj.HasPersistentOrder,
 				(obj, val) => obj.HasPersistentOrder = val),
-			new CustomPropertyDescriptor<CompoundObjectProperty, bool>(
+			// else
+			new CustomPropertyDescriptor<CompoundObjectProperty__Implementation__, bool>(
 				new Guid("8a861113-a48a-40c5-bdec-6ceafef86f48"),
 				"IsList",
 				null,
 				obj => obj.IsList,
 				(obj, val) => obj.IsList = val),
+			// rel: CompoundObjectProperty has CompoundObjectDefinition (cbc99fc5-2b15-4829-b4ae-bc8e38e767a8)
 		};
 		
 		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)

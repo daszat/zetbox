@@ -228,13 +228,15 @@ namespace Kistl.App.Base
 
 
 		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			new CustomPropertyDescriptor<CurrentSchema, string>(
+			// else
+			new CustomPropertyDescriptor<CurrentSchema__Implementation__, string>(
 				new Guid("175143b9-dd09-4b49-a633-e9cdb508c4c5"),
 				"Schema",
 				null,
 				obj => obj.Schema,
 				(obj, val) => obj.Schema = val),
-			new CustomPropertyDescriptor<CurrentSchema, int>(
+			// else
+			new CustomPropertyDescriptor<CurrentSchema__Implementation__, int>(
 				new Guid("193c24c4-5a42-418e-8ed8-6e1689beca50"),
 				"Version",
 				null,

@@ -496,42 +496,49 @@ namespace Kistl.App.Base
 
 
 		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			new CustomPropertyDescriptor<ObjectReferencePlaceholderProperty, bool>(
+			// else
+			new CustomPropertyDescriptor<ObjectReferencePlaceholderProperty__Implementation__, bool>(
 				new Guid("7e52aa2a-aa3a-4f5b-8171-c6c2f364108b"),
 				"HasPersistentOrder",
 				null,
 				obj => obj.HasPersistentOrder,
 				(obj, val) => obj.HasPersistentOrder = val),
-			new CustomPropertyDescriptor<ObjectReferencePlaceholderProperty, string>(
+			// else
+			new CustomPropertyDescriptor<ObjectReferencePlaceholderProperty__Implementation__, string>(
 				new Guid("b5fa31d8-ad30-4aeb-b5a0-8b4b117b1d29"),
 				"ImplementorRoleName",
 				null,
 				obj => obj.ImplementorRoleName,
 				(obj, val) => obj.ImplementorRoleName = val),
-			new CustomPropertyDescriptor<ObjectReferencePlaceholderProperty, bool>(
+			// else
+			new CustomPropertyDescriptor<ObjectReferencePlaceholderProperty__Implementation__, bool>(
 				new Guid("52692870-0bd4-47b6-99dc-eb8bf4238f24"),
 				"IsList",
 				null,
 				obj => obj.IsList,
 				(obj, val) => obj.IsList = val),
-			new CustomPropertyDescriptor<ObjectReferencePlaceholderProperty, string>(
+			// else
+			new CustomPropertyDescriptor<ObjectReferencePlaceholderProperty__Implementation__, string>(
 				new Guid("06d56d44-bc5f-428b-a6b5-4348573425f9"),
 				"ItemRoleName",
 				null,
 				obj => obj.ItemRoleName,
 				(obj, val) => obj.ItemRoleName = val),
-			new CustomPropertyDescriptor<ObjectReferencePlaceholderProperty, Kistl.App.Base.ObjectClass>(
+			// else
+			new CustomPropertyDescriptor<ObjectReferencePlaceholderProperty__Implementation__, Kistl.App.Base.ObjectClass>(
 				new Guid("41da7ae6-aff7-44cf-83be-6150bf7578fd"),
 				"ReferencedObjectClass",
 				null,
 				obj => obj.ReferencedObjectClass,
 				(obj, val) => obj.ReferencedObjectClass = val),
-			new CustomPropertyDescriptor<ObjectReferencePlaceholderProperty, string>(
+			// else
+			new CustomPropertyDescriptor<ObjectReferencePlaceholderProperty__Implementation__, string>(
 				new Guid("dd98c4f1-bf83-4d9a-8885-546457fc6591"),
 				"Verb",
 				null,
 				obj => obj.Verb,
 				(obj, val) => obj.Verb = val),
+			// rel: ObjectReferencePlaceholderProperty ofType ReferencedObjectClass (47ccedbe-6cfa-4810-8b8e-c064b8434f3f)
 		};
 		
 		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)

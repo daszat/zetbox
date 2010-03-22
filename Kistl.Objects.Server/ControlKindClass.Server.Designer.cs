@@ -290,12 +290,15 @@ namespace Kistl.App.GUI
 
 
 		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			new CustomPropertyDescriptor<ControlKindClass, ICollection<Kistl.App.Base.TypeRef>>(
+			// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
+			new CustomPropertyDescriptor<ControlKindClass__Implementation__, ICollection<Kistl.App.Base.TypeRef>>(
 				new Guid("883a2f71-78ae-4978-8d76-904a2237cc25"),
 				"SupportedInterfaces",
 				null,
 				obj => obj.SupportedInterfaces,
 				null), // lists are read-only properties
+			// rel: List has ItemKind (c05b892d-dccf-440b-89d1-9943fa8eae52)
+			// rel: Control isof Kind (b4911f1f-d707-4b14-9b7e-b6c6fd49a640)
 		};
 		
 		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)

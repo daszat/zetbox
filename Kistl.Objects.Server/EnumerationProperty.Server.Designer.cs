@@ -231,12 +231,14 @@ namespace Kistl.App.Base
 
 
 		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			new CustomPropertyDescriptor<EnumerationProperty, Kistl.App.Base.Enumeration>(
+			// else
+			new CustomPropertyDescriptor<EnumerationProperty__Implementation__, Kistl.App.Base.Enumeration>(
 				new Guid("1144c061-3610-495f-b8b4-951058bb0c23"),
 				"Enumeration",
 				null,
 				obj => obj.Enumeration,
 				(obj, val) => obj.Enumeration = val),
+			// rel: EnumerationProperty has Enumeration (f85ff30f-0907-4e28-806e-a7f1aac98acb)
 		};
 		
 		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)

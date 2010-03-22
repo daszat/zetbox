@@ -590,42 +590,50 @@ namespace Kistl.App.Base
 
 
 		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			new CustomPropertyDescriptor<DefaultPropertyValue, Kistl.App.Base.Identity>(
+			// else
+			new CustomPropertyDescriptor<DefaultPropertyValue__Implementation__, Kistl.App.Base.Identity>(
 				new Guid("c33da8b7-beba-43e5-a9e8-a8d51c6a3443"),
 				"ChangedBy",
 				null,
 				obj => obj.ChangedBy,
 				(obj, val) => obj.ChangedBy = val),
-			new CustomPropertyDescriptor<DefaultPropertyValue, DateTime?>(
+			// else
+			new CustomPropertyDescriptor<DefaultPropertyValue__Implementation__, DateTime?>(
 				new Guid("0f199917-c51d-4f4e-9c59-663a274c79a0"),
 				"ChangedOn",
 				null,
 				obj => obj.ChangedOn,
 				(obj, val) => obj.ChangedOn = val),
-			new CustomPropertyDescriptor<DefaultPropertyValue, Kistl.App.Base.Identity>(
+			// else
+			new CustomPropertyDescriptor<DefaultPropertyValue__Implementation__, Kistl.App.Base.Identity>(
 				new Guid("68c4fa75-42bd-4d51-b74d-a074ea17e242"),
 				"CreatedBy",
 				null,
 				obj => obj.CreatedBy,
 				(obj, val) => obj.CreatedBy = val),
-			new CustomPropertyDescriptor<DefaultPropertyValue, DateTime?>(
+			// else
+			new CustomPropertyDescriptor<DefaultPropertyValue__Implementation__, DateTime?>(
 				new Guid("4ace0c4f-58d7-4656-b263-9adae69a6b06"),
 				"CreatedOn",
 				null,
 				obj => obj.CreatedOn,
 				(obj, val) => obj.CreatedOn = val),
-			new CustomPropertyDescriptor<DefaultPropertyValue, Guid>(
+			// else
+			new CustomPropertyDescriptor<DefaultPropertyValue__Implementation__, Guid>(
 				new Guid("e672de1a-e0f4-4613-9d1f-121ba543c2ec"),
 				"ExportGuid",
 				null,
 				obj => obj.ExportGuid,
 				(obj, val) => obj.ExportGuid = val),
-			new CustomPropertyDescriptor<DefaultPropertyValue, Kistl.App.Base.Property>(
+			// else
+			new CustomPropertyDescriptor<DefaultPropertyValue__Implementation__, Kistl.App.Base.Property>(
 				new Guid("a2451b2f-2430-4de4-81a6-3d5ac9f0138f"),
 				"Property",
 				null,
 				obj => obj.Property,
 				(obj, val) => obj.Property = val),
+			// rel: DefaultPropertyValue was CreatedBy (2cec73a2-76e5-4b98-bf49-16e873d4bf67)
+			// rel: DefaultPropertyValue was ChangedBy (7f9ecbb7-c962-4f95-9d89-3cb86857886f)
 		};
 		
 		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)

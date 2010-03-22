@@ -223,13 +223,15 @@ namespace Kistl.App.Test
 
 
 		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			new CustomPropertyDescriptor<TestStudent, string>(
+			// else
+			new CustomPropertyDescriptor<TestStudent__Implementation__, string>(
 				new Guid("190b4492-c1cb-40a2-8941-84b8ff3ac141"),
 				"Name",
 				null,
 				obj => obj.Name,
 				(obj, val) => obj.Name = val),
-			new CustomPropertyDescriptor<TestStudent, ICollection<Kistl.App.Test.Fragebogen>>(
+			// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
+			new CustomPropertyDescriptor<TestStudent__Implementation__, ICollection<Kistl.App.Test.Fragebogen>>(
 				new Guid("f330d95b-372d-4302-b4d1-73afc5fa71de"),
 				"Testbogen",
 				null,

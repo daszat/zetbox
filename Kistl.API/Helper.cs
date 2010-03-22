@@ -8,6 +8,7 @@ using System.Text;
 using System.Xml.Serialization;
 
 using Kistl.API.Utils;
+using System.ComponentModel;
 
 namespace Kistl.API
 {
@@ -120,11 +121,11 @@ namespace Kistl.API
             if (src == null) throw new ArgumentNullException("src");
             if (dest == null) throw new ArgumentNullException("dest");
 
-            if(src.CanSeek) src.Seek(0, SeekOrigin.Begin);
+            if (src.CanSeek) src.Seek(0, SeekOrigin.Begin);
 
             var buffer = new byte[4096];
             int cnt;
-            while((cnt = src.Read(buffer, 0, buffer.Length)) > 0)
+            while ((cnt = src.Read(buffer, 0, buffer.Length)) > 0)
             {
                 dest.Write(buffer, 0, cnt);
             }
@@ -352,8 +353,8 @@ namespace Kistl.API
         /// <returns>PropertyValue</returns>
         public static T GetPropertyValue<T>(this object obj, string propName)
         {
-            if (obj == null) throw new ArgumentNullException("obj");
-            if (propName == null) throw new ArgumentNullException("propName");
+            if (obj == null) { throw new ArgumentNullException("obj"); }
+            if (propName == null) { throw new ArgumentNullException("propName"); }
 
             object result = obj;
             foreach (string it_p in propName.Split('.'))
@@ -362,9 +363,7 @@ namespace Kistl.API
                 string p = it_p;
                 ExtractDictKey(ref dictKey, ref p);
 
-                PropertyInfo pi = result.GetType().GetProperty(p);
-                if (pi == null) throw new ArgumentOutOfRangeException("propName", string.Format("Property {0} was not found in Type {1}", propName, obj.GetType().FullName));
-                result = pi.GetValue(result, null);
+                result = GetSinglePropertyValue(result, p);
                 if (result == null) return default(T);
 
                 if (!string.IsNullOrEmpty(dictKey))
@@ -381,6 +380,27 @@ namespace Kistl.API
                 }
             }
             return (T)result;
+        }
+
+        private static object GetSinglePropertyValue(object obj, string propName)
+        {
+            if (obj == null) { throw new ArgumentNullException("obj"); }
+            if (propName == null) { throw new ArgumentNullException("propName"); }
+
+            var ctd = obj as ICustomTypeDescriptor;
+            if (ctd != null)
+            {
+                var pd = ctd.GetProperties()[propName];
+                if (pd != null)
+                {
+                    return pd.GetValue(ctd.GetPropertyOwner(pd));
+                }
+            }
+
+            // fallback to reflection
+            PropertyInfo pi = obj.GetType().GetProperty(propName);
+            if (pi == null) throw new ArgumentOutOfRangeException("propName", string.Format("Property {0} was not found in Type {1}", propName, obj.GetType().FullName));
+            return pi.GetValue(obj, null);
         }
 
         private static void ExtractDictKey(ref string dictKey, ref string p)
@@ -403,7 +423,7 @@ namespace Kistl.API
         /// <summary>
         /// Converts a object to XML.
         /// </summary>
-        /// <param name="obj">Any XML Serializalable Object.</param>
+        /// <param name="obj">Any XML Serializable Object.</param>
         /// <returns>XML string</returns>
         public static string ToXmlString(this object obj)
         {

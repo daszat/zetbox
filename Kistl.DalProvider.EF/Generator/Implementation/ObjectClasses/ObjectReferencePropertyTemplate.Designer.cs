@@ -19,6 +19,7 @@ namespace Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses
 		protected String referencedInterface;
 		protected String referencedImplementation;
 		protected bool hasPositionStorage;
+		protected string positionPropertyName;
 		protected bool relDataTypeExportable;
 		protected string moduleNamespace;
 		protected bool eagerLoading;
@@ -26,7 +27,7 @@ namespace Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses
 		protected bool isReloadable;
 
 
-        public ObjectReferencePropertyTemplate(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Kistl.Server.Generators.Templates.Implementation.SerializationMembersList serializationList, String name, String associationName, String targetRoleName, String referencedInterface, String referencedImplementation, bool hasPositionStorage, bool relDataTypeExportable, string moduleNamespace, bool eagerLoading, bool callGetterSetterEvents, bool isReloadable)
+        public ObjectReferencePropertyTemplate(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Kistl.Server.Generators.Templates.Implementation.SerializationMembersList serializationList, String name, String associationName, String targetRoleName, String referencedInterface, String referencedImplementation, bool hasPositionStorage, string positionPropertyName, bool relDataTypeExportable, string moduleNamespace, bool eagerLoading, bool callGetterSetterEvents, bool isReloadable)
             : base(_host)
         {
 			this.ctx = ctx;
@@ -37,6 +38,7 @@ namespace Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses
 			this.referencedInterface = referencedInterface;
 			this.referencedImplementation = referencedImplementation;
 			this.hasPositionStorage = hasPositionStorage;
+			this.positionPropertyName = positionPropertyName;
 			this.relDataTypeExportable = relDataTypeExportable;
 			this.moduleNamespace = moduleNamespace;
 			this.eagerLoading = eagerLoading;
@@ -47,14 +49,14 @@ namespace Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses
         
         public override void Generate()
         {
-#line 26 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
+#line 27 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
 string efName = name + Kistl.API.Helper.ImplementationSuffix;
 	string fkBackingName = "_fk_" + name;
 	string fGuidkBackingName = "_fk_guid_" + name;
 	string eventName = "On" + name;
 
 
-#line 32 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
+#line 33 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
 this.WriteObjects("   		// ",  this.GetType() , "\r\n");
 this.WriteObjects("        // implement the user-visible interface\r\n");
 this.WriteObjects("        [XmlIgnore()]\r\n");
@@ -75,18 +77,18 @@ this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
 this.WriteObjects("        \r\n");
 this.WriteObjects("        private int? ",  fkBackingName , ";\r\n");
-#line 53 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
+#line 54 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
 if (isReloadable)
         {
 
-#line 56 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
+#line 57 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
 this.WriteObjects("        private Guid? ",  fGuidkBackingName , " = null;\r\n");
-#line 58 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
+#line 59 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
 }
 		
         AddSerialization(serializationList, name);
 
-#line 62 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
+#line 63 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
 this.WriteObjects("        // EF sees only this property\r\n");
 this.WriteObjects("        [EdmRelationshipNavigationProperty(\"Model\", \"",  associationName , "\", \"",  targetRoleName , "\")]\r\n");
 this.WriteObjects("        public ",  referencedImplementation , " ",  efName , "\r\n");
@@ -104,21 +106,21 @@ this.WriteObjects("                    r.Load(); \r\n");
 this.WriteObjects("                    if(r.Value != null) r.Value.AttachToContext(this.Context);\r\n");
 this.WriteObjects("                }\r\n");
 this.WriteObjects("                var __value = r.Value;\r\n");
-#line 80 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
+#line 81 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
 if(callGetterSetterEvents)
 				{
 
-#line 83 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
+#line 84 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
 this.WriteObjects("				if(",  eventName , "_Getter != null)\r\n");
 this.WriteObjects("				{\r\n");
 this.WriteObjects("					var e = new PropertyGetterEventArgs<",  referencedInterface , ">(__value);\r\n");
 this.WriteObjects("					",  eventName , "_Getter(this, e);\r\n");
 this.WriteObjects("					__value = (",  referencedImplementation , ")e.Result;\r\n");
 this.WriteObjects("				}\r\n");
-#line 90 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
+#line 91 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
 }
 
-#line 92 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
+#line 93 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
 this.WriteObjects("                return __value;\r\n");
 this.WriteObjects("            }\r\n");
 this.WriteObjects("            set\r\n");
@@ -135,51 +137,49 @@ this.WriteObjects("                }\r\n");
 this.WriteObjects("                ",  referencedInterface , " __oldValue = (",  referencedInterface , ")r.Value;\r\n");
 this.WriteObjects("                ",  referencedInterface , " __newValue = (",  referencedInterface , ")value;\r\n");
 this.WriteObjects("\r\n");
-#line 109 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
+#line 110 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
 if(callGetterSetterEvents)
 				{
 
-#line 112 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
+#line 113 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
 this.WriteObjects("                if(",  eventName , "_PreSetter != null)\r\n");
 this.WriteObjects("                {\r\n");
 this.WriteObjects("					var e = new PropertyPreSetterEventArgs<",  referencedInterface , ">(__oldValue, __newValue);\r\n");
 this.WriteObjects("					",  eventName , "_PreSetter(this, e);\r\n");
 this.WriteObjects("					__newValue = e.Result;\r\n");
 this.WriteObjects("                }\r\n");
-#line 119 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
+#line 120 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
 }
 
-#line 121 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
+#line 122 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
 this.WriteObjects("                r.Value = (",  referencedImplementation , ")__newValue;\r\n");
-#line 123 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
+#line 124 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
 if(callGetterSetterEvents)
 				{
 
-#line 126 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
+#line 127 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
 this.WriteObjects("                if(",  eventName , "_PostSetter != null)\r\n");
 this.WriteObjects("                {\r\n");
 this.WriteObjects("					var e = new PropertyPostSetterEventArgs<",  referencedInterface , ">(__oldValue, __newValue);\r\n");
 this.WriteObjects("					",  eventName , "_PostSetter(this, e);\r\n");
 this.WriteObjects("                }\r\n");
-#line 132 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
+#line 133 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
 }
 
-#line 133 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
+#line 134 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
 this.WriteObjects("                                \r\n");
 this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
 this.WriteObjects("        \r\n");
-#line 138 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
-string posStorageName = name + Kistl.API.Helper.PositionSuffix;
-
-	if (hasPositionStorage)
+#line 139 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
+if (hasPositionStorage)
 	{
 		Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty.Call(Host, ctx,
 		    serializationList,
-			"int?", posStorageName, moduleNamespace);
+			"int?", positionPropertyName, moduleNamespace);
 	}
 
-#line 147 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
+#line 146 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
 this.WriteObjects("        \r\n");
 
         }

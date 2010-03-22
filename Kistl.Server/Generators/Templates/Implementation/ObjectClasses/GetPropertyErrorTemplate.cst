@@ -13,8 +13,13 @@
 <%@ Parameter Name="cls" Type="ObjectClass" %>
 
 <%
+var set = Settings;
+	var clsName = cls.Name + Kistl.API.Helper.ImplementationSuffix + Settings["extrasuffix"];
 	var properties = cls.Properties.OrderBy(p => p.Name).ToList();
-	if (properties.Count > 0) {
+	var rels = cls.Context.GetQuery<Relation>().Where(r => r.A.Type == cls || r.B.Type == cls).ToList();
+	
+	if (properties.Count > 0 || rels.Count > 0)
+	{
 %>
 		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
 <%
@@ -24,7 +29,8 @@
 			if (property.IsAssociation() && !property.IsObjectReferencePropertySingle())
 			{
 %>
-			new CustomPropertyDescriptor<<%= cls.Name %>, <%= property.GetCollectionTypeString() %>>(
+			// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
+			new CustomPropertyDescriptor<<%= clsName %>, <%= property.GetCollectionTypeString() %>>(
 				new Guid("<%= property.ExportGuid %>"),
 				"<%= propertyName %>",
 				null,
@@ -32,9 +38,11 @@
 				null), // lists are read-only properties
 <%
 			}
-			else if (property is CalculatedObjectReferenceProperty) {
+			else if (property is CalculatedObjectReferenceProperty)
+			{
 %>
-			new CustomPropertyDescriptor<<%= cls.Name %>, <%= property.ReferencedTypeAsCSharp() %>>(
+			// property is CalculatedObjectReferenceProperty
+			new CustomPropertyDescriptor<<%= clsName %>, <%= property.ReferencedTypeAsCSharp() %>>(
 				new Guid("<%= property.ExportGuid %>"),
 				"<%= propertyName %>",
 				null,
@@ -43,13 +51,55 @@
 <%
 			} else {
 %>
-			new CustomPropertyDescriptor<<%= cls.Name %>, <%= property.ReferencedTypeAsCSharp() %>>(
+			// else
+			new CustomPropertyDescriptor<<%= clsName %>, <%= property.ReferencedTypeAsCSharp() %>>(
 				new Guid("<%= property.ExportGuid %>"),
 				"<%= propertyName %>",
 				null,
 				obj => obj.<%= propertyName %>,
 				(obj, val) => obj.<%= propertyName %> = val),
 <%
+			}
+		}
+		
+		if ("Frozen".Equals(Settings["extrasuffix"]))
+		{
+%>
+			// skipping position columns for frozen context (not implemented)
+<%
+		} else {		
+			foreach(var rel in rels.Where(r => r.GetRelationType() == RelationType.one_n))
+			{
+%>
+			// rel: <%= rel.A.RoleName %> <%= rel.Verb %> <%= rel.B.RoleName %> (<%= rel.ExportGuid %>)
+<%
+			if (rel.A.Type == cls && rel.A.HasPersistentOrder) 
+			{
+				var posColumnName = Construct.ListPositionPropertyName(rel.A);
+%>
+			// rel.A.Type == cls && rel.A.HasPersistentOrder
+			new CustomPropertyDescriptor<<%= clsName %>, int?>(
+				null,
+				"<%= posColumnName %>",
+				null,
+				obj => obj.<%= posColumnName %>,
+				(obj, val) => obj.<%= posColumnName %> = val),
+<%
+				}
+			
+				if (rel.B.Type == cls && rel.B.HasPersistentOrder) 
+				{
+					var posColumnName = Construct.ListPositionPropertyName(rel.B);
+%>
+			// rel.B.Type == cls && rel.B.HasPersistentOrder
+			new CustomPropertyDescriptor<<%= clsName %>, int?>(
+				null,
+				"<%= posColumnName %>",
+				null,
+				obj => obj.<%= posColumnName %>,
+				(obj, val) => obj.<%= posColumnName %> = val),
+<%
+				}
 			}
 		}
 %>

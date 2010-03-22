@@ -426,36 +426,42 @@ namespace Kistl.App.TimeRecords
 
 
 		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			new CustomPropertyDescriptor<WorkEffort, DateTime>(
+			// else
+			new CustomPropertyDescriptor<WorkEffort__Implementation__, DateTime>(
 				new Guid("b169f505-9b5f-4e4e-ae25-a46bc9926c87"),
 				"From",
 				null,
 				obj => obj.From,
 				(obj, val) => obj.From = val),
-			new CustomPropertyDescriptor<WorkEffort, Kistl.App.Projekte.Mitarbeiter>(
+			// else
+			new CustomPropertyDescriptor<WorkEffort__Implementation__, Kistl.App.Projekte.Mitarbeiter>(
 				new Guid("720f5bcf-5654-4114-8fba-f57fb7bd48ea"),
 				"Mitarbeiter",
 				null,
 				obj => obj.Mitarbeiter,
 				(obj, val) => obj.Mitarbeiter = val),
-			new CustomPropertyDescriptor<WorkEffort, string>(
+			// else
+			new CustomPropertyDescriptor<WorkEffort__Implementation__, string>(
 				new Guid("a96df76c-c45c-4d21-8221-8c7deaac4814"),
 				"Name",
 				null,
 				obj => obj.Name,
 				(obj, val) => obj.Name = val),
-			new CustomPropertyDescriptor<WorkEffort, string>(
+			// else
+			new CustomPropertyDescriptor<WorkEffort__Implementation__, string>(
 				new Guid("1744a31b-a1c3-4e7c-834c-504521240478"),
 				"Notes",
 				null,
 				obj => obj.Notes,
 				(obj, val) => obj.Notes = val),
-			new CustomPropertyDescriptor<WorkEffort, DateTime?>(
+			// else
+			new CustomPropertyDescriptor<WorkEffort__Implementation__, DateTime?>(
 				new Guid("553440f1-3b22-402b-ba5b-355f21cc31d9"),
 				"Thru",
 				null,
 				obj => obj.Thru,
 				(obj, val) => obj.Thru = val),
+			// rel: WorkEffort has Mitarbeiter (3963b6bc-bb5a-4615-b4db-56eecd9d3f97)
 		};
 		
 		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)

@@ -206,7 +206,8 @@ namespace at.dasz.DocumentManagement
 
 
 		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			new CustomPropertyDescriptor<Document, IList<Kistl.App.Base.Blob>>(
+			// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
+			new CustomPropertyDescriptor<Document__Implementation__, IList<Kistl.App.Base.Blob>>(
 				new Guid("ec544fe0-8189-4bb2-a3d1-3cb61d815aa5"),
 				"Revisions",
 				null,

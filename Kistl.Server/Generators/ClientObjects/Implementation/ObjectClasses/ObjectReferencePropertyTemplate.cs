@@ -1,16 +1,17 @@
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-
-using Kistl.API;
-using Kistl.App.Base;
-using Kistl.App.Extensions;
-using Kistl.Server.Generators.Templates.Implementation;
 
 namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Linq;
+    using System.Text;
+
+    using Kistl.API;
+    using Kistl.App.Base;
+    using Kistl.App.Extensions;
+    using Kistl.Server.Generators.Templates.Implementation;
+
     public partial class ObjectReferencePropertyTemplate
     {
         public static void Call(Arebis.CodeGeneration.IGenerationHost host,
@@ -23,7 +24,10 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
 
             string name = prop.Name;
             string ownInterface = prop.ObjectClass.GetDataTypeString();
-            string referencedInterface = prop.GetReferencedObjectClass().Module.Namespace + "." + prop.GetReferencedObjectClass().Name;
+            string referencedInterface = String.Format(
+                "{0}.{1}",
+                prop.GetReferencedObjectClass().Module.Namespace,
+                prop.GetReferencedObjectClass().Name);
 
             var rel = RelationExtensions.Lookup(ctx, prop);
             var endRole = rel.GetEnd(prop).GetRole();
@@ -42,7 +46,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
             RelationEndRole endRole, bool callGetterSetterEvents)
         {
             if (rel == null) { throw new ArgumentNullException("rel"); }
-            
+
             RelationEnd relEnd = rel.GetEndFromRole(endRole);
             RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
 
@@ -54,9 +58,12 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
 
             Call(host, ctx, serializationList,
                 name, efName, fkBackingName, fkGuidBackingName,
-                ownInterface, referencedInterface, 
+                ownInterface, referencedInterface,
                 rel, endRole,
-                hasInverseNavigator, rel.NeedsPositionStorage(endRole), callGetterSetterEvents);
+                hasInverseNavigator,
+                rel.NeedsPositionStorage(endRole),
+                Construct.ListPositionPropertyName(relEnd),
+                callGetterSetterEvents);
         }
 
 
@@ -73,6 +80,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
             RelationEndRole endRole,
             bool hasInverseNavigator,
             bool hasPositionStorage,
+            string positionPropertyName,
             bool callGetterSetterEvents)
         {
             if (host == null) { throw new ArgumentNullException("host"); }
@@ -80,7 +88,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
 
             host.CallTemplate("Implementation.ObjectClasses.ObjectReferencePropertyTemplate", ctx, serializationList,
                 name, efName, fkBackingName, fkGuidBackingName, ownInterface, referencedInterface, rel, endRole,
-                hasInverseNavigator, hasPositionStorage, callGetterSetterEvents);
+                hasInverseNavigator, hasPositionStorage, positionPropertyName, callGetterSetterEvents);
         }
 
         protected virtual void AddSerialization(Templates.Implementation.SerializationMembersList list, string memberName)
@@ -90,7 +98,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
             {
                 //if (relDataTypeExportable)
                 //{
-                    // list.Add("Implementation.ObjectClasses.ObjectReferencePropertySerialization", SerializerType.ImportExport, "http://dasz.at/Kistl", name, memberName);
+                // list.Add("Implementation.ObjectClasses.ObjectReferencePropertySerialization", SerializerType.ImportExport, "http://dasz.at/Kistl", name, memberName);
                 //}
                 list.Add(SerializerType.Service, "http://dasz.at/Kistl", name, memberName);
             }

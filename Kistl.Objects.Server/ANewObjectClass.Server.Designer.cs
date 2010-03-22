@@ -175,7 +175,8 @@ namespace Kistl.App.Test
 
 
 		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			new CustomPropertyDescriptor<ANewObjectClass, string>(
+			// else
+			new CustomPropertyDescriptor<ANewObjectClass__Implementation__, string>(
 				new Guid("e7371fa9-cd18-4cdc-91c3-a73c0984a019"),
 				"TestString",
 				null,

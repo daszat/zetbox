@@ -138,6 +138,13 @@ namespace Kistl.App.Base
         public static event ObjectEventHandler<Interface> OnDeleting_Interface;
 
 
+		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
+		};
+		
+		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
+		{
+			props.AddRange(_properties);
+		}
 	
 
 		public override void ReloadReferences()

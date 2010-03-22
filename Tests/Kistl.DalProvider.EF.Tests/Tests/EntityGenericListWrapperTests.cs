@@ -90,7 +90,7 @@ namespace Kistl.DalProvider.EF.Tests
             foreach (var expected in expectedItems.Cast<Property__Implementation__>())
             {
                 Assert.That(expected.ObjectClass, Is.EqualTo(parent));
-                Assert.That(expected.ObjectClass_pos, Is.Not.Null);
+                Assert.That(expected.Properties_pos, Is.Not.Null);
             }
 
             // the removed objects' references must be nulled
@@ -98,7 +98,7 @@ namespace Kistl.DalProvider.EF.Tests
             foreach (var removed in removedItems)
             {
                 Assert.That(removed.ObjectClass, Is.Null);
-                Assert.That(removed.ObjectClass_pos, Is.Null);
+                Assert.That(removed.Properties_pos, Is.Null);
             }
         }
     }

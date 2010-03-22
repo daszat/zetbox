@@ -18,7 +18,7 @@ namespace Kistl.API.Client.Mocks.OneNLists
 
         public OneSide(List<INSide> initialObjects)
         {
-            _list = new OneNRelationList<INSide>("OneSide", this, () => OnPropertyChanged("NSide"), initialObjects);
+            _list = new OneNRelationList<INSide>("OneSide", "OneSide_pos", this, () => OnPropertyChanged("NSide"), initialObjects);
         }
 
         private int _id = NextId();

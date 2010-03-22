@@ -64,29 +64,7 @@ namespace Kistl.Server.Generators.Extensions
         {
             if (prop == null) { throw new ArgumentNullException("prop"); }
 
-            bool isIndexed = false;
-
-            if (prop is ObjectReferenceProperty)
-            {
-                var p = (ObjectReferenceProperty)prop;
-                var rel = RelationExtensions.Lookup(p.Context, p);
-                var relEnd = rel.GetEnd(p);
-                var otherEnd = rel.GetOtherEnd(relEnd);
-                if (rel.NeedsPositionStorage(otherEnd.GetRole()))
-                {
-                    isIndexed = true;
-                }
-            }
-            else if (prop is ValueTypeProperty)
-            {
-                isIndexed = ((ValueTypeProperty)prop).HasPersistentOrder;
-            }
-            else if (prop is CompoundObjectProperty)
-            {
-                isIndexed = ((CompoundObjectProperty)prop).HasPersistentOrder;
-            }
-
-            if (isIndexed)
+            if (prop.HasPersistentOrder())
             {
                 return string.Format("IList<{0}>", prop.ReferencedTypeAsCSharp());
             }
@@ -94,6 +72,36 @@ namespace Kistl.Server.Generators.Extensions
             {
                 return string.Format("ICollection<{0}>", prop.ReferencedTypeAsCSharp());
             }
+        }
+
+        public static bool HasPersistentOrder(this Property prop)
+        {
+            if (prop == null) { throw new ArgumentNullException("prop"); }
+
+            bool result = false;
+
+            if (prop is ObjectReferenceProperty)
+            {
+                var p = (ObjectReferenceProperty)prop;
+                var rel = RelationExtensions.Lookup(p.Context, p);
+                var relEnd = rel.GetEnd(p);
+                var otherEnd = rel.GetOtherEnd(relEnd);
+            
+                if (rel.NeedsPositionStorage(otherEnd.GetRole()))
+                {
+                    result = true;
+                }
+            }
+            else if (prop is ValueTypeProperty)
+            {
+                result = ((ValueTypeProperty)prop).HasPersistentOrder;
+            }
+            else if (prop is CompoundObjectProperty)
+            {
+                result = ((CompoundObjectProperty)prop).HasPersistentOrder;
+            }
+
+            return result;
         }
 
         public static bool IsList(this ObjectReferenceProperty prop)

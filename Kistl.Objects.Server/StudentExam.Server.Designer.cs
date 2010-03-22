@@ -359,24 +359,29 @@ namespace at.dasz.CourseOrganiser
 
 
 		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			new CustomPropertyDescriptor<StudentExam, at.dasz.CourseOrganiser.Exam>(
+			// else
+			new CustomPropertyDescriptor<StudentExam__Implementation__, at.dasz.CourseOrganiser.Exam>(
 				new Guid("4fe24a6b-6f71-4313-8b1e-6d1a96437abb"),
 				"Exam",
 				null,
 				obj => obj.Exam,
 				(obj, val) => obj.Exam = val),
-			new CustomPropertyDescriptor<StudentExam, int?>(
+			// else
+			new CustomPropertyDescriptor<StudentExam__Implementation__, int?>(
 				new Guid("b7e4ed77-9a3b-497f-9792-3e7341d9b960"),
 				"Score",
 				null,
 				obj => obj.Score,
 				(obj, val) => obj.Score = val),
-			new CustomPropertyDescriptor<StudentExam, at.dasz.CourseOrganiser.Student>(
+			// else
+			new CustomPropertyDescriptor<StudentExam__Implementation__, at.dasz.CourseOrganiser.Student>(
 				new Guid("2fd40eb4-b358-4e7d-bf1e-4f49dd3e5efd"),
 				"Student",
 				null,
 				obj => obj.Student,
 				(obj, val) => obj.Student = val),
+			// rel: StudentExam passes Exam (3e15530a-1753-4e97-9390-7235192a1a9e)
+			// rel: StudentExam writtenby Student (da365b25-b8d4-43dd-91c7-f30cad09d600)
 		};
 		
 		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)

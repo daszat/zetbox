@@ -1,15 +1,17 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Kistl.API;
-using Kistl.App.Base;
-using Kistl.App.Extensions;
-using Kistl.Server.Generators.Templates.Implementation;
 
 namespace Kistl.DalProvider.EF.Generator.Implementation.CollectionEntries
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+
+    using Kistl.API;
+    using Kistl.App.Base;
+    using Kistl.App.Extensions;
+    using Kistl.Server.Generators;
+    using Kistl.Server.Generators.Templates.Implementation;
+
     public partial class ObjectCollectionEntry
     {
         protected override void ApplyObjectReferenceProperty(Relation rel, RelationEndRole endRole, string propertyName)
@@ -22,7 +24,8 @@ namespace Kistl.DalProvider.EF.Generator.Implementation.CollectionEntries
                 this.MembersToSerialize,
                 propertyName, rel.GetRelationAssociationName(endRole), relEnd.RoleName,
                 relEnd.Type.GetDataTypeString(), relEnd.Type.GetDataTypeString() + Kistl.API.Helper.ImplementationSuffix,
-                rel.NeedsPositionStorage(endRole), ImplementsIExportable(), relEnd.Type.Module.Namespace,
+                rel.NeedsPositionStorage(endRole), endRole.ToString() + Kistl.API.Helper.PositionSuffix,
+                ImplementsIExportable(), relEnd.Type.Module.Namespace,
                 eagerLoading, false, true);
         }
 

@@ -43,15 +43,15 @@ namespace Kistl.DalProvider.EF.Generator.Implementation.EfModel
 
                 if (rel.A.Type == cls && rel.NeedsPositionStorage(RelationEndRole.A) && rel.A.Navigator != null)
                 {
-                    propertyName = rel.A.Navigator.Name + Kistl.API.Helper.PositionSuffix;
-                    columnName = Construct.ListPositionColumnName(rel.B, String.Empty);
+                    propertyName = Construct.ListPositionPropertyName(rel.A);
+                    columnName = Construct.ListPositionColumnName(rel.B);
                     this.WriteLine("<ScalarProperty Name=\"{0}\" ColumnName=\"{1}\" />", propertyName, columnName);
                 }
 
                 if (rel.B.Type == cls && rel.NeedsPositionStorage(RelationEndRole.B) && rel.B.Navigator != null)
                 {
-                    propertyName = rel.B.Navigator.Name + Kistl.API.Helper.PositionSuffix;
-                    columnName = Construct.ListPositionColumnName(rel.A, String.Empty);
+                    propertyName = Construct.ListPositionPropertyName(rel.B);
+                    columnName = Construct.ListPositionColumnName(rel.A);
                     this.WriteLine("<ScalarProperty Name=\"{0}\" ColumnName=\"{1}\" />", propertyName, columnName);
                 }
             }
@@ -66,53 +66,5 @@ namespace Kistl.DalProvider.EF.Generator.Implementation.EfModel
                 ModelMslEntityTypeMappingComplexProperty.Call(Host, ctx, prop, prop.Name, String.Empty);
             }
         }
-
-        //protected virtual void ApplyScalarProperty(Property prop, string parentName)
-        //{
-        //    string propertyName = prop.Name;
-        //    string columnName;
-
-        //    if (prop is EnumerationProperty)
-        //    {
-        //        columnName = Construct.NestedColumnName(prop, parentName);
-        //        propertyName += Kistl.API.Helper.ImplementationSuffix;
-        //    }
-        //    else if (prop is ValueTypeProperty)
-        //    {
-        //        columnName = Construct.NestedColumnName(prop, parentName);
-        //    }
-        //    else if (prop is ObjectReferenceProperty)
-        //    {
-        //        throw new ArgumentOutOfRangeException("prop", "cannot apply ObjectReferenceProperty as scalar");
-        //    }
-        //    else
-        //    {
-        //        return;
-        //    }
-
-        //    this.WriteLine("<ScalarProperty Name=\"{0}\" ColumnName=\"{1}\" />", propertyName, columnName);
-        //}
-
-        //protected virtual void ApplyComplexProperty(StructProperty prop, string parentName)
-        //{
-        //    this.WriteLine("<ComplexProperty Name=\"{0}{1}\" TypeName=\"Model.{2}\">",
-        //        prop.Name,
-        //        Kistl.API.Helper.ImplementationSuffix,
-        //        prop.StructDefinition.Name
-        //        );
-
-        //    string newParent = Construct.NestedColumnName(prop, parentName);
-        //    foreach (var subProp in prop.StructDefinition.Properties.OfType<ValueTypeProperty>().Where(p => !p.IsList).OrderBy(p => p.Name))
-        //    {
-        //        ModelMslEntityTypeMappingScalarProperty.Call(Host, ctx, subProp, subProp.Name, newParent);
-        //    }
-
-        //    foreach (var subProp in prop.StructDefinition.Properties.OfType<StructProperty>().Where(p => !p.IsList).OrderBy(p => p.Name))
-        //    {
-        //        ApplyComplexProperty(subProp, newParent);
-        //    }
-
-        //    this.WriteLine("</ComplexProperty>");
-        //}
     }
 }

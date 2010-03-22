@@ -421,36 +421,43 @@ namespace at.dasz.CourseOrganiser
 
 
 		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			new CustomPropertyDescriptor<Exercise, DateTime?>(
+			// else
+			new CustomPropertyDescriptor<Exercise__Implementation__, DateTime?>(
 				new Guid("7d4137e1-360c-44eb-ab64-5cc61983da60"),
 				"Date",
 				null,
 				obj => obj.Date,
 				(obj, val) => obj.Date = val),
-			new CustomPropertyDescriptor<Exercise, ICollection<at.dasz.CourseOrganiser.GroupExcercise>>(
+			// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
+			new CustomPropertyDescriptor<Exercise__Implementation__, ICollection<at.dasz.CourseOrganiser.GroupExcercise>>(
 				new Guid("4c82e650-323b-4bc6-a472-642c1b975bfc"),
 				"GroupExcercise",
 				null,
 				obj => obj.GroupExcercise,
 				null), // lists are read-only properties
-			new CustomPropertyDescriptor<Exercise, int>(
+			// else
+			new CustomPropertyDescriptor<Exercise__Implementation__, int>(
 				new Guid("a7d4b4d0-08aa-4d30-bf1b-0e45ed1db172"),
 				"MaxScores",
 				null,
 				obj => obj.MaxScores,
 				(obj, val) => obj.MaxScores = val),
-			new CustomPropertyDescriptor<Exercise, string>(
+			// else
+			new CustomPropertyDescriptor<Exercise__Implementation__, string>(
 				new Guid("f1fb9038-d6b3-4042-8072-c7192dfd6828"),
 				"Name",
 				null,
 				obj => obj.Name,
 				(obj, val) => obj.Name = val),
-			new CustomPropertyDescriptor<Exercise, at.dasz.CourseOrganiser.Semester>(
+			// else
+			new CustomPropertyDescriptor<Exercise__Implementation__, at.dasz.CourseOrganiser.Semester>(
 				new Guid("30583b3c-51ff-4308-8e00-8f4f8cacb80c"),
 				"Semester",
 				null,
 				obj => obj.Semester,
 				(obj, val) => obj.Semester = val),
+			// rel: GroupExcercise passes Excercise (a8350540-d61e-48b3-b7a1-39751968dcf3)
+			// rel: Excercise happens_in Semester (719bf072-74d1-4878-8d8b-db1c92d60145)
 		};
 		
 		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)

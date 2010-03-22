@@ -1,14 +1,15 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Kistl.API;
-using Kistl.App.Base;
-using Kistl.Server.Generators.Extensions;
 
 namespace Kistl.DalProvider.EF.Generator.Implementation.CompoundObjects
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+
+    using Kistl.API;
+    using Kistl.App.Base;
+    using Kistl.Server.Generators.Extensions;
+
     public class Template
         : Kistl.Server.Generators.Templates.Implementation.CompoundObjects.Template
     {

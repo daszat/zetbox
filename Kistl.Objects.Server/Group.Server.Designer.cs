@@ -475,42 +475,50 @@ namespace Kistl.App.Base
 
 
 		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			new CustomPropertyDescriptor<Group, ICollection<Kistl.App.Base.Group>>(
+			// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
+			new CustomPropertyDescriptor<Group__Implementation__, ICollection<Kistl.App.Base.Group>>(
 				new Guid("8bf923e1-1e2c-4fec-bd18-098b1ca4ff20"),
 				"ChildGroups",
 				null,
 				obj => obj.ChildGroups,
 				null), // lists are read-only properties
-			new CustomPropertyDescriptor<Group, Guid>(
+			// else
+			new CustomPropertyDescriptor<Group__Implementation__, Guid>(
 				new Guid("c776e87f-2b95-466e-848e-0ce195f4bd73"),
 				"ExportGuid",
 				null,
 				obj => obj.ExportGuid,
 				(obj, val) => obj.ExportGuid = val),
-			new CustomPropertyDescriptor<Group, ICollection<Kistl.App.Base.Identity>>(
+			// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
+			new CustomPropertyDescriptor<Group__Implementation__, ICollection<Kistl.App.Base.Identity>>(
 				new Guid("f60308a5-a502-4641-aa19-f895e701778c"),
 				"Member",
 				null,
 				obj => obj.Member,
 				null), // lists are read-only properties
-			new CustomPropertyDescriptor<Group, Kistl.App.Base.Module>(
+			// else
+			new CustomPropertyDescriptor<Group__Implementation__, Kistl.App.Base.Module>(
 				new Guid("8da2dab4-81c9-4659-9f25-c6b5177ba26d"),
 				"Module",
 				null,
 				obj => obj.Module,
 				(obj, val) => obj.Module = val),
-			new CustomPropertyDescriptor<Group, string>(
+			// else
+			new CustomPropertyDescriptor<Group__Implementation__, string>(
 				new Guid("99c320b1-0003-4e2d-aa98-9a215d80988b"),
 				"Name",
 				null,
 				obj => obj.Name,
 				(obj, val) => obj.Name = val),
-			new CustomPropertyDescriptor<Group, ICollection<Kistl.App.Base.Group>>(
+			// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
+			new CustomPropertyDescriptor<Group__Implementation__, ICollection<Kistl.App.Base.Group>>(
 				new Guid("257a1f6e-86cf-45a0-bce5-f75cd901c28d"),
 				"ParentGroups",
 				null,
 				obj => obj.ParentGroups,
 				null), // lists are read-only properties
+			// rel: Group has Module (8d76b5ef-a7ae-4d4b-a92e-747fe972acfb)
+			// rel: GroupMembership has Group (bb6d8d28-041f-4e53-8916-9f69b480d6ba)
 		};
 		
 		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)

@@ -531,36 +531,44 @@ namespace Kistl.App.GUI
 
 
 		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			new CustomPropertyDescriptor<ViewDescriptor, Kistl.App.Base.TypeRef>(
+			// else
+			new CustomPropertyDescriptor<ViewDescriptor__Implementation__, Kistl.App.Base.TypeRef>(
 				new Guid("eff6276d-975b-4a0d-bd3c-ad76af2189c3"),
 				"ControlRef",
 				null,
 				obj => obj.ControlRef,
 				(obj, val) => obj.ControlRef = val),
-			new CustomPropertyDescriptor<ViewDescriptor, Guid>(
+			// else
+			new CustomPropertyDescriptor<ViewDescriptor__Implementation__, Guid>(
 				new Guid("94140a56-9fed-4d65-8c2c-cb8e658dff96"),
 				"ExportGuid",
 				null,
 				obj => obj.ExportGuid,
 				(obj, val) => obj.ExportGuid = val),
-			new CustomPropertyDescriptor<ViewDescriptor, Kistl.App.GUI.ControlKindClass>(
+			// else
+			new CustomPropertyDescriptor<ViewDescriptor__Implementation__, Kistl.App.GUI.ControlKindClass>(
 				new Guid("b7548d0b-f503-47fc-9808-52c491b8f2dd"),
 				"Kind",
 				null,
 				obj => obj.Kind,
 				(obj, val) => obj.Kind = val),
-			new CustomPropertyDescriptor<ViewDescriptor, Kistl.App.Base.Module>(
+			// else
+			new CustomPropertyDescriptor<ViewDescriptor__Implementation__, Kistl.App.Base.Module>(
 				new Guid("25da3568-f362-4441-841e-7c163b10b983"),
 				"Module",
 				null,
 				obj => obj.Module,
 				(obj, val) => obj.Module = val),
-			new CustomPropertyDescriptor<ViewDescriptor, Kistl.App.GUI.Toolkit>(
+			// else
+			new CustomPropertyDescriptor<ViewDescriptor__Implementation__, Kistl.App.GUI.Toolkit>(
 				new Guid("2a798728-d79d-471f-be51-1f488beb8dc1"),
 				"Toolkit",
 				null,
 				obj => obj.Toolkit,
 				(obj, val) => obj.Toolkit = val),
+			// rel: ViewDescriptor has Module (51b089fa-edd9-4a1b-9f4c-ccfdaad76856)
+			// rel: View has ControlRef (6c1c4c7c-7f0c-4c80-a937-ed6af8774d3f)
+			// rel: Control isof Kind (b4911f1f-d707-4b14-9b7e-b6c6fd49a640)
 		};
 		
 		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)

@@ -56,18 +56,19 @@ this.WriteObjects("			me.",  prop.Name , " = other.",  prop.Name , " != null ? (
 			foreach(var prop in cls.Properties.OfType<ObjectReferenceProperty>().Where(p => !p.IsList()).OrderBy(p => p.Name))
 			{
 				if (prop.RelationEnd.HasPersistentOrder) {
+					var positionPropertyName = Construct.ListPositionPropertyName(prop.RelationEnd);
 
-#line 42 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\ApplyChangesFromMethod.cst"
-this.WriteObjects("			this.",  prop.Name , "",  Kistl.API.Helper.PositionSuffix , " = otherImpl.",  prop.Name , "",  Kistl.API.Helper.PositionSuffix , ";\r\n");
-#line 44 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\ApplyChangesFromMethod.cst"
+#line 43 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\ApplyChangesFromMethod.cst"
+this.WriteObjects("			this.",  positionPropertyName , " = otherImpl.",  positionPropertyName , ";\r\n");
+#line 45 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\ApplyChangesFromMethod.cst"
 }
 
-#line 46 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\ApplyChangesFromMethod.cst"
+#line 47 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\ApplyChangesFromMethod.cst"
 this.WriteObjects("			this._fk_",  prop.Name , " = otherImpl._fk_",  prop.Name , ";\r\n");
-#line 48 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\ApplyChangesFromMethod.cst"
+#line 49 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\ApplyChangesFromMethod.cst"
 }
 
-#line 50 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\ApplyChangesFromMethod.cst"
+#line 51 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\ApplyChangesFromMethod.cst"
 this.WriteObjects("		}\r\n");
 
         }

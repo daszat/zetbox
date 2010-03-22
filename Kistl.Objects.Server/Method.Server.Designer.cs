@@ -813,7 +813,7 @@ namespace Kistl.App.Base
                 if (_ParameterWrapper == null)
                 {
                     _ParameterWrapper = new EntityListWrapper<Kistl.App.Base.BaseParameter, Kistl.App.Base.BaseParameter__Implementation__>(
-                            this.Context, Parameter__Implementation__, "Method");
+                            this.Context, Parameter__Implementation__, "Method", "Parameter_pos");
                 }
                 return _ParameterWrapper;
             }
@@ -959,78 +959,97 @@ namespace Kistl.App.Base
 
 
 		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			new CustomPropertyDescriptor<Method, Kistl.App.Base.Identity>(
+			// else
+			new CustomPropertyDescriptor<Method__Implementation__, Kistl.App.Base.Identity>(
 				new Guid("2a7c5b69-437a-46f5-8d9f-b055c81ebada"),
 				"ChangedBy",
 				null,
 				obj => obj.ChangedBy,
 				(obj, val) => obj.ChangedBy = val),
-			new CustomPropertyDescriptor<Method, DateTime?>(
+			// else
+			new CustomPropertyDescriptor<Method__Implementation__, DateTime?>(
 				new Guid("3df96dd2-8cfa-4b37-bf19-792d8c3fc90d"),
 				"ChangedOn",
 				null,
 				obj => obj.ChangedOn,
 				(obj, val) => obj.ChangedOn = val),
-			new CustomPropertyDescriptor<Method, Kistl.App.Base.Identity>(
+			// else
+			new CustomPropertyDescriptor<Method__Implementation__, Kistl.App.Base.Identity>(
 				new Guid("b1c88012-ceb1-48b2-812b-454a1d5205cb"),
 				"CreatedBy",
 				null,
 				obj => obj.CreatedBy,
 				(obj, val) => obj.CreatedBy = val),
-			new CustomPropertyDescriptor<Method, DateTime?>(
+			// else
+			new CustomPropertyDescriptor<Method__Implementation__, DateTime?>(
 				new Guid("4bfb09a2-bcd3-4983-b57d-d1bfcf15a343"),
 				"CreatedOn",
 				null,
 				obj => obj.CreatedOn,
 				(obj, val) => obj.CreatedOn = val),
-			new CustomPropertyDescriptor<Method, string>(
+			// else
+			new CustomPropertyDescriptor<Method__Implementation__, string>(
 				new Guid("cbf27789-e98f-4d9f-88e9-f3ff89e8c952"),
 				"Description",
 				null,
 				obj => obj.Description,
 				(obj, val) => obj.Description = val),
-			new CustomPropertyDescriptor<Method, Guid>(
+			// else
+			new CustomPropertyDescriptor<Method__Implementation__, Guid>(
 				new Guid("842eb3fc-3c8f-47d6-a59f-225c75ec2439"),
 				"ExportGuid",
 				null,
 				obj => obj.ExportGuid,
 				(obj, val) => obj.ExportGuid = val),
-			new CustomPropertyDescriptor<Method, bool>(
+			// else
+			new CustomPropertyDescriptor<Method__Implementation__, bool>(
 				new Guid("5ac29d6a-9dec-4d88-8f66-59ee7a139f4d"),
 				"IsDisplayable",
 				null,
 				obj => obj.IsDisplayable,
 				(obj, val) => obj.IsDisplayable = val),
-			new CustomPropertyDescriptor<Method, ICollection<Kistl.App.Base.MethodInvocation>>(
+			// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
+			new CustomPropertyDescriptor<Method__Implementation__, ICollection<Kistl.App.Base.MethodInvocation>>(
 				new Guid("dc2bd380-6e63-4a44-bcc3-192780f80606"),
 				"MethodInvocations",
 				null,
 				obj => obj.MethodInvocations,
 				null), // lists are read-only properties
-			new CustomPropertyDescriptor<Method, Kistl.App.Base.Module>(
+			// else
+			new CustomPropertyDescriptor<Method__Implementation__, Kistl.App.Base.Module>(
 				new Guid("51640f6f-b2ae-4f26-915e-fda5a2c060a6"),
 				"Module",
 				null,
 				obj => obj.Module,
 				(obj, val) => obj.Module = val),
-			new CustomPropertyDescriptor<Method, string>(
+			// else
+			new CustomPropertyDescriptor<Method__Implementation__, string>(
 				new Guid("88de8421-488e-452e-8289-33074054b22f"),
 				"Name",
 				null,
 				obj => obj.Name,
 				(obj, val) => obj.Name = val),
-			new CustomPropertyDescriptor<Method, Kistl.App.Base.DataType>(
+			// else
+			new CustomPropertyDescriptor<Method__Implementation__, Kistl.App.Base.DataType>(
 				new Guid("9afc74a4-4eeb-4c39-879c-eacc8f369fa7"),
 				"ObjectClass",
 				null,
 				obj => obj.ObjectClass,
 				(obj, val) => obj.ObjectClass = val),
-			new CustomPropertyDescriptor<Method, IList<Kistl.App.Base.BaseParameter>>(
+			// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
+			new CustomPropertyDescriptor<Method__Implementation__, IList<Kistl.App.Base.BaseParameter>>(
 				new Guid("8dace0a9-6db1-458d-b054-ace4a3d906c2"),
 				"Parameter",
 				null,
 				obj => obj.Parameter,
 				null), // lists are read-only properties
+			// rel: Method has Parameter (f7738ce1-9784-4b8b-8156-9f4f0e97f937)
+			// rel: Method has MethodInvocations (4a388300-4e4d-45d2-b04e-0fe8efc25fec)
+			// rel: Visual has Method (304c9a1e-7365-45ee-a685-348fd76f10e7)
+			// rel: Method was CreatedBy (c2f4906d-2841-47df-bd91-6228f2f4285a)
+			// rel: Method was ChangedBy (30768fac-3c40-46e7-94fd-a2ab73447cd7)
+			// rel: Method has Module (b251ee8c-2821-441e-b631-d215c006f1c8)
+			// rel: ObjectClass has Methods (557ddcb4-8e99-48f2-9107-ef0cbff8066b)
 		};
 		
 		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)

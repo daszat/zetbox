@@ -382,31 +382,36 @@ namespace Kistl.App.TimeRecords
 
 
 		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			new CustomPropertyDescriptor<WorkEffortAccount, double?>(
+			// else
+			new CustomPropertyDescriptor<WorkEffortAccount__Implementation__, double?>(
 				new Guid("2f57b6c8-d798-43de-b9c8-29675ff0c65f"),
 				"BudgetHours",
 				null,
 				obj => obj.BudgetHours,
 				(obj, val) => obj.BudgetHours = val),
-			new CustomPropertyDescriptor<WorkEffortAccount, ICollection<Kistl.App.Projekte.Mitarbeiter>>(
+			// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
+			new CustomPropertyDescriptor<WorkEffortAccount__Implementation__, ICollection<Kistl.App.Projekte.Mitarbeiter>>(
 				new Guid("21ed2b37-6e10-4aff-b4c1-554a1cc0e967"),
 				"Mitarbeiter",
 				null,
 				obj => obj.Mitarbeiter,
 				null), // lists are read-only properties
-			new CustomPropertyDescriptor<WorkEffortAccount, string>(
+			// else
+			new CustomPropertyDescriptor<WorkEffortAccount__Implementation__, string>(
 				new Guid("763b0b46-8309-4532-ba98-36575f02a1d1"),
 				"Name",
 				null,
 				obj => obj.Name,
 				(obj, val) => obj.Name = val),
-			new CustomPropertyDescriptor<WorkEffortAccount, string>(
+			// else
+			new CustomPropertyDescriptor<WorkEffortAccount__Implementation__, string>(
 				new Guid("79c8188d-d8e2-41b7-82c9-08f384fd6b68"),
 				"Notes",
 				null,
 				obj => obj.Notes,
 				(obj, val) => obj.Notes = val),
-			new CustomPropertyDescriptor<WorkEffortAccount, double?>(
+			// else
+			new CustomPropertyDescriptor<WorkEffortAccount__Implementation__, double?>(
 				new Guid("f7816f8a-0b07-429c-9161-47ca495a2e41"),
 				"SpentHours",
 				null,

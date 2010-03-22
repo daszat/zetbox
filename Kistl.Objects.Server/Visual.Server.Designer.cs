@@ -455,36 +455,44 @@ namespace Kistl.App.GUI
 
 
 		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			new CustomPropertyDescriptor<Visual, ICollection<Kistl.App.GUI.Visual>>(
+			// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
+			new CustomPropertyDescriptor<Visual__Implementation__, ICollection<Kistl.App.GUI.Visual>>(
 				new Guid("9f69c3bd-e274-4639-b30c-8d2a9599917b"),
 				"Children",
 				null,
 				obj => obj.Children,
 				null), // lists are read-only properties
-			new CustomPropertyDescriptor<Visual, ICollection<Kistl.App.GUI.Visual>>(
+			// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
+			new CustomPropertyDescriptor<Visual__Implementation__, ICollection<Kistl.App.GUI.Visual>>(
 				new Guid("7b18f26e-0f3f-4554-b469-1029bd4ca10b"),
 				"ContextMenu",
 				null,
 				obj => obj.ContextMenu,
 				null), // lists are read-only properties
-			new CustomPropertyDescriptor<Visual, string>(
+			// else
+			new CustomPropertyDescriptor<Visual__Implementation__, string>(
 				new Guid("8d3b7c91-2bbf-4dcf-bc37-318dc0fda92d"),
 				"Description",
 				null,
 				obj => obj.Description,
 				(obj, val) => obj.Description = val),
-			new CustomPropertyDescriptor<Visual, Kistl.App.Base.Method>(
+			// else
+			new CustomPropertyDescriptor<Visual__Implementation__, Kistl.App.Base.Method>(
 				new Guid("0b55b2ba-3ac0-4631-8a73-1e8846c8e9b1"),
 				"Method",
 				null,
 				obj => obj.Method,
 				(obj, val) => obj.Method = val),
-			new CustomPropertyDescriptor<Visual, Kistl.App.Base.Property>(
+			// else
+			new CustomPropertyDescriptor<Visual__Implementation__, Kistl.App.Base.Property>(
 				new Guid("a432e3ff-61ed-4726-8559-f34516181065"),
 				"Property",
 				null,
 				obj => obj.Property,
 				(obj, val) => obj.Property = val),
+			// rel: Visual has Property (73178882-7f93-444b-bf93-75db193904cf)
+			// rel: Template has VisualTree (299a4cf9-3f3e-4b89-b6ba-6b163b4e5dc0)
+			// rel: Visual has Method (304c9a1e-7365-45ee-a685-348fd76f10e7)
 		};
 		
 		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)

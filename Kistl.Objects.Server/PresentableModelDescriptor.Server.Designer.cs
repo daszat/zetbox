@@ -655,48 +655,60 @@ namespace Kistl.App.GUI
 
 
 		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			new CustomPropertyDescriptor<PresentableModelDescriptor, Kistl.App.GUI.ControlKind>(
+			// else
+			new CustomPropertyDescriptor<PresentableModelDescriptor__Implementation__, Kistl.App.GUI.ControlKind>(
 				new Guid("6c744476-35e0-4cef-a221-f02abc81566c"),
 				"DefaultGridCellKind",
 				null,
 				obj => obj.DefaultGridCellKind,
 				(obj, val) => obj.DefaultGridCellKind = val),
-			new CustomPropertyDescriptor<PresentableModelDescriptor, Kistl.App.GUI.ControlKind>(
+			// else
+			new CustomPropertyDescriptor<PresentableModelDescriptor__Implementation__, Kistl.App.GUI.ControlKind>(
 				new Guid("b535115c-b847-479d-bdea-a7994ae6eeca"),
 				"DefaultKind",
 				null,
 				obj => obj.DefaultKind,
 				(obj, val) => obj.DefaultKind = val),
-			new CustomPropertyDescriptor<PresentableModelDescriptor, string>(
+			// else
+			new CustomPropertyDescriptor<PresentableModelDescriptor__Implementation__, string>(
 				new Guid("93e25648-50f9-40d8-8753-e5dadab68e1d"),
 				"Description",
 				null,
 				obj => obj.Description,
 				(obj, val) => obj.Description = val),
-			new CustomPropertyDescriptor<PresentableModelDescriptor, Guid>(
+			// else
+			new CustomPropertyDescriptor<PresentableModelDescriptor__Implementation__, Guid>(
 				new Guid("77ce1e5b-f244-4279-af13-b3e75b55f933"),
 				"ExportGuid",
 				null,
 				obj => obj.ExportGuid,
 				(obj, val) => obj.ExportGuid = val),
-			new CustomPropertyDescriptor<PresentableModelDescriptor, Kistl.App.Base.Module>(
+			// else
+			new CustomPropertyDescriptor<PresentableModelDescriptor__Implementation__, Kistl.App.Base.Module>(
 				new Guid("0b7135d3-dedc-4091-a0c4-690c1b4a2b6d"),
 				"Module",
 				null,
 				obj => obj.Module,
 				(obj, val) => obj.Module = val),
-			new CustomPropertyDescriptor<PresentableModelDescriptor, Kistl.App.Base.TypeRef>(
+			// else
+			new CustomPropertyDescriptor<PresentableModelDescriptor__Implementation__, Kistl.App.Base.TypeRef>(
 				new Guid("554288d1-f5f4-4b22-908b-01525a1d0f9b"),
 				"PresentableModelRef",
 				null,
 				obj => obj.PresentableModelRef,
 				(obj, val) => obj.PresentableModelRef = val),
-			new CustomPropertyDescriptor<PresentableModelDescriptor, ICollection<Kistl.App.GUI.ControlKind>>(
+			// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
+			new CustomPropertyDescriptor<PresentableModelDescriptor__Implementation__, ICollection<Kistl.App.GUI.ControlKind>>(
 				new Guid("5e2e007c-2e90-4ba6-9c9d-46e62b662ff9"),
 				"SecondaryControlKinds",
 				null,
 				obj => obj.SecondaryControlKinds,
 				null), // lists are read-only properties
+			// rel: PresentableModelDescriptor has Module (557dbc1c-2a38-4c77-8544-264a95307980)
+			// rel: PresentableModelDescriptor displayedInGridBy DefaultGridCellKind (0a03215f-1c1a-4a44-892d-86642eefe9f1)
+			// rel: Presentable has DefaultPresentableModelDescriptor (1ae94c81-3359-45e8-b97a-b61add91abba)
+			// rel: Property has ValueModelDescriptor (3437ea5d-d926-4a0b-a848-9dafedf7ad6a)
+			// rel: Descriptor has PresentableModelRef (9d771d87-3b28-4e5e-be33-ea71028e1720)
 		};
 		
 		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)

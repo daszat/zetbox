@@ -121,6 +121,7 @@ namespace Kistl.Server.Generators
         protected virtual string RunTemplate(IKistlContext ctx, string templateName, string filename, params object[] args)
         {
             var gen = Generator.GetTemplateGenerator(
+                Description,
                 TemplateProviderNamespace,
                 TemplateProviderAssembly,
                 templateName,

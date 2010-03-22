@@ -372,36 +372,42 @@ namespace at.dasz.CourseOrganiser
 
 
 		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			new CustomPropertyDescriptor<Student, ICollection<at.dasz.CourseOrganiser.GroupExcercise>>(
+			// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
+			new CustomPropertyDescriptor<Student__Implementation__, ICollection<at.dasz.CourseOrganiser.GroupExcercise>>(
 				new Guid("6c9bed6d-1ce1-4260-8e25-d864ffb85463"),
 				"GroupExcercise",
 				null,
 				obj => obj.GroupExcercise,
 				null), // lists are read-only properties
-			new CustomPropertyDescriptor<Student, string>(
+			// else
+			new CustomPropertyDescriptor<Student__Implementation__, string>(
 				new Guid("d65a724a-85eb-49f4-89ce-a050aec5d7f8"),
 				"MatriculationNumber",
 				null,
 				obj => obj.MatriculationNumber,
 				(obj, val) => obj.MatriculationNumber = val),
-			new CustomPropertyDescriptor<Student, string>(
+			// else
+			new CustomPropertyDescriptor<Student__Implementation__, string>(
 				new Guid("0090bd59-0e0e-49cb-be92-935eae1276ca"),
 				"Name",
 				null,
 				obj => obj.Name,
 				(obj, val) => obj.Name = val),
-			new CustomPropertyDescriptor<Student, ICollection<at.dasz.CourseOrganiser.Semester>>(
+			// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
+			new CustomPropertyDescriptor<Student__Implementation__, ICollection<at.dasz.CourseOrganiser.Semester>>(
 				new Guid("f95b44bb-edd0-4e81-82b6-4e1b2476190e"),
 				"Semesters",
 				null,
 				obj => obj.Semesters,
 				null), // lists are read-only properties
-			new CustomPropertyDescriptor<Student, ICollection<at.dasz.CourseOrganiser.StudentExam>>(
+			// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
+			new CustomPropertyDescriptor<Student__Implementation__, ICollection<at.dasz.CourseOrganiser.StudentExam>>(
 				new Guid("b99355b0-540a-4585-9453-bbe16255b164"),
 				"StudentExam",
 				null,
 				obj => obj.StudentExam,
 				null), // lists are read-only properties
+			// rel: StudentExam writtenby Student (da365b25-b8d4-43dd-91c7-f30cad09d600)
 		};
 		
 		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)

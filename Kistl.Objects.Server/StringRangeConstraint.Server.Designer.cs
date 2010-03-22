@@ -245,13 +245,15 @@ namespace Kistl.App.Base
 
 
 		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			new CustomPropertyDescriptor<StringRangeConstraint, int?>(
+			// else
+			new CustomPropertyDescriptor<StringRangeConstraint__Implementation__, int?>(
 				new Guid("17aa679d-72d0-480e-9bd9-b37f4eba1d68"),
 				"MaxLength",
 				null,
 				obj => obj.MaxLength,
 				(obj, val) => obj.MaxLength = val),
-			new CustomPropertyDescriptor<StringRangeConstraint, int>(
+			// else
+			new CustomPropertyDescriptor<StringRangeConstraint__Implementation__, int>(
 				new Guid("8d3e24f7-c8c8-4bb3-931e-d0452e7ee5b6"),
 				"MinLength",
 				null,

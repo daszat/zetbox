@@ -16,6 +16,7 @@
 <%@ Parameter Name="referencedInterface" Type="String" %>
 <%@ Parameter Name="referencedImplementation" Type="String" %>
 <%@ Parameter Name="hasPositionStorage" Type="bool" %>
+<%@ Parameter Name="positionPropertyName" Type="string" %>
 <%@ Parameter Name="relDataTypeExportable" Type="bool" %>
 <%@ Parameter Name="moduleNamespace" Type="string" %>
 <%@ Parameter Name="eagerLoading" Type="bool" %>
@@ -135,13 +136,11 @@
         }
         
 <%
-	string posStorageName = name + Kistl.API.Helper.PositionSuffix;
-
 	if (hasPositionStorage)
 	{
 		Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty.Call(Host, ctx,
 		    serializationList,
-			"int?", posStorageName, moduleNamespace);
+			"int?", positionPropertyName, moduleNamespace);
 	}
 %>
         

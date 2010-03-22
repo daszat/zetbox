@@ -45,7 +45,7 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.Antwort)">
 	    <MappingFragment StoreEntitySet="Antwort">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
-<ScalarProperty Name="Fragebogen_pos" ColumnName="fk_Ein_Fragebogen_pos" />
+<ScalarProperty Name="gute_Antworten_pos" ColumnName="fk_Ein_Fragebogen_pos" />
 <ScalarProperty Name="Frage" ColumnName="Frage" />
 <ScalarProperty Name="FragenNummer" ColumnName="FragenNummer" />
 <ScalarProperty Name="GegebeneAntwort" ColumnName="GegebeneAntwort" />
@@ -97,7 +97,7 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.BaseParameter)">
 	    <MappingFragment StoreEntitySet="BaseParameter">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
-<ScalarProperty Name="Method_pos" ColumnName="fk_Method_pos" />
+<ScalarProperty Name="Parameter_pos" ColumnName="fk_Method_pos" />
 <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -629,7 +629,7 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.Property)">
 	    <MappingFragment StoreEntitySet="Property">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
-<ScalarProperty Name="ObjectClass_pos" ColumnName="fk_ObjectClass_pos" />
+<ScalarProperty Name="Properties_pos" ColumnName="fk_ObjectClass_pos" />
 <ScalarProperty Name="CategoryTags" ColumnName="CategoryTags" />
 <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />

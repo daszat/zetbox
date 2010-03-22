@@ -66,36 +66,48 @@ namespace Kistl.API.Tests
 			Assert.That(result, Is.False);
 		}
 
+        private class TestClass
+        {
+            public int IntProperty { get; set; }
+            public bool BoolProperty { get; set; }
+            public string StringProperty { get; set; }
+        }
+
 		[Test]
 		public void GetPropertyValue()
 		{
-			Assert.That(obj.GetPropertyValue<int>("IntProperty"), Is.EqualTo(obj.IntProperty));
-			Assert.That(obj.GetPropertyValue<bool>("BoolProperty"), Is.EqualTo(obj.BoolProperty));
-			Assert.That(obj.GetPropertyValue<string>("StringProperty"), Is.EqualTo(obj.StringProperty));
+            var test = new TestClass() { BoolProperty = true, IntProperty = 42, StringProperty = "muh" };
+            Assert.That(test.GetPropertyValue<int>("IntProperty"), Is.EqualTo(test.IntProperty));
+            Assert.That(test.GetPropertyValue<bool>("BoolProperty"), Is.EqualTo(test.BoolProperty));
+            Assert.That(test.GetPropertyValue<string>("StringProperty"), Is.EqualTo(test.StringProperty));
+            Assert.That(() => obj.GetPropertyValue<string>("StringProperty"), Throws.InstanceOf<NotImplementedException>());
 		}
 
 		[Test]
 		public void SetPropertyValue()
 		{
-			obj.SetPropertyValue<int>("IntProperty", 2);
-			obj.SetPropertyValue<bool>("BoolProperty", false);
-			obj.SetPropertyValue<string>("StringProperty", "Hello");
+            var test = new TestClass();
+            test.SetPropertyValue<int>("IntProperty", 2);
+            test.SetPropertyValue<bool>("BoolProperty", false);
+            test.SetPropertyValue<string>("StringProperty", "Hello");
 
-			Assert.That(obj.IntProperty, Is.EqualTo(2));
-			Assert.That(obj.BoolProperty, Is.EqualTo(false));
-			Assert.That(obj.StringProperty, Is.EqualTo("Hello"));
-		}
+            Assert.That(test.IntProperty, Is.EqualTo(2));
+            Assert.That(test.BoolProperty, Is.EqualTo(false));
+            Assert.That(test.StringProperty, Is.EqualTo("Hello"));
+        }
 
 		[Test]
 		public void GetPropertyValue_InvalidPropertyName()
 		{
-			Assert.That(() => obj.GetPropertyValue<int>("TestProperty"), Throws.InstanceOf<ArgumentOutOfRangeException>());
+            var test = new TestClass() { BoolProperty = true, IntProperty = 42, StringProperty = "muh" };
+            Assert.That(() => test.GetPropertyValue<int>("TestProperty"), Throws.InstanceOf<ArgumentOutOfRangeException>());
 		}
 
 		[Test]
 		public void SetPropertyValue_InvalidPropertyName()
 		{
-			Assert.That(() => obj.SetPropertyValue<int>("TestProperty", 1), Throws.InstanceOf<ArgumentOutOfRangeException>());
+            var test = new TestClass() { BoolProperty = true, IntProperty = 42, StringProperty = "muh" };
+            Assert.That(() => test.SetPropertyValue<int>("TestProperty", 1), Throws.InstanceOf<ArgumentOutOfRangeException>());
 		}
 
 		[Test]

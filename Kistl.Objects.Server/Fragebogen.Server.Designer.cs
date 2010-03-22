@@ -78,7 +78,7 @@ namespace Kistl.App.Test
                 if (_AntwortenWrapper == null)
                 {
                     _AntwortenWrapper = new EntityListWrapper<Kistl.App.Test.Antwort, Kistl.App.Test.Antwort__Implementation__>(
-                            this.Context, Antworten__Implementation__, "Ein_Fragebogen");
+                            this.Context, Antworten__Implementation__, "Ein_Fragebogen", "gute_Antworten_pos");
                 }
                 return _AntwortenWrapper;
             }
@@ -272,24 +272,28 @@ namespace Kistl.App.Test
 
 
 		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			new CustomPropertyDescriptor<Fragebogen, IList<Kistl.App.Test.Antwort>>(
+			// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
+			new CustomPropertyDescriptor<Fragebogen__Implementation__, IList<Kistl.App.Test.Antwort>>(
 				new Guid("e8f20c02-abea-4c91-850f-c321adfd46f0"),
 				"Antworten",
 				null,
 				obj => obj.Antworten,
 				null), // lists are read-only properties
-			new CustomPropertyDescriptor<Fragebogen, int?>(
+			// else
+			new CustomPropertyDescriptor<Fragebogen__Implementation__, int?>(
 				new Guid("b65f1a91-e063-4054-a2e7-d5dc0292e3fc"),
 				"BogenNummer",
 				null,
 				obj => obj.BogenNummer,
 				(obj, val) => obj.BogenNummer = val),
-			new CustomPropertyDescriptor<Fragebogen, ICollection<Kistl.App.Test.TestStudent>>(
+			// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
+			new CustomPropertyDescriptor<Fragebogen__Implementation__, ICollection<Kistl.App.Test.TestStudent>>(
 				new Guid("3a91e745-0dd2-4f31-864e-eaf657ddb577"),
 				"Student",
 				null,
 				obj => obj.Student,
 				null), // lists are read-only properties
+			// rel: Ein_Fragebogen enthaelt gute_Antworten (0f425937-0d1e-4887-ae65-a162b45fc93e)
 		};
 		
 		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)

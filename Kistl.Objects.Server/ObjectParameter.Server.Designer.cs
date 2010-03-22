@@ -231,12 +231,14 @@ namespace Kistl.App.Base
 
 
 		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			new CustomPropertyDescriptor<ObjectParameter, Kistl.App.Base.DataType>(
+			// else
+			new CustomPropertyDescriptor<ObjectParameter__Implementation__, Kistl.App.Base.DataType>(
 				new Guid("9bd64c60-7282-47f0-8069-528a175fcc92"),
 				"DataType",
 				null,
 				obj => obj.DataType,
 				(obj, val) => obj.DataType = val),
+			// rel: ObjectParameter has DataType (a6a30705-15ad-4a3a-b624-23305fe2807a)
 		};
 		
 		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)

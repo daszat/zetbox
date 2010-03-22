@@ -240,18 +240,22 @@ namespace Kistl.App.Base
 
 
 		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			new CustomPropertyDescriptor<Enumeration, bool>(
+			// else
+			new CustomPropertyDescriptor<Enumeration__Implementation__, bool>(
 				new Guid("1ef92eea-d8b3-4f95-a694-9ca09ceff0e5"),
 				"AreFlags",
 				null,
 				obj => obj.AreFlags,
 				(obj, val) => obj.AreFlags = val),
-			new CustomPropertyDescriptor<Enumeration, ICollection<Kistl.App.Base.EnumerationEntry>>(
+			// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
+			new CustomPropertyDescriptor<Enumeration__Implementation__, ICollection<Kistl.App.Base.EnumerationEntry>>(
 				new Guid("1619c8a7-b969-4c05-851c-7a2545cda484"),
 				"EnumerationEntries",
 				null,
 				obj => obj.EnumerationEntries,
 				null), // lists are read-only properties
+			// rel: EnumerationProperty has Enumeration (f85ff30f-0907-4e28-806e-a7f1aac98acb)
+			// rel: Enumeration has EnumerationEntries (55bd59b8-ad37-4837-b066-d505f86316fe)
 		};
 		
 		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)

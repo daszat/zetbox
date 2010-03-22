@@ -731,66 +731,89 @@ namespace Kistl.App.Base
 
 
 		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			new CustomPropertyDescriptor<Module, ICollection<Kistl.App.Base.Assembly>>(
+			// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
+			new CustomPropertyDescriptor<Module__Implementation__, ICollection<Kistl.App.Base.Assembly>>(
 				new Guid("cab23a85-a179-475c-a70f-77789e2a2907"),
 				"Assemblies",
 				null,
 				obj => obj.Assemblies,
 				null), // lists are read-only properties
-			new CustomPropertyDescriptor<Module, Kistl.App.Base.Identity>(
+			// else
+			new CustomPropertyDescriptor<Module__Implementation__, Kistl.App.Base.Identity>(
 				new Guid("d1cad06b-040e-417c-8e43-67fa2e861649"),
 				"ChangedBy",
 				null,
 				obj => obj.ChangedBy,
 				(obj, val) => obj.ChangedBy = val),
-			new CustomPropertyDescriptor<Module, DateTime?>(
+			// else
+			new CustomPropertyDescriptor<Module__Implementation__, DateTime?>(
 				new Guid("75aedd67-e42d-461d-9263-c301d15b54f0"),
 				"ChangedOn",
 				null,
 				obj => obj.ChangedOn,
 				(obj, val) => obj.ChangedOn = val),
-			new CustomPropertyDescriptor<Module, Kistl.App.Base.Identity>(
+			// else
+			new CustomPropertyDescriptor<Module__Implementation__, Kistl.App.Base.Identity>(
 				new Guid("7b76322d-c8cd-4845-9cb4-b77f572692be"),
 				"CreatedBy",
 				null,
 				obj => obj.CreatedBy,
 				(obj, val) => obj.CreatedBy = val),
-			new CustomPropertyDescriptor<Module, DateTime?>(
+			// else
+			new CustomPropertyDescriptor<Module__Implementation__, DateTime?>(
 				new Guid("c6370ff5-115a-441d-a688-28297c9e46f8"),
 				"CreatedOn",
 				null,
 				obj => obj.CreatedOn,
 				(obj, val) => obj.CreatedOn = val),
-			new CustomPropertyDescriptor<Module, ICollection<Kistl.App.Base.DataType>>(
+			// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
+			new CustomPropertyDescriptor<Module__Implementation__, ICollection<Kistl.App.Base.DataType>>(
 				new Guid("a1711984-5263-4407-ac67-6e4123954976"),
 				"DataTypes",
 				null,
 				obj => obj.DataTypes,
 				null), // lists are read-only properties
-			new CustomPropertyDescriptor<Module, string>(
+			// else
+			new CustomPropertyDescriptor<Module__Implementation__, string>(
 				new Guid("79408b86-1731-42ad-89b2-ed5c567fbf8a"),
 				"Description",
 				null,
 				obj => obj.Description,
 				(obj, val) => obj.Description = val),
-			new CustomPropertyDescriptor<Module, Guid>(
+			// else
+			new CustomPropertyDescriptor<Module__Implementation__, Guid>(
 				new Guid("75e3db82-220c-474e-973a-ceb65fd8386d"),
 				"ExportGuid",
 				null,
 				obj => obj.ExportGuid,
 				(obj, val) => obj.ExportGuid = val),
-			new CustomPropertyDescriptor<Module, string>(
+			// else
+			new CustomPropertyDescriptor<Module__Implementation__, string>(
 				new Guid("63facb30-d8f7-42f6-8c14-85933d5f94b8"),
 				"Name",
 				null,
 				obj => obj.Name,
 				(obj, val) => obj.Name = val),
-			new CustomPropertyDescriptor<Module, string>(
+			// else
+			new CustomPropertyDescriptor<Module__Implementation__, string>(
 				new Guid("36d2b9e7-d6b9-4a9c-a363-7e059a637919"),
 				"Namespace",
 				null,
 				obj => obj.Namespace,
 				(obj, val) => obj.Namespace = val),
+			// rel: BaseProperty has Module (bffae7c3-c5f3-4139-ae96-577f4c9fed8f)
+			// rel: Module has Relation (1c91bee2-397b-44f3-8346-313a8e2ba127)
+			// rel: Module was CreatedBy (5c8dd58e-cf1d-484f-af64-ff84ea4c3ee9)
+			// rel: Module was ChangedBy (9d108dc6-7caa-4597-95d4-82cf52da5638)
+			// rel: Icon has Module (a1360ce2-ecd5-4660-9b4d-3a2dc3919344)
+			// rel: MethodInvocation has Module (379b7181-a832-431f-a48d-ef1dd1996414)
+			// rel: AccessControl has Module (89b9c0a5-3b5a-4e04-83cf-0e8de37abcf1)
+			// rel: Module contains Assemblies (a10474db-85df-4731-a86c-124e54f3d146)
+			// rel: Group has Module (8d76b5ef-a7ae-4d4b-a92e-747fe972acfb)
+			// rel: PresentableModelDescriptor has Module (557dbc1c-2a38-4c77-8544-264a95307980)
+			// rel: ViewDescriptor has Module (51b089fa-edd9-4a1b-9f4c-ccfdaad76856)
+			// rel: Method has Module (b251ee8c-2821-441e-b631-d215c006f1c8)
+			// rel: Module contains DataTypes (52c4ab07-f341-4eb3-86e2-05f27c8af2f7)
 		};
 		
 		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)

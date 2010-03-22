@@ -145,7 +145,8 @@ namespace Kistl.App.Base
 
 
 		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			new CustomPropertyDescriptor<RoleMembership, IList<Kistl.App.Base.Relation>>(
+			// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
+			new CustomPropertyDescriptor<RoleMembership__Implementation__, IList<Kistl.App.Base.Relation>>(
 				new Guid("fb799900-1a5b-4b62-a445-5dae8febdd28"),
 				"Relations",
 				null,

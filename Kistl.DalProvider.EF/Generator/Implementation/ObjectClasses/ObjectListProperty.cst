@@ -25,6 +25,8 @@
 	string wrapperName = "_" + name + "Wrapper";
 	// the name of the wrapper class for wrapping the EntityCollection
 	string wrapperClass = rel.NeedsPositionStorage(otherEnd.GetRole()) ? "EntityListWrapper" : "EntityCollectionWrapper";
+	// the name of the position property as string argument
+	string positionPropertyNameArgument = rel.NeedsPositionStorage(otherEnd.GetRole()) ? String.Format(@", ""{0}""", Construct.ListPositionPropertyName(otherEnd)) : String.Empty;
 	
 	// the name of the EF association
 	string assocName = rel.GetAssociationName();
@@ -61,7 +63,7 @@
 	{
 		this.WriteObjects(", \"", relEnd.RoleName, "\"");
 	}
-                            %>);
+                            %><%= positionPropertyNameArgument %>);
                 }
                 return <%= wrapperName %>;
             }

@@ -786,66 +786,81 @@ namespace Kistl.App.Projekte
 
 
 		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			new CustomPropertyDescriptor<Mitarbeiter, Kistl.App.Base.Identity>(
+			// else
+			new CustomPropertyDescriptor<Mitarbeiter__Implementation__, Kistl.App.Base.Identity>(
 				new Guid("08945d72-d667-40b0-9993-05f2d8df0d0f"),
 				"ChangedBy",
 				null,
 				obj => obj.ChangedBy,
 				(obj, val) => obj.ChangedBy = val),
-			new CustomPropertyDescriptor<Mitarbeiter, DateTime?>(
+			// else
+			new CustomPropertyDescriptor<Mitarbeiter__Implementation__, DateTime?>(
 				new Guid("45650670-a031-4f4b-8ac9-adb825b3a255"),
 				"ChangedOn",
 				null,
 				obj => obj.ChangedOn,
 				(obj, val) => obj.ChangedOn = val),
-			new CustomPropertyDescriptor<Mitarbeiter, Kistl.App.Base.Identity>(
+			// else
+			new CustomPropertyDescriptor<Mitarbeiter__Implementation__, Kistl.App.Base.Identity>(
 				new Guid("4d49fec0-85be-4302-b88b-57005b0a9dd7"),
 				"CreatedBy",
 				null,
 				obj => obj.CreatedBy,
 				(obj, val) => obj.CreatedBy = val),
-			new CustomPropertyDescriptor<Mitarbeiter, DateTime?>(
+			// else
+			new CustomPropertyDescriptor<Mitarbeiter__Implementation__, DateTime?>(
 				new Guid("ced272ca-9998-49a9-8056-b1efe012909c"),
 				"CreatedOn",
 				null,
 				obj => obj.CreatedOn,
 				(obj, val) => obj.CreatedOn = val),
-			new CustomPropertyDescriptor<Mitarbeiter, DateTime?>(
+			// else
+			new CustomPropertyDescriptor<Mitarbeiter__Implementation__, DateTime?>(
 				new Guid("b10bf288-1252-49c3-9129-cfabb1637c47"),
 				"Geburtstag",
 				null,
 				obj => obj.Geburtstag,
 				(obj, val) => obj.Geburtstag = val),
-			new CustomPropertyDescriptor<Mitarbeiter, Kistl.App.Base.Identity>(
+			// else
+			new CustomPropertyDescriptor<Mitarbeiter__Implementation__, Kistl.App.Base.Identity>(
 				new Guid("5e148730-ec8a-4349-bcf7-e59cef2ce29f"),
 				"Identity",
 				null,
 				obj => obj.Identity,
 				(obj, val) => obj.Identity = val),
-			new CustomPropertyDescriptor<Mitarbeiter, string>(
+			// else
+			new CustomPropertyDescriptor<Mitarbeiter__Implementation__, string>(
 				new Guid("5aab79fd-3083-4ce1-a558-ed1449ecddce"),
 				"Name",
 				null,
 				obj => obj.Name,
 				(obj, val) => obj.Name = val),
-			new CustomPropertyDescriptor<Mitarbeiter, IList<Kistl.App.Projekte.Projekt>>(
+			// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
+			new CustomPropertyDescriptor<Mitarbeiter__Implementation__, IList<Kistl.App.Projekte.Projekt>>(
 				new Guid("1abb5a1b-ba9f-4b75-b6ea-3d28be877b7c"),
 				"Projekte",
 				null,
 				obj => obj.Projekte,
 				null), // lists are read-only properties
-			new CustomPropertyDescriptor<Mitarbeiter, string>(
+			// else
+			new CustomPropertyDescriptor<Mitarbeiter__Implementation__, string>(
 				new Guid("505988c4-dd50-4a0f-be21-a360b25e7d7d"),
 				"SVNr",
 				null,
 				obj => obj.SVNr,
 				(obj, val) => obj.SVNr = val),
-			new CustomPropertyDescriptor<Mitarbeiter, string>(
+			// else
+			new CustomPropertyDescriptor<Mitarbeiter__Implementation__, string>(
 				new Guid("73230333-f975-4f0b-9dd3-e850b48d9c13"),
 				"TelefonNummer",
 				null,
 				obj => obj.TelefonNummer,
 				(obj, val) => obj.TelefonNummer = val),
+			// rel: WorkEffort has Mitarbeiter (3963b6bc-bb5a-4615-b4db-56eecd9d3f97)
+			// rel: Mitarbeiter was CreatedBy (3c7ef80e-07a3-4cb0-93be-9163650abc9a)
+			// rel: PresenceRecord has Mitarbeiter (f6d98929-883a-4457-a49f-157324bd5ae3)
+			// rel: Mitarbeiter was ChangedBy (aeca0771-5b0f-48a7-9ff9-02a56d6fe758)
+			// rel: Auftrag has Mitarbeiter (4964faf9-ebae-4287-91f8-6d2112a5921c)
 		};
 		
 		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)

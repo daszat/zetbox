@@ -158,14 +158,17 @@ namespace Kistl.DalProvider.EF
         where TInterface : class, IDataObject
     {
         private readonly string _pointerProperty;
+        private readonly string _positionProperty;
         private List<TImpl> _orderedItems;
 
-        public EntityListWrapper(IKistlContext ctx, EntityCollection<TImpl> ec, string pointerProperty)
+        public EntityListWrapper(IKistlContext ctx, EntityCollection<TImpl> ec, string pointerProperty, string positionProperty)
             : base(ctx, ec)
         {
             if (String.IsNullOrEmpty(pointerProperty)) { throw new ArgumentOutOfRangeException("pointerProperty"); }
+            if (String.IsNullOrEmpty(positionProperty)) { throw new ArgumentOutOfRangeException("positionProperty"); }
 
             _pointerProperty = pointerProperty;
+            _positionProperty = positionProperty;
             ResetOrderedItems();
         }
 
@@ -190,12 +193,12 @@ namespace Kistl.DalProvider.EF
             // Sets the position Property for a 1:n Relation
             // eg. Method 1-n Parameter
             // Sets Parameter.Method_pos
-            item.SetPropertyValue<int?>(_pointerProperty + Helper.PositionSuffix, index);
+            item.SetPropertyValue<int?>(_positionProperty, index);
         }
 
         protected int? GetIndexProperty(TInterface item)
         {
-            return item.GetPropertyValue<int?>(_pointerProperty + Helper.PositionSuffix);
+            return item.GetPropertyValue<int?>(_positionProperty);
         }
         #endregion
 

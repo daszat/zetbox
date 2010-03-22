@@ -15,6 +15,7 @@ namespace Kistl.Client.Tests
 
     using Moq;
     using NUnit.Framework;
+    using System.ComponentModel;
 
     [TestFixture]
     public class ObjectListModelTests
@@ -43,6 +44,7 @@ namespace Kistl.Client.Tests
 
             list = new ObservableCollection<TestObject>();
             objMock.Setup(obj => obj.TestCollection).Returns(list);
+            objMock.Setup(obj => obj.GetProperties()).Returns(new PropertyDescriptorCollection(new PropertyDescriptor[] { }));
 
             orpMock = KistlMockFactory.CreateObjectReferenceProperty("TestCollection", true);
 

@@ -306,13 +306,15 @@ namespace Kistl.App.Base
 
 
 		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			new CustomPropertyDescriptor<ObjectReferenceProperty, bool>(
+			// else
+			new CustomPropertyDescriptor<ObjectReferenceProperty__Implementation__, bool>(
 				new Guid("373f0036-42d6-41e2-a2a4-74462537f426"),
 				"EagerLoading",
 				null,
 				obj => obj.EagerLoading,
 				(obj, val) => obj.EagerLoading = val),
-			new CustomPropertyDescriptor<ObjectReferenceProperty, Kistl.App.Base.RelationEnd>(
+			// else
+			new CustomPropertyDescriptor<ObjectReferenceProperty__Implementation__, Kistl.App.Base.RelationEnd>(
 				new Guid("63ba109d-92c6-4ced-980b-0a52aabfaec0"),
 				"RelationEnd",
 				null,

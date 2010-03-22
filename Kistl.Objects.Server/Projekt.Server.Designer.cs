@@ -715,66 +715,80 @@ namespace Kistl.App.Projekte
 
 
 		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			new CustomPropertyDescriptor<Projekt, ICollection<Kistl.App.Projekte.Auftrag>>(
+			// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
+			new CustomPropertyDescriptor<Projekt__Implementation__, ICollection<Kistl.App.Projekte.Auftrag>>(
 				new Guid("30a1d8b6-4db5-45a0-a9a8-531472a9107e"),
 				"Auftraege",
 				null,
 				obj => obj.Auftraege,
 				null), // lists are read-only properties
-			new CustomPropertyDescriptor<Projekt, double?>(
+			// else
+			new CustomPropertyDescriptor<Projekt__Implementation__, double?>(
 				new Guid("a26cec7d-1e5c-44f5-9c56-92af595739eb"),
 				"AufwandGes",
 				null,
 				obj => obj.AufwandGes,
 				(obj, val) => obj.AufwandGes = val),
-			new CustomPropertyDescriptor<Projekt, Kistl.App.Base.Identity>(
+			// else
+			new CustomPropertyDescriptor<Projekt__Implementation__, Kistl.App.Base.Identity>(
 				new Guid("2fe9d894-c359-412f-b787-d3ed3a26a0a2"),
 				"ChangedBy",
 				null,
 				obj => obj.ChangedBy,
 				(obj, val) => obj.ChangedBy = val),
-			new CustomPropertyDescriptor<Projekt, DateTime?>(
+			// else
+			new CustomPropertyDescriptor<Projekt__Implementation__, DateTime?>(
 				new Guid("d1f821b0-5991-44a7-9c4d-8be66834ea9c"),
 				"ChangedOn",
 				null,
 				obj => obj.ChangedOn,
 				(obj, val) => obj.ChangedOn = val),
-			new CustomPropertyDescriptor<Projekt, Kistl.App.Base.Identity>(
+			// else
+			new CustomPropertyDescriptor<Projekt__Implementation__, Kistl.App.Base.Identity>(
 				new Guid("fbe34f93-21ec-470a-b9d4-6e4664729466"),
 				"CreatedBy",
 				null,
 				obj => obj.CreatedBy,
 				(obj, val) => obj.CreatedBy = val),
-			new CustomPropertyDescriptor<Projekt, DateTime?>(
+			// else
+			new CustomPropertyDescriptor<Projekt__Implementation__, DateTime?>(
 				new Guid("7119febf-e750-411f-a4f2-5a2181e45dc7"),
 				"CreatedOn",
 				null,
 				obj => obj.CreatedOn,
 				(obj, val) => obj.CreatedOn = val),
-			new CustomPropertyDescriptor<Projekt, string>(
+			// else
+			new CustomPropertyDescriptor<Projekt__Implementation__, string>(
 				new Guid("cd6be045-d1bd-4086-b848-c83249f5ca9b"),
 				"Kundenname",
 				null,
 				obj => obj.Kundenname,
 				(obj, val) => obj.Kundenname = val),
-			new CustomPropertyDescriptor<Projekt, IList<Kistl.App.Projekte.Mitarbeiter>>(
+			// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
+			new CustomPropertyDescriptor<Projekt__Implementation__, IList<Kistl.App.Projekte.Mitarbeiter>>(
 				new Guid("3e60fe29-ac50-4232-bbeb-af023ede02f6"),
 				"Mitarbeiter",
 				null,
 				obj => obj.Mitarbeiter,
 				null), // lists are read-only properties
-			new CustomPropertyDescriptor<Projekt, string>(
+			// else
+			new CustomPropertyDescriptor<Projekt__Implementation__, string>(
 				new Guid("b5482479-fd14-4990-86f4-49872e2eeeb8"),
 				"Name",
 				null,
 				obj => obj.Name,
 				(obj, val) => obj.Name = val),
-			new CustomPropertyDescriptor<Projekt, ICollection<Kistl.App.Projekte.Task>>(
+			// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
+			new CustomPropertyDescriptor<Projekt__Implementation__, ICollection<Kistl.App.Projekte.Task>>(
 				new Guid("f6ff71b0-ccaf-4c7d-8e2b-1210a9df4b0f"),
 				"Tasks",
 				null,
 				obj => obj.Tasks,
 				null), // lists are read-only properties
+			// rel: Projekt was CreatedBy (035db8da-a9f4-4529-9f50-29afd9e6f043)
+			// rel: Projekt has Tasks (434dab4f-0dcd-4724-a62b-730540ce143a)
+			// rel: Projekt has Auftraege (062fa6cf-bdb1-4994-9e8b-5fe5426c60aa)
+			// rel: Projekt was ChangedBy (bc2a3fdc-68d7-4ba1-9c16-03fd74c43bb0)
 		};
 		
 		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)

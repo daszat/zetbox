@@ -662,60 +662,71 @@ namespace Kistl.App.Test
 
 
 		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			new CustomPropertyDescriptor<TestCustomObject, DateTime?>(
+			// else
+			new CustomPropertyDescriptor<TestCustomObject__Implementation__, DateTime?>(
 				new Guid("bdcf86b8-4c47-4c50-b340-d9323344c7f0"),
 				"Birthday",
 				null,
 				obj => obj.Birthday,
 				(obj, val) => obj.Birthday = val),
-			new CustomPropertyDescriptor<TestCustomObject, ICollection<Kistl.App.Test.Muhblah>>(
+			// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
+			new CustomPropertyDescriptor<TestCustomObject__Implementation__, ICollection<Kistl.App.Test.Muhblah>>(
 				new Guid("4a929ef5-f211-47b4-92c3-4961da6d5173"),
 				"MubBlah_List_Nav",
 				null,
 				obj => obj.MubBlah_List_Nav,
 				null), // lists are read-only properties
-			new CustomPropertyDescriptor<TestCustomObject, Kistl.App.Test.Muhblah>(
+			// else
+			new CustomPropertyDescriptor<TestCustomObject__Implementation__, Kistl.App.Test.Muhblah>(
 				new Guid("3251497d-5214-4e42-976e-f36c3d9541de"),
 				"MubBlah_Nav",
 				null,
 				obj => obj.MubBlah_Nav,
 				(obj, val) => obj.MubBlah_Nav = val),
-			new CustomPropertyDescriptor<TestCustomObject, ICollection<Kistl.App.Test.Muhblah>>(
+			// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
+			new CustomPropertyDescriptor<TestCustomObject__Implementation__, ICollection<Kistl.App.Test.Muhblah>>(
 				new Guid("9c4217f2-47d8-47b5-a324-7601ecabc7b0"),
 				"MuhBlah_ManyList_Nav",
 				null,
 				obj => obj.MuhBlah_ManyList_Nav,
 				null), // lists are read-only properties
-			new CustomPropertyDescriptor<TestCustomObject, Kistl.App.Test.Muhblah>(
+			// else
+			new CustomPropertyDescriptor<TestCustomObject__Implementation__, Kistl.App.Test.Muhblah>(
 				new Guid("e7b207d3-5d25-4716-85b3-564f10eac210"),
 				"MuhBlah_One_Nav",
 				null,
 				obj => obj.MuhBlah_One_Nav,
 				(obj, val) => obj.MuhBlah_One_Nav = val),
-			new CustomPropertyDescriptor<TestCustomObject, string>(
+			// else
+			new CustomPropertyDescriptor<TestCustomObject__Implementation__, string>(
 				new Guid("bd501a1f-a0a3-4ddf-b6c2-8fdc9ffdfabd"),
 				"PersonName",
 				null,
 				obj => obj.PersonName,
 				(obj, val) => obj.PersonName = val),
-			new CustomPropertyDescriptor<TestCustomObject, Kistl.App.Test.TestPhoneCompoundObject>(
+			// else
+			new CustomPropertyDescriptor<TestCustomObject__Implementation__, Kistl.App.Test.TestPhoneCompoundObject>(
 				new Guid("05e41070-e88a-4270-ab1c-94cd2e7d41d1"),
 				"PhoneNumberMobile",
 				null,
 				obj => obj.PhoneNumberMobile,
 				(obj, val) => obj.PhoneNumberMobile = val),
-			new CustomPropertyDescriptor<TestCustomObject, Kistl.App.Test.TestPhoneCompoundObject>(
+			// else
+			new CustomPropertyDescriptor<TestCustomObject__Implementation__, Kistl.App.Test.TestPhoneCompoundObject>(
 				new Guid("465e10ec-4e5e-4e8f-831f-44562dd0d68b"),
 				"PhoneNumberOffice",
 				null,
 				obj => obj.PhoneNumberOffice,
 				(obj, val) => obj.PhoneNumberOffice = val),
-			new CustomPropertyDescriptor<TestCustomObject, ICollection<Kistl.App.Test.TestPhoneCompoundObject>>(
+			// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
+			new CustomPropertyDescriptor<TestCustomObject__Implementation__, ICollection<Kistl.App.Test.TestPhoneCompoundObject>>(
 				new Guid("0c0c1101-118a-4ce2-806c-d30a03b19dde"),
 				"PhoneNumbersOther",
 				null,
 				obj => obj.PhoneNumbersOther,
 				null), // lists are read-only properties
+			// rel: MuhBlah_List_Role hasOther TestCustomObjects_Role (804f4d1e-ca7d-45e2-b9a3-3f89a6874768)
+			// rel: MuhBlah_Role has TestCustomObjects_List_Role (bd379747-6864-4c4e-95a8-319ff917fd60)
 		};
 		
 		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)

@@ -189,12 +189,14 @@ namespace Kistl.App.Base
 
 
 		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			new CustomPropertyDescriptor<GroupMembership, Kistl.App.Base.Group>(
+			// else
+			new CustomPropertyDescriptor<GroupMembership__Implementation__, Kistl.App.Base.Group>(
 				new Guid("da080b07-15d2-4cdf-bc1c-df776e094a75"),
 				"Group",
 				null,
 				obj => obj.Group,
 				(obj, val) => obj.Group = val),
+			// rel: GroupMembership has Group (bb6d8d28-041f-4e53-8916-9f69b480d6ba)
 		};
 		
 		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)

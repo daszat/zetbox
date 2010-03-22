@@ -678,54 +678,65 @@ namespace Kistl.App.Base
 
 
 		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			new CustomPropertyDescriptor<Blob, Kistl.App.Base.Identity>(
+			// else
+			new CustomPropertyDescriptor<Blob__Implementation__, Kistl.App.Base.Identity>(
 				new Guid("ba5667b5-4306-42cb-8833-45932490ffe0"),
 				"ChangedBy",
 				null,
 				obj => obj.ChangedBy,
 				(obj, val) => obj.ChangedBy = val),
-			new CustomPropertyDescriptor<Blob, DateTime?>(
+			// else
+			new CustomPropertyDescriptor<Blob__Implementation__, DateTime?>(
 				new Guid("bd06a19d-16a6-4234-a1cd-79d09e317d92"),
 				"ChangedOn",
 				null,
 				obj => obj.ChangedOn,
 				(obj, val) => obj.ChangedOn = val),
-			new CustomPropertyDescriptor<Blob, Kistl.App.Base.Identity>(
+			// else
+			new CustomPropertyDescriptor<Blob__Implementation__, Kistl.App.Base.Identity>(
 				new Guid("1125d9cf-dcc5-4e70-9a3b-308b2f84ddb6"),
 				"CreatedBy",
 				null,
 				obj => obj.CreatedBy,
 				(obj, val) => obj.CreatedBy = val),
-			new CustomPropertyDescriptor<Blob, DateTime?>(
+			// else
+			new CustomPropertyDescriptor<Blob__Implementation__, DateTime?>(
 				new Guid("9cc23a89-9bc3-4feb-bc56-82c696be80ba"),
 				"CreatedOn",
 				null,
 				obj => obj.CreatedOn,
 				(obj, val) => obj.CreatedOn = val),
-			new CustomPropertyDescriptor<Blob, Guid>(
+			// else
+			new CustomPropertyDescriptor<Blob__Implementation__, Guid>(
 				new Guid("0e39b312-faa7-4ee4-92a4-41773ccbd394"),
 				"ExportGuid",
 				null,
 				obj => obj.ExportGuid,
 				(obj, val) => obj.ExportGuid = val),
-			new CustomPropertyDescriptor<Blob, string>(
+			// else
+			new CustomPropertyDescriptor<Blob__Implementation__, string>(
 				new Guid("182a7118-5123-4d5f-b623-205e38573e8e"),
 				"MimeType",
 				null,
 				obj => obj.MimeType,
 				(obj, val) => obj.MimeType = val),
-			new CustomPropertyDescriptor<Blob, string>(
+			// else
+			new CustomPropertyDescriptor<Blob__Implementation__, string>(
 				new Guid("c1f449e2-9532-4093-8667-6ba5f7372892"),
 				"OriginalName",
 				null,
 				obj => obj.OriginalName,
 				(obj, val) => obj.OriginalName = val),
-			new CustomPropertyDescriptor<Blob, string>(
+			// else
+			new CustomPropertyDescriptor<Blob__Implementation__, string>(
 				new Guid("bd8eaefd-0684-4c05-a6b5-6f4d97017e6c"),
 				"StoragePath",
 				null,
 				obj => obj.StoragePath,
 				(obj, val) => obj.StoragePath = val),
+			// rel: File has Blob (d93a4ed6-3b8b-44f7-b839-f528d1c06abd)
+			// rel: Document was CreatedBy (40257114-de1a-493c-998e-18484521fb8c)
+			// rel: Document was ChangedBy (5b930212-f85a-4be9-9882-437cca6ffe0d)
 		};
 		
 		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)

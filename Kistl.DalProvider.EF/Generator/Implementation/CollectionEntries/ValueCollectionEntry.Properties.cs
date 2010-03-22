@@ -18,7 +18,7 @@ namespace Kistl.DalProvider.EF.Generator.Implementation.CollectionEntries
                 MembersToSerialize,
                 propertyName, prop.GetAssociationName(), prop.ObjectClass.Name,
                 prop.ObjectClass.Name, prop.ObjectClass.Name + Kistl.API.Helper.ImplementationSuffix,
-                false, false, prop.Module.Namespace,
+                false, String.Empty, false, prop.Module.Namespace,
                 false, false, false);
 
         }

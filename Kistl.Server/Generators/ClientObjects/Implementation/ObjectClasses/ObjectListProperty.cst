@@ -17,13 +17,14 @@
 <%@ Parameter Name="exposedListType" Type="string" %>
 <%@ Parameter Name="rel" Type="Relation" %>
 <%@ Parameter Name="endRole" Type="RelationEndRole" %>
+<%@ Parameter Name="positionPropertyName" Type="string" %>
 <%@ Parameter Name="otherName" Type="string" %>
 <%@ Parameter Name="referencedInterface" Type="string" %>
 <%
 
     RelationEnd relEnd = rel.GetEndFromRole(endRole);
     RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
-        
+
     string idsListName = name + "Ids";
 	
 	// whether or not the collection will be eagerly loaded
@@ -57,6 +58,7 @@
                         
                     <%= wrapperName %> = new <%= wrapperClass %><<%= referencedInterface %>>(
                         "<%= otherName %>",
+                        <% if (!String.IsNullOrEmpty(positionPropertyName)) { %>"<%= positionPropertyName %>"<% } else { %>null<% } %>,
                         this,
                         () => this.NotifyPropertyChanged("<%= name %>", null, null),
                         serverList);

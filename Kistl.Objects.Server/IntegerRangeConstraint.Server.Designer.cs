@@ -245,13 +245,15 @@ namespace Kistl.App.Base
 
 
 		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			new CustomPropertyDescriptor<IntegerRangeConstraint, int>(
+			// else
+			new CustomPropertyDescriptor<IntegerRangeConstraint__Implementation__, int>(
 				new Guid("dff43695-5b93-4378-a01d-94a82d29dcef"),
 				"Max",
 				null,
 				obj => obj.Max,
 				(obj, val) => obj.Max = val),
-			new CustomPropertyDescriptor<IntegerRangeConstraint, int>(
+			// else
+			new CustomPropertyDescriptor<IntegerRangeConstraint__Implementation__, int>(
 				new Guid("8afdbf66-c979-4c09-8872-1a44aa1dbf72"),
 				"Min",
 				null,

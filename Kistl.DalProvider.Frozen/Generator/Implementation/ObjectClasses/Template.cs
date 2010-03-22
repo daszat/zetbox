@@ -34,14 +34,14 @@ namespace Kistl.DalProvider.Frozen.Generator.Implementation.ObjectClasses
 
         protected override string MungeClassName(string name)
         {
-            return Template.GetClassName(this.ObjectClass);
+            return base.MungeClassName(name) + Kistl.API.Helper.ImplementationSuffix + Settings["extrasuffix"];
         }
 
         protected override string GetBaseClass()
         {
             if (this.ObjectClass.BaseObjectClass != null)
             {
-                return this.ObjectClass.BaseObjectClass.Module.Namespace + "." + Template.GetClassName(this.ObjectClass.BaseObjectClass);
+                return this.ObjectClass.BaseObjectClass.Module.Namespace + "." + GetClassName(this.ObjectClass.BaseObjectClass);
             }
             else
             {

@@ -1,12 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Kistl.API;
-using Kistl.App.Base;
 
 namespace Kistl.Server.Generators.ClientObjects.Implementation.CompoundObjects
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+
+    using Kistl.API;
+    using Kistl.App.Base;
+
     public class Template
         : Kistl.Server.Generators.Templates.Implementation.CompoundObjects.Template
     {
@@ -24,7 +26,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.CompoundObjects
 
         protected override string MungeClassName(string name)
         {
-            return base.MungeClassName(name) + "__Implementation__";
+            return base.MungeClassName(name) + Kistl.API.Helper.ImplementationSuffix;
         }
 
         /// <returns>The base class to inherit from.</returns>

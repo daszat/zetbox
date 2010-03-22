@@ -138,6 +138,14 @@ namespace Kistl.App.Base
         public static event ObjectEventHandler<CompoundObject> OnDeleting_CompoundObject;
 
 
+		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
+			// rel: CompoundObjectProperty has CompoundObjectDefinition (cbc99fc5-2b15-4829-b4ae-bc8e38e767a8)
+		};
+		
+		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
+		{
+			props.AddRange(_properties);
+		}
 	
 
 		public override void ReloadReferences()

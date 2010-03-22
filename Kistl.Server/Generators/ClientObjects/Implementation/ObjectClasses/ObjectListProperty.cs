@@ -28,9 +28,11 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
             var rel = RelationExtensions.Lookup(ctx, prop);
             var relEnd = rel.GetEnd(prop);
             var otherEnd = rel.GetOtherEnd(relEnd);
-            string exposedListType = rel.NeedsPositionStorage(otherEnd.GetRole()) ? "IList" : "ICollection";
+            var exposedListType = rel.NeedsPositionStorage(otherEnd.GetRole()) ? "IList" : "ICollection";
+            // the name of the position property
+            var positionPropertyName = rel.NeedsPositionStorage(otherEnd.GetRole()) ? Construct.ListPositionPropertyName(otherEnd) : String.Empty;
 
-            Call(host, ctx, serializationList, name, wrapperClass, exposedListType, rel, relEnd.GetRole());
+            Call(host, ctx, serializationList, name, wrapperClass, exposedListType, rel, relEnd.GetRole(), positionPropertyName);
         }
 
         /// <summary>
@@ -44,6 +46,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
         /// <param name="exposedListType">which generic interface to use for the collection (IList or ICollection)</param>
         /// <param name="rel"></param>
         /// <param name="endRole"></param>
+        /// <param name="positionPropertyName">the name of the position property for this list</param>
         public static void Call(Arebis.CodeGeneration.IGenerationHost host,
             IKistlContext ctx,
             Templates.Implementation.SerializationMembersList serializationList,
@@ -51,7 +54,8 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
             string wrapperClass,
             string exposedListType,
             Relation rel,
-            RelationEndRole endRole)
+            RelationEndRole endRole,
+            string positionPropertyName)
         {
             if (rel == null) { throw new ArgumentNullException("rel"); }
 
@@ -64,7 +68,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
 
             string referencedInterface = otherEnd.Type.GetDataTypeString();
 
-            Call(host, ctx, serializationList, name, wrapperName, wrapperClass, exposedListType, rel, endRole, otherName, referencedInterface);
+            Call(host, ctx, serializationList, name, wrapperName, wrapperClass, exposedListType, rel, endRole, positionPropertyName, otherName, referencedInterface);
         }
 
         /// <summary>
@@ -79,6 +83,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
         /// <param name="exposedListType">which generic interface to use for the collection (IList or ICollection)</param>
         /// <param name="rel"></param>
         /// <param name="endRole"></param>
+        /// <param name="positionPropertyName">the name of the position property for this list</param>
         /// <param name="otherName"></param>
         /// <param name="referencedInterface">which Kistl interface this list contains</param>
         public static void Call(Arebis.CodeGeneration.IGenerationHost host,
@@ -90,6 +95,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
             string exposedListType,
             Relation rel,
             RelationEndRole endRole,
+            string positionPropertyName,
             string otherName,
             string referencedInterface)
         {
@@ -104,7 +110,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
             host.CallTemplate("Implementation.ObjectClasses.ObjectListProperty",
                 ctx, serializationList,
                 name, wrapperName, wrapperClass, exposedListType,
-                rel, endRole, otherName,
+                rel, endRole, positionPropertyName, otherName,
                 referencedInterface);
         }
 

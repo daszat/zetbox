@@ -22,13 +22,15 @@
 <%@ Parameter Name="endRole" Type="RelationEndRole" %>
 <%@ Parameter Name="hasInverseNavigator" Type="bool" %>
 <%@ Parameter Name="hasPositionStorage" Type="bool" %>
+<%@ Parameter Name="positionPropertyName" Type="string" %>
 <%@ Parameter Name="callGetterSetterEvents" Type="bool" %>
 <%
     RelationEnd relEnd = rel.GetEndFromRole(endRole);
     RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
 	string eventName = "On" + name;
 %>
-		// <%= this.GetType() %>
+		// BEGIN <%= this.GetType() %> for <%= name %>
+		// rel(<%= endRole %>): <%= rel.A.RoleName %> <%= rel.Verb %> <%= rel.B.RoleName %>
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -170,12 +172,11 @@
 <%
     AddSerialization(serializationList, fkBackingName);
 
-	string posStorageName = name + Kistl.API.Helper.PositionSuffix;
-
 	if (hasPositionStorage)
 	{
 		Templates.Implementation.ObjectClasses.NotifyingValueProperty.Call(Host, ctx,
 		    serializationList,
-			"int?", posStorageName, "http://dasz.at/Kistl");
+			"int?", positionPropertyName, "http://dasz.at/Kistl");
 	}
 %>
+		// END <%= this.GetType() %> for <%= name %>

@@ -754,7 +754,7 @@
                         Relationship="Model.FK_Ein_Fragebogen_enthaelt_gute_Antworten"
                         FromRole="gute_Antworten"
                         ToRole="Ein_Fragebogen" />
-    <Property Name="Fragebogen_pos" Type="Int32" Nullable="true" />
+    <Property Name="gute_Antworten_pos" Type="Int32" Nullable="true" />
     <Property Name="FragenNummer" Type="Int32" Nullable="false" />
     <Property Name="GegebeneAntwort" Type="Int32" Nullable="true" />
   </EntityType>
@@ -856,7 +856,7 @@
                         Relationship="Model.FK_Method_has_Parameter"
                         FromRole="Parameter"
                         ToRole="Method" />
-    <Property Name="Method_pos" Type="Int32" Nullable="true" />
+    <Property Name="Parameter_pos" Type="Int32" Nullable="true" />
     <Property Name="Name" Type="String" Nullable="false" MaxLength="100" />
   </EntityType>
   <EntityType Name="Blob">
@@ -1457,7 +1457,7 @@
                         Relationship="Model.FK_ObjectClass_has_Properties"
                         FromRole="Properties"
                         ToRole="ObjectClass" />
-    <Property Name="ObjectClass_pos" Type="Int32" Nullable="true" />
+    <Property Name="Properties_pos" Type="Int32" Nullable="true" />
     <NavigationProperty Name="ValueModelDescriptor__Implementation__"
                         Relationship="Model.FK_Property_has_ValueModelDescriptor"
                         FromRole="Property"

@@ -53,7 +53,7 @@
 				if (rel.NeedsPositionStorage(relEnd.GetRole()))
 				{
 %>
-    <Property Name="<%= p.Name + Kistl.API.Helper.PositionSuffix %>" Type="Int32" Nullable="true" />
+    <Property Name="<%= Construct.ListPositionPropertyName(relEnd) %>" Type="Int32" Nullable="true" />
 <%
 				}
 			}

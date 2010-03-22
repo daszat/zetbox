@@ -68,7 +68,7 @@ if (rel.NeedsPositionStorage(relEnd.GetRole()))
 				{
 
 #line 56 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.csdl.EntityTypeFields.cst"
-this.WriteObjects("    <Property Name=\"",  p.Name + Kistl.API.Helper.PositionSuffix , "\" Type=\"Int32\" Nullable=\"true\" />\r\n");
+this.WriteObjects("    <Property Name=\"",  Construct.ListPositionPropertyName(relEnd) , "\" Type=\"Int32\" Nullable=\"true\" />\r\n");
 #line 58 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.csdl.EntityTypeFields.cst"
 }
 			}

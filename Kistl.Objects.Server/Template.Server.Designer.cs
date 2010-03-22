@@ -481,36 +481,43 @@ namespace Kistl.App.GUI
 
 
 		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			new CustomPropertyDescriptor<Template, Kistl.App.Base.Assembly>(
+			// else
+			new CustomPropertyDescriptor<Template__Implementation__, Kistl.App.Base.Assembly>(
 				new Guid("c81105da-97e4-4685-af88-792c68e55a17"),
 				"DisplayedTypeAssembly",
 				null,
 				obj => obj.DisplayedTypeAssembly,
 				(obj, val) => obj.DisplayedTypeAssembly = val),
-			new CustomPropertyDescriptor<Template, string>(
+			// else
+			new CustomPropertyDescriptor<Template__Implementation__, string>(
 				new Guid("4b683aa1-45a9-4c5e-80e7-0ff30f5b798c"),
 				"DisplayedTypeFullName",
 				null,
 				obj => obj.DisplayedTypeFullName,
 				(obj, val) => obj.DisplayedTypeFullName = val),
-			new CustomPropertyDescriptor<Template, string>(
+			// else
+			new CustomPropertyDescriptor<Template__Implementation__, string>(
 				new Guid("4fc51781-b0fe-495c-91a1-90e484345515"),
 				"DisplayName",
 				null,
 				obj => obj.DisplayName,
 				(obj, val) => obj.DisplayName = val),
-			new CustomPropertyDescriptor<Template, ICollection<Kistl.App.GUI.Visual>>(
+			// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
+			new CustomPropertyDescriptor<Template__Implementation__, ICollection<Kistl.App.GUI.Visual>>(
 				new Guid("5e9612d5-019a-416b-a2e2-dfc9674a50f6"),
 				"Menu",
 				null,
 				obj => obj.Menu,
 				null), // lists are read-only properties
-			new CustomPropertyDescriptor<Template, Kistl.App.GUI.Visual>(
+			// else
+			new CustomPropertyDescriptor<Template__Implementation__, Kistl.App.GUI.Visual>(
 				new Guid("5d2880a4-716a-4bdc-aaa9-379c006e7ed4"),
 				"VisualTree",
 				null,
 				obj => obj.VisualTree,
 				(obj, val) => obj.VisualTree = val),
+			// rel: Template has VisualTree (299a4cf9-3f3e-4b89-b6ba-6b163b4e5dc0)
+			// rel: Template has DisplayedTypeAssembly (0e64ccd9-2f72-489a-83a4-095f949fdee3)
 		};
 		
 		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)

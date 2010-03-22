@@ -231,12 +231,14 @@ namespace Kistl.App.Base
 
 
 		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			new CustomPropertyDescriptor<CLRObjectParameter, Kistl.App.Base.TypeRef>(
+			// else
+			new CustomPropertyDescriptor<CLRObjectParameter__Implementation__, Kistl.App.Base.TypeRef>(
 				new Guid("137292ce-4493-451d-a7fa-1b7cc7df03dd"),
 				"Type",
 				null,
 				obj => obj.Type,
 				(obj, val) => obj.Type = val),
+			// rel: ClrObjectParameter isOf Type (4c7e0ac7-eb8a-4304-85e7-fcc358cb639c)
 		};
 		
 		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)

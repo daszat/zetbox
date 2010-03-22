@@ -720,66 +720,80 @@ namespace Kistl.App.Projekte
 
 
 		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			new CustomPropertyDescriptor<Kunde, string>(
+			// else
+			new CustomPropertyDescriptor<Kunde__Implementation__, string>(
 				new Guid("7ba07561-15f4-495a-b2eb-59006e4210e5"),
 				"Adresse",
 				null,
 				obj => obj.Adresse,
 				(obj, val) => obj.Adresse = val),
-			new CustomPropertyDescriptor<Kunde, Kistl.App.Base.Identity>(
+			// else
+			new CustomPropertyDescriptor<Kunde__Implementation__, Kistl.App.Base.Identity>(
 				new Guid("d2148600-ebba-4782-8379-a8b03a31362b"),
 				"ChangedBy",
 				null,
 				obj => obj.ChangedBy,
 				(obj, val) => obj.ChangedBy = val),
-			new CustomPropertyDescriptor<Kunde, DateTime?>(
+			// else
+			new CustomPropertyDescriptor<Kunde__Implementation__, DateTime?>(
 				new Guid("028ff0b0-1beb-486d-b400-bfe3cdf73c5f"),
 				"ChangedOn",
 				null,
 				obj => obj.ChangedOn,
 				(obj, val) => obj.ChangedOn = val),
-			new CustomPropertyDescriptor<Kunde, Kistl.App.Base.Identity>(
+			// else
+			new CustomPropertyDescriptor<Kunde__Implementation__, Kistl.App.Base.Identity>(
 				new Guid("acc46d95-0f07-40cd-b2b1-79d093d6e7b4"),
 				"CreatedBy",
 				null,
 				obj => obj.CreatedBy,
 				(obj, val) => obj.CreatedBy = val),
-			new CustomPropertyDescriptor<Kunde, DateTime?>(
+			// else
+			new CustomPropertyDescriptor<Kunde__Implementation__, DateTime?>(
 				new Guid("1c23561e-07d4-4363-8ceb-3b13f3125634"),
 				"CreatedOn",
 				null,
 				obj => obj.CreatedOn,
 				(obj, val) => obj.CreatedOn = val),
-			new CustomPropertyDescriptor<Kunde, ICollection<string>>(
+			// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
+			new CustomPropertyDescriptor<Kunde__Implementation__, ICollection<string>>(
 				new Guid("1d0f6da6-4b69-48d7-9e94-bfb5466654b9"),
 				"EMails",
 				null,
 				obj => obj.EMails,
 				null), // lists are read-only properties
-			new CustomPropertyDescriptor<Kunde, string>(
+			// else
+			new CustomPropertyDescriptor<Kunde__Implementation__, string>(
 				new Guid("2817a845-b2d5-43ed-b0f1-5a6692a62183"),
 				"Kundenname",
 				null,
 				obj => obj.Kundenname,
 				(obj, val) => obj.Kundenname = val),
-			new CustomPropertyDescriptor<Kunde, string>(
+			// else
+			new CustomPropertyDescriptor<Kunde__Implementation__, string>(
 				new Guid("c01afb40-9f28-494f-9058-9d0eca79a125"),
 				"Land",
 				null,
 				obj => obj.Land,
 				(obj, val) => obj.Land = val),
-			new CustomPropertyDescriptor<Kunde, string>(
+			// else
+			new CustomPropertyDescriptor<Kunde__Implementation__, string>(
 				new Guid("5281cbe0-8f63-4a2d-bb9e-2ee04588202d"),
 				"Ort",
 				null,
 				obj => obj.Ort,
 				(obj, val) => obj.Ort = val),
-			new CustomPropertyDescriptor<Kunde, string>(
+			// else
+			new CustomPropertyDescriptor<Kunde__Implementation__, string>(
 				new Guid("cafb4b93-4a1a-4753-8ec0-c65936a0d129"),
 				"PLZ",
 				null,
 				obj => obj.PLZ,
 				(obj, val) => obj.PLZ = val),
+			// rel: Auftrag has Kunde (c0c472d1-95b3-4588-812b-0d41c6e692b5)
+			// rel: Kunde was CreatedBy (5daf8db8-be8b-4ac7-a887-9217442fa7f4)
+			// rel: TestObjClass has ObjectProp (9d44eac8-2470-4373-a2bf-df3bc16d3454)
+			// rel: Kunde was ChangedBy (2a33407e-beeb-4919-b4c1-9aa264286151)
 		};
 		
 		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
