@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2010-03-19T17:46:36.747Z" xmlns="http://dasz.at/Kistl">
+<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2010-03-22T12:00:00Z" xmlns="http://dasz.at/Kistl">
   <KistlBase:Module ExportGuid="110acbc0-652a-4adc-9de5-8baabfcf3637">
     <KistlBase:ChangedOn>2010-02-01T16:07:00.49Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2010-02-01T15:23:35.247Z</KistlBase:CreatedOn>
@@ -6334,7 +6334,7 @@
     <KistlBase:AParent>f7e487a4-6922-40bf-a404-24ce6accbb83</KistlBase:AParent>
     <KistlBase:ChangedOn>2010-02-10T14:44:02.3Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.347Z</KistlBase:CreatedOn>
-    <KistlBase:HasPersistentOrder>true</KistlBase:HasPersistentOrder>
+    <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>2</KistlBase:Multiplicity>
     <KistlBase:Navigator>e7d91162-0aa8-4fe3-9e29-d0519781ceb7</KistlBase:Navigator>
     <KistlBase:RoleName>ObjectClass</KistlBase:RoleName>
