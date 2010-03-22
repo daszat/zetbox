@@ -14,6 +14,7 @@ namespace Kistl.API.Utils
     {
 
         private IDictionary<Type, IDictionary<int, IPersistenceObject>> _objects = new Dictionary<Type, IDictionary<int, IPersistenceObject>>();
+        private IDictionary<Guid, IPersistenceObject> _exportableobjects = new Dictionary<Guid, IPersistenceObject>();
 
         /// <summary>
         /// Returns the root implementation Type of a given IPersistenceObject.
@@ -57,6 +58,13 @@ namespace Kistl.API.Utils
             return typeList[id];
         }
 
+        public IPersistenceObject Lookup(Guid exportGuid)
+        {
+            if (!_exportableobjects.ContainsKey(exportGuid))
+                return null;
+            return _exportableobjects[exportGuid];
+        }
+
         public IEnumerable this[InterfaceType t]
         {
             get
@@ -82,11 +90,19 @@ namespace Kistl.API.Utils
                 _objects[rootT] = new Dictionary<int, IPersistenceObject>();
 
             _objects[rootT][item.ID] = item;
+
+            if (item is IExportableInternal)
+            {
+                var guid = ((IExportableInternal)item).ExportGuid;
+                if (!_exportableobjects.ContainsKey(guid))
+                    _exportableobjects[guid] = item;
+            }
         }
 
         public void Clear()
         {
             _objects.Clear();
+            _exportableobjects.Clear();
         }
 
         public bool Contains(IPersistenceObject item)

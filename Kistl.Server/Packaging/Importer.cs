@@ -150,27 +150,35 @@ namespace Kistl.Server.Packaging
 
                     PreFetchObjects(ctx, objects, guids);
                 }
-                s.Seek(0, SeekOrigin.Begin);
-                using (XmlReader xml = XmlReader.Create(s, new XmlReaderSettings() { CloseInput = false }))
+
+                using (Log.InfoTraceMethodCall("Loading"))
                 {
-
-                    Log.Info("Loading");
-
-                    // Find Root Element
-                    while (xml.Read() && xml.NodeType != XmlNodeType.Element && xml.LocalName != "KistlPackaging" && xml.NamespaceURI != "http://dasz.at/Kistl") ;
-
-                    // Read content
-                    while (xml.Read())
+                    s.Seek(0, SeekOrigin.Begin);
+                    using (XmlReader xml = XmlReader.Create(s, new XmlReaderSettings() { CloseInput = false }))
                     {
-                        if (xml.NodeType != XmlNodeType.Element) continue;
-                        ImportElement(ctx, objects, xml);
+
+                        Log.Info("Loading");
+
+                        // Find Root Element
+                        while (xml.Read() && xml.NodeType != XmlNodeType.Element && xml.LocalName != "KistlPackaging" && xml.NamespaceURI != "http://dasz.at/Kistl") ;
+
+                        // Read content
+                        while (xml.Read())
+                        {
+                            if (xml.NodeType != XmlNodeType.Element) continue;
+                            ImportElement(ctx, objects, xml);
+                        }
                     }
                 }
 
-                Log.Info("Reloading References");
-                foreach (var obj in objects.Values)
+
+                using (Log.InfoTraceMethodCall("Reloading References"))
                 {
-                    obj.ReloadReferences();
+                    Log.Info("Reloading References");
+                    foreach (var obj in objects.Values)
+                    {
+                        obj.ReloadReferences();
+                    }
                 }
                 Log.Info("Import finished");
             }
@@ -295,9 +303,9 @@ namespace Kistl.Server.Packaging
                 {
                     throw new InvalidOperationException("Unable to create object of type " + ifType.ToImplementationType().Type);
                 }
-                ctx.Attach(obj);
                 objects[exportGuid] = obj;
                 ((Kistl.App.Base.IExportable)obj).ExportGuid = exportGuid;
+                ctx.Attach(obj);
                 return obj;
             }
             else

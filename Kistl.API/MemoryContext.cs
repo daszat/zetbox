@@ -275,14 +275,12 @@ namespace Kistl.API
 
         public T FindPersistenceObject<T>(Guid exportGuid) where T : class, IPersistenceObject
         {
-            return (T)FindPersistenceObject(new InterfaceType(typeof(T)), exportGuid);
+            return (T)_objects.Lookup(exportGuid);
         }
 
         public IPersistenceObject FindPersistenceObject(InterfaceType ifType, Guid exportGuid)
         {
-            var query = _objects[ifType];
-            if (query == null) return null;
-            return (IPersistenceObject)query.Cast<IExportableInternal>().FirstOrDefault(o => o.ExportGuid == exportGuid);
+            return _objects.Lookup(exportGuid);
         }
 
         public IEnumerable<IPersistenceObject> FindPersistenceObjects(InterfaceType ifType, IEnumerable<Guid> exportGuids)
