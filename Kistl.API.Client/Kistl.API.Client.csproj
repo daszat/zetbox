@@ -12,6 +12,8 @@
     <AssemblyName>Kistl.API.Client</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>Kistl.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -127,6 +129,7 @@
     <None Include="Service References\KistlService\KistlService4.xsd" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Kistl.snk" />
     <None Include="Service References\KistlService\configuration91.svcinfo" />
     <None Include="Service References\KistlService\KistlService1.wsdl" />
     <None Include="Service References\KistlService\KistlService5.xsd" />

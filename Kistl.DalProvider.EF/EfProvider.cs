@@ -24,10 +24,10 @@ namespace Kistl.DalProvider.EF
         {
             base.Load(moduleBuilder);
 
-            var interfaceAssembly = Assembly.Load("Kistl.Objects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null");
+            var interfaceAssembly = Assembly.Load("Kistl.Objects");
             if (interfaceAssembly == null)
                 throw new InvalidOperationException("Unable to load Kistl.Objects Assembly, no Entity Framework Metadata will be loaded");
-            var serverAssembly = Assembly.Load("Kistl.Objects.Server, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null");
+            var serverAssembly = Assembly.Load("Kistl.Objects.Server");
             if (serverAssembly == null)
                 throw new InvalidOperationException("Unable to load Kistl.Objects.Server Assembly, no Entity Framework Metadata will be loaded");
 

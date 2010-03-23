@@ -11,6 +11,8 @@
     <AssemblyName>Kistl.Objects.Server</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>Kistl.Objects.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -193,6 +195,9 @@
     <Compile Include="TestPhoneCompoundObject.Server.Designer.cs" />
     <Compile Include="AssemblyInfo.Server.cs" />
     <Compile Include="AssociationSetAttributes.Server.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Kistl.Objects.snk" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Model.csdl" />

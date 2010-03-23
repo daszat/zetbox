@@ -11,6 +11,8 @@
     <AssemblyName>Kistl.Objects</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>Kistl.Objects.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -190,6 +192,9 @@
     <Compile Include="ProjekteRepository.Interface.Designer.cs" />
     <Compile Include="TestModuleRepository.Interface.Designer.cs" />
     <Compile Include="TimeRecordsRepository.Interface.Designer.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Kistl.Objects.snk" />
   </ItemGroup>
   
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

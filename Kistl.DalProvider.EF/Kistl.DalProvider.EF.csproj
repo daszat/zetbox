@@ -14,6 +14,8 @@
     <FileAlignment>512</FileAlignment>
     <StartupObject>
     </StartupObject>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>Kistl.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -39,9 +41,10 @@
     <NoWarn>1591</NoWarn>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Arebis.CodeGeneration, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Arebis.CodeGeneration, Version=1.2.0.1, Culture=neutral, PublicKeyToken=1012dfebee6c8abd, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\ArebisCGen\Arebis.CodeGeneration\bin\Release\Arebis.CodeGeneration.dll</HintPath>
+      <HintPath>C:\Program Files (x86)\AREBIS\Arebis Generation Tools\Arebis.CodeGeneration.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Autofac, Version=1.4.5.676, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -357,6 +360,7 @@
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>RelationDebugTemplate.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Kistl.snk" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Generator\Implementation\README 1-N.txt" />

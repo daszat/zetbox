@@ -19,6 +19,8 @@
     <AssemblyName><%= GetAssemblyName() %></AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>Kistl.Objects.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -79,6 +81,9 @@
 <%
 	}
 %>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Kistl.Objects.snk" />
   </ItemGroup>
 <%
 	ApplyAdditionalItemGroups();

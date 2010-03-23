@@ -12,6 +12,8 @@
     <AssemblyName>Kistl.API</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>Kistl.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -105,6 +107,7 @@
     <Content Include="Configuration\SampleConfig.xml" />
     <None Include="ClassDiagram.Kistl.API.cd" />
     <None Include="Configuration\CreateSchema.cmd" />
+    <None Include="Kistl.snk" />
     <Compile Include="BaseNotifyingObject.cs" />
     <Compile Include="BasePersistenceObject.cs" />
     <Compile Include="BaseCompoundObject.cs" />

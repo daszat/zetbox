@@ -11395,21 +11395,21 @@
     <KistlBase:CreatedOn>2009-12-14T17:08:05.39Z</KistlBase:CreatedOn>
     <KistlBase:DeploymentRestrictions>1</KistlBase:DeploymentRestrictions>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
-    <KistlBase:Name>Kistl.App.Projekte.Client, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</KistlBase:Name>
+    <KistlBase:Name>Kistl.App.Projekte.Client, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ccdf16e4dd7b6d78</KistlBase:Name>
   </KistlBase:Assembly>
   <KistlBase:Assembly ExportGuid="ac417690-2bab-4e7f-ab1b-b8afefe6aebf">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.393Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.393Z</KistlBase:CreatedOn>
     <KistlBase:DeploymentRestrictions>0</KistlBase:DeploymentRestrictions>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
-    <KistlBase:Name>Kistl.App.Projekte.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</KistlBase:Name>
+    <KistlBase:Name>Kistl.App.Projekte.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ccdf16e4dd7b6d78</KistlBase:Name>
   </KistlBase:Assembly>
   <KistlBase:Assembly ExportGuid="9acf0b2c-a4a1-4418-99b8-3ec69157c3f0">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.393Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.393Z</KistlBase:CreatedOn>
     <KistlBase:DeploymentRestrictions>2</KistlBase:DeploymentRestrictions>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
-    <KistlBase:Name>Kistl.App.Projekte.Server, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</KistlBase:Name>
+    <KistlBase:Name>Kistl.App.Projekte.Server, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ccdf16e4dd7b6d78</KistlBase:Name>
   </KistlBase:Assembly>
   <KistlBase:Assembly ExportGuid="1e574f0e-05aa-4576-8130-e4d0c82ec26c">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.393Z</KistlBase:ChangedOn>
@@ -11423,7 +11423,7 @@
     <KistlBase:CreatedOn>2009-12-15T11:30:29.737Z</KistlBase:CreatedOn>
     <KistlBase:DeploymentRestrictions>1</KistlBase:DeploymentRestrictions>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
-    <KistlBase:Name>TempAppHelpers, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</KistlBase:Name>
+    <KistlBase:Name>TempAppHelpers, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ccdf16e4dd7b6d78</KistlBase:Name>
   </KistlBase:Assembly>
   <KistlBase:TypeRef ExportGuid="5d0aadd8-86ef-4da6-a349-5052cd3a159b">
     <KistlBase:Assembly>8937dfc1-288e-49ca-a6c6-701e9c230b07</KistlBase:Assembly>
@@ -14221,49 +14221,49 @@
     <KistlBase:CreatedOn>2009-12-14T17:08:05.403Z</KistlBase:CreatedOn>
     <KistlBase:DeploymentRestrictions>0</KistlBase:DeploymentRestrictions>
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
-    <KistlBase:Name>Kistl.API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</KistlBase:Name>
+    <KistlBase:Name>Kistl.API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ccdf16e4dd7b6d78</KistlBase:Name>
   </KistlBase:Assembly>
   <KistlBase:Assembly ExportGuid="15b6b4c4-6a16-485a-aa55-017b0c76fc56">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.403Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.403Z</KistlBase:CreatedOn>
     <KistlBase:DeploymentRestrictions>1</KistlBase:DeploymentRestrictions>
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
-    <KistlBase:Name>Kistl.API.Client, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</KistlBase:Name>
+    <KistlBase:Name>Kistl.API.Client, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ccdf16e4dd7b6d78</KistlBase:Name>
   </KistlBase:Assembly>
   <KistlBase:Assembly ExportGuid="ccb4bfc9-d76a-43be-963e-bc3712e6b405">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.407Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.407Z</KistlBase:CreatedOn>
     <KistlBase:DeploymentRestrictions>1</KistlBase:DeploymentRestrictions>
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
-    <KistlBase:Name>Kistl.Client, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</KistlBase:Name>
+    <KistlBase:Name>Kistl.Client, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ccdf16e4dd7b6d78</KistlBase:Name>
   </KistlBase:Assembly>
   <KistlBase:Assembly ExportGuid="eb5c0841-a9bb-4262-bb9a-5aed5a7086c7">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.407Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.407Z</KistlBase:CreatedOn>
     <KistlBase:DeploymentRestrictions>1</KistlBase:DeploymentRestrictions>
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
-    <KistlBase:Name>Kistl.Client.ASPNET.Toolkit, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</KistlBase:Name>
+    <KistlBase:Name>Kistl.Client.ASPNET.Toolkit, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ccdf16e4dd7b6d78</KistlBase:Name>
   </KistlBase:Assembly>
   <KistlBase:Assembly ExportGuid="62afd077-5c95-46ce-8daa-ffda715ad3f5">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.407Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.407Z</KistlBase:CreatedOn>
     <KistlBase:DeploymentRestrictions>1</KistlBase:DeploymentRestrictions>
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
-    <KistlBase:Name>Kistl.Client.Forms, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</KistlBase:Name>
+    <KistlBase:Name>Kistl.Client.Forms, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ccdf16e4dd7b6d78</KistlBase:Name>
   </KistlBase:Assembly>
   <KistlBase:Assembly ExportGuid="157c1754-6eed-49f7-883b-ae2543bafd7e">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.407Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.407Z</KistlBase:CreatedOn>
     <KistlBase:DeploymentRestrictions>1</KistlBase:DeploymentRestrictions>
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
-    <KistlBase:Name>Kistl.Client.WPF, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</KistlBase:Name>
+    <KistlBase:Name>Kistl.Client.WPF, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ccdf16e4dd7b6d78</KistlBase:Name>
   </KistlBase:Assembly>
   <KistlBase:Assembly ExportGuid="242a1ea6-e8e1-420c-824d-0d2707ece25d">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.407Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.407Z</KistlBase:CreatedOn>
     <KistlBase:DeploymentRestrictions>0</KistlBase:DeploymentRestrictions>
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
-    <KistlBase:Name>Kistl.Objects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</KistlBase:Name>
+    <KistlBase:Name>Kistl.Objects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ccdf16e4dd7b6d78</KistlBase:Name>
   </KistlBase:Assembly>
   <KistlBase:Assembly ExportGuid="59dbd4ab-f5d2-455f-8181-acffe0fcec0b">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.407Z</KistlBase:ChangedOn>

@@ -12,7 +12,9 @@ namespace Kistl.Server.Generators
 {
     public abstract class BaseDataObjectGenerator
     {
+        private readonly static object _lock = new object();
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Server.Generator");
+        private static MemoryStream _KistlObjectSNKCache = null;
 
         // Case #1382?
         private string codeBasePath = String.Empty;
@@ -29,6 +31,25 @@ namespace Kistl.Server.Generators
                 .ToList().ForEach(d => Directory.Delete(d));
 
             Directory.CreateDirectory(codeBasePath);
+
+            lock (_lock)
+            {
+                if (_KistlObjectSNKCache == null)
+                {
+                    using (var snkSrc = this.GetType().Assembly.GetManifestResourceStream("Kistl.Server.Generators.Kistl.Objects.snk"))
+                    {
+                        _KistlObjectSNKCache = new MemoryStream();
+                        snkSrc.CopyTo(_KistlObjectSNKCache);
+                    }
+                }
+
+                // Save KeyFile
+                using (var snkDest = File.Open(Path.Combine(codeBasePath, "Kistl.Objects.snk"), FileMode.Create))
+                {
+                    snkDest.SetLength(0);
+                    _KistlObjectSNKCache.CopyTo(snkDest);
+                }
+            }
 
             var generatedFileNames = new List<string>();
 

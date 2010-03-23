@@ -14,6 +14,8 @@
     <FileAlignment>512</FileAlignment>
     <StartupObject>
     </StartupObject>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>Kistl.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -537,6 +539,7 @@
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>ObjectListProperty.Designer.cs</LastGenOutput>
     </None>
+    <EmbeddedResource Include="Generators\Kistl.Objects.snk" />
     <None Include="Generators\Templates\Implementation\ObjectClasses\CalculatedProperty.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>CalculatedProperty.Designer.cs</LastGenOutput>
@@ -656,6 +659,7 @@
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>Repository.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Kistl.snk" />
     <Compile Include="Generators\ClientObjects\Implementation\ObjectClasses\CollectionSerialization.cs" />
     <Compile Include="Generators\KistlCodeTemplate.cs" />
     <Compile Include="Generators\Templates\Implementation\CollectionEntries\ExportGuidProperty.cs" />

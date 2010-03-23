@@ -54,14 +54,14 @@ namespace Kistl.Server.Generators
                 }
 
                 GenerateTo(workingPath);
-                GenerateCodeOnStaThread(workingPath);
+                CompileCodeOnStaThread(workingPath);
                 ArchiveOldOutput();
                 PublishOutput();
                 Log.Info("Finished generating Code");
             }
         }
 
-        private void GenerateCodeOnStaThread(string workingPath)
+        private void CompileCodeOnStaThread(string workingPath)
         {
             var staThread = new Thread(() => CompileCode(workingPath));
             if (staThread.TrySetApartmentState(ApartmentState.STA))
@@ -70,7 +70,7 @@ namespace Kistl.Server.Generators
             }
             else
             {
-                Log.Info("Successfully set STA on compile thread");
+                Log.Warn("STA not set on compile thread");
             }
             staThread.Name = "Compile";
             staThread.Start();
