@@ -13,5 +13,20 @@ namespace Kistl.App.Base
     public interface InstanceConstraint : IDataObject 
     {
 
+        /// <summary>
+        /// The reason of this constraint
+        /// </summary>
+		string Reason {
+			get;
+			set;
+		}
+        /// <summary>
+        /// 
+        /// </summary>
+		 void GetErrorText(Kistl.API.IDataObject constrainedObject) ;
+        /// <summary>
+        /// 
+        /// </summary>
+		 bool IsValid(Kistl.API.IDataObject constrainedObject) ;
     }
 }

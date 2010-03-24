@@ -1147,6 +1147,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Reason" Type="String" Nullable="true" MaxLength="1000" />
   </EntityType>
   <EntityType Name="Kunde">
     <Key>

@@ -246,20 +246,21 @@ namespace Kistl.Server.Service
 
         internal static void DefaultInitialisation(string dataSourceXmlFile, IContainer container)
         {
-        	using(Log.InfoTraceMethodCall()) {
-        		Log.TraceTotalMemory("Before DefaultInitialisation()");
+            using (Log.InfoTraceMethodCall())
+            {
+                Log.TraceTotalMemory("Before DefaultInitialisation()");
 
-        		// TODO: remove, this should be default when using the container.
-        		{
-        			container.Resolve<ServerApplicationContext>();
-        			if (dataSourceXmlFile == null) { FrozenContext.RegisterFallback(container.Resolve<IReadOnlyKistlContext>()); }
-        		}
+                // TODO: remove, this should be default when using the container.
+                {
+                    container.Resolve<ServerApplicationContext>();
+                    if (dataSourceXmlFile == null) { FrozenContext.RegisterFallback(container.Resolve<IReadOnlyKistlContext>()); }
+                }
 
-        		// initialise custom actions manager
-        		var cams = container.Resolve<BaseCustomActionsManager>();
+                // initialise custom actions manager
+                var cams = container.Resolve<BaseCustomActionsManager>();
 
-        		Log.TraceTotalMemory("After DefaultInitialisation()");
-        	}
+                Log.TraceTotalMemory("After DefaultInitialisation()");
+            }
         }
 
         internal static IContainer CreateMasterContainer(KistlConfig config, string dataSourceXmlFile)

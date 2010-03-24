@@ -57,6 +57,101 @@ namespace Kistl.App.Base
         }
         private int _ID;
 
+        /// <summary>
+        /// The reason of this constraint
+        /// </summary>
+        // value type property
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+           // Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.NotifyingDataProperty
+        public virtual string Reason
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _Reason;
+                if (OnReason_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<string>(__result);
+                    OnReason_Getter(this, __e);
+                    __result = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_Reason != value)
+                {
+                    var __oldValue = _Reason;
+                    var __newValue = value;
+                    if(OnReason_PreSetter != null)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
+                        OnReason_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("Reason", __oldValue, __newValue);
+                    _Reason = __newValue;
+                    NotifyPropertyChanged("Reason", __oldValue, __newValue);
+                    if(OnReason_PostSetter != null)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
+                        OnReason_PostSetter(this, __e);
+                    }
+                }
+            }
+        }
+        private string _Reason;
+		public static event PropertyGetterHandler<Kistl.App.Base.InstanceConstraint, string> OnReason_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.InstanceConstraint, string> OnReason_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.InstanceConstraint, string> OnReason_PostSetter;
+
+        /// <summary>
+        /// 
+        /// </summary>
+		[EventBasedMethod("OnGetErrorText_InstanceConstraint")]
+		public virtual void GetErrorText(Kistl.API.IDataObject constrainedObject) 
+		{
+            // base.GetErrorText();
+            if (OnGetErrorText_InstanceConstraint != null)
+            {
+				OnGetErrorText_InstanceConstraint(this, constrainedObject);
+			}
+			else
+			{
+                throw new NotImplementedException("No handler registered on InstanceConstraint.GetErrorText");
+			}
+        }
+		public delegate void GetErrorText_Handler<T>(T obj, Kistl.API.IDataObject constrainedObject);
+		public static event GetErrorText_Handler<InstanceConstraint> OnGetErrorText_InstanceConstraint;
+
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+		[EventBasedMethod("OnIsValid_InstanceConstraint")]
+		public virtual bool IsValid(Kistl.API.IDataObject constrainedObject) 
+        {
+            var e = new MethodReturnEventArgs<bool>();
+            if (OnIsValid_InstanceConstraint != null)
+            {
+                OnIsValid_InstanceConstraint(this, e, constrainedObject);
+            }
+            else
+            {
+                throw new NotImplementedException("No handler registered on InstanceConstraint.IsValid");
+            }
+            return e.Result;
+        }
+		public delegate void IsValid_Handler<T>(T obj, MethodReturnEventArgs<bool> ret, Kistl.API.IDataObject constrainedObject);
+		public static event IsValid_Handler<InstanceConstraint> OnIsValid_InstanceConstraint;
+
+
+
 		public override InterfaceType GetInterfaceType()
 		{
 			return new InterfaceType(typeof(InstanceConstraint));
@@ -69,6 +164,7 @@ namespace Kistl.App.Base
 			var otherImpl = (InstanceConstraint__Implementation__)obj;
 			var me = (InstanceConstraint)this;
 
+			me.Reason = other.Reason;
 		}
 
         // tail template
@@ -122,6 +218,13 @@ namespace Kistl.App.Base
 
 
 		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
+			// else
+			new CustomPropertyDescriptor<InstanceConstraint__Implementation__, string>(
+				new Guid("83be7495-e0e0-48fc-872a-70de9c0f7a88"),
+				"Reason",
+				null,
+				obj => obj.Reason,
+				(obj, val) => obj.Reason = val),
 			// rel: Constraint on Constrained (e2b66b79-ab7a-43c0-a229-16dddf4b8934)
 		};
 		
@@ -146,24 +249,28 @@ namespace Kistl.App.Base
         {
             
             base.ToStream(binStream, auxObjects);
+            BinarySerializer.ToStream(this._Reason, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             
             base.FromStream(binStream);
+            BinarySerializer.FromStream(out this._Reason, binStream);
         }
 
         public override void ToStream(System.Xml.XmlWriter xml)
         {
             
             base.ToStream(xml);
+            XmlStreamer.ToStream(this._Reason, xml, "Reason", "Kistl.App.Base");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
             
             base.FromStream(xml);
+            XmlStreamer.FromStream(ref this._Reason, xml, "Reason", "Kistl.App.Base");
         }
 
 #endregion

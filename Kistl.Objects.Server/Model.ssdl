@@ -1672,6 +1672,7 @@
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="fk_Constrained" Type="int" />
+    <Property Name="Reason" Type="nvarchar" MaxLength="1000" Nullable="true" />
   </EntityType>
 	
   <EntityType Name="IntegerRangeConstraint">

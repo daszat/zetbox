@@ -499,6 +499,7 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.InstanceConstraint)">
 	    <MappingFragment StoreEntitySet="InstanceConstraint">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="Reason" ColumnName="Reason" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2010-03-22T16:32:35.58Z" xmlns="http://dasz.at/Kistl">
+<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2010-03-24T15:43:58.303Z" xmlns="http://dasz.at/Kistl">
   <KistlBase:Module ExportGuid="110acbc0-652a-4adc-9de5-8baabfcf3637">
     <KistlBase:ChangedOn>2010-02-01T16:07:00.49Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2010-02-01T15:23:35.247Z</KistlBase:CreatedOn>
@@ -3834,6 +3834,19 @@
     <KistlBase:ObjectClass>0999effb-c645-45e1-b3c2-5654530d0acb</KistlBase:ObjectClass>
     <KistlBase:Properties_pos>100</KistlBase:Properties_pos>
     <GUI:ValueModelDescriptor>d1135824-6e2a-41e7-a1db-83621b5de078</GUI:ValueModelDescriptor>
+    <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
+    <KistlBase:IsList>false</KistlBase:IsList>
+  </KistlBase:StringProperty>
+  <KistlBase:StringProperty ExportGuid="83be7495-e0e0-48fc-872a-70de9c0f7a88">
+    <KistlBase:CategoryTags>Summary</KistlBase:CategoryTags>
+    <KistlBase:ChangedOn>2010-03-24T15:38:46.077Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-03-24T15:38:46.077Z</KistlBase:CreatedOn>
+    <KistlBase:Description>The reason of this constraint</KistlBase:Description>
+    <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
+    <KistlBase:Name>Reason</KistlBase:Name>
+    <KistlBase:ObjectClass>25a83f49-3cff-4baf-850d-8d185bb329ec</KistlBase:ObjectClass>
+    <KistlBase:Properties_pos>0</KistlBase:Properties_pos>
+    <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:IsList>false</KistlBase:IsList>
   </KistlBase:StringProperty>
@@ -8296,6 +8309,22 @@
     <KistlBase:Name>GetMemberName</KistlBase:Name>
     <KistlBase:ObjectClass>0999effb-c645-45e1-b3c2-5654530d0acb</KistlBase:ObjectClass>
   </KistlBase:Method>
+  <KistlBase:Method ExportGuid="3645a0d5-abb5-4e87-aec1-17ecaa9c1b5f">
+    <KistlBase:ChangedOn>2010-03-24T15:41:58.503Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-03-24T15:41:58.503Z</KistlBase:CreatedOn>
+    <GUI:IsDisplayable>false</GUI:IsDisplayable>
+    <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
+    <KistlBase:Name>GetErrorText</KistlBase:Name>
+    <KistlBase:ObjectClass>25a83f49-3cff-4baf-850d-8d185bb329ec</KistlBase:ObjectClass>
+  </KistlBase:Method>
+  <KistlBase:Method ExportGuid="ec91627e-1ac4-492b-8f26-fa8acc105f33">
+    <KistlBase:ChangedOn>2010-03-24T15:43:58.303Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-03-24T15:43:12.003Z</KistlBase:CreatedOn>
+    <GUI:IsDisplayable>false</GUI:IsDisplayable>
+    <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
+    <KistlBase:Name>IsValid</KistlBase:Name>
+    <KistlBase:ObjectClass>25a83f49-3cff-4baf-850d-8d185bb329ec</KistlBase:ObjectClass>
+  </KistlBase:Method>
   <KistlBase:Method ExportGuid="8ad972e0-bc57-4f59-85e5-98bdef7526b7">
     <KistlBase:ChangedOn>2010-03-15T11:36:26.957Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2010-03-15T11:36:26.957Z</KistlBase:CreatedOn>
@@ -9130,6 +9159,38 @@
     <KistlBase:Parameter_pos>0</KistlBase:Parameter_pos>
     <KistlBase:Name>ReturnValue</KistlBase:Name>
   </KistlBase:StringParameter>
+  <KistlBase:CLRObjectParameter ExportGuid="00cf4c73-f3f4-476f-b985-c6f9bc14c3ff">
+    <KistlBase:ChangedOn>2010-03-24T15:41:58.523Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-03-24T15:41:58.523Z</KistlBase:CreatedOn>
+    <KistlBase:Description>The constrained object to be checked.</KistlBase:Description>
+    <KistlBase:IsList>false</KistlBase:IsList>
+    <KistlBase:IsReturnParameter>false</KistlBase:IsReturnParameter>
+    <KistlBase:Method>3645a0d5-abb5-4e87-aec1-17ecaa9c1b5f</KistlBase:Method>
+    <KistlBase:Parameter_pos>0</KistlBase:Parameter_pos>
+    <KistlBase:Name>constrainedObject</KistlBase:Name>
+    <KistlBase:Type>527370ff-ca5e-4c4f-a665-bd5483f1936f</KistlBase:Type>
+  </KistlBase:CLRObjectParameter>
+  <KistlBase:CLRObjectParameter ExportGuid="0aee4742-9a1d-4df5-ac45-ff186916564a">
+    <KistlBase:ChangedOn>2010-03-24T15:43:58.013Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-03-24T15:43:58.013Z</KistlBase:CreatedOn>
+    <KistlBase:Description>The constrained object to be checked.</KistlBase:Description>
+    <KistlBase:IsList>false</KistlBase:IsList>
+    <KistlBase:IsReturnParameter>false</KistlBase:IsReturnParameter>
+    <KistlBase:Method>ec91627e-1ac4-492b-8f26-fa8acc105f33</KistlBase:Method>
+    <KistlBase:Parameter_pos>1</KistlBase:Parameter_pos>
+    <KistlBase:Name>constrainedObject</KistlBase:Name>
+    <KistlBase:Type>527370ff-ca5e-4c4f-a665-bd5483f1936f</KistlBase:Type>
+  </KistlBase:CLRObjectParameter>
+  <KistlBase:BoolParameter ExportGuid="be9aa24f-3103-4109-8d86-70f6a9a1f82c">
+    <KistlBase:ChangedOn>2010-03-24T15:43:12.017Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-03-24T15:43:12.017Z</KistlBase:CreatedOn>
+    <KistlBase:Description>Whether or not the specified object is valid.</KistlBase:Description>
+    <KistlBase:IsList>false</KistlBase:IsList>
+    <KistlBase:IsReturnParameter>true</KistlBase:IsReturnParameter>
+    <KistlBase:Method>ec91627e-1ac4-492b-8f26-fa8acc105f33</KistlBase:Method>
+    <KistlBase:Parameter_pos>0</KistlBase:Parameter_pos>
+    <KistlBase:Name>result</KistlBase:Name>
+  </KistlBase:BoolParameter>
   <KistlBase:StringParameter ExportGuid="30de0b6f-4e39-4994-ac5e-4180598d07a4">
     <KistlBase:ChangedOn>2010-03-15T11:36:26.957Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2010-03-15T11:36:26.957Z</KistlBase:CreatedOn>
