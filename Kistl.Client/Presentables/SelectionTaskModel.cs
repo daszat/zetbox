@@ -30,6 +30,19 @@ namespace Kistl.Client.Presentables
         {
             _choices = _filteredChoices = new ReadOnlyCollection<TChoosable>(choices);
             _callback = callback;
+            _additionalActions = new ReadOnlyCollection<CommandModel>(new CommandModel[] { });
+        }
+
+        protected SelectionTaskModel(
+            IGuiApplicationContext appCtx, IKistlContext dataCtx,
+            IList<TChoosable> choices,
+            Action<TChoosable> callback,
+            IList<CommandModel> additionalActions)
+            : base(appCtx, dataCtx)
+        {
+            _choices = _filteredChoices = new ReadOnlyCollection<TChoosable>(choices);
+            _callback = callback;
+            _additionalActions = new ReadOnlyCollection<CommandModel>(additionalActions ?? new CommandModel[] { });
         }
 
         #region Public interface
@@ -47,6 +60,14 @@ namespace Kistl.Client.Presentables
             get
             {
                 return _filteredChoices;
+            }
+        }
+
+        public ReadOnlyCollection<CommandModel> AdditionalActions
+        {
+            get
+            {
+                return _additionalActions;
             }
         }
 
@@ -101,6 +122,7 @@ namespace Kistl.Client.Presentables
         private ReadOnlyCollection<TChoosable> _choices;
         private ReadOnlyCollection<TChoosable> _filteredChoices;
         private Action<TChoosable> _callback;
+        private ReadOnlyCollection<CommandModel> _additionalActions;
 
         public override string Name
         {
@@ -115,6 +137,15 @@ namespace Kistl.Client.Presentables
             IList<DataObjectModel> choices,
             Action<DataObjectModel> callback)
             : base(appCtx, dataCtx, choices, callback)
+        {
+        }
+
+        public DataObjectSelectionTaskModel(
+            IGuiApplicationContext appCtx, IKistlContext dataCtx,
+            IList<DataObjectModel> choices,
+            Action<DataObjectModel> callback,
+            IList<CommandModel> additionalActions)
+            : base(appCtx, dataCtx, choices, callback, additionalActions)
         {
         }
     }

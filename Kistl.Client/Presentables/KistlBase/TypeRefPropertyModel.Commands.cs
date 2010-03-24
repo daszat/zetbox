@@ -105,24 +105,50 @@ namespace Kistl.Client.Presentables.KistlBase
         /// </summary>
         /// <param name="assembly">the assembly to choose from</param>
         protected void ChooseTypeRefFromAssembly(Kistl.App.Base.Assembly assembly)
-        {
-            assembly.RegenerateTypeRefs();
-
+        {            
             var selectionTask = Factory.CreateSpecificModel<DataObjectSelectionTaskModel>(
                 DataContext,
-                DataContext.GetQuery<Kistl.App.Base.TypeRef>().Where(tr => tr.Assembly.ID == assembly.ID)
-                    .ToList()
-                    .OrderBy(tr => tr.FullName)
-                    .Select(tr => (DataObjectModel)Factory.CreateDefaultModel(DataContext, tr))
-                    .ToList(),
+                GetTypeRefList(assembly),
                 new Action<DataObjectModel>(delegate(DataObjectModel chosen)
                 {
                     if (chosen != null)
                     {
                         this.Parent.Value = chosen;
                     }
-                }));
+                }),
+                new List<CommandModel>() { new RegenerateTypeRefsCommand(AppContext, DataContext, assembly) });
             Factory.ShowModel(selectionTask, true);
+        }
+
+        private List<DataObjectModel> GetTypeRefList(Kistl.App.Base.Assembly assembly)
+        {
+            return DataContext.GetQuery<Kistl.App.Base.TypeRef>().Where(tr => tr.Assembly.ID == assembly.ID)
+                                .ToList()
+                                .OrderBy(tr => tr.FullName)
+                                .Select(tr => (DataObjectModel)Factory.CreateDefaultModel(DataContext, tr))
+                                .ToList();
+        }
+
+        private class RegenerateTypeRefsCommand : CommandModel
+        {
+            private Kistl.App.Base.Assembly _assembly;
+
+            public RegenerateTypeRefsCommand(IGuiApplicationContext appCtx, IKistlContext dataCtx, Kistl.App.Base.Assembly assembly)
+                : base(appCtx, dataCtx, "Regenerate TypeRefs", "Regenerate TypeRefs")
+            {
+                _assembly = assembly;
+            }
+
+            public override bool CanExecute(object data)
+            {
+                return true;
+            }
+
+            protected override void DoExecute(object data)
+            {
+                _assembly.RegenerateTypeRefs();
+                // TODO: Add Refresh
+            }
         }
 
     }

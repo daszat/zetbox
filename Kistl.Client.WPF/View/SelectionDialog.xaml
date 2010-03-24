@@ -1,10 +1,13 @@
 ﻿<Window x:Class="Kistl.Client.WPF.View.SelectionDialog"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:client="clr-namespace:Kistl.Client.Presentables;assembly=Kistl.Client"
         Title="Choose Object"
         ResizeMode="CanResize"
         SizeToContent="WidthAndHeight"
-        Loaded="OnLoaded">
+        Loaded="OnLoaded"
+        xmlns:commands="clr-namespace:Kistl.Client.WPF.Commands"
+        commands:SmartRoutedUICommand.IsCommandSink="True">
     <Window.Resources>
         <Style x:Key="addedMargins">
             <Setter Property="FrameworkElement.Margin"
@@ -31,6 +34,14 @@
             <Button IsCancel="True"
                     Click="CancelClickHandler"
                     Style="{StaticResource addedMargins}">Cancel</Button>
+            <ListBox ItemsSource="{Binding Path=AdditionalActions}" >
+                <ListBox.ItemTemplate>
+                    <DataTemplate DataType="{x:Type client:CommandModel}">
+                        <Button Command="{Binding Converter={StaticResource CommandConverter}}"
+                                Style="{StaticResource addedMargins}" Content="{Binding Path=Label}" ToolTip="{Binding Path=ToolTip}"></Button>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
         </UniformGrid>
 
         <ListBox x:Name="choicesList"

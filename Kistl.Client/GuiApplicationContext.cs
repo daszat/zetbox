@@ -90,7 +90,7 @@ namespace Kistl.Client
                     //AsyncThread = new Kistl.Client.Presentables.WPF.AsyncThreadManager();
 
                     Factory = (ModelFactory)Activator.CreateInstance(
-                        Type.GetType("Kistl.Client.WPF.WpfModelFactory, Kistl.Client.WPF, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null", true),
+                        Type.GetType("Kistl.Client.WPF.WpfModelFactory, Kistl.Client.WPF, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ccdf16e4dd7b6d78", true),
                         new object[] { this }
                       );
                     break;
@@ -101,7 +101,7 @@ namespace Kistl.Client
                     AsyncThread = new SynchronousThreadManager();
 
                     Factory = (ModelFactory)Activator.CreateInstance(
-                        Type.GetType("Kistl.Client.Forms.FormsModelFactory, Kistl.Client.Forms", true),
+                        Type.GetType("Kistl.Client.Forms.FormsModelFactory, Kistl.Client.Forms, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ccdf16e4dd7b6d78", true),
                         new object[] { this });
                     break;
                 case Toolkit.ASPNET:
@@ -109,7 +109,7 @@ namespace Kistl.Client
                     AsyncThread = new SynchronousThreadManager();
 
                     Factory = (ModelFactory)Activator.CreateInstance(
-                        Type.GetType("Kistl.Client.ASPNET.Toolkit.AspnetModelFactory, Kistl.Client.ASPNET.Toolkit", true),
+                        Type.GetType("Kistl.Client.ASPNET.Toolkit.AspnetModelFactory, Kistl.Client.ASPNET.Toolkit, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ccdf16e4dd7b6d78", true),
                         new object[] { this });
                     break;
                 default:

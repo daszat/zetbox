@@ -49,6 +49,7 @@ M: System.Delegate Kistl.Client.WPF.View.KistlBase.TypeRefPropertyView::_CreateD
 M: System.Delegate Kistl.Client.WPF.View.TextValueSelectionView::_CreateDelegate(System.Type,System.String)
 M: System.Delegate Kistl.Client.WPF.View.KistlBase.TypeRefPropertyView::_CreateDelegate(System.Type,System.String)
 M: System.Delegate Kistl.Client.WPF.View.TextValueSelectionView::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Kistl.Client.WPF.View.SelectionDialog::_CreateDelegate(System.Type,System.String)
 
 R: Gendarme.Rules.Correctness.CheckParametersNullityInVisibleMethodsRule
 # MethodInvocation implementors should not have to check for thisobj==null => too many false positives
