@@ -483,8 +483,8 @@ namespace at.dasz.CourseOrganiser
 				null,
 				obj => obj.Year,
 				(obj, val) => obj.Year = val),
-			// rel: Excercise happens_in Semester (719bf072-74d1-4878-8d8b-db1c92d60145)
 			// rel: Exam happens_in Semester (af26d91c-68a2-4c18-aca7-4fc56d3b519a)
+			// rel: Excercise happens_in Semester (719bf072-74d1-4878-8d8b-db1c92d60145)
 		};
 		
 		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)

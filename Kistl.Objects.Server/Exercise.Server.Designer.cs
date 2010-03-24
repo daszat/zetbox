@@ -456,8 +456,8 @@ namespace at.dasz.CourseOrganiser
 				null,
 				obj => obj.Semester,
 				(obj, val) => obj.Semester = val),
-			// rel: GroupExcercise passes Excercise (a8350540-d61e-48b3-b7a1-39751968dcf3)
 			// rel: Excercise happens_in Semester (719bf072-74d1-4878-8d8b-db1c92d60145)
+			// rel: GroupExcercise passes Excercise (a8350540-d61e-48b3-b7a1-39751968dcf3)
 		};
 		
 		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)

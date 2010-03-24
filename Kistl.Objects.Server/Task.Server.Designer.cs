@@ -779,9 +779,9 @@ namespace Kistl.App.Projekte
 				null,
 				obj => obj.Projekt,
 				(obj, val) => obj.Projekt = val),
+			// rel: Projekt has Tasks (434dab4f-0dcd-4724-a62b-730540ce143a)
 			// rel: Task was CreatedBy (d3b22699-c804-4443-bf4d-5d083cb0d313)
 			// rel: Task was ChangedBy (79cfa49b-e629-492f-a8d7-d4467d3a55c0)
-			// rel: Projekt has Tasks (434dab4f-0dcd-4724-a62b-730540ce143a)
 		};
 		
 		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)

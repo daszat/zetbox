@@ -878,11 +878,11 @@ namespace Kistl.App.Projekte
 				null,
 				obj => obj.Projekt,
 				(obj, val) => obj.Projekt = val),
-			// rel: Auftrag has Kunde (c0c472d1-95b3-4588-812b-0d41c6e692b5)
 			// rel: Auftrag ChangedBy ChangedBy (f12a4d5c-dcb0-416c-b1fa-1f6fc163bdac)
 			// rel: Auftrag CreatedBy CreatedBy (a6ed6bc7-2eb3-4e43-97f3-ec8aca0e120b)
-			// rel: Projekt has Auftraege (062fa6cf-bdb1-4994-9e8b-5fe5426c60aa)
+			// rel: Auftrag has Kunde (c0c472d1-95b3-4588-812b-0d41c6e692b5)
 			// rel: Auftrag has Mitarbeiter (4964faf9-ebae-4287-91f8-6d2112a5921c)
+			// rel: Projekt has Auftraege (062fa6cf-bdb1-4994-9e8b-5fe5426c60aa)
 		};
 		
 		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)

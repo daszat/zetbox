@@ -905,10 +905,10 @@ namespace Kistl.App.Base
 				null,
 				obj => obj.Rights,
 				(obj, val) => obj.Rights = val),
-			// rel: ObjectClass has AccessControlList (5c3092e0-a3e1-46d2-8e66-e59298b342e7)
-			// rel: AccessControl was ChangedBy (89cba0a2-2515-45d8-90e5-fa96db0cc4b3)
-			// rel: AccessControl was CreatedBy (a6a5dcbf-0751-4911-9a0a-5fb1a59d2a45)
 			// rel: AccessControl has Module (89b9c0a5-3b5a-4e04-83cf-0e8de37abcf1)
+			// rel: AccessControl was CreatedBy (a6a5dcbf-0751-4911-9a0a-5fb1a59d2a45)
+			// rel: AccessControl was ChangedBy (89cba0a2-2515-45d8-90e5-fa96db0cc4b3)
+			// rel: ObjectClass has AccessControlList (5c3092e0-a3e1-46d2-8e66-e59298b342e7)
 		};
 		
 		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)

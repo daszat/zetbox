@@ -686,8 +686,8 @@ namespace Kistl.App.Test
 				null,
 				obj => obj.TestString,
 				(obj, val) => obj.TestString = val),
-			// rel: MuhBlah_List_Role hasOther TestCustomObjects_Role (804f4d1e-ca7d-45e2-b9a3-3f89a6874768)
 			// rel: MuhBlah_Role has TestCustomObjects_List_Role (bd379747-6864-4c4e-95a8-319ff917fd60)
+			// rel: MuhBlah_List_Role hasOther TestCustomObjects_Role (804f4d1e-ca7d-45e2-b9a3-3f89a6874768)
 		};
 		
 		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)

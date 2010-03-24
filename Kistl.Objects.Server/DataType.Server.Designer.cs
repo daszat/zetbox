@@ -1221,14 +1221,14 @@ namespace Kistl.App.Base
 				null,
 				obj => obj.ShowNameInLists,
 				(obj, val) => obj.ShowNameInLists = val),
-			// rel: ObjectParameter has DataType (a6a30705-15ad-4a3a-b624-23305fe2807a)
-			// rel: DataType was CreatedBy (b7d1b442-4364-4979-b81c-66392fbe69fd)
-			// rel: DataType was ChangedBy (cf88221e-3474-4de1-8692-abd65d052e8b)
+			// rel: DataType has DefaultIcon (eb852cc4-3977-42b9-9fcd-3a8c60aa49ac)
+			// rel: ObjectClass has Methods (557ddcb4-8e99-48f2-9107-ef0cbff8066b)
 			// rel: InvokeOnObjectClass has MethodInvocations (dabf87d2-8038-4bc7-978f-f043151c7d25)
 			// rel: ObjectClass has Properties (f7e487a4-6922-40bf-a404-24ce6accbb83)
-			// rel: DataType has DefaultIcon (eb852cc4-3977-42b9-9fcd-3a8c60aa49ac)
+			// rel: DataType was CreatedBy (b7d1b442-4364-4979-b81c-66392fbe69fd)
+			// rel: DataType was ChangedBy (cf88221e-3474-4de1-8692-abd65d052e8b)
 			// rel: Module contains DataTypes (52c4ab07-f341-4eb3-86e2-05f27c8af2f7)
-			// rel: ObjectClass has Methods (557ddcb4-8e99-48f2-9107-ef0cbff8066b)
+			// rel: ObjectParameter has DataType (a6a30705-15ad-4a3a-b624-23305fe2807a)
 		};
 		
 		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)

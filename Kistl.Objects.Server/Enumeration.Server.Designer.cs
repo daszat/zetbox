@@ -254,8 +254,8 @@ namespace Kistl.App.Base
 				null,
 				obj => obj.EnumerationEntries,
 				null), // lists are read-only properties
-			// rel: EnumerationProperty has Enumeration (f85ff30f-0907-4e28-806e-a7f1aac98acb)
 			// rel: Enumeration has EnumerationEntries (55bd59b8-ad37-4837-b066-d505f86316fe)
+			// rel: EnumerationProperty has Enumeration (f85ff30f-0907-4e28-806e-a7f1aac98acb)
 		};
 		
 		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)

@@ -704,11 +704,11 @@ namespace Kistl.App.GUI
 				null,
 				obj => obj.SecondaryControlKinds,
 				null), // lists are read-only properties
-			// rel: PresentableModelDescriptor has Module (557dbc1c-2a38-4c77-8544-264a95307980)
-			// rel: PresentableModelDescriptor displayedInGridBy DefaultGridCellKind (0a03215f-1c1a-4a44-892d-86642eefe9f1)
 			// rel: Presentable has DefaultPresentableModelDescriptor (1ae94c81-3359-45e8-b97a-b61add91abba)
-			// rel: Property has ValueModelDescriptor (3437ea5d-d926-4a0b-a848-9dafedf7ad6a)
+			// rel: PresentableModelDescriptor displayedInGridBy DefaultGridCellKind (0a03215f-1c1a-4a44-892d-86642eefe9f1)
+			// rel: PresentableModelDescriptor has Module (557dbc1c-2a38-4c77-8544-264a95307980)
 			// rel: Descriptor has PresentableModelRef (9d771d87-3b28-4e5e-be33-ea71028e1720)
+			// rel: Property has ValueModelDescriptor (3437ea5d-d926-4a0b-a848-9dafedf7ad6a)
 		};
 		
 		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)

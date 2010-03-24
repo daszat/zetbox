@@ -801,19 +801,19 @@ namespace Kistl.App.Base
 				null,
 				obj => obj.Namespace,
 				(obj, val) => obj.Namespace = val),
-			// rel: BaseProperty has Module (bffae7c3-c5f3-4139-ae96-577f4c9fed8f)
-			// rel: Module has Relation (1c91bee2-397b-44f3-8346-313a8e2ba127)
-			// rel: Module was CreatedBy (5c8dd58e-cf1d-484f-af64-ff84ea4c3ee9)
-			// rel: Module was ChangedBy (9d108dc6-7caa-4597-95d4-82cf52da5638)
-			// rel: Icon has Module (a1360ce2-ecd5-4660-9b4d-3a2dc3919344)
-			// rel: MethodInvocation has Module (379b7181-a832-431f-a48d-ef1dd1996414)
 			// rel: AccessControl has Module (89b9c0a5-3b5a-4e04-83cf-0e8de37abcf1)
-			// rel: Module contains Assemblies (a10474db-85df-4731-a86c-124e54f3d146)
 			// rel: Group has Module (8d76b5ef-a7ae-4d4b-a92e-747fe972acfb)
-			// rel: PresentableModelDescriptor has Module (557dbc1c-2a38-4c77-8544-264a95307980)
-			// rel: ViewDescriptor has Module (51b089fa-edd9-4a1b-9f4c-ccfdaad76856)
+			// rel: Icon has Module (a1360ce2-ecd5-4660-9b4d-3a2dc3919344)
 			// rel: Method has Module (b251ee8c-2821-441e-b631-d215c006f1c8)
+			// rel: MethodInvocation has Module (379b7181-a832-431f-a48d-ef1dd1996414)
+			// rel: Module contains Assemblies (a10474db-85df-4731-a86c-124e54f3d146)
 			// rel: Module contains DataTypes (52c4ab07-f341-4eb3-86e2-05f27c8af2f7)
+			// rel: Module has Relation (1c91bee2-397b-44f3-8346-313a8e2ba127)
+			// rel: Module was ChangedBy (9d108dc6-7caa-4597-95d4-82cf52da5638)
+			// rel: Module was CreatedBy (5c8dd58e-cf1d-484f-af64-ff84ea4c3ee9)
+			// rel: PresentableModelDescriptor has Module (557dbc1c-2a38-4c77-8544-264a95307980)
+			// rel: BaseProperty has Module (bffae7c3-c5f3-4139-ae96-577f4c9fed8f)
+			// rel: ViewDescriptor has Module (51b089fa-edd9-4a1b-9f4c-ccfdaad76856)
 		};
 		
 		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)

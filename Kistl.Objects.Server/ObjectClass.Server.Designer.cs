@@ -906,13 +906,13 @@ namespace Kistl.App.Base
 				null,
 				obj => obj.TableName,
 				(obj, val) => obj.TableName = val),
-			// rel: ObjectClass has AccessControlList (5c3092e0-a3e1-46d2-8e66-e59298b342e7)
-			// rel: Constraint on Constrained (e2b66b79-ab7a-43c0-a229-16dddf4b8934)
-			// rel: ObjectReferencePlaceholderProperty ofType ReferencedObjectClass (47ccedbe-6cfa-4810-8b8e-c064b8434f3f)
 			// rel: CalculatedReference references ReferencedClass (6c207cc8-d6a2-49b5-81f3-743d261b7411)
-			// rel: RelationEnd has Type (1d8d8e0b-cb0d-4746-a4c5-85c8f399e00a)
+			// rel: Constraint on Constrained (e2b66b79-ab7a-43c0-a229-16dddf4b8934)
+			// rel: ObjectClass has AccessControlList (5c3092e0-a3e1-46d2-8e66-e59298b342e7)
 			// rel: BaseObjectClass has SubClasses (cba32040-b1f2-4267-991a-f3dc0e349ff5)
 			// rel: Presentable has DefaultPresentableModelDescriptor (1ae94c81-3359-45e8-b97a-b61add91abba)
+			// rel: ObjectReferencePlaceholderProperty ofType ReferencedObjectClass (47ccedbe-6cfa-4810-8b8e-c064b8434f3f)
+			// rel: RelationEnd has Type (1d8d8e0b-cb0d-4746-a4c5-85c8f399e00a)
 		};
 		
 		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)

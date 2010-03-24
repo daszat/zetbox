@@ -714,9 +714,9 @@ namespace Kistl.App.Base
 				null,
 				obj => obj.Reason,
 				(obj, val) => obj.Reason = val),
-			// rel: ConstrainedProperty has Constraints (6fa271a3-e365-4b8d-9cb1-575d7a3b5d6a)
-			// rel: Constraint was ChangedBy (6b1b0216-b3cf-4a5f-ae59-e6f46fda9331)
 			// rel: Constraint was CreatedBy (f7eab863-c425-4819-b435-10394cf1ca5a)
+			// rel: Constraint was ChangedBy (6b1b0216-b3cf-4a5f-ae59-e6f46fda9331)
+			// rel: ConstrainedProperty has Constraints (6fa271a3-e365-4b8d-9cb1-575d7a3b5d6a)
 		};
 		
 		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)

@@ -922,6 +922,8 @@ namespace Kistl.App.Base
 				null,
 				obj => obj.Name,
 				(obj, val) => obj.Name = val),
+			// rel: BaseParameter was CreatedBy (e98d475b-1a3f-4ffb-ac5a-4ecbebb2e6ce)
+			// rel: BaseParameter was ChangedBy (50657ede-910f-4552-a58b-b58832b7db8d)
 			// rel: Method has Parameter (f7738ce1-9784-4b8b-8156-9f4f0e97f937)
 			// rel.B.Type == cls && rel.B.HasPersistentOrder
 			new CustomPropertyDescriptor<BaseParameter__Implementation__, int?>(
@@ -930,8 +932,6 @@ namespace Kistl.App.Base
 				null,
 				obj => obj.Parameter_pos,
 				(obj, val) => obj.Parameter_pos = val),
-			// rel: BaseParameter was ChangedBy (50657ede-910f-4552-a58b-b58832b7db8d)
-			// rel: BaseParameter was CreatedBy (e98d475b-1a3f-4ffb-ac5a-4ecbebb2e6ce)
 		};
 		
 		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)

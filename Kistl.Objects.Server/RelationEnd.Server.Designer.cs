@@ -1152,8 +1152,8 @@ namespace Kistl.App.Base
 				null,
 				obj => obj.Type,
 				(obj, val) => obj.Type = val),
-			// rel: RelationEnd was ChangedBy (7be8f809-6b85-40e1-bfce-7de8909a03d9)
 			// rel: RelationEnd has Type (1d8d8e0b-cb0d-4746-a4c5-85c8f399e00a)
+			// rel: RelationEnd was ChangedBy (7be8f809-6b85-40e1-bfce-7de8909a03d9)
 			// rel: RelationEnd was CreatedBy (f474544e-8537-4dce-a8b4-9ec0b5f4150e)
 		};
 		

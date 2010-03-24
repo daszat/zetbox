@@ -490,9 +490,9 @@ namespace Kistl.App.GUI
 				null,
 				obj => obj.Property,
 				(obj, val) => obj.Property = val),
-			// rel: Visual has Property (73178882-7f93-444b-bf93-75db193904cf)
 			// rel: Template has VisualTree (299a4cf9-3f3e-4b89-b6ba-6b163b4e5dc0)
 			// rel: Visual has Method (304c9a1e-7365-45ee-a685-348fd76f10e7)
+			// rel: Visual has Property (73178882-7f93-444b-bf93-75db193904cf)
 		};
 		
 		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)

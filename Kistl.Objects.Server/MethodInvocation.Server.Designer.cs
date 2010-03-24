@@ -1011,12 +1011,12 @@ namespace Kistl.App.Base
 				null,
 				obj => obj.Module,
 				(obj, val) => obj.Module = val),
-			// rel: MethodInvocation has Module (379b7181-a832-431f-a48d-ef1dd1996414)
-			// rel: Method has MethodInvocations (4a388300-4e4d-45d2-b04e-0fe8efc25fec)
-			// rel: MethodInvocation was CreatedBy (062cc504-2191-4e6b-87e1-08747acd350c)
 			// rel: InvokeOnObjectClass has MethodInvocations (dabf87d2-8038-4bc7-978f-f043151c7d25)
-			// rel: MethodInvocation was ChangedBy (7ad6ee5a-550e-444e-b568-998bbf1a1994)
+			// rel: Method has MethodInvocations (4a388300-4e4d-45d2-b04e-0fe8efc25fec)
+			// rel: MethodInvocation has Module (379b7181-a832-431f-a48d-ef1dd1996414)
 			// rel: MethodInvocation has Implementor (dc9013af-8758-40b4-8f52-c2c8683a13e0)
+			// rel: MethodInvocation was CreatedBy (062cc504-2191-4e6b-87e1-08747acd350c)
+			// rel: MethodInvocation was ChangedBy (7ad6ee5a-550e-444e-b568-998bbf1a1994)
 		};
 		
 		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)

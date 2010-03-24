@@ -13,10 +13,11 @@
 <%@ Parameter Name="cls" Type="ObjectClass" %>
 
 <%
-var set = Settings;
 	var clsName = cls.Name + Kistl.API.Helper.ImplementationSuffix + Settings["extrasuffix"];
 	var properties = cls.Properties.OrderBy(p => p.Name).ToList();
-	var rels = cls.Context.GetQuery<Relation>().Where(r => r.A.Type == cls || r.B.Type == cls).ToList();
+	var rels = cls.Context.GetQuery<Relation>().Where(r => r.A.Type == cls || r.B.Type == cls)
+		.OrderBy(i => i.A.Type.Name).ThenBy(i => i.Verb).ThenBy(i => i.B.Type.Name).ThenBy(i => i.ExportGuid)
+		.ToList();
 	
 	if (properties.Count > 0 || rels.Count > 0)
 	{

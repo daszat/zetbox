@@ -734,9 +734,9 @@ namespace Kistl.App.Base
 				null,
 				obj => obj.StoragePath,
 				(obj, val) => obj.StoragePath = val),
-			// rel: File has Blob (d93a4ed6-3b8b-44f7-b839-f528d1c06abd)
 			// rel: Document was CreatedBy (40257114-de1a-493c-998e-18484521fb8c)
 			// rel: Document was ChangedBy (5b930212-f85a-4be9-9882-437cca6ffe0d)
+			// rel: File has Blob (d93a4ed6-3b8b-44f7-b839-f528d1c06abd)
 		};
 		
 		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)

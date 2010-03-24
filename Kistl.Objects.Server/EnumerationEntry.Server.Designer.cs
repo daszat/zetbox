@@ -790,8 +790,8 @@ namespace Kistl.App.Base
 				null,
 				obj => obj.Value,
 				(obj, val) => obj.Value = val),
-			// rel: EnumerationEntry was ChangedBy (20d04b3c-9357-440f-96e9-7056736d6ca3)
 			// rel: Enumeration has EnumerationEntries (55bd59b8-ad37-4837-b066-d505f86316fe)
+			// rel: EnumerationEntry was ChangedBy (20d04b3c-9357-440f-96e9-7056736d6ca3)
 			// rel: EnumerationEntry was CreatedBy (c4b36682-947b-4c4a-802f-7618e3b0c3c3)
 		};
 		

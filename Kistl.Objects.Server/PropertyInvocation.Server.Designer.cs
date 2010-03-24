@@ -889,10 +889,10 @@ namespace Kistl.App.Base
 				null,
 				obj => obj.MemberName,
 				(obj, val) => obj.MemberName = val),
-			// rel: PropertyInvocation was CreatedBy (dc1d4aa8-0253-48da-9ed0-d3c9b8d2746e)
-			// rel: PropertyInvocation was ChangedBy (a3de8754-433e-4cd5-b463-7b2708b18e66)
 			// rel: InvokeOnProperty has Invocations (dd9f5bf9-8a0e-432b-a7bb-5ba97e12face)
 			// rel: PropertyInvocation has Implementor (7fa78e0e-c9bb-4ce2-ae74-262174f48b45)
+			// rel: PropertyInvocation was ChangedBy (a3de8754-433e-4cd5-b463-7b2708b18e66)
+			// rel: PropertyInvocation was CreatedBy (dc1d4aa8-0253-48da-9ed0-d3c9b8d2746e)
 		};
 		
 		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)

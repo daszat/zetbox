@@ -352,8 +352,8 @@ namespace Kistl.App.GUI
 				null,
 				obj => obj.Module,
 				(obj, val) => obj.Module = val),
-			// rel: Icon has Module (a1360ce2-ecd5-4660-9b4d-3a2dc3919344)
 			// rel: DataType has DefaultIcon (eb852cc4-3977-42b9-9fcd-3a8c60aa49ac)
+			// rel: Icon has Module (a1360ce2-ecd5-4660-9b4d-3a2dc3919344)
 		};
 		
 		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)

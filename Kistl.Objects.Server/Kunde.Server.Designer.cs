@@ -792,8 +792,8 @@ namespace Kistl.App.Projekte
 				(obj, val) => obj.PLZ = val),
 			// rel: Auftrag has Kunde (c0c472d1-95b3-4588-812b-0d41c6e692b5)
 			// rel: Kunde was CreatedBy (5daf8db8-be8b-4ac7-a887-9217442fa7f4)
-			// rel: TestObjClass has ObjectProp (9d44eac8-2470-4373-a2bf-df3bc16d3454)
 			// rel: Kunde was ChangedBy (2a33407e-beeb-4919-b4c1-9aa264286151)
+			// rel: TestObjClass has ObjectProp (9d44eac8-2470-4373-a2bf-df3bc16d3454)
 		};
 		
 		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)

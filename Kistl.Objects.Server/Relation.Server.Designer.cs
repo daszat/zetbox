@@ -1190,9 +1190,9 @@ namespace Kistl.App.Base
 				null,
 				obj => obj.Verb,
 				(obj, val) => obj.Verb = val),
-			// rel: Relation was CreatedBy (84a74390-2386-465d-b9a5-83f9b60a006f)
 			// rel: Module has Relation (1c91bee2-397b-44f3-8346-313a8e2ba127)
 			// rel: Relation was ChangedBy (ba46e16e-5659-4e29-b770-1222d7b0acc1)
+			// rel: Relation was CreatedBy (84a74390-2386-465d-b9a5-83f9b60a006f)
 		};
 		
 		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)

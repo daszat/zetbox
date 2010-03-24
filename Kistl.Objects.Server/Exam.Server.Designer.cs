@@ -401,8 +401,8 @@ namespace at.dasz.CourseOrganiser
 				null,
 				obj => obj.Semester,
 				(obj, val) => obj.Semester = val),
-			// rel: StudentExam passes Exam (3e15530a-1753-4e97-9390-7235192a1a9e)
 			// rel: Exam happens_in Semester (af26d91c-68a2-4c18-aca7-4fc56d3b519a)
+			// rel: StudentExam passes Exam (3e15530a-1753-4e97-9390-7235192a1a9e)
 		};
 		
 		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)

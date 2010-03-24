@@ -1043,13 +1043,13 @@ namespace Kistl.App.Base
 				null,
 				obj => obj.Parameter,
 				null), // lists are read-only properties
+			// rel: ObjectClass has Methods (557ddcb4-8e99-48f2-9107-ef0cbff8066b)
 			// rel: Method has Parameter (f7738ce1-9784-4b8b-8156-9f4f0e97f937)
 			// rel: Method has MethodInvocations (4a388300-4e4d-45d2-b04e-0fe8efc25fec)
-			// rel: Visual has Method (304c9a1e-7365-45ee-a685-348fd76f10e7)
+			// rel: Method has Module (b251ee8c-2821-441e-b631-d215c006f1c8)
 			// rel: Method was CreatedBy (c2f4906d-2841-47df-bd91-6228f2f4285a)
 			// rel: Method was ChangedBy (30768fac-3c40-46e7-94fd-a2ab73447cd7)
-			// rel: Method has Module (b251ee8c-2821-441e-b631-d215c006f1c8)
-			// rel: ObjectClass has Methods (557ddcb4-8e99-48f2-9107-ef0cbff8066b)
+			// rel: Visual has Method (304c9a1e-7365-45ee-a685-348fd76f10e7)
 		};
 		
 		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)

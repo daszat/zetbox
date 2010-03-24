@@ -1271,11 +1271,6 @@ namespace Kistl.App.Base
 				null,
 				obj => obj.ValueModelDescriptor,
 				(obj, val) => obj.ValueModelDescriptor = val),
-			// rel: BaseProperty has Module (bffae7c3-c5f3-4139-ae96-577f4c9fed8f)
-			// rel: Property was ChangedBy (88098240-78f7-43eb-8c0d-746c8dfeba63)
-			// rel: Property was CreatedBy (3c085354-3ef4-49b2-bb95-80d5295519f1)
-			// rel: Visual has Property (73178882-7f93-444b-bf93-75db193904cf)
-			// rel: ConstrainedProperty has Constraints (6fa271a3-e365-4b8d-9cb1-575d7a3b5d6a)
 			// rel: ObjectClass has Properties (f7e487a4-6922-40bf-a404-24ce6accbb83)
 			// rel.B.Type == cls && rel.B.HasPersistentOrder
 			new CustomPropertyDescriptor<Property__Implementation__, int?>(
@@ -1284,8 +1279,13 @@ namespace Kistl.App.Base
 				null,
 				obj => obj.Properties_pos,
 				(obj, val) => obj.Properties_pos = val),
-			// rel: InvokeOnProperty has Invocations (dd9f5bf9-8a0e-432b-a7bb-5ba97e12face)
+			// rel: ConstrainedProperty has Constraints (6fa271a3-e365-4b8d-9cb1-575d7a3b5d6a)
+			// rel: BaseProperty has Module (bffae7c3-c5f3-4139-ae96-577f4c9fed8f)
 			// rel: Property has ValueModelDescriptor (3437ea5d-d926-4a0b-a848-9dafedf7ad6a)
+			// rel: InvokeOnProperty has Invocations (dd9f5bf9-8a0e-432b-a7bb-5ba97e12face)
+			// rel: Property was ChangedBy (88098240-78f7-43eb-8c0d-746c8dfeba63)
+			// rel: Property was CreatedBy (3c085354-3ef4-49b2-bb95-80d5295519f1)
+			// rel: Visual has Property (73178882-7f93-444b-bf93-75db193904cf)
 		};
 		
 		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)

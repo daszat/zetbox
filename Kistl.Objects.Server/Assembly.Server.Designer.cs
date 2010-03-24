@@ -770,8 +770,8 @@ namespace Kistl.App.Base
 			// rel: Assembly was CreatedBy (56b41a57-e179-4cd3-8706-8c6871f0fc58)
 			// rel: Assembly was ChangedBy (98612719-3882-45a2-ae30-b5329524e744)
 			// rel: Module contains Assemblies (a10474db-85df-4731-a86c-124e54f3d146)
-			// rel: TypeRef has Assembly (c10b1abc-3786-40f6-8c8c-dccdd8dc03ef)
 			// rel: Template has DisplayedTypeAssembly (0e64ccd9-2f72-489a-83a4-095f949fdee3)
+			// rel: TypeRef has Assembly (c10b1abc-3786-40f6-8c8c-dccdd8dc03ef)
 		};
 		
 		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)

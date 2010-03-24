@@ -856,11 +856,11 @@ namespace Kistl.App.Projekte
 				null,
 				obj => obj.TelefonNummer,
 				(obj, val) => obj.TelefonNummer = val),
-			// rel: WorkEffort has Mitarbeiter (3963b6bc-bb5a-4615-b4db-56eecd9d3f97)
+			// rel: Auftrag has Mitarbeiter (4964faf9-ebae-4287-91f8-6d2112a5921c)
+			// rel: Mitarbeiter was ChangedBy (aeca0771-5b0f-48a7-9ff9-02a56d6fe758)
 			// rel: Mitarbeiter was CreatedBy (3c7ef80e-07a3-4cb0-93be-9163650abc9a)
 			// rel: PresenceRecord has Mitarbeiter (f6d98929-883a-4457-a49f-157324bd5ae3)
-			// rel: Mitarbeiter was ChangedBy (aeca0771-5b0f-48a7-9ff9-02a56d6fe758)
-			// rel: Auftrag has Mitarbeiter (4964faf9-ebae-4287-91f8-6d2112a5921c)
+			// rel: WorkEffort has Mitarbeiter (3963b6bc-bb5a-4615-b4db-56eecd9d3f97)
 		};
 		
 		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)

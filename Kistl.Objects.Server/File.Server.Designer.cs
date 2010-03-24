@@ -735,8 +735,8 @@ namespace at.dasz.DocumentManagement
 				obj => obj.Name,
 				(obj, val) => obj.Name = val),
 			// rel: File has Blob (d93a4ed6-3b8b-44f7-b839-f528d1c06abd)
-			// rel: File was CreatedBy (1f543299-93ce-4441-a3d7-6d95e8546350)
 			// rel: File was ChangedBy (2ff68641-0051-4f2e-a8ee-5f50b9d507f3)
+			// rel: File was CreatedBy (1f543299-93ce-4441-a3d7-6d95e8546350)
 		};
 		
 		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)

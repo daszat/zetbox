@@ -785,10 +785,10 @@ namespace Kistl.App.Projekte
 				null,
 				obj => obj.Tasks,
 				null), // lists are read-only properties
-			// rel: Projekt was CreatedBy (035db8da-a9f4-4529-9f50-29afd9e6f043)
-			// rel: Projekt has Tasks (434dab4f-0dcd-4724-a62b-730540ce143a)
 			// rel: Projekt has Auftraege (062fa6cf-bdb1-4994-9e8b-5fe5426c60aa)
+			// rel: Projekt has Tasks (434dab4f-0dcd-4724-a62b-730540ce143a)
 			// rel: Projekt was ChangedBy (bc2a3fdc-68d7-4ba1-9c16-03fd74c43bb0)
+			// rel: Projekt was CreatedBy (035db8da-a9f4-4529-9f50-29afd9e6f043)
 		};
 		
 		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
