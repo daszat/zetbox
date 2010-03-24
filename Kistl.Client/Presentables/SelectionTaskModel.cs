@@ -117,6 +117,12 @@ namespace Kistl.Client.Presentables
             OnPropertyChanged("FilteredChoices");
         }
 
+        public void Refresh(IList<TChoosable> choices)
+        {
+            _choices = new ReadOnlyCollection<TChoosable>(choices);
+            FilterChoices();
+        }
+
         #endregion
 
         private ReadOnlyCollection<TChoosable> _choices;

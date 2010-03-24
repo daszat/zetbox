@@ -38,6 +38,7 @@
                 <ListBox.ItemTemplate>
                     <DataTemplate DataType="{x:Type client:CommandModel}">
                         <Button Command="{Binding Converter={StaticResource CommandConverter}}"
+                                CommandParameter="{Binding Path=DataContext, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
                                 Style="{StaticResource addedMargins}" Content="{Binding Path=Label}" ToolTip="{Binding Path=ToolTip}"></Button>
                     </DataTemplate>
                 </ListBox.ItemTemplate>

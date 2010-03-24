@@ -116,11 +116,11 @@ namespace Kistl.Client.Presentables.KistlBase
                         this.Parent.Value = chosen;
                     }
                 }),
-                new List<CommandModel>() { new RegenerateTypeRefsCommand(AppContext, DataContext, assembly) });
+                new List<CommandModel>() { new RegenerateTypeRefsCommand(AppContext, DataContext, this, assembly) });
             Factory.ShowModel(selectionTask, true);
         }
 
-        private List<DataObjectModel> GetTypeRefList(Kistl.App.Base.Assembly assembly)
+        internal List<DataObjectModel> GetTypeRefList(Kistl.App.Base.Assembly assembly)
         {
             return DataContext.GetQuery<Kistl.App.Base.TypeRef>().Where(tr => tr.Assembly.ID == assembly.ID)
                                 .ToList()
@@ -132,22 +132,25 @@ namespace Kistl.Client.Presentables.KistlBase
         private class RegenerateTypeRefsCommand : CommandModel
         {
             private Kistl.App.Base.Assembly _assembly;
+            private LoadTypeRefCommand _outer;
 
-            public RegenerateTypeRefsCommand(IGuiApplicationContext appCtx, IKistlContext dataCtx, Kistl.App.Base.Assembly assembly)
+            public RegenerateTypeRefsCommand(IGuiApplicationContext appCtx, IKistlContext dataCtx, LoadTypeRefCommand outer, Kistl.App.Base.Assembly assembly)
                 : base(appCtx, dataCtx, "Regenerate TypeRefs", "Regenerate TypeRefs")
             {
+                _outer = outer;
                 _assembly = assembly;
             }
 
             public override bool CanExecute(object data)
             {
-                return true;
+                return data is DataObjectSelectionTaskModel;
             }
 
             protected override void DoExecute(object data)
             {
                 _assembly.RegenerateTypeRefs();
-                // TODO: Add Refresh
+                var mdl = (DataObjectSelectionTaskModel)data;
+                mdl.Refresh(_outer.GetTypeRefList(_assembly));
             }
         }
 
