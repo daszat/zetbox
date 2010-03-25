@@ -158,7 +158,11 @@ namespace Kistl.App.Base
                     case StorageType.MergeIntoB:
                         return rel.A.Multiplicity.UpperBound() <= 1 ? String.Empty : "A side could be more than one. Not able to merge foreign key into B";
                     case StorageType.Separate:
-                        if (rel.A.Multiplicity.UpperBound() <= 1)
+                        if (rel.A.Multiplicity.UpperBound() <= 1 && rel.B.Multiplicity.UpperBound() <= 1)
+                        {
+                            return "A side is only one-ary. Please use MergeIntoA or MergeIntoB";
+                        }
+                        else if (rel.A.Multiplicity.UpperBound() <= 1)
                         {
                             return "A side is only one-ary. Please use MergeIntoB";
                         }
