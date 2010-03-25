@@ -924,10 +924,10 @@ namespace Kistl.App.Base
 #region Serializer
 
 
-        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects)
+        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             
-            base.ToStream(binStream, auxObjects);
+            base.ToStream(binStream, auxObjects, eagerLoadLists);
             BinarySerializer.ToStream(Assembly != null ? Assembly.ID : (int?)null, binStream);
 			if (auxObjects != null) {
 				auxObjects.Add(Assembly);
@@ -941,6 +941,8 @@ namespace Kistl.App.Base
                 BinarySerializer.ToStream(this._ExportGuid, binStream);
             }
             BinarySerializer.ToStream(this._FullName, binStream);
+
+			if(eagerLoadLists)
 			{
 				foreach(var obj in GenericArguments__Implementation__)
 				{
@@ -966,6 +968,7 @@ namespace Kistl.App.Base
                 BinarySerializer.FromStream(out this._ExportGuid, binStream);
             }
             BinarySerializer.FromStream(out this._FullName, binStream);
+
             BinarySerializer.FromStream(out this._fk_Parent, binStream);
         }
 

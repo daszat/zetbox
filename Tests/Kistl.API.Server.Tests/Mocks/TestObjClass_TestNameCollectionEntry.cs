@@ -76,9 +76,9 @@ namespace Kistl.API.Server.Mocks
 
         #endregion
 
-        public override void ToStream(System.IO.BinaryWriter sw, HashSet<IStreamable> auxObjects)
+        public override void ToStream(System.IO.BinaryWriter sw, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
-            base.ToStream(sw, auxObjects);
+            base.ToStream(sw, auxObjects, eagerLoadLists);
             BinarySerializer.ToStream(Value, sw);
         }
 

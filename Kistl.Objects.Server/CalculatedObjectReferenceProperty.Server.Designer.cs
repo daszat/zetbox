@@ -322,10 +322,12 @@ namespace Kistl.App.Base
 #region Serializer
 
 
-        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects)
+        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             
-            base.ToStream(binStream, auxObjects);
+            base.ToStream(binStream, auxObjects, eagerLoadLists);
+
+			if(eagerLoadLists)
 			{
 				foreach(var obj in Inputs__Implementation__)
 				{
@@ -344,6 +346,7 @@ namespace Kistl.App.Base
         {
             
             base.FromStream(binStream);
+
             BinarySerializer.FromStream(out this._fk_ReferencedClass, binStream);
         }
 

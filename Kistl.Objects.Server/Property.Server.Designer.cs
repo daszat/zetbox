@@ -1347,14 +1347,17 @@ namespace Kistl.App.Base
 #region Serializer
 
 
-        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects)
+        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             
-            base.ToStream(binStream, auxObjects);
+            base.ToStream(binStream, auxObjects, eagerLoadLists);
             BinarySerializer.ToStream(this._CategoryTags, binStream);
             BinarySerializer.ToStream(ChangedBy != null ? ChangedBy.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._ChangedOn, binStream);
+
+			if(eagerLoadLists)
 			{
+				BinarySerializer.ToStream(true, binStream);
 				BinarySerializer.ToStream(Constraints.Count, binStream);
 				foreach(var obj in Constraints)
 				{
@@ -1363,6 +1366,10 @@ namespace Kistl.App.Base
 					}
 					BinarySerializer.ToStream(obj.ID, binStream);
 				}
+			}
+			else
+			{
+				BinarySerializer.ToStream(false, binStream);
 			}
             BinarySerializer.ToStream(CreatedBy != null ? CreatedBy.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._CreatedOn, binStream);
@@ -1375,7 +1382,10 @@ namespace Kistl.App.Base
             if (this._isExportGuidSet) {
                 BinarySerializer.ToStream(this._ExportGuid, binStream);
             }
+
+			if(eagerLoadLists)
 			{
+				BinarySerializer.ToStream(true, binStream);
 				BinarySerializer.ToStream(Invocations.Count, binStream);
 				foreach(var obj in Invocations)
 				{
@@ -1384,6 +1394,10 @@ namespace Kistl.App.Base
 					}
 					BinarySerializer.ToStream(obj.ID, binStream);
 				}
+			}
+			else
+			{
+				BinarySerializer.ToStream(false, binStream);
 			}
             BinarySerializer.ToStream(Module != null ? Module.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._Name, binStream);
@@ -1399,18 +1413,23 @@ namespace Kistl.App.Base
             BinarySerializer.FromStream(out this._CategoryTags, binStream);
             BinarySerializer.FromStream(out this._fk_ChangedBy, binStream);
             BinarySerializer.FromStream(out this._ChangedOn, binStream);
+
 			{
-				int numElements;
-				BinarySerializer.FromStream(out numElements, binStream);
-				ConstraintsIds = new List<int>(numElements);
-				while (numElements-- > 0) 
+				bool containsList;
+				BinarySerializer.FromStream(out containsList, binStream);
+				if(containsList)
 				{
-					int id;
-					BinarySerializer.FromStream(out id, binStream);
-					ConstraintsIds.Add(id);
+					int numElements;
+					BinarySerializer.FromStream(out numElements, binStream);
+					ConstraintsIds = new List<int>(numElements);
+					while (numElements-- > 0) 
+					{
+						int id;
+						BinarySerializer.FromStream(out id, binStream);
+						ConstraintsIds.Add(id);
+					}
 				}
 			}
-
             BinarySerializer.FromStream(out this._fk_CreatedBy, binStream);
             BinarySerializer.FromStream(out this._CreatedOn, binStream);
             BinarySerializer.FromStream(out this._fk_DefaultValue, binStream);
@@ -1419,18 +1438,23 @@ namespace Kistl.App.Base
             if (this._isExportGuidSet) {
                 BinarySerializer.FromStream(out this._ExportGuid, binStream);
             }
+
 			{
-				int numElements;
-				BinarySerializer.FromStream(out numElements, binStream);
-				InvocationsIds = new List<int>(numElements);
-				while (numElements-- > 0) 
+				bool containsList;
+				BinarySerializer.FromStream(out containsList, binStream);
+				if(containsList)
 				{
-					int id;
-					BinarySerializer.FromStream(out id, binStream);
-					InvocationsIds.Add(id);
+					int numElements;
+					BinarySerializer.FromStream(out numElements, binStream);
+					InvocationsIds = new List<int>(numElements);
+					while (numElements-- > 0) 
+					{
+						int id;
+						BinarySerializer.FromStream(out id, binStream);
+						InvocationsIds.Add(id);
+					}
 				}
 			}
-
             BinarySerializer.FromStream(out this._fk_Module, binStream);
             BinarySerializer.FromStream(out this._Name, binStream);
             BinarySerializer.FromStream(out this._fk_ObjectClass, binStream);

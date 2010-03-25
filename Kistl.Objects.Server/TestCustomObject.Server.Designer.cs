@@ -760,10 +760,10 @@ namespace Kistl.App.Test
 #region Serializer
 
 
-        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects)
+        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             
-            base.ToStream(binStream, auxObjects);
+            base.ToStream(binStream, auxObjects, eagerLoadLists);
             BinarySerializer.ToStream(this._Birthday, binStream);
             BinarySerializer.ToStream(MubBlah_Nav != null ? MubBlah_Nav.ID : (int?)null, binStream);
             BinarySerializer.ToStream(MuhBlah_One_Nav != null ? MuhBlah_One_Nav.ID : (int?)null, binStream);

@@ -757,10 +757,10 @@ namespace Kistl.App.Base
 #region Serializer
 
 
-        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects)
+        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             
-            base.ToStream(binStream, auxObjects);
+            base.ToStream(binStream, auxObjects, eagerLoadLists);
             BinarySerializer.ToStream(ChangedBy != null ? ChangedBy.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._ChangedOn, binStream);
             BinarySerializer.ToStream(ConstrainedProperty != null ? ConstrainedProperty.ID : (int?)null, binStream);

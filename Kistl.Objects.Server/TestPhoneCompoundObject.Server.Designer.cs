@@ -151,10 +151,10 @@ namespace Kistl.App.Test
 #region Serializer
 
 
-        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects)
+        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             
-            base.ToStream(binStream, auxObjects);
+            base.ToStream(binStream, auxObjects, eagerLoadLists);
             BinarySerializer.ToStream(this._AreaCode, binStream);
             BinarySerializer.ToStream(this._Number, binStream);
         }

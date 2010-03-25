@@ -45,8 +45,15 @@
                     if (Helper.IsPersistedObject(this))
                     {
 <% if (eagerLoading) { %>
-						serverList = <%= idsListName %>.Select(id => Context.Find<<%= referencedInterface %>>(id)).ToList();
-						<%= idsListName %> = null; // allow id list to be garbage collected
+						if(<%= idsListName %> != null)
+						{
+							serverList = <%= idsListName %>.Select(id => Context.Find<<%= referencedInterface %>>(id)).ToList();
+							<%= idsListName %> = null; // allow id list to be garbage collected
+						}
+						else
+						{
+							serverList = Context.GetListOf<<%= referencedInterface %>>(this, "<%= name %>");
+						}
 <% } else { %>
 						serverList = Context.GetListOf<<%= referencedInterface %>>(this, "<%= name %>");
 <% } %>

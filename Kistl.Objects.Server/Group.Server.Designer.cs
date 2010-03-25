@@ -545,10 +545,10 @@ namespace Kistl.App.Base
 #region Serializer
 
 
-        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects)
+        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             
-            base.ToStream(binStream, auxObjects);
+            base.ToStream(binStream, auxObjects, eagerLoadLists);
             BinarySerializer.ToStream(this._isExportGuidSet, binStream);
             if (this._isExportGuidSet) {
                 BinarySerializer.ToStream(this._ExportGuid, binStream);

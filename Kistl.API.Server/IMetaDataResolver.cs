@@ -49,7 +49,7 @@ namespace Kistl.API.Server
         {
             if (_cache == null) { return null; }
 
-            return _cache[ifType.Type.Name].First(o => o.Module.Namespace == ifType.Type.Namespace && o.Name == ifType.Type.Name);
+            return _cache[ifType.Type.Name].FirstOrDefault(o => o.Module.Namespace == ifType.Type.Namespace && o.Name == ifType.Type.Name);
         }
     }
 }

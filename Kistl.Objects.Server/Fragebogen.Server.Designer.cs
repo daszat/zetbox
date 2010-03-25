@@ -313,11 +313,14 @@ namespace Kistl.App.Test
 #region Serializer
 
 
-        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects)
+        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             
-            base.ToStream(binStream, auxObjects);
+            base.ToStream(binStream, auxObjects, eagerLoadLists);
+
+			if(eagerLoadLists)
 			{
+				BinarySerializer.ToStream(true, binStream);
 				BinarySerializer.ToStream(Antworten.Count, binStream);
 				foreach(var obj in Antworten)
 				{
@@ -327,6 +330,10 @@ namespace Kistl.App.Test
 					BinarySerializer.ToStream(obj.ID, binStream);
 				}
 			}
+			else
+			{
+				BinarySerializer.ToStream(false, binStream);
+			}
             BinarySerializer.ToStream(this._BogenNummer, binStream);
         }
 
@@ -334,18 +341,23 @@ namespace Kistl.App.Test
         {
             
             base.FromStream(binStream);
+
 			{
-				int numElements;
-				BinarySerializer.FromStream(out numElements, binStream);
-				AntwortenIds = new List<int>(numElements);
-				while (numElements-- > 0) 
+				bool containsList;
+				BinarySerializer.FromStream(out containsList, binStream);
+				if(containsList)
 				{
-					int id;
-					BinarySerializer.FromStream(out id, binStream);
-					AntwortenIds.Add(id);
+					int numElements;
+					BinarySerializer.FromStream(out numElements, binStream);
+					AntwortenIds = new List<int>(numElements);
+					while (numElements-- > 0) 
+					{
+						int id;
+						BinarySerializer.FromStream(out id, binStream);
+						AntwortenIds.Add(id);
+					}
 				}
 			}
-
             BinarySerializer.FromStream(out this._BogenNummer, binStream);
         }
 

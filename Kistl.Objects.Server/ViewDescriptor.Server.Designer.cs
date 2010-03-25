@@ -609,10 +609,10 @@ namespace Kistl.App.GUI
 #region Serializer
 
 
-        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects)
+        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             
-            base.ToStream(binStream, auxObjects);
+            base.ToStream(binStream, auxObjects, eagerLoadLists);
             BinarySerializer.ToStream(ControlRef != null ? ControlRef.ID : (int?)null, binStream);
 			if (auxObjects != null) {
 				auxObjects.Add(ControlRef);

@@ -1276,10 +1276,10 @@ namespace Kistl.App.Base
 #region Serializer
 
 
-        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects)
+        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             
-            base.ToStream(binStream, auxObjects);
+            base.ToStream(binStream, auxObjects, eagerLoadLists);
             BinarySerializer.ToStream(ChangedBy != null ? ChangedBy.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._ChangedOn, binStream);
             BinarySerializer.ToStream(CreatedBy != null ? CreatedBy.ID : (int?)null, binStream);
@@ -1293,7 +1293,10 @@ namespace Kistl.App.Base
             if (this._isExportGuidSet) {
                 BinarySerializer.ToStream(this._ExportGuid, binStream);
             }
+
+			if(eagerLoadLists)
 			{
+				BinarySerializer.ToStream(true, binStream);
 				BinarySerializer.ToStream(MethodInvocations.Count, binStream);
 				foreach(var obj in MethodInvocations)
 				{
@@ -1303,7 +1306,14 @@ namespace Kistl.App.Base
 					BinarySerializer.ToStream(obj.ID, binStream);
 				}
 			}
+			else
 			{
+				BinarySerializer.ToStream(false, binStream);
+			}
+
+			if(eagerLoadLists)
+			{
+				BinarySerializer.ToStream(true, binStream);
 				BinarySerializer.ToStream(Methods.Count, binStream);
 				foreach(var obj in Methods)
 				{
@@ -1313,12 +1323,19 @@ namespace Kistl.App.Base
 					BinarySerializer.ToStream(obj.ID, binStream);
 				}
 			}
+			else
+			{
+				BinarySerializer.ToStream(false, binStream);
+			}
             BinarySerializer.ToStream(Module != null ? Module.ID : (int?)null, binStream);
 			if (auxObjects != null) {
 				auxObjects.Add(Module);
 			}
             BinarySerializer.ToStream(this._Name, binStream);
+
+			if(eagerLoadLists)
 			{
+				BinarySerializer.ToStream(true, binStream);
 				BinarySerializer.ToStream(Properties.Count, binStream);
 				foreach(var obj in Properties)
 				{
@@ -1327,6 +1344,10 @@ namespace Kistl.App.Base
 					}
 					BinarySerializer.ToStream(obj.ID, binStream);
 				}
+			}
+			else
+			{
+				BinarySerializer.ToStream(false, binStream);
 			}
             BinarySerializer.ToStream(this._ShowIconInLists, binStream);
             BinarySerializer.ToStream(this._ShowIdInLists, binStream);
@@ -1347,44 +1368,59 @@ namespace Kistl.App.Base
             if (this._isExportGuidSet) {
                 BinarySerializer.FromStream(out this._ExportGuid, binStream);
             }
+
 			{
-				int numElements;
-				BinarySerializer.FromStream(out numElements, binStream);
-				MethodInvocationsIds = new List<int>(numElements);
-				while (numElements-- > 0) 
+				bool containsList;
+				BinarySerializer.FromStream(out containsList, binStream);
+				if(containsList)
 				{
-					int id;
-					BinarySerializer.FromStream(out id, binStream);
-					MethodInvocationsIds.Add(id);
+					int numElements;
+					BinarySerializer.FromStream(out numElements, binStream);
+					MethodInvocationsIds = new List<int>(numElements);
+					while (numElements-- > 0) 
+					{
+						int id;
+						BinarySerializer.FromStream(out id, binStream);
+						MethodInvocationsIds.Add(id);
+					}
 				}
 			}
 
 			{
-				int numElements;
-				BinarySerializer.FromStream(out numElements, binStream);
-				MethodsIds = new List<int>(numElements);
-				while (numElements-- > 0) 
+				bool containsList;
+				BinarySerializer.FromStream(out containsList, binStream);
+				if(containsList)
 				{
-					int id;
-					BinarySerializer.FromStream(out id, binStream);
-					MethodsIds.Add(id);
+					int numElements;
+					BinarySerializer.FromStream(out numElements, binStream);
+					MethodsIds = new List<int>(numElements);
+					while (numElements-- > 0) 
+					{
+						int id;
+						BinarySerializer.FromStream(out id, binStream);
+						MethodsIds.Add(id);
+					}
 				}
 			}
-
             BinarySerializer.FromStream(out this._fk_Module, binStream);
             BinarySerializer.FromStream(out this._Name, binStream);
+
 			{
-				int numElements;
-				BinarySerializer.FromStream(out numElements, binStream);
-				PropertiesIds = new List<int>(numElements);
-				while (numElements-- > 0) 
+				bool containsList;
+				BinarySerializer.FromStream(out containsList, binStream);
+				if(containsList)
 				{
-					int id;
-					BinarySerializer.FromStream(out id, binStream);
-					PropertiesIds.Add(id);
+					int numElements;
+					BinarySerializer.FromStream(out numElements, binStream);
+					PropertiesIds = new List<int>(numElements);
+					while (numElements-- > 0) 
+					{
+						int id;
+						BinarySerializer.FromStream(out id, binStream);
+						PropertiesIds.Add(id);
+					}
 				}
 			}
-
             BinarySerializer.FromStream(out this._ShowIconInLists, binStream);
             BinarySerializer.FromStream(out this._ShowIdInLists, binStream);
             BinarySerializer.FromStream(out this._ShowNameInLists, binStream);

@@ -155,9 +155,9 @@ namespace Kistl.API.Server.Mocks
             };
         }
 
-        public override void ToStream(System.IO.BinaryWriter sw, HashSet<IStreamable> auxObjects)
+        public override void ToStream(System.IO.BinaryWriter sw, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
-            base.ToStream(sw, auxObjects);
+            base.ToStream(sw, auxObjects, eagerLoadLists);
             int? id = this.BaseTestObjClass == null ? (int?)null : this.BaseTestObjClass.ID;
             BinarySerializer.ToStream(id, sw);
 

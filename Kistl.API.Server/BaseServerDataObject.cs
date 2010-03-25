@@ -39,9 +39,9 @@ namespace Kistl.API.Server
 
         public DataObjectState ClientObjectState { get; set; }
 
-        public override void ToStream(BinaryWriter sw, HashSet<IStreamable> auxObjects)
+        public override void ToStream(BinaryWriter sw, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
-            base.ToStream(sw, auxObjects);
+            base.ToStream(sw, auxObjects, eagerLoadLists);
             BinarySerializer.ToStream((int)DataObjectState.Unmodified, sw);
         }
 

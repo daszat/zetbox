@@ -390,7 +390,7 @@ namespace Kistl.API
 			if (sw == null) { throw new ArgumentNullException("sw"); }
 			SerializerTrace("CurrentPos: {0}", sw.BaseStream.Position);
 			SerializerTrace("Writing ICompoundObject {0}", val);
-			if (val != null) { sw.Write(true); val.ToStream(sw, null); } else { sw.Write(false); }
+			if (val != null) { sw.Write(true); val.ToStream(sw, null, false); } else { sw.Write(false); }
 		}
 
 		/// <summary>
@@ -597,7 +597,7 @@ namespace Kistl.API
 					ToStream(true, sw);
 					SerializerTrace("CurrentPos: {0}", sw.BaseStream.Position);
 					SerializerTrace("Writing CollectionEntry {0}", val.ToString());
-					obj.ToStream(sw, null);
+					obj.ToStream(sw, null, false);
 				}
 			}
 

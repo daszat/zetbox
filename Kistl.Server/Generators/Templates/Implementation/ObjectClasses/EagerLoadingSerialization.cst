@@ -16,14 +16,17 @@
 <%@ Parameter Name="xmlname" Type="string" %>
 <%@ Parameter Name="collectionName" Type="string" %>
 <%@ Parameter Name="serializeIds" Type="bool" %>
+
 <%
 
 	switch(direction)
 	{
 		case SerializerDirection.ToStream:
 %>
+			if(eagerLoadLists)
 			{
 <% if (serializeIds) { %>
+				BinarySerializer.ToStream(true, <%= streamName %>);
 				BinarySerializer.ToStream(<%= collectionName %>.Count, <%= streamName %>);
 <% } %>
 				foreach(var obj in <%= collectionName %>)
@@ -36,26 +39,35 @@
 <% } %>
 				}
 			}
+<% if (serializeIds) { %>
+			else
+			{
+				BinarySerializer.ToStream(false, <%= streamName %>);
+			}
+<% } %>
 <%
 			break;
 		case SerializerDirection.FromStream:
-			if (serializeIds)
-			{ 
 %>
+<% if (serializeIds) { %>
 			{
-				int numElements;
-				BinarySerializer.FromStream(out numElements, <%= streamName %>);
-				<%= collectionName %>Ids = new List<int>(numElements);
-				while (numElements-- > 0) 
+				bool containsList;
+				BinarySerializer.FromStream(out containsList, <%= streamName %>);
+				if(containsList)
 				{
-					int id;
-					BinarySerializer.FromStream(out id, <%= streamName %>);
-					<%= collectionName %>Ids.Add(id);
+					int numElements;
+					BinarySerializer.FromStream(out numElements, <%= streamName %>);
+					<%= collectionName %>Ids = new List<int>(numElements);
+					while (numElements-- > 0) 
+					{
+						int id;
+						BinarySerializer.FromStream(out id, <%= streamName %>);
+						<%= collectionName %>Ids.Add(id);
+					}
 				}
 			}
-
+<% } %>
 <%
-			}
 			break;
 		default:
 			throw new ArgumentOutOfRangeException("direction");

@@ -209,10 +209,10 @@ namespace Kistl.App.Base
 #region Serializer
 
 
-        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects)
+        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             
-            base.ToStream(binStream, auxObjects);
+            base.ToStream(binStream, auxObjects, eagerLoadLists);
             BinarySerializer.ToStream(this._ExportGuid, binStream);
             BinarySerializer.ToStream(A != null ? A.ID : (int?)null, binStream);
             BinarySerializer.ToStream(B != null ? B.ID : (int?)null, binStream);
@@ -505,10 +505,10 @@ namespace Kistl.App.GUI
 #region Serializer
 
 
-        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects)
+        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             
-            base.ToStream(binStream, auxObjects);
+            base.ToStream(binStream, auxObjects, eagerLoadLists);
             BinarySerializer.ToStream(this._ExportGuid, binStream);
             BinarySerializer.ToStream(A != null ? A.ID : (int?)null, binStream);
             BinarySerializer.ToStream(B != null ? B.ID : (int?)null, binStream);
@@ -862,10 +862,10 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
 #region Serializer
 
 
-        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects)
+        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             
-            base.ToStream(binStream, auxObjects);
+            base.ToStream(binStream, auxObjects, eagerLoadLists);
             BinarySerializer.ToStream(this._ExportGuid, binStream);
             BinarySerializer.ToStream(A != null ? A.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._A_pos, binStream);
@@ -1184,10 +1184,10 @@ namespace Kistl.App.Base
 #region Serializer
 
 
-        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects)
+        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             
-            base.ToStream(binStream, auxObjects);
+            base.ToStream(binStream, auxObjects, eagerLoadLists);
             BinarySerializer.ToStream(this._ExportGuid, binStream);
             BinarySerializer.ToStream(A != null ? A.ID : (int?)null, binStream);
             BinarySerializer.ToStream(B != null ? B.ID : (int?)null, binStream);
@@ -1446,10 +1446,10 @@ namespace at.dasz.CourseOrganiser
 #region Serializer
 
 
-        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects)
+        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             
-            base.ToStream(binStream, auxObjects);
+            base.ToStream(binStream, auxObjects, eagerLoadLists);
             BinarySerializer.ToStream(A != null ? A.ID : (int?)null, binStream);
             BinarySerializer.ToStream(B != null ? B.ID : (int?)null, binStream);
         }
@@ -1689,10 +1689,10 @@ namespace Kistl.App.Base
 #region Serializer
 
 
-        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects)
+        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             
-            base.ToStream(binStream, auxObjects);
+            base.ToStream(binStream, auxObjects, eagerLoadLists);
             BinarySerializer.ToStream(A != null ? A.ID : (int?)null, binStream);
             BinarySerializer.ToStream(B != null ? B.ID : (int?)null, binStream);
         }
@@ -1932,10 +1932,10 @@ namespace Kistl.App.Test
 #region Serializer
 
 
-        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects)
+        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             
-            base.ToStream(binStream, auxObjects);
+            base.ToStream(binStream, auxObjects, eagerLoadLists);
             BinarySerializer.ToStream(A != null ? A.ID : (int?)null, binStream);
             BinarySerializer.ToStream(B != null ? B.ID : (int?)null, binStream);
         }
@@ -2205,10 +2205,10 @@ namespace Kistl.App.Base
 #region Serializer
 
 
-        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects)
+        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             
-            base.ToStream(binStream, auxObjects);
+            base.ToStream(binStream, auxObjects, eagerLoadLists);
             BinarySerializer.ToStream(this._ExportGuid, binStream);
             BinarySerializer.ToStream(A != null ? A.ID : (int?)null, binStream);
             BinarySerializer.ToStream(B != null ? B.ID : (int?)null, binStream);
@@ -2497,10 +2497,10 @@ namespace Kistl.App.GUI
 #region Serializer
 
 
-        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects)
+        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             
-            base.ToStream(binStream, auxObjects);
+            base.ToStream(binStream, auxObjects, eagerLoadLists);
             BinarySerializer.ToStream(this._ExportGuid, binStream);
             BinarySerializer.ToStream(A != null ? A.ID : (int?)null, binStream);
             BinarySerializer.ToStream(B != null ? B.ID : (int?)null, binStream);
@@ -2823,10 +2823,10 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
 #region Serializer
 
 
-        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects)
+        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             
-            base.ToStream(binStream, auxObjects);
+            base.ToStream(binStream, auxObjects, eagerLoadLists);
             BinarySerializer.ToStream(A != null ? A.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._A_pos, binStream);
             BinarySerializer.ToStream(B != null ? B.ID : (int?)null, binStream);
@@ -3178,10 +3178,10 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
 #region Serializer
 
 
-        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects)
+        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             
-            base.ToStream(binStream, auxObjects);
+            base.ToStream(binStream, auxObjects, eagerLoadLists);
             BinarySerializer.ToStream(this._ExportGuid, binStream);
             BinarySerializer.ToStream(A != null ? A.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._A_pos, binStream);
@@ -3470,10 +3470,10 @@ namespace at.dasz.CourseOrganiser
 #region Serializer
 
 
-        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects)
+        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             
-            base.ToStream(binStream, auxObjects);
+            base.ToStream(binStream, auxObjects, eagerLoadLists);
             BinarySerializer.ToStream(A != null ? A.ID : (int?)null, binStream);
             BinarySerializer.ToStream(B != null ? B.ID : (int?)null, binStream);
         }
@@ -3713,10 +3713,10 @@ namespace Kistl.App.GUI
 #region Serializer
 
 
-        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects)
+        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             
-            base.ToStream(binStream, auxObjects);
+            base.ToStream(binStream, auxObjects, eagerLoadLists);
             BinarySerializer.ToStream(A != null ? A.ID : (int?)null, binStream);
             BinarySerializer.ToStream(B != null ? B.ID : (int?)null, binStream);
         }
@@ -3956,10 +3956,10 @@ namespace Kistl.App.Test
 #region Serializer
 
 
-        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects)
+        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             
-            base.ToStream(binStream, auxObjects);
+            base.ToStream(binStream, auxObjects, eagerLoadLists);
             BinarySerializer.ToStream(A != null ? A.ID : (int?)null, binStream);
             BinarySerializer.ToStream(B != null ? B.ID : (int?)null, binStream);
         }
@@ -4293,10 +4293,10 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
 #region Serializer
 
 
-        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects)
+        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             
-            base.ToStream(binStream, auxObjects);
+            base.ToStream(binStream, auxObjects, eagerLoadLists);
             BinarySerializer.ToStream(this._ExportGuid, binStream);
             BinarySerializer.ToStream(A != null ? A.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._A_pos, binStream);
@@ -4588,10 +4588,10 @@ namespace Kistl.App.GUI
 #region Serializer
 
 
-        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects)
+        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             
-            base.ToStream(binStream, auxObjects);
+            base.ToStream(binStream, auxObjects, eagerLoadLists);
             BinarySerializer.ToStream(A != null ? A.ID : (int?)null, binStream);
             BinarySerializer.ToStream(B != null ? B.ID : (int?)null, binStream);
         }
@@ -4831,10 +4831,10 @@ namespace Kistl.App.GUI
 #region Serializer
 
 
-        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects)
+        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             
-            base.ToStream(binStream, auxObjects);
+            base.ToStream(binStream, auxObjects, eagerLoadLists);
             BinarySerializer.ToStream(A != null ? A.ID : (int?)null, binStream);
             BinarySerializer.ToStream(B != null ? B.ID : (int?)null, binStream);
         }
@@ -5075,10 +5075,10 @@ namespace Kistl.App.TimeRecords
 #region Serializer
 
 
-        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects)
+        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             
-            base.ToStream(binStream, auxObjects);
+            base.ToStream(binStream, auxObjects, eagerLoadLists);
             BinarySerializer.ToStream(A != null ? A.ID : (int?)null, binStream);
             BinarySerializer.ToStream(B != null ? B.ID : (int?)null, binStream);
         }
@@ -5285,10 +5285,10 @@ public string Value { get { return B; } set { B = value; } }
 #region Serializer
 
 
-        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects)
+        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             
-            base.ToStream(binStream, auxObjects);
+            base.ToStream(binStream, auxObjects, eagerLoadLists);
             BinarySerializer.ToStream(A != null ? A.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._B, binStream);
         }
@@ -5502,10 +5502,10 @@ public TestCustomObject Parent { get { return A; } set { A = value; } }
 #region Serializer
 
 
-        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects)
+        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             
-            base.ToStream(binStream, auxObjects);
+            base.ToStream(binStream, auxObjects, eagerLoadLists);
             BinarySerializer.ToStream(A != null ? A.ID : (int?)null, binStream);
 			BinarySerializer.ToStream(this.B, binStream);
         }

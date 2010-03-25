@@ -948,12 +948,15 @@ namespace Kistl.App.Base
 #region Serializer
 
 
-        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects)
+        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             
-            base.ToStream(binStream, auxObjects);
+            base.ToStream(binStream, auxObjects, eagerLoadLists);
             BinarySerializer.ToStream(BaseObjectClass != null ? BaseObjectClass.ID : (int?)null, binStream);
+
+			if(eagerLoadLists)
 			{
+				BinarySerializer.ToStream(true, binStream);
 				BinarySerializer.ToStream(Constraints.Count, binStream);
 				foreach(var obj in Constraints)
 				{
@@ -962,6 +965,10 @@ namespace Kistl.App.Base
 					}
 					BinarySerializer.ToStream(obj.ID, binStream);
 				}
+			}
+			else
+			{
+				BinarySerializer.ToStream(false, binStream);
 			}
             BinarySerializer.ToStream(DefaultPresentableModelDescriptor != null ? DefaultPresentableModelDescriptor.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._IsAbstract, binStream);
@@ -975,18 +982,23 @@ namespace Kistl.App.Base
             
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._fk_BaseObjectClass, binStream);
+
 			{
-				int numElements;
-				BinarySerializer.FromStream(out numElements, binStream);
-				ConstraintsIds = new List<int>(numElements);
-				while (numElements-- > 0) 
+				bool containsList;
+				BinarySerializer.FromStream(out containsList, binStream);
+				if(containsList)
 				{
-					int id;
-					BinarySerializer.FromStream(out id, binStream);
-					ConstraintsIds.Add(id);
+					int numElements;
+					BinarySerializer.FromStream(out numElements, binStream);
+					ConstraintsIds = new List<int>(numElements);
+					while (numElements-- > 0) 
+					{
+						int id;
+						BinarySerializer.FromStream(out id, binStream);
+						ConstraintsIds.Add(id);
+					}
 				}
 			}
-
             BinarySerializer.FromStream(out this._fk_DefaultPresentableModelDescriptor, binStream);
             BinarySerializer.FromStream(out this._IsAbstract, binStream);
             BinarySerializer.FromStream(out this._IsFrozenObject, binStream);

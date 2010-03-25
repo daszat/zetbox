@@ -33,7 +33,7 @@ namespace Kistl.API.AbstractConsumerTests.BinarySerializers
 
         #region IStreamable Members
 
-        public void ToStream(BinaryWriter sw, HashSet<IStreamable> auxObjects)
+        public void ToStream(BinaryWriter sw, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
 
         }

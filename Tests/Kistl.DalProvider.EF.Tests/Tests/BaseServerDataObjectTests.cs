@@ -112,7 +112,7 @@ namespace Kistl.DalProvider.EF.Tests
                 BinaryReader sr = new BinaryReader(ms);
 
                 InitialiseObject(ctx, obj);
-                obj.ToStream(sw, null);
+                obj.ToStream(sw, null, false);
 
                 Assert.That(ms.Length, Is.GreaterThan(0));
                 ms.Seek(0, SeekOrigin.Begin);
@@ -150,7 +150,7 @@ namespace Kistl.DalProvider.EF.Tests
             BinaryWriter sw = new BinaryWriter(ms);
             BinaryReader sr = new BinaryReader(ms);
 
-            obj.ToStream(sw, null);
+            obj.ToStream(sw, null, false);
 
             Assert.That(ms.Length, Is.GreaterThan(0));
 

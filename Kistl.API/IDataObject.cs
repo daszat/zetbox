@@ -126,7 +126,8 @@ namespace Kistl.API
         /// </summary>
         /// <param name="sw">BinaryWriter to serialize to</param>
         /// <param name="auxObjects">pass a HashSet here to collect auxiliary, eagerly loaded objects. Ignored if null.</param>
-        void ToStream(BinaryWriter sw, HashSet<IStreamable> auxObjects);
+        /// <param name="eagerLoadLists">True is lists should be eager loaded</param>
+        void ToStream(BinaryWriter sw, HashSet<IStreamable> auxObjects, bool eagerLoadLists);
 
         /// <summary>
         /// Deserialize this Object from a BinaryReader

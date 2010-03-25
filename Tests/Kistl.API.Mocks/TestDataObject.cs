@@ -60,7 +60,7 @@ using System.Xml.Serialization;
             }
         }
 
-        public void ToStream(BinaryWriter sw, HashSet<IStreamable> auxObjects)
+        public void ToStream(BinaryWriter sw, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             BinarySerializer.ToStream(new SerializableType(this.GetInterfaceType()), sw);
             BinarySerializer.ToStream(ID, sw);

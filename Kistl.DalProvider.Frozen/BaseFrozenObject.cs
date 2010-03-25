@@ -79,7 +79,8 @@ namespace Kistl.DalProvider.Frozen
         /// </summary>
         /// <param name="sw"></param>
         /// <param name="auxObjects"></param>
-        public virtual void ToStream(BinaryWriter sw, HashSet<IStreamable> auxObjects)
+        /// <param name="eagerLoadLists"></param>
+        public virtual void ToStream(BinaryWriter sw, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             ToStream(sw);
         }

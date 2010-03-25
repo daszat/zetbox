@@ -25,7 +25,7 @@ namespace Kistl.API.Tests.Skeletons
         [ExpectedException(typeof(ArgumentNullException))]
         public void fails_on_serializing_to_null_stream()
         {
-            obj.ToStream((BinaryWriter)null, null);
+            obj.ToStream((BinaryWriter)null, null, false);
         }
 
         [Test]
@@ -47,7 +47,7 @@ namespace Kistl.API.Tests.Skeletons
             BinaryWriter sw = new BinaryWriter(ms);
             BinaryReader sr = new BinaryReader(ms);
 
-            obj.ToStream(sw, null);
+            obj.ToStream(sw, null, false);
 
             Assert.That(ms.Length, Is.GreaterThan(0));
 

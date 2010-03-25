@@ -72,7 +72,7 @@ namespace Kistl.Server
                             .GetServerObjectSetHandler()
                             .SetObjects(ctx, objects, notificationRequests ?? new ObjectNotificationRequest[0])
                             .Cast<IStreamable>();
-                        return SendObjects(changedObjects);
+                        return SendObjects(changedObjects, true);
                     }
                 }
             }
@@ -104,13 +104,15 @@ namespace Kistl.Server
 
                     using (IKistlContext ctx = _ctxFactory())
                     {
+                        var filterExpresstion = filter != null ? SerializableExpression.ToExpression(filter) : null;
+                        bool eagerLoadLists = maxListCount == 1;
                         IEnumerable<IStreamable> lst = _sohFactory
                             .GetServerObjectHandler(type.GetInterfaceType().Type)
                             .GetList(ctx, maxListCount,
-                                filter != null ? SerializableExpression.ToExpression(filter) : null,
+                                filterExpresstion,
                                 orderBy != null ? orderBy.Select(o => SerializableExpression.ToExpression(o)).ToList() : null);
 
-                        return SendObjects(lst);
+                        return SendObjects(lst, eagerLoadLists);
                     }
                 }
             }
@@ -128,7 +130,8 @@ namespace Kistl.Server
         /// <param name="sw">the stream to write to</param>
         /// <param name="auxObjects">a set of objects to send; will not be modified by this call</param>
         /// <param name="sentObjects">a set objects already sent; receives all newly sent objects too</param>
-        private static void SendAuxiliaryObjects(BinaryWriter sw, HashSet<IStreamable> auxObjects, HashSet<IStreamable> sentObjects)
+        /// <param name="eagerLoadLists">True if Lists should be eager loaded</param>
+        private static void SendAuxiliaryObjects(BinaryWriter sw, HashSet<IStreamable> auxObjects, HashSet<IStreamable> sentObjects, bool eagerLoadLists)
         {
             // clone auxObjects to avoid modification
             auxObjects = new HashSet<IStreamable>(auxObjects);
@@ -140,7 +143,7 @@ namespace Kistl.Server
                 foreach (var aux in auxObjects.Where(o => o != null))
                 {
                     BinarySerializer.ToStream(true, sw);
-                    aux.ToStream(sw, secondTierAuxObjects);
+                    aux.ToStream(sw, secondTierAuxObjects, eagerLoadLists);
                     sentObjects.Add(aux);
                 }
                 // check whether new objects where eagerly loaded
@@ -155,8 +158,9 @@ namespace Kistl.Server
         /// Serializes a list of objects onto a <see cref="MemoryStream"/>.
         /// </summary>
         /// <param name="lst">the list of objects to send</param>
+        /// <param name="eagerLoadLists">True if Lists should be eager loaded</param>
         /// <returns>a memory stream containing all objects and all eagerly loaded auxiliary objects</returns>
-        private static MemoryStream SendObjects(IEnumerable<IStreamable> lst)
+        private static MemoryStream SendObjects(IEnumerable<IStreamable> lst, bool eagerLoadLists)
         {
             HashSet<IStreamable> sentObjects = new HashSet<IStreamable>();
             HashSet<IStreamable> auxObjects = new HashSet<IStreamable>();
@@ -167,17 +171,19 @@ namespace Kistl.Server
             {
                 BinarySerializer.ToStream(true, sw);
                 // don't check sentObjects here, because a list might contain items twice
-                obj.ToStream(sw, auxObjects);
+                obj.ToStream(sw, auxObjects, eagerLoadLists);
                 sentObjects.Add(obj);
             }
             BinarySerializer.ToStream(false, sw);
 
-            SendAuxiliaryObjects(sw, auxObjects, sentObjects);
+            SendAuxiliaryObjects(sw, auxObjects, sentObjects, eagerLoadLists);
 
             // https://connect.microsoft.com/VisualStudio/feedback/details/541494/wcf-streaming-issue
             BinarySerializer.ToStream(false, sw);
             BinarySerializer.ToStream(false, sw);
             BinarySerializer.ToStream(false, sw);
+
+            Logging.Facade.DebugFormat("Sending {0} Objects with {1} with AuxObjects and EagerLoadLists = {2}", sentObjects.Count, auxObjects.Count, eagerLoadLists);
 
             result.Seek(0, SeekOrigin.Begin);
             return result;
@@ -206,7 +212,7 @@ namespace Kistl.Server
                         IEnumerable<IStreamable> lst = _sohFactory
                             .GetServerObjectHandler(type.GetInterfaceType().Type)
                             .GetListOf(ctx, ID, property);
-                        return SendObjects(lst);
+                        return SendObjects(lst, true);
                     }
                 }
             }
@@ -247,7 +253,7 @@ namespace Kistl.Server
                             .GetServerCollectionHandler(rel.A.Type.GetDataType(), rel.B.Type.GetDataType(), endRole)
                             .GetCollectionEntries(ctx, relId, endRole, parentObjID);
 
-                        return SendObjects(lst.Cast<IStreamable>());
+                        return SendObjects(lst.Cast<IStreamable>(), true);
                     }
                 }
             }
@@ -309,7 +315,7 @@ namespace Kistl.Server
                             .SetBlobStream(ctx, blob.Stream, blob.FileName, blob.MimeType);
                         BlobResponse resp = new BlobResponse();
                         resp.ID = result.ID;
-                        resp.BlobInstance = SendObjects(new IDataObject[] { result });
+                        resp.BlobInstance = SendObjects(new IDataObject[] { result }, true);
                         return resp;
                     }
                 }

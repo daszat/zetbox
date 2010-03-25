@@ -98,7 +98,8 @@ namespace Kistl.API
         /// </summary>
         /// <param name="sw">Stream to serialize to</param>
         /// <param name="auxObjects">pass a List here to collect auxiliary, eagerly loaded objects. Ignored if null.</param>
-        public virtual void ToStream(BinaryWriter sw, HashSet<IStreamable> auxObjects)
+        /// <param name="eagerLoadLists">True if Lists should be eager loaded.</param>
+        public virtual void ToStream(BinaryWriter sw, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             if (sw == null)
                 throw new ArgumentNullException("sw");

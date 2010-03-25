@@ -49,8 +49,8 @@ string methodName = direction.ToString();
             argName = "binStream";
             methodName = "ToStream";
             serType = SerializerType.Binary;
-            additionalArgs = ", HashSet<IStreamable> auxObjects";
-            callBaseWithAdditionalArgs = ", auxObjects";
+            additionalArgs = ", HashSet<IStreamable> auxObjects, bool eagerLoadLists";
+            callBaseWithAdditionalArgs = ", auxObjects, eagerLoadLists";
             break;
         case SerializerDirection.FromStream:
             argType = "System.IO.BinaryReader";
