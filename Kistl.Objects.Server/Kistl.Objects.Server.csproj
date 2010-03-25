@@ -101,7 +101,6 @@
     <Compile Include="Company.Server.Designer.cs" />
     <Compile Include="CompoundObject.Server.Designer.cs" />
     <Compile Include="CompoundObjectProperty.Server.Designer.cs" />
-    <Compile Include="ConsistentNavigatorConstraint.Server.Designer.cs" />
     <Compile Include="Constraint.Server.Designer.cs" />
     <Compile Include="ConstraintInvocation.Server.Designer.cs" />
     <Compile Include="ControlKind.Server.Designer.cs" />

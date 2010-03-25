@@ -456,16 +456,6 @@ namespace Kistl.App.Base
 			}
 		}
 		
-		/// <summary>List of all ConsistentNavigatorConstraint</summary>
-		/// Checks whether a Navigator on a RelationEnd is consistent with the Relation's definition
-		public IQueryable<ConsistentNavigatorConstraint> ConsistentNavigatorConstraints
-		{ 
-			get
-			{
-				return Context.GetQuery<ConsistentNavigatorConstraint>();
-			}
-		}
-		
 		/// <summary>List of all CompoundObjectProperty</summary>
 		/// Metadefinition Object for Compound Object Properties.
 		public IQueryable<CompoundObjectProperty> CompoundObjectProperties

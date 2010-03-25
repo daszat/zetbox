@@ -38,7 +38,7 @@ namespace Kistl.App.Base
     /*
     Relation: FK_Constraint_invokes_GetErrorTextInvocation
     A: One InvokingConstraint as Constraint
-    B: ZeroOrOne ConstraintInvocation as GetErrorTextInvocation
+    B: One ConstraintInvocation as GetErrorTextInvocation
     Preferred Storage: MergeIntoA
     */
         // object reference property
@@ -129,7 +129,7 @@ namespace Kistl.App.Base
     /*
     Relation: FK_Constraint_invokes_IsValidInvocation
     A: One InvokingConstraint as Constraint
-    B: ZeroOrOne ConstraintInvocation as IsValidInvocation
+    B: One ConstraintInvocation as IsValidInvocation
     Preferred Storage: MergeIntoA
     */
         // object reference property
@@ -377,7 +377,13 @@ namespace Kistl.App.Base
             
             base.ToStream(binStream, auxObjects);
             BinarySerializer.ToStream(GetErrorTextInvocation != null ? GetErrorTextInvocation.ID : (int?)null, binStream);
+			if (auxObjects != null) {
+				auxObjects.Add(GetErrorTextInvocation);
+			}
             BinarySerializer.ToStream(IsValidInvocation != null ? IsValidInvocation.ID : (int?)null, binStream);
+			if (auxObjects != null) {
+				auxObjects.Add(IsValidInvocation);
+			}
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)

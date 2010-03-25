@@ -436,10 +436,6 @@
       <End Role="Icon" EntitySet="Icon" />
       <End Role="Module" EntitySet="Module" />
     </AssociationSet>
-    <AssociationSet Name="FK_InvokeOnObjectClass_has_MethodInvocations" Association="Model.FK_InvokeOnObjectClass_has_MethodInvocations" >
-      <End Role="InvokeOnObjectClass" EntitySet="DataType" />
-      <End Role="MethodInvocations" EntitySet="MethodInvocation" />
-    </AssociationSet>
     <AssociationSet Name="FK_InvokeOnProperty_has_Invocations" Association="Model.FK_InvokeOnProperty_has_Invocations" >
       <End Role="InvokeOnProperty" EntitySet="Property" />
       <End Role="Invocations" EntitySet="PropertyInvocation" />
@@ -491,6 +487,10 @@
     <AssociationSet Name="FK_MethodInvocation_was_CreatedBy" Association="Model.FK_MethodInvocation_was_CreatedBy" >
       <End Role="MethodInvocation" EntitySet="MethodInvocation" />
       <End Role="CreatedBy" EntitySet="Identity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MethodOwner_has_MethodInvocations" Association="Model.FK_MethodOwner_has_MethodInvocations" >
+      <End Role="MethodOwner" EntitySet="DataType" />
+      <End Role="MethodInvocations" EntitySet="MethodInvocation" />
     </AssociationSet>
     <AssociationSet Name="FK_Mitarbeiter_is_a_Identity" Association="Model.FK_Mitarbeiter_is_a_Identity" >
       <End Role="Mitarbeiter" EntitySet="Mitarbeiter" />
@@ -971,8 +971,8 @@
     <Property Name="Description" Type="String" Nullable="true" MaxLength="200" />
     <Property Name="ExportGuid" Type="Guid" Nullable="false" />
     <NavigationProperty Name="MethodInvocations__Implementation__"
-                        Relationship="Model.FK_InvokeOnObjectClass_has_MethodInvocations"
-                        FromRole="InvokeOnObjectClass"
+                        Relationship="Model.FK_MethodOwner_has_MethodInvocations"
+                        FromRole="MethodOwner"
                         ToRole="MethodInvocations" />
     <NavigationProperty Name="Methods__Implementation__"
                         Relationship="Model.FK_ObjectClass_has_Methods"
@@ -1256,9 +1256,9 @@
                         FromRole="MethodInvocation"
                         ToRole="Implementor" />
     <NavigationProperty Name="InvokeOnObjectClass__Implementation__"
-                        Relationship="Model.FK_InvokeOnObjectClass_has_MethodInvocations"
+                        Relationship="Model.FK_MethodOwner_has_MethodInvocations"
                         FromRole="MethodInvocations"
-                        ToRole="InvokeOnObjectClass" />
+                        ToRole="MethodOwner" />
     <Property Name="MemberName" Type="String" Nullable="false" MaxLength="200" />
     <NavigationProperty Name="Method__Implementation__"
                         Relationship="Model.FK_Method_has_MethodInvocations"
@@ -1901,8 +1901,6 @@
                         ToRole="CompoundObjectDefinition" />
     <Property Name="HasPersistentOrder" Type="Boolean" Nullable="false" />
     <Property Name="IsList" Type="Boolean" Nullable="false" />
-  </EntityType>
-  <EntityType Name="ConsistentNavigatorConstraint" BaseType="Model.Constraint">
   </EntityType>
   <EntityType Name="ControlKindClass" BaseType="Model.ObjectClass">
     <NavigationProperty Name="SupportedInterfaces__Implementation__"
@@ -3296,14 +3294,6 @@
          Type="Model.Module" 
          Multiplicity="0..1" />
   </Association>
-  <Association Name="FK_InvokeOnObjectClass_has_MethodInvocations" >
-    <End Role="InvokeOnObjectClass"
-         Type="Model.DataType" 
-         Multiplicity="0..1" />
-    <End Role="MethodInvocations"
-         Type="Model.MethodInvocation" 
-         Multiplicity="*" />
-  </Association>
   <Association Name="FK_InvokeOnProperty_has_Invocations" >
     <End Role="InvokeOnProperty"
          Type="Model.Property" 
@@ -3407,6 +3397,14 @@
     <End Role="CreatedBy"
          Type="Model.Identity" 
          Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_MethodOwner_has_MethodInvocations" >
+    <End Role="MethodOwner"
+         Type="Model.DataType" 
+         Multiplicity="0..1" />
+    <End Role="MethodInvocations"
+         Type="Model.MethodInvocation" 
+         Multiplicity="*" />
   </Association>
   <Association Name="FK_Mitarbeiter_is_a_Identity" >
     <End Role="Mitarbeiter"

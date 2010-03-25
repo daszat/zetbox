@@ -123,12 +123,6 @@
       <End Role="A_Property" EntitySet="Property" />
       <End Role="B_CompoundObjectProperty" EntitySet="CompoundObjectProperty" />
     </AssociationSet>
-    <EntitySet Name="ConsistentNavigatorConstraint" EntityType="Model.Store.ConsistentNavigatorConstraint" Table="ConsistentNavigatorConstraints"/>
-    <!-- inherits from Constraint -->
-    <AssociationSet Name="FK_ConsistentNavigatorConstraint_Constraint_ID" Association="Model.Store.FK_ConsistentNavigatorConstraint_Constraint_ID" >
-      <End Role="A_Constraint" EntitySet="Constraint" />
-      <End Role="B_ConsistentNavigatorConstraint" EntitySet="ConsistentNavigatorConstraint" />
-    </AssociationSet>
     <EntitySet Name="ControlKindClass" EntityType="Model.Store.ControlKindClass" Table="ControlKindClasses"/>
     <!-- inherits from ObjectClass -->
     <AssociationSet Name="FK_ControlKindClass_ObjectClass_ID" Association="Model.Store.FK_ControlKindClass_ObjectClass_ID" >
@@ -904,10 +898,6 @@
       <End Role="Icon" EntitySet="Icon" />
       <End Role="Module" EntitySet="Module" />
     </AssociationSet>
-    <AssociationSet Name="FK_InvokeOnObjectClass_has_MethodInvocations" Association="Model.Store.FK_InvokeOnObjectClass_has_MethodInvocations" >
-      <End Role="InvokeOnObjectClass" EntitySet="DataType" />
-      <End Role="MethodInvocations" EntitySet="MethodInvocation" />
-    </AssociationSet>
     <AssociationSet Name="FK_InvokeOnProperty_has_Invocations" Association="Model.Store.FK_InvokeOnProperty_has_Invocations" >
       <End Role="InvokeOnProperty" EntitySet="Property" />
       <End Role="Invocations" EntitySet="PropertyInvocation" />
@@ -959,6 +949,10 @@
     <AssociationSet Name="FK_MethodInvocation_was_CreatedBy" Association="Model.Store.FK_MethodInvocation_was_CreatedBy" >
       <End Role="MethodInvocation" EntitySet="MethodInvocation" />
       <End Role="CreatedBy" EntitySet="Identity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MethodOwner_has_MethodInvocations" Association="Model.Store.FK_MethodOwner_has_MethodInvocations" >
+      <End Role="MethodOwner" EntitySet="DataType" />
+      <End Role="MethodInvocations" EntitySet="MethodInvocation" />
     </AssociationSet>
     <AssociationSet Name="FK_Mitarbeiter_is_a_Identity" Association="Model.Store.FK_Mitarbeiter_is_a_Identity" >
       <End Role="Mitarbeiter" EntitySet="Mitarbeiter" />
@@ -1400,13 +1394,6 @@
     <Property Name="IsList" Type="bit" Nullable="false" />
   </EntityType>
 	
-  <EntityType Name="ConsistentNavigatorConstraint">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
-  </EntityType>
-	
   <EntityType Name="Constraint">
     <Key>
       <PropertyRef Name="ID" />
@@ -1809,12 +1796,12 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="fk_InvokeOnObjectClass" Type="int" />
     <Property Name="fk_Method" Type="int" />
     <Property Name="fk_Implementor" Type="int" />
     <Property Name="fk_Module" Type="int" />
     <Property Name="fk_ChangedBy" Type="int" />
     <Property Name="fk_CreatedBy" Type="int" />
+    <Property Name="fk_MethodOwner" Type="int" />
     <Property Name="ChangedOn" Type="datetime" Nullable="true" />
     <Property Name="CreatedOn" Type="datetime" Nullable="true" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
@@ -3718,20 +3705,6 @@
   </Association>
 
 
-  <Association Name="FK_InvokeOnObjectClass_has_MethodInvocations">
-    <End Role="InvokeOnObjectClass" Type="Model.Store.DataType" Multiplicity="0..1" />
-    <End Role="MethodInvocations" Type="Model.Store.MethodInvocation" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="InvokeOnObjectClass">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="MethodInvocations">
-        <PropertyRef Name="fk_InvokeOnObjectClass" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-
   <Association Name="FK_InvokeOnProperty_has_Invocations">
     <End Role="InvokeOnProperty" Type="Model.Store.Property" Multiplicity="0..1" />
     <End Role="Invocations" Type="Model.Store.PropertyInvocation" Multiplicity="*" />
@@ -3909,6 +3882,20 @@
       </Principal>
       <Dependent Role="MethodInvocation">
         <PropertyRef Name="fk_CreatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_MethodOwner_has_MethodInvocations">
+    <End Role="MethodOwner" Type="Model.Store.DataType" Multiplicity="0..1" />
+    <End Role="MethodInvocations" Type="Model.Store.MethodInvocation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MethodOwner">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="MethodInvocations">
+        <PropertyRef Name="fk_MethodOwner" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -4778,18 +4765,6 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="B_CompoundObjectProperty">
-        <PropertyRef Name="ID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_ConsistentNavigatorConstraint_Constraint_ID">
-    <End Role="A_Constraint" Type="Model.Store.Constraint" Multiplicity="1" />
-    <End Role="B_ConsistentNavigatorConstraint" Type="Model.Store.ConsistentNavigatorConstraint" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="A_Constraint">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="B_ConsistentNavigatorConstraint">
         <PropertyRef Name="ID" />
       </Dependent>
     </ReferentialConstraint>

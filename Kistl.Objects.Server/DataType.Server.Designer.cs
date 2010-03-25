@@ -553,8 +553,8 @@ namespace Kistl.App.Base
         /// all implemented Methods in this DataType
         /// </summary>
     /*
-    Relation: FK_InvokeOnObjectClass_has_MethodInvocations
-    A: One DataType as InvokeOnObjectClass
+    Relation: FK_MethodOwner_has_MethodInvocations
+    A: One DataType as MethodOwner
     B: ZeroOrMore MethodInvocation as MethodInvocations
     Preferred Storage: MergeIntoB
     */
@@ -576,14 +576,14 @@ namespace Kistl.App.Base
             }
         }
         
-        [EdmRelationshipNavigationProperty("Model", "FK_InvokeOnObjectClass_has_MethodInvocations", "MethodInvocations")]
+        [EdmRelationshipNavigationProperty("Model", "FK_MethodOwner_has_MethodInvocations", "MethodInvocations")]
         public EntityCollection<Kistl.App.Base.MethodInvocation__Implementation__> MethodInvocations__Implementation__
         {
             get
             {
                 var c = ((IEntityWithRelationships)(this)).RelationshipManager
                     .GetRelatedCollection<Kistl.App.Base.MethodInvocation__Implementation__>(
-                        "Model.FK_InvokeOnObjectClass_has_MethodInvocations",
+                        "Model.FK_MethodOwner_has_MethodInvocations",
                         "MethodInvocations");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)
@@ -1223,7 +1223,7 @@ namespace Kistl.App.Base
 				(obj, val) => obj.ShowNameInLists = val),
 			// rel: DataType has DefaultIcon (eb852cc4-3977-42b9-9fcd-3a8c60aa49ac)
 			// rel: ObjectClass has Methods (557ddcb4-8e99-48f2-9107-ef0cbff8066b)
-			// rel: InvokeOnObjectClass has MethodInvocations (dabf87d2-8038-4bc7-978f-f043151c7d25)
+			// rel: MethodOwner has MethodInvocations (dabf87d2-8038-4bc7-978f-f043151c7d25)
 			// rel: ObjectClass has Properties (f7e487a4-6922-40bf-a404-24ce6accbb83)
 			// rel: DataType was CreatedBy (b7d1b442-4364-4979-b81c-66392fbe69fd)
 			// rel: DataType was ChangedBy (cf88221e-3474-4de1-8692-abd65d052e8b)

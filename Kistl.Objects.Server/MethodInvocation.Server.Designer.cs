@@ -501,8 +501,8 @@ namespace Kistl.App.Base
         /// In dieser Objektklasse implementieren
         /// </summary>
     /*
-    Relation: FK_InvokeOnObjectClass_has_MethodInvocations
-    A: One DataType as InvokeOnObjectClass
+    Relation: FK_MethodOwner_has_MethodInvocations
+    A: One DataType as MethodOwner
     B: ZeroOrMore MethodInvocation as MethodInvocations
     Preferred Storage: MergeIntoB
     */
@@ -529,15 +529,15 @@ namespace Kistl.App.Base
         private int? _fk_InvokeOnObjectClass;
         private Guid? _fk_guid_InvokeOnObjectClass = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_InvokeOnObjectClass_has_MethodInvocations", "InvokeOnObjectClass")]
+        [EdmRelationshipNavigationProperty("Model", "FK_MethodOwner_has_MethodInvocations", "MethodOwner")]
         public Kistl.App.Base.DataType__Implementation__ InvokeOnObjectClass__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Base.DataType__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.DataType__Implementation__>(
-                        "Model.FK_InvokeOnObjectClass_has_MethodInvocations",
-                        "InvokeOnObjectClass");
+                        "Model.FK_MethodOwner_has_MethodInvocations",
+                        "MethodOwner");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
                 {
@@ -557,8 +557,8 @@ namespace Kistl.App.Base
             {
                 EntityReference<Kistl.App.Base.DataType__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.DataType__Implementation__>(
-                        "Model.FK_InvokeOnObjectClass_has_MethodInvocations",
-                        "InvokeOnObjectClass");
+                        "Model.FK_MethodOwner_has_MethodInvocations",
+                        "MethodOwner");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
                 {
@@ -1011,7 +1011,7 @@ namespace Kistl.App.Base
 				null,
 				obj => obj.Module,
 				(obj, val) => obj.Module = val),
-			// rel: InvokeOnObjectClass has MethodInvocations (dabf87d2-8038-4bc7-978f-f043151c7d25)
+			// rel: MethodOwner has MethodInvocations (dabf87d2-8038-4bc7-978f-f043151c7d25)
 			// rel: Method has MethodInvocations (4a388300-4e4d-45d2-b04e-0fe8efc25fec)
 			// rel: MethodInvocation has Module (379b7181-a832-431f-a48d-ef1dd1996414)
 			// rel: MethodInvocation has Implementor (dc9013af-8758-40b4-8f52-c2c8683a13e0)

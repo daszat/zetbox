@@ -298,7 +298,7 @@ using Kistl.DalProvider.EF;
 	/*
     Relation: FK_Constraint_invokes_GetErrorTextInvocation
     A: One InvokingConstraint as Constraint
-    B: ZeroOrOne ConstraintInvocation as GetErrorTextInvocation
+    B: One ConstraintInvocation as GetErrorTextInvocation
     Preferred Storage: MergeIntoA
 	*/
 
@@ -313,7 +313,7 @@ using Kistl.DalProvider.EF;
 	/*
     Relation: FK_Constraint_invokes_IsValidInvocation
     A: One InvokingConstraint as Constraint
-    B: ZeroOrOne ConstraintInvocation as IsValidInvocation
+    B: One ConstraintInvocation as IsValidInvocation
     Preferred Storage: MergeIntoA
 	*/
 
@@ -821,21 +821,6 @@ using Kistl.DalProvider.EF;
     )]
 
 	/*
-    Relation: FK_InvokeOnObjectClass_has_MethodInvocations
-    A: One DataType as InvokeOnObjectClass
-    B: ZeroOrMore MethodInvocation as MethodInvocations
-    Preferred Storage: MergeIntoB
-	*/
-
-// basic association
-[assembly: EdmRelationship(
-    "Model", "FK_InvokeOnObjectClass_has_MethodInvocations",
-    "InvokeOnObjectClass", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.DataType__Implementation__),
-    "MethodInvocations", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.MethodInvocation__Implementation__)
-    )]
-
-
-	/*
     Relation: FK_InvokeOnProperty_has_Invocations
     A: One Property as InvokeOnProperty
     B: ZeroOrMore PropertyInvocation as Invocations
@@ -1027,6 +1012,21 @@ using Kistl.DalProvider.EF;
     "Model", "FK_MethodInvocation_was_CreatedBy",
     "MethodInvocation", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.MethodInvocation__Implementation__),
     "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Identity__Implementation__)
+    )]
+
+
+	/*
+    Relation: FK_MethodOwner_has_MethodInvocations
+    A: One DataType as MethodOwner
+    B: ZeroOrMore MethodInvocation as MethodInvocations
+    Preferred Storage: MergeIntoB
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_MethodOwner_has_MethodInvocations",
+    "MethodOwner", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.DataType__Implementation__),
+    "MethodInvocations", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.MethodInvocation__Implementation__)
     )]
 
 

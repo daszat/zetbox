@@ -174,11 +174,6 @@
 <ScalarProperty Name="Reason" ColumnName="Reason" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.ConsistentNavigatorConstraint)">
-	    <MappingFragment StoreEntitySet="ConsistentNavigatorConstraint">
-	      <ScalarProperty Name="ID" ColumnName="ID" />
-	    </MappingFragment>
-      </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Model.IntegerRangeConstraint)">
 	    <MappingFragment StoreEntitySet="IntegerRangeConstraint">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
@@ -1932,7 +1927,7 @@
     <!--
     Relation: FK_Constraint_invokes_GetErrorTextInvocation
     A: One InvokingConstraint as Constraint
-    B: ZeroOrOne ConstraintInvocation as GetErrorTextInvocation
+    B: One ConstraintInvocation as GetErrorTextInvocation
     Preferred Storage: MergeIntoA
     -->
     <AssociationSetMapping Name="FK_Constraint_invokes_GetErrorTextInvocation"
@@ -1949,7 +1944,7 @@
     <!--
     Relation: FK_Constraint_invokes_IsValidInvocation
     A: One InvokingConstraint as Constraint
-    B: ZeroOrOne ConstraintInvocation as IsValidInvocation
+    B: One ConstraintInvocation as IsValidInvocation
     Preferred Storage: MergeIntoA
     -->
     <AssociationSetMapping Name="FK_Constraint_invokes_IsValidInvocation"
@@ -2423,23 +2418,6 @@
       <Condition ColumnName="fk_Module" IsNull="false"/>
     </AssociationSetMapping>
     <!--
-    Relation: FK_InvokeOnObjectClass_has_MethodInvocations
-    A: One DataType as InvokeOnObjectClass
-    B: ZeroOrMore MethodInvocation as MethodInvocations
-    Preferred Storage: MergeIntoB
-    -->
-    <AssociationSetMapping Name="FK_InvokeOnObjectClass_has_MethodInvocations"
-                           TypeName="Model.FK_InvokeOnObjectClass_has_MethodInvocations"
-                           StoreEntitySet="MethodInvocation" >
-      <EndProperty Name="InvokeOnObjectClass">
-        <ScalarProperty Name="ID" ColumnName="fk_InvokeOnObjectClass"/>
-      </EndProperty>
-      <EndProperty Name="MethodInvocations">
-        <ScalarProperty Name="ID" ColumnName="ID"/>
-      </EndProperty>
-      <Condition ColumnName="fk_InvokeOnObjectClass" IsNull="false"/>
-    </AssociationSetMapping>
-    <!--
     Relation: FK_InvokeOnProperty_has_Invocations
     A: One Property as InvokeOnProperty
     B: ZeroOrMore PropertyInvocation as Invocations
@@ -2659,6 +2637,23 @@
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="fk_CreatedBy" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_MethodOwner_has_MethodInvocations
+    A: One DataType as MethodOwner
+    B: ZeroOrMore MethodInvocation as MethodInvocations
+    Preferred Storage: MergeIntoB
+    -->
+    <AssociationSetMapping Name="FK_MethodOwner_has_MethodInvocations"
+                           TypeName="Model.FK_MethodOwner_has_MethodInvocations"
+                           StoreEntitySet="MethodInvocation" >
+      <EndProperty Name="MethodOwner">
+        <ScalarProperty Name="ID" ColumnName="fk_MethodOwner"/>
+      </EndProperty>
+      <EndProperty Name="MethodInvocations">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_MethodOwner" IsNull="false"/>
     </AssociationSetMapping>
     <!--
     Relation: FK_Mitarbeiter_is_a_Identity

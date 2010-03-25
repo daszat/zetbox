@@ -62,11 +62,6 @@ namespace Kistl.App.Base
         {
             e.Result = "Method names, property names, enum names etc. must be valid names.";
         }
-
-        public static void OnToString_ConsistentNavigatorConstraint(ConsistentNavigatorConstraint obj, MethodReturnEventArgs<string> e)
-        {
-            e.Result = "The navigator should be consistent with the defining Relation.";
-        }
         #endregion
 
         #region InvokingConstraint
@@ -123,8 +118,8 @@ namespace Kistl.App.Base
         public static bool OnIsValid_Relation_Storage(object constrainedObject, object constrainedValue)
         {
             if (constrainedObject == null) { throw new ArgumentNullException("constrainedObject"); }
-            var rel = constrainedObject as Relation;
-            if (rel != null && rel.A != null && rel.B != null)
+            var rel = (Relation)constrainedObject;
+            if (rel.A != null && rel.B != null)
             {
                 switch (rel.Storage)
                 {
@@ -148,8 +143,8 @@ namespace Kistl.App.Base
         public static string OnGetErrorText_Relation_Storage(object constrainedObject, object constrainedValue)
         {
             if (constrainedObject == null) { throw new ArgumentNullException("constrainedObject"); }
-            var rel = constrainedObject as Relation;
-            if (rel != null && rel.A != null && rel.B != null)
+            var rel = (Relation)constrainedObject;
+            if (rel.A != null && rel.B != null)
             {
                 switch (rel.Storage)
                 {
@@ -183,6 +178,94 @@ namespace Kistl.App.Base
             {
                 return "Incomplete Relation";
             }
+        }
+
+        #endregion
+
+        #region RelationEnd_Navigator Constraint
+
+        public static bool OnIsValid_RelationEnd_Navigator(object constrainedObject, object constrainedValue)
+        {
+            var relEnd = (RelationEnd)constrainedObject;
+            var otherEnd = relEnd.GetParent().GetOtherEnd(relEnd);
+            var orp = (ObjectReferenceProperty)constrainedValue;
+
+            if (orp != null)
+            {
+                if (orp.ObjectClass == null)
+                {
+                    return false;
+                }
+                if (orp.ObjectClass != relEnd.Type)
+                {
+                    return false;
+                }
+
+                switch (otherEnd.Multiplicity)
+                {
+                    case Multiplicity.One:
+                        return orp.Constraints.OfType<NotNullableConstraint>().Count() > 0;
+                    case Multiplicity.ZeroOrMore:
+                        return orp.Constraints.OfType<NotNullableConstraint>().Count() == 0;
+                    case Multiplicity.ZeroOrOne:
+                        return orp.Constraints.OfType<NotNullableConstraint>().Count() == 0;
+                    default:
+                        return false;
+                }
+            }
+            return true;
+        }
+
+        public static string OnGetErrorText_RelationEnd_Navigator(object constrainedObject, object constrainedValue)
+        {
+            var relEnd = (RelationEnd)constrainedObject;
+            var otherEnd = (relEnd.AParent ?? relEnd.BParent).GetOtherEnd(relEnd);
+            var orp = (ObjectReferenceProperty)constrainedValue;
+
+            var result = new List<string>();
+
+            if (orp != null)
+            {
+                switch (otherEnd.Multiplicity)
+                {
+                    case Multiplicity.One:
+                        if (orp.Constraints.OfType<NotNullableConstraint>().Count() == 0)
+                        {
+                            result.Add("Navigator should have NotNullableConstraint because Multiplicity of opposite RelationEnd is One");
+                        }
+                        break;
+                    case Multiplicity.ZeroOrMore:
+                        if (orp.Constraints.OfType<NotNullableConstraint>().Count() > 0)
+                        {
+                            result.Add("Navigator should not have NotNullableConstraint because Multiplicity of opposite RelationEnd is ZeroOrMore");
+                        }
+                        break;
+                    case Multiplicity.ZeroOrOne:
+                        if (orp.Constraints.OfType<NotNullableConstraint>().Count() > 0)
+                        {
+                            result.Add("Navigator should not have NotNullableConstraint because Multiplicity of opposite RelationEnd is ZeroOrOne");
+                        }
+                        break;
+                }
+
+                if (relEnd.Type == null)
+                {
+                    result.Add("RelationEnd has no Type defined yet.");
+                }
+                else if (orp.ObjectClass == null)
+                {
+                    result.Add(String.Format("Navigator should be attached to {0}",
+                        relEnd.Type));
+                }
+                else if (relEnd.Type != orp.ObjectClass)
+                {
+                    result.Add(String.Format("Navigator is attached to {0} but should be attached to {1}",
+                        orp.ObjectClass,
+                        relEnd.Type));
+                } 
+            }
+
+            return String.Join("\n", result.ToArray());
         }
 
         #endregion

@@ -77,7 +77,6 @@
     <Compile Include="Company.Interface.Designer.cs" />
     <Compile Include="CompoundObject.Interface.Designer.cs" />
     <Compile Include="CompoundObjectProperty.Interface.Designer.cs" />
-    <Compile Include="ConsistentNavigatorConstraint.Interface.Designer.cs" />
     <Compile Include="Constraint.Interface.Designer.cs" />
     <Compile Include="ConstraintInvocation.Interface.Designer.cs" />
     <Compile Include="ControlKind.Interface.Designer.cs" />
