@@ -176,7 +176,75 @@ namespace Kistl.App.Base
             }
             else
             {
-                return "Incomplete Relation";
+                return "Incomplete Relation (A or B missing)";
+            }
+        }
+
+        #endregion
+
+        #region Relation_Containment Constraint
+
+        public static bool OnIsValid_Relation_Containment(object constrainedObject, object constrainedValue)
+        {
+            if (constrainedObject == null) { throw new ArgumentNullException("constrainedObject"); }
+            var rel = (Relation)constrainedObject;
+            if (rel.A != null && rel.B != null)
+            {
+                var relType = rel.GetRelationType();
+
+                switch (rel.Containment)
+                {
+                    case ContainmentSpecification.AContainsB:
+                        if (relType == RelationType.n_m) return false;
+                        else if (relType == RelationType.one_n) return rel.B.Multiplicity.UpperBound() > 1;
+                        else if (relType == RelationType.one_one) return true;
+                        else return false;
+                    case ContainmentSpecification.BContainsA:
+                        if (relType == RelationType.n_m) return false;
+                        else if (relType == RelationType.one_n) return rel.A.Multiplicity.UpperBound() > 1;
+                        else if (relType == RelationType.one_one) return true;
+                        else return false;
+                    case ContainmentSpecification.Independent:
+                        return true;
+                    default:
+                        return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public static string OnGetErrorText_Relation_Containment(object constrainedObject, object constrainedValue)
+        {
+            if (constrainedObject == null) { throw new ArgumentNullException("constrainedObject"); }
+            var rel = (Relation)constrainedObject;
+            if (rel.A != null && rel.B != null)
+            {
+               var relType = rel.GetRelationType();
+
+                switch (rel.Containment)
+                {
+                    case ContainmentSpecification.AContainsB:
+                        if (relType == RelationType.n_m) return "N:M relations cannot be containment relations";
+                        else if (relType == RelationType.one_n) return rel.B.Multiplicity.UpperBound() > 1 ? String.Empty : "Can only contain the N-side of a 1:N relationship (which is A).";
+                        else if (relType == RelationType.one_one) return String.Empty;
+                        else return String.Format("RelationType.{0} not implemented.", relType);
+                    case ContainmentSpecification.BContainsA:
+                        if (relType == RelationType.n_m) return "N:M relations cannot be containment relations";
+                        else if (relType == RelationType.one_n) return rel.A.Multiplicity.UpperBound() > 1 ? String.Empty : "Can only contain the N-side of a 1:N relationship (which is B).";
+                        else if (relType == RelationType.one_one) return String.Empty;
+                        else return String.Format("RelationType.{0} not implemented.", relType);
+                    case ContainmentSpecification.Independent:
+                        return String.Empty;
+                    default:
+                        return String.Format("ContainmentType.{0} not implemented.", rel.Containment);
+                }
+            }
+            else
+            {
+                return "Incomplete Relation (A or B missing)";
             }
         }
 
