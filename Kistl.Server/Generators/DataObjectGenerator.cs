@@ -1,18 +1,17 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-
-using Kistl.API;
-using Kistl.API.Utils;
-using Kistl.App.Base;
-
 namespace Kistl.Server.Generators
 {
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+
+    using Kistl.API;
+    using Kistl.API.Utils;
+    using Kistl.App.Base;
+
     public abstract class BaseDataObjectGenerator
     {
-        private readonly static object _lock = new object();
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Server.Generator");
 
         // Case #1382?
@@ -31,15 +30,12 @@ namespace Kistl.Server.Generators
 
             Directory.CreateDirectory(codeBasePath);
 
-            lock (_lock)
+            // Save KeyFile
+            using (var snkSrc = typeof(BaseDataObjectGenerator).Assembly.GetManifestResourceStream("Kistl.Server.Generators.Kistl.Objects.snk"))
+            using (var snkDest = File.Open(Path.Combine(codeBasePath, "Kistl.Objects.snk"), FileMode.Create))
             {
-                // Save KeyFile
-                using (var snkSrc = typeof(BaseDataObjectGenerator).Assembly.GetManifestResourceStream("Kistl.Server.Generators.Kistl.Objects.snk"))
-                using (var snkDest = File.Open(Path.Combine(codeBasePath, "Kistl.Objects.snk"), FileMode.Create))
-                {
-                    snkDest.SetLength(0);
-                    snkSrc.CopyTo(snkDest);
-                }
+                snkDest.SetLength(0);
+                snkSrc.CopyTo(snkDest);
             }
 
             var generatedFileNames = new List<string>();
@@ -72,7 +68,7 @@ namespace Kistl.Server.Generators
             foreach (CompoundObject s in Generator.GetCompoundObjectList(ctx).OrderBy(x => x.Name))
             {
                 generatedFileNames.Add(Generate_CompoundObject(ctx, s));
-                Log.Debug("    " + s.Name);                
+                Log.Debug("    " + s.Name);
             }
 
             Log.Info("  Assemblyinfo");
