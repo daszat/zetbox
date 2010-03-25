@@ -103,6 +103,7 @@
     <Compile Include="CompoundObjectProperty.Server.Designer.cs" />
     <Compile Include="ConsistentNavigatorConstraint.Server.Designer.cs" />
     <Compile Include="Constraint.Server.Designer.cs" />
+    <Compile Include="ConstraintInvocation.Server.Designer.cs" />
     <Compile Include="ControlKind.Server.Designer.cs" />
     <Compile Include="ControlKindClass.Server.Designer.cs" />
     <Compile Include="CurrentSchema.Server.Designer.cs" />
@@ -137,6 +138,7 @@
     <Compile Include="Interface.Server.Designer.cs" />
     <Compile Include="IntParameter.Server.Designer.cs" />
     <Compile Include="IntProperty.Server.Designer.cs" />
+    <Compile Include="InvokingConstraint.Server.Designer.cs" />
     <Compile Include="IsValidIdentifierConstraint.Server.Designer.cs" />
     <Compile Include="IsValidNamespaceConstraint.Server.Designer.cs" />
     <Compile Include="Kunde.Server.Designer.cs" />

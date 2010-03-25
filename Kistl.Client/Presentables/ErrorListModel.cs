@@ -53,7 +53,7 @@ namespace Kistl.Client.Presentables
             _errors.Clear();
             foreach (var error in DataContext.AttachedObjects
                 .OfType<IDataObject>()
-                .Where(o => o.ObjectState != DataObjectState.Unmodified)
+                .Where(o => o.ObjectState == DataObjectState.Modified || o.ObjectState == DataObjectState.New) 
                 .Select(o => new { obj = o, err = o.Error })
                 .Where(tmp => !String.IsNullOrEmpty(tmp.err)))
             {

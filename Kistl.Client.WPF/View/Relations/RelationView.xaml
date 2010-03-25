@@ -32,19 +32,19 @@
                     <DockPanel>
                         <view:LabeledView DockPanel.Dock="Top"
                                           Margin="5,0,5,0"
-                                          DataContext="{Binding PropertyModelsByName[Description]}" />
+                                          DataContext="{Binding PropertyModelsByName[Description], UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}" />
 
                         <view:LabeledView DockPanel.Dock="Top"
                                           Margin="5,0,5,0"
-                                          DataContext="{Binding PropertyModelsByName[Module]}" />
+                                          DataContext="{Binding PropertyModelsByName[Module], UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}" />
 
                         <view:LabeledView DockPanel.Dock="Top"
                                           Margin="5,0,5,0"
-                                          DataContext="{Binding PropertyModelsByName[Storage]}" />
+                                          DataContext="{Binding PropertyModelsByName[Storage], UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}" />
                     
                         <view:LabeledView DockPanel.Dock="Top"
                                           Margin="5,0,5,0"
-                                          DataContext="{Binding PropertyModelsByName[Containment]}" />
+                                          DataContext="{Binding PropertyModelsByName[Containment], UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}" />
                     </DockPanel>
                 </GroupBox>
 

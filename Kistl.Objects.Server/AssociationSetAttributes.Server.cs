@@ -296,6 +296,36 @@ using Kistl.DalProvider.EF;
 
 
 	/*
+    Relation: FK_Constraint_invokes_GetErrorTextInvocation
+    A: One InvokingConstraint as Constraint
+    B: ZeroOrOne ConstraintInvocation as GetErrorTextInvocation
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_Constraint_invokes_GetErrorTextInvocation",
+    "Constraint", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.InvokingConstraint__Implementation__),
+    "GetErrorTextInvocation", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.ConstraintInvocation__Implementation__)
+    )]
+
+
+	/*
+    Relation: FK_Constraint_invokes_IsValidInvocation
+    A: One InvokingConstraint as Constraint
+    B: ZeroOrOne ConstraintInvocation as IsValidInvocation
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_Constraint_invokes_IsValidInvocation",
+    "Constraint", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.InvokingConstraint__Implementation__),
+    "IsValidInvocation", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.ConstraintInvocation__Implementation__)
+    )]
+
+
+	/*
     Relation: FK_Constraint_on_Constrained
     A: ZeroOrMore InstanceConstraint as Constraint
     B: ZeroOrOne ObjectClass as Constrained
@@ -337,6 +367,21 @@ using Kistl.DalProvider.EF;
     "Model", "FK_Constraint_was_CreatedBy",
     "Constraint", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.Constraint__Implementation__),
     "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Identity__Implementation__)
+    )]
+
+
+	/*
+    Relation: FK_ConstraintInvocation_has_TypeRef
+    A: ZeroOrMore ConstraintInvocation as ConstraintInvocation
+    B: ZeroOrOne TypeRef as TypeRef
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_ConstraintInvocation_has_TypeRef",
+    "ConstraintInvocation", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.ConstraintInvocation__Implementation__),
+    "TypeRef", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.TypeRef__Implementation__)
     )]
 
 

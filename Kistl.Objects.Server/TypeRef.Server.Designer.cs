@@ -868,6 +868,7 @@ namespace Kistl.App.Base
 				obj => obj.Parent,
 				(obj, val) => obj.Parent = val),
 			// rel: ClrObjectParameter isOf Type (4c7e0ac7-eb8a-4304-85e7-fcc358cb639c)
+			// rel: ConstraintInvocation has TypeRef (ed423e87-e04d-4753-ba99-c186a7a12242)
 			// rel: MethodInvocation has Implementor (dc9013af-8758-40b4-8f52-c2c8683a13e0)
 			// rel: Descriptor has PresentableModelRef (9d771d87-3b28-4e5e-be33-ea71028e1720)
 			// rel: PropertyInvocation has Implementor (7fa78e0e-c9bb-4ce2-ae74-262174f48b45)

@@ -186,6 +186,11 @@
 <ScalarProperty Name="Min" ColumnName="Min" />
 	    </MappingFragment>
       </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.InvokingConstraint)">
+	    <MappingFragment StoreEntitySet="InvokingConstraint">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+	    </MappingFragment>
+      </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Model.IsValidIdentifierConstraint)">
 	    <MappingFragment StoreEntitySet="IsValidIdentifierConstraint">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
@@ -211,6 +216,15 @@
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="MaxLength" ColumnName="MaxLength" />
 <ScalarProperty Name="MinLength" ColumnName="MinLength" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ConstraintInvocation">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.ConstraintInvocation)">
+	    <MappingFragment StoreEntitySet="ConstraintInvocation">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+<ScalarProperty Name="MemberName" ColumnName="MemberName" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1916,6 +1930,40 @@
       <Condition ColumnName="fk_ConstrainedProperty" IsNull="false"/>
     </AssociationSetMapping>
     <!--
+    Relation: FK_Constraint_invokes_GetErrorTextInvocation
+    A: One InvokingConstraint as Constraint
+    B: ZeroOrOne ConstraintInvocation as GetErrorTextInvocation
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_Constraint_invokes_GetErrorTextInvocation"
+                           TypeName="Model.FK_Constraint_invokes_GetErrorTextInvocation"
+                           StoreEntitySet="InvokingConstraint" >
+      <EndProperty Name="GetErrorTextInvocation">
+        <ScalarProperty Name="ID" ColumnName="fk_GetErrorTextInvocation"/>
+      </EndProperty>
+      <EndProperty Name="Constraint">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_GetErrorTextInvocation" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_Constraint_invokes_IsValidInvocation
+    A: One InvokingConstraint as Constraint
+    B: ZeroOrOne ConstraintInvocation as IsValidInvocation
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_Constraint_invokes_IsValidInvocation"
+                           TypeName="Model.FK_Constraint_invokes_IsValidInvocation"
+                           StoreEntitySet="InvokingConstraint" >
+      <EndProperty Name="IsValidInvocation">
+        <ScalarProperty Name="ID" ColumnName="fk_IsValidInvocation"/>
+      </EndProperty>
+      <EndProperty Name="Constraint">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_IsValidInvocation" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
     Relation: FK_Constraint_on_Constrained
     A: ZeroOrMore InstanceConstraint as Constraint
     B: ZeroOrOne ObjectClass as Constrained
@@ -1965,6 +2013,23 @@
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="fk_CreatedBy" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_ConstraintInvocation_has_TypeRef
+    A: ZeroOrMore ConstraintInvocation as ConstraintInvocation
+    B: ZeroOrOne TypeRef as TypeRef
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_ConstraintInvocation_has_TypeRef"
+                           TypeName="Model.FK_ConstraintInvocation_has_TypeRef"
+                           StoreEntitySet="ConstraintInvocation" >
+      <EndProperty Name="TypeRef">
+        <ScalarProperty Name="ID" ColumnName="fk_TypeRef"/>
+      </EndProperty>
+      <EndProperty Name="ConstraintInvocation">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_TypeRef" IsNull="false"/>
     </AssociationSetMapping>
     <!--
     Relation: FK_Control_isof_Kind

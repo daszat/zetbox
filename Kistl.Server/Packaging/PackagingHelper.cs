@@ -15,7 +15,8 @@ namespace Kistl.Server.Packaging
     {
         public static IList<IPersistenceObject> GetMetaObjects(IKistlContext ctx, Module module)
         {
-            IList<IPersistenceObject> result = new List<IPersistenceObject>();
+            var result = new List<IPersistenceObject>();
+            // break reference for linq
             int moduleID = module.ID;
 
             AddMetaObjects(result, ctx.GetQuery<Module>().Where(i => i.ID == moduleID).OrderBy(m => m.Name).ThenBy(i => i.ExportGuid));
@@ -45,6 +46,12 @@ namespace Kistl.Server.Packaging
             // TODO: Add Module to Constraint - or should that not be changable by other modules?
             AddMetaObjects(result, ctx.GetQuery<Constraint>().Where(i => i.ConstrainedProperty.Module.ID == moduleID).ToList().AsQueryable() // local sorting because of GetInterfaceType
                 .OrderBy(i => i.ConstrainedProperty.ObjectClass.Name).ThenBy(i => i.ConstrainedProperty.Name).ThenBy(i => i.GetInterfaceType().Type.Name).ThenBy(i => i.ExportGuid));
+            foreach (var invokingConstraint in ctx.GetQuery<InvokingConstraint>().Where(i => i.ConstrainedProperty.Module.ID == moduleID).ToList().AsQueryable() // local sorting because of GetInterfaceType
+                .OrderBy(i => i.ConstrainedProperty.ObjectClass.Name).ThenBy(i => i.ConstrainedProperty.Name).ThenBy(i => i.GetInterfaceType().Type.Name).ThenBy(i => i.ExportGuid))
+            {
+                result.Add(invokingConstraint.IsValidInvocation);
+                result.Add(invokingConstraint.GetErrorTextInvocation);
+            }
 
             // TODO: Add Module to DefaultPropertyValue - or should that not be changable by other modules?
             AddMetaObjects(result, ctx.GetQuery<DefaultPropertyValue>().Where(i => i.Property.Module.ID == moduleID)
@@ -90,7 +97,7 @@ namespace Kistl.Server.Packaging
             return result;
         }
 
-        private static void AddMetaObjects<T>(IList<IPersistenceObject> result, IOrderedQueryable<T> objects)
+        private static void AddMetaObjects<T>(List<IPersistenceObject> result, IOrderedQueryable<T> objects)
             where T : IPersistenceObject
         {
             // TODO: always do a final stabilisation sort by ExportGuid

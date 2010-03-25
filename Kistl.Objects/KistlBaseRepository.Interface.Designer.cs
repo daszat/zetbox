@@ -236,6 +236,16 @@ namespace Kistl.App.Base
 			}
 		}
 		
+		/// <summary>List of all InvokingConstraint</summary>
+		/// 
+		public IQueryable<InvokingConstraint> InvokingConstraints
+		{ 
+			get
+			{
+				return Context.GetQuery<InvokingConstraint>();
+			}
+		}
+		
 		/// <summary>List of all IntProperty</summary>
 		/// Metadefinition Object for Int Properties.
 		public IQueryable<IntProperty> IntProperties
@@ -423,6 +433,16 @@ namespace Kistl.App.Base
 			get
 			{
 				return Context.GetQuery<CurrentSchema>();
+			}
+		}
+		
+		/// <summary>List of all ConstraintInvocation</summary>
+		/// 
+		public IQueryable<ConstraintInvocation> ConstraintInvocations
+		{ 
+			get
+			{
+				return Context.GetQuery<ConstraintInvocation>();
 			}
 		}
 		

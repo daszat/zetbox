@@ -22,6 +22,7 @@
     <EntitySet Name="Blob" EntityType="Model.Store.Blob" Table="Blobs"/>
     <EntitySet Name="Company" EntityType="Model.Store.Company" Table="Companies"/>
     <EntitySet Name="Constraint" EntityType="Model.Store.Constraint" Table="Constraints"/>
+    <EntitySet Name="ConstraintInvocation" EntityType="Model.Store.ConstraintInvocation" Table="ConstraintInvocations"/>
     <EntitySet Name="ControlKind" EntityType="Model.Store.ControlKind" Table="ControlKinds"/>
     <EntitySet Name="CurrentSchema" EntityType="Model.Store.CurrentSchema" Table="CurrentSchema"/>
     <EntitySet Name="DataType" EntityType="Model.Store.DataType" Table="DataTypes"/>
@@ -247,6 +248,12 @@
     <AssociationSet Name="FK_IntProperty_ValueTypeProperty_ID" Association="Model.Store.FK_IntProperty_ValueTypeProperty_ID" >
       <End Role="A_ValueTypeProperty" EntitySet="ValueTypeProperty" />
       <End Role="B_IntProperty" EntitySet="IntProperty" />
+    </AssociationSet>
+    <EntitySet Name="InvokingConstraint" EntityType="Model.Store.InvokingConstraint" Table="InvokingConstraints"/>
+    <!-- inherits from Constraint -->
+    <AssociationSet Name="FK_InvokingConstraint_Constraint_ID" Association="Model.Store.FK_InvokingConstraint_Constraint_ID" >
+      <End Role="A_Constraint" EntitySet="Constraint" />
+      <End Role="B_InvokingConstraint" EntitySet="InvokingConstraint" />
     </AssociationSet>
     <EntitySet Name="IsValidIdentifierConstraint" EntityType="Model.Store.IsValidIdentifierConstraint" Table="IsValidIdentifierConstraints"/>
     <!-- inherits from Constraint -->
@@ -781,6 +788,14 @@
       <End Role="ConstrainedProperty" EntitySet="Property" />
       <End Role="Constraints" EntitySet="Constraint" />
     </AssociationSet>
+    <AssociationSet Name="FK_Constraint_invokes_GetErrorTextInvocation" Association="Model.Store.FK_Constraint_invokes_GetErrorTextInvocation" >
+      <End Role="Constraint" EntitySet="InvokingConstraint" />
+      <End Role="GetErrorTextInvocation" EntitySet="ConstraintInvocation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Constraint_invokes_IsValidInvocation" Association="Model.Store.FK_Constraint_invokes_IsValidInvocation" >
+      <End Role="Constraint" EntitySet="InvokingConstraint" />
+      <End Role="IsValidInvocation" EntitySet="ConstraintInvocation" />
+    </AssociationSet>
     <AssociationSet Name="FK_Constraint_on_Constrained" Association="Model.Store.FK_Constraint_on_Constrained" >
       <End Role="Constraint" EntitySet="InstanceConstraint" />
       <End Role="Constrained" EntitySet="ObjectClass" />
@@ -792,6 +807,10 @@
     <AssociationSet Name="FK_Constraint_was_CreatedBy" Association="Model.Store.FK_Constraint_was_CreatedBy" >
       <End Role="Constraint" EntitySet="Constraint" />
       <End Role="CreatedBy" EntitySet="Identity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ConstraintInvocation_has_TypeRef" Association="Model.Store.FK_ConstraintInvocation_has_TypeRef" >
+      <End Role="ConstraintInvocation" EntitySet="ConstraintInvocation" />
+      <End Role="TypeRef" EntitySet="TypeRef" />
     </AssociationSet>
     <AssociationSet Name="FK_Control_isof_Kind" Association="Model.Store.FK_Control_isof_Kind" >
       <End Role="Control" EntitySet="ViewDescriptor" />
@@ -1402,6 +1421,16 @@
     <Property Name="Reason" Type="nvarchar" MaxLength="400" Nullable="true" />
   </EntityType>
 	
+  <EntityType Name="ConstraintInvocation">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_TypeRef" Type="int" />
+    <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="MemberName" Type="nvarchar" Nullable="false" />
+  </EntityType>
+	
   <EntityType Name="ControlKind">
     <Key>
       <PropertyRef Name="ID" />
@@ -1703,6 +1732,15 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" />
+  </EntityType>
+	
+  <EntityType Name="InvokingConstraint">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="fk_GetErrorTextInvocation" Type="int" />
+    <Property Name="fk_IsValidInvocation" Type="int" />
   </EntityType>
 	
   <EntityType Name="IsValidIdentifierConstraint">
@@ -3274,6 +3312,34 @@
   </Association>
 
 
+  <Association Name="FK_Constraint_invokes_GetErrorTextInvocation">
+    <End Role="GetErrorTextInvocation" Type="Model.Store.ConstraintInvocation" Multiplicity="0..1" />
+    <End Role="Constraint" Type="Model.Store.InvokingConstraint" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GetErrorTextInvocation">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Constraint">
+        <PropertyRef Name="fk_GetErrorTextInvocation" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_Constraint_invokes_IsValidInvocation">
+    <End Role="IsValidInvocation" Type="Model.Store.ConstraintInvocation" Multiplicity="0..1" />
+    <End Role="Constraint" Type="Model.Store.InvokingConstraint" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="IsValidInvocation">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Constraint">
+        <PropertyRef Name="fk_IsValidInvocation" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
   <Association Name="FK_Constraint_on_Constrained">
     <End Role="Constrained" Type="Model.Store.ObjectClass" Multiplicity="0..1" />
     <End Role="Constraint" Type="Model.Store.InstanceConstraint" Multiplicity="*" />
@@ -3311,6 +3377,20 @@
       </Principal>
       <Dependent Role="Constraint">
         <PropertyRef Name="fk_CreatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_ConstraintInvocation_has_TypeRef">
+    <End Role="TypeRef" Type="Model.Store.TypeRef" Multiplicity="0..1" />
+    <End Role="ConstraintInvocation" Type="Model.Store.ConstraintInvocation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TypeRef">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ConstraintInvocation">
+        <PropertyRef Name="fk_TypeRef" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -4950,6 +5030,18 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="B_IntProperty">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InvokingConstraint_Constraint_ID">
+    <End Role="A_Constraint" Type="Model.Store.Constraint" Multiplicity="1" />
+    <End Role="B_InvokingConstraint" Type="Model.Store.InvokingConstraint" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="A_Constraint">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_InvokingConstraint">
         <PropertyRef Name="ID" />
       </Dependent>
     </ReferentialConstraint>

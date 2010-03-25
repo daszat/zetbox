@@ -79,6 +79,7 @@
     <Compile Include="CompoundObjectProperty.Interface.Designer.cs" />
     <Compile Include="ConsistentNavigatorConstraint.Interface.Designer.cs" />
     <Compile Include="Constraint.Interface.Designer.cs" />
+    <Compile Include="ConstraintInvocation.Interface.Designer.cs" />
     <Compile Include="ControlKind.Interface.Designer.cs" />
     <Compile Include="ControlKindClass.Interface.Designer.cs" />
     <Compile Include="CurrentSchema.Interface.Designer.cs" />
@@ -113,6 +114,7 @@
     <Compile Include="Interface.Interface.Designer.cs" />
     <Compile Include="IntParameter.Interface.Designer.cs" />
     <Compile Include="IntProperty.Interface.Designer.cs" />
+    <Compile Include="InvokingConstraint.Interface.Designer.cs" />
     <Compile Include="IsValidIdentifierConstraint.Interface.Designer.cs" />
     <Compile Include="IsValidNamespaceConstraint.Interface.Designer.cs" />
     <Compile Include="Kunde.Interface.Designer.cs" />
