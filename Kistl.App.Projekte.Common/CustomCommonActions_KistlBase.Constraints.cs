@@ -372,5 +372,55 @@ namespace Kistl.App.Base
         }
 
         #endregion
+
+        #region Property_Name_Unique Constraint
+
+        public static bool OnIsValid_Property_Name_Unique(object constrainedObject, object constrainedValue)
+        {
+            var prop = (Property)constrainedObject;
+            var name = (string)constrainedValue;
+
+            var dataType = prop.ObjectClass;
+            while (dataType != null)
+            {
+                if (dataType.Properties.Where(p => p != prop && p.Name == name).Count() > 0)
+                {
+                    return false;
+                }
+
+                var klass = dataType as ObjectClass;
+                if (klass != null)
+                {
+                    dataType = klass.BaseObjectClass;
+                }
+            }
+            return true;
+        }
+
+        public static string OnGetErrorText_Property_Name_Unique(object constrainedObject, object constrainedValue)
+        {
+            var prop = (Property)constrainedObject;
+            var name = (string)constrainedValue;
+
+            var dataType = prop.ObjectClass;
+            while (dataType != null)
+            {
+                var collidingProperties = dataType.Properties.Where(p => p != prop && p.Name == name).ToList();
+
+                if (collidingProperties.Count > 0)
+                {
+                    return String.Format("Property name '{0}' collides with '{1}.{2}'", name, dataType, collidingProperties.First());
+                }
+
+                var klass = dataType as ObjectClass;
+                if (klass != null)
+                {
+                    dataType = klass.BaseObjectClass;
+                }
+            }
+            return String.Empty;
+        }
+
+        #endregion
     }
 }
