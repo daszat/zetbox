@@ -1,3 +1,4 @@
+#define EAGERLOADING
 
 [assembly: global::System.Data.Objects.DataClasses.EdmSchema]
 
@@ -175,41 +176,42 @@ namespace Kistl.DalProvider.EF
             return result.AsQueryable().Cast<IPersistenceObject>();
         }
 
-        #region Include
+        #region EagerLoading
+#if EAGERLOADING
         private static Dictionary<Type, IList<string>> _includeCache = new Dictionary<Type, IList<string>>();
 
-        private ObjectQuery<BaseServerDataObject_EntityFramework> AddIncludes<T>(ObjectQuery<BaseServerDataObject_EntityFramework> src)
+        private ObjectQuery<BaseServerDataObject_EntityFramework> AddEagerLoading<T>(ObjectQuery<BaseServerDataObject_EntityFramework> src)
         {
-            return src;
-            //lock (_lock)
-            //{
-            //    if (!_includeCache.ContainsKey(typeof(T)))
-            //    {
-            //        var lst = new List<string>();
-            //        var objClass = metaDataResolver.GetObjectClass(new InterfaceType(typeof(T)));
-            //        if(objClass == null) return src;
-            //        GetIncludeProperties(lst, objClass);
-            //        _includeCache[typeof(T)] = lst;
-            //    }
-            //    foreach (var incl in _includeCache[typeof(T)])
-            //    {
-            //        src = src.Include(incl);
-            //    }
-            //    return src;
-            //}
+            lock (_lock)
+            {
+                if (!_includeCache.ContainsKey(typeof(T)))
+                {
+                    var lst = new List<string>();
+                    var objClass = metaDataResolver.GetObjectClass(new InterfaceType(typeof(T)));
+                    if (objClass == null) return src;
+                    GetIncludeProperties(lst, objClass);
+                    _includeCache[typeof(T)] = lst;
+                }
+                foreach (var incl in _includeCache[typeof(T)])
+                {
+                    src = src.Include(incl);
+                }
+                return src;
+            }
         }
 
-        //private void GetIncludeProperties(List<string> lst, ObjectClass objClass)
-        //{
-        //    foreach (var cls in objClass.GetObjectHierarchie())
-        //    {
-        //        foreach (var prop in cls.Properties.OfType<ObjectReferenceProperty>().Where(p => p.EagerLoading))
-        //        {
-        //            if (prop.GetIsList()) continue;
-        //            lst.Add(prop.Name + Kistl.API.Helper.ImplementationSuffix);
-        //        }
-        //    }
-        //}
+        private void GetIncludeProperties(List<string> lst, ObjectClass objClass)
+        {
+            foreach (var cls in objClass.GetObjectHierarchie())
+            {
+                foreach (var prop in cls.Properties.OfType<ObjectReferenceProperty>().Where(p => p.EagerLoading))
+                {
+                    if (prop.GetIsList()) continue;
+                    lst.Add(prop.Name + Kistl.API.Helper.ImplementationSuffix);
+                }
+            }
+        }
+#endif
         #endregion
 
         /// <summary>
@@ -224,9 +226,12 @@ namespace Kistl.DalProvider.EF
             if (!_table.ContainsKey(type))
             {
                 var query = _ctx.CreateQuery<BaseServerDataObject_EntityFramework>("[" + GetEntityName(type) + "]");
+#if EAGERLOADING
+                query = AddEagerLoading<T>(query);
+#endif
                 _table[type] = new QueryTranslator<T>(
                     metaDataResolver, this.identity,
-                    AddIncludes<T>(query), this);
+                    query, this);
             }
 
             // This doesn't work without "OfType"
@@ -244,9 +249,12 @@ namespace Kistl.DalProvider.EF
             if (!_table.ContainsKey(type))
             {
                 var query = _ctx.CreateQuery<BaseServerDataObject_EntityFramework>("[" + GetEntityName(type) + "]");
+#if EAGERLOADING
+                query = AddEagerLoading<T>(query);
+#endif
                 _table[type] = new QueryTranslator<T>(
                     metaDataResolver, this.identity,
-                    AddIncludes<T>(query), this);
+                    query, this);
             }
 
             // This doesn't work without "OfType"
