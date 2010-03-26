@@ -1,13 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Kistl.API;
-using Kistl.App.Extensions;
 
 namespace Kistl.App.Base
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+
+    using Kistl.API;
+    using Kistl.App.Extensions;
+
     public static partial class CustomCommonActions_KistlBase
     {
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Common.CustomActions");
@@ -222,7 +223,7 @@ namespace Kistl.App.Base
             var rel = (Relation)constrainedObject;
             if (rel.A != null && rel.B != null)
             {
-               var relType = rel.GetRelationType();
+                var relType = rel.GetRelationType();
 
                 switch (rel.Containment)
                 {
@@ -330,10 +331,44 @@ namespace Kistl.App.Base
                     result.Add(String.Format("Navigator is attached to {0} but should be attached to {1}",
                         orp.ObjectClass,
                         relEnd.Type));
-                } 
+                }
             }
 
             return String.Join("\n", result.ToArray());
+        }
+
+        #endregion
+
+        #region RelationEnd_HasPersistentOrder Constraint
+
+        public static bool OnIsValid_RelationEnd_HasPersistentOrder(object constrainedObject, object constrainedValue)
+        {
+            var relEnd = (RelationEnd)constrainedObject;
+            var hasPersistentOrder = (bool)constrainedValue;
+
+            if (hasPersistentOrder && relEnd.Multiplicity != Multiplicity.ZeroOrMore)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        public static string OnGetErrorText_RelationEnd_HasPersistentOrder(object constrainedObject, object constrainedValue)
+        {
+            var relEnd = (RelationEnd)constrainedObject;
+            var hasPersistentOrder = (bool)constrainedValue;
+
+            if (hasPersistentOrder && relEnd.Multiplicity != Multiplicity.ZeroOrMore)
+            {
+                return String.Format("Can only require persistent order when multiplicity is ZeroOrMore, but multiplicity is {0}", relEnd.Multiplicity);
+            }
+            else
+            {
+                return String.Empty;
+            }
         }
 
         #endregion
