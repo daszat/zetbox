@@ -253,7 +253,6 @@ namespace Kistl.App.GUI
 				null,
 				obj => obj.RequestedWidth,
 				(obj, val) => obj.RequestedWidth = val),
-			// rel: PresentableModelDescriptor displayedInGridBy DefaultGridCellKind (0a03215f-1c1a-4a44-892d-86642eefe9f1)
 		};
 		
 		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)

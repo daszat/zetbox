@@ -16,10 +16,10 @@ namespace Kistl.Client.WPF
         {
             if (appCtx == null) { throw new ArgumentNullException("appCtx", "Missing GUI Application Context"); }
 
-            bool _timeRecorder = args.Contains("-timerecorder");
+            var debugger = appCtx.Factory.CreateSpecificModel<KistlDebuggerAsModel>(KistlContext.GetContext());
+            appCtx.Factory.ShowModel(debugger, true);
 
-            //var debugger = AppContext.Factory.CreateSpecificModel<KistlDebuggerAsModel>(KistlContext.GetContext());
-            //AppContext.Factory.ShowModel(debugger, true);
+            bool _timeRecorder = args.Contains("-timerecorder");
 
             App.FixupDatabase();
 
@@ -36,6 +36,7 @@ namespace Kistl.Client.WPF
             // ugh?
             LauncherKind launcher = appCtx.TransientContext.Create<LauncherKind>();
             appCtx.Factory.ShowModel(initialWorkspace, launcher, true);
+
         }
     }
 }

@@ -186,6 +186,16 @@ namespace Kistl.App.GUI
 			}
 		}
 		
+		/// <summary>List of all KistlDebuggerKind</summary>
+		/// Control Kind for Kistl Context Debugger
+		public IQueryable<KistlDebuggerKind> KistlDebuggerKinds
+		{ 
+			get
+			{
+				return Context.GetQuery<KistlDebuggerKind>();
+			}
+		}
+		
 		/// <summary>List of all Icon</summary>
 		/// 
 		public IQueryable<Icon> Icons

@@ -149,17 +149,12 @@ namespace Kistl.Client.Presentables
 
         #region Public Interface
 
-        private ObservableCollection<DataObjectModel> _objCache = new ObservableCollection<DataObjectModel>();
-        private ReadOnlyObservableCollection<DataObjectModel> _objView;
-        public ReadOnlyObservableCollection<DataObjectModel> AttachedObjects
+        private ObservableCollection<string> _objCache = new ObservableCollection<string>();
+        public ObservableCollection<string> AttachedObjects
         {
             get
             {
-                if (_objView == null)
-                {
-                    _objView = new ReadOnlyObservableCollection<DataObjectModel>(_objCache);
-                }
-                return _objView;
+                return _objCache;
             }
         }
 
@@ -220,7 +215,7 @@ namespace Kistl.Client.Presentables
         private void SyncObjects(IDataObject[] objs)
         {
             _objCache.Clear();
-            objs.ForEach(o => _objCache.Add((DataObjectModel)Factory.CreateDefaultModel(DataContext, o)));
+            objs.ForEach(o => _objCache.Add(string.Format("({0}) {1}", o.ID, o.GetInterfaceType().Type.FullName)));
             Count = objs.Length;
         }
 

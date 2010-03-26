@@ -1371,7 +1371,7 @@ using Kistl.DalProvider.EF;
 
 	/*
     Relation: FK_PresentableModelDescriptor_displayedInGridBy_DefaultGridCellKind
-    A: ZeroOrMore PresentableModelDescriptor as PresentableModelDescriptor
+    A: ZeroOrOne PresentableModelDescriptor as PresentableModelDescriptor
     B: ZeroOrOne ControlKind as DefaultGridCellKind
     Preferred Storage: MergeIntoA
 	*/
@@ -1379,7 +1379,7 @@ using Kistl.DalProvider.EF;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_PresentableModelDescriptor_displayedInGridBy_DefaultGridCellKind",
-    "PresentableModelDescriptor", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.PresentableModelDescriptor__Implementation__),
+    "PresentableModelDescriptor", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.GUI.PresentableModelDescriptor__Implementation__),
     "DefaultGridCellKind", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.GUI.ControlKind__Implementation__)
     )]
 

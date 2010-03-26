@@ -261,6 +261,12 @@
       <End Role="A_IsValidIdentifierConstraint" EntitySet="IsValidIdentifierConstraint" />
       <End Role="B_IsValidNamespaceConstraint" EntitySet="IsValidNamespaceConstraint" />
     </AssociationSet>
+    <EntitySet Name="KistlDebuggerKind" EntityType="Model.Store.KistlDebuggerKind" Table="KistlDebuggerKinds"/>
+    <!-- inherits from ControlKind -->
+    <AssociationSet Name="FK_KistlDebuggerKind_ControlKind_ID" Association="Model.Store.FK_KistlDebuggerKind_ControlKind_ID" >
+      <End Role="A_ControlKind" EntitySet="ControlKind" />
+      <End Role="B_KistlDebuggerKind" EntitySet="KistlDebuggerKind" />
+    </AssociationSet>
     <EntitySet Name="LabelKind" EntityType="Model.Store.LabelKind" Table="LabelKinds"/>
     <!-- inherits from ControlKind -->
     <AssociationSet Name="FK_LabelKind_ControlKind_ID" Association="Model.Store.FK_LabelKind_ControlKind_ID" >
@@ -1738,6 +1744,13 @@
   </EntityType>
 	
   <EntityType Name="IsValidNamespaceConstraint">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+  </EntityType>
+	
+  <EntityType Name="KistlDebuggerKind">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
@@ -5041,6 +5054,18 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="B_IsValidNamespaceConstraint">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_KistlDebuggerKind_ControlKind_ID">
+    <End Role="A_ControlKind" Type="Model.Store.ControlKind" Multiplicity="1" />
+    <End Role="B_KistlDebuggerKind" Type="Model.Store.KistlDebuggerKind" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="A_ControlKind">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_KistlDebuggerKind">
         <PropertyRef Name="ID" />
       </Dependent>
     </ReferentialConstraint>

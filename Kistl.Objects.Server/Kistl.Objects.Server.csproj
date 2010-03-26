@@ -140,6 +140,7 @@
     <Compile Include="InvokingConstraint.Server.Designer.cs" />
     <Compile Include="IsValidIdentifierConstraint.Server.Designer.cs" />
     <Compile Include="IsValidNamespaceConstraint.Server.Designer.cs" />
+    <Compile Include="KistlDebuggerKind.Server.Designer.cs" />
     <Compile Include="Kunde.Server.Designer.cs" />
     <Compile Include="LabelKind.Server.Designer.cs" />
     <Compile Include="LauncherKind.Server.Designer.cs" />

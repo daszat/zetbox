@@ -271,6 +271,11 @@
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 	    </MappingFragment>
       </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.KistlDebuggerKind)">
+	    <MappingFragment StoreEntitySet="KistlDebuggerKind">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+	    </MappingFragment>
+      </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Model.LabelKind)">
 	    <MappingFragment StoreEntitySet="LabelKind">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
@@ -2980,7 +2985,7 @@
     </AssociationSetMapping>
     <!--
     Relation: FK_PresentableModelDescriptor_displayedInGridBy_DefaultGridCellKind
-    A: ZeroOrMore PresentableModelDescriptor as PresentableModelDescriptor
+    A: ZeroOrOne PresentableModelDescriptor as PresentableModelDescriptor
     B: ZeroOrOne ControlKind as DefaultGridCellKind
     Preferred Storage: MergeIntoA
     -->

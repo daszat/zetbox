@@ -10,40 +10,55 @@
         WindowStyle="ToolWindow"
         ShowInTaskbar="False">
     <Window.Resources>
-        <HierarchicalDataTemplate DataType="{x:Type client:KistlContextModel}"
-                                  ItemsSource="{Binding AttachedObjects}"
-                                  ItemTemplateSelector="{StaticResource listItemTemplateSelector}">
+        <DataTemplate DataType="{x:Type client:KistlContextModel}">
             <StackPanel Orientation="Vertical">
                 <TextBlock Text="{Binding Count, Converter={StaticResource FormattingConverter}, ConverterParameter='Count: {0}'}" />
                 <Expander Header="Created at">
-                    <TextBlock Text="{Binding CreatedAt}" />
+                    <TextBlock Text="{Binding CreatedAt}" Margin="10,0,0,0" />
                 </Expander>
                 <Expander Header="Disposed at">
-                    <TextBlock Text="{Binding DisposedAt}" />
+                    <TextBlock Text="{Binding DisposedAt}"  Margin="10,0,0,0" />
                 </Expander>
             </StackPanel>
-        </HierarchicalDataTemplate>
+        </DataTemplate>
     </Window.Resources>
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="5px" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <DockPanel Grid.Row="0">
+        <DockPanel Grid.Row="0" Grid.Column="0">
             <TextBlock DockPanel.Dock="Top"
                        HorizontalAlignment="Center"
                        Text="{Binding ActiveContexts.Count, Converter={StaticResource FormattingConverter}, ConverterParameter='Active Contexts: {0}'}" />
-            <TreeView ItemsSource="{Binding ActiveContexts}"
+            <ListBox ItemsSource="{Binding ActiveContexts}" 
+                      x:Name="lstActiveContexts" 
+                      IsSynchronizedWithCurrentItem="True"
                       BorderThickness="0" />
         </DockPanel>
-        <GridSplitter Grid.Row="1" />
-        <DockPanel Grid.Row="2">
+        <ListBox Grid.Row="0" Grid.Column="1" 
+                 DataContext="{Binding ElementName=lstActiveContexts, Path=Items}" 
+                 ItemsSource="{Binding Path=AttachedObjects}" 
+                 IsSynchronizedWithCurrentItem="True" />
+        <GridSplitter Grid.Row="1" Grid.ColumnSpan="2" />
+        <DockPanel Grid.Row="2" Grid.Column="0">
             <TextBlock DockPanel.Dock="Top"
                        HorizontalAlignment="Center"
                        Text="{Binding DisposedContexts.Count, Converter={StaticResource FormattingConverter}, ConverterParameter='Disposed Contexts: {0}'}" />
-            <TreeView ItemsSource="{Binding DisposedContexts}"
+            <ListBox ItemsSource="{Binding DisposedContexts}" 
+                      x:Name="lstDisposedContexts" 
+                      IsSynchronizedWithCurrentItem="True"
                       BorderThickness="0" />
         </DockPanel>
+        <ListBox Grid.Row="2" Grid.Column="1" 
+                 DataContext="{Binding ElementName=lstDisposedContexts, Path=Items}" 
+                 ItemsSource="{Binding Path=AttachedObjects}" 
+                 IsSynchronizedWithCurrentItem="True">
+        </ListBox>
     </Grid>
 </Window>

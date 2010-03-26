@@ -1979,6 +1979,8 @@
   </EntityType>
   <EntityType Name="IsValidNamespaceConstraint" BaseType="Model.IsValidIdentifierConstraint">
   </EntityType>
+  <EntityType Name="KistlDebuggerKind" BaseType="Model.ControlKind">
+  </EntityType>
   <EntityType Name="LabelKind" BaseType="Model.ControlKind">
   </EntityType>
   <EntityType Name="LauncherKind" BaseType="Model.ControlKind">
@@ -3561,7 +3563,7 @@
   <Association Name="FK_PresentableModelDescriptor_displayedInGridBy_DefaultGridCellKind" >
     <End Role="PresentableModelDescriptor"
          Type="Model.PresentableModelDescriptor" 
-         Multiplicity="*" />
+         Multiplicity="0..1" />
     <End Role="DefaultGridCellKind"
          Type="Model.ControlKind" 
          Multiplicity="0..1" />

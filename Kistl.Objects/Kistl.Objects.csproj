@@ -116,6 +116,7 @@
     <Compile Include="InvokingConstraint.Interface.Designer.cs" />
     <Compile Include="IsValidIdentifierConstraint.Interface.Designer.cs" />
     <Compile Include="IsValidNamespaceConstraint.Interface.Designer.cs" />
+    <Compile Include="KistlDebuggerKind.Interface.Designer.cs" />
     <Compile Include="Kunde.Interface.Designer.cs" />
     <Compile Include="LabelKind.Interface.Designer.cs" />
     <Compile Include="LauncherKind.Interface.Designer.cs" />
