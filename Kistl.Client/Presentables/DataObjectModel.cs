@@ -1,25 +1,27 @@
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Text;
-
-using Kistl.API;
-using Kistl.API.Utils;
-using Kistl.App.Base;
-using Kistl.App.Extensions;
-using Kistl.App.GUI;
 
 namespace Kistl.Client.Presentables
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Collections.Specialized;
+    using System.ComponentModel;
+    using System.Diagnostics;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+
+    using Kistl.API;
+    using Kistl.API.Utils;
+    using Kistl.App.Base;
+    using Kistl.App.Extensions;
+    using Kistl.App.GUI;
+
     /// <summary>
     /// Proxies a whole IDataObject
     /// </summary>
     public class DataObjectModel
-        : PresentableModel
+        : PresentableModel, IDataErrorInfo
     {
         public DataObjectModel(
             IGuiApplicationContext appCtx, IKistlContext dataCtx,
@@ -381,11 +383,41 @@ namespace Kistl.Client.Presentables
             if (e.PropertyName == "ID")
                 OnPropertyChanged("ID");
 
+            // propagate updates for IDataErrorInfo
+            OnPropertyChanged("PropertyModels");
+            OnPropertyChanged("PropertyModelsByName");
+            OnPropertyChanged("PropertyGroups");
+            OnPropertyChanged("PropertyGroupsByName");
+
             UpdateViewCache();
             // all updates done
         }
 
         #endregion
 
+        #region IDataErrorInfo Members
+
+        public string Error
+        {
+            get { return String.Join("\n", PropertyModels.OfType<IDataErrorInfo>().Select(idei => idei.Error).Where(s => !String.IsNullOrEmpty(s)).ToArray()); }
+        }
+
+        public string this[string columnName]
+        {
+            get
+            {
+                if (PropertyModelsByName.ContainsKey(columnName))
+                {
+                    var idei = PropertyModelsByName[columnName] as IDataErrorInfo;
+                    if (idei != null)
+                    {
+                        return idei.Error;
+                    }
+                }
+                return String.Empty;
+            }
+        }
+
+        #endregion
     }
 }

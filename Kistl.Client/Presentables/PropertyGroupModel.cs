@@ -1,20 +1,22 @@
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-
-using Kistl.API;
-using Kistl.API.Utils;
 
 namespace Kistl.Client.Presentables
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Collections.Specialized;
+    using System.ComponentModel;
+    using System.Linq;
+    using System.Text;
+
+    using Kistl.API;
+    using Kistl.API.Utils;
 
     /// <summary>
     /// Models a group of Property(Models)
     /// </summary>
     public class PropertyGroupModel
-        : PresentableModel
+        : PresentableModel, IDataErrorInfo
     {
         private string _title;
         private ObservableCollection<PresentableModel> _properties;
@@ -27,6 +29,11 @@ namespace Kistl.Client.Presentables
         {
             _title = title;
             _properties = new ObservableCollection<PresentableModel>(obj);
+            _properties.CollectionChanged += PropertyListChanged;
+            foreach (var prop in _properties)
+            {
+                prop.PropertyChanged += AnyPropertyChangedHandler;
+            }
         }
 
         #region Public Interface
@@ -51,8 +58,60 @@ namespace Kistl.Client.Presentables
         {
             get { return Title; }
         }
-        
+
         #endregion
 
+        #region IDataErrorInfo Members
+
+        public string Error
+        {
+            get { return this["PropertyModels"]; }
+        }
+
+        public string this[string columnName]
+        {
+            get
+            {
+                switch (columnName)
+                {
+                    case "Title":
+                    case "PropertyModels":
+                        return String.Join("\n", PropertyModels.OfType<IDataErrorInfo>().Select(idei => idei.Error).Where(s => !String.IsNullOrEmpty(s)).ToArray());
+                    default:
+                        return null;
+                }
+            }
+        }
+
+        #endregion
+
+        #region Event handlers
+
+        private void PropertyListChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (e.NewItems != null)
+            {
+                foreach (var prop in e.NewItems.OfType<INotifyPropertyChanged>())
+                {
+                    prop.PropertyChanged += AnyPropertyChangedHandler;
+                }
+            }
+
+            if (e.OldItems != null)
+            {
+                foreach (var prop in e.OldItems.OfType<INotifyPropertyChanged>())
+                {
+                    prop.PropertyChanged -= AnyPropertyChangedHandler;
+                }
+            }
+        }
+
+        private void AnyPropertyChangedHandler(object sender, EventArgs e)
+        {
+            OnPropertyChanged("Title");
+            OnPropertyChanged("PropertyModels");
+        }
+
+        #endregion
     }
 }

@@ -6,6 +6,7 @@ namespace Kistl.Client.Presentables
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Collections.Specialized;
+    using System.ComponentModel;
     using System.Linq;
     using System.Text;
 
@@ -40,6 +41,8 @@ namespace Kistl.Client.Presentables
             // extract special references if available.
             _list = _collection as IList;
 
+            AttachPropertyChangeHandlers();
+
             var relEnd = _property.RelationEnd;
             if (relEnd != null)
             {
@@ -52,6 +55,14 @@ namespace Kistl.Client.Presentables
                         _allowAddExisting = false;
                     }
                 }
+            }
+        }
+
+        private void AttachPropertyChangeHandlers()
+        {
+            if (_notifier != null)
+            {
+                _notifier.CollectionChanged += ValueListChanged;
             }
         }
 
@@ -366,6 +377,34 @@ namespace Kistl.Client.Presentables
                     CollectChildClasses(oc.ID, children);
                 };
             }
+        }
+
+        #endregion
+
+        #region Event handlers
+
+        private void ValueListChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (e.NewItems != null)
+            {
+                foreach (var prop in e.NewItems.OfType<INotifyPropertyChanged>())
+                {
+                    prop.PropertyChanged += AnyPropertyChangedHandler;
+                }
+            }
+         
+            if (e.OldItems != null)
+            {
+                foreach (var prop in e.OldItems.OfType<INotifyPropertyChanged>())
+                {
+                    prop.PropertyChanged -= AnyPropertyChangedHandler;
+                }
+            }
+        }
+
+        private void AnyPropertyChangedHandler(object sender, EventArgs e)
+        {
+            OnPropertyChanged("Value");
         }
 
         #endregion

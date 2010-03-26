@@ -45,7 +45,7 @@
 
         <!-- configured from code, see ListView_Initialized() -->
         <ListView x:Name="ListView"
-                  ItemsSource="{Binding Value, Mode=OneWay}"
+                  ItemsSource="{Binding Value, Mode=OneWay, ValidatesOnDataErrors=true}"
                   SelectedItem="{Binding SelectedItem}"
                   MinHeight="50"
                   MaxHeight="300"

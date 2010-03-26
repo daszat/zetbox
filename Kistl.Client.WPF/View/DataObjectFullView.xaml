@@ -42,19 +42,19 @@
 
                 <TabControl x:Name="PropertyGroupTabs"
                           Grid.Row="0"
-                          ItemsSource="{Binding PropertyGroups}"
+                          ItemsSource="{Binding PropertyGroups, ValidatesOnDataErrors=true}"
                           BorderThickness="0"
                           HorizontalContentAlignment="Stretch">
 
                     <TabControl.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding Title}"/>
+                            <TextBlock Text="{Binding Title, Mode=OneWay, ValidatesOnDataErrors=true}"/>
                         </DataTemplate>
                     </TabControl.ItemTemplate>
 
                     <TabControl.ContentTemplate>
                         <DataTemplate>
-                            <ListView ItemsSource="{Binding PropertyModels}"
+                            <ListView ItemsSource="{Binding PropertyModels, ValidatesOnDataErrors=true}"
                                   BorderThickness="0"
                                   HorizontalContentAlignment="Stretch">
 
