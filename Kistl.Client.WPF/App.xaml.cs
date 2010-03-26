@@ -80,6 +80,7 @@ namespace Kistl.Client.WPF
 
         private void Application_Startup(object sender, StartupEventArgs e)
         {
+            DebugConsole.Show();
             Logging.Configure();
             SplashScreen.ShowSplashScreen("Kistl is starting...", "Init application", 5);
 

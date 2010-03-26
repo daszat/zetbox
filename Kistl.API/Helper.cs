@@ -179,6 +179,7 @@ namespace Kistl.API
         public static T GetPrivatePropertyValue<T>(this object obj, string propName)
         {
             if (obj == null) throw new ArgumentNullException("obj");
+            if(Logging.Reflection.IsDebugEnabled) Logging.Reflection.DebugFormat("GetPrivatePropertyValue of {0}.{1}", obj.GetType().FullName, propName);
             PropertyInfo pi = obj.GetType().GetProperty(propName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
             if (pi == null) throw new ArgumentOutOfRangeException("propName", string.Format("Property {0} was not found in Type {1}", propName, obj.GetType().FullName));
             return (T)pi.GetValue(obj, null);
@@ -195,6 +196,7 @@ namespace Kistl.API
         public static T GetPrivateFieldValue<T>(this object obj, string propName)
         {
             if (obj == null) throw new ArgumentNullException("obj");
+            if (Logging.Reflection.IsDebugEnabled) Logging.Reflection.DebugFormat("GetPrivateFieldValue of {0}.{1}", obj.GetType().FullName, propName);
             Type t = obj.GetType();
             FieldInfo fi = null;
             while (fi == null && t != null)
@@ -217,6 +219,7 @@ namespace Kistl.API
         public static void SetPrivatePropertyValue<T>(this object obj, string propName, T val)
         {
             if (obj == null) throw new ArgumentNullException("obj");
+            if (Logging.Reflection.IsDebugEnabled) Logging.Reflection.DebugFormat("SetPrivatePropertyValue of {0}.{1}", obj.GetType().FullName, propName);
 
             Type t = obj.GetType();
             if (t.GetProperty(propName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance) == null)
@@ -239,6 +242,7 @@ namespace Kistl.API
         {
             if (obj == null) throw new ArgumentNullException("obj");
             if (propName == null) throw new ArgumentNullException("propName");
+            if (Logging.Reflection.IsDebugEnabled) Logging.Reflection.DebugFormat("GetPropertyType of {0}.{1}", obj.GetType().FullName, propName);
 
             Type result = null;
             object loopObj = obj;
@@ -283,6 +287,7 @@ namespace Kistl.API
         {
             if (obj == null) throw new ArgumentNullException("obj");
             if (propName == null) throw new ArgumentNullException("propName");
+            if (Logging.Reflection.IsDebugEnabled) Logging.Reflection.DebugFormat("HasProperty of {0}.{1}", obj.GetType().FullName, propName);
 
             object loopObj = obj;
             foreach (string it_p in propName.Split('.'))
@@ -325,20 +330,31 @@ namespace Kistl.API
         {
             if (obj == null) throw new ArgumentNullException("obj");
             if (propName == null) throw new ArgumentNullException("propName");
+            if (Logging.Reflection.IsDebugEnabled) Logging.Reflection.DebugFormat("SetPropertyValue of {0}.{1}", obj.GetType().FullName, propName);
 
             var propertylist = propName.Split('.');
             object result = obj;
             foreach (string p in propertylist.Take(propertylist.Count() - 1))
             {
-                PropertyInfo pi = result.GetType().GetProperty(p);
-                if (pi == null) throw new ArgumentOutOfRangeException("propName", string.Format("Property {0} was not found in Type {1}", propName, obj.GetType().FullName));
-                result = pi.GetValue(result, null);
+                //PropertyInfo pi = result.GetType().GetProperty(p);
+                //if (pi == null) throw new ArgumentOutOfRangeException("propName", string.Format("Property {0} was not found in Type {1}", propName, obj.GetType().FullName));
+                //result = pi.GetValue(result, null);
+                result = GetSinglePropertyValue(result, p);
                 if (result == null) throw new InvalidOperationException(string.Format("Unable to set Property {0}. The Path contains a NULL Object.", propName));
             }
 
+            var ctd = result as ICustomTypeDescriptor;
+            if (ctd != null)
+            {
+                var pd = ctd.GetProperties()[propName];
+                if (pd != null)
+                {
+                    pd.SetValue(ctd.GetPropertyOwner(pd), val);
+                    return;
+                }
+            }
             PropertyInfo set_pi = result.GetType().GetProperty(propertylist.Last());
             if (set_pi == null) throw new ArgumentOutOfRangeException("propName", string.Format("Property {0} was not found in Type {1}", propName, obj.GetType().FullName));
-
             set_pi.SetValue(result, val, null);
         }
 
@@ -355,6 +371,7 @@ namespace Kistl.API
         {
             if (obj == null) { throw new ArgumentNullException("obj"); }
             if (propName == null) { throw new ArgumentNullException("propName"); }
+            if (Logging.Reflection.IsDebugEnabled) Logging.Reflection.DebugFormat("GetPropertyValue of {0}.{1}", obj.GetType().FullName, propName);
 
             object result = obj;
             foreach (string it_p in propName.Split('.'))
@@ -398,6 +415,7 @@ namespace Kistl.API
             }
 
             // fallback to reflection
+            if (Logging.Reflection.IsWarnEnabled) Logging.Reflection.WarnFormat("Fallback to Reflection for {0}.{1}", obj.GetType().FullName, propName);
             PropertyInfo pi = obj.GetType().GetProperty(propName);
             if (pi == null) throw new ArgumentOutOfRangeException("propName", string.Format("Property {0} was not found in Type {1}", propName, obj.GetType().FullName));
             return pi.GetValue(obj, null);

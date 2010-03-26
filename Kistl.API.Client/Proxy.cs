@@ -74,7 +74,6 @@ namespace Kistl.API.Client
     internal class ProxyImplementation
         : IProxy
     {
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Client.Proxy");
         private readonly static object _lock = new object();
 
         private KistlServiceClient _service;
@@ -91,7 +90,7 @@ namespace Kistl.API.Client
                 {
                     if (_service == null || _service.State != System.ServiceModel.CommunicationState.Opened)
                     {
-                        Log.Info("Initializing Service");
+                        Logging.Facade.Info("Initializing Service");
                         _service = new KistlServiceClient();
                     }
                     return _service;
@@ -101,7 +100,7 @@ namespace Kistl.API.Client
 
         public IEnumerable<IDataObject> GetList(InterfaceType ifType, int maxListCount, Expression filter, IEnumerable<Expression> orderBy, out List<IStreamable> auxObjects)
         {
-            using (Log.InfoTraceMethodCallFormat("GetList[{0}]", ifType.ToString()))
+            using (Logging.Facade.InfoTraceMethodCallFormat("GetList[{0}]", ifType.ToString()))
             {
                 using (MemoryStream s = Service.GetList(
                     new SerializableType(ifType),
@@ -119,7 +118,7 @@ namespace Kistl.API.Client
 
         public IEnumerable<IDataObject> GetListOf(InterfaceType ifType, int ID, string property, out List<IStreamable> auxObjects)
         {
-            using (Log.InfoTraceMethodCallFormat("{0} [{1}].{2}", ifType, ID, property))
+            using (Logging.Facade.InfoTraceMethodCallFormat("{0} [{1}].{2}", ifType, ID, property))
             {
                 using (MemoryStream s = Service.GetListOf(new SerializableType(ifType), ID, property))
                 {
@@ -134,7 +133,7 @@ namespace Kistl.API.Client
 
         public IEnumerable<IPersistenceObject> SetObjects(IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notficationRequests)
         {
-            using (Log.InfoTraceMethodCall("SetObjects"))
+            using (Logging.Facade.InfoTraceMethodCall("SetObjects"))
             {
                 // Serialize
                 using (var ms = new MemoryStream())
@@ -168,7 +167,7 @@ namespace Kistl.API.Client
         {
             var result = ReceiveObjectList(sr);
             auxObjects = ReceiveObjectList(sr);
-            Log.DebugFormat("retrieved: {0} objects; {1} auxObjects", result.Count(), auxObjects.Count());
+            Logging.Facade.DebugFormat("retrieved: {0} objects; {1} auxObjects", result.Count(), auxObjects.Count());
             return result;
         }
 
@@ -194,7 +193,7 @@ namespace Kistl.API.Client
         public IEnumerable<T> FetchRelation<T>(Guid relationId, RelationEndRole role, IDataObject parent, out List<IStreamable> auxObjects)
             where T : class, IRelationCollectionEntry
         {
-            using (Log.InfoTraceMethodCallFormat("Fetching relation: ID=[{0}],role=[{1}],parentId=[{2}]", relationId, role, parent.ID))
+            using (Logging.Facade.InfoTraceMethodCallFormat("Fetching relation: ID=[{0}],role=[{1}],parentId=[{2}]", relationId, role, parent.ID))
             {
                 // TODO: could be implemented in generated properties
                 if (parent.ObjectState == DataObjectState.New)
@@ -223,7 +222,7 @@ namespace Kistl.API.Client
                 // dispose managed resources
                 if (_service != null)
                 {
-                    Log.Debug("Closing Service");
+                    Logging.Facade.Debug("Closing Service");
                     _service.Close();
                     ((IDisposable)_service).Dispose();
                     _service = null;
@@ -241,23 +240,29 @@ namespace Kistl.API.Client
 
         public Stream GetBlobStream(int ID)
         {
-            return Service.GetBlobStream(ID);
+            using (Logging.Facade.InfoTraceMethodCallFormat("GetBlobStream: ID=[{0}]", ID))
+            {
+                return Service.GetBlobStream(ID);
+            }
         }
 
         public Kistl.App.Base.Blob SetBlobStream(Stream stream, string filename, string mimetype)
         {
-            Stream result;
-            int id = Service.SetBlobStream(filename, mimetype, stream, out result);
-            try
+            using (Logging.Facade.InfoTraceMethodCallFormat("SetBlobStream: filename=[{0}]", filename))
             {
-                using (var sr = new BinaryReader(result))
+                Stream result;
+                int id = Service.SetBlobStream(filename, mimetype, stream, out result);
+                try
                 {
-                    return ReceiveObjectList(sr).Cast<Kistl.App.Base.Blob>().Single();
+                    using (var sr = new BinaryReader(result))
+                    {
+                        return ReceiveObjectList(sr).Cast<Kistl.App.Base.Blob>().Single();
+                    }
                 }
-            }
-            finally
-            {
-                result.Dispose();
+                finally
+                {
+                    result.Dispose();
+                }
             }
         }
     }
