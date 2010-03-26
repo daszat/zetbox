@@ -1,4 +1,4 @@
-#define EAGERLOADING
+// #define EAGERLOADING
 
 [assembly: global::System.Data.Objects.DataClasses.EdmSchema]
 
