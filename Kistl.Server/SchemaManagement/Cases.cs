@@ -656,6 +656,7 @@ namespace Kistl.Server.SchemaManagement
             else if (srcTblName == destTblName && srcColName != destColName)
             {
                 db.RenameColumn(srcTblName, srcColName, destColName);
+                db.DropIndex(srcTblName, Construct.IndexName(srcTblName, srcColName));
             }
             else
             {
@@ -860,6 +861,7 @@ namespace Kistl.Server.SchemaManagement
                 var assocName = rel.GetRelationAssociationName(RelationEndRole.A);
                 var refTblName = rel.B.Type.TableName;
                 db.CreateFKConstraint(destTblName, refTblName, destColName, assocName, false);
+                db.CreateIndex(destTblName, Construct.IndexName(destTblName, destColName), true, false, destColName);
                 srcColWasReused = true;
             }
             if (rel.HasStorage(RelationEndRole.B) && !bCreated)
@@ -873,6 +875,7 @@ namespace Kistl.Server.SchemaManagement
                 var assocName = rel.GetRelationAssociationName(RelationEndRole.B);
                 var refTblName = rel.A.Type.TableName;
                 db.CreateFKConstraint(destTblName, refTblName, destColName, assocName, false);
+                db.CreateIndex(destTblName, Construct.IndexName(destTblName, destColName), true, false, destColName);
                 srcColWasReused = true;
             }
 
@@ -1133,7 +1136,7 @@ namespace Kistl.Server.SchemaManagement
             string colName = Construct.ForeignKeyColumnName(otherEnd);
             string indexName = Construct.ListPositionColumnName(otherEnd);
 
-            CreateNotNullableColumn(otherEnd, tblName, colName);
+            CreateFKColumn(otherEnd, tblName, colName);
             db.CreateFKConstraint(tblName, refTblName, colName, assocName, false);
 
             if (isIndexed)
@@ -1269,7 +1272,6 @@ namespace Kistl.Server.SchemaManagement
             string assocName = rel.GetRelationAssociationName(role);
 
             db.DropFKConstraint(tblName, assocName);
-
             db.DropColumn(tblName, colName);
 
             if (rel.NeedsPositionStorage(role))
@@ -1305,9 +1307,11 @@ namespace Kistl.Server.SchemaManagement
             string refTblName = otherEnd.Type.TableName;
             string colName = Construct.ForeignKeyColumnName(otherEnd);
             string assocName = rel.GetRelationAssociationName(role);
+            string idxName = Construct.IndexName(tblName, colName);
 
-            CreateNotNullableColumn(otherEnd, tblName, colName);
+            CreateFKColumn(otherEnd, tblName, colName);
             db.CreateFKConstraint(tblName, refTblName, colName, assocName, false);
+            db.CreateIndex(tblName, idxName, true, false, colName);
 
             if (rel.NeedsPositionStorage(role))
             {
@@ -1315,10 +1319,8 @@ namespace Kistl.Server.SchemaManagement
             }
         }
 
-        private void CreateNotNullableColumn(RelationEnd otherEnd, string tblName, string colName)
+        private void CreateFKColumn(RelationEnd otherEnd, string tblName, string colName)
         {
-            Log.InfoFormat("Creating new column '{0}.{1}'", tblName, colName);
-
             if (otherEnd.IsNullable() || !db.CheckTableContainsData(tblName))
             {
                 db.CreateColumn(tblName, colName, System.Data.DbType.Int32, 0, otherEnd.IsNullable());

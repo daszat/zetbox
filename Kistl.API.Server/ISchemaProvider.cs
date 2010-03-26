@@ -68,6 +68,8 @@ namespace Kistl.API.Server
         bool CheckTableContainsData(string tblName);
         bool CheckColumnContainsNulls(string tblName, string colName);
         bool CheckColumnContainsUniqueValues(string tblName, string colName);
+        bool CheckColumnIsNullable(string tblName, string colName);
+        bool CheckIndexExists(string tblName, string idxName);
 
         bool CheckPositionColumnValidity(string tblName, string positionColumnName);
         bool RepairPositionColumn(string tblName, string positionColumnName);
@@ -95,6 +97,7 @@ namespace Kistl.API.Server
         void DropTrigger(string triggerName);
         void DropView(string viewName);
         void DropProcedure(string procName);
+        void DropIndex(string tblName, string idxName);
 
         void CopyColumnData(string srcTblName, string srcColName, string tblName, string colName);
         void MigrateFKs(string srcTblName, string srcColName, string tblName, string colName);

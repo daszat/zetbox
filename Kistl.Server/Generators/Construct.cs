@@ -83,6 +83,13 @@ namespace Kistl.Server.Generators
 
         #endregion
 
+        #region IndexNames
+        public static string IndexName(string tblName, params string[] colNames)
+        {
+            return "IDX_" + tblName + "_" + string.Join("_", colNames);
+        }        
+        #endregion
+
         #region Column Names
 
         // internal use only. Implement and use a proper overload in/from this region.

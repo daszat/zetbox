@@ -280,6 +280,7 @@ namespace Kistl.Server.SchemaManagement
                 string refTblName = otherEnd.Type.TableName;
                 string colName = Construct.ForeignKeyColumnName(otherEnd);
                 string assocName = rel.GetRelationAssociationName(role);
+                string idxName = Construct.IndexName(tblName, colName);
 
                 CheckColumn(relEnd.Type.TableName, Construct.ForeignKeyColumnName(otherEnd), System.Data.DbType.Int32, 0, otherEnd.IsNullable());
                 if (!db.CheckFKConstraintExists(assocName))
@@ -288,6 +289,14 @@ namespace Kistl.Server.SchemaManagement
                     if (repair)
                     {
                         db.CreateFKConstraint(tblName, refTblName, colName, assocName, false);
+                    }
+                }
+                if (!db.CheckIndexExists(tblName, idxName))
+                {
+                    Log.WarnFormat("Index '{0}' is missing", idxName);
+                    if (repair)
+                    {
+                        db.CreateIndex(tblName, idxName, true, false, colName);
                     }
                 }
             }

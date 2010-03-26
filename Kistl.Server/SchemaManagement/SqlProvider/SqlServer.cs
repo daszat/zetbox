@@ -177,6 +177,20 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
             }
         }
 
+        public bool CheckColumnIsNullable(string tblName, string colName)
+        {
+            using (var cmd = new SqlCommand(@"SELECT is_nullable FROM sys.objects o INNER JOIN sys.columns c ON c.object_id=o.object_id
+	                                            WHERE o.object_id = OBJECT_ID(@table) 
+		                                            AND o.type IN (N'U')
+		                                            AND c.Name = @column", db, tx))
+            {
+                cmd.Parameters.AddWithValue("@table", tblName);
+                cmd.Parameters.AddWithValue("@column", colName);
+                QueryLog.Debug(cmd.CommandText);
+                return (bool)cmd.ExecuteScalar();
+            }
+        }
+
         public bool CheckFKConstraintExists(string fkName)
         {
             using (var cmd = new SqlCommand("SELECT COUNT(*) FROM sys.objects WHERE object_id = OBJECT_ID(@fk_constraint) AND type IN (N'F')", db, tx))
@@ -453,6 +467,17 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
             }
         }
 
+        private object ExecuteScalar(string nonQueryFormat, params object[] args)
+        {
+            string query = String.Format(nonQueryFormat, args);
+
+            using (var cmd = new SqlCommand(query, db, tx))
+            {
+                QueryLog.Debug(query);
+                return cmd.ExecuteScalar();
+            }
+        }
+
         public void DropColumn(string tblName, string colName)
         {
             Log.DebugFormat("Dropping column [{0}].[{1}]", tblName, colName);
@@ -511,18 +536,58 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
                 destColName, srcColName, destTblName, srcTblName, srcFKColName);
         }
 
+        private int GetSQLServerVersion()
+        {
+            string verStr = (string)ExecuteScalar("SELECT SERVERPROPERTY('productversion')");
+            return int.Parse(verStr.Split('.').First());
+        }
+
+        public bool CheckIndexExists(string tblName, string idxName)
+        {
+            using (var cmd = new SqlCommand("SELECT COUNT(*) from sys.sysindexes WHERE id = OBJECT_ID(@tbl) AND [name] = @idx", db, tx))
+            {
+                cmd.Parameters.AddWithValue("@tbl", tblName);
+                cmd.Parameters.AddWithValue("@idx", idxName);
+                QueryLog.Debug(cmd.CommandText);
+                return (int)cmd.ExecuteScalar() > 0;
+            }
+        }
+
+        public void DropIndex(string tblName, string idxName)
+        {
+            ExecuteNonQuery("DROP INDEX {0} ON [{1}]", idxName, tblName);
+        }
+
         public void CreateIndex(string tblName, string idxName, bool unique, bool clustered, params string[] columns)
         {
             string colSpec = string.Join(", ", columns.Select(c => "[" + c + "]").ToArray());
 
             Log.DebugFormat("Creating index [{0}].[{1}] ({2})", tblName, idxName, colSpec);
 
-            ExecuteNonQuery("CREATE {0} {1} INDEX {2} ON [{3}] ({4})",
+            string appendIndexFilter = string.Empty;
+            if (unique && !clustered && columns.Length == 1)
+            {
+                bool isNullable = CheckColumnIsNullable(tblName, columns.First());
+                int dbVer = GetSQLServerVersion();
+                // Special checks
+                if(isNullable && dbVer < 10)
+                {
+                    Log.WarnFormat("Warning: Unable to create unique index on nullable column [{0}].[{1}]. Creating non unique index.", tblName, columns);
+                    unique = false;
+                }
+                else if (isNullable && dbVer >= 10)
+                {
+                    appendIndexFilter = string.Format(" WHERE [{0}] IS NOT NULL", columns.First());
+                }
+            }
+
+            ExecuteNonQuery("CREATE {0} {1} INDEX {2} ON [{3}] ({4}){5}",
                 unique ? "UNIQUE" : string.Empty,
                 clustered ? "CLUSTERED" : string.Empty,
                 idxName,
                 tblName,
-                colSpec);
+                colSpec,
+                appendIndexFilter);
         }
 
         public void CreateUpdateRightsTrigger(string triggerName, string tblName, List<RightsTrigger> tblList)
