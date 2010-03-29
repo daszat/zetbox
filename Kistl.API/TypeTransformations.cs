@@ -103,6 +103,11 @@ namespace Kistl.API
 
         #endregion
 
+        public bool IsAssignableFrom(InterfaceType b)
+        {
+            return this.Type.IsAssignableFrom(b.Type);
+        }
+
         public override string ToString()
         {
             return Type.ToString();

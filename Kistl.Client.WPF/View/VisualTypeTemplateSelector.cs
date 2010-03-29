@@ -108,13 +108,13 @@ namespace Kistl.Client.WPF.View
             {
                 var ckcInterface = new InterfaceType(Type.GetType(controlKindClassName + "," + GuiApplicationContext.Current.InterfaceAssembly, true));
                 var defaultKind = pmd.GetDefaultKind();
-                if (defaultKind != null && defaultKind.GetInterfaceType() == ckcInterface)
+                if (defaultKind != null && ckcInterface.IsAssignableFrom(defaultKind.GetInterfaceType()))
                 {
                     visualDesc = pmd.GetDefaultViewDescriptor(Toolkit.WPF);
                 }
                 else
                 {
-                    ControlKind controlKind = pmd.SecondaryControlKinds.Where(ck => ck.GetInterfaceType() == ckcInterface).SingleOrDefault();
+                    ControlKind controlKind = pmd.SecondaryControlKinds.Where(ck => ckcInterface.IsAssignableFrom(ck.GetInterfaceType())).SingleOrDefault();
                     if (controlKind == null && pmd.PresentableModelRef.Parent != null)
                     {
                         var parentDescriptor = pmd.PresentableModelRef.Parent.GetPresentableModelDescriptor();

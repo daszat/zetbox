@@ -106,6 +106,7 @@
     <Compile Include="ControlKind.Server.Designer.cs" />
     <Compile Include="ControlKindClass.Server.Designer.cs" />
     <Compile Include="CurrentSchema.Server.Designer.cs" />
+    <Compile Include="DashboardKind.Server.Designer.cs" />
     <Compile Include="DataObjectKind.Server.Designer.cs" />
     <Compile Include="DataObjectSelectionTaskKind.Server.Designer.cs" />
     <Compile Include="DataObjectSummaryKind.Server.Designer.cs" />
@@ -149,6 +150,7 @@
     <Compile Include="MethodInvocationConstraint.Server.Designer.cs" />
     <Compile Include="Mitarbeiter.Server.Designer.cs" />
     <Compile Include="Module.Server.Designer.cs" />
+    <Compile Include="ModuleEditorDashboardKind.Server.Designer.cs" />
     <Compile Include="Muhblah.Server.Designer.cs" />
     <Compile Include="NewGuidDefaultValue.Server.Designer.cs" />
     <Compile Include="NotNullableConstraint.Server.Designer.cs" />

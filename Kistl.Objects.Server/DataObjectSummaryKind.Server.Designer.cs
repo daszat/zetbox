@@ -24,7 +24,7 @@ namespace Kistl.App.GUI
     /// </summary>
     [EdmEntityType(NamespaceName="Model", Name="DataObjectSummaryKind")]
     [System.Diagnostics.DebuggerDisplay("DataObjectSummaryKind")]
-    public class DataObjectSummaryKind__Implementation__ : Kistl.App.GUI.ControlKind__Implementation__, DataObjectSummaryKind
+    public class DataObjectSummaryKind__Implementation__ : Kistl.App.GUI.DashboardKind__Implementation__, DataObjectSummaryKind
     {
     
 		public DataObjectSummaryKind__Implementation__()

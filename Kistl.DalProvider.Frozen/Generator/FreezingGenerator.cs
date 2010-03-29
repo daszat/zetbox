@@ -65,8 +65,8 @@ namespace Kistl.DalProvider.Frozen.Generator
             var otherFileNames = new List<string>();
 
             // TODO: IsFrozenObject doesn't contain enough information, should check parents too
-            var modulesWithFrozenClasses = ctx.GetQuery<Module>()
-                .Where(m => m.DataTypes.OfType<ObjectClass>().Any(cls => cls.IsFrozenObject))
+            var modulesWithFrozenClasses = ctx.GetQuery<Module>().ToList()
+                .Where(m => m.DataTypes.OfType<ObjectClass>().Any(cls => cls.IsFrozen()))
                 .OrderBy(m => m.Name)
                 .ToList();
 

@@ -256,6 +256,16 @@ namespace Kistl.App.GUI
 			}
 		}
 		
+		/// <summary>List of all DashboardKind</summary>
+		/// 
+		public IQueryable<DashboardKind> DashboardKinds
+		{ 
+			get
+			{
+				return Context.GetQuery<DashboardKind>();
+			}
+		}
+		
 		/// <summary>List of all ControlKindClass</summary>
 		/// Extended MetaClass for defining supported interfaces of ControlKinds
 		public IQueryable<ControlKindClass> ControlKindClasses

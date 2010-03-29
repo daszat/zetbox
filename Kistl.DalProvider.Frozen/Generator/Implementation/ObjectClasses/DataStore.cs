@@ -119,14 +119,14 @@ namespace Kistl.DalProvider.Frozen.Generator.Implementation.ObjectClasses
                             sb.AppendLine(") {");
                             foreach (var item in items)
                             {
-                                sb.AppendFormat("{0}.DataStore[{1}],\n", referencedType, item.ID);
+                                sb.AppendFormat("{0}.DataStore.ContainsKey({1}) ? {0}.DataStore[{1}] : null,\n", referencedType, item.ID);
                             }
                             sb.Append("})");
                             return sb.ToString();
                         }
                         else
                         {
-                            return String.Format("{0}.DataStore[{1}]", referencedType, ((IDataObject)value).ID);
+                            return String.Format("{0}.DataStore.ContainsKey({1}) ? {0}.DataStore[{1}] : null", referencedType, ((IDataObject)value).ID);
                         }
                     }
                     else

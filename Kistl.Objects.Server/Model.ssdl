@@ -129,6 +129,12 @@
       <End Role="A_ObjectClass" EntitySet="ObjectClass" />
       <End Role="B_ControlKindClass" EntitySet="ControlKindClass" />
     </AssociationSet>
+    <EntitySet Name="DashboardKind" EntityType="Model.Store.DashboardKind" Table="DashboardKinds"/>
+    <!-- inherits from ControlKind -->
+    <AssociationSet Name="FK_DashboardKind_ControlKind_ID" Association="Model.Store.FK_DashboardKind_ControlKind_ID" >
+      <End Role="A_ControlKind" EntitySet="ControlKind" />
+      <End Role="B_DashboardKind" EntitySet="DashboardKind" />
+    </AssociationSet>
     <EntitySet Name="DataObjectKind" EntityType="Model.Store.DataObjectKind" Table="DataObjectKinds"/>
     <!-- inherits from ControlKind -->
     <AssociationSet Name="FK_DataObjectKind_ControlKind_ID" Association="Model.Store.FK_DataObjectKind_ControlKind_ID" >
@@ -142,9 +148,9 @@
       <End Role="B_DataObjectSelectionTaskKind" EntitySet="DataObjectSelectionTaskKind" />
     </AssociationSet>
     <EntitySet Name="DataObjectSummaryKind" EntityType="Model.Store.DataObjectSummaryKind" Table="DataObjectSummaryKinds"/>
-    <!-- inherits from ControlKind -->
-    <AssociationSet Name="FK_DataObjectSummaryKind_ControlKind_ID" Association="Model.Store.FK_DataObjectSummaryKind_ControlKind_ID" >
-      <End Role="A_ControlKind" EntitySet="ControlKind" />
+    <!-- inherits from DashboardKind -->
+    <AssociationSet Name="FK_DataObjectSummaryKind_DashboardKind_ID" Association="Model.Store.FK_DataObjectSummaryKind_DashboardKind_ID" >
+      <End Role="A_DashboardKind" EntitySet="DashboardKind" />
       <End Role="B_DataObjectSummaryKind" EntitySet="DataObjectSummaryKind" />
     </AssociationSet>
     <EntitySet Name="DateTimeParameter" EntityType="Model.Store.DateTimeParameter" Table="DateTimeParameters"/>
@@ -284,6 +290,12 @@
     <AssociationSet Name="FK_MethodInvocationConstraint_Constraint_ID" Association="Model.Store.FK_MethodInvocationConstraint_Constraint_ID" >
       <End Role="A_Constraint" EntitySet="Constraint" />
       <End Role="B_MethodInvocationConstraint" EntitySet="MethodInvocationConstraint" />
+    </AssociationSet>
+    <EntitySet Name="ModuleEditorDashboardKind" EntityType="Model.Store.ModuleEditorDashboardKind" Table="ModuleEditorDashboardKinds"/>
+    <!-- inherits from DashboardKind -->
+    <AssociationSet Name="FK_ModuleEditorDashboardKind_DashboardKind_ID" Association="Model.Store.FK_ModuleEditorDashboardKind_DashboardKind_ID" >
+      <End Role="A_DashboardKind" EntitySet="DashboardKind" />
+      <End Role="B_ModuleEditorDashboardKind" EntitySet="ModuleEditorDashboardKind" />
     </AssociationSet>
     <EntitySet Name="NewGuidDefaultValue" EntityType="Model.Store.NewGuidDefaultValue" Table="NewGuidDefaultValues"/>
     <!-- inherits from DefaultPropertyValue -->
@@ -1449,6 +1461,13 @@
     <Property Name="Version" Type="int" Nullable="false" />
   </EntityType>
 	
+  <EntityType Name="DashboardKind">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+  </EntityType>
+	
   <EntityType Name="DataObjectKind">
     <Key>
       <PropertyRef Name="ID" />
@@ -1857,6 +1876,13 @@
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
     <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
     <Property Name="Namespace" Type="nvarchar" MaxLength="200" Nullable="false" />
+  </EntityType>
+	
+  <EntityType Name="ModuleEditorDashboardKind">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="Muhblah">
@@ -4794,6 +4820,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_DashboardKind_ControlKind_ID">
+    <End Role="A_ControlKind" Type="Model.Store.ControlKind" Multiplicity="1" />
+    <End Role="B_DashboardKind" Type="Model.Store.DashboardKind" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="A_ControlKind">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_DashboardKind">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_DataObjectKind_ControlKind_ID">
     <End Role="A_ControlKind" Type="Model.Store.ControlKind" Multiplicity="1" />
     <End Role="B_DataObjectKind" Type="Model.Store.DataObjectKind" Multiplicity="0..1" />
@@ -4818,11 +4856,11 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_DataObjectSummaryKind_ControlKind_ID">
-    <End Role="A_ControlKind" Type="Model.Store.ControlKind" Multiplicity="1" />
+  <Association Name="FK_DataObjectSummaryKind_DashboardKind_ID">
+    <End Role="A_DashboardKind" Type="Model.Store.DashboardKind" Multiplicity="1" />
     <End Role="B_DataObjectSummaryKind" Type="Model.Store.DataObjectSummaryKind" Multiplicity="0..1" />
     <ReferentialConstraint>
-      <Principal Role="A_ControlKind">
+      <Principal Role="A_DashboardKind">
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="B_DataObjectSummaryKind">
@@ -5102,6 +5140,18 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="B_MethodInvocationConstraint">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ModuleEditorDashboardKind_DashboardKind_ID">
+    <End Role="A_DashboardKind" Type="Model.Store.DashboardKind" Multiplicity="1" />
+    <End Role="B_ModuleEditorDashboardKind" Type="Model.Store.ModuleEditorDashboardKind" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="A_DashboardKind">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_ModuleEditorDashboardKind">
         <PropertyRef Name="ID" />
       </Dependent>
     </ReferentialConstraint>

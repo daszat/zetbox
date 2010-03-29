@@ -1908,11 +1908,13 @@
                         FromRole="ControlKindClass"
                         ToRole="CollectionEntry" />
   </EntityType>
+  <EntityType Name="DashboardKind" BaseType="Model.ControlKind" Abstract="true">
+  </EntityType>
   <EntityType Name="DataObjectKind" BaseType="Model.ControlKind">
   </EntityType>
   <EntityType Name="DataObjectSelectionTaskKind" BaseType="Model.ControlKind">
   </EntityType>
-  <EntityType Name="DataObjectSummaryKind" BaseType="Model.ControlKind">
+  <EntityType Name="DataObjectSummaryKind" BaseType="Model.DashboardKind">
   </EntityType>
   <EntityType Name="DateTimeParameter" BaseType="Model.BaseParameter">
   </EntityType>
@@ -1986,6 +1988,8 @@
   <EntityType Name="LauncherKind" BaseType="Model.ControlKind">
   </EntityType>
   <EntityType Name="MethodInvocationConstraint" BaseType="Model.Constraint">
+  </EntityType>
+  <EntityType Name="ModuleEditorDashboardKind" BaseType="Model.DashboardKind">
   </EntityType>
   <EntityType Name="NewGuidDefaultValue" BaseType="Model.DefaultPropertyValue">
   </EntityType>

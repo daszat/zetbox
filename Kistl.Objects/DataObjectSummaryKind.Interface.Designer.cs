@@ -10,7 +10,7 @@ namespace Kistl.App.GUI
     /// <summary>
     /// 
     /// </summary>
-    public interface DataObjectSummaryKind : Kistl.App.GUI.ControlKind 
+    public interface DataObjectSummaryKind : Kistl.App.GUI.DashboardKind 
     {
 
     }

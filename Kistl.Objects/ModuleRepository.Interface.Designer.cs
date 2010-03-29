@@ -54,6 +54,16 @@ namespace Kistl.App
 			}
 		}
 		
+		/// <summary>Repository for ModuleEditor</summary>
+		/// 
+		public daszAt.ModuleEditor.ModuleEditorRepository ModuleEditor
+		{
+			get
+			{
+				return new daszAt.ModuleEditor.ModuleEditorRepository(Context);
+			}
+		}
+		
 		/// <summary>Repository for Projekte</summary>
 		/// 
 		public Kistl.App.Projekte.ProjekteRepository Projekte

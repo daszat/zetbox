@@ -120,6 +120,14 @@ namespace Kistl.Client.WPF
             // FixupTypeRefParents();
             // PrintEagerLoadingGraphViz();
             // CreateTestFragebögen();
+
+            using (IKistlContext ctx = KistlContext.GetContext())
+            {
+                foreach(var ck in ctx.GetQuery<ControlKind>())
+                {
+                    Logging.Log.InfoFormat("ID = {0}, Type = {1}", ck.ID, ck.GetType().Name);
+                }
+            }
         }
     }
 }

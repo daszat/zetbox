@@ -26,6 +26,6 @@
     <!--<view:VisualTypeTemplateSelector x:Key="gridCellTemplateSelector"
                                      RequestedType="GridCell"
                                      RequestedKind="FAIL" />-->
-    <view:VisualTypeTemplateSelector x:Key="summaryTemplateSelector"
-                                     RequestedKind="Kistl.App.GUI.DataObjectSummaryKind" />
+    <view:VisualTypeTemplateSelector x:Key="dashBoardTemplateSelector"
+                                     RequestedKind="Kistl.App.GUI.DashboardKind" />
 </ResourceDictionary>
