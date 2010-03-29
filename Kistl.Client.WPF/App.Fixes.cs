@@ -111,7 +111,17 @@ namespace Kistl.Client.WPF
         //        ctx.SubmitChanges();
         //    }
         //}
-
+        
+        //private static void PrintControlKindTypes()
+        //{
+        //    using (IKistlContext ctx = KistlContext.GetContext())
+        //    {
+        //        foreach (var ck in ctx.GetQuery<ControlKind>())
+        //        {
+        //            Logging.Log.InfoFormat("ID = {0}, Type = {1}", ck.ID, ck.GetType().Name);
+        //        }
+        //    }
+        //}
         /// <summary>
         /// Calls currently needed Database fixes
         /// </summary>
@@ -120,14 +130,7 @@ namespace Kistl.Client.WPF
             // FixupTypeRefParents();
             // PrintEagerLoadingGraphViz();
             // CreateTestFragebögen();
-
-            using (IKistlContext ctx = KistlContext.GetContext())
-            {
-                foreach(var ck in ctx.GetQuery<ControlKind>())
-                {
-                    Logging.Log.InfoFormat("ID = {0}, Type = {1}", ck.ID, ck.GetType().Name);
-                }
-            }
+            //PrintControlKindTypes();
         }
     }
 }

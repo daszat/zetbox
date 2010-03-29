@@ -7,6 +7,7 @@ namespace Kistl.Client.Presentables.ModuleEditor
     using Kistl.API;
     using System.Collections.ObjectModel;
     using Kistl.App.Base;
+    using Kistl.API.Client;
 
     public class AppLauncherModel : PresentableModel
     {
@@ -46,17 +47,26 @@ namespace Kistl.Client.Presentables.ModuleEditor
     }
 
     public class AppLauncherModuleModel
-        : PresentableModel
+        : DataObjectModel
     {
-        public AppLauncherModuleModel(IGuiApplicationContext appCtx, IKistlContext dataCtx)
-            : base(appCtx, dataCtx)
+        public AppLauncherModuleModel(IGuiApplicationContext appCtx, IKistlContext dataCtx, Module m)
+            : base(appCtx, dataCtx, m)
         {
 
         }
 
         public override string Name
         {
-            get { return "Module"; }
+            get { return this.Object.ToString(); }
+        }
+
+        public void ShowWorkspace()
+        {
+            var factory = AppContext.Factory;
+            var newWorkspace = factory.CreateSpecificModel<WorkspaceModel>(KistlContext.GetContext(), this.Object);
+            // This is another way...
+            // newWorkspace.ShowForeignModel(this);
+            factory.ShowModel(newWorkspace, true);
         }
     }
 }

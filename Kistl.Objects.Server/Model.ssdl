@@ -297,6 +297,12 @@
       <End Role="A_DashboardKind" EntitySet="DashboardKind" />
       <End Role="B_ModuleEditorDashboardKind" EntitySet="ModuleEditorDashboardKind" />
     </AssociationSet>
+    <EntitySet Name="ModuleEditorWorkspaceKind" EntityType="Model.Store.ModuleEditorWorkspaceKind" Table="ModuleEditorWorkspaceKinds"/>
+    <!-- inherits from WorkspaceKind -->
+    <AssociationSet Name="FK_ModuleEditorWorkspaceKind_WorkspaceKind_ID" Association="Model.Store.FK_ModuleEditorWorkspaceKind_WorkspaceKind_ID" >
+      <End Role="A_WorkspaceKind" EntitySet="WorkspaceKind" />
+      <End Role="B_ModuleEditorWorkspaceKind" EntitySet="ModuleEditorWorkspaceKind" />
+    </AssociationSet>
     <EntitySet Name="NewGuidDefaultValue" EntityType="Model.Store.NewGuidDefaultValue" Table="NewGuidDefaultValues"/>
     <!-- inherits from DefaultPropertyValue -->
     <AssociationSet Name="FK_NewGuidDefaultValue_DefaultPropertyValue_ID" Association="Model.Store.FK_NewGuidDefaultValue_DefaultPropertyValue_ID" >
@@ -1879,6 +1885,13 @@
   </EntityType>
 	
   <EntityType Name="ModuleEditorDashboardKind">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+  </EntityType>
+	
+  <EntityType Name="ModuleEditorWorkspaceKind">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
@@ -5152,6 +5165,18 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="B_ModuleEditorDashboardKind">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ModuleEditorWorkspaceKind_WorkspaceKind_ID">
+    <End Role="A_WorkspaceKind" Type="Model.Store.WorkspaceKind" Multiplicity="1" />
+    <End Role="B_ModuleEditorWorkspaceKind" Type="Model.Store.ModuleEditorWorkspaceKind" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="A_WorkspaceKind">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_ModuleEditorWorkspaceKind">
         <PropertyRef Name="ID" />
       </Dependent>
     </ReferentialConstraint>

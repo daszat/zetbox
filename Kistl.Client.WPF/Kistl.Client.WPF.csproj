@@ -122,6 +122,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\ModuleEditor\Workspace.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\StringListView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -285,6 +289,9 @@
     </Compile>
     <Compile Include="View\ModuleEditor\AppLauncherDisplay.xaml.cs">
       <DependentUpon>AppLauncherDisplay.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ModuleEditor\Workspace.xaml.cs">
+      <DependentUpon>Workspace.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\StringListView.xaml.cs">
       <DependentUpon>StringListView.xaml</DependentUpon>

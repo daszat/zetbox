@@ -127,6 +127,7 @@
     <Compile Include="Mitarbeiter.Interface.Designer.cs" />
     <Compile Include="Module.Interface.Designer.cs" />
     <Compile Include="ModuleEditorDashboardKind.Interface.Designer.cs" />
+    <Compile Include="ModuleEditorWorkspaceKind.Interface.Designer.cs" />
     <Compile Include="Muhblah.Interface.Designer.cs" />
     <Compile Include="NewGuidDefaultValue.Interface.Designer.cs" />
     <Compile Include="NotNullableConstraint.Interface.Designer.cs" />

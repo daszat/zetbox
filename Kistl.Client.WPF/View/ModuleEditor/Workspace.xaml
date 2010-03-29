@@ -1,0 +1,30 @@
+﻿<Window x:Class="Kistl.Client.WPF.View.ModuleEditor.Workspace"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Module Editor Workspace" Height="600" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="5" />
+            <ColumnDefinition Width="2*" />
+        </Grid.ColumnDefinitions>
+
+        <DockPanel Grid.Column="0">
+            <TreeView>
+                <TreeViewItem Header="Object Classes"></TreeViewItem>
+                <TreeViewItem Header="Enumerations"></TreeViewItem>
+                <TreeViewItem Header="Comp. Types"></TreeViewItem>
+                <TreeViewItem Header="Relations"></TreeViewItem>
+                <TreeViewItem Header="UML"></TreeViewItem>
+            </TreeView>
+        </DockPanel>
+
+        <GridSplitter Grid.Column="1"
+                          HorizontalAlignment="Stretch" />
+
+        <ContentPresenter Grid.Column="2"
+                              Grid.IsSharedSizeScope="True"
+                              Content="{Binding SelectedItem}"
+                              ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />
+    </Grid>
+</Window>

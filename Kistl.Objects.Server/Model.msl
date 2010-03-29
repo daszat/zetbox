@@ -346,6 +346,11 @@
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 	    </MappingFragment>
       </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.ModuleEditorWorkspaceKind)">
+	    <MappingFragment StoreEntitySet="ModuleEditorWorkspaceKind">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+	    </MappingFragment>
+      </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="CurrentSchema">
       <EntityTypeMapping TypeName="IsTypeOf(Model.CurrentSchema)">

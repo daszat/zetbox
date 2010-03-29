@@ -16,6 +16,16 @@ namespace daszAt.ModuleEditor
 		
 		public IKistlContext Context { get; private set; }
 		
+		/// <summary>List of all ModuleEditorWorkspaceKind</summary>
+		/// 
+		public IQueryable<ModuleEditorWorkspaceKind> ModuleEditorWorkspaceKinds
+		{ 
+			get
+			{
+				return Context.GetQuery<ModuleEditorWorkspaceKind>();
+			}
+		}
+		
 		/// <summary>List of all ModuleEditorDashboardKind</summary>
 		/// 
 		public IQueryable<ModuleEditorDashboardKind> ModuleEditorDashboardKinds

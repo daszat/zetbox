@@ -1991,6 +1991,8 @@
   </EntityType>
   <EntityType Name="ModuleEditorDashboardKind" BaseType="Model.DashboardKind">
   </EntityType>
+  <EntityType Name="ModuleEditorWorkspaceKind" BaseType="Model.WorkspaceKind">
+  </EntityType>
   <EntityType Name="NewGuidDefaultValue" BaseType="Model.DefaultPropertyValue">
   </EntityType>
   <EntityType Name="NotNullableConstraint" BaseType="Model.Constraint">

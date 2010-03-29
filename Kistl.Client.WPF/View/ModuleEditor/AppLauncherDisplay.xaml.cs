@@ -11,6 +11,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Kistl.Client.Presentables;
+using Kistl.Client.Presentables.ModuleEditor;
 
 namespace Kistl.Client.WPF.View.ModuleEditor
 {
@@ -22,6 +24,30 @@ namespace Kistl.Client.WPF.View.ModuleEditor
         public AppLauncherDisplay()
         {
             InitializeComponent();
+        }
+
+        private void ModuleList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            var listItem = sender as ListViewItem;
+            if (listItem == null)
+            {
+                return;
+            }
+
+            var dataObject = listItem.Content as AppLauncherModuleModel;
+            if (dataObject == null)
+            {
+                return;
+            }
+
+            // only react to left mouse button double clicks
+            if (e.ChangedButton != MouseButton.Left)
+            {
+                return;
+            }
+
+            dataObject.ShowWorkspace();
+            e.Handled = true;
         }
     }
 }
