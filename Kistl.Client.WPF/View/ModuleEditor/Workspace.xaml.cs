@@ -22,5 +22,19 @@ namespace Kistl.Client.WPF.View.ModuleEditor
         {
             InitializeComponent();
         }
+
+        private void TreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            var item = NavTree.SelectedItem as Kistl.Client.Presentables.PresentableModel;
+            if (item != null)
+            {
+                this.Model.SelectedItem = item;
+            }
+        }
+
+        private Kistl.Client.Presentables.ModuleEditor.WorkspaceModel Model
+        {
+            get { return (Kistl.Client.Presentables.ModuleEditor.WorkspaceModel)DataContext; }
+        }
     }
 }

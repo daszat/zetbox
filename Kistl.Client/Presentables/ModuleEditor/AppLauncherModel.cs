@@ -63,9 +63,7 @@ namespace Kistl.Client.Presentables.ModuleEditor
         public void ShowWorkspace()
         {
             var factory = AppContext.Factory;
-            var newWorkspace = factory.CreateSpecificModel<WorkspaceModel>(KistlContext.GetContext(), this.Object);
-            // This is another way...
-            // newWorkspace.ShowForeignModel(this);
+            var newWorkspace = factory.CreateSpecificModel<WorkspaceModel>(KistlContext.GetContext(), this.Object.ID);
             factory.ShowModel(newWorkspace, true);
         }
     }

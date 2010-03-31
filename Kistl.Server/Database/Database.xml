@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2010-03-29T18:55:43.91Z" xmlns="http://dasz.at/Kistl">
+<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2010-03-30T13:09:21.937Z" xmlns="http://dasz.at/Kistl">
   <KistlBase:Module ExportGuid="110acbc0-652a-4adc-9de5-8baabfcf3637">
     <KistlBase:ChangedOn>2010-02-01T16:07:00.49Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2010-02-01T15:23:35.247Z</KistlBase:CreatedOn>
@@ -15185,6 +15185,48 @@
     <KistlBase:CreatedOn>2010-03-29T12:45:22.78Z</KistlBase:CreatedOn>
     <KistlBase:FullName>Kistl.Client.Presentables.ModuleEditor.AppLauncherModuleModel</KistlBase:FullName>
     <KistlBase:Parent>a07f30a6-b920-4fef-98ac-53155791e804</KistlBase:Parent>
+  </KistlBase:TypeRef>
+  <KistlBase:TypeRef ExportGuid="3c8a6d45-55d5-4f88-80f1-6fc4d8f608f2">
+    <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
+    <KistlBase:ChangedOn>2010-03-30T13:09:21.937Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-03-30T13:09:21.937Z</KistlBase:CreatedOn>
+    <KistlBase:FullName>Kistl.Client.Presentables.ModuleEditor.AssemblyDashboardModel</KistlBase:FullName>
+    <KistlBase:Parent>df544506-721e-448b-9d2d-6935bf4c01ae</KistlBase:Parent>
+  </KistlBase:TypeRef>
+  <KistlBase:TypeRef ExportGuid="02fa3b50-2f98-49bc-8e48-b08fbc6917a9">
+    <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
+    <KistlBase:ChangedOn>2010-03-30T12:20:53.213Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-03-30T12:20:53.213Z</KistlBase:CreatedOn>
+    <KistlBase:FullName>Kistl.Client.Presentables.ModuleEditor.CompoundObjectDashboardModel</KistlBase:FullName>
+    <KistlBase:Parent>41b6d0a1-a2ae-4c68-8997-503db83319bc</KistlBase:Parent>
+  </KistlBase:TypeRef>
+  <KistlBase:TypeRef ExportGuid="62c14559-7bf1-4016-a54a-fd093b7f30f0">
+    <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
+    <KistlBase:ChangedOn>2010-03-30T12:20:53.21Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-03-30T12:20:53.21Z</KistlBase:CreatedOn>
+    <KistlBase:FullName>Kistl.Client.Presentables.ModuleEditor.EnumerationDashboardModel</KistlBase:FullName>
+    <KistlBase:Parent>41b6d0a1-a2ae-4c68-8997-503db83319bc</KistlBase:Parent>
+  </KistlBase:TypeRef>
+  <KistlBase:TypeRef ExportGuid="df544506-721e-448b-9d2d-6935bf4c01ae">
+    <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
+    <KistlBase:ChangedOn>2010-03-30T13:09:21.893Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-03-30T13:09:21.893Z</KistlBase:CreatedOn>
+    <KistlBase:FullName>Kistl.Client.Presentables.ModuleEditor.ModuleEditorDashboardModel</KistlBase:FullName>
+    <KistlBase:Parent>41b6d0a1-a2ae-4c68-8997-503db83319bc</KistlBase:Parent>
+  </KistlBase:TypeRef>
+  <KistlBase:TypeRef ExportGuid="117f4a1c-c0a8-4c2b-9d25-902feeba0b0a">
+    <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
+    <KistlBase:ChangedOn>2010-03-30T11:52:15.03Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-03-30T11:52:15.03Z</KistlBase:CreatedOn>
+    <KistlBase:FullName>Kistl.Client.Presentables.ModuleEditor.ModuleFilteredDataTypeModel</KistlBase:FullName>
+    <KistlBase:Parent>41b6d0a1-a2ae-4c68-8997-503db83319bc</KistlBase:Parent>
+  </KistlBase:TypeRef>
+  <KistlBase:TypeRef ExportGuid="1501a52c-c487-417c-aadd-156036c81d17">
+    <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
+    <KistlBase:ChangedOn>2010-03-30T12:20:53.173Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-03-30T12:20:53.173Z</KistlBase:CreatedOn>
+    <KistlBase:FullName>Kistl.Client.Presentables.ModuleEditor.ObjectClassDashboardModel</KistlBase:FullName>
+    <KistlBase:Parent>41b6d0a1-a2ae-4c68-8997-503db83319bc</KistlBase:Parent>
   </KistlBase:TypeRef>
   <KistlBase:TypeRef ExportGuid="e164a931-9040-472d-a1ae-79a20d706ace">
     <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>

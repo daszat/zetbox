@@ -10,12 +10,9 @@
         </Grid.ColumnDefinitions>
 
         <DockPanel Grid.Column="0">
-            <TreeView>
-                <TreeViewItem Header="Object Classes"></TreeViewItem>
-                <TreeViewItem Header="Enumerations"></TreeViewItem>
-                <TreeViewItem Header="Comp. Types"></TreeViewItem>
-                <TreeViewItem Header="Relations"></TreeViewItem>
-                <TreeViewItem Header="UML"></TreeViewItem>
+            <TreeView x:Name="NavTree"
+                      ItemsSource="{Binding Path=TreeItems}" 
+                      SelectedItemChanged="TreeView_SelectedItemChanged">
             </TreeView>
         </DockPanel>
 
@@ -25,6 +22,6 @@
         <ContentPresenter Grid.Column="2"
                               Grid.IsSharedSizeScope="True"
                               Content="{Binding SelectedItem}"
-                              ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />
+                              ContentTemplateSelector="{StaticResource dashBoardTemplateSelector}" />
     </Grid>
 </Window>
