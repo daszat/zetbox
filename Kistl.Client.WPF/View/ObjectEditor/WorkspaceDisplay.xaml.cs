@@ -15,14 +15,14 @@ using Kistl.App.GUI;
 using Kistl.Client.GUI;
 using Kistl.Client.Presentables;
 
-namespace Kistl.Client.WPF.View
+namespace Kistl.Client.WPF.View.ObjectEditor
 {
     /// <summary>
     /// Interaction logic for DesktopView.xaml
     /// </summary>
-    public partial class WorkspaceView : Window
+    public partial class WorkspaceDisplay : Window
     {
-        public WorkspaceView()
+        public WorkspaceDisplay()
         {
             InitializeComponent();
         }

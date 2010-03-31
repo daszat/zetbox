@@ -22,7 +22,7 @@ namespace Kistl.Client.WPF.View.KistlBase
     /// Interaction logic for TypeRefPropertyView.xaml
     /// </summary>
     public partial class TypeRefPropertyView
-        : PropertyView
+        : PropertyEditor
     {
         public TypeRefPropertyView()
         {

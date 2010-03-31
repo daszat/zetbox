@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -16,18 +15,16 @@ using System.Windows.Shapes;
 using Kistl.Client.GUI;
 using Kistl.Client.Presentables;
 
-namespace Kistl.Client.WPF.View
+namespace Kistl.Client.WPF.View.KistlBase
 {
     /// <summary>
-    /// Interaction logic for DataObjectFullView.xaml
+    /// Interaction logic for DataObjectLineDisplay.xaml
     /// </summary>
-    public partial class DataObjectFullView : UserControl
+    public partial class DataObjectLineDisplay : UserControl
     {
-
-        public DataObjectFullView()
+        public DataObjectLineDisplay()
         {
             InitializeComponent();
-        }
+        }     
     }
-
 }

@@ -1,8 +1,8 @@
-﻿<view:PropertyView x:Class="Kistl.Client.WPF.View.StringListView"
+﻿<view:PropertyEditor x:Class="Kistl.Client.WPF.View.StringListView"
                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                    xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls"
-                   xmlns:view="clr-namespace:Kistl.Client.WPF.View"
+                   xmlns:view="clr-namespace:Kistl.Client.WPF.View.KistlBase"
                    xmlns:kevin="clr-namespace:Microsoft.Samples.KMoore.WPFSamples.InfoTextBox;assembly=WPFSamplesLib"
                    xmlns:client="clr-namespace:Kistl.Client.Presentables;assembly=Kistl.Client">
 
@@ -21,4 +21,4 @@
                   MinHeight="50"
                   MaxHeight="300" />
     </DockPanel>
-</view:PropertyView>
+</view:PropertyEditor>

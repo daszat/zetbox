@@ -18,7 +18,7 @@ namespace Kistl.Client.WPF.View.KistlBase
     /// <summary>
     /// Interaction logic for StringDisplay.xaml
     /// </summary>
-    public partial class StringDisplay : PropertyView
+    public partial class StringDisplay : PropertyEditor
     {
         public StringDisplay()
         {

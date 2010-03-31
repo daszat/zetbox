@@ -14,13 +14,14 @@ using System.Windows.Shapes;
 
 using Kistl.Client.GUI;
 using Kistl.Client.Presentables;
+using Kistl.Client.WPF.View.KistlBase;
 
 namespace Kistl.Client.WPF.View
 {
     /// <summary>
     /// Interaction logic for NullablePropertyTextBoxView.xaml
     /// </summary>
-    public partial class NullablePropertyTextBoxView : PropertyView
+    public partial class NullablePropertyTextBoxView : PropertyEditor
     {
         public NullablePropertyTextBoxView()
         {

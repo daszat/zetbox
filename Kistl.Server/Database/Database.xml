@@ -16049,21 +16049,21 @@
     <KistlBase:Assembly>157c1754-6eed-49f7-883b-ae2543bafd7e</KistlBase:Assembly>
     <KistlBase:ChangedOn>2009-12-14T17:08:05.41Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.41Z</KistlBase:CreatedOn>
-    <KistlBase:FullName>Kistl.Client.WPF.View.ActionView</KistlBase:FullName>
+    <KistlBase:FullName>Kistl.Client.WPF.View.KistlBase.ActionDisplay</KistlBase:FullName>
     <KistlBase:Parent>1fda132a-a95c-4483-9f9d-1e952fa20245</KistlBase:Parent>
   </KistlBase:TypeRef>
   <KistlBase:TypeRef ExportGuid="ba95fc85-c50f-494a-b4f0-5596ef38b7bf">
     <KistlBase:Assembly>157c1754-6eed-49f7-883b-ae2543bafd7e</KistlBase:Assembly>
     <KistlBase:ChangedOn>2009-12-14T17:08:05.41Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.41Z</KistlBase:CreatedOn>
-    <KistlBase:FullName>Kistl.Client.WPF.View.DataObjectFullView</KistlBase:FullName>
+    <KistlBase:FullName>Kistl.Client.WPF.View.ObjectEditor.DataObjectEditor</KistlBase:FullName>
     <KistlBase:Parent>1fda132a-a95c-4483-9f9d-1e952fa20245</KistlBase:Parent>
   </KistlBase:TypeRef>
   <KistlBase:TypeRef ExportGuid="4652082a-202d-4d20-a0d4-81a4f69ffb85">
     <KistlBase:Assembly>157c1754-6eed-49f7-883b-ae2543bafd7e</KistlBase:Assembly>
     <KistlBase:ChangedOn>2009-12-14T17:08:05.41Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.41Z</KistlBase:CreatedOn>
-    <KistlBase:FullName>Kistl.Client.WPF.View.DataObjectListView</KistlBase:FullName>
+    <KistlBase:FullName>Kistl.Client.WPF.View.KistlBase.ObjectReferenceListEditor</KistlBase:FullName>
     <KistlBase:Parent>b63e703b-9bbc-40cd-9dfd-e29bfb925826</KistlBase:Parent>
   </KistlBase:TypeRef>
   <KistlBase:TypeRef ExportGuid="92fb7c93-822b-41f7-b25b-dd44e0fb3516">
@@ -16126,7 +16126,7 @@
     <KistlBase:Assembly>157c1754-6eed-49f7-883b-ae2543bafd7e</KistlBase:Assembly>
     <KistlBase:ChangedOn>2009-12-14T17:08:05.41Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.41Z</KistlBase:CreatedOn>
-    <KistlBase:FullName>Kistl.Client.WPF.View.KistlBase.ObjectClassDisplay</KistlBase:FullName>
+    <KistlBase:FullName>Kistl.Client.WPF.View.ObjectBrowser.InstanceListDisplay</KistlBase:FullName>
     <KistlBase:Parent>1fda132a-a95c-4483-9f9d-1e952fa20245</KistlBase:Parent>
   </KistlBase:TypeRef>
   <KistlBase:TypeRef ExportGuid="3e9153f9-1a71-4c1e-9022-948aa7db6e11">
@@ -16175,7 +16175,7 @@
     <KistlBase:Assembly>157c1754-6eed-49f7-883b-ae2543bafd7e</KistlBase:Assembly>
     <KistlBase:ChangedOn>2010-03-29T18:55:43.91Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2010-03-29T18:55:43.91Z</KistlBase:CreatedOn>
-    <KistlBase:FullName>Kistl.Client.WPF.View.ModuleEditor.Workspace</KistlBase:FullName>
+    <KistlBase:FullName>Kistl.Client.WPF.View.ModuleEditor.WorkspaceDisplay</KistlBase:FullName>
     <KistlBase:Parent>ee07bd36-41ee-43df-8099-f4dd0c355902</KistlBase:Parent>
   </KistlBase:TypeRef>
   <KistlBase:TypeRef ExportGuid="aaa5a0a2-90df-4926-ac92-263444eb6940">
@@ -16203,7 +16203,7 @@
     <KistlBase:Assembly>157c1754-6eed-49f7-883b-ae2543bafd7e</KistlBase:Assembly>
     <KistlBase:ChangedOn>2009-12-14T17:08:05.41Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.41Z</KistlBase:CreatedOn>
-    <KistlBase:FullName>Kistl.Client.WPF.View.ObjectReferenceView</KistlBase:FullName>
+    <KistlBase:FullName>Kistl.Client.WPF.View.KistlBase.ObjectReferenceEditor</KistlBase:FullName>
     <KistlBase:Parent>b63e703b-9bbc-40cd-9dfd-e29bfb925826</KistlBase:Parent>
   </KistlBase:TypeRef>
   <KistlBase:TypeRef ExportGuid="9c2c3f17-3445-46e0-8b76-fc11f15dfbf5">
@@ -16224,7 +16224,7 @@
     <KistlBase:Assembly>157c1754-6eed-49f7-883b-ae2543bafd7e</KistlBase:Assembly>
     <KistlBase:ChangedOn>2009-12-14T17:08:05.41Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.41Z</KistlBase:CreatedOn>
-    <KistlBase:FullName>Kistl.Client.WPF.View.PropertyView</KistlBase:FullName>
+    <KistlBase:FullName>Kistl.Client.WPF.View.KistlBase.PropertyEditor</KistlBase:FullName>
     <KistlBase:Parent>1fda132a-a95c-4483-9f9d-1e952fa20245</KistlBase:Parent>
   </KistlBase:TypeRef>
   <KistlBase:TypeRef ExportGuid="477259e0-5729-4c10-9fd8-827d2a705e7d">
@@ -16301,14 +16301,14 @@
     <KistlBase:Assembly>157c1754-6eed-49f7-883b-ae2543bafd7e</KistlBase:Assembly>
     <KistlBase:ChangedOn>2009-12-14T17:08:05.413Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.413Z</KistlBase:CreatedOn>
-    <KistlBase:FullName>Kistl.Client.WPF.View.WorkspaceDisplay</KistlBase:FullName>
+    <KistlBase:FullName>Kistl.Client.WPF.View.ObjectBrowser.WorkspaceDisplay</KistlBase:FullName>
     <KistlBase:Parent>ee07bd36-41ee-43df-8099-f4dd0c355902</KistlBase:Parent>
   </KistlBase:TypeRef>
   <KistlBase:TypeRef ExportGuid="28a89148-24d1-4cc9-accc-24cc7eb2dfde">
     <KistlBase:Assembly>157c1754-6eed-49f7-883b-ae2543bafd7e</KistlBase:Assembly>
     <KistlBase:ChangedOn>2009-12-14T17:08:05.413Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.413Z</KistlBase:CreatedOn>
-    <KistlBase:FullName>Kistl.Client.WPF.View.WorkspaceView</KistlBase:FullName>
+    <KistlBase:FullName>Kistl.Client.WPF.View.ObjectEditor.WorkspaceDisplay</KistlBase:FullName>
     <KistlBase:Parent>ee07bd36-41ee-43df-8099-f4dd0c355902</KistlBase:Parent>
   </KistlBase:TypeRef>
   <KistlBase:TypeRef ExportGuid="67d83e6c-f46e-4500-a948-f1eef8832c2b">

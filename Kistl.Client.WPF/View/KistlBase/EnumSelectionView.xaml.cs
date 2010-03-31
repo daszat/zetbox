@@ -14,13 +14,14 @@ using System.Windows.Shapes;
 
 using Kistl.Client.GUI;
 using Kistl.Client.Presentables;
+using Kistl.Client.WPF.View.KistlBase;
 
 namespace Kistl.Client.WPF.View
 {
     /// <summary>
     /// Interaction logic for EnumSelectionView.xaml
     /// </summary>
-    public partial class EnumSelectionView : PropertyView
+    public partial class EnumSelectionView : PropertyEditor
     {
         public EnumSelectionView()
         {

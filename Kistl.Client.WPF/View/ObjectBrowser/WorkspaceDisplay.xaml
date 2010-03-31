@@ -1,8 +1,8 @@
-﻿<Window x:Class="Kistl.Client.WPF.View.WorkspaceDisplay"
+﻿<Window x:Class="Kistl.Client.WPF.View.ObjectBrowser.WorkspaceDisplay"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls"
-        xmlns:view="clr-namespace:Kistl.Client.WPF.View"
+        xmlns:view="clr-namespace:Kistl.Client.WPF.View.KistlBase"
         xmlns:client="clr-namespace:Kistl.Client.Presentables;assembly=Kistl.Client"
         xmlns:tr="clr-namespace:Kistl.Client.Presentables.TimeRecords;assembly=Kistl.Client"
         xmlns:commands="clr-namespace:Kistl.Client.WPF.Commands"
@@ -40,10 +40,10 @@
                         <TreeView.Resources>
                             <HierarchicalDataTemplate DataType="{x:Type client:ModuleModel}"
                                                       ItemsSource="{Binding ObjectClasses}">
-                                <view:DataObjectView />
+                                <view:DataObjectLineDisplay />
                             </HierarchicalDataTemplate>
                             <DataTemplate DataType="{x:Type client:DataObjectModel}">
-                                <view:DataObjectView />
+                                <view:DataObjectLineDisplay />
                             </DataTemplate>
                             <DataTemplate DataType="{x:Type tr:Dashboard}">
                                 <TextBlock>Time Records</TextBlock>

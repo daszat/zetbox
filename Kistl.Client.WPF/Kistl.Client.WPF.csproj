@@ -110,23 +110,59 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\ActionView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="View\ErrorListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\KistlBase\ActionDisplay.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\KistlBase\ObjectReferenceListEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\KistlBase\DataObjectLineDisplay.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\KistlBase\EnumSelectionView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\KistlBase\NullableBoolValueView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\KistlBase\NullablePropertyTextBoxView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\KistlBase\ObjectReferenceEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\KistlBase\PropertyGroupBoxView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\KistlBase\StringListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\KistlBase\TextValueSelectionView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="View\ModuleEditor\AppLauncherDisplay.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\ModuleEditor\Workspace.xaml">
+    <Page Include="View\ModuleEditor\WorkspaceDisplay.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\StringListView.xaml">
+    <Page Include="View\ObjectBrowser\InstanceListDisplay.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -142,10 +178,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\KistlBase\ObjectClassDisplay.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="View\KistlBase\StringDisplay.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -158,35 +190,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\PropertyGroupBoxView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\DataObjectListView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="SplashScreen.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\DataObjectFullView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\DataObjectView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\EnumSelectionView.xaml">
+    <Page Include="View\ObjectEditor\DataObjectEditor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\KistlDebuggerView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\NullableBoolValueView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -202,10 +214,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\TextValueSelectionView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="View\TimeRecords\Dashboard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -214,23 +222,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\WorkspaceDisplay.xaml">
+    <Page Include="View\ObjectBrowser\WorkspaceDisplay.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\WorkspaceView.xaml">
+    <Page Include="View\ObjectEditor\WorkspaceDisplay.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\DefaultViews.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\NullablePropertyTextBoxView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\ObjectReferenceView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -281,20 +281,48 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Commands\SmartRoutedUICommand.cs" />
-    <Compile Include="View\ActionView.xaml.cs">
-      <DependentUpon>ActionView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\ErrorListView.xaml.cs">
       <DependentUpon>ErrorListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\KistlBase\ActionDisplay.xaml.cs">
+      <DependentUpon>ActionDisplay.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\KistlBase\ObjectReferenceListEditor.xaml.cs">
+      <DependentUpon>ObjectReferenceListEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\KistlBase\DataObjectLineDisplay.xaml.cs">
+      <DependentUpon>DataObjectLineDisplay.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\KistlBase\EnumSelectionView.xaml.cs">
+      <DependentUpon>EnumSelectionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\KistlBase\NullableBoolValueView.xaml.cs">
+      <DependentUpon>NullableBoolValueView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\KistlBase\NullablePropertyTextBoxView.xaml.cs">
+      <DependentUpon>NullablePropertyTextBoxView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\KistlBase\ObjectReferenceEditor.xaml.cs">
+      <DependentUpon>ObjectReferenceEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\KistlBase\PropertyGroupBoxView.xaml.cs">
+      <DependentUpon>PropertyGroupBoxView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\KistlBase\PropertyEditor.cs" />
+    <Compile Include="View\KistlBase\StringListView.xaml.cs">
+      <DependentUpon>StringListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\KistlBase\TextValueSelectionView.xaml.cs">
+      <DependentUpon>TextValueSelectionView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ModuleEditor\AppLauncherDisplay.xaml.cs">
       <DependentUpon>AppLauncherDisplay.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ModuleEditor\Workspace.xaml.cs">
-      <DependentUpon>Workspace.xaml</DependentUpon>
+    <Compile Include="View\ModuleEditor\WorkspaceDisplay.xaml.cs">
+      <DependentUpon>WorkspaceDisplay.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\StringListView.xaml.cs">
-      <DependentUpon>StringListView.xaml</DependentUpon>
+    <Compile Include="View\ObjectBrowser\InstanceListDisplay.xaml.cs">
+      <DependentUpon>InstanceListDisplay.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\GridCells\ReferenceEditor.xaml.cs">
       <DependentUpon>ReferenceEditor.xaml</DependentUpon>
@@ -305,9 +333,6 @@
     <Compile Include="View\GUI\DashboardDisplay.xaml.cs">
       <DependentUpon>DashboardDisplay.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\KistlBase\ObjectClassDisplay.xaml.cs">
-      <DependentUpon>ObjectClassDisplay.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\KistlBase\StringDisplay.xaml.cs">
       <DependentUpon>StringDisplay.xaml</DependentUpon>
     </Compile>
@@ -317,15 +342,6 @@
     <Compile Include="View\LabeledView.xaml.cs">
       <DependentUpon>LabeledView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\PropertyGroupBoxView.xaml.cs">
-      <DependentUpon>PropertyGroupBoxView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\DataObjectListView.xaml.cs">
-      <DependentUpon>DataObjectListView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\EnumSelectionView.xaml.cs">
-      <DependentUpon>EnumSelectionView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\KistlDebuggerView.xaml.cs">
       <DependentUpon>KistlDebuggerView.xaml</DependentUpon>
     </Compile>
@@ -333,16 +349,9 @@
       <DependentUpon>SplashScreen.xaml</DependentUpon>
     </Compile>
     <Compile Include="UndoRedo.cs" />
-    <Compile Include="View\DataObjectFullView.xaml.cs">
-      <DependentUpon>DataObjectFullView.xaml</DependentUpon>
+    <Compile Include="View\ObjectEditor\DataObjectEditor.xaml.cs">
+      <DependentUpon>DataObjectEditor.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\DataObjectView.xaml.cs">
-      <DependentUpon>DataObjectView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\NullableBoolValueView.xaml.cs">
-      <DependentUpon>NullableBoolValueView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\PropertyView.cs" />
     <Compile Include="View\Relations\RelationEndView.xaml.cs">
       <DependentUpon>RelationEndView.xaml</DependentUpon>
     </Compile>
@@ -352,27 +361,18 @@
     <Compile Include="View\SelectionDialog.xaml.cs">
       <DependentUpon>SelectionDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\TextValueSelectionView.xaml.cs">
-      <DependentUpon>TextValueSelectionView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\TimeRecords\Dashboard.xaml.cs">
       <DependentUpon>Dashboard.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\TimeRecords\WorkEffortLineView.xaml.cs">
       <DependentUpon>WorkEffortLineView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\WorkspaceDisplay.xaml.cs">
+    <Compile Include="View\ObjectBrowser\WorkspaceDisplay.xaml.cs">
       <DependentUpon>WorkspaceDisplay.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\WorkspaceView.xaml.Commands.cs" />
-    <Compile Include="View\WorkspaceView.xaml.cs">
-      <DependentUpon>WorkspaceView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\NullablePropertyTextBoxView.xaml.cs">
-      <DependentUpon>NullablePropertyTextBoxView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\ObjectReferenceView.xaml.cs">
-      <DependentUpon>ObjectReferenceView.xaml</DependentUpon>
+    <Compile Include="View\ObjectEditor\WorkspaceDisplay.xaml.Commands.cs" />
+    <Compile Include="View\ObjectEditor\WorkspaceDisplay.xaml.cs">
+      <DependentUpon>WorkspaceDisplay.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\TimeRecords\WorkEffortView.xaml.cs">
       <DependentUpon>WorkEffortView.xaml</DependentUpon>

@@ -16,9 +16,9 @@ namespace Kistl.Client.WPF.View.ModuleEditor
     /// <summary>
     /// Interaction logic for Workspace.xaml
     /// </summary>
-    public partial class Workspace : Window
+    public partial class WorkspaceDisplay : Window
     {
-        public Workspace()
+        public WorkspaceDisplay()
         {
             InitializeComponent();
         }

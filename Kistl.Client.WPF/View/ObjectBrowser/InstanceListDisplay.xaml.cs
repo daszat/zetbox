@@ -1,5 +1,5 @@
 
-namespace Kistl.Client.WPF.View.KistlBase
+namespace Kistl.Client.WPF.View.ObjectBrowser
 {
     using System;
     using System.Collections.Generic;
@@ -20,15 +20,15 @@ namespace Kistl.Client.WPF.View.KistlBase
     using Kistl.Client.Presentables;
 
     /// <summary>
-    /// Interaction logic for ObjectClassDisplay.xaml
+    /// Shows all instances of a given DataTypeModel
     /// </summary>
-    public partial class ObjectClassDisplay
+    public partial class InstanceListDisplay
         : UserControl
     {
         /// <summary>
         /// Initializes a new instance of the ObjectClassDisplay class.
         /// </summary>
-        public ObjectClassDisplay()
+        public InstanceListDisplay()
         {
             InitializeComponent();
         }

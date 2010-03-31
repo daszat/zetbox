@@ -15,16 +15,16 @@ using System.Windows.Shapes;
 using Kistl.Client.GUI;
 using Kistl.Client.Presentables;
 
-namespace Kistl.Client.WPF.View
+namespace Kistl.Client.WPF.View.KistlBase
 {
     /// <summary>
-    /// Interaction logic for DataObjectView.xaml
+    /// Interaction logic for ObjectReferenceEditor.xaml
     /// </summary>
-    public partial class DataObjectView : UserControl
+    public partial class ObjectReferenceEditor : PropertyEditor
     {
-        public DataObjectView()
+        public ObjectReferenceEditor()
         {
             InitializeComponent();
-        }     
+        }
     }
 }

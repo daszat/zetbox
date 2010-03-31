@@ -12,13 +12,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Kistl.Client.Presentables;
+using Kistl.Client.WPF.View.KistlBase;
 
 namespace Kistl.Client.WPF.View
 {
     /// <summary>
     /// Interaction logic for StringListView.xaml
     /// </summary>
-    public partial class StringListView : PropertyView
+    public partial class StringListView : PropertyEditor
     {
         public StringListView()
         {

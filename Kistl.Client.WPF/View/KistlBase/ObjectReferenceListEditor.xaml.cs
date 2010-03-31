@@ -1,5 +1,5 @@
 
-namespace Kistl.Client.WPF.View
+namespace Kistl.Client.WPF.View.KistlBase
 {
     using System;
     using System.Collections.Generic;
@@ -22,10 +22,10 @@ namespace Kistl.Client.WPF.View
     /// <summary>
     /// Interaction logic for DataObjectListView.xaml
     /// </summary>
-    public partial class DataObjectListView
-        : PropertyView
+    public partial class ObjectReferenceListEditor
+        : PropertyEditor
     {
-        public DataObjectListView()
+        public ObjectReferenceListEditor()
         {
             InitializeComponent();
         }

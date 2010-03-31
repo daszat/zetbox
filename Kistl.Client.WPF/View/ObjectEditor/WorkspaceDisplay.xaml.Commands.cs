@@ -1,5 +1,5 @@
 
-namespace Kistl.Client.WPF.View
+namespace Kistl.Client.WPF.View.ObjectEditor
 {
     using System;
     using System.Collections.Generic;
@@ -17,30 +17,27 @@ namespace Kistl.Client.WPF.View
     using Kistl.Client.Presentables;
     using Kistl.Client.WPF.Commands;
 
-    /// <summary>
-    /// Interaction logic for DesktopView.xaml
-    /// </summary>
-    public partial class WorkspaceView : Window
+    public partial class WorkspaceDisplay
     {
         // TODO: retrieve strings from DB
         // TODO: implement some bridging code to reduce code duplication on multiple commands
 
         #region SaveCommand
 
-        public static readonly RoutedUICommand Save = new RoutedUICommand("Save", "save", typeof(WorkspaceView));
-        public static readonly RoutedUICommand Verify = new RoutedUICommand("Verify", "verify", typeof(WorkspaceView));
+        public static readonly RoutedUICommand Save = new RoutedUICommand("Save", "save", typeof(WorkspaceDisplay));
+        public static readonly RoutedUICommand Verify = new RoutedUICommand("Verify", "verify", typeof(WorkspaceDisplay));
 
-        static WorkspaceView()
+        static WorkspaceDisplay()
         {
             CommandManager.RegisterClassCommandBinding(
-                typeof(WorkspaceView),
+                typeof(WorkspaceDisplay),
                 new CommandBinding(
                     Save,
                     SaveExecuted,
                     SaveCanExecute)); 
             
             CommandManager.RegisterClassCommandBinding(
-                typeof(WorkspaceView),
+                typeof(WorkspaceDisplay),
                 new CommandBinding(
                     Verify,
                     VerifyExecuted));
