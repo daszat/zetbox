@@ -10,6 +10,7 @@ using Kistl.API.Client;
 using Kistl.App.Base;
 using Kistl.App.Extensions;
 using Kistl.Client.Presentables;
+using Kistl.Client.Presentables.ObjectBrowser;
 
 namespace Kistl.Client.ASPNET.Toolkit
 {
@@ -21,7 +22,7 @@ namespace Kistl.Client.ASPNET.Toolkit
         public List<JavaScriptObjectMoniker> GetModules()
         {
             var workspace = GuiApplicationContext.Current.Factory
-                .CreateSpecificModel<WorkspaceModel>(KistlContextManagerModule.KistlContext);
+                .CreateSpecificModel<WorkspaceViewModel>(KistlContextManagerModule.KistlContext);
 
             return workspace.Modules.Select(i => new JavaScriptObjectMoniker(i)).ToList();
         }
@@ -30,7 +31,7 @@ namespace Kistl.Client.ASPNET.Toolkit
         public List<JavaScriptObjectMoniker> GetObjectClasses(int moduleID)
         {
             var workspace = GuiApplicationContext.Current.Factory
-                .CreateSpecificModel<WorkspaceModel>(KistlContextManagerModule.KistlContext);
+                .CreateSpecificModel<WorkspaceViewModel>(KistlContextManagerModule.KistlContext);
 
             return workspace.Modules.Single(m => m.ID == moduleID).ObjectClasses
                 .Select(i => new JavaScriptObjectMoniker(i)).ToList();

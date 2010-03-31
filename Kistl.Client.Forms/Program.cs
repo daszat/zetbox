@@ -8,6 +8,7 @@ using Kistl.API;
 using Kistl.API.Client;
 using Kistl.API.Configuration;
 using Kistl.Client.Presentables;
+using Kistl.Client.Presentables.ObjectBrowser;
 
 namespace Kistl.Client.Forms
 {
@@ -29,7 +30,7 @@ namespace Kistl.Client.Forms
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            var initialWorkspace = AppContext.Factory.CreateSpecificModel<WorkspaceModel>(KistlContext.GetContext());
+            var initialWorkspace = AppContext.Factory.CreateSpecificModel<WorkspaceViewModel>(KistlContext.GetContext());
             AppContext.Factory.ShowModel(initialWorkspace, true);
 
             Application.Run();

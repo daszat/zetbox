@@ -11,13 +11,14 @@ using Kistl.API;
 using Kistl.Client.ASPNET.Toolkit.Pages;
 using Kistl.Client.GUI;
 using Kistl.Client.Presentables;
+using Kistl.Client.Presentables.ObjectBrowser;
 
 [assembly: WebResource("Kistl.Client.ASPNET.Toolkit.View.LauncherView.js", "text/javascript")] 
 
 namespace Kistl.Client.ASPNET.Toolkit.View
 {
     [ControlLocation("~/View/LauncherView.ascx")]
-    public abstract class LauchnerView : ModelUserControl<WorkspaceModel>, IScriptControl
+    public abstract class LauchnerView : ModelUserControl<WorkspaceViewModel>, IScriptControl
     {
         protected abstract AjaxDataControls.DataList listModulesCtrl { get; }
         protected abstract AjaxDataControls.DataList listObjectClassesCtrl { get; }

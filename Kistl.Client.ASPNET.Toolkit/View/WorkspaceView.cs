@@ -12,13 +12,14 @@ using Kistl.Client.ASPNET.Toolkit.Pages;
 using Kistl.Client.GUI;
 using Kistl.Client.Presentables;
 using System.Web.UI.HtmlControls;
+using Kistl.Client.Presentables.ObjectEditor;
 
 [assembly: WebResource("Kistl.Client.ASPNET.Toolkit.View.WorkspaceView.js", "text/javascript")]
 
 namespace Kistl.Client.ASPNET.Toolkit.View
 {
     [ControlLocation("~/View/WorkspaceView.ascx")]
-    public abstract class WorkspaceView : ModelUserControl<WorkspaceModel>, IScriptControl
+    public abstract class WorkspaceView : ModelUserControl<WorkspaceViewModel>, IScriptControl
     {
         protected abstract Control containerCtrl { get; }
         protected abstract HiddenField hdObjectsControl { get; }

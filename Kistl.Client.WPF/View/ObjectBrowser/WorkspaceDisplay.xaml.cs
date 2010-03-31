@@ -18,11 +18,12 @@ namespace Kistl.Client.WPF.View.ObjectBrowser
     using Kistl.API.Client;
     using Kistl.Client.Presentables;
     using Kistl.Client.GUI;
+    using Kistl.Client.Presentables.ObjectBrowser;
 
     /// <summary>
-    /// Interaction logic for WorkspaceDisplay.xaml, a read-only display of a <see cref="Kistl.Client.Presentables.WorkspaceModel"/>.
+    /// Interaction logic for WorkspaceDisplay.xaml, a read-only display of a <see cref="Kistl.Client.Presentables.ObjectBrowser.WorkspaceViewModel"/>.
     /// </summary>
-    public partial class WorkspaceDisplay : Window, IHasViewModel<WorkspaceModel>
+    public partial class WorkspaceDisplay : Window, IHasViewModel<WorkspaceViewModel>
     {
         /// <summary>
         /// Initializes a new instance of the WorkspaceDisplay class.
@@ -44,9 +45,9 @@ namespace Kistl.Client.WPF.View.ObjectBrowser
         /// <summary>
         /// Gets the displayed model. Uses the DataContext as backing store.
         /// </summary>
-        public WorkspaceModel ViewModel
+        public WorkspaceViewModel ViewModel
         {
-            get { return (WorkspaceModel)DataContext; }
+            get { return (WorkspaceViewModel)DataContext; }
         }
     }
 }

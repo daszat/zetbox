@@ -18,6 +18,7 @@ namespace Kistl.Client.WPF.View.ObjectBrowser
     using Kistl.API.Client;
     using Kistl.App.Base;
     using Kistl.Client.Presentables;
+    using ObjectEditorWorkspace = Kistl.Client.Presentables.ObjectEditor.WorkspaceViewModel;
 
     /// <summary>
     /// Shows all instances of a given DataTypeModel
@@ -59,7 +60,7 @@ namespace Kistl.Client.WPF.View.ObjectBrowser
             }
 
             var factory = App.Current.AppContext.Factory;
-            var newWorkspace = factory.CreateSpecificModel<WorkspaceModel>(KistlContext.GetContext());
+            var newWorkspace = factory.CreateSpecificModel<ObjectEditorWorkspace>(KistlContext.GetContext());
             newWorkspace.ShowForeignModel(dataObject);
             factory.ShowModel(newWorkspace, true);
             e.Handled = true;
@@ -68,7 +69,7 @@ namespace Kistl.Client.WPF.View.ObjectBrowser
         private void Open_Click(object sender, RoutedEventArgs e)
         {
             var factory = App.Current.AppContext.Factory;
-            var newWorkspace = factory.CreateSpecificModel<WorkspaceModel>(KistlContext.GetContext());
+            var newWorkspace = factory.CreateSpecificModel<ObjectEditorWorkspace>(KistlContext.GetContext());
             foreach (var item in ClassList.SelectedItems.OfType<DataObjectModel>())
             {
                 newWorkspace.ShowForeignModel(item);
@@ -93,7 +94,7 @@ namespace Kistl.Client.WPF.View.ObjectBrowser
             {
                 var newCtx = KistlContext.GetContext();
                 var objClass = newCtx.Find<DataType>(dtm.TypeId);
-                var newWorkspace = factory.CreateSpecificModel<WorkspaceModel>(newCtx);
+                var newWorkspace = factory.CreateSpecificModel<ObjectEditorWorkspace>(newCtx);
                 newWorkspace.ShowForeignModel((DataObjectModel)factory.CreateDefaultModel(newCtx, objClass));
                 factory.ShowModel(newWorkspace, true);
             }
@@ -106,7 +107,7 @@ namespace Kistl.Client.WPF.View.ObjectBrowser
             if (dtm != null)
             {
                 var newCtx = KistlContext.GetContext();
-                var newWorkspace = factory.CreateSpecificModel<WorkspaceModel>(newCtx);
+                var newWorkspace = factory.CreateSpecificModel<ObjectEditorWorkspace>(newCtx);
                 newWorkspace.ShowForeignModel((DataObjectModel)factory.CreateDefaultModel(newCtx, newCtx.Create(dtm.InterfaceType)));
                 factory.ShowModel(newWorkspace, true);
             }

@@ -14,13 +14,14 @@ using System.Windows.Shapes;
 using Kistl.App.GUI;
 using Kistl.Client.GUI;
 using Kistl.Client.Presentables;
+using Kistl.Client.Presentables.ObjectEditor;
 
 namespace Kistl.Client.WPF.View.ObjectEditor
 {
     /// <summary>
     /// Interaction logic for DesktopView.xaml
     /// </summary>
-    public partial class WorkspaceDisplay : Window, IHasViewModel<WorkspaceModel>
+    public partial class WorkspaceDisplay : Window, IHasViewModel<WorkspaceViewModel>
     {
         public WorkspaceDisplay()
         {
@@ -37,9 +38,9 @@ namespace Kistl.Client.WPF.View.ObjectEditor
             }
         }
 
-        public WorkspaceModel ViewModel
+        public WorkspaceViewModel ViewModel
         {
-            get { return (WorkspaceModel)this.DataContext; }
+            get { return (WorkspaceViewModel)this.DataContext; }
         }
     }
 }

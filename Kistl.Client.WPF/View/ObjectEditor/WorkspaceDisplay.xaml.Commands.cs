@@ -16,6 +16,7 @@ namespace Kistl.Client.WPF.View.ObjectEditor
 
     using Kistl.Client.Presentables;
     using Kistl.Client.WPF.Commands;
+    using Kistl.Client.Presentables.ObjectEditor;
 
     public partial class WorkspaceDisplay
     {
@@ -45,7 +46,7 @@ namespace Kistl.Client.WPF.View.ObjectEditor
 
         private static void SaveCanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            var workspaceModel = (WorkspaceModel)e.Parameter;
+            var workspaceModel = (WorkspaceViewModel)e.Parameter;
             e.CanExecute =
                 workspaceModel != null
                 && workspaceModel.SaveCommand.CanExecute(null);
@@ -53,13 +54,13 @@ namespace Kistl.Client.WPF.View.ObjectEditor
 
         private static void SaveExecuted(object sender, ExecutedRoutedEventArgs e)
         {
-            var workspaceModel = (WorkspaceModel)e.Parameter;
+            var workspaceModel = (WorkspaceViewModel)e.Parameter;
             workspaceModel.SaveCommand.Execute(null);
         }
 
         private static void VerifyExecuted(object sender, ExecutedRoutedEventArgs e)
         {
-            var workspaceModel = (WorkspaceModel)e.Parameter;
+            var workspaceModel = (WorkspaceViewModel)e.Parameter;
             workspaceModel.VerifyContextCommand.Execute(null);
         }
 

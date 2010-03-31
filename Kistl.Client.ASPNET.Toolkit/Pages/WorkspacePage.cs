@@ -19,6 +19,7 @@ using Kistl.Client.ASPNET.Toolkit;
 using Kistl.Client.ASPNET.Toolkit.View;
 using Kistl.Client.Presentables;
 using Kistl.Client.GUI;
+using Kistl.Client.Presentables.ObjectBrowser;
 
 namespace Kistl.Client.ASPNET.Toolkit.Pages
 {
@@ -34,7 +35,7 @@ namespace Kistl.Client.ASPNET.Toolkit.Pages
         void WorkspacePage_Init(object sender, EventArgs e)
         {
             var mdl = GuiApplicationContext.Current.Factory
-                .CreateSpecificModel<WorkspaceModel>(KistlContextManagerModule.KistlContext);
+                .CreateSpecificModel<WorkspaceViewModel>(KistlContextManagerModule.KistlContext);
 
             GuiApplicationContext.Current.Factory.CreateDefaultView(mdl, ctrlMainContent);
         }

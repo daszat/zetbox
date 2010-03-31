@@ -12280,9 +12280,15 @@
   </GUI:PresentableModelDescriptor>
   <GUI:PresentableModelDescriptor ExportGuid="ffc833d5-a2a5-4cde-8335-6285973742d8">
     <GUI:DefaultKind>329837fd-1146-48b2-9f4e-79aec8958b1e</GUI:DefaultKind>
-    <GUI:Description>A top-level window containing a Workspace, a visual representation for IKistlContext</GUI:Description>
+    <GUI:Description>A top-level window containing a Workspace ObjectEditor, a visual representation for IKistlContext</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentableModelRef>d9fe8f77-b156-4929-add8-38cc2fa546e8</GUI:PresentableModelRef>
+  </GUI:PresentableModelDescriptor>
+  <GUI:PresentableModelDescriptor ExportGuid="B8C85C21-966F-4cb0-A2B9-FCAD029DE674">
+    <GUI:DefaultKind>329837fd-1146-48b2-9f4e-79aec8958b1e</GUI:DefaultKind>
+    <GUI:Description>A top-level window containing a Workspace ObjectBrowser, a visual representation for IKistlContext</GUI:Description>
+    <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+    <GUI:PresentableModelRef>BF51F3C4-2F92-480b-A244-02DC8C69ED56</GUI:PresentableModelRef>
   </GUI:PresentableModelDescriptor>
   <GUI:ViewDescriptor ExportGuid="17aec30d-f2b5-4c08-8f8d-940504481b5d">
     <GUI:ControlRef>5f402c91-e7e1-4b53-9ac3-68ff2398ac58</GUI:ControlRef>
@@ -15582,7 +15588,14 @@
     <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
     <KistlBase:ChangedOn>2009-12-14T17:08:05.41Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.41Z</KistlBase:CreatedOn>
-    <KistlBase:FullName>Kistl.Client.Presentables.WorkspaceModel</KistlBase:FullName>
+    <KistlBase:FullName>Kistl.Client.Presentables.ObjectEditor.WorkspaceViewModel</KistlBase:FullName>
+    <KistlBase:Parent>6012afb5-9ef6-4552-9481-b46a39f8f54d</KistlBase:Parent>
+  </KistlBase:TypeRef>
+  <KistlBase:TypeRef ExportGuid="BF51F3C4-2F92-480b-A244-02DC8C69ED56">
+    <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
+    <KistlBase:ChangedOn>2009-12-14T17:08:05.41Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2009-12-14T17:08:05.41Z</KistlBase:CreatedOn>
+    <KistlBase:FullName>Kistl.Client.Presentables.ObjectBrowser.WorkspaceViewModel</KistlBase:FullName>
     <KistlBase:Parent>6012afb5-9ef6-4552-9481-b46a39f8f54d</KistlBase:Parent>
   </KistlBase:TypeRef>
   <KistlBase:TypeRef ExportGuid="1067284c-7e5c-426d-b65d-7f46249ef266">

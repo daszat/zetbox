@@ -9,7 +9,7 @@ using Kistl.App.Extensions;
 
 namespace Kistl.Client.Presentables.ModuleEditor
 {
-    public class WorkspaceViewModel : PresentableModel
+    public class WorkspaceViewModel : WindowViewModel
     {
         public WorkspaceViewModel(IGuiApplicationContext appCtx, IKistlContext dataCtx)
             : base(appCtx, dataCtx)

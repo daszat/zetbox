@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using Kistl.Client.Forms.View;
 using Kistl.Client.Presentables;
 using Kistl.Client.GUI;
+using Kistl.Client.Presentables.ObjectBrowser;
 
 namespace Kistl.Client.Forms
 {
@@ -26,7 +27,7 @@ namespace Kistl.Client.Forms
             get { return Kistl.App.GUI.Toolkit.WinForms; }
         }
 
-        protected void CreateWorkspace(WorkspaceModel mdl, bool activate)
+        protected void CreateWorkspace(WorkspaceViewModel mdl, bool activate)
         {
             var workspace = new WorkspaceView(); // TODO: delegate to data store / TypeDescriptor
             workspace.DataContext = mdl;

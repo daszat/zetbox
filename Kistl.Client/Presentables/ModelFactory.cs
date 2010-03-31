@@ -34,7 +34,7 @@ namespace Kistl.Client.Presentables
         {
             AppContext = appCtx;
             AppContext.UiThread.Verify();
-            this.Workspaces = new Dictionary<IKistlContext, WorkspaceModel>();
+            this.Managers = new Dictionary<IKistlContext, IMultipleInstancesManager>();
         }
 
         #region Model Management
@@ -119,9 +119,9 @@ namespace Kistl.Client.Presentables
             }
 
             // save workspaces
-            if (typeof(WorkspaceModel).IsAssignableFrom(requestedType))
+            if (typeof(IMultipleInstancesManager).IsAssignableFrom(requestedType))
             {
-                OnWorkspaceCreated(ctx, (WorkspaceModel)result);
+                OnIMultipleInstancesManagerCreated(ctx, (IMultipleInstancesManager)result);
             }
 
             return result;
@@ -206,9 +206,9 @@ namespace Kistl.Client.Presentables
             }
             else
             {
-                var ws = Workspaces[dom.Object.Context];
-                ws.HistoryTouch(dom);
-                ws.SelectedItem = dom;
+                var m = Managers[dom.Object.Context];
+                m.HistoryTouch(dom);
+                m.SelectedItem = dom;
             }
         }
 
@@ -218,12 +218,12 @@ namespace Kistl.Client.Presentables
 
         #region Workspace Management
 
-        protected Dictionary<IKistlContext, WorkspaceModel> Workspaces { get; private set; }
+        protected Dictionary<IKistlContext, IMultipleInstancesManager> Managers { get; private set; }
 
-        protected virtual void OnWorkspaceCreated(IKistlContext ctx, WorkspaceModel workspace)
+        protected virtual void OnIMultipleInstancesManagerCreated(IKistlContext ctx, IMultipleInstancesManager workspace)
         {
             // TODO: limit this reference to the lifetime of the context
-            this.Workspaces[ctx] = workspace;
+            this.Managers[ctx] = workspace;
         }
 
         #endregion

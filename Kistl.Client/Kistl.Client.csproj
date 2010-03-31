@@ -86,6 +86,7 @@
     <Compile Include="Presentables\ICommand.cs" />
     <Compile Include="Presentables\ILabeledViewModel.cs" />
     <Compile Include="Presentables\IModelFactory.cs" />
+    <Compile Include="Presentables\IMultipleInstancesManager.cs" />
     <Compile Include="Presentables\IPropertyModel.cs" />
     <Compile Include="Presentables\KistlBase\AssemblyModel.cs" />
     <Compile Include="Presentables\KistlBase\AssemblyReferenceModel.cs" />
@@ -100,6 +101,7 @@
     <Compile Include="Presentables\ModelFactory.cs" />
     <Compile Include="Presentables\ModuleEditor\WorkspaceViewModel.cs" />
     <Compile Include="Presentables\ModuleModel.cs" />
+    <Compile Include="Presentables\ObjectBrowser\WorkspaceViewModel.cs" />
     <Compile Include="Presentables\ObjectClassModel.cs" />
     <Compile Include="Presentables\ObjectListModel.cs" />
     <Compile Include="Presentables\ObjectReferenceModel.Commands.cs" />
@@ -113,9 +115,10 @@
     <Compile Include="Presentables\TimeRecords\PresenceRecordModel.cs" />
     <Compile Include="Presentables\TimeRecords\WorkEffortRecorderModel.Commands.cs" />
     <Compile Include="Presentables\ValuePropertyModels.cs" />
-    <Compile Include="Presentables\WorkspaceModel.cs" />
+    <Compile Include="Presentables\ObjectEditor\WorkspaceViewModel.cs" />
     <Compile Include="Presentables\TimeRecords\WorkEffortModel.cs" />
     <Compile Include="Presentables\TimeRecords\WorkEffortRecorderModel.cs" />
+    <Compile Include="Presentables\WindowViewModel.cs" />
     <Compile Include="ServerDomainManager.cs" />
     <Compile Include="CustomActionsManagerClient.cs" />
     <Compile Include="GuiApplicationContext.cs" />

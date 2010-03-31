@@ -10,55 +10,18 @@ using Kistl.App.Extensions;
 using Kistl.API.Client;
 using System.ComponentModel;
 
-namespace Kistl.Client.Presentables
+namespace Kistl.Client.Presentables.ObjectEditor
 {
-    public class WorkspaceModel
-        : PresentableModel
+    public class WorkspaceViewModel
+        : WindowViewModel
     {
-        public WorkspaceModel(IGuiApplicationContext appCtx, IKistlContext dataCtx)
+        public WorkspaceViewModel(IGuiApplicationContext appCtx, IKistlContext dataCtx)
             : base(appCtx, dataCtx)
         {
             RecentObjects = new ObservableCollection<PresentableModel>();
         }
 
         #region Data
-
-        /// <summary>
-        /// A collection of all <see cref="Module"/>s, to display as entry 
-        /// point into the object hierarchy
-        /// </summary>
-        public ObservableCollection<ModuleModel> Modules
-        {
-            get
-            {
-                if (_modulesCache == null)
-                {
-                    _modulesCache = new ObservableCollection<ModuleModel>();
-                    LoadModules();
-                }
-                return _modulesCache;
-            }
-        }
-        private ObservableCollection<ModuleModel> _modulesCache;
-
-        /// <summary>
-        /// A collection of all applications, to display as entry 
-        /// points.
-        /// </summary>
-        public ObservableCollection<PresentableModel> Applications
-        {
-            get
-            {
-                if (_applicationsCache == null)
-                {
-                    _applicationsCache = new ObservableCollection<PresentableModel>();
-                    LoadApplications();
-                }
-                return _applicationsCache;
-            }
-        }
-        private ObservableCollection<PresentableModel> _applicationsCache;
-
         /// <summary>
         /// A list of "active" <see cref="IDataObject"/>s
         /// </summary>
@@ -128,30 +91,10 @@ namespace Kistl.Client.Presentables
 
         #endregion
 
-        #region Create New Instance Externally
-
-        private static CreateNewInstanceExternallyCommand _createNewInstanceExternallyCommand = null;
-        /// <summary>
-        /// Creates a new instance of an <see cref="ObjectClass"/> and makes it the currently selected instance.
-        /// </summary>
-        public ICommand CreateNewInstanceExternallyCommand
-        {
-            get
-            {
-                if (_createNewInstanceExternallyCommand == null)
-                {
-                    _createNewInstanceExternallyCommand = new CreateNewInstanceExternallyCommand(AppContext, DataContext);
-                }
-                return _createNewInstanceExternallyCommand;
-            }
-        }
-
-        #endregion
-
         #region History Touch
 
         /// <summary>
-        /// registers a user contact with the mdl in this <see cref="WorkspaceModel"/>'s history
+        /// registers a user contact with the mdl in this <see cref="WorkspaceViewModel"/>'s history
         /// </summary>
         /// <param name="mdl"></param>
         public void HistoryTouch(PresentableModel mdl)
@@ -186,27 +129,6 @@ namespace Kistl.Client.Presentables
         }
 
         #endregion
-
-        #endregion
-
-        #region Utilities and UI callbacks
-
-        private void LoadModules()
-        {
-            var modules = DataContext.GetQuery<Module>().ToList();
-            foreach (var m in modules)
-            {
-                Modules.Add((ModuleModel)Factory.CreateDefaultModel(DataContext, m));
-            }
-        }
-
-        private void LoadApplications()
-        {
-            this.Applications.Add(new GUI.DashboardModel(AppContext, DataContext));
-            this.Applications.Add(new TimeRecords.Dashboard(AppContext, DataContext));
-            // TODO:
-            // this.Applications.Add(new ModuleEditor.AppLauncherModel(AppContext, DataContext));
-        }
 
         #endregion
 
@@ -307,13 +229,13 @@ namespace Kistl.Client.Presentables
     /// </summary>
     internal class CreateNewInstanceCommand : CommandModel
     {
-        public CreateNewInstanceCommand(IGuiApplicationContext appCtx, IKistlContext dataCtx, WorkspaceModel parent)
+        public CreateNewInstanceCommand(IGuiApplicationContext appCtx, IKistlContext dataCtx, WorkspaceViewModel parent)
             : base(appCtx, dataCtx, "New", "Create a new instance")
         {
             _parent = parent;
         }
 
-        private WorkspaceModel _parent;
+        private WorkspaceViewModel _parent;
 
         public override bool CanExecute(object data)
         {
@@ -333,41 +255,6 @@ namespace Kistl.Client.Presentables
                 var newModel = (DataObjectModel)Factory.CreateDefaultModel(DataContext, newObject);
                 _parent.HistoryTouch(newModel);
                 _parent.SelectedItem = newModel;
-            }
-        }
-    }
-
-    /// <summary>
-    /// Creates a new instance of an <see cref="ObjectClass"/> and opens it in a new WorkspaceView.
-    /// </summary>
-    internal class CreateNewInstanceExternallyCommand : CommandModel
-    {
-        public CreateNewInstanceExternallyCommand(IGuiApplicationContext appCtx, IKistlContext dataCtx)
-            : base(appCtx, dataCtx, "External New ...", "Create a new instance of this object class in a new window")
-        {
-        }
-
-        public override bool CanExecute(object data)
-        {
-            return data != null
-                && data is ObjectClassModel;
-        }
-
-        protected override void DoExecute(object data)
-        {
-            if (CanExecute(data))
-            {
-                var externalCtx = KistlContext.GetContext();
-                var objectClass = data as ObjectClassModel;
-
-                // responsibility to externalCtx's disposal passes to newWorkspace
-                var newWorkspace = Factory.CreateSpecificModel<WorkspaceModel>(externalCtx);
-                var newObject = externalCtx.Create(objectClass.GetDescribedInterfaceType());
-                var newModel = (DataObjectModel)Factory.CreateDefaultModel(externalCtx, newObject);
-
-                newWorkspace.HistoryTouch(newModel);
-                newWorkspace.SelectedItem = newModel;
-                Factory.ShowModel(newWorkspace, true);
             }
         }
     }

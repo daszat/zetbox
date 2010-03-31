@@ -9,6 +9,7 @@ namespace Kistl.Client.WPF
     using Kistl.API.Client;
     using Kistl.App.GUI;
     using Kistl.Client.Presentables;
+    using Kistl.Client.Presentables.ObjectBrowser;
 
     public static class Launcher
     {
@@ -30,7 +31,7 @@ namespace Kistl.Client.WPF
             }
             else
             {
-                initialWorkspace = appCtx.Factory.CreateSpecificModel<WorkspaceModel>(KistlContext.GetContext());
+                initialWorkspace = appCtx.Factory.CreateSpecificModel<WorkspaceViewModel>(KistlContext.GetContext());
             }
 
             // ugh?

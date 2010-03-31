@@ -17,10 +17,10 @@ namespace Kistl.Client.Presentables.TimeRecords
     /// <summary>
     /// Main workspace presenter of the TimeRecords module for recording work efforts.
     /// </summary>
-    /// This <see cref="WorkspaceModel"/> implements the use case of capturing fine grained
+    /// This WorkspaceViewModel implements the use case of capturing fine grained
     /// work effort information "on the go" while employees are working on their PC.
     public sealed partial class WorkEffortRecorderModel
-        : WorkspaceModel
+        : WindowViewModel
     {
         /// <summary>
         /// Initializes a new instance of the WorkEffortRecorderModel class.
@@ -30,6 +30,14 @@ namespace Kistl.Client.Presentables.TimeRecords
         public WorkEffortRecorderModel(IGuiApplicationContext appCtx, IKistlContext dataCtx)
             : base(appCtx, dataCtx)
         {
+        }
+
+        public override string Name
+        {
+            get
+            {
+                return "WorkEffortRecorderModel";
+            }
         }
 
         #region The currently logging user

@@ -7,13 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using Kistl.Client.Presentables;
+using Kistl.Client.Presentables.ObjectBrowser;
 
 namespace Kistl.Client.Forms.View
 {
     public partial class WorkspaceView : Form, IFormsView
     {
-        private WorkspaceModel _dataContextCache;
-        public WorkspaceModel DataContext
+        private WorkspaceViewModel _dataContextCache;
+        public WorkspaceViewModel DataContext
         {
             get
             {
@@ -169,7 +170,7 @@ namespace Kistl.Client.Forms.View
 
         void IFormsView.SetDataContext(INotifyPropertyChanged mdl)
         {
-            this.DataContext = (WorkspaceModel)mdl;
+            this.DataContext = (WorkspaceViewModel)mdl;
         }
 
         internal Renderer Renderer { get; private set; }
