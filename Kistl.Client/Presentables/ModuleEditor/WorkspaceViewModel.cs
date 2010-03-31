@@ -9,15 +9,15 @@ using Kistl.App.Extensions;
 
 namespace Kistl.Client.Presentables.ModuleEditor
 {
-    public class WorkspaceModel : PresentableModel
+    public class WorkspaceViewModel : PresentableModel
     {
-        public WorkspaceModel(IGuiApplicationContext appCtx, IKistlContext dataCtx)
+        public WorkspaceViewModel(IGuiApplicationContext appCtx, IKistlContext dataCtx)
             : base(appCtx, dataCtx)
         {
             CurrentModule = dataCtx.GetQuery<Module>().FirstOrDefault();
         }
 
-        public WorkspaceModel(IGuiApplicationContext appCtx, IKistlContext dataCtx, int moduleID)
+        public WorkspaceViewModel(IGuiApplicationContext appCtx, IKistlContext dataCtx, int moduleID)
             : base(appCtx, dataCtx)
         {
             CurrentModule = dataCtx.Find<Module>(moduleID);

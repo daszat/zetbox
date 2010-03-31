@@ -154,10 +154,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\ModuleEditor\AppLauncherDisplay.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="View\ModuleEditor\WorkspaceDisplay.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -202,11 +198,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Relations\RelationEndView.xaml">
+    <Page Include="View\Relations\RelationEndEditor.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Relations\RelationView.xaml">
+    <Page Include="View\Relations\RelationEditor.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -315,9 +311,6 @@
     <Compile Include="View\KistlBase\TextValueSelectionView.xaml.cs">
       <DependentUpon>TextValueSelectionView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ModuleEditor\AppLauncherDisplay.xaml.cs">
-      <DependentUpon>AppLauncherDisplay.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\ModuleEditor\WorkspaceDisplay.xaml.cs">
       <DependentUpon>WorkspaceDisplay.xaml</DependentUpon>
     </Compile>
@@ -352,11 +345,11 @@
     <Compile Include="View\ObjectEditor\DataObjectEditor.xaml.cs">
       <DependentUpon>DataObjectEditor.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Relations\RelationEndView.xaml.cs">
-      <DependentUpon>RelationEndView.xaml</DependentUpon>
+    <Compile Include="View\Relations\RelationEndEditor.xaml.cs">
+      <DependentUpon>RelationEndEditor.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Relations\RelationView.xaml.cs">
-      <DependentUpon>RelationView.xaml</DependentUpon>
+    <Compile Include="View\Relations\RelationEditor.xaml.cs">
+      <DependentUpon>RelationEditor.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\SelectionDialog.xaml.cs">
       <DependentUpon>SelectionDialog.xaml</DependentUpon>

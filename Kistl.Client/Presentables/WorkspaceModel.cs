@@ -204,7 +204,8 @@ namespace Kistl.Client.Presentables
         {
             this.Applications.Add(new GUI.DashboardModel(AppContext, DataContext));
             this.Applications.Add(new TimeRecords.Dashboard(AppContext, DataContext));
-            this.Applications.Add(new ModuleEditor.AppLauncherModel(AppContext, DataContext));
+            // TODO:
+            // this.Applications.Add(new ModuleEditor.AppLauncherModel(AppContext, DataContext));
         }
 
         #endregion

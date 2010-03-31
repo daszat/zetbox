@@ -20,11 +20,16 @@ namespace Kistl.Client.WPF.View.KistlBase
     /// <summary>
     /// Interaction logic for DataObjectLineDisplay.xaml
     /// </summary>
-    public partial class DataObjectLineDisplay : UserControl
+    public partial class DataObjectLineDisplay : UserControl, IHasViewModel<PresentableModel>
     {
         public DataObjectLineDisplay()
         {
             InitializeComponent();
-        }     
+        }
+
+        public PresentableModel ViewModel
+        {
+            get { return (PresentableModel)DataContext; }
+        }
     }
 }

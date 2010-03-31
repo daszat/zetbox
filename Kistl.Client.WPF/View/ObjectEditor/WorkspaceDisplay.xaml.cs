@@ -20,7 +20,7 @@ namespace Kistl.Client.WPF.View.ObjectEditor
     /// <summary>
     /// Interaction logic for DesktopView.xaml
     /// </summary>
-    public partial class WorkspaceDisplay : Window
+    public partial class WorkspaceDisplay : Window, IHasViewModel<WorkspaceModel>
     {
         public WorkspaceDisplay()
         {
@@ -29,13 +29,17 @@ namespace Kistl.Client.WPF.View.ObjectEditor
 
         private void DeleteHandler(object sender, RoutedEventArgs e)
         {
-            var workspaceModel = (WorkspaceModel)this.DataContext;
-            var item = workspaceModel.SelectedItem as DataObjectModel;
+            var item = ViewModel.SelectedItem as DataObjectModel;
             if (item != null)
             {
                 item.Delete();
-                workspaceModel.HistoryTouch(item);
+                ViewModel.HistoryTouch(item);
             }
+        }
+
+        public WorkspaceModel ViewModel
+        {
+            get { return (WorkspaceModel)this.DataContext; }
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Kistl.Client.WPF.View.Relations.RelationView"
+﻿<UserControl x:Class="Kistl.Client.WPF.View.Relations.RelationEditor"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls"
@@ -41,7 +41,7 @@
                         <view:LabeledView DockPanel.Dock="Top"
                                           Margin="5,0,5,0"
                                           DataContext="{Binding PropertyModelsByName[Storage], UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}" />
-                    
+
                         <view:LabeledView DockPanel.Dock="Top"
                                           Margin="5,0,5,0"
                                           DataContext="{Binding PropertyModelsByName[Containment], UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}" />
@@ -82,14 +82,14 @@
                                HorizontalAlignment="Center"
                                FontWeight="Bold">B</TextBlock>
 
-                    <rels:RelationEndView Grid.Row="1"
-                                          Grid.Column="0"
-                                          Grid.ColumnSpan="3"
-                                          DataContext="{Binding A}" />
-                    <rels:RelationEndView Grid.Row="1"
-                                          Grid.Column="3"
-                                          Grid.ColumnSpan="3"
-                                          DataContext="{Binding B}" />
+                    <rels:RelationEndEditor Grid.Row="1"
+                                            Grid.Column="0"
+                                            Grid.ColumnSpan="3"
+                                            DataContext="{Binding A}" />
+                    <rels:RelationEndEditor Grid.Row="1"
+                                            Grid.Column="3"
+                                            Grid.ColumnSpan="3"
+                                            DataContext="{Binding B}" />
                 </Grid>
 
                 <GroupBox DockPanel.Dock="Top"

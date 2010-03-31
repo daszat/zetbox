@@ -73,6 +73,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GUI\IHasViewModel.cs" />
     <Compile Include="GUI\IRenderer.cs" />
     <Compile Include="Presentables\ActionModel.cs" />
     <Compile Include="Presentables\AsyncList.cs" />
@@ -97,8 +98,7 @@
     <Compile Include="Presentables\MethodInvocationModel.cs" />
     <Compile Include="Presentables\MethodResultModels.cs" />
     <Compile Include="Presentables\ModelFactory.cs" />
-    <Compile Include="Presentables\ModuleEditor\AppLauncherModel.cs" />
-    <Compile Include="Presentables\ModuleEditor\WorkspaceModel.cs" />
+    <Compile Include="Presentables\ModuleEditor\WorkspaceViewModel.cs" />
     <Compile Include="Presentables\ModuleModel.cs" />
     <Compile Include="Presentables\ObjectClassModel.cs" />
     <Compile Include="Presentables\ObjectListModel.cs" />

@@ -17,11 +17,12 @@ namespace Kistl.Client.WPF.View.ObjectBrowser
 
     using Kistl.API.Client;
     using Kistl.Client.Presentables;
+    using Kistl.Client.GUI;
 
     /// <summary>
     /// Interaction logic for WorkspaceDisplay.xaml, a read-only display of a <see cref="Kistl.Client.Presentables.WorkspaceModel"/>.
     /// </summary>
-    public partial class WorkspaceDisplay : Window
+    public partial class WorkspaceDisplay : Window, IHasViewModel<WorkspaceModel>
     {
         /// <summary>
         /// Initializes a new instance of the WorkspaceDisplay class.
@@ -36,16 +37,16 @@ namespace Kistl.Client.WPF.View.ObjectBrowser
             var item = ObjectTree.SelectedItem as Kistl.Client.Presentables.PresentableModel;
             if (item != null)
             {
-                this.Model.SelectedItem = item;
+                this.ViewModel.SelectedItem = item;
             }
         }
 
         /// <summary>
-        /// Gets or sets the displayed model. Uses the DataContext as backing store.
+        /// Gets the displayed model. Uses the DataContext as backing store.
         /// </summary>
-        private Kistl.Client.Presentables.WorkspaceModel Model
+        public WorkspaceModel ViewModel
         {
-            get { return (Kistl.Client.Presentables.WorkspaceModel)DataContext; }
+            get { return (WorkspaceModel)DataContext; }
         }
     }
 }

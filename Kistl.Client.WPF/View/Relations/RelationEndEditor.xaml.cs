@@ -15,17 +15,23 @@ using System.Windows.Shapes;
 
 using Kistl.Client.GUI;
 using Kistl.Client.Presentables;
+using Kistl.Client.Presentables.Relations;
 
 namespace Kistl.Client.WPF.View.Relations
 {
     /// <summary>
-    /// Interaction logic for DataObjectFullView.xaml
+    /// Interaction logic for RelationEndEditor.xaml
     /// </summary>
-    public partial class RelationEndView : UserControl
+    public partial class RelationEndEditor : UserControl, IHasViewModel<RelationEndModel>
     {
-        public RelationEndView()
+        public RelationEndEditor()
         {
             InitializeComponent();
+        }
+
+        public RelationEndModel ViewModel
+        {
+            get { return (RelationEndModel)DataContext; }
         }
     }
 

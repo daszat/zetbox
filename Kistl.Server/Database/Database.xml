@@ -16231,14 +16231,14 @@
     <KistlBase:Assembly>157c1754-6eed-49f7-883b-ae2543bafd7e</KistlBase:Assembly>
     <KistlBase:ChangedOn>2009-12-14T17:08:05.41Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.41Z</KistlBase:CreatedOn>
-    <KistlBase:FullName>Kistl.Client.WPF.View.Relations.RelationEndView</KistlBase:FullName>
+    <KistlBase:FullName>Kistl.Client.WPF.View.Relations.RelationEndEditor</KistlBase:FullName>
     <KistlBase:Parent>1fda132a-a95c-4483-9f9d-1e952fa20245</KistlBase:Parent>
   </KistlBase:TypeRef>
   <KistlBase:TypeRef ExportGuid="7364ee0c-a700-430d-9176-e4eef9f51581">
     <KistlBase:Assembly>157c1754-6eed-49f7-883b-ae2543bafd7e</KistlBase:Assembly>
     <KistlBase:ChangedOn>2009-12-14T17:08:05.41Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.41Z</KistlBase:CreatedOn>
-    <KistlBase:FullName>Kistl.Client.WPF.View.Relations.RelationView</KistlBase:FullName>
+    <KistlBase:FullName>Kistl.Client.WPF.View.Relations.RelationEditor</KistlBase:FullName>
     <KistlBase:Parent>1fda132a-a95c-4483-9f9d-1e952fa20245</KistlBase:Parent>
   </KistlBase:TypeRef>
   <KistlBase:TypeRef ExportGuid="12084abf-1e98-4d04-b66d-fed4ea47d3c2">

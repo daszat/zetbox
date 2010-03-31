@@ -12,13 +12,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Kistl.Client.Presentables;
+using Kistl.Client.GUI;
 
 namespace Kistl.Client.WPF.View.KistlBase
 {
     /// <summary>
     /// Interaction logic for ActionView.xaml
     /// </summary>
-    public partial class ActionDisplay : UserControl
+    public partial class ActionDisplay : UserControl, IHasViewModel<ActionModel>
     {
         public ActionDisplay()
         {
@@ -27,7 +28,12 @@ namespace Kistl.Client.WPF.View.KistlBase
 
         private void ClickHandler(object sender, RoutedEventArgs e)
         {
-            ((ActionModel)DataContext).Execute(null);
+            ViewModel.Execute(null);
+        }
+
+        public ActionModel ViewModel
+        {
+            get { return (ActionModel)DataContext; }
         }
     }
 }

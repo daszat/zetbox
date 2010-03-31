@@ -10,13 +10,15 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Kistl.Client.GUI;
+using Kistl.Client.Presentables.ModuleEditor;
 
 namespace Kistl.Client.WPF.View.ModuleEditor
 {
     /// <summary>
     /// Interaction logic for Workspace.xaml
     /// </summary>
-    public partial class WorkspaceDisplay : Window
+    public partial class WorkspaceDisplay : Window, IHasViewModel<WorkspaceViewModel>
     {
         public WorkspaceDisplay()
         {
@@ -28,13 +30,13 @@ namespace Kistl.Client.WPF.View.ModuleEditor
             var item = NavTree.SelectedItem as Kistl.Client.Presentables.PresentableModel;
             if (item != null)
             {
-                this.Model.SelectedItem = item;
+                this.ViewModel.SelectedItem = item;
             }
         }
 
-        private Kistl.Client.Presentables.ModuleEditor.WorkspaceModel Model
+        public WorkspaceViewModel ViewModel
         {
-            get { return (Kistl.Client.Presentables.ModuleEditor.WorkspaceModel)DataContext; }
+            get { return (WorkspaceViewModel)DataContext; }
         }
     }
 }
