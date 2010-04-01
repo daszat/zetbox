@@ -108,6 +108,7 @@ M: System.Void Kistl.Client.ASPNET.Toolkit.View.WorkspaceView::OnPreRender(Syste
 M: System.Void Kistl.Client.ASPNET.Toolkit.View.DataObjectListView::OnPreRender(System.EventArgs)
 # factory method to create this object and pass it on
 M: System.Void Kistl.Client.Presentables.ObjectBrowser.CreateNewInstanceExternallyCommand::DoExecute(System.Object)
+M: System.Void Kistl.Client.Presentables.KistlBase.OpenApplicatonCommand::DoExecute(System.Object)
 M: System.Void Kistl.Client.ASPNET.Toolkit.KistlContextManagerModule::context_BeginRequest(System.Object,System.EventArgs)
 M: System.Void Kistl.Client.ASPNET.Toolkit.View.WorkspaceView::RecentObjects_CollectionChanged(System.Object,System.Collections.Specialized.NotifyCollectionChangedEventArgs)
 M: System.Object Kistl.Client.ASPNET.Toolkit.AspnetModelFactoryExtensions::AddControl(System.Web.UI.Control,System.Object)
@@ -116,6 +117,7 @@ M: System.Void Kistl.Client.Forms.FormsModelFactory::CreateWorkspace(Kistl.Clien
 M: System.Void Kistl.Client.Forms.View.DataObjectFullView::SyncProperties()
 M: System.Void Kistl.Client.WPF.View.ObjectBrowser.InstanceListDisplay::Edit_Click(System.Object,System.Windows.RoutedEventArgs)
 M: System.Void Kistl.Client.WPF.View.ObjectBrowser.InstanceListDisplay::New_Click(System.Object,System.Windows.RoutedEventArgs)
+M: System.Void Kistl.Client.WPF.View.ModuleEditor.InstanceListDisplay::New_Click(System.Object,System.Windows.RoutedEventArgs)
 # object is "bound" to the process' life cycle, no disposal necessary
 M: System.Void Kistl.Server.WcfServer::Init(Kistl.API.Configuration.KistlConfig)
 M: System.Void Kistl.Server.Service.Program::XmlFallbackInitialisation(System.String)

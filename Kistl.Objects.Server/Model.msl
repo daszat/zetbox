@@ -296,6 +296,11 @@
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 	    </MappingFragment>
       </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.ModuleEditorInstanceListKind)">
+	    <MappingFragment StoreEntitySet="ModuleEditorInstanceListKind">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+	    </MappingFragment>
+      </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Model.ObjectListKind)">
 	    <MappingFragment StoreEntitySet="ObjectListKind">
 	      <ScalarProperty Name="ID" ColumnName="ID" />

@@ -4,6 +4,7 @@
         xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls"
         xmlns:view="clr-namespace:Kistl.Client.WPF.View.KistlBase"
         xmlns:client="clr-namespace:Kistl.Client.Presentables;assembly=Kistl.Client"
+        xmlns:clientKistlBase="clr-namespace:Kistl.Client.Presentables.KistlBase;assembly=Kistl.Client"
         xmlns:tr="clr-namespace:Kistl.Client.Presentables.TimeRecords;assembly=Kistl.Client"
         xmlns:commands="clr-namespace:Kistl.Client.WPF.Commands"
         commands:SmartRoutedUICommand.IsCommandSink="True"
@@ -16,6 +17,16 @@
             <MenuItem Header="{Binding CreateNewInstanceExternallyCommand.Label}"
                       Command="{Binding CreateNewInstanceExternallyCommand, Converter={StaticResource CommandConverter}}"
                       CommandParameter="{Binding SelectedItem}" />
+            <MenuItem Header="Apps" 
+                      ItemsSource="{Binding Applications}">
+                <MenuItem.ItemContainerStyle>
+                    <Style TargetType="{x:Type MenuItem}">
+                        <Setter Property="Header" Value="{Binding Name}" />
+                        <Setter Property="Command" Value="{Binding OpenApplicatonCommand, Converter={StaticResource CommandConverter}}" />
+                        <Setter Property="CommandParameter" Value="{Binding}" />
+                    </Style>
+                </MenuItem.ItemContainerStyle>
+            </MenuItem>
         </Menu>
         <Grid>
             <Grid.ColumnDefinitions>
@@ -24,64 +35,28 @@
                 <ColumnDefinition Width="2*" />
             </Grid.ColumnDefinitions>
 
-            <!-- Navigation Tree and Lists -->
-            <Grid Grid.Column="0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="5" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-
-                <DockPanel Grid.Row="0">
-                    <TreeView x:Name="ObjectTree"
+            <!-- Navigation Tree -->
+            <TreeView x:Name="ObjectTree"
+                              Grid.Column="0"
                               BorderThickness="0"
                               Margin="5"
                               SelectedItemChanged="ModuleTreeSelectedItemChangedHandler">
-                        <TreeView.Resources>
-                            <HierarchicalDataTemplate DataType="{x:Type client:ModuleModel}"
+                <TreeView.Resources>
+                    <HierarchicalDataTemplate DataType="{x:Type client:ModuleModel}"
                                                       ItemsSource="{Binding ObjectClasses}">
-                                <view:DataObjectLineDisplay />
-                            </HierarchicalDataTemplate>
-                            <DataTemplate DataType="{x:Type client:DataObjectModel}">
-                                <view:DataObjectLineDisplay />
-                            </DataTemplate>
-                            <DataTemplate DataType="{x:Type tr:Dashboard}">
-                                <TextBlock>Time Records</TextBlock>
-                            </DataTemplate>
-                        </TreeView.Resources>
-                        <!-- TODO: implement template selector which creates appropriate (hierarchical) 
-                                   Templates with appropriate contents (replace DataObjectView with DataObjectLineLayout)
-                        <TreeView.ItemTemplateSelector>
-                            <view:ModuleTreeTemplateSelector />
-                        </TreeView.ItemTemplateSelector>
-                        -->
-                        <TreeViewItem Header="Browse"
+                        <view:DataObjectLineDisplay />
+                    </HierarchicalDataTemplate>
+                    <DataTemplate DataType="{x:Type client:DataObjectModel}">
+                        <view:DataObjectLineDisplay />
+                    </DataTemplate>
+                </TreeView.Resources>
+                <TreeViewItem Header="Browse"
                                       ItemsSource="{Binding Modules}"
                                       IsExpanded="True" />
-                        <TreeViewItem Header="Apps"
-                                      ItemsSource="{Binding Applications}"
-                                      IsExpanded="True" />
-                    </TreeView>
-                </DockPanel>
+            </TreeView>
 
-                <!-- overlay on the tree -->
-                <ctrls:LoadingIndicator Grid.Row="0" />
-
-                <GridSplitter Grid.Row="1"
-                              HorizontalAlignment="Stretch" />
-
-                <DockPanel Grid.Row="2">
-                    <TextBlock DockPanel.Dock="Top"
-                               Margin="5"
-                               HorizontalAlignment="Center">Recent Objects:</TextBlock>
-                    <ListBox Margin="5"
-                             ItemsSource="{Binding RecentObjects}"
-                             SelectedItem="{Binding SelectedItem}"
-                             ItemTemplateSelector="{StaticResource listItemTemplateSelector}"
-                             BorderThickness="0" />
-                </DockPanel>
-
-            </Grid>
+            <!-- overlay on the tree -->
+            <ctrls:LoadingIndicator Grid.Row="0" />
 
             <GridSplitter Grid.Column="1"
                           HorizontalAlignment="Stretch" />

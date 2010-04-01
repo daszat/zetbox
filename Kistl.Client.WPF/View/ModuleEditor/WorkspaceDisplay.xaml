@@ -10,6 +10,7 @@
         </Grid.ColumnDefinitions>
 
         <DockPanel Grid.Column="0">
+            <ComboBox DockPanel.Dock="Top" ItemsSource="{Binding ModuleList}" SelectedItem="{Binding CurrentModule}" />
             <TreeView x:Name="NavTree"
                       ItemsSource="{Binding Path=TreeItems}" 
                       SelectedItemChanged="TreeView_SelectedItemChanged">
@@ -22,6 +23,6 @@
         <ContentPresenter Grid.Column="2"
                               Grid.IsSharedSizeScope="True"
                               Content="{Binding SelectedItem}"
-                              ContentTemplateSelector="{StaticResource dashBoardTemplateSelector}" />
+                              ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />
     </Grid>
 </Window>

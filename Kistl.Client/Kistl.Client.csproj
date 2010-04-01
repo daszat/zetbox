@@ -88,6 +88,7 @@
     <Compile Include="Presentables\IModelFactory.cs" />
     <Compile Include="Presentables\IMultipleInstancesManager.cs" />
     <Compile Include="Presentables\IPropertyModel.cs" />
+    <Compile Include="Presentables\KistlBase\ApplicationViewModel.cs" />
     <Compile Include="Presentables\KistlBase\AssemblyModel.cs" />
     <Compile Include="Presentables\KistlBase\AssemblyReferenceModel.cs" />
     <Compile Include="Presentables\KistlBase\SystemTypeModel.cs" />
@@ -99,6 +100,7 @@
     <Compile Include="Presentables\MethodInvocationModel.cs" />
     <Compile Include="Presentables\MethodResultModels.cs" />
     <Compile Include="Presentables\ModelFactory.cs" />
+    <Compile Include="Presentables\ModuleEditor\InstanceListViewModel.cs" />
     <Compile Include="Presentables\ModuleEditor\WorkspaceViewModel.cs" />
     <Compile Include="Presentables\ModuleModel.cs" />
     <Compile Include="Presentables\ObjectBrowser\WorkspaceViewModel.cs" />

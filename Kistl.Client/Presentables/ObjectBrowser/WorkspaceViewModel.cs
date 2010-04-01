@@ -9,6 +9,7 @@ using Kistl.App.Base;
 using Kistl.App.Extensions;
 using Kistl.API.Client;
 using System.ComponentModel;
+using Kistl.Client.Presentables.KistlBase;
 
 namespace Kistl.Client.Presentables.ObjectBrowser
 {
@@ -44,19 +45,19 @@ namespace Kistl.Client.Presentables.ObjectBrowser
         /// A collection of all applications, to display as entry 
         /// points.
         /// </summary>
-        public ObservableCollection<ViewModel> Applications
+        public ObservableCollection<ApplicationViewModel> Applications
         {
             get
             {
                 if (_applicationsCache == null)
                 {
-                    _applicationsCache = new ObservableCollection<ViewModel>();
+                    _applicationsCache = new ObservableCollection<ApplicationViewModel>();
                     LoadApplications();
                 }
                 return _applicationsCache;
             }
         }
-        private ObservableCollection<ViewModel> _applicationsCache;
+        private ObservableCollection<ApplicationViewModel> _applicationsCache;
 
         private ViewModel _selectedItem;
         /// <summary>
@@ -117,10 +118,9 @@ namespace Kistl.Client.Presentables.ObjectBrowser
 
         private void LoadApplications()
         {
-            this.Applications.Add(new GUI.DashboardModel(AppContext, DataContext));
-            this.Applications.Add(new TimeRecords.Dashboard(AppContext, DataContext));
-            // TODO:
-            // this.Applications.Add(new ModuleEditor.AppLauncherModel(AppContext, DataContext));
+            this.Applications.Add(new ApplicationViewModel(AppContext, DataContext, "GUI", typeof(GUI.DashboardModel)));
+            this.Applications.Add(new ApplicationViewModel(AppContext, DataContext, "TimeRecords", typeof(TimeRecords.Dashboard)));
+            this.Applications.Add(new ApplicationViewModel(AppContext, DataContext, "Module Editor", typeof(ModuleEditor.WorkspaceViewModel)));
         }
 
         #endregion
@@ -146,6 +146,7 @@ namespace Kistl.Client.Presentables.ObjectBrowser
         }
     }
 
+    
 
     /// <summary>
     /// Creates a new instance of an <see cref="ObjectClass"/> and opens it in a new WorkspaceView.

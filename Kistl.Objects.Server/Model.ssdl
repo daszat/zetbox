@@ -297,6 +297,12 @@
       <End Role="A_DashboardKind" EntitySet="DashboardKind" />
       <End Role="B_ModuleEditorDashboardKind" EntitySet="ModuleEditorDashboardKind" />
     </AssociationSet>
+    <EntitySet Name="ModuleEditorInstanceListKind" EntityType="Model.Store.ModuleEditorInstanceListKind" Table="ModuleEditorInstanceListKinds"/>
+    <!-- inherits from ControlKind -->
+    <AssociationSet Name="FK_ModuleEditorInstanceListKind_ControlKind_ID" Association="Model.Store.FK_ModuleEditorInstanceListKind_ControlKind_ID" >
+      <End Role="A_ControlKind" EntitySet="ControlKind" />
+      <End Role="B_ModuleEditorInstanceListKind" EntitySet="ModuleEditorInstanceListKind" />
+    </AssociationSet>
     <EntitySet Name="ModuleEditorWorkspaceKind" EntityType="Model.Store.ModuleEditorWorkspaceKind" Table="ModuleEditorWorkspaceKinds"/>
     <!-- inherits from WorkspaceKind -->
     <AssociationSet Name="FK_ModuleEditorWorkspaceKind_WorkspaceKind_ID" Association="Model.Store.FK_ModuleEditorWorkspaceKind_WorkspaceKind_ID" >
@@ -1885,6 +1891,13 @@
   </EntityType>
 	
   <EntityType Name="ModuleEditorDashboardKind">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+  </EntityType>
+	
+  <EntityType Name="ModuleEditorInstanceListKind">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
@@ -5165,6 +5178,18 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="B_ModuleEditorDashboardKind">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ModuleEditorInstanceListKind_ControlKind_ID">
+    <End Role="A_ControlKind" Type="Model.Store.ControlKind" Multiplicity="1" />
+    <End Role="B_ModuleEditorInstanceListKind" Type="Model.Store.ModuleEditorInstanceListKind" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="A_ControlKind">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_ModuleEditorInstanceListKind">
         <PropertyRef Name="ID" />
       </Dependent>
     </ReferentialConstraint>
