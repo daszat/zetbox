@@ -64,21 +64,21 @@ namespace Kistl.Client.ASPNET.Toolkit
             }
         }
 
-        public override object CreateDefaultView(PresentableModel mdl)
+        public override object CreateDefaultView(ViewModel mdl)
         {
             IView view = (IView)base.CreateDefaultView(mdl);
             view.SetModel(mdl);
             return view;
         }
 
-        public override object CreateSpecificView(PresentableModel mdl, ControlKind kind)
+        public override object CreateSpecificView(ViewModel mdl, ControlKind kind)
         {
             IView view = (IView)base.CreateSpecificView(mdl, kind);
             view.SetModel(mdl);
             return view;
         }
 
-        protected override void ShowInView(PresentableModel mdl, object view, bool activate)
+        protected override void ShowInView(ViewModel mdl, object view, bool activate)
         {
             throw new NotImplementedException();
         }
@@ -96,14 +96,14 @@ namespace Kistl.Client.ASPNET.Toolkit
 
     public static class AspnetModelFactoryExtensions
     {
-        public static object CreateDefaultView(this IModelFactory self, PresentableModel mdl, Control container)
+        public static object CreateDefaultView(this IModelFactory self, ViewModel mdl, Control container)
         {
             if (self == null) { throw new ArgumentNullException("self"); }
 
             return AddControl(container, self.CreateDefaultView(mdl));
         }
 
-        public static object CreateSpecificView(this IModelFactory self, PresentableModel mdl, ControlKind kind, Control container)
+        public static object CreateSpecificView(this IModelFactory self, ViewModel mdl, ControlKind kind, Control container)
         {
             if (self == null) { throw new ArgumentNullException("self"); }
 

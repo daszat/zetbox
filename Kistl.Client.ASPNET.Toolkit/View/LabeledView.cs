@@ -26,7 +26,7 @@ namespace Kistl.Client.ASPNET.Toolkit.View
             InititalizeView();
         }
 
-        public override void SetModel(PresentableModel mdl)
+        public override void SetModel(ViewModel mdl)
         {
             base.SetModel(mdl);
             InititalizeView();

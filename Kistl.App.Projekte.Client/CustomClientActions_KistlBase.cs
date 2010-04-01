@@ -19,7 +19,7 @@ namespace Kistl.App.Base
 
         public static void OnCreated_ObjectClass(ObjectClass obj)
         {
-            obj.DefaultPresentableModelDescriptor = obj.Context.FindPersistenceObject<PresentableModelDescriptor>(DataObjectModelDescriptor);
+            obj.DefaultViewModelDescriptor = obj.Context.FindPersistenceObject<ViewModelDescriptor>(DataObjectModelDescriptor);
         }
 
         public static void OnGetDataType_DataType(DataType obj, MethodReturnEventArgs<System.Type> e)

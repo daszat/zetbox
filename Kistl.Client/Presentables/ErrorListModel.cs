@@ -27,7 +27,7 @@ namespace Kistl.Client.Presentables
     /// A simple model presenting a list of errors from constraints of the specified DataContext.
     /// </summary>
     public class ErrorListModel
-        : PresentableModel
+        : ViewModel
     {
         public ErrorListModel(IGuiApplicationContext appCtx, IKistlContext dataCtx)
             : base(appCtx, dataCtx)

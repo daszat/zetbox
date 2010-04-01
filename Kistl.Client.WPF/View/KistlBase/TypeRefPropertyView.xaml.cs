@@ -31,7 +31,7 @@ namespace Kistl.Client.WPF.View.KistlBase
 
         #region IView Members
 
-        public void SetModel(PresentableModel mdl)
+        public void SetModel(ViewModel mdl)
         {
             DataContext = (TypeRefPropertyModel)mdl;
         }

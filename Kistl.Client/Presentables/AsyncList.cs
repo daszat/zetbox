@@ -14,7 +14,7 @@ namespace Kistl.Client.Presentables
         public static ImmutableAsyncList<TAsync, TUi> UiCreateImmutable<TAsync, TUi>(
             IGuiApplicationContext appCtx,
             IKistlContext ctx,
-            PresentableModel parentModel,
+            ViewModel parentModel,
             Func<IEnumerable<TAsync>> asyncOriginalList,
             Func<TAsync, TUi> uiTransform)
         {
@@ -24,7 +24,7 @@ namespace Kistl.Client.Presentables
         public static AsyncList<TAsync, TUi> UiCreateMutable<TAsync, TUi>(
             IGuiApplicationContext appCtx,
             IKistlContext ctx,
-            PresentableModel parentModel,
+            ViewModel parentModel,
             Func<INotifyCollectionChanged> asyncNotifier,
             Func<IList<TAsync>> asyncOriginalList,
             Func<TAsync, TUi> uiTransform,
@@ -42,7 +42,7 @@ namespace Kistl.Client.Presentables
     {
 
         private IGuiApplicationContext _appCtx;
-        private PresentableModel _parentModel;
+        private ViewModel _parentModel;
         private Func<IEnumerable<TAsync>> _asyncOriginalList;
         private Func<TAsync, TUi> _uiTransform;
 
@@ -56,7 +56,7 @@ namespace Kistl.Client.Presentables
         internal ImmutableAsyncList(
             IGuiApplicationContext appCtx,
             IKistlContext ctx,
-            PresentableModel parentModel,
+            ViewModel parentModel,
             Func<IEnumerable<TAsync>> asyncOriginalList,
             Func<TAsync, TUi> uiTransform)
         {
@@ -120,7 +120,7 @@ namespace Kistl.Client.Presentables
     {
 
         private IGuiApplicationContext _appCtx;
-        private PresentableModel _parentModel;
+        private ViewModel _parentModel;
         private Func<IList<TAsync>> _asyncOriginalList;
         private Func<INotifyCollectionChanged> _asyncNotifier;
         private Func<TAsync, TUi> _uiTransform;
@@ -136,7 +136,7 @@ namespace Kistl.Client.Presentables
         internal AsyncList(
             IGuiApplicationContext appCtx,
             IKistlContext ctx,
-            PresentableModel parentModel,
+            ViewModel parentModel,
             Func<INotifyCollectionChanged> asyncNotifier,
             Func<IList<TAsync>> asyncOriginalList,
             Func<TAsync, TUi> uiTransform,

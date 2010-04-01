@@ -961,12 +961,12 @@ namespace Kistl.App.Base
 		public static event PropertyPostSetterHandler<Kistl.App.Base.Property, Kistl.App.Base.DataType> OnObjectClass_PostSetter;
 
         /// <summary>
-        /// The PresentableModel to use for values of this Property
+        /// The ViewModel to use for values of this Property
         /// </summary>
     /*
     Relation: FK_Property_has_ValueModelDescriptor
     A: ZeroOrMore Property as Property
-    B: One PresentableModelDescriptor as ValueModelDescriptor
+    B: One ViewModelDescriptor as ValueModelDescriptor
     Preferred Storage: MergeIntoA
     */
         // object reference property
@@ -974,7 +974,7 @@ namespace Kistl.App.Base
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.GUI.PresentableModelDescriptor ValueModelDescriptor
+        public Kistl.App.GUI.ViewModelDescriptor ValueModelDescriptor
         {
             get
             {
@@ -985,7 +985,7 @@ namespace Kistl.App.Base
                 // TODO: NotifyPropertyChanged()
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if(value != null && value.Context != this.Context) throw new WrongKistlContextException();
-                ValueModelDescriptor__Implementation__ = (Kistl.App.GUI.PresentableModelDescriptor__Implementation__)value;
+                ValueModelDescriptor__Implementation__ = (Kistl.App.GUI.ViewModelDescriptor__Implementation__)value;
             }
         }
         
@@ -993,12 +993,12 @@ namespace Kistl.App.Base
         private Guid? _fk_guid_ValueModelDescriptor = null;
         // EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Property_has_ValueModelDescriptor", "ValueModelDescriptor")]
-        public Kistl.App.GUI.PresentableModelDescriptor__Implementation__ ValueModelDescriptor__Implementation__
+        public Kistl.App.GUI.ViewModelDescriptor__Implementation__ ValueModelDescriptor__Implementation__
         {
             get
             {
-                EntityReference<Kistl.App.GUI.PresentableModelDescriptor__Implementation__> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.PresentableModelDescriptor__Implementation__>(
+                EntityReference<Kistl.App.GUI.ViewModelDescriptor__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.ViewModelDescriptor__Implementation__>(
                         "Model.FK_Property_has_ValueModelDescriptor",
                         "ValueModelDescriptor");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -1010,16 +1010,16 @@ namespace Kistl.App.Base
                 var __value = r.Value;
 				if(OnValueModelDescriptor_Getter != null)
 				{
-					var e = new PropertyGetterEventArgs<Kistl.App.GUI.PresentableModelDescriptor>(__value);
+					var e = new PropertyGetterEventArgs<Kistl.App.GUI.ViewModelDescriptor>(__value);
 					OnValueModelDescriptor_Getter(this, e);
-					__value = (Kistl.App.GUI.PresentableModelDescriptor__Implementation__)e.Result;
+					__value = (Kistl.App.GUI.ViewModelDescriptor__Implementation__)e.Result;
 				}
                 return __value;
             }
             set
             {
-                EntityReference<Kistl.App.GUI.PresentableModelDescriptor__Implementation__> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.PresentableModelDescriptor__Implementation__>(
+                EntityReference<Kistl.App.GUI.ViewModelDescriptor__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.ViewModelDescriptor__Implementation__>(
                         "Model.FK_Property_has_ValueModelDescriptor",
                         "ValueModelDescriptor");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -1027,19 +1027,19 @@ namespace Kistl.App.Base
                 {
                     r.Load(); 
                 }
-                Kistl.App.GUI.PresentableModelDescriptor __oldValue = (Kistl.App.GUI.PresentableModelDescriptor)r.Value;
-                Kistl.App.GUI.PresentableModelDescriptor __newValue = (Kistl.App.GUI.PresentableModelDescriptor)value;
+                Kistl.App.GUI.ViewModelDescriptor __oldValue = (Kistl.App.GUI.ViewModelDescriptor)r.Value;
+                Kistl.App.GUI.ViewModelDescriptor __newValue = (Kistl.App.GUI.ViewModelDescriptor)value;
 
                 if(OnValueModelDescriptor_PreSetter != null)
                 {
-					var e = new PropertyPreSetterEventArgs<Kistl.App.GUI.PresentableModelDescriptor>(__oldValue, __newValue);
+					var e = new PropertyPreSetterEventArgs<Kistl.App.GUI.ViewModelDescriptor>(__oldValue, __newValue);
 					OnValueModelDescriptor_PreSetter(this, e);
 					__newValue = e.Result;
                 }
-                r.Value = (Kistl.App.GUI.PresentableModelDescriptor__Implementation__)__newValue;
+                r.Value = (Kistl.App.GUI.ViewModelDescriptor__Implementation__)__newValue;
                 if(OnValueModelDescriptor_PostSetter != null)
                 {
-					var e = new PropertyPostSetterEventArgs<Kistl.App.GUI.PresentableModelDescriptor>(__oldValue, __newValue);
+					var e = new PropertyPostSetterEventArgs<Kistl.App.GUI.ViewModelDescriptor>(__oldValue, __newValue);
 					OnValueModelDescriptor_PostSetter(this, e);
                 }
                                 
@@ -1047,9 +1047,9 @@ namespace Kistl.App.Base
         }
         
         
-		public static event PropertyGetterHandler<Kistl.App.Base.Property, Kistl.App.GUI.PresentableModelDescriptor> OnValueModelDescriptor_Getter;
-		public static event PropertyPreSetterHandler<Kistl.App.Base.Property, Kistl.App.GUI.PresentableModelDescriptor> OnValueModelDescriptor_PreSetter;
-		public static event PropertyPostSetterHandler<Kistl.App.Base.Property, Kistl.App.GUI.PresentableModelDescriptor> OnValueModelDescriptor_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.Property, Kistl.App.GUI.ViewModelDescriptor> OnValueModelDescriptor_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.Property, Kistl.App.GUI.ViewModelDescriptor> OnValueModelDescriptor_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.Property, Kistl.App.GUI.ViewModelDescriptor> OnValueModelDescriptor_PostSetter;
 
         /// <summary>
         /// Returns the resulting Type of this Property Meta Object.
@@ -1265,7 +1265,7 @@ namespace Kistl.App.Base
 				obj => obj.ObjectClass,
 				(obj, val) => obj.ObjectClass = val),
 			// else
-			new CustomPropertyDescriptor<Property__Implementation__, Kistl.App.GUI.PresentableModelDescriptor>(
+			new CustomPropertyDescriptor<Property__Implementation__, Kistl.App.GUI.ViewModelDescriptor>(
 				new Guid("84e0996a-081f-4a17-a34d-54cf23991301"),
 				"ValueModelDescriptor",
 				null,
@@ -1281,8 +1281,8 @@ namespace Kistl.App.Base
 				(obj, val) => obj.Properties_pos = val),
 			// rel: ConstrainedProperty has Constraints (6fa271a3-e365-4b8d-9cb1-575d7a3b5d6a)
 			// rel: BaseProperty has Module (bffae7c3-c5f3-4139-ae96-577f4c9fed8f)
-			// rel: Property has ValueModelDescriptor (3437ea5d-d926-4a0b-a848-9dafedf7ad6a)
 			// rel: InvokeOnProperty has Invocations (dd9f5bf9-8a0e-432b-a7bb-5ba97e12face)
+			// rel: Property has ValueModelDescriptor (3437ea5d-d926-4a0b-a848-9dafedf7ad6a)
 			// rel: Property was ChangedBy (88098240-78f7-43eb-8c0d-746c8dfeba63)
 			// rel: Property was CreatedBy (3c085354-3ef4-49b2-bb95-80d5295519f1)
 			// rel: Visual has Property (73178882-7f93-444b-bf93-75db193904cf)
@@ -1338,9 +1338,9 @@ namespace Kistl.App.Base
 				ObjectClass__Implementation__ = null;
 
 			if (_fk_guid_ValueModelDescriptor.HasValue)
-				ValueModelDescriptor__Implementation__ = (Kistl.App.GUI.PresentableModelDescriptor__Implementation__)Context.FindPersistenceObject<Kistl.App.GUI.PresentableModelDescriptor>(_fk_guid_ValueModelDescriptor.Value);
+				ValueModelDescriptor__Implementation__ = (Kistl.App.GUI.ViewModelDescriptor__Implementation__)Context.FindPersistenceObject<Kistl.App.GUI.ViewModelDescriptor>(_fk_guid_ValueModelDescriptor.Value);
 			else if (_fk_ValueModelDescriptor.HasValue)
-				ValueModelDescriptor__Implementation__ = (Kistl.App.GUI.PresentableModelDescriptor__Implementation__)Context.Find<Kistl.App.GUI.PresentableModelDescriptor>(_fk_ValueModelDescriptor.Value);
+				ValueModelDescriptor__Implementation__ = (Kistl.App.GUI.ViewModelDescriptor__Implementation__)Context.Find<Kistl.App.GUI.ViewModelDescriptor>(_fk_ValueModelDescriptor.Value);
 			else
 				ValueModelDescriptor__Implementation__ = null;
 		}

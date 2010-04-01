@@ -20,7 +20,7 @@ namespace Kistl.Client.Tests
     [TestFixture]
     public class ObjectListModelTests
     {
-        Dictionary<IDataObject, PresentableModel> models;
+        Dictionary<IDataObject, ViewModel> models;
         Mock<IModelFactory> facMock;
         Mock<IGuiApplicationContext> appCtxMock;
         Mock<TestObject> objMock;
@@ -35,7 +35,7 @@ namespace Kistl.Client.Tests
             var appCtx = new TestApplicationContext("Kistl.Client.Tests.Config.xml");
 
             // setup an ObjectListModel
-            models = new Dictionary<IDataObject, PresentableModel>();
+            models = new Dictionary<IDataObject, ViewModel>();
             facMock = KistlMockFactory.CreateFactory(models);
             appCtxMock = new Mock<IGuiApplicationContext>();
             appCtxMock.Setup(ac => ac.Factory).Returns(facMock.Object);

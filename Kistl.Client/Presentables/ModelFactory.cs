@@ -16,7 +16,7 @@ namespace Kistl.Client.Presentables
 
     /// <summary>
     /// Abstract base class to provide basic functionality of all model factories. Toolkit-specific implementations of this class will be 
-    /// used by the rendering infrastructure to create PresentableModels and Views.
+    /// used by the rendering infrastructure to create ViewModels and Views.
     /// </summary>
     public abstract class ModelFactory : Kistl.Client.Presentables.IModelFactory
     {
@@ -48,7 +48,7 @@ namespace Kistl.Client.Presentables
         /// <param name="ctx">the data context to use</param>
         /// <param name="data">the arguments to pass to the model's constructor</param>
         public TModel CreateSpecificModel<TModel>(IKistlContext ctx, params object[] data)
-            where TModel : PresentableModel
+            where TModel : ViewModel
         {
             Type requestedType = typeof(TModel);
             return (TModel)CreateModel(requestedType, ctx, data);
@@ -61,23 +61,23 @@ namespace Kistl.Client.Presentables
         /// <param name="obj">the object to model</param>
         /// <param name="data">the arguments to pass to the model's constructor</param>
         /// <returns>the configured model</returns>
-        public PresentableModel CreateDefaultModel(IKistlContext ctx, IDataObject obj, params object[] data)
+        public ViewModel CreateDefaultModel(IKistlContext ctx, IDataObject obj, params object[] data)
         {
             Type t = obj.GetObjectClass(AppContext.MetaContext)
-                .DefaultPresentableModelDescriptor
-                .PresentableModelRef
+                .DefaultViewModelDescriptor
+                .ViewModelRef
                 .AsType(true);
             return CreateModel(t, ctx, new object[] { obj }.Concat(data).ToArray());
         }
 
         /// <summary>
-        /// Creates a PresentableModel to display/edit the value of the property p of the object obj.
+        /// Creates a ViewModel to display/edit the value of the property p of the object obj.
         /// </summary>
         /// <param name="ctx">the data context to use</param>
         /// <param name="obj">the referenced object</param>
         /// <param name="p">the property whose value shall be displayed</param>
-        /// <returns>a properly initialised PresentableModel</returns>
-        public PresentableModel CreatePropertyValueModel(IKistlContext ctx, IDataObject obj, Property p)
+        /// <returns>a properly initialised ViewModel</returns>
+        public ViewModel CreatePropertyValueModel(IKistlContext ctx, IDataObject obj, Property p)
         {
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
             if (obj == null) { throw new ArgumentNullException("obj"); }
@@ -86,7 +86,7 @@ namespace Kistl.Client.Presentables
             if (p.ValueModelDescriptor != null)
             {
                 return CreateModel(p.ValueModelDescriptor
-                    .PresentableModelRef
+                    .ViewModelRef
                     .AsType(true), ctx, new object[] { obj, p });
             }
             else
@@ -95,20 +95,20 @@ namespace Kistl.Client.Presentables
             }
         }
 
-        public PresentableModel CreateModel(Type requestedType, IKistlContext ctx, object[] data)
+        public ViewModel CreateModel(Type requestedType, IKistlContext ctx, object[] data)
         {
 
             // by convention, all presentable models take the IGuiApplicationContext
             // and a IKistlContext as first parameters
             object[] parameters = new object[] { AppContext, ctx }.Concat(data).ToArray();
 
-            PresentableModel result = _cache.LookupModel(requestedType, parameters);
+            ViewModel result = _cache.LookupModel(requestedType, parameters);
 
             if (result == null)
             {
                 try
                 {
-                    result = (PresentableModel)Activator.CreateInstance(requestedType, parameters);
+                    result = (ViewModel)Activator.CreateInstance(requestedType, parameters);
                 }
                 catch (Exception ex)
                 {
@@ -132,18 +132,18 @@ namespace Kistl.Client.Presentables
         #region Top-Level Views Management
 
         /// <summary>
-        /// Creates a default View for the given PresentableModel.
+        /// Creates a default View for the given ViewModel.
         /// </summary>
         /// <param name="mdl">the model to be viewed</param>
         /// <returns>the configured view</returns>
-        public virtual object CreateDefaultView(PresentableModel mdl)
+        public virtual object CreateDefaultView(ViewModel mdl)
         {
             if (mdl == null) { throw new ArgumentNullException("mdl"); }
 
-            PresentableModelDescriptor pmd = mdl
+            ViewModelDescriptor pmd = mdl
                 .GetType()
                 .ToRef(FrozenContext.Single)
-                .GetPresentableModelDescriptor();
+                .GetViewModelDescriptor();
 
             var vDesc = pmd.GetDefaultViewDescriptor(Toolkit);
 
@@ -163,18 +163,18 @@ namespace Kistl.Client.Presentables
         }
 
         /// <summary>
-        /// Creates a specific View for the given PresentableModel.
+        /// Creates a specific View for the given ViewModel.
         /// </summary>
         /// <param name="mdl">the model to be viewed</param>
         /// <param name="kind">the kind of view to create</param>
         /// <returns>the configured view</returns>
-        public virtual object CreateSpecificView(PresentableModel mdl, ControlKind kind)
+        public virtual object CreateSpecificView(ViewModel mdl, ControlKind kind)
         {
             if (mdl == null) { throw new ArgumentNullException("mdl"); }
             if (kind == null) { throw new ArgumentNullException("kind"); }
 
-            PresentableModelDescriptor pmd = mdl.GetType().ToRef(FrozenContext.Single)
-                .GetPresentableModelDescriptor();
+            ViewModelDescriptor pmd = mdl.GetType().ToRef(FrozenContext.Single)
+                .GetViewModelDescriptor();
 
             var vDesc = pmd.GetViewDescriptor(Toolkit, kind);
 
@@ -183,7 +183,7 @@ namespace Kistl.Client.Presentables
                 : CreateView(vDesc);
         }
 
-        public void ShowModel(PresentableModel mdl, ControlKind kind, bool activate)
+        public void ShowModel(ViewModel mdl, ControlKind kind, bool activate)
         {
             ShowInView(mdl, CreateSpecificView(mdl, kind), activate);
         }
@@ -193,7 +193,7 @@ namespace Kistl.Client.Presentables
         /// </summary>
         /// <param name="mdl"></param>
         /// <param name="activate"></param>
-        public void ShowModel(PresentableModel mdl, bool activate)
+        public void ShowModel(ViewModel mdl, bool activate)
         {
             if (mdl == null)
                 throw new ArgumentNullException("mdl");
@@ -212,7 +212,7 @@ namespace Kistl.Client.Presentables
             }
         }
 
-        protected abstract void ShowInView(PresentableModel mdl, object view, bool activate);
+        protected abstract void ShowInView(ViewModel mdl, object view, bool activate);
 
         #endregion
 
@@ -250,19 +250,19 @@ namespace Kistl.Client.Presentables
             // TODO: memory: investigate using a weakly referencing proxy to object[] as 2nd level key,
             //               but probably all data params are rooted elsewhere too. Should clean up
             //               at least when the IKistlContext of a Workspace is disposed
-            private Dictionary<Type, Dictionary<object[], PresentableModel>> _models
-                    = new Dictionary<Type, Dictionary<object[], PresentableModel>>();
+            private Dictionary<Type, Dictionary<object[], ViewModel>> _models
+                    = new Dictionary<Type, Dictionary<object[], ViewModel>>();
 
-            internal PresentableModel LookupModel(Type requestedType, object[] parameters)
+            internal ViewModel LookupModel(Type requestedType, object[] parameters)
             {
-                Dictionary<object[], PresentableModel> modelCache;
+                Dictionary<object[], ViewModel> modelCache;
                 if (!_models.TryGetValue(requestedType, out modelCache))
                 {
                     // top level entry doesn't exist
                     return null;
                 }
 
-                PresentableModel result = null;
+                ViewModel result = null;
                 if (!modelCache.TryGetValue(parameters, out result))
                 {
                     return null;
@@ -270,15 +270,15 @@ namespace Kistl.Client.Presentables
                 return result;
             }
 
-            internal void StoreModel(object[] parameters, PresentableModel mdl)
+            internal void StoreModel(object[] parameters, ViewModel mdl)
             {
                 Type requestedType = mdl.GetType();
 
-                Dictionary<object[], PresentableModel> modelCache;
+                Dictionary<object[], ViewModel> modelCache;
                 if (!_models.TryGetValue(requestedType, out modelCache))
                 {
                     // create new top-level entry
-                    modelCache = new Dictionary<object[], PresentableModel>(new ObjectArrayComparer());
+                    modelCache = new Dictionary<object[], ViewModel>(new ObjectArrayComparer());
                     _models[requestedType] = modelCache;
                 }
 

@@ -41,7 +41,7 @@ namespace Kistl.IntegrationTests
             using (var initCtx = KistlContext.GetContext())
             {
                 _moduleGuid = initCtx.GetQuery<Module>().Single(m => m.Name == "KistlBase").ExportGuid;
-                _valueDescGuid = initCtx.GetQuery<PresentableModelDescriptor>().First().ExportGuid;
+                _valueDescGuid = initCtx.GetQuery<ViewModelDescriptor>().First().ExportGuid;
 
                 var fixtureOC = initCtx.GetQuery<ObjectClass>().FirstOrDefault(oc => oc.Properties.Count == items)
                     ?? initCtx.GetQuery<ObjectClass>().FirstOrDefault(oc => oc.Properties.Count > items)
@@ -99,7 +99,7 @@ namespace Kistl.IntegrationTests
             var result = ctx.Create<IntProperty>();
             result.Module = ctx.FindPersistenceObject<Module>(_moduleGuid);
             result.Name = "property" + unique;
-            result.ValueModelDescriptor = ctx.FindPersistenceObject<PresentableModelDescriptor>(_valueDescGuid);
+            result.ValueModelDescriptor = ctx.FindPersistenceObject<ViewModelDescriptor>(_valueDescGuid);
             return result;
         }
 
@@ -212,7 +212,7 @@ namespace Kistl.IntegrationTests
             using (var initCtx = KistlContext.GetContext())
             {
                 _moduleGuid = initCtx.GetQuery<Module>().Single(m => m.Name == "KistlBase").ExportGuid;
-                _valueDescGuid = initCtx.GetQuery<PresentableModelDescriptor>().First().ExportGuid;
+                _valueDescGuid = initCtx.GetQuery<ViewModelDescriptor>().First().ExportGuid;
 
                 var fixtureOC = initCtx.GetQuery<ObjectClass>().FirstOrDefault(oc => oc.Properties.Count == items);
                 if (fixtureOC == null)
@@ -271,7 +271,7 @@ namespace Kistl.IntegrationTests
             var result = ctx.Create<IntProperty>();
             result.Module = ctx.FindPersistenceObject<Module>(_moduleGuid);
             result.Name = "property" + unique;
-            result.ValueModelDescriptor = ctx.FindPersistenceObject<PresentableModelDescriptor>(_valueDescGuid);
+            result.ValueModelDescriptor = ctx.FindPersistenceObject<ViewModelDescriptor>(_valueDescGuid);
             return result;
         }
 

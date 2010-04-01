@@ -36,6 +36,16 @@ namespace Kistl.App.GUI
 			}
 		}
 		
+		/// <summary>List of all ViewModelDescriptor</summary>
+		/// 
+		public IQueryable<ViewModelDescriptor> ViewModelDescriptors
+		{ 
+			get
+			{
+				return Context.GetQuery<ViewModelDescriptor>();
+			}
+		}
+		
 		/// <summary>List of all ViewDescriptor</summary>
 		/// 
 		public IQueryable<ViewDescriptor> ViewDescriptors
@@ -123,16 +133,6 @@ namespace Kistl.App.GUI
 			get
 			{
 				return Context.GetQuery<PropertyGroupKind>();
-			}
-		}
-		
-		/// <summary>List of all PresentableModelDescriptor</summary>
-		/// 
-		public IQueryable<PresentableModelDescriptor> PresentableModelDescriptors
-		{ 
-			get
-			{
-				return Context.GetQuery<PresentableModelDescriptor>();
 			}
 		}
 		

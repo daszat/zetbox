@@ -15,7 +15,7 @@
     <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -29,7 +29,7 @@
     <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -43,7 +43,7 @@
     <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -67,7 +67,7 @@
     <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -81,7 +81,7 @@
     <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -95,7 +95,7 @@
     <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -987,7 +987,7 @@
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
     <KistlBase:BaseObjectClass>8043ccd8-6ff1-4b45-b04b-e0a0f19ce1b6</KistlBase:BaseObjectClass>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -1004,7 +1004,7 @@
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
     <KistlBase:BaseObjectClass>8043ccd8-6ff1-4b45-b04b-e0a0f19ce1b6</KistlBase:BaseObjectClass>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -1020,7 +1020,7 @@
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>true</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -1037,7 +1037,7 @@
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
     <KistlBase:BaseObjectClass>8043ccd8-6ff1-4b45-b04b-e0a0f19ce1b6</KistlBase:BaseObjectClass>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -1409,7 +1409,7 @@
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
     <KistlBase:BaseObjectClass>302c3ca4-7e86-4880-8e32-ff548268f80b</KistlBase:BaseObjectClass>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -1424,24 +1424,24 @@
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
     <KistlBase:BaseObjectClass>4fdf9e9c-a21c-40ab-84c2-16b2c7b7ec5f</KistlBase:BaseObjectClass>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <KistlBase:TableName>ModuleEditorWorkspaceKinds</KistlBase:TableName>
   </GUI:ControlKindClass>
-  <GUI:PresentableModelDescriptor ExportGuid="42ebc084-694f-464a-8662-83c70b784ef3">
+  <GUI:ViewModelDescriptor ExportGuid="42ebc084-694f-464a-8662-83c70b784ef3">
     <GUI:DefaultKind>ee2ec87f-cd81-4cfa-a662-d51ac1ba4673</GUI:DefaultKind>
     <GUI:Description>Model for the AppLauncher</GUI:Description>
     <GUI:Module>0fe1ab38-860a-414f-a599-b0b86a22ce1a</GUI:Module>
-    <GUI:PresentableModelRef>56ecad45-72f7-4e9e-b243-436ea8106cba</GUI:PresentableModelRef>
-  </GUI:PresentableModelDescriptor>
-  <GUI:PresentableModelDescriptor ExportGuid="c92286af-1bb6-4e0d-ac58-d77179e626a1">
+    <GUI:ViewModelRef>56ecad45-72f7-4e9e-b243-436ea8106cba</GUI:ViewModelRef>
+  </GUI:ViewModelDescriptor>
+  <GUI:ViewModelDescriptor ExportGuid="c92286af-1bb6-4e0d-ac58-d77179e626a1">
     <GUI:DefaultKind>66c71e86-39d1-4a19-a3c7-11b03168f598</GUI:DefaultKind>
     <GUI:Description>Workspace Model</GUI:Description>
     <GUI:Module>0fe1ab38-860a-414f-a599-b0b86a22ce1a</GUI:Module>
-    <GUI:PresentableModelRef>e164a931-9040-472d-a1ae-79a20d706ace</GUI:PresentableModelRef>
-  </GUI:PresentableModelDescriptor>
+    <GUI:ViewModelRef>e164a931-9040-472d-a1ae-79a20d706ace</GUI:ViewModelRef>
+  </GUI:ViewModelDescriptor>
   <GUI:ViewDescriptor ExportGuid="7b09227a-bbc5-4814-a02d-9123adaa316b">
     <GUI:ControlRef>5c8806f2-a4ce-46d9-bea0-e66bac695d7e</GUI:ControlRef>
     <GUI:Kind>861b4dc3-7b62-49ff-82bd-908dbcbd3b36</GUI:Kind>
@@ -1469,7 +1469,7 @@
     <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -1495,7 +1495,7 @@
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -1511,7 +1511,7 @@
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>true</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -1527,7 +1527,7 @@
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -1544,7 +1544,7 @@
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
     <KistlBase:BaseObjectClass>63b8e3f7-e663-4fde-a09a-64ca876586bd</KistlBase:BaseObjectClass>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -1561,7 +1561,7 @@
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
     <KistlBase:BaseObjectClass>b0c23c07-950f-47a0-af23-a925dc691b3e</KistlBase:BaseObjectClass>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -1577,7 +1577,7 @@
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
     <KistlBase:BaseObjectClass>e5f93f63-9cb8-40a5-8118-d1d9e479370c</KistlBase:BaseObjectClass>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -1594,7 +1594,7 @@
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
     <KistlBase:BaseObjectClass>63b8e3f7-e663-4fde-a09a-64ca876586bd</KistlBase:BaseObjectClass>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -1611,7 +1611,7 @@
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
     <KistlBase:BaseObjectClass>6f005f31-c09c-45f9-9bcb-44090ebf0d1f</KistlBase:BaseObjectClass>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -1628,7 +1628,7 @@
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
     <KistlBase:BaseObjectClass>e5f93f63-9cb8-40a5-8118-d1d9e479370c</KistlBase:BaseObjectClass>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -1643,7 +1643,7 @@
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -1657,7 +1657,7 @@
     <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -1683,7 +1683,7 @@
     <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -1699,7 +1699,7 @@
     <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
-    <GUI:DefaultPresentableModelDescriptor>0d3a2e45-9a49-4e29-afea-619baa8d3871</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>0d3a2e45-9a49-4e29-afea-619baa8d3871</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>true</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -1716,7 +1716,7 @@
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
     <KistlBase:BaseObjectClass>63b8e3f7-e663-4fde-a09a-64ca876586bd</KistlBase:BaseObjectClass>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -1733,7 +1733,7 @@
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
     <KistlBase:BaseObjectClass>b0c23c07-950f-47a0-af23-a925dc691b3e</KistlBase:BaseObjectClass>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -1747,7 +1747,7 @@
     <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -1776,7 +1776,7 @@
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
     <KistlBase:BaseObjectClass>63b8e3f7-e663-4fde-a09a-64ca876586bd</KistlBase:BaseObjectClass>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -1793,7 +1793,7 @@
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
     <KistlBase:BaseObjectClass>b0c23c07-950f-47a0-af23-a925dc691b3e</KistlBase:BaseObjectClass>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -1810,7 +1810,7 @@
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
     <KistlBase:BaseObjectClass>6f005f31-c09c-45f9-9bcb-44090ebf0d1f</KistlBase:BaseObjectClass>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -1826,7 +1826,7 @@
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>true</GUI:IsSimpleObject>
@@ -1843,7 +1843,7 @@
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
     <KistlBase:BaseObjectClass>b0c23c07-950f-47a0-af23-a925dc691b3e</KistlBase:BaseObjectClass>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -1857,7 +1857,7 @@
     <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -1872,7 +1872,7 @@
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
     <KistlBase:BaseObjectClass>f1c37bfb-e45f-4964-b6ba-672c1ec81b60</KistlBase:BaseObjectClass>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -1889,7 +1889,7 @@
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
     <KistlBase:BaseObjectClass>b0c23c07-950f-47a0-af23-a925dc691b3e</KistlBase:BaseObjectClass>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -1916,7 +1916,7 @@
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -1950,7 +1950,7 @@
     <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
-    <GUI:DefaultPresentableModelDescriptor>6b368136-addd-4e86-ad29-3d2158a00de5</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>6b368136-addd-4e86-ad29-3d2158a00de5</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -1966,7 +1966,7 @@
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
     <KistlBase:BaseObjectClass>ac1d5ac9-d909-438f-a4f5-f64ea6904944</KistlBase:BaseObjectClass>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -1983,7 +1983,7 @@
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
     <KistlBase:BaseObjectClass>6f005f31-c09c-45f9-9bcb-44090ebf0d1f</KistlBase:BaseObjectClass>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -2000,7 +2000,7 @@
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
     <KistlBase:BaseObjectClass>63b8e3f7-e663-4fde-a09a-64ca876586bd</KistlBase:BaseObjectClass>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -2017,7 +2017,7 @@
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
     <KistlBase:BaseObjectClass>b0c23c07-950f-47a0-af23-a925dc691b3e</KistlBase:BaseObjectClass>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -2033,7 +2033,7 @@
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
     <KistlBase:BaseObjectClass>ac1d5ac9-d909-438f-a4f5-f64ea6904944</KistlBase:BaseObjectClass>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -2049,7 +2049,7 @@
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
     <KistlBase:BaseObjectClass>ac1d5ac9-d909-438f-a4f5-f64ea6904944</KistlBase:BaseObjectClass>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -2065,7 +2065,7 @@
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
     <KistlBase:BaseObjectClass>ed8f30ad-186f-48ee-8dd5-a153d24dfada</KistlBase:BaseObjectClass>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -2081,7 +2081,7 @@
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -2097,7 +2097,7 @@
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
-    <GUI:DefaultPresentableModelDescriptor>caf3e708-2f31-4084-9957-ca11fccc1374</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>caf3e708-2f31-4084-9957-ca11fccc1374</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -2113,7 +2113,7 @@
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
     <KistlBase:BaseObjectClass>ac1d5ac9-d909-438f-a4f5-f64ea6904944</KistlBase:BaseObjectClass>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -2129,7 +2129,7 @@
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
-    <GUI:DefaultPresentableModelDescriptor>84828181-4048-47a7-b526-01508b7a0fd0</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>84828181-4048-47a7-b526-01508b7a0fd0</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -2157,7 +2157,7 @@
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
     <KistlBase:BaseObjectClass>74785c72-3271-4fb7-95fc-86b0baa09c8e</KistlBase:BaseObjectClass>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -2173,7 +2173,7 @@
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
     <KistlBase:BaseObjectClass>ac1d5ac9-d909-438f-a4f5-f64ea6904944</KistlBase:BaseObjectClass>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -2190,7 +2190,7 @@
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
     <KistlBase:BaseObjectClass>6f005f31-c09c-45f9-9bcb-44090ebf0d1f</KistlBase:BaseObjectClass>
-    <GUI:DefaultPresentableModelDescriptor>6b368136-addd-4e86-ad29-3d2158a00de5</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>6b368136-addd-4e86-ad29-3d2158a00de5</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -2207,7 +2207,7 @@
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
     <KistlBase:BaseObjectClass>63b8e3f7-e663-4fde-a09a-64ca876586bd</KistlBase:BaseObjectClass>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -2224,7 +2224,7 @@
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
     <KistlBase:BaseObjectClass>e5f93f63-9cb8-40a5-8118-d1d9e479370c</KistlBase:BaseObjectClass>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -2241,7 +2241,7 @@
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
     <KistlBase:BaseObjectClass>e5f93f63-9cb8-40a5-8118-d1d9e479370c</KistlBase:BaseObjectClass>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -2257,7 +2257,7 @@
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>true</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -2271,7 +2271,7 @@
     <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -2297,7 +2297,7 @@
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
-    <GUI:DefaultPresentableModelDescriptor>225bfb18-82fc-429d-81ff-e1ba738fdbc7</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>225bfb18-82fc-429d-81ff-e1ba738fdbc7</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -2312,7 +2312,7 @@
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
-    <GUI:DefaultPresentableModelDescriptor>d4d5ae35-104d-4445-b0a9-2d49ae5f7716</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d4d5ae35-104d-4445-b0a9-2d49ae5f7716</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -2327,7 +2327,7 @@
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
     <KistlBase:BaseObjectClass>f1c37bfb-e45f-4964-b6ba-672c1ec81b60</KistlBase:BaseObjectClass>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -2356,7 +2356,7 @@
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
     <KistlBase:BaseObjectClass>63b8e3f7-e663-4fde-a09a-64ca876586bd</KistlBase:BaseObjectClass>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -2373,7 +2373,7 @@
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
     <KistlBase:BaseObjectClass>b0c23c07-950f-47a0-af23-a925dc691b3e</KistlBase:BaseObjectClass>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -2389,7 +2389,7 @@
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
     <KistlBase:BaseObjectClass>ac1d5ac9-d909-438f-a4f5-f64ea6904944</KistlBase:BaseObjectClass>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -2405,7 +2405,7 @@
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -2422,7 +2422,7 @@
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
     <KistlBase:BaseObjectClass>e5f93f63-9cb8-40a5-8118-d1d9e479370c</KistlBase:BaseObjectClass>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>true</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -2560,10 +2560,6 @@
     <KistlBase:A>8a1ace7c-77f2-4b48-9b0b-bcb68c660d11</KistlBase:A>
     <KistlBase:B>4ae6616a-eca3-47a5-b502-8e3c3913c2f0</KistlBase:B>
   </KistlBase:ObjectClass_implements_Interface_RelationEntry>
-  <KistlBase:ObjectClass_implements_Interface_RelationEntry ExportGuid="ce7397c4-d7bb-416b-96de-894890447c9d">
-    <KistlBase:A>5d152c6f-6c1e-48b7-b03e-669e30468808</KistlBase:A>
-    <KistlBase:B>4ae6616a-eca3-47a5-b502-8e3c3913c2f0</KistlBase:B>
-  </KistlBase:ObjectClass_implements_Interface_RelationEntry>
   <KistlBase:ObjectClass_implements_Interface_RelationEntry ExportGuid="0f9d7471-7f42-4e62-a59a-cb22b702bd7f">
     <KistlBase:A>885939e8-82e1-4fdf-b80e-5f612d5131d3</KistlBase:A>
     <KistlBase:B>a73f2d0a-786b-483d-b474-b9d9df42b8b3</KistlBase:B>
@@ -2618,6 +2614,10 @@
   </KistlBase:ObjectClass_implements_Interface_RelationEntry>
   <KistlBase:ObjectClass_implements_Interface_RelationEntry ExportGuid="fe0a5037-b476-486e-9105-9d92991854c1">
     <KistlBase:A>ffda4604-1536-43b6-b951-f8753d5092ca</KistlBase:A>
+    <KistlBase:B>4ae6616a-eca3-47a5-b502-8e3c3913c2f0</KistlBase:B>
+  </KistlBase:ObjectClass_implements_Interface_RelationEntry>
+  <KistlBase:ObjectClass_implements_Interface_RelationEntry ExportGuid="ce7397c4-d7bb-416b-96de-894890447c9d">
+    <KistlBase:A>5d152c6f-6c1e-48b7-b03e-669e30468808</KistlBase:A>
     <KistlBase:B>4ae6616a-eca3-47a5-b502-8e3c3913c2f0</KistlBase:B>
   </KistlBase:ObjectClass_implements_Interface_RelationEntry>
   <KistlBase:ObjectReferenceProperty ExportGuid="c8d556ec-a0b9-4491-95ee-91a1f2018faa">
@@ -5960,7 +5960,7 @@
     <KistlBase:ChangedOn>2009-12-14T17:08:05.343Z</KistlBase:ChangedOn>
     <KistlBase:Containment>0</KistlBase:Containment>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.343Z</KistlBase:CreatedOn>
-    <KistlBase:Description>This relation between a PresentableModelDescriptor and the described PresentableModel's Type</KistlBase:Description>
+    <KistlBase:Description>This relation between a ViewModelDescriptor and the described ViewModel's Type</KistlBase:Description>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
     <KistlBase:Storage>1</KistlBase:Storage>
     <KistlBase:Verb>has</KistlBase:Verb>
@@ -6027,17 +6027,6 @@
     <KistlBase:Storage>1</KistlBase:Storage>
     <KistlBase:Verb>has</KistlBase:Verb>
   </KistlBase:Relation>
-  <KistlBase:Relation ExportGuid="3437ea5d-d926-4a0b-a848-9dafedf7ad6a">
-    <KistlBase:A>32fe5f8c-1e3f-4be5-a77f-40e3714dfecc</KistlBase:A>
-    <KistlBase:B>b793d4e7-e0c0-4455-8606-4e9f39cd71a2</KistlBase:B>
-    <KistlBase:ChangedOn>2009-12-14T17:08:05.343Z</KistlBase:ChangedOn>
-    <KistlBase:Containment>0</KistlBase:Containment>
-    <KistlBase:CreatedOn>2009-12-14T17:08:05.343Z</KistlBase:CreatedOn>
-    <KistlBase:Description>Connects a Property with the PresentableModel to display her value</KistlBase:Description>
-    <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
-    <KistlBase:Storage>1</KistlBase:Storage>
-    <KistlBase:Verb>has</KistlBase:Verb>
-  </KistlBase:Relation>
   <KistlBase:Relation ExportGuid="dd9f5bf9-8a0e-432b-a7bb-5ba97e12face">
     <KistlBase:A>b7c4e084-d97e-44c1-8652-e26de485908f</KistlBase:A>
     <KistlBase:B>cc4c780a-8afc-417a-8726-976e2d314f1d</KistlBase:B>
@@ -6047,6 +6036,17 @@
     <KistlBase:Description>Property has PropertyInvocations</KistlBase:Description>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
     <KistlBase:Storage>2</KistlBase:Storage>
+    <KistlBase:Verb>has</KistlBase:Verb>
+  </KistlBase:Relation>
+  <KistlBase:Relation ExportGuid="3437ea5d-d926-4a0b-a848-9dafedf7ad6a">
+    <KistlBase:A>32fe5f8c-1e3f-4be5-a77f-40e3714dfecc</KistlBase:A>
+    <KistlBase:B>b793d4e7-e0c0-4455-8606-4e9f39cd71a2</KistlBase:B>
+    <KistlBase:ChangedOn>2009-12-14T17:08:05.343Z</KistlBase:ChangedOn>
+    <KistlBase:Containment>0</KistlBase:Containment>
+    <KistlBase:CreatedOn>2009-12-14T17:08:05.343Z</KistlBase:CreatedOn>
+    <KistlBase:Description>Connects a Property with the ViewModel to display her value</KistlBase:Description>
+    <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
+    <KistlBase:Storage>1</KistlBase:Storage>
     <KistlBase:Verb>has</KistlBase:Verb>
   </KistlBase:Relation>
   <KistlBase:Relation ExportGuid="88098240-78f7-43eb-8c0d-746c8dfeba63">
@@ -7381,24 +7381,6 @@
     <KistlBase:RoleName>Navigator</KistlBase:RoleName>
     <KistlBase:Type>f1baf69c-a341-4a3a-b321-e782e1458e87</KistlBase:Type>
   </KistlBase:RelationEnd>
-  <KistlBase:RelationEnd ExportGuid="83bf4a69-385b-486d-b0f7-c2a77dd351dc">
-    <KistlBase:BParent>1ae94c81-3359-45e8-b97a-b61add91abba</KistlBase:BParent>
-    <KistlBase:ChangedOn>2009-12-14T17:08:05.35Z</KistlBase:ChangedOn>
-    <KistlBase:CreatedOn>2009-12-14T17:08:05.35Z</KistlBase:CreatedOn>
-    <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
-    <KistlBase:Multiplicity>2</KistlBase:Multiplicity>
-    <KistlBase:RoleName>DefaultPresentableModelDescriptor</KistlBase:RoleName>
-    <KistlBase:Type>5d152c6f-6c1e-48b7-b03e-669e30468808</KistlBase:Type>
-  </KistlBase:RelationEnd>
-  <KistlBase:RelationEnd ExportGuid="b793d4e7-e0c0-4455-8606-4e9f39cd71a2">
-    <KistlBase:BParent>3437ea5d-d926-4a0b-a848-9dafedf7ad6a</KistlBase:BParent>
-    <KistlBase:ChangedOn>2009-12-14T17:08:05.35Z</KistlBase:ChangedOn>
-    <KistlBase:CreatedOn>2009-12-14T17:08:05.35Z</KistlBase:CreatedOn>
-    <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
-    <KistlBase:Multiplicity>2</KistlBase:Multiplicity>
-    <KistlBase:RoleName>ValueModelDescriptor</KistlBase:RoleName>
-    <KistlBase:Type>5d152c6f-6c1e-48b7-b03e-669e30468808</KistlBase:Type>
-  </KistlBase:RelationEnd>
   <KistlBase:RelationEnd ExportGuid="3ecc43dd-f231-4b6d-af16-ee14f684105c">
     <KistlBase:AParent>bffae7c3-c5f3-4139-ae96-577f4c9fed8f</KistlBase:AParent>
     <KistlBase:ChangedOn>2009-12-14T17:08:05.35Z</KistlBase:ChangedOn>
@@ -7760,6 +7742,24 @@
     <KistlBase:Navigator>8e862e5e-bc66-479a-9482-edd3a3355db3</KistlBase:Navigator>
     <KistlBase:RoleName>TypeRef</KistlBase:RoleName>
     <KistlBase:Type>87766ae2-89a4-4c37-ab25-583a710c55e5</KistlBase:Type>
+  </KistlBase:RelationEnd>
+  <KistlBase:RelationEnd ExportGuid="83bf4a69-385b-486d-b0f7-c2a77dd351dc">
+    <KistlBase:BParent>1ae94c81-3359-45e8-b97a-b61add91abba</KistlBase:BParent>
+    <KistlBase:ChangedOn>2009-12-14T17:08:05.35Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2009-12-14T17:08:05.35Z</KistlBase:CreatedOn>
+    <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
+    <KistlBase:Multiplicity>2</KistlBase:Multiplicity>
+    <KistlBase:RoleName>DefaultViewModelDescriptor</KistlBase:RoleName>
+    <KistlBase:Type>5d152c6f-6c1e-48b7-b03e-669e30468808</KistlBase:Type>
+  </KistlBase:RelationEnd>
+  <KistlBase:RelationEnd ExportGuid="b793d4e7-e0c0-4455-8606-4e9f39cd71a2">
+    <KistlBase:BParent>3437ea5d-d926-4a0b-a848-9dafedf7ad6a</KistlBase:BParent>
+    <KistlBase:ChangedOn>2009-12-14T17:08:05.35Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2009-12-14T17:08:05.35Z</KistlBase:CreatedOn>
+    <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
+    <KistlBase:Multiplicity>2</KistlBase:Multiplicity>
+    <KistlBase:RoleName>ValueModelDescriptor</KistlBase:RoleName>
+    <KistlBase:Type>5d152c6f-6c1e-48b7-b03e-669e30468808</KistlBase:Type>
   </KistlBase:RelationEnd>
   <KistlBase:EnumerationEntry ExportGuid="5d82dda2-7b8d-4dbb-b418-ae64cdad9856">
     <KistlBase:ChangedOn>2010-01-29T16:54:15.767Z</KistlBase:ChangedOn>
@@ -12089,207 +12089,207 @@
     <GUI:IconFile>VSProject_genericproject.ico</GUI:IconFile>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
   </GUI:Icon>
-  <GUI:PresentableModelDescriptor ExportGuid="3d779eaf-1c37-4c3b-822b-0b1af0926802">
+  <GUI:ViewModelDescriptor ExportGuid="3d779eaf-1c37-4c3b-822b-0b1af0926802">
     <GUI:DefaultKind>364aaaf3-0f61-4642-a0e3-bd812935cf44</GUI:DefaultKind>
     <GUI:Description>An action which can be triggered by the user</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
-    <GUI:PresentableModelRef>cd9797e0-ad1b-4dd7-b66b-1f2528f7a50c</GUI:PresentableModelRef>
-  </GUI:PresentableModelDescriptor>
-  <GUI:PresentableModelDescriptor ExportGuid="d1135824-6e2a-41e7-a1db-83621b5de078">
+    <GUI:ViewModelRef>cd9797e0-ad1b-4dd7-b66b-1f2528f7a50c</GUI:ViewModelRef>
+  </GUI:ViewModelDescriptor>
+  <GUI:ViewModelDescriptor ExportGuid="d1135824-6e2a-41e7-a1db-83621b5de078">
     <GUI:DefaultKind>ab09eaba-507b-4dce-9fbd-589adbc9580b</GUI:DefaultKind>
     <GUI:Description>Select a string value from a set of values</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
-    <GUI:PresentableModelRef>a1c64886-b50d-4e06-b806-dc359e605626</GUI:PresentableModelRef>
-  </GUI:PresentableModelDescriptor>
-  <GUI:PresentableModelDescriptor ExportGuid="d8e95ac5-d46a-4dfa-a574-12ea299eadc4">
+    <GUI:ViewModelRef>a1c64886-b50d-4e06-b806-dc359e605626</GUI:ViewModelRef>
+  </GUI:ViewModelDescriptor>
+  <GUI:ViewModelDescriptor ExportGuid="d8e95ac5-d46a-4dfa-a574-12ea299eadc4">
     <GUI:DefaultKind>f0010cd6-9256-46ff-9629-5a707fa25158</GUI:DefaultKind>
     <GUI:Description>A complete IDataObject</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
-    <GUI:PresentableModelRef>a07f30a6-b920-4fef-98ac-53155791e804</GUI:PresentableModelRef>
-  </GUI:PresentableModelDescriptor>
-  <GUI:PresentableModelDescriptor ExportGuid="7ec25c1a-c819-4219-9432-af1fdb0aaf63">
+    <GUI:ViewModelRef>a07f30a6-b920-4fef-98ac-53155791e804</GUI:ViewModelRef>
+  </GUI:ViewModelDescriptor>
+  <GUI:ViewModelDescriptor ExportGuid="7ec25c1a-c819-4219-9432-af1fdb0aaf63">
     <GUI:DefaultKind>18c0afa2-61bc-4ecb-b1e9-47b33b294573</GUI:DefaultKind>
     <GUI:Description>A task for the user: select an IDataObject from a list</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
-    <GUI:PresentableModelRef>312383a3-5c45-43cf-a032-5271792a4eec</GUI:PresentableModelRef>
-  </GUI:PresentableModelDescriptor>
-  <GUI:PresentableModelDescriptor ExportGuid="0d3a2e45-9a49-4e29-afea-619baa8d3871">
+    <GUI:ViewModelRef>312383a3-5c45-43cf-a032-5271792a4eec</GUI:ViewModelRef>
+  </GUI:ViewModelDescriptor>
+  <GUI:ViewModelDescriptor ExportGuid="0d3a2e45-9a49-4e29-afea-619baa8d3871">
     <GUI:DefaultKind>4149c816-b593-4346-93e4-eb4bba99fab4</GUI:DefaultKind>
     <GUI:Description>DataObjectModel with specific extensions for DataTypes</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
-    <GUI:PresentableModelRef>41b6d0a1-a2ae-4c68-8997-503db83319bc</GUI:PresentableModelRef>
-  </GUI:PresentableModelDescriptor>
-  <GUI:PresentableModelDescriptor ExportGuid="a6ff986c-a485-4c4d-947c-e59d14112ec2">
+    <GUI:ViewModelRef>41b6d0a1-a2ae-4c68-8997-503db83319bc</GUI:ViewModelRef>
+  </GUI:ViewModelDescriptor>
+  <GUI:ViewModelDescriptor ExportGuid="a6ff986c-a485-4c4d-947c-e59d14112ec2">
     <GUI:DefaultKind>9d414225-460a-4c54-8e36-e368804e387f</GUI:DefaultKind>
     <GUI:Description>An enumeration value for generic enumerations</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
-    <GUI:PresentableModelRef>48cdd708-4699-4da7-9cb0-83b2a8209c95</GUI:PresentableModelRef>
-  </GUI:PresentableModelDescriptor>
-  <GUI:PresentableModelDescriptor ExportGuid="6d40b091-3c20-4371-9bc2-dc12fe2f552f">
+    <GUI:ViewModelRef>48cdd708-4699-4da7-9cb0-83b2a8209c95</GUI:ViewModelRef>
+  </GUI:ViewModelDescriptor>
+  <GUI:ViewModelDescriptor ExportGuid="6d40b091-3c20-4371-9bc2-dc12fe2f552f">
     <GUI:Description>A basic DashBoard for the GUI module.</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
-    <GUI:PresentableModelRef>f9521a1c-77dc-4af5-ba5d-f41a4761c612</GUI:PresentableModelRef>
-  </GUI:PresentableModelDescriptor>
-  <GUI:PresentableModelDescriptor ExportGuid="d96d030e-eebe-4b7f-8b55-dca30cbd4bde">
+    <GUI:ViewModelRef>f9521a1c-77dc-4af5-ba5d-f41a4761c612</GUI:ViewModelRef>
+  </GUI:ViewModelDescriptor>
+  <GUI:ViewModelDescriptor ExportGuid="d96d030e-eebe-4b7f-8b55-dca30cbd4bde">
     <GUI:DefaultKind>6b5093bb-3ac0-4710-b30d-d72a50b09ee8</GUI:DefaultKind>
     <GUI:Description>A model for easier working with TypeRef valued Properties</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
-    <GUI:PresentableModelRef>e36fd933-69a1-404d-a09e-93f4ecb88d31</GUI:PresentableModelRef>
-  </GUI:PresentableModelDescriptor>
-  <GUI:PresentableModelDescriptor ExportGuid="b1df266b-a841-4669-9199-a6a01f6dbfcc">
+    <GUI:ViewModelRef>e36fd933-69a1-404d-a09e-93f4ecb88d31</GUI:ViewModelRef>
+  </GUI:ViewModelDescriptor>
+  <GUI:ViewModelDescriptor ExportGuid="b1df266b-a841-4669-9199-a6a01f6dbfcc">
     <GUI:DefaultKind>59253ed1-a3a5-4574-b3bb-3c4fa535d21c</GUI:DefaultKind>
     <GUI:Description>A debugger window showing the used IKistlContexts and their AttachedObjects</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
-    <GUI:PresentableModelRef>266f79a3-9b2f-4779-a9ae-9702ccf53a5a</GUI:PresentableModelRef>
-  </GUI:PresentableModelDescriptor>
-  <GUI:PresentableModelDescriptor ExportGuid="caf3e708-2f31-4084-9957-ca11fccc1374">
+    <GUI:ViewModelRef>266f79a3-9b2f-4779-a9ae-9702ccf53a5a</GUI:ViewModelRef>
+  </GUI:ViewModelDescriptor>
+  <GUI:ViewModelDescriptor ExportGuid="caf3e708-2f31-4084-9957-ca11fccc1374">
     <GUI:DefaultKind>a31b5081-88c2-4661-964b-7917578e0711</GUI:DefaultKind>
     <GUI:Description>DataObjectModel with specific extensions for MethodInvocations</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
-    <GUI:PresentableModelRef>68c7ae8c-6fc6-4c67-877b-7a84efd47b55</GUI:PresentableModelRef>
-  </GUI:PresentableModelDescriptor>
-  <GUI:PresentableModelDescriptor ExportGuid="84828181-4048-47a7-b526-01508b7a0fd0">
+    <GUI:ViewModelRef>68c7ae8c-6fc6-4c67-877b-7a84efd47b55</GUI:ViewModelRef>
+  </GUI:ViewModelDescriptor>
+  <GUI:ViewModelDescriptor ExportGuid="84828181-4048-47a7-b526-01508b7a0fd0">
     <GUI:DefaultKind>c86d56f3-52c5-4864-ae26-b102cd61ffb6</GUI:DefaultKind>
     <GUI:Description>DataObjectModel with specific extensions for Modules</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
-    <GUI:PresentableModelRef>98b741e5-2dd5-4221-b001-01de816ded70</GUI:PresentableModelRef>
-  </GUI:PresentableModelDescriptor>
-  <GUI:PresentableModelDescriptor ExportGuid="1f4e8593-5675-4f0a-9454-7cb888cfe6e1">
+    <GUI:ViewModelRef>98b741e5-2dd5-4221-b001-01de816ded70</GUI:ViewModelRef>
+  </GUI:ViewModelDescriptor>
+  <GUI:ViewModelDescriptor ExportGuid="1f4e8593-5675-4f0a-9454-7cb888cfe6e1">
     <GUI:Description>A method returning an integer value</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
-    <GUI:PresentableModelRef>b030fc3a-8022-4e46-97a3-7d9c3562c32e</GUI:PresentableModelRef>
-  </GUI:PresentableModelDescriptor>
-  <GUI:PresentableModelDescriptor ExportGuid="ae255750-0147-4e61-9426-8b7232c927fc">
+    <GUI:ViewModelRef>b030fc3a-8022-4e46-97a3-7d9c3562c32e</GUI:ViewModelRef>
+  </GUI:ViewModelDescriptor>
+  <GUI:ViewModelDescriptor ExportGuid="ae255750-0147-4e61-9426-8b7232c927fc">
     <GUI:Description>A method returning true or false</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
-    <GUI:PresentableModelRef>8bdb8b68-0dc3-46ff-a7a0-00bcc96feb4a</GUI:PresentableModelRef>
-  </GUI:PresentableModelDescriptor>
-  <GUI:PresentableModelDescriptor ExportGuid="677a70dc-a7ec-4f41-9aae-9e87949489db">
+    <GUI:ViewModelRef>8bdb8b68-0dc3-46ff-a7a0-00bcc96feb4a</GUI:ViewModelRef>
+  </GUI:ViewModelDescriptor>
+  <GUI:ViewModelDescriptor ExportGuid="677a70dc-a7ec-4f41-9aae-9e87949489db">
     <GUI:Description>A method returning a floating point value</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
-    <GUI:PresentableModelRef>e4266301-3554-46cb-bd25-f13f545dcffa</GUI:PresentableModelRef>
-  </GUI:PresentableModelDescriptor>
-  <GUI:PresentableModelDescriptor ExportGuid="e60611f1-025e-49f3-854e-c682127bc247">
+    <GUI:ViewModelRef>e4266301-3554-46cb-bd25-f13f545dcffa</GUI:ViewModelRef>
+  </GUI:ViewModelDescriptor>
+  <GUI:ViewModelDescriptor ExportGuid="e60611f1-025e-49f3-854e-c682127bc247">
     <GUI:Description>A method returning a date and time value</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
-    <GUI:PresentableModelRef>e57001ad-1e50-4d01-b5f7-5f7e0c27d2c8</GUI:PresentableModelRef>
-  </GUI:PresentableModelDescriptor>
-  <GUI:PresentableModelDescriptor ExportGuid="edaf9334-dc36-4778-aa33-1e5cdaeeb767">
+    <GUI:ViewModelRef>e57001ad-1e50-4d01-b5f7-5f7e0c27d2c8</GUI:ViewModelRef>
+  </GUI:ViewModelDescriptor>
+  <GUI:ViewModelDescriptor ExportGuid="edaf9334-dc36-4778-aa33-1e5cdaeeb767">
     <GUI:DefaultKind>2377807c-605b-4e64-9c74-361d3ea6f353</GUI:DefaultKind>
     <GUI:Description>An integer attribute</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
-    <GUI:PresentableModelRef>2f35b21a-73c2-4e38-ab28-7ee2404684be</GUI:PresentableModelRef>
-  </GUI:PresentableModelDescriptor>
-  <GUI:PresentableModelDescriptor ExportGuid="3a3d0c1c-679e-4d4d-adeb-3ab260079ccb">
+    <GUI:ViewModelRef>2f35b21a-73c2-4e38-ab28-7ee2404684be</GUI:ViewModelRef>
+  </GUI:ViewModelDescriptor>
+  <GUI:ViewModelDescriptor ExportGuid="3a3d0c1c-679e-4d4d-adeb-3ab260079ccb">
     <GUI:DefaultKind>2686036b-b3c9-45b9-9361-e452d69cdc09</GUI:DefaultKind>
     <GUI:Description>A floating point attribute</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
-    <GUI:PresentableModelRef>f223c178-c447-40a8-960e-ffba6b8423af</GUI:PresentableModelRef>
-  </GUI:PresentableModelDescriptor>
-  <GUI:PresentableModelDescriptor ExportGuid="2b6fb70f-a382-4057-a139-cc33333d619d">
+    <GUI:ViewModelRef>f223c178-c447-40a8-960e-ffba6b8423af</GUI:ViewModelRef>
+  </GUI:ViewModelDescriptor>
+  <GUI:ViewModelDescriptor ExportGuid="2b6fb70f-a382-4057-a139-cc33333d619d">
     <GUI:DefaultKind>200f0be5-9f23-4ddb-9a00-0133b4fc295d</GUI:DefaultKind>
     <GUI:Description>A GUID attribute</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
-    <GUI:PresentableModelRef>7ea78a35-65a1-41f0-a0f0-da2dee7dd5bf</GUI:PresentableModelRef>
-  </GUI:PresentableModelDescriptor>
-  <GUI:PresentableModelDescriptor ExportGuid="fc74b434-3801-4e4a-ab67-e65a9e014005">
+    <GUI:ViewModelRef>7ea78a35-65a1-41f0-a0f0-da2dee7dd5bf</GUI:ViewModelRef>
+  </GUI:ViewModelDescriptor>
+  <GUI:ViewModelDescriptor ExportGuid="fc74b434-3801-4e4a-ab67-e65a9e014005">
     <GUI:DefaultKind>227dcbce-4905-4337-a6a0-720c9d218ab7</GUI:DefaultKind>
     <GUI:Description>A date and time attribute</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
-    <GUI:PresentableModelRef>59ab4b8c-ab9f-461b-9b9c-7941a7b4a9fa</GUI:PresentableModelRef>
-  </GUI:PresentableModelDescriptor>
-  <GUI:PresentableModelDescriptor ExportGuid="09d1f453-d0d9-429e-88e7-e84b33de7c2e">
+    <GUI:ViewModelRef>59ab4b8c-ab9f-461b-9b9c-7941a7b4a9fa</GUI:ViewModelRef>
+  </GUI:ViewModelDescriptor>
+  <GUI:ViewModelDescriptor ExportGuid="09d1f453-d0d9-429e-88e7-e84b33de7c2e">
     <GUI:DefaultKind>12b829e1-abab-43f3-99ea-e33cd383d7e6</GUI:DefaultKind>
     <GUI:Description>A simple true/false attribute</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
-    <GUI:PresentableModelRef>69d2fcb4-d385-497d-8159-20c03157d5c0</GUI:PresentableModelRef>
-  </GUI:PresentableModelDescriptor>
-  <GUI:PresentableModelDescriptor ExportGuid="b8c85c21-966f-4cb0-a2b9-fcad029de674">
+    <GUI:ViewModelRef>69d2fcb4-d385-497d-8159-20c03157d5c0</GUI:ViewModelRef>
+  </GUI:ViewModelDescriptor>
+  <GUI:ViewModelDescriptor ExportGuid="b8c85c21-966f-4cb0-a2b9-fcad029de674">
     <GUI:DefaultKind>329837fd-1146-48b2-9f4e-79aec8958b1e</GUI:DefaultKind>
     <GUI:Description>A top-level window containing a Workspace ObjectBrowser, a visual representation for IKistlContext</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
-    <GUI:PresentableModelRef>bf51f3c4-2f92-480b-a244-02dc8c69ed56</GUI:PresentableModelRef>
-  </GUI:PresentableModelDescriptor>
-  <GUI:PresentableModelDescriptor ExportGuid="6b368136-addd-4e86-ad29-3d2158a00de5">
+    <GUI:ViewModelRef>bf51f3c4-2f92-480b-a244-02dc8c69ed56</GUI:ViewModelRef>
+  </GUI:ViewModelDescriptor>
+  <GUI:ViewModelDescriptor ExportGuid="6b368136-addd-4e86-ad29-3d2158a00de5">
     <GUI:DefaultKind>06bf9adc-c5bc-4552-abdc-18a96c527962</GUI:DefaultKind>
     <GUI:Description>DataObjectModel with specific extensions for ObjectClasses</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
-    <GUI:PresentableModelRef>da04f1a5-fb30-4786-b329-8f070083a4f6</GUI:PresentableModelRef>
-  </GUI:PresentableModelDescriptor>
-  <GUI:PresentableModelDescriptor ExportGuid="ffc833d5-a2a5-4cde-8335-6285973742d8">
+    <GUI:ViewModelRef>da04f1a5-fb30-4786-b329-8f070083a4f6</GUI:ViewModelRef>
+  </GUI:ViewModelDescriptor>
+  <GUI:ViewModelDescriptor ExportGuid="ffc833d5-a2a5-4cde-8335-6285973742d8">
     <GUI:DefaultKind>44654dc7-6f5f-46a1-bdc6-7c3bd124b5bb</GUI:DefaultKind>
     <GUI:Description>A top-level window containing a Workspace ObjectEditor, a visual representation for IKistlContext</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
-    <GUI:PresentableModelRef>d9fe8f77-b156-4929-add8-38cc2fa546e8</GUI:PresentableModelRef>
-  </GUI:PresentableModelDescriptor>
-  <GUI:PresentableModelDescriptor ExportGuid="9fce01fe-fd6d-4e21-8b55-08d5e38aea36">
+    <GUI:ViewModelRef>d9fe8f77-b156-4929-add8-38cc2fa546e8</GUI:ViewModelRef>
+  </GUI:ViewModelDescriptor>
+  <GUI:ViewModelDescriptor ExportGuid="9fce01fe-fd6d-4e21-8b55-08d5e38aea36">
     <GUI:DefaultKind>9731f312-8ce4-4c2d-8d95-1923256dc9b8</GUI:DefaultKind>
     <GUI:Description>A list of IDataObjects</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
-    <GUI:PresentableModelRef>85be3823-e778-4829-b214-69154c1e6164</GUI:PresentableModelRef>
-  </GUI:PresentableModelDescriptor>
-  <GUI:PresentableModelDescriptor ExportGuid="83aae6fd-0fae-4348-b313-737a6e751027">
+    <GUI:ViewModelRef>85be3823-e778-4829-b214-69154c1e6164</GUI:ViewModelRef>
+  </GUI:ViewModelDescriptor>
+  <GUI:ViewModelDescriptor ExportGuid="83aae6fd-0fae-4348-b313-737a6e751027">
     <GUI:DefaultGridCellKind>d55c9558-4ced-47b0-8eda-81553340fb5b</GUI:DefaultGridCellKind>
     <GUI:DefaultKind>b86945ed-9edc-42ca-9ca5-8124fbf47b5c</GUI:DefaultKind>
     <GUI:Description>A reference to an IDataObject</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
-    <GUI:PresentableModelRef>59136763-5a94-4ae5-b9ab-6d679e86245a</GUI:PresentableModelRef>
-  </GUI:PresentableModelDescriptor>
-  <GUI:PresentableModelDescriptor ExportGuid="c799b6bf-a1f7-4374-99df-3ebae6e52ef0">
+    <GUI:ViewModelRef>59136763-5a94-4ae5-b9ab-6d679e86245a</GUI:ViewModelRef>
+  </GUI:ViewModelDescriptor>
+  <GUI:ViewModelDescriptor ExportGuid="c799b6bf-a1f7-4374-99df-3ebae6e52ef0">
     <GUI:Description>A method returning an IDataObject reference</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
-    <GUI:PresentableModelRef>03338e3b-2317-4e88-9858-a6a165dd57f9</GUI:PresentableModelRef>
-  </GUI:PresentableModelDescriptor>
-  <GUI:PresentableModelDescriptor ExportGuid="75aef030-0c25-4306-b6d2-ca8c7cd672dd">
+    <GUI:ViewModelRef>03338e3b-2317-4e88-9858-a6a165dd57f9</GUI:ViewModelRef>
+  </GUI:ViewModelDescriptor>
+  <GUI:ViewModelDescriptor ExportGuid="75aef030-0c25-4306-b6d2-ca8c7cd672dd">
     <GUI:DefaultGridCellKind>194e5f9f-5586-41f8-bcfb-beb6b4016aa0</GUI:DefaultGridCellKind>
     <GUI:DefaultKind>a3f09ef3-2fac-4d7e-aea8-cbf0eab4de70</GUI:DefaultKind>
     <GUI:Description>A method returning a string</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
-    <GUI:PresentableModelRef>eda5fdba-d8e3-4a43-b69b-84d3617f105b</GUI:PresentableModelRef>
-  </GUI:PresentableModelDescriptor>
-  <GUI:PresentableModelDescriptor ExportGuid="ac2f4c88-333a-4917-a0b5-a39ad7ea991a">
+    <GUI:ViewModelRef>eda5fdba-d8e3-4a43-b69b-84d3617f105b</GUI:ViewModelRef>
+  </GUI:ViewModelDescriptor>
+  <GUI:ViewModelDescriptor ExportGuid="ac2f4c88-333a-4917-a0b5-a39ad7ea991a">
     <GUI:DefaultKind>d9fb7cec-b71f-48f1-a591-216de253c7d1</GUI:DefaultKind>
     <GUI:Description>A group of properties</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
-    <GUI:PresentableModelRef>8314a3e7-5e20-47bd-ba61-c3e88eae2ffc</GUI:PresentableModelRef>
-  </GUI:PresentableModelDescriptor>
-  <GUI:PresentableModelDescriptor ExportGuid="975eee82-e7e1-4a12-ab43-d2e3bc3766e4">
+    <GUI:ViewModelRef>8314a3e7-5e20-47bd-ba61-c3e88eae2ffc</GUI:ViewModelRef>
+  </GUI:ViewModelDescriptor>
+  <GUI:ViewModelDescriptor ExportGuid="975eee82-e7e1-4a12-ab43-d2e3bc3766e4">
     <GUI:DefaultKind>2279b0a6-36b8-4c97-b1fd-9eb1710e74f3</GUI:DefaultKind>
     <GUI:Description>A string attribute</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
-    <GUI:PresentableModelRef>006ae4fa-804d-47a7-97d5-33d99a0ebb51</GUI:PresentableModelRef>
-  </GUI:PresentableModelDescriptor>
-  <GUI:PresentableModelDescriptor ExportGuid="d4d5ae35-104d-4445-b0a9-2d49ae5f7716">
+    <GUI:ViewModelRef>006ae4fa-804d-47a7-97d5-33d99a0ebb51</GUI:ViewModelRef>
+  </GUI:ViewModelDescriptor>
+  <GUI:ViewModelDescriptor ExportGuid="d4d5ae35-104d-4445-b0a9-2d49ae5f7716">
     <GUI:Description>RelationEditor</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
-    <GUI:PresentableModelRef>b2054c43-2acd-46de-a8b9-d3b4189fcbe8</GUI:PresentableModelRef>
-  </GUI:PresentableModelDescriptor>
-  <GUI:PresentableModelDescriptor ExportGuid="225bfb18-82fc-429d-81ff-e1ba738fdbc7">
+    <GUI:ViewModelRef>b2054c43-2acd-46de-a8b9-d3b4189fcbe8</GUI:ViewModelRef>
+  </GUI:ViewModelDescriptor>
+  <GUI:ViewModelDescriptor ExportGuid="225bfb18-82fc-429d-81ff-e1ba738fdbc7">
     <GUI:DefaultKind>f7cf3060-5fa5-4077-93e9-5fc681f875fe</GUI:DefaultKind>
     <GUI:Description>Releation Editor</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
-    <GUI:PresentableModelRef>e4de1cc8-9d31-41e5-96c8-ae99cf725486</GUI:PresentableModelRef>
-  </GUI:PresentableModelDescriptor>
-  <GUI:PresentableModelDescriptor ExportGuid="8023e937-5827-4056-b0c0-ffb5bf061dfd">
+    <GUI:ViewModelRef>e4de1cc8-9d31-41e5-96c8-ae99cf725486</GUI:ViewModelRef>
+  </GUI:ViewModelDescriptor>
+  <GUI:ViewModelDescriptor ExportGuid="8023e937-5827-4056-b0c0-ffb5bf061dfd">
     <GUI:Description>A dashboard for the TimeRecords module</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
-    <GUI:PresentableModelRef>935f01dd-da91-426f-8afa-b469aec0be09</GUI:PresentableModelRef>
-  </GUI:PresentableModelDescriptor>
-  <GUI:PresentableModelDescriptor ExportGuid="382050bb-706b-4812-b23b-133833d72d55">
+    <GUI:ViewModelRef>935f01dd-da91-426f-8afa-b469aec0be09</GUI:ViewModelRef>
+  </GUI:ViewModelDescriptor>
+  <GUI:ViewModelDescriptor ExportGuid="382050bb-706b-4812-b23b-133833d72d55">
     <GUI:Description>just a wrapper</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
-    <GUI:PresentableModelRef>1be9e966-ddec-4d9a-bdce-a3e2a380bfcc</GUI:PresentableModelRef>
-  </GUI:PresentableModelDescriptor>
-  <GUI:PresentableModelDescriptor ExportGuid="b6dc8994-6930-4cf4-8cb7-7f18efe9ef68">
+    <GUI:ViewModelRef>1be9e966-ddec-4d9a-bdce-a3e2a380bfcc</GUI:ViewModelRef>
+  </GUI:ViewModelDescriptor>
+  <GUI:ViewModelDescriptor ExportGuid="b6dc8994-6930-4cf4-8cb7-7f18efe9ef68">
     <GUI:Description>A model for a single work effort</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
-    <GUI:PresentableModelRef>4b424049-d2b5-46b2-a88e-7fd330395838</GUI:PresentableModelRef>
-  </GUI:PresentableModelDescriptor>
-  <GUI:PresentableModelDescriptor ExportGuid="b4b23681-f63b-4aeb-9ecb-b258bd33be24">
+    <GUI:ViewModelRef>4b424049-d2b5-46b2-a88e-7fd330395838</GUI:ViewModelRef>
+  </GUI:ViewModelDescriptor>
+  <GUI:ViewModelDescriptor ExportGuid="b4b23681-f63b-4aeb-9ecb-b258bd33be24">
     <GUI:Description>A workspace for recording work efforts</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
-    <GUI:PresentableModelRef>28114689-4fc3-44b6-b7f1-141dab6b78d9</GUI:PresentableModelRef>
-  </GUI:PresentableModelDescriptor>
+    <GUI:ViewModelRef>28114689-4fc3-44b6-b7f1-141dab6b78d9</GUI:ViewModelRef>
+  </GUI:ViewModelDescriptor>
   <GUI:ViewDescriptor ExportGuid="17aec30d-f2b5-4c08-8f8d-940504481b5d">
     <GUI:ControlRef>5f402c91-e7e1-4b53-9ac3-68ff2398ac58</GUI:ControlRef>
     <GUI:Kind>5624100a-9fed-44c0-822e-d174c4c9cb45</GUI:Kind>
@@ -12430,7 +12430,7 @@
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
     <KistlBase:BaseObjectClass>a9166f1e-9233-4d2d-8eb6-be71d724ea14</KistlBase:BaseObjectClass>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -12447,7 +12447,7 @@
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
     <KistlBase:BaseObjectClass>a9166f1e-9233-4d2d-8eb6-be71d724ea14</KistlBase:BaseObjectClass>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -12463,7 +12463,7 @@
     <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -12480,7 +12480,7 @@
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
     <KistlBase:BaseObjectClass>20888dfc-1fbc-47c8-9f3c-c6a30a5c0048</KistlBase:BaseObjectClass>
-    <GUI:DefaultPresentableModelDescriptor>6b368136-addd-4e86-ad29-3d2158a00de5</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>6b368136-addd-4e86-ad29-3d2158a00de5</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -12495,7 +12495,7 @@
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
     <KistlBase:BaseObjectClass>a9166f1e-9233-4d2d-8eb6-be71d724ea14</KistlBase:BaseObjectClass>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>true</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -12512,7 +12512,7 @@
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
     <KistlBase:BaseObjectClass>a9166f1e-9233-4d2d-8eb6-be71d724ea14</KistlBase:BaseObjectClass>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -12529,7 +12529,7 @@
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
     <KistlBase:BaseObjectClass>a9166f1e-9233-4d2d-8eb6-be71d724ea14</KistlBase:BaseObjectClass>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -12545,7 +12545,7 @@
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
     <KistlBase:BaseObjectClass>302c3ca4-7e86-4880-8e32-ff548268f80b</KistlBase:BaseObjectClass>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -12562,7 +12562,7 @@
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
     <KistlBase:BaseObjectClass>a9166f1e-9233-4d2d-8eb6-be71d724ea14</KistlBase:BaseObjectClass>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -12578,7 +12578,7 @@
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
     <KistlBase:BaseObjectClass>a9166f1e-9233-4d2d-8eb6-be71d724ea14</KistlBase:BaseObjectClass>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -12594,7 +12594,7 @@
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>true</GUI:IsSimpleObject>
@@ -12621,7 +12621,7 @@
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
     <KistlBase:BaseObjectClass>a9166f1e-9233-4d2d-8eb6-be71d724ea14</KistlBase:BaseObjectClass>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -12638,7 +12638,7 @@
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
     <KistlBase:BaseObjectClass>a9166f1e-9233-4d2d-8eb6-be71d724ea14</KistlBase:BaseObjectClass>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -12655,7 +12655,7 @@
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
     <KistlBase:BaseObjectClass>a9166f1e-9233-4d2d-8eb6-be71d724ea14</KistlBase:BaseObjectClass>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -12672,7 +12672,7 @@
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
     <KistlBase:BaseObjectClass>a9166f1e-9233-4d2d-8eb6-be71d724ea14</KistlBase:BaseObjectClass>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -12688,7 +12688,7 @@
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
     <KistlBase:BaseObjectClass>a9166f1e-9233-4d2d-8eb6-be71d724ea14</KistlBase:BaseObjectClass>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -12705,27 +12705,12 @@
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
     <KistlBase:BaseObjectClass>a9166f1e-9233-4d2d-8eb6-be71d724ea14</KistlBase:BaseObjectClass>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <KistlBase:TableName>ObjectRefKinds</KistlBase:TableName>
   </GUI:ControlKindClass>
-  <KistlBase:ObjectClass ExportGuid="5d152c6f-6c1e-48b7-b03e-669e30468808">
-    <KistlBase:ChangedOn>2009-12-14T17:08:05.4Z</KistlBase:ChangedOn>
-    <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>
-    <KistlBase:Description />
-    <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
-    <KistlBase:Name>PresentableModelDescriptor</KistlBase:Name>
-    <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
-    <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
-    <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
-    <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
-    <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
-    <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
-    <KistlBase:TableName>PresentableModelDescriptors</KistlBase:TableName>
-  </KistlBase:ObjectClass>
   <GUI:ControlKindClass ExportGuid="68a53f9f-fbdb-4d44-8d58-da9be3812ba7">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.4Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>
@@ -12737,7 +12722,7 @@
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
     <KistlBase:BaseObjectClass>a9166f1e-9233-4d2d-8eb6-be71d724ea14</KistlBase:BaseObjectClass>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -12754,7 +12739,7 @@
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
     <KistlBase:BaseObjectClass>b91f789f-8ecb-44e2-8458-7f0d27ea027a</KistlBase:BaseObjectClass>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -12771,7 +12756,7 @@
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
     <KistlBase:BaseObjectClass>a9166f1e-9233-4d2d-8eb6-be71d724ea14</KistlBase:BaseObjectClass>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -12787,7 +12772,7 @@
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
     <KistlBase:BaseObjectClass>a9166f1e-9233-4d2d-8eb6-be71d724ea14</KistlBase:BaseObjectClass>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -12804,7 +12789,7 @@
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
     <KistlBase:BaseObjectClass>a9166f1e-9233-4d2d-8eb6-be71d724ea14</KistlBase:BaseObjectClass>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -12819,7 +12804,7 @@
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -12836,7 +12821,7 @@
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
     <KistlBase:BaseObjectClass>a9166f1e-9233-4d2d-8eb6-be71d724ea14</KistlBase:BaseObjectClass>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -12865,7 +12850,7 @@
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
     <KistlBase:BaseObjectClass>27e8a0f3-ffff-4bb1-b956-c36a5a28dd14</KistlBase:BaseObjectClass>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -12880,11 +12865,26 @@
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <KistlBase:TableName>ViewDescriptors</KistlBase:TableName>
+  </KistlBase:ObjectClass>
+  <KistlBase:ObjectClass ExportGuid="5d152c6f-6c1e-48b7-b03e-669e30468808">
+    <KistlBase:ChangedOn>2009-12-14T17:08:05.4Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>
+    <KistlBase:Description />
+    <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
+    <KistlBase:Name>ViewModelDescriptor</KistlBase:Name>
+    <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
+    <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
+    <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
+    <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
+    <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
+    <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <KistlBase:TableName>ViewModelDescriptors</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="98790e5d-808f-4e0b-8a1a-b304839f07ab">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.4Z</KistlBase:ChangedOn>
@@ -12895,7 +12895,7 @@
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -12912,7 +12912,7 @@
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
     <KistlBase:BaseObjectClass>a9166f1e-9233-4d2d-8eb6-be71d724ea14</KistlBase:BaseObjectClass>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -12926,12 +12926,12 @@
     <KistlBase:A>78b6f354-013b-4129-a390-7f3a5a5e28e9</KistlBase:A>
     <KistlBase:B>4ae6616a-eca3-47a5-b502-8e3c3913c2f0</KistlBase:B>
   </KistlBase:ObjectClass_implements_Interface_RelationEntry>
-  <KistlBase:ObjectClass_implements_Interface_RelationEntry ExportGuid="ce7397c4-d7bb-416b-96de-894890447c9d">
-    <KistlBase:A>5d152c6f-6c1e-48b7-b03e-669e30468808</KistlBase:A>
-    <KistlBase:B>4ae6616a-eca3-47a5-b502-8e3c3913c2f0</KistlBase:B>
-  </KistlBase:ObjectClass_implements_Interface_RelationEntry>
   <KistlBase:ObjectClass_implements_Interface_RelationEntry ExportGuid="fe0a5037-b476-486e-9105-9d92991854c1">
     <KistlBase:A>ffda4604-1536-43b6-b951-f8753d5092ca</KistlBase:A>
+    <KistlBase:B>4ae6616a-eca3-47a5-b502-8e3c3913c2f0</KistlBase:B>
+  </KistlBase:ObjectClass_implements_Interface_RelationEntry>
+  <KistlBase:ObjectClass_implements_Interface_RelationEntry ExportGuid="ce7397c4-d7bb-416b-96de-894890447c9d">
+    <KistlBase:A>5d152c6f-6c1e-48b7-b03e-669e30468808</KistlBase:A>
     <KistlBase:B>4ae6616a-eca3-47a5-b502-8e3c3913c2f0</KistlBase:B>
   </KistlBase:ObjectClass_implements_Interface_RelationEntry>
   <KistlBase:DoubleProperty ExportGuid="2a0d22cd-5538-4a2c-bfb9-287652637708">
@@ -13062,9 +13062,9 @@
     <KistlBase:CategoryTags>GUI</KistlBase:CategoryTags>
     <KistlBase:ChangedOn>2009-12-14T17:08:05.4Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>
-    <KistlBase:Description>The default PresentableModel to use for this ObjectClass</KistlBase:Description>
+    <KistlBase:Description>The default ViewModel to use for this ObjectClass</KistlBase:Description>
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
-    <KistlBase:Name>DefaultPresentableModelDescriptor</KistlBase:Name>
+    <KistlBase:Name>DefaultViewModelDescriptor</KistlBase:Name>
     <KistlBase:ObjectClass>20888dfc-1fbc-47c8-9f3c-c6a30a5c0048</KistlBase:ObjectClass>
     <KistlBase:Properties_pos>900</KistlBase:Properties_pos>
     <GUI:ValueModelDescriptor>83aae6fd-0fae-4348-b313-737a6e751027</GUI:ValueModelDescriptor>
@@ -13084,101 +13084,11 @@
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:IsList>false</KistlBase:IsList>
   </KistlBase:BoolProperty>
-  <KistlBase:ObjectReferenceProperty ExportGuid="6c744476-35e0-4cef-a221-f02abc81566c">
-    <KistlBase:CategoryTags>Main</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2009-12-14T17:08:05.4Z</KistlBase:ChangedOn>
-    <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>
-    <KistlBase:Description>The default ControlKind for displaying this model in a GridCell</KistlBase:Description>
-    <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
-    <KistlBase:Name>DefaultGridCellKind</KistlBase:Name>
-    <KistlBase:ObjectClass>5d152c6f-6c1e-48b7-b03e-669e30468808</KistlBase:ObjectClass>
-    <KistlBase:Properties_pos>500</KistlBase:Properties_pos>
-    <GUI:ValueModelDescriptor>83aae6fd-0fae-4348-b313-737a6e751027</GUI:ValueModelDescriptor>
-    <KistlBase:EagerLoading>true</KistlBase:EagerLoading>
-    <KistlBase:RelationEnd>0c0e6de2-3afa-40f9-9076-968e1bbfda00</KistlBase:RelationEnd>
-  </KistlBase:ObjectReferenceProperty>
-  <KistlBase:ObjectReferenceProperty ExportGuid="b535115c-b847-479d-bdea-a7994ae6eeca">
-    <KistlBase:CategoryTags>Main</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2009-12-14T17:08:05.4Z</KistlBase:ChangedOn>
-    <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>
-    <KistlBase:Description>The default ControlKind to use for this Presentable.</KistlBase:Description>
-    <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
-    <KistlBase:Name>DefaultKind</KistlBase:Name>
-    <KistlBase:ObjectClass>5d152c6f-6c1e-48b7-b03e-669e30468808</KistlBase:ObjectClass>
-    <KistlBase:Properties_pos>600</KistlBase:Properties_pos>
-    <GUI:ValueModelDescriptor>83aae6fd-0fae-4348-b313-737a6e751027</GUI:ValueModelDescriptor>
-    <KistlBase:EagerLoading>true</KistlBase:EagerLoading>
-    <KistlBase:RelationEnd>5588cece-c696-40be-9142-80053efd4e29</KistlBase:RelationEnd>
-  </KistlBase:ObjectReferenceProperty>
-  <KistlBase:StringProperty ExportGuid="93e25648-50f9-40d8-8753-e5dadab68e1d">
-    <KistlBase:CategoryTags>Summary,Main</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2009-12-14T17:08:05.4Z</KistlBase:ChangedOn>
-    <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>
-    <KistlBase:Description>describe this PresentableModel</KistlBase:Description>
-    <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
-    <KistlBase:Name>Description</KistlBase:Name>
-    <KistlBase:ObjectClass>5d152c6f-6c1e-48b7-b03e-669e30468808</KistlBase:ObjectClass>
-    <KistlBase:Properties_pos>300</KistlBase:Properties_pos>
-    <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
-    <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
-    <KistlBase:IsList>false</KistlBase:IsList>
-  </KistlBase:StringProperty>
-  <KistlBase:GuidProperty ExportGuid="77ce1e5b-f244-4279-af13-b3e75b55f933">
-    <KistlBase:CategoryTags>Export</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2009-12-14T17:08:05.4Z</KistlBase:ChangedOn>
-    <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>
-    <KistlBase:DefaultValue>fe342efd-3267-4221-be27-e51c2c85a18d</KistlBase:DefaultValue>
-    <KistlBase:Description>Export Guid</KistlBase:Description>
-    <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
-    <KistlBase:Name>ExportGuid</KistlBase:Name>
-    <KistlBase:ObjectClass>5d152c6f-6c1e-48b7-b03e-669e30468808</KistlBase:ObjectClass>
-    <KistlBase:Properties_pos>200</KistlBase:Properties_pos>
-    <GUI:ValueModelDescriptor>2b6fb70f-a382-4057-a139-cc33333d619d</GUI:ValueModelDescriptor>
-    <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
-    <KistlBase:IsList>false</KistlBase:IsList>
-  </KistlBase:GuidProperty>
-  <KistlBase:ObjectReferenceProperty ExportGuid="0b7135d3-dedc-4091-a0c4-690c1b4a2b6d">
-    <KistlBase:CategoryTags>MetaData</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2009-12-14T17:08:05.4Z</KistlBase:ChangedOn>
-    <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>
-    <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
-    <KistlBase:Name>Module</KistlBase:Name>
-    <KistlBase:ObjectClass>5d152c6f-6c1e-48b7-b03e-669e30468808</KistlBase:ObjectClass>
-    <KistlBase:Properties_pos>400</KistlBase:Properties_pos>
-    <GUI:ValueModelDescriptor>83aae6fd-0fae-4348-b313-737a6e751027</GUI:ValueModelDescriptor>
-    <KistlBase:EagerLoading>false</KistlBase:EagerLoading>
-    <KistlBase:RelationEnd>0b5f4b29-44f2-4d6c-bed1-f11e5bd610f7</KistlBase:RelationEnd>
-  </KistlBase:ObjectReferenceProperty>
-  <KistlBase:ObjectReferenceProperty ExportGuid="554288d1-f5f4-4b22-908b-01525a1d0f9b">
-    <KistlBase:CategoryTags>Main</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2010-03-22T16:31:55.37Z</KistlBase:ChangedOn>
-    <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>
-    <KistlBase:Description>The described CLR class&amp;apos; reference</KistlBase:Description>
-    <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
-    <KistlBase:Name>PresentableModelRef</KistlBase:Name>
-    <KistlBase:ObjectClass>5d152c6f-6c1e-48b7-b03e-669e30468808</KistlBase:ObjectClass>
-    <KistlBase:Properties_pos>700</KistlBase:Properties_pos>
-    <GUI:ValueModelDescriptor>d96d030e-eebe-4b7f-8b55-dca30cbd4bde</GUI:ValueModelDescriptor>
-    <KistlBase:EagerLoading>true</KistlBase:EagerLoading>
-    <KistlBase:RelationEnd>eccb7be2-6c54-4fbb-83f4-dceed3825b65</KistlBase:RelationEnd>
-  </KistlBase:ObjectReferenceProperty>
-  <KistlBase:ObjectReferenceProperty ExportGuid="5e2e007c-2e90-4ba6-9c9d-46e62b662ff9">
-    <KistlBase:CategoryTags>Main</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2009-12-14T17:08:05.4Z</KistlBase:ChangedOn>
-    <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>
-    <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
-    <KistlBase:Name>SecondaryControlKinds</KistlBase:Name>
-    <KistlBase:ObjectClass>5d152c6f-6c1e-48b7-b03e-669e30468808</KistlBase:ObjectClass>
-    <KistlBase:Properties_pos>100</KistlBase:Properties_pos>
-    <GUI:ValueModelDescriptor>9fce01fe-fd6d-4e21-8b55-08d5e38aea36</GUI:ValueModelDescriptor>
-    <KistlBase:EagerLoading>false</KistlBase:EagerLoading>
-    <KistlBase:RelationEnd>28dfffe3-02cc-402e-a677-77f145346b73</KistlBase:RelationEnd>
-  </KistlBase:ObjectReferenceProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="84e0996a-081f-4a17-a34d-54cf23991301">
     <KistlBase:CategoryTags>DataModel</KistlBase:CategoryTags>
     <KistlBase:ChangedOn>2009-12-14T17:08:05.4Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>
-    <KistlBase:Description>The PresentableModel to use for values of this Property</KistlBase:Description>
+    <KistlBase:Description>The ViewModel to use for values of this Property</KistlBase:Description>
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
     <KistlBase:Name>ValueModelDescriptor</KistlBase:Name>
     <KistlBase:ObjectClass>e5f93f63-9cb8-40a5-8118-d1d9e479370c</KistlBase:ObjectClass>
@@ -13324,6 +13234,96 @@
     <KistlBase:IsList>false</KistlBase:IsList>
     <KistlBase:Enumeration>803fb38d-f0d2-409c-9f15-30da4bdcf576</KistlBase:Enumeration>
   </KistlBase:EnumerationProperty>
+  <KistlBase:ObjectReferenceProperty ExportGuid="6c744476-35e0-4cef-a221-f02abc81566c">
+    <KistlBase:CategoryTags>Main</KistlBase:CategoryTags>
+    <KistlBase:ChangedOn>2009-12-14T17:08:05.4Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>
+    <KistlBase:Description>The default ControlKind for displaying this model in a GridCell</KistlBase:Description>
+    <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
+    <KistlBase:Name>DefaultGridCellKind</KistlBase:Name>
+    <KistlBase:ObjectClass>5d152c6f-6c1e-48b7-b03e-669e30468808</KistlBase:ObjectClass>
+    <KistlBase:Properties_pos>500</KistlBase:Properties_pos>
+    <GUI:ValueModelDescriptor>83aae6fd-0fae-4348-b313-737a6e751027</GUI:ValueModelDescriptor>
+    <KistlBase:EagerLoading>true</KistlBase:EagerLoading>
+    <KistlBase:RelationEnd>0c0e6de2-3afa-40f9-9076-968e1bbfda00</KistlBase:RelationEnd>
+  </KistlBase:ObjectReferenceProperty>
+  <KistlBase:ObjectReferenceProperty ExportGuid="b535115c-b847-479d-bdea-a7994ae6eeca">
+    <KistlBase:CategoryTags>Main</KistlBase:CategoryTags>
+    <KistlBase:ChangedOn>2009-12-14T17:08:05.4Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>
+    <KistlBase:Description>The default ControlKind to use for this Presentable.</KistlBase:Description>
+    <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
+    <KistlBase:Name>DefaultKind</KistlBase:Name>
+    <KistlBase:ObjectClass>5d152c6f-6c1e-48b7-b03e-669e30468808</KistlBase:ObjectClass>
+    <KistlBase:Properties_pos>600</KistlBase:Properties_pos>
+    <GUI:ValueModelDescriptor>83aae6fd-0fae-4348-b313-737a6e751027</GUI:ValueModelDescriptor>
+    <KistlBase:EagerLoading>true</KistlBase:EagerLoading>
+    <KistlBase:RelationEnd>5588cece-c696-40be-9142-80053efd4e29</KistlBase:RelationEnd>
+  </KistlBase:ObjectReferenceProperty>
+  <KistlBase:StringProperty ExportGuid="93e25648-50f9-40d8-8753-e5dadab68e1d">
+    <KistlBase:CategoryTags>Summary,Main</KistlBase:CategoryTags>
+    <KistlBase:ChangedOn>2009-12-14T17:08:05.4Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>
+    <KistlBase:Description>describe this ViewModel</KistlBase:Description>
+    <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
+    <KistlBase:Name>Description</KistlBase:Name>
+    <KistlBase:ObjectClass>5d152c6f-6c1e-48b7-b03e-669e30468808</KistlBase:ObjectClass>
+    <KistlBase:Properties_pos>300</KistlBase:Properties_pos>
+    <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
+    <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
+    <KistlBase:IsList>false</KistlBase:IsList>
+  </KistlBase:StringProperty>
+  <KistlBase:GuidProperty ExportGuid="77ce1e5b-f244-4279-af13-b3e75b55f933">
+    <KistlBase:CategoryTags>Export</KistlBase:CategoryTags>
+    <KistlBase:ChangedOn>2009-12-14T17:08:05.4Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>
+    <KistlBase:DefaultValue>fe342efd-3267-4221-be27-e51c2c85a18d</KistlBase:DefaultValue>
+    <KistlBase:Description>Export Guid</KistlBase:Description>
+    <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
+    <KistlBase:Name>ExportGuid</KistlBase:Name>
+    <KistlBase:ObjectClass>5d152c6f-6c1e-48b7-b03e-669e30468808</KistlBase:ObjectClass>
+    <KistlBase:Properties_pos>200</KistlBase:Properties_pos>
+    <GUI:ValueModelDescriptor>2b6fb70f-a382-4057-a139-cc33333d619d</GUI:ValueModelDescriptor>
+    <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
+    <KistlBase:IsList>false</KistlBase:IsList>
+  </KistlBase:GuidProperty>
+  <KistlBase:ObjectReferenceProperty ExportGuid="0b7135d3-dedc-4091-a0c4-690c1b4a2b6d">
+    <KistlBase:CategoryTags>MetaData</KistlBase:CategoryTags>
+    <KistlBase:ChangedOn>2009-12-14T17:08:05.4Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>
+    <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
+    <KistlBase:Name>Module</KistlBase:Name>
+    <KistlBase:ObjectClass>5d152c6f-6c1e-48b7-b03e-669e30468808</KistlBase:ObjectClass>
+    <KistlBase:Properties_pos>400</KistlBase:Properties_pos>
+    <GUI:ValueModelDescriptor>83aae6fd-0fae-4348-b313-737a6e751027</GUI:ValueModelDescriptor>
+    <KistlBase:EagerLoading>false</KistlBase:EagerLoading>
+    <KistlBase:RelationEnd>0b5f4b29-44f2-4d6c-bed1-f11e5bd610f7</KistlBase:RelationEnd>
+  </KistlBase:ObjectReferenceProperty>
+  <KistlBase:ObjectReferenceProperty ExportGuid="5e2e007c-2e90-4ba6-9c9d-46e62b662ff9">
+    <KistlBase:CategoryTags>Main</KistlBase:CategoryTags>
+    <KistlBase:ChangedOn>2009-12-14T17:08:05.4Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>
+    <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
+    <KistlBase:Name>SecondaryControlKinds</KistlBase:Name>
+    <KistlBase:ObjectClass>5d152c6f-6c1e-48b7-b03e-669e30468808</KistlBase:ObjectClass>
+    <KistlBase:Properties_pos>100</KistlBase:Properties_pos>
+    <GUI:ValueModelDescriptor>9fce01fe-fd6d-4e21-8b55-08d5e38aea36</GUI:ValueModelDescriptor>
+    <KistlBase:EagerLoading>false</KistlBase:EagerLoading>
+    <KistlBase:RelationEnd>28dfffe3-02cc-402e-a677-77f145346b73</KistlBase:RelationEnd>
+  </KistlBase:ObjectReferenceProperty>
+  <KistlBase:ObjectReferenceProperty ExportGuid="554288d1-f5f4-4b22-908b-01525a1d0f9b">
+    <KistlBase:CategoryTags>Main</KistlBase:CategoryTags>
+    <KistlBase:ChangedOn>2010-03-22T16:31:55.37Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>
+    <KistlBase:Description>The described CLR class&amp;apos; reference</KistlBase:Description>
+    <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
+    <KistlBase:Name>ViewModelRef</KistlBase:Name>
+    <KistlBase:ObjectClass>5d152c6f-6c1e-48b7-b03e-669e30468808</KistlBase:ObjectClass>
+    <KistlBase:Properties_pos>700</KistlBase:Properties_pos>
+    <GUI:ValueModelDescriptor>d96d030e-eebe-4b7f-8b55-dca30cbd4bde</GUI:ValueModelDescriptor>
+    <KistlBase:EagerLoading>true</KistlBase:EagerLoading>
+    <KistlBase:RelationEnd>eccb7be2-6c54-4fbb-83f4-dceed3825b65</KistlBase:RelationEnd>
+  </KistlBase:ObjectReferenceProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="9f69c3bd-e274-4639-b30c-8d2a9599917b">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.4Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>
@@ -13405,59 +13405,6 @@
     <KistlBase:Storage>1</KistlBase:Storage>
     <KistlBase:Verb>has</KistlBase:Verb>
   </KistlBase:Relation>
-  <KistlBase:Relation ExportGuid="5404456a-4527-4e40-a660-b4a5e96e4a47">
-    <KistlBase:A>28dfffe3-02cc-402e-a677-77f145346b73</KistlBase:A>
-    <KistlBase:B>c43ddfa0-5130-4dc7-b7d9-8b769e3715d5</KistlBase:B>
-    <KistlBase:ChangedOn>2009-12-14T17:08:05.4Z</KistlBase:ChangedOn>
-    <KistlBase:Containment>0</KistlBase:Containment>
-    <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>
-    <KistlBase:Description>a list of additional control kinds for displaying this model</KistlBase:Description>
-    <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
-    <KistlBase:Storage>4</KistlBase:Storage>
-    <KistlBase:Verb>displayedBy</KistlBase:Verb>
-  </KistlBase:Relation>
-  <KistlBase:Relation ExportGuid="0a03215f-1c1a-4a44-892d-86642eefe9f1">
-    <KistlBase:A>0c0e6de2-3afa-40f9-9076-968e1bbfda00</KistlBase:A>
-    <KistlBase:B>ece8037b-8d39-4f44-ba70-dfa86e8ddf56</KistlBase:B>
-    <KistlBase:ChangedOn>2010-03-26T12:37:43.347Z</KistlBase:ChangedOn>
-    <KistlBase:Containment>1</KistlBase:Containment>
-    <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>
-    <KistlBase:Description>specify a default control kind when used in a grid cell</KistlBase:Description>
-    <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
-    <KistlBase:Storage>1</KistlBase:Storage>
-    <KistlBase:Verb>displayedInGridBy</KistlBase:Verb>
-  </KistlBase:Relation>
-  <KistlBase:Relation ExportGuid="cc835258-6ada-4f3f-839e-7f276ded995a">
-    <KistlBase:A>5588cece-c696-40be-9142-80053efd4e29</KistlBase:A>
-    <KistlBase:B>635212ec-96ec-4c7c-bb44-779eaa1c2df5</KistlBase:B>
-    <KistlBase:ChangedOn>2010-03-26T12:37:43.35Z</KistlBase:ChangedOn>
-    <KistlBase:Containment>1</KistlBase:Containment>
-    <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>
-    <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
-    <KistlBase:Storage>1</KistlBase:Storage>
-    <KistlBase:Verb>has</KistlBase:Verb>
-  </KistlBase:Relation>
-  <KistlBase:Relation ExportGuid="557dbc1c-2a38-4c77-8544-264a95307980">
-    <KistlBase:A>0b5f4b29-44f2-4d6c-bed1-f11e5bd610f7</KistlBase:A>
-    <KistlBase:B>5a0d8770-a911-48ee-b111-c3b080da325d</KistlBase:B>
-    <KistlBase:ChangedOn>2009-12-14T17:08:05.4Z</KistlBase:ChangedOn>
-    <KistlBase:Containment>0</KistlBase:Containment>
-    <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>
-    <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
-    <KistlBase:Storage>1</KistlBase:Storage>
-    <KistlBase:Verb>has</KistlBase:Verb>
-  </KistlBase:Relation>
-  <KistlBase:Relation ExportGuid="9d771d87-3b28-4e5e-be33-ea71028e1720">
-    <KistlBase:A>eccb7be2-6c54-4fbb-83f4-dceed3825b65</KistlBase:A>
-    <KistlBase:B>7ebd7ba7-7574-4523-b2d9-4639561261fe</KistlBase:B>
-    <KistlBase:ChangedOn>2009-12-14T17:08:05.4Z</KistlBase:ChangedOn>
-    <KistlBase:Containment>0</KistlBase:Containment>
-    <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>
-    <KistlBase:Description>This relation between a PresentableModelDescriptor and the described PresentableModel's Type</KistlBase:Description>
-    <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
-    <KistlBase:Storage>1</KistlBase:Storage>
-    <KistlBase:Verb>has</KistlBase:Verb>
-  </KistlBase:Relation>
   <KistlBase:Relation ExportGuid="c05b892d-dccf-440b-89d1-9943fa8eae52">
     <KistlBase:A>b2441cf7-8e81-4704-a344-435b7bdf4c20</KistlBase:A>
     <KistlBase:B>97c71311-9912-4dce-b992-b07da20415be</KistlBase:B>
@@ -13530,6 +13477,59 @@
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
     <KistlBase:Storage>1</KistlBase:Storage>
     <KistlBase:Verb>isof</KistlBase:Verb>
+  </KistlBase:Relation>
+  <KistlBase:Relation ExportGuid="5404456a-4527-4e40-a660-b4a5e96e4a47">
+    <KistlBase:A>28dfffe3-02cc-402e-a677-77f145346b73</KistlBase:A>
+    <KistlBase:B>c43ddfa0-5130-4dc7-b7d9-8b769e3715d5</KistlBase:B>
+    <KistlBase:ChangedOn>2009-12-14T17:08:05.4Z</KistlBase:ChangedOn>
+    <KistlBase:Containment>0</KistlBase:Containment>
+    <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>
+    <KistlBase:Description>a list of additional control kinds for displaying this model</KistlBase:Description>
+    <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
+    <KistlBase:Storage>4</KistlBase:Storage>
+    <KistlBase:Verb>displayedBy</KistlBase:Verb>
+  </KistlBase:Relation>
+  <KistlBase:Relation ExportGuid="0a03215f-1c1a-4a44-892d-86642eefe9f1">
+    <KistlBase:A>0c0e6de2-3afa-40f9-9076-968e1bbfda00</KistlBase:A>
+    <KistlBase:B>ece8037b-8d39-4f44-ba70-dfa86e8ddf56</KistlBase:B>
+    <KistlBase:ChangedOn>2010-03-26T12:37:43.347Z</KistlBase:ChangedOn>
+    <KistlBase:Containment>1</KistlBase:Containment>
+    <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>
+    <KistlBase:Description>specify a default control kind when used in a grid cell</KistlBase:Description>
+    <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
+    <KistlBase:Storage>1</KistlBase:Storage>
+    <KistlBase:Verb>displayedInGridBy</KistlBase:Verb>
+  </KistlBase:Relation>
+  <KistlBase:Relation ExportGuid="cc835258-6ada-4f3f-839e-7f276ded995a">
+    <KistlBase:A>5588cece-c696-40be-9142-80053efd4e29</KistlBase:A>
+    <KistlBase:B>635212ec-96ec-4c7c-bb44-779eaa1c2df5</KistlBase:B>
+    <KistlBase:ChangedOn>2010-03-26T12:37:43.35Z</KistlBase:ChangedOn>
+    <KistlBase:Containment>1</KistlBase:Containment>
+    <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>
+    <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
+    <KistlBase:Storage>1</KistlBase:Storage>
+    <KistlBase:Verb>has</KistlBase:Verb>
+  </KistlBase:Relation>
+  <KistlBase:Relation ExportGuid="557dbc1c-2a38-4c77-8544-264a95307980">
+    <KistlBase:A>0b5f4b29-44f2-4d6c-bed1-f11e5bd610f7</KistlBase:A>
+    <KistlBase:B>5a0d8770-a911-48ee-b111-c3b080da325d</KistlBase:B>
+    <KistlBase:ChangedOn>2009-12-14T17:08:05.4Z</KistlBase:ChangedOn>
+    <KistlBase:Containment>0</KistlBase:Containment>
+    <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>
+    <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
+    <KistlBase:Storage>1</KistlBase:Storage>
+    <KistlBase:Verb>has</KistlBase:Verb>
+  </KistlBase:Relation>
+  <KistlBase:Relation ExportGuid="9d771d87-3b28-4e5e-be33-ea71028e1720">
+    <KistlBase:A>eccb7be2-6c54-4fbb-83f4-dceed3825b65</KistlBase:A>
+    <KistlBase:B>7ebd7ba7-7574-4523-b2d9-4639561261fe</KistlBase:B>
+    <KistlBase:ChangedOn>2009-12-14T17:08:05.4Z</KistlBase:ChangedOn>
+    <KistlBase:Containment>0</KistlBase:Containment>
+    <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>
+    <KistlBase:Description>This relation between a ViewModelDescriptor and the described ViewModel's Type</KistlBase:Description>
+    <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
+    <KistlBase:Storage>1</KistlBase:Storage>
+    <KistlBase:Verb>has</KistlBase:Verb>
   </KistlBase:Relation>
   <KistlBase:Relation ExportGuid="4d4e1ffd-f362-40e2-9fe1-0711ded83241">
     <KistlBase:A>cc4262dd-defd-4992-8edb-c44b267378f9</KistlBase:A>
@@ -13681,56 +13681,6 @@
     <KistlBase:RoleName>Module</KistlBase:RoleName>
     <KistlBase:Type>8a1ace7c-77f2-4b48-9b0b-bcb68c660d11</KistlBase:Type>
   </KistlBase:RelationEnd>
-  <KistlBase:RelationEnd ExportGuid="eccb7be2-6c54-4fbb-83f4-dceed3825b65">
-    <KistlBase:AParent>9d771d87-3b28-4e5e-be33-ea71028e1720</KistlBase:AParent>
-    <KistlBase:ChangedOn>2009-12-14T17:08:05.4Z</KistlBase:ChangedOn>
-    <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>
-    <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
-    <KistlBase:Multiplicity>3</KistlBase:Multiplicity>
-    <KistlBase:Navigator>554288d1-f5f4-4b22-908b-01525a1d0f9b</KistlBase:Navigator>
-    <KistlBase:RoleName>Descriptor</KistlBase:RoleName>
-    <KistlBase:Type>5d152c6f-6c1e-48b7-b03e-669e30468808</KistlBase:Type>
-  </KistlBase:RelationEnd>
-  <KistlBase:RelationEnd ExportGuid="28dfffe3-02cc-402e-a677-77f145346b73">
-    <KistlBase:AParent>5404456a-4527-4e40-a660-b4a5e96e4a47</KistlBase:AParent>
-    <KistlBase:ChangedOn>2009-12-14T17:08:05.4Z</KistlBase:ChangedOn>
-    <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>
-    <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
-    <KistlBase:Multiplicity>3</KistlBase:Multiplicity>
-    <KistlBase:Navigator>5e2e007c-2e90-4ba6-9c9d-46e62b662ff9</KistlBase:Navigator>
-    <KistlBase:RoleName>Presentable</KistlBase:RoleName>
-    <KistlBase:Type>5d152c6f-6c1e-48b7-b03e-669e30468808</KistlBase:Type>
-  </KistlBase:RelationEnd>
-  <KistlBase:RelationEnd ExportGuid="5588cece-c696-40be-9142-80053efd4e29">
-    <KistlBase:AParent>cc835258-6ada-4f3f-839e-7f276ded995a</KistlBase:AParent>
-    <KistlBase:ChangedOn>2009-12-14T17:08:05.4Z</KistlBase:ChangedOn>
-    <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>
-    <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
-    <KistlBase:Multiplicity>1</KistlBase:Multiplicity>
-    <KistlBase:Navigator>b535115c-b847-479d-bdea-a7994ae6eeca</KistlBase:Navigator>
-    <KistlBase:RoleName>Presentable</KistlBase:RoleName>
-    <KistlBase:Type>5d152c6f-6c1e-48b7-b03e-669e30468808</KistlBase:Type>
-  </KistlBase:RelationEnd>
-  <KistlBase:RelationEnd ExportGuid="0c0e6de2-3afa-40f9-9076-968e1bbfda00">
-    <KistlBase:AParent>0a03215f-1c1a-4a44-892d-86642eefe9f1</KistlBase:AParent>
-    <KistlBase:ChangedOn>2010-03-26T12:37:43.313Z</KistlBase:ChangedOn>
-    <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>
-    <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
-    <KistlBase:Multiplicity>1</KistlBase:Multiplicity>
-    <KistlBase:Navigator>6c744476-35e0-4cef-a221-f02abc81566c</KistlBase:Navigator>
-    <KistlBase:RoleName>PresentableModelDescriptor</KistlBase:RoleName>
-    <KistlBase:Type>5d152c6f-6c1e-48b7-b03e-669e30468808</KistlBase:Type>
-  </KistlBase:RelationEnd>
-  <KistlBase:RelationEnd ExportGuid="0b5f4b29-44f2-4d6c-bed1-f11e5bd610f7">
-    <KistlBase:AParent>557dbc1c-2a38-4c77-8544-264a95307980</KistlBase:AParent>
-    <KistlBase:ChangedOn>2009-12-14T17:08:05.4Z</KistlBase:ChangedOn>
-    <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>
-    <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
-    <KistlBase:Multiplicity>3</KistlBase:Multiplicity>
-    <KistlBase:Navigator>0b7135d3-dedc-4091-a0c4-690c1b4a2b6d</KistlBase:Navigator>
-    <KistlBase:RoleName>PresentableModelDescriptor</KistlBase:RoleName>
-    <KistlBase:Type>5d152c6f-6c1e-48b7-b03e-669e30468808</KistlBase:Type>
-  </KistlBase:RelationEnd>
   <KistlBase:RelationEnd ExportGuid="60607525-aa94-4839-b269-8f1e02c6a478">
     <KistlBase:BParent>73178882-7f93-444b-bf93-75db193904cf</KistlBase:BParent>
     <KistlBase:ChangedOn>2009-12-14T17:08:05.4Z</KistlBase:ChangedOn>
@@ -13789,15 +13739,6 @@
     <KistlBase:RoleName>ControlRef</KistlBase:RoleName>
     <KistlBase:Type>87766ae2-89a4-4c37-ab25-583a710c55e5</KistlBase:Type>
   </KistlBase:RelationEnd>
-  <KistlBase:RelationEnd ExportGuid="7ebd7ba7-7574-4523-b2d9-4639561261fe">
-    <KistlBase:BParent>9d771d87-3b28-4e5e-be33-ea71028e1720</KistlBase:BParent>
-    <KistlBase:ChangedOn>2009-12-14T17:08:05.4Z</KistlBase:ChangedOn>
-    <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>
-    <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
-    <KistlBase:Multiplicity>2</KistlBase:Multiplicity>
-    <KistlBase:RoleName>PresentableModelRef</KistlBase:RoleName>
-    <KistlBase:Type>87766ae2-89a4-4c37-ab25-583a710c55e5</KistlBase:Type>
-  </KistlBase:RelationEnd>
   <KistlBase:RelationEnd ExportGuid="b2061a0b-1f5a-42df-a0cb-186e5586a080">
     <KistlBase:BParent>0ded88ab-da47-4e72-83bc-5e409b81e0d1</KistlBase:BParent>
     <KistlBase:ChangedOn>2009-12-14T17:08:05.4Z</KistlBase:ChangedOn>
@@ -13805,6 +13746,15 @@
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>3</KistlBase:Multiplicity>
     <KistlBase:RoleName>SupportedInterfaces</KistlBase:RoleName>
+    <KistlBase:Type>87766ae2-89a4-4c37-ab25-583a710c55e5</KistlBase:Type>
+  </KistlBase:RelationEnd>
+  <KistlBase:RelationEnd ExportGuid="7ebd7ba7-7574-4523-b2d9-4639561261fe">
+    <KistlBase:BParent>9d771d87-3b28-4e5e-be33-ea71028e1720</KistlBase:BParent>
+    <KistlBase:ChangedOn>2009-12-14T17:08:05.4Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>
+    <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
+    <KistlBase:Multiplicity>2</KistlBase:Multiplicity>
+    <KistlBase:RoleName>ViewModelRef</KistlBase:RoleName>
     <KistlBase:Type>87766ae2-89a4-4c37-ab25-583a710c55e5</KistlBase:Type>
   </KistlBase:RelationEnd>
   <KistlBase:RelationEnd ExportGuid="cf4bc307-aa3d-43f0-9dd1-1e133f0dc021">
@@ -13836,6 +13786,56 @@
     <KistlBase:Navigator>25da3568-f362-4441-841e-7c163b10b983</KistlBase:Navigator>
     <KistlBase:RoleName>ViewDescriptor</KistlBase:RoleName>
     <KistlBase:Type>ffda4604-1536-43b6-b951-f8753d5092ca</KistlBase:Type>
+  </KistlBase:RelationEnd>
+  <KistlBase:RelationEnd ExportGuid="eccb7be2-6c54-4fbb-83f4-dceed3825b65">
+    <KistlBase:AParent>9d771d87-3b28-4e5e-be33-ea71028e1720</KistlBase:AParent>
+    <KistlBase:ChangedOn>2009-12-14T17:08:05.4Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>
+    <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
+    <KistlBase:Multiplicity>3</KistlBase:Multiplicity>
+    <KistlBase:Navigator>554288d1-f5f4-4b22-908b-01525a1d0f9b</KistlBase:Navigator>
+    <KistlBase:RoleName>Descriptor</KistlBase:RoleName>
+    <KistlBase:Type>5d152c6f-6c1e-48b7-b03e-669e30468808</KistlBase:Type>
+  </KistlBase:RelationEnd>
+  <KistlBase:RelationEnd ExportGuid="28dfffe3-02cc-402e-a677-77f145346b73">
+    <KistlBase:AParent>5404456a-4527-4e40-a660-b4a5e96e4a47</KistlBase:AParent>
+    <KistlBase:ChangedOn>2009-12-14T17:08:05.4Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>
+    <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
+    <KistlBase:Multiplicity>3</KistlBase:Multiplicity>
+    <KistlBase:Navigator>5e2e007c-2e90-4ba6-9c9d-46e62b662ff9</KistlBase:Navigator>
+    <KistlBase:RoleName>Presentable</KistlBase:RoleName>
+    <KistlBase:Type>5d152c6f-6c1e-48b7-b03e-669e30468808</KistlBase:Type>
+  </KistlBase:RelationEnd>
+  <KistlBase:RelationEnd ExportGuid="5588cece-c696-40be-9142-80053efd4e29">
+    <KistlBase:AParent>cc835258-6ada-4f3f-839e-7f276ded995a</KistlBase:AParent>
+    <KistlBase:ChangedOn>2009-12-14T17:08:05.4Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>
+    <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
+    <KistlBase:Multiplicity>1</KistlBase:Multiplicity>
+    <KistlBase:Navigator>b535115c-b847-479d-bdea-a7994ae6eeca</KistlBase:Navigator>
+    <KistlBase:RoleName>Presentable</KistlBase:RoleName>
+    <KistlBase:Type>5d152c6f-6c1e-48b7-b03e-669e30468808</KistlBase:Type>
+  </KistlBase:RelationEnd>
+  <KistlBase:RelationEnd ExportGuid="0c0e6de2-3afa-40f9-9076-968e1bbfda00">
+    <KistlBase:AParent>0a03215f-1c1a-4a44-892d-86642eefe9f1</KistlBase:AParent>
+    <KistlBase:ChangedOn>2010-03-26T12:37:43.313Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>
+    <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
+    <KistlBase:Multiplicity>1</KistlBase:Multiplicity>
+    <KistlBase:Navigator>6c744476-35e0-4cef-a221-f02abc81566c</KistlBase:Navigator>
+    <KistlBase:RoleName>ViewModelDescriptor</KistlBase:RoleName>
+    <KistlBase:Type>5d152c6f-6c1e-48b7-b03e-669e30468808</KistlBase:Type>
+  </KistlBase:RelationEnd>
+  <KistlBase:RelationEnd ExportGuid="0b5f4b29-44f2-4d6c-bed1-f11e5bd610f7">
+    <KistlBase:AParent>557dbc1c-2a38-4c77-8544-264a95307980</KistlBase:AParent>
+    <KistlBase:ChangedOn>2009-12-14T17:08:05.4Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>
+    <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
+    <KistlBase:Multiplicity>3</KistlBase:Multiplicity>
+    <KistlBase:Navigator>0b7135d3-dedc-4091-a0c4-690c1b4a2b6d</KistlBase:Navigator>
+    <KistlBase:RoleName>ViewModelDescriptor</KistlBase:RoleName>
+    <KistlBase:Type>5d152c6f-6c1e-48b7-b03e-669e30468808</KistlBase:Type>
   </KistlBase:RelationEnd>
   <KistlBase:RelationEnd ExportGuid="e93bd45d-a2e0-481a-9b82-60215f6f4d39">
     <KistlBase:BParent>4d4e1ffd-f362-40e2-9fe1-0711ded83241</KistlBase:BParent>
@@ -14055,49 +14055,6 @@
     <KistlBase:Name>ShowObject</KistlBase:Name>
     <KistlBase:ObjectClass>2e93e071-875a-41ee-a768-5d55c2683546</KistlBase:ObjectClass>
   </KistlBase:Method>
-  <KistlBase:Method ExportGuid="b178716f-982e-4d06-886f-b2f9dd894cfa">
-    <KistlBase:ChangedOn>2010-03-15T11:36:26.957Z</KistlBase:ChangedOn>
-    <KistlBase:CreatedOn>2010-03-15T11:36:26.957Z</KistlBase:CreatedOn>
-    <GUI:IsDisplayable>false</GUI:IsDisplayable>
-    <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
-    <KistlBase:Name>NotifyCreated</KistlBase:Name>
-    <KistlBase:ObjectClass>5d152c6f-6c1e-48b7-b03e-669e30468808</KistlBase:ObjectClass>
-  </KistlBase:Method>
-  <KistlBase:Method ExportGuid="bc9d6667-98f1-47a7-9f74-d306e9bc5513">
-    <KistlBase:ChangedOn>2010-03-15T11:36:26.957Z</KistlBase:ChangedOn>
-    <KistlBase:CreatedOn>2010-03-15T11:36:26.957Z</KistlBase:CreatedOn>
-    <GUI:IsDisplayable>false</GUI:IsDisplayable>
-    <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
-    <KistlBase:Name>NotifyDeleting</KistlBase:Name>
-    <KistlBase:ObjectClass>5d152c6f-6c1e-48b7-b03e-669e30468808</KistlBase:ObjectClass>
-  </KistlBase:Method>
-  <KistlBase:Method ExportGuid="212de77d-2fe9-4500-a42d-4712d7011513">
-    <KistlBase:ChangedOn>2009-12-14T17:08:05.4Z</KistlBase:ChangedOn>
-    <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>
-    <KistlBase:Description />
-    <GUI:IsDisplayable>false</GUI:IsDisplayable>
-    <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
-    <KistlBase:Name>NotifyPostSave</KistlBase:Name>
-    <KistlBase:ObjectClass>5d152c6f-6c1e-48b7-b03e-669e30468808</KistlBase:ObjectClass>
-  </KistlBase:Method>
-  <KistlBase:Method ExportGuid="244fd20f-7562-43b2-8c74-76bf176f5f69">
-    <KistlBase:ChangedOn>2009-12-14T17:08:05.4Z</KistlBase:ChangedOn>
-    <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>
-    <KistlBase:Description />
-    <GUI:IsDisplayable>false</GUI:IsDisplayable>
-    <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
-    <KistlBase:Name>NotifyPreSave</KistlBase:Name>
-    <KistlBase:ObjectClass>5d152c6f-6c1e-48b7-b03e-669e30468808</KistlBase:ObjectClass>
-  </KistlBase:Method>
-  <KistlBase:Method ExportGuid="116f7c88-1972-4a12-a732-463981a36b34">
-    <KistlBase:ChangedOn>2009-12-14T17:08:05.4Z</KistlBase:ChangedOn>
-    <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>
-    <KistlBase:Description />
-    <GUI:IsDisplayable>false</GUI:IsDisplayable>
-    <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
-    <KistlBase:Name>ToString</KistlBase:Name>
-    <KistlBase:ObjectClass>5d152c6f-6c1e-48b7-b03e-669e30468808</KistlBase:ObjectClass>
-  </KistlBase:Method>
   <KistlBase:Method ExportGuid="b7474828-cad6-44a7-8d13-eb551d8faa80">
     <KistlBase:ChangedOn>2010-03-15T11:36:26.957Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2010-03-15T11:36:26.957Z</KistlBase:CreatedOn>
@@ -14192,6 +14149,49 @@
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
     <KistlBase:Name>ToString</KistlBase:Name>
     <KistlBase:ObjectClass>ffda4604-1536-43b6-b951-f8753d5092ca</KistlBase:ObjectClass>
+  </KistlBase:Method>
+  <KistlBase:Method ExportGuid="b178716f-982e-4d06-886f-b2f9dd894cfa">
+    <KistlBase:ChangedOn>2010-03-15T11:36:26.957Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-03-15T11:36:26.957Z</KistlBase:CreatedOn>
+    <GUI:IsDisplayable>false</GUI:IsDisplayable>
+    <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
+    <KistlBase:Name>NotifyCreated</KistlBase:Name>
+    <KistlBase:ObjectClass>5d152c6f-6c1e-48b7-b03e-669e30468808</KistlBase:ObjectClass>
+  </KistlBase:Method>
+  <KistlBase:Method ExportGuid="bc9d6667-98f1-47a7-9f74-d306e9bc5513">
+    <KistlBase:ChangedOn>2010-03-15T11:36:26.957Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-03-15T11:36:26.957Z</KistlBase:CreatedOn>
+    <GUI:IsDisplayable>false</GUI:IsDisplayable>
+    <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
+    <KistlBase:Name>NotifyDeleting</KistlBase:Name>
+    <KistlBase:ObjectClass>5d152c6f-6c1e-48b7-b03e-669e30468808</KistlBase:ObjectClass>
+  </KistlBase:Method>
+  <KistlBase:Method ExportGuid="212de77d-2fe9-4500-a42d-4712d7011513">
+    <KistlBase:ChangedOn>2009-12-14T17:08:05.4Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>
+    <KistlBase:Description />
+    <GUI:IsDisplayable>false</GUI:IsDisplayable>
+    <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
+    <KistlBase:Name>NotifyPostSave</KistlBase:Name>
+    <KistlBase:ObjectClass>5d152c6f-6c1e-48b7-b03e-669e30468808</KistlBase:ObjectClass>
+  </KistlBase:Method>
+  <KistlBase:Method ExportGuid="244fd20f-7562-43b2-8c74-76bf176f5f69">
+    <KistlBase:ChangedOn>2009-12-14T17:08:05.4Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>
+    <KistlBase:Description />
+    <GUI:IsDisplayable>false</GUI:IsDisplayable>
+    <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
+    <KistlBase:Name>NotifyPreSave</KistlBase:Name>
+    <KistlBase:ObjectClass>5d152c6f-6c1e-48b7-b03e-669e30468808</KistlBase:ObjectClass>
+  </KistlBase:Method>
+  <KistlBase:Method ExportGuid="116f7c88-1972-4a12-a732-463981a36b34">
+    <KistlBase:ChangedOn>2009-12-14T17:08:05.4Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>
+    <KistlBase:Description />
+    <GUI:IsDisplayable>false</GUI:IsDisplayable>
+    <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
+    <KistlBase:Name>ToString</KistlBase:Name>
+    <KistlBase:ObjectClass>5d152c6f-6c1e-48b7-b03e-669e30468808</KistlBase:ObjectClass>
   </KistlBase:Method>
   <KistlBase:Method ExportGuid="ea7def7f-432a-44e3-a30e-80468e21d8f2">
     <KistlBase:ChangedOn>2010-03-15T11:36:26.957Z</KistlBase:ChangedOn>
@@ -14303,15 +14303,6 @@
     <KistlBase:Name>obj</KistlBase:Name>
     <KistlBase:Type>527370ff-ca5e-4c4f-a665-bd5483f1936f</KistlBase:Type>
   </KistlBase:CLRObjectParameter>
-  <KistlBase:StringParameter ExportGuid="3b70bf0e-e2f2-4ad7-9955-f028a196d667">
-    <KistlBase:ChangedOn>2010-03-15T11:36:26.957Z</KistlBase:ChangedOn>
-    <KistlBase:CreatedOn>2010-03-15T11:36:26.957Z</KistlBase:CreatedOn>
-    <KistlBase:IsList>false</KistlBase:IsList>
-    <KistlBase:IsReturnParameter>true</KistlBase:IsReturnParameter>
-    <KistlBase:Method>116f7c88-1972-4a12-a732-463981a36b34</KistlBase:Method>
-    <KistlBase:Parameter_pos>0</KistlBase:Parameter_pos>
-    <KistlBase:Name>retVal</KistlBase:Name>
-  </KistlBase:StringParameter>
   <KistlBase:ObjectParameter ExportGuid="c0ee1435-955b-4ed8-b633-d4165a56b048">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.4Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>
@@ -14337,6 +14328,15 @@
     <KistlBase:IsList>false</KistlBase:IsList>
     <KistlBase:IsReturnParameter>true</KistlBase:IsReturnParameter>
     <KistlBase:Method>d6a377ca-66e6-473d-a7e9-b0cdead60a4b</KistlBase:Method>
+    <KistlBase:Parameter_pos>0</KistlBase:Parameter_pos>
+    <KistlBase:Name>retVal</KistlBase:Name>
+  </KistlBase:StringParameter>
+  <KistlBase:StringParameter ExportGuid="3b70bf0e-e2f2-4ad7-9955-f028a196d667">
+    <KistlBase:ChangedOn>2010-03-15T11:36:26.957Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-03-15T11:36:26.957Z</KistlBase:CreatedOn>
+    <KistlBase:IsList>false</KistlBase:IsList>
+    <KistlBase:IsReturnParameter>true</KistlBase:IsReturnParameter>
+    <KistlBase:Method>116f7c88-1972-4a12-a732-463981a36b34</KistlBase:Method>
     <KistlBase:Parameter_pos>0</KistlBase:Parameter_pos>
     <KistlBase:Name>retVal</KistlBase:Name>
   </KistlBase:StringParameter>
@@ -14439,15 +14439,6 @@
     <KistlBase:Method>42a6a8b7-02cf-450d-9cde-ca57e7ff32fe</KistlBase:Method>
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
   </KistlBase:MethodInvocation>
-  <KistlBase:MethodInvocation ExportGuid="9b06d50b-4bae-44f8-bafa-a46b5873895a">
-    <KistlBase:ChangedOn>2009-12-14T17:08:05.4Z</KistlBase:ChangedOn>
-    <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>
-    <KistlBase:Implementor>2f979c67-61ba-4173-838b-378e2224c337</KistlBase:Implementor>
-    <KistlBase:InvokeOnObjectClass>5d152c6f-6c1e-48b7-b03e-669e30468808</KistlBase:InvokeOnObjectClass>
-    <KistlBase:MemberName>OnToString_PresentableModelDescriptor</KistlBase:MemberName>
-    <KistlBase:Method>116f7c88-1972-4a12-a732-463981a36b34</KistlBase:Method>
-    <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
-  </KistlBase:MethodInvocation>
   <KistlBase:MethodInvocation ExportGuid="c460a5fc-5fad-4414-8a5e-bc65ac18bf7b">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.4Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>
@@ -14473,6 +14464,15 @@
     <KistlBase:InvokeOnObjectClass>ffda4604-1536-43b6-b951-f8753d5092ca</KistlBase:InvokeOnObjectClass>
     <KistlBase:MemberName>OnToString_ViewDescriptor</KistlBase:MemberName>
     <KistlBase:Method>d6a377ca-66e6-473d-a7e9-b0cdead60a4b</KistlBase:Method>
+    <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
+  </KistlBase:MethodInvocation>
+  <KistlBase:MethodInvocation ExportGuid="9b06d50b-4bae-44f8-bafa-a46b5873895a">
+    <KistlBase:ChangedOn>2009-12-14T17:08:05.4Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>
+    <KistlBase:Implementor>2f979c67-61ba-4173-838b-378e2224c337</KistlBase:Implementor>
+    <KistlBase:InvokeOnObjectClass>5d152c6f-6c1e-48b7-b03e-669e30468808</KistlBase:InvokeOnObjectClass>
+    <KistlBase:MemberName>OnToString_ViewModelDescriptor</KistlBase:MemberName>
+    <KistlBase:Method>116f7c88-1972-4a12-a732-463981a36b34</KistlBase:Method>
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
   </KistlBase:MethodInvocation>
   <KistlBase:MethodInvocation ExportGuid="7f866626-6125-4bc4-9ea2-4e462e790610">
@@ -14535,39 +14535,6 @@
   <KistlBase:NotNullableConstraint ExportGuid="fa02149f-23d6-4643-b4ef-67dcc46c041e">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.403Z</KistlBase:ChangedOn>
     <KistlBase:ConstrainedProperty>edc853d3-0d02-4492-9159-c548c7713e9b</KistlBase:ConstrainedProperty>
-    <KistlBase:CreatedOn>2009-12-14T17:08:05.403Z</KistlBase:CreatedOn>
-  </KistlBase:NotNullableConstraint>
-  <KistlBase:NotNullableConstraint ExportGuid="757f243b-b2b0-4696-a0ce-daef8641f2f7">
-    <KistlBase:ChangedOn>2009-12-14T17:08:05.403Z</KistlBase:ChangedOn>
-    <KistlBase:ConstrainedProperty>93e25648-50f9-40d8-8753-e5dadab68e1d</KistlBase:ConstrainedProperty>
-    <KistlBase:CreatedOn>2009-12-14T17:08:05.403Z</KistlBase:CreatedOn>
-  </KistlBase:NotNullableConstraint>
-  <KistlBase:StringRangeConstraint ExportGuid="ef21d105-f97d-4f81-a98b-25d472cbc41f">
-    <KistlBase:ChangedOn>2009-12-14T17:08:05.403Z</KistlBase:ChangedOn>
-    <KistlBase:ConstrainedProperty>93e25648-50f9-40d8-8753-e5dadab68e1d</KistlBase:ConstrainedProperty>
-    <KistlBase:CreatedOn>2009-12-14T17:08:05.403Z</KistlBase:CreatedOn>
-    <KistlBase:MaxLength>4000</KistlBase:MaxLength>
-    <KistlBase:MinLength>0</KistlBase:MinLength>
-  </KistlBase:StringRangeConstraint>
-  <KistlBase:NotNullableConstraint ExportGuid="8cb0cbf9-1b18-427a-9635-4e8bd7595ad0">
-    <KistlBase:ChangedOn>2009-12-14T17:08:05.403Z</KistlBase:ChangedOn>
-    <KistlBase:ConstrainedProperty>77ce1e5b-f244-4279-af13-b3e75b55f933</KistlBase:ConstrainedProperty>
-    <KistlBase:CreatedOn>2009-12-14T17:08:05.403Z</KistlBase:CreatedOn>
-    <KistlBase:Reason>ExportGuid cannot be empty</KistlBase:Reason>
-  </KistlBase:NotNullableConstraint>
-  <KistlBase:NotNullableConstraint ExportGuid="e4397224-e3fb-41d0-a160-4d912723182e">
-    <KistlBase:ChangedOn>2009-12-14T17:08:05.403Z</KistlBase:ChangedOn>
-    <KistlBase:ConstrainedProperty>0b7135d3-dedc-4091-a0c4-690c1b4a2b6d</KistlBase:ConstrainedProperty>
-    <KistlBase:CreatedOn>2009-12-14T17:08:05.403Z</KistlBase:CreatedOn>
-  </KistlBase:NotNullableConstraint>
-  <KistlBase:NotNullableConstraint ExportGuid="6d82fced-ed0f-45c9-8b54-0e2cfee2af4c">
-    <KistlBase:ChangedOn>2009-12-14T17:08:05.403Z</KistlBase:ChangedOn>
-    <KistlBase:ConstrainedProperty>554288d1-f5f4-4b22-908b-01525a1d0f9b</KistlBase:ConstrainedProperty>
-    <KistlBase:CreatedOn>2009-12-14T17:08:05.403Z</KistlBase:CreatedOn>
-  </KistlBase:NotNullableConstraint>
-  <KistlBase:NotNullableConstraint ExportGuid="2392bfd1-b160-44de-b803-d5429b9545c7">
-    <KistlBase:ChangedOn>2009-12-14T17:08:05.403Z</KistlBase:ChangedOn>
-    <KistlBase:ConstrainedProperty>5e2e007c-2e90-4ba6-9c9d-46e62b662ff9</KistlBase:ConstrainedProperty>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.403Z</KistlBase:CreatedOn>
   </KistlBase:NotNullableConstraint>
   <KistlBase:NotNullableConstraint ExportGuid="c05fca0d-3b4c-451e-a080-b9d9af14340d">
@@ -14635,6 +14602,39 @@
     <KistlBase:ConstrainedProperty>2a798728-d79d-471f-be51-1f488beb8dc1</KistlBase:ConstrainedProperty>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.403Z</KistlBase:CreatedOn>
   </KistlBase:NotNullableConstraint>
+  <KistlBase:NotNullableConstraint ExportGuid="757f243b-b2b0-4696-a0ce-daef8641f2f7">
+    <KistlBase:ChangedOn>2009-12-14T17:08:05.403Z</KistlBase:ChangedOn>
+    <KistlBase:ConstrainedProperty>93e25648-50f9-40d8-8753-e5dadab68e1d</KistlBase:ConstrainedProperty>
+    <KistlBase:CreatedOn>2009-12-14T17:08:05.403Z</KistlBase:CreatedOn>
+  </KistlBase:NotNullableConstraint>
+  <KistlBase:StringRangeConstraint ExportGuid="ef21d105-f97d-4f81-a98b-25d472cbc41f">
+    <KistlBase:ChangedOn>2009-12-14T17:08:05.403Z</KistlBase:ChangedOn>
+    <KistlBase:ConstrainedProperty>93e25648-50f9-40d8-8753-e5dadab68e1d</KistlBase:ConstrainedProperty>
+    <KistlBase:CreatedOn>2009-12-14T17:08:05.403Z</KistlBase:CreatedOn>
+    <KistlBase:MaxLength>4000</KistlBase:MaxLength>
+    <KistlBase:MinLength>0</KistlBase:MinLength>
+  </KistlBase:StringRangeConstraint>
+  <KistlBase:NotNullableConstraint ExportGuid="8cb0cbf9-1b18-427a-9635-4e8bd7595ad0">
+    <KistlBase:ChangedOn>2009-12-14T17:08:05.403Z</KistlBase:ChangedOn>
+    <KistlBase:ConstrainedProperty>77ce1e5b-f244-4279-af13-b3e75b55f933</KistlBase:ConstrainedProperty>
+    <KistlBase:CreatedOn>2009-12-14T17:08:05.403Z</KistlBase:CreatedOn>
+    <KistlBase:Reason>ExportGuid cannot be empty</KistlBase:Reason>
+  </KistlBase:NotNullableConstraint>
+  <KistlBase:NotNullableConstraint ExportGuid="e4397224-e3fb-41d0-a160-4d912723182e">
+    <KistlBase:ChangedOn>2009-12-14T17:08:05.403Z</KistlBase:ChangedOn>
+    <KistlBase:ConstrainedProperty>0b7135d3-dedc-4091-a0c4-690c1b4a2b6d</KistlBase:ConstrainedProperty>
+    <KistlBase:CreatedOn>2009-12-14T17:08:05.403Z</KistlBase:CreatedOn>
+  </KistlBase:NotNullableConstraint>
+  <KistlBase:NotNullableConstraint ExportGuid="2392bfd1-b160-44de-b803-d5429b9545c7">
+    <KistlBase:ChangedOn>2009-12-14T17:08:05.403Z</KistlBase:ChangedOn>
+    <KistlBase:ConstrainedProperty>5e2e007c-2e90-4ba6-9c9d-46e62b662ff9</KistlBase:ConstrainedProperty>
+    <KistlBase:CreatedOn>2009-12-14T17:08:05.403Z</KistlBase:CreatedOn>
+  </KistlBase:NotNullableConstraint>
+  <KistlBase:NotNullableConstraint ExportGuid="6d82fced-ed0f-45c9-8b54-0e2cfee2af4c">
+    <KistlBase:ChangedOn>2009-12-14T17:08:05.403Z</KistlBase:ChangedOn>
+    <KistlBase:ConstrainedProperty>554288d1-f5f4-4b22-908b-01525a1d0f9b</KistlBase:ConstrainedProperty>
+    <KistlBase:CreatedOn>2009-12-14T17:08:05.403Z</KistlBase:CreatedOn>
+  </KistlBase:NotNullableConstraint>
   <KistlBase:NotNullableConstraint ExportGuid="82b789d5-b0e6-4ce8-8e9d-f47488e35aa9">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.403Z</KistlBase:ChangedOn>
     <KistlBase:ConstrainedProperty>8d3b7c91-2bbf-4dcf-bc37-318dc0fda92d</KistlBase:ConstrainedProperty>
@@ -14652,15 +14652,15 @@
     <KistlBase:ConstrainedProperty>0b55b2ba-3ac0-4631-8a73-1e8846c8e9b1</KistlBase:ConstrainedProperty>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.403Z</KistlBase:CreatedOn>
   </KistlBase:NotNullableConstraint>
-  <KistlBase:NewGuidDefaultValue ExportGuid="fe342efd-3267-4221-be27-e51c2c85a18d">
-    <KistlBase:ChangedOn>2009-12-14T17:08:05.403Z</KistlBase:ChangedOn>
-    <KistlBase:CreatedOn>2009-12-14T17:08:05.403Z</KistlBase:CreatedOn>
-    <KistlBase:Property>77ce1e5b-f244-4279-af13-b3e75b55f933</KistlBase:Property>
-  </KistlBase:NewGuidDefaultValue>
   <KistlBase:NewGuidDefaultValue ExportGuid="14918fa9-45e3-4bae-9e08-25268515610c">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.403Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.403Z</KistlBase:CreatedOn>
     <KistlBase:Property>94140a56-9fed-4d65-8c2c-cb8e658dff96</KistlBase:Property>
+  </KistlBase:NewGuidDefaultValue>
+  <KistlBase:NewGuidDefaultValue ExportGuid="fe342efd-3267-4221-be27-e51c2c85a18d">
+    <KistlBase:ChangedOn>2009-12-14T17:08:05.403Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2009-12-14T17:08:05.403Z</KistlBase:CreatedOn>
+    <KistlBase:Property>77ce1e5b-f244-4279-af13-b3e75b55f933</KistlBase:Property>
   </KistlBase:NewGuidDefaultValue>
   <KistlBase:Assembly ExportGuid="ba51f88e-57df-49cb-a907-b25e1091487b">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.403Z</KistlBase:ChangedOn>
@@ -15402,13 +15402,6 @@
     <KistlBase:FullName>Kistl.Client.Presentables.ObjectResultModel`1</KistlBase:FullName>
     <KistlBase:Parent>308dc904-c576-420a-bf19-85d1c1853d6c</KistlBase:Parent>
   </KistlBase:TypeRef>
-  <KistlBase:TypeRef ExportGuid="6012afb5-9ef6-4552-9481-b46a39f8f54d">
-    <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
-    <KistlBase:ChangedOn>2009-12-14T17:08:05.41Z</KistlBase:ChangedOn>
-    <KistlBase:CreatedOn>2009-12-14T17:08:05.41Z</KistlBase:CreatedOn>
-    <KistlBase:FullName>Kistl.Client.Presentables.PresentableModel</KistlBase:FullName>
-    <KistlBase:Parent>c51c8086-60b2-410e-96c4-c1a32c1f57ee</KistlBase:Parent>
-  </KistlBase:TypeRef>
   <KistlBase:TypeRef ExportGuid="8314a3e7-5e20-47bd-ba61-c3e88eae2ffc">
     <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
     <KistlBase:ChangedOn>2009-12-14T17:08:05.41Z</KistlBase:ChangedOn>
@@ -15597,6 +15590,13 @@
     <KistlBase:CreatedOn>2009-12-14T17:08:05.41Z</KistlBase:CreatedOn>
     <KistlBase:FullName>Kistl.Client.Presentables.TimeRecords.WorkEffortRecorderModel</KistlBase:FullName>
     <KistlBase:Parent>d9fe8f77-b156-4929-add8-38cc2fa546e8</KistlBase:Parent>
+  </KistlBase:TypeRef>
+  <KistlBase:TypeRef ExportGuid="6012afb5-9ef6-4552-9481-b46a39f8f54d">
+    <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
+    <KistlBase:ChangedOn>2009-12-14T17:08:05.41Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2009-12-14T17:08:05.41Z</KistlBase:CreatedOn>
+    <KistlBase:FullName>Kistl.Client.Presentables.ViewModel</KistlBase:FullName>
+    <KistlBase:Parent>c51c8086-60b2-410e-96c4-c1a32c1f57ee</KistlBase:Parent>
   </KistlBase:TypeRef>
   <KistlBase:TypeRef ExportGuid="1067284c-7e5c-426d-b65d-7f46249ef266">
     <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
@@ -17329,18 +17329,18 @@
     <KistlBase:A_pos>2147483647</KistlBase:A_pos>
     <KistlBase:B_pos>0</KistlBase:B_pos>
   </KistlBase:TypeRef_hasGenericArguments_TypeRef_RelationEntry>
-  <GUI:PresentableModelDescriptor ExportGuid="bec5adb5-06fe-4c4f-8d72-69d4c359cb08">
+  <GUI:ViewModelDescriptor ExportGuid="bec5adb5-06fe-4c4f-8d72-69d4c359cb08">
     <GUI:DefaultKind>7e30f1de-076c-42d3-80b2-9c1111a6cdfb</GUI:DefaultKind>
     <GUI:Description>A list of errors from the currently active DataObjects</GUI:Description>
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
-    <GUI:PresentableModelRef>d5087c41-a7e0-4e10-9762-bbba49b49759</GUI:PresentableModelRef>
-  </GUI:PresentableModelDescriptor>
-  <GUI:PresentableModelDescriptor ExportGuid="88ce02bf-fc40-4227-a7b5-28f6385efa1b">
+    <GUI:ViewModelRef>d5087c41-a7e0-4e10-9762-bbba49b49759</GUI:ViewModelRef>
+  </GUI:ViewModelDescriptor>
+  <GUI:ViewModelDescriptor ExportGuid="88ce02bf-fc40-4227-a7b5-28f6385efa1b">
     <GUI:DefaultKind>f9092349-b263-4887-b605-cccac6a361bd</GUI:DefaultKind>
     <GUI:Description>A simple string list view</GUI:Description>
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
-    <GUI:PresentableModelRef>617a16ed-37bc-465b-976e-627d0ae4b66c</GUI:PresentableModelRef>
-  </GUI:PresentableModelDescriptor>
+    <GUI:ViewModelRef>617a16ed-37bc-465b-976e-627d0ae4b66c</GUI:ViewModelRef>
+  </GUI:ViewModelDescriptor>
   <GUI:ViewDescriptor ExportGuid="ec6ea229-fe90-4f5d-8a39-66901d03ddf1">
     <GUI:ControlRef>3a690041-c11c-4bdc-a4a7-44948ca11f6c</GUI:ControlRef>
     <GUI:Kind>b91f789f-8ecb-44e2-8458-7f0d27ea027a</GUI:Kind>
@@ -17456,18 +17456,18 @@
   <GUI:TypeRefRefKind ExportGuid="6b5093bb-3ac0-4710-b30d-d72a50b09ee8" />
   <GUI:WorkspaceKind ExportGuid="329837fd-1146-48b2-9f4e-79aec8958b1e" />
   <GUI:WorkspaceKind ExportGuid="44654dc7-6f5f-46a1-bdc6-7c3bd124b5bb" />
-  <GUI:PresentableModelDescriptor_displayedBy_ControlKind_RelationEntry ExportGuid="ddba1bc9-bfa6-4438-bf71-78787a4fd9bf">
+  <GUI:ViewModelDescriptor_displayedBy_ControlKind_RelationEntry ExportGuid="ddba1bc9-bfa6-4438-bf71-78787a4fd9bf">
     <GUI:A>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:A>
     <GUI:B>c2b9dfc5-0744-430c-9373-bcd98f783180</GUI:B>
-  </GUI:PresentableModelDescriptor_displayedBy_ControlKind_RelationEntry>
-  <GUI:PresentableModelDescriptor_displayedBy_ControlKind_RelationEntry ExportGuid="95feca0a-90c9-45bf-bf8b-b1799c019fcc">
+  </GUI:ViewModelDescriptor_displayedBy_ControlKind_RelationEntry>
+  <GUI:ViewModelDescriptor_displayedBy_ControlKind_RelationEntry ExportGuid="95feca0a-90c9-45bf-bf8b-b1799c019fcc">
     <GUI:A>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:A>
     <GUI:B>66e080be-471d-4dc5-9850-25bedbdfc76e</GUI:B>
-  </GUI:PresentableModelDescriptor_displayedBy_ControlKind_RelationEntry>
-  <GUI:PresentableModelDescriptor_displayedBy_ControlKind_RelationEntry ExportGuid="62639600-0b92-4f0c-a547-855151e44bed">
+  </GUI:ViewModelDescriptor_displayedBy_ControlKind_RelationEntry>
+  <GUI:ViewModelDescriptor_displayedBy_ControlKind_RelationEntry ExportGuid="62639600-0b92-4f0c-a547-855151e44bed">
     <GUI:A>ffc833d5-a2a5-4cde-8335-6285973742d8</GUI:A>
     <GUI:B>90d5ff7f-0c82-4278-bb8d-49c240f6bc2c</GUI:B>
-  </GUI:PresentableModelDescriptor_displayedBy_ControlKind_RelationEntry>
+  </GUI:ViewModelDescriptor_displayedBy_ControlKind_RelationEntry>
   <KistlBase:Module ExportGuid="a56d9701-d98e-49ab-bd49-a491d09e2d46">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.417Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.417Z</KistlBase:CreatedOn>
@@ -17485,7 +17485,7 @@
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -17501,7 +17501,7 @@
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -17517,7 +17517,7 @@
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -17533,7 +17533,7 @@
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -17549,7 +17549,7 @@
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -19358,7 +19358,7 @@
     <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -19373,7 +19373,7 @@
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -19387,7 +19387,7 @@
     <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>true</GUI:IsSimpleObject>
@@ -19402,7 +19402,7 @@
     <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -19416,7 +19416,7 @@
     <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -19442,7 +19442,7 @@
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -19457,7 +19457,7 @@
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -19484,7 +19484,7 @@
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -19508,7 +19508,7 @@
     <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -20774,7 +20774,7 @@
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
-    <GUI:DefaultPresentableModelDescriptor>382050bb-706b-4812-b23b-133833d72d55</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>382050bb-706b-4812-b23b-133833d72d55</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -20790,7 +20790,7 @@
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
-    <GUI:DefaultPresentableModelDescriptor>b6dc8994-6930-4cf4-8cb7-7f18efe9ef68</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>b6dc8994-6930-4cf4-8cb7-7f18efe9ef68</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -20806,7 +20806,7 @@
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
-    <GUI:DefaultPresentableModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultPresentableModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>

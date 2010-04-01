@@ -74,7 +74,7 @@
                                 </ListView.Template>
 
                                 <ListView.ItemTemplate>
-                                    <DataTemplate DataType="{x:Type client:PresentableModel}">
+                                    <DataTemplate DataType="{x:Type client:ViewModel}">
                                         <view:LabeledView />
                                     </DataTemplate>
                                 </ListView.ItemTemplate>

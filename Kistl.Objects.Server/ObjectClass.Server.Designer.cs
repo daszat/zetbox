@@ -221,12 +221,12 @@ namespace Kistl.App.Base
 
 
         /// <summary>
-        /// The default PresentableModel to use for this ObjectClass
+        /// The default ViewModel to use for this ObjectClass
         /// </summary>
     /*
-    Relation: FK_Presentable_has_DefaultPresentableModelDescriptor
+    Relation: FK_Presentable_has_DefaultViewModelDescriptor
     A: ZeroOrMore ObjectClass as Presentable
-    B: One PresentableModelDescriptor as DefaultPresentableModelDescriptor
+    B: One ViewModelDescriptor as DefaultViewModelDescriptor
     Preferred Storage: MergeIntoA
     */
         // object reference property
@@ -234,33 +234,33 @@ namespace Kistl.App.Base
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.GUI.PresentableModelDescriptor DefaultPresentableModelDescriptor
+        public Kistl.App.GUI.ViewModelDescriptor DefaultViewModelDescriptor
         {
             get
             {
-                return DefaultPresentableModelDescriptor__Implementation__;
+                return DefaultViewModelDescriptor__Implementation__;
             }
             set
             {
                 // TODO: NotifyPropertyChanged()
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if(value != null && value.Context != this.Context) throw new WrongKistlContextException();
-                DefaultPresentableModelDescriptor__Implementation__ = (Kistl.App.GUI.PresentableModelDescriptor__Implementation__)value;
+                DefaultViewModelDescriptor__Implementation__ = (Kistl.App.GUI.ViewModelDescriptor__Implementation__)value;
             }
         }
         
-        private int? _fk_DefaultPresentableModelDescriptor;
-        private Guid? _fk_guid_DefaultPresentableModelDescriptor = null;
+        private int? _fk_DefaultViewModelDescriptor;
+        private Guid? _fk_guid_DefaultViewModelDescriptor = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_Presentable_has_DefaultPresentableModelDescriptor", "DefaultPresentableModelDescriptor")]
-        public Kistl.App.GUI.PresentableModelDescriptor__Implementation__ DefaultPresentableModelDescriptor__Implementation__
+        [EdmRelationshipNavigationProperty("Model", "FK_Presentable_has_DefaultViewModelDescriptor", "DefaultViewModelDescriptor")]
+        public Kistl.App.GUI.ViewModelDescriptor__Implementation__ DefaultViewModelDescriptor__Implementation__
         {
             get
             {
-                EntityReference<Kistl.App.GUI.PresentableModelDescriptor__Implementation__> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.PresentableModelDescriptor__Implementation__>(
-                        "Model.FK_Presentable_has_DefaultPresentableModelDescriptor",
-                        "DefaultPresentableModelDescriptor");
+                EntityReference<Kistl.App.GUI.ViewModelDescriptor__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.ViewModelDescriptor__Implementation__>(
+                        "Model.FK_Presentable_has_DefaultViewModelDescriptor",
+                        "DefaultViewModelDescriptor");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
                 {
@@ -268,48 +268,48 @@ namespace Kistl.App.Base
                     if(r.Value != null) r.Value.AttachToContext(this.Context);
                 }
                 var __value = r.Value;
-				if(OnDefaultPresentableModelDescriptor_Getter != null)
+				if(OnDefaultViewModelDescriptor_Getter != null)
 				{
-					var e = new PropertyGetterEventArgs<Kistl.App.GUI.PresentableModelDescriptor>(__value);
-					OnDefaultPresentableModelDescriptor_Getter(this, e);
-					__value = (Kistl.App.GUI.PresentableModelDescriptor__Implementation__)e.Result;
+					var e = new PropertyGetterEventArgs<Kistl.App.GUI.ViewModelDescriptor>(__value);
+					OnDefaultViewModelDescriptor_Getter(this, e);
+					__value = (Kistl.App.GUI.ViewModelDescriptor__Implementation__)e.Result;
 				}
                 return __value;
             }
             set
             {
-                EntityReference<Kistl.App.GUI.PresentableModelDescriptor__Implementation__> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.PresentableModelDescriptor__Implementation__>(
-                        "Model.FK_Presentable_has_DefaultPresentableModelDescriptor",
-                        "DefaultPresentableModelDescriptor");
+                EntityReference<Kistl.App.GUI.ViewModelDescriptor__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.ViewModelDescriptor__Implementation__>(
+                        "Model.FK_Presentable_has_DefaultViewModelDescriptor",
+                        "DefaultViewModelDescriptor");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
                 {
                     r.Load(); 
                 }
-                Kistl.App.GUI.PresentableModelDescriptor __oldValue = (Kistl.App.GUI.PresentableModelDescriptor)r.Value;
-                Kistl.App.GUI.PresentableModelDescriptor __newValue = (Kistl.App.GUI.PresentableModelDescriptor)value;
+                Kistl.App.GUI.ViewModelDescriptor __oldValue = (Kistl.App.GUI.ViewModelDescriptor)r.Value;
+                Kistl.App.GUI.ViewModelDescriptor __newValue = (Kistl.App.GUI.ViewModelDescriptor)value;
 
-                if(OnDefaultPresentableModelDescriptor_PreSetter != null)
+                if(OnDefaultViewModelDescriptor_PreSetter != null)
                 {
-					var e = new PropertyPreSetterEventArgs<Kistl.App.GUI.PresentableModelDescriptor>(__oldValue, __newValue);
-					OnDefaultPresentableModelDescriptor_PreSetter(this, e);
+					var e = new PropertyPreSetterEventArgs<Kistl.App.GUI.ViewModelDescriptor>(__oldValue, __newValue);
+					OnDefaultViewModelDescriptor_PreSetter(this, e);
 					__newValue = e.Result;
                 }
-                r.Value = (Kistl.App.GUI.PresentableModelDescriptor__Implementation__)__newValue;
-                if(OnDefaultPresentableModelDescriptor_PostSetter != null)
+                r.Value = (Kistl.App.GUI.ViewModelDescriptor__Implementation__)__newValue;
+                if(OnDefaultViewModelDescriptor_PostSetter != null)
                 {
-					var e = new PropertyPostSetterEventArgs<Kistl.App.GUI.PresentableModelDescriptor>(__oldValue, __newValue);
-					OnDefaultPresentableModelDescriptor_PostSetter(this, e);
+					var e = new PropertyPostSetterEventArgs<Kistl.App.GUI.ViewModelDescriptor>(__oldValue, __newValue);
+					OnDefaultViewModelDescriptor_PostSetter(this, e);
                 }
                                 
             }
         }
         
         
-		public static event PropertyGetterHandler<Kistl.App.Base.ObjectClass, Kistl.App.GUI.PresentableModelDescriptor> OnDefaultPresentableModelDescriptor_Getter;
-		public static event PropertyPreSetterHandler<Kistl.App.Base.ObjectClass, Kistl.App.GUI.PresentableModelDescriptor> OnDefaultPresentableModelDescriptor_PreSetter;
-		public static event PropertyPostSetterHandler<Kistl.App.Base.ObjectClass, Kistl.App.GUI.PresentableModelDescriptor> OnDefaultPresentableModelDescriptor_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.Base.ObjectClass, Kistl.App.GUI.ViewModelDescriptor> OnDefaultViewModelDescriptor_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.ObjectClass, Kistl.App.GUI.ViewModelDescriptor> OnDefaultViewModelDescriptor_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.ObjectClass, Kistl.App.GUI.ViewModelDescriptor> OnDefaultViewModelDescriptor_PostSetter;
 
         /// <summary>
         /// Interfaces der Objektklasse
@@ -782,7 +782,7 @@ namespace Kistl.App.Base
 			me.IsSimpleObject = other.IsSimpleObject;
 			me.TableName = other.TableName;
 			this._fk_BaseObjectClass = otherImpl._fk_BaseObjectClass;
-			this._fk_DefaultPresentableModelDescriptor = otherImpl._fk_DefaultPresentableModelDescriptor;
+			this._fk_DefaultViewModelDescriptor = otherImpl._fk_DefaultViewModelDescriptor;
 		}
 
         // tail template
@@ -858,12 +858,12 @@ namespace Kistl.App.Base
 				obj => obj.Constraints,
 				null), // lists are read-only properties
 			// else
-			new CustomPropertyDescriptor<ObjectClass__Implementation__, Kistl.App.GUI.PresentableModelDescriptor>(
+			new CustomPropertyDescriptor<ObjectClass__Implementation__, Kistl.App.GUI.ViewModelDescriptor>(
 				new Guid("11adedb9-d32a-4da9-b986-0534e65df760"),
-				"DefaultPresentableModelDescriptor",
+				"DefaultViewModelDescriptor",
 				null,
-				obj => obj.DefaultPresentableModelDescriptor,
-				(obj, val) => obj.DefaultPresentableModelDescriptor = val),
+				obj => obj.DefaultViewModelDescriptor,
+				(obj, val) => obj.DefaultViewModelDescriptor = val),
 			// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
 			new CustomPropertyDescriptor<ObjectClass__Implementation__, ICollection<Kistl.App.Base.Interface>>(
 				new Guid("a9ec04c2-0807-4d6c-a96a-824d13e5c571"),
@@ -910,7 +910,7 @@ namespace Kistl.App.Base
 			// rel: Constraint on Constrained (e2b66b79-ab7a-43c0-a229-16dddf4b8934)
 			// rel: ObjectClass has AccessControlList (5c3092e0-a3e1-46d2-8e66-e59298b342e7)
 			// rel: BaseObjectClass has SubClasses (cba32040-b1f2-4267-991a-f3dc0e349ff5)
-			// rel: Presentable has DefaultPresentableModelDescriptor (1ae94c81-3359-45e8-b97a-b61add91abba)
+			// rel: Presentable has DefaultViewModelDescriptor (1ae94c81-3359-45e8-b97a-b61add91abba)
 			// rel: ObjectReferencePlaceholderProperty ofType ReferencedObjectClass (47ccedbe-6cfa-4810-8b8e-c064b8434f3f)
 			// rel: RelationEnd has Type (1d8d8e0b-cb0d-4746-a4c5-85c8f399e00a)
 		};
@@ -938,12 +938,12 @@ namespace Kistl.App.Base
 			else
 				BaseObjectClass__Implementation__ = null;
 
-			if (_fk_guid_DefaultPresentableModelDescriptor.HasValue)
-				DefaultPresentableModelDescriptor__Implementation__ = (Kistl.App.GUI.PresentableModelDescriptor__Implementation__)Context.FindPersistenceObject<Kistl.App.GUI.PresentableModelDescriptor>(_fk_guid_DefaultPresentableModelDescriptor.Value);
-			else if (_fk_DefaultPresentableModelDescriptor.HasValue)
-				DefaultPresentableModelDescriptor__Implementation__ = (Kistl.App.GUI.PresentableModelDescriptor__Implementation__)Context.Find<Kistl.App.GUI.PresentableModelDescriptor>(_fk_DefaultPresentableModelDescriptor.Value);
+			if (_fk_guid_DefaultViewModelDescriptor.HasValue)
+				DefaultViewModelDescriptor__Implementation__ = (Kistl.App.GUI.ViewModelDescriptor__Implementation__)Context.FindPersistenceObject<Kistl.App.GUI.ViewModelDescriptor>(_fk_guid_DefaultViewModelDescriptor.Value);
+			else if (_fk_DefaultViewModelDescriptor.HasValue)
+				DefaultViewModelDescriptor__Implementation__ = (Kistl.App.GUI.ViewModelDescriptor__Implementation__)Context.Find<Kistl.App.GUI.ViewModelDescriptor>(_fk_DefaultViewModelDescriptor.Value);
 			else
-				DefaultPresentableModelDescriptor__Implementation__ = null;
+				DefaultViewModelDescriptor__Implementation__ = null;
 		}
 #region Serializer
 
@@ -970,7 +970,7 @@ namespace Kistl.App.Base
 			{
 				BinarySerializer.ToStream(false, binStream);
 			}
-            BinarySerializer.ToStream(DefaultPresentableModelDescriptor != null ? DefaultPresentableModelDescriptor.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(DefaultViewModelDescriptor != null ? DefaultViewModelDescriptor.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._IsAbstract, binStream);
             BinarySerializer.ToStream(this._IsFrozenObject, binStream);
             BinarySerializer.ToStream(this._IsSimpleObject, binStream);
@@ -999,7 +999,7 @@ namespace Kistl.App.Base
 					}
 				}
 			}
-            BinarySerializer.FromStream(out this._fk_DefaultPresentableModelDescriptor, binStream);
+            BinarySerializer.FromStream(out this._fk_DefaultViewModelDescriptor, binStream);
             BinarySerializer.FromStream(out this._IsAbstract, binStream);
             BinarySerializer.FromStream(out this._IsFrozenObject, binStream);
             BinarySerializer.FromStream(out this._IsSimpleObject, binStream);
@@ -1011,7 +1011,7 @@ namespace Kistl.App.Base
             
             base.ToStream(xml);
             XmlStreamer.ToStream(BaseObjectClass != null ? BaseObjectClass.ID : (int?)null, xml, "BaseObjectClass", "Kistl.App.Base");
-            XmlStreamer.ToStream(DefaultPresentableModelDescriptor != null ? DefaultPresentableModelDescriptor.ID : (int?)null, xml, "DefaultPresentableModelDescriptor", "Kistl.App.GUI");
+            XmlStreamer.ToStream(DefaultViewModelDescriptor != null ? DefaultViewModelDescriptor.ID : (int?)null, xml, "DefaultViewModelDescriptor", "Kistl.App.GUI");
             XmlStreamer.ToStream(this._IsAbstract, xml, "IsAbstract", "Kistl.App.Base");
             XmlStreamer.ToStream(this._IsFrozenObject, xml, "IsFrozenObject", "Kistl.App.Base");
             XmlStreamer.ToStream(this._IsSimpleObject, xml, "IsSimpleObject", "Kistl.App.GUI");
@@ -1023,7 +1023,7 @@ namespace Kistl.App.Base
             
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._fk_BaseObjectClass, xml, "BaseObjectClass", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._fk_DefaultPresentableModelDescriptor, xml, "DefaultPresentableModelDescriptor", "Kistl.App.GUI");
+            XmlStreamer.FromStream(ref this._fk_DefaultViewModelDescriptor, xml, "DefaultViewModelDescriptor", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._IsAbstract, xml, "IsAbstract", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._IsFrozenObject, xml, "IsFrozenObject", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._IsSimpleObject, xml, "IsSimpleObject", "Kistl.App.GUI");
@@ -1035,7 +1035,7 @@ namespace Kistl.App.Base
             
             base.Export(xml, modules);
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(BaseObjectClass != null ? BaseObjectClass.ExportGuid : (Guid?)null, xml, "BaseObjectClass", "Kistl.App.Base");
-            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(DefaultPresentableModelDescriptor != null ? DefaultPresentableModelDescriptor.ExportGuid : (Guid?)null, xml, "DefaultPresentableModelDescriptor", "Kistl.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(DefaultViewModelDescriptor != null ? DefaultViewModelDescriptor.ExportGuid : (Guid?)null, xml, "DefaultViewModelDescriptor", "Kistl.App.GUI");
     
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._IsAbstract, xml, "IsAbstract", "Kistl.App.Base");
     
@@ -1051,7 +1051,7 @@ namespace Kistl.App.Base
             
             base.MergeImport(xml);
             XmlStreamer.FromStream(ref this._fk_guid_BaseObjectClass, xml, "BaseObjectClass", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._fk_guid_DefaultPresentableModelDescriptor, xml, "DefaultPresentableModelDescriptor", "Kistl.App.GUI");
+            XmlStreamer.FromStream(ref this._fk_guid_DefaultViewModelDescriptor, xml, "DefaultViewModelDescriptor", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._IsAbstract, xml, "IsAbstract", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._IsFrozenObject, xml, "IsFrozenObject", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._IsSimpleObject, xml, "IsSimpleObject", "Kistl.App.GUI");

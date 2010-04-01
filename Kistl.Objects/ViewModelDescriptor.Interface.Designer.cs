@@ -10,7 +10,7 @@ namespace Kistl.App.GUI
     /// <summary>
     /// 
     /// </summary>
-    public interface PresentableModelDescriptor : IDataObject, Kistl.App.Base.IExportable 
+    public interface ViewModelDescriptor : IDataObject, Kistl.App.Base.IExportable 
     {
 
         /// <summary>
@@ -28,7 +28,7 @@ namespace Kistl.App.GUI
 			set;
 		}
         /// <summary>
-        /// describe this PresentableModel
+        /// describe this ViewModel
         /// </summary>
 		string Description {
 			get;
@@ -42,16 +42,16 @@ namespace Kistl.App.GUI
 			set;
 		}
         /// <summary>
-        /// The described CLR class&apos; reference
-        /// </summary>
-		Kistl.App.Base.TypeRef PresentableModelRef {
-			get;
-			set;
-		}
-        /// <summary>
         /// 
         /// </summary>
 
         ICollection<Kistl.App.GUI.ControlKind> SecondaryControlKinds { get; }
+        /// <summary>
+        /// The described CLR class&apos; reference
+        /// </summary>
+		Kistl.App.Base.TypeRef ViewModelRef {
+			get;
+			set;
+		}
     }
 }

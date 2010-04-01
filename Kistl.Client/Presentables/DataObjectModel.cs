@@ -21,7 +21,7 @@ namespace Kistl.Client.Presentables
     /// Proxies a whole IDataObject
     /// </summary>
     public class DataObjectModel
-        : PresentableModel, IDataErrorInfo
+        : ViewModel, IDataErrorInfo
     {
         public DataObjectModel(
             IGuiApplicationContext appCtx, IKistlContext dataCtx,
@@ -50,14 +50,14 @@ namespace Kistl.Client.Presentables
             }
         }
 
-        private ReadOnlyProjectedList<Property, PresentableModel> _propertyModels;
-        public IReadOnlyList<PresentableModel> PropertyModels
+        private ReadOnlyProjectedList<Property, ViewModel> _propertyModels;
+        public IReadOnlyList<ViewModel> PropertyModels
         {
             get
             {
                 if (_propertyModels == null)
                 {
-                    _propertyModels = new ReadOnlyProjectedList<Property, PresentableModel>(
+                    _propertyModels = new ReadOnlyProjectedList<Property, ViewModel>(
                         FetchPropertyList().ToList(),
                         property => Factory.CreatePropertyValueModel(DataContext, Object, property),
                         null);
@@ -65,27 +65,27 @@ namespace Kistl.Client.Presentables
                 return _propertyModels;
             }
         }
-        private LookupDictionary<string, Property, PresentableModel> _propertyModelsByName;
-        public LookupDictionary<string, Property, PresentableModel> PropertyModelsByName
+        private LookupDictionary<string, Property, ViewModel> _propertyModelsByName;
+        public LookupDictionary<string, Property, ViewModel> PropertyModelsByName
         {
             get
             {
                 if (_propertyModelsByName == null)
                 {
-                    _propertyModelsByName = new LookupDictionary<string, Property, PresentableModel>(FetchPropertyList().ToList(), prop => prop.Name, prop => Factory.CreatePropertyValueModel(DataContext, Object, prop));
+                    _propertyModelsByName = new LookupDictionary<string, Property, ViewModel>(FetchPropertyList().ToList(), prop => prop.Name, prop => Factory.CreatePropertyValueModel(DataContext, Object, prop));
                 }
                 return _propertyModelsByName;
             }
         }
 
-        private ReadOnlyProjectedList<Method, PresentableModel> _methodResultsCache;
-        public IReadOnlyList<PresentableModel> MethodResults
+        private ReadOnlyProjectedList<Method, ViewModel> _methodResultsCache;
+        public IReadOnlyList<ViewModel> MethodResults
         {
             get
             {
                 if (_methodResultsCache == null)
                 {
-                    _methodResultsCache = new ReadOnlyProjectedList<Method, PresentableModel>(
+                    _methodResultsCache = new ReadOnlyProjectedList<Method, ViewModel>(
                         FetchMethodList().ToList(),
                         method =>
                         {
@@ -275,7 +275,7 @@ namespace Kistl.Client.Presentables
         }
 
         // TODO: should go to renderer and use database backed decision tables
-        protected virtual PresentableModel ModelFromMethod(ObjectClass cls, Method pm)
+        protected virtual ViewModel ModelFromMethod(ObjectClass cls, Method pm)
         {
             Debug.Assert(pm.Parameter.Single().IsReturnParameter);
             var retParam = pm.GetReturnParameter();

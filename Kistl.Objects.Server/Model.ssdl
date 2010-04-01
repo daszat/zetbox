@@ -44,7 +44,6 @@
     <EntitySet Name="Module" EntityType="Model.Store.Module" Table="Modules"/>
     <EntitySet Name="Muhblah" EntityType="Model.Store.Muhblah" Table="Muhblas"/>
     <EntitySet Name="PresenceRecord" EntityType="Model.Store.PresenceRecord" Table="PresenceRecords"/>
-    <EntitySet Name="PresentableModelDescriptor" EntityType="Model.Store.PresentableModelDescriptor" Table="PresentableModelDescriptors"/>
     <EntitySet Name="Projekt" EntityType="Model.Store.Projekt" Table="Projekte"/>
     <EntitySet Name="Projekt_Rights" EntityType="Model.Store.Projekt_Rights" Table="Projekte_Rights"/>
     <AssociationSet Name="FK_Projekte_Rights" Association="Model.Store.FK_Projekte_Rights">
@@ -70,6 +69,7 @@
     <EntitySet Name="TestStudent" EntityType="Model.Store.TestStudent" Table="TestStudenten"/>
     <EntitySet Name="TypeRef" EntityType="Model.Store.TypeRef" Table="TypeRefs"/>
     <EntitySet Name="ViewDescriptor" EntityType="Model.Store.ViewDescriptor" Table="ViewDescriptors"/>
+    <EntitySet Name="ViewModelDescriptor" EntityType="Model.Store.ViewModelDescriptor" Table="ViewModelDescriptors"/>
     <EntitySet Name="Visual" EntityType="Model.Store.Visual" Table="Visuals"/>
     <EntitySet Name="WorkEffort" EntityType="Model.Store.WorkEffort" Table="WorkEfforts"/>
     <EntitySet Name="WorkEffortAccount" EntityType="Model.Store.WorkEffortAccount" Table="WorkEffortAccounts"/>
@@ -573,17 +573,17 @@
     
     <!-- 
     Relation: FK_Presentable_displayedBy_SecondaryControlKinds
-    A: ZeroOrMore PresentableModelDescriptor as Presentable
+    A: ZeroOrMore ViewModelDescriptor as Presentable
     B: ZeroOrMore ControlKind as SecondaryControlKinds
     Preferred Storage: Separate
     -->
-    <EntitySet Name="PresentableModelDescriptor_displayedBy_ControlKind_RelationEntry" EntityType="Model.Store.PresentableModelDescriptor_displayedBy_ControlKind_RelationEntry" Table="Presentable_displayedBy_SecondaryControlKinds" />
+    <EntitySet Name="ViewModelDescriptor_displayedBy_ControlKind_RelationEntry" EntityType="Model.Store.ViewModelDescriptor_displayedBy_ControlKind_RelationEntry" Table="Presentable_displayedBy_SecondaryControlKinds" />
     <AssociationSet Name="FK_Presentable_displayedBy_SecondaryControlKinds_A" Association="Model.Store.FK_Presentable_displayedBy_SecondaryControlKinds_A" >
-      <End Role="Presentable" EntitySet="PresentableModelDescriptor" />
-      <End Role="CollectionEntry" EntitySet="PresentableModelDescriptor_displayedBy_ControlKind_RelationEntry" />
+      <End Role="Presentable" EntitySet="ViewModelDescriptor" />
+      <End Role="CollectionEntry" EntitySet="ViewModelDescriptor_displayedBy_ControlKind_RelationEntry" />
     </AssociationSet>
     <AssociationSet Name="FK_Presentable_displayedBy_SecondaryControlKinds_B" Association="Model.Store.FK_Presentable_displayedBy_SecondaryControlKinds_B" >
-      <End Role="CollectionEntry" EntitySet="PresentableModelDescriptor_displayedBy_ControlKind_RelationEntry" />
+      <End Role="CollectionEntry" EntitySet="ViewModelDescriptor_displayedBy_ControlKind_RelationEntry" />
       <End Role="SecondaryControlKinds" EntitySet="ControlKind" />
     </AssociationSet>
     
@@ -854,9 +854,9 @@
       <End Role="DefaultPropertyValue" EntitySet="DefaultPropertyValue" />
       <End Role="CreatedBy" EntitySet="Identity" />
     </AssociationSet>
-    <AssociationSet Name="FK_Descriptor_has_PresentableModelRef" Association="Model.Store.FK_Descriptor_has_PresentableModelRef" >
-      <End Role="Descriptor" EntitySet="PresentableModelDescriptor" />
-      <End Role="PresentableModelRef" EntitySet="TypeRef" />
+    <AssociationSet Name="FK_Descriptor_has_ViewModelRef" Association="Model.Store.FK_Descriptor_has_ViewModelRef" >
+      <End Role="Descriptor" EntitySet="ViewModelDescriptor" />
+      <End Role="ViewModelRef" EntitySet="TypeRef" />
     </AssociationSet>
     <AssociationSet Name="FK_Document_was_ChangedBy" Association="Model.Store.FK_Document_was_ChangedBy" >
       <End Role="Document" EntitySet="Blob" />
@@ -1047,20 +1047,12 @@
       <End Role="Mitarbeiter" EntitySet="Mitarbeiter" />
     </AssociationSet>
     <AssociationSet Name="FK_Presentable_has_DefaultKind" Association="Model.Store.FK_Presentable_has_DefaultKind" >
-      <End Role="Presentable" EntitySet="PresentableModelDescriptor" />
+      <End Role="Presentable" EntitySet="ViewModelDescriptor" />
       <End Role="DefaultKind" EntitySet="ControlKind" />
     </AssociationSet>
-    <AssociationSet Name="FK_Presentable_has_DefaultPresentableModelDescriptor" Association="Model.Store.FK_Presentable_has_DefaultPresentableModelDescriptor" >
+    <AssociationSet Name="FK_Presentable_has_DefaultViewModelDescriptor" Association="Model.Store.FK_Presentable_has_DefaultViewModelDescriptor" >
       <End Role="Presentable" EntitySet="ObjectClass" />
-      <End Role="DefaultPresentableModelDescriptor" EntitySet="PresentableModelDescriptor" />
-    </AssociationSet>
-    <AssociationSet Name="FK_PresentableModelDescriptor_displayedInGridBy_DefaultGridCellKind" Association="Model.Store.FK_PresentableModelDescriptor_displayedInGridBy_DefaultGridCellKind" >
-      <End Role="PresentableModelDescriptor" EntitySet="PresentableModelDescriptor" />
-      <End Role="DefaultGridCellKind" EntitySet="ControlKind" />
-    </AssociationSet>
-    <AssociationSet Name="FK_PresentableModelDescriptor_has_Module" Association="Model.Store.FK_PresentableModelDescriptor_has_Module" >
-      <End Role="PresentableModelDescriptor" EntitySet="PresentableModelDescriptor" />
-      <End Role="Module" EntitySet="Module" />
+      <End Role="DefaultViewModelDescriptor" EntitySet="ViewModelDescriptor" />
     </AssociationSet>
     <AssociationSet Name="FK_Projekt_has_Auftraege" Association="Model.Store.FK_Projekt_has_Auftraege" >
       <End Role="Projekt" EntitySet="Projekt" />
@@ -1084,7 +1076,7 @@
     </AssociationSet>
     <AssociationSet Name="FK_Property_has_ValueModelDescriptor" Association="Model.Store.FK_Property_has_ValueModelDescriptor" >
       <End Role="Property" EntitySet="Property" />
-      <End Role="ValueModelDescriptor" EntitySet="PresentableModelDescriptor" />
+      <End Role="ValueModelDescriptor" EntitySet="ViewModelDescriptor" />
     </AssociationSet>
     <AssociationSet Name="FK_Property_was_ChangedBy" Association="Model.Store.FK_Property_was_ChangedBy" >
       <End Role="Property" EntitySet="Property" />
@@ -1184,6 +1176,14 @@
     </AssociationSet>
     <AssociationSet Name="FK_ViewDescriptor_has_Module" Association="Model.Store.FK_ViewDescriptor_has_Module" >
       <End Role="ViewDescriptor" EntitySet="ViewDescriptor" />
+      <End Role="Module" EntitySet="Module" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ViewModelDescriptor_displayedInGridBy_DefaultGridCellKind" Association="Model.Store.FK_ViewModelDescriptor_displayedInGridBy_DefaultGridCellKind" >
+      <End Role="ViewModelDescriptor" EntitySet="ViewModelDescriptor" />
+      <End Role="DefaultGridCellKind" EntitySet="ControlKind" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ViewModelDescriptor_has_Module" Association="Model.Store.FK_ViewModelDescriptor_has_Module" >
+      <End Role="ViewModelDescriptor" EntitySet="ViewModelDescriptor" />
       <End Role="Module" EntitySet="Module" />
     </AssociationSet>
     <AssociationSet Name="FK_Visual_has_Method" Association="Model.Store.FK_Visual_has_Method" >
@@ -1931,7 +1931,7 @@
     </Key>
     <Property Name="ID" Type="int" Nullable="false" />
     <Property Name="fk_BaseObjectClass" Type="int" />
-    <Property Name="fk_DefaultPresentableModelDescriptor" Type="int" />
+    <Property Name="fk_DefaultViewModelDescriptor" Type="int" />
     <Property Name="IsAbstract" Type="bit" Nullable="false" />
     <Property Name="IsFrozenObject" Type="bit" Nullable="false" />
     <Property Name="IsSimpleObject" Type="bit" Nullable="false" />
@@ -1996,19 +1996,6 @@
     <Property Name="fk_Mitarbeiter" Type="int" />
     <Property Name="From" Type="datetime" Nullable="false" />
     <Property Name="Thru" Type="datetime" Nullable="true" />
-  </EntityType>
-	
-  <EntityType Name="PresentableModelDescriptor">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="fk_PresentableModelRef" Type="int" />
-    <Property Name="fk_DefaultKind" Type="int" />
-    <Property Name="fk_DefaultGridCellKind" Type="int" />
-    <Property Name="fk_Module" Type="int" />
-    <Property Name="Description" Type="nvarchar" MaxLength="4000" Nullable="false" />
-    <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="Projekt">
@@ -2352,6 +2339,19 @@
     <Property Name="fk_Module" Type="int" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
     <Property Name="Toolkit" Type="int" Nullable="false" />
+  </EntityType>
+	
+  <EntityType Name="ViewModelDescriptor">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_ViewModelRef" Type="int" />
+    <Property Name="fk_DefaultKind" Type="int" />
+    <Property Name="fk_DefaultGridCellKind" Type="int" />
+    <Property Name="fk_Module" Type="int" />
+    <Property Name="Description" Type="nvarchar" MaxLength="4000" Nullable="false" />
+    <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="Visual">
@@ -2707,7 +2707,7 @@
   </Association>
 
 	
-  <EntityType Name="PresentableModelDescriptor_displayedBy_ControlKind_RelationEntry">
+  <EntityType Name="ViewModelDescriptor_displayedBy_ControlKind_RelationEntry">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
@@ -2719,8 +2719,8 @@
 
   <!-- A to CollectionEntry -->
   <Association Name="FK_Presentable_displayedBy_SecondaryControlKinds_A">
-    <End Role="Presentable" Type="Model.Store.PresentableModelDescriptor" Multiplicity="0..1" />
-    <End Role="CollectionEntry" Type="Model.Store.PresentableModelDescriptor_displayedBy_ControlKind_RelationEntry" Multiplicity="*" />
+    <End Role="Presentable" Type="Model.Store.ViewModelDescriptor" Multiplicity="0..1" />
+    <End Role="CollectionEntry" Type="Model.Store.ViewModelDescriptor_displayedBy_ControlKind_RelationEntry" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Presentable">
         <PropertyRef Name="ID" />
@@ -2734,7 +2734,7 @@
   <!-- B to CollectionEntry -->
   <Association Name="FK_Presentable_displayedBy_SecondaryControlKinds_B">
     <End Role="SecondaryControlKinds" Type="Model.Store.ControlKind" Multiplicity="0..1" />
-    <End Role="CollectionEntry" Type="Model.Store.PresentableModelDescriptor_displayedBy_ControlKind_RelationEntry" Multiplicity="*" />
+    <End Role="CollectionEntry" Type="Model.Store.ViewModelDescriptor_displayedBy_ControlKind_RelationEntry" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="SecondaryControlKinds">
         <PropertyRef Name="ID" />
@@ -3519,15 +3519,15 @@
   </Association>
 
 
-  <Association Name="FK_Descriptor_has_PresentableModelRef">
-    <End Role="PresentableModelRef" Type="Model.Store.TypeRef" Multiplicity="0..1" />
-    <End Role="Descriptor" Type="Model.Store.PresentableModelDescriptor" Multiplicity="*" />
+  <Association Name="FK_Descriptor_has_ViewModelRef">
+    <End Role="ViewModelRef" Type="Model.Store.TypeRef" Multiplicity="0..1" />
+    <End Role="Descriptor" Type="Model.Store.ViewModelDescriptor" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="PresentableModelRef">
+      <Principal Role="ViewModelRef">
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="Descriptor">
-        <PropertyRef Name="fk_PresentableModelRef" />
+        <PropertyRef Name="fk_ViewModelRef" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -4193,7 +4193,7 @@
 
   <Association Name="FK_Presentable_has_DefaultKind">
     <End Role="DefaultKind" Type="Model.Store.ControlKind" Multiplicity="0..1" />
-    <End Role="Presentable" Type="Model.Store.PresentableModelDescriptor" Multiplicity="*" />
+    <End Role="Presentable" Type="Model.Store.ViewModelDescriptor" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="DefaultKind">
         <PropertyRef Name="ID" />
@@ -4205,43 +4205,15 @@
   </Association>
 
 
-  <Association Name="FK_Presentable_has_DefaultPresentableModelDescriptor">
-    <End Role="DefaultPresentableModelDescriptor" Type="Model.Store.PresentableModelDescriptor" Multiplicity="0..1" />
+  <Association Name="FK_Presentable_has_DefaultViewModelDescriptor">
+    <End Role="DefaultViewModelDescriptor" Type="Model.Store.ViewModelDescriptor" Multiplicity="0..1" />
     <End Role="Presentable" Type="Model.Store.ObjectClass" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="DefaultPresentableModelDescriptor">
+      <Principal Role="DefaultViewModelDescriptor">
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="Presentable">
-        <PropertyRef Name="fk_DefaultPresentableModelDescriptor" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-
-  <Association Name="FK_PresentableModelDescriptor_displayedInGridBy_DefaultGridCellKind">
-    <End Role="DefaultGridCellKind" Type="Model.Store.ControlKind" Multiplicity="0..1" />
-    <End Role="PresentableModelDescriptor" Type="Model.Store.PresentableModelDescriptor" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="DefaultGridCellKind">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="PresentableModelDescriptor">
-        <PropertyRef Name="fk_DefaultGridCellKind" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-
-  <Association Name="FK_PresentableModelDescriptor_has_Module">
-    <End Role="Module" Type="Model.Store.Module" Multiplicity="0..1" />
-    <End Role="PresentableModelDescriptor" Type="Model.Store.PresentableModelDescriptor" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Module">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="PresentableModelDescriptor">
-        <PropertyRef Name="fk_Module" />
+        <PropertyRef Name="fk_DefaultViewModelDescriptor" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -4318,7 +4290,7 @@
 
 
   <Association Name="FK_Property_has_ValueModelDescriptor">
-    <End Role="ValueModelDescriptor" Type="Model.Store.PresentableModelDescriptor" Multiplicity="0..1" />
+    <End Role="ValueModelDescriptor" Type="Model.Store.ViewModelDescriptor" Multiplicity="0..1" />
     <End Role="Property" Type="Model.Store.Property" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ValueModelDescriptor">
@@ -4675,6 +4647,34 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="ViewDescriptor">
+        <PropertyRef Name="fk_Module" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_ViewModelDescriptor_displayedInGridBy_DefaultGridCellKind">
+    <End Role="DefaultGridCellKind" Type="Model.Store.ControlKind" Multiplicity="0..1" />
+    <End Role="ViewModelDescriptor" Type="Model.Store.ViewModelDescriptor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DefaultGridCellKind">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ViewModelDescriptor">
+        <PropertyRef Name="fk_DefaultGridCellKind" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_ViewModelDescriptor_has_Module">
+    <End Role="Module" Type="Model.Store.Module" Multiplicity="0..1" />
+    <End Role="ViewModelDescriptor" Type="Model.Store.ViewModelDescriptor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Module">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ViewModelDescriptor">
         <PropertyRef Name="fk_Module" />
       </Dependent>
     </ReferentialConstraint>

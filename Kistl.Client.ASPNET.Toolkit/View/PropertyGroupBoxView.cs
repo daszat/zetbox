@@ -38,7 +38,7 @@ namespace Kistl.Client.ASPNET.Toolkit.View
         {
             if (e.Item.ItemType.In(ListItemType.Item, ListItemType.AlternatingItem))
             {
-                var data = (PresentableModel)e.Item.DataItem;
+                var data = (ViewModel)e.Item.DataItem;
                 var view = (LabeledView)e.Item.FindControl("lbView");
                 view.SetModel(data);
             }

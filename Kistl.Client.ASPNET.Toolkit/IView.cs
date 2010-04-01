@@ -8,7 +8,7 @@ namespace Kistl.Client.ASPNET.Toolkit
 {
     public interface IView
     {
-        void SetModel(PresentableModel mdl);
-        PresentableModel GetModel();
+        void SetModel(ViewModel mdl);
+        ViewModel GetModel();
     }
 }

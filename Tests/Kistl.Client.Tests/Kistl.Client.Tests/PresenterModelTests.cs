@@ -14,9 +14,9 @@ namespace Kistl.Client.Tests
     //[TestFixture]
     //public class PresenterModelTests : MockeryTestFixture
     //{
-        //internal class PresentableModelInspector : PresentableModel
+        //internal class ViewModelInspector : ViewModel
         //{
-        //    internal PresentableModelInspector(ThreadManagerMock uiThreadMock, ThreadManagerMock backgroundThreadMock)
+        //    internal ViewModelInspector(ThreadManagerMock uiThreadMock, ThreadManagerMock backgroundThreadMock)
         //        : base(uiThreadMock, backgroundThreadMock, null, null, null)
         //    {
         //    }
@@ -34,7 +34,7 @@ namespace Kistl.Client.Tests
         //    ThreadManagerMock backgroundThreadMock = new ThreadManagerMock("Background Thread");
         //    ThreadManagerMock.SetDefaultThread(uiThreadMock);
 
-        //    PresentableModelInspector pm = new PresentableModelInspector(uiThreadMock, backgroundThreadMock);
+        //    ViewModelInspector pm = new ViewModelInspector(uiThreadMock, backgroundThreadMock);
 
         //    Assert.AreSame(uiThreadMock, pm.GetUitm());
         //    Assert.AreSame(backgroundThreadMock, pm.GetBgtm());

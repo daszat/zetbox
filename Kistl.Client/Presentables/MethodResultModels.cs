@@ -10,7 +10,7 @@ namespace Kistl.Client.Presentables
 {
 
     public abstract class MethodResultModel<TValue>
-        : PresentableModel, IReadOnlyValueModel<string>
+        : ViewModel, IReadOnlyValueModel<string>
     {
         protected MethodResultModel(
             IGuiApplicationContext appCtx, IKistlContext dataCtx,

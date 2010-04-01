@@ -15,7 +15,7 @@ namespace Kistl.Client.Presentables.GUI
     /// A dashboard for the GUI Module.
     /// </summary>
     public class DashboardModel
-        : PresentableModel
+        : ViewModel
     {
         /// <summary>
         /// Initializes a new instance of the DashboardModel class.
@@ -25,51 +25,51 @@ namespace Kistl.Client.Presentables.GUI
         public DashboardModel(IGuiApplicationContext appCtx, IKistlContext dataCtx)
             : base(appCtx, dataCtx)
         {
-            // TODO: react to ctx.Create<PresentableModelDescriptor>()/ctx.Delete<PresentableModelDescriptor>()
+            // TODO: react to ctx.Create<ViewModelDescriptor>()/ctx.Delete<ViewModelDescriptor>()
             // TODO: Reactivate
-            //PresentableModelDescriptors = new ReadOnlyObservableCollection<DataObjectModel>(
+            //ViewModelDescriptors = new ReadOnlyObservableCollection<DataObjectModel>(
             //    new ObservableCollection<DataObjectModel>(
             //        DataContext
-            //            .GetQuery<PresentableModelDescriptor>()
+            //            .GetQuery<ViewModelDescriptor>()
             //            .Select(desc => (DataObjectModel)Factory.CreateDefaultModel(DataContext, desc))
             //            .ToList()));
 
-            //_selectedPresentableModelDescriptor = null;
+            //_selectedViewModelDescriptor = null;
 
             //DefaultViewDescriptors = new Dictionary<Toolkit, DataObjectModel>();
         }
 
-        public ReadOnlyObservableCollection<DataObjectModel> PresentableModelDescriptors { get; private set; }
+        public ReadOnlyObservableCollection<DataObjectModel> ViewModelDescriptors { get; private set; }
 
-        private DataObjectModel _selectedPresentableModelDescriptor;
-        public DataObjectModel SelectedPresentableModelDescriptor
+        private DataObjectModel _selectedViewModelDescriptor;
+        public DataObjectModel SelectedViewModelDescriptor
         {
-            get { return _selectedPresentableModelDescriptor; }
+            get { return _selectedViewModelDescriptor; }
             set
             {
-                if (value != _selectedPresentableModelDescriptor)
+                if (value != _selectedViewModelDescriptor)
                 {
-                    _selectedPresentableModelDescriptor = value;
-                    OnSelectedPresentableModelDescriptorChanged();
+                    _selectedViewModelDescriptor = value;
+                    OnSelectedViewModelDescriptorChanged();
                 }
             }
         }
 
-        protected virtual void OnSelectedPresentableModelDescriptorChanged()
+        protected virtual void OnSelectedViewModelDescriptorChanged()
         {
             UpdateDefaultViewDescriptors();
             UpdateApplicableViewDescriptors();
 
-            OnPropertyChanged("SelectedPresentableModelDescriptor");
+            OnPropertyChanged("SelectedViewModelDescriptor");
         }
 
         private void UpdateApplicableViewDescriptors()
         {
             //ApplicableViewDescriptors = new ReadOnlyObservableCollection<DataObjectModel>(
             //    new ObservableCollection<DataObjectModel>(
-            //        PresentableModelDescriptors
+            //        ViewModelDescriptors
             //            .Select(dom => dom.Object)
-            //            .OfType<PresentableModelDescriptor>()
+            //            .OfType<ViewModelDescriptor>()
             //            .SelectMany(pmd => pmd.GetApplicableViewDescriptors())
             //            .Select(vd => (DataObjectModel)Factory.CreateDefaultModel(DataContext, vd))
             //            .ToList()));
@@ -80,7 +80,7 @@ namespace Kistl.Client.Presentables.GUI
             DefaultViewDescriptors.Clear();
             foreach (Toolkit tk in Enum.GetValues(typeof(Toolkit)))
             {
-                var defaultView = (SelectedPresentableModelDescriptor.Object as PresentableModelDescriptor).GetDefaultViewDescriptor(tk);
+                var defaultView = (SelectedViewModelDescriptor.Object as ViewModelDescriptor).GetDefaultViewDescriptor(tk);
                 if (defaultView != null)
                 {
                     DefaultViewDescriptors[tk] = (DataObjectModel)Factory.CreateDefaultModel(DataContext, defaultView);

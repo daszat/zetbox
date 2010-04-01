@@ -16,19 +16,19 @@ namespace Kistl.Client.Presentables
     /// Models a group of Property(Models)
     /// </summary>
     public class PropertyGroupModel
-        : PresentableModel, IDataErrorInfo
+        : ViewModel, IDataErrorInfo
     {
         private string _title;
-        private ObservableCollection<PresentableModel> _properties;
+        private ObservableCollection<ViewModel> _properties;
 
         public PropertyGroupModel(
             IGuiApplicationContext appCtx, IKistlContext dataCtx,
             string title,
-            IEnumerable<PresentableModel> obj)
+            IEnumerable<ViewModel> obj)
             : base(appCtx, dataCtx)
         {
             _title = title;
-            _properties = new ObservableCollection<PresentableModel>(obj);
+            _properties = new ObservableCollection<ViewModel>(obj);
             _properties.CollectionChanged += PropertyListChanged;
             foreach (var prop in _properties)
             {
@@ -41,14 +41,14 @@ namespace Kistl.Client.Presentables
         public string Title { get { return _title; } }
         public string ToolTip { get { return _title; } }
 
-        private ReadOnlyObservableCollection<PresentableModel> _propertyModelsCache;
-        public ReadOnlyObservableCollection<PresentableModel> PropertyModels
+        private ReadOnlyObservableCollection<ViewModel> _propertyModelsCache;
+        public ReadOnlyObservableCollection<ViewModel> PropertyModels
         {
             get
             {
                 if (_propertyModelsCache == null)
                 {
-                    _propertyModelsCache = new ReadOnlyObservableCollection<PresentableModel>(_properties);
+                    _propertyModelsCache = new ReadOnlyObservableCollection<ViewModel>(_properties);
                 }
                 return _propertyModelsCache;
             }

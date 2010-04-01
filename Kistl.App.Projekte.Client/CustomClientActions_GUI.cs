@@ -32,10 +32,10 @@ namespace Kistl.App.GUI
             }
         }
 
-        public static void OnToString_PresentableModelDescriptor(PresentableModelDescriptor obj, MethodReturnEventArgs<string> e)
+        public static void OnToString_ViewModelDescriptor(ViewModelDescriptor obj, MethodReturnEventArgs<string> e)
         {
             e.Result = String.Format("{0} (default: {1})",
-                obj.PresentableModelRef == null ? "(no type)" : obj.PresentableModelRef.ToString(),
+                obj.ViewModelRef == null ? "(no type)" : obj.ViewModelRef.ToString(),
                 obj.DefaultKind);
         }
 

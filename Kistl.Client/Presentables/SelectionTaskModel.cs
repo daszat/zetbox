@@ -9,14 +9,14 @@ using Kistl.API;
 namespace Kistl.Client.Presentables
 {
     public class SelectionTaskModel<TChoosable>
-        : PresentableModel
-        where TChoosable : PresentableModel
+        : ViewModel
+        where TChoosable : ViewModel
     {
         /// <summary>
         /// Initializes a new instance of the SelectionTaskModel class. This is protected since there 
-        /// is no PresentableModelDescriptor for this class. Instead, either use the
+        /// is no ViewModelDescriptor for this class. Instead, either use the
         /// <see cref="DataObjectSelectionTaskModel"/> or inherit this for a specific type yourself and 
-        /// add your own PresentableModelDescriptor and View.
+        /// add your own ViewModelDescriptor and View.
         /// </summary>
         /// <param name="appCtx"></param>
         /// <param name="dataCtx"></param>

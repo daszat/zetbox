@@ -811,9 +811,9 @@ namespace Kistl.App.Base
 			// rel: Module has Relation (1c91bee2-397b-44f3-8346-313a8e2ba127)
 			// rel: Module was ChangedBy (9d108dc6-7caa-4597-95d4-82cf52da5638)
 			// rel: Module was CreatedBy (5c8dd58e-cf1d-484f-af64-ff84ea4c3ee9)
-			// rel: PresentableModelDescriptor has Module (557dbc1c-2a38-4c77-8544-264a95307980)
 			// rel: BaseProperty has Module (bffae7c3-c5f3-4139-ae96-577f4c9fed8f)
 			// rel: ViewDescriptor has Module (51b089fa-edd9-4a1b-9f4c-ccfdaad76856)
+			// rel: ViewModelDescriptor has Module (557dbc1c-2a38-4c77-8544-264a95307980)
 		};
 		
 		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)

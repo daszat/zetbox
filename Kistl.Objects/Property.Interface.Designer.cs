@@ -66,9 +66,9 @@ namespace Kistl.App.Base
 			set;
 		}
         /// <summary>
-        /// The PresentableModel to use for values of this Property
+        /// The ViewModel to use for values of this Property
         /// </summary>
-		Kistl.App.GUI.PresentableModelDescriptor ValueModelDescriptor {
+		Kistl.App.GUI.ViewModelDescriptor ValueModelDescriptor {
 			get;
 			set;
 		}

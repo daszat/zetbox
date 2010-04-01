@@ -7,15 +7,15 @@
                    FontWeight="Bold"
                    HorizontalAlignment="Center">Available GUI Infrastructure</TextBlock>
         <DockPanel DockPanel.Dock="Top">
-            <TextBlock DockPanel.Dock="Top">PresentableModel Descriptors:</TextBlock>
+            <TextBlock DockPanel.Dock="Top">ViewModel Descriptors:</TextBlock>
             <ListView MaxHeight="200"
-                      ItemsSource="{Binding PresentableModelDescriptors}"
+                      ItemsSource="{Binding ViewModelDescriptors}"
                       ItemTemplateSelector="{StaticResource listItemTemplateSelector}"
-                      SelectedItem="{Binding SelectedPresentableModelDescriptor, UpdateSourceTrigger=PropertyChanged}" />
+                      SelectedItem="{Binding SelectedViewModelDescriptor, UpdateSourceTrigger=PropertyChanged}" />
         </DockPanel>
         <DockPanel DockPanel.Dock="Top">
             <TextBox DockPanel.Dock="Left">Default visual type:</TextBox>
-            <ContentPresenter Content="{Binding SelectedPresentableModelDescriptor.DefaultVisualType}" />
+            <ContentPresenter Content="{Binding SelectedViewModelDescriptor.DefaultVisualType}" />
         </DockPanel>
         <ListView DockPanel.Dock="Top"
                   MaxHeight="200"

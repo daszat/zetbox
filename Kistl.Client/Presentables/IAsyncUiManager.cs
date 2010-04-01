@@ -11,7 +11,7 @@ namespace Kistl.Client.Presentables
 
     /// <summary>
     /// The ThreadManager takes care of executing task on a specific Thread.
-    /// This is a necessary abstraction to decouple the <see cref="PresentableModel"/>s
+    /// This is a necessary abstraction to decouple the <see cref="ViewModel"/>s
     /// from the underlying Toolkit.
     /// 
     /// Implementations are allowed to execute tasks in a blocking fashion on the calling Thread 

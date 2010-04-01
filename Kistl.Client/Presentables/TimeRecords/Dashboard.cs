@@ -14,7 +14,7 @@ namespace Kistl.Client.Presentables.TimeRecords
     /// An executive summary of the Time Records module's data.
     /// </summary>
     public class Dashboard
-        : PresentableModel
+        : ViewModel
     {
         /// <summary>
         /// Initializes a new instance of the Dashboard class.

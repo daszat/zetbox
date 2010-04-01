@@ -30,14 +30,14 @@ namespace Kistl.Client.Presentables.ModuleEditor
             get { return "Module Editor Workspace"; }
         }
 
-        private ReadOnlyObservableCollection<PresentableModel> _TreeItems = null;
-        public ReadOnlyObservableCollection<PresentableModel> TreeItems
+        private ReadOnlyObservableCollection<ViewModel> _TreeItems = null;
+        public ReadOnlyObservableCollection<ViewModel> TreeItems
         {
             get
             {
                 if (_TreeItems == null)
                 {
-                    var lst = new ObservableCollection<PresentableModel>();
+                    var lst = new ObservableCollection<ViewModel>();
                     // ObjectClass
                     lst.Add(new ObjectClassDashboardModel(AppContext, DataContext, CurrentModule, DataContext.FindPersistenceObject<ObjectClass>(new Guid("20888DFC-1FBC-47C8-9F3C-C6A30A5C0048"))));
                     // Enumeration
@@ -47,14 +47,14 @@ namespace Kistl.Client.Presentables.ModuleEditor
                     // Assemblies
                     lst.Add(new AssemblyDashboardModel(AppContext, DataContext, CurrentModule, DataContext.FindPersistenceObject<ObjectClass>(new Guid("A590A975-66E5-421C-AA97-7AB3169E0E9B"))));
 
-                    _TreeItems = new ReadOnlyObservableCollection<PresentableModel>(lst);
+                    _TreeItems = new ReadOnlyObservableCollection<ViewModel>(lst);
                 }
                 return _TreeItems;
             }
         }
 
-        private PresentableModel _selectedItem;
-        public PresentableModel SelectedItem
+        private ViewModel _selectedItem;
+        public ViewModel SelectedItem
         {
             get
             {

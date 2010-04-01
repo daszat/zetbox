@@ -57,10 +57,10 @@ namespace Kistl.Client.Presentables
     }
 
     /// <summary>
-    /// A little PresentableModel to capture a simple command and provide infrastructure to give feedbck on the state of this command.
+    /// A little ViewModel to capture a simple command and provide infrastructure to give feedbck on the state of this command.
     /// </summary>
     public abstract class CommandModel
-        : PresentableModel, ICommand
+        : ViewModel, ICommand
     {
         /// <summary>
         /// Initializes a new instance of the CommandModel class.

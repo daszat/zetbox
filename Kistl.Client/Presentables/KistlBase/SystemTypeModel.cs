@@ -12,7 +12,7 @@ namespace Kistl.Client.Presentables.KistlBase
     /// Models a <see cref="System.Type"/>. Contains references to the Assembly and the respective TypeRef.
     /// </summary>
     public class SystemTypeModel
-        : PresentableModel
+        : ViewModel
     {
         private Type _type;
 

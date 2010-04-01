@@ -24,7 +24,7 @@ namespace Kistl.Client.WPF
 
             App.FixupDatabase();
 
-            PresentableModel initialWorkspace;
+            ViewModel initialWorkspace;
             if (_timeRecorder)
             {
                 initialWorkspace = appCtx.Factory.CreateSpecificModel<Kistl.Client.Presentables.TimeRecords.WorkEffortRecorderModel>(KistlContext.GetContext());

@@ -44,25 +44,25 @@ namespace Kistl.Client.Presentables.ObjectBrowser
         /// A collection of all applications, to display as entry 
         /// points.
         /// </summary>
-        public ObservableCollection<PresentableModel> Applications
+        public ObservableCollection<ViewModel> Applications
         {
             get
             {
                 if (_applicationsCache == null)
                 {
-                    _applicationsCache = new ObservableCollection<PresentableModel>();
+                    _applicationsCache = new ObservableCollection<ViewModel>();
                     LoadApplications();
                 }
                 return _applicationsCache;
             }
         }
-        private ObservableCollection<PresentableModel> _applicationsCache;
+        private ObservableCollection<ViewModel> _applicationsCache;
 
-        private PresentableModel _selectedItem;
+        private ViewModel _selectedItem;
         /// <summary>
-        /// The last selected PresentableModel.
+        /// The last selected ViewModel.
         /// </summary>
-        public PresentableModel SelectedItem
+        public ViewModel SelectedItem
         {
             get
             {

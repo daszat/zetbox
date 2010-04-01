@@ -616,15 +616,6 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="PresentableModelDescriptor">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.PresentableModelDescriptor)">
-	    <MappingFragment StoreEntitySet="PresentableModelDescriptor">
-	      <ScalarProperty Name="ID" ColumnName="ID" />
-<ScalarProperty Name="Description" ColumnName="Description" />
-<ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
-	    </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Projekt">
       <EntityTypeMapping TypeName="IsTypeOf(Model.Projekt)">
 	    <MappingFragment StoreEntitySet="Projekt">
@@ -899,6 +890,15 @@
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
 <ScalarProperty Name="Toolkit__Implementation__" ColumnName="Toolkit" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ViewModelDescriptor">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.ViewModelDescriptor)">
+	    <MappingFragment StoreEntitySet="ViewModelDescriptor">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="Description" ColumnName="Description" />
+<ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1248,13 +1248,13 @@
 
     <!--
     Relation: FK_Presentable_displayedBy_SecondaryControlKinds
-    A: ZeroOrMore PresentableModelDescriptor as Presentable
+    A: ZeroOrMore ViewModelDescriptor as Presentable
     B: ZeroOrMore ControlKind as SecondaryControlKinds
     Preferred Storage: Separate
     -->
-    <EntitySetMapping Name="PresentableModelDescriptor_displayedBy_ControlKind_RelationEntry">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.PresentableModelDescriptor_displayedBy_ControlKind_RelationEntry)">
-        <MappingFragment StoreEntitySet="PresentableModelDescriptor_displayedBy_ControlKind_RelationEntry">
+    <EntitySetMapping Name="ViewModelDescriptor_displayedBy_ControlKind_RelationEntry">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.ViewModelDescriptor_displayedBy_ControlKind_RelationEntry)">
+        <MappingFragment StoreEntitySet="ViewModelDescriptor_displayedBy_ControlKind_RelationEntry">
           <ScalarProperty Name="ID" ColumnName="ID" />
 		  <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
         </MappingFragment>
@@ -1263,7 +1263,7 @@
     <!-- A to CollectionEntry -->
     <AssociationSetMapping Name="FK_Presentable_displayedBy_SecondaryControlKinds_A"
                            TypeName="Model.FK_Presentable_displayedBy_SecondaryControlKinds_A"
-                           StoreEntitySet="PresentableModelDescriptor_displayedBy_ControlKind_RelationEntry" >
+                           StoreEntitySet="ViewModelDescriptor_displayedBy_ControlKind_RelationEntry" >
       <EndProperty Name="Presentable">
         <ScalarProperty Name="ID" ColumnName="fk_Presentable"/>
       </EndProperty>
@@ -1275,7 +1275,7 @@
     <!-- B to CollectionEntry -->
     <AssociationSetMapping Name="FK_Presentable_displayedBy_SecondaryControlKinds_B"
                            TypeName="Model.FK_Presentable_displayedBy_SecondaryControlKinds_B"
-                           StoreEntitySet="PresentableModelDescriptor_displayedBy_ControlKind_RelationEntry" >
+                           StoreEntitySet="ViewModelDescriptor_displayedBy_ControlKind_RelationEntry" >
       <EndProperty Name="SecondaryControlKinds">
         <ScalarProperty Name="ID" ColumnName="fk_SecondaryControlKinds"/>
       </EndProperty>
@@ -2149,21 +2149,21 @@
       <Condition ColumnName="fk_CreatedBy" IsNull="false"/>
     </AssociationSetMapping>
     <!--
-    Relation: FK_Descriptor_has_PresentableModelRef
-    A: ZeroOrMore PresentableModelDescriptor as Descriptor
-    B: One TypeRef as PresentableModelRef
+    Relation: FK_Descriptor_has_ViewModelRef
+    A: ZeroOrMore ViewModelDescriptor as Descriptor
+    B: One TypeRef as ViewModelRef
     Preferred Storage: MergeIntoA
     -->
-    <AssociationSetMapping Name="FK_Descriptor_has_PresentableModelRef"
-                           TypeName="Model.FK_Descriptor_has_PresentableModelRef"
-                           StoreEntitySet="PresentableModelDescriptor" >
-      <EndProperty Name="PresentableModelRef">
-        <ScalarProperty Name="ID" ColumnName="fk_PresentableModelRef"/>
+    <AssociationSetMapping Name="FK_Descriptor_has_ViewModelRef"
+                           TypeName="Model.FK_Descriptor_has_ViewModelRef"
+                           StoreEntitySet="ViewModelDescriptor" >
+      <EndProperty Name="ViewModelRef">
+        <ScalarProperty Name="ID" ColumnName="fk_ViewModelRef"/>
       </EndProperty>
       <EndProperty Name="Descriptor">
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
-      <Condition ColumnName="fk_PresentableModelRef" IsNull="false"/>
+      <Condition ColumnName="fk_ViewModelRef" IsNull="false"/>
     </AssociationSetMapping>
     <!--
     Relation: FK_Document_was_ChangedBy
@@ -2966,13 +2966,13 @@
     </AssociationSetMapping>
     <!--
     Relation: FK_Presentable_has_DefaultKind
-    A: ZeroOrOne PresentableModelDescriptor as Presentable
+    A: ZeroOrOne ViewModelDescriptor as Presentable
     B: ZeroOrOne ControlKind as DefaultKind
     Preferred Storage: MergeIntoA
     -->
     <AssociationSetMapping Name="FK_Presentable_has_DefaultKind"
                            TypeName="Model.FK_Presentable_has_DefaultKind"
-                           StoreEntitySet="PresentableModelDescriptor" >
+                           StoreEntitySet="ViewModelDescriptor" >
       <EndProperty Name="DefaultKind">
         <ScalarProperty Name="ID" ColumnName="fk_DefaultKind"/>
       </EndProperty>
@@ -2982,55 +2982,21 @@
       <Condition ColumnName="fk_DefaultKind" IsNull="false"/>
     </AssociationSetMapping>
     <!--
-    Relation: FK_Presentable_has_DefaultPresentableModelDescriptor
+    Relation: FK_Presentable_has_DefaultViewModelDescriptor
     A: ZeroOrMore ObjectClass as Presentable
-    B: One PresentableModelDescriptor as DefaultPresentableModelDescriptor
+    B: One ViewModelDescriptor as DefaultViewModelDescriptor
     Preferred Storage: MergeIntoA
     -->
-    <AssociationSetMapping Name="FK_Presentable_has_DefaultPresentableModelDescriptor"
-                           TypeName="Model.FK_Presentable_has_DefaultPresentableModelDescriptor"
+    <AssociationSetMapping Name="FK_Presentable_has_DefaultViewModelDescriptor"
+                           TypeName="Model.FK_Presentable_has_DefaultViewModelDescriptor"
                            StoreEntitySet="ObjectClass" >
-      <EndProperty Name="DefaultPresentableModelDescriptor">
-        <ScalarProperty Name="ID" ColumnName="fk_DefaultPresentableModelDescriptor"/>
+      <EndProperty Name="DefaultViewModelDescriptor">
+        <ScalarProperty Name="ID" ColumnName="fk_DefaultViewModelDescriptor"/>
       </EndProperty>
       <EndProperty Name="Presentable">
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
-      <Condition ColumnName="fk_DefaultPresentableModelDescriptor" IsNull="false"/>
-    </AssociationSetMapping>
-    <!--
-    Relation: FK_PresentableModelDescriptor_displayedInGridBy_DefaultGridCellKind
-    A: ZeroOrOne PresentableModelDescriptor as PresentableModelDescriptor
-    B: ZeroOrOne ControlKind as DefaultGridCellKind
-    Preferred Storage: MergeIntoA
-    -->
-    <AssociationSetMapping Name="FK_PresentableModelDescriptor_displayedInGridBy_DefaultGridCellKind"
-                           TypeName="Model.FK_PresentableModelDescriptor_displayedInGridBy_DefaultGridCellKind"
-                           StoreEntitySet="PresentableModelDescriptor" >
-      <EndProperty Name="DefaultGridCellKind">
-        <ScalarProperty Name="ID" ColumnName="fk_DefaultGridCellKind"/>
-      </EndProperty>
-      <EndProperty Name="PresentableModelDescriptor">
-        <ScalarProperty Name="ID" ColumnName="ID"/>
-      </EndProperty>
-      <Condition ColumnName="fk_DefaultGridCellKind" IsNull="false"/>
-    </AssociationSetMapping>
-    <!--
-    Relation: FK_PresentableModelDescriptor_has_Module
-    A: ZeroOrMore PresentableModelDescriptor as PresentableModelDescriptor
-    B: One Module as Module
-    Preferred Storage: MergeIntoA
-    -->
-    <AssociationSetMapping Name="FK_PresentableModelDescriptor_has_Module"
-                           TypeName="Model.FK_PresentableModelDescriptor_has_Module"
-                           StoreEntitySet="PresentableModelDescriptor" >
-      <EndProperty Name="Module">
-        <ScalarProperty Name="ID" ColumnName="fk_Module"/>
-      </EndProperty>
-      <EndProperty Name="PresentableModelDescriptor">
-        <ScalarProperty Name="ID" ColumnName="ID"/>
-      </EndProperty>
-      <Condition ColumnName="fk_Module" IsNull="false"/>
+      <Condition ColumnName="fk_DefaultViewModelDescriptor" IsNull="false"/>
     </AssociationSetMapping>
     <!--
     Relation: FK_Projekt_has_Auftraege
@@ -3120,7 +3086,7 @@
     <!--
     Relation: FK_Property_has_ValueModelDescriptor
     A: ZeroOrMore Property as Property
-    B: One PresentableModelDescriptor as ValueModelDescriptor
+    B: One ViewModelDescriptor as ValueModelDescriptor
     Preferred Storage: MergeIntoA
     -->
     <AssociationSetMapping Name="FK_Property_has_ValueModelDescriptor"
@@ -3555,6 +3521,40 @@
         <ScalarProperty Name="ID" ColumnName="fk_Module"/>
       </EndProperty>
       <EndProperty Name="ViewDescriptor">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_Module" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_ViewModelDescriptor_displayedInGridBy_DefaultGridCellKind
+    A: ZeroOrOne ViewModelDescriptor as ViewModelDescriptor
+    B: ZeroOrOne ControlKind as DefaultGridCellKind
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_ViewModelDescriptor_displayedInGridBy_DefaultGridCellKind"
+                           TypeName="Model.FK_ViewModelDescriptor_displayedInGridBy_DefaultGridCellKind"
+                           StoreEntitySet="ViewModelDescriptor" >
+      <EndProperty Name="DefaultGridCellKind">
+        <ScalarProperty Name="ID" ColumnName="fk_DefaultGridCellKind"/>
+      </EndProperty>
+      <EndProperty Name="ViewModelDescriptor">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_DefaultGridCellKind" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_ViewModelDescriptor_has_Module
+    A: ZeroOrMore ViewModelDescriptor as ViewModelDescriptor
+    B: One Module as Module
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_ViewModelDescriptor_has_Module"
+                           TypeName="Model.FK_ViewModelDescriptor_has_Module"
+                           StoreEntitySet="ViewModelDescriptor" >
+      <EndProperty Name="Module">
+        <ScalarProperty Name="ID" ColumnName="fk_Module"/>
+      </EndProperty>
+      <EndProperty Name="ViewModelDescriptor">
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="fk_Module" IsNull="false"/>

@@ -8,7 +8,7 @@ namespace Kistl.Client.Presentables
     // TODO: Make that easier
     public interface IMultipleInstancesManager
     {
-        PresentableModel SelectedItem { get; set; }
-        void HistoryTouch(PresentableModel mdl);
+        ViewModel SelectedItem { get; set; }
+        void HistoryTouch(ViewModel mdl);
     }
 }

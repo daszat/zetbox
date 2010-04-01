@@ -31,7 +31,7 @@ namespace Kistl.Client.ASPNET.Toolkit.View
 
         protected void repProperties_OnItemDataBound(object sender, RepeaterItemEventArgs e)
         {
-            PresentableModel mdl = (PresentableModel)e.Item.DataItem;
+            ViewModel mdl = (ViewModel)e.Item.DataItem;
             Control divPlaceHolder = e.Item.FindControl("divPlaceHolder");
 
             GuiApplicationContext.Current.Factory.CreateDefaultView(mdl, divPlaceHolder);

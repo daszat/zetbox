@@ -10,7 +10,7 @@ using System.ComponentModel;
 namespace Kistl.Client.Presentables
 {
     public class ActionModel
-        : PresentableModel
+        : ViewModel
     {
         public ActionModel(
             IGuiApplicationContext appCtx, IKistlContext dataCtx,

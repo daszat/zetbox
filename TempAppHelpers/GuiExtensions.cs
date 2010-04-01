@@ -18,14 +18,14 @@ namespace Kistl.App.Extensions
     public static class GuiExtensions
     {
         /// <summary>
-        /// Looks up the default ViewDesriptor matching the PresentableModel and Toolkit; 
-        /// uses the PresentableModelDescriptor's DefaultVisualType
+        /// Looks up the default ViewDesriptor matching the ViewModel and Toolkit; 
+        /// uses the ViewModelDescriptor's DefaultVisualType
         /// </summary>
-        /// <param name="pmd">the specified PresentableModelDescriptor</param>
+        /// <param name="pmd">the specified ViewModelDescriptor</param>
         /// <param name="tk">the specified Toolkit</param>
-        /// <returns>the default ViewDescriptor to display this PresentableModel with this Toolkit</returns>
+        /// <returns>the default ViewDescriptor to display this ViewModel with this Toolkit</returns>
         public static ViewDescriptor GetDefaultViewDescriptor(
-            this PresentableModelDescriptor pmd,
+            this ViewModelDescriptor pmd,
             Toolkit tk)
         {
             var defaultKind = GetDefaultKind(pmd);
@@ -35,27 +35,27 @@ namespace Kistl.App.Extensions
             }
             else
             {
-                Logging.Log.WarnFormat("No default control kind for {0} found.", pmd.PresentableModelRef.ToString());
+                Logging.Log.WarnFormat("No default control kind for {0} found.", pmd.ViewModelRef.ToString());
                 return null;
             }
         }
 
         /// <summary>
-        /// Returns the default control kind of a given PresentableModelDescriptor.
+        /// Returns the default control kind of a given ViewModelDescriptor.
         /// </summary>
         /// <param name="pmd"></param>
         /// <returns></returns>
-        public static ControlKind GetDefaultKind(this PresentableModelDescriptor pmd)
+        public static ControlKind GetDefaultKind(this ViewModelDescriptor pmd)
         {
             return pmd.AndParents().Select(p => p.DefaultKind).FirstOrDefault(dk => dk != null);
         }
 
         /// <summary>
-        /// Returns the default control kind for use in grid cells of a given PresentableModelDescriptor.
+        /// Returns the default control kind for use in grid cells of a given ViewModelDescriptor.
         /// </summary>
         /// <param name="pmd"></param>
         /// <returns></returns>
-        public static ControlKind GetDefaultGridCellKind(this PresentableModelDescriptor pmd)
+        public static ControlKind GetDefaultGridCellKind(this ViewModelDescriptor pmd)
         {
             return pmd.AndParents().Select(p => p.DefaultGridCellKind).FirstOrDefault(dk => dk != null) ?? pmd.GetDefaultKind();
         }
@@ -70,7 +70,7 @@ namespace Kistl.App.Extensions
         /// <param name="ck"></param>
         /// <returns></returns>
         public static ViewDescriptor GetViewDescriptor(
-            this PresentableModelDescriptor self,
+            this ViewModelDescriptor self,
             Toolkit tk,
             ControlKind ck)
         {
@@ -84,18 +84,18 @@ namespace Kistl.App.Extensions
         }
 
         /// <summary>
-        /// Returns a list of the specified PresentableModelDescriptor and its parents descriptors.
+        /// Returns a list of the specified ViewModelDescriptor and its parents descriptors.
         /// </summary>
-        /// <param name="pmd">the PresentableModelDescriptor to inspect</param>
-        /// <returns>a list, containing the requested PresentableModelDescriptors sorted by ascending inheritance</returns>
-        public static List<PresentableModelDescriptor> AndParents(this PresentableModelDescriptor pmd)
+        /// <param name="pmd">the ViewModelDescriptor to inspect</param>
+        /// <returns>a list, containing the requested ViewModelDescriptors sorted by ascending inheritance</returns>
+        public static List<ViewModelDescriptor> AndParents(this ViewModelDescriptor pmd)
         {
-            var result = new List<PresentableModelDescriptor>();
+            var result = new List<ViewModelDescriptor>();
             result.Add(pmd);
-            var parent = pmd.PresentableModelRef.Parent;
+            var parent = pmd.ViewModelRef.Parent;
             while (parent != null)
             {
-                var parentDescriptor = parent.GetPresentableModelDescriptor();
+                var parentDescriptor = parent.GetViewModelDescriptor();
                 if (parentDescriptor != null)
                 {
                     result.Add(parentDescriptor);
@@ -105,13 +105,13 @@ namespace Kistl.App.Extensions
             return result;
         }
 
-        public static PresentableModelDescriptor GetPresentableModelDescriptor(this TypeRef tr)
+        public static ViewModelDescriptor GetViewModelDescriptor(this TypeRef tr)
         {
             if (tr == null) { throw new ArgumentNullException("tr"); }
 
             PrimeCaches(null);
 
-            PresentableModelDescriptor result = null;
+            ViewModelDescriptor result = null;
             while (result == null && tr != null)
             {
                 if (_pmdCache.ContainsKey(tr.ID))
@@ -123,7 +123,7 @@ namespace Kistl.App.Extensions
             return result;
         }
 
-        private static Dictionary<int, PresentableModelDescriptor> _pmdCache = null;
+        private static Dictionary<int, ViewModelDescriptor> _pmdCache = null;
         private static Dictionary<Toolkit, ViewDescriptorCache> _viewCaches = new Dictionary<Toolkit, ViewDescriptorCache>();
 
 
@@ -131,7 +131,7 @@ namespace Kistl.App.Extensions
         {
             if (_pmdCache == null)
             {
-                _pmdCache = GetPresentableModelDescriptorByTypeRefCache();
+                _pmdCache = GetViewModelDescriptorByTypeRefCache();
             }
             if (tk.HasValue)
             {
@@ -147,11 +147,11 @@ namespace Kistl.App.Extensions
             }
         }
 
-        private static Dictionary<int, PresentableModelDescriptor> GetPresentableModelDescriptorByTypeRefCache()
+        private static Dictionary<int, ViewModelDescriptor> GetViewModelDescriptorByTypeRefCache()
         {
             return FrozenContext.Single
-                .GetQuery<PresentableModelDescriptor>()
-                .ToDictionary(obj => obj.PresentableModelRef.ID);
+                .GetQuery<ViewModelDescriptor>()
+                .ToDictionary(obj => obj.ViewModelRef.ID);
         }
     }
 

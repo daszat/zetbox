@@ -21,15 +21,15 @@ namespace Kistl.Client.ASPNET.Toolkit.View
 
         public string ModelPath { get; set; }
 
-        private PresentableModel _Model = null;
+        private ViewModel _Model = null;
 
-        public virtual void SetModel(PresentableModel mdl)
+        public virtual void SetModel(ViewModel mdl)
         {
             if (!(mdl is T)) throw new ArgumentOutOfRangeException("mdl", "Incompatible Model was set");
             _Model = mdl;
         }
 
-        public PresentableModel GetModel()
+        public ViewModel GetModel()
         {
             if (ApplicationContext.Current == null) return null; // Designmode
             if (_Model == null && !string.IsNullOrEmpty(ModelPath))
@@ -44,7 +44,7 @@ namespace Kistl.Client.ASPNET.Toolkit.View
                         object mdl = view.GetModel().GetPropertyValue<object>(ModelPath);
                         if (mdl is T)
                         {
-                            _Model = (PresentableModel)mdl;
+                            _Model = (ViewModel)mdl;
                             break;
                         }
                     }

@@ -27,7 +27,7 @@ namespace Kistl.Client.WPF.View.ModuleEditor
 
         private void TreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            var item = NavTree.SelectedItem as Kistl.Client.Presentables.PresentableModel;
+            var item = NavTree.SelectedItem as Kistl.Client.Presentables.ViewModel;
             if (item != null)
             {
                 this.ViewModel.SelectedItem = item;

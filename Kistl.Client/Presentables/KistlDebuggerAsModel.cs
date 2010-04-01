@@ -11,7 +11,7 @@ namespace Kistl.Client.Presentables
 {
 
     public class KistlDebuggerAsModel 
-        : PresentableModel, IKistlContextDebugger
+        : ViewModel, IKistlContextDebugger
     {
 
         public KistlDebuggerAsModel(IGuiApplicationContext appCtx, IDebuggingKistlContext dataCtx)
@@ -136,7 +136,7 @@ namespace Kistl.Client.Presentables
     }
 
     public class KistlContextModel
-        : PresentableModel
+        : ViewModel
     {
 
         protected IDebuggingKistlContext DebuggingContext { get; private set; }

@@ -52,7 +52,7 @@ namespace Kistl.Client.ASPNET.Toolkit.View
             }
         }
 
-        public override void SetModel(PresentableModel mdl)
+        public override void SetModel(ViewModel mdl)
         {
             base.SetModel(mdl);
             Model.RecentObjects.CollectionChanged += new System.Collections.Specialized.NotifyCollectionChangedEventHandler(RecentObjects_CollectionChanged);

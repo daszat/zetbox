@@ -35,7 +35,7 @@ namespace Kistl.Client.WPF.View.ObjectBrowser
 
         private void ModuleTreeSelectedItemChangedHandler(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            var item = ObjectTree.SelectedItem as Kistl.Client.Presentables.PresentableModel;
+            var item = ObjectTree.SelectedItem as Kistl.Client.Presentables.ViewModel;
             if (item != null)
             {
                 this.ViewModel.SelectedItem = item;

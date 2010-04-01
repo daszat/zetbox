@@ -870,13 +870,13 @@ namespace Kistl.App.Base
 			// rel: ClrObjectParameter isOf Type (4c7e0ac7-eb8a-4304-85e7-fcc358cb639c)
 			// rel: ConstraintInvocation has TypeRef (ed423e87-e04d-4753-ba99-c186a7a12242)
 			// rel: MethodInvocation has Implementor (dc9013af-8758-40b4-8f52-c2c8683a13e0)
-			// rel: Descriptor has PresentableModelRef (9d771d87-3b28-4e5e-be33-ea71028e1720)
 			// rel: PropertyInvocation has Implementor (7fa78e0e-c9bb-4ce2-ae74-262174f48b45)
 			// rel: TypeRef has Assembly (c10b1abc-3786-40f6-8c8c-dccdd8dc03ef)
 			// rel: Child has Parent (2094dc91-456b-4cdf-ac0c-bf97f5c85a7e)
 			// rel: TypeRef was CreatedBy (18ca9bcf-98f8-42b1-8280-649401dec9de)
 			// rel: TypeRef was ChangedBy (b027e54e-632d-43ef-a83f-9d017717a9da)
 			// rel: View has ControlRef (6c1c4c7c-7f0c-4c80-a937-ed6af8774d3f)
+			// rel: Descriptor has ViewModelRef (9d771d87-3b28-4e5e-be33-ea71028e1720)
 		};
 		
 		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)

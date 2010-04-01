@@ -17,12 +17,12 @@ namespace Kistl.Client.Presentables
     }
 
     /// <summary>
-    /// A base class for implementing the PresentableModel pattern. This class proxies the actual
+    /// A base class for implementing the ViewModel pattern. This class proxies the actual
     /// data model into a non-blocking, view-state holding entity. Unless noted differently, members
     /// are not thread-safe and may only be called from the UI thread.
     /// </summary>
     /// See http://blogs.msdn.com/dancre/archive/2006/10/11/datamodel-view-viewmodel-pattern-series.aspx
-    public abstract class PresentableModel : INotifyPropertyChanged
+    public abstract class ViewModel : INotifyPropertyChanged
     {
         /// <summary>
         /// This application's global context
@@ -55,7 +55,7 @@ namespace Kistl.Client.Presentables
 
         /// <param name="appCtx">The <see cref="IGuiApplicationContext"/> to access the current application context</param>
         /// <param name="dataCtx">The <see cref="IKistlContext"/> to access the current user's data session</param>
-        protected PresentableModel(IGuiApplicationContext appCtx, IKistlContext dataCtx)
+        protected ViewModel(IGuiApplicationContext appCtx, IKistlContext dataCtx)
         {
             IsInDesignMode = false;
 
@@ -120,11 +120,11 @@ namespace Kistl.Client.Presentables
         #region Design Mode 
         
         /// <summary>
-        /// Creates a PresentableModel in "design" mode
+        /// Creates a ViewModel in "design" mode
         /// </summary>
         /// <param name="designMode">always must be true</param>
         /// <seealso cref="IsInDesignMode"/>
-        protected PresentableModel(bool designMode)
+        protected ViewModel(bool designMode)
         {
             if (!designMode)
             {

@@ -18,20 +18,20 @@ namespace Kistl.Client.Presentables.ObjectEditor
         public WorkspaceViewModel(IGuiApplicationContext appCtx, IKistlContext dataCtx)
             : base(appCtx, dataCtx)
         {
-            RecentObjects = new ObservableCollection<PresentableModel>();
+            RecentObjects = new ObservableCollection<ViewModel>();
         }
 
         #region Data
         /// <summary>
         /// A list of "active" <see cref="IDataObject"/>s
         /// </summary>
-        public ObservableCollection<PresentableModel> RecentObjects { get; private set; }
+        public ObservableCollection<ViewModel> RecentObjects { get; private set; }
 
-        private PresentableModel _selectedItem;
+        private ViewModel _selectedItem;
         /// <summary>
-        /// The last selected PresentableModel.
+        /// The last selected ViewModel.
         /// </summary>
-        public PresentableModel SelectedItem
+        public ViewModel SelectedItem
         {
             get
             {
@@ -97,7 +97,7 @@ namespace Kistl.Client.Presentables.ObjectEditor
         /// registers a user contact with the mdl in this <see cref="WorkspaceViewModel"/>'s history
         /// </summary>
         /// <param name="mdl"></param>
-        public void HistoryTouch(PresentableModel mdl)
+        public void HistoryTouch(ViewModel mdl)
         {
             // fetch old SelectedItem to reestablish selection after modifying RecentObjects
             var item = SelectedItem;

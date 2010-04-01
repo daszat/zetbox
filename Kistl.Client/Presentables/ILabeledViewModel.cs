@@ -13,6 +13,6 @@ namespace Kistl.Client.Presentables
         string Label { get; }
         string ToolTip { get; }
         ControlKind RequestedKind { get; }
-        PresentableModel Model { get; }
+        ViewModel Model { get; }
     }
 }

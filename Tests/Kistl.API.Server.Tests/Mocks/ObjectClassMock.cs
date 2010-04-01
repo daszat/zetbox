@@ -24,7 +24,7 @@ namespace Kistl.API.Server.Mocks
             get { throw new NotImplementedException(); }
         }
 
-        public Kistl.App.GUI.PresentableModelDescriptor DefaultPresentableModelDescriptor
+        public Kistl.App.GUI.ViewModelDescriptor DefaultViewModelDescriptor
         {
             get;
             set;

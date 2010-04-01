@@ -18,51 +18,51 @@ namespace Kistl.Client.WPF.View
     using Kistl.Client.Presentables;
 
     /// <summary>
-    /// A <see cref="DataTemplateSelector"/> to choose the appropriate view for a specified <see cref="PresentableModel"/>.
+    /// A <see cref="DataTemplateSelector"/> to choose the appropriate view for a specified <see cref="ViewModel"/>.
     /// </summary>
     public class VisualTypeTemplateSelector
         : DataTemplateSelector
     {
         /// <summary>
         /// The core method of this class. Chooses the appropriate 
-        /// view for a specified <see cref="PresentableModel"/> 
+        /// view for a specified <see cref="ViewModel"/> 
         /// according to the specified parameters.
         /// </summary>
         /// <param name="mdl">the model to display</param>
         /// <param name="controlKindClassName">which kind of view to use</param>
         /// <returns>a DataTemplate capable of displaying the specified model</returns>
-        public static DataTemplate SelectTemplate(PresentableModel mdl, string controlKindClassName)
+        public static DataTemplate SelectTemplate(ViewModel mdl, string controlKindClassName)
         {
             if (mdl == null) { throw new ArgumentNullException("mdl"); }
 
-            PresentableModelDescriptor pmd = mdl.GetType().ToRef(FrozenContext.Single).GetPresentableModelDescriptor();
+            ViewModelDescriptor pmd = mdl.GetType().ToRef(FrozenContext.Single).GetViewModelDescriptor();
             if (pmd == null)
             {
-                Logging.Log.ErrorFormat("No matching PresentableModelDescriptor found for {0}", mdl.GetType());
+                Logging.Log.ErrorFormat("No matching ViewModelDescriptor found for {0}", mdl.GetType());
                 return null;
             }
 
             return CreateTemplate(LookupSecondaryViewDescriptor(pmd, controlKindClassName));
         }
 
-        private static DataTemplate SelectTemplate(PresentableModel mdl, ControlKind controlKind)
+        private static DataTemplate SelectTemplate(ViewModel mdl, ControlKind controlKind)
         {
-            PresentableModelDescriptor pmd = mdl.GetType().ToRef(FrozenContext.Single).GetPresentableModelDescriptor();
+            ViewModelDescriptor pmd = mdl.GetType().ToRef(FrozenContext.Single).GetViewModelDescriptor();
             if (pmd == null)
             {
-                Logging.Log.ErrorFormat("No matching PresentableModelDescriptor found for {0}", mdl.GetType());
+                Logging.Log.ErrorFormat("No matching ViewModelDescriptor found for {0}", mdl.GetType());
                 return null;
             }
 
             return CreateTemplate(pmd.GetViewDescriptor(Toolkit.WPF, controlKind));
         }
 
-        private static DataTemplate SelectDefaultTemplate(PresentableModel mdl)
+        private static DataTemplate SelectDefaultTemplate(ViewModel mdl)
         {
-            PresentableModelDescriptor pmd = mdl.GetType().ToRef(FrozenContext.Single).GetPresentableModelDescriptor();
+            ViewModelDescriptor pmd = mdl.GetType().ToRef(FrozenContext.Single).GetViewModelDescriptor();
             if (pmd == null)
             {
-                Logging.Log.ErrorFormat("No matching PresentableModelDescriptor found for {0}", mdl.GetType());
+                Logging.Log.ErrorFormat("No matching ViewModelDescriptor found for {0}", mdl.GetType());
                 return null;
             }
 
@@ -97,7 +97,7 @@ namespace Kistl.Client.WPF.View
             return result;
         }
 
-        private static ViewDescriptor LookupSecondaryViewDescriptor(PresentableModelDescriptor pmd, string controlKindClassName)
+        private static ViewDescriptor LookupSecondaryViewDescriptor(ViewModelDescriptor pmd, string controlKindClassName)
         {
             ViewDescriptor visualDesc;
             if (String.IsNullOrEmpty(controlKindClassName))
@@ -115,9 +115,9 @@ namespace Kistl.Client.WPF.View
                 else
                 {
                     ControlKind controlKind = pmd.SecondaryControlKinds.Where(ck => ckcInterface.IsAssignableFrom(ck.GetInterfaceType())).SingleOrDefault();
-                    if (controlKind == null && pmd.PresentableModelRef.Parent != null)
+                    if (controlKind == null && pmd.ViewModelRef.Parent != null)
                     {
-                        var parentDescriptor = pmd.PresentableModelRef.Parent.GetPresentableModelDescriptor();
+                        var parentDescriptor = pmd.ViewModelRef.Parent.GetViewModelDescriptor();
                         if (parentDescriptor != null)
                         {
                             // recursively iterate up the inheritance tree
@@ -164,7 +164,7 @@ namespace Kistl.Client.WPF.View
 
             var rk = RequestedKind ?? GetRequestedKind(container);
 
-            var model = item as PresentableModel;
+            var model = item as ViewModel;
             DataTemplate result = null;
             if (model != null)
             {

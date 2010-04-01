@@ -70,8 +70,8 @@ namespace Kistl.Server.Packaging
 
             AddMetaObjects(result, ctx.GetQuery<Icon>().Where(i => i.Module.ID == moduleID)
                 .OrderBy(i => i.IconFile).ThenBy(i => i.ExportGuid));
-            AddMetaObjects(result, ctx.GetQuery<PresentableModelDescriptor>().Where(i => i.Module.ID == moduleID)
-                .OrderBy(i => i.PresentableModelRef.Assembly.Name).ThenBy(i => i.PresentableModelRef.FullName).ThenBy(i => i.ExportGuid));
+            AddMetaObjects(result, ctx.GetQuery<ViewModelDescriptor>().Where(i => i.Module.ID == moduleID)
+                .OrderBy(i => i.ViewModelRef.Assembly.Name).ThenBy(i => i.ViewModelRef.FullName).ThenBy(i => i.ExportGuid));
             AddMetaObjects(result, ctx.GetQuery<ViewDescriptor>().Where(i => i.Module.ID == moduleID)
                 .OrderBy(i => i.ControlRef.Assembly.Name).ThenBy(i => i.ControlRef.FullName).ThenBy(i => i.ExportGuid));
 
@@ -88,9 +88,9 @@ namespace Kistl.Server.Packaging
                 AddMetaObjects(result, ctx.GetQuery<ControlKind>()// TODO: .Where(i => i.Module.ID == moduleID)
                     .ToList().AsQueryable() // TODO: remove this workaround for GetInterfaceType()
                     .OrderBy(i => i.GetInterfaceType().Type.FullName).ThenBy(i => i.ExportGuid));
-                AddMetaObjects(result, ctx.GetPersistenceObjectQuery<PresentableModelDescriptor_displayedBy_ControlKind_RelationEntry>()
+                AddMetaObjects(result, ctx.GetPersistenceObjectQuery<ViewModelDescriptor_displayedBy_ControlKind_RelationEntry>()
                     .ToList().AsQueryable() // TODO: remove this workaround for GetType()
-                    .OrderBy(i => i.A.PresentableModelRef.Assembly.Name).ThenBy(i => i.A.PresentableModelRef.FullName)
+                    .OrderBy(i => i.A.ViewModelRef.Assembly.Name).ThenBy(i => i.A.ViewModelRef.FullName)
                     .ThenBy(i => i.B.GetType().FullName)
                     .ThenBy(i => i.A.ExportGuid).ThenBy(i => i.B.ExportGuid));
             }

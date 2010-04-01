@@ -74,7 +74,7 @@ namespace Kistl.Client.Presentables
     }
 
     public abstract class PropertyModel<TValue>
-        : PresentableModel, IPropertyValueModel, IDataErrorInfo
+        : ViewModel, IPropertyValueModel, IDataErrorInfo
     {
         protected PropertyModel(
             IGuiApplicationContext appCtx, IKistlContext dataCtx,
@@ -121,7 +121,7 @@ namespace Kistl.Client.Presentables
             get { return Label; }
         }
 
-        public PresentableModel Model
+        public ViewModel Model
         {
             get
             {

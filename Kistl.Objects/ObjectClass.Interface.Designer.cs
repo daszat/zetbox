@@ -31,9 +31,9 @@ namespace Kistl.App.Base
 
         ICollection<Kistl.App.Base.InstanceConstraint> Constraints { get; }
         /// <summary>
-        /// The default PresentableModel to use for this ObjectClass
+        /// The default ViewModel to use for this ObjectClass
         /// </summary>
-		Kistl.App.GUI.PresentableModelDescriptor DefaultPresentableModelDescriptor {
+		Kistl.App.GUI.ViewModelDescriptor DefaultViewModelDescriptor {
 			get;
 			set;
 		}

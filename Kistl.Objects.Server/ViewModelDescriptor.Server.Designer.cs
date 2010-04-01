@@ -22,12 +22,12 @@ namespace Kistl.App.GUI
     /// <summary>
     /// 
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="PresentableModelDescriptor")]
-    [System.Diagnostics.DebuggerDisplay("PresentableModelDescriptor")]
-    public class PresentableModelDescriptor__Implementation__ : BaseServerDataObject_EntityFramework, Kistl.API.IExportableInternal, PresentableModelDescriptor
+    [EdmEntityType(NamespaceName="Model", Name="ViewModelDescriptor")]
+    [System.Diagnostics.DebuggerDisplay("ViewModelDescriptor")]
+    public class ViewModelDescriptor__Implementation__ : BaseServerDataObject_EntityFramework, Kistl.API.IExportableInternal, ViewModelDescriptor
     {
     
-		public PresentableModelDescriptor__Implementation__()
+		public ViewModelDescriptor__Implementation__()
 		{
         }
 
@@ -61,8 +61,8 @@ namespace Kistl.App.GUI
         /// The default ControlKind for displaying this model in a GridCell
         /// </summary>
     /*
-    Relation: FK_PresentableModelDescriptor_displayedInGridBy_DefaultGridCellKind
-    A: ZeroOrOne PresentableModelDescriptor as PresentableModelDescriptor
+    Relation: FK_ViewModelDescriptor_displayedInGridBy_DefaultGridCellKind
+    A: ZeroOrOne ViewModelDescriptor as ViewModelDescriptor
     B: ZeroOrOne ControlKind as DefaultGridCellKind
     Preferred Storage: MergeIntoA
     */
@@ -89,14 +89,14 @@ namespace Kistl.App.GUI
         private int? _fk_DefaultGridCellKind;
         private Guid? _fk_guid_DefaultGridCellKind = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_PresentableModelDescriptor_displayedInGridBy_DefaultGridCellKind", "DefaultGridCellKind")]
+        [EdmRelationshipNavigationProperty("Model", "FK_ViewModelDescriptor_displayedInGridBy_DefaultGridCellKind", "DefaultGridCellKind")]
         public Kistl.App.GUI.ControlKind__Implementation__ DefaultGridCellKind__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.GUI.ControlKind__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.ControlKind__Implementation__>(
-                        "Model.FK_PresentableModelDescriptor_displayedInGridBy_DefaultGridCellKind",
+                        "Model.FK_ViewModelDescriptor_displayedInGridBy_DefaultGridCellKind",
                         "DefaultGridCellKind");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -117,7 +117,7 @@ namespace Kistl.App.GUI
             {
                 EntityReference<Kistl.App.GUI.ControlKind__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.ControlKind__Implementation__>(
-                        "Model.FK_PresentableModelDescriptor_displayedInGridBy_DefaultGridCellKind",
+                        "Model.FK_ViewModelDescriptor_displayedInGridBy_DefaultGridCellKind",
                         "DefaultGridCellKind");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -144,16 +144,16 @@ namespace Kistl.App.GUI
         }
         
         
-		public static event PropertyGetterHandler<Kistl.App.GUI.PresentableModelDescriptor, Kistl.App.GUI.ControlKind> OnDefaultGridCellKind_Getter;
-		public static event PropertyPreSetterHandler<Kistl.App.GUI.PresentableModelDescriptor, Kistl.App.GUI.ControlKind> OnDefaultGridCellKind_PreSetter;
-		public static event PropertyPostSetterHandler<Kistl.App.GUI.PresentableModelDescriptor, Kistl.App.GUI.ControlKind> OnDefaultGridCellKind_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.GUI.ViewModelDescriptor, Kistl.App.GUI.ControlKind> OnDefaultGridCellKind_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.GUI.ViewModelDescriptor, Kistl.App.GUI.ControlKind> OnDefaultGridCellKind_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.GUI.ViewModelDescriptor, Kistl.App.GUI.ControlKind> OnDefaultGridCellKind_PostSetter;
 
         /// <summary>
         /// The default ControlKind to use for this Presentable.
         /// </summary>
     /*
     Relation: FK_Presentable_has_DefaultKind
-    A: ZeroOrOne PresentableModelDescriptor as Presentable
+    A: ZeroOrOne ViewModelDescriptor as Presentable
     B: ZeroOrOne ControlKind as DefaultKind
     Preferred Storage: MergeIntoA
     */
@@ -235,12 +235,12 @@ namespace Kistl.App.GUI
         }
         
         
-		public static event PropertyGetterHandler<Kistl.App.GUI.PresentableModelDescriptor, Kistl.App.GUI.ControlKind> OnDefaultKind_Getter;
-		public static event PropertyPreSetterHandler<Kistl.App.GUI.PresentableModelDescriptor, Kistl.App.GUI.ControlKind> OnDefaultKind_PreSetter;
-		public static event PropertyPostSetterHandler<Kistl.App.GUI.PresentableModelDescriptor, Kistl.App.GUI.ControlKind> OnDefaultKind_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.GUI.ViewModelDescriptor, Kistl.App.GUI.ControlKind> OnDefaultKind_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.GUI.ViewModelDescriptor, Kistl.App.GUI.ControlKind> OnDefaultKind_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.GUI.ViewModelDescriptor, Kistl.App.GUI.ControlKind> OnDefaultKind_PostSetter;
 
         /// <summary>
-        /// describe this PresentableModel
+        /// describe this ViewModel
         /// </summary>
         // value type property
         [XmlIgnore()]
@@ -287,9 +287,9 @@ namespace Kistl.App.GUI
             }
         }
         private string _Description;
-		public static event PropertyGetterHandler<Kistl.App.GUI.PresentableModelDescriptor, string> OnDescription_Getter;
-		public static event PropertyPreSetterHandler<Kistl.App.GUI.PresentableModelDescriptor, string> OnDescription_PreSetter;
-		public static event PropertyPostSetterHandler<Kistl.App.GUI.PresentableModelDescriptor, string> OnDescription_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.GUI.ViewModelDescriptor, string> OnDescription_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.GUI.ViewModelDescriptor, string> OnDescription_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.GUI.ViewModelDescriptor, string> OnDescription_PostSetter;
 
         /// <summary>
         /// Export Guid
@@ -313,7 +313,7 @@ namespace Kistl.App.GUI
                         _isExportGuidSet = true;
                         __result = this._ExportGuid = (Guid)__p.DefaultValue.GetDefaultValue();
                     } else {
-                        Kistl.API.Utils.Logging.Log.Warn("Unable to get default value for property 'PresentableModelDescriptor.ExportGuid'");
+                        Kistl.API.Utils.Logging.Log.Warn("Unable to get default value for property 'ViewModelDescriptor.ExportGuid'");
                     }
                 }
                 if (OnExportGuid_Getter != null)
@@ -350,16 +350,16 @@ namespace Kistl.App.GUI
             }
         }
         private Guid _ExportGuid;
-		public static event PropertyGetterHandler<Kistl.App.GUI.PresentableModelDescriptor, Guid> OnExportGuid_Getter;
-		public static event PropertyPreSetterHandler<Kistl.App.GUI.PresentableModelDescriptor, Guid> OnExportGuid_PreSetter;
-		public static event PropertyPostSetterHandler<Kistl.App.GUI.PresentableModelDescriptor, Guid> OnExportGuid_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.GUI.ViewModelDescriptor, Guid> OnExportGuid_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.GUI.ViewModelDescriptor, Guid> OnExportGuid_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.GUI.ViewModelDescriptor, Guid> OnExportGuid_PostSetter;
 
         /// <summary>
         /// 
         /// </summary>
     /*
-    Relation: FK_PresentableModelDescriptor_has_Module
-    A: ZeroOrMore PresentableModelDescriptor as PresentableModelDescriptor
+    Relation: FK_ViewModelDescriptor_has_Module
+    A: ZeroOrMore ViewModelDescriptor as ViewModelDescriptor
     B: One Module as Module
     Preferred Storage: MergeIntoA
     */
@@ -386,14 +386,14 @@ namespace Kistl.App.GUI
         private int? _fk_Module;
         private Guid? _fk_guid_Module = null;
         // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_PresentableModelDescriptor_has_Module", "Module")]
+        [EdmRelationshipNavigationProperty("Model", "FK_ViewModelDescriptor_has_Module", "Module")]
         public Kistl.App.Base.Module__Implementation__ Module__Implementation__
         {
             get
             {
                 EntityReference<Kistl.App.Base.Module__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Module__Implementation__>(
-                        "Model.FK_PresentableModelDescriptor_has_Module",
+                        "Model.FK_ViewModelDescriptor_has_Module",
                         "Module");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -414,7 +414,7 @@ namespace Kistl.App.GUI
             {
                 EntityReference<Kistl.App.Base.Module__Implementation__> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Module__Implementation__>(
-                        "Model.FK_PresentableModelDescriptor_has_Module",
+                        "Model.FK_ViewModelDescriptor_has_Module",
                         "Module");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !r.IsLoaded)
@@ -441,107 +441,16 @@ namespace Kistl.App.GUI
         }
         
         
-		public static event PropertyGetterHandler<Kistl.App.GUI.PresentableModelDescriptor, Kistl.App.Base.Module> OnModule_Getter;
-		public static event PropertyPreSetterHandler<Kistl.App.GUI.PresentableModelDescriptor, Kistl.App.Base.Module> OnModule_PreSetter;
-		public static event PropertyPostSetterHandler<Kistl.App.GUI.PresentableModelDescriptor, Kistl.App.Base.Module> OnModule_PostSetter;
-
-        /// <summary>
-        /// The described CLR class&apos; reference
-        /// </summary>
-    /*
-    Relation: FK_Descriptor_has_PresentableModelRef
-    A: ZeroOrMore PresentableModelDescriptor as Descriptor
-    B: One TypeRef as PresentableModelRef
-    Preferred Storage: MergeIntoA
-    */
-        // object reference property
-   		// Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
-        // implement the user-visible interface
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Base.TypeRef PresentableModelRef
-        {
-            get
-            {
-                return PresentableModelRef__Implementation__;
-            }
-            set
-            {
-                // TODO: NotifyPropertyChanged()
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if(value != null && value.Context != this.Context) throw new WrongKistlContextException();
-                PresentableModelRef__Implementation__ = (Kistl.App.Base.TypeRef__Implementation__)value;
-            }
-        }
-        
-        private int? _fk_PresentableModelRef;
-        private Guid? _fk_guid_PresentableModelRef = null;
-        // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_Descriptor_has_PresentableModelRef", "PresentableModelRef")]
-        public Kistl.App.Base.TypeRef__Implementation__ PresentableModelRef__Implementation__
-        {
-            get
-            {
-                EntityReference<Kistl.App.Base.TypeRef__Implementation__> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.TypeRef__Implementation__>(
-                        "Model.FK_Descriptor_has_PresentableModelRef",
-                        "PresentableModelRef");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !r.IsLoaded)
-                {
-                    r.Load(); 
-                    if(r.Value != null) r.Value.AttachToContext(this.Context);
-                }
-                var __value = r.Value;
-				if(OnPresentableModelRef_Getter != null)
-				{
-					var e = new PropertyGetterEventArgs<Kistl.App.Base.TypeRef>(__value);
-					OnPresentableModelRef_Getter(this, e);
-					__value = (Kistl.App.Base.TypeRef__Implementation__)e.Result;
-				}
-                return __value;
-            }
-            set
-            {
-                EntityReference<Kistl.App.Base.TypeRef__Implementation__> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.TypeRef__Implementation__>(
-                        "Model.FK_Descriptor_has_PresentableModelRef",
-                        "PresentableModelRef");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !r.IsLoaded)
-                {
-                    r.Load(); 
-                }
-                Kistl.App.Base.TypeRef __oldValue = (Kistl.App.Base.TypeRef)r.Value;
-                Kistl.App.Base.TypeRef __newValue = (Kistl.App.Base.TypeRef)value;
-
-                if(OnPresentableModelRef_PreSetter != null)
-                {
-					var e = new PropertyPreSetterEventArgs<Kistl.App.Base.TypeRef>(__oldValue, __newValue);
-					OnPresentableModelRef_PreSetter(this, e);
-					__newValue = e.Result;
-                }
-                r.Value = (Kistl.App.Base.TypeRef__Implementation__)__newValue;
-                if(OnPresentableModelRef_PostSetter != null)
-                {
-					var e = new PropertyPostSetterEventArgs<Kistl.App.Base.TypeRef>(__oldValue, __newValue);
-					OnPresentableModelRef_PostSetter(this, e);
-                }
-                                
-            }
-        }
-        
-        
-		public static event PropertyGetterHandler<Kistl.App.GUI.PresentableModelDescriptor, Kistl.App.Base.TypeRef> OnPresentableModelRef_Getter;
-		public static event PropertyPreSetterHandler<Kistl.App.GUI.PresentableModelDescriptor, Kistl.App.Base.TypeRef> OnPresentableModelRef_PreSetter;
-		public static event PropertyPostSetterHandler<Kistl.App.GUI.PresentableModelDescriptor, Kistl.App.Base.TypeRef> OnPresentableModelRef_PostSetter;
+		public static event PropertyGetterHandler<Kistl.App.GUI.ViewModelDescriptor, Kistl.App.Base.Module> OnModule_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.GUI.ViewModelDescriptor, Kistl.App.Base.Module> OnModule_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.GUI.ViewModelDescriptor, Kistl.App.Base.Module> OnModule_PostSetter;
 
         /// <summary>
         /// 
         /// </summary>
     /*
     Relation: FK_Presentable_displayedBy_SecondaryControlKinds
-    A: ZeroOrMore PresentableModelDescriptor as Presentable
+    A: ZeroOrMore ViewModelDescriptor as Presentable
     B: ZeroOrMore ControlKind as SecondaryControlKinds
     Preferred Storage: Separate
     */
@@ -556,7 +465,7 @@ namespace Kistl.App.GUI
             {
                 if (_SecondaryControlKindsWrapper == null)
                 {
-                    _SecondaryControlKindsWrapper = new EntityRelationBSideCollectionWrapper<Kistl.App.GUI.PresentableModelDescriptor, Kistl.App.GUI.ControlKind, Kistl.App.GUI.PresentableModelDescriptor_displayedBy_ControlKind_RelationEntry__Implementation__>(
+                    _SecondaryControlKindsWrapper = new EntityRelationBSideCollectionWrapper<Kistl.App.GUI.ViewModelDescriptor, Kistl.App.GUI.ControlKind, Kistl.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntry__Implementation__>(
                             this,
                             SecondaryControlKinds__Implementation__);
                 }
@@ -565,12 +474,12 @@ namespace Kistl.App.GUI
         }
         
         [EdmRelationshipNavigationProperty("Model", "FK_Presentable_displayedBy_SecondaryControlKinds_A", "CollectionEntry")]
-        public EntityCollection<Kistl.App.GUI.PresentableModelDescriptor_displayedBy_ControlKind_RelationEntry__Implementation__> SecondaryControlKinds__Implementation__
+        public EntityCollection<Kistl.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntry__Implementation__> SecondaryControlKinds__Implementation__
         {
             get
             {
                 var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<Kistl.App.GUI.PresentableModelDescriptor_displayedBy_ControlKind_RelationEntry__Implementation__>(
+                    .GetRelatedCollection<Kistl.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntry__Implementation__>(
                         "Model.FK_Presentable_displayedBy_SecondaryControlKinds_A",
                         "CollectionEntry");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -581,133 +490,224 @@ namespace Kistl.App.GUI
                 return c;
             }
         }
-        private EntityRelationBSideCollectionWrapper<Kistl.App.GUI.PresentableModelDescriptor, Kistl.App.GUI.ControlKind, Kistl.App.GUI.PresentableModelDescriptor_displayedBy_ControlKind_RelationEntry__Implementation__> _SecondaryControlKindsWrapper;
+        private EntityRelationBSideCollectionWrapper<Kistl.App.GUI.ViewModelDescriptor, Kistl.App.GUI.ControlKind, Kistl.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntry__Implementation__> _SecondaryControlKindsWrapper;
 
+
+        /// <summary>
+        /// The described CLR class&apos; reference
+        /// </summary>
+    /*
+    Relation: FK_Descriptor_has_ViewModelRef
+    A: ZeroOrMore ViewModelDescriptor as Descriptor
+    B: One TypeRef as ViewModelRef
+    Preferred Storage: MergeIntoA
+    */
+        // object reference property
+   		// Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public Kistl.App.Base.TypeRef ViewModelRef
+        {
+            get
+            {
+                return ViewModelRef__Implementation__;
+            }
+            set
+            {
+                // TODO: NotifyPropertyChanged()
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if(value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                ViewModelRef__Implementation__ = (Kistl.App.Base.TypeRef__Implementation__)value;
+            }
+        }
+        
+        private int? _fk_ViewModelRef;
+        private Guid? _fk_guid_ViewModelRef = null;
+        // EF sees only this property
+        [EdmRelationshipNavigationProperty("Model", "FK_Descriptor_has_ViewModelRef", "ViewModelRef")]
+        public Kistl.App.Base.TypeRef__Implementation__ ViewModelRef__Implementation__
+        {
+            get
+            {
+                EntityReference<Kistl.App.Base.TypeRef__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.TypeRef__Implementation__>(
+                        "Model.FK_Descriptor_has_ViewModelRef",
+                        "ViewModelRef");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load(); 
+                    if(r.Value != null) r.Value.AttachToContext(this.Context);
+                }
+                var __value = r.Value;
+				if(OnViewModelRef_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<Kistl.App.Base.TypeRef>(__value);
+					OnViewModelRef_Getter(this, e);
+					__value = (Kistl.App.Base.TypeRef__Implementation__)e.Result;
+				}
+                return __value;
+            }
+            set
+            {
+                EntityReference<Kistl.App.Base.TypeRef__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.TypeRef__Implementation__>(
+                        "Model.FK_Descriptor_has_ViewModelRef",
+                        "ViewModelRef");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load(); 
+                }
+                Kistl.App.Base.TypeRef __oldValue = (Kistl.App.Base.TypeRef)r.Value;
+                Kistl.App.Base.TypeRef __newValue = (Kistl.App.Base.TypeRef)value;
+
+                if(OnViewModelRef_PreSetter != null)
+                {
+					var e = new PropertyPreSetterEventArgs<Kistl.App.Base.TypeRef>(__oldValue, __newValue);
+					OnViewModelRef_PreSetter(this, e);
+					__newValue = e.Result;
+                }
+                r.Value = (Kistl.App.Base.TypeRef__Implementation__)__newValue;
+                if(OnViewModelRef_PostSetter != null)
+                {
+					var e = new PropertyPostSetterEventArgs<Kistl.App.Base.TypeRef>(__oldValue, __newValue);
+					OnViewModelRef_PostSetter(this, e);
+                }
+                                
+            }
+        }
+        
+        
+		public static event PropertyGetterHandler<Kistl.App.GUI.ViewModelDescriptor, Kistl.App.Base.TypeRef> OnViewModelRef_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.GUI.ViewModelDescriptor, Kistl.App.Base.TypeRef> OnViewModelRef_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.GUI.ViewModelDescriptor, Kistl.App.Base.TypeRef> OnViewModelRef_PostSetter;
 
 		public override InterfaceType GetInterfaceType()
 		{
-			return new InterfaceType(typeof(PresentableModelDescriptor));
+			return new InterfaceType(typeof(ViewModelDescriptor));
 		}
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{
 			base.ApplyChangesFrom(obj);
-			var other = (PresentableModelDescriptor)obj;
-			var otherImpl = (PresentableModelDescriptor__Implementation__)obj;
-			var me = (PresentableModelDescriptor)this;
+			var other = (ViewModelDescriptor)obj;
+			var otherImpl = (ViewModelDescriptor__Implementation__)obj;
+			var me = (ViewModelDescriptor)this;
 
 			me.Description = other.Description;
 			me.ExportGuid = other.ExportGuid;
 			this._fk_DefaultGridCellKind = otherImpl._fk_DefaultGridCellKind;
 			this._fk_DefaultKind = otherImpl._fk_DefaultKind;
 			this._fk_Module = otherImpl._fk_Module;
-			this._fk_PresentableModelRef = otherImpl._fk_PresentableModelRef;
+			this._fk_ViewModelRef = otherImpl._fk_ViewModelRef;
 		}
 
         // tail template
    		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
         [System.Diagnostics.DebuggerHidden()]
-        [EventBasedMethod("OnToString_PresentableModelDescriptor")]
+        [EventBasedMethod("OnToString_ViewModelDescriptor")]
         public override string ToString()
         {
             MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
             e.Result = base.ToString();
-            if (OnToString_PresentableModelDescriptor != null)
+            if (OnToString_ViewModelDescriptor != null)
             {
-                OnToString_PresentableModelDescriptor(this, e);
+                OnToString_ViewModelDescriptor(this, e);
             }
             return e.Result;
         }
-        public static event ToStringHandler<PresentableModelDescriptor> OnToString_PresentableModelDescriptor;
+        public static event ToStringHandler<ViewModelDescriptor> OnToString_ViewModelDescriptor;
 
-        [EventBasedMethod("OnPreSave_PresentableModelDescriptor")]
+        [EventBasedMethod("OnPreSave_ViewModelDescriptor")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_PresentableModelDescriptor != null) OnPreSave_PresentableModelDescriptor(this);
+            if (OnPreSave_ViewModelDescriptor != null) OnPreSave_ViewModelDescriptor(this);
         }
-        public static event ObjectEventHandler<PresentableModelDescriptor> OnPreSave_PresentableModelDescriptor;
+        public static event ObjectEventHandler<ViewModelDescriptor> OnPreSave_ViewModelDescriptor;
 
-        [EventBasedMethod("OnPostSave_PresentableModelDescriptor")]
+        [EventBasedMethod("OnPostSave_ViewModelDescriptor")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_PresentableModelDescriptor != null) OnPostSave_PresentableModelDescriptor(this);
+            if (OnPostSave_ViewModelDescriptor != null) OnPostSave_ViewModelDescriptor(this);
         }
-        public static event ObjectEventHandler<PresentableModelDescriptor> OnPostSave_PresentableModelDescriptor;
+        public static event ObjectEventHandler<ViewModelDescriptor> OnPostSave_ViewModelDescriptor;
 
-        [EventBasedMethod("OnCreated_PresentableModelDescriptor")]
+        [EventBasedMethod("OnCreated_ViewModelDescriptor")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_PresentableModelDescriptor != null) OnCreated_PresentableModelDescriptor(this);
+            if (OnCreated_ViewModelDescriptor != null) OnCreated_ViewModelDescriptor(this);
         }
-        public static event ObjectEventHandler<PresentableModelDescriptor> OnCreated_PresentableModelDescriptor;
+        public static event ObjectEventHandler<ViewModelDescriptor> OnCreated_ViewModelDescriptor;
 
-        [EventBasedMethod("OnDeleting_PresentableModelDescriptor")]
+        [EventBasedMethod("OnDeleting_ViewModelDescriptor")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_PresentableModelDescriptor != null) OnDeleting_PresentableModelDescriptor(this);
+            if (OnDeleting_ViewModelDescriptor != null) OnDeleting_ViewModelDescriptor(this);
         }
-        public static event ObjectEventHandler<PresentableModelDescriptor> OnDeleting_PresentableModelDescriptor;
+        public static event ObjectEventHandler<ViewModelDescriptor> OnDeleting_ViewModelDescriptor;
 
 
 		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
 			// else
-			new CustomPropertyDescriptor<PresentableModelDescriptor__Implementation__, Kistl.App.GUI.ControlKind>(
+			new CustomPropertyDescriptor<ViewModelDescriptor__Implementation__, Kistl.App.GUI.ControlKind>(
 				new Guid("6c744476-35e0-4cef-a221-f02abc81566c"),
 				"DefaultGridCellKind",
 				null,
 				obj => obj.DefaultGridCellKind,
 				(obj, val) => obj.DefaultGridCellKind = val),
 			// else
-			new CustomPropertyDescriptor<PresentableModelDescriptor__Implementation__, Kistl.App.GUI.ControlKind>(
+			new CustomPropertyDescriptor<ViewModelDescriptor__Implementation__, Kistl.App.GUI.ControlKind>(
 				new Guid("b535115c-b847-479d-bdea-a7994ae6eeca"),
 				"DefaultKind",
 				null,
 				obj => obj.DefaultKind,
 				(obj, val) => obj.DefaultKind = val),
 			// else
-			new CustomPropertyDescriptor<PresentableModelDescriptor__Implementation__, string>(
+			new CustomPropertyDescriptor<ViewModelDescriptor__Implementation__, string>(
 				new Guid("93e25648-50f9-40d8-8753-e5dadab68e1d"),
 				"Description",
 				null,
 				obj => obj.Description,
 				(obj, val) => obj.Description = val),
 			// else
-			new CustomPropertyDescriptor<PresentableModelDescriptor__Implementation__, Guid>(
+			new CustomPropertyDescriptor<ViewModelDescriptor__Implementation__, Guid>(
 				new Guid("77ce1e5b-f244-4279-af13-b3e75b55f933"),
 				"ExportGuid",
 				null,
 				obj => obj.ExportGuid,
 				(obj, val) => obj.ExportGuid = val),
 			// else
-			new CustomPropertyDescriptor<PresentableModelDescriptor__Implementation__, Kistl.App.Base.Module>(
+			new CustomPropertyDescriptor<ViewModelDescriptor__Implementation__, Kistl.App.Base.Module>(
 				new Guid("0b7135d3-dedc-4091-a0c4-690c1b4a2b6d"),
 				"Module",
 				null,
 				obj => obj.Module,
 				(obj, val) => obj.Module = val),
-			// else
-			new CustomPropertyDescriptor<PresentableModelDescriptor__Implementation__, Kistl.App.Base.TypeRef>(
-				new Guid("554288d1-f5f4-4b22-908b-01525a1d0f9b"),
-				"PresentableModelRef",
-				null,
-				obj => obj.PresentableModelRef,
-				(obj, val) => obj.PresentableModelRef = val),
 			// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
-			new CustomPropertyDescriptor<PresentableModelDescriptor__Implementation__, ICollection<Kistl.App.GUI.ControlKind>>(
+			new CustomPropertyDescriptor<ViewModelDescriptor__Implementation__, ICollection<Kistl.App.GUI.ControlKind>>(
 				new Guid("5e2e007c-2e90-4ba6-9c9d-46e62b662ff9"),
 				"SecondaryControlKinds",
 				null,
 				obj => obj.SecondaryControlKinds,
 				null), // lists are read-only properties
-			// rel: Presentable has DefaultPresentableModelDescriptor (1ae94c81-3359-45e8-b97a-b61add91abba)
-			// rel: PresentableModelDescriptor has Module (557dbc1c-2a38-4c77-8544-264a95307980)
-			// rel: Descriptor has PresentableModelRef (9d771d87-3b28-4e5e-be33-ea71028e1720)
+			// else
+			new CustomPropertyDescriptor<ViewModelDescriptor__Implementation__, Kistl.App.Base.TypeRef>(
+				new Guid("554288d1-f5f4-4b22-908b-01525a1d0f9b"),
+				"ViewModelRef",
+				null,
+				obj => obj.ViewModelRef,
+				(obj, val) => obj.ViewModelRef = val),
+			// rel: Presentable has DefaultViewModelDescriptor (1ae94c81-3359-45e8-b97a-b61add91abba)
 			// rel: Property has ValueModelDescriptor (3437ea5d-d926-4a0b-a848-9dafedf7ad6a)
+			// rel: ViewModelDescriptor has Module (557dbc1c-2a38-4c77-8544-264a95307980)
+			// rel: Descriptor has ViewModelRef (9d771d87-3b28-4e5e-be33-ea71028e1720)
 		};
 		
 		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
@@ -745,12 +745,12 @@ namespace Kistl.App.GUI
 			else
 				Module__Implementation__ = null;
 
-			if (_fk_guid_PresentableModelRef.HasValue)
-				PresentableModelRef__Implementation__ = (Kistl.App.Base.TypeRef__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.TypeRef>(_fk_guid_PresentableModelRef.Value);
-			else if (_fk_PresentableModelRef.HasValue)
-				PresentableModelRef__Implementation__ = (Kistl.App.Base.TypeRef__Implementation__)Context.Find<Kistl.App.Base.TypeRef>(_fk_PresentableModelRef.Value);
+			if (_fk_guid_ViewModelRef.HasValue)
+				ViewModelRef__Implementation__ = (Kistl.App.Base.TypeRef__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.TypeRef>(_fk_guid_ViewModelRef.Value);
+			else if (_fk_ViewModelRef.HasValue)
+				ViewModelRef__Implementation__ = (Kistl.App.Base.TypeRef__Implementation__)Context.Find<Kistl.App.Base.TypeRef>(_fk_ViewModelRef.Value);
 			else
-				PresentableModelRef__Implementation__ = null;
+				ViewModelRef__Implementation__ = null;
 		}
 #region Serializer
 
@@ -773,9 +773,9 @@ namespace Kistl.App.GUI
                 BinarySerializer.ToStream(this._ExportGuid, binStream);
             }
             BinarySerializer.ToStream(Module != null ? Module.ID : (int?)null, binStream);
-            BinarySerializer.ToStream(PresentableModelRef != null ? PresentableModelRef.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(ViewModelRef != null ? ViewModelRef.ID : (int?)null, binStream);
 			if (auxObjects != null) {
-				auxObjects.Add(PresentableModelRef);
+				auxObjects.Add(ViewModelRef);
 			}
         }
 
@@ -791,7 +791,7 @@ namespace Kistl.App.GUI
                 BinarySerializer.FromStream(out this._ExportGuid, binStream);
             }
             BinarySerializer.FromStream(out this._fk_Module, binStream);
-            BinarySerializer.FromStream(out this._fk_PresentableModelRef, binStream);
+            BinarySerializer.FromStream(out this._fk_ViewModelRef, binStream);
         }
 
         public override void ToStream(System.Xml.XmlWriter xml)
@@ -806,7 +806,7 @@ namespace Kistl.App.GUI
                 XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.GUI");
             }
             XmlStreamer.ToStream(Module != null ? Module.ID : (int?)null, xml, "Module", "Kistl.App.GUI");
-            XmlStreamer.ToStream(PresentableModelRef != null ? PresentableModelRef.ID : (int?)null, xml, "PresentableModelRef", "Kistl.App.GUI");
+            XmlStreamer.ToStream(ViewModelRef != null ? ViewModelRef.ID : (int?)null, xml, "ViewModelRef", "Kistl.App.GUI");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
@@ -821,7 +821,7 @@ namespace Kistl.App.GUI
                 XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.GUI");
             }
             XmlStreamer.FromStream(ref this._fk_Module, xml, "Module", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._fk_PresentableModelRef, xml, "PresentableModelRef", "Kistl.App.GUI");
+            XmlStreamer.FromStream(ref this._fk_ViewModelRef, xml, "ViewModelRef", "Kistl.App.GUI");
         }
 
         public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
@@ -833,7 +833,7 @@ namespace Kistl.App.GUI
     
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this._Description, xml, "Description", "Kistl.App.GUI");
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(Module != null ? Module.ExportGuid : (Guid?)null, xml, "Module", "Kistl.App.GUI");
-            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(PresentableModelRef != null ? PresentableModelRef.ExportGuid : (Guid?)null, xml, "PresentableModelRef", "Kistl.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(ViewModelRef != null ? ViewModelRef.ExportGuid : (Guid?)null, xml, "ViewModelRef", "Kistl.App.GUI");
         }
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
@@ -844,7 +844,7 @@ namespace Kistl.App.GUI
             XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.GUI");
             this._isExportGuidSet = true;
             XmlStreamer.FromStream(ref this._fk_guid_Module, xml, "Module", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._fk_guid_PresentableModelRef, xml, "PresentableModelRef", "Kistl.App.GUI");
+            XmlStreamer.FromStream(ref this._fk_guid_ViewModelRef, xml, "ViewModelRef", "Kistl.App.GUI");
         }
 
 #endregion

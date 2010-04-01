@@ -13,7 +13,7 @@ namespace Kistl.Client.Forms
     internal class Renderer
     {
 
-        public void ShowModel(PresentableModel mdl, Control parent)
+        public void ShowModel(ViewModel mdl, Control parent)
         {
             // TODO: revive with new infrastructure
             //Layout lout = DataMocks.LookupDefaultLayout(mdl.GetType());

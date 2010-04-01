@@ -7,7 +7,7 @@ using Kistl.API;
 namespace Kistl.Client.Presentables
 {
     public class LauncherModel
-        : PresentableModel
+        : ViewModel
     {
         public LauncherModel(IGuiApplicationContext appCtx, IKistlContext dataCtx)
             : base(appCtx, dataCtx)
