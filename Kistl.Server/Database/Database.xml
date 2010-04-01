@@ -12217,6 +12217,7 @@
     <GUI:PresentableModelRef>da04f1a5-fb30-4786-b329-8f070083a4f6</GUI:PresentableModelRef>
   </GUI:PresentableModelDescriptor>
   <GUI:PresentableModelDescriptor ExportGuid="ffc833d5-a2a5-4cde-8335-6285973742d8">
+    <GUI:DefaultKind>44654dc7-6f5f-46a1-bdc6-7c3bd124b5bb</GUI:DefaultKind>
     <GUI:Description>A top-level window containing a Workspace ObjectEditor, a visual representation for IKistlContext</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:PresentableModelRef>d9fe8f77-b156-4929-add8-38cc2fa546e8</GUI:PresentableModelRef>
@@ -17454,6 +17455,7 @@
   <GUI:TextboxKind ExportGuid="2686036b-b3c9-45b9-9361-e452d69cdc09" />
   <GUI:TypeRefRefKind ExportGuid="6b5093bb-3ac0-4710-b30d-d72a50b09ee8" />
   <GUI:WorkspaceKind ExportGuid="329837fd-1146-48b2-9f4e-79aec8958b1e" />
+  <GUI:WorkspaceKind ExportGuid="44654dc7-6f5f-46a1-bdc6-7c3bd124b5bb" />
   <GUI:PresentableModelDescriptor_displayedBy_ControlKind_RelationEntry ExportGuid="ddba1bc9-bfa6-4438-bf71-78787a4fd9bf">
     <GUI:A>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:A>
     <GUI:B>c2b9dfc5-0744-430c-9373-bcd98f783180</GUI:B>
