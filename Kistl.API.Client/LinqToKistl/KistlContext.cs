@@ -194,7 +194,7 @@ namespace Kistl.API.Client
         {
             CheckDisposed();
             KistlContextQuery<T> query = new KistlContextQuery<T>(this, type);
-            return ((KistlContextProvider)query.Provider).GetListOf(ID, propertyName).Cast<T>().ToList();
+            return ((KistlContextProvider)query.Provider).GetListOfCall(ID, propertyName).Cast<T>().ToList();
         }
 
         public IList<T> FetchRelation<T>(Guid relationId, RelationEndRole role, IDataObject container) where T : class, IRelationCollectionEntry

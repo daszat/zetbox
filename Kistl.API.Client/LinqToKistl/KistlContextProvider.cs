@@ -48,26 +48,7 @@ namespace Kistl.API.Client
             _type = ifType;
         }
 
-        internal List<IDataObject> GetListOf(int ID, string propertyName)
-        {
-            List<IStreamable> auxObjects;
-            List<IDataObject> serviceResult = ProxySingleton.Current.GetListOf(_type, ID, propertyName, out auxObjects).ToList();
-            List<IDataObject> result = new List<IDataObject>();
-
-            foreach (IDataObject obj in serviceResult)
-            {
-                result.Add((IDataObject)_context.Attach(obj));
-            }
-
-            foreach (IPersistenceObject obj in auxObjects)
-            {
-                _context.Attach(obj);
-            }
-
-            return result;
-        }
-
-
+        #region CallService
         private List<IDataObject> VisitAndCallService(Expression e, out List<IStreamable> auxObjects)
         {
             e = TransformExpression(e);
@@ -87,21 +68,26 @@ namespace Kistl.API.Client
         {
             return ProxySingleton.Current.GetList(_type, _maxListCount, _filter, _orderBy, out auxObjects).ToList();
         }
+        #endregion
 
-        private void AddNewLocalObjects(InterfaceType ifType, IList result)
+        #region Operations GetListOf/GetList/GetObject
+        internal List<IDataObject> GetListOfCall(int ID, string propertyName)
         {
-            MethodInfo mi = typeof(KistlContextProvider).GetMethod("AddNewLocalObjectsGeneric", BindingFlags.Instance | BindingFlags.NonPublic)
-                .MakeGenericMethod(ifType.Type);
-            mi.Invoke(this, new object[] { result });
-        }
+            List<IStreamable> auxObjects;
+            List<IDataObject> serviceResult = ProxySingleton.Current.GetListOf(_type, ID, propertyName, out auxObjects).ToList();
+            List<IDataObject> result = new List<IDataObject>();
 
-        // Helper method which is only called by reflection from AddNewLocalObjects
-        private void AddNewLocalObjectsGeneric<T>(IList result) where T : IDataObject
-        {
-            var list = _context.AttachedObjects.AsQueryable().OfType<T>()
-                .Where(o => o.ObjectState == DataObjectState.New);
-            if (_filter != null) list = (IQueryable<T>)list.AddFilter(_filter);
-            list.ForEach<T>(i => result.Add(i));
+            foreach (IDataObject obj in serviceResult)
+            {
+                result.Add((IDataObject)_context.Attach(obj));
+            }
+
+            foreach (IPersistenceObject obj in auxObjects)
+            {
+                _context.Attach(obj);
+            }
+
+            return result;
         }
 
         /// <summary>
@@ -140,6 +126,7 @@ namespace Kistl.API.Client
                 {
                     result.Add(_context.Attach(obj));
                 }
+                // Can't use T as it is a ListType
                 AddNewLocalObjects(_type, result);
 
                 IQueryable selectResult = result.AsQueryable().AddSelector(selector, sourceType, typeof(T).FindElementTypes().First());
@@ -153,6 +140,7 @@ namespace Kistl.API.Client
                 {
                     ((IList)result).Add(_context.Attach(obj));
                 }
+                // Can't use T as it is a ListType
                 AddNewLocalObjects(_type, (IList)result);
                 return result;
             }
@@ -174,13 +162,12 @@ namespace Kistl.API.Client
             e = TransformExpression(e);
             Visit(e);
 
+            // Try to find a local object first
             List<T> result = new List<T>();
-            AddNewLocalObjects(_type, result);
+            AddLocalObjects<T>(result);
 
-            // If nothing found or a List is expected -> goto Server
-            if (result.Count == 0 ||
-                    e.IsMethodCallExpression("First") ||
-                    e.IsMethodCallExpression("FirstOrDefault"))
+            // If nothing found local -> goto Server
+            if (result.Count == 0)
             {
                 List<IStreamable> auxObjects;
                 List<IDataObject> serviceResult = CallService(out auxObjects);
@@ -217,6 +204,31 @@ namespace Kistl.API.Client
                 throw new NotSupportedException("Expression is not supported");
             }
         }
+
+        #region Local Object handling
+        private void AddNewLocalObjects(InterfaceType ifType, IList result)
+        {
+            MethodInfo mi = typeof(KistlContextProvider).GetMethod("AddNewLocalObjectsGeneric", BindingFlags.Instance | BindingFlags.NonPublic)
+                .MakeGenericMethod(ifType.Type);
+            mi.Invoke(this, new object[] { result });
+        }
+
+        private void AddNewLocalObjectsGeneric<T>(IList result)
+        {
+            var list = _context.AttachedObjects.AsQueryable().Where(o => o.ObjectState == DataObjectState.New).OfType<T>();
+            if (_filter != null) list = list.AddFilter(_filter);
+            list.ForEach<T>(i => result.Add(i));
+        }
+
+        private void AddLocalObjects<T>(IList result)
+        {
+            var list = _context.AttachedObjects.AsQueryable().Where(o => o.ObjectState != DataObjectState.Deleted).OfType<T>();
+            if (_filter != null) list = list.AddFilter(_filter);
+            list.ForEach<T>(i => result.Add(i));
+        }
+        #endregion
+
+        #endregion
 
         #region IQueryProvider Members
         public IQueryable<TElement> CreateQuery<TElement>(Expression expression)
