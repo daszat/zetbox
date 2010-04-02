@@ -13,7 +13,7 @@ using System.ComponentModel;
 namespace Kistl.Client.Presentables.ObjectEditor
 {
     public class WorkspaceViewModel
-        : WindowViewModel
+        : WindowViewModel, IMultipleInstancesManager
     {
         public WorkspaceViewModel(IGuiApplicationContext appCtx, IKistlContext dataCtx)
             : base(appCtx, dataCtx)
