@@ -142,7 +142,7 @@ namespace Kistl.Client.Presentables
 
             ViewModelDescriptor pmd = mdl
                 .GetType()
-                .ToRef(FrozenContext.Single)
+                .ToRef(GuiApplicationContext.Current.MetaContext)
                 .GetViewModelDescriptor();
 
             var vDesc = pmd.GetDefaultViewDescriptor(Toolkit);
@@ -173,7 +173,7 @@ namespace Kistl.Client.Presentables
             if (mdl == null) { throw new ArgumentNullException("mdl"); }
             if (kind == null) { throw new ArgumentNullException("kind"); }
 
-            ViewModelDescriptor pmd = mdl.GetType().ToRef(FrozenContext.Single)
+            ViewModelDescriptor pmd = mdl.GetType().ToRef(GuiApplicationContext.Current.MetaContext)
                 .GetViewModelDescriptor();
 
             var vDesc = pmd.GetViewDescriptor(Toolkit, kind);
