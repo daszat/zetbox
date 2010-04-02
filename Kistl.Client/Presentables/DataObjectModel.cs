@@ -149,6 +149,43 @@ namespace Kistl.Client.Presentables
             }
         }
 
+        private PropertyGroupModel _selectedPropertyGroup;
+        public PropertyGroupModel SelectedPropertyGroup
+        {
+            get
+            {
+                if (_selectedPropertyGroup == null && PropertyGroups.Count > 0)
+                {
+                    _selectedPropertyGroup = PropertyGroupsByName.ContainsKey("Summary") ? PropertyGroupsByName["Summary"] : PropertyGroups.FirstOrDefault();
+                }
+                return _selectedPropertyGroup;
+            }
+            set
+            {
+                // only accept new value if it is a contained model
+                if (value == null || (PropertyGroupsByName.ContainsKey(value.Name) && PropertyGroupsByName[value.Name] == value))
+                {
+                    _selectedPropertyGroup = value;
+                    OnPropertyChanged("SelectedPropertyGroup");
+                    OnPropertyChanged("SelectedPropertyGroupName");
+                }
+            }
+        }
+        public string SelectedPropertyGroupName
+        {
+            get
+            {
+                return SelectedPropertyGroup == null ? null : SelectedPropertyGroup.Name;
+            }
+            set
+            {
+                if (PropertyGroupsByName.ContainsKey(value))
+                {
+                    SelectedPropertyGroup = PropertyGroupsByName[value];
+                }
+            }
+        }
+
         private string _toStringCache;
         public override string Name
         {
