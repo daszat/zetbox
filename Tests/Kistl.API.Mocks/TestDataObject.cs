@@ -142,6 +142,14 @@ using System.Xml.Serialization;
                 return _context;
             }
         }
+        [XmlIgnore]
+        public IReadOnlyKistlContext ReadOnlyContext
+        {
+            get
+            {
+                return _context;
+            }
+        }
         public void AttachToContext(IKistlContext ctx)
         {
             _context = ctx;

@@ -17,6 +17,10 @@ namespace Kistl.App.Extensions
     /// </summary>
     public static class GuiExtensions
     {
+        private static ViewDescriptorCache _viewDescriptorCache = new ViewDescriptorCache();
+        private static ViewModelDescriptorCache _pmdCache = null;
+        private static ViewDescriptorToolkitCache _viewCaches = new ViewDescriptorToolkitCache();
+
         /// <summary>
         /// Looks up the default ViewDesriptor matching the ViewModel and Toolkit; 
         /// uses the ViewModelDescriptor's DefaultVisualType
@@ -30,41 +34,6 @@ namespace Kistl.App.Extensions
         {
             return GetViewDescriptor(pmd, tk, GetDefaultKind(pmd));
         }
-
-        private sealed class ViewDescCacheKey
-        {
-            public ViewDescCacheKey(TypeRef vmd,
-                Toolkit tk,
-                InterfaceType? ck)
-            {
-                this.vmd = vmd;
-                this.tk = tk;
-                this.ck = ck;
-            }
-
-            private readonly TypeRef vmd;
-            private readonly Toolkit tk;
-            private readonly InterfaceType? ck;
-
-            public override bool Equals(object obj)
-            {
-                var other = obj as ViewDescCacheKey;
-                if (other == null) return false;
-                return object.Equals(this.vmd, other.vmd)
-                    && object.Equals(this.tk, other.tk)
-                    && object.Equals(this.ck, other.ck);
-            }
-
-            public override int GetHashCode()
-            {
-                return vmd.AsType(true).GetHashCode()
-                    + (ck.HasValue ? ck.Value.Type.GetHashCode() : 0)
-                    + (int)this.tk;
-            }
-        }
-
-        private static Dictionary<ViewDescCacheKey, ViewDescriptor> _viewDescriptorCache = new Dictionary<ViewDescCacheKey, ViewDescriptor>();
-
 
         /// <summary>
         /// Look up the ViewDescriptor for this presentable model and ControlKind
@@ -81,7 +50,7 @@ namespace Kistl.App.Extensions
             if (self == null) throw new ArgumentNullException("self");
             PrimeCaches(tk);
 
-            var key = new ViewDescCacheKey(self.ViewModelRef, tk, ck != null ? (InterfaceType?)ck.GetInterfaceType() : null);
+            var key = new ViewDescriptorCache.Key(self.ViewModelRef, tk, ck != null ? (InterfaceType?)ck.GetInterfaceType() : null);
             if (_viewDescriptorCache.ContainsKey(key)) return _viewDescriptorCache[key];
 
             ViewDescriptor result = null;
@@ -89,12 +58,11 @@ namespace Kistl.App.Extensions
             ICollection<ViewDescriptor> candidates;
             if (ck != null)
             {
-                candidates = _viewCaches[tk].GetDescriptors(ck.GetInterfaceType().GetObjectClass(FrozenContext.Single)).ToList();
+                candidates = _viewCaches[tk].GetDescriptors(ck.GetInterfaceType()).ToList();
             }
             else
             {
-                // TODO #1509: Frozen Context objects does not have self.Context set.
-                candidates = FrozenContext.Single.GetQuery<ViewDescriptor>().ToList();
+                candidates = self.ReadOnlyContext.GetQuery<ViewDescriptor>().ToList();
             }
 
             if (candidates.Count == 0)
@@ -131,11 +99,10 @@ namespace Kistl.App.Extensions
                 type = type.Parent;
             }
 
-            // TODO #1509: Frozen Context objects does not have self.Context set.
             allTypes.AddRange(
                 self.ViewModelRef.AsType(false).GetInterfaces()
                     .OrderBy(i => i.FullName)
-                    .Select(i => i.ToRef(FrozenContext.Single))
+                    .Select(i => i.ToRef(self.ReadOnlyContext))
                     .Where(i => i != null)
             );
             return allTypes;
@@ -204,10 +171,6 @@ namespace Kistl.App.Extensions
             return pmd.AndParents().Select(p => p.DefaultGridCellKind).FirstOrDefault(dk => dk != null) ?? pmd.GetDefaultKind();
         }
 
-
-
-
-
         /// <summary>
         /// Returns a list of the specified ViewModelDescriptor and its parents descriptors.
         /// </summary>
@@ -248,67 +211,190 @@ namespace Kistl.App.Extensions
             return result;
         }
 
-        private static Dictionary<int, ViewModelDescriptor> _pmdCache = null;
-        private static Dictionary<Toolkit, ViewDescriptorCache> _viewCaches = new Dictionary<Toolkit, ViewDescriptorCache>();
-
 
         private static void PrimeCaches(Toolkit? tk)
         {
             if (_pmdCache == null)
             {
-                _pmdCache = GetViewModelDescriptorByTypeRefCache();
+                _pmdCache = new ViewModelDescriptorCache();
             }
-            if (tk.HasValue)
+            if (tk.HasValue && !_viewCaches.ContainsKey(tk.Value))
             {
-                if (!_viewCaches.ContainsKey(tk.Value))
-                {
-                    _viewCaches[tk.Value] = ViewDescriptorCache.CreateCache(tk.Value);
-                }
+                _viewCaches[tk.Value] = ViewDescriptorToolkitCache.Content.CreateCache(tk.Value);
+            }
+        }
+    }
 
-                if (!_viewCaches.ContainsKey(tk.Value))
-                {
-                    _viewCaches[tk.Value] = ViewDescriptorCache.CreateCache(tk.Value);
-                }
+    #region Caches
+    internal class ViewDescriptorToolkitCache : Cache
+    {
+        private Dictionary<Toolkit, Content> _cache = new Dictionary<Toolkit, Content>();
+
+        public bool ContainsKey(Toolkit key)
+        {
+            return _cache.ContainsKey(key);
+        }
+
+        public Content this[Toolkit key]
+        {
+            get
+            {
+                return _cache[key];
+            }
+            set
+            {
+                _cache[key] = value;
+                ItemAdded();
             }
         }
 
-        private static Dictionary<int, ViewModelDescriptor> GetViewModelDescriptorByTypeRefCache()
+        public override int ItemCount
         {
-            return FrozenContext.Single
+            get { return _cache.Count; }
+        }
+
+        public override void Clear()
+        {
+            _cache.Clear();
+        }
+
+        internal class Content
+        {
+            private Content() { }
+
+            private Dictionary<InterfaceType, ReadOnlyCollection<ViewDescriptor>> _vdCache = new Dictionary<InterfaceType, ReadOnlyCollection<ViewDescriptor>>();
+
+            private static readonly ReadOnlyCollection<ViewDescriptor> EmptyList = new ReadOnlyCollection<ViewDescriptor>(new List<ViewDescriptor>(0));
+
+            public static Content CreateCache(Toolkit tk)
+            {
+                var result = new Content();
+                result._vdCache = FrozenContext.Single
+                    .GetQuery<ViewDescriptor>()
+                    .Where(obj => obj.Toolkit == tk && obj.Kind != null)
+                    .GroupBy(obj => obj.Kind)
+                    .ToDictionary(g => g.Key.GetDescribedInterfaceType(), g => new ReadOnlyCollection<ViewDescriptor>(g.ToList()));
+                return result;
+            }
+
+            public ReadOnlyCollection<ViewDescriptor> GetDescriptors(InterfaceType cls)
+            {
+                if (_vdCache.ContainsKey(cls))
+                {
+                    return _vdCache[cls];
+                }
+                else
+                {
+                    return EmptyList;
+                }
+            }
+        }
+    }
+
+    internal class ViewDescriptorCache : Cache
+    {
+        private Dictionary<Key, ViewDescriptor> _cache = new Dictionary<Key, ViewDescriptor>();
+
+        public bool ContainsKey(Key key)
+        {
+            return _cache.ContainsKey(key);
+        }
+
+        public ViewDescriptor this[Key key]
+        {
+            get
+            {
+                return _cache[key];
+            }
+            set
+            {
+                _cache[key] = value;
+                ItemAdded();
+            }
+        }
+
+        public override int ItemCount
+        {
+            get { return _cache.Count; }
+        }
+
+        public override void Clear()
+        {
+            _cache.Clear();
+        }
+
+        internal sealed class Key
+        {
+            public Key( TypeRef vmd,
+                        Toolkit tk,
+                        InterfaceType? ck)
+            {
+                this.vmd = vmd;
+                this.tk = tk;
+                this.ck = ck;
+            }
+
+            private readonly TypeRef vmd;
+            private readonly Toolkit tk;
+            private readonly InterfaceType? ck;
+
+            public override bool Equals(object obj)
+            {
+                var other = obj as Key;
+                if (other == null) return false;
+                return object.Equals(this.vmd, other.vmd)
+                    && object.Equals(this.tk, other.tk)
+                    && object.Equals(this.ck, other.ck);
+            }
+
+            public override int GetHashCode()
+            {
+                return vmd.AsType(true).GetHashCode()
+                    + (ck.HasValue ? ck.Value.Type.GetHashCode() : 0)
+                    + (int)this.tk;
+            }
+        }
+
+    }
+
+    internal class ViewModelDescriptorCache : Cache
+    {
+        private Dictionary<int, ViewModelDescriptor> _cache = null;
+
+        public ViewModelDescriptorCache()
+        {
+            FillCache();
+        }
+
+        private void FillCache()
+        {
+            _cache = FrozenContext.Single
                 .GetQuery<ViewModelDescriptor>()
                 .ToDictionary(obj => obj.ViewModelRef.ID);
         }
-    }
 
-    internal class ViewDescriptorCache
-    {
-        private ViewDescriptorCache() { }
-
-        private Dictionary<ObjectClass, ReadOnlyCollection<ViewDescriptor>> _vdCache = new Dictionary<ObjectClass, ReadOnlyCollection<ViewDescriptor>>();
-
-        private static readonly ReadOnlyCollection<ViewDescriptor> EmptyList = new ReadOnlyCollection<ViewDescriptor>(new List<ViewDescriptor>(0));
-
-        public static ViewDescriptorCache CreateCache(Toolkit tk)
+        public bool ContainsKey(int key)
         {
-            var result = new ViewDescriptorCache();
-            result._vdCache = FrozenContext.Single
-                .GetQuery<ViewDescriptor>()
-                .Where(obj => obj.Toolkit == tk && obj.Kind != null)
-                .GroupBy(obj => obj.Kind)
-                .ToDictionary(g => (ObjectClass)g.Key, g => new ReadOnlyCollection<ViewDescriptor>(g.ToList()));
-            return result;
+            return _cache.ContainsKey(key);
         }
 
-        public ReadOnlyCollection<ViewDescriptor> GetDescriptors(ObjectClass cls)
+        public ViewModelDescriptor this[int key]
         {
-            if (_vdCache.ContainsKey(cls))
+            get
             {
-                return _vdCache[cls];
-            }
-            else
-            {
-                return EmptyList;
+                return _cache[key];
             }
         }
+
+        public override int ItemCount
+        {
+            get { return _cache.Count; }
+        }
+
+        public override void Clear()
+        {
+            FillCache();
+        }
     }
+    #endregion
 }

@@ -130,7 +130,7 @@ namespace Kistl.App.Extensions
             else
             {
                 // ToList: Workaround Case 1212
-                return source.ToList().SingleOrDefault(tRef
+                return source.FirstOrDefault(tRef
                     => tRef.Assembly.Name == t.Assembly.FullName
                     && tRef.FullName == t.FullName
                     && tRef.GenericArguments.Count == 0);

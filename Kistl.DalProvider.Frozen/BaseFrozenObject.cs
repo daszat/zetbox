@@ -149,8 +149,11 @@ namespace Kistl.DalProvider.Frozen
         /// <summary>
         /// 
         /// </summary>
-        // TODO: actually this should return the frozencontext, but it is only a IReadOnlyKistlContext, not a full IKistlContext
-        public IKistlContext Context { get { return null /* FrozenContext.Single*/; } }
+        public IKistlContext Context { get { return null; } }
+        /// <summary>
+        /// 
+        /// </summary>
+        public IReadOnlyKistlContext ReadOnlyContext { get { return FrozenContext.Single; } }
 
         /// <summary>
         /// 

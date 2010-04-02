@@ -176,6 +176,11 @@ namespace Kistl.API
         IKistlContext Context { get; }
 
         /// <summary>
+        /// Gets the <see cref="IReadOnlyKistlContext"/> containing this object.
+        /// </summary>
+        IReadOnlyKistlContext ReadOnlyContext { get; }
+
+        /// <summary>
         /// Gets a value indicating whether or not this object is attached to a context.
         /// </summary>
         bool IsAttached { get; }

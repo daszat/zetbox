@@ -203,6 +203,11 @@ namespace Kistl.API.Server.Mocks
             get { throw new NotImplementedException(); }
         }
 
+        public IReadOnlyKistlContext ReadOnlyContext
+        {
+            get { throw new NotImplementedException(); }
+        }
+
         public bool IsAttached
         {
             get { throw new NotImplementedException(); }

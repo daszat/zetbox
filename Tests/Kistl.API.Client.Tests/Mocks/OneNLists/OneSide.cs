@@ -53,6 +53,11 @@ namespace Kistl.API.Client.Mocks.OneNLists
             get { return null; }
         }
 
+        public IReadOnlyKistlContext ReadOnlyContext
+        {
+            get { return null; }
+        }
+
         #region INotifyPropertyChanged Members
 
         private void OnPropertyChanged(string propertyName)

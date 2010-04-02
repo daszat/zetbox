@@ -70,14 +70,12 @@ namespace Kistl.Client.Presentables.ModuleEditor
                 if (_TreeItems == null)
                 {
                     var lst = new ObservableCollection<ViewModel>();
-                    // ObjectClass
                     lst.Add(new ObjectClassInstanceListViewModel(AppContext, DataContext, CurrentModule));
-                    // Enumeration
                     lst.Add(new EnumerationInstanceListViewModel(AppContext, DataContext, CurrentModule));
-                    // CompoundObject
                     lst.Add(new CompoundObjectInstanceListViewModel(AppContext, DataContext, CurrentModule));
-                    // Assemblies
                     lst.Add(new AssemblyInstanceListViewModel(AppContext, DataContext, CurrentModule));
+                    lst.Add(new ViewDescriptorInstanceListViewModel(AppContext, DataContext, CurrentModule));
+                    lst.Add(new ViewModelDescriptorInstanceListViewModel(AppContext, DataContext, CurrentModule));
 
                     _TreeItems = new ReadOnlyObservableCollection<ViewModel>(lst);
                 }

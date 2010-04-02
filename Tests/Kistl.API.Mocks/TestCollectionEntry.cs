@@ -117,6 +117,10 @@ namespace Kistl.API.Mocks
         {
             get { throw new NotImplementedException(); }
         }
+        public IReadOnlyKistlContext ReadOnlyContext
+        {
+            get { throw new NotImplementedException(); }
+        }
 
         public void DetachFromContext(IKistlContext ctx)
         {

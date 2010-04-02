@@ -35,6 +35,11 @@ namespace Kistl.API
         /// </summary>
         [XmlIgnore]
         public IKistlContext Context { get; private set; }
+        /// <summary>
+        /// Gets the <see cref="IReadOnlyKistlContext"/> containing this object.
+        /// </summary>
+        [XmlIgnore]
+        public IReadOnlyKistlContext ReadOnlyContext { get { return Context; } }
 
         /// <summary>
         /// Gets a value indicating whether or not this object is attached to a context.

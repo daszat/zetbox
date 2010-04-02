@@ -6,6 +6,7 @@ using Kistl.API;
 using System.Collections.ObjectModel;
 using Kistl.App.Base;
 using Kistl.API.Client;
+using Kistl.App.GUI;
 
 namespace Kistl.Client.Presentables.ModuleEditor
 {
@@ -228,6 +229,64 @@ namespace Kistl.Client.Presentables.ModuleEditor
         public override InterfaceType InterfaceType
         {
             get { return new InterfaceType(typeof(Assembly)); }
+        }
+    }
+
+    public class ViewDescriptorInstanceListViewModel : InstanceListViewModel
+    {
+        public ViewDescriptorInstanceListViewModel(
+            IGuiApplicationContext appCtx,
+            IKistlContext dataCtx,
+            Module module)
+            : base(appCtx, dataCtx, module)
+        {
+        }
+
+        protected override IQueryable<IDataObject> GetQuery()
+        {
+            return DataContext.GetQuery<ViewDescriptor>().Where(i => i.Module == module).ToList().AsQueryable().Cast<IDataObject>();
+        }
+
+        public override string Name
+        {
+            get
+            {
+                return "View Descriptors";
+            }
+        }
+
+        public override InterfaceType InterfaceType
+        {
+            get { return new InterfaceType(typeof(ViewDescriptor)); }
+        }
+    }
+
+    public class ViewModelDescriptorInstanceListViewModel : InstanceListViewModel
+    {
+        public ViewModelDescriptorInstanceListViewModel(
+            IGuiApplicationContext appCtx,
+            IKistlContext dataCtx,
+            Module module)
+            : base(appCtx, dataCtx, module)
+        {
+        }
+
+        protected override IQueryable<IDataObject> GetQuery()
+        {
+            return DataContext.GetQuery<ViewModelDescriptor>().Where(i => i.Module == module).ToList().AsQueryable().Cast<IDataObject>();
+        }
+
+        public override string Name
+        {
+            get
+            {
+                return "ViewModel Descriptors";
+            }
+        }
+
+        public override InterfaceType InterfaceType
+        {
+            get { return new InterfaceType(typeof(ViewModelDescriptor)); }
         }
     }
     #endregion

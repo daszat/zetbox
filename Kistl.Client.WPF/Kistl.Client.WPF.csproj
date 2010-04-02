@@ -110,6 +110,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\CacheDebuggerDisplay.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\ErrorListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -281,6 +285,9 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Commands\SmartRoutedUICommand.cs" />
+    <Compile Include="View\CacheDebuggerDisplay.xaml.cs">
+      <DependentUpon>CacheDebuggerDisplay.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ErrorListView.xaml.cs">
       <DependentUpon>ErrorListView.xaml</DependentUpon>
     </Compile>
