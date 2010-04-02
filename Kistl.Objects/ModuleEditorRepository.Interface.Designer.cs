@@ -26,26 +26,6 @@ namespace daszAt.ModuleEditor
 			}
 		}
 		
-		/// <summary>List of all ModuleEditorInstanceListKind</summary>
-		/// 
-		public IQueryable<ModuleEditorInstanceListKind> ModuleEditorInstanceListKinds
-		{ 
-			get
-			{
-				return Context.GetQuery<ModuleEditorInstanceListKind>();
-			}
-		}
-		
-		/// <summary>List of all ModuleEditorDashboardKind</summary>
-		/// 
-		public IQueryable<ModuleEditorDashboardKind> ModuleEditorDashboardKinds
-		{ 
-			get
-			{
-				return Context.GetQuery<ModuleEditorDashboardKind>();
-			}
-		}
-		
 	
 	}
 	

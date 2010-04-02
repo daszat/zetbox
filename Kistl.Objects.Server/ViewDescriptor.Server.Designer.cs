@@ -217,7 +217,7 @@ namespace Kistl.App.GUI
     /*
     Relation: FK_Control_isof_Kind
     A: ZeroOrMore ViewDescriptor as Control
-    B: One ControlKindClass as Kind
+    B: ZeroOrOne ControlKindClass as Kind
     Preferred Storage: MergeIntoA
     */
         // object reference property
@@ -394,6 +394,54 @@ namespace Kistl.App.GUI
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.ViewDescriptor, Kistl.App.Base.Module> OnModule_PostSetter;
 
         /// <summary>
+        /// A View supports one or more ViewModels
+        /// </summary>
+    /*
+    Relation: FK_ViewDescriptor_supports_ViewModelTypeRefs
+    A: ZeroOrMore ViewDescriptor as ViewDescriptor
+    B: ZeroOrMore TypeRef as ViewModelTypeRefs
+    Preferred Storage: Separate
+    */
+        // collection reference property
+		// Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.CollectionEntryListProperty
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public ICollection<Kistl.App.Base.TypeRef> SupportedViewModels
+        {
+            get
+            {
+                if (_SupportedViewModelsWrapper == null)
+                {
+                    _SupportedViewModelsWrapper = new EntityRelationBSideCollectionWrapper<Kistl.App.GUI.ViewDescriptor, Kistl.App.Base.TypeRef, Kistl.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntry__Implementation__>(
+                            this,
+                            SupportedViewModels__Implementation__);
+                }
+                return _SupportedViewModelsWrapper;
+            }
+        }
+        
+        [EdmRelationshipNavigationProperty("Model", "FK_ViewDescriptor_supports_ViewModelTypeRefs_A", "CollectionEntry")]
+        public EntityCollection<Kistl.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntry__Implementation__> SupportedViewModels__Implementation__
+        {
+            get
+            {
+                var c = ((IEntityWithRelationships)(this)).RelationshipManager
+                    .GetRelatedCollection<Kistl.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntry__Implementation__>(
+                        "Model.FK_ViewDescriptor_supports_ViewModelTypeRefs_A",
+                        "CollectionEntry");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !c.IsLoaded)
+                {
+                    c.Load();
+                }
+                return c;
+            }
+        }
+        private EntityRelationBSideCollectionWrapper<Kistl.App.GUI.ViewDescriptor, Kistl.App.Base.TypeRef, Kistl.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntry__Implementation__> _SupportedViewModelsWrapper;
+
+
+        /// <summary>
         /// Which toolkit provides this View
         /// </summary>
         // enumeration property
@@ -559,6 +607,13 @@ namespace Kistl.App.GUI
 				null,
 				obj => obj.Module,
 				(obj, val) => obj.Module = val),
+			// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
+			new CustomPropertyDescriptor<ViewDescriptor__Implementation__, ICollection<Kistl.App.Base.TypeRef>>(
+				new Guid("4698cfda-6b1d-4cd7-8350-630a1adab1a8"),
+				"SupportedViewModels",
+				null,
+				obj => obj.SupportedViewModels,
+				null), // lists are read-only properties
 			// else
 			new CustomPropertyDescriptor<ViewDescriptor__Implementation__, Kistl.App.GUI.Toolkit>(
 				new Guid("2a798728-d79d-471f-be51-1f488beb8dc1"),
@@ -626,6 +681,16 @@ namespace Kistl.App.GUI
 				auxObjects.Add(Kind);
 			}
             BinarySerializer.ToStream(Module != null ? Module.ID : (int?)null, binStream);
+
+			if(eagerLoadLists)
+			{
+				foreach(var obj in SupportedViewModels__Implementation__)
+				{
+					if (auxObjects != null) {
+						auxObjects.Add(obj);
+					}
+				}
+			}
             BinarySerializer.ToStream((int?)((ViewDescriptor)this).Toolkit, binStream);
         }
 
@@ -640,6 +705,7 @@ namespace Kistl.App.GUI
             }
             BinarySerializer.FromStream(out this._fk_Kind, binStream);
             BinarySerializer.FromStream(out this._fk_Module, binStream);
+
 			{
 				int? baseValue;
 				BinarySerializer.FromStream(out baseValue, binStream);

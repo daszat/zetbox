@@ -388,7 +388,7 @@ using Kistl.DalProvider.EF;
 	/*
     Relation: FK_Control_isof_Kind
     A: ZeroOrMore ViewDescriptor as Control
-    B: One ControlKindClass as Kind
+    B: ZeroOrOne ControlKindClass as Kind
     Preferred Storage: MergeIntoA
 	*/
 
@@ -1941,6 +1941,24 @@ using Kistl.DalProvider.EF;
     "Module", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Module__Implementation__)
     )]
 
+
+	/*
+    Relation: FK_ViewDescriptor_supports_ViewModelTypeRefs
+    A: ZeroOrMore ViewDescriptor as ViewDescriptor
+    B: ZeroOrMore TypeRef as ViewModelTypeRefs
+    Preferred Storage: Separate
+	*/
+
+// The association from A to the CollectionEntry
+[assembly: EdmRelationship("Model", "FK_ViewDescriptor_supports_ViewModelTypeRefs_A",
+    "ViewDescriptor", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.GUI.ViewDescriptor__Implementation__),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntry__Implementation__)
+    )]
+// The association from B to the CollectionEntry
+[assembly: EdmRelationship("Model", "FK_ViewDescriptor_supports_ViewModelTypeRefs_B",
+    "ViewModelTypeRefs", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.TypeRef__Implementation__),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntry__Implementation__)
+    )]
 
 	/*
     Relation: FK_ViewModelDescriptor_displayedInGridBy_DefaultGridCellKind

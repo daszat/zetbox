@@ -42,7 +42,8 @@ namespace Kistl.Client.WPF.View
                 return null;
             }
 
-            return CreateTemplate(LookupSecondaryViewDescriptor(pmd, controlKindClassName));
+            var ckcInterface = new InterfaceType(Type.GetType(controlKindClassName + "," + GuiApplicationContext.Current.InterfaceAssembly, true));
+            return CreateTemplate(pmd.GetViewDescriptor(Toolkit.WPF, ckcInterface));
         }
 
         private static DataTemplate SelectTemplate(ViewModel mdl, ControlKind controlKind)
@@ -66,7 +67,7 @@ namespace Kistl.Client.WPF.View
                 return null;
             }
 
-            return CreateTemplate(pmd.GetDefaultViewDescriptor(Toolkit.WPF));
+            return CreateTemplate(pmd.GetViewDescriptor(Toolkit.WPF));
         }
 
         private static Dictionary<Type, DataTemplate> templateCache = new Dictionary<Type, DataTemplate>();
@@ -95,47 +96,6 @@ namespace Kistl.Client.WPF.View
                 }
             }
             return result;
-        }
-
-        private static ViewDescriptor LookupSecondaryViewDescriptor(ViewModelDescriptor pmd, string controlKindClassName)
-        {
-            ViewDescriptor visualDesc;
-            if (String.IsNullOrEmpty(controlKindClassName))
-            {
-                visualDesc = pmd.GetDefaultViewDescriptor(Toolkit.WPF);
-            }
-            else
-            {
-                var ckcInterface = new InterfaceType(Type.GetType(controlKindClassName + "," + GuiApplicationContext.Current.InterfaceAssembly, true));
-                var defaultKind = pmd.GetDefaultKind();
-                if (defaultKind != null && ckcInterface.IsAssignableFrom(defaultKind.GetInterfaceType()))
-                {
-                    visualDesc = pmd.GetDefaultViewDescriptor(Toolkit.WPF);
-                }
-                else
-                {
-                    ControlKind controlKind = pmd.SecondaryControlKinds.Where(ck => ckcInterface.IsAssignableFrom(ck.GetInterfaceType())).SingleOrDefault();
-                    if (controlKind == null && pmd.ViewModelRef.Parent != null)
-                    {
-                        var parentDescriptor = pmd.ViewModelRef.Parent.GetViewModelDescriptor();
-                        if (parentDescriptor != null)
-                        {
-                            // recursively iterate up the inheritance tree
-                            visualDesc = LookupSecondaryViewDescriptor(parentDescriptor, controlKindClassName);
-                        }
-                        else
-                        {
-                            Logging.Log.WarnFormat("Couldn't find matching controlKind: '{0}'", controlKindClassName);
-                            visualDesc = null;
-                        }
-                    }
-                    else
-                    {
-                        visualDesc = pmd.GetViewDescriptor(Toolkit.WPF, controlKind);
-                    }
-                }
-            }
-            return visualDesc;
         }
 
         /// <summary>

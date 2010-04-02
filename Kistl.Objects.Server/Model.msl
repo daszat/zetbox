@@ -251,11 +251,6 @@
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.ModuleEditorDashboardKind)">
-	    <MappingFragment StoreEntitySet="ModuleEditorDashboardKind">
-	      <ScalarProperty Name="ID" ColumnName="ID" />
-	    </MappingFragment>
-      </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Model.DataObjectKind)">
 	    <MappingFragment StoreEntitySet="DataObjectKind">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
@@ -293,11 +288,6 @@
       </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Model.LauncherKind)">
 	    <MappingFragment StoreEntitySet="LauncherKind">
-	      <ScalarProperty Name="ID" ColumnName="ID" />
-	    </MappingFragment>
-      </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.ModuleEditorInstanceListKind)">
-	    <MappingFragment StoreEntitySet="ModuleEditorInstanceListKind">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 	    </MappingFragment>
       </EntityTypeMapping>
@@ -1527,6 +1517,45 @@
     </AssociationSetMapping>
 
     <!--
+    Relation: FK_ViewDescriptor_supports_ViewModelTypeRefs
+    A: ZeroOrMore ViewDescriptor as ViewDescriptor
+    B: ZeroOrMore TypeRef as ViewModelTypeRefs
+    Preferred Storage: Separate
+    -->
+    <EntitySetMapping Name="ViewDescriptor_supports_TypeRef_RelationEntry">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.ViewDescriptor_supports_TypeRef_RelationEntry)">
+        <MappingFragment StoreEntitySet="ViewDescriptor_supports_TypeRef_RelationEntry">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+		  <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <!-- A to CollectionEntry -->
+    <AssociationSetMapping Name="FK_ViewDescriptor_supports_ViewModelTypeRefs_A"
+                           TypeName="Model.FK_ViewDescriptor_supports_ViewModelTypeRefs_A"
+                           StoreEntitySet="ViewDescriptor_supports_TypeRef_RelationEntry" >
+      <EndProperty Name="ViewDescriptor">
+        <ScalarProperty Name="ID" ColumnName="fk_ViewDescriptor"/>
+      </EndProperty>
+      <EndProperty Name="CollectionEntry">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_ViewDescriptor" IsNull="false"/>
+    </AssociationSetMapping>
+    <!-- B to CollectionEntry -->
+    <AssociationSetMapping Name="FK_ViewDescriptor_supports_ViewModelTypeRefs_B"
+                           TypeName="Model.FK_ViewDescriptor_supports_ViewModelTypeRefs_B"
+                           StoreEntitySet="ViewDescriptor_supports_TypeRef_RelationEntry" >
+      <EndProperty Name="ViewModelTypeRefs">
+        <ScalarProperty Name="ID" ColumnName="fk_ViewModelTypeRefs"/>
+      </EndProperty>
+      <EndProperty Name="CollectionEntry">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_ViewModelTypeRefs" IsNull="false"/>
+    </AssociationSetMapping>
+
+    <!--
     Relation: FK_Visual_contains_Children
     A: ZeroOrMore Visual as Visual
     B: ZeroOrMore Visual as Children
@@ -2054,7 +2083,7 @@
     <!--
     Relation: FK_Control_isof_Kind
     A: ZeroOrMore ViewDescriptor as Control
-    B: One ControlKindClass as Kind
+    B: ZeroOrOne ControlKindClass as Kind
     Preferred Storage: MergeIntoA
     -->
     <AssociationSetMapping Name="FK_Control_isof_Kind"

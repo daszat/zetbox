@@ -291,18 +291,6 @@
       <End Role="A_Constraint" EntitySet="Constraint" />
       <End Role="B_MethodInvocationConstraint" EntitySet="MethodInvocationConstraint" />
     </AssociationSet>
-    <EntitySet Name="ModuleEditorDashboardKind" EntityType="Model.Store.ModuleEditorDashboardKind" Table="ModuleEditorDashboardKinds"/>
-    <!-- inherits from DashboardKind -->
-    <AssociationSet Name="FK_ModuleEditorDashboardKind_DashboardKind_ID" Association="Model.Store.FK_ModuleEditorDashboardKind_DashboardKind_ID" >
-      <End Role="A_DashboardKind" EntitySet="DashboardKind" />
-      <End Role="B_ModuleEditorDashboardKind" EntitySet="ModuleEditorDashboardKind" />
-    </AssociationSet>
-    <EntitySet Name="ModuleEditorInstanceListKind" EntityType="Model.Store.ModuleEditorInstanceListKind" Table="ModuleEditorInstanceListKinds"/>
-    <!-- inherits from ControlKind -->
-    <AssociationSet Name="FK_ModuleEditorInstanceListKind_ControlKind_ID" Association="Model.Store.FK_ModuleEditorInstanceListKind_ControlKind_ID" >
-      <End Role="A_ControlKind" EntitySet="ControlKind" />
-      <End Role="B_ModuleEditorInstanceListKind" EntitySet="ModuleEditorInstanceListKind" />
-    </AssociationSet>
     <EntitySet Name="ModuleEditorWorkspaceKind" EntityType="Model.Store.ModuleEditorWorkspaceKind" Table="ModuleEditorWorkspaceKinds"/>
     <!-- inherits from WorkspaceKind -->
     <AssociationSet Name="FK_ModuleEditorWorkspaceKind_WorkspaceKind_ID" Association="Model.Store.FK_ModuleEditorWorkspaceKind_WorkspaceKind_ID" >
@@ -687,6 +675,22 @@
     <AssociationSet Name="FK_TypeRef_hasGenericArguments_GenericArguments_B" Association="Model.Store.FK_TypeRef_hasGenericArguments_GenericArguments_B" >
       <End Role="CollectionEntry" EntitySet="TypeRef_hasGenericArguments_TypeRef_RelationEntry" />
       <End Role="GenericArguments" EntitySet="TypeRef" />
+    </AssociationSet>
+    
+    <!-- 
+    Relation: FK_ViewDescriptor_supports_ViewModelTypeRefs
+    A: ZeroOrMore ViewDescriptor as ViewDescriptor
+    B: ZeroOrMore TypeRef as ViewModelTypeRefs
+    Preferred Storage: Separate
+    -->
+    <EntitySet Name="ViewDescriptor_supports_TypeRef_RelationEntry" EntityType="Model.Store.ViewDescriptor_supports_TypeRef_RelationEntry" Table="ViewDescriptor_supports_ViewModelTypeRefs" />
+    <AssociationSet Name="FK_ViewDescriptor_supports_ViewModelTypeRefs_A" Association="Model.Store.FK_ViewDescriptor_supports_ViewModelTypeRefs_A" >
+      <End Role="ViewDescriptor" EntitySet="ViewDescriptor" />
+      <End Role="CollectionEntry" EntitySet="ViewDescriptor_supports_TypeRef_RelationEntry" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ViewDescriptor_supports_ViewModelTypeRefs_B" Association="Model.Store.FK_ViewDescriptor_supports_ViewModelTypeRefs_B" >
+      <End Role="CollectionEntry" EntitySet="ViewDescriptor_supports_TypeRef_RelationEntry" />
+      <End Role="ViewModelTypeRefs" EntitySet="TypeRef" />
     </AssociationSet>
     
     <!-- 
@@ -1890,20 +1894,6 @@
     <Property Name="Namespace" Type="nvarchar" MaxLength="200" Nullable="false" />
   </EntityType>
 	
-  <EntityType Name="ModuleEditorDashboardKind">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
-  </EntityType>
-	
-  <EntityType Name="ModuleEditorInstanceListKind">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
-  </EntityType>
-	
   <EntityType Name="ModuleEditorWorkspaceKind">
     <Key>
       <PropertyRef Name="ID" />
@@ -2990,6 +2980,45 @@
       </Principal>
       <Dependent Role="CollectionEntry">
         <PropertyRef Name="fk_GenericArguments" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+	
+  <EntityType Name="ViewDescriptor_supports_TypeRef_RelationEntry">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+	<Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="fk_ViewDescriptor" Type="int" Nullable="true" />
+    <Property Name="fk_ViewModelTypeRefs" Type="int" Nullable="true" />
+  </EntityType>
+
+  <!-- A to CollectionEntry -->
+  <Association Name="FK_ViewDescriptor_supports_ViewModelTypeRefs_A">
+    <End Role="ViewDescriptor" Type="Model.Store.ViewDescriptor" Multiplicity="0..1" />
+    <End Role="CollectionEntry" Type="Model.Store.ViewDescriptor_supports_TypeRef_RelationEntry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ViewDescriptor">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CollectionEntry">
+        <PropertyRef Name="fk_ViewDescriptor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+  <!-- B to CollectionEntry -->
+  <Association Name="FK_ViewDescriptor_supports_ViewModelTypeRefs_B">
+    <End Role="ViewModelTypeRefs" Type="Model.Store.TypeRef" Multiplicity="0..1" />
+    <End Role="CollectionEntry" Type="Model.Store.ViewDescriptor_supports_TypeRef_RelationEntry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ViewModelTypeRefs">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CollectionEntry">
+        <PropertyRef Name="fk_ViewModelTypeRefs" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -5166,30 +5195,6 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="B_MethodInvocationConstraint">
-        <PropertyRef Name="ID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_ModuleEditorDashboardKind_DashboardKind_ID">
-    <End Role="A_DashboardKind" Type="Model.Store.DashboardKind" Multiplicity="1" />
-    <End Role="B_ModuleEditorDashboardKind" Type="Model.Store.ModuleEditorDashboardKind" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="A_DashboardKind">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="B_ModuleEditorDashboardKind">
-        <PropertyRef Name="ID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_ModuleEditorInstanceListKind_ControlKind_ID">
-    <End Role="A_ControlKind" Type="Model.Store.ControlKind" Multiplicity="1" />
-    <End Role="B_ModuleEditorInstanceListKind" Type="Model.Store.ModuleEditorInstanceListKind" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="A_ControlKind">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="B_ModuleEditorInstanceListKind">
         <PropertyRef Name="ID" />
       </Dependent>
     </ReferentialConstraint>

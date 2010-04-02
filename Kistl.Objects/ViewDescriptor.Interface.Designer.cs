@@ -35,6 +35,11 @@ namespace Kistl.App.GUI
 			set;
 		}
         /// <summary>
+        /// A View supports one or more ViewModels
+        /// </summary>
+
+        ICollection<Kistl.App.Base.TypeRef> SupportedViewModels { get; }
+        /// <summary>
         /// Which toolkit provides this View
         /// </summary>
 		Kistl.App.GUI.Toolkit Toolkit {

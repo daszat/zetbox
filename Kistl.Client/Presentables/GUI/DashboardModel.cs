@@ -80,7 +80,7 @@ namespace Kistl.Client.Presentables.GUI
             DefaultViewDescriptors.Clear();
             foreach (Toolkit tk in Enum.GetValues(typeof(Toolkit)))
             {
-                var defaultView = (SelectedViewModelDescriptor.Object as ViewModelDescriptor).GetDefaultViewDescriptor(tk);
+                var defaultView = (SelectedViewModelDescriptor.Object as ViewModelDescriptor).GetViewDescriptor(tk);
                 if (defaultView != null)
                 {
                     DefaultViewDescriptors[tk] = (DataObjectModel)Factory.CreateDefaultModel(DataContext, defaultView);

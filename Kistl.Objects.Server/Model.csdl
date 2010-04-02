@@ -205,6 +205,15 @@
       <End Role="GenericArguments" EntitySet="TypeRef" />
       <End Role="CollectionEntry" EntitySet="TypeRef_hasGenericArguments_TypeRef_RelationEntry" />
     </AssociationSet>
+    <EntitySet Name="ViewDescriptor_supports_TypeRef_RelationEntry" EntityType="Model.ViewDescriptor_supports_TypeRef_RelationEntry" />
+    <AssociationSet Name="FK_ViewDescriptor_supports_ViewModelTypeRefs_A" Association="Model.FK_ViewDescriptor_supports_ViewModelTypeRefs_A" >
+      <End Role="ViewDescriptor" EntitySet="ViewDescriptor" />
+      <End Role="CollectionEntry" EntitySet="ViewDescriptor_supports_TypeRef_RelationEntry" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ViewDescriptor_supports_ViewModelTypeRefs_B" Association="Model.FK_ViewDescriptor_supports_ViewModelTypeRefs_B" >
+      <End Role="ViewModelTypeRefs" EntitySet="TypeRef" />
+      <End Role="CollectionEntry" EntitySet="ViewDescriptor_supports_TypeRef_RelationEntry" />
+    </AssociationSet>
     <EntitySet Name="Visual_contains_Visual_RelationEntry" EntityType="Model.Visual_contains_Visual_RelationEntry" />
     <AssociationSet Name="FK_Visual_contains_Children_A" Association="Model.FK_Visual_contains_Children_A" >
       <End Role="Visual" EntitySet="Visual" />
@@ -1785,6 +1794,10 @@
                         Relationship="Model.FK_ViewDescriptor_has_Module"
                         FromRole="ViewDescriptor"
                         ToRole="Module" />
+    <NavigationProperty Name="SupportedViewModels__Implementation__"
+                        Relationship="Model.FK_ViewDescriptor_supports_ViewModelTypeRefs_A"
+                        FromRole="ViewDescriptor"
+                        ToRole="CollectionEntry" />
     <Property Name="Toolkit__Implementation__" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="ViewModelDescriptor">
@@ -1988,10 +2001,6 @@
   <EntityType Name="LauncherKind" BaseType="Model.ControlKind">
   </EntityType>
   <EntityType Name="MethodInvocationConstraint" BaseType="Model.Constraint">
-  </EntityType>
-  <EntityType Name="ModuleEditorDashboardKind" BaseType="Model.DashboardKind">
-  </EntityType>
-  <EntityType Name="ModuleEditorInstanceListKind" BaseType="Model.ControlKind">
   </EntityType>
   <EntityType Name="ModuleEditorWorkspaceKind" BaseType="Model.WorkspaceKind">
   </EntityType>
@@ -2744,6 +2753,49 @@
          Multiplicity="0..1" />
     <End Role="CollectionEntry"
          Type="Model.TypeRef_hasGenericArguments_TypeRef_RelationEntry"
+         Multiplicity="*" />
+  </Association>
+  
+  <!--
+    Relation: FK_ViewDescriptor_supports_ViewModelTypeRefs
+    A: ZeroOrMore ViewDescriptor as ViewDescriptor
+    B: ZeroOrMore TypeRef as ViewModelTypeRefs
+    Preferred Storage: Separate
+  -->
+  <EntityType Name="ViewDescriptor_supports_TypeRef_RelationEntry" >
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+	<Property Name="ExportGuid" Type="Guid" Nullable="false" />
+	
+    
+    <!-- A -->
+    <NavigationProperty Name="A__Implementation__"
+                        Relationship="Model.FK_ViewDescriptor_supports_ViewModelTypeRefs_A"
+                        FromRole="CollectionEntry"
+                        ToRole="ViewDescriptor" />
+
+    <!-- B -->
+    <NavigationProperty Name="B__Implementation__"
+                        Relationship="Model.FK_ViewDescriptor_supports_ViewModelTypeRefs_B"
+                        FromRole="CollectionEntry"
+                        ToRole="ViewModelTypeRefs" />
+  </EntityType>
+  <Association Name="FK_ViewDescriptor_supports_ViewModelTypeRefs_A" >
+    <End Role="ViewDescriptor"
+         Type="Model.ViewDescriptor" 
+         Multiplicity="0..1" />
+    <End Role="CollectionEntry"
+         Type="Model.ViewDescriptor_supports_TypeRef_RelationEntry"
+         Multiplicity="*" />
+  </Association>
+  <Association Name="FK_ViewDescriptor_supports_ViewModelTypeRefs_B" >
+    <End Role="ViewModelTypeRefs"
+         Type="Model.TypeRef" 
+         Multiplicity="0..1" />
+    <End Role="CollectionEntry"
+         Type="Model.ViewDescriptor_supports_TypeRef_RelationEntry"
          Multiplicity="*" />
   </Association>
   

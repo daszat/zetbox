@@ -145,7 +145,7 @@ namespace Kistl.Client.Presentables
                 .ToRef(GuiApplicationContext.Current.MetaContext)
                 .GetViewModelDescriptor();
 
-            var vDesc = pmd.GetDefaultViewDescriptor(Toolkit);
+            var vDesc = pmd.GetViewDescriptor(Toolkit);
 
             return vDesc == null
                 ? null
