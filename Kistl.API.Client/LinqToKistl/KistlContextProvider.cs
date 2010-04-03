@@ -34,6 +34,11 @@ namespace Kistl.API.Client
         private int _maxListCount = API.Helper.MAXLISTCOUNT;
 
         /// <summary>
+        /// 
+        /// </summary>
+        private bool? _eagerLoadLists = null;
+
+        /// <summary>
         /// Filter Expression for GetList SearchType.
         /// </summary>
         private Expression _filter = null;
@@ -66,7 +71,7 @@ namespace Kistl.API.Client
 
         private List<IDataObject> CallService(out List<IStreamable> auxObjects)
         {
-            return ProxySingleton.Current.GetList(_type, _maxListCount, _filter, _orderBy, out auxObjects).ToList();
+            return ProxySingleton.Current.GetList(_type, _maxListCount, _eagerLoadLists ?? _maxListCount == 1, _filter, _orderBy, out auxObjects).ToList();
         }
         #endregion
 
@@ -260,11 +265,11 @@ namespace Kistl.API.Client
         #region Visits
         protected override void VisitMethodCall(MethodCallExpression m)
         {
-            if (_filter != null) throw new InvalidOperationException("Filter is already set");
-
             if (m.IsMethodCallExpression("Where"))
             {
+                if (_filter != null) throw new InvalidOperationException("Filter is already set");
                 _filter = m.Arguments[1];
+                base.Visit(m.Arguments[0]);
             }
             else if (m.IsMethodCallExpression("OrderBy") || m.IsMethodCallExpression("ThenBy"))
             {
@@ -298,9 +303,13 @@ namespace Kistl.API.Client
                 // OK - just a cast
                 // No special processing needed
             }
+            else if(m.IsMethodCallExpression("WithEagerLoading", typeof(KistlContextExtensions)))
+            {
+                _eagerLoadLists = true;
+            }
             else
             {
-                throw new NotSupportedException(string.Format("Method Call '{0}' is not supported", m.Method.Name));
+                throw new NotSupportedException(string.Format("Method Call '{0}' is not allowed", m.Method.Name));
             }
 
             // Do not call base - only first expression is important

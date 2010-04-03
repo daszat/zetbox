@@ -20,7 +20,7 @@ namespace Kistl.API.Client.Tests
             throw new NotImplementedException();
         }
 
-        public IEnumerable<IDataObject> GetList(InterfaceType ifType, int maxListCount, Expression filter, IEnumerable<Expression> orderBy, out List<IStreamable> auxObjects)
+        public IEnumerable<IDataObject> GetList(InterfaceType ifType, int maxListCount, bool withEagerLoading, Expression filter, IEnumerable<Expression> orderBy, out List<IStreamable> auxObjects)
         {
             if (ifType == null) throw new ArgumentNullException("ifType");            
             if (orderBy != null) throw new ArgumentException("OrderBy is not supported yet");

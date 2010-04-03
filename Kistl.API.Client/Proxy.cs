@@ -20,7 +20,7 @@ namespace Kistl.API.Client
     public interface IProxy
         : IDisposable
     {
-        IEnumerable<IDataObject> GetList(InterfaceType ifType, int maxListCount, Expression filter, IEnumerable<Expression> orderBy, out List<IStreamable> auxObjects);
+        IEnumerable<IDataObject> GetList(InterfaceType ifType, int maxListCount, bool eagerLoadLists, Expression filter, IEnumerable<Expression> orderBy, out List<IStreamable> auxObjects);
         IEnumerable<IDataObject> GetListOf(InterfaceType ifType, int ID, string property, out List<IStreamable> auxObjects);
 
         IEnumerable<IPersistenceObject> SetObjects(IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests);
@@ -98,13 +98,14 @@ namespace Kistl.API.Client
             }
         }
 
-        public IEnumerable<IDataObject> GetList(InterfaceType ifType, int maxListCount, Expression filter, IEnumerable<Expression> orderBy, out List<IStreamable> auxObjects)
+        public IEnumerable<IDataObject> GetList(InterfaceType ifType, int maxListCount, bool eagerLoadLists, Expression filter, IEnumerable<Expression> orderBy, out List<IStreamable> auxObjects)
         {
             using (Logging.Facade.InfoTraceMethodCallFormat("GetList[{0}]", ifType.ToString()))
             {
                 using (MemoryStream s = Service.GetList(
                     new SerializableType(ifType),
                     maxListCount,
+                    eagerLoadLists,
                     filter != null ? SerializableExpression.FromExpression(filter) : null,
                     orderBy != null ? orderBy.Select(o => SerializableExpression.FromExpression(o)).ToArray() : null))
                 {

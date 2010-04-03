@@ -64,14 +64,38 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfSerializableExpression" nillable="true" type="tns:ArrayOfSerializableExpression" />
-  <xs:complexType name="SerializableLambdaExpression">
+  <xs:complexType name="SerializableConstantExpression">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:SerializableExpression">
+        <xs:sequence>
+          <xs:element name="_x003C_Value_x003E_k__BackingField" nillable="true" type="xs:anyType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="SerializableConstantExpression" nillable="true" type="tns:SerializableConstantExpression" />
+  <xs:complexType name="SerializableBinaryExpression">
     <xs:complexContent mixed="false">
       <xs:extension base="tns:SerializableCompoundExpression">
         <xs:sequence />
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element name="SerializableLambdaExpression" nillable="true" type="tns:SerializableLambdaExpression" />
+  <xs:element name="SerializableBinaryExpression" nillable="true" type="tns:SerializableBinaryExpression" />
+  <xs:complexType name="SerializableMethodCallExpression">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:SerializableCompoundExpression">
+        <xs:sequence>
+          <xs:element name="_x003C_GenericArguments_x003E_k__BackingField" nillable="true" type="tns:ArrayOfSerializableType" />
+          <xs:element name="_x003C_MethodName_x003E_k__BackingField" nillable="true" type="xs:string" />
+          <xs:element name="_x003C_ObjectExpression_x003E_k__BackingField" nillable="true" type="tns:SerializableExpression" />
+          <xs:element name="_x003C_ParameterTypes_x003E_k__BackingField" nillable="true" type="tns:ArrayOfSerializableType" />
+          <xs:element name="_x003C_SerializableMethodType_x003E_k__BackingField" nillable="true" type="tns:SerializableType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="SerializableMethodCallExpression" nillable="true" type="tns:SerializableMethodCallExpression" />
   <xs:complexType name="SerializableParameterExpression">
     <xs:complexContent mixed="false">
       <xs:extension base="tns:SerializableExpression">
@@ -90,20 +114,14 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="SerializableUnaryExpression" nillable="true" type="tns:SerializableUnaryExpression" />
-  <xs:complexType name="SerializableMethodCallExpression">
+  <xs:complexType name="SerializableLambdaExpression">
     <xs:complexContent mixed="false">
       <xs:extension base="tns:SerializableCompoundExpression">
-        <xs:sequence>
-          <xs:element name="_x003C_GenericArguments_x003E_k__BackingField" nillable="true" type="tns:ArrayOfSerializableType" />
-          <xs:element name="_x003C_MethodName_x003E_k__BackingField" nillable="true" type="xs:string" />
-          <xs:element name="_x003C_ObjectExpression_x003E_k__BackingField" nillable="true" type="tns:SerializableExpression" />
-          <xs:element name="_x003C_ParameterTypes_x003E_k__BackingField" nillable="true" type="tns:ArrayOfSerializableType" />
-          <xs:element name="_x003C_SerializableMethodType_x003E_k__BackingField" nillable="true" type="tns:SerializableType" />
-        </xs:sequence>
+        <xs:sequence />
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element name="SerializableMethodCallExpression" nillable="true" type="tns:SerializableMethodCallExpression" />
+  <xs:element name="SerializableLambdaExpression" nillable="true" type="tns:SerializableLambdaExpression" />
   <xs:complexType name="SerializableMemberExpression">
     <xs:complexContent mixed="false">
       <xs:extension base="tns:SerializableCompoundExpression">
@@ -114,14 +132,6 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="SerializableMemberExpression" nillable="true" type="tns:SerializableMemberExpression" />
-  <xs:complexType name="SerializableBinaryExpression">
-    <xs:complexContent mixed="false">
-      <xs:extension base="tns:SerializableCompoundExpression">
-        <xs:sequence />
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name="SerializableBinaryExpression" nillable="true" type="tns:SerializableBinaryExpression" />
   <xs:complexType name="SerializableConditionalExpression">
     <xs:complexContent mixed="false">
       <xs:extension base="tns:SerializableExpression">
@@ -134,14 +144,4 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="SerializableConditionalExpression" nillable="true" type="tns:SerializableConditionalExpression" />
-  <xs:complexType name="SerializableConstantExpression">
-    <xs:complexContent mixed="false">
-      <xs:extension base="tns:SerializableExpression">
-        <xs:sequence>
-          <xs:element name="_x003C_Value_x003E_k__BackingField" nillable="true" type="xs:anyType" />
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name="SerializableConstantExpression" nillable="true" type="tns:SerializableConstantExpression" />
 </xs:schema>

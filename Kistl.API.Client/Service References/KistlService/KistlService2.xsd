@@ -24,6 +24,7 @@
       <xs:sequence>
         <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Kistl.API" minOccurs="0" name="type" nillable="true" type="q4:SerializableType" />
         <xs:element minOccurs="0" name="maxListCount" type="xs:int" />
+        <xs:element minOccurs="0" name="eagerLoadLists" type="xs:boolean" />
         <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Kistl.API" minOccurs="0" name="filter" nillable="true" type="q5:SerializableExpression" />
         <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Kistl.API" minOccurs="0" name="orderBy" nillable="true" type="q6:ArrayOfSerializableExpression" />
       </xs:sequence>

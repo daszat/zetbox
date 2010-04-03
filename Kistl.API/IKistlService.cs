@@ -37,12 +37,13 @@ namespace Kistl.API
         /// </summary>
         /// <param name="type">Type of Objects</param>
         /// <param name="maxListCount">Max. ammount of objects</param>
+        /// <param name="eagerLoadLists">If true list properties will be eager loaded</param>
         /// <param name="filter">Serializable linq expression used a filter</param>
         /// <param name="orderBy">List of derializable linq expressions used as orderby</param>
         /// <returns>the found objects</returns>
         [OperationContract]
         [FaultContract(typeof(Exception))]
-        MemoryStream GetList(SerializableType type, int maxListCount, SerializableExpression filter, List<SerializableExpression> orderBy);
+        MemoryStream GetList(SerializableType type, int maxListCount, bool eagerLoadLists, SerializableExpression filter, List<SerializableExpression> orderBy);
 
         /// <summary>
         /// returns a list of objects referenced by a specified Property. Use an equivalent query in GetList() instead.

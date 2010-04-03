@@ -87,14 +87,14 @@ namespace Kistl.API.Client.KistlService {
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Kistl.API.SerializableNewExpression))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Kistl.API.SerializableCompoundExpression))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Kistl.API.SerializableExpression[]))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Kistl.API.SerializableLambdaExpression))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Kistl.API.SerializableConstantExpression))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Kistl.API.SerializableBinaryExpression))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Kistl.API.SerializableMethodCallExpression))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Kistl.API.SerializableParameterExpression))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Kistl.API.SerializableUnaryExpression))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Kistl.API.SerializableMethodCallExpression))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Kistl.API.SerializableLambdaExpression))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Kistl.API.SerializableMemberExpression))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Kistl.API.SerializableBinaryExpression))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Kistl.API.SerializableConditionalExpression))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Kistl.API.SerializableConstantExpression))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(int[]))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.Reflection.MemberInfo[]))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.Reflection.MemberInfo))]
@@ -206,15 +206,15 @@ namespace Kistl.API.Client.KistlService {
         [System.ServiceModel.FaultContractAttribute(typeof(System.Exception), Action="http://tempuri.org/IKistlService/GetListExceptionFault", Name="Exception", Namespace="http://schemas.datacontract.org/2004/07/System")]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Kistl.API.SerializableCompoundExpression))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Kistl.API.SerializableNewExpression))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Kistl.API.SerializableLambdaExpression))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Kistl.API.SerializableUnaryExpression))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Kistl.API.SerializableMethodCallExpression))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Kistl.API.SerializableMemberExpression))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Kistl.API.SerializableBinaryExpression))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Kistl.API.SerializableMethodCallExpression))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Kistl.API.SerializableUnaryExpression))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Kistl.API.SerializableLambdaExpression))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Kistl.API.SerializableMemberExpression))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Kistl.API.SerializableConstantExpression))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Kistl.API.SerializableParameterExpression))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Kistl.API.SerializableConditionalExpression))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Kistl.API.SerializableConstantExpression))]
-        System.IO.MemoryStream GetList(Kistl.API.SerializableType type, int maxListCount, Kistl.API.SerializableExpression filter, Kistl.API.SerializableExpression[] orderBy);
+        System.IO.MemoryStream GetList(Kistl.API.SerializableType type, int maxListCount, bool eagerLoadLists, Kistl.API.SerializableExpression filter, Kistl.API.SerializableExpression[] orderBy);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IKistlService/GetListOf", ReplyAction="http://tempuri.org/IKistlService/GetListOfResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(System.Exception), Action="http://tempuri.org/IKistlService/GetListOfExceptionFault", Name="Exception", Namespace="http://schemas.datacontract.org/2004/07/System")]
@@ -309,8 +309,8 @@ namespace Kistl.API.Client.KistlService {
             return base.Channel.SetObjects(msg, notificationRequests);
         }
         
-        public System.IO.MemoryStream GetList(Kistl.API.SerializableType type, int maxListCount, Kistl.API.SerializableExpression filter, Kistl.API.SerializableExpression[] orderBy) {
-            return base.Channel.GetList(type, maxListCount, filter, orderBy);
+        public System.IO.MemoryStream GetList(Kistl.API.SerializableType type, int maxListCount, bool eagerLoadLists, Kistl.API.SerializableExpression filter, Kistl.API.SerializableExpression[] orderBy) {
+            return base.Channel.GetList(type, maxListCount, eagerLoadLists, filter, orderBy);
         }
         
         public System.IO.MemoryStream GetListOf(Kistl.API.SerializableType type, int ID, string property) {

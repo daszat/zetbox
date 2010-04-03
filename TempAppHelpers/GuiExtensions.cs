@@ -273,7 +273,7 @@ namespace Kistl.App.Extensions
                 
                 // All View Descriptors for the given Toolkit
                 result._allVDCache = new ReadOnlyCollection<ViewDescriptor>(
-                    ctx.GetQuery<ViewDescriptor>().Where(obj => obj.Toolkit == tk).ToList());
+                    ctx.GetQuery<ViewDescriptor>().WithEagerLoading().Where(obj => obj.Toolkit == tk).ToList());
                 
                 // Dictionary by Kind
                 result._vdCache = result._allVDCache.Where(obj => obj.Kind != null).GroupBy(obj => obj.Kind)

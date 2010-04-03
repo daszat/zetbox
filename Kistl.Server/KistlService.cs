@@ -89,10 +89,11 @@ namespace Kistl.Server
         /// </summary>
         /// <param name="type">Type of Objects</param>
         /// <param name="maxListCount">Max. ammount of objects</param>
+        /// <param name="eagerLoadLists">If true list properties will be eager loaded</param>
         /// <param name="filter">Serializable linq expression used a filter</param>
         /// <param name="orderBy">List of derializable linq expressions used as orderby</param>
         /// <returns>the found objects</returns>
-        public MemoryStream GetList(SerializableType type, int maxListCount, SerializableExpression filter, List<SerializableExpression> orderBy)
+        public MemoryStream GetList(SerializableType type, int maxListCount, bool eagerLoadLists, SerializableExpression filter, List<SerializableExpression> orderBy)
         {
             try
             {
@@ -105,7 +106,6 @@ namespace Kistl.Server
                     using (IKistlContext ctx = _ctxFactory())
                     {
                         var filterExpresstion = filter != null ? SerializableExpression.ToExpression(filter) : null;
-                        bool eagerLoadLists = maxListCount == 1;
                         IEnumerable<IStreamable> lst = _sohFactory
                             .GetServerObjectHandler(type.GetInterfaceType().Type)
                             .GetList(ctx, maxListCount,

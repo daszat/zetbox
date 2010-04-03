@@ -74,7 +74,6 @@
     <Compile Include="LinqToKistl\RelationshipFilterCollection.cs" />
     <Compile Include="OneNRelationList.cs" />
     <Compile Include="BaseClientDataObject.cs" />
-    <Compile Include="CacheController.cs" />
     <Compile Include="ClientApiContext.cs" />
     <Compile Include="CollectionWrapperImplementations.cs" />
     <Compile Include="Helper.cs" />
