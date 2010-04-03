@@ -9,6 +9,7 @@ namespace Kistl.Client.WPF.Converter
 
     using Kistl.API;
     using Kistl.API.Client;
+    using Kistl.App.Extensions;
 
     [ValueConversion(typeof(IDataObject), typeof(string))]
     public class IconConverter : IValueConverter
@@ -45,9 +46,10 @@ namespace Kistl.Client.WPF.Converter
             else if (value is IDataObject)
             {
                 IDataObject obj = (IDataObject)value;
-                if (ClientHelper.ObjectClasses[obj.GetInterfaceType()].DefaultIcon != null)
+                var cls = obj.GetObjectClass(FrozenContext.Single);
+                if (cls.DefaultIcon != null)
                 {
-                    return GetIconPath(ClientHelper.ObjectClasses[obj.GetInterfaceType()].DefaultIcon.IconFile);
+                    return GetIconPath(cls.DefaultIcon.IconFile);
                 }
                 else
                 {

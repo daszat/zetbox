@@ -100,7 +100,7 @@ namespace Kistl.Client.WPF.Dialogs
 
         protected virtual void OnNew()
         {
-            ObjectClass oc = ClientHelper.ObjectClasses[ObjectType];
+            ObjectClass oc = ObjectType.GetObjectClass(FrozenContext.Single);
             if (oc.SubClasses.Count > 0)
             {
                 ChooseFromSubclassesDialog coc = new ChooseFromSubclassesDialog(oc);

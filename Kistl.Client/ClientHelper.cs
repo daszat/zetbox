@@ -39,46 +39,6 @@ namespace Kistl.Client
                 throw ex;
             }
         }
-
-        // TODO: Das muss in "statische" Objekte, oder auch Immutable Objects genannt, umgewandelt werden.
-        private static Dictionary<InterfaceType, ObjectClass> _ObjectClasses = null;
-
-        private static void FetchObjectClasses()
-        {
-            lock (_lock)
-            {
-                if (_ObjectClasses == null)
-                {
-                    using (Logging.Log.DebugTraceMethodCall("Getting Object Classes"))
-                    {
-                        // Prefetch Modules
-                        //_ObjectClasses = _fetchContext.GetQuery<Kistl.App.Base.ObjectClass>()
-                        //    .ToDictionary(o => o.GetDataCLRType());
-                        _ObjectClasses = new Dictionary<InterfaceType, ObjectClass>();
-                        foreach (var o in FrozenContext.Single.GetQuery<ObjectClass>())
-                        {
-                            try
-                            {
-                                _ObjectClasses[o.GetDescribedInterfaceType()] = o;
-                            }
-                            catch (Exception ex)
-                            {
-                                Debug.WriteLine(ex.ToString());
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        public static Dictionary<InterfaceType, ObjectClass> ObjectClasses
-        {
-            get
-            {
-                FetchObjectClasses();
-                return _ObjectClasses;
-            }
-        }
     }
 
     public static class ClientExtensions
