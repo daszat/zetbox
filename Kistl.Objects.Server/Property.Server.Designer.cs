@@ -299,6 +299,7 @@ namespace Kistl.App.Base
         private EntityCollectionWrapper<Kistl.App.Base.Constraint, Kistl.App.Base.Constraint__Implementation__> _ConstraintsWrapper;
 
 		private List<int> ConstraintsIds;
+		private bool Constraints_was_eagerLoaded = false;
 
 
         /// <summary>
@@ -697,6 +698,7 @@ namespace Kistl.App.Base
         private EntityCollectionWrapper<Kistl.App.Base.PropertyInvocation, Kistl.App.Base.PropertyInvocation__Implementation__> _InvocationsWrapper;
 
 		private List<int> InvocationsIds;
+		private bool Invocations_was_eagerLoaded = false;
 
 
         /// <summary>
@@ -1355,6 +1357,7 @@ namespace Kistl.App.Base
             BinarySerializer.ToStream(ChangedBy != null ? ChangedBy.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._ChangedOn, binStream);
 
+			BinarySerializer.ToStream(eagerLoadLists, binStream);
 			if(eagerLoadLists)
 			{
 				BinarySerializer.ToStream(true, binStream);
@@ -1383,6 +1386,7 @@ namespace Kistl.App.Base
                 BinarySerializer.ToStream(this._ExportGuid, binStream);
             }
 
+			BinarySerializer.ToStream(eagerLoadLists, binStream);
 			if(eagerLoadLists)
 			{
 				BinarySerializer.ToStream(true, binStream);
@@ -1414,6 +1418,7 @@ namespace Kistl.App.Base
             BinarySerializer.FromStream(out this._fk_ChangedBy, binStream);
             BinarySerializer.FromStream(out this._ChangedOn, binStream);
 
+			BinarySerializer.FromStream(out Constraints_was_eagerLoaded, binStream);
 			{
 				bool containsList;
 				BinarySerializer.FromStream(out containsList, binStream);
@@ -1439,6 +1444,7 @@ namespace Kistl.App.Base
                 BinarySerializer.FromStream(out this._ExportGuid, binStream);
             }
 
+			BinarySerializer.FromStream(out Invocations_was_eagerLoaded, binStream);
 			{
 				bool containsList;
 				BinarySerializer.FromStream(out containsList, binStream);

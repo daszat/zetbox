@@ -48,7 +48,7 @@ namespace Kistl.App.Extensions
             ControlKind ck)
         {
             if (self == null) throw new ArgumentNullException("self");
-            PrimeCaches(tk);
+            PrimeCaches(tk, self.ReadOnlyContext);
 
             var key = new ViewDescriptorCache.Key(self.ViewModelRef, tk, ck != null ? (InterfaceType?)ck.GetInterfaceType() : null);
             if (_viewDescriptorCache.ContainsKey(key)) return _viewDescriptorCache[key];
@@ -58,11 +58,11 @@ namespace Kistl.App.Extensions
             ICollection<ViewDescriptor> candidates;
             if (ck != null)
             {
-                candidates = _viewCaches[tk].GetDescriptors(ck.GetInterfaceType()).ToList();
+                candidates = _viewCaches[tk].GetDescriptors(ck.GetInterfaceType());
             }
             else
             {
-                candidates = self.ReadOnlyContext.GetQuery<ViewDescriptor>().ToList();
+                candidates = _viewCaches[tk].GetDescriptors();
             }
 
             if (candidates.Count == 0)
@@ -197,7 +197,7 @@ namespace Kistl.App.Extensions
         {
             if (tr == null) { throw new ArgumentNullException("tr"); }
 
-            PrimeCaches(null);
+            PrimeCaches(null, tr.ReadOnlyContext);
 
             ViewModelDescriptor result = null;
             while (result == null && tr != null)
@@ -212,15 +212,15 @@ namespace Kistl.App.Extensions
         }
 
 
-        private static void PrimeCaches(Toolkit? tk)
+        private static void PrimeCaches(Toolkit? tk, IReadOnlyKistlContext ctx)
         {
             if (_pmdCache == null)
             {
-                _pmdCache = new ViewModelDescriptorCache();
+                _pmdCache = new ViewModelDescriptorCache(ctx);
             }
             if (tk.HasValue && !_viewCaches.ContainsKey(tk.Value))
             {
-                _viewCaches[tk.Value] = ViewDescriptorToolkitCache.Content.CreateCache(tk.Value);
+                _viewCaches[tk.Value] = ViewDescriptorToolkitCache.Content.CreateCache(tk.Value, ctx);
             }
         }
     }
@@ -263,17 +263,22 @@ namespace Kistl.App.Extensions
             private Content() { }
 
             private Dictionary<InterfaceType, ReadOnlyCollection<ViewDescriptor>> _vdCache = new Dictionary<InterfaceType, ReadOnlyCollection<ViewDescriptor>>();
+            private ReadOnlyCollection<ViewDescriptor> _allVDCache = null;
 
             private static readonly ReadOnlyCollection<ViewDescriptor> EmptyList = new ReadOnlyCollection<ViewDescriptor>(new List<ViewDescriptor>(0));
 
-            public static Content CreateCache(Toolkit tk)
+            public static Content CreateCache(Toolkit tk, IReadOnlyKistlContext ctx)
             {
                 var result = new Content();
-                result._vdCache = FrozenContext.Single
-                    .GetQuery<ViewDescriptor>()
-                    .Where(obj => obj.Toolkit == tk && obj.Kind != null)
-                    .GroupBy(obj => obj.Kind)
+                
+                // All View Descriptors for the given Toolkit
+                result._allVDCache = new ReadOnlyCollection<ViewDescriptor>(
+                    ctx.GetQuery<ViewDescriptor>().Where(obj => obj.Toolkit == tk).ToList());
+                
+                // Dictionary by Kind
+                result._vdCache = result._allVDCache.Where(obj => obj.Kind != null).GroupBy(obj => obj.Kind)
                     .ToDictionary(g => g.Key.GetDescribedInterfaceType(), g => new ReadOnlyCollection<ViewDescriptor>(g.ToList()));
+                
                 return result;
             }
 
@@ -287,6 +292,11 @@ namespace Kistl.App.Extensions
                 {
                     return EmptyList;
                 }
+            }
+
+            public ReadOnlyCollection<ViewDescriptor> GetDescriptors()
+            {
+                return _allVDCache;
             }
         }
     }
@@ -360,15 +370,17 @@ namespace Kistl.App.Extensions
     internal class ViewModelDescriptorCache : Cache
     {
         private Dictionary<int, ViewModelDescriptor> _cache = null;
+        private IReadOnlyKistlContext _context = null;
 
-        public ViewModelDescriptorCache()
+        public ViewModelDescriptorCache(IReadOnlyKistlContext ctx)
         {
+            _context = ctx;
             FillCache();
         }
 
         private void FillCache()
         {
-            _cache = FrozenContext.Single
+            _cache = _context
                 .GetQuery<ViewModelDescriptor>()
                 .ToDictionary(obj => obj.ViewModelRef.ID);
         }

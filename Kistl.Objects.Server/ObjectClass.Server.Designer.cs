@@ -218,6 +218,7 @@ namespace Kistl.App.Base
         private EntityCollectionWrapper<Kistl.App.Base.InstanceConstraint, Kistl.App.Base.InstanceConstraint__Implementation__> _ConstraintsWrapper;
 
 		private List<int> ConstraintsIds;
+		private bool Constraints_was_eagerLoaded = false;
 
 
         /// <summary>
@@ -954,6 +955,7 @@ namespace Kistl.App.Base
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             BinarySerializer.ToStream(BaseObjectClass != null ? BaseObjectClass.ID : (int?)null, binStream);
 
+			BinarySerializer.ToStream(eagerLoadLists, binStream);
 			if(eagerLoadLists)
 			{
 				BinarySerializer.ToStream(true, binStream);
@@ -983,6 +985,7 @@ namespace Kistl.App.Base
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._fk_BaseObjectClass, binStream);
 
+			BinarySerializer.FromStream(out Constraints_was_eagerLoaded, binStream);
 			{
 				bool containsList;
 				BinarySerializer.FromStream(out containsList, binStream);

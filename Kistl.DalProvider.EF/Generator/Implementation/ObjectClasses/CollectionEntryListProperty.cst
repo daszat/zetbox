@@ -116,5 +116,11 @@
         private <%= wrapperClass %><<%= rel.A.Type.GetDataTypeString() %>, <%= rel.B.Type.GetDataTypeString() %>, <%= ceName %>> <%= wrapperName %>;
 
 <%
+	if (eagerLoading)
+	{
+%>
+		private bool <%= efName %>_was_eagerLoaded = false;
+<%
+	}
         AddSerialization(serializationList, efName, eagerLoading);
 %>

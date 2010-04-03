@@ -93,6 +93,7 @@
 	{
 %>
 		private List<int> <%= name %>Ids;
+		private bool <%= name %>_was_eagerLoaded = false;
 <%
 	
 		if (serializationList != null)

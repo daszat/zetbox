@@ -596,6 +596,7 @@ namespace Kistl.App.Base
         }
         private EntityRelationBSideListWrapper<Kistl.App.Base.TypeRef, Kistl.App.Base.TypeRef, Kistl.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntry__Implementation__> _GenericArgumentsWrapper;
 
+		private bool GenericArguments__Implementation___was_eagerLoaded = false;
 
         /// <summary>
         /// The TypeRef of the BaseClass of the referenced Type
@@ -942,6 +943,7 @@ namespace Kistl.App.Base
             }
             BinarySerializer.ToStream(this._FullName, binStream);
 
+			BinarySerializer.ToStream(eagerLoadLists, binStream);
 			if(eagerLoadLists)
 			{
 				foreach(var obj in GenericArguments__Implementation__)
@@ -969,6 +971,7 @@ namespace Kistl.App.Base
             }
             BinarySerializer.FromStream(out this._FullName, binStream);
 
+			BinarySerializer.FromStream(out GenericArguments__Implementation___was_eagerLoaded, binStream);
             BinarySerializer.FromStream(out this._fk_Parent, binStream);
         }
 

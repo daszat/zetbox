@@ -4,6 +4,7 @@
   <FrozenProvider>Kistl.DalProvider.Frozen.FrozenProvider, Kistl.DalProvider.Frozen</FrozenProvider>
   <Client StartClient="false" ThrowErrors="false">
     <DocumentStore>P:\Kistl\DocumentStore\Client\</DocumentStore>
+    <DevelopmentEnvironment>true</DevelopmentEnvironment>
   </Client>
   <SourceFileLocation>
     <!-- default probe path -->

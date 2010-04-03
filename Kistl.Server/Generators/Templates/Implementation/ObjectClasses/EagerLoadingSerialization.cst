@@ -23,6 +23,7 @@
 	{
 		case SerializerDirection.ToStream:
 %>
+			BinarySerializer.ToStream(eagerLoadLists, <%= streamName %>);
 			if(eagerLoadLists)
 			{
 <% if (serializeIds) { %>
@@ -49,6 +50,7 @@
 			break;
 		case SerializerDirection.FromStream:
 %>
+			BinarySerializer.FromStream(out <%= collectionName %>_was_eagerLoaded, <%= streamName %>);
 <% if (serializeIds) { %>
 			{
 				bool containsList;

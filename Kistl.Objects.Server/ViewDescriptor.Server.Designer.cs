@@ -440,6 +440,7 @@ namespace Kistl.App.GUI
         }
         private EntityRelationBSideCollectionWrapper<Kistl.App.GUI.ViewDescriptor, Kistl.App.Base.TypeRef, Kistl.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntry__Implementation__> _SupportedViewModelsWrapper;
 
+		private bool SupportedViewModels__Implementation___was_eagerLoaded = false;
 
         /// <summary>
         /// Which toolkit provides this View
@@ -682,6 +683,7 @@ namespace Kistl.App.GUI
 			}
             BinarySerializer.ToStream(Module != null ? Module.ID : (int?)null, binStream);
 
+			BinarySerializer.ToStream(eagerLoadLists, binStream);
 			if(eagerLoadLists)
 			{
 				foreach(var obj in SupportedViewModels__Implementation__)
@@ -706,6 +708,7 @@ namespace Kistl.App.GUI
             BinarySerializer.FromStream(out this._fk_Kind, binStream);
             BinarySerializer.FromStream(out this._fk_Module, binStream);
 
+			BinarySerializer.FromStream(out SupportedViewModels__Implementation___was_eagerLoaded, binStream);
 			{
 				int? baseValue;
 				BinarySerializer.FromStream(out baseValue, binStream);

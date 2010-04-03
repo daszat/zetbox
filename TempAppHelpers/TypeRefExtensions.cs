@@ -33,10 +33,10 @@ namespace Kistl.App.Extensions
             }
             var result = LookupByType(ctx, ctx.GetQuery<TypeRef>(), t);
 
-            if (result == null)
-            {
-                throw new ReadOnlyContextException(String.Format("Type [{0}] not available and context is read-only", t));
-            }
+            //if (result == null)
+            //{
+            //    throw new ReadOnlyContextException(String.Format("Type [{0}] not available and context is read-only", t));
+            //}
 
             return result;
         }
@@ -84,21 +84,23 @@ namespace Kistl.App.Extensions
             return result;
         }
 
+        #region Frozen Part
         private static TypeRef ToFrozenRef(this Type t)
         {
-            PrimeRefCache();
+            PrimeFrozenRefCache();
             return LookupByType(FrozenContext.Single, _typeRefsByFullName[t.IsGenericType ? t.GetGenericTypeDefinition().FullName : t.FullName], t);
         }
 
         private static ILookup<string, TypeRef> _typeRefsByFullName;
 
-        private static void PrimeRefCache()
+        private static void PrimeFrozenRefCache()
         {
             if (_typeRefsByFullName == null)
             {
                 _typeRefsByFullName = FrozenContext.Single.GetQuery<TypeRef>().ToLookup(obj => obj.FullName);
             }
         }
+        #endregion
 
         private static TypeRef LookupByType(IReadOnlyKistlContext ctx, IQueryable<TypeRef> source, Type t)
         {

@@ -44,46 +44,49 @@ switch(direction)
 		case SerializerDirection.ToStream:
 
 #line 26 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\EagerLoadingSerialization.cst"
+this.WriteObjects("			BinarySerializer.ToStream(eagerLoadLists, ",  streamName , ");\r\n");
 this.WriteObjects("			if(eagerLoadLists)\r\n");
 this.WriteObjects("			{\r\n");
-#line 28 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\EagerLoadingSerialization.cst"
-if (serializeIds) { 
 #line 29 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\EagerLoadingSerialization.cst"
+if (serializeIds) { 
+#line 30 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\EagerLoadingSerialization.cst"
 this.WriteObjects("				BinarySerializer.ToStream(true, ",  streamName , ");\r\n");
 this.WriteObjects("				BinarySerializer.ToStream(",  collectionName , ".Count, ",  streamName , ");\r\n");
-#line 31 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\EagerLoadingSerialization.cst"
-} 
 #line 32 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\EagerLoadingSerialization.cst"
+} 
+#line 33 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\EagerLoadingSerialization.cst"
 this.WriteObjects("				foreach(var obj in ",  collectionName , ")\r\n");
 this.WriteObjects("				{\r\n");
 this.WriteObjects("					if (auxObjects != null) {\r\n");
 this.WriteObjects("						auxObjects.Add(obj);\r\n");
 this.WriteObjects("					}\r\n");
-#line 37 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\EagerLoadingSerialization.cst"
-if (serializeIds) { 
 #line 38 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\EagerLoadingSerialization.cst"
-this.WriteObjects("					BinarySerializer.ToStream(obj.ID, ",  streamName , ");\r\n");
+if (serializeIds) { 
 #line 39 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\EagerLoadingSerialization.cst"
-} 
+this.WriteObjects("					BinarySerializer.ToStream(obj.ID, ",  streamName , ");\r\n");
 #line 40 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\EagerLoadingSerialization.cst"
+} 
+#line 41 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\EagerLoadingSerialization.cst"
 this.WriteObjects("				}\r\n");
 this.WriteObjects("			}\r\n");
-#line 42 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\EagerLoadingSerialization.cst"
-if (serializeIds) { 
 #line 43 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\EagerLoadingSerialization.cst"
+if (serializeIds) { 
+#line 44 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\EagerLoadingSerialization.cst"
 this.WriteObjects("			else\r\n");
 this.WriteObjects("			{\r\n");
 this.WriteObjects("				BinarySerializer.ToStream(false, ",  streamName , ");\r\n");
 this.WriteObjects("			}\r\n");
-#line 47 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\EagerLoadingSerialization.cst"
+#line 48 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\EagerLoadingSerialization.cst"
 } 
-#line 49 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\EagerLoadingSerialization.cst"
+#line 50 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\EagerLoadingSerialization.cst"
 break;
 		case SerializerDirection.FromStream:
 
-#line 52 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\EagerLoadingSerialization.cst"
-if (serializeIds) { 
 #line 53 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\EagerLoadingSerialization.cst"
+this.WriteObjects("			BinarySerializer.FromStream(out ",  collectionName , "_was_eagerLoaded, ",  streamName , ");\r\n");
+#line 54 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\EagerLoadingSerialization.cst"
+if (serializeIds) { 
+#line 55 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\EagerLoadingSerialization.cst"
 this.WriteObjects("			{\r\n");
 this.WriteObjects("				bool containsList;\r\n");
 this.WriteObjects("				BinarySerializer.FromStream(out containsList, ",  streamName , ");\r\n");
@@ -100,9 +103,9 @@ this.WriteObjects("						",  collectionName , "Ids.Add(id);\r\n");
 this.WriteObjects("					}\r\n");
 this.WriteObjects("				}\r\n");
 this.WriteObjects("			}\r\n");
-#line 69 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\EagerLoadingSerialization.cst"
-} 
 #line 71 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\EagerLoadingSerialization.cst"
+} 
+#line 73 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\EagerLoadingSerialization.cst"
 break;
 		default:
 			throw new ArgumentOutOfRangeException("direction");

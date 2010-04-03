@@ -124,7 +124,8 @@ if (eagerLoading)
 
 #line 83 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ObjectListProperty.cst"
 this.WriteObjects("		private List<int> ",  name , "Ids;\r\n");
-#line 85 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ObjectListProperty.cst"
+this.WriteObjects("		private bool ",  name , "_was_eagerLoaded = false;\r\n");
+#line 86 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ObjectListProperty.cst"
 }
 
     AddSerialization(serializationList, name, eagerLoading);

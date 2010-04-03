@@ -241,7 +241,8 @@ namespace Kistl.Client.Presentables
 
         #endregion
 
-        internal sealed class ModelCache
+        #region ModelCache
+        internal sealed class ModelCache : Cache
         {
             /// <summary>
             /// a map of all models created from this factory.
@@ -283,6 +284,17 @@ namespace Kistl.Client.Presentables
                 }
 
                 modelCache[parameters] = mdl;
+                ItemAdded();
+            }
+
+            public override int ItemCount
+            {
+                get { return _models.Count; }
+            }
+
+            public override void Clear()
+            {
+                _models.Clear();
             }
         }
 
@@ -330,5 +342,6 @@ namespace Kistl.Client.Presentables
 
             #endregion
         }
+        #endregion
     }
 }

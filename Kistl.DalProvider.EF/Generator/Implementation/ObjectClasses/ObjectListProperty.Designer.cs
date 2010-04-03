@@ -115,14 +115,15 @@ if (eagerLoading)
 
 #line 95 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\ObjectListProperty.cst"
 this.WriteObjects("		private List<int> ",  name , "Ids;\r\n");
-#line 98 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\ObjectListProperty.cst"
+this.WriteObjects("		private bool ",  name , "_was_eagerLoaded = false;\r\n");
+#line 99 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\ObjectListProperty.cst"
 if (serializationList != null)
 		{
 			serializationList.Add("Implementation.ObjectClasses.EagerLoadingSerialization", Kistl.Server.Generators.Templates.Implementation.SerializerType.Binary, null, null, name, true);
 		}
 	}
 
-#line 104 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\ObjectListProperty.cst"
+#line 105 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\ObjectListProperty.cst"
 this.WriteObjects("\r\n");
 
         }

@@ -178,6 +178,12 @@ namespace Kistl.API.Configuration
             /// </summary>
             [XmlElement(IsNullable = false)]
             public string DocumentStore { get; set; }
+
+            /// <summary>
+            /// Path to the Document Store - TODO: Will be replaced by a Document Cache
+            /// </summary>
+            [XmlElement(IsNullable = true)]
+            public bool? DevelopmentEnvironment { get; set; }            
         }
 
         /// <summary>

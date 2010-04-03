@@ -596,6 +596,7 @@ namespace Kistl.App.Base
         private EntityCollectionWrapper<Kistl.App.Base.MethodInvocation, Kistl.App.Base.MethodInvocation__Implementation__> _MethodInvocationsWrapper;
 
 		private List<int> MethodInvocationsIds;
+		private bool MethodInvocations_was_eagerLoaded = false;
 
 
         /// <summary>
@@ -645,6 +646,7 @@ namespace Kistl.App.Base
         private EntityCollectionWrapper<Kistl.App.Base.Method, Kistl.App.Base.Method__Implementation__> _MethodsWrapper;
 
 		private List<int> MethodsIds;
+		private bool Methods_was_eagerLoaded = false;
 
 
         /// <summary>
@@ -837,6 +839,7 @@ namespace Kistl.App.Base
         private EntityListWrapper<Kistl.App.Base.Property, Kistl.App.Base.Property__Implementation__> _PropertiesWrapper;
 
 		private List<int> PropertiesIds;
+		private bool Properties_was_eagerLoaded = false;
 
 
         /// <summary>
@@ -1294,6 +1297,7 @@ namespace Kistl.App.Base
                 BinarySerializer.ToStream(this._ExportGuid, binStream);
             }
 
+			BinarySerializer.ToStream(eagerLoadLists, binStream);
 			if(eagerLoadLists)
 			{
 				BinarySerializer.ToStream(true, binStream);
@@ -1311,6 +1315,7 @@ namespace Kistl.App.Base
 				BinarySerializer.ToStream(false, binStream);
 			}
 
+			BinarySerializer.ToStream(eagerLoadLists, binStream);
 			if(eagerLoadLists)
 			{
 				BinarySerializer.ToStream(true, binStream);
@@ -1333,6 +1338,7 @@ namespace Kistl.App.Base
 			}
             BinarySerializer.ToStream(this._Name, binStream);
 
+			BinarySerializer.ToStream(eagerLoadLists, binStream);
 			if(eagerLoadLists)
 			{
 				BinarySerializer.ToStream(true, binStream);
@@ -1369,6 +1375,7 @@ namespace Kistl.App.Base
                 BinarySerializer.FromStream(out this._ExportGuid, binStream);
             }
 
+			BinarySerializer.FromStream(out MethodInvocations_was_eagerLoaded, binStream);
 			{
 				bool containsList;
 				BinarySerializer.FromStream(out containsList, binStream);
@@ -1386,6 +1393,7 @@ namespace Kistl.App.Base
 				}
 			}
 
+			BinarySerializer.FromStream(out Methods_was_eagerLoaded, binStream);
 			{
 				bool containsList;
 				BinarySerializer.FromStream(out containsList, binStream);
@@ -1405,6 +1413,7 @@ namespace Kistl.App.Base
             BinarySerializer.FromStream(out this._fk_Module, binStream);
             BinarySerializer.FromStream(out this._Name, binStream);
 
+			BinarySerializer.FromStream(out Properties_was_eagerLoaded, binStream);
 			{
 				bool containsList;
 				BinarySerializer.FromStream(out containsList, binStream);

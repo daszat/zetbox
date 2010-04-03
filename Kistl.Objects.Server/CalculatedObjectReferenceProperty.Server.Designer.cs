@@ -79,6 +79,7 @@ namespace Kistl.App.Base
         }
         private EntityRelationBSideCollectionWrapper<Kistl.App.Base.CalculatedObjectReferenceProperty, Kistl.App.Base.Property, Kistl.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntry__Implementation__> _InputsWrapper;
 
+		private bool Inputs__Implementation___was_eagerLoaded = false;
 
         /// <summary>
         /// the referenced class of objects
@@ -327,6 +328,7 @@ namespace Kistl.App.Base
             
             base.ToStream(binStream, auxObjects, eagerLoadLists);
 
+			BinarySerializer.ToStream(eagerLoadLists, binStream);
 			if(eagerLoadLists)
 			{
 				foreach(var obj in Inputs__Implementation__)
@@ -347,6 +349,7 @@ namespace Kistl.App.Base
             
             base.FromStream(binStream);
 
+			BinarySerializer.FromStream(out Inputs__Implementation___was_eagerLoaded, binStream);
             BinarySerializer.FromStream(out this._fk_ReferencedClass, binStream);
         }
 

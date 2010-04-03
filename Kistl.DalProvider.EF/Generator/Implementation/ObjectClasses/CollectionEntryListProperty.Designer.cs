@@ -132,7 +132,14 @@ this.WriteObjects("        }\r\n");
 this.WriteObjects("        private ",  wrapperClass , "<",  rel.A.Type.GetDataTypeString() , ", ",  rel.B.Type.GetDataTypeString() , ", ",  ceName , "> ",  wrapperName , ";\r\n");
 this.WriteObjects("\r\n");
 #line 119 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\CollectionEntryListProperty.cst"
-AddSerialization(serializationList, efName, eagerLoading);
+if (eagerLoading)
+	{
+
+#line 122 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\CollectionEntryListProperty.cst"
+this.WriteObjects("		private bool ",  efName , "_was_eagerLoaded = false;\r\n");
+#line 124 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\CollectionEntryListProperty.cst"
+}
+        AddSerialization(serializationList, efName, eagerLoading);
 
 
         }

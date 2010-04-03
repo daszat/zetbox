@@ -37,6 +37,12 @@
 					Context.FetchRelation<<%= entryType %>>(new Guid("<%= relId %>"), RelationEndRole.<%= role %>, this);
 <%
 	}
+	else
+	{
+%>
+					if(!<%= name %>_was_eagerLoaded) Context.FetchRelation<<%= entryType %>>(new Guid("<%= relId %>"), RelationEndRole.<%= role %>, this);
+<%
+	}
 %>
 					<%= backingName %> 
 						= new <%= backingCollectionType %><<%= aSideType %>, <%= bSideType %>, <%= entryType %>>(
@@ -49,5 +55,11 @@
 
 		private <%= backingCollectionType %><<%= aSideType %>, <%= bSideType %>, <%= entryType %>> <%= backingName %>;
 <%
+	if(eagerLoading)
+	{
+%>		
+		private bool <%= name %>_was_eagerLoaded = false;
+<%
+	}
         AddSerialization(serializationList, name, eagerLoading);
 %>

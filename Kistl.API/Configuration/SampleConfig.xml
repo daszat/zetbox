@@ -15,6 +15,7 @@
   </Server>
   <Client StartClient="true" ThrowErrors="true">
     <DocumentStore>DocumentStore\Client\</DocumentStore>
+    <DevelopmentEnvironment>false</DevelopmentEnvironment>
   </Client>
   <SourceFileLocation>
     <!-- default probe path -->

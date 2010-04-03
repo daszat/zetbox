@@ -104,6 +104,7 @@ namespace Kistl.App.Test
         private EntityListWrapper<Kistl.App.Test.Antwort, Kistl.App.Test.Antwort__Implementation__> _AntwortenWrapper;
 
 		private List<int> AntwortenIds;
+		private bool Antworten_was_eagerLoaded = false;
 
 
         /// <summary>
@@ -318,6 +319,7 @@ namespace Kistl.App.Test
             
             base.ToStream(binStream, auxObjects, eagerLoadLists);
 
+			BinarySerializer.ToStream(eagerLoadLists, binStream);
 			if(eagerLoadLists)
 			{
 				BinarySerializer.ToStream(true, binStream);
@@ -342,6 +344,7 @@ namespace Kistl.App.Test
             
             base.FromStream(binStream);
 
+			BinarySerializer.FromStream(out Antworten_was_eagerLoaded, binStream);
 			{
 				bool containsList;
 				BinarySerializer.FromStream(out containsList, binStream);

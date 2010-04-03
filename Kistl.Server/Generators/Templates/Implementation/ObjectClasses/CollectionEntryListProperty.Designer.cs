@@ -66,8 +66,15 @@ this.WriteObjects("				{\r\n");
 this.WriteObjects("					Context.FetchRelation<",  entryType , ">(new Guid(\"",  relId , "\"), RelationEndRole.",  role , ", this);\r\n");
 #line 39 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CollectionEntryListProperty.cst"
 }
+	else
+	{
 
-#line 41 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CollectionEntryListProperty.cst"
+#line 43 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CollectionEntryListProperty.cst"
+this.WriteObjects("					if(!",  name , "_was_eagerLoaded) Context.FetchRelation<",  entryType , ">(new Guid(\"",  relId , "\"), RelationEndRole.",  role , ", this);\r\n");
+#line 45 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CollectionEntryListProperty.cst"
+}
+
+#line 47 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CollectionEntryListProperty.cst"
 this.WriteObjects("					",  backingName , " \r\n");
 this.WriteObjects("						= new ",  backingCollectionType , "<",  aSideType , ", ",  bSideType , ", ",  entryType , ">(\r\n");
 this.WriteObjects("							this, \r\n");
@@ -78,8 +85,16 @@ this.WriteObjects("			}\r\n");
 this.WriteObjects("		}\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("		private ",  backingCollectionType , "<",  aSideType , ", ",  bSideType , ", ",  entryType , "> ",  backingName , ";\r\n");
-#line 52 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CollectionEntryListProperty.cst"
-AddSerialization(serializationList, name, eagerLoading);
+#line 58 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CollectionEntryListProperty.cst"
+if(eagerLoading)
+	{
+
+#line 60 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CollectionEntryListProperty.cst"
+this.WriteObjects("		\r\n");
+this.WriteObjects("		private bool ",  name , "_was_eagerLoaded = false;\r\n");
+#line 63 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CollectionEntryListProperty.cst"
+}
+        AddSerialization(serializationList, name, eagerLoading);
 
 
         }

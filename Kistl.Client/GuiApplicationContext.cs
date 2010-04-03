@@ -126,12 +126,25 @@ namespace Kistl.Client
 
         public IRenderer Renderer { get; private set; }
 
+        private IReadOnlyKistlContext _metaContext = null;
         /// <inheritdoc />
         public IReadOnlyKistlContext MetaContext
         {
             get
             {
-                return FrozenContext.Single;
+                // TODO: Case# 817
+                if (_metaContext == null)
+                {
+                    if (Configuration.Client.DevelopmentEnvironment == true)
+                    {
+                        _metaContext = KistlContext.GetContext();
+                    }
+                    else
+                    {
+                        _metaContext = FrozenContext.Single;
+                    }
+                }
+                return _metaContext;
             }
         }
 

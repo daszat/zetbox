@@ -27,6 +27,7 @@
   <xs:complexType name="ClientConfig">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="1" name="DocumentStore" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="DevelopmentEnvironment" type="xs:boolean" />
     </xs:sequence>
     <xs:attribute name="StartClient" type="xs:boolean" use="required" />
     <xs:attribute name="ThrowErrors" type="xs:boolean" use="required" />
