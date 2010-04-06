@@ -71,6 +71,7 @@ namespace Kistl.Client.Presentables.ModuleEditor
                 {
                     var lst = new ObservableCollection<ViewModel>();
                     lst.Add(new ObjectClassInstanceListViewModel(AppContext, DataContext, CurrentModule));
+                    lst.Add(new InterfaceInstanceListViewModel(AppContext, DataContext, CurrentModule));
                     lst.Add(new EnumerationInstanceListViewModel(AppContext, DataContext, CurrentModule));
                     lst.Add(new CompoundObjectInstanceListViewModel(AppContext, DataContext, CurrentModule));
                     lst.Add(new AssemblyInstanceListViewModel(AppContext, DataContext, CurrentModule));

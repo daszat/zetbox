@@ -175,6 +175,7 @@
     <Compile Include="IChangedBy.Interface.Designer.cs" />
     <Compile Include="IExportable.Interface.Designer.cs" />
     <Compile Include="IInvocation.Interface.Designer.cs" />
+    <Compile Include="IModuleMember.Interface.Designer.cs" />
     <Compile Include="IRenderer.Interface.Designer.cs" />
     <Compile Include="ITestInterface.Interface.Designer.cs" />
     <Compile Include="AccessRights.Interface.Designer.cs" />

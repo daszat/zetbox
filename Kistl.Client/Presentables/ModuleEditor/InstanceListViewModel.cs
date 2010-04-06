@@ -129,7 +129,12 @@ namespace Kistl.Client.Presentables.ModuleEditor
 
         protected override IQueryable<IDataObject> GetQuery()
         {
-            return DataContext.GetQuery<ObjectClass>().Where(i => i.Module == module).ToList().AsQueryable().Cast<IDataObject>();
+            var result = DataContext.GetQuery<ObjectClass>().Where(i => i.Module == module).ToList().AsQueryable();
+            if (OnlyBaseClasses)
+            {
+                result = result.Where(i => i.BaseObjectClass == null);
+            }
+            return result.Cast<IDataObject>();
         }
 
         public override string Name
@@ -140,9 +145,56 @@ namespace Kistl.Client.Presentables.ModuleEditor
             }
         }
 
+        private bool _OnlyBaseClasses = false;
+        public bool OnlyBaseClasses
+        {
+            get
+            {
+                return _OnlyBaseClasses;
+            }
+            set
+            {
+                if (value != _OnlyBaseClasses)
+                {
+                    _OnlyBaseClasses = value;
+                    OnPropertyChanged("OnlyBaseClasses");
+                    OnPropertyChanged("InstancesFiltered");
+                }
+            }
+        }
+
         public override InterfaceType InterfaceType
         {
             get { return new InterfaceType(typeof(ObjectClass)); }
+        }
+    }
+
+    public class InterfaceInstanceListViewModel : InstanceListViewModel
+    {
+        public InterfaceInstanceListViewModel(
+            IGuiApplicationContext appCtx,
+            IKistlContext dataCtx,
+            Module module)
+            : base(appCtx, dataCtx, module)
+        {
+        }
+
+        protected override IQueryable<IDataObject> GetQuery()
+        {
+            return DataContext.GetQuery<Interface>().Where(i => i.Module == module).ToList().AsQueryable().Cast<IDataObject>();
+        }
+
+        public override string Name
+        {
+            get
+            {
+                return "Interfaces";
+            }
+        }
+
+        public override InterfaceType InterfaceType
+        {
+            get { return new InterfaceType(typeof(Interface)); }
         }
     }
 
