@@ -74,6 +74,8 @@ namespace Kistl.Server.Packaging
                 .OrderBy(i => i.ViewModelRef.Assembly.Name).ThenBy(i => i.ViewModelRef.FullName).ThenBy(i => i.ExportGuid));
             AddMetaObjects(result, ctx.GetQuery<ViewDescriptor>().Where(i => i.Module.ID == moduleID)
                 .OrderBy(i => i.ControlRef.Assembly.Name).ThenBy(i => i.ControlRef.FullName).ThenBy(i => i.ExportGuid));
+            AddMetaObjects(result, ctx.GetPersistenceObjectQuery<ViewDescriptor_supports_TypeRef_RelationEntry>().Where(i => i.A.Module.ID == moduleID)
+                .OrderBy(i => i.A.ControlRef.Assembly.Name).ThenBy(i => i.A.ControlRef.FullName).ThenBy(i => i.A.ExportGuid));
 
             // Security
             AddMetaObjects(result, ctx.GetQuery<Group>().Where(i => i.Module.ID == moduleID)

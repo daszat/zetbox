@@ -1437,6 +1437,10 @@
     <GUI:Module>0fe1ab38-860a-414f-a599-b0b86a22ce1a</GUI:Module>
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
+  <GUI:ViewDescriptor_supports_TypeRef_RelationEntry ExportGuid="27dadb79-f8dd-4ddc-8793-f8421f780113">
+    <GUI:A>c8bae57b-730c-47ae-a464-7b2c40ef0263</GUI:A>
+    <KistlBase:B>109e65cb-67b9-467d-a088-4c8f42b3c513</KistlBase:B>
+  </GUI:ViewDescriptor_supports_TypeRef_RelationEntry>
   <KistlBase:Module ExportGuid="ef6d5bd8-5826-4ce6-a9ca-c8438ddde773">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.32Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.32Z</KistlBase:CreatedOn>
@@ -12402,6 +12406,10 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
+  <GUI:ViewDescriptor_supports_TypeRef_RelationEntry ExportGuid="daeb6cfa-e00d-48d1-9a38-8c3482ba3e89">
+    <GUI:A>2509d44a-64df-468b-8980-04fae9bc1e9e</GUI:A>
+    <KistlBase:B>dcfbf9f3-df12-4edb-b3bd-deaf378d5420</KistlBase:B>
+  </GUI:ViewDescriptor_supports_TypeRef_RelationEntry>
   <KistlBase:Group ExportGuid="9c46f2b1-09d9-46b8-a7bf-812850921030">
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
     <KistlBase:Name>Administrator</KistlBase:Name>
