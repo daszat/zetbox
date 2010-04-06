@@ -21,7 +21,7 @@ namespace Kistl.Client.Forms
         [STAThread]
         static void Main()
         {
-            var config = KistlConfig.FromFile(String.Empty);
+            var config = KistlConfig.FromFile("DefaultFormsConfig.xml");
             AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
             Assembly interfaces = Assembly.Load(Kistl.API.Helper.InterfaceAssembly);
             Assembly implementation = Assembly.Load(Kistl.API.Helper.ClientAssembly);

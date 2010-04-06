@@ -157,7 +157,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DefaultConfig.xml">
+    <Content Include="DefaultFormsConfig.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
