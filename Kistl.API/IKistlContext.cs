@@ -366,13 +366,24 @@ namespace Kistl.API
         StackTrace DisposedAt { get; }
     }
 
-    public static class KistlContextExtensions
+    public interface IKistlQueryProvider : IQueryProvider
+    {
+    }
+
+    public static class KistlContextQueryableExtensions
     {
         public static IQueryable<T> WithEagerLoading<T>(this IQueryable<T> query)
         {
             if (query == null) throw new ArgumentNullException("query");
-            return query.Provider.CreateQuery<T>(
-                System.Linq.Expressions.Expression.Call(typeof(KistlContextExtensions), "WithEagerLoading", new Type[] { typeof(T) }, query.Expression));
+            if (query.Provider is IKistlQueryProvider)
+            {
+                return query.Provider.CreateQuery<T>(
+                    System.Linq.Expressions.Expression.Call(typeof(KistlContextQueryableExtensions), "WithEagerLoading", new Type[] { typeof(T) }, query.Expression));
+            }
+            else
+            {
+                return query;
+            }
         }
     }
 }

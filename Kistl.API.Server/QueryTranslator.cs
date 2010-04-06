@@ -69,7 +69,7 @@ namespace Kistl.API.Server
     #endregion
 
     #region QueryTranslatorProvider
-    public sealed class QueryTranslatorProvider<T> : ExpressionTreeTranslator, IQueryProvider
+    public sealed class QueryTranslatorProvider<T> : ExpressionTreeTranslator, IKistlQueryProvider
     {
         private readonly IMetaDataResolver _metaDataResolver;
         private readonly Identity _identity;
@@ -214,17 +214,25 @@ namespace Kistl.API.Server
             Expression objExp = base.Visit(m.Object);
             MethodInfo newMethod = GetMethodInfo(m.Method);
             ReadOnlyCollection<Expression> args = base.VisitExpressionList(m.Arguments);
-            var result = Expression.Call(
-                objExp,
-                newMethod,
-                args);
-
-            if (result.IsMethodCallExpression("OfType"))
+            if (m.IsMethodCallExpression("WithEagerLoading", typeof(KistlContextQueryableExtensions)))
             {
-                var type = result.Type.FindElementTypes().First();
-                return AddSecurityFilter(result, new InterfaceType(type.ToInterfaceType()));
+                // Eager Loading is done automatically on the server - ignore and continue
+                return args.Single();
             }
-            return result;
+            else
+            {
+                var result = Expression.Call(
+                    objExp,
+                    newMethod,
+                    args);
+
+                if (result.IsMethodCallExpression("OfType"))
+                {
+                    var type = result.Type.FindElementTypes().First();
+                    return AddSecurityFilter(result, new InterfaceType(type.ToInterfaceType()));
+                }
+                return result;
+            }
         }
 
         protected override Expression VisitUnary(UnaryExpression u)

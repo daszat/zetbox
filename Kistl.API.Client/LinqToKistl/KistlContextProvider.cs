@@ -17,7 +17,7 @@ namespace Kistl.API.Client
     /// <summary>
     /// Provider for Kistl Linq Provider
     /// </summary>
-    public class KistlContextProvider : ExpressionTreeVisitor, IQueryProvider
+    public class KistlContextProvider : ExpressionTreeVisitor, IKistlQueryProvider
     {
         /// <summary>
         /// The result type of this provider
@@ -303,7 +303,7 @@ namespace Kistl.API.Client
                 // OK - just a cast
                 // No special processing needed
             }
-            else if(m.IsMethodCallExpression("WithEagerLoading", typeof(KistlContextExtensions)))
+            else if (m.IsMethodCallExpression("WithEagerLoading", typeof(KistlContextQueryableExtensions)))
             {
                 _eagerLoadLists = true;
             }
