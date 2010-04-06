@@ -274,6 +274,7 @@ namespace Kistl.App.Base
 
             // pre-load context
             var oldTypes = ctx.GetQuery<TypeRef>()
+                .WithEagerLoading()
                 .Where(tr => tr.Assembly.ID == assembly.ID)
                 .ToList();
             try
