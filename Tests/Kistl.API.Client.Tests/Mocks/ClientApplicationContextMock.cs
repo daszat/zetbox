@@ -23,7 +23,7 @@ namespace Kistl.API.Client.Mocks
 
         public void SetInterfaceAssembly_Objects()
         {
-            InterfaceAssembly = "Kistl.Objects";
+            InterfaceAssembly = Kistl.API.Helper.InterfaceAssembly;
         }
 
         public void SetInterfaceAssembly_This()

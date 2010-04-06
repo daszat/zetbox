@@ -259,7 +259,7 @@ namespace Kistl.App.Extensions
         /// Initialises a new instane of the FrozenActionsManager.
         /// </summary>
         protected FrozenActionsManager()
-            : base("Frozen", "Kistl.Objects.Frozen")
+            : base("Frozen", Kistl.API.Helper.FrozenAssembly)
         {
         }
 

@@ -44,7 +44,7 @@ namespace Kistl.App.Base
         #region GetTypes
         public static void OnGetDataType_DataType(Kistl.App.Base.DataType obj, Kistl.API.MethodReturnEventArgs<System.Type> e)
         {
-            e.Result = Type.GetType(obj.GetDataTypeString() + ", Kistl.Objects", true);
+            e.Result = Type.GetType(obj.GetDataTypeString() + ", " + Kistl.API.Helper.InterfaceAssembly, true);
         }
 
         public static void OnGetDataTypeString_DataType(Kistl.App.Base.DataType obj, Kistl.API.MethodReturnEventArgs<string> e)
@@ -58,7 +58,7 @@ namespace Kistl.App.Base
 
             if (obj is EnumerationProperty)
             {
-                e.Result = Type.GetType(fullname + ", Kistl.Objects");
+                e.Result = Type.GetType(fullname + ", " + Kistl.API.Helper.InterfaceAssembly);
             }
             // ValueTypes all use mscorlib types,
             else if (obj is ValueTypeProperty)
@@ -68,7 +68,7 @@ namespace Kistl.App.Base
             else
             {
                 // other properties not
-                string assembly = "Kistl.Objects";
+                string assembly = Kistl.API.Helper.InterfaceAssembly;
                 e.Result = Type.GetType(fullname + ", " + assembly, true);
             }
         }
@@ -137,7 +137,7 @@ namespace Kistl.App.Base
         }
         public static void OnGetParameterType_ObjectParameter(Kistl.App.Base.ObjectParameter obj, Kistl.API.MethodReturnEventArgs<System.Type> e)
         {
-            e.Result = Type.GetType(obj.GetParameterTypeString() + ", Kistl.Objects", true);
+            e.Result = Type.GetType(obj.GetParameterTypeString() + ", " + Kistl.API.Helper.InterfaceAssembly, true);
         }
 
         public static void OnGetParameterTypeString_StringParameter(Kistl.App.Base.StringParameter obj, Kistl.API.MethodReturnEventArgs<string> e)

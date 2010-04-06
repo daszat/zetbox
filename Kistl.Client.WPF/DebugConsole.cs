@@ -39,6 +39,8 @@ namespace Kistl.Client.WPF
             standardOutput = new StreamWriter(fileStream, System.Text.Encoding.GetEncoding(437));
             standardOutput.AutoFlush = true;
             System.Console.SetOut(standardOutput);
+
+            System.Console.WriteLine("Debug Console allocated");
         }  
     }
 }

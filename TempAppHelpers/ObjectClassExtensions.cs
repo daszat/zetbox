@@ -171,7 +171,7 @@ namespace Kistl.App.Extensions
 
             // TODO: During export schema, while creating a new Database, no custom actions are attached (Database is empty)
             // return new InterfaceType(cls.GetDataType());
-            return new InterfaceType(Type.GetType(cls.Module.Namespace + "." + cls.Name + ", Kistl.Objects", true));
+            return new InterfaceType(Type.GetType(cls.Module.Namespace + "." + cls.Name + ", " + Kistl.API.Helper.InterfaceAssembly, true));
         }
 
         public static bool ImplementsIExportable(this ObjectClass cls)

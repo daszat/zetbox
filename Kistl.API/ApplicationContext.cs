@@ -71,7 +71,7 @@ namespace Kistl.API
             AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, Configuration);
 
             // Hardcode Interface and Implementation assemblies
-            InterfaceAssembly = "Kistl.Objects";
+            InterfaceAssembly = Kistl.API.Helper.InterfaceAssembly;
             ImplementationAssembly = "Kistl.Objects." + HostType;
         }
 

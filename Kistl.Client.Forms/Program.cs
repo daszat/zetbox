@@ -23,8 +23,8 @@ namespace Kistl.Client.Forms
         {
             var config = KistlConfig.FromFile(String.Empty);
             AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
-            Assembly interfaces = Assembly.Load("Kistl.Objects");
-            Assembly implementation = Assembly.Load("Kistl.Objects.Client");
+            Assembly interfaces = Assembly.Load(Kistl.API.Helper.InterfaceAssembly);
+            Assembly implementation = Assembly.Load(Kistl.API.Helper.ClientAssembly);
             AppContext = new GuiApplicationContext(config, "TEST", () => new MemoryContext(interfaces, implementation));
 
             Application.EnableVisualStyles();

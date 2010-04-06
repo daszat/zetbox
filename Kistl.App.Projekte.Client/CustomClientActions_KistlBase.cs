@@ -26,7 +26,7 @@ namespace Kistl.App.Base
         {
             // TODO: remove this bad test-hack
             string fullname = obj.GetDataTypeString();
-            string assembly = fullname == "Kistl.Client.Mocks.TestObject" ? "Kistl.Client.Tests" : "Kistl.Objects";
+            string assembly = fullname == "Kistl.Client.Mocks.TestObject" ? "Kistl.Client.Tests" : Kistl.API.Helper.InterfaceAssembly;
             e.Result = Type.GetType(fullname + ", " + assembly, true);
         }
 
@@ -50,7 +50,7 @@ namespace Kistl.App.Base
 
             if (obj is EnumerationProperty)
             {
-                e.Result = Type.GetType(fullname + ", Kistl.Objects");
+                e.Result = Type.GetType(fullname + ", " + Kistl.API.Helper.InterfaceAssembly);
             }
             // ValueTypes all use mscorlib types,
             else if (obj is ValueTypeProperty)
@@ -61,7 +61,7 @@ namespace Kistl.App.Base
             {
                 // other properties not
                 // TODO: ??
-                string assembly = fullname == "Kistl.Client.Mocks.TestObject" ? "Kistl.Client.Tests" : "Kistl.Objects";
+                string assembly = fullname == "Kistl.Client.Mocks.TestObject" ? "Kistl.Client.Tests" : Kistl.API.Helper.InterfaceAssembly;
                 e.Result = Type.GetType(fullname + ", " + assembly, true);
             }
         }
@@ -165,7 +165,7 @@ namespace Kistl.App.Base
 
         public static void OnGetParameterType_ObjectParameter(ObjectParameter obj, MethodReturnEventArgs<System.Type> e)
         {
-            e.Result = Type.GetType(obj.GetParameterTypeString() + ", Kistl.Objects", true);
+            e.Result = Type.GetType(obj.GetParameterTypeString() + ", " + Kistl.API.Helper.InterfaceAssembly, true);
         }
 
         public static void OnGetParameterTypeString_StringParameter(StringParameter obj, MethodReturnEventArgs<string> e)

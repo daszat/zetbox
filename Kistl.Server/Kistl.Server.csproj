@@ -30,6 +30,7 @@
     <DocumentationFile>..\bin\Debug\bin\Server\Kistl.Server.XML</DocumentationFile>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <ArebisMsBuildPath>..\Libs\ArebisCGen\Arebis.CodeGeneration.MsBuild\</ArebisMsBuildPath>
+    <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>

@@ -40,8 +40,8 @@ namespace Kistl.IntegrationTests
                     manager.Start(config);
 
                     AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
-                    Assembly interfaces = Assembly.Load("Kistl.Objects");
-                    Assembly implementation = Assembly.Load("Kistl.Objects.Client");
+                    Assembly interfaces = Assembly.Load(Kistl.API.Helper.InterfaceAssembly);
+                    Assembly implementation = Assembly.Load(Kistl.API.Helper.ClientAssembly);
                     var testCtx = new GuiApplicationContext(config, "WPF", () => new MemoryContext(interfaces, implementation));
                     using (var initCtx = Kistl.API.Client.KistlContext.GetContext()) {
                     	// load up all infrastructure from the DalProvider

@@ -22,7 +22,7 @@ namespace Kistl.DalProvider.Frozen
 
             // register the frozen context only when it's available
             // TODO: also check the version?
-            var frozenContextType = Type.GetType("Kistl.Objects.Frozen.FrozenContextImplementation, Kistl.Objects.Frozen", false);
+            var frozenContextType = Type.GetType("Kistl.Objects.Frozen.FrozenContextImplementation, " + Kistl.API.Helper.FrozenAssembly, false);
             if (frozenContextType != null)
             {
                 moduleBuilder

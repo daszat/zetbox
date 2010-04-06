@@ -289,5 +289,34 @@ namespace Kistl.Client.Presentables.ModuleEditor
             get { return new InterfaceType(typeof(ViewModelDescriptor)); }
         }
     }
+
+    public class RelationInstanceListViewModel : InstanceListViewModel
+    {
+        public RelationInstanceListViewModel(
+            IGuiApplicationContext appCtx,
+            IKistlContext dataCtx,
+            Module module)
+            : base(appCtx, dataCtx, module)
+        {
+        }
+
+        protected override IQueryable<IDataObject> GetQuery()
+        {
+            return DataContext.GetQuery<Relation>().Where(i => i.Module == module).ToList().AsQueryable().Cast<IDataObject>();
+        }
+
+        public override string Name
+        {
+            get
+            {
+                return "Relations";
+            }
+        }
+
+        public override InterfaceType InterfaceType
+        {
+            get { return new InterfaceType(typeof(Relation)); }
+        }
+    }
     #endregion
 }

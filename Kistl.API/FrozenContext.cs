@@ -153,7 +153,7 @@ namespace Kistl.API
         {
             using (Logging.Log.DebugTraceMethodCall())
             {
-                const string frozenAssemblyName = "Kistl.Objects.Frozen.FrozenContextImplementation, Kistl.Objects.Frozen";
+                string frozenAssemblyName = "Kistl.Objects.Frozen.FrozenContextImplementation, " + Kistl.API.Helper.FrozenAssembly;
                 if (!_haveTriedLoading)
                 {
                     try

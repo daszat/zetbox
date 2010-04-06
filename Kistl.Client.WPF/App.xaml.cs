@@ -69,8 +69,8 @@ namespace Kistl.Client.WPF
 
             SplashScreen.SetInfo("Bootstraping Assembly Resolver");
             AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
-            Assembly interfaces = Assembly.Load("Kistl.Objects");
-            Assembly implementation = Assembly.Load("Kistl.Objects.Client");
+            Assembly interfaces = Assembly.Load(Kistl.API.Helper.InterfaceAssembly);
+            Assembly implementation = Assembly.Load(Kistl.API.Helper.ClientAssembly);
 
             SplashScreen.SetInfo("Initializing Application Context");
             AppContext = new GuiApplicationContext(config, "WPF", () => new MemoryContext(interfaces, implementation));

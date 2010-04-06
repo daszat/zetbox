@@ -55,8 +55,8 @@ namespace Kistl.Client.ASPNET.Toolkit
 
                 var config = KistlConfig.FromFile(HttpContext.Current.Server.MapPath(ConfigurationManager.AppSettings["configFile"]));
                 AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
-                Assembly interfaces = Assembly.Load("Kistl.Objects");
-                Assembly implementation = Assembly.Load("Kistl.Objects.Client");
+                Assembly interfaces = Assembly.Load(Kistl.API.Helper.InterfaceAssembly);
+                Assembly implementation = Assembly.Load(Kistl.API.Helper.ClientAssembly);
                 var testCtx = new GuiApplicationContext(config, "ASPNET", () => new MemoryContext(interfaces, implementation));
             }
             KistlContext = Kistl.API.Client.KistlContext.GetContext();

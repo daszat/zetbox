@@ -24,20 +24,20 @@ namespace Kistl.DalProvider.EF
         {
             base.Load(moduleBuilder);
 
-            var interfaceAssembly = Assembly.Load("Kistl.Objects");
+            var interfaceAssembly = Assembly.Load(Kistl.API.Helper.InterfaceAssembly);
             if (interfaceAssembly == null)
                 throw new InvalidOperationException("Unable to load Kistl.Objects Assembly, no Entity Framework Metadata will be loaded");
-            var serverAssembly = Assembly.Load("Kistl.Objects.Server");
+            var serverAssembly = Assembly.Load(Kistl.API.Helper.ServerAssembly);
             if (serverAssembly == null)
                 throw new InvalidOperationException("Unable to load Kistl.Objects.Server Assembly, no Entity Framework Metadata will be loaded");
 
             // force-load a few assemblies to the reflection-only context so the DAL provider can find them
             // this uses the AssemblyLoader directly because Assembly.ReflectionOnlyLoad doesn't go through all 
             // the moves of resolving AssemblyNames to files. See http://stackoverflow.com/questions/570117/
-            var reflectedInterfaceAssembly = AssemblyLoader.ReflectionOnlyLoadFrom("Kistl.Objects");
+            var reflectedInterfaceAssembly = AssemblyLoader.ReflectionOnlyLoadFrom(Kistl.API.Helper.InterfaceAssembly);
             if (reflectedInterfaceAssembly == null)
                 throw new InvalidOperationException("Unable to load Kistl.Objects Assembly for reflection, no Entity Framework Metadata will be loaded");
-            var reflectedServerAssembly = AssemblyLoader.ReflectionOnlyLoadFrom("Kistl.Objects.Server");
+            var reflectedServerAssembly = AssemblyLoader.ReflectionOnlyLoadFrom(Kistl.API.Helper.ServerAssembly);
             if (reflectedServerAssembly == null)
                 throw new InvalidOperationException("Unable to load Kistl.Objects.Server Assembly for reflection, no Entity Framework Metadata will be loaded");
 
@@ -76,8 +76,8 @@ namespace Kistl.DalProvider.EF
                     // initialisation troubles
 
                     // TODO: decide whether to load this from configuration too?
-                    System.Reflection.Assembly interfaces = System.Reflection.Assembly.Load("Kistl.Objects");
-                    System.Reflection.Assembly implementation = System.Reflection.Assembly.Load("Kistl.Objects.Server");
+                    System.Reflection.Assembly interfaces = System.Reflection.Assembly.Load(Kistl.API.Helper.InterfaceAssembly);
+                    System.Reflection.Assembly implementation = System.Reflection.Assembly.Load(Kistl.API.Helper.ServerAssembly);
                     return new MemoryContext(interfaces, implementation);
                 })
                 .FactoryScoped();

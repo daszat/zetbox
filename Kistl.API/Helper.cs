@@ -33,6 +33,23 @@ namespace Kistl.API
         public static readonly string ImplementationSuffix = "__Implementation__";
 
         /// <summary>
+        /// Interface Assembly
+        /// </summary>
+        public static readonly string InterfaceAssembly = "Kistl.Objects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=7b69192d05046fdf";
+        /// <summary>
+        /// Client Assembly
+        /// </summary>
+        public static readonly string ClientAssembly = "Kistl.Objects.Client, Version=1.0.0.0, Culture=neutral, PublicKeyToken=7b69192d05046fdf";
+        /// <summary>
+        /// Server Assembly
+        /// </summary>
+        public static readonly string ServerAssembly = "Kistl.Objects.Server, Version=1.0.0.0, Culture=neutral, PublicKeyToken=7b69192d05046fdf";
+        /// <summary>
+        /// Frozen Assembly
+        /// </summary>
+        public static readonly string FrozenAssembly = "Kistl.Objects.Frozen, Version=1.0.0.0, Culture=neutral, PublicKeyToken=7b69192d05046fdf";
+
+        /// <summary>
         /// Suffix for Position Properties in Lists
         /// </summary>
         public static readonly string PositionSuffix = "_pos";
