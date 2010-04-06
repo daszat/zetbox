@@ -286,6 +286,7 @@ namespace Kistl.App.Base
                     .Select(t => t.ToRef(ctx))
                     .ToDictionary(tr => tr.ID);
 
+                // Delete unused Refs
                 foreach (var tr in oldTypes)
                 {
                     var type = tr.AsType(false);
@@ -302,6 +303,12 @@ namespace Kistl.App.Base
                             ctx.Delete(tr);
                         }
                     }
+                }
+
+                // update parent infos
+                foreach (var tr in newTypes.Values)
+                {
+                    tr.UpdateParent();
                 }
             }
             catch (FileNotFoundException ex)
