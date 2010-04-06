@@ -270,14 +270,62 @@ namespace Kistl.App.Base
 
         public static void OnRegenerateTypeRefs_Assembly(Assembly assembly)
         {
-            var ctx = assembly.Context;
+            using (Logging.Log.InfoTraceMethodCall(assembly.Name))
+            {
+                var ctx = assembly.Context;
 
-            // pre-load context
-            var oldTypes = ctx.GetQuery<TypeRef>()
-                .WithEagerLoading()
-                .Where(tr => tr.Assembly.ID == assembly.ID)
-                .ToList();
-            try
+                // pre-load context
+                var oldTypes = ctx.GetQuery<TypeRef>()
+                    .WithEagerLoading()
+                    .Where(tr => tr.Assembly.ID == assembly.ID)
+                    .ToList();
+
+                try
+                {
+                    var newTypes = LoadAndCreateTypes(assembly, ctx);
+
+
+                    using (Logging.Log.InfoTraceMethodCallFormat("Updating refs"))
+                    {
+                        // Delete unused Refs
+                        foreach (var tr in oldTypes)
+                        {
+                            var type = tr.AsType(false);
+                            if (type == null)
+                            {
+                                // TODO: delete+cascade here
+                                Logging.Log.Warn("Should delete " + tr.FullName);
+                                ////ctx.Delete(tr);
+                            }
+                            else if (!type.IsGenericType)
+                            {
+                                if (!newTypes.ContainsKey(tr.ID))
+                                {
+                                    ctx.Delete(tr);
+                                }
+                            }
+                        }
+                    }
+
+                    using (Logging.Log.InfoTraceMethodCallFormat("Updating parents"))
+                    {
+                        // update parent infos
+                        foreach (var tr in newTypes.Values)
+                        {
+                            tr.UpdateParent();
+                        }
+                    }
+                }
+                catch (FileNotFoundException ex)
+                {
+                    Logging.Log.Warn("Failed to RegenerateTypeRefs", ex);
+                }
+            }
+        }
+
+        private static Dictionary<int, TypeRef> LoadAndCreateTypes(Assembly assembly, IKistlContext ctx)
+        {
+            using (Logging.Log.InfoTraceMethodCall("Loading new types"))
             {
                 // load all current references into the context
                 var newTypes = System.Reflection.Assembly
@@ -286,35 +334,7 @@ namespace Kistl.App.Base
                     .Where(t => !t.IsGenericTypeDefinition)
                     .Select(t => t.ToRef(ctx))
                     .ToDictionary(tr => tr.ID);
-
-                // Delete unused Refs
-                foreach (var tr in oldTypes)
-                {
-                    var type = tr.AsType(false);
-                    if (type == null)
-                    {
-                        // TODO: delete+cascade here
-                        Logging.Log.Warn("Should delete " + tr.FullName);
-                        ////ctx.Delete(tr);
-                    }
-                    else if (!type.IsGenericType)
-                    {
-                        if (!newTypes.ContainsKey(tr.ID))
-                        {
-                            ctx.Delete(tr);
-                        }
-                    }
-                }
-
-                // update parent infos
-                foreach (var tr in newTypes.Values)
-                {
-                    tr.UpdateParent();
-                }
-            }
-            catch (FileNotFoundException ex)
-            {
-                Logging.Log.Warn("Failed to RegenerateTypeRefs", ex);
+                return newTypes;
             }
         }
 
