@@ -14744,7 +14744,7 @@
     <KistlBase:CreatedOn>2009-12-14T17:08:05.407Z</KistlBase:CreatedOn>
     <KistlBase:DeploymentRestrictions>0</KistlBase:DeploymentRestrictions>
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
-    <KistlBase:Name>Kistl.Objects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ccdf16e4dd7b6d78</KistlBase:Name>
+    <KistlBase:Name>Kistl.Objects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=7b69192d05046fdf</KistlBase:Name>
   </KistlBase:Assembly>
   <KistlBase:Assembly ExportGuid="59dbd4ab-f5d2-455f-8181-acffe0fcec0b">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.407Z</KistlBase:ChangedOn>
