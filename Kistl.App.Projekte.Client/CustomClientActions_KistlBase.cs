@@ -319,7 +319,15 @@ namespace Kistl.App.Base
 
         public static void OnUpdateParent_TypeRef(TypeRef obj)
         {
-            obj.Parent = obj.AsType(true).BaseType.ToRef(obj.Context);
+            var baseType = obj.AsType(true).BaseType;
+            if (baseType == null)
+            {
+                obj.Parent = null;
+            }
+            else
+            {
+                obj.Parent = baseType.ToRef(obj.Context);
+            }
         }
 
         public static void OnImplementInterfaces_ObjectClass(ObjectClass objClass)
