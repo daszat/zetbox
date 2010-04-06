@@ -10,7 +10,7 @@ namespace Kistl.Client.WPF
 
     using Kistl.Client.GUI;
     using Kistl.Client.Presentables;
-    
+
     using Microsoft.Win32;
 
     public class WpfModelFactory
@@ -43,7 +43,7 @@ namespace Kistl.Client.WPF
             else
             {
                 // TODO: what should be done here, really?
-                throw new NotImplementedException(String.Format("Cannot show view of type {0}", view.GetType()));
+                throw new NotImplementedException(String.Format("Cannot show view of type {0}", view == null ? "(null)" : view.GetType().ToString()));
             }
         }
 
@@ -59,7 +59,7 @@ namespace Kistl.Client.WPF
         public override object CreateDefaultView(ViewModel mdl)
         {
             System.Windows.Controls.Control view = (System.Windows.Controls.Control)base.CreateDefaultView(mdl);
-            if(view != null) view.DataContext = mdl;
+            if (view != null) view.DataContext = mdl;
             return view;
         }
 
