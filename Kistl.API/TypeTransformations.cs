@@ -45,6 +45,8 @@ namespace Kistl.API
             if (type.IsGenericType)
                 return type.GetGenericArguments().All(t => InterfaceType.IsValid(t));
 
+            if (type.IsValueType) return true;
+
             if (type.Assembly.FullName == ApplicationContext.Current.InterfaceAssembly
                 && type.IsInterface)
                 return true;
@@ -151,6 +153,8 @@ namespace Kistl.API
 
             if (type.IsGenericType)
                 return type.GetGenericArguments().All(t => ImplementationType.IsValid(t));
+
+            if (type.IsValueType) return true;
 
             if (type.Assembly.FullName == ApplicationContext.Current.ImplementationAssembly
                 && !type.IsInterface)

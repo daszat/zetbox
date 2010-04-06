@@ -72,7 +72,17 @@ namespace Kistl.API
 
             // Hardcode Interface and Implementation assemblies
             InterfaceAssembly = Kistl.API.Helper.InterfaceAssembly;
-            ImplementationAssembly = "Kistl.Objects." + HostType;
+            switch(HostType)
+            {
+                case HostType.Client:
+                    ImplementationAssembly = Kistl.API.Helper.ClientAssembly;
+                    break;
+                case HostType.Server:
+                    ImplementationAssembly = Kistl.API.Helper.ServerAssembly;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException("type");
+            }
         }
 
         #region IDisposable Members
