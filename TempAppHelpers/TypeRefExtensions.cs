@@ -41,6 +41,40 @@ namespace Kistl.App.Extensions
             return result;
         }
 
+        /// <summary>
+        /// Returns the right TypeRef for the specified system type, using an additional provided cache.
+        /// </summary>
+        /// <param name="t">the type to look up.</param>
+        /// <param name="ctx">the context to use to create the TypeRef if none is availabe.</param>
+        /// <param name="cache">an authoritative cache of all TypeRefs by TypeRef.FullName</param>
+        /// <returns>a TypeRef describing <paramref name="t"/></returns>
+        public static TypeRef ToRef(this Type t, IKistlContext ctx, ILookup<string, TypeRef> cache)
+        {
+            if (t == null) { throw new ArgumentNullException("t"); }
+            if (ctx == null) { throw new ArgumentNullException("ctx"); }
+
+            TypeRef result = null;
+
+            if (cache != null && cache.Contains(t.FullName))
+            {
+                foreach (var tr in cache[t.FullName])
+                {
+                    if (tr.AsType(false) == t)
+                    {
+                        result = tr;
+                        break;
+                    }
+                }
+            }
+
+            if (result == null)
+            {
+                result = t.ToRef(ctx);
+            }
+
+            return result;
+        }
+
         /// <returns>a Kistl TypeRef for a given System.Type</returns>
         public static TypeRef ToRef(this Type t, IKistlContext ctx)
         {
@@ -57,29 +91,35 @@ namespace Kistl.App.Extensions
             var result = LookupByType(ctx, ctx.GetQuery<TypeRef>(), t);
             if (result == null)
             {
-                result = ctx.Create<TypeRef>();
-                var a = t.Assembly.ToRef(ctx);
-                result.Assembly = a;
+                result = CreateTypeRef(t, ctx);
+            }
+            return result;
+        }
 
-                if (t.IsGenericType)
-                {
-                    var genericDefinition = t.GetGenericTypeDefinition();
-                    result.FullName = genericDefinition.FullName;
-                    result.GenericArguments.Clear();
-                    foreach (var arg in t.GetGenericArguments())
-                    {
-                        result.GenericArguments.Add(arg.ToRef(ctx));
-                    }
-                }
-                else
-                {
-                    result.FullName = t.FullName;
-                }
+        private static TypeRef CreateTypeRef(Type t, IKistlContext ctx)
+        {
+            var result = ctx.Create<TypeRef>();
+            var a = t.Assembly.ToRef(ctx);
+            result.Assembly = a;
 
-                if (t.BaseType != null)
+            if (t.IsGenericType)
+            {
+                var genericDefinition = t.GetGenericTypeDefinition();
+                result.FullName = genericDefinition.FullName;
+                result.GenericArguments.Clear();
+                foreach (var arg in t.GetGenericArguments())
                 {
-                    result.Parent = t.BaseType.ToRef(ctx);
+                    result.GenericArguments.Add(arg.ToRef(ctx));
                 }
+            }
+            else
+            {
+                result.FullName = t.FullName;
+            }
+
+            if (t.BaseType != null)
+            {
+                result.Parent = t.BaseType.ToRef(ctx);
             }
             return result;
         }

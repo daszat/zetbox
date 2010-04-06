@@ -278,17 +278,16 @@ namespace Kistl.App.Base
                 var oldTypes = ctx.GetQuery<TypeRef>()
                     .WithEagerLoading()
                     .Where(tr => tr.Assembly.ID == assembly.ID)
-                    .ToList();
+                    .ToLookup(tr => tr.FullName);
 
                 try
                 {
-                    var newTypes = LoadAndCreateTypes(assembly, ctx);
-
+                    var newTypes = LoadAndCreateTypes(assembly, ctx, oldTypes);
 
                     using (Logging.Log.InfoTraceMethodCallFormat("Updating refs"))
                     {
                         // Delete unused Refs
-                        foreach (var tr in oldTypes)
+                        foreach (var tr in oldTypes.SelectMany(g => g))
                         {
                             var type = tr.AsType(false);
                             if (type == null)
@@ -323,16 +322,15 @@ namespace Kistl.App.Base
             }
         }
 
-        private static Dictionary<int, TypeRef> LoadAndCreateTypes(Assembly assembly, IKistlContext ctx)
+        private static Dictionary<int, TypeRef> LoadAndCreateTypes(Assembly assembly, IKistlContext ctx, ILookup<string, TypeRef> oldTypes)
         {
             using (Logging.Log.InfoTraceMethodCall("Loading new types"))
             {
-                // load all current references into the context
                 var newTypes = System.Reflection.Assembly
                     .Load(assembly.Name)
                     .GetExportedTypes()
                     .Where(t => !t.IsGenericTypeDefinition)
-                    .Select(t => t.ToRef(ctx))
+                    .Select(t => t.ToRef(ctx, oldTypes))
                     .ToDictionary(tr => tr.ID);
                 return newTypes;
             }
