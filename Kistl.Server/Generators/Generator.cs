@@ -63,7 +63,8 @@ namespace Kistl.Server.Generators
 
         private void CompileCodeOnStaThread(string workingPath)
         {
-            var staThread = new Thread(() => CompileCode(workingPath));
+            Exception failed = null;
+            var staThread = new Thread(() => { try { CompileCode(workingPath); } catch (Exception ex) { failed = ex; } });
             if (staThread.TrySetApartmentState(ApartmentState.STA))
             {
                 Log.Info("Successfully set STA on compile thread");
@@ -75,11 +76,17 @@ namespace Kistl.Server.Generators
             staThread.Name = "Compile";
             staThread.Start();
             staThread.Join();
+
+            if (failed != null)
+            {
+                throw failed;
+            }
         }
 
         private void GenerateTo(string workingPath)
         {
             Log.InfoFormat("Generating Code to [{0}]", workingPath);
+            List<Exception> failed = new List<Exception>();
             var threads = new List<Thread>();
             foreach (var gen in _generatorProviders)
             {
@@ -87,9 +94,16 @@ namespace Kistl.Server.Generators
                 var generator = gen;
                 var genThread = new Thread(() =>
                 {
-                    using (var innerContainer = _container.CreateInnerContainer())
+                    try
                     {
-                        generator.Generate(innerContainer.Resolve<IKistlContext>(), workingPath);
+                        using (var innerContainer = _container.CreateInnerContainer())
+                        {
+                            generator.Generate(innerContainer.Resolve<IKistlContext>(), workingPath);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        failed.Add(ex);
                     }
                 });
                 genThread.Name = gen.BaseName;
@@ -99,6 +113,12 @@ namespace Kistl.Server.Generators
             foreach (var t in threads)
             {
                 t.Join();
+            }
+
+            if (failed.Count > 0)
+            {
+                // TODO: Introduce own exception
+                throw failed.First();
             }
         }
 
