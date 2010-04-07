@@ -131,7 +131,7 @@ M: System.Void Kistl.Server.Service.Program::XmlFallbackInitialisation(System.St
 M: Kistl.API.Configuration.KistlConfig Kistl.Server.Service.Program::InitApplicationContext(System.String[])
 M: System.Void Kistl.Server.Service.ServerManager::Start(Kistl.API.Configuration.KistlConfig)
 
-# see https://bugzilla.novell.com/show_bug.cgi?id=567995
+# see https://bugzilla.novell.com/show_bug.cgi?id=567995 , should be fixed in gendarme 2.8
 R: Gendarme.Rules.Exceptions.InstantiateArgumentExceptionCorrectlyRule
 M: TItem Kistl.API.BaseRelationListWrapper`6::get_Item(System.Int32)
 M: System.Void Kistl.API.BaseRelationListWrapper`6::set_Item(System.Int32,TItem)
@@ -139,6 +139,7 @@ M: TValue Kistl.API.ValueListWrapper`4::get_Item(System.Int32)
 M: System.Void Kistl.API.ValueListWrapper`4::set_Item(System.Int32,TValue)
 M: TInterface Kistl.DalProvider.EF.EntityListWrapper`2::get_Item(System.Int32)
 M: System.Void Kistl.DalProvider.EF.EntityListWrapper`2::set_Item(System.Int32,TInterface)
+M: System.Collections.IEnumerable Kistl.API.Utils.ContextCache::get_Item(Kistl.API.InterfaceType)
 
 R: Gendarme.Rules.Correctness.ProvideCorrectArgumentsToFormattingMethodsRule
 # Format string build during runtime

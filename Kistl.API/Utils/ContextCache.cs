@@ -1,52 +1,25 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Collections;
 
 namespace Kistl.API.Utils
 {
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+
     /// <summary>
     /// Store IPersistenceObjects ordered by (root-)Type and ID for fast access within the KistlContextImpl
     /// </summary>
-    public class ContextCache 
+    public class ContextCache
         : ICollection<IPersistenceObject>
     {
-
-        private IDictionary<Type, IDictionary<int, IPersistenceObject>> _objects = new Dictionary<Type, IDictionary<int, IPersistenceObject>>();
-        private IDictionary<Guid, IPersistenceObject> _exportableobjects = new Dictionary<Guid, IPersistenceObject>();
-
-        /// <summary>
-        /// Returns the root implementation Type of a given IPersistenceObject.
-        /// This corresponds to the ID namespace of the object
-        /// </summary>
-        /// <param name="obj">IPersistenceObject to inspect</param>
-        /// <returns>Root Type of the given Type</returns>
-        private static Type GetRootImplType(IPersistenceObject obj)
-        {
-            return GetRootImplType(obj.GetInterfaceType().ToImplementationType());
-        }
-
-        /// <summary>
-        /// Returns the root implementation Type of a given System.Type.
-        /// This corresponds to the ID namespace of the object
-        /// </summary>
-        /// <param name="t">Type to inspect</param>
-        /// <returns>Root Type of the given Type</returns>
-        private static Type GetRootImplType(ImplementationType t)
-        {
-            Type result = t.Type;
-            while (result != null && result.BaseType != null && result.BaseType.Name.EndsWith(Helper.ImplementationSuffix))
-            {
-                result = result.BaseType;
-            }
-
-            return result;
-        }
+        private Dictionary<InterfaceType, Dictionary<int, IPersistenceObject>> _objects = new Dictionary<InterfaceType, Dictionary<int, IPersistenceObject>>();
+        private Dictionary<Guid, IPersistenceObject> _exportableobjects = new Dictionary<Guid, IPersistenceObject>();
 
         public IPersistenceObject Lookup(InterfaceType t, int id)
         {
-            Type rootT = GetRootImplType(t.ToImplementationType());
+            if (t == null) { throw new ArgumentNullException("t"); }
+            var rootT = t.GetRootType();
 
             if (!_objects.ContainsKey(rootT))
                 return null;
@@ -69,12 +42,13 @@ namespace Kistl.API.Utils
         {
             get
             {
-                Type rootT = GetRootImplType(t.ToImplementationType());
+                if (t == null) { throw new ArgumentNullException("t"); }
+                var rootT = t.GetRootType();
 
                 if (!_objects.ContainsKey(rootT))
                     return null;
 
-                IDictionary<int, IPersistenceObject> typeList = _objects[rootT];
+                Dictionary<int, IPersistenceObject> typeList = _objects[rootT];
                 return typeList.Values;
             }
         }
@@ -83,7 +57,8 @@ namespace Kistl.API.Utils
 
         public void Add(IPersistenceObject item)
         {
-            Type rootT = GetRootImplType(item);
+            if (item == null) { throw new ArgumentNullException("item"); }
+            var rootT = item.GetInterfaceType().GetRootType();
 
             // create per-Type dictionary on-demand
             if (!_objects.ContainsKey(rootT))
@@ -107,7 +82,8 @@ namespace Kistl.API.Utils
 
         public bool Contains(IPersistenceObject item)
         {
-            Type rootT = GetRootImplType(item);
+            if (item == null) { throw new ArgumentNullException("item"); }
+            var rootT = item.GetInterfaceType().GetRootType();
             return _objects.ContainsKey(rootT) && _objects[rootT].ContainsKey(item.ID);
         }
 
@@ -131,9 +107,12 @@ namespace Kistl.API.Utils
 
         public bool Remove(IPersistenceObject item)
         {
+            if (item == null) { throw new ArgumentNullException("item"); }
+            var rootT = item.GetInterfaceType().GetRootType();
+
             if (Contains(item))
                 // should always return true
-                return _objects[GetRootImplType(item)].Remove(item.ID);
+                return _objects[rootT].Remove(item.ID);
             else
                 return false;
         }
