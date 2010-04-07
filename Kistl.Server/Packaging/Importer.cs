@@ -1,21 +1,19 @@
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Xml;
-using System.Xml.XPath;
-
-using Kistl.API;
-using Kistl.API.Server;
-using Kistl.API.Utils;
 
 namespace Kistl.Server.Packaging
 {
-    /// <summary>
-    /// 
-    /// </summary>
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Xml;
+    using System.Xml.XPath;
+
+    using Kistl.API;
+    using Kistl.API.Server;
+    using Kistl.API.Utils;
+
     public class Importer
     {
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Server.Importer");
@@ -298,7 +296,7 @@ namespace Kistl.Server.Packaging
                 {
                     throw new NotSupportedException("Interfacetype " + ifType + " is not supported");
                 }
-                IPersistenceObject obj = (IPersistenceObject)Activator.CreateInstance(ifType.ToImplementationType().Type);
+                IPersistenceObject obj = ctx.CreateUnattached(ifType);
                 if (obj == null)
                 {
                     throw new InvalidOperationException("Unable to create object of type " + ifType.ToImplementationType().Type);
@@ -314,6 +312,5 @@ namespace Kistl.Server.Packaging
             }
         }
         #endregion
-
     }
 }
