@@ -107,7 +107,7 @@ namespace Kistl.Server
                     {
                         var filterExpresstion = filter != null ? SerializableExpression.ToExpression(filter) : null;
                         IEnumerable<IStreamable> lst = _sohFactory
-                            .GetServerObjectHandler(type.GetInterfaceType().Type)
+                            .GetServerObjectHandler(type.GetInterfaceType())
                             .GetList(ctx, maxListCount,
                                 filterExpresstion,
                                 orderBy != null ? orderBy.Select(o => SerializableExpression.ToExpression(o)).ToList() : null);
@@ -210,7 +210,7 @@ namespace Kistl.Server
                     using (IKistlContext ctx = _ctxFactory())
                     {
                         IEnumerable<IStreamable> lst = _sohFactory
-                            .GetServerObjectHandler(type.GetInterfaceType().Type)
+                            .GetServerObjectHandler(type.GetInterfaceType())
                             .GetListOf(ctx, ID, property);
                         return SendObjects(lst, true);
                     }
@@ -250,7 +250,10 @@ namespace Kistl.Server
                         var ceType = ifType.MakeGenericType(rel.A.Type.GetDataType(), rel.B.Type.GetDataType());
 
                         var lst = _sohFactory
-                            .GetServerCollectionHandler(rel.A.Type.GetDataType(), rel.B.Type.GetDataType(), endRole)
+                            .GetServerCollectionHandler(
+                                new InterfaceType(rel.A.Type.GetDataType()),
+                                new InterfaceType(rel.B.Type.GetDataType()),
+                                endRole)
                             .GetCollectionEntries(ctx, relId, endRole, parentObjID);
 
                         return SendObjects(lst.Cast<IStreamable>(), true);

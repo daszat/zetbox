@@ -93,11 +93,7 @@ namespace Kistl.DalProvider.EF
                 .SingletonScoped();
 
             moduleBuilder
-                .Register(c => new ServerObjectHandlerFactory(
-                    typeof(ServerCollectionHandler<,,,>),
-                    typeof(ServerObjectHandler<>),
-                    typeof(ServerObjectSetHandler),
-                    typeof(ServerDocumentHandler)))
+                .Register(c => new EfServerObjectHandlerFactory())
                 .As(typeof(IServerObjectHandlerFactory));
         }
     }

@@ -404,8 +404,7 @@ namespace Kistl.DalProvider.EF
 
         protected override object CreateUnattachedInstance(InterfaceType ifType)
         {
-            var implTypeName = String.Format("{0}.{1}{2}, {3}", ifType.Type.Namespace, ifType.Type.Name, Kistl.API.Helper.ImplementationSuffix, Kistl.API.Helper.ServerAssembly);
-            return Activator.CreateInstance(Type.GetType(implTypeName), true);
+            return Activator.CreateInstance(ImplementationType(ifType).Type);
         }
 
         /// <summary>
@@ -657,6 +656,12 @@ namespace Kistl.DalProvider.EF
                 obj.AttachToContext(this);
             }
             return result;
+        }
+
+        public static ImplementationType ImplementationType(InterfaceType ifType)
+        {
+            var implTypeName = String.Format("{0}.{1}{2}, {3}", ifType.Type.Namespace, ifType.Type.Name, Kistl.API.Helper.ImplementationSuffix, Kistl.API.Helper.ServerAssembly);
+            return new ImplementationType(Type.GetType(implTypeName, true));
         }
     }
 }

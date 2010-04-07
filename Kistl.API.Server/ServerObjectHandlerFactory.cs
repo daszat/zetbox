@@ -8,88 +8,60 @@ namespace Kistl.API.Server
     using Kistl.API.Utils;
 
     /// <summary>
-    /// Default-Factory for loading ServerObjectHandlers from types.
+    /// Default-Factory for loading ServerObjectHandlers from types containing
+    /// helper methods to help with creating the generic handlers.
     /// </summary>
-    public class ServerObjectHandlerFactory
+    public abstract class ServerObjectHandlerFactory
         : IServerObjectHandlerFactory
     {
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Server");
 
-        private readonly Type _collectionHandlerType = null;
-        private readonly Type _objectHandlerType = null;
-        private readonly Type _objectSetHandlerType = null;
-        private readonly Type _documentHandlerType = null;
-
-        /// <summary>
-        /// Initialises a new instance of the ServerObjectHandlerFactory 
-        /// class using the specified types as source for the server object 
-        /// handlers.
-        /// </summary>
-        /// <param name="collectionHandler"></param>
-        /// <param name="objectHandler"></param>
-        /// <param name="objectSetHandler"></param>
-        /// <param name="documentHandlerType"></param>
-        public ServerObjectHandlerFactory(Type collectionHandler, Type objectHandler, Type objectSetHandler, Type documentHandlerType)
+        protected ServerObjectHandlerFactory()
         {
-            _collectionHandlerType = collectionHandler;
-            _objectHandlerType = objectHandler;
-            _objectSetHandlerType = objectSetHandler;
-            _documentHandlerType = documentHandlerType;
         }
 
         /// <inheritdoc/>
-        public IServerObjectHandler GetServerObjectHandler(Type type)
+        protected IServerObjectHandler GetServerObjectHandlerHelper(
+            Type objectHandlerType,
+            ImplementationType implType)
         {
-            if (type == null) { throw new ArgumentNullException("type"); }
+            if (implType == null) { throw new ArgumentNullException("implType"); }
 
             try
             {
-                Type result = _objectHandlerType.MakeGenericType(type);
+                Type result = objectHandlerType.MakeGenericType(implType.Type);
                 return (IServerObjectHandler)Activator.CreateInstance(result);
             }
             catch (Exception ex)
             {
-                Log.Error(String.Format("Failed to create IServerObjectHandler for [{0}]", type), ex);
+                Log.Error(String.Format("Failed to create IServerObjectHandler for [{0}]", implType), ex);
                 throw;
             }
         }
 
         /// <inheritdoc/>
-        public IServerObjectSetHandler GetServerObjectSetHandler()
-        {
-            try
-            {
-                return (IServerObjectSetHandler)Activator.CreateInstance(_objectSetHandlerType);
-            }
-            catch (Exception ex)
-            {
-                Log.Error("Failed to create IServerObjectSetHandler", ex);
-                throw;
-            }
-        }
-
-        /// <inheritdoc/>
-        public IServerCollectionHandler GetServerCollectionHandler(Type aType, Type bType, RelationEndRole endRole)
+        protected IServerCollectionHandler GetServerCollectionHandlerHelper(
+            Type collectionHandlerType,
+            ImplementationType aType,
+            ImplementationType bType,
+            RelationEndRole endRole)
         {
             if (aType == null) { throw new ArgumentNullException("aType"); }
             if (bType == null) { throw new ArgumentNullException("bType"); }
             try
             {
-                aType = aType.ToImplementationType();
-                bType = bType.ToImplementationType();
-
                 // dynamically translate generic types into provider-known types
                 Type[] genericArgs;
                 if (endRole == RelationEndRole.A)
                 {
-                    genericArgs = new Type[] { aType, bType, aType, bType };
+                    genericArgs = new Type[] { aType.Type, bType.Type, aType.Type, bType.Type };
                 }
                 else
                 {
-                    genericArgs = new Type[] { aType, bType, bType, aType };
+                    genericArgs = new Type[] { aType.Type, bType.Type, bType.Type, aType.Type };
                 }
 
-                Type resultType = _collectionHandlerType.MakeGenericType(genericArgs);
+                Type resultType = collectionHandlerType.MakeGenericType(genericArgs);
                 return (IServerCollectionHandler)Activator.CreateInstance(resultType);
             }
             catch (Exception ex)
@@ -104,17 +76,13 @@ namespace Kistl.API.Server
             }
         }
 
-        public IServerDocumentHandler GetServerDocumentHandler()
-        {
-            try
-            {
-                return (IServerDocumentHandler)Activator.CreateInstance(_documentHandlerType);
-            }
-            catch (Exception ex)
-            {
-                Log.Error("Failed to create IServerDocumentHandler", ex);
-                throw;
-            }
-        }
+        #region IServerObjectHandlerFactory Members
+
+        public abstract IServerCollectionHandler GetServerCollectionHandler(InterfaceType aType, InterfaceType bType, RelationEndRole endRole);
+        public abstract IServerObjectHandler GetServerObjectHandler(InterfaceType type);
+        public abstract IServerObjectSetHandler GetServerObjectSetHandler();
+        public abstract IServerDocumentHandler GetServerDocumentHandler();
+
+        #endregion
     }
 }

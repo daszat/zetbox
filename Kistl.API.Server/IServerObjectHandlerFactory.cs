@@ -12,15 +12,15 @@ namespace Kistl.API.Server
         /// <param name="bType">The type of the B-side of the Relation.</param>
         /// <param name="endRole">The "parent"-side of the collection.</param>
         /// <returns>A newly initialised <see cref="IServerCollectionHandler"/>.</returns>
-        IServerCollectionHandler GetServerCollectionHandler(Type aType, Type bType, RelationEndRole endRole);
+        IServerCollectionHandler GetServerCollectionHandler(InterfaceType aType, InterfaceType bType, RelationEndRole endRole);
 
         /// <summary>
         /// Creates an <see cref="IServerObjectHandler"/> for the specified Type.
         /// </summary>
         /// <param name="type">The Type which should be handled by the <see cref="IServerObjectHandler"/>.</param>
         /// <returns>A newly initialised <see cref="IServerObjectHandler"/>.</returns>
-        IServerObjectHandler GetServerObjectHandler(Type type);
-        
+        IServerObjectHandler GetServerObjectHandler(InterfaceType type);
+
         /// <summary>
         /// Creates an <see cref="IServerObjectSetHandler"/>.
         /// </summary>
