@@ -81,7 +81,7 @@ namespace Kistl.API.Server
             if (expression == null) throw new ArgumentNullException("expression");
 
             Type elementType = expression.Type.FindElementTypes().First();
-            MethodInfo getSubProvider = typeof(QueryTranslatorProvider<T>).GetMethod("GetSubProvider").MakeGenericMethod(elementType);
+            MethodInfo getSubProvider = typeof(QueryTranslatorProvider<T>).GetMethod("GetSubProvider", BindingFlags.NonPublic | BindingFlags.Instance).MakeGenericMethod(elementType);
             // new' up a generic class with the result of a generic method call, yay!
             IQueryable result = (IQueryable)Activator.CreateInstance(typeof(QueryTranslator<>).MakeGenericType(elementType),
                 new object[] { getSubProvider.Invoke(this, new object[] { }) });
@@ -433,11 +433,13 @@ namespace Kistl.API.Server
         /// <summary>
         /// Translates the specified Type to a provider type, if it is a IPersistenceObject; else it is passed through unmodified.
         /// </summary>
-        /// <param name="t"></param>
-        /// <returns></returns>
-        private Type TranslateType(Type t)
+        private Type TranslateType(Type type)
         {
-            return typeof(IPersistenceObject).IsAssignableFrom(t) ? ToProviderType(t) : t;
+            return (type.IsIPersistenceObject() || type.IsICompoundObject())
+                ? ToProviderType(type)
+                : type.IsGenericType
+                    ? type.GetGenericTypeDefinition().MakeGenericType(type.GetGenericArguments().Select(arg => TranslateType(arg)).ToArray())
+                    : type;
         }
 
         #endregion
