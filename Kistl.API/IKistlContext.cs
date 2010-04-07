@@ -288,17 +288,30 @@ namespace Kistl.API
         bool IsReadonly { get; }
 
         /// <summary>
-        /// Creates a new IDataObject by Type
+        /// Creates a new attached IDataObject by Type
         /// </summary>
         /// <param name="ifType">Type of the new IDataObject</param>
-        /// <returns>A new IDataObject</returns>
+        /// <returns>A new attached IDataObject</returns>
         IDataObject Create(InterfaceType ifType);
         /// <summary>
-        /// Creates a new IDataObject.
+        /// Creates a new attached IDataObject.
         /// </summary>
         /// <typeparam name="T">Type of the new IDataObject</typeparam>
-        /// <returns>A new IDataObject</returns>
+        /// <returns>A new attached IDataObject</returns>
         T Create<T>() where T : class, IDataObject;
+
+        /// <summary>
+        /// Creates a new unattached IPersistenceObject by Type
+        /// </summary>
+        /// <param name="ifType">Type of the new IPersistenceObject</param>
+        /// <returns>A new unattached IPersistenceObject</returns>
+        IPersistenceObject CreateUnattached(InterfaceType ifType);
+        /// <summary>
+        /// Creates a new unattached IPersistenceObject.
+        /// </summary>
+        /// <typeparam name="T">Type of the new IPersistenceObject</typeparam>
+        /// <returns>A new unattached IPersistenceObject</returns>
+        T CreateUnattached<T>() where T : class, IPersistenceObject;
 
         /// <summary>
         /// Creates a new ICollectionEntry by Type

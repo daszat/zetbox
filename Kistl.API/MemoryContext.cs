@@ -162,24 +162,28 @@ namespace Kistl.API
 
         public bool IsReadonly { get { return false; } }
 
-        /// <summary>
-        /// Creates a new IDataObject.
-        /// </summary>
-        /// <typeparam name="T">Type of the new IDataObject</typeparam>
-        /// <returns>A new IDataObject</returns>
+        /// <inheritdoc />
         public T Create<T>() where T : class, IDataObject
         {
             return (T)Create(new InterfaceType(typeof(T)));
         }
 
-        /// <summary>
-        /// Creates a new IDataObject by System.Type. Note - this Method is depricated!
-        /// </summary>
-        /// <param name="ifType">System.Type of the new IDataObject</param>
-        /// <returns>A new IDataObject</returns>
+        /// <inheritdoc />
         public IDataObject Create(InterfaceType ifType)
         {
             return (IDataObject)CreateInternal(ifType);
+        }
+
+        /// <inheritdoc />
+        public T CreateUnattached<T>() where T : class, IPersistenceObject
+        {
+            return (T)CreateUnattachedInstance(new InterfaceType(typeof(T)));
+        }
+
+        /// <inheritdoc />
+        public IPersistenceObject CreateUnattached(InterfaceType ifType)
+        {
+            return (IPersistenceObject)CreateUnattachedInstance(ifType);
         }
 
         /// <summary>
@@ -220,9 +224,14 @@ namespace Kistl.API
             return (IValueCollectionEntry)CreateInternal(ifType);
         }
 
+        private object CreateUnattachedInstance(InterfaceType ifType)
+        {
+            return Activator.CreateInstance(ifType.ToImplementationType().Type);
+        }
+
         private IPersistenceObject CreateInternal(InterfaceType ifType)
         {
-            IPersistenceObject obj = (IPersistenceObject)Activator.CreateInstance(ifType.ToImplementationType().Type);
+            IPersistenceObject obj = (IPersistenceObject)CreateUnattachedInstance(ifType);
             Attach(obj);
             OnObjectCreated(obj);
             if (obj is IDataObject)
@@ -239,7 +248,7 @@ namespace Kistl.API
         /// <returns>A new CompoundObject</returns>
         public ICompoundObject CreateCompoundObject(InterfaceType ifType)
         {
-            ICompoundObject obj = (ICompoundObject)Activator.CreateInstance(ifType.ToImplementationType().Type);
+            ICompoundObject obj = (ICompoundObject)CreateUnattachedInstance(ifType);
             return obj;
         }
         /// <summary>

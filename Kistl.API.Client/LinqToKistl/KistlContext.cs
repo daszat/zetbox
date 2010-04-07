@@ -231,6 +231,18 @@ namespace Kistl.API.Client
             return (IDataObject)CreateInternal(ifType);
         }
 
+        /// <inheritdoc />
+        public IPersistenceObject CreateUnattached(InterfaceType ifType)
+        {
+            return (IPersistenceObject)CreateUnattachedInstance(ifType);
+        }
+
+        /// <inheritdoc />
+        public T CreateUnattached<T>() where T : class, IPersistenceObject
+        {
+            return (T)CreateUnattachedInstance(new InterfaceType(typeof(T)));
+        }
+
         /// <summary>
         /// Creates a new IRelationCollectionEntry by Type
         /// </summary>
@@ -269,13 +281,17 @@ namespace Kistl.API.Client
             return (IValueCollectionEntry)CreateInternal(ifType);
         }
 
+        private object CreateUnattachedInstance(InterfaceType ifType)
+        {
+            return Activator.CreateInstance(ifType.ToImplementationType().Type);
+        }
 
         private IPersistenceObject CreateInternal(InterfaceType ifType)
         {
             CheckDisposed();
             if (ifType.Type == typeof(Kistl.App.Base.Blob)) throw new InvalidOperationException("Creating a Blob is not supported. Use CreateBlob() instead");
 
-            IPersistenceObject obj = (IPersistenceObject)Activator.CreateInstance(ifType.ToImplementationType().Type);
+            IPersistenceObject obj = (IPersistenceObject)CreateUnattachedInstance(ifType);
             Attach(obj);
             OnObjectCreated(obj);
             if (obj is IDataObject)
@@ -293,7 +309,7 @@ namespace Kistl.API.Client
         public ICompoundObject CreateCompoundObject(InterfaceType ifType)
         {
             CheckDisposed();
-            ICompoundObject obj = (ICompoundObject)Activator.CreateInstance(ifType.ToImplementationType().Type);
+            ICompoundObject obj = (ICompoundObject)CreateUnattachedInstance(ifType);
             return obj;
         }
         /// <summary>

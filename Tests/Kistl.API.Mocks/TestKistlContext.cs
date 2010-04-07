@@ -90,6 +90,16 @@ namespace Kistl.API.Mocks
             throw new NotImplementedException();
         }
 
+        public IPersistenceObject CreateUnattached(InterfaceType ifType)
+        {
+            throw new NotImplementedException();
+        }
+
+        public T CreateUnattached<T>() where T : class, IPersistenceObject
+        {
+            throw new NotImplementedException();
+        }
+
         public IRelationCollectionEntry CreateRelationCollectionEntry(InterfaceType ifType)
         {
             throw new NotImplementedException();

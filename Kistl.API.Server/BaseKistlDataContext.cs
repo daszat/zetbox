@@ -294,6 +294,18 @@ namespace Kistl.API.Server
             return (T)Create(new InterfaceType(typeof(T)));
         }
 
+        /// <inheritdoc />
+        public IPersistenceObject CreateUnattached(InterfaceType ifType)
+        {
+            return (IPersistenceObject)CreateUnattachedInstance(ifType);
+        }
+
+        /// <inheritdoc />
+        public T CreateUnattached<T>() where T : class, IPersistenceObject
+        {
+            return (T)CreateUnattachedInstance(new InterfaceType(typeof(T)));
+        }
+
         /// <summary>
         /// Creates a new IPersistenceObject by System.Type.
         /// </summary>
