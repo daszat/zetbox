@@ -307,6 +307,7 @@
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>Model.ssdl.EntityTypeColumnsRel.Designer.cs</LastGenOutput>
     </None>
+    <Compile Include="EfQueryTranslatorProvider.cs" />
     <Compile Include="EfServerObjectHandlerFactory.cs" />
     <Compile Include="Generator\Implementation\EfModel\ModelMslEntityTypeMapping.ComplexProperty.cs" />
     <Compile Include="Generator\Implementation\EfModel\ModelMslEntityTypeMapping.ScalarProperty.cs" />

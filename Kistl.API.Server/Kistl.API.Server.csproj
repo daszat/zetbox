@@ -70,6 +70,7 @@
   <ItemGroup>
     <Compile Include="BaseKistlDataContext.cs" />
     <Compile Include="BaseServerDataObject.cs" />
+    <Compile Include="QueryTranslatorProvider.cs" />
     <Compile Include="CustomPropertyDescriptor.cs" />
     <Compile Include="IdentityManager.cs" />
     <Compile Include="IKistlServerContext.cs" />

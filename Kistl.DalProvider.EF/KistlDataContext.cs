@@ -205,8 +205,9 @@ namespace Kistl.DalProvider.EF
                 query = AddEagerLoading<T>(query);
 #endif
                 _table[type] = new QueryTranslator<T>(
-                    metaDataResolver, this.identity,
-                    query, this);
+                    new EfQueryTranslatorProvider<T>(
+                        metaDataResolver, this.identity,
+                        query, this));
             }
 
             // This doesn't work without "OfType"
@@ -228,8 +229,9 @@ namespace Kistl.DalProvider.EF
                 query = AddEagerLoading<T>(query);
 #endif
                 _table[type] = new QueryTranslator<T>(
-                    metaDataResolver, this.identity,
-                    query, this);
+                    new EfQueryTranslatorProvider<T>(
+                        metaDataResolver, this.identity,
+                        query, this));
             }
 
             // This doesn't work without "OfType"
