@@ -10,7 +10,7 @@ namespace Kistl.App.Base
     /// <summary>
     /// Base Metadefinition Object for Objectclasses, Interfaces, CompoundObjects and Enumerations.
     /// </summary>
-    public interface DataType : IDataObject, Kistl.App.Base.IChangedBy, Kistl.App.Base.IExportable 
+    public interface DataType : IDataObject, Kistl.App.Base.IChangedBy, Kistl.App.Base.IExportable, Kistl.App.Base.IModuleMember 
     {
 
         /// <summary>
@@ -37,13 +37,6 @@ namespace Kistl.App.Base
         /// </summary>
 
         ICollection<Kistl.App.Base.Method> Methods { get; }
-        /// <summary>
-        /// Modul der Objektklasse
-        /// </summary>
-		Kistl.App.Base.Module Module {
-			get;
-			set;
-		}
         /// <summary>
         /// Der Name der Objektklasse
         /// </summary>

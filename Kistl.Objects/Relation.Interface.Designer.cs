@@ -10,7 +10,7 @@ namespace Kistl.App.Base
     /// <summary>
     /// Describes a Relation between two Object Classes
     /// </summary>
-    public interface Relation : IDataObject, Kistl.App.Base.IChangedBy, Kistl.App.Base.IExportable 
+    public interface Relation : IDataObject, Kistl.App.Base.IChangedBy, Kistl.App.Base.IExportable, Kistl.App.Base.IModuleMember 
     {
 
         /// <summary>
@@ -38,13 +38,6 @@ namespace Kistl.App.Base
         /// Description of this Relation
         /// </summary>
 		string Description {
-			get;
-			set;
-		}
-        /// <summary>
-        /// 
-        /// </summary>
-		Kistl.App.Base.Module Module {
 			get;
 			set;
 		}

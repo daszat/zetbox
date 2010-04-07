@@ -10,7 +10,7 @@ namespace Kistl.App.Base
     /// <summary>
     /// 
     /// </summary>
-    public interface Group : IDataObject, Kistl.App.Base.IExportable 
+    public interface Group : IDataObject, Kistl.App.Base.IExportable, Kistl.App.Base.IModuleMember 
     {
 
         /// <summary>
@@ -23,13 +23,6 @@ namespace Kistl.App.Base
         /// </summary>
 
         ICollection<Kistl.App.Base.Identity> Member { get; }
-        /// <summary>
-        /// Module is optional. Use it only when you need a Group to be exportable
-        /// </summary>
-		Kistl.App.Base.Module Module {
-			get;
-			set;
-		}
         /// <summary>
         /// 
         /// </summary>

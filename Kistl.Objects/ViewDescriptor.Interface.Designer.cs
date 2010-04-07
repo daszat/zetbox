@@ -10,7 +10,7 @@ namespace Kistl.App.GUI
     /// <summary>
     /// 
     /// </summary>
-    public interface ViewDescriptor : IDataObject, Kistl.App.Base.IExportable 
+    public interface ViewDescriptor : IDataObject, Kistl.App.Base.IExportable, Kistl.App.Base.IModuleMember 
     {
 
         /// <summary>
@@ -24,13 +24,6 @@ namespace Kistl.App.GUI
         /// 
         /// </summary>
 		Kistl.App.GUI.ControlKindClass Kind {
-			get;
-			set;
-		}
-        /// <summary>
-        /// 
-        /// </summary>
-		Kistl.App.Base.Module Module {
 			get;
 			set;
 		}

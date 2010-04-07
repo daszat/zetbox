@@ -10,20 +10,13 @@ namespace Kistl.App.Base
     /// <summary>
     /// 
     /// </summary>
-    public interface Assembly : IDataObject, Kistl.App.Base.IChangedBy, Kistl.App.Base.IExportable 
+    public interface Assembly : IDataObject, Kistl.App.Base.IChangedBy, Kistl.App.Base.IExportable, Kistl.App.Base.IModuleMember 
     {
 
         /// <summary>
         /// Deployment restrictions for this assembly
         /// </summary>
 		Kistl.App.Base.DeploymentRestriction DeploymentRestrictions {
-			get;
-			set;
-		}
-        /// <summary>
-        /// Module
-        /// </summary>
-		Kistl.App.Base.Module Module {
 			get;
 			set;
 		}

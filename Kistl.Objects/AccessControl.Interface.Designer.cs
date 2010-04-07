@@ -10,20 +10,13 @@ namespace Kistl.App.Base
     /// <summary>
     /// 
     /// </summary>
-    public interface AccessControl : IDataObject, Kistl.App.Base.IChangedBy, Kistl.App.Base.IExportable 
+    public interface AccessControl : IDataObject, Kistl.App.Base.IChangedBy, Kistl.App.Base.IExportable, Kistl.App.Base.IModuleMember 
     {
 
         /// <summary>
         /// 
         /// </summary>
 		string Description {
-			get;
-			set;
-		}
-        /// <summary>
-        /// 
-        /// </summary>
-		Kistl.App.Base.Module Module {
 			get;
 			set;
 		}

@@ -10,7 +10,7 @@ namespace Kistl.App.Base
     /// <summary>
     /// Metadefinition Object for Methods.
     /// </summary>
-    public interface Method : IDataObject, Kistl.App.Base.IChangedBy, Kistl.App.Base.IExportable 
+    public interface Method : IDataObject, Kistl.App.Base.IChangedBy, Kistl.App.Base.IExportable, Kistl.App.Base.IModuleMember 
     {
 
         /// <summary>
@@ -32,13 +32,6 @@ namespace Kistl.App.Base
         /// </summary>
 
         ICollection<Kistl.App.Base.MethodInvocation> MethodInvocations { get; }
-        /// <summary>
-        /// Zugehörig zum Modul
-        /// </summary>
-		Kistl.App.Base.Module Module {
-			get;
-			set;
-		}
         /// <summary>
         /// 
         /// </summary>

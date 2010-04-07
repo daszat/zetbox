@@ -10,7 +10,7 @@ namespace Kistl.App.Base
     /// <summary>
     /// Metadefinition Object for Properties. This class is abstract.
     /// </summary>
-    public interface Property : IDataObject, Kistl.App.Base.IChangedBy, Kistl.App.Base.IExportable 
+    public interface Property : IDataObject, Kistl.App.Base.IChangedBy, Kistl.App.Base.IExportable, Kistl.App.Base.IModuleMember 
     {
 
         /// <summary>
@@ -44,13 +44,6 @@ namespace Kistl.App.Base
         /// </summary>
 
         ICollection<Kistl.App.Base.PropertyInvocation> Invocations { get; }
-        /// <summary>
-        /// Zugehörig zum Modul
-        /// </summary>
-		Kistl.App.Base.Module Module {
-			get;
-			set;
-		}
         /// <summary>
         /// 
         /// </summary>

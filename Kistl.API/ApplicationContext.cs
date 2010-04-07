@@ -80,6 +80,9 @@ namespace Kistl.API
                 case HostType.Server:
                     ImplementationAssembly = Kistl.API.Helper.ServerAssembly;
                     break;
+                case HostType.None:
+                    ImplementationAssembly = "";
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException("type");
             }

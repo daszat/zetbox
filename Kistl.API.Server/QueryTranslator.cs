@@ -311,7 +311,7 @@ namespace Kistl.API.Server
             }
             else
             {
-                declaringType = m.Member.DeclaringType.ToImplementationType();
+                declaringType = m.Expression.Type.ToImplementationType();
             }
             MemberExpression result;
             if (declaringType.GetMember(memberName).Length > 0 && declaringType.GetMember(memberName + Kistl.API.Helper.ImplementationSuffix).Length > 0)
@@ -320,14 +320,7 @@ namespace Kistl.API.Server
             }
             else
             {
-                MemberInfo member = m.Member;
-                // If this is not a static access AND the member type and expression type do not match, fixup the MemberInfo
-                if (e != null && !member.DeclaringType.IsAssignableFrom(e.Type))
-                {
-                    member = e.Type.GetMember(m.Member.Name).Single();
-                }
-
-                result = Expression.MakeMemberAccess(e, member);
+                result = Expression.MakeMemberAccess(e, m.Member);
             }
             return result;
         }

@@ -158,7 +158,7 @@ namespace Kistl.Client.Presentables.ModuleEditor
                 {
                     _OnlyBaseClasses = value;
                     OnPropertyChanged("OnlyBaseClasses");
-                    OnPropertyChanged("InstancesFiltered");
+                    ReloadInstances();
                 }
             }
         }
