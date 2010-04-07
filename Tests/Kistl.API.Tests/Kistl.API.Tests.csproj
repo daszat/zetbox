@@ -105,7 +105,6 @@
     <Compile Include="Tests.Serializables\SerializableExpressionTests.cs" />
     <Compile Include="Tests.Serializables\SerializableTypeTests.cs" />
     <Compile Include="Tests.Serializables\SerializerMockTests.cs" />
-    <Content Include="ProfilingSessions\Session20100208_134712.sdps" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Kistl.API.Tests.PartCoverSettings.xml" />
