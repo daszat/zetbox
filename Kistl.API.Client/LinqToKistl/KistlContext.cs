@@ -1,17 +1,15 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Text;
-using Kistl.API.Utils;
-
-//using Kistl.API.Client.LinqToKistl;
 
 namespace Kistl.API.Client
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Linq;
+    using System.Text;
+
+    using Kistl.API.Utils;
+
     /// <summary>
     /// Linq to Kistl Context Factory
     /// </summary>
@@ -40,9 +38,6 @@ namespace Kistl.API.Client
             KistlContextDebuggerSingleton.Created(this);
             //_relationshipManager = new RelationshipManager(this);
         }
-
-        //private LinqToKistl.RelationshipManager _relationshipManager;
-
 
         [SuppressMessage("Microsoft.Performance", "CA1805:DoNotInitializeUnnecessarily", Justification = "Clarifies intent of variable")]
         private bool disposed = false;
