@@ -69,20 +69,6 @@ namespace Kistl.API
             return new InterfaceType(GetSystemType());
         }
 
-        public ImplementationType GetImplementationType()
-        {
-            return GetInterfaceType().ToImplementationType();
-        }
-
-        /// <summary>
-        /// Creates a new implementation instance of this Type
-        /// </summary>
-        /// <returns>a freshly constructed instance</returns>
-        public object CreateInstance()
-        {
-            return Activator.CreateInstance(GetImplementationType().Type);
-        }
-
         /// <summary>
         /// Returns the serialized System.Type
         /// </summary>
