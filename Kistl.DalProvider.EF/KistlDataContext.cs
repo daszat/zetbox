@@ -402,10 +402,10 @@ namespace Kistl.DalProvider.EF
             }
         }
 
-        protected override IPersistenceObject CreateUnattachedInstance(InterfaceType ifType)
+        protected override object CreateUnattachedInstance(InterfaceType ifType)
         {
             var implTypeName = String.Format("{0}.{1}{2}, {3}", ifType.Type.Namespace, ifType.Type.Name, Kistl.API.Helper.ImplementationSuffix, Kistl.API.Helper.ServerAssembly);
-            return (IPersistenceObject)Activator.CreateInstance(Type.GetType(implTypeName), true);
+            return Activator.CreateInstance(Type.GetType(implTypeName), true);
         }
 
         /// <summary>

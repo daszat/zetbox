@@ -252,11 +252,11 @@ namespace Kistl.API.Server
         /// </summary>
         /// <param name="ifType">the requested type</param>
         /// <returns>a newly initialised provider-specific object of the specified type, which is not yet attached</returns>
-        protected abstract IPersistenceObject CreateUnattachedInstance(InterfaceType ifType);
+        protected abstract object CreateUnattachedInstance(InterfaceType ifType);
 
         private IPersistenceObject CreateInternal(InterfaceType ifType)
         {
-            IPersistenceObject obj = CreateUnattachedInstance(ifType);
+            var obj = (IPersistenceObject)CreateUnattachedInstance(ifType);
             Attach(obj);
             OnObjectCreated(obj);
             if (obj is IDataObject)
@@ -341,9 +341,9 @@ namespace Kistl.API.Server
         /// <returns>A new CompoundObject</returns>
         public virtual ICompoundObject CreateCompoundObject(InterfaceType ifType)
         {
-            ICompoundObject obj = (ICompoundObject)Activator.CreateInstance(ifType.ToImplementationType().Type);
-            return obj;
+            return (ICompoundObject)CreateUnattachedInstance(ifType);
         }
+
         /// <summary>
         /// Creates a new CompoundObject.
         /// </summary>
