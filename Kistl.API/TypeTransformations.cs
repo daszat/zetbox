@@ -58,6 +58,54 @@ namespace Kistl.API
             return false;
         }
 
+        private static readonly Type[] BaseInterfaces = new[] { 
+            typeof(IDataObject),
+            typeof(ICompoundObject),
+            typeof(IRelationListEntry<,>),
+            typeof(IRelationListEntry),
+            typeof(IRelationCollectionEntry<,>),
+            typeof(IRelationCollectionEntry),
+            typeof(IValueCollectionEntry<,>),
+            typeof(IValueCollectionEntry),
+            typeof(IPersistenceObject) 
+        };
+
+        /// <summary>
+        /// Returns the root of the specified InterfaceType's data model. The
+        /// root is the top-most interface in this interface's parentage that 
+        /// inherits only from IDataObject, or IPersistenceObject. Interfaces 
+        /// that do not inherit from IDataObject, or IPersistenceObject are 
+        /// excluded from all considerations.
+        /// </summary>
+        /// <returns>the root InterfaceType of this InterfaceType's data model</returns>
+        public InterfaceType GetRootType()
+        {
+            var self = this.Type.IsGenericType ? this.Type.GetGenericTypeDefinition() : this.Type;
+            // the base of the interface we're looking for
+            var baseInterface = BaseInterfaces.Where(t => t.IsAssignableFrom(self)).First();
+            var allInherited = GetInterestingInterfaces(baseInterface, this.Type);
+            var candidates = allInherited
+                .Select(intf => new { Interface = intf, Inherited = GetInterestingInterfaces(baseInterface, intf) })
+                .ToList();
+            candidates.Add(new { Interface = this.Type, Inherited = allInherited });
+            return new InterfaceType(candidates.OrderBy(i => i.Inherited.Length).First().Interface);
+        }
+
+        /// <summary>
+        /// Returns an array of interfaces that are potential base interfaces 
+        /// of type <paramref name="baseInterface"/> for the specified Type 
+        /// <paramref name="t"/>.
+        /// </summary>
+        /// <param name="baseInterface">the basic interface that is the parent of the searched base</param>
+        /// <param name="t">the interface to inspect</param>
+        /// <returns>an array of interfaces</returns>
+        private static Type[] GetInterestingInterfaces(Type baseInterface, Type t)
+        {
+            return t.GetInterfaces()
+                .Where(i => baseInterface.IsAssignableFrom(i) && !BaseInterfaces.Contains(i.IsGenericType ? i.GetGenericTypeDefinition() : i))
+                .ToArray();
+        }
+
         /// <summary>
         /// Computes the corresponding <see cref="ImplementationType"/>
         /// </summary>

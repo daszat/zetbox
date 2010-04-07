@@ -95,6 +95,7 @@
     <Compile Include="Tests\BasicCollectionTests.cs" />
     <Compile Include="Tests\BasicListTestsBaseline.cs" />
     <Compile Include="Tests\BasicListTests.cs" />
+    <Compile Include="Tests\InterfaceTypes\when_looking_for_root_type.cs" />
     <Compile Include="Tests\KistlConfigTests.cs" />
     <Compile Include="Tests\ExpressionFilterTest.cs" />
     <Compile Include="Tests\ExtensionHelpersTest.cs" />

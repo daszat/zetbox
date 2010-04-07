@@ -85,40 +85,18 @@ namespace Kistl.DalProvider.EF
         /// <summary>
         /// Type/Query cache
         /// </summary>
-        private Dictionary<Type, object> _table = new Dictionary<Type, object>();
+        private Dictionary<InterfaceType, object> _table = new Dictionary<InterfaceType, object>();
 
         /// <summary>
-        /// Returns the Root Type of a given Type.
+        /// Returns the EntitySet name of the specified InterfaceType.
         /// </summary>
-        /// <param name="t">Type</param>
-        /// <returns>Root Type of the given Type</returns>
-        private Type GetRootType(Type t)
+        /// <param name="intf">the interface to resolve</param>
+        /// <returns>the name of the underlying entity set</returns>
+        private string GetEntityName(InterfaceType intf)
         {
-            while (t != null &&
-                t.BaseType != typeof(BaseServerDataObject) &&
-                t.BaseType != typeof(BaseServerDataObject_EntityFramework) &&
-                t.BaseType != typeof(BaseServerCollectionEntry) &&
-                t.BaseType != typeof(BaseServerCollectionEntry_EntityFramework)
-                )
-            {
-                t = t.BaseType;
-            }
-
-            return t;
-        }
-
-        /// <summary>
-        /// Returns the EntiySet Name of the given Type.
-        /// </summary>
-        /// <param name="type">Type</param>
-        /// <returns>EntitySet Name</returns>
-        private string GetEntityName(Type type)
-        {
-            if (type == null) throw new ArgumentNullException("type");
-            Type rootType = GetRootType(type);
-            if (rootType == null) throw new ArgumentOutOfRangeException("type", string.Format("Unable to find root type of '{0}'", type.FullName));
-
-            return rootType.Name.Remove(rootType.Name.Length - Kistl.API.Helper.ImplementationSuffix.Length, Kistl.API.Helper.ImplementationSuffix.Length);
+            if (intf == null) throw new ArgumentNullException("intf");
+            var rootType = intf.GetRootType();
+            return rootType.Type.Name;
         }
 
         /// <summary>
@@ -130,7 +108,6 @@ namespace Kistl.DalProvider.EF
         {
             return GetPersistenceObjectQuery<T>();
         }
-
 
         /// <summary>
         /// Returns a Query by System.Type.
@@ -149,9 +126,6 @@ namespace Kistl.DalProvider.EF
             //return result.OfType<IDataObject>();
 
             //throw new NotSupportedException("Entity Framework does not support queries on Interfaces. Please use GetQuery<T>().");
-
-            // Des geht a net...
-            //Type type = objType.ToImplementationType();
 
             //// Unable to cache - cannot cast from/to IQueryable<IDataObject> <-> IQueryable<T>
             //IQueryable<IDataObject> query = new QueryTranslator<IDataObject>(
@@ -221,7 +195,7 @@ namespace Kistl.DalProvider.EF
         /// <returns>IQueryable</returns>
         public override IQueryable<T> GetPersistenceObjectQuery<T>()
         {
-            Type type = typeof(T).ToImplementationType();
+            InterfaceType type = new InterfaceType(typeof(T));
 
             if (!_table.ContainsKey(type))
             {
@@ -244,7 +218,7 @@ namespace Kistl.DalProvider.EF
 
         public System.Collections.IList GetListHack<T>()
         {
-            Type type = typeof(T).ToImplementationType();
+            InterfaceType type = new InterfaceType(typeof(T));
 
             if (!_table.ContainsKey(type))
             {
@@ -438,7 +412,7 @@ namespace Kistl.DalProvider.EF
             if (obj == null) { throw new ArgumentNullException("obj"); }
 
             var serverObj = (BaseServerPersistenceObject)obj;
-            string entityName = GetEntityName(obj.GetType());
+            string entityName = GetEntityName(obj.GetInterfaceType());
 
             if (serverObj.ClientObjectState == DataObjectState.New
                 || serverObj.ClientObjectState == DataObjectState.NotDeserialized)
@@ -623,7 +597,7 @@ namespace Kistl.DalProvider.EF
             {
                 // TODO: Case #1174
                 var tmp = GetPersistenceObjectQuery<Kistl.App.Base.ObjectClass>().FirstOrDefault();
-                string sql = string.Format("SELECT VALUE e FROM Entities.[{0}] AS e WHERE e.[ExportGuid] = @guid", GetEntityName(typeof(T).ToImplementationType()));
+                string sql = string.Format("SELECT VALUE e FROM Entities.[{0}] AS e WHERE e.[ExportGuid] = @guid", GetEntityName(new InterfaceType(typeof(T))));
                 result = _ctx.CreateQuery<T>(sql, new System.Data.Objects.ObjectParameter("guid", exportGuid)).FirstOrDefault();
                 if (result != null) result.AttachToContext(this);
             }
@@ -664,7 +638,7 @@ namespace Kistl.DalProvider.EF
             if (exportGuids.Count() == 0) return new List<T>();
 
             StringBuilder sql = new StringBuilder();
-            sql.AppendFormat("SELECT VALUE e FROM Entities.{0} AS e WHERE e.ExportGuid IN {{", GetEntityName(typeof(T).ToImplementationType()));
+            sql.AppendFormat("SELECT VALUE e FROM Entities.{0} AS e WHERE e.ExportGuid IN {{", GetEntityName(new InterfaceType(typeof(T))));
             foreach (Guid g in exportGuids)
             {
                 sql.AppendFormat("Guid'{0}',", g);
