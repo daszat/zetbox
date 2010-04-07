@@ -1,21 +1,23 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using NUnit.Framework;
-using Kistl.App.Projekte;
 
 namespace Kistl.Server.Tests.Security
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+
+    using Kistl.App.Projekte;
+
+    using NUnit.Framework;
+
     [TestFixture]
     public class when_creating : SecurityDataFixture
     {
         [Test]
-        [ExpectedException(typeof(System.Security.SecurityException))]
         public void project_should_throw_exception_with_no_privileges()
         {
             var newProj = id3Ctx_low.Create<Projekt>();
-            newProj.Name = "Test";
+            Assert.That(() => newProj.Name = "Test", Throws.InstanceOf<System.Security.SecurityException>());
         }
 
         [Test]

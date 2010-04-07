@@ -1,17 +1,21 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Kistl.API;
-using Kistl.API.Server;
-using Autofac;
-using Kistl.App.Base;
-using Kistl.App.Projekte;
-using NUnit.Framework;
-using System.Data.SqlClient;
 
 namespace Kistl.Server.Tests.Security
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Data.SqlClient;
+    using System.Linq;
+    using System.Text;
+
+    using Autofac;
+
+    using Kistl.API;
+    using Kistl.API.Server;
+    using Kistl.App.Base;
+    using Kistl.App.Projekte;
+
+    using NUnit.Framework;
+
     public abstract class SecurityDataFixture
     {
         protected IContainer container;
@@ -112,7 +116,7 @@ namespace Kistl.Server.Tests.Security
             id2Ctx.SubmitChanges();
 
             // Fix security tables
-            // Own test checks if this works during objet modifications too
+            // Own test checks if this works during object modifications too
             using (SqlConnection db = new SqlConnection(ApplicationContext.Current.Configuration.Server.ConnectionString))
             {
                 db.Open();
@@ -171,9 +175,7 @@ namespace Kistl.Server.Tests.Security
         [TearDown]
         public void DisposeContext()
         {
-            srvCtx.Dispose();
-            id1Ctx.Dispose();
-            id2Ctx.Dispose();
+            container.Dispose();
         }
     }
 }
