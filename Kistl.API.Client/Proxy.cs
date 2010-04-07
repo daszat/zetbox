@@ -20,18 +20,17 @@ namespace Kistl.API.Client
     public interface IProxy
         : IDisposable
     {
-        IEnumerable<IDataObject> GetList(InterfaceType ifType, int maxListCount, bool eagerLoadLists, Expression filter, IEnumerable<Expression> orderBy, out List<IStreamable> auxObjects);
-        IEnumerable<IDataObject> GetListOf(InterfaceType ifType, int ID, string property, out List<IStreamable> auxObjects);
+        IEnumerable<IDataObject> GetList(IKistlContext ctx, InterfaceType ifType, int maxListCount, bool eagerLoadLists, Expression filter, IEnumerable<Expression> orderBy, out List<IStreamable> auxObjects);
+        IEnumerable<IDataObject> GetListOf(IKistlContext ctx, InterfaceType ifType, int ID, string property, out List<IStreamable> auxObjects);
 
-        IEnumerable<IPersistenceObject> SetObjects(IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests);
+        IEnumerable<IPersistenceObject> SetObjects(IKistlContext ctx, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests);
 
-        IEnumerable<T> FetchRelation<T>(Guid relationId, RelationEndRole role, IDataObject parent, out List<IStreamable> auxObjects)
+        IEnumerable<T> FetchRelation<T>(IKistlContext ctx, Guid relationId, RelationEndRole role, IDataObject parent, out List<IStreamable> auxObjects)
             where T : class, IRelationCollectionEntry;
 
         Stream GetBlobStream(int ID);
-        Kistl.App.Base.Blob SetBlobStream(Stream stream, string filename, string mimetype);
+        Kistl.App.Base.Blob SetBlobStream(IKistlContext ctx, Stream stream, string filename, string mimetype);
     }
-
 
     /// <summary>
     /// Proxy Singleton
@@ -98,7 +97,7 @@ namespace Kistl.API.Client
             }
         }
 
-        public IEnumerable<IDataObject> GetList(InterfaceType ifType, int maxListCount, bool eagerLoadLists, Expression filter, IEnumerable<Expression> orderBy, out List<IStreamable> auxObjects)
+        public IEnumerable<IDataObject> GetList(IKistlContext ctx, InterfaceType ifType, int maxListCount, bool eagerLoadLists, Expression filter, IEnumerable<Expression> orderBy, out List<IStreamable> auxObjects)
         {
             using (Logging.Facade.InfoTraceMethodCallFormat("GetList[{0}]", ifType.ToString()))
             {
@@ -111,13 +110,13 @@ namespace Kistl.API.Client
                 {
                     using (var sr = new BinaryReader(s))
                     {
-                        return ReceiveObjects(sr, out auxObjects).Cast<IDataObject>();
+                        return ReceiveObjects(ctx, sr, out auxObjects).Cast<IDataObject>();
                     }
                 }
             }
         }
 
-        public IEnumerable<IDataObject> GetListOf(InterfaceType ifType, int ID, string property, out List<IStreamable> auxObjects)
+        public IEnumerable<IDataObject> GetListOf(IKistlContext ctx, InterfaceType ifType, int ID, string property, out List<IStreamable> auxObjects)
         {
             using (Logging.Facade.InfoTraceMethodCallFormat("{0} [{1}].{2}", ifType, ID, property))
             {
@@ -125,14 +124,14 @@ namespace Kistl.API.Client
                 {
                     using (var sr = new BinaryReader(s))
                     {
-                        var result = ReceiveObjects(sr, out auxObjects).Cast<IDataObject>();
+                        var result = ReceiveObjects(ctx, sr, out auxObjects).Cast<IDataObject>();
                         return result;
                     }
                 }
             }
         }
 
-        public IEnumerable<IPersistenceObject> SetObjects(IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notficationRequests)
+        public IEnumerable<IPersistenceObject> SetObjects(IKistlContext ctx, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notficationRequests)
         {
             using (Logging.Facade.InfoTraceMethodCall("SetObjects"))
             {
@@ -154,7 +153,7 @@ namespace Kistl.API.Client
                             {
                                 // merge auxiliary objects into primary set objects result
                                 List<IStreamable> auxObjects;
-                                var receivedObjects = ReceiveObjects(sr, out auxObjects);
+                                var receivedObjects = ReceiveObjects(ctx, sr, out auxObjects);
                                 var result = receivedObjects.Concat(auxObjects).Cast<IPersistenceObject>();
                                 return result;
                             }
@@ -164,15 +163,15 @@ namespace Kistl.API.Client
             }
         }
 
-        private static IEnumerable<IStreamable> ReceiveObjects(BinaryReader sr, out List<IStreamable> auxObjects)
+        private static IEnumerable<IStreamable> ReceiveObjects(IKistlContext ctx, BinaryReader sr, out List<IStreamable> auxObjects)
         {
-            var result = ReceiveObjectList(sr);
-            auxObjects = ReceiveObjectList(sr);
+            var result = ReceiveObjectList(ctx, sr);
+            auxObjects = ReceiveObjectList(ctx, sr);
             Logging.Facade.DebugFormat("retrieved: {0} objects; {1} auxObjects", result.Count(), auxObjects.Count());
             return result;
         }
 
-        private static List<IStreamable> ReceiveObjectList(BinaryReader sr)
+        private static List<IStreamable> ReceiveObjectList(IKistlContext ctx, BinaryReader sr)
         {
             List<IStreamable> result = new List<IStreamable>();
             bool cont = true;
@@ -182,7 +181,7 @@ namespace Kistl.API.Client
                 SerializableType objType;
                 BinarySerializer.FromStream(out objType, sr);
 
-                IStreamable obj = (IStreamable)objType.NewObject();
+                IStreamable obj = (IStreamable)ctx.CreateUnattached(new InterfaceType(objType.GetSystemType()));
                 obj.FromStream(sr);
 
                 result.Add((IStreamable)obj);
@@ -191,7 +190,7 @@ namespace Kistl.API.Client
             return result;
         }
 
-        public IEnumerable<T> FetchRelation<T>(Guid relationId, RelationEndRole role, IDataObject parent, out List<IStreamable> auxObjects)
+        public IEnumerable<T> FetchRelation<T>(IKistlContext ctx, Guid relationId, RelationEndRole role, IDataObject parent, out List<IStreamable> auxObjects)
             where T : class, IRelationCollectionEntry
         {
             using (Logging.Facade.InfoTraceMethodCallFormat("Fetching relation: ID=[{0}],role=[{1}],parentId=[{2}]", relationId, role, parent.ID))
@@ -207,7 +206,7 @@ namespace Kistl.API.Client
                 {
                     using (var sr = new BinaryReader(s))
                     {
-                        return ReceiveObjects(sr, out auxObjects).Cast<T>();
+                        return ReceiveObjects(ctx, sr, out auxObjects).Cast<T>();
                     }
                 }
             }
@@ -247,7 +246,7 @@ namespace Kistl.API.Client
             }
         }
 
-        public Kistl.App.Base.Blob SetBlobStream(Stream stream, string filename, string mimetype)
+        public Kistl.App.Base.Blob SetBlobStream(IKistlContext ctx, Stream stream, string filename, string mimetype)
         {
             using (Logging.Facade.InfoTraceMethodCallFormat("SetBlobStream: filename=[{0}]", filename))
             {
@@ -257,7 +256,7 @@ namespace Kistl.API.Client
                 {
                     using (var sr = new BinaryReader(result))
                     {
-                        return ReceiveObjectList(sr).Cast<Kistl.App.Base.Blob>().Single();
+                        return ReceiveObjectList(ctx, sr).Cast<Kistl.App.Base.Blob>().Single();
                     }
                 }
                 finally

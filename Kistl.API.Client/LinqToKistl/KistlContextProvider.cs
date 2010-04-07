@@ -1,21 +1,19 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Reflection;
-using System.Text;
-using Kistl.API.Utils;
-using Kistl.API.Client.LinqToKistl;
-
-// http://blogs.msdn.com/mattwar/archive/2007/07/30/linq-building-an-iqueryable-provider-part-i.aspx
-
 
 namespace Kistl.API.Client
 {
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+    using System.Linq.Expressions;
+    using System.Reflection;
+    using System.Text;
+    using Kistl.API.Client.LinqToKistl;
+    using Kistl.API.Utils;
+    
     /// <summary>
-    /// Provider for Kistl Linq Provider
+    /// Provider for Kistl Linq Provider. See http://blogs.msdn.com/mattwar/archive/2007/07/30/linq-building-an-iqueryable-provider-part-i.aspx for details.
     /// </summary>
     public class KistlContextProvider : ExpressionTreeVisitor, IKistlQueryProvider
     {
@@ -71,7 +69,7 @@ namespace Kistl.API.Client
 
         private List<IDataObject> CallService(out List<IStreamable> auxObjects)
         {
-            return ProxySingleton.Current.GetList(_type, _maxListCount, _eagerLoadLists ?? _maxListCount == 1, _filter, _orderBy, out auxObjects).ToList();
+            return ProxySingleton.Current.GetList(_context, _type, _maxListCount, _eagerLoadLists ?? _maxListCount == 1, _filter, _orderBy, out auxObjects).ToList();
         }
         #endregion
 
@@ -79,7 +77,7 @@ namespace Kistl.API.Client
         internal List<IDataObject> GetListOfCall(int ID, string propertyName)
         {
             List<IStreamable> auxObjects;
-            List<IDataObject> serviceResult = ProxySingleton.Current.GetListOf(_type, ID, propertyName, out auxObjects).ToList();
+            List<IDataObject> serviceResult = ProxySingleton.Current.GetListOf(_context, _type, ID, propertyName, out auxObjects).ToList();
             List<IDataObject> result = new List<IDataObject>();
 
             foreach (IDataObject obj in serviceResult)
@@ -181,7 +179,7 @@ namespace Kistl.API.Client
                 {
                     _context.Attach(obj);
                 }
-                
+
                 foreach (IDataObject obj in serviceResult)
                 {
                     result.Add((T)_context.Attach(obj));

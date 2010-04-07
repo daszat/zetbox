@@ -5,6 +5,7 @@ namespace Kistl.API.Client
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
+    using System.IO;
     using System.Linq;
     using System.Text;
 
@@ -195,7 +196,7 @@ namespace Kistl.API.Client
         public IList<T> FetchRelation<T>(Guid relationId, RelationEndRole role, IDataObject container) where T : class, IRelationCollectionEntry
         {
             List<IStreamable> auxObjects;
-            var serverList = ProxySingleton.Current.FetchRelation<T>(relationId, role, container, out auxObjects);
+            var serverList = ProxySingleton.Current.FetchRelation<T>(this, relationId, role, container, out auxObjects);
 
             foreach (IPersistenceObject obj in auxObjects)
             {
@@ -450,6 +451,7 @@ namespace Kistl.API.Client
 
             // Submit to server
             var objectsFromServer = ProxySingleton.Current.SetObjects(
+                this,
                 objectsToSubmit
                     .Cast<IPersistenceObject>(),
                 AttachedObjects
@@ -661,14 +663,14 @@ namespace Kistl.API.Client
             }
         }
 
-        public int CreateBlob(System.IO.Stream s, string filename, string mimetype)
+        public int CreateBlob(Stream s, string filename, string mimetype)
         {
-            var blob = ProxySingleton.Current.SetBlobStream(s, filename, mimetype);
+            var blob = ProxySingleton.Current.SetBlobStream(this, s, filename, mimetype);
             Attach(blob);
             return blob.ID;
         }
 
-        public int CreateBlob(System.IO.FileInfo fi, string mimetype)
+        public int CreateBlob(FileInfo fi, string mimetype)
         {
             using (var s = fi.OpenRead())
             {
@@ -676,30 +678,30 @@ namespace Kistl.API.Client
             }
         }
 
-        public System.IO.Stream GetStream(int ID)
+        public Stream GetStream(int ID)
         {
             return GetFileInfo(ID).OpenRead();
         }
 
-        public System.IO.FileInfo GetFileInfo(int ID)
+        public FileInfo GetFileInfo(int ID)
         {
             var blob = this.Find<Kistl.App.Base.Blob>(ID);
 
-            string path = System.IO.Path.Combine(ApplicationContext.Current.Configuration.Client.DocumentStore, blob.StoragePath);
-            System.IO.Directory.CreateDirectory(System.IO.Path.GetDirectoryName(path));
+            string path = Path.Combine(ApplicationContext.Current.Configuration.Client.DocumentStore, blob.StoragePath);
+            Directory.CreateDirectory(Path.GetDirectoryName(path));
 
-            if (!System.IO.File.Exists(path))
+            if (!File.Exists(path))
             {
                 using (var stream = ProxySingleton.Current.GetBlobStream(ID))
-                using (var file = new System.IO.FileStream(path, System.IO.FileMode.Create, System.IO.FileAccess.Write))
+                using (var file = new FileStream(path, FileMode.Create, FileAccess.Write))
                 {
                     file.SetLength(0);
                     stream.CopyTo(file);
                 }
-                System.IO.File.SetAttributes(path, System.IO.FileAttributes.ReadOnly);
+                File.SetAttributes(path, FileAttributes.ReadOnly);
             }
 
-            return new System.IO.FileInfo(path);
+            return new FileInfo(path);
         }
 
         #region IDebuggingKistlContext Members

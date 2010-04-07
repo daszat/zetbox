@@ -100,15 +100,6 @@ namespace Kistl.API
             return result;
         }
 
-        /// <summary>
-        /// Creates a new Object
-        /// </summary>
-        /// <returns></returns>
-        public object NewObject()
-        {
-            return Activator.CreateInstance(GetSystemType().ToImplementationType());
-        }
-
         #region implement value equality over TypeName and AssemblyQualifiedName
 
         public override bool Equals(object obj)

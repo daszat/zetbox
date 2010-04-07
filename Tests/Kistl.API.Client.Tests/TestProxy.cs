@@ -20,7 +20,7 @@ namespace Kistl.API.Client.Tests
             throw new NotImplementedException();
         }
 
-        public IEnumerable<IDataObject> GetList(InterfaceType ifType, int maxListCount, bool withEagerLoading, Expression filter, IEnumerable<Expression> orderBy, out List<IStreamable> auxObjects)
+        public IEnumerable<IDataObject> GetList(IKistlContext ctx, InterfaceType ifType, int maxListCount, bool withEagerLoading, Expression filter, IEnumerable<Expression> orderBy, out List<IStreamable> auxObjects)
         {
             if (ifType == null) throw new ArgumentNullException("ifType");            
             if (orderBy != null) throw new ArgumentException("OrderBy is not supported yet");
@@ -62,7 +62,7 @@ namespace Kistl.API.Client.Tests
             return result.Cast<IDataObject>();
         }
 
-        public IEnumerable<IDataObject> GetListOf(InterfaceType ifType, int ID, string property, out List<IStreamable> auxObjects)
+        public IEnumerable<IDataObject> GetListOf(IKistlContext ctx, InterfaceType ifType, int ID, string property, out List<IStreamable> auxObjects)
         {
             if (ifType == null) throw new ArgumentNullException("ifType");
             if (ifType != typeof(TestObjClass)) throw new ArgumentOutOfRangeException("type", "Only TestObjClasses are allowed");
@@ -85,7 +85,7 @@ namespace Kistl.API.Client.Tests
             throw new NotImplementedException();
         }
 
-        public IEnumerable<IPersistenceObject> SetObjects(IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests)
+        public IEnumerable<IPersistenceObject> SetObjects(IKistlContext ctx, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests)
         {
             var result = new List<IPersistenceObject>();
             foreach (var obj in objects)
@@ -134,34 +134,25 @@ namespace Kistl.API.Client.Tests
             fi.SetValue(obj, val);
         }
 
-        public IEnumerable<T> FetchRelation<T>(Guid relationId, RelationEndRole role, IDataObject parent, out List<IStreamable> auxObjects) where T : class, IRelationCollectionEntry
+        public IEnumerable<T> FetchRelation<T>(IKistlContext ctx, Guid relationId, RelationEndRole role, IDataObject parent, out List<IStreamable> auxObjects) where T : class, IRelationCollectionEntry
         {
             auxObjects = new List<IStreamable>();
             return new List<T>();
         }
-
-        #region IDisposable Members
 
         public void Dispose()
         {
             throw new NotImplementedException();
         }
 
-        #endregion
-
-        #region IProxy Members
-
-
         public System.IO.Stream GetBlobStream(int ID)
         {
             throw new NotImplementedException();
         }
 
-        public Kistl.App.Base.Blob SetBlobStream(System.IO.Stream stream, string filename, string mimetype)
+        public Kistl.App.Base.Blob SetBlobStream(IKistlContext ctx, System.IO.Stream stream, string filename, string mimetype)
         {
             throw new NotImplementedException();
         }
-
-        #endregion
     }
 }

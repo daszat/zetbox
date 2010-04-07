@@ -49,24 +49,24 @@ namespace Kistl.Server
                 {
                     DebugLogIdentity();
 
-                    BinaryReader sr = new BinaryReader(msg);
-                    var objects = new List<IPersistenceObject>();
-                    bool @continue;
-                    BinarySerializer.FromStream(out @continue, sr);
-                    while (@continue)
-                    {
-                        // Deserialize
-                        SerializableType objType;
-                        BinarySerializer.FromStream(out objType, sr);
-
-                        var obj = (IPersistenceObject)objType.NewObject();
-                        obj.FromStream(sr);
-                        objects.Add(obj);
-                        BinarySerializer.FromStream(out @continue, sr);
-                    }
-
                     using (IKistlContext ctx = _ctxFactory())
                     {
+                        BinaryReader sr = new BinaryReader(msg);
+                        var objects = new List<IPersistenceObject>();
+                        bool @continue;
+                        BinarySerializer.FromStream(out @continue, sr);
+                        while (@continue)
+                        {
+                            // Deserialize
+                            SerializableType objType;
+                            BinarySerializer.FromStream(out objType, sr);
+
+                            var obj = ctx.CreateUnattached(new InterfaceType(objType.GetSystemType()));
+                            obj.FromStream(sr);
+                            objects.Add(obj);
+                            BinarySerializer.FromStream(out @continue, sr);
+                        }
+
                         // Set Operation
                         var changedObjects = _sohFactory
                             .GetServerObjectSetHandler()
