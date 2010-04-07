@@ -59,8 +59,9 @@ namespace Kistl.DalProvider.EF
     /// </summary>
     public sealed class KistlDataContext : BaseKistlDataContext, IKistlContext, IDisposable
     {
-        private readonly EFObjectContext _ctx;
         private static readonly object _lock = new object();
+
+        private readonly EFObjectContext _ctx;
 
         /// <summary>
         /// For Clean Up Session
@@ -401,6 +402,11 @@ namespace Kistl.DalProvider.EF
             }
         }
 
+        protected override IPersistenceObject CreateUnattachedInstance(InterfaceType ifType)
+        {
+            var implTypeName = String.Format("{0}.{1}{2}, {3}", ifType.Type.Namespace, ifType.Type.Name, Kistl.API.Helper.ImplementationSuffix, Kistl.API.Helper.ServerAssembly);
+            return (IPersistenceObject)Activator.CreateInstance(Type.GetType(implTypeName), true);
+        }
 
         /// <summary>
         /// Attach an IPersistenceObject. The EntityFramework guarantees the all Objects are unique. No check requiered.

@@ -247,9 +247,16 @@ namespace Kistl.API.Server
             changedOrAdded.ForEach(obj => obj.NotifyPostSave());
         }
 
+        /// <summary>
+        /// Creates an unattached instance of the specified interface type. This is used by various public methods to create objects.
+        /// </summary>
+        /// <param name="ifType">the requested type</param>
+        /// <returns>a newly initialised provider-specific object of the specified type, which is not yet attached</returns>
+        protected abstract IPersistenceObject CreateUnattachedInstance(InterfaceType ifType);
+
         private IPersistenceObject CreateInternal(InterfaceType ifType)
         {
-            IPersistenceObject obj = (IPersistenceObject)Activator.CreateInstance(ifType.ToImplementationType().Type);
+            IPersistenceObject obj = CreateUnattachedInstance(ifType);
             Attach(obj);
             OnObjectCreated(obj);
             if (obj is IDataObject)

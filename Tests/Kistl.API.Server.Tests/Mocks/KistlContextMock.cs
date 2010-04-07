@@ -145,5 +145,10 @@ namespace Kistl.API.Server.Mocks
         {
             throw new NotImplementedException();
         }
+
+        protected override IPersistenceObject CreateUnattachedInstance(InterfaceType ifType)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

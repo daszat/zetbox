@@ -39,7 +39,7 @@ namespace Kistl.API.AbstractConsumerTests
                 catch (Exception ex)
                 {
                     Log.Error("Error while restoring database", ex);
-                    throw ex;
+                    throw;
                 }
 
                 Log.InfoFormat("Current Directory=[{0}]", Environment.CurrentDirectory);
