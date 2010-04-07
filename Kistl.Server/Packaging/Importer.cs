@@ -297,10 +297,6 @@ namespace Kistl.Server.Packaging
                     throw new NotSupportedException("Interfacetype " + ifType + " is not supported");
                 }
                 IPersistenceObject obj = ctx.CreateUnattached(ifType);
-                if (obj == null)
-                {
-                    throw new InvalidOperationException("Unable to create object of type " + ifType.ToImplementationType().Type);
-                }
                 objects[exportGuid] = obj;
                 ((Kistl.App.Base.IExportable)obj).ExportGuid = exportGuid;
                 ctx.Attach(obj);
