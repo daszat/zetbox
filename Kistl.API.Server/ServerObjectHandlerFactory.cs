@@ -20,26 +20,24 @@ namespace Kistl.API.Server
         {
         }
 
-        /// <inheritdoc/>
         protected IServerObjectHandler GetServerObjectHandlerHelper(
             Type objectHandlerType,
-            ImplementationType implType)
+            InterfaceType intfType)
         {
-            if (implType == null) { throw new ArgumentNullException("implType"); }
+            if (intfType == null) { throw new ArgumentNullException("intfType"); }
 
             try
             {
-                Type result = objectHandlerType.MakeGenericType(implType.Type);
+                Type result = objectHandlerType.MakeGenericType(intfType.Type);
                 return (IServerObjectHandler)Activator.CreateInstance(result);
             }
             catch (Exception ex)
             {
-                Log.Error(String.Format("Failed to create IServerObjectHandler for [{0}]", implType), ex);
+                Log.Error(String.Format("Failed to create IServerObjectHandler for [{0}]", intfType), ex);
                 throw;
             }
         }
 
-        /// <inheritdoc/>
         protected IServerCollectionHandler GetServerCollectionHandlerHelper(
             Type collectionHandlerType,
             ImplementationType aType,
@@ -78,9 +76,16 @@ namespace Kistl.API.Server
 
         #region IServerObjectHandlerFactory Members
 
+        /// <inheritdoc/>
         public abstract IServerCollectionHandler GetServerCollectionHandler(InterfaceType aType, InterfaceType bType, RelationEndRole endRole);
+
+        /// <inheritdoc/>
         public abstract IServerObjectHandler GetServerObjectHandler(InterfaceType type);
+
+        /// <inheritdoc/>
         public abstract IServerObjectSetHandler GetServerObjectSetHandler();
+
+        /// <inheritdoc/>
         public abstract IServerDocumentHandler GetServerDocumentHandler();
 
         #endregion

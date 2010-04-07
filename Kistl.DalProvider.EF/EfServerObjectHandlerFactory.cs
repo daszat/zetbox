@@ -27,9 +27,7 @@ namespace Kistl.DalProvider.EF
 
         public override IServerObjectHandler GetServerObjectHandler(InterfaceType type)
         {
-            return GetServerObjectHandlerHelper(
-                typeof(ServerObjectHandler<>),
-                KistlDataContext.ImplementationType(type));
+            return GetServerObjectHandlerHelper(typeof(ServerObjectHandler<>), type);
         }
 
         public override IServerObjectSetHandler GetServerObjectSetHandler()
