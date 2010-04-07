@@ -196,49 +196,41 @@ namespace Kistl.DalProvider.EF
         /// <returns>IQueryable</returns>
         public override IQueryable<T> GetPersistenceObjectQuery<T>()
         {
-            InterfaceType type = new InterfaceType(typeof(T));
-
-            if (!_table.ContainsKey(type))
-            {
-                var query = _ctx.CreateQuery<BaseServerDataObject_EntityFramework>("[" + GetEntityName(type) + "]");
-#if EAGERLOADING
-                query = AddEagerLoading<T>(query);
-#endif
-                _table[type] = new QueryTranslator<T>(
-                    new EfQueryTranslatorProvider<T>(
-                        metaDataResolver, this.identity,
-                        query, this));
-            }
-
-            // This doesn't work without "OfType"
-            // The reason is that "GetEntityName" returns a Query to the baseobject 
-            // but maybe a derived object is asked. OfType will filter this.
-            // return (ObjectQuery<T>)_table[type];
-            return ((IQueryable<T>)_table[type]).OfType<T>();
+            var interfaceType = new InterfaceType(typeof(T));
+            PrimeQueryCache<T>(interfaceType, ImplementationType(interfaceType));
+            return ((IQueryable<T>)_table[interfaceType]);
         }
 
-
         public System.Collections.IList GetListHack<T>()
+            where T : class, IPersistenceObject
         {
-            InterfaceType type = new InterfaceType(typeof(T));
+            var interfaceType = new InterfaceType(typeof(T));
+            PrimeQueryCache<T>(interfaceType, ImplementationType(interfaceType));
 
-            if (!_table.ContainsKey(type))
+            return ((IQueryable<T>)_table[interfaceType]).ToList();
+        }
+
+        private void PrimeQueryCache<T>(InterfaceType interfaceType, ImplementationType implementationType)
+            where T : class, IPersistenceObject
+        {
+            if (!_table.ContainsKey(interfaceType))
             {
-                var query = _ctx.CreateQuery<BaseServerDataObject_EntityFramework>("[" + GetEntityName(type) + "]");
+                var objectQuery = _ctx.CreateQuery<BaseServerDataObject_EntityFramework>("[" + GetEntityName(interfaceType) + "]");
+
+                // The reason is that "GetEntityName" returns a Query to the baseobject 
+                // but maybe a derived object is requested. OfType will filter this.
+                // This filter has to be added first, so the QueryTranslator can ignore this
+                MethodInfo ofType = typeof(ObjectQuery<BaseServerDataObject_EntityFramework>).GetMethod("OfType").MakeGenericMethod(implementationType.Type);
+                var query = (IQueryable)ofType.Invoke(objectQuery, new object[] { });
+
 #if EAGERLOADING
                 query = AddEagerLoading<T>(query);
 #endif
-                _table[type] = new QueryTranslator<T>(
+                _table[interfaceType] = new QueryTranslator<T>(
                     new EfQueryTranslatorProvider<T>(
                         metaDataResolver, this.identity,
                         query, this));
             }
-
-            // This doesn't work without "OfType"
-            // The reason is that "GetEntityName" returns a Query to the baseobject 
-            // but maybe a derived object is asked. OfType will filter this.
-            // return (ObjectQuery<T>)_table[type];
-            return ((IQueryable<T>)_table[type]).OfType<T>().ToList();
         }
 
         /// <summary>
