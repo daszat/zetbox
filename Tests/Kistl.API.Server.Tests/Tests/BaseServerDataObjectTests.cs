@@ -1,16 +1,17 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-
-using Kistl.API.Mocks;
-using Kistl.API.Server.Mocks;
-
-using NUnit.Framework;
 
 namespace Kistl.API.Server.Tests
 {
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+
+    using Kistl.API.Mocks;
+    using Kistl.API.Server.Mocks;
+
+    using NUnit.Framework;
+
     [TestFixture]
     public class BaseServerDataObjectTests
     {
@@ -68,10 +69,9 @@ namespace Kistl.API.Server.Tests
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void ToStream_to_null_fails()
         {
-            obj.ToStream((BinaryWriter)null, null, false);
+            Assert.That(() => obj.ToStream((BinaryWriter)null, null, false), Throws.InstanceOf<ArgumentNullException>());
         }
 
         [Test]
@@ -112,15 +112,13 @@ namespace Kistl.API.Server.Tests
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void FromStream_Null_StreamReader_fails()
         {
             TestObjClass result = new TestObjClass__Implementation__();
-            result.FromStream((BinaryReader)null);
+            Assert.That(() => result.FromStream((BinaryReader)null), Throws.InstanceOf<ArgumentNullException>());
         }
 
         [Test]
-        [ExpectedException(typeof(InvalidOperationException))]
         public void FromStream_Attached()
         {
             MemoryStream ms = new MemoryStream();
@@ -136,7 +134,7 @@ namespace Kistl.API.Server.Tests
             var ctxMock = new KistlContextMock();
             TestObjClass result = ctxMock.Create<TestObjClass>();
             Assert.That(result.IsAttached, Is.True);
-            result.FromStream(sr);
+            Assert.That(() => result.FromStream(sr), Throws.InstanceOf<InvalidOperationException>());
         }
 
         [Test]
@@ -153,6 +151,5 @@ namespace Kistl.API.Server.Tests
             BinarySerializer.FromStream(out t, sr);
             Assert.That(t, Is.EqualTo(new SerializableType(new InterfaceType(typeof(TestObjClass)))));
         }
-
     }
 }

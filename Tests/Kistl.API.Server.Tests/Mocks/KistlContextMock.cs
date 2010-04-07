@@ -148,7 +148,14 @@ namespace Kistl.API.Server.Mocks
 
         protected override object CreateUnattachedInstance(InterfaceType ifType)
         {
-            throw new NotImplementedException();
+            if (ifType.Type == typeof(TestObjClass))
+            {
+                return new TestObjClass__Implementation__();
+            }
+            else
+            {
+                return Activator.CreateInstance(ifType.Type);
+            }
         }
     }
 }
