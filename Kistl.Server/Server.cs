@@ -14,6 +14,7 @@ namespace Kistl.Server
     using Kistl.API.Configuration;
     using Kistl.API.Server;
     using Kistl.API.Utils;
+    using Kistl.App.Extensions;
 
 	/// <summary>
 	/// Serversteuerung
@@ -218,6 +219,16 @@ namespace Kistl.Server
 			{
 				var ctx = subContainer.Resolve<IKistlServerContext>();
 				Log.Info("Currently no fixes to do");
+
+                //var tr = typeof(Kistl.App.Base.ObjectClass).ToRef(ctx);
+                //Console.WriteLine(tr.ToString());
+
+                //using (var s = new MemoryStream())
+                //{
+                //    s.Write(new byte[] { (byte)'h', (byte)'e', (byte)'l', (byte)'l', (byte)'o' }, 0, 5);
+                //    var blob = ctx.CreateBlob(s, "test.txt", "text");
+                //}
+
 				ctx.SubmitChanges();
 			}
 		}

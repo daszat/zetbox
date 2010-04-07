@@ -304,23 +304,29 @@ namespace Kistl.API.Server
             Expression e = base.Visit(m.Expression);
 
             string memberName = m.Member.Name;
-            Type declaringType;
+            Type type;
             if (e is ParameterExpression)
             {
-                declaringType = e.Type;
+                type = e.Type;
             }
             else
             {
-                declaringType = m.Expression.Type.ToImplementationType();
+                type = m.Expression.Type.ToImplementationType();
             }
             MemberExpression result;
-            if (declaringType.GetMember(memberName).Length > 0 && declaringType.GetMember(memberName + Kistl.API.Helper.ImplementationSuffix).Length > 0)
+            if (type.GetMember(memberName).Length > 0 && type.GetMember(memberName + Kistl.API.Helper.ImplementationSuffix).Length > 0)
             {
                 result = Expression.PropertyOrField(e, memberName + Kistl.API.Helper.ImplementationSuffix);
             }
             else
             {
-                result = Expression.MakeMemberAccess(e, m.Member);
+                MemberInfo member = m.Member;
+                // If this is not a static access AND the member type(!) and expression type do not match, fixup MemberInfo
+                if (e != null && !member.DeclaringType.IsAssignableFrom(e.Type))
+                {
+                    member = e.Type.GetMember(m.Member.Name).Single();
+                }
+                result = Expression.MakeMemberAccess(e, member);
             }
             return result;
         }
