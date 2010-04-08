@@ -109,6 +109,7 @@
     <None Include="ClassDiagram.Kistl.API.cd" />
     <None Include="Configuration\CreateSchema.cmd" />
     <None Include="Kistl.snk" />
+    <Compile Include="BaseMemoryContext.cs" />
     <Compile Include="BaseNotifyingObject.cs" />
     <Compile Include="BasePersistenceObject.cs" />
     <Compile Include="BaseCompoundObject.cs" />

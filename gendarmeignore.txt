@@ -133,8 +133,8 @@ M: System.Void Kistl.Server.Service.ServerManager::Start(Kistl.API.Configuration
 
 R: Gendarme.Rules.Exceptions.InstantiateArgumentExceptionCorrectlyRule
 # false positives on helper functions
-M: System.Void Kistl.API.MemoryContext::CheckInterfaceAssembly(System.String,System.Type)
-M: System.Void Kistl.API.MemoryContext::CheckImplementationAssembly(System.String,System.Type)
+M: System.Void Kistl.API.BaseMemoryContext::CheckInterfaceAssembly(System.String,System.Type)
+M: System.Void Kistl.API.BaseMemoryContext::CheckImplementationAssembly(System.String,System.Type)
 # see https://bugzilla.novell.com/show_bug.cgi?id=567995 , should be fixed in gendarme 2.8
 M: TItem Kistl.API.BaseRelationListWrapper`6::get_Item(System.Int32)
 M: System.Void Kistl.API.BaseRelationListWrapper`6::set_Item(System.Int32,TItem)

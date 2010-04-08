@@ -15,7 +15,7 @@ namespace Kistl.API
     /// <summary>
     /// A temporary data context without permanent backing store.
     /// </summary>
-    public class MemoryContext
+    public abstract class BaseMemoryContext
         : IKistlContext
     {
         private readonly ContextCache _objects = new ContextCache();
@@ -34,7 +34,7 @@ namespace Kistl.API
         private int _newIDCounter = Helper.INVALIDID;
 
         /// <summary>
-        /// Check whether the specified type is from the Interface assembly. Throws an ArgumentOutOfRangeException if not.
+        /// Check whether the specified type is from the interface assembly. Throws an ArgumentOutOfRangeException if not.
         /// </summary>
         /// <param name="paramName">the paramName to use for the exception</param>
         /// <param name="t">the Type to check.</param>
@@ -48,7 +48,7 @@ namespace Kistl.API
         }
 
         /// <summary>
-        /// Check whether the specified type is from the Interface assembly. Throws an ArgumentOutOfRangeException if not.
+        /// Check whether the specified type is from the implementation assembly. Throws an ArgumentOutOfRangeException if not.
         /// </summary>
         /// <param name="paramName">the paramName to use for the exception</param>
         /// <param name="t">the Type to check.</param>
@@ -62,11 +62,11 @@ namespace Kistl.API
         }
 
         /// <summary>
-        /// Initializes a new instance of the MemoryContext class, using the specified assemblies for interfaces and implementation.
+        /// Initializes a new instance of the BaseMemoryContext class, using the specified assemblies for interfaces and implementation.
         /// </summary>
         /// <param name="interfaces">The assembly containing the interfaces available in this context. MUST not be null.</param>
         /// <param name="implementations">The assembly containing the classes implementing the interfaces in this context. MUST not be null.</param>
-        public MemoryContext(Assembly interfaces, Assembly implementations)
+        protected BaseMemoryContext(Assembly interfaces, Assembly implementations)
         {
             if (interfaces == null) { throw new ArgumentNullException("interfaces"); }
             if (implementations == null) { throw new ArgumentNullException("implementations"); }
@@ -165,8 +165,10 @@ namespace Kistl.API
             return GetPersistenceObjectQuery(new InterfaceType(typeof(T))).Cast<T>();
         }
 
-        /// <inheritdoc />
-        public IQueryable<IPersistenceObject> GetPersistenceObjectQuery(InterfaceType ifType)
+        /// <summary>Retrieves a new query on top of the attached objects.</summary>
+        /// <remarks>Implementors can override this method to modify queries 
+        /// according to their provider's needs.</remarks>
+        public virtual IQueryable<IPersistenceObject> GetPersistenceObjectQuery(InterfaceType ifType)
         {
             if (ifType == null) { throw new ArgumentNullException("ifType"); }
             CheckInterfaceAssembly("ifType", ifType.Type);
@@ -216,8 +218,8 @@ namespace Kistl.API
             }
         }
 
-        /// <summary>Not supported.</summary>
-        int IKistlContext.SubmitChanges() { throw new NotSupportedException(); }
+        /// <inheritdoc />
+        public abstract int SubmitChanges();
 
         /// <inheritdoc />
         public bool IsDisposed { get; private set; }
@@ -290,11 +292,7 @@ namespace Kistl.API
         /// </summary>
         /// <param name="ifType">The requested interface.</param>
         /// <returns>A newly created, unattached instance of the implementation for the specified interface.</returns>
-        private object CreateUnattachedInstance(InterfaceType ifType)
-        {
-            var implType = ImplementationAssembly.GetType(ifType.Type.FullName + Kistl.API.Helper.ImplementationSuffix);
-            return Activator.CreateInstance(implType);
-        }
+        protected abstract object CreateUnattachedInstance(InterfaceType ifType);
 
         /// <summary>
         /// Creates an attached, ready-to-use instance of the specified type. The implementation type is instantiated from the implementation assembly.
