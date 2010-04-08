@@ -83,9 +83,9 @@ namespace Kistl.API
         }
 
         /// <summary>
-        /// Constant for Max List Count. Value is 500.
+        /// Constant for Max List Count. Value is 1000.
         /// </summary>
-        public static readonly int MAXLISTCOUNT = 500;
+        public static readonly int MAXLISTCOUNT = 1000;
 
         /// <summary>
         /// Replaces all illigal Path Characters with an '_' char.

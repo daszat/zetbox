@@ -78,6 +78,7 @@ namespace Kistl.Client.Presentables.ModuleEditor
                     lst.Add(new ViewDescriptorInstanceListViewModel(AppContext, DataContext, CurrentModule));
                     lst.Add(new ViewModelDescriptorInstanceListViewModel(AppContext, DataContext, CurrentModule));
                     lst.Add(new RelationInstanceListViewModel(AppContext, DataContext, CurrentModule));
+                    lst.Add(new DiagramViewModel(AppContext, DataContext, CurrentModule));
 
                     _TreeItems = new ReadOnlyObservableCollection<ViewModel>(lst);
                 }

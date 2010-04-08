@@ -62,9 +62,21 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libs\AutoFac 1.4\Autofac.dll</HintPath>
     </Reference>
+    <Reference Include="GraphSharp, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\GraphSharp 1.0\GraphSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="GraphSharp.Controls, Version=1.0.3438.42543, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\GraphSharp 1.0\GraphSharp.Controls.dll</HintPath>
+    </Reference>
     <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libs\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="QuickGraph, Version=3.2.40122.0, Culture=neutral, PublicKeyToken=f3fb40175eec2af3, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\GraphSharp 1.0\QuickGraph.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
@@ -92,6 +104,10 @@
     </Reference>
     <Reference Include="PresentationFramework">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WPFExtensions, Version=1.0.3437.34043, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\GraphSharp 1.0\WPFExtensions.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -158,6 +174,10 @@
     <Page Include="View\KistlBase\TextValueSelectionView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ModuleEditor\DiagramDisplay.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ModuleEditor\InstanceListDisplay.xaml">
       <SubType>Designer</SubType>
@@ -326,6 +346,9 @@
     </Compile>
     <Compile Include="View\KistlBase\TextValueSelectionView.xaml.cs">
       <DependentUpon>TextValueSelectionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ModuleEditor\DiagramDisplay.xaml.cs">
+      <DependentUpon>DiagramDisplay.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ModuleEditor\InstanceListDisplay.xaml.cs">
       <DependentUpon>InstanceListDisplay.xaml</DependentUpon>
