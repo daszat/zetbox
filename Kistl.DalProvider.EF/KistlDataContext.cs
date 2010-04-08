@@ -198,7 +198,8 @@ namespace Kistl.DalProvider.EF
         {
             var interfaceType = new InterfaceType(typeof(T));
             PrimeQueryCache<T>(interfaceType, ImplementationType(interfaceType));
-            return ((IQueryable<T>)_table[interfaceType]);
+            // OfType<T>() at the end adds the security filters
+            return ((IQueryable)_table[interfaceType]).OfType<T>();
         }
 
         public System.Collections.IList GetListHack<T>()
@@ -207,7 +208,8 @@ namespace Kistl.DalProvider.EF
             var interfaceType = new InterfaceType(typeof(T));
             PrimeQueryCache<T>(interfaceType, ImplementationType(interfaceType));
 
-            return ((IQueryable<T>)_table[interfaceType]).ToList();
+            // OfType<T>() at the end adds the security filters
+            return ((IQueryable)_table[interfaceType]).OfType<T>().ToList();
         }
 
         private void PrimeQueryCache<T>(InterfaceType interfaceType, ImplementationType implementationType)
