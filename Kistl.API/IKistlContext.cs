@@ -314,32 +314,32 @@ namespace Kistl.API
         T CreateUnattached<T>() where T : class, IPersistenceObject;
 
         /// <summary>
-        /// Creates a new ICollectionEntry by Type
+        /// Creates a new IRelationCollectionEntry by Type
         /// </summary>
-        /// <param name="ifType">Type of the new ICollectionEntry</param>
-        /// <returns>A new ICollectionEntry</returns>
+        /// <param name="ifType">Type of the new IRelationCollectionEntry</param>
+        /// <returns>A new IRelationCollectionEntry</returns>
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
         IRelationCollectionEntry CreateRelationCollectionEntry(InterfaceType ifType);
         /// <summary>
-        /// Creates a new ICollectionEntry.
+        /// Creates a new IRelationCollectionEntry.
         /// </summary>
-        /// <typeparam name="T">Type of the new ICollectionEntry</typeparam>
-        /// <returns>A new ICollectionEntry</returns>
+        /// <typeparam name="T">Type of the new IRelationCollectionEntry</typeparam>
+        /// <returns>A new IRelationCollectionEntry</returns>
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
         T CreateRelationCollectionEntry<T>() where T : IRelationCollectionEntry;
 
         /// <summary>
-        /// Creates a new ICollectionEntry by Type
+        /// Creates a new IValueCollectionEntry by Type
         /// </summary>
-        /// <param name="ifType">Type of the new ICollectionEntry</param>
-        /// <returns>A new ICollectionEntry</returns>
+        /// <param name="ifType">Type of the new IValueCollectionEntry</param>
+        /// <returns>A new IValueCollectionEntry</returns>
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
         IValueCollectionEntry CreateValueCollectionEntry(InterfaceType ifType);
         /// <summary>
-        /// Creates a new ICollectionEntry.
+        /// Creates a new IValueCollectionEntry.
         /// </summary>
-        /// <typeparam name="T">Type of the new ICollectionEntry</typeparam>
-        /// <returns>A new ICollectionEntry</returns>
+        /// <typeparam name="T">Type of the new IValueCollectionEntry</typeparam>
+        /// <returns>A new IValueCollectionEntry</returns>
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
         T CreateValueCollectionEntry<T>() where T : IValueCollectionEntry;
 

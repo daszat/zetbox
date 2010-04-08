@@ -8,7 +8,7 @@ namespace Kistl.API.Utils
     using System.Text;
 
     /// <summary>
-    /// Store IPersistenceObjects ordered by (root-)Type and ID for fast access within the KistlContextImpl
+    /// Store IPersistenceObjects ordered by (root-)Type and ID for fast access by type or Export Guid.
     /// </summary>
     public class ContextCache
         : ICollection<IPersistenceObject>
