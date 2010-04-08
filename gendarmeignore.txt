@@ -43,6 +43,7 @@ M: System.Delegate Kistl.Client.WPF.View.ObjectEditor.WorkspaceDisplay::_CreateD
 M: System.Delegate Kistl.Client.WPF.View.ObjectBrowser.WorkspaceDisplay::_CreateDelegate(System.Type,System.String)
 
 M: System.Delegate Kistl.Client.WPF.View.ModuleEditor.ObjectClassInstanceList::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Kistl.Client.WPF.View.ModuleEditor.DiagramDisplay::_CreateDelegate(System.Type,System.String)
 
 M: System.Delegate Kistl.Client.WPF.View.Relations.RelationEndEditor::_CreateDelegate(System.Type,System.String)
 M: System.Delegate Kistl.Client.WPF.View.Relations.RelationEditor::_CreateDelegate(System.Type,System.String)

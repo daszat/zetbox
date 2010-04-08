@@ -107,7 +107,7 @@
     </Reference>
     <Reference Include="WPFExtensions, Version=1.0.3437.34043, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\GraphSharp 1.0\WPFExtensions.dll</HintPath>
+      <HintPath>..\Libs\WPFExtensions.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
