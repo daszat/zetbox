@@ -16,8 +16,7 @@ namespace Kistl.Server.Tests.Security
         [Test]
         public void project_should_throw_exception_with_no_privileges()
         {
-            var newProj = id3Ctx_low.Create<Projekt>();
-            Assert.That(() => newProj.Name = "Test", Throws.InstanceOf<System.Security.SecurityException>());
+            Assert.That(() => id3Ctx_low.Create<Projekt>(), Throws.InstanceOf<System.Security.SecurityException>());
         }
 
         [Test]
