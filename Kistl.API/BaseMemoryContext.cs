@@ -61,6 +61,11 @@ namespace Kistl.API
             }
         }
 
+        private void CheckDisposed()
+        {
+            if (IsDisposed) { throw new InvalidOperationException("Context already disposed"); }
+        }
+
         /// <summary>
         /// Initializes a new instance of the BaseMemoryContext class, using the specified assemblies for interfaces and implementation.
         /// </summary>
@@ -78,6 +83,7 @@ namespace Kistl.API
         /// <inheritdoc />
         public IPersistenceObject Attach(IPersistenceObject obj)
         {
+            CheckDisposed();
             if (obj == null) { throw new ArgumentNullException("obj"); }
             CheckImplementationAssembly("obj", obj.GetType());
 
@@ -119,6 +125,7 @@ namespace Kistl.API
         /// <inheritdoc />
         public void Detach(IPersistenceObject obj)
         {
+            CheckDisposed();
             if (obj == null) { throw new ArgumentNullException("obj"); }
             if (!_objects.Contains(obj)) { throw new InvalidOperationException("This object does not belong to the current context"); }
 
@@ -129,6 +136,7 @@ namespace Kistl.API
         /// <inheritdoc />
         public void Delete(IPersistenceObject obj)
         {
+            CheckDisposed();
             if (obj == null) { throw new ArgumentNullException("obj"); }
             if (obj.Context != this) { throw new InvalidOperationException("This object does not belong to the current Context"); }
 
@@ -146,6 +154,7 @@ namespace Kistl.API
         public IQueryable<T> GetQuery<T>()
             where T : class, IDataObject
         {
+            CheckDisposed();
             CheckInterfaceAssembly("T", typeof(T));
             return GetPersistenceObjectQuery(new InterfaceType(typeof(T))).Cast<T>();
         }
@@ -153,6 +162,7 @@ namespace Kistl.API
         /// <inheritdoc />
         public IQueryable<IDataObject> GetQuery(InterfaceType ifType)
         {
+            CheckDisposed();
             if (ifType == null) { throw new ArgumentNullException("ifType"); }
             CheckInterfaceAssembly("ifType", ifType.Type);
             return GetPersistenceObjectQuery(ifType).Cast<IDataObject>();
@@ -161,6 +171,7 @@ namespace Kistl.API
         /// <inheritdoc />
         public IQueryable<T> GetPersistenceObjectQuery<T>() where T : class, IPersistenceObject
         {
+            CheckDisposed();
             CheckInterfaceAssembly("T", typeof(T));
             return GetPersistenceObjectQuery(new InterfaceType(typeof(T))).Cast<T>();
         }
@@ -170,6 +181,7 @@ namespace Kistl.API
         /// according to their provider's needs.</remarks>
         public virtual IQueryable<IPersistenceObject> GetPersistenceObjectQuery(InterfaceType ifType)
         {
+            CheckDisposed();
             if (ifType == null) { throw new ArgumentNullException("ifType"); }
             CheckInterfaceAssembly("ifType", ifType.Type);
             return (_objects[ifType] ?? _emptyList).AsQueryable().AddOfType(ifType.Type).Cast<IPersistenceObject>();
@@ -192,6 +204,7 @@ namespace Kistl.API
         {
             if (parent == null)
             {
+                CheckDisposed();
                 CheckInterfaceAssembly("T", typeof(T));
                 return GetPersistenceObjectQuery(new InterfaceType(typeof(T))).Cast<T>().ToList();
             }
@@ -204,6 +217,7 @@ namespace Kistl.API
         /// <inheritdoc />
         public IPersistenceObject ContainsObject(InterfaceType ifType, int ID)
         {
+            CheckDisposed();
             CheckInterfaceAssembly("type", ifType.Type);
             return Find(ifType, ID);
         }
@@ -214,6 +228,7 @@ namespace Kistl.API
         {
             get
             {
+                CheckDisposed();
                 return _objects;
             }
         }
@@ -225,11 +240,19 @@ namespace Kistl.API
         public bool IsDisposed { get; private set; }
 
         /// <summary>This context is read/write.</summary>
-        public bool IsReadonly { get { return false; } }
+        public bool IsReadonly
+        {
+            get
+            {
+                CheckDisposed();
+                return false;
+            }
+        }
 
         /// <inheritdoc />
         public T Create<T>() where T : class, IDataObject
         {
+            CheckDisposed();
             CheckInterfaceAssembly("T", typeof(T));
             return (T)Create(new InterfaceType(typeof(T)));
         }
@@ -237,6 +260,7 @@ namespace Kistl.API
         /// <inheritdoc />
         public IDataObject Create(InterfaceType ifType)
         {
+            CheckDisposed();
             if (ifType == null) { throw new ArgumentNullException("ifType"); }
             CheckInterfaceAssembly("ifType", ifType.Type);
             return (IDataObject)CreateInternal(ifType);
@@ -245,6 +269,7 @@ namespace Kistl.API
         /// <inheritdoc />
         public T CreateUnattached<T>() where T : class, IPersistenceObject
         {
+            CheckDisposed();
             CheckInterfaceAssembly("T", typeof(T));
             return (T)CreateUnattachedInstance(new InterfaceType(typeof(T)));
         }
@@ -252,6 +277,7 @@ namespace Kistl.API
         /// <inheritdoc />
         public IPersistenceObject CreateUnattached(InterfaceType ifType)
         {
+            CheckDisposed();
             if (ifType == null) { throw new ArgumentNullException("ifType"); }
             CheckInterfaceAssembly("ifType", ifType.Type);
             return (IPersistenceObject)CreateUnattachedInstance(ifType);
@@ -260,6 +286,7 @@ namespace Kistl.API
         /// <inheritdoc />
         public T CreateRelationCollectionEntry<T>() where T : IRelationCollectionEntry
         {
+            CheckDisposed();
             CheckInterfaceAssembly("T", typeof(T));
             return (T)CreateRelationCollectionEntry(new InterfaceType(typeof(T)));
         }
@@ -267,6 +294,7 @@ namespace Kistl.API
         /// <inheritdoc />
         public IRelationCollectionEntry CreateRelationCollectionEntry(InterfaceType ifType)
         {
+            CheckDisposed();
             if (ifType == null) { throw new ArgumentNullException("ifType"); }
             CheckInterfaceAssembly("ifType", ifType.Type);
             return (IRelationCollectionEntry)CreateInternal(ifType);
@@ -275,6 +303,7 @@ namespace Kistl.API
         /// <inheritdoc />
         public T CreateValueCollectionEntry<T>() where T : IValueCollectionEntry
         {
+            CheckDisposed();
             CheckInterfaceAssembly("T", typeof(T));
             return (T)CreateValueCollectionEntry(new InterfaceType(typeof(T)));
         }
@@ -282,6 +311,7 @@ namespace Kistl.API
         /// <inheritdoc />
         public IValueCollectionEntry CreateValueCollectionEntry(InterfaceType ifType)
         {
+            CheckDisposed();
             if (ifType == null) { throw new ArgumentNullException("ifType"); }
             CheckInterfaceAssembly("ifType", ifType.Type);
             return (IValueCollectionEntry)CreateInternal(ifType);
@@ -301,6 +331,7 @@ namespace Kistl.API
         /// <returns>A newly created, attached instance of the implementation for the specified interface.</returns>
         private IPersistenceObject CreateInternal(InterfaceType ifType)
         {
+            CheckDisposed();
             IPersistenceObject obj = (IPersistenceObject)CreateUnattachedInstance(ifType);
             Attach(obj);
             OnObjectCreated(obj);
@@ -314,6 +345,7 @@ namespace Kistl.API
         /// <inheritdoc />
         public ICompoundObject CreateCompoundObject(InterfaceType ifType)
         {
+            CheckDisposed();
             if (ifType == null) { throw new ArgumentNullException("ifType"); }
             CheckInterfaceAssembly("ifType", ifType.Type);
 
@@ -323,6 +355,7 @@ namespace Kistl.API
         /// <inheritdoc />
         public T CreateCompoundObject<T>() where T : ICompoundObject
         {
+            CheckDisposed();
             CheckInterfaceAssembly("T", typeof(T));
 
             return (T)CreateCompoundObject(new InterfaceType(typeof(T)));
@@ -331,6 +364,7 @@ namespace Kistl.API
         /// <inheritdoc />
         public IDataObject Find(InterfaceType ifType, int ID)
         {
+            CheckDisposed();
             if (ifType == null) { throw new ArgumentNullException("ifType"); }
             CheckInterfaceAssembly("ifType", ifType.Type);
 
@@ -341,6 +375,7 @@ namespace Kistl.API
         public T Find<T>(int ID)
             where T : class, IDataObject
         {
+            CheckDisposed();
             CheckInterfaceAssembly("T", typeof(T));
 
             return (T)Find(new InterfaceType(typeof(T)), ID);
@@ -349,6 +384,7 @@ namespace Kistl.API
         /// <inheritdoc />
         public T FindPersistenceObject<T>(int ID) where T : class, IPersistenceObject
         {
+            CheckDisposed();
             CheckInterfaceAssembly("T", typeof(T));
 
             return (T)FindPersistenceObject(new InterfaceType(typeof(T)), ID);
@@ -357,6 +393,7 @@ namespace Kistl.API
         /// <inheritdoc />
         public IPersistenceObject FindPersistenceObject(InterfaceType ifType, int ID)
         {
+            CheckDisposed();
             if (ifType == null) { throw new ArgumentNullException("ifType"); }
             CheckInterfaceAssembly("ifType", ifType.Type);
 
@@ -366,6 +403,7 @@ namespace Kistl.API
         /// <inheritdoc />
         public T FindPersistenceObject<T>(Guid exportGuid) where T : class, IPersistenceObject
         {
+            CheckDisposed();
             CheckInterfaceAssembly("T", typeof(T));
 
             return (T)_objects.Lookup(exportGuid);
@@ -374,6 +412,7 @@ namespace Kistl.API
         /// <inheritdoc />
         public IPersistenceObject FindPersistenceObject(InterfaceType ifType, Guid exportGuid)
         {
+            CheckDisposed();
             if (ifType == null) { throw new ArgumentNullException("ifType"); }
             CheckInterfaceAssembly("ifType", ifType.Type);
 
@@ -383,6 +422,7 @@ namespace Kistl.API
         /// <inheritdoc />
         public IEnumerable<IPersistenceObject> FindPersistenceObjects(InterfaceType ifType, IEnumerable<Guid> exportGuids)
         {
+            CheckDisposed();
             if (ifType == null) { throw new ArgumentNullException("ifType"); }
             CheckInterfaceAssembly("ifType", ifType.Type);
             if (exportGuids == null) { throw new ArgumentNullException("exportGuids"); }
@@ -395,6 +435,7 @@ namespace Kistl.API
         /// <inheritdoc />
         public IEnumerable<T> FindPersistenceObjects<T>(IEnumerable<Guid> exportGuids) where T : class, IPersistenceObject
         {
+            CheckDisposed();
             CheckInterfaceAssembly("T", typeof(T));
             if (exportGuids == null) { throw new ArgumentNullException("exportGuids"); }
 
@@ -451,6 +492,7 @@ namespace Kistl.API
         public virtual void Dispose()
         {
             // nothing to dispose
+            IsDisposed = true;
         }
 
         /// <summary>Not implemented.</summary>
