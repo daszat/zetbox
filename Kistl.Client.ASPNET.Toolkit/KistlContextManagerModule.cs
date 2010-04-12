@@ -6,9 +6,11 @@ using System.Reflection;
 using System.Text;
 using System.Web;
 
+using Autofac;
 using Kistl.API;
 using Kistl.API.Configuration;
 using Kistl.API.Utils;
+using Kistl.App.Extensions;
 
 namespace Kistl.Client.ASPNET.Toolkit
 {
@@ -55,9 +57,15 @@ namespace Kistl.Client.ASPNET.Toolkit
 
                 var config = KistlConfig.FromFile(HttpContext.Current.Server.MapPath(ConfigurationManager.AppSettings["configFile"]));
                 AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
-                Assembly interfaces = Assembly.Load(Kistl.API.Helper.InterfaceAssembly);
-                Assembly implementation = Assembly.Load(Kistl.API.Helper.ClientAssembly);
-                var testCtx = new GuiApplicationContext(config, "ASPNET", () => new MemoryContext(interfaces, implementation));
+
+                var builder = Kistl.API.Utils.AutoFacBuilder.CreateContainerBuilder(config, config.Client.Modules);
+                var container = builder.Build();
+
+                var testCtx = new GuiApplicationContext(config, "ASPNET");
+
+                // initialise custom actions manager
+                var cams = container.Resolve<BaseCustomActionsManager>();
+
             }
             KistlContext = Kistl.API.Client.KistlContext.GetContext();
         }

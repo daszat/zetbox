@@ -9,8 +9,12 @@
     <CodeGenWorkingPath>bin\CodeGenNext</CodeGenWorkingPath>
     <CodeGenOutputPath>bin\CodeGen</CodeGenOutputPath>
     <CodeGenArchivePath>Backup</CodeGenArchivePath>
-    <StoreProvider></StoreProvider>
-    <KistlDataContextType>Kistl.API.Server.Mocks.KistlContextMock, Kistl.API.Server.Tests</KistlDataContextType>
+    <Modules>
+      <Module>Kistl.API.ApiModule, Kistl.API</Module>
+      <Module>Kistl.Server.ServerModule, Kistl.Server</Module>
+      <Module>Kistl.DalProvider.EF.EfProvider, Kistl.DalProvider.EF</Module>
+      <Module>Kistl.DalProvider.Frozen.FrozenProvider, Kistl.DalProvider.Frozen</Module>
+    </Modules>
   </Server>
   <Client StartClient="false" ThrowErrors="false"/>
   <SourceFileLocation>

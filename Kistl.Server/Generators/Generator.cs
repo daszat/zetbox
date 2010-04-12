@@ -96,7 +96,7 @@ namespace Kistl.Server.Generators
                 {
                     try
                     {
-                        using (var innerContainer = _container.CreateInnerContainer())
+                        using (var innerContainer = _container.BeginLifetimeScope())
                         {
                             generator.Generate(innerContainer.Resolve<IKistlContext>(), workingPath);
                         }

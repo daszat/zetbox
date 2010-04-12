@@ -18,7 +18,7 @@ namespace Kistl.Server.Tests.Security
 
     public abstract class SecurityDataFixture
     {
-        protected IContainer container;
+        protected ILifetimeScope container;
 
         protected Identity admin;
         protected Identity identity1;

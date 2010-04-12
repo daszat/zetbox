@@ -19,7 +19,7 @@ namespace Kistl.Server.Tests
     [TestFixture]
     public class ObjectTests
     {
-        private IContainer container;
+        private ILifetimeScope container;
         private IKistlContext ctx;
 
         [SetUp]

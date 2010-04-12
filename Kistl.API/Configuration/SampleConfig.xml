@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <KistlConfig xmlns="http://dasz.at/Kistl/">
   <ConfigName>Default Server Configuration</ConfigName>
-  <FrozenProvider>Kistl.DalProvider.Frozen.FrozenProvider, Kistl.DalProvider.Frozen</FrozenProvider>
   <Server StartServer="false">
     <DatabaseProvider>System.Data.SqlClient</DatabaseProvider>
     <ConnectionString>Data Source=.\SQLEXPRESS;Initial Catalog=Kistl;Integrated Security=True;MultipleActiveResultSets=true;</ConnectionString>
@@ -9,13 +8,21 @@
     <LogFilePath>bin\LogFiles</LogFilePath>
     <CodeGenWorkingPath>bin\CodeGenNext</CodeGenWorkingPath>
     <CodeGenOutputPath>bin\CodeGen</CodeGenOutputPath>
-    <CodeGenArchivePath>bin\CodeGenArchives</CodeGenArchivePath>
-    <StoreProvider>Kistl.DalProvider.EF.EfProvider, Kistl.DalProvider.EF</StoreProvider>
-    <KistlDataContextType>Kistl.DalProvider.EF.KistlDataContext, Kistl.DalProvider.EF</KistlDataContextType>
+    <CodeGenArchivePath>Backup</CodeGenArchivePath>
+    <Modules>
+      <Module>Kistl.API.ApiModule, Kistl.API</Module>
+      <Module>Kistl.Server.ServerModule, Kistl.Server</Module>
+      <Module>Kistl.DalProvider.EF.EfProvider, Kistl.DalProvider.EF</Module>
+      <Module>Kistl.DalProvider.Frozen.FrozenProvider, Kistl.DalProvider.Frozen</Module>
+    </Modules>
   </Server>
-  <Client StartClient="true" ThrowErrors="true">
+  <Client StartClient="false" ThrowErrors="true">
     <DocumentStore>DocumentStore\Client\</DocumentStore>
-    <DevelopmentEnvironment>false</DevelopmentEnvironment>
+    <Modules>
+      <Module>Kistl.API.ApiModule, Kistl.API</Module>
+      <Module>Kistl.Client.ClientModule, Kistl.Client</Module>
+      <Module>Kistl.DalProvider.Frozen.FrozenClientProvider, Kistl.DalProvider.Frozen</Module>
+    </Modules>
   </Client>
   <SourceFileLocation>
     <!-- default probe path -->

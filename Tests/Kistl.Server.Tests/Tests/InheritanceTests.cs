@@ -17,7 +17,7 @@ namespace Kistl.Server.Tests
     [TestFixture]
     public class InheritanceTests
     {
-        private IContainer container;
+        private ILifetimeScope container;
         private IReadOnlyKistlContext ctx;
 
         [SetUp]

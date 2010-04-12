@@ -10,17 +10,28 @@ namespace Kistl.Client.WPF
     using Kistl.App.GUI;
     using Kistl.Client.Presentables;
     using Kistl.Client.Presentables.ObjectBrowser;
+    using Kistl.API;
 
-    public static class Launcher
+    public class Launcher
     {
-        public static void Execute(IGuiApplicationContext appCtx, string[] args)
+        private readonly GuiApplicationContext appCtx;
+        private readonly IKistlContext ctx;
+        private readonly Func<IKistlContext> ctxFactory;
+        public Launcher(GuiApplicationContext appCtx, IKistlContext ctx, Func<IKistlContext> ctxFactory)
         {
-            if (appCtx == null) { throw new ArgumentNullException("appCtx", "Missing GUI Application Context"); }
+            this.appCtx = appCtx;
+            this.ctx = ctx;
+            this.ctxFactory = ctxFactory;
+        }
 
-            var ctxDebugger = appCtx.Factory.CreateSpecificModel<KistlDebuggerAsModel>(KistlContext.GetContext());
+        public void Show(string[] args)
+        {
+            if (args == null) { throw new ArgumentNullException("args"); }
+
+            var ctxDebugger = appCtx.Factory.CreateSpecificModel<KistlDebuggerAsModel>(ctxFactory.Invoke());
             appCtx.Factory.ShowModel(ctxDebugger, true);
 
-            var cacheDebugger = appCtx.Factory.CreateSpecificModel<CacheDebuggerViewModel>(KistlContext.GetContext());
+            var cacheDebugger = appCtx.Factory.CreateSpecificModel<CacheDebuggerViewModel>(ctxFactory.Invoke());
             appCtx.Factory.ShowModel(cacheDebugger, true);
 
             bool _timeRecorder = args.Contains("-timerecorder");
@@ -30,17 +41,15 @@ namespace Kistl.Client.WPF
             ViewModel initialWorkspace;
             if (_timeRecorder)
             {
-                initialWorkspace = appCtx.Factory.CreateSpecificModel<Kistl.Client.Presentables.TimeRecords.WorkEffortRecorderModel>(KistlContext.GetContext());
+                initialWorkspace = appCtx.Factory.CreateSpecificModel<Kistl.Client.Presentables.TimeRecords.WorkEffortRecorderModel>(ctxFactory.Invoke());
             }
             else
             {
-                initialWorkspace = appCtx.Factory.CreateSpecificModel<WorkspaceViewModel>(KistlContext.GetContext());
+                initialWorkspace = appCtx.Factory.CreateSpecificModel<WorkspaceViewModel>(ctxFactory.Invoke());
             }
 
-            // ugh?
-            LauncherKind launcher = appCtx.TransientContext.Create<LauncherKind>();
+            LauncherKind launcher = ctx.Create<LauncherKind>();
             appCtx.Factory.ShowModel(initialWorkspace, launcher, true);
-
         }
     }
 }

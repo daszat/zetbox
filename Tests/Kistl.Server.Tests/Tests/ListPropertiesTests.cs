@@ -17,8 +17,8 @@ namespace Kistl.Server.Tests
     public class ListPropertiesTests
         : AbstractListPropertiesTests
     {
-        private IContainer container;
-        private IContainer GetContainer()
+        private ILifetimeScope container;
+        private ILifetimeScope GetContainer()
         {
             if (container == null)
             {

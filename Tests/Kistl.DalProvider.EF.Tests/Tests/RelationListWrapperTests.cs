@@ -24,7 +24,7 @@ namespace Kistl.DalProvider.EF.Tests
     {
         protected EntityCollection<Projekt_haben_Mitarbeiter_RelationEntry__Implementation__> wrappedCollection;
 
-        private IContainer innerContainer;
+        private ILifetimeScope innerContainer;
         private IKistlContext ctx;
         private Projekt__Implementation__ parent;
 
@@ -35,7 +35,7 @@ namespace Kistl.DalProvider.EF.Tests
         {
             if (innerContainer == null)
             {
-                innerContainer = KistlContext.Container.CreateInnerContainer();
+                innerContainer = KistlContext.Container.BeginLifetimeScope();
                 ctx = innerContainer.Resolve<IKistlContext>();
             }
         }

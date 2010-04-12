@@ -8,14 +8,13 @@ namespace Kistl.Server.Service
     using System.Text;
 
     using Autofac;
-    using Autofac.Builder;
-    using Autofac.Configuration;
     using Autofac.Integration.Wcf;
     using Kistl.API;
     using Kistl.API.Configuration;
     using Kistl.API.Server;
     using Kistl.API.Utils;
     using Kistl.App.Extensions;
+    using Autofac.Configuration;
 
     /// <summary>
     /// Mainprogramm
@@ -65,7 +64,7 @@ namespace Kistl.Server.Service
             bool waitForKey = false;
             try
             {
-                List<Action<IContainer, List<string>>> actions = new List<Action<IContainer, List<string>>>();
+                List<Action<ILifetimeScope, List<string>>> actions = new List<Action<ILifetimeScope, List<string>>>();
                 string dataSourceXmlFile = null;
 
                 options = new OptionSet()
@@ -185,6 +184,7 @@ namespace Kistl.Server.Service
 
                 Log.TraceTotalMemory("After InitApplicationContext");
 
+                AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
                 using (var container = CreateMasterContainer(config, dataSourceXmlFile))
                 {
                     DefaultInitialisation(dataSourceXmlFile, container);
@@ -197,7 +197,7 @@ namespace Kistl.Server.Service
 
                         foreach (var action in actions)
                         {
-                            using (var innerContainer = container.CreateInnerContainer())
+                            using (var innerContainer = container.BeginLifetimeScope())
                             {
                                 action(innerContainer, extraArguments);
                             }
@@ -265,23 +265,9 @@ namespace Kistl.Server.Service
 
         internal static IContainer CreateMasterContainer(KistlConfig config, string dataSourceXmlFile)
         {
-            AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
+            var builder = Kistl.API.Utils.AutoFacBuilder.CreateContainerBuilder(config, config.Server.Modules);
 
-            var builder = new ContainerBuilder();
-
-            // register the configuration
-            builder
-                .Register(config)
-                .ExternallyOwned()
-                .SingletonScoped();
             // register components from most general to most specific source
-            // default server stuff
-            builder.RegisterModule(new ServerModule());
-            // register the datastore provider
-            builder.RegisterModule((IModule)Activator.CreateInstance(Type.GetType(config.Server.StoreProvider, true)));
-            // register the provider for frozen objects
-            // if there's a generated frozencontext, this'll override the store's default
-            builder.RegisterModule((IModule)Activator.CreateInstance(Type.GetType(config.FrozenProvider, true)));
             // if there is a data source xml file, use it instead of a (possibly missing) frozen context
             if (dataSourceXmlFile != null)
             {
@@ -295,7 +281,7 @@ namespace Kistl.Server.Service
                         return memCtx;
                     })
                     .As<IReadOnlyKistlContext>()
-                    .SingletonScoped();
+                    .SingleInstance();
             }
             // register deployment-specific components
             builder.RegisterModule(new ConfigurationSettingsReader("servercomponents"));

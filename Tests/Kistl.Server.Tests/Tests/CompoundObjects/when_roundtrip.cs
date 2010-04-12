@@ -16,8 +16,8 @@ namespace Kistl.Server.Tests.CompoundObjects
     public class when_roundtrip
         : Kistl.API.AbstractConsumerTests.CompoundObjects.when_roundtrip
     {
-        private IContainer container;
-        private IContainer GetContainer()
+        private ILifetimeScope container;
+        private ILifetimeScope GetContainer()
         {
             if (container == null)
             {

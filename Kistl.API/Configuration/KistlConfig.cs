@@ -57,22 +57,22 @@ namespace Kistl.API.Configuration
         public string ConfigName { get; set; }
 
         /// <summary>
-        /// Frozen objects provider
-        /// </summary>
-        [XmlElement(IsNullable = false)]
-        public string FrozenProvider { get; set; }
-
-        /// <summary>
         /// Server Configuration
         /// </summary>
-        [XmlElement(IsNullable = true)]
+        [XmlElement(IsNullable = false)]
         public ServerConfig Server { get; set; }
+
+        [XmlIgnore]
+        public bool ServerSpecified { get; set; }
 
         /// <summary>
         /// Client Configuration
         /// </summary>
-        [XmlElement(IsNullable = true)]
+        [XmlElement(IsNullable = false)]
         public ClientConfig Client { get; set; }
+
+        [XmlIgnore]
+        public bool ClientSpecified { get; set; }
 
         /// <summary>
         /// Location (Path) to Assemblies - TODO: Will be replaced!
@@ -128,7 +128,7 @@ namespace Kistl.API.Configuration
             /// Where the Generator will store its results when successful. 
             /// Contents of this directory are replaced on each successful run.
             /// </summary>
-            [XmlElement(IsNullable = true)]
+            [XmlElement(IsNullable = false)]
             public string CodeGenOutputPath { get; set; }
 
             /// <summary>
@@ -136,17 +136,15 @@ namespace Kistl.API.Configuration
             /// <see cref="CodeGenOutputPath"/> before replacing it. Leave 
             /// this configuration parameter empty to suppress archival.
             /// </summary>
-            [XmlElement(IsNullable = true)]
+            [XmlElement(IsNullable = false)]
             public string CodeGenArchivePath { get; set; }
 
             /// <summary>
-            /// KistlStore Provider Name
+            /// AutoFac modules to load
             /// </summary>
-            [XmlElement(IsNullable = false)]
-            public string StoreProvider { get; set; }
-
-            [XmlElement(IsNullable = false)]
-            public string KistlDataContextType { get; set; }
+            [XmlArray("Modules")]
+            [XmlArrayItem("Module", typeof(string))]
+            public string[] Modules { get; set; }
 
             public string GetLogFilePath(string name)
             {
@@ -183,7 +181,17 @@ namespace Kistl.API.Configuration
             /// Path to the Document Store - TODO: Will be replaced by a Document Cache
             /// </summary>
             [XmlElement(IsNullable = true)]
-            public bool? DevelopmentEnvironment { get; set; }            
+            public bool? DevelopmentEnvironment { get; set; }
+
+            [XmlIgnore]
+            public bool DevelopmentEnvironmentSpecified { get; set; }
+
+            /// <summary>
+            /// AutoFac modules to load
+            /// </summary>
+            [XmlArray("Modules")]
+            [XmlArrayItem("Module", typeof(string))]
+            public string[] Modules { get; set; }
         }
 
         /// <summary>

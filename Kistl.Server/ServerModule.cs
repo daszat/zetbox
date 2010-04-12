@@ -9,7 +9,6 @@ namespace Kistl.Server
     using System.Text;
 
     using Autofac;
-    using Autofac.Builder;
     using Autofac.Integration.Wcf;
     using Kistl.API;
     using Kistl.API.Configuration;
@@ -23,18 +22,6 @@ namespace Kistl.Server
             base.Load(moduleBuilder);
 
             moduleBuilder
-                .RegisterGeneratedFactory<Func<IReadOnlyKistlContext>>()
-                .SingletonScoped();
-
-            moduleBuilder
-                .RegisterGeneratedFactory<Func<IKistlContext>>()
-                .SingletonScoped();
-
-            moduleBuilder
-                .RegisterGeneratedFactory<Func<IKistlServerContext>>()
-                .SingletonScoped();
-
-            moduleBuilder
                 .Register((c, p) =>
                 {
                     IKistlContext ctx = c.Resolve<MemoryContext>();
@@ -46,44 +33,43 @@ namespace Kistl.Server
                         p.Named<IKistlContext>("newSchema"),
                         ctx);
                 })
-                .FactoryScoped();
+                .InstancePerDependency();
 
             moduleBuilder
-                .Register<Server>()
-                .SingletonScoped();
+                .RegisterType<FrozenActionsManagerServer>()
+                .As<FrozenActionsManager>()
+                .SingleInstance();
 
             moduleBuilder
-                .Register<WcfServer>()
+                .RegisterType<Server>()
+                .SingleInstance();
+
+            moduleBuilder
+                .RegisterType<WcfServer>()
                 .As<IKistlAppDomain>()
-                .SingletonScoped();
+                .SingleInstance();
 
             moduleBuilder
-                .RegisterCollection<Generators.BaseDataObjectGenerator>()
-                .SingletonScoped();
-
-            moduleBuilder
-                .Register<Generators.Interfaces.InterfaceGenerator>()
+                .RegisterType<Generators.Interfaces.InterfaceGenerator>()
                 .As<Generators.BaseDataObjectGenerator>()
-                .MemberOf<IEnumerable<Generators.BaseDataObjectGenerator>>()
-                .SingletonScoped();
+                .SingleInstance();
             moduleBuilder
-                .Register<Generators.ClientObjects.ClientObjectGenerator>()
+                .RegisterType<Generators.ClientObjects.ClientObjectGenerator>()
                 .As<Generators.BaseDataObjectGenerator>()
-                .MemberOf<IEnumerable<Generators.BaseDataObjectGenerator>>()
-                .SingletonScoped();
+                .SingleInstance();
 
             moduleBuilder
-                .Register<Generators.Generator>()
-                .SingletonScoped();
+                .RegisterType<Generators.Generator>()
+                .SingleInstance();
 
             moduleBuilder
                 .Register(c => new AutofacServiceHostFactory())
                 .As<ServiceHostFactoryBase>()
-                .SingletonScoped();
+                .SingleInstance();
 
             moduleBuilder
-                .Register<KistlService>()
-                .FactoryScoped();
+                .RegisterType<KistlService>()
+                .InstancePerDependency();
 
             moduleBuilder
                 .Register(c =>
@@ -96,28 +82,28 @@ namespace Kistl.Server
                     return cams;
                 })
                 .As<BaseCustomActionsManager>()
-                .SingletonScoped();
+                .SingleInstance();
 
             moduleBuilder
                 .Register(c => new ServerApplicationContext(c.Resolve<KistlConfig>()))
-                .SingletonScoped();
+                .SingleInstance();
 
             moduleBuilder
-                .Register<CachingMetaDataResolver>()
+                .RegisterType<CachingMetaDataResolver>()
                 .As<IMetaDataResolver>()
-                .OnActivated(ActivatedHandler.InjectUnsetProperties)
-                .SingletonScoped();
+                .PropertiesAutowired()
+                .SingleInstance();
 
             moduleBuilder
-                .Register<ThreadPrincipalResolver>()
+                .RegisterType<ThreadPrincipalResolver>()
                 .As<IIdentityResolver>()
-                .ContainerScoped();
+                .InstancePerLifetimeScope();
 
             // TODO: move to separate MSSQL-specific assembly, since the SQL-Schema should be independent of the DalProvider
             moduleBuilder
                 .Register(c => new Kistl.Server.SchemaManagement.SqlProvider.SqlServer())
                 .As<ISchemaProvider>()
-                .FactoryScoped();
+                .InstancePerDependency();
         }
     }
 }

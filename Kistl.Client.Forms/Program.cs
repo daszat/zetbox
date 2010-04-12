@@ -9,12 +9,15 @@ using Kistl.API.Client;
 using Kistl.API.Configuration;
 using Kistl.Client.Presentables;
 using Kistl.Client.Presentables.ObjectBrowser;
+using Kistl.App.Extensions;
+using Autofac;
 
 namespace Kistl.Client.Forms
 {
     static class Program
     {
         static GuiApplicationContext AppContext { get; set; }
+        static IContainer container;
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -23,9 +26,12 @@ namespace Kistl.Client.Forms
         {
             var config = KistlConfig.FromFile("DefaultFormsConfig.xml");
             AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
-            Assembly interfaces = Assembly.Load(Kistl.API.Helper.InterfaceAssembly);
-            Assembly implementation = Assembly.Load(Kistl.API.Helper.ClientAssembly);
-            AppContext = new GuiApplicationContext(config, "TEST", () => new MemoryContext(interfaces, implementation));
+
+            var builder = Kistl.API.Utils.AutoFacBuilder.CreateContainerBuilder(config, config.Client.Modules);
+            container = builder.Build();
+            AppContext = new GuiApplicationContext(config, "TEST");
+
+            var cams = container.Resolve<BaseCustomActionsManager>();
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

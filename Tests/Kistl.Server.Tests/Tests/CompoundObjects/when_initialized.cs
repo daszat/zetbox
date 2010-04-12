@@ -16,8 +16,8 @@ namespace Kistl.Server.Tests.CompoundObjects
     public class when_initialized
         : Kistl.API.AbstractConsumerTests.CompoundObjects.when_initialized
     {
-        private IContainer container;
-        private IContainer GetContainer()
+        private ILifetimeScope container;
+        private ILifetimeScope GetContainer()
         {
             if (container == null)
             {

@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 
 using Autofac;
-using Autofac.Builder;
 using Autofac.Integration.Wcf;
 
 using Kistl.API;
@@ -28,9 +27,9 @@ namespace Kistl.Server.Tests
         private static IContainer container;
         private IKistlAppDomain manager;
 
-        internal static IContainer CreateInnerContainer()
+        internal static ILifetimeScope CreateInnerContainer()
         {
-            return container.CreateInnerContainer();
+            return container.BeginLifetimeScope();
         }
 
         [SetUp]
@@ -43,11 +42,7 @@ namespace Kistl.Server.Tests
 
                 AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
 
-                var builder = new ContainerBuilder();
-                builder.Register(config).ExternallyOwned().SingletonScoped();
-                builder.RegisterModule(new ServerModule());
-                // TODO: replace this with registering a mocked provider of some kind.
-                builder.RegisterModule((IModule)Activator.CreateInstance(Type.GetType(config.Server.StoreProvider, true)));
+                var builder = Kistl.API.Utils.AutoFacBuilder.CreateContainerBuilder(config, config.Server.Modules);
 
                 container = builder.Build();
                 AutofacServiceHostFactory.Container = container;

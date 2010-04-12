@@ -8,13 +8,11 @@ namespace Kistl.DalProvider.Frozen
 
     using Autofac;
     using Kistl.API;
-    using Kistl.Server;
-    using Kistl.Server.Generators;
     using Kistl.API.Utils;
     using Kistl.API.Configuration;
     using Kistl.App.Extensions;
 
-    public class FrozenProvider 
+    public class FrozenClientProvider 
         : Module
     {
         protected override void Load(ContainerBuilder moduleBuilder)
@@ -30,17 +28,12 @@ namespace Kistl.DalProvider.Frozen
                     .RegisterType(frozenContextType)
                     .As<IReadOnlyKistlContext>()
                     .OnActivating(frozen => {
-                        Logging.Log.Info("Initialising FrozenActionsManagerServer");
+                        Logging.Log.Info("Initialising FrozenActionsManagerClient");
                         var fams = frozen.Context.Resolve<FrozenActionsManager>();
                         fams.Init((IReadOnlyKistlContext)frozen.Instance);
                     })
                     .SingleInstance();
             }
-
-            moduleBuilder
-                .RegisterType<Generator.FreezingGenerator>()
-                .As<BaseDataObjectGenerator>()
-                .SingleInstance();
         }
     }
 }

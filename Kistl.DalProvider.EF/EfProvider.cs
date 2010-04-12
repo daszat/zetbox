@@ -8,15 +8,15 @@ namespace Kistl.DalProvider.EF
     using System.Text;
 
     using Autofac;
-    using Autofac.Builder;
 
     using Kistl.API;
     using Kistl.API.Configuration;
     using Kistl.API.Server;
     using Kistl.Server.Generators;
+    using Autofac.Core;
 
     public class EfProvider
-        : Autofac.Builder.Module
+        : Autofac.Module
     {
         private static readonly object _lock = new object();
 
@@ -51,7 +51,7 @@ namespace Kistl.DalProvider.EF
                     }
                 })
                 .As<IKistlServerContext>()
-                .FactoryScoped();
+                .InstancePerDependency();
 
             moduleBuilder
                 .Register((c,p) =>
@@ -67,7 +67,7 @@ namespace Kistl.DalProvider.EF
                 })
                 .As<IKistlContext>()
                 .As<IReadOnlyKistlContext>()
-                .FactoryScoped();
+                .InstancePerDependency();
 
             moduleBuilder
                 .Register<MemoryContext>(c =>
@@ -80,17 +80,12 @@ namespace Kistl.DalProvider.EF
                     System.Reflection.Assembly implementation = System.Reflection.Assembly.Load(Kistl.API.Helper.ServerAssembly);
                     return new MemoryContext(interfaces, implementation);
                 })
-                .FactoryScoped();
+                .InstancePerDependency();
 
             moduleBuilder
-                .RegisterGeneratedFactory<Func<MemoryContext>>()
-                .SingletonScoped();
-
-            moduleBuilder
-                .Register<Generator.EntityFrameworkGenerator>()
+                .RegisterType<Generator.EntityFrameworkGenerator>()
                 .As<BaseDataObjectGenerator>()
-                .MemberOf<IEnumerable<BaseDataObjectGenerator>>()
-                .SingletonScoped();
+                .SingleInstance();
 
             moduleBuilder
                 .Register(c => new EfServerObjectHandlerFactory())

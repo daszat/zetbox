@@ -37,7 +37,7 @@ namespace Kistl.Client.ASPNET.Toolkit.Pages
         {
             var mdl = GuiApplicationContext.Current.Factory
                 .CreateSpecificModel<WorkspaceViewModel>(KistlContextManagerModule.KistlContext);
-            LauncherKind launcher = GuiApplicationContext.Current.TransientContext.Create<LauncherKind>();
+            LauncherKind launcher = KistlContextManagerModule.KistlContext.Create<LauncherKind>();
             ctrlMainContent.Controls.Add((Control)GuiApplicationContext.Current.Factory.CreateSpecificView(mdl, launcher));
         }
     }

@@ -48,6 +48,7 @@ namespace Kistl.API
 
         /// <summary>
         /// Loads an appropriate frozen custom actions manager for this IKistlContext.
+        /// TODO: Remove that when AutoFac is implemented anywhere
         /// </summary>
         /// <param name="ctx"></param>
         public abstract void LoadFrozenActions(IReadOnlyKistlContext ctx);

@@ -5,8 +5,7 @@ namespace Kistl.DalProvider.EF.Tests
     using System.Collections.Generic;
 
     using Autofac;
-    using Autofac.Builder;
-
+    
     using Kistl.API;
     using Kistl.API.Configuration;
     using Kistl.App.Base;
@@ -21,9 +20,9 @@ namespace Kistl.DalProvider.EF.Tests
     {
         private static IContainer container;
 
-        internal static IContainer CreateInnerContainer()
+        internal static ILifetimeScope CreateInnerContainer()
         {
-            return container.CreateInnerContainer();
+            return container.BeginLifetimeScope();
         }
 
         [SetUp]
@@ -36,12 +35,8 @@ namespace Kistl.DalProvider.EF.Tests
 
             var appCtx = new ServerApplicationContext(config);
 
-            var builder = new ContainerBuilder();
-
-            builder.Register(config).ExternallyOwned().SingletonScoped();
-            builder.RegisterModule(new ServerModule());
-            builder.RegisterModule(new EfProvider());
-
+            var builder = Kistl.API.Utils.AutoFacBuilder.CreateContainerBuilder(config, config.Server.Modules);
+            builder.RegisterInstance(config).ExternallyOwned().SingleInstance();
             container = builder.Build();
 
             KistlContext.Container = container;

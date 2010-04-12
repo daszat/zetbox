@@ -13,6 +13,7 @@ using Kistl.API.Configuration;
 using Kistl.API.Utils;
 using Kistl.App.GUI;
 using Kistl.Client.Presentables;
+using Kistl.App.Extensions;
 
 namespace Kistl.Client.WPF
 {
@@ -37,6 +38,7 @@ namespace Kistl.Client.WPF
         }
 
         private static ServerDomainManager serverDomain;
+        private static IContainer container;
 
         private string[] HandleCommandline(string[] args)
         {
@@ -69,13 +71,34 @@ namespace Kistl.Client.WPF
 
             SplashScreen.SetInfo("Bootstraping Assembly Resolver");
             AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
-            Assembly interfaces = Assembly.Load(Kistl.API.Helper.InterfaceAssembly);
-            Assembly implementation = Assembly.Load(Kistl.API.Helper.ClientAssembly);
 
-            SplashScreen.SetInfo("Initializing Application Context");
-            AppContext = new GuiApplicationContext(config, "WPF", () => new MemoryContext(interfaces, implementation));
+            container = CreateMasterContainer(config);
+
+            // initialise custom actions manager
+            var cams = container.Resolve<BaseCustomActionsManager>();
+
+            SplashScreen.SetInfo("Initializing Launcher");
+
+            // delegate all business logic into another class, which 
+            // allows us to load the Kistl.Objects assemblies _before_ 
+            // they are needed.
+            var launcher = container.Resolve<Launcher>();
+            launcher.Show(args);
 
             return result;
+        }
+
+        private IContainer CreateMasterContainer(KistlConfig config)
+        {
+            var builder = Kistl.API.Utils.AutoFacBuilder.CreateContainerBuilder(config, config.Client.Modules);
+
+            builder.RegisterType<Launcher>().SingleInstance();
+
+            SplashScreen.SetInfo("Initializing Application Context");
+            AppContext = new GuiApplicationContext(config, "WPF");
+            builder.RegisterInstance(AppContext).ExternallyOwned();
+
+            return builder.Build();
         }
 
         private void Application_Startup(object sender, StartupEventArgs e)
@@ -87,12 +110,6 @@ namespace Kistl.Client.WPF
             using (Logging.Log.InfoTraceMethodCall("Starting Client"))
             {
                 var args = HandleCommandline(e.Args);
-
-                SplashScreen.SetInfo("Initializing Launcher");
-                // delegate all business logic into another class, which 
-                // allows us to load the Kistl.Objects assemblies _before_ 
-                // they are needed.
-                Launcher.Execute(AppContext, args);
             }
 
             SplashScreen.HideSplashScreen();

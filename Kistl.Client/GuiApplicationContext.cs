@@ -20,11 +20,6 @@ namespace Kistl.Client
         IReadOnlyKistlContext MetaContext { get; }
 
         /// <summary>
-        /// A non-persisted <see cref="IKistlContext"/> for transient objects
-        /// </summary>
-        IKistlContext TransientContext { get; }
-
-        /// <summary>
         /// The <see cref="ModelFactory"/> of this GUI.
         /// </summary>
         IModelFactory Factory { get; }
@@ -46,6 +41,7 @@ namespace Kistl.Client
         /// <summary>
         /// The configuration of this context
         /// </summary>
+        [Obsolete]
         KistlConfig Configuration { get; }
     }
 
@@ -56,8 +52,6 @@ namespace Kistl.Client
 
         public ICustomActionsManager CustomActionsManager { get; private set; }
 
-        private readonly Func<MemoryContext> MemoryContextFactory;
-
         /// <summary>
         /// 
         /// </summary>
@@ -67,16 +61,10 @@ namespace Kistl.Client
         /// assembly, which cannot be loaded before initialisation 
         /// of the <see cref="AssemblyLoader"/>, which is loaded in 
         /// the same calling method (which is too late).</param>
-        /// <param name="memCtxFactory">The transient context will be created from this factory.</param>
-        public GuiApplicationContext(KistlConfig config, string tkName, Func<MemoryContext> memCtxFactory)
+        public GuiApplicationContext(KistlConfig config, string tkName)
             : base(config)
         {
-            MemoryContextFactory = memCtxFactory;
-
             GuiApplicationContext.Current = this;
-
-            CustomActionsManager = new CustomActionsManagerClient();
-            CustomActionsManager.Init(FrozenContext.Single);
 
             Toolkit tk = (Toolkit)Enum.Parse(typeof(Toolkit), tkName, true);
             // TODO: replace by fetching TypeRefs from the Store
@@ -145,22 +133,6 @@ namespace Kistl.Client
                     }
                 }
                 return _metaContext;
-            }
-        }
-
-        /// <summary>
-        /// private backing store for the <see cref="TransientContext"/> property.
-        /// </summary>
-        private MemoryContext _transientContextCache;
-
-        /// <inheritdoc/>
-        public IKistlContext TransientContext
-        {
-            get
-            {
-                if (_transientContextCache == null)
-                    _transientContextCache = MemoryContextFactory.Invoke();
-                return _transientContextCache;
             }
         }
 

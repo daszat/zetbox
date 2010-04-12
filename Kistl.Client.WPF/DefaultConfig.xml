@@ -1,10 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <KistlConfig xmlns="http://dasz.at/Kistl/">
   <ConfigName>Default Client Configuration</ConfigName>
-  <FrozenProvider>Kistl.DalProvider.Frozen.FrozenProvider, Kistl.DalProvider.Frozen</FrozenProvider>
   <Client StartClient="false" ThrowErrors="false">
     <DocumentStore>P:\Kistl\DocumentStore\Client\</DocumentStore>
     <DevelopmentEnvironment>true</DevelopmentEnvironment>
+    <Modules>
+      <Module>Kistl.API.ApiModule, Kistl.API</Module>
+      <Module>Kistl.Client.ClientModule, Kistl.Client</Module>
+      <Module>Kistl.DalProvider.Frozen.FrozenClientProvider, Kistl.DalProvider.Frozen</Module>
+    </Modules>
   </Client>
   <SourceFileLocation>
     <!-- default probe path -->

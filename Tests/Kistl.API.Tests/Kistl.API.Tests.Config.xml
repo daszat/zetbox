@@ -10,11 +10,20 @@
     <CodeGenWorkingPath>bin\CodeGenNext</CodeGenWorkingPath>
     <CodeGenOutputPath>bin\CodeGen</CodeGenOutputPath>
     <CodeGenArchivePath>Backup</CodeGenArchivePath>
-    <StoreProvider>Kistl.DalProvider.EF.EfProvider, Kistl.DalProvider.EF</StoreProvider>
-    <KistlDataContextType>Kistl.DalProvider.EF.KistlDataContext, Kistl.DalProvider.EF</KistlDataContextType>
+    <Modules>
+      <Module>Kistl.API.ApiModule, Kistl.API</Module>
+      <Module>Kistl.Server.ServerModule, Kistl.Server</Module>
+      <Module>Kistl.DalProvider.EF.EfProvider, Kistl.DalProvider.EF</Module>
+      <Module>Kistl.DalProvider.Frozen.FrozenProvider, Kistl.DalProvider.Frozen</Module>
+    </Modules>
   </Server>
-  <Client StartClient="true" ThrowErrors="true">
+  <Client StartClient="false" ThrowErrors="true">
     <DocumentStore>DocumentStore\Client\</DocumentStore>
+    <Modules>
+      <Module>Kistl.API.ApiModule, Kistl.API</Module>
+      <Module>Kistl.Client.ClientModule, Kistl.Client</Module>
+      <Module>Kistl.DalProvider.Frozen.FrozenClientProvider, Kistl.DalProvider.Frozen</Module>
+    </Modules>
   </Client>
   <SourceFileLocation>
     <!-- default probe path -->

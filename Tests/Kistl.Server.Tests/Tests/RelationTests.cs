@@ -17,7 +17,7 @@ namespace Kistl.Server.Tests
     [TestFixture]
     public class RelationTests
     {
-        private IContainer container;
+        private ILifetimeScope container;
         private IKistlContext ctx;
 
         [SetUp]

@@ -24,7 +24,7 @@ namespace Kistl.DalProvider.EF.Tests
     {
         protected EntityCollection<Property__Implementation__> wrappedList;
 
-        private IContainer innerContainer;
+        private ILifetimeScope innerContainer;
         private IKistlContext ctx;
         private ObjectClass__Implementation__ parent;
 
@@ -35,7 +35,7 @@ namespace Kistl.DalProvider.EF.Tests
         {
             if (innerContainer == null)
             {
-                innerContainer = KistlContext.Container.CreateInnerContainer();
+                innerContainer = KistlContext.Container.BeginLifetimeScope();
                 ctx = innerContainer.Resolve<IKistlContext>();
             }
         }

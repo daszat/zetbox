@@ -13,8 +13,8 @@ namespace Kistl.Server.Tests.Blobs
     public class when_using
             : Kistl.API.AbstractConsumerTests.Blobs.when_using
     {
-        private IContainer container;
-        private IContainer GetContainer()
+        private ILifetimeScope container;
+        private ILifetimeScope GetContainer()
         {
             if (container == null)
             {

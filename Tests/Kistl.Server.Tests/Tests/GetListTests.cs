@@ -18,7 +18,7 @@ namespace Kistl.Server.Tests
     {
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Tests.Server.GetList");
 
-        private IContainer container;
+        private ILifetimeScope container;
         private IReadOnlyKistlContext ctx;
 
         [SetUp]

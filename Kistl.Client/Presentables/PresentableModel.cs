@@ -155,11 +155,6 @@ namespace Kistl.Client.Presentables
             get { throw new InvalidOperationException("No data access operations allowed in Design mode"); }
         }
 
-        public IKistlContext TransientContext
-        {
-            get { throw new InvalidOperationException("No transient data operations allowed in Design mode"); }
-        }
-
         public IModelFactory Factory
         {
             get { throw new NotImplementedException(); }

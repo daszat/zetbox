@@ -11,8 +11,10 @@ using Kistl.API.Utils;
 using Kistl.App.GUI;
 using Kistl.Client;
 
+using Autofac;
 using NUnit.Framework;
 using NUnit.Framework.Constraints;
+using Kistl.App.Extensions;
 
 namespace Kistl.IntegrationTests
 {
@@ -40,9 +42,13 @@ namespace Kistl.IntegrationTests
                     manager.Start(config);
 
                     AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
-                    Assembly interfaces = Assembly.Load(Kistl.API.Helper.InterfaceAssembly);
-                    Assembly implementation = Assembly.Load(Kistl.API.Helper.ClientAssembly);
-                    var testCtx = new GuiApplicationContext(config, "WPF", () => new MemoryContext(interfaces, implementation));
+                    var builder = Kistl.API.Utils.AutoFacBuilder.CreateContainerBuilder(config, config.Client.Modules);
+                    var container = builder.Build();
+                    var testCtx = new GuiApplicationContext(config, "WPF");
+
+                    // initialise custom actions manager
+                    var cams = container.Resolve<BaseCustomActionsManager>(); 
+
                     using (var initCtx = Kistl.API.Client.KistlContext.GetContext()) {
                     	// load up all infrastructure from the DalProvider
                     	// TODO: remove ToList() call!

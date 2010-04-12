@@ -16,8 +16,8 @@ namespace Kistl.Server.Tests.CompoundObjects
     public class when_changing
         : Kistl.API.AbstractConsumerTests.CompoundObjects.when_changing
     {
-        private IContainer container;
-        private IContainer GetContainer()
+        private ILifetimeScope container;
+        private ILifetimeScope GetContainer()
         {
             if (container == null)
             {
