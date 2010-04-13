@@ -16,6 +16,8 @@ namespace Kistl.Client.Presentables.ObjectBrowser
     public class WorkspaceViewModel
         : WindowViewModel
     {
+        public new delegate WorkspaceViewModel Factory(IKistlContext dataCtx);
+
         public WorkspaceViewModel(IGuiApplicationContext appCtx, IKistlContext dataCtx)
             : base(appCtx, dataCtx)
         {
@@ -112,7 +114,7 @@ namespace Kistl.Client.Presentables.ObjectBrowser
             var modules = DataContext.GetQuery<Module>().ToList();
             foreach (var m in modules)
             {
-                Modules.Add(ModelFactory.CreateModel<ModuleModel.Factory>(m).Invoke(DataContext, m));
+                Modules.Add(ModelFactory.CreateViewModel<ModuleModel.Factory>(m).Invoke(DataContext, m));
             }
         }
 

@@ -70,12 +70,12 @@ namespace Kistl.Client.Presentables
         }
 
         //----------------------------------------------------------------------------------------------
-        public TModelFactory CreateModel<TModelFactory>() where TModelFactory : class
+        public TModelFactory CreateViewModel<TModelFactory>() where TModelFactory : class
         {
-            return CreateModel<TModelFactory>(typeof(TModelFactory));
+            return CreateViewModel<TModelFactory>(typeof(TModelFactory));
         }
 
-        public TModelFactory CreateModel<TModelFactory>(IDataObject obj) where TModelFactory : class
+        public TModelFactory CreateViewModel<TModelFactory>(IDataObject obj) where TModelFactory : class
         {
             if (obj == null) throw new ArgumentNullException("obj");
 
@@ -83,10 +83,10 @@ namespace Kistl.Client.Presentables
                 .DefaultViewModelDescriptor
                 .ViewModelRef
                 .AsType(true);
-            return CreateModel<TModelFactory>(ResolveFactory(t));
+            return CreateViewModel<TModelFactory>(ResolveFactory(t));
         }
 
-        public TModelFactory CreateModel<TModelFactory>(Property p) where TModelFactory : class
+        public TModelFactory CreateViewModel<TModelFactory>(Property p) where TModelFactory : class
         {
             if (p == null) { throw new ArgumentNullException("p"); }
 
@@ -95,7 +95,7 @@ namespace Kistl.Client.Presentables
                 var t = p.ValueModelDescriptor
                     .ViewModelRef
                     .AsType(true);
-                return CreateModel<TModelFactory>(ResolveFactory(t));
+                return CreateViewModel<TModelFactory>(ResolveFactory(t));
             }
             else
             {
@@ -103,16 +103,16 @@ namespace Kistl.Client.Presentables
             }
         }
 
-        public TModelFactory CreateModel<TModelFactory>(Type t) where TModelFactory : class
+        public TModelFactory CreateViewModel<TModelFactory>(Type t) where TModelFactory : class
         {
             if (t == null) throw new ArgumentNullException("t");
+            if (!typeof(Delegate).IsAssignableFrom(t)) throw new ArgumentOutOfRangeException("t", "Parameter must be a Delegate. CreateViewModel uses Autofac'S Factory pattern");
             try
             {
                 var factory = Container.Resolve(t);
                 if (t == typeof(TModelFactory)) return (TModelFactory)factory;
-                // Wrap delegate
+                // Wrap delegate. This will implement inheritance
                 Delegate factoryDelegate = (Delegate)factory;
-
                 var parameter = factoryDelegate.Method.GetParameters().Skip(1).Select(p => Expression.Parameter(p.ParameterType, p.Name)).ToArray();
                 var lambda_body = Expression.Invoke(Expression.Constant(factoryDelegate), parameter);
                 var l = Expression.Lambda(typeof(TModelFactory), lambda_body, parameter);
@@ -149,32 +149,6 @@ namespace Kistl.Client.Presentables
             return f;
         }
         //----------------------------------------------------------------------------------------------
-
-
-        /// <summary>
-        /// Creates a ViewModel to display/edit the value of the property p of the object obj.
-        /// </summary>
-        /// <param name="ctx">the data context to use</param>
-        /// <param name="obj">the referenced object</param>
-        /// <param name="p">the property whose value shall be displayed</param>
-        /// <returns>a properly initialised ViewModel</returns>
-        public ViewModel CreatePropertyValueModel(IKistlContext ctx, IDataObject obj, Property p)
-        {
-            if (ctx == null) { throw new ArgumentNullException("ctx"); }
-            if (obj == null) { throw new ArgumentNullException("obj"); }
-            if (p == null) { throw new ArgumentNullException("p"); }
-
-            if (p.ValueModelDescriptor != null)
-            {
-                return CreateModel(p.ValueModelDescriptor
-                    .ViewModelRef
-                    .AsType(true), ctx, new object[] { obj, p });
-            }
-            else
-            {
-                throw new NotImplementedException(String.Format("==>> No model for property: '{0}' of Type '{1}'", p, p.GetType()));
-            }
-        }
 
         public ViewModel CreateModel(Type requestedType, IKistlContext ctx, object[] data)
         {

@@ -33,7 +33,7 @@ namespace Kistl.Client.Presentables
 
             if (_memberNameModel == null)
                 // fetches already generated model from cache
-                _memberNameModel = (ChooseReferencePropertyModel<string>)ModelFactory.CreatePropertyValueModel(DataContext, Object, _memberNameProperty);
+                _memberNameModel = ModelFactory.CreateViewModel<ChooseReferencePropertyModel<string>.Factory>(_memberNameProperty).Invoke(DataContext, Object, _memberNameProperty);
 
             if (_invocation.Implementor == null) return;
 

@@ -28,10 +28,10 @@ namespace Kistl.Client.WPF
         {
             if (args == null) { throw new ArgumentNullException("args"); }
 
-            var ctxDebugger = appCtx.Factory.CreateModel<KistlDebuggerAsModel.Factory>().Invoke(ctxFactory.Invoke());
+            var ctxDebugger = appCtx.Factory.CreateViewModel<KistlDebuggerAsModel.Factory>().Invoke(ctxFactory());
             appCtx.Factory.ShowModel(ctxDebugger, true);
 
-            var cacheDebugger = appCtx.Factory.CreateSpecificModel<CacheDebuggerViewModel>(ctxFactory.Invoke());
+            var cacheDebugger = appCtx.Factory.CreateViewModel<CacheDebuggerViewModel.Factory>().Invoke(ctxFactory());
             appCtx.Factory.ShowModel(cacheDebugger, true);
 
             bool _timeRecorder = args.Contains("-timerecorder");

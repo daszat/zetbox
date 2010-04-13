@@ -73,25 +73,25 @@ namespace Kistl.Client.Presentables
         bool AllowNullInput { get; }
     }
 
-    public abstract class UntypedPropertyModel : ViewModel
+    public abstract class BasePropertyModel : ViewModel
     {
-        public new delegate UntypedPropertyModel Factory(IKistlContext dataCtx, IDataObject obj, Property prop);
+        public new delegate BasePropertyModel Factory(IKistlContext dataCtx, IDataObject obj, Property prop);
 
-        protected UntypedPropertyModel(
+        protected BasePropertyModel(
             IGuiApplicationContext appCtx, IKistlContext dataCtx,
             IDataObject obj, Property prop)
             : base(appCtx, dataCtx)
         {
         }
 
-        protected UntypedPropertyModel(bool designMode)
+        protected BasePropertyModel(bool designMode)
             : base(designMode)
         {
         }
     }
 
     public abstract class PropertyModel<TValue>
-        : UntypedPropertyModel, IPropertyValueModel, IDataErrorInfo
+        : BasePropertyModel, IPropertyValueModel, IDataErrorInfo
     {
         public new delegate PropertyModel<TValue> Factory(IKistlContext dataCtx, IDataObject obj, Property prop);
 

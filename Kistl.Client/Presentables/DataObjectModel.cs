@@ -61,7 +61,7 @@ namespace Kistl.Client.Presentables
                 {
                     _propertyModels = new ReadOnlyProjectedList<Property, ViewModel>(
                         FetchPropertyList().ToList(),
-                        property => ModelFactory.CreatePropertyValueModel(DataContext, Object, property),
+                        property => ModelFactory.CreateViewModel<BasePropertyModel.Factory>(property).Invoke(DataContext, Object, property),
                         null);
                 }
                 return _propertyModels;
@@ -74,7 +74,7 @@ namespace Kistl.Client.Presentables
             {
                 if (_propertyModelsByName == null)
                 {
-                    _propertyModelsByName = new LookupDictionary<string, Property, ViewModel>(FetchPropertyList().ToList(), prop => prop.Name, prop => ModelFactory.CreatePropertyValueModel(DataContext, Object, prop));
+                    _propertyModelsByName = new LookupDictionary<string, Property, ViewModel>(FetchPropertyList().ToList(), prop => prop.Name, prop => ModelFactory.CreateViewModel<BasePropertyModel.Factory>(prop).Invoke(DataContext, Object, prop));
                 }
                 return _propertyModelsByName;
             }
@@ -135,7 +135,7 @@ namespace Kistl.Client.Presentables
                                 DataContext,
                                 group.Key,
                                 group.Select(p =>
-                                     ModelFactory.CreateModel<UntypedPropertyModel.Factory>(p).Invoke(DataContext, _object, p)).Cast<ViewModel>()))
+                                     ModelFactory.CreateViewModel<BasePropertyModel.Factory>(p).Invoke(DataContext, _object, p)).Cast<ViewModel>()))
                             .ToList());
 
                 }

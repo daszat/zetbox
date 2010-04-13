@@ -10,6 +10,8 @@ namespace Kistl.Client.Presentables
 {
     public class CacheDebuggerViewModel : ViewModel
     {
+        public new delegate CacheDebuggerViewModel Factory(IKistlContext dataCtx);
+
         public CacheDebuggerViewModel(IGuiApplicationContext appCtx, IKistlContext dataCtx)
             : base(appCtx, dataCtx)
         {
