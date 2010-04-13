@@ -12,28 +12,23 @@
 <%@ Parameter Name="ctx" Type="IKistlContext" %>
 <%@ Parameter Name="serializationList" Type="Templates.Implementation.SerializationMembersList" %>
 <%@ Parameter Name="prop" Type="CompoundObjectProperty" %>
-<%@ Parameter Name="name" Type="string" %>
-<%
-
-	string backingPropertyName = name + Kistl.API.Helper.ImplementationSuffix;
-	string backingStoreName = "_" + name + "Store";
-	
-	string coType = prop.GetPropertyTypeString();
-	string coImplementationType = coType + Kistl.API.Helper.ImplementationSuffix;
-
-%>
+<%@ Parameter Name="propName" Type="string" %>
+<%@ Parameter Name="backingPropertyName" Type="string" %>
+<%@ Parameter Name="backingStoreName" Type="string" %>
+<%@ Parameter Name="coType" Type="string" %>
+<%@ Parameter Name="coImplementationType" Type="string" %>
 		// <%= this.GetType() %>
         // implement the user-visible interface
-        public <%= coType %> <%= name %>
+        public <%= coType %> <%= propName %>
         {
             get { return <%= backingPropertyName %>; }
             set { <%= backingPropertyName %> = (<%= coImplementationType %>)value; }
         }
         
-        /// <summary>backing store for <%= name %></summary>
+        /// <summary>backing store for <%= propName %></summary>
         private <%= coImplementationType %> <%= backingStoreName %>;
         
-        /// <summary>backing property for <%= name %>, takes care of attaching/detaching the values</summary>
+        /// <summary>backing property for <%= propName %>, takes care of attaching/detaching the values</summary>
         private <%= coImplementationType %> <%= backingPropertyName %> {
             get { return <%= backingStoreName %>; }
             set {
@@ -48,15 +43,15 @@
                 var __oldValue = <%= backingStoreName %>;
                 var __newValue = value;
 
-                NotifyPropertyChanging("<%= name %>", __oldValue, __newValue);
+                NotifyPropertyChanging("<%= propName %>", __oldValue, __newValue);
                 
-				if (<%= backingStoreName %> != null) <%= backingStoreName %>.DetachFromObject(this, "<%= name %>");
+				if (<%= backingStoreName %> != null) <%= backingStoreName %>.DetachFromObject(this, "<%= propName %>");
                 <%= backingStoreName %> = value != null ? (<%= coImplementationType %>)value.Clone() : null;
-				if (<%= backingStoreName %> != null) <%= backingStoreName %>.AttachToObject(this, "<%= name %>");
+				if (<%= backingStoreName %> != null) <%= backingStoreName %>.AttachToObject(this, "<%= propName %>");
 
-                NotifyPropertyChanged("<%= name %>", __oldValue, __newValue);
+                NotifyPropertyChanged("<%= propName %>", __oldValue, __newValue);
             }
 		}
 <%
-        AddSerialization(serializationList, name);
+        AddSerialization(serializationList, propName, backingPropertyName);
 %>  

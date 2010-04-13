@@ -14,23 +14,24 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
     {
 		protected IKistlContext ctx;
 		protected ObjectClass cls;
+		protected string implName;
 
 
-        public CustomTypeDescriptor(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, ObjectClass cls)
+        public CustomTypeDescriptor(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, ObjectClass cls, string implName)
             : base(_host)
         {
 			this.ctx = ctx;
 			this.cls = cls;
+			this.implName = implName;
 
         }
         
         public override void Generate()
         {
-#line 14 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CustomTypeDescriptor.cst"
+#line 15 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CustomTypeDescriptor.cst"
 this.WriteObjects("\r\n");
-#line 16 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CustomTypeDescriptor.cst"
-var clsName = cls.Name + Kistl.API.Helper.ImplementationSuffix + Settings["extrasuffix"];
-	var properties = cls.Properties.OrderBy(p => p.Name).ToList();
+#line 17 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CustomTypeDescriptor.cst"
+var properties = cls.Properties.OrderBy(p => p.Name).ToList();
 	var rels = cls.Context.GetQuery<Relation>().Where(r => r.A.Type == cls || r.B.Type == cls)
 		.OrderBy(i => i.A.Type.Name).ThenBy(i => i.Verb).ThenBy(i => i.B.Type.Name).ThenBy(i => i.ExportGuid)
 		.ToList();
@@ -49,7 +50,7 @@ foreach(var property in properties)
 
 #line 33 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CustomTypeDescriptor.cst"
 this.WriteObjects("			// property.IsAssociation() && !property.IsObjectReferencePropertySingle()\r\n");
-this.WriteObjects("			new CustomPropertyDescriptor<",  clsName , ", ",  property.GetCollectionTypeString() , ">(\r\n");
+this.WriteObjects("			new CustomPropertyDescriptor<",  implName , ", ",  property.GetCollectionTypeString() , ">(\r\n");
 this.WriteObjects("				new Guid(\"",  property.ExportGuid , "\"),\r\n");
 this.WriteObjects("				\"",  propertyName , "\",\r\n");
 this.WriteObjects("				null,\r\n");
@@ -62,7 +63,7 @@ this.WriteObjects("				null), // lists are read-only properties\r\n");
 
 #line 45 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CustomTypeDescriptor.cst"
 this.WriteObjects("			// property is CalculatedObjectReferenceProperty\r\n");
-this.WriteObjects("			new CustomPropertyDescriptor<",  clsName , ", ",  property.ReferencedTypeAsCSharp() , ">(\r\n");
+this.WriteObjects("			new CustomPropertyDescriptor<",  implName , ", ",  property.ReferencedTypeAsCSharp() , ">(\r\n");
 this.WriteObjects("				new Guid(\"",  property.ExportGuid , "\"),\r\n");
 this.WriteObjects("				\"",  propertyName , "\",\r\n");
 this.WriteObjects("				null,\r\n");
@@ -73,7 +74,7 @@ this.WriteObjects("				null), // CalculatedObjectReferenceProperty is a read-onl
 
 #line 55 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CustomTypeDescriptor.cst"
 this.WriteObjects("			// else\r\n");
-this.WriteObjects("			new CustomPropertyDescriptor<",  clsName , ", ",  property.ReferencedTypeAsCSharp() , ">(\r\n");
+this.WriteObjects("			new CustomPropertyDescriptor<",  implName , ", ",  property.ReferencedTypeAsCSharp() , ">(\r\n");
 this.WriteObjects("				new Guid(\"",  property.ExportGuid , "\"),\r\n");
 this.WriteObjects("				\"",  propertyName , "\",\r\n");
 this.WriteObjects("				null,\r\n");
@@ -102,7 +103,7 @@ if (rel.A.Type == cls && rel.A.HasPersistentOrder)
 
 #line 81 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CustomTypeDescriptor.cst"
 this.WriteObjects("			// rel.A.Type == cls && rel.A.HasPersistentOrder\r\n");
-this.WriteObjects("			new CustomPropertyDescriptor<",  clsName , ", int?>(\r\n");
+this.WriteObjects("			new CustomPropertyDescriptor<",  implName , ", int?>(\r\n");
 this.WriteObjects("				null,\r\n");
 this.WriteObjects("				\"",  posColumnName , "\",\r\n");
 this.WriteObjects("				null,\r\n");
@@ -117,7 +118,7 @@ this.WriteObjects("				(obj, val) => obj.",  posColumnName , " = val),\r\n");
 
 #line 95 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CustomTypeDescriptor.cst"
 this.WriteObjects("			// rel.B.Type == cls && rel.B.HasPersistentOrder\r\n");
-this.WriteObjects("			new CustomPropertyDescriptor<",  clsName , ", int?>(\r\n");
+this.WriteObjects("			new CustomPropertyDescriptor<",  implName , ", int?>(\r\n");
 this.WriteObjects("				null,\r\n");
 this.WriteObjects("				\"",  posColumnName , "\",\r\n");
 this.WriteObjects("				null,\r\n");

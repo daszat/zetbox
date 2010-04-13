@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{7E3CE048-00C1-4357-BE27-801AB5B75FE3}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Kistl.DalProvider.Memory</RootNamespace>
+    <AssemblyName>Kistl.DalProvider.Memory</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>Kistl.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\bin\Debug\bin\Server\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>1591</NoWarn>
+    <DocumentationFile>..\bin\Debug\bin\Server\Kistl.DalProvider.Memory.XML</DocumentationFile>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\bin\Release\bin\Server\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>..\bin\Release\bin\Server\Kistl.DalProvider.Memory.XML</DocumentationFile>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <NoWarn>1591</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Arebis.CodeGeneration, Version=1.2.0.1, Culture=neutral, PublicKeyToken=1012dfebee6c8abd, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\AREBIS\Arebis Generation Tools\Arebis.CodeGeneration.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac, Version=1.4.5.676, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\AutoFac 1.4\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BaseMemoryCollectionEntry.cs" />
+    <Compile Include="BaseMemoryDataObject.cs" />
+    <Compile Include="BaseMemoryPersistenceObject.cs" />
+    <Compile Include="ClientValueCollectionWrapper.cs" />
+    <Compile Include="CollectionWrapperImplementations.cs" />
+    <Compile Include="ClientProvider.cs" />
+    <Compile Include="CustomPropertyDescriptor.cs" />
+    <Compile Include="Generator\Implementation\CollectionEntries\ValueCollectionEntry.cs" />
+    <Compile Include="Generator\Implementation\CollectionEntries\ObjectCollectionEntry.cs" />
+    <Compile Include="Generator\Implementation\CollectionEntries\ValueCollectionEntryParentReference.cs" />
+    <Compile Include="Generator\Implementation\CompoundObjects\Template.cs" />
+    <Compile Include="Generator\Implementation\ObjectClasses\CollectionEntries.cs" />
+    <Compile Include="Generator\Implementation\ObjectClasses\AttachToContextTemplate.cs" />
+    <Compile Include="Generator\Implementation\ObjectClasses\CompoundObjectPropertyTemplate.cs" />
+    <Compile Include="Generator\Implementation\ObjectClasses\ValueCollectionProperty.cs" />
+    <Compile Include="Generator\Implementation\ObjectClasses\ObjectListProperty.cs" />
+    <Compile Include="Generator\Implementation\ObjectClasses\UpdateParentTemplate.cs" />
+    <Compile Include="Generator\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cs" />
+    <Compile Include="Generator\Implementation\ObjectClasses\Template.cs" />
+    <Compile Include="Generator\Implementation\ProjectFile.cs" />
+    <Compile Include="Generator\MemoryGenerator.cs" />
+    <Compile Include="OneNRelationList.cs" />
+    <Compile Include="ServerProvider.cs" />
+    <Compile Include="MemoryContext.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <None Include="Kistl.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Kistl.API\Kistl.API.csproj">
+      <Project>{AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9}</Project>
+      <Name>Kistl.API</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Kistl.Objects\Kistl.Objects.csproj">
+      <Project>{0C9E6E69-309F-46F7-A936-D5762229DEB9}</Project>
+      <Name>Kistl.Objects</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Kistl.Server\Kistl.Server.csproj">
+      <Project>{FA2B6CCD-95CB-4927-9CB5-AFE833EB38B7}</Project>
+      <Name>Kistl.Server</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TempAppHelpers\TempAppHelpers.csproj">
+      <Project>{9677AE11-CB92-4F0A-A248-87A21586F0DA}</Project>
+      <Name>TempAppHelpers</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

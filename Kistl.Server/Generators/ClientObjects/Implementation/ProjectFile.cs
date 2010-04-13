@@ -28,7 +28,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation
             this.WriteLine(@"      <RequiredTargetFramework>3.5</RequiredTargetFramework>");
             this.WriteLine(@"    </Reference>");
 
-            // used for ObservableCollection?
+            // used for INotifyCollectionChanged
             this.WriteLine(@"    <Reference Include=""WindowsBase"">");
             this.WriteLine(@"      <RequiredTargetFramework>3.0</RequiredTargetFramework>");
             this.WriteLine(@"    </Reference>");

@@ -1,12 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Kistl.App.Base;
 
 namespace Kistl.Server.Generators.ClientObjects.Implementation.CollectionEntries
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+
+    using Kistl.App.Base;
+
     public partial class ValueCollectionEntry
     {
         protected override void ApplyParentReferencePropertyTemplate(Property prop, string propertyName)

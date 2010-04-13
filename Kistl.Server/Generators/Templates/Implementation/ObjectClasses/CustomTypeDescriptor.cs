@@ -11,11 +11,11 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
 
     public partial class CustomTypeDescriptor
     {
-        public static void Call(Arebis.CodeGeneration.IGenerationHost host, IKistlContext ctx, ObjectClass cls)
+        public static void Call(Arebis.CodeGeneration.IGenerationHost host, IKistlContext ctx, ObjectClass cls, string implName)
         {
             if (host == null) { throw new ArgumentNullException("host"); }
 
-            host.CallTemplate("Implementation.ObjectClasses.CustomTypeDescriptor", ctx, cls);
+            host.CallTemplate("Implementation.ObjectClasses.CustomTypeDescriptor", ctx, cls, implName);
         }
     }
 }

@@ -10,11 +10,14 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
 {
     public partial class ApplyChangesFromMethod
     {
-        public static void Call(IGenerationHost host, IKistlContext ctx, DataType dataType)
+        public static void Call(IGenerationHost host, IKistlContext ctx, DataType dataType, string implName)
         {
             if (host == null) { throw new ArgumentNullException("host"); }
+            if (dataType == null) { throw new ArgumentNullException("dataType"); }
 
-            host.CallTemplate("Implementation.ObjectClasses.ApplyChangesFromMethod", ctx, dataType);
+            var clsName = dataType.Name;
+
+            host.CallTemplate("Implementation.ObjectClasses.ApplyChangesFromMethod", ctx, dataType, clsName, implName);
         }
     }
 }

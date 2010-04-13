@@ -19,9 +19,10 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
 		protected string xmlnamespace;
 		protected string xmlname;
 		protected string memberName;
+		protected string backingStoreName;
 
 
-        public CompoundObjectSerialization(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, SerializerDirection direction, string streamName, string xmlnamespace, string xmlname, string memberName)
+        public CompoundObjectSerialization(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, SerializerDirection direction, string streamName, string xmlnamespace, string xmlname, string memberName, string backingStoreName)
             : base(_host)
         {
 			this.ctx = ctx;
@@ -30,47 +31,46 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
 			this.xmlnamespace = xmlnamespace;
 			this.xmlname = xmlname;
 			this.memberName = memberName;
+			this.backingStoreName = backingStoreName;
 
         }
         
         public override void Generate()
         {
-#line 20 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CompoundObjectSerialization.cst"
-string backingName = memberName + Kistl.API.Helper.ImplementationSuffix;
-	
-	if (direction == SerializerDirection.ToStream)
+#line 21 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CompoundObjectSerialization.cst"
+if (direction == SerializerDirection.ToStream)
 	{
 
-#line 25 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CompoundObjectSerialization.cst"
+#line 24 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CompoundObjectSerialization.cst"
 this.WriteObjects("			BinarySerializer.ToStream(this.",  memberName , ", ",  streamName , ");\r\n");
-#line 27 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CompoundObjectSerialization.cst"
+#line 26 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CompoundObjectSerialization.cst"
 }
 	else if (direction == SerializerDirection.FromStream)
 	{
 
-#line 31 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CompoundObjectSerialization.cst"
+#line 30 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CompoundObjectSerialization.cst"
 this.WriteObjects("			{\r\n");
 this.WriteObjects("				// trick compiler into generating correct temporary variable\r\n");
-this.WriteObjects("				var tmp = this.",  backingName , ";\r\n");
+this.WriteObjects("				var tmp = this.",  backingStoreName , ";\r\n");
 this.WriteObjects("				BinarySerializer.FromStream(out tmp, ",  streamName , ");\r\n");
 this.WriteObjects("				// use setter to de-/attach everything correctly\r\n");
-this.WriteObjects("	            this.",  backingName , " = tmp;\r\n");
+this.WriteObjects("	            this.",  backingStoreName , " = tmp;\r\n");
 this.WriteObjects("	        }\r\n");
-#line 39 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CompoundObjectSerialization.cst"
+#line 38 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CompoundObjectSerialization.cst"
 }
 	else if (direction == SerializerDirection.ToXmlStream)
 	{
 
-#line 43 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CompoundObjectSerialization.cst"
+#line 42 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CompoundObjectSerialization.cst"
 this.WriteObjects("			// TODO: Add XML Serializer here\r\n");
-#line 45 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CompoundObjectSerialization.cst"
+#line 44 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CompoundObjectSerialization.cst"
 }
 	else if (direction == SerializerDirection.FromXmlStream)
 	{
 
-#line 49 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CompoundObjectSerialization.cst"
+#line 48 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CompoundObjectSerialization.cst"
 this.WriteObjects("			// TODO: Add XML Serializer here\r\n");
-#line 51 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CompoundObjectSerialization.cst"
+#line 50 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CompoundObjectSerialization.cst"
 }
 	else
 	{

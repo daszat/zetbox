@@ -11,9 +11,9 @@
 <%@ Import Namespace="Kistl.Server.Generators.Extensions" %>
 <%@ Parameter Name="ctx" Type="IKistlContext" %>
 <%@ Parameter Name="cls" Type="ObjectClass" %>
+<%@ Parameter Name="implName" Type="string" %>
 
 <%
-	var clsName = cls.Name + Kistl.API.Helper.ImplementationSuffix + Settings["extrasuffix"];
 	var properties = cls.Properties.OrderBy(p => p.Name).ToList();
 	var rels = cls.Context.GetQuery<Relation>().Where(r => r.A.Type == cls || r.B.Type == cls)
 		.OrderBy(i => i.A.Type.Name).ThenBy(i => i.Verb).ThenBy(i => i.B.Type.Name).ThenBy(i => i.ExportGuid)
@@ -31,7 +31,7 @@
 			{
 %>
 			// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
-			new CustomPropertyDescriptor<<%= clsName %>, <%= property.GetCollectionTypeString() %>>(
+			new CustomPropertyDescriptor<<%= implName %>, <%= property.GetCollectionTypeString() %>>(
 				new Guid("<%= property.ExportGuid %>"),
 				"<%= propertyName %>",
 				null,
@@ -43,7 +43,7 @@
 			{
 %>
 			// property is CalculatedObjectReferenceProperty
-			new CustomPropertyDescriptor<<%= clsName %>, <%= property.ReferencedTypeAsCSharp() %>>(
+			new CustomPropertyDescriptor<<%= implName %>, <%= property.ReferencedTypeAsCSharp() %>>(
 				new Guid("<%= property.ExportGuid %>"),
 				"<%= propertyName %>",
 				null,
@@ -53,7 +53,7 @@
 			} else {
 %>
 			// else
-			new CustomPropertyDescriptor<<%= clsName %>, <%= property.ReferencedTypeAsCSharp() %>>(
+			new CustomPropertyDescriptor<<%= implName %>, <%= property.ReferencedTypeAsCSharp() %>>(
 				new Guid("<%= property.ExportGuid %>"),
 				"<%= propertyName %>",
 				null,
@@ -79,7 +79,7 @@
 				var posColumnName = Construct.ListPositionPropertyName(rel.A);
 %>
 			// rel.A.Type == cls && rel.A.HasPersistentOrder
-			new CustomPropertyDescriptor<<%= clsName %>, int?>(
+			new CustomPropertyDescriptor<<%= implName %>, int?>(
 				null,
 				"<%= posColumnName %>",
 				null,
@@ -93,7 +93,7 @@
 					var posColumnName = Construct.ListPositionPropertyName(rel.B);
 %>
 			// rel.B.Type == cls && rel.B.HasPersistentOrder
-			new CustomPropertyDescriptor<<%= clsName %>, int?>(
+			new CustomPropertyDescriptor<<%= implName %>, int?>(
 				null,
 				"<%= posColumnName %>",
 				null,

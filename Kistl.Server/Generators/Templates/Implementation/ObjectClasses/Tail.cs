@@ -10,11 +10,11 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
 {
     public partial class Tail
     {
-        public static void Call(IGenerationHost host, IKistlContext ctx, DataType dataType)
+        public static void Call(IGenerationHost host, IKistlContext ctx, DataType dataType, string implName)
         {
             if (host == null) { throw new ArgumentNullException("host"); }
 
-            host.CallTemplate("Implementation.ObjectClasses.Tail", ctx, dataType);
+            host.CallTemplate("Implementation.ObjectClasses.Tail", ctx, dataType, implName);
         }
     }
 }

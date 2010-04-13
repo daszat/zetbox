@@ -98,7 +98,7 @@ this.WriteObjects("        }\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("\r\n");
 #line 80 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\CompoundObjectPropertyTemplate.cst"
-AddSerialization(serializationList, name);
+AddSerialization(serializationList, name, efName);
 
 #line 81 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\CompoundObjectPropertyTemplate.cst"
 this.WriteObjects("  ");

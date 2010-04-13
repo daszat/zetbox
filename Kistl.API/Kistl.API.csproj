@@ -122,6 +122,7 @@
     <Compile Include="EventBasedMethodAttribute.cs" />
     <Compile Include="MemoryContext.cs" />
     <Compile Include="RelationEndRole.cs" />
+    <Compile Include="RelationshipFilterCollection.cs" />
     <Compile Include="SerializableExpression.Visitors.cs" />
     <Compile Include="TypeDescriptorImplementation.cs" />
     <Compile Include="TypeTransformations.cs" />

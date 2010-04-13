@@ -16,9 +16,8 @@
 <%@ Parameter Name="xmlnamespace" Type="string" %>
 <%@ Parameter Name="xmlname" Type="string" %>
 <%@ Parameter Name="memberName" Type="string" %>
+<%@ Parameter Name="backingStoreName" Type="string" %>
 <%
-	string backingName = memberName + Kistl.API.Helper.ImplementationSuffix;
-	
 	if (direction == SerializerDirection.ToStream)
 	{
 %>
@@ -30,10 +29,10 @@
 %>
 			{
 				// trick compiler into generating correct temporary variable
-				var tmp = this.<%= backingName %>;
+				var tmp = this.<%= backingStoreName %>;
 				BinarySerializer.FromStream(out tmp, <%= streamName %>);
 				// use setter to de-/attach everything correctly
-	            this.<%= backingName %> = tmp;
+	            this.<%= backingStoreName %> = tmp;
 	        }
 <%	
 	}

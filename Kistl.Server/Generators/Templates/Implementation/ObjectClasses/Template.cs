@@ -114,13 +114,13 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
         protected override void ApplyApplyChangesFromMethod()
         {
             base.ApplyApplyChangesFromMethod();
-            Implementation.ObjectClasses.ApplyChangesFromMethod.Call(Host, ctx, this.DataType);
+            Implementation.ObjectClasses.ApplyChangesFromMethod.Call(Host, ctx, this.DataType, GetTypeName());
         }
 
         protected override void ApplyClassTailTemplate()
         {
             base.ApplyClassTailTemplate();
-            Implementation.ObjectClasses.Tail.Call(Host, ctx, this.DataType);
+            Implementation.ObjectClasses.Tail.Call(Host, ctx, this.DataType, GetTypeName());
         }
 
     }

@@ -83,13 +83,13 @@ M: System.Void Kistl.Server.Server::ReadUsers(System.String,System.Collections.G
 R: Gendarme.Rules.Correctness.EnsureLocalDisposalRule
 # false positives when returning an IEnumerator from GetEnumerator
 M: System.Collections.IEnumerator Kistl.API.BaseRelationCollectionWrapper`6::System.Collections.IEnumerable.GetEnumerator()
+M: System.Collections.IEnumerator Kistl.API.BaseRelationshipFilterCollection`1::System.Collections.IEnumerable.GetEnumerator()
 M: System.Collections.IEnumerator Kistl.API.Utils.ReadOnlyProjectedCollection`2::System.Collections.IEnumerable.GetEnumerator()
 M: System.Collections.IEnumerator Kistl.API.Utils.ContextCache::System.Collections.IEnumerable.GetEnumerator()
 M: System.Collections.IEnumerator Kistl.API.Utils.GenericCastingCollectionWrapper`2::System.Collections.IEnumerable.GetEnumerator()
 M: System.Collections.IEnumerator Kistl.API.Utils.SortListFromCollection`2::System.Collections.IEnumerable.GetEnumerator()
 M: System.Collections.IEnumerator Kistl.API.Utils.LookupDictionary`3::System.Collections.IEnumerable.GetEnumerator()
 M: System.Collections.IEnumerator Kistl.API.ValueCollectionWrapper`4::System.Collections.IEnumerable.GetEnumerator()
-M: System.Collections.IEnumerator Kistl.API.Client.BaseRelationshipFilterCollection`1::System.Collections.IEnumerable.GetEnumerator()
 # the following are compiler generated stuff, sometimes these may change in the d__X part :-/
 M: System.Collections.IEnumerator Kistl.Client.ASPNET.Toolkit.View.DataObjectReferenceView/<GetScriptDescriptors>d__0::System.Collections.IEnumerable.GetEnumerator()
 M: System.Collections.IEnumerator Kistl.Client.ASPNET.Toolkit.View.DataObjectReferenceView/<GetScriptReferences>d__4::System.Collections.IEnumerable.GetEnumerator()
@@ -169,6 +169,7 @@ A: Kistl.DalProvider.ClientObjects
 A: Kistl.API.Server
 A: Kistl.App.Projekte.Server
 A: Kistl.DalProvider.EF
+A: Kistl.DalProvider.Memory
 A: Kistl.Server
 A: Kistl.Server.Service
 
@@ -190,6 +191,7 @@ A: Kistl.DalProvider.ClientObjects
 A: Kistl.API.Server
 A: Kistl.App.Projekte.Server
 A: Kistl.DalProvider.EF
+A: Kistl.DalProvider.Memory
 A: Kistl.Server
 A: Kistl.Server.Service
 
@@ -209,6 +211,7 @@ A: Kistl.DalProvider.ClientObjects
 A: Kistl.API.Server
 A: Kistl.App.Projekte.Server
 A: Kistl.DalProvider.EF
+A: Kistl.DalProvider.Memory
 A: Kistl.Server
 A: Kistl.Server.Service
 
@@ -228,6 +231,7 @@ A: Kistl.DalProvider.ClientObjects
 A: Kistl.API.Server
 A: Kistl.App.Projekte.Server
 A: Kistl.DalProvider.EF
+A: Kistl.DalProvider.Memory
 A: Kistl.Server
 A: Kistl.Server.Service
 
@@ -247,6 +251,7 @@ A: Kistl.DalProvider.ClientObjects
 A: Kistl.API.Server
 A: Kistl.App.Projekte.Server
 A: Kistl.DalProvider.EF
+A: Kistl.DalProvider.Memory
 A: Kistl.Server
 A: Kistl.Server.Service
 
@@ -266,6 +271,7 @@ A: Kistl.DalProvider.ClientObjects
 A: Kistl.API.Server
 A: Kistl.App.Projekte.Server
 A: Kistl.DalProvider.EF
+A: Kistl.DalProvider.Memory
 A: Kistl.Server
 A: Kistl.Server.Service
 

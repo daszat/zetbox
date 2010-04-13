@@ -14,19 +14,21 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
     {
 		protected IKistlContext ctx;
 		protected ObjectClass cls;
+		protected string implName;
 
 
-        public Tail(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, ObjectClass cls)
+        public Tail(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, ObjectClass cls, string implName)
             : base(_host)
         {
 			this.ctx = ctx;
 			this.cls = cls;
+			this.implName = implName;
 
         }
         
         public override void Generate()
         {
-#line 14 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\Tail.cst"
+#line 15 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\Tail.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("        // tail template\r\n");
 this.WriteObjects("   		// ",  this.GetType() , "\r\n");
@@ -77,8 +79,8 @@ this.WriteObjects("            if (OnDeleting_",  cls.Name , " != null) OnDeleti
 this.WriteObjects("        }\r\n");
 this.WriteObjects("        public static event ObjectEventHandler<",  cls.Name , "> OnDeleting_",  cls.Name , ";\r\n");
 this.WriteObjects("\r\n");
-#line 65 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\Tail.cst"
-Implementation.ObjectClasses.CustomTypeDescriptor.Call(Host, ctx, cls);
+#line 66 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\Tail.cst"
+Implementation.ObjectClasses.CustomTypeDescriptor.Call(Host, ctx, cls, implName);
 
 
         }

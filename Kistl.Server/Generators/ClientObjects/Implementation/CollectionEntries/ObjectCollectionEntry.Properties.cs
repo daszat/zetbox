@@ -10,7 +10,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.CollectionEntries
     using Kistl.API.Server;
     using Kistl.App.Base;
     using Kistl.App.Extensions;
-    using Kistl.Server.Generators.Templates.Implementation;
+    using Templates = Kistl.Server.Generators.Templates;
 
     public partial class ObjectCollectionEntry
     {
@@ -38,7 +38,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.CollectionEntries
 
             if (rel.NeedsPositionStorage(endRole))
             {
-                this.MembersToSerialize.Add(SerializerType.All, relEnd.Type.Module.Namespace, endRole + Kistl.API.Helper.PositionSuffix, "_" + endRole + Kistl.API.Helper.PositionSuffix);
+                this.MembersToSerialize.Add(Templates.Implementation.SerializerType.All, relEnd.Type.Module.Namespace, endRole + Kistl.API.Helper.PositionSuffix, "_" + endRole + Kistl.API.Helper.PositionSuffix);
                 this.WriteObjects("public int? ", endRole, "Index { get { return ",
                     endRole, Kistl.API.Helper.PositionSuffix, "; } set { ",
                     endRole, Kistl.API.Helper.PositionSuffix, " = value; } }");

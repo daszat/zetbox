@@ -11,14 +11,16 @@
 <%@ Import Namespace="Kistl.Server.Generators" %>
 <%@ Import Namespace="Kistl.Server.Generators.Extensions" %>
 <%@ Parameter Name="ctx" Type="IKistlContext" %>
-<%@ Parameter Name="cls" Type="ObjectClass" %>
+<%@ Parameter Name="cls" Type="DataType" %>
+<%@ Parameter Name="clsName" Type="string" %>
+<%@ Parameter Name="implName" Type="string" %>
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{
 			base.ApplyChangesFrom(obj);
-			var other = (<%= cls.Name %>)obj;
-			var otherImpl = (<%= cls.Name + Kistl.API.Helper.ImplementationSuffix %>)obj;
-			var me = (<%= cls.Name %>)this;
+			var other = (<%= clsName %>)obj;
+			var otherImpl = (<%= implName %>)obj;
+			var me = (<%= clsName %>)this;
 
 <%			
 			foreach(var prop in cls.Properties.OfType<ValueTypeProperty>().Where(p => !p.IsList).OrderBy(p => p.Name))

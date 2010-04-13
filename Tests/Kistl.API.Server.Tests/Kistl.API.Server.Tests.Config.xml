@@ -13,6 +13,7 @@
       <Module>Kistl.API.ApiModule, Kistl.API</Module>
       <Module>Kistl.Server.ServerModule, Kistl.Server</Module>
       <Module>Kistl.DalProvider.EF.EfProvider, Kistl.DalProvider.EF</Module>
+      <Module>Kistl.DalProvider.Memory.ServerProvider, Kistl.DalProvider.Memory</Module>
       <Module>Kistl.DalProvider.Frozen.FrozenProvider, Kistl.DalProvider.Frozen</Module>
     </Modules>
   </Server>

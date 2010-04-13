@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Kistl.API.Client
+namespace Kistl.API
 {
     public abstract class BaseRelationshipFilterCollection<T> : ICollection<T>
         where T : IRelationCollectionEntry

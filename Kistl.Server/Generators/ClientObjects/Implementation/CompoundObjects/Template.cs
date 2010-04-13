@@ -41,6 +41,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.CompoundObjects
 
             string clsName = this.GetTypeName();
 
+            // attach compound to parent object
             this.WriteObjects("        public ", clsName, "(IPersistenceObject parent, string property)");
             this.WriteLine();
             this.WriteObjects("        {");
@@ -49,7 +50,6 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.CompoundObjects
             this.WriteLine();
             this.WriteObjects("        }");
             this.WriteLine();
-
         }
     }
 }

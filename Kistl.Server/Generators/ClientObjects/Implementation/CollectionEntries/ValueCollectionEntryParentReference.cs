@@ -1,15 +1,16 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Arebis.CodeGeneration;
-using Kistl.API;
 
 namespace Kistl.Server.Generators.ClientObjects.Implementation.CollectionEntries
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+
+    using Kistl.API;
+
     public partial class ValueCollectionEntryParentReference
     {
-        public static void Call(IGenerationHost host, IKistlContext ctx,
+        public static void Call(Arebis.CodeGeneration.IGenerationHost host, IKistlContext ctx,
            Templates.Implementation.SerializationMembersList membersToSerialize,
            string className, string propertyName)
         {
