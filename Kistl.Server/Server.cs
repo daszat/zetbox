@@ -24,7 +24,7 @@ namespace Kistl.Server
     {
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Server");
 
-        public Server(IContainer container)
+        public Server(ILifetimeScope container)
         {
             this.container = container;
         }
@@ -32,7 +32,7 @@ namespace Kistl.Server
         /// <summary>
         /// The IoC container used by this Server.
         /// </summary>
-        private IContainer container;
+        private ILifetimeScope container;
 
         public void GenerateCode()
         {
