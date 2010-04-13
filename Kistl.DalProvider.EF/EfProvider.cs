@@ -54,20 +54,34 @@ namespace Kistl.DalProvider.EF
                 .InstancePerDependency();
 
             moduleBuilder
-                .Register((c,p) =>
+                .Register((c, p) =>
                 {
                     // EF's meta data initialization is not thread-safe
                     lock (_lock)
                     {
                         var param = p.OfType<ConstantParameter>().FirstOrDefault();
-                        return new KistlDataContext(c.Resolve<KistlConfig>(), 
+                        return new KistlDataContext(c.Resolve<KistlConfig>(),
                             c.Resolve<IMetaDataResolver>(),
                             param != null ? (Kistl.App.Base.Identity)param.Value : c.Resolve<IIdentityResolver>().GetCurrent());
                     }
                 })
                 .As<IKistlContext>()
-                .As<IReadOnlyKistlContext>()
                 .InstancePerDependency();
+
+            moduleBuilder
+                .Register(c =>
+                {
+                    // EF's meta data initialization is not thread-safe
+                    lock (_lock)
+                    {
+                        var resolver = new CachingMetaDataResolver();
+                        var result = new KistlDataContext(c.Resolve<KistlConfig>(), resolver, null);
+                        resolver.Context = result;
+                        return result;
+                    }
+                })
+                .As<IReadOnlyKistlContext>()
+                .SingleInstance();
 
             moduleBuilder
                 .Register<MemoryContext>(c =>
