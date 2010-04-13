@@ -22,10 +22,10 @@ namespace Kistl.Server.Generators
     public class Generator
     {
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Server.Generator");
-        private readonly IContainer _container;
+        private readonly ILifetimeScope _container;
         private readonly IEnumerable<BaseDataObjectGenerator> _generatorProviders;
 
-        public Generator(IContainer container, IEnumerable<BaseDataObjectGenerator> generatorProviders)
+        public Generator(ILifetimeScope container, IEnumerable<BaseDataObjectGenerator> generatorProviders)
         {
             _container = container;
             _generatorProviders = generatorProviders;
@@ -110,9 +110,9 @@ namespace Kistl.Server.Generators
                 genThread.Start();
                 threads.Add(genThread);
 
-                // serialize execution
-                Log.Warn("Serializing generation threads.");
-                genThread.Join();
+                ////// serialize execution
+                ////Log.Warn("Serializing generation threads.");
+                ////genThread.Join();
             }
             foreach (var t in threads)
             {
@@ -155,43 +155,56 @@ namespace Kistl.Server.Generators
 
             try
             {
-                foreach (var gen in _generatorProviders)
+                CompileSingle(serverReferencePath, clientReferencePath, binPath, engine, _generatorProviders.Single(g => g.BaseName == "Interface"));
+                foreach (var gen in _generatorProviders.Where(g => g.BaseName != "Interface"))
                 {
-                    using (log4net.NDC.Push("Compiling " + gen.Description))
-                    {
-                        Log.DebugFormat("Loading MsBuild Project");
-                        var proj = new Project(engine);
-                        proj.Load(gen.ProjectFileName);
-                        var defaultPropertyGroup = proj.AddNewPropertyGroup(false);
-                        defaultPropertyGroup.AddNewProperty("OutputPath", binPath, true);
-#if DEBUG
-                        defaultPropertyGroup.AddNewProperty("Configuration", "Debug", true);
-#else
-                        defaultPropertyGroup.AddNewProperty("Configuration", "Release", true);
-#endif
-                        // Fix XML Path
-                        defaultPropertyGroup.AddNewProperty("DocumentationFile", "$(OutputPath)\\$(AssemblyName).xml", false);
-                        if (gen.BaseName == "Client")
-                        {
-                            defaultPropertyGroup.AddNewProperty("KistlAPIPath", clientReferencePath, true);
-                        }
-                        else
-                        {
-                            defaultPropertyGroup.AddNewProperty("KistlAPIPath", serverReferencePath, true);
-                        }
-
-                        Log.DebugFormat("Compiling");
-                        if (!engine.BuildProject(proj))
-                        {
-                            throw new ApplicationException(String.Format("Failed to compile {0}", gen.Description));
-                        }
-                    }
+                    CompileSingle(serverReferencePath, clientReferencePath, binPath, engine, gen);
                 }
             }
             finally
             {
                 // close all logfiles
                 engine.UnregisterAllLoggers();
+            }
+        }
+
+        private static void CompileSingle(string serverReferencePath, string clientReferencePath, string binPath, Engine engine, BaseDataObjectGenerator gen)
+        {
+            try
+            {
+                using (log4net.NDC.Push("Compiling " + gen.Description))
+                {
+                    Log.DebugFormat("Loading MsBuild Project");
+                    var proj = new Project(engine);
+                    proj.Load(gen.ProjectFileName);
+                    var defaultPropertyGroup = proj.AddNewPropertyGroup(false);
+                    defaultPropertyGroup.AddNewProperty("OutputPath", binPath, true);
+#if DEBUG
+                    defaultPropertyGroup.AddNewProperty("Configuration", "Debug", true);
+#else
+                        defaultPropertyGroup.AddNewProperty("Configuration", "Release", true);
+#endif
+                    // Fix XML Path
+                    defaultPropertyGroup.AddNewProperty("DocumentationFile", "$(OutputPath)\\$(AssemblyName).xml", false);
+                    if (gen.BaseName == "Client")
+                    {
+                        defaultPropertyGroup.AddNewProperty("KistlAPIPath", clientReferencePath, true);
+                    }
+                    else
+                    {
+                        defaultPropertyGroup.AddNewProperty("KistlAPIPath", serverReferencePath, true);
+                    }
+
+                    Log.DebugFormat("Compiling");
+                    if (!engine.BuildProject(proj))
+                    {
+                        throw new ApplicationException(String.Format("Failed to compile {0}", gen.Description));
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Failed compiling " + gen.Description, ex);
             }
         }
 
