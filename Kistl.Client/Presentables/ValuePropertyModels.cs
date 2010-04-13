@@ -73,21 +73,40 @@ namespace Kistl.Client.Presentables
         bool AllowNullInput { get; }
     }
 
-    public abstract class PropertyModel<TValue>
-        : ViewModel, IPropertyValueModel, IDataErrorInfo
+    public abstract class UntypedPropertyModel : ViewModel
     {
+        public new delegate UntypedPropertyModel Factory(IKistlContext dataCtx, IDataObject obj, Property prop);
+
+        protected UntypedPropertyModel(
+            IGuiApplicationContext appCtx, IKistlContext dataCtx,
+            IDataObject obj, Property prop)
+            : base(appCtx, dataCtx)
+        {
+        }
+
+        protected UntypedPropertyModel(bool designMode)
+            : base(designMode)
+        {
+        }
+    }
+
+    public abstract class PropertyModel<TValue>
+        : UntypedPropertyModel, IPropertyValueModel, IDataErrorInfo
+    {
+        public new delegate PropertyModel<TValue> Factory(IKistlContext dataCtx, IDataObject obj, Property prop);
+
         protected PropertyModel(
             IGuiApplicationContext appCtx, IKistlContext dataCtx,
-            IDataObject obj, Property bp)
-            : base(appCtx, dataCtx)
+            IDataObject obj, Property prop)
+            : base(appCtx, dataCtx, obj, prop)
         {
             if (obj == null)
                 throw new ArgumentNullException("obj");
-            if (bp == null)
-                throw new ArgumentNullException("bp");
+            if (prop == null)
+                throw new ArgumentNullException("prop");
 
             this.Object = obj;
-            this.Property = bp;
+            this.Property = prop;
 
             this.Property.PropertyChanged += this.PropertyPropertyChangedHandler;
             this.Object.PropertyChanged += this.ObjectPropertyChangedHandler;
@@ -250,6 +269,8 @@ namespace Kistl.Client.Presentables
         : PropertyModel<Nullable<TValue>>, IValueModel<Nullable<TValue>>, IValueModel<string>
         where TValue : struct
     {
+        public new delegate NullableValuePropertyModel<TValue> Factory(IKistlContext dataCtx, IDataObject obj, Property prop);
+
         public NullableValuePropertyModel(
             IGuiApplicationContext appCtx, IKistlContext dataCtx,
             IDataObject obj, ValueTypeProperty prop)
@@ -397,12 +418,18 @@ namespace Kistl.Client.Presentables
         : PropertyModel<TValue>, IValueModel<TValue>
         where TValue : class
     {
+        public new delegate ReferencePropertyModel<TValue> Factory(IKistlContext dataCtx, IDataObject obj, Property prop);
+
         public ReferencePropertyModel(
             IGuiApplicationContext appCtx, IKistlContext dataCtx,
             IDataObject obj, ValueTypeProperty prop)
             : base(appCtx, dataCtx, obj, prop)
         {
             this.AllowNullInput = prop.IsNullable();
+            //var x = new Factory((a, b, c) => { return null; });
+            //Delegate.CreateDelegate(typeof(UntypedPropertyModel.Factory), x.Method);
+            //Delegate y = new UntypedPropertyModel.Factory(x);
+            //var z = Activator.CreateInstance(typeof(UntypedPropertyModel.Factory), x);
         }
 
         #region Public Interface
@@ -485,6 +512,8 @@ namespace Kistl.Client.Presentables
         : ReferencePropertyModel<TValue>
         where TValue : class
     {
+        public new delegate ChooseReferencePropertyModel<TValue> Factory(IKistlContext dataCtx, IDataObject obj, Property prop);
+
         public ChooseReferencePropertyModel(
             IGuiApplicationContext appCtx, IKistlContext dataCtx,
             IDataObject obj, ValueTypeProperty prop)
@@ -504,6 +533,8 @@ namespace Kistl.Client.Presentables
         : NullableValuePropertyModel<TValue>
         where TValue : struct
     {
+        public new delegate EnumerationPropertyModel<TValue> Factory(IKistlContext dataCtx, IDataObject obj, Property prop);
+
         public EnumerationPropertyModel(
             IGuiApplicationContext appCtx, IKistlContext dataCtx,
             IDataObject obj, EnumerationProperty prop)
@@ -523,6 +554,8 @@ namespace Kistl.Client.Presentables
     public class EnumerationPropertyModel
         : NullableValuePropertyModel<int>
     {
+        public new delegate EnumerationPropertyModel Factory(IKistlContext dataCtx, IDataObject obj, Property prop);
+
         public EnumerationPropertyModel(
             IGuiApplicationContext appCtx, IKistlContext dataCtx,
             IDataObject obj, EnumerationProperty prop)

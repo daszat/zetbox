@@ -73,6 +73,8 @@ namespace Kistl.Client.Presentables
     public class StringListPropertyModel
         : PropertyModel<ICollection<string>>, IValueListModel<string>
     {
+        public new delegate StringListPropertyModel Factory(IKistlContext dataCtx, IDataObject obj, Property prop);
+
         private readonly StringProperty _property;
 
         public StringListPropertyModel(

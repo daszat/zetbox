@@ -17,13 +17,13 @@ namespace Kistl.Client.WPF
         : ModelFactory
     {
 
-        public WpfModelFactory(IGuiApplicationContext appCtx)
-            : base(appCtx)
+        public WpfModelFactory(Autofac.ILifetimeScope container)
+            : base(container)
         {
         }
 
         /// <inheritdoc/>
-        protected override Kistl.App.GUI.Toolkit Toolkit
+        public override Kistl.App.GUI.Toolkit Toolkit
         {
             get { return Kistl.App.GUI.Toolkit.WPF; }
         }
@@ -31,7 +31,7 @@ namespace Kistl.Client.WPF
         /// <inheritdoc/>
         protected override void ShowInView(ViewModel mdl, object view, bool activate)
         {
-            AppContext.UiThread.Verify();
+            GuiApplicationContext.Current.UiThread.Verify();
 
             if (view is Window)
             {

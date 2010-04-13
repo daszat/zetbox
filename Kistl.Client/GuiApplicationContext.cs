@@ -50,55 +50,31 @@ namespace Kistl.Client
     {
         public static new GuiApplicationContext Current { get; private set; }
 
-        public ICustomActionsManager CustomActionsManager { get; private set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="config"></param>
-        /// <param name="tkName">This has to be astring, since the 
-        /// <see cref="Toolkit"/> enum is defined in the Kistl.Objects 
-        /// assembly, which cannot be loaded before initialisation 
-        /// of the <see cref="AssemblyLoader"/>, which is loaded in 
-        /// the same calling method (which is too late).</param>
-        public GuiApplicationContext(KistlConfig config, string tkName)
+        public GuiApplicationContext(KistlConfig config, IModelFactory factory)
             : base(config)
         {
             GuiApplicationContext.Current = this;
+            Factory = factory;
 
-            Toolkit tk = (Toolkit)Enum.Parse(typeof(Toolkit), tkName, true);
             // TODO: replace by fetching TypeRefs from the Store
             //       via the FrozenContext
-            switch (tk)
+            switch (factory.Toolkit)
             {
                 case Toolkit.WPF:
                     UiThread = new SynchronousThreadManager();
                     AsyncThread = new SynchronousThreadManager();
                     //UiThread = new Kistl.Client.Presentables.WPF.UiThreadManager();
                     //AsyncThread = new Kistl.Client.Presentables.WPF.AsyncThreadManager();
-
-                    Factory = (ModelFactory)Activator.CreateInstance(
-                        Type.GetType("Kistl.Client.WPF.WpfModelFactory, Kistl.Client.WPF, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ccdf16e4dd7b6d78", true),
-                        new object[] { this }
-                      );
                     break;
                 case Toolkit.WinForms:
                     //UiThread = new Kistl.Client.Presentables.WPF.UiThreadManager();
                     //AsyncThread = new Kistl.Client.Presentables.WPF.AsyncThreadManager();
                     UiThread = new SynchronousThreadManager();
                     AsyncThread = new SynchronousThreadManager();
-
-                    Factory = (ModelFactory)Activator.CreateInstance(
-                        Type.GetType("Kistl.Client.Forms.FormsModelFactory, Kistl.Client.Forms, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ccdf16e4dd7b6d78", true),
-                        new object[] { this });
                     break;
                 case Toolkit.ASPNET:
                     UiThread = new SynchronousThreadManager();
                     AsyncThread = new SynchronousThreadManager();
-
-                    Factory = (ModelFactory)Activator.CreateInstance(
-                        Type.GetType("Kistl.Client.ASPNET.Toolkit.AspnetModelFactory, Kistl.Client.ASPNET.Toolkit, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ccdf16e4dd7b6d78", true),
-                        new object[] { this });
                     break;
                 default:
                     throw new NotImplementedException();
@@ -150,10 +126,5 @@ namespace Kistl.Client
         /// A <see cref="IThreadManager"/> for asynchronous Tasks
         /// </summary>
         public IThreadManager AsyncThread { get; private set; }
-
-        public void SetCustomActionsManager(ICustomActionsManager manager)
-        {
-            this.CustomActionsManager = manager;
-        }
     }
 }

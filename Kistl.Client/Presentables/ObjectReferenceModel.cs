@@ -15,10 +15,12 @@ namespace Kistl.Client.Presentables
     public partial class ObjectReferenceModel
         : PropertyModel<DataObjectModel>, IValueModel<DataObjectModel>
     {
+        public new delegate ObjectReferenceModel Factory(IKistlContext dataCtx, IDataObject obj, Property prop);
+
         public ObjectReferenceModel(
             IGuiApplicationContext appCtx, IKistlContext dataCtx,
-            IDataObject referenceHolder, ObjectReferenceProperty prop)
-            : base(appCtx, dataCtx, referenceHolder, prop)
+            IDataObject obj, ObjectReferenceProperty prop)
+            : base(appCtx, dataCtx, obj, prop)
         {
             AllowNullInput = prop.IsNullable();
             ReferencedClass = prop.GetReferencedObjectClass();
@@ -111,7 +113,7 @@ namespace Kistl.Client.Presentables
         protected override void UpdatePropertyValue()
         {
             IDataObject newValue = Object.GetPropertyValue<IDataObject>(Property.Name);
-            var newModel = newValue == null ? null : (DataObjectModel)Factory.CreateDefaultModel(DataContext, newValue);
+            var newModel = newValue == null ? null : (DataObjectModel)ModelFactory.CreateDefaultModel(DataContext, newValue);
             if (Value != newModel)
             {
                 Value = newModel;
@@ -127,7 +129,7 @@ namespace Kistl.Client.Presentables
                 .ToList() // TODO: remove this
                 .OrderBy(obj => obj.ToString()).ToList())
             {
-                result.Add((DataObjectModel)Factory.CreateDefaultModel(DataContext, obj));
+                result.Add((DataObjectModel)ModelFactory.CreateDefaultModel(DataContext, obj));
             }
             return result;
         }

@@ -20,6 +20,8 @@ namespace Kistl.Client.Presentables
     public class ObjectListModel
         : PropertyModel<IList<DataObjectModel>>, IValueListModel<DataObjectModel>
     {
+        public new delegate ObjectListModel Factory(IKistlContext dataCtx, IDataObject obj, Property prop);
+
         private readonly ObjectReferenceProperty _property;
         private readonly ObjectClass _referencedClass;
         private readonly ICollection _collection;
@@ -28,8 +30,8 @@ namespace Kistl.Client.Presentables
 
         public ObjectListModel(
             IGuiApplicationContext appCtx, IKistlContext dataCtx,
-            IDataObject referenceHolder, ObjectReferenceProperty prop)
-            : base(appCtx, dataCtx, referenceHolder, prop)
+            IDataObject obj, ObjectReferenceProperty prop)
+            : base(appCtx, dataCtx, obj, prop)
         {
             if (!prop.GetIsList()) { throw new ArgumentOutOfRangeException("prop", "ObjectReferenceProperty must be a list"); }
 
@@ -94,7 +96,7 @@ namespace Kistl.Client.Presentables
             {
                 _valueCache = new ReadOnlyObservableProjectedList<IDataObject, DataObjectModel>(
                     Object.GetPropertyValue<INotifyCollectionChanged>(Property.Name),
-                    obj => (DataObjectModel)Factory.CreateDefaultModel(DataContext, obj),
+                    obj => (DataObjectModel)ModelFactory.CreateDefaultModel(DataContext, obj),
                     mdl => mdl.Object);
             }
         }
@@ -238,7 +240,7 @@ namespace Kistl.Client.Presentables
             {
                 var targetType = baseclass.GetDescribedInterfaceType();
                 var item = this.DataContext.Create(targetType);
-                onCreated(Factory.CreateSpecificModel<DataObjectModel>(DataContext, item));
+                onCreated(ModelFactory.CreateSpecificModel<DataObjectModel>(DataContext, item));
             }
             else
             {
@@ -246,11 +248,11 @@ namespace Kistl.Client.Presentables
                 // TODO: filter non-instantiable classes
                 var childModels = children
                     .OrderBy(oc => oc.Name)
-                    .Select(oc => (DataObjectModel)Factory.CreateSpecificModel<ObjectClassModel>(DataContext, oc))
+                    .Select(oc => (DataObjectModel)ModelFactory.CreateSpecificModel<ObjectClassModel>(DataContext, oc))
                     .ToList();
 
-                Factory.ShowModel(
-                    Factory.CreateSpecificModel<DataObjectSelectionTaskModel>(
+                ModelFactory.ShowModel(
+                    ModelFactory.CreateSpecificModel<DataObjectSelectionTaskModel>(
                         DataContext,
                         childModels,
                         new Action<DataObjectModel>(delegate(DataObjectModel chosen)
@@ -259,7 +261,7 @@ namespace Kistl.Client.Presentables
                             {
                                 var targetType = ((ObjectClass)chosen.Object).GetDescribedInterfaceType();
                                 var item = this.DataContext.Create(targetType);
-                                onCreated(Factory.CreateSpecificModel<DataObjectModel>(DataContext, item));
+                                onCreated(ModelFactory.CreateSpecificModel<DataObjectModel>(DataContext, item));
                             }
                             else
                             {
@@ -286,11 +288,11 @@ namespace Kistl.Client.Presentables
             var instances = DataContext.GetQuery(baseclass).ToList(); // TODO: remove superfluous ToList
             var instanceModels = instances
                 .OrderBy(i => i.ToString())
-                .Select(i => (DataObjectModel)Factory.CreateDefaultModel(DataContext, i))
+                .Select(i => (DataObjectModel)ModelFactory.CreateDefaultModel(DataContext, i))
                 .ToList();
 
-            Factory.ShowModel(
-                Factory.CreateSpecificModel<DataObjectSelectionTaskModel>(
+            ModelFactory.ShowModel(
+                ModelFactory.CreateSpecificModel<DataObjectSelectionTaskModel>(
                     DataContext,
                     instanceModels,
                     new Action<DataObjectModel>(delegate(DataObjectModel chosen)
@@ -350,7 +352,7 @@ namespace Kistl.Client.Presentables
         {
             if (item == null) { throw new ArgumentNullException("item"); }
 
-            Factory.ShowModel(item, activate);
+            ModelFactory.ShowModel(item, activate);
         }
 
         #endregion

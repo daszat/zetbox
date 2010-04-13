@@ -34,14 +34,36 @@ namespace Kistl.Client
                 .As<FrozenActionsManager>()
                 .SingleInstance();
 
+            moduleBuilder
+                .RegisterType<ModelFactory>()
+                .As<IModelFactory>()
+                .SingleInstance();
+
+            moduleBuilder
+                .RegisterType<GuiApplicationContext>()
+                .As<IGuiApplicationContext>()
+                .SingleInstance();
+
             moduleBuilder.Register(c => KistlContext.GetContext())
                 .As<IKistlContext>()
                 .As<IReadOnlyKistlContext>()
                 .InstancePerDependency();
 
             // Register all ViewModel Types
-            moduleBuilder.RegisterAssemblyTypes(typeof(ClientModule).Assembly)
-                .Where(t => typeof(ViewModel).IsAssignableFrom(t));
+            foreach (var t in typeof(ClientModule).Assembly.GetTypes()
+                .Where(t => typeof(ViewModel).IsAssignableFrom(t)))
+            {
+                if (t.IsGenericTypeDefinition)
+                {
+                    moduleBuilder.RegisterGeneric(t)
+                        .InstancePerDependency();
+                }
+                else
+                {
+                    moduleBuilder.RegisterType(t)
+                        .InstancePerDependency();
+                }
+            }
         }
     }
 }

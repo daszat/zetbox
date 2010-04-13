@@ -82,7 +82,7 @@ namespace Kistl.API
         }
     }
 
-    public interface IKistlContextDebugger : IDisposable
+    public interface IKistlContextDebugger
     {
         void Created(IKistlContext ctx);
         void Disposed(IKistlContext ctx);

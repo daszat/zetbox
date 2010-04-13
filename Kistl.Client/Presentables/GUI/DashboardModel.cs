@@ -83,7 +83,7 @@ namespace Kistl.Client.Presentables.GUI
                 var defaultView = (SelectedViewModelDescriptor.Object as ViewModelDescriptor).GetViewDescriptor(tk);
                 if (defaultView != null)
                 {
-                    DefaultViewDescriptors[tk] = (DataObjectModel)Factory.CreateDefaultModel(DataContext, defaultView);
+                    DefaultViewDescriptors[tk] = (DataObjectModel)ModelFactory.CreateDefaultModel(DataContext, defaultView);
                 }
             }
         }

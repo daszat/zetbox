@@ -17,12 +17,12 @@ namespace Kistl.Client.Forms
 
         private List<WorkspaceView> _workspaces = new List<WorkspaceView>();
 
-        public FormsModelFactory(IGuiApplicationContext appCtx)
-            : base(appCtx)
+        public FormsModelFactory(Autofac.ILifetimeScope container)
+            : base(container)
         {
         }
 
-        protected override Kistl.App.GUI.Toolkit Toolkit
+        public override Kistl.App.GUI.Toolkit Toolkit
         {
             get { return Kistl.App.GUI.Toolkit.WinForms; }
         }

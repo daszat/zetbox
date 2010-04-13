@@ -420,6 +420,7 @@
     </Compile>
     <Compile Include="View\VisualTypeTemplateSelector.cs" />
     <Compile Include="WpfModelFactory.cs" />
+    <Compile Include="WPFModule.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

@@ -14,10 +14,10 @@ namespace Kistl.Client.WPF
 
     public class Launcher
     {
-        private readonly GuiApplicationContext appCtx;
+        private readonly IGuiApplicationContext appCtx;
         private readonly IKistlContext ctx;
         private readonly Func<IKistlContext> ctxFactory;
-        public Launcher(GuiApplicationContext appCtx, IKistlContext ctx, Func<IKistlContext> ctxFactory)
+        public Launcher(IGuiApplicationContext appCtx, IKistlContext ctx, Func<IKistlContext> ctxFactory)
         {
             this.appCtx = appCtx;
             this.ctx = ctx;
@@ -28,7 +28,7 @@ namespace Kistl.Client.WPF
         {
             if (args == null) { throw new ArgumentNullException("args"); }
 
-            var ctxDebugger = appCtx.Factory.CreateSpecificModel<KistlDebuggerAsModel>(ctxFactory.Invoke());
+            var ctxDebugger = appCtx.Factory.CreateModel<KistlDebuggerAsModel.Factory>().Invoke(ctxFactory.Invoke());
             appCtx.Factory.ShowModel(ctxDebugger, true);
 
             var cacheDebugger = appCtx.Factory.CreateSpecificModel<CacheDebuggerViewModel>(ctxFactory.Invoke());

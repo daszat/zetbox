@@ -22,7 +22,13 @@ namespace Kistl.Client.WPF
     /// </summary>
     public partial class App : Application
     {
-        public GuiApplicationContext AppContext { get; private set; }
+        public IGuiApplicationContext AppContext
+        {
+            get
+            {
+                return container.Resolve<IGuiApplicationContext>();
+            }
+        }
 
         public static new App Current { get { return (App)(Application.Current); } }
 
@@ -74,6 +80,10 @@ namespace Kistl.Client.WPF
 
             container = CreateMasterContainer(config);
 
+            // initialise AppContext
+            SplashScreen.SetInfo("Initializing Application Context");
+            var appCtx = AppContext;
+
             // initialise custom actions manager
             var cams = container.Resolve<BaseCustomActionsManager>();
 
@@ -91,13 +101,7 @@ namespace Kistl.Client.WPF
         private IContainer CreateMasterContainer(KistlConfig config)
         {
             var builder = Kistl.API.Utils.AutoFacBuilder.CreateContainerBuilder(config, config.Client.Modules);
-
             builder.RegisterType<Launcher>().SingleInstance();
-
-            SplashScreen.SetInfo("Initializing Application Context");
-            AppContext = new GuiApplicationContext(config, "WPF");
-            builder.RegisterInstance(AppContext).ExternallyOwned();
-
             return builder.Build();
         }
 

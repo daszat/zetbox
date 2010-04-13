@@ -63,7 +63,7 @@ namespace Kistl.Client.Presentables.ObjectEditor
             get
             {
                 if (_saveCommand == null)
-                    _saveCommand = Factory.CreateSpecificModel<SaveContextCommand>(DataContext);
+                    _saveCommand = ModelFactory.CreateSpecificModel<SaveContextCommand>(DataContext);
 
                 return _saveCommand;
             }
@@ -122,7 +122,7 @@ namespace Kistl.Client.Presentables.ObjectEditor
             get
             {
                 if (_verifyCommand == null)
-                    _verifyCommand = Factory.CreateSpecificModel<VerifyContextCommand>(DataContext);
+                    _verifyCommand = ModelFactory.CreateSpecificModel<VerifyContextCommand>(DataContext);
 
                 return _verifyCommand;
             }
@@ -175,9 +175,9 @@ namespace Kistl.Client.Presentables.ObjectEditor
 
         protected override void DoExecute(object data)
         {
-            var elm = Factory.CreateSpecificModel<ErrorListModel>(DataContext);
+            var elm = ModelFactory.CreateSpecificModel<ErrorListModel>(DataContext);
             elm.RefreshErrors();
-            Factory.ShowModel(elm,  true);
+            ModelFactory.ShowModel(elm,  true);
         }
     }
 
@@ -252,7 +252,7 @@ namespace Kistl.Client.Presentables.ObjectEditor
             {
                 var objectClass = data as ObjectClassModel;
                 var newObject = DataContext.Create(objectClass.GetDescribedInterfaceType());
-                var newModel = (DataObjectModel)Factory.CreateDefaultModel(DataContext, newObject);
+                var newModel = (DataObjectModel)ModelFactory.CreateDefaultModel(DataContext, newObject);
                 _parent.HistoryTouch(newModel);
                 _parent.SelectedItem = newModel;
             }

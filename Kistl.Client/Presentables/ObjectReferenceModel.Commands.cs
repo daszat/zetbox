@@ -19,7 +19,7 @@ namespace Kistl.Client.Presentables
         public void OpenReference()
         {
             if (Value != null)
-                Factory.ShowModel(Value, true);
+                ModelFactory.ShowModel(Value, true);
         }
 
         private OpenReferenceCommandModel _openReferenceCommand;
@@ -75,7 +75,7 @@ namespace Kistl.Client.Presentables
             {
                 var targetType = baseclass.GetDescribedInterfaceType();
                 var item = this.DataContext.Create(targetType);
-                var model = Factory.CreateSpecificModel<DataObjectModel>(DataContext, item);
+                var model = ModelFactory.CreateSpecificModel<DataObjectModel>(DataContext, item);
 
                 Value = model;
 
@@ -88,11 +88,11 @@ namespace Kistl.Client.Presentables
                 // TODO: filter non-instantiable classes
                 var childModels = children
                     .OrderBy(oc => oc.Name)
-                    .Select(oc => (DataObjectModel)Factory.CreateSpecificModel<ObjectClassModel>(DataContext, oc))
+                    .Select(oc => (DataObjectModel)ModelFactory.CreateSpecificModel<ObjectClassModel>(DataContext, oc))
                     .ToList();
 
-                Factory.ShowModel(
-                    Factory.CreateSpecificModel<DataObjectSelectionTaskModel>(
+                ModelFactory.ShowModel(
+                    ModelFactory.CreateSpecificModel<DataObjectSelectionTaskModel>(
                         DataContext,
                         childModels,
                         new Action<DataObjectModel>(delegate(DataObjectModel chosen)
@@ -101,7 +101,7 @@ namespace Kistl.Client.Presentables
                             {
                                 var targetType = ((ObjectClass)chosen.Object).GetDescribedInterfaceType();
                                 var item = this.DataContext.Create(targetType);
-                                var model = Factory.CreateSpecificModel<DataObjectModel>(DataContext, item);
+                                var model = ModelFactory.CreateSpecificModel<DataObjectModel>(DataContext, item);
 
                                 Value = model;
                                 if (onCreated != null)
@@ -157,7 +157,7 @@ namespace Kistl.Client.Presentables
 
         public void SelectValue()
         {
-            var selectionTask = Factory.CreateSpecificModel<DataObjectSelectionTaskModel>(
+            var selectionTask = ModelFactory.CreateSpecificModel<DataObjectSelectionTaskModel>(
                 DataContext,
                 GetDomain(),
                 new Action<DataObjectModel>(delegate(DataObjectModel chosen)
@@ -167,7 +167,7 @@ namespace Kistl.Client.Presentables
                             Value = chosen;
                         }
                     }));
-            Factory.ShowModel(selectionTask, true);
+            ModelFactory.ShowModel(selectionTask, true);
         }
 
         private SelectValueCommandModel _SelectValueCommand;

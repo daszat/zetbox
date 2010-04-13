@@ -30,7 +30,7 @@ namespace Kistl.Client.Presentables.KistlBase
 
         public void LoadValueFromFile()
         {
-            string assemblyFileName = Factory.GetSourceFileNameFromUser("Assembly files|*.dll;*.exe", "All files|*.*");
+            string assemblyFileName = ModelFactory.GetSourceFileNameFromUser("Assembly files|*.dll;*.exe", "All files|*.*");
             var assembly = System.Reflection.Assembly.ReflectionOnlyLoadFrom(assemblyFileName);
             var assemblyDescriptor = DataContext.GetQuery<Assembly>().SingleOrDefault(a => a.Name == assembly.FullName);
             if (assemblyDescriptor == null)
@@ -39,7 +39,7 @@ namespace Kistl.Client.Presentables.KistlBase
                 assemblyDescriptor.Name = assembly.FullName;
             }
 
-            this.Value = (DataObjectModel)Factory.CreateDefaultModel(DataContext, assemblyDescriptor);
+            this.Value = (DataObjectModel)ModelFactory.CreateDefaultModel(DataContext, assemblyDescriptor);
         }
     }
 }

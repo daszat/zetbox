@@ -61,8 +61,6 @@ namespace Kistl.Client.ASPNET.Toolkit
                 var builder = Kistl.API.Utils.AutoFacBuilder.CreateContainerBuilder(config, config.Client.Modules);
                 var container = builder.Build();
 
-                var testCtx = new GuiApplicationContext(config, "ASPNET");
-
                 // initialise custom actions manager
                 var cams = container.Resolve<BaseCustomActionsManager>();
 

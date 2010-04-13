@@ -30,7 +30,7 @@ namespace Kistl.Client.Presentables.Relations
         {
             get
             {
-                return (RelationEndModel)Factory.CreateDefaultModel(DataContext, _relation.A);
+                return (RelationEndModel)ModelFactory.CreateDefaultModel(DataContext, _relation.A);
             }
         }
 
@@ -38,7 +38,7 @@ namespace Kistl.Client.Presentables.Relations
         {
             get
             {
-                return (RelationEndModel)Factory.CreateDefaultModel(DataContext, _relation.B);
+                return (RelationEndModel)ModelFactory.CreateDefaultModel(DataContext, _relation.B);
             }
         }
 

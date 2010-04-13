@@ -112,7 +112,7 @@ namespace Kistl.Client.Presentables.ObjectBrowser
             var modules = DataContext.GetQuery<Module>().ToList();
             foreach (var m in modules)
             {
-                Modules.Add((ModuleModel)Factory.CreateDefaultModel(DataContext, m));
+                Modules.Add(ModelFactory.CreateModel<ModuleModel.Factory>(m).Invoke(DataContext, m));
             }
         }
 
@@ -172,12 +172,12 @@ namespace Kistl.Client.Presentables.ObjectBrowser
                 var objectClass = data as ObjectClassModel;
 
                 // responsibility to externalCtx's disposal passes to newWorkspace
-                var newWorkspace = Factory.CreateSpecificModel<ObjectEditor.WorkspaceViewModel>(externalCtx);
+                var newWorkspace = ModelFactory.CreateSpecificModel<ObjectEditor.WorkspaceViewModel>(externalCtx);
                 var newObject = externalCtx.Create(objectClass.GetDescribedInterfaceType());
-                var newModel = (DataObjectModel)Factory.CreateDefaultModel(externalCtx, newObject);
+                var newModel = (DataObjectModel)ModelFactory.CreateDefaultModel(externalCtx, newObject);
 
                 newWorkspace.SelectedItem = newModel;
-                Factory.ShowModel(newWorkspace, true);
+                ModelFactory.ShowModel(newWorkspace, true);
             }
         }
     }

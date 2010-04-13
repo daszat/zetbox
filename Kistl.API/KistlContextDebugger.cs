@@ -16,10 +16,6 @@ namespace Kistl.API
         {
             lock (_lock)
             {
-                if (_Current != null)
-                {
-                    _Current.Dispose();
-                }
                 _Current = debugger;
             }
         }

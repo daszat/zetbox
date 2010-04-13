@@ -7,12 +7,14 @@ namespace Kistl.Client.Presentables
     using System.Linq;
     using System.Text;
 
+    using Autofac;
     using Kistl.API;
     using Kistl.API.Utils;
     using Kistl.App.Base;
     using Kistl.App.Extensions;
     using Kistl.App.GUI;
     using Kistl.Client.GUI;
+    using System.Linq.Expressions;
 
     /// <summary>
     /// Abstract base class to provide basic functionality of all model factories. Toolkit-specific implementations of this class will be 
@@ -21,19 +23,15 @@ namespace Kistl.Client.Presentables
     public abstract class ModelFactory : Kistl.Client.Presentables.IModelFactory
     {
         /// <summary>
-        /// Gets this application's global context. A helper.
-        /// </summary>
-        protected IGuiApplicationContext AppContext { get; private set; }
-
-        /// <summary>
         /// Gets the Toolkit of the implementation. A constant.
         /// </summary>
-        protected abstract Toolkit Toolkit { get; }
+        public abstract Toolkit Toolkit { get; }
 
-        protected ModelFactory(IGuiApplicationContext appCtx)
+        protected readonly Autofac.ILifetimeScope Container;
+
+        protected ModelFactory(Autofac.ILifetimeScope container)
         {
-            AppContext = appCtx;
-            AppContext.UiThread.Verify();
+            this.Container = container;
             this.Managers = new Dictionary<IKistlContext, IMultipleInstancesManager>();
         }
 
@@ -54,6 +52,7 @@ namespace Kistl.Client.Presentables
             return (TModel)CreateModel(requestedType, ctx, data);
         }
 
+
         /// <summary>
         /// Creates a default model for the object <paramref name="obj"/>
         /// </summary>
@@ -63,12 +62,94 @@ namespace Kistl.Client.Presentables
         /// <returns>the configured model</returns>
         public ViewModel CreateDefaultModel(IKistlContext ctx, IDataObject obj, params object[] data)
         {
-            Type t = obj.GetObjectClass(AppContext.MetaContext)
+            Type t = obj.GetObjectClass(GuiApplicationContext.Current.MetaContext)
                 .DefaultViewModelDescriptor
                 .ViewModelRef
                 .AsType(true);
             return CreateModel(t, ctx, new object[] { obj }.Concat(data).ToArray());
         }
+
+        //----------------------------------------------------------------------------------------------
+        public TModelFactory CreateModel<TModelFactory>() where TModelFactory : class
+        {
+            return CreateModel<TModelFactory>(typeof(TModelFactory));
+        }
+
+        public TModelFactory CreateModel<TModelFactory>(IDataObject obj) where TModelFactory : class
+        {
+            if (obj == null) throw new ArgumentNullException("obj");
+
+            var t = obj.GetObjectClass(GuiApplicationContext.Current.MetaContext)
+                .DefaultViewModelDescriptor
+                .ViewModelRef
+                .AsType(true);
+            return CreateModel<TModelFactory>(ResolveFactory(t));
+        }
+
+        public TModelFactory CreateModel<TModelFactory>(Property p) where TModelFactory : class
+        {
+            if (p == null) { throw new ArgumentNullException("p"); }
+
+            if (p.ValueModelDescriptor != null)
+            {
+                var t = p.ValueModelDescriptor
+                    .ViewModelRef
+                    .AsType(true);
+                return CreateModel<TModelFactory>(ResolveFactory(t));
+            }
+            else
+            {
+                throw new NotImplementedException(String.Format("==>> No model for property: '{0}' of Type '{1}'", p, p.GetType()));
+            }
+        }
+
+        public TModelFactory CreateModel<TModelFactory>(Type t) where TModelFactory : class
+        {
+            if (t == null) throw new ArgumentNullException("t");
+            try
+            {
+                var factory = Container.Resolve(t);
+                if (t == typeof(TModelFactory)) return (TModelFactory)factory;
+                // Wrap delegate
+                Delegate factoryDelegate = (Delegate)factory;
+
+                var parameter = factoryDelegate.Method.GetParameters().Skip(1).Select(p => Expression.Parameter(p.ParameterType, p.Name)).ToArray();
+                var lambda_body = Expression.Invoke(Expression.Constant(factoryDelegate), parameter);
+                var l = Expression.Lambda(typeof(TModelFactory), lambda_body, parameter);
+                return l.Compile() as TModelFactory;
+            }
+            catch (Exception ex)
+            {
+                Logging.Log.Error(string.Format("Unable to create type {0}", t.FullName), ex);
+                throw;
+            }
+        }
+
+        private Type ResolveFactory(Type t)
+        {
+            if (typeof(Delegate).IsAssignableFrom(t)) return t;
+            Type f = null;
+            while (t != null)
+            {
+                f = t.GetNestedType("Factory");
+                if (f == null)
+                {
+                    t = t.BaseType;
+                }
+                else
+                {
+                    if (t.IsGenericType)
+                    {
+                        f = f.MakeGenericType(t.GetGenericArguments());
+                    }
+                    break;
+                }
+            }
+            if (f == null) throw new InvalidOperationException(string.Format("The given Type {0} does not contain a Factory", t.FullName));
+            return f;
+        }
+        //----------------------------------------------------------------------------------------------
+
 
         /// <summary>
         /// Creates a ViewModel to display/edit the value of the property p of the object obj.
@@ -100,15 +181,14 @@ namespace Kistl.Client.Presentables
 
             // by convention, all presentable models take the IGuiApplicationContext
             // and a IKistlContext as first parameters
-            object[] parameters = new object[] { AppContext, ctx }.Concat(data).ToArray();
-
-            ViewModel result = _cache.LookupModel(requestedType, parameters);
+            object[] parameters = new object[] { ctx }.Concat(data).ToArray();
+            ViewModel result = _cache.LookupModel(requestedType, data);
 
             if (result == null)
             {
                 try
                 {
-                    result = (ViewModel)Activator.CreateInstance(requestedType, parameters);
+                    result = (ViewModel)Container.Resolve(requestedType, parameters.Select((i, idx) => new Autofac.PositionalParameter(idx + 1, i)).Cast<Autofac.Core.Parameter>());
                 }
                 catch (Exception ex)
                 {

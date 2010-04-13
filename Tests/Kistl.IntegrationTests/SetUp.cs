@@ -44,7 +44,7 @@ namespace Kistl.IntegrationTests
                     AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
                     var builder = Kistl.API.Utils.AutoFacBuilder.CreateContainerBuilder(config, config.Client.Modules);
                     var container = builder.Build();
-                    var testCtx = new GuiApplicationContext(config, "WPF");
+                    // var testCtx = new GuiApplicationContext(config, "WPF");
 
                     // initialise custom actions manager
                     var cams = container.Resolve<BaseCustomActionsManager>(); 

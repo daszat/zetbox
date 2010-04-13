@@ -13,8 +13,9 @@ namespace Kistl.Client.Presentables
     public class KistlDebuggerAsModel 
         : ViewModel, IKistlContextDebugger
     {
+        public new delegate KistlDebuggerAsModel Factory(IKistlContext dataCtx);
 
-        public KistlDebuggerAsModel(IGuiApplicationContext appCtx, IDebuggingKistlContext dataCtx)
+        public KistlDebuggerAsModel(IGuiApplicationContext appCtx, IKistlContext dataCtx)
             : base(appCtx, dataCtx)
         {
             KistlContextDebuggerSingleton.SetDebugger(this);
@@ -62,7 +63,7 @@ namespace Kistl.Client.Presentables
 
         private KistlContextModel GetModel(IKistlContext ctx)
         {
-            return Factory.CreateSpecificModel<KistlContextModel>(ctx);
+            return ModelFactory.CreateSpecificModel<KistlContextModel>(ctx);
         }
 
         void IKistlContextDebugger.Created(IKistlContext ctx)
@@ -82,57 +83,7 @@ namespace Kistl.Client.Presentables
             var ctxMdl = GetModel(ctx);
             ctxMdl.OnContextChanged();
         }
-
         #endregion
-
-        #region IDisposable Members
-
-        // as suggested on http://msdn.microsoft.com/en-us/system.idisposable.aspx
-        // adapted for easier usage when inheriting, by naming the functions appropriately
-        private bool disposed = false;
-        private void Dispose(bool disposing)
-        {
-            if (!this.disposed)
-            {
-                if (disposing)
-                {
-                    // dispose managed resources
-                    // must not be done when running from the finalizer
-                    DisposeManagedResources();
-                }
-                // free native resources
-                DisposeNativeResources();
-
-                this.disposed = true;
-            }
-        }
-
-        /// <summary>
-        /// Override this to be called when Managed Resources should be disposed
-        /// </summary>
-        protected virtual void DisposeManagedResources()
-        {
-            if (_activeCtxCache != null)
-                _activeCtxCache.Clear();
-        }
-        /// <summary>
-        /// Override this to be called when Native Resources should be disposed
-        /// </summary>
-        protected virtual void DisposeNativeResources() { }
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        ~KistlDebuggerAsModel()
-        {
-            Dispose(false);
-        }
-
-        #endregion
-
     }
 
     public class KistlContextModel

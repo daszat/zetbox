@@ -24,6 +24,8 @@ namespace Kistl.Client.Presentables
     /// See http://blogs.msdn.com/dancre/archive/2006/10/11/datamodel-view-viewmodel-pattern-series.aspx
     public abstract class ViewModel : INotifyPropertyChanged
     {
+        public delegate ViewModel Factory(IKistlContext dataCtx);
+
         /// <summary>
         /// This application's global context
         /// </summary>
@@ -46,7 +48,7 @@ namespace Kistl.Client.Presentables
         /// <summary>
         /// The factory from where new models should be created
         /// </summary>
-        public IModelFactory Factory { get { return AppContext.Factory; } }
+        public IModelFactory ModelFactory { get { return AppContext.Factory; } }
 
         /// <summary>
         /// A <see cref="IKistlContext"/> to access the current user's data

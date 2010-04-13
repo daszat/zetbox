@@ -37,13 +37,13 @@ namespace Kistl.Client.ASPNET.Toolkit
         : ModelFactory
     {
 
-        public AspnetModelFactory(IGuiApplicationContext appCtx)
-            : base(appCtx)
+        public AspnetModelFactory(Autofac.ILifetimeScope container)
+            : base(container)
         {
 
         }
 
-        protected override Toolkit Toolkit
+        public override Toolkit Toolkit
         {
             get { return Toolkit.ASPNET; }
         }

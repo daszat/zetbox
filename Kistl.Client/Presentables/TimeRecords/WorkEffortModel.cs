@@ -75,7 +75,7 @@ namespace Kistl.Client.Presentables.TimeRecords
         {
             get
             {
-                return (DataObjectModel)this.Factory.CreateDefaultModel(this.DataContext, this._entry.Mitarbeiter);
+                return (DataObjectModel)this.ModelFactory.CreateDefaultModel(this.DataContext, this._entry.Mitarbeiter);
             }
             set
             {

@@ -23,6 +23,8 @@ namespace Kistl.Client.Presentables
     public class DataObjectModel
         : ViewModel, IDataErrorInfo
     {
+        public new delegate DataObjectModel Factory(IKistlContext dataCtx, IDataObject obj);
+
         public DataObjectModel(
             IGuiApplicationContext appCtx, IKistlContext dataCtx,
             IDataObject obj)
@@ -59,7 +61,7 @@ namespace Kistl.Client.Presentables
                 {
                     _propertyModels = new ReadOnlyProjectedList<Property, ViewModel>(
                         FetchPropertyList().ToList(),
-                        property => Factory.CreatePropertyValueModel(DataContext, Object, property),
+                        property => ModelFactory.CreatePropertyValueModel(DataContext, Object, property),
                         null);
                 }
                 return _propertyModels;
@@ -72,7 +74,7 @@ namespace Kistl.Client.Presentables
             {
                 if (_propertyModelsByName == null)
                 {
-                    _propertyModelsByName = new LookupDictionary<string, Property, ViewModel>(FetchPropertyList().ToList(), prop => prop.Name, prop => Factory.CreatePropertyValueModel(DataContext, Object, prop));
+                    _propertyModelsByName = new LookupDictionary<string, Property, ViewModel>(FetchPropertyList().ToList(), prop => prop.Name, prop => ModelFactory.CreatePropertyValueModel(DataContext, Object, prop));
                 }
                 return _propertyModelsByName;
             }
@@ -133,7 +135,7 @@ namespace Kistl.Client.Presentables
                                 DataContext,
                                 group.Key,
                                 group.Select(p =>
-                                     Factory.CreatePropertyValueModel(DataContext, _object, p))))
+                                     ModelFactory.CreateModel<UntypedPropertyModel.Factory>(p).Invoke(DataContext, _object, p)).Cast<ViewModel>()))
                             .ToList());
 
                 }
@@ -307,7 +309,7 @@ namespace Kistl.Client.Presentables
             foreach (var action in methods)
             {
                 //Debug.Assert(action.Parameter.Count == 0);
-                _actionsCache.Add(Factory.CreateSpecificModel<ActionModel>(DataContext, _object, action));
+                _actionsCache.Add(ModelFactory.CreateSpecificModel<ActionModel>(DataContext, _object, action));
             }
         }
 
@@ -319,27 +321,27 @@ namespace Kistl.Client.Presentables
 
             if (retParam is BoolParameter && !retParam.IsList)
             {
-                return (Factory.CreateSpecificModel<NullableResultModel<Boolean>>(DataContext, _object, pm));
+                return (ModelFactory.CreateSpecificModel<NullableResultModel<Boolean>>(DataContext, _object, pm));
             }
             else if (retParam is DateTimeParameter && !retParam.IsList)
             {
-                return (Factory.CreateSpecificModel<NullableResultModel<DateTime>>(DataContext, _object, pm));
+                return (ModelFactory.CreateSpecificModel<NullableResultModel<DateTime>>(DataContext, _object, pm));
             }
             else if (retParam is DoubleParameter && !retParam.IsList)
             {
-                return (Factory.CreateSpecificModel<NullableResultModel<Double>>(DataContext, _object, pm));
+                return (ModelFactory.CreateSpecificModel<NullableResultModel<Double>>(DataContext, _object, pm));
             }
             else if (retParam is IntParameter && !retParam.IsList)
             {
-                return (Factory.CreateSpecificModel<NullableResultModel<int>>(DataContext, _object, pm));
+                return (ModelFactory.CreateSpecificModel<NullableResultModel<int>>(DataContext, _object, pm));
             }
             else if (retParam is StringParameter && !retParam.IsList)
             {
-                return (Factory.CreateSpecificModel<ObjectResultModel<string>>(DataContext, _object, pm));
+                return (ModelFactory.CreateSpecificModel<ObjectResultModel<string>>(DataContext, _object, pm));
             }
             else if (retParam is ObjectParameter && !retParam.IsList)
             {
-                return (Factory.CreateSpecificModel<ObjectResultModel<IDataObject>>(DataContext, _object, pm));
+                return (ModelFactory.CreateSpecificModel<ObjectResultModel<IDataObject>>(DataContext, _object, pm));
             }
             else
             {

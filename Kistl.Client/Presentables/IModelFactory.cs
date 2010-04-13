@@ -1,6 +1,7 @@
 namespace Kistl.Client.Presentables
 {
     using System;
+    using Kistl.App.GUI;
 
     public interface IModelFactory
     {
@@ -14,5 +15,12 @@ namespace Kistl.Client.Presentables
         string GetSourceFileNameFromUser(params string[] filter);
         void ShowModel(ViewModel mdl, bool activate);
         void ShowModel(ViewModel mdl, Kistl.App.GUI.ControlKind kind, bool activate);
+        Toolkit Toolkit { get; }
+
+
+        TModelFactory CreateModel<TModelFactory>() where TModelFactory : class;
+        TModelFactory CreateModel<TModelFactory>(Kistl.API.IDataObject obj) where TModelFactory : class;
+        TModelFactory CreateModel<TModelFactory>(Kistl.App.Base.Property p) where TModelFactory : class;
+        TModelFactory CreateModel<TModelFactory>(System.Type t) where TModelFactory : class;
     }
 }

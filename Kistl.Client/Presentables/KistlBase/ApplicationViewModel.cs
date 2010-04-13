@@ -73,8 +73,8 @@ namespace Kistl.Client.Presentables.KistlBase
                 var appMdl = data as ApplicationViewModel;
 
                 // responsibility to externalCtx's disposal passes to newWorkspace
-                var newWorkspace = Factory.CreateModel(appMdl.WindowModelType, externalCtx, new object[] { });
-                Factory.ShowModel(newWorkspace, true);
+                var newWorkspace = ModelFactory.CreateModel(appMdl.WindowModelType, externalCtx, new object[] { });
+                ModelFactory.ShowModel(newWorkspace, true);
             }
         }
     }

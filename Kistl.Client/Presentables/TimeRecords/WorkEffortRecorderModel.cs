@@ -80,7 +80,7 @@ namespace Kistl.Client.Presentables.TimeRecords
             {
                 if (_availableUsers == null)
                 {
-                    _availableUsers = new ReadOnlyCollection<DataObjectModel>(DataContext.GetQuery<Mitarbeiter>().Select(o => (DataObjectModel)Factory.CreateDefaultModel(DataContext, o)).ToList());
+                    _availableUsers = new ReadOnlyCollection<DataObjectModel>(DataContext.GetQuery<Mitarbeiter>().Select(o => (DataObjectModel)ModelFactory.CreateDefaultModel(DataContext, o)).ToList());
                 }
                 return _availableUsers;
             }
@@ -122,7 +122,7 @@ namespace Kistl.Client.Presentables.TimeRecords
                         nowPresent.From = DateTime.Now;
                         nowPresent.Mitarbeiter = (Mitarbeiter)CurrentUser.Object;
                         InitialisePresenceRecords();
-                        _presenceRecords.Add((PresenceRecordModel)Factory.CreateDefaultModel(DataContext, nowPresent));
+                        _presenceRecords.Add((PresenceRecordModel)ModelFactory.CreateDefaultModel(DataContext, nowPresent));
                         DataContext.SubmitChanges();
                     }
                     else
@@ -195,7 +195,7 @@ namespace Kistl.Client.Presentables.TimeRecords
             {
                 var effortModels = DataContext.GetQuery<WorkEffort>()
                     .Where(o => o.Mitarbeiter.ID == CurrentUser.ID && (o.From > DateTime.Today || !o.Thru.HasValue || (o.Thru.HasValue && o.Thru.Value > DateTime.Today)))
-                    .Select(o => (WorkEffortModel)Factory.CreateDefaultModel(DataContext, o));
+                    .Select(o => (WorkEffortModel)ModelFactory.CreateDefaultModel(DataContext, o));
 
                 foreach (var wem in effortModels)
                 {
@@ -305,7 +305,7 @@ namespace Kistl.Client.Presentables.TimeRecords
 
                 foreach (var pr in recordModels)
                 {
-                    _presenceRecords.Add((PresenceRecordModel)Factory.CreateDefaultModel(DataContext, pr));
+                    _presenceRecords.Add((PresenceRecordModel)ModelFactory.CreateDefaultModel(DataContext, pr));
                 }
             }
         }
@@ -328,7 +328,7 @@ namespace Kistl.Client.Presentables.TimeRecords
                 {
                     // set flag before starting the timer to avoid any potential races
                     _totalWorkTimeTodayTimerStarted = true;
-                    this.Factory.CreateTimer(TimeSpan.FromMilliseconds(300), () => OnPropertyChanged("TotalWorkTimeToday"));
+                    this.ModelFactory.CreateTimer(TimeSpan.FromMilliseconds(300), () => OnPropertyChanged("TotalWorkTimeToday"));
                 }
                 return Efforts
                     .Where(e => e.From.Date == DateTime.Now.Date)
@@ -350,7 +350,7 @@ namespace Kistl.Client.Presentables.TimeRecords
                 {
                     // set flag before starting the timer to avoid any potential races
                     _totalPresenceTimeTodayTimerStarted = true;
-                    this.Factory.CreateTimer(TimeSpan.FromMilliseconds(300), () => OnPropertyChanged("TotalPresenceTimeToday"));
+                    this.ModelFactory.CreateTimer(TimeSpan.FromMilliseconds(300), () => OnPropertyChanged("TotalPresenceTimeToday"));
                 }
                 return PresenceRecords
                     .Select(mdl => mdl.Entry)

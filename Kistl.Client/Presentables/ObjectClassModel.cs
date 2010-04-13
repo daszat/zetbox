@@ -37,7 +37,7 @@ namespace Kistl.Client.Presentables
         {
             foreach (var obj in DataContext.GetQuery(_class.GetDescribedInterfaceType()).ToList().OrderBy(obj => obj.ToString()))
             {
-                Instances.Add((DataObjectModel)Factory.CreateDefaultModel(DataContext, obj));
+                Instances.Add((DataObjectModel)ModelFactory.CreateDefaultModel(DataContext, obj));
             }
         }
 

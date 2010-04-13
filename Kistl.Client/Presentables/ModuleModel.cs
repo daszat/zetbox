@@ -12,6 +12,8 @@ namespace Kistl.Client.Presentables
 {
     public class ModuleModel : DataObjectModel
     {
+        public new delegate ModuleModel Factory(IKistlContext dataCtx, Module mdl);
+
         public ModuleModel(
             IGuiApplicationContext appCtx, IKistlContext dataCtx,
             Module mdl)
@@ -48,7 +50,7 @@ namespace Kistl.Client.Presentables
                 .OrderBy(dt => dt.Name);
             foreach (var dt in datatypes)
             {
-                ObjectClasses.Add((DataObjectModel)Factory.CreateDefaultModel(DataContext, dt));
+                ObjectClasses.Add((DataObjectModel)ModelFactory.CreateDefaultModel(DataContext, dt));
             }
         }
 

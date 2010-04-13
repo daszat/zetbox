@@ -29,7 +29,6 @@ namespace Kistl.Client.Forms
 
             var builder = Kistl.API.Utils.AutoFacBuilder.CreateContainerBuilder(config, config.Client.Modules);
             container = builder.Build();
-            AppContext = new GuiApplicationContext(config, "TEST");
 
             var cams = container.Resolve<BaseCustomActionsManager>();
 

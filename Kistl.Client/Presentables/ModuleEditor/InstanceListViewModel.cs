@@ -40,7 +40,7 @@ namespace Kistl.Client.Presentables.ModuleEditor
         {
             foreach (var obj in GetQuery().ToList().OrderBy(obj => obj.ToString()))
             {
-                _instances.Add((DataObjectModel)Factory.CreateDefaultModel(DataContext, obj));
+                _instances.Add((DataObjectModel)ModelFactory.CreateDefaultModel(DataContext, obj));
             }
         }
 

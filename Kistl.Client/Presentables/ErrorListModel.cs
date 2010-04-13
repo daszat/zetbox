@@ -58,7 +58,7 @@ namespace Kistl.Client.Presentables
                 .Where(tmp => !String.IsNullOrEmpty(tmp.err)))
             {
                 _errors.Add(new ErrorDescriptor(
-                    (DataObjectModel)Factory.CreateDefaultModel(DataContext, error.obj),
+                    (DataObjectModel)ModelFactory.CreateDefaultModel(DataContext, error.obj),
                     new List<string>() { error.err }));
             }
         }
