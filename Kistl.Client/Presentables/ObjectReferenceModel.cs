@@ -113,7 +113,7 @@ namespace Kistl.Client.Presentables
         protected override void UpdatePropertyValue()
         {
             IDataObject newValue = Object.GetPropertyValue<IDataObject>(Property.Name);
-            var newModel = newValue == null ? null : (DataObjectModel)ModelFactory.CreateDefaultModel(DataContext, newValue);
+            var newModel = newValue == null ? null : ModelFactory.CreateViewModel<DataObjectModel.Factory>(newValue).Invoke(DataContext, newValue);
             if (Value != newModel)
             {
                 Value = newModel;
@@ -129,7 +129,7 @@ namespace Kistl.Client.Presentables
                 .ToList() // TODO: remove this
                 .OrderBy(obj => obj.ToString()).ToList())
             {
-                result.Add((DataObjectModel)ModelFactory.CreateDefaultModel(DataContext, obj));
+                result.Add(ModelFactory.CreateViewModel<DataObjectModel.Factory>(obj).Invoke(DataContext, obj));
             }
             return result;
         }

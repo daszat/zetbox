@@ -88,7 +88,7 @@ namespace Kistl.Client.Presentables.TimeRecords
             protected override void DoExecute(object data)
             {
                 WorkEffort effort = DataContext.Create<WorkEffort>();
-                WorkEffortModel effortModel = (WorkEffortModel)AppContext.Factory.CreateDefaultModel(DataContext, effort);
+                WorkEffortModel effortModel = AppContext.Factory.CreateViewModel<WorkEffortModel.Factory>(effort).Invoke(DataContext, effort);
                 effortModel.Mitarbeiter = _parent.CurrentUser;
                 effortModel.From = DateTime.Now;
                 _parent.InitialiseEfforts();

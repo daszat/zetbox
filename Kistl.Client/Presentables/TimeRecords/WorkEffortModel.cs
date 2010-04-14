@@ -16,6 +16,8 @@ namespace Kistl.Client.Presentables.TimeRecords
     public class WorkEffortModel
         : DataObjectModel
     {
+        public new delegate WorkEffortModel Factory(IKistlContext dataCtx, WorkEffort obj);
+
         /// <summary>The presented <see cref="WorkEffort"/></summary>
         private WorkEffort _entry;
 
@@ -75,7 +77,7 @@ namespace Kistl.Client.Presentables.TimeRecords
         {
             get
             {
-                return (DataObjectModel)this.ModelFactory.CreateDefaultModel(this.DataContext, this._entry.Mitarbeiter);
+                return this.ModelFactory.CreateViewModel<DataObjectModel.Factory>(this._entry.Mitarbeiter).Invoke(this.DataContext, this._entry.Mitarbeiter);
             }
             set
             {

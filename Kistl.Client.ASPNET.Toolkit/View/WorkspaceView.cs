@@ -120,7 +120,7 @@ namespace Kistl.Client.ASPNET.Toolkit.View
                         InterfaceType ifType = new InterfaceType(Type.GetType(type + ", " + ApplicationContext.Current.InterfaceAssembly));
                         IDataObject obj = (IDataObject)KistlContextManagerModule.KistlContext.Find(ifType, id);
 
-                        var mdl = GuiApplicationContext.Current.Factory.CreateDefaultModel(KistlContextManagerModule.KistlContext, obj) as DataObjectModel;
+                        var mdl = GuiApplicationContext.Current.Factory.CreateViewModel<DataObjectModel.Factory>(obj).Invoke(KistlContextManagerModule.KistlContext, obj);
                         if (mdl == null) throw new InvalidOperationException(string.Format("Unable to create model for {0}({1})", type, id));
                         _Objects.Add(mdl);
                     }

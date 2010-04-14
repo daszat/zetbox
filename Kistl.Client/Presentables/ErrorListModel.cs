@@ -55,12 +55,12 @@ namespace Kistl.Client.Presentables
             _errors.Clear();
             foreach (var error in DataContext.AttachedObjects
                 .OfType<IDataObject>()
-                .Where(o => o.ObjectState == DataObjectState.Modified || o.ObjectState == DataObjectState.New) 
+                .Where(o => o.ObjectState == DataObjectState.Modified || o.ObjectState == DataObjectState.New)
                 .Select(o => new { obj = o, err = o.Error })
                 .Where(tmp => !String.IsNullOrEmpty(tmp.err)))
             {
                 _errors.Add(new ErrorDescriptor(
-                    (DataObjectModel)ModelFactory.CreateDefaultModel(DataContext, error.obj),
+                    ModelFactory.CreateViewModel<DataObjectModel.Factory>(error.obj).Invoke(DataContext, error.obj),
                     new List<string>() { error.err }));
             }
         }

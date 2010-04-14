@@ -82,7 +82,8 @@ namespace Kistl.Client.WPF.View.ModuleEditor
             var factory = App.Current.AppContext.Factory;
             var newCtx = KistlContext.GetContext();
             var newWorkspace = factory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(newCtx);
-            newWorkspace.ShowForeignModel((DataObjectModel)factory.CreateDefaultModel(newCtx, newCtx.Create(ViewModel.InterfaceType)));
+            var newObj = newCtx.Create(ViewModel.InterfaceType);
+            newWorkspace.ShowForeignModel(factory.CreateViewModel<DataObjectModel.Factory>(newObj).Invoke(newCtx, newObj));
             factory.ShowModel(newWorkspace, true);
         }
 

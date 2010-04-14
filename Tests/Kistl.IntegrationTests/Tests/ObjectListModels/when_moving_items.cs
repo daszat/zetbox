@@ -46,7 +46,7 @@ namespace Kistl.IntegrationTests.ObjectListModels
 
                 Assert.That(objectClass.Properties.Select(p => p.GetPrivateFieldValue<int>("_Properties_pos")), Is.Ordered);
                 var factory = new WpfModelFactory(null);
-                var classModel = (DataObjectModel)factory.CreateDefaultModel(ctx, objectClass);
+                var classModel = factory.CreateViewModel<DataObjectModel.Factory>(objectClass).Invoke(ctx, objectClass);
                 var listModel = (ObjectListModel)classModel.PropertyModelsByName["Properties"];
                 propList = objectClass.Properties.ToArray();
                 var mdlList = listModel.Value.ToArray();

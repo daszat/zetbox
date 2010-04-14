@@ -139,7 +139,7 @@ namespace Kistl.Client.Presentables.ObjectBrowser
 
             var other = dataObject.Object;
             var here = DataContext.Find(other.GetInterfaceType(), other.ID);
-            SelectedItem = AppContext.Factory.CreateDefaultModel(DataContext, here);
+            SelectedItem = AppContext.Factory.CreateViewModel<DataObjectModel.Factory>(here).Invoke(DataContext, here);
         }
 
         public override string Name
@@ -148,7 +148,7 @@ namespace Kistl.Client.Presentables.ObjectBrowser
         }
     }
 
-    
+
 
     /// <summary>
     /// Creates a new instance of an <see cref="ObjectClass"/> and opens it in a new WorkspaceView.
@@ -176,7 +176,7 @@ namespace Kistl.Client.Presentables.ObjectBrowser
                 // responsibility to externalCtx's disposal passes to newWorkspace
                 var newWorkspace = ModelFactory.CreateViewModel<ObjectEditor.WorkspaceViewModel.Factory>().Invoke(externalCtx);
                 var newObject = externalCtx.Create(objectClass.GetDescribedInterfaceType());
-                var newModel = (DataObjectModel)ModelFactory.CreateDefaultModel(externalCtx, newObject);
+                var newModel = ModelFactory.CreateViewModel<DataObjectModel.Factory>(newObject).Invoke(externalCtx, newObject);
 
                 newWorkspace.SelectedItem = newModel;
                 ModelFactory.ShowModel(newWorkspace, true);

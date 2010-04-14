@@ -39,7 +39,7 @@ namespace Kistl.Client.Presentables
         {
             foreach (var obj in DataContext.GetQuery(_class.GetDescribedInterfaceType()).ToList().OrderBy(obj => obj.ToString()))
             {
-                Instances.Add((DataObjectModel)ModelFactory.CreateDefaultModel(DataContext, obj));
+                Instances.Add(ModelFactory.CreateViewModel<DataObjectModel.Factory>(obj).Invoke(DataContext, obj));
             }
         }
 

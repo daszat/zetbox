@@ -5,7 +5,6 @@ namespace Kistl.Client.Presentables
 
     public interface IModelFactory
     {
-        ViewModel CreateDefaultModel(Kistl.API.IKistlContext ctx, Kistl.API.IDataObject obj, params object[] data);
         object CreateDefaultView(ViewModel mdl);
         ViewModel CreateModel(Type requestedType, Kistl.API.IKistlContext ctx, object[] data);
         object CreateSpecificView(ViewModel mdl, Kistl.App.GUI.ControlKind kind);

@@ -50,7 +50,7 @@ namespace Kistl.Client.Presentables
                 .OrderBy(dt => dt.Name);
             foreach (var dt in datatypes)
             {
-                ObjectClasses.Add((DataObjectModel)ModelFactory.CreateDefaultModel(DataContext, dt));
+                ObjectClasses.Add(ModelFactory.CreateViewModel<DataObjectModel.Factory>(dt).Invoke(DataContext, dt));
             }
         }
 

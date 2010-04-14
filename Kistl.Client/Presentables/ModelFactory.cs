@@ -39,23 +39,6 @@ namespace Kistl.Client.Presentables
 
         private ModelCache _cache = new ModelCache();
 
-
-        /// <summary>
-        /// Creates a default model for the object <paramref name="obj"/>
-        /// </summary>
-        /// <param name="ctx">the data context to use</param>
-        /// <param name="obj">the object to model</param>
-        /// <param name="data">the arguments to pass to the model's constructor</param>
-        /// <returns>the configured model</returns>
-        public ViewModel CreateDefaultModel(IKistlContext ctx, IDataObject obj, params object[] data)
-        {
-            Type t = obj.GetObjectClass(GuiApplicationContext.Current.MetaContext)
-                .DefaultViewModelDescriptor
-                .ViewModelRef
-                .AsType(true);
-            return CreateModel(t, ctx, new object[] { obj }.Concat(data).ToArray());
-        }
-
         //----------------------------------------------------------------------------------------------
         public TModelFactory CreateViewModel<TModelFactory>() where TModelFactory : class
         {

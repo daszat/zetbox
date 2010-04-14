@@ -95,7 +95,7 @@ namespace Kistl.Client.WPF.View.ObjectBrowser
                 var newCtx = KistlContext.GetContext();
                 var objClass = newCtx.Find<DataType>(dtm.TypeId);
                 var newWorkspace = factory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(newCtx);
-                newWorkspace.ShowForeignModel((DataObjectModel)factory.CreateDefaultModel(newCtx, objClass));
+                newWorkspace.ShowForeignModel(factory.CreateViewModel<DataObjectModel.Factory>(objClass).Invoke(newCtx, objClass));
                 factory.ShowModel(newWorkspace, true);
             }
         }
@@ -108,7 +108,8 @@ namespace Kistl.Client.WPF.View.ObjectBrowser
             {
                 var newCtx = KistlContext.GetContext();
                 var newWorkspace = factory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(newCtx);
-                newWorkspace.ShowForeignModel((DataObjectModel)factory.CreateDefaultModel(newCtx, newCtx.Create(dtm.InterfaceType)));
+                var newObj = newCtx.Create(dtm.InterfaceType);
+                newWorkspace.ShowForeignModel(factory.CreateViewModel<DataObjectModel.Factory>(newObj).Invoke(newCtx, newObj));
                 factory.ShowModel(newWorkspace, true);
             }
         }

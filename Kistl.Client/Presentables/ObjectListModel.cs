@@ -96,7 +96,7 @@ namespace Kistl.Client.Presentables
             {
                 _valueCache = new ReadOnlyObservableProjectedList<IDataObject, DataObjectModel>(
                     Object.GetPropertyValue<INotifyCollectionChanged>(Property.Name),
-                    obj => (DataObjectModel)ModelFactory.CreateDefaultModel(DataContext, obj),
+                    obj => ModelFactory.CreateViewModel<DataObjectModel.Factory>(obj).Invoke(DataContext, obj),
                     mdl => mdl.Object);
             }
         }
@@ -289,7 +289,7 @@ namespace Kistl.Client.Presentables
             var instances = DataContext.GetQuery(baseclass).ToList(); // TODO: remove superfluous ToList
             var instanceModels = instances
                 .OrderBy(i => i.ToString())
-                .Select(i => (DataObjectModel)ModelFactory.CreateDefaultModel(DataContext, i))
+                .Select(i => ModelFactory.CreateViewModel<DataObjectModel.Factory>(i).Invoke(DataContext, i))
                 .ToList();
 
             ModelFactory.ShowModel(
@@ -396,7 +396,7 @@ namespace Kistl.Client.Presentables
                     prop.PropertyChanged += AnyPropertyChangedHandler;
                 }
             }
-         
+
             if (e.OldItems != null)
             {
                 foreach (var prop in e.OldItems.OfType<INotifyPropertyChanged>())

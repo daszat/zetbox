@@ -39,7 +39,7 @@ namespace Kistl.Client.Presentables.KistlBase
                 assemblyDescriptor.Name = assembly.FullName;
             }
 
-            this.Value = (DataObjectModel)ModelFactory.CreateDefaultModel(DataContext, assemblyDescriptor);
+            this.Value = ModelFactory.CreateViewModel<DataObjectModel.Factory>(assemblyDescriptor).Invoke(DataContext, assemblyDescriptor);
         }
     }
 }

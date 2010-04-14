@@ -11,6 +11,8 @@ namespace Kistl.Client.Presentables.Relations
     public class RelationEndModel
         : DataObjectModel
     {
+        public new delegate RelationEndModel Factory(IKistlContext dataCtx, RelationEnd relEnd);
+
         private RelationEnd _relationEnd;
 
         public RelationEndModel(

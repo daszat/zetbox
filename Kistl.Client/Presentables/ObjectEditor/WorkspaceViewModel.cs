@@ -147,7 +147,7 @@ namespace Kistl.Client.Presentables.ObjectEditor
 
             var other = dataObject.Object;
             var here = DataContext.Find(other.GetInterfaceType(), other.ID);
-            SelectedItem = AppContext.Factory.CreateDefaultModel(DataContext, here);
+            SelectedItem = AppContext.Factory.CreateViewModel<DataObjectModel.Factory>(here).Invoke(DataContext, here);
             HistoryTouch(SelectedItem);
         }
 
@@ -191,7 +191,7 @@ namespace Kistl.Client.Presentables.ObjectEditor
         {
             var elm = ModelFactory.CreateViewModel<ErrorListModel.Factory>().Invoke(DataContext);
             elm.RefreshErrors();
-            ModelFactory.ShowModel(elm,  true);
+            ModelFactory.ShowModel(elm, true);
         }
     }
 
@@ -268,7 +268,7 @@ namespace Kistl.Client.Presentables.ObjectEditor
             {
                 var objectClass = data as ObjectClassModel;
                 var newObject = DataContext.Create(objectClass.GetDescribedInterfaceType());
-                var newModel = (DataObjectModel)ModelFactory.CreateDefaultModel(DataContext, newObject);
+                var newModel = ModelFactory.CreateViewModel<DataObjectModel.Factory>(newObject).Invoke(DataContext, newObject);
                 _parent.HistoryTouch(newModel);
                 _parent.SelectedItem = newModel;
             }
