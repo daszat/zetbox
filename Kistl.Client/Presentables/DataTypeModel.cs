@@ -18,6 +18,8 @@ namespace Kistl.Client.Presentables
     public class DataTypeModel
         : DataObjectModel
     {
+        public new delegate DataTypeModel Factory(IKistlContext dataCtx, DataType type);
+
         /// <summary>
         /// Initializes a new instance of the DataTypeModel class.
         /// </summary>

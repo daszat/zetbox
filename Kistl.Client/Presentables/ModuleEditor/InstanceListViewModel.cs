@@ -12,6 +12,8 @@ namespace Kistl.Client.Presentables.ModuleEditor
 {
     public abstract class InstanceListViewModel : ViewModel
     {
+        public new delegate InstanceListViewModel Factory(IKistlContext dataCtx, Module module);
+
         public InstanceListViewModel(
             IGuiApplicationContext appCtx,
             IKistlContext dataCtx,

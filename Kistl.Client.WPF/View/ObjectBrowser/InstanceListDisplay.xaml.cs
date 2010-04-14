@@ -60,7 +60,7 @@ namespace Kistl.Client.WPF.View.ObjectBrowser
             }
 
             var factory = App.Current.AppContext.Factory;
-            var newWorkspace = factory.CreateSpecificModel<ObjectEditorWorkspace>(KistlContext.GetContext());
+            var newWorkspace = factory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(KistlContext.GetContext());
             newWorkspace.ShowForeignModel(dataObject);
             factory.ShowModel(newWorkspace, true);
             e.Handled = true;
@@ -69,7 +69,7 @@ namespace Kistl.Client.WPF.View.ObjectBrowser
         private void Open_Click(object sender, RoutedEventArgs e)
         {
             var factory = App.Current.AppContext.Factory;
-            var newWorkspace = factory.CreateSpecificModel<ObjectEditorWorkspace>(KistlContext.GetContext());
+            var newWorkspace = factory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(KistlContext.GetContext());
             foreach (var item in ClassList.SelectedItems.OfType<DataObjectModel>())
             {
                 newWorkspace.ShowForeignModel(item);
@@ -94,7 +94,7 @@ namespace Kistl.Client.WPF.View.ObjectBrowser
             {
                 var newCtx = KistlContext.GetContext();
                 var objClass = newCtx.Find<DataType>(dtm.TypeId);
-                var newWorkspace = factory.CreateSpecificModel<ObjectEditorWorkspace>(newCtx);
+                var newWorkspace = factory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(newCtx);
                 newWorkspace.ShowForeignModel((DataObjectModel)factory.CreateDefaultModel(newCtx, objClass));
                 factory.ShowModel(newWorkspace, true);
             }
@@ -107,7 +107,7 @@ namespace Kistl.Client.WPF.View.ObjectBrowser
             if (dtm != null)
             {
                 var newCtx = KistlContext.GetContext();
-                var newWorkspace = factory.CreateSpecificModel<ObjectEditorWorkspace>(newCtx);
+                var newWorkspace = factory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(newCtx);
                 newWorkspace.ShowForeignModel((DataObjectModel)factory.CreateDefaultModel(newCtx, newCtx.Create(dtm.InterfaceType)));
                 factory.ShowModel(newWorkspace, true);
             }

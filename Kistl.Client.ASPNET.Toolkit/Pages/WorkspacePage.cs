@@ -35,7 +35,7 @@ namespace Kistl.Client.ASPNET.Toolkit.Pages
         void WorkspacePage_Init(object sender, EventArgs e)
         {
             var mdl = GuiApplicationContext.Current.Factory
-                .CreateSpecificModel<WorkspaceViewModel>(KistlContextManagerModule.KistlContext);
+                .CreateViewModel<WorkspaceViewModel.Factory>().Invoke(KistlContextManagerModule.KistlContext);
 
             GuiApplicationContext.Current.Factory.CreateDefaultView(mdl, ctrlMainContent);
         }

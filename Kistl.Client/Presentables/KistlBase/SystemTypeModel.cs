@@ -14,6 +14,8 @@ namespace Kistl.Client.Presentables.KistlBase
     public class SystemTypeModel
         : ViewModel
     {
+        public new delegate SystemTypeModel Factory(IKistlContext dataCtx, Type type);
+
         private Type _type;
 
         public SystemTypeModel(

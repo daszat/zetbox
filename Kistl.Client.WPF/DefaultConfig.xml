@@ -3,7 +3,7 @@
   <ConfigName>Default Client Configuration</ConfigName>
   <Client StartClient="false" ThrowErrors="false">
     <DocumentStore>P:\Kistl\DocumentStore\Client\</DocumentStore>
-    <DevelopmentEnvironment>true</DevelopmentEnvironment>
+    <DevelopmentEnvironment>false</DevelopmentEnvironment>
     <Modules>
       <Module>Kistl.API.ApiModule, Kistl.API</Module>
       <Module>Kistl.Client.ClientModule, Kistl.Client</Module>

@@ -21,6 +21,16 @@ namespace Kistl.Client.Presentables
             KistlContextDebuggerSingleton.SetDebugger(this);
         }
 
+        public KistlDebuggerAsModel(bool designMode)
+            : base(designMode)
+        {
+        }
+
+        public override string Name
+        {
+            get { return this.GetType().Name; }
+        }
+
         #region Public Interface
 
         private ObservableCollection<KistlContextModel> _activeCtxCache = new ObservableCollection<KistlContextModel>();
@@ -51,19 +61,13 @@ namespace Kistl.Client.Presentables
                 return _disposedCtxView;
             }
         }
-
-        public override string Name
-        {
-            get { return this.GetType().Name; }
-        }
-
         #endregion
 
         #region IKistlContextDebugger Members
 
         private KistlContextModel GetModel(IKistlContext ctx)
         {
-            return ModelFactory.CreateSpecificModel<KistlContextModel>(ctx);
+            return ModelFactory.CreateViewModel<KistlContextModel.Factory>().Invoke(ctx);
         }
 
         void IKistlContextDebugger.Created(IKistlContext ctx)
@@ -89,6 +93,7 @@ namespace Kistl.Client.Presentables
     public class KistlContextModel
         : ViewModel
     {
+        public new delegate KistlContextModel Factory(IKistlContext dataCtx);
 
         protected IDebuggingKistlContext DebuggingContext { get; private set; }
 

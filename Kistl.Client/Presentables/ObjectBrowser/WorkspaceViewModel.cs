@@ -174,7 +174,7 @@ namespace Kistl.Client.Presentables.ObjectBrowser
                 var objectClass = data as ObjectClassModel;
 
                 // responsibility to externalCtx's disposal passes to newWorkspace
-                var newWorkspace = ModelFactory.CreateSpecificModel<ObjectEditor.WorkspaceViewModel>(externalCtx);
+                var newWorkspace = ModelFactory.CreateViewModel<ObjectEditor.WorkspaceViewModel.Factory>().Invoke(externalCtx);
                 var newObject = externalCtx.Create(objectClass.GetDescribedInterfaceType());
                 var newModel = (DataObjectModel)ModelFactory.CreateDefaultModel(externalCtx, newObject);
 

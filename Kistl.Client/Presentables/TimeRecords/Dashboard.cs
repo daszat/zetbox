@@ -16,6 +16,8 @@ namespace Kistl.Client.Presentables.TimeRecords
     public class Dashboard
         : ViewModel
     {
+        public new delegate Dashboard Factory(IKistlContext dataCtx);
+
         /// <summary>
         /// Initializes a new instance of the Dashboard class.
         /// </summary>
@@ -60,7 +62,7 @@ namespace Kistl.Client.Presentables.TimeRecords
 
         protected override void DoExecute(object data)
         {
-            var initialWorkspace = AppContext.Factory.CreateSpecificModel<Kistl.Client.Presentables.TimeRecords.WorkEffortRecorderModel>(KistlContext.GetContext());
+            var initialWorkspace = AppContext.Factory.CreateViewModel<Kistl.Client.Presentables.TimeRecords.WorkEffortRecorderModel.Factory>().Invoke(KistlContext.GetContext());
             AppContext.Factory.ShowModel(initialWorkspace, true);
         }
     }

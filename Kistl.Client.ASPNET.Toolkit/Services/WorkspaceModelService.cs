@@ -22,7 +22,7 @@ namespace Kistl.Client.ASPNET.Toolkit
         public List<JavaScriptObjectMoniker> GetModules()
         {
             var workspace = GuiApplicationContext.Current.Factory
-                .CreateSpecificModel<WorkspaceViewModel>(KistlContextManagerModule.KistlContext);
+                .CreateViewModel<WorkspaceViewModel.Factory>().Invoke(KistlContextManagerModule.KistlContext);
 
             return workspace.Modules.Select(i => new JavaScriptObjectMoniker(i)).ToList();
         }
@@ -31,7 +31,7 @@ namespace Kistl.Client.ASPNET.Toolkit
         public List<JavaScriptObjectMoniker> GetObjectClasses(int moduleID)
         {
             var workspace = GuiApplicationContext.Current.Factory
-                .CreateSpecificModel<WorkspaceViewModel>(KistlContextManagerModule.KistlContext);
+                .CreateViewModel<WorkspaceViewModel.Factory>().Invoke(KistlContextManagerModule.KistlContext);
 
             return workspace.Modules.Single(m => m.ID == moduleID).ObjectClasses
                 .Select(i => new JavaScriptObjectMoniker(i)).ToList();

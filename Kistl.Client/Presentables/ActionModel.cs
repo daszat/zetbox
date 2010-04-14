@@ -12,6 +12,8 @@ namespace Kistl.Client.Presentables
     public class ActionModel
         : ViewModel
     {
+        public new delegate ActionModel Factory(IKistlContext dataCtx, IDataObject obj, Method m);
+
         public ActionModel(
             IGuiApplicationContext appCtx, IKistlContext dataCtx,
             IDataObject obj, Method m)

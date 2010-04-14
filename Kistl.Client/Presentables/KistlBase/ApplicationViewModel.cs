@@ -9,6 +9,8 @@ namespace Kistl.Client.Presentables.KistlBase
 {
     public class ApplicationViewModel : ViewModel
     {
+        public new delegate ApplicationViewModel Factory(IKistlContext dataCtx, string name, Type wndMdlType);
+
         public ApplicationViewModel(
             IGuiApplicationContext appCtx, IKistlContext dataCtx,
             string name, Type wndMdlType)

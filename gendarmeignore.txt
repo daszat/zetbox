@@ -215,6 +215,26 @@ A: Kistl.DalProvider.Memory
 A: Kistl.Server
 A: Kistl.Server.Service
 
+# Due to Autofac this rule is useless
+R: Gendarme.Rules.Correctness.EnsureLocalDisposalRule
+A: Kistl.API
+A: Kistl.App.Projekte.Common
+A: Kistl.DalProvider.Frozen
+A: TempAppHelpers
+A: Kistl.API.Client
+A: Kistl.App.Projekte.Client
+A: Kistl.Client.ASPNET.Toolkit
+A: Kistl.Client
+A: Kistl.Client.Forms
+A: Kistl.Client.WPF
+A: Kistl.DalProvider.ClientObjects
+A: Kistl.API.Server
+A: Kistl.App.Projekte.Server
+A: Kistl.DalProvider.EF
+A: Kistl.DalProvider.Memory
+A: Kistl.Server
+A: Kistl.Server.Service
+
 # Flags mostly generated code or Presentable models, which generally have little cohesion.
 R: Gendarme.Rules.Maintainability.AvoidLackOfCohesionOfMethodsRule
 A: Kistl.API

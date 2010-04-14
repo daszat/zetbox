@@ -13,12 +13,15 @@ using System.ComponentModel;
 namespace Kistl.Client.Presentables.ObjectEditor
 {
     public class WorkspaceViewModel
-        : WindowViewModel, IMultipleInstancesManager
+        : WindowViewModel, IMultipleInstancesManager, IDisposable
     {
+        public new delegate WorkspaceViewModel Factory(IKistlContext dataCtx);
+
         public WorkspaceViewModel(IGuiApplicationContext appCtx, IKistlContext dataCtx)
             : base(appCtx, dataCtx)
         {
             RecentObjects = new ObservableCollection<ViewModel>();
+            appCtx.Factory.OnIMultipleInstancesManagerCreated(dataCtx, this);
         }
 
         #region Data
@@ -63,7 +66,7 @@ namespace Kistl.Client.Presentables.ObjectEditor
             get
             {
                 if (_saveCommand == null)
-                    _saveCommand = ModelFactory.CreateSpecificModel<SaveContextCommand>(DataContext);
+                    _saveCommand = ModelFactory.CreateViewModel<SaveContextCommand.Factory>().Invoke(DataContext);
 
                 return _saveCommand;
             }
@@ -122,7 +125,7 @@ namespace Kistl.Client.Presentables.ObjectEditor
             get
             {
                 if (_verifyCommand == null)
-                    _verifyCommand = ModelFactory.CreateSpecificModel<VerifyContextCommand>(DataContext);
+                    _verifyCommand = ModelFactory.CreateViewModel<VerifyContextCommand.Factory>().Invoke(DataContext);
 
                 return _verifyCommand;
             }
@@ -152,12 +155,23 @@ namespace Kistl.Client.Presentables.ObjectEditor
         {
             get { return "Workspace"; }
         }
+
+        #region IDisposable Members
+
+        public void Dispose()
+        {
+            AppContext.Factory.OnIMultipleInstancesManagerDisposed(DataContext, this);
+        }
+
+        #endregion
     }
 
     /// <summary>
     /// </summary>
     internal class VerifyContextCommand : CommandModel
     {
+        public new delegate VerifyContextCommand Factory(IKistlContext dataCtx);
+
         public VerifyContextCommand(IGuiApplicationContext appCtx, IKistlContext dataCtx)
             : base(appCtx, dataCtx, "Verify", "Verifies that all constraints are met.")
         {
@@ -175,7 +189,7 @@ namespace Kistl.Client.Presentables.ObjectEditor
 
         protected override void DoExecute(object data)
         {
-            var elm = ModelFactory.CreateSpecificModel<ErrorListModel>(DataContext);
+            var elm = ModelFactory.CreateViewModel<ErrorListModel.Factory>().Invoke(DataContext);
             elm.RefreshErrors();
             ModelFactory.ShowModel(elm,  true);
         }
@@ -187,6 +201,8 @@ namespace Kistl.Client.Presentables.ObjectEditor
     /// </summary>
     internal class SaveContextCommand : CommandModel
     {
+        public new delegate SaveContextCommand Factory(IKistlContext dataCtx);
+
         public SaveContextCommand(IGuiApplicationContext appCtx, IKistlContext dataCtx)
             : base(appCtx, dataCtx, "Save", "Saves outstanding changes to the data store.")
         {

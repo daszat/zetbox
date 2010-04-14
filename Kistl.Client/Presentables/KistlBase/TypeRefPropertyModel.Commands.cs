@@ -84,7 +84,7 @@ namespace Kistl.Client.Presentables.KistlBase
         /// </summary>
         protected void ChooseAssemblyAndTypeRef()
         {
-            var selectionTask = ModelFactory.CreateSpecificModel<DataObjectSelectionTaskModel>(
+            var selectionTask = ModelFactory.CreateViewModel<DataObjectSelectionTaskModel.Factory>().Invoke(
                 DataContext,
                 DataContext.GetQuery<Kistl.App.Base.Assembly>()
                     .OrderBy(a => a.Name)
@@ -96,7 +96,8 @@ namespace Kistl.Client.Presentables.KistlBase
                     {
                         ChooseTypeRefFromAssembly(chosen.Object as Kistl.App.Base.Assembly);
                     }
-                }));
+                }),
+                null);
             ModelFactory.ShowModel(selectionTask, true);
         }
 
@@ -106,7 +107,7 @@ namespace Kistl.Client.Presentables.KistlBase
         /// <param name="assembly">the assembly to choose from</param>
         protected void ChooseTypeRefFromAssembly(Kistl.App.Base.Assembly assembly)
         {            
-            var selectionTask = ModelFactory.CreateSpecificModel<DataObjectSelectionTaskModel>(
+            var selectionTask = ModelFactory.CreateViewModel<DataObjectSelectionTaskModel.Factory>().Invoke(
                 DataContext,
                 GetTypeRefList(assembly),
                 new Action<DataObjectModel>(delegate(DataObjectModel chosen)

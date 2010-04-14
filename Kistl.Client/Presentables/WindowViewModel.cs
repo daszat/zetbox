@@ -8,6 +8,8 @@ namespace Kistl.Client.Presentables
 {
     public abstract class WindowViewModel : ViewModel
     {
+        public new delegate WindowViewModel Factory(IKistlContext dataCtx);
+
         public WindowViewModel(IGuiApplicationContext appCtx, IKistlContext dataCtx)
             : base(appCtx, dataCtx)
         {

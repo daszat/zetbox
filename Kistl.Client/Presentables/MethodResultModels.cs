@@ -8,14 +8,27 @@ using System.ComponentModel;
 
 namespace Kistl.Client.Presentables
 {
+    public abstract class BaseMethodResultModel : ViewModel
+    {
+        public new delegate BaseMethodResultModel Factory(IKistlContext dataCtx, IDataObject obj, Method m);
+
+        protected BaseMethodResultModel(
+               IGuiApplicationContext appCtx, IKistlContext dataCtx,
+               IDataObject obj, Method m)
+            : base(appCtx, dataCtx)
+        {
+        }
+    }
 
     public abstract class MethodResultModel<TValue>
-        : ViewModel, IReadOnlyValueModel<string>
+        : BaseMethodResultModel, IReadOnlyValueModel<string>
     {
+        public new delegate MethodResultModel<TValue> Factory(IKistlContext dataCtx, IDataObject obj, Method m);
+
         protected MethodResultModel(
             IGuiApplicationContext appCtx, IKistlContext dataCtx,
             IDataObject obj, Method m)
-            : base(appCtx, dataCtx)
+            : base(appCtx, dataCtx, obj, m)
         {
             Object = obj;
             Method = m;
@@ -105,6 +118,8 @@ namespace Kistl.Client.Presentables
         : MethodResultModel<Nullable<TValue>>, IReadOnlyValueModel<Nullable<TValue>>
         where TValue : struct
     {
+        public new delegate NullableResultModel<TValue> Factory(IKistlContext dataCtx, IDataObject obj, Method m);
+
         public NullableResultModel(
             IGuiApplicationContext appCtx, IKistlContext dataCtx,
             IDataObject obj, Method m)
@@ -145,6 +160,8 @@ namespace Kistl.Client.Presentables
         : MethodResultModel<TValue>, IReadOnlyValueModel<TValue>
         where TValue : class
     {
+        public new delegate ObjectResultModel<TValue> Factory(IKistlContext dataCtx, IDataObject obj, Method m);
+
         public ObjectResultModel(
             IGuiApplicationContext appCtx, IKistlContext dataCtx,
             IDataObject obj, Method m)

@@ -18,6 +18,8 @@ namespace Kistl.Client.Presentables
     public class PropertyGroupModel
         : ViewModel, IDataErrorInfo
     {
+        public new delegate PropertyGroupModel Factory(IKistlContext dataCtx, string title, IEnumerable<ViewModel> obj);
+
         private string _title;
         private ObservableCollection<ViewModel> _properties;
 

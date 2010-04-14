@@ -17,6 +17,8 @@ namespace Kistl.Client.Presentables.GUI
     public class DashboardModel
         : ViewModel
     {
+        public new delegate DashboardModel Factory(IKistlContext dataCtx);
+
         /// <summary>
         /// Initializes a new instance of the DashboardModel class.
         /// </summary>

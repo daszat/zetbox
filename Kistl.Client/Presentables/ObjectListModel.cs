@@ -240,7 +240,7 @@ namespace Kistl.Client.Presentables
             {
                 var targetType = baseclass.GetDescribedInterfaceType();
                 var item = this.DataContext.Create(targetType);
-                onCreated(ModelFactory.CreateSpecificModel<DataObjectModel>(DataContext, item));
+                onCreated(ModelFactory.CreateViewModel<DataObjectModel.Factory>().Invoke(DataContext, item));
             }
             else
             {
@@ -248,11 +248,11 @@ namespace Kistl.Client.Presentables
                 // TODO: filter non-instantiable classes
                 var childModels = children
                     .OrderBy(oc => oc.Name)
-                    .Select(oc => (DataObjectModel)ModelFactory.CreateSpecificModel<ObjectClassModel>(DataContext, oc))
+                    .Select(oc => (DataObjectModel)ModelFactory.CreateViewModel<ObjectClassModel.Factory>().Invoke(DataContext, oc))
                     .ToList();
 
                 ModelFactory.ShowModel(
-                    ModelFactory.CreateSpecificModel<DataObjectSelectionTaskModel>(
+                    ModelFactory.CreateViewModel<DataObjectSelectionTaskModel.Factory>().Invoke(
                         DataContext,
                         childModels,
                         new Action<DataObjectModel>(delegate(DataObjectModel chosen)
@@ -261,13 +261,14 @@ namespace Kistl.Client.Presentables
                             {
                                 var targetType = ((ObjectClass)chosen.Object).GetDescribedInterfaceType();
                                 var item = this.DataContext.Create(targetType);
-                                onCreated(ModelFactory.CreateSpecificModel<DataObjectModel>(DataContext, item));
+                                onCreated(ModelFactory.CreateViewModel<DataObjectModel.Factory>().Invoke(DataContext, item));
                             }
                             else
                             {
                                 onCreated(null);
                             }
-                        })), true);
+                        }),
+                    null), true);
             }
         }
 
@@ -292,7 +293,7 @@ namespace Kistl.Client.Presentables
                 .ToList();
 
             ModelFactory.ShowModel(
-                ModelFactory.CreateSpecificModel<DataObjectSelectionTaskModel>(
+                ModelFactory.CreateViewModel<DataObjectSelectionTaskModel.Factory>().Invoke(
                     DataContext,
                     instanceModels,
                     new Action<DataObjectModel>(delegate(DataObjectModel chosen)
@@ -302,7 +303,8 @@ namespace Kistl.Client.Presentables
                             AddItem(chosen);
                             SelectedItem = chosen;
                         }
-                    })), true);
+                    }),
+                    null), true);
         }
 
         public void MoveItemUp(DataObjectModel item)

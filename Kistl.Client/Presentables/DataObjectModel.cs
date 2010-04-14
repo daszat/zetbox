@@ -309,7 +309,7 @@ namespace Kistl.Client.Presentables
             foreach (var action in methods)
             {
                 //Debug.Assert(action.Parameter.Count == 0);
-                _actionsCache.Add(ModelFactory.CreateSpecificModel<ActionModel>(DataContext, _object, action));
+                _actionsCache.Add(ModelFactory.CreateViewModel<ActionModel.Factory>().Invoke(DataContext, _object, action));
             }
         }
 
@@ -321,27 +321,27 @@ namespace Kistl.Client.Presentables
 
             if (retParam is BoolParameter && !retParam.IsList)
             {
-                return (ModelFactory.CreateSpecificModel<NullableResultModel<Boolean>>(DataContext, _object, pm));
+                return (ModelFactory.CreateViewModel<NullableResultModel<Boolean>.Factory>().Invoke(DataContext, _object, pm));
             }
             else if (retParam is DateTimeParameter && !retParam.IsList)
             {
-                return (ModelFactory.CreateSpecificModel<NullableResultModel<DateTime>>(DataContext, _object, pm));
+                return (ModelFactory.CreateViewModel<NullableResultModel<DateTime>.Factory>().Invoke(DataContext, _object, pm));
             }
             else if (retParam is DoubleParameter && !retParam.IsList)
             {
-                return (ModelFactory.CreateSpecificModel<NullableResultModel<Double>>(DataContext, _object, pm));
+                return (ModelFactory.CreateViewModel<NullableResultModel<Double>.Factory>().Invoke(DataContext, _object, pm));
             }
             else if (retParam is IntParameter && !retParam.IsList)
             {
-                return (ModelFactory.CreateSpecificModel<NullableResultModel<int>>(DataContext, _object, pm));
+                return (ModelFactory.CreateViewModel<NullableResultModel<int>.Factory>().Invoke(DataContext, _object, pm));
             }
             else if (retParam is StringParameter && !retParam.IsList)
             {
-                return (ModelFactory.CreateSpecificModel<ObjectResultModel<string>>(DataContext, _object, pm));
+                return (ModelFactory.CreateViewModel<ObjectResultModel<string>.Factory>().Invoke(DataContext, _object, pm));
             }
             else if (retParam is ObjectParameter && !retParam.IsList)
             {
-                return (ModelFactory.CreateSpecificModel<ObjectResultModel<IDataObject>>(DataContext, _object, pm));
+                return (ModelFactory.CreateViewModel<ObjectResultModel<IDataObject>.Factory>().Invoke(DataContext, _object, pm));
             }
             else
             {

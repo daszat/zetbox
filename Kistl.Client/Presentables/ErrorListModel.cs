@@ -29,6 +29,8 @@ namespace Kistl.Client.Presentables
     public class ErrorListModel
         : ViewModel
     {
+        public new delegate ErrorListModel Factory(IKistlContext dataCtx);
+
         public ErrorListModel(IGuiApplicationContext appCtx, IKistlContext dataCtx)
             : base(appCtx, dataCtx)
         {

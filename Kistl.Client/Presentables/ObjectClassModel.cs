@@ -12,6 +12,8 @@ namespace Kistl.Client.Presentables
 {
     public class ObjectClassModel : DataTypeModel
     {
+        public new delegate ObjectClassModel Factory(IKistlContext dataCtx, ObjectClass cls);
+
         public ObjectClassModel(
             IGuiApplicationContext appCtx, IKistlContext dataCtx,
             ObjectClass cls)

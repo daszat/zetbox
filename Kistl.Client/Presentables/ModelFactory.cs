@@ -39,19 +39,6 @@ namespace Kistl.Client.Presentables
 
         private ModelCache _cache = new ModelCache();
 
-        /// <summary>
-        /// Should only be used in very "special" situations. Using
-        /// <see cref="CreateDefaultModel"/> is usually much better.
-        /// </summary>
-        /// <param name="ctx">the data context to use</param>
-        /// <param name="data">the arguments to pass to the model's constructor</param>
-        public TModel CreateSpecificModel<TModel>(IKistlContext ctx, params object[] data)
-            where TModel : ViewModel
-        {
-            Type requestedType = typeof(TModel);
-            return (TModel)CreateModel(requestedType, ctx, data);
-        }
-
 
         /// <summary>
         /// Creates a default model for the object <paramref name="obj"/>
@@ -274,10 +261,13 @@ namespace Kistl.Client.Presentables
 
         protected Dictionary<IKistlContext, IMultipleInstancesManager> Managers { get; private set; }
 
-        protected virtual void OnIMultipleInstancesManagerCreated(IKistlContext ctx, IMultipleInstancesManager workspace)
+        public virtual void OnIMultipleInstancesManagerCreated(IKistlContext ctx, IMultipleInstancesManager workspace)
         {
-            // TODO: limit this reference to the lifetime of the context
             this.Managers[ctx] = workspace;
+        }
+        public virtual void OnIMultipleInstancesManagerDisposed(IKistlContext ctx, IMultipleInstancesManager workspace)
+        {
+            this.Managers.Remove(ctx);
         }
 
         #endregion

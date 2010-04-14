@@ -12,6 +12,11 @@ namespace Kistl.Client.Presentables
         : ViewModel
         where TChoosable : ViewModel
     {
+        public new delegate SelectionTaskModel<TChoosable> Factory(IKistlContext dataCtx,
+            IList<TChoosable> choices,
+            Action<TChoosable> callback,
+            IList<CommandModel> additionalActions);
+
         /// <summary>
         /// Initializes a new instance of the SelectionTaskModel class. This is protected since there 
         /// is no ViewModelDescriptor for this class. Instead, either use the
@@ -22,17 +27,7 @@ namespace Kistl.Client.Presentables
         /// <param name="dataCtx"></param>
         /// <param name="choices"></param>
         /// <param name="callback"></param>
-        protected SelectionTaskModel(
-            IGuiApplicationContext appCtx, IKistlContext dataCtx,
-            IList<TChoosable> choices,
-            Action<TChoosable> callback)
-            : base(appCtx, dataCtx)
-        {
-            _choices = _filteredChoices = new ReadOnlyCollection<TChoosable>(choices);
-            _callback = callback;
-            _additionalActions = new ReadOnlyCollection<CommandModel>(new CommandModel[] { });
-        }
-
+        /// <param name="additionalActions"></param>
         protected SelectionTaskModel(
             IGuiApplicationContext appCtx, IKistlContext dataCtx,
             IList<TChoosable> choices,
@@ -138,13 +133,9 @@ namespace Kistl.Client.Presentables
 
     public class DataObjectSelectionTaskModel : SelectionTaskModel<DataObjectModel>
     {
-        public DataObjectSelectionTaskModel(
-            IGuiApplicationContext appCtx, IKistlContext dataCtx,
-            IList<DataObjectModel> choices,
-            Action<DataObjectModel> callback)
-            : base(appCtx, dataCtx, choices, callback)
-        {
-        }
+        public new delegate DataObjectSelectionTaskModel Factory(IKistlContext dataCtx, IList<DataObjectModel> choices,
+            Action<DataObjectModel> callback,
+            IList<CommandModel> additionalActions);
 
         public DataObjectSelectionTaskModel(
             IGuiApplicationContext appCtx, IKistlContext dataCtx,

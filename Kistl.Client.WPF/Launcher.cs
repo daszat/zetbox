@@ -41,11 +41,11 @@ namespace Kistl.Client.WPF
             ViewModel initialWorkspace;
             if (_timeRecorder)
             {
-                initialWorkspace = appCtx.Factory.CreateSpecificModel<Kistl.Client.Presentables.TimeRecords.WorkEffortRecorderModel>(ctxFactory.Invoke());
+                initialWorkspace = appCtx.Factory.CreateViewModel<Kistl.Client.Presentables.TimeRecords.WorkEffortRecorderModel.Factory>().Invoke(ctxFactory.Invoke());
             }
             else
             {
-                initialWorkspace = appCtx.Factory.CreateSpecificModel<WorkspaceViewModel>(ctxFactory.Invoke());
+                initialWorkspace = appCtx.Factory.CreateViewModel<WorkspaceViewModel.Factory>().Invoke(ctxFactory.Invoke());
             }
 
             LauncherKind launcher = ctx.Create<LauncherKind>();
