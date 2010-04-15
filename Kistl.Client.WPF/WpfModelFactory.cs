@@ -56,14 +56,14 @@ namespace Kistl.Client.WPF
             timer.Start();
         }
 
-        public override object CreateDefaultView(ViewModel mdl)
+        protected override object CreateDefaultView(ViewModel mdl)
         {
             System.Windows.Controls.Control view = (System.Windows.Controls.Control)base.CreateDefaultView(mdl);
             if (view != null) view.DataContext = mdl;
             return view;
         }
 
-        public override object CreateSpecificView(ViewModel mdl, Kistl.App.GUI.ControlKind kind)
+        protected override object CreateSpecificView(ViewModel mdl, Kistl.App.GUI.ControlKind kind)
         {
             System.Windows.Controls.Control view = (System.Windows.Controls.Control)base.CreateSpecificView(mdl, kind);
             if (view != null) view.DataContext = mdl;

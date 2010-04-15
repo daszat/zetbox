@@ -64,14 +64,14 @@ namespace Kistl.Client.ASPNET.Toolkit
             }
         }
 
-        public override object CreateDefaultView(ViewModel mdl)
+        protected override object CreateDefaultView(ViewModel mdl)
         {
             IView view = (IView)base.CreateDefaultView(mdl);
             view.SetModel(mdl);
             return view;
         }
 
-        public override object CreateSpecificView(ViewModel mdl, ControlKind kind)
+        protected override object CreateSpecificView(ViewModel mdl, ControlKind kind)
         {
             IView view = (IView)base.CreateSpecificView(mdl, kind);
             view.SetModel(mdl);
@@ -100,14 +100,14 @@ namespace Kistl.Client.ASPNET.Toolkit
         {
             if (self == null) { throw new ArgumentNullException("self"); }
 
-            return AddControl(container, self.CreateDefaultView(mdl));
+            return AddControl(container, null /*self.CreateDefaultView(mdl)*/);
         }
 
         public static object CreateSpecificView(this IModelFactory self, ViewModel mdl, ControlKind kind, Control container)
         {
             if (self == null) { throw new ArgumentNullException("self"); }
 
-            return AddControl(container, self.CreateSpecificView(mdl, kind));
+            return AddControl(container, null /*self.CreateSpecificView(mdl, kind) */);
         }
 
         private static object AddControl(Control container, object ctrl)

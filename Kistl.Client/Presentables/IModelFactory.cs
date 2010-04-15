@@ -5,15 +5,12 @@ namespace Kistl.Client.Presentables
 
     public interface IModelFactory
     {
-        object CreateDefaultView(ViewModel mdl);
-        ViewModel CreateModel(Type requestedType, Kistl.API.IKistlContext ctx, object[] data);
-        object CreateSpecificView(ViewModel mdl, Kistl.App.GUI.ControlKind kind);
-        void CreateTimer(TimeSpan tickLength, Action action);
-        string GetSourceFileNameFromUser(params string[] filter);
         void ShowModel(ViewModel mdl, bool activate);
         void ShowModel(ViewModel mdl, Kistl.App.GUI.ControlKind kind, bool activate);
-        Toolkit Toolkit { get; }
 
+        void CreateTimer(TimeSpan tickLength, Action action);
+        string GetSourceFileNameFromUser(params string[] filter);
+        Toolkit Toolkit { get; }
 
         // Create Models
         TModelFactory CreateViewModel<TModelFactory>() where TModelFactory : class;

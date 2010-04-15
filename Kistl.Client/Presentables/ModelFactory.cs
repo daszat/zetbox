@@ -36,10 +36,6 @@ namespace Kistl.Client.Presentables
         }
 
         #region Model Management
-
-        private ModelCache _cache = new ModelCache();
-
-        //----------------------------------------------------------------------------------------------
         public TModelFactory CreateViewModel<TModelFactory>() where TModelFactory : class
         {
             return CreateViewModel<TModelFactory>(typeof(TModelFactory));
@@ -76,16 +72,28 @@ namespace Kistl.Client.Presentables
         public TModelFactory CreateViewModel<TModelFactory>(Type t) where TModelFactory : class
         {
             if (t == null) throw new ArgumentNullException("t");
-            if (!typeof(Delegate).IsAssignableFrom(t)) throw new ArgumentOutOfRangeException("t", "Parameter must be a Delegate. CreateViewModel uses Autofac'S Factory pattern");
+            if (!typeof(Delegate).IsAssignableFrom(t)) throw new ArgumentOutOfRangeException("t", "Parameter must be a Delegate. CreateViewModel uses Autofac's Factory pattern");
             try
             {
                 var factory = Container.Resolve(t);
                 if (t == typeof(TModelFactory)) return (TModelFactory)factory;
+
                 // Wrap delegate. This will implement inheritance
                 Delegate factoryDelegate = (Delegate)factory;
-                var parameter = factoryDelegate.Method.GetParameters().Skip(1).Select(p => Expression.Parameter(p.ParameterType, p.Name)).ToArray();
-                var lambda_body = Expression.Invoke(Expression.Constant(factoryDelegate), parameter);
-                var l = Expression.Lambda(typeof(TModelFactory), lambda_body, parameter);
+                // Get Parameter of both, src and dest delegate
+                var parameter_factory = factoryDelegate.Method.GetParameters().Skip(1).ToArray();
+                var parameter = typeof(TModelFactory).GetMethod("Invoke").GetParameters()
+                    .Select(p => Expression.Parameter(p.ParameterType, p.Name)).ToArray();
+
+                // create cast expressions. Sometimes a UpCast is needed. 
+                // TModelFactory == DataTypeModel
+                // typeof(factory) == ObjectClassModel
+                var invoke = Expression.Invoke(Expression.Constant(factoryDelegate), 
+                    parameter.Select(
+                        (p,idx) => Expression.Convert(p, parameter_factory[idx].ParameterType) 
+                        ).ToArray()
+                    );
+                var l = Expression.Lambda(typeof(TModelFactory), invoke, parameter);
                 return l.Compile() as TModelFactory;
             }
             catch (Exception ex)
@@ -118,39 +126,6 @@ namespace Kistl.Client.Presentables
             if (f == null) throw new InvalidOperationException(string.Format("The given Type {0} does not contain a Factory", t.FullName));
             return f;
         }
-        //----------------------------------------------------------------------------------------------
-
-        public ViewModel CreateModel(Type requestedType, IKistlContext ctx, object[] data)
-        {
-
-            // by convention, all presentable models take the IGuiApplicationContext
-            // and a IKistlContext as first parameters
-            object[] parameters = new object[] { ctx }.Concat(data).ToArray();
-            ViewModel result = _cache.LookupModel(requestedType, data);
-
-            if (result == null)
-            {
-                try
-                {
-                    result = (ViewModel)Container.Resolve(requestedType, parameters.Select((i, idx) => new Autofac.PositionalParameter(idx + 1, i)).Cast<Autofac.Core.Parameter>());
-                }
-                catch (Exception ex)
-                {
-                    Logging.Log.Error(string.Format("Error creating model for requestedType [{0}]", requestedType.FullName), ex);
-                    return null;
-                }
-                _cache.StoreModel(parameters, result);
-            }
-
-            // save workspaces
-            if (typeof(IMultipleInstancesManager).IsAssignableFrom(requestedType))
-            {
-                OnIMultipleInstancesManagerCreated(ctx, (IMultipleInstancesManager)result);
-            }
-
-            return result;
-        }
-
         #endregion
 
         #region Top-Level Views Management
@@ -160,7 +135,7 @@ namespace Kistl.Client.Presentables
         /// </summary>
         /// <param name="mdl">the model to be viewed</param>
         /// <returns>the configured view</returns>
-        public virtual object CreateDefaultView(ViewModel mdl)
+        protected virtual object CreateDefaultView(ViewModel mdl)
         {
             if (mdl == null) { throw new ArgumentNullException("mdl"); }
 
@@ -177,22 +152,12 @@ namespace Kistl.Client.Presentables
         }
 
         /// <summary>
-        /// Creates a view from a view descriptor. By default it just creates a new instance of the ControlRef
-        /// </summary>
-        /// <param name="vDesc">the descriptor describing the view</param>
-        /// <returns>a newly created view</returns>
-        protected virtual object CreateView(ViewDescriptor vDesc)
-        {
-            return vDesc.ControlRef.Create();
-        }
-
-        /// <summary>
         /// Creates a specific View for the given ViewModel.
         /// </summary>
         /// <param name="mdl">the model to be viewed</param>
         /// <param name="kind">the kind of view to create</param>
         /// <returns>the configured view</returns>
-        public virtual object CreateSpecificView(ViewModel mdl, ControlKind kind)
+        protected virtual object CreateSpecificView(ViewModel mdl, ControlKind kind)
         {
             if (mdl == null) { throw new ArgumentNullException("mdl"); }
             if (kind == null) { throw new ArgumentNullException("kind"); }
@@ -206,6 +171,17 @@ namespace Kistl.Client.Presentables
                 ? null
                 : CreateView(vDesc);
         }
+
+        /// <summary>
+        /// Creates a view from a view descriptor. By default it just creates a new instance of the ControlRef
+        /// </summary>
+        /// <param name="vDesc">the descriptor describing the view</param>
+        /// <returns>a newly created view</returns>
+        protected virtual object CreateView(ViewDescriptor vDesc)
+        {
+            return vDesc.ControlRef.Create();
+        }
+
 
         public void ShowModel(ViewModel mdl, ControlKind kind, bool activate)
         {
@@ -266,109 +242,6 @@ namespace Kistl.Client.Presentables
         /// <returns>the chosen file name or <code>String.Empty</code> if the user aborted the selection</returns>
         public abstract string GetSourceFileNameFromUser(params string[] filter);
 
-        #endregion
-
-        #region ModelCache
-        internal sealed class ModelCache : Cache
-        {
-            /// <summary>
-            /// a map of all models created from this factory.
-            /// </summary>
-            /// uses Type as outer parameter to keep number of second level dictionaries small
-            // TODO: memory: investigate using a weakly referencing proxy to object[] as 2nd level key,
-            //               but probably all data params are rooted elsewhere too. Should clean up
-            //               at least when the IKistlContext of a Workspace is disposed
-            private Dictionary<Type, Dictionary<object[], ViewModel>> _models
-                    = new Dictionary<Type, Dictionary<object[], ViewModel>>();
-
-            internal ViewModel LookupModel(Type requestedType, object[] parameters)
-            {
-                Dictionary<object[], ViewModel> modelCache;
-                if (!_models.TryGetValue(requestedType, out modelCache))
-                {
-                    // top level entry doesn't exist
-                    return null;
-                }
-
-                ViewModel result = null;
-                if (!modelCache.TryGetValue(parameters, out result))
-                {
-                    return null;
-                }
-                return result;
-            }
-
-            internal void StoreModel(object[] parameters, ViewModel mdl)
-            {
-                Type requestedType = mdl.GetType();
-
-                Dictionary<object[], ViewModel> modelCache;
-                if (!_models.TryGetValue(requestedType, out modelCache))
-                {
-                    // create new top-level entry
-                    modelCache = new Dictionary<object[], ViewModel>(new ObjectArrayComparer());
-                    _models[requestedType] = modelCache;
-                }
-
-                modelCache[parameters] = mdl;
-                ItemAdded();
-            }
-
-            public override int ItemCount
-            {
-                get { return _models.Count; }
-            }
-
-            public override void Clear()
-            {
-                _models.Clear();
-            }
-        }
-
-        /// <summary>
-        /// an <see cref="IEqualityComparer&lt;T>"/> which compares object arrays for memberwise 
-        /// equality and calculates an appropriate hashcode
-        /// </summary>
-        internal sealed class ObjectArrayComparer : IEqualityComparer<object[]>
-        {
-            #region IEqualityComparer<object[]> Members
-
-            /// <inheritdoc/>
-            public bool Equals(object[] x, object[] y)
-            {
-                bool result = true;
-
-                if (x.Length != y.Length)
-                {
-                    return false;
-                }
-
-                for (int i = 0;
-                    // abort on first miss
-                    result && i < x.Length;
-                    i++)
-                {
-                    if (x[i] != null && y[i] != null)
-                    {
-                        result &= x[i].Equals(y[i]);
-                    }
-                    else
-                    {
-                        result &= x[i] == y[i]; // only true if both x[i] and y[i] are null
-                    }
-                }
-                return result;
-            }
-
-            /// <inheritdoc/>
-            public int GetHashCode(object[] objs)
-            {
-                // calculate the XOR of all not null elements of objs
-                return objs.Where(o => o != null).Aggregate(0, (acc, o) => (acc ^= o.GetHashCode()));
-            }
-
-            #endregion
-        }
         #endregion
     }
 }
