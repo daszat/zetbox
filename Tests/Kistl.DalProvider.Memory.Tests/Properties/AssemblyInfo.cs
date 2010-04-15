@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Kistl.DalProvider.Memory")]
+[assembly: AssemblyTitle("Kistl.DalProvider.Memory.Tests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("dasz.at OG")]
-[assembly: AssemblyProduct("Kistl.DalProvider.Memory")]
-[assembly: AssemblyCopyright("Copyright © dasz.at OG 2010")]
+[assembly: AssemblyCompany("Microsoft")]
+[assembly: AssemblyProduct("Kistl.DalProvider.Memory.Tests")]
+[assembly: AssemblyCopyright("Copyright © Microsoft 2010")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("e6284b8a-7cd8-4909-8abb-01c220376b96")]
+[assembly: Guid("f73a715d-fe23-427f-aeca-3ee6a1b337c7")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -34,8 +34,3 @@ using System.Runtime.InteropServices;
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
-
-// The Common Language Specification (CLS) defines naming restrictions, data types,
-// and rules to which assemblies must conform if they are to be used across programming
-// languages. This assembly should be compatible.
-[assembly: System.CLSCompliant(true)]

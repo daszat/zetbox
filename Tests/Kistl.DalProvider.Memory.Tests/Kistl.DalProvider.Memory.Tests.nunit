@@ -1,0 +1,12 @@
+﻿<NUnitProject>
+  <Settings activeconfig="Debug" />
+  <Config name="Debug" appbase="bin\Debug" configfile="Kistl.DalProvider.Memory.Tests.dll.config" binpathtype="Auto">
+    <assembly path="Kistl.DalProvider.Memory.Tests.dll" />
+  </Config>
+  <Config name="Release" appbase="bin\Release" configfile="Kistl.DalProvider.Memory.Tests.dll.config" binpathtype="Auto">
+    <assembly path="Kistl.DalProvider.Memory.Tests.dll" />
+  </Config>
+  <Config name="Studio" appbase="" configfile="Kistl.DalProvider.Memory.Tests.dll.config" binpathtype="Auto">
+    <assembly path="Kistl.DalProvider.Memory.Tests.dll" />
+  </Config>
+</NUnitProject>

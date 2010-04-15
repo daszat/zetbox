@@ -30,10 +30,10 @@ namespace Kistl.DalProvider.Memory
                 .As<BaseMemoryContext>()
                 .OnActivating(args =>
                 {
-                    // TODO: check validity of using FAMS here.
-                    Logging.Log.Info("Initialising FrozenActionsManagerClient");
-                    var fams = args.Context.Resolve<FrozenActionsManager>();
-                    fams.Init((IReadOnlyKistlContext)args.Instance);
+                    //// TODO: check validity of using FAMS here.
+                    //Logging.Log.Info("Initialising FrozenActionsManagerClient");
+                    //var fams = args.Context.Resolve<FrozenActionsManager>();
+                    //fams.Init((IReadOnlyKistlContext)args.Instance);
                 })
                 .SingleInstance();
         }

@@ -1,18 +1,27 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Kistl.API;
 
 namespace Kistl.DalProvider.Memory
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    
+    using Kistl.API;
+
     public class MemoryContext
         : BaseMemoryContext
     {
-        public MemoryContext()
-            : base(System.Reflection.Assembly.ReflectionOnlyLoad(Kistl.API.Helper.InterfaceAssembly),
-                System.Reflection.Assembly.ReflectionOnlyLoad(ServerProvider.GeneratedAssemblyName))
+        private static readonly List<IPersistenceObject> emptylist = new List<IPersistenceObject>(0);
+
+        public MemoryContext(IInterfaceTypeFilter ifFilter)
+            : base(ifFilter, System.Reflection.Assembly.Load(Kistl.API.Helper.InterfaceAssembly),
+                System.Reflection.Assembly.Load(ServerProvider.GeneratedAssemblyName))
         {
+        }
+
+        public override IQueryable<IPersistenceObject> GetPersistenceObjectQuery(InterfaceType ifType)
+        {
+            return (this.objects[ifType] ?? emptylist).AsQueryable().OfType<IPersistenceObject>();
         }
 
         public override int SubmitChanges()

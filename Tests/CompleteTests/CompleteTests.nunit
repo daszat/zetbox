@@ -10,6 +10,7 @@
     <assembly path="Kistl.DalProvider.ClientObjects.Tests.dll" />
     <assembly path="Kistl.DalProvider.EF.Tests.dll" />
     <assembly path="Kistl.DalProvider.Frozen.Tests.dll" />
+    <assembly path="Kistl.DalProvider.Memory.Tests.dll" />
   </Config>
   <Config name="Release" appbase="bin\Release" configfile="CompleteTests.dll.config" binpathtype="Auto">
     <assembly path="Kistl.API.Tests.dll" />
@@ -21,6 +22,7 @@
     <assembly path="Kistl.DalProvider.ClientObjects.Tests.dll" />
     <assembly path="Kistl.DalProvider.EF.Tests.dll" />
     <assembly path="Kistl.DalProvider.Frozen.Tests.dll" />
+    <assembly path="Kistl.DalProvider.Memory.Tests.dll" />
   </Config>
   <Config name="Studio" appbase="" configfile="CompleteTests.dll.config" binpathtype="Auto">
     <assembly path="Kistl.API.Tests.dll" />
@@ -32,5 +34,6 @@
     <assembly path="Kistl.DalProvider.ClientObjects.Tests.dll" />
     <assembly path="Kistl.DalProvider.EF.Tests.dll" />
     <assembly path="Kistl.DalProvider.Frozen.Tests.dll" />
+    <assembly path="Kistl.DalProvider.Memory.Tests.dll" />
   </Config>
 </NUnitProject>

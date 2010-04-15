@@ -7,12 +7,98 @@ using Kistl.API.Utils;
 
 namespace Kistl.API
 {
+    public interface IInterfaceTypeFilter
+    {
+        /// <summary>
+        /// Interpret the specified Type <paramref name="type"/> as an interface 
+        /// type and return the wrapper. If the <paramref name="type"/> is not an 
+        /// interface type, an exception is thrown.
+        /// </summary>
+        /// <param name="type">The type to interpret.</param>
+        /// <returns>An InterfaceType representing the specified Type t.</returns>
+        InterfaceType AsInterfaceType(Type type);
+        /// <summary>
+        /// Interpret the specified Type <paramref name="type"/> as an interface 
+        /// type and return the wrapper. If the <paramref name="type"/> is not an 
+        /// interface type, null is returned.
+        /// </summary>
+        /// <param name="type">The type to interpret.</param>
+        /// <returns>An InterfaceType representing the specified Type t, or null.</returns>
+        InterfaceType? TryAsInterfaceType(Type type);
+
+        // TODO: remove this
+        bool IsInterfaceType(Type t);
+    }
+
+    /// <summary>
+    /// Default implementation of IInterfaceTypeFilter, should be provided by the generated assembly.
+    /// </summary>
+    public class DefaultInterfaceTypeFilter
+        : IInterfaceTypeFilter
+    {
+        public DefaultInterfaceTypeFilter(System.Reflection.Assembly InterfaceAssembly)
+        {
+            if (InterfaceAssembly.FullName != Kistl.API.Helper.InterfaceAssembly)
+            {
+                throw new ArgumentOutOfRangeException("InterfaceAssembly");
+            }
+        }
+
+        #region IInterfaceTypeFilter Members
+
+        public InterfaceType AsInterfaceType(Type type)
+        {
+            if (type == null) { throw new ArgumentNullException("type"); }
+
+            if (IsInterfaceType(type))
+            {
+                return new InterfaceType(this, type);
+            }
+            else
+            {
+                throw new ArgumentOutOfRangeException("type", String.Format("type {0} is not from the interface assembly", type.AssemblyQualifiedName));
+            }
+        }
+
+        public InterfaceType? TryAsInterfaceType(Type type)
+        {
+            if (type == null) { throw new ArgumentNullException("type"); }
+
+            if (IsInterfaceType(type))
+            {
+                return new InterfaceType(this, type);
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public bool IsInterfaceType(Type type)
+        {
+            return type.IsInterface && type.Assembly.FullName == Kistl.API.Helper.InterfaceAssembly;
+        }
+
+        #endregion
+    }
+
     public struct InterfaceType
     {
         /// <summary>
         /// The wrapped <see cref="System.Type"/>. Guaranteed to be a valid InterfaceType (see <see cref="IsValid"/>).
         /// </summary>
         public Type Type { get; private set; }
+
+        private readonly IInterfaceTypeFilter _ifFilter;
+        internal InterfaceType(IInterfaceTypeFilter ifFilter, Type type)
+            : this()
+        {
+            if (ifFilter == null) { throw new ArgumentNullException("ifFilter"); }
+            _ifFilter = ifFilter;
+            if (!ifFilter.IsInterfaceType(type)) { throw new ArgumentOutOfRangeException("type"); }
+
+            this.Type = type;
+        }
 
         /// <summary>
         /// Wrap a given InterfaceType
@@ -47,11 +133,13 @@ namespace Kistl.API
 
             if (type.IsValueType) return true;
 
-            if (type.Assembly.FullName == ApplicationContext.Current.InterfaceAssembly
+            if (ApplicationContext.Current != null
+                && type.Assembly.FullName == ApplicationContext.Current.InterfaceAssembly
                 && type.IsInterface)
                 return true;
 
-            if (type.Assembly.FullName != ApplicationContext.Current.InterfaceAssembly
+            if (ApplicationContext.Current != null
+                && type.Assembly.FullName != ApplicationContext.Current.InterfaceAssembly
                 && type.Assembly.FullName != ApplicationContext.Current.ImplementationAssembly)
                 return true;
 
@@ -88,7 +176,15 @@ namespace Kistl.API
                 .Select(intf => new { Interface = intf, Inherited = GetInterestingInterfaces(baseInterface, intf) })
                 .ToList();
             candidates.Add(new { Interface = this.Type, Inherited = allInherited });
-            return new InterfaceType(candidates.OrderBy(i => i.Inherited.Length).First().Interface);
+         
+            if (_ifFilter != null)
+            {
+                return _ifFilter.AsInterfaceType(candidates.OrderBy(i => i.Inherited.Length).First().Interface);
+            }
+            else
+            {
+                return new InterfaceType(candidates.OrderBy(i => i.Inherited.Length).First().Interface);
+            }
         }
 
         /// <summary>

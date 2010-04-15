@@ -21,10 +21,11 @@ namespace Kistl.API
         /// <summary>
         /// Initializes a new instance of the MemoryContext class, using the specified assemblies for interfaces and implementation.
         /// </summary>
+        /// <param name="ifFilter">An interface type filter, passed in from the container</param>
         /// <param name="interfaces">The assembly containing the interfaces available in this context. MUST not be null.</param>
         /// <param name="implementations">The assembly containing the classes implementing the interfaces in this context. MUST not be null.</param>
-        public MemoryContext(Assembly interfaces, Assembly implementations)
-            : base(interfaces, implementations)
+        public MemoryContext(IInterfaceTypeFilter ifFilter, Assembly interfaces, Assembly implementations)
+            : base(ifFilter, interfaces, implementations)
         {
         }
 
