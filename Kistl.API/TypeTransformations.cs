@@ -38,6 +38,7 @@ namespace Kistl.API
     {
         public DefaultInterfaceTypeFilter(System.Reflection.Assembly InterfaceAssembly)
         {
+            if (InterfaceAssembly == null) { throw new ArgumentNullException("InterfaceAssembly"); }
             if (InterfaceAssembly.FullName != Kistl.API.Helper.InterfaceAssembly)
             {
                 throw new ArgumentOutOfRangeException("InterfaceAssembly");
@@ -76,6 +77,7 @@ namespace Kistl.API
 
         public bool IsInterfaceType(Type type)
         {
+            if (type == null) { throw new ArgumentNullException("type"); }
             return type.IsInterface && type.Assembly.FullName == Kistl.API.Helper.InterfaceAssembly;
         }
 

@@ -92,7 +92,7 @@ namespace Kistl.DalProvider.EF
                     // TODO: decide whether to load this from configuration too?
                     System.Reflection.Assembly interfaces = System.Reflection.Assembly.Load(Kistl.API.Helper.InterfaceAssembly);
                     System.Reflection.Assembly implementation = System.Reflection.Assembly.Load(Kistl.API.Helper.ServerAssembly);
-                    return new MemoryContext(interfaces, implementation);
+                    return new MemoryContext(c.Resolve<IInterfaceTypeFilter>(), interfaces, implementation);
                 })
                 .InstancePerDependency();
 
