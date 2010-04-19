@@ -1,18 +1,20 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Kistl.API;
-using Kistl.API.Server;
-using Kistl.App.Base;
-
-using NUnit.Framework;
-using NUnit.Framework.Constraints;
-using Autofac;
 
 namespace Kistl.Server.Tests
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+
+    using Autofac;
+
+    using Kistl.API;
+    using Kistl.API.Server;
+    using Kistl.App.Base;
+
+    using NUnit.Framework;
+    using NUnit.Framework.Constraints;
+
     [TestFixture]
     public class GetListTests
     {
@@ -26,7 +28,7 @@ namespace Kistl.Server.Tests
         {
             //CacheController<Kistl.API.IDataObject>.Current.Clear();
             container = Kistl.Server.Tests.SetUp.CreateInnerContainer();
-            ctx = container.Resolve<IReadOnlyKistlContext>();
+            ctx = container.Resolve<IKistlContext>();
         }
 
         [TearDown]
@@ -171,7 +173,6 @@ namespace Kistl.Server.Tests
         }
 
         [Test]
-        [Ignore("Case 634")]
         public void GetListWithOrderByThenOrderBy()
         {
             var list = ctx.GetQuery<Kistl.App.Base.ObjectClass>().OrderBy(o => o.Module.Name).ThenBy(o => o.Name).ToList();
@@ -218,19 +219,21 @@ namespace Kistl.Server.Tests
         }
 
         [Test]
-        [ExpectedException]
+        [Ignore("Case 471")]
         public void GetListWithSingle()
         {
             var guiModule = ctx.GetQuery<Kistl.App.Base.Module>().Where(m => m.Name == "GUI").Single();
             Assert.That(guiModule, Is.Not.Null);
+            Assert.That(guiModule.Name, Is.EqualTo("GUI"));
         }
 
         [Test]
-        [ExpectedException]
+        [Ignore("Case 471")]
         public void GetListSingle()
         {
             var guiModule = ctx.GetQuery<Kistl.App.Base.Module>().Single(m => m.Name == "GUI");
             Assert.That(guiModule, Is.Not.Null);
+            Assert.That(guiModule.Name, Is.EqualTo("GUI"));
         }
 
         [Test]
@@ -238,6 +241,7 @@ namespace Kistl.Server.Tests
         {
             var guiModule = ctx.GetQuery<Kistl.App.Base.Module>().Where(m => m.Name == "GUI").First();
             Assert.That(guiModule, Is.Not.Null);
+            Assert.That(guiModule.Name, Is.EqualTo("GUI"));
         }
 
         [Test]
@@ -245,14 +249,13 @@ namespace Kistl.Server.Tests
         {
             var guiModule = ctx.GetQuery<Kistl.App.Base.Module>().First(m => m.Name == "GUI");
             Assert.That(guiModule, Is.Not.Null);
+            Assert.That(guiModule.Name, Is.EqualTo("GUI"));
         }
-
 
         public class Test
         {
             public string TestProp { get; set; }
         }
-
 
         /// <summary>
         /// Case 472
