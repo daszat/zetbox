@@ -78,6 +78,10 @@ namespace Kistl.API
         public bool IsInterfaceType(Type type)
         {
             if (type == null) { throw new ArgumentNullException("type"); }
+        
+            if (type.IsGenericType)
+                return type.GetGenericArguments().All(t => InterfaceType.IsValid(t));
+            
             return type.IsInterface && type.Assembly.FullName == Kistl.API.Helper.InterfaceAssembly;
         }
 
@@ -110,11 +114,8 @@ namespace Kistl.API
         /// fulfill all constraints</exception>
         /// <exception cref="ArgumentNullException">if <paramref name="type"/> is null</exception>
         public InterfaceType(Type type)
-            : this()
+            : this(new DefaultInterfaceTypeFilter(System.Reflection.Assembly.Load(Kistl.API.Helper.InterfaceAssembly)), type)
         {
-            if (!IsValid(type)) { throw new ArgumentOutOfRangeException("type"); }
-
-            this.Type = type;
         }
 
         /// <summary>

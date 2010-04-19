@@ -14,8 +14,8 @@ namespace Kistl.Client
     internal class CustomActionsManagerClient
         : BaseCustomActionsManager
     {
-        internal CustomActionsManagerClient()
-            : base(String.Empty, ApplicationContext.Current.ImplementationAssembly)
+        internal CustomActionsManagerClient(ApplicationContext appCtx)
+            : base(String.Empty, appCtx.ImplementationAssembly)
         {
         }
 

@@ -7,6 +7,7 @@ using Kistl.App.Extensions;
 using Kistl.API.Client;
 using Kistl.Client.Presentables;
 using Autofac;
+using Kistl.API.Configuration;
 
 namespace Kistl.Client
 {
@@ -20,8 +21,8 @@ namespace Kistl.Client
                 .Register(c =>
                 {
                     var ctx = c.Resolve<IReadOnlyKistlContext>();
-
-                    var cams = new CustomActionsManagerClient();
+                    var appCtx = c.Resolve<ApplicationContext>();
+                    var cams = new CustomActionsManagerClient(appCtx);
                     cams.Init(ctx);
 
                     return cams;
@@ -40,7 +41,13 @@ namespace Kistl.Client
                 .SingleInstance();
 
             moduleBuilder
-                .RegisterType<GuiApplicationContext>()
+                .Register(c =>
+                {
+                    var cfg = c.Resolve<KistlConfig>();
+                    var mf = c.Resolve<IModelFactory>();
+                    return new GuiApplicationContext(cfg, mf);
+                })
+                .As<ApplicationContext>()
                 .As<IGuiApplicationContext>()
                 .SingleInstance();
 

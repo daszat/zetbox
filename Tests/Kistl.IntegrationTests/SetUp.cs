@@ -42,17 +42,19 @@ namespace Kistl.IntegrationTests
                     manager.Start(config);
 
                     AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
+
                     var builder = Kistl.API.Utils.AutoFacBuilder.CreateContainerBuilder(config, config.Client.Modules);
+                    builder.RegisterModule(new Kistl.Client.WPF.WPFModule());
                     var container = builder.Build();
-                    // var testCtx = new GuiApplicationContext(config, "WPF");
 
                     // initialise custom actions manager
-                    var cams = container.Resolve<BaseCustomActionsManager>(); 
+                    var cams = container.Resolve<BaseCustomActionsManager>();
 
-                    using (var initCtx = Kistl.API.Client.KistlContext.GetContext()) {
-                    	// load up all infrastructure from the DalProvider
-                    	// TODO: remove ToList() call!
-                    	Console.WriteLine(initCtx.GetQuery<Kistl.App.Base.ObjectClass>().ToList().Count());
+                    using (var initCtx = Kistl.API.Client.KistlContext.GetContext())
+                    {
+                        // load up all infrastructure from the DalProvider
+                        // TODO: remove ToList() call!
+                        Console.WriteLine(initCtx.GetQuery<Kistl.App.Base.ObjectClass>().ToList().Count());
                     }
                 }
                 catch (Exception error)
