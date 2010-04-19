@@ -78,11 +78,17 @@ namespace Kistl.API
         public bool IsInterfaceType(Type type)
         {
             if (type == null) { throw new ArgumentNullException("type"); }
-        
+
+            // only check parameters of generic types, like ICollection<>
             if (type.IsGenericType)
                 return type.GetGenericArguments().All(t => InterfaceType.IsValid(t));
-            
-            return type.IsInterface && type.Assembly.FullName == Kistl.API.Helper.InterfaceAssembly;
+
+            // accept all basic types as interface types
+            if (type.Assembly == typeof(bool).Assembly || type.Assembly == typeof(IQueryable).Assembly)
+                return true;
+
+            // check remainder for being an interface/enum from the InterfaceAssembly
+            return (type.IsInterface || type.IsEnum) && type.Assembly.FullName == Kistl.API.Helper.InterfaceAssembly;
         }
 
         #endregion
@@ -101,7 +107,7 @@ namespace Kistl.API
         {
             if (ifFilter == null) { throw new ArgumentNullException("ifFilter"); }
             _ifFilter = ifFilter;
-            if (!ifFilter.IsInterfaceType(type)) { throw new ArgumentOutOfRangeException("type"); }
+            if (!ifFilter.IsInterfaceType(type)) { throw new ArgumentOutOfRangeException("type", String.Format("type {0} is not from the interface assembly", type.AssemblyQualifiedName)); }
 
             this.Type = type;
         }
@@ -179,7 +185,7 @@ namespace Kistl.API
                 .Select(intf => new { Interface = intf, Inherited = GetInterestingInterfaces(baseInterface, intf) })
                 .ToList();
             candidates.Add(new { Interface = this.Type, Inherited = allInherited });
-         
+
             if (_ifFilter != null)
             {
                 return _ifFilter.AsInterfaceType(candidates.OrderBy(i => i.Inherited.Length).First().Interface);
