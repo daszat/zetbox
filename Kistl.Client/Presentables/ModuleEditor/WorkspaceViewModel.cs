@@ -11,16 +11,15 @@ namespace Kistl.Client.Presentables.ModuleEditor
 {
     public class WorkspaceViewModel : WindowViewModel
     {
-        public WorkspaceViewModel(IGuiApplicationContext appCtx, IKistlContext dataCtx)
-            : base(appCtx, dataCtx)
-        {
-            _CurrentModule = dataCtx.GetQuery<Module>().FirstOrDefault();
-        }
+        public new delegate WorkspaceViewModel Factory(IKistlContext dataCtx);
 
-        public WorkspaceViewModel(IGuiApplicationContext appCtx, IKistlContext dataCtx, int moduleID)
+        protected IModelFactory mdlFactory;
+
+        public WorkspaceViewModel(IGuiApplicationContext appCtx, IKistlContext dataCtx, IModelFactory mdlFactory)
             : base(appCtx, dataCtx)
         {
-            _CurrentModule = dataCtx.Find<Module>(moduleID);
+            this.mdlFactory = mdlFactory;
+            _CurrentModule = dataCtx.GetQuery<Module>().FirstOrDefault();
         }
 
         private Module _CurrentModule;
@@ -70,15 +69,15 @@ namespace Kistl.Client.Presentables.ModuleEditor
                 if (_TreeItems == null)
                 {
                     var lst = new ObservableCollection<ViewModel>();
-                    lst.Add(new ObjectClassInstanceListViewModel(AppContext, DataContext, CurrentModule));
-                    lst.Add(new InterfaceInstanceListViewModel(AppContext, DataContext, CurrentModule));
-                    lst.Add(new EnumerationInstanceListViewModel(AppContext, DataContext, CurrentModule));
-                    lst.Add(new CompoundObjectInstanceListViewModel(AppContext, DataContext, CurrentModule));
-                    lst.Add(new AssemblyInstanceListViewModel(AppContext, DataContext, CurrentModule));
-                    lst.Add(new ViewDescriptorInstanceListViewModel(AppContext, DataContext, CurrentModule));
-                    lst.Add(new ViewModelDescriptorInstanceListViewModel(AppContext, DataContext, CurrentModule));
-                    lst.Add(new RelationInstanceListViewModel(AppContext, DataContext, CurrentModule));
-                    lst.Add(new DiagramViewModel(AppContext, DataContext, CurrentModule));
+                    lst.Add(mdlFactory.CreateViewModel<ObjectClassInstanceListViewModel.Factory>().Invoke(DataContext, CurrentModule));
+                    lst.Add(mdlFactory.CreateViewModel<InterfaceInstanceListViewModel.Factory>().Invoke(DataContext, CurrentModule));
+                    lst.Add(mdlFactory.CreateViewModel<EnumerationInstanceListViewModel.Factory>().Invoke(DataContext, CurrentModule));
+                    lst.Add(mdlFactory.CreateViewModel<CompoundObjectInstanceListViewModel.Factory>().Invoke(DataContext, CurrentModule));
+                    lst.Add(mdlFactory.CreateViewModel<AssemblyInstanceListViewModel.Factory>().Invoke(DataContext, CurrentModule));
+                    lst.Add(mdlFactory.CreateViewModel<ViewDescriptorInstanceListViewModel.Factory>().Invoke(DataContext, CurrentModule));
+                    lst.Add(mdlFactory.CreateViewModel<ViewModelDescriptorInstanceListViewModel.Factory>().Invoke(DataContext, CurrentModule));
+                    lst.Add(mdlFactory.CreateViewModel<RelationInstanceListViewModel.Factory>().Invoke(DataContext, CurrentModule));
+                    lst.Add(mdlFactory.CreateViewModel<DiagramViewModel.Factory>().Invoke(DataContext, CurrentModule));
 
                     _TreeItems = new ReadOnlyObservableCollection<ViewModel>(lst);
                 }

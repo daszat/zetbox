@@ -41,12 +41,9 @@ namespace Kistl.Client.ASPNET.Toolkit
         public List<JavaScriptObjectMoniker> GetInstances(int objectClassID)
         {
             // Dont use model - directly selecting is faster
-            using (IKistlContext ctx = KistlContext.GetContext())
-            {
-                var objClass = ctx.Find<ObjectClass>(objectClassID);
-                return ctx.GetQuery(objClass.GetDescribedInterfaceType())
-                    .Select(i => new JavaScriptObjectMoniker(ctx, i)).ToList();
-            }
+            var objClass = KistlContextManagerModule.KistlContext.Find<ObjectClass>(objectClassID);
+            return KistlContextManagerModule.KistlContext.GetQuery(objClass.GetDescribedInterfaceType())
+                    .Select(i => new JavaScriptObjectMoniker(KistlContextManagerModule.KistlContext, i)).ToList();
         }
     }
 }

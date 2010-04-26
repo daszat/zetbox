@@ -18,13 +18,13 @@ namespace Kistl.Client.WPF.View.ObjectBrowser
     using Kistl.API.Client;
     using Kistl.App.Base;
     using Kistl.Client.Presentables;
-    using ObjectEditorWorkspace = Kistl.Client.Presentables.ObjectEditor.WorkspaceViewModel;
+    using Kistl.Client.GUI;
 
     /// <summary>
     /// Shows all instances of a given DataTypeModel
     /// </summary>
     public partial class InstanceListDisplay
-        : UserControl
+        : UserControl, IHasViewModel<DataTypeModel>
     {
         /// <summary>
         /// Initializes a new instance of the ObjectClassDisplay class.
@@ -59,59 +59,37 @@ namespace Kistl.Client.WPF.View.ObjectBrowser
                 return;
             }
 
-            var factory = App.Current.AppContext.Factory;
-            var newWorkspace = factory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(KistlContext.GetContext());
-            newWorkspace.ShowForeignModel(dataObject);
-            factory.ShowModel(newWorkspace, true);
+            ViewModel.OpenObject(new DataObjectModel[] { dataObject });
             e.Handled = true;
         }
 
         private void Open_Click(object sender, RoutedEventArgs e)
         {
-            var factory = App.Current.AppContext.Factory;
-            var newWorkspace = factory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(KistlContext.GetContext());
-            foreach (var item in ClassList.SelectedItems.OfType<DataObjectModel>())
-            {
-                newWorkspace.ShowForeignModel(item);
-            }
-            factory.ShowModel(newWorkspace, true);
+            ViewModel.OpenObject(ClassList.SelectedItems.OfType<DataObjectModel>());
         }
 
         private void Refresh_Click(object sender, RoutedEventArgs e)
         {
-            var dtm = DataContext as DataTypeModel;
-            if (dtm != null)
-            {
-                dtm.ReloadInstances();
-            }
+            ViewModel.ReloadInstances();
         }
 
         private void Edit_Click(object sender, RoutedEventArgs e)
         {
-            var factory = App.Current.AppContext.Factory;
-            var dtm = DataContext as DataTypeModel;
-            if (dtm != null)
-            {
-                var newCtx = KistlContext.GetContext();
-                var objClass = newCtx.Find<DataType>(dtm.TypeId);
-                var newWorkspace = factory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(newCtx);
-                newWorkspace.ShowForeignModel(factory.CreateViewModel<DataObjectModel.Factory>(objClass).Invoke(newCtx, objClass));
-                factory.ShowModel(newWorkspace, true);
-            }
+            ViewModel.EditClass();
         }
 
         private void New_Click(object sender, RoutedEventArgs e)
         {
-            var factory = App.Current.AppContext.Factory;
-            var dtm = DataContext as DataTypeModel;
-            if (dtm != null)
-            {
-                var newCtx = KistlContext.GetContext();
-                var newWorkspace = factory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(newCtx);
-                var newObj = newCtx.Create(dtm.InterfaceType);
-                newWorkspace.ShowForeignModel(factory.CreateViewModel<DataObjectModel.Factory>(newObj).Invoke(newCtx, newObj));
-                factory.ShowModel(newWorkspace, true);
-            }
+            ViewModel.NewObject();
         }
+
+        #region IHasViewModel<DataTypeModel> Members
+
+        public DataTypeModel ViewModel
+        {
+            get { return (DataTypeModel)DataContext; }
+        }
+
+        #endregion
     }
 }

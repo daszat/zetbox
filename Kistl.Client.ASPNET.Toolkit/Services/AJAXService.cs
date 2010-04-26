@@ -23,11 +23,8 @@ namespace Kistl.Client.ASPNET.Toolkit
 
             try
             {
-                using (IKistlContext ctx = KistlContext.GetContext())
-                {
-                    return ctx.GetQuery(type.GetInterfaceType())
-                        .Select(i => new JavaScriptObjectMoniker(ctx, i)).ToList();
-                }
+                return KistlContextManagerModule.KistlContext.GetQuery(type.GetInterfaceType())
+                    .Select(i => new JavaScriptObjectMoniker(KistlContextManagerModule.KistlContext, i)).ToList();
             }
             catch (Exception ex)
             {

@@ -13,12 +13,15 @@ namespace Kistl.Client.Presentables.KistlBase
 
         public ApplicationViewModel(
             IGuiApplicationContext appCtx, IKistlContext dataCtx,
-            string name, Type wndMdlType)
+            string name, Type wndMdlType, IModelFactory mdlFactory)
             : base(appCtx, dataCtx)
         {
             _name = name;
             _wndMdlType = wndMdlType;
+            _mdlFactory = mdlFactory;
         }
+
+        private IModelFactory _mdlFactory;
 
         private Type _wndMdlType;
         public Type WindowModelType
@@ -44,7 +47,7 @@ namespace Kistl.Client.Presentables.KistlBase
             {
                 if (_openApplicatonCommand == null)
                 {
-                    _openApplicatonCommand = new OpenApplicatonCommand(AppContext, DataContext);
+                    _openApplicatonCommand = _mdlFactory.CreateViewModel<OpenApplicatonCommand.Factory>().Invoke(DataContext);
                 }
                 return _openApplicatonCommand;
             }
@@ -56,9 +59,14 @@ namespace Kistl.Client.Presentables.KistlBase
 
     internal class OpenApplicatonCommand : CommandModel
     {
-        public OpenApplicatonCommand(IGuiApplicationContext appCtx, IKistlContext dataCtx)
+        public new delegate OpenApplicatonCommand Factory(IKistlContext dataCtx);
+
+        private readonly Func<IKistlContext> ctxFactory;
+
+        public OpenApplicatonCommand(IGuiApplicationContext appCtx, IKistlContext dataCtx, Func<IKistlContext> ctxFactory)
             : base(appCtx, dataCtx, "Open Application", "Opens an Application in a new window")
         {
+            this.ctxFactory = ctxFactory;
         }
 
         public override bool CanExecute(object data)
@@ -71,11 +79,11 @@ namespace Kistl.Client.Presentables.KistlBase
         {
             if (CanExecute(data))
             {
-                var externalCtx = KistlContext.GetContext();
+                var externalCtx = ctxFactory();
                 var appMdl = data as ApplicationViewModel;
 
                 // responsibility to externalCtx's disposal passes to newWorkspace
-                var newWorkspace = ModelFactory.CreateViewModel<WindowViewModel.Factory>().Invoke(externalCtx);
+                var newWorkspace = ModelFactory.CreateViewModel<WindowViewModel.Factory>(appMdl.WindowModelType).Invoke(externalCtx);
                 ModelFactory.ShowModel(newWorkspace, true);
             }
         }

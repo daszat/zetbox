@@ -54,22 +54,13 @@ namespace Kistl.Client.WPF.View.ModuleEditor
                 return;
             }
 
-            var factory = App.Current.AppContext.Factory;
-            var newWorkspace = factory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(KistlContext.GetContext());
-            newWorkspace.ShowForeignModel(dataObject);
-            factory.ShowModel(newWorkspace, true);
+            ViewModel.OpenObject(new DataObjectModel[] { dataObject });
             e.Handled = true;
         }
 
         private void Open_Click(object sender, RoutedEventArgs e)
         {
-            var factory = App.Current.AppContext.Factory;
-            var newWorkspace = factory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(KistlContext.GetContext());
-            foreach (var item in InstancesList.SelectedItems.OfType<DataObjectModel>())
-            {
-                newWorkspace.ShowForeignModel(item);
-            }
-            factory.ShowModel(newWorkspace, true);
+            ViewModel.OpenObject(InstancesList.SelectedItems.OfType<DataObjectModel>());
         }
 
         private void Refresh_Click(object sender, RoutedEventArgs e)
@@ -79,12 +70,7 @@ namespace Kistl.Client.WPF.View.ModuleEditor
 
         private void New_Click(object sender, RoutedEventArgs e)
         {
-            var factory = App.Current.AppContext.Factory;
-            var newCtx = KistlContext.GetContext();
-            var newWorkspace = factory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(newCtx);
-            var newObj = newCtx.Create(ViewModel.InterfaceType);
-            newWorkspace.ShowForeignModel(factory.CreateViewModel<DataObjectModel.Factory>(newObj).Invoke(newCtx, newObj));
-            factory.ShowModel(newWorkspace, true);
+            ViewModel.NewObject();
         }
 
         #region IHasViewModel<ModuleEditorDashboardModel> Members

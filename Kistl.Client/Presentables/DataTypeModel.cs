@@ -7,6 +7,7 @@ namespace Kistl.Client.Presentables
     using System.Collections.Specialized;
     using System.Linq;
     using System.Text;
+    using ObjectEditorWorkspace = Kistl.Client.Presentables.ObjectEditor.WorkspaceViewModel;
 
     using Kistl.API;
     using Kistl.API.Client;
@@ -20,19 +21,28 @@ namespace Kistl.Client.Presentables
     {
         public new delegate DataTypeModel Factory(IKistlContext dataCtx, DataType type);
 
+        protected IModelFactory mdlFactory;
+        protected Func<IKistlContext> ctxFactory;
+
         /// <summary>
         /// Initializes a new instance of the DataTypeModel class.
         /// </summary>
         /// <param name="appCtx">the application context to use</param>
         /// <param name="dataCtx">the data context to use</param>
         /// <param name="type">the data type to model</param>
+        /// <param name="mdlFactory"></param>
+        /// <param name="ctxFactory"></param>
         public DataTypeModel(
             IGuiApplicationContext appCtx,
             IKistlContext dataCtx,
-            DataType type)
+            DataType type,
+            IModelFactory mdlFactory,
+            Func<IKistlContext> ctxFactory)
             : base(appCtx, dataCtx, type)
         {
             _type = type;
+            this.mdlFactory = mdlFactory;
+            this.ctxFactory = ctxFactory;
         }
 
         #region Public interface
@@ -138,6 +148,36 @@ namespace Kistl.Client.Presentables
             {
                 return new InterfaceType(_type.GetDataType());
             }
+        }
+
+        public void OpenObject(IEnumerable<DataObjectModel> objects)
+        {
+            if (objects == null) throw new ArgumentNullException("objects");
+
+            var newWorkspace = mdlFactory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(ctxFactory());
+            foreach (var item in objects)
+            {
+                newWorkspace.ShowForeignModel(item);
+            }
+            mdlFactory.ShowModel(newWorkspace, true);
+        }
+
+        public void NewObject()
+        {
+            var newCtx = ctxFactory();
+            var newWorkspace = mdlFactory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(newCtx);
+            var newObj = newCtx.Create(this.InterfaceType);
+            newWorkspace.ShowForeignModel(mdlFactory.CreateViewModel<DataObjectModel.Factory>(newObj).Invoke(newCtx, newObj));
+            mdlFactory.ShowModel(newWorkspace, true);
+        }
+
+        public void EditClass()
+        {
+            var newCtx = ctxFactory();
+            var objClass = newCtx.Find<DataType>(this.TypeId);
+            var newWorkspace = mdlFactory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(newCtx);
+            newWorkspace.ShowForeignModel(mdlFactory.CreateViewModel<DataObjectModel.Factory>(objClass).Invoke(newCtx, objClass));
+            mdlFactory.ShowModel(newWorkspace, true);
         }
 
         #endregion

@@ -18,14 +18,18 @@ namespace Kistl.Client.Presentables.TimeRecords
     {
         public new delegate Dashboard Factory(IKistlContext dataCtx);
 
+        private IModelFactory mdlFactory;
+
         /// <summary>
         /// Initializes a new instance of the Dashboard class.
         /// </summary>
         /// <param name="appCtx">the application context to use</param>
         /// <param name="dataCtx">the data context to use</param>
-        public Dashboard(IGuiApplicationContext appCtx, IKistlContext dataCtx)
+        /// <param name="mdlFactory"></param>
+        public Dashboard(IGuiApplicationContext appCtx, IKistlContext dataCtx, IModelFactory mdlFactory)
             : base(appCtx, dataCtx)
         {
+            this.mdlFactory = mdlFactory;
         }
 
         private OpenRecorderCommand _openRecorderCommand;
@@ -35,7 +39,7 @@ namespace Kistl.Client.Presentables.TimeRecords
             {
                 if (_openRecorderCommand == null)
                 {
-                    _openRecorderCommand = new OpenRecorderCommand(AppContext, DataContext);
+                    _openRecorderCommand = mdlFactory.CreateViewModel<OpenRecorderCommand.Factory>().Invoke(DataContext);
                 }
                 return _openRecorderCommand;
             }
@@ -50,9 +54,14 @@ namespace Kistl.Client.Presentables.TimeRecords
     internal class OpenRecorderCommand
         : CommandModel
     {
-        internal OpenRecorderCommand(IGuiApplicationContext appCtx, IKistlContext dataCtx)
+        public new delegate OpenRecorderCommand Factory(IKistlContext dataCtx);
+
+        private readonly Func<IKistlContext> ctxFactory;
+
+        public OpenRecorderCommand(IGuiApplicationContext appCtx, IKistlContext dataCtx, Func<IKistlContext> ctxFactory)
             : base(appCtx, dataCtx, "Start recording", "Start recording")
         {
+            this.ctxFactory = ctxFactory;
         }
 
         public override bool CanExecute(object data)
@@ -62,7 +71,7 @@ namespace Kistl.Client.Presentables.TimeRecords
 
         protected override void DoExecute(object data)
         {
-            var initialWorkspace = AppContext.Factory.CreateViewModel<Kistl.Client.Presentables.TimeRecords.WorkEffortRecorderModel.Factory>().Invoke(KistlContext.GetContext());
+            var initialWorkspace = AppContext.Factory.CreateViewModel<Kistl.Client.Presentables.TimeRecords.WorkEffortRecorderModel.Factory>().Invoke(ctxFactory());
             AppContext.Factory.ShowModel(initialWorkspace, true);
         }
     }

@@ -16,8 +16,10 @@ namespace Kistl.Client.Presentables
 
         public ObjectClassModel(
             IGuiApplicationContext appCtx, IKistlContext dataCtx,
-            ObjectClass cls)
-            : base(appCtx, dataCtx, cls)
+            ObjectClass cls,
+            IModelFactory mdlFactory,
+            Func<IKistlContext> ctxFactory)
+            : base(appCtx, dataCtx, cls, mdlFactory, ctxFactory)
         {
             _class = cls;
         }

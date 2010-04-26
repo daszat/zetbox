@@ -65,7 +65,7 @@ namespace Kistl.Client.ASPNET.Toolkit
                 var cams = container.Resolve<BaseCustomActionsManager>();
 
             }
-            KistlContext = Kistl.API.Client.KistlContext.GetContext();
+            //KistlContext = Kistl.API.Client.KistlContext.GetContext();
         }
     }
 }

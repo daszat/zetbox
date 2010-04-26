@@ -35,7 +35,7 @@ namespace Kistl.Client.Forms
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            var initialWorkspace = AppContext.Factory.CreateViewModel<WorkspaceViewModel.Factory>().Invoke(KistlContext.GetContext());
+            var initialWorkspace = AppContext.Factory.CreateViewModel<WorkspaceViewModel.Factory>().Invoke(container.Resolve<IKistlContext>());
             AppContext.Factory.ShowModel(initialWorkspace, true);
 
             Application.Run();
