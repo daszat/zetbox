@@ -22,10 +22,13 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
 
         protected SqlConnection db;
         protected SqlTransaction tx;
+        protected KistlConfig config;
 
-        public SqlServer()
+        public SqlServer(KistlConfig config)
         {
-            var connectionString = ApplicationContext.Current.Configuration.Server.ConnectionString;
+            if (config == null) throw new ArgumentNullException("config");
+            this.config = config;
+            var connectionString = config.Server.ConnectionString;
             if (String.IsNullOrEmpty(connectionString))
             {
                 throw new ConfigurationException("Configuration/Server/ConnectionString empty, cannot connect to database");

@@ -14,25 +14,26 @@ namespace Kistl.Client.WPF
 
     public class Launcher
     {
-        private readonly IGuiApplicationContext appCtx;
         private readonly IKistlContext ctx;
         private readonly Func<IKistlContext> ctxFactory;
-        public Launcher(IGuiApplicationContext appCtx, IKistlContext ctx, Func<IKistlContext> ctxFactory)
+        private readonly IModelFactory mdlFactory;
+
+        public Launcher(IKistlContext ctx, Func<IKistlContext> ctxFactory, IModelFactory mdlFactory)
         {
-            this.appCtx = appCtx;
             this.ctx = ctx;
             this.ctxFactory = ctxFactory;
+            this.mdlFactory = mdlFactory;
         }
 
         public void Show(string[] args)
         {
             if (args == null) { throw new ArgumentNullException("args"); }
 
-            var ctxDebugger = appCtx.Factory.CreateViewModel<KistlDebuggerAsModel.Factory>().Invoke(ctxFactory());
-            appCtx.Factory.ShowModel(ctxDebugger, true);
+            var ctxDebugger = mdlFactory.CreateViewModel<KistlDebuggerAsModel.Factory>().Invoke(ctxFactory());
+            mdlFactory.ShowModel(ctxDebugger, true);
 
-            var cacheDebugger = appCtx.Factory.CreateViewModel<CacheDebuggerViewModel.Factory>().Invoke(ctxFactory());
-            appCtx.Factory.ShowModel(cacheDebugger, true);
+            var cacheDebugger = mdlFactory.CreateViewModel<CacheDebuggerViewModel.Factory>().Invoke(ctxFactory());
+            mdlFactory.ShowModel(cacheDebugger, true);
 
             bool _timeRecorder = args.Contains("-timerecorder");
 
@@ -41,15 +42,15 @@ namespace Kistl.Client.WPF
             ViewModel initialWorkspace;
             if (_timeRecorder)
             {
-                initialWorkspace = appCtx.Factory.CreateViewModel<Kistl.Client.Presentables.TimeRecords.WorkEffortRecorderModel.Factory>().Invoke(ctxFactory.Invoke());
+                initialWorkspace = mdlFactory.CreateViewModel<Kistl.Client.Presentables.TimeRecords.WorkEffortRecorderModel.Factory>().Invoke(ctxFactory.Invoke());
             }
             else
             {
-                initialWorkspace = appCtx.Factory.CreateViewModel<WorkspaceViewModel.Factory>().Invoke(ctxFactory.Invoke());
+                initialWorkspace = mdlFactory.CreateViewModel<WorkspaceViewModel.Factory>().Invoke(ctxFactory.Invoke());
             }
 
             LauncherKind launcher = ctx.Create<LauncherKind>();
-            appCtx.Factory.ShowModel(initialWorkspace, launcher, true);
+            mdlFactory.ShowModel(initialWorkspace, launcher, true);
         }
     }
 }

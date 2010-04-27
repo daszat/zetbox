@@ -7,15 +7,11 @@ namespace Kistl.API.Server
     using System.Runtime.Remoting.Lifetime;
     using System.Text;
 
-    public abstract class ServerApiContext : ApplicationContext
+    public class ServerApplicationContext : ApplicationContext
     {
-        public static new ServerApiContext Current { get; private set; }
-
-        public ServerApiContext(Configuration.KistlConfig config)
-            : base(HostType.Server, config)
+        public ServerApplicationContext()
+            : base(HostType.Server)
         {
-            ServerApiContext.Current = this;
-
             BaseDataObjectType = typeof(BaseServerDataObject);
             BasePersistenceObjectType = typeof(BaseServerPersistenceObject);
             BaseCollectionEntryType = typeof(BaseServerCollectionEntry);

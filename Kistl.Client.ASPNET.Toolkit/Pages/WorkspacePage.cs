@@ -34,10 +34,10 @@ namespace Kistl.Client.ASPNET.Toolkit.Pages
 
         void WorkspacePage_Init(object sender, EventArgs e)
         {
-            var mdl = GuiApplicationContext.Current.Factory
+            var mdl = KistlContextManagerModule.ModelFactory
                 .CreateViewModel<WorkspaceViewModel.Factory>().Invoke(KistlContextManagerModule.KistlContext);
 
-            GuiApplicationContext.Current.Factory.CreateDefaultView(mdl, ctrlMainContent);
+            KistlContextManagerModule.ModelFactory.CreateDefaultView(mdl, ctrlMainContent);
         }
 
         protected override void OnPreRender(EventArgs e)

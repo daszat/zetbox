@@ -16,7 +16,6 @@ namespace Kistl.API.Server
     {
         protected BaseServerPersistenceObject()
         {
-            if (ApplicationContext.Current.HostType != HostType.Server) throw new InvalidOperationException("A BaseServerPersistenceObject can only exist on a server");
             ClientObjectState = DataObjectState.NotDeserialized;
             var trace = new System.Diagnostics.StackTrace(true);
             _constructTrace = String.Join("\n",

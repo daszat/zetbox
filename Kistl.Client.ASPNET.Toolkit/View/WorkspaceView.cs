@@ -43,7 +43,7 @@ namespace Kistl.Client.ASPNET.Toolkit.View
 
             foreach (var item in Objects)
             {
-                GuiApplicationContext.Current.Factory.ShowModel(item, false);
+                KistlContextManagerModule.ModelFactory.ShowModel(item, false);
             }
 
             if (!IsPostBack)
@@ -69,7 +69,7 @@ namespace Kistl.Client.ASPNET.Toolkit.View
                     container.Attributes.Add("display", "node");
                     containerObjectsCtrl.Controls.Add(container);
 
-                    var ctrl = (Control)GuiApplicationContext.Current.Factory.CreateDefaultView(mdl, container);
+                    var ctrl = (Control)KistlContextManagerModule.ModelFactory.CreateDefaultView(mdl, container);
                     _controlsAdded.Add(container);
                 }
             }
@@ -120,7 +120,7 @@ namespace Kistl.Client.ASPNET.Toolkit.View
                         InterfaceType ifType = new InterfaceType(Type.GetType(type + ", " + ApplicationContext.Current.InterfaceAssembly));
                         IDataObject obj = (IDataObject)KistlContextManagerModule.KistlContext.Find(ifType, id);
 
-                        var mdl = GuiApplicationContext.Current.Factory.CreateViewModel<DataObjectModel.Factory>(obj).Invoke(KistlContextManagerModule.KistlContext, obj);
+                        var mdl = KistlContextManagerModule.ModelFactory.CreateViewModel<DataObjectModel.Factory>(obj).Invoke(KistlContextManagerModule.KistlContext, obj);
                         if (mdl == null) throw new InvalidOperationException(string.Format("Unable to create model for {0}({1})", type, id));
                         _Objects.Add(mdl);
                     }

@@ -13,8 +13,6 @@ namespace Kistl.API.Client
     {
         protected BaseClientPersistenceObject()
         {
-            if (ApplicationContext.Current.HostType != HostType.Client)
-                throw new InvalidOperationException("A BaseClientPersistenceObject can exist only on a client");
         }
 
         private int _ID;

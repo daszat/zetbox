@@ -8,17 +8,12 @@ using Kistl.API.Configuration;
 
 namespace Kistl.API.Server.Mocks
 {
-    class ServerApiContextMock : ServerApiContext
+    class ServerApiContextMock : ServerApplicationContext
     {
         public ServerApiContextMock()
-            : base(KistlConfig.FromFile("Kistl.API.Server.Tests.Config.xml"))
+            : base()
         {
             ImplementationAssembly = InterfaceAssembly = Assembly.GetAssembly(this.GetType()).FullName;
-        }
-
-        public override void LoadFrozenActions(IReadOnlyKistlContext ctx)
-        {
-            throw new NotImplementedException();
         }
     }
 }

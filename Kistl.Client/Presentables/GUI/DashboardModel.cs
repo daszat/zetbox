@@ -24,7 +24,7 @@ namespace Kistl.Client.Presentables.GUI
         /// </summary>
         /// <param name="appCtx">the application context to use</param>
         /// <param name="dataCtx">the data context to use</param>
-        public DashboardModel(IGuiApplicationContext appCtx, IKistlContext dataCtx)
+        public DashboardModel(IViewModelDependencies appCtx, IKistlContext dataCtx)
             : base(appCtx, dataCtx)
         {
             // TODO: react to ctx.Create<ViewModelDescriptor>()/ctx.Delete<ViewModelDescriptor>()

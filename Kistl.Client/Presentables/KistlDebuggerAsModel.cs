@@ -15,7 +15,7 @@ namespace Kistl.Client.Presentables
     {
         public new delegate KistlDebuggerAsModel Factory(IKistlContext dataCtx);
 
-        public KistlDebuggerAsModel(IGuiApplicationContext appCtx, IKistlContext dataCtx)
+        public KistlDebuggerAsModel(IViewModelDependencies appCtx, IKistlContext dataCtx)
             : base(appCtx, dataCtx)
         {
             KistlContextDebuggerSingleton.SetDebugger(this);
@@ -97,7 +97,7 @@ namespace Kistl.Client.Presentables
 
         protected IDebuggingKistlContext DebuggingContext { get; private set; }
 
-        public KistlContextModel(IGuiApplicationContext appCtx, IDebuggingKistlContext dataCtx)
+        public KistlContextModel(IViewModelDependencies appCtx, IDebuggingKistlContext dataCtx)
             : base(appCtx, dataCtx)
         {
             DebuggingContext = dataCtx;

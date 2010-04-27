@@ -29,7 +29,7 @@ namespace Kistl.Client.Presentables
         private readonly INotifyCollectionChanged _notifier;
 
         public ObjectListModel(
-            IGuiApplicationContext appCtx, IKistlContext dataCtx,
+            IViewModelDependencies appCtx, IKistlContext dataCtx,
             IDataObject obj, ObjectReferenceProperty prop)
             : base(appCtx, dataCtx, obj, prop)
         {
@@ -369,7 +369,7 @@ namespace Kistl.Client.Presentables
 
         private void CollectChildClasses(int id, List<ObjectClass> children)
         {
-            var nextChildren = MetaContext.GetQuery<ObjectClass>()
+            var nextChildren = FrozenContext.Single.GetQuery<ObjectClass>()
                 .Where(oc => oc.BaseObjectClass != null && oc.BaseObjectClass.ID == id)
                 .ToList();
 

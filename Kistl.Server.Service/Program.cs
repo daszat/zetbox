@@ -180,7 +180,7 @@ namespace Kistl.Server.Service
 
                 Log.TraceTotalMemory("Before InitApplicationContext");
 
-                var config = InitApplicationContext(extraArguments);
+                var config = ExtractConfig(extraArguments);
 
                 Log.TraceTotalMemory("After InitApplicationContext");
 
@@ -250,11 +250,8 @@ namespace Kistl.Server.Service
             {
                 Log.TraceTotalMemory("Before DefaultInitialisation()");
 
-                // TODO: remove, this should be default when using the container.
-                {
-                    container.Resolve<ServerApplicationContext>();
-                    if (dataSourceXmlFile == null) { FrozenContext.RegisterFallback(container.Resolve<IReadOnlyKistlContext>()); }
-                }
+                var appCtx = container.Resolve<ApplicationContext>();
+                if (dataSourceXmlFile == null) { FrozenContext.RegisterFallback(container.Resolve<IReadOnlyKistlContext>()); }
 
                 // initialise custom actions manager
                 var cams = container.Resolve<BaseCustomActionsManager>();
@@ -291,9 +288,7 @@ namespace Kistl.Server.Service
             return container;
         }
 
-        private static ServerApplicationContext _appCtx;
-
-        private static KistlConfig InitApplicationContext(List<string> args)
+        private static KistlConfig ExtractConfig(List<string> args)
         {
             string configFilePath;
             if (args.Count > 0 && !args[0].StartsWith("-"))
@@ -304,9 +299,7 @@ namespace Kistl.Server.Service
             {
                 configFilePath = String.Empty;
             }
-            var config = KistlConfig.FromFile(configFilePath);
-            _appCtx = new ServerApplicationContext(config);
-            return config;
+            return KistlConfig.FromFile(configFilePath);
         }
     }
 }

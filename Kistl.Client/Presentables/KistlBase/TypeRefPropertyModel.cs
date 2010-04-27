@@ -14,7 +14,7 @@ namespace Kistl.Client.Presentables.KistlBase
            : ObjectReferenceModel
     {
         public TypeRefPropertyModel(
-            IGuiApplicationContext appCtx, IKistlContext dataCtx,
+            IViewModelDependencies appCtx, IKistlContext dataCtx,
             IDataObject referenceHolder, ObjectReferenceProperty prop)
             : base(appCtx, dataCtx, referenceHolder, prop)
         {
@@ -26,26 +26,26 @@ namespace Kistl.Client.Presentables.KistlBase
         }
 
         private LoadTypeRefFromAssemblyFileCommand _loadTypeRefFromAssemblyFileCommand = null;
-        public LoadTypeRefFromAssemblyFileCommand LoadTypeRefFromAssemblyFileCommand
+        public ICommand LoadTypeRefFromAssemblyFileCommand
         {
             get
             {
                 if (_loadTypeRefFromAssemblyFileCommand == null)
                 {
-                    _loadTypeRefFromAssemblyFileCommand = new LoadTypeRefFromAssemblyFileCommand(AppContext, DataContext, this);
+                    _loadTypeRefFromAssemblyFileCommand = ModelFactory.CreateViewModel<LoadTypeRefFromAssemblyFileCommand.Factory>().Invoke(DataContext, this);
                 }
                 return _loadTypeRefFromAssemblyFileCommand;
             }
         }
 
         private LoadTypeRefFromAssemblyRefCommand _loadTypeRefFromAssemblyRefCommand = null;
-        public LoadTypeRefFromAssemblyRefCommand LoadTypeRefFromAssemblyRefCommand
+        public ICommand LoadTypeRefFromAssemblyRefCommand
         {
             get
             {
                 if (_loadTypeRefFromAssemblyRefCommand == null)
                 {
-                    _loadTypeRefFromAssemblyRefCommand = new LoadTypeRefFromAssemblyRefCommand(AppContext, DataContext, this);
+                    _loadTypeRefFromAssemblyRefCommand = ModelFactory.CreateViewModel<LoadTypeRefFromAssemblyRefCommand.Factory>().Invoke(DataContext, this);
                 }
                 return _loadTypeRefFromAssemblyRefCommand;
             }

@@ -37,7 +37,7 @@ namespace Kistl.Client.ASPNET.Toolkit.View
         {
             if (!_initialized && Model != null)
             {
-                GuiApplicationContext.Current.Factory.CreateSpecificView(Model.Model, Model.RequestedKind, containerCtrl);
+                KistlContextManagerModule.ModelFactory.CreateSpecificView(Model.Model, Model.RequestedKind, containerCtrl);
                 _initialized = true;
             }
         }

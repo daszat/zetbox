@@ -6,15 +6,11 @@ namespace Kistl.API.Client
     using System.Linq;
     using System.Text;
 
-    public abstract class ClientApiContext : ApplicationContext
+    public class ClientApplicationContext : ApplicationContext
     {
-        public static new ClientApiContext Current { get; private set; }
-
-        public ClientApiContext(Configuration.KistlConfig config) :
-            base(HostType.Client, config)
+        public ClientApplicationContext() :
+            base(HostType.Client)
         {
-            ClientApiContext.Current = this;
-
             BaseDataObjectType = typeof(BaseClientDataObject);
             BasePersistenceObjectType = typeof(BaseClientPersistenceObject);
             BaseCollectionEntryType = typeof(BaseClientCollectionEntry);

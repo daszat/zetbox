@@ -14,10 +14,16 @@ namespace Kistl.Client.WPF.Converter
     [ValueConversion(typeof(IDataObject), typeof(string))]
     public class IconConverter : IValueConverter
     {
+        public IconConverter(string docStore)
+        {
+            this.DocumentStore = docStore;
+        }
+
+        private readonly string DocumentStore;
+
         private string GetIconPath(string name)
         {
-            if (ApplicationContext.Current == null) return String.Empty;
-            string result = ApplicationContext.Current.Configuration.Client.DocumentStore
+            string result = DocumentStore
                 + @"\GUI.Icons\"
                 + name;
             result = System.IO.Path.IsPathRooted(result) ? result : Environment.CurrentDirectory + "\\" + result;

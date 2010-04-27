@@ -16,6 +16,24 @@ namespace Kistl.Client.Presentables
         Invalid,
     }
 
+    public interface IViewModelDependencies
+    {
+        /// <summary>
+        /// The <see cref="ModelFactory"/> of this GUI.
+        /// </summary>
+        IModelFactory Factory { get; }
+
+        /// <summary>
+        /// A <see cref="IThreadManager"/> for the UI Thread
+        /// </summary>
+        IUiThreadManager UiThread { get; }
+        /// <summary>
+        /// A <see cref="IThreadManager"/> for asynchronous Tasks
+        /// </summary>
+        IAsyncThreadManager AsyncThread { get; }
+
+    }
+
     /// <summary>
     /// A base class for implementing the ViewModel pattern. This class proxies the actual
     /// data model into a non-blocking, view-state holding entity. Unless noted differently, members
@@ -26,43 +44,33 @@ namespace Kistl.Client.Presentables
     {
         public delegate ViewModel Factory(IKistlContext dataCtx);
 
-        /// <summary>
-        /// This application's global context
-        /// </summary>
-        protected IGuiApplicationContext AppContext { get; private set; }
+        private readonly IViewModelDependencies _dependencies;
 
         /// <summary>
         /// A <see cref="IThreadManager"/> for the UI Thread
         /// </summary>
-        protected IThreadManager UI { get { return AppContext.UiThread; } }
+        protected IUiThreadManager UI { get { return _dependencies.UiThread; } }
         /// <summary>
         /// A <see cref="IThreadManager"/> for asynchronous Tasks
         /// </summary>
-        protected IThreadManager Async { get { return AppContext.AsyncThread; } }
-
-        /// <summary>
-        /// An <see cref="IReadOnlyKistlContext"/> to access meta data
-        /// </summary>
-        protected IReadOnlyKistlContext MetaContext { get { return AppContext.MetaContext; } }
+        protected IAsyncThreadManager Async { get { return _dependencies.AsyncThread; } }
 
         /// <summary>
         /// The factory from where new models should be created
         /// </summary>
-        public IModelFactory ModelFactory { get { return AppContext.Factory; } }
+        public IModelFactory ModelFactory { get { return _dependencies.Factory; } }
 
         /// <summary>
         /// A <see cref="IKistlContext"/> to access the current user's data
         /// </summary>
         protected IKistlContext DataContext { get; private set; }
 
-        /// <param name="appCtx">The <see cref="IGuiApplicationContext"/> to access the current application context</param>
+        /// <param name="dependencies">The <see cref="IViewModelDependencies"/> to access the current application context</param>
         /// <param name="dataCtx">The <see cref="IKistlContext"/> to access the current user's data session</param>
-        protected ViewModel(IGuiApplicationContext appCtx, IKistlContext dataCtx)
+        protected ViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx)
         {
             IsInDesignMode = false;
-
-            AppContext = appCtx;
-
+            _dependencies = dependencies;
             DataContext = dataCtx;
         }
 
@@ -134,7 +142,7 @@ namespace Kistl.Client.Presentables
             }
 
             IsInDesignMode = true;
-            AppContext = new DesignApplicationContext();
+            _dependencies = new DesignerDependencies();
         }
 
         /// <summary>
@@ -148,36 +156,25 @@ namespace Kistl.Client.Presentables
 
     }
 
-    internal class DesignApplicationContext : IGuiApplicationContext
+    internal class DesignerDependencies : IViewModelDependencies
     {
         #region IGuiApplicationContext Members
-
-        public IReadOnlyKistlContext MetaContext
-        {
-            get { throw new InvalidOperationException("No data access operations allowed in Design mode"); }
-        }
 
         public IModelFactory Factory
         {
             get { throw new NotImplementedException(); }
         }
 
-        private IThreadManager _thread = new SynchronousThreadManager();
-        public IThreadManager UiThread
+        private IUiThreadManager _thread = new SynchronousThreadManager();
+        public IUiThreadManager UiThread
         {
             get { return _thread; }
         }
 
-        public IThreadManager AsyncThread
+        public IAsyncThreadManager AsyncThread
         {
             get { throw new InvalidOperationException("No asynchronous operations allowed in Design mode"); }
         }
-
-        public Kistl.API.Configuration.KistlConfig Configuration
-        {
-            get { throw new InvalidOperationException("No asynchronous operations allowed in Design mode"); }
-        }
-
         #endregion
     }
 

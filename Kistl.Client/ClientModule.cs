@@ -13,6 +13,38 @@ namespace Kistl.Client
 {
     public sealed class ClientModule : Module
     {
+        private class ViewModelDependencies : IViewModelDependencies
+        {
+            public ViewModelDependencies(IModelFactory f, IUiThreadManager ui, IAsyncThreadManager async)
+            {
+                Factory = f;
+                UiThread = ui;
+                AsyncThread = async;
+            }
+
+            #region IViewModelDependencies Members
+
+            public IModelFactory Factory
+            {
+                get;
+                private set;
+            }
+
+            public IUiThreadManager UiThread
+            {
+                get;
+                private set;
+            }
+
+            public IAsyncThreadManager AsyncThread
+            {
+                get;
+                private set;
+            }
+
+            #endregion
+        }
+
         protected override void Load(ContainerBuilder moduleBuilder)
         {
             base.Load(moduleBuilder);
@@ -41,20 +73,18 @@ namespace Kistl.Client
                 .SingleInstance();
 
             moduleBuilder
-                .Register(c =>
-                {
-                    var cfg = c.Resolve<KistlConfig>();
-                    var mf = c.Resolve<IModelFactory>();
-                    return new GuiApplicationContext(cfg, mf);
-                })
+                .Register(c => new ClientApplicationContext())
                 .As<ApplicationContext>()
-                .As<IGuiApplicationContext>()
                 .SingleInstance();
 
-            moduleBuilder.Register(c => KistlContext.GetContext())
-                .As<IKistlContext>()
-                .As<IReadOnlyKistlContext>()
-                .InstancePerDependency();
+            moduleBuilder
+                .RegisterType<SynchronousThreadManager>()
+                .As<IAsyncThreadManager>()
+                .As<IUiThreadManager>();
+
+            moduleBuilder
+                .Register(c => new ViewModelDependencies(c.Resolve<IModelFactory>(), c.Resolve<IUiThreadManager>(), c.Resolve<IAsyncThreadManager>()))
+                .As<IViewModelDependencies>();
 
             // Register all ViewModel Types
             foreach (var t in typeof(ClientModule).Assembly.GetTypes()

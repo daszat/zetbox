@@ -43,110 +43,114 @@ namespace Kistl.Client.Presentables
 
     }
 
-    namespace WPF
+    public interface IUiThreadManager : IThreadManager
     {
+    }
 
-        /// <summary>
-        /// The <see cref="IThreadManager"/> for WPF has to be constructed on the UI Thread.
-        /// </summary>
-        public class UiThreadManager : IThreadManager
+    public interface IAsyncThreadManager : IThreadManager
+    {
+    }
+
+    /// <summary>
+    /// The <see cref="IThreadManager"/> for WPF has to be constructed on the UI Thread.
+    /// </summary>
+    public class UiThreadManager : IUiThreadManager
+    {
+        private Dispatcher _dispatcher;
+        public UiThreadManager()
         {
-            private Dispatcher _dispatcher;
-            public UiThreadManager()
-            {
-                _dispatcher = Dispatcher.CurrentDispatcher;
-            }
-
-            #region IThreadManager Members
-
-            // only the thread where this manager was created is acceptable
-            public void Verify()
-            {
-#if DEBUG
-                if (Dispatcher.CurrentDispatcher != this._dispatcher)
-                    throw new InvalidOperationException("Call must be made on UI thread.");
-#endif
-            }
-
-            [System.Diagnostics.DebuggerHidden()]
-            public void Queue(object lck, Action uiTask)
-            {
-                Debug.Assert(lck == this, "always pass the UI thread manager to UI.Queue() calls");
-                _dispatcher.BeginInvoke(DispatcherPriority.ApplicationIdle, new ThreadStart(uiTask));
-            }
-
-            [System.Diagnostics.DebuggerHidden()]
-            public void Queue(object lck, Action<object> uiTask, object data)
-            {
-                Debug.Assert(lck == this, "always pass the UI thread manager to UI.Queue() calls");
-                _dispatcher.BeginInvoke(DispatcherPriority.ApplicationIdle, new ThreadStart(() => uiTask(data)));
-            }
-
-            #endregion
+            _dispatcher = Dispatcher.CurrentDispatcher;
         }
 
-        public class AsyncThreadManager : IThreadManager
+        #region IThreadManager Members
+
+        // only the thread where this manager was created is acceptable
+        public void Verify()
         {
-            #region IThreadManager Members
+#if DEBUG
+            if (Dispatcher.CurrentDispatcher != this._dispatcher)
+                throw new InvalidOperationException("Call must be made on UI thread.");
+#endif
+        }
 
-            // every thread may be async, since doing stuff on the UI thread makes 
-            // it only slower but has no potential race conditions
-            public void Verify() { }
+        [System.Diagnostics.DebuggerHidden()]
+        public void Queue(object lck, Action uiTask)
+        {
+            Debug.Assert(lck == this, "always pass the UI thread manager to UI.Queue() calls");
+            _dispatcher.BeginInvoke(DispatcherPriority.ApplicationIdle, new ThreadStart(uiTask));
+        }
 
-            // strange, the msdn ( http://msdn.microsoft.com/en-us/library/kbf0f1ct.aspx ) 
-            // says that this always returns true, and throws exceptions else (when being "hosted"),
-            // but dan crevier uses this simpler implementation 
-            // ( http://blogs.msdn.com/dancre/archive/2006/07/26/679851.aspx )
-            // I'll go with the simple implementation until we hit this scenario 
+        [System.Diagnostics.DebuggerHidden()]
+        public void Queue(object lck, Action<object> uiTask, object data)
+        {
+            Debug.Assert(lck == this, "always pass the UI thread manager to UI.Queue() calls");
+            _dispatcher.BeginInvoke(DispatcherPriority.ApplicationIdle, new ThreadStart(() => uiTask(data)));
+        }
 
-            [System.Diagnostics.DebuggerHidden()]
-            public void Queue(object lck, Action asyncTask)
+        #endregion
+    }
+
+    public class AsyncThreadManager : IAsyncThreadManager
+    {
+        #region IThreadManager Members
+
+        // every thread may be async, since doing stuff on the UI thread makes 
+        // it only slower but has no potential race conditions
+        public void Verify() { }
+
+        // strange, the msdn ( http://msdn.microsoft.com/en-us/library/kbf0f1ct.aspx ) 
+        // says that this always returns true, and throws exceptions else (when being "hosted"),
+        // but dan crevier uses this simpler implementation 
+        // ( http://blogs.msdn.com/dancre/archive/2006/07/26/679851.aspx )
+        // I'll go with the simple implementation until we hit this scenario 
+
+        [System.Diagnostics.DebuggerHidden()]
+        public void Queue(object lck, Action asyncTask)
+        {
+            if (!ThreadPool.QueueUserWorkItem(new WaitCallback((data) =>
             {
-                if (!ThreadPool.QueueUserWorkItem(new WaitCallback((data) =>
+                if (lck == null)
                 {
-                    if (lck == null)
+                    asyncTask();
+                }
+                else
+                {
+                    lock (lck)
                     {
                         asyncTask();
                     }
-                    else
-                    {
-                        lock (lck)
-                        {
-                            asyncTask();
-                        }
-                    }
-                }), null))
-                    throw new InvalidOperationException("Cannot queue task in background");
-            }
+                }
+            }), null))
+                throw new InvalidOperationException("Cannot queue task in background");
+        }
 
-            [System.Diagnostics.DebuggerHidden()]
-            public void Queue(object lck, Action<object> asyncTask, object data)
+        [System.Diagnostics.DebuggerHidden()]
+        public void Queue(object lck, Action<object> asyncTask, object data)
+        {
+            if (!ThreadPool.QueueUserWorkItem(new WaitCallback((passed_data) =>
             {
-                if (!ThreadPool.QueueUserWorkItem(new WaitCallback((passed_data) =>
+                if (lck == null)
                 {
-                    if (lck == null)
+                    asyncTask(passed_data);
+                }
+                else
+                {
+                    lock (lck)
                     {
                         asyncTask(passed_data);
                     }
-                    else
-                    {
-                        lock (lck)
-                        {
-                            asyncTask(passed_data);
-                        }
-                    }
-                }), data))
-                    throw new InvalidOperationException("Cannot queue task in background");
-            }
-
-            #endregion
+                }
+            }), data))
+                throw new InvalidOperationException("Cannot queue task in background");
         }
+
+        #endregion
     }
 
     /// <summary>
     /// A <see cref="IThreadManager"/> to execute all tasks synchronously
     /// </summary>
-    public class SynchronousThreadManager : IThreadManager
+    public class SynchronousThreadManager : IUiThreadManager, IAsyncThreadManager
     {
         #region IThreadManager Members
 

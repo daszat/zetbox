@@ -8,7 +8,6 @@
              DispatcherUnhandledException="Application_DispatcherUnhandledException">
     <Application.Resources>
         <ResourceDictionary>
-            <converter:IconConverter x:Key="IconConverter" />
             <converter:FormattingConverter x:Key="FormattingConverter" />
             <converter:GetTypeConverter x:Key="GetTypeConverter" />
             <converter:ValidityToBrushConverter x:Key="ValidityToBrushConverter" />

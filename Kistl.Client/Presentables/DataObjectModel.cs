@@ -16,6 +16,7 @@ namespace Kistl.Client.Presentables
     using Kistl.App.Base;
     using Kistl.App.Extensions;
     using Kistl.App.GUI;
+using Kistl.API.Configuration;
 
     /// <summary>
     /// Proxies a whole IDataObject
@@ -25,11 +26,14 @@ namespace Kistl.Client.Presentables
     {
         public new delegate DataObjectModel Factory(IKistlContext dataCtx, IDataObject obj);
 
+        protected readonly KistlConfig config;
+
         public DataObjectModel(
-            IGuiApplicationContext appCtx, IKistlContext dataCtx,
+            IViewModelDependencies appCtx, KistlConfig config, IKistlContext dataCtx,
             IDataObject obj)
             : base(appCtx, dataCtx)
         {
+            this.config = config;
             _object = obj;
             _object.PropertyChanged += ObjectPropertyChanged;
             // TODO: Optional machen!
@@ -91,7 +95,7 @@ namespace Kistl.Client.Presentables
                         FetchMethodList().ToList(),
                         method =>
                         {
-                            ObjectClass cls = _object.GetObjectClass(MetaContext);
+                            ObjectClass cls = _object.GetObjectClass(FrozenContext.Single);
                             return ModelFromMethod(cls, method);
                         },
                         null);
@@ -130,8 +134,7 @@ namespace Kistl.Client.Presentables
                                                 .Select(s => new { Category = s, Property = p }))
                             .GroupBy(x => x.Category, x => x.Property)
                             .OrderBy(group => group.Key)
-                            .Select(group => new PropertyGroupModel(
-                                AppContext,
+                            .Select(group => ModelFactory.CreateViewModel<PropertyGroupModel.Factory>().Invoke(
                                 DataContext,
                                 group.Key,
                                 group.Select(p =>
@@ -248,7 +251,7 @@ namespace Kistl.Client.Presentables
         private IEnumerable<Property> FetchPropertyList()
         {
             // load properties from MetaContext
-            ObjectClass cls = _object.GetObjectClass(MetaContext);
+            ObjectClass cls = _object.GetObjectClass(FrozenContext.Single);
             var props = new List<Property>();
             while (cls != null)
             {
@@ -265,7 +268,7 @@ namespace Kistl.Client.Presentables
         private IEnumerable<Method> FetchMethodList()
         {
             // load properties from MetaContext
-            ObjectClass cls = _object.GetObjectClass(MetaContext);
+            ObjectClass cls = _object.GetObjectClass(FrozenContext.Single);
             var methods = new List<Method>();
             while (cls != null)
             {
@@ -286,7 +289,7 @@ namespace Kistl.Client.Presentables
         private void FetchActions()
         {
             // load properties
-            ObjectClass cls = _object.GetObjectClass(MetaContext);
+            ObjectClass cls = _object.GetObjectClass(FrozenContext.Single);
             var actions = new List<Method>();
             while (cls != null)
             {
@@ -352,7 +355,7 @@ namespace Kistl.Client.Presentables
 
         private string GetIconPath(string name)
         {
-            string result = AppContext.Configuration.Client.DocumentStore
+            string result = config.Client.DocumentStore
                 + @"\GUI.Icons\"
                 + name;
             result = Path.IsPathRooted(result) ? result : Environment.CurrentDirectory + "\\" + result;
@@ -407,7 +410,7 @@ namespace Kistl.Client.Presentables
             }
             else
             {
-                icon = _object.GetObjectClass(MetaContext).DefaultIcon;
+                icon = _object.GetObjectClass(FrozenContext.Single).DefaultIcon;
             }
             return icon;
         }

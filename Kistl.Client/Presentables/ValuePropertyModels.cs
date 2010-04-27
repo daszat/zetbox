@@ -78,7 +78,7 @@ namespace Kistl.Client.Presentables
         public new delegate BasePropertyModel Factory(IKistlContext dataCtx, IDataObject obj, Property prop);
 
         protected BasePropertyModel(
-            IGuiApplicationContext appCtx, IKistlContext dataCtx,
+            IViewModelDependencies appCtx, IKistlContext dataCtx,
             IDataObject obj, Property prop)
             : base(appCtx, dataCtx)
         {
@@ -96,7 +96,7 @@ namespace Kistl.Client.Presentables
         public new delegate PropertyModel<TValue> Factory(IKistlContext dataCtx, IDataObject obj, Property prop);
 
         protected PropertyModel(
-            IGuiApplicationContext appCtx, IKistlContext dataCtx,
+            IViewModelDependencies appCtx, IKistlContext dataCtx,
             IDataObject obj, Property prop)
             : base(appCtx, dataCtx, obj, prop)
         {
@@ -272,7 +272,7 @@ namespace Kistl.Client.Presentables
         public new delegate NullableValuePropertyModel<TValue> Factory(IKistlContext dataCtx, IDataObject obj, Property prop);
 
         public NullableValuePropertyModel(
-            IGuiApplicationContext appCtx, IKistlContext dataCtx,
+            IViewModelDependencies appCtx, IKistlContext dataCtx,
             IDataObject obj, ValueTypeProperty prop)
             : base(appCtx, dataCtx, obj, prop)
         {
@@ -421,7 +421,7 @@ namespace Kistl.Client.Presentables
         public new delegate ReferencePropertyModel<TValue> Factory(IKistlContext dataCtx, IDataObject obj, Property prop);
 
         public ReferencePropertyModel(
-            IGuiApplicationContext appCtx, IKistlContext dataCtx,
+            IViewModelDependencies appCtx, IKistlContext dataCtx,
             IDataObject obj, ValueTypeProperty prop)
             : base(appCtx, dataCtx, obj, prop)
         {
@@ -515,7 +515,7 @@ namespace Kistl.Client.Presentables
         public new delegate ChooseReferencePropertyModel<TValue> Factory(IKistlContext dataCtx, IDataObject obj, Property prop);
 
         public ChooseReferencePropertyModel(
-            IGuiApplicationContext appCtx, IKistlContext dataCtx,
+            IViewModelDependencies appCtx, IKistlContext dataCtx,
             IDataObject obj, ValueTypeProperty prop)
             : base(appCtx, dataCtx, obj, prop)
         {
@@ -536,7 +536,7 @@ namespace Kistl.Client.Presentables
         public new delegate EnumerationPropertyModel<TValue> Factory(IKistlContext dataCtx, IDataObject obj, Property prop);
 
         public EnumerationPropertyModel(
-            IGuiApplicationContext appCtx, IKistlContext dataCtx,
+            IViewModelDependencies appCtx, IKistlContext dataCtx,
             IDataObject obj, EnumerationProperty prop)
             : base(appCtx, dataCtx, obj, prop)
         {
@@ -557,7 +557,7 @@ namespace Kistl.Client.Presentables
         public new delegate EnumerationPropertyModel Factory(IKistlContext dataCtx, IDataObject obj, Property prop);
 
         public EnumerationPropertyModel(
-            IGuiApplicationContext appCtx, IKistlContext dataCtx,
+            IViewModelDependencies appCtx, IKistlContext dataCtx,
             IDataObject obj, EnumerationProperty prop)
             : base(appCtx, dataCtx, obj, prop)
         {

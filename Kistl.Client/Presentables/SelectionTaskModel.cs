@@ -29,7 +29,7 @@ namespace Kistl.Client.Presentables
         /// <param name="callback"></param>
         /// <param name="additionalActions"></param>
         protected SelectionTaskModel(
-            IGuiApplicationContext appCtx, IKistlContext dataCtx,
+            IViewModelDependencies appCtx, IKistlContext dataCtx,
             IList<TChoosable> choices,
             Action<TChoosable> callback,
             IList<CommandModel> additionalActions)
@@ -138,7 +138,7 @@ namespace Kistl.Client.Presentables
             IList<CommandModel> additionalActions);
 
         public DataObjectSelectionTaskModel(
-            IGuiApplicationContext appCtx, IKistlContext dataCtx,
+            IViewModelDependencies appCtx, IKistlContext dataCtx,
             IList<DataObjectModel> choices,
             Action<DataObjectModel> callback,
             IList<CommandModel> additionalActions)

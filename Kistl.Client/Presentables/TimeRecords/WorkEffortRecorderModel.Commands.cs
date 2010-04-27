@@ -30,7 +30,7 @@ namespace Kistl.Client.Presentables.TimeRecords
             {
                 if (_startNewWorkEffortCommand == null)
                 {
-                    _startNewWorkEffortCommand = new StartNewWorkEffortCommand(AppContext, DataContext, this);
+                    _startNewWorkEffortCommand = ModelFactory.CreateViewModel<StartNewWorkEffortCommand.Factory>().Invoke(DataContext, this);
                 }
                 return _startNewWorkEffortCommand;
             }
@@ -41,6 +41,8 @@ namespace Kistl.Client.Presentables.TimeRecords
         /// </summary>
         private class StartNewWorkEffortCommand : CommandModel
         {
+            public new delegate StartNewWorkEffortCommand Factory(IKistlContext dataCtx, WorkEffortRecorderModel parent);
+
             /// <summary>The <see cref="WorkEffortRecorderModel"/> to work on.</summary>
             private WorkEffortRecorderModel _parent;
 
@@ -50,7 +52,7 @@ namespace Kistl.Client.Presentables.TimeRecords
             /// <param name="appCtx">the application context to use</param>
             /// <param name="dataCtx">the data context to use</param>
             /// <param name="parent">which <see cref="WorkEffortRecorderModel"/> to work on</param>
-            public StartNewWorkEffortCommand(IGuiApplicationContext appCtx, IKistlContext dataCtx, WorkEffortRecorderModel parent)
+            public StartNewWorkEffortCommand(IViewModelDependencies appCtx, IKistlContext dataCtx, WorkEffortRecorderModel parent)
                 : base(appCtx, dataCtx, "New Work Effort", "Create a new work effort")
             {
                 if (parent == null)
@@ -88,7 +90,7 @@ namespace Kistl.Client.Presentables.TimeRecords
             protected override void DoExecute(object data)
             {
                 WorkEffort effort = DataContext.Create<WorkEffort>();
-                WorkEffortModel effortModel = AppContext.Factory.CreateViewModel<WorkEffortModel.Factory>(effort).Invoke(DataContext, effort);
+                WorkEffortModel effortModel = ModelFactory.CreateViewModel<WorkEffortModel.Factory>(effort).Invoke(DataContext, effort);
                 effortModel.Mitarbeiter = _parent.CurrentUser;
                 effortModel.From = DateTime.Now;
                 _parent.InitialiseEfforts();
@@ -114,7 +116,7 @@ namespace Kistl.Client.Presentables.TimeRecords
             {
                 if (_FinishWorkEffortCommand == null)
                 {
-                    _FinishWorkEffortCommand = new FinishWorkEffortCommand(AppContext, DataContext, this);
+                    _FinishWorkEffortCommand = ModelFactory.CreateViewModel<FinishWorkEffortCommand.Factory>().Invoke(DataContext, this);
                 }
                 return _FinishWorkEffortCommand;
             }
@@ -125,6 +127,8 @@ namespace Kistl.Client.Presentables.TimeRecords
         /// </summary>
         private class FinishWorkEffortCommand : CommandModel
         {
+            public new delegate FinishWorkEffortCommand Factory(IKistlContext dataCtx, WorkEffortRecorderModel parent);
+
             /// <summary>The <see cref="WorkEffortRecorderModel"/> to work on.</summary>
             private WorkEffortRecorderModel _parent;
 
@@ -134,7 +138,7 @@ namespace Kistl.Client.Presentables.TimeRecords
             /// <param name="appCtx">the application context to use</param>
             /// <param name="dataCtx">the data context to use</param>
             /// <param name="parent">which <see cref="WorkEffortRecorderModel"/> to work on</param>
-            public FinishWorkEffortCommand(IGuiApplicationContext appCtx, IKistlContext dataCtx, WorkEffortRecorderModel parent)
+            public FinishWorkEffortCommand(IViewModelDependencies appCtx, IKistlContext dataCtx, WorkEffortRecorderModel parent)
                 : base(appCtx, dataCtx, "Finish", "Stops and closes this work effort")
             {
                 if (parent == null)

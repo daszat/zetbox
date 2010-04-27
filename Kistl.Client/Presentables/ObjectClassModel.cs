@@ -7,6 +7,7 @@ using System.Text;
 using Kistl.API;
 using Kistl.App.Base;
 using Kistl.App.Extensions;
+using Kistl.API.Configuration;
 
 namespace Kistl.Client.Presentables
 {
@@ -15,11 +16,10 @@ namespace Kistl.Client.Presentables
         public new delegate ObjectClassModel Factory(IKistlContext dataCtx, ObjectClass cls);
 
         public ObjectClassModel(
-            IGuiApplicationContext appCtx, IKistlContext dataCtx,
+            IViewModelDependencies appCtx, KistlConfig config, IKistlContext dataCtx,
             ObjectClass cls,
-            IModelFactory mdlFactory,
             Func<IKistlContext> ctxFactory)
-            : base(appCtx, dataCtx, cls, mdlFactory, ctxFactory)
+            : base(appCtx, config, dataCtx, cls, ctxFactory)
         {
             _class = cls;
         }

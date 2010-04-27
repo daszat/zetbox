@@ -5,6 +5,7 @@ using System.Text;
 using Kistl.API;
 using Kistl.App.Base;
 using QuickGraph;
+using Kistl.API.Configuration;
 
 namespace Kistl.Client.Presentables.ModuleEditor
 {
@@ -12,7 +13,7 @@ namespace Kistl.Client.Presentables.ModuleEditor
     {
         public new delegate DiagramViewModel Factory(IKistlContext dataCtx, Module module);
 
-        public DiagramViewModel(IGuiApplicationContext appCtx, IKistlContext dataCtx, Module module)
+        public DiagramViewModel(IViewModelDependencies appCtx, IKistlContext dataCtx, Module module)
             : base(appCtx, dataCtx)
         {
             this.module = module;
@@ -69,11 +70,13 @@ namespace Kistl.Client.Presentables.ModuleEditor
         #region DataTypes
         public class DataTypeModel : Presentables.DataObjectModel
         {
+            public new delegate DataTypeModel Factory(IKistlContext dataCtx, DataType obj, DiagramViewModel parent);
+
             private DiagramViewModel _parent;
 
-            public DataTypeModel(IGuiApplicationContext appCtx, IKistlContext dataCtx,
+            public DataTypeModel(IViewModelDependencies appCtx, KistlConfig config, IKistlContext dataCtx,
                 DataType obj, DiagramViewModel parent)
-                : base(appCtx, dataCtx, obj)
+                : base(appCtx, config, dataCtx, obj)
             {
                 _parent = parent;
                 DataType = obj as DataType;
@@ -113,7 +116,7 @@ namespace Kistl.Client.Presentables.ModuleEditor
                 if (_dataTypes == null)
                 {
                     _dataTypes = DataContext.GetQuery<DataType>().Where(i => i.Module == module).ToList()
-                        .Select(i => new DataTypeModel(AppContext, DataContext, i, this)).OrderBy(i => i.Name).ToList();
+                        .Select(i => ModelFactory.CreateViewModel<DataTypeModel.Factory>().Invoke(DataContext, i, this)).OrderBy(i => i.Name).ToList();
                 }
                 return _dataTypes;
             }
@@ -258,16 +261,18 @@ namespace Kistl.Client.Presentables.ModuleEditor
             {
                 if (_selectAllCommand == null)
                 {
-                    _selectAllCommand = new SelectAllCommandModel(AppContext, DataContext, this);
+                    _selectAllCommand = ModelFactory.CreateViewModel<SelectAllCommandModel.Factory>().Invoke(DataContext, this);
                 }
                 return _selectAllCommand;
             }
         }
         internal class SelectAllCommandModel : CommandModel
         {
+            public new delegate SelectAllCommandModel Factory(IKistlContext dataCtx, DiagramViewModel parent);
+
             private DiagramViewModel _parent;
 
-            public SelectAllCommandModel(IGuiApplicationContext appCtx, IKistlContext dataCtx, DiagramViewModel parent)
+            public SelectAllCommandModel(IViewModelDependencies appCtx, IKistlContext dataCtx, DiagramViewModel parent)
                 : base(appCtx, dataCtx, "Select All", "Selects all DataTypes")
             {
                 _parent = parent;
@@ -291,16 +296,18 @@ namespace Kistl.Client.Presentables.ModuleEditor
             {
                 if (_selectNoneCommand == null)
                 {
-                    _selectNoneCommand = new SelectNoneCommandModel(AppContext, DataContext, this);
+                    _selectNoneCommand = ModelFactory.CreateViewModel<SelectNoneCommandModel.Factory>().Invoke(DataContext, this);
                 }
                 return _selectNoneCommand;
             }
         }
         internal class SelectNoneCommandModel : CommandModel
         {
+            public new delegate SelectNoneCommandModel Factory(IKistlContext dataCtx, DiagramViewModel parent);
+
             private DiagramViewModel _parent;
 
-            public SelectNoneCommandModel(IGuiApplicationContext appCtx, IKistlContext dataCtx, DiagramViewModel parent)
+            public SelectNoneCommandModel(IViewModelDependencies appCtx, IKistlContext dataCtx, DiagramViewModel parent)
                 : base(appCtx, dataCtx, "Select None", "Selects no DataTypes")
             {
                 _parent = parent;
@@ -324,16 +331,18 @@ namespace Kistl.Client.Presentables.ModuleEditor
             {
                 if (_addRelatedCommand == null)
                 {
-                    _addRelatedCommand = new AddRelatedCommandModel(AppContext, DataContext, this);
+                    _addRelatedCommand = ModelFactory.CreateViewModel<AddRelatedCommandModel.Factory>().Invoke(DataContext, this);
                 }
                 return _addRelatedCommand;
             }
         }
         internal class AddRelatedCommandModel : CommandModel
         {
+            public new delegate AddRelatedCommandModel Factory(IKistlContext dataCtx, DiagramViewModel parent);
+
             private DiagramViewModel _parent;
 
-            public AddRelatedCommandModel(IGuiApplicationContext appCtx, IKistlContext dataCtx, DiagramViewModel parent)
+            public AddRelatedCommandModel(IViewModelDependencies appCtx, IKistlContext dataCtx, DiagramViewModel parent)
                 : base(appCtx, dataCtx, "Select None", "Selects no DataTypes")
             {
                 _parent = parent;

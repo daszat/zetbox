@@ -148,8 +148,8 @@ namespace Kistl.API.Configuration
 
             public string GetLogFilePath(string name)
             {
-                Directory.CreateDirectory(ApplicationContext.Current.Configuration.Server.LogFilePath);
-                return Path.Combine(ApplicationContext.Current.Configuration.Server.LogFilePath, name);
+                Directory.CreateDirectory(LogFilePath);
+                return Path.Combine(LogFilePath, name);
             }
         }
 

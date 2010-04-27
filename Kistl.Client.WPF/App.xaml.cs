@@ -14,6 +14,7 @@ using Kistl.API.Utils;
 using Kistl.App.GUI;
 using Kistl.Client.Presentables;
 using Kistl.App.Extensions;
+using Kistl.Client.WPF.Converter;
 
 namespace Kistl.Client.WPF
 {
@@ -22,14 +23,6 @@ namespace Kistl.Client.WPF
     /// </summary>
     public partial class App : Application
     {
-        public IGuiApplicationContext AppContext
-        {
-            get
-            {
-                return container.Resolve<IGuiApplicationContext>();
-            }
-        }
-
         public static new App Current { get { return (App)(Application.Current); } }
 
         /// <summary>
@@ -46,9 +39,8 @@ namespace Kistl.Client.WPF
         private static ServerDomainManager serverDomain;
         private static IContainer container;
 
-        private string[] HandleCommandline(string[] args)
+        private string[] HandleCommandline(string[] args, out string configFilePath)
         {
-            string configFilePath;
             string[] result;
 
             if (args.Length == 1 && !args[0].StartsWith("-"))
@@ -61,40 +53,6 @@ namespace Kistl.Client.WPF
                 configFilePath = String.Empty;
                 result = (string[])args.Clone();
             }
-
-            var config = KistlConfig.FromFile(configFilePath);
-
-            if (config.Server != null && config.Server.StartServer)
-            {
-                SplashScreen.SetInfo("Starting Server");
-                serverDomain = new ServerDomainManager();
-                serverDomain.Start(config);
-            }
-            else
-            {
-                SplashScreen.SetInfo("No server start required");
-            }
-
-            SplashScreen.SetInfo("Bootstraping Assembly Resolver");
-            AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
-
-            container = CreateMasterContainer(config);
-
-            // initialise AppContext
-            SplashScreen.SetInfo("Initializing Application Context");
-            var appCtx = AppContext;
-
-            // initialise custom actions manager
-            var cams = container.Resolve<BaseCustomActionsManager>();
-
-            SplashScreen.SetInfo("Initializing Launcher");
-
-            // delegate all business logic into another class, which 
-            // allows us to load the Kistl.Objects assemblies _before_ 
-            // they are needed.
-            var launcher = container.Resolve<Launcher>();
-            launcher.Show(args);
-
             return result;
         }
 
@@ -109,11 +67,49 @@ namespace Kistl.Client.WPF
         {
             DebugConsole.Show();
             Logging.Configure();
-            SplashScreen.ShowSplashScreen("Kistl is starting...", "Init application", 5);
+            SplashScreen.ShowSplashScreen("Kistl is starting...", "Init application", 6);
 
             using (Logging.Log.InfoTraceMethodCall("Starting Client"))
             {
-                var args = HandleCommandline(e.Args);
+                string configFilePath;
+                var args = HandleCommandline(e.Args, out configFilePath);
+
+                var config = KistlConfig.FromFile(configFilePath);
+
+                if (config.Server != null && config.Server.StartServer)
+                {
+                    SplashScreen.SetInfo("Starting Server");
+                    serverDomain = new ServerDomainManager();
+                    serverDomain.Start(config);
+                }
+                else
+                {
+                    SplashScreen.SetInfo("No server start required");
+                }
+
+                SplashScreen.SetInfo("Bootstraping Assembly Resolver");
+                AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
+
+                container = CreateMasterContainer(config);
+
+                // initialise AppContext
+                SplashScreen.SetInfo("Initializing Application Context");
+                var appCtx = container.Resolve<ApplicationContext>();
+
+                SplashScreen.SetInfo("Initializing Custom Actions Manager");
+                // initialise custom actions manager
+                var cams = container.Resolve<BaseCustomActionsManager>();
+
+                SplashScreen.SetInfo("Initializing Launcher");
+
+                // Init Resources
+                this.Resources["IconConverter"] = new IconConverter(config.Client.DocumentStore);
+
+                // delegate all business logic into another class, which 
+                // allows us to load the Kistl.Objects assemblies _before_ 
+                // they are needed.
+                var launcher = container.Resolve<Launcher>();
+                launcher.Show(args);
             }
 
             SplashScreen.HideSplashScreen();

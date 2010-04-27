@@ -10,18 +10,13 @@ using Kistl.API.Server;
 
 namespace Kistl.DalProvider.EF.Mocks
 {
-    class ServerApiContextMock : ServerApiContext
+    class ServerApiContextMock : ServerApplicationContext
     {
         public ServerApiContextMock()
-            : base(KistlConfig.FromFile("Kistl.DalProvider.EF.Tests.Config.xml"))
+            : base()
         {
             InterfaceAssembly = Assembly.GetAssembly(typeof(Kistl.App.Base.Assembly)).FullName;
             ImplementationAssembly = Assembly.GetAssembly(typeof(Kistl.App.Base.Assembly__Implementation__)).FullName;
-        }
-
-        public override void LoadFrozenActions(IReadOnlyKistlContext ctx)
-        {
-            throw new NotImplementedException();
         }
     }
 }

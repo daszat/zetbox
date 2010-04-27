@@ -72,13 +72,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClientApiContext.cs" />
+    <Compile Include="ClientApiModule.cs" />
     <Compile Include="ClientValueCollectionWrapper.cs" />
     <Compile Include="CustomPropertyDescriptor.cs" />
     <Compile Include="LinqToKistl\ConstantEvaluator.cs" />
     <Compile Include="LinqToKistl\QueryTranslator.cs" />
     <Compile Include="OneNRelationList.cs" />
     <Compile Include="BaseClientDataObject.cs" />
-    <Compile Include="ClientApiContext.cs" />
     <Compile Include="CollectionWrapperImplementations.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="LinqToKistl\KistlContext.cs" />

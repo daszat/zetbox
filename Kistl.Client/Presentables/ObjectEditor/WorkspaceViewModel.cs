@@ -17,7 +17,7 @@ namespace Kistl.Client.Presentables.ObjectEditor
     {
         public new delegate WorkspaceViewModel Factory(IKistlContext dataCtx);
 
-        public WorkspaceViewModel(IGuiApplicationContext appCtx, IKistlContext dataCtx)
+        public WorkspaceViewModel(IViewModelDependencies appCtx, IKistlContext dataCtx)
             : base(appCtx, dataCtx)
         {
             RecentObjects = new ObservableCollection<ViewModel>();
@@ -86,7 +86,7 @@ namespace Kistl.Client.Presentables.ObjectEditor
             {
                 if (_createNewInstanceCommand == null)
                 {
-                    _createNewInstanceCommand = new CreateNewInstanceCommand(AppContext, DataContext, this);
+                    _createNewInstanceCommand = ModelFactory.CreateViewModel<CreateNewInstanceCommand.Factory>().Invoke(DataContext, this);
                 }
                 return _createNewInstanceCommand;
             }
@@ -147,7 +147,7 @@ namespace Kistl.Client.Presentables.ObjectEditor
 
             var other = dataObject.Object;
             var here = DataContext.Find(other.GetInterfaceType(), other.ID);
-            SelectedItem = AppContext.Factory.CreateViewModel<DataObjectModel.Factory>(here).Invoke(DataContext, here);
+            SelectedItem = ModelFactory.CreateViewModel<DataObjectModel.Factory>(here).Invoke(DataContext, here);
             HistoryTouch(SelectedItem);
         }
 
@@ -160,7 +160,7 @@ namespace Kistl.Client.Presentables.ObjectEditor
 
         public void Dispose()
         {
-            AppContext.Factory.OnIMultipleInstancesManagerDisposed(DataContext, this);
+            ModelFactory.OnIMultipleInstancesManagerDisposed(DataContext, this);
         }
 
         #endregion
@@ -172,7 +172,7 @@ namespace Kistl.Client.Presentables.ObjectEditor
     {
         public new delegate VerifyContextCommand Factory(IKistlContext dataCtx);
 
-        public VerifyContextCommand(IGuiApplicationContext appCtx, IKistlContext dataCtx)
+        public VerifyContextCommand(IViewModelDependencies appCtx, IKistlContext dataCtx)
             : base(appCtx, dataCtx, "Verify", "Verifies that all constraints are met.")
         {
         }
@@ -203,7 +203,7 @@ namespace Kistl.Client.Presentables.ObjectEditor
     {
         public new delegate SaveContextCommand Factory(IKistlContext dataCtx);
 
-        public SaveContextCommand(IGuiApplicationContext appCtx, IKistlContext dataCtx)
+        public SaveContextCommand(IViewModelDependencies appCtx, IKistlContext dataCtx)
             : base(appCtx, dataCtx, "Save", "Saves outstanding changes to the data store.")
         {
         }
@@ -245,7 +245,9 @@ namespace Kistl.Client.Presentables.ObjectEditor
     /// </summary>
     internal class CreateNewInstanceCommand : CommandModel
     {
-        public CreateNewInstanceCommand(IGuiApplicationContext appCtx, IKistlContext dataCtx, WorkspaceViewModel parent)
+        public new delegate CreateNewInstanceCommand Factory(IKistlContext dataCtx, WorkspaceViewModel parent);
+
+        public CreateNewInstanceCommand(IViewModelDependencies appCtx, IKistlContext dataCtx, WorkspaceViewModel parent)
             : base(appCtx, dataCtx, "New", "Create a new instance")
         {
             _parent = parent;

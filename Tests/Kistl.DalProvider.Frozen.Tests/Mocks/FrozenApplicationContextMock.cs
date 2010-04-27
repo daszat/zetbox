@@ -13,18 +13,13 @@ namespace Kistl.DalProvider.Frozen.Mocks
         : ApplicationContext
     {
         public FrozenApplicationContextMock()
-            : base(HostType.None, KistlConfig.FromFile("Kistl.DalProvider.Frozen.Tests.Config.xml"))
+            : base(HostType.None)
         {
         }
 
         internal void SetAssemblies(string p)
         {
             InterfaceAssembly = ImplementationAssembly = p;
-        }
-
-        public override void LoadFrozenActions(IReadOnlyKistlContext ctx)
-        {
-            throw new NotImplementedException();
         }
     }
 }

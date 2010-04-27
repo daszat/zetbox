@@ -12,7 +12,7 @@ namespace Kistl.Client.Presentables
     {
         public new delegate CacheDebuggerViewModel Factory(IKistlContext dataCtx);
 
-        public CacheDebuggerViewModel(IGuiApplicationContext appCtx, IKistlContext dataCtx)
+        public CacheDebuggerViewModel(IViewModelDependencies appCtx, IKistlContext dataCtx)
             : base(appCtx, dataCtx)
         {
             Cache.CachesCollectionChanged += new EventHandler(Cache_CachesCollectionChanged);
@@ -43,7 +43,7 @@ namespace Kistl.Client.Presentables
             {
                 if (_clearCommand == null)
                 {
-                    _clearCommand = new ClearCommand(AppContext, DataContext);
+                    _clearCommand = ModelFactory.CreateViewModel<ClearCommand.Factory>().Invoke(DataContext);
                 }
                 return _clearCommand;
             }
@@ -52,7 +52,9 @@ namespace Kistl.Client.Presentables
 
     internal class ClearCommand : CommandModel
     {
-        public ClearCommand(IGuiApplicationContext appCtx, IKistlContext dataCtx)
+        public new delegate ClearCommand Factory(IKistlContext dataCtx);
+
+        public ClearCommand(IViewModelDependencies appCtx, IKistlContext dataCtx)
             : base(appCtx, dataCtx, "Clear", "Clears all caches")
         {
         }

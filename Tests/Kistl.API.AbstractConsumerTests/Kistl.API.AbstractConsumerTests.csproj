@@ -35,6 +35,10 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac, Version=2.1.13.813, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libs\AutoFac 1.4\Autofac.dll</HintPath>
+    </Reference>
     <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libs\log4net.dll</HintPath>
@@ -56,6 +60,8 @@
   <ItemGroup>
     <Compile Include="AbstractContextTests.cs" />
     <Compile Include="AbstractListPropertiesTests.cs" />
+    <Compile Include="AbstractSetup.cs" />
+    <Compile Include="AbstractTextFixture.cs" />
     <Compile Include="BinarySerializers\should_work_with_ICompoundObjects.cs" />
     <Compile Include="Blobs\BlobFixture.cs" />
     <Compile Include="Blobs\when_using.cs" />

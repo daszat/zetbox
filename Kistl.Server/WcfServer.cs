@@ -33,7 +33,7 @@ namespace Kistl.Server
         /// </summary>
         private AutoResetEvent serverStarted = new AutoResetEvent(false);
 
-        public WcfServer(ServiceHostFactoryBase factory, ServerApplicationContext appCtx)
+        public WcfServer(ServiceHostFactoryBase factory)
         {
             if (factory == null) { throw new ArgumentNullException("factory"); }
 

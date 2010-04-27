@@ -35,20 +35,20 @@ namespace Kistl.Client.WPF.View
         {
             if (mdl == null) { throw new ArgumentNullException("mdl"); }
 
-            ViewModelDescriptor pmd = mdl.GetType().ToRef(GuiApplicationContext.Current.MetaContext).GetViewModelDescriptor();
+            ViewModelDescriptor pmd = mdl.GetType().ToRef(FrozenContext.Single).GetViewModelDescriptor();
             if (pmd == null)
             {
                 Logging.Log.ErrorFormat("No matching ViewModelDescriptor found for {0}", mdl.GetType());
                 return null;
             }
 
-            var ckcInterface = new InterfaceType(Type.GetType(controlKindClassName + "," + GuiApplicationContext.Current.InterfaceAssembly, true));
+            var ckcInterface = new InterfaceType(Type.GetType(controlKindClassName + "," + ApplicationContext.Current.InterfaceAssembly, true));
             return CreateTemplate(pmd.GetViewDescriptor(Toolkit.WPF, ckcInterface));
         }
 
         private static DataTemplate SelectTemplate(ViewModel mdl, ControlKind controlKind)
         {
-            ViewModelDescriptor pmd = mdl.GetType().ToRef(GuiApplicationContext.Current.MetaContext).GetViewModelDescriptor();
+            ViewModelDescriptor pmd = mdl.GetType().ToRef(FrozenContext.Single).GetViewModelDescriptor();
             if (pmd == null)
             {
                 Logging.Log.ErrorFormat("No matching ViewModelDescriptor found for {0}", mdl.GetType());
@@ -60,7 +60,7 @@ namespace Kistl.Client.WPF.View
 
         private static DataTemplate SelectDefaultTemplate(ViewModel mdl)
         {
-            ViewModelDescriptor pmd = mdl.GetType().ToRef(GuiApplicationContext.Current.MetaContext).GetViewModelDescriptor();
+            ViewModelDescriptor pmd = mdl.GetType().ToRef(FrozenContext.Single).GetViewModelDescriptor();
             if (pmd == null)
             {
                 Logging.Log.ErrorFormat("No matching ViewModelDescriptor found for {0}", mdl.GetType());

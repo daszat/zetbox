@@ -7,6 +7,7 @@ using System.Text;
 
 using Kistl.API;
 using Kistl.App.Base;
+using Kistl.API.Configuration;
 
 namespace Kistl.Client.Presentables
 {
@@ -15,9 +16,9 @@ namespace Kistl.Client.Presentables
         public new delegate ModuleModel Factory(IKistlContext dataCtx, Module mdl);
 
         public ModuleModel(
-            IGuiApplicationContext appCtx, IKistlContext dataCtx,
+            IViewModelDependencies appCtx, KistlConfig config, IKistlContext dataCtx,
             Module mdl)
-            : base(appCtx, dataCtx, mdl)
+            : base(appCtx, config, dataCtx, mdl)
         {
             _module = mdl;
             _module.PropertyChanged += ModulePropertyChanged;

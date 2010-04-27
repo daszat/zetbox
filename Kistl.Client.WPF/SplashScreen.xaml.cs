@@ -24,7 +24,7 @@ namespace Kistl.Client.WPF
         {
             Steps = 10;
             CurrentStep = 0;
-            InitializeComponent();            
+            InitializeComponent();
         }
 
         private static SplashScreen _current = null;
@@ -40,66 +40,51 @@ namespace Kistl.Client.WPF
 
         public static void ShowSplashScreen(string message, string info, int steps)
         {
-            try
+            if (_current == null)
             {
-                if (_current == null)
+                _thread = new Thread(new ThreadStart(RunSplashScreen));
+                _thread.SetApartmentState(ApartmentState.STA);
+                _thread.Start();
+
+                _threadStarted.WaitOne();
+
+                _current.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(delegate()
                 {
-                    _thread = new Thread(new ThreadStart(RunSplashScreen));
-                    _thread.SetApartmentState(ApartmentState.STA);
-                    _thread.Start();
-
-                    _threadStarted.WaitOne();
-
-                    _current.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(delegate()
-                    {
-                        _current.Message = message;
-                        _current.Info = info;
-                        _current.Steps = steps;
-                    }));
-                }
-            }
-            catch (Exception ex)
-            {
-                ClientHelper.HandleError(ex);
+                    _current.Message = message;
+                    _current.Info = info;
+                    _current.Steps = steps;
+                }));
             }
         }
 
         public static void HideSplashScreen()
         {
-            try
+            if (_current != null)
             {
-                if (_current != null)
+                try
                 {
                     _current.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(delegate()
                     {
                         _current.Close();
                     }));
+                }
+                finally
+                {
                     _current = null;
                     _thread = null;
                 }
-            }
-            catch (Exception ex)
-            {
-                ClientHelper.HandleError(ex);
             }
         }
 
         public static void SetInfo(string info)
         {
-            try
+            if (_current != null)
             {
-                if (_current != null)
+                _current.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(delegate()
                 {
-                    _current.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(delegate()
-                    {
-                        _current.Info = info;
-                        _current.CurrentStep++;
-                    }));
-                }
-            }
-            catch (Exception ex)
-            {
-                ClientHelper.HandleError(ex);
+                    _current.Info = info;
+                    _current.CurrentStep++;
+                }));
             }
         }
 

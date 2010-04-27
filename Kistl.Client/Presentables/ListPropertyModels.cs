@@ -78,7 +78,7 @@ namespace Kistl.Client.Presentables
         private readonly StringProperty _property;
 
         public StringListPropertyModel(
-            IGuiApplicationContext appCtx, IKistlContext dataCtx,
+            IViewModelDependencies appCtx, IKistlContext dataCtx,
             IDataObject obj, StringProperty prop)
             : base(appCtx, dataCtx, obj, prop)
         {

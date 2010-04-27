@@ -9,6 +9,7 @@ namespace Kistl.Client.Presentables.TimeRecords
     using Kistl.API;
     using Kistl.App.Projekte;
     using Kistl.App.TimeRecords;
+    using Kistl.API.Configuration;
 
     /// <summary>
     /// A <see cref="DataObjectModel"/> for <see cref="WorkEffort"/>.
@@ -27,11 +28,12 @@ namespace Kistl.Client.Presentables.TimeRecords
         /// <param name="appCtx">which GuiApplicationContext to use</param>
         /// <param name="dataCtx">which <see cref="IKistlContext"/> to use</param>
         /// <param name="obj">the modelled <see cref="WorkEffort"/></param>
+        /// <param name="config"></param>
         public WorkEffortModel(
-            IGuiApplicationContext appCtx,
+            IViewModelDependencies appCtx, KistlConfig config,
             IKistlContext dataCtx,
             WorkEffort obj)
-            : base(appCtx, dataCtx, obj)
+            : base(appCtx, config, dataCtx, obj)
         {
             this._entry = obj;
             this._entry.PropertyChanged += (sender, args) =>

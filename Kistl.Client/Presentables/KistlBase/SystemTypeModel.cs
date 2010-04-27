@@ -19,7 +19,7 @@ namespace Kistl.Client.Presentables.KistlBase
         private Type _type;
 
         public SystemTypeModel(
-            IGuiApplicationContext appCtx, IKistlContext dataCtx,
+            IViewModelDependencies appCtx, IKistlContext dataCtx,
             Type type)
             : base(appCtx, dataCtx)
         {

@@ -10,6 +10,7 @@ namespace Kistl.API.Server
     using Kistl.App.Base;
     using Kistl.App.Extensions;
     using Autofac;
+using Kistl.API.Configuration;
 
     public static class AutoFacContainerExtensions
     {
@@ -26,16 +27,19 @@ namespace Kistl.API.Server
     {
         protected readonly Identity identity;
         protected readonly IMetaDataResolver metaDataResolver;
+        protected KistlConfig config;
 
         /// <summary>
         /// Initializes a new instance of the BaseKistlDataContext class using the specified <see cref="Identity"/>.
         /// </summary>
         /// <param name="metaDataResolver">the IMetaDataResolver for this context.</param>
         /// <param name="identity">the identity of this context. if this is null, the context does no security checks</param>
-        protected BaseKistlDataContext(IMetaDataResolver metaDataResolver, Identity identity)
+        /// <param name="config"></param>
+        protected BaseKistlDataContext(IMetaDataResolver metaDataResolver, Identity identity, KistlConfig config)
         {
             if (metaDataResolver == null) { throw new ArgumentNullException("metaDataResolver"); }
-
+            
+            this.config = config;
             this.identity = identity;
             this.metaDataResolver = metaDataResolver;
         }
@@ -452,7 +456,7 @@ namespace Kistl.API.Server
             blob.OriginalName = filename;
             blob.MimeType = mimetype;
 
-            string path = System.IO.Path.Combine(ApplicationContext.Current.Configuration.Server.DocumentStore, blob.StoragePath);
+            string path = System.IO.Path.Combine(config.Server.DocumentStore, blob.StoragePath);
             System.IO.Directory.CreateDirectory(System.IO.Path.GetDirectoryName(path));
 
             using (var file = System.IO.File.Open(path, System.IO.FileMode.Create, System.IO.FileAccess.Write))
@@ -482,7 +486,7 @@ namespace Kistl.API.Server
         public System.IO.FileInfo GetFileInfo(int ID)
         {
             var blob = this.Find<Kistl.App.Base.Blob>(ID);
-            string path = System.IO.Path.Combine(ApplicationContext.Current.Configuration.Server.DocumentStore, blob.StoragePath);
+            string path = System.IO.Path.Combine(config.Server.DocumentStore, blob.StoragePath);
             return new System.IO.FileInfo(path);
         }
 

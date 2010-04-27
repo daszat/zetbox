@@ -75,8 +75,8 @@ namespace Kistl.DalProvider.EF
         /// <summary>
         /// Internal Constructor
         /// </summary>
-        public KistlDataContext(KistlConfig config, IMetaDataResolver metaDataResolver, Identity identity)
-            : base(metaDataResolver, identity)
+        public KistlDataContext(IMetaDataResolver metaDataResolver, Identity identity, KistlConfig config)
+            : base(metaDataResolver, identity, config)
         {
             _ctx = new EFObjectContext(config);
         }

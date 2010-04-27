@@ -17,7 +17,7 @@ namespace Kistl.Client.Presentables.KistlBase
         : ObjectReferenceModel
     {
         public AssemblyReferenceModel(
-            IGuiApplicationContext appCtx, IKistlContext dataCtx,
+            IViewModelDependencies appCtx, IKistlContext dataCtx,
             IDataObject referenceHolder, ObjectReferenceProperty prop)
             : base(appCtx, dataCtx, referenceHolder, prop)
         {

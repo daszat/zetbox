@@ -12,7 +12,7 @@ namespace Kistl.Client.Presentables
     {
 
         public static ImmutableAsyncList<TAsync, TUi> UiCreateImmutable<TAsync, TUi>(
-            IGuiApplicationContext appCtx,
+            IViewModelDependencies appCtx,
             IKistlContext ctx,
             ViewModel parentModel,
             Func<IEnumerable<TAsync>> asyncOriginalList,
@@ -22,7 +22,7 @@ namespace Kistl.Client.Presentables
         }
 
         public static AsyncList<TAsync, TUi> UiCreateMutable<TAsync, TUi>(
-            IGuiApplicationContext appCtx,
+            IViewModelDependencies appCtx,
             IKistlContext ctx,
             ViewModel parentModel,
             Func<INotifyCollectionChanged> asyncNotifier,
@@ -41,7 +41,7 @@ namespace Kistl.Client.Presentables
     public class ImmutableAsyncList<TAsync, TUi>
     {
 
-        private IGuiApplicationContext _appCtx;
+        private IViewModelDependencies _appCtx;
         private ViewModel _parentModel;
         private Func<IEnumerable<TAsync>> _asyncOriginalList;
         private Func<TAsync, TUi> _uiTransform;
@@ -54,7 +54,7 @@ namespace Kistl.Client.Presentables
         protected IKistlContext DataContext { get; private set; }
 
         internal ImmutableAsyncList(
-            IGuiApplicationContext appCtx,
+            IViewModelDependencies appCtx,
             IKistlContext ctx,
             ViewModel parentModel,
             Func<IEnumerable<TAsync>> asyncOriginalList,
@@ -119,7 +119,7 @@ namespace Kistl.Client.Presentables
     public class AsyncList<TAsync, TUi>
     {
 
-        private IGuiApplicationContext _appCtx;
+        private IViewModelDependencies _appCtx;
         private ViewModel _parentModel;
         private Func<IList<TAsync>> _asyncOriginalList;
         private Func<INotifyCollectionChanged> _asyncNotifier;
@@ -134,7 +134,7 @@ namespace Kistl.Client.Presentables
         protected IKistlContext DataContext { get; private set; }
 
         internal AsyncList(
-            IGuiApplicationContext appCtx,
+            IViewModelDependencies appCtx,
             IKistlContext ctx,
             ViewModel parentModel,
             Func<INotifyCollectionChanged> asyncNotifier,

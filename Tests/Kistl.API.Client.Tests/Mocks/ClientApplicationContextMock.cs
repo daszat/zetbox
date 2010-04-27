@@ -8,12 +8,12 @@ using Kistl.API.Configuration;
 
 namespace Kistl.API.Client.Mocks
 {
-    public class ClientApplicationContextMock : ClientApiContext
+    public class ClientApplicationContextMock : ClientApplicationContext
     {
         public static ClientApplicationContextMock CurrentMock { get; private set; }
 
         public ClientApplicationContextMock()
-            : base(KistlConfig.FromFile("Kistl.API.Client.Tests.Config.xml"))
+            : base()
         {
             ImplementationAssembly = Assembly.GetAssembly(this.GetType()).FullName;
             SetInterfaceAssembly_This();
@@ -29,11 +29,6 @@ namespace Kistl.API.Client.Mocks
         public void SetInterfaceAssembly_This()
         {
             InterfaceAssembly = Assembly.GetAssembly(this.GetType()).FullName;
-        }
-
-        public override void LoadFrozenActions(IReadOnlyKistlContext ctx)
-        {
-            throw new NotImplementedException();
         }
 
         internal void ResetActionManager()

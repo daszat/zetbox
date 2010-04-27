@@ -5,6 +5,7 @@ using System.Text;
 
 using Kistl.API;
 using Kistl.App.Base;
+using Kistl.API.Configuration;
 
 namespace Kistl.Client.Presentables.Relations
 {
@@ -16,9 +17,9 @@ namespace Kistl.Client.Presentables.Relations
         private RelationEnd _relationEnd;
 
         public RelationEndModel(
-            IGuiApplicationContext appCtx, IKistlContext dataCtx,
+            IViewModelDependencies appCtx, KistlConfig config, IKistlContext dataCtx,
             RelationEnd relEnd)
-            : base(appCtx, dataCtx, relEnd)
+            : base(appCtx, config, dataCtx, relEnd)
         {
             _relationEnd = relEnd;
         }

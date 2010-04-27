@@ -9,6 +9,7 @@ namespace Kistl.Client.Presentables.TimeRecords
     using Kistl.API;
     using Kistl.App.Projekte;
     using Kistl.App.TimeRecords;
+    using Kistl.API.Configuration;
 
     /// <summary>
     /// Models <see cref="PresenceRecord"/>s for viewing and editing.
@@ -29,13 +30,15 @@ namespace Kistl.Client.Presentables.TimeRecords
         /// Initializes a new instance of the PresenceRecordModel class.
         /// </summary>
         /// <param name="appCtx">which GuiApplicationContext to use</param>
+        /// <param name="config"></param>
         /// <param name="dataCtx">which <see cref="IKistlContext"/> to use</param>
         /// <param name="obj">the modelled <see cref="PresenceRecord"/></param>
         public PresenceRecordModel(
-            IGuiApplicationContext appCtx,
+            IViewModelDependencies appCtx, 
+            KistlConfig config,
             IKistlContext dataCtx,
             PresenceRecord obj)
-            : base(appCtx, dataCtx, obj)
+            : base(appCtx, config, dataCtx, obj)
         {
             this.Entry = obj;
         }

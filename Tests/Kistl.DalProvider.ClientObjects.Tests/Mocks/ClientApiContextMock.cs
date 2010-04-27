@@ -26,17 +26,11 @@ namespace Kistl.DalProvider.ClientObjects.Mocks
         }
     }
 
-    public class ClientApiContextMock : ClientApiContext
-    {
-        public ClientApiContextMock()
-            : base(KistlConfig.FromFile("Kistl.DalProvider.ClientObjects.Tests.Config.xml"))
-        {
-        }
-
-        public override void LoadFrozenActions(IReadOnlyKistlContext ctx)
-        {
-            var fam = new FrozenActionsManagerClient();
-            fam.Init(ctx);
-        }
-    }
+    //public class ClientApiContextMock
+    //{
+    //    public ClientApiContextMock()
+    //        : base(KistlConfig.FromFile("Kistl.DalProvider.ClientObjects.Tests.Config.xml"))
+    //    {
+    //    }
+    //}
 }

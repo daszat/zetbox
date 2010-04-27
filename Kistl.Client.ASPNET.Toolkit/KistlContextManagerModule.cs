@@ -11,6 +11,7 @@ using Kistl.API;
 using Kistl.API.Configuration;
 using Kistl.API.Utils;
 using Kistl.App.Extensions;
+using Kistl.Client.Presentables;
 
 namespace Kistl.Client.ASPNET.Toolkit
 {
@@ -27,6 +28,10 @@ namespace Kistl.Client.ASPNET.Toolkit
                 HttpContext.Current.Items["__Current_KistlContextManagerModule_KistlContext"] = value;
             }
         }
+
+        public static IModelFactory ModelFactory { get; private set; }
+
+        private static IContainer container;
 
         public void Dispose()
         {
@@ -51,7 +56,7 @@ namespace Kistl.Client.ASPNET.Toolkit
 
         void context_BeginRequest(object sender, EventArgs e)
         {
-            if (GuiApplicationContext.Current == null)
+            if (container == null)
             {
                 Logging.Configure();
 
@@ -59,13 +64,15 @@ namespace Kistl.Client.ASPNET.Toolkit
                 AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
 
                 var builder = Kistl.API.Utils.AutoFacBuilder.CreateContainerBuilder(config, config.Client.Modules);
-                var container = builder.Build();
+                container = builder.Build();
 
                 // initialise custom actions manager
                 var cams = container.Resolve<BaseCustomActionsManager>();
 
+                ModelFactory = container.Resolve<IModelFactory>();
+
             }
-            //KistlContext = Kistl.API.Client.KistlContext.GetContext();
+            KistlContext = container.Resolve<IKistlContext>();
         }
     }
 }

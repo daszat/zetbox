@@ -18,12 +18,9 @@ namespace Kistl.Client.Presentables.ObjectBrowser
     {
         public new delegate WorkspaceViewModel Factory(IKistlContext dataCtx);
 
-        private IModelFactory mdlFactory;
-
-        public WorkspaceViewModel(IGuiApplicationContext appCtx, IKistlContext dataCtx, IModelFactory mdlFactory)
+        public WorkspaceViewModel(IViewModelDependencies appCtx, IKistlContext dataCtx)
             : base(appCtx, dataCtx)
         {
-            this.mdlFactory = mdlFactory;
         }
 
         #region Data
@@ -100,7 +97,7 @@ namespace Kistl.Client.Presentables.ObjectBrowser
             {
                 if (_createNewInstanceExternallyCommand == null)
                 {
-                    _createNewInstanceExternallyCommand = mdlFactory.CreateViewModel<CreateNewInstanceExternallyCommand.Factory>().Invoke(DataContext);
+                    _createNewInstanceExternallyCommand = ModelFactory.CreateViewModel<CreateNewInstanceExternallyCommand.Factory>().Invoke(DataContext);
                 }
                 return _createNewInstanceExternallyCommand;
             }
@@ -123,9 +120,9 @@ namespace Kistl.Client.Presentables.ObjectBrowser
 
         private void LoadApplications()
         {
-            this.Applications.Add(mdlFactory.CreateViewModel<ApplicationViewModel.Factory>().Invoke(DataContext, "GUI", typeof(GUI.DashboardModel.Factory)));
-            this.Applications.Add(mdlFactory.CreateViewModel<ApplicationViewModel.Factory>().Invoke(DataContext, "TimeRecords", typeof(TimeRecords.Dashboard.Factory)));
-            this.Applications.Add(mdlFactory.CreateViewModel<ApplicationViewModel.Factory>().Invoke(DataContext, "Module Editor", typeof(ModuleEditor.WorkspaceViewModel.Factory)));
+            this.Applications.Add(ModelFactory.CreateViewModel<ApplicationViewModel.Factory>().Invoke(DataContext, "GUI", typeof(GUI.DashboardModel.Factory)));
+            this.Applications.Add(ModelFactory.CreateViewModel<ApplicationViewModel.Factory>().Invoke(DataContext, "TimeRecords", typeof(TimeRecords.Dashboard.Factory)));
+            this.Applications.Add(ModelFactory.CreateViewModel<ApplicationViewModel.Factory>().Invoke(DataContext, "Module Editor", typeof(ModuleEditor.WorkspaceViewModel.Factory)));
         }
 
         #endregion
@@ -142,7 +139,7 @@ namespace Kistl.Client.Presentables.ObjectBrowser
 
             var other = dataObject.Object;
             var here = DataContext.Find(other.GetInterfaceType(), other.ID);
-            SelectedItem = AppContext.Factory.CreateViewModel<DataObjectModel.Factory>(here).Invoke(DataContext, here);
+            SelectedItem = ModelFactory.CreateViewModel<DataObjectModel.Factory>(here).Invoke(DataContext, here);
         }
 
         public override string Name
@@ -162,7 +159,7 @@ namespace Kistl.Client.Presentables.ObjectBrowser
 
         private readonly Func<IKistlContext> ctxFactory;
 
-        public CreateNewInstanceExternallyCommand(IGuiApplicationContext appCtx, IKistlContext dataCtx, Func<IKistlContext> ctxFactory)
+        public CreateNewInstanceExternallyCommand(IViewModelDependencies appCtx, IKistlContext dataCtx, Func<IKistlContext> ctxFactory)
             : base(appCtx, dataCtx, "External New ...", "Create a new instance of this object class in a new window")
         {
             this.ctxFactory = ctxFactory;

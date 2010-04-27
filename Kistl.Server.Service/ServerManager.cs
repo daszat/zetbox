@@ -26,8 +26,6 @@ namespace Kistl.Server.Service
             Logging.Configure();
             AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
 
-            var testCtx = new ServerApplicationContext(config);
-
             container = Program.CreateMasterContainer(config, null);
 
             Program.DefaultInitialisation(null, container);

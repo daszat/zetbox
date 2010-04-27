@@ -47,7 +47,7 @@ namespace Kistl.DalProvider.EF
                     // EF's meta data initialization is not thread-safe
                     lock (_lock)
                     {
-                        return new KistlDataContext(c.Resolve<KistlConfig>(), c.Resolve<IMetaDataResolver>(), null);
+                        return new KistlDataContext(c.Resolve<IMetaDataResolver>(), null, c.Resolve<KistlConfig>());
                     }
                 })
                 .As<IKistlServerContext>()
@@ -60,9 +60,10 @@ namespace Kistl.DalProvider.EF
                     lock (_lock)
                     {
                         var param = p.OfType<ConstantParameter>().FirstOrDefault();
-                        return new KistlDataContext(c.Resolve<KistlConfig>(),
+                        return new KistlDataContext(
                             c.Resolve<IMetaDataResolver>(),
-                            param != null ? (Kistl.App.Base.Identity)param.Value : c.Resolve<IIdentityResolver>().GetCurrent());
+                            param != null ? (Kistl.App.Base.Identity)param.Value : c.Resolve<IIdentityResolver>().GetCurrent(),
+                            c.Resolve<KistlConfig>());
                     }
                 })
                 .As<IKistlContext>()
@@ -75,7 +76,7 @@ namespace Kistl.DalProvider.EF
                     lock (_lock)
                     {
                         var resolver = new CachingMetaDataResolver();
-                        var result = new KistlDataContext(c.Resolve<KistlConfig>(), resolver, null);
+                        var result = new KistlDataContext(resolver, null, c.Resolve<KistlConfig>());
                         resolver.Context = result;
                         return result;
                     }

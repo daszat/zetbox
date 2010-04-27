@@ -27,11 +27,13 @@ namespace Kistl.Server
                     IKistlContext ctx = c.Resolve<MemoryContext>();
                     ISchemaProvider schemaProvider = c.Resolve<ISchemaProvider>();
                     SchemaManagement.SchemaManager.LoadSavedSchemaInto(schemaProvider, ctx);
+                    KistlConfig cfg = c.Resolve<KistlConfig>();
 
                     return new SchemaManagement.SchemaManager(
                         schemaProvider,
                         p.Named<IKistlContext>("newSchema"),
-                        ctx);
+                        ctx,
+                        cfg);
                 })
                 .InstancePerDependency();
 
@@ -85,7 +87,8 @@ namespace Kistl.Server
                 .SingleInstance();
 
             moduleBuilder
-                .Register(c => new ServerApplicationContext(c.Resolve<KistlConfig>()))
+                .Register(c => new ServerApplicationContext())
+                .As<ApplicationContext>()
                 .SingleInstance();
 
             moduleBuilder
@@ -101,7 +104,7 @@ namespace Kistl.Server
 
             // TODO: move to separate MSSQL-specific assembly, since the SQL-Schema should be independent of the DalProvider
             moduleBuilder
-                .Register(c => new Kistl.Server.SchemaManagement.SqlProvider.SqlServer())
+                .RegisterType<Kistl.Server.SchemaManagement.SqlProvider.SqlServer>()
                 .As<ISchemaProvider>()
                 .InstancePerDependency();
         }

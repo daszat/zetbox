@@ -19,7 +19,8 @@ namespace Kistl.DalProvider.ClientObjects.Tests
         [SetUp]
         public void Init()
         {
-            var appCtx = new ClientApiContextMock();
+            Kistl.API.Configuration.KistlConfig.FromFile("Kistl.DalProvider.ClientObjects.Tests.Config.xml");
+            var appCtx = new ClientApplicationContext();
             ProxySingleton.SetProxy(new ProxyMock());
         }
 

@@ -12,34 +12,24 @@ namespace Kistl.API.Tests
 
     public class ConfigTestApplicationContext : ApplicationContext
     {
-        public ConfigTestApplicationContext(KistlConfig config)
-            : base(HostType.None, config)
+        public ConfigTestApplicationContext()
+            : base(HostType.None)
         {
 
-        }
-
-        public override void LoadFrozenActions(IReadOnlyKistlContext ctx)
-        {
-            throw new NotImplementedException();
         }
     }
 
     public class CustomActionsTestApplicationContext : ApplicationContext
     {
-        public CustomActionsTestApplicationContext(string configfilename)
-            : base(HostType.None, KistlConfig.FromFile(configfilename))
+        public CustomActionsTestApplicationContext()
+            : base(HostType.None)
         { }
-
-        public override void LoadFrozenActions(IReadOnlyKistlContext ctx)
-        {
-            throw new NotImplementedException();
-        }
     }
 
     public class TypesTestApplicationContext : ApplicationContext
     {
-        public TypesTestApplicationContext(string configfilename)
-            : base(HostType.None, KistlConfig.FromFile(configfilename))
+        public TypesTestApplicationContext()
+            : base(HostType.None)
         { }
 
         // public Type BasePersistenceObjectType { get; protected set; }
@@ -51,42 +41,5 @@ namespace Kistl.API.Tests
         internal void SetBdoType(Type t) { this.BaseDataObjectType = t; }
         internal void SetBsoType(Type t) { this.BaseCompoundObjectType = t; }
         internal void SetBceType(Type t) { this.BaseCollectionEntryType = t; }
-
-        public override void LoadFrozenActions(IReadOnlyKistlContext ctx)
-        {
-            throw new NotImplementedException();
-        }
-    }
-
-
-    [TestFixture]
-    public partial class ApplicationContextTests
-    {
-        readonly static string ConfigFile = "Kistl.API.Tests.Config.xml";
-
-        [Test]
-        public void InitDefaultConfig()
-        {
-            var config = KistlConfig.FromFile(ConfigFile);
-            var testCtx = new ConfigTestApplicationContext(config);
-
-            Assert.IsNotNull(ApplicationContext.Current);
-            Assert.AreSame(config, ApplicationContext.Current.Configuration);
-        }
-
-        [Test]
-        public void PersistsTypes()
-        {
-            var testCtx = new TypesTestApplicationContext(ConfigFile);
-            testCtx.SetBceType(typeof(char));
-            testCtx.SetBdoType(typeof(double));
-            testCtx.SetBpoType(typeof(Predicate<int>));
-            testCtx.SetBsoType(typeof(string));
-
-            Assert.AreEqual(typeof(char), testCtx.BaseCollectionEntryType);
-            Assert.AreEqual(typeof(double), testCtx.BaseDataObjectType);
-            Assert.AreEqual(typeof(Predicate<int>), testCtx.BasePersistenceObjectType);
-            Assert.AreEqual(typeof(string), testCtx.BaseCompoundObjectType);
-        }
     }
 }

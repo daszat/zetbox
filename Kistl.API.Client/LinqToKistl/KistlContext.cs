@@ -10,6 +10,7 @@ namespace Kistl.API.Client
     using System.Text;
 
     using Kistl.API.Utils;
+    using Kistl.API.Configuration;
 
     /// <summary>
     /// Linq to Kistl Context Factory
@@ -22,7 +23,7 @@ namespace Kistl.API.Client
         /// <returns>A new KistlContext</returns>
         public static IKistlContext GetContext()
         {
-            return new KistlContextImpl();
+            return new KistlContextImpl(null);
         }
     }
 
@@ -32,9 +33,11 @@ namespace Kistl.API.Client
     internal class KistlContextImpl : IDebuggingKistlContext, IDisposable
     {
         private readonly static object _lock = new object();
+        private KistlConfig config;
 
-        public KistlContextImpl()
+        public KistlContextImpl(KistlConfig config)
         {
+            this.config = config;
             CreatedAt = new StackTrace(true);
             KistlContextDebuggerSingleton.Created(this);
             //_relationshipManager = new RelationshipManager(this);
@@ -687,7 +690,7 @@ namespace Kistl.API.Client
         {
             var blob = this.Find<Kistl.App.Base.Blob>(ID);
 
-            string path = Path.Combine(ApplicationContext.Current.Configuration.Client.DocumentStore, blob.StoragePath);
+            string path = Path.Combine(config.Client.DocumentStore, blob.StoragePath);
             Directory.CreateDirectory(Path.GetDirectoryName(path));
 
             if (!File.Exists(path))

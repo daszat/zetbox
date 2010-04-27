@@ -12,16 +12,13 @@ namespace Kistl.Client.Presentables.KistlBase
         public new delegate ApplicationViewModel Factory(IKistlContext dataCtx, string name, Type wndMdlType);
 
         public ApplicationViewModel(
-            IGuiApplicationContext appCtx, IKistlContext dataCtx,
-            string name, Type wndMdlType, IModelFactory mdlFactory)
+            IViewModelDependencies appCtx, IKistlContext dataCtx,
+            string name, Type wndMdlType)
             : base(appCtx, dataCtx)
         {
             _name = name;
             _wndMdlType = wndMdlType;
-            _mdlFactory = mdlFactory;
         }
-
-        private IModelFactory _mdlFactory;
 
         private Type _wndMdlType;
         public Type WindowModelType
@@ -47,7 +44,7 @@ namespace Kistl.Client.Presentables.KistlBase
             {
                 if (_openApplicatonCommand == null)
                 {
-                    _openApplicatonCommand = _mdlFactory.CreateViewModel<OpenApplicatonCommand.Factory>().Invoke(DataContext);
+                    _openApplicatonCommand = ModelFactory.CreateViewModel<OpenApplicatonCommand.Factory>().Invoke(DataContext);
                 }
                 return _openApplicatonCommand;
             }
@@ -63,7 +60,7 @@ namespace Kistl.Client.Presentables.KistlBase
 
         private readonly Func<IKistlContext> ctxFactory;
 
-        public OpenApplicatonCommand(IGuiApplicationContext appCtx, IKistlContext dataCtx, Func<IKistlContext> ctxFactory)
+        public OpenApplicatonCommand(IViewModelDependencies appCtx, IKistlContext dataCtx, Func<IKistlContext> ctxFactory)
             : base(appCtx, dataCtx, "Open Application", "Opens an Application in a new window")
         {
             this.ctxFactory = ctxFactory;

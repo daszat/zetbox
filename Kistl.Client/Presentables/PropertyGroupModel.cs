@@ -24,7 +24,7 @@ namespace Kistl.Client.Presentables
         private ObservableCollection<ViewModel> _properties;
 
         public PropertyGroupModel(
-            IGuiApplicationContext appCtx, IKistlContext dataCtx,
+            IViewModelDependencies appCtx, IKistlContext dataCtx,
             string title,
             IEnumerable<ViewModel> obj)
             : base(appCtx, dataCtx)

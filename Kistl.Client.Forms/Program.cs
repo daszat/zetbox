@@ -16,7 +16,6 @@ namespace Kistl.Client.Forms
 {
     static class Program
     {
-        static GuiApplicationContext AppContext { get; set; }
         static IContainer container;
         /// <summary>
         /// The main entry point for the application.
@@ -35,8 +34,9 @@ namespace Kistl.Client.Forms
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            var initialWorkspace = AppContext.Factory.CreateViewModel<WorkspaceViewModel.Factory>().Invoke(container.Resolve<IKistlContext>());
-            AppContext.Factory.ShowModel(initialWorkspace, true);
+            var mdlFactory = container.Resolve<IModelFactory>();
+            var initialWorkspace = mdlFactory.CreateViewModel<WorkspaceViewModel.Factory>().Invoke(container.Resolve<IKistlContext>());
+            mdlFactory.ShowModel(initialWorkspace, true);
 
             Application.Run();
         }

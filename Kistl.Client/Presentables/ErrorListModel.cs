@@ -31,7 +31,7 @@ namespace Kistl.Client.Presentables
     {
         public new delegate ErrorListModel Factory(IKistlContext dataCtx);
 
-        public ErrorListModel(IGuiApplicationContext appCtx, IKistlContext dataCtx)
+        public ErrorListModel(IViewModelDependencies appCtx, IKistlContext dataCtx)
             : base(appCtx, dataCtx)
         {
             _errors = new ObservableCollection<ErrorDescriptor>();

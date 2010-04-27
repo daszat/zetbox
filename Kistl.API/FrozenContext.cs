@@ -161,7 +161,6 @@ namespace Kistl.API
                         _haveTriedLoading = true;
                         Type t = Type.GetType(frozenAssemblyName, true);
                         _single = (IReadOnlyKistlContext)Activator.CreateInstance(t);
-                        ApplicationContext.Current.LoadFrozenActions(_single);
                     }
                     catch (Exception ex)
                     {

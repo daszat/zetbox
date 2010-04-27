@@ -83,7 +83,6 @@
     <Compile Include="Tests\BinarySerializers\should_work_with_ICompoundObjects.cs" />
     <Compile Include="Tests\BinarySerializerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="CustomActionsManagerAPITest.cs" />
     <Compile Include="Tests\ApplicationContextTests.IDisposable.cs" />
     <Compile Include="Tests\GenericObservableCollectionTestsBaseline.cs" />
     <Compile Include="Tests\BasicObservableCollectionTestsBaseline.cs" />

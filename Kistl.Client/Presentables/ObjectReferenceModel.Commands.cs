@@ -30,7 +30,7 @@ namespace Kistl.Client.Presentables
             {
                 if (_openReferenceCommand == null)
                 {
-                    _openReferenceCommand = new OpenReferenceCommandModel(AppContext, DataContext, this);
+                    _openReferenceCommand = ModelFactory.CreateViewModel<OpenReferenceCommandModel.Factory>().Invoke(DataContext, this);
                 }
                 return _openReferenceCommand;
             }
@@ -39,7 +39,9 @@ namespace Kistl.Client.Presentables
         private class OpenReferenceCommandModel
             : CommandModel
         {
-            public OpenReferenceCommandModel(IGuiApplicationContext appCtx, IKistlContext dataCtx, ObjectReferenceModel parent)
+            public new delegate OpenReferenceCommandModel Factory(IKistlContext dataCtx, ObjectReferenceModel parent);
+
+            public OpenReferenceCommandModel(IViewModelDependencies appCtx, IKistlContext dataCtx, ObjectReferenceModel parent)
                 : base(appCtx, dataCtx, "Open reference", "Open the referenced object")
             {
                 _parent = parent;
@@ -124,7 +126,7 @@ namespace Kistl.Client.Presentables
             {
                 if (_createNewItemAndSetValueCommand == null)
                 {
-                    _createNewItemAndSetValueCommand = new CreateNewItemAndSetValueCommandModel(AppContext, DataContext, this);
+                    _createNewItemAndSetValueCommand = ModelFactory.CreateViewModel<CreateNewItemAndSetValueCommandModel.Factory>().Invoke(DataContext, this);
                 }
                 return _createNewItemAndSetValueCommand;
             }
@@ -133,7 +135,9 @@ namespace Kistl.Client.Presentables
         private class CreateNewItemAndSetValueCommandModel
             : CommandModel
         {
-            public CreateNewItemAndSetValueCommandModel(IGuiApplicationContext appCtx, IKistlContext dataCtx, ObjectReferenceModel parent)
+            public new delegate CreateNewItemAndSetValueCommandModel Factory(IKistlContext dataCtx, ObjectReferenceModel parent);
+
+            public CreateNewItemAndSetValueCommandModel(IViewModelDependencies appCtx, IKistlContext dataCtx, ObjectReferenceModel parent)
                 : base(appCtx, dataCtx, "Create new item", "Create new item")
             {
                 _parent = parent;
@@ -179,7 +183,7 @@ namespace Kistl.Client.Presentables
             {
                 if (_SelectValueCommand == null)
                 {
-                    _SelectValueCommand = new SelectValueCommandModel(AppContext, DataContext, this);
+                    _SelectValueCommand = ModelFactory.CreateViewModel<SelectValueCommandModel.Factory>().Invoke(DataContext, this);
                 }
                 return _SelectValueCommand;
             }
@@ -188,7 +192,9 @@ namespace Kistl.Client.Presentables
         private class SelectValueCommandModel
             : CommandModel
         {
-            public SelectValueCommandModel(IGuiApplicationContext appCtx, IKistlContext dataCtx, ObjectReferenceModel parent)
+            public new delegate SelectValueCommandModel Factory(IKistlContext dataCtx, ObjectReferenceModel parent);
+
+            public SelectValueCommandModel(IViewModelDependencies appCtx, IKistlContext dataCtx, ObjectReferenceModel parent)
                 : base(appCtx, dataCtx, "Open reference", "Open reference")
             {
                 _parent = parent;

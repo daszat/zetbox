@@ -10,6 +10,11 @@ namespace Kistl.API.Utils
 {
     public static class AutoFacBuilder
     {
+        public static ContainerBuilder CreateContainerBuilder(KistlConfig config)
+        {
+            return CreateContainerBuilder(config, null);
+        }
+
         public static ContainerBuilder CreateContainerBuilder(KistlConfig config, string[] modules)
         {
             if (config == null) throw new ArgumentNullException("config");
@@ -22,9 +27,7 @@ namespace Kistl.API.Utils
                 .ExternallyOwned()
                 .SingleInstance();
 
-            var empty = new string[] { };
-
-            foreach (var m in modules)
+            foreach (var m in modules ?? new string[] { })
             {
                 try
                 {

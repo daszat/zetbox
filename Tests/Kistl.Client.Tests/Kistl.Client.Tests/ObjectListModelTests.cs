@@ -22,7 +22,7 @@ namespace Kistl.Client.Tests
     {
         Dictionary<IDataObject, ViewModel> models;
         Mock<IModelFactory> facMock;
-        Mock<IGuiApplicationContext> appCtxMock;
+        Mock<IViewModelDependencies> appCtxMock;
         Mock<TestObject> objMock;
         ObservableCollection<TestObject> list;
         Mock<ObjectReferenceProperty> orpMock;
@@ -32,12 +32,12 @@ namespace Kistl.Client.Tests
         public void SetUp()
         {
             // setup assembly information
-            var appCtx = new TestApplicationContext("Kistl.Client.Tests.Config.xml");
+            var appCtx = new TestApplicationContext();
 
             // setup an ObjectListModel
             models = new Dictionary<IDataObject, ViewModel>();
             facMock = KistlMockFactory.CreateFactory(models);
-            appCtxMock = new Mock<IGuiApplicationContext>();
+            appCtxMock = new Mock<IViewModelDependencies>();
             appCtxMock.Setup(ac => ac.Factory).Returns(facMock.Object);
 
             objMock = KistlMockFactory.CreateTestObject();
@@ -61,7 +61,7 @@ namespace Kistl.Client.Tests
         private DataObjectModel CreateNewDataObjectModel()
         {
             var newMock = KistlMockFactory.CreateTestObject();
-            var dom = new DataObjectModel(null, null, newMock.Object);
+            var dom = new DataObjectModel(null, null, null, newMock.Object);
             models[objMock.Object] = dom;
             return dom;
         }

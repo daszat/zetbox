@@ -18,7 +18,7 @@ namespace Kistl.Client.Presentables
         public new delegate ObjectReferenceModel Factory(IKistlContext dataCtx, IDataObject obj, Property prop);
 
         public ObjectReferenceModel(
-            IGuiApplicationContext appCtx, IKistlContext dataCtx,
+            IViewModelDependencies appCtx, IKistlContext dataCtx,
             IDataObject obj, ObjectReferenceProperty prop)
             : base(appCtx, dataCtx, obj, prop)
         {
@@ -27,7 +27,7 @@ namespace Kistl.Client.Presentables
         }
 
         public ObjectReferenceModel(
-           IGuiApplicationContext appCtx, IKistlContext dataCtx,
+           IViewModelDependencies appCtx, IKistlContext dataCtx,
            IDataObject referenceHolder, CalculatedObjectReferenceProperty prop)
             : base(appCtx, dataCtx, referenceHolder, prop)
         {
@@ -136,7 +136,7 @@ namespace Kistl.Client.Presentables
 
         private void CollectChildClasses(int id, List<ObjectClass> children)
         {
-            var nextChildren = MetaContext
+            var nextChildren = FrozenContext.Single
                 .GetQuery<ObjectClass>()
                 .Where(oc => oc.BaseObjectClass != null && oc.BaseObjectClass.ID == id)
                 .ToList();

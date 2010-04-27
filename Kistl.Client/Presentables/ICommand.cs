@@ -69,7 +69,7 @@ namespace Kistl.Client.Presentables
         /// <param name="dataCtx">the data context to use</param>
         /// <param name="label">a label for this command</param>
         /// <param name="tooltip">a tooltip for this command</param>
-        protected CommandModel(IGuiApplicationContext appCtx, IKistlContext dataCtx, string label, string tooltip)
+        protected CommandModel(IViewModelDependencies appCtx, IKistlContext dataCtx, string label, string tooltip)
             : base(appCtx, dataCtx)
         {
             if (label == null)

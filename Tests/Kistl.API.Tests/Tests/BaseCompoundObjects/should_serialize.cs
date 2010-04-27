@@ -25,7 +25,7 @@ namespace Kistl.API.Tests.BaseCompoundObjects
             ms = new MemoryStream();
             sw = new BinaryWriter(ms);
             sr = new BinaryReader(ms);
-            var testCtx = new TestApplicationContext("Kistl.API.Tests.Config.xml");
+            var testCtx = new TestApplicationContext();
 
             test = new TestCompoundObject__Implementation__();
         }

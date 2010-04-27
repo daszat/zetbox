@@ -6,6 +6,7 @@ using System.Text;
 using Kistl.API;
 using Kistl.App.Base;
 using Kistl.App.Extensions;
+using Kistl.API.Configuration;
 
 namespace Kistl.Client.Presentables.Relations
 {
@@ -16,9 +17,9 @@ namespace Kistl.Client.Presentables.Relations
         private Relation _relation;
 
         public RelationModel(
-            IGuiApplicationContext appCtx, IKistlContext dataCtx,
+            IViewModelDependencies appCtx, KistlConfig config, IKistlContext dataCtx,
             Relation rel)
-            : base(appCtx, dataCtx, rel)
+            : base(appCtx, config, dataCtx, rel)
         {
             _relation = rel;
             _relation.PropertyChanged += (sender, args) => OnPropertyChanged(args.PropertyName);

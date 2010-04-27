@@ -27,7 +27,7 @@ namespace Kistl.Client.Presentables.TimeRecords
         /// </summary>
         /// <param name="appCtx">the application context to use</param>
         /// <param name="dataCtx">the data context to use</param>
-        public WorkEffortRecorderModel(IGuiApplicationContext appCtx, IKistlContext dataCtx)
+        public WorkEffortRecorderModel(IViewModelDependencies appCtx, IKistlContext dataCtx)
             : base(appCtx, dataCtx)
         {
         }

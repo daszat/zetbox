@@ -15,10 +15,12 @@ namespace Kistl.Server.Tests.Security
     using Kistl.App.Projekte;
 
     using NUnit.Framework;
+using Kistl.API.Configuration;
 
     public abstract class SecurityDataFixture
     {
         protected ILifetimeScope container;
+        protected KistlConfig config;
 
         protected Identity admin;
         protected Identity identity1;
@@ -117,7 +119,7 @@ namespace Kistl.Server.Tests.Security
 
             // Fix security tables
             // Own test checks if this works during object modifications too
-            using (SqlConnection db = new SqlConnection(ApplicationContext.Current.Configuration.Server.ConnectionString))
+            using (SqlConnection db = new SqlConnection(config.Server.ConnectionString))
             {
                 db.Open();
                 using (SqlCommand cmd = db.CreateCommand())
@@ -168,6 +170,7 @@ namespace Kistl.Server.Tests.Security
         public void SetUp()
         {
             container = Kistl.Server.Tests.SetUp.CreateInnerContainer();
+            config = container.Resolve<KistlConfig>();
             DeleteData();
             CreateTestData();
         }

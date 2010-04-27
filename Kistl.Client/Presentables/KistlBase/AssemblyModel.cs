@@ -10,6 +10,7 @@ namespace Kistl.Client.Presentables.KistlBase
     using Kistl.API;
     using Kistl.API.Utils;
     using Kistl.App.Base;
+    using Kistl.API.Configuration;
     
     public class AssemblyModel
         : DataObjectModel
@@ -17,9 +18,9 @@ namespace Kistl.Client.Presentables.KistlBase
         private Assembly _assembly;
 
         public AssemblyModel(
-            IGuiApplicationContext appCtx, IKistlContext dataCtx,
+            IViewModelDependencies appCtx, KistlConfig config, IKistlContext dataCtx,
             Assembly assembly)
-            : base(appCtx, dataCtx, assembly)
+            : base(appCtx, config, dataCtx, assembly)
         {
             _assembly = assembly;
         }

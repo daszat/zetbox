@@ -12,6 +12,7 @@ using Kistl.App.Extensions;
 using Kistl.Server.Generators;
 using Kistl.Server.Generators.Extensions;
 using System.Runtime.Serialization;
+using Kistl.API.Configuration;
 
 namespace Kistl.Server.SchemaManagement
 {
@@ -25,12 +26,14 @@ namespace Kistl.Server.SchemaManagement
         private ISchemaProvider db;
         private bool repair = false;
         private readonly Cases Case;
+        private readonly KistlConfig config;
         #endregion
 
         #region Constructor
 
-        public SchemaManager(ISchemaProvider provider, IKistlContext schema, IKistlContext savedSchema)
+        public SchemaManager(ISchemaProvider provider, IKistlContext schema, IKistlContext savedSchema, KistlConfig config)
         {
+            this.config = config;
             this.schema = schema;
             this.db = provider;
             this.Case = new Cases(schema, provider, savedSchema);
@@ -55,7 +58,7 @@ namespace Kistl.Server.SchemaManagement
         {
             Log.InfoFormat("== {0} ==", reportName);
             Log.InfoFormat("Date: {0}", DateTime.Now);
-            Log.InfoFormat("Database: {0}", ApplicationContext.Current.Configuration.Server.ConnectionString);
+            Log.InfoFormat("Database: {0}", config.Server.ConnectionString);
             Log.Info(String.Empty);
         }
 

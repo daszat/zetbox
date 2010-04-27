@@ -8,6 +8,7 @@ using System.Text;
 using Kistl.API;
 using Kistl.App.Base;
 using Kistl.App.Extensions;
+using Kistl.API.Configuration;
 
 namespace Kistl.Client.Presentables
 {
@@ -15,9 +16,9 @@ namespace Kistl.Client.Presentables
         : DataObjectModel
     {
         public MethodInvocationModel(
-            IGuiApplicationContext appCtx, IKistlContext dataCtx,
+            IViewModelDependencies appCtx, KistlConfig config, IKistlContext dataCtx,
             MethodInvocation mdl)
-            : base(appCtx, dataCtx, mdl)
+            : base(appCtx, config, dataCtx, mdl)
         {
             _invocation = mdl;
             _invocation.PropertyChanged += InvocationPropertyChanged;
@@ -29,7 +30,7 @@ namespace Kistl.Client.Presentables
         private void UpdateMemberNamePossibilities()
         {
             if (_memberNameProperty == null)
-                _memberNameProperty = Object.GetObjectClass(MetaContext).Properties.Single(p => p.Name == "MemberName");
+                _memberNameProperty = Object.GetObjectClass(FrozenContext.Single).Properties.Single(p => p.Name == "MemberName");
 
             if (_memberNameModel == null)
                 // fetches already generated model from cache

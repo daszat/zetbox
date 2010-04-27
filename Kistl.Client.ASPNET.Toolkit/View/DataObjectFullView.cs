@@ -34,7 +34,7 @@ namespace Kistl.Client.ASPNET.Toolkit.View
             ViewModel mdl = (ViewModel)e.Item.DataItem;
             Control divPlaceHolder = e.Item.FindControl("divPlaceHolder");
 
-            GuiApplicationContext.Current.Factory.CreateDefaultView(mdl, divPlaceHolder);
+            KistlContextManagerModule.ModelFactory.CreateDefaultView(mdl, divPlaceHolder);
         }
     }
 }

@@ -13,34 +13,6 @@ using Kistl.API.Utils;
 
 namespace Kistl.Client
 {
-    /// <summary>
-    /// Client Helper Methods
-    /// </summary>
-    public static class ClientHelper
-    {
-        private readonly static object _lock = new object();
-
-        public static void HandleError(Exception ex)
-        {
-            //TODO: put exception into DB/Logfile
-            if (ex == null) { throw new ArgumentNullException("ex"); }
-
-            if (ex is FaultException)
-            {
-                GuiApplicationContext.Current.Renderer.ShowMessage((ex as FaultException).Message);
-            }
-            else
-            {
-                GuiApplicationContext.Current.Renderer.ShowMessage(ex.ToString());
-            }
-
-            if (GuiApplicationContext.Current.Configuration.Client.ThrowErrors)
-            {
-                throw ex;
-            }
-        }
-    }
-
     public static class ClientExtensions
     {
         /// <summary>

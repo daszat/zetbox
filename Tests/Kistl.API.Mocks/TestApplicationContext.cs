@@ -10,8 +10,8 @@ namespace Kistl.API.Mocks
 {
     public class TestApplicationContext : ApplicationContext
     {
-        public TestApplicationContext(string configfilename)
-            : base(HostType.None, KistlConfig.FromFile(configfilename))
+        public TestApplicationContext()
+            : base(HostType.None)
         {
             this.SetAssemblies(Assembly.GetAssembly(this.GetType()).FullName);
         }
@@ -19,11 +19,6 @@ namespace Kistl.API.Mocks
         internal void SetAssemblies(string p)
         {
             InterfaceAssembly = ImplementationAssembly = p;
-        }
-
-        public override void LoadFrozenActions(IReadOnlyKistlContext ctx)
-        {
-            throw new NotImplementedException();
         }
     }
 }

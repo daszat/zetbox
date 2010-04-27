@@ -13,7 +13,7 @@ namespace Kistl.Client.Presentables
         public new delegate BaseMethodResultModel Factory(IKistlContext dataCtx, IDataObject obj, Method m);
 
         protected BaseMethodResultModel(
-               IGuiApplicationContext appCtx, IKistlContext dataCtx,
+               IViewModelDependencies appCtx, IKistlContext dataCtx,
                IDataObject obj, Method m)
             : base(appCtx, dataCtx)
         {
@@ -26,7 +26,7 @@ namespace Kistl.Client.Presentables
         public new delegate MethodResultModel<TValue> Factory(IKistlContext dataCtx, IDataObject obj, Method m);
 
         protected MethodResultModel(
-            IGuiApplicationContext appCtx, IKistlContext dataCtx,
+            IViewModelDependencies appCtx, IKistlContext dataCtx,
             IDataObject obj, Method m)
             : base(appCtx, dataCtx, obj, m)
         {
@@ -121,7 +121,7 @@ namespace Kistl.Client.Presentables
         public new delegate NullableResultModel<TValue> Factory(IKistlContext dataCtx, IDataObject obj, Method m);
 
         public NullableResultModel(
-            IGuiApplicationContext appCtx, IKistlContext dataCtx,
+            IViewModelDependencies appCtx, IKistlContext dataCtx,
             IDataObject obj, Method m)
             : base(appCtx, dataCtx, obj, m)
         {
@@ -163,7 +163,7 @@ namespace Kistl.Client.Presentables
         public new delegate ObjectResultModel<TValue> Factory(IKistlContext dataCtx, IDataObject obj, Method m);
 
         public ObjectResultModel(
-            IGuiApplicationContext appCtx, IKistlContext dataCtx,
+            IViewModelDependencies appCtx, IKistlContext dataCtx,
             IDataObject obj, Method m)
             : base(appCtx, dataCtx, obj, m)
         {

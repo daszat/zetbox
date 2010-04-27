@@ -12,14 +12,17 @@ namespace Kistl.Client.WPF
     using Kistl.Client.Presentables;
 
     using Microsoft.Win32;
+    using Autofac;
 
     public class WpfModelFactory
         : ModelFactory
     {
+        private readonly IUiThreadManager uiThread;
 
-        public WpfModelFactory(Autofac.ILifetimeScope container)
+        public WpfModelFactory(Autofac.ILifetimeScope container, IUiThreadManager uiThread)
             : base(container)
         {
+            this.uiThread = uiThread;
         }
 
         /// <inheritdoc/>
@@ -31,7 +34,7 @@ namespace Kistl.Client.WPF
         /// <inheritdoc/>
         protected override void ShowInView(ViewModel mdl, object view, bool activate)
         {
-            GuiApplicationContext.Current.UiThread.Verify();
+            uiThread.Verify();
 
             if (view is Window)
             {

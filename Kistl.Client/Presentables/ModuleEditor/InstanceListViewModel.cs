@@ -15,19 +15,16 @@ namespace Kistl.Client.Presentables.ModuleEditor
     {
         public new delegate InstanceListViewModel Factory(IKistlContext dataCtx, Module module);
 
-        protected IModelFactory mdlFactory;
         protected Func<IKistlContext> ctxFactory;
 
         public InstanceListViewModel(
-            IGuiApplicationContext appCtx,
+            IViewModelDependencies appCtx,
             IKistlContext dataCtx,
             Module module,
-            IModelFactory mdlFactory,
             Func<IKistlContext> ctxFactory)
             : base(appCtx, dataCtx)
         {
             this.module = module;
-            this.mdlFactory = mdlFactory;
             this.ctxFactory = ctxFactory;
         }
 
@@ -129,21 +126,21 @@ namespace Kistl.Client.Presentables.ModuleEditor
         {
             if (objects == null) throw new ArgumentNullException("objects");
 
-            var newWorkspace = mdlFactory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(ctxFactory());
+            var newWorkspace = ModelFactory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(ctxFactory());
             foreach (var item in objects)
             {
                 newWorkspace.ShowForeignModel(item);
             }
-            mdlFactory.ShowModel(newWorkspace, true);
+            ModelFactory.ShowModel(newWorkspace, true);
         }
 
         public void NewObject()
         {
             var newCtx = ctxFactory();
-            var newWorkspace = mdlFactory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(newCtx);
+            var newWorkspace = ModelFactory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(newCtx);
             var newObj = newCtx.Create(this.InterfaceType);
-            newWorkspace.ShowForeignModel(mdlFactory.CreateViewModel<DataObjectModel.Factory>(newObj).Invoke(newCtx, newObj));
-            mdlFactory.ShowModel(newWorkspace, true);
+            newWorkspace.ShowForeignModel(ModelFactory.CreateViewModel<DataObjectModel.Factory>(newObj).Invoke(newCtx, newObj));
+            ModelFactory.ShowModel(newWorkspace, true);
         }
     }
 
@@ -153,12 +150,11 @@ namespace Kistl.Client.Presentables.ModuleEditor
         public new delegate ObjectClassInstanceListViewModel Factory(IKistlContext dataCtx, Module module);
 
         public ObjectClassInstanceListViewModel(
-            IGuiApplicationContext appCtx,
+            IViewModelDependencies appCtx,
             IKistlContext dataCtx,
             Module module,
-            IModelFactory mdlFactory,
             Func<IKistlContext> ctxFactory)
-            : base(appCtx, dataCtx, module, mdlFactory, ctxFactory)
+            : base(appCtx, dataCtx, module, ctxFactory)
         {
         }
 
@@ -209,12 +205,11 @@ namespace Kistl.Client.Presentables.ModuleEditor
         public new delegate InterfaceInstanceListViewModel Factory(IKistlContext dataCtx, Module module);
 
         public InterfaceInstanceListViewModel(
-            IGuiApplicationContext appCtx,
+            IViewModelDependencies appCtx,
             IKistlContext dataCtx,
             Module module,
-            IModelFactory mdlFactory,
             Func<IKistlContext> ctxFactory)
-            : base(appCtx, dataCtx, module, mdlFactory, ctxFactory)
+            : base(appCtx, dataCtx, module, ctxFactory)
         {
         }
 
@@ -242,12 +237,11 @@ namespace Kistl.Client.Presentables.ModuleEditor
         public new delegate EnumerationInstanceListViewModel Factory(IKistlContext dataCtx, Module module);
 
         public EnumerationInstanceListViewModel(
-            IGuiApplicationContext appCtx,
+            IViewModelDependencies appCtx,
             IKistlContext dataCtx,
             Module module,
-            IModelFactory mdlFactory,
             Func<IKistlContext> ctxFactory)
-            : base(appCtx, dataCtx, module, mdlFactory, ctxFactory)
+            : base(appCtx, dataCtx, module, ctxFactory)
         {
         }
         protected override IQueryable<IDataObject> GetQuery()
@@ -274,12 +268,11 @@ namespace Kistl.Client.Presentables.ModuleEditor
         public new delegate CompoundObjectInstanceListViewModel Factory(IKistlContext dataCtx, Module module);
 
         public CompoundObjectInstanceListViewModel(
-            IGuiApplicationContext appCtx,
+            IViewModelDependencies appCtx,
             IKistlContext dataCtx,
             Module module,
-            IModelFactory mdlFactory,
             Func<IKistlContext> ctxFactory)
-            : base(appCtx, dataCtx, module, mdlFactory, ctxFactory)
+            : base(appCtx, dataCtx, module, ctxFactory)
         {
         }
 
@@ -307,12 +300,11 @@ namespace Kistl.Client.Presentables.ModuleEditor
         public new delegate AssemblyInstanceListViewModel Factory(IKistlContext dataCtx, Module module);
 
         public AssemblyInstanceListViewModel(
-            IGuiApplicationContext appCtx,
+            IViewModelDependencies appCtx,
             IKistlContext dataCtx,
             Module module,
-            IModelFactory mdlFactory,
             Func<IKistlContext> ctxFactory)
-            : base(appCtx, dataCtx, module, mdlFactory, ctxFactory)
+            : base(appCtx, dataCtx, module, ctxFactory)
         {
         }
 
@@ -340,12 +332,11 @@ namespace Kistl.Client.Presentables.ModuleEditor
         public new delegate ViewDescriptorInstanceListViewModel Factory(IKistlContext dataCtx, Module module);
 
         public ViewDescriptorInstanceListViewModel(
-            IGuiApplicationContext appCtx,
+            IViewModelDependencies appCtx,
             IKistlContext dataCtx,
             Module module,
-            IModelFactory mdlFactory,
             Func<IKistlContext> ctxFactory)
-            : base(appCtx, dataCtx, module, mdlFactory, ctxFactory)
+            : base(appCtx, dataCtx, module, ctxFactory)
         {
         }
 
@@ -373,12 +364,11 @@ namespace Kistl.Client.Presentables.ModuleEditor
         public new delegate ViewModelDescriptorInstanceListViewModel Factory(IKistlContext dataCtx, Module module);
 
         public ViewModelDescriptorInstanceListViewModel(
-            IGuiApplicationContext appCtx,
+            IViewModelDependencies appCtx,
             IKistlContext dataCtx,
             Module module,
-            IModelFactory mdlFactory,
             Func<IKistlContext> ctxFactory)
-            : base(appCtx, dataCtx, module, mdlFactory, ctxFactory)
+            : base(appCtx, dataCtx, module, ctxFactory)
         {
         }
 
@@ -406,12 +396,11 @@ namespace Kistl.Client.Presentables.ModuleEditor
         public new delegate RelationInstanceListViewModel Factory(IKistlContext dataCtx, Module module);
 
         public RelationInstanceListViewModel(
-            IGuiApplicationContext appCtx,
+            IViewModelDependencies appCtx,
             IKistlContext dataCtx,
             Module module,
-            IModelFactory mdlFactory,
             Func<IKistlContext> ctxFactory)
-            : base(appCtx, dataCtx, module, mdlFactory, ctxFactory)
+            : base(appCtx, dataCtx, module, ctxFactory)
         {
         }
 

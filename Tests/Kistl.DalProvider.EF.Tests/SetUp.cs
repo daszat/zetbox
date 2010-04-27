@@ -13,6 +13,7 @@ namespace Kistl.DalProvider.EF.Tests
     using Kistl.Server;
 
     using NUnit.Framework;
+    using Kistl.DalProvider.EF.Mocks;
 
     [SetUpFixture]
     public class SetUp
@@ -33,7 +34,7 @@ namespace Kistl.DalProvider.EF.Tests
 
             AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
 
-            var appCtx = new ServerApplicationContext(config);
+            var appCtx = new ServerApiContextMock();
 
             var builder = Kistl.API.Utils.AutoFacBuilder.CreateContainerBuilder(config, config.Server.Modules);
             builder.RegisterInstance(config).ExternallyOwned().SingleInstance();

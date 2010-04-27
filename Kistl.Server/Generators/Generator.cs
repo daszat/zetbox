@@ -24,11 +24,13 @@ namespace Kistl.Server.Generators
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Server.Generator");
         private readonly ILifetimeScope _container;
         private readonly IEnumerable<BaseDataObjectGenerator> _generatorProviders;
+        private readonly KistlConfig _config;
 
         public Generator(ILifetimeScope container, IEnumerable<BaseDataObjectGenerator> generatorProviders)
         {
             _container = container;
             _generatorProviders = generatorProviders;
+            _config = _container.Resolve<KistlConfig>();
         }
 
         public void GenerateCode()
@@ -41,7 +43,7 @@ namespace Kistl.Server.Generators
 
             using (Log.DebugTraceMethodCall())
             {
-                var workingPath = ApplicationContext.Current.Configuration.Server.CodeGenWorkingPath;
+                var workingPath = _config.Server.CodeGenWorkingPath;
                 if (String.IsNullOrEmpty(workingPath))
                 {
                     throw new ConfigurationException("CodeGenWorkingPath is not defined in the current configuration file.");
@@ -210,7 +212,7 @@ namespace Kistl.Server.Generators
 
         private void PublishOutput()
         {
-            var outputPath = ApplicationContext.Current.Configuration.Server.CodeGenOutputPath;
+            var outputPath = _config.Server.CodeGenOutputPath;
             if (!String.IsNullOrEmpty(outputPath))
             {
                 Log.InfoFormat("Publishing results to [{0}]", outputPath);
@@ -218,7 +220,7 @@ namespace Kistl.Server.Generators
                 {
                     Directory.Delete(outputPath, true);
                 }
-                Directory.Move(ApplicationContext.Current.Configuration.Server.CodeGenWorkingPath, outputPath);
+                Directory.Move(_config.Server.CodeGenWorkingPath, outputPath);
                 // Case #1382: Recompile to regenerate PDB's
                 // CompileCode(outputPath);
             }
@@ -226,12 +228,12 @@ namespace Kistl.Server.Generators
 
         private void ArchiveOldOutput()
         {
-            var outputPath = ApplicationContext.Current.Configuration.Server.CodeGenOutputPath;
+            var outputPath = _config.Server.CodeGenOutputPath;
             if (String.IsNullOrEmpty(outputPath))
             {
                 throw new ConfigurationException("CodeGenOutputPath is not defined in the current configuration file, but archival was requested: don't know what to archive.");
             }
-            var archivePath = ApplicationContext.Current.Configuration.Server.CodeGenArchivePath;
+            var archivePath = _config.Server.CodeGenArchivePath;
             if (!String.IsNullOrEmpty(archivePath))
             {
                 var destDir = Path.Combine(archivePath, DateTime.Now.ToString("'CodeGen'yyyyMMdd'_'HHmmss"));
