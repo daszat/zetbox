@@ -13,11 +13,19 @@ namespace Kistl.API.Tests.Skeletons
         : IStreamableTests<T>
         where T : IPersistenceObject, new()
     {
+        protected IKistlContext ctx;
 
-        [Test]
-        public void should_not_be_attached_when_created()
+        public override void SetUp()
         {
-            Assert.That(obj.IsAttached, Is.False);
+            base.SetUp();
+            ctx = GetContext();
+            ctx.Attach(obj);
+
+        }
+        public override void TearDown()
+        {
+            ctx.Dispose();
+            base.TearDown();
         }
 
         [Test]
@@ -26,8 +34,6 @@ namespace Kistl.API.Tests.Skeletons
             T result = SerializationRoundtrip(obj);
 
             Assert.That(result.ID, Is.EqualTo(obj.ID));
-            // [Ignore("Obsolete, DAL Provider will manage ObjectState")]
-            // Assert.That(result.ObjectState, Is.EqualTo(obj.ObjectState));
         }
     }
 

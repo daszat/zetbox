@@ -34,8 +34,8 @@ namespace Kistl.API.AbstractConsumerTests
             using (Log.InfoTraceMethodCall("Starting up"))
             {
                 var config = KistlConfig.FromFile(GetConfigFile());
-                config.Server.DocumentStore = System.IO.Path.Combine(System.IO.Path.GetTempPath(), GetHostType().ToString());
-                config.Client.DocumentStore = System.IO.Path.Combine(System.IO.Path.GetTempPath(), GetHostType().ToString());
+                if (config.Server != null) config.Server.DocumentStore = System.IO.Path.Combine(System.IO.Path.GetTempPath(), GetHostType().ToString());
+                if (config.Client != null) config.Client.DocumentStore = System.IO.Path.Combine(System.IO.Path.GetTempPath(), GetHostType().ToString());
 
                 AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
 

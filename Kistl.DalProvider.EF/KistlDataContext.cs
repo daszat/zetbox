@@ -656,7 +656,7 @@ namespace Kistl.DalProvider.EF
 
         public override ImplementationType ToImplementationType(InterfaceType t)
         {
-            return GetImplementationType(Type.GetType(t.Type.Name + Kistl.API.Helper.ImplementationSuffix + "," + Kistl.API.Helper.ServerAssembly));
+            return GetImplementationType(Type.GetType(t.Type.FullName + Kistl.API.Helper.ImplementationSuffix + "," + Kistl.API.Helper.ServerAssembly));
         }
     }
 }

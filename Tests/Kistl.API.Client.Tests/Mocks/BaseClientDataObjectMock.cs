@@ -2,23 +2,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Kistl.App.Test;
 
 namespace Kistl.API.Client.Mocks
 {
-    /// <summary>
-    /// Empty interface for BaseClientDataObjectMock__Implementation__
-    /// </summary>
-    public interface BaseClientDataObjectMock
-        : IDataObject
-    {
-    }
-
     public class BaseClientDataObjectMock__Implementation__ 
-        : BaseClientDataObject, BaseClientDataObjectMock
+        : BaseClientDataObject, ANewObjectClass
     {
         public override Type GetImplementedInterface()
         {
-            return typeof(BaseClientDataObjectMock);
+            return typeof(ANewObjectClass);
         }
 
         #region IDataErrorInfo Members
@@ -44,5 +37,21 @@ namespace Kistl.API.Client.Mocks
         {
             throw new NotImplementedException();
         }
+
+        #region ANewObjectClass Members
+
+        public string TestString
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        #endregion
     }
 }

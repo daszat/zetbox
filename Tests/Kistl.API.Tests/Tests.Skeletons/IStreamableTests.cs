@@ -21,6 +21,7 @@ namespace Kistl.API.Tests.Skeletons
             obj = new T();
         }
 
+
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
         public void fails_on_serializing_to_null_stream()

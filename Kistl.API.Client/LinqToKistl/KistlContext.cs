@@ -21,6 +21,7 @@ namespace Kistl.API.Client
         private readonly KistlConfig config;
         private readonly ITypeTransformations typeTrans;
         private readonly IProxy proxy;
+        private readonly string _ClientImplementationAssembly;
 
         /// <summary>
         /// List of Objects (IDataObject and ICollectionEntry) in this Context.
@@ -33,11 +34,12 @@ namespace Kistl.API.Client
         [SuppressMessage("Microsoft.Performance", "CA1805:DoNotInitializeUnnecessarily", Justification = "Uses global constant")]
         private int _newIDCounter = Helper.INVALIDID;
 
-        public KistlContextImpl(KistlConfig config, ITypeTransformations typeTrans, IProxy proxy)
+        public KistlContextImpl(KistlConfig config, ITypeTransformations typeTrans, IProxy proxy, string clientImplementationAssembly)
         {
             this.config = config;
             this.typeTrans = typeTrans;
             this.proxy = proxy;
+            this._ClientImplementationAssembly = clientImplementationAssembly;
             this._objects = new ContextCache(this);
 
             CreatedAt = new StackTrace(true);
@@ -731,7 +733,7 @@ namespace Kistl.API.Client
 
         public ImplementationType ToImplementationType(InterfaceType t)
         {
-            return GetImplementationType(Type.GetType(t.Type.Name + Kistl.API.Helper.ImplementationSuffix + "," + Kistl.API.Helper.ClientAssembly, true));
+            return GetImplementationType(Type.GetType(t.Type.FullName + Kistl.API.Helper.ImplementationSuffix + "," + _ClientImplementationAssembly, true));
         }
         #endregion
     }

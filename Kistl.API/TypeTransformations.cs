@@ -198,7 +198,7 @@ namespace Kistl.API
 
     public struct ImplementationType
     {
-        public delegate ImplementationType Factory(Type t);
+        public delegate ImplementationType Factory(Type type);
 
         /// <summary>
         /// The wrapped <see cref="System.Type"/>. Guaranteed to be a valid ImplementationType (see <see cref="IsValid"/>).

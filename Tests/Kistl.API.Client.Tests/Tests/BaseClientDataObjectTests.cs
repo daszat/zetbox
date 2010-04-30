@@ -109,25 +109,25 @@ namespace Kistl.API.Client.Tests
             BinaryWriter sw = new BinaryWriter(ms);
             BinaryReader sr = new BinaryReader(ms);
 
-            obj.ToStream(sw, null, false);
-
-            Assert.That(ms.Length, Is.GreaterThan(0));
-
-            ms.Seek(0, SeekOrigin.Begin);
-
-            using (IKistlContext ctx = GetContext())
+            using (var ctx = GetContext())
             {
-                SerializableType t;
-                BinarySerializer.FromStream(out t, sr);
+                ctx.Attach(obj);
+                obj.ToStream(sw, null, false);
 
-                BaseClientDataObjectMock__Implementation__ result = new BaseClientDataObjectMock__Implementation__();
-                result.FromStream(sr);
+                Assert.That(ms.Length, Is.GreaterThan(0));
 
-                Assert.That(result.GetType(), Is.EqualTo(obj.GetType()));
-                Assert.That(result.ID, Is.EqualTo(obj.ID));
-                Assert.That(result.ObjectState, Is.EqualTo(obj.ObjectState));
-                Assert.That(PropertyChangedCalled, Is.False);
+                ms.Seek(0, SeekOrigin.Begin);
             }
+
+            SerializableType t;
+            BinarySerializer.FromStream(out t, sr);
+
+            BaseClientDataObjectMock__Implementation__ result = new BaseClientDataObjectMock__Implementation__();
+            result.FromStream(sr);
+
+            Assert.That(result.GetType(), Is.EqualTo(obj.GetType()));
+            Assert.That(result.ID, Is.EqualTo(obj.ID));
+            Assert.That(result.ObjectState, Is.EqualTo(obj.ObjectState));
         }
 
         [Test]

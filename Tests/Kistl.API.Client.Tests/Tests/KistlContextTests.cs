@@ -11,6 +11,7 @@ namespace Kistl.API.Client.Tests
 
     using NUnit.Framework;
     using Autofac;
+    using Kistl.App.Test;
 
     [TestFixture]
     public class KistlContextTests : AbstractApiClientTestFixture

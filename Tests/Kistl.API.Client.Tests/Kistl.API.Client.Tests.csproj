@@ -76,11 +76,11 @@
     <Compile Include="Mocks\OneNLists\OneSide.cs" />
     <Compile Include="Mocks\ProjektMock.cs" />
     <Compile Include="Mocks\Projekt_haben_Mitarbeiter_RelationEntry.cs" />
+    <Compile Include="Mocks\TestObjClass.cs" />
+    <Compile Include="Mocks\TestObjClass_TestNameCollectionEntry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SetUp.cs" />
-    <Compile Include="TestObjClass.cs" />
-    <Compile Include="TestObjClass_TestNameCollectionEntry.cs" />
-    <Compile Include="TestProxy.cs" />
+    <Compile Include="Mocks\TestProxy.cs" />
     <Compile Include="Tests\BaseClientCollectionEntryTests.cs" />
     <Compile Include="Tests\BaseClientDataObjectTests.cs" />
     <Compile Include="Tests\BinarySerializers\should_work_with_IStructs.cs" />

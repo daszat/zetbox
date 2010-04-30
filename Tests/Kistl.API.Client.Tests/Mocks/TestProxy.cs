@@ -7,6 +7,7 @@ using System.Text;
 using Kistl.API;
 using Kistl.API.Client;
 using System.Reflection;
+using Kistl.App.Test;
 
 namespace Kistl.API.Client.Tests
 {
@@ -49,8 +50,8 @@ namespace Kistl.API.Client.Tests
         {
             List<TestObjClass> result = new List<TestObjClass>();
             result.Add(new TestObjClass__Implementation__() { StringProp = "String " + 1 });
-            result.Add(new TestObjClass__Implementation__() { StringProp = "String " + 2, fk_Parent = 1 });
-            result.Add(new TestObjClass__Implementation__() { StringProp = "String " + 3, fk_Parent = 1 });
+            result.Add(new TestObjClass__Implementation__() { StringProp = "String " + 2, _fk_ObjectProp = 1 });
+            result.Add(new TestObjClass__Implementation__() { StringProp = "String " + 3, _fk_ObjectProp = 1 });
             result.Add(new TestObjClass__Implementation__() { StringProp = "String " + 4 });
             result.Add(new TestObjClass__Implementation__() { StringProp = "String " + 5 });
 
@@ -142,7 +143,6 @@ namespace Kistl.API.Client.Tests
 
         public void Dispose()
         {
-            throw new NotImplementedException();
         }
 
         public System.IO.Stream GetBlobStream(int ID)

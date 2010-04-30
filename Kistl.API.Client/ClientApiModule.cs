@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Autofac;
 using System.Reflection;
+using Kistl.API.Configuration;
 
 namespace Kistl.API.Client
 {
@@ -30,7 +31,7 @@ namespace Kistl.API.Client
         {
             base.Load(moduleBuilder);
 
-            moduleBuilder.RegisterType<KistlContextImpl>()
+            moduleBuilder.Register(c => new KistlContextImpl(c.Resolve<KistlConfig>(), c.Resolve<ITypeTransformations>(), c.Resolve<IProxy>(), Kistl.API.Helper.ClientAssembly))
                 .As<IKistlContext>()
                 .As<IReadOnlyKistlContext>()
                 .InstancePerDependency();

@@ -162,7 +162,7 @@ namespace Kistl.API.Server.Mocks
 
         public override ImplementationType ToImplementationType(InterfaceType t)
         {
-            return GetImplementationType(Type.GetType(t.Type.Name + Kistl.API.Helper.ImplementationSuffix + "," + typeof(KistlContextMock).Assembly.FullName));
+            return GetImplementationType(Type.GetType(t.Type.FullName + Kistl.API.Helper.ImplementationSuffix + "," + typeof(KistlContextMock).Assembly.FullName));
         }
     }
 }
