@@ -535,6 +535,8 @@ using Kistl.API.Configuration;
             return typeTrans.AsImplementationType(t);
         }
 
+        public abstract ImplementationType ToImplementationType(InterfaceType t);
+
         #endregion
     }
 }

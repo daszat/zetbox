@@ -16,34 +16,9 @@ namespace Kistl.API.Server
             get { return Kistl.API.Helper.InterfaceAssembly; }
         }
 
-        public string ImplementationAssemblyName
-        {
-            get { return Kistl.API.Helper.ServerAssembly; }
-        }
-
         public IEnumerable<string> AllImplementationAssemblyNames
         {
-            get { return new[] { Kistl.API.Helper.ServerAssembly }; }
-        }
-
-        public Type BasePersistenceObjectType
-        {
-            get { return typeof(BaseServerPersistenceObject); }
-        }
-
-        public Type BaseDataObjectType
-        {
-            get { return typeof(BaseServerDataObject); }
-        }
-
-        public Type BaseCompoundObjectType
-        {
-            get { return typeof(BaseServerCompoundObject); }
-        }
-
-        public Type BaseCollectionEntryType
-        {
-            get { return typeof(BaseServerCollectionEntry); }
+            get { return new[] { Kistl.API.Helper.ServerAssembly, Kistl.API.Helper.FrozenAssembly, Kistl.API.Helper.MemoryAssembly }; }
         }
 
         #endregion

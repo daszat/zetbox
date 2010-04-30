@@ -13,8 +13,8 @@ namespace Kistl.Server
     internal class CustomActionsManagerServer
         : BaseCustomActionsManager
     {
-        internal CustomActionsManagerServer(IAssemblyConfiguration assemblyConfiguration)
-            : base(String.Empty, assemblyConfiguration)
+        internal CustomActionsManagerServer()
+            : base(String.Empty, Kistl.API.Helper.ServerAssembly)
         {
         }
 
@@ -28,8 +28,8 @@ namespace Kistl.Server
     public class FrozenActionsManagerServer
           : FrozenActionsManager
     {
-        public FrozenActionsManagerServer(IAssemblyConfiguration aCfg)
-            : base(aCfg)
+        public FrozenActionsManagerServer()
+            : base()
         {
         }
 

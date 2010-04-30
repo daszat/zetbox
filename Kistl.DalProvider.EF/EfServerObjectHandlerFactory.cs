@@ -14,14 +14,16 @@ namespace Kistl.DalProvider.EF
         public EfServerObjectHandlerFactory() { }
 
         public override IServerCollectionHandler GetServerCollectionHandler(
+            IKistlContext ctx, 
             InterfaceType aType,
             InterfaceType bType,
             RelationEndRole endRole)
         {
+            if (ctx == null) throw new ArgumentNullException("ctx");
             return GetServerCollectionHandlerHelper(
                 typeof(ServerCollectionHandler<,,,>),
-                aType.ToImplementationType(),
-                bType.ToImplementationType(),
+                ctx.ToImplementationType(aType),
+                ctx.ToImplementationType(bType),
                 endRole);
         }
 

@@ -16,36 +16,10 @@ namespace Kistl.API.Client
             get { return Kistl.API.Helper.InterfaceAssembly; }
         }
 
-        public string ImplementationAssemblyName
-        {
-            get { return Kistl.API.Helper.ClientAssembly; }
-        }
-
         public IEnumerable<string> AllImplementationAssemblyNames
         {
-            get { return new[] { Kistl.API.Helper.ClientAssembly }; }
+            get { return new[] { Kistl.API.Helper.ClientAssembly, Kistl.API.Helper.FrozenAssembly, Kistl.API.Helper.MemoryAssembly }; }
         }
-
-        public Type BasePersistenceObjectType
-        {
-            get { return typeof(BaseClientPersistenceObject); }
-        }
-
-        public Type BaseDataObjectType
-        {
-            get { return typeof(BaseClientDataObject); }
-        }
-
-        public Type BaseCompoundObjectType
-        {
-            get { return typeof(BaseClientCompoundObject); }
-        }
-
-        public Type BaseCollectionEntryType
-        {
-            get { return typeof(BaseClientCollectionEntry); }
-        }
-
         #endregion
     }
 

@@ -14,8 +14,8 @@ namespace Kistl.Client
     internal class CustomActionsManagerClient
         : BaseCustomActionsManager
     {
-        internal CustomActionsManagerClient(IAssemblyConfiguration assemblyConfiguration)
-            : base(String.Empty, assemblyConfiguration)
+        internal CustomActionsManagerClient()
+            : base(String.Empty, Kistl.API.Helper.ClientAssembly)
         {
         }
 
@@ -33,8 +33,8 @@ namespace Kistl.Client
     public class FrozenActionsManagerClient
         : FrozenActionsManager
     {
-        public FrozenActionsManagerClient(IAssemblyConfiguration aCfg)
-            : base(aCfg)
+        public FrozenActionsManagerClient()
+            : base()
         {
         }
 

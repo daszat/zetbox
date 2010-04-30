@@ -190,6 +190,10 @@ namespace Kistl.DalProvider.Frozen
             return typeTrans.AsImplementationType(t);
         }
 
+        public ImplementationType ToImplementationType(InterfaceType t)
+        {
+            return GetImplementationType(Type.GetType(t.Type.Name + Kistl.API.Helper.ImplementationSuffix + "Frozen," + Kistl.API.Helper.FrozenAssembly, true));
+        }
 
         #endregion
     }

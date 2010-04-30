@@ -77,7 +77,7 @@ namespace Kistl.API.Server
         #region IServerObjectHandlerFactory Members
 
         /// <inheritdoc/>
-        public abstract IServerCollectionHandler GetServerCollectionHandler(InterfaceType aType, InterfaceType bType, RelationEndRole endRole);
+        public abstract IServerCollectionHandler GetServerCollectionHandler(IKistlContext ctx, InterfaceType aType, InterfaceType bType, RelationEndRole endRole);
 
         /// <inheritdoc/>
         public abstract IServerObjectHandler GetServerObjectHandler(InterfaceType type);

@@ -159,5 +159,10 @@ namespace Kistl.API.Server.Mocks
                 return Activator.CreateInstance(ifType.Type);
             }
         }
+
+        public override ImplementationType ToImplementationType(InterfaceType t)
+        {
+            return GetImplementationType(Type.GetType(t.Type.Name + Kistl.API.Helper.ImplementationSuffix + "," + typeof(KistlContextMock).Assembly.FullName));
+        }
     }
 }

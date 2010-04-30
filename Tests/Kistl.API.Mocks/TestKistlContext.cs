@@ -253,6 +253,10 @@ namespace Kistl.API.Mocks
             return typeTrans.AsImplementationType(t);
         }
 
+        public ImplementationType ToImplementationType(InterfaceType t)
+        {
+            return GetImplementationType(Type.GetType(t.Type.Name + Kistl.API.Helper.ImplementationSuffix + "," + typeof(TestKistlContext).Assembly.FullName, true));
+        }
         #endregion
     }
 }

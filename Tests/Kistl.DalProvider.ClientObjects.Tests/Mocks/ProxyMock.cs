@@ -35,15 +35,15 @@ namespace Kistl.DalProvider.ClientObjects.Mocks
 
             if (ifType == typeof(TestObjClass))
             {
-                result = GetList_TestObjClass();
+                result = GetList_TestObjClass(ctx);
             }
             else if (ifType == typeof(TestCustomObject))
             {
-                result = GetList_TestCustomObject();
+                result = GetList_TestCustomObject(ctx);
             }
             else if (ifType == typeof(Muhblah))
             {
-                result = GetList_Muhblah();
+                result = GetList_Muhblah(ctx);
             }
             else
             {
@@ -58,49 +58,49 @@ namespace Kistl.DalProvider.ClientObjects.Mocks
             return result.Cast<IDataObject>();
         }
 
-        private T CreateInstance<T>(int id)
+        private T CreateInstance<T>(IKistlContext ctx, int id)
         {
             InterfaceType ifType = typeTrans.AsInterfaceType(typeof(T));
-            return (T)CreateInstance(ifType, id);
+            return (T)CreateInstance(ctx, ifType, id);
         }
 
-        private static IDataObject CreateInstance(InterfaceType ifType, int id)
+        private static IDataObject CreateInstance(IKistlContext ctx, InterfaceType ifType, int id)
         {
-            var result = (IDataObject)Activator.CreateInstance(ifType.ToImplementationType().Type);
+            var result = (IDataObject)Activator.CreateInstance(ctx.ToImplementationType(ifType).Type);
             result.SetPrivatePropertyValue<int>("ID", id);
             return result;
         }
 
-        private IEnumerable<IDataObject> GetList_Muhblah()
+        private IEnumerable<IDataObject> GetList_Muhblah(IKistlContext ctx)
         {
             var result = new List<Muhblah>();
-            result.Add(CreateInstance<Muhblah>(1));
-            result.Add(CreateInstance<Muhblah>(2));
-            result.Add(CreateInstance<Muhblah>(3));
-            result.Add(CreateInstance<Muhblah>(4));
-            result.Add(CreateInstance<Muhblah>(5));
+            result.Add(CreateInstance<Muhblah>(ctx, 1));
+            result.Add(CreateInstance<Muhblah>(ctx, 2));
+            result.Add(CreateInstance<Muhblah>(ctx, 3));
+            result.Add(CreateInstance<Muhblah>(ctx, 4));
+            result.Add(CreateInstance<Muhblah>(ctx, 5));
             return result.Cast<IDataObject>();
         }
 
-        private IEnumerable<IDataObject> GetList_TestCustomObject()
+        private IEnumerable<IDataObject> GetList_TestCustomObject(IKistlContext ctx)
         {
             var result = new List<TestCustomObject>();
-            result.Add(CreateInstance<TestCustomObject>(1));
-            result.Add(CreateInstance<TestCustomObject>(2));
-            result.Add(CreateInstance<TestCustomObject>(3));
-            result.Add(CreateInstance<TestCustomObject>(4));
-            result.Add(CreateInstance<TestCustomObject>(5));
+            result.Add(CreateInstance<TestCustomObject>(ctx, 1));
+            result.Add(CreateInstance<TestCustomObject>(ctx, 2));
+            result.Add(CreateInstance<TestCustomObject>(ctx, 3));
+            result.Add(CreateInstance<TestCustomObject>(ctx, 4));
+            result.Add(CreateInstance<TestCustomObject>(ctx, 5));
             return result.Cast<IDataObject>();
         }
 
-        private IEnumerable<IDataObject> GetList_TestObjClass()
+        private IEnumerable<IDataObject> GetList_TestObjClass(IKistlContext ctx)
         {
             var result = new List<TestObjClass>();
-            result.Add(CreateInstance<TestObjClass>(1));
-            result.Add(CreateInstance<TestObjClass>(2));
-            result.Add(CreateInstance<TestObjClass>(3));
-            result.Add(CreateInstance<TestObjClass>(4));
-            result.Add(CreateInstance<TestObjClass>(5));
+            result.Add(CreateInstance<TestObjClass>(ctx, 1));
+            result.Add(CreateInstance<TestObjClass>(ctx, 2));
+            result.Add(CreateInstance<TestObjClass>(ctx, 3));
+            result.Add(CreateInstance<TestObjClass>(ctx, 4));
+            result.Add(CreateInstance<TestObjClass>(ctx, 5));
 
             result[0].StringProp = "String 1";
 
@@ -126,8 +126,8 @@ namespace Kistl.DalProvider.ClientObjects.Mocks
             List<TestObjClass> result = new List<TestObjClass>();
             if (ID == 1)
             {
-                result.Add(CreateInstance<TestObjClass>(2));
-                result.Add(CreateInstance<TestObjClass>(3));
+                result.Add(CreateInstance<TestObjClass>(ctx, 2));
+                result.Add(CreateInstance<TestObjClass>(ctx, 3));
 
                 result[0].StringProp = "String 2";
                 result[0].SetPrivatePropertyValue<int>("fk_Parent", 1);
@@ -154,7 +154,7 @@ namespace Kistl.DalProvider.ClientObjects.Mocks
 
                 if (obj.ObjectState != DataObjectState.Deleted)
                 {
-                    var newObj = CreateInstance(type, 0);
+                    var newObj = CreateInstance(ctx, type, 0);
 
                     // Copy old object to new object
                     newObj.ApplyChangesFrom(obj);

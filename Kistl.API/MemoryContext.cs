@@ -37,8 +37,13 @@ namespace Kistl.API
         /// <returns>A newly created, unattached instance of the implementation for the specified interface.</returns>
         protected override object CreateUnattachedInstance(InterfaceType ifType)
         {
-            var implType = ifType.ToImplementationType().Type;
+            var implType = ToImplementationType(ifType).Type;
             return Activator.CreateInstance(implType);
+        }
+
+        public override ImplementationType ToImplementationType(InterfaceType t)
+        {
+            return GetImplementationType(Type.GetType(t.Type.Name + Kistl.API.Helper.ImplementationSuffix + "," + Kistl.API.Helper.MemoryAssembly));
         }
     }
 }

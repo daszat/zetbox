@@ -279,7 +279,7 @@ namespace Kistl.API.Client
 
         private object CreateUnattachedInstance(InterfaceType ifType)
         {
-            return Activator.CreateInstance(ifType.ToImplementationType().Type);
+            return Activator.CreateInstance(ToImplementationType(ifType).Type);
         }
 
         private IPersistenceObject CreateInternal(InterfaceType ifType)
@@ -729,6 +729,10 @@ namespace Kistl.API.Client
             return typeTrans.AsImplementationType(t);
         }
 
+        public ImplementationType ToImplementationType(InterfaceType t)
+        {
+            return GetImplementationType(Type.GetType(t.Type.Name + Kistl.API.Helper.ImplementationSuffix + "," + Kistl.API.Helper.ClientAssembly, true));
+        }
         #endregion
     }
 }

@@ -26,7 +26,9 @@ namespace Kistl.App.Extensions
         /// <summary>
         /// Gets or sets the extra suffix which is used to create the implementation class' name.
         /// </summary>
-        protected string ExtraSuffix { get; set; }
+        protected string ExtraSuffix { get; private set; }
+
+        protected string ImplementationAssemblyName { get; private set; }
 
         /// <summary>
         /// Override this method to modify the acceptable DeploymentRestrictions. By default only None is accepted.
@@ -47,11 +49,11 @@ namespace Kistl.App.Extensions
         /// using the specified extra suffix and implementation assembly name.
         /// </summary>
         /// <param name="extraSuffix"></param>
-        /// <param name="assemblyConfiguration"></param>
-        protected BaseCustomActionsManager(string extraSuffix, IAssemblyConfiguration assemblyConfiguration)
+        /// <param name="implementationAssemblyName"></param>
+        protected BaseCustomActionsManager(string extraSuffix, string implementationAssemblyName)
         {
             ExtraSuffix = extraSuffix;
-            this.assemblyConfiguration = assemblyConfiguration;
+            ImplementationAssemblyName = implementationAssemblyName;
         }
 
         /// <summary>
@@ -65,7 +67,7 @@ namespace Kistl.App.Extensions
                 Log.TraceTotalMemory("Before BaseCustomActionsManager.Init()");
 
                 // Init
-                CreateInvokeInfosForObjectClasses(ctx, ExtraSuffix, assemblyConfiguration.ImplementationAssemblyName, ObjectClassFilter);
+                CreateInvokeInfosForObjectClasses(ctx, ExtraSuffix, ImplementationAssemblyName, ObjectClassFilter);
 
                 Log.TraceTotalMemory("After BaseCustomActionsManager.Init()");
             }
@@ -254,8 +256,8 @@ namespace Kistl.App.Extensions
         /// <summary>
         /// Initialises a new instane of the FrozenActionsManager.
         /// </summary>
-        protected FrozenActionsManager(IAssemblyConfiguration aCfg)
-            : base("Frozen", aCfg)
+        protected FrozenActionsManager()
+            : base("Frozen", Kistl.API.Helper.FrozenAssembly)
         {
         }
 

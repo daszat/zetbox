@@ -20,7 +20,7 @@ namespace Kistl.DalProvider.EF
 
         protected override Type ToProviderType(Type t)
         {
-            return typeTrans.AsInterfaceType(t).ToImplementationType().Type;
+            return Ctx.ToImplementationType(typeTrans.AsInterfaceType(t)).Type;
         }
 
         protected override QueryTranslatorProvider<TElement> GetSubProvider<TElement>()

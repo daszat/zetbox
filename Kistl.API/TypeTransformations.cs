@@ -10,13 +10,7 @@ namespace Kistl.API
     public interface IAssemblyConfiguration
     {
         string InterfaceAssemblyName { get; }
-        string ImplementationAssemblyName { get; }
         IEnumerable<string> AllImplementationAssemblyNames { get; }
-
-        Type BasePersistenceObjectType { get; }
-        Type BaseDataObjectType { get; }
-        Type BaseCompoundObjectType { get; }
-        Type BaseCollectionEntryType { get; }
     }
 
     // TODO: 
@@ -29,36 +23,10 @@ namespace Kistl.API
             get { return Kistl.API.Helper.InterfaceAssembly; }
         }
 
-        public string ImplementationAssemblyName
-        {
-            get { return Kistl.API.Helper.FrozenAssembly; }
-        }
-
         public IEnumerable<string> AllImplementationAssemblyNames
         {
-            get { return new[] { Kistl.API.Helper.FrozenAssembly }; }
+            get { return new[] { Kistl.API.Helper.FrozenAssembly, Kistl.API.Helper.MemoryAssembly }; }
         }
-
-        public Type BasePersistenceObjectType
-        {
-            get { return null; }
-        }
-
-        public Type BaseDataObjectType
-        {
-            get { return null; }
-        }
-
-        public Type BaseCompoundObjectType
-        {
-            get { return null; }
-        }
-
-        public Type BaseCollectionEntryType
-        {
-            get { return null; }
-        }
-
         #endregion
     }
 
@@ -205,16 +173,6 @@ namespace Kistl.API
                 .ToArray();
         }
 
-        /// <summary>
-        /// Computes the corresponding <see cref="ImplementationType"/>
-        /// </summary>
-        /// <returns>An <see cref="ImplementationType"/> corresponding to this <see cref="InterfaceType"/></returns>
-        public ImplementationType ToImplementationType()
-        {
-            // TODO: inline transformation logic to here
-            return new ImplementationType(this.Type.ToImplementationType(typeTrans.AssemblyConfiguration), typeTrans);
-        }
-
         public SerializableType ToSerializableType()
         {
             return new SerializableType(this, typeTrans);
@@ -303,7 +261,7 @@ namespace Kistl.API
 
             if (type.IsValueType) return true;
 
-            if (type.Assembly.FullName == assemblyConfig.ImplementationAssemblyName
+            if (assemblyConfig.AllImplementationAssemblyNames.Contains(type.Assembly.FullName)
                 && !type.IsInterface)
                 return true;
 
@@ -389,60 +347,60 @@ namespace Kistl.API
             return type;
         }
 
-        /// <summary>
-        /// Returns the Type implementing a given Kistl.Objects interface from the current ImplementationAssembly
-        /// </summary>
-        public static Type ToImplementationType(this Type type, IAssemblyConfiguration assemblyConfig)
-        {
-            if (type == null) { throw new ArgumentNullException("type"); }
+        ///// <summary>
+        ///// Returns the Type implementing a given Kistl.Objects interface from the current ImplementationAssembly
+        ///// </summary>
+        //private static Type ToImplementationType(this Type type, IAssemblyConfiguration assemblyConfig)
+        //{
+        //    if (type == null) { throw new ArgumentNullException("type"); }
 
-            // shortcut and warn when trying to resolve an already resolved type
-            if (type.FullName.Contains(Kistl.API.Helper.ImplementationSuffix) && type.IsIPersistenceObject())
-            {
-                Logging.Log.Error("Tried to convert an implementation type a second time");
-                return type;
-            }
+        //    // shortcut and warn when trying to resolve an already resolved type
+        //    if (type.FullName.Contains(Kistl.API.Helper.ImplementationSuffix) && type.IsIPersistenceObject())
+        //    {
+        //        Logging.Log.Error("Tried to convert an implementation type a second time");
+        //        return type;
+        //    }
 
-            if (type.IsGenericType)
-            {
-                // convert args of things like Generic Collections
-                Type genericType = type.GetGenericTypeDefinition();
-                var genericArguments = type.GetGenericArguments().Select(t => t.ToImplementationType(assemblyConfig)).ToArray();
-                return genericType.MakeGenericType(genericArguments);
-            }
-            else
-            {
-                if (type == typeof(IDataObject))
-                {
-                    return assemblyConfig.BaseDataObjectType;
-                }
-                else if (type == typeof(IPersistenceObject))
-                {
-                    return assemblyConfig.BasePersistenceObjectType;
-                }
-                else if (type == typeof(ICompoundObject))
-                {
-                    return assemblyConfig.BaseCompoundObjectType;
-                }
-                else if (type == typeof(IRelationCollectionEntry))
-                {
-                    return assemblyConfig.BaseCollectionEntryType;
-                }
-                else if (type == typeof(IValueCollectionEntry))
-                {
-                    return assemblyConfig.BaseCollectionEntryType;
-                }
-                else if (type.IsInterface)
-                {
-                    if (type.IsIPersistenceObject() || type.IsICompoundObject())
-                    {
-                        // add ImplementationSuffix
-                        string newType = type.FullName + Kistl.API.Helper.ImplementationSuffix + ", " + assemblyConfig.ImplementationAssemblyName;
-                        return Type.GetType(newType, true);
-                    }
-                }
-                return type;
-            }
-        }
+        //    if (type.IsGenericType)
+        //    {
+        //        // convert args of things like Generic Collections
+        //        Type genericType = type.GetGenericTypeDefinition();
+        //        var genericArguments = type.GetGenericArguments().Select(t => t.ToImplementationType(assemblyConfig)).ToArray();
+        //        return genericType.MakeGenericType(genericArguments);
+        //    }
+        //    else
+        //    {
+        //        if (type == typeof(IDataObject))
+        //        {
+        //            return assemblyConfig.BaseDataObjectType;
+        //        }
+        //        else if (type == typeof(IPersistenceObject))
+        //        {
+        //            return assemblyConfig.BasePersistenceObjectType;
+        //        }
+        //        else if (type == typeof(ICompoundObject))
+        //        {
+        //            return assemblyConfig.BaseCompoundObjectType;
+        //        }
+        //        else if (type == typeof(IRelationCollectionEntry))
+        //        {
+        //            return assemblyConfig.BaseCollectionEntryType;
+        //        }
+        //        else if (type == typeof(IValueCollectionEntry))
+        //        {
+        //            return assemblyConfig.BaseCollectionEntryType;
+        //        }
+        //        else if (type.IsInterface)
+        //        {
+        //            if (type.IsIPersistenceObject() || type.IsICompoundObject())
+        //            {
+        //                // add ImplementationSuffix
+        //                string newType = type.FullName + Kistl.API.Helper.ImplementationSuffix + ", " + assemblyConfig.ImplementationAssemblyName;
+        //                return Type.GetType(newType, true);
+        //            }
+        //        }
+        //        return type;
+        //    }
+        //}
     }
 }

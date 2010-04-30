@@ -72,7 +72,7 @@ namespace Kistl.DalProvider.EF
             var relEnd = rel.GetEndFromRole(endRole);
             var relOtherEnd = rel.GetOtherEnd(relEnd);
             var parent = ctx.Find(ctx.GetImplementationType(typeof(TParent)).ToInterfaceType(), parentId);
-            var ceType = ctx.GetInterfaceType(rel.GetRelationFullName()).ToImplementationType().Type;
+            var ceType = ctx.ToImplementationType(ctx.GetInterfaceType(rel.GetRelationFullName())).Type;
 
             var method = this.GetType().GetMethod("GetCollectionEntriesInternal", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
             return (IEnumerable<IRelationCollectionEntry>)method

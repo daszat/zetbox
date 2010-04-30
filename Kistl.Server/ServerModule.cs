@@ -77,9 +77,7 @@ namespace Kistl.Server
                 .Register(c =>
                 {
                     var ctx = c.Resolve<IReadOnlyKistlContext>();
-                    var aCfg = c.Resolve<IAssemblyConfiguration>();
-
-                    var cams = new CustomActionsManagerServer(aCfg);
+                    var cams = new CustomActionsManagerServer();
                     cams.Init(ctx);
 
                     return cams;

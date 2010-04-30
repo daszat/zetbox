@@ -492,6 +492,7 @@ namespace Kistl.API
             return _typeTrans.AsImplementationType(t);
         }
 
+        public abstract ImplementationType ToImplementationType(InterfaceType t);
         #endregion
     }
 }

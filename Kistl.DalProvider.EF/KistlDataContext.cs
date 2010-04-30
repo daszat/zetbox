@@ -197,7 +197,7 @@ namespace Kistl.DalProvider.EF
         public override IQueryable<T> GetPersistenceObjectQuery<T>()
         {
             var interfaceType = typeTrans.AsInterfaceType(typeof(T));
-            PrimeQueryCache<T>(interfaceType, interfaceType.ToImplementationType());
+            PrimeQueryCache<T>(interfaceType, ToImplementationType(interfaceType));
             // OfType<T>() at the end adds the security filters
             return ((IQueryable)_table[interfaceType]).OfType<T>();
         }
@@ -206,7 +206,7 @@ namespace Kistl.DalProvider.EF
             where T : class, IPersistenceObject
         {
             var interfaceType = typeTrans.AsInterfaceType(typeof(T));
-            PrimeQueryCache<T>(interfaceType, interfaceType.ToImplementationType());
+            PrimeQueryCache<T>(interfaceType, ToImplementationType(interfaceType));
 
             // OfType<T>() at the end adds the security filters
             return ((IQueryable)_table[interfaceType]).OfType<T>().ToList();
@@ -400,7 +400,7 @@ namespace Kistl.DalProvider.EF
 
         protected override object CreateUnattachedInstance(InterfaceType ifType)
         {
-            return Activator.CreateInstance(ifType.ToImplementationType().Type);
+            return Activator.CreateInstance(ToImplementationType(ifType).Type);
         }
 
         /// <summary>
@@ -652,6 +652,11 @@ namespace Kistl.DalProvider.EF
                 obj.AttachToContext(this);
             }
             return result;
+        }
+
+        public override ImplementationType ToImplementationType(InterfaceType t)
+        {
+            return GetImplementationType(Type.GetType(t.Type.Name + Kistl.API.Helper.ImplementationSuffix + "," + Kistl.API.Helper.ServerAssembly));
         }
     }
 }

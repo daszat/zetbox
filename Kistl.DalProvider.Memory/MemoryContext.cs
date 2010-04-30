@@ -32,5 +32,10 @@ namespace Kistl.DalProvider.Memory
         {
             throw new NotImplementedException();
         }
+
+        public override ImplementationType ToImplementationType(InterfaceType t)
+        {
+            return GetImplementationType(Type.GetType(t.Type.Name + Kistl.API.Helper.ImplementationSuffix + "," + Kistl.API.Helper.MemoryAssembly));
+        }
     }
 }

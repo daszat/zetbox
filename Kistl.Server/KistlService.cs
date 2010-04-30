@@ -253,6 +253,7 @@ namespace Kistl.Server
 
                         var lst = _sohFactory
                             .GetServerCollectionHandler(
+                                ctx,
                                 _typeTrans.AsInterfaceType(rel.A.Type.GetDataType()),
                                 _typeTrans.AsInterfaceType(rel.B.Type.GetDataType()),
                                 endRole)

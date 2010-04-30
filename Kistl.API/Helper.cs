@@ -48,6 +48,10 @@ namespace Kistl.API
         /// Frozen Assembly
         /// </summary>
         public static readonly string FrozenAssembly = "Kistl.Objects.Frozen, Version=1.0.0.0, Culture=neutral, PublicKeyToken=7b69192d05046fdf";
+        /// <summary>
+        /// Memory Assembly
+        /// </summary>
+        public static readonly string MemoryAssembly = "Kistl.Objects.Memory, Version=1.0.0.0, Culture=neutral, PublicKeyToken=7b69192d05046fdf";
 
         /// <summary>
         /// Suffix for Position Properties in Lists

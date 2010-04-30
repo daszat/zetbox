@@ -53,8 +53,7 @@ namespace Kistl.Client
                 .Register(c =>
                 {
                     var ctx = c.Resolve<IReadOnlyKistlContext>();
-                    var aCfg = c.Resolve<IAssemblyConfiguration>();
-                    var cams = new CustomActionsManagerClient(aCfg);
+                    var cams = new CustomActionsManagerClient();
                     cams.Init(ctx);
 
                     return cams;
