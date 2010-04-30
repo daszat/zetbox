@@ -20,7 +20,7 @@ namespace Kistl.API.Tests
     }
 
     [TestFixture]
-    public class ExpressionTreeVisitorTests
+    public class ExpressionTreeVisitorTests : AbstractApiTestFixture
     {
         private int MethodCallTest(int a)
         {

@@ -16,6 +16,7 @@ namespace Kistl.API.AbstractConsumerTests.PersistenceObjects
 
         public override void SetUp()
         {
+            base.SetUp();
             CreateObject();
             ctx = GetContext();
             obj = GetObject();
@@ -23,6 +24,7 @@ namespace Kistl.API.AbstractConsumerTests.PersistenceObjects
 
         public override void TearDown()
         {
+            base.TearDown();
             if (ctx != null)
                 ctx.Dispose();
             DestroyObjects();

@@ -18,7 +18,7 @@ namespace Kistl.API.Tests.Serializables
 {
 
     [TestFixture]
-    public class MemberExpressions : AbstractConsumerTests.AbstractTestFixture
+    public class MemberExpressions : AbstractApiTestFixture
     {
 
         public override void SetUp()

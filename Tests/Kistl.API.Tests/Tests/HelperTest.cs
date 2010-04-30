@@ -17,12 +17,13 @@ using Autofac;
 namespace Kistl.API.Tests
 {
     [TestFixture]
-    public class HelperTest : AbstractApiTextFixture
+    public class HelperTest : AbstractApiTestFixture
     {
         TestDataObject obj;
 
         public override void SetUp()
         {
+            base.SetUp();
             obj = new TestDataObject__Implementation__() { BoolProperty = true, IntProperty = 1, StringProperty = "test" };
         }
 

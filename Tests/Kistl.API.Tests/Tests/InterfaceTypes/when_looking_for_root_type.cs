@@ -14,7 +14,7 @@ namespace Kistl.API.Tests.InterfaceTypes
     public interface ValueCollectionEntry : IValueCollectionEntry<BaseClass, ChildClass> { }
 
     [TestFixture]
-    public class when_looking_for_root_type : AbstractApiTextFixture
+    public class when_looking_for_root_type : AbstractApiTestFixture
     {
         [Test]
         public void should_recognize_data_objects()

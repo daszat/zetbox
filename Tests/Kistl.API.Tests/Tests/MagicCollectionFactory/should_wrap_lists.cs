@@ -8,7 +8,7 @@ namespace Kistl.API.Tests.MagicCollectionFactory
 
     using NUnit.Framework;
 
-    public class should_wrap_lists
+    public class should_wrap_lists : AbstractApiTestFixture
     {
     }
 }

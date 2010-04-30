@@ -110,21 +110,21 @@ namespace Kistl.API.Mocks
 
         public void AttachToContext(IKistlContext ctx)
         {
-            throw new NotImplementedException();
+            Context = ctx;
         }
 
         public IKistlContext Context
         {
-            get { throw new NotImplementedException(); }
+            get; private set;
         }
         public IReadOnlyKistlContext ReadOnlyContext
         {
-            get { throw new NotImplementedException(); }
+            get { return Context; }
         }
 
         public void DetachFromContext(IKistlContext ctx)
         {
-            throw new NotImplementedException();
+            ctx = null;
         }
 
         /// <summary>

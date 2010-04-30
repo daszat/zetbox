@@ -15,7 +15,7 @@ namespace Kistl.API.Tests.Serializables
 {
 
     [TestFixture]
-    public class ConstantExpressions : AbstractApiTextFixture
+    public class ConstantExpressions : AbstractApiTestFixture
     {
 
         public interface ISomething { }

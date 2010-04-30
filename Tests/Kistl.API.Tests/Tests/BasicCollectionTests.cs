@@ -9,7 +9,7 @@ namespace Kistl.API.Tests
 
     using NUnit.Framework;
 
-    public abstract class BasicCollectionTests<TCollection, TItem> : AbstractApiTextFixture
+    public abstract class BasicCollectionTests<TCollection, TItem> : AbstractApiTestFixture
         where TCollection : ICollection
     {
         private static int itemNumber = 0;
@@ -91,6 +91,7 @@ namespace Kistl.API.Tests
 
         public override void SetUp()
         {
+            base.SetUp();
             PreSetup();
             initialItems = InitialItems();
             collection = CreateCollection(initialItems);
@@ -100,6 +101,7 @@ namespace Kistl.API.Tests
 
         public override void TearDown()
         {
+            base.TearDown();
             PostTeardown();
         }
 

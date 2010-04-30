@@ -9,7 +9,7 @@ using NUnit.Framework;
 namespace Kistl.API.Tests.Skeletons
 {
 
-    public class IStreamableTests<T> : AbstractApiTextFixture
+    public class IStreamableTests<T> : AbstractApiTestFixture
         where T : IStreamable, new()
     {
 
@@ -17,6 +17,7 @@ namespace Kistl.API.Tests.Skeletons
 
         public override void SetUp()
         {
+            base.SetUp();
             obj = new T();
         }
 

@@ -18,6 +18,8 @@ namespace Kistl.API.Client.Tests
 
         public override void SetUp()
         {
+            base.SetUp();
+
             PropertyChangedCalled = false;
 
             obj = new BaseClientDataObjectMock__Implementation__();

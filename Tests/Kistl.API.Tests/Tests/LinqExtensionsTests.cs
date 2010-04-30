@@ -13,14 +13,14 @@ using NUnit.Framework.Constraints;
 namespace Kistl.API.Tests
 {
 	[TestFixture]
-	public class LinqExtensionsTests
+    public class LinqExtensionsTests : AbstractApiTestFixture
 	{
 		List<TestDataObject> ctx;
 		IQueryable<TestDataObject> list;
 
-		[SetUp]
-		public void SetUp()
+		public override void SetUp()
 		{
+            base.SetUp();
 			ctx = new TestQuery<TestDataObject>().ToList();
 			list = (from o in ctx
 			        select o).AsQueryable<TestDataObject>();

@@ -15,7 +15,7 @@ namespace Kistl.API.Tests.Serializables
     using Autofac;
 
 	[TestFixture]
-    public class SerializableExpressionTests : AbstractApiTextFixture
+    public class SerializableExpressionTests : AbstractApiTestFixture
 	{
 		[Test]
 		public void FromExpression_null_fails()

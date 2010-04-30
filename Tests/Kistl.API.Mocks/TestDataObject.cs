@@ -35,7 +35,6 @@ using System.Xml.Serialization;
 
         public Kistl.API.AccessRights CurrentAccessRights { get { return AccessRights.Full; } }
 
-
         public string TestField;
 
         public object Clone()

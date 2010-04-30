@@ -32,6 +32,7 @@ namespace Kistl.Client.Tests
 
         public override void SetUp()
         {
+            base.SetUp();
             // setup an ObjectListModel
             models = new Dictionary<IDataObject, ViewModel>();
             facMock = KistlMockFactory.CreateFactory(models);

@@ -74,6 +74,7 @@
     <Compile Include="NDesk.Options\OptionSetTest.cs" />
     <Compile Include="NDesk.Options\OptionTest.cs" />
     <Compile Include="NDesk.Options\Utils.cs" />
+    <Compile Include="SetUp.cs" />
     <Compile Include="Tests.Serializables\ConstantExpressions.cs" />
     <Compile Include="Tests.Serializables\AssertExpressions.cs" />
     <Compile Include="Tests.Serializables\MemberExpressions.cs" />
@@ -81,7 +82,7 @@
     <Compile Include="Tests.Skeletons\IDataObjectTests.cs" />
     <Compile Include="Tests.Skeletons\IPersistenceObjectTests.cs" />
     <Compile Include="Tests.Skeletons\IStreamableTests.cs" />
-    <Compile Include="Tests\AbstractApiTextFixture.cs" />
+    <Compile Include="AbstractApiTestFixture.cs" />
     <Compile Include="Tests\AssemblyLoaderTests.cs" />
     <Compile Include="Tests\BaseCompoundObjects\should_serialize.cs" />
     <Compile Include="Tests\BinarySerializers\should_work_with_ICompoundObjects.cs" />

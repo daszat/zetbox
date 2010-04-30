@@ -18,7 +18,7 @@ namespace Kistl.API.Tests
 	using NUnit.Framework.Constraints;
     using Autofac;
 
-	public class BinarySerializerTests : AbstractApiTextFixture
+	public class BinarySerializerTests : AbstractApiTestFixture
 	{
 		MemoryStream ms;
 		BinaryWriter sw;
@@ -26,7 +26,8 @@ namespace Kistl.API.Tests
 
 		public override void SetUp()
 		{
-			ms = new MemoryStream();
+            base.SetUp();
+            ms = new MemoryStream();
 			sw = new BinaryWriter(ms);
 			sr = new BinaryReader(ms);
 		}
@@ -647,20 +648,25 @@ namespace Kistl.API.Tests
 
 			private void TestToFromStreamCollectionEntries(List<TestCollectionEntry> toval)
 			{
-				List<TestCollectionEntry> fromval;
-				BinarySerializer.ToStreamCollectionEntries(toval, sw);
-				ms.Seek(0, SeekOrigin.Begin);
+                using (var ctx = GetContext())
+                {
+                    if(toval != null) toval.ForEach(ce => ctx.Attach(ce));
 
-				fromval = new List<TestCollectionEntry>();
-				BinarySerializer.FromStreamCollectionEntries(fromval, sr);
-				if (toval == null) 
-				{
-					Assert.That(toval, Is.Null);
-				}
-				else
-				{
-					Assert.That(fromval, Is.EquivalentTo(toval));
-				}
+                    List<TestCollectionEntry> fromval;
+                    BinarySerializer.ToStreamCollectionEntries(toval, sw);
+                    ms.Seek(0, SeekOrigin.Begin);
+
+                    fromval = new List<TestCollectionEntry>();
+                    BinarySerializer.FromStreamCollectionEntries(fromval, sr);
+                    if (toval == null)
+                    {
+                        Assert.That(toval, Is.Null);
+                    }
+                    else
+                    {
+                        Assert.That(fromval, Is.EquivalentTo(toval));
+                    }
+                }
 			}
 
 			[Test]
@@ -669,13 +675,17 @@ namespace Kistl.API.Tests
 				List<TestCollectionEntry> toval;
 				toval = new List<TestCollectionEntry>();
 				toval.Add(new TestCollectionEntry() { ID = 20, TestName = "Hello" });
+                using (var ctx = GetContext())
+                {
+                    toval.ForEach(ce => ctx.Attach(ce));
 
-				BinarySerializer.ToStreamCollectionEntries(toval, sw);
-				ms.Seek(0, SeekOrigin.Begin);
+                    BinarySerializer.ToStreamCollectionEntries(toval, sw);
+                    ms.Seek(0, SeekOrigin.Begin);
 
-				ObservableCollection<TestCollectionEntry> fromvalobserbable = new ObservableCollection<TestCollectionEntry>();
-				BinarySerializer.FromStreamCollectionEntries(fromvalobserbable, sr);
-				Assert.That(toval, Is.EqualTo(fromvalobserbable));
+                    ObservableCollection<TestCollectionEntry> fromvalobserbable = new ObservableCollection<TestCollectionEntry>();
+                    BinarySerializer.FromStreamCollectionEntries(fromvalobserbable, sr);
+                    Assert.That(toval, Is.EqualTo(fromvalobserbable));
+                }
 			}
 		}
 

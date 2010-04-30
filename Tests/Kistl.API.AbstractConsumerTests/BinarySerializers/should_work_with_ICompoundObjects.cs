@@ -106,7 +106,7 @@ namespace Kistl.API.AbstractConsumerTests.BinarySerializers
     }
 
     [TestFixture(typeof(MinimalCompoundObjectTest))]
-    public class should_work_with_ICompoundObjects<T>
+    public class should_work_with_ICompoundObjects<T> : AbstractTestFixture
         where T : class, ICompoundObject, new()
     {
         MemoryStream ms;
@@ -115,9 +115,10 @@ namespace Kistl.API.AbstractConsumerTests.BinarySerializers
 
         T test;
 
-        [SetUp]
-        public void SetUp()
+        public override void SetUp()
         {
+            base.SetUp();
+
             ms = new MemoryStream();
             sw = new BinaryWriter(ms);
             sr = new BinaryReader(ms);

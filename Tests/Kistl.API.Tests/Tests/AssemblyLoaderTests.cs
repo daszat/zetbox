@@ -13,12 +13,8 @@ using NUnit.Framework.Constraints;
 namespace Kistl.API.Tests
 {
     [TestFixture]
-    public class AssemblyLoaderTests
+    public class AssemblyLoaderTests : AbstractApiTestFixture
     {
-        [SetUp]
-        public void SetUp()
-        {
-        }
 
         // TODO: Load AssemblyLoader in AppDomain to _really_ test this stuff
         //[Test]

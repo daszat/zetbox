@@ -13,7 +13,7 @@ namespace Kistl.API.Tests.Serializables
     /// <summary>
     /// Helper function to check Expressions
     /// </summary>
-    public class AssertExpressions
+    public class AssertExpressions : AbstractApiTestFixture
     {
 
         /// <summary>

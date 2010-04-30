@@ -163,7 +163,8 @@ namespace Kistl.API
             }
         }
 
-        protected ITypeTransformations typeTrans { get; private set; }
+        [NonSerialized]
+        protected readonly ITypeTransformations typeTrans;
 
         /// <summary>
         /// Converts a SerializableExpression to a Linq Expression

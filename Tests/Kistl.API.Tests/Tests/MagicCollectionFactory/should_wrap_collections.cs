@@ -8,7 +8,7 @@ using NUnit.Framework;
 namespace Kistl.API.Tests.MagicCollectionFactory
 {
     [TestFixture]
-    public class should_wrap_collections
+    public class should_wrap_collections : AbstractApiTestFixture
     {
         [Test]
         public void from_string_to_object()

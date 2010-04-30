@@ -45,6 +45,7 @@ namespace Kistl.API.Server.Tests
 
         public override void SetUp()
         {
+            base.SetUp();
             ctx = new KistlContextMock(scope.Resolve<IMetaDataResolver>(), null, scope.Resolve<KistlConfig>(), scope.Resolve<ITypeTransformations>());
         }
 

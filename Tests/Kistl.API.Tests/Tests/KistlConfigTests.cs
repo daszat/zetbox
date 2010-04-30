@@ -16,7 +16,7 @@ using NUnit.Framework.Constraints;
 namespace Kistl.API.Tests
 {
     [TestFixture]
-    public class KistlConfigTests
+    public class KistlConfigTests : AbstractApiTestFixture
     {
         readonly static string ConfigFile = "Kistl.API.Tests.Config.xml";
 

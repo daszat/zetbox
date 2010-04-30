@@ -90,6 +90,7 @@ namespace Kistl.API.AbstractConsumerTests
         /// </summary>
         public override void SetUp()
         {
+            base.SetUp();
             using (var ctx = GetContext())
             {
                 DeleteData(ctx);

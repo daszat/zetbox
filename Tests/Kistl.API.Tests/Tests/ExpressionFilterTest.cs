@@ -13,15 +13,15 @@ using NUnit.Framework.Constraints;
 namespace Kistl.API.Tests
 {
     [TestFixture]
-    public class ExpressionFilterTest
+    public class ExpressionFilterTest : AbstractApiTestFixture
     {
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Tests.Api.ExpressionFilter");
 
         TestQuery<IDataObject> ctx;
 
-        [SetUp]
-        public void SetUp()
+        public override void SetUp()
         {
+            base.SetUp();
             ctx = new TestQuery<IDataObject>();
         }
 

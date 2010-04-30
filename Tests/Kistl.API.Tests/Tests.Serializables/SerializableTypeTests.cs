@@ -12,7 +12,7 @@ using Autofac;
 namespace Kistl.API.Tests.Serializables
 {
     [TestFixture]
-    public class SerializableTypeTests : AbstractApiTextFixture
+    public class SerializableTypeTests : AbstractApiTestFixture
     {
         SerializableType t;
 

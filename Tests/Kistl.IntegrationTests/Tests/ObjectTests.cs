@@ -28,6 +28,7 @@ namespace Kistl.IntegrationTests
 
         public override void SetUp()
         {
+            base.SetUp();
             DeleteObjects();
 
             using (IKistlContext ctx = GetContext())
@@ -68,6 +69,7 @@ namespace Kistl.IntegrationTests
         
         public override void TearDown()
         {
+            base.TearDown();
             DeleteObjects();
         }
 

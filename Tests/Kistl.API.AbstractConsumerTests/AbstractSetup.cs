@@ -22,9 +22,10 @@ namespace Kistl.API.AbstractConsumerTests
 
         protected abstract string GetConfigFile();
         protected abstract HostType GetHostType();
-        
+
         protected virtual void SetupBuilder(ContainerBuilder builder)
         {
+
         }
 
         [SetUp]

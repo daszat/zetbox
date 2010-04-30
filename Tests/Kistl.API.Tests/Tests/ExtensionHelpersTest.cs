@@ -15,13 +15,13 @@ using NUnit.Framework.Constraints;
 namespace Kistl.API.Tests
 {
 	[TestFixture]
-	public class ExtensionHelpersTest
+    public class ExtensionHelpersTest : AbstractApiTestFixture
 	{
 		TestDataObject obj;
 
-		[SetUp]
-		public void SetUp()
+		public override void SetUp()
 		{
+            base.SetUp();
 			obj = new TestDataObject__Implementation__() { BoolProperty = true, IntProperty = 1, StringProperty = "test" };
 		}
 

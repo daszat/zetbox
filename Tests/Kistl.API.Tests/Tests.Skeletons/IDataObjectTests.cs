@@ -8,7 +8,7 @@ using NUnit.Framework;
 
 namespace Kistl.API.Tests.Skeletons
 {
-    public class IDataObjectTests<T>
+    public class IDataObjectTests<T> 
         : IPersistenceObjectTests<T>
         where T : IDataObject, new()
     {

@@ -9,7 +9,7 @@ namespace Kistl.API.Mocks
     {
         protected ITypeTransformations typeTrans;
 
-        protected TestKistlContext(ITypeTransformations typeTrans)
+        public TestKistlContext(ITypeTransformations typeTrans)
         {
             this.typeTrans = typeTrans;
         }
@@ -18,12 +18,13 @@ namespace Kistl.API.Mocks
 
         public IPersistenceObject Attach(IPersistenceObject obj)
         {
+            obj.AttachToContext(this);
             return obj;
         }
 
         public void Detach(IPersistenceObject obj)
         {
-
+            obj.DetachFromContext(this);
         }
 
         public void Delete(IPersistenceObject obj)
@@ -200,7 +201,6 @@ namespace Kistl.API.Mocks
 
         public void Dispose()
         {
-            throw new NotImplementedException();
         }
 
         #endregion
@@ -245,7 +245,20 @@ namespace Kistl.API.Mocks
 
         public InterfaceType GetInterfaceType(IPersistenceObject obj)
         {
-            return typeTrans.AsInterfaceType(((BasePersistenceObject)obj).GetImplementedInterface());
+            Type ifType;
+            if (obj is TestCollectionEntry)
+            {
+                ifType = ((TestCollectionEntry)obj).GetImplementedInterface();
+            }
+            else if (obj is TestDataObject__Implementation__)
+            {
+                ifType = ((TestDataObject__Implementation__)obj).GetImplementedInterface();
+            }
+            else
+            {
+                throw new NotImplementedException("unable to get the implemented interfacetype of the given object");
+            }
+            return typeTrans.AsInterfaceType(ifType);
         }
 
         public ImplementationType GetImplementationType(Type t)

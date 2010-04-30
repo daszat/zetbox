@@ -65,6 +65,7 @@ namespace Kistl.API.AbstractConsumerTests
     {
         public override void SetUp()
         {
+            base.SetUp();
             using (var ctx = GetContext())
             {
                 ProjectDataFixture.DeleteData(ctx);
@@ -76,6 +77,7 @@ namespace Kistl.API.AbstractConsumerTests
 
         public override void TearDown()
         {
+            base.TearDown();
             using (var ctx = GetContext())
             {
                 ProjectDataFixture.DeleteData(ctx);

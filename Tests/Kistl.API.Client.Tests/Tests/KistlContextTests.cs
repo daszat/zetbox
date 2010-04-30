@@ -20,6 +20,8 @@ namespace Kistl.API.Client.Tests
 
         public override void SetUp()
         {
+            base.SetUp();
+
             Logging.Log.Info("KistlContextTests.SetUp() is called");
 
             this.typeTrans = scope.Resolve<ITypeTransformations>();

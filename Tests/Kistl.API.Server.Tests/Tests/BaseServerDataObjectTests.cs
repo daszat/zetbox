@@ -21,6 +21,7 @@ namespace Kistl.API.Server.Tests
 
         public override void SetUp()
         {
+            base.SetUp();
             obj = new TestObjClass__Implementation__();
             typeTrans = scope.Resolve<ITypeTransformations>();
         }

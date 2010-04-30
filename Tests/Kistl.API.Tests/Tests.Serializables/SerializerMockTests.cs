@@ -15,7 +15,7 @@ using NUnit.Framework.Constraints;
 namespace Kistl.API.Tests.Serializables
 {
     [TestFixture]
-    public class SerializerMockTests : AbstractApiTextFixture
+    public class SerializerMockTests : AbstractApiTestFixture
     {
         MemoryStream ms;
         BinaryWriter sw;
@@ -25,6 +25,7 @@ namespace Kistl.API.Tests.Serializables
 
         public override void SetUp()
         {
+            base.SetUp();
             ms = new MemoryStream();
             sw = new BinaryWriter(ms);
             sr = new BinaryReader(ms);
