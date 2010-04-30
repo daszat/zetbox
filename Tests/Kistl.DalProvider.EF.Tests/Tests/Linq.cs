@@ -27,8 +27,6 @@ namespace Kistl.DalProvider.EF.Tests
         [SetUp]
         public void Init()
         {
-            var testCtx = new ServerApiContextMock();
-
             using (IKistlContext localCtx = KistlContext.GetContext())
             {
                 var result = localCtx.GetQuery<TestObjClass>();
@@ -96,11 +94,6 @@ namespace Kistl.DalProvider.EF.Tests
             var localResult = expression(query.ToList().AsQueryable());
 
             Assert.That(linqResult, Is.EqualTo(localResult));
-        }
-
-        protected override IKistlContext GetContext()
-        {
-            return KistlContext.GetContext();
         }
     }
 }

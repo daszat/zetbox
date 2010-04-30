@@ -174,9 +174,9 @@ namespace Kistl.App.Base
 
 
 
-		public override InterfaceType GetInterfaceType()
+		public override Type GetImplementedInterface()
 		{
-			return new InterfaceType(typeof(Enumeration));
+			return typeof(Enumeration);
 		}
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)

@@ -14,8 +14,8 @@ namespace Kistl.Client
     internal class CustomActionsManagerClient
         : BaseCustomActionsManager
     {
-        internal CustomActionsManagerClient(ApplicationContext appCtx)
-            : base(String.Empty, appCtx.ImplementationAssembly)
+        internal CustomActionsManagerClient(IAssemblyConfiguration assemblyConfiguration)
+            : base(String.Empty, assemblyConfiguration)
         {
         }
 
@@ -33,6 +33,11 @@ namespace Kistl.Client
     public class FrozenActionsManagerClient
         : FrozenActionsManager
     {
+        public FrozenActionsManagerClient(IAssemblyConfiguration aCfg)
+            : base(aCfg)
+        {
+        }
+
         /// <inheritdoc/>
         protected override bool IsAcceptableDeploymentRestriction(int r)
         {

@@ -22,7 +22,7 @@ namespace Kistl.Client.Presentables
     {
         public new delegate DataTypeModel Factory(IKistlContext dataCtx, DataType type);
 
-        protected Func<IKistlContext> ctxFactory;
+        protected readonly Func<IKistlContext> ctxFactory;
 
         /// <summary>
         /// Initializes a new instance of the DataTypeModel class.
@@ -145,7 +145,7 @@ namespace Kistl.Client.Presentables
         {
             get
             {
-                return new InterfaceType(_type.GetDataType());
+                return DataContext.GetInterfaceType(_type.GetDataType());
             }
         }
 

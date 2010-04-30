@@ -75,8 +75,8 @@ namespace Kistl.DalProvider.EF
         /// <summary>
         /// Internal Constructor
         /// </summary>
-        public KistlDataContext(IMetaDataResolver metaDataResolver, Identity identity, KistlConfig config)
-            : base(metaDataResolver, identity, config)
+        public KistlDataContext(IMetaDataResolver metaDataResolver, Identity identity, KistlConfig config, ITypeTransformations typeTrans)
+            : base(metaDataResolver, identity, config, typeTrans)
         {
             _ctx = new EFObjectContext(config);
         }
@@ -196,8 +196,8 @@ namespace Kistl.DalProvider.EF
         /// <returns>IQueryable</returns>
         public override IQueryable<T> GetPersistenceObjectQuery<T>()
         {
-            var interfaceType = new InterfaceType(typeof(T));
-            PrimeQueryCache<T>(interfaceType, ImplementationType(interfaceType));
+            var interfaceType = typeTrans.AsInterfaceType(typeof(T));
+            PrimeQueryCache<T>(interfaceType, interfaceType.ToImplementationType());
             // OfType<T>() at the end adds the security filters
             return ((IQueryable)_table[interfaceType]).OfType<T>();
         }
@@ -205,8 +205,8 @@ namespace Kistl.DalProvider.EF
         public System.Collections.IList GetListHack<T>()
             where T : class, IPersistenceObject
         {
-            var interfaceType = new InterfaceType(typeof(T));
-            PrimeQueryCache<T>(interfaceType, ImplementationType(interfaceType));
+            var interfaceType = typeTrans.AsInterfaceType(typeof(T));
+            PrimeQueryCache<T>(interfaceType, interfaceType.ToImplementationType());
 
             // OfType<T>() at the end adds the security filters
             return ((IQueryable)_table[interfaceType]).OfType<T>().ToList();
@@ -231,7 +231,7 @@ namespace Kistl.DalProvider.EF
                 _table[interfaceType] = new QueryTranslator<T>(
                     new EfQueryTranslatorProvider<T>(
                         metaDataResolver, this.identity,
-                        query, this));
+                        query, this, typeTrans));
             }
         }
 
@@ -265,7 +265,7 @@ namespace Kistl.DalProvider.EF
         /// If the Object is not in that Context, null is returned.</returns>
         public override IPersistenceObject ContainsObject(InterfaceType type, int ID)
         {
-            return AttachedObjects.Where(obj => obj.GetInterfaceType() == type && obj.ID == ID).SingleOrDefault();
+            return AttachedObjects.Where(obj => GetInterfaceType(obj) == type && obj.ID == ID).SingleOrDefault();
         }
 
         /// <summary>
@@ -400,7 +400,7 @@ namespace Kistl.DalProvider.EF
 
         protected override object CreateUnattachedInstance(InterfaceType ifType)
         {
-            return Activator.CreateInstance(ImplementationType(ifType).Type);
+            return Activator.CreateInstance(ifType.ToImplementationType().Type);
         }
 
         /// <summary>
@@ -413,7 +413,7 @@ namespace Kistl.DalProvider.EF
             if (obj == null) { throw new ArgumentNullException("obj"); }
 
             var serverObj = (BaseServerPersistenceObject)obj;
-            string entityName = GetEntityName(obj.GetInterfaceType());
+            string entityName = GetEntityName(GetInterfaceType(obj));
 
             if (serverObj.ClientObjectState == DataObjectState.New
                 || serverObj.ClientObjectState == DataObjectState.NotDeserialized)
@@ -598,7 +598,7 @@ namespace Kistl.DalProvider.EF
             {
                 // TODO: Case #1174
                 var tmp = GetPersistenceObjectQuery<Kistl.App.Base.ObjectClass>().FirstOrDefault();
-                string sql = string.Format("SELECT VALUE e FROM Entities.[{0}] AS e WHERE e.[ExportGuid] = @guid", GetEntityName(new InterfaceType(typeof(T))));
+                string sql = string.Format("SELECT VALUE e FROM Entities.[{0}] AS e WHERE e.[ExportGuid] = @guid", GetEntityName(typeTrans.AsInterfaceType(typeof(T))));
                 result = _ctx.CreateQuery<T>(sql, new System.Data.Objects.ObjectParameter("guid", exportGuid)).FirstOrDefault();
                 if (result != null) result.AttachToContext(this);
             }
@@ -639,7 +639,7 @@ namespace Kistl.DalProvider.EF
             if (exportGuids.Count() == 0) return new List<T>();
 
             StringBuilder sql = new StringBuilder();
-            sql.AppendFormat("SELECT VALUE e FROM Entities.{0} AS e WHERE e.ExportGuid IN {{", GetEntityName(new InterfaceType(typeof(T))));
+            sql.AppendFormat("SELECT VALUE e FROM Entities.{0} AS e WHERE e.ExportGuid IN {{", GetEntityName(typeTrans.AsInterfaceType(typeof(T))));
             foreach (Guid g in exportGuids)
             {
                 sql.AppendFormat("Guid'{0}',", g);
@@ -652,12 +652,6 @@ namespace Kistl.DalProvider.EF
                 obj.AttachToContext(this);
             }
             return result;
-        }
-
-        public static ImplementationType ImplementationType(InterfaceType ifType)
-        {
-            var implTypeName = String.Format("{0}.{1}{2}, {3}", ifType.Type.Namespace, ifType.Type.Name, Kistl.API.Helper.ImplementationSuffix, Kistl.API.Helper.ServerAssembly);
-            return new ImplementationType(Type.GetType(implTypeName, true));
         }
     }
 }

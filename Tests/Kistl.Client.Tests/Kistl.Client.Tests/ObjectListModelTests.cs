@@ -17,8 +17,10 @@ namespace Kistl.Client.Tests
     using NUnit.Framework;
     using System.ComponentModel;
 
+    using Autofac;
+
     [TestFixture]
-    public class ObjectListModelTests
+    public class ObjectListModelTests : AbstractClientTestFixture
     {
         Dictionary<IDataObject, ViewModel> models;
         Mock<IModelFactory> facMock;
@@ -28,39 +30,29 @@ namespace Kistl.Client.Tests
         Mock<ObjectReferenceProperty> orpMock;
         ObjectListModel olm;
 
-        [SetUp]
-        public void SetUp()
+        public override void SetUp()
         {
-            // setup assembly information
-            var appCtx = new TestApplicationContext();
-
             // setup an ObjectListModel
             models = new Dictionary<IDataObject, ViewModel>();
             facMock = KistlMockFactory.CreateFactory(models);
             appCtxMock = new Mock<IViewModelDependencies>();
             appCtxMock.Setup(ac => ac.Factory).Returns(facMock.Object);
 
-            objMock = KistlMockFactory.CreateTestObject();
+            objMock = scope.Resolve<KistlMockFactory>().CreateTestObject();
 
             list = new ObservableCollection<TestObject>();
             objMock.Setup(obj => obj.TestCollection).Returns(list);
             objMock.Setup(obj => obj.GetProperties()).Returns(new PropertyDescriptorCollection(new PropertyDescriptor[] { }));
 
-            orpMock = KistlMockFactory.CreateObjectReferenceProperty("TestCollection", true);
+            orpMock = scope.Resolve<KistlMockFactory>().CreateObjectReferenceProperty("TestCollection", true);
 
             olm = new ObjectListModel(appCtxMock.Object, null, objMock.Object, orpMock.Object);
 
         }
 
-        [TearDown]
-        public void TearDown()
-        {
-
-        }
-
         private DataObjectModel CreateNewDataObjectModel()
         {
-            var newMock = KistlMockFactory.CreateTestObject();
+            var newMock = scope.Resolve<KistlMockFactory>().CreateTestObject();
             var dom = new DataObjectModel(null, null, null, newMock.Object);
             models[objMock.Object] = dom;
             return dom;

@@ -658,9 +658,9 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Module, string> OnNamespace_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.Module, string> OnNamespace_PostSetter;
 
-		public override InterfaceType GetInterfaceType()
+		public override Type GetImplementedInterface()
 		{
-			return new InterfaceType(typeof(Module));
+			return typeof(Module);
 		}
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)

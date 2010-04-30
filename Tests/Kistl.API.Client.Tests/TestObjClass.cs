@@ -191,9 +191,9 @@ namespace Kistl.API.Client.Tests
 
         public delegate void TestMethod_Handler<T>(T obj, DateTime DateTimeParamForTestMethod);
 
-        public override InterfaceType GetInterfaceType()
+        public override Type GetImplementedInterface()
         {
-            return new InterfaceType(typeof(TestObjClass));
+            return typeof(TestObjClass);
         }
 
         public override bool IsValid()

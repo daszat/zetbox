@@ -28,8 +28,8 @@ namespace Kistl.Client.ASPNET.Toolkit
                 HttpContext.Current.Items["__Current_KistlContextManagerModule_KistlContext"] = value;
             }
         }
-
         public static IModelFactory ModelFactory { get; private set; }
+        public static ITypeTransformations TypeTransformations { get; private set; }
 
         private static IContainer container;
 
@@ -70,6 +70,7 @@ namespace Kistl.Client.ASPNET.Toolkit
                 var cams = container.Resolve<BaseCustomActionsManager>();
 
                 ModelFactory = container.Resolve<IModelFactory>();
+                TypeTransformations = container.Resolve<ITypeTransformations>();
 
             }
             KistlContext = container.Resolve<IKistlContext>();

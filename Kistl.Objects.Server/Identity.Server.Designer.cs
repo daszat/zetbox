@@ -261,9 +261,9 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Identity, string> OnUserName_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.Identity, string> OnUserName_PostSetter;
 
-		public override InterfaceType GetInterfaceType()
+		public override Type GetImplementedInterface()
 		{
-			return new InterfaceType(typeof(Identity));
+			return typeof(Identity);
 		}
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)

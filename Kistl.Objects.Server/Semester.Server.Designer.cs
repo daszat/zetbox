@@ -373,9 +373,9 @@ namespace at.dasz.CourseOrganiser
 		public static event PropertyPreSetterHandler<at.dasz.CourseOrganiser.Semester, int?> OnYear_PreSetter;
 		public static event PropertyPostSetterHandler<at.dasz.CourseOrganiser.Semester, int?> OnYear_PostSetter;
 
-		public override InterfaceType GetInterfaceType()
+		public override Type GetImplementedInterface()
 		{
-			return new InterfaceType(typeof(Semester));
+			return typeof(Semester);
 		}
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)

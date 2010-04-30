@@ -73,9 +73,9 @@ namespace Kistl.API.Client.Tests
             this._fk_Parent = ((TestObjClass_TestNameCollectionEntry)obj)._fk_Parent;
         }
 
-        public override InterfaceType GetInterfaceType()
+        public override Type GetImplementedInterface()
         {
-            return new InterfaceType(typeof(IValueCollectionEntry<TestObjClass, string>));
+            return typeof(IValueCollectionEntry<TestObjClass, string>);
         }
     }
 }

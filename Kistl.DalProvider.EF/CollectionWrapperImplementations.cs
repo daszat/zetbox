@@ -22,7 +22,7 @@ namespace Kistl.DalProvider.EF
 
         protected override TEntry CreateEntry(object item)
         {
-            return (TEntry)ParentObject.Context.CreateRelationCollectionEntry(new ImplementationType(typeof(TEntry)).ToInterfaceType());
+            return (TEntry)ParentObject.Context.CreateRelationCollectionEntry(ParentObject.Context.GetImplementationType(typeof(TEntry)).ToInterfaceType());
         }
 
         protected override void OnEntryRemoved(TEntry entry)
@@ -46,7 +46,7 @@ namespace Kistl.DalProvider.EF
 
         protected override TEntry CreateEntry(object item)
         {
-            return (TEntry)ParentObject.Context.CreateRelationCollectionEntry(new ImplementationType(typeof(TEntry)).ToInterfaceType());
+            return (TEntry)ParentObject.Context.CreateRelationCollectionEntry(ParentObject.Context.GetImplementationType(typeof(TEntry)).ToInterfaceType());
         }
 
         protected override void OnEntryRemoved(TEntry entry)
@@ -69,7 +69,7 @@ namespace Kistl.DalProvider.EF
 
         protected override TEntry CreateEntry(object item)
         {
-            return (TEntry)ParentObject.Context.CreateRelationCollectionEntry(new ImplementationType(typeof(TEntry)).ToInterfaceType());
+            return (TEntry)ParentObject.Context.CreateRelationCollectionEntry(ParentObject.Context.GetImplementationType(typeof(TEntry)).ToInterfaceType());
         }
 
         protected override void OnEntryRemoved(TEntry entry)
@@ -92,7 +92,7 @@ namespace Kistl.DalProvider.EF
 
         protected override TEntry CreateEntry(object item)
         {
-            return (TEntry)ParentObject.Context.CreateRelationCollectionEntry(new ImplementationType(typeof(TEntry)).ToInterfaceType());
+            return (TEntry)ParentObject.Context.CreateRelationCollectionEntry(ParentObject.Context.GetImplementationType(typeof(TEntry)).ToInterfaceType());
         }
 
         protected override void OnEntryRemoved(TEntry entry)

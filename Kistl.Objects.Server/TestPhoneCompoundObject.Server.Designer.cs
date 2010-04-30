@@ -136,9 +136,9 @@ namespace Kistl.App.Test
 		public static event PropertyPreSetterHandler<Kistl.App.Test.TestPhoneCompoundObject, string> OnNumber_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Test.TestPhoneCompoundObject, string> OnNumber_PostSetter;
 
-		public override InterfaceType GetInterfaceType()
+		public override Type GetImplementedInterface()
 		{
-			return new InterfaceType(typeof(TestPhoneCompoundObject));
+			return typeof(TestPhoneCompoundObject);
 		}
         public TestPhoneCompoundObject__Implementation__(bool isNull, IPersistenceObject parent, string property)
         {

@@ -17,6 +17,11 @@ namespace Kistl.DalProvider.Frozen
         : IPersistenceObject
     {
         /// <summary>
+        /// Interfacetype Factory injected by a Context
+        /// </summary>
+        public ITypeTransformations TypeTrans { get; set; }
+
+        /// <summary>
         /// 
         /// </summary>
         protected BaseFrozenObject()
@@ -69,7 +74,7 @@ namespace Kistl.DalProvider.Frozen
         /// <param name="sw"></param>
         public virtual void ToStream(BinaryWriter sw)
         {
-            BinarySerializer.ToStream(new SerializableType(this.GetInterfaceType()), sw);
+            BinarySerializer.ToStream(Context.GetInterfaceType(this).ToSerializableType(), sw);
             BinarySerializer.ToStream(ID, sw);
             BinarySerializer.ToStream((int)ObjectState, sw);
         }
@@ -193,10 +198,13 @@ namespace Kistl.DalProvider.Frozen
         public bool IsReadonly { get { return IsSealed; } }
 
         /// <summary>
-        /// 
+        /// Returns the most specific System.Type implemented by this object.
         /// </summary>
-        /// <returns></returns>
-        public abstract InterfaceType GetInterfaceType();
+        /// <returns>the System.Type of this object</returns>
+        public virtual Type GetImplementedInterface()
+        {
+            return null;
+        }
 
         #endregion
 

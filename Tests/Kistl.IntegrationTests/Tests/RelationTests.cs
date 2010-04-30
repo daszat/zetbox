@@ -302,10 +302,5 @@ namespace Kistl.IntegrationTests
 
         #endregion
 
-        /// <inheritdoc/>
-        protected override IKistlContext GetContext()
-        {
-            return KistlContext.GetContext();
-        }
     }
 }

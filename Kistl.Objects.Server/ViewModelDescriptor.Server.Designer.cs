@@ -584,9 +584,9 @@ namespace Kistl.App.GUI
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.ViewModelDescriptor, Kistl.App.Base.TypeRef> OnViewModelRef_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.ViewModelDescriptor, Kistl.App.Base.TypeRef> OnViewModelRef_PostSetter;
 
-		public override InterfaceType GetInterfaceType()
+		public override Type GetImplementedInterface()
 		{
-			return new InterfaceType(typeof(ViewModelDescriptor));
+			return typeof(ViewModelDescriptor);
 		}
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)

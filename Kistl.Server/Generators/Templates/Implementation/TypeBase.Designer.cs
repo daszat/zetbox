@@ -118,9 +118,9 @@ ApplyMethodTemplate(m, index++);
 
 #line 98 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
 this.WriteObjects("\r\n");
-this.WriteObjects("		public override InterfaceType GetInterfaceType()\r\n");
+this.WriteObjects("		public override Type GetImplementedInterface()\r\n");
 this.WriteObjects("		{\r\n");
-this.WriteObjects("			return new InterfaceType(typeof(",  DataType.Name , "));\r\n");
+this.WriteObjects("			return typeof(",  DataType.Name , ");\r\n");
 this.WriteObjects("		}\r\n");
 #line 104 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
 ApplyApplyChangesFromMethod();

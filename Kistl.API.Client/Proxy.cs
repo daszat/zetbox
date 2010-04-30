@@ -33,46 +33,18 @@ namespace Kistl.API.Client
     }
 
     /// <summary>
-    /// Proxy Singleton
-    /// </summary>
-    public static class ProxySingleton
-    {
-        /// <summary>
-        /// Singleton
-        /// </summary>
-        private static IProxy current;
-
-        /// <summary>
-        /// Sets the current Proxy, used in Unit Tests
-        /// </summary>
-        /// <param name="p"></param>
-        public static void SetProxy(IProxy p)
-        {
-            current = p;
-        }
-
-        /// <summary>
-        /// WCF Proxy für das KistlService
-        /// </summary>
-        public static IProxy Current
-        {
-            get
-            {
-                if (current == null)
-                {
-                    SetProxy(new ProxyImplementation());
-                }
-                return current;
-            }
-        }
-    }
-
-    /// <summary>
     /// Proxy Implementation
     /// </summary>
     internal class ProxyImplementation
         : IProxy
     {
+        private readonly ITypeTransformations typeTrans;
+
+        public ProxyImplementation(ITypeTransformations typeTrans)
+        {
+            this.typeTrans = typeTrans;
+        }
+
         private readonly static object _lock = new object();
 
         private KistlServiceClient _service;
@@ -102,11 +74,11 @@ namespace Kistl.API.Client
             using (Logging.Facade.InfoTraceMethodCallFormat("GetList[{0}]", ifType.ToString()))
             {
                 using (MemoryStream s = Service.GetList(
-                    new SerializableType(ifType),
+                    ifType.ToSerializableType(),
                     maxListCount,
                     eagerLoadLists,
-                    filter != null ? SerializableExpression.FromExpression(filter) : null,
-                    orderBy != null ? orderBy.Select(o => SerializableExpression.FromExpression(o)).ToArray() : null))
+                    filter != null ? SerializableExpression.FromExpression(filter, typeTrans) : null,
+                    orderBy != null ? orderBy.Select(o => SerializableExpression.FromExpression(o, typeTrans)).ToArray() : null))
                 {
                     using (var sr = new BinaryReader(s))
                     {
@@ -120,7 +92,7 @@ namespace Kistl.API.Client
         {
             using (Logging.Facade.InfoTraceMethodCallFormat("{0} [{1}].{2}", ifType, ID, property))
             {
-                using (MemoryStream s = Service.GetListOf(new SerializableType(ifType), ID, property))
+                using (MemoryStream s = Service.GetListOf(ifType.ToSerializableType(), ID, property))
                 {
                     using (var sr = new BinaryReader(s))
                     {
@@ -163,7 +135,7 @@ namespace Kistl.API.Client
             }
         }
 
-        private static IEnumerable<IStreamable> ReceiveObjects(IKistlContext ctx, BinaryReader sr, out List<IStreamable> auxObjects)
+        private IEnumerable<IStreamable> ReceiveObjects(IKistlContext ctx, BinaryReader sr, out List<IStreamable> auxObjects)
         {
             var result = ReceiveObjectList(ctx, sr);
             auxObjects = ReceiveObjectList(ctx, sr);
@@ -171,7 +143,7 @@ namespace Kistl.API.Client
             return result;
         }
 
-        private static List<IStreamable> ReceiveObjectList(IKistlContext ctx, BinaryReader sr)
+        private List<IStreamable> ReceiveObjectList(IKistlContext ctx, BinaryReader sr)
         {
             List<IStreamable> result = new List<IStreamable>();
             bool cont = true;
@@ -181,7 +153,7 @@ namespace Kistl.API.Client
                 SerializableType objType;
                 BinarySerializer.FromStream(out objType, sr);
 
-                IStreamable obj = (IStreamable)ctx.CreateUnattached(new InterfaceType(objType.GetSystemType()));
+                IStreamable obj = (IStreamable)ctx.CreateUnattached(typeTrans.AsInterfaceType(objType.GetSystemType()));
                 obj.FromStream(sr);
 
                 result.Add((IStreamable)obj);

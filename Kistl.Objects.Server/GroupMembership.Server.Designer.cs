@@ -123,9 +123,9 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.GroupMembership, Kistl.App.Base.Group> OnGroup_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.GroupMembership, Kistl.App.Base.Group> OnGroup_PostSetter;
 
-		public override InterfaceType GetInterfaceType()
+		public override Type GetImplementedInterface()
 		{
-			return new InterfaceType(typeof(GroupMembership));
+			return typeof(GroupMembership);
 		}
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)

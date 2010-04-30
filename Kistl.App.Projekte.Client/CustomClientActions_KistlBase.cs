@@ -364,7 +364,7 @@ namespace Kistl.App.Base
                         Property newProp;
                         if (prop is ValueTypeProperty)
                         {
-                            newProp = (Property)ctx.Create(prop.GetInterfaceType());
+                            newProp = (Property)ctx.Create(ctx.GetInterfaceType(prop));
                         }
                         else if (prop is ObjectReferencePlaceholderProperty)
                         {
@@ -393,7 +393,7 @@ namespace Kistl.App.Base
                         // Copy Constrains
                         foreach (var c in prop.Constraints)
                         {
-                            var newC = (Constraint)ctx.Create(c.GetInterfaceType());
+                            var newC = (Constraint)ctx.Create(ctx.GetInterfaceType(c));
                             newProp.Constraints.Add(newC);
                             newC.Reason = c.Reason;
                         }
@@ -402,7 +402,7 @@ namespace Kistl.App.Base
                         if (prop.DefaultValue != null)
                         {
                             var dv = prop.DefaultValue;
-                            var newDV = (DefaultPropertyValue)ctx.Create(dv.GetInterfaceType());
+                            var newDV = (DefaultPropertyValue)ctx.Create(ctx.GetInterfaceType(dv));
                             newProp.DefaultValue = newDV;
                         }
 
@@ -437,7 +437,7 @@ namespace Kistl.App.Base
                     // TODO: evtl. IsDeclaredInImplementsInterface aus dem Generator verallgemeinern & benutzen
                     if (!objClass.Methods.Select(m => m.Name).Contains(meth.Name))
                     {
-                        Method newMeth = (Method)ctx.Create(meth.GetInterfaceType());
+                        Method newMeth = (Method)ctx.Create(ctx.GetInterfaceType(meth));
                         objClass.Methods.Add(newMeth);
                         newMeth.Name = meth.Name;
                         newMeth.IsDisplayable = meth.IsDisplayable;
@@ -446,7 +446,7 @@ namespace Kistl.App.Base
 
                         foreach (var param in meth.Parameter)
                         {
-                            var newParam = (BaseParameter)ctx.Create(param.GetInterfaceType());
+                            var newParam = (BaseParameter)ctx.Create(ctx.GetInterfaceType(param));
                             newMeth.Parameter.Add(newParam);
 
                             newParam.Name = param.Name;

@@ -36,10 +36,5 @@ namespace Kistl.Server.Tests
                 container = null;
             }
         }
-
-        protected override IKistlContext GetContext()
-        {
-            return GetContainer().Resolve<IKistlContext>();
-        }
     }
 }

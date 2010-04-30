@@ -39,29 +39,34 @@ this.WriteObjects("\r\n");
 this.WriteObjects("	public class FrozenContextImplementation\r\n");
 this.WriteObjects("		: Kistl.DalProvider.Frozen.BaseFrozenContext\r\n");
 this.WriteObjects("	{\r\n");
+this.WriteObjects("		public FrozenContextImplementation(ITypeTransformations typeTrans)\r\n");
+this.WriteObjects("			: base(typeTrans)\r\n");
+this.WriteObjects("		{\r\n");
+this.WriteObjects("		}\r\n");
+this.WriteObjects("	\r\n");
 this.WriteObjects("		static FrozenContextImplementation()\r\n");
 this.WriteObjects("		{\r\n");
-#line 29 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Repositories\FrozenContextImplementation.cst"
-foreach(var module in modulesWithFrozenClasses)
-	{
-
-#line 32 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Repositories\FrozenContextImplementation.cst"
-this.WriteObjects("			",  module.Namespace , ".Frozen",  module.Name , "Repository.CreateInstances();\r\n");
 #line 34 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Repositories\FrozenContextImplementation.cst"
-}
-
-#line 36 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Repositories\FrozenContextImplementation.cst"
-this.WriteObjects("\r\n");
-#line 38 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Repositories\FrozenContextImplementation.cst"
 foreach(var module in modulesWithFrozenClasses)
 	{
+
+#line 37 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Repositories\FrozenContextImplementation.cst"
+this.WriteObjects("			",  module.Namespace , ".Frozen",  module.Name , "Repository.CreateInstances();\r\n");
+#line 39 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Repositories\FrozenContextImplementation.cst"
+}
 
 #line 41 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Repositories\FrozenContextImplementation.cst"
-this.WriteObjects("			",  module.Namespace , ".Frozen",  module.Name , "Repository.FillDataStore();\r\n");
+this.WriteObjects("\r\n");
 #line 43 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Repositories\FrozenContextImplementation.cst"
+foreach(var module in modulesWithFrozenClasses)
+	{
+
+#line 46 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Repositories\FrozenContextImplementation.cst"
+this.WriteObjects("			",  module.Namespace , ".Frozen",  module.Name , "Repository.FillDataStore();\r\n");
+#line 48 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Repositories\FrozenContextImplementation.cst"
 }
 
-#line 45 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Repositories\FrozenContextImplementation.cst"
+#line 50 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Repositories\FrozenContextImplementation.cst"
 this.WriteObjects("			InitialiseGuidCache(GetAttachedObjects()); \r\n");
 this.WriteObjects("		}\r\n");
 this.WriteObjects("		\r\n");
@@ -72,21 +77,21 @@ this.WriteObjects("		}\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("		public override IQueryable<IDataObject> GetQuery(InterfaceType ifType)\r\n");
 this.WriteObjects("		{\r\n");
-#line 56 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Repositories\FrozenContextImplementation.cst"
+#line 61 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Repositories\FrozenContextImplementation.cst"
 foreach(var module in modulesWithFrozenClasses)
 	{
 	    // TODO: remove ToList when IsFrozenObject correctly inherits across meta-data
 		foreach(var frozenCls in module.DataTypes.OfType<ObjectClass>().ToList().Where(cls => cls.IsFrozen()).OrderBy(c => c.Name))
 		{
 
-#line 62 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Repositories\FrozenContextImplementation.cst"
+#line 67 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Repositories\FrozenContextImplementation.cst"
 this.WriteObjects("			if (ifType == typeof(",  frozenCls.Module.Namespace , ".",  frozenCls.Name , "))\r\n");
 this.WriteObjects("				return ",  frozenCls.Module.Namespace , ".",  Implementation.ObjectClasses.Template.GetClassName(frozenCls) , ".DataStore.Values.AsQueryable().Cast<IDataObject>();\r\n");
-#line 65 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Repositories\FrozenContextImplementation.cst"
+#line 70 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Repositories\FrozenContextImplementation.cst"
 }
 	}
 
-#line 68 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Repositories\FrozenContextImplementation.cst"
+#line 73 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Repositories\FrozenContextImplementation.cst"
 this.WriteObjects("			throw new NotImplementedException();\r\n");
 this.WriteObjects("		}\r\n");
 this.WriteObjects("		\r\n");
@@ -100,40 +105,40 @@ this.WriteObjects("		}\r\n");
 this.WriteObjects("		\r\n");
 this.WriteObjects("		private static IEnumerable<IPersistenceObject> GetAttachedObjects() {\r\n");
 this.WriteObjects("			return new List<IPersistenceObject>(0)\r\n");
-#line 82 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Repositories\FrozenContextImplementation.cst"
+#line 87 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Repositories\FrozenContextImplementation.cst"
 foreach(var module in modulesWithFrozenClasses)
 	{
 		// TODO: remove ToList when IsFrozenObject correctly inherits across meta-data
         foreach(var frozenCls in module.DataTypes.OfType<ObjectClass>().ToList().Where(cls => cls.IsFrozen()).OrderBy(c => c.Name))
 		{
 
-#line 88 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Repositories\FrozenContextImplementation.cst"
+#line 93 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Repositories\FrozenContextImplementation.cst"
 this.WriteObjects("				.Concat(",  frozenCls.Module.Namespace , ".",  Implementation.ObjectClasses.Template.GetClassName(frozenCls) , ".DataStore.Values.AsQueryable().Cast<IPersistenceObject>())\r\n");
-#line 90 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Repositories\FrozenContextImplementation.cst"
+#line 95 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Repositories\FrozenContextImplementation.cst"
 }
 	}
 
-#line 93 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Repositories\FrozenContextImplementation.cst"
+#line 98 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Repositories\FrozenContextImplementation.cst"
 this.WriteObjects("				.Distinct();\r\n");
 this.WriteObjects("		}\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("        public override IDataObject Find(InterfaceType ifType, int ID)\r\n");
 this.WriteObjects("		{\r\n");
-#line 99 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Repositories\FrozenContextImplementation.cst"
+#line 104 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Repositories\FrozenContextImplementation.cst"
 foreach(var module in modulesWithFrozenClasses)
 	{
 		// TODO: remove ToList when IsFrozenObject correctly inherits across meta-data
 		foreach(var frozenCls in module.DataTypes.OfType<ObjectClass>().ToList().Where(cls => cls.IsFrozen()).OrderBy(c => c.Name))
 		{
 
-#line 105 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Repositories\FrozenContextImplementation.cst"
+#line 110 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Repositories\FrozenContextImplementation.cst"
 this.WriteObjects("			if (ifType == typeof(",  frozenCls.Module.Namespace , ".",  frozenCls.Name , "))\r\n");
 this.WriteObjects("				return ",  frozenCls.Module.Namespace , ".",  Implementation.ObjectClasses.Template.GetClassName(frozenCls) , ".DataStore[ID];\r\n");
-#line 108 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Repositories\FrozenContextImplementation.cst"
+#line 113 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Repositories\FrozenContextImplementation.cst"
 }
 	}
 
-#line 111 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Repositories\FrozenContextImplementation.cst"
+#line 116 "P:\Kistl\Kistl.DalProvider.Frozen\Generator\Repositories\FrozenContextImplementation.cst"
 this.WriteObjects("			throw new NotImplementedException();\r\n");
 this.WriteObjects("		}\r\n");
 this.WriteObjects("\r\n");

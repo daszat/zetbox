@@ -32,9 +32,9 @@ namespace Kistl.App.GUI
         }
 
 
-		public override InterfaceType GetInterfaceType()
+		public override Type GetImplementedInterface()
 		{
-			return new InterfaceType(typeof(DashboardKind));
+			return typeof(DashboardKind);
 		}
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)

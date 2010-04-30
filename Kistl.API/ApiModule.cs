@@ -25,8 +25,15 @@ namespace Kistl.API
                 .As<Assembly>();
 
             moduleBuilder
-                .Register<IInterfaceTypeFilter>(c => new DefaultInterfaceTypeFilter(c.Resolve<Assembly>("InterfaceAssembly")))
-                .SingleInstance();
+                .RegisterType<InterfaceType>()
+                .InstancePerDependency();
+            moduleBuilder
+                .RegisterType<ImplementationType>()
+                .InstancePerDependency();
+
+            moduleBuilder
+                .Register(c => new TypeTransformations(c.Resolve<InterfaceType.Factory>(), c.Resolve<InterfaceType.NameFactory>(), c.Resolve<ImplementationType.Factory>(), c.Resolve<IAssemblyConfiguration>()))
+                .As<ITypeTransformations>();
         }
     }
 }

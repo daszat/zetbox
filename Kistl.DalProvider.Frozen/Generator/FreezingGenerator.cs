@@ -45,7 +45,7 @@ namespace Kistl.DalProvider.Frozen.Generator
                 }
             }
 
-            FrozenInstances = instances.GroupBy(o => o.GetInterfaceType().Type).ToDictionary(grp => grp.Key, grp => grp.AsEnumerable());
+            FrozenInstances = instances.GroupBy(o => ctx.GetInterfaceType(o).Type).ToDictionary(grp => grp.Key, grp => grp.AsEnumerable());
 
             base.Generate(ctx, basePath);
 

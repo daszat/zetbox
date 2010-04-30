@@ -207,9 +207,9 @@ namespace Kistl.App.Projekte
         /// Index into the B-side list of this relation
         /// </summary>
         public int? BIndex { get { return B_pos; } set { B_pos = value; } }
-        public override Kistl.API.InterfaceType GetInterfaceType()
+        public override Type GetImplementedInterface()
         {
-            return new InterfaceType(typeof(Projekt_haben_Mitarbeiter_RelationEntry));
+            return typeof(Projekt_haben_Mitarbeiter_RelationEntry);
         }
     }
 }

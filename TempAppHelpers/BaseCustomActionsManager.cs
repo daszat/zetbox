@@ -19,6 +19,7 @@ namespace Kistl.App.Extensions
         : ICustomActionsManager
     {
         protected readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Common.BaseCustomActionsManager");
+        protected readonly IAssemblyConfiguration assemblyConfiguration;
 
         protected bool initialized = false;
 
@@ -26,11 +27,6 @@ namespace Kistl.App.Extensions
         /// Gets or sets the extra suffix which is used to create the implementation class' name.
         /// </summary>
         protected string ExtraSuffix { get; set; }
-
-        /// <summary>
-        /// Gets or sets the name of the assembly containing the implementation classes.
-        /// </summary>
-        protected string ImplementationAssembly { get; set; }
 
         /// <summary>
         /// Override this method to modify the acceptable DeploymentRestrictions. By default only None is accepted.
@@ -51,11 +47,11 @@ namespace Kistl.App.Extensions
         /// using the specified extra suffix and implementation assembly name.
         /// </summary>
         /// <param name="extraSuffix"></param>
-        /// <param name="implementationAssembly"></param>
-        protected BaseCustomActionsManager(string extraSuffix, string implementationAssembly)
+        /// <param name="assemblyConfiguration"></param>
+        protected BaseCustomActionsManager(string extraSuffix, IAssemblyConfiguration assemblyConfiguration)
         {
             ExtraSuffix = extraSuffix;
-            ImplementationAssembly = implementationAssembly;
+            this.assemblyConfiguration = assemblyConfiguration;
         }
 
         /// <summary>
@@ -69,7 +65,7 @@ namespace Kistl.App.Extensions
                 Log.TraceTotalMemory("Before BaseCustomActionsManager.Init()");
 
                 // Init
-                CreateInvokeInfosForObjectClasses(ctx, ExtraSuffix, ImplementationAssembly, ObjectClassFilter);
+                CreateInvokeInfosForObjectClasses(ctx, ExtraSuffix, assemblyConfiguration.ImplementationAssemblyName, ObjectClassFilter);
 
                 Log.TraceTotalMemory("After BaseCustomActionsManager.Init()");
             }
@@ -258,8 +254,8 @@ namespace Kistl.App.Extensions
         /// <summary>
         /// Initialises a new instane of the FrozenActionsManager.
         /// </summary>
-        protected FrozenActionsManager()
-            : base("Frozen", Kistl.API.Helper.FrozenAssembly)
+        protected FrozenActionsManager(IAssemblyConfiguration aCfg)
+            : base("Frozen", aCfg)
         {
         }
 

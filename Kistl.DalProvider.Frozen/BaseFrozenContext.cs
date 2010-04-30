@@ -12,6 +12,11 @@ namespace Kistl.DalProvider.Frozen
     /// </summary>
     public abstract class BaseFrozenContext : IReadOnlyKistlContext
     {
+        private readonly ITypeTransformations typeTrans;
+        public BaseFrozenContext(ITypeTransformations typeTrans)
+        {
+            this.typeTrans = typeTrans;
+        }
 
         /// <inheritdoc/>
         public abstract IQueryable<T> GetQuery<T>() where T : class, IDataObject;
@@ -160,6 +165,31 @@ namespace Kistl.DalProvider.Frozen
         {
             throw new NotSupportedException();
         }
+
+        #endregion
+
+        #region IReadOnlyKistlContext Members
+
+        public InterfaceType GetInterfaceType(Type t)
+        {
+            return typeTrans.AsInterfaceType(t);
+        }
+
+        public InterfaceType GetInterfaceType(string typeName)
+        {
+            return typeTrans.AsInterfaceType(typeName);
+        }
+
+        public InterfaceType GetInterfaceType(IPersistenceObject obj)
+        {
+            return typeTrans.AsInterfaceType(((BasePersistenceObject)obj).GetImplementedInterface());
+        }
+
+        public ImplementationType GetImplementationType(Type t)
+        {
+            return typeTrans.AsImplementationType(t);
+        }
+
 
         #endregion
     }

@@ -62,7 +62,7 @@ using System.Xml.Serialization;
 
         public void ToStream(BinaryWriter sw, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
-            BinarySerializer.ToStream(new SerializableType(this.GetInterfaceType()), sw);
+            BinarySerializer.ToStream(Context.GetInterfaceType(this).ToSerializableType(), sw);
             BinarySerializer.ToStream(ID, sw);
             BinarySerializer.ToStream(StringProperty, sw);
             BinarySerializer.ToStream(IntProperty, sw);
@@ -168,7 +168,7 @@ using System.Xml.Serialization;
         {
             if (obj == null)
                 throw new ArgumentNullException("obj");
-            if (obj.GetType().ToInterfaceType() != this.GetType().ToInterfaceType())
+            if (((TestDataObject__Implementation__)obj).GetImplementedInterface() != this.GetImplementedInterface())
                 throw new ArgumentOutOfRangeException("obj");
 
             this.ID = obj.ID;
@@ -203,9 +203,9 @@ using System.Xml.Serialization;
 
         #endregion
 
-        public InterfaceType GetInterfaceType()
+        public Type GetImplementedInterface()
         {
-            return new InterfaceType(typeof(TestDataObject));
+            return typeof(TestDataObject);
         }
 
         public void NotifyPreSave()

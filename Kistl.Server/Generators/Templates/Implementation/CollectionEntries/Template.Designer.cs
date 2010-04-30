@@ -110,9 +110,9 @@ Implementation.ObjectClasses.SerializerTemplate.Call(Host, ctx,
 this.WriteObjects("\r\n");
 this.WriteObjects("#endregion\r\n");
 this.WriteObjects("\r\n");
-this.WriteObjects("		public override InterfaceType GetInterfaceType()\r\n");
+this.WriteObjects("		public override Type GetImplementedInterface()\r\n");
 this.WriteObjects("		{\r\n");
-this.WriteObjects("			return new InterfaceType(typeof(",  GetCeInterface() , "));\r\n");
+this.WriteObjects("			return typeof(",  GetCeInterface() , ");\r\n");
 this.WriteObjects("		}\r\n");
 this.WriteObjects("	\r\n");
 this.WriteObjects("		public override void ReloadReferences()\r\n");

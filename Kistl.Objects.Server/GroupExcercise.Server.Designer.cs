@@ -248,9 +248,9 @@ namespace at.dasz.CourseOrganiser
         private EntityRelationBSideCollectionWrapper<at.dasz.CourseOrganiser.GroupExcercise, at.dasz.CourseOrganiser.Student, at.dasz.CourseOrganiser.GroupExcercise_accomplished_by_Student_RelationEntry__Implementation__> _StudentsWrapper;
 
 
-		public override InterfaceType GetInterfaceType()
+		public override Type GetImplementedInterface()
 		{
-			return new InterfaceType(typeof(GroupExcercise));
+			return typeof(GroupExcercise);
 		}
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)

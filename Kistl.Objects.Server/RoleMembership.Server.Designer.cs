@@ -80,9 +80,9 @@ namespace Kistl.App.Base
         private EntityRelationBSideListWrapper<Kistl.App.Base.RoleMembership, Kistl.App.Base.Relation, Kistl.App.Base.RoleMembership_resolves_Relation_RelationEntry__Implementation__> _RelationsWrapper;
 
 
-		public override InterfaceType GetInterfaceType()
+		public override Type GetImplementedInterface()
 		{
-			return new InterfaceType(typeof(RoleMembership));
+			return typeof(RoleMembership);
 		}
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)

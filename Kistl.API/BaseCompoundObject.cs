@@ -116,10 +116,13 @@ namespace Kistl.API
         #endregion
 
         /// <summary>
-        /// returns the Kistl.Objects interface type of this CompoundObject
+        /// Returns the most specific System.Type implemented by this object.
         /// </summary>
-        /// <returns></returns>
-        public abstract InterfaceType GetInterfaceType();
+        /// <returns>the System.Type of this object</returns>
+        public virtual Type GetImplementedInterface()
+        {
+            return null;
+        }
 
         protected override void OnPropertyChanging(string property, object oldValue, object newValue)
         {

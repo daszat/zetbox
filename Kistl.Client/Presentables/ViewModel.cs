@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 
 using Kistl.API;
+using Kistl.App.GUI;
 
 namespace Kistl.Client.Presentables
 {
@@ -97,7 +98,6 @@ namespace Kistl.Client.Presentables
         /// A common "name" of this Model. May be used for generic filtering or displaying.
         /// </summary>
         public abstract string Name { get; }
-
         #endregion
 
         #region INotifyPropertyChanged Members

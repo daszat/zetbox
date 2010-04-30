@@ -144,7 +144,7 @@ namespace Kistl.Server.Packaging
                 Dictionary<Guid, IPersistenceObject> objects = new Dictionary<Guid, IPersistenceObject>();
                 using (XmlReader xml = XmlReader.Create(s, new XmlReaderSettings() { CloseInput = false }))
                 {
-                    Dictionary<Type, List<Guid>> guids = LoadGuids(xml);
+                    Dictionary<Type, List<Guid>> guids = LoadGuids(ctx, xml);
 
                     PreFetchObjects(ctx, objects, guids);
                 }
@@ -189,7 +189,7 @@ namespace Kistl.Server.Packaging
             Log.Info("Prefetching Objects");
             foreach (Type t in guids.Keys)
             {
-                IEnumerable<IPersistenceObject> result = ctx.FindPersistenceObjects(new InterfaceType(t), guids[t]);
+                IEnumerable<IPersistenceObject> result = ctx.FindPersistenceObjects(ctx.GetInterfaceType(t), guids[t]);
                 Log.DebugFormat("{0}: XML: {1}, Storage: {2}", t.FullName, guids[t].Count, result.Count());
 
                 foreach (IPersistenceObject obj in result)
@@ -199,7 +199,7 @@ namespace Kistl.Server.Packaging
             }
         }
 
-        private static Dictionary<Type, List<Guid>> LoadGuids(XmlReader xml)
+        private static Dictionary<Type, List<Guid>> LoadGuids(IKistlContext ctx, XmlReader xml)
         {
             Log.Info("Loading Export Guids");
 
@@ -217,8 +217,8 @@ namespace Kistl.Server.Packaging
                     Guid exportGuid = it.Current.Value.TryParseGuidValue();
                     if (exportGuid != Guid.Empty)
                     {
-                        string ifTypeName = string.Format("{0}.{1}, {2}", ns, tn, ApplicationContext.Current.InterfaceAssembly);
-                        Type t = Type.GetType(ifTypeName);
+                        string ifTypeName = string.Format("{0}.{1}", ns, tn);
+                        Type t = ctx.GetInterfaceType(ifTypeName).Type;
                         if (t != null)
                         {
                             if (!guids.ContainsKey(t)) guids[t] = new List<Guid>();
@@ -256,15 +256,13 @@ namespace Kistl.Server.Packaging
             Guid exportGuid = xml.GetAttribute("ExportGuid").TryParseGuidValue();
             if (exportGuid != Guid.Empty)
             {
-                string ifTypeName = string.Format("{0}.{1}, {2}", xml.NamespaceURI, xml.LocalName, ApplicationContext.Current.InterfaceAssembly);
-                Type t = Type.GetType(ifTypeName);
-                if (t == null)
+                string ifTypeName = string.Format("{0}.{1}", xml.NamespaceURI, xml.LocalName);
+                InterfaceType ifType = ctx.GetInterfaceType(ifTypeName);
+                if (ifType == null)
                 {
                     Log.WarnFormat("Type {0} not found", ifTypeName);
                     return null;
                 }
-
-                InterfaceType ifType = new InterfaceType(t);
 
                 IPersistenceObject obj = FindObject(ctx, objects, exportGuid, ifType);
 

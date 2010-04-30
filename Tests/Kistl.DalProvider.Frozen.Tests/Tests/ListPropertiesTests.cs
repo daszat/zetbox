@@ -11,10 +11,5 @@ namespace Kistl.DalProvider.Frozen.Tests
     [Ignore("Needs Frozen value list property")]
     public class ListPropertiesTests : AbstractReadonlyListPropertiesTests
     {
-        protected override Kistl.API.IKistlContext GetContext()
-        {
-            //return new Kistl.App.FrozenContextImplementation();
-            throw new NotImplementedException();
-        }
     }
 }

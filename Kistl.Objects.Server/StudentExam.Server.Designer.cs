@@ -291,9 +291,9 @@ namespace at.dasz.CourseOrganiser
 		public static event PropertyPreSetterHandler<at.dasz.CourseOrganiser.StudentExam, at.dasz.CourseOrganiser.Student> OnStudent_PreSetter;
 		public static event PropertyPostSetterHandler<at.dasz.CourseOrganiser.StudentExam, at.dasz.CourseOrganiser.Student> OnStudent_PostSetter;
 
-		public override InterfaceType GetInterfaceType()
+		public override Type GetImplementedInterface()
 		{
-			return new InterfaceType(typeof(StudentExam));
+			return typeof(StudentExam);
 		}
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)

@@ -19,8 +19,6 @@ namespace Kistl.API.Client.Tests
         [SetUp]
         public void SetUp()
         {
-            var testCtx = new ClientApplicationContextMock();
-
             PropertyChangedCalled = false;
 
             obj = new BaseClientDataObjectMock__Implementation__();

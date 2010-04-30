@@ -32,7 +32,7 @@ namespace Kistl.DalProvider.Memory
 
         public virtual void UpdateParent(string propertyName, int? id)
         {
-            throw new MemberAccessException(String.Format("No {0} property in {1}", propertyName, GetInterfaceType().Type.FullName));
+            throw new MemberAccessException(String.Format("No {0} property in {1}", propertyName, GetImplementedInterface().FullName));
         }
     }
 }

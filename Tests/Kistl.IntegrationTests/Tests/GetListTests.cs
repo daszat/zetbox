@@ -143,7 +143,7 @@ namespace Kistl.IntegrationTests
         {
             using (IKistlContext ctx = KistlContext.GetContext())
             {
-                var list = ctx.GetQuery(new InterfaceType(typeof(ObjectClass))).Cast<ObjectClass>()
+                var list = ctx.GetQuery(ctx.GetInterfaceType(typeof(ObjectClass))).Cast<ObjectClass>()
                     .OrderBy(o => o.Name)
                     .ToList().Cast<ObjectClass>();
                 Assert.That(list.Count(), Is.GreaterThan(0));

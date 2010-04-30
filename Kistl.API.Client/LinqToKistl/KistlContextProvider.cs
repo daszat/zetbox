@@ -45,10 +45,13 @@ namespace Kistl.API.Client
         /// </summary>
         private LinkedList<Expression> _orderBy = null;
 
-        internal KistlContextProvider(IKistlContext ctx, InterfaceType ifType)
+        private IProxy _proxy;
+
+        internal KistlContextProvider(IKistlContext ctx, InterfaceType ifType, IProxy proxy)
         {
             _context = ctx;
             _type = ifType;
+            _proxy = proxy;
         }
 
         #region CallService
@@ -69,7 +72,7 @@ namespace Kistl.API.Client
 
         private List<IDataObject> CallService(out List<IStreamable> auxObjects)
         {
-            return ProxySingleton.Current.GetList(_context, _type, _maxListCount, _eagerLoadLists ?? _maxListCount == 1, _filter, _orderBy, out auxObjects).ToList();
+            return _proxy.GetList(_context, _type, _maxListCount, _eagerLoadLists ?? _maxListCount == 1, _filter, _orderBy, out auxObjects).ToList();
         }
         #endregion
 
@@ -77,7 +80,7 @@ namespace Kistl.API.Client
         internal List<IDataObject> GetListOfCall(int ID, string propertyName)
         {
             List<IStreamable> auxObjects;
-            List<IDataObject> serviceResult = ProxySingleton.Current.GetListOf(_context, _type, ID, propertyName, out auxObjects).ToList();
+            List<IDataObject> serviceResult = _proxy.GetListOf(_context, _type, ID, propertyName, out auxObjects).ToList();
             List<IDataObject> result = new List<IDataObject>();
 
             foreach (IDataObject obj in serviceResult)

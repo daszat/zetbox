@@ -313,9 +313,9 @@ namespace Kistl.App.TimeRecords
 		public static event PropertyPreSetterHandler<Kistl.App.TimeRecords.WorkEffortAccount, double?> OnSpentHours_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.TimeRecords.WorkEffortAccount, double?> OnSpentHours_PostSetter;
 
-		public override InterfaceType GetInterfaceType()
+		public override Type GetImplementedInterface()
 		{
-			return new InterfaceType(typeof(WorkEffortAccount));
+			return typeof(WorkEffortAccount);
 		}
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)

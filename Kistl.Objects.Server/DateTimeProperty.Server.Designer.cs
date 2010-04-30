@@ -74,9 +74,9 @@ namespace Kistl.App.Base
 
 
 
-		public override InterfaceType GetInterfaceType()
+		public override Type GetImplementedInterface()
 		{
-			return new InterfaceType(typeof(DateTimeProperty));
+			return typeof(DateTimeProperty);
 		}
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)

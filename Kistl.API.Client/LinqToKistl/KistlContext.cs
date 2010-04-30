@@ -23,7 +23,7 @@ namespace Kistl.API.Client
         /// <returns>A new KistlContext</returns>
         public static IKistlContext GetContext()
         {
-            return new KistlContextImpl(null);
+            return new KistlContextImpl(null, null, null);
         }
     }
 
@@ -33,14 +33,30 @@ namespace Kistl.API.Client
     internal class KistlContextImpl : IDebuggingKistlContext, IDisposable
     {
         private readonly static object _lock = new object();
-        private KistlConfig config;
+        private readonly KistlConfig config;
+        private readonly ITypeTransformations typeTrans;
+        private readonly IProxy proxy;
 
-        public KistlContextImpl(KistlConfig config)
+        /// <summary>
+        /// List of Objects (IDataObject and ICollectionEntry) in this Context.
+        /// </summary>
+        private ContextCache _objects;
+
+        /// <summary>
+        /// Counter for newly created Objects to give them a valid ID
+        /// </summary>
+        [SuppressMessage("Microsoft.Performance", "CA1805:DoNotInitializeUnnecessarily", Justification = "Uses global constant")]
+        private int _newIDCounter = Helper.INVALIDID;
+
+        public KistlContextImpl(KistlConfig config, ITypeTransformations typeTrans, IProxy proxy)
         {
             this.config = config;
+            this.typeTrans = typeTrans;
+            this.proxy = proxy;
+            this._objects = new ContextCache(this);
+
             CreatedAt = new StackTrace(true);
             KistlContextDebuggerSingleton.Created(this);
-            //_relationshipManager = new RelationshipManager(this);
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1805:DoNotInitializeUnnecessarily", Justification = "Clarifies intent of variable")]
@@ -54,6 +70,7 @@ namespace Kistl.API.Client
             {
                 if (!disposed)
                 {
+                    proxy.Dispose();
                     DisposedAt = new StackTrace(true);
                     KistlContextDebuggerSingleton.Disposed(this);
                 }
@@ -84,16 +101,6 @@ namespace Kistl.API.Client
             }
         }
 
-        /// <summary>
-        /// List of Objects (IDataObject and ICollectionEntry) in this Context.
-        /// </summary>
-        private ContextCache _objects = new ContextCache();
-
-        /// <summary>
-        /// Counter for newly created Objects to give them a valid ID
-        /// </summary>
-        [SuppressMessage("Microsoft.Performance", "CA1805:DoNotInitializeUnnecessarily", Justification = "Uses global constant")]
-        private int _newIDCounter = Helper.INVALIDID;
 
         /// <summary>
         /// Checks if the given Object is already in that Context.
@@ -130,7 +137,7 @@ namespace Kistl.API.Client
         public IQueryable<IDataObject> GetQuery(InterfaceType ifType)
         {
             CheckDisposed();
-            return new KistlContextQuery<IDataObject>(this, ifType);
+            return new KistlContextQuery<IDataObject>(this, ifType, proxy);
         }
 
         /// <summary>
@@ -141,7 +148,7 @@ namespace Kistl.API.Client
         public IQueryable<T> GetQuery<T>() where T : class, IDataObject
         {
             CheckDisposed();
-            return new KistlContextQuery<T>(this, new InterfaceType(typeof(T)));
+            return new KistlContextQuery<T>(this, typeTrans.AsInterfaceType(typeof(T)), proxy);
         }
 
         /// <summary>
@@ -153,7 +160,7 @@ namespace Kistl.API.Client
         public IQueryable<T> GetPersistenceObjectQuery<T>() where T : class, IPersistenceObject
         {
             CheckDisposed();
-            return new KistlContextQuery<T>(this, new InterfaceType(typeof(T)));
+            return new KistlContextQuery<T>(this, typeTrans.AsInterfaceType(typeof(T)), proxy);
         }
 
         /// <summary>
@@ -165,7 +172,7 @@ namespace Kistl.API.Client
         public IQueryable<IPersistenceObject> GetPersistenceObjectQuery(InterfaceType ifType)
         {
             CheckDisposed();
-            return new KistlContextQuery<IPersistenceObject>(this, ifType);
+            return new KistlContextQuery<IPersistenceObject>(this, ifType, proxy);
         }
 
         /// <summary>
@@ -178,7 +185,7 @@ namespace Kistl.API.Client
         public List<T> GetListOf<T>(IDataObject obj, string propertyName) where T : class, IDataObject
         {
             CheckDisposed();
-            return this.GetListOf<T>(obj.GetInterfaceType(), obj.ID, propertyName);
+            return this.GetListOf<T>(GetInterfaceType(obj), obj.ID, propertyName);
         }
 
         /// <summary>
@@ -192,14 +199,14 @@ namespace Kistl.API.Client
         public List<T> GetListOf<T>(InterfaceType type, int ID, string propertyName) where T : class, IDataObject
         {
             CheckDisposed();
-            KistlContextQuery<T> query = new KistlContextQuery<T>(this, type);
+            KistlContextQuery<T> query = new KistlContextQuery<T>(this, type, proxy);
             return ((KistlContextProvider)query.Provider).GetListOfCall(ID, propertyName).Cast<T>().ToList();
         }
 
         public IList<T> FetchRelation<T>(Guid relationId, RelationEndRole role, IDataObject container) where T : class, IRelationCollectionEntry
         {
             List<IStreamable> auxObjects;
-            var serverList = ProxySingleton.Current.FetchRelation<T>(this, relationId, role, container, out auxObjects);
+            var serverList = proxy.FetchRelation<T>(this, relationId, role, container, out auxObjects);
 
             foreach (IPersistenceObject obj in auxObjects)
             {
@@ -222,7 +229,7 @@ namespace Kistl.API.Client
         /// <returns>A new IDataObject</returns>
         public T Create<T>() where T : class, IDataObject
         {
-            return (T)Create(new InterfaceType(typeof(T)));
+            return (T)Create(typeTrans.AsInterfaceType(typeof(T)));
         }
 
         /// <summary>
@@ -244,7 +251,7 @@ namespace Kistl.API.Client
         /// <inheritdoc />
         public T CreateUnattached<T>() where T : class, IPersistenceObject
         {
-            return (T)CreateUnattachedInstance(new InterfaceType(typeof(T)));
+            return (T)CreateUnattachedInstance(typeTrans.AsInterfaceType(typeof(T)));
         }
 
         /// <summary>
@@ -254,7 +261,7 @@ namespace Kistl.API.Client
         /// <returns>A new IRelationCollectionEntry</returns>
         public T CreateRelationCollectionEntry<T>() where T : IRelationCollectionEntry
         {
-            return (T)CreateRelationCollectionEntry(new InterfaceType(typeof(T)));
+            return (T)CreateRelationCollectionEntry(typeTrans.AsInterfaceType(typeof(T)));
         }
 
         /// <summary>
@@ -273,7 +280,7 @@ namespace Kistl.API.Client
         /// <returns>A new IValueCollectionEntry</returns>
         public T CreateValueCollectionEntry<T>() where T : IValueCollectionEntry
         {
-            return (T)CreateValueCollectionEntry(new InterfaceType(typeof(T)));
+            return (T)CreateValueCollectionEntry(typeTrans.AsInterfaceType(typeof(T)));
         }
 
         /// <summary>
@@ -323,7 +330,7 @@ namespace Kistl.API.Client
         /// <returns>A new CompoundObject</returns>
         public T CreateCompoundObject<T>() where T : ICompoundObject
         {
-            return (T)CreateCompoundObject(new InterfaceType(typeof(T)));
+            return (T)CreateCompoundObject(typeTrans.AsInterfaceType(typeof(T)));
         }
 
 
@@ -347,7 +354,7 @@ namespace Kistl.API.Client
             else
             {
                 // Check if Object is already in this Context
-                var attachedObj = ContainsObject(obj.GetInterfaceType(), obj.ID);
+                var attachedObj = ContainsObject(GetInterfaceType(obj), obj.ID);
                 if (attachedObj != null)
                 {
                     // already attached, nothing to do
@@ -453,13 +460,13 @@ namespace Kistl.API.Client
             notifySaveList.ForEach(o => o.NotifyPreSave());
 
             // Submit to server
-            var objectsFromServer = ProxySingleton.Current.SetObjects(
+            var objectsFromServer = proxy.SetObjects(
                 this,
                 objectsToSubmit
                     .Cast<IPersistenceObject>(),
                 AttachedObjects
-                    .ToLookup(o => o.GetInterfaceType())
-                    .Select(g => new ObjectNotificationRequest() { Type = new SerializableType(g.Key), IDs = g.Select(o => o.ID).ToArray() }));
+                    .ToLookup(o => GetInterfaceType(o))
+                    .Select(g => new ObjectNotificationRequest() { Type = g.Key.ToSerializableType(), IDs = g.Select(o => o.ID).ToArray() }));
 
             // Apply Changes
             int counter = 0;
@@ -477,7 +484,7 @@ namespace Kistl.API.Client
                 }
                 else
                 {
-                    obj = (BaseClientPersistenceObject)this.ContainsObject(objFromServer.GetInterfaceType(), objFromServer.ID) ?? objFromServer;
+                    obj = (BaseClientPersistenceObject)this.ContainsObject(GetInterfaceType(objFromServer), objFromServer.ID) ?? objFromServer;
                 }
 
                 obj.RecordNotifications();
@@ -537,7 +544,7 @@ namespace Kistl.API.Client
             where T : class, IDataObject
         {
             CheckDisposed();
-            IPersistenceObject cacheHit = _objects.Lookup(new InterfaceType(typeof(T)), ID);
+            IPersistenceObject cacheHit = _objects.Lookup(typeTrans.AsInterfaceType(typeof(T)), ID);
             if (cacheHit != null)
                 return (T)cacheHit;
             else
@@ -576,7 +583,7 @@ namespace Kistl.API.Client
         public T FindPersistenceObject<T>(int ID) where T : class, IPersistenceObject
         {
             CheckDisposed();
-            IPersistenceObject cacheHit = _objects.Lookup(new InterfaceType(typeof(T)), ID);
+            IPersistenceObject cacheHit = _objects.Lookup(typeTrans.AsInterfaceType(typeof(T)), ID);
             if (cacheHit != null)
                 return (T)cacheHit;
             else
@@ -668,7 +675,7 @@ namespace Kistl.API.Client
 
         public int CreateBlob(Stream s, string filename, string mimetype)
         {
-            var blob = ProxySingleton.Current.SetBlobStream(this, s, filename, mimetype);
+            var blob = proxy.SetBlobStream(this, s, filename, mimetype);
             Attach(blob);
             return blob.ID;
         }
@@ -695,7 +702,7 @@ namespace Kistl.API.Client
 
             if (!File.Exists(path))
             {
-                using (var stream = ProxySingleton.Current.GetBlobStream(ID))
+                using (var stream = proxy.GetBlobStream(ID))
                 using (var file = new FileStream(path, FileMode.Create, FileAccess.Write))
                 {
                     file.SetLength(0);
@@ -712,6 +719,30 @@ namespace Kistl.API.Client
         public StackTrace CreatedAt { get; private set; }
 
         public StackTrace DisposedAt { get; private set; }
+
+        #endregion
+
+        #region IReadOnlyKistlContext Members
+
+        public InterfaceType GetInterfaceType(Type t)
+        {
+            return typeTrans.AsInterfaceType(t);
+        }
+
+        public InterfaceType GetInterfaceType(string typeName)
+        {
+            return typeTrans.AsInterfaceType(typeName);
+        }
+
+        public InterfaceType GetInterfaceType(IPersistenceObject obj)
+        {
+            return typeTrans.AsInterfaceType(((BasePersistenceObject)obj).GetImplementedInterface());
+        }
+
+        public ImplementationType GetImplementationType(Type t)
+        {
+            return typeTrans.AsImplementationType(t);
+        }
 
         #endregion
     }

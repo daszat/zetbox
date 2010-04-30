@@ -57,7 +57,7 @@ namespace Kistl.API.Mocks
 
         public void ToStream(BinaryWriter sw, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
-            BinarySerializer.ToStream(new SerializableType(new InterfaceType(typeof(IRelationCollectionEntry))), sw);
+            BinarySerializer.ToStream(Context.GetInterfaceType(this).ToSerializableType(), sw);
             BinarySerializer.ToStream(ID, sw);
             BinarySerializer.ToStream(TestName, sw);
         }
@@ -135,7 +135,7 @@ namespace Kistl.API.Mocks
         {
             if (obj == null)
                 throw new ArgumentNullException("obj");
-            if (obj.GetType().ToInterfaceType() != this.GetType().ToInterfaceType())
+            if (((TestCollectionEntry)obj).GetImplementedInterface() != this.GetImplementedInterface())
                 throw new ArgumentOutOfRangeException("obj");
 
             this.ID = obj.ID;
@@ -162,9 +162,9 @@ namespace Kistl.API.Mocks
             get { throw new NotImplementedException(); }
         }
 
-        public InterfaceType GetInterfaceType()
+        public Type GetImplementedInterface()
         {
-            return new InterfaceType(typeof(IRelationCollectionEntry));
+            return typeof(IRelationCollectionEntry);
         }
 
         #endregion

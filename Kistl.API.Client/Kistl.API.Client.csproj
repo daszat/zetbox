@@ -72,7 +72,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ClientApiContext.cs" />
     <Compile Include="ClientApiModule.cs" />
     <Compile Include="ClientValueCollectionWrapper.cs" />
     <Compile Include="CustomPropertyDescriptor.cs" />

@@ -207,9 +207,9 @@ namespace Kistl.App.Test
         private EntityRelationASideCollectionWrapper<Kistl.App.Test.TestStudent, Kistl.App.Test.Fragebogen, Kistl.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntry__Implementation__> _StudentWrapper;
 
 
-		public override InterfaceType GetInterfaceType()
+		public override Type GetImplementedInterface()
 		{
-			return new InterfaceType(typeof(Fragebogen));
+			return typeof(Fragebogen);
 		}
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)

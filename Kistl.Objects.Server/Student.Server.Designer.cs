@@ -305,9 +305,9 @@ namespace at.dasz.CourseOrganiser
 
 
 
-		public override InterfaceType GetInterfaceType()
+		public override Type GetImplementedInterface()
 		{
-			return new InterfaceType(typeof(Student));
+			return typeof(Student);
 		}
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)

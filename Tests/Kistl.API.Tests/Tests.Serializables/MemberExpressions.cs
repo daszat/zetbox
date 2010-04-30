@@ -12,13 +12,20 @@ using Kistl.API.Utils;
 using NUnit.Framework;
 using NUnit.Framework.Constraints;
 
+using Autofac;
+
 namespace Kistl.API.Tests.Serializables
 {
 
     [TestFixture]
-    public class MemberExpressions
+    public class MemberExpressions : AbstractConsumerTests.AbstractTextFixture
     {
-      
+
+        public override void SetUp()
+        {
+            base.SetUp();
+        }
+
         // TODO: Discuss: do we really want to optimize Linq epxressions when serializing?
         //       currently, this seems to be a side-effect of the ExpressionEvaluator
         //       in the far future, we might want to extract expression optimisation into a
@@ -30,7 +37,7 @@ namespace Kistl.API.Tests.Serializables
             var objExpr = Expression.Constant(testString);
             MemberExpression expr = Expression.MakeMemberAccess(objExpr, typeof(string).GetMember("Length").First());
 
-            var result = SerializableExpression.ToExpression(SerializableExpression.FromExpression(expr));
+            var result = SerializableExpression.ToExpression(SerializableExpression.FromExpression(expr, scope.Resolve<ITypeTransformations>()));
 
             AssertExpressions.AreEqual(result, Expression.Constant(testString.Length));
         }

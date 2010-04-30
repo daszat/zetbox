@@ -109,9 +109,9 @@ namespace Kistl.App.Test
 		public static event PropertyPreSetterHandler<Kistl.App.Test.Company, string> OnName_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Test.Company, string> OnName_PostSetter;
 
-		public override InterfaceType GetInterfaceType()
+		public override Type GetImplementedInterface()
 		{
-			return new InterfaceType(typeof(Company));
+			return typeof(Company);
 		}
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)

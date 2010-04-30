@@ -12,14 +12,19 @@ namespace Kistl.API.Server.Tests
 
     using NUnit.Framework;
 
+    using Autofac;
+    using Kistl.API.Configuration;
+
     internal class TestQueryTranslatorProvider<T> : QueryTranslatorProvider<T>
     {
         private readonly Func<Type, Type> _translator;
+        private readonly ITypeTransformations _typeTrans;
 
-        internal TestQueryTranslatorProvider(IMetaDataResolver metaDataResolver, Identity identity, IQueryable source, IKistlContext ctx, Func<Type, Type> translator)
-            : base(metaDataResolver, identity, source, ctx)
+        internal TestQueryTranslatorProvider(IMetaDataResolver metaDataResolver, Identity identity, IQueryable source, IKistlContext ctx, ITypeTransformations typeTrans, Func<Type, Type> translator)
+            : base(metaDataResolver, identity, source, ctx, typeTrans)
         {
             _translator = translator;
+            _typeTrans = typeTrans;
         }
 
         protected override Type ToProviderType(Type t)
@@ -29,26 +34,25 @@ namespace Kistl.API.Server.Tests
 
         protected override QueryTranslatorProvider<TElement> GetSubProvider<TElement>()
         {
-            return new TestQueryTranslatorProvider<TElement>(MetaDataResolver, Identity, Source, Ctx, _translator);
+            return new TestQueryTranslatorProvider<TElement>(MetaDataResolver, Identity, Source, Ctx, _typeTrans, _translator);
         }
     }
 
     [TestFixture]
-    public class QueryTranslatorTests
+    public class QueryTranslatorTests : AbstractApiServerTestFixture
     {
         IKistlContext ctx;
 
-        [SetUp]
-        public void SetUp()
+        public override void SetUp()
         {
-            ctx = new KistlContextMock();
+            ctx = new KistlContextMock(scope.Resolve<IMetaDataResolver>(), null, scope.Resolve<KistlConfig>(), scope.Resolve<ITypeTransformations>());
         }
 
         [Test]
         public void should_keep_Convert_nodes_on_primitive_data()
         {
             var q = ctx.GetQuery<TestObjClass>();
-            var subject = new TestQueryTranslatorProvider<TestObjClass>(new MetaDataResolverMock(), null, q, ctx, (t) => { Assert.Fail("Should not try to translate anything"); return null; });
+            var subject = new TestQueryTranslatorProvider<TestObjClass>(scope.Resolve<IMetaDataResolver>(), null, q, ctx, scope.Resolve<ITypeTransformations>(), (t) => { Assert.Fail("Should not try to translate anything"); return null; });
 
             var obj = Expression.MakeBinary(
                 ExpressionType.Equal,

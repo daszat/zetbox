@@ -44,7 +44,7 @@ namespace Kistl.Client.ASPNET.Toolkit.View
                 containerCtrl.ClientID);
             desc.AddElementProperty("LnkOpen", btnOpenCtrl.ClientID);
             desc.AddElementProperty("ValueCtrl", _valueCtrl.ClientID);
-            desc.AddProperty("Type", new SerializableType(Model.ReferencedClass.GetDescribedInterfaceType()));
+            desc.AddProperty("Type", Model.ReferencedClass.GetDescribedInterfaceType().ToSerializableType());
             yield return desc;
         }
 

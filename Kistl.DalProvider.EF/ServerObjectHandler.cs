@@ -71,10 +71,8 @@ namespace Kistl.DalProvider.EF
             var rel = ctx.FindPersistenceObject<Relation>(relId);
             var relEnd = rel.GetEndFromRole(endRole);
             var relOtherEnd = rel.GetOtherEnd(relEnd);
-            var parent = ctx.Find(new ImplementationType(typeof(TParent)).ToInterfaceType(), parentId);
-            var ceType = Type.GetType(rel.GetRelationFullName() +
-                Kistl.API.Helper.ImplementationSuffix +
-                ", " + ApplicationContext.Current.ImplementationAssembly);
+            var parent = ctx.Find(ctx.GetImplementationType(typeof(TParent)).ToInterfaceType(), parentId);
+            var ceType = ctx.GetInterfaceType(rel.GetRelationFullName()).ToImplementationType().Type;
 
             var method = this.GetType().GetMethod("GetCollectionEntriesInternal", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
             return (IEnumerable<IRelationCollectionEntry>)method

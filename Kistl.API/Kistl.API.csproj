@@ -83,7 +83,7 @@
     <Compile Include="ExpressionTreeVisitor.cs" />
     <Compile Include="FrozenContext.cs" />
     <Compile Include="Helper.cs" />
-    <Compile Include="ApplicationContext.cs" />
+    <Compile Include="HostType.cs" />
     <Compile Include="ICustomActions.cs" />
     <Compile Include="IDataObject.cs" />
     <Compile Include="IKistlAppDomain.cs" />

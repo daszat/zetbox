@@ -214,9 +214,9 @@ namespace Kistl.App.Base
 
 
 
-		public override InterfaceType GetInterfaceType()
+		public override Type GetImplementedInterface()
 		{
-			return new InterfaceType(typeof(CalculatedObjectReferenceProperty));
+			return typeof(CalculatedObjectReferenceProperty);
 		}
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)

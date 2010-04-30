@@ -14,13 +14,13 @@ namespace Kistl.API.AbstractConsumerTests
         protected ILifetimeScope scope;
 
         [SetUp]
-        public void SetUp()
+        public virtual void SetUp()
         {
             scope = AbstractSetup.BeginLifetimeScope();
         }
 
         [TearDown]
-        public void TearDown()
+        public virtual void TearDown()
         {
             scope.Dispose();
         }

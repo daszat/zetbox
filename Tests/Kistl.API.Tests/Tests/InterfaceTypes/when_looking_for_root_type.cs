@@ -14,22 +14,22 @@ namespace Kistl.API.Tests.InterfaceTypes
     public interface ValueCollectionEntry : IValueCollectionEntry<BaseClass, ChildClass> { }
 
     [TestFixture]
-    public class when_looking_for_root_type
+    public class when_looking_for_root_type : AbstractApiTextFixture
     {
         [Test]
         public void should_recognize_data_objects()
         {
-            var baseInterfaceType = new InterfaceType(typeof(BaseClass));
+            var baseInterfaceType = typeTrans.AsInterfaceType(typeof(BaseClass));
             Assert.That(baseInterfaceType.GetRootType(), Is.EqualTo(baseInterfaceType));
 
-            var childInterfaceType = new InterfaceType(typeof(ChildClass));
+            var childInterfaceType = typeTrans.AsInterfaceType(typeof(ChildClass));
             Assert.That(childInterfaceType.GetRootType(), Is.EqualTo(baseInterfaceType));
         }
 
         [Test]
         public void should_recognize_valueCollectionEntries()
         {
-            var ceInterfaceType = new InterfaceType(typeof(ValueCollectionEntry));
+            var ceInterfaceType = typeTrans.AsInterfaceType(typeof(ValueCollectionEntry));
             Assert.That(ceInterfaceType.GetRootType(), Is.EqualTo(ceInterfaceType));
         }
     }

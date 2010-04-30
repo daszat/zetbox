@@ -183,9 +183,9 @@ namespace Kistl.App.Projekte
 
         #endregion
 
-        public override InterfaceType GetInterfaceType()
+        public override Type GetImplementedInterface()
         {
-            return new InterfaceType(typeof(Kistl.App.Projekte.Mitarbeiter));
+            return typeof(Kistl.App.Projekte.Mitarbeiter);
         }
     }
 }

@@ -149,6 +149,10 @@ R: Gendarme.Rules.Correctness.ProvideCorrectArgumentsToFormattingMethodsRule
 # Format string build during runtime
 M: System.Void Kistl.Server.SchemaManagement.SqlProvider.SqlServer::CreateUpdateRightsTrigger(System.String,System.String,System.Collections.Generic.List`1<Kistl.API.Server.RightsTrigger>)
 
+R: Gendarme.Rules.Performance.AvoidUninstantiatedInternalClassesRule
+# The internal type is not instantiated by code within the assembly.
+T: Kistl.API.Server.ServerAssemblyConfiguration
+
 ###############################################################################
 ##  GLOBAL IGNORES  ###########################################################
 ###############################################################################

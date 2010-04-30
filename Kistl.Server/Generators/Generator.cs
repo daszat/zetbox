@@ -112,9 +112,9 @@ namespace Kistl.Server.Generators
                 genThread.Start();
                 threads.Add(genThread);
 
-                ////// serialize execution
-                ////Log.Warn("Serializing generation threads.");
-                ////genThread.Join();
+                //// serialize execution
+                //Log.Warn("Serializing generation threads.");
+                //genThread.Join();
             }
             foreach (var t in threads)
             {

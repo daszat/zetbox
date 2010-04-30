@@ -51,7 +51,7 @@ namespace Kistl.API.Client.Mocks.OneNLists
             }
         }
 
-        public override InterfaceType GetInterfaceType()
+        public override Type GetImplementedInterface()
         {
             throw new NotImplementedException();
         }

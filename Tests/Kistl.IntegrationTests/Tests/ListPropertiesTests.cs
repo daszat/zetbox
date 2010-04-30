@@ -13,9 +13,5 @@ namespace Kistl.IntegrationTests
     public class ListPropertiesTests
         : AbstractListPropertiesTests
     {
-        protected override Kistl.API.IKistlContext GetContext()
-        {
-            return Kistl.API.Client.KistlContext.GetContext();
-        }
     }
 }

@@ -10,14 +10,21 @@ using NUnit.Framework;
 namespace Kistl.API.Server.Tests
 {
     [SetUpFixture]
-    public class SetUp
+    public class SetUp : AbstractConsumerTests.AbstractSetup
     {
         [SetUp]
         public void Init()
         {
-            var testCtx = new ServerApiContextMock();
-            AssemblyLoader.Load(testCtx.ImplementationAssembly);
-            AssemblyLoader.ReflectionOnlyLoadFrom(testCtx.ImplementationAssembly);
+        }
+
+        protected override string GetConfigFile()
+        {
+            return "Kistl.API.Server.Tests.Config.xml";
+        }
+
+        protected override HostType GetHostType()
+        {
+            return HostType.Server;
         }
     }
 }

@@ -15,6 +15,12 @@ namespace Kistl.API.Utils
     {
         private Dictionary<InterfaceType, Dictionary<int, IPersistenceObject>> _objects = new Dictionary<InterfaceType, Dictionary<int, IPersistenceObject>>();
         private Dictionary<Guid, IPersistenceObject> _exportableobjects = new Dictionary<Guid, IPersistenceObject>();
+        private readonly IKistlContext ctx;
+
+        public ContextCache(IKistlContext parent)
+        {
+            this.ctx = parent;
+        }
 
         public IPersistenceObject Lookup(InterfaceType t, int id)
         {
@@ -58,7 +64,7 @@ namespace Kistl.API.Utils
         public void Add(IPersistenceObject item)
         {
             if (item == null) { throw new ArgumentNullException("item"); }
-            var rootT = item.GetInterfaceType().GetRootType();
+            var rootT = ctx.GetInterfaceType(item).GetRootType();
 
             // create per-Type dictionary on-demand
             if (!_objects.ContainsKey(rootT))
@@ -83,7 +89,7 @@ namespace Kistl.API.Utils
         public bool Contains(IPersistenceObject item)
         {
             if (item == null) { throw new ArgumentNullException("item"); }
-            var rootT = item.GetInterfaceType().GetRootType();
+            var rootT = ctx.GetInterfaceType(item).GetRootType();
             return _objects.ContainsKey(rootT) && _objects[rootT].ContainsKey(item.ID);
         }
 
@@ -108,7 +114,7 @@ namespace Kistl.API.Utils
         public bool Remove(IPersistenceObject item)
         {
             if (item == null) { throw new ArgumentNullException("item"); }
-            var rootT = item.GetInterfaceType().GetRootType();
+            var rootT = ctx.GetInterfaceType(item).GetRootType();
 
             if (Contains(item))
                 // should always return true

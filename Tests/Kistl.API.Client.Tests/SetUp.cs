@@ -6,17 +6,29 @@ using System.Text;
 using Kistl.API.Client.Mocks;
 
 using NUnit.Framework;
+using Autofac;
 
 namespace Kistl.API.Client.Tests
 {
     [SetUpFixture]
-    public class SetUp
+    public class SetUp : AbstractConsumerTests.AbstractSetup
     {
-        [SetUp]
-        public void Init()
+        protected override void SetupBuilder(Autofac.ContainerBuilder builder)
         {
-            var testCtx = new ClientApplicationContextMock();
-            ProxySingleton.SetProxy(new TestProxy());
+            base.SetupBuilder(builder);
+            builder.RegisterType<TestProxy>()
+                .As<IProxy>()
+                .InstancePerDependency();
+        }
+
+        protected override string GetConfigFile()
+        {
+            return "Kistl.API.Client.Tests.Config.xml";
+        }
+
+        protected override HostType GetHostType()
+        {
+            return HostType.Client;
         }
     }
 }

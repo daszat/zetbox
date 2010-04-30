@@ -20,11 +20,13 @@ namespace Kistl.Server
     {
         private readonly IServerObjectHandlerFactory _sohFactory;
         private readonly Func<IKistlContext> _ctxFactory;
+        private readonly ITypeTransformations _typeTrans;
 
-        public KistlService(IServerObjectHandlerFactory sohFactory, Func<IKistlContext> ctxFactory)
+        public KistlService(IServerObjectHandlerFactory sohFactory, Func<IKistlContext> ctxFactory, ITypeTransformations typeTrans)
         {
             _sohFactory = sohFactory;
             _ctxFactory = ctxFactory;
+            _typeTrans = typeTrans;
         }
 
         private static void DebugLogIdentity()
@@ -61,7 +63,7 @@ namespace Kistl.Server
                             SerializableType objType;
                             BinarySerializer.FromStream(out objType, sr);
 
-                            var obj = ctx.CreateUnattached(new InterfaceType(objType.GetSystemType()));
+                            var obj = ctx.CreateUnattached(_typeTrans.AsInterfaceType(objType.GetSystemType()));
                             obj.FromStream(sr);
                             objects.Add(obj);
                             BinarySerializer.FromStream(out @continue, sr);
@@ -107,7 +109,7 @@ namespace Kistl.Server
                     {
                         var filterExpresstion = filter != null ? SerializableExpression.ToExpression(filter) : null;
                         IEnumerable<IStreamable> lst = _sohFactory
-                            .GetServerObjectHandler(type.GetInterfaceType())
+                            .GetServerObjectHandler(type.GetInterfaceType(_typeTrans))
                             .GetList(ctx, maxListCount,
                                 filterExpresstion,
                                 orderBy != null ? orderBy.Select(o => SerializableExpression.ToExpression(o)).ToList() : null);
@@ -210,7 +212,7 @@ namespace Kistl.Server
                     using (IKistlContext ctx = _ctxFactory())
                     {
                         IEnumerable<IStreamable> lst = _sohFactory
-                            .GetServerObjectHandler(type.GetInterfaceType())
+                            .GetServerObjectHandler(type.GetInterfaceType(_typeTrans))
                             .GetListOf(ctx, ID, property);
                         return SendObjects(lst, true);
                     }
@@ -251,8 +253,8 @@ namespace Kistl.Server
 
                         var lst = _sohFactory
                             .GetServerCollectionHandler(
-                                new InterfaceType(rel.A.Type.GetDataType()),
-                                new InterfaceType(rel.B.Type.GetDataType()),
+                                _typeTrans.AsInterfaceType(rel.A.Type.GetDataType()),
+                                _typeTrans.AsInterfaceType(rel.B.Type.GetDataType()),
                                 endRole)
                             .GetCollectionEntries(ctx, relId, endRole, parentObjID);
 

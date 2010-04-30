@@ -29,6 +29,7 @@ namespace Kistl.API.Server
         protected readonly Identity Identity;
         protected readonly IQueryable Source;
         protected readonly IKistlContext Ctx;
+        protected readonly ITypeTransformations typeTrans;
 
         /// <summary>
         /// Provider specific mapping from interface types in the query to 
@@ -56,16 +57,18 @@ namespace Kistl.API.Server
         /// <param name="identity">the user who is making the query; if null, a unrestricted query is executed.</param>
         /// <param name="source"></param>
         /// <param name="ctx"></param>
-        protected QueryTranslatorProvider(IMetaDataResolver metaDataResolver, Identity identity, IQueryable source, IKistlContext ctx)
+        /// <param name="typeTrans"></param>
+        protected QueryTranslatorProvider(IMetaDataResolver metaDataResolver, Identity identity, IQueryable source, IKistlContext ctx, ITypeTransformations typeTrans)
         {
             if (metaDataResolver == null) { throw new ArgumentNullException("metaDataResolver"); }
             if (source == null) { throw new ArgumentNullException("source"); }
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
 
-            MetaDataResolver = metaDataResolver;
-            Identity = identity;
-            Source = source;
-            Ctx = ctx;
+            this.MetaDataResolver = metaDataResolver;
+            this.Identity = identity;
+            this.Source = source;
+            this.Ctx = ctx;
+            this.typeTrans = typeTrans;
         }
 
         #region IQueryProvider Members
@@ -98,6 +101,7 @@ namespace Kistl.API.Server
         public object Execute(Expression expression)
         {
             if (expression == null) throw new ArgumentNullException("expression");
+            ResetProvider();
 
             using (Logging.Linq.DebugTraceMethodCall())
             {
@@ -125,6 +129,7 @@ namespace Kistl.API.Server
         internal IEnumerable ExecuteEnumerable(Expression expression)
         {
             if (expression == null) throw new ArgumentNullException("expression");
+            ResetProvider();
 
             using (Logging.Linq.DebugTraceMethodCall())
             {
@@ -151,6 +156,10 @@ namespace Kistl.API.Server
             }
         }
 
+        private void ResetProvider()
+        {
+            _Parameter = new Dictionary<string, ParameterExpression>();
+        }
         #endregion
 
         #region Visits
@@ -174,7 +183,7 @@ namespace Kistl.API.Server
                 if (result.IsMethodCallExpression("OfType"))
                 {
                     var type = result.Type.FindElementTypes().First();
-                    return AddSecurityFilter(result, new InterfaceType(type.ToInterfaceType()));
+                    return AddSecurityFilter(result, typeTrans.AsInterfaceType(type.ToInterfaceType(typeTrans.AssemblyConfiguration)));
                 }
                 return result;
             }
@@ -200,17 +209,10 @@ namespace Kistl.API.Server
 
         protected override Expression VisitLambda(LambdaExpression lambda)
         {
-            try
-            {
-                Type t = TranslateType(lambda.Type);
-                Expression body = base.Visit(lambda.Body);
-                var parameters = base.VisitParameterList(lambda.Parameters);
-                return Expression.Lambda(t, body, parameters);
-            }
-            catch
-            {
-                throw;
-            }
+            Type t = TranslateType(lambda.Type);
+            Expression body = base.Visit(lambda.Body);
+            var parameters = base.VisitParameterList(lambda.Parameters);
+            return Expression.Lambda(t, body, parameters);
         }
 
         protected override Expression VisitTypeIs(TypeBinaryExpression b)

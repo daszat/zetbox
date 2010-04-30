@@ -146,7 +146,7 @@ namespace Kistl.Client.Presentables.ObjectEditor
                 return;
 
             var other = dataObject.Object;
-            var here = DataContext.Find(other.GetInterfaceType(), other.ID);
+            var here = DataContext.Find(DataContext.GetInterfaceType(other), other.ID);
             SelectedItem = ModelFactory.CreateViewModel<DataObjectModel.Factory>(here).Invoke(DataContext, here);
             HistoryTouch(SelectedItem);
         }

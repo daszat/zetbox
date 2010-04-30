@@ -172,9 +172,9 @@ namespace Kistl.App.GUI
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.ControlKind, double?> OnRequestedWidth_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.ControlKind, double?> OnRequestedWidth_PostSetter;
 
-		public override InterfaceType GetInterfaceType()
+		public override Type GetImplementedInterface()
 		{
-			return new InterfaceType(typeof(ControlKind));
+			return typeof(ControlKind);
 		}
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)

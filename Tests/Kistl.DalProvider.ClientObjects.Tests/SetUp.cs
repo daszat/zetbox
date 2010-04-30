@@ -9,19 +9,31 @@ using System.Text;
 using NUnit.Framework;
 using Kistl.API.Client;
 using Kistl.DalProvider.ClientObjects.Mocks;
+using Kistl.API.AbstractConsumerTests;
+using Autofac;
 
 namespace Kistl.DalProvider.ClientObjects.Tests
 {
     [SetUpFixture]
-    public class SetUp
+    public class SetUp : AbstractSetup
     {
 
-        [SetUp]
-        public void Init()
+        protected override void SetupBuilder(Autofac.ContainerBuilder builder)
         {
-            Kistl.API.Configuration.KistlConfig.FromFile("Kistl.DalProvider.ClientObjects.Tests.Config.xml");
-            var appCtx = new ClientApplicationContext();
-            ProxySingleton.SetProxy(new ProxyMock());
+            base.SetupBuilder(builder);
+            builder.RegisterType<ProxyMock>()
+                .As<IProxy>()
+                .InstancePerDependency();
+        }
+
+        protected override string GetConfigFile()
+        {
+            return "Kistl.DalProvider.ClientObjects.Tests.Config.xml";
+        }
+
+        protected override Kistl.API.HostType GetHostType()
+        {
+            return Kistl.API.HostType.Client;
         }
 
     }

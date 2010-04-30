@@ -12,20 +12,21 @@ namespace Kistl.API.Tests.Serializables
 
 	using NUnit.Framework;
 	using NUnit.Framework.Constraints;
+    using Autofac;
 
 	[TestFixture]
-	public class SerializableExpressionTests
+    public class SerializableExpressionTests : AbstractApiTextFixture
 	{
 		[Test]
 		public void FromExpression_null_fails()
 		{
-			Assert.That(() => SerializableExpression.FromExpression(null), Throws.InstanceOf<ArgumentNullException>());
+            Assert.That(() => SerializableExpression.FromExpression(null, typeTrans), Throws.InstanceOf<ArgumentNullException>());
 		}
 
 		[Test]
 		public void ToExpression_null_fails()
 		{
-			Assert.That(() => SerializableExpression.ToExpression(null), Throws.InstanceOf<ArgumentNullException>());
+            Assert.That(() => SerializableExpression.ToExpression(null), Throws.InstanceOf<ArgumentNullException>());
 		}
 	}
 }

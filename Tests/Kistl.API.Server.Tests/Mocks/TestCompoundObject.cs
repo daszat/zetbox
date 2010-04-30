@@ -34,9 +34,9 @@ namespace Kistl.API.Server.Mocks
             TestString = _tmps;
         }
 
-        public override InterfaceType GetInterfaceType()
+        public override Type GetImplementedInterface()
         {
-            return new InterfaceType(typeof(ICompoundObject));
+            return typeof(ICompoundObject);
         }
     }
 }

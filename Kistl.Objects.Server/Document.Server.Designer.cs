@@ -141,9 +141,9 @@ namespace at.dasz.DocumentManagement
 
 
 
-		public override InterfaceType GetInterfaceType()
+		public override Type GetImplementedInterface()
 		{
-			return new InterfaceType(typeof(Document));
+			return typeof(Document);
 		}
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)

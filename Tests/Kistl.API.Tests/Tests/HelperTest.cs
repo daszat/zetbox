@@ -12,15 +12,16 @@ using Kistl.API.Mocks;
 using NUnit.Framework;
 using NUnit.Framework.Constraints;
 
+using Autofac;
+
 namespace Kistl.API.Tests
 {
     [TestFixture]
-    public class HelperTest
+    public class HelperTest : AbstractApiTextFixture
     {
         TestDataObject obj;
 
-        [SetUp]
-        public void SetUp()
+        public override void SetUp()
         {
             obj = new TestDataObject__Implementation__() { BoolProperty = true, IntProperty = 1, StringProperty = "test" };
         }
@@ -30,7 +31,7 @@ namespace Kistl.API.Tests
         {
             Assert.That(Helper.IsFloatingObject(obj), Is.EqualTo(true));
             ((TestDataObject__Implementation__)obj).ID = 1;
-            obj.AttachToContext(new TestKistlContext());
+            obj.AttachToContext(scope.Resolve<IKistlContext>());
             Assert.That(Helper.IsFloatingObject(obj), Is.EqualTo(false));
         }
 
@@ -39,7 +40,7 @@ namespace Kistl.API.Tests
         {
             Assert.That(Helper.IsPersistedObject(obj), Is.EqualTo(false));
             ((TestDataObject__Implementation__)obj).ID = 1;
-            obj.AttachToContext(new TestKistlContext());
+            obj.AttachToContext(scope.Resolve<IKistlContext>());
             Assert.That(Helper.IsPersistedObject(obj), Is.EqualTo(true));
         }
 

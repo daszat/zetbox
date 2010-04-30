@@ -643,9 +643,9 @@ namespace Kistl.App.Projekte
 
 
 
-		public override InterfaceType GetInterfaceType()
+		public override Type GetImplementedInterface()
 		{
-			return new InterfaceType(typeof(Projekt));
+			return typeof(Projekt);
 		}
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)

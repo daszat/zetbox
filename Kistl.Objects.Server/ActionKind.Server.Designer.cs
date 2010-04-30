@@ -32,9 +32,9 @@ namespace Kistl.App.GUI
         }
 
 
-		public override InterfaceType GetInterfaceType()
+		public override Type GetImplementedInterface()
 		{
-			return new InterfaceType(typeof(ActionKind));
+			return typeof(ActionKind);
 		}
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)

@@ -7,121 +7,123 @@ using Kistl.API.Utils;
 
 namespace Kistl.API
 {
-    public interface IInterfaceTypeFilter
+    public interface IAssemblyConfiguration
     {
-        /// <summary>
-        /// Interpret the specified Type <paramref name="type"/> as an interface 
-        /// type and return the wrapper. If the <paramref name="type"/> is not an 
-        /// interface type, an exception is thrown.
-        /// </summary>
-        /// <param name="type">The type to interpret.</param>
-        /// <returns>An InterfaceType representing the specified Type t.</returns>
-        InterfaceType AsInterfaceType(Type type);
-        /// <summary>
-        /// Interpret the specified Type <paramref name="type"/> as an interface 
-        /// type and return the wrapper. If the <paramref name="type"/> is not an 
-        /// interface type, null is returned.
-        /// </summary>
-        /// <param name="type">The type to interpret.</param>
-        /// <returns>An InterfaceType representing the specified Type t, or null.</returns>
-        InterfaceType? TryAsInterfaceType(Type type);
+        string InterfaceAssemblyName { get; }
+        string ImplementationAssemblyName { get; }
+        IEnumerable<string> AllImplementationAssemblyNames { get; }
 
-        // TODO: remove this
-        bool IsInterfaceType(Type t);
+        Type BasePersistenceObjectType { get; }
+        Type BaseDataObjectType { get; }
+        Type BaseCompoundObjectType { get; }
+        Type BaseCollectionEntryType { get; }
     }
 
-    /// <summary>
-    /// Default implementation of IInterfaceTypeFilter, should be provided by the generated assembly.
-    /// </summary>
-    public class DefaultInterfaceTypeFilter
-        : IInterfaceTypeFilter
+    // TODO: 
+    public class FrozenAssemblyConfiguration : IAssemblyConfiguration
     {
-        public DefaultInterfaceTypeFilter(System.Reflection.Assembly InterfaceAssembly)
+        #region IAssemblyConfiguration Members
+
+        public string InterfaceAssemblyName
         {
-            if (InterfaceAssembly == null) { throw new ArgumentNullException("InterfaceAssembly"); }
-            if (InterfaceAssembly.FullName != Kistl.API.Helper.InterfaceAssembly)
-            {
-                throw new ArgumentOutOfRangeException("InterfaceAssembly");
-            }
+            get { return Kistl.API.Helper.InterfaceAssembly; }
         }
 
-        #region IInterfaceTypeFilter Members
-
-        public InterfaceType AsInterfaceType(Type type)
+        public string ImplementationAssemblyName
         {
-            if (type == null) { throw new ArgumentNullException("type"); }
-
-            if (IsInterfaceType(type))
-            {
-                return new InterfaceType(this, type);
-            }
-            else
-            {
-                throw new ArgumentOutOfRangeException("type", String.Format("type {0} is not from the interface assembly", type.AssemblyQualifiedName));
-            }
+            get { return Kistl.API.Helper.FrozenAssembly; }
         }
 
-        public InterfaceType? TryAsInterfaceType(Type type)
+        public IEnumerable<string> AllImplementationAssemblyNames
         {
-            if (type == null) { throw new ArgumentNullException("type"); }
-
-            if (IsInterfaceType(type))
-            {
-                return new InterfaceType(this, type);
-            }
-            else
-            {
-                return null;
-            }
+            get { return new[] { Kistl.API.Helper.FrozenAssembly }; }
         }
 
-        public bool IsInterfaceType(Type type)
+        public Type BasePersistenceObjectType
         {
-            if (type == null) { throw new ArgumentNullException("type"); }
+            get { return null; }
+        }
 
-            // only check parameters of generic types, like ICollection<>
-            if (type.IsGenericType)
-                return type.GetGenericArguments().All(t => InterfaceType.IsValid(t));
+        public Type BaseDataObjectType
+        {
+            get { return null; }
+        }
 
-            // accept all basic types as interface types
-            if (type.Assembly == typeof(bool).Assembly || type.Assembly == typeof(IQueryable).Assembly)
-                return true;
+        public Type BaseCompoundObjectType
+        {
+            get { return null; }
+        }
 
-            // check remainder for being an interface/enum from the InterfaceAssembly
-            return (type.IsInterface || type.IsEnum) && type.Assembly.FullName == Kistl.API.Helper.InterfaceAssembly;
+        public Type BaseCollectionEntryType
+        {
+            get { return null; }
         }
 
         #endregion
     }
 
+    public interface ITypeTransformations
+    {
+        InterfaceType AsInterfaceType(Type t);
+        InterfaceType AsInterfaceType(string name);
+        ImplementationType AsImplementationType(Type t);
+        IAssemblyConfiguration AssemblyConfiguration { get; }
+    }
+
+    public class TypeTransformations : ITypeTransformations
+    {
+        public TypeTransformations(InterfaceType.Factory ifTypeFactory, InterfaceType.NameFactory ifNameFactory, ImplementationType.Factory imTypeFactory, IAssemblyConfiguration assemblyConfig)
+        {
+            _ifTypeFactory = ifTypeFactory;
+            _ifNameFactory = ifNameFactory;
+            _imTypeFactory = imTypeFactory;
+            this.AssemblyConfiguration = assemblyConfig;
+        }
+
+        private readonly InterfaceType.Factory _ifTypeFactory;
+        private readonly InterfaceType.NameFactory _ifNameFactory;
+        private readonly ImplementationType.Factory _imTypeFactory;
+
+        public InterfaceType AsInterfaceType(Type t) { return _ifTypeFactory(t); }
+        public InterfaceType AsInterfaceType(string name) { return _ifNameFactory(name); }
+        public ImplementationType AsImplementationType(Type t) { return _imTypeFactory(t); }
+        public IAssemblyConfiguration AssemblyConfiguration { get; private set; }
+    }
+
     public struct InterfaceType
     {
+        public delegate InterfaceType Factory(Type type);
+        public delegate InterfaceType NameFactory(string name);
+
         /// <summary>
         /// The wrapped <see cref="System.Type"/>. Guaranteed to be a valid InterfaceType (see <see cref="IsValid"/>).
         /// </summary>
         public Type Type { get; private set; }
+        private readonly ITypeTransformations typeTrans;
 
-        private readonly IInterfaceTypeFilter _ifFilter;
-        internal InterfaceType(IInterfaceTypeFilter ifFilter, Type type)
+        public InterfaceType(Type type, ITypeTransformations typeTrans)
             : this()
         {
-            if (ifFilter == null) { throw new ArgumentNullException("ifFilter"); }
-            _ifFilter = ifFilter;
-            if (!ifFilter.IsInterfaceType(type)) { throw new ArgumentOutOfRangeException("type", String.Format("type {0} is not from the interface assembly", type.AssemblyQualifiedName)); }
+            if (type == null) throw new ArgumentNullException("type");
+            if (typeTrans == null) throw new ArgumentNullException("typeTrans");
+
+            if (!IsValid(type, typeTrans.AssemblyConfiguration)) { throw new ArgumentOutOfRangeException("type"); }
 
             this.Type = type;
+            this.typeTrans = typeTrans;
         }
 
-        /// <summary>
-        /// Wrap a given InterfaceType
-        /// </summary>
-        /// <param name="type">A valid InterfaceType</param>
-        /// <exception cref="ArgumentOutOfRangeException">if <paramref name="type"/> doesn't 
-        /// fulfill all constraints</exception>
-        /// <exception cref="ArgumentNullException">if <paramref name="type"/> is null</exception>
-        public InterfaceType(Type type)
-            : this(new DefaultInterfaceTypeFilter(System.Reflection.Assembly.Load(Kistl.API.Helper.InterfaceAssembly)), type)
+        public InterfaceType(string name, ITypeTransformations typeTrans)
+            : this()
         {
+            if (name == null) throw new ArgumentNullException("name");
+            if (typeTrans == null) throw new ArgumentNullException("typeTrans");
+
+            var type = Type.GetType(name + "," + typeTrans.AssemblyConfiguration.InterfaceAssemblyName, true);
+            if (!IsValid(type, typeTrans.AssemblyConfiguration)) { throw new InvalidOperationException("type is not a valid interface type"); }
+
+            this.Type = type;
+            this.typeTrans = typeTrans;
         }
 
         /// <summary>
@@ -132,24 +134,23 @@ namespace Kistl.API
         /// to pass through system types unscathed)
         /// </summary>
         /// <param name="type"></param>
+        /// <param name="assemblyConfig"></param>
         /// <returns></returns>
-        public static bool IsValid(Type type)
+        private static bool IsValid(Type type, IAssemblyConfiguration assemblyConfig)
         {
             if (type == null) { throw new ArgumentNullException("type"); }
 
             if (type.IsGenericType)
-                return type.GetGenericArguments().All(t => InterfaceType.IsValid(t));
+                return type.GetGenericArguments().All(t => IsValid(t, assemblyConfig));
 
             if (type.IsValueType) return true;
 
-            if (ApplicationContext.Current != null
-                && type.Assembly.FullName == ApplicationContext.Current.InterfaceAssembly
+            if (type.Assembly.FullName == assemblyConfig.InterfaceAssemblyName
                 && type.IsInterface)
                 return true;
 
-            if (ApplicationContext.Current != null
-                && type.Assembly.FullName != ApplicationContext.Current.InterfaceAssembly
-                && type.Assembly.FullName != ApplicationContext.Current.ImplementationAssembly)
+            if (type.Assembly.FullName != assemblyConfig.InterfaceAssemblyName
+                && !assemblyConfig.AllImplementationAssemblyNames.Contains(type.Assembly.FullName))
                 return true;
 
             return false;
@@ -186,14 +187,7 @@ namespace Kistl.API
                 .ToList();
             candidates.Add(new { Interface = this.Type, Inherited = allInherited });
 
-            if (_ifFilter != null)
-            {
-                return _ifFilter.AsInterfaceType(candidates.OrderBy(i => i.Inherited.Length).First().Interface);
-            }
-            else
-            {
-                return new InterfaceType(candidates.OrderBy(i => i.Inherited.Length).First().Interface);
-            }
+            return new InterfaceType(candidates.OrderBy(i => i.Inherited.Length).First().Interface, typeTrans);
         }
 
         /// <summary>
@@ -218,20 +212,12 @@ namespace Kistl.API
         public ImplementationType ToImplementationType()
         {
             // TODO: inline transformation logic to here
-            return new ImplementationType(this.Type.ToImplementationType());
+            return new ImplementationType(this.Type.ToImplementationType(typeTrans.AssemblyConfiguration), typeTrans);
         }
 
-        /// <summary>
-        /// Forces the given Type into an Interface shape.
-        /// </summary>
-        /// <param name="type"></param>
-        /// <returns></returns>
-        public static InterfaceType Transform(Type type)
+        public SerializableType ToSerializableType()
         {
-            if (InterfaceType.IsValid(type))
-                return new InterfaceType(type);
-            else
-                return new ImplementationType(type).ToInterfaceType();
+            return new SerializableType(this, typeTrans);
         }
 
         #region implement content equality over the Type property
@@ -271,23 +257,30 @@ namespace Kistl.API
 
     public struct ImplementationType
     {
+        public delegate ImplementationType Factory(Type t);
+
         /// <summary>
         /// The wrapped <see cref="System.Type"/>. Guaranteed to be a valid ImplementationType (see <see cref="IsValid"/>).
         /// </summary>
         public Type Type { get; private set; }
 
+        private readonly ITypeTransformations typeTrans;
+
         /// <summary>
         /// Wrap a given ImplementationType
         /// </summary>
         /// <param name="type">A valid ImplementationType</param>
+        /// <param name="typeTrans"></param>
         /// <exception cref="ArgumentOutOfRangeException">if <paramref name="type"/> doesn't 
         /// fulfill all constraints</exception>
         /// <exception cref="ArgumentNullException">if <paramref name="type"/> is null</exception>
-        public ImplementationType(Type type)
+        public ImplementationType(Type type, ITypeTransformations typeTrans)
             : this()
         {
-            if (!IsValid(type)) { throw new ArgumentOutOfRangeException("type"); }
-
+            if (type == null) throw new ArgumentNullException("type");
+            if (typeTrans == null) throw new ArgumentNullException("typeTrans");
+            if (!IsValid(type, typeTrans.AssemblyConfiguration)) { throw new ArgumentOutOfRangeException("type"); }
+            this.typeTrans = typeTrans;
             this.Type = type;
         }
 
@@ -299,22 +292,23 @@ namespace Kistl.API
         /// to pass through system types unscathed)
         /// </summary>
         /// <param name="type"></param>
+        /// <param name="assemblyConfig"></param>
         /// <returns></returns>
-        public static bool IsValid(Type type)
+        private static bool IsValid(Type type, IAssemblyConfiguration assemblyConfig)
         {
             if (type == null) { throw new ArgumentNullException("type"); }
 
             if (type.IsGenericType)
-                return type.GetGenericArguments().All(t => ImplementationType.IsValid(t));
+                return type.GetGenericArguments().All(t => ImplementationType.IsValid(t, assemblyConfig));
 
             if (type.IsValueType) return true;
 
-            if (type.Assembly.FullName == ApplicationContext.Current.ImplementationAssembly
+            if (type.Assembly.FullName == assemblyConfig.ImplementationAssemblyName
                 && !type.IsInterface)
                 return true;
 
-            if (type.Assembly.FullName != ApplicationContext.Current.InterfaceAssembly
-                && type.Assembly.FullName != ApplicationContext.Current.ImplementationAssembly)
+            if (type.Assembly.FullName != assemblyConfig.InterfaceAssemblyName
+                && !assemblyConfig.AllImplementationAssemblyNames.Contains(type.Assembly.FullName))
                 return true;
 
 
@@ -328,7 +322,7 @@ namespace Kistl.API
         public InterfaceType ToInterfaceType()
         {
             // TODO: inline transformation logic to here
-            return new InterfaceType(this.Type.ToInterfaceType());
+            return new InterfaceType(this.Type.ToInterfaceType(typeTrans.AssemblyConfiguration), typeTrans);
         }
 
         #region implement content equality over the Type property
@@ -361,13 +355,12 @@ namespace Kistl.API
         }
     }
 
-    public static class TypeTransformations
+    public static class TypeTransformationsExtensions
     {
-
         /// <summary>
         /// Returns the most specific implemented Kistl.Objects interface of a given Type.
         /// </summary>
-        public static Type ToInterfaceType(this Type type)
+        public static Type ToInterfaceType(this Type type, IAssemblyConfiguration assemblyConfig)
         {
             if (type == null) { throw new ArgumentNullException("type"); }
 
@@ -382,7 +375,7 @@ namespace Kistl.API
             {
                 // convert args of things like Generic Collections
                 Type genericType = type.GetGenericTypeDefinition();
-                var genericArguments = type.GetGenericArguments().Select(t => t.ToInterfaceType()).ToArray();
+                var genericArguments = type.GetGenericArguments().Select(t => t.ToInterfaceType(assemblyConfig)).ToArray();
                 return genericType.MakeGenericType(genericArguments);
             }
             else if (!type.IsInterface)
@@ -390,7 +383,7 @@ namespace Kistl.API
                 if (type.IsIPersistenceObject() || type.IsICompoundObject())
                 {
                     var parts = type.FullName.Split(new string[] { Helper.ImplementationSuffix }, StringSplitOptions.RemoveEmptyEntries);
-                    type = Type.GetType(parts[0] + ", " + ApplicationContext.Current.InterfaceAssembly, true);
+                    type = Type.GetType(parts[0] + ", " + assemblyConfig.InterfaceAssemblyName, true);
                 }
             }
             return type;
@@ -399,7 +392,7 @@ namespace Kistl.API
         /// <summary>
         /// Returns the Type implementing a given Kistl.Objects interface from the current ImplementationAssembly
         /// </summary>
-        public static Type ToImplementationType(this Type type)
+        public static Type ToImplementationType(this Type type, IAssemblyConfiguration assemblyConfig)
         {
             if (type == null) { throw new ArgumentNullException("type"); }
 
@@ -414,37 +407,37 @@ namespace Kistl.API
             {
                 // convert args of things like Generic Collections
                 Type genericType = type.GetGenericTypeDefinition();
-                var genericArguments = type.GetGenericArguments().Select(t => t.ToImplementationType()).ToArray();
+                var genericArguments = type.GetGenericArguments().Select(t => t.ToImplementationType(assemblyConfig)).ToArray();
                 return genericType.MakeGenericType(genericArguments);
             }
             else
             {
                 if (type == typeof(IDataObject))
                 {
-                    return ApplicationContext.Current.BaseDataObjectType;
+                    return assemblyConfig.BaseDataObjectType;
                 }
                 else if (type == typeof(IPersistenceObject))
                 {
-                    return ApplicationContext.Current.BasePersistenceObjectType;
+                    return assemblyConfig.BasePersistenceObjectType;
                 }
                 else if (type == typeof(ICompoundObject))
                 {
-                    return ApplicationContext.Current.BaseCompoundObjectType;
+                    return assemblyConfig.BaseCompoundObjectType;
                 }
                 else if (type == typeof(IRelationCollectionEntry))
                 {
-                    return ApplicationContext.Current.BaseCollectionEntryType;
+                    return assemblyConfig.BaseCollectionEntryType;
                 }
                 else if (type == typeof(IValueCollectionEntry))
                 {
-                    return ApplicationContext.Current.BaseCollectionEntryType;
+                    return assemblyConfig.BaseCollectionEntryType;
                 }
                 else if (type.IsInterface)
                 {
                     if (type.IsIPersistenceObject() || type.IsICompoundObject())
                     {
                         // add ImplementationSuffix
-                        string newType = type.FullName + Kistl.API.Helper.ImplementationSuffix + ", " + ApplicationContext.Current.ImplementationAssembly;
+                        string newType = type.FullName + Kistl.API.Helper.ImplementationSuffix + ", " + assemblyConfig.ImplementationAssemblyName;
                         return Type.GetType(newType, true);
                     }
                 }

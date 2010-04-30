@@ -159,7 +159,7 @@ using System.IO;
             // then apply changes
             foreach (var obj in objects.Where(o => o.ClientObjectState == DataObjectState.Modified))
             {
-                var ctxObj = ctx.FindPersistenceObject(obj.GetInterfaceType(), obj.ID);
+                var ctxObj = ctx.FindPersistenceObject(ctx.GetInterfaceType(obj), obj.ID);
                 ((BasePersistenceObject)ctxObj).RecordNotifications();
                 ctxObj.ApplyChangesFrom(obj);
                 entityObjects[ctxObj] = ctxObj;
@@ -168,7 +168,7 @@ using System.IO;
             // then update references
             foreach (var obj in objects.Where(o => o.ClientObjectState != DataObjectState.Deleted))
             {
-                var ctxObj = ctx.FindPersistenceObject(obj.GetInterfaceType(), obj.ID);
+                var ctxObj = ctx.FindPersistenceObject(ctx.GetInterfaceType(obj), obj.ID);
                 ((BasePersistenceObject)ctxObj).RecordNotifications();
                 ctxObj.ReloadReferences();
                 entityObjects[ctxObj] = ctxObj;
@@ -177,7 +177,7 @@ using System.IO;
             // then delete objects
             foreach (var obj in objects.Where(o => o.ClientObjectState == DataObjectState.Deleted))
             {
-                var ctxObj = ctx.FindPersistenceObject(obj.GetInterfaceType(), obj.ID);
+                var ctxObj = ctx.FindPersistenceObject(ctx.GetInterfaceType(obj), obj.ID);
                 ctx.Delete(ctxObj);
             }
 
@@ -194,7 +194,7 @@ using System.IO;
             var requestedObjects = ctx.AttachedObjects
                 .Where(obj =>
                 {
-                    var ids = requestLookup[obj.GetInterfaceType().Type.FullName].FirstOrDefault();
+                    var ids = requestLookup[ctx.GetInterfaceType(obj).Type.FullName].FirstOrDefault();
                     if (ids == null)
                     {
                         return false;

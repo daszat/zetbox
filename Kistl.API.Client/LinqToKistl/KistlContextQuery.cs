@@ -18,7 +18,7 @@ namespace Kistl.API.Client
         private IKistlContext _context;
 
         #region Constructor
-        public KistlContextQuery(IKistlContext ctx, InterfaceType type)
+        public KistlContextQuery(IKistlContext ctx, InterfaceType type, IProxy proxy)
         {
             if (ctx == null) throw new ArgumentNullException("ctx");
             if (type == null) throw new ArgumentNullException("type");
@@ -26,7 +26,7 @@ namespace Kistl.API.Client
             _type = type;
             _context = ctx;
             _expression = System.Linq.Expressions.Expression.Constant(this);
-            _provider = new KistlContextProvider(_context, _type);
+            _provider = new KistlContextProvider(_context, _type, proxy);
         }
 
         public KistlContextQuery(IKistlContext ctx, InterfaceType type, KistlContextProvider provider, Expression expression)

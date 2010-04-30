@@ -124,7 +124,7 @@ namespace Kistl.API
         private static Dictionary<string, Assembly> _Assemblies = new Dictionary<string, Assembly>();
 
         /// <summary>
-        /// Called by the Framework to resolve an Assembly. Initialized in the <see cref="ApplicationContext"/>.
+        /// Called by the Framework to resolve an Assembly.
         /// </summary>
         /// <param name="sender">See MSDN</param>
         /// <param name="args">See MSDN</param>

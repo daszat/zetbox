@@ -67,7 +67,7 @@ namespace Kistl.Client.WPF
         {
             DebugConsole.Show();
             Logging.Configure();
-            SplashScreen.ShowSplashScreen("Kistl is starting...", "Init application", 6);
+            SplashScreen.ShowSplashScreen("Kistl is starting...", "Init application", 5);
 
             using (Logging.Log.InfoTraceMethodCall("Starting Client"))
             {
@@ -93,9 +93,6 @@ namespace Kistl.Client.WPF
                 container = CreateMasterContainer(config);
 
                 // initialise AppContext
-                SplashScreen.SetInfo("Initializing Application Context");
-                var appCtx = container.Resolve<ApplicationContext>();
-
                 SplashScreen.SetInfo("Initializing Custom Actions Manager");
                 // initialise custom actions manager
                 var cams = container.Resolve<BaseCustomActionsManager>();
@@ -104,6 +101,7 @@ namespace Kistl.Client.WPF
 
                 // Init Resources
                 this.Resources["IconConverter"] = new IconConverter(config.Client.DocumentStore);
+                Kistl.Client.WPF.View.VisualTypeTemplateSelector.TypeTrans = container.Resolve<ITypeTransformations>();
 
                 // delegate all business logic into another class, which 
                 // allows us to load the Kistl.Objects assemblies _before_ 

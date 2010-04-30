@@ -642,9 +642,9 @@ namespace Kistl.App.Projekte
 		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Task, Kistl.App.Projekte.Projekt> OnProjekt_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Task, Kistl.App.Projekte.Projekt> OnProjekt_PostSetter;
 
-		public override InterfaceType GetInterfaceType()
+		public override Type GetImplementedInterface()
 		{
-			return new InterfaceType(typeof(Task));
+			return typeof(Task);
 		}
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)

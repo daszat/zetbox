@@ -265,9 +265,9 @@ namespace Kistl.App.Base
 
 #endregion
 
-		public override InterfaceType GetInterfaceType()
+		public override Type GetImplementedInterface()
 		{
-			return new InterfaceType(typeof(CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntry));
+			return typeof(CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntry);
 		}
 	
 		public override void ReloadReferences()
@@ -558,9 +558,9 @@ namespace Kistl.App.GUI
 
 #endregion
 
-		public override InterfaceType GetInterfaceType()
+		public override Type GetImplementedInterface()
 		{
-			return new InterfaceType(typeof(ControlKindClass_supports_TypeRef_RelationEntry));
+			return typeof(ControlKindClass_supports_TypeRef_RelationEntry);
 		}
 	
 		public override void ReloadReferences()
@@ -943,9 +943,9 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
 
 #endregion
 
-		public override InterfaceType GetInterfaceType()
+		public override Type GetImplementedInterface()
 		{
-			return new InterfaceType(typeof(Document_has_Blob_RelationEntry));
+			return typeof(Document_has_Blob_RelationEntry);
 		}
 	
 		public override void ReloadReferences()
@@ -1237,9 +1237,9 @@ namespace Kistl.App.Base
 
 #endregion
 
-		public override InterfaceType GetInterfaceType()
+		public override Type GetImplementedInterface()
 		{
-			return new InterfaceType(typeof(Group_memberOf_Group_RelationEntry));
+			return typeof(Group_memberOf_Group_RelationEntry);
 		}
 	
 		public override void ReloadReferences()
@@ -1480,9 +1480,9 @@ namespace at.dasz.CourseOrganiser
 
 #endregion
 
-		public override InterfaceType GetInterfaceType()
+		public override Type GetImplementedInterface()
 		{
-			return new InterfaceType(typeof(GroupExcercise_accomplished_by_Student_RelationEntry));
+			return typeof(GroupExcercise_accomplished_by_Student_RelationEntry);
 		}
 	
 		public override void ReloadReferences()
@@ -1723,9 +1723,9 @@ namespace Kistl.App.Base
 
 #endregion
 
-		public override InterfaceType GetInterfaceType()
+		public override Type GetImplementedInterface()
 		{
-			return new InterfaceType(typeof(Identity_memberOf_Group_RelationEntry));
+			return typeof(Identity_memberOf_Group_RelationEntry);
 		}
 	
 		public override void ReloadReferences()
@@ -1966,9 +1966,9 @@ namespace Kistl.App.Test
 
 #endregion
 
-		public override InterfaceType GetInterfaceType()
+		public override Type GetImplementedInterface()
 		{
-			return new InterfaceType(typeof(Muhblah_has_TestCustomObject_RelationEntry));
+			return typeof(Muhblah_has_TestCustomObject_RelationEntry);
 		}
 	
 		public override void ReloadReferences()
@@ -2258,9 +2258,9 @@ namespace Kistl.App.Base
 
 #endregion
 
-		public override InterfaceType GetInterfaceType()
+		public override Type GetImplementedInterface()
 		{
-			return new InterfaceType(typeof(ObjectClass_implements_Interface_RelationEntry));
+			return typeof(ObjectClass_implements_Interface_RelationEntry);
 		}
 	
 		public override void ReloadReferences()
@@ -2581,9 +2581,9 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
 
 #endregion
 
-		public override InterfaceType GetInterfaceType()
+		public override Type GetImplementedInterface()
 		{
-			return new InterfaceType(typeof(Projekt_haben_Mitarbeiter_RelationEntry));
+			return typeof(Projekt_haben_Mitarbeiter_RelationEntry);
 		}
 	
 		public override void ReloadReferences()
@@ -2967,9 +2967,9 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
 
 #endregion
 
-		public override InterfaceType GetInterfaceType()
+		public override Type GetImplementedInterface()
 		{
-			return new InterfaceType(typeof(RoleMembership_resolves_Relation_RelationEntry));
+			return typeof(RoleMembership_resolves_Relation_RelationEntry);
 		}
 	
 		public override void ReloadReferences()
@@ -3212,9 +3212,9 @@ namespace at.dasz.CourseOrganiser
 
 #endregion
 
-		public override InterfaceType GetInterfaceType()
+		public override Type GetImplementedInterface()
 		{
-			return new InterfaceType(typeof(Student_attend_Semester_RelationEntry));
+			return typeof(Student_attend_Semester_RelationEntry);
 		}
 	
 		public override void ReloadReferences()
@@ -3455,9 +3455,9 @@ namespace Kistl.App.GUI
 
 #endregion
 
-		public override InterfaceType GetInterfaceType()
+		public override Type GetImplementedInterface()
 		{
-			return new InterfaceType(typeof(Template_hasMenu_Visual_RelationEntry));
+			return typeof(Template_hasMenu_Visual_RelationEntry);
 		}
 	
 		public override void ReloadReferences()
@@ -3698,9 +3698,9 @@ namespace Kistl.App.Test
 
 #endregion
 
-		public override InterfaceType GetInterfaceType()
+		public override Type GetImplementedInterface()
 		{
-			return new InterfaceType(typeof(TestStudent_füllt_aus_Fragebogen_RelationEntry));
+			return typeof(TestStudent_füllt_aus_Fragebogen_RelationEntry);
 		}
 	
 		public override void ReloadReferences()
@@ -4085,9 +4085,9 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
 
 #endregion
 
-		public override InterfaceType GetInterfaceType()
+		public override Type GetImplementedInterface()
 		{
-			return new InterfaceType(typeof(TypeRef_hasGenericArguments_TypeRef_RelationEntry));
+			return typeof(TypeRef_hasGenericArguments_TypeRef_RelationEntry);
 		}
 	
 		public override void ReloadReferences()
@@ -4383,9 +4383,9 @@ namespace Kistl.App.GUI
 
 #endregion
 
-		public override InterfaceType GetInterfaceType()
+		public override Type GetImplementedInterface()
 		{
-			return new InterfaceType(typeof(ViewDescriptor_supports_TypeRef_RelationEntry));
+			return typeof(ViewDescriptor_supports_TypeRef_RelationEntry);
 		}
 	
 		public override void ReloadReferences()
@@ -4675,9 +4675,9 @@ namespace Kistl.App.GUI
 
 #endregion
 
-		public override InterfaceType GetInterfaceType()
+		public override Type GetImplementedInterface()
 		{
-			return new InterfaceType(typeof(ViewModelDescriptor_displayedBy_ControlKind_RelationEntry));
+			return typeof(ViewModelDescriptor_displayedBy_ControlKind_RelationEntry);
 		}
 	
 		public override void ReloadReferences()
@@ -4918,9 +4918,9 @@ namespace Kistl.App.GUI
 
 #endregion
 
-		public override InterfaceType GetInterfaceType()
+		public override Type GetImplementedInterface()
 		{
-			return new InterfaceType(typeof(Visual_contains_Visual_RelationEntry));
+			return typeof(Visual_contains_Visual_RelationEntry);
 		}
 	
 		public override void ReloadReferences()
@@ -5161,9 +5161,9 @@ namespace Kistl.App.GUI
 
 #endregion
 
-		public override InterfaceType GetInterfaceType()
+		public override Type GetImplementedInterface()
 		{
-			return new InterfaceType(typeof(Visual_hasContextMenu_Visual_RelationEntry));
+			return typeof(Visual_hasContextMenu_Visual_RelationEntry);
 		}
 	
 		public override void ReloadReferences()
@@ -5405,9 +5405,9 @@ namespace Kistl.App.TimeRecords
 
 #endregion
 
-		public override InterfaceType GetInterfaceType()
+		public override Type GetImplementedInterface()
 		{
-			return new InterfaceType(typeof(WorkEffortAccount_has_Mitarbeiter_RelationEntry));
+			return typeof(WorkEffortAccount_has_Mitarbeiter_RelationEntry);
 		}
 	
 		public override void ReloadReferences()
@@ -5615,9 +5615,9 @@ public string Value { get { return B; } set { B = value; } }
 
 #endregion
 
-		public override InterfaceType GetInterfaceType()
+		public override Type GetImplementedInterface()
 		{
-			return new InterfaceType(typeof(Kunde_EMails_CollectionEntry));
+			return typeof(Kunde_EMails_CollectionEntry);
 		}
 	
 		public override void ReloadReferences()
@@ -5838,9 +5838,9 @@ public TestCustomObject Parent { get { return A; } set { A = value; } }
 
 #endregion
 
-		public override InterfaceType GetInterfaceType()
+		public override Type GetImplementedInterface()
 		{
-			return new InterfaceType(typeof(TestCustomObject_PhoneNumbersOther_CollectionEntry));
+			return typeof(TestCustomObject_PhoneNumbersOther_CollectionEntry);
 		}
 	
 		public override void ReloadReferences()

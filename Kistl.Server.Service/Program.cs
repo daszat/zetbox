@@ -250,7 +250,6 @@ namespace Kistl.Server.Service
             {
                 Log.TraceTotalMemory("Before DefaultInitialisation()");
 
-                var appCtx = container.Resolve<ApplicationContext>();
                 if (dataSourceXmlFile == null) { FrozenContext.RegisterFallback(container.Resolve<IReadOnlyKistlContext>()); }
 
                 // initialise custom actions manager

@@ -10,7 +10,7 @@ namespace Kistl.API.Tests.BaseCompoundObjects
 {
 
     [TestFixture]
-    public class should_serialize
+    public class should_serialize : AbstractApiTextFixture
     {
 
         MemoryStream ms;
@@ -19,13 +19,11 @@ namespace Kistl.API.Tests.BaseCompoundObjects
 
         TestCompoundObject__Implementation__ test;
 
-        [SetUp]
-        public void SetUp()
+        public override void SetUp()
         {
             ms = new MemoryStream();
             sw = new BinaryWriter(ms);
             sr = new BinaryReader(ms);
-            var testCtx = new TestApplicationContext();
 
             test = new TestCompoundObject__Implementation__();
         }

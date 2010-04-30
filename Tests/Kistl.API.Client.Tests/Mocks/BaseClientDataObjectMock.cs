@@ -16,9 +16,9 @@ namespace Kistl.API.Client.Mocks
     public class BaseClientDataObjectMock__Implementation__ 
         : BaseClientDataObject, BaseClientDataObjectMock
     {
-        public override InterfaceType GetInterfaceType()
+        public override Type GetImplementedInterface()
         {
-            return new InterfaceType(typeof(BaseClientDataObjectMock));
+            return typeof(BaseClientDataObjectMock);
         }
 
         #region IDataErrorInfo Members

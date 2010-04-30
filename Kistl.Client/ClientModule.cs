@@ -53,8 +53,8 @@ namespace Kistl.Client
                 .Register(c =>
                 {
                     var ctx = c.Resolve<IReadOnlyKistlContext>();
-                    var appCtx = c.Resolve<ApplicationContext>();
-                    var cams = new CustomActionsManagerClient(appCtx);
+                    var aCfg = c.Resolve<IAssemblyConfiguration>();
+                    var cams = new CustomActionsManagerClient(aCfg);
                     cams.Init(ctx);
 
                     return cams;
@@ -70,11 +70,6 @@ namespace Kistl.Client
             moduleBuilder
                 .RegisterType<ModelFactory>()
                 .As<IModelFactory>()
-                .SingleInstance();
-
-            moduleBuilder
-                .Register(c => new ClientApplicationContext())
-                .As<ApplicationContext>()
                 .SingleInstance();
 
             moduleBuilder

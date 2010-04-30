@@ -241,7 +241,7 @@ using Kistl.API.Configuration;
 
         public InterfaceType GetInterfaceType()
         {
-            return Object.GetInterfaceType();
+            return DataContext.GetInterfaceType(Object);
         }
 
         #endregion
@@ -369,7 +369,7 @@ using Kistl.API.Configuration;
                 _object.ObjectState.ToUserString(),
                 _object.ToString());
             _longNameCache = String.Format("{0}: {1}",
-                _object.GetInterfaceType().Type.FullName,
+                DataContext.GetInterfaceType(_object).Type.FullName,
                 _toStringCache);
         }
 

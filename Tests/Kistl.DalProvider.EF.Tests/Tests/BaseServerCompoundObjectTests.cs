@@ -25,8 +25,6 @@ namespace Kistl.DalProvider.EF.Tests
         [SetUp]
         public void SetUpTestObject()
         {
-            var testCtx = new ServerApiContextMock();
-
             obj = new TestPhoneCompoundObject__Implementation__() { AreaCode = "ABC", Number = "123456" };
 
             parent = new TestCustomObject__Implementation__();

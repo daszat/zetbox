@@ -115,9 +115,9 @@ namespace Kistl.Server.Packaging
                             if (!rel.A.Type.ImplementsIExportable()) continue;
                             if (!rel.B.Type.ImplementsIExportable()) continue;
 
-                            string ifTypeName = string.Format("{0}, {1}", rel.GetRelationFullName(), ApplicationContext.Current.InterfaceAssembly);
+                            var ifTypeName = rel.GetRelationFullName();
                             Log.InfoFormat("    {0} ", ifTypeName);
-                            Type ifType = Type.GetType(ifTypeName);
+                            Type ifType = ctx.GetInterfaceType(ifTypeName).Type;
                             if (ifType == null)
                             {
                                 Log.WarnFormat("RelationType {0} not found", ifTypeName);
@@ -143,7 +143,7 @@ namespace Kistl.Server.Packaging
         #region Xml/Export private Methods
         private static void ExportObject(XmlWriter xml, IPersistenceObject obj, string[] propNamespaces)
         {
-            Type t = obj.GetInterfaceType().Type;
+            Type t = obj.Context.GetInterfaceType(obj).Type;
             xml.WriteStartElement(t.Name, t.Namespace);
             if (((IExportable)obj).ExportGuid == Guid.Empty)
             {

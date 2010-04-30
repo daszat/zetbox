@@ -37,7 +37,7 @@ namespace Kistl.DalProvider.Memory
                     {
                         // TODO: check validity of using FAMS here.
                         Logging.Log.Info("Initialising FrozenActionsManagerServer");
-                        var fams = new FrozenActionsManagerServer();
+                        var fams = new FrozenActionsManagerServer(new FrozenAssemblyConfiguration());
                         fams.Init((IReadOnlyKistlContext)args.Instance);
                     })
                     .SingleInstance();

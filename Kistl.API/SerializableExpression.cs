@@ -29,11 +29,12 @@ namespace Kistl.API
         /// Creates a serializable Expression from a Expression
         /// </summary>
         /// <param name="e">Linq Expression</param>
+        /// <param name="typeTrans"></param>
         /// <returns>serializable Expression</returns>
-        public static SerializableExpression FromExpression(Expression e)
+        public static SerializableExpression FromExpression(Expression e, ITypeTransformations typeTrans)
         {
             SerializationContext ctx = new SerializationContext();
-            return FromExpression(e, ctx);
+            return FromExpression(e, ctx, typeTrans);
         }
 
         /// <summary>
@@ -41,19 +42,20 @@ namespace Kistl.API
         /// </summary>
         /// <param name="e">Linq Expression</param>
         /// <param name="ctx">Serialization Context</param>
+        /// <param name="typeTrans"></param>
         // TODO: use ExpressionTreeVisitor/Translator
-        internal static SerializableExpression FromExpression(Expression e, SerializationContext ctx)
+        internal static SerializableExpression FromExpression(Expression e, SerializationContext ctx, ITypeTransformations typeTrans)
         {
             if (e == null) throw new ArgumentNullException("e");
 
             if (e is BinaryExpression)
-                return new SerializableBinaryExpression((BinaryExpression)e, ctx);
+                return new SerializableBinaryExpression((BinaryExpression)e, ctx, typeTrans);
 
             if (e is UnaryExpression)
-                return new SerializableUnaryExpression((UnaryExpression)e, ctx);
+                return new SerializableUnaryExpression((UnaryExpression)e, ctx, typeTrans);
 
             if (e is ConstantExpression)
-                return new SerializableConstantExpression((ConstantExpression)e, ctx);
+                return new SerializableConstantExpression((ConstantExpression)e, ctx, typeTrans);
 
             if (e is MemberExpression)
             {
@@ -63,34 +65,34 @@ namespace Kistl.API
                     ConstantExpression left = (ConstantExpression)exp.Expression;
                     if (exp.Member is PropertyInfo)
                     {
-                        return new SerializableConstantExpression(Expression.Constant(((PropertyInfo)exp.Member).GetValue(left.Value, null)), ctx);
+                        return new SerializableConstantExpression(Expression.Constant(((PropertyInfo)exp.Member).GetValue(left.Value, null)), ctx, typeTrans);
                     }
                     else if (exp.Member is FieldInfo)
                     {
-                        return new SerializableConstantExpression(Expression.Constant(((FieldInfo)exp.Member).GetValue(left.Value)), ctx);
+                        return new SerializableConstantExpression(Expression.Constant(((FieldInfo)exp.Member).GetValue(left.Value)), ctx, typeTrans);
                     }
                     else
                     {
                         throw new NotImplementedException();
                     }
                 }
-                return new SerializableMemberExpression((MemberExpression)e, ctx);
+                return new SerializableMemberExpression((MemberExpression)e, ctx, typeTrans);
             }
 
             if (e is LambdaExpression)
-                return new SerializableLambdaExpression((LambdaExpression)e, ctx);
+                return new SerializableLambdaExpression((LambdaExpression)e, ctx, typeTrans);
 
             if (e is MethodCallExpression)
-                return new SerializableMethodCallExpression((MethodCallExpression)e, ctx);
+                return new SerializableMethodCallExpression((MethodCallExpression)e, ctx, typeTrans);
 
             if (e is ParameterExpression)
-                return new SerializableParameterExpression((ParameterExpression)e, ctx);
+                return new SerializableParameterExpression((ParameterExpression)e, ctx, typeTrans);
 
             if (e is NewExpression)
-                return new SerializableNewExpression((NewExpression)e, ctx);
+                return new SerializableNewExpression((NewExpression)e, ctx, typeTrans);
 
             if (e is ConditionalExpression)
-                return new SerializableConditionalExpression((ConditionalExpression)e, ctx);
+                return new SerializableConditionalExpression((ConditionalExpression)e, ctx, typeTrans);
 
             throw new NotSupportedException(string.Format("Nodetype {0} is not supported: {1}", e.NodeType, e.ToString()));
         }
@@ -130,9 +132,11 @@ namespace Kistl.API
         /// </summary>
         /// <param name="e">Linq Expression</param>
         /// <param name="ctx">Serialization Context</param>
-        internal SerializableExpression(Expression e, SerializationContext ctx)
+        /// <param name="typeTrans"></param>
+        internal SerializableExpression(Expression e, SerializationContext ctx, ITypeTransformations typeTrans)
         {
-            SerializableType = new SerializableType(InterfaceType.Transform(e.Type));
+            this.typeTrans = typeTrans;
+            SerializableType = typeTrans.AsInterfaceType(e.Type.ToInterfaceType(typeTrans.AssemblyConfiguration)).ToSerializableType();
             NodeType = e.NodeType;
         }
 
@@ -159,6 +163,8 @@ namespace Kistl.API
             }
         }
 
+        protected ITypeTransformations typeTrans { get; private set; }
+
         /// <summary>
         /// Converts a SerializableExpression to a Linq Expression
         /// </summary>
@@ -174,8 +180,8 @@ namespace Kistl.API
     [Serializable]
     public abstract class SerializableCompoundExpression : SerializableExpression
     {
-        internal SerializableCompoundExpression(Expression e, SerializableExpression.SerializationContext ctx)
-            : base(e, ctx)
+        internal SerializableCompoundExpression(Expression e, SerializableExpression.SerializationContext ctx, ITypeTransformations typeTrans)
+            : base(e, ctx, typeTrans)
         {
             this.Children = new List<SerializableExpression>();
         }
@@ -196,11 +202,11 @@ namespace Kistl.API
     [Serializable]
     public class SerializableBinaryExpression : SerializableCompoundExpression
     {
-        internal SerializableBinaryExpression(BinaryExpression e, SerializableExpression.SerializationContext ctx)
-            : base(e, ctx)
+        internal SerializableBinaryExpression(BinaryExpression e, SerializableExpression.SerializationContext ctx, ITypeTransformations typeTrans)
+            : base(e, ctx, typeTrans)
         {
-            Children.Add(SerializableExpression.FromExpression(e.Left, ctx));
-            Children.Add(SerializableExpression.FromExpression(e.Right, ctx));
+            Children.Add(SerializableExpression.FromExpression(e.Left, ctx, typeTrans));
+            Children.Add(SerializableExpression.FromExpression(e.Right, ctx, typeTrans));
         }
 
         internal override Expression ToExpressionInternal(SerializationContext ctx)
@@ -217,10 +223,10 @@ namespace Kistl.API
     [Serializable]
     public class SerializableUnaryExpression : SerializableCompoundExpression
     {
-        internal SerializableUnaryExpression(UnaryExpression e, SerializableExpression.SerializationContext ctx)
-            : base(e, ctx)
+        internal SerializableUnaryExpression(UnaryExpression e, SerializableExpression.SerializationContext ctx, ITypeTransformations typeTrans)
+            : base(e, ctx, typeTrans)
         {
-            Children.Add(SerializableExpression.FromExpression(e.Operand, ctx));
+            Children.Add(SerializableExpression.FromExpression(e.Operand, ctx, typeTrans));
         }
 
         internal override Expression ToExpressionInternal(SerializationContext ctx)
@@ -237,8 +243,8 @@ namespace Kistl.API
     [Serializable]
     public class SerializableConstantExpression : SerializableExpression
     {
-        internal SerializableConstantExpression(ConstantExpression e, SerializationContext ctx)
-            : base(e, ctx)
+        internal SerializableConstantExpression(ConstantExpression e, SerializationContext ctx, ITypeTransformations typeTrans)
+            : base(e, ctx, typeTrans)
         {
             Value = e.Value;
         }
@@ -263,11 +269,11 @@ namespace Kistl.API
     [Serializable]
     public class SerializableMemberExpression : SerializableCompoundExpression
     {
-        internal SerializableMemberExpression(MemberExpression e, SerializationContext ctx)
-            : base(e, ctx)
+        internal SerializableMemberExpression(MemberExpression e, SerializationContext ctx, ITypeTransformations typeTrans)
+            : base(e, ctx, typeTrans)
         {
             MemberName = e.Member.Name;
-            Children.Add(SerializableExpression.FromExpression(e.Expression, ctx));
+            Children.Add(SerializableExpression.FromExpression(e.Expression, ctx, typeTrans));
         }
 
         internal override Expression ToExpressionInternal(SerializationContext ctx)
@@ -292,19 +298,19 @@ namespace Kistl.API
     [Serializable]
     public class SerializableMethodCallExpression : SerializableCompoundExpression
     {
-        internal SerializableMethodCallExpression(MethodCallExpression e, SerializationContext ctx)
-            : base(e, ctx)
+        internal SerializableMethodCallExpression(MethodCallExpression e, SerializationContext ctx, ITypeTransformations typeTrans)
+            : base(e, ctx, typeTrans)
         {
-            if (e.Object != null) ObjectExpression = SerializableExpression.FromExpression(e.Object, ctx);
+            if (e.Object != null) ObjectExpression = SerializableExpression.FromExpression(e.Object, ctx, typeTrans);
 
             MethodName = e.Method.Name;
-            SerializableMethodType = new SerializableType(new InterfaceType(e.Method.DeclaringType));
-            ParameterTypes = e.Method.GetParameters().Select(p => new SerializableType(new InterfaceType(p.ParameterType))).ToList();
-            GenericArguments = e.Method.GetGenericArguments().Select(p => new SerializableType(new InterfaceType(p))).ToList();
+            SerializableMethodType = typeTrans.AsInterfaceType(e.Method.DeclaringType).ToSerializableType();
+            ParameterTypes = e.Method.GetParameters().Select(p => typeTrans.AsInterfaceType(p.ParameterType).ToSerializableType()).ToList();
+            GenericArguments = e.Method.GetGenericArguments().Select(p => typeTrans.AsInterfaceType(p).ToSerializableType()).ToList();
 
             if (e.Arguments != null)
             {
-                Children = e.Arguments.Select(a => SerializableExpression.FromExpression(a, ctx)).ToList();
+                Children = e.Arguments.Select(a => SerializableExpression.FromExpression(a, ctx, typeTrans)).ToList();
             }
         }
 
@@ -426,11 +432,11 @@ namespace Kistl.API
     [Serializable]
     public class SerializableLambdaExpression : SerializableCompoundExpression
     {
-        internal SerializableLambdaExpression(LambdaExpression e, SerializationContext ctx)
-            : base(e, ctx)
+        internal SerializableLambdaExpression(LambdaExpression e, SerializationContext ctx, ITypeTransformations typeTrans)
+            : base(e, ctx, typeTrans)
         {
-            Children.Add(SerializableExpression.FromExpression(e.Body, ctx));
-            Children.AddRange(e.Parameters.Select(p => SerializableExpression.FromExpression(p, ctx)));
+            Children.Add(SerializableExpression.FromExpression(e.Body, ctx, typeTrans));
+            Children.AddRange(e.Parameters.Select(p => SerializableExpression.FromExpression(p, ctx, typeTrans)));
         }
 
         internal override Expression ToExpressionInternal(SerializationContext ctx)
@@ -451,8 +457,8 @@ namespace Kistl.API
     [Serializable]
     public class SerializableParameterExpression : SerializableExpression
     {
-        internal SerializableParameterExpression(ParameterExpression e, SerializationContext ctx)
-            : base(e, ctx)
+        internal SerializableParameterExpression(ParameterExpression e, SerializationContext ctx, ITypeTransformations typeTrans)
+            : base(e, ctx, typeTrans)
         {
             this.Name = e.Name;
         }
@@ -490,8 +496,8 @@ namespace Kistl.API
         [DataMember]
         public List<MemberInfo> Members;
 
-        internal SerializableNewExpression(NewExpression source, SerializationContext ctx)
-            : base(source, ctx)
+        internal SerializableNewExpression(NewExpression source, SerializationContext ctx, ITypeTransformations typeTrans)
+            : base(source, ctx, typeTrans)
         {
             Constructor = source.Constructor;
             if (source.Members != null)
@@ -499,7 +505,7 @@ namespace Kistl.API
                 Members = source.Members.ToList();
             }
 
-            Children = source.Arguments.Select(a => SerializableExpression.FromExpression(a, ctx)).ToList();
+            Children = source.Arguments.Select(a => SerializableExpression.FromExpression(a, ctx, typeTrans)).ToList();
         }
 
         internal override Expression ToExpressionInternal(SerializationContext ctx)
@@ -531,12 +537,12 @@ namespace Kistl.API
         [DataMember]
         public SerializableExpression IfFalse { get; set; }
 
-        internal SerializableConditionalExpression(ConditionalExpression source, SerializationContext ctx)
-            : base(source, ctx)
+        internal SerializableConditionalExpression(ConditionalExpression source, SerializationContext ctx, ITypeTransformations typeTrans)
+            : base(source, ctx, typeTrans)
         {
-            Test = SerializableExpression.FromExpression(source.Test, ctx);
-            IfTrue = SerializableExpression.FromExpression(source.IfTrue, ctx);
-            IfFalse = SerializableExpression.FromExpression(source.IfFalse, ctx);
+            Test = SerializableExpression.FromExpression(source.Test, ctx, typeTrans);
+            IfTrue = SerializableExpression.FromExpression(source.IfTrue, ctx, typeTrans);
+            IfFalse = SerializableExpression.FromExpression(source.IfFalse, ctx, typeTrans);
         }
 
         internal override Expression ToExpressionInternal(SerializableExpression.SerializationContext ctx)

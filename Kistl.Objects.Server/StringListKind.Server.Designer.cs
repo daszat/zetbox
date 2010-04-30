@@ -123,9 +123,9 @@ namespace Kistl.App.GUI
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.StringListKind, Kistl.App.GUI.ControlKindClass> OnItemKind_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.StringListKind, Kistl.App.GUI.ControlKindClass> OnItemKind_PostSetter;
 
-		public override InterfaceType GetInterfaceType()
+		public override Type GetImplementedInterface()
 		{
-			return new InterfaceType(typeof(StringListKind));
+			return typeof(StringListKind);
 		}
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)

@@ -125,7 +125,7 @@ namespace Kistl.Client.Presentables
             List<DataObjectModel> result = new List<DataObjectModel>();
 
             foreach (var obj in DataContext
-                .GetQuery(new InterfaceType(Property.GetPropertyType()))
+                .GetQuery(DataContext.GetInterfaceType(Property.GetPropertyType()))
                 .ToList() // TODO: remove this
                 .OrderBy(obj => obj.ToString()).ToList())
             {

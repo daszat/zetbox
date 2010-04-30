@@ -34,9 +34,9 @@ namespace Kistl.API.Mocks
 
         #endregion
 
-        public override InterfaceType GetInterfaceType()
+        public override Type GetImplementedInterface()
         {
-            return new InterfaceType(typeof(TestCompoundObject));
+            return typeof(TestCompoundObject);
         }
     }
 }

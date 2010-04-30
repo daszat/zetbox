@@ -13,17 +13,8 @@ using NUnit.Framework;
 namespace Kistl.DalProvider.EF.Tests
 {
     [TestFixture]
-    public class QueryTranslatorTests
+    public class QueryTranslatorTests : AbstractEFTestFixture
     {
-        IKistlContext ctx;
-
-        [SetUp]
-        public void Init()
-        {
-            var testCtx = new ServerApiContextMock();
-            ctx = KistlContext.GetContext();
-        }
-
         public interface TestInterface
         {
             int ID { get; }

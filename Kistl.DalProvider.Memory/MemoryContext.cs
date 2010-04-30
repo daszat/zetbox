@@ -13,9 +13,8 @@ namespace Kistl.DalProvider.Memory
     {
         private static readonly List<IPersistenceObject> emptylist = new List<IPersistenceObject>(0);
 
-        public MemoryContext(IInterfaceTypeFilter ifFilter)
-            : base(ifFilter, System.Reflection.Assembly.Load(Kistl.API.Helper.InterfaceAssembly),
-                System.Reflection.Assembly.Load(ServerProvider.GeneratedAssemblyName))
+        public MemoryContext(ITypeTransformations typeTrans)
+            : base(typeTrans)
         {
         }
 

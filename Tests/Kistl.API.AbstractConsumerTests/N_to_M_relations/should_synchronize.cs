@@ -12,10 +12,8 @@ using NUnit.Framework;
 namespace Kistl.API.AbstractConsumerTests.N_to_M_relations
 {
 
-    public abstract class should_synchronize
+    public abstract class should_synchronize : AbstractTextFixture
     {
-        protected abstract IKistlContext GetContext();
-
         IKistlContext ctx;
         Projekt proj1;
         Projekt proj2;

@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Kistl.API.Server.Tests;
+using Kistl.App.Base;
+using Kistl.API.Configuration;
 
 namespace Kistl.API.Server.Mocks
 {
     public class KistlContextMock : BaseKistlDataContext
     {
         public Dictionary<int, TestObjClass__Implementation__> TestObjClasses = new Dictionary<int, TestObjClass__Implementation__>();
-        public KistlContextMock()
-            : base(new MetaDataResolverMock(), null, null)
+        public KistlContextMock(IMetaDataResolver metaDataResolver, Identity identity, KistlConfig config, ITypeTransformations typeTrans)
+            : base(metaDataResolver, identity, config, typeTrans)
         {
             TestObjClasses[1] = new TestObjClass__Implementation__() { ID = 1 };
             TestObjClasses[3] = new TestObjClass__Implementation__() { ID = 3 };

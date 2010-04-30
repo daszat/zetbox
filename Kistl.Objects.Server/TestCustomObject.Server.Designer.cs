@@ -591,9 +591,9 @@ namespace Kistl.App.Test
         }
         private EFValueCollectionWrapper<TestCustomObject, Kistl.App.Test.TestPhoneCompoundObject, TestCustomObject_PhoneNumbersOther_CollectionEntry__Implementation__, EntityCollection<TestCustomObject_PhoneNumbersOther_CollectionEntry__Implementation__>> _PhoneNumbersOtherWrapper;
 
-		public override InterfaceType GetInterfaceType()
+		public override Type GetImplementedInterface()
 		{
-			return new InterfaceType(typeof(TestCustomObject));
+			return typeof(TestCustomObject);
 		}
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)

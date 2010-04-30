@@ -30,9 +30,7 @@ namespace Kistl.API.Client.Tests
         {
             if (ctx == null)
             {
-                var testCtx = new ClientApplicationContextMock();
-                testCtx.SetInterfaceAssembly_Objects();
-                ctx = KistlContext.GetContext();
+                ctx = GetContext();
             }
         }
 

@@ -646,9 +646,9 @@ namespace Kistl.App.Projekte
 		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Kunde, string> OnPLZ_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Kunde, string> OnPLZ_PostSetter;
 
-		public override InterfaceType GetInterfaceType()
+		public override Type GetImplementedInterface()
 		{
-			return new InterfaceType(typeof(Kunde));
+			return typeof(Kunde);
 		}
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)

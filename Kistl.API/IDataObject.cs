@@ -223,12 +223,6 @@ namespace Kistl.API
         /// </summary>
         /// <param name="obj">the object to copy from</param>
         void ApplyChangesFrom(IPersistenceObject obj);
-
-        /// <summary>
-        /// Returns the most specific <see cref="InterfaceType"/> implemented by this object.
-        /// </summary>
-        /// <returns>the <see cref="InterfaceType"/> of this object</returns>
-        InterfaceType GetInterfaceType();
     }
 
     /// <summary>

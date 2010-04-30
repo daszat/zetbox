@@ -20,7 +20,8 @@ namespace Kistl.API
         /// only interface types are stored. Usually this is used to declare the type of the following IPersistenceObject.
         /// </summary>
         /// <param name="ifType">System.Type to serialize</param>
-        public SerializableType(InterfaceType ifType)
+        /// <param name="typeTrans"></param>
+        internal SerializableType(InterfaceType ifType, ITypeTransformations typeTrans)
         {
             var type = ifType.Type;
 
@@ -31,7 +32,7 @@ namespace Kistl.API
                 AssemblyQualifiedName = genericType.AssemblyQualifiedName;
 
                 GenericTypeParameter = type.GetGenericArguments()
-                    .Select(t => new SerializableType(new InterfaceType(t)))
+                    .Select(t => new SerializableType(typeTrans.AsInterfaceType(t), typeTrans))
                     .ToList();
             }
             else
@@ -64,9 +65,10 @@ namespace Kistl.API
         [DataMember]
         public List<SerializableType> GenericTypeParameter { get; set; }
 
-        public InterfaceType GetInterfaceType()
+        public InterfaceType GetInterfaceType(ITypeTransformations typeTrans)
         {
-            return new InterfaceType(GetSystemType());
+            if (typeTrans == null) throw new ArgumentNullException("typeTrans");
+            return typeTrans.AsInterfaceType(GetSystemType());
         }
 
         /// <summary>

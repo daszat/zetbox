@@ -82,7 +82,7 @@ namespace Kistl.API.Client
         public override void AttachToContext(IKistlContext ctx)
         {
             base.AttachToContext(ctx);
-            if (ctx.ContainsObject(this.GetInterfaceType(), this.ID) == null)
+            if (ctx.ContainsObject(ctx.GetInterfaceType(this), this.ID) == null)
             {
                 // Object is not in this Context present
                 // -> Attach it. Attach will call this Method again!
@@ -137,7 +137,7 @@ namespace Kistl.API.Client
 
         public virtual void UpdateParent(string propertyName, int? id)
         {
-            throw new MemberAccessException(String.Format("No {0} property in {1}", propertyName, GetInterfaceType().Type.FullName));
+            throw new MemberAccessException(String.Format("No {0} property in {1}", propertyName, GetImplementedInterface().FullName));
         }
 
         /// <summary>

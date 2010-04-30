@@ -23,6 +23,11 @@ namespace Kistl.Objects.Frozen
 	public class FrozenContextImplementation
 		: Kistl.DalProvider.Frozen.BaseFrozenContext
 	{
+		public FrozenContextImplementation(ITypeTransformations typeTrans)
+			: base(typeTrans)
+		{
+		}
+	
 		static FrozenContextImplementation()
 		{
 <%

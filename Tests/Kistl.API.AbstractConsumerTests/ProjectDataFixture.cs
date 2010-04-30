@@ -12,10 +12,12 @@ namespace Kistl.API.AbstractConsumerTests
 
     using NUnit.Framework;
 
+    using Autofac;
+
     /// <summary>
     /// This fixture creates a set of Kunden, Projekte, Mitarbeiter and Tasks for testing.
     /// </summary>
-    public abstract class ProjectDataFixture
+    public abstract class ProjectDataFixture : AbstractTextFixture
     {
         /// <summary>
         /// Creates a few new test objects
@@ -84,16 +86,9 @@ namespace Kistl.API.AbstractConsumerTests
         }
 
         /// <summary>
-        /// Override this method to provide the context under test.
-        /// </summary>
-        /// <returns>a context that can be used for creating and deleting the test objects</returns>
-        protected abstract IKistlContext GetContext();
-
-        /// <summary>
         /// Deletes all existing test data and creates new objects.
         /// </summary>
-        [SetUp]
-        public void SetUp()
+        public override void SetUp()
         {
             using (var ctx = GetContext())
             {

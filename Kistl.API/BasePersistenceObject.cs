@@ -17,6 +17,11 @@ namespace Kistl.API
         : BaseNotifyingObject, IPersistenceObject, IDataErrorInfo, ICustomTypeDescriptor
     {
         /// <summary>
+        /// Interfacetype Factory injected by a Context
+        /// </summary>
+        public ITypeTransformations TypeTrans { get; set; }
+
+        /// <summary>
         /// Gets or sets the primary key of this object. By convention all persistent objects have to have this synthesised primary key.
         /// </summary>
         public abstract int ID { get; set; }
@@ -84,17 +89,18 @@ namespace Kistl.API
         {
             if (obj == null)
                 throw new ArgumentNullException("obj");
-            if (obj.GetType().ToInterfaceType() != this.GetType().ToInterfaceType())
+            if (((BasePersistenceObject)obj).GetImplementedInterface() != this.GetImplementedInterface())
                 throw new ArgumentOutOfRangeException("obj");
 
             this.ID = obj.ID;
         }
 
+
         /// <summary>
-        /// Returns the most specific <see cref="InterfaceType"/> implemented by this object.
+        /// Returns the most specific System.Type implemented by this object.
         /// </summary>
-        /// <returns>the <see cref="InterfaceType"/> of this object</returns>
-        public abstract InterfaceType GetInterfaceType();
+        /// <returns>the System.Type of this object</returns>
+        public abstract Type GetImplementedInterface();
 
         #region IStreamable Members
 
@@ -109,7 +115,7 @@ namespace Kistl.API
             if (sw == null)
                 throw new ArgumentNullException("sw");
 
-            BinarySerializer.ToStream(new SerializableType(this.GetInterfaceType()), sw);
+            BinarySerializer.ToStream(Context.GetInterfaceType(this.GetImplementedInterface()).ToSerializableType(), sw);
             BinarySerializer.ToStream(this.ID, sw);
         }
 

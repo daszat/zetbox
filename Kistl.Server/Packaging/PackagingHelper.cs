@@ -45,9 +45,9 @@ namespace Kistl.Server.Packaging
 
             // TODO: Add Module to Constraint - or should that not be changable by other modules?
             AddMetaObjects(result, ctx.GetQuery<Constraint>().Where(i => i.ConstrainedProperty.Module.ID == moduleID).ToList().AsQueryable() // local sorting because of GetInterfaceType
-                .OrderBy(i => i.ConstrainedProperty.ObjectClass.Name).ThenBy(i => i.ConstrainedProperty.Name).ThenBy(i => i.GetInterfaceType().Type.Name).ThenBy(i => i.ExportGuid));
+                .OrderBy(i => i.ConstrainedProperty.ObjectClass.Name).ThenBy(i => i.ConstrainedProperty.Name).ThenBy(i => ctx.GetInterfaceType(i).Type.Name).ThenBy(i => i.ExportGuid));
             foreach (var invokingConstraint in ctx.GetQuery<InvokingConstraint>().Where(i => i.ConstrainedProperty.Module.ID == moduleID).ToList().AsQueryable() // local sorting because of GetInterfaceType
-                .OrderBy(i => i.ConstrainedProperty.ObjectClass.Name).ThenBy(i => i.ConstrainedProperty.Name).ThenBy(i => i.GetInterfaceType().Type.Name).ThenBy(i => i.ExportGuid))
+                .OrderBy(i => i.ConstrainedProperty.ObjectClass.Name).ThenBy(i => i.ConstrainedProperty.Name).ThenBy(i => ctx.GetInterfaceType(i).Type.Name).ThenBy(i => i.ExportGuid))
             {
                 result.Add(invokingConstraint.IsValidInvocation);
                 result.Add(invokingConstraint.GetErrorTextInvocation);
@@ -89,7 +89,7 @@ namespace Kistl.Server.Packaging
             {
                 AddMetaObjects(result, ctx.GetQuery<ControlKind>()// TODO: .Where(i => i.Module.ID == moduleID)
                     .ToList().AsQueryable() // TODO: remove this workaround for GetInterfaceType()
-                    .OrderBy(i => i.GetInterfaceType().Type.FullName).ThenBy(i => i.ExportGuid));
+                    .OrderBy(i => ctx.GetInterfaceType(i).Type.FullName).ThenBy(i => i.ExportGuid));
                 AddMetaObjects(result, ctx.GetPersistenceObjectQuery<ViewModelDescriptor_displayedBy_ControlKind_RelationEntry>()
                     .ToList().AsQueryable() // TODO: remove this workaround for GetType()
                     .OrderBy(i => i.A.ViewModelRef.Assembly.Name).ThenBy(i => i.A.ViewModelRef.FullName)

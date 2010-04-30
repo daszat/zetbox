@@ -22,7 +22,7 @@ namespace Kistl.API.Client
 
         protected override TEntry CreateEntry(object item)
         {
-            return (TEntry)ParentObject.Context.CreateRelationCollectionEntry(new ImplementationType(typeof(TEntry)).ToInterfaceType());
+            return (TEntry)ParentObject.Context.CreateRelationCollectionEntry(ParentObject.Context.GetImplementationType(typeof(TEntry)).ToInterfaceType());
         }
 
         protected override void OnEntryAdded(TEntry entry)
@@ -66,7 +66,7 @@ namespace Kistl.API.Client
 
         protected override TEntry CreateEntry(object item)
         {
-            return (TEntry)ParentObject.Context.CreateRelationCollectionEntry(new ImplementationType(typeof(TEntry)).ToInterfaceType());
+            return (TEntry)ParentObject.Context.CreateRelationCollectionEntry(ParentObject.Context.GetImplementationType(typeof(TEntry)).ToInterfaceType());
         }
 
         protected override void OnEntryAdded(TEntry entry)
@@ -110,7 +110,7 @@ namespace Kistl.API.Client
 
         protected override TEntry CreateEntry(object item)
         {
-            return (TEntry)ParentObject.Context.CreateRelationCollectionEntry(new ImplementationType(typeof(TEntry)).ToInterfaceType());
+            return (TEntry)ParentObject.Context.CreateRelationCollectionEntry(ParentObject.Context.GetImplementationType(typeof(TEntry)).ToInterfaceType());
         }
 
         protected override void OnEntryAdded(TEntry entry)
@@ -154,7 +154,7 @@ namespace Kistl.API.Client
 
         protected override TEntry CreateEntry(object item)
         {
-            return (TEntry)ParentObject.Context.CreateRelationCollectionEntry(new ImplementationType(typeof(TEntry)).ToInterfaceType());
+            return (TEntry)ParentObject.Context.CreateRelationCollectionEntry(ParentObject.Context.GetImplementationType(typeof(TEntry)).ToInterfaceType());
         }
 
         protected override void OnEntryAdded(TEntry entry)

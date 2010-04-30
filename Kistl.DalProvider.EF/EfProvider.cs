@@ -47,7 +47,7 @@ namespace Kistl.DalProvider.EF
                     // EF's meta data initialization is not thread-safe
                     lock (_lock)
                     {
-                        return new KistlDataContext(c.Resolve<IMetaDataResolver>(), null, c.Resolve<KistlConfig>());
+                        return new KistlDataContext(c.Resolve<IMetaDataResolver>(), null, c.Resolve<KistlConfig>(), c.Resolve<ITypeTransformations>());
                     }
                 })
                 .As<IKistlServerContext>()
@@ -63,7 +63,7 @@ namespace Kistl.DalProvider.EF
                         return new KistlDataContext(
                             c.Resolve<IMetaDataResolver>(),
                             param != null ? (Kistl.App.Base.Identity)param.Value : c.Resolve<IIdentityResolver>().GetCurrent(),
-                            c.Resolve<KistlConfig>());
+                            c.Resolve<KistlConfig>(), c.Resolve<ITypeTransformations>());
                     }
                 })
                 .As<IKistlContext>()
@@ -76,7 +76,7 @@ namespace Kistl.DalProvider.EF
                     lock (_lock)
                     {
                         var resolver = new CachingMetaDataResolver();
-                        var result = new KistlDataContext(resolver, null, c.Resolve<KistlConfig>());
+                        var result = new KistlDataContext(resolver, null, c.Resolve<KistlConfig>(), c.Resolve<ITypeTransformations>());
                         resolver.Context = result;
                         return result;
                     }
@@ -91,9 +91,8 @@ namespace Kistl.DalProvider.EF
                     // initialisation troubles
 
                     // TODO: decide whether to load this from configuration too?
-                    System.Reflection.Assembly interfaces = System.Reflection.Assembly.Load(Kistl.API.Helper.InterfaceAssembly);
-                    System.Reflection.Assembly implementation = System.Reflection.Assembly.Load(Kistl.API.Helper.ServerAssembly);
-                    return new MemoryContext(c.Resolve<IInterfaceTypeFilter>(), interfaces, implementation);
+                    // TODO: Replace the default TypeTransformations with other configuration
+                    return new MemoryContext(c.Resolve<ITypeTransformations>());
                 })
                 .InstancePerDependency();
 

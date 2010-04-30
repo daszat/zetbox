@@ -13,6 +13,12 @@ namespace Kistl.DalProvider.ClientObjects.Mocks
     public class ProxyMock : IProxy
     {
         private int newID = 10;
+        private ITypeTransformations typeTrans;
+
+        public ProxyMock(ITypeTransformations typeTrans)
+        {
+            this.typeTrans = typeTrans;
+        }
 
         public void Generate()
         {
@@ -52,9 +58,9 @@ namespace Kistl.DalProvider.ClientObjects.Mocks
             return result.Cast<IDataObject>();
         }
 
-        private static T CreateInstance<T>(int id)
+        private T CreateInstance<T>(int id)
         {
-            InterfaceType ifType = new InterfaceType(typeof(T));
+            InterfaceType ifType = typeTrans.AsInterfaceType(typeof(T));
             return (T)CreateInstance(ifType, id);
         }
 
@@ -87,7 +93,7 @@ namespace Kistl.DalProvider.ClientObjects.Mocks
             return result.Cast<IDataObject>();
         }
 
-        private static IEnumerable<IDataObject> GetList_TestObjClass()
+        private IEnumerable<IDataObject> GetList_TestObjClass()
         {
             var result = new List<TestObjClass>();
             result.Add(CreateInstance<TestObjClass>(1));
@@ -143,7 +149,7 @@ namespace Kistl.DalProvider.ClientObjects.Mocks
             var result = new List<IPersistenceObject>();
             foreach (var obj in objects)
             {
-                var type = obj.GetInterfaceType();
+                var type = ctx.GetInterfaceType(obj);
                 if (type == null) throw new ArgumentNullException("type");
 
                 if (obj.ObjectState != DataObjectState.Deleted)

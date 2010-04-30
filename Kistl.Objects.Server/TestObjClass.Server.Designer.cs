@@ -341,9 +341,9 @@ namespace Kistl.App.Test
 
 
 
-		public override InterfaceType GetInterfaceType()
+		public override Type GetImplementedInterface()
 		{
-			return new InterfaceType(typeof(TestObjClass));
+			return typeof(TestObjClass);
 		}
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)

@@ -10,27 +10,27 @@ namespace Kistl.API.Client.Tests
     using Kistl.API.Utils;
 
     using NUnit.Framework;
+    using Autofac;
 
     [TestFixture]
-    public class KistlContextTests
+    public class KistlContextTests : AbstractApiClientTestFixture
     {
         private IKistlContext ctx;
+        private ITypeTransformations typeTrans;
 
-        [SetUp]
-        public void SetUp()
+        public override void SetUp()
         {
             Logging.Log.Info("KistlContextTests.SetUp() is called");
 
-            var testCtx = new ClientApplicationContextMock();
-
-            ctx = KistlContext.GetContext();
+            this.typeTrans = scope.Resolve<ITypeTransformations>();
+            ctx = GetContext();
             //CacheController<Kistl.API.IDataObject>.Current.Clear();
         }
 
         [Test]
         public void GetQuery_ObjectType_should_create_query_with_proper_ElementType()
         {
-            IQueryable<IDataObject> query = ctx.GetQuery(new InterfaceType(typeof(TestObjClass)));
+            IQueryable<IDataObject> query = ctx.GetQuery(typeTrans.AsInterfaceType(typeof(TestObjClass)));
             Assert.That(query, Is.Not.Null);
             Assert.That(query.ElementType, Is.EqualTo(typeof(IDataObject)));
         }
@@ -59,7 +59,7 @@ namespace Kistl.API.Client.Tests
         public void Find_ObjectType_should_return_correct_item()
         {
             int targetId = 1;
-            TestObjClass obj = (TestObjClass)ctx.Find(new InterfaceType(typeof(TestObjClass)), targetId);
+            TestObjClass obj = (TestObjClass)ctx.Find(typeTrans.AsInterfaceType(typeof(TestObjClass)), targetId);
             Assert.That(obj, Is.Not.Null);
             Assert.That(obj, Is.InstanceOf(typeof(TestObjClass)));
             Assert.That(obj.ID, Is.EqualTo(targetId));
@@ -109,7 +109,7 @@ namespace Kistl.API.Client.Tests
         [Test]
         public void GetListOf()
         {
-            List<TestObjClass> list = ctx.GetListOf<TestObjClass>(new InterfaceType(typeof(TestObjClass)), 1, "Children");
+            List<TestObjClass> list = ctx.GetListOf<TestObjClass>(typeTrans.AsInterfaceType(typeof(TestObjClass)), 1, "Children");
             Assert.That(list, Is.Not.Null);
             Assert.That(list.Count, Is.AtLeast(2));
             list.ForEach(obj => Assert.That(obj, Is.Not.Null));
@@ -120,12 +120,12 @@ namespace Kistl.API.Client.Tests
         [Test]
         public void GetListOf_Twice()
         {
-            List<TestObjClass> list1 = ctx.GetListOf<TestObjClass>(new InterfaceType(typeof(TestObjClass)), 1, "Children");
+            List<TestObjClass> list1 = ctx.GetListOf<TestObjClass>(typeTrans.AsInterfaceType(typeof(TestObjClass)), 1, "Children");
             Assert.That(list1, Is.Not.Null);
             Assert.That(list1.Count, Is.AtLeast(2));
             list1.ForEach(obj => Assert.That(obj, Is.Not.Null));
 
-            List<TestObjClass> list2 = ctx.GetListOf<TestObjClass>(new InterfaceType(typeof(TestObjClass)), 1, "Children");
+            List<TestObjClass> list2 = ctx.GetListOf<TestObjClass>(typeTrans.AsInterfaceType(typeof(TestObjClass)), 1, "Children");
             Assert.That(list2, Is.Not.Null);
             Assert.That(list2.Count, Is.EqualTo(list1.Count));
             list2.ForEach(obj => Assert.That(obj, Is.Not.Null));
@@ -161,7 +161,7 @@ namespace Kistl.API.Client.Tests
             Assert.That(obj, Is.Not.Null);
             Assert.That(obj.ID, Is.EqualTo(3));
 
-            List<TestObjClass> list = ctx.GetListOf<TestObjClass>(new InterfaceType(typeof(TestObjClass)), 1, "Children");
+            List<TestObjClass> list = ctx.GetListOf<TestObjClass>(typeTrans.AsInterfaceType(typeof(TestObjClass)), 1, "Children");
             Assert.That(list, Is.Not.Null);
             Assert.That(list.Count, Is.AtLeast(2));
 
@@ -179,7 +179,7 @@ namespace Kistl.API.Client.Tests
             Assert.That(list, Is.Not.Null);
             Assert.That(list.Count, Is.AtLeast(2));
 
-            List<TestObjClass> listOf = ctx.GetListOf<TestObjClass>(new InterfaceType(typeof(TestObjClass)), 1, "Children");
+            List<TestObjClass> listOf = ctx.GetListOf<TestObjClass>(typeTrans.AsInterfaceType(typeof(TestObjClass)), 1, "Children");
             Assert.That(listOf, Is.Not.Null);
             Assert.That(listOf.Count, Is.AtLeast(2));
 
@@ -208,7 +208,7 @@ namespace Kistl.API.Client.Tests
         [Test]
         public void Create_Type()
         {
-            TestObjClass obj = ctx.Create(new InterfaceType(typeof(TestObjClass))) as TestObjClass;
+            TestObjClass obj = ctx.Create(typeTrans.AsInterfaceType(typeof(TestObjClass))) as TestObjClass;
             Assert.That(obj, Is.Not.Null);
             Assert.That(obj.ID, Is.LessThan(Helper.INVALIDID));
             Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.New));
@@ -218,7 +218,7 @@ namespace Kistl.API.Client.Tests
         [Test]
         public void Create_ObjectType()
         {
-            TestObjClass obj = ctx.Create(new InterfaceType(typeof(TestObjClass))) as TestObjClass;
+            TestObjClass obj = ctx.Create(typeTrans.AsInterfaceType(typeof(TestObjClass))) as TestObjClass;
             Assert.That(obj, Is.Not.Null);
             Assert.That(obj.ID, Is.LessThan(Helper.INVALIDID));
             Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.New));

@@ -21,11 +21,9 @@ namespace Kistl.API
         /// <summary>
         /// Initializes a new instance of the MemoryContext class, using the specified assemblies for interfaces and implementation.
         /// </summary>
-        /// <param name="ifFilter">An interface type filter, passed in from the container</param>
-        /// <param name="interfaces">The assembly containing the interfaces available in this context. MUST not be null.</param>
-        /// <param name="implementations">The assembly containing the classes implementing the interfaces in this context. MUST not be null.</param>
-        public MemoryContext(IInterfaceTypeFilter ifFilter, Assembly interfaces, Assembly implementations)
-            : base(ifFilter, interfaces, implementations)
+        /// <param name="typeTrans"></param>
+        public MemoryContext(ITypeTransformations typeTrans)
+            : base(typeTrans)
         {
         }
 
@@ -39,7 +37,7 @@ namespace Kistl.API
         /// <returns>A newly created, unattached instance of the implementation for the specified interface.</returns>
         protected override object CreateUnattachedInstance(InterfaceType ifType)
         {
-            var implType = ImplementationAssembly.GetType(ifType.Type.FullName + Kistl.API.Helper.ImplementationSuffix);
+            var implType = ifType.ToImplementationType().Type;
             return Activator.CreateInstance(implType);
         }
     }

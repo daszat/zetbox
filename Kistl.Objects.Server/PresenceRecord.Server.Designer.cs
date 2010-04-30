@@ -252,9 +252,9 @@ namespace Kistl.App.TimeRecords
 		public static event PropertyPreSetterHandler<Kistl.App.TimeRecords.PresenceRecord, DateTime?> OnThru_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.TimeRecords.PresenceRecord, DateTime?> OnThru_PostSetter;
 
-		public override InterfaceType GetInterfaceType()
+		public override Type GetImplementedInterface()
 		{
-			return new InterfaceType(typeof(PresenceRecord));
+			return typeof(PresenceRecord);
 		}
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)

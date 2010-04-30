@@ -20,8 +20,8 @@ namespace Kistl.DalProvider.EF
         {
             return GetServerCollectionHandlerHelper(
                 typeof(ServerCollectionHandler<,,,>),
-                KistlDataContext.ImplementationType(aType),
-                KistlDataContext.ImplementationType(bType),
+                aType.ToImplementationType(),
+                bType.ToImplementationType(),
                 endRole);
         }
 

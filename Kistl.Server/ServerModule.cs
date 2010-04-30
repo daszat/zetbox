@@ -77,18 +77,14 @@ namespace Kistl.Server
                 .Register(c =>
                 {
                     var ctx = c.Resolve<IReadOnlyKistlContext>();
+                    var aCfg = c.Resolve<IAssemblyConfiguration>();
 
-                    var cams = new CustomActionsManagerServer();
+                    var cams = new CustomActionsManagerServer(aCfg);
                     cams.Init(ctx);
 
                     return cams;
                 })
                 .As<BaseCustomActionsManager>()
-                .SingleInstance();
-
-            moduleBuilder
-                .Register(c => new ServerApplicationContext())
-                .As<ApplicationContext>()
                 .SingleInstance();
 
             moduleBuilder

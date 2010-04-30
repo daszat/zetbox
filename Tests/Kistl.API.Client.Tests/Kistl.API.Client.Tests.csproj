@@ -66,9 +66,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AbstractApiClientTestFixture.cs" />
     <Compile Include="Mocks\BaseClientDataObjectMock.cs" />
     <Compile Include="Mocks\CustomActionsManagerAPITest.cs" />
-    <Compile Include="Mocks\ClientApplicationContextMock.cs" />
     <Compile Include="Mocks\MitarbeiterMock.cs" />
     <Compile Include="Mocks\OneNLists\INSide.cs" />
     <Compile Include="Mocks\OneNLists\IOneSide.cs" />

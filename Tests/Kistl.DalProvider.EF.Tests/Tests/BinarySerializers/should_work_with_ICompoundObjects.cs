@@ -20,9 +20,9 @@ namespace Kistl.DalProvider.EF.Tests.BinarySerializers
 
     public class CompoundObjectMock__Implementation__ : BaseServerCompoundObject_EntityFramework
     {
-        public override InterfaceType GetInterfaceType()
+        public override Type GetImplementedInterface()
         {
-            return new InterfaceType(typeof(CompoundObjectMock));
+            return typeof(CompoundObjectMock);
         }
     }
 

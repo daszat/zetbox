@@ -13,24 +13,23 @@ using Kistl.App.Test;
 using Kistl.DalProvider.EF.Mocks;
 
 using NUnit.Framework;
+using Autofac;
 
 namespace Kistl.DalProvider.EF.Tests
 {
     [TestFixture]
     public class ContextTests : AbstractContextTests
     {
-
-        protected override IKistlContext GetContext() { return KistlContext.GetContext(); }
-
         int firstId;
         int secondId;
+        ITypeTransformations typeTrans;
 
         [SetUp]
         public new void SetUp()
         {
-            var appCtx = new ServerApiContextMock();
+            typeTrans = scope.Resolve<ITypeTransformations>();
 
-            using (IKistlContext ctx = KistlContext.GetContext())
+            using (IKistlContext ctx = GetContext())
             {
                 var result = ctx.GetQuery<TestObjClass>();
                 var list = result.ToList();
@@ -80,7 +79,7 @@ namespace Kistl.DalProvider.EF.Tests
         {
             using (IKistlContext ctx = KistlContext.GetContext())
             {
-                var result = ctx.GetQuery(new InterfaceType(typeof(TestObjClass)));
+                var result = ctx.GetQuery(typeTrans.AsInterfaceType(typeof(TestObjClass)));
                 Assert.That(result, Is.Not.Null);
                 var testObj = result.First(o => o.ID == firstId);
                 Assert.That(testObj, Is.Not.Null);
@@ -115,7 +114,7 @@ namespace Kistl.DalProvider.EF.Tests
         {
             using (IKistlContext ctx = KistlContext.GetContext())
             {
-                TestObjClass obj = (TestObjClass)ctx.Find(new InterfaceType(typeof(TestObjClass)), firstId);
+                TestObjClass obj = (TestObjClass)ctx.Find(typeTrans.AsInterfaceType(typeof(TestObjClass)), firstId);
                 Assert.That(obj, Is.Not.Null);
                 Assert.That(obj.ID, Is.EqualTo(firstId));
                 Assert.That(obj.TestEnumProp, Is.EqualTo(TestEnum.First));
@@ -128,7 +127,7 @@ namespace Kistl.DalProvider.EF.Tests
         {
             using (IKistlContext ctx = KistlContext.GetContext())
             {
-                TestObjClass obj = (TestObjClass)ctx.Find(new InterfaceType(typeof(TestObjClass)), Kistl.API.Helper.INVALIDID);
+                TestObjClass obj = (TestObjClass)ctx.Find(typeTrans.AsInterfaceType(typeof(TestObjClass)), Kistl.API.Helper.INVALIDID);
             }
         }
 
@@ -150,7 +149,7 @@ namespace Kistl.DalProvider.EF.Tests
             using (IKistlContext ctx = KistlContext.GetContext())
             {
                 var obj = ctx.GetQuery<ObjectClass>().First(o => o.Name == "DataType");
-                List<ObjectClass> result = ctx.GetListOf<ObjectClass>(new InterfaceType(typeof(ObjectClass)), obj.ID, "SubClasses").ToList();
+                List<ObjectClass> result = ctx.GetListOf<ObjectClass>(typeTrans.AsInterfaceType(typeof(ObjectClass)), obj.ID, "SubClasses").ToList();
                 Assert.That(result, Is.Not.Null);
                 Assert.That(result.Count, Is.GreaterThan(0));
             }
@@ -173,7 +172,7 @@ namespace Kistl.DalProvider.EF.Tests
         {
             using (IKistlContext ctx = KistlContext.GetContext())
             {
-                var result = ctx.GetListOf<TestObjClass>(new InterfaceType(typeof(TestObjClass)), firstId, "NotAProperty");
+                var result = ctx.GetListOf<TestObjClass>(typeTrans.AsInterfaceType(typeof(TestObjClass)), firstId, "NotAProperty");
             }
         }
 
@@ -195,7 +194,7 @@ namespace Kistl.DalProvider.EF.Tests
             using (IKistlContext ctx = KistlContext.GetContext())
             {
                 var obj = ctx.GetQuery<ObjectClass>().First(o => o.Name == "DataType");
-                var result = ctx.GetListOf<TestObjClass>(new InterfaceType(typeof(ObjectClass)), obj.ID, "SubClasses").ToList();
+                var result = ctx.GetListOf<TestObjClass>(typeTrans.AsInterfaceType(typeof(ObjectClass)), obj.ID, "SubClasses").ToList();
             }
         }
 
@@ -393,7 +392,7 @@ namespace Kistl.DalProvider.EF.Tests
                 ctx.Create<TestObjClass>();
                 Assert.That(ctx.AttachedObjects.Count(), Is.EqualTo(2));
 
-                Assert.That(ctx.ContainsObject(obj.GetInterfaceType(), obj.ID), Is.EqualTo(obj));
+                Assert.That(ctx.ContainsObject(ctx.GetInterfaceType(obj), obj.ID), Is.EqualTo(obj));
             }
         }
 
@@ -406,7 +405,7 @@ namespace Kistl.DalProvider.EF.Tests
                 ctx.Create<TestObjClass>();
                 Assert.That(ctx.AttachedObjects.Count(), Is.EqualTo(1));
 
-                Assert.That(ctx.ContainsObject(obj.GetInterfaceType(), obj.ID), Is.Null);
+                Assert.That(ctx.ContainsObject(ctx.GetInterfaceType(obj), obj.ID), Is.Null);
             }
         }
 
@@ -433,7 +432,7 @@ namespace Kistl.DalProvider.EF.Tests
         {
             using (IKistlContext ctx = KistlContext.GetContext())
             {
-                TestObjClass newObj = ctx.Create(new InterfaceType(typeof(TestObjClass))) as TestObjClass;
+                TestObjClass newObj = ctx.Create(typeTrans.AsInterfaceType(typeof(TestObjClass))) as TestObjClass;
                 Assert.That(newObj, Is.Not.Null);
                 Assert.That(newObj.Context, Is.Not.Null);
             }
@@ -444,7 +443,7 @@ namespace Kistl.DalProvider.EF.Tests
         {
             using (IKistlContext ctx = KistlContext.GetContext())
             {
-                TestObjClass newObj = ctx.Create(new InterfaceType(typeof(TestObjClass))) as TestObjClass;
+                TestObjClass newObj = ctx.Create(typeTrans.AsInterfaceType(typeof(TestObjClass))) as TestObjClass;
                 Assert.That(newObj, Is.Not.Null);
                 Assert.That(newObj.Context, Is.Not.Null);
             }

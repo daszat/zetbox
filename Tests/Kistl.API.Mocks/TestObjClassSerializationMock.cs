@@ -33,31 +33,31 @@ namespace Kistl.API.Mocks
         public readonly static string[] TestTestNamesValues = new[] { "testname1", "testname2", "testname3" };
         public readonly static DataObjectState TestCollectionEntryState = DataObjectState.Unmodified;
 
-        private static SerializableType GetSerializableType<LOCALINTERFACE, ENUMTYPE>()
+        private static SerializableType GetSerializableType<LOCALINTERFACE, ENUMTYPE>(ITypeTransformations typeTrans)
             where LOCALINTERFACE : TestObjClass<LOCALINTERFACE, ENUMTYPE>
             where ENUMTYPE : struct
         {
-            return new SerializableType(new InterfaceType(typeof(LOCALINTERFACE)));
+            return new InterfaceType(typeof(LOCALINTERFACE), typeTrans).ToSerializableType();
         }
 
-        private static SerializableType GetSerializableCollectionEntryType<LOCALINTERFACE, ENUMTYPE>()
+        private static SerializableType GetSerializableCollectionEntryType<LOCALINTERFACE, ENUMTYPE>(ITypeTransformations typeTrans)
             where LOCALINTERFACE : TestObjClass<LOCALINTERFACE, ENUMTYPE>
             where ENUMTYPE : struct
         {
-            return new SerializableType(new InterfaceType(typeof(IValueCollectionEntry<LOCALINTERFACE, string>)));
+            return new InterfaceType(typeof(IValueCollectionEntry<LOCALINTERFACE, string>), typeTrans).ToSerializableType();
         }
 
         /// <summary>
         /// Serializes a test TestObjClass to the stream sw.
         /// </summary>
         /// <param name="sw"></param>
-        public static void ToStream<LOCALINTERFACE, ENUMTYPE>(BinaryWriter sw)
+        public static void ToStream<LOCALINTERFACE, ENUMTYPE>(BinaryWriter sw, ITypeTransformations typeTrans)
             where LOCALINTERFACE : TestObjClass<LOCALINTERFACE, ENUMTYPE>
             where ENUMTYPE : struct
         {
 
             // BaseServerPersistenceObject
-            BinarySerializer.ToStream(GetSerializableType<LOCALINTERFACE, ENUMTYPE>(), sw);
+            BinarySerializer.ToStream(GetSerializableType<LOCALINTERFACE, ENUMTYPE>(typeTrans), sw);
             BinarySerializer.ToStream(TestObjClassId, sw);
             BinarySerializer.ToStream((int)TestObjectState, sw);
 
@@ -82,7 +82,7 @@ namespace Kistl.API.Mocks
             BinarySerializer.ToStream((int)TestEnum.TestSerializationValue, sw);
 
             // TestNames
-            var ceType = GetSerializableCollectionEntryType<LOCALINTERFACE, ENUMTYPE>();
+            var ceType = GetSerializableCollectionEntryType<LOCALINTERFACE, ENUMTYPE>(typeTrans);
             for (int i = 0; i < TestTestNamesIds.Length; i++)
             {
                 BinarySerializer.ToStream(true, sw);
@@ -96,7 +96,7 @@ namespace Kistl.API.Mocks
             BinarySerializer.ToStream(false, sw);
         }
 
-        public static void AssertCorrectContents<LOCALINTERFACE, ENUMTYPE>(BinaryReader sr)
+        public static void AssertCorrectContents<LOCALINTERFACE, ENUMTYPE>(BinaryReader sr, ITypeTransformations typeTrans)
             where LOCALINTERFACE : TestObjClass<LOCALINTERFACE, ENUMTYPE>
             where ENUMTYPE : struct
         {
@@ -104,7 +104,7 @@ namespace Kistl.API.Mocks
 
             SerializableType objType = null;
             BinarySerializer.FromStream(out objType, sr);
-            Assert.That(objType, Is.EqualTo(GetSerializableType<LOCALINTERFACE, ENUMTYPE>()), "wrong interface type found");
+            Assert.That(objType, Is.EqualTo(GetSerializableType<LOCALINTERFACE, ENUMTYPE>(typeTrans)), "wrong interface type found");
 
             int testObjId;
             BinarySerializer.FromStream(out testObjId, sr);
@@ -156,7 +156,7 @@ namespace Kistl.API.Mocks
 
                 SerializableType ceType = null;
                 BinarySerializer.FromStream(out ceType, sr);
-                Assert.That(ceType, Is.EqualTo(GetSerializableCollectionEntryType<LOCALINTERFACE, ENUMTYPE>()), "wrong interface type found for collection entry #{0}", i);
+                Assert.That(ceType, Is.EqualTo(GetSerializableCollectionEntryType<LOCALINTERFACE, ENUMTYPE>(typeTrans)), "wrong interface type found for collection entry #{0}", i);
 
                 int readCeId;
                 BinarySerializer.FromStream(out readCeId, sr);

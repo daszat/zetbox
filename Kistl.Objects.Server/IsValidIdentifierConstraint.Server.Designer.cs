@@ -74,9 +74,9 @@ namespace Kistl.App.Base
 
 
 
-		public override InterfaceType GetInterfaceType()
+		public override Type GetImplementedInterface()
 		{
-			return new InterfaceType(typeof(IsValidIdentifierConstraint));
+			return typeof(IsValidIdentifierConstraint);
 		}
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)

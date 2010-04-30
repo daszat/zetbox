@@ -171,7 +171,7 @@ namespace Kistl.Client.Presentables
         private void SyncObjects(IDataObject[] objs)
         {
             _objCache.Clear();
-            objs.ForEach(o => _objCache.Add(string.Format("({0}) {1}", o.ID, o.GetInterfaceType().Type.FullName)));
+            objs.ForEach(o => _objCache.Add(string.Format("({0}) {1}", o.ID, DataContext.GetInterfaceType(o).Type.FullName)));
             Count = objs.Length;
         }
 

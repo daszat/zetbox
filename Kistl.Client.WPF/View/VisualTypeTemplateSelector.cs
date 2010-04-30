@@ -24,14 +24,11 @@ namespace Kistl.Client.WPF.View
         : DataTemplateSelector
     {
         /// <summary>
-        /// The core method of this class. Chooses the appropriate 
-        /// view for a specified <see cref="ViewModel"/> 
-        /// according to the specified parameters.
+        /// Injected at startup
         /// </summary>
-        /// <param name="mdl">the model to display</param>
-        /// <param name="controlKindClassName">which kind of view to use</param>
-        /// <returns>a DataTemplate capable of displaying the specified model</returns>
-        public static DataTemplate SelectTemplate(ViewModel mdl, string controlKindClassName)
+        public static ITypeTransformations TypeTrans { get; set; }
+
+        private static DataTemplate SelectTemplate(ViewModel mdl, string controlKindClassName)
         {
             if (mdl == null) { throw new ArgumentNullException("mdl"); }
 
@@ -42,7 +39,7 @@ namespace Kistl.Client.WPF.View
                 return null;
             }
 
-            var ckcInterface = new InterfaceType(Type.GetType(controlKindClassName + "," + ApplicationContext.Current.InterfaceAssembly, true));
+            var ckcInterface = TypeTrans.AsInterfaceType(controlKindClassName);
             return CreateTemplate(pmd.GetViewDescriptor(Toolkit.WPF, ckcInterface));
         }
 
@@ -131,17 +128,17 @@ namespace Kistl.Client.WPF.View
                 if (rk is ControlKind)
                 {
                     Logging.Log.DebugFormat("Searching '{0}' Template for {1}", rk.GetType().FullName, model.GetType().FullName);
-                    result = VisualTypeTemplateSelector.SelectTemplate(model, rk as ControlKind);
+                    result = SelectTemplate(model, rk as ControlKind);
                 }
                 else if (rk is String)
                 {
                     Logging.Log.DebugFormat("Searching '{0}' Template for {1}", rk, model.GetType().FullName);
-                    result = VisualTypeTemplateSelector.SelectTemplate(model, rk as String);
+                    result = SelectTemplate(model, rk as String);
                 }
                 else if (rk == null)
                 {
                     Logging.Log.DebugFormat("Searching default Template for {0}", model.GetType().FullName);
-                    result = VisualTypeTemplateSelector.SelectDefaultTemplate(model);
+                    result = SelectDefaultTemplate(model);
                 }
                 else
                 {

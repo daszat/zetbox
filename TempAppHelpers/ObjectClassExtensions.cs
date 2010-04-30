@@ -22,7 +22,7 @@ namespace Kistl.App.Extensions
             if (obj == null) { throw new ArgumentNullException("obj"); }
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
 
-            return GetObjectClass(obj.GetInterfaceType(), ctx);
+            return GetObjectClass(ctx.GetInterfaceType(obj), ctx);
         }
 
         public static ObjectClass GetObjectClass(this InterfaceType ifType, IReadOnlyKistlContext ctx)
@@ -168,10 +168,7 @@ namespace Kistl.App.Extensions
         public static InterfaceType GetDescribedInterfaceType(this ObjectClass cls)
         {
             if (cls == null) { throw new ArgumentNullException("cls"); }
-
-            // TODO: During export schema, while creating a new Database, no custom actions are attached (Database is empty)
-            // return new InterfaceType(cls.GetDataType());
-            return new InterfaceType(Type.GetType(cls.Module.Namespace + "." + cls.Name + ", " + Kistl.API.Helper.InterfaceAssembly, true));
+            return cls.Context.GetInterfaceType(cls.Module.Namespace + "." + cls.Name);
         }
 
         public static bool ImplementsIExportable(this ObjectClass cls)

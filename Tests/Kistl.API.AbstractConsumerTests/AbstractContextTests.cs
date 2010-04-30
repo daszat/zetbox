@@ -13,10 +13,8 @@ using NUnit.Framework;
 namespace Kistl.API.AbstractConsumerTests
 {
 
-    public abstract class AbstractReadonlyContextTests
+    public abstract class AbstractReadonlyContextTests : AbstractTextFixture
     {
-        protected abstract IKistlContext GetContext();
-
         [Test]
         public void query_should_execute_twice()
         {
@@ -65,8 +63,7 @@ namespace Kistl.API.AbstractConsumerTests
 
     public abstract class AbstractContextTests : AbstractReadonlyContextTests
     {
-        [SetUp]
-        public void SetUp()
+        public override void SetUp()
         {
             using (var ctx = GetContext())
             {
@@ -77,8 +74,7 @@ namespace Kistl.API.AbstractConsumerTests
             }
         }
 
-        [TearDown]
-        public void TearDown()
+        public override void TearDown()
         {
             using (var ctx = GetContext())
             {

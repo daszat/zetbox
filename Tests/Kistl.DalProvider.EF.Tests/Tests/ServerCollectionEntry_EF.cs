@@ -20,12 +20,6 @@ namespace Kistl.DalProvider.EF.Tests
     public class ServerCollectionEntry_EF
         : CollectionEntryTests<Kunde_EMails_CollectionEntry__Implementation__>
     {
-        public override void SetUp()
-        {
-            var testCtx = new ServerApiContextMock();
-
-            base.SetUp();
-        }
 
         [Test]
         public void should_have_a_RelationshipManager()

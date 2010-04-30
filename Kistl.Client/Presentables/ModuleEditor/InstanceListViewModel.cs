@@ -15,7 +15,7 @@ namespace Kistl.Client.Presentables.ModuleEditor
     {
         public new delegate InstanceListViewModel Factory(IKistlContext dataCtx, Module module);
 
-        protected Func<IKistlContext> ctxFactory;
+        protected readonly Func<IKistlContext> ctxFactory;
 
         public InstanceListViewModel(
             IViewModelDependencies appCtx,
@@ -196,7 +196,7 @@ namespace Kistl.Client.Presentables.ModuleEditor
 
         public override InterfaceType InterfaceType
         {
-            get { return new InterfaceType(typeof(ObjectClass)); }
+            get { return DataContext.GetInterfaceType(typeof(ObjectClass)); }
         }
     }
 
@@ -228,7 +228,7 @@ namespace Kistl.Client.Presentables.ModuleEditor
 
         public override InterfaceType InterfaceType
         {
-            get { return new InterfaceType(typeof(Interface)); }
+            get { return DataContext.GetInterfaceType(typeof(Interface)); }
         }
     }
 
@@ -259,7 +259,7 @@ namespace Kistl.Client.Presentables.ModuleEditor
 
         public override InterfaceType InterfaceType
         {
-            get { return new InterfaceType(typeof(Enumeration)); }
+            get { return DataContext.GetInterfaceType(typeof(Enumeration)); }
         }
     }
 
@@ -291,7 +291,7 @@ namespace Kistl.Client.Presentables.ModuleEditor
 
         public override InterfaceType InterfaceType
         {
-            get { return new InterfaceType(typeof(CompoundObject)); }
+            get { return DataContext.GetInterfaceType(typeof(CompoundObject)); }
         }
     }
 
@@ -323,7 +323,7 @@ namespace Kistl.Client.Presentables.ModuleEditor
 
         public override InterfaceType InterfaceType
         {
-            get { return new InterfaceType(typeof(Assembly)); }
+            get { return DataContext.GetInterfaceType(typeof(Assembly)); }
         }
     }
 
@@ -355,7 +355,7 @@ namespace Kistl.Client.Presentables.ModuleEditor
 
         public override InterfaceType InterfaceType
         {
-            get { return new InterfaceType(typeof(ViewDescriptor)); }
+            get { return DataContext.GetInterfaceType(typeof(ViewDescriptor)); }
         }
     }
 
@@ -387,7 +387,7 @@ namespace Kistl.Client.Presentables.ModuleEditor
 
         public override InterfaceType InterfaceType
         {
-            get { return new InterfaceType(typeof(ViewModelDescriptor)); }
+            get { return DataContext.GetInterfaceType(typeof(ViewModelDescriptor)); }
         }
     }
 
@@ -419,7 +419,7 @@ namespace Kistl.Client.Presentables.ModuleEditor
 
         public override InterfaceType InterfaceType
         {
-            get { return new InterfaceType(typeof(Relation)); }
+            get { return DataContext.GetInterfaceType(typeof(Relation)); }
         }
     }
     #endregion

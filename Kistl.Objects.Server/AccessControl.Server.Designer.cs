@@ -760,9 +760,9 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.AccessControl, Kistl.App.Base.AccessRights?> OnRights_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.AccessControl, Kistl.App.Base.AccessRights?> OnRights_PostSetter;
 
-		public override InterfaceType GetInterfaceType()
+		public override Type GetImplementedInterface()
 		{
-			return new InterfaceType(typeof(AccessControl));
+			return typeof(AccessControl);
 		}
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)

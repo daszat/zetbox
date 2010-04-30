@@ -32,9 +32,9 @@ namespace daszAt.ModuleEditor
         }
 
 
-		public override InterfaceType GetInterfaceType()
+		public override Type GetImplementedInterface()
 		{
-			return new InterfaceType(typeof(ModuleEditorWorkspaceKind));
+			return typeof(ModuleEditorWorkspaceKind);
 		}
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)

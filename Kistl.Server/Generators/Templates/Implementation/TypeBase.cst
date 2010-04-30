@@ -96,9 +96,9 @@ namespace <%= DataType.Module.Namespace %>
         }
 %>
 
-		public override InterfaceType GetInterfaceType()
+		public override Type GetImplementedInterface()
 		{
-			return new InterfaceType(typeof(<%= DataType.Name %>));
+			return typeof(<%= DataType.Name %>);
 		}
 <%
 		ApplyApplyChangesFromMethod();

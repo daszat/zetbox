@@ -15,8 +15,8 @@ namespace Kistl.DalProvider.ClientObjects.Mocks
 
     public class MyCustomActionsManagerClient : BaseCustomActionsManager
     {
-        public MyCustomActionsManagerClient()
-            : base(String.Empty, ApplicationContext.Current.ImplementationAssembly)
+        public MyCustomActionsManagerClient(IAssemblyConfiguration aCfg)
+            : base(String.Empty, aCfg)
         {
         }
 

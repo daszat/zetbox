@@ -41,7 +41,7 @@ namespace Kistl.Client.ASPNET.Toolkit
         private void Init(DataObjectModel m)
         {
             ID = m.ID;
-            Type = new SerializableType(m.GetInterfaceType());
+            Type = m.GetInterfaceType().ToSerializableType();
             Text = m.Name;
         }
 
@@ -53,12 +53,12 @@ namespace Kistl.Client.ASPNET.Toolkit
             
             if (ID <= Helper.INVALIDID)
             {
-                obj = ctx.Create(Type.GetInterfaceType());
+                obj = ctx.Create(Type.GetInterfaceType(KistlContextManagerModule.TypeTransformations));
                 ID = obj.ID;
             }
             else
             {
-                obj = (IDataObject)ctx.Find(Type.GetInterfaceType(), ID);
+                obj = (IDataObject)ctx.Find(Type.GetInterfaceType(KistlContextManagerModule.TypeTransformations), ID);
             }
 
             return KistlContextManagerModule.ModelFactory.CreateViewModel<DataObjectModel.Factory>(obj).Invoke(ctx, obj);
@@ -84,7 +84,7 @@ namespace Kistl.Client.ASPNET.Toolkit
             DataContractJsonSerializer s = new DataContractJsonSerializer(typeof(SerializableType));
             using (var ms = new MemoryStream())
             {
-                s.WriteObject(ms, new SerializableType(ifType));
+                s.WriteObject(ms, ifType.ToSerializableType());
                 return GetEncoder().GetString(ms.ToArray());
             }
         }

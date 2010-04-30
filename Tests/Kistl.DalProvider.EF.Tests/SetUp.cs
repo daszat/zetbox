@@ -34,8 +34,6 @@ namespace Kistl.DalProvider.EF.Tests
 
             AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
 
-            var appCtx = new ServerApiContextMock();
-
             var builder = Kistl.API.Utils.AutoFacBuilder.CreateContainerBuilder(config, config.Server.Modules);
             builder.RegisterInstance(config).ExternallyOwned().SingleInstance();
             container = builder.Build();

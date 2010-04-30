@@ -653,9 +653,9 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.EnumerationEntry, int> OnValue_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.EnumerationEntry, int> OnValue_PostSetter;
 
-		public override InterfaceType GetInterfaceType()
+		public override Type GetImplementedInterface()
 		{
-			return new InterfaceType(typeof(EnumerationEntry));
+			return typeof(EnumerationEntry);
 		}
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)

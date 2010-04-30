@@ -17,9 +17,9 @@ namespace Kistl.API.Client.Tests.BinarySerializers
 
     public class CompoundObjectMock__Implementation__ : BaseClientCompoundObject
     {
-        public override InterfaceType GetInterfaceType()
+        public override Type GetImplementedInterface()
         {
-            return new InterfaceType(typeof(CompoundObjectMock));
+            return typeof(CompoundObjectMock);
         }
     }
 

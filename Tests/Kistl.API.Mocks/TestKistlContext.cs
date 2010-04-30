@@ -7,6 +7,13 @@ namespace Kistl.API.Mocks
 {
     public class TestKistlContext : IKistlContext
     {
+        protected ITypeTransformations typeTrans;
+
+        protected TestKistlContext(ITypeTransformations typeTrans)
+        {
+            this.typeTrans = typeTrans;
+        }
+
         #region IKistlContext Members
 
         public IPersistenceObject Attach(IPersistenceObject obj)
@@ -224,6 +231,26 @@ namespace Kistl.API.Mocks
         public System.IO.FileInfo GetFileInfo(int ID)
         {
             throw new NotImplementedException();
+        }
+
+        public InterfaceType GetInterfaceType(Type t)
+        {
+            return typeTrans.AsInterfaceType(t);
+        }
+
+        public InterfaceType GetInterfaceType(string typeName)
+        {
+            return typeTrans.AsInterfaceType(typeName);
+        }
+
+        public InterfaceType GetInterfaceType(IPersistenceObject obj)
+        {
+            return typeTrans.AsInterfaceType(((BasePersistenceObject)obj).GetImplementedInterface());
+        }
+
+        public ImplementationType GetImplementationType(Type t)
+        {
+            return typeTrans.AsImplementationType(t);
         }
 
         #endregion

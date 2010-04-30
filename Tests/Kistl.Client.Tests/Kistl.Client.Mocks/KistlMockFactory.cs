@@ -13,9 +13,15 @@ namespace Kistl.Client.Mocks
     using Moq;
     using Kistl.Client.Presentables;
 
-    public static class KistlMockFactory
+    public class KistlMockFactory
     {
-        public static Mock<ObjectReferenceProperty> CreateObjectReferenceProperty(
+        ITypeTransformations typeTrans;
+        public KistlMockFactory(ITypeTransformations typeTrans)
+        {
+            this.typeTrans = typeTrans;
+        }
+
+        public Mock<ObjectReferenceProperty> CreateObjectReferenceProperty(
             string propertyName,
             bool isList
             )
@@ -30,10 +36,10 @@ namespace Kistl.Client.Mocks
             return result;
         }
 
-        public static Mock<TestObject> CreateTestObject()
+        public Mock<TestObject> CreateTestObject()
         {
             var result = new Mock<TestObject>();
-            result.Setup(obj => obj.GetInterfaceType()).Returns(new InterfaceType(typeof(TestObject)));
+            //result.Setup(obj => obj.GetInterfaceType()).Returns(new InterfaceType(typeof(TestObject)));
             return result;
         }
 

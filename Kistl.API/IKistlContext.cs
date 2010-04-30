@@ -98,6 +98,11 @@ namespace Kistl.API
     public interface IReadOnlyKistlContext
         : IDisposable
     {
+        InterfaceType GetInterfaceType(Type t);
+        InterfaceType GetInterfaceType(string typeName);
+        InterfaceType GetInterfaceType(IPersistenceObject obj);
+        ImplementationType GetImplementationType(Type t);
+
         /// <summary>
         /// Returns a Query by T
         /// </summary>

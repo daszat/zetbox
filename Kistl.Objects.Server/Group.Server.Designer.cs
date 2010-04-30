@@ -407,9 +407,9 @@ namespace Kistl.App.Base
         private EntityRelationBSideCollectionWrapper<Kistl.App.Base.Group, Kistl.App.Base.Group, Kistl.App.Base.Group_memberOf_Group_RelationEntry__Implementation__> _ParentGroupsWrapper;
 
 
-		public override InterfaceType GetInterfaceType()
+		public override Type GetImplementedInterface()
 		{
-			return new InterfaceType(typeof(Group));
+			return typeof(Group);
 		}
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)

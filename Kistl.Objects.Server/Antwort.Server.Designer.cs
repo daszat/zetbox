@@ -331,9 +331,9 @@ namespace Kistl.App.Test
 		public static event PropertyPreSetterHandler<Kistl.App.Test.Antwort, int?> OnGegebeneAntwort_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Test.Antwort, int?> OnGegebeneAntwort_PostSetter;
 
-		public override InterfaceType GetInterfaceType()
+		public override Type GetImplementedInterface()
 		{
-			return new InterfaceType(typeof(Antwort));
+			return typeof(Antwort);
 		}
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)

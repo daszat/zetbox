@@ -16,20 +16,19 @@ namespace Kistl.API.Tests
 
 	using NUnit.Framework;
 	using NUnit.Framework.Constraints;
+    using Autofac;
 
-	public class BinarySerializerTests
+	public class BinarySerializerTests : AbstractApiTextFixture
 	{
 		MemoryStream ms;
 		BinaryWriter sw;
 		BinaryReader sr;
 
-		[SetUp]
-		public void SetUp()
+		public override void SetUp()
 		{
 			ms = new MemoryStream();
 			sw = new BinaryWriter(ms);
 			sr = new BinaryReader(ms);
-			var testCtx = new TestApplicationContext();
 		}
 
 		[TestFixture]
@@ -423,7 +422,7 @@ namespace Kistl.API.Tests
 			public IEnumerable<SerializableType> CreateSerializableTypes()
 			{
 				return new[] {
-					new SerializableType(new InterfaceType(typeof(TestDataObject)))
+					typeTrans.AsInterfaceType(typeof(TestDataObject)).ToSerializableType()
 				};
 			}
 
@@ -581,7 +580,7 @@ namespace Kistl.API.Tests
 					o.IntProperty,
 					o.BoolProperty
 				};
-				return Kistl.API.SerializableExpression.FromExpression(list.Expression);
+				return Kistl.API.SerializableExpression.FromExpression(list.Expression, typeTrans);
 			}
 		}
 

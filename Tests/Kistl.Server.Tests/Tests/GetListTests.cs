@@ -137,7 +137,7 @@ namespace Kistl.Server.Tests
         [Ignore("Case 617")]
         public void GetListByTypeWithOrderBy()
         {
-            var list = ctx.GetQuery(new InterfaceType(typeof(ObjectClass)))
+            var list = ctx.GetQuery(ctx.GetInterfaceType(typeof(ObjectClass)))
                 .OrderBy<IDataObject, string>(o => ((ObjectClass)o).Name)
                 .ToList().Cast<ObjectClass>();
             Assert.That(list.Count(), Is.GreaterThan(0));

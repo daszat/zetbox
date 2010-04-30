@@ -28,6 +28,7 @@ using Kistl.API.Configuration;
         protected readonly Identity identity;
         protected readonly IMetaDataResolver metaDataResolver;
         protected KistlConfig config;
+        protected ITypeTransformations typeTrans;
 
         /// <summary>
         /// Initializes a new instance of the BaseKistlDataContext class using the specified <see cref="Identity"/>.
@@ -35,13 +36,15 @@ using Kistl.API.Configuration;
         /// <param name="metaDataResolver">the IMetaDataResolver for this context.</param>
         /// <param name="identity">the identity of this context. if this is null, the context does no security checks</param>
         /// <param name="config"></param>
-        protected BaseKistlDataContext(IMetaDataResolver metaDataResolver, Identity identity, KistlConfig config)
+        /// <param name="typeTrans"></param>
+        protected BaseKistlDataContext(IMetaDataResolver metaDataResolver, Identity identity, KistlConfig config, ITypeTransformations typeTrans)
         {
             if (metaDataResolver == null) { throw new ArgumentNullException("metaDataResolver"); }
             
             this.config = config;
             this.identity = identity;
             this.metaDataResolver = metaDataResolver;
+            this.typeTrans = typeTrans;
         }
 
         // TODO: implement proper IDisposable pattern
@@ -71,7 +74,7 @@ using Kistl.API.Configuration;
             // Object might be created by SerializableType
             if (obj is IDataObject && obj.ObjectState == DataObjectState.New)
             {
-                var ifType = obj.GetInterfaceType();
+                var ifType = GetInterfaceType(obj);
                 ObjectClass cls = metaDataResolver.GetObjectClass(ifType).GetRootClass();
                 if (identity != null && cls.HasAccessControlList() && (cls.GetGroupAccessRights(identity) & AccessRights.Create) != AccessRights.Create)
                 {
@@ -297,7 +300,7 @@ using Kistl.API.Configuration;
         /// <returns>A new IDataObject</returns>
         public virtual T Create<T>() where T : class, IDataObject
         {
-            return (T)Create(new InterfaceType(typeof(T)));
+            return (T)Create(typeTrans.AsInterfaceType(typeof(T)));
         }
 
         /// <inheritdoc />
@@ -309,7 +312,7 @@ using Kistl.API.Configuration;
         /// <inheritdoc />
         public T CreateUnattached<T>() where T : class, IPersistenceObject
         {
-            return (T)CreateUnattachedInstance(new InterfaceType(typeof(T)));
+            return (T)CreateUnattachedInstance(typeTrans.AsInterfaceType(typeof(T)));
         }
 
         /// <summary>
@@ -329,7 +332,7 @@ using Kistl.API.Configuration;
         /// <returns>A new IDataObject</returns>
         public virtual T CreateRelationCollectionEntry<T>() where T : IRelationCollectionEntry
         {
-            return (T)CreateRelationCollectionEntry(new InterfaceType(typeof(T)));
+            return (T)CreateRelationCollectionEntry(typeTrans.AsInterfaceType(typeof(T)));
         }
 
         /// <summary>
@@ -349,7 +352,7 @@ using Kistl.API.Configuration;
         /// <returns>A new IDataObject</returns>
         public virtual T CreateValueCollectionEntry<T>() where T : IValueCollectionEntry
         {
-            return (T)CreateValueCollectionEntry(new InterfaceType(typeof(T)));
+            return (T)CreateValueCollectionEntry(typeTrans.AsInterfaceType(typeof(T)));
         }
 
         /// <summary>
@@ -369,7 +372,7 @@ using Kistl.API.Configuration;
         /// <returns>A new CompoundObject</returns>
         public virtual T CreateCompoundObject<T>() where T : ICompoundObject
         {
-            return (T)CreateCompoundObject(new InterfaceType(typeof(T)));
+            return (T)CreateCompoundObject(typeTrans.AsInterfaceType(typeof(T)));
         }
 
         /// <summary>
@@ -450,7 +453,7 @@ using Kistl.API.Configuration;
             if (string.IsNullOrEmpty(filename)) throw new ArgumentNullException("filename");
             if (string.IsNullOrEmpty(mimetype)) throw new ArgumentNullException("mimetype");
 
-            var blob = (Kistl.App.Base.Blob)this.CreateInternal(new InterfaceType(typeof(Kistl.App.Base.Blob)));
+            var blob = (Kistl.App.Base.Blob)this.CreateInternal(typeTrans.AsInterfaceType(typeof(Kistl.App.Base.Blob)));
             DateTime today = DateTime.Today;
             blob.StoragePath = string.Format(@"{0:0000}\{1:00}\{2:00}\({3}) - {4}", today.Year, today.Month, today.Day, Guid.NewGuid(), filename);
             blob.OriginalName = filename;
@@ -509,5 +512,29 @@ using Kistl.API.Configuration;
                 ObjectDeleted(this, new GenericEventArgs<IPersistenceObject>() { Data = obj });
             }
         }
+
+        #region IReadOnlyKistlContext Members
+
+        public InterfaceType GetInterfaceType(Type t)
+        {
+            return typeTrans.AsInterfaceType(t);
+        }
+
+        public InterfaceType GetInterfaceType(string typeName)
+        {
+            return typeTrans.AsInterfaceType(typeName);
+        }
+
+        public InterfaceType GetInterfaceType(IPersistenceObject obj)
+        {
+            return typeTrans.AsInterfaceType(((BasePersistenceObject)obj).GetImplementedInterface());
+        }
+
+        public ImplementationType GetImplementationType(Type t)
+        {
+            return typeTrans.AsImplementationType(t);
+        }
+
+        #endregion
     }
 }

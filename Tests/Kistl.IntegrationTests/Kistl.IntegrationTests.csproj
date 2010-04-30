@@ -73,6 +73,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AbstractIntegrationTestFixture.cs" />
     <Compile Include="Tests\BinarySerializers\should_work_with_ICompoundObjects.cs" />
     <Compile Include="Tests\Blobs\when_using.cs" />
     <Compile Include="Tests\CompoundObjects\when_changing_a_compoundobject_list.cs" />

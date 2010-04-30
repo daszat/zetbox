@@ -13,8 +13,8 @@ namespace Kistl.Server
     internal class CustomActionsManagerServer
         : BaseCustomActionsManager
     {
-        internal CustomActionsManagerServer()
-            : base(String.Empty, ApplicationContext.Current.ImplementationAssembly)
+        internal CustomActionsManagerServer(IAssemblyConfiguration assemblyConfiguration)
+            : base(String.Empty, assemblyConfiguration)
         {
         }
 
@@ -28,6 +28,11 @@ namespace Kistl.Server
     public class FrozenActionsManagerServer
           : FrozenActionsManager
     {
+        public FrozenActionsManagerServer(IAssemblyConfiguration aCfg)
+            : base(aCfg)
+        {
+        }
+
         /// <inheritdoc/>
         protected override bool IsAcceptableDeploymentRestriction(int r)
         {
