@@ -13,23 +13,6 @@ namespace Kistl.API
         IEnumerable<string> AllImplementationAssemblyNames { get; }
     }
 
-    // TODO: 
-    public class FrozenAssemblyConfiguration : IAssemblyConfiguration
-    {
-        #region IAssemblyConfiguration Members
-
-        public string InterfaceAssemblyName
-        {
-            get { return Kistl.API.Helper.InterfaceAssembly; }
-        }
-
-        public IEnumerable<string> AllImplementationAssemblyNames
-        {
-            get { return new[] { Kistl.API.Helper.FrozenAssembly, Kistl.API.Helper.MemoryAssembly }; }
-        }
-        #endregion
-    }
-
     public interface ITypeTransformations
     {
         InterfaceType AsInterfaceType(Type t);
