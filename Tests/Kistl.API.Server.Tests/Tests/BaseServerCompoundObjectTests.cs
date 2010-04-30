@@ -12,13 +12,13 @@ using NUnit.Framework;
 namespace Kistl.API.Server.Tests
 {
     [TestFixture]
-    public class BaseServerCompoundObjectTests
+    public class BaseServerCompoundObjectTests : AbstractApiServerTestFixture
     {
         private TestCompoundObject obj;
 
-        [SetUp]
-        public void SetUp()
+        public override void SetUp()
         {
+            base.SetUp();
             obj = new TestCompoundObject() { TestInt = 1, TestString = "Hello World" };
         }
 

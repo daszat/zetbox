@@ -17,13 +17,22 @@ namespace Kistl.API.Server.Tests
     public class BaseServerDataObjectTests : AbstractApiServerTestFixture
     {
         private TestObjClass__Implementation__ obj;
+        private IKistlContext ctx;
         private ITypeTransformations typeTrans;
 
         public override void SetUp()
         {
             base.SetUp();
-            obj = new TestObjClass__Implementation__();
             typeTrans = scope.Resolve<ITypeTransformations>();
+            ctx = GetContext();
+            obj = new TestObjClass__Implementation__();
+            ctx.Attach(obj);
+        }
+
+        public override void TearDown()
+        {
+            base.TearDown();
+            ctx.Dispose();
         }
 
         public void InitialiseObject(TestObjClass__Implementation__ objImpl)
@@ -45,6 +54,7 @@ namespace Kistl.API.Server.Tests
                 var subClass = new TestObjClass__Implementation__();
                 subClass.ID = subClassId;
                 objImpl.SubClasses.Add(subClass);
+                objImpl.Context.Attach(subClass);
             }
 
             objImpl.TestEnumProp = TestEnum.TestSerializationValue;
@@ -57,6 +67,7 @@ namespace Kistl.API.Server.Tests
                 ce.Parent = objImpl;
                 ce.Value = TestObjClassSerializationMock.TestTestNamesValues[i];
 
+                objImpl.Context.Attach(ce);
                 objImpl.TestNames__Implementation__.Add(ce);
             }
         }
@@ -107,7 +118,9 @@ namespace Kistl.API.Server.Tests
             SerializableType t;
             BinarySerializer.FromStream(out t, sr);
 
+            var obj = new TestObjClass__Implementation__();
             obj.FromStream(sr);
+            ctx.Attach(obj);
 
             TestObjClassSerializationMock.AssertCorrectContentsEnum<TestObjClass>(obj);
         }
@@ -125,7 +138,6 @@ namespace Kistl.API.Server.Tests
             MemoryStream ms = new MemoryStream();
             BinaryWriter sw = new BinaryWriter(ms);
             BinaryReader sr = new BinaryReader(ms);
-
             obj.ToStream(sw, null, false);
 
             Assert.That(ms.Length, Is.GreaterThan(0));
