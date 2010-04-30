@@ -11,10 +11,8 @@ namespace Kistl.API.AbstractConsumerTests.one_to_N_relations
 
     using NUnit.Framework;
 
-    public abstract class should_obey_order
+    public abstract class should_obey_order : AbstractTestFixture
     {
-        protected abstract IKistlContext GetContext();
-        
         private static List<BaseParameter> CanonicalOrdering(IEnumerable<BaseParameter> input)
         {
             return input.OrderBy(p => p.IsReturnParameter)

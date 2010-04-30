@@ -23,7 +23,7 @@ namespace Kistl.IntegrationTests
         [Test]
         public void Relation_1_1_Set_Left()
         {
-            using (IKistlContext ctx = KistlContext.GetContext())
+            using (IKistlContext ctx = GetContext())
             {
                 var prop = ctx.Create<Kistl.App.Base.IntProperty>();
                 Assert.That(prop.DefaultValue, Is.Null);
@@ -41,7 +41,7 @@ namespace Kistl.IntegrationTests
         [Test]
         public void Relation_1_1_Set_Right()
         {
-            using (IKistlContext ctx = KistlContext.GetContext())
+            using (IKistlContext ctx = GetContext())
             {
                 var prop = ctx.Create<Kistl.App.Base.IntProperty>();
                 Assert.That(prop.DefaultValue, Is.Null);
@@ -65,7 +65,7 @@ namespace Kistl.IntegrationTests
         [Test]
         public void Change_Relation_n_m_Set_n_With_Remove()
         {
-            using (IKistlContext ctx = KistlContext.GetContext())
+            using (IKistlContext ctx = GetContext())
             {
                 var prj = ctx.Create<Kistl.App.Projekte.Projekt>();
                 var ma = ctx.Create<Kistl.App.Projekte.Mitarbeiter>();
@@ -92,7 +92,7 @@ namespace Kistl.IntegrationTests
         [Test]
         public void Change_Relation_n_m_Set_n_With_Clear()
         {
-            using (IKistlContext ctx = KistlContext.GetContext())
+            using (IKistlContext ctx = GetContext())
             {
                 var prj = ctx.Create<Kistl.App.Projekte.Projekt>();
                 var ma = ctx.Create<Kistl.App.Projekte.Mitarbeiter>();
@@ -119,7 +119,7 @@ namespace Kistl.IntegrationTests
         [Test]
         public void Change_Relation_n_m_Set_n_By_Index()
         {
-            using (IKistlContext ctx = KistlContext.GetContext())
+            using (IKistlContext ctx = GetContext())
             {
                 var prj = ctx.Create<Kistl.App.Projekte.Projekt>();
                 var ma = ctx.Create<Kistl.App.Projekte.Mitarbeiter>();
@@ -145,7 +145,7 @@ namespace Kistl.IntegrationTests
         [Test]
         public void Change_Relation_n_m_Set_m_With_Remove()
         {
-            using (IKistlContext ctx = KistlContext.GetContext())
+            using (IKistlContext ctx = GetContext())
             {
                 var prj = ctx.Create<Kistl.App.Projekte.Projekt>();
                 var prj2 = ctx.Create<Kistl.App.Projekte.Projekt>();
@@ -171,7 +171,7 @@ namespace Kistl.IntegrationTests
         [Test]
         public void Change_Relation_n_m_Set_m_With_Clear()
         {
-            using (IKistlContext ctx = KistlContext.GetContext())
+            using (IKistlContext ctx = GetContext())
             {
                 var prj = ctx.Create<Kistl.App.Projekte.Projekt>();
                 var prj2 = ctx.Create<Kistl.App.Projekte.Projekt>();
@@ -197,7 +197,7 @@ namespace Kistl.IntegrationTests
         [Test]
         public void Change_Relation_n_m_Set_m_By_Index()
         {
-            using (IKistlContext ctx = KistlContext.GetContext())
+            using (IKistlContext ctx = GetContext())
             {
                 var prj = ctx.Create<Kistl.App.Projekte.Projekt>();
                 var prj2 = ctx.Create<Kistl.App.Projekte.Projekt>();
@@ -233,7 +233,7 @@ namespace Kistl.IntegrationTests
         public void Sort_Relation_n_m_n()
         {
             int prjID = 0;
-            using (IKistlContext ctx = KistlContext.GetContext())
+            using (IKistlContext ctx = GetContext())
             {
                 var prj = ctx.GetQuery<Kistl.App.Projekte.Projekt>().ToList()
                     .OrderByDescending(p => p.Mitarbeiter.Count).First();
@@ -250,7 +250,7 @@ namespace Kistl.IntegrationTests
                 ctx.SubmitChanges();
             }
 
-            using (IKistlContext ctx = KistlContext.GetContext())
+            using (IKistlContext ctx = GetContext())
             {
                 var prj = ctx.Find<Kistl.App.Projekte.Projekt>(prjID);
 
@@ -269,7 +269,7 @@ namespace Kistl.IntegrationTests
         public void Sort_Relation_n_m_m()
         {
             int maID = 0;
-            using (IKistlContext ctx = KistlContext.GetContext())
+            using (IKistlContext ctx = GetContext())
             {
                 var ma = ctx.GetQuery<Kistl.App.Projekte.Mitarbeiter>().ToList()
                     .OrderByDescending(p => p.Projekte.Count).First();
@@ -286,7 +286,7 @@ namespace Kistl.IntegrationTests
                 ctx.SubmitChanges();
             }
 
-            using (IKistlContext ctx = KistlContext.GetContext())
+            using (IKistlContext ctx = GetContext())
             {
                 var ma = ctx.Find<Kistl.App.Projekte.Mitarbeiter>(maID);
 

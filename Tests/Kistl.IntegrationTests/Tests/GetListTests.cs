@@ -15,20 +15,15 @@ using NUnit.Framework.Constraints;
 namespace Kistl.IntegrationTests
 {
     [TestFixture]
-    public class GetListTests
+    public class GetListTests : AbstractIntegrationTestFixture
     {
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Tests.Integration.GetList");
 
-        [SetUp]
-        public void SetUp()
-        {
-            //CacheController<IDataObject>.Current.Clear();
-        }
 
         [Test]
         public void GetList()
         {
-            using (IKistlContext ctx = KistlContext.GetContext())
+            using (IKistlContext ctx = GetContext())
             {
                 var list = ctx.GetQuery<ObjectClass>().ToList();
                 Assert.That(list.Count, Is.GreaterThan(0));
@@ -38,7 +33,7 @@ namespace Kistl.IntegrationTests
         [Test]
         public void GetList_Twice()
         {
-            using (IKistlContext ctx = KistlContext.GetContext())
+            using (IKistlContext ctx = GetContext())
             {
                 List<ObjectClass> list1 = ctx.GetQuery<ObjectClass>().ToList();
                 Assert.That(list1, Is.Not.Null);
@@ -60,7 +55,7 @@ namespace Kistl.IntegrationTests
         [Test]
         public void GetObject_GetList()
         {
-            using (IKistlContext ctx = KistlContext.GetContext())
+            using (IKistlContext ctx = GetContext())
             {
                 var prop = ctx.Find<Property>(1);
                 Assert.That(prop, Is.Not.Null);
@@ -81,7 +76,7 @@ namespace Kistl.IntegrationTests
         [Test]
         public void GetList_GetOneObject()
         {
-            using (IKistlContext ctx = KistlContext.GetContext())
+            using (IKistlContext ctx = GetContext())
             {
                 var list_objclass = ctx.GetQuery<ObjectClass>().ToList();
                 Assert.That(list_objclass.Count, Is.GreaterThan(0));
@@ -100,7 +95,7 @@ namespace Kistl.IntegrationTests
         [Test]
         public void GetListWithTake()
         {
-            using (IKistlContext ctx = KistlContext.GetContext())
+            using (IKistlContext ctx = GetContext())
             {
                 var list = ctx.GetQuery<ObjectClass>().Take(10).ToList();
                 Assert.That(list.Count, Is.EqualTo(10));
@@ -110,7 +105,7 @@ namespace Kistl.IntegrationTests
         [Test]
         public void GetListWithTakeAndWhere()
         {
-            using (IKistlContext ctx = KistlContext.GetContext())
+            using (IKistlContext ctx = GetContext())
             {
                 var list = ctx.GetQuery<ObjectClass>().Where(o => o.Module.Name == "KistlBase").Take(10).ToList();
                 Assert.That(list.Count, Is.EqualTo(10));
@@ -120,7 +115,7 @@ namespace Kistl.IntegrationTests
         [Test]
         public void GetListWithOrderBy()
         {
-            using (IKistlContext ctx = KistlContext.GetContext())
+            using (IKistlContext ctx = GetContext())
             {
                 var list = ctx.GetQuery<ObjectClass>().OrderBy(o => o.Name).ToList();
                 Assert.That(list.Count, Is.GreaterThan(0));
@@ -141,7 +136,7 @@ namespace Kistl.IntegrationTests
         [Test]
         public void GetListByTypeWithOrderBy()
         {
-            using (IKistlContext ctx = KistlContext.GetContext())
+            using (IKistlContext ctx = GetContext())
             {
                 var list = ctx.GetQuery(ctx.GetInterfaceType(typeof(ObjectClass))).Cast<ObjectClass>()
                     .OrderBy(o => o.Name)
@@ -164,7 +159,7 @@ namespace Kistl.IntegrationTests
         [Test]
         public void GetListWithOrderByAndWhere()
         {
-            using (IKistlContext ctx = KistlContext.GetContext())
+            using (IKistlContext ctx = GetContext())
             {
                 var list = ctx.GetQuery<ObjectClass>().Where(o => o.Module.Name == "KistlBase").OrderBy(o => o.Name).ToList();
                 Assert.That(list.Count, Is.GreaterThan(0));
@@ -185,7 +180,7 @@ namespace Kistl.IntegrationTests
         [Test]
         public void GetListWithOrderByThenOrderBy()
         {
-            using (IKistlContext ctx = KistlContext.GetContext())
+            using (IKistlContext ctx = GetContext())
             {
                 var list = ctx.GetQuery<ObjectClass>().OrderBy(o => o.Module.Name).ThenBy(o => o.Name).ToList();
                 Assert.That(list.Count, Is.GreaterThan(0));
@@ -206,7 +201,7 @@ namespace Kistl.IntegrationTests
         [Test]
         public void GetListWithParameterLegal()
         {
-            using (IKistlContext ctx = KistlContext.GetContext())
+            using (IKistlContext ctx = GetContext())
             {
                 var test = (from m in ctx.GetQuery<Module>()
                             where
@@ -227,7 +222,7 @@ namespace Kistl.IntegrationTests
         [ExpectedException(typeof(System.ServiceModel.FaultException))]
         public void GetListWithParameterIllegal()
         {
-            using (IKistlContext ctx = KistlContext.GetContext())
+            using (IKistlContext ctx = GetContext())
             {
                 var test = from z in ctx.GetQuery<Kistl.App.TimeRecords.WorkEffortAccount>()
                            where z.Mitarbeiter.Select(ma => ma.Geburtstag > new DateTime(1978, 1, 1)).Count() > 0
@@ -242,7 +237,7 @@ namespace Kistl.IntegrationTests
         [Test]
         public void GetListWithEnum()
         {
-            using (IKistlContext ctx = KistlContext.GetContext())
+            using (IKistlContext ctx = GetContext())
             {
                 var q = ctx.GetQuery<Relation>().Where(r => r.Storage == StorageType.Separate).ToList();
                 Assert.IsNotEmpty(q);
@@ -257,7 +252,7 @@ namespace Kistl.IntegrationTests
         [Test]
         public void GetListWithProjection()
         {
-            using (IKistlContext ctx = KistlContext.GetContext())
+            using (IKistlContext ctx = GetContext())
             {
                 var test = from z in ctx.GetQuery<Kistl.App.TimeRecords.WorkEffortAccount>()
                            select new { A = z.SpentHours, B = z.BudgetHours };
@@ -271,7 +266,7 @@ namespace Kistl.IntegrationTests
         [Test]
         public void GetListWithSingle()
         {
-            using (IKistlContext ctx = KistlContext.GetContext())
+            using (IKistlContext ctx = GetContext())
             {
                 var guiModule = ctx.GetQuery<Module>().Where(m => m.Name == "GUI").Single();
                 Assert.That(guiModule, Is.Not.Null);
@@ -281,7 +276,7 @@ namespace Kistl.IntegrationTests
         [Test]
         public void GetListSingle()
         {
-            using (IKistlContext ctx = KistlContext.GetContext())
+            using (IKistlContext ctx = GetContext())
             {
                 var guiModule = ctx.GetQuery<Module>().Single(m => m.Name == "GUI");
                 Assert.That(guiModule, Is.Not.Null);
@@ -291,7 +286,7 @@ namespace Kistl.IntegrationTests
         [Test]
         public void GetListWithFirst()
         {
-            using (IKistlContext ctx = KistlContext.GetContext())
+            using (IKistlContext ctx = GetContext())
             {
                 var guiModule = ctx.GetQuery<Module>().Where(m => m.Name == "GUI").First();
                 Assert.That(guiModule, Is.Not.Null);
@@ -301,7 +296,7 @@ namespace Kistl.IntegrationTests
         [Test]
         public void GetListFirst()
         {
-            using (IKistlContext ctx = KistlContext.GetContext())
+            using (IKistlContext ctx = GetContext())
             {
                 var guiModule = ctx.GetQuery<Module>().First(m => m.Name == "GUI");
                 Assert.That(guiModule, Is.Not.Null);
@@ -322,7 +317,7 @@ namespace Kistl.IntegrationTests
         [Test]
         public void GetListWithPropertyAccessor()
         {
-            using (IKistlContext ctx = KistlContext.GetContext())
+            using (IKistlContext ctx = GetContext())
             {
                 Test t = new Test();
                 t.TestProp = "foo";
@@ -338,7 +333,7 @@ namespace Kistl.IntegrationTests
         [Test]
         public void GetListWithPropertyObjectAccessor()
         {
-            using (IKistlContext ctx = KistlContext.GetContext())
+            using (IKistlContext ctx = GetContext())
             {
                 int mID = 1;
                 var result = ctx.GetQuery<ObjectClass>().Where(c => c.Module.ID == mID).ToList();
@@ -352,7 +347,7 @@ namespace Kistl.IntegrationTests
         [Test]
         public void GetListWithObjectFilter()
         {
-            using (IKistlContext ctx = KistlContext.GetContext())
+            using (IKistlContext ctx = GetContext())
             {
                 var module = ctx.GetQuery<Module>().Where(m => m.Name == "KistlBase").Single();
                 Assert.That(module, Is.Not.Null);

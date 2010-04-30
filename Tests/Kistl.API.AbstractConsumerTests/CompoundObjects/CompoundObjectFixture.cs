@@ -12,10 +12,9 @@ using System.Globalization;
 namespace Kistl.API.AbstractConsumerTests.CompoundObjects
 {
 
-    public abstract class CompoundObjectFixture
+    public abstract class CompoundObjectFixture : AbstractTestFixture
     {
         protected const int MINLISTCOUNT = 5;
-        public abstract IKistlContext GetContext();
 
         protected Random rnd = new Random();
         protected string testNumber;

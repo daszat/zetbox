@@ -11,13 +11,12 @@ using NUnit.Framework;
 namespace Kistl.API.Client.Tests
 {
     [TestFixture]
-    public class BaseClientDataObjectTests
+    public class BaseClientDataObjectTests : AbstractApiClientTestFixture
     {
         private BaseClientDataObjectMock__Implementation__ obj;
         private bool PropertyChangedCalled = false;
 
-        [SetUp]
-        public void SetUp()
+        public override void SetUp()
         {
             PropertyChangedCalled = false;
 
@@ -114,7 +113,7 @@ namespace Kistl.API.Client.Tests
 
             ms.Seek(0, SeekOrigin.Begin);
 
-            using (IKistlContext ctx = KistlContext.GetContext())
+            using (IKistlContext ctx = GetContext())
             {
                 SerializableType t;
                 BinarySerializer.FromStream(out t, sr);
@@ -133,7 +132,7 @@ namespace Kistl.API.Client.Tests
         [ExpectedException(typeof(ArgumentNullException))]
         public void FromStream_Null_StreamReader()
         {
-            using (IKistlContext ctx = KistlContext.GetContext())
+            using (IKistlContext ctx = GetContext())
             {
                 BaseClientDataObjectMock__Implementation__ result = new BaseClientDataObjectMock__Implementation__();
                 result.FromStream((BinaryReader)null);
@@ -145,7 +144,7 @@ namespace Kistl.API.Client.Tests
         {
             Assert.That(obj.Context, Is.Null);
             obj.SetPrivatePropertyValue<int>("ID", 10);
-            using (IKistlContext ctx = KistlContext.GetContext())
+            using (IKistlContext ctx = GetContext())
             {
                 obj.AttachToContext(ctx);
                 Assert.That(obj.Context, Is.Not.Null);
@@ -158,7 +157,7 @@ namespace Kistl.API.Client.Tests
         public void AttachToContext_New()
         {
             Assert.That(obj.Context, Is.Null);
-            using (IKistlContext ctx = KistlContext.GetContext())
+            using (IKistlContext ctx = GetContext())
             {
                 obj.SetPrivatePropertyValue<int>("ID", -1);
                 obj.AttachToContext(ctx);
@@ -173,7 +172,7 @@ namespace Kistl.API.Client.Tests
         public void AttachToContext_New_InvalidID()
         {
             Assert.That(obj.Context, Is.Null);
-            using (IKistlContext ctx = KistlContext.GetContext())
+            using (IKistlContext ctx = GetContext())
             {
                 obj.SetPrivatePropertyValue<int>("ID", Helper.INVALIDID);
                 obj.AttachToContext(ctx);
@@ -188,7 +187,7 @@ namespace Kistl.API.Client.Tests
         {
             Assert.That(obj.Context, Is.Null);
             obj.SetPrivatePropertyValue<int>("ID", 10);
-            using (IKistlContext ctx = KistlContext.GetContext())
+            using (IKistlContext ctx = GetContext())
             {
                 obj.AttachToContext(ctx);
                 Assert.That(obj.Context, Is.Not.Null);
@@ -204,7 +203,7 @@ namespace Kistl.API.Client.Tests
         {
             Assert.That(obj.Context, Is.Null);
             obj.SetPrivatePropertyValue<int>("ID", 10);
-            using (IKistlContext ctx = KistlContext.GetContext())
+            using (IKistlContext ctx = GetContext())
             {
                 ctx.Attach(obj);
                 Assert.That(obj.Context, Is.Not.Null);
@@ -222,7 +221,7 @@ namespace Kistl.API.Client.Tests
         {
             Assert.That(obj.Context, Is.Null);
             obj.SetPrivatePropertyValue<int>("ID", 10);
-            using (IKistlContext ctx = KistlContext.GetContext())
+            using (IKistlContext ctx = GetContext())
             {
                 obj.DetachFromContext(ctx);
                 Assert.That(obj.Context, Is.Null);

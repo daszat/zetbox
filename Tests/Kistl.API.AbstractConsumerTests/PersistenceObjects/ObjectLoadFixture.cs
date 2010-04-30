@@ -11,26 +11,22 @@ namespace Kistl.API.AbstractConsumerTests.PersistenceObjects
 
     using NUnit.Framework;
 
-    public abstract class ObjectLoadFixture
+    public abstract class ObjectLoadFixture : AbstractTestFixture
     {
 
-        [SetUp]
-        public void SetUp()
+        public override void SetUp()
         {
             CreateObject();
             ctx = GetContext();
             obj = GetObject();
         }
 
-        [TearDown]
-        public virtual void TearDown()
+        public override void TearDown()
         {
             if (ctx != null)
                 ctx.Dispose();
             DestroyObjects();
         }
-
-        protected abstract IKistlContext GetContext();
 
         protected virtual void CreateObject()
         {

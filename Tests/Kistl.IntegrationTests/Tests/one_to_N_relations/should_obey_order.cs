@@ -14,9 +14,5 @@ namespace Kistl.IntegrationTests.one_to_N_relations
     public class should_obey_order 
         : Kistl.API.AbstractConsumerTests.one_to_N_relations.should_obey_order
     {
-        protected override IKistlContext GetContext()
-        {
-            return Kistl.API.Client.KistlContext.GetContext();
-        }
     }
 }

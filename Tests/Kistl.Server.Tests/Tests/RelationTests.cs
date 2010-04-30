@@ -143,7 +143,7 @@ namespace Kistl.Server.Tests
         //[Test]
         //public void Relation_1_1_Set_Left()
         //{
-        //    using (IKistlContext ctx = KistlContext.GetContext())
+        //    using (IKistlContext ctx = GetContext())
         //    {
         //        var rel = ctx.Create<Kistl.App.Base.Relation>();
         //        Assert.That(rel.LeftPart, Is.Null);
@@ -161,7 +161,7 @@ namespace Kistl.Server.Tests
         //[Test]
         //public void Relation_1_1_Set_Right()
         //{
-        //    using (IKistlContext ctx = KistlContext.GetContext())
+        //    using (IKistlContext ctx = GetContext())
         //    {
         //        var rel = ctx.Create<Kistl.App.Base.Relation>();
         //        Assert.That(rel.LeftPart, Is.Null);

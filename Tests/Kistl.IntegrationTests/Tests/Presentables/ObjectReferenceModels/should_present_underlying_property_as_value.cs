@@ -11,12 +11,12 @@ using NUnit.Framework;
 namespace Kistl.IntegrationTests.Presentables.ObjectReferenceModels
 {
 	[TestFixture]
-	public class should_present_underlying_property_as_value
+	public class should_present_underlying_property_as_value : AbstractIntegrationTestFixture
 	{
 		[Test]
 		public void when_displaying_a_value()
 		{
-			using(var ctx = KistlContext.GetContext())
+			using(var ctx = GetContext())
 			{
 				var obj = ctx.GetQuery<TypeRef>().First();
 				var typeRefClass = ctx.GetQuery<ObjectClass>()

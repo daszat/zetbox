@@ -10,7 +10,7 @@ using NUnit.Framework;
 namespace Kistl.IntegrationTests.TypeRefs
 {
     [TestFixture]
-    public class should_convert_types_correctly
+    public class should_convert_types_correctly : AbstractIntegrationTestFixture
     {
         // These are important TypeRefs for the GUI which must exist
         // using int for "CompoundObject" types, string for "class" types
@@ -28,7 +28,7 @@ namespace Kistl.IntegrationTests.TypeRefs
         [Theory]
         public void when_calling_ToRef_on_a_Type(Type systemType)
         {
-            using (var ctx = KistlContext.GetContext())
+            using (var ctx = GetContext())
             {
                 var tr = systemType.ToRef(ctx);
                 Assert.That(tr, Is.Not.Null);

@@ -42,7 +42,7 @@ namespace Kistl.DalProvider.EF.Tests
         [Test]
         public void should_be_attached_to_EFContext_after_attaching()
         {
-            using (var ctx = KistlContext.GetContext())
+            using (var ctx = GetContext())
             {
                 ctx.Attach(obj);
                 Assert.That(obj.EntityState, Is.Not.EqualTo(EntityState.Detached));

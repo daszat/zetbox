@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Kistl
 {
-    public class AbstractClientTestFixture : Kistl.API.AbstractConsumerTests.AbstractTextFixture
+    public class AbstractClientTestFixture : Kistl.API.AbstractConsumerTests.AbstractTestFixture
     {
     }
 }

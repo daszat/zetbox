@@ -9,14 +9,13 @@ using NUnit.Framework;
 namespace Kistl.API.Tests.Skeletons
 {
 
-    public class IStreamableTests<T>
+    public class IStreamableTests<T> : AbstractApiTextFixture
         where T : IStreamable, new()
     {
 
         protected T obj;
 
-        [SetUp]
-        public virtual void SetUp()
+        public override void SetUp()
         {
             obj = new T();
         }

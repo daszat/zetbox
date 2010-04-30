@@ -70,7 +70,7 @@ namespace Kistl.Server.Tests
             //int ID = Kistl.API.Helper.INVALIDID;
             //double? maxStungen = 0.0;
 
-            //using (Kistl.API.IKistlContext ctx = KistlContext.GetContext())
+            //using (Kistl.API.IKistlContext ctx = GetContext())
             //{
             //    var list = ctx.GetQuery<Kistl.App.TimeRecords.Kostentraeger>().ToList();
             //    Assert.That(list.Count, Is.GreaterThan(0));
@@ -82,7 +82,7 @@ namespace Kistl.Server.Tests
             //    ctx.SubmitChanges();
             //}
 
-            //using (Kistl.API.IKistlContext ctx = KistlContext.GetContext())
+            //using (Kistl.API.IKistlContext ctx = GetContext())
             //{
             //    var k = ctx.GetQuery<Kistl.App.TimeRecords.Kostentraeger>().First(o => o.ID == ID);
             //    Assert.That(k, Is.Not.Null);

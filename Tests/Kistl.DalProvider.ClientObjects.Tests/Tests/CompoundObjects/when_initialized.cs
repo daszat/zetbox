@@ -15,9 +15,5 @@ namespace Kistl.DalProvider.ClientObjects.Tests.CompoundObjects
     public class when_initialized
         : Kistl.API.AbstractConsumerTests.CompoundObjects.when_initialized
     {
-        public override IKistlContext GetContext()
-        {
-            return KistlContext.GetContext();
-        }
     }
 }

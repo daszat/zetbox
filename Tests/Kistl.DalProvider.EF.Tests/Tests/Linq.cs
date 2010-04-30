@@ -27,7 +27,7 @@ namespace Kistl.DalProvider.EF.Tests
         [SetUp]
         public void Init()
         {
-            using (IKistlContext localCtx = KistlContext.GetContext())
+            using (IKistlContext localCtx = GetContext())
             {
                 var result = localCtx.GetQuery<TestObjClass>();
                 var list = result.ToList();
@@ -48,7 +48,7 @@ namespace Kistl.DalProvider.EF.Tests
                 localCtx.SubmitChanges();
             }
 
-            ctx = KistlContext.GetContext();
+            ctx = GetContext();
         }
 
         [TearDown]

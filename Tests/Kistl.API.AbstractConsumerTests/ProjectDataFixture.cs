@@ -17,7 +17,7 @@ namespace Kistl.API.AbstractConsumerTests
     /// <summary>
     /// This fixture creates a set of Kunden, Projekte, Mitarbeiter and Tasks for testing.
     /// </summary>
-    public abstract class ProjectDataFixture : AbstractTextFixture
+    public abstract class ProjectDataFixture : AbstractTestFixture
     {
         /// <summary>
         /// Creates a few new test objects

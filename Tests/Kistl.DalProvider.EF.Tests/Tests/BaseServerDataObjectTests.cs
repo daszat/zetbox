@@ -74,7 +74,7 @@ namespace Kistl.DalProvider.EF.Tests
         [Ignore("Enable if Case #1359 is fixed")]
         public void should_roundtrip_ObjectClass_attributes_correctly()
         {
-            using (IKistlContext ctx = KistlContext.GetContext())
+            using (IKistlContext ctx = GetContext())
             {
                 MemoryStream ms = new MemoryStream();
                 BinaryWriter sw = new BinaryWriter(ms);
@@ -105,7 +105,7 @@ namespace Kistl.DalProvider.EF.Tests
         [Test]
         public void ToStream_creates_correct_Stream()
         {
-            using (IKistlContext ctx = KistlContext.GetContext())
+            using (IKistlContext ctx = GetContext())
             {
                 MemoryStream ms = new MemoryStream();
                 BinaryWriter sw = new BinaryWriter(ms);
@@ -156,7 +156,7 @@ namespace Kistl.DalProvider.EF.Tests
 
             ms.Seek(0, SeekOrigin.Begin);
 
-            using (IKistlContext ctx = KistlContext.GetContext())
+            using (IKistlContext ctx = GetContext())
             {
                 var result = ctx.Create<ObjectClass>();
                 result.FromStream(sr);
@@ -167,7 +167,7 @@ namespace Kistl.DalProvider.EF.Tests
         public void AttachToContext()
         {
             Assert.That(obj.Context, Is.Null);
-            using (IKistlContext ctx = KistlContext.GetContext())
+            using (IKistlContext ctx = GetContext())
             {
                 obj.AttachToContext(ctx);
                 Assert.That(obj.Context, Is.Not.Null);
@@ -180,12 +180,12 @@ namespace Kistl.DalProvider.EF.Tests
         public void AttachToContext_Other_fails()
         {
             Assert.That(obj.Context, Is.Null);
-            using (IKistlContext ctx = KistlContext.GetContext())
+            using (IKistlContext ctx = GetContext())
             {
                 obj.AttachToContext(ctx);
                 Assert.That(obj.Context, Is.Not.Null);
                 Assert.That(obj.EntityState, Is.EqualTo(System.Data.EntityState.Detached));
-                using (IKistlContext ctx2 = KistlContext.GetContext())
+                using (IKistlContext ctx2 = GetContext())
                 {
                     obj.AttachToContext(ctx2);
                     Assert.That(obj.Context, Is.Not.Null);
@@ -200,7 +200,7 @@ namespace Kistl.DalProvider.EF.Tests
             Assert.That(obj.Context, Is.Null);
             obj.ID = 10;
             obj.ClientObjectState = DataObjectState.Unmodified;
-            using (IKistlContext ctx = KistlContext.GetContext())
+            using (IKistlContext ctx = GetContext())
             {
                 ctx.Attach(obj);
                 Assert.That(obj.Context, Is.Not.Null);
@@ -219,7 +219,7 @@ namespace Kistl.DalProvider.EF.Tests
             Assert.That(obj.Context, Is.Null);
             obj.ID = 10;
             obj.ClientObjectState = DataObjectState.Unmodified;
-            using (IKistlContext ctx = KistlContext.GetContext())
+            using (IKistlContext ctx = GetContext())
             {
                 ctx.Attach(obj);
                 Assert.That(obj.Context, Is.Not.Null);
@@ -228,7 +228,7 @@ namespace Kistl.DalProvider.EF.Tests
                 Assert.That(obj.Context, Is.Null);
                 Assert.That(obj.EntityState, Is.EqualTo(System.Data.EntityState.Unchanged));
 
-                using (IKistlContext ctx2 = KistlContext.GetContext())
+                using (IKistlContext ctx2 = GetContext())
                 {
                     obj.DetachFromContext(ctx2);
                     Assert.That(obj.Context, Is.Null);

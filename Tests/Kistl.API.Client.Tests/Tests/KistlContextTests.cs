@@ -374,7 +374,7 @@ namespace Kistl.API.Client.Tests
         [ExpectedException(typeof(InvalidOperationException))]
         public void Delete_Wrong_Context()
         {
-            TestObjClass obj = KistlContext.GetContext().Find<TestObjClass>(1);
+            TestObjClass obj = GetContext().Find<TestObjClass>(1);
             ctx.Delete(obj);
             Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.Deleted));
         }

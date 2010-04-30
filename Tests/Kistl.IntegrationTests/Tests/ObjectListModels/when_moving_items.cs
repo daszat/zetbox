@@ -15,26 +15,15 @@ namespace Kistl.IntegrationTests.ObjectListModels
     using NUnit.Framework;
     using Kistl.Client;
 
-    public class when_moving_items
+    public class when_moving_items : AbstractIntegrationTestFixture
     {
 
-        [SetUp]
-        public void SetUp()
-        {
-        }
-
-        [TearDown]
-        public void TearDown()
-        {
-        }
-
         [Test]
-        [Ignore("Autofac implementation missing")]
         public void should_persist_changes()
         {
             Property[] propList;
 
-            using (var ctx = KistlContext.GetContext())
+            using (var ctx = GetContext())
             {
                 var objectClass = ctx.GetQuery<ObjectClass>().Single(oc => oc.Name == "ObjectClass");
 
@@ -87,9 +76,9 @@ namespace Kistl.IntegrationTests.ObjectListModels
             }
         }
 
-        private static void CheckPropertyList(Property[] propList)
+        private void CheckPropertyList(Property[] propList)
         {
-            using (var checkCtx = KistlContext.GetContext())
+            using (var checkCtx = GetContext())
             {
                 var checkObjectClass = checkCtx.GetQuery<ObjectClass>().Single(oc => oc.Name == "ObjectClass");
                 // compare by Name, since we got new instances from the checkCtx

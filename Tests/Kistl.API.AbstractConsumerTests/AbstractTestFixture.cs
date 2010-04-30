@@ -9,7 +9,7 @@ using Kistl.API.Configuration;
 
 namespace Kistl.API.AbstractConsumerTests
 {
-    public abstract class AbstractTextFixture
+    public abstract class AbstractTestFixture
     {
         protected ILifetimeScope scope;
 

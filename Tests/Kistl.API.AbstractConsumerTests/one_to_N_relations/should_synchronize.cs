@@ -12,10 +12,8 @@ namespace Kistl.API.AbstractConsumerTests.one_to_N_relations
 
     using NUnit.Framework;
 
-    public abstract class should_synchronize
+    public abstract class should_synchronize : AbstractTestFixture
     {
-        protected abstract IKistlContext GetContext();
-
         IKistlContext ctx;
         Projekt proj1;
         Projekt proj2;

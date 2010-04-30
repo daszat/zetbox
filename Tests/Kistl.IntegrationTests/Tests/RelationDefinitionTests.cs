@@ -12,12 +12,12 @@ using Kistl.App.Base;
 namespace Kistl.IntegrationTests
 {
     [TestFixture]
-    public class RelationDefinitionTests
+    public class RelationDefinitionTests : AbstractIntegrationTestFixture
     {
         [Test]
         public void CalculateParent()
         {
-            using (var ctx = KistlContext.GetContext())
+            using (var ctx = GetContext())
             {
                 foreach (var relEnd in ctx.GetQuery<RelationEnd>())
                 {

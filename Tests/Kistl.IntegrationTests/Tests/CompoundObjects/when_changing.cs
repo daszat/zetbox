@@ -17,7 +17,7 @@ namespace Kistl.IntegrationTests.CompoundObjects
     {
         public override IKistlContext GetContext()
         {
-            return KistlContext.GetContext();
+            return GetContext();
         }
     }
 }

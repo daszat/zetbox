@@ -6,7 +6,7 @@ using Kistl.API;
 
 namespace Kistl.DalProvider.EF
 {
-    public class AbstractEFTestFixture : Kistl.API.AbstractConsumerTests.AbstractTextFixture
+    public class AbstractEFTestFixture : Kistl.API.AbstractConsumerTests.AbstractTestFixture
     {
         protected IKistlContext ctx;
 

@@ -14,9 +14,5 @@ namespace Kistl.DalProvider.ClientObjects.Tests.PersistenceObjects
     public class navigator_context_checks 
         : Kistl.API.AbstractConsumerTests.PersistenceObjects.navigator_context_checks
     {
-        protected override IKistlContext GetContext()
-        {
-            return KistlContext.GetContext();
-        }
     }
 }

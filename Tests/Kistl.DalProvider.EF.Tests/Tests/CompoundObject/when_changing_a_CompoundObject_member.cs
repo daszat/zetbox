@@ -17,7 +17,7 @@ namespace Kistl.DalProvider.EF.Tests.CompoundObjects
     {
         public override IKistlContext GetContext()
         {
-            return KistlContext.GetContext();
+            return GetContext();
         }
     }
 }

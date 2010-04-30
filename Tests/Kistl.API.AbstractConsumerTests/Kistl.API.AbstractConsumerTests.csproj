@@ -61,7 +61,7 @@
     <Compile Include="AbstractContextTests.cs" />
     <Compile Include="AbstractListPropertiesTests.cs" />
     <Compile Include="AbstractSetup.cs" />
-    <Compile Include="AbstractTextFixture.cs" />
+    <Compile Include="AbstractTestFixture.cs" />
     <Compile Include="BinarySerializers\should_work_with_ICompoundObjects.cs" />
     <Compile Include="Blobs\BlobFixture.cs" />
     <Compile Include="Blobs\when_using.cs" />

@@ -15,10 +15,5 @@ namespace Kistl.DalProvider.EF.Tests.BaseServerDataObjects
         : Kistl.API.AbstractConsumerTests.PersistenceObjects.when_loaded
     {
 
-        protected override IKistlContext GetContext()
-        {
-            return KistlContext.GetContext();
-        }
-
     }
 }

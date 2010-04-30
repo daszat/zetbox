@@ -13,9 +13,5 @@ namespace Kistl.DalProvider.ClientObjects.Tests.Blobs
     public class when_using
         : Kistl.API.AbstractConsumerTests.Blobs.when_using
     {
-        public override IKistlContext GetContext()
-        {
-            return KistlContext.GetContext();
-        }
     }
 }

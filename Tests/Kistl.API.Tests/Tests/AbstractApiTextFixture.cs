@@ -8,7 +8,7 @@ using Autofac;
 
 namespace Kistl.API.Tests
 {
-    public abstract class AbstractApiTextFixture : AbstractConsumerTests.AbstractTextFixture
+    public abstract class AbstractApiTextFixture : AbstractConsumerTests.AbstractTestFixture
     {
         protected ITypeTransformations typeTrans;
 

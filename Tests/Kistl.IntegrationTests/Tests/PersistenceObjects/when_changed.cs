@@ -17,10 +17,6 @@ namespace Kistl.IntegrationTests.PersistenceObjects
     public class when_changed
         : Kistl.API.AbstractConsumerTests.PersistenceObjects.when_changed
     {
-        protected override IKistlContext GetContext()
-        {
-            return KistlContext.GetContext();
-        }
     }
 
 }

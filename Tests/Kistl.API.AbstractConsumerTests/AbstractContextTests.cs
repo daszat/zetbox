@@ -13,7 +13,7 @@ using NUnit.Framework;
 namespace Kistl.API.AbstractConsumerTests
 {
 
-    public abstract class AbstractReadonlyContextTests : AbstractTextFixture
+    public abstract class AbstractReadonlyContextTests : AbstractTestFixture
     {
         [Test]
         public void query_should_execute_twice()

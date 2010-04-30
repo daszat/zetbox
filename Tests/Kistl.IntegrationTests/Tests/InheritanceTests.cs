@@ -12,18 +12,12 @@ using NUnit.Framework.Constraints;
 namespace Kistl.IntegrationTests
 {
     [TestFixture]
-    public class InheritanceTests
+    public class InheritanceTests : AbstractIntegrationTestFixture
     {
-        [SetUp]
-        public void SetUp()
-        {
-            //CacheController<Kistl.API.IDataObject>.Current.Clear();
-        }
-
         [Test]
         public void GetListOfInheritedObjects()
         {
-            using (Kistl.API.IKistlContext ctx = Kistl.API.Client.KistlContext.GetContext())
+            using (Kistl.API.IKistlContext ctx = GetContext())
             {
                 bool intFound = false;
                 bool stringFound = false;
@@ -55,7 +49,7 @@ namespace Kistl.IntegrationTests
             //int ID = Kistl.API.Helper.INVALIDID;
             //double? maxStungen = 0.0;
 
-            //using (Kistl.API.IKistlContext ctx = KistlContext.GetContext())
+            //using (Kistl.API.IKistlContext ctx = GetContext())
             //{
             //    var list = ctx.GetQuery<Kistl.App.TimeRecords.Kostentraeger>().ToList();
             //    Assert.That(list.Count, Is.GreaterThan(0));
@@ -67,7 +61,7 @@ namespace Kistl.IntegrationTests
             //    ctx.SubmitChanges();
             //}
 
-            //using (Kistl.API.IKistlContext ctx = KistlContext.GetContext())
+            //using (Kistl.API.IKistlContext ctx = GetContext())
             //{
             //    var k = ctx.GetQuery<Kistl.App.TimeRecords.Kostentraeger>().First(o => o.ID == ID);
             //    Assert.That(k, Is.Not.Null);

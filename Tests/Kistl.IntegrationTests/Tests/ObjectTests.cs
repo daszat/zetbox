@@ -15,7 +15,7 @@ using NUnit.Framework.Constraints;
 namespace Kistl.IntegrationTests
 {
     [TestFixture]
-    public class ObjectTests
+    public class ObjectTests : AbstractIntegrationTestFixture
     {
         private const string ProjectName1 = "Project 1";
         private const string ProjectName2 = "Project 2";
@@ -26,12 +26,11 @@ namespace Kistl.IntegrationTests
         private int Project1ID = -1;
         private int Project2ID = -1;
 
-        [SetUp]
-        public void SetUp()
+        public override void SetUp()
         {
             DeleteObjects();
 
-            using (IKistlContext ctx = KistlContext.GetContext())
+            using (IKistlContext ctx = GetContext())
             {
                 Projekt prj1 = ctx.Create<Projekt>();
                 prj1.Name = ProjectName1;
@@ -66,15 +65,15 @@ namespace Kistl.IntegrationTests
             prj.Tasks.Add(t);
         }
 
-        [TearDown]
-        public void TearDown()
+        
+        public override void TearDown()
         {
             DeleteObjects();
         }
 
-        private static void DeleteObjects()
+        private void DeleteObjects()
         {
-            using (IKistlContext ctx = KistlContext.GetContext())
+            using (IKistlContext ctx = GetContext())
             {
                 // TODO: remove obj.Mitarbeiter.Clear() after fixing Case 1369 and marking the Mitarbeiter RelationEnd properly
                 ctx.GetQuery<Projekt>().ForEach(obj => { obj.Mitarbeiter.Clear(); ctx.Delete(obj); });
@@ -86,7 +85,7 @@ namespace Kistl.IntegrationTests
         [Test]
         public void GetOneObject()
         {
-            using (IKistlContext ctx = KistlContext.GetContext())
+            using (IKistlContext ctx = GetContext())
             {
                 var obj = ctx.GetQuery<Projekt>().Single(o => o.ID == Project1ID);
                 Assert.That(obj.Name, Is.EqualTo(ProjectName1));
@@ -96,7 +95,7 @@ namespace Kistl.IntegrationTests
         [Test]
         public void GetObject_Twice()
         {
-            using (IKistlContext ctx = KistlContext.GetContext())
+            using (IKistlContext ctx = GetContext())
             {
                 var obj1 = ctx.GetQuery<Projekt>().Single(o => o.ID == Project1ID);
                 Assert.That(obj1.Name, Is.EqualTo(ProjectName1));
@@ -112,7 +111,7 @@ namespace Kistl.IntegrationTests
         [Test]
         public void GetListOf()
         {
-            using (IKistlContext ctx = KistlContext.GetContext())
+            using (IKistlContext ctx = GetContext())
             {
                 var list = ctx.GetQuery<Projekt>();
                 int count = 0;
@@ -129,7 +128,7 @@ namespace Kistl.IntegrationTests
         {
             double aufwand;
             int ID;
-            using (IKistlContext ctx = KistlContext.GetContext())
+            using (IKistlContext ctx = GetContext())
             {
                 var list = ctx.GetQuery<Task>().ToList();
                 Assert.That(list.Count, Is.GreaterThan(0));
@@ -143,7 +142,7 @@ namespace Kistl.IntegrationTests
                 ctx.SubmitChanges();
             }
 
-            using (IKistlContext checkctx = KistlContext.GetContext())
+            using (IKistlContext checkctx = GetContext())
             {
                 var obj = checkctx.GetQuery<Task>().Single(o => o.ID == ID);
                 Assert.That(obj, Is.Not.Null);
@@ -158,7 +157,7 @@ namespace Kistl.IntegrationTests
             double aufwand = 1.0;
             DateTime datum = DateTime.Now;
             Projekt p;
-            using (IKistlContext ctx = KistlContext.GetContext())
+            using (IKistlContext ctx = GetContext())
             {
                 p = ctx.GetQuery<Projekt>().First(prj => prj.Name == ProjectName1);
                 var obj = ctx.Create<Task>();
@@ -174,7 +173,7 @@ namespace Kistl.IntegrationTests
                 Assert.That(ID, Is.Not.EqualTo(Kistl.API.Helper.INVALIDID));
             }
 
-            using (IKistlContext checkctx = KistlContext.GetContext())
+            using (IKistlContext checkctx = GetContext())
             {
                 var obj = checkctx.GetQuery<Task>().Single(o => o.ID == ID);
                 Assert.That(obj, Is.Not.Null);

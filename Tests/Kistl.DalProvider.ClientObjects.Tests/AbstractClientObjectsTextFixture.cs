@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Kistl.DalProvider.ClientObjects
 {
-    public class AbstractClientObjectsTextFixture : Kistl.API.AbstractConsumerTests.AbstractTextFixture
+    public class AbstractClientObjectsTextFixture : Kistl.API.AbstractConsumerTests.AbstractTestFixture
     {
         public override void SetUp()
         {

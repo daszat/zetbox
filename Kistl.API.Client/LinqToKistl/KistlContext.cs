@@ -13,21 +13,6 @@ namespace Kistl.API.Client
     using Kistl.API.Configuration;
 
     /// <summary>
-    /// Linq to Kistl Context Factory
-    /// </summary>
-    public static class KistlContext
-    {
-        /// <summary>
-        /// Returns a new KistContext.
-        /// </summary>
-        /// <returns>A new KistlContext</returns>
-        public static IKistlContext GetContext()
-        {
-            return new KistlContextImpl(null, null, null);
-        }
-    }
-
-    /// <summary>
     /// Linq to Kistl Context Implementation
     /// </summary>
     internal class KistlContextImpl : IDebuggingKistlContext, IDisposable

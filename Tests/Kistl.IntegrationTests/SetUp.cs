@@ -50,7 +50,7 @@ namespace Kistl.IntegrationTests
                     // initialise custom actions manager
                     var cams = container.Resolve<BaseCustomActionsManager>();
 
-                    using (var initCtx = Kistl.API.Client.KistlContext.GetContext())
+                    using (var initCtx = container.Resolve<IKistlContext>())
                     {
                         // load up all infrastructure from the DalProvider
                         // TODO: remove ToList() call!

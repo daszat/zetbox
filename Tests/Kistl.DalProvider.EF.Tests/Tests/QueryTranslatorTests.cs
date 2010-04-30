@@ -79,7 +79,7 @@ namespace Kistl.DalProvider.EF.Tests
         [Test]
         public void query_with_objectfilter()
         {
-            using (IKistlContext ctx = KistlContext.GetContext())
+            using (IKistlContext ctx = GetContext())
             {
                 var module = ctx.GetQuery<Module>().Where(m => m.Name == "KistlBase").First();
                 Assert.That(module, Is.Not.Null);

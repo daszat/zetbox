@@ -14,7 +14,7 @@ namespace Kistl.DalProvider.EF.Tests.Blobs
     {
         public override IKistlContext GetContext()
         {
-            return KistlContext.GetContext();
+            return GetContext();
         }
     }
 }

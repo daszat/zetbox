@@ -89,12 +89,6 @@ namespace Kistl.API
         void Changed(IKistlContext ctx);
     }
 
-    /// <summary>
-    /// A simple delegate to provide an interface for creating new contexts.
-    /// </summary>
-    /// <returns>A newly intialised <see cref="IKistlContext"/>.</returns>
-    public delegate IKistlContext GetContext();
-
     public interface IReadOnlyKistlContext
         : IDisposable
     {

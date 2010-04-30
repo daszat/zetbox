@@ -14,10 +14,6 @@ namespace Kistl.IntegrationTests.one_to_N_relations
     public class should_synchronize 
         : Kistl.API.AbstractConsumerTests.one_to_N_relations.should_synchronize
     {
-        protected override IKistlContext GetContext()
-        {
-            return Kistl.API.Client.KistlContext.GetContext();
-        }
     }
 
 }

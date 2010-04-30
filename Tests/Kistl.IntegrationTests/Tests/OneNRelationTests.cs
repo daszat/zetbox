@@ -38,7 +38,7 @@ namespace Kistl.IntegrationTests
 
         private void SetupFixtureObject()
         {
-            using (var initCtx = KistlContext.GetContext())
+            using (var initCtx = GetContext())
             {
                 _moduleGuid = initCtx.GetQuery<Module>().Single(m => m.Name == "KistlBase").ExportGuid;
                 _valueDescGuid = initCtx.GetQuery<ViewModelDescriptor>().First().ExportGuid;
@@ -70,7 +70,7 @@ namespace Kistl.IntegrationTests
         {
             SetupFixtureObject();
 
-            ctx = KistlContext.GetContext();
+            ctx = GetContext();
             Assert.That(ctx.AttachedObjects, Is.Empty);
 
             _parent = ctx.FindPersistenceObject<ObjectClass>(_fixtureGuid);
@@ -177,7 +177,7 @@ namespace Kistl.IntegrationTests
 
             // finally, check remaining properties for them being properly roundtripped
             var propertyNames = collection.Select(p => p.Name).ToArray();
-            using (var checkCtx = KistlContext.GetContext())
+            using (var checkCtx = GetContext())
             {
                 var checkParent = checkCtx.FindPersistenceObject<ObjectClass>(_fixtureGuid);
                 Assert.That(checkParent.Properties.Select(p => p.Name).ToArray(), Is.EquivalentTo(propertyNames));
@@ -209,7 +209,7 @@ namespace Kistl.IntegrationTests
 
         private void SetupFixtureObject()
         {
-            using (var initCtx = KistlContext.GetContext())
+            using (var initCtx = GetContext())
             {
                 _moduleGuid = initCtx.GetQuery<Module>().Single(m => m.Name == "KistlBase").ExportGuid;
                 _valueDescGuid = initCtx.GetQuery<ViewModelDescriptor>().First().ExportGuid;
@@ -242,7 +242,7 @@ namespace Kistl.IntegrationTests
         {
             SetupFixtureObject();
 
-            ctx = KistlContext.GetContext();
+            ctx = GetContext();
             Assert.That(ctx.AttachedObjects, Is.Empty);
 
             _parent = ctx.FindPersistenceObject<ObjectClass>(_fixtureGuid);
@@ -349,7 +349,7 @@ namespace Kistl.IntegrationTests
 
             // finally, check remaining properties for them being properly roundtripped
             var propertyNames = collection.Select(p => p.Name).ToArray();
-            using (var checkCtx = KistlContext.GetContext())
+            using (var checkCtx = GetContext())
             {
                 var checkParent = checkCtx.FindPersistenceObject<ObjectClass>(_fixtureGuid);
                 Assert.That(checkParent.Properties.Select(p => p.Name).ToArray(), Is.EquivalentTo(propertyNames));

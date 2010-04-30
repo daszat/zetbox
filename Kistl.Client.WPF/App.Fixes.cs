@@ -25,7 +25,7 @@ namespace Kistl.Client.WPF
         //{
         //    using (Logging.Log.DebugTraceMethodCall("FixupTypeRefParents"))
         //    {
-        //        using (IKistlContext ctx = KistlContext.GetContext())
+        //        using (IKistlContext ctx = GetContext())
         //        {
         //            var typeRefs = ctx.GetQuery<TypeRef>();
         //            foreach (var tr in typeRefs)
@@ -68,7 +68,7 @@ namespace Kistl.Client.WPF
         //        Console.WriteLine("---------------------------------------------------------------");
         //        Console.WriteLine();
         //        Console.WriteLine("graph A{");
-        //        using (IKistlContext ctx = KistlContext.GetContext())
+        //        using (IKistlContext ctx = GetContext())
         //        {
         //            var relations = ctx.GetQuery<Relation>();
 
@@ -92,7 +92,7 @@ namespace Kistl.Client.WPF
         //private static void CreateTestFragebögen()
         //{
         //    using (Logging.Log.DebugTraceMethodCall("FixupTypeRefParents"))
-        //    using (IKistlContext ctx = KistlContext.GetContext())
+        //    using (IKistlContext ctx = GetContext())
         //    {
         //        ctx.GetQuery<Kistl.App.Test.Antwort>().ForEach(a => ctx.Delete(a));
         //        ctx.GetQuery<Kistl.App.Test.Fragebogen>().ForEach(a => ctx.Delete(a));
@@ -114,7 +114,7 @@ namespace Kistl.Client.WPF
         
         //private static void PrintControlKindTypes()
         //{
-        //    using (IKistlContext ctx = KistlContext.GetContext())
+        //    using (IKistlContext ctx = GetContext())
         //    {
         //        foreach (var ck in ctx.GetQuery<ControlKind>())
         //        {

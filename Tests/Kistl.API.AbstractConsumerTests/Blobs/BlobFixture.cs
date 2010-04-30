@@ -8,10 +8,8 @@ using Kistl.App.Base;
 
 namespace Kistl.API.AbstractConsumerTests.Blobs
 {
-    public abstract class BlobFixture
+    public abstract class BlobFixture : AbstractTestFixture
     {
-        public abstract IKistlContext GetContext();
-
         protected IKistlContext ctx;
         protected MemoryStream data;
         protected static readonly string txt_data = "Hello Blob!\nI'm a test file";
