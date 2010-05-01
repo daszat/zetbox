@@ -54,7 +54,7 @@ namespace Kistl.Client.Tests
         private DataObjectModel CreateNewDataObjectModel()
         {
             var newMock = scope.Resolve<KistlMockFactory>().CreateTestObject();
-            var dom = new DataObjectModel(null, null, null, newMock.Object);
+            var dom = new DataObjectModel(null, null, GetContext(), newMock.Object);
             models[objMock.Object] = dom;
             return dom;
         }
