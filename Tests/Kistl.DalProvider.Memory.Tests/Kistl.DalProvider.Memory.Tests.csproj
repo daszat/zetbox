@@ -54,9 +54,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AbstractMemoryContextTextFixture.cs" />
     <Compile Include="ContextTests\when_creating.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Setup.cs" />
+    <Compile Include="SetUpFixture.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Kistl.API\Kistl.API.csproj">
@@ -70,6 +71,10 @@
     <ProjectReference Include="..\..\Kistl.Objects\Kistl.Objects.csproj">
       <Project>{0C9E6E69-309F-46F7-A936-D5762229DEB9}</Project>
       <Name>Kistl.Objects</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Kistl.API.AbstractConsumerTests\Kistl.API.AbstractConsumerTests.csproj">
+      <Project>{1EEA57CD-4824-4A14-9447-3BD0E57997F4}</Project>
+      <Name>Kistl.API.AbstractConsumerTests</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -15,7 +15,7 @@ using Autofac;
 namespace Kistl.DalProvider.ClientObjects.Tests
 {
     [SetUpFixture]
-    public class SetUp : AbstractSetup
+    public class SetUpFixture : AbstractSetUpFixture
     {
 
         protected override void SetupBuilder(Autofac.ContainerBuilder builder)

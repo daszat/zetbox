@@ -104,26 +104,27 @@ this.WriteObjects("                    && !c.IsLoaded)\r\n");
 this.WriteObjects("                {\r\n");
 this.WriteObjects("                    c.Load();\r\n");
 this.WriteObjects("                }\r\n");
+this.WriteObjects("                c.ForEach(i => i.AttachToContext(Context));\r\n");
 this.WriteObjects("                return c;\r\n");
 this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
 this.WriteObjects("        private ",  wrapperClass , "<",  referencedInterface , ", ",  referencedImplementation , "> ",  wrapperName , ";\r\n");
 this.WriteObjects("\r\n");
-#line 92 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\ObjectListProperty.cst"
+#line 93 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\ObjectListProperty.cst"
 if (eagerLoading)
 	{
 
-#line 95 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\ObjectListProperty.cst"
+#line 96 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\ObjectListProperty.cst"
 this.WriteObjects("		private List<int> ",  name , "Ids;\r\n");
 this.WriteObjects("		private bool ",  name , "_was_eagerLoaded = false;\r\n");
-#line 99 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\ObjectListProperty.cst"
+#line 100 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\ObjectListProperty.cst"
 if (serializationList != null)
 		{
 			serializationList.Add("Implementation.ObjectClasses.EagerLoadingSerialization", Kistl.Server.Generators.Templates.Implementation.SerializerType.Binary, null, null, name, true);
 		}
 	}
 
-#line 105 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\ObjectListProperty.cst"
+#line 106 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\ObjectListProperty.cst"
 this.WriteObjects("\r\n");
 
         }

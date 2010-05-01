@@ -17,17 +17,13 @@ namespace Kistl.Server.Tests
     using NUnit.Framework.Constraints;
 
     [TestFixture]
-    public class ObjectTests
+    public class ObjectTests : AbstractServerTestFixture
     {
-        private ILifetimeScope container;
         private IKistlContext ctx;
 
-        [SetUp]
-        public void SetUp()
+        public override void SetUp()
         {
-            container = Kistl.Server.Tests.SetUp.CreateInnerContainer();
-
-            var setupCtx = container.Resolve<IKistlContext>();
+            var setupCtx = GetContext();
 
             var ma1 = setupCtx.Create<Mitarbeiter>();
             ma1.Geburtstag = new DateTime(1970, 10, 22);
@@ -53,23 +49,16 @@ namespace Kistl.Server.Tests
 
             setupCtx.SubmitChanges();
 
-            ctx = container.Resolve<IKistlContext>();
+            ctx = GetContext();
         }
 
-        [TearDown]
-        public void TearDown()
+        public override void TearDown()
         {
-            var deleteCtx = container.Resolve<IKistlContext>();
+            var deleteCtx = GetContext();
             deleteCtx.GetQuery<Mitarbeiter>().ForEach(obj => deleteCtx.Delete(obj));
             deleteCtx.GetQuery<Projekt>().ForEach(obj => { obj.Mitarbeiter.Clear(); obj.Tasks.Clear(); deleteCtx.Delete(obj); });
             deleteCtx.GetQuery<Task>().ForEach(obj => deleteCtx.Delete(obj));
             deleteCtx.SubmitChanges();
-            
-            if (container != null)
-            {
-                container.Dispose();
-                container = null;
-            }
         }
 
         [Test]
@@ -131,7 +120,7 @@ namespace Kistl.Server.Tests
 
             ctx.SubmitChanges();
 
-            IKistlContext checkctx = container.Resolve<IKistlContext>();
+            IKistlContext checkctx = GetContext();
             var checkObj = checkctx.GetQuery<Kistl.App.Projekte.Task>().First(o => o.ID == ID);
             Assert.That(checkObj, Is.Not.Null);
             Assert.That(checkObj.Aufwand, Is.EqualTo(aufwand));
@@ -157,7 +146,7 @@ namespace Kistl.Server.Tests
             ID = obj.ID;
             Assert.That(ID, Is.Not.EqualTo(Kistl.API.Helper.INVALIDID));
 
-            IKistlContext checkctx = container.Resolve<IKistlContext>();
+            IKistlContext checkctx = GetContext();
             var checkObj = checkctx.GetQuery<Kistl.App.Projekte.Task>().First(o => o.ID == ID);
             Assert.That(checkObj, Is.Not.Null);
             Assert.That(checkObj.Aufwand, Is.EqualTo(aufwand));

@@ -76,7 +76,7 @@
     <Compile Include="Mocks\ObjectClassMock.cs" />
     <Compile Include="Mocks\TestObjClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SetUp.cs" />
+    <Compile Include="SetUpFixture.cs" />
     <Compile Include="Mocks\TestObjClass_TestNameCollectionEntry.cs" />
     <Compile Include="Mocks\TestObjClassImpl.cs" />
     <Compile Include="Mocks\TestCompoundObject.cs" />

@@ -115,6 +115,8 @@ namespace Kistl.API
         /// </summary>
         private static bool _haveTriedLoading = false;
 
+        private static ITypeTransformations _typeTrans = null;
+
         /// <summary>
         /// Gets the FrozenContext singleton. This is loaded on demand. If no 
         /// frozen context provider/assembly is available an optionally 
@@ -156,11 +158,13 @@ namespace Kistl.API
                 string frozenAssemblyName = "Kistl.Objects.Frozen.FrozenContextImplementation, " + Kistl.API.Helper.FrozenAssembly;
                 if (!_haveTriedLoading)
                 {
+                    // TODO: Remove that when ForzenContext is loaded by AutoFac
+                    if (_typeTrans == null) throw new InvalidOperationException("RegisterTypeTransformations was not called");
                     try
                     {
                         _haveTriedLoading = true;
                         Type t = Type.GetType(frozenAssemblyName, true);
-                        _single = (IReadOnlyKistlContext)Activator.CreateInstance(t);
+                        _single = (IReadOnlyKistlContext)Activator.CreateInstance(t, _typeTrans);
                     }
                     catch (Exception ex)
                     {
@@ -188,6 +192,11 @@ namespace Kistl.API
                 Logging.Log.Warn("Replacing FrozenContext fallback.");
             }
             _fallback = ctx;
+        }
+
+        public static void RegisterTypeTransformations(ITypeTransformations typeTrans)
+        {
+            _typeTrans = typeTrans;
         }
     }
 }

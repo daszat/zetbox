@@ -24,41 +24,20 @@ namespace Kistl.DalProvider.EF.Tests
     {
         protected EntityCollection<Property__Implementation__> wrappedList;
 
-        private ILifetimeScope innerContainer;
         private IKistlContext ctx;
         private ObjectClass__Implementation__ parent;
 
         public EntityGenericListWrapperTests(int items)
             : base(items) { }
 
-        protected void EnsureContainer()
+        public override void SetUp()
         {
-            if (innerContainer == null)
-            {
-                innerContainer = KistlContext.Container.BeginLifetimeScope();
-                ctx = innerContainer.Resolve<IKistlContext>();
-            }
-        }
-
-        [TearDown]
-        protected void DisposeContainer()
-        {
-            if (innerContainer != null)
-            {
-                try
-                {
-                    innerContainer.Dispose();
-                }
-                finally
-                {
-                    innerContainer = null;
-                }
-            }
+            base.SetUp();
+            ctx = GetContext();
         }
 
         protected override Property NewItem()
         {
-            EnsureContainer();
             var result = ctx.Create<IntProperty>();
             result.Description = "item#" + NewItemNumber();
             return result;
@@ -66,7 +45,6 @@ namespace Kistl.DalProvider.EF.Tests
 
         protected override EntityListWrapper<Property, Property__Implementation__> CreateCollection(List<Property> items)
         {
-            EnsureContainer();
             parent = (ObjectClass__Implementation__)ctx.Create<ObjectClass>();
             wrappedList = parent.Properties__Implementation__;
             foreach (var item in items)

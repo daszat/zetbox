@@ -433,6 +433,7 @@ namespace Kistl.App.Projekte
                 {
                     c.Load();
                 }
+                c.ForEach(i => i.AttachToContext(Context));
                 return c;
             }
         }

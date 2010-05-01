@@ -26,7 +26,7 @@ namespace Kistl.API
     }
 
     [SetUpFixture]
-    public class SetUp : AbstractConsumerTests.AbstractSetup
+    public class SetUpFixture : AbstractConsumerTests.AbstractSetUpFixture
     {
         protected override void SetupBuilder(Autofac.ContainerBuilder builder)
         {

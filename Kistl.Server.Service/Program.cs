@@ -252,6 +252,9 @@ namespace Kistl.Server.Service
 
                 if (dataSourceXmlFile == null) { FrozenContext.RegisterFallback(container.Resolve<IReadOnlyKistlContext>()); }
 
+                // TODO: Remove when ForzenContext is loaded by AutoFac
+                FrozenContext.RegisterTypeTransformations(container.Resolve<ITypeTransformations>());
+
                 // initialise custom actions manager
                 var cams = container.Resolve<BaseCustomActionsManager>();
 

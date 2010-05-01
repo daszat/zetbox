@@ -17,24 +17,5 @@ namespace Kistl.Server.Tests
     public class ListPropertiesTests
         : AbstractListPropertiesTests
     {
-        private ILifetimeScope container;
-        private ILifetimeScope GetContainer()
-        {
-            if (container == null)
-            {
-                container = Kistl.Server.Tests.SetUp.CreateInnerContainer();
-            }
-            return container;
-        }
-
-        [TearDown]
-        public void TearDownContainer()
-        {
-            if (container != null)
-            {
-                container.Dispose();
-                container = null;
-            }
-        }
     }
 }

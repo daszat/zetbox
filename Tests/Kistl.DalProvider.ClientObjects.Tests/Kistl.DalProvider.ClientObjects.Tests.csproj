@@ -58,7 +58,7 @@
     <Compile Include="AbstractClientObjectsTextFixture.cs" />
     <Compile Include="Mocks\ProxyMock.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SetUp.cs" />
+    <Compile Include="SetUpFixture.cs" />
     <Compile Include="Tests\BinarySerializers\should_work_with_IStructs.cs" />
     <Compile Include="Tests\Blobs\when_using.cs" />
     <Compile Include="Tests\CompoundObjects\when_changing.cs" />

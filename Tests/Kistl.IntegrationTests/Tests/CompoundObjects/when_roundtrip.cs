@@ -15,9 +15,5 @@ namespace Kistl.IntegrationTests.CompoundObjects
     public class when_roundtrip
         : Kistl.API.AbstractConsumerTests.CompoundObjects.when_roundtrip
     {
-        public override IKistlContext GetContext()
-        {
-            return GetContext();
-        }
     }
 }

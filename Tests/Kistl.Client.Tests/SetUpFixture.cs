@@ -7,7 +7,7 @@ using NUnit.Framework;
 namespace Kistl
 {
     [SetUpFixture]
-    public class SetUp : Kistl.API.AbstractConsumerTests.AbstractSetup
+    public class SetUpFixture : Kistl.API.AbstractConsumerTests.AbstractSetUpFixture
     {
         protected override string GetConfigFile()
         {

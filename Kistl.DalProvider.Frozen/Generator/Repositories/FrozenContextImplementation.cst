@@ -52,7 +52,7 @@ namespace Kistl.Objects.Frozen
 		
 		public override IQueryable<T> GetQuery<T>()
 		{
-			return GetQuery(new InterfaceType(typeof(T))).Cast<T>();
+			return GetQuery(typeTrans.AsInterfaceType(typeof(T))).Cast<T>();
 		}
 
 		public override IQueryable<IDataObject> GetQuery(InterfaceType ifType)
@@ -118,7 +118,7 @@ namespace Kistl.Objects.Frozen
 
         public override T Find<T>(int ID)
         {
-			return (T)Find(new InterfaceType(typeof(T)), ID);
+			return (T)Find(typeTrans.AsInterfaceType(typeof(T)), ID);
         }
 	}
 }

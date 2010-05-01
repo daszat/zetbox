@@ -9,7 +9,7 @@ using Kistl.API.Configuration;
 
 namespace Kistl.API.AbstractConsumerTests
 {
-    public abstract class AbstractSetup
+    public abstract class AbstractSetUpFixture
     {
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Tests.AbstractSetup");
 
@@ -28,8 +28,13 @@ namespace Kistl.API.AbstractConsumerTests
 
         }
 
+        protected virtual void SetUpTest(IContainer container)
+        {
+
+        }
+
         [SetUp]
-        public void SetUp()
+        public virtual void SetUp()
         {
             using (Log.InfoTraceMethodCall("Starting up"))
             {
@@ -56,11 +61,12 @@ namespace Kistl.API.AbstractConsumerTests
                 }
                 SetupBuilder(builder);
                 container = builder.Build();
+                SetUpTest(container);
             }
         }
 
         [TearDown]
-        public void TearDown()
+        public virtual void TearDown()
         {
             using (Log.InfoTraceMethodCall("Shutting down"))
             {

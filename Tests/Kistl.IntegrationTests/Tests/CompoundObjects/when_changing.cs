@@ -15,9 +15,5 @@ namespace Kistl.IntegrationTests.CompoundObjects
     public class when_changing
         : Kistl.API.AbstractConsumerTests.CompoundObjects.when_changing
     {
-        public override IKistlContext GetContext()
-        {
-            return GetContext();
-        }
     }
 }

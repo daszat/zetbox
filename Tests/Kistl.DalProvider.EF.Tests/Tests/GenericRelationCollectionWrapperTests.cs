@@ -24,41 +24,20 @@ namespace Kistl.DalProvider.EF.Tests
     {
         protected EntityCollection<ObjectClass__Implementation__> wrappedCollection;
 
-        private ILifetimeScope innerContainer;
         private IKistlContext ctx;
         private ObjectClass__Implementation__ parent;
 
         public GenericRelationCollectionWrapperTests(int items)
             : base(items) { }
 
-        protected void EnsureContainer()
+        public override void SetUp()
         {
-            if (innerContainer == null)
-            {
-                innerContainer = KistlContext.Container.BeginLifetimeScope();
-                ctx = innerContainer.Resolve<IKistlContext>();
-            }
-        }
-
-        [TearDown]
-        protected void DisposeContainer()
-        {
-            if (innerContainer != null)
-            {
-                try
-                {
-                    innerContainer.Dispose();
-                }
-                finally
-                {
-                    innerContainer = null;
-                }
-            }
+            base.SetUp();
+            ctx = GetContext();
         }
 
         protected override ObjectClass NewItem()
         {
-            EnsureContainer();
             var result = ctx.Create<ObjectClass>();
             result.Description = "item#" + NewItemNumber();
             return result;
@@ -66,7 +45,6 @@ namespace Kistl.DalProvider.EF.Tests
 
         protected override EntityCollectionWrapper<ObjectClass, ObjectClass__Implementation__> CreateCollection(List<ObjectClass> items)
         {
-            EnsureContainer();
             parent = (ObjectClass__Implementation__)ctx.Create<ObjectClass>();
             wrappedCollection = parent.SubClasses__Implementation__;
             foreach (var item in items)

@@ -24,41 +24,20 @@ namespace Kistl.DalProvider.EF.Tests
     {
         protected EntityCollection<Projekt_haben_Mitarbeiter_RelationEntry__Implementation__> wrappedCollection;
 
-        private ILifetimeScope innerContainer;
         private IKistlContext ctx;
         private Projekt__Implementation__ parent;
 
         public RelationListWrapperTests(int items)
             : base(items) { }
 
-        protected void EnsureContainer()
+        public override void SetUp()
         {
-            if (innerContainer == null)
-            {
-                innerContainer = KistlContext.Container.BeginLifetimeScope();
-                ctx = innerContainer.Resolve<IKistlContext>();
-            }
-        }
-
-        [TearDown]
-        protected void DisposeContainer()
-        {
-            if (innerContainer != null)
-            {
-                try
-                {
-                    innerContainer.Dispose();
-                }
-                finally
-                {
-                    innerContainer = null;
-                }
-            }
+            base.SetUp();
+            ctx = GetContext();
         }
 
         protected override Mitarbeiter NewItem()
         {
-            EnsureContainer();
             var result = ctx.Create<Mitarbeiter>();
             result.Name = "item#" + result.ID;
             return result;
@@ -66,7 +45,6 @@ namespace Kistl.DalProvider.EF.Tests
 
         protected override EntityRelationBSideListWrapper<Projekt, Mitarbeiter, Projekt_haben_Mitarbeiter_RelationEntry__Implementation__> CreateCollection(List<Mitarbeiter> items)
         {
-            EnsureContainer();
             parent = (Projekt__Implementation__)ctx.Create<Projekt>();
             parent.Name = "proj#" + parent.ID;
             wrappedCollection = parent.Mitarbeiter__Implementation__;

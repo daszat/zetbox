@@ -12,22 +12,14 @@ namespace Kistl.DalProvider.Memory.Tests.ContextTests
     using Kistl.App.Base;
 
     [TestFixture]
-    public class when_creating
+    public class when_creating : AbstractMemoryContextTextFixture
     {
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.DalProvider.Memory.Tests.ContextTests.when_creating");
-
-        private ILifetimeScope container;
-
-        [SetUp]
-        public void BeginLifetimeScope()
-        {
-            container = Setup.MasterContainer.BeginLifetimeScope();
-        }
 
         [Test]
         public void should_resolve_readwrite()
         {
-            IKistlContext ctx = container.Resolve<BaseMemoryContext>();
+            IKistlContext ctx = GetMemoryContext();
 
             Assert.That(ctx, Is.Not.Null);
             Assert.That(ctx.IsReadonly, Is.False);
@@ -36,7 +28,7 @@ namespace Kistl.DalProvider.Memory.Tests.ContextTests
         [Test]
         public void should_be_queryable()
         {
-            IKistlContext ctx = container.Resolve<BaseMemoryContext>();
+            IKistlContext ctx = GetMemoryContext();
 
             IQueryable<ObjectClass> query = ctx.GetQuery<ObjectClass>();
             Assert.That(query, Is.Not.Null);
@@ -44,22 +36,6 @@ namespace Kistl.DalProvider.Memory.Tests.ContextTests
             var list = query.ToList();
 
             Assert.That(list, Is.Empty);
-        }
-
-        [TearDown]
-        public void DisposeLifetimeScope()
-        {
-            if (container != null)
-            {
-                try
-                {
-                    container.Dispose();
-                }
-                finally
-                {
-                    container = null;
-                }
-            }
         }
     }
 }

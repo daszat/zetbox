@@ -15,11 +15,10 @@ namespace Kistl.Server.Tests.Security
     using Kistl.App.Projekte;
 
     using NUnit.Framework;
-using Kistl.API.Configuration;
+    using Kistl.API.Configuration;
 
-    public abstract class SecurityDataFixture
+    public abstract class SecurityDataFixture : AbstractServerTestFixture
     {
-        protected ILifetimeScope container;
         protected KistlConfig config;
 
         protected Identity admin;
@@ -50,7 +49,7 @@ using Kistl.API.Configuration;
 
         private void CreateTestData()
         {
-            srvCtx = container.Resolve<IKistlServerContext>();
+            srvCtx = scope.Resolve<IKistlServerContext>();
 
             var grpAdmin = srvCtx.FindPersistenceObject<Group>(new Guid("9C46F2B1-09D9-46B8-A7BF-812850921030"));
             var grpEveryOne = srvCtx.FindPersistenceObject<Group>(new Guid("76D43CF2-4DDF-4A3A-9AD6-28CABFDDDFF1"));
@@ -91,9 +90,9 @@ using Kistl.API.Configuration;
             srvCtx.SubmitChanges();
 
             // Create 3 identity context
-            id1Ctx = container.GetKistlContext(identity1);
-            id2Ctx = container.GetKistlContext(identity2);
-            id3Ctx_low = container.GetKistlContext(identity3_low);
+            id1Ctx = scope.GetKistlContext(identity1);
+            id2Ctx = scope.GetKistlContext(identity2);
+            id3Ctx_low = scope.GetKistlContext(identity3_low);
 
             // Create TestData with Identity 1
             prj1 = id1Ctx.Create<Projekt>();
@@ -150,7 +149,7 @@ using Kistl.API.Configuration;
 
         public void DeleteData()
         {
-            using (var ctx = container.Resolve<IKistlServerContext>())
+            using (var ctx = scope.Resolve<IKistlServerContext>())
             {
                 if (identity1 != null) { var id = ctx.Find<Identity>(identity1.ID); id.Groups.Clear(); ctx.Delete(id); }
                 if (identity2 != null) { var id = ctx.Find<Identity>(identity2.ID); id.Groups.Clear(); ctx.Delete(id); }
@@ -166,19 +165,11 @@ using Kistl.API.Configuration;
             }
         }
 
-        [SetUp]
-        public void SetUp()
+        public override void SetUp()
         {
-            container = Kistl.Server.Tests.SetUp.CreateInnerContainer();
-            config = container.Resolve<KistlConfig>();
+            config = scope.Resolve<KistlConfig>();
             DeleteData();
             CreateTestData();
-        }
-
-        [TearDown]
-        public void DisposeContext()
-        {
-            container.Dispose();
         }
     }
 }

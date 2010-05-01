@@ -12,7 +12,7 @@ namespace Kistl.DalProvider.Frozen
     /// </summary>
     public abstract class BaseFrozenContext : IReadOnlyKistlContext
     {
-        private readonly ITypeTransformations typeTrans;
+        protected readonly ITypeTransformations typeTrans;
         public BaseFrozenContext(ITypeTransformations typeTrans)
         {
             this.typeTrans = typeTrans;

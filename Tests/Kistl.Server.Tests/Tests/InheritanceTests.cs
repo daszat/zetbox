@@ -15,27 +15,13 @@ using NUnit.Framework.Constraints;
 namespace Kistl.Server.Tests
 {
     [TestFixture]
-    public class InheritanceTests
+    public class InheritanceTests : AbstractServerTestFixture
     {
-        private ILifetimeScope container;
         private IReadOnlyKistlContext ctx;
 
-        [SetUp]
-        public void SetUp()
+        public override void SetUp()
         {
-            //CacheController<Kistl.API.IDataObject>.Current.Clear();
-            container = Kistl.Server.Tests.SetUp.CreateInnerContainer();
-            ctx = container.Resolve<IReadOnlyKistlContext>();
-        }
-
-        [TearDown]
-        public void TearDown()
-        {
-            if (container != null)
-            {
-                container.Dispose();
-                container = null;
-            }
+            ctx = scope.Resolve<IReadOnlyKistlContext>();
         }
 
         [Test]

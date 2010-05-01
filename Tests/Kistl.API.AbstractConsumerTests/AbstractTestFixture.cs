@@ -16,7 +16,7 @@ namespace Kistl.API.AbstractConsumerTests
         [SetUp]
         public virtual void SetUp()
         {
-            scope = AbstractSetup.BeginLifetimeScope();
+            scope = AbstractSetUpFixture.BeginLifetimeScope();
         }
 
         [TearDown]
@@ -25,7 +25,7 @@ namespace Kistl.API.AbstractConsumerTests
             scope.Dispose();
         }
 
-        public virtual IKistlContext GetContext()
+        protected IKistlContext GetContext()
         {
             return scope.Resolve<IKistlContext>();
         }

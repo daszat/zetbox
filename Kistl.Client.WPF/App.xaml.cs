@@ -92,10 +92,14 @@ namespace Kistl.Client.WPF
 
                 container = CreateMasterContainer(config);
 
+                // TODO: Remove when ForzenContext is loaded by AutoFac
+                FrozenContext.RegisterTypeTransformations(container.Resolve<ITypeTransformations>());
+
                 // initialise AppContext
                 SplashScreen.SetInfo("Initializing Custom Actions Manager");
                 // initialise custom actions manager
                 var cams = container.Resolve<BaseCustomActionsManager>();
+
 
                 SplashScreen.SetInfo("Initializing Launcher");
 

@@ -15,9 +15,5 @@ namespace Kistl.DalProvider.EF.Tests.CompoundObjects
     public class when_changing_a_compoundobject_member
         : Kistl.API.AbstractConsumerTests.CompoundObjects.when_changing_a_compoundobject_member
     {
-        public override IKistlContext GetContext()
-        {
-            return GetContext();
-        }
     }
 }

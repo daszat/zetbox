@@ -20,45 +20,30 @@ using NUnit.Framework.Constraints;
 namespace Kistl.Server.Tests
 {
     [SetUpFixture]
-    public class SetUp : Kistl.API.AbstractConsumerTests.DatabaseResetup, IDisposable
+    public class SetUpFixture : Kistl.API.AbstractConsumerTests.DatabaseResetup, IDisposable
     {
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Tests.Server.SetUp");
 
-        private static IContainer container;
         private IKistlAppDomain manager;
 
-        internal static ILifetimeScope CreateInnerContainer()
+        protected override void SetUpTest(IContainer container)
         {
-            return container.BeginLifetimeScope();
-        }
-
-        [SetUp]
-        public void Init()
-        {
+            base.SetUpTest(container);
             using (Log.InfoTraceMethodCall("Starting up"))
             {
-                var config = KistlConfig.FromFile("Kistl.Server.Tests.Config.xml");
-                config.Server.DocumentStore = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "Server");
-
-                AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
-
-                var builder = Kistl.API.Utils.AutoFacBuilder.CreateContainerBuilder(config, config.Server.Modules);
-
-                container = builder.Build();
                 AutofacServiceHostFactory.Container = container;
 
+                var config = container.Resolve<KistlConfig>();
                 ResetDatabase(config);
 
                 manager = container.Resolve<IKistlAppDomain>();
-
                 manager.Start(config);
             }
         }
 
-        [TearDown]
-        public void TearDown()
+        public override void TearDown()
         {
-            lock (typeof(SetUp))
+            lock (typeof(SetUpFixture))
             {
                 if (manager != null)
                 {
@@ -66,8 +51,6 @@ namespace Kistl.Server.Tests
                     {
                         manager.Stop();
                         manager = null;
-                        container.Dispose();
-                        container = null;
                     }
                 }
             }
@@ -81,5 +64,15 @@ namespace Kistl.Server.Tests
         }
 
         #endregion
+
+        protected override string GetConfigFile()
+        {
+            return "Kistl.Server.Tests.Config.xml";
+        }
+
+        protected override HostType GetHostType()
+        {
+            return HostType.Server;
+        }
     }
 }

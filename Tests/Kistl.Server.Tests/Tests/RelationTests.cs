@@ -15,17 +15,13 @@ using NUnit.Framework.Constraints;
 namespace Kistl.Server.Tests
 {
     [TestFixture]
-    public class RelationTests
+    public class RelationTests : AbstractServerTestFixture
     {
-        private ILifetimeScope container;
         private IKistlContext ctx;
 
-        [SetUp]
-        public void SetUp()
+        public override void SetUp()
         {
-            container = Kistl.Server.Tests.SetUp.CreateInnerContainer();
-
-            var setupCtx = container.Resolve<IKistlContext>();
+            var setupCtx = GetContext();
             var ma1 = setupCtx.Create<Mitarbeiter>();
             ma1.Geburtstag = new DateTime(1970, 10, 22);
             ma1.Name = "Testmitarbeiter Blaha";
@@ -44,21 +40,14 @@ namespace Kistl.Server.Tests
             prj2.Name = "flubb";
 
             setupCtx.SubmitChanges();
-            ctx = container.Resolve<IKistlContext>();
+            ctx = GetContext();
         }
 
-        [TearDown]
-        public void TearDown()
+        public override void TearDown()
         {
-            var deleteCtx = container.Resolve<IKistlContext>();
+            var deleteCtx = GetContext();
             deleteCtx.GetQuery<Mitarbeiter>().ForEach(obj => deleteCtx.Delete(obj));
             deleteCtx.GetQuery<Projekt>().ForEach(obj => { obj.Mitarbeiter.Clear(); deleteCtx.Delete(obj); });
-
-            if (container != null)
-            {
-                container.Dispose();
-                container = null;
-            }
         }
 
         #region Set Relation once
@@ -434,7 +423,7 @@ namespace Kistl.Server.Tests
 
             ctx.SubmitChanges();
 
-            var checkCtx = container.Resolve<IKistlContext>();
+            var checkCtx = GetContext();
             var checkMethod = checkCtx.Find<Kistl.App.Base.Method>(methodID);
             var checkParameter = checkMethod.Parameter.ToList();
 
@@ -465,7 +454,7 @@ namespace Kistl.Server.Tests
 
             ctx.SubmitChanges();
 
-            var checkCtx = container.Resolve<IKistlContext>();
+            var checkCtx = GetContext();
             var checkPrj = checkCtx.Find<Kistl.App.Projekte.Projekt>(prjID);
             var checkMitarbeiter = checkPrj.Mitarbeiter.ToList();
 
@@ -495,7 +484,7 @@ namespace Kistl.Server.Tests
 
             ctx.SubmitChanges();
 
-            var checkCtx = container.Resolve<IKistlContext>();
+            var checkCtx = GetContext();
             var checkMitarbeiter = checkCtx.Find<Kistl.App.Projekte.Mitarbeiter>(maID);
             var checkProjekte = checkMitarbeiter.Projekte.ToList();
 

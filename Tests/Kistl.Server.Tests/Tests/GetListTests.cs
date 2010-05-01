@@ -16,29 +16,15 @@ namespace Kistl.Server.Tests
     using NUnit.Framework.Constraints;
 
     [TestFixture]
-    public class GetListTests
+    public class GetListTests : AbstractServerTestFixture
     {
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Tests.Server.GetList");
 
-        private ILifetimeScope container;
         private IReadOnlyKistlContext ctx;
 
-        [SetUp]
-        public void SetUp()
+        public override void SetUp()
         {
-            //CacheController<Kistl.API.IDataObject>.Current.Clear();
-            container = Kistl.Server.Tests.SetUp.CreateInnerContainer();
-            ctx = container.Resolve<IKistlContext>();
-        }
-
-        [TearDown]
-        public void TearDown()
-        {
-            if (container != null)
-            {
-                container.Dispose();
-                container = null;
-            }
+            ctx = GetContext();
         }
 
         [Test]

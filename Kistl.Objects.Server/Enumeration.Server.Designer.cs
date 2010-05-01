@@ -125,6 +125,7 @@ namespace Kistl.App.Base
                 {
                     c.Load();
                 }
+                c.ForEach(i => i.AttachToContext(Context));
                 return c;
             }
         }

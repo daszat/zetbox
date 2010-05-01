@@ -52,7 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SetUp.cs" />
+    <Compile Include="SetUpFixture.cs" />
     <Compile Include="Tests\FrozenContextTests.cs" />
     <Compile Include="Tests\ListPropertiesTests.cs" />
   </ItemGroup>

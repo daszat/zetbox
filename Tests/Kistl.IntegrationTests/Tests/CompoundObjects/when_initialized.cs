@@ -15,9 +15,5 @@ namespace Kistl.IntegrationTests.CompoundObjects
     public class when_initialized
         : Kistl.API.AbstractConsumerTests.CompoundObjects.when_initialized
     {
-        public override IKistlContext GetContext()
-        {
-            return GetContext();
-        }
     }
 }

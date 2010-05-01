@@ -5,7 +5,7 @@ namespace Kistl.DalProvider.EF.Tests
     using System.Collections.Generic;
 
     using Autofac;
-    
+
     using Kistl.API;
     using Kistl.API.Configuration;
     using Kistl.App.Base;
@@ -16,31 +16,13 @@ namespace Kistl.DalProvider.EF.Tests
     using Kistl.DalProvider.EF.Mocks;
 
     [SetUpFixture]
-    public class SetUp
+    public class SetUpFixture
         : Kistl.API.AbstractConsumerTests.DatabaseResetup
     {
-        private static IContainer container;
-
-        internal static ILifetimeScope CreateInnerContainer()
+        protected override void SetUpTest(IContainer container)
         {
-            return container.BeginLifetimeScope();
-        }
-
-        [SetUp]
-        public void Init()
-        {
-            var config = KistlConfig.FromFile("Kistl.DalProvider.EF.Tests.Config.xml");
-            config.Server.DocumentStore = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "Server");
-
-            AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
-
-            var builder = Kistl.API.Utils.AutoFacBuilder.CreateContainerBuilder(config, config.Server.Modules);
-            builder.RegisterInstance(config).ExternallyOwned().SingleInstance();
-            container = builder.Build();
-
-            KistlContext.Container = container;
-
-            ResetDatabase(config);
+            base.SetUpTest(container);
+            ResetDatabase(container.Resolve<KistlConfig>());
 
             Property__Implementation__.OnToString_Property
                 += (obj, args) => { args.Result = String.Format("Prop, [{0}]", obj.Description); };
@@ -48,6 +30,16 @@ namespace Kistl.DalProvider.EF.Tests
                 += (obj, args) => { args.Result = String.Format("MA, [{0}]", obj.Name); };
             Projekt__Implementation__.OnToString_Projekt
                 += (obj, args) => { args.Result = String.Format("Proj, [{0}]", obj.Name); };
+        }
+
+        protected override string GetConfigFile()
+        {
+            return "Kistl.DalProvider.EF.Tests.Config.xml";
+        }
+
+        protected override HostType GetHostType()
+        {
+            return HostType.Server;
         }
     }
 }

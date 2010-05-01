@@ -71,7 +71,7 @@
     <Compile Include="Kistl.Client.Tests\PresenterModelTests.cs" />
     <Compile Include="Kistl.Client.Tests\SynchronousThreadManagerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SetUp.cs" />
+    <Compile Include="SetUpFixture.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Kistl.API.Client\Kistl.API.Client.csproj">

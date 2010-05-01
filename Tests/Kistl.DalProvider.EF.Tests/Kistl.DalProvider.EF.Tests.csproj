@@ -79,10 +79,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AbstractEFTestFixture.cs" />
-    <Compile Include="KistlContext.cs" />
     <Compile Include="Mocks\CustomActionsManagerAPITest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SetUp.cs" />
+    <Compile Include="SetUpFixture.cs" />
     <Compile Include="Tests\BaseServerDataObjects\navigator_context_checks.cs" />
     <Compile Include="Tests\BaseServerDataObjects\when_changed.cs" />
     <Compile Include="Tests\BaseServerDataObjects\when_loaded.cs" />

@@ -19,33 +19,27 @@ using Kistl.App.Extensions;
 namespace Kistl.IntegrationTests
 {
     [SetUpFixture]
-    public class SetUp : Kistl.API.AbstractConsumerTests.DatabaseResetup, IDisposable
+    public class SetUpFixture : Kistl.API.AbstractConsumerTests.DatabaseResetup, IDisposable
     {
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Tests.Integration.SetUp");
 
         private ServerDomainManager manager;
 
-        [SetUp]
-        public void Init()
+        protected override void SetUpTest(IContainer container)
         {
+            base.SetUpTest(container);
             using (Log.InfoTraceMethodCall("Starting up"))
             {
                 try
                 {
-                    var config = KistlConfig.FromFile("Kistl.IntegrationTests.Config.xml");
-                    config.Server.DocumentStore = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "Server");
-                    config.Client.DocumentStore = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "Client");
-
+                    var config = container.Resolve<KistlConfig>();
                     ResetDatabase(config);
 
                     manager = new ServerDomainManager();
                     manager.Start(config);
 
-                    AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
-
-                    var builder = Kistl.API.Utils.AutoFacBuilder.CreateContainerBuilder(config, config.Client.Modules);
-                    builder.RegisterModule(new Kistl.Client.WPF.WPFModule());
-                    var container = builder.Build();
+                    // TODO: Remove when ForzenContext is loaded by AutoFac
+                    FrozenContext.RegisterTypeTransformations(container.Resolve<ITypeTransformations>());
 
                     // initialise custom actions manager
                     var cams = container.Resolve<BaseCustomActionsManager>();
@@ -66,10 +60,9 @@ namespace Kistl.IntegrationTests
             }
         }
 
-        [TearDown]
-        public void TearDown()
+        public override void TearDown()
         {
-            lock (typeof(SetUp))
+            lock (typeof(SetUpFixture))
             {
                 DisposeManager();
             }
@@ -96,5 +89,15 @@ namespace Kistl.IntegrationTests
         }
 
         #endregion
+
+        protected override string GetConfigFile()
+        {
+            return "Kistl.IntegrationTests.Config.xml";
+        }
+
+        protected override HostType GetHostType()
+        {
+            return HostType.Client;
+        }
     }
 }

@@ -17,7 +17,7 @@ namespace Kistl.API.AbstractConsumerTests
     /// <summary>
     /// Resets the database into a known state
     /// </summary>
-    public abstract class DatabaseResetup
+    public abstract class DatabaseResetup : AbstractSetUpFixture
     {
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Tests.Api.AbstractConsumer");
 

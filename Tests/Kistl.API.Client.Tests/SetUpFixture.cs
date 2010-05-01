@@ -3,47 +3,46 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using Kistl.API.Server.Mocks;
+using Kistl.API.Client.Mocks;
 
 using NUnit.Framework;
 using Autofac;
 using Kistl.API.Configuration;
 
-namespace Kistl.API.Server.Tests
+namespace Kistl.API.Client.Tests
 {
-    internal class ServerApiAssemblyConfiguration : IAssemblyConfiguration
+    internal class ClientApiAssemblyConfiguration : IAssemblyConfiguration
     {
         #region IAssemblyConfiguration Members
 
         public string InterfaceAssemblyName
         {
-            get { return typeof(ServerApiAssemblyConfiguration).Assembly.FullName; }
+            get { return Kistl.API.Helper.InterfaceAssembly; }
         }
 
         public IEnumerable<string> AllImplementationAssemblyNames
         {
-            get { return new[] { typeof(ServerApiAssemblyConfiguration).Assembly.FullName }; }
+            get { return new[] { typeof(ClientApiAssemblyConfiguration).Assembly.FullName }; }
         }
         #endregion
     }
 
     [SetUpFixture]
-    public class SetUp : AbstractConsumerTests.AbstractSetup
+    public class SetUpFixture : AbstractConsumerTests.AbstractSetUpFixture
     {
         protected override void SetupBuilder(Autofac.ContainerBuilder builder)
         {
             base.SetupBuilder(builder);
+            builder.RegisterType<TestProxy>()
+                .As<IProxy>()
+                .InstancePerDependency();
+
             builder
-                .RegisterType<ServerApiAssemblyConfiguration>()
+                .RegisterType<ClientApiAssemblyConfiguration>()
                 .As<IAssemblyConfiguration>()
                 .SingleInstance();
 
-            builder
-                .RegisterType<MetaDataResolverMock>()
-                .As<IMetaDataResolver>()
-                .InstancePerDependency();
-
-            builder.Register(c => new KistlContextMock(c.Resolve<IMetaDataResolver>(), null, c.Resolve<KistlConfig>(), c.Resolve<ITypeTransformations>()))
+            builder.Register(c => new KistlContextImpl(c.Resolve<KistlConfig>(), c.Resolve<ITypeTransformations>(), c.Resolve<IProxy>(), typeof(Kistl.App.Test.TestObjClass__Implementation__).Assembly.FullName))
                 .As<IKistlContext>()
                 .As<IReadOnlyKistlContext>()
                 .InstancePerDependency();
@@ -51,12 +50,12 @@ namespace Kistl.API.Server.Tests
 
         protected override string GetConfigFile()
         {
-            return "Kistl.API.Server.Tests.Config.xml";
+            return "Kistl.API.Client.Tests.Config.xml";
         }
 
         protected override HostType GetHostType()
         {
-            return HostType.Server;
+            return HostType.Client;
         }
     }
 }
