@@ -25,9 +25,9 @@ namespace Kistl.IntegrationTests
 
         private ServerDomainManager manager;
 
-        protected override void SetUpTest(IContainer container)
+        protected override void SetUp(IContainer container)
         {
-            base.SetUpTest(container);
+            base.SetUp(container);
             using (Log.InfoTraceMethodCall("Starting up"))
             {
                 try

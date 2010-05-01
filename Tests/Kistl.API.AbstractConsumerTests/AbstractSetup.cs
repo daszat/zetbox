@@ -13,6 +13,11 @@ namespace Kistl.API.AbstractConsumerTests
     {
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Tests.AbstractSetup");
 
+        static AbstractSetUpFixture()
+        {
+            Logging.Configure();
+        }
+
         private static IContainer container;
 
         public static ILifetimeScope BeginLifetimeScope()
@@ -23,18 +28,8 @@ namespace Kistl.API.AbstractConsumerTests
         protected abstract string GetConfigFile();
         protected abstract HostType GetHostType();
 
-        protected virtual void SetupBuilder(ContainerBuilder builder)
-        {
-
-        }
-
-        protected virtual void SetUpTest(IContainer container)
-        {
-
-        }
-
         [SetUp]
-        public virtual void SetUp()
+        public void SetUpTestFixture()
         {
             using (Log.InfoTraceMethodCall("Starting up"))
             {
@@ -61,9 +56,20 @@ namespace Kistl.API.AbstractConsumerTests
                 }
                 SetupBuilder(builder);
                 container = builder.Build();
-                SetUpTest(container);
+                SetUp(container);
             }
         }
+
+        protected virtual void SetupBuilder(ContainerBuilder builder)
+        {
+
+        }
+
+        protected virtual void SetUp(IContainer container)
+        {
+
+        }
+
 
         [TearDown]
         public virtual void TearDown()

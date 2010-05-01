@@ -19,9 +19,9 @@ namespace Kistl.DalProvider.EF.Tests
     public class SetUpFixture
         : Kistl.API.AbstractConsumerTests.DatabaseResetup
     {
-        protected override void SetUpTest(IContainer container)
+        protected override void SetUp(IContainer container)
         {
-            base.SetUpTest(container);
+            base.SetUp(container);
             ResetDatabase(container.Resolve<KistlConfig>());
 
             Property__Implementation__.OnToString_Property

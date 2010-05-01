@@ -200,7 +200,6 @@ namespace Kistl.DalProvider.ClientObjects.Mocks
 
         public void Dispose()
         {
-            throw new NotImplementedException();
         }
 
         public System.IO.Stream GetBlobStream(int ID)
