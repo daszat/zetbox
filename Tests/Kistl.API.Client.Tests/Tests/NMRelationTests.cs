@@ -20,32 +20,14 @@ namespace Kistl.API.Client.Tests
     public class NMRelationBSideTests
         : BasicListTests<ClientRelationBSideListWrapper<Projekt, Mitarbeiter, Projekt_haben_Mitarbeiter_RelationEntry__Implementation__>, Mitarbeiter>
     {
-        private IKistlContext ctx;
         private Projekt__Implementation__ parent;
 
         public NMRelationBSideTests(int items)
             : base(items) { }
 
-        protected void EnsureContext()
-        {
-            if (ctx == null)
-            {
-                ctx = GetContext();
-            }
-        }
-
-        [TearDown]
-        protected void DisposeContext()
-        {
-            if (ctx != null)
-            {
-                ctx = null;
-            }
-        }
 
         protected override Mitarbeiter NewItem()
         {
-            EnsureContext();
             var result = ctx.Create<Mitarbeiter>();
             result.Name = "item#" + result.ID;
             return result;
@@ -53,7 +35,6 @@ namespace Kistl.API.Client.Tests
 
         protected override ClientRelationBSideListWrapper<Projekt, Mitarbeiter, Projekt_haben_Mitarbeiter_RelationEntry__Implementation__> CreateCollection(List<Mitarbeiter> items)
         {
-            EnsureContext();
             parent = (Projekt__Implementation__)ctx.Create<Projekt>();
             parent.Name = "proj#" + parent.ID;
             foreach (var item in items)

@@ -28,7 +28,6 @@ namespace Kistl.IntegrationTests
         private Guid _valueDescGuid;
         private Guid _otherClassGuid;
 
-        private IKistlContext ctx;
         private ObjectClass _parent;
         private bool _hasCollectionChanged;
         private bool _hasParentChanged;
@@ -69,9 +68,6 @@ namespace Kistl.IntegrationTests
         protected override void PreSetup()
         {
             SetupFixtureObject();
-
-            ctx = GetContext();
-            Assert.That(ctx.AttachedObjects, Is.Empty);
 
             _parent = ctx.FindPersistenceObject<ObjectClass>(_fixtureGuid);
             Assert.That(_parent.Properties.Count, Is.EqualTo(items));
@@ -199,7 +195,6 @@ namespace Kistl.IntegrationTests
         private Guid _valueDescGuid;
         private Guid _otherClassGuid;
 
-        private IKistlContext ctx;
         private ObjectClass _parent;
         private bool _hasCollectionChanged;
         private bool _hasParentChanged;
@@ -241,9 +236,6 @@ namespace Kistl.IntegrationTests
         protected override void PreSetup()
         {
             SetupFixtureObject();
-
-            ctx = GetContext();
-            Assert.That(ctx.AttachedObjects, Is.Empty);
 
             _parent = ctx.FindPersistenceObject<ObjectClass>(_fixtureGuid);
             Assert.That(_parent.Properties.Count, Is.EqualTo(items));
