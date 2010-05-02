@@ -43,7 +43,9 @@ namespace Kistl.API
 
         public override ImplementationType ToImplementationType(InterfaceType t)
         {
-            return GetImplementationType(Type.GetType(t.Type.FullName + Kistl.API.Helper.ImplementationSuffix + "," + Kistl.API.Helper.MemoryAssembly));
+            // TODO: Maybe MemoryContext is not available so Type could not be loaded. ServerAssembly is always available
+            //return GetImplementationType(Type.GetType(t.Type.FullName + Kistl.API.Helper.ImplementationSuffix + "," + Kistl.API.Helper.MemoryAssembly, true));
+            return GetImplementationType(Type.GetType(t.Type.FullName + Kistl.API.Helper.ImplementationSuffix + "," + Kistl.API.Helper.ServerAssembly, true));
         }
     }
 }
