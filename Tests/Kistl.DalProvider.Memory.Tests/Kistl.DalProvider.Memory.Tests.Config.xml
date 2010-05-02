@@ -1,19 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <KistlConfig xmlns="http://dasz.at/Kistl/">
-  <ConfigName>Memory DalProvider Test Configuration</ConfigName>
-  <Server StartServer="false">
-    <DatabaseProvider>System.Data.SqlClient</DatabaseProvider>
-    <ConnectionString>Data Source=.\SQLEXPRESS;Initial Catalog=Kistl_test;Integrated Security=True;MultipleActiveResultSets=true;</ConnectionString>
-    <DocumentStore>DocumentStore\Server\</DocumentStore>
-    <LogFilePath>bin\LogFiles</LogFilePath>
-    <CodeGenWorkingPath>bin\CodeGenNext</CodeGenWorkingPath>
-    <CodeGenOutputPath>bin\CodeGen</CodeGenOutputPath>
-    <CodeGenArchivePath>Backup</CodeGenArchivePath>
-    <Modules>
-      <!--<Module>Kistl.API.ApiModule, Kistl.API</Module>
-      <Module>Kistl.DalProvider.Memory.ClientProvider, Kistl.DalProvider.Memory</Module>-->
-    </Modules>
-  </Server>
+  <ConfigName>Memory DalProvider Test Configuration</ConfigName>  
   <SourceFileLocation>
     <!-- default probe path -->
     <string>P:\Kistl\bin\CodeGen\bin\Debug</string>

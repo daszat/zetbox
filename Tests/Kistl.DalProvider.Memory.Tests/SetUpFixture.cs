@@ -9,6 +9,23 @@ using NUnit.Framework;
 using Kistl.API.Configuration;
 using Kistl.API;
 
+
+internal class MemoryAssemblyConfiguration : IAssemblyConfiguration
+{
+    #region IAssemblyConfiguration Members
+
+    public string InterfaceAssemblyName
+    {
+        get { return Kistl.API.Helper.InterfaceAssembly; }
+    }
+
+    public IEnumerable<string> AllImplementationAssemblyNames
+    {
+        get { return new[] { Kistl.API.Helper.MemoryAssembly }; }
+    }
+    #endregion
+}
+
 [SetUpFixture]
 public sealed class SetUpFixture : Kistl.API.AbstractConsumerTests.AbstractSetUpFixture
 {
@@ -21,6 +38,11 @@ public sealed class SetUpFixture : Kistl.API.AbstractConsumerTests.AbstractSetUp
         // Register modules -> Hosttype = none
         builder.RegisterModule(new Kistl.API.ApiModule());
         builder.RegisterModule(new Kistl.DalProvider.Memory.ClientProvider());
+
+        builder
+           .RegisterType<MemoryAssemblyConfiguration>()
+           .As<IAssemblyConfiguration>()
+           .SingleInstance();
     }
 
     protected override string GetConfigFile()
