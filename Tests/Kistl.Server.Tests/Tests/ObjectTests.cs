@@ -23,6 +23,7 @@ namespace Kistl.Server.Tests
 
         public override void SetUp()
         {
+            base.SetUp();
             var setupCtx = GetContext();
 
             var ma1 = setupCtx.Create<Mitarbeiter>();

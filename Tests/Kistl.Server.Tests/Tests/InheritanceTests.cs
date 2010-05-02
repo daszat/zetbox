@@ -21,6 +21,7 @@ namespace Kistl.Server.Tests
 
         public override void SetUp()
         {
+            base.SetUp();
             ctx = scope.Resolve<IReadOnlyKistlContext>();
         }
 

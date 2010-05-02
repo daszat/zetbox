@@ -167,6 +167,7 @@ namespace Kistl.Server.Tests.Security
 
         public override void SetUp()
         {
+            base.SetUp();
             config = scope.Resolve<KistlConfig>();
             DeleteData();
             CreateTestData();
