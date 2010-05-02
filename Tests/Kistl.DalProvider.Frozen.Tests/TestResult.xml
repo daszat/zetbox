@@ -1,27 +1,26 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <!--This file represents the results of running a test suite-->
-<test-results name="P:\Kistl\Tests\Kistl.DalProvider.Frozen.Tests\Kistl.DalProvider.Frozen.Tests.nunit" total="5" errors="0" failures="0" not-run="7" ignored="7" skipped="0" invalid="0" date="2009-03-20" time="15:36:13">
-  <environment nunit-version="2.5.0.9015" clr-version="2.0.50727.3074" os-version="Microsoft Windows NT 6.0.6001 Service Pack 1" platform="Win32NT" cwd="P:\Kistl\Tests\Kistl.DalProvider.Frozen.Tests" machine-name="KISTL" user="david" user-domain="kistl" />
-  <culture-info current-culture="de-AT" current-uiculture="de-DE" />
-  <test-suite name="P:\Kistl\Tests\Kistl.DalProvider.Frozen.Tests\Kistl.DalProvider.Frozen.Tests.nunit" executed="True" success="True" time="1.851" asserts="0">
+<test-results name="P:\Kistl\Tests\Kistl.DalProvider.Frozen.Tests\Kistl.DalProvider.Frozen.Tests.nunit" total="4" errors="0" failures="0" not-run="8" inconclusive="0" ignored="8" skipped="0" invalid="0" date="2010-05-02" time="17:32:36">
+  <environment nunit-version="2.5.2.9222" clr-version="2.0.50727.4927" os-version="Microsoft Windows NT 6.1.7600.0" platform="Win32NT" cwd="P:\Kistl\Tests\Kistl.DalProvider.Frozen.Tests" machine-name="ARTHUR-NB" user="arthur" user-domain="DASZ" />
+  <culture-info current-culture="de-AT" current-uiculture="en-US" />
+  <test-suite name="P:\Kistl\Tests\Kistl.DalProvider.Frozen.Tests\Kistl.DalProvider.Frozen.Tests.nunit" executed="True" success="True" time="14.127" asserts="0">
     <results>
-      <test-suite name="P:\Kistl\Tests\Kistl.DalProvider.Frozen.Tests\bin\Debug\Kistl.DalProvider.Frozen.Tests.dll" executed="True" success="True" time="1.764" asserts="0">
+      <test-suite name="P:\Kistl\Tests\Kistl.DalProvider.Frozen.Tests\bin\Debug\Kistl.DalProvider.Frozen.Tests.dll" executed="True" success="True" time="14.121" asserts="0">
         <results>
-          <test-suite name="Kistl" executed="True" success="True" time="1.266" asserts="0">
+          <test-suite name="Kistl" executed="True" success="True" time="13.083" asserts="0">
             <results>
-              <test-suite name="DalProvider" executed="True" success="True" time="1.264" asserts="0">
+              <test-suite name="DalProvider" executed="True" success="True" time="13.082" asserts="0">
                 <results>
-                  <test-suite name="Frozen" executed="True" success="True" time="1.262" asserts="0">
+                  <test-suite name="Frozen" executed="True" success="True" time="13.082" asserts="0">
                     <results>
-                      <test-suite name="Tests" executed="True" success="True" time="1.242" asserts="0">
+                      <test-suite name="Tests" executed="True" success="True" time="13.078" asserts="0">
                         <results>
-                          <test-suite name="FrozenContextTests" executed="True" success="True" time="1.236" asserts="0">
+                          <test-suite name="FrozenContextTests" executed="True" success="True" time="13.057" asserts="0">
                             <results>
-                              <test-case name="Kistl.DalProvider.Frozen.Tests.FrozenContextTests.should_forbid_Create" executed="True" success="True" time="1.105" asserts="0" />
-                              <test-case name="Kistl.DalProvider.Frozen.Tests.FrozenContextTests.should_forbid_setting_reference_properties" executed="True" success="True" time="0.111" asserts="0" />
+                              <test-case name="Kistl.DalProvider.Frozen.Tests.FrozenContextTests.should_forbid_setting_reference_properties" executed="True" success="True" time="12.958" asserts="0" />
                               <test-case name="Kistl.DalProvider.Frozen.Tests.FrozenContextTests.should_forbid_setting_simple_properties" executed="True" success="True" time="0.002" asserts="0" />
-                              <test-case name="Kistl.DalProvider.Frozen.Tests.FrozenContextTests.should_have_IsReadonly_set" executed="True" success="True" time="0.002" asserts="1" />
-                              <test-case name="Kistl.DalProvider.Frozen.Tests.FrozenContextTests.should_only_hand_out_objects_with_IsReadonly_set" executed="True" success="True" time="0.003" asserts="61" />
+                              <test-case name="Kistl.DalProvider.Frozen.Tests.FrozenContextTests.should_only_hand_out_objects_with_IsReadonly_set" executed="True" success="True" time="0.004" asserts="111" />
+                              <test-case name="Kistl.DalProvider.Frozen.Tests.FrozenContextTests.should_provide_each_AttachedObject_only_once" executed="True" success="True" time="0.081" asserts="1" />
                             </results>
                           </test-suite>
                           <test-suite name="ListPropertiesTests" executed="False">
@@ -30,6 +29,11 @@
                             </reason>
                             <results>
                               <test-case name="Kistl.DalProvider.Frozen.Tests.ListPropertiesTests.list_and_query_should_yield_consistent_results" executed="False">
+                                <reason>
+                                  <message><![CDATA[Needs Frozen value list property]]></message>
+                                </reason>
+                              </test-case>
+                              <test-case name="Kistl.DalProvider.Frozen.Tests.ListPropertiesTests.list_should_be_sorted_correctly" executed="False">
                                 <reason>
                                   <message><![CDATA[Needs Frozen value list property]]></message>
                                 </reason>

@@ -4,49 +4,13 @@
   <SelectedNode>[0-1000]P:\Kistl\Tests\Kistl.DalProvider.Frozen.Tests\Kistl.DalProvider.Frozen.Tests.nunit</SelectedNode>
   <ExcludeCategories>false</ExcludeCategories>
   <Nodes>
-    <Node UniqueName="[0-1000]P:\Kistl\Tests\Kistl.DalProvider.Frozen.Tests\Kistl.DalProvider.Frozen.Tests.nunit" Expanded="true">
-      <Nodes>
-        <Node UniqueName="[1-1000]SetUp" Expanded="true">
-          <Nodes>
-            <Node UniqueName="[1-1016]Kistl" Expanded="true">
-              <Nodes>
-                <Node UniqueName="[1-1017]Kistl.DalProvider" Expanded="true">
-                  <Nodes>
-                    <Node UniqueName="[1-1018]Kistl.DalProvider.Frozen" Expanded="true">
-                      <Nodes>
-                        <Node UniqueName="[1-1019]Kistl.DalProvider.Frozen.Tests" Expanded="true">
-                          <Nodes>
-                            <Node UniqueName="[1-1001]Kistl.DalProvider.Frozen.Tests.FrozenContextTests" Expanded="true">
-                              <Nodes>
-                                <Node UniqueName="[1-1003]Kistl.DalProvider.Frozen.Tests.FrozenContextTests.should_forbid_Create" />
-                                <Node UniqueName="[1-1006]Kistl.DalProvider.Frozen.Tests.FrozenContextTests.should_forbid_setting_reference_properties" />
-                                <Node UniqueName="[1-1005]Kistl.DalProvider.Frozen.Tests.FrozenContextTests.should_forbid_setting_simple_properties" />
-                                <Node UniqueName="[1-1002]Kistl.DalProvider.Frozen.Tests.FrozenContextTests.should_have_IsReadonly_set" />
-                                <Node UniqueName="[1-1004]Kistl.DalProvider.Frozen.Tests.FrozenContextTests.should_only_hand_out_objects_with_IsReadonly_set" />
-                              </Nodes>
-                            </Node>
-                            <Node UniqueName="[1-1007]Kistl.DalProvider.Frozen.Tests.ListPropertiesTests" Expanded="true">
-                              <Nodes>
-                                <Node UniqueName="[1-1014]Kistl.DalProvider.Frozen.Tests.ListPropertiesTests.list_and_query_should_yield_consistent_results" />
-                                <Node UniqueName="[1-1010]Kistl.DalProvider.Frozen.Tests.ListPropertiesTests.navigating_a_fk_list_property_should_yield_related_objects" />
-                                <Node UniqueName="[1-1011]Kistl.DalProvider.Frozen.Tests.ListPropertiesTests.navigating_a_nm_list_property_should_yield_related_objects" />
-                                <Node UniqueName="[1-1009]Kistl.DalProvider.Frozen.Tests.ListPropertiesTests.object_lists_should_have_elements" />
-                                <Node UniqueName="[1-1012]Kistl.DalProvider.Frozen.Tests.ListPropertiesTests.retrieving_a_fk_list_twice_should_yield_same_list" />
-                                <Node UniqueName="[1-1013]Kistl.DalProvider.Frozen.Tests.ListPropertiesTests.retrieving_a_nm_list_twice_should_yield_same_list" />
-                                <Node UniqueName="[1-1008]Kistl.DalProvider.Frozen.Tests.ListPropertiesTests.value_lists_should_have_elements" />
-                              </Nodes>
-                            </Node>
-                          </Nodes>
-                        </Node>
-                      </Nodes>
-                    </Node>
-                  </Nodes>
-                </Node>
-              </Nodes>
-            </Node>
-          </Nodes>
-        </Node>
-      </Nodes>
-    </Node>
+    <Node UniqueName="[0-1000]P:\Kistl\Tests\Kistl.DalProvider.Frozen.Tests\Kistl.DalProvider.Frozen.Tests.nunit" Expanded="true" />
+    <Node UniqueName="[0-1001]SetUpFixture" Expanded="true" />
+    <Node UniqueName="[0-1017]Kistl" Expanded="true" />
+    <Node UniqueName="[0-1018]Kistl.DalProvider" Expanded="true" />
+    <Node UniqueName="[0-1019]Kistl.DalProvider.Frozen" Expanded="true" />
+    <Node UniqueName="[0-1020]Kistl.DalProvider.Frozen.Tests" Expanded="true" />
+    <Node UniqueName="[0-1011]Kistl.DalProvider.Frozen.Tests.FrozenContextTests" Expanded="true" />
+    <Node UniqueName="[0-1002]Kistl.DalProvider.Frozen.Tests.ListPropertiesTests" Expanded="true" />
   </Nodes>
 </VisualState>
