@@ -24,7 +24,6 @@ namespace Kistl.DalProvider.EF.Tests
     {
         protected EntityCollection<Property__Implementation__> wrappedList;
 
-        private IKistlContext ctx;
         private ObjectClass__Implementation__ parent;
 
         public EntityListWrapperTests(int items)
@@ -33,7 +32,6 @@ namespace Kistl.DalProvider.EF.Tests
         public override void SetUp()
         {
             base.SetUp();
-            ctx = GetContext();
         }
 
         protected override Property NewItem()

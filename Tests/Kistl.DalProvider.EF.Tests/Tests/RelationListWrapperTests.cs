@@ -24,7 +24,6 @@ namespace Kistl.DalProvider.EF.Tests
     {
         protected EntityCollection<Projekt_haben_Mitarbeiter_RelationEntry__Implementation__> wrappedCollection;
 
-        private IKistlContext ctx;
         private Projekt__Implementation__ parent;
 
         public RelationListWrapperTests(int items)
@@ -33,7 +32,6 @@ namespace Kistl.DalProvider.EF.Tests
         public override void SetUp()
         {
             base.SetUp();
-            ctx = GetContext();
         }
 
         protected override Mitarbeiter NewItem()

@@ -30,28 +30,24 @@ namespace Kistl.DalProvider.EF.Tests
         [Test]
         public void should_have_no_EntityKey_when_created()
         {
-            Assert.That(obj.EntityKey, Is.Null);
+            var local_obj = CreateObjectInstance();
+            Assert.That(local_obj.EntityKey, Is.Null);
         }
 
         [Test]
         public void should_have_Detached_EntityState_when_created()
         {
-            Assert.That(obj.EntityState, Is.EqualTo(EntityState.Detached));
+            var local_obj = CreateObjectInstance();
+            Assert.That(local_obj.EntityState, Is.EqualTo(EntityState.Detached));
         }
 
         [Test]
         public void should_be_attached_to_EFContext_after_attaching()
         {
-            using (var ctx = GetContext())
-            {
-                ctx.Attach(obj);
-                Assert.That(obj.EntityState, Is.Not.EqualTo(EntityState.Detached));
-                Assert.That(obj.IsAttached, Is.EqualTo(true));
-                ObjectContext objCtx = obj.GetEFContext();
-                Assert.That(objCtx, Is.Not.Null);
-            }
+            Assert.That(obj.EntityState, Is.Not.EqualTo(EntityState.Detached));
+            Assert.That(obj.IsAttached, Is.EqualTo(true));
+            ObjectContext objCtx = obj.GetEFContext();
+            Assert.That(objCtx, Is.Not.Null);
         }
-
     }
-
 }

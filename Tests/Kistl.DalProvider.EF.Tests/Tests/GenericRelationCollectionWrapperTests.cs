@@ -24,7 +24,6 @@ namespace Kistl.DalProvider.EF.Tests
     {
         protected EntityCollection<ObjectClass__Implementation__> wrappedCollection;
 
-        private IKistlContext ctx;
         private ObjectClass__Implementation__ parent;
 
         public GenericRelationCollectionWrapperTests(int items)
@@ -33,7 +32,6 @@ namespace Kistl.DalProvider.EF.Tests
         public override void SetUp()
         {
             base.SetUp();
-            ctx = GetContext();
         }
 
         protected override ObjectClass NewItem()

@@ -18,7 +18,12 @@ namespace Kistl.API.Tests.Skeletons
         public override void SetUp()
         {
             base.SetUp();
-            obj = new T();
+            obj = CreateObjectInstance();
+        }
+
+        protected T CreateObjectInstance()
+        {
+            return new T();
         }
 
 

@@ -43,33 +43,6 @@ namespace Kistl.DalProvider.EF.Tests
             obj.TableName = "testtablename";
         }
 
-        // TODO: WTF? Please explain
-        [Test]
-        [Ignore("Wrong test, ObjectState is managed by EF")]
-        public void ObjectState_should_be_Unmodified_after_setting_ID()
-        {
-            obj.ID = 10;
-            Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.Unmodified));
-        }
-
-        [Test]
-        [Ignore("Wrong test, ObjectState is managed by EF")]
-        public void ObjectState_ObjectWithID_Modified()
-        {
-            obj.ID = 10;
-            obj.ClientObjectState = DataObjectState.Unmodified;
-            obj.NotifyPropertyChanged("test", null, null);
-            Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.Unmodified));
-        }
-
-        [Test]
-        public void NotifyPropertyChanged_ing()
-        {
-            obj.NotifyPropertyChanging("StringProp", null, null);
-            obj.Name = "test";
-            obj.NotifyPropertyChanged("StringProp", null, null);
-        }
-
         [Test]
         [Ignore("Enable if Case #1359 is fixed")]
         public void should_roundtrip_ObjectClass_attributes_correctly()
@@ -105,21 +78,18 @@ namespace Kistl.DalProvider.EF.Tests
         [Test]
         public void ToStream_creates_correct_Stream()
         {
-            using (IKistlContext ctx = GetContext())
-            {
-                MemoryStream ms = new MemoryStream();
-                BinaryWriter sw = new BinaryWriter(ms);
-                BinaryReader sr = new BinaryReader(ms);
+            MemoryStream ms = new MemoryStream();
+            BinaryWriter sw = new BinaryWriter(ms);
+            BinaryReader sr = new BinaryReader(ms);
 
-                InitialiseObject(ctx, obj);
-                obj.ToStream(sw, null, false);
+            InitialiseObject(ctx, obj);
+            obj.ToStream(sw, null, false);
 
-                Assert.That(ms.Length, Is.GreaterThan(0));
-                ms.Seek(0, SeekOrigin.Begin);
+            Assert.That(ms.Length, Is.GreaterThan(0));
+            ms.Seek(0, SeekOrigin.Begin);
 
-                Assert.Ignore("need to implement mocked serialization for ObjectClass");
-                //TestObjClassSerializationMock.AssertCorrectContents<TestObjClass, int>(sr);
-            }
+            Assert.Ignore("need to implement mocked serialization for ObjectClass");
+            //TestObjClassSerializationMock.AssertCorrectContents<TestObjClass, int>(sr);
         }
 
         [Test]
@@ -166,12 +136,13 @@ namespace Kistl.DalProvider.EF.Tests
         [Test]
         public void AttachToContext()
         {
-            Assert.That(obj.Context, Is.Null);
+            var local_obj = CreateObjectInstance();
+            Assert.That(local_obj.Context, Is.Null);
             using (IKistlContext ctx = GetContext())
             {
-                obj.AttachToContext(ctx);
-                Assert.That(obj.Context, Is.Not.Null);
-                Assert.That(obj.EntityState, Is.EqualTo(System.Data.EntityState.Detached));
+                local_obj.AttachToContext(ctx);
+                Assert.That(local_obj.Context, Is.Not.Null);
+                Assert.That(local_obj.EntityState, Is.EqualTo(System.Data.EntityState.Detached));
             }
         }
 
@@ -179,17 +150,18 @@ namespace Kistl.DalProvider.EF.Tests
         [ExpectedException(typeof(WrongKistlContextException))]
         public void AttachToContext_Other_fails()
         {
-            Assert.That(obj.Context, Is.Null);
+            var local_obj = CreateObjectInstance();
+            Assert.That(local_obj.Context, Is.Null);
             using (IKistlContext ctx = GetContext())
             {
-                obj.AttachToContext(ctx);
-                Assert.That(obj.Context, Is.Not.Null);
-                Assert.That(obj.EntityState, Is.EqualTo(System.Data.EntityState.Detached));
+                local_obj.AttachToContext(ctx);
+                Assert.That(local_obj.Context, Is.Not.Null);
+                Assert.That(local_obj.EntityState, Is.EqualTo(System.Data.EntityState.Detached));
                 using (IKistlContext ctx2 = GetContext())
                 {
-                    obj.AttachToContext(ctx2);
-                    Assert.That(obj.Context, Is.Not.Null);
-                    Assert.That(obj.EntityState, Is.EqualTo(System.Data.EntityState.Detached));
+                    local_obj.AttachToContext(ctx2);
+                    Assert.That(local_obj.Context, Is.Not.Null);
+                    Assert.That(local_obj.EntityState, Is.EqualTo(System.Data.EntityState.Detached));
                 }
             }
         }
@@ -197,43 +169,30 @@ namespace Kistl.DalProvider.EF.Tests
         [Test]
         public void DetachFromContext()
         {
-            Assert.That(obj.Context, Is.Null);
+            Assert.That(obj.Context, Is.Not.Null);
             obj.ID = 10;
             obj.ClientObjectState = DataObjectState.Unmodified;
-            using (IKistlContext ctx = GetContext())
-            {
-                ctx.Attach(obj);
-                Assert.That(obj.Context, Is.Not.Null);
-
-                obj.DetachFromContext(ctx);
-                Assert.That(obj.Context, Is.Null);
-
-                Assert.That(obj.EntityState, Is.EqualTo(System.Data.EntityState.Unchanged));
-            }
+            obj.DetachFromContext(ctx);
+            Assert.That(obj.Context, Is.Null);
+            Assert.That(obj.EntityState, Is.EqualTo(System.Data.EntityState.Added));
         }
 
         [Test]
         [ExpectedException(typeof(WrongKistlContextException))]
         public void DetachFromContext_Other()
         {
-            Assert.That(obj.Context, Is.Null);
+            Assert.That(obj.Context, Is.Not.Null);
             obj.ID = 10;
             obj.ClientObjectState = DataObjectState.Unmodified;
-            using (IKistlContext ctx = GetContext())
+            obj.DetachFromContext(ctx);
+            Assert.That(obj.Context, Is.Null);
+            Assert.That(obj.EntityState, Is.EqualTo(System.Data.EntityState.Added));
+
+            using (IKistlContext ctx2 = GetContext())
             {
-                ctx.Attach(obj);
-                Assert.That(obj.Context, Is.Not.Null);
-
-                obj.DetachFromContext(ctx);
+                obj.DetachFromContext(ctx2);
                 Assert.That(obj.Context, Is.Null);
-                Assert.That(obj.EntityState, Is.EqualTo(System.Data.EntityState.Unchanged));
-
-                using (IKistlContext ctx2 = GetContext())
-                {
-                    obj.DetachFromContext(ctx2);
-                    Assert.That(obj.Context, Is.Null);
-                    Assert.That(obj.EntityState, Is.EqualTo(System.Data.EntityState.Unchanged));
-                }
+                Assert.That(obj.EntityState, Is.EqualTo(System.Data.EntityState.Added));
             }
         }
     }

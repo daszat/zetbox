@@ -16,6 +16,8 @@ namespace Kistl.API.Tests
 
         protected readonly int items;
 
+        protected IKistlContext ctx;
+
         protected BasicCollectionTests(int items)
         {
             this.items = items;
@@ -92,6 +94,7 @@ namespace Kistl.API.Tests
         public override void SetUp()
         {
             base.SetUp();
+            ctx = GetContext();
             PreSetup();
             initialItems = InitialItems();
             collection = CreateCollection(initialItems);
