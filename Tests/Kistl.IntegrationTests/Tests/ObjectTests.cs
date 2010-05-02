@@ -69,8 +69,8 @@ namespace Kistl.IntegrationTests
         
         public override void TearDown()
         {
-            base.TearDown();
             DeleteObjects();
+            base.TearDown();
         }
 
         private void DeleteObjects()

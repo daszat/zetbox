@@ -31,8 +31,8 @@ namespace Kistl.API.Server.Tests
 
         public override void TearDown()
         {
-            base.TearDown();
             ctx.Dispose();
+            base.TearDown();
         }
 
         public void InitialiseObject(TestObjClass__Implementation__ objImpl)

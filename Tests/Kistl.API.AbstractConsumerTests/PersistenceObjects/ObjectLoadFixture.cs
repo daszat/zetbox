@@ -24,10 +24,10 @@ namespace Kistl.API.AbstractConsumerTests.PersistenceObjects
 
         public override void TearDown()
         {
-            base.TearDown();
             if (ctx != null)
                 ctx.Dispose();
             DestroyObjects();
+            base.TearDown();
         }
 
         protected virtual void CreateObject()

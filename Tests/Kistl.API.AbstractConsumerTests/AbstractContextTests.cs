@@ -77,13 +77,13 @@ namespace Kistl.API.AbstractConsumerTests
 
         public override void TearDown()
         {
-            base.TearDown();
             using (var ctx = GetContext())
             {
                 ProjectDataFixture.DeleteData(ctx);
                 ctx.GetQuery<TestObjClass>().ForEach(obj => { obj.ObjectProp = null; ctx.Delete(obj); });
                 ctx.SubmitChanges();
             }
+            base.TearDown();
         }
 
         [Test]

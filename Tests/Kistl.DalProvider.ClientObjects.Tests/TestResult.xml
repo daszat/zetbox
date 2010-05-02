@@ -1,21 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <!--This file represents the results of running a test suite-->
-<test-results name="P:\Kistl\Tests\Kistl.DalProvider.ClientObjects.Tests\Kistl.DalProvider.ClientObjects.Tests.nunit" total="11" errors="11" failures="0" not-run="32" inconclusive="0" ignored="32" skipped="0" invalid="0" date="2010-05-01" time="18:12:16">
+<test-results name="P:\Kistl\Tests\Kistl.DalProvider.ClientObjects.Tests\Kistl.DalProvider.ClientObjects.Tests.nunit" total="11" errors="0" failures="0" not-run="32" inconclusive="0" ignored="32" skipped="0" invalid="0" date="2010-05-02" time="16:43:20">
   <environment nunit-version="2.5.2.9222" clr-version="2.0.50727.4927" os-version="Microsoft Windows NT 6.1.7600.0" platform="Win32NT" cwd="P:\Kistl\Tests\Kistl.DalProvider.ClientObjects.Tests" machine-name="ARTHUR-NB" user="arthur" user-domain="DASZ" />
   <culture-info current-culture="de-AT" current-uiculture="en-US" />
-  <test-suite name="P:\Kistl\Tests\Kistl.DalProvider.ClientObjects.Tests\Kistl.DalProvider.ClientObjects.Tests.nunit" executed="True" success="False" time="176.702" asserts="0">
+  <test-suite name="P:\Kistl\Tests\Kistl.DalProvider.ClientObjects.Tests\Kistl.DalProvider.ClientObjects.Tests.nunit" executed="True" success="True" time="18.035" asserts="0">
     <results>
-      <test-suite name="P:\Kistl\Tests\Kistl.DalProvider.ClientObjects.Tests\bin\Debug\Kistl.DalProvider.ClientObjects.Tests.dll" executed="True" success="False" time="176.702" asserts="0">
+      <test-suite name="P:\Kistl\Tests\Kistl.DalProvider.ClientObjects.Tests\bin\Debug\Kistl.DalProvider.ClientObjects.Tests.dll" executed="True" success="True" time="18.022" asserts="0">
         <results>
-          <test-suite name="Kistl" executed="True" success="False" time="176.702" asserts="0">
+          <test-suite name="Kistl" executed="True" success="True" time="18.015" asserts="0">
             <results>
-              <test-suite name="DalProvider" executed="True" success="False" time="176.702" asserts="0">
+              <test-suite name="DalProvider" executed="True" success="True" time="18.013" asserts="0">
                 <results>
-                  <test-suite name="ClientObjects" executed="True" success="False" time="176.702" asserts="0">
+                  <test-suite name="ClientObjects" executed="True" success="True" time="18.003" asserts="0">
                     <results>
-                      <test-suite name="Tests" executed="True" success="False" time="176.701" asserts="0">
+                      <test-suite name="Tests" executed="True" success="True" time="17.994" asserts="0">
                         <results>
-                          <test-suite name="Blobs" executed="True" success="False" time="0.020" asserts="0">
+                          <test-suite name="Blobs" executed="True" success="False" time="0.023" asserts="0">
                             <results>
                               <test-suite name="when_using" executed="False">
                                 <reason>
@@ -51,7 +51,7 @@
                               </test-suite>
                             </results>
                           </test-suite>
-                          <test-suite name="CompoundObjects" executed="True" success="False" time="0.001" asserts="0">
+                          <test-suite name="CompoundObjects" executed="True" success="False" time="0.042" asserts="0">
                             <results>
                               <test-suite name="when_changing" executed="False">
                                 <reason>
@@ -225,359 +225,29 @@
                               </test-suite>
                             </results>
                           </test-suite>
-                          <test-suite name="PersistenceObjects" executed="True" success="False" time="143.199" asserts="0">
+                          <test-suite name="PersistenceObjects" executed="True" success="True" time="0.559" asserts="0">
                             <results>
-                              <test-suite name="navigator_context_checks" executed="True" success="False" time="143.110" asserts="0">
+                              <test-suite name="navigator_context_checks" executed="True" success="True" time="0.468" asserts="0">
                                 <results>
-                                  <test-case name="Kistl.DalProvider.ClientObjects.Tests.PersistenceObjects.navigator_context_checks.set_1_1_same_context" executed="True" success="False" time="142.396" asserts="0">
-                                    <failure>
-                                      <message><![CDATA[TearDown : System.NullReferenceException : Object reference not set to an instance of an object.]]></message>
-                                      <stack-trace><![CDATA[--TearDown
-at Autofac.Core.Disposer.AddInstanceForDisposal(IDisposable instance)
-at Autofac.Core.Resolving.ComponentActivation.Activate(IEnumerable`1 parameters)
-at Autofac.Core.Resolving.ComponentActivation.Execute(IEnumerable`1 parameters)
-at Autofac.Core.Resolving.ResolveOperation.Resolve(ISharingLifetimeScope activationScope, IComponentRegistration registration, IEnumerable`1 parameters)
-at Autofac.Core.Resolving.ComponentActivation.Resolve(IComponentRegistration registration, IEnumerable`1 parameters)
-at Autofac.ResolutionExtensions.TryResolve(IComponentContext context, Service service, IEnumerable`1 parameters, Object& instance)
-at Autofac.ResolutionExtensions.Resolve(IComponentContext context, Service service, IEnumerable`1 parameters)
-at Autofac.ResolutionExtensions.Resolve[TService](IComponentContext context, IEnumerable`1 parameters)
-at Autofac.ResolutionExtensions.Resolve[TService](IComponentContext context)
-at Kistl.API.Client.ClientApiModule.<Load>b__0(IComponentContext c) in P:\Kistl\Kistl.API.Client\ClientApiModule.cs:line 34
-at Autofac.RegistrationExtensions.<>c__DisplayClass10`1.<Register>b__f(IComponentContext c, IEnumerable`1 p)
-at Autofac.Builder.RegistrationBuilder.<>c__DisplayClass1`1.<ForDelegate>b__0(IComponentContext c, IEnumerable`1 p)
-at Autofac.Core.Activators.Delegate.DelegateActivator.ActivateInstance(IComponentContext context, IEnumerable`1 parameters)
-at Autofac.Core.Resolving.ComponentActivation.Activate(IEnumerable`1 parameters)
-at Autofac.Core.Resolving.ComponentActivation.Execute(IEnumerable`1 parameters)
-at Autofac.Core.Resolving.ResolveOperation.Resolve(ISharingLifetimeScope activationScope, IComponentRegistration registration, IEnumerable`1 parameters)
-at Autofac.Core.Lifetime.LifetimeScope.Resolve(IComponentRegistration registration, IEnumerable`1 parameters)
-at Autofac.ResolutionExtensions.TryResolve(IComponentContext context, Service service, IEnumerable`1 parameters, Object& instance)
-at Autofac.ResolutionExtensions.Resolve(IComponentContext context, Service service, IEnumerable`1 parameters)
-at Autofac.ResolutionExtensions.Resolve[TService](IComponentContext context, IEnumerable`1 parameters)
-at Autofac.ResolutionExtensions.Resolve[TService](IComponentContext context)
-at Kistl.API.AbstractConsumerTests.AbstractTestFixture.GetContext() in P:\Kistl\Tests\Kistl.API.AbstractConsumerTests\AbstractTestFixture.cs:line 30
-at Kistl.API.AbstractConsumerTests.PersistenceObjects.ObjectLoadFixture.DestroyObjects() in P:\Kistl\Tests\Kistl.API.AbstractConsumerTests\PersistenceObjects\ObjectLoadFixture.cs:line 46
-at Kistl.API.AbstractConsumerTests.PersistenceObjects.ObjectLoadFixture.TearDown() in P:\Kistl\Tests\Kistl.API.AbstractConsumerTests\PersistenceObjects\ObjectLoadFixture.cs:line 30
-]]></stack-trace>
-                                    </failure>
-                                  </test-case>
-                                  <test-case name="Kistl.DalProvider.ClientObjects.Tests.PersistenceObjects.navigator_context_checks.set_1_1_wrong_context" executed="True" success="False" time="0.033" asserts="0">
-                                    <failure>
-                                      <message><![CDATA[TearDown : System.NullReferenceException : Object reference not set to an instance of an object.]]></message>
-                                      <stack-trace><![CDATA[--TearDown
-at Autofac.Core.Disposer.AddInstanceForDisposal(IDisposable instance)
-at Autofac.Core.Resolving.ComponentActivation.Activate(IEnumerable`1 parameters)
-at Autofac.Core.Resolving.ComponentActivation.Execute(IEnumerable`1 parameters)
-at Autofac.Core.Resolving.ResolveOperation.Resolve(ISharingLifetimeScope activationScope, IComponentRegistration registration, IEnumerable`1 parameters)
-at Autofac.Core.Resolving.ComponentActivation.Resolve(IComponentRegistration registration, IEnumerable`1 parameters)
-at Autofac.ResolutionExtensions.TryResolve(IComponentContext context, Service service, IEnumerable`1 parameters, Object& instance)
-at Autofac.ResolutionExtensions.Resolve(IComponentContext context, Service service, IEnumerable`1 parameters)
-at Autofac.ResolutionExtensions.Resolve[TService](IComponentContext context, IEnumerable`1 parameters)
-at Autofac.ResolutionExtensions.Resolve[TService](IComponentContext context)
-at Kistl.API.Client.ClientApiModule.<Load>b__0(IComponentContext c) in P:\Kistl\Kistl.API.Client\ClientApiModule.cs:line 34
-at Autofac.RegistrationExtensions.<>c__DisplayClass10`1.<Register>b__f(IComponentContext c, IEnumerable`1 p)
-at Autofac.Builder.RegistrationBuilder.<>c__DisplayClass1`1.<ForDelegate>b__0(IComponentContext c, IEnumerable`1 p)
-at Autofac.Core.Activators.Delegate.DelegateActivator.ActivateInstance(IComponentContext context, IEnumerable`1 parameters)
-at Autofac.Core.Resolving.ComponentActivation.Activate(IEnumerable`1 parameters)
-at Autofac.Core.Resolving.ComponentActivation.Execute(IEnumerable`1 parameters)
-at Autofac.Core.Resolving.ResolveOperation.Resolve(ISharingLifetimeScope activationScope, IComponentRegistration registration, IEnumerable`1 parameters)
-at Autofac.Core.Lifetime.LifetimeScope.Resolve(IComponentRegistration registration, IEnumerable`1 parameters)
-at Autofac.ResolutionExtensions.TryResolve(IComponentContext context, Service service, IEnumerable`1 parameters, Object& instance)
-at Autofac.ResolutionExtensions.Resolve(IComponentContext context, Service service, IEnumerable`1 parameters)
-at Autofac.ResolutionExtensions.Resolve[TService](IComponentContext context, IEnumerable`1 parameters)
-at Autofac.ResolutionExtensions.Resolve[TService](IComponentContext context)
-at Kistl.API.AbstractConsumerTests.AbstractTestFixture.GetContext() in P:\Kistl\Tests\Kistl.API.AbstractConsumerTests\AbstractTestFixture.cs:line 30
-at Kistl.API.AbstractConsumerTests.PersistenceObjects.ObjectLoadFixture.DestroyObjects() in P:\Kistl\Tests\Kistl.API.AbstractConsumerTests\PersistenceObjects\ObjectLoadFixture.cs:line 46
-at Kistl.API.AbstractConsumerTests.PersistenceObjects.ObjectLoadFixture.TearDown() in P:\Kistl\Tests\Kistl.API.AbstractConsumerTests\PersistenceObjects\ObjectLoadFixture.cs:line 30
-]]></stack-trace>
-                                    </failure>
-                                  </test-case>
-                                  <test-case name="Kistl.DalProvider.ClientObjects.Tests.PersistenceObjects.navigator_context_checks.set_1_N_same_context" executed="True" success="False" time="0.122" asserts="0">
-                                    <failure>
-                                      <message><![CDATA[TearDown : System.NullReferenceException : Object reference not set to an instance of an object.]]></message>
-                                      <stack-trace><![CDATA[--TearDown
-at Autofac.Core.Disposer.AddInstanceForDisposal(IDisposable instance)
-at Autofac.Core.Resolving.ComponentActivation.Activate(IEnumerable`1 parameters)
-at Autofac.Core.Resolving.ComponentActivation.Execute(IEnumerable`1 parameters)
-at Autofac.Core.Resolving.ResolveOperation.Resolve(ISharingLifetimeScope activationScope, IComponentRegistration registration, IEnumerable`1 parameters)
-at Autofac.Core.Resolving.ComponentActivation.Resolve(IComponentRegistration registration, IEnumerable`1 parameters)
-at Autofac.ResolutionExtensions.TryResolve(IComponentContext context, Service service, IEnumerable`1 parameters, Object& instance)
-at Autofac.ResolutionExtensions.Resolve(IComponentContext context, Service service, IEnumerable`1 parameters)
-at Autofac.ResolutionExtensions.Resolve[TService](IComponentContext context, IEnumerable`1 parameters)
-at Autofac.ResolutionExtensions.Resolve[TService](IComponentContext context)
-at Kistl.API.Client.ClientApiModule.<Load>b__0(IComponentContext c) in P:\Kistl\Kistl.API.Client\ClientApiModule.cs:line 34
-at Autofac.RegistrationExtensions.<>c__DisplayClass10`1.<Register>b__f(IComponentContext c, IEnumerable`1 p)
-at Autofac.Builder.RegistrationBuilder.<>c__DisplayClass1`1.<ForDelegate>b__0(IComponentContext c, IEnumerable`1 p)
-at Autofac.Core.Activators.Delegate.DelegateActivator.ActivateInstance(IComponentContext context, IEnumerable`1 parameters)
-at Autofac.Core.Resolving.ComponentActivation.Activate(IEnumerable`1 parameters)
-at Autofac.Core.Resolving.ComponentActivation.Execute(IEnumerable`1 parameters)
-at Autofac.Core.Resolving.ResolveOperation.Resolve(ISharingLifetimeScope activationScope, IComponentRegistration registration, IEnumerable`1 parameters)
-at Autofac.Core.Lifetime.LifetimeScope.Resolve(IComponentRegistration registration, IEnumerable`1 parameters)
-at Autofac.ResolutionExtensions.TryResolve(IComponentContext context, Service service, IEnumerable`1 parameters, Object& instance)
-at Autofac.ResolutionExtensions.Resolve(IComponentContext context, Service service, IEnumerable`1 parameters)
-at Autofac.ResolutionExtensions.Resolve[TService](IComponentContext context, IEnumerable`1 parameters)
-at Autofac.ResolutionExtensions.Resolve[TService](IComponentContext context)
-at Kistl.API.AbstractConsumerTests.AbstractTestFixture.GetContext() in P:\Kistl\Tests\Kistl.API.AbstractConsumerTests\AbstractTestFixture.cs:line 30
-at Kistl.API.AbstractConsumerTests.PersistenceObjects.ObjectLoadFixture.DestroyObjects() in P:\Kistl\Tests\Kistl.API.AbstractConsumerTests\PersistenceObjects\ObjectLoadFixture.cs:line 46
-at Kistl.API.AbstractConsumerTests.PersistenceObjects.ObjectLoadFixture.TearDown() in P:\Kistl\Tests\Kistl.API.AbstractConsumerTests\PersistenceObjects\ObjectLoadFixture.cs:line 30
-]]></stack-trace>
-                                    </failure>
-                                  </test-case>
-                                  <test-case name="Kistl.DalProvider.ClientObjects.Tests.PersistenceObjects.navigator_context_checks.set_1_N_wrong_context" executed="True" success="False" time="0.014" asserts="0">
-                                    <failure>
-                                      <message><![CDATA[TearDown : System.NullReferenceException : Object reference not set to an instance of an object.]]></message>
-                                      <stack-trace><![CDATA[--TearDown
-at Autofac.Core.Disposer.AddInstanceForDisposal(IDisposable instance)
-at Autofac.Core.Resolving.ComponentActivation.Activate(IEnumerable`1 parameters)
-at Autofac.Core.Resolving.ComponentActivation.Execute(IEnumerable`1 parameters)
-at Autofac.Core.Resolving.ResolveOperation.Resolve(ISharingLifetimeScope activationScope, IComponentRegistration registration, IEnumerable`1 parameters)
-at Autofac.Core.Resolving.ComponentActivation.Resolve(IComponentRegistration registration, IEnumerable`1 parameters)
-at Autofac.ResolutionExtensions.TryResolve(IComponentContext context, Service service, IEnumerable`1 parameters, Object& instance)
-at Autofac.ResolutionExtensions.Resolve(IComponentContext context, Service service, IEnumerable`1 parameters)
-at Autofac.ResolutionExtensions.Resolve[TService](IComponentContext context, IEnumerable`1 parameters)
-at Autofac.ResolutionExtensions.Resolve[TService](IComponentContext context)
-at Kistl.API.Client.ClientApiModule.<Load>b__0(IComponentContext c) in P:\Kistl\Kistl.API.Client\ClientApiModule.cs:line 34
-at Autofac.RegistrationExtensions.<>c__DisplayClass10`1.<Register>b__f(IComponentContext c, IEnumerable`1 p)
-at Autofac.Builder.RegistrationBuilder.<>c__DisplayClass1`1.<ForDelegate>b__0(IComponentContext c, IEnumerable`1 p)
-at Autofac.Core.Activators.Delegate.DelegateActivator.ActivateInstance(IComponentContext context, IEnumerable`1 parameters)
-at Autofac.Core.Resolving.ComponentActivation.Activate(IEnumerable`1 parameters)
-at Autofac.Core.Resolving.ComponentActivation.Execute(IEnumerable`1 parameters)
-at Autofac.Core.Resolving.ResolveOperation.Resolve(ISharingLifetimeScope activationScope, IComponentRegistration registration, IEnumerable`1 parameters)
-at Autofac.Core.Lifetime.LifetimeScope.Resolve(IComponentRegistration registration, IEnumerable`1 parameters)
-at Autofac.ResolutionExtensions.TryResolve(IComponentContext context, Service service, IEnumerable`1 parameters, Object& instance)
-at Autofac.ResolutionExtensions.Resolve(IComponentContext context, Service service, IEnumerable`1 parameters)
-at Autofac.ResolutionExtensions.Resolve[TService](IComponentContext context, IEnumerable`1 parameters)
-at Autofac.ResolutionExtensions.Resolve[TService](IComponentContext context)
-at Kistl.API.AbstractConsumerTests.AbstractTestFixture.GetContext() in P:\Kistl\Tests\Kistl.API.AbstractConsumerTests\AbstractTestFixture.cs:line 30
-at Kistl.API.AbstractConsumerTests.PersistenceObjects.ObjectLoadFixture.DestroyObjects() in P:\Kistl\Tests\Kistl.API.AbstractConsumerTests\PersistenceObjects\ObjectLoadFixture.cs:line 46
-at Kistl.API.AbstractConsumerTests.PersistenceObjects.ObjectLoadFixture.TearDown() in P:\Kistl\Tests\Kistl.API.AbstractConsumerTests\PersistenceObjects\ObjectLoadFixture.cs:line 30
-]]></stack-trace>
-                                    </failure>
-                                  </test-case>
-                                  <test-case name="Kistl.DalProvider.ClientObjects.Tests.PersistenceObjects.navigator_context_checks.set_N_1_same_context" executed="True" success="False" time="0.018" asserts="0">
-                                    <failure>
-                                      <message><![CDATA[TearDown : System.NullReferenceException : Object reference not set to an instance of an object.]]></message>
-                                      <stack-trace><![CDATA[--TearDown
-at Autofac.Core.Disposer.AddInstanceForDisposal(IDisposable instance)
-at Autofac.Core.Resolving.ComponentActivation.Activate(IEnumerable`1 parameters)
-at Autofac.Core.Resolving.ComponentActivation.Execute(IEnumerable`1 parameters)
-at Autofac.Core.Resolving.ResolveOperation.Resolve(ISharingLifetimeScope activationScope, IComponentRegistration registration, IEnumerable`1 parameters)
-at Autofac.Core.Resolving.ComponentActivation.Resolve(IComponentRegistration registration, IEnumerable`1 parameters)
-at Autofac.ResolutionExtensions.TryResolve(IComponentContext context, Service service, IEnumerable`1 parameters, Object& instance)
-at Autofac.ResolutionExtensions.Resolve(IComponentContext context, Service service, IEnumerable`1 parameters)
-at Autofac.ResolutionExtensions.Resolve[TService](IComponentContext context, IEnumerable`1 parameters)
-at Autofac.ResolutionExtensions.Resolve[TService](IComponentContext context)
-at Kistl.API.Client.ClientApiModule.<Load>b__0(IComponentContext c) in P:\Kistl\Kistl.API.Client\ClientApiModule.cs:line 34
-at Autofac.RegistrationExtensions.<>c__DisplayClass10`1.<Register>b__f(IComponentContext c, IEnumerable`1 p)
-at Autofac.Builder.RegistrationBuilder.<>c__DisplayClass1`1.<ForDelegate>b__0(IComponentContext c, IEnumerable`1 p)
-at Autofac.Core.Activators.Delegate.DelegateActivator.ActivateInstance(IComponentContext context, IEnumerable`1 parameters)
-at Autofac.Core.Resolving.ComponentActivation.Activate(IEnumerable`1 parameters)
-at Autofac.Core.Resolving.ComponentActivation.Execute(IEnumerable`1 parameters)
-at Autofac.Core.Resolving.ResolveOperation.Resolve(ISharingLifetimeScope activationScope, IComponentRegistration registration, IEnumerable`1 parameters)
-at Autofac.Core.Lifetime.LifetimeScope.Resolve(IComponentRegistration registration, IEnumerable`1 parameters)
-at Autofac.ResolutionExtensions.TryResolve(IComponentContext context, Service service, IEnumerable`1 parameters, Object& instance)
-at Autofac.ResolutionExtensions.Resolve(IComponentContext context, Service service, IEnumerable`1 parameters)
-at Autofac.ResolutionExtensions.Resolve[TService](IComponentContext context, IEnumerable`1 parameters)
-at Autofac.ResolutionExtensions.Resolve[TService](IComponentContext context)
-at Kistl.API.AbstractConsumerTests.AbstractTestFixture.GetContext() in P:\Kistl\Tests\Kistl.API.AbstractConsumerTests\AbstractTestFixture.cs:line 30
-at Kistl.API.AbstractConsumerTests.PersistenceObjects.ObjectLoadFixture.DestroyObjects() in P:\Kistl\Tests\Kistl.API.AbstractConsumerTests\PersistenceObjects\ObjectLoadFixture.cs:line 46
-at Kistl.API.AbstractConsumerTests.PersistenceObjects.ObjectLoadFixture.TearDown() in P:\Kistl\Tests\Kistl.API.AbstractConsumerTests\PersistenceObjects\ObjectLoadFixture.cs:line 30
-]]></stack-trace>
-                                    </failure>
-                                  </test-case>
-                                  <test-case name="Kistl.DalProvider.ClientObjects.Tests.PersistenceObjects.navigator_context_checks.set_N_1_wrong_context" executed="True" success="False" time="0.011" asserts="0">
-                                    <failure>
-                                      <message><![CDATA[TearDown : System.NullReferenceException : Object reference not set to an instance of an object.]]></message>
-                                      <stack-trace><![CDATA[--TearDown
-at Autofac.Core.Disposer.AddInstanceForDisposal(IDisposable instance)
-at Autofac.Core.Resolving.ComponentActivation.Activate(IEnumerable`1 parameters)
-at Autofac.Core.Resolving.ComponentActivation.Execute(IEnumerable`1 parameters)
-at Autofac.Core.Resolving.ResolveOperation.Resolve(ISharingLifetimeScope activationScope, IComponentRegistration registration, IEnumerable`1 parameters)
-at Autofac.Core.Resolving.ComponentActivation.Resolve(IComponentRegistration registration, IEnumerable`1 parameters)
-at Autofac.ResolutionExtensions.TryResolve(IComponentContext context, Service service, IEnumerable`1 parameters, Object& instance)
-at Autofac.ResolutionExtensions.Resolve(IComponentContext context, Service service, IEnumerable`1 parameters)
-at Autofac.ResolutionExtensions.Resolve[TService](IComponentContext context, IEnumerable`1 parameters)
-at Autofac.ResolutionExtensions.Resolve[TService](IComponentContext context)
-at Kistl.API.Client.ClientApiModule.<Load>b__0(IComponentContext c) in P:\Kistl\Kistl.API.Client\ClientApiModule.cs:line 34
-at Autofac.RegistrationExtensions.<>c__DisplayClass10`1.<Register>b__f(IComponentContext c, IEnumerable`1 p)
-at Autofac.Builder.RegistrationBuilder.<>c__DisplayClass1`1.<ForDelegate>b__0(IComponentContext c, IEnumerable`1 p)
-at Autofac.Core.Activators.Delegate.DelegateActivator.ActivateInstance(IComponentContext context, IEnumerable`1 parameters)
-at Autofac.Core.Resolving.ComponentActivation.Activate(IEnumerable`1 parameters)
-at Autofac.Core.Resolving.ComponentActivation.Execute(IEnumerable`1 parameters)
-at Autofac.Core.Resolving.ResolveOperation.Resolve(ISharingLifetimeScope activationScope, IComponentRegistration registration, IEnumerable`1 parameters)
-at Autofac.Core.Lifetime.LifetimeScope.Resolve(IComponentRegistration registration, IEnumerable`1 parameters)
-at Autofac.ResolutionExtensions.TryResolve(IComponentContext context, Service service, IEnumerable`1 parameters, Object& instance)
-at Autofac.ResolutionExtensions.Resolve(IComponentContext context, Service service, IEnumerable`1 parameters)
-at Autofac.ResolutionExtensions.Resolve[TService](IComponentContext context, IEnumerable`1 parameters)
-at Autofac.ResolutionExtensions.Resolve[TService](IComponentContext context)
-at Kistl.API.AbstractConsumerTests.AbstractTestFixture.GetContext() in P:\Kistl\Tests\Kistl.API.AbstractConsumerTests\AbstractTestFixture.cs:line 30
-at Kistl.API.AbstractConsumerTests.PersistenceObjects.ObjectLoadFixture.DestroyObjects() in P:\Kistl\Tests\Kistl.API.AbstractConsumerTests\PersistenceObjects\ObjectLoadFixture.cs:line 46
-at Kistl.API.AbstractConsumerTests.PersistenceObjects.ObjectLoadFixture.TearDown() in P:\Kistl\Tests\Kistl.API.AbstractConsumerTests\PersistenceObjects\ObjectLoadFixture.cs:line 30
-]]></stack-trace>
-                                    </failure>
-                                  </test-case>
-                                  <test-case name="Kistl.DalProvider.ClientObjects.Tests.PersistenceObjects.navigator_context_checks.set_N_M_same_context" executed="True" success="False" time="0.030" asserts="0">
-                                    <failure>
-                                      <message><![CDATA[TearDown : System.NullReferenceException : Object reference not set to an instance of an object.]]></message>
-                                      <stack-trace><![CDATA[--TearDown
-at Autofac.Core.Disposer.AddInstanceForDisposal(IDisposable instance)
-at Autofac.Core.Resolving.ComponentActivation.Activate(IEnumerable`1 parameters)
-at Autofac.Core.Resolving.ComponentActivation.Execute(IEnumerable`1 parameters)
-at Autofac.Core.Resolving.ResolveOperation.Resolve(ISharingLifetimeScope activationScope, IComponentRegistration registration, IEnumerable`1 parameters)
-at Autofac.Core.Resolving.ComponentActivation.Resolve(IComponentRegistration registration, IEnumerable`1 parameters)
-at Autofac.ResolutionExtensions.TryResolve(IComponentContext context, Service service, IEnumerable`1 parameters, Object& instance)
-at Autofac.ResolutionExtensions.Resolve(IComponentContext context, Service service, IEnumerable`1 parameters)
-at Autofac.ResolutionExtensions.Resolve[TService](IComponentContext context, IEnumerable`1 parameters)
-at Autofac.ResolutionExtensions.Resolve[TService](IComponentContext context)
-at Kistl.API.Client.ClientApiModule.<Load>b__0(IComponentContext c) in P:\Kistl\Kistl.API.Client\ClientApiModule.cs:line 34
-at Autofac.RegistrationExtensions.<>c__DisplayClass10`1.<Register>b__f(IComponentContext c, IEnumerable`1 p)
-at Autofac.Builder.RegistrationBuilder.<>c__DisplayClass1`1.<ForDelegate>b__0(IComponentContext c, IEnumerable`1 p)
-at Autofac.Core.Activators.Delegate.DelegateActivator.ActivateInstance(IComponentContext context, IEnumerable`1 parameters)
-at Autofac.Core.Resolving.ComponentActivation.Activate(IEnumerable`1 parameters)
-at Autofac.Core.Resolving.ComponentActivation.Execute(IEnumerable`1 parameters)
-at Autofac.Core.Resolving.ResolveOperation.Resolve(ISharingLifetimeScope activationScope, IComponentRegistration registration, IEnumerable`1 parameters)
-at Autofac.Core.Lifetime.LifetimeScope.Resolve(IComponentRegistration registration, IEnumerable`1 parameters)
-at Autofac.ResolutionExtensions.TryResolve(IComponentContext context, Service service, IEnumerable`1 parameters, Object& instance)
-at Autofac.ResolutionExtensions.Resolve(IComponentContext context, Service service, IEnumerable`1 parameters)
-at Autofac.ResolutionExtensions.Resolve[TService](IComponentContext context, IEnumerable`1 parameters)
-at Autofac.ResolutionExtensions.Resolve[TService](IComponentContext context)
-at Kistl.API.AbstractConsumerTests.AbstractTestFixture.GetContext() in P:\Kistl\Tests\Kistl.API.AbstractConsumerTests\AbstractTestFixture.cs:line 30
-at Kistl.API.AbstractConsumerTests.PersistenceObjects.ObjectLoadFixture.DestroyObjects() in P:\Kistl\Tests\Kistl.API.AbstractConsumerTests\PersistenceObjects\ObjectLoadFixture.cs:line 46
-at Kistl.API.AbstractConsumerTests.PersistenceObjects.ObjectLoadFixture.TearDown() in P:\Kistl\Tests\Kistl.API.AbstractConsumerTests\PersistenceObjects\ObjectLoadFixture.cs:line 30
-]]></stack-trace>
-                                    </failure>
-                                  </test-case>
-                                  <test-case name="Kistl.DalProvider.ClientObjects.Tests.PersistenceObjects.navigator_context_checks.set_N_M_wrong_context" executed="True" success="False" time="0.031" asserts="0">
-                                    <failure>
-                                      <message><![CDATA[TearDown : System.NullReferenceException : Object reference not set to an instance of an object.]]></message>
-                                      <stack-trace><![CDATA[--TearDown
-at Autofac.Core.Disposer.AddInstanceForDisposal(IDisposable instance)
-at Autofac.Core.Resolving.ComponentActivation.Activate(IEnumerable`1 parameters)
-at Autofac.Core.Resolving.ComponentActivation.Execute(IEnumerable`1 parameters)
-at Autofac.Core.Resolving.ResolveOperation.Resolve(ISharingLifetimeScope activationScope, IComponentRegistration registration, IEnumerable`1 parameters)
-at Autofac.Core.Resolving.ComponentActivation.Resolve(IComponentRegistration registration, IEnumerable`1 parameters)
-at Autofac.ResolutionExtensions.TryResolve(IComponentContext context, Service service, IEnumerable`1 parameters, Object& instance)
-at Autofac.ResolutionExtensions.Resolve(IComponentContext context, Service service, IEnumerable`1 parameters)
-at Autofac.ResolutionExtensions.Resolve[TService](IComponentContext context, IEnumerable`1 parameters)
-at Autofac.ResolutionExtensions.Resolve[TService](IComponentContext context)
-at Kistl.API.Client.ClientApiModule.<Load>b__0(IComponentContext c) in P:\Kistl\Kistl.API.Client\ClientApiModule.cs:line 34
-at Autofac.RegistrationExtensions.<>c__DisplayClass10`1.<Register>b__f(IComponentContext c, IEnumerable`1 p)
-at Autofac.Builder.RegistrationBuilder.<>c__DisplayClass1`1.<ForDelegate>b__0(IComponentContext c, IEnumerable`1 p)
-at Autofac.Core.Activators.Delegate.DelegateActivator.ActivateInstance(IComponentContext context, IEnumerable`1 parameters)
-at Autofac.Core.Resolving.ComponentActivation.Activate(IEnumerable`1 parameters)
-at Autofac.Core.Resolving.ComponentActivation.Execute(IEnumerable`1 parameters)
-at Autofac.Core.Resolving.ResolveOperation.Resolve(ISharingLifetimeScope activationScope, IComponentRegistration registration, IEnumerable`1 parameters)
-at Autofac.Core.Lifetime.LifetimeScope.Resolve(IComponentRegistration registration, IEnumerable`1 parameters)
-at Autofac.ResolutionExtensions.TryResolve(IComponentContext context, Service service, IEnumerable`1 parameters, Object& instance)
-at Autofac.ResolutionExtensions.Resolve(IComponentContext context, Service service, IEnumerable`1 parameters)
-at Autofac.ResolutionExtensions.Resolve[TService](IComponentContext context, IEnumerable`1 parameters)
-at Autofac.ResolutionExtensions.Resolve[TService](IComponentContext context)
-at Kistl.API.AbstractConsumerTests.AbstractTestFixture.GetContext() in P:\Kistl\Tests\Kistl.API.AbstractConsumerTests\AbstractTestFixture.cs:line 30
-at Kistl.API.AbstractConsumerTests.PersistenceObjects.ObjectLoadFixture.DestroyObjects() in P:\Kistl\Tests\Kistl.API.AbstractConsumerTests\PersistenceObjects\ObjectLoadFixture.cs:line 46
-at Kistl.API.AbstractConsumerTests.PersistenceObjects.ObjectLoadFixture.TearDown() in P:\Kistl\Tests\Kistl.API.AbstractConsumerTests\PersistenceObjects\ObjectLoadFixture.cs:line 30
-]]></stack-trace>
-                                    </failure>
-                                  </test-case>
+                                  <test-case name="Kistl.DalProvider.ClientObjects.Tests.PersistenceObjects.navigator_context_checks.set_1_1_same_context" executed="True" success="True" time="0.277" asserts="0" />
+                                  <test-case name="Kistl.DalProvider.ClientObjects.Tests.PersistenceObjects.navigator_context_checks.set_1_1_wrong_context" executed="True" success="True" time="0.023" asserts="0" />
+                                  <test-case name="Kistl.DalProvider.ClientObjects.Tests.PersistenceObjects.navigator_context_checks.set_1_N_same_context" executed="True" success="True" time="0.024" asserts="0" />
+                                  <test-case name="Kistl.DalProvider.ClientObjects.Tests.PersistenceObjects.navigator_context_checks.set_1_N_wrong_context" executed="True" success="True" time="0.022" asserts="0" />
+                                  <test-case name="Kistl.DalProvider.ClientObjects.Tests.PersistenceObjects.navigator_context_checks.set_N_1_same_context" executed="True" success="True" time="0.024" asserts="0" />
+                                  <test-case name="Kistl.DalProvider.ClientObjects.Tests.PersistenceObjects.navigator_context_checks.set_N_1_wrong_context" executed="True" success="True" time="0.016" asserts="0" />
+                                  <test-case name="Kistl.DalProvider.ClientObjects.Tests.PersistenceObjects.navigator_context_checks.set_N_M_same_context" executed="True" success="True" time="0.046" asserts="0" />
+                                  <test-case name="Kistl.DalProvider.ClientObjects.Tests.PersistenceObjects.navigator_context_checks.set_N_M_wrong_context" executed="True" success="True" time="0.019" asserts="0" />
                                 </results>
                               </test-suite>
-                              <test-suite name="when_changed" executed="True" success="False" time="0.037" asserts="0">
+                              <test-suite name="when_changed" executed="True" success="True" time="0.029" asserts="0">
                                 <results>
-                                  <test-case name="Kistl.DalProvider.ClientObjects.Tests.PersistenceObjects.when_changed.should_be_modified" executed="True" success="False" time="0.037" asserts="2">
-                                    <failure>
-                                      <message><![CDATA[TearDown : System.NullReferenceException : Object reference not set to an instance of an object.]]></message>
-                                      <stack-trace><![CDATA[--TearDown
-at Autofac.Core.Disposer.AddInstanceForDisposal(IDisposable instance)
-at Autofac.Core.Resolving.ComponentActivation.Activate(IEnumerable`1 parameters)
-at Autofac.Core.Resolving.ComponentActivation.Execute(IEnumerable`1 parameters)
-at Autofac.Core.Resolving.ResolveOperation.Resolve(ISharingLifetimeScope activationScope, IComponentRegistration registration, IEnumerable`1 parameters)
-at Autofac.Core.Resolving.ComponentActivation.Resolve(IComponentRegistration registration, IEnumerable`1 parameters)
-at Autofac.ResolutionExtensions.TryResolve(IComponentContext context, Service service, IEnumerable`1 parameters, Object& instance)
-at Autofac.ResolutionExtensions.Resolve(IComponentContext context, Service service, IEnumerable`1 parameters)
-at Autofac.ResolutionExtensions.Resolve[TService](IComponentContext context, IEnumerable`1 parameters)
-at Autofac.ResolutionExtensions.Resolve[TService](IComponentContext context)
-at Kistl.API.Client.ClientApiModule.<Load>b__0(IComponentContext c) in P:\Kistl\Kistl.API.Client\ClientApiModule.cs:line 34
-at Autofac.RegistrationExtensions.<>c__DisplayClass10`1.<Register>b__f(IComponentContext c, IEnumerable`1 p)
-at Autofac.Builder.RegistrationBuilder.<>c__DisplayClass1`1.<ForDelegate>b__0(IComponentContext c, IEnumerable`1 p)
-at Autofac.Core.Activators.Delegate.DelegateActivator.ActivateInstance(IComponentContext context, IEnumerable`1 parameters)
-at Autofac.Core.Resolving.ComponentActivation.Activate(IEnumerable`1 parameters)
-at Autofac.Core.Resolving.ComponentActivation.Execute(IEnumerable`1 parameters)
-at Autofac.Core.Resolving.ResolveOperation.Resolve(ISharingLifetimeScope activationScope, IComponentRegistration registration, IEnumerable`1 parameters)
-at Autofac.Core.Lifetime.LifetimeScope.Resolve(IComponentRegistration registration, IEnumerable`1 parameters)
-at Autofac.ResolutionExtensions.TryResolve(IComponentContext context, Service service, IEnumerable`1 parameters, Object& instance)
-at Autofac.ResolutionExtensions.Resolve(IComponentContext context, Service service, IEnumerable`1 parameters)
-at Autofac.ResolutionExtensions.Resolve[TService](IComponentContext context, IEnumerable`1 parameters)
-at Autofac.ResolutionExtensions.Resolve[TService](IComponentContext context)
-at Kistl.API.AbstractConsumerTests.AbstractTestFixture.GetContext() in P:\Kistl\Tests\Kistl.API.AbstractConsumerTests\AbstractTestFixture.cs:line 30
-at Kistl.API.AbstractConsumerTests.PersistenceObjects.ObjectLoadFixture.DestroyObjects() in P:\Kistl\Tests\Kistl.API.AbstractConsumerTests\PersistenceObjects\ObjectLoadFixture.cs:line 46
-at Kistl.API.AbstractConsumerTests.PersistenceObjects.ObjectLoadFixture.TearDown() in P:\Kistl\Tests\Kistl.API.AbstractConsumerTests\PersistenceObjects\ObjectLoadFixture.cs:line 30
-]]></stack-trace>
-                                    </failure>
-                                  </test-case>
+                                  <test-case name="Kistl.DalProvider.ClientObjects.Tests.PersistenceObjects.when_changed.should_be_modified" executed="True" success="True" time="0.028" asserts="2" />
                                 </results>
                               </test-suite>
-                              <test-suite name="when_loaded" executed="True" success="False" time="0.037" asserts="0">
+                              <test-suite name="when_loaded" executed="True" success="True" time="0.030" asserts="0">
                                 <results>
-                                  <test-case name="Kistl.DalProvider.ClientObjects.Tests.PersistenceObjects.when_loaded.should_be_attached" executed="True" success="False" time="0.009" asserts="1">
-                                    <failure>
-                                      <message><![CDATA[TearDown : System.NullReferenceException : Object reference not set to an instance of an object.]]></message>
-                                      <stack-trace><![CDATA[--TearDown
-at Autofac.Core.Disposer.AddInstanceForDisposal(IDisposable instance)
-at Autofac.Core.Resolving.ComponentActivation.Activate(IEnumerable`1 parameters)
-at Autofac.Core.Resolving.ComponentActivation.Execute(IEnumerable`1 parameters)
-at Autofac.Core.Resolving.ResolveOperation.Resolve(ISharingLifetimeScope activationScope, IComponentRegistration registration, IEnumerable`1 parameters)
-at Autofac.Core.Resolving.ComponentActivation.Resolve(IComponentRegistration registration, IEnumerable`1 parameters)
-at Autofac.ResolutionExtensions.TryResolve(IComponentContext context, Service service, IEnumerable`1 parameters, Object& instance)
-at Autofac.ResolutionExtensions.Resolve(IComponentContext context, Service service, IEnumerable`1 parameters)
-at Autofac.ResolutionExtensions.Resolve[TService](IComponentContext context, IEnumerable`1 parameters)
-at Autofac.ResolutionExtensions.Resolve[TService](IComponentContext context)
-at Kistl.API.Client.ClientApiModule.<Load>b__0(IComponentContext c) in P:\Kistl\Kistl.API.Client\ClientApiModule.cs:line 34
-at Autofac.RegistrationExtensions.<>c__DisplayClass10`1.<Register>b__f(IComponentContext c, IEnumerable`1 p)
-at Autofac.Builder.RegistrationBuilder.<>c__DisplayClass1`1.<ForDelegate>b__0(IComponentContext c, IEnumerable`1 p)
-at Autofac.Core.Activators.Delegate.DelegateActivator.ActivateInstance(IComponentContext context, IEnumerable`1 parameters)
-at Autofac.Core.Resolving.ComponentActivation.Activate(IEnumerable`1 parameters)
-at Autofac.Core.Resolving.ComponentActivation.Execute(IEnumerable`1 parameters)
-at Autofac.Core.Resolving.ResolveOperation.Resolve(ISharingLifetimeScope activationScope, IComponentRegistration registration, IEnumerable`1 parameters)
-at Autofac.Core.Lifetime.LifetimeScope.Resolve(IComponentRegistration registration, IEnumerable`1 parameters)
-at Autofac.ResolutionExtensions.TryResolve(IComponentContext context, Service service, IEnumerable`1 parameters, Object& instance)
-at Autofac.ResolutionExtensions.Resolve(IComponentContext context, Service service, IEnumerable`1 parameters)
-at Autofac.ResolutionExtensions.Resolve[TService](IComponentContext context, IEnumerable`1 parameters)
-at Autofac.ResolutionExtensions.Resolve[TService](IComponentContext context)
-at Kistl.API.AbstractConsumerTests.AbstractTestFixture.GetContext() in P:\Kistl\Tests\Kistl.API.AbstractConsumerTests\AbstractTestFixture.cs:line 30
-at Kistl.API.AbstractConsumerTests.PersistenceObjects.ObjectLoadFixture.DestroyObjects() in P:\Kistl\Tests\Kistl.API.AbstractConsumerTests\PersistenceObjects\ObjectLoadFixture.cs:line 46
-at Kistl.API.AbstractConsumerTests.PersistenceObjects.ObjectLoadFixture.TearDown() in P:\Kistl\Tests\Kistl.API.AbstractConsumerTests\PersistenceObjects\ObjectLoadFixture.cs:line 30
-]]></stack-trace>
-                                    </failure>
-                                  </test-case>
-                                  <test-case name="Kistl.DalProvider.ClientObjects.Tests.PersistenceObjects.when_loaded.should_be_unmodified" executed="True" success="False" time="0.015" asserts="1">
-                                    <failure>
-                                      <message><![CDATA[TearDown : System.NullReferenceException : Object reference not set to an instance of an object.]]></message>
-                                      <stack-trace><![CDATA[--TearDown
-at Autofac.Core.Disposer.AddInstanceForDisposal(IDisposable instance)
-at Autofac.Core.Resolving.ComponentActivation.Activate(IEnumerable`1 parameters)
-at Autofac.Core.Resolving.ComponentActivation.Execute(IEnumerable`1 parameters)
-at Autofac.Core.Resolving.ResolveOperation.Resolve(ISharingLifetimeScope activationScope, IComponentRegistration registration, IEnumerable`1 parameters)
-at Autofac.Core.Resolving.ComponentActivation.Resolve(IComponentRegistration registration, IEnumerable`1 parameters)
-at Autofac.ResolutionExtensions.TryResolve(IComponentContext context, Service service, IEnumerable`1 parameters, Object& instance)
-at Autofac.ResolutionExtensions.Resolve(IComponentContext context, Service service, IEnumerable`1 parameters)
-at Autofac.ResolutionExtensions.Resolve[TService](IComponentContext context, IEnumerable`1 parameters)
-at Autofac.ResolutionExtensions.Resolve[TService](IComponentContext context)
-at Kistl.API.Client.ClientApiModule.<Load>b__0(IComponentContext c) in P:\Kistl\Kistl.API.Client\ClientApiModule.cs:line 34
-at Autofac.RegistrationExtensions.<>c__DisplayClass10`1.<Register>b__f(IComponentContext c, IEnumerable`1 p)
-at Autofac.Builder.RegistrationBuilder.<>c__DisplayClass1`1.<ForDelegate>b__0(IComponentContext c, IEnumerable`1 p)
-at Autofac.Core.Activators.Delegate.DelegateActivator.ActivateInstance(IComponentContext context, IEnumerable`1 parameters)
-at Autofac.Core.Resolving.ComponentActivation.Activate(IEnumerable`1 parameters)
-at Autofac.Core.Resolving.ComponentActivation.Execute(IEnumerable`1 parameters)
-at Autofac.Core.Resolving.ResolveOperation.Resolve(ISharingLifetimeScope activationScope, IComponentRegistration registration, IEnumerable`1 parameters)
-at Autofac.Core.Lifetime.LifetimeScope.Resolve(IComponentRegistration registration, IEnumerable`1 parameters)
-at Autofac.ResolutionExtensions.TryResolve(IComponentContext context, Service service, IEnumerable`1 parameters, Object& instance)
-at Autofac.ResolutionExtensions.Resolve(IComponentContext context, Service service, IEnumerable`1 parameters)
-at Autofac.ResolutionExtensions.Resolve[TService](IComponentContext context, IEnumerable`1 parameters)
-at Autofac.ResolutionExtensions.Resolve[TService](IComponentContext context)
-at Kistl.API.AbstractConsumerTests.AbstractTestFixture.GetContext() in P:\Kistl\Tests\Kistl.API.AbstractConsumerTests\AbstractTestFixture.cs:line 30
-at Kistl.API.AbstractConsumerTests.PersistenceObjects.ObjectLoadFixture.DestroyObjects() in P:\Kistl\Tests\Kistl.API.AbstractConsumerTests\PersistenceObjects\ObjectLoadFixture.cs:line 46
-at Kistl.API.AbstractConsumerTests.PersistenceObjects.ObjectLoadFixture.TearDown() in P:\Kistl\Tests\Kistl.API.AbstractConsumerTests\PersistenceObjects\ObjectLoadFixture.cs:line 30
-]]></stack-trace>
-                                    </failure>
-                                  </test-case>
+                                  <test-case name="Kistl.DalProvider.ClientObjects.Tests.PersistenceObjects.when_loaded.should_be_attached" executed="True" success="True" time="0.014" asserts="1" />
+                                  <test-case name="Kistl.DalProvider.ClientObjects.Tests.PersistenceObjects.when_loaded.should_be_unmodified" executed="True" success="True" time="0.014" asserts="1" />
                                 </results>
                               </test-suite>
                             </results>

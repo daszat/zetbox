@@ -100,8 +100,8 @@ namespace Kistl.API.Tests
 
         public override void TearDown()
         {
-            base.TearDown();
             PostTeardown();
+            base.TearDown();
         }
 
         /// <summary>
