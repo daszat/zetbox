@@ -6,6 +6,8 @@ using NUnit.Framework;
 
 using Autofac;
 using Kistl.API;
+using Kistl.API.Client;
+using Kistl.Client.Mocks;
 
 namespace Kistl
 {
@@ -20,8 +22,8 @@ namespace Kistl
                 .As<Kistl.Client.Mocks.KistlMockFactory>()
                 .InstancePerLifetimeScope();
 
-            builder.Register(c => Kistl.Client.Mocks.KistlMockFactory.CreateContext())
-                .As<IKistlContext>()
+            builder.RegisterType<TestProxy>()
+                .As<IProxy>()
                 .InstancePerDependency();
         }
 

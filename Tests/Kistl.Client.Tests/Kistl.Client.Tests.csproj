@@ -64,7 +64,10 @@
     <Compile Include="AbstractClientTestFixture.cs" />
     <Compile Include="Kistl.Client.Mocks\CustomActionsManagerClientTests.cs" />
     <Compile Include="Kistl.Client.Mocks\KistlMockFactory.cs" />
+    <Compile Include="Kistl.Client.Mocks\TestObjClass.cs" />
+    <Compile Include="Kistl.Client.Mocks\TestObjClass_TestNameCollectionEntry.cs" />
     <Compile Include="Kistl.Client.Mocks\TestObject.cs" />
+    <Compile Include="Kistl.Client.Mocks\TestProxy.cs" />
     <Compile Include="Kistl.Client.Mocks\ThreadManagerMock.cs" />
     <Compile Include="Kistl.Client.Tests\DataObjectModelTests.cs" />
     <Compile Include="Kistl.Client.Tests\ObjectListModelTests.cs" />

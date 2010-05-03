@@ -20,6 +20,7 @@ namespace Kistl.Client.Tests
     using Autofac;
 
     [TestFixture]
+    [Ignore("Mocks not implemented")]
     public class ObjectListModelTests : AbstractClientTestFixture
     {
         Dictionary<IDataObject, ViewModel> models;
