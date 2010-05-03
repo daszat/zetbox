@@ -61,7 +61,7 @@ using System.Xml.Serialization;
 
         public void ToStream(BinaryWriter sw, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
-            BinarySerializer.ToStream(Context.GetInterfaceType(this).ToSerializableType(), sw);
+            BinarySerializer.ToStream(ReadOnlyContext.GetInterfaceType(this).ToSerializableType(), sw);
             BinarySerializer.ToStream(ID, sw);
             BinarySerializer.ToStream(StringProperty, sw);
             BinarySerializer.ToStream(IntProperty, sw);

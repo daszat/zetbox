@@ -225,9 +225,9 @@ namespace Kistl.API.Server
         {
             if (c.Type.IsGenericType && c.Type.GetGenericTypeDefinition() == typeof(QueryTranslator<>))
             {
-                // Just return the wrapped Linq Source
-                // Security Filter are added during OfType Visits
-                return Source.Expression;
+                var result = Source.Expression;
+                var type = result.Type.GetGenericArguments().First();
+                return AddSecurityFilter(result, typeTrans.AsInterfaceType(type.ToInterfaceType(typeTrans.AssemblyConfiguration)));
             }
             else
             {

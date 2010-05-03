@@ -74,7 +74,7 @@ namespace Kistl.DalProvider.Frozen
         /// <param name="sw"></param>
         public virtual void ToStream(BinaryWriter sw)
         {
-            BinarySerializer.ToStream(Context.GetInterfaceType(this).ToSerializableType(), sw);
+            BinarySerializer.ToStream(ReadOnlyContext.GetInterfaceType(this).ToSerializableType(), sw);
             BinarySerializer.ToStream(ID, sw);
             BinarySerializer.ToStream((int)ObjectState, sw);
         }

@@ -24,7 +24,7 @@ namespace Kistl.App.GUI.Common
                 return;
             }
 
-            e.Result = kind.Context.GetInterfaceType(kind).Type.Name;
+            e.Result = kind.ReadOnlyContext.GetInterfaceType(kind).Type.Name;
         }
     }
 }

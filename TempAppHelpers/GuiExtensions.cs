@@ -50,7 +50,7 @@ namespace Kistl.App.Extensions
             if (self == null) throw new ArgumentNullException("self");
             PrimeCaches(tk, self.ReadOnlyContext);
 
-            var key = new ViewDescriptorCache.Key(self.ViewModelRef, tk, ck != null ? (InterfaceType?)ck.Context.GetInterfaceType(ck) : null);
+            var key = new ViewDescriptorCache.Key(self.ViewModelRef, tk, ck != null ? (InterfaceType?)ck.ReadOnlyContext.GetInterfaceType(ck) : null);
             if (_viewDescriptorCache.ContainsKey(key)) return _viewDescriptorCache[key];
 
             ViewDescriptor result = null;
@@ -58,7 +58,7 @@ namespace Kistl.App.Extensions
             ICollection<ViewDescriptor> candidates;
             if (ck != null)
             {
-                candidates = _viewCaches[tk].GetDescriptors(ck.Context.GetInterfaceType(ck));
+                candidates = _viewCaches[tk].GetDescriptors(ck.ReadOnlyContext.GetInterfaceType(ck));
             }
             else
             {
@@ -121,13 +121,13 @@ namespace Kistl.App.Extensions
             else
             {
                 var defaultKind = self.GetDefaultKind();
-                if (defaultKind != null && ckcInterface.IsAssignableFrom(defaultKind.Context.GetInterfaceType(defaultKind)))
+                if (defaultKind != null && ckcInterface.IsAssignableFrom(defaultKind.ReadOnlyContext.GetInterfaceType(defaultKind)))
                 {
                     visualDesc = GetViewDescriptor(self, tk);
                 }
                 else
                 {
-                    ControlKind controlKind = self.SecondaryControlKinds.Where(ck => ckcInterface.IsAssignableFrom(ck.Context.GetInterfaceType(ck))).SingleOrDefault();
+                    ControlKind controlKind = self.SecondaryControlKinds.Where(ck => ckcInterface.IsAssignableFrom(ck.ReadOnlyContext.GetInterfaceType(ck))).SingleOrDefault();
                     if (controlKind == null && self.ViewModelRef.Parent != null)
                     {
                         var parentDescriptor = self.ViewModelRef.Parent.GetViewModelDescriptor();

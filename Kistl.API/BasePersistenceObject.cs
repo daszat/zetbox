@@ -115,7 +115,7 @@ namespace Kistl.API
             if (sw == null)
                 throw new ArgumentNullException("sw");
 
-            BinarySerializer.ToStream(Context.GetInterfaceType(this.GetImplementedInterface()).ToSerializableType(), sw);
+            BinarySerializer.ToStream(ReadOnlyContext.GetInterfaceType(this.GetImplementedInterface()).ToSerializableType(), sw);
             BinarySerializer.ToStream(this.ID, sw);
         }
 

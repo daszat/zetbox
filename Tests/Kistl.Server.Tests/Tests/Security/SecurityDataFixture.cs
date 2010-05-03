@@ -73,7 +73,7 @@ namespace Kistl.Server.Tests.Security
 
             identity3_low = srvCtx.Create<Identity>();
             identity3_low.DisplayName = "User 3 with low privileges";
-            identity3_low.UserName = "<TestDomain>\\User2";
+            identity3_low.UserName = "<TestDomain>\\User3";
 
             ma1 = srvCtx.Create<Mitarbeiter>();
             ma1.Name = identity1.DisplayName;
@@ -90,9 +90,9 @@ namespace Kistl.Server.Tests.Security
             srvCtx.SubmitChanges();
 
             // Create 3 identity context
-            id1Ctx = scope.GetKistlContext(identity1);
-            id2Ctx = scope.GetKistlContext(identity2);
-            id3Ctx_low = scope.GetKistlContext(identity3_low);
+            id1Ctx = scope.Resolve<ServerKistlContextFactory>().Invoke(identity1);
+            id2Ctx = scope.Resolve<ServerKistlContextFactory>().Invoke(identity2);
+            id3Ctx_low = scope.Resolve<ServerKistlContextFactory>().Invoke(identity3_low);
 
             // Create TestData with Identity 1
             prj1 = id1Ctx.Create<Projekt>();

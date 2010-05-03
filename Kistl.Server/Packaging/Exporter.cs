@@ -143,7 +143,7 @@ namespace Kistl.Server.Packaging
         #region Xml/Export private Methods
         private static void ExportObject(XmlWriter xml, IPersistenceObject obj, string[] propNamespaces)
         {
-            Type t = obj.Context.GetInterfaceType(obj).Type;
+            Type t = obj.ReadOnlyContext.GetInterfaceType(obj).Type;
             xml.WriteStartElement(t.Name, t.Namespace);
             if (((IExportable)obj).ExportGuid == Guid.Empty)
             {

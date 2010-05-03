@@ -10,17 +10,19 @@ namespace Kistl.API.Server
     using Kistl.App.Base;
     using Kistl.App.Extensions;
     using Autofac;
-using Kistl.API.Configuration;
+    using Kistl.API.Configuration;
 
-    public static class AutoFacContainerExtensions
-    {
-        [Obsolete("Replace with Autofac Factory")]
-        public static IKistlContext GetKistlContext(this ILifetimeScope container, Identity identity)
-        {
-            if (container == null) throw new ArgumentNullException("container");
-            return container.Resolve<IKistlContext>(new Autofac.PositionalParameter(0, identity));
-        }
-    }
+    //public static class AutoFacContainerExtensions
+    //{
+    //    [Obsolete("Replace with Autofac Factory")]
+    //    public static IKistlContext GetKistlContext(this ILifetimeScope container, Identity identity)
+    //    {
+    //        if (container == null) throw new ArgumentNullException("container");
+    //        return container.Resolve<IKistlContext>(new Autofac.PositionalParameter(0, identity));
+    //    }
+    //}
+
+    public delegate IKistlContext ServerKistlContextFactory(Identity identity);
 
     public abstract class BaseKistlDataContext
         : IKistlServerContext, IDisposable
