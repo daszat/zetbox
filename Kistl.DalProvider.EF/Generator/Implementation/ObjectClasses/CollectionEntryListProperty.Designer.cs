@@ -125,19 +125,20 @@ this.WriteObjects("                if (this.EntityState.In(System.Data.EntitySta
 this.WriteObjects("                    && !c.IsLoaded)\r\n");
 this.WriteObjects("                {\r\n");
 this.WriteObjects("                    c.Load();\r\n");
+this.WriteObjects("                    c.ForEach(i => i.AttachToContext(Context));\r\n");
 this.WriteObjects("                }\r\n");
 this.WriteObjects("                return c;\r\n");
 this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
 this.WriteObjects("        private ",  wrapperClass , "<",  rel.A.Type.GetDataTypeString() , ", ",  rel.B.Type.GetDataTypeString() , ", ",  ceName , "> ",  wrapperName , ";\r\n");
 this.WriteObjects("\r\n");
-#line 119 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\CollectionEntryListProperty.cst"
+#line 120 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\CollectionEntryListProperty.cst"
 if (eagerLoading)
 	{
 
-#line 122 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\CollectionEntryListProperty.cst"
+#line 123 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\CollectionEntryListProperty.cst"
 this.WriteObjects("		private bool ",  efName , "_was_eagerLoaded = false;\r\n");
-#line 124 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\CollectionEntryListProperty.cst"
+#line 125 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\CollectionEntryListProperty.cst"
 }
         AddSerialization(serializationList, efName, eagerLoading);
 

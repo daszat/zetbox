@@ -294,6 +294,7 @@ namespace Kistl.App.Test
                     && !c.IsLoaded)
                 {
                     c.Load();
+                    c.ForEach(i => i.AttachToContext(Context));
                 }
                 return c;
             }
@@ -586,8 +587,8 @@ namespace Kistl.App.Test
                     && !c.IsLoaded)
                 {
                     c.Load();
+                    c.ForEach(i => i.AttachToContext(Context));
                 }
-                c.ForEach(i => i.AttachToContext(Context));
                 return c;
             }
         }

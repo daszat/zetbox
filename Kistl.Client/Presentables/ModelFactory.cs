@@ -31,6 +31,7 @@ namespace Kistl.Client.Presentables
 
         protected ModelFactory(Autofac.ILifetimeScope container)
         {
+            if (container == null) throw new ArgumentNullException("container");
             this.Container = container;
             this.Managers = new Dictionary<IKistlContext, IMultipleInstancesManager>();
         }
@@ -105,6 +106,7 @@ namespace Kistl.Client.Presentables
 
         private Type ResolveFactory(Type t)
         {
+            if (t == null) throw new ArgumentNullException("t");
             if (typeof(Delegate).IsAssignableFrom(t)) return t;
             Type f = null;
             while (t != null)

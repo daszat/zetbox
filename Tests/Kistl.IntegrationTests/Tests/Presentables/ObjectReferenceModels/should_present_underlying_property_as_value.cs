@@ -8,6 +8,8 @@ using Kistl.Client.Presentables;
 
 using NUnit.Framework;
 
+using Autofac;
+
 namespace Kistl.IntegrationTests.Presentables.ObjectReferenceModels
 {
 	[TestFixture]
@@ -23,7 +25,7 @@ namespace Kistl.IntegrationTests.Presentables.ObjectReferenceModels
 					.Single(oc => oc.Name == "TypeRef");
 				var assemblyProperty = ctx.GetQuery<ObjectReferenceProperty>()
 					.Single(p => p.ObjectClass.ID == typeRefClass.ID && p.Name == "Assembly");
-				var orm = new ObjectReferenceModel(null, ctx, obj, assemblyProperty);
+				var orm = scope.Resolve<ObjectReferenceModel.Factory>().Invoke(ctx, obj, assemblyProperty);
 				
 				Assert.That(orm.Value.ID , Is.EqualTo(obj.Assembly.ID));
 			}

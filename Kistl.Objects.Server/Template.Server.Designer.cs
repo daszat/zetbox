@@ -293,6 +293,7 @@ namespace Kistl.App.GUI
                     && !c.IsLoaded)
                 {
                     c.Load();
+                    c.ForEach(i => i.AttachToContext(Context));
                 }
                 return c;
             }

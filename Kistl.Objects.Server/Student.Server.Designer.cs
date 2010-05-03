@@ -98,6 +98,7 @@ namespace at.dasz.CourseOrganiser
                     && !c.IsLoaded)
                 {
                     c.Load();
+                    c.ForEach(i => i.AttachToContext(Context));
                 }
                 return c;
             }
@@ -250,6 +251,7 @@ namespace at.dasz.CourseOrganiser
                     && !c.IsLoaded)
                 {
                     c.Load();
+                    c.ForEach(i => i.AttachToContext(Context));
                 }
                 return c;
             }

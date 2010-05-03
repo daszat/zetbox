@@ -93,6 +93,7 @@ namespace Kistl.DalProvider.EF
             {
                 c.Load();
             }
+            c.Cast<IRelationCollectionEntry>().ForEach(i=> i.AttachToContext(parent.Context));
             return c.Cast<IRelationCollectionEntry>();
         }
     }

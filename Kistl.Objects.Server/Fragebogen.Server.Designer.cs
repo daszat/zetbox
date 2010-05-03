@@ -201,6 +201,7 @@ namespace Kistl.App.Test
                     && !c.IsLoaded)
                 {
                     c.Load();
+                    c.ForEach(i => i.AttachToContext(Context));
                 }
                 return c;
             }

@@ -15,6 +15,8 @@ namespace Kistl.IntegrationTests.ObjectListModels
     using NUnit.Framework;
     using Kistl.Client;
 
+    using Autofac;
+
     public class when_moving_items : AbstractIntegrationTestFixture
     {
 
@@ -34,7 +36,7 @@ namespace Kistl.IntegrationTests.ObjectListModels
                 }
 
                 Assert.That(objectClass.Properties.Select(p => p.GetPrivateFieldValue<int>("_Properties_pos")), Is.Ordered);
-                var factory = new WpfModelFactory(null, null);
+                var factory = scope.Resolve<IModelFactory>();
                 var classModel = factory.CreateViewModel<DataObjectModel.Factory>(objectClass).Invoke(ctx, objectClass);
                 var listModel = (ObjectListModel)classModel.PropertyModelsByName["Properties"];
                 propList = objectClass.Properties.ToArray();
