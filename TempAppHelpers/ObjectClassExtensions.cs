@@ -22,7 +22,7 @@ namespace Kistl.App.Extensions
             if (obj == null) { throw new ArgumentNullException("obj"); }
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
 
-            return GetObjectClass(ctx.GetInterfaceType(obj), ctx);
+            return GetObjectClass(obj.ReadOnlyContext.GetInterfaceType(obj), ctx);
         }
 
         public static ObjectClass GetObjectClass(this InterfaceType ifType, IReadOnlyKistlContext ctx)
