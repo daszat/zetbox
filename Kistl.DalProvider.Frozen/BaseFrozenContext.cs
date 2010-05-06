@@ -182,7 +182,7 @@ namespace Kistl.DalProvider.Frozen
 
         public InterfaceType GetInterfaceType(IPersistenceObject obj)
         {
-            return typeTrans.AsInterfaceType(((BasePersistenceObject)obj).GetImplementedInterface());
+            return typeTrans.AsInterfaceType(((BaseFrozenObject)obj).GetImplementedInterface());
         }
 
         public ImplementationType GetImplementationType(Type t)
