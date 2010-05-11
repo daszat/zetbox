@@ -194,7 +194,7 @@ namespace Kistl.Client.Presentables
             return Name;
         }
 
-        protected IQueryable<IDataObject> GetQuery()
+        protected virtual IQueryable<IDataObject> GetQuery()
         {
             return DataContext.GetQuery(InterfaceType);
         }
