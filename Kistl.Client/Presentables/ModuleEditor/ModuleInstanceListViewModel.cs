@@ -11,13 +11,13 @@ using ObjectEditorWorkspace = Kistl.Client.Presentables.ObjectEditor.WorkspaceVi
 
 namespace Kistl.Client.Presentables.ModuleEditor
 {
-    public abstract class InstanceListViewModel : ViewModel
+    public abstract class ModuleInstanceListViewModel : ViewModel
     {
-        public new delegate InstanceListViewModel Factory(IKistlContext dataCtx, Module module);
+        public new delegate ModuleInstanceListViewModel Factory(IKistlContext dataCtx, Module module);
 
         protected readonly Func<IKistlContext> ctxFactory;
 
-        public InstanceListViewModel(
+        public ModuleInstanceListViewModel(
             IViewModelDependencies appCtx,
             IKistlContext dataCtx,
             Module module,
@@ -145,7 +145,7 @@ namespace Kistl.Client.Presentables.ModuleEditor
     }
 
     #region *InstanceListViewModel
-    public class ObjectClassInstanceListViewModel : InstanceListViewModel
+    public class ObjectClassInstanceListViewModel : ModuleInstanceListViewModel
     {
         public new delegate ObjectClassInstanceListViewModel Factory(IKistlContext dataCtx, Module module);
 
@@ -200,7 +200,7 @@ namespace Kistl.Client.Presentables.ModuleEditor
         }
     }
 
-    public class InterfaceInstanceListViewModel : InstanceListViewModel
+    public class InterfaceInstanceListViewModel : ModuleInstanceListViewModel
     {
         public new delegate InterfaceInstanceListViewModel Factory(IKistlContext dataCtx, Module module);
 
@@ -232,7 +232,7 @@ namespace Kistl.Client.Presentables.ModuleEditor
         }
     }
 
-    public class EnumerationInstanceListViewModel : InstanceListViewModel
+    public class EnumerationInstanceListViewModel : ModuleInstanceListViewModel
     {
         public new delegate EnumerationInstanceListViewModel Factory(IKistlContext dataCtx, Module module);
 
@@ -263,7 +263,7 @@ namespace Kistl.Client.Presentables.ModuleEditor
         }
     }
 
-    public class CompoundObjectInstanceListViewModel : InstanceListViewModel
+    public class CompoundObjectInstanceListViewModel : ModuleInstanceListViewModel
     {
         public new delegate CompoundObjectInstanceListViewModel Factory(IKistlContext dataCtx, Module module);
 
@@ -295,7 +295,7 @@ namespace Kistl.Client.Presentables.ModuleEditor
         }
     }
 
-    public class AssemblyInstanceListViewModel : InstanceListViewModel
+    public class AssemblyInstanceListViewModel : ModuleInstanceListViewModel
     {
         public new delegate AssemblyInstanceListViewModel Factory(IKistlContext dataCtx, Module module);
 
@@ -327,7 +327,7 @@ namespace Kistl.Client.Presentables.ModuleEditor
         }
     }
 
-    public class ViewDescriptorInstanceListViewModel : InstanceListViewModel
+    public class ViewDescriptorInstanceListViewModel : ModuleInstanceListViewModel
     {
         public new delegate ViewDescriptorInstanceListViewModel Factory(IKistlContext dataCtx, Module module);
 
@@ -359,7 +359,7 @@ namespace Kistl.Client.Presentables.ModuleEditor
         }
     }
 
-    public class ViewModelDescriptorInstanceListViewModel : InstanceListViewModel
+    public class ViewModelDescriptorInstanceListViewModel : ModuleInstanceListViewModel
     {
         public new delegate ViewModelDescriptorInstanceListViewModel Factory(IKistlContext dataCtx, Module module);
 
@@ -391,7 +391,7 @@ namespace Kistl.Client.Presentables.ModuleEditor
         }
     }
 
-    public class RelationInstanceListViewModel : InstanceListViewModel
+    public class RelationInstanceListViewModel : ModuleInstanceListViewModel
     {
         public new delegate RelationInstanceListViewModel Factory(IKistlContext dataCtx, Module module);
 

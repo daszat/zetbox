@@ -29,19 +29,19 @@ namespace Kistl.Client.Presentables.ObjectBrowser
         /// A collection of all <see cref="Module"/>s, to display as entry 
         /// point into the object hierarchy
         /// </summary>
-        public ObservableCollection<ModuleModel> Modules
+        public ObservableCollection<ModuleViewModel> Modules
         {
             get
             {
                 if (_modulesCache == null)
                 {
-                    _modulesCache = new ObservableCollection<ModuleModel>();
+                    _modulesCache = new ObservableCollection<ModuleViewModel>();
                     LoadModules();
                 }
                 return _modulesCache;
             }
         }
-        private ObservableCollection<ModuleModel> _modulesCache;
+        private ObservableCollection<ModuleViewModel> _modulesCache;
 
         /// <summary>
         /// A collection of all applications, to display as entry 
@@ -114,7 +114,7 @@ namespace Kistl.Client.Presentables.ObjectBrowser
             var modules = DataContext.GetQuery<Module>().ToList();
             foreach (var m in modules)
             {
-                Modules.Add(ModelFactory.CreateViewModel<ModuleModel.Factory>(m).Invoke(DataContext, m));
+                Modules.Add(ModelFactory.CreateViewModel<ModuleViewModel.Factory>(m).Invoke(DataContext, m));
             }
         }
 

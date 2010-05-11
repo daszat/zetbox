@@ -17,9 +17,8 @@ namespace Kistl.Client.Presentables
 
         public ObjectClassModel(
             IViewModelDependencies appCtx, KistlConfig config, IKistlContext dataCtx,
-            ObjectClass cls,
-            Func<IKistlContext> ctxFactory)
-            : base(appCtx, config, dataCtx, cls, ctxFactory)
+            ObjectClass cls)
+            : base(appCtx, config, dataCtx, cls)
         {
             _class = cls;
         }
@@ -29,24 +28,11 @@ namespace Kistl.Client.Presentables
             return _class.GetDescribedInterfaceType();
         }
 
-        #region Utilities and UI callbacks
-
-        protected override void QueryHasInstances()
-        {
-            var obj = DataContext.GetQuery(_class.GetDescribedInterfaceType()).FirstOrDefault();
-            HasInstances = (obj != null);
-        }
-
-        protected override void LoadInstances()
-        {
-            foreach (var obj in DataContext.GetQuery(_class.GetDescribedInterfaceType()).ToList().OrderBy(obj => obj.ToString()))
-            {
-                Instances.Add(ModelFactory.CreateViewModel<DataObjectModel.Factory>(obj).Invoke(DataContext, obj));
-            }
-        }
-
-        #endregion
-
         private ObjectClass _class;
+
+        public override Kistl.App.GUI.Icon Icon
+        {
+            get { return _class.DefaultIcon; }
+        }
     }
 }

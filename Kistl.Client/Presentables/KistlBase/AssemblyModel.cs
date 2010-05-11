@@ -15,14 +15,16 @@ namespace Kistl.Client.Presentables.KistlBase
     public class AssemblyModel
         : DataObjectModel
     {
+        public new delegate DataObjectModel Factory(IKistlContext dataCtx, Assembly obj);
+
         private Assembly _assembly;
 
         public AssemblyModel(
             IViewModelDependencies appCtx, KistlConfig config, IKistlContext dataCtx,
-            Assembly assembly)
-            : base(appCtx, config, dataCtx, assembly)
+            Assembly obj)
+            : base(appCtx, config, dataCtx, obj)
         {
-            _assembly = assembly;
+            _assembly = obj;
         }
 
         #region Public Interface

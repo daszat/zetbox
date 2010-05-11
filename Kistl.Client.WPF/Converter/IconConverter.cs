@@ -62,10 +62,10 @@ namespace Kistl.Client.WPF.Converter
                     return Binding.DoNothing;
                 }
             }
-            else if (value is Kistl.Client.Presentables.DataObjectModel)
+            else if (value is Kistl.Client.Presentables.IViewModelWithIcon)
             {
-                string path = (value as Kistl.Client.Presentables.DataObjectModel).IconPath;
-                return String.IsNullOrEmpty(path) ? Binding.DoNothing : path;
+                var ico = (value as Kistl.Client.Presentables.IViewModelWithIcon).Icon;
+                return ico == null ? Binding.DoNothing : GetIconPath(ico.IconFile);
             }
 
             return GetIconPath("error.ico");

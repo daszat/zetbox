@@ -91,6 +91,7 @@
     <Compile Include="Presentables\ColumnDisplayModel.cs" />
     <Compile Include="Presentables\DataObjectModel.cs" />
     <Compile Include="Presentables\DataTypeModel.cs" />
+    <Compile Include="Presentables\InstanceListViewModel.cs" />
     <Compile Include="Presentables\ErrorListModel.cs" />
     <Compile Include="Presentables\GUI\DashboardModel.cs" />
     <Compile Include="Presentables\IAsyncUiManager.cs" />
@@ -99,6 +100,7 @@
     <Compile Include="Presentables\IModelFactory.cs" />
     <Compile Include="Presentables\IMultipleInstancesManager.cs" />
     <Compile Include="Presentables\IPropertyModel.cs" />
+    <Compile Include="Presentables\IViewModelWithIcon.cs" />
     <Compile Include="Presentables\KistlBase\ApplicationViewModel.cs" />
     <Compile Include="Presentables\KistlBase\AssemblyModel.cs" />
     <Compile Include="Presentables\KistlBase\AssemblyReferenceModel.cs" />
@@ -112,9 +114,9 @@
     <Compile Include="Presentables\MethodResultModels.cs" />
     <Compile Include="Presentables\ModelFactory.cs" />
     <Compile Include="Presentables\ModuleEditor\DiagramViewModel.cs" />
-    <Compile Include="Presentables\ModuleEditor\InstanceListViewModel.cs" />
+    <Compile Include="Presentables\ModuleEditor\ModuleInstanceListViewModel.cs" />
     <Compile Include="Presentables\ModuleEditor\WorkspaceViewModel.cs" />
-    <Compile Include="Presentables\ModuleModel.cs" />
+    <Compile Include="Presentables\ObjectBrowser\ModuleViewModel.cs" />
     <Compile Include="Presentables\ObjectBrowser\WorkspaceViewModel.cs" />
     <Compile Include="Presentables\ObjectClassModel.cs" />
     <Compile Include="Presentables\ObjectListModel.cs" />

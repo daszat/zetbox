@@ -15,7 +15,7 @@ namespace Kistl.Client.Presentables
     public partial class ObjectReferenceModel
         : PropertyModel<DataObjectModel>, IValueModel<DataObjectModel>
     {
-        public new delegate ObjectReferenceModel Factory(IKistlContext dataCtx, IDataObject obj, Property prop);
+        public new delegate ObjectReferenceModel Factory(IKistlContext dataCtx, IDataObject obj, ObjectReferenceProperty prop);
 
         public ObjectReferenceModel(
             IViewModelDependencies appCtx, IKistlContext dataCtx,

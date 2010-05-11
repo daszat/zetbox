@@ -22,7 +22,7 @@ using Kistl.API.Configuration;
     /// Proxies a whole IDataObject
     /// </summary>
     public class DataObjectModel
-        : ViewModel, IDataErrorInfo
+        : ViewModel, IDataErrorInfo, IViewModelWithIcon
     {
         public new delegate DataObjectModel Factory(IKistlContext dataCtx, IDataObject obj);
 
@@ -209,28 +209,6 @@ using Kistl.API.Configuration;
             }
         }
 
-        /// <summary>Private backing store for the <see cref="IconPath"/> property. String.Empty means no IconPath, null means not yet fetched.</summary>
-        private string _iconPathCache;
-        public string IconPath
-        {
-            get
-            {
-                if (_iconPathCache == null)
-                {
-                    UpdateIconPath();
-                }
-                return _iconPathCache;
-            }
-            set
-            {
-                if (value != _iconPathCache)
-                {
-                    _iconPathCache = value;
-                    OnPropertyChanged("IconPath");
-                }
-            }
-        }
-
         /// <summary>
         /// Schedules the underlying object for deletion.
         /// </summary>
@@ -353,15 +331,6 @@ using Kistl.API.Configuration;
             }
         }
 
-        private string GetIconPath(string name)
-        {
-            string result = config.Client.DocumentStore
-                + @"\GUI.Icons\"
-                + name;
-            result = Path.IsPathRooted(result) ? result : Environment.CurrentDirectory + "\\" + result;
-            return result;
-        }
-
         private void InitialiseViewCache()
         {
             // update Name
@@ -373,46 +342,36 @@ using Kistl.API.Configuration;
                 _toStringCache);
         }
 
-        private void UpdateIconPath()
-        {
-            // update IconPath
-            Icon icon = GetIcon();
-            if (icon != null)
-            {
-                string newIconPath = GetIconPath(icon.IconFile);
-                IconPath = newIconPath;
-            }
-            else
-            {
-                IconPath = String.Empty;
-            }
-        }
-
         protected void UpdateViewCache()
         {
             InitialiseViewCache();
             OnPropertyChanged("Name");
             OnPropertyChanged("LongName");
 
-            UpdateIconPath();
         }
 
+        private Icon _iconCache = null;
         /// <summary>
         /// Override this to present a custom icon
         /// </summary>
         /// <returns>an <see cref="Icon"/> describing the desired icon</returns>
-        protected virtual Icon GetIcon()
+        public virtual Icon Icon
         {
-            Icon icon = null;
-            if (_object is Icon)
+            get
             {
-                icon = (Icon)_object;
+                if (_iconCache == null)
+                {
+                    if (_object is Icon)
+                    {
+                        _iconCache = (Icon)_object;
+                    }
+                    else
+                    {
+                        _iconCache = _object.GetObjectClass(FrozenContext.Single).DefaultIcon;
+                    }
+                }
+                return _iconCache;
             }
-            else
-            {
-                icon = _object.GetObjectClass(FrozenContext.Single).DefaultIcon;
-            }
-            return icon;
         }
 
         #endregion

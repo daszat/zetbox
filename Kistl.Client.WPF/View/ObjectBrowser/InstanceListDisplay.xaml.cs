@@ -24,7 +24,7 @@ namespace Kistl.Client.WPF.View.ObjectBrowser
     /// Shows all instances of a given DataTypeModel
     /// </summary>
     public partial class InstanceListDisplay
-        : UserControl, IHasViewModel<DataTypeModel>
+        : UserControl, IHasViewModel<InstanceListViewModel>
     {
         /// <summary>
         /// Initializes a new instance of the ObjectClassDisplay class.
@@ -85,9 +85,9 @@ namespace Kistl.Client.WPF.View.ObjectBrowser
 
         #region IHasViewModel<DataTypeModel> Members
 
-        public DataTypeModel ViewModel
+        public InstanceListViewModel ViewModel
         {
-            get { return (DataTypeModel)DataContext; }
+            get { return (InstanceListViewModel)DataContext; }
         }
 
         #endregion

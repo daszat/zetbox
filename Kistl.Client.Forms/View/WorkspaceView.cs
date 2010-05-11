@@ -86,12 +86,12 @@ namespace Kistl.Client.Forms.View
         {
             if (e.PropertyName == "Name" && _moduleList.SelectedItems.Count > 0)
 
-                SyncObjectClasses((ModuleModel)_moduleList.SelectedItems[0].Tag);
+                SyncObjectClasses((ModuleViewModel)_moduleList.SelectedItems[0].Tag);
         }
         void InstancePropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "Name" && _instancesList.SelectedItems.Count > 0)
-                SyncInstances((ObjectClassModel)_instancesList.SelectedItems[0].Tag);
+                SyncInstances((InstanceListViewModel)_instancesList.SelectedItems[0].Tag);
         }
         public WorkspaceView()
         {
@@ -102,11 +102,11 @@ namespace Kistl.Client.Forms.View
         {
             if (_objectClassList.SelectedItems.Count > 0)
             {
-                SyncInstances((DataTypeModel)_objectClassList.SelectedItems[0].Tag);
+                SyncInstances((InstanceListViewModel)_objectClassList.SelectedItems[0].Tag);
             }
         }
 
-        private void SyncObjectClasses(ModuleModel mdlMdl)
+        private void SyncObjectClasses(ModuleViewModel mdlMdl)
         {
             System.Diagnostics.Debug.WriteLine("SyncModules");
             _objectClassList.BeginUpdate();
@@ -130,11 +130,11 @@ namespace Kistl.Client.Forms.View
         {
             if (_moduleList.SelectedItems.Count > 0)
             {
-                SyncObjectClasses((ModuleModel)_moduleList.SelectedItems[0].Tag);
+                SyncObjectClasses((ModuleViewModel)_moduleList.SelectedItems[0].Tag);
             }
         }
 
-        private void SyncInstances(DataTypeModel ocModel)
+        private void SyncInstances(InstanceListViewModel ocModel)
         {
             System.Diagnostics.Debug.WriteLine("SyncModules");
             _instancesList.BeginUpdate();

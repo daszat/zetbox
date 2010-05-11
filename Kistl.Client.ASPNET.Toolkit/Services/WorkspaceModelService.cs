@@ -34,7 +34,7 @@ namespace Kistl.Client.ASPNET.Toolkit
                 .CreateViewModel<WorkspaceViewModel.Factory>().Invoke(KistlContextManagerModule.KistlContext);
 
             return workspace.Modules.Single(m => m.ID == moduleID).ObjectClasses
-                .Select(i => new JavaScriptObjectMoniker(i)).ToList();
+                .Select(i => new JavaScriptObjectMoniker(i.DataTypeModel)).ToList();
         }
 
         [OperationContract]

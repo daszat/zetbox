@@ -22,7 +22,7 @@ namespace Kistl.Client.WPF.View.ModuleEditor
     /// <summary>
     /// Interaction logic for InstanceListDisplay.xaml
     /// </summary>
-    public partial class InstanceListDisplay : UserControl, IHasViewModel<InstanceListViewModel>
+    public partial class InstanceListDisplay : UserControl, IHasViewModel<ModuleInstanceListViewModel>
     {
         public InstanceListDisplay()
         {
@@ -75,9 +75,9 @@ namespace Kistl.Client.WPF.View.ModuleEditor
 
         #region IHasViewModel<ModuleEditorDashboardModel> Members
 
-        public InstanceListViewModel ViewModel
+        public ModuleInstanceListViewModel ViewModel
         {
-            get { return (InstanceListViewModel)DataContext; }
+            get { return (ModuleInstanceListViewModel)DataContext; }
         }
 
         #endregion

@@ -9,13 +9,13 @@ using Kistl.API;
 using Kistl.App.Base;
 using Kistl.API.Configuration;
 
-namespace Kistl.Client.Presentables
+namespace Kistl.Client.Presentables.ObjectBrowser
 {
-    public class ModuleModel : DataObjectModel
+    public class ModuleViewModel : DataObjectModel
     {
-        public new delegate ModuleModel Factory(IKistlContext dataCtx, Module mdl);
+        public new delegate ModuleViewModel Factory(IKistlContext dataCtx, Module mdl);
 
-        public ModuleModel(
+        public ModuleViewModel(
             IViewModelDependencies appCtx, KistlConfig config, IKistlContext dataCtx,
             Module mdl)
             : base(appCtx, config, dataCtx, mdl)
@@ -26,14 +26,14 @@ namespace Kistl.Client.Presentables
 
         #region public interface
 
-        private ObservableCollection<DataObjectModel> _objectClassesCache = null;
-        public ObservableCollection<DataObjectModel> ObjectClasses
+        private ObservableCollection<InstanceListViewModel> _objectClassesCache = null;
+        public ObservableCollection<InstanceListViewModel> ObjectClasses
         {
             get
             {
                 if (_objectClassesCache == null)
                 {
-                    _objectClassesCache = new ObservableCollection<DataObjectModel>();
+                    _objectClassesCache = new ObservableCollection<InstanceListViewModel>();
                     LoadObjectClasses();
                 }
                 return _objectClassesCache;
@@ -51,7 +51,7 @@ namespace Kistl.Client.Presentables
                 .OrderBy(dt => dt.Name);
             foreach (var dt in datatypes)
             {
-                ObjectClasses.Add(ModelFactory.CreateViewModel<DataObjectModel.Factory>(dt).Invoke(DataContext, dt));
+                ObjectClasses.Add(ModelFactory.CreateViewModel<InstanceListViewModel.Factory>().Invoke(DataContext, dt));
             }
         }
 
