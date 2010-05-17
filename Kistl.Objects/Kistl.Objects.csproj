@@ -110,6 +110,7 @@
     <Compile Include="Icon.Interface.Designer.cs" />
     <Compile Include="Identity.Interface.Designer.cs" />
     <Compile Include="InstanceConstraint.Interface.Designer.cs" />
+    <Compile Include="InstanceListKind.Interface.Designer.cs" />
     <Compile Include="IntegerRangeConstraint.Interface.Designer.cs" />
     <Compile Include="Interface.Interface.Designer.cs" />
     <Compile Include="IntParameter.Interface.Designer.cs" />

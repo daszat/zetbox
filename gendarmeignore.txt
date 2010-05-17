@@ -57,6 +57,9 @@ M: System.Delegate Kistl.Client.WPF.View.NullablePropertyTextBoxView::_CreateDel
 M: System.Delegate Kistl.Client.WPF.View.TextValueSelectionView::_CreateDelegate(System.Type,System.String)
 M: System.Delegate Kistl.Client.WPF.View.CacheDebuggerDisplay::_CreateDelegate(System.Type,System.String)
 
+# Called by an Lambda
+M: System.Boolean System.Linq.Dynamic.ExpressionParser::IsBetterThan(System.Linq.Expressions.Expression[],System.Linq.Dynamic.ExpressionParser/MethodData,System.Linq.Dynamic.ExpressionParser/MethodData)
+
 R: Gendarme.Rules.Correctness.CheckParametersNullityInVisibleMethodsRule
 # MethodInvocation implementors should not have to check for thisobj==null => too many false positives
 A: Kistl.App.Projekte.Common
@@ -152,6 +155,10 @@ M: System.Void Kistl.Server.SchemaManagement.SqlProvider.SqlServer::CreateUpdate
 R: Gendarme.Rules.Performance.AvoidUninstantiatedInternalClassesRule
 # The internal type is not instantiated by code within the assembly.
 T: Kistl.API.Server.ServerAssemblyConfiguration
+
+R: Gendarme.Rules.Correctness.ReviewInconsistentIdentityRule
+# The type does not manage identity consistently in its Equals, relational operator, CompareTo, GetHashCode, and Clone methods.
+T: System.Linq.Dynamic.Signature
 
 ###############################################################################
 ##  GLOBAL IGNORES  ###########################################################

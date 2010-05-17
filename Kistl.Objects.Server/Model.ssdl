@@ -225,6 +225,12 @@
       <End Role="A_ValueTypeProperty" EntitySet="ValueTypeProperty" />
       <End Role="B_GuidProperty" EntitySet="GuidProperty" />
     </AssociationSet>
+    <EntitySet Name="InstanceListKind" EntityType="Model.Store.InstanceListKind" Table="InstanceListKind"/>
+    <!-- inherits from DashboardKind -->
+    <AssociationSet Name="FK_InstanceListKind_DashboardKind_ID" Association="Model.Store.FK_InstanceListKind_DashboardKind_ID" >
+      <End Role="A_DashboardKind" EntitySet="DashboardKind" />
+      <End Role="B_InstanceListKind" EntitySet="InstanceListKind" />
+    </AssociationSet>
     <EntitySet Name="IntegerRangeConstraint" EntityType="Model.Store.IntegerRangeConstraint" Table="IntegerRangeConstraints"/>
     <!-- inherits from Constraint -->
     <AssociationSet Name="FK_IntegerRangeConstraint_Constraint_ID" Association="Model.Store.FK_IntegerRangeConstraint_Constraint_ID" >
@@ -1730,6 +1736,13 @@
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="fk_Constrained" Type="int" />
     <Property Name="Reason" Type="nvarchar" MaxLength="1000" Nullable="true" />
+  </EntityType>
+	
+  <EntityType Name="InstanceListKind">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="IntegerRangeConstraint">
@@ -5063,6 +5076,18 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="B_GuidProperty">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InstanceListKind_DashboardKind_ID">
+    <End Role="A_DashboardKind" Type="Model.Store.DashboardKind" Multiplicity="1" />
+    <End Role="B_InstanceListKind" Type="Model.Store.InstanceListKind" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="A_DashboardKind">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_InstanceListKind">
         <PropertyRef Name="ID" />
       </Dependent>
     </ReferentialConstraint>

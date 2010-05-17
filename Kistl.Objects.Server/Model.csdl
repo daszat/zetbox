@@ -1970,6 +1970,8 @@
   </EntityType>
   <EntityType Name="GuidProperty" BaseType="Model.ValueTypeProperty">
   </EntityType>
+  <EntityType Name="InstanceListKind" BaseType="Model.DashboardKind">
+  </EntityType>
   <EntityType Name="IntegerRangeConstraint" BaseType="Model.Constraint">
     <Property Name="Max" Type="Int32" Nullable="false" />
     <Property Name="Min" Type="Int32" Nullable="false" />

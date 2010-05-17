@@ -134,6 +134,7 @@
     <Compile Include="Icon.Server.Designer.cs" />
     <Compile Include="Identity.Server.Designer.cs" />
     <Compile Include="InstanceConstraint.Server.Designer.cs" />
+    <Compile Include="InstanceListKind.Server.Designer.cs" />
     <Compile Include="IntegerRangeConstraint.Server.Designer.cs" />
     <Compile Include="Interface.Server.Designer.cs" />
     <Compile Include="IntParameter.Server.Designer.cs" />

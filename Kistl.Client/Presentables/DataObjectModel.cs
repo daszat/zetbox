@@ -338,7 +338,7 @@ using Kistl.API.Configuration;
                 _object.ObjectState.ToUserString(),
                 _object.ToString());
             _longNameCache = String.Format("{0}: {1}",
-                DataContext.GetInterfaceType(_object).Type.FullName,
+                _object.ReadOnlyContext.GetInterfaceType(_object).Type.FullName,
                 _toStringCache);
         }
 

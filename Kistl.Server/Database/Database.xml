@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2010-04-08T19:12:41.817Z" xmlns="http://dasz.at/Kistl">
+<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2010-05-17T12:30:09.797Z" xmlns="http://dasz.at/Kistl">
   <KistlBase:Module ExportGuid="110acbc0-652a-4adc-9de5-8baabfcf3637">
     <KistlBase:ChangedOn>2010-02-01T16:07:00.49Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2010-02-01T15:23:35.247Z</KistlBase:CreatedOn>
@@ -1416,16 +1416,13 @@
     <KistlBase:TableName>ModuleEditorWorkspaceKinds</KistlBase:TableName>
   </GUI:ControlKindClass>
   <GUI:ViewModelDescriptor ExportGuid="e8343dd6-81a0-48eb-af63-5527cdccfa63">
+    <GUI:DefaultKind>4e7a8b0b-0c8e-49e1-aa35-d3a9ec7b8e4c</GUI:DefaultKind>
     <GUI:Description>ViewModel for the UML Diagram</GUI:Description>
     <GUI:Module>0fe1ab38-860a-414f-a599-b0b86a22ce1a</GUI:Module>
     <GUI:ViewModelRef>19133b0e-3da2-4151-b542-88e000449b85</GUI:ViewModelRef>
   </GUI:ViewModelDescriptor>
-  <GUI:ViewModelDescriptor ExportGuid="b34fac62-7591-4389-8ab2-e62ea60ec8d4">
-    <GUI:Description>ViewModel for Instance Lists in ModuleEditors Workspace</GUI:Description>
-    <GUI:Module>0fe1ab38-860a-414f-a599-b0b86a22ce1a</GUI:Module>
-    <GUI:ViewModelRef>109e65cb-67b9-467d-a088-4c8f42b3c513</GUI:ViewModelRef>
-  </GUI:ViewModelDescriptor>
   <GUI:ViewModelDescriptor ExportGuid="93d905d3-15cb-4cf6-856f-bf465e0aca28">
+    <GUI:DefaultKind>06bd4b7a-df2c-44ab-8e1f-08288ac0e4e5</GUI:DefaultKind>
     <GUI:Description>ViewModel for a List of Object Classes</GUI:Description>
     <GUI:Module>0fe1ab38-860a-414f-a599-b0b86a22ce1a</GUI:Module>
     <GUI:ViewModelRef>34ebd667-db5b-4cb3-8bea-a545c0a276bb</GUI:ViewModelRef>
@@ -1438,6 +1435,7 @@
   </GUI:ViewModelDescriptor>
   <GUI:ViewDescriptor ExportGuid="eff0da6d-04b6-4e53-9be6-2b04baad83fb">
     <GUI:ControlRef>3e6cd159-fdaf-48fe-9147-05014ffc0d8e</GUI:ControlRef>
+    <GUI:Kind>bf9cd569-9765-4b7c-a1f8-3eac16f48f71</GUI:Kind>
     <GUI:Module>0fe1ab38-860a-414f-a599-b0b86a22ce1a</GUI:Module>
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
@@ -1448,6 +1446,7 @@
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="fd1061f4-cc1a-496b-ba1a-93ec65f50c3a">
     <GUI:ControlRef>86d605d7-928b-46bc-beaf-d0ec134db325</GUI:ControlRef>
+    <GUI:Kind>bf9cd569-9765-4b7c-a1f8-3eac16f48f71</GUI:Kind>
     <GUI:Module>0fe1ab38-860a-414f-a599-b0b86a22ce1a</GUI:Module>
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
@@ -12267,7 +12266,7 @@
     <GUI:ViewModelRef>f9521a1c-77dc-4af5-ba5d-f41a4761c612</GUI:ViewModelRef>
   </GUI:ViewModelDescriptor>
   <GUI:ViewModelDescriptor ExportGuid="0d3a2e45-9a49-4e29-afea-619baa8d3871">
-    <GUI:DefaultKind>4149c816-b593-4346-93e4-eb4bba99fab4</GUI:DefaultKind>
+    <GUI:DefaultKind>7cbc941f-7990-4ec6-a39a-fbc4338b470b</GUI:DefaultKind>
     <GUI:Description>DataObjectModel with specific extensions for DataTypes</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:ViewModelRef>41b6d0a1-a2ae-4c68-8997-503db83319bc</GUI:ViewModelRef>
@@ -12505,7 +12504,7 @@
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="c479b0e0-e199-4905-853a-a2361d38884b">
     <GUI:ControlRef>18c4efb5-c283-44f2-81bf-c0b70e97b79f</GUI:ControlRef>
-    <GUI:Kind>6603c126-83ec-4861-b7d1-d692ec96cc5e</GUI:Kind>
+    <GUI:Kind>bf9cd569-9765-4b7c-a1f8-3eac16f48f71</GUI:Kind>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
@@ -12751,6 +12750,21 @@
     <GUI:IsSimpleObject>true</GUI:IsSimpleObject>
     <KistlBase:TableName>Icons</KistlBase:TableName>
   </KistlBase:ObjectClass>
+  <GUI:ControlKindClass ExportGuid="bf9cd569-9765-4b7c-a1f8-3eac16f48f71">
+    <KistlBase:ChangedOn>2010-05-17T12:30:09.797Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-05-17T12:30:09.797Z</KistlBase:CreatedOn>
+    <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
+    <KistlBase:Name>InstanceListKind</KistlBase:Name>
+    <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
+    <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
+    <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
+    <KistlBase:BaseObjectClass>302c3ca4-7e86-4880-8e32-ff548268f80b</KistlBase:BaseObjectClass>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
+    <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
+    <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
+    <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <KistlBase:TableName>InstanceListKind</KistlBase:TableName>
+  </GUI:ControlKindClass>
   <KistlBase:Interface ExportGuid="2e93e071-875a-41ee-a768-5d55c2683546">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.4Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>
@@ -19705,7 +19719,6 @@
   <GUI:ActionKind ExportGuid="364aaaf3-0f61-4642-a0e3-bd812935cf44" />
   <GUI:CheckboxKind ExportGuid="12b829e1-abab-43f3-99ea-e33cd383d7e6" />
   <GUI:DataObjectKind ExportGuid="06bf9adc-c5bc-4552-abdc-18a96c527962" />
-  <GUI:DataObjectKind ExportGuid="4149c816-b593-4346-93e4-eb4bba99fab4" />
   <GUI:DataObjectKind ExportGuid="a31b5081-88c2-4661-964b-7917578e0711" />
   <GUI:DataObjectKind ExportGuid="c86d56f3-52c5-4864-ae26-b102cd61ffb6" />
   <GUI:DataObjectKind ExportGuid="f0010cd6-9256-46ff-9629-5a707fa25158" />
@@ -19713,6 +19726,9 @@
   <GUI:DataObjectSummaryKind ExportGuid="c2b9dfc5-0744-430c-9373-bcd98f783180" />
   <GUI:EnumerationSelectorKind ExportGuid="9d414225-460a-4c54-8e36-e368804e387f" />
   <GUI:ErrorListKind ExportGuid="7e30f1de-076c-42d3-80b2-9c1111a6cdfb" />
+  <GUI:InstanceListKind ExportGuid="06bd4b7a-df2c-44ab-8e1f-08288ac0e4e5" />
+  <GUI:InstanceListKind ExportGuid="4e7a8b0b-0c8e-49e1-aa35-d3a9ec7b8e4c" />
+  <GUI:InstanceListKind ExportGuid="7cbc941f-7990-4ec6-a39a-fbc4338b470b" />
   <GUI:KistlDebuggerKind ExportGuid="59253ed1-a3a5-4574-b3bb-3c4fa535d21c" />
   <GUI:LabelKind ExportGuid="194e5f9f-5586-41f8-bcfb-beb6b4016aa0" />
   <GUI:LabelKind ExportGuid="a3f09ef3-2fac-4d7e-aea8-cbf0eab4de70" />

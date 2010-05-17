@@ -6,6 +6,7 @@ namespace Kistl.Client.Presentables
     using System.Collections.ObjectModel;
     using System.Collections.Specialized;
     using System.Linq;
+    using System.Linq.Dynamic;
     using System.Text;
     using ObjectEditorWorkspace = Kistl.Client.Presentables.ObjectEditor.WorkspaceViewModel;
 
@@ -13,6 +14,7 @@ namespace Kistl.Client.Presentables
     using Kistl.API.Client;
     using Kistl.App.Base;
     using Kistl.API.Configuration;
+    using System.Reflection;
 
     /// <summary>
     /// Models the specialities of <see cref="DataType"/>s.
@@ -33,7 +35,7 @@ namespace Kistl.Client.Presentables
         /// <param name="type">the data type to model</param>
         /// <param name="ctxFactory"></param>
         public InstanceListViewModel(
-            IViewModelDependencies appCtx, 
+            IViewModelDependencies appCtx,
             KistlConfig config,
             IKistlContext dataCtx,
             DataType type,
@@ -45,6 +47,19 @@ namespace Kistl.Client.Presentables
         }
 
         #region Public interface
+
+        private List<KeyValuePair<string, object>> _constantFilter = null;
+        public ICollection<KeyValuePair<string, object>> ConstantFilter
+        {
+            get
+            {
+                if (_constantFilter == null)
+                {
+                    _constantFilter = new List<KeyValuePair<string, object>>();
+                }
+                return _constantFilter;
+            }
+        }
 
         private Kistl.Client.Presentables.DataTypeModel _dataTypeMdl = null;
         public Kistl.Client.Presentables.DataTypeModel DataTypeModel
@@ -194,9 +209,26 @@ namespace Kistl.Client.Presentables
             return Name;
         }
 
-        protected virtual IQueryable<IDataObject> GetQuery()
+        public virtual IQueryable GetTypedQuery<T>() where T : class, IDataObject
         {
-            return DataContext.GetQuery(InterfaceType);
+            return DataContext.GetQuery<T>();
+        }
+
+        protected virtual IQueryable GetQuery()
+        {
+            MethodInfo mi = this.GetType().FindGenericMethod("GetTypedQuery", new Type[] { InterfaceType.Type }, null);
+            // See Case 552
+            var result = (IQueryable)mi.Invoke(this, new object[] { });
+
+            if (_constantFilter != null)
+            {
+                foreach (var f in _constantFilter)
+                {
+                    result = result.Where(f.Key, f.Value);
+                }
+            }
+
+            return result;
         }
 
         /// <summary>
@@ -204,7 +236,7 @@ namespace Kistl.Client.Presentables
         /// </summary>
         private void LoadInstances()
         {
-            foreach (var obj in GetQuery().ToList().OrderBy(obj => obj.ToString()))
+            foreach (var obj in GetQuery().Cast<IDataObject>().ToList().OrderBy(obj => obj.ToString()))
             {
                 _instances.Add(ModelFactory.CreateViewModel<DataObjectModel.Factory>(obj).Invoke(DataContext, obj));
             }

@@ -303,6 +303,7 @@ namespace Kistl.API.Client
             {
                 // OK - just a cast
                 // No special processing needed
+                base.Visit(m.Arguments[0]);
             }
             else if (m.IsMethodCallExpression("WithEagerLoading", typeof(KistlContextQueryableExtensions)))
             {

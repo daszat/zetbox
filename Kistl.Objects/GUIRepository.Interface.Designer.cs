@@ -196,6 +196,16 @@ namespace Kistl.App.GUI
 			}
 		}
 		
+		/// <summary>List of all InstanceListKind</summary>
+		/// 
+		public IQueryable<InstanceListKind> InstanceListKind
+		{ 
+			get
+			{
+				return Context.GetQuery<InstanceListKind>();
+			}
+		}
+		
 		/// <summary>List of all Icon</summary>
 		/// 
 		public IQueryable<Icon> Icons

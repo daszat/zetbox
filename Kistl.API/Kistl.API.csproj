@@ -119,6 +119,7 @@
     <Compile Include="BasePersistenceObject.cs" />
     <Compile Include="BaseCompoundObject.cs" />
     <Compile Include="BaseValueCollectionWrapper.cs" />
+    <Compile Include="DynamicLinq.cs" />
     <Compile Include="EventBasedMethodAttribute.cs" />
     <Compile Include="MemoryContext.cs" />
     <Compile Include="RelationEndRole.cs" />

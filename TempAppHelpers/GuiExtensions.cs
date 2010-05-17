@@ -78,6 +78,14 @@ namespace Kistl.App.Extensions
                 var allTypes = GetAllTypes(self);
                 // As allTypes is sorted from most specific to least specific first or default is perfect.
                 var match = allTypes.SelectMany(t => candidates.Where(c => c.SupportedViewModels.Contains(t))).FirstOrDefault();
+
+                // Try the most common
+                if (match == null)
+                {
+                    match = allTypes.SelectMany(t => candidates.Where(c => c.SupportedViewModels.Count == 0)).FirstOrDefault();
+                }
+
+                // Log a warning if nothing found
                 if (match == null)
                 {
                     Logging.Log.WarnFormat("Couldn't find ViewDescriptor for '{1}' matching ControlKind: '{0}'", ck, self.GetType().FullName);

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Diagnostics;
 using Kistl.API.Utils;
+using System.Reflection;
 
 namespace Kistl.API
 {
@@ -35,9 +36,9 @@ namespace Kistl.API
         private readonly InterfaceType.NameFactory _ifNameFactory;
         private readonly ImplementationType.Factory _imTypeFactory;
 
-        public InterfaceType AsInterfaceType(Type t) { return _ifTypeFactory(t); }
-        public InterfaceType AsInterfaceType(string name) { return _ifNameFactory(name); }
-        public ImplementationType AsImplementationType(Type t) { return _imTypeFactory(t); }
+        public InterfaceType AsInterfaceType(Type t) { try { return _ifTypeFactory(t); } catch (TargetInvocationException ex) { throw ex.InnerException; } }
+        public InterfaceType AsInterfaceType(string name) { try { return _ifNameFactory(name); } catch (TargetInvocationException ex) { throw ex.InnerException; } }
+        public ImplementationType AsImplementationType(Type t) { try { return _imTypeFactory(t); } catch (TargetInvocationException ex) { throw ex.InnerException; } }
         public IAssemblyConfiguration AssemblyConfiguration { get; private set; }
     }
 
@@ -192,7 +193,7 @@ namespace Kistl.API
 
         public override string ToString()
         {
-            return Type.ToString();
+            return Type != null ? Type.ToString() : "<Type is NULL>";
         }
     }
 

@@ -23,6 +23,6 @@
         <ContentPresenter Grid.Column="2"
                               Grid.IsSharedSizeScope="True"
                               Content="{Binding SelectedItem}"
-                              ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />
+                              ContentTemplateSelector="{StaticResource dashBoardTemplateSelector}" />
     </Grid>
 </Window>

@@ -175,10 +175,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\ModuleEditor\InstanceListDisplay.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="View\ModuleEditor\ObjectClassInstanceList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -342,9 +338,6 @@
     </Compile>
     <Compile Include="View\ModuleEditor\DiagramDisplay.xaml.cs">
       <DependentUpon>DiagramDisplay.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\ModuleEditor\InstanceListDisplay.xaml.cs">
-      <DependentUpon>InstanceListDisplay.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ModuleEditor\ObjectClassInstanceList.xaml.cs">
       <DependentUpon>ObjectClassInstanceList.xaml</DependentUpon>
