@@ -135,6 +135,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\KistlBase\BoolFilterExpression.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\KistlBase\ObjectReferenceListEditor.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -175,15 +179,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\ModuleEditor\ObjectClassInstanceList.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="View\ModuleEditor\WorkspaceDisplay.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\ObjectBrowser\InstanceListDisplay.xaml">
+    <Page Include="View\KistlBase\InstanceListDisplay.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -308,6 +308,9 @@
     <Compile Include="View\KistlBase\ActionDisplay.xaml.cs">
       <DependentUpon>ActionDisplay.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\KistlBase\BoolFilterExpression.xaml.cs">
+      <DependentUpon>BoolFilterExpression.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\KistlBase\ObjectReferenceListEditor.xaml.cs">
       <DependentUpon>ObjectReferenceListEditor.xaml</DependentUpon>
     </Compile>
@@ -339,13 +342,10 @@
     <Compile Include="View\ModuleEditor\DiagramDisplay.xaml.cs">
       <DependentUpon>DiagramDisplay.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ModuleEditor\ObjectClassInstanceList.xaml.cs">
-      <DependentUpon>ObjectClassInstanceList.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\ModuleEditor\WorkspaceDisplay.xaml.cs">
       <DependentUpon>WorkspaceDisplay.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ObjectBrowser\InstanceListDisplay.xaml.cs">
+    <Compile Include="View\KistlBase\InstanceListDisplay.xaml.cs">
       <DependentUpon>InstanceListDisplay.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\GridCells\ReferenceEditor.xaml.cs">

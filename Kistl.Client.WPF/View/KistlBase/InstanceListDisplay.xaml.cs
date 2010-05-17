@@ -1,5 +1,5 @@
 
-namespace Kistl.Client.WPF.View.ObjectBrowser
+namespace Kistl.Client.WPF.View.KistlBase
 {
     using System;
     using System.Collections.Generic;
@@ -19,6 +19,7 @@ namespace Kistl.Client.WPF.View.ObjectBrowser
     using Kistl.App.Base;
     using Kistl.Client.Presentables;
     using Kistl.Client.GUI;
+    using Kistl.Client.Presentables.KistlBase;
 
     /// <summary>
     /// Shows all instances of a given DataTypeModel

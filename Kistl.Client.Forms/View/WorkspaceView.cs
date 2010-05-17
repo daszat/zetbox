@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using Kistl.Client.Presentables;
 using Kistl.Client.Presentables.ObjectBrowser;
+using Kistl.Client.Presentables.KistlBase;
 
 namespace Kistl.Client.Forms.View
 {

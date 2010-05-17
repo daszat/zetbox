@@ -1,5 +1,5 @@
 
-namespace Kistl.Client.Presentables
+namespace Kistl.Client.Presentables.KistlBase
 {
     using System;
     using System.Collections.Generic;
@@ -48,16 +48,31 @@ namespace Kistl.Client.Presentables
 
         #region Public interface
 
-        private List<KeyValuePair<string, object>> _constantFilter = null;
-        public ICollection<KeyValuePair<string, object>> ConstantFilter
+        private List<IFilterExpression> _filter = null;
+        public ICollection<IFilterExpression> Filter
         {
             get
             {
-                if (_constantFilter == null)
+                if (_filter == null)
                 {
-                    _constantFilter = new List<KeyValuePair<string, object>>();
+                    _filter = new List<IFilterExpression>();
                 }
-                return _constantFilter;
+                return _filter;
+            }
+        }
+
+        public IEnumerable<IUIFilterExpression> FilterViewModels
+        {
+            get
+            {
+                if (_filter == null)
+                {
+                    return null;
+                }
+                else
+                {
+                    return _filter.OfType<IUIFilterExpression>();
+                }
             }
         }
 
@@ -220,16 +235,23 @@ namespace Kistl.Client.Presentables
             // See Case 552
             var result = (IQueryable)mi.Invoke(this, new object[] { });
 
-            if (_constantFilter != null)
+            if (_filter != null)
             {
-                foreach (var f in _constantFilter)
+                // attach change events
+                foreach (var uiFilter in _filter.OfType<IUIFilterExpression>())
                 {
-                    result = result.Where(f.Key, f.Value);
+                    uiFilter.FilterChanged += new EventHandler(delegate(object sender, EventArgs e) { ReloadInstances(); });
+                }
+
+                foreach (var f in _filter.Where(f => f.Enabled))
+                {
+                    result = result.Where(f.Predicate, f.FilterValues);
                 }
             }
 
             return result;
         }
+
 
         /// <summary>
         /// Loads the instances of this DataType and adds them to the Instances collection

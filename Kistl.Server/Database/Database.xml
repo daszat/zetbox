@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2010-05-17T12:30:09.797Z" xmlns="http://dasz.at/Kistl">
+<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2010-05-17T16:28:40.893Z" xmlns="http://dasz.at/Kistl">
   <KistlBase:Module ExportGuid="110acbc0-652a-4adc-9de5-8baabfcf3637">
     <KistlBase:ChangedOn>2010-02-01T16:07:00.49Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2010-02-01T15:23:35.247Z</KistlBase:CreatedOn>
@@ -11884,6 +11884,13 @@
     <KistlBase:CreatedOn>2009-12-14T17:08:05.39Z</KistlBase:CreatedOn>
     <KistlBase:Property>48430be7-e17f-48ad-ac8b-7f9cb5341318</KistlBase:Property>
   </KistlBase:NewGuidDefaultValue>
+  <KistlBase:Assembly ExportGuid="58ab2fd9-ec5a-422c-9ffc-9d6e06462ea3">
+    <KistlBase:ChangedOn>2010-05-17T16:26:47.863Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-05-17T16:26:47.863Z</KistlBase:CreatedOn>
+    <KistlBase:DeploymentRestrictions>1</KistlBase:DeploymentRestrictions>
+    <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
+    <KistlBase:Name>Autofac, Version=2.1.14.854, Culture=neutral, PublicKeyToken=17863af14b0044da</KistlBase:Name>
+  </KistlBase:Assembly>
   <KistlBase:Assembly ExportGuid="8937dfc1-288e-49ca-a6c6-701e9c230b07">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.39Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.39Z</KistlBase:CreatedOn>
@@ -11933,6 +11940,13 @@
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
     <KistlBase:Name>TempAppHelpers, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ccdf16e4dd7b6d78</KistlBase:Name>
   </KistlBase:Assembly>
+  <KistlBase:TypeRef ExportGuid="94620323-422d-4b74-b1aa-f1daa4b4a448">
+    <KistlBase:Assembly>58ab2fd9-ec5a-422c-9ffc-9d6e06462ea3</KistlBase:Assembly>
+    <KistlBase:ChangedOn>2010-05-17T16:26:47.88Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-05-17T16:26:47.88Z</KistlBase:CreatedOn>
+    <KistlBase:FullName>Autofac.Module</KistlBase:FullName>
+    <KistlBase:Parent>c51c8086-60b2-410e-96c4-c1a32c1f57ee</KistlBase:Parent>
+  </KistlBase:TypeRef>
   <KistlBase:TypeRef ExportGuid="5d0aadd8-86ef-4da6-a349-5052cd3a159b">
     <KistlBase:Assembly>8937dfc1-288e-49ca-a6c6-701e9c230b07</KistlBase:Assembly>
     <KistlBase:ChangedOn>2010-03-10T13:34:04.573Z</KistlBase:ChangedOn>
@@ -12460,6 +12474,12 @@
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
+  <GUI:ViewDescriptor ExportGuid="c479b0e0-e199-4905-853a-a2361d38884b">
+    <GUI:ControlRef>18c4efb5-c283-44f2-81bf-c0b70e97b79f</GUI:ControlRef>
+    <GUI:Kind>bf9cd569-9765-4b7c-a1f8-3eac16f48f71</GUI:Kind>
+    <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+    <GUI:Toolkit>0</GUI:Toolkit>
+  </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="31d8374d-0565-4e4d-a1f8-6053e4832901">
     <GUI:ControlRef>0695b951-f3fe-4bf2-a9b7-f893c5bb7c1c</GUI:ControlRef>
     <GUI:Kind>27e8a0f3-ffff-4bb1-b956-c36a5a28dd14</GUI:Kind>
@@ -12499,12 +12519,6 @@
   <GUI:ViewDescriptor ExportGuid="ef91f0f1-4d92-44ba-92b9-bb638bb8fa35">
     <GUI:ControlRef>852d2841-6918-4faf-a8ef-5d93a1e5d548</GUI:ControlRef>
     <GUI:Kind>d3f5a566-3331-4c7b-bed4-ea5166815b67</GUI:Kind>
-    <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
-    <GUI:Toolkit>0</GUI:Toolkit>
-  </GUI:ViewDescriptor>
-  <GUI:ViewDescriptor ExportGuid="c479b0e0-e199-4905-853a-a2361d38884b">
-    <GUI:ControlRef>18c4efb5-c283-44f2-81bf-c0b70e97b79f</GUI:ControlRef>
-    <GUI:Kind>bf9cd569-9765-4b7c-a1f8-3eac16f48f71</GUI:Kind>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
@@ -15742,6 +15756,13 @@
     <KistlBase:FullName>Kistl.Client.ClientHelper</KistlBase:FullName>
     <KistlBase:Parent>c51c8086-60b2-410e-96c4-c1a32c1f57ee</KistlBase:Parent>
   </KistlBase:TypeRef>
+  <KistlBase:TypeRef ExportGuid="83ad183f-a59c-475c-8c5c-3283491d1093">
+    <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
+    <KistlBase:ChangedOn>2010-05-17T16:28:40.893Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-05-17T16:28:40.893Z</KistlBase:CreatedOn>
+    <KistlBase:FullName>Kistl.Client.ClientModule</KistlBase:FullName>
+    <KistlBase:Parent>94620323-422d-4b74-b1aa-f1daa4b4a448</KistlBase:Parent>
+  </KistlBase:TypeRef>
   <KistlBase:TypeRef ExportGuid="01c2492f-daf9-4bc9-927d-c364e4321c46">
     <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
     <KistlBase:ChangedOn>2009-12-15T11:30:29.843Z</KistlBase:ChangedOn>
@@ -15781,6 +15802,13 @@
     <KistlBase:FullName>Kistl.Client.Presentables.ActionModel</KistlBase:FullName>
     <KistlBase:Parent>6012afb5-9ef6-4552-9481-b46a39f8f54d</KistlBase:Parent>
   </KistlBase:TypeRef>
+  <KistlBase:TypeRef ExportGuid="22fe700b-85dd-4351-89be-55fbdcaf8e0e">
+    <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
+    <KistlBase:ChangedOn>2010-05-17T16:28:40.893Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-05-17T16:28:40.893Z</KistlBase:CreatedOn>
+    <KistlBase:FullName>Kistl.Client.Presentables.ActionModel+Factory</KistlBase:FullName>
+    <KistlBase:Parent>68559faa-c4b4-4bb2-bb0d-49bb83a081a7</KistlBase:Parent>
+  </KistlBase:TypeRef>
   <KistlBase:TypeRef ExportGuid="fb4ecca3-b9e5-4ea4-a778-82f5419bf24f">
     <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
     <KistlBase:ChangedOn>2009-12-14T17:08:05.407Z</KistlBase:ChangedOn>
@@ -15788,12 +15816,54 @@
     <KistlBase:FullName>Kistl.Client.Presentables.AsyncListFactory</KistlBase:FullName>
     <KistlBase:Parent>c51c8086-60b2-410e-96c4-c1a32c1f57ee</KistlBase:Parent>
   </KistlBase:TypeRef>
+  <KistlBase:TypeRef ExportGuid="0bd6ac23-e735-4aa5-a8b9-cbca2462cd2f">
+    <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
+    <KistlBase:ChangedOn>2010-05-17T16:28:40.893Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-05-17T16:28:40.893Z</KistlBase:CreatedOn>
+    <KistlBase:FullName>Kistl.Client.Presentables.AsyncThreadManager</KistlBase:FullName>
+    <KistlBase:Parent>c51c8086-60b2-410e-96c4-c1a32c1f57ee</KistlBase:Parent>
+  </KistlBase:TypeRef>
+  <KistlBase:TypeRef ExportGuid="8715ecd6-5107-43b9-a990-8cd23f2dbfe7">
+    <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
+    <KistlBase:ChangedOn>2010-05-17T16:28:40.893Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-05-17T16:28:40.893Z</KistlBase:CreatedOn>
+    <KistlBase:FullName>Kistl.Client.Presentables.BaseMethodResultModel</KistlBase:FullName>
+    <KistlBase:Parent>6012afb5-9ef6-4552-9481-b46a39f8f54d</KistlBase:Parent>
+  </KistlBase:TypeRef>
+  <KistlBase:TypeRef ExportGuid="cf4e0830-f5e9-42cd-bd0a-0e3c10d1d997">
+    <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
+    <KistlBase:ChangedOn>2010-05-17T16:28:40.893Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-05-17T16:28:40.893Z</KistlBase:CreatedOn>
+    <KistlBase:FullName>Kistl.Client.Presentables.BaseMethodResultModel+Factory</KistlBase:FullName>
+    <KistlBase:Parent>68559faa-c4b4-4bb2-bb0d-49bb83a081a7</KistlBase:Parent>
+  </KistlBase:TypeRef>
+  <KistlBase:TypeRef ExportGuid="1397fbd9-d38c-45cb-99d6-86f852d22bc5">
+    <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
+    <KistlBase:ChangedOn>2010-05-17T16:28:40.893Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-05-17T16:28:40.893Z</KistlBase:CreatedOn>
+    <KistlBase:FullName>Kistl.Client.Presentables.BasePropertyModel</KistlBase:FullName>
+    <KistlBase:Parent>6012afb5-9ef6-4552-9481-b46a39f8f54d</KistlBase:Parent>
+  </KistlBase:TypeRef>
+  <KistlBase:TypeRef ExportGuid="81b54ce0-543e-42ea-b577-8361e19295c3">
+    <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
+    <KistlBase:ChangedOn>2010-05-17T16:28:40.893Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-05-17T16:28:40.893Z</KistlBase:CreatedOn>
+    <KistlBase:FullName>Kistl.Client.Presentables.BasePropertyModel+Factory</KistlBase:FullName>
+    <KistlBase:Parent>68559faa-c4b4-4bb2-bb0d-49bb83a081a7</KistlBase:Parent>
+  </KistlBase:TypeRef>
   <KistlBase:TypeRef ExportGuid="dcfbf9f3-df12-4edb-b3bd-deaf378d5420">
     <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
     <KistlBase:ChangedOn>2010-04-02T17:15:22.033Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2010-04-02T17:15:22.033Z</KistlBase:CreatedOn>
     <KistlBase:FullName>Kistl.Client.Presentables.CacheDebuggerViewModel</KistlBase:FullName>
     <KistlBase:Parent>6012afb5-9ef6-4552-9481-b46a39f8f54d</KistlBase:Parent>
+  </KistlBase:TypeRef>
+  <KistlBase:TypeRef ExportGuid="82643750-215b-4243-961b-e1fb8812cac2">
+    <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
+    <KistlBase:ChangedOn>2010-05-17T16:28:40.893Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-05-17T16:28:40.893Z</KistlBase:CreatedOn>
+    <KistlBase:FullName>Kistl.Client.Presentables.CacheDebuggerViewModel+Factory</KistlBase:FullName>
+    <KistlBase:Parent>68559faa-c4b4-4bb2-bb0d-49bb83a081a7</KistlBase:Parent>
   </KistlBase:TypeRef>
   <KistlBase:TypeRef ExportGuid="a1c64886-b50d-4e06-b806-dc359e605626">
     <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
@@ -15823,12 +15893,40 @@
     <KistlBase:FullName>Kistl.Client.Presentables.DataObjectModel</KistlBase:FullName>
     <KistlBase:Parent>6012afb5-9ef6-4552-9481-b46a39f8f54d</KistlBase:Parent>
   </KistlBase:TypeRef>
+  <KistlBase:TypeRef ExportGuid="0bf67f1b-3b45-47e7-bef0-d010bd276512">
+    <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
+    <KistlBase:ChangedOn>2010-05-17T16:28:40.893Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-05-17T16:28:40.893Z</KistlBase:CreatedOn>
+    <KistlBase:FullName>Kistl.Client.Presentables.DataObjectModel+Factory</KistlBase:FullName>
+    <KistlBase:Parent>68559faa-c4b4-4bb2-bb0d-49bb83a081a7</KistlBase:Parent>
+  </KistlBase:TypeRef>
   <KistlBase:TypeRef ExportGuid="312383a3-5c45-43cf-a032-5271792a4eec">
     <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
     <KistlBase:ChangedOn>2009-12-14T17:08:05.407Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.407Z</KistlBase:CreatedOn>
     <KistlBase:FullName>Kistl.Client.Presentables.DataObjectSelectionTaskModel</KistlBase:FullName>
     <KistlBase:Parent>1b3d6d7f-3f7e-4e78-baa6-3d9f2bf8c887</KistlBase:Parent>
+  </KistlBase:TypeRef>
+  <KistlBase:TypeRef ExportGuid="f80b67d0-b489-4c4d-ab9d-17dfdf2f4a13">
+    <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
+    <KistlBase:ChangedOn>2010-05-17T16:28:40.893Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-05-17T16:28:40.893Z</KistlBase:CreatedOn>
+    <KistlBase:FullName>Kistl.Client.Presentables.DataObjectSelectionTaskModel+Factory</KistlBase:FullName>
+    <KistlBase:Parent>68559faa-c4b4-4bb2-bb0d-49bb83a081a7</KistlBase:Parent>
+  </KistlBase:TypeRef>
+  <KistlBase:TypeRef ExportGuid="f0967728-c963-4eb0-adb6-b8883f30b928">
+    <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
+    <KistlBase:ChangedOn>2010-05-17T16:28:40.893Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-05-17T16:28:40.893Z</KistlBase:CreatedOn>
+    <KistlBase:FullName>Kistl.Client.Presentables.DataTypeModel</KistlBase:FullName>
+    <KistlBase:Parent>a07f30a6-b920-4fef-98ac-53155791e804</KistlBase:Parent>
+  </KistlBase:TypeRef>
+  <KistlBase:TypeRef ExportGuid="b4a2f064-eaa4-4db9-aab9-62a49743f56c">
+    <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
+    <KistlBase:ChangedOn>2010-05-17T16:28:40.893Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-05-17T16:28:40.893Z</KistlBase:CreatedOn>
+    <KistlBase:FullName>Kistl.Client.Presentables.DataTypeModel+Factory</KistlBase:FullName>
+    <KistlBase:Parent>68559faa-c4b4-4bb2-bb0d-49bb83a081a7</KistlBase:Parent>
   </KistlBase:TypeRef>
   <KistlBase:TypeRef ExportGuid="48cdd708-4699-4da7-9cb0-83b2a8209c95">
     <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
@@ -15872,6 +15970,13 @@
     <KistlBase:FullName>Kistl.Client.Presentables.EnumerationPropertyModel`1</KistlBase:FullName>
     <KistlBase:Parent>74121a59-0018-439b-90ad-eb4c967278f4</KistlBase:Parent>
   </KistlBase:TypeRef>
+  <KistlBase:TypeRef ExportGuid="46caf28a-f2c7-4cb2-958d-7bad3fcd23a8">
+    <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
+    <KistlBase:ChangedOn>2010-05-17T16:28:40.893Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-05-17T16:28:40.893Z</KistlBase:CreatedOn>
+    <KistlBase:FullName>Kistl.Client.Presentables.EnumerationPropertyModel+Factory</KistlBase:FullName>
+    <KistlBase:Parent>68559faa-c4b4-4bb2-bb0d-49bb83a081a7</KistlBase:Parent>
+  </KistlBase:TypeRef>
   <KistlBase:TypeRef ExportGuid="fd272c5b-3c30-4d01-b0cd-ebe93b9b174a">
     <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
     <KistlBase:ChangedOn>2010-03-16T14:14:25.423Z</KistlBase:ChangedOn>
@@ -15886,6 +15991,13 @@
     <KistlBase:FullName>Kistl.Client.Presentables.ErrorListModel</KistlBase:FullName>
     <KistlBase:Parent>6012afb5-9ef6-4552-9481-b46a39f8f54d</KistlBase:Parent>
   </KistlBase:TypeRef>
+  <KistlBase:TypeRef ExportGuid="9c1c2f7e-d532-41c8-833e-5c2205657a01">
+    <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
+    <KistlBase:ChangedOn>2010-05-17T16:28:40.893Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-05-17T16:28:40.893Z</KistlBase:CreatedOn>
+    <KistlBase:FullName>Kistl.Client.Presentables.ErrorListModel+Factory</KistlBase:FullName>
+    <KistlBase:Parent>68559faa-c4b4-4bb2-bb0d-49bb83a081a7</KistlBase:Parent>
+  </KistlBase:TypeRef>
   <KistlBase:TypeRef ExportGuid="c9938d3a-c47f-474c-99e0-0575b1f39d77">
     <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
     <KistlBase:ChangedOn>2009-12-14T17:08:05.407Z</KistlBase:ChangedOn>
@@ -15899,6 +16011,19 @@
     <KistlBase:CreatedOn>2009-12-14T17:08:05.407Z</KistlBase:CreatedOn>
     <KistlBase:FullName>Kistl.Client.Presentables.GUI.DashboardModel</KistlBase:FullName>
     <KistlBase:Parent>6012afb5-9ef6-4552-9481-b46a39f8f54d</KistlBase:Parent>
+  </KistlBase:TypeRef>
+  <KistlBase:TypeRef ExportGuid="8fd65091-e03c-40b1-b56c-77ebf7517a7a">
+    <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
+    <KistlBase:ChangedOn>2010-05-17T16:28:40.893Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-05-17T16:28:40.893Z</KistlBase:CreatedOn>
+    <KistlBase:FullName>Kistl.Client.Presentables.GUI.DashboardModel+Factory</KistlBase:FullName>
+    <KistlBase:Parent>68559faa-c4b4-4bb2-bb0d-49bb83a081a7</KistlBase:Parent>
+  </KistlBase:TypeRef>
+  <KistlBase:TypeRef ExportGuid="002b05fb-59bc-4090-86fd-b3cf0767a771">
+    <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
+    <KistlBase:ChangedOn>2010-05-17T16:28:40.893Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-05-17T16:28:40.893Z</KistlBase:CreatedOn>
+    <KistlBase:FullName>Kistl.Client.Presentables.IAsyncThreadManager</KistlBase:FullName>
   </KistlBase:TypeRef>
   <KistlBase:TypeRef ExportGuid="1ddd8333-40b8-4b7e-a98a-83be2c4ad51e">
     <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
@@ -15930,13 +16055,6 @@
     <KistlBase:CreatedOn>2010-04-01T15:50:11.963Z</KistlBase:CreatedOn>
     <KistlBase:FullName>Kistl.Client.Presentables.IMultipleInstancesManager</KistlBase:FullName>
   </KistlBase:TypeRef>
-  <KistlBase:TypeRef ExportGuid="41b6d0a1-a2ae-4c68-8997-503db83319bc">
-    <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
-    <KistlBase:ChangedOn>2009-12-14T17:08:05.407Z</KistlBase:ChangedOn>
-    <KistlBase:CreatedOn>2009-12-14T17:08:05.407Z</KistlBase:CreatedOn>
-    <KistlBase:FullName>Kistl.Client.Presentables.InstanceListViewModel</KistlBase:FullName>
-    <KistlBase:Parent>a07f30a6-b920-4fef-98ac-53155791e804</KistlBase:Parent>
-  </KistlBase:TypeRef>
   <KistlBase:TypeRef ExportGuid="c0e7c82d-41fc-4a74-99a5-dcd716604eb5">
     <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
     <KistlBase:ChangedOn>2009-12-14T17:08:05.407Z</KistlBase:ChangedOn>
@@ -15954,6 +16072,12 @@
     <KistlBase:ChangedOn>2009-12-14T17:08:05.407Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.407Z</KistlBase:CreatedOn>
     <KistlBase:FullName>Kistl.Client.Presentables.IThreadManager</KistlBase:FullName>
+  </KistlBase:TypeRef>
+  <KistlBase:TypeRef ExportGuid="2b0cfbe0-b665-488a-9492-b832e2c031d7">
+    <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
+    <KistlBase:ChangedOn>2010-05-17T16:28:40.893Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-05-17T16:28:40.893Z</KistlBase:CreatedOn>
+    <KistlBase:FullName>Kistl.Client.Presentables.IUiThreadManager</KistlBase:FullName>
   </KistlBase:TypeRef>
   <KistlBase:TypeRef ExportGuid="dd8e872b-d813-4a8e-baa8-7c275f510aaf">
     <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
@@ -15979,6 +16103,18 @@
     <KistlBase:CreatedOn>2009-12-14T17:08:05.407Z</KistlBase:CreatedOn>
     <KistlBase:FullName>Kistl.Client.Presentables.IValueModel`1</KistlBase:FullName>
   </KistlBase:TypeRef>
+  <KistlBase:TypeRef ExportGuid="5d176133-8e56-4d6f-8cae-31568568305e">
+    <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
+    <KistlBase:ChangedOn>2010-05-17T16:28:40.893Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-05-17T16:28:40.893Z</KistlBase:CreatedOn>
+    <KistlBase:FullName>Kistl.Client.Presentables.IViewModelDependencies</KistlBase:FullName>
+  </KistlBase:TypeRef>
+  <KistlBase:TypeRef ExportGuid="22dacbd8-9c88-4b19-9f78-0248cc74233b">
+    <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
+    <KistlBase:ChangedOn>2010-05-17T16:28:40.893Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-05-17T16:28:40.893Z</KistlBase:CreatedOn>
+    <KistlBase:FullName>Kistl.Client.Presentables.IViewModelWithIcon</KistlBase:FullName>
+  </KistlBase:TypeRef>
   <KistlBase:TypeRef ExportGuid="677c7985-27e5-4cc2-bcb3-0fd8294f3d4d">
     <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
     <KistlBase:ChangedOn>2010-04-01T15:50:11.963Z</KistlBase:ChangedOn>
@@ -15986,12 +16122,26 @@
     <KistlBase:FullName>Kistl.Client.Presentables.KistlBase.ApplicationViewModel</KistlBase:FullName>
     <KistlBase:Parent>6012afb5-9ef6-4552-9481-b46a39f8f54d</KistlBase:Parent>
   </KistlBase:TypeRef>
+  <KistlBase:TypeRef ExportGuid="ae450ab1-1a38-477b-a8ca-62f235c43425">
+    <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
+    <KistlBase:ChangedOn>2010-05-17T16:28:40.893Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-05-17T16:28:40.893Z</KistlBase:CreatedOn>
+    <KistlBase:FullName>Kistl.Client.Presentables.KistlBase.ApplicationViewModel+Factory</KistlBase:FullName>
+    <KistlBase:Parent>68559faa-c4b4-4bb2-bb0d-49bb83a081a7</KistlBase:Parent>
+  </KistlBase:TypeRef>
   <KistlBase:TypeRef ExportGuid="c4705325-2947-4cfc-90e3-8e96dc27f52c">
     <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
     <KistlBase:ChangedOn>2009-12-14T17:08:05.407Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.407Z</KistlBase:CreatedOn>
     <KistlBase:FullName>Kistl.Client.Presentables.KistlBase.AssemblyModel</KistlBase:FullName>
     <KistlBase:Parent>a07f30a6-b920-4fef-98ac-53155791e804</KistlBase:Parent>
+  </KistlBase:TypeRef>
+  <KistlBase:TypeRef ExportGuid="d973e105-38cd-43cd-938b-68bcec76a7a1">
+    <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
+    <KistlBase:ChangedOn>2010-05-17T16:28:40.893Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-05-17T16:28:40.893Z</KistlBase:CreatedOn>
+    <KistlBase:FullName>Kistl.Client.Presentables.KistlBase.AssemblyModel+Factory</KistlBase:FullName>
+    <KistlBase:Parent>68559faa-c4b4-4bb2-bb0d-49bb83a081a7</KistlBase:Parent>
   </KistlBase:TypeRef>
   <KistlBase:TypeRef ExportGuid="a2ba7d74-a002-4bdd-8a54-a230f44ae41b">
     <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
@@ -16007,26 +16157,59 @@
     <KistlBase:FullName>Kistl.Client.Presentables.KistlBase.ChooseMethodInvocationNamePropertyModel</KistlBase:FullName>
     <KistlBase:Parent>a1c64886-b50d-4e06-b806-dc359e605626</KistlBase:Parent>
   </KistlBase:TypeRef>
+  <KistlBase:TypeRef ExportGuid="db1c6b19-a068-484e-adf6-6624d98d80ce">
+    <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
+    <KistlBase:ChangedOn>2010-05-17T16:28:40.893Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-05-17T16:28:40.893Z</KistlBase:CreatedOn>
+    <KistlBase:FullName>Kistl.Client.Presentables.KistlBase.ConstantFilterExpression</KistlBase:FullName>
+    <KistlBase:Parent>c51c8086-60b2-410e-96c4-c1a32c1f57ee</KistlBase:Parent>
+  </KistlBase:TypeRef>
+  <KistlBase:TypeRef ExportGuid="1c9b7a66-8116-4144-bf43-d7e5153aaab7">
+    <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
+    <KistlBase:ChangedOn>2010-05-17T16:28:40.893Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-05-17T16:28:40.893Z</KistlBase:CreatedOn>
+    <KistlBase:FullName>Kistl.Client.Presentables.KistlBase.EnableFilterExpression</KistlBase:FullName>
+    <KistlBase:Parent>0cc476f1-123e-486d-bab5-b2a63c30f849</KistlBase:Parent>
+  </KistlBase:TypeRef>
+  <KistlBase:TypeRef ExportGuid="9238317c-6428-412b-88c4-cd86858fbac2">
+    <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
+    <KistlBase:ChangedOn>2010-05-17T16:28:40.893Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-05-17T16:28:40.893Z</KistlBase:CreatedOn>
+    <KistlBase:FullName>Kistl.Client.Presentables.KistlBase.EnableFilterExpression+Factory</KistlBase:FullName>
+    <KistlBase:Parent>68559faa-c4b4-4bb2-bb0d-49bb83a081a7</KistlBase:Parent>
+  </KistlBase:TypeRef>
+  <KistlBase:TypeRef ExportGuid="78d69c11-dbd4-448b-a525-b3b8436e2cbf">
+    <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
+    <KistlBase:ChangedOn>2010-05-17T16:28:40.893Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-05-17T16:28:40.893Z</KistlBase:CreatedOn>
+    <KistlBase:FullName>Kistl.Client.Presentables.KistlBase.IFilterExpression</KistlBase:FullName>
+  </KistlBase:TypeRef>
+  <KistlBase:TypeRef ExportGuid="41b6d0a1-a2ae-4c68-8997-503db83319bc">
+    <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
+    <KistlBase:ChangedOn>2009-12-14T17:08:05.407Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2009-12-14T17:08:05.407Z</KistlBase:CreatedOn>
+    <KistlBase:FullName>Kistl.Client.Presentables.KistlBase.InstanceListViewModel</KistlBase:FullName>
+    <KistlBase:Parent>6012afb5-9ef6-4552-9481-b46a39f8f54d</KistlBase:Parent>
+  </KistlBase:TypeRef>
+  <KistlBase:TypeRef ExportGuid="55249e5a-369b-4270-8e39-3ab983cd4619">
+    <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
+    <KistlBase:ChangedOn>2010-05-17T16:28:40.893Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-05-17T16:28:40.893Z</KistlBase:CreatedOn>
+    <KistlBase:FullName>Kistl.Client.Presentables.KistlBase.InstanceListViewModel+Factory</KistlBase:FullName>
+    <KistlBase:Parent>68559faa-c4b4-4bb2-bb0d-49bb83a081a7</KistlBase:Parent>
+  </KistlBase:TypeRef>
+  <KistlBase:TypeRef ExportGuid="de88838a-3f33-4d12-a8d3-36783b75c2cb">
+    <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
+    <KistlBase:ChangedOn>2010-05-17T16:28:40.893Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-05-17T16:28:40.893Z</KistlBase:CreatedOn>
+    <KistlBase:FullName>Kistl.Client.Presentables.KistlBase.IUIFilterExpression</KistlBase:FullName>
+  </KistlBase:TypeRef>
   <KistlBase:TypeRef ExportGuid="940f6030-4dfe-4caf-b955-c09ddbda0665">
     <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
     <KistlBase:ChangedOn>2009-12-14T17:08:05.407Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.407Z</KistlBase:CreatedOn>
     <KistlBase:FullName>Kistl.Client.Presentables.KistlBase.LoadTypeRefCommand</KistlBase:FullName>
     <KistlBase:Parent>34a220b5-e8b0-481e-beed-8948acf5173e</KistlBase:Parent>
-  </KistlBase:TypeRef>
-  <KistlBase:TypeRef ExportGuid="d3ac5a80-fcb4-49c3-9953-caf2ae8553eb">
-    <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
-    <KistlBase:ChangedOn>2009-12-14T17:08:05.407Z</KistlBase:ChangedOn>
-    <KistlBase:CreatedOn>2009-12-14T17:08:05.407Z</KistlBase:CreatedOn>
-    <KistlBase:FullName>Kistl.Client.Presentables.KistlBase.LoadTypeRefFromAssemblyFileCommand</KistlBase:FullName>
-    <KistlBase:Parent>940f6030-4dfe-4caf-b955-c09ddbda0665</KistlBase:Parent>
-  </KistlBase:TypeRef>
-  <KistlBase:TypeRef ExportGuid="e18ff8be-3aa0-498b-99ac-f2eaf718f98e">
-    <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
-    <KistlBase:ChangedOn>2009-12-14T17:08:05.407Z</KistlBase:ChangedOn>
-    <KistlBase:CreatedOn>2009-12-14T17:08:05.407Z</KistlBase:CreatedOn>
-    <KistlBase:FullName>Kistl.Client.Presentables.KistlBase.LoadTypeRefFromAssemblyRefCommand</KistlBase:FullName>
-    <KistlBase:Parent>940f6030-4dfe-4caf-b955-c09ddbda0665</KistlBase:Parent>
   </KistlBase:TypeRef>
   <KistlBase:TypeRef ExportGuid="95984665-40e8-4bbb-afca-b0b41dc40e79">
     <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
@@ -16035,12 +16218,40 @@
     <KistlBase:FullName>Kistl.Client.Presentables.KistlBase.SystemTypeModel</KistlBase:FullName>
     <KistlBase:Parent>6012afb5-9ef6-4552-9481-b46a39f8f54d</KistlBase:Parent>
   </KistlBase:TypeRef>
+  <KistlBase:TypeRef ExportGuid="b5dba865-8813-44b4-bc46-060a62afb7dc">
+    <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
+    <KistlBase:ChangedOn>2010-05-17T16:28:40.893Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-05-17T16:28:40.893Z</KistlBase:CreatedOn>
+    <KistlBase:FullName>Kistl.Client.Presentables.KistlBase.SystemTypeModel+Factory</KistlBase:FullName>
+    <KistlBase:Parent>68559faa-c4b4-4bb2-bb0d-49bb83a081a7</KistlBase:Parent>
+  </KistlBase:TypeRef>
   <KistlBase:TypeRef ExportGuid="e36fd933-69a1-404d-a09e-93f4ecb88d31">
     <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
     <KistlBase:ChangedOn>2009-12-14T17:08:05.407Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.407Z</KistlBase:CreatedOn>
     <KistlBase:FullName>Kistl.Client.Presentables.KistlBase.TypeRefPropertyModel</KistlBase:FullName>
     <KistlBase:Parent>59136763-5a94-4ae5-b9ab-6d679e86245a</KistlBase:Parent>
+  </KistlBase:TypeRef>
+  <KistlBase:TypeRef ExportGuid="5e1e3ac7-0ee9-48de-9db9-f36154cb1898">
+    <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
+    <KistlBase:ChangedOn>2010-05-17T16:28:40.893Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-05-17T16:28:40.893Z</KistlBase:CreatedOn>
+    <KistlBase:FullName>Kistl.Client.Presentables.KistlBase.TypeRefPropertyModel+Factory</KistlBase:FullName>
+    <KistlBase:Parent>68559faa-c4b4-4bb2-bb0d-49bb83a081a7</KistlBase:Parent>
+  </KistlBase:TypeRef>
+  <KistlBase:TypeRef ExportGuid="8bae6ce0-2215-4f05-a0f8-f547589df8ef">
+    <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
+    <KistlBase:ChangedOn>2010-05-17T16:28:40.893Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-05-17T16:28:40.893Z</KistlBase:CreatedOn>
+    <KistlBase:FullName>Kistl.Client.Presentables.KistlBase.UIFilterExpressionViewModel`1</KistlBase:FullName>
+    <KistlBase:Parent>6012afb5-9ef6-4552-9481-b46a39f8f54d</KistlBase:Parent>
+  </KistlBase:TypeRef>
+  <KistlBase:TypeRef ExportGuid="0cc476f1-123e-486d-bab5-b2a63c30f849">
+    <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
+    <KistlBase:ChangedOn>2010-05-17T16:28:40.893Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-05-17T16:28:40.893Z</KistlBase:CreatedOn>
+    <KistlBase:FullName>Kistl.Client.Presentables.KistlBase.ValueTypeUIFilterExpressionViewModel`1</KistlBase:FullName>
+    <KistlBase:Parent>8bae6ce0-2215-4f05-a0f8-f547589df8ef</KistlBase:Parent>
   </KistlBase:TypeRef>
   <KistlBase:TypeRef ExportGuid="c8e36412-31de-4ea0-90a3-4d4392f1c3c8">
     <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
@@ -16049,12 +16260,26 @@
     <KistlBase:FullName>Kistl.Client.Presentables.KistlContextModel</KistlBase:FullName>
     <KistlBase:Parent>6012afb5-9ef6-4552-9481-b46a39f8f54d</KistlBase:Parent>
   </KistlBase:TypeRef>
+  <KistlBase:TypeRef ExportGuid="868c21ac-334d-4479-b887-2f1aa919d8b3">
+    <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
+    <KistlBase:ChangedOn>2010-05-17T16:28:40.893Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-05-17T16:28:40.893Z</KistlBase:CreatedOn>
+    <KistlBase:FullName>Kistl.Client.Presentables.KistlContextModel+Factory</KistlBase:FullName>
+    <KistlBase:Parent>68559faa-c4b4-4bb2-bb0d-49bb83a081a7</KistlBase:Parent>
+  </KistlBase:TypeRef>
   <KistlBase:TypeRef ExportGuid="266f79a3-9b2f-4779-a9ae-9702ccf53a5a">
     <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
     <KistlBase:ChangedOn>2009-12-14T17:08:05.407Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.407Z</KistlBase:CreatedOn>
     <KistlBase:FullName>Kistl.Client.Presentables.KistlDebuggerAsModel</KistlBase:FullName>
     <KistlBase:Parent>6012afb5-9ef6-4552-9481-b46a39f8f54d</KistlBase:Parent>
+  </KistlBase:TypeRef>
+  <KistlBase:TypeRef ExportGuid="07ba6a94-8252-46c5-9d4c-6a02a2b60daa">
+    <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
+    <KistlBase:ChangedOn>2010-05-17T16:28:40.893Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-05-17T16:28:40.893Z</KistlBase:CreatedOn>
+    <KistlBase:FullName>Kistl.Client.Presentables.KistlDebuggerAsModel+Factory</KistlBase:FullName>
+    <KistlBase:Parent>68559faa-c4b4-4bb2-bb0d-49bb83a081a7</KistlBase:Parent>
   </KistlBase:TypeRef>
   <KistlBase:TypeRef ExportGuid="19c8f289-2db0-4466-8996-71948f630d67">
     <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
@@ -16189,6 +16414,20 @@
     <KistlBase:FullName>Kistl.Client.Presentables.ModuleEditor.DiagramViewModel+DataTypeModel</KistlBase:FullName>
     <KistlBase:Parent>a07f30a6-b920-4fef-98ac-53155791e804</KistlBase:Parent>
   </KistlBase:TypeRef>
+  <KistlBase:TypeRef ExportGuid="5944cc81-6e73-485c-a8be-bb6161a5e377">
+    <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
+    <KistlBase:ChangedOn>2010-05-17T16:28:40.893Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-05-17T16:28:40.893Z</KistlBase:CreatedOn>
+    <KistlBase:FullName>Kistl.Client.Presentables.ModuleEditor.DiagramViewModel+DataTypeModel+Factory</KistlBase:FullName>
+    <KistlBase:Parent>68559faa-c4b4-4bb2-bb0d-49bb83a081a7</KistlBase:Parent>
+  </KistlBase:TypeRef>
+  <KistlBase:TypeRef ExportGuid="b58c3c60-7f17-419b-8b47-26936f169415">
+    <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
+    <KistlBase:ChangedOn>2010-05-17T16:28:40.893Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-05-17T16:28:40.893Z</KistlBase:CreatedOn>
+    <KistlBase:FullName>Kistl.Client.Presentables.ModuleEditor.DiagramViewModel+Factory</KistlBase:FullName>
+    <KistlBase:Parent>68559faa-c4b4-4bb2-bb0d-49bb83a081a7</KistlBase:Parent>
+  </KistlBase:TypeRef>
   <KistlBase:TypeRef ExportGuid="c964fa22-410c-4e43-8057-522a2b309400">
     <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
     <KistlBase:ChangedOn>2010-04-08T19:12:41.787Z</KistlBase:ChangedOn>
@@ -16279,6 +16518,13 @@
     <KistlBase:CreatedOn>2010-03-29T18:54:08.877Z</KistlBase:CreatedOn>
     <KistlBase:FullName>Kistl.Client.Presentables.ModuleEditor.WorkspaceViewModel</KistlBase:FullName>
     <KistlBase:Parent>def10a59-ea6c-4adc-9c47-f9ad2cf44156</KistlBase:Parent>
+  </KistlBase:TypeRef>
+  <KistlBase:TypeRef ExportGuid="313bce08-a2f7-4f54-b2b2-725652200030">
+    <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
+    <KistlBase:ChangedOn>2010-05-17T16:28:40.893Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-05-17T16:28:40.893Z</KistlBase:CreatedOn>
+    <KistlBase:FullName>Kistl.Client.Presentables.ModuleEditor.WorkspaceViewModel+Factory</KistlBase:FullName>
+    <KistlBase:Parent>68559faa-c4b4-4bb2-bb0d-49bb83a081a7</KistlBase:Parent>
   </KistlBase:TypeRef>
   <KistlBase:TypeRef ExportGuid="e68d95a9-b9a1-4eb5-9806-ed35a591f647">
     <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
@@ -16392,6 +16638,13 @@
     <KistlBase:FullName>Kistl.Client.Presentables.ObjectBrowser.ModuleViewModel</KistlBase:FullName>
     <KistlBase:Parent>a07f30a6-b920-4fef-98ac-53155791e804</KistlBase:Parent>
   </KistlBase:TypeRef>
+  <KistlBase:TypeRef ExportGuid="d403e479-8a7e-46ca-9ed1-741190154c09">
+    <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
+    <KistlBase:ChangedOn>2010-05-17T16:28:40.893Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-05-17T16:28:40.893Z</KistlBase:CreatedOn>
+    <KistlBase:FullName>Kistl.Client.Presentables.ObjectBrowser.ModuleViewModel+Factory</KistlBase:FullName>
+    <KistlBase:Parent>68559faa-c4b4-4bb2-bb0d-49bb83a081a7</KistlBase:Parent>
+  </KistlBase:TypeRef>
   <KistlBase:TypeRef ExportGuid="bf51f3c4-2f92-480b-a244-02dc8c69ed56">
     <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
     <KistlBase:ChangedOn>2009-12-14T17:08:05.41Z</KistlBase:ChangedOn>
@@ -16399,12 +16652,26 @@
     <KistlBase:FullName>Kistl.Client.Presentables.ObjectBrowser.WorkspaceViewModel</KistlBase:FullName>
     <KistlBase:Parent>def10a59-ea6c-4adc-9c47-f9ad2cf44156</KistlBase:Parent>
   </KistlBase:TypeRef>
+  <KistlBase:TypeRef ExportGuid="50881bc0-640e-4764-821a-ffb3f0088e8a">
+    <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
+    <KistlBase:ChangedOn>2010-05-17T16:28:40.893Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-05-17T16:28:40.893Z</KistlBase:CreatedOn>
+    <KistlBase:FullName>Kistl.Client.Presentables.ObjectBrowser.WorkspaceViewModel+Factory</KistlBase:FullName>
+    <KistlBase:Parent>68559faa-c4b4-4bb2-bb0d-49bb83a081a7</KistlBase:Parent>
+  </KistlBase:TypeRef>
   <KistlBase:TypeRef ExportGuid="da04f1a5-fb30-4786-b329-8f070083a4f6">
     <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
     <KistlBase:ChangedOn>2009-12-14T17:08:05.41Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.41Z</KistlBase:CreatedOn>
     <KistlBase:FullName>Kistl.Client.Presentables.ObjectClassModel</KistlBase:FullName>
-    <KistlBase:Parent>41b6d0a1-a2ae-4c68-8997-503db83319bc</KistlBase:Parent>
+    <KistlBase:Parent>f0967728-c963-4eb0-adb6-b8883f30b928</KistlBase:Parent>
+  </KistlBase:TypeRef>
+  <KistlBase:TypeRef ExportGuid="3f94a45a-648e-472b-951a-75cf704dac03">
+    <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
+    <KistlBase:ChangedOn>2010-05-17T16:28:40.893Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-05-17T16:28:40.893Z</KistlBase:CreatedOn>
+    <KistlBase:FullName>Kistl.Client.Presentables.ObjectClassModel+Factory</KistlBase:FullName>
+    <KistlBase:Parent>68559faa-c4b4-4bb2-bb0d-49bb83a081a7</KistlBase:Parent>
   </KistlBase:TypeRef>
   <KistlBase:TypeRef ExportGuid="d9fe8f77-b156-4929-add8-38cc2fa546e8">
     <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
@@ -16413,6 +16680,13 @@
     <KistlBase:FullName>Kistl.Client.Presentables.ObjectEditor.WorkspaceViewModel</KistlBase:FullName>
     <KistlBase:Parent>def10a59-ea6c-4adc-9c47-f9ad2cf44156</KistlBase:Parent>
   </KistlBase:TypeRef>
+  <KistlBase:TypeRef ExportGuid="90dcc57a-aa99-4cd7-bff7-a357f90bf675">
+    <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
+    <KistlBase:ChangedOn>2010-05-17T16:28:40.893Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-05-17T16:28:40.893Z</KistlBase:CreatedOn>
+    <KistlBase:FullName>Kistl.Client.Presentables.ObjectEditor.WorkspaceViewModel+Factory</KistlBase:FullName>
+    <KistlBase:Parent>68559faa-c4b4-4bb2-bb0d-49bb83a081a7</KistlBase:Parent>
+  </KistlBase:TypeRef>
   <KistlBase:TypeRef ExportGuid="85be3823-e778-4829-b214-69154c1e6164">
     <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
     <KistlBase:ChangedOn>2009-12-14T17:08:05.41Z</KistlBase:ChangedOn>
@@ -16420,12 +16694,26 @@
     <KistlBase:FullName>Kistl.Client.Presentables.ObjectListModel</KistlBase:FullName>
     <KistlBase:Parent>b7a03f37-4f3c-4b14-946c-446793d384fa</KistlBase:Parent>
   </KistlBase:TypeRef>
+  <KistlBase:TypeRef ExportGuid="65a5f0fe-4170-4181-85d9-57fdf48d4891">
+    <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
+    <KistlBase:ChangedOn>2010-05-17T16:28:40.893Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-05-17T16:28:40.893Z</KistlBase:CreatedOn>
+    <KistlBase:FullName>Kistl.Client.Presentables.ObjectListModel+Factory</KistlBase:FullName>
+    <KistlBase:Parent>68559faa-c4b4-4bb2-bb0d-49bb83a081a7</KistlBase:Parent>
+  </KistlBase:TypeRef>
   <KistlBase:TypeRef ExportGuid="59136763-5a94-4ae5-b9ab-6d679e86245a">
     <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
     <KistlBase:ChangedOn>2009-12-14T17:08:05.41Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.41Z</KistlBase:CreatedOn>
     <KistlBase:FullName>Kistl.Client.Presentables.ObjectReferenceModel</KistlBase:FullName>
     <KistlBase:Parent>1d98088b-42c9-4a90-886f-814d5707c453</KistlBase:Parent>
+  </KistlBase:TypeRef>
+  <KistlBase:TypeRef ExportGuid="a02b03c6-1a0b-4b02-9bdc-91a3a5a69b88">
+    <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
+    <KistlBase:ChangedOn>2010-05-17T16:28:40.893Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-05-17T16:28:40.893Z</KistlBase:CreatedOn>
+    <KistlBase:FullName>Kistl.Client.Presentables.ObjectReferenceModel+Factory</KistlBase:FullName>
+    <KistlBase:Parent>68559faa-c4b4-4bb2-bb0d-49bb83a081a7</KistlBase:Parent>
   </KistlBase:TypeRef>
   <KistlBase:TypeRef ExportGuid="eda5fdba-d8e3-4a43-b69b-84d3617f105b">
     <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
@@ -16447,6 +16735,13 @@
     <KistlBase:CreatedOn>2009-12-14T17:08:05.41Z</KistlBase:CreatedOn>
     <KistlBase:FullName>Kistl.Client.Presentables.PropertyGroupModel</KistlBase:FullName>
     <KistlBase:Parent>6012afb5-9ef6-4552-9481-b46a39f8f54d</KistlBase:Parent>
+  </KistlBase:TypeRef>
+  <KistlBase:TypeRef ExportGuid="915d9d6c-2ddb-4ec0-b165-5753b2b71e56">
+    <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
+    <KistlBase:ChangedOn>2010-05-17T16:28:40.893Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-05-17T16:28:40.893Z</KistlBase:CreatedOn>
+    <KistlBase:FullName>Kistl.Client.Presentables.PropertyGroupModel+Factory</KistlBase:FullName>
+    <KistlBase:Parent>68559faa-c4b4-4bb2-bb0d-49bb83a081a7</KistlBase:Parent>
   </KistlBase:TypeRef>
   <KistlBase:TypeRef ExportGuid="7045df02-d480-4755-bf6d-2cae438dce1c">
     <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
@@ -16574,6 +16869,13 @@
     <KistlBase:FullName>Kistl.Client.Presentables.Relations.RelationEndModel</KistlBase:FullName>
     <KistlBase:Parent>a07f30a6-b920-4fef-98ac-53155791e804</KistlBase:Parent>
   </KistlBase:TypeRef>
+  <KistlBase:TypeRef ExportGuid="c9b036ea-7571-42ca-89f7-fac8b6442c26">
+    <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
+    <KistlBase:ChangedOn>2010-05-17T16:28:40.893Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-05-17T16:28:40.893Z</KistlBase:CreatedOn>
+    <KistlBase:FullName>Kistl.Client.Presentables.Relations.RelationEndModel+Factory</KistlBase:FullName>
+    <KistlBase:Parent>68559faa-c4b4-4bb2-bb0d-49bb83a081a7</KistlBase:Parent>
+  </KistlBase:TypeRef>
   <KistlBase:TypeRef ExportGuid="e4de1cc8-9d31-41e5-96c8-ae99cf725486">
     <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
     <KistlBase:ChangedOn>2009-12-14T17:08:05.41Z</KistlBase:ChangedOn>
@@ -16602,6 +16904,13 @@
     <KistlBase:FullName>Kistl.Client.Presentables.StringListPropertyModel</KistlBase:FullName>
     <KistlBase:Parent>04a0d13e-0c1a-4024-8c45-c2bfc70e0ec5</KistlBase:Parent>
   </KistlBase:TypeRef>
+  <KistlBase:TypeRef ExportGuid="7ae289ab-70e9-4476-b967-8a57d6ac862b">
+    <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
+    <KistlBase:ChangedOn>2010-05-17T16:28:40.893Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-05-17T16:28:40.893Z</KistlBase:CreatedOn>
+    <KistlBase:FullName>Kistl.Client.Presentables.StringListPropertyModel+Factory</KistlBase:FullName>
+    <KistlBase:Parent>68559faa-c4b4-4bb2-bb0d-49bb83a081a7</KistlBase:Parent>
+  </KistlBase:TypeRef>
   <KistlBase:TypeRef ExportGuid="91fdfdb4-7e1d-4949-952e-6da8c2b0ad48">
     <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
     <KistlBase:ChangedOn>2009-12-14T17:08:05.41Z</KistlBase:ChangedOn>
@@ -16616,12 +16925,26 @@
     <KistlBase:FullName>Kistl.Client.Presentables.TimeRecords.Dashboard</KistlBase:FullName>
     <KistlBase:Parent>6012afb5-9ef6-4552-9481-b46a39f8f54d</KistlBase:Parent>
   </KistlBase:TypeRef>
+  <KistlBase:TypeRef ExportGuid="f852dcc5-e341-4256-929a-48f7915f6d81">
+    <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
+    <KistlBase:ChangedOn>2010-05-17T16:28:40.893Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-05-17T16:28:40.893Z</KistlBase:CreatedOn>
+    <KistlBase:FullName>Kistl.Client.Presentables.TimeRecords.Dashboard+Factory</KistlBase:FullName>
+    <KistlBase:Parent>68559faa-c4b4-4bb2-bb0d-49bb83a081a7</KistlBase:Parent>
+  </KistlBase:TypeRef>
   <KistlBase:TypeRef ExportGuid="1be9e966-ddec-4d9a-bdce-a3e2a380bfcc">
     <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
     <KistlBase:ChangedOn>2009-12-14T17:08:05.41Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.41Z</KistlBase:CreatedOn>
     <KistlBase:FullName>Kistl.Client.Presentables.TimeRecords.PresenceRecordModel</KistlBase:FullName>
     <KistlBase:Parent>a07f30a6-b920-4fef-98ac-53155791e804</KistlBase:Parent>
+  </KistlBase:TypeRef>
+  <KistlBase:TypeRef ExportGuid="5a14bfcf-0223-4a82-b11f-f57f33f38914">
+    <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
+    <KistlBase:ChangedOn>2010-05-17T16:28:40.893Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-05-17T16:28:40.893Z</KistlBase:CreatedOn>
+    <KistlBase:FullName>Kistl.Client.Presentables.TimeRecords.PresenceRecordModel+Factory</KistlBase:FullName>
+    <KistlBase:Parent>68559faa-c4b4-4bb2-bb0d-49bb83a081a7</KistlBase:Parent>
   </KistlBase:TypeRef>
   <KistlBase:TypeRef ExportGuid="4b424049-d2b5-46b2-a88e-7fd330395838">
     <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
@@ -16630,12 +16953,26 @@
     <KistlBase:FullName>Kistl.Client.Presentables.TimeRecords.WorkEffortModel</KistlBase:FullName>
     <KistlBase:Parent>a07f30a6-b920-4fef-98ac-53155791e804</KistlBase:Parent>
   </KistlBase:TypeRef>
+  <KistlBase:TypeRef ExportGuid="baffa54c-0193-4bbf-bef2-a1a86e6770ba">
+    <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
+    <KistlBase:ChangedOn>2010-05-17T16:28:40.893Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-05-17T16:28:40.893Z</KistlBase:CreatedOn>
+    <KistlBase:FullName>Kistl.Client.Presentables.TimeRecords.WorkEffortModel+Factory</KistlBase:FullName>
+    <KistlBase:Parent>68559faa-c4b4-4bb2-bb0d-49bb83a081a7</KistlBase:Parent>
+  </KistlBase:TypeRef>
   <KistlBase:TypeRef ExportGuid="28114689-4fc3-44b6-b7f1-141dab6b78d9">
     <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
     <KistlBase:ChangedOn>2009-12-14T17:08:05.41Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.41Z</KistlBase:CreatedOn>
     <KistlBase:FullName>Kistl.Client.Presentables.TimeRecords.WorkEffortRecorderModel</KistlBase:FullName>
     <KistlBase:Parent>def10a59-ea6c-4adc-9c47-f9ad2cf44156</KistlBase:Parent>
+  </KistlBase:TypeRef>
+  <KistlBase:TypeRef ExportGuid="ff6078cb-ed83-4730-b6fe-afc338a83fdf">
+    <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
+    <KistlBase:ChangedOn>2010-05-17T16:28:40.893Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-05-17T16:28:40.893Z</KistlBase:CreatedOn>
+    <KistlBase:FullName>Kistl.Client.Presentables.UiThreadManager</KistlBase:FullName>
+    <KistlBase:Parent>c51c8086-60b2-410e-96c4-c1a32c1f57ee</KistlBase:Parent>
   </KistlBase:TypeRef>
   <KistlBase:TypeRef ExportGuid="6012afb5-9ef6-4552-9481-b46a39f8f54d">
     <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
@@ -16644,12 +16981,26 @@
     <KistlBase:FullName>Kistl.Client.Presentables.ViewModel</KistlBase:FullName>
     <KistlBase:Parent>c51c8086-60b2-410e-96c4-c1a32c1f57ee</KistlBase:Parent>
   </KistlBase:TypeRef>
+  <KistlBase:TypeRef ExportGuid="4f8be443-4c35-4bac-8869-fc8d51e52c93">
+    <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
+    <KistlBase:ChangedOn>2010-05-17T16:28:40.883Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-05-17T16:28:40.883Z</KistlBase:CreatedOn>
+    <KistlBase:FullName>Kistl.Client.Presentables.ViewModel+Factory</KistlBase:FullName>
+    <KistlBase:Parent>68559faa-c4b4-4bb2-bb0d-49bb83a081a7</KistlBase:Parent>
+  </KistlBase:TypeRef>
   <KistlBase:TypeRef ExportGuid="def10a59-ea6c-4adc-9c47-f9ad2cf44156">
     <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
     <KistlBase:ChangedOn>2010-04-01T15:50:11.963Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2010-04-01T15:50:11.963Z</KistlBase:CreatedOn>
     <KistlBase:FullName>Kistl.Client.Presentables.WindowViewModel</KistlBase:FullName>
     <KistlBase:Parent>6012afb5-9ef6-4552-9481-b46a39f8f54d</KistlBase:Parent>
+  </KistlBase:TypeRef>
+  <KistlBase:TypeRef ExportGuid="a272b705-c409-4962-a185-55ee59384a07">
+    <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
+    <KistlBase:ChangedOn>2010-05-17T16:28:40.893Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-05-17T16:28:40.893Z</KistlBase:CreatedOn>
+    <KistlBase:FullName>Kistl.Client.Presentables.WindowViewModel+Factory</KistlBase:FullName>
+    <KistlBase:Parent>68559faa-c4b4-4bb2-bb0d-49bb83a081a7</KistlBase:Parent>
   </KistlBase:TypeRef>
   <KistlBase:TypeRef ExportGuid="1067284c-7e5c-426d-b65d-7f46249ef266">
     <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
@@ -17251,11 +17602,25 @@
     <KistlBase:FullName>Kistl.Client.WPF.View.KistlBase.ActionDisplay</KistlBase:FullName>
     <KistlBase:Parent>1fda132a-a95c-4483-9f9d-1e952fa20245</KistlBase:Parent>
   </KistlBase:TypeRef>
+  <KistlBase:TypeRef ExportGuid="47c1d713-7632-4bbb-9a30-4046b86db123">
+    <KistlBase:Assembly>157c1754-6eed-49f7-883b-ae2543bafd7e</KistlBase:Assembly>
+    <KistlBase:ChangedOn>2010-05-17T16:26:47.88Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-05-17T16:26:47.88Z</KistlBase:CreatedOn>
+    <KistlBase:FullName>Kistl.Client.WPF.View.KistlBase.BoolFilterExpression</KistlBase:FullName>
+    <KistlBase:Parent>1fda132a-a95c-4483-9f9d-1e952fa20245</KistlBase:Parent>
+  </KistlBase:TypeRef>
   <KistlBase:TypeRef ExportGuid="92fb7c93-822b-41f7-b25b-dd44e0fb3516">
     <KistlBase:Assembly>157c1754-6eed-49f7-883b-ae2543bafd7e</KistlBase:Assembly>
     <KistlBase:ChangedOn>2009-12-14T17:08:05.41Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.41Z</KistlBase:CreatedOn>
     <KistlBase:FullName>Kistl.Client.WPF.View.KistlBase.DataObjectLineDisplay</KistlBase:FullName>
+    <KistlBase:Parent>1fda132a-a95c-4483-9f9d-1e952fa20245</KistlBase:Parent>
+  </KistlBase:TypeRef>
+  <KistlBase:TypeRef ExportGuid="18c4efb5-c283-44f2-81bf-c0b70e97b79f">
+    <KistlBase:Assembly>157c1754-6eed-49f7-883b-ae2543bafd7e</KistlBase:Assembly>
+    <KistlBase:ChangedOn>2009-12-14T17:08:05.41Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2009-12-14T17:08:05.41Z</KistlBase:CreatedOn>
+    <KistlBase:FullName>Kistl.Client.WPF.View.KistlBase.InstanceListDisplay</KistlBase:FullName>
     <KistlBase:Parent>1fda132a-a95c-4483-9f9d-1e952fa20245</KistlBase:Parent>
   </KistlBase:TypeRef>
   <KistlBase:TypeRef ExportGuid="0695b951-f3fe-4bf2-a9b7-f893c5bb7c1c">
@@ -17370,13 +17735,6 @@
     <KistlBase:FullName>Kistl.Client.WPF.View.NullablePropertyTextBoxView</KistlBase:FullName>
     <KistlBase:Parent>b63e703b-9bbc-40cd-9dfd-e29bfb925826</KistlBase:Parent>
   </KistlBase:TypeRef>
-  <KistlBase:TypeRef ExportGuid="18c4efb5-c283-44f2-81bf-c0b70e97b79f">
-    <KistlBase:Assembly>157c1754-6eed-49f7-883b-ae2543bafd7e</KistlBase:Assembly>
-    <KistlBase:ChangedOn>2009-12-14T17:08:05.41Z</KistlBase:ChangedOn>
-    <KistlBase:CreatedOn>2009-12-14T17:08:05.41Z</KistlBase:CreatedOn>
-    <KistlBase:FullName>Kistl.Client.WPF.View.ObjectBrowser.InstanceListDisplay</KistlBase:FullName>
-    <KistlBase:Parent>1fda132a-a95c-4483-9f9d-1e952fa20245</KistlBase:Parent>
-  </KistlBase:TypeRef>
   <KistlBase:TypeRef ExportGuid="857d0acf-6eac-49b5-9940-4f7fb6b81549">
     <KistlBase:Assembly>157c1754-6eed-49f7-883b-ae2543bafd7e</KistlBase:Assembly>
     <KistlBase:ChangedOn>2009-12-14T17:08:05.413Z</KistlBase:ChangedOn>
@@ -17488,6 +17846,13 @@
     <KistlBase:CreatedOn>2009-12-14T17:08:05.413Z</KistlBase:CreatedOn>
     <KistlBase:FullName>Kistl.Client.WPF.WpfModelFactory</KistlBase:FullName>
     <KistlBase:Parent>a2ef02e2-851b-4b34-bb7f-2a906dda177d</KistlBase:Parent>
+  </KistlBase:TypeRef>
+  <KistlBase:TypeRef ExportGuid="12eb7977-4e6a-486c-b147-d2f81a49a2d4">
+    <KistlBase:Assembly>157c1754-6eed-49f7-883b-ae2543bafd7e</KistlBase:Assembly>
+    <KistlBase:ChangedOn>2010-05-17T16:26:47.88Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-05-17T16:26:47.88Z</KistlBase:CreatedOn>
+    <KistlBase:FullName>Kistl.Client.WPF.WPFModule</KistlBase:FullName>
+    <KistlBase:Parent>94620323-422d-4b74-b1aa-f1daa4b4a448</KistlBase:Parent>
   </KistlBase:TypeRef>
   <KistlBase:TypeRef ExportGuid="887c9fd5-f2c1-4923-a6c1-fab6e5ad9ebf">
     <KistlBase:Assembly>157c1754-6eed-49f7-883b-ae2543bafd7e</KistlBase:Assembly>
@@ -19073,6 +19438,22 @@
     <KistlBase:A_pos>2147483647</KistlBase:A_pos>
     <KistlBase:B_pos>0</KistlBase:B_pos>
   </KistlBase:TypeRef_hasGenericArguments_TypeRef_RelationEntry>
+  <KistlBase:TypeRef_hasGenericArguments_TypeRef_RelationEntry ExportGuid="bc9d7111-e7a5-4799-b879-08ddfeca4d8d">
+    <KistlBase:A>8bae6ce0-2215-4f05-a0f8-f547589df8ef</KistlBase:A>
+    <KistlBase:A_pos>2147483647</KistlBase:A_pos>
+    <KistlBase:B>bd45e851-e071-463b-b7a9-c159f4a1bf15</KistlBase:B>
+    <KistlBase:B_pos>0</KistlBase:B_pos>
+    <KistlBase:A_pos>2147483647</KistlBase:A_pos>
+    <KistlBase:B_pos>0</KistlBase:B_pos>
+  </KistlBase:TypeRef_hasGenericArguments_TypeRef_RelationEntry>
+  <KistlBase:TypeRef_hasGenericArguments_TypeRef_RelationEntry ExportGuid="b16251c6-f4f0-44ca-846c-0ea4af45dc5f">
+    <KistlBase:A>0cc476f1-123e-486d-bab5-b2a63c30f849</KistlBase:A>
+    <KistlBase:A_pos>2147483647</KistlBase:A_pos>
+    <KistlBase:B>bd45e851-e071-463b-b7a9-c159f4a1bf15</KistlBase:B>
+    <KistlBase:B_pos>0</KistlBase:B_pos>
+    <KistlBase:A_pos>2147483647</KistlBase:A_pos>
+    <KistlBase:B_pos>0</KistlBase:B_pos>
+  </KistlBase:TypeRef_hasGenericArguments_TypeRef_RelationEntry>
   <KistlBase:TypeRef_hasGenericArguments_TypeRef_RelationEntry ExportGuid="829bc38e-8ec8-44f6-b84c-afef0a47d3ac">
     <KistlBase:A>f1f674ba-07da-4831-b3d1-a3bad72eb88f</KistlBase:A>
     <KistlBase:A_pos>2147483647</KistlBase:A_pos>
@@ -19631,6 +20012,11 @@
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
     <GUI:ViewModelRef>d5087c41-a7e0-4e10-9762-bbba49b49759</GUI:ViewModelRef>
   </GUI:ViewModelDescriptor>
+  <GUI:ViewModelDescriptor ExportGuid="1579f2e0-2ac9-47bb-a70c-afadbe31d3b6">
+    <GUI:Description>Viewmodel for enabled filter expressions</GUI:Description>
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:ViewModelRef>1c9b7a66-8116-4144-bf43-d7e5153aaab7</GUI:ViewModelRef>
+  </GUI:ViewModelDescriptor>
   <GUI:ViewModelDescriptor ExportGuid="88ce02bf-fc40-4227-a7b5-28f6385efa1b">
     <GUI:DefaultKind>f9092349-b263-4887-b605-cccac6a361bd</GUI:DefaultKind>
     <GUI:Description>A simple string list view</GUI:Description>
@@ -19709,12 +20095,21 @@
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
+  <GUI:ViewDescriptor ExportGuid="475c28d6-97a6-48a0-bee8-634aa0395ac0">
+    <GUI:ControlRef>47c1d713-7632-4bbb-9a30-4046b86db123</GUI:ControlRef>
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:Toolkit>0</GUI:Toolkit>
+  </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="b88fd41f-4fdb-4167-8922-cf8efe176294">
     <GUI:ControlRef>937a06f5-8bdb-47e7-b30d-ef5e944e2eae</GUI:ControlRef>
     <GUI:Kind>c6ed9c8e-e7b4-47af-948e-93bef8c7e1f8</GUI:Kind>
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
+  <GUI:ViewDescriptor_supports_TypeRef_RelationEntry ExportGuid="46d867c3-0db2-4e9d-b712-dad79d370447">
+    <GUI:A>475c28d6-97a6-48a0-bee8-634aa0395ac0</GUI:A>
+    <KistlBase:B>1c9b7a66-8116-4144-bf43-d7e5153aaab7</KistlBase:B>
+  </GUI:ViewDescriptor_supports_TypeRef_RelationEntry>
   <ModuleEditorWorkspaceKind ExportGuid="66c71e86-39d1-4a19-a3c7-11b03168f598" xmlns="daszAt.ModuleEditor" />
   <GUI:ActionKind ExportGuid="364aaaf3-0f61-4642-a0e3-bd812935cf44" />
   <GUI:CheckboxKind ExportGuid="12b829e1-abab-43f3-99ea-e33cd383d7e6" />

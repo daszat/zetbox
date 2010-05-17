@@ -47,7 +47,7 @@
                                                       ItemsSource="{Binding ObjectClasses}">
                         <view:DataObjectLineDisplay />
                     </HierarchicalDataTemplate>
-                    <DataTemplate DataType="{x:Type client:InstanceListViewModel}">
+                    <DataTemplate DataType="{x:Type clientKistlBase:InstanceListViewModel}">
                         <view:DataObjectLineDisplay DataContext="{Binding DataTypeModel}" />
                     </DataTemplate>
                 </TreeView.Resources>

@@ -6,6 +6,7 @@ using System.Text;
 using Kistl.API;
 using Kistl.App.Base;
 using Kistl.App.Extensions;
+using Kistl.Client.Presentables.KistlBase;
 
 namespace Kistl.Client.Presentables.ModuleEditor
 {
@@ -69,36 +70,37 @@ namespace Kistl.Client.Presentables.ModuleEditor
 
                     InstanceListViewModel lstMdl;
 
-                    lstMdl = ModelFactory.CreateViewModel<ObjectClassInstanceListViewModel.Factory>().Invoke(DataContext, DataContext.FindPersistenceObject<DataType>(new Guid("20888DFC-1FBC-47C8-9F3C-C6A30A5C0048")));
-                    lstMdl.ConstantFilter.Add(new KeyValuePair<string, object>("Module = @0", CurrentModule));
+                    lstMdl = ModelFactory.CreateViewModel<InstanceListViewModel.Factory>().Invoke(DataContext, DataContext.FindPersistenceObject<DataType>(new Guid("20888DFC-1FBC-47C8-9F3C-C6A30A5C0048")));
+                    lstMdl.Filter.Add(new ConstantFilterExpression("Module = @0", CurrentModule));
+                    lstMdl.Filter.Add(ModelFactory.CreateViewModel<EnableFilterExpression.Factory>().Invoke(DataContext, "Only Baseclasses", "BaseObjectClass = null"));
                     lst.Add(lstMdl);
 
                     lstMdl = ModelFactory.CreateViewModel<InstanceListViewModel.Factory>().Invoke(DataContext, DataContext.FindPersistenceObject<DataType>(new Guid("7EA88D99-88F0-44A7-B0A3-DA725E57595D")));
-                    lstMdl.ConstantFilter.Add(new KeyValuePair<string, object>("Module = @0", CurrentModule));
+                    lstMdl.Filter.Add(new ConstantFilterExpression("Module = @0", CurrentModule));
                     lst.Add(lstMdl);
 
                     lstMdl = ModelFactory.CreateViewModel<InstanceListViewModel.Factory>().Invoke(DataContext, DataContext.FindPersistenceObject<DataType>(new Guid("EE475DE2-D626-49E9-9E40-6BB12CB026D4")));
-                    lstMdl.ConstantFilter.Add(new KeyValuePair<string, object>("Module = @0", CurrentModule));
+                    lstMdl.Filter.Add(new ConstantFilterExpression("Module = @0", CurrentModule));
                     lst.Add(lstMdl);
 
                     lstMdl = ModelFactory.CreateViewModel<InstanceListViewModel.Factory>().Invoke(DataContext, DataContext.FindPersistenceObject<DataType>(new Guid("2CB3F778-DD6A-46C7-AD2B-5F8691313035")));
-                    lstMdl.ConstantFilter.Add(new KeyValuePair<string, object>("Module = @0", CurrentModule));
+                    lstMdl.Filter.Add(new ConstantFilterExpression("Module = @0", CurrentModule));
                     lst.Add(lstMdl);
 
                     lstMdl = ModelFactory.CreateViewModel<InstanceListViewModel.Factory>().Invoke(DataContext, DataContext.FindPersistenceObject<DataType>(new Guid("A590A975-66E5-421C-AA97-7AB3169E0E9B")));
-                    lstMdl.ConstantFilter.Add(new KeyValuePair<string, object>("Module = @0", CurrentModule));
+                    lstMdl.Filter.Add(new ConstantFilterExpression("Module = @0", CurrentModule));
                     lst.Add(lstMdl);
 
                     lstMdl = ModelFactory.CreateViewModel<InstanceListViewModel.Factory>().Invoke(DataContext, DataContext.FindPersistenceObject<DataType>(new Guid("FFDA4604-1536-43B6-B951-F8753D5092CA")));
-                    lstMdl.ConstantFilter.Add(new KeyValuePair<string, object>("Module = @0", CurrentModule));
+                    lstMdl.Filter.Add(new ConstantFilterExpression("Module = @0", CurrentModule));
                     lst.Add(lstMdl);
 
                     lstMdl = ModelFactory.CreateViewModel<InstanceListViewModel.Factory>().Invoke(DataContext, DataContext.FindPersistenceObject<DataType>(new Guid("5D152C6F-6C1E-48B7-B03E-669E30468808")));
-                    lstMdl.ConstantFilter.Add(new KeyValuePair<string, object>("Module = @0", CurrentModule));
+                    lstMdl.Filter.Add(new ConstantFilterExpression("Module = @0", CurrentModule));
                     lst.Add(lstMdl);
 
                     lstMdl = ModelFactory.CreateViewModel<InstanceListViewModel.Factory>().Invoke(DataContext, DataContext.FindPersistenceObject<DataType>(new Guid("1C0E894F-4EB4-422F-8094-3095735B4917")));
-                    lstMdl.ConstantFilter.Add(new KeyValuePair<string, object>("Module = @0", CurrentModule));
+                    lstMdl.Filter.Add(new ConstantFilterExpression("Module = @0", CurrentModule));
                     lst.Add(lstMdl);
 
                     var diagMdl = ModelFactory.CreateViewModel<DiagramViewModel.Factory>().Invoke(DataContext, CurrentModule);

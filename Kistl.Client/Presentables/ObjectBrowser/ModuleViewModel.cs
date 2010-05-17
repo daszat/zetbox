@@ -8,6 +8,7 @@ using System.Text;
 using Kistl.API;
 using Kistl.App.Base;
 using Kistl.API.Configuration;
+using Kistl.Client.Presentables.KistlBase;
 
 namespace Kistl.Client.Presentables.ObjectBrowser
 {
