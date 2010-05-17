@@ -20,16 +20,6 @@
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="100" />
-                        <ColumnDefinition />
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="0" Text="Label" />
-                    <TextBox 
-                         Grid.Column="1"
-                         Text="{Binding InstancesSearchString, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}" />
-                </Grid>
             </StackPanel>
         </GroupBox>
 

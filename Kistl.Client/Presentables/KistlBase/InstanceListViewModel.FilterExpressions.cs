@@ -20,6 +20,11 @@ namespace Kistl.Client.Presentables.KistlBase
         event EventHandler FilterChanged;
     }
 
+    public interface IPostFilterExpression : IFilterExpression
+    {
+        ReadOnlyObservableCollection<DataObjectModel> Execute(IEnumerable<DataObjectModel> instances);
+    }
+
     public class ConstantFilterExpression : IFilterExpression
     {
         public ConstantFilterExpression(string filter, params object[] values)
@@ -138,11 +143,73 @@ namespace Kistl.Client.Presentables.KistlBase
         }
     }
 
+    public abstract class ReferenceTypeUIFilterExpressionViewModel<TValue> : UIFilterExpressionViewModel<TValue>
+        where TValue : class
+    {
+        public ReferenceTypeUIFilterExpressionViewModel(
+            IViewModelDependencies appCtx, IKistlContext dataCtx,
+            string label)
+            : base(appCtx, dataCtx, label)
+        {
+        }
+
+        public TValue Value
+        {
+            get
+            {
+                if (Values.Count == 0) return null;
+                return Values[0];
+            }
+            set
+            {
+                if (value == null)
+                {
+                    Values.RemoveAt(0);
+                }
+                else if (Values.Count == 0)
+                {
+                    Values.Add(value);
+                }
+                else
+                {
+                    Values[0] = value;
+                }
+
+                OnFilterChanged();
+            }
+        }
+    }
+
     public class EnableFilterExpression : ValueTypeUIFilterExpressionViewModel<bool>
     {
         public new delegate EnableFilterExpression Factory(IKistlContext dataCtx, string label, string filter, params object[] values);
 
         public EnableFilterExpression(
+            IViewModelDependencies appCtx, IKistlContext dataCtx,
+            string label, string filter, params object[] values)
+            : base(appCtx, dataCtx, label)
+        {
+            this.Label = label;
+            this.Predicate = filter;
+            this.FilterValues = values;
+            this.Values.Add(false);
+            AllowNullInput = false;
+        }
+
+        public override bool Enabled
+        {
+            get
+            {
+                return Values.Count > 0 && Values[0];
+            }
+        }
+    }
+
+    public class NameFilterExpression : ReferenceTypeUIFilterExpressionViewModel<string>, IPostFilterExpression
+    {
+        public new delegate NameFilterExpression Factory(IKistlContext dataCtx, string label, string filter, params object[] values);
+
+        public NameFilterExpression(
             IViewModelDependencies appCtx, IKistlContext dataCtx,
             string label, string filter, params object[] values)
             : base(appCtx, dataCtx, label)
@@ -157,8 +224,21 @@ namespace Kistl.Client.Presentables.KistlBase
         {
             get
             {
-                return Values.Count > 0 && Values[0];
+                return Values.Count > 0 && !string.IsNullOrEmpty(Values[0]);
             }
         }
+
+        #region IPostFilterExpression Members
+
+        public ReadOnlyObservableCollection<DataObjectModel> Execute(IEnumerable<DataObjectModel> instances)
+        {
+            return new ReadOnlyObservableCollection<DataObjectModel>(
+                    new ObservableCollection<DataObjectModel>(
+                        instances.Where(
+                            o => o.Name.ToLowerInvariant().Contains(Value.ToLowerInvariant())
+                            || o.ID.ToString().Contains(Value))));
+        }
+
+        #endregion
     }
 }

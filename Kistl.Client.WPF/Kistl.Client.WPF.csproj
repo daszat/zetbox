@@ -167,6 +167,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\KistlBase\StringFilterExpression.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\KistlBase\StringListView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -333,6 +337,9 @@
       <DependentUpon>PropertyGroupBoxView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\KistlBase\PropertyEditor.cs" />
+    <Compile Include="View\KistlBase\StringFilterExpression.xaml.cs">
+      <DependentUpon>StringFilterExpression.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\KistlBase\StringListView.xaml.cs">
       <DependentUpon>StringListView.xaml</DependentUpon>
     </Compile>

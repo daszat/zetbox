@@ -44,21 +44,36 @@ namespace Kistl.Client.Presentables.KistlBase
         {
             _type = type;
             this.ctxFactory = ctxFactory;
+
+            // Add default filter for all
+            this.Filter.Add(ModelFactory.CreateViewModel<NameFilterExpression.Factory>().Invoke(dataCtx, "Name", null));
         }
 
         #region Public interface
 
-        private List<IFilterExpression> _filter = null;
+        private ObservableCollection<IFilterExpression> _filter = null;
         public ICollection<IFilterExpression> Filter
         {
             get
             {
                 if (_filter == null)
                 {
-                    _filter = new List<IFilterExpression>();
+                    _filter = new ObservableCollection<IFilterExpression>();
+                    _filter.CollectionChanged += new NotifyCollectionChangedEventHandler(_filter_CollectionChanged);
                 }
                 return _filter;
             }
+        }
+
+        void _filter_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            foreach (var item in e.NewItems.OfType<IUIFilterExpression>())
+            {
+                // attach change events
+                item.FilterChanged += new EventHandler(delegate(object s, EventArgs a) { ReloadInstances(); });
+            }
+
+            OnPropertyChanged("FilterViewModels");
         }
 
         public IEnumerable<IUIFilterExpression> FilterViewModels
@@ -104,23 +119,6 @@ namespace Kistl.Client.Presentables.KistlBase
                     LoadInstances();
                 }
                 return _instances;
-            }
-        }
-
-        private string _instancesSearchString = String.Empty;
-        public string InstancesSearchString
-        {
-            get
-            {
-                return _instancesSearchString;
-            }
-            set
-            {
-                if (_instancesSearchString != value)
-                {
-                    _instancesSearchString = value;
-                    OnInstancesSearchStringChanged(_instancesSearchString);
-                }
             }
         }
 
@@ -237,13 +235,7 @@ namespace Kistl.Client.Presentables.KistlBase
 
             if (_filter != null)
             {
-                // attach change events
-                foreach (var uiFilter in _filter.OfType<IUIFilterExpression>())
-                {
-                    uiFilter.FilterChanged += new EventHandler(delegate(object sender, EventArgs e) { ReloadInstances(); });
-                }
-
-                foreach (var f in _filter.Where(f => f.Enabled))
+                foreach (var f in _filter.Where(f => f.Enabled && !(f is IPostFilterExpression)))
                 {
                     result = result.Where(f.Predicate, f.FilterValues);
                 }
@@ -276,32 +268,18 @@ namespace Kistl.Client.Presentables.KistlBase
         }
 
         /// <summary>
-        /// Call this when the <see cref="InstancesSearchString"/> property 
-        /// has changed. Override this to react on changes here.
-        /// </summary>
-        protected virtual void OnInstancesSearchStringChanged(string oldValue)
-        {
-            OnPropertyChanged("InstancesSearchString");
-            ExecuteFilter();
-        }
-
-        /// <summary>
         /// Create a fresh <see cref="InstancesFiltered"/> collection when something has changed.
         /// </summary>
         private void ExecuteFilter()
         {
-            if (InstancesSearchString.Length == 0)
+            _instancesFiltered = new ReadOnlyObservableCollection<DataObjectModel>(this.Instances);
+            // poor man's full text search
+            foreach (var filter in _filter.OfType<IPostFilterExpression>())
             {
-                _instancesFiltered = new ReadOnlyObservableCollection<DataObjectModel>(this.Instances);
-            }
-            else
-            {
-                // poor man's full text search
-                _instancesFiltered = new ReadOnlyObservableCollection<DataObjectModel>(
-                    new ObservableCollection<DataObjectModel>(
-                        this.Instances.Where(
-                            o => o.Name.ToLowerInvariant().Contains(this.InstancesSearchString.ToLowerInvariant())
-                            || o.ID.ToString().Contains(this.InstancesSearchString))));
+                if (filter.Enabled)
+                {
+                    _instancesFiltered = filter.Execute(_instancesFiltered);
+                }
             }
             OnPropertyChanged("InstancesFiltered");
         }

@@ -17,18 +17,18 @@ using Kistl.Client.Presentables.KistlBase;
 namespace Kistl.Client.WPF.View.KistlBase
 {
     /// <summary>
-    /// Interaction logic for BoolFilterExpression.xaml
+    /// Interaction logic for StringFilterExpression.xaml
     /// </summary>
-    public partial class BoolFilterExpression : UserControl, IHasViewModel<ValueTypeUIFilterExpressionViewModel<bool>>
+    public partial class StringFilterExpression : UserControl, IHasViewModel<ReferenceTypeUIFilterExpressionViewModel<string>>
     {
-        public BoolFilterExpression()
+        public StringFilterExpression()
         {
             InitializeComponent();
         }
 
-        public ValueTypeUIFilterExpressionViewModel<bool> ViewModel
+        public ReferenceTypeUIFilterExpressionViewModel<string> ViewModel
         {
-            get { return (ValueTypeUIFilterExpressionViewModel<bool>)DataContext; }
+            get { return (ReferenceTypeUIFilterExpressionViewModel<string>)DataContext; }
         }
     }
 }
