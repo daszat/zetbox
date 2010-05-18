@@ -70,6 +70,7 @@
     <Compile Include="CustomClientActions_KistlBase.Constraints.cs" />
     <Compile Include="CustomClientActions_KistlBase.cs" />
     <Compile Include="CustomClientActions_GUI.cs" />
+    <Compile Include="CustomClientActions_KistlBase.TypeRefs.cs" />
     <Compile Include="CustomClientActions_Projekte.cs" />
     <Compile Include="CustomClientActions_Zeiterfassung.cs" />
     <Compile Include="Gui\PropertyActions.cs" />

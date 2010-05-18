@@ -21,6 +21,13 @@ namespace Kistl.App.Base
 			set;
 		}
         /// <summary>
+        /// If the TypeRef could not be found in the containing assembly this property is set to true, otherwise to null
+        /// </summary>
+		bool? Deleted {
+			get;
+			set;
+		}
+        /// <summary>
         /// 
         /// </summary>
 		string FullName {

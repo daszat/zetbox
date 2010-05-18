@@ -8,7 +8,7 @@ using ObjectEditorWorkspace = Kistl.Client.Presentables.ObjectEditor.WorkspaceVi
 
 namespace Kistl.Client.Presentables.KistlBase
 {
-    public class OpenDataObjectCommand : CommandModel
+    public class OpenDataObjectCommand : ItemCommandModel<DataObjectModel>
     {
         public new delegate OpenDataObjectCommand Factory(IKistlContext dataCtx);
 
@@ -20,31 +20,33 @@ namespace Kistl.Client.Presentables.KistlBase
             this.ctxFactory = ctxFactory;
         }
 
-        public override bool CanExecute(object data)
+        protected override void DoExecute(IEnumerable<DataObjectModel> data)
         {
-            return (data is IEnumerable<DataObjectModel>) || (data is DataObjectModel);
-        }
-
-        protected override void DoExecute(object data)
-        {
-            IEnumerable<DataObjectModel> objects = null;
-            if (data is IEnumerable<DataObjectModel>)
-            {
-                objects = (IEnumerable<DataObjectModel>)data;
-            }
-            else if (data is DataObjectModel)
-            {
-                objects = new DataObjectModel[] { (DataObjectModel)data };
-            }
-
-            if (objects == null) return;
-
             var newWorkspace = ModelFactory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(ctxFactory());
-            foreach (var item in objects)
+            foreach (var item in data)
             {
                 newWorkspace.ShowForeignModel(item);
             }
             ModelFactory.ShowModel(newWorkspace, true);
+        }
+    }
+
+    public class DeleteDataObjectCommand : ItemCommandModel<DataObjectModel>
+    {
+        public new delegate DeleteDataObjectCommand Factory(IKistlContext dataCtx);
+
+        public DeleteDataObjectCommand(IViewModelDependencies appCtx, IKistlContext dataCtx)
+            : base(appCtx, dataCtx, "Delete", "Deletes the current selected Object")
+        {
+        }
+
+        protected override void DoExecute(IEnumerable<DataObjectModel> data)
+        {
+            foreach (var item in data)
+            {
+                DataContext.Delete(item.Object);
+            }
+            DataContext.SubmitChanges();
         }
     }
 

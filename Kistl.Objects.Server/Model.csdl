@@ -1765,6 +1765,7 @@
                         FromRole="TypeRef"
                         ToRole="CreatedBy" />
     <Property Name="CreatedOn" Type="DateTime" Nullable="true" />
+    <Property Name="Deleted" Type="Boolean" Nullable="true" />
     <Property Name="ExportGuid" Type="Guid" Nullable="false" />
     <Property Name="FullName" Type="String" Nullable="false" MaxLength="200" />
     <NavigationProperty Name="GenericArguments__Implementation__"
@@ -1962,6 +1963,8 @@
   </EntityType>
   <EntityType Name="ErrorListKind" BaseType="Model.ControlKind">
   </EntityType>
+  <EntityType Name="FilterKind" BaseType="Model.ControlKind">
+  </EntityType>
   <EntityType Name="GroupMembership" BaseType="Model.AccessControl">
     <NavigationProperty Name="Group__Implementation__"
                         Relationship="Model.FK_GroupMembership_has_Group"
@@ -2080,9 +2083,15 @@
                         FromRole="RoleMembership"
                         ToRole="CollectionEntry" />
   </EntityType>
+  <EntityType Name="SimpleBoolFilterKind" BaseType="Model.FilterKind">
+  </EntityType>
+  <EntityType Name="SimpleDropdownFilterKind" BaseType="Model.FilterKind">
+  </EntityType>
   <EntityType Name="SingleLineDataObjectKind" BaseType="Model.ControlKind">
   </EntityType>
   <EntityType Name="StaticFile" BaseType="Model.File">
+  </EntityType>
+  <EntityType Name="StringFilterKind" BaseType="Model.FilterKind">
   </EntityType>
   <EntityType Name="StringListKind" BaseType="Model.ControlKind">
     <NavigationProperty Name="ItemKind__Implementation__"

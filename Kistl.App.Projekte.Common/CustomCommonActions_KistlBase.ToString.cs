@@ -201,7 +201,8 @@ namespace Kistl.App.Base
 
         public static void OnToString_TypeRef(TypeRef obj, MethodReturnEventArgs<string> e)
         {
-            e.Result = String.Format("{0}{1}, {2}",
+            e.Result = String.Format("{0}{1}{2}, {3}",
+                obj.Deleted == true ? "(DELETED) " : string.Empty,
                 obj.FullName,
                 "<?>", // TODO:
                 //obj.GenericArguments.Count > 0

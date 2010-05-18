@@ -281,6 +281,26 @@
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 	    </MappingFragment>
       </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.FilterKind)">
+	    <MappingFragment StoreEntitySet="FilterKind">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.SimpleBoolFilterKind)">
+	    <MappingFragment StoreEntitySet="SimpleBoolFilterKind">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.SimpleDropdownFilterKind)">
+	    <MappingFragment StoreEntitySet="SimpleDropdownFilterKind">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.StringFilterKind)">
+	    <MappingFragment StoreEntitySet="StringFilterKind">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+	    </MappingFragment>
+      </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Model.KistlDebuggerKind)">
 	    <MappingFragment StoreEntitySet="KistlDebuggerKind">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
@@ -879,6 +899,7 @@
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+<ScalarProperty Name="Deleted" ColumnName="Deleted" />
 <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
 <ScalarProperty Name="FullName" ColumnName="FullName" />
 	    </MappingFragment>

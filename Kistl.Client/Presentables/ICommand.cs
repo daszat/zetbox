@@ -230,6 +230,128 @@ namespace Kistl.Client.Presentables
         }
 
         #endregion
-
     }
+
+    public sealed class SimpleCommandModel : CommandModel
+    {
+        public new delegate SimpleCommandModel Factory(IKistlContext dataCtx, string label, string tooltip, Action execute, Func<bool> canExecute);
+
+        private readonly Action execute;
+        private readonly Func<bool> canExecute;
+
+        public SimpleCommandModel(IViewModelDependencies appCtx, IKistlContext dataCtx, string label, string tooltip, Action execute, Func<bool> canExecute)
+            : base(appCtx, dataCtx, label, tooltip)
+        {
+            if (execute == null) throw new ArgumentNullException("execute");
+            this.execute = execute;
+            this.canExecute = canExecute;
+        }
+
+        public override bool CanExecute(object data)
+        {
+            if (canExecute == null) return true;
+            return canExecute();
+        }
+
+        protected override void DoExecute(object data)
+        {
+            execute();
+        }
+    }
+
+    public sealed class SimpleParameterCommandModel<T> : CommandModel
+    {
+        public new delegate SimpleParameterCommandModel<T> Factory(IKistlContext dataCtx, string label, string tooltip, Action<T> execute, Func<T, bool> canExecute);
+
+        private readonly Action<T> execute;
+        private readonly Func<T, bool> canExecute;
+
+        public SimpleParameterCommandModel(IViewModelDependencies appCtx, IKistlContext dataCtx, string label, string tooltip, Action<T> execute, Func<T, bool> canExecute)
+            : base(appCtx, dataCtx, label, tooltip)
+        {
+            if (execute == null) throw new ArgumentNullException("execute");
+            this.execute = execute;
+            this.canExecute = canExecute;
+        }
+
+        public override bool CanExecute(object data)
+        {
+            if (canExecute == null) return true;
+            if (data is T)
+            {
+                return canExecute((T)data);
+            }
+            else
+            {
+                return canExecute(default(T));
+            }
+        }
+
+        protected override void DoExecute(object data)
+        {
+            if (data is T)
+            {
+                execute((T)data);
+            }
+            else
+            {
+                execute(default(T));
+            }
+        }
+    }
+
+    public abstract class ItemCommandModel<T> : CommandModel
+    {
+        public ItemCommandModel(IViewModelDependencies appCtx, IKistlContext dataCtx, string label, string tooltip)
+            : base(appCtx, dataCtx, label, tooltip)
+        {
+        }
+
+        public override bool CanExecute(object data)
+        {
+            if (data is IEnumerable<T>)
+            {
+                return ((IEnumerable<T>)data).Count() > 0;
+            }
+            else return (data is T);
+        }
+
+        protected override void DoExecute(object data)
+        {
+            IEnumerable<T> objects = null;
+            if (data is IEnumerable<T>)
+            {
+                objects = (IEnumerable<T>)data;
+            }
+            else if (data is T)
+            {
+                objects = new T[] { (T)data };
+            }
+            if (objects == null) return;
+
+            DoExecute(objects);
+        }
+
+        protected abstract void DoExecute(IEnumerable<T> data);
+    }
+
+
+    public sealed class SimpleItemCommandModel<T> : ItemCommandModel<T>
+    {
+        public new delegate SimpleItemCommandModel<T> Factory(IKistlContext dataCtx, string label, string tooltip, Action<IEnumerable<T>> execute);
+
+        private readonly Action<IEnumerable<T>> execute;
+
+        public SimpleItemCommandModel(IViewModelDependencies appCtx, IKistlContext dataCtx, string label, string tooltip, Action<IEnumerable<T>> execute)
+            : base(appCtx, dataCtx, label, tooltip)
+        {
+            this.execute = execute;
+        }
+
+        protected override void DoExecute(IEnumerable<T> data)
+        {
+            execute(data);
+        }
+    }
+
 }

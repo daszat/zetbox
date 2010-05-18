@@ -126,6 +126,7 @@
     <Compile Include="Exam.Server.Designer.cs" />
     <Compile Include="Exercise.Server.Designer.cs" />
     <Compile Include="File.Server.Designer.cs" />
+    <Compile Include="FilterKind.Server.Designer.cs" />
     <Compile Include="Fragebogen.Server.Designer.cs" />
     <Compile Include="Group.Server.Designer.cs" />
     <Compile Include="GroupExcercise.Server.Designer.cs" />
@@ -172,8 +173,11 @@
     <Compile Include="RelationEnd.Server.Designer.cs" />
     <Compile Include="RoleMembership.Server.Designer.cs" />
     <Compile Include="Semester.Server.Designer.cs" />
+    <Compile Include="SimpleBoolFilterKind.Server.Designer.cs" />
+    <Compile Include="SimpleDropdownFilterKind.Server.Designer.cs" />
     <Compile Include="SingleLineDataObjectKind.Server.Designer.cs" />
     <Compile Include="StaticFile.Server.Designer.cs" />
+    <Compile Include="StringFilterKind.Server.Designer.cs" />
     <Compile Include="StringListKind.Server.Designer.cs" />
     <Compile Include="StringParameter.Server.Designer.cs" />
     <Compile Include="StringProperty.Server.Designer.cs" />

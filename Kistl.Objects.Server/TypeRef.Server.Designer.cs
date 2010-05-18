@@ -435,6 +435,58 @@ namespace Kistl.App.Base
 		public static event PropertyPostSetterHandler<Kistl.App.Base.TypeRef, DateTime?> OnCreatedOn_PostSetter;
 
         /// <summary>
+        /// If the TypeRef could not be found in the containing assembly this property is set to true, otherwise to null
+        /// </summary>
+        // value type property
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+           // Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.NotifyingDataProperty
+        public virtual bool? Deleted
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _Deleted;
+                if (OnDeleted_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<bool?>(__result);
+                    OnDeleted_Getter(this, __e);
+                    __result = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_Deleted != value)
+                {
+                    var __oldValue = _Deleted;
+                    var __newValue = value;
+                    if(OnDeleted_PreSetter != null)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<bool?>(__oldValue, __newValue);
+                        OnDeleted_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("Deleted", __oldValue, __newValue);
+                    _Deleted = __newValue;
+                    NotifyPropertyChanged("Deleted", __oldValue, __newValue);
+                    if(OnDeleted_PostSetter != null)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<bool?>(__oldValue, __newValue);
+                        OnDeleted_PostSetter(this, __e);
+                    }
+                }
+            }
+        }
+        private bool? _Deleted;
+		public static event PropertyGetterHandler<Kistl.App.Base.TypeRef, bool?> OnDeleted_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.TypeRef, bool?> OnDeleted_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.TypeRef, bool?> OnDeleted_PostSetter;
+
+        /// <summary>
         /// Export Guid
         /// </summary>
         // value type property
@@ -747,6 +799,7 @@ namespace Kistl.App.Base
 
 			me.ChangedOn = other.ChangedOn;
 			me.CreatedOn = other.CreatedOn;
+			me.Deleted = other.Deleted;
 			me.ExportGuid = other.ExportGuid;
 			me.FullName = other.FullName;
 			this._fk_Assembly = otherImpl._fk_Assembly;
@@ -841,6 +894,13 @@ namespace Kistl.App.Base
 				null,
 				obj => obj.CreatedOn,
 				(obj, val) => obj.CreatedOn = val),
+			// else
+			new CustomPropertyDescriptor<TypeRef__Implementation__, bool?>(
+				new Guid("aa1a4c98-2ae0-45d9-a343-7db43ca6430e"),
+				"Deleted",
+				null,
+				obj => obj.Deleted,
+				(obj, val) => obj.Deleted = val),
 			// else
 			new CustomPropertyDescriptor<TypeRef__Implementation__, Guid>(
 				new Guid("48430be7-e17f-48ad-ac8b-7f9cb5341318"),
@@ -938,6 +998,7 @@ namespace Kistl.App.Base
             BinarySerializer.ToStream(this._ChangedOn, binStream);
             BinarySerializer.ToStream(CreatedBy != null ? CreatedBy.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._CreatedOn, binStream);
+            BinarySerializer.ToStream(this._Deleted, binStream);
             BinarySerializer.ToStream(this._isExportGuidSet, binStream);
             if (this._isExportGuidSet) {
                 BinarySerializer.ToStream(this._ExportGuid, binStream);
@@ -966,6 +1027,7 @@ namespace Kistl.App.Base
             BinarySerializer.FromStream(out this._ChangedOn, binStream);
             BinarySerializer.FromStream(out this._fk_CreatedBy, binStream);
             BinarySerializer.FromStream(out this._CreatedOn, binStream);
+            BinarySerializer.FromStream(out this._Deleted, binStream);
             BinarySerializer.FromStream(out this._isExportGuidSet, binStream);
             if (this._isExportGuidSet) {
                 BinarySerializer.FromStream(out this._ExportGuid, binStream);
@@ -985,6 +1047,7 @@ namespace Kistl.App.Base
             XmlStreamer.ToStream(this._ChangedOn, xml, "ChangedOn", "Kistl.App.Base");
             XmlStreamer.ToStream(CreatedBy != null ? CreatedBy.ID : (int?)null, xml, "CreatedBy", "Kistl.App.Base");
             XmlStreamer.ToStream(this._CreatedOn, xml, "CreatedOn", "Kistl.App.Base");
+            XmlStreamer.ToStream(this._Deleted, xml, "Deleted", "Kistl.App.Base");
             XmlStreamer.ToStream(this._isExportGuidSet, xml, "IsExportGuidSet", "Kistl.App.Base");
             if (this._isExportGuidSet) {
                 XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
@@ -1002,6 +1065,7 @@ namespace Kistl.App.Base
             XmlStreamer.FromStream(ref this._ChangedOn, xml, "ChangedOn", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_CreatedBy, xml, "CreatedBy", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._CreatedOn, xml, "CreatedOn", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._Deleted, xml, "Deleted", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._isExportGuidSet, xml, "IsExportGuidSet", "Kistl.App.Base");
             if (this._isExportGuidSet) {
                 XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
@@ -1020,6 +1084,8 @@ namespace Kistl.App.Base
     
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._CreatedOn, xml, "CreatedOn", "Kistl.App.Base");
     
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._Deleted, xml, "Deleted", "Kistl.App.Base");
+    
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._FullName, xml, "FullName", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(Parent != null ? Parent.ExportGuid : (Guid?)null, xml, "Parent", "Kistl.App.Base");
         }
@@ -1029,6 +1095,7 @@ namespace Kistl.App.Base
             XmlStreamer.FromStream(ref this._fk_guid_Assembly, xml, "Assembly", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._ChangedOn, xml, "ChangedOn", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._CreatedOn, xml, "CreatedOn", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._Deleted, xml, "Deleted", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
             this._isExportGuidSet = true;
             XmlStreamer.FromStream(ref this._FullName, xml, "FullName", "Kistl.App.Base");

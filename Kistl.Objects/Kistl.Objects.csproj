@@ -102,6 +102,7 @@
     <Compile Include="Exam.Interface.Designer.cs" />
     <Compile Include="Exercise.Interface.Designer.cs" />
     <Compile Include="File.Interface.Designer.cs" />
+    <Compile Include="FilterKind.Interface.Designer.cs" />
     <Compile Include="Fragebogen.Interface.Designer.cs" />
     <Compile Include="Group.Interface.Designer.cs" />
     <Compile Include="GroupExcercise.Interface.Designer.cs" />
@@ -148,8 +149,11 @@
     <Compile Include="RelationEnd.Interface.Designer.cs" />
     <Compile Include="RoleMembership.Interface.Designer.cs" />
     <Compile Include="Semester.Interface.Designer.cs" />
+    <Compile Include="SimpleBoolFilterKind.Interface.Designer.cs" />
+    <Compile Include="SimpleDropdownFilterKind.Interface.Designer.cs" />
     <Compile Include="SingleLineDataObjectKind.Interface.Designer.cs" />
     <Compile Include="StaticFile.Interface.Designer.cs" />
+    <Compile Include="StringFilterKind.Interface.Designer.cs" />
     <Compile Include="StringListKind.Interface.Designer.cs" />
     <Compile Include="StringParameter.Interface.Designer.cs" />
     <Compile Include="StringProperty.Interface.Designer.cs" />

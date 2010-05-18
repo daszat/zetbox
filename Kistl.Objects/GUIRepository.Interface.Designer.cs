@@ -106,6 +106,16 @@ namespace Kistl.App.GUI
 			}
 		}
 		
+		/// <summary>List of all StringFilterKind</summary>
+		/// 
+		public IQueryable<StringFilterKind> StringFilterKinds
+		{ 
+			get
+			{
+				return Context.GetQuery<StringFilterKind>();
+			}
+		}
+		
 		/// <summary>List of all SingleLineDataObjectKind</summary>
 		/// Presents a data object in a single line
 		public IQueryable<SingleLineDataObjectKind> SingleLineDataObjectKinds
@@ -113,6 +123,26 @@ namespace Kistl.App.GUI
 			get
 			{
 				return Context.GetQuery<SingleLineDataObjectKind>();
+			}
+		}
+		
+		/// <summary>List of all SimpleDropdownFilterKind</summary>
+		/// 
+		public IQueryable<SimpleDropdownFilterKind> SimpleDropdownFilterKinds
+		{ 
+			get
+			{
+				return Context.GetQuery<SimpleDropdownFilterKind>();
+			}
+		}
+		
+		/// <summary>List of all SimpleBoolFilterKind</summary>
+		/// 
+		public IQueryable<SimpleBoolFilterKind> SimpleBoolFilterKinds
+		{ 
+			get
+			{
+				return Context.GetQuery<SimpleBoolFilterKind>();
 			}
 		}
 		
@@ -213,6 +243,16 @@ namespace Kistl.App.GUI
 			get
 			{
 				return Context.GetQuery<Icon>();
+			}
+		}
+		
+		/// <summary>List of all FilterKind</summary>
+		/// 
+		public IQueryable<FilterKind> FilterKinds
+		{ 
+			get
+			{
+				return Context.GetQuery<FilterKind>();
 			}
 		}
 		

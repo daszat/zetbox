@@ -35,6 +35,19 @@ namespace Kistl.Client.Presentables
 
     }
 
+    [AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = false)]
+    public sealed class ViewModelDescriptorAttribute : Attribute
+    {
+        public ViewModelDescriptorAttribute(string module)
+        {
+            this.Module = module;
+        }
+
+        public string Description { get; set; }
+        public string Module { get; set; }
+        public Type DefaultKind { get; set; }
+    }
+
     /// <summary>
     /// A base class for implementing the ViewModel pattern. This class proxies the actual
     /// data model into a non-blocking, view-state holding entity. Unless noted differently, members
@@ -76,6 +89,11 @@ namespace Kistl.Client.Presentables
         }
 
         #region Public interface
+
+        /// <summary>
+        /// Used to override DefaultKind in code
+        /// </summary>
+        public ControlKind RequestedControlKind { get; set; }
 
         private ModelState _State = ModelState.Active;
         public ModelState State

@@ -85,6 +85,7 @@
     <Compile Include="ClientModule.cs" />
     <Compile Include="GUI\IHasViewModel.cs" />
     <Compile Include="GUI\IRenderer.cs" />
+    <Compile Include="GUI\ViewDescriptorAttribute.cs" />
     <Compile Include="Presentables\ActionModel.cs" />
     <Compile Include="Presentables\AsyncList.cs" />
     <Compile Include="Presentables\CacheDebuggerViewModel.cs" />

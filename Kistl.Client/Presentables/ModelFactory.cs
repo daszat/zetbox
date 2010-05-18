@@ -146,7 +146,9 @@ namespace Kistl.Client.Presentables
                 .ToRef(FrozenContext.Single)
                 .GetViewModelDescriptor();
 
-            var vDesc = pmd.GetViewDescriptor(Toolkit);
+            var vDesc = mdl.RequestedControlKind != null 
+                ? pmd.GetViewDescriptor(Toolkit, mdl.RequestedControlKind)
+                : pmd.GetViewDescriptor(Toolkit);
 
             return vDesc == null
                 ? null
