@@ -25,25 +25,25 @@ namespace Kistl.DalProvider.ClientObjects.Mocks
             throw new NotImplementedException();
         }
 
-        public IEnumerable<IDataObject> GetList(IKistlContext ctx, InterfaceType ifType, int maxListCount, bool withEagerLoading, Expression filter, IEnumerable<Expression> orderBy, out List<IStreamable> auxObjects)
+        public IEnumerable<IDataObject> GetList(IKistlContext ctx, InterfaceType ifType, int maxListCount, bool withEagerLoading, IEnumerable<Expression> filter, IEnumerable<Expression> orderBy, out List<IStreamable> auxObjects)
         {
             if (ifType == null) throw new ArgumentNullException("ifType");
             if (orderBy != null) throw new ArgumentException("OrderBy is not supported yet");
 
             auxObjects = new List<IStreamable>();
-            IEnumerable<IDataObject> result;
+            IEnumerable<IDataObject> query;
 
             if (ifType == typeof(TestObjClass))
             {
-                result = GetList_TestObjClass(ctx);
+                query = GetList_TestObjClass(ctx);
             }
             else if (ifType == typeof(TestCustomObject))
             {
-                result = GetList_TestCustomObject(ctx);
+                query = GetList_TestCustomObject(ctx);
             }
             else if (ifType == typeof(Muhblah))
             {
-                result = GetList_Muhblah(ctx);
+                query = GetList_Muhblah(ctx);
             }
             else
             {
@@ -52,10 +52,14 @@ namespace Kistl.DalProvider.ClientObjects.Mocks
 
             if (filter != null)
             {
-                filter = filter.StripQuotes();
-                return result.AsQueryable().AddCast(ifType.Type).AddFilter(filter).Cast<IDataObject>().ToList();
+                var result = query.AsQueryable().AddCast(ifType.Type);
+                filter.ForEach(f => result = result.AddFilter(f.StripQuotes()));
+                return result.Cast<IDataObject>().ToList();
             }
-            return result.Cast<IDataObject>();
+            else
+            {
+                return query.Cast<IDataObject>();
+            }
         }
 
         private T CreateInstance<T>(IKistlContext ctx, int id)

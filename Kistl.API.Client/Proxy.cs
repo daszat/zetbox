@@ -20,7 +20,7 @@ namespace Kistl.API.Client
     public interface IProxy
         : IDisposable
     {
-        IEnumerable<IDataObject> GetList(IKistlContext ctx, InterfaceType ifType, int maxListCount, bool eagerLoadLists, Expression filter, IEnumerable<Expression> orderBy, out List<IStreamable> auxObjects);
+        IEnumerable<IDataObject> GetList(IKistlContext ctx, InterfaceType ifType, int maxListCount, bool eagerLoadLists, IEnumerable<Expression> filter, IEnumerable<Expression> orderBy, out List<IStreamable> auxObjects);
         IEnumerable<IDataObject> GetListOf(IKistlContext ctx, InterfaceType ifType, int ID, string property, out List<IStreamable> auxObjects);
 
         IEnumerable<IPersistenceObject> SetObjects(IKistlContext ctx, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests);
@@ -69,7 +69,7 @@ namespace Kistl.API.Client
             }
         }
 
-        public IEnumerable<IDataObject> GetList(IKistlContext ctx, InterfaceType ifType, int maxListCount, bool eagerLoadLists, Expression filter, IEnumerable<Expression> orderBy, out List<IStreamable> auxObjects)
+        public IEnumerable<IDataObject> GetList(IKistlContext ctx, InterfaceType ifType, int maxListCount, bool eagerLoadLists, IEnumerable<Expression> filter, IEnumerable<Expression> orderBy, out List<IStreamable> auxObjects)
         {
             using (Logging.Facade.InfoTraceMethodCallFormat("GetList[{0}]", ifType.ToString()))
             {
@@ -77,7 +77,7 @@ namespace Kistl.API.Client
                     ifType.ToSerializableType(),
                     maxListCount,
                     eagerLoadLists,
-                    filter != null ? SerializableExpression.FromExpression(filter, typeTrans) : null,
+                    filter != null ? filter.Select(f => SerializableExpression.FromExpression(f, typeTrans)).ToArray() : null,
                     orderBy != null ? orderBy.Select(o => SerializableExpression.FromExpression(o, typeTrans)).ToArray() : null))
                 {
                     using (var sr = new BinaryReader(s))

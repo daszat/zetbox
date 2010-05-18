@@ -25,7 +25,7 @@ using System.IO;
         /// <param name="filter">a Linq filter to apply</param>
         /// <param name="orderBy">a number of linq expressions to order by</param>
         /// <returns>the filtered and ordered list of objects, containing at most <paramref name="maxListCount"/> objects</returns>
-        IEnumerable<IStreamable> GetList(IKistlContext ctx, int maxListCount, Expression filter, List<Expression> orderBy);
+        IEnumerable<IStreamable> GetList(IKistlContext ctx, int maxListCount, List<Expression> filter, List<Expression> orderBy);
 
         /// <summary>
         /// Return the list of objects referenced by the specified property.
@@ -73,7 +73,7 @@ using System.IO;
         {
         }
 
-        public IEnumerable<IStreamable> GetList(IKistlContext ctx, int maxListCount, Expression filter, List<Expression> orderBy)
+        public IEnumerable<IStreamable> GetList(IKistlContext ctx, int maxListCount, List<Expression> filter, List<Expression> orderBy)
         {
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
 
@@ -86,7 +86,10 @@ using System.IO;
 
             if (filter != null)
             {
-                result = (IQueryable<T>)result.AddFilter(filter);
+                foreach (var f in filter)
+                {
+                    result = (IQueryable<T>)result.AddFilter(f);
+                }
             }
 
             if (orderBy != null)

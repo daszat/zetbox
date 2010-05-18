@@ -11,7 +11,7 @@ namespace Kistl.API.Client
     using System.Text;
     using Kistl.API.Client.LinqToKistl;
     using Kistl.API.Utils;
-    
+
     /// <summary>
     /// Provider for Kistl Linq Provider. See http://blogs.msdn.com/mattwar/archive/2007/07/30/linq-building-an-iqueryable-provider-part-i.aspx for details.
     /// </summary>
@@ -39,7 +39,7 @@ namespace Kistl.API.Client
         /// <summary>
         /// Filter Expression for GetList SearchType.
         /// </summary>
-        private Expression _filter = null;
+        private LinkedList<Expression> _filter = null;
         /// <summary>
         /// OrderBy Expression for GetList SearchType.
         /// </summary>
@@ -52,6 +52,14 @@ namespace Kistl.API.Client
             _context = ctx;
             _type = ifType;
             _proxy = proxy;
+        }
+
+        private void ResetState()
+        {
+            _maxListCount = API.Helper.MAXLISTCOUNT;
+            _eagerLoadLists = null;
+            _filter = null;
+            _orderBy = null;
         }
 
         #region CallService
@@ -79,6 +87,8 @@ namespace Kistl.API.Client
         #region Operations GetListOf/GetList/GetObject
         internal List<IDataObject> GetListOfCall(int ID, string propertyName)
         {
+            ResetState();
+
             List<IStreamable> auxObjects;
             List<IDataObject> serviceResult = _proxy.GetListOf(_context, _type, ID, propertyName, out auxObjects).ToList();
             List<IDataObject> result = new List<IDataObject>();
@@ -103,6 +113,8 @@ namespace Kistl.API.Client
         /// <returns></returns>
         internal T GetListCall<T>(Expression e)
         {
+            ResetState();
+
             if (Logging.Linq.IsInfoEnabled)
             {
                 Logging.Linq.Info(e.ToString());
@@ -159,6 +171,8 @@ namespace Kistl.API.Client
         /// <returns>A Object an Expeption, if the Object was not found.</returns>
         internal T GetObjectCall<T>(Expression e)
         {
+            ResetState();
+
             if (Logging.Linq.IsInfoEnabled)
             {
                 Logging.Linq.Info(e.ToString());
@@ -222,14 +236,14 @@ namespace Kistl.API.Client
         private void AddNewLocalObjectsGeneric<T>(IList result)
         {
             var list = _context.AttachedObjects.AsQueryable().Where(o => o.ObjectState == DataObjectState.New).OfType<T>();
-            if (_filter != null) list = list.AddFilter(_filter);
+            if (_filter != null) _filter.ForEach(f => list = list.AddFilter(f));
             list.ForEach<T>(i => result.Add(i));
         }
 
         private void AddLocalObjects<T>(IList result)
         {
             var list = _context.AttachedObjects.AsQueryable().Where(o => o.ObjectState != DataObjectState.Deleted).OfType<T>();
-            if (_filter != null) list = list.AddFilter(_filter);
+            if (_filter != null) _filter.ForEach(f => list = list.AddFilter(f));
             list.ForEach<T>(i => result.Add(i));
         }
         #endregion
@@ -268,8 +282,8 @@ namespace Kistl.API.Client
         {
             if (m.IsMethodCallExpression("Where"))
             {
-                if (_filter != null) throw new InvalidOperationException("Filter is already set");
-                _filter = m.Arguments[1];
+                if (_filter == null) _filter = new LinkedList<Expression>();
+                _filter.AddFirst(m.Arguments[1]);
                 base.Visit(m.Arguments[0]);
             }
             else if (m.IsMethodCallExpression("OrderBy") || m.IsMethodCallExpression("ThenBy"))
@@ -295,7 +309,10 @@ namespace Kistl.API.Client
             {
                 _maxListCount = 1;
                 if (m.Arguments.Count == 2)
-                    _filter = m.Arguments[1];
+                {
+                    if (_filter == null) _filter = new LinkedList<Expression>();
+                    _filter.AddFirst(m.Arguments[1]);
+                }
                 else
                     base.Visit(m.Arguments[0]);
             }

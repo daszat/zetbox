@@ -53,6 +53,29 @@ namespace Kistl.IntegrationTests
         }
 
         [Test]
+        public void GetList_Twice_on_same_query()
+        {
+            using (IKistlContext ctx = GetContext())
+            {
+                var query = ctx.GetQuery<ObjectClass>();
+                List<ObjectClass> list1 = query.ToList();
+                Assert.That(list1, Is.Not.Null);
+                Assert.That(list1.Count, Is.AtLeast(2));
+                list1.ForEach(obj => Assert.That(obj, Is.Not.Null));
+
+                List<ObjectClass> list2 = query.ToList();
+                Assert.That(list2, Is.Not.Null);
+                Assert.That(list2.Count, Is.EqualTo(list1.Count));
+                list2.ForEach(obj => Assert.That(obj, Is.Not.Null));
+
+                for (int i = 0; i < list1.Count; i++)
+                {
+                    Assert.That(object.ReferenceEquals(list1[i], list2[i]), "list1[i] & list2[i] are different Objects");
+                }
+            }
+        }
+
+        [Test]
         public void GetObject_GetList()
         {
             using (IKistlContext ctx = GetContext())
@@ -108,6 +131,29 @@ namespace Kistl.IntegrationTests
             using (IKistlContext ctx = GetContext())
             {
                 var list = ctx.GetQuery<ObjectClass>().Where(o => o.Module.Name == "KistlBase").Take(10).ToList();
+                Assert.That(list.Count, Is.EqualTo(10));
+            }
+        }
+
+        [Test]
+        public void GetListWithTakeAndWhere_Twice()
+        {
+            using (IKistlContext ctx = GetContext())
+            {
+                var query = ctx.GetQuery<ObjectClass>();
+                var list1 = query.Where(o => o.Module.Name == "KistlBase").Take(10).ToList();
+                var list2 = query.Where(o => o.Module.Name == "KistlBase").Take(10).ToList();
+                Assert.That(list1.Count, Is.EqualTo(10));
+                Assert.That(list2.Count, Is.EqualTo(10));
+            }
+        }
+
+        [Test]
+        public void GetListWithTakeAndMultipleWhere()
+        {
+            using (IKistlContext ctx = GetContext())
+            {
+                var list = ctx.GetQuery<ObjectClass>().Where(o => o.Module.Name == "KistlBase").Where(o => o.Name.Contains("a")).Take(10).ToList();
                 Assert.That(list.Count, Is.EqualTo(10));
             }
         }

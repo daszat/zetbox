@@ -43,7 +43,7 @@ namespace Kistl.API
         /// <returns>the found objects</returns>
         [OperationContract]
         [FaultContract(typeof(Exception))]
-        MemoryStream GetList(SerializableType type, int maxListCount, bool eagerLoadLists, SerializableExpression filter, List<SerializableExpression> orderBy);
+        MemoryStream GetList(SerializableType type, int maxListCount, bool eagerLoadLists, List<SerializableExpression> filter, List<SerializableExpression> orderBy);
 
         /// <summary>
         /// returns a list of objects referenced by a specified Property. Use an equivalent query in GetList() instead.
