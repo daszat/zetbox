@@ -15,6 +15,7 @@ namespace Kistl.Client.WPF.View.KistlBase
     using System.Windows.Navigation;
     using System.Windows.Shapes;
 
+    using Kistl.API;
     using Kistl.API.Client;
     using Kistl.App.Base;
     using Kistl.Client.Presentables;
@@ -60,28 +61,14 @@ namespace Kistl.Client.WPF.View.KistlBase
                 return;
             }
 
-            ViewModel.OpenObject(new DataObjectModel[] { dataObject });
+            ViewModel.OpenObjects(new DataObjectModel[] { dataObject });
             e.Handled = true;
         }
 
-        private void Open_Click(object sender, RoutedEventArgs e)
+        private void ClassList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ViewModel.OpenObject(ClassList.SelectedItems.OfType<DataObjectModel>());
-        }
-
-        private void Refresh_Click(object sender, RoutedEventArgs e)
-        {
-            ViewModel.ReloadInstances();
-        }
-
-        private void Edit_Click(object sender, RoutedEventArgs e)
-        {
-            ViewModel.EditClass();
-        }
-
-        private void New_Click(object sender, RoutedEventArgs e)
-        {
-            ViewModel.NewObject();
+            e.RemovedItems.ForEach<DataObjectModel>(i => ViewModel.SelectedItems.Remove(i));            
+            e.AddedItems.ForEach<DataObjectModel>(i => ViewModel.SelectedItems.Add(i));
         }
 
         #region IHasViewModel<DataTypeModel> Members

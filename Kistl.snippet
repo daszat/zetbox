@@ -16,11 +16,12 @@
           <Default>NewCommand</Default>
         </Literal>
       </Declarations>
-      <Code Language="CSharp" Kind="method body"><![CDATA[public class $Name$ : CommandModel
+      <Code Language="CSharp" Kind="method body">
+  <![CDATA[public class $Name$ : CommandModel
     {
         public new delegate $Name$ Factory(IKistlContext dataCtx);
 
-        public OpenCommand(IViewModelDependencies appCtx, IKistlContext dataCtx)
+        public $Name$(IViewModelDependencies appCtx, IKistlContext dataCtx)
             : base(appCtx, dataCtx, "", "")
         {
         }

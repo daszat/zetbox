@@ -20,7 +20,7 @@ namespace Kistl.Client.Presentables.KistlBase
     /// Models the specialities of <see cref="DataType"/>s.
     /// </summary>
     public class InstanceListViewModel
-        : ViewModel, IViewModelWithIcon
+        : ViewModel, IViewModelWithIcon, IRefreshCommandListener
     {
         public new delegate InstanceListViewModel Factory(IKistlContext dataCtx, DataType type);
 
@@ -47,6 +47,11 @@ namespace Kistl.Client.Presentables.KistlBase
 
             // Add default filter for all
             this.Filter.Add(ModelFactory.CreateViewModel<NameFilterExpression.Factory>().Invoke(dataCtx, "Name", null));
+
+            // Add default actions
+            Commands.Add(ModelFactory.CreateViewModel<NewDataObjectCommand.Factory>().Invoke(dataCtx, _type));
+            Commands.Add(ModelFactory.CreateViewModel<OpenDataObjectCommand.Factory>().Invoke(dataCtx));
+            Commands.Add(ModelFactory.CreateViewModel<RefreshCommand.Factory>().Invoke(dataCtx, this));
         }
 
         #region Public interface
@@ -88,6 +93,19 @@ namespace Kistl.Client.Presentables.KistlBase
                 {
                     return _filter.OfType<IUIFilterExpression>();
                 }
+            }
+        }
+
+        private ObservableCollection<ICommand> _commands = null;
+        public ICollection<ICommand> Commands
+        {
+            get
+            {
+                if (_commands == null)
+                {
+                    _commands = new ObservableCollection<ICommand>();
+                }
+                return _commands;
             }
         }
 
@@ -135,6 +153,23 @@ namespace Kistl.Client.Presentables.KistlBase
             }
         }
 
+        private ObservableCollection<DataObjectModel> _selectedItems = null;
+        public ObservableCollection<DataObjectModel> SelectedItems
+        {
+            get
+            {
+                if (_selectedItems == null)
+                {
+                    _selectedItems = new ObservableCollection<DataObjectModel>();
+                }
+                return _selectedItems;
+            }
+            set
+            {
+                _selectedItems = value;
+                OnPropertyChanged("SelectedItems");
+            }
+        }
         /// <summary>
         /// Reload instances from context.
         /// </summary>
@@ -148,14 +183,6 @@ namespace Kistl.Client.Presentables.KistlBase
             }
         }
 
-        /// <summary>
-        /// Gets the ID of the modelled DataType.
-        /// </summary>
-        public int TypeId
-        {
-            get { return _type.ID; }
-        }
-
         public InterfaceType InterfaceType
         {
             get
@@ -164,7 +191,7 @@ namespace Kistl.Client.Presentables.KistlBase
             }
         }
 
-        public void OpenObject(IEnumerable<DataObjectModel> objects)
+        public void OpenObjects(IEnumerable<DataObjectModel> objects)
         {
             if (objects == null) throw new ArgumentNullException("objects");
 
@@ -173,24 +200,6 @@ namespace Kistl.Client.Presentables.KistlBase
             {
                 newWorkspace.ShowForeignModel(item);
             }
-            ModelFactory.ShowModel(newWorkspace, true);
-        }
-
-        public void NewObject()
-        {
-            var newCtx = ctxFactory();
-            var newWorkspace = ModelFactory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(newCtx);
-            var newObj = newCtx.Create(this.InterfaceType);
-            newWorkspace.ShowForeignModel(ModelFactory.CreateViewModel<DataObjectModel.Factory>(newObj).Invoke(newCtx, newObj));
-            ModelFactory.ShowModel(newWorkspace, true);
-        }
-
-        public void EditClass()
-        {
-            var newCtx = ctxFactory();
-            var objClass = newCtx.Find<DataType>(this.TypeId);
-            var newWorkspace = ModelFactory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(newCtx);
-            newWorkspace.ShowForeignModel(ModelFactory.CreateViewModel<DataObjectModel.Factory>(objClass).Invoke(newCtx, objClass));
             ModelFactory.ShowModel(newWorkspace, true);
         }
 
@@ -287,5 +296,14 @@ namespace Kistl.Client.Presentables.KistlBase
         #endregion
 
         private DataType _type;
+
+        #region IRefreshCommandListener Members
+
+        void IRefreshCommandListener.Refresh()
+        {
+            ReloadInstances();
+        }
+
+        #endregion
     }
 }

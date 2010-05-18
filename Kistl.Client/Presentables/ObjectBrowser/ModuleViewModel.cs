@@ -52,7 +52,9 @@ namespace Kistl.Client.Presentables.ObjectBrowser
                 .OrderBy(dt => dt.Name);
             foreach (var dt in datatypes)
             {
-                ObjectClasses.Add(ModelFactory.CreateViewModel<InstanceListViewModel.Factory>().Invoke(DataContext, dt));
+                var mdl = ModelFactory.CreateViewModel<InstanceListViewModel.Factory>().Invoke(DataContext, dt);
+                mdl.Commands.Add(ModelFactory.CreateViewModel<EditDataObjectClassCommand.Factory>().Invoke(DataContext, dt));
+                ObjectClasses.Add(mdl);
             }
         }
 
