@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>CommandModel snippet</Title>
+      <Author>dasz.at OG</Author>
+      <Description>Inserts an CommandModel.</Description>
+      <Shortcut>cmdmdl</Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>Name</ID>
+          <Type>String</Type>
+          <ToolTip>Replace with an name.</ToolTip>
+          <Default>NewCommand</Default>
+        </Literal>
+      </Declarations>
+      <Code Language="CSharp" Kind="method body"><![CDATA[public class $Name$ : CommandModel
+    {
+        public new delegate $Name$ Factory(IKistlContext dataCtx);
+
+        public OpenCommand(IViewModelDependencies appCtx, IKistlContext dataCtx)
+            : base(appCtx, dataCtx, "", "")
+        {
+        }
+
+        public override bool CanExecute(object data)
+        {
+            return true;
+        }
+
+        protected override void DoExecute(object data)
+        {
+            // TODO: Add command logic here
+        }
+    }]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>
