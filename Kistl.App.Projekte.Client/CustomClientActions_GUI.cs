@@ -53,7 +53,7 @@ namespace Kistl.App.GUI
         {
             e.Result = String.Format("{0}/{1}: {2}",
                 obj.Toolkit,
-                obj.Kind != null ? obj.Kind.Name : "(unknown kind)",
+                obj.ControlKind != null ? obj.ControlKind.Name : "(unknown kind)",
                 obj.ControlRef == null
                     ? "(none)"
                     : obj.ControlRef.ToString());

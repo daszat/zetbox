@@ -28,7 +28,7 @@ namespace Kistl.Client.WPF.View
         /// </summary>
         public static ITypeTransformations TypeTrans { get; set; }
 
-        private static DataTemplate SelectTemplate(ViewModel mdl, string controlKindClassName)
+        private static DataTemplate SelectTemplate(ViewModel mdl, string controlKindName)
         {
             if (mdl == null) { throw new ArgumentNullException("mdl"); }
 
@@ -39,8 +39,8 @@ namespace Kistl.Client.WPF.View
                 return null;
             }
 
-            var ckcInterface = TypeTrans.AsInterfaceType(controlKindClassName);
-            return CreateTemplate(pmd.GetViewDescriptor(Toolkit.WPF, ckcInterface));
+            var ck = FrozenContext.Single.GetQuery<ControlKind>().SingleOrDefault(c => c.Name == controlKindName);
+            return CreateTemplate(pmd.GetViewDescriptor(Toolkit.WPF, ck));
         }
 
         private static DataTemplate SelectTemplate(ViewModel mdl, ControlKind controlKind)

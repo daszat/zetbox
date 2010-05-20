@@ -88,9 +88,9 @@ namespace Kistl.App.Base
                                 descr.ViewModelRef = tr;
                                 descr.Module = ctx.GetQuery<Module>().First(i => i.Name == attr.Module);
                                 descr.Description = string.IsNullOrEmpty(attr.Description) ? "TODO: Add description" : attr.Description;
-                                if (attr.DefaultKind != null)
+                                if (!string.IsNullOrEmpty(attr.DefaultKind))
                                 {
-                                    descr.DefaultKind = (ControlKind)ctx.Create(ctx.GetInterfaceType(attr.DefaultKind.ToRef(ctx, oldTypes).AsType(true)));
+                                    descr.DefaultKind = ctx.GetQuery<ControlKind>().FirstOrDefault(c => c.Name == attr.DefaultKind);
                                 }
                             }
                         }
@@ -118,9 +118,9 @@ namespace Kistl.App.Base
                                 descr.ControlRef = tr;
                                 descr.Module = ctx.GetQuery<Module>().First(i => i.Name == attr.Module);
                                 descr.Toolkit = attr.Toolkit;
-                                if (attr.Kind != null)
+                                if (!string.IsNullOrEmpty(attr.Kind))
                                 {
-                                    descr.Kind = (ControlKindClass)ctx.GetInterfaceType(attr.Kind).GetObjectClass(ctx);
+                                    descr.ControlKind = ctx.GetQuery<ControlKind>().FirstOrDefault(c => c.Name == attr.Kind);
                                 }
                             }
                         }

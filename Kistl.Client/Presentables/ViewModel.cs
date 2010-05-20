@@ -45,7 +45,7 @@ namespace Kistl.Client.Presentables
 
         public string Description { get; set; }
         public string Module { get; set; }
-        public Type DefaultKind { get; set; }
+        public string DefaultKind { get; set; }
     }
 
     /// <summary>

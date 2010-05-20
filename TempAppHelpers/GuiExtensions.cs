@@ -50,7 +50,7 @@ namespace Kistl.App.Extensions
             if (self == null) throw new ArgumentNullException("self");
             PrimeCaches(tk, self.ReadOnlyContext);
 
-            var key = new ViewDescriptorCache.Key(self.ViewModelRef, tk, ck != null ? (InterfaceType?)ck.ReadOnlyContext.GetInterfaceType(ck) : null);
+            var key = new ViewDescriptorCache.Key(self.ViewModelRef, tk, ck);
             if (_viewDescriptorCache.ContainsKey(key)) return _viewDescriptorCache[key];
 
             ViewDescriptor result = null;
@@ -58,7 +58,7 @@ namespace Kistl.App.Extensions
             ICollection<ViewDescriptor> candidates;
             if (ck != null)
             {
-                candidates = _viewCaches[tk].GetDescriptors(ck.ReadOnlyContext.GetInterfaceType(ck));
+                candidates = _viewCaches[tk].GetDescriptors(ck);
             }
             else
             {
@@ -67,7 +67,14 @@ namespace Kistl.App.Extensions
 
             if (candidates.Count == 0)
             {
-                Logging.Log.WarnFormat("Couldn't find ViewDescriptor for '{1}' matching ControlKind: '{0}'", ck, self.GetType().FullName);
+                if (ck.Parent != null)
+                {
+                    return GetViewDescriptor(self, tk, ck.Parent);
+                }
+                else
+                {
+                    Logging.Log.WarnFormat("Couldn't find ViewDescriptor for '{1}' matching ControlKind: '{0}'", ck, self.GetType().FullName);
+                }
             }
             else if (candidates.Count == 1)
             {
@@ -88,7 +95,14 @@ namespace Kistl.App.Extensions
                 // Log a warning if nothing found
                 if (match == null)
                 {
-                    Logging.Log.WarnFormat("Couldn't find ViewDescriptor for '{1}' matching ControlKind: '{0}'", ck, self.GetType().FullName);
+                    if (ck.Parent != null)
+                    {
+                        return GetViewDescriptor(self, tk, ck.Parent);
+                    }
+                    else
+                    {
+                        Logging.Log.WarnFormat("Couldn't find ViewDescriptor for '{1}' matching ControlKind: '{0}'", ck, self.GetType().FullName);
+                    }
                 }
                 result = match;
             }
@@ -116,48 +130,49 @@ namespace Kistl.App.Extensions
             return allTypes;
         }
 
-        public static ViewDescriptor GetViewDescriptor(
-            this ViewModelDescriptor self,
-            Toolkit tk,
-            InterfaceType ckcInterface)
-        {
-            ViewDescriptor visualDesc;
-            if (ckcInterface == null)
-            {
-                visualDesc = GetViewDescriptor(self, tk);
-            }
-            else
-            {
-                var defaultKind = self.GetDefaultKind();
-                if (defaultKind != null && ckcInterface.IsAssignableFrom(defaultKind.ReadOnlyContext.GetInterfaceType(defaultKind)))
-                {
-                    visualDesc = GetViewDescriptor(self, tk);
-                }
-                else
-                {
-                    ControlKind controlKind = self.SecondaryControlKinds.Where(ck => ckcInterface.IsAssignableFrom(ck.ReadOnlyContext.GetInterfaceType(ck))).SingleOrDefault();
-                    if (controlKind == null && self.ViewModelRef.Parent != null)
-                    {
-                        var parentDescriptor = self.ViewModelRef.Parent.GetViewModelDescriptor();
-                        if (parentDescriptor != null)
-                        {
-                            // recursively iterate up the inheritance tree
-                            visualDesc = GetViewDescriptor(parentDescriptor, tk, ckcInterface);
-                        }
-                        else
-                        {
-                            Logging.Log.WarnFormat("Couldn't find matching controlKind: '{0}'", ckcInterface);
-                            visualDesc = null;
-                        }
-                    }
-                    else
-                    {
-                        visualDesc = GetViewDescriptor(self, tk, controlKind);
-                    }
-                }
-            }
-            return visualDesc;
-        }
+        //public static ViewDescriptor GetViewDescriptor(
+        //    this ViewModelDescriptor self,
+        //    Toolkit tk,
+        //    InterfaceType ck)
+        //{
+        //    ViewDescriptor visualDesc;
+        //    if (ck == null)
+        //    {
+        //        visualDesc = GetViewDescriptor(self, tk);
+        //    }
+        //    else
+        //    {
+        //        var allControlKinds = ck.AndParents();
+        //        var defaultKind = self.GetDefaultKind();
+        //        if (defaultKind != null && allControlKinds.Contains(defaultKind))
+        //        {
+        //            visualDesc = GetViewDescriptor(self, tk);
+        //        }
+        //        else
+        //        {
+        //            ControlKind controlKind = self.SecondaryControlKinds.Where(sck => allControlKinds.Contains(sck)).SingleOrDefault();
+        //            if (controlKind == null && self.ViewModelRef.Parent != null)
+        //            {
+        //                var parentDescriptor = self.ViewModelRef.Parent.GetViewModelDescriptor();
+        //                if (parentDescriptor != null)
+        //                {
+        //                    // recursively iterate up the inheritance tree
+        //                    visualDesc = GetViewDescriptor(parentDescriptor, tk, controlKind);
+        //                }
+        //                else
+        //                {
+        //                    Logging.Log.WarnFormat("Couldn't find matching controlKind: '{0}'", ck.Name);
+        //                    visualDesc = null;
+        //                }
+        //            }
+        //            else
+        //            {
+        //                visualDesc = GetViewDescriptor(self, tk, controlKind);
+        //            }
+        //        }
+        //    }
+        //    return visualDesc;
+        //}
 
         /// <summary>
         /// Returns the default control kind of a given ViewModelDescriptor.
@@ -196,6 +211,19 @@ namespace Kistl.App.Extensions
                 {
                     result.Add(parentDescriptor);
                 }
+                parent = parent.Parent;
+            }
+            return result;
+        }
+
+        public static List<ControlKind> AndParents(this ControlKind ck)
+        {
+            var result = new List<ControlKind>();
+            result.Add(ck);
+            var parent = ck.Parent;
+            while (parent != null)
+            {
+                result.Add(parent);
                 parent = parent.Parent;
             }
             return result;
@@ -270,7 +298,7 @@ namespace Kistl.App.Extensions
         {
             private Content() { }
 
-            private Dictionary<InterfaceType, ReadOnlyCollection<ViewDescriptor>> _vdCache = new Dictionary<InterfaceType, ReadOnlyCollection<ViewDescriptor>>();
+            private Dictionary<Guid, ReadOnlyCollection<ViewDescriptor>> _vdCache = new Dictionary<Guid, ReadOnlyCollection<ViewDescriptor>>();
             private ReadOnlyCollection<ViewDescriptor> _allVDCache = null;
 
             private static readonly ReadOnlyCollection<ViewDescriptor> EmptyList = new ReadOnlyCollection<ViewDescriptor>(new List<ViewDescriptor>(0));
@@ -284,17 +312,17 @@ namespace Kistl.App.Extensions
                     ctx.GetQuery<ViewDescriptor>().WithEagerLoading().Where(obj => obj.Toolkit == tk).ToList());
                 
                 // Dictionary by Kind
-                result._vdCache = result._allVDCache.Where(obj => obj.Kind != null).GroupBy(obj => obj.Kind)
-                    .ToDictionary(g => g.Key.GetDescribedInterfaceType(), g => new ReadOnlyCollection<ViewDescriptor>(g.ToList()));
+                result._vdCache = result._allVDCache.Where(obj => obj.ControlKind != null).GroupBy(obj => obj.ControlKind)
+                    .ToDictionary(g => g.Key.ExportGuid, g => new ReadOnlyCollection<ViewDescriptor>(g.ToList()));
                 
                 return result;
             }
 
-            public ReadOnlyCollection<ViewDescriptor> GetDescriptors(InterfaceType cls)
+            public ReadOnlyCollection<ViewDescriptor> GetDescriptors(ControlKind c)
             {
-                if (_vdCache.ContainsKey(cls))
+                if (_vdCache.ContainsKey(c.ExportGuid))
                 {
-                    return _vdCache[cls];
+                    return _vdCache[c.ExportGuid];
                 }
                 else
                 {
@@ -345,16 +373,16 @@ namespace Kistl.App.Extensions
         {
             public Key( TypeRef vmd,
                         Toolkit tk,
-                        InterfaceType? ck)
+                        ControlKind ck)
             {
                 this.vmd = vmd;
                 this.tk = tk;
-                this.ck = ck;
+                this.ck = ck != null ? ck.ExportGuid : Guid.Empty;
             }
 
             private readonly TypeRef vmd;
             private readonly Toolkit tk;
-            private readonly InterfaceType? ck;
+            private readonly Guid ck;
 
             public override bool Equals(object obj)
             {
@@ -368,7 +396,7 @@ namespace Kistl.App.Extensions
             public override int GetHashCode()
             {
                 return vmd.AsType(true).GetHashCode()
-                    + (ck.HasValue ? ck.Value.Type.GetHashCode() : 0)
+                    + (ck != null ? ck.GetHashCode() : 0)
                     + (int)this.tk;
             }
         }

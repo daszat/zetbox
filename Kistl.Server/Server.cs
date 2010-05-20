@@ -221,24 +221,26 @@ namespace Kistl.Server
                 var ctx = subContainer.Resolve<IKistlServerContext>();
                 //Log.Info("Currently no fixes to do");
 
-                //foreach (var ck in ctx.GetQuery<ControlKind>())
+                foreach (var ck in ctx.GetQuery<ControlKind>())
+                {
+                    var ckc = ck.GetObjectClass(ctx);
+                    ck.Name = ckc.Module.Namespace + "." + ckc.Name;
+
+                    //var parent = ckc.BaseObjectClass;
+                    //if (parent != null)
+                    //{
+                    //    ck.Parent = ctx.GetQuery<ControlKind>().FirstOrDefault(c => c.Name == parent.Name);
+                    //}
+                }
+
+                //foreach (var vd in ctx.GetQuery<ViewDescriptor>())
                 //{
-                //    var ckc = ck.GetObjectClass(ctx);
-                //    var parent = ckc.BaseObjectClass;
-                //    if(parent != null)
+                //    if (vd.Kind != null)
                 //    {
-                //        ck.Parent = ctx.GetQuery<ControlKind>().FirstOrDefault(c => c.Name == parent.Name);
+                //        string name = vd.Kind.Name;
+                //        vd.ControlKind = ctx.GetQuery<ControlKind>().FirstOrDefault(c => c.Name == name);
                 //    }
                 //}
-
-                foreach (var vd in ctx.GetQuery<ViewDescriptor>())
-                {
-                    if (vd.Kind != null)
-                    {
-                        string name = vd.Kind.Name;
-                        vd.ControlKind = ctx.GetQuery<ControlKind>().FirstOrDefault(c => c.Name == name);
-                    }
-                }
 
                 //var usedControlKinds = ctx.GetQuery<ViewModelDescriptor>().Select(vmd => vmd.DefaultKind).ToList();
                 //usedControlKinds.AddRange(ctx.GetQuery<ViewModelDescriptor>().Select(vmd => vmd.DefaultGridCellKind).ToList());

@@ -15,7 +15,7 @@ namespace Kistl.Client.GUI
         }
 
         public string Module { get; set; }
-        public Type Kind { get; set; }
+        public string Kind { get; set; }
         public Kistl.App.GUI.Toolkit Toolkit { get; set; }
     }
 }

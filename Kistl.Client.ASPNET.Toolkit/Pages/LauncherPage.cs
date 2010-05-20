@@ -37,8 +37,8 @@ namespace Kistl.Client.ASPNET.Toolkit.Pages
         {
             var mdl = KistlContextManagerModule.ModelFactory
                 .CreateViewModel<WorkspaceViewModel.Factory>().Invoke(KistlContextManagerModule.KistlContext);
-            LauncherKind launcher = KistlContextManagerModule.KistlContext.Create<LauncherKind>();
-            //ctrlMainContent.Controls.Add((Control)GuiApplicationContext.Current.Factory.CreateSpecificView(mdl, launcher));
+            ControlKind launcher = KistlContextManagerModule.KistlContext.FindPersistenceObject<ControlKind>(new Guid("90D5FF7F-0C82-4278-BB8D-49C240F6BC2C"));
+            KistlContextManagerModule.ModelFactory.CreateSpecificView(mdl, launcher, ctrlMainContent);
         }
     }
 }

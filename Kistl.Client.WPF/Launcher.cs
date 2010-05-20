@@ -49,7 +49,7 @@ namespace Kistl.Client.WPF
                 initialWorkspace = mdlFactory.CreateViewModel<WorkspaceViewModel.Factory>().Invoke(ctxFactory.Invoke());
             }
 
-            LauncherKind launcher = ctx.Create<LauncherKind>();
+            ControlKind launcher = ctx.FindPersistenceObject<ControlKind>(new Guid("90D5FF7F-0C82-4278-BB8D-49C240F6BC2C"));
             mdlFactory.ShowModel(initialWorkspace, launcher, true);
         }
     }
