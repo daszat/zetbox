@@ -251,6 +251,21 @@ using Kistl.DalProvider.EF;
 
 
 	/*
+    Relation: FK_ChildControlKinds_have_a_Parent
+    A: ZeroOrMore ControlKind as ChildControlKinds
+    B: ZeroOrOne ControlKind as Parent
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_ChildControlKinds_have_a_Parent",
+    "ChildControlKinds", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.ControlKind__Implementation__),
+    "Parent", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.GUI.ControlKind__Implementation__)
+    )]
+
+
+	/*
     Relation: FK_ClrObjectParameter_isOf_Type
     A: ZeroOrMore CLRObjectParameter as ClrObjectParameter
     B: One TypeRef as Type
@@ -397,6 +412,21 @@ using Kistl.DalProvider.EF;
     "Model", "FK_Control_isof_Kind",
     "Control", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.ViewDescriptor__Implementation__),
     "Kind", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.GUI.ControlKindClass__Implementation__)
+    )]
+
+
+	/*
+    Relation: FK_ControlKind_has_Module
+    A: ZeroOrMore ControlKind as ControlKind
+    B: ZeroOrOne Module as Module
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_ControlKind_has_Module",
+    "ControlKind", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.ControlKind__Implementation__),
+    "Module", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Module__Implementation__)
     )]
 
 
@@ -1341,7 +1371,7 @@ using Kistl.DalProvider.EF;
 
 	/*
     Relation: FK_Presentable_has_DefaultKind
-    A: ZeroOrOne ViewModelDescriptor as Presentable
+    A: ZeroOrMore ViewModelDescriptor as Presentable
     B: ZeroOrOne ControlKind as DefaultKind
     Preferred Storage: MergeIntoA
 	*/
@@ -1349,7 +1379,7 @@ using Kistl.DalProvider.EF;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_Presentable_has_DefaultKind",
-    "Presentable", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.GUI.ViewModelDescriptor__Implementation__),
+    "Presentable", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.ViewModelDescriptor__Implementation__),
     "DefaultKind", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.GUI.ControlKind__Implementation__)
     )]
 
@@ -1943,6 +1973,21 @@ using Kistl.DalProvider.EF;
 
 
 	/*
+    Relation: FK_ViewDescriptor_is_a_ControlKind
+    A: ZeroOrMore ViewDescriptor as ViewDescriptor
+    B: ZeroOrOne ControlKind as ControlKind
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_ViewDescriptor_is_a_ControlKind",
+    "ViewDescriptor", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.ViewDescriptor__Implementation__),
+    "ControlKind", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.GUI.ControlKind__Implementation__)
+    )]
+
+
+	/*
     Relation: FK_ViewDescriptor_supports_ViewModelTypeRefs
     A: ZeroOrMore ViewDescriptor as ViewDescriptor
     B: ZeroOrMore TypeRef as ViewModelTypeRefs
@@ -1962,7 +2007,7 @@ using Kistl.DalProvider.EF;
 
 	/*
     Relation: FK_ViewModelDescriptor_displayedInGridBy_DefaultGridCellKind
-    A: ZeroOrOne ViewModelDescriptor as ViewModelDescriptor
+    A: ZeroOrMore ViewModelDescriptor as ViewModelDescriptor
     B: ZeroOrOne ControlKind as DefaultGridCellKind
     Preferred Storage: MergeIntoA
 	*/
@@ -1970,7 +2015,7 @@ using Kistl.DalProvider.EF;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_ViewModelDescriptor_displayedInGridBy_DefaultGridCellKind",
-    "ViewModelDescriptor", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.GUI.ViewModelDescriptor__Implementation__),
+    "ViewModelDescriptor", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.ViewModelDescriptor__Implementation__),
     "DefaultGridCellKind", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.GUI.ControlKind__Implementation__)
     )]
 

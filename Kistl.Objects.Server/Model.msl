@@ -228,7 +228,7 @@
 	    <MappingFragment StoreEntitySet="ControlKind">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
-<ScalarProperty Name="RequestedWidth" ColumnName="RequestedWidth" />
+<ScalarProperty Name="Name" ColumnName="Name" />
 	    </MappingFragment>
       </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Model.ActionKind)">
@@ -1954,6 +1954,23 @@
       <Condition ColumnName="fk_Parent" IsNull="false"/>
     </AssociationSetMapping>
     <!--
+    Relation: FK_ChildControlKinds_have_a_Parent
+    A: ZeroOrMore ControlKind as ChildControlKinds
+    B: ZeroOrOne ControlKind as Parent
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_ChildControlKinds_have_a_Parent"
+                           TypeName="Model.FK_ChildControlKinds_have_a_Parent"
+                           StoreEntitySet="ControlKind" >
+      <EndProperty Name="Parent">
+        <ScalarProperty Name="ID" ColumnName="fk_Parent"/>
+      </EndProperty>
+      <EndProperty Name="ChildControlKinds">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_Parent" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
     Relation: FK_ClrObjectParameter_isOf_Type
     A: ZeroOrMore CLRObjectParameter as ClrObjectParameter
     B: One TypeRef as Type
@@ -2122,6 +2139,23 @@
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="fk_Kind" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_ControlKind_has_Module
+    A: ZeroOrMore ControlKind as ControlKind
+    B: ZeroOrOne Module as Module
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_ControlKind_has_Module"
+                           TypeName="Model.FK_ControlKind_has_Module"
+                           StoreEntitySet="ControlKind" >
+      <EndProperty Name="Module">
+        <ScalarProperty Name="ID" ColumnName="fk_Module"/>
+      </EndProperty>
+      <EndProperty Name="ControlKind">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_Module" IsNull="false"/>
     </AssociationSetMapping>
     <!--
     Relation: FK_DataType_has_DefaultIcon
@@ -3026,7 +3060,7 @@
     </AssociationSetMapping>
     <!--
     Relation: FK_Presentable_has_DefaultKind
-    A: ZeroOrOne ViewModelDescriptor as Presentable
+    A: ZeroOrMore ViewModelDescriptor as Presentable
     B: ZeroOrOne ControlKind as DefaultKind
     Preferred Storage: MergeIntoA
     -->
@@ -3586,8 +3620,25 @@
       <Condition ColumnName="fk_Module" IsNull="false"/>
     </AssociationSetMapping>
     <!--
+    Relation: FK_ViewDescriptor_is_a_ControlKind
+    A: ZeroOrMore ViewDescriptor as ViewDescriptor
+    B: ZeroOrOne ControlKind as ControlKind
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_ViewDescriptor_is_a_ControlKind"
+                           TypeName="Model.FK_ViewDescriptor_is_a_ControlKind"
+                           StoreEntitySet="ViewDescriptor" >
+      <EndProperty Name="ControlKind">
+        <ScalarProperty Name="ID" ColumnName="fk_ControlKind"/>
+      </EndProperty>
+      <EndProperty Name="ViewDescriptor">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_ControlKind" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
     Relation: FK_ViewModelDescriptor_displayedInGridBy_DefaultGridCellKind
-    A: ZeroOrOne ViewModelDescriptor as ViewModelDescriptor
+    A: ZeroOrMore ViewModelDescriptor as ViewModelDescriptor
     B: ZeroOrOne ControlKind as DefaultGridCellKind
     Preferred Storage: MergeIntoA
     -->

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2010-05-18T17:16:27.967Z" xmlns="http://dasz.at/Kistl">
+<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2010-05-20T15:27:31.817Z" xmlns="http://dasz.at/Kistl">
   <KistlBase:Module ExportGuid="110acbc0-652a-4adc-9de5-8baabfcf3637">
     <KistlBase:ChangedOn>2010-02-01T16:07:00.49Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2010-02-01T15:23:35.247Z</KistlBase:CreatedOn>
@@ -1428,12 +1428,14 @@
     <GUI:ViewModelRef>e164a931-9040-472d-a1ae-79a20d706ace</GUI:ViewModelRef>
   </GUI:ViewModelDescriptor>
   <GUI:ViewDescriptor ExportGuid="eff0da6d-04b6-4e53-9be6-2b04baad83fb">
+    <GUI:ControlKind>4e7a8b0b-0c8e-49e1-aa35-d3a9ec7b8e4c</GUI:ControlKind>
     <GUI:ControlRef>3e6cd159-fdaf-48fe-9147-05014ffc0d8e</GUI:ControlRef>
     <GUI:Kind>bf9cd569-9765-4b7c-a1f8-3eac16f48f71</GUI:Kind>
     <GUI:Module>0fe1ab38-860a-414f-a599-b0b86a22ce1a</GUI:Module>
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="a2d6a70e-093b-4984-8c3a-e2570b7f990f">
+    <GUI:ControlKind>66c71e86-39d1-4a19-a3c7-11b03168f598</GUI:ControlKind>
     <GUI:ControlRef>2aabe45d-679f-42c9-adf3-4447e4c9f6f9</GUI:ControlRef>
     <GUI:Kind>540759af-a9ba-4cba-bcdb-8fab22423cd9</GUI:Kind>
     <GUI:Module>0fe1ab38-860a-414f-a599-b0b86a22ce1a</GUI:Module>
@@ -2491,6 +2493,10 @@
     <KistlBase:A>a9166f1e-9233-4d2d-8eb6-be71d724ea14</KistlBase:A>
     <KistlBase:B>4ae6616a-eca3-47a5-b502-8e3c3913c2f0</KistlBase:B>
   </KistlBase:ObjectClass_implements_Interface_RelationEntry>
+  <KistlBase:ObjectClass_implements_Interface_RelationEntry ExportGuid="b303bb28-0ba1-4bec-9e27-ea0e714e8066">
+    <KistlBase:A>a9166f1e-9233-4d2d-8eb6-be71d724ea14</KistlBase:A>
+    <KistlBase:B>b6afa3e7-edf6-4318-9194-75bdbfc7ec7b</KistlBase:B>
+  </KistlBase:ObjectClass_implements_Interface_RelationEntry>
   <KistlBase:ObjectClass_implements_Interface_RelationEntry ExportGuid="0e3b5b2b-1bb2-4e01-a4c2-be20b081ccc7">
     <KistlBase:A>6f005f31-c09c-45f9-9bcb-44090ebf0d1f</KistlBase:A>
     <KistlBase:B>a73f2d0a-786b-483d-b474-b9d9df42b8b3</KistlBase:B>
@@ -3347,7 +3353,7 @@
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
     <KistlBase:Name>ExportGuid</KistlBase:Name>
     <KistlBase:ObjectClass>a9166f1e-9233-4d2d-8eb6-be71d724ea14</KistlBase:ObjectClass>
-    <KistlBase:Properties_pos>200</KistlBase:Properties_pos>
+    <KistlBase:Properties_pos>300</KistlBase:Properties_pos>
     <GUI:ValueModelDescriptor>2b6fb70f-a382-4057-a139-cc33333d619d</GUI:ValueModelDescriptor>
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:IsList>false</KistlBase:IsList>
@@ -12245,7 +12251,7 @@
     <GUI:ViewModelRef>a1c64886-b50d-4e06-b806-dc359e605626</GUI:ViewModelRef>
   </GUI:ViewModelDescriptor>
   <GUI:ViewModelDescriptor ExportGuid="d8e95ac5-d46a-4dfa-a574-12ea299eadc4">
-    <GUI:DefaultKind>f0010cd6-9256-46ff-9629-5a707fa25158</GUI:DefaultKind>
+    <GUI:DefaultKind>06bf9adc-c5bc-4552-abdc-18a96c527962</GUI:DefaultKind>
     <GUI:Description>A complete IDataObject</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:ViewModelRef>a07f30a6-b920-4fef-98ac-53155791e804</GUI:ViewModelRef>
@@ -12268,7 +12274,7 @@
     <GUI:ViewModelRef>f9521a1c-77dc-4af5-ba5d-f41a4761c612</GUI:ViewModelRef>
   </GUI:ViewModelDescriptor>
   <GUI:ViewModelDescriptor ExportGuid="0d3a2e45-9a49-4e29-afea-619baa8d3871">
-    <GUI:DefaultKind>7cbc941f-7990-4ec6-a39a-fbc4338b470b</GUI:DefaultKind>
+    <GUI:DefaultKind>4e7a8b0b-0c8e-49e1-aa35-d3a9ec7b8e4c</GUI:DefaultKind>
     <GUI:Description>DataObjectModel with specific extensions for DataTypes</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:ViewModelRef>41b6d0a1-a2ae-4c68-8997-503db83319bc</GUI:ViewModelRef>
@@ -12286,7 +12292,7 @@
     <GUI:ViewModelRef>266f79a3-9b2f-4779-a9ae-9702ccf53a5a</GUI:ViewModelRef>
   </GUI:ViewModelDescriptor>
   <GUI:ViewModelDescriptor ExportGuid="caf3e708-2f31-4084-9957-ca11fccc1374">
-    <GUI:DefaultKind>a31b5081-88c2-4661-964b-7917578e0711</GUI:DefaultKind>
+    <GUI:DefaultKind>06bf9adc-c5bc-4552-abdc-18a96c527962</GUI:DefaultKind>
     <GUI:Description>DataObjectModel with specific extensions for MethodInvocations</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:ViewModelRef>68c7ae8c-6fc6-4c67-877b-7a84efd47b55</GUI:ViewModelRef>
@@ -12312,25 +12318,25 @@
     <GUI:ViewModelRef>e57001ad-1e50-4d01-b5f7-5f7e0c27d2c8</GUI:ViewModelRef>
   </GUI:ViewModelDescriptor>
   <GUI:ViewModelDescriptor ExportGuid="edaf9334-dc36-4778-aa33-1e5cdaeeb767">
-    <GUI:DefaultKind>2377807c-605b-4e64-9c74-361d3ea6f353</GUI:DefaultKind>
+    <GUI:DefaultKind>2279b0a6-36b8-4c97-b1fd-9eb1710e74f3</GUI:DefaultKind>
     <GUI:Description>An integer attribute</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:ViewModelRef>2f35b21a-73c2-4e38-ab28-7ee2404684be</GUI:ViewModelRef>
   </GUI:ViewModelDescriptor>
   <GUI:ViewModelDescriptor ExportGuid="3a3d0c1c-679e-4d4d-adeb-3ab260079ccb">
-    <GUI:DefaultKind>2686036b-b3c9-45b9-9361-e452d69cdc09</GUI:DefaultKind>
+    <GUI:DefaultKind>2279b0a6-36b8-4c97-b1fd-9eb1710e74f3</GUI:DefaultKind>
     <GUI:Description>A floating point attribute</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:ViewModelRef>f223c178-c447-40a8-960e-ffba6b8423af</GUI:ViewModelRef>
   </GUI:ViewModelDescriptor>
   <GUI:ViewModelDescriptor ExportGuid="2b6fb70f-a382-4057-a139-cc33333d619d">
-    <GUI:DefaultKind>200f0be5-9f23-4ddb-9a00-0133b4fc295d</GUI:DefaultKind>
+    <GUI:DefaultKind>2279b0a6-36b8-4c97-b1fd-9eb1710e74f3</GUI:DefaultKind>
     <GUI:Description>A GUID attribute</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:ViewModelRef>7ea78a35-65a1-41f0-a0f0-da2dee7dd5bf</GUI:ViewModelRef>
   </GUI:ViewModelDescriptor>
   <GUI:ViewModelDescriptor ExportGuid="fc74b434-3801-4e4a-ab67-e65a9e014005">
-    <GUI:DefaultKind>227dcbce-4905-4337-a6a0-720c9d218ab7</GUI:DefaultKind>
+    <GUI:DefaultKind>2279b0a6-36b8-4c97-b1fd-9eb1710e74f3</GUI:DefaultKind>
     <GUI:Description>A date and time attribute</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:ViewModelRef>59ab4b8c-ab9f-461b-9b9c-7941a7b4a9fa</GUI:ViewModelRef>
@@ -12342,7 +12348,7 @@
     <GUI:ViewModelRef>69d2fcb4-d385-497d-8159-20c03157d5c0</GUI:ViewModelRef>
   </GUI:ViewModelDescriptor>
   <GUI:ViewModelDescriptor ExportGuid="84828181-4048-47a7-b526-01508b7a0fd0">
-    <GUI:DefaultKind>c86d56f3-52c5-4864-ae26-b102cd61ffb6</GUI:DefaultKind>
+    <GUI:DefaultKind>06bf9adc-c5bc-4552-abdc-18a96c527962</GUI:DefaultKind>
     <GUI:Description>DataObjectModel with specific extensions for Modules</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:ViewModelRef>98b741e5-2dd5-4221-b001-01de816ded70</GUI:ViewModelRef>
@@ -12360,7 +12366,7 @@
     <GUI:ViewModelRef>da04f1a5-fb30-4786-b329-8f070083a4f6</GUI:ViewModelRef>
   </GUI:ViewModelDescriptor>
   <GUI:ViewModelDescriptor ExportGuid="ffc833d5-a2a5-4cde-8335-6285973742d8">
-    <GUI:DefaultKind>44654dc7-6f5f-46a1-bdc6-7c3bd124b5bb</GUI:DefaultKind>
+    <GUI:DefaultKind>329837fd-1146-48b2-9f4e-79aec8958b1e</GUI:DefaultKind>
     <GUI:Description>A top-level window containing a Workspace ObjectEditor, a visual representation for IKistlContext</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:ViewModelRef>d9fe8f77-b156-4929-add8-38cc2fa546e8</GUI:ViewModelRef>
@@ -12384,7 +12390,7 @@
     <GUI:ViewModelRef>03338e3b-2317-4e88-9858-a6a165dd57f9</GUI:ViewModelRef>
   </GUI:ViewModelDescriptor>
   <GUI:ViewModelDescriptor ExportGuid="75aef030-0c25-4306-b6d2-ca8c7cd672dd">
-    <GUI:DefaultGridCellKind>194e5f9f-5586-41f8-bcfb-beb6b4016aa0</GUI:DefaultGridCellKind>
+    <GUI:DefaultGridCellKind>a3f09ef3-2fac-4d7e-aea8-cbf0eab4de70</GUI:DefaultGridCellKind>
     <GUI:DefaultKind>a3f09ef3-2fac-4d7e-aea8-cbf0eab4de70</GUI:DefaultKind>
     <GUI:Description>A method returning a string</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
@@ -12434,6 +12440,7 @@
     <GUI:ViewModelRef>28114689-4fc3-44b6-b7f1-141dab6b78d9</GUI:ViewModelRef>
   </GUI:ViewModelDescriptor>
   <GUI:ViewDescriptor ExportGuid="17aec30d-f2b5-4c08-8f8d-940504481b5d">
+    <GUI:ControlKind>f7cf3060-5fa5-4077-93e9-5fc681f875fe</GUI:ControlKind>
     <GUI:ControlRef>5f402c91-e7e1-4b53-9ac3-68ff2398ac58</GUI:ControlRef>
     <GUI:Kind>5624100a-9fed-44c0-822e-d174c4c9cb45</GUI:Kind>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
@@ -12445,108 +12452,126 @@
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="192702b5-0c7d-4ff5-a7a7-e74211562580">
+    <GUI:ControlKind>9d414225-460a-4c54-8e36-e368804e387f</GUI:ControlKind>
     <GUI:ControlRef>d1ea3d41-384e-4f72-940c-0471f2421082</GUI:ControlRef>
     <GUI:Kind>add058e1-2a72-4663-a0c4-9b79cd1d4537</GUI:Kind>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="b8cec662-195f-40ae-8d79-ab9f35540a2e">
+    <GUI:ControlKind>364aaaf3-0f61-4642-a0e3-bd812935cf44</GUI:ControlKind>
     <GUI:ControlRef>a7c67d95-c198-47da-ad6d-af90e08137f7</GUI:ControlRef>
     <GUI:Kind>98aeb643-d367-46e6-a961-4c627cdf7387</GUI:Kind>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="a17d75a0-d0f9-49ae-a846-a72e65963ea3">
+    <GUI:ControlKind>66e080be-471d-4dc5-9850-25bedbdfc76e</GUI:ControlKind>
     <GUI:ControlRef>92fb7c93-822b-41f7-b25b-dd44e0fb3516</GUI:ControlRef>
     <GUI:Kind>bbd088cc-c68c-46de-a89e-6e1e6f768245</GUI:Kind>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="c479b0e0-e199-4905-853a-a2361d38884b">
+    <GUI:ControlKind>4e7a8b0b-0c8e-49e1-aa35-d3a9ec7b8e4c</GUI:ControlKind>
     <GUI:ControlRef>18c4efb5-c283-44f2-81bf-c0b70e97b79f</GUI:ControlRef>
     <GUI:Kind>bf9cd569-9765-4b7c-a1f8-3eac16f48f71</GUI:Kind>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="31d8374d-0565-4e4d-a1f8-6053e4832901">
+    <GUI:ControlKind>b86945ed-9edc-42ca-9ca5-8124fbf47b5c</GUI:ControlKind>
     <GUI:ControlRef>0695b951-f3fe-4bf2-a9b7-f893c5bb7c1c</GUI:ControlRef>
     <GUI:Kind>27e8a0f3-ffff-4bb1-b956-c36a5a28dd14</GUI:Kind>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="70669305-0ecf-4806-b1d9-a13e5893afad">
+    <GUI:ControlKind>9731f312-8ce4-4c2d-8d95-1923256dc9b8</GUI:ControlKind>
     <GUI:ControlRef>4652082a-202d-4d20-a0d4-81a4f69ffb85</GUI:ControlRef>
     <GUI:Kind>0c15ef90-4410-4aec-9eea-5c46b87cb032</GUI:Kind>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="94917bbc-d32a-4c53-a4f6-904567576732">
+    <GUI:ControlKind>a3f09ef3-2fac-4d7e-aea8-cbf0eab4de70</GUI:ControlKind>
     <GUI:ControlRef>3e9153f9-1a71-4c1e-9022-948aa7db6e11</GUI:ControlRef>
     <GUI:Kind>e39e18d2-c7a7-4ed6-9542-4d76177c7521</GUI:Kind>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="82c0bcbd-2184-4c36-adaf-60ad5e984dee">
+    <GUI:ControlKind>6b5093bb-3ac0-4710-b30d-d72a50b09ee8</GUI:ControlKind>
     <GUI:ControlRef>46a2ac8e-1d19-40e1-bca9-37834962ef95</GUI:ControlRef>
     <GUI:Kind>b474f8f2-99d2-4ae5-ac1a-203c5e51a770</GUI:Kind>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="074fdde3-165d-452a-84cc-3b2bd35ab4d6">
+    <GUI:ControlKind>59253ed1-a3a5-4574-b3bb-3c4fa535d21c</GUI:ControlKind>
     <GUI:ControlRef>e68bbcf2-0d0d-446a-bc1e-4791e904c3fb</GUI:ControlRef>
     <GUI:Kind>eea17391-7dce-442c-b6a3-c3d7dda93d18</GUI:Kind>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="2699da6a-0fe8-4c91-ac62-00ca6f8359bb">
+    <GUI:ControlKind>12b829e1-abab-43f3-99ea-e33cd383d7e6</GUI:ControlKind>
     <GUI:ControlRef>58dc43e8-3fc4-46ce-b233-51459ebe4d2b</GUI:ControlRef>
     <GUI:Kind>b3f3e922-4fce-4c33-824d-40d47381e3cd</GUI:Kind>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="ef91f0f1-4d92-44ba-92b9-bb638bb8fa35">
+    <GUI:ControlKind>2279b0a6-36b8-4c97-b1fd-9eb1710e74f3</GUI:ControlKind>
     <GUI:ControlRef>852d2841-6918-4faf-a8ef-5d93a1e5d548</GUI:ControlRef>
     <GUI:Kind>d3f5a566-3331-4c7b-bed4-ea5166815b67</GUI:Kind>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="2eaa5517-915d-4242-9ce1-91cff16b6046">
+    <GUI:ControlKind>90d5ff7f-0c82-4278-bb8d-49c240f6bc2c</GUI:ControlKind>
     <GUI:ControlRef>857d0acf-6eac-49b5-9940-4f7fb6b81549</GUI:ControlRef>
     <GUI:Kind>a012a762-5d8b-4aec-b396-e262cf30f9f9</GUI:Kind>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="8fa28c18-ee3a-476c-a79d-d9ef61a943d8">
+    <GUI:ControlKind>06bf9adc-c5bc-4552-abdc-18a96c527962</GUI:ControlKind>
     <GUI:ControlRef>ba95fc85-c50f-494a-b4f0-5596ef38b7bf</GUI:ControlRef>
     <GUI:Kind>b91f789f-8ecb-44e2-8458-7f0d27ea027a</GUI:Kind>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="02dacd0b-c604-4311-b564-15b1ced9299f">
+    <GUI:ControlKind>329837fd-1146-48b2-9f4e-79aec8958b1e</GUI:ControlKind>
     <GUI:ControlRef>28a89148-24d1-4cc9-accc-24cc7eb2dfde</GUI:ControlRef>
     <GUI:Kind>4fdf9e9c-a21c-40ab-84c2-16b2c7b7ec5f</GUI:Kind>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="af750a10-d57e-4424-a0c7-2257b47c2b23">
+    <GUI:ControlKind>d9fb7cec-b71f-48f1-a591-216de253c7d1</GUI:ControlKind>
     <GUI:ControlRef>9c2c3f17-3445-46e0-8b76-fc11f15dfbf5</GUI:ControlRef>
     <GUI:Kind>68a53f9f-fbdb-4d44-8d58-da9be3812ba7</GUI:Kind>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="b1a38e67-9315-454d-812d-9819386968e7">
+    <GUI:ControlKind>f7cf3060-5fa5-4077-93e9-5fc681f875fe</GUI:ControlKind>
     <GUI:ControlRef>7364ee0c-a700-430d-9176-e4eef9f51581</GUI:ControlRef>
     <GUI:Kind>5624100a-9fed-44c0-822e-d174c4c9cb45</GUI:Kind>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="4b8a4590-690c-4e85-b10a-d0bf8f475c46">
+    <GUI:ControlKind>18c0afa2-61bc-4ecb-b1e9-47b33b294573</GUI:ControlKind>
     <GUI:ControlRef>12084abf-1e98-4d04-b66d-fed4ea47d3c2</GUI:ControlRef>
     <GUI:Kind>c421eb80-883a-4f28-9ba0-25fa19fba103</GUI:Kind>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="3fd9383c-ca6e-41dc-9dc1-3b24799f6871">
+    <GUI:ControlKind>f9092349-b263-4887-b605-cccac6a361bd</GUI:ControlKind>
     <GUI:ControlRef>a4a45766-f3c2-46b9-8f12-dbec57d818d5</GUI:ControlRef>
     <GUI:Kind>a3207646-c6a6-4ecc-89cb-31bf28dbc6ac</GUI:Kind>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
@@ -13149,6 +13174,10 @@
     <KistlBase:A>a9166f1e-9233-4d2d-8eb6-be71d724ea14</KistlBase:A>
     <KistlBase:B>4ae6616a-eca3-47a5-b502-8e3c3913c2f0</KistlBase:B>
   </KistlBase:ObjectClass_implements_Interface_RelationEntry>
+  <KistlBase:ObjectClass_implements_Interface_RelationEntry ExportGuid="b303bb28-0ba1-4bec-9e27-ea0e714e8066">
+    <KistlBase:A>a9166f1e-9233-4d2d-8eb6-be71d724ea14</KistlBase:A>
+    <KistlBase:B>b6afa3e7-edf6-4318-9194-75bdbfc7ec7b</KistlBase:B>
+  </KistlBase:ObjectClass_implements_Interface_RelationEntry>
   <KistlBase:ObjectClass_implements_Interface_RelationEntry ExportGuid="3c423a41-6c42-4c0b-a3dd-589b678dd2ec">
     <KistlBase:A>78b6f354-013b-4129-a390-7f3a5a5e28e9</KistlBase:A>
     <KistlBase:B>4ae6616a-eca3-47a5-b502-8e3c3913c2f0</KistlBase:B>
@@ -13173,19 +13202,55 @@
     <KistlBase:A>5d152c6f-6c1e-48b7-b03e-669e30468808</KistlBase:A>
     <KistlBase:B>b6afa3e7-edf6-4318-9194-75bdbfc7ec7b</KistlBase:B>
   </KistlBase:ObjectClass_implements_Interface_RelationEntry>
-  <KistlBase:DoubleProperty ExportGuid="2a0d22cd-5538-4a2c-bfb9-287652637708">
-    <KistlBase:CategoryTags>GUI</KistlBase:CategoryTags>
-    <KistlBase:ChangedOn>2009-12-30T10:46:58.277Z</KistlBase:ChangedOn>
-    <KistlBase:CreatedOn>2009-12-30T10:45:11.61Z</KistlBase:CreatedOn>
-    <KistlBase:Description>The requested width for displaying this control. May be NULL to request auto-sizing.</KistlBase:Description>
+  <KistlBase:ObjectReferenceProperty ExportGuid="bf073bb5-eaa8-4e3d-b019-60b47ba6a088">
+    <KistlBase:CategoryTags />
+    <KistlBase:ChangedOn>2010-05-19T19:32:44.253Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-05-19T19:32:44.253Z</KistlBase:CreatedOn>
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
-    <KistlBase:Name>RequestedWidth</KistlBase:Name>
+    <KistlBase:Name>ChildControlKinds</KistlBase:Name>
     <KistlBase:ObjectClass>a9166f1e-9233-4d2d-8eb6-be71d724ea14</KistlBase:ObjectClass>
     <KistlBase:Properties_pos>100</KistlBase:Properties_pos>
-    <GUI:ValueModelDescriptor>3a3d0c1c-679e-4d4d-adeb-3ab260079ccb</GUI:ValueModelDescriptor>
+    <GUI:ValueModelDescriptor>9fce01fe-fd6d-4e21-8b55-08d5e38aea36</GUI:ValueModelDescriptor>
+    <KistlBase:EagerLoading>false</KistlBase:EagerLoading>
+    <KistlBase:RelationEnd>25df6e81-9331-4210-ae71-87c9bbb9829a</KistlBase:RelationEnd>
+  </KistlBase:ObjectReferenceProperty>
+  <KistlBase:ObjectReferenceProperty ExportGuid="e4cf2c2d-be50-4954-a43c-b8df2dedecec">
+    <KistlBase:CategoryTags>MetaData</KistlBase:CategoryTags>
+    <KistlBase:ChangedOn>2010-05-19T19:29:27.327Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-05-19T19:29:27.327Z</KistlBase:CreatedOn>
+    <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
+    <KistlBase:Name>Module</KistlBase:Name>
+    <KistlBase:ObjectClass>a9166f1e-9233-4d2d-8eb6-be71d724ea14</KistlBase:ObjectClass>
+    <KistlBase:Properties_pos>500</KistlBase:Properties_pos>
+    <GUI:ValueModelDescriptor>83aae6fd-0fae-4348-b313-737a6e751027</GUI:ValueModelDescriptor>
+    <KistlBase:EagerLoading>false</KistlBase:EagerLoading>
+    <KistlBase:RelationEnd>ab01e0f3-ed3b-4180-a0a6-f8171a4894ee</KistlBase:RelationEnd>
+  </KistlBase:ObjectReferenceProperty>
+  <KistlBase:StringProperty ExportGuid="438ab847-c5d1-4072-9449-96e3d4e92b1f">
+    <KistlBase:CategoryTags>Summary</KistlBase:CategoryTags>
+    <KistlBase:ChangedOn>2010-05-19T18:17:01.387Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-05-19T18:17:01.387Z</KistlBase:CreatedOn>
+    <KistlBase:Description>Name of this ControlKind</KistlBase:Description>
+    <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
+    <KistlBase:Name>Name</KistlBase:Name>
+    <KistlBase:ObjectClass>a9166f1e-9233-4d2d-8eb6-be71d724ea14</KistlBase:ObjectClass>
+    <KistlBase:Properties_pos>400</KistlBase:Properties_pos>
+    <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:IsList>false</KistlBase:IsList>
-  </KistlBase:DoubleProperty>
+  </KistlBase:StringProperty>
+  <KistlBase:ObjectReferenceProperty ExportGuid="5d75bf4f-29dd-4d00-8e4f-b40a1b9ad92c">
+    <KistlBase:CategoryTags />
+    <KistlBase:ChangedOn>2010-05-19T19:32:44.24Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-05-19T19:32:44.24Z</KistlBase:CreatedOn>
+    <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
+    <KistlBase:Name>Parent</KistlBase:Name>
+    <KistlBase:ObjectClass>a9166f1e-9233-4d2d-8eb6-be71d724ea14</KistlBase:ObjectClass>
+    <KistlBase:Properties_pos>200</KistlBase:Properties_pos>
+    <GUI:ValueModelDescriptor>83aae6fd-0fae-4348-b313-737a6e751027</GUI:ValueModelDescriptor>
+    <KistlBase:EagerLoading>false</KistlBase:EagerLoading>
+    <KistlBase:RelationEnd>6c2c8d62-8d71-45d6-8a05-9b411063c2ff</KistlBase:RelationEnd>
+  </KistlBase:ObjectReferenceProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="883a2f71-78ae-4978-8d76-904a2237cc25">
     <KistlBase:CategoryTags>DataModel</KistlBase:CategoryTags>
     <KistlBase:ChangedOn>2009-12-14T17:08:05.4Z</KistlBase:ChangedOn>
@@ -13408,6 +13473,18 @@
     <KistlBase:EagerLoading>false</KistlBase:EagerLoading>
     <KistlBase:RelationEnd>ddcefca9-0300-42b1-b706-ea7c30f2b88b</KistlBase:RelationEnd>
   </KistlBase:ObjectReferenceProperty>
+  <KistlBase:ObjectReferenceProperty ExportGuid="7720b38c-64af-4607-bc73-d015af6612e3">
+    <KistlBase:CategoryTags />
+    <KistlBase:ChangedOn>2010-05-20T15:27:31.8Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-05-20T15:27:31.8Z</KistlBase:CreatedOn>
+    <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
+    <KistlBase:Name>ControlKind</KistlBase:Name>
+    <KistlBase:ObjectClass>ffda4604-1536-43b6-b951-f8753d5092ca</KistlBase:ObjectClass>
+    <KistlBase:Properties_pos>200</KistlBase:Properties_pos>
+    <GUI:ValueModelDescriptor>83aae6fd-0fae-4348-b313-737a6e751027</GUI:ValueModelDescriptor>
+    <KistlBase:EagerLoading>false</KistlBase:EagerLoading>
+    <KistlBase:RelationEnd>9d6aa137-d1c8-4527-ae07-681acc503dcd</KistlBase:RelationEnd>
+  </KistlBase:ObjectReferenceProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="eff6276d-975b-4a0d-bd3c-ad76af2189c3">
     <KistlBase:CategoryTags>Summary</KistlBase:CategoryTags>
     <KistlBase:ChangedOn>2010-04-02T10:56:33.96Z</KistlBase:ChangedOn>
@@ -13416,7 +13493,7 @@
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
     <KistlBase:Name>ControlRef</KistlBase:Name>
     <KistlBase:ObjectClass>ffda4604-1536-43b6-b951-f8753d5092ca</KistlBase:ObjectClass>
-    <KistlBase:Properties_pos>500</KistlBase:Properties_pos>
+    <KistlBase:Properties_pos>700</KistlBase:Properties_pos>
     <GUI:ValueModelDescriptor>d96d030e-eebe-4b7f-8b55-dca30cbd4bde</GUI:ValueModelDescriptor>
     <KistlBase:EagerLoading>true</KistlBase:EagerLoading>
     <KistlBase:RelationEnd>cd048a20-cd26-4a12-8208-362a86ed0762</KistlBase:RelationEnd>
@@ -13430,7 +13507,7 @@
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
     <KistlBase:Name>ExportGuid</KistlBase:Name>
     <KistlBase:ObjectClass>ffda4604-1536-43b6-b951-f8753d5092ca</KistlBase:ObjectClass>
-    <KistlBase:Properties_pos>100</KistlBase:Properties_pos>
+    <KistlBase:Properties_pos>300</KistlBase:Properties_pos>
     <GUI:ValueModelDescriptor>2b6fb70f-a382-4057-a139-cc33333d619d</GUI:ValueModelDescriptor>
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:IsList>false</KistlBase:IsList>
@@ -13442,7 +13519,7 @@
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
     <KistlBase:Name>Kind</KistlBase:Name>
     <KistlBase:ObjectClass>ffda4604-1536-43b6-b951-f8753d5092ca</KistlBase:ObjectClass>
-    <KistlBase:Properties_pos>300</KistlBase:Properties_pos>
+    <KistlBase:Properties_pos>500</KistlBase:Properties_pos>
     <GUI:ValueModelDescriptor>83aae6fd-0fae-4348-b313-737a6e751027</GUI:ValueModelDescriptor>
     <KistlBase:EagerLoading>true</KistlBase:EagerLoading>
     <KistlBase:RelationEnd>cf4bc307-aa3d-43f0-9dd1-1e133f0dc021</KistlBase:RelationEnd>
@@ -13454,7 +13531,7 @@
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
     <KistlBase:Name>Module</KistlBase:Name>
     <KistlBase:ObjectClass>ffda4604-1536-43b6-b951-f8753d5092ca</KistlBase:ObjectClass>
-    <KistlBase:Properties_pos>200</KistlBase:Properties_pos>
+    <KistlBase:Properties_pos>400</KistlBase:Properties_pos>
     <GUI:ValueModelDescriptor>83aae6fd-0fae-4348-b313-737a6e751027</GUI:ValueModelDescriptor>
     <KistlBase:EagerLoading>false</KistlBase:EagerLoading>
     <KistlBase:RelationEnd>da5e33ac-1df3-4e92-ab2f-ad9cee7c9bd5</KistlBase:RelationEnd>
@@ -13467,7 +13544,7 @@
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
     <KistlBase:Name>SupportedViewModels</KistlBase:Name>
     <KistlBase:ObjectClass>ffda4604-1536-43b6-b951-f8753d5092ca</KistlBase:ObjectClass>
-    <KistlBase:Properties_pos>0</KistlBase:Properties_pos>
+    <KistlBase:Properties_pos>100</KistlBase:Properties_pos>
     <GUI:ValueModelDescriptor>9fce01fe-fd6d-4e21-8b55-08d5e38aea36</GUI:ValueModelDescriptor>
     <KistlBase:EagerLoading>true</KistlBase:EagerLoading>
     <KistlBase:RelationEnd>a0547544-665f-4b18-b930-3dda49162d14</KistlBase:RelationEnd>
@@ -13480,7 +13557,7 @@
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
     <KistlBase:Name>Toolkit</KistlBase:Name>
     <KistlBase:ObjectClass>ffda4604-1536-43b6-b951-f8753d5092ca</KistlBase:ObjectClass>
-    <KistlBase:Properties_pos>400</KistlBase:Properties_pos>
+    <KistlBase:Properties_pos>600</KistlBase:Properties_pos>
     <GUI:ValueModelDescriptor>a6ff986c-a485-4c4d-947c-e59d14112ec2</GUI:ValueModelDescriptor>
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:IsList>false</KistlBase:IsList>
@@ -13636,6 +13713,27 @@
     <KistlBase:EagerLoading>false</KistlBase:EagerLoading>
     <KistlBase:RelationEnd>8de5dbe2-e2b5-45a4-a366-10dc3b4f64cd</KistlBase:RelationEnd>
   </KistlBase:ObjectReferenceProperty>
+  <KistlBase:Relation ExportGuid="6d5e026a-2605-4630-88ed-9da0b0e14c95">
+    <KistlBase:A>ab01e0f3-ed3b-4180-a0a6-f8171a4894ee</KistlBase:A>
+    <KistlBase:B>69310edc-7d79-431d-b36b-2c57c4b879fa</KistlBase:B>
+    <KistlBase:ChangedOn>2010-05-19T19:29:27.343Z</KistlBase:ChangedOn>
+    <KistlBase:Containment>0</KistlBase:Containment>
+    <KistlBase:CreatedOn>2010-05-19T19:29:27.343Z</KistlBase:CreatedOn>
+    <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
+    <KistlBase:Storage>1</KistlBase:Storage>
+    <KistlBase:Verb>has</KistlBase:Verb>
+  </KistlBase:Relation>
+  <KistlBase:Relation ExportGuid="4ff9061d-f26a-42d6-ae95-b418f039a35e">
+    <KistlBase:A>6c2c8d62-8d71-45d6-8a05-9b411063c2ff</KistlBase:A>
+    <KistlBase:B>25df6e81-9331-4210-ae71-87c9bbb9829a</KistlBase:B>
+    <KistlBase:ChangedOn>2010-05-19T19:32:44.253Z</KistlBase:ChangedOn>
+    <KistlBase:Containment>0</KistlBase:Containment>
+    <KistlBase:CreatedOn>2010-05-19T19:32:44.253Z</KistlBase:CreatedOn>
+    <KistlBase:Description>ControlKind may have a Parent</KistlBase:Description>
+    <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
+    <KistlBase:Storage>1</KistlBase:Storage>
+    <KistlBase:Verb>have_a</KistlBase:Verb>
+  </KistlBase:Relation>
   <KistlBase:Relation ExportGuid="0ded88ab-da47-4e72-83bc-5e409b81e0d1">
     <KistlBase:A>51b74e58-28a7-439a-99c9-df638a1993a7</KistlBase:A>
     <KistlBase:B>b2061a0b-1f5a-42df-a0cb-186e5586a080</KistlBase:B>
@@ -13719,6 +13817,16 @@
     <KistlBase:Storage>1</KistlBase:Storage>
     <KistlBase:Verb>has</KistlBase:Verb>
   </KistlBase:Relation>
+  <KistlBase:Relation ExportGuid="bffabb36-7862-4fcf-b8fb-efb719c70f3f">
+    <KistlBase:A>9d6aa137-d1c8-4527-ae07-681acc503dcd</KistlBase:A>
+    <KistlBase:B>dd3157ce-8038-40c9-ab81-384acbdc31fb</KistlBase:B>
+    <KistlBase:ChangedOn>2010-05-20T15:27:31.817Z</KistlBase:ChangedOn>
+    <KistlBase:Containment>0</KistlBase:Containment>
+    <KistlBase:CreatedOn>2010-05-20T15:27:31.817Z</KistlBase:CreatedOn>
+    <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
+    <KistlBase:Storage>1</KistlBase:Storage>
+    <KistlBase:Verb>is_a</KistlBase:Verb>
+  </KistlBase:Relation>
   <KistlBase:Relation ExportGuid="b4911f1f-d707-4b14-9b7e-b6c6fd49a640">
     <KistlBase:A>cf4bc307-aa3d-43f0-9dd1-1e133f0dc021</KistlBase:A>
     <KistlBase:B>72f7bf73-b41d-4f60-af50-56a9e35fe5a7</KistlBase:B>
@@ -13754,8 +13862,8 @@
   <KistlBase:Relation ExportGuid="0a03215f-1c1a-4a44-892d-86642eefe9f1">
     <KistlBase:A>0c0e6de2-3afa-40f9-9076-968e1bbfda00</KistlBase:A>
     <KistlBase:B>ece8037b-8d39-4f44-ba70-dfa86e8ddf56</KistlBase:B>
-    <KistlBase:ChangedOn>2010-03-26T12:37:43.347Z</KistlBase:ChangedOn>
-    <KistlBase:Containment>1</KistlBase:Containment>
+    <KistlBase:ChangedOn>2010-05-20T15:24:39.557Z</KistlBase:ChangedOn>
+    <KistlBase:Containment>0</KistlBase:Containment>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>
     <KistlBase:Description>specify a default control kind when used in a grid cell</KistlBase:Description>
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
@@ -13765,8 +13873,8 @@
   <KistlBase:Relation ExportGuid="cc835258-6ada-4f3f-839e-7f276ded995a">
     <KistlBase:A>5588cece-c696-40be-9142-80053efd4e29</KistlBase:A>
     <KistlBase:B>635212ec-96ec-4c7c-bb44-779eaa1c2df5</KistlBase:B>
-    <KistlBase:ChangedOn>2010-03-26T12:37:43.35Z</KistlBase:ChangedOn>
-    <KistlBase:Containment>1</KistlBase:Containment>
+    <KistlBase:ChangedOn>2010-05-20T15:23:21.357Z</KistlBase:ChangedOn>
+    <KistlBase:Containment>0</KistlBase:Containment>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
     <KistlBase:Storage>1</KistlBase:Storage>
@@ -13842,6 +13950,35 @@
     <KistlBase:RoleName>DisplayedTypeAssembly</KistlBase:RoleName>
     <KistlBase:Type>a590a975-66e5-421c-aa97-7ab3169e0e9b</KistlBase:Type>
   </KistlBase:RelationEnd>
+  <KistlBase:RelationEnd ExportGuid="6c2c8d62-8d71-45d6-8a05-9b411063c2ff">
+    <KistlBase:AParent>4ff9061d-f26a-42d6-ae95-b418f039a35e</KistlBase:AParent>
+    <KistlBase:ChangedOn>2010-05-19T19:32:44.253Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-05-19T19:32:44.253Z</KistlBase:CreatedOn>
+    <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
+    <KistlBase:Multiplicity>3</KistlBase:Multiplicity>
+    <KistlBase:Navigator>5d75bf4f-29dd-4d00-8e4f-b40a1b9ad92c</KistlBase:Navigator>
+    <KistlBase:RoleName>ChildControlKinds</KistlBase:RoleName>
+    <KistlBase:Type>a9166f1e-9233-4d2d-8eb6-be71d724ea14</KistlBase:Type>
+  </KistlBase:RelationEnd>
+  <KistlBase:RelationEnd ExportGuid="dd3157ce-8038-40c9-ab81-384acbdc31fb">
+    <KistlBase:BParent>bffabb36-7862-4fcf-b8fb-efb719c70f3f</KistlBase:BParent>
+    <KistlBase:ChangedOn>2010-05-20T15:27:31.817Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-05-20T15:27:31.817Z</KistlBase:CreatedOn>
+    <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
+    <KistlBase:Multiplicity>1</KistlBase:Multiplicity>
+    <KistlBase:RoleName>ControlKind</KistlBase:RoleName>
+    <KistlBase:Type>a9166f1e-9233-4d2d-8eb6-be71d724ea14</KistlBase:Type>
+  </KistlBase:RelationEnd>
+  <KistlBase:RelationEnd ExportGuid="ab01e0f3-ed3b-4180-a0a6-f8171a4894ee">
+    <KistlBase:AParent>6d5e026a-2605-4630-88ed-9da0b0e14c95</KistlBase:AParent>
+    <KistlBase:ChangedOn>2010-05-19T19:29:27.343Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-05-19T19:29:27.343Z</KistlBase:CreatedOn>
+    <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
+    <KistlBase:Multiplicity>3</KistlBase:Multiplicity>
+    <KistlBase:Navigator>e4cf2c2d-be50-4954-a43c-b8df2dedecec</KistlBase:Navigator>
+    <KistlBase:RoleName>ControlKind</KistlBase:RoleName>
+    <KistlBase:Type>a9166f1e-9233-4d2d-8eb6-be71d724ea14</KistlBase:Type>
+  </KistlBase:RelationEnd>
   <KistlBase:RelationEnd ExportGuid="ece8037b-8d39-4f44-ba70-dfa86e8ddf56">
     <KistlBase:BParent>0a03215f-1c1a-4a44-892d-86642eefe9f1</KistlBase:BParent>
     <KistlBase:ChangedOn>2009-12-14T17:08:05.4Z</KistlBase:ChangedOn>
@@ -13858,6 +13995,16 @@
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
     <KistlBase:Multiplicity>1</KistlBase:Multiplicity>
     <KistlBase:RoleName>DefaultKind</KistlBase:RoleName>
+    <KistlBase:Type>a9166f1e-9233-4d2d-8eb6-be71d724ea14</KistlBase:Type>
+  </KistlBase:RelationEnd>
+  <KistlBase:RelationEnd ExportGuid="25df6e81-9331-4210-ae71-87c9bbb9829a">
+    <KistlBase:BParent>4ff9061d-f26a-42d6-ae95-b418f039a35e</KistlBase:BParent>
+    <KistlBase:ChangedOn>2010-05-19T19:32:44.253Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-05-19T19:32:44.253Z</KistlBase:CreatedOn>
+    <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
+    <KistlBase:Multiplicity>1</KistlBase:Multiplicity>
+    <KistlBase:Navigator>bf073bb5-eaa8-4e3d-b019-60b47ba6a088</KistlBase:Navigator>
+    <KistlBase:RoleName>Parent</KistlBase:RoleName>
     <KistlBase:Type>a9166f1e-9233-4d2d-8eb6-be71d724ea14</KistlBase:Type>
   </KistlBase:RelationEnd>
   <KistlBase:RelationEnd ExportGuid="c43ddfa0-5130-4dc7-b7d9-8b769e3715d5">
@@ -13915,6 +14062,15 @@
     <KistlBase:Multiplicity>1</KistlBase:Multiplicity>
     <KistlBase:RoleName>Method</KistlBase:RoleName>
     <KistlBase:Type>ef79c0b9-55e0-45ad-8233-1ff8f852661f</KistlBase:Type>
+  </KistlBase:RelationEnd>
+  <KistlBase:RelationEnd ExportGuid="69310edc-7d79-431d-b36b-2c57c4b879fa">
+    <KistlBase:BParent>6d5e026a-2605-4630-88ed-9da0b0e14c95</KistlBase:BParent>
+    <KistlBase:ChangedOn>2010-05-19T19:29:27.347Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-05-19T19:29:27.347Z</KistlBase:CreatedOn>
+    <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
+    <KistlBase:Multiplicity>1</KistlBase:Multiplicity>
+    <KistlBase:RoleName>Module</KistlBase:RoleName>
+    <KistlBase:Type>8a1ace7c-77f2-4b48-9b0b-bcb68c660d11</KistlBase:Type>
   </KistlBase:RelationEnd>
   <KistlBase:RelationEnd ExportGuid="73808ddf-36d0-4a0c-9ed6-b5e372d0b4fa">
     <KistlBase:BParent>a1360ce2-ecd5-4660-9b4d-3a2dc3919344</KistlBase:BParent>
@@ -14058,6 +14214,16 @@
     <KistlBase:RoleName>ViewDescriptor</KistlBase:RoleName>
     <KistlBase:Type>ffda4604-1536-43b6-b951-f8753d5092ca</KistlBase:Type>
   </KistlBase:RelationEnd>
+  <KistlBase:RelationEnd ExportGuid="9d6aa137-d1c8-4527-ae07-681acc503dcd">
+    <KistlBase:AParent>bffabb36-7862-4fcf-b8fb-efb719c70f3f</KistlBase:AParent>
+    <KistlBase:ChangedOn>2010-05-20T15:27:31.817Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-05-20T15:27:31.817Z</KistlBase:CreatedOn>
+    <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
+    <KistlBase:Multiplicity>3</KistlBase:Multiplicity>
+    <KistlBase:Navigator>7720b38c-64af-4607-bc73-d015af6612e3</KistlBase:Navigator>
+    <KistlBase:RoleName>ViewDescriptor</KistlBase:RoleName>
+    <KistlBase:Type>ffda4604-1536-43b6-b951-f8753d5092ca</KistlBase:Type>
+  </KistlBase:RelationEnd>
   <KistlBase:RelationEnd ExportGuid="da5e33ac-1df3-4e92-ab2f-ad9cee7c9bd5">
     <KistlBase:AParent>51b089fa-edd9-4a1b-9f4c-ccfdaad76856</KistlBase:AParent>
     <KistlBase:ChangedOn>2009-12-14T17:08:05.4Z</KistlBase:ChangedOn>
@@ -14090,20 +14256,20 @@
   </KistlBase:RelationEnd>
   <KistlBase:RelationEnd ExportGuid="5588cece-c696-40be-9142-80053efd4e29">
     <KistlBase:AParent>cc835258-6ada-4f3f-839e-7f276ded995a</KistlBase:AParent>
-    <KistlBase:ChangedOn>2009-12-14T17:08:05.4Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2010-05-20T15:23:15.71Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
-    <KistlBase:Multiplicity>1</KistlBase:Multiplicity>
+    <KistlBase:Multiplicity>3</KistlBase:Multiplicity>
     <KistlBase:Navigator>b535115c-b847-479d-bdea-a7994ae6eeca</KistlBase:Navigator>
     <KistlBase:RoleName>Presentable</KistlBase:RoleName>
     <KistlBase:Type>5d152c6f-6c1e-48b7-b03e-669e30468808</KistlBase:Type>
   </KistlBase:RelationEnd>
   <KistlBase:RelationEnd ExportGuid="0c0e6de2-3afa-40f9-9076-968e1bbfda00">
     <KistlBase:AParent>0a03215f-1c1a-4a44-892d-86642eefe9f1</KistlBase:AParent>
-    <KistlBase:ChangedOn>2010-03-26T12:37:43.313Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2010-05-20T15:24:39.547Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
-    <KistlBase:Multiplicity>1</KistlBase:Multiplicity>
+    <KistlBase:Multiplicity>3</KistlBase:Multiplicity>
     <KistlBase:Navigator>6c744476-35e0-4cef-a221-f02abc81566c</KistlBase:Navigator>
     <KistlBase:RoleName>ViewModelDescriptor</KistlBase:RoleName>
     <KistlBase:Type>5d152c6f-6c1e-48b7-b03e-669e30468808</KistlBase:Type>
@@ -14899,11 +15065,6 @@
   <KistlBase:NotNullableConstraint ExportGuid="e4397224-e3fb-41d0-a160-4d912723182e">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.403Z</KistlBase:ChangedOn>
     <KistlBase:ConstrainedProperty>0b7135d3-dedc-4091-a0c4-690c1b4a2b6d</KistlBase:ConstrainedProperty>
-    <KistlBase:CreatedOn>2009-12-14T17:08:05.403Z</KistlBase:CreatedOn>
-  </KistlBase:NotNullableConstraint>
-  <KistlBase:NotNullableConstraint ExportGuid="2392bfd1-b160-44de-b803-d5429b9545c7">
-    <KistlBase:ChangedOn>2009-12-14T17:08:05.403Z</KistlBase:ChangedOn>
-    <KistlBase:ConstrainedProperty>5e2e007c-2e90-4ba6-9c9d-46e62b662ff9</KistlBase:ConstrainedProperty>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.403Z</KistlBase:CreatedOn>
   </KistlBase:NotNullableConstraint>
   <KistlBase:NotNullableConstraint ExportGuid="6d82fced-ed0f-45c9-8b54-0e2cfee2af4c">
@@ -20132,135 +20293,214 @@
     <GUI:ViewModelRef>617a16ed-37bc-465b-976e-627d0ae4b66c</GUI:ViewModelRef>
   </GUI:ViewModelDescriptor>
   <GUI:ViewDescriptor ExportGuid="ec6ea229-fe90-4f5d-8a39-66901d03ddf1">
+    <GUI:ControlKind>06bf9adc-c5bc-4552-abdc-18a96c527962</GUI:ControlKind>
     <GUI:ControlRef>3a690041-c11c-4bdc-a4a7-44948ca11f6c</GUI:ControlRef>
     <GUI:Kind>b91f789f-8ecb-44e2-8458-7f0d27ea027a</GUI:Kind>
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
     <GUI:Toolkit>1</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="24b9b20e-aaed-47fa-bebd-863c95e8c901">
+    <GUI:ControlKind>9731f312-8ce4-4c2d-8d95-1923256dc9b8</GUI:ControlKind>
     <GUI:ControlRef>d02920f9-1ec5-4e89-9a77-c112963617cf</GUI:ControlRef>
     <GUI:Kind>0c15ef90-4410-4aec-9eea-5c46b87cb032</GUI:Kind>
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
     <GUI:Toolkit>1</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="5b5d4fcf-843e-49bf-9f1a-e3a612f3b090">
+    <GUI:ControlKind>b86945ed-9edc-42ca-9ca5-8124fbf47b5c</GUI:ControlKind>
     <GUI:ControlRef>8f4a60b7-d307-4e55-baa8-ccf51e7e910b</GUI:ControlRef>
     <GUI:Kind>27e8a0f3-ffff-4bb1-b956-c36a5a28dd14</GUI:Kind>
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
     <GUI:Toolkit>1</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="d9ad5202-d1be-474f-a11a-a1f7e91a09ce">
+    <GUI:ControlKind>9d414225-460a-4c54-8e36-e368804e387f</GUI:ControlKind>
     <GUI:ControlRef>53444743-6813-4fdd-8c1e-2b868aaabfc9</GUI:ControlRef>
     <GUI:Kind>add058e1-2a72-4663-a0c4-9b79cd1d4537</GUI:Kind>
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
     <GUI:Toolkit>1</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="8393395f-4cc0-4efe-815a-54dff7ef4c16">
+    <GUI:ControlKind>a3f09ef3-2fac-4d7e-aea8-cbf0eab4de70</GUI:ControlKind>
     <GUI:ControlRef>e7b4afe1-a1d3-4386-a77a-e939460de6ad</GUI:ControlRef>
     <GUI:Kind>e39e18d2-c7a7-4ed6-9542-4d76177c7521</GUI:Kind>
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
     <GUI:Toolkit>1</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="f05ea0f0-274a-4faf-ac6b-5700eb8a98f3">
+    <GUI:ControlKind>90d5ff7f-0c82-4278-bb8d-49c240f6bc2c</GUI:ControlKind>
     <GUI:ControlRef>8a6b4152-a7b8-4cda-87a4-31f74b8f528a</GUI:ControlRef>
     <GUI:Kind>a012a762-5d8b-4aec-b396-e262cf30f9f9</GUI:Kind>
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
     <GUI:Toolkit>1</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="31b6f79b-947a-48be-b310-68068550764e">
+    <GUI:ControlKind>12b829e1-abab-43f3-99ea-e33cd383d7e6</GUI:ControlKind>
     <GUI:ControlRef>b20eb2ec-5fee-4236-a4ec-1cd1e78c7597</GUI:ControlRef>
     <GUI:Kind>b3f3e922-4fce-4c33-824d-40d47381e3cd</GUI:Kind>
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
     <GUI:Toolkit>1</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="92ebac84-6779-4b9a-8b25-4d095b4142cb">
+    <GUI:ControlKind>2279b0a6-36b8-4c97-b1fd-9eb1710e74f3</GUI:ControlKind>
     <GUI:ControlRef>cd208407-0852-4d6b-9495-989067765916</GUI:ControlRef>
     <GUI:Kind>d3f5a566-3331-4c7b-bed4-ea5166815b67</GUI:Kind>
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
     <GUI:Toolkit>1</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="a338e487-92b9-4c4d-901a-e0101299c6c0">
+    <GUI:ControlKind>d9fb7cec-b71f-48f1-a591-216de253c7d1</GUI:ControlKind>
     <GUI:ControlRef>4d51c7b4-d633-4e36-85f5-57057084c4b9</GUI:ControlRef>
     <GUI:Kind>68a53f9f-fbdb-4d44-8d58-da9be3812ba7</GUI:Kind>
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
     <GUI:Toolkit>1</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="3acd218f-ec55-471a-b915-28b0f5dc3f6e">
+    <GUI:ControlKind>329837fd-1146-48b2-9f4e-79aec8958b1e</GUI:ControlKind>
     <GUI:ControlRef>eac86566-ba79-4012-b4b6-ded6b617fabe</GUI:ControlRef>
     <GUI:Kind>4fdf9e9c-a21c-40ab-84c2-16b2c7b7ec5f</GUI:Kind>
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
     <GUI:Toolkit>1</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="b53bfe42-5122-47b2-8eab-b1e223073186">
+    <GUI:ControlKind>7e30f1de-076c-42d3-80b2-9c1111a6cdfb</GUI:ControlKind>
     <GUI:ControlRef>1b1fedf1-8006-41b7-9f3f-186a87825887</GUI:ControlRef>
     <GUI:Kind>4b3d5c5c-b170-440a-b576-ce379950c110</GUI:Kind>
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="f221b18a-6628-4ad1-b932-645ac37e6033">
+    <GUI:ControlKind>d55c9558-4ced-47b0-8eda-81553340fb5b</GUI:ControlKind>
     <GUI:ControlRef>268210f3-c451-4b6f-a8fb-1db8409a00f7</GUI:ControlRef>
     <GUI:Kind>4e6f1445-1d03-465a-b3b6-8ce6966e941c</GUI:Kind>
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="475c28d6-97a6-48a0-bee8-634aa0395ac0">
+    <GUI:ControlKind>d781be32-1e8a-416c-a964-9e51aa8694de</GUI:ControlKind>
     <GUI:ControlRef>47c1d713-7632-4bbb-9a30-4046b86db123</GUI:ControlRef>
     <GUI:Kind>a538afec-8d61-43ab-9e70-1973d3932c0a</GUI:Kind>
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="f8f68431-588b-49fa-8a30-54df477ac8aa">
+    <GUI:ControlKind>aee9072d-6d36-48ed-b94e-e7eff7321e46</GUI:ControlKind>
     <GUI:ControlRef>f0735939-9224-43f1-9bd7-73c7152b3c93</GUI:ControlRef>
     <GUI:Kind>7922ed7f-0c71-4d1a-8bfa-ad2c3c8f3b5c</GUI:Kind>
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="b88fd41f-4fdb-4167-8922-cf8efe176294">
+    <GUI:ControlKind>ab09eaba-507b-4dce-9fbd-589adbc9580b</GUI:ControlKind>
     <GUI:ControlRef>937a06f5-8bdb-47e7-b30d-ef5e944e2eae</GUI:ControlRef>
     <GUI:Kind>c6ed9c8e-e7b4-47af-948e-93bef8c7e1f8</GUI:Kind>
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
-  <ModuleEditorWorkspaceKind ExportGuid="66c71e86-39d1-4a19-a3c7-11b03168f598" xmlns="daszAt.ModuleEditor" />
-  <GUI:ActionKind ExportGuid="364aaaf3-0f61-4642-a0e3-bd812935cf44" />
-  <GUI:CheckboxKind ExportGuid="12b829e1-abab-43f3-99ea-e33cd383d7e6" />
-  <GUI:DataObjectKind ExportGuid="06bf9adc-c5bc-4552-abdc-18a96c527962" />
-  <GUI:DataObjectKind ExportGuid="a31b5081-88c2-4661-964b-7917578e0711" />
-  <GUI:DataObjectKind ExportGuid="c86d56f3-52c5-4864-ae26-b102cd61ffb6" />
-  <GUI:DataObjectKind ExportGuid="f0010cd6-9256-46ff-9629-5a707fa25158" />
-  <GUI:DataObjectSelectionTaskKind ExportGuid="18c0afa2-61bc-4ecb-b1e9-47b33b294573" />
-  <GUI:DataObjectSummaryKind ExportGuid="c2b9dfc5-0744-430c-9373-bcd98f783180" />
-  <GUI:EnumerationSelectorKind ExportGuid="9d414225-460a-4c54-8e36-e368804e387f" />
-  <GUI:ErrorListKind ExportGuid="7e30f1de-076c-42d3-80b2-9c1111a6cdfb" />
-  <GUI:InstanceListKind ExportGuid="06bd4b7a-df2c-44ab-8e1f-08288ac0e4e5" />
-  <GUI:InstanceListKind ExportGuid="4e7a8b0b-0c8e-49e1-aa35-d3a9ec7b8e4c" />
-  <GUI:InstanceListKind ExportGuid="7cbc941f-7990-4ec6-a39a-fbc4338b470b" />
-  <GUI:KistlDebuggerKind ExportGuid="59253ed1-a3a5-4574-b3bb-3c4fa535d21c" />
-  <GUI:LabelKind ExportGuid="194e5f9f-5586-41f8-bcfb-beb6b4016aa0" />
-  <GUI:LabelKind ExportGuid="a3f09ef3-2fac-4d7e-aea8-cbf0eab4de70" />
-  <GUI:LauncherKind ExportGuid="90d5ff7f-0c82-4278-bb8d-49c240f6bc2c" />
-  <GUI:ObjectListKind ExportGuid="9731f312-8ce4-4c2d-8d95-1923256dc9b8" />
+  <ModuleEditorWorkspaceKind ExportGuid="66c71e86-39d1-4a19-a3c7-11b03168f598" xmlns="daszAt.ModuleEditor">
+    <GUI:Module>0fe1ab38-860a-414f-a599-b0b86a22ce1a</GUI:Module>
+    <GUI:Name>ModuleEditorWorkspaceKind</GUI:Name>
+    <GUI:Parent>329837fd-1146-48b2-9f4e-79aec8958b1e</GUI:Parent>
+  </ModuleEditorWorkspaceKind>
+  <GUI:ActionKind ExportGuid="364aaaf3-0f61-4642-a0e3-bd812935cf44">
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:Name>ActionKind</GUI:Name>
+  </GUI:ActionKind>
+  <GUI:CheckboxKind ExportGuid="12b829e1-abab-43f3-99ea-e33cd383d7e6">
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:Name>CheckboxKind</GUI:Name>
+  </GUI:CheckboxKind>
+  <GUI:DataObjectKind ExportGuid="06bf9adc-c5bc-4552-abdc-18a96c527962">
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:Name>DataObjectKind</GUI:Name>
+  </GUI:DataObjectKind>
+  <GUI:DataObjectSelectionTaskKind ExportGuid="18c0afa2-61bc-4ecb-b1e9-47b33b294573">
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:Name>DataObjectSelectionTaskKind</GUI:Name>
+  </GUI:DataObjectSelectionTaskKind>
+  <GUI:DataObjectSummaryKind ExportGuid="c2b9dfc5-0744-430c-9373-bcd98f783180">
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:Name>DataObjectSummaryKind</GUI:Name>
+  </GUI:DataObjectSummaryKind>
+  <GUI:EnumerationSelectorKind ExportGuid="9d414225-460a-4c54-8e36-e368804e387f">
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:Name>EnumerationSelectorKind</GUI:Name>
+  </GUI:EnumerationSelectorKind>
+  <GUI:ErrorListKind ExportGuid="7e30f1de-076c-42d3-80b2-9c1111a6cdfb">
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:Name>ErrorListKind</GUI:Name>
+  </GUI:ErrorListKind>
+  <GUI:InstanceListKind ExportGuid="4e7a8b0b-0c8e-49e1-aa35-d3a9ec7b8e4c">
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:Name>InstanceListKind</GUI:Name>
+  </GUI:InstanceListKind>
+  <GUI:KistlDebuggerKind ExportGuid="59253ed1-a3a5-4574-b3bb-3c4fa535d21c">
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:Name>KistlDebuggerKind</GUI:Name>
+  </GUI:KistlDebuggerKind>
+  <GUI:LabelKind ExportGuid="a3f09ef3-2fac-4d7e-aea8-cbf0eab4de70">
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:Name>LabelKind</GUI:Name>
+  </GUI:LabelKind>
+  <GUI:LauncherKind ExportGuid="90d5ff7f-0c82-4278-bb8d-49c240f6bc2c">
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:Name>LauncherKind</GUI:Name>
+  </GUI:LauncherKind>
+  <GUI:ObjectListKind ExportGuid="9731f312-8ce4-4c2d-8d95-1923256dc9b8">
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:Name>ObjectListKind</GUI:Name>
+  </GUI:ObjectListKind>
   <GUI:ObjectRefGridCellKind ExportGuid="d55c9558-4ced-47b0-8eda-81553340fb5b">
-    <GUI:RequestedWidth>200</GUI:RequestedWidth>
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:Name>ObjectRefGridCellKind</GUI:Name>
   </GUI:ObjectRefGridCellKind>
-  <GUI:ObjectRefKind ExportGuid="b86945ed-9edc-42ca-9ca5-8124fbf47b5c" />
-  <GUI:PropertyGroupKind ExportGuid="d9fb7cec-b71f-48f1-a591-216de253c7d1" />
-  <GUI:RelationEditorKind ExportGuid="f7cf3060-5fa5-4077-93e9-5fc681f875fe" />
-  <GUI:SimpleBoolFilterKind ExportGuid="d781be32-1e8a-416c-a964-9e51aa8694de" />
-  <GUI:SingleLineDataObjectKind ExportGuid="66e080be-471d-4dc5-9850-25bedbdfc76e" />
-  <GUI:StringFilterKind ExportGuid="aee9072d-6d36-48ed-b94e-e7eff7321e46" />
+  <GUI:ObjectRefKind ExportGuid="b86945ed-9edc-42ca-9ca5-8124fbf47b5c">
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:Name>ObjectRefKind</GUI:Name>
+  </GUI:ObjectRefKind>
+  <GUI:PropertyGroupKind ExportGuid="d9fb7cec-b71f-48f1-a591-216de253c7d1">
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:Name>PropertyGroupKind</GUI:Name>
+  </GUI:PropertyGroupKind>
+  <GUI:RelationEditorKind ExportGuid="f7cf3060-5fa5-4077-93e9-5fc681f875fe">
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:Name>RelationEditorKind</GUI:Name>
+    <GUI:Parent>06bf9adc-c5bc-4552-abdc-18a96c527962</GUI:Parent>
+  </GUI:RelationEditorKind>
+  <GUI:SimpleBoolFilterKind ExportGuid="d781be32-1e8a-416c-a964-9e51aa8694de">
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:Name>SimpleBoolFilterKind</GUI:Name>
+  </GUI:SimpleBoolFilterKind>
+  <GUI:SingleLineDataObjectKind ExportGuid="66e080be-471d-4dc5-9850-25bedbdfc76e">
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:Name>SingleLineDataObjectKind</GUI:Name>
+  </GUI:SingleLineDataObjectKind>
+  <GUI:StringFilterKind ExportGuid="aee9072d-6d36-48ed-b94e-e7eff7321e46">
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:Name>StringFilterKind</GUI:Name>
+  </GUI:StringFilterKind>
   <GUI:StringListKind ExportGuid="f9092349-b263-4887-b605-cccac6a361bd">
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:Name>StringListKind</GUI:Name>
     <GUI:ItemKind>d3f5a566-3331-4c7b-bed4-ea5166815b67</GUI:ItemKind>
   </GUI:StringListKind>
-  <GUI:StringSelectorKind ExportGuid="ab09eaba-507b-4dce-9fbd-589adbc9580b" />
-  <GUI:TextboxKind ExportGuid="200f0be5-9f23-4ddb-9a00-0133b4fc295d" />
-  <GUI:TextboxKind ExportGuid="2279b0a6-36b8-4c97-b1fd-9eb1710e74f3" />
-  <GUI:TextboxKind ExportGuid="227dcbce-4905-4337-a6a0-720c9d218ab7" />
-  <GUI:TextboxKind ExportGuid="2377807c-605b-4e64-9c74-361d3ea6f353" />
-  <GUI:TextboxKind ExportGuid="2686036b-b3c9-45b9-9361-e452d69cdc09" />
-  <GUI:TypeRefRefKind ExportGuid="6b5093bb-3ac0-4710-b30d-d72a50b09ee8" />
-  <GUI:WorkspaceKind ExportGuid="329837fd-1146-48b2-9f4e-79aec8958b1e" />
-  <GUI:WorkspaceKind ExportGuid="44654dc7-6f5f-46a1-bdc6-7c3bd124b5bb" />
+  <GUI:StringSelectorKind ExportGuid="ab09eaba-507b-4dce-9fbd-589adbc9580b">
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:Name>StringSelectorKind</GUI:Name>
+  </GUI:StringSelectorKind>
+  <GUI:TextboxKind ExportGuid="2279b0a6-36b8-4c97-b1fd-9eb1710e74f3">
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:Name>TextboxKind</GUI:Name>
+  </GUI:TextboxKind>
+  <GUI:TypeRefRefKind ExportGuid="6b5093bb-3ac0-4710-b30d-d72a50b09ee8">
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:Name>TypeRefRefKind</GUI:Name>
+    <GUI:Parent>b86945ed-9edc-42ca-9ca5-8124fbf47b5c</GUI:Parent>
+  </GUI:TypeRefRefKind>
+  <GUI:WorkspaceKind ExportGuid="329837fd-1146-48b2-9f4e-79aec8958b1e">
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:Name>WorkspaceKind</GUI:Name>
+  </GUI:WorkspaceKind>
   <GUI:ViewModelDescriptor_displayedBy_ControlKind_RelationEntry ExportGuid="ddba1bc9-bfa6-4438-bf71-78787a4fd9bf">
     <GUI:A>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:A>
     <GUI:B>c2b9dfc5-0744-430c-9373-bcd98f783180</GUI:B>

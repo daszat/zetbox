@@ -834,6 +834,10 @@
       <End Role="Child" EntitySet="TypeRef" />
       <End Role="Parent" EntitySet="TypeRef" />
     </AssociationSet>
+    <AssociationSet Name="FK_ChildControlKinds_have_a_Parent" Association="Model.Store.FK_ChildControlKinds_have_a_Parent" >
+      <End Role="ChildControlKinds" EntitySet="ControlKind" />
+      <End Role="Parent" EntitySet="ControlKind" />
+    </AssociationSet>
     <AssociationSet Name="FK_ClrObjectParameter_isOf_Type" Association="Model.Store.FK_ClrObjectParameter_isOf_Type" >
       <End Role="ClrObjectParameter" EntitySet="CLRObjectParameter" />
       <End Role="Type" EntitySet="TypeRef" />
@@ -873,6 +877,10 @@
     <AssociationSet Name="FK_Control_isof_Kind" Association="Model.Store.FK_Control_isof_Kind" >
       <End Role="Control" EntitySet="ViewDescriptor" />
       <End Role="Kind" EntitySet="ControlKindClass" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ControlKind_has_Module" Association="Model.Store.FK_ControlKind_has_Module" >
+      <End Role="ControlKind" EntitySet="ControlKind" />
+      <End Role="Module" EntitySet="Module" />
     </AssociationSet>
     <AssociationSet Name="FK_DataType_has_DefaultIcon" Association="Model.Store.FK_DataType_has_DefaultIcon" >
       <End Role="DataType" EntitySet="DataType" />
@@ -1218,6 +1226,10 @@
       <End Role="ViewDescriptor" EntitySet="ViewDescriptor" />
       <End Role="Module" EntitySet="Module" />
     </AssociationSet>
+    <AssociationSet Name="FK_ViewDescriptor_is_a_ControlKind" Association="Model.Store.FK_ViewDescriptor_is_a_ControlKind" >
+      <End Role="ViewDescriptor" EntitySet="ViewDescriptor" />
+      <End Role="ControlKind" EntitySet="ControlKind" />
+    </AssociationSet>
     <AssociationSet Name="FK_ViewModelDescriptor_displayedInGridBy_DefaultGridCellKind" Association="Model.Store.FK_ViewModelDescriptor_displayedInGridBy_DefaultGridCellKind" >
       <End Role="ViewModelDescriptor" EntitySet="ViewModelDescriptor" />
       <End Role="DefaultGridCellKind" EntitySet="ControlKind" />
@@ -1487,8 +1499,10 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_Parent" Type="int" />
+    <Property Name="fk_Module" Type="int" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="RequestedWidth" Type="float" Nullable="true" />
+    <Property Name="Name" Type="nvarchar" MaxLength="1000" Nullable="true" />
   </EntityType>
 	
   <EntityType Name="ControlKindClass">
@@ -2406,6 +2420,7 @@
     <Property Name="fk_Kind" Type="int" />
     <Property Name="fk_ControlRef" Type="int" />
     <Property Name="fk_Module" Type="int" />
+    <Property Name="fk_ControlKind" Type="int" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
     <Property Name="Toolkit" Type="int" Nullable="false" />
   </EntityType>
@@ -3417,6 +3432,20 @@
   </Association>
 
 
+  <Association Name="FK_ChildControlKinds_have_a_Parent">
+    <End Role="Parent" Type="Model.Store.ControlKind" Multiplicity="0..1" />
+    <End Role="ChildControlKinds" Type="Model.Store.ControlKind" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Parent">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ChildControlKinds">
+        <PropertyRef Name="fk_Parent" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
   <Association Name="FK_ClrObjectParameter_isOf_Type">
     <End Role="Type" Type="Model.Store.TypeRef" Multiplicity="0..1" />
     <End Role="ClrObjectParameter" Type="Model.Store.CLRObjectParameter" Multiplicity="*" />
@@ -3552,6 +3581,20 @@
       </Principal>
       <Dependent Role="Control">
         <PropertyRef Name="fk_Kind" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_ControlKind_has_Module">
+    <End Role="Module" Type="Model.Store.Module" Multiplicity="0..1" />
+    <End Role="ControlKind" Type="Model.Store.ControlKind" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Module">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ControlKind">
+        <PropertyRef Name="fk_Module" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -4756,6 +4799,20 @@
       </Principal>
       <Dependent Role="ViewDescriptor">
         <PropertyRef Name="fk_Module" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_ViewDescriptor_is_a_ControlKind">
+    <End Role="ControlKind" Type="Model.Store.ControlKind" Multiplicity="0..1" />
+    <End Role="ViewDescriptor" Type="Model.Store.ViewDescriptor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ControlKind">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ViewDescriptor">
+        <PropertyRef Name="fk_ControlKind" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

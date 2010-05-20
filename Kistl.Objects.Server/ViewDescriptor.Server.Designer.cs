@@ -58,6 +58,97 @@ namespace Kistl.App.GUI
         private int _ID;
 
         /// <summary>
+        /// 
+        /// </summary>
+    /*
+    Relation: FK_ViewDescriptor_is_a_ControlKind
+    A: ZeroOrMore ViewDescriptor as ViewDescriptor
+    B: ZeroOrOne ControlKind as ControlKind
+    Preferred Storage: MergeIntoA
+    */
+        // object reference property
+   		// Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public Kistl.App.GUI.ControlKind ControlKind
+        {
+            get
+            {
+                return ControlKind__Implementation__;
+            }
+            set
+            {
+                // TODO: NotifyPropertyChanged()
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if(value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                ControlKind__Implementation__ = (Kistl.App.GUI.ControlKind__Implementation__)value;
+            }
+        }
+        
+        private int? _fk_ControlKind;
+        private Guid? _fk_guid_ControlKind = null;
+        // EF sees only this property
+        [EdmRelationshipNavigationProperty("Model", "FK_ViewDescriptor_is_a_ControlKind", "ControlKind")]
+        public Kistl.App.GUI.ControlKind__Implementation__ ControlKind__Implementation__
+        {
+            get
+            {
+                EntityReference<Kistl.App.GUI.ControlKind__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.ControlKind__Implementation__>(
+                        "Model.FK_ViewDescriptor_is_a_ControlKind",
+                        "ControlKind");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load(); 
+                    if(r.Value != null) r.Value.AttachToContext(this.Context);
+                }
+                var __value = r.Value;
+				if(OnControlKind_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<Kistl.App.GUI.ControlKind>(__value);
+					OnControlKind_Getter(this, e);
+					__value = (Kistl.App.GUI.ControlKind__Implementation__)e.Result;
+				}
+                return __value;
+            }
+            set
+            {
+                EntityReference<Kistl.App.GUI.ControlKind__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.ControlKind__Implementation__>(
+                        "Model.FK_ViewDescriptor_is_a_ControlKind",
+                        "ControlKind");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load(); 
+                }
+                Kistl.App.GUI.ControlKind __oldValue = (Kistl.App.GUI.ControlKind)r.Value;
+                Kistl.App.GUI.ControlKind __newValue = (Kistl.App.GUI.ControlKind)value;
+
+                if(OnControlKind_PreSetter != null)
+                {
+					var e = new PropertyPreSetterEventArgs<Kistl.App.GUI.ControlKind>(__oldValue, __newValue);
+					OnControlKind_PreSetter(this, e);
+					__newValue = e.Result;
+                }
+                r.Value = (Kistl.App.GUI.ControlKind__Implementation__)__newValue;
+                if(OnControlKind_PostSetter != null)
+                {
+					var e = new PropertyPostSetterEventArgs<Kistl.App.GUI.ControlKind>(__oldValue, __newValue);
+					OnControlKind_PostSetter(this, e);
+                }
+                                
+            }
+        }
+        
+        
+		public static event PropertyGetterHandler<Kistl.App.GUI.ViewDescriptor, Kistl.App.GUI.ControlKind> OnControlKind_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.GUI.ViewDescriptor, Kistl.App.GUI.ControlKind> OnControlKind_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.GUI.ViewDescriptor, Kistl.App.GUI.ControlKind> OnControlKind_PostSetter;
+
+        /// <summary>
         /// The control implementing this View
         /// </summary>
     /*
@@ -525,6 +616,7 @@ namespace Kistl.App.GUI
 
 			me.ExportGuid = other.ExportGuid;
 			me.Toolkit = other.Toolkit;
+			this._fk_ControlKind = otherImpl._fk_ControlKind;
 			this._fk_ControlRef = otherImpl._fk_ControlRef;
 			this._fk_Kind = otherImpl._fk_Kind;
 			this._fk_Module = otherImpl._fk_Module;
@@ -582,6 +674,13 @@ namespace Kistl.App.GUI
 
 		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
 			// else
+			new CustomPropertyDescriptor<ViewDescriptor__Implementation__, Kistl.App.GUI.ControlKind>(
+				new Guid("7720b38c-64af-4607-bc73-d015af6612e3"),
+				"ControlKind",
+				null,
+				obj => obj.ControlKind,
+				(obj, val) => obj.ControlKind = val),
+			// else
 			new CustomPropertyDescriptor<ViewDescriptor__Implementation__, Kistl.App.Base.TypeRef>(
 				new Guid("eff6276d-975b-4a0d-bd3c-ad76af2189c3"),
 				"ControlRef",
@@ -625,6 +724,7 @@ namespace Kistl.App.GUI
 				(obj, val) => obj.Toolkit = val),
 			// rel: ViewDescriptor has Module (51b089fa-edd9-4a1b-9f4c-ccfdaad76856)
 			// rel: View has ControlRef (6c1c4c7c-7f0c-4c80-a937-ed6af8774d3f)
+			// rel: ViewDescriptor is_a ControlKind (bffabb36-7862-4fcf-b8fb-efb719c70f3f)
 			// rel: Control isof Kind (b4911f1f-d707-4b14-9b7e-b6c6fd49a640)
 		};
 		
@@ -641,6 +741,13 @@ namespace Kistl.App.GUI
 			// TODO: enable when MemoryContext uses MemoryDataObjects
 			//if (this.ObjectState == DataObjectState.Deleted) return;
 			// fix direct object references
+
+			if (_fk_guid_ControlKind.HasValue)
+				ControlKind__Implementation__ = (Kistl.App.GUI.ControlKind__Implementation__)Context.FindPersistenceObject<Kistl.App.GUI.ControlKind>(_fk_guid_ControlKind.Value);
+			else if (_fk_ControlKind.HasValue)
+				ControlKind__Implementation__ = (Kistl.App.GUI.ControlKind__Implementation__)Context.Find<Kistl.App.GUI.ControlKind>(_fk_ControlKind.Value);
+			else
+				ControlKind__Implementation__ = null;
 
 			if (_fk_guid_ControlRef.HasValue)
 				ControlRef__Implementation__ = (Kistl.App.Base.TypeRef__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.TypeRef>(_fk_guid_ControlRef.Value);
@@ -670,6 +777,7 @@ namespace Kistl.App.GUI
         {
             
             base.ToStream(binStream, auxObjects, eagerLoadLists);
+            BinarySerializer.ToStream(ControlKind != null ? ControlKind.ID : (int?)null, binStream);
             BinarySerializer.ToStream(ControlRef != null ? ControlRef.ID : (int?)null, binStream);
 			if (auxObjects != null) {
 				auxObjects.Add(ControlRef);
@@ -701,6 +809,7 @@ namespace Kistl.App.GUI
         {
             
             base.FromStream(binStream);
+            BinarySerializer.FromStream(out this._fk_ControlKind, binStream);
             BinarySerializer.FromStream(out this._fk_ControlRef, binStream);
             BinarySerializer.FromStream(out this._isExportGuidSet, binStream);
             if (this._isExportGuidSet) {
@@ -721,6 +830,7 @@ namespace Kistl.App.GUI
         {
             
             base.ToStream(xml);
+            XmlStreamer.ToStream(ControlKind != null ? ControlKind.ID : (int?)null, xml, "ControlKind", "Kistl.App.GUI");
             XmlStreamer.ToStream(ControlRef != null ? ControlRef.ID : (int?)null, xml, "ControlRef", "Kistl.App.GUI");
             XmlStreamer.ToStream(this._isExportGuidSet, xml, "IsExportGuidSet", "Kistl.App.GUI");
             if (this._isExportGuidSet) {
@@ -735,6 +845,7 @@ namespace Kistl.App.GUI
         {
             
             base.FromStream(xml);
+            XmlStreamer.FromStream(ref this._fk_ControlKind, xml, "ControlKind", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._fk_ControlRef, xml, "ControlRef", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._isExportGuidSet, xml, "IsExportGuidSet", "Kistl.App.GUI");
             if (this._isExportGuidSet) {
@@ -749,6 +860,7 @@ namespace Kistl.App.GUI
         {
             
             xml.WriteAttributeString("ExportGuid", this._ExportGuid.ToString());
+            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(ControlKind != null ? ControlKind.ExportGuid : (Guid?)null, xml, "ControlKind", "Kistl.App.GUI");
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(ControlRef != null ? ControlRef.ExportGuid : (Guid?)null, xml, "ControlRef", "Kistl.App.GUI");
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(Kind != null ? Kind.ExportGuid : (Guid?)null, xml, "Kind", "Kistl.App.GUI");
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(Module != null ? Module.ExportGuid : (Guid?)null, xml, "Module", "Kistl.App.GUI");
@@ -757,6 +869,7 @@ namespace Kistl.App.GUI
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
         {
+            XmlStreamer.FromStream(ref this._fk_guid_ControlKind, xml, "ControlKind", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._fk_guid_ControlRef, xml, "ControlRef", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.GUI");
             this._isExportGuidSet = true;

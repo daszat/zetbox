@@ -114,6 +114,7 @@ namespace Kistl.Client.Presentables
                 f = t.GetNestedType("Factory");
                 if (f == null)
                 {
+                    Logging.Log.WarnFormat("Type {0} does not have a factory delegate. Lokking in base class", t.FullName);
                     t = t.BaseType;
                 }
                 else

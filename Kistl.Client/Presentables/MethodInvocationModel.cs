@@ -15,6 +15,8 @@ namespace Kistl.Client.Presentables
     public class MethodInvocationModel
         : DataObjectModel
     {
+        public new delegate MethodInvocationModel Factory(IKistlContext dataCtx, MethodInvocation mdl);
+
         public MethodInvocationModel(
             IViewModelDependencies appCtx, KistlConfig config, IKistlContext dataCtx,
             MethodInvocation mdl)

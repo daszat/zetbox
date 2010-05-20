@@ -69,7 +69,7 @@ namespace Kistl.Client
             moduleBuilder
                 .RegisterType<ModelFactory>()
                 .As<IModelFactory>()
-                .SingleInstance();
+                .InstancePerLifetimeScope();
 
             moduleBuilder
                 .RegisterType<SynchronousThreadManager>()

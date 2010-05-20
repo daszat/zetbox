@@ -191,6 +191,8 @@ namespace Kistl.App.Base
             var rel = (Relation)constrainedObject;
             if (rel.A != null && rel.B != null)
             {
+                if (rel.A.Multiplicity == 0 || rel.B.Multiplicity == 0) return false;
+
                 var relType = rel.GetRelationType();
 
                 switch (rel.Containment)
@@ -223,6 +225,11 @@ namespace Kistl.App.Base
             var rel = (Relation)constrainedObject;
             if (rel.A != null && rel.B != null)
             {
+                if (rel.A.Multiplicity == 0 || rel.B.Multiplicity == 0)
+                {
+                    return "Incomplete Relation (A.Multiplicity or B.Multiplicity missing)";
+                }
+
                 var relType = rel.GetRelationType();
 
                 switch (rel.Containment)

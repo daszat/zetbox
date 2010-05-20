@@ -159,7 +159,6 @@ namespace Kistl.Client.WPF.View.KistlBase
                 cpFef.SetValue(ContentPresenter.ContentTemplateSelectorProperty, FindResource("defaultTemplateSelector"));
                 result.VisualTree = cpFef;
                 col.CellTemplate = result;
-                col.Width = desc.ControlKind.RequestedWidth ?? Double.NaN;
                 view.Columns.Add(col);
             }
 

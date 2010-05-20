@@ -651,7 +651,7 @@ namespace Kistl.Server.SchemaManagement
 
             if (srcTblName == destTblName && srcColName == destColName)
             {
-                // Do nothing
+                db.DropIndex(srcTblName, Construct.IndexName(srcTblName, srcColName));
             }
             else if (srcTblName == destTblName && srcColName != destColName)
             {

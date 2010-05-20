@@ -28,6 +28,8 @@ namespace Kistl.API.Utils
         private readonly ICollection<TInput> _collection;
         private readonly Func<TInput, TOutput> _selector;
         private readonly Func<TOutput, TInput> _inverter;
+        private readonly Dictionary<TInput, TOutput> _selectorCache = new Dictionary<TInput, TOutput>();
+        private readonly Dictionary<TOutput, TInput> _inverterCache = new Dictionary<TOutput, TInput>();
 
         /// <summary>
         /// </summary>
@@ -40,8 +42,8 @@ namespace Kistl.API.Utils
             if (selector == null) { throw new ArgumentNullException("selector"); }
 
             _collection = collection;
-            _selector = selector;
-            _inverter = inverter;
+            _selector = input => { if (_selectorCache.ContainsKey(input)) { return _selectorCache[input]; } else { return _selectorCache[input] = selector(input); } };
+            _inverter = output => { if (_inverterCache.ContainsKey(output)) { return _inverterCache[output]; } else { return _inverterCache[output] = inverter(output); } };
         }
 
         #region Utilities

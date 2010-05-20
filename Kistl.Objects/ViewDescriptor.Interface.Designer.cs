@@ -14,6 +14,13 @@ namespace Kistl.App.GUI
     {
 
         /// <summary>
+        /// 
+        /// </summary>
+		Kistl.App.GUI.ControlKind ControlKind {
+			get;
+			set;
+		}
+        /// <summary>
         /// The control implementing this View
         /// </summary>
 		Kistl.App.Base.TypeRef ControlRef {

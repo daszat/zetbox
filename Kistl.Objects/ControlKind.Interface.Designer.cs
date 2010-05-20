@@ -10,13 +10,25 @@ namespace Kistl.App.GUI
     /// <summary>
     /// The ControlKind specifies the toolkit-independent kind or type of control that should display a given Presentable.
     /// </summary>
-    public interface ControlKind : IDataObject, Kistl.App.Base.IExportable 
+    public interface ControlKind : IDataObject, Kistl.App.Base.IExportable, Kistl.App.Base.IModuleMember 
     {
 
         /// <summary>
-        /// The requested width for displaying this control. May be NULL to request auto-sizing.
+        /// 
         /// </summary>
-		double? RequestedWidth {
+
+        ICollection<Kistl.App.GUI.ControlKind> ChildControlKinds { get; }
+        /// <summary>
+        /// Name of this ControlKind
+        /// </summary>
+		string Name {
+			get;
+			set;
+		}
+        /// <summary>
+        /// 
+        /// </summary>
+		Kistl.App.GUI.ControlKind Parent {
 			get;
 			set;
 		}

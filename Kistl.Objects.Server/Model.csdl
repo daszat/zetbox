@@ -317,6 +317,10 @@
       <End Role="Child" EntitySet="TypeRef" />
       <End Role="Parent" EntitySet="TypeRef" />
     </AssociationSet>
+    <AssociationSet Name="FK_ChildControlKinds_have_a_Parent" Association="Model.FK_ChildControlKinds_have_a_Parent" >
+      <End Role="ChildControlKinds" EntitySet="ControlKind" />
+      <End Role="Parent" EntitySet="ControlKind" />
+    </AssociationSet>
     <AssociationSet Name="FK_ClrObjectParameter_isOf_Type" Association="Model.FK_ClrObjectParameter_isOf_Type" >
       <End Role="ClrObjectParameter" EntitySet="BaseParameter" />
       <End Role="Type" EntitySet="TypeRef" />
@@ -356,6 +360,10 @@
     <AssociationSet Name="FK_Control_isof_Kind" Association="Model.FK_Control_isof_Kind" >
       <End Role="Control" EntitySet="ViewDescriptor" />
       <End Role="Kind" EntitySet="DataType" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ControlKind_has_Module" Association="Model.FK_ControlKind_has_Module" >
+      <End Role="ControlKind" EntitySet="ControlKind" />
+      <End Role="Module" EntitySet="Module" />
     </AssociationSet>
     <AssociationSet Name="FK_DataType_has_DefaultIcon" Association="Model.FK_DataType_has_DefaultIcon" >
       <End Role="DataType" EntitySet="DataType" />
@@ -701,6 +709,10 @@
       <End Role="ViewDescriptor" EntitySet="ViewDescriptor" />
       <End Role="Module" EntitySet="Module" />
     </AssociationSet>
+    <AssociationSet Name="FK_ViewDescriptor_is_a_ControlKind" Association="Model.FK_ViewDescriptor_is_a_ControlKind" >
+      <End Role="ViewDescriptor" EntitySet="ViewDescriptor" />
+      <End Role="ControlKind" EntitySet="ControlKind" />
+    </AssociationSet>
     <AssociationSet Name="FK_ViewModelDescriptor_displayedInGridBy_DefaultGridCellKind" Association="Model.FK_ViewModelDescriptor_displayedInGridBy_DefaultGridCellKind" >
       <End Role="ViewModelDescriptor" EntitySet="ViewModelDescriptor" />
       <End Role="DefaultGridCellKind" EntitySet="ControlKind" />
@@ -947,8 +959,20 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ChildControlKinds__Implementation__"
+                        Relationship="Model.FK_ChildControlKinds_have_a_Parent"
+                        FromRole="Parent"
+                        ToRole="ChildControlKinds" />
     <Property Name="ExportGuid" Type="Guid" Nullable="false" />
-    <Property Name="RequestedWidth" Type="Double" Nullable="true" />
+    <NavigationProperty Name="Module__Implementation__"
+                        Relationship="Model.FK_ControlKind_has_Module"
+                        FromRole="ControlKind"
+                        ToRole="Module" />
+    <Property Name="Name" Type="String" Nullable="true" MaxLength="1000" />
+    <NavigationProperty Name="Parent__Implementation__"
+                        Relationship="Model.FK_ChildControlKinds_have_a_Parent"
+                        FromRole="ChildControlKinds"
+                        ToRole="Parent" />
   </EntityType>
   <EntityType Name="CurrentSchema">
     <Key>
@@ -1782,6 +1806,10 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ControlKind__Implementation__"
+                        Relationship="Model.FK_ViewDescriptor_is_a_ControlKind"
+                        FromRole="ViewDescriptor"
+                        ToRole="ControlKind" />
     <NavigationProperty Name="ControlRef__Implementation__"
                         Relationship="Model.FK_View_has_ControlRef"
                         FromRole="View"
@@ -3111,6 +3139,14 @@
          Type="Model.TypeRef" 
          Multiplicity="0..1" />
   </Association>
+  <Association Name="FK_ChildControlKinds_have_a_Parent" >
+    <End Role="ChildControlKinds"
+         Type="Model.ControlKind" 
+         Multiplicity="*" />
+    <End Role="Parent"
+         Type="Model.ControlKind" 
+         Multiplicity="0..1" />
+  </Association>
   <Association Name="FK_ClrObjectParameter_isOf_Type" >
     <End Role="ClrObjectParameter"
          Type="Model.CLRObjectParameter" 
@@ -3189,6 +3225,14 @@
          Multiplicity="*" />
     <End Role="Kind"
          Type="Model.ControlKindClass" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_ControlKind_has_Module" >
+    <End Role="ControlKind"
+         Type="Model.ControlKind" 
+         Multiplicity="*" />
+    <End Role="Module"
+         Type="Model.Module" 
          Multiplicity="0..1" />
   </Association>
   <Association Name="FK_DataType_has_DefaultIcon" >
@@ -3618,7 +3662,7 @@
   <Association Name="FK_Presentable_has_DefaultKind" >
     <End Role="Presentable"
          Type="Model.ViewModelDescriptor" 
-         Multiplicity="0..1" />
+         Multiplicity="*" />
     <End Role="DefaultKind"
          Type="Model.ControlKind" 
          Multiplicity="0..1" />
@@ -3879,10 +3923,18 @@
          Type="Model.Module" 
          Multiplicity="0..1" />
   </Association>
+  <Association Name="FK_ViewDescriptor_is_a_ControlKind" >
+    <End Role="ViewDescriptor"
+         Type="Model.ViewDescriptor" 
+         Multiplicity="*" />
+    <End Role="ControlKind"
+         Type="Model.ControlKind" 
+         Multiplicity="0..1" />
+  </Association>
   <Association Name="FK_ViewModelDescriptor_displayedInGridBy_DefaultGridCellKind" >
     <End Role="ViewModelDescriptor"
          Type="Model.ViewModelDescriptor" 
-         Multiplicity="0..1" />
+         Multiplicity="*" />
     <End Role="DefaultGridCellKind"
          Type="Model.ControlKind" 
          Multiplicity="0..1" />

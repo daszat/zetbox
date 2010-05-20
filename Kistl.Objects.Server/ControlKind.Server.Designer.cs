@@ -58,6 +58,55 @@ namespace Kistl.App.GUI
         private int _ID;
 
         /// <summary>
+        /// 
+        /// </summary>
+    /*
+    Relation: FK_ChildControlKinds_have_a_Parent
+    A: ZeroOrMore ControlKind as ChildControlKinds
+    B: ZeroOrOne ControlKind as Parent
+    Preferred Storage: MergeIntoA
+    */
+        // object list property
+   		// Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.ObjectListProperty
+	    // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public ICollection<Kistl.App.GUI.ControlKind> ChildControlKinds
+        {
+            get
+            {
+                if (_ChildControlKindsWrapper == null)
+                {
+                    _ChildControlKindsWrapper = new EntityCollectionWrapper<Kistl.App.GUI.ControlKind, Kistl.App.GUI.ControlKind__Implementation__>(
+                            this.Context, ChildControlKinds__Implementation__);
+                }
+                return _ChildControlKindsWrapper;
+            }
+        }
+        
+        [EdmRelationshipNavigationProperty("Model", "FK_ChildControlKinds_have_a_Parent", "ChildControlKinds")]
+        public EntityCollection<Kistl.App.GUI.ControlKind__Implementation__> ChildControlKinds__Implementation__
+        {
+            get
+            {
+                var c = ((IEntityWithRelationships)(this)).RelationshipManager
+                    .GetRelatedCollection<Kistl.App.GUI.ControlKind__Implementation__>(
+                        "Model.FK_ChildControlKinds_have_a_Parent",
+                        "ChildControlKinds");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !c.IsLoaded)
+                {
+                    c.Load();
+                }
+                c.ForEach(i => i.AttachToContext(Context));
+                return c;
+            }
+        }
+        private EntityCollectionWrapper<Kistl.App.GUI.ControlKind, Kistl.App.GUI.ControlKind__Implementation__> _ChildControlKindsWrapper;
+
+
+
+        /// <summary>
         /// Export Guid
         /// </summary>
         // value type property
@@ -121,24 +170,115 @@ namespace Kistl.App.GUI
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.ControlKind, Guid> OnExportGuid_PostSetter;
 
         /// <summary>
-        /// The requested width for displaying this control. May be NULL to request auto-sizing.
+        /// 
+        /// </summary>
+    /*
+    Relation: FK_ControlKind_has_Module
+    A: ZeroOrMore ControlKind as ControlKind
+    B: ZeroOrOne Module as Module
+    Preferred Storage: MergeIntoA
+    */
+        // object reference property
+   		// Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public Kistl.App.Base.Module Module
+        {
+            get
+            {
+                return Module__Implementation__;
+            }
+            set
+            {
+                // TODO: NotifyPropertyChanged()
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if(value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                Module__Implementation__ = (Kistl.App.Base.Module__Implementation__)value;
+            }
+        }
+        
+        private int? _fk_Module;
+        private Guid? _fk_guid_Module = null;
+        // EF sees only this property
+        [EdmRelationshipNavigationProperty("Model", "FK_ControlKind_has_Module", "Module")]
+        public Kistl.App.Base.Module__Implementation__ Module__Implementation__
+        {
+            get
+            {
+                EntityReference<Kistl.App.Base.Module__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Module__Implementation__>(
+                        "Model.FK_ControlKind_has_Module",
+                        "Module");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load(); 
+                    if(r.Value != null) r.Value.AttachToContext(this.Context);
+                }
+                var __value = r.Value;
+				if(OnModule_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<Kistl.App.Base.Module>(__value);
+					OnModule_Getter(this, e);
+					__value = (Kistl.App.Base.Module__Implementation__)e.Result;
+				}
+                return __value;
+            }
+            set
+            {
+                EntityReference<Kistl.App.Base.Module__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Module__Implementation__>(
+                        "Model.FK_ControlKind_has_Module",
+                        "Module");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load(); 
+                }
+                Kistl.App.Base.Module __oldValue = (Kistl.App.Base.Module)r.Value;
+                Kistl.App.Base.Module __newValue = (Kistl.App.Base.Module)value;
+
+                if(OnModule_PreSetter != null)
+                {
+					var e = new PropertyPreSetterEventArgs<Kistl.App.Base.Module>(__oldValue, __newValue);
+					OnModule_PreSetter(this, e);
+					__newValue = e.Result;
+                }
+                r.Value = (Kistl.App.Base.Module__Implementation__)__newValue;
+                if(OnModule_PostSetter != null)
+                {
+					var e = new PropertyPostSetterEventArgs<Kistl.App.Base.Module>(__oldValue, __newValue);
+					OnModule_PostSetter(this, e);
+                }
+                                
+            }
+        }
+        
+        
+		public static event PropertyGetterHandler<Kistl.App.GUI.ControlKind, Kistl.App.Base.Module> OnModule_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.GUI.ControlKind, Kistl.App.Base.Module> OnModule_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.GUI.ControlKind, Kistl.App.Base.Module> OnModule_PostSetter;
+
+        /// <summary>
+        /// Name of this ControlKind
         /// </summary>
         // value type property
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
            // Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.NotifyingDataProperty
-        public virtual double? RequestedWidth
+        public virtual string Name
         {
             get
             {
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
-                var __result = _RequestedWidth;
-                if (OnRequestedWidth_Getter != null)
+                var __result = _Name;
+                if (OnName_Getter != null)
                 {
-                    var __e = new PropertyGetterEventArgs<double?>(__result);
-                    OnRequestedWidth_Getter(this, __e);
+                    var __e = new PropertyGetterEventArgs<string>(__result);
+                    OnName_Getter(this, __e);
                     __result = __e.Result;
                 }
                 return __result;
@@ -146,31 +286,122 @@ namespace Kistl.App.GUI
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
-                if (_RequestedWidth != value)
+                if (_Name != value)
                 {
-                    var __oldValue = _RequestedWidth;
+                    var __oldValue = _Name;
                     var __newValue = value;
-                    if(OnRequestedWidth_PreSetter != null)
+                    if(OnName_PreSetter != null)
                     {
-                        var __e = new PropertyPreSetterEventArgs<double?>(__oldValue, __newValue);
-                        OnRequestedWidth_PreSetter(this, __e);
+                        var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
+                        OnName_PreSetter(this, __e);
                         __newValue = __e.Result;
                     }
-                    NotifyPropertyChanging("RequestedWidth", __oldValue, __newValue);
-                    _RequestedWidth = __newValue;
-                    NotifyPropertyChanged("RequestedWidth", __oldValue, __newValue);
-                    if(OnRequestedWidth_PostSetter != null)
+                    NotifyPropertyChanging("Name", __oldValue, __newValue);
+                    _Name = __newValue;
+                    NotifyPropertyChanged("Name", __oldValue, __newValue);
+                    if(OnName_PostSetter != null)
                     {
-                        var __e = new PropertyPostSetterEventArgs<double?>(__oldValue, __newValue);
-                        OnRequestedWidth_PostSetter(this, __e);
+                        var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
+                        OnName_PostSetter(this, __e);
                     }
                 }
             }
         }
-        private double? _RequestedWidth;
-		public static event PropertyGetterHandler<Kistl.App.GUI.ControlKind, double?> OnRequestedWidth_Getter;
-		public static event PropertyPreSetterHandler<Kistl.App.GUI.ControlKind, double?> OnRequestedWidth_PreSetter;
-		public static event PropertyPostSetterHandler<Kistl.App.GUI.ControlKind, double?> OnRequestedWidth_PostSetter;
+        private string _Name;
+		public static event PropertyGetterHandler<Kistl.App.GUI.ControlKind, string> OnName_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.GUI.ControlKind, string> OnName_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.GUI.ControlKind, string> OnName_PostSetter;
+
+        /// <summary>
+        /// 
+        /// </summary>
+    /*
+    Relation: FK_ChildControlKinds_have_a_Parent
+    A: ZeroOrMore ControlKind as ChildControlKinds
+    B: ZeroOrOne ControlKind as Parent
+    Preferred Storage: MergeIntoA
+    */
+        // object reference property
+   		// Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public Kistl.App.GUI.ControlKind Parent
+        {
+            get
+            {
+                return Parent__Implementation__;
+            }
+            set
+            {
+                // TODO: NotifyPropertyChanged()
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if(value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                Parent__Implementation__ = (Kistl.App.GUI.ControlKind__Implementation__)value;
+            }
+        }
+        
+        private int? _fk_Parent;
+        private Guid? _fk_guid_Parent = null;
+        // EF sees only this property
+        [EdmRelationshipNavigationProperty("Model", "FK_ChildControlKinds_have_a_Parent", "Parent")]
+        public Kistl.App.GUI.ControlKind__Implementation__ Parent__Implementation__
+        {
+            get
+            {
+                EntityReference<Kistl.App.GUI.ControlKind__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.ControlKind__Implementation__>(
+                        "Model.FK_ChildControlKinds_have_a_Parent",
+                        "Parent");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load(); 
+                    if(r.Value != null) r.Value.AttachToContext(this.Context);
+                }
+                var __value = r.Value;
+				if(OnParent_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<Kistl.App.GUI.ControlKind>(__value);
+					OnParent_Getter(this, e);
+					__value = (Kistl.App.GUI.ControlKind__Implementation__)e.Result;
+				}
+                return __value;
+            }
+            set
+            {
+                EntityReference<Kistl.App.GUI.ControlKind__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.ControlKind__Implementation__>(
+                        "Model.FK_ChildControlKinds_have_a_Parent",
+                        "Parent");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load(); 
+                }
+                Kistl.App.GUI.ControlKind __oldValue = (Kistl.App.GUI.ControlKind)r.Value;
+                Kistl.App.GUI.ControlKind __newValue = (Kistl.App.GUI.ControlKind)value;
+
+                if(OnParent_PreSetter != null)
+                {
+					var e = new PropertyPreSetterEventArgs<Kistl.App.GUI.ControlKind>(__oldValue, __newValue);
+					OnParent_PreSetter(this, e);
+					__newValue = e.Result;
+                }
+                r.Value = (Kistl.App.GUI.ControlKind__Implementation__)__newValue;
+                if(OnParent_PostSetter != null)
+                {
+					var e = new PropertyPostSetterEventArgs<Kistl.App.GUI.ControlKind>(__oldValue, __newValue);
+					OnParent_PostSetter(this, e);
+                }
+                                
+            }
+        }
+        
+        
+		public static event PropertyGetterHandler<Kistl.App.GUI.ControlKind, Kistl.App.GUI.ControlKind> OnParent_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.GUI.ControlKind, Kistl.App.GUI.ControlKind> OnParent_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.GUI.ControlKind, Kistl.App.GUI.ControlKind> OnParent_PostSetter;
 
 		public override Type GetImplementedInterface()
 		{
@@ -185,7 +416,9 @@ namespace Kistl.App.GUI
 			var me = (ControlKind)this;
 
 			me.ExportGuid = other.ExportGuid;
-			me.RequestedWidth = other.RequestedWidth;
+			me.Name = other.Name;
+			this._fk_Module = otherImpl._fk_Module;
+			this._fk_Parent = otherImpl._fk_Parent;
 		}
 
         // tail template
@@ -239,6 +472,13 @@ namespace Kistl.App.GUI
 
 
 		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
+			// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
+			new CustomPropertyDescriptor<ControlKind__Implementation__, ICollection<Kistl.App.GUI.ControlKind>>(
+				new Guid("bf073bb5-eaa8-4e3d-b019-60b47ba6a088"),
+				"ChildControlKinds",
+				null,
+				obj => obj.ChildControlKinds,
+				null), // lists are read-only properties
 			// else
 			new CustomPropertyDescriptor<ControlKind__Implementation__, Guid>(
 				new Guid("758d8eba-b458-4cd4-98a8-e08713912654"),
@@ -247,12 +487,31 @@ namespace Kistl.App.GUI
 				obj => obj.ExportGuid,
 				(obj, val) => obj.ExportGuid = val),
 			// else
-			new CustomPropertyDescriptor<ControlKind__Implementation__, double?>(
-				new Guid("2a0d22cd-5538-4a2c-bfb9-287652637708"),
-				"RequestedWidth",
+			new CustomPropertyDescriptor<ControlKind__Implementation__, Kistl.App.Base.Module>(
+				new Guid("e4cf2c2d-be50-4954-a43c-b8df2dedecec"),
+				"Module",
 				null,
-				obj => obj.RequestedWidth,
-				(obj, val) => obj.RequestedWidth = val),
+				obj => obj.Module,
+				(obj, val) => obj.Module = val),
+			// else
+			new CustomPropertyDescriptor<ControlKind__Implementation__, string>(
+				new Guid("438ab847-c5d1-4072-9449-96e3d4e92b1f"),
+				"Name",
+				null,
+				obj => obj.Name,
+				(obj, val) => obj.Name = val),
+			// else
+			new CustomPropertyDescriptor<ControlKind__Implementation__, Kistl.App.GUI.ControlKind>(
+				new Guid("5d75bf4f-29dd-4d00-8e4f-b40a1b9ad92c"),
+				"Parent",
+				null,
+				obj => obj.Parent,
+				(obj, val) => obj.Parent = val),
+			// rel: ControlKind has Module (6d5e026a-2605-4630-88ed-9da0b0e14c95)
+			// rel: ChildControlKinds have_a Parent (4ff9061d-f26a-42d6-ae95-b418f039a35e)
+			// rel: ViewDescriptor is_a ControlKind (bffabb36-7862-4fcf-b8fb-efb719c70f3f)
+			// rel: ViewModelDescriptor displayedInGridBy DefaultGridCellKind (0a03215f-1c1a-4a44-892d-86642eefe9f1)
+			// rel: Presentable has DefaultKind (cc835258-6ada-4f3f-839e-7f276ded995a)
 		};
 		
 		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
@@ -268,6 +527,20 @@ namespace Kistl.App.GUI
 			// TODO: enable when MemoryContext uses MemoryDataObjects
 			//if (this.ObjectState == DataObjectState.Deleted) return;
 			// fix direct object references
+
+			if (_fk_guid_Module.HasValue)
+				Module__Implementation__ = (Kistl.App.Base.Module__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.Module>(_fk_guid_Module.Value);
+			else if (_fk_Module.HasValue)
+				Module__Implementation__ = (Kistl.App.Base.Module__Implementation__)Context.Find<Kistl.App.Base.Module>(_fk_Module.Value);
+			else
+				Module__Implementation__ = null;
+
+			if (_fk_guid_Parent.HasValue)
+				Parent__Implementation__ = (Kistl.App.GUI.ControlKind__Implementation__)Context.FindPersistenceObject<Kistl.App.GUI.ControlKind>(_fk_guid_Parent.Value);
+			else if (_fk_Parent.HasValue)
+				Parent__Implementation__ = (Kistl.App.GUI.ControlKind__Implementation__)Context.Find<Kistl.App.GUI.ControlKind>(_fk_Parent.Value);
+			else
+				Parent__Implementation__ = null;
 		}
 #region Serializer
 
@@ -280,7 +553,9 @@ namespace Kistl.App.GUI
             if (this._isExportGuidSet) {
                 BinarySerializer.ToStream(this._ExportGuid, binStream);
             }
-            BinarySerializer.ToStream(this._RequestedWidth, binStream);
+            BinarySerializer.ToStream(Module != null ? Module.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(this._Name, binStream);
+            BinarySerializer.ToStream(Parent != null ? Parent.ID : (int?)null, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
@@ -291,7 +566,9 @@ namespace Kistl.App.GUI
             if (this._isExportGuidSet) {
                 BinarySerializer.FromStream(out this._ExportGuid, binStream);
             }
-            BinarySerializer.FromStream(out this._RequestedWidth, binStream);
+            BinarySerializer.FromStream(out this._fk_Module, binStream);
+            BinarySerializer.FromStream(out this._Name, binStream);
+            BinarySerializer.FromStream(out this._fk_Parent, binStream);
         }
 
         public override void ToStream(System.Xml.XmlWriter xml)
@@ -302,7 +579,9 @@ namespace Kistl.App.GUI
             if (this._isExportGuidSet) {
                 XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
             }
-            XmlStreamer.ToStream(this._RequestedWidth, xml, "RequestedWidth", "Kistl.App.GUI");
+            XmlStreamer.ToStream(Module != null ? Module.ID : (int?)null, xml, "Module", "Kistl.App.GUI");
+            XmlStreamer.ToStream(this._Name, xml, "Name", "Kistl.App.GUI");
+            XmlStreamer.ToStream(Parent != null ? Parent.ID : (int?)null, xml, "Parent", "Kistl.App.GUI");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
@@ -313,22 +592,28 @@ namespace Kistl.App.GUI
             if (this._isExportGuidSet) {
                 XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
             }
-            XmlStreamer.FromStream(ref this._RequestedWidth, xml, "RequestedWidth", "Kistl.App.GUI");
+            XmlStreamer.FromStream(ref this._fk_Module, xml, "Module", "Kistl.App.GUI");
+            XmlStreamer.FromStream(ref this._Name, xml, "Name", "Kistl.App.GUI");
+            XmlStreamer.FromStream(ref this._fk_Parent, xml, "Parent", "Kistl.App.GUI");
         }
 
         public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
         {
             
             xml.WriteAttributeString("ExportGuid", this._ExportGuid.ToString());
+            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(Module != null ? Module.ExportGuid : (Guid?)null, xml, "Module", "Kistl.App.GUI");
     
-            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this._RequestedWidth, xml, "RequestedWidth", "Kistl.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this._Name, xml, "Name", "Kistl.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(Parent != null ? Parent.ExportGuid : (Guid?)null, xml, "Parent", "Kistl.App.GUI");
         }
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
         {
             XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
             this._isExportGuidSet = true;
-            XmlStreamer.FromStream(ref this._RequestedWidth, xml, "RequestedWidth", "Kistl.App.GUI");
+            XmlStreamer.FromStream(ref this._fk_guid_Module, xml, "Module", "Kistl.App.GUI");
+            XmlStreamer.FromStream(ref this._Name, xml, "Name", "Kistl.App.GUI");
+            XmlStreamer.FromStream(ref this._fk_guid_Parent, xml, "Parent", "Kistl.App.GUI");
         }
 
 #endregion

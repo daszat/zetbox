@@ -14,6 +14,8 @@ namespace Kistl.Client.Presentables.Relations
     public class RelationModel
         : DataObjectModel
     {
+        public new delegate RelationModel Factory(IKistlContext dataCtx, Relation rel);
+
         private Relation _relation;
 
         public RelationModel(

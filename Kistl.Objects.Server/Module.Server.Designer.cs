@@ -804,6 +804,7 @@ namespace Kistl.App.Base
 				obj => obj.Namespace,
 				(obj, val) => obj.Namespace = val),
 			// rel: AccessControl has Module (89b9c0a5-3b5a-4e04-83cf-0e8de37abcf1)
+			// rel: ControlKind has Module (6d5e026a-2605-4630-88ed-9da0b0e14c95)
 			// rel: Group has Module (8d76b5ef-a7ae-4d4b-a92e-747fe972acfb)
 			// rel: Icon has Module (a1360ce2-ecd5-4660-9b4d-3a2dc3919344)
 			// rel: Method has Module (b251ee8c-2821-441e-b631-d215c006f1c8)

@@ -261,7 +261,7 @@ namespace Kistl.Client.Presentables
                             {
                                 var targetType = ((ObjectClass)chosen.Object).GetDescribedInterfaceType();
                                 var item = this.DataContext.Create(targetType);
-                                onCreated(ModelFactory.CreateViewModel<DataObjectModel.Factory>().Invoke(DataContext, item));
+                                onCreated(ModelFactory.CreateViewModel<DataObjectModel.Factory>(item).Invoke(DataContext, item));
                             }
                             else
                             {

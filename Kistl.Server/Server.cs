@@ -15,6 +15,7 @@ namespace Kistl.Server
     using Kistl.API.Server;
     using Kistl.API.Utils;
     using Kistl.App.Extensions;
+    using Kistl.App.GUI;
 
     /// <summary>
     /// Serversteuerung
@@ -218,7 +219,38 @@ namespace Kistl.Server
             using (var subContainer = container.BeginLifetimeScope())
             {
                 var ctx = subContainer.Resolve<IKistlServerContext>();
-                Log.Info("Currently no fixes to do");
+                //Log.Info("Currently no fixes to do");
+
+                //foreach (var ck in ctx.GetQuery<ControlKind>())
+                //{
+                //    var ckc = ck.GetObjectClass(ctx);
+                //    var parent = ckc.BaseObjectClass;
+                //    if(parent != null)
+                //    {
+                //        ck.Parent = ctx.GetQuery<ControlKind>().FirstOrDefault(c => c.Name == parent.Name);
+                //    }
+                //}
+
+                foreach (var vd in ctx.GetQuery<ViewDescriptor>())
+                {
+                    if (vd.Kind != null)
+                    {
+                        string name = vd.Kind.Name;
+                        vd.ControlKind = ctx.GetQuery<ControlKind>().FirstOrDefault(c => c.Name == name);
+                    }
+                }
+
+                //var usedControlKinds = ctx.GetQuery<ViewModelDescriptor>().Select(vmd => vmd.DefaultKind).ToList();
+                //usedControlKinds.AddRange(ctx.GetQuery<ViewModelDescriptor>().Select(vmd => vmd.DefaultGridCellKind).ToList());
+                //usedControlKinds.AddRange(ctx.GetQuery<ViewModelDescriptor>().ToList().SelectMany(vmd => vmd.SecondaryControlKinds).ToList());
+
+                //foreach (var ck in ctx.GetQuery<ControlKind>())
+                //{
+                //    if (!usedControlKinds.Contains(ck))
+                //    {
+                //        ctx.Delete(ck);
+                //    }
+                //}
 
                 //var tr = typeof(Kistl.App.Base.ObjectClass).ToRef(ctx);
                 //Console.WriteLine(tr.ToString());
