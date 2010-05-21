@@ -56,16 +56,6 @@ namespace Kistl.App.GUI
 			}
 		}
 		
-		/// <summary>List of all TypeRefRefKind</summary>
-		/// A specifc ObjectRefKind for selecting TypeRefs
-		public IQueryable<TypeRefRefKind> TypeRefRefKinds
-		{ 
-			get
-			{
-				return Context.GetQuery<TypeRefRefKind>();
-			}
-		}
-		
 		/// <summary>List of all TextboxKind</summary>
 		/// A textbox-like control
 		public IQueryable<TextboxKind> TextboxKinds
@@ -106,16 +96,6 @@ namespace Kistl.App.GUI
 			}
 		}
 		
-		/// <summary>List of all StringFilterKind</summary>
-		/// 
-		public IQueryable<StringFilterKind> StringFilterKinds
-		{ 
-			get
-			{
-				return Context.GetQuery<StringFilterKind>();
-			}
-		}
-		
 		/// <summary>List of all SingleLineDataObjectKind</summary>
 		/// Presents a data object in a single line
 		public IQueryable<SingleLineDataObjectKind> SingleLineDataObjectKinds
@@ -126,16 +106,6 @@ namespace Kistl.App.GUI
 			}
 		}
 		
-		/// <summary>List of all SimpleDropdownFilterKind</summary>
-		/// 
-		public IQueryable<SimpleDropdownFilterKind> SimpleDropdownFilterKinds
-		{ 
-			get
-			{
-				return Context.GetQuery<SimpleDropdownFilterKind>();
-			}
-		}
-		
 		/// <summary>List of all SimpleBoolFilterKind</summary>
 		/// 
 		public IQueryable<SimpleBoolFilterKind> SimpleBoolFilterKinds
@@ -143,16 +113,6 @@ namespace Kistl.App.GUI
 			get
 			{
 				return Context.GetQuery<SimpleBoolFilterKind>();
-			}
-		}
-		
-		/// <summary>List of all RelationEditorKind</summary>
-		/// A special editor for relations
-		public IQueryable<RelationEditorKind> RelationEditorKinds
-		{ 
-			get
-			{
-				return Context.GetQuery<RelationEditorKind>();
 			}
 		}
 		
@@ -223,16 +183,6 @@ namespace Kistl.App.GUI
 			get
 			{
 				return Context.GetQuery<KistlDebuggerKind>();
-			}
-		}
-		
-		/// <summary>List of all InstanceListKind</summary>
-		/// 
-		public IQueryable<InstanceListKind> InstanceListKind
-		{ 
-			get
-			{
-				return Context.GetQuery<InstanceListKind>();
 			}
 		}
 		

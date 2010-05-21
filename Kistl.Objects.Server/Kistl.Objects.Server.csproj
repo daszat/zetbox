@@ -134,7 +134,6 @@
     <Compile Include="Icon.Server.Designer.cs" />
     <Compile Include="Identity.Server.Designer.cs" />
     <Compile Include="InstanceConstraint.Server.Designer.cs" />
-    <Compile Include="InstanceListKind.Server.Designer.cs" />
     <Compile Include="IntegerRangeConstraint.Server.Designer.cs" />
     <Compile Include="Interface.Server.Designer.cs" />
     <Compile Include="IntParameter.Server.Designer.cs" />
@@ -151,7 +150,6 @@
     <Compile Include="MethodInvocationConstraint.Server.Designer.cs" />
     <Compile Include="Mitarbeiter.Server.Designer.cs" />
     <Compile Include="Module.Server.Designer.cs" />
-    <Compile Include="ModuleEditorWorkspaceKind.Server.Designer.cs" />
     <Compile Include="Muhblah.Server.Designer.cs" />
     <Compile Include="NewGuidDefaultValue.Server.Designer.cs" />
     <Compile Include="NotNullableConstraint.Server.Designer.cs" />
@@ -168,15 +166,12 @@
     <Compile Include="PropertyGroupKind.Server.Designer.cs" />
     <Compile Include="PropertyInvocation.Server.Designer.cs" />
     <Compile Include="Relation.Server.Designer.cs" />
-    <Compile Include="RelationEditorKind.Server.Designer.cs" />
     <Compile Include="RelationEnd.Server.Designer.cs" />
     <Compile Include="RoleMembership.Server.Designer.cs" />
     <Compile Include="Semester.Server.Designer.cs" />
     <Compile Include="SimpleBoolFilterKind.Server.Designer.cs" />
-    <Compile Include="SimpleDropdownFilterKind.Server.Designer.cs" />
     <Compile Include="SingleLineDataObjectKind.Server.Designer.cs" />
     <Compile Include="StaticFile.Server.Designer.cs" />
-    <Compile Include="StringFilterKind.Server.Designer.cs" />
     <Compile Include="StringListKind.Server.Designer.cs" />
     <Compile Include="StringParameter.Server.Designer.cs" />
     <Compile Include="StringProperty.Server.Designer.cs" />
@@ -191,7 +186,6 @@
     <Compile Include="TestStudent.Server.Designer.cs" />
     <Compile Include="TextboxKind.Server.Designer.cs" />
     <Compile Include="TypeRef.Server.Designer.cs" />
-    <Compile Include="TypeRefRefKind.Server.Designer.cs" />
     <Compile Include="ValueTypeProperty.Server.Designer.cs" />
     <Compile Include="ViewDescriptor.Server.Designer.cs" />
     <Compile Include="ViewModelDescriptor.Server.Designer.cs" />

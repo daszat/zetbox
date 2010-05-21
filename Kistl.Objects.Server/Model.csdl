@@ -1974,8 +1974,6 @@
   </EntityType>
   <EntityType Name="GuidProperty" BaseType="Model.ValueTypeProperty">
   </EntityType>
-  <EntityType Name="InstanceListKind" BaseType="Model.DashboardKind">
-  </EntityType>
   <EntityType Name="IntegerRangeConstraint" BaseType="Model.Constraint">
     <Property Name="Max" Type="Int32" Nullable="false" />
     <Property Name="Min" Type="Int32" Nullable="false" />
@@ -2007,8 +2005,6 @@
   <EntityType Name="LauncherKind" BaseType="Model.ControlKind">
   </EntityType>
   <EntityType Name="MethodInvocationConstraint" BaseType="Model.Constraint">
-  </EntityType>
-  <EntityType Name="ModuleEditorWorkspaceKind" BaseType="Model.WorkspaceKind">
   </EntityType>
   <EntityType Name="NewGuidDefaultValue" BaseType="Model.DefaultPropertyValue">
   </EntityType>
@@ -2076,8 +2072,6 @@
   </EntityType>
   <EntityType Name="PropertyGroupKind" BaseType="Model.ControlKind">
   </EntityType>
-  <EntityType Name="RelationEditorKind" BaseType="Model.DataObjectKind">
-  </EntityType>
   <EntityType Name="RoleMembership" BaseType="Model.AccessControl">
     <NavigationProperty Name="Relations__Implementation__"
                         Relationship="Model.FK_RoleMembership_resolves_Relations_A"
@@ -2086,13 +2080,9 @@
   </EntityType>
   <EntityType Name="SimpleBoolFilterKind" BaseType="Model.FilterKind">
   </EntityType>
-  <EntityType Name="SimpleDropdownFilterKind" BaseType="Model.FilterKind">
-  </EntityType>
   <EntityType Name="SingleLineDataObjectKind" BaseType="Model.ControlKind">
   </EntityType>
   <EntityType Name="StaticFile" BaseType="Model.File">
-  </EntityType>
-  <EntityType Name="StringFilterKind" BaseType="Model.FilterKind">
   </EntityType>
   <EntityType Name="StringListKind" BaseType="Model.ControlKind">
   </EntityType>
@@ -2107,8 +2097,6 @@
   <EntityType Name="StringSelectorKind" BaseType="Model.ControlKind">
   </EntityType>
   <EntityType Name="TextboxKind" BaseType="Model.ControlKind">
-  </EntityType>
-  <EntityType Name="TypeRefRefKind" BaseType="Model.ObjectRefKind">
   </EntityType>
   <EntityType Name="ValueTypeProperty" BaseType="Model.Property" Abstract="true">
     <Property Name="HasPersistentOrder" Type="Boolean" Nullable="false" />

@@ -251,18 +251,8 @@
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.InstanceListKind)">
-	    <MappingFragment StoreEntitySet="InstanceListKind">
-	      <ScalarProperty Name="ID" ColumnName="ID" />
-	    </MappingFragment>
-      </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Model.DataObjectKind)">
 	    <MappingFragment StoreEntitySet="DataObjectKind">
-	      <ScalarProperty Name="ID" ColumnName="ID" />
-	    </MappingFragment>
-      </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.RelationEditorKind)">
-	    <MappingFragment StoreEntitySet="RelationEditorKind">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 	    </MappingFragment>
       </EntityTypeMapping>
@@ -288,16 +278,6 @@
       </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Model.SimpleBoolFilterKind)">
 	    <MappingFragment StoreEntitySet="SimpleBoolFilterKind">
-	      <ScalarProperty Name="ID" ColumnName="ID" />
-	    </MappingFragment>
-      </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.SimpleDropdownFilterKind)">
-	    <MappingFragment StoreEntitySet="SimpleDropdownFilterKind">
-	      <ScalarProperty Name="ID" ColumnName="ID" />
-	    </MappingFragment>
-      </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.StringFilterKind)">
-	    <MappingFragment StoreEntitySet="StringFilterKind">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 	    </MappingFragment>
       </EntityTypeMapping>
@@ -331,11 +311,6 @@
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.TypeRefRefKind)">
-	    <MappingFragment StoreEntitySet="TypeRefRefKind">
-	      <ScalarProperty Name="ID" ColumnName="ID" />
-	    </MappingFragment>
-      </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Model.PropertyGroupKind)">
 	    <MappingFragment StoreEntitySet="PropertyGroupKind">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
@@ -363,11 +338,6 @@
       </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Model.WorkspaceKind)">
 	    <MappingFragment StoreEntitySet="WorkspaceKind">
-	      <ScalarProperty Name="ID" ColumnName="ID" />
-	    </MappingFragment>
-      </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.ModuleEditorWorkspaceKind)">
-	    <MappingFragment StoreEntitySet="ModuleEditorWorkspaceKind">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 	    </MappingFragment>
       </EntityTypeMapping>

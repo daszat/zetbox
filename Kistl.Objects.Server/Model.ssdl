@@ -225,12 +225,6 @@
       <End Role="A_ValueTypeProperty" EntitySet="ValueTypeProperty" />
       <End Role="B_GuidProperty" EntitySet="GuidProperty" />
     </AssociationSet>
-    <EntitySet Name="InstanceListKind" EntityType="Model.Store.InstanceListKind" Table="InstanceListKind"/>
-    <!-- inherits from DashboardKind -->
-    <AssociationSet Name="FK_InstanceListKind_DashboardKind_ID" Association="Model.Store.FK_InstanceListKind_DashboardKind_ID" >
-      <End Role="A_DashboardKind" EntitySet="DashboardKind" />
-      <End Role="B_InstanceListKind" EntitySet="InstanceListKind" />
-    </AssociationSet>
     <EntitySet Name="IntegerRangeConstraint" EntityType="Model.Store.IntegerRangeConstraint" Table="IntegerRangeConstraints"/>
     <!-- inherits from Constraint -->
     <AssociationSet Name="FK_IntegerRangeConstraint_Constraint_ID" Association="Model.Store.FK_IntegerRangeConstraint_Constraint_ID" >
@@ -297,12 +291,6 @@
       <End Role="A_Constraint" EntitySet="Constraint" />
       <End Role="B_MethodInvocationConstraint" EntitySet="MethodInvocationConstraint" />
     </AssociationSet>
-    <EntitySet Name="ModuleEditorWorkspaceKind" EntityType="Model.Store.ModuleEditorWorkspaceKind" Table="ModuleEditorWorkspaceKinds"/>
-    <!-- inherits from WorkspaceKind -->
-    <AssociationSet Name="FK_ModuleEditorWorkspaceKind_WorkspaceKind_ID" Association="Model.Store.FK_ModuleEditorWorkspaceKind_WorkspaceKind_ID" >
-      <End Role="A_WorkspaceKind" EntitySet="WorkspaceKind" />
-      <End Role="B_ModuleEditorWorkspaceKind" EntitySet="ModuleEditorWorkspaceKind" />
-    </AssociationSet>
     <EntitySet Name="NewGuidDefaultValue" EntityType="Model.Store.NewGuidDefaultValue" Table="NewGuidDefaultValues"/>
     <!-- inherits from DefaultPropertyValue -->
     <AssociationSet Name="FK_NewGuidDefaultValue_DefaultPropertyValue_ID" Association="Model.Store.FK_NewGuidDefaultValue_DefaultPropertyValue_ID" >
@@ -363,12 +351,6 @@
       <End Role="A_ControlKind" EntitySet="ControlKind" />
       <End Role="B_PropertyGroupKind" EntitySet="PropertyGroupKind" />
     </AssociationSet>
-    <EntitySet Name="RelationEditorKind" EntityType="Model.Store.RelationEditorKind" Table="RelationEditorKinds"/>
-    <!-- inherits from DataObjectKind -->
-    <AssociationSet Name="FK_RelationEditorKind_DataObjectKind_ID" Association="Model.Store.FK_RelationEditorKind_DataObjectKind_ID" >
-      <End Role="A_DataObjectKind" EntitySet="DataObjectKind" />
-      <End Role="B_RelationEditorKind" EntitySet="RelationEditorKind" />
-    </AssociationSet>
     <EntitySet Name="RoleMembership" EntityType="Model.Store.RoleMembership" Table="RoleMemberships"/>
     <!-- inherits from AccessControl -->
     <AssociationSet Name="FK_RoleMembership_AccessControl_ID" Association="Model.Store.FK_RoleMembership_AccessControl_ID" >
@@ -381,12 +363,6 @@
       <End Role="A_FilterKind" EntitySet="FilterKind" />
       <End Role="B_SimpleBoolFilterKind" EntitySet="SimpleBoolFilterKind" />
     </AssociationSet>
-    <EntitySet Name="SimpleDropdownFilterKind" EntityType="Model.Store.SimpleDropdownFilterKind" Table="SimpleDropdownFilterKinds"/>
-    <!-- inherits from FilterKind -->
-    <AssociationSet Name="FK_SimpleDropdownFilterKind_FilterKind_ID" Association="Model.Store.FK_SimpleDropdownFilterKind_FilterKind_ID" >
-      <End Role="A_FilterKind" EntitySet="FilterKind" />
-      <End Role="B_SimpleDropdownFilterKind" EntitySet="SimpleDropdownFilterKind" />
-    </AssociationSet>
     <EntitySet Name="SingleLineDataObjectKind" EntityType="Model.Store.SingleLineDataObjectKind" Table="SingleLineDataObjectKinds"/>
     <!-- inherits from ControlKind -->
     <AssociationSet Name="FK_SingleLineDataObjectKind_ControlKind_ID" Association="Model.Store.FK_SingleLineDataObjectKind_ControlKind_ID" >
@@ -398,12 +374,6 @@
     <AssociationSet Name="FK_StaticFile_File_ID" Association="Model.Store.FK_StaticFile_File_ID" >
       <End Role="A_File" EntitySet="File" />
       <End Role="B_StaticFile" EntitySet="StaticFile" />
-    </AssociationSet>
-    <EntitySet Name="StringFilterKind" EntityType="Model.Store.StringFilterKind" Table="StringFilterKinds"/>
-    <!-- inherits from FilterKind -->
-    <AssociationSet Name="FK_StringFilterKind_FilterKind_ID" Association="Model.Store.FK_StringFilterKind_FilterKind_ID" >
-      <End Role="A_FilterKind" EntitySet="FilterKind" />
-      <End Role="B_StringFilterKind" EntitySet="StringFilterKind" />
     </AssociationSet>
     <EntitySet Name="StringListKind" EntityType="Model.Store.StringListKind" Table="StringListKinds"/>
     <!-- inherits from ControlKind -->
@@ -440,12 +410,6 @@
     <AssociationSet Name="FK_TextboxKind_ControlKind_ID" Association="Model.Store.FK_TextboxKind_ControlKind_ID" >
       <End Role="A_ControlKind" EntitySet="ControlKind" />
       <End Role="B_TextboxKind" EntitySet="TextboxKind" />
-    </AssociationSet>
-    <EntitySet Name="TypeRefRefKind" EntityType="Model.Store.TypeRefRefKind" Table="TypeRefRefKinds"/>
-    <!-- inherits from ObjectRefKind -->
-    <AssociationSet Name="FK_TypeRefRefKind_ObjectRefKind_ID" Association="Model.Store.FK_TypeRefRefKind_ObjectRefKind_ID" >
-      <End Role="A_ObjectRefKind" EntitySet="ObjectRefKind" />
-      <End Role="B_TypeRefRefKind" EntitySet="TypeRefRefKind" />
     </AssociationSet>
     <EntitySet Name="ValueTypeProperty" EntityType="Model.Store.ValueTypeProperty" Table="ValueTypeProperties"/>
     <!-- inherits from Property -->
@@ -1746,13 +1710,6 @@
     <Property Name="Reason" Type="nvarchar" MaxLength="1000" Nullable="true" />
   </EntityType>
 	
-  <EntityType Name="InstanceListKind">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
-  </EntityType>
-	
   <EntityType Name="IntegerRangeConstraint">
     <Key>
       <PropertyRef Name="ID" />
@@ -1913,13 +1870,6 @@
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
     <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
     <Property Name="Namespace" Type="nvarchar" MaxLength="200" Nullable="false" />
-  </EntityType>
-	
-  <EntityType Name="ModuleEditorWorkspaceKind">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="Muhblah">
@@ -2118,13 +2068,6 @@
     <Property Name="Verb" Type="nvarchar" MaxLength="200" Nullable="false" />
   </EntityType>
 	
-  <EntityType Name="RelationEditorKind">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
-  </EntityType>
-	
   <EntityType Name="RelationEnd">
     <Key>
       <PropertyRef Name="ID" />
@@ -2166,13 +2109,6 @@
     <Property Name="ID" Type="int" Nullable="false" />
   </EntityType>
 	
-  <EntityType Name="SimpleDropdownFilterKind">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
-  </EntityType>
-	
   <EntityType Name="SingleLineDataObjectKind">
     <Key>
       <PropertyRef Name="ID" />
@@ -2181,13 +2117,6 @@
   </EntityType>
 	
   <EntityType Name="StaticFile">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
-  </EntityType>
-	
-  <EntityType Name="StringFilterKind">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
@@ -2356,13 +2285,6 @@
     <Property Name="Deleted" Type="bit" Nullable="true" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
     <Property Name="FullName" Type="nvarchar" MaxLength="200" Nullable="false" />
-  </EntityType>
-	
-  <EntityType Name="TypeRefRefKind">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="ValueTypeProperty">
@@ -5084,18 +5006,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_InstanceListKind_DashboardKind_ID">
-    <End Role="A_DashboardKind" Type="Model.Store.DashboardKind" Multiplicity="1" />
-    <End Role="B_InstanceListKind" Type="Model.Store.InstanceListKind" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="A_DashboardKind">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="B_InstanceListKind">
-        <PropertyRef Name="ID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_IntegerRangeConstraint_Constraint_ID">
     <End Role="A_Constraint" Type="Model.Store.Constraint" Multiplicity="1" />
     <End Role="B_IntegerRangeConstraint" Type="Model.Store.IntegerRangeConstraint" Multiplicity="0..1" />
@@ -5228,18 +5138,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_ModuleEditorWorkspaceKind_WorkspaceKind_ID">
-    <End Role="A_WorkspaceKind" Type="Model.Store.WorkspaceKind" Multiplicity="1" />
-    <End Role="B_ModuleEditorWorkspaceKind" Type="Model.Store.ModuleEditorWorkspaceKind" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="A_WorkspaceKind">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="B_ModuleEditorWorkspaceKind">
-        <PropertyRef Name="ID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_NewGuidDefaultValue_DefaultPropertyValue_ID">
     <End Role="A_DefaultPropertyValue" Type="Model.Store.DefaultPropertyValue" Multiplicity="1" />
     <End Role="B_NewGuidDefaultValue" Type="Model.Store.NewGuidDefaultValue" Multiplicity="0..1" />
@@ -5360,18 +5258,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_RelationEditorKind_DataObjectKind_ID">
-    <End Role="A_DataObjectKind" Type="Model.Store.DataObjectKind" Multiplicity="1" />
-    <End Role="B_RelationEditorKind" Type="Model.Store.RelationEditorKind" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="A_DataObjectKind">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="B_RelationEditorKind">
-        <PropertyRef Name="ID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_RoleMembership_AccessControl_ID">
     <End Role="A_AccessControl" Type="Model.Store.AccessControl" Multiplicity="1" />
     <End Role="B_RoleMembership" Type="Model.Store.RoleMembership" Multiplicity="0..1" />
@@ -5396,18 +5282,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_SimpleDropdownFilterKind_FilterKind_ID">
-    <End Role="A_FilterKind" Type="Model.Store.FilterKind" Multiplicity="1" />
-    <End Role="B_SimpleDropdownFilterKind" Type="Model.Store.SimpleDropdownFilterKind" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="A_FilterKind">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="B_SimpleDropdownFilterKind">
-        <PropertyRef Name="ID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_SingleLineDataObjectKind_ControlKind_ID">
     <End Role="A_ControlKind" Type="Model.Store.ControlKind" Multiplicity="1" />
     <End Role="B_SingleLineDataObjectKind" Type="Model.Store.SingleLineDataObjectKind" Multiplicity="0..1" />
@@ -5428,18 +5302,6 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="B_StaticFile">
-        <PropertyRef Name="ID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_StringFilterKind_FilterKind_ID">
-    <End Role="A_FilterKind" Type="Model.Store.FilterKind" Multiplicity="1" />
-    <End Role="B_StringFilterKind" Type="Model.Store.StringFilterKind" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="A_FilterKind">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="B_StringFilterKind">
         <PropertyRef Name="ID" />
       </Dependent>
     </ReferentialConstraint>
@@ -5512,18 +5374,6 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="B_TextboxKind">
-        <PropertyRef Name="ID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_TypeRefRefKind_ObjectRefKind_ID">
-    <End Role="A_ObjectRefKind" Type="Model.Store.ObjectRefKind" Multiplicity="1" />
-    <End Role="B_TypeRefRefKind" Type="Model.Store.TypeRefRefKind" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="A_ObjectRefKind">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="B_TypeRefRefKind">
         <PropertyRef Name="ID" />
       </Dependent>
     </ReferentialConstraint>

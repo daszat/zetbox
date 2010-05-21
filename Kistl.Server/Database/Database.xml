@@ -1400,21 +1400,6 @@
     <KistlBase:Name>ModuleEditor</KistlBase:Name>
     <KistlBase:Namespace>daszAt.ModuleEditor</KistlBase:Namespace>
   </KistlBase:Module>
-  <KistlBase:ObjectClass ExportGuid="540759af-a9ba-4cba-bcdb-8fab22423cd9">
-    <KistlBase:ChangedOn>2010-03-29T18:26:49.3Z</KistlBase:ChangedOn>
-    <KistlBase:CreatedOn>2010-03-29T18:26:49.3Z</KistlBase:CreatedOn>
-    <KistlBase:Module>0fe1ab38-860a-414f-a599-b0b86a22ce1a</KistlBase:Module>
-    <KistlBase:Name>ModuleEditorWorkspaceKind</KistlBase:Name>
-    <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
-    <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
-    <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
-    <KistlBase:BaseObjectClass>4fdf9e9c-a21c-40ab-84c2-16b2c7b7ec5f</KistlBase:BaseObjectClass>
-    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
-    <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
-    <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
-    <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
-    <KistlBase:TableName>ModuleEditorWorkspaceKinds</KistlBase:TableName>
-  </KistlBase:ObjectClass>
   <GUI:ViewModelDescriptor ExportGuid="e8343dd6-81a0-48eb-af63-5527cdccfa63">
     <GUI:DefaultKind>4e7a8b0b-0c8e-49e1-aa35-d3a9ec7b8e4c</GUI:DefaultKind>
     <GUI:Description>ViewModel for the UML Diagram</GUI:Description>
@@ -12754,21 +12739,6 @@
     <GUI:IsSimpleObject>true</GUI:IsSimpleObject>
     <KistlBase:TableName>Icons</KistlBase:TableName>
   </KistlBase:ObjectClass>
-  <KistlBase:ObjectClass ExportGuid="bf9cd569-9765-4b7c-a1f8-3eac16f48f71">
-    <KistlBase:ChangedOn>2010-05-17T12:30:09.797Z</KistlBase:ChangedOn>
-    <KistlBase:CreatedOn>2010-05-17T12:30:09.797Z</KistlBase:CreatedOn>
-    <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
-    <KistlBase:Name>InstanceListKind</KistlBase:Name>
-    <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
-    <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
-    <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
-    <KistlBase:BaseObjectClass>302c3ca4-7e86-4880-8e32-ff548268f80b</KistlBase:BaseObjectClass>
-    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
-    <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
-    <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
-    <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
-    <KistlBase:TableName>InstanceListKind</KistlBase:TableName>
-  </KistlBase:ObjectClass>
   <KistlBase:Interface ExportGuid="2e93e071-875a-41ee-a768-5d55c2683546">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.4Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>
@@ -12897,23 +12867,6 @@
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <KistlBase:TableName>PropertyGroupKinds</KistlBase:TableName>
   </KistlBase:ObjectClass>
-  <KistlBase:ObjectClass ExportGuid="5624100a-9fed-44c0-822e-d174c4c9cb45">
-    <KistlBase:ChangedOn>2009-12-14T17:08:05.4Z</KistlBase:ChangedOn>
-    <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>
-    <GUI:DefaultIcon>59c6ef01-66e7-411e-8326-c16f593ec5e7</GUI:DefaultIcon>
-    <KistlBase:Description>A special editor for relations</KistlBase:Description>
-    <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
-    <KistlBase:Name>RelationEditorKind</KistlBase:Name>
-    <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
-    <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
-    <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
-    <KistlBase:BaseObjectClass>b91f789f-8ecb-44e2-8458-7f0d27ea027a</KistlBase:BaseObjectClass>
-    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
-    <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
-    <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
-    <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
-    <KistlBase:TableName>RelationEditorKinds</KistlBase:TableName>
-  </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="a538afec-8d61-43ab-9e70-1973d3932c0a">
     <KistlBase:ChangedOn>2010-05-18T17:14:56.01Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2010-05-18T17:14:56.01Z</KistlBase:CreatedOn>
@@ -12928,21 +12881,6 @@
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <KistlBase:TableName>SimpleBoolFilterKinds</KistlBase:TableName>
-  </KistlBase:ObjectClass>
-  <KistlBase:ObjectClass ExportGuid="af394ba9-c036-41bb-8852-b292a816a53f">
-    <KistlBase:ChangedOn>2010-05-18T17:16:27.953Z</KistlBase:ChangedOn>
-    <KistlBase:CreatedOn>2010-05-18T17:16:27.953Z</KistlBase:CreatedOn>
-    <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
-    <KistlBase:Name>SimpleDropdownFilterKind</KistlBase:Name>
-    <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
-    <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
-    <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
-    <KistlBase:BaseObjectClass>400b2042-c41d-45fd-9b3c-05b43ab33182</KistlBase:BaseObjectClass>
-    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
-    <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
-    <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
-    <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
-    <KistlBase:TableName>SimpleDropdownFilterKinds</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="bbd088cc-c68c-46de-a89e-6e1e6f768245">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.4Z</KistlBase:ChangedOn>
@@ -12960,21 +12898,6 @@
     <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <KistlBase:TableName>SingleLineDataObjectKinds</KistlBase:TableName>
-  </KistlBase:ObjectClass>
-  <KistlBase:ObjectClass ExportGuid="7922ed7f-0c71-4d1a-8bfa-ad2c3c8f3b5c">
-    <KistlBase:ChangedOn>2010-05-18T17:15:39.397Z</KistlBase:ChangedOn>
-    <KistlBase:CreatedOn>2010-05-18T17:15:39.397Z</KistlBase:CreatedOn>
-    <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
-    <KistlBase:Name>StringFilterKind</KistlBase:Name>
-    <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
-    <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
-    <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
-    <KistlBase:BaseObjectClass>400b2042-c41d-45fd-9b3c-05b43ab33182</KistlBase:BaseObjectClass>
-    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
-    <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
-    <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
-    <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
-    <KistlBase:TableName>StringFilterKinds</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="a3207646-c6a6-4ecc-89cb-31bf28dbc6ac">
     <KistlBase:ChangedOn>2009-12-15T11:39:03.85Z</KistlBase:ChangedOn>
@@ -13053,23 +12976,6 @@
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
     <KistlBase:AreFlags>false</KistlBase:AreFlags>
   </KistlBase:Enumeration>
-  <KistlBase:ObjectClass ExportGuid="b474f8f2-99d2-4ae5-ac1a-203c5e51a770">
-    <KistlBase:ChangedOn>2009-12-14T17:08:05.4Z</KistlBase:ChangedOn>
-    <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>
-    <GUI:DefaultIcon>ab326b2e-6cbb-421e-ba3a-0b40ae09c002</GUI:DefaultIcon>
-    <KistlBase:Description>A specifc ObjectRefKind for selecting TypeRefs</KistlBase:Description>
-    <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
-    <KistlBase:Name>TypeRefRefKind</KistlBase:Name>
-    <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
-    <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
-    <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
-    <KistlBase:BaseObjectClass>27e8a0f3-ffff-4bb1-b956-c36a5a28dd14</KistlBase:BaseObjectClass>
-    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
-    <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
-    <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
-    <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
-    <KistlBase:TableName>TypeRefRefKinds</KistlBase:TableName>
-  </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="ffda4604-1536-43b6-b951-f8753d5092ca">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.4Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>

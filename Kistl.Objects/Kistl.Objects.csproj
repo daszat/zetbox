@@ -110,7 +110,6 @@
     <Compile Include="Icon.Interface.Designer.cs" />
     <Compile Include="Identity.Interface.Designer.cs" />
     <Compile Include="InstanceConstraint.Interface.Designer.cs" />
-    <Compile Include="InstanceListKind.Interface.Designer.cs" />
     <Compile Include="IntegerRangeConstraint.Interface.Designer.cs" />
     <Compile Include="Interface.Interface.Designer.cs" />
     <Compile Include="IntParameter.Interface.Designer.cs" />
@@ -127,7 +126,6 @@
     <Compile Include="MethodInvocationConstraint.Interface.Designer.cs" />
     <Compile Include="Mitarbeiter.Interface.Designer.cs" />
     <Compile Include="Module.Interface.Designer.cs" />
-    <Compile Include="ModuleEditorWorkspaceKind.Interface.Designer.cs" />
     <Compile Include="Muhblah.Interface.Designer.cs" />
     <Compile Include="NewGuidDefaultValue.Interface.Designer.cs" />
     <Compile Include="NotNullableConstraint.Interface.Designer.cs" />
@@ -144,15 +142,12 @@
     <Compile Include="PropertyGroupKind.Interface.Designer.cs" />
     <Compile Include="PropertyInvocation.Interface.Designer.cs" />
     <Compile Include="Relation.Interface.Designer.cs" />
-    <Compile Include="RelationEditorKind.Interface.Designer.cs" />
     <Compile Include="RelationEnd.Interface.Designer.cs" />
     <Compile Include="RoleMembership.Interface.Designer.cs" />
     <Compile Include="Semester.Interface.Designer.cs" />
     <Compile Include="SimpleBoolFilterKind.Interface.Designer.cs" />
-    <Compile Include="SimpleDropdownFilterKind.Interface.Designer.cs" />
     <Compile Include="SingleLineDataObjectKind.Interface.Designer.cs" />
     <Compile Include="StaticFile.Interface.Designer.cs" />
-    <Compile Include="StringFilterKind.Interface.Designer.cs" />
     <Compile Include="StringListKind.Interface.Designer.cs" />
     <Compile Include="StringParameter.Interface.Designer.cs" />
     <Compile Include="StringProperty.Interface.Designer.cs" />
@@ -167,7 +162,6 @@
     <Compile Include="TestStudent.Interface.Designer.cs" />
     <Compile Include="TextboxKind.Interface.Designer.cs" />
     <Compile Include="TypeRef.Interface.Designer.cs" />
-    <Compile Include="TypeRefRefKind.Interface.Designer.cs" />
     <Compile Include="ValueTypeProperty.Interface.Designer.cs" />
     <Compile Include="ViewDescriptor.Interface.Designer.cs" />
     <Compile Include="ViewModelDescriptor.Interface.Designer.cs" />
