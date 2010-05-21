@@ -30,17 +30,8 @@ namespace Kistl.Client.WPF.View
 
         private static DataTemplate SelectTemplate(ViewModel mdl, string controlKindName)
         {
-            if (mdl == null) { throw new ArgumentNullException("mdl"); }
-
-            ViewModelDescriptor pmd = mdl.GetType().ToRef(FrozenContext.Single).GetViewModelDescriptor();
-            if (pmd == null)
-            {
-                Logging.Log.ErrorFormat("No matching ViewModelDescriptor found for {0}", mdl.GetType());
-                return null;
-            }
-
             var ck = FrozenContext.Single.GetQuery<ControlKind>().SingleOrDefault(c => c.Name == controlKindName);
-            return CreateTemplate(pmd.GetViewDescriptor(Toolkit.WPF, ck));
+            return SelectTemplate(mdl, ck);
         }
 
         private static DataTemplate SelectTemplate(ViewModel mdl, ControlKind controlKind)

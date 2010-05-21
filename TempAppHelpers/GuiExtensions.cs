@@ -35,30 +35,49 @@ namespace Kistl.App.Extensions
             return GetViewDescriptor(pmd, tk, GetDefaultKind(pmd));
         }
 
+        //// Steps for resolving a ViewModel to View
+        //// 1. Find all ViewModel requested Views matching the ControlKind
+        //// 2. Find all Views supporting the ViewModel matching the ControlKind
+        //// 3. Find all Views supporting the ViewModel without ControlKind
+
         /// <summary>
         /// Look up the ViewDescriptor for this presentable model and ControlKind
         /// </summary>
         /// <param name="self"></param>
         /// <param name="tk"></param>
-        /// <param name="ck"></param>
+        /// <param name="requestedControlKind"></param>
         /// <returns></returns>
         public static ViewDescriptor GetViewDescriptor(
             this ViewModelDescriptor self,
             Toolkit tk,
-            ControlKind ck)
+            ControlKind requestedControlKind)
         {
+            // Checks
             if (self == null) throw new ArgumentNullException("self");
+
+            #region Cache Management
             PrimeCaches(tk, self.ReadOnlyContext);
 
-            var key = new ViewDescriptorCache.Key(self.ViewModelRef, tk, ck);
+            var key = new ViewDescriptorCache.Key(self.ViewModelRef, tk, requestedControlKind);
             if (_viewDescriptorCache.ContainsKey(key)) return _viewDescriptorCache[key];
+            #endregion
+
+            // If the ViewModel has a more specific DefaultKind respect its choice
+            if (self.DefaultKind != null && self.DefaultKind.AndParents().Contains(requestedControlKind))
+            {
+                requestedControlKind = self.DefaultKind;
+            }
+            else
+            {
+                requestedControlKind = self.SecondaryControlKinds.FirstOrDefault(sck => sck.AndParents().Contains(requestedControlKind)) ?? requestedControlKind;
+            }
 
             ViewDescriptor result = null;
 
             ICollection<ViewDescriptor> candidates;
-            if (ck != null)
+            if (requestedControlKind != null)
             {
-                candidates = _viewCaches[tk].GetDescriptors(ck);
+                candidates = _viewCaches[tk].GetDescriptors(requestedControlKind);
             }
             else
             {
@@ -67,14 +86,7 @@ namespace Kistl.App.Extensions
 
             if (candidates.Count == 0)
             {
-                if (ck.Parent != null)
-                {
-                    return GetViewDescriptor(self, tk, ck.Parent);
-                }
-                else
-                {
-                    Logging.Log.WarnFormat("Couldn't find ViewDescriptor for '{1}' matching ControlKind: '{0}'", ck, self.GetType().FullName);
-                }
+                Logging.Log.WarnFormat("Couldn't find ViewDescriptor for '{1}' matching ControlKind: '{0}'", requestedControlKind, self.GetType().FullName);
             }
             else if (candidates.Count == 1)
             {
@@ -95,39 +107,13 @@ namespace Kistl.App.Extensions
                 // Log a warning if nothing found
                 if (match == null)
                 {
-                    if (ck.Parent != null)
-                    {
-                        return GetViewDescriptor(self, tk, ck.Parent);
-                    }
-                    else
-                    {
-                        Logging.Log.WarnFormat("Couldn't find ViewDescriptor for '{1}' matching ControlKind: '{0}'", ck, self.GetType().FullName);
-                    }
+                    Logging.Log.WarnFormat("Couldn't find ViewDescriptor for '{1}' matching ControlKind: '{0}'", requestedControlKind, self.GetType().FullName);
                 }
                 result = match;
             }
 
             _viewDescriptorCache[key] = result;
             return result;
-        }
-
-        private static IList<TypeRef> GetAllTypes(ViewModelDescriptor self)
-        {
-            var allTypes = new List<TypeRef>();
-            var type = self.ViewModelRef;
-            while (type != null)
-            {
-                allTypes.Add(type);
-                type = type.Parent;
-            }
-
-            allTypes.AddRange(
-                self.ViewModelRef.AsType(false).GetInterfaces()
-                    .OrderBy(i => i.FullName)
-                    .Select(i => i.ToRef(self.ReadOnlyContext))
-                    .Where(i => i != null)
-            );
-            return allTypes;
         }
 
         //public static ViewDescriptor GetViewDescriptor(
@@ -173,6 +159,26 @@ namespace Kistl.App.Extensions
         //    }
         //    return visualDesc;
         //}
+
+        private static IList<TypeRef> GetAllTypes(ViewModelDescriptor self)
+        {
+            var allTypes = new List<TypeRef>();
+            var type = self.ViewModelRef;
+            while (type != null)
+            {
+                allTypes.Add(type);
+                type = type.Parent;
+            }
+
+            allTypes.AddRange(
+                self.ViewModelRef.AsType(false).GetInterfaces()
+                    .OrderBy(i => i.FullName)
+                    .Select(i => i.ToRef(self.ReadOnlyContext))
+                    .Where(i => i != null)
+            );
+            return allTypes;
+        }
+
 
         /// <summary>
         /// Returns the default control kind of a given ViewModelDescriptor.
