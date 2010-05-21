@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2010-05-20T15:27:31.817Z" xmlns="http://dasz.at/Kistl">
+<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2010-05-21T15:33:01.23Z" xmlns="http://dasz.at/Kistl">
   <KistlBase:Module ExportGuid="110acbc0-652a-4adc-9de5-8baabfcf3637">
     <KistlBase:ChangedOn>2010-02-01T16:07:00.49Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2010-02-01T15:23:35.247Z</KistlBase:CreatedOn>
@@ -12611,7 +12611,7 @@
     <KistlBase:TableName>ControlKinds</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="302c3ca4-7e86-4880-8e32-ff548268f80b">
-    <KistlBase:ChangedOn>2010-03-29T13:55:21.903Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2010-05-21T15:33:01.23Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2010-03-29T13:52:45.36Z</KistlBase:CreatedOn>
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
     <KistlBase:Name>DashboardKind</KistlBase:Name>
@@ -12620,7 +12620,7 @@
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
     <KistlBase:BaseObjectClass>a9166f1e-9233-4d2d-8eb6-be71d724ea14</KistlBase:BaseObjectClass>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
-    <KistlBase:IsAbstract>true</KistlBase:IsAbstract>
+    <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <KistlBase:TableName>DashboardKinds</KistlBase:TableName>
@@ -12658,22 +12658,6 @@
     <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <KistlBase:TableName>DataObjectSelectionTaskKinds</KistlBase:TableName>
-  </KistlBase:ObjectClass>
-  <KistlBase:ObjectClass ExportGuid="6603c126-83ec-4861-b7d1-d692ec96cc5e">
-    <KistlBase:ChangedOn>2009-12-14T17:08:05.4Z</KistlBase:ChangedOn>
-    <KistlBase:CreatedOn>2009-12-14T17:08:05.4Z</KistlBase:CreatedOn>
-    <GUI:DefaultIcon>0f4acffa-6dc8-4d87-89ee-2d21cfa3d088</GUI:DefaultIcon>
-    <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
-    <KistlBase:Name>DataObjectSummaryKind</KistlBase:Name>
-    <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
-    <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
-    <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
-    <KistlBase:BaseObjectClass>302c3ca4-7e86-4880-8e32-ff548268f80b</KistlBase:BaseObjectClass>
-    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
-    <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
-    <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
-    <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
-    <KistlBase:TableName>DataObjectSummaryKinds</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="add058e1-2a72-4663-a0c4-9b79cd1d4537">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.4Z</KistlBase:ChangedOn>
@@ -12866,21 +12850,6 @@
     <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <KistlBase:TableName>PropertyGroupKinds</KistlBase:TableName>
-  </KistlBase:ObjectClass>
-  <KistlBase:ObjectClass ExportGuid="a538afec-8d61-43ab-9e70-1973d3932c0a">
-    <KistlBase:ChangedOn>2010-05-18T17:14:56.01Z</KistlBase:ChangedOn>
-    <KistlBase:CreatedOn>2010-05-18T17:14:56.01Z</KistlBase:CreatedOn>
-    <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
-    <KistlBase:Name>SimpleBoolFilterKind</KistlBase:Name>
-    <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
-    <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
-    <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
-    <KistlBase:BaseObjectClass>400b2042-c41d-45fd-9b3c-05b43ab33182</KistlBase:BaseObjectClass>
-    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
-    <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
-    <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
-    <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
-    <KistlBase:TableName>SimpleBoolFilterKinds</KistlBase:TableName>
   </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="bbd088cc-c68c-46de-a89e-6e1e6f768245">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.4Z</KistlBase:ChangedOn>

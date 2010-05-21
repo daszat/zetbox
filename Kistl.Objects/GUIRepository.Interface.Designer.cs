@@ -106,16 +106,6 @@ namespace Kistl.App.GUI
 			}
 		}
 		
-		/// <summary>List of all SimpleBoolFilterKind</summary>
-		/// 
-		public IQueryable<SimpleBoolFilterKind> SimpleBoolFilterKinds
-		{ 
-			get
-			{
-				return Context.GetQuery<SimpleBoolFilterKind>();
-			}
-		}
-		
 		/// <summary>List of all PropertyGroupKind</summary>
 		/// Displays a group of properties from a data object
 		public IQueryable<PropertyGroupKind> PropertyGroupKinds
@@ -223,16 +213,6 @@ namespace Kistl.App.GUI
 			get
 			{
 				return Context.GetQuery<EnumerationSelectorKind>();
-			}
-		}
-		
-		/// <summary>List of all DataObjectSummaryKind</summary>
-		/// 
-		public IQueryable<DataObjectSummaryKind> DataObjectSummaryKinds
-		{ 
-			get
-			{
-				return Context.GetQuery<DataObjectSummaryKind>();
 			}
 		}
 		

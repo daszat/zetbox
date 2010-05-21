@@ -84,7 +84,6 @@
     <Compile Include="DashboardKind.Interface.Designer.cs" />
     <Compile Include="DataObjectKind.Interface.Designer.cs" />
     <Compile Include="DataObjectSelectionTaskKind.Interface.Designer.cs" />
-    <Compile Include="DataObjectSummaryKind.Interface.Designer.cs" />
     <Compile Include="DataType.Interface.Designer.cs" />
     <Compile Include="DateTimeParameter.Interface.Designer.cs" />
     <Compile Include="DateTimeProperty.Interface.Designer.cs" />
@@ -145,7 +144,6 @@
     <Compile Include="RelationEnd.Interface.Designer.cs" />
     <Compile Include="RoleMembership.Interface.Designer.cs" />
     <Compile Include="Semester.Interface.Designer.cs" />
-    <Compile Include="SimpleBoolFilterKind.Interface.Designer.cs" />
     <Compile Include="SingleLineDataObjectKind.Interface.Designer.cs" />
     <Compile Include="StaticFile.Interface.Designer.cs" />
     <Compile Include="StringListKind.Interface.Designer.cs" />

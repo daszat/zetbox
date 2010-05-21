@@ -141,12 +141,6 @@
       <End Role="A_ControlKind" EntitySet="ControlKind" />
       <End Role="B_DataObjectSelectionTaskKind" EntitySet="DataObjectSelectionTaskKind" />
     </AssociationSet>
-    <EntitySet Name="DataObjectSummaryKind" EntityType="Model.Store.DataObjectSummaryKind" Table="DataObjectSummaryKinds"/>
-    <!-- inherits from DashboardKind -->
-    <AssociationSet Name="FK_DataObjectSummaryKind_DashboardKind_ID" Association="Model.Store.FK_DataObjectSummaryKind_DashboardKind_ID" >
-      <End Role="A_DashboardKind" EntitySet="DashboardKind" />
-      <End Role="B_DataObjectSummaryKind" EntitySet="DataObjectSummaryKind" />
-    </AssociationSet>
     <EntitySet Name="DateTimeParameter" EntityType="Model.Store.DateTimeParameter" Table="DateTimeParameters"/>
     <!-- inherits from BaseParameter -->
     <AssociationSet Name="FK_DateTimeParameter_BaseParameter_ID" Association="Model.Store.FK_DateTimeParameter_BaseParameter_ID" >
@@ -356,12 +350,6 @@
     <AssociationSet Name="FK_RoleMembership_AccessControl_ID" Association="Model.Store.FK_RoleMembership_AccessControl_ID" >
       <End Role="A_AccessControl" EntitySet="AccessControl" />
       <End Role="B_RoleMembership" EntitySet="RoleMembership" />
-    </AssociationSet>
-    <EntitySet Name="SimpleBoolFilterKind" EntityType="Model.Store.SimpleBoolFilterKind" Table="SimpleBoolFilterKinds"/>
-    <!-- inherits from FilterKind -->
-    <AssociationSet Name="FK_SimpleBoolFilterKind_FilterKind_ID" Association="Model.Store.FK_SimpleBoolFilterKind_FilterKind_ID" >
-      <End Role="A_FilterKind" EntitySet="FilterKind" />
-      <End Role="B_SimpleBoolFilterKind" EntitySet="SimpleBoolFilterKind" />
     </AssociationSet>
     <EntitySet Name="SingleLineDataObjectKind" EntityType="Model.Store.SingleLineDataObjectKind" Table="SingleLineDataObjectKinds"/>
     <!-- inherits from ControlKind -->
@@ -1469,13 +1457,6 @@
     <Property Name="ID" Type="int" Nullable="false" />
   </EntityType>
 	
-  <EntityType Name="DataObjectSummaryKind">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
-  </EntityType>
-	
   <EntityType Name="DataType">
     <Key>
       <PropertyRef Name="ID" />
@@ -2100,13 +2081,6 @@
     <Property Name="CourseName" Type="nvarchar" MaxLength="1000" Nullable="false" />
     <Property Name="Period" Type="int" Nullable="true" />
     <Property Name="Year" Type="int" Nullable="true" />
-  </EntityType>
-	
-  <EntityType Name="SimpleBoolFilterKind">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="SingleLineDataObjectKind">
@@ -4838,18 +4812,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_DataObjectSummaryKind_DashboardKind_ID">
-    <End Role="A_DashboardKind" Type="Model.Store.DashboardKind" Multiplicity="1" />
-    <End Role="B_DataObjectSummaryKind" Type="Model.Store.DataObjectSummaryKind" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="A_DashboardKind">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="B_DataObjectSummaryKind">
-        <PropertyRef Name="ID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_DateTimeParameter_BaseParameter_ID">
     <End Role="A_BaseParameter" Type="Model.Store.BaseParameter" Multiplicity="1" />
     <End Role="B_DateTimeParameter" Type="Model.Store.DateTimeParameter" Multiplicity="0..1" />
@@ -5266,18 +5228,6 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="B_RoleMembership">
-        <PropertyRef Name="ID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_SimpleBoolFilterKind_FilterKind_ID">
-    <End Role="A_FilterKind" Type="Model.Store.FilterKind" Multiplicity="1" />
-    <End Role="B_SimpleBoolFilterKind" Type="Model.Store.SimpleBoolFilterKind" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="A_FilterKind">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="B_SimpleBoolFilterKind">
         <PropertyRef Name="ID" />
       </Dependent>
     </ReferentialConstraint>

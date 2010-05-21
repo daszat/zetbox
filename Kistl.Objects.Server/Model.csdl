@@ -1923,13 +1923,11 @@
     <Property Name="HasPersistentOrder" Type="Boolean" Nullable="false" />
     <Property Name="IsList" Type="Boolean" Nullable="false" />
   </EntityType>
-  <EntityType Name="DashboardKind" BaseType="Model.ControlKind" Abstract="true">
+  <EntityType Name="DashboardKind" BaseType="Model.ControlKind">
   </EntityType>
   <EntityType Name="DataObjectKind" BaseType="Model.ControlKind">
   </EntityType>
   <EntityType Name="DataObjectSelectionTaskKind" BaseType="Model.ControlKind">
-  </EntityType>
-  <EntityType Name="DataObjectSummaryKind" BaseType="Model.DashboardKind">
   </EntityType>
   <EntityType Name="DateTimeParameter" BaseType="Model.BaseParameter">
   </EntityType>
@@ -2077,8 +2075,6 @@
                         Relationship="Model.FK_RoleMembership_resolves_Relations_A"
                         FromRole="RoleMembership"
                         ToRole="CollectionEntry" />
-  </EntityType>
-  <EntityType Name="SimpleBoolFilterKind" BaseType="Model.FilterKind">
   </EntityType>
   <EntityType Name="SingleLineDataObjectKind" BaseType="Model.ControlKind">
   </EntityType>

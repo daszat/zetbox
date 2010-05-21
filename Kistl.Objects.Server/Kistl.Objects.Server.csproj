@@ -108,7 +108,6 @@
     <Compile Include="DashboardKind.Server.Designer.cs" />
     <Compile Include="DataObjectKind.Server.Designer.cs" />
     <Compile Include="DataObjectSelectionTaskKind.Server.Designer.cs" />
-    <Compile Include="DataObjectSummaryKind.Server.Designer.cs" />
     <Compile Include="DataType.Server.Designer.cs" />
     <Compile Include="DateTimeParameter.Server.Designer.cs" />
     <Compile Include="DateTimeProperty.Server.Designer.cs" />
@@ -169,7 +168,6 @@
     <Compile Include="RelationEnd.Server.Designer.cs" />
     <Compile Include="RoleMembership.Server.Designer.cs" />
     <Compile Include="Semester.Server.Designer.cs" />
-    <Compile Include="SimpleBoolFilterKind.Server.Designer.cs" />
     <Compile Include="SingleLineDataObjectKind.Server.Designer.cs" />
     <Compile Include="StaticFile.Server.Designer.cs" />
     <Compile Include="StringListKind.Server.Designer.cs" />

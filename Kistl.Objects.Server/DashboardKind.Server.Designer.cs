@@ -24,7 +24,7 @@ namespace Kistl.App.GUI
     /// </summary>
     [EdmEntityType(NamespaceName="Model", Name="DashboardKind")]
     [System.Diagnostics.DebuggerDisplay("DashboardKind")]
-    public abstract class DashboardKind__Implementation__ : Kistl.App.GUI.ControlKind__Implementation__, DashboardKind
+    public class DashboardKind__Implementation__ : Kistl.App.GUI.ControlKind__Implementation__, DashboardKind
     {
     
 		public DashboardKind__Implementation__()

@@ -246,11 +246,6 @@
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.DataObjectSummaryKind)">
-	    <MappingFragment StoreEntitySet="DataObjectSummaryKind">
-	      <ScalarProperty Name="ID" ColumnName="ID" />
-	    </MappingFragment>
-      </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Model.DataObjectKind)">
 	    <MappingFragment StoreEntitySet="DataObjectKind">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
@@ -273,11 +268,6 @@
       </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Model.FilterKind)">
 	    <MappingFragment StoreEntitySet="FilterKind">
-	      <ScalarProperty Name="ID" ColumnName="ID" />
-	    </MappingFragment>
-      </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.SimpleBoolFilterKind)">
-	    <MappingFragment StoreEntitySet="SimpleBoolFilterKind">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 	    </MappingFragment>
       </EntityTypeMapping>
