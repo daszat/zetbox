@@ -8,6 +8,7 @@ using Kistl.API;
 using Kistl.App.Base;
 using Kistl.App.Extensions;
 using Kistl.API.Configuration;
+using Kistl.Client.Presentables.KistlBase;
 
 namespace Kistl.Client.Presentables
 {
@@ -33,6 +34,17 @@ namespace Kistl.Client.Presentables
         public override Kistl.App.GUI.Icon Icon
         {
             get { return _class.DefaultIcon; }
+        }
+
+        protected override List<PropertyGroupModel> CreatePropertyGroups()
+        {
+            var result = base.CreatePropertyGroups();
+            
+            var relListMdl = ModelFactory.CreateViewModel<InstanceListViewModel.Factory>().Invoke(DataContext, DataContext.FindPersistenceObject<DataType>(new Guid("1C0E894F-4EB4-422F-8094-3095735B4917")));
+            relListMdl.Filter.Add(new ConstantFilterExpression("A.Type = @0 || B.Type = @0", this.Object));
+
+            result.Add(ModelFactory.CreateViewModel<PropertyGroupModel.Factory>().Invoke(DataContext, "Relations", new ViewModel[] { relListMdl }));
+            return result;
         }
     }
 }

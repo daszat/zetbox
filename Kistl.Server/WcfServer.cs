@@ -40,6 +40,18 @@ namespace Kistl.Server
             _host = factory.CreateServiceHost(typeof(KistlService).AssemblyQualifiedName, new[] { new Uri("http://localhost:6666/KistlService") });
             _host.UnknownMessageReceived += new EventHandler<UnknownMessageReceivedEventArgs>(host_UnknownMessageReceived);
             _host.Faulted += new EventHandler(host_Faulted);
+            _host.Closed += new EventHandler(_host_Closed);
+            _host.Opened += new EventHandler(_host_Opened);
+        }
+
+        void _host_Opened(object sender, EventArgs e)
+        {
+            Log.Info("Host opened");
+        }
+
+        void _host_Closed(object sender, EventArgs e)
+        {
+            Log.Info("Host closed");
         }
 
         /// <summary>

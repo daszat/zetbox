@@ -16,7 +16,7 @@ namespace Kistl.Server
     /// Implements the main WCF interface.
     /// </summary>
     public class KistlService
-        : IKistlService
+        : IKistlService, IDisposable
     {
         private readonly IServerObjectHandlerFactory _sohFactory;
         private readonly Func<IKistlContext> _ctxFactory;
@@ -24,6 +24,7 @@ namespace Kistl.Server
 
         public KistlService(IServerObjectHandlerFactory sohFactory, Func<IKistlContext> ctxFactory, ITypeTransformations typeTrans)
         {
+            Logging.Facade.Info("Creating new KistlService instance");
             _sohFactory = sohFactory;
             _ctxFactory = ctxFactory;
             _typeTrans = typeTrans;
@@ -333,5 +334,14 @@ namespace Kistl.Server
                 return null;
             }
         }
+
+        #region IDisposable Members
+
+        public void Dispose()
+        {
+            Logging.Facade.Info("Disposing KistlService instance");
+        }
+
+        #endregion
     }
 }

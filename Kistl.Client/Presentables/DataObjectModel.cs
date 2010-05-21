@@ -16,7 +16,7 @@ namespace Kistl.Client.Presentables
     using Kistl.App.Base;
     using Kistl.App.Extensions;
     using Kistl.App.GUI;
-using Kistl.API.Configuration;
+    using Kistl.API.Configuration;
 
     /// <summary>
     /// Proxies a whole IDataObject
@@ -127,23 +127,27 @@ using Kistl.API.Configuration;
             {
                 if (_propertyGroups == null)
                 {
-                    _propertyGroups = new ReadOnlyCollection<PropertyGroupModel>(
-                        FetchPropertyList()
-                            .SelectMany(p => (String.IsNullOrEmpty(p.CategoryTags) ? "Uncategorised" : p.CategoryTags)
-                                                .Split(", ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries)
-                                                .Select(s => new { Category = s, Property = p }))
-                            .GroupBy(x => x.Category, x => x.Property)
-                            .OrderBy(group => group.Key)
-                            .Select(group => ModelFactory.CreateViewModel<PropertyGroupModel.Factory>().Invoke(
-                                DataContext,
-                                group.Key,
-                                group.Select(p =>
-                                     ModelFactory.CreateViewModel<BasePropertyModel.Factory>(p).Invoke(DataContext, _object, p)).Cast<ViewModel>()))
-                            .ToList());
+                    _propertyGroups = new ReadOnlyCollection<PropertyGroupModel>(CreatePropertyGroups());
 
                 }
                 return _propertyGroups;
             }
+        }
+
+        protected virtual List<PropertyGroupModel> CreatePropertyGroups()
+        {
+            return FetchPropertyList()
+                        .SelectMany(p => (String.IsNullOrEmpty(p.CategoryTags) ? "Uncategorised" : p.CategoryTags)
+                                            .Split(", ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries)
+                                            .Select(s => new { Category = s, Property = p }))
+                        .GroupBy(x => x.Category, x => x.Property)
+                        .OrderBy(group => group.Key)
+                        .Select(group => ModelFactory.CreateViewModel<PropertyGroupModel.Factory>().Invoke(
+                            DataContext,
+                            group.Key,
+                            group.Select(p =>
+                                 ModelFactory.CreateViewModel<BasePropertyModel.Factory>(p).Invoke(DataContext, _object, p)).Cast<ViewModel>()))
+                        .ToList();
         }
 
         public LookupDictionary<string, PropertyGroupModel, PropertyGroupModel> PropertyGroupsByName
