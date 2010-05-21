@@ -13,12 +13,5 @@ namespace Kistl.App.GUI
     public interface StringListKind : Kistl.App.GUI.ControlKind 
     {
 
-        /// <summary>
-        /// 
-        /// </summary>
-		Kistl.App.GUI.ControlKindClass ItemKind {
-			get;
-			set;
-		}
     }
 }

@@ -79,15 +79,6 @@
       <End Role="InputProperties" EntitySet="Property" />
       <End Role="CollectionEntry" EntitySet="CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntry" />
     </AssociationSet>
-    <EntitySet Name="ControlKindClass_supports_TypeRef_RelationEntry" EntityType="Model.ControlKindClass_supports_TypeRef_RelationEntry" />
-    <AssociationSet Name="FK_ControlKindClass_supports_SupportedInterfaces_A" Association="Model.FK_ControlKindClass_supports_SupportedInterfaces_A" >
-      <End Role="ControlKindClass" EntitySet="DataType" />
-      <End Role="CollectionEntry" EntitySet="ControlKindClass_supports_TypeRef_RelationEntry" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ControlKindClass_supports_SupportedInterfaces_B" Association="Model.FK_ControlKindClass_supports_SupportedInterfaces_B" >
-      <End Role="SupportedInterfaces" EntitySet="TypeRef" />
-      <End Role="CollectionEntry" EntitySet="ControlKindClass_supports_TypeRef_RelationEntry" />
-    </AssociationSet>
     <EntitySet Name="Document_has_Blob_RelationEntry" EntityType="Model.Document_has_Blob_RelationEntry" />
     <AssociationSet Name="FK_Document_has_Revisions_A" Association="Model.FK_Document_has_Revisions_A" >
       <End Role="Document" EntitySet="File" />
@@ -357,10 +348,6 @@
       <End Role="ConstraintInvocation" EntitySet="ConstraintInvocation" />
       <End Role="TypeRef" EntitySet="TypeRef" />
     </AssociationSet>
-    <AssociationSet Name="FK_Control_isof_Kind" Association="Model.FK_Control_isof_Kind" >
-      <End Role="Control" EntitySet="ViewDescriptor" />
-      <End Role="Kind" EntitySet="DataType" />
-    </AssociationSet>
     <AssociationSet Name="FK_ControlKind_has_Module" Association="Model.FK_ControlKind_has_Module" >
       <End Role="ControlKind" EntitySet="ControlKind" />
       <End Role="Module" EntitySet="Module" />
@@ -464,10 +451,6 @@
     <AssociationSet Name="FK_Kunde_was_CreatedBy" Association="Model.FK_Kunde_was_CreatedBy" >
       <End Role="Kunde" EntitySet="Kunde" />
       <End Role="CreatedBy" EntitySet="Identity" />
-    </AssociationSet>
-    <AssociationSet Name="FK_List_has_ItemKind" Association="Model.FK_List_has_ItemKind" >
-      <End Role="List" EntitySet="ControlKind" />
-      <End Role="ItemKind" EntitySet="DataType" />
     </AssociationSet>
     <AssociationSet Name="FK_Method_has_MethodInvocations" Association="Model.FK_Method_has_MethodInvocations" >
       <End Role="Method" EntitySet="Method" />
@@ -1815,10 +1798,6 @@
                         FromRole="View"
                         ToRole="ControlRef" />
     <Property Name="ExportGuid" Type="Guid" Nullable="false" />
-    <NavigationProperty Name="Kind__Implementation__"
-                        Relationship="Model.FK_Control_isof_Kind"
-                        FromRole="Control"
-                        ToRole="Kind" />
     <NavigationProperty Name="Module__Implementation__"
                         Relationship="Model.FK_ViewDescriptor_has_Module"
                         FromRole="ViewDescriptor"
@@ -1943,12 +1922,6 @@
                         ToRole="CompoundObjectDefinition" />
     <Property Name="HasPersistentOrder" Type="Boolean" Nullable="false" />
     <Property Name="IsList" Type="Boolean" Nullable="false" />
-  </EntityType>
-  <EntityType Name="ControlKindClass" BaseType="Model.ObjectClass">
-    <NavigationProperty Name="SupportedInterfaces__Implementation__"
-                        Relationship="Model.FK_ControlKindClass_supports_SupportedInterfaces_A"
-                        FromRole="ControlKindClass"
-                        ToRole="CollectionEntry" />
   </EntityType>
   <EntityType Name="DashboardKind" BaseType="Model.ControlKind" Abstract="true">
   </EntityType>
@@ -2122,10 +2095,6 @@
   <EntityType Name="StringFilterKind" BaseType="Model.FilterKind">
   </EntityType>
   <EntityType Name="StringListKind" BaseType="Model.ControlKind">
-    <NavigationProperty Name="ItemKind__Implementation__"
-                        Relationship="Model.FK_List_has_ItemKind"
-                        FromRole="List"
-                        ToRole="ItemKind" />
   </EntityType>
   <EntityType Name="StringParameter" BaseType="Model.BaseParameter">
   </EntityType>
@@ -2189,49 +2158,6 @@
          Multiplicity="0..1" />
     <End Role="CollectionEntry"
          Type="Model.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntry"
-         Multiplicity="*" />
-  </Association>
-  
-  <!--
-    Relation: FK_ControlKindClass_supports_SupportedInterfaces
-    A: ZeroOrMore ControlKindClass as ControlKindClass
-    B: ZeroOrMore TypeRef as SupportedInterfaces
-    Preferred Storage: Separate
-  -->
-  <EntityType Name="ControlKindClass_supports_TypeRef_RelationEntry" >
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-	<Property Name="ExportGuid" Type="Guid" Nullable="false" />
-	
-    
-    <!-- A -->
-    <NavigationProperty Name="A__Implementation__"
-                        Relationship="Model.FK_ControlKindClass_supports_SupportedInterfaces_A"
-                        FromRole="CollectionEntry"
-                        ToRole="ControlKindClass" />
-
-    <!-- B -->
-    <NavigationProperty Name="B__Implementation__"
-                        Relationship="Model.FK_ControlKindClass_supports_SupportedInterfaces_B"
-                        FromRole="CollectionEntry"
-                        ToRole="SupportedInterfaces" />
-  </EntityType>
-  <Association Name="FK_ControlKindClass_supports_SupportedInterfaces_A" >
-    <End Role="ControlKindClass"
-         Type="Model.ControlKindClass" 
-         Multiplicity="0..1" />
-    <End Role="CollectionEntry"
-         Type="Model.ControlKindClass_supports_TypeRef_RelationEntry"
-         Multiplicity="*" />
-  </Association>
-  <Association Name="FK_ControlKindClass_supports_SupportedInterfaces_B" >
-    <End Role="SupportedInterfaces"
-         Type="Model.TypeRef" 
-         Multiplicity="0..1" />
-    <End Role="CollectionEntry"
-         Type="Model.ControlKindClass_supports_TypeRef_RelationEntry"
          Multiplicity="*" />
   </Association>
   
@@ -3219,14 +3145,6 @@
          Type="Model.TypeRef" 
          Multiplicity="0..1" />
   </Association>
-  <Association Name="FK_Control_isof_Kind" >
-    <End Role="Control"
-         Type="Model.ViewDescriptor" 
-         Multiplicity="*" />
-    <End Role="Kind"
-         Type="Model.ControlKindClass" 
-         Multiplicity="0..1" />
-  </Association>
   <Association Name="FK_ControlKind_has_Module" >
     <End Role="ControlKind"
          Type="Model.ControlKind" 
@@ -3433,14 +3351,6 @@
          Multiplicity="*" />
     <End Role="CreatedBy"
          Type="Model.Identity" 
-         Multiplicity="0..1" />
-  </Association>
-  <Association Name="FK_List_has_ItemKind" >
-    <End Role="List"
-         Type="Model.StringListKind" 
-         Multiplicity="*" />
-    <End Role="ItemKind"
-         Type="Model.ControlKindClass" 
          Multiplicity="0..1" />
   </Association>
   <Association Name="FK_Method_has_MethodInvocations" >

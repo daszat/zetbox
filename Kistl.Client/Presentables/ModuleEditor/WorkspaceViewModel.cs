@@ -123,11 +123,6 @@ namespace Kistl.Client.Presentables.ModuleEditor
                     lstMdl.Filter.Add(new ConstantFilterExpression("Module = @0", CurrentModule));
                     lst.Add(lstMdl);
 
-                    // ControlKindClass                    
-                    lstMdl = ModelFactory.CreateViewModel<InstanceListViewModel.Factory>().Invoke(DataContext, DataContext.FindPersistenceObject<DataType>(new Guid("C0C6369E-90CD-4E14-AD5C-A45E9E782E2F")));
-                    lstMdl.Filter.Add(new ConstantFilterExpression("Module = @0", CurrentModule));
-                    lst.Add(lstMdl);
-
                     // Relation
                     lstMdl = ModelFactory.CreateViewModel<InstanceListViewModel.Factory>().Invoke(DataContext, DataContext.FindPersistenceObject<DataType>(new Guid("1C0E894F-4EB4-422F-8094-3095735B4917")));
                     lstMdl.Filter.Add(new ConstantFilterExpression("Module = @0", CurrentModule));

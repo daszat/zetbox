@@ -123,12 +123,6 @@
       <End Role="A_Property" EntitySet="Property" />
       <End Role="B_CompoundObjectProperty" EntitySet="CompoundObjectProperty" />
     </AssociationSet>
-    <EntitySet Name="ControlKindClass" EntityType="Model.Store.ControlKindClass" Table="ControlKindClasses"/>
-    <!-- inherits from ObjectClass -->
-    <AssociationSet Name="FK_ControlKindClass_ObjectClass_ID" Association="Model.Store.FK_ControlKindClass_ObjectClass_ID" >
-      <End Role="A_ObjectClass" EntitySet="ObjectClass" />
-      <End Role="B_ControlKindClass" EntitySet="ControlKindClass" />
-    </AssociationSet>
     <EntitySet Name="DashboardKind" EntityType="Model.Store.DashboardKind" Table="DashboardKinds"/>
     <!-- inherits from ControlKind -->
     <AssociationSet Name="FK_DashboardKind_ControlKind_ID" Association="Model.Store.FK_DashboardKind_ControlKind_ID" >
@@ -481,22 +475,6 @@
     <AssociationSet Name="FK_CalculatedReference_dependsOn_InputProperties_B" Association="Model.Store.FK_CalculatedReference_dependsOn_InputProperties_B" >
       <End Role="CollectionEntry" EntitySet="CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntry" />
       <End Role="InputProperties" EntitySet="Property" />
-    </AssociationSet>
-    
-    <!-- 
-    Relation: FK_ControlKindClass_supports_SupportedInterfaces
-    A: ZeroOrMore ControlKindClass as ControlKindClass
-    B: ZeroOrMore TypeRef as SupportedInterfaces
-    Preferred Storage: Separate
-    -->
-    <EntitySet Name="ControlKindClass_supports_TypeRef_RelationEntry" EntityType="Model.Store.ControlKindClass_supports_TypeRef_RelationEntry" Table="ControlKindClass_supports_SupportedInterfaces" />
-    <AssociationSet Name="FK_ControlKindClass_supports_SupportedInterfaces_A" Association="Model.Store.FK_ControlKindClass_supports_SupportedInterfaces_A" >
-      <End Role="ControlKindClass" EntitySet="ControlKindClass" />
-      <End Role="CollectionEntry" EntitySet="ControlKindClass_supports_TypeRef_RelationEntry" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ControlKindClass_supports_SupportedInterfaces_B" Association="Model.Store.FK_ControlKindClass_supports_SupportedInterfaces_B" >
-      <End Role="CollectionEntry" EntitySet="ControlKindClass_supports_TypeRef_RelationEntry" />
-      <End Role="SupportedInterfaces" EntitySet="TypeRef" />
     </AssociationSet>
     
     <!-- 
@@ -874,10 +852,6 @@
       <End Role="ConstraintInvocation" EntitySet="ConstraintInvocation" />
       <End Role="TypeRef" EntitySet="TypeRef" />
     </AssociationSet>
-    <AssociationSet Name="FK_Control_isof_Kind" Association="Model.Store.FK_Control_isof_Kind" >
-      <End Role="Control" EntitySet="ViewDescriptor" />
-      <End Role="Kind" EntitySet="ControlKindClass" />
-    </AssociationSet>
     <AssociationSet Name="FK_ControlKind_has_Module" Association="Model.Store.FK_ControlKind_has_Module" >
       <End Role="ControlKind" EntitySet="ControlKind" />
       <End Role="Module" EntitySet="Module" />
@@ -981,10 +955,6 @@
     <AssociationSet Name="FK_Kunde_was_CreatedBy" Association="Model.Store.FK_Kunde_was_CreatedBy" >
       <End Role="Kunde" EntitySet="Kunde" />
       <End Role="CreatedBy" EntitySet="Identity" />
-    </AssociationSet>
-    <AssociationSet Name="FK_List_has_ItemKind" Association="Model.Store.FK_List_has_ItemKind" >
-      <End Role="List" EntitySet="StringListKind" />
-      <End Role="ItemKind" EntitySet="ControlKindClass" />
     </AssociationSet>
     <AssociationSet Name="FK_Method_has_MethodInvocations" Association="Model.Store.FK_Method_has_MethodInvocations" >
       <End Role="Method" EntitySet="Method" />
@@ -1503,13 +1473,6 @@
     <Property Name="fk_Module" Type="int" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
     <Property Name="Name" Type="nvarchar" MaxLength="1000" Nullable="true" />
-  </EntityType>
-	
-  <EntityType Name="ControlKindClass">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="CurrentSchema">
@@ -2236,7 +2199,6 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" />
-    <Property Name="fk_ItemKind" Type="int" />
   </EntityType>
 	
   <EntityType Name="StringParameter">
@@ -2417,7 +2379,6 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="fk_Kind" Type="int" />
     <Property Name="fk_ControlRef" Type="int" />
     <Property Name="fk_Module" Type="int" />
     <Property Name="fk_ControlKind" Type="int" />
@@ -2514,45 +2475,6 @@
       </Principal>
       <Dependent Role="CollectionEntry">
         <PropertyRef Name="fk_InputProperties" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-	
-  <EntityType Name="ControlKindClass_supports_TypeRef_RelationEntry">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-	<Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="fk_ControlKindClass" Type="int" Nullable="true" />
-    <Property Name="fk_SupportedInterfaces" Type="int" Nullable="true" />
-  </EntityType>
-
-  <!-- A to CollectionEntry -->
-  <Association Name="FK_ControlKindClass_supports_SupportedInterfaces_A">
-    <End Role="ControlKindClass" Type="Model.Store.ControlKindClass" Multiplicity="0..1" />
-    <End Role="CollectionEntry" Type="Model.Store.ControlKindClass_supports_TypeRef_RelationEntry" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ControlKindClass">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="CollectionEntry">
-        <PropertyRef Name="fk_ControlKindClass" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-  <!-- B to CollectionEntry -->
-  <Association Name="FK_ControlKindClass_supports_SupportedInterfaces_B">
-    <End Role="SupportedInterfaces" Type="Model.Store.TypeRef" Multiplicity="0..1" />
-    <End Role="CollectionEntry" Type="Model.Store.ControlKindClass_supports_TypeRef_RelationEntry" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="SupportedInterfaces">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="CollectionEntry">
-        <PropertyRef Name="fk_SupportedInterfaces" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -3572,20 +3494,6 @@
   </Association>
 
 
-  <Association Name="FK_Control_isof_Kind">
-    <End Role="Kind" Type="Model.Store.ControlKindClass" Multiplicity="0..1" />
-    <End Role="Control" Type="Model.Store.ViewDescriptor" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Kind">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="Control">
-        <PropertyRef Name="fk_Kind" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-
   <Association Name="FK_ControlKind_has_Module">
     <End Role="Module" Type="Model.Store.Module" Multiplicity="0..1" />
     <End Role="ControlKind" Type="Model.Store.ControlKind" Multiplicity="*" />
@@ -3945,20 +3853,6 @@
       </Principal>
       <Dependent Role="Kunde">
         <PropertyRef Name="fk_CreatedBy" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-
-  <Association Name="FK_List_has_ItemKind">
-    <End Role="ItemKind" Type="Model.Store.ControlKindClass" Multiplicity="0..1" />
-    <End Role="List" Type="Model.Store.StringListKind" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ItemKind">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="List">
-        <PropertyRef Name="fk_ItemKind" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -4982,18 +4876,6 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="B_CompoundObjectProperty">
-        <PropertyRef Name="ID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_ControlKindClass_ObjectClass_ID">
-    <End Role="A_ObjectClass" Type="Model.Store.ObjectClass" Multiplicity="1" />
-    <End Role="B_ControlKindClass" Type="Model.Store.ControlKindClass" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="A_ObjectClass">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="B_ControlKindClass">
         <PropertyRef Name="ID" />
       </Dependent>
     </ReferentialConstraint>

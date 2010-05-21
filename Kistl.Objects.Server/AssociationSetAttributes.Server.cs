@@ -401,21 +401,6 @@ using Kistl.DalProvider.EF;
 
 
 	/*
-    Relation: FK_Control_isof_Kind
-    A: ZeroOrMore ViewDescriptor as Control
-    B: ZeroOrOne ControlKindClass as Kind
-    Preferred Storage: MergeIntoA
-	*/
-
-// basic association
-[assembly: EdmRelationship(
-    "Model", "FK_Control_isof_Kind",
-    "Control", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.ViewDescriptor__Implementation__),
-    "Kind", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.GUI.ControlKindClass__Implementation__)
-    )]
-
-
-	/*
     Relation: FK_ControlKind_has_Module
     A: ZeroOrMore ControlKind as ControlKind
     B: ZeroOrOne Module as Module
@@ -429,24 +414,6 @@ using Kistl.DalProvider.EF;
     "Module", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Module__Implementation__)
     )]
 
-
-	/*
-    Relation: FK_ControlKindClass_supports_SupportedInterfaces
-    A: ZeroOrMore ControlKindClass as ControlKindClass
-    B: ZeroOrMore TypeRef as SupportedInterfaces
-    Preferred Storage: Separate
-	*/
-
-// The association from A to the CollectionEntry
-[assembly: EdmRelationship("Model", "FK_ControlKindClass_supports_SupportedInterfaces_A",
-    "ControlKindClass", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.GUI.ControlKindClass__Implementation__),
-    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.ControlKindClass_supports_TypeRef_RelationEntry__Implementation__)
-    )]
-// The association from B to the CollectionEntry
-[assembly: EdmRelationship("Model", "FK_ControlKindClass_supports_SupportedInterfaces_B",
-    "SupportedInterfaces", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.TypeRef__Implementation__),
-    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.ControlKindClass_supports_TypeRef_RelationEntry__Implementation__)
-    )]
 
 	/*
     Relation: FK_DataType_has_DefaultIcon
@@ -892,21 +859,6 @@ using Kistl.DalProvider.EF;
     "Model", "FK_Kunde_was_CreatedBy",
     "Kunde", RelationshipMultiplicity.Many, typeof(Kistl.App.Projekte.Kunde__Implementation__),
     "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Identity__Implementation__)
-    )]
-
-
-	/*
-    Relation: FK_List_has_ItemKind
-    A: ZeroOrMore StringListKind as List
-    B: One ControlKindClass as ItemKind
-    Preferred Storage: MergeIntoA
-	*/
-
-// basic association
-[assembly: EdmRelationship(
-    "Model", "FK_List_has_ItemKind",
-    "List", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.StringListKind__Implementation__),
-    "ItemKind", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.GUI.ControlKindClass__Implementation__)
     )]
 
 

@@ -32,97 +32,6 @@ namespace Kistl.App.GUI
         }
 
 
-        /// <summary>
-        /// 
-        /// </summary>
-    /*
-    Relation: FK_List_has_ItemKind
-    A: ZeroOrMore StringListKind as List
-    B: One ControlKindClass as ItemKind
-    Preferred Storage: MergeIntoA
-    */
-        // object reference property
-   		// Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
-        // implement the user-visible interface
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.GUI.ControlKindClass ItemKind
-        {
-            get
-            {
-                return ItemKind__Implementation__;
-            }
-            set
-            {
-                // TODO: NotifyPropertyChanged()
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if(value != null && value.Context != this.Context) throw new WrongKistlContextException();
-                ItemKind__Implementation__ = (Kistl.App.GUI.ControlKindClass__Implementation__)value;
-            }
-        }
-        
-        private int? _fk_ItemKind;
-        private Guid? _fk_guid_ItemKind = null;
-        // EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_List_has_ItemKind", "ItemKind")]
-        public Kistl.App.GUI.ControlKindClass__Implementation__ ItemKind__Implementation__
-        {
-            get
-            {
-                EntityReference<Kistl.App.GUI.ControlKindClass__Implementation__> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.ControlKindClass__Implementation__>(
-                        "Model.FK_List_has_ItemKind",
-                        "ItemKind");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !r.IsLoaded)
-                {
-                    r.Load(); 
-                    if(r.Value != null) r.Value.AttachToContext(this.Context);
-                }
-                var __value = r.Value;
-				if(OnItemKind_Getter != null)
-				{
-					var e = new PropertyGetterEventArgs<Kistl.App.GUI.ControlKindClass>(__value);
-					OnItemKind_Getter(this, e);
-					__value = (Kistl.App.GUI.ControlKindClass__Implementation__)e.Result;
-				}
-                return __value;
-            }
-            set
-            {
-                EntityReference<Kistl.App.GUI.ControlKindClass__Implementation__> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.ControlKindClass__Implementation__>(
-                        "Model.FK_List_has_ItemKind",
-                        "ItemKind");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !r.IsLoaded)
-                {
-                    r.Load(); 
-                }
-                Kistl.App.GUI.ControlKindClass __oldValue = (Kistl.App.GUI.ControlKindClass)r.Value;
-                Kistl.App.GUI.ControlKindClass __newValue = (Kistl.App.GUI.ControlKindClass)value;
-
-                if(OnItemKind_PreSetter != null)
-                {
-					var e = new PropertyPreSetterEventArgs<Kistl.App.GUI.ControlKindClass>(__oldValue, __newValue);
-					OnItemKind_PreSetter(this, e);
-					__newValue = e.Result;
-                }
-                r.Value = (Kistl.App.GUI.ControlKindClass__Implementation__)__newValue;
-                if(OnItemKind_PostSetter != null)
-                {
-					var e = new PropertyPostSetterEventArgs<Kistl.App.GUI.ControlKindClass>(__oldValue, __newValue);
-					OnItemKind_PostSetter(this, e);
-                }
-                                
-            }
-        }
-        
-        
-		public static event PropertyGetterHandler<Kistl.App.GUI.StringListKind, Kistl.App.GUI.ControlKindClass> OnItemKind_Getter;
-		public static event PropertyPreSetterHandler<Kistl.App.GUI.StringListKind, Kistl.App.GUI.ControlKindClass> OnItemKind_PreSetter;
-		public static event PropertyPostSetterHandler<Kistl.App.GUI.StringListKind, Kistl.App.GUI.ControlKindClass> OnItemKind_PostSetter;
-
 		public override Type GetImplementedInterface()
 		{
 			return typeof(StringListKind);
@@ -135,7 +44,6 @@ namespace Kistl.App.GUI
 			var otherImpl = (StringListKind__Implementation__)obj;
 			var me = (StringListKind)this;
 
-			this._fk_ItemKind = otherImpl._fk_ItemKind;
 		}
 
         // tail template
@@ -188,22 +96,6 @@ namespace Kistl.App.GUI
         public static event ObjectEventHandler<StringListKind> OnDeleting_StringListKind;
 
 
-		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			// else
-			new CustomPropertyDescriptor<StringListKind__Implementation__, Kistl.App.GUI.ControlKindClass>(
-				new Guid("14270073-da33-4c5e-b6ef-c4e71e3ccee0"),
-				"ItemKind",
-				null,
-				obj => obj.ItemKind,
-				(obj, val) => obj.ItemKind = val),
-			// rel: List has ItemKind (c05b892d-dccf-440b-89d1-9943fa8eae52)
-		};
-		
-		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
-		{
-			base.CollectProperties(props);
-			props.AddRange(_properties);
-		}
 	
 
 		public override void ReloadReferences()
@@ -214,13 +106,6 @@ namespace Kistl.App.GUI
 			base.ReloadReferences();
 			
 			// fix direct object references
-
-			if (_fk_guid_ItemKind.HasValue)
-				ItemKind__Implementation__ = (Kistl.App.GUI.ControlKindClass__Implementation__)Context.FindPersistenceObject<Kistl.App.GUI.ControlKindClass>(_fk_guid_ItemKind.Value);
-			else if (_fk_ItemKind.HasValue)
-				ItemKind__Implementation__ = (Kistl.App.GUI.ControlKindClass__Implementation__)Context.Find<Kistl.App.GUI.ControlKindClass>(_fk_ItemKind.Value);
-			else
-				ItemKind__Implementation__ = null;
 		}
 #region Serializer
 
@@ -229,42 +114,36 @@ namespace Kistl.App.GUI
         {
             
             base.ToStream(binStream, auxObjects, eagerLoadLists);
-            BinarySerializer.ToStream(ItemKind != null ? ItemKind.ID : (int?)null, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
         {
             
             base.FromStream(binStream);
-            BinarySerializer.FromStream(out this._fk_ItemKind, binStream);
         }
 
         public override void ToStream(System.Xml.XmlWriter xml)
         {
             
             base.ToStream(xml);
-            XmlStreamer.ToStream(ItemKind != null ? ItemKind.ID : (int?)null, xml, "ItemKind", "Kistl.App.GUI");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
             
             base.FromStream(xml);
-            XmlStreamer.FromStream(ref this._fk_ItemKind, xml, "ItemKind", "Kistl.App.GUI");
         }
 
         public override void Export(System.Xml.XmlWriter xml, string[] modules)
         {
             
             base.Export(xml, modules);
-            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(ItemKind != null ? ItemKind.ExportGuid : (Guid?)null, xml, "ItemKind", "Kistl.App.GUI");
         }
 
         public override void MergeImport(System.Xml.XmlReader xml)
         {
             
             base.MergeImport(xml);
-            XmlStreamer.FromStream(ref this._fk_guid_ItemKind, xml, "ItemKind", "Kistl.App.GUI");
         }
 
 #endregion

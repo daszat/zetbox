@@ -420,11 +420,6 @@
 <ScalarProperty Name="TableName" ColumnName="TableName" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.ControlKindClass)">
-	    <MappingFragment StoreEntitySet="ControlKindClass">
-	      <ScalarProperty Name="ID" ColumnName="ID" />
-	    </MappingFragment>
-      </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="DefaultPropertyValue">
       <EntityTypeMapping TypeName="IsTypeOf(Model.DefaultPropertyValue)">
@@ -993,45 +988,6 @@
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="fk_InputProperties" IsNull="false"/>
-    </AssociationSetMapping>
-
-    <!--
-    Relation: FK_ControlKindClass_supports_SupportedInterfaces
-    A: ZeroOrMore ControlKindClass as ControlKindClass
-    B: ZeroOrMore TypeRef as SupportedInterfaces
-    Preferred Storage: Separate
-    -->
-    <EntitySetMapping Name="ControlKindClass_supports_TypeRef_RelationEntry">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.ControlKindClass_supports_TypeRef_RelationEntry)">
-        <MappingFragment StoreEntitySet="ControlKindClass_supports_TypeRef_RelationEntry">
-          <ScalarProperty Name="ID" ColumnName="ID" />
-		  <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <!-- A to CollectionEntry -->
-    <AssociationSetMapping Name="FK_ControlKindClass_supports_SupportedInterfaces_A"
-                           TypeName="Model.FK_ControlKindClass_supports_SupportedInterfaces_A"
-                           StoreEntitySet="ControlKindClass_supports_TypeRef_RelationEntry" >
-      <EndProperty Name="ControlKindClass">
-        <ScalarProperty Name="ID" ColumnName="fk_ControlKindClass"/>
-      </EndProperty>
-      <EndProperty Name="CollectionEntry">
-        <ScalarProperty Name="ID" ColumnName="ID"/>
-      </EndProperty>
-      <Condition ColumnName="fk_ControlKindClass" IsNull="false"/>
-    </AssociationSetMapping>
-    <!-- B to CollectionEntry -->
-    <AssociationSetMapping Name="FK_ControlKindClass_supports_SupportedInterfaces_B"
-                           TypeName="Model.FK_ControlKindClass_supports_SupportedInterfaces_B"
-                           StoreEntitySet="ControlKindClass_supports_TypeRef_RelationEntry" >
-      <EndProperty Name="SupportedInterfaces">
-        <ScalarProperty Name="ID" ColumnName="fk_SupportedInterfaces"/>
-      </EndProperty>
-      <EndProperty Name="CollectionEntry">
-        <ScalarProperty Name="ID" ColumnName="ID"/>
-      </EndProperty>
-      <Condition ColumnName="fk_SupportedInterfaces" IsNull="false"/>
     </AssociationSetMapping>
 
     <!--
@@ -2124,23 +2080,6 @@
       <Condition ColumnName="fk_TypeRef" IsNull="false"/>
     </AssociationSetMapping>
     <!--
-    Relation: FK_Control_isof_Kind
-    A: ZeroOrMore ViewDescriptor as Control
-    B: ZeroOrOne ControlKindClass as Kind
-    Preferred Storage: MergeIntoA
-    -->
-    <AssociationSetMapping Name="FK_Control_isof_Kind"
-                           TypeName="Model.FK_Control_isof_Kind"
-                           StoreEntitySet="ViewDescriptor" >
-      <EndProperty Name="Kind">
-        <ScalarProperty Name="ID" ColumnName="fk_Kind"/>
-      </EndProperty>
-      <EndProperty Name="Control">
-        <ScalarProperty Name="ID" ColumnName="ID"/>
-      </EndProperty>
-      <Condition ColumnName="fk_Kind" IsNull="false"/>
-    </AssociationSetMapping>
-    <!--
     Relation: FK_ControlKind_has_Module
     A: ZeroOrMore ControlKind as ControlKind
     B: ZeroOrOne Module as Module
@@ -2581,23 +2520,6 @@
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="fk_CreatedBy" IsNull="false"/>
-    </AssociationSetMapping>
-    <!--
-    Relation: FK_List_has_ItemKind
-    A: ZeroOrMore StringListKind as List
-    B: One ControlKindClass as ItemKind
-    Preferred Storage: MergeIntoA
-    -->
-    <AssociationSetMapping Name="FK_List_has_ItemKind"
-                           TypeName="Model.FK_List_has_ItemKind"
-                           StoreEntitySet="StringListKind" >
-      <EndProperty Name="ItemKind">
-        <ScalarProperty Name="ID" ColumnName="fk_ItemKind"/>
-      </EndProperty>
-      <EndProperty Name="List">
-        <ScalarProperty Name="ID" ColumnName="ID"/>
-      </EndProperty>
-      <Condition ColumnName="fk_ItemKind" IsNull="false"/>
     </AssociationSetMapping>
     <!--
     Relation: FK_Method_has_MethodInvocations

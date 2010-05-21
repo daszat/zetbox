@@ -28,13 +28,6 @@ namespace Kistl.App.GUI
 			set;
 		}
         /// <summary>
-        /// 
-        /// </summary>
-		Kistl.App.GUI.ControlKindClass Kind {
-			get;
-			set;
-		}
-        /// <summary>
         /// A View supports one or more ViewModels
         /// </summary>
 

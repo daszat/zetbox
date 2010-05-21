@@ -80,7 +80,6 @@
     <Compile Include="Constraint.Interface.Designer.cs" />
     <Compile Include="ConstraintInvocation.Interface.Designer.cs" />
     <Compile Include="ControlKind.Interface.Designer.cs" />
-    <Compile Include="ControlKindClass.Interface.Designer.cs" />
     <Compile Include="CurrentSchema.Interface.Designer.cs" />
     <Compile Include="DashboardKind.Interface.Designer.cs" />
     <Compile Include="DataObjectKind.Interface.Designer.cs" />
