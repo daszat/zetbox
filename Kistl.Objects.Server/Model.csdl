@@ -1889,8 +1889,6 @@
   </EntityType>
 
   <!-- EntityTypes for all other classes -->
-  <EntityType Name="ActionKind" BaseType="Model.ControlKind">
-  </EntityType>
   <EntityType Name="BoolParameter" BaseType="Model.BaseParameter">
   </EntityType>
   <EntityType Name="BoolProperty" BaseType="Model.ValueTypeProperty">
@@ -1904,8 +1902,6 @@
                         Relationship="Model.FK_CalculatedReference_references_ReferencedClass"
                         FromRole="CalculatedReference"
                         ToRole="ReferencedClass" />
-  </EntityType>
-  <EntityType Name="CheckboxKind" BaseType="Model.ControlKind">
   </EntityType>
   <EntityType Name="CLRObjectParameter" BaseType="Model.BaseParameter">
     <NavigationProperty Name="Type__Implementation__"
@@ -1922,12 +1918,6 @@
                         ToRole="CompoundObjectDefinition" />
     <Property Name="HasPersistentOrder" Type="Boolean" Nullable="false" />
     <Property Name="IsList" Type="Boolean" Nullable="false" />
-  </EntityType>
-  <EntityType Name="DashboardKind" BaseType="Model.ControlKind">
-  </EntityType>
-  <EntityType Name="DataObjectKind" BaseType="Model.ControlKind">
-  </EntityType>
-  <EntityType Name="DataObjectSelectionTaskKind" BaseType="Model.ControlKind">
   </EntityType>
   <EntityType Name="DateTimeParameter" BaseType="Model.BaseParameter">
   </EntityType>
@@ -1957,12 +1947,6 @@
                         Relationship="Model.FK_EnumerationProperty_has_Enumeration"
                         FromRole="EnumerationProperty"
                         ToRole="Enumeration" />
-  </EntityType>
-  <EntityType Name="EnumerationSelectorKind" BaseType="Model.ControlKind">
-  </EntityType>
-  <EntityType Name="ErrorListKind" BaseType="Model.ControlKind">
-  </EntityType>
-  <EntityType Name="FilterKind" BaseType="Model.ControlKind">
   </EntityType>
   <EntityType Name="GroupMembership" BaseType="Model.AccessControl">
     <NavigationProperty Name="Group__Implementation__"
@@ -1995,12 +1979,6 @@
   <EntityType Name="IsValidIdentifierConstraint" BaseType="Model.Constraint">
   </EntityType>
   <EntityType Name="IsValidNamespaceConstraint" BaseType="Model.IsValidIdentifierConstraint">
-  </EntityType>
-  <EntityType Name="KistlDebuggerKind" BaseType="Model.ControlKind">
-  </EntityType>
-  <EntityType Name="LabelKind" BaseType="Model.ControlKind">
-  </EntityType>
-  <EntityType Name="LauncherKind" BaseType="Model.ControlKind">
   </EntityType>
   <EntityType Name="MethodInvocationConstraint" BaseType="Model.Constraint">
   </EntityType>
@@ -2038,8 +2016,6 @@
                         ToRole="SubClasses" />
     <Property Name="TableName" Type="String" Nullable="false" MaxLength="100" />
   </EntityType>
-  <EntityType Name="ObjectListKind" BaseType="Model.ControlKind">
-  </EntityType>
   <EntityType Name="ObjectParameter" BaseType="Model.BaseParameter">
     <NavigationProperty Name="DataType__Implementation__"
                         Relationship="Model.FK_ObjectParameter_has_DataType"
@@ -2064,23 +2040,13 @@
                         FromRole="Navigator"
                         ToRole="RelationEnd" />
   </EntityType>
-  <EntityType Name="ObjectRefGridCellKind" BaseType="Model.ControlKind">
-  </EntityType>
-  <EntityType Name="ObjectRefKind" BaseType="Model.ControlKind">
-  </EntityType>
-  <EntityType Name="PropertyGroupKind" BaseType="Model.ControlKind">
-  </EntityType>
   <EntityType Name="RoleMembership" BaseType="Model.AccessControl">
     <NavigationProperty Name="Relations__Implementation__"
                         Relationship="Model.FK_RoleMembership_resolves_Relations_A"
                         FromRole="RoleMembership"
                         ToRole="CollectionEntry" />
   </EntityType>
-  <EntityType Name="SingleLineDataObjectKind" BaseType="Model.ControlKind">
-  </EntityType>
   <EntityType Name="StaticFile" BaseType="Model.File">
-  </EntityType>
-  <EntityType Name="StringListKind" BaseType="Model.ControlKind">
   </EntityType>
   <EntityType Name="StringParameter" BaseType="Model.BaseParameter">
   </EntityType>
@@ -2090,15 +2056,9 @@
     <Property Name="MaxLength" Type="Int32" Nullable="true" />
     <Property Name="MinLength" Type="Int32" Nullable="false" />
   </EntityType>
-  <EntityType Name="StringSelectorKind" BaseType="Model.ControlKind">
-  </EntityType>
-  <EntityType Name="TextboxKind" BaseType="Model.ControlKind">
-  </EntityType>
   <EntityType Name="ValueTypeProperty" BaseType="Model.Property" Abstract="true">
     <Property Name="HasPersistentOrder" Type="Boolean" Nullable="false" />
     <Property Name="IsList" Type="Boolean" Nullable="false" />
-  </EntityType>
-  <EntityType Name="WorkspaceKind" BaseType="Model.ControlKind">
   </EntityType>
 
   <!-- EntityTypes and Associations for all object-object CollectionEntrys -->

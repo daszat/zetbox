@@ -75,12 +75,6 @@
     <EntitySet Name="WorkEffortAccount" EntityType="Model.Store.WorkEffortAccount" Table="WorkEffortAccounts"/>
 
     <!-- EntitySets for all derived classes and their inheritance AssociationSets -->
-    <EntitySet Name="ActionKind" EntityType="Model.Store.ActionKind" Table="ActionKinds"/>
-    <!-- inherits from ControlKind -->
-    <AssociationSet Name="FK_ActionKind_ControlKind_ID" Association="Model.Store.FK_ActionKind_ControlKind_ID" >
-      <End Role="A_ControlKind" EntitySet="ControlKind" />
-      <End Role="B_ActionKind" EntitySet="ActionKind" />
-    </AssociationSet>
     <EntitySet Name="BoolParameter" EntityType="Model.Store.BoolParameter" Table="BoolParameters"/>
     <!-- inherits from BaseParameter -->
     <AssociationSet Name="FK_BoolParameter_BaseParameter_ID" Association="Model.Store.FK_BoolParameter_BaseParameter_ID" >
@@ -99,12 +93,6 @@
       <End Role="A_Property" EntitySet="Property" />
       <End Role="B_CalculatedObjectReferenceProperty" EntitySet="CalculatedObjectReferenceProperty" />
     </AssociationSet>
-    <EntitySet Name="CheckboxKind" EntityType="Model.Store.CheckboxKind" Table="CheckboxKinds"/>
-    <!-- inherits from ControlKind -->
-    <AssociationSet Name="FK_CheckboxKind_ControlKind_ID" Association="Model.Store.FK_CheckboxKind_ControlKind_ID" >
-      <End Role="A_ControlKind" EntitySet="ControlKind" />
-      <End Role="B_CheckboxKind" EntitySet="CheckboxKind" />
-    </AssociationSet>
     <EntitySet Name="CLRObjectParameter" EntityType="Model.Store.CLRObjectParameter" Table="CLRObjectParameters"/>
     <!-- inherits from BaseParameter -->
     <AssociationSet Name="FK_CLRObjectParameter_BaseParameter_ID" Association="Model.Store.FK_CLRObjectParameter_BaseParameter_ID" >
@@ -122,24 +110,6 @@
     <AssociationSet Name="FK_CompoundObjectProperty_Property_ID" Association="Model.Store.FK_CompoundObjectProperty_Property_ID" >
       <End Role="A_Property" EntitySet="Property" />
       <End Role="B_CompoundObjectProperty" EntitySet="CompoundObjectProperty" />
-    </AssociationSet>
-    <EntitySet Name="DashboardKind" EntityType="Model.Store.DashboardKind" Table="DashboardKinds"/>
-    <!-- inherits from ControlKind -->
-    <AssociationSet Name="FK_DashboardKind_ControlKind_ID" Association="Model.Store.FK_DashboardKind_ControlKind_ID" >
-      <End Role="A_ControlKind" EntitySet="ControlKind" />
-      <End Role="B_DashboardKind" EntitySet="DashboardKind" />
-    </AssociationSet>
-    <EntitySet Name="DataObjectKind" EntityType="Model.Store.DataObjectKind" Table="DataObjectKinds"/>
-    <!-- inherits from ControlKind -->
-    <AssociationSet Name="FK_DataObjectKind_ControlKind_ID" Association="Model.Store.FK_DataObjectKind_ControlKind_ID" >
-      <End Role="A_ControlKind" EntitySet="ControlKind" />
-      <End Role="B_DataObjectKind" EntitySet="DataObjectKind" />
-    </AssociationSet>
-    <EntitySet Name="DataObjectSelectionTaskKind" EntityType="Model.Store.DataObjectSelectionTaskKind" Table="DataObjectSelectionTaskKinds"/>
-    <!-- inherits from ControlKind -->
-    <AssociationSet Name="FK_DataObjectSelectionTaskKind_ControlKind_ID" Association="Model.Store.FK_DataObjectSelectionTaskKind_ControlKind_ID" >
-      <End Role="A_ControlKind" EntitySet="ControlKind" />
-      <End Role="B_DataObjectSelectionTaskKind" EntitySet="DataObjectSelectionTaskKind" />
     </AssociationSet>
     <EntitySet Name="DateTimeParameter" EntityType="Model.Store.DateTimeParameter" Table="DateTimeParameters"/>
     <!-- inherits from BaseParameter -->
@@ -188,24 +158,6 @@
     <AssociationSet Name="FK_EnumerationProperty_ValueTypeProperty_ID" Association="Model.Store.FK_EnumerationProperty_ValueTypeProperty_ID" >
       <End Role="A_ValueTypeProperty" EntitySet="ValueTypeProperty" />
       <End Role="B_EnumerationProperty" EntitySet="EnumerationProperty" />
-    </AssociationSet>
-    <EntitySet Name="EnumerationSelectorKind" EntityType="Model.Store.EnumerationSelectorKind" Table="EnumerationSelectorKinds"/>
-    <!-- inherits from ControlKind -->
-    <AssociationSet Name="FK_EnumerationSelectorKind_ControlKind_ID" Association="Model.Store.FK_EnumerationSelectorKind_ControlKind_ID" >
-      <End Role="A_ControlKind" EntitySet="ControlKind" />
-      <End Role="B_EnumerationSelectorKind" EntitySet="EnumerationSelectorKind" />
-    </AssociationSet>
-    <EntitySet Name="ErrorListKind" EntityType="Model.Store.ErrorListKind" Table="ErrorListKinds"/>
-    <!-- inherits from ControlKind -->
-    <AssociationSet Name="FK_ErrorListKind_ControlKind_ID" Association="Model.Store.FK_ErrorListKind_ControlKind_ID" >
-      <End Role="A_ControlKind" EntitySet="ControlKind" />
-      <End Role="B_ErrorListKind" EntitySet="ErrorListKind" />
-    </AssociationSet>
-    <EntitySet Name="FilterKind" EntityType="Model.Store.FilterKind" Table="FilterKinds"/>
-    <!-- inherits from ControlKind -->
-    <AssociationSet Name="FK_FilterKind_ControlKind_ID" Association="Model.Store.FK_FilterKind_ControlKind_ID" >
-      <End Role="A_ControlKind" EntitySet="ControlKind" />
-      <End Role="B_FilterKind" EntitySet="FilterKind" />
     </AssociationSet>
     <EntitySet Name="GroupMembership" EntityType="Model.Store.GroupMembership" Table="GroupMemberships"/>
     <!-- inherits from AccessControl -->
@@ -261,24 +213,6 @@
       <End Role="A_IsValidIdentifierConstraint" EntitySet="IsValidIdentifierConstraint" />
       <End Role="B_IsValidNamespaceConstraint" EntitySet="IsValidNamespaceConstraint" />
     </AssociationSet>
-    <EntitySet Name="KistlDebuggerKind" EntityType="Model.Store.KistlDebuggerKind" Table="KistlDebuggerKinds"/>
-    <!-- inherits from ControlKind -->
-    <AssociationSet Name="FK_KistlDebuggerKind_ControlKind_ID" Association="Model.Store.FK_KistlDebuggerKind_ControlKind_ID" >
-      <End Role="A_ControlKind" EntitySet="ControlKind" />
-      <End Role="B_KistlDebuggerKind" EntitySet="KistlDebuggerKind" />
-    </AssociationSet>
-    <EntitySet Name="LabelKind" EntityType="Model.Store.LabelKind" Table="LabelKinds"/>
-    <!-- inherits from ControlKind -->
-    <AssociationSet Name="FK_LabelKind_ControlKind_ID" Association="Model.Store.FK_LabelKind_ControlKind_ID" >
-      <End Role="A_ControlKind" EntitySet="ControlKind" />
-      <End Role="B_LabelKind" EntitySet="LabelKind" />
-    </AssociationSet>
-    <EntitySet Name="LauncherKind" EntityType="Model.Store.LauncherKind" Table="LauncherKinds"/>
-    <!-- inherits from ControlKind -->
-    <AssociationSet Name="FK_LauncherKind_ControlKind_ID" Association="Model.Store.FK_LauncherKind_ControlKind_ID" >
-      <End Role="A_ControlKind" EntitySet="ControlKind" />
-      <End Role="B_LauncherKind" EntitySet="LauncherKind" />
-    </AssociationSet>
     <EntitySet Name="MethodInvocationConstraint" EntityType="Model.Store.MethodInvocationConstraint" Table="MethodInvocationConstraints"/>
     <!-- inherits from Constraint -->
     <AssociationSet Name="FK_MethodInvocationConstraint_Constraint_ID" Association="Model.Store.FK_MethodInvocationConstraint_Constraint_ID" >
@@ -303,12 +237,6 @@
       <End Role="A_DataType" EntitySet="DataType" />
       <End Role="B_ObjectClass" EntitySet="ObjectClass" />
     </AssociationSet>
-    <EntitySet Name="ObjectListKind" EntityType="Model.Store.ObjectListKind" Table="ObjectListKinds"/>
-    <!-- inherits from ControlKind -->
-    <AssociationSet Name="FK_ObjectListKind_ControlKind_ID" Association="Model.Store.FK_ObjectListKind_ControlKind_ID" >
-      <End Role="A_ControlKind" EntitySet="ControlKind" />
-      <End Role="B_ObjectListKind" EntitySet="ObjectListKind" />
-    </AssociationSet>
     <EntitySet Name="ObjectParameter" EntityType="Model.Store.ObjectParameter" Table="ObjectParameters"/>
     <!-- inherits from BaseParameter -->
     <AssociationSet Name="FK_ObjectParameter_BaseParameter_ID" Association="Model.Store.FK_ObjectParameter_BaseParameter_ID" >
@@ -327,47 +255,17 @@
       <End Role="A_Property" EntitySet="Property" />
       <End Role="B_ObjectReferenceProperty" EntitySet="ObjectReferenceProperty" />
     </AssociationSet>
-    <EntitySet Name="ObjectRefGridCellKind" EntityType="Model.Store.ObjectRefGridCellKind" Table="ObjectRefGridCellKinds"/>
-    <!-- inherits from ControlKind -->
-    <AssociationSet Name="FK_ObjectRefGridCellKind_ControlKind_ID" Association="Model.Store.FK_ObjectRefGridCellKind_ControlKind_ID" >
-      <End Role="A_ControlKind" EntitySet="ControlKind" />
-      <End Role="B_ObjectRefGridCellKind" EntitySet="ObjectRefGridCellKind" />
-    </AssociationSet>
-    <EntitySet Name="ObjectRefKind" EntityType="Model.Store.ObjectRefKind" Table="ObjectRefKinds"/>
-    <!-- inherits from ControlKind -->
-    <AssociationSet Name="FK_ObjectRefKind_ControlKind_ID" Association="Model.Store.FK_ObjectRefKind_ControlKind_ID" >
-      <End Role="A_ControlKind" EntitySet="ControlKind" />
-      <End Role="B_ObjectRefKind" EntitySet="ObjectRefKind" />
-    </AssociationSet>
-    <EntitySet Name="PropertyGroupKind" EntityType="Model.Store.PropertyGroupKind" Table="PropertyGroupKinds"/>
-    <!-- inherits from ControlKind -->
-    <AssociationSet Name="FK_PropertyGroupKind_ControlKind_ID" Association="Model.Store.FK_PropertyGroupKind_ControlKind_ID" >
-      <End Role="A_ControlKind" EntitySet="ControlKind" />
-      <End Role="B_PropertyGroupKind" EntitySet="PropertyGroupKind" />
-    </AssociationSet>
     <EntitySet Name="RoleMembership" EntityType="Model.Store.RoleMembership" Table="RoleMemberships"/>
     <!-- inherits from AccessControl -->
     <AssociationSet Name="FK_RoleMembership_AccessControl_ID" Association="Model.Store.FK_RoleMembership_AccessControl_ID" >
       <End Role="A_AccessControl" EntitySet="AccessControl" />
       <End Role="B_RoleMembership" EntitySet="RoleMembership" />
     </AssociationSet>
-    <EntitySet Name="SingleLineDataObjectKind" EntityType="Model.Store.SingleLineDataObjectKind" Table="SingleLineDataObjectKinds"/>
-    <!-- inherits from ControlKind -->
-    <AssociationSet Name="FK_SingleLineDataObjectKind_ControlKind_ID" Association="Model.Store.FK_SingleLineDataObjectKind_ControlKind_ID" >
-      <End Role="A_ControlKind" EntitySet="ControlKind" />
-      <End Role="B_SingleLineDataObjectKind" EntitySet="SingleLineDataObjectKind" />
-    </AssociationSet>
     <EntitySet Name="StaticFile" EntityType="Model.Store.StaticFile" Table="StaticFiles"/>
     <!-- inherits from File -->
     <AssociationSet Name="FK_StaticFile_File_ID" Association="Model.Store.FK_StaticFile_File_ID" >
       <End Role="A_File" EntitySet="File" />
       <End Role="B_StaticFile" EntitySet="StaticFile" />
-    </AssociationSet>
-    <EntitySet Name="StringListKind" EntityType="Model.Store.StringListKind" Table="StringListKinds"/>
-    <!-- inherits from ControlKind -->
-    <AssociationSet Name="FK_StringListKind_ControlKind_ID" Association="Model.Store.FK_StringListKind_ControlKind_ID" >
-      <End Role="A_ControlKind" EntitySet="ControlKind" />
-      <End Role="B_StringListKind" EntitySet="StringListKind" />
     </AssociationSet>
     <EntitySet Name="StringParameter" EntityType="Model.Store.StringParameter" Table="StringParameters"/>
     <!-- inherits from BaseParameter -->
@@ -387,29 +285,11 @@
       <End Role="A_Constraint" EntitySet="Constraint" />
       <End Role="B_StringRangeConstraint" EntitySet="StringRangeConstraint" />
     </AssociationSet>
-    <EntitySet Name="StringSelectorKind" EntityType="Model.Store.StringSelectorKind" Table="StringSelectorKinds"/>
-    <!-- inherits from ControlKind -->
-    <AssociationSet Name="FK_StringSelectorKind_ControlKind_ID" Association="Model.Store.FK_StringSelectorKind_ControlKind_ID" >
-      <End Role="A_ControlKind" EntitySet="ControlKind" />
-      <End Role="B_StringSelectorKind" EntitySet="StringSelectorKind" />
-    </AssociationSet>
-    <EntitySet Name="TextboxKind" EntityType="Model.Store.TextboxKind" Table="TextboxKinds"/>
-    <!-- inherits from ControlKind -->
-    <AssociationSet Name="FK_TextboxKind_ControlKind_ID" Association="Model.Store.FK_TextboxKind_ControlKind_ID" >
-      <End Role="A_ControlKind" EntitySet="ControlKind" />
-      <End Role="B_TextboxKind" EntitySet="TextboxKind" />
-    </AssociationSet>
     <EntitySet Name="ValueTypeProperty" EntityType="Model.Store.ValueTypeProperty" Table="ValueTypeProperties"/>
     <!-- inherits from Property -->
     <AssociationSet Name="FK_ValueTypeProperty_Property_ID" Association="Model.Store.FK_ValueTypeProperty_Property_ID" >
       <End Role="A_Property" EntitySet="Property" />
       <End Role="B_ValueTypeProperty" EntitySet="ValueTypeProperty" />
-    </AssociationSet>
-    <EntitySet Name="WorkspaceKind" EntityType="Model.Store.WorkspaceKind" Table="WorkspaceKinds"/>
-    <!-- inherits from ControlKind -->
-    <AssociationSet Name="FK_WorkspaceKind_ControlKind_ID" Association="Model.Store.FK_WorkspaceKind_ControlKind_ID" >
-      <End Role="A_ControlKind" EntitySet="ControlKind" />
-      <End Role="B_WorkspaceKind" EntitySet="WorkspaceKind" />
     </AssociationSet>
 
     <!-- EntitySets and AssociationSet for all object-object CollectionEntrys -->
@@ -1211,13 +1091,6 @@
     <Property Name="Rights" Type="int" Nullable="true" />
   </EntityType>
 	
-  <EntityType Name="ActionKind">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
-  </EntityType>
-	
   <EntityType Name="ANewObjectClass">
     <Key>
       <PropertyRef Name="ID" />
@@ -1352,13 +1225,6 @@
     <Property Name="fk_ReferencedClass" Type="int" />
   </EntityType>
 	
-  <EntityType Name="CheckboxKind">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
-  </EntityType>
-	
   <EntityType Name="CLRObjectParameter">
     <Key>
       <PropertyRef Name="ID" />
@@ -1434,27 +1300,6 @@
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="Schema" Type="nvarchar" Nullable="false" />
     <Property Name="Version" Type="int" Nullable="false" />
-  </EntityType>
-	
-  <EntityType Name="DashboardKind">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
-  </EntityType>
-	
-  <EntityType Name="DataObjectKind">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
-  </EntityType>
-	
-  <EntityType Name="DataObjectSelectionTaskKind">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="DataType">
@@ -1563,20 +1408,6 @@
     <Property Name="fk_Enumeration" Type="int" />
   </EntityType>
 	
-  <EntityType Name="EnumerationSelectorKind">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
-  </EntityType>
-	
-  <EntityType Name="ErrorListKind">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
-  </EntityType>
-	
   <EntityType Name="Exam">
     <Key>
       <PropertyRef Name="ID" />
@@ -1611,13 +1442,6 @@
     <Property Name="CreatedOn" Type="datetime" Nullable="true" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
     <Property Name="Name" Type="nvarchar" MaxLength="1000" Nullable="true" />
-  </EntityType>
-	
-  <EntityType Name="FilterKind">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="Fragebogen">
@@ -1744,13 +1568,6 @@
     <Property Name="ID" Type="int" Nullable="false" />
   </EntityType>
 	
-  <EntityType Name="KistlDebuggerKind">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
-  </EntityType>
-	
   <EntityType Name="Kunde">
     <Key>
       <PropertyRef Name="ID" />
@@ -1765,20 +1582,6 @@
     <Property Name="Land" Type="nvarchar" MaxLength="50" Nullable="true" />
     <Property Name="Ort" Type="nvarchar" MaxLength="100" Nullable="true" />
     <Property Name="PLZ" Type="nvarchar" MaxLength="10" Nullable="false" />
-  </EntityType>
-	
-  <EntityType Name="LabelKind">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
-  </EntityType>
-	
-  <EntityType Name="LauncherKind">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="Method">
@@ -1893,13 +1696,6 @@
     <Property Name="TableName" Type="nvarchar" MaxLength="100" Nullable="false" />
   </EntityType>
 	
-  <EntityType Name="ObjectListKind">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
-  </EntityType>
-	
   <EntityType Name="ObjectParameter">
     <Key>
       <PropertyRef Name="ID" />
@@ -1927,20 +1723,6 @@
     </Key>
     <Property Name="ID" Type="int" Nullable="false" />
     <Property Name="EagerLoading" Type="bit" Nullable="false" />
-  </EntityType>
-	
-  <EntityType Name="ObjectRefGridCellKind">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
-  </EntityType>
-	
-  <EntityType Name="ObjectRefKind">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="PresenceRecord">
@@ -2005,13 +1787,6 @@
     <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="true" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
     <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
-  </EntityType>
-	
-  <EntityType Name="PropertyGroupKind">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="PropertyInvocation">
@@ -2083,21 +1858,7 @@
     <Property Name="Year" Type="int" Nullable="true" />
   </EntityType>
 	
-  <EntityType Name="SingleLineDataObjectKind">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
-  </EntityType>
-	
   <EntityType Name="StaticFile">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
-  </EntityType>
-	
-  <EntityType Name="StringListKind">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
@@ -2125,13 +1886,6 @@
     <Property Name="ID" Type="int" Nullable="false" />
     <Property Name="MaxLength" Type="int" Nullable="true" />
     <Property Name="MinLength" Type="int" Nullable="false" />
-  </EntityType>
-	
-  <EntityType Name="StringSelectorKind">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="Student">
@@ -2238,13 +1992,6 @@
     <Property Name="Name" Type="nvarchar" MaxLength="1000" Nullable="false" />
   </EntityType>
 	
-  <EntityType Name="TextboxKind">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
-  </EntityType>
-	
   <EntityType Name="TypeRef">
     <Key>
       <PropertyRef Name="ID" />
@@ -2326,13 +2073,6 @@
     <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
     <Property Name="Notes" Type="nvarchar" MaxLength="4000" Nullable="false" />
     <Property Name="SpentHours" Type="float" Nullable="true" />
-  </EntityType>
-	
-  <EntityType Name="WorkspaceKind">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
   </EntityType>
 
   <!-- EntityTypes for all object-object CollectionEntrys with their associations -->
@@ -4680,18 +4420,6 @@
 
 
   <!-- derived->base ObjectClass references -->
-  <Association Name="FK_ActionKind_ControlKind_ID">
-    <End Role="A_ControlKind" Type="Model.Store.ControlKind" Multiplicity="1" />
-    <End Role="B_ActionKind" Type="Model.Store.ActionKind" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="A_ControlKind">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="B_ActionKind">
-        <PropertyRef Name="ID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_BoolParameter_BaseParameter_ID">
     <End Role="A_BaseParameter" Type="Model.Store.BaseParameter" Multiplicity="1" />
     <End Role="B_BoolParameter" Type="Model.Store.BoolParameter" Multiplicity="0..1" />
@@ -4728,18 +4456,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_CheckboxKind_ControlKind_ID">
-    <End Role="A_ControlKind" Type="Model.Store.ControlKind" Multiplicity="1" />
-    <End Role="B_CheckboxKind" Type="Model.Store.CheckboxKind" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="A_ControlKind">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="B_CheckboxKind">
-        <PropertyRef Name="ID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_CLRObjectParameter_BaseParameter_ID">
     <End Role="A_BaseParameter" Type="Model.Store.BaseParameter" Multiplicity="1" />
     <End Role="B_CLRObjectParameter" Type="Model.Store.CLRObjectParameter" Multiplicity="0..1" />
@@ -4772,42 +4488,6 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="B_CompoundObjectProperty">
-        <PropertyRef Name="ID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_DashboardKind_ControlKind_ID">
-    <End Role="A_ControlKind" Type="Model.Store.ControlKind" Multiplicity="1" />
-    <End Role="B_DashboardKind" Type="Model.Store.DashboardKind" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="A_ControlKind">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="B_DashboardKind">
-        <PropertyRef Name="ID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_DataObjectKind_ControlKind_ID">
-    <End Role="A_ControlKind" Type="Model.Store.ControlKind" Multiplicity="1" />
-    <End Role="B_DataObjectKind" Type="Model.Store.DataObjectKind" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="A_ControlKind">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="B_DataObjectKind">
-        <PropertyRef Name="ID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_DataObjectSelectionTaskKind_ControlKind_ID">
-    <End Role="A_ControlKind" Type="Model.Store.ControlKind" Multiplicity="1" />
-    <End Role="B_DataObjectSelectionTaskKind" Type="Model.Store.DataObjectSelectionTaskKind" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="A_ControlKind">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="B_DataObjectSelectionTaskKind">
         <PropertyRef Name="ID" />
       </Dependent>
     </ReferentialConstraint>
@@ -4904,42 +4584,6 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="B_EnumerationProperty">
-        <PropertyRef Name="ID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_EnumerationSelectorKind_ControlKind_ID">
-    <End Role="A_ControlKind" Type="Model.Store.ControlKind" Multiplicity="1" />
-    <End Role="B_EnumerationSelectorKind" Type="Model.Store.EnumerationSelectorKind" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="A_ControlKind">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="B_EnumerationSelectorKind">
-        <PropertyRef Name="ID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_ErrorListKind_ControlKind_ID">
-    <End Role="A_ControlKind" Type="Model.Store.ControlKind" Multiplicity="1" />
-    <End Role="B_ErrorListKind" Type="Model.Store.ErrorListKind" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="A_ControlKind">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="B_ErrorListKind">
-        <PropertyRef Name="ID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_FilterKind_ControlKind_ID">
-    <End Role="A_ControlKind" Type="Model.Store.ControlKind" Multiplicity="1" />
-    <End Role="B_FilterKind" Type="Model.Store.FilterKind" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="A_ControlKind">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="B_FilterKind">
         <PropertyRef Name="ID" />
       </Dependent>
     </ReferentialConstraint>
@@ -5052,42 +4696,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_KistlDebuggerKind_ControlKind_ID">
-    <End Role="A_ControlKind" Type="Model.Store.ControlKind" Multiplicity="1" />
-    <End Role="B_KistlDebuggerKind" Type="Model.Store.KistlDebuggerKind" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="A_ControlKind">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="B_KistlDebuggerKind">
-        <PropertyRef Name="ID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_LabelKind_ControlKind_ID">
-    <End Role="A_ControlKind" Type="Model.Store.ControlKind" Multiplicity="1" />
-    <End Role="B_LabelKind" Type="Model.Store.LabelKind" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="A_ControlKind">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="B_LabelKind">
-        <PropertyRef Name="ID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_LauncherKind_ControlKind_ID">
-    <End Role="A_ControlKind" Type="Model.Store.ControlKind" Multiplicity="1" />
-    <End Role="B_LauncherKind" Type="Model.Store.LauncherKind" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="A_ControlKind">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="B_LauncherKind">
-        <PropertyRef Name="ID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_MethodInvocationConstraint_Constraint_ID">
     <End Role="A_Constraint" Type="Model.Store.Constraint" Multiplicity="1" />
     <End Role="B_MethodInvocationConstraint" Type="Model.Store.MethodInvocationConstraint" Multiplicity="0..1" />
@@ -5136,18 +4744,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_ObjectListKind_ControlKind_ID">
-    <End Role="A_ControlKind" Type="Model.Store.ControlKind" Multiplicity="1" />
-    <End Role="B_ObjectListKind" Type="Model.Store.ObjectListKind" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="A_ControlKind">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="B_ObjectListKind">
-        <PropertyRef Name="ID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_ObjectParameter_BaseParameter_ID">
     <End Role="A_BaseParameter" Type="Model.Store.BaseParameter" Multiplicity="1" />
     <End Role="B_ObjectParameter" Type="Model.Store.ObjectParameter" Multiplicity="0..1" />
@@ -5184,42 +4780,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_ObjectRefGridCellKind_ControlKind_ID">
-    <End Role="A_ControlKind" Type="Model.Store.ControlKind" Multiplicity="1" />
-    <End Role="B_ObjectRefGridCellKind" Type="Model.Store.ObjectRefGridCellKind" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="A_ControlKind">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="B_ObjectRefGridCellKind">
-        <PropertyRef Name="ID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_ObjectRefKind_ControlKind_ID">
-    <End Role="A_ControlKind" Type="Model.Store.ControlKind" Multiplicity="1" />
-    <End Role="B_ObjectRefKind" Type="Model.Store.ObjectRefKind" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="A_ControlKind">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="B_ObjectRefKind">
-        <PropertyRef Name="ID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_PropertyGroupKind_ControlKind_ID">
-    <End Role="A_ControlKind" Type="Model.Store.ControlKind" Multiplicity="1" />
-    <End Role="B_PropertyGroupKind" Type="Model.Store.PropertyGroupKind" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="A_ControlKind">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="B_PropertyGroupKind">
-        <PropertyRef Name="ID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_RoleMembership_AccessControl_ID">
     <End Role="A_AccessControl" Type="Model.Store.AccessControl" Multiplicity="1" />
     <End Role="B_RoleMembership" Type="Model.Store.RoleMembership" Multiplicity="0..1" />
@@ -5232,18 +4792,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_SingleLineDataObjectKind_ControlKind_ID">
-    <End Role="A_ControlKind" Type="Model.Store.ControlKind" Multiplicity="1" />
-    <End Role="B_SingleLineDataObjectKind" Type="Model.Store.SingleLineDataObjectKind" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="A_ControlKind">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="B_SingleLineDataObjectKind">
-        <PropertyRef Name="ID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_StaticFile_File_ID">
     <End Role="A_File" Type="Model.Store.File" Multiplicity="1" />
     <End Role="B_StaticFile" Type="Model.Store.StaticFile" Multiplicity="0..1" />
@@ -5252,18 +4800,6 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="B_StaticFile">
-        <PropertyRef Name="ID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_StringListKind_ControlKind_ID">
-    <End Role="A_ControlKind" Type="Model.Store.ControlKind" Multiplicity="1" />
-    <End Role="B_StringListKind" Type="Model.Store.StringListKind" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="A_ControlKind">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="B_StringListKind">
         <PropertyRef Name="ID" />
       </Dependent>
     </ReferentialConstraint>
@@ -5304,30 +4840,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_StringSelectorKind_ControlKind_ID">
-    <End Role="A_ControlKind" Type="Model.Store.ControlKind" Multiplicity="1" />
-    <End Role="B_StringSelectorKind" Type="Model.Store.StringSelectorKind" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="A_ControlKind">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="B_StringSelectorKind">
-        <PropertyRef Name="ID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_TextboxKind_ControlKind_ID">
-    <End Role="A_ControlKind" Type="Model.Store.ControlKind" Multiplicity="1" />
-    <End Role="B_TextboxKind" Type="Model.Store.TextboxKind" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="A_ControlKind">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="B_TextboxKind">
-        <PropertyRef Name="ID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_ValueTypeProperty_Property_ID">
     <End Role="A_Property" Type="Model.Store.Property" Multiplicity="1" />
     <End Role="B_ValueTypeProperty" Type="Model.Store.ValueTypeProperty" Multiplicity="0..1" />
@@ -5336,18 +4848,6 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="B_ValueTypeProperty">
-        <PropertyRef Name="ID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_WorkspaceKind_ControlKind_ID">
-    <End Role="A_ControlKind" Type="Model.Store.ControlKind" Multiplicity="1" />
-    <End Role="B_WorkspaceKind" Type="Model.Store.WorkspaceKind" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="A_ControlKind">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="B_WorkspaceKind">
         <PropertyRef Name="ID" />
       </Dependent>
     </ReferentialConstraint>

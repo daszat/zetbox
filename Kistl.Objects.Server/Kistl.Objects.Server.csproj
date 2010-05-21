@@ -85,7 +85,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccessControl.Server.Designer.cs" />
-    <Compile Include="ActionKind.Server.Designer.cs" />
     <Compile Include="ANewObjectClass.Server.Designer.cs" />
     <Compile Include="AnotherTest.Server.Designer.cs" />
     <Compile Include="Antwort.Server.Designer.cs" />
@@ -96,7 +95,6 @@
     <Compile Include="BoolParameter.Server.Designer.cs" />
     <Compile Include="BoolProperty.Server.Designer.cs" />
     <Compile Include="CalculatedObjectReferenceProperty.Server.Designer.cs" />
-    <Compile Include="CheckboxKind.Server.Designer.cs" />
     <Compile Include="CLRObjectParameter.Server.Designer.cs" />
     <Compile Include="Company.Server.Designer.cs" />
     <Compile Include="CompoundObject.Server.Designer.cs" />
@@ -105,9 +103,6 @@
     <Compile Include="ConstraintInvocation.Server.Designer.cs" />
     <Compile Include="ControlKind.Server.Designer.cs" />
     <Compile Include="CurrentSchema.Server.Designer.cs" />
-    <Compile Include="DashboardKind.Server.Designer.cs" />
-    <Compile Include="DataObjectKind.Server.Designer.cs" />
-    <Compile Include="DataObjectSelectionTaskKind.Server.Designer.cs" />
     <Compile Include="DataType.Server.Designer.cs" />
     <Compile Include="DateTimeParameter.Server.Designer.cs" />
     <Compile Include="DateTimeProperty.Server.Designer.cs" />
@@ -119,12 +114,9 @@
     <Compile Include="Enumeration.Server.Designer.cs" />
     <Compile Include="EnumerationEntry.Server.Designer.cs" />
     <Compile Include="EnumerationProperty.Server.Designer.cs" />
-    <Compile Include="EnumerationSelectorKind.Server.Designer.cs" />
-    <Compile Include="ErrorListKind.Server.Designer.cs" />
     <Compile Include="Exam.Server.Designer.cs" />
     <Compile Include="Exercise.Server.Designer.cs" />
     <Compile Include="File.Server.Designer.cs" />
-    <Compile Include="FilterKind.Server.Designer.cs" />
     <Compile Include="Fragebogen.Server.Designer.cs" />
     <Compile Include="Group.Server.Designer.cs" />
     <Compile Include="GroupExcercise.Server.Designer.cs" />
@@ -140,10 +132,7 @@
     <Compile Include="InvokingConstraint.Server.Designer.cs" />
     <Compile Include="IsValidIdentifierConstraint.Server.Designer.cs" />
     <Compile Include="IsValidNamespaceConstraint.Server.Designer.cs" />
-    <Compile Include="KistlDebuggerKind.Server.Designer.cs" />
     <Compile Include="Kunde.Server.Designer.cs" />
-    <Compile Include="LabelKind.Server.Designer.cs" />
-    <Compile Include="LauncherKind.Server.Designer.cs" />
     <Compile Include="Method.Server.Designer.cs" />
     <Compile Include="MethodInvocation.Server.Designer.cs" />
     <Compile Include="MethodInvocationConstraint.Server.Designer.cs" />
@@ -153,28 +142,21 @@
     <Compile Include="NewGuidDefaultValue.Server.Designer.cs" />
     <Compile Include="NotNullableConstraint.Server.Designer.cs" />
     <Compile Include="ObjectClass.Server.Designer.cs" />
-    <Compile Include="ObjectListKind.Server.Designer.cs" />
     <Compile Include="ObjectParameter.Server.Designer.cs" />
     <Compile Include="ObjectReferencePlaceholderProperty.Server.Designer.cs" />
     <Compile Include="ObjectReferenceProperty.Server.Designer.cs" />
-    <Compile Include="ObjectRefGridCellKind.Server.Designer.cs" />
-    <Compile Include="ObjectRefKind.Server.Designer.cs" />
     <Compile Include="PresenceRecord.Server.Designer.cs" />
     <Compile Include="Projekt.Server.Designer.cs" />
     <Compile Include="Property.Server.Designer.cs" />
-    <Compile Include="PropertyGroupKind.Server.Designer.cs" />
     <Compile Include="PropertyInvocation.Server.Designer.cs" />
     <Compile Include="Relation.Server.Designer.cs" />
     <Compile Include="RelationEnd.Server.Designer.cs" />
     <Compile Include="RoleMembership.Server.Designer.cs" />
     <Compile Include="Semester.Server.Designer.cs" />
-    <Compile Include="SingleLineDataObjectKind.Server.Designer.cs" />
     <Compile Include="StaticFile.Server.Designer.cs" />
-    <Compile Include="StringListKind.Server.Designer.cs" />
     <Compile Include="StringParameter.Server.Designer.cs" />
     <Compile Include="StringProperty.Server.Designer.cs" />
     <Compile Include="StringRangeConstraint.Server.Designer.cs" />
-    <Compile Include="StringSelectorKind.Server.Designer.cs" />
     <Compile Include="Student.Server.Designer.cs" />
     <Compile Include="StudentExam.Server.Designer.cs" />
     <Compile Include="Task.Server.Designer.cs" />
@@ -182,7 +164,6 @@
     <Compile Include="TestCustomObject.Server.Designer.cs" />
     <Compile Include="TestObjClass.Server.Designer.cs" />
     <Compile Include="TestStudent.Server.Designer.cs" />
-    <Compile Include="TextboxKind.Server.Designer.cs" />
     <Compile Include="TypeRef.Server.Designer.cs" />
     <Compile Include="ValueTypeProperty.Server.Designer.cs" />
     <Compile Include="ViewDescriptor.Server.Designer.cs" />
@@ -190,7 +171,6 @@
     <Compile Include="Visual.Server.Designer.cs" />
     <Compile Include="WorkEffort.Server.Designer.cs" />
     <Compile Include="WorkEffortAccount.Server.Designer.cs" />
-    <Compile Include="WorkspaceKind.Server.Designer.cs" />
     <Compile Include="CollectionEntries.Server.Designer.cs" />
     <Compile Include="TestPhoneCompoundObject.Server.Designer.cs" />
     <Compile Include="AssemblyInfo.Server.cs" />

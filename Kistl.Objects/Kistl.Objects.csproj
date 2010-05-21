@@ -61,7 +61,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccessControl.Interface.Designer.cs" />
-    <Compile Include="ActionKind.Interface.Designer.cs" />
     <Compile Include="ANewObjectClass.Interface.Designer.cs" />
     <Compile Include="AnotherTest.Interface.Designer.cs" />
     <Compile Include="Antwort.Interface.Designer.cs" />
@@ -72,7 +71,6 @@
     <Compile Include="BoolParameter.Interface.Designer.cs" />
     <Compile Include="BoolProperty.Interface.Designer.cs" />
     <Compile Include="CalculatedObjectReferenceProperty.Interface.Designer.cs" />
-    <Compile Include="CheckboxKind.Interface.Designer.cs" />
     <Compile Include="CLRObjectParameter.Interface.Designer.cs" />
     <Compile Include="Company.Interface.Designer.cs" />
     <Compile Include="CompoundObject.Interface.Designer.cs" />
@@ -81,9 +79,6 @@
     <Compile Include="ConstraintInvocation.Interface.Designer.cs" />
     <Compile Include="ControlKind.Interface.Designer.cs" />
     <Compile Include="CurrentSchema.Interface.Designer.cs" />
-    <Compile Include="DashboardKind.Interface.Designer.cs" />
-    <Compile Include="DataObjectKind.Interface.Designer.cs" />
-    <Compile Include="DataObjectSelectionTaskKind.Interface.Designer.cs" />
     <Compile Include="DataType.Interface.Designer.cs" />
     <Compile Include="DateTimeParameter.Interface.Designer.cs" />
     <Compile Include="DateTimeProperty.Interface.Designer.cs" />
@@ -95,12 +90,9 @@
     <Compile Include="Enumeration.Interface.Designer.cs" />
     <Compile Include="EnumerationEntry.Interface.Designer.cs" />
     <Compile Include="EnumerationProperty.Interface.Designer.cs" />
-    <Compile Include="EnumerationSelectorKind.Interface.Designer.cs" />
-    <Compile Include="ErrorListKind.Interface.Designer.cs" />
     <Compile Include="Exam.Interface.Designer.cs" />
     <Compile Include="Exercise.Interface.Designer.cs" />
     <Compile Include="File.Interface.Designer.cs" />
-    <Compile Include="FilterKind.Interface.Designer.cs" />
     <Compile Include="Fragebogen.Interface.Designer.cs" />
     <Compile Include="Group.Interface.Designer.cs" />
     <Compile Include="GroupExcercise.Interface.Designer.cs" />
@@ -116,10 +108,7 @@
     <Compile Include="InvokingConstraint.Interface.Designer.cs" />
     <Compile Include="IsValidIdentifierConstraint.Interface.Designer.cs" />
     <Compile Include="IsValidNamespaceConstraint.Interface.Designer.cs" />
-    <Compile Include="KistlDebuggerKind.Interface.Designer.cs" />
     <Compile Include="Kunde.Interface.Designer.cs" />
-    <Compile Include="LabelKind.Interface.Designer.cs" />
-    <Compile Include="LauncherKind.Interface.Designer.cs" />
     <Compile Include="Method.Interface.Designer.cs" />
     <Compile Include="MethodInvocation.Interface.Designer.cs" />
     <Compile Include="MethodInvocationConstraint.Interface.Designer.cs" />
@@ -129,28 +118,21 @@
     <Compile Include="NewGuidDefaultValue.Interface.Designer.cs" />
     <Compile Include="NotNullableConstraint.Interface.Designer.cs" />
     <Compile Include="ObjectClass.Interface.Designer.cs" />
-    <Compile Include="ObjectListKind.Interface.Designer.cs" />
     <Compile Include="ObjectParameter.Interface.Designer.cs" />
     <Compile Include="ObjectReferencePlaceholderProperty.Interface.Designer.cs" />
     <Compile Include="ObjectReferenceProperty.Interface.Designer.cs" />
-    <Compile Include="ObjectRefGridCellKind.Interface.Designer.cs" />
-    <Compile Include="ObjectRefKind.Interface.Designer.cs" />
     <Compile Include="PresenceRecord.Interface.Designer.cs" />
     <Compile Include="Projekt.Interface.Designer.cs" />
     <Compile Include="Property.Interface.Designer.cs" />
-    <Compile Include="PropertyGroupKind.Interface.Designer.cs" />
     <Compile Include="PropertyInvocation.Interface.Designer.cs" />
     <Compile Include="Relation.Interface.Designer.cs" />
     <Compile Include="RelationEnd.Interface.Designer.cs" />
     <Compile Include="RoleMembership.Interface.Designer.cs" />
     <Compile Include="Semester.Interface.Designer.cs" />
-    <Compile Include="SingleLineDataObjectKind.Interface.Designer.cs" />
     <Compile Include="StaticFile.Interface.Designer.cs" />
-    <Compile Include="StringListKind.Interface.Designer.cs" />
     <Compile Include="StringParameter.Interface.Designer.cs" />
     <Compile Include="StringProperty.Interface.Designer.cs" />
     <Compile Include="StringRangeConstraint.Interface.Designer.cs" />
-    <Compile Include="StringSelectorKind.Interface.Designer.cs" />
     <Compile Include="Student.Interface.Designer.cs" />
     <Compile Include="StudentExam.Interface.Designer.cs" />
     <Compile Include="Task.Interface.Designer.cs" />
@@ -158,7 +140,6 @@
     <Compile Include="TestCustomObject.Interface.Designer.cs" />
     <Compile Include="TestObjClass.Interface.Designer.cs" />
     <Compile Include="TestStudent.Interface.Designer.cs" />
-    <Compile Include="TextboxKind.Interface.Designer.cs" />
     <Compile Include="TypeRef.Interface.Designer.cs" />
     <Compile Include="ValueTypeProperty.Interface.Designer.cs" />
     <Compile Include="ViewDescriptor.Interface.Designer.cs" />
@@ -166,7 +147,6 @@
     <Compile Include="Visual.Interface.Designer.cs" />
     <Compile Include="WorkEffort.Interface.Designer.cs" />
     <Compile Include="WorkEffortAccount.Interface.Designer.cs" />
-    <Compile Include="WorkspaceKind.Interface.Designer.cs" />
     <Compile Include="CollectionEntries.Interface.Designer.cs" />
     <Compile Include="IChangedBy.Interface.Designer.cs" />
     <Compile Include="IExportable.Interface.Designer.cs" />
