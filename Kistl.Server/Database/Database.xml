@@ -20218,122 +20218,122 @@
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
-  <ModuleEditorWorkspaceKind ExportGuid="66c71e86-39d1-4a19-a3c7-11b03168f598" xmlns="daszAt.ModuleEditor">
+  <GUI:ControlKind ExportGuid="06bf9adc-c5bc-4552-abdc-18a96c527962">
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:Name>Kistl.App.GUI.DataObjectKind</GUI:Name>
+  </GUI:ControlKind>
+  <GUI:ControlKind ExportGuid="12b829e1-abab-43f3-99ea-e33cd383d7e6">
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:Name>Kistl.App.GUI.CheckboxKind</GUI:Name>
+  </GUI:ControlKind>
+  <GUI:ControlKind ExportGuid="18c0afa2-61bc-4ecb-b1e9-47b33b294573">
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:Name>Kistl.App.GUI.DataObjectSelectionTaskKind</GUI:Name>
+  </GUI:ControlKind>
+  <GUI:ControlKind ExportGuid="2279b0a6-36b8-4c97-b1fd-9eb1710e74f3">
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:Name>Kistl.App.GUI.TextboxKind</GUI:Name>
+  </GUI:ControlKind>
+  <GUI:ControlKind ExportGuid="329837fd-1146-48b2-9f4e-79aec8958b1e">
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:Name>Kistl.App.GUI.WorkspaceKind</GUI:Name>
+  </GUI:ControlKind>
+  <GUI:ControlKind ExportGuid="364aaaf3-0f61-4642-a0e3-bd812935cf44">
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:Name>Kistl.App.GUI.ActionKind</GUI:Name>
+  </GUI:ControlKind>
+  <GUI:ControlKind ExportGuid="4e7a8b0b-0c8e-49e1-aa35-d3a9ec7b8e4c">
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:Name>Kistl.App.GUI.InstanceListKind</GUI:Name>
+    <GUI:Parent>545aac34-3b0e-441d-87db-386dd711970d</GUI:Parent>
+  </GUI:ControlKind>
+  <GUI:ControlKind ExportGuid="545aac34-3b0e-441d-87db-386dd711970d">
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:Name>Kistl.App.GUI.DashboardKind</GUI:Name>
+  </GUI:ControlKind>
+  <GUI:ControlKind ExportGuid="59253ed1-a3a5-4574-b3bb-3c4fa535d21c">
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:Name>Kistl.App.GUI.KistlDebuggerKind</GUI:Name>
+  </GUI:ControlKind>
+  <GUI:ControlKind ExportGuid="66c71e86-39d1-4a19-a3c7-11b03168f598">
     <GUI:Module>0fe1ab38-860a-414f-a599-b0b86a22ce1a</GUI:Module>
     <GUI:Name>daszAt.ModuleEditor.ModuleEditorWorkspaceKind</GUI:Name>
     <GUI:Parent>329837fd-1146-48b2-9f4e-79aec8958b1e</GUI:Parent>
-  </ModuleEditorWorkspaceKind>
-  <GUI:ActionKind ExportGuid="364aaaf3-0f61-4642-a0e3-bd812935cf44">
+  </GUI:ControlKind>
+  <GUI:ControlKind ExportGuid="66e080be-471d-4dc5-9850-25bedbdfc76e">
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
-    <GUI:Name>Kistl.App.GUI.ActionKind</GUI:Name>
-  </GUI:ActionKind>
-  <GUI:CheckboxKind ExportGuid="12b829e1-abab-43f3-99ea-e33cd383d7e6">
+    <GUI:Name>Kistl.App.GUI.SingleLineDataObjectKind</GUI:Name>
+  </GUI:ControlKind>
+  <GUI:ControlKind ExportGuid="6b5093bb-3ac0-4710-b30d-d72a50b09ee8">
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
-    <GUI:Name>Kistl.App.GUI.CheckboxKind</GUI:Name>
-  </GUI:CheckboxKind>
+    <GUI:Name>Kistl.App.GUI.TypeRefRefKind</GUI:Name>
+    <GUI:Parent>b86945ed-9edc-42ca-9ca5-8124fbf47b5c</GUI:Parent>
+  </GUI:ControlKind>
+  <GUI:ControlKind ExportGuid="7e30f1de-076c-42d3-80b2-9c1111a6cdfb">
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:Name>Kistl.App.GUI.ErrorListKind</GUI:Name>
+  </GUI:ControlKind>
+  <GUI:ControlKind ExportGuid="90d5ff7f-0c82-4278-bb8d-49c240f6bc2c">
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:Name>Kistl.App.GUI.LauncherKind</GUI:Name>
+  </GUI:ControlKind>
+  <GUI:ControlKind ExportGuid="9731f312-8ce4-4c2d-8d95-1923256dc9b8">
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:Name>Kistl.App.GUI.ObjectListKind</GUI:Name>
+  </GUI:ControlKind>
+  <GUI:ControlKind ExportGuid="9d414225-460a-4c54-8e36-e368804e387f">
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:Name>Kistl.App.GUI.EnumerationSelectorKind</GUI:Name>
+  </GUI:ControlKind>
+  <GUI:ControlKind ExportGuid="a3f09ef3-2fac-4d7e-aea8-cbf0eab4de70">
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:Name>Kistl.App.GUI.LabelKind</GUI:Name>
+  </GUI:ControlKind>
+  <GUI:ControlKind ExportGuid="ab09eaba-507b-4dce-9fbd-589adbc9580b">
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:Name>Kistl.App.GUI.StringSelectorKind</GUI:Name>
+  </GUI:ControlKind>
+  <GUI:ControlKind ExportGuid="aee9072d-6d36-48ed-b94e-e7eff7321e46">
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:Name>Kistl.App.GUI.StringFilterKind</GUI:Name>
+  </GUI:ControlKind>
+  <GUI:ControlKind ExportGuid="b86945ed-9edc-42ca-9ca5-8124fbf47b5c">
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:Name>Kistl.App.GUI.ObjectRefKind</GUI:Name>
+  </GUI:ControlKind>
+  <GUI:ControlKind ExportGuid="c2b9dfc5-0744-430c-9373-bcd98f783180">
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:Name>Kistl.App.GUI.DataObjectSummaryKind</GUI:Name>
+    <GUI:Parent>545aac34-3b0e-441d-87db-386dd711970d</GUI:Parent>
+  </GUI:ControlKind>
+  <GUI:ControlKind ExportGuid="d55c9558-4ced-47b0-8eda-81553340fb5b">
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:Name>Kistl.App.GUI.ObjectRefGridCellKind</GUI:Name>
+  </GUI:ControlKind>
+  <GUI:ControlKind ExportGuid="d781be32-1e8a-416c-a964-9e51aa8694de">
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:Name>Kistl.App.GUI.SimpleBoolFilterKind</GUI:Name>
+  </GUI:ControlKind>
+  <GUI:ControlKind ExportGuid="d9fb7cec-b71f-48f1-a591-216de253c7d1">
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:Name>Kistl.App.GUI.PropertyGroupKind</GUI:Name>
+  </GUI:ControlKind>
+  <GUI:ControlKind ExportGuid="f7cf3060-5fa5-4077-93e9-5fc681f875fe">
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:Name>Kistl.App.GUI.RelationEditorKind</GUI:Name>
+    <GUI:Parent>06bf9adc-c5bc-4552-abdc-18a96c527962</GUI:Parent>
+  </GUI:ControlKind>
   <GUI:ControlKind ExportGuid="f9092349-b263-4887-b605-cccac6a361bd">
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
     <GUI:Name>Kistl.App.GUI.StringListKind</GUI:Name>
   </GUI:ControlKind>
-  <GUI:DataObjectKind ExportGuid="06bf9adc-c5bc-4552-abdc-18a96c527962">
-    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
-    <GUI:Name>Kistl.App.GUI.DataObjectKind</GUI:Name>
-  </GUI:DataObjectKind>
-  <GUI:DataObjectSelectionTaskKind ExportGuid="18c0afa2-61bc-4ecb-b1e9-47b33b294573">
-    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
-    <GUI:Name>Kistl.App.GUI.DataObjectSelectionTaskKind</GUI:Name>
-  </GUI:DataObjectSelectionTaskKind>
-  <GUI:DataObjectSummaryKind ExportGuid="c2b9dfc5-0744-430c-9373-bcd98f783180">
-    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
-    <GUI:Name>Kistl.App.GUI.DataObjectSummaryKind</GUI:Name>
-    <GUI:Parent>545aac34-3b0e-441d-87db-386dd711970d</GUI:Parent>
-  </GUI:DataObjectSummaryKind>
-  <GUI:EnumerationSelectorKind ExportGuid="9d414225-460a-4c54-8e36-e368804e387f">
-    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
-    <GUI:Name>Kistl.App.GUI.EnumerationSelectorKind</GUI:Name>
-  </GUI:EnumerationSelectorKind>
-  <GUI:ErrorListKind ExportGuid="7e30f1de-076c-42d3-80b2-9c1111a6cdfb">
-    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
-    <GUI:Name>Kistl.App.GUI.ErrorListKind</GUI:Name>
-  </GUI:ErrorListKind>
-  <GUI:InstanceListKind ExportGuid="4e7a8b0b-0c8e-49e1-aa35-d3a9ec7b8e4c">
-    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
-    <GUI:Name>Kistl.App.GUI.InstanceListKind</GUI:Name>
-    <GUI:Parent>545aac34-3b0e-441d-87db-386dd711970d</GUI:Parent>
-  </GUI:InstanceListKind>
-  <GUI:KistlDebuggerKind ExportGuid="59253ed1-a3a5-4574-b3bb-3c4fa535d21c">
-    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
-    <GUI:Name>Kistl.App.GUI.KistlDebuggerKind</GUI:Name>
-  </GUI:KistlDebuggerKind>
-  <GUI:LabelKind ExportGuid="a3f09ef3-2fac-4d7e-aea8-cbf0eab4de70">
-    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
-    <GUI:Name>Kistl.App.GUI.LabelKind</GUI:Name>
-  </GUI:LabelKind>
-  <GUI:LauncherKind ExportGuid="90d5ff7f-0c82-4278-bb8d-49c240f6bc2c">
-    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
-    <GUI:Name>Kistl.App.GUI.LauncherKind</GUI:Name>
-  </GUI:LauncherKind>
-  <GUI:ObjectListKind ExportGuid="9731f312-8ce4-4c2d-8d95-1923256dc9b8">
-    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
-    <GUI:Name>Kistl.App.GUI.ObjectListKind</GUI:Name>
-  </GUI:ObjectListKind>
-  <GUI:ObjectRefGridCellKind ExportGuid="d55c9558-4ced-47b0-8eda-81553340fb5b">
-    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
-    <GUI:Name>Kistl.App.GUI.ObjectRefGridCellKind</GUI:Name>
-  </GUI:ObjectRefGridCellKind>
-  <GUI:ObjectRefKind ExportGuid="b86945ed-9edc-42ca-9ca5-8124fbf47b5c">
-    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
-    <GUI:Name>Kistl.App.GUI.ObjectRefKind</GUI:Name>
-  </GUI:ObjectRefKind>
-  <GUI:PropertyGroupKind ExportGuid="d9fb7cec-b71f-48f1-a591-216de253c7d1">
-    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
-    <GUI:Name>Kistl.App.GUI.PropertyGroupKind</GUI:Name>
-  </GUI:PropertyGroupKind>
-  <GUI:RelationEditorKind ExportGuid="f7cf3060-5fa5-4077-93e9-5fc681f875fe">
-    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
-    <GUI:Name>Kistl.App.GUI.RelationEditorKind</GUI:Name>
-    <GUI:Parent>06bf9adc-c5bc-4552-abdc-18a96c527962</GUI:Parent>
-  </GUI:RelationEditorKind>
-  <GUI:SimpleBoolFilterKind ExportGuid="d781be32-1e8a-416c-a964-9e51aa8694de">
-    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
-    <GUI:Name>Kistl.App.GUI.SimpleBoolFilterKind</GUI:Name>
-  </GUI:SimpleBoolFilterKind>
-  <GUI:SingleLineDataObjectKind ExportGuid="66e080be-471d-4dc5-9850-25bedbdfc76e">
-    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
-    <GUI:Name>Kistl.App.GUI.SingleLineDataObjectKind</GUI:Name>
-  </GUI:SingleLineDataObjectKind>
-  <GUI:StringFilterKind ExportGuid="aee9072d-6d36-48ed-b94e-e7eff7321e46">
-    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
-    <GUI:Name>Kistl.App.GUI.StringFilterKind</GUI:Name>
-  </GUI:StringFilterKind>
-  <GUI:StringSelectorKind ExportGuid="ab09eaba-507b-4dce-9fbd-589adbc9580b">
-    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
-    <GUI:Name>Kistl.App.GUI.StringSelectorKind</GUI:Name>
-  </GUI:StringSelectorKind>
-  <GUI:TextboxKind ExportGuid="2279b0a6-36b8-4c97-b1fd-9eb1710e74f3">
-    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
-    <GUI:Name>Kistl.App.GUI.TextboxKind</GUI:Name>
-  </GUI:TextboxKind>
-  <GUI:TypeRefRefKind ExportGuid="545aac34-3b0e-441d-87db-386dd711970d">
-    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
-    <GUI:Name>Kistl.App.GUI.DashboardKind</GUI:Name>
-  </GUI:TypeRefRefKind>
-  <GUI:TypeRefRefKind ExportGuid="6b5093bb-3ac0-4710-b30d-d72a50b09ee8">
-    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
-    <GUI:Name>Kistl.App.GUI.TypeRefRefKind</GUI:Name>
-    <GUI:Parent>b86945ed-9edc-42ca-9ca5-8124fbf47b5c</GUI:Parent>
-  </GUI:TypeRefRefKind>
-  <GUI:WorkspaceKind ExportGuid="329837fd-1146-48b2-9f4e-79aec8958b1e">
-    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
-    <GUI:Name>Kistl.App.GUI.WorkspaceKind</GUI:Name>
-  </GUI:WorkspaceKind>
-  <GUI:ViewModelDescriptor_displayedBy_ControlKind_RelationEntry ExportGuid="ddba1bc9-bfa6-4438-bf71-78787a4fd9bf">
-    <GUI:A>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:A>
-    <GUI:B>c2b9dfc5-0744-430c-9373-bcd98f783180</GUI:B>
-  </GUI:ViewModelDescriptor_displayedBy_ControlKind_RelationEntry>
   <GUI:ViewModelDescriptor_displayedBy_ControlKind_RelationEntry ExportGuid="95feca0a-90c9-45bf-bf8b-b1799c019fcc">
     <GUI:A>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:A>
     <GUI:B>66e080be-471d-4dc5-9850-25bedbdfc76e</GUI:B>
+  </GUI:ViewModelDescriptor_displayedBy_ControlKind_RelationEntry>
+  <GUI:ViewModelDescriptor_displayedBy_ControlKind_RelationEntry ExportGuid="ddba1bc9-bfa6-4438-bf71-78787a4fd9bf">
+    <GUI:A>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:A>
+    <GUI:B>c2b9dfc5-0744-430c-9373-bcd98f783180</GUI:B>
   </GUI:ViewModelDescriptor_displayedBy_ControlKind_RelationEntry>
   <GUI:ViewModelDescriptor_displayedBy_ControlKind_RelationEntry ExportGuid="62639600-0b92-4f0c-a547-855151e44bed">
     <GUI:A>ffc833d5-a2a5-4cde-8335-6285973742d8</GUI:A>

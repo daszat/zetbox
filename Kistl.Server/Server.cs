@@ -221,17 +221,17 @@ namespace Kistl.Server
                 var ctx = subContainer.Resolve<IKistlServerContext>();
                 //Log.Info("Currently no fixes to do");
 
-                foreach (var ck in ctx.GetQuery<ControlKind>())
-                {
-                    var ckc = ck.GetObjectClass(ctx);
-                    ck.Name = ckc.Module.Namespace + "." + ckc.Name;
+                //foreach (var ck in ctx.GetQuery<ControlKind>())
+                //{
+                //    var ckc = ck.GetObjectClass(ctx);
+                //    ck.Name = ckc.Module.Namespace + "." + ckc.Name;
 
-                    //var parent = ckc.BaseObjectClass;
-                    //if (parent != null)
-                    //{
-                    //    ck.Parent = ctx.GetQuery<ControlKind>().FirstOrDefault(c => c.Name == parent.Name);
-                    //}
-                }
+                //    //var parent = ckc.BaseObjectClass;
+                //    //if (parent != null)
+                //    //{
+                //    //    ck.Parent = ctx.GetQuery<ControlKind>().FirstOrDefault(c => c.Name == parent.Name);
+                //    //}
+                //}
 
                 //foreach (var vd in ctx.GetQuery<ViewDescriptor>())
                 //{
