@@ -140,5 +140,7 @@ namespace Kistl.API
         {
             // don't care
         }
+
+        public bool IsAttached { get { return ParentObject != null && ParentObject.IsAttached; } }
     }
 }

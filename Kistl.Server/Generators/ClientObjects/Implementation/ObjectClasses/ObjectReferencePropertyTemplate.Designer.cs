@@ -113,7 +113,7 @@ if(callGetterSetterEvents)
 				{
 
 #line 85 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
-this.WriteObjects("                if(",  eventName , "_PreSetter != null)\r\n");
+this.WriteObjects("                if(",  eventName , "_PreSetter != null && IsAttached)\r\n");
 this.WriteObjects("                {\r\n");
 this.WriteObjects("					var e = new PropertyPreSetterEventArgs<",  referencedInterface , ">(__oldValue, __newValue);\r\n");
 this.WriteObjects("					",  eventName , "_PreSetter(this, e);\r\n");
@@ -198,7 +198,7 @@ if(callGetterSetterEvents)
 				{
 
 #line 160 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
-this.WriteObjects("                if(",  eventName , "_PostSetter != null)\r\n");
+this.WriteObjects("                if(",  eventName , "_PostSetter != null && IsAttached)\r\n");
 this.WriteObjects("                {\r\n");
 this.WriteObjects("					var e = new PropertyPostSetterEventArgs<",  referencedInterface , ">(__oldValue, __newValue);\r\n");
 this.WriteObjects("					",  eventName , "_PostSetter(this, e);\r\n");

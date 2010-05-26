@@ -90,8 +90,8 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
         protected override void ApplyPreSetTemplate()
         {
             base.ApplyPreSetTemplate();
-           
-            this.WriteObjects("                    if(", EventName, "_PreSetter != null)\r\n");
+
+            this.WriteObjects("                    if(", EventName, "_PreSetter != null && IsAttached)\r\n");
             this.WriteObjects("                    {\r\n");
             this.WriteObjects("                        var __e = new PropertyPreSetterEventArgs<", type, ">(__oldValue, __newValue);\r\n");
             this.WriteObjects("                        ", EventName, "_PreSetter(this, __e);\r\n");
@@ -102,7 +102,7 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
         protected override void ApplyPostSetTemplate()
         {
             base.ApplyPostSetTemplate();
-            this.WriteObjects("                    if(", EventName, "_PostSetter != null)\r\n");
+            this.WriteObjects("                    if(", EventName, "_PostSetter != null && IsAttached)\r\n");
             this.WriteObjects("                    {\r\n");
             this.WriteObjects("                        var __e = new PropertyPostSetterEventArgs<", type, ">(__oldValue, __newValue);\r\n");
             this.WriteObjects("                        ", EventName, "_PostSetter(this, __e);\r\n");
