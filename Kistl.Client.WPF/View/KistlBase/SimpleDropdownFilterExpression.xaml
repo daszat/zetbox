@@ -6,7 +6,7 @@
     xmlns:kevin="clr-namespace:Microsoft.Samples.KMoore.WPFSamples.InfoTextBox;assembly=WPFSamplesLib"
     ToolTip="{Binding ToolTip}">
     <DockPanel>
-        <ComboBox ItemsSource="{Binding PossibleValues, Mode=OneWay}" DisplayMemberPath="Value"
+        <ComboBox ItemsSource="{Binding PossibleValues, Mode=OneWay}" 
                   SelectedValue="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}" />
     </DockPanel>
 </UserControl>

@@ -15,6 +15,7 @@ namespace Kistl.Client.Presentables.KistlBase
     public interface IFilterExpression
     {
         bool Enabled { get; }
+        bool Requiered { get; }
     }
 
     public interface ILinqFilterExpression : IFilterExpression
@@ -212,6 +213,7 @@ namespace Kistl.Client.Presentables.KistlBase
         }
 
         public bool Enabled { get { return true; } }
+        public bool Requiered { get { return true; } }
     }
 
     [ViewModelDescriptor("GUI", DefaultKind = "Kistl.App.GUI.SimpleBoolFilterKind", Description = "Filter expressions for switchable Filter")]
@@ -239,6 +241,8 @@ namespace Kistl.Client.Presentables.KistlBase
                 return Values.Count > 0 && Values[0];
             }
         }
+
+        public bool Requiered { get { return false; } }
 
         #region ILinqFilterExpression Members
         public string Predicate
@@ -275,6 +279,7 @@ namespace Kistl.Client.Presentables.KistlBase
                 return Values.Count > 0 && !string.IsNullOrEmpty(Values[0]);
             }
         }
+        public bool Requiered { get { return false; } }
 
         #region IPostFilterExpression Members
 
@@ -323,14 +328,15 @@ namespace Kistl.Client.Presentables.KistlBase
                 return base.Values.Count > 0;
             }
         }
+        public virtual bool Requiered { get { return Configuration.Requiered; } }
 
-        public string Predicate
+        public virtual string Predicate
         {
             get;
             private set;
         }
 
-        public object[] FilterValues
+        public virtual object[] FilterValues
         {
             get { return base.Values.Cast<object>().ToArray(); }
         }
@@ -359,14 +365,15 @@ namespace Kistl.Client.Presentables.KistlBase
                 return base.Values.Count > 0;
             }
         }
+        public virtual bool Requiered { get { return Configuration.Requiered; } }
 
-        public string Predicate
+        public virtual string Predicate
         {
             get;
             private set;
         }
 
-        public object[] FilterValues
+        public virtual object[] FilterValues
         {
             get { return base.Values.Cast<object>().ToArray(); }
         }
@@ -391,6 +398,14 @@ namespace Kistl.Client.Presentables.KistlBase
         public ObjectReferencePropertyFilterExpressionViewModel(IViewModelDependencies appCtx, IKistlContext dataCtx, Property prop, FilterConfiguration filterCfg)
             : base(appCtx, dataCtx, prop, filterCfg)
         {
+        }
+
+        public override object[] FilterValues
+        {
+            get
+            {
+                return Values.Select(v => v.Object).ToArray();
+            }
         }
 
         #region IListTypeFilterViewModel Members

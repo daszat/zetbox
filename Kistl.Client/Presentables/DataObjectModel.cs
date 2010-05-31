@@ -195,12 +195,12 @@ namespace Kistl.Client.Presentables
             }
         }
 
-        private string _toStringCache;
+        private string _nameCache;
         public override string Name
         {
             get
             {
-                return _toStringCache;
+                return _nameCache;
             }
         }
 
@@ -211,6 +211,11 @@ namespace Kistl.Client.Presentables
             {
                 return _longNameCache;
             }
+        }
+
+        public override string ToString()
+        {
+            return _nameCache;
         }
 
         /// <summary>
@@ -338,12 +343,12 @@ namespace Kistl.Client.Presentables
         private void InitialiseViewCache()
         {
             // update Name
-            _toStringCache = String.Format("{0} {1}",
+            _nameCache = String.Format("{0} {1}",
                 _object.ObjectState.ToUserString(),
                 _object.ToString());
             _longNameCache = String.Format("{0}: {1}",
                 _object.ReadOnlyContext.GetInterfaceType(_object).Type.FullName,
-                _toStringCache);
+                _nameCache);
         }
 
         protected void UpdateViewCache()

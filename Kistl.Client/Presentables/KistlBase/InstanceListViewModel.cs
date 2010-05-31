@@ -157,7 +157,7 @@ namespace Kistl.Client.Presentables.KistlBase
             {
                 if (_instancesFiltered == null)
                 {
-                    ExecuteFilter();
+                    ExecutePostFilter();
                 }
                 return _instancesFiltered;
             }
@@ -189,7 +189,7 @@ namespace Kistl.Client.Presentables.KistlBase
             {
                 _instances.Clear();
                 LoadInstances();
-                ExecuteFilter();
+                ExecutePostFilter();
             }
         }
 
@@ -269,6 +269,9 @@ namespace Kistl.Client.Presentables.KistlBase
         /// </summary>
         private void LoadInstances()
         {
+            // Can execute?
+            if (_filter.Count(f => !f.Enabled && f.Requiered) > 0) return;
+
             foreach (var obj in GetQuery().Cast<IDataObject>().ToList().OrderBy(obj => obj.ToString()))
             {
                 _instances.Add(ModelFactory.CreateViewModel<DataObjectModel.Factory>(obj).Invoke(DataContext, obj));
@@ -283,13 +286,13 @@ namespace Kistl.Client.Presentables.KistlBase
         protected virtual void OnInstancesChanged()
         {
             OnPropertyChanged("Instances");
-            ExecuteFilter();
+            ExecutePostFilter();
         }
 
         /// <summary>
         /// Create a fresh <see cref="InstancesFiltered"/> collection when something has changed.
         /// </summary>
-        private void ExecuteFilter()
+        private void ExecutePostFilter()
         {
             _instancesFiltered = new ReadOnlyObservableCollection<DataObjectModel>(this.Instances);
             // poor man's full text search
