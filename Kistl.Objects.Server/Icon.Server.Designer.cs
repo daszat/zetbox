@@ -98,7 +98,7 @@ namespace Kistl.App.GUI
                 {
                     var __oldValue = _ExportGuid;
                     var __newValue = value;
-                    if(OnExportGuid_PreSetter != null)
+                    if(OnExportGuid_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<Guid>(__oldValue, __newValue);
                         OnExportGuid_PreSetter(this, __e);
@@ -107,7 +107,7 @@ namespace Kistl.App.GUI
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     _ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
-                    if(OnExportGuid_PostSetter != null)
+                    if(OnExportGuid_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<Guid>(__oldValue, __newValue);
                         OnExportGuid_PostSetter(this, __e);
@@ -150,7 +150,7 @@ namespace Kistl.App.GUI
                 {
                     var __oldValue = _IconFile;
                     var __newValue = value;
-                    if(OnIconFile_PreSetter != null)
+                    if(OnIconFile_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
                         OnIconFile_PreSetter(this, __e);
@@ -159,7 +159,7 @@ namespace Kistl.App.GUI
                     NotifyPropertyChanging("IconFile", __oldValue, __newValue);
                     _IconFile = __newValue;
                     NotifyPropertyChanged("IconFile", __oldValue, __newValue);
-                    if(OnIconFile_PostSetter != null)
+                    if(OnIconFile_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
                         OnIconFile_PostSetter(this, __e);

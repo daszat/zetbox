@@ -27,6 +27,7 @@
     <EntitySet Name="Exam" EntityType="Model.Exam" />
     <EntitySet Name="Exercise" EntityType="Model.Exercise" />
     <EntitySet Name="File" EntityType="Model.File" />
+    <EntitySet Name="FilterConfiguration" EntityType="Model.FilterConfiguration" />
     <EntitySet Name="Fragebogen" EntityType="Model.Fragebogen" />
     <EntitySet Name="Group" EntityType="Model.Group" />
     <EntitySet Name="GroupExcercise" EntityType="Model.GroupExcercise" />
@@ -424,6 +425,22 @@
       <End Role="File" EntitySet="File" />
       <End Role="CreatedBy" EntitySet="Identity" />
     </AssociationSet>
+    <AssociationSet Name="FK_FilterConfiguration_has_Module" Association="Model.FK_FilterConfiguration_has_Module" >
+      <End Role="FilterConfiguration" EntitySet="FilterConfiguration" />
+      <End Role="Module" EntitySet="Module" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FilterConfiguration_has_ViewModelDescriptor" Association="Model.FK_FilterConfiguration_has_ViewModelDescriptor" >
+      <End Role="FilterConfiguration" EntitySet="FilterConfiguration" />
+      <End Role="ViewModelDescriptor" EntitySet="ViewModelDescriptor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FilterConfiguration_was_ChangedBy" Association="Model.FK_FilterConfiguration_was_ChangedBy" >
+      <End Role="FilterConfiguration" EntitySet="FilterConfiguration" />
+      <End Role="ChangedBy" EntitySet="Identity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FilterConfiguration_was_CreatedBy" Association="Model.FK_FilterConfiguration_was_CreatedBy" >
+      <End Role="FilterConfiguration" EntitySet="FilterConfiguration" />
+      <End Role="CreatedBy" EntitySet="Identity" />
+    </AssociationSet>
     <AssociationSet Name="FK_Group_has_Module" Association="Model.FK_Group_has_Module" >
       <End Role="Group" EntitySet="Group" />
       <End Role="Module" EntitySet="Module" />
@@ -587,6 +604,10 @@
     <AssociationSet Name="FK_Property_has_DefaultValue" Association="Model.FK_Property_has_DefaultValue" >
       <End Role="Property" EntitySet="Property" />
       <End Role="DefaultValue" EntitySet="DefaultPropertyValue" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Property_Has_FilterConfiguration" Association="Model.FK_Property_Has_FilterConfiguration" >
+      <End Role="Property" EntitySet="Property" />
+      <End Role="FilterConfiguration" EntitySet="FilterConfiguration" />
     </AssociationSet>
     <AssociationSet Name="FK_Property_has_ValueModelDescriptor" Association="Model.FK_Property_has_ValueModelDescriptor" >
       <End Role="Property" EntitySet="Property" />
@@ -1104,6 +1125,33 @@
     <Property Name="ExportGuid" Type="Guid" Nullable="false" />
     <Property Name="Name" Type="String" Nullable="true" MaxLength="1000" />
   </EntityType>
+  <EntityType Name="FilterConfiguration">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ChangedBy__Implementation__"
+                        Relationship="Model.FK_FilterConfiguration_was_ChangedBy"
+                        FromRole="FilterConfiguration"
+                        ToRole="ChangedBy" />
+    <Property Name="ChangedOn" Type="DateTime" Nullable="true" />
+    <NavigationProperty Name="CreatedBy__Implementation__"
+                        Relationship="Model.FK_FilterConfiguration_was_CreatedBy"
+                        FromRole="FilterConfiguration"
+                        ToRole="CreatedBy" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="true" />
+    <Property Name="ExportGuid" Type="Guid" Nullable="false" />
+    <NavigationProperty Name="Module__Implementation__"
+                        Relationship="Model.FK_FilterConfiguration_has_Module"
+                        FromRole="FilterConfiguration"
+                        ToRole="Module" />
+    <Property Name="Multiple" Type="Boolean" Nullable="false" />
+    <Property Name="Requiered" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="ViewModelDescriptor__Implementation__"
+                        Relationship="Model.FK_FilterConfiguration_has_ViewModelDescriptor"
+                        FromRole="FilterConfiguration"
+                        ToRole="ViewModelDescriptor" />
+  </EntityType>
   <EntityType Name="Fragebogen">
     <Key>
       <PropertyRef Name="ID" />
@@ -1458,6 +1506,10 @@
                         ToRole="DefaultValue" />
     <Property Name="Description" Type="String" Nullable="true" MaxLength="200" />
     <Property Name="ExportGuid" Type="Guid" Nullable="false" />
+    <NavigationProperty Name="FilterConfiguration__Implementation__"
+                        Relationship="Model.FK_Property_Has_FilterConfiguration"
+                        FromRole="Property"
+                        ToRole="FilterConfiguration" />
     <NavigationProperty Name="Invocations__Implementation__"
                         Relationship="Model.FK_InvokeOnProperty_has_Invocations"
                         FromRole="InvokeOnProperty"
@@ -1783,6 +1835,7 @@
                         Relationship="Model.FK_Child_has_Parent"
                         FromRole="Child"
                         ToRole="Parent" />
+    <Property Name="ToStringCache" Type="String" Nullable="true" MaxLength="1000" />
   </EntityType>
   <EntityType Name="ViewDescriptor">
     <Key>
@@ -3241,6 +3294,38 @@
          Type="Model.Identity" 
          Multiplicity="0..1" />
   </Association>
+  <Association Name="FK_FilterConfiguration_has_Module" >
+    <End Role="FilterConfiguration"
+         Type="Model.FilterConfiguration" 
+         Multiplicity="*" />
+    <End Role="Module"
+         Type="Model.Module" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_FilterConfiguration_has_ViewModelDescriptor" >
+    <End Role="FilterConfiguration"
+         Type="Model.FilterConfiguration" 
+         Multiplicity="*" />
+    <End Role="ViewModelDescriptor"
+         Type="Model.ViewModelDescriptor" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_FilterConfiguration_was_ChangedBy" >
+    <End Role="FilterConfiguration"
+         Type="Model.FilterConfiguration" 
+         Multiplicity="*" />
+    <End Role="ChangedBy"
+         Type="Model.Identity" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_FilterConfiguration_was_CreatedBy" >
+    <End Role="FilterConfiguration"
+         Type="Model.FilterConfiguration" 
+         Multiplicity="*" />
+    <End Role="CreatedBy"
+         Type="Model.Identity" 
+         Multiplicity="0..1" />
+  </Association>
   <Association Name="FK_Group_has_Module" >
     <End Role="Group"
          Type="Model.Group" 
@@ -3567,6 +3652,14 @@
          Multiplicity="0..1" />
     <End Role="DefaultValue"
          Type="Model.DefaultPropertyValue" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_Property_Has_FilterConfiguration" >
+    <End Role="Property"
+         Type="Model.Property" 
+         Multiplicity="0..1" />
+    <End Role="FilterConfiguration"
+         Type="Model.FilterConfiguration" 
          Multiplicity="0..1" />
   </Association>
   <Association Name="FK_Property_has_ValueModelDescriptor" >

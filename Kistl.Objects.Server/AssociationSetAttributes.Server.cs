@@ -704,6 +704,66 @@ using Kistl.DalProvider.EF;
 
 
 	/*
+    Relation: FK_FilterConfiguration_has_Module
+    A: ZeroOrMore FilterConfiguration as FilterConfiguration
+    B: ZeroOrOne Module as Module
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_FilterConfiguration_has_Module",
+    "FilterConfiguration", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.FilterConfiguration__Implementation__),
+    "Module", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Module__Implementation__)
+    )]
+
+
+	/*
+    Relation: FK_FilterConfiguration_has_ViewModelDescriptor
+    A: ZeroOrMore FilterConfiguration as FilterConfiguration
+    B: One ViewModelDescriptor as ViewModelDescriptor
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_FilterConfiguration_has_ViewModelDescriptor",
+    "FilterConfiguration", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.FilterConfiguration__Implementation__),
+    "ViewModelDescriptor", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.GUI.ViewModelDescriptor__Implementation__)
+    )]
+
+
+	/*
+    Relation: FK_FilterConfiguration_was_ChangedBy
+    A: ZeroOrMore FilterConfiguration as FilterConfiguration
+    B: ZeroOrOne Identity as ChangedBy
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_FilterConfiguration_was_ChangedBy",
+    "FilterConfiguration", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.FilterConfiguration__Implementation__),
+    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Identity__Implementation__)
+    )]
+
+
+	/*
+    Relation: FK_FilterConfiguration_was_CreatedBy
+    A: ZeroOrMore FilterConfiguration as FilterConfiguration
+    B: ZeroOrOne Identity as CreatedBy
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_FilterConfiguration_was_CreatedBy",
+    "FilterConfiguration", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.FilterConfiguration__Implementation__),
+    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Identity__Implementation__)
+    )]
+
+
+	/*
     Relation: FK_Group_has_Module
     A: ZeroOrMore Group as Group
     B: One Module as Module
@@ -1441,6 +1501,21 @@ using Kistl.DalProvider.EF;
     "Model", "FK_Property_has_DefaultValue",
     "Property", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Property__Implementation__),
     "DefaultValue", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.DefaultPropertyValue__Implementation__)
+    )]
+
+
+	/*
+    Relation: FK_Property_Has_FilterConfiguration
+    A: ZeroOrOne Property as Property
+    B: ZeroOrOne FilterConfiguration as FilterConfiguration
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_Property_Has_FilterConfiguration",
+    "Property", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Property__Implementation__),
+    "FilterConfiguration", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.GUI.FilterConfiguration__Implementation__)
     )]
 
 

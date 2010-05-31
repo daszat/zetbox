@@ -87,7 +87,7 @@ namespace Kistl.App.Base
                 {
                     var __oldValue = _DisplayName;
                     var __newValue = value;
-                    if(OnDisplayName_PreSetter != null)
+                    if(OnDisplayName_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
                         OnDisplayName_PreSetter(this, __e);
@@ -96,7 +96,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("DisplayName", __oldValue, __newValue);
                     _DisplayName = __newValue;
                     NotifyPropertyChanged("DisplayName", __oldValue, __newValue);
-                    if(OnDisplayName_PostSetter != null)
+                    if(OnDisplayName_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
                         OnDisplayName_PostSetter(this, __e);
@@ -188,7 +188,7 @@ namespace Kistl.App.Base
                 {
                     var __oldValue = _Password;
                     var __newValue = value;
-                    if(OnPassword_PreSetter != null)
+                    if(OnPassword_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
                         OnPassword_PreSetter(this, __e);
@@ -197,7 +197,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("Password", __oldValue, __newValue);
                     _Password = __newValue;
                     NotifyPropertyChanged("Password", __oldValue, __newValue);
-                    if(OnPassword_PostSetter != null)
+                    if(OnPassword_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
                         OnPassword_PostSetter(this, __e);
@@ -240,7 +240,7 @@ namespace Kistl.App.Base
                 {
                     var __oldValue = _UserName;
                     var __newValue = value;
-                    if(OnUserName_PreSetter != null)
+                    if(OnUserName_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
                         OnUserName_PreSetter(this, __e);
@@ -249,7 +249,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("UserName", __oldValue, __newValue);
                     _UserName = __newValue;
                     NotifyPropertyChanged("UserName", __oldValue, __newValue);
-                    if(OnUserName_PostSetter != null)
+                    if(OnUserName_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
                         OnUserName_PostSetter(this, __e);
@@ -378,6 +378,8 @@ namespace Kistl.App.Base
 			// rel: EnumerationEntry was CreatedBy (c4b36682-947b-4c4a-802f-7618e3b0c3c3)
 			// rel: File was ChangedBy (2ff68641-0051-4f2e-a8ee-5f50b9d507f3)
 			// rel: File was CreatedBy (1f543299-93ce-4441-a3d7-6d95e8546350)
+			// rel: FilterConfiguration was ChangedBy (d3e05e7e-7bb7-45ee-867c-99b4431528a8)
+			// rel: FilterConfiguration was CreatedBy (aaf1ccf3-69c1-4322-be3c-9ad593880451)
 			// rel: Kunde was CreatedBy (5daf8db8-be8b-4ac7-a887-9217442fa7f4)
 			// rel: Kunde was ChangedBy (2a33407e-beeb-4919-b4c1-9aa264286151)
 			// rel: Method was CreatedBy (c2f4906d-2841-47df-bd91-6228f2f4285a)

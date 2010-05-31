@@ -93,6 +93,7 @@
     <Compile Include="Exam.Interface.Designer.cs" />
     <Compile Include="Exercise.Interface.Designer.cs" />
     <Compile Include="File.Interface.Designer.cs" />
+    <Compile Include="FilterConfiguration.Interface.Designer.cs" />
     <Compile Include="Fragebogen.Interface.Designer.cs" />
     <Compile Include="Group.Interface.Designer.cs" />
     <Compile Include="GroupExcercise.Interface.Designer.cs" />

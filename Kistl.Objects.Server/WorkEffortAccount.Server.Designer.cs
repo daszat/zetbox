@@ -87,7 +87,7 @@ namespace Kistl.App.TimeRecords
                 {
                     var __oldValue = _BudgetHours;
                     var __newValue = value;
-                    if(OnBudgetHours_PreSetter != null)
+                    if(OnBudgetHours_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<double?>(__oldValue, __newValue);
                         OnBudgetHours_PreSetter(this, __e);
@@ -96,7 +96,7 @@ namespace Kistl.App.TimeRecords
                     NotifyPropertyChanging("BudgetHours", __oldValue, __newValue);
                     _BudgetHours = __newValue;
                     NotifyPropertyChanged("BudgetHours", __oldValue, __newValue);
-                    if(OnBudgetHours_PostSetter != null)
+                    if(OnBudgetHours_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<double?>(__oldValue, __newValue);
                         OnBudgetHours_PostSetter(this, __e);
@@ -188,7 +188,7 @@ namespace Kistl.App.TimeRecords
                 {
                     var __oldValue = _Name;
                     var __newValue = value;
-                    if(OnName_PreSetter != null)
+                    if(OnName_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
                         OnName_PreSetter(this, __e);
@@ -197,7 +197,7 @@ namespace Kistl.App.TimeRecords
                     NotifyPropertyChanging("Name", __oldValue, __newValue);
                     _Name = __newValue;
                     NotifyPropertyChanged("Name", __oldValue, __newValue);
-                    if(OnName_PostSetter != null)
+                    if(OnName_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
                         OnName_PostSetter(this, __e);
@@ -240,7 +240,7 @@ namespace Kistl.App.TimeRecords
                 {
                     var __oldValue = _Notes;
                     var __newValue = value;
-                    if(OnNotes_PreSetter != null)
+                    if(OnNotes_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
                         OnNotes_PreSetter(this, __e);
@@ -249,7 +249,7 @@ namespace Kistl.App.TimeRecords
                     NotifyPropertyChanging("Notes", __oldValue, __newValue);
                     _Notes = __newValue;
                     NotifyPropertyChanged("Notes", __oldValue, __newValue);
-                    if(OnNotes_PostSetter != null)
+                    if(OnNotes_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
                         OnNotes_PostSetter(this, __e);
@@ -292,7 +292,7 @@ namespace Kistl.App.TimeRecords
                 {
                     var __oldValue = _SpentHours;
                     var __newValue = value;
-                    if(OnSpentHours_PreSetter != null)
+                    if(OnSpentHours_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<double?>(__oldValue, __newValue);
                         OnSpentHours_PreSetter(this, __e);
@@ -301,7 +301,7 @@ namespace Kistl.App.TimeRecords
                     NotifyPropertyChanging("SpentHours", __oldValue, __newValue);
                     _SpentHours = __newValue;
                     NotifyPropertyChanged("SpentHours", __oldValue, __newValue);
-                    if(OnSpentHours_PostSetter != null)
+                    if(OnSpentHours_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<double?>(__oldValue, __newValue);
                         OnSpentHours_PostSetter(this, __e);

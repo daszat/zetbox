@@ -393,7 +393,7 @@ namespace Kistl.App.Base
                 {
                     var __oldValue = _IsAbstract;
                     var __newValue = value;
-                    if(OnIsAbstract_PreSetter != null)
+                    if(OnIsAbstract_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<bool>(__oldValue, __newValue);
                         OnIsAbstract_PreSetter(this, __e);
@@ -402,7 +402,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("IsAbstract", __oldValue, __newValue);
                     _IsAbstract = __newValue;
                     NotifyPropertyChanged("IsAbstract", __oldValue, __newValue);
-                    if(OnIsAbstract_PostSetter != null)
+                    if(OnIsAbstract_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<bool>(__oldValue, __newValue);
                         OnIsAbstract_PostSetter(this, __e);
@@ -445,7 +445,7 @@ namespace Kistl.App.Base
                 {
                     var __oldValue = _IsFrozenObject;
                     var __newValue = value;
-                    if(OnIsFrozenObject_PreSetter != null)
+                    if(OnIsFrozenObject_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<bool>(__oldValue, __newValue);
                         OnIsFrozenObject_PreSetter(this, __e);
@@ -454,7 +454,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("IsFrozenObject", __oldValue, __newValue);
                     _IsFrozenObject = __newValue;
                     NotifyPropertyChanged("IsFrozenObject", __oldValue, __newValue);
-                    if(OnIsFrozenObject_PostSetter != null)
+                    if(OnIsFrozenObject_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<bool>(__oldValue, __newValue);
                         OnIsFrozenObject_PostSetter(this, __e);
@@ -497,7 +497,7 @@ namespace Kistl.App.Base
                 {
                     var __oldValue = _IsSimpleObject;
                     var __newValue = value;
-                    if(OnIsSimpleObject_PreSetter != null)
+                    if(OnIsSimpleObject_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<bool>(__oldValue, __newValue);
                         OnIsSimpleObject_PreSetter(this, __e);
@@ -506,7 +506,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("IsSimpleObject", __oldValue, __newValue);
                     _IsSimpleObject = __newValue;
                     NotifyPropertyChanged("IsSimpleObject", __oldValue, __newValue);
-                    if(OnIsSimpleObject_PostSetter != null)
+                    if(OnIsSimpleObject_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<bool>(__oldValue, __newValue);
                         OnIsSimpleObject_PostSetter(this, __e);
@@ -598,7 +598,7 @@ namespace Kistl.App.Base
                 {
                     var __oldValue = _TableName;
                     var __newValue = value;
-                    if(OnTableName_PreSetter != null)
+                    if(OnTableName_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
                         OnTableName_PreSetter(this, __e);
@@ -607,7 +607,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("TableName", __oldValue, __newValue);
                     _TableName = __newValue;
                     NotifyPropertyChanged("TableName", __oldValue, __newValue);
-                    if(OnTableName_PostSetter != null)
+                    if(OnTableName_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
                         OnTableName_PostSetter(this, __e);

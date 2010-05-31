@@ -87,7 +87,7 @@ namespace Kistl.App.TimeRecords
                 {
                     var __oldValue = _From;
                     var __newValue = value;
-                    if(OnFrom_PreSetter != null)
+                    if(OnFrom_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<DateTime>(__oldValue, __newValue);
                         OnFrom_PreSetter(this, __e);
@@ -96,7 +96,7 @@ namespace Kistl.App.TimeRecords
                     NotifyPropertyChanging("From", __oldValue, __newValue);
                     _From = __newValue;
                     NotifyPropertyChanged("From", __oldValue, __newValue);
-                    if(OnFrom_PostSetter != null)
+                    if(OnFrom_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<DateTime>(__oldValue, __newValue);
                         OnFrom_PostSetter(this, __e);
@@ -230,7 +230,7 @@ namespace Kistl.App.TimeRecords
                 {
                     var __oldValue = _Name;
                     var __newValue = value;
-                    if(OnName_PreSetter != null)
+                    if(OnName_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
                         OnName_PreSetter(this, __e);
@@ -239,7 +239,7 @@ namespace Kistl.App.TimeRecords
                     NotifyPropertyChanging("Name", __oldValue, __newValue);
                     _Name = __newValue;
                     NotifyPropertyChanged("Name", __oldValue, __newValue);
-                    if(OnName_PostSetter != null)
+                    if(OnName_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
                         OnName_PostSetter(this, __e);
@@ -282,7 +282,7 @@ namespace Kistl.App.TimeRecords
                 {
                     var __oldValue = _Notes;
                     var __newValue = value;
-                    if(OnNotes_PreSetter != null)
+                    if(OnNotes_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
                         OnNotes_PreSetter(this, __e);
@@ -291,7 +291,7 @@ namespace Kistl.App.TimeRecords
                     NotifyPropertyChanging("Notes", __oldValue, __newValue);
                     _Notes = __newValue;
                     NotifyPropertyChanged("Notes", __oldValue, __newValue);
-                    if(OnNotes_PostSetter != null)
+                    if(OnNotes_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
                         OnNotes_PostSetter(this, __e);
@@ -334,7 +334,7 @@ namespace Kistl.App.TimeRecords
                 {
                     var __oldValue = _Thru;
                     var __newValue = value;
-                    if(OnThru_PreSetter != null)
+                    if(OnThru_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<DateTime?>(__oldValue, __newValue);
                         OnThru_PreSetter(this, __e);
@@ -343,7 +343,7 @@ namespace Kistl.App.TimeRecords
                     NotifyPropertyChanging("Thru", __oldValue, __newValue);
                     _Thru = __newValue;
                     NotifyPropertyChanged("Thru", __oldValue, __newValue);
-                    if(OnThru_PostSetter != null)
+                    if(OnThru_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<DateTime?>(__oldValue, __newValue);
                         OnThru_PostSetter(this, __e);

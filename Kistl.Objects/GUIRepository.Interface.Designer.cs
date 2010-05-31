@@ -66,6 +66,16 @@ namespace Kistl.App.GUI
 			}
 		}
 		
+		/// <summary>List of all FilterConfiguration</summary>
+		/// 
+		public IQueryable<FilterConfiguration> FilterConfigurations
+		{ 
+			get
+			{
+				return Context.GetQuery<FilterConfiguration>();
+			}
+		}
+		
 		/// <summary>List of all ControlKind</summary>
 		/// The ControlKind specifies the toolkit-independent kind or type of control that should display a given Presentable.
 		public IQueryable<ControlKind> ControlKinds

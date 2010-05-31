@@ -138,7 +138,7 @@ namespace Kistl.App.Test
                 {
                     var __oldValue = _BogenNummer;
                     var __newValue = value;
-                    if(OnBogenNummer_PreSetter != null)
+                    if(OnBogenNummer_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<int?>(__oldValue, __newValue);
                         OnBogenNummer_PreSetter(this, __e);
@@ -147,7 +147,7 @@ namespace Kistl.App.Test
                     NotifyPropertyChanging("BogenNummer", __oldValue, __newValue);
                     _BogenNummer = __newValue;
                     NotifyPropertyChanged("BogenNummer", __oldValue, __newValue);
-                    if(OnBogenNummer_PostSetter != null)
+                    if(OnBogenNummer_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<int?>(__oldValue, __newValue);
                         OnBogenNummer_PostSetter(this, __e);

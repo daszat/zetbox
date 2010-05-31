@@ -178,7 +178,7 @@ namespace Kistl.App.Projekte
                 {
                     var __oldValue = _ChangedOn;
                     var __newValue = value;
-                    if(OnChangedOn_PreSetter != null)
+                    if(OnChangedOn_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<DateTime?>(__oldValue, __newValue);
                         OnChangedOn_PreSetter(this, __e);
@@ -187,7 +187,7 @@ namespace Kistl.App.Projekte
                     NotifyPropertyChanging("ChangedOn", __oldValue, __newValue);
                     _ChangedOn = __newValue;
                     NotifyPropertyChanged("ChangedOn", __oldValue, __newValue);
-                    if(OnChangedOn_PostSetter != null)
+                    if(OnChangedOn_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<DateTime?>(__oldValue, __newValue);
                         OnChangedOn_PostSetter(this, __e);
@@ -321,7 +321,7 @@ namespace Kistl.App.Projekte
                 {
                     var __oldValue = _CreatedOn;
                     var __newValue = value;
-                    if(OnCreatedOn_PreSetter != null)
+                    if(OnCreatedOn_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<DateTime?>(__oldValue, __newValue);
                         OnCreatedOn_PreSetter(this, __e);
@@ -330,7 +330,7 @@ namespace Kistl.App.Projekte
                     NotifyPropertyChanging("CreatedOn", __oldValue, __newValue);
                     _CreatedOn = __newValue;
                     NotifyPropertyChanged("CreatedOn", __oldValue, __newValue);
-                    if(OnCreatedOn_PostSetter != null)
+                    if(OnCreatedOn_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<DateTime?>(__oldValue, __newValue);
                         OnCreatedOn_PostSetter(this, __e);
@@ -373,7 +373,7 @@ namespace Kistl.App.Projekte
                 {
                     var __oldValue = _Geburtstag;
                     var __newValue = value;
-                    if(OnGeburtstag_PreSetter != null)
+                    if(OnGeburtstag_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<DateTime?>(__oldValue, __newValue);
                         OnGeburtstag_PreSetter(this, __e);
@@ -382,7 +382,7 @@ namespace Kistl.App.Projekte
                     NotifyPropertyChanging("Geburtstag", __oldValue, __newValue);
                     _Geburtstag = __newValue;
                     NotifyPropertyChanged("Geburtstag", __oldValue, __newValue);
-                    if(OnGeburtstag_PostSetter != null)
+                    if(OnGeburtstag_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<DateTime?>(__oldValue, __newValue);
                         OnGeburtstag_PostSetter(this, __e);
@@ -516,7 +516,7 @@ namespace Kistl.App.Projekte
                 {
                     var __oldValue = _Name;
                     var __newValue = value;
-                    if(OnName_PreSetter != null)
+                    if(OnName_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
                         OnName_PreSetter(this, __e);
@@ -525,7 +525,7 @@ namespace Kistl.App.Projekte
                     NotifyPropertyChanging("Name", __oldValue, __newValue);
                     _Name = __newValue;
                     NotifyPropertyChanged("Name", __oldValue, __newValue);
-                    if(OnName_PostSetter != null)
+                    if(OnName_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
                         OnName_PostSetter(this, __e);
@@ -617,7 +617,7 @@ namespace Kistl.App.Projekte
                 {
                     var __oldValue = _SVNr;
                     var __newValue = value;
-                    if(OnSVNr_PreSetter != null)
+                    if(OnSVNr_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
                         OnSVNr_PreSetter(this, __e);
@@ -626,7 +626,7 @@ namespace Kistl.App.Projekte
                     NotifyPropertyChanging("SVNr", __oldValue, __newValue);
                     _SVNr = __newValue;
                     NotifyPropertyChanged("SVNr", __oldValue, __newValue);
-                    if(OnSVNr_PostSetter != null)
+                    if(OnSVNr_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
                         OnSVNr_PostSetter(this, __e);
@@ -669,7 +669,7 @@ namespace Kistl.App.Projekte
                 {
                     var __oldValue = _TelefonNummer;
                     var __newValue = value;
-                    if(OnTelefonNummer_PreSetter != null)
+                    if(OnTelefonNummer_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
                         OnTelefonNummer_PreSetter(this, __e);
@@ -678,7 +678,7 @@ namespace Kistl.App.Projekte
                     NotifyPropertyChanging("TelefonNummer", __oldValue, __newValue);
                     _TelefonNummer = __newValue;
                     NotifyPropertyChanged("TelefonNummer", __oldValue, __newValue);
-                    if(OnTelefonNummer_PostSetter != null)
+                    if(OnTelefonNummer_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
                         OnTelefonNummer_PostSetter(this, __e);

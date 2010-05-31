@@ -178,7 +178,7 @@ namespace Kistl.App.GUI
                 {
                     var __oldValue = _DisplayedTypeFullName;
                     var __newValue = value;
-                    if(OnDisplayedTypeFullName_PreSetter != null)
+                    if(OnDisplayedTypeFullName_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
                         OnDisplayedTypeFullName_PreSetter(this, __e);
@@ -187,7 +187,7 @@ namespace Kistl.App.GUI
                     NotifyPropertyChanging("DisplayedTypeFullName", __oldValue, __newValue);
                     _DisplayedTypeFullName = __newValue;
                     NotifyPropertyChanged("DisplayedTypeFullName", __oldValue, __newValue);
-                    if(OnDisplayedTypeFullName_PostSetter != null)
+                    if(OnDisplayedTypeFullName_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
                         OnDisplayedTypeFullName_PostSetter(this, __e);
@@ -230,7 +230,7 @@ namespace Kistl.App.GUI
                 {
                     var __oldValue = _DisplayName;
                     var __newValue = value;
-                    if(OnDisplayName_PreSetter != null)
+                    if(OnDisplayName_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
                         OnDisplayName_PreSetter(this, __e);
@@ -239,7 +239,7 @@ namespace Kistl.App.GUI
                     NotifyPropertyChanging("DisplayName", __oldValue, __newValue);
                     _DisplayName = __newValue;
                     NotifyPropertyChanged("DisplayName", __oldValue, __newValue);
-                    if(OnDisplayName_PostSetter != null)
+                    if(OnDisplayName_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
                         OnDisplayName_PostSetter(this, __e);

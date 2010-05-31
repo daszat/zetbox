@@ -87,7 +87,7 @@ namespace Kistl.App.Projekte
                 {
                     var __oldValue = _Aufwand;
                     var __newValue = value;
-                    if(OnAufwand_PreSetter != null)
+                    if(OnAufwand_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<double?>(__oldValue, __newValue);
                         OnAufwand_PreSetter(this, __e);
@@ -96,7 +96,7 @@ namespace Kistl.App.Projekte
                     NotifyPropertyChanging("Aufwand", __oldValue, __newValue);
                     _Aufwand = __newValue;
                     NotifyPropertyChanged("Aufwand", __oldValue, __newValue);
-                    if(OnAufwand_PostSetter != null)
+                    if(OnAufwand_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<double?>(__oldValue, __newValue);
                         OnAufwand_PostSetter(this, __e);
@@ -230,7 +230,7 @@ namespace Kistl.App.Projekte
                 {
                     var __oldValue = _ChangedOn;
                     var __newValue = value;
-                    if(OnChangedOn_PreSetter != null)
+                    if(OnChangedOn_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<DateTime?>(__oldValue, __newValue);
                         OnChangedOn_PreSetter(this, __e);
@@ -239,7 +239,7 @@ namespace Kistl.App.Projekte
                     NotifyPropertyChanging("ChangedOn", __oldValue, __newValue);
                     _ChangedOn = __newValue;
                     NotifyPropertyChanged("ChangedOn", __oldValue, __newValue);
-                    if(OnChangedOn_PostSetter != null)
+                    if(OnChangedOn_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<DateTime?>(__oldValue, __newValue);
                         OnChangedOn_PostSetter(this, __e);
@@ -373,7 +373,7 @@ namespace Kistl.App.Projekte
                 {
                     var __oldValue = _CreatedOn;
                     var __newValue = value;
-                    if(OnCreatedOn_PreSetter != null)
+                    if(OnCreatedOn_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<DateTime?>(__oldValue, __newValue);
                         OnCreatedOn_PreSetter(this, __e);
@@ -382,7 +382,7 @@ namespace Kistl.App.Projekte
                     NotifyPropertyChanging("CreatedOn", __oldValue, __newValue);
                     _CreatedOn = __newValue;
                     NotifyPropertyChanged("CreatedOn", __oldValue, __newValue);
-                    if(OnCreatedOn_PostSetter != null)
+                    if(OnCreatedOn_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<DateTime?>(__oldValue, __newValue);
                         OnCreatedOn_PostSetter(this, __e);
@@ -425,7 +425,7 @@ namespace Kistl.App.Projekte
                 {
                     var __oldValue = _DatumBis;
                     var __newValue = value;
-                    if(OnDatumBis_PreSetter != null)
+                    if(OnDatumBis_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<DateTime?>(__oldValue, __newValue);
                         OnDatumBis_PreSetter(this, __e);
@@ -434,7 +434,7 @@ namespace Kistl.App.Projekte
                     NotifyPropertyChanging("DatumBis", __oldValue, __newValue);
                     _DatumBis = __newValue;
                     NotifyPropertyChanged("DatumBis", __oldValue, __newValue);
-                    if(OnDatumBis_PostSetter != null)
+                    if(OnDatumBis_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<DateTime?>(__oldValue, __newValue);
                         OnDatumBis_PostSetter(this, __e);
@@ -477,7 +477,7 @@ namespace Kistl.App.Projekte
                 {
                     var __oldValue = _DatumVon;
                     var __newValue = value;
-                    if(OnDatumVon_PreSetter != null)
+                    if(OnDatumVon_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<DateTime?>(__oldValue, __newValue);
                         OnDatumVon_PreSetter(this, __e);
@@ -486,7 +486,7 @@ namespace Kistl.App.Projekte
                     NotifyPropertyChanging("DatumVon", __oldValue, __newValue);
                     _DatumVon = __newValue;
                     NotifyPropertyChanged("DatumVon", __oldValue, __newValue);
-                    if(OnDatumVon_PostSetter != null)
+                    if(OnDatumVon_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<DateTime?>(__oldValue, __newValue);
                         OnDatumVon_PostSetter(this, __e);
@@ -529,7 +529,7 @@ namespace Kistl.App.Projekte
                 {
                     var __oldValue = _Name;
                     var __newValue = value;
-                    if(OnName_PreSetter != null)
+                    if(OnName_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
                         OnName_PreSetter(this, __e);
@@ -538,7 +538,7 @@ namespace Kistl.App.Projekte
                     NotifyPropertyChanging("Name", __oldValue, __newValue);
                     _Name = __newValue;
                     NotifyPropertyChanged("Name", __oldValue, __newValue);
-                    if(OnName_PostSetter != null)
+                    if(OnName_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
                         OnName_PostSetter(this, __e);

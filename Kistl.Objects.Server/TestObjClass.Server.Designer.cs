@@ -87,7 +87,7 @@ namespace Kistl.App.Test
                 {
                     var __oldValue = _MyIntProperty;
                     var __newValue = value;
-                    if(OnMyIntProperty_PreSetter != null)
+                    if(OnMyIntProperty_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<int?>(__oldValue, __newValue);
                         OnMyIntProperty_PreSetter(this, __e);
@@ -96,7 +96,7 @@ namespace Kistl.App.Test
                     NotifyPropertyChanging("MyIntProperty", __oldValue, __newValue);
                     _MyIntProperty = __newValue;
                     NotifyPropertyChanged("MyIntProperty", __oldValue, __newValue);
-                    if(OnMyIntProperty_PostSetter != null)
+                    if(OnMyIntProperty_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<int?>(__oldValue, __newValue);
                         OnMyIntProperty_PostSetter(this, __e);
@@ -230,7 +230,7 @@ namespace Kistl.App.Test
                 {
                     var __oldValue = _StringProp;
                     var __newValue = value;
-                    if(OnStringProp_PreSetter != null)
+                    if(OnStringProp_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
                         OnStringProp_PreSetter(this, __e);
@@ -239,7 +239,7 @@ namespace Kistl.App.Test
                     NotifyPropertyChanging("StringProp", __oldValue, __newValue);
                     _StringProp = __newValue;
                     NotifyPropertyChanged("StringProp", __oldValue, __newValue);
-                    if(OnStringProp_PostSetter != null)
+                    if(OnStringProp_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
                         OnStringProp_PostSetter(this, __e);

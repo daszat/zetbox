@@ -19,16 +19,17 @@ namespace Kistl.Client.WPF.View.KistlBase
     /// <summary>
     /// Interaction logic for StringFilterExpression.xaml
     /// </summary>
-    public partial class StringFilterExpression : UserControl, IHasViewModel<ReferenceTypeUIFilterExpressionViewModel<string>>
+    [ViewDescriptor("GUI", Kistl.App.GUI.Toolkit.WPF, Kind = "Kistl.App.GUI.StringFilterKind")]
+    public partial class StringFilterExpression : UserControl, IHasViewModel<IReferenceTypeFilterViewModel<string>>
     {
         public StringFilterExpression()
         {
             InitializeComponent();
         }
 
-        public ReferenceTypeUIFilterExpressionViewModel<string> ViewModel
+        public IReferenceTypeFilterViewModel<string> ViewModel
         {
-            get { return (ReferenceTypeUIFilterExpressionViewModel<string>)DataContext; }
+            get { return (IReferenceTypeFilterViewModel<string>)DataContext; }
         }
     }
 }

@@ -42,6 +42,13 @@ namespace Kistl.App.Base
         /// <summary>
         /// 
         /// </summary>
+		Kistl.App.GUI.FilterConfiguration FilterConfiguration {
+			get;
+			set;
+		}
+        /// <summary>
+        /// 
+        /// </summary>
 
         ICollection<Kistl.App.Base.PropertyInvocation> Invocations { get; }
         /// <summary>

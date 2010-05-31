@@ -87,7 +87,7 @@ namespace Kistl.App.Base
                 {
                     var __oldValue = _CategoryTags;
                     var __newValue = value;
-                    if(OnCategoryTags_PreSetter != null)
+                    if(OnCategoryTags_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
                         OnCategoryTags_PreSetter(this, __e);
@@ -96,7 +96,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("CategoryTags", __oldValue, __newValue);
                     _CategoryTags = __newValue;
                     NotifyPropertyChanged("CategoryTags", __oldValue, __newValue);
-                    if(OnCategoryTags_PostSetter != null)
+                    if(OnCategoryTags_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
                         OnCategoryTags_PostSetter(this, __e);
@@ -230,7 +230,7 @@ namespace Kistl.App.Base
                 {
                     var __oldValue = _ChangedOn;
                     var __newValue = value;
-                    if(OnChangedOn_PreSetter != null)
+                    if(OnChangedOn_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<DateTime?>(__oldValue, __newValue);
                         OnChangedOn_PreSetter(this, __e);
@@ -239,7 +239,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("ChangedOn", __oldValue, __newValue);
                     _ChangedOn = __newValue;
                     NotifyPropertyChanged("ChangedOn", __oldValue, __newValue);
-                    if(OnChangedOn_PostSetter != null)
+                    if(OnChangedOn_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<DateTime?>(__oldValue, __newValue);
                         OnChangedOn_PostSetter(this, __e);
@@ -424,7 +424,7 @@ namespace Kistl.App.Base
                 {
                     var __oldValue = _CreatedOn;
                     var __newValue = value;
-                    if(OnCreatedOn_PreSetter != null)
+                    if(OnCreatedOn_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<DateTime?>(__oldValue, __newValue);
                         OnCreatedOn_PreSetter(this, __e);
@@ -433,7 +433,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("CreatedOn", __oldValue, __newValue);
                     _CreatedOn = __newValue;
                     NotifyPropertyChanged("CreatedOn", __oldValue, __newValue);
-                    if(OnCreatedOn_PostSetter != null)
+                    if(OnCreatedOn_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<DateTime?>(__oldValue, __newValue);
                         OnCreatedOn_PostSetter(this, __e);
@@ -567,7 +567,7 @@ namespace Kistl.App.Base
                 {
                     var __oldValue = _Description;
                     var __newValue = value;
-                    if(OnDescription_PreSetter != null)
+                    if(OnDescription_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
                         OnDescription_PreSetter(this, __e);
@@ -576,7 +576,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("Description", __oldValue, __newValue);
                     _Description = __newValue;
                     NotifyPropertyChanged("Description", __oldValue, __newValue);
-                    if(OnDescription_PostSetter != null)
+                    if(OnDescription_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
                         OnDescription_PostSetter(this, __e);
@@ -630,7 +630,7 @@ namespace Kistl.App.Base
                 {
                     var __oldValue = _ExportGuid;
                     var __newValue = value;
-                    if(OnExportGuid_PreSetter != null)
+                    if(OnExportGuid_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<Guid>(__oldValue, __newValue);
                         OnExportGuid_PreSetter(this, __e);
@@ -639,7 +639,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     _ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
-                    if(OnExportGuid_PostSetter != null)
+                    if(OnExportGuid_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<Guid>(__oldValue, __newValue);
                         OnExportGuid_PostSetter(this, __e);
@@ -651,6 +651,97 @@ namespace Kistl.App.Base
 		public static event PropertyGetterHandler<Kistl.App.Base.Property, Guid> OnExportGuid_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Property, Guid> OnExportGuid_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.Property, Guid> OnExportGuid_PostSetter;
+
+        /// <summary>
+        /// 
+        /// </summary>
+    /*
+    Relation: FK_Property_Has_FilterConfiguration
+    A: ZeroOrOne Property as Property
+    B: ZeroOrOne FilterConfiguration as FilterConfiguration
+    Preferred Storage: MergeIntoA
+    */
+        // object reference property
+   		// Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public Kistl.App.GUI.FilterConfiguration FilterConfiguration
+        {
+            get
+            {
+                return FilterConfiguration__Implementation__;
+            }
+            set
+            {
+                // TODO: NotifyPropertyChanged()
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if(value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                FilterConfiguration__Implementation__ = (Kistl.App.GUI.FilterConfiguration__Implementation__)value;
+            }
+        }
+        
+        private int? _fk_FilterConfiguration;
+        private Guid? _fk_guid_FilterConfiguration = null;
+        // EF sees only this property
+        [EdmRelationshipNavigationProperty("Model", "FK_Property_Has_FilterConfiguration", "FilterConfiguration")]
+        public Kistl.App.GUI.FilterConfiguration__Implementation__ FilterConfiguration__Implementation__
+        {
+            get
+            {
+                EntityReference<Kistl.App.GUI.FilterConfiguration__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.FilterConfiguration__Implementation__>(
+                        "Model.FK_Property_Has_FilterConfiguration",
+                        "FilterConfiguration");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load(); 
+                    if(r.Value != null) r.Value.AttachToContext(this.Context);
+                }
+                var __value = r.Value;
+				if(OnFilterConfiguration_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<Kistl.App.GUI.FilterConfiguration>(__value);
+					OnFilterConfiguration_Getter(this, e);
+					__value = (Kistl.App.GUI.FilterConfiguration__Implementation__)e.Result;
+				}
+                return __value;
+            }
+            set
+            {
+                EntityReference<Kistl.App.GUI.FilterConfiguration__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.FilterConfiguration__Implementation__>(
+                        "Model.FK_Property_Has_FilterConfiguration",
+                        "FilterConfiguration");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load(); 
+                }
+                Kistl.App.GUI.FilterConfiguration __oldValue = (Kistl.App.GUI.FilterConfiguration)r.Value;
+                Kistl.App.GUI.FilterConfiguration __newValue = (Kistl.App.GUI.FilterConfiguration)value;
+
+                if(OnFilterConfiguration_PreSetter != null)
+                {
+					var e = new PropertyPreSetterEventArgs<Kistl.App.GUI.FilterConfiguration>(__oldValue, __newValue);
+					OnFilterConfiguration_PreSetter(this, e);
+					__newValue = e.Result;
+                }
+                r.Value = (Kistl.App.GUI.FilterConfiguration__Implementation__)__newValue;
+                if(OnFilterConfiguration_PostSetter != null)
+                {
+					var e = new PropertyPostSetterEventArgs<Kistl.App.GUI.FilterConfiguration>(__oldValue, __newValue);
+					OnFilterConfiguration_PostSetter(this, e);
+                }
+                                
+            }
+        }
+        
+        
+		public static event PropertyGetterHandler<Kistl.App.Base.Property, Kistl.App.GUI.FilterConfiguration> OnFilterConfiguration_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.Property, Kistl.App.GUI.FilterConfiguration> OnFilterConfiguration_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.Property, Kistl.App.GUI.FilterConfiguration> OnFilterConfiguration_PostSetter;
 
         /// <summary>
         /// 
@@ -824,7 +915,7 @@ namespace Kistl.App.Base
                 {
                     var __oldValue = _Name;
                     var __newValue = value;
-                    if(OnName_PreSetter != null)
+                    if(OnName_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
                         OnName_PreSetter(this, __e);
@@ -833,7 +924,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("Name", __oldValue, __newValue);
                     _Name = __newValue;
                     NotifyPropertyChanged("Name", __oldValue, __newValue);
-                    if(OnName_PostSetter != null)
+                    if(OnName_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
                         OnName_PostSetter(this, __e);
@@ -1120,6 +1211,7 @@ namespace Kistl.App.Base
 			this._fk_ChangedBy = otherImpl._fk_ChangedBy;
 			this._fk_CreatedBy = otherImpl._fk_CreatedBy;
 			this._fk_DefaultValue = otherImpl._fk_DefaultValue;
+			this._fk_FilterConfiguration = otherImpl._fk_FilterConfiguration;
 			this._fk_Module = otherImpl._fk_Module;
 			this.Properties_pos = otherImpl.Properties_pos;
 			this._fk_ObjectClass = otherImpl._fk_ObjectClass;
@@ -1240,6 +1332,13 @@ namespace Kistl.App.Base
 				null,
 				obj => obj.ExportGuid,
 				(obj, val) => obj.ExportGuid = val),
+			// else
+			new CustomPropertyDescriptor<Property__Implementation__, Kistl.App.GUI.FilterConfiguration>(
+				new Guid("dbf93142-1769-4f53-bcbc-71325e1d5ce7"),
+				"FilterConfiguration",
+				null,
+				obj => obj.FilterConfiguration,
+				(obj, val) => obj.FilterConfiguration = val),
 			// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
 			new CustomPropertyDescriptor<Property__Implementation__, ICollection<Kistl.App.Base.PropertyInvocation>>(
 				new Guid("dddba981-ca47-4995-a9cc-d649bf5dd8a3"),
@@ -1327,6 +1426,13 @@ namespace Kistl.App.Base
 			else
 				DefaultValue__Implementation__ = null;
 
+			if (_fk_guid_FilterConfiguration.HasValue)
+				FilterConfiguration__Implementation__ = (Kistl.App.GUI.FilterConfiguration__Implementation__)Context.FindPersistenceObject<Kistl.App.GUI.FilterConfiguration>(_fk_guid_FilterConfiguration.Value);
+			else if (_fk_FilterConfiguration.HasValue)
+				FilterConfiguration__Implementation__ = (Kistl.App.GUI.FilterConfiguration__Implementation__)Context.Find<Kistl.App.GUI.FilterConfiguration>(_fk_FilterConfiguration.Value);
+			else
+				FilterConfiguration__Implementation__ = null;
+
 			if (_fk_guid_Module.HasValue)
 				Module__Implementation__ = (Kistl.App.Base.Module__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.Module>(_fk_guid_Module.Value);
 			else if (_fk_Module.HasValue)
@@ -1387,6 +1493,7 @@ namespace Kistl.App.Base
             if (this._isExportGuidSet) {
                 BinarySerializer.ToStream(this._ExportGuid, binStream);
             }
+            BinarySerializer.ToStream(FilterConfiguration != null ? FilterConfiguration.ID : (int?)null, binStream);
 
 			BinarySerializer.ToStream(eagerLoadLists, binStream);
 			if(eagerLoadLists)
@@ -1445,6 +1552,7 @@ namespace Kistl.App.Base
             if (this._isExportGuidSet) {
                 BinarySerializer.FromStream(out this._ExportGuid, binStream);
             }
+            BinarySerializer.FromStream(out this._fk_FilterConfiguration, binStream);
 
 			BinarySerializer.FromStream(out Invocations_was_eagerLoaded, binStream);
 			{
@@ -1485,6 +1593,7 @@ namespace Kistl.App.Base
             if (this._isExportGuidSet) {
                 XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
             }
+            XmlStreamer.ToStream(FilterConfiguration != null ? FilterConfiguration.ID : (int?)null, xml, "FilterConfiguration", "Kistl.App.GUI");
             XmlStreamer.ToStream(Module != null ? Module.ID : (int?)null, xml, "Module", "Kistl.App.Base");
             XmlStreamer.ToStream(this._Name, xml, "Name", "Kistl.App.Base");
             XmlStreamer.ToStream(ObjectClass != null ? ObjectClass.ID : (int?)null, xml, "ObjectClass", "Kistl.App.Base");
@@ -1507,6 +1616,7 @@ namespace Kistl.App.Base
             if (this._isExportGuidSet) {
                 XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
             }
+            XmlStreamer.FromStream(ref this._fk_FilterConfiguration, xml, "FilterConfiguration", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._fk_Module, xml, "Module", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._Name, xml, "Name", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_ObjectClass, xml, "ObjectClass", "Kistl.App.Base");
@@ -1527,6 +1637,7 @@ namespace Kistl.App.Base
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(DefaultValue != null ? DefaultValue.ExportGuid : (Guid?)null, xml, "DefaultValue", "Kistl.App.Base");
     
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._Description, xml, "Description", "Kistl.App.Base");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(FilterConfiguration != null ? FilterConfiguration.ExportGuid : (Guid?)null, xml, "FilterConfiguration", "Kistl.App.GUI");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(Module != null ? Module.ExportGuid : (Guid?)null, xml, "Module", "Kistl.App.Base");
     
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._Name, xml, "Name", "Kistl.App.Base");
@@ -1545,6 +1656,7 @@ namespace Kistl.App.Base
             XmlStreamer.FromStream(ref this._Description, xml, "Description", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
             this._isExportGuidSet = true;
+            XmlStreamer.FromStream(ref this._fk_guid_FilterConfiguration, xml, "FilterConfiguration", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._fk_guid_Module, xml, "Module", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._Name, xml, "Name", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_guid_ObjectClass, xml, "ObjectClass", "Kistl.App.Base");

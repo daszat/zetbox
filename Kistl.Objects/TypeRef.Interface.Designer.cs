@@ -47,6 +47,13 @@ namespace Kistl.App.Base
 			set;
 		}
         /// <summary>
+        /// 
+        /// </summary>
+		string ToStringCache {
+			get;
+			set;
+		}
+        /// <summary>
         /// get the referenced <see cref="System.Type"/>
         /// </summary>
 		 System.Type AsType(System.Boolean throwOnError) ;
@@ -54,5 +61,9 @@ namespace Kistl.App.Base
         /// Update the Parent property to the currently loaded assemblies' state
         /// </summary>
 		 void UpdateParent() ;
+        /// <summary>
+        /// 
+        /// </summary>
+		 void UpdateToStringCache() ;
     }
 }

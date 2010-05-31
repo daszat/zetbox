@@ -62,7 +62,7 @@ namespace Kistl.App.Base
                 {
                     var __oldValue = _HasPersistentOrder;
                     var __newValue = value;
-                    if(OnHasPersistentOrder_PreSetter != null)
+                    if(OnHasPersistentOrder_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<bool>(__oldValue, __newValue);
                         OnHasPersistentOrder_PreSetter(this, __e);
@@ -71,7 +71,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("HasPersistentOrder", __oldValue, __newValue);
                     _HasPersistentOrder = __newValue;
                     NotifyPropertyChanged("HasPersistentOrder", __oldValue, __newValue);
-                    if(OnHasPersistentOrder_PostSetter != null)
+                    if(OnHasPersistentOrder_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<bool>(__oldValue, __newValue);
                         OnHasPersistentOrder_PostSetter(this, __e);
@@ -114,7 +114,7 @@ namespace Kistl.App.Base
                 {
                     var __oldValue = _ImplementorRoleName;
                     var __newValue = value;
-                    if(OnImplementorRoleName_PreSetter != null)
+                    if(OnImplementorRoleName_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
                         OnImplementorRoleName_PreSetter(this, __e);
@@ -123,7 +123,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("ImplementorRoleName", __oldValue, __newValue);
                     _ImplementorRoleName = __newValue;
                     NotifyPropertyChanged("ImplementorRoleName", __oldValue, __newValue);
-                    if(OnImplementorRoleName_PostSetter != null)
+                    if(OnImplementorRoleName_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
                         OnImplementorRoleName_PostSetter(this, __e);
@@ -166,7 +166,7 @@ namespace Kistl.App.Base
                 {
                     var __oldValue = _IsList;
                     var __newValue = value;
-                    if(OnIsList_PreSetter != null)
+                    if(OnIsList_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<bool>(__oldValue, __newValue);
                         OnIsList_PreSetter(this, __e);
@@ -175,7 +175,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("IsList", __oldValue, __newValue);
                     _IsList = __newValue;
                     NotifyPropertyChanged("IsList", __oldValue, __newValue);
-                    if(OnIsList_PostSetter != null)
+                    if(OnIsList_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<bool>(__oldValue, __newValue);
                         OnIsList_PostSetter(this, __e);
@@ -218,7 +218,7 @@ namespace Kistl.App.Base
                 {
                     var __oldValue = _ItemRoleName;
                     var __newValue = value;
-                    if(OnItemRoleName_PreSetter != null)
+                    if(OnItemRoleName_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
                         OnItemRoleName_PreSetter(this, __e);
@@ -227,7 +227,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("ItemRoleName", __oldValue, __newValue);
                     _ItemRoleName = __newValue;
                     NotifyPropertyChanged("ItemRoleName", __oldValue, __newValue);
-                    if(OnItemRoleName_PostSetter != null)
+                    if(OnItemRoleName_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
                         OnItemRoleName_PostSetter(this, __e);
@@ -361,7 +361,7 @@ namespace Kistl.App.Base
                 {
                     var __oldValue = _Verb;
                     var __newValue = value;
-                    if(OnVerb_PreSetter != null)
+                    if(OnVerb_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
                         OnVerb_PreSetter(this, __e);
@@ -370,7 +370,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("Verb", __oldValue, __newValue);
                     _Verb = __newValue;
                     NotifyPropertyChanged("Verb", __oldValue, __newValue);
-                    if(OnVerb_PostSetter != null)
+                    if(OnVerb_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
                         OnVerb_PostSetter(this, __e);

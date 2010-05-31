@@ -355,6 +355,18 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="FilterConfiguration">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.FilterConfiguration)">
+	    <MappingFragment StoreEntitySet="FilterConfiguration">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+<ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+<ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+<ScalarProperty Name="Multiple" ColumnName="Multiple" />
+<ScalarProperty Name="Requiered" ColumnName="Requiered" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Fragebogen">
       <EntityTypeMapping TypeName="IsTypeOf(Model.Fragebogen)">
 	    <MappingFragment StoreEntitySet="Fragebogen">
@@ -757,6 +769,7 @@
 <ScalarProperty Name="Deleted" ColumnName="Deleted" />
 <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
 <ScalarProperty Name="FullName" ColumnName="FullName" />
+<ScalarProperty Name="ToStringCache" ColumnName="ToStringCache" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -2263,6 +2276,74 @@
       <Condition ColumnName="fk_CreatedBy" IsNull="false"/>
     </AssociationSetMapping>
     <!--
+    Relation: FK_FilterConfiguration_has_Module
+    A: ZeroOrMore FilterConfiguration as FilterConfiguration
+    B: ZeroOrOne Module as Module
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_FilterConfiguration_has_Module"
+                           TypeName="Model.FK_FilterConfiguration_has_Module"
+                           StoreEntitySet="FilterConfiguration" >
+      <EndProperty Name="Module">
+        <ScalarProperty Name="ID" ColumnName="fk_Module"/>
+      </EndProperty>
+      <EndProperty Name="FilterConfiguration">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_Module" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_FilterConfiguration_has_ViewModelDescriptor
+    A: ZeroOrMore FilterConfiguration as FilterConfiguration
+    B: One ViewModelDescriptor as ViewModelDescriptor
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_FilterConfiguration_has_ViewModelDescriptor"
+                           TypeName="Model.FK_FilterConfiguration_has_ViewModelDescriptor"
+                           StoreEntitySet="FilterConfiguration" >
+      <EndProperty Name="ViewModelDescriptor">
+        <ScalarProperty Name="ID" ColumnName="fk_ViewModelDescriptor"/>
+      </EndProperty>
+      <EndProperty Name="FilterConfiguration">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_ViewModelDescriptor" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_FilterConfiguration_was_ChangedBy
+    A: ZeroOrMore FilterConfiguration as FilterConfiguration
+    B: ZeroOrOne Identity as ChangedBy
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_FilterConfiguration_was_ChangedBy"
+                           TypeName="Model.FK_FilterConfiguration_was_ChangedBy"
+                           StoreEntitySet="FilterConfiguration" >
+      <EndProperty Name="ChangedBy">
+        <ScalarProperty Name="ID" ColumnName="fk_ChangedBy"/>
+      </EndProperty>
+      <EndProperty Name="FilterConfiguration">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_ChangedBy" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_FilterConfiguration_was_CreatedBy
+    A: ZeroOrMore FilterConfiguration as FilterConfiguration
+    B: ZeroOrOne Identity as CreatedBy
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_FilterConfiguration_was_CreatedBy"
+                           TypeName="Model.FK_FilterConfiguration_was_CreatedBy"
+                           StoreEntitySet="FilterConfiguration" >
+      <EndProperty Name="CreatedBy">
+        <ScalarProperty Name="ID" ColumnName="fk_CreatedBy"/>
+      </EndProperty>
+      <EndProperty Name="FilterConfiguration">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_CreatedBy" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
     Relation: FK_Group_has_Module
     A: ZeroOrMore Group as Group
     B: One Module as Module
@@ -2958,6 +3039,23 @@
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="fk_Property" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_Property_Has_FilterConfiguration
+    A: ZeroOrOne Property as Property
+    B: ZeroOrOne FilterConfiguration as FilterConfiguration
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_Property_Has_FilterConfiguration"
+                           TypeName="Model.FK_Property_Has_FilterConfiguration"
+                           StoreEntitySet="Property" >
+      <EndProperty Name="FilterConfiguration">
+        <ScalarProperty Name="ID" ColumnName="fk_FilterConfiguration"/>
+      </EndProperty>
+      <EndProperty Name="Property">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_FilterConfiguration" IsNull="false"/>
     </AssociationSetMapping>
     <!--
     Relation: FK_Property_has_ValueModelDescriptor

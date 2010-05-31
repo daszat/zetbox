@@ -258,5 +258,32 @@ namespace Kistl.App.Base
             e.Result = obj.ReferencedObjectClass.Module.Namespace + "." + obj.ReferencedObjectClass.Name;
         }
         #endregion
+
+        #region TypeRef
+        public static void OnUpdateToStringCache_TypeRef(Kistl.App.Base.TypeRef obj)
+        {
+            obj.ToStringCache = String.Format("{0}{1}, {2}",
+                obj.FullName,
+                obj.GenericArguments.Count > 0
+                    ? "<" + String.Join(", ", obj.GenericArguments.Select(tr => tr.ToStringCache).ToArray()) + ">"
+                    : String.Empty,
+                obj.Assembly);
+        }
+
+        public static void OnFullName_PostSetter_TypeRef(Kistl.App.Base.TypeRef obj, PropertyPostSetterEventArgs<System.String> e)
+        {
+            obj.UpdateToStringCache();
+        }
+
+        public static void OnAssembly_PostSetter_TypeRef(Kistl.App.Base.TypeRef obj, PropertyPostSetterEventArgs<Kistl.App.Base.Assembly> e)
+        {
+            obj.UpdateToStringCache();
+        }
+
+        public static void OnGenericArguments_PostSetter_TypeRef(Kistl.App.Base.TypeRef obj, PropertyPostSetterEventArgs<Kistl.App.Base.TypeRef> e)
+        {
+            obj.UpdateToStringCache();
+        }
+        #endregion
     }
 }

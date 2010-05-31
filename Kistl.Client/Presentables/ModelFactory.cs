@@ -73,7 +73,13 @@ namespace Kistl.Client.Presentables
         public TModelFactory CreateViewModel<TModelFactory>(Type t) where TModelFactory : class
         {
             if (t == null) throw new ArgumentNullException("t");
-            if (!typeof(Delegate).IsAssignableFrom(t)) throw new ArgumentOutOfRangeException("t", "Parameter must be a Delegate. CreateViewModel uses Autofac's Factory pattern");
+            // try to resolve factory if t is not such a factory
+            if (!typeof(Delegate).IsAssignableFrom(t))
+            {
+                t = ResolveFactory(t);
+                // throw an exception if t is still not a factory
+                if (t == null || !typeof(Delegate).IsAssignableFrom(t)) throw new ArgumentOutOfRangeException("t", "Parameter must be a Delegate. CreateViewModel uses Autofac's Factory pattern");
+            }
             try
             {
                 var factory = Container.Resolve(t);

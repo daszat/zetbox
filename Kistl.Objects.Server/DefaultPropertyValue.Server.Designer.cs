@@ -178,7 +178,7 @@ namespace Kistl.App.Base
                 {
                     var __oldValue = _ChangedOn;
                     var __newValue = value;
-                    if(OnChangedOn_PreSetter != null)
+                    if(OnChangedOn_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<DateTime?>(__oldValue, __newValue);
                         OnChangedOn_PreSetter(this, __e);
@@ -187,7 +187,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("ChangedOn", __oldValue, __newValue);
                     _ChangedOn = __newValue;
                     NotifyPropertyChanged("ChangedOn", __oldValue, __newValue);
-                    if(OnChangedOn_PostSetter != null)
+                    if(OnChangedOn_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<DateTime?>(__oldValue, __newValue);
                         OnChangedOn_PostSetter(this, __e);
@@ -321,7 +321,7 @@ namespace Kistl.App.Base
                 {
                     var __oldValue = _CreatedOn;
                     var __newValue = value;
-                    if(OnCreatedOn_PreSetter != null)
+                    if(OnCreatedOn_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<DateTime?>(__oldValue, __newValue);
                         OnCreatedOn_PreSetter(this, __e);
@@ -330,7 +330,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("CreatedOn", __oldValue, __newValue);
                     _CreatedOn = __newValue;
                     NotifyPropertyChanged("CreatedOn", __oldValue, __newValue);
-                    if(OnCreatedOn_PostSetter != null)
+                    if(OnCreatedOn_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<DateTime?>(__oldValue, __newValue);
                         OnCreatedOn_PostSetter(this, __e);
@@ -384,7 +384,7 @@ namespace Kistl.App.Base
                 {
                     var __oldValue = _ExportGuid;
                     var __newValue = value;
-                    if(OnExportGuid_PreSetter != null)
+                    if(OnExportGuid_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<Guid>(__oldValue, __newValue);
                         OnExportGuid_PreSetter(this, __e);
@@ -393,7 +393,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     _ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
-                    if(OnExportGuid_PostSetter != null)
+                    if(OnExportGuid_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<Guid>(__oldValue, __newValue);
                         OnExportGuid_PostSetter(this, __e);

@@ -117,6 +117,7 @@
     <Compile Include="Exam.Server.Designer.cs" />
     <Compile Include="Exercise.Server.Designer.cs" />
     <Compile Include="File.Server.Designer.cs" />
+    <Compile Include="FilterConfiguration.Server.Designer.cs" />
     <Compile Include="Fragebogen.Server.Designer.cs" />
     <Compile Include="Group.Server.Designer.cs" />
     <Compile Include="GroupExcercise.Server.Designer.cs" />

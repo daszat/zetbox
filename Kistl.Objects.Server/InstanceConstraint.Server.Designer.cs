@@ -87,7 +87,7 @@ namespace Kistl.App.Base
                 {
                     var __oldValue = _Reason;
                     var __newValue = value;
-                    if(OnReason_PreSetter != null)
+                    if(OnReason_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
                         OnReason_PreSetter(this, __e);
@@ -96,7 +96,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("Reason", __oldValue, __newValue);
                     _Reason = __newValue;
                     NotifyPropertyChanged("Reason", __oldValue, __newValue);
-                    if(OnReason_PostSetter != null)
+                    if(OnReason_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
                         OnReason_PostSetter(this, __e);

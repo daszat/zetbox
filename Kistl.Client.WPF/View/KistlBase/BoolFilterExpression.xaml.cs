@@ -19,16 +19,17 @@ namespace Kistl.Client.WPF.View.KistlBase
     /// <summary>
     /// Interaction logic for BoolFilterExpression.xaml
     /// </summary>
-    public partial class BoolFilterExpression : UserControl, IHasViewModel<ValueTypeUIFilterExpressionViewModel<bool>>
+    [ViewDescriptor("GUI", Kistl.App.GUI.Toolkit.WPF, Kind = "Kistl.App.GUI.SimpleBoolFilterKind")]
+    public partial class BoolFilterExpression : UserControl, IHasViewModel<IValueTypeFilterViewModel<bool>>
     {
         public BoolFilterExpression()
         {
             InitializeComponent();
         }
 
-        public ValueTypeUIFilterExpressionViewModel<bool> ViewModel
+        public IValueTypeFilterViewModel<bool> ViewModel
         {
-            get { return (ValueTypeUIFilterExpressionViewModel<bool>)DataContext; }
+            get { return (IValueTypeFilterViewModel<bool>)DataContext; }
         }
     }
 }

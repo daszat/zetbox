@@ -147,7 +147,7 @@ namespace Kistl.App.Base
                 {
                     var __oldValue = _ExportGuid;
                     var __newValue = value;
-                    if(OnExportGuid_PreSetter != null)
+                    if(OnExportGuid_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<Guid>(__oldValue, __newValue);
                         OnExportGuid_PreSetter(this, __e);
@@ -156,7 +156,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     _ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
-                    if(OnExportGuid_PostSetter != null)
+                    if(OnExportGuid_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<Guid>(__oldValue, __newValue);
                         OnExportGuid_PostSetter(this, __e);
@@ -339,7 +339,7 @@ namespace Kistl.App.Base
                 {
                     var __oldValue = _Name;
                     var __newValue = value;
-                    if(OnName_PreSetter != null)
+                    if(OnName_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
                         OnName_PreSetter(this, __e);
@@ -348,7 +348,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("Name", __oldValue, __newValue);
                     _Name = __newValue;
                     NotifyPropertyChanged("Name", __oldValue, __newValue);
-                    if(OnName_PostSetter != null)
+                    if(OnName_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
                         OnName_PostSetter(this, __e);

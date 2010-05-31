@@ -269,7 +269,7 @@ namespace Kistl.App.Base
                 {
                     var __oldValue = _ChangedOn;
                     var __newValue = value;
-                    if(OnChangedOn_PreSetter != null)
+                    if(OnChangedOn_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<DateTime?>(__oldValue, __newValue);
                         OnChangedOn_PreSetter(this, __e);
@@ -278,7 +278,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("ChangedOn", __oldValue, __newValue);
                     _ChangedOn = __newValue;
                     NotifyPropertyChanged("ChangedOn", __oldValue, __newValue);
-                    if(OnChangedOn_PostSetter != null)
+                    if(OnChangedOn_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<DateTime?>(__oldValue, __newValue);
                         OnChangedOn_PostSetter(this, __e);
@@ -412,7 +412,7 @@ namespace Kistl.App.Base
                 {
                     var __oldValue = _CreatedOn;
                     var __newValue = value;
-                    if(OnCreatedOn_PreSetter != null)
+                    if(OnCreatedOn_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<DateTime?>(__oldValue, __newValue);
                         OnCreatedOn_PreSetter(this, __e);
@@ -421,7 +421,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("CreatedOn", __oldValue, __newValue);
                     _CreatedOn = __newValue;
                     NotifyPropertyChanged("CreatedOn", __oldValue, __newValue);
-                    if(OnCreatedOn_PostSetter != null)
+                    if(OnCreatedOn_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<DateTime?>(__oldValue, __newValue);
                         OnCreatedOn_PostSetter(this, __e);
@@ -464,7 +464,7 @@ namespace Kistl.App.Base
                 {
                     var __oldValue = _Deleted;
                     var __newValue = value;
-                    if(OnDeleted_PreSetter != null)
+                    if(OnDeleted_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<bool?>(__oldValue, __newValue);
                         OnDeleted_PreSetter(this, __e);
@@ -473,7 +473,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("Deleted", __oldValue, __newValue);
                     _Deleted = __newValue;
                     NotifyPropertyChanged("Deleted", __oldValue, __newValue);
-                    if(OnDeleted_PostSetter != null)
+                    if(OnDeleted_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<bool?>(__oldValue, __newValue);
                         OnDeleted_PostSetter(this, __e);
@@ -527,7 +527,7 @@ namespace Kistl.App.Base
                 {
                     var __oldValue = _ExportGuid;
                     var __newValue = value;
-                    if(OnExportGuid_PreSetter != null)
+                    if(OnExportGuid_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<Guid>(__oldValue, __newValue);
                         OnExportGuid_PreSetter(this, __e);
@@ -536,7 +536,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     _ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
-                    if(OnExportGuid_PostSetter != null)
+                    if(OnExportGuid_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<Guid>(__oldValue, __newValue);
                         OnExportGuid_PostSetter(this, __e);
@@ -579,7 +579,7 @@ namespace Kistl.App.Base
                 {
                     var __oldValue = _FullName;
                     var __newValue = value;
-                    if(OnFullName_PreSetter != null)
+                    if(OnFullName_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
                         OnFullName_PreSetter(this, __e);
@@ -588,7 +588,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("FullName", __oldValue, __newValue);
                     _FullName = __newValue;
                     NotifyPropertyChanged("FullName", __oldValue, __newValue);
-                    if(OnFullName_PostSetter != null)
+                    if(OnFullName_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
                         OnFullName_PostSetter(this, __e);
@@ -743,6 +743,58 @@ namespace Kistl.App.Base
 		public static event PropertyPostSetterHandler<Kistl.App.Base.TypeRef, Kistl.App.Base.TypeRef> OnParent_PostSetter;
 
         /// <summary>
+        /// 
+        /// </summary>
+        // value type property
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+           // Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.NotifyingDataProperty
+        public virtual string ToStringCache
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _ToStringCache;
+                if (OnToStringCache_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<string>(__result);
+                    OnToStringCache_Getter(this, __e);
+                    __result = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_ToStringCache != value)
+                {
+                    var __oldValue = _ToStringCache;
+                    var __newValue = value;
+                    if(OnToStringCache_PreSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
+                        OnToStringCache_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("ToStringCache", __oldValue, __newValue);
+                    _ToStringCache = __newValue;
+                    NotifyPropertyChanged("ToStringCache", __oldValue, __newValue);
+                    if(OnToStringCache_PostSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
+                        OnToStringCache_PostSetter(this, __e);
+                    }
+                }
+            }
+        }
+        private string _ToStringCache;
+		public static event PropertyGetterHandler<Kistl.App.Base.TypeRef, string> OnToStringCache_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.TypeRef, string> OnToStringCache_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.TypeRef, string> OnToStringCache_PostSetter;
+
+        /// <summary>
         /// get the referenced <see cref="System.Type"/>
         /// </summary>
 		[EventBasedMethod("OnAsType_TypeRef")]
@@ -785,6 +837,27 @@ namespace Kistl.App.Base
 
 
 
+        /// <summary>
+        /// 
+        /// </summary>
+		[EventBasedMethod("OnUpdateToStringCache_TypeRef")]
+		public virtual void UpdateToStringCache() 
+		{
+            // base.UpdateToStringCache();
+            if (OnUpdateToStringCache_TypeRef != null)
+            {
+				OnUpdateToStringCache_TypeRef(this);
+			}
+			else
+			{
+                throw new NotImplementedException("No handler registered on TypeRef.UpdateToStringCache");
+			}
+        }
+		public delegate void UpdateToStringCache_Handler<T>(T obj);
+		public static event UpdateToStringCache_Handler<TypeRef> OnUpdateToStringCache_TypeRef;
+
+
+
 		public override Type GetImplementedInterface()
 		{
 			return typeof(TypeRef);
@@ -802,6 +875,7 @@ namespace Kistl.App.Base
 			me.Deleted = other.Deleted;
 			me.ExportGuid = other.ExportGuid;
 			me.FullName = other.FullName;
+			me.ToStringCache = other.ToStringCache;
 			this._fk_Assembly = otherImpl._fk_Assembly;
 			this._fk_ChangedBy = otherImpl._fk_ChangedBy;
 			this._fk_CreatedBy = otherImpl._fk_CreatedBy;
@@ -929,6 +1003,13 @@ namespace Kistl.App.Base
 				null,
 				obj => obj.Parent,
 				(obj, val) => obj.Parent = val),
+			// else
+			new CustomPropertyDescriptor<TypeRef__Implementation__, string>(
+				new Guid("7887ad1c-654c-46fb-b7eb-bde9de04184a"),
+				"ToStringCache",
+				null,
+				obj => obj.ToStringCache,
+				(obj, val) => obj.ToStringCache = val),
 			// rel: ClrObjectParameter isOf Type (4c7e0ac7-eb8a-4304-85e7-fcc358cb639c)
 			// rel: ConstraintInvocation has TypeRef (ed423e87-e04d-4753-ba99-c186a7a12242)
 			// rel: MethodInvocation has Implementor (dc9013af-8758-40b4-8f52-c2c8683a13e0)
@@ -1016,6 +1097,7 @@ namespace Kistl.App.Base
 				}
 			}
             BinarySerializer.ToStream(Parent != null ? Parent.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(this._ToStringCache, binStream);
         }
 
         public override void FromStream(System.IO.BinaryReader binStream)
@@ -1036,6 +1118,7 @@ namespace Kistl.App.Base
 
 			BinarySerializer.FromStream(out GenericArguments__Implementation___was_eagerLoaded, binStream);
             BinarySerializer.FromStream(out this._fk_Parent, binStream);
+            BinarySerializer.FromStream(out this._ToStringCache, binStream);
         }
 
         public override void ToStream(System.Xml.XmlWriter xml)
@@ -1054,6 +1137,7 @@ namespace Kistl.App.Base
             }
             XmlStreamer.ToStream(this._FullName, xml, "FullName", "Kistl.App.Base");
             XmlStreamer.ToStream(Parent != null ? Parent.ID : (int?)null, xml, "Parent", "Kistl.App.Base");
+            XmlStreamer.ToStream(this._ToStringCache, xml, "ToStringCache", "Kistl.App.Base");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
@@ -1072,6 +1156,7 @@ namespace Kistl.App.Base
             }
             XmlStreamer.FromStream(ref this._FullName, xml, "FullName", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_Parent, xml, "Parent", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._ToStringCache, xml, "ToStringCache", "Kistl.App.Base");
         }
 
         public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
@@ -1088,6 +1173,8 @@ namespace Kistl.App.Base
     
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._FullName, xml, "FullName", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(Parent != null ? Parent.ExportGuid : (Guid?)null, xml, "Parent", "Kistl.App.Base");
+    
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._ToStringCache, xml, "ToStringCache", "Kistl.App.Base");
         }
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
@@ -1100,6 +1187,7 @@ namespace Kistl.App.Base
             this._isExportGuidSet = true;
             XmlStreamer.FromStream(ref this._FullName, xml, "FullName", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_guid_Parent, xml, "Parent", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._ToStringCache, xml, "ToStringCache", "Kistl.App.Base");
         }
 
 #endregion

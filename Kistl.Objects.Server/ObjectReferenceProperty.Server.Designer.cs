@@ -62,7 +62,7 @@ namespace Kistl.App.Base
                 {
                     var __oldValue = _EagerLoading;
                     var __newValue = value;
-                    if(OnEagerLoading_PreSetter != null)
+                    if(OnEagerLoading_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<bool>(__oldValue, __newValue);
                         OnEagerLoading_PreSetter(this, __e);
@@ -71,7 +71,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("EagerLoading", __oldValue, __newValue);
                     _EagerLoading = __newValue;
                     NotifyPropertyChanged("EagerLoading", __oldValue, __newValue);
-                    if(OnEagerLoading_PostSetter != null)
+                    if(OnEagerLoading_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<bool>(__oldValue, __newValue);
                         OnEagerLoading_PostSetter(this, __e);

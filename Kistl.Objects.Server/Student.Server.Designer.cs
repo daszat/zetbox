@@ -136,7 +136,7 @@ namespace at.dasz.CourseOrganiser
                 {
                     var __oldValue = _MatriculationNumber;
                     var __newValue = value;
-                    if(OnMatriculationNumber_PreSetter != null)
+                    if(OnMatriculationNumber_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
                         OnMatriculationNumber_PreSetter(this, __e);
@@ -145,7 +145,7 @@ namespace at.dasz.CourseOrganiser
                     NotifyPropertyChanging("MatriculationNumber", __oldValue, __newValue);
                     _MatriculationNumber = __newValue;
                     NotifyPropertyChanged("MatriculationNumber", __oldValue, __newValue);
-                    if(OnMatriculationNumber_PostSetter != null)
+                    if(OnMatriculationNumber_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
                         OnMatriculationNumber_PostSetter(this, __e);
@@ -188,7 +188,7 @@ namespace at.dasz.CourseOrganiser
                 {
                     var __oldValue = _Name;
                     var __newValue = value;
-                    if(OnName_PreSetter != null)
+                    if(OnName_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
                         OnName_PreSetter(this, __e);
@@ -197,7 +197,7 @@ namespace at.dasz.CourseOrganiser
                     NotifyPropertyChanging("Name", __oldValue, __newValue);
                     _Name = __newValue;
                     NotifyPropertyChanged("Name", __oldValue, __newValue);
-                    if(OnName_PostSetter != null)
+                    if(OnName_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
                         OnName_PostSetter(this, __e);

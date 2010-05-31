@@ -62,7 +62,7 @@ namespace Kistl.App.Base
                 {
                     var __oldValue = _AreFlags;
                     var __newValue = value;
-                    if(OnAreFlags_PreSetter != null)
+                    if(OnAreFlags_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<bool>(__oldValue, __newValue);
                         OnAreFlags_PreSetter(this, __e);
@@ -71,7 +71,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("AreFlags", __oldValue, __newValue);
                     _AreFlags = __newValue;
                     NotifyPropertyChanged("AreFlags", __oldValue, __newValue);
-                    if(OnAreFlags_PostSetter != null)
+                    if(OnAreFlags_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<bool>(__oldValue, __newValue);
                         OnAreFlags_PostSetter(this, __e);

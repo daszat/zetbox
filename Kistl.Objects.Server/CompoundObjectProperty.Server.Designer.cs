@@ -153,7 +153,7 @@ namespace Kistl.App.Base
                 {
                     var __oldValue = _HasPersistentOrder;
                     var __newValue = value;
-                    if(OnHasPersistentOrder_PreSetter != null)
+                    if(OnHasPersistentOrder_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<bool>(__oldValue, __newValue);
                         OnHasPersistentOrder_PreSetter(this, __e);
@@ -162,7 +162,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("HasPersistentOrder", __oldValue, __newValue);
                     _HasPersistentOrder = __newValue;
                     NotifyPropertyChanged("HasPersistentOrder", __oldValue, __newValue);
-                    if(OnHasPersistentOrder_PostSetter != null)
+                    if(OnHasPersistentOrder_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<bool>(__oldValue, __newValue);
                         OnHasPersistentOrder_PostSetter(this, __e);
@@ -205,7 +205,7 @@ namespace Kistl.App.Base
                 {
                     var __oldValue = _IsList;
                     var __newValue = value;
-                    if(OnIsList_PreSetter != null)
+                    if(OnIsList_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<bool>(__oldValue, __newValue);
                         OnIsList_PreSetter(this, __e);
@@ -214,7 +214,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("IsList", __oldValue, __newValue);
                     _IsList = __newValue;
                     NotifyPropertyChanged("IsList", __oldValue, __newValue);
-                    if(OnIsList_PostSetter != null)
+                    if(OnIsList_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<bool>(__oldValue, __newValue);
                         OnIsList_PostSetter(this, __e);

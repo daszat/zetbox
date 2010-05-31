@@ -91,7 +91,7 @@ namespace Kistl.App.Test
                 {
                     var __oldValue = _Birthday;
                     var __newValue = value;
-                    if(OnBirthday_PreSetter != null)
+                    if(OnBirthday_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<DateTime?>(__oldValue, __newValue);
                         OnBirthday_PreSetter(this, __e);
@@ -100,7 +100,7 @@ namespace Kistl.App.Test
                     NotifyPropertyChanging("Birthday", __oldValue, __newValue);
                     _Birthday = __newValue;
                     NotifyPropertyChanged("Birthday", __oldValue, __newValue);
-                    if(OnBirthday_PostSetter != null)
+                    if(OnBirthday_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<DateTime?>(__oldValue, __newValue);
                         OnBirthday_PostSetter(this, __e);
@@ -423,7 +423,7 @@ namespace Kistl.App.Test
                 {
                     var __oldValue = _PersonName;
                     var __newValue = value;
-                    if(OnPersonName_PreSetter != null)
+                    if(OnPersonName_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
                         OnPersonName_PreSetter(this, __e);
@@ -432,7 +432,7 @@ namespace Kistl.App.Test
                     NotifyPropertyChanging("PersonName", __oldValue, __newValue);
                     _PersonName = __newValue;
                     NotifyPropertyChanged("PersonName", __oldValue, __newValue);
-                    if(OnPersonName_PostSetter != null)
+                    if(OnPersonName_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
                         OnPersonName_PostSetter(this, __e);

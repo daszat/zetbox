@@ -167,6 +167,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\KistlBase\SimpleDropdownFilterExpression.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\KistlBase\StringFilterExpression.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -337,6 +341,9 @@
       <DependentUpon>PropertyGroupBoxView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\KistlBase\PropertyEditor.cs" />
+    <Compile Include="View\KistlBase\SimpleDropdownFilterExpression.xaml.cs">
+      <DependentUpon>SimpleDropdownFilterExpression.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\KistlBase\StringFilterExpression.xaml.cs">
       <DependentUpon>StringFilterExpression.xaml</DependentUpon>
     </Compile>

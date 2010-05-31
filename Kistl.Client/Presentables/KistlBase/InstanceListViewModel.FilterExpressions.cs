@@ -4,20 +4,23 @@ using System.Linq;
 using System.Text;
 using Kistl.API;
 using System.Collections.ObjectModel;
+using Kistl.App.Base;
+using Kistl.App.GUI;
+using System.Data;
+using System.Collections;
 
 namespace Kistl.Client.Presentables.KistlBase
 {
+    #region Interfaces
     public interface IFilterExpression
     {
-        string Predicate { get; }
-        object[] FilterValues { get; }
         bool Enabled { get; }
     }
 
-    public interface IUIFilterExpression : IFilterExpression
+    public interface ILinqFilterExpression : IFilterExpression
     {
-        string Label { get; }
-        event EventHandler FilterChanged;
+        string Predicate { get; }
+        object[] FilterValues { get; }
     }
 
     public interface IPostFilterExpression : IFilterExpression
@@ -25,29 +28,32 @@ namespace Kistl.Client.Presentables.KistlBase
         ReadOnlyObservableCollection<DataObjectModel> Execute(IEnumerable<DataObjectModel> instances);
     }
 
-    public class ConstantFilterExpression : IFilterExpression
+    public interface IUIFilterExpression
     {
-        public ConstantFilterExpression(string filter, params object[] values)
-        {
-            this.Predicate = filter;
-            this.FilterValues = values;
-        }
-
-        public string Predicate
-        {
-            get;
-            private set;
-        }
-
-        public object[] FilterValues
-        {
-            get;
-            private set;
-        }
-
-        public bool Enabled { get { return true; } }
+        string Label { get; }
+        event EventHandler FilterChanged;
     }
 
+    public interface IValueTypeFilterViewModel<TValue> : IUIFilterExpression
+        where TValue : struct
+    {
+        Nullable<TValue> Value { get; set; }
+    }
+
+    public interface IReferenceTypeFilterViewModel<TValue> : IUIFilterExpression
+        where TValue : class
+    {
+        TValue Value { get; set; }
+    }
+
+    public interface IListTypeFilterViewModel : IUIFilterExpression
+    {
+        object Value { get; set; }
+        IEnumerable PossibleValues { get; }
+    }
+    #endregion
+
+    #region BaseFilterExpressions
     public abstract class UIFilterExpressionViewModel<TValue> : ViewModel, IUIFilterExpression
     {
         public UIFilterExpressionViewModel(
@@ -70,18 +76,6 @@ namespace Kistl.Client.Presentables.KistlBase
             }
         }
 
-        public virtual string Predicate
-        {
-            get;
-            protected set;
-        }
-
-        public virtual object[] FilterValues
-        {
-            get;
-            protected set;
-        }
-
         public string Label
         {
             get;
@@ -99,14 +93,14 @@ namespace Kistl.Client.Presentables.KistlBase
             private set;
         }
 
-        public virtual bool Enabled { get { return true; } }
+        public abstract bool Enabled { get; }
 
         public string ToolTip { get; set; }
 
         public bool AllowNullInput { get; set; }
     }
 
-    public abstract class ValueTypeUIFilterExpressionViewModel<TValue> : UIFilterExpressionViewModel<TValue>
+    public abstract class ValueTypeUIFilterExpressionViewModel<TValue> : UIFilterExpressionViewModel<TValue>, IValueTypeFilterViewModel<TValue>, IReferenceTypeFilterViewModel<string>
         where TValue : struct
     {
         public ValueTypeUIFilterExpressionViewModel(
@@ -141,9 +135,23 @@ namespace Kistl.Client.Presentables.KistlBase
                 OnFilterChanged();
             }
         }
+
+        #region IReferenceTypeFilterViewModel<string> Members
+        string IReferenceTypeFilterViewModel<string>.Value
+        {
+            get
+            {
+                return Value != null ? Value.ToString() : String.Empty;
+            }
+            set
+            {
+                this.Value = String.IsNullOrEmpty(value) ? null : (Nullable<TValue>)System.Convert.ChangeType(value, typeof(TValue));
+            }
+        }
+        #endregion
     }
 
-    public abstract class ReferenceTypeUIFilterExpressionViewModel<TValue> : UIFilterExpressionViewModel<TValue>
+    public abstract class ReferenceTypeUIFilterExpressionViewModel<TValue> : UIFilterExpressionViewModel<TValue>, IReferenceTypeFilterViewModel<TValue>
         where TValue : class
     {
         public ReferenceTypeUIFilterExpressionViewModel(
@@ -179,8 +187,35 @@ namespace Kistl.Client.Presentables.KistlBase
             }
         }
     }
+    #endregion
 
-    public class EnableFilterExpression : ValueTypeUIFilterExpressionViewModel<bool>
+    #region CodeOnly Filter Expressions
+    // No ViewModelDescriptor - code only filter
+    public class ConstantFilterExpression : ILinqFilterExpression
+    {
+        public ConstantFilterExpression(string filter, params object[] values)
+        {
+            this.Predicate = filter;
+            this.FilterValues = values;
+        }
+
+        public string Predicate
+        {
+            get;
+            private set;
+        }
+
+        public object[] FilterValues
+        {
+            get;
+            private set;
+        }
+
+        public bool Enabled { get { return true; } }
+    }
+
+    [ViewModelDescriptor("GUI", DefaultKind = "Kistl.App.GUI.SimpleBoolFilterKind", Description = "Filter expressions for switchable Filter")]
+    public class EnableFilterExpression : ValueTypeUIFilterExpressionViewModel<bool>, ILinqFilterExpression
     {
         public new delegate EnableFilterExpression Factory(IKistlContext dataCtx, string label, string filter, params object[] values);
 
@@ -196,6 +231,7 @@ namespace Kistl.Client.Presentables.KistlBase
             AllowNullInput = false;
         }
 
+
         public override bool Enabled
         {
             get
@@ -203,20 +239,32 @@ namespace Kistl.Client.Presentables.KistlBase
                 return Values.Count > 0 && Values[0];
             }
         }
+
+        #region ILinqFilterExpression Members
+        public string Predicate
+        {
+            get;
+            private set;
+        }
+        public object[] FilterValues
+        {
+            get;
+            private set;
+        }
+        #endregion
     }
 
-    public class NameFilterExpression : ReferenceTypeUIFilterExpressionViewModel<string>, IPostFilterExpression
+    [ViewModelDescriptor("GUI", DefaultKind = "Kistl.App.GUI.StringFilterKind", Description = "Filter expression for searching in ViewModel names")]
+    public class ToStringFilterExpression : ReferenceTypeUIFilterExpressionViewModel<string>, IPostFilterExpression
     {
-        public new delegate NameFilterExpression Factory(IKistlContext dataCtx, string label, string filter, params object[] values);
+        public new delegate ToStringFilterExpression Factory(IKistlContext dataCtx, string label);
 
-        public NameFilterExpression(
+        public ToStringFilterExpression(
             IViewModelDependencies appCtx, IKistlContext dataCtx,
-            string label, string filter, params object[] values)
+            string label)
             : base(appCtx, dataCtx, label)
         {
             this.Label = label;
-            this.Predicate = filter;
-            this.FilterValues = values;
             AllowNullInput = false;
         }
 
@@ -241,4 +289,146 @@ namespace Kistl.Client.Presentables.KistlBase
 
         #endregion
     }
+    #endregion
+
+    #region PropertyFilterExpression
+
+    public sealed class PropertyFilterExpression
+    {
+        public delegate IFilterExpression Factory(IKistlContext dataCtx, Property prop, FilterConfiguration filterCfg);
+    }
+
+    public class ValueTypePropertyFilterExpressionViewModel<TValue> : ValueTypeUIFilterExpressionViewModel<TValue>, ILinqFilterExpression
+        where TValue : struct
+    {
+        public new delegate ValueTypePropertyFilterExpressionViewModel<TValue> Factory(IKistlContext dataCtx, Property prop, FilterConfiguration filterCfg);
+
+        public ValueTypePropertyFilterExpressionViewModel(IViewModelDependencies appCtx, IKistlContext dataCtx, Property prop, FilterConfiguration filterCfg)
+            : base(appCtx, dataCtx, "")
+        {
+            if (prop == null) throw new ArgumentNullException("prop");
+            this.Property = prop;
+            this.Configuration = filterCfg;
+            base.Label = prop.Name;
+            this.Predicate = string.Format("{0} = @0", prop.Name);
+        }
+
+        protected Property Property { get; private set; }
+        protected FilterConfiguration Configuration { get; private set; }
+
+        public override bool Enabled
+        {
+            get
+            {
+                return base.Values.Count > 0;
+            }
+        }
+
+        public string Predicate
+        {
+            get;
+            private set;
+        }
+
+        public object[] FilterValues
+        {
+            get { return base.Values.Cast<object>().ToArray(); }
+        }
+    }
+
+    public abstract class ReferencePropertyFilterExpressionViewModel<TValue> : ReferenceTypeUIFilterExpressionViewModel<TValue>, ILinqFilterExpression
+        where TValue : class
+    {
+        public ReferencePropertyFilterExpressionViewModel(IViewModelDependencies appCtx, IKistlContext dataCtx, Property prop, FilterConfiguration filterCfg)
+            : base(appCtx, dataCtx, "")
+        {
+            if (prop == null) throw new ArgumentNullException("prop");
+            this.Property = prop;
+            this.Configuration = filterCfg;
+            base.Label = prop.Name;
+            this.Predicate = string.Format("{0} = @0", prop.Name);
+        }
+
+        protected Property Property { get; private set; }
+        protected FilterConfiguration Configuration { get; private set; }
+
+        public override bool Enabled
+        {
+            get
+            {
+                return base.Values.Count > 0;
+            }
+        }
+
+        public string Predicate
+        {
+            get;
+            private set;
+        }
+
+        public object[] FilterValues
+        {
+            get { return base.Values.Cast<object>().ToArray(); }
+        }
+    }
+
+    [ViewModelDescriptor("GUI", DefaultKind = "Kistl.App.GUI.StringFilterKind", Description = "Filter expression for String Properties")]
+    public class StringPropertyFilterExpressionViewModel : ReferencePropertyFilterExpressionViewModel<string>
+    {
+        public new delegate StringPropertyFilterExpressionViewModel Factory(IKistlContext dataCtx, Property prop, FilterConfiguration filterCfg);
+
+        public StringPropertyFilterExpressionViewModel(IViewModelDependencies appCtx, IKistlContext dataCtx, Property prop, FilterConfiguration filterCfg)
+            : base(appCtx, dataCtx, prop, filterCfg)
+        {
+        }
+    }
+
+    [ViewModelDescriptor("GUI", DefaultKind = "Kistl.App.GUI.SimpleDropdownFilterKind", Description = "Filter expression for ObjectReference Properties")]
+    public class ObjectReferencePropertyFilterExpressionViewModel : ReferencePropertyFilterExpressionViewModel<DataObjectModel>, IListTypeFilterViewModel
+    {
+        public new delegate ObjectReferencePropertyFilterExpressionViewModel Factory(IKistlContext dataCtx, Property prop, FilterConfiguration filterCfg);
+
+        public ObjectReferencePropertyFilterExpressionViewModel(IViewModelDependencies appCtx, IKistlContext dataCtx, Property prop, FilterConfiguration filterCfg)
+            : base(appCtx, dataCtx, prop, filterCfg)
+        {
+        }
+
+        #region IListTypeFilterViewModel Members
+
+        object IListTypeFilterViewModel.Value
+        {
+            get
+            {
+                return base.Value;
+            }
+            set
+            {
+                base.Value = (DataObjectModel)value;
+            }
+        }
+
+        List<DataObjectModel> _PossibleValues = null;
+
+        public IEnumerable PossibleValues
+        {
+            get
+            {
+                if (_PossibleValues == null)
+                {
+                    _PossibleValues = new List<DataObjectModel>();
+                    foreach (var obj in DataContext
+                        .GetQuery(DataContext.GetInterfaceType(Property.GetPropertyType()))
+                        .ToList() // TODO: remove this
+                        .OrderBy(obj => obj.ToString()).ToList())
+                    {
+                        _PossibleValues.Add(ModelFactory.CreateViewModel<DataObjectModel.Factory>(obj).Invoke(DataContext, obj));
+                    }
+                }
+                return _PossibleValues;
+            }
+        }
+
+        #endregion
+    }
+    #endregion
 }

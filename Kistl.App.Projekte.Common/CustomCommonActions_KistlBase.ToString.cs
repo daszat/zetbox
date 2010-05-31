@@ -201,14 +201,9 @@ namespace Kistl.App.Base
 
         public static void OnToString_TypeRef(TypeRef obj, MethodReturnEventArgs<string> e)
         {
-            e.Result = String.Format("{0}{1}{2}, {3}",
+            e.Result = String.Format("{0}{1}",
                 obj.Deleted == true ? "(DELETED) " : string.Empty,
-                obj.FullName,
-                "<?>", // TODO:
-                //obj.GenericArguments.Count > 0
-                //    ? "<" + String.Join(", ", obj.GenericArguments.Select(tr => tr.ToString()).ToArray()) + ">"
-                //    : String.Empty,
-                obj.Assembly);
+                obj.ToStringCache);
 
             FixupFloatingObjectsToString(obj, e);
         }

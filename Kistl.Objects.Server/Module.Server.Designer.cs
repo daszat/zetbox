@@ -227,7 +227,7 @@ namespace Kistl.App.Base
                 {
                     var __oldValue = _ChangedOn;
                     var __newValue = value;
-                    if(OnChangedOn_PreSetter != null)
+                    if(OnChangedOn_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<DateTime?>(__oldValue, __newValue);
                         OnChangedOn_PreSetter(this, __e);
@@ -236,7 +236,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("ChangedOn", __oldValue, __newValue);
                     _ChangedOn = __newValue;
                     NotifyPropertyChanged("ChangedOn", __oldValue, __newValue);
-                    if(OnChangedOn_PostSetter != null)
+                    if(OnChangedOn_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<DateTime?>(__oldValue, __newValue);
                         OnChangedOn_PostSetter(this, __e);
@@ -370,7 +370,7 @@ namespace Kistl.App.Base
                 {
                     var __oldValue = _CreatedOn;
                     var __newValue = value;
-                    if(OnCreatedOn_PreSetter != null)
+                    if(OnCreatedOn_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<DateTime?>(__oldValue, __newValue);
                         OnCreatedOn_PreSetter(this, __e);
@@ -379,7 +379,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("CreatedOn", __oldValue, __newValue);
                     _CreatedOn = __newValue;
                     NotifyPropertyChanged("CreatedOn", __oldValue, __newValue);
-                    if(OnCreatedOn_PostSetter != null)
+                    if(OnCreatedOn_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<DateTime?>(__oldValue, __newValue);
                         OnCreatedOn_PostSetter(this, __e);
@@ -471,7 +471,7 @@ namespace Kistl.App.Base
                 {
                     var __oldValue = _Description;
                     var __newValue = value;
-                    if(OnDescription_PreSetter != null)
+                    if(OnDescription_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
                         OnDescription_PreSetter(this, __e);
@@ -480,7 +480,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("Description", __oldValue, __newValue);
                     _Description = __newValue;
                     NotifyPropertyChanged("Description", __oldValue, __newValue);
-                    if(OnDescription_PostSetter != null)
+                    if(OnDescription_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
                         OnDescription_PostSetter(this, __e);
@@ -534,7 +534,7 @@ namespace Kistl.App.Base
                 {
                     var __oldValue = _ExportGuid;
                     var __newValue = value;
-                    if(OnExportGuid_PreSetter != null)
+                    if(OnExportGuid_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<Guid>(__oldValue, __newValue);
                         OnExportGuid_PreSetter(this, __e);
@@ -543,7 +543,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     _ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
-                    if(OnExportGuid_PostSetter != null)
+                    if(OnExportGuid_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<Guid>(__oldValue, __newValue);
                         OnExportGuid_PostSetter(this, __e);
@@ -586,7 +586,7 @@ namespace Kistl.App.Base
                 {
                     var __oldValue = _Name;
                     var __newValue = value;
-                    if(OnName_PreSetter != null)
+                    if(OnName_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
                         OnName_PreSetter(this, __e);
@@ -595,7 +595,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("Name", __oldValue, __newValue);
                     _Name = __newValue;
                     NotifyPropertyChanged("Name", __oldValue, __newValue);
-                    if(OnName_PostSetter != null)
+                    if(OnName_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
                         OnName_PostSetter(this, __e);
@@ -638,7 +638,7 @@ namespace Kistl.App.Base
                 {
                     var __oldValue = _Namespace;
                     var __newValue = value;
-                    if(OnNamespace_PreSetter != null)
+                    if(OnNamespace_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
                         OnNamespace_PreSetter(this, __e);
@@ -647,7 +647,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("Namespace", __oldValue, __newValue);
                     _Namespace = __newValue;
                     NotifyPropertyChanged("Namespace", __oldValue, __newValue);
-                    if(OnNamespace_PostSetter != null)
+                    if(OnNamespace_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
                         OnNamespace_PostSetter(this, __e);
@@ -805,6 +805,7 @@ namespace Kistl.App.Base
 				(obj, val) => obj.Namespace = val),
 			// rel: AccessControl has Module (89b9c0a5-3b5a-4e04-83cf-0e8de37abcf1)
 			// rel: ControlKind has Module (6d5e026a-2605-4630-88ed-9da0b0e14c95)
+			// rel: FilterConfiguration has Module (a4f7a1d1-bedb-4708-96ff-cd5033c6c03e)
 			// rel: Group has Module (8d76b5ef-a7ae-4d4b-a92e-747fe972acfb)
 			// rel: Icon has Module (a1360ce2-ecd5-4660-9b4d-3a2dc3919344)
 			// rel: Method has Module (b251ee8c-2821-441e-b631-d215c006f1c8)

@@ -34,9 +34,10 @@ namespace Kistl.App.GUI
 
         public static void OnToString_ViewModelDescriptor(ViewModelDescriptor obj, MethodReturnEventArgs<string> e)
         {
-            e.Result = String.Format("{0} (default: {1})",
-                obj.ViewModelRef == null ? "(no type)" : obj.ViewModelRef.ToString(),
-                obj.DefaultKind);
+            e.Result = String.Format("{0} (default: {1}) [{2}]",
+                obj.Description,
+                obj.DefaultKind,
+                obj.ViewModelRef == null ? "(no type)" : obj.ViewModelRef.ToString());
         }
 
 

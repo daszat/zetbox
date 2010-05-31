@@ -269,7 +269,7 @@ namespace Kistl.App.GUI
                 {
                     var __oldValue = _Description;
                     var __newValue = value;
-                    if(OnDescription_PreSetter != null)
+                    if(OnDescription_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
                         OnDescription_PreSetter(this, __e);
@@ -278,7 +278,7 @@ namespace Kistl.App.GUI
                     NotifyPropertyChanging("Description", __oldValue, __newValue);
                     _Description = __newValue;
                     NotifyPropertyChanged("Description", __oldValue, __newValue);
-                    if(OnDescription_PostSetter != null)
+                    if(OnDescription_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
                         OnDescription_PostSetter(this, __e);
@@ -332,7 +332,7 @@ namespace Kistl.App.GUI
                 {
                     var __oldValue = _ExportGuid;
                     var __newValue = value;
-                    if(OnExportGuid_PreSetter != null)
+                    if(OnExportGuid_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<Guid>(__oldValue, __newValue);
                         OnExportGuid_PreSetter(this, __e);
@@ -341,7 +341,7 @@ namespace Kistl.App.GUI
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     _ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
-                    if(OnExportGuid_PostSetter != null)
+                    if(OnExportGuid_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<Guid>(__oldValue, __newValue);
                         OnExportGuid_PostSetter(this, __e);
@@ -705,6 +705,7 @@ namespace Kistl.App.GUI
 				null,
 				obj => obj.ViewModelRef,
 				(obj, val) => obj.ViewModelRef = val),
+			// rel: FilterConfiguration has ViewModelDescriptor (2d856368-2ffc-42de-83ef-5389cc57308a)
 			// rel: Presentable has DefaultViewModelDescriptor (1ae94c81-3359-45e8-b97a-b61add91abba)
 			// rel: Property has ValueModelDescriptor (3437ea5d-d926-4a0b-a848-9dafedf7ad6a)
 			// rel: ViewModelDescriptor displayedInGridBy DefaultGridCellKind (0a03215f-1c1a-4a44-892d-86642eefe9f1)

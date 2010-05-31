@@ -87,7 +87,7 @@ namespace Kistl.App.Test
                 {
                     var __oldValue = _TestBool;
                     var __newValue = value;
-                    if(OnTestBool_PreSetter != null)
+                    if(OnTestBool_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<bool?>(__oldValue, __newValue);
                         OnTestBool_PreSetter(this, __e);
@@ -96,7 +96,7 @@ namespace Kistl.App.Test
                     NotifyPropertyChanging("TestBool", __oldValue, __newValue);
                     _TestBool = __newValue;
                     NotifyPropertyChanged("TestBool", __oldValue, __newValue);
-                    if(OnTestBool_PostSetter != null)
+                    if(OnTestBool_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<bool?>(__oldValue, __newValue);
                         OnTestBool_PostSetter(this, __e);
@@ -419,7 +419,7 @@ namespace Kistl.App.Test
                 {
                     var __oldValue = _TestDateTime;
                     var __newValue = value;
-                    if(OnTestDateTime_PreSetter != null)
+                    if(OnTestDateTime_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<DateTime?>(__oldValue, __newValue);
                         OnTestDateTime_PreSetter(this, __e);
@@ -428,7 +428,7 @@ namespace Kistl.App.Test
                     NotifyPropertyChanging("TestDateTime", __oldValue, __newValue);
                     _TestDateTime = __newValue;
                     NotifyPropertyChanged("TestDateTime", __oldValue, __newValue);
-                    if(OnTestDateTime_PostSetter != null)
+                    if(OnTestDateTime_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<DateTime?>(__oldValue, __newValue);
                         OnTestDateTime_PostSetter(this, __e);
@@ -539,7 +539,7 @@ namespace Kistl.App.Test
                 {
                     var __oldValue = _TestString;
                     var __newValue = value;
-                    if(OnTestString_PreSetter != null)
+                    if(OnTestString_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
                         OnTestString_PreSetter(this, __e);
@@ -548,7 +548,7 @@ namespace Kistl.App.Test
                     NotifyPropertyChanging("TestString", __oldValue, __newValue);
                     _TestString = __newValue;
                     NotifyPropertyChanged("TestString", __oldValue, __newValue);
-                    if(OnTestString_PostSetter != null)
+                    if(OnTestString_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
                         OnTestString_PostSetter(this, __e);

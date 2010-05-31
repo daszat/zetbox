@@ -43,11 +43,20 @@ namespace Kistl.Client.Presentables.KistlBase
             Func<IKistlContext> ctxFactory)
             : base(appCtx, dataCtx)
         {
+            if (dataCtx == null) throw new ArgumentNullException("dataCtx");
+            if (type == null) throw new ArgumentNullException("type");
             _type = type;
             this.ctxFactory = ctxFactory;
 
+            // Add Property filter expressions
+            foreach (var prop in type.Properties.Where(p => p.FilterConfiguration != null))
+            {
+                var cfg = prop.FilterConfiguration;
+                this.Filter.Add(ModelFactory.CreateViewModel<PropertyFilterExpression.Factory>(cfg.ViewModelDescriptor.ViewModelRef.AsType(true)).Invoke(DataContext, prop, cfg));
+            }
+
             // Add default filter for all
-            this.Filter.Add(ModelFactory.CreateViewModel<NameFilterExpression.Factory>().Invoke(dataCtx, "Name", null));
+            this.Filter.Add(ModelFactory.CreateViewModel<ToStringFilterExpression.Factory>().Invoke(dataCtx, "Name"));
 
             // Add default actions
             Commands.Add(ModelFactory.CreateViewModel<NewDataObjectCommand.Factory>().Invoke(dataCtx, _type));
@@ -245,7 +254,7 @@ namespace Kistl.Client.Presentables.KistlBase
 
             if (_filter != null)
             {
-                foreach (var f in _filter.Where(f => f.Enabled && !(f is IPostFilterExpression)))
+                foreach (var f in _filter.OfType<ILinqFilterExpression>().Where(f => f.Enabled))
                 {
                     result = result.Where(f.Predicate, f.FilterValues);
                 }

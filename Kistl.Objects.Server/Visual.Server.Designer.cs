@@ -185,7 +185,7 @@ namespace Kistl.App.GUI
                 {
                     var __oldValue = _Description;
                     var __newValue = value;
-                    if(OnDescription_PreSetter != null)
+                    if(OnDescription_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
                         OnDescription_PreSetter(this, __e);
@@ -194,7 +194,7 @@ namespace Kistl.App.GUI
                     NotifyPropertyChanging("Description", __oldValue, __newValue);
                     _Description = __newValue;
                     NotifyPropertyChanged("Description", __oldValue, __newValue);
-                    if(OnDescription_PostSetter != null)
+                    if(OnDescription_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
                         OnDescription_PostSetter(this, __e);

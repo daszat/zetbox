@@ -16,6 +16,7 @@ namespace Kistl.Server
     using Kistl.API.Utils;
     using Kistl.App.Extensions;
     using Kistl.App.GUI;
+    using Kistl.App.Base;
 
     /// <summary>
     /// Serversteuerung
@@ -219,7 +220,12 @@ namespace Kistl.Server
             using (var subContainer = container.BeginLifetimeScope())
             {
                 var ctx = subContainer.Resolve<IKistlServerContext>();
-                //Log.Info("Currently no fixes to do");
+                Log.Info("Currently no fixes to do");
+
+                //foreach (var tr in ctx.GetQuery<TypeRef>())
+                //{
+                //    tr.UpdateToStringCache();
+                //}
 
                 //foreach (var ck in ctx.GetQuery<ControlKind>())
                 //{

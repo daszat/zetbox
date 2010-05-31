@@ -87,7 +87,7 @@ namespace at.dasz.CourseOrganiser
                 {
                     var __oldValue = _Date;
                     var __newValue = value;
-                    if(OnDate_PreSetter != null)
+                    if(OnDate_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<DateTime?>(__oldValue, __newValue);
                         OnDate_PreSetter(this, __e);
@@ -96,7 +96,7 @@ namespace at.dasz.CourseOrganiser
                     NotifyPropertyChanging("Date", __oldValue, __newValue);
                     _Date = __newValue;
                     NotifyPropertyChanged("Date", __oldValue, __newValue);
-                    if(OnDate_PostSetter != null)
+                    if(OnDate_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<DateTime?>(__oldValue, __newValue);
                         OnDate_PostSetter(this, __e);
@@ -139,7 +139,7 @@ namespace at.dasz.CourseOrganiser
                 {
                     var __oldValue = _MaxScores;
                     var __newValue = value;
-                    if(OnMaxScores_PreSetter != null)
+                    if(OnMaxScores_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<int>(__oldValue, __newValue);
                         OnMaxScores_PreSetter(this, __e);
@@ -148,7 +148,7 @@ namespace at.dasz.CourseOrganiser
                     NotifyPropertyChanging("MaxScores", __oldValue, __newValue);
                     _MaxScores = __newValue;
                     NotifyPropertyChanged("MaxScores", __oldValue, __newValue);
-                    if(OnMaxScores_PostSetter != null)
+                    if(OnMaxScores_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<int>(__oldValue, __newValue);
                         OnMaxScores_PostSetter(this, __e);
@@ -191,7 +191,7 @@ namespace at.dasz.CourseOrganiser
                 {
                     var __oldValue = _Name;
                     var __newValue = value;
-                    if(OnName_PreSetter != null)
+                    if(OnName_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
                         OnName_PreSetter(this, __e);
@@ -200,7 +200,7 @@ namespace at.dasz.CourseOrganiser
                     NotifyPropertyChanging("Name", __oldValue, __newValue);
                     _Name = __newValue;
                     NotifyPropertyChanged("Name", __oldValue, __newValue);
-                    if(OnName_PostSetter != null)
+                    if(OnName_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
                         OnName_PostSetter(this, __e);

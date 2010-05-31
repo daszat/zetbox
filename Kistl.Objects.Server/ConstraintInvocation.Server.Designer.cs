@@ -98,7 +98,7 @@ namespace Kistl.App.Base
                 {
                     var __oldValue = _ExportGuid;
                     var __newValue = value;
-                    if(OnExportGuid_PreSetter != null)
+                    if(OnExportGuid_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<Guid>(__oldValue, __newValue);
                         OnExportGuid_PreSetter(this, __e);
@@ -107,7 +107,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
                     _ExportGuid = __newValue;
                     NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
-                    if(OnExportGuid_PostSetter != null)
+                    if(OnExportGuid_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<Guid>(__oldValue, __newValue);
                         OnExportGuid_PostSetter(this, __e);
@@ -241,7 +241,7 @@ namespace Kistl.App.Base
                 {
                     var __oldValue = _MemberName;
                     var __newValue = value;
-                    if(OnMemberName_PreSetter != null)
+                    if(OnMemberName_PreSetter != null && IsAttached)
                     {
                         var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
                         OnMemberName_PreSetter(this, __e);
@@ -250,7 +250,7 @@ namespace Kistl.App.Base
                     NotifyPropertyChanging("MemberName", __oldValue, __newValue);
                     _MemberName = __newValue;
                     NotifyPropertyChanged("MemberName", __oldValue, __newValue);
-                    if(OnMemberName_PostSetter != null)
+                    if(OnMemberName_PostSetter != null && IsAttached)
                     {
                         var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
                         OnMemberName_PostSetter(this, __e);
