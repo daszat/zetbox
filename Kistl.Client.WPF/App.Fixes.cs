@@ -125,12 +125,22 @@ namespace Kistl.Client.WPF
         /// <summary>
         /// Calls currently needed Database fixes
         /// </summary>
-        internal static void FixupDatabase()
+        internal static void FixupDatabase(Func<IKistlContext> ctxFactory)
         {
             // FixupTypeRefParents();
             // PrintEagerLoadingGraphViz();
             // CreateTestFragebögen();
             //PrintControlKindTypes();
+            //FixupCallImplementInterfaces(ctx);
         }
+
+        //private static void FixupCallImplementInterfaces(Func<IKistlContext> ctxFactory)
+        //{
+        //    foreach (var objClass in ctx.GetQuery<ObjectClass>())
+        //    {
+        //        objClass.ImplementInterfaces();
+        //    }
+        //    ctx.SubmitChanges();
+        //}
     }
 }

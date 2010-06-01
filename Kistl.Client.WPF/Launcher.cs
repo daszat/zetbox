@@ -37,7 +37,7 @@ namespace Kistl.Client.WPF
 
             bool _timeRecorder = args.Contains("-timerecorder");
 
-            App.FixupDatabase();
+            App.FixupDatabase(ctxFactory);
 
             ViewModel initialWorkspace;
             if (_timeRecorder)
