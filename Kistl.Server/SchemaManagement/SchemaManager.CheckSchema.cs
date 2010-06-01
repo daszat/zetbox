@@ -452,6 +452,7 @@ namespace Kistl.Server.SchemaManagement
                 {
                     Log.DebugFormat("  Table: {0}", objClass.TableName);
                     CheckColumns(objClass, objClass.Properties, String.Empty);
+                    CheckUniqueConstraints(objClass);
                     CheckValueTypeCollections(objClass);
                     CheckCompoundObjectCollections(objClass);
                     CheckExtraColumns(objClass);
@@ -460,6 +461,24 @@ namespace Kistl.Server.SchemaManagement
                 else
                 {
                     Log.WarnFormat("Table '{0}' is missing", objClass.TableName);
+                }
+            }
+        }
+
+        private void CheckUniqueConstraints(ObjectClass objClass)
+        {
+            foreach (var uc in objClass.Constraints.OfType<UniqueConstraint>())
+            {
+                var tblName = objClass.TableName;
+                var columns = Cases.GetUCColNames(uc);
+                var idxName = Construct.UniqueIndexName(tblName, columns);
+                if (!db.CheckIndexExists(tblName, idxName))
+                {
+                    Log.WarnFormat("Unique Constraint '{0}' is missing", idxName);
+                    if (repair)
+                    {
+                        Case.DoNewUniqueConstraint(uc);
+                    }
                 }
             }
         }

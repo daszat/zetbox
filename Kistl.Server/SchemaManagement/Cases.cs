@@ -1899,7 +1899,7 @@ namespace Kistl.Server.SchemaManagement
             db.CreateIndex(objClass.TableName, Construct.UniqueIndexName(objClass.TableName, columns), true, false, columns);
         }
 
-        private static string[] GetUCColNames(UniqueConstraint uc)
+        internal static string[] GetUCColNames(UniqueConstraint uc)
         {
             var vt_columns = uc.Properties.OfType<ValueTypeProperty>().Select(p => Construct.NestedColumnName(p, null)).ToArray();
             var columns = vt_columns.Union(uc.Properties.OfType<ObjectReferenceProperty>().Select(p => Construct.ForeignKeyColumnName(p.RelationEnd.Parent.GetOtherEnd(p.RelationEnd)))).OrderBy(n => n).ToArray();
