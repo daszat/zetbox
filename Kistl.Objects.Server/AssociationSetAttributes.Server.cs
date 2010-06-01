@@ -343,7 +343,7 @@ using Kistl.DalProvider.EF;
 	/*
     Relation: FK_Constraint_on_Constrained
     A: ZeroOrMore InstanceConstraint as Constraint
-    B: ZeroOrOne ObjectClass as Constrained
+    B: ZeroOrOne DataType as Constrained
     Preferred Storage: MergeIntoA
 	*/
 
@@ -351,7 +351,7 @@ using Kistl.DalProvider.EF;
 [assembly: EdmRelationship(
     "Model", "FK_Constraint_on_Constrained",
     "Constraint", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.InstanceConstraint__Implementation__),
-    "Constrained", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.ObjectClass__Implementation__)
+    "Constrained", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.DataType__Implementation__)
     )]
 
 
@@ -1968,6 +1968,24 @@ using Kistl.DalProvider.EF;
     "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Identity__Implementation__)
     )]
 
+
+	/*
+    Relation: FK_UniqueContraints_ensures_unique_on_Properties
+    A: ZeroOrMore UniqueConstraint as UniqueContraints
+    B: ZeroOrMore Property as Properties
+    Preferred Storage: Separate
+	*/
+
+// The association from A to the CollectionEntry
+[assembly: EdmRelationship("Model", "FK_UniqueContraints_ensures_unique_on_Properties_A",
+    "UniqueContraints", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.UniqueConstraint__Implementation__),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.UniqueConstraint_ensures_unique_on_Property_RelationEntry__Implementation__)
+    )]
+// The association from B to the CollectionEntry
+[assembly: EdmRelationship("Model", "FK_UniqueContraints_ensures_unique_on_Properties_B",
+    "Properties", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Property__Implementation__),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.UniqueConstraint_ensures_unique_on_Property_RelationEntry__Implementation__)
+    )]
 
 	/*
     Relation: FK_View_has_ControlRef

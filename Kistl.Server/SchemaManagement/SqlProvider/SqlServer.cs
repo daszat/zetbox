@@ -262,6 +262,15 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
             }
         }
 
+        public bool CheckColumnContainsValues(string tblName, string colName)
+        {
+            using (var cmd = new SqlCommand(string.Format("SELECT COUNT(*) FROM (SELECT TOP 1 [{1}] FROM [{0}] WHERE [{1}] IS NOT NULL) AS nulls", tblName, colName), db, tx))
+            {
+                QueryLog.Debug(cmd.CommandText);
+                return (int)cmd.ExecuteScalar() > 0;
+            }
+        }
+
         public bool CheckPositionColumnValidity(string tblName, string posName)
         {
             var failed = CheckColumnContainsNulls(tblName, posName);

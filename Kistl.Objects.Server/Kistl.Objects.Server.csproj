@@ -166,6 +166,7 @@
     <Compile Include="TestObjClass.Server.Designer.cs" />
     <Compile Include="TestStudent.Server.Designer.cs" />
     <Compile Include="TypeRef.Server.Designer.cs" />
+    <Compile Include="UniqueConstraint.Server.Designer.cs" />
     <Compile Include="ValueTypeProperty.Server.Designer.cs" />
     <Compile Include="ViewDescriptor.Server.Designer.cs" />
     <Compile Include="ViewModelDescriptor.Server.Designer.cs" />

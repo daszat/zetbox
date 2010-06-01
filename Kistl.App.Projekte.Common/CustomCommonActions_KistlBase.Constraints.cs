@@ -429,5 +429,17 @@ namespace Kistl.App.Base
         }
 
         #endregion
+
+        #region UniqueContriant
+        public static void OnGetErrorText_UniqueConstraint(Kistl.App.Base.UniqueConstraint obj, MethodReturnEventArgs<string> e, IDataObject constrainedObject)
+        {
+            e.Result = "";
+        }
+
+        public static void OnIsValid_UniqueConstraint(Kistl.App.Base.UniqueConstraint obj, MethodReturnEventArgs<bool> e, Kistl.API.IDataObject constrainedObject)
+        {
+            e.Result = true; // enforced by database
+        }
+        #endregion
     }
 }

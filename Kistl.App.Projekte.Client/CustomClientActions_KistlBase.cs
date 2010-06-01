@@ -243,7 +243,7 @@ namespace Kistl.App.Base
             }
         }
 
-        
+
 
         public static void OnImplementInterfaces_ObjectClass(ObjectClass objClass)
         {
@@ -252,6 +252,7 @@ namespace Kistl.App.Base
             foreach (var iface in objClass.ImplementsInterfaces)
             {
                 // TODO: implement CompoundObject too
+                #region Properties
                 foreach (var prop in iface.Properties)
                 {
                     if (!objClass.Properties.Select(p => p.Name).Contains(prop.Name))
@@ -325,7 +326,9 @@ namespace Kistl.App.Base
                         }
                     }
                 }
+                #endregion
 
+                #region Methods
                 foreach (Method meth in iface.Methods)
                 {
                     // TODO: Wenn das sortieren von Parametern funktioniert müssen auch die Parameter
@@ -352,6 +355,29 @@ namespace Kistl.App.Base
                         }
                     }
                 }
+                #endregion
+
+                #region Contraints
+                foreach (InstanceConstraint constr in iface.Constraints)
+                {
+                    if (!objClass.Constraints.Select(c => c.GetObjectClass(ctx)).Contains(constr.GetObjectClass(ctx)))
+                    {
+                        InstanceConstraint newConstr = (InstanceConstraint)ctx.Create(ctx.GetInterfaceType(constr));
+                        objClass.Constraints.Add(newConstr);
+                        newConstr.Reason = constr.Reason;
+                        if (constr is UniqueConstraint)
+                        {
+                            var uConstr = (UniqueConstraint)constr;
+                            var newUConstr = (UniqueConstraint)newConstr;
+                            foreach (var propname in uConstr.Properties.Select(p => p.Name))
+                            {
+                                var np = objClass.Properties.FirstOrDefault(p => p.Name == propname);
+                                if (np != null) newUConstr.Properties.Add(np);
+                            }
+                        }
+                    }
+                }
+                #endregion
             }
         }
 

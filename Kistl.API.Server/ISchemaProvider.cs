@@ -68,6 +68,7 @@ namespace Kistl.API.Server
         bool CheckTableContainsData(string tblName);
         bool CheckColumnContainsNulls(string tblName, string colName);
         bool CheckColumnContainsUniqueValues(string tblName, string colName);
+        bool CheckColumnContainsValues(string tblName, string colName);
         bool CheckColumnIsNullable(string tblName, string colName);
         bool CheckIndexExists(string tblName, string idxName);
 

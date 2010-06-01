@@ -10,9 +10,16 @@ namespace Kistl.App.Base
     /// <summary>
     /// 
     /// </summary>
-    public interface InstanceConstraint : IDataObject 
+    public interface InstanceConstraint : IDataObject, Kistl.App.Base.IExportable 
     {
 
+        /// <summary>
+        /// 
+        /// </summary>
+		Kistl.App.Base.DataType Constrained {
+			get;
+			set;
+		}
         /// <summary>
         /// The reason of this constraint
         /// </summary>
@@ -23,7 +30,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// 
         /// </summary>
-		 void GetErrorText(Kistl.API.IDataObject constrainedObject) ;
+		 string GetErrorText(Kistl.API.IDataObject constrainedObject) ;
         /// <summary>
         /// 
         /// </summary>

@@ -3837,6 +3837,298 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
     }
 }
 
+namespace Kistl.App.Base
+{
+    [EdmEntityType(NamespaceName="Model", Name="UniqueConstraint_ensures_unique_on_Property_RelationEntry")]
+    [System.Diagnostics.DebuggerDisplay("UniqueConstraint_ensures_unique_on_Property_RelationEntry__Implementation__")]
+    public class UniqueConstraint_ensures_unique_on_Property_RelationEntry__Implementation__ : BaseServerCollectionEntry_EntityFramework, Kistl.API.IExportableInternal, Kistl.App.Base.IExportable, UniqueConstraint_ensures_unique_on_Property_RelationEntry
+    {
+    
+        [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
+           // Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.IdProperty
+        public override int ID
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _ID;
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_ID != value)
+                {
+                    var __oldValue = _ID;
+                    var __newValue = value;
+                    NotifyPropertyChanging("ID", __oldValue, __newValue);
+                    _ID = __newValue;
+                    NotifyPropertyChanged("ID", __oldValue, __newValue);
+                }
+            }
+        }
+        private int _ID;
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+           // Kistl.DalProvider.EF.Generator.Implementation.CollectionEntries.ExportGuidProperty
+        public virtual Guid ExportGuid
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _ExportGuid;
+                if (_ExportGuid == Guid.Empty) {
+                    __result = _ExportGuid = Guid.NewGuid();
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_ExportGuid != value)
+                {
+                    var __oldValue = _ExportGuid;
+                    var __newValue = value;
+                    NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
+                    _ExportGuid = __newValue;
+                    NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+                }
+            }
+        }
+        private Guid _ExportGuid;
+        public Guid RelationID { get { return new Guid("29235ba6-5979-4ed8-8e75-6bd0837c7f28"); } }
+        public IDataObject AObject { get { return A; } set { A = (Kistl.App.Base.UniqueConstraint)value; } }
+        public IDataObject BObject { get { return B; } set { B = (Kistl.App.Base.Property)value; } }
+
+        /// <summary>
+        /// Reference to the A-Side member of this CollectionEntry
+        /// </summary>
+   		// Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public Kistl.App.Base.UniqueConstraint A
+        {
+            get
+            {
+                return A__Implementation__;
+            }
+            set
+            {
+                // TODO: NotifyPropertyChanged()
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if(value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                A__Implementation__ = (Kistl.App.Base.UniqueConstraint__Implementation__)value;
+            }
+        }
+        
+        private int? _fk_A;
+        private Guid? _fk_guid_A = null;
+        // EF sees only this property
+        [EdmRelationshipNavigationProperty("Model", "FK_UniqueContraints_ensures_unique_on_Properties_A", "UniqueContraints")]
+        public Kistl.App.Base.UniqueConstraint__Implementation__ A__Implementation__
+        {
+            get
+            {
+                EntityReference<Kistl.App.Base.UniqueConstraint__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.UniqueConstraint__Implementation__>(
+                        "Model.FK_UniqueContraints_ensures_unique_on_Properties_A",
+                        "UniqueContraints");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load(); 
+                    if(r.Value != null) r.Value.AttachToContext(this.Context);
+                }
+                var __value = r.Value;
+                return __value;
+            }
+            set
+            {
+                EntityReference<Kistl.App.Base.UniqueConstraint__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.UniqueConstraint__Implementation__>(
+                        "Model.FK_UniqueContraints_ensures_unique_on_Properties_A",
+                        "UniqueContraints");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load(); 
+                }
+                Kistl.App.Base.UniqueConstraint __oldValue = (Kistl.App.Base.UniqueConstraint)r.Value;
+                Kistl.App.Base.UniqueConstraint __newValue = (Kistl.App.Base.UniqueConstraint)value;
+
+                r.Value = (Kistl.App.Base.UniqueConstraint__Implementation__)__newValue;
+                                
+            }
+        }
+        
+        
+        /// <summary>
+        /// the B-side value of this CollectionEntry
+        /// </summary>
+   		// Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public Kistl.App.Base.Property B
+        {
+            get
+            {
+                return B__Implementation__;
+            }
+            set
+            {
+                // TODO: NotifyPropertyChanged()
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if(value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                B__Implementation__ = (Kistl.App.Base.Property__Implementation__)value;
+            }
+        }
+        
+        private int? _fk_B;
+        private Guid? _fk_guid_B = null;
+        // EF sees only this property
+        [EdmRelationshipNavigationProperty("Model", "FK_UniqueContraints_ensures_unique_on_Properties_B", "Properties")]
+        public Kistl.App.Base.Property__Implementation__ B__Implementation__
+        {
+            get
+            {
+                EntityReference<Kistl.App.Base.Property__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Property__Implementation__>(
+                        "Model.FK_UniqueContraints_ensures_unique_on_Properties_B",
+                        "Properties");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load(); 
+                    if(r.Value != null) r.Value.AttachToContext(this.Context);
+                }
+                var __value = r.Value;
+                return __value;
+            }
+            set
+            {
+                EntityReference<Kistl.App.Base.Property__Implementation__> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.Property__Implementation__>(
+                        "Model.FK_UniqueContraints_ensures_unique_on_Properties_B",
+                        "Properties");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load(); 
+                }
+                Kistl.App.Base.Property __oldValue = (Kistl.App.Base.Property)r.Value;
+                Kistl.App.Base.Property __newValue = (Kistl.App.Base.Property)value;
+
+                r.Value = (Kistl.App.Base.Property__Implementation__)__newValue;
+                                
+            }
+        }
+        
+        
+
+#region Serializer
+
+
+        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        {
+            
+            base.ToStream(binStream, auxObjects, eagerLoadLists);
+            BinarySerializer.ToStream(this._ExportGuid, binStream);
+            BinarySerializer.ToStream(A != null ? A.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(B != null ? B.ID : (int?)null, binStream);
+        }
+
+        public override void FromStream(System.IO.BinaryReader binStream)
+        {
+            
+            base.FromStream(binStream);
+            BinarySerializer.FromStream(out this._ExportGuid, binStream);
+            BinarySerializer.FromStream(out this._fk_A, binStream);
+            BinarySerializer.FromStream(out this._fk_B, binStream);
+        }
+
+        public override void ToStream(System.Xml.XmlWriter xml)
+        {
+            
+            base.ToStream(xml);
+            XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "");
+            XmlStreamer.ToStream(A != null ? A.ID : (int?)null, xml, "A", "Kistl.App.Base");
+            XmlStreamer.ToStream(B != null ? B.ID : (int?)null, xml, "B", "Kistl.App.Base");
+        }
+
+        public override void FromStream(System.Xml.XmlReader xml)
+        {
+            
+            base.FromStream(xml);
+            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "");
+            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.Base");
+        }
+
+        public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
+        {
+            
+            xml.WriteAttributeString("ExportGuid", this._ExportGuid.ToString());
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(A != null ? A.ExportGuid : (Guid?)null, xml, "A", "Kistl.App.Base");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(B != null ? B.ExportGuid : (Guid?)null, xml, "B", "Kistl.App.Base");
+        }
+
+        public virtual void MergeImport(System.Xml.XmlReader xml)
+        {
+            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "");
+            XmlStreamer.FromStream(ref this._fk_guid_A, xml, "A", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._fk_guid_B, xml, "B", "Kistl.App.Base");
+        }
+
+#endregion
+
+		public override Type GetImplementedInterface()
+		{
+			return typeof(UniqueConstraint_ensures_unique_on_Property_RelationEntry);
+		}
+	
+		public override void ReloadReferences()
+		{
+			// Do not reload references if the current object has been deleted.
+			// TODO: enable when MemoryContext uses MemoryDataObjects
+			//if (this.ObjectState == DataObjectState.Deleted) return;
+
+			if (_fk_guid_A.HasValue)
+				A__Implementation__ = (Kistl.App.Base.UniqueConstraint__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.UniqueConstraint>(_fk_guid_A.Value);
+			else if (_fk_A.HasValue)
+				A__Implementation__ = (Kistl.App.Base.UniqueConstraint__Implementation__)Context.Find<Kistl.App.Base.UniqueConstraint>(_fk_A.Value);
+			else
+				A__Implementation__ = null;
+
+
+			if (_fk_guid_B.HasValue)
+				B__Implementation__ = (Kistl.App.Base.Property__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.Property>(_fk_guid_B.Value);
+			else if (_fk_B.HasValue)
+				B__Implementation__ = (Kistl.App.Base.Property__Implementation__)Context.Find<Kistl.App.Base.Property>(_fk_B.Value);
+			else
+				B__Implementation__ = null;
+	
+		}
+		
+		public override void ApplyChangesFrom(IPersistenceObject obj)
+		{
+			base.ApplyChangesFrom(obj);
+			var other = (UniqueConstraint_ensures_unique_on_Property_RelationEntry__Implementation__)obj;
+			var me = (UniqueConstraint_ensures_unique_on_Property_RelationEntry__Implementation__)this;
+			
+            me._fk_A = other._fk_A;
+            me._fk_B = other._fk_B;
+		}		
+		
+		
+
+    }
+}
+
 namespace Kistl.App.GUI
 {
 	using Kistl.App.Base;

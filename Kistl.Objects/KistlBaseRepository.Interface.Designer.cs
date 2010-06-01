@@ -26,6 +26,16 @@ namespace Kistl.App.Base
 			}
 		}
 		
+		/// <summary>List of all UniqueConstraint</summary>
+		/// 
+		public IQueryable<UniqueConstraint> UniqueConstraints
+		{ 
+			get
+			{
+				return Context.GetQuery<UniqueConstraint>();
+			}
+		}
+		
 		/// <summary>List of all TypeRef</summary>
 		/// This class models a reference to a specific, concrete Type. Generic Types have all parameters filled.
 		public IQueryable<TypeRef> TypeRefs

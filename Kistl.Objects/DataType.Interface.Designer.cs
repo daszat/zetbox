@@ -14,6 +14,11 @@ namespace Kistl.App.Base
     {
 
         /// <summary>
+        /// 
+        /// </summary>
+
+        ICollection<Kistl.App.Base.InstanceConstraint> Constraints { get; }
+        /// <summary>
         /// Standard Icon wenn IIcon nicht implementiert ist
         /// </summary>
 		Kistl.App.GUI.Icon DefaultIcon {

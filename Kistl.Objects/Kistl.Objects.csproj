@@ -142,6 +142,7 @@
     <Compile Include="TestObjClass.Interface.Designer.cs" />
     <Compile Include="TestStudent.Interface.Designer.cs" />
     <Compile Include="TypeRef.Interface.Designer.cs" />
+    <Compile Include="UniqueConstraint.Interface.Designer.cs" />
     <Compile Include="ValueTypeProperty.Interface.Designer.cs" />
     <Compile Include="ViewDescriptor.Interface.Designer.cs" />
     <Compile Include="ViewModelDescriptor.Interface.Designer.cs" />

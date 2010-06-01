@@ -145,9 +145,38 @@ namespace Kistl.Server.SchemaManagement
 
                 UpdateColumns(objClass, objClass.Properties, String.Empty);
                 UpdateDeletedColumns(objClass, String.Empty);
+                UpdateUniqueContraints(objClass);
+                UpdateDeletedUniqueContraints(objClass);
             }
             Log.Debug(String.Empty);
         }
+
+        private void UpdateUniqueContraints(ObjectClass objClass)
+        {
+            foreach (var uc in objClass.Constraints.OfType<UniqueConstraint>())
+            {
+                if (Case.IsNewUniqueConstraint(uc))
+                {
+                    Case.DoNewUniqueConstraint(uc);
+                }
+                else if (Case.IsChangeUniqueConstraint(uc))
+                {
+                    Case.DoChangeUniqueConstraint(uc);
+                }
+            }
+        }
+
+        private void UpdateDeletedUniqueContraints(ObjectClass objClass)
+        {
+            foreach (UniqueConstraint uc in Case.savedSchema.GetQuery<UniqueConstraint>().Where(p => p.Constrained.ExportGuid == objClass.ExportGuid))
+            {
+                if (Case.IsDeleteUniqueConstraint(uc))
+                {
+                    Case.DoDeleteUniqueConstraint(uc);
+                }
+            }
+        }
+
 
         private void UpdateColumns(ObjectClass objClass, ICollection<Property> properties, string prefix)
         {
@@ -384,7 +413,11 @@ namespace Kistl.Server.SchemaManagement
                         }
                     }
 
-                    if (Case.IsChangeRelationName(rel))
+                    if (Case.IsChangeRelationEndTypes(rel))
+                    {
+                        Case.DoChangeRelationEndTypes(rel);
+                    }
+                    else if (Case.IsChangeRelationName(rel))
                     {
                         Case.DoChangeRelationName(rel);
                     }

@@ -1041,6 +1041,100 @@ namespace Kistl.Server.SchemaManagement
 
         #endregion
 
+        #region ChangeRelationEndTypes
+        public bool IsChangeRelationEndTypes(Relation rel)
+        {
+            var saved = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
+            if (saved == null) return false;
+            return saved.A.Type.ExportGuid != rel.A.Type.ExportGuid || saved.B.Type.ExportGuid != rel.B.Type.ExportGuid;
+        }
+        
+        public void DoChangeRelationEndTypes(Relation rel)
+        {
+            var saved = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
+
+            if (rel.GetRelationType() == RelationType.n_m)
+            {
+                string tblName = saved.GetRelationTableName();
+                if (db.CheckTableContainsData(tblName))
+                {
+                    Log.WarnFormat("Unable to drop old relation. Relation has some instances. Table: " + tblName);
+                }
+                else
+                {
+                    DoDelete_N_M_Relation(saved);
+                    DoNew_N_M_Relation(rel);
+                }
+            }
+            else if (rel.GetRelationType() == RelationType.one_n)
+            {
+                RelationEnd relEnd, otherEnd;
+
+                switch (rel.Storage)
+                {
+                    case StorageType.MergeIntoA:
+                        relEnd = saved.A;
+                        otherEnd = saved.B;
+                        break;
+                    case StorageType.MergeIntoB:
+                        otherEnd = saved.A;
+                        relEnd = saved.B;
+                        break;
+                    default:
+                        Log.ErrorFormat("Relation '{0}' has unsupported Storage set: {1}, skipped", rel.GetAssociationName(), rel.Storage);
+                        return;
+                }
+
+                string tblName = relEnd.Type.TableName;
+                string colName = Construct.ForeignKeyColumnName(otherEnd);
+
+                if (db.CheckColumnContainsValues(tblName, colName))
+                {
+                    Log.WarnFormat("Unable to drop old relation. Relation has some instances. Table: " + tblName);
+                }
+                else
+                {
+                    DoDelete_1_N_Relation(saved);
+                    DoNew_1_N_Relation(rel);
+                }
+            }
+            else if (rel.GetRelationType() == RelationType.one_one)
+            {
+                RelationEnd relEnd, otherEnd;
+
+                switch (rel.Storage)
+                {
+                    case StorageType.MergeIntoA:
+                    case StorageType.Replicate:
+                        relEnd = saved.A;
+                        otherEnd = saved.B;
+                        break;
+                    case StorageType.MergeIntoB:
+                        otherEnd = saved.A;
+                        relEnd = saved.B;
+                        break;
+                    default:
+                        Log.ErrorFormat("Relation '{0}' has unsupported Storage set: {1}, skipped", rel.GetAssociationName(), rel.Storage);
+                        return;
+                }
+
+                string tblName = relEnd.Type.TableName;
+                string colName = Construct.ForeignKeyColumnName(otherEnd);
+
+                if (db.CheckColumnContainsValues(tblName, colName))
+                {
+                    Log.WarnFormat("Unable to drop old relation. Relation has some instances. Table: " + tblName);
+                }
+                else
+                {
+                    DoDelete_1_1_Relation(saved);
+                    DoNew_1_1_Relation(rel);
+                }
+            }
+
+        }
+        #endregion
+
         #region ChangeRelationName
         public bool IsChangeRelationName(Relation rel)
         {
@@ -1790,6 +1884,67 @@ namespace Kistl.Server.SchemaManagement
             // TODO: Add neested CompoundObjectProperty
         }
         #endregion
+
+        #region NewUniqueConstraint
+        public bool IsNewUniqueConstraint(UniqueConstraint uc)
+        {
+            return uc.Constrained is ObjectClass && savedSchema.FindPersistenceObject<UniqueConstraint>(uc.ExportGuid) == null;
+        }
+        public void DoNewUniqueConstraint(UniqueConstraint uc)
+        {
+            var objClass = (ObjectClass)uc.Constrained;            
+            var tblName = objClass.TableName;
+            var columns = GetUCColNames(uc);
+            Log.InfoFormat("New Unique Contraint: {0} on {1}({2})", uc.Reason, objClass.TableName, string.Join(", ", columns));
+            db.CreateIndex(objClass.TableName, Construct.UniqueIndexName(objClass.TableName, columns), true, false, columns);
+        }
+
+        private static string[] GetUCColNames(UniqueConstraint uc)
+        {
+            var vt_columns = uc.Properties.OfType<ValueTypeProperty>().Select(p => Construct.NestedColumnName(p, null)).ToArray();
+            var columns = vt_columns.Union(uc.Properties.OfType<ObjectReferenceProperty>().Select(p => Construct.ForeignKeyColumnName(p.RelationEnd.Parent.GetOtherEnd(p.RelationEnd)))).OrderBy(n => n).ToArray();
+            return columns;
+        }
+        #endregion
+
+        #region DeleteUniqueConstraint
+        public bool IsDeleteUniqueConstraint(UniqueConstraint uc)
+        {
+            return uc.Constrained is ObjectClass && schema.FindPersistenceObject<UniqueConstraint>(uc.ExportGuid) == null;
+        }
+        public void DoDeleteUniqueConstraint(UniqueConstraint uc)
+        {
+            var objClass = (ObjectClass)uc.Constrained;
+            var tblName = objClass.TableName;
+            var columns = GetUCColNames(uc);
+            Log.InfoFormat("Drop Unique Contraint: {0} on {1}({2})", uc.Reason, objClass.TableName, string.Join(", ", columns));
+            db.DropIndex(objClass.TableName, Construct.UniqueIndexName(objClass.TableName, columns));
+        }
+        #endregion
+
+        #region ChangeUniqueConstraint
+        public bool IsChangeUniqueConstraint(UniqueConstraint uc)
+        {
+            if(!(uc is UniqueConstraint)) return false;
+            var saved = savedSchema.FindPersistenceObject<UniqueConstraint>(uc.ExportGuid);
+            if (saved == null) return false;
+            var newCols = GetUCColNames(uc);
+            var savedCols = GetUCColNames(saved);
+            if (newCols.Length != savedCols.Length) return true;
+            foreach (var c in newCols)
+            {
+                if (!savedCols.Contains(c)) return true;
+            }
+            return false;
+        }
+        public void DoChangeUniqueConstraint(UniqueConstraint uc)
+        {
+            var saved = savedSchema.FindPersistenceObject<UniqueConstraint>(uc.ExportGuid);
+            DoDeleteUniqueConstraint(saved);
+            DoNewUniqueConstraint(uc);
+        }
+        #endregion
+
 
         #endregion
     }

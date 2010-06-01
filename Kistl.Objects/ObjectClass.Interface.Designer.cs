@@ -26,11 +26,6 @@ namespace Kistl.App.Base
 			set;
 		}
         /// <summary>
-        /// 
-        /// </summary>
-
-        ICollection<Kistl.App.Base.InstanceConstraint> Constraints { get; }
-        /// <summary>
         /// The default ViewModel to use for this ObjectClass
         /// </summary>
 		Kistl.App.GUI.ViewModelDescriptor DefaultViewModelDescriptor {

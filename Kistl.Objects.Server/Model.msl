@@ -415,7 +415,13 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.InstanceConstraint)">
 	    <MappingFragment StoreEntitySet="InstanceConstraint">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
 <ScalarProperty Name="Reason" ColumnName="Reason" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.UniqueConstraint)">
+	    <MappingFragment StoreEntitySet="UniqueConstraint">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1372,6 +1378,45 @@
     </AssociationSetMapping>
 
     <!--
+    Relation: FK_UniqueContraints_ensures_unique_on_Properties
+    A: ZeroOrMore UniqueConstraint as UniqueContraints
+    B: ZeroOrMore Property as Properties
+    Preferred Storage: Separate
+    -->
+    <EntitySetMapping Name="UniqueConstraint_ensures_unique_on_Property_RelationEntry">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.UniqueConstraint_ensures_unique_on_Property_RelationEntry)">
+        <MappingFragment StoreEntitySet="UniqueConstraint_ensures_unique_on_Property_RelationEntry">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+		  <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <!-- A to CollectionEntry -->
+    <AssociationSetMapping Name="FK_UniqueContraints_ensures_unique_on_Properties_A"
+                           TypeName="Model.FK_UniqueContraints_ensures_unique_on_Properties_A"
+                           StoreEntitySet="UniqueConstraint_ensures_unique_on_Property_RelationEntry" >
+      <EndProperty Name="UniqueContraints">
+        <ScalarProperty Name="ID" ColumnName="fk_UniqueContraints"/>
+      </EndProperty>
+      <EndProperty Name="CollectionEntry">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_UniqueContraints" IsNull="false"/>
+    </AssociationSetMapping>
+    <!-- B to CollectionEntry -->
+    <AssociationSetMapping Name="FK_UniqueContraints_ensures_unique_on_Properties_B"
+                           TypeName="Model.FK_UniqueContraints_ensures_unique_on_Properties_B"
+                           StoreEntitySet="UniqueConstraint_ensures_unique_on_Property_RelationEntry" >
+      <EndProperty Name="Properties">
+        <ScalarProperty Name="ID" ColumnName="fk_Properties"/>
+      </EndProperty>
+      <EndProperty Name="CollectionEntry">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_Properties" IsNull="false"/>
+    </AssociationSetMapping>
+
+    <!--
     Relation: FK_ViewDescriptor_supports_ViewModelTypeRefs
     A: ZeroOrMore ViewDescriptor as ViewDescriptor
     B: ZeroOrMore TypeRef as ViewModelTypeRefs
@@ -1887,7 +1932,7 @@
     <!--
     Relation: FK_Constraint_on_Constrained
     A: ZeroOrMore InstanceConstraint as Constraint
-    B: ZeroOrOne ObjectClass as Constrained
+    B: ZeroOrOne DataType as Constrained
     Preferred Storage: MergeIntoA
     -->
     <AssociationSetMapping Name="FK_Constraint_on_Constrained"

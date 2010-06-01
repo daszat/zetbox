@@ -201,6 +201,57 @@ namespace Kistl.App.Base
 		public static event PropertyPostSetterHandler<Kistl.App.Base.DataType, DateTime?> OnChangedOn_PostSetter;
 
         /// <summary>
+        /// 
+        /// </summary>
+    /*
+    Relation: FK_Constraint_on_Constrained
+    A: ZeroOrMore InstanceConstraint as Constraint
+    B: ZeroOrOne DataType as Constrained
+    Preferred Storage: MergeIntoA
+    */
+        // object list property
+   		// Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.ObjectListProperty
+	    // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public ICollection<Kistl.App.Base.InstanceConstraint> Constraints
+        {
+            get
+            {
+                if (_ConstraintsWrapper == null)
+                {
+                    _ConstraintsWrapper = new EntityCollectionWrapper<Kistl.App.Base.InstanceConstraint, Kistl.App.Base.InstanceConstraint__Implementation__>(
+                            this.Context, Constraints__Implementation__);
+                }
+                return _ConstraintsWrapper;
+            }
+        }
+        
+        [EdmRelationshipNavigationProperty("Model", "FK_Constraint_on_Constrained", "Constraint")]
+        public EntityCollection<Kistl.App.Base.InstanceConstraint__Implementation__> Constraints__Implementation__
+        {
+            get
+            {
+                var c = ((IEntityWithRelationships)(this)).RelationshipManager
+                    .GetRelatedCollection<Kistl.App.Base.InstanceConstraint__Implementation__>(
+                        "Model.FK_Constraint_on_Constrained",
+                        "Constraint");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !c.IsLoaded)
+                {
+                    c.Load();
+                }
+                c.ForEach(i => i.AttachToContext(Context));
+                return c;
+            }
+        }
+        private EntityCollectionWrapper<Kistl.App.Base.InstanceConstraint, Kistl.App.Base.InstanceConstraint__Implementation__> _ConstraintsWrapper;
+
+		private List<int> ConstraintsIds;
+		private bool Constraints_was_eagerLoaded = false;
+
+
+        /// <summary>
         /// Identity which created this object
         /// </summary>
     /*
@@ -1136,6 +1187,13 @@ namespace Kistl.App.Base
 				null,
 				obj => obj.ChangedOn,
 				(obj, val) => obj.ChangedOn = val),
+			// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
+			new CustomPropertyDescriptor<DataType__Implementation__, ICollection<Kistl.App.Base.InstanceConstraint>>(
+				new Guid("eda15826-7251-4726-9f6b-65e7f24f6ad1"),
+				"Constraints",
+				null,
+				obj => obj.Constraints,
+				null), // lists are read-only properties
 			// else
 			new CustomPropertyDescriptor<DataType__Implementation__, Kistl.App.Base.Identity>(
 				new Guid("5c2ec701-9e7e-4340-a463-4fc2b8204f5d"),
@@ -1233,6 +1291,7 @@ namespace Kistl.App.Base
 			// rel: ObjectClass has Properties (f7e487a4-6922-40bf-a404-24ce6accbb83)
 			// rel: DataType was CreatedBy (b7d1b442-4364-4979-b81c-66392fbe69fd)
 			// rel: DataType was ChangedBy (cf88221e-3474-4de1-8692-abd65d052e8b)
+			// rel: Constraint on Constrained (e2b66b79-ab7a-43c0-a229-16dddf4b8934)
 			// rel: Module contains DataTypes (52c4ab07-f341-4eb3-86e2-05f27c8af2f7)
 			// rel: ObjectParameter has DataType (a6a30705-15ad-4a3a-b624-23305fe2807a)
 		};
@@ -1288,6 +1347,24 @@ namespace Kistl.App.Base
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             BinarySerializer.ToStream(ChangedBy != null ? ChangedBy.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._ChangedOn, binStream);
+
+			BinarySerializer.ToStream(eagerLoadLists, binStream);
+			if(eagerLoadLists)
+			{
+				BinarySerializer.ToStream(true, binStream);
+				BinarySerializer.ToStream(Constraints.Count, binStream);
+				foreach(var obj in Constraints)
+				{
+					if (auxObjects != null) {
+						auxObjects.Add(obj);
+					}
+					BinarySerializer.ToStream(obj.ID, binStream);
+				}
+			}
+			else
+			{
+				BinarySerializer.ToStream(false, binStream);
+			}
             BinarySerializer.ToStream(CreatedBy != null ? CreatedBy.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._CreatedOn, binStream);
             BinarySerializer.ToStream(DefaultIcon != null ? DefaultIcon.ID : (int?)null, binStream);
@@ -1369,6 +1446,24 @@ namespace Kistl.App.Base
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._fk_ChangedBy, binStream);
             BinarySerializer.FromStream(out this._ChangedOn, binStream);
+
+			BinarySerializer.FromStream(out Constraints_was_eagerLoaded, binStream);
+			{
+				bool containsList;
+				BinarySerializer.FromStream(out containsList, binStream);
+				if(containsList)
+				{
+					int numElements;
+					BinarySerializer.FromStream(out numElements, binStream);
+					ConstraintsIds = new List<int>(numElements);
+					while (numElements-- > 0) 
+					{
+						int id;
+						BinarySerializer.FromStream(out id, binStream);
+						ConstraintsIds.Add(id);
+					}
+				}
+			}
             BinarySerializer.FromStream(out this._fk_CreatedBy, binStream);
             BinarySerializer.FromStream(out this._CreatedOn, binStream);
             BinarySerializer.FromStream(out this._fk_DefaultIcon, binStream);

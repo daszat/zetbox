@@ -87,7 +87,11 @@ namespace Kistl.Server.Generators
         public static string IndexName(string tblName, params string[] colNames)
         {
             return "IDX_" + tblName + "_" + string.Join("_", colNames);
-        }        
+        }
+        public static string UniqueIndexName(string tblName, params string[] colNames)
+        {
+            return "UIDX_" + tblName + "_" + string.Join("_", colNames);
+        }
         #endregion
 
         #region Column Names

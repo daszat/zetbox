@@ -286,6 +286,12 @@
       <End Role="A_Constraint" EntitySet="Constraint" />
       <End Role="B_StringRangeConstraint" EntitySet="StringRangeConstraint" />
     </AssociationSet>
+    <EntitySet Name="UniqueConstraint" EntityType="Model.Store.UniqueConstraint" Table="UniqueConstraints"/>
+    <!-- inherits from InstanceConstraint -->
+    <AssociationSet Name="FK_UniqueConstraint_InstanceConstraint_ID" Association="Model.Store.FK_UniqueConstraint_InstanceConstraint_ID" >
+      <End Role="A_InstanceConstraint" EntitySet="InstanceConstraint" />
+      <End Role="B_UniqueConstraint" EntitySet="UniqueConstraint" />
+    </AssociationSet>
     <EntitySet Name="ValueTypeProperty" EntityType="Model.Store.ValueTypeProperty" Table="ValueTypeProperties"/>
     <!-- inherits from Property -->
     <AssociationSet Name="FK_ValueTypeProperty_Property_ID" Association="Model.Store.FK_ValueTypeProperty_Property_ID" >
@@ -519,6 +525,22 @@
     </AssociationSet>
     
     <!-- 
+    Relation: FK_UniqueContraints_ensures_unique_on_Properties
+    A: ZeroOrMore UniqueConstraint as UniqueContraints
+    B: ZeroOrMore Property as Properties
+    Preferred Storage: Separate
+    -->
+    <EntitySet Name="UniqueConstraint_ensures_unique_on_Property_RelationEntry" EntityType="Model.Store.UniqueConstraint_ensures_unique_on_Property_RelationEntry" Table="UniqueContraints_ensures_unique_on_Properties" />
+    <AssociationSet Name="FK_UniqueContraints_ensures_unique_on_Properties_A" Association="Model.Store.FK_UniqueContraints_ensures_unique_on_Properties_A" >
+      <End Role="UniqueContraints" EntitySet="UniqueConstraint" />
+      <End Role="CollectionEntry" EntitySet="UniqueConstraint_ensures_unique_on_Property_RelationEntry" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UniqueContraints_ensures_unique_on_Properties_B" Association="Model.Store.FK_UniqueContraints_ensures_unique_on_Properties_B" >
+      <End Role="CollectionEntry" EntitySet="UniqueConstraint_ensures_unique_on_Property_RelationEntry" />
+      <End Role="Properties" EntitySet="Property" />
+    </AssociationSet>
+    
+    <!-- 
     Relation: FK_ViewDescriptor_supports_ViewModelTypeRefs
     A: ZeroOrMore ViewDescriptor as ViewDescriptor
     B: ZeroOrMore TypeRef as ViewModelTypeRefs
@@ -671,7 +693,7 @@
     </AssociationSet>
     <AssociationSet Name="FK_Constraint_on_Constrained" Association="Model.Store.FK_Constraint_on_Constrained" >
       <End Role="Constraint" EntitySet="InstanceConstraint" />
-      <End Role="Constrained" EntitySet="ObjectClass" />
+      <End Role="Constrained" EntitySet="DataType" />
     </AssociationSet>
     <AssociationSet Name="FK_Constraint_was_ChangedBy" Association="Model.Store.FK_Constraint_was_ChangedBy" >
       <End Role="Constraint" EntitySet="Constraint" />
@@ -1549,6 +1571,7 @@
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="fk_Constrained" Type="int" />
+    <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
     <Property Name="Reason" Type="nvarchar" MaxLength="1000" Nullable="true" />
   </EntityType>
 	
@@ -2045,6 +2068,13 @@
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
     <Property Name="FullName" Type="nvarchar" MaxLength="200" Nullable="false" />
     <Property Name="ToStringCache" Type="nvarchar" MaxLength="1000" Nullable="true" />
+  </EntityType>
+	
+  <EntityType Name="UniqueConstraint">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="ValueTypeProperty">
@@ -2663,6 +2693,45 @@
   </Association>
 
 	
+  <EntityType Name="UniqueConstraint_ensures_unique_on_Property_RelationEntry">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+	<Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="fk_UniqueContraints" Type="int" Nullable="true" />
+    <Property Name="fk_Properties" Type="int" Nullable="true" />
+  </EntityType>
+
+  <!-- A to CollectionEntry -->
+  <Association Name="FK_UniqueContraints_ensures_unique_on_Properties_A">
+    <End Role="UniqueContraints" Type="Model.Store.UniqueConstraint" Multiplicity="0..1" />
+    <End Role="CollectionEntry" Type="Model.Store.UniqueConstraint_ensures_unique_on_Property_RelationEntry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UniqueContraints">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CollectionEntry">
+        <PropertyRef Name="fk_UniqueContraints" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+  <!-- B to CollectionEntry -->
+  <Association Name="FK_UniqueContraints_ensures_unique_on_Properties_B">
+    <End Role="Properties" Type="Model.Store.Property" Multiplicity="0..1" />
+    <End Role="CollectionEntry" Type="Model.Store.UniqueConstraint_ensures_unique_on_Property_RelationEntry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Properties">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CollectionEntry">
+        <PropertyRef Name="fk_Properties" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+	
   <EntityType Name="ViewDescriptor_supports_TypeRef_RelationEntry">
     <Key>
       <PropertyRef Name="ID" />
@@ -3114,7 +3183,7 @@
 
 
   <Association Name="FK_Constraint_on_Constrained">
-    <End Role="Constrained" Type="Model.Store.ObjectClass" Multiplicity="0..1" />
+    <End Role="Constrained" Type="Model.Store.DataType" Multiplicity="0..1" />
     <End Role="Constraint" Type="Model.Store.InstanceConstraint" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Constrained">
@@ -4945,6 +5014,18 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="B_StringRangeConstraint">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UniqueConstraint_InstanceConstraint_ID">
+    <End Role="A_InstanceConstraint" Type="Model.Store.InstanceConstraint" Multiplicity="1" />
+    <End Role="B_UniqueConstraint" Type="Model.Store.UniqueConstraint" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="A_InstanceConstraint">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_UniqueConstraint">
         <PropertyRef Name="ID" />
       </Dependent>
     </ReferentialConstraint>

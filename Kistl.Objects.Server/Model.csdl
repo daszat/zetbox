@@ -197,6 +197,15 @@
       <End Role="GenericArguments" EntitySet="TypeRef" />
       <End Role="CollectionEntry" EntitySet="TypeRef_hasGenericArguments_TypeRef_RelationEntry" />
     </AssociationSet>
+    <EntitySet Name="UniqueConstraint_ensures_unique_on_Property_RelationEntry" EntityType="Model.UniqueConstraint_ensures_unique_on_Property_RelationEntry" />
+    <AssociationSet Name="FK_UniqueContraints_ensures_unique_on_Properties_A" Association="Model.FK_UniqueContraints_ensures_unique_on_Properties_A" >
+      <End Role="UniqueContraints" EntitySet="InstanceConstraint" />
+      <End Role="CollectionEntry" EntitySet="UniqueConstraint_ensures_unique_on_Property_RelationEntry" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UniqueContraints_ensures_unique_on_Properties_B" Association="Model.FK_UniqueContraints_ensures_unique_on_Properties_B" >
+      <End Role="Properties" EntitySet="Property" />
+      <End Role="CollectionEntry" EntitySet="UniqueConstraint_ensures_unique_on_Property_RelationEntry" />
+    </AssociationSet>
     <EntitySet Name="ViewDescriptor_supports_TypeRef_RelationEntry" EntityType="Model.ViewDescriptor_supports_TypeRef_RelationEntry" />
     <AssociationSet Name="FK_ViewDescriptor_supports_ViewModelTypeRefs_A" Association="Model.FK_ViewDescriptor_supports_ViewModelTypeRefs_A" >
       <End Role="ViewDescriptor" EntitySet="ViewDescriptor" />
@@ -996,6 +1005,10 @@
                         FromRole="DataType"
                         ToRole="ChangedBy" />
     <Property Name="ChangedOn" Type="DateTime" Nullable="true" />
+    <NavigationProperty Name="Constraints__Implementation__"
+                        Relationship="Model.FK_Constraint_on_Constrained"
+                        FromRole="Constrained"
+                        ToRole="Constraint" />
     <NavigationProperty Name="CreatedBy__Implementation__"
                         Relationship="Model.FK_DataType_was_CreatedBy"
                         FromRole="DataType"
@@ -1236,6 +1249,11 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Constrained__Implementation__"
+                        Relationship="Model.FK_Constraint_on_Constrained"
+                        FromRole="Constraint"
+                        ToRole="Constrained" />
+    <Property Name="ExportGuid" Type="Guid" Nullable="false" />
     <Property Name="Reason" Type="String" Nullable="true" MaxLength="1000" />
   </EntityType>
   <EntityType Name="Kunde">
@@ -2048,10 +2066,6 @@
                         Relationship="Model.FK_BaseObjectClass_has_SubClasses"
                         FromRole="SubClasses"
                         ToRole="BaseObjectClass" />
-    <NavigationProperty Name="Constraints__Implementation__"
-                        Relationship="Model.FK_Constraint_on_Constrained"
-                        FromRole="Constrained"
-                        ToRole="Constraint" />
     <NavigationProperty Name="DefaultViewModelDescriptor__Implementation__"
                         Relationship="Model.FK_Presentable_has_DefaultViewModelDescriptor"
                         FromRole="Presentable"
@@ -2108,6 +2122,12 @@
   <EntityType Name="StringRangeConstraint" BaseType="Model.Constraint">
     <Property Name="MaxLength" Type="Int32" Nullable="true" />
     <Property Name="MinLength" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UniqueConstraint" BaseType="Model.InstanceConstraint">
+    <NavigationProperty Name="Properties__Implementation__"
+                        Relationship="Model.FK_UniqueContraints_ensures_unique_on_Properties_A"
+                        FromRole="UniqueContraints"
+                        ToRole="CollectionEntry" />
   </EntityType>
   <EntityType Name="ValueTypeProperty" BaseType="Model.Property" Abstract="true">
     <Property Name="HasPersistentOrder" Type="Boolean" Nullable="false" />
@@ -2719,6 +2739,49 @@
   </Association>
   
   <!--
+    Relation: FK_UniqueContraints_ensures_unique_on_Properties
+    A: ZeroOrMore UniqueConstraint as UniqueContraints
+    B: ZeroOrMore Property as Properties
+    Preferred Storage: Separate
+  -->
+  <EntityType Name="UniqueConstraint_ensures_unique_on_Property_RelationEntry" >
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+	<Property Name="ExportGuid" Type="Guid" Nullable="false" />
+	
+    
+    <!-- A -->
+    <NavigationProperty Name="A__Implementation__"
+                        Relationship="Model.FK_UniqueContraints_ensures_unique_on_Properties_A"
+                        FromRole="CollectionEntry"
+                        ToRole="UniqueContraints" />
+
+    <!-- B -->
+    <NavigationProperty Name="B__Implementation__"
+                        Relationship="Model.FK_UniqueContraints_ensures_unique_on_Properties_B"
+                        FromRole="CollectionEntry"
+                        ToRole="Properties" />
+  </EntityType>
+  <Association Name="FK_UniqueContraints_ensures_unique_on_Properties_A" >
+    <End Role="UniqueContraints"
+         Type="Model.UniqueConstraint" 
+         Multiplicity="0..1" />
+    <End Role="CollectionEntry"
+         Type="Model.UniqueConstraint_ensures_unique_on_Property_RelationEntry"
+         Multiplicity="*" />
+  </Association>
+  <Association Name="FK_UniqueContraints_ensures_unique_on_Properties_B" >
+    <End Role="Properties"
+         Type="Model.Property" 
+         Multiplicity="0..1" />
+    <End Role="CollectionEntry"
+         Type="Model.UniqueConstraint_ensures_unique_on_Property_RelationEntry"
+         Multiplicity="*" />
+  </Association>
+  
+  <!--
     Relation: FK_ViewDescriptor_supports_ViewModelTypeRefs
     A: ZeroOrMore ViewDescriptor as ViewDescriptor
     B: ZeroOrMore TypeRef as ViewModelTypeRefs
@@ -3115,7 +3178,7 @@
          Type="Model.InstanceConstraint" 
          Multiplicity="*" />
     <End Role="Constrained"
-         Type="Model.ObjectClass" 
+         Type="Model.DataType" 
          Multiplicity="0..1" />
   </Association>
   <Association Name="FK_Constraint_was_ChangedBy" >
