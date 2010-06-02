@@ -116,50 +116,6 @@ namespace Kistl.App.Extensions
             return result;
         }
 
-        //public static ViewDescriptor GetViewDescriptor(
-        //    this ViewModelDescriptor self,
-        //    Toolkit tk,
-        //    InterfaceType ck)
-        //{
-        //    ViewDescriptor visualDesc;
-        //    if (ck == null)
-        //    {
-        //        visualDesc = GetViewDescriptor(self, tk);
-        //    }
-        //    else
-        //    {
-        //        var allControlKinds = ck.AndParents();
-        //        var defaultKind = self.GetDefaultKind();
-        //        if (defaultKind != null && allControlKinds.Contains(defaultKind))
-        //        {
-        //            visualDesc = GetViewDescriptor(self, tk);
-        //        }
-        //        else
-        //        {
-        //            ControlKind controlKind = self.SecondaryControlKinds.Where(sck => allControlKinds.Contains(sck)).SingleOrDefault();
-        //            if (controlKind == null && self.ViewModelRef.Parent != null)
-        //            {
-        //                var parentDescriptor = self.ViewModelRef.Parent.GetViewModelDescriptor();
-        //                if (parentDescriptor != null)
-        //                {
-        //                    // recursively iterate up the inheritance tree
-        //                    visualDesc = GetViewDescriptor(parentDescriptor, tk, controlKind);
-        //                }
-        //                else
-        //                {
-        //                    Logging.Log.WarnFormat("Couldn't find matching controlKind: '{0}'", ck.Name);
-        //                    visualDesc = null;
-        //                }
-        //            }
-        //            else
-        //            {
-        //                visualDesc = GetViewDescriptor(self, tk, controlKind);
-        //            }
-        //        }
-        //    }
-        //    return visualDesc;
-        //}
-
         private static IList<TypeRef> GetAllTypes(ViewModelDescriptor self)
         {
             var allTypes = new List<TypeRef>();

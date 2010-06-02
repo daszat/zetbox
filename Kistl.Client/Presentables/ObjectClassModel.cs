@@ -43,7 +43,9 @@ namespace Kistl.Client.Presentables
             var relListMdl = ModelFactory.CreateViewModel<InstanceListViewModel.Factory>().Invoke(DataContext, DataContext.FindPersistenceObject<DataType>(new Guid("1C0E894F-4EB4-422F-8094-3095735B4917")));
             relListMdl.Filter.Add(new ConstantFilterExpression("A.Type = @0 || B.Type = @0", this.Object));
 
-            result.Add(ModelFactory.CreateViewModel<PropertyGroupModel.Factory>().Invoke(DataContext, "Relations", new ViewModel[] { relListMdl }));
+            var lblMdl = ModelFactory.CreateViewModel<LabeledViewContainerViewModel.Factory>().Invoke(DataContext, "Relations", "", relListMdl);
+            var propGrpMdl = ModelFactory.CreateViewModel<PropertyGroupModel.Factory>().Invoke(DataContext, "Relations", new ViewModel[] { lblMdl});
+            result.Add(propGrpMdl);
             return result;
         }
     }

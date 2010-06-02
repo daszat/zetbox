@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls"
              xmlns:view="clr-namespace:Kistl.Client.WPF.View"
+             xmlns:doeview="clr-namespace:Kistl.Client.WPF.View.ObjectEditor"
              xmlns:client="clr-namespace:Kistl.Client.Presentables;assembly=Kistl.Client">
 
     <!-- Use this for Design Mode support 
@@ -32,81 +33,79 @@
 
         <ctrls:LoadingIndicator DockPanel.Dock="Top" />
 
-        <ScrollViewer HorizontalScrollBarVisibility="Disabled">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
 
-                <TabControl x:Name="PropertyGroupTabs"
-                            Grid.Row="0"
-                            ItemsSource="{Binding PropertyGroups, ValidatesOnDataErrors=true}"
-                            SelectedValue="{Binding SelectedPropertyGroup}"
-                            BorderThickness="0"
-                            HorizontalContentAlignment="Stretch">
+            <TabControl x:Name="PropertyGroupTabs"
+                        Grid.Row="0"
+                        ItemsSource="{Binding PropertyGroups, ValidatesOnDataErrors=true}"
+                        SelectedValue="{Binding SelectedPropertyGroup}"
+                        BorderThickness="0"
+                        HorizontalContentAlignment="Stretch">
 
-                    <TabControl.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Title, Mode=OneWay, ValidatesOnDataErrors=true}" />
-                        </DataTemplate>
-                    </TabControl.ItemTemplate>
+                <TabControl.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Title, Mode=OneWay, ValidatesOnDataErrors=true}" />
+                    </DataTemplate>
+                </TabControl.ItemTemplate>
 
-                    <TabControl.ContentTemplate>
-                        <DataTemplate>
-                            <ListView ItemsSource="{Binding PropertyModels, ValidatesOnDataErrors=true}"
-                                      BorderThickness="0"
-                                      HorizontalContentAlignment="Stretch">
+                <TabControl.ContentTemplate>
+                    <DataTemplate>
+                        <ItemsControl ItemsSource="{Binding PropertyModels, ValidatesOnDataErrors=true}"
+                                  BorderThickness="0"
+                                  HorizontalContentAlignment="Stretch"
+                                  VerticalContentAlignment="Stretch">
 
-                                <!-- use the whole horizontal space, but no more -->
-                                <ListView.ItemContainerStyle>
-                                    <Style>
-                                        <Setter Property="DockPanel.Dock"
-                                                Value="Top" />
-                                    </Style>
-                                </ListView.ItemContainerStyle>
+                            <!-- use the whole horizontal space, but no more -->
+                            <ItemsControl.ItemContainerStyle>
+                                <Style>
+                                    <Setter Property="DockPanel.Dock"
+                                            Value="Top" />
+                                </Style>
+                            </ItemsControl.ItemContainerStyle>
 
-                                <ListView.Template>
-                                    <ControlTemplate>
-                                        <DockPanel IsItemsHost="True"
-                                                   LastChildFill="False" />
-                                    </ControlTemplate>
-                                </ListView.Template>
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <DockPanel IsItemsHost="True"
+                                           LastChildFill="{Binding DataContext.LastChildFill, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
 
-                                <ListView.ItemTemplate>
-                                    <DataTemplate DataType="{x:Type client:ViewModel}">
-                                        <view:LabeledView />
-                                    </DataTemplate>
-                                </ListView.ItemTemplate>
-                            </ListView>
-                        </DataTemplate>
-                    </TabControl.ContentTemplate>
-                </TabControl>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate DataType="{x:Type client:ViewModel}">
+                                    <view:LabeledView />
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </DataTemplate>
+                </TabControl.ContentTemplate>
+            </TabControl>
 
-                <ListView x:Name="ResultList"
-                          Grid.Row="2"
-                          ItemsSource="{Binding MethodResults}"
-                          BorderThickness="0"
-                          ItemTemplateSelector="{StaticResource defaultTemplateSelector}"
-                          HorizontalContentAlignment="Stretch">
+            <ListView x:Name="ResultList"
+                      Grid.Row="1"
+                      ItemsSource="{Binding MethodResults}"
+                      BorderThickness="0"
+                      ItemTemplateSelector="{StaticResource defaultTemplateSelector}"
+                      HorizontalContentAlignment="Stretch">
 
-                    <!-- use the whole horizontal space, but no more -->
-                    <ListView.ItemContainerStyle>
-                        <Style>
-                            <Setter Property="DockPanel.Dock"
-                                    Value="Top" />
-                        </Style>
-                    </ListView.ItemContainerStyle>
+                <!-- use the whole horizontal space, but no more -->
+                <ListView.ItemContainerStyle>
+                    <Style>
+                        <Setter Property="DockPanel.Dock"
+                                Value="Top" />
+                    </Style>
+                </ListView.ItemContainerStyle>
 
-                    <ListView.Template>
-                        <ControlTemplate>
-                            <DockPanel IsItemsHost="True"
-                                       LastChildFill="False" />
-                        </ControlTemplate>
-                    </ListView.Template>
-                </ListView>
-            </Grid>
-        </ScrollViewer>
+                <ListView.Template>
+                    <ControlTemplate>
+                        <DockPanel IsItemsHost="True"
+                                   LastChildFill="False" />
+                    </ControlTemplate>
+                </ListView.Template>
+            </ListView>
+        </Grid>
     </DockPanel>
 </UserControl>

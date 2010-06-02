@@ -15,24 +15,26 @@ namespace Kistl.Client.Presentables
     public partial class ObjectReferenceModel
         : PropertyModel<DataObjectModel>, IValueModel<DataObjectModel>
     {
-        public new delegate ObjectReferenceModel Factory(IKistlContext dataCtx, IDataObject obj, ObjectReferenceProperty prop);
+        public new delegate ObjectReferenceModel Factory(IKistlContext dataCtx, IDataObject obj, Property prop);
 
         public ObjectReferenceModel(
             IViewModelDependencies appCtx, IKistlContext dataCtx,
-            IDataObject obj, ObjectReferenceProperty prop)
+            IDataObject obj, Property prop)
             : base(appCtx, dataCtx, obj, prop)
         {
             AllowNullInput = prop.IsNullable();
-            ReferencedClass = prop.GetReferencedObjectClass();
-        }
-
-        public ObjectReferenceModel(
-           IViewModelDependencies appCtx, IKistlContext dataCtx,
-           IDataObject referenceHolder, CalculatedObjectReferenceProperty prop)
-            : base(appCtx, dataCtx, referenceHolder, prop)
-        {
-            AllowNullInput = prop.IsNullable();
-            ReferencedClass = prop.ReferencedClass;
+            if (prop is ObjectReferenceProperty)
+            {
+                ReferencedClass = ((ObjectReferenceProperty)prop).GetReferencedObjectClass();
+            }
+            else if (prop is CalculatedObjectReferenceProperty)
+            {
+                ReferencedClass = ((CalculatedObjectReferenceProperty)prop).ReferencedClass;
+            }
+            else
+            {
+                throw new ArgumentOutOfRangeException("prop", "prop must be ObjectReferenceProperty or CalculatedObjectReferenceProperty");
+            }
         }
 
         #region Public Interface

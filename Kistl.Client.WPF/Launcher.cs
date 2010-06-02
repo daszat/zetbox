@@ -29,12 +29,6 @@ namespace Kistl.Client.WPF
         {
             if (args == null) { throw new ArgumentNullException("args"); }
 
-            var ctxDebugger = mdlFactory.CreateViewModel<KistlDebuggerAsModel.Factory>().Invoke(ctxFactory());
-            mdlFactory.ShowModel(ctxDebugger, true);
-
-            var cacheDebugger = mdlFactory.CreateViewModel<CacheDebuggerViewModel.Factory>().Invoke(ctxFactory());
-            mdlFactory.ShowModel(cacheDebugger, true);
-
             bool _timeRecorder = args.Contains("-timerecorder");
 
             App.FixupDatabase(ctxFactory);
@@ -51,6 +45,12 @@ namespace Kistl.Client.WPF
 
             ControlKind launcher = ctx.FindPersistenceObject<ControlKind>(new Guid("90D5FF7F-0C82-4278-BB8D-49C240F6BC2C"));
             mdlFactory.ShowModel(initialWorkspace, launcher, true);
+
+            var ctxDebugger = mdlFactory.CreateViewModel<KistlDebuggerAsModel.Factory>().Invoke(ctxFactory());
+            mdlFactory.ShowModel(ctxDebugger, true);
+
+            var cacheDebugger = mdlFactory.CreateViewModel<CacheDebuggerViewModel.Factory>().Invoke(ctxFactory());
+            mdlFactory.ShowModel(cacheDebugger, true);
         }
     }
 }

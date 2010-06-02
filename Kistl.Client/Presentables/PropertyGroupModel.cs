@@ -61,6 +61,14 @@ namespace Kistl.Client.Presentables
             get { return Title; }
         }
 
+        public bool LastChildFill
+        {
+            get
+            {
+                return _properties.Count == 1;
+            }
+        }
+
         #endregion
 
         #region IDataErrorInfo Members
