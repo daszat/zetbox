@@ -32,7 +32,7 @@ namespace Kistl.Client.Presentables
         private void UpdateMemberNamePossibilities()
         {
             if (_memberNameProperty == null)
-                _memberNameProperty = Object.GetObjectClass(FrozenContext.Single).Properties.Single(p => p.Name == "MemberName");
+                _memberNameProperty = Object.GetObjectClass(FrozenContext).Properties.Single(p => p.Name == "MemberName");
 
             if (_memberNameModel == null)
                 // fetches already generated model from cache

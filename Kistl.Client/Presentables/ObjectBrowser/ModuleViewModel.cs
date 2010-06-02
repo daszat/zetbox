@@ -47,7 +47,7 @@ namespace Kistl.Client.Presentables.ObjectBrowser
 
         private void LoadObjectClasses()
         {
-            var datatypes = DataContext.GetQuery<ObjectClass>()
+            var datatypes = MetaContext.GetQuery<ObjectClass>()
                 .Where(dt => dt.Module.ID == _module.ID && !dt.IsSimpleObject)
                 .OrderBy(dt => dt.Name);
             foreach (var dt in datatypes)

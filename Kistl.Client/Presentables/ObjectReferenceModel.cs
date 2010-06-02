@@ -136,7 +136,7 @@ namespace Kistl.Client.Presentables
 
         private void CollectChildClasses(int id, List<ObjectClass> children)
         {
-            var nextChildren = FrozenContext.Single
+            var nextChildren = MetaContext
                 .GetQuery<ObjectClass>()
                 .Where(oc => oc.BaseObjectClass != null && oc.BaseObjectClass.ID == id)
                 .ToList();

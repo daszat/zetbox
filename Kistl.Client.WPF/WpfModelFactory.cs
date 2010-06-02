@@ -13,14 +13,15 @@ namespace Kistl.Client.WPF
 
     using Microsoft.Win32;
     using Autofac;
+using Kistl.API;
 
     public class WpfModelFactory
         : ModelFactory
     {
         private readonly IUiThreadManager uiThread;
 
-        public WpfModelFactory(Autofac.ILifetimeScope container, IUiThreadManager uiThread)
-            : base(container)
+        public WpfModelFactory(Autofac.ILifetimeScope container, IUiThreadManager uiThread, IReadOnlyKistlContext metaCtx)
+            : base(container, metaCtx)
         {
             this.uiThread = uiThread;
         }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Autofac;
 using Kistl.Client.Presentables;
+using Kistl.API;
 
 namespace Kistl.Client.WPF
 {
@@ -14,7 +15,7 @@ namespace Kistl.Client.WPF
             base.Load(builder);
 
             builder
-                .RegisterType<WpfModelFactory>()
+                .Register(c => new WpfModelFactory(c.Resolve<ILifetimeScope>(), c.Resolve<IUiThreadManager>(), c.Resolve<IReadOnlyKistlContext>(Kistl.API.Helper.MetaContextServiceName)))
                 .As<IModelFactory>()
                 .SingleInstance();
         }

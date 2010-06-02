@@ -34,6 +34,18 @@ namespace Kistl.API
             moduleBuilder
                 .Register(c => new TypeTransformations(c.Resolve<InterfaceType.Factory>(), c.Resolve<InterfaceType.NameFactory>(), c.Resolve<ImplementationType.Factory>(), c.Resolve<IAssemblyConfiguration>()))
                 .As<ITypeTransformations>();
+
+            moduleBuilder
+                .Register(c => FrozenContext.Single)
+                .Named<IReadOnlyKistlContext>(Kistl.API.Helper.MetaContextServiceName)
+                .SingleInstance()
+                .ExternallyOwned();
+
+            moduleBuilder
+                .Register(c => FrozenContext.Single)
+                .Named<IReadOnlyKistlContext>(Kistl.API.Helper.FrozenContextServiceName)
+                .SingleInstance()
+                .ExternallyOwned();
         }
     }
 }

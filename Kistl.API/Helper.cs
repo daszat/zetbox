@@ -58,6 +58,9 @@ namespace Kistl.API
         /// </summary>
         public static readonly string PositionSuffix = "_pos";
 
+        public static readonly string MetaContextServiceName = "MetaContext";
+        public static readonly string FrozenContextServiceName = "FrozenContext";
+
         /// <summary>
         /// Default length if StringRangeConstraint is missing
         /// </summary>

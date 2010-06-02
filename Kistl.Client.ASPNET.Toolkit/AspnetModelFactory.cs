@@ -12,6 +12,7 @@ namespace Kistl.Client.ASPNET.Toolkit
     using Kistl.App.GUI;
     using Kistl.Client.GUI;
     using Kistl.Client.Presentables;
+    using Kistl.API;
 
     [AttributeUsage(AttributeTargets.Class)]
     public class ControlLocation : Attribute
@@ -37,8 +38,8 @@ namespace Kistl.Client.ASPNET.Toolkit
         : ModelFactory
     {
 
-        public AspnetModelFactory(Autofac.ILifetimeScope container)
-            : base(container)
+        public AspnetModelFactory(Autofac.ILifetimeScope container, IReadOnlyKistlContext metaCtx)
+            : base(container, metaCtx)
         {
 
         }

@@ -8,6 +8,7 @@ using Kistl.Client.Forms.View;
 using Kistl.Client.Presentables;
 using Kistl.Client.GUI;
 using Kistl.Client.Presentables.ObjectBrowser;
+using Kistl.API;
 
 namespace Kistl.Client.Forms
 {
@@ -17,8 +18,8 @@ namespace Kistl.Client.Forms
 
         private List<WorkspaceView> _workspaces = new List<WorkspaceView>();
 
-        public FormsModelFactory(Autofac.ILifetimeScope container)
-            : base(container)
+        public FormsModelFactory(Autofac.ILifetimeScope container, IReadOnlyKistlContext metaCtx)
+            : base(container, metaCtx)
         {
         }
 

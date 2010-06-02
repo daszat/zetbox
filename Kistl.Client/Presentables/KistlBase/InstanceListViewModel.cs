@@ -45,23 +45,9 @@ namespace Kistl.Client.Presentables.KistlBase
         {
             if (dataCtx == null) throw new ArgumentNullException("dataCtx");
             if (type == null) throw new ArgumentNullException("type");
-            _type = type;
+            
+            this._type = type;
             this.ctxFactory = ctxFactory;
-
-            // Add Property filter expressions
-            foreach (var prop in type.Properties.Where(p => p.FilterConfiguration != null))
-            {
-                var cfg = prop.FilterConfiguration;
-                this.Filter.Add(ModelFactory.CreateViewModel<PropertyFilterExpression.Factory>(cfg.ViewModelDescriptor.ViewModelRef.AsType(true)).Invoke(DataContext, prop, cfg));
-            }
-
-            // Add default filter for all
-            this.Filter.Add(ModelFactory.CreateViewModel<ToStringFilterExpression.Factory>().Invoke(dataCtx, "Name"));
-
-            // Add default actions
-            Commands.Add(ModelFactory.CreateViewModel<NewDataObjectCommand.Factory>().Invoke(dataCtx, _type));
-            Commands.Add(ModelFactory.CreateViewModel<OpenDataObjectCommand.Factory>().Invoke(dataCtx));
-            Commands.Add(ModelFactory.CreateViewModel<RefreshCommand.Factory>().Invoke(dataCtx, this));
         }
 
         #region Public interface
@@ -74,6 +60,17 @@ namespace Kistl.Client.Presentables.KistlBase
                 if (_filter == null)
                 {
                     _filter = new ObservableCollection<IFilterExpression>();
+
+                    // Add Property filter expressions
+                    foreach (var prop in _type.Properties.Where(p => p.FilterConfiguration != null))
+                    {
+                        var cfg = prop.FilterConfiguration;
+                        _filter.Add(ModelFactory.CreateViewModel<PropertyFilterExpression.Factory>(cfg.ViewModelDescriptor.ViewModelRef.AsType(true)).Invoke(DataContext, prop, cfg));
+                    }
+
+                    // Add default filter for all
+                    _filter.Add(ModelFactory.CreateViewModel<ToStringFilterExpression.Factory>().Invoke(DataContext, "Name"));
+
                     _filter.CollectionChanged += new NotifyCollectionChangedEventHandler(_filter_CollectionChanged);
                 }
                 return _filter;
@@ -95,14 +92,7 @@ namespace Kistl.Client.Presentables.KistlBase
         {
             get
             {
-                if (_filter == null)
-                {
-                    return null;
-                }
-                else
-                {
-                    return _filter.OfType<IUIFilterExpression>();
-                }
+                return Filter.OfType<IUIFilterExpression>();
             }
         }
 
@@ -114,6 +104,10 @@ namespace Kistl.Client.Presentables.KistlBase
                 if (_commands == null)
                 {
                     _commands = new ObservableCollection<ICommand>();
+                    // Add default actions
+                    _commands.Add(ModelFactory.CreateViewModel<NewDataObjectCommand.Factory>().Invoke(DataContext, _type));
+                    _commands.Add(ModelFactory.CreateViewModel<OpenDataObjectCommand.Factory>().Invoke(DataContext));
+                    _commands.Add(ModelFactory.CreateViewModel<RefreshCommand.Factory>().Invoke(DataContext, this));
                 }
                 return _commands;
             }
@@ -252,12 +246,9 @@ namespace Kistl.Client.Presentables.KistlBase
             // See Case 552
             var result = (IQueryable)mi.Invoke(this, new object[] { });
 
-            if (_filter != null)
+            foreach (var f in Filter.OfType<ILinqFilterExpression>().Where(f => f.Enabled))
             {
-                foreach (var f in _filter.OfType<ILinqFilterExpression>().Where(f => f.Enabled))
-                {
-                    result = result.Where(f.Predicate, f.FilterValues);
-                }
+                result = result.Where(f.Predicate, f.FilterValues);
             }
 
             return result;
@@ -270,7 +261,7 @@ namespace Kistl.Client.Presentables.KistlBase
         private void LoadInstances()
         {
             // Can execute?
-            if (_filter.Count(f => !f.Enabled && f.Requiered) > 0) return;
+            if (Filter.Count(f => !f.Enabled && f.Requiered) > 0) return;
 
             foreach (var obj in GetQuery().Cast<IDataObject>().ToList().OrderBy(obj => obj.ToString()))
             {
@@ -296,7 +287,7 @@ namespace Kistl.Client.Presentables.KistlBase
         {
             _instancesFiltered = new ReadOnlyObservableCollection<DataObjectModel>(this.Instances);
             // poor man's full text search
-            foreach (var filter in _filter.OfType<IPostFilterExpression>())
+            foreach (var filter in Filter.OfType<IPostFilterExpression>())
             {
                 if (filter.Enabled)
                 {

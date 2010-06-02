@@ -33,6 +33,9 @@ namespace Kistl.Client.Presentables
         /// </summary>
         IAsyncThreadManager AsyncThread { get; }
 
+        IReadOnlyKistlContext MetaContext { get; }
+
+        IReadOnlyKistlContext FrozenContext { get; }
     }
 
     [AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = false)]
@@ -68,6 +71,10 @@ namespace Kistl.Client.Presentables
         /// A <see cref="IThreadManager"/> for asynchronous Tasks
         /// </summary>
         protected IAsyncThreadManager Async { get { return _dependencies.AsyncThread; } }
+
+        protected IReadOnlyKistlContext MetaContext { get { return _dependencies.MetaContext; } }
+
+        protected IReadOnlyKistlContext FrozenContext { get { return _dependencies.FrozenContext; } }
 
         /// <summary>
         /// The factory from where new models should be created
@@ -176,8 +183,6 @@ namespace Kistl.Client.Presentables
 
     internal class DesignerDependencies : IViewModelDependencies
     {
-        #region IGuiApplicationContext Members
-
         public IModelFactory Factory
         {
             get { throw new NotImplementedException(); }
@@ -193,7 +198,16 @@ namespace Kistl.Client.Presentables
         {
             get { throw new InvalidOperationException("No asynchronous operations allowed in Design mode"); }
         }
-        #endregion
+
+        public IReadOnlyKistlContext MetaContext
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public IReadOnlyKistlContext FrozenContext
+        {
+            get { throw new NotImplementedException(); }
+        }
     }
 
 }

@@ -15,11 +15,13 @@ namespace Kistl.Client
     {
         private class ViewModelDependencies : IViewModelDependencies
         {
-            public ViewModelDependencies(IModelFactory f, IUiThreadManager ui, IAsyncThreadManager async)
+            public ViewModelDependencies(IModelFactory f, IUiThreadManager ui, IAsyncThreadManager async, IReadOnlyKistlContext metaCtx, IReadOnlyKistlContext frozenCtx)
             {
                 Factory = f;
                 UiThread = ui;
                 AsyncThread = async;
+                MetaContext = metaCtx;
+                FrozenContext = frozenCtx;
             }
 
             #region IViewModelDependencies Members
@@ -37,6 +39,18 @@ namespace Kistl.Client
             }
 
             public IAsyncThreadManager AsyncThread
+            {
+                get;
+                private set;
+            }
+
+            public IReadOnlyKistlContext MetaContext
+            {
+                get;
+                private set;
+            }
+
+            public IReadOnlyKistlContext FrozenContext
             {
                 get;
                 private set;
@@ -67,17 +81,17 @@ namespace Kistl.Client
                 .SingleInstance();
 
             moduleBuilder
-                .RegisterType<ModelFactory>()
-                .As<IModelFactory>()
-                .InstancePerLifetimeScope();
-
-            moduleBuilder
                 .RegisterType<SynchronousThreadManager>()
                 .As<IAsyncThreadManager>()
                 .As<IUiThreadManager>();
 
             moduleBuilder
-                .Register(c => new ViewModelDependencies(c.Resolve<IModelFactory>(), c.Resolve<IUiThreadManager>(), c.Resolve<IAsyncThreadManager>()))
+                .Register(c => new ViewModelDependencies(
+                    c.Resolve<IModelFactory>(), 
+                    c.Resolve<IUiThreadManager>(), 
+                    c.Resolve<IAsyncThreadManager>(),
+                    c.Resolve<IReadOnlyKistlContext>(Kistl.API.Helper.MetaContextServiceName),
+                    c.Resolve<IReadOnlyKistlContext>(Kistl.API.Helper.FrozenContextServiceName)))
                 .As<IViewModelDependencies>();
 
             // Register all ViewModel Types
