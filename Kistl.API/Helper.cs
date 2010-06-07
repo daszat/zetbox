@@ -79,6 +79,15 @@ namespace Kistl.API
             return obj.Context != null && obj.ID > INVALIDID;
         }
 
+        public static bool IsFrozenObject(IPersistenceObject obj)
+        {
+            if (obj == null)
+                throw new ArgumentNullException("obj");
+
+            return obj.ReadOnlyContext == FrozenContext.Single;
+        }
+
+
         /// <summary>
         /// Newly created objects are not yet saved to the server and therefore handle some data only locally.
         /// This method can distinguish them from "older" objects that already have a representation on the server.
@@ -86,8 +95,9 @@ namespace Kistl.API
         /// <returns>true when the object is detached and/or doesn't exist on the server yet</returns>
         public static bool IsFloatingObject(IPersistenceObject obj)
         {
-            return !IsPersistedObject(obj);
+            return !IsPersistedObject(obj) && !IsFrozenObject(obj);
         }
+
 
         /// <summary>
         /// Constant for Max List Count. Value is 1000.

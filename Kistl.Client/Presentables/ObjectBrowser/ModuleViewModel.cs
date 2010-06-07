@@ -7,6 +7,7 @@ using System.Text;
 
 using Kistl.API;
 using Kistl.App.Base;
+using Kistl.App.Extensions;
 using Kistl.API.Configuration;
 using Kistl.Client.Presentables.KistlBase;
 
@@ -50,10 +51,10 @@ namespace Kistl.Client.Presentables.ObjectBrowser
             var datatypes = MetaContext.GetQuery<ObjectClass>()
                 .Where(dt => dt.Module.ID == _module.ID && !dt.IsSimpleObject)
                 .OrderBy(dt => dt.Name);
-            foreach (var dt in datatypes)
+            foreach (var cls in datatypes)
             {
-                var mdl = ModelFactory.CreateViewModel<InstanceListViewModel.Factory>().Invoke(DataContext, dt);
-                mdl.Commands.Add(ModelFactory.CreateViewModel<EditDataObjectClassCommand.Factory>().Invoke(DataContext, dt));
+                var mdl = ModelFactory.CreateViewModel<InstanceListViewModel.Factory>().Invoke(DataContext, cls, null);
+                mdl.Commands.Add(ModelFactory.CreateViewModel<EditDataObjectClassCommand.Factory>().Invoke(DataContext, cls));
                 ObjectClasses.Add(mdl);
             }
         }

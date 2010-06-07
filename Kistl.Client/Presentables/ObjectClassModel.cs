@@ -39,8 +39,8 @@ namespace Kistl.Client.Presentables
         protected override List<PropertyGroupModel> CreatePropertyGroups()
         {
             var result = base.CreatePropertyGroups();
-            
-            var relListMdl = ModelFactory.CreateViewModel<InstanceListViewModel.Factory>().Invoke(DataContext, DataContext.FindPersistenceObject<DataType>(new Guid("1C0E894F-4EB4-422F-8094-3095735B4917")));
+
+            var relListMdl = ModelFactory.CreateViewModel<InstanceListViewModel.Factory>().Invoke(DataContext, null, DataContext.GetQuery<Relation>());
             relListMdl.Filter.Add(new ConstantFilterExpression("A.Type = @0 || B.Type = @0", this.Object));
 
             var lblMdl = ModelFactory.CreateViewModel<LabeledViewContainerViewModel.Factory>().Invoke(DataContext, "Relations", "", relListMdl);

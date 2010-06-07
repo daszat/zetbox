@@ -23,7 +23,7 @@ namespace Kistl.Client.Presentables.KistlBase
     public class InstanceListViewModel
         : ViewModel, IViewModelWithIcon, IRefreshCommandListener
     {
-        public new delegate InstanceListViewModel Factory(IKistlContext dataCtx, DataType type);
+        public new delegate InstanceListViewModel Factory(IKistlContext dataCtx, DataType type, IQueryable qry);
 
         protected readonly Func<IKistlContext> ctxFactory;
 
@@ -33,25 +33,50 @@ namespace Kistl.Client.Presentables.KistlBase
         /// <param name="appCtx">the application context to use</param>
         /// <param name="config"></param>
         /// <param name="dataCtx">the data context to use</param>
-        /// <param name="type">the data type to model</param>
+        /// <param name="type">optional: the data type to model. If null, qry must be a Query of a valid DataType</param>
+        /// <param name="qry">optional: the query to display. If null, Query will be constructed from type</param>
         /// <param name="ctxFactory"></param>
         public InstanceListViewModel(
             IViewModelDependencies appCtx,
             KistlConfig config,
             IKistlContext dataCtx,
             DataType type,
+            IQueryable qry,
             Func<IKistlContext> ctxFactory)
             : base(appCtx, dataCtx)
         {
             if (dataCtx == null) throw new ArgumentNullException("dataCtx");
-            if (type == null) throw new ArgumentNullException("type");
-            
-            this._type = type;
+            if (qry == null && type == null) throw new ArgumentException("qry and type may not be null");
+
+            if (type != null)
+            {
+                _type = type;
+            }
+            else
+            {
+                this._type = FrozenContext.GetQuery<DataType>().SingleOrDefault(dt => dt.GetDataType() == qry.ElementType);
+                if (_type == null) throw new ArgumentException("Cannot resolve type from Query");
+            }
+            if (qry == null)
+            {
+                MethodInfo mi = this.GetType().FindGenericMethod("GetTypedQuery", new Type[] { DataContext.GetInterfaceType(_type.GetDataType()).Type }, null);
+                // See Case 552
+                _query = (IQueryable)mi.Invoke(this, new object[] { });
+            }
+            else
+            {
+                _query = qry;
+            }
+
             this.ctxFactory = ctxFactory;
         }
 
-        #region Public interface
+        public IQueryable GetTypedQuery<T>() where T : class, IDataObject
+        {
+            return DataContext.GetQuery<T>();
+        }
 
+        #region Public interface
         private ObservableCollection<IFilterExpression> _filter = null;
         public ICollection<IFilterExpression> Filter
         {
@@ -235,16 +260,11 @@ namespace Kistl.Client.Presentables.KistlBase
             return Name;
         }
 
-        public virtual IQueryable GetTypedQuery<T>() where T : class, IDataObject
-        {
-            return DataContext.GetQuery<T>();
-        }
 
+        private IQueryable _query;
         protected virtual IQueryable GetQuery()
         {
-            MethodInfo mi = this.GetType().FindGenericMethod("GetTypedQuery", new Type[] { InterfaceType.Type }, null);
-            // See Case 552
-            var result = (IQueryable)mi.Invoke(this, new object[] { });
+            var result = _query;
 
             foreach (var f in Filter.OfType<ILinqFilterExpression>().Where(f => f.Enabled))
             {
