@@ -6,6 +6,7 @@
         ResizeMode="CanResize"
         SizeToContent="Height"
         MinWidth="300"
+        Loaded="Window_Loaded"
         xmlns:commands="clr-namespace:Kistl.Client.WPF.Commands"
         commands:SmartRoutedUICommand.IsCommandSink="True">
     <Window.Resources>

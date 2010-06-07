@@ -26,6 +26,17 @@ namespace Kistl.Client.WPF.View
             InitializeComponent();
         }
 
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            ViewModel.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(ViewModel_PropertyChanged);
+
+        }
+
+        void ViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "Show" && !ViewModel.Show) this.Close();
+        }
+
         private void ChooseClickHandler(object sender, RoutedEventArgs e)
         {
             var choosen = ViewModel.SelectedItem;

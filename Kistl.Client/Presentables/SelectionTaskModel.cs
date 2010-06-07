@@ -13,8 +13,8 @@ namespace Kistl.Client.Presentables
     public class DataObjectSelectionTaskModel
         : ViewModel
     {
-        public new delegate DataObjectSelectionTaskModel Factory(IKistlContext dataCtx, 
-            DataType type, 
+        public new delegate DataObjectSelectionTaskModel Factory(IKistlContext dataCtx,
+            DataType type,
             IQueryable qry,
             Action<DataObjectModel> callback,
             IList<CommandModel> additionalActions);
@@ -54,7 +54,7 @@ namespace Kistl.Client.Presentables
         void ListViewModel_ItemsDefaultAction(IEnumerable<DataObjectModel> objects)
         {
             var obj = objects.FirstOrDefault();
-            if(obj != null) Choose(obj);
+            if (obj != null) Choose(obj);
         }
 
         public InstanceListViewModel ListViewModel { get; private set; }
@@ -79,6 +79,7 @@ namespace Kistl.Client.Presentables
             {
                 _callback(null);
             }
+            Show = false;
         }
 
         public void Refresh()
@@ -92,6 +93,13 @@ namespace Kistl.Client.Presentables
             {
                 return ListViewModel.SelectedItems.FirstOrDefault();
             }
+        }
+
+        private bool _show = true;
+        public bool Show
+        {
+            get { return _show; }
+            private set { _show = value; OnPropertyChanged("Show"); }
         }
 
         #endregion
