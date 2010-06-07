@@ -19,7 +19,7 @@ namespace Kistl.Client.WPF.View
     /// <summary>
     /// Interaction logic for SelectionDialog.xaml
     /// </summary>
-    public partial class SelectionDialog : Window
+    public partial class SelectionDialog : Window, IHasViewModel<DataObjectSelectionTaskModel>
     {
         public SelectionDialog()
         {
@@ -28,35 +28,25 @@ namespace Kistl.Client.WPF.View
 
         private void ChooseClickHandler(object sender, RoutedEventArgs e)
         {
-            var model = (DataObjectSelectionTaskModel)DataContext;
-            var choosen = (DataObjectModel)choicesList.SelectedItem;
-            model.Choose(choosen);
+            var choosen = ViewModel.SelectedItem;
+            if (choosen == null) return;
+            ViewModel.Choose(choosen);
             this.Close();
         }
 
         private void CancelClickHandler(object sender, RoutedEventArgs e)
         {
-            var model = (DataObjectSelectionTaskModel)DataContext;
-            model.Choose(null);
+            ViewModel.Choose(null);
             this.Close();            
         }
 
-        private void ChoiceActivated(object sender, MouseButtonEventArgs e)
+        #region IHasViewModel<DataObjectSelectionTaskModel> Members
+
+        public DataObjectSelectionTaskModel ViewModel
         {
-            var model = (DataObjectSelectionTaskModel)DataContext;
-            var choosen = (DataObjectModel)choicesList.SelectedItem;
-            
-            // ignore double clicks without selection
-            if (choosen != null)
-            {
-                model.Choose(choosen);
-                this.Close();
-            }
+            get { return (DataObjectSelectionTaskModel)DataContext; }
         }
 
-        private void OnLoaded(object sender, RoutedEventArgs e)
-        {
-            filterTextBox.Focus();
-        }
+        #endregion
     }
 }

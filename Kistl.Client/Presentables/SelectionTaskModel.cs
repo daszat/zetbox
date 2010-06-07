@@ -5,16 +5,18 @@ using System.Linq;
 using System.Text;
 
 using Kistl.API;
+using Kistl.App.Base;
+using Kistl.Client.Presentables.KistlBase;
 
 namespace Kistl.Client.Presentables
 {
-    public class SelectionTaskModel<TChoosable>
+    public class DataObjectSelectionTaskModel
         : ViewModel
-        where TChoosable : ViewModel
     {
-        public new delegate SelectionTaskModel<TChoosable> Factory(IKistlContext dataCtx,
-            IList<TChoosable> choices,
-            Action<TChoosable> callback,
+        public new delegate DataObjectSelectionTaskModel Factory(IKistlContext dataCtx, 
+            DataType type, 
+            IQueryable qry,
+            Action<DataObjectModel> callback,
             IList<CommandModel> additionalActions);
 
         /// <summary>
@@ -25,39 +27,32 @@ namespace Kistl.Client.Presentables
         /// </summary>
         /// <param name="appCtx"></param>
         /// <param name="dataCtx"></param>
-        /// <param name="choices"></param>
+        /// <param name="type"></param>
+        /// <param name="qry"></param>
         /// <param name="callback"></param>
         /// <param name="additionalActions"></param>
-        protected SelectionTaskModel(
+        public DataObjectSelectionTaskModel(
             IViewModelDependencies appCtx, IKistlContext dataCtx,
-            IList<TChoosable> choices,
-            Action<TChoosable> callback,
+            DataType type,
+            IQueryable qry,
+            Action<DataObjectModel> callback,
             IList<CommandModel> additionalActions)
             : base(appCtx, dataCtx)
         {
-            _choices = _filteredChoices = new ReadOnlyCollection<TChoosable>(choices);
             _callback = callback;
             _additionalActions = new ReadOnlyCollection<CommandModel>(additionalActions ?? new CommandModel[] { });
+            ListViewModel = ModelFactory.CreateViewModel<InstanceListViewModel.Factory>().Invoke(dataCtx, type, qry);
+            ListViewModel.Commands.Clear();
+            foreach (var cmd in _additionalActions)
+            {
+                ListViewModel.Commands.Add(cmd);
+            }
         }
+
+        public InstanceListViewModel ListViewModel { get; private set; }
+
 
         #region Public interface
-
-        public ReadOnlyCollection<TChoosable> Choices
-        {
-            get
-            {
-                return _choices;
-            }
-        }
-
-        public ReadOnlyCollection<TChoosable> FilteredChoices
-        {
-            get
-            {
-                return _filteredChoices;
-            }
-        }
-
         public ReadOnlyCollection<CommandModel> AdditionalActions
         {
             get
@@ -66,9 +61,9 @@ namespace Kistl.Client.Presentables
             }
         }
 
-        public void Choose(TChoosable choosen)
+        public void Choose(DataObjectModel choosen)
         {
-            if (_choices.Contains(choosen))
+            if (ListViewModel.Instances.Contains(choosen))
             {
                 _callback(choosen);
             }
@@ -78,72 +73,27 @@ namespace Kistl.Client.Presentables
             }
         }
 
-        private string _filter;
-        public string Filter
+        public void Refresh()
         {
-            get { return _filter; }
-            set
-            {
-                if (_filter != value)
-                {
-                    _filter = value;
-                    OnFilterChanged();
-                }
-            }
+            ListViewModel.ReloadInstances();
         }
 
-        protected virtual void OnFilterChanged()
+        public DataObjectModel SelectedItem
         {
-            OnPropertyChanged("Filter");
-            FilterChoices();
-        }
-
-        private void FilterChoices()
-        {
-            if (String.IsNullOrEmpty(_filter))
+            get
             {
-                _filteredChoices = _choices;
+                return ListViewModel.SelectedItems.FirstOrDefault();
             }
-            else
-            {
-                string filter = _filter.ToLowerInvariant();
-                _filteredChoices = new ReadOnlyCollection<TChoosable>(_choices.Where(o => o.Name.ToLowerInvariant().Contains(filter)).ToList());
-            }
-            OnPropertyChanged("FilteredChoices");
-        }
-
-        public void Refresh(IList<TChoosable> choices)
-        {
-            _choices = new ReadOnlyCollection<TChoosable>(choices);
-            FilterChoices();
         }
 
         #endregion
 
-        private ReadOnlyCollection<TChoosable> _choices;
-        private ReadOnlyCollection<TChoosable> _filteredChoices;
-        private Action<TChoosable> _callback;
+        private Action<DataObjectModel> _callback;
         private ReadOnlyCollection<CommandModel> _additionalActions;
 
         public override string Name
         {
-            get { return "Choose object of Type " + typeof(TChoosable).Name; }
-        }
-    }
-
-    public class DataObjectSelectionTaskModel : SelectionTaskModel<DataObjectModel>
-    {
-        public new delegate DataObjectSelectionTaskModel Factory(IKistlContext dataCtx, IList<DataObjectModel> choices,
-            Action<DataObjectModel> callback,
-            IList<CommandModel> additionalActions);
-
-        public DataObjectSelectionTaskModel(
-            IViewModelDependencies appCtx, IKistlContext dataCtx,
-            IList<DataObjectModel> choices,
-            Action<DataObjectModel> callback,
-            IList<CommandModel> additionalActions)
-            : base(appCtx, dataCtx, choices, callback, additionalActions)
-        {
+            get { return "Choose object of Type " + ListViewModel.DataTypeModel.Name; }
         }
     }
 }

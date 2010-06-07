@@ -244,17 +244,11 @@ namespace Kistl.Client.Presentables
             }
             else
             {
-                // sort by name, create models
-                // TODO: filter non-instantiable classes
-                var childModels = children
-                    .OrderBy(oc => oc.Name)
-                    .Select(oc => (DataObjectModel)ModelFactory.CreateViewModel<ObjectClassModel.Factory>().Invoke(DataContext, oc))
-                    .ToList();
-
                 ModelFactory.ShowModel(
                     ModelFactory.CreateViewModel<DataObjectSelectionTaskModel.Factory>().Invoke(
                         DataContext,
-                        childModels,
+                        null,
+                        children.AsQueryable(),
                         new Action<DataObjectModel>(delegate(DataObjectModel chosen)
                         {
                             if (chosen != null)
@@ -285,17 +279,13 @@ namespace Kistl.Client.Presentables
         /// </summary>
         public void AddExistingItem()
         {
-            var baseclass = ((ObjectReferenceProperty)this.Property).GetReferencedObjectClass().GetDescribedInterfaceType();
-            var instances = DataContext.GetQuery(baseclass).ToList(); // TODO: remove superfluous ToList
-            var instanceModels = instances
-                .OrderBy(i => i.ToString())
-                .Select(i => ModelFactory.CreateViewModel<DataObjectModel.Factory>(i).Invoke(DataContext, i))
-                .ToList();
+            var ifType = DataContext.GetInterfaceType(Property.GetPropertyType());
 
             ModelFactory.ShowModel(
                 ModelFactory.CreateViewModel<DataObjectSelectionTaskModel.Factory>().Invoke(
                     DataContext,
-                    instanceModels,
+                    FrozenContext.GetQuery<ObjectClass>().Single(c => c.GetDescribedInterfaceType() == ifType),
+                    DataContext.GetQuery(ifType),
                     new Action<DataObjectModel>(delegate(DataObjectModel chosen)
                     {
                         if (chosen != null)

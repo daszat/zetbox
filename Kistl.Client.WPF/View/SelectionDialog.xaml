@@ -4,8 +4,8 @@
         xmlns:client="clr-namespace:Kistl.Client.Presentables;assembly=Kistl.Client"
         Title="Choose Object"
         ResizeMode="CanResize"
-        SizeToContent="WidthAndHeight"
-        Loaded="OnLoaded"
+        SizeToContent="Height"
+        MinWidth="300"
         xmlns:commands="clr-namespace:Kistl.Client.WPF.Commands"
         commands:SmartRoutedUICommand.IsCommandSink="True">
     <Window.Resources>
@@ -17,14 +17,6 @@
     <DockPanel Style="{StaticResource addedMargins}"
                LastChildFill="True">
 
-        <DockPanel DockPanel.Dock="Top"
-                   Margin="0,0,0,3">
-            <Label DockPanel.Dock="Left">Search:</Label>
-            <TextBox x:Name="filterTextBox"
-                     Text="{Binding Path=Filter, UpdateSourceTrigger=PropertyChanged}"
-                     TabIndex="1" />
-        </DockPanel>
-
         <UniformGrid DockPanel.Dock="Bottom"
                      Style="{StaticResource addedMargins}"
                      Rows="1">
@@ -34,23 +26,10 @@
             <Button IsCancel="True"
                     Click="CancelClickHandler"
                     Style="{StaticResource addedMargins}">Cancel</Button>
-            <ListBox ItemsSource="{Binding Path=AdditionalActions}" >
-                <ListBox.ItemTemplate>
-                    <DataTemplate DataType="{x:Type client:CommandModel}">
-                        <Button Command="{Binding Converter={StaticResource CommandConverter}}"
-                                CommandParameter="{Binding Path=DataContext, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
-                                Style="{StaticResource addedMargins}" Content="{Binding Path=Label}" ToolTip="{Binding Path=ToolTip}"></Button>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
         </UniformGrid>
 
-        <ListBox x:Name="choicesList"
-                 ItemsSource="{Binding FilteredChoices}"
-                 ItemTemplateSelector="{StaticResource listItemTemplateSelector}"
-                 MouseDoubleClick="ChoiceActivated"
-                 MaxHeight="400"
-                 Style="{StaticResource addedMargins}" />
-
+        <ContentPresenter 
+                  ContentTemplateSelector="{StaticResource defaultTemplateSelector}"
+                  Content="{Binding ListViewModel}" />
     </DockPanel>
 </Window>

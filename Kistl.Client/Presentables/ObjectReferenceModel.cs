@@ -122,20 +122,6 @@ namespace Kistl.Client.Presentables
             }
         }
 
-        public IList<DataObjectModel> GetDomain()
-        {
-            List<DataObjectModel> result = new List<DataObjectModel>();
-
-            foreach (var obj in DataContext
-                .GetQuery(DataContext.GetInterfaceType(Property.GetPropertyType()))
-                .ToList() // TODO: remove this
-                .OrderBy(obj => obj.ToString()).ToList())
-            {
-                result.Add(ModelFactory.CreateViewModel<DataObjectModel.Factory>(obj).Invoke(DataContext, obj));
-            }
-            return result;
-        }
-
         private void CollectChildClasses(int id, List<ObjectClass> children)
         {
             var nextChildren = MetaContext

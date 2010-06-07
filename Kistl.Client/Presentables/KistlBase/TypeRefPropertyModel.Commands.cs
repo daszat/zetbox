@@ -86,10 +86,8 @@ namespace Kistl.Client.Presentables.KistlBase
         {
             var selectionTask = ModelFactory.CreateViewModel<DataObjectSelectionTaskModel.Factory>().Invoke(
                 DataContext,
-                DataContext.GetQuery<Kistl.App.Base.Assembly>()
-                    .OrderBy(a => a.Name)
-                    .Select(a => ModelFactory.CreateViewModel<DataObjectModel.Factory>(a).Invoke(DataContext, a))
-                    .ToList(),
+                null,
+                DataContext.GetQuery<Kistl.App.Base.Assembly>(),
                 new Action<DataObjectModel>(delegate(DataObjectModel chosen)
                 {
                     if (chosen != null)
@@ -109,6 +107,7 @@ namespace Kistl.Client.Presentables.KistlBase
         {
             var selectionTask = ModelFactory.CreateViewModel<DataObjectSelectionTaskModel.Factory>().Invoke(
                 DataContext,
+                null,
                 GetTypeRefList(assembly),
                 new Action<DataObjectModel>(delegate(DataObjectModel chosen)
                 {
@@ -121,13 +120,10 @@ namespace Kistl.Client.Presentables.KistlBase
             ModelFactory.ShowModel(selectionTask, true);
         }
 
-        internal List<DataObjectModel> GetTypeRefList(Kistl.App.Base.Assembly assembly)
+        internal IQueryable GetTypeRefList(Kistl.App.Base.Assembly assembly)
         {
-            return DataContext.GetQuery<Kistl.App.Base.TypeRef>().Where(tr => tr.Assembly.ID == assembly.ID)
-                                .ToList()
-                                .OrderBy(tr => tr.FullName)
-                                .Select(tr => ModelFactory.CreateViewModel<DataObjectModel.Factory>(tr).Invoke(DataContext, tr))
-                                .ToList();
+            return DataContext.GetQuery<Kistl.App.Base.TypeRef>().Where(tr => tr.Assembly.ID == assembly.ID);
+                                //.OrderBy(tr => tr.FullName);
         }
 
         private class RegenerateTypeRefsCommand : CommandModel
@@ -153,7 +149,7 @@ namespace Kistl.Client.Presentables.KistlBase
             {
                 _assembly.RegenerateTypeRefs();
                 var mdl = (DataObjectSelectionTaskModel)data;
-                mdl.Refresh(_outer.GetTypeRefList(_assembly));
+                mdl.Refresh();
             }
         }
 

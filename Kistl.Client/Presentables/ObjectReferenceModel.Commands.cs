@@ -86,17 +86,11 @@ namespace Kistl.Client.Presentables
             }
             else
             {
-                // sort by name, create models
-                // TODO: filter non-instantiable classes
-                var childModels = children
-                    .OrderBy(oc => oc.Name)
-                    .Select(oc => (DataObjectModel)ModelFactory.CreateViewModel<ObjectClassModel.Factory>().Invoke(DataContext, oc))
-                    .ToList();
-
                 ModelFactory.ShowModel(
                     ModelFactory.CreateViewModel<DataObjectSelectionTaskModel.Factory>().Invoke(
                         DataContext,
-                        childModels,
+                        null,
+                        children.AsQueryable(),
                         new Action<DataObjectModel>(delegate(DataObjectModel chosen)
                         {
                             if (chosen != null)
@@ -161,16 +155,18 @@ namespace Kistl.Client.Presentables
 
         public void SelectValue()
         {
+            var ifType = DataContext.GetInterfaceType(Property.GetPropertyType());
             var selectionTask = ModelFactory.CreateViewModel<DataObjectSelectionTaskModel.Factory>().Invoke(
                 DataContext,
-                GetDomain(),
+                FrozenContext.GetQuery<ObjectClass>().Single(c => c.GetDescribedInterfaceType() == ifType),
+                DataContext.GetQuery(ifType),
                 new Action<DataObjectModel>(delegate(DataObjectModel chosen)
                     {
                         if (chosen != null)
                         {
                             Value = chosen;
                         }
-                    }), 
+                    }),
                 null);
             ModelFactory.ShowModel(selectionTask, true);
         }
