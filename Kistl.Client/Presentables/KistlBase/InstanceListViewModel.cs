@@ -85,18 +85,27 @@ namespace Kistl.Client.Presentables.KistlBase
                 if (_filter == null)
                 {
                     _filter = new ObservableCollection<IFilterExpression>();
+                    // React on changes -> attach to FilterChanged Event
+                    _filter.CollectionChanged += new NotifyCollectionChangedEventHandler(_filter_CollectionChanged);
 
-                    // Add Property filter expressions
-                    foreach (var prop in _type.Properties.Where(p => p.FilterConfiguration != null))
+                    // Resolve default property filter
+                    var t = _type;
+                    while (t != null)
                     {
-                        var cfg = prop.FilterConfiguration;
-                        _filter.Add(ModelFactory.CreateViewModel<PropertyFilterExpression.Factory>(cfg.ViewModelDescriptor.ViewModelRef.AsType(true)).Invoke(DataContext, prop, cfg));
+                        // Add Property filter expressions
+                        foreach (var prop in t.Properties.Where(p => p.FilterConfiguration != null))
+                        {
+                            var cfg = prop.FilterConfiguration;
+                            _filter.Add(ModelFactory.CreateViewModel<PropertyFilterExpression.Factory>(cfg.ViewModelDescriptor.ViewModelRef.AsType(true)).Invoke(DataContext, prop, cfg));
+                        }
+                        if(t is ObjectClass)
+                        {
+                            t = ((ObjectClass)t).BaseObjectClass;
+                        }
                     }
 
-                    // Add default filter for all
+                    // Add default ToString Filter for all
                     _filter.Add(ModelFactory.CreateViewModel<ToStringFilterExpression.Factory>().Invoke(DataContext, "Name"));
-
-                    _filter.CollectionChanged += new NotifyCollectionChangedEventHandler(_filter_CollectionChanged);
                 }
                 return _filter;
             }
@@ -230,6 +239,22 @@ namespace Kistl.Client.Presentables.KistlBase
                 newWorkspace.ShowForeignModel(item);
             }
             ModelFactory.ShowModel(newWorkspace, true);
+        }
+
+        public delegate void ItemsDefaultActionHandler(IEnumerable<DataObjectModel> objects);
+        public event ItemsDefaultActionHandler ItemsDefaultAction = null;
+
+        public void OnItemsDefaultAction(IEnumerable<DataObjectModel> objects)
+        {
+            ItemsDefaultActionHandler temp = ItemsDefaultAction;
+            if (temp != null)
+            {
+                temp(objects);
+            }
+            else
+            {
+                OpenObjects(objects);
+            }
         }
 
         #endregion

@@ -284,8 +284,8 @@ namespace Kistl.Client.Presentables
             ModelFactory.ShowModel(
                 ModelFactory.CreateViewModel<DataObjectSelectionTaskModel.Factory>().Invoke(
                     DataContext,
-                    FrozenContext.GetQuery<ObjectClass>().Single(c => c.GetDescribedInterfaceType() == ifType),
-                    DataContext.GetQuery(ifType),
+                    ifType.GetObjectClass(FrozenContext),
+                    null,
                     new Action<DataObjectModel>(delegate(DataObjectModel chosen)
                     {
                         if (chosen != null)

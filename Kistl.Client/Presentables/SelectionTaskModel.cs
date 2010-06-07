@@ -47,6 +47,14 @@ namespace Kistl.Client.Presentables
             {
                 ListViewModel.Commands.Add(cmd);
             }
+
+            ListViewModel.ItemsDefaultAction += new InstanceListViewModel.ItemsDefaultActionHandler(ListViewModel_ItemsDefaultAction);
+        }
+
+        void ListViewModel_ItemsDefaultAction(IEnumerable<DataObjectModel> objects)
+        {
+            var obj = objects.FirstOrDefault();
+            if(obj != null) Choose(obj);
         }
 
         public InstanceListViewModel ListViewModel { get; private set; }

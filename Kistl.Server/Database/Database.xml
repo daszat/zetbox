@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2010-06-02T15:48:28.177Z" xmlns="http://dasz.at/Kistl">
+<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2010-06-07T16:26:15.3Z" xmlns="http://dasz.at/Kistl">
   <KistlBase:Module ExportGuid="110acbc0-652a-4adc-9de5-8baabfcf3637">
     <KistlBase:ChangedOn>2010-02-01T16:07:00.49Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2010-02-01T15:23:35.247Z</KistlBase:CreatedOn>
@@ -4919,6 +4919,7 @@
     <KistlBase:ChangedOn>2009-12-14T17:08:05.337Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.337Z</KistlBase:CreatedOn>
     <KistlBase:Description />
+    <GUI:FilterConfiguration>ba5ec385-d8df-462a-b121-8e891977a99a</GUI:FilterConfiguration>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
     <KistlBase:Name>ObjectClass</KistlBase:Name>
     <KistlBase:ObjectClass>e5f93f63-9cb8-40a5-8118-d1d9e479370c</KistlBase:ObjectClass>
@@ -13347,8 +13348,8 @@
     <KistlBase:IsList>false</KistlBase:IsList>
   </KistlBase:BoolProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="5776e14c-4bf4-4388-8a5b-2e81b232bf8f">
-    <KistlBase:CategoryTags />
-    <KistlBase:ChangedOn>2010-05-26T11:26:41.767Z</KistlBase:ChangedOn>
+    <KistlBase:CategoryTags>MetaData</KistlBase:CategoryTags>
+    <KistlBase:ChangedOn>2010-06-07T16:26:15.3Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2010-05-26T11:26:41.767Z</KistlBase:CreatedOn>
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
     <KistlBase:Name>ViewModelDescriptor</KistlBase:Name>
@@ -13435,8 +13436,8 @@
     <KistlBase:IsList>false</KistlBase:IsList>
   </KistlBase:BoolProperty>
   <KistlBase:ObjectReferenceProperty ExportGuid="dbf93142-1769-4f53-bcbc-71325e1d5ce7">
-    <KistlBase:CategoryTags />
-    <KistlBase:ChangedOn>2010-05-26T11:25:09.667Z</KistlBase:ChangedOn>
+    <KistlBase:CategoryTags>DataModel</KistlBase:CategoryTags>
+    <KistlBase:ChangedOn>2010-06-07T16:25:23.4Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2010-05-26T11:25:09.667Z</KistlBase:CreatedOn>
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
     <KistlBase:Name>FilterConfiguration</KistlBase:Name>

@@ -62,7 +62,7 @@ namespace Kistl.Client.WPF.View.KistlBase
                 return;
             }
 
-            ViewModel.OpenObjects(new DataObjectModel[] { dataObject });
+            ViewModel.OnItemsDefaultAction(new DataObjectModel[] { dataObject });
             e.Handled = true;
         }
 

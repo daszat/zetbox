@@ -155,11 +155,11 @@ namespace Kistl.Client.Presentables
 
         public void SelectValue()
         {
-            var ifType = DataContext.GetInterfaceType(Property.GetPropertyType());
+            var ifType = DataContext.GetInterfaceType(Property.GetPropertyType());            
             var selectionTask = ModelFactory.CreateViewModel<DataObjectSelectionTaskModel.Factory>().Invoke(
                 DataContext,
-                FrozenContext.GetQuery<ObjectClass>().Single(c => c.GetDescribedInterfaceType() == ifType),
-                DataContext.GetQuery(ifType),
+                ifType.GetObjectClass(FrozenContext),
+                null,
                 new Action<DataObjectModel>(delegate(DataObjectModel chosen)
                     {
                         if (chosen != null)
