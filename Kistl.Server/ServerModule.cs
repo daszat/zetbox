@@ -71,7 +71,7 @@ namespace Kistl.Server
 
             moduleBuilder
                 .RegisterType<KistlService>()
-                .InstancePerDependency();
+                .SingleInstance();
 
             moduleBuilder
                 .Register(c =>
