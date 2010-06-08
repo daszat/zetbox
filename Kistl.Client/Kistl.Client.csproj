@@ -92,6 +92,8 @@
     <Compile Include="Presentables\ColumnDisplayModel.cs" />
     <Compile Include="Presentables\DataObjectModel.cs" />
     <Compile Include="Presentables\DataTypeModel.cs" />
+    <Compile Include="Presentables\DescribedMethodViewModel.cs" />
+    <Compile Include="Presentables\DescribedPropertyViewModel.cs" />
     <Compile Include="Presentables\KistlBase\CommonCommands.cs" />
     <Compile Include="Presentables\KistlBase\InstanceListViewModel.cs" />
     <Compile Include="Presentables\ErrorListModel.cs" />

@@ -15,9 +15,13 @@ using Kistl.Client.GUI;
 using Kistl.Client.Presentables.ModuleEditor;
 using QuickGraph;
 using Kistl.App.Base;
+using GraphSharp.Controls;
 
 namespace Kistl.Client.WPF.View.ModuleEditor
 {
+    [CLSCompliant(false)]
+    public class DataTypeGraphLayout : GraphLayout<DataTypeGraphModel, IEdge<DataTypeGraphModel>, DataTypeGraph> { }
+
     /// <summary>
     /// Interaction logic for DiagramDisplay.xaml
     /// </summary>

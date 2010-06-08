@@ -6,9 +6,86 @@ using Kistl.API;
 using Kistl.App.Base;
 using QuickGraph;
 using Kistl.API.Configuration;
+using Kistl.API.Utils;
+using ObjectEditorWorkspace = Kistl.Client.Presentables.ObjectEditor.WorkspaceViewModel;
 
 namespace Kistl.Client.Presentables.ModuleEditor
 {
+    [CLSCompliant(false)]
+    public class DataTypeGraph : BidirectionalGraph<DataTypeGraphModel, IEdge<DataTypeGraphModel>>
+    {
+        public DataTypeGraph() { }
+
+        public DataTypeGraph(bool allowParallelEdges)
+            : base(allowParallelEdges) { }
+
+        public DataTypeGraph(bool allowParallelEdges, int vertexCapacity)
+            : base(allowParallelEdges, vertexCapacity) { }
+    }
+
+    public class DataTypeGraphModel : Presentables.DataTypeModel
+    {
+        public new delegate DataTypeGraphModel Factory(IKistlContext dataCtx, DataType obj, DiagramViewModel parent);
+
+        private DiagramViewModel _diagMdl;
+        protected readonly Func<IKistlContext> ctxFactory;
+
+        public DataTypeGraphModel(IViewModelDependencies appCtx, KistlConfig config, IKistlContext dataCtx,
+            DataType obj, DiagramViewModel parent, Func<IKistlContext> ctxFactory)
+            : base(appCtx, config, dataCtx, obj)
+        {
+            this._diagMdl = parent;
+            this.ctxFactory = ctxFactory;
+            this.DataType = obj;
+        }
+
+        public DataType DataType { get; private set; }
+
+        private bool _isChecked = false;
+        public bool IsChecked
+        {
+            get
+            {
+                return _isChecked;
+            }
+            set
+            {
+                SetChecked(value, true);
+            }
+        }
+
+        internal void SetChecked(bool chk, bool recreateGraph)
+        {
+            if (_isChecked != chk)
+            {
+                _isChecked = chk;
+                if (recreateGraph) _diagMdl.RecreateGraph();
+                OnPropertyChanged("IsChecked");
+            }
+        }
+
+        private ICommand _open = null;
+        public ICommand Open
+        {
+            get
+            {
+                if (_open == null)
+                {
+                    _open = ModelFactory.CreateViewModel<SimpleCommandModel.Factory>().Invoke(
+                        DataContext, "Open", "Opens the current DataType", () =>
+                        {
+                            var newWorkspace = ModelFactory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(ctxFactory());
+                            newWorkspace.ShowForeignModel(this);
+                            ModelFactory.ShowModel(newWorkspace, true);
+                        }, null);
+                }
+
+                return _open;
+            }
+        }
+    }
+
+
     public class DiagramViewModel : ViewModel
     {
         public new delegate DiagramViewModel Factory(IKistlContext dataCtx, Module module);
@@ -68,55 +145,16 @@ namespace Kistl.Client.Presentables.ModuleEditor
         #endregion
 
         #region DataTypes
-        public class DataTypeModel : Presentables.DataObjectModel
-        {
-            public new delegate DataTypeModel Factory(IKistlContext dataCtx, DataType obj, DiagramViewModel parent);
 
-            private DiagramViewModel _parent;
-
-            public DataTypeModel(IViewModelDependencies appCtx, KistlConfig config, IKistlContext dataCtx,
-                DataType obj, DiagramViewModel parent)
-                : base(appCtx, config, dataCtx, obj)
-            {
-                _parent = parent;
-                DataType = obj as DataType;
-            }
-
-            public DataType DataType { get; private set; }
-
-            private bool _isChecked = false;
-            public bool IsChecked
-            {
-                get
-                {
-                    return _isChecked;
-                }
-                set
-                {
-                    SetChecked(value, true);
-                }
-            }
-
-            internal void SetChecked(bool chk, bool recreateGraph)
-            {
-                if (_isChecked != chk)
-                {
-                    _isChecked = chk;
-                    if (recreateGraph) _parent.RecreateGraph();
-                    OnPropertyChanged("IsChecked");
-                }
-            }
-        }
-
-        private List<DataTypeModel> _dataTypes = null;
-        public IEnumerable<DataTypeModel> DataTypes
+        private List<DataTypeGraphModel> _dataTypes = null;
+        public IEnumerable<DataTypeGraphModel> DataTypes
         {
             get
             {
                 if (_dataTypes == null)
                 {
                     _dataTypes = DataContext.GetQuery<DataType>().Where(i => i.Module == module).ToList()
-                        .Select(i => ModelFactory.CreateViewModel<DataTypeModel.Factory>().Invoke(DataContext, i, this)).OrderBy(i => i.Name).ToList();
+                        .Select(i => ModelFactory.CreateViewModel<DataTypeGraphModel.Factory>().Invoke(DataContext, i, this)).OrderBy(i => i.Name).ToList();
                 }
                 return _dataTypes;
             }
@@ -135,11 +173,11 @@ namespace Kistl.Client.Presentables.ModuleEditor
             }
         }
 
-        private IEnumerable<DataType> SelectedDataTypes
+        private IEnumerable<DataTypeGraphModel> SelectedDataTypeModels
         {
             get
             {
-                return _dataTypes.Where(i => i.IsChecked).Select(i => i.DataType);
+                return _dataTypes.Where(i => i.IsChecked);
             }
         }
 
@@ -159,19 +197,19 @@ namespace Kistl.Client.Presentables.ModuleEditor
         {
             foreach (var dtm in DataTypes.Where(i => i.IsChecked).ToList())
             {
-                var add = new List<DataTypeModel>();
+                var add = new List<DataTypeGraphModel>();
                 if (GraphType == GraphTypeEnum.Inheritance)
                 {
                     // Add BaseClass
-                    if(dtm.DataType is ObjectClass && ((ObjectClass)dtm.DataType).BaseObjectClass != null)
+                    if (dtm.DataType is ObjectClass && ((ObjectClass)dtm.DataType).BaseObjectClass != null)
                     {
                         var item = DataTypes.FirstOrDefault(i => i.DataType == ((ObjectClass)dtm.DataType).BaseObjectClass);
-                        if(item != null) add.Add(item);
+                        if (item != null) add.Add(item);
                     }
 
                     // Add Inheritance
                     add.AddRange(DataTypes.Where(i => i.DataType is ObjectClass && ((ObjectClass)i.DataType).BaseObjectClass == dtm.DataType));
-                    
+
                 }
                 else if (GraphType == GraphTypeEnum.Relation)
                 {
@@ -195,50 +233,52 @@ namespace Kistl.Client.Presentables.ModuleEditor
         #region Graph
         private void CreateGraph()
         {
-            var g = new BidirectionalGraph<object, IEdge<object>>();
+            var g = new DataTypeGraph(true);
 
-            if (SelectedDataTypes.Count() == 0)
+            if (SelectedDataTypeModels.Count() == 0)
             {
-                g.AddVertex("Nothing selected");
+                _graph = null;
+                return;
             }
-            else
-            {
-                foreach (var dt in SelectedDataTypes)
-                {
-                    g.AddVertex(dt);
-                }
 
-                if (GraphType == GraphTypeEnum.Relation)
+            Dictionary<DataType, DataTypeGraphModel> typeMdlDict = new Dictionary<DataType, DataTypeGraphModel>();
+            foreach (var dt in SelectedDataTypeModels)
+            {
+                g.AddVertex(dt);
+                typeMdlDict[dt.DataType] = dt;
+            }
+
+            if (GraphType == GraphTypeEnum.Relation)
+            {
+                foreach (var rel in Relations)
                 {
-                    foreach (var rel in Relations)
+                    if (typeMdlDict.ContainsKey(rel.A.Type) && typeMdlDict.ContainsKey(rel.B.Type))
                     {
-                        if (g.ContainsVertex(rel.A.Type) && g.ContainsVertex(rel.B.Type))
-                        {
-                            g.AddEdge(new TaggedEdge<object, Relation>(rel.A.Type, rel.B.Type, rel));
-                        }
-                    }
-                }
-                else if (GraphType == GraphTypeEnum.Inheritance)
-                {
-                    foreach (var cls in SelectedDataTypes.OfType<ObjectClass>())
-                    {
-                        if (cls.BaseObjectClass != null && g.ContainsVertex(cls) && g.ContainsVertex(cls.BaseObjectClass))
-                        {
-                            g.AddEdge(new TaggedEdge<object, ObjectClass>(cls, cls.BaseObjectClass, cls));
-                        }
+                        g.AddEdge(new TaggedEdge<DataTypeGraphModel, Relation>(typeMdlDict[rel.A.Type], typeMdlDict[rel.B.Type], rel));
                     }
                 }
             }
+            else if (GraphType == GraphTypeEnum.Inheritance)
+            {
+                foreach (var cls in SelectedDataTypeModels.Select(i => i.DataType).OfType<ObjectClass>())
+                {
+                    if (cls.BaseObjectClass != null && typeMdlDict.ContainsKey(cls) && typeMdlDict.ContainsKey(cls.BaseObjectClass))
+                    {
+                        g.AddEdge(new TaggedEdge<DataTypeGraphModel, ObjectClass>(typeMdlDict[cls], typeMdlDict[cls.BaseObjectClass], cls));
+                    }
+                }
+            }
+
             _graph = g;
         }
 
-        protected void RecreateGraph()
+        internal void RecreateGraph()
         {
             _graph = null;
             OnPropertyChanged("Graph");
         }
 
-        private IBidirectionalGraph<object, IEdge<object>> _graph;
+        private DataTypeGraph _graph;
         public object Graph
         {
             get

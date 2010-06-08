@@ -1,10 +1,19 @@
 ﻿<UserControl x:Class="Kistl.Client.WPF.View.ModuleEditor.DiagramDisplay"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:graphsharp="clr-namespace:GraphSharp.Controls;assembly=GraphSharp.Controls"
+    xmlns:moduleEditor="clr-namespace:Kistl.Client.WPF.View.ModuleEditor"
     xmlns:wpfext="clr-namespace:WPFExtensions.Controls;assembly=WPFExtensions"        
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:commands="clr-namespace:Kistl.Client.WPF.Commands"
     commands:SmartRoutedUICommand.IsCommandSink="True">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="GraphTemplates.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
     <DockPanel>
         <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
             <ComboBox x:Name="cbType" ItemsSource="{Binding GraphTypes}" SelectedItem="{Binding GraphType}">
@@ -41,13 +50,13 @@
             </DockPanel>
             <GridSplitter Grid.Column="1"
                           HorizontalAlignment="Stretch" />
-            <wpfext:ZoomControl Grid.Column="2">
-                <graphsharp:GraphLayout x:Name="graphLayout"
+            <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible">
+                <moduleEditor:DataTypeGraphLayout x:Name="graphLayout"
                                     Graph="{Binding Graph}"
                                     LayoutAlgorithmType="{Binding ElementName=cbLayoutAlgorithmType, Path=SelectedValue.Name}"
                                     OverlapRemovalAlgorithmType="FSA"
                                     HighlightAlgorithmType="Simple" />
-            </wpfext:ZoomControl>
+            </ScrollViewer>
         </Grid>
     </DockPanel>
 </UserControl>

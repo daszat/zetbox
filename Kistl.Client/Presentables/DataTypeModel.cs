@@ -5,6 +5,8 @@ using System.Text;
 using Kistl.API;
 using Kistl.App.Base;
 using Kistl.API.Configuration;
+using Kistl.API.Utils;
+using Kistl.App.Extensions;
 
 namespace Kistl.Client.Presentables
 {
@@ -20,5 +22,45 @@ namespace Kistl.Client.Presentables
             _dataType = dt;
         }
         private DataType _dataType;
+
+        private ReadOnlyProjectedList<Property, DescribedPropertyViewModel> _propertyModels;
+        public IReadOnlyList<DescribedPropertyViewModel> DescribedPropertyModels
+        {
+            get
+            {
+                if (_propertyModels == null)
+                {
+                    _propertyModels = new ReadOnlyProjectedList<Property, DescribedPropertyViewModel>(
+                        _dataType.Properties.OrderBy(p => p.Name).ToList(),
+                        property => ModelFactory.CreateViewModel<DescribedPropertyViewModel.Factory>().Invoke(DataContext, property),
+                        null);
+                }
+                return _propertyModels;
+            }
+        }
+
+        private ReadOnlyProjectedList<Method, DescribedMethodViewModel> _methodModels;
+        public IReadOnlyList<DescribedMethodViewModel> DescribedMethods
+        {
+            get
+            {
+                if (_methodModels == null)
+                {
+                    _methodModels = new ReadOnlyProjectedList<Method, DescribedMethodViewModel>(
+                        _dataType.Methods.OrderBy(m => m.Name).ToList(),
+                        m => ModelFactory.CreateViewModel<DescribedMethodViewModel.Factory>().Invoke(DataContext, m),
+                        null);
+                }
+                return _methodModels;
+            }
+        }
+
+        public IEnumerable<DescribedMethodViewModel> DescribedCustomMethods
+        {
+            get
+            {
+                return DescribedMethods.Where(m => !m.IsDefaultMethod);
+            }
+        }
     }
 }

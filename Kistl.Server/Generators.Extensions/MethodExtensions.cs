@@ -10,26 +10,6 @@ namespace Kistl.Server.Generators.Extensions
 
     public static class MethodExtensions
     {
-        /// <summary>
-        /// returns true if the Method is one of the "default" methods, "ToString", "NotifyPreSave", "NotifyPostSave", "NotifyCreated" or "NotifyDeleting".
-        /// </summary>
-        public static bool IsDefaultMethod(this Method method)
-        {
-            if (method == null) { throw new ArgumentNullException("method"); }
-
-            switch (method.Name)
-            {
-                case "ToString":
-                case "NotifyPreSave":
-                case "NotifyPostSave":
-                case "NotifyCreated":
-                case "NotifyDeleting":
-                    return true;
-                default:
-                    return false;
-            }
-        }
-
         public static string GetParameterDefinitions(this Method method)
         {
             if (method == null) { throw new ArgumentNullException("method"); }
