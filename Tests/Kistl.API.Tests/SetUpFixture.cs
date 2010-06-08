@@ -1,14 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Autofac;
-using NUnit.Framework;
-using Autofac.Core;
 
 namespace Kistl.API
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+
+    using Autofac;
+    using NUnit.Framework;
+
     internal class ApiAssemblyConfiguration : IAssemblyConfiguration
     {
         #region IAssemblyConfiguration Members
@@ -54,6 +54,12 @@ namespace Kistl.API
         protected override HostType GetHostType()
         {
             return HostType.None;
+        }
+
+        protected override void SetUp(IContainer container)
+        {
+            base.SetUp(container);
+            FrozenContext.RegisterTypeTransformations(container.Resolve<ITypeTransformations>());
         }
     }
 }
