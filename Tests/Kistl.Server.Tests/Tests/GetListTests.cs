@@ -259,12 +259,10 @@ namespace Kistl.Server.Tests
             Assert.That(result.Count, Is.EqualTo(0));
         }
 
-        /// <summary>
-        /// </summary>
         [Test]
         public void GetListWithPropertyObjectAccessor()
         {
-            int mID = 1;
+            int mID = ctx.GetQuery<Kistl.App.Base.ObjectClass>().First().Module.ID;
             var result = ctx.GetQuery<Kistl.App.Base.ObjectClass>().Where(c => c.Module.ID == mID).ToList();
             Assert.That(result, Is.Not.Null);
             Assert.That(result.Count, Is.GreaterThan(0));

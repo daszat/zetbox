@@ -374,22 +374,18 @@ namespace Kistl.IntegrationTests
             }
         }
 
-        /// <summary>
-        /// </summary>
         [Test]
         public void GetListWithPropertyObjectAccessor()
         {
             using (IKistlContext ctx = GetContext())
             {
-                int mID = 1;
+                int mID = ctx.GetQuery<Kistl.App.Base.ObjectClass>().First().Module.ID;
                 var result = ctx.GetQuery<ObjectClass>().Where(c => c.Module.ID == mID).ToList();
                 Assert.That(result, Is.Not.Null);
                 Assert.That(result.Count, Is.GreaterThan(0));
             }
         }
 
-        /// <summary>
-        /// </summary>
         [Test]
         public void GetListWithObjectFilter()
         {
