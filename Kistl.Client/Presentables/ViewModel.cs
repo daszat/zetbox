@@ -33,8 +33,9 @@ namespace Kistl.Client.Presentables
         /// </summary>
         IAsyncThreadManager AsyncThread { get; }
 
-        IReadOnlyKistlContext MetaContext { get; }
-
+        /// <summary>
+        /// FrozenContext for resolving meta data
+        /// </summary>
         IReadOnlyKistlContext FrozenContext { get; }
     }
 
@@ -72,8 +73,9 @@ namespace Kistl.Client.Presentables
         /// </summary>
         protected IAsyncThreadManager Async { get { return _dependencies.AsyncThread; } }
 
-        protected IReadOnlyKistlContext MetaContext { get { return _dependencies.MetaContext; } }
-
+        /// <summary>
+        /// FrozenContext for resolving meta data
+        /// </summary>
         protected IReadOnlyKistlContext FrozenContext { get { return _dependencies.FrozenContext; } }
 
         /// <summary>
@@ -197,11 +199,6 @@ namespace Kistl.Client.Presentables
         public IAsyncThreadManager AsyncThread
         {
             get { throw new InvalidOperationException("No asynchronous operations allowed in Design mode"); }
-        }
-
-        public IReadOnlyKistlContext MetaContext
-        {
-            get { throw new NotImplementedException(); }
         }
 
         public IReadOnlyKistlContext FrozenContext

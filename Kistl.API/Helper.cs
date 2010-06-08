@@ -58,7 +58,9 @@ namespace Kistl.API
         /// </summary>
         public static readonly string PositionSuffix = "_pos";
 
-        public static readonly string MetaContextServiceName = "MetaContext";
+        /// <summary>
+        /// Autofac Service Name for the FrozenContext Service
+        /// </summary>
         public static readonly string FrozenContextServiceName = "FrozenContext";
 
         /// <summary>

@@ -20,8 +20,8 @@ using Kistl.API;
     {
         private readonly IUiThreadManager uiThread;
 
-        public WpfModelFactory(Autofac.ILifetimeScope container, IUiThreadManager uiThread, IReadOnlyKistlContext metaCtx)
-            : base(container, metaCtx)
+        public WpfModelFactory(Autofac.ILifetimeScope container, IUiThreadManager uiThread, IReadOnlyKistlContext frozenCtx)
+            : base(container, frozenCtx)
         {
             this.uiThread = uiThread;
         }

@@ -15,7 +15,7 @@ namespace Kistl.Client.WPF
             base.Load(builder);
 
             builder
-                .Register(c => new WpfModelFactory(c.Resolve<ILifetimeScope>(), c.Resolve<IUiThreadManager>(), c.Resolve<IReadOnlyKistlContext>(Kistl.API.Helper.MetaContextServiceName)))
+                .Register(c => new WpfModelFactory(c.Resolve<ILifetimeScope>(), c.Resolve<IUiThreadManager>(), c.Resolve<IReadOnlyKistlContext>(Kistl.API.Helper.FrozenContextServiceName)))
                 .As<IModelFactory>()
                 .SingleInstance();
         }

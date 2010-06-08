@@ -28,13 +28,13 @@ namespace Kistl.Client.Presentables
         public abstract Toolkit Toolkit { get; }
 
         protected readonly Autofac.ILifetimeScope Container;
-        protected readonly IReadOnlyKistlContext MetaContext;
+        protected readonly IReadOnlyKistlContext FrozenContext;
 
-        protected ModelFactory(Autofac.ILifetimeScope container, IReadOnlyKistlContext metaContext)
+        protected ModelFactory(Autofac.ILifetimeScope container, IReadOnlyKistlContext frozenCtx)
         {
             if (container == null) throw new ArgumentNullException("container");
             this.Container = container;
-            this.MetaContext = metaContext;
+            this.FrozenContext = frozenCtx;
             this.Managers = new Dictionary<IKistlContext, IMultipleInstancesManager>();
         }
 
@@ -48,7 +48,7 @@ namespace Kistl.Client.Presentables
         {
             if (obj == null) throw new ArgumentNullException("obj");
 
-            var t = obj.GetObjectClass(MetaContext)
+            var t = obj.GetObjectClass(FrozenContext)
                 .DefaultViewModelDescriptor
                 .ViewModelRef
                 .AsType(true);
@@ -152,7 +152,7 @@ namespace Kistl.Client.Presentables
 
             ViewModelDescriptor pmd = mdl
                 .GetType()
-                .ToRef(MetaContext)
+                .ToRef(FrozenContext)
                 .GetViewModelDescriptor();
 
             var vDesc = mdl.RequestedControlKind != null 
@@ -175,7 +175,7 @@ namespace Kistl.Client.Presentables
             if (mdl == null) { throw new ArgumentNullException("mdl"); }
             if (kind == null) { throw new ArgumentNullException("kind"); }
 
-            ViewModelDescriptor pmd = mdl.GetType().ToRef(MetaContext)
+            ViewModelDescriptor pmd = mdl.GetType().ToRef(FrozenContext)
                 .GetViewModelDescriptor();
 
             var vDesc = pmd.GetViewDescriptor(Toolkit, kind);

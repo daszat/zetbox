@@ -15,12 +15,11 @@ namespace Kistl.Client
     {
         private class ViewModelDependencies : IViewModelDependencies
         {
-            public ViewModelDependencies(IModelFactory f, IUiThreadManager ui, IAsyncThreadManager async, IReadOnlyKistlContext metaCtx, IReadOnlyKistlContext frozenCtx)
+            public ViewModelDependencies(IModelFactory f, IUiThreadManager ui, IAsyncThreadManager async, IReadOnlyKistlContext frozenCtx)
             {
                 Factory = f;
                 UiThread = ui;
                 AsyncThread = async;
-                MetaContext = metaCtx;
                 FrozenContext = frozenCtx;
             }
 
@@ -39,12 +38,6 @@ namespace Kistl.Client
             }
 
             public IAsyncThreadManager AsyncThread
-            {
-                get;
-                private set;
-            }
-
-            public IReadOnlyKistlContext MetaContext
             {
                 get;
                 private set;
@@ -90,7 +83,6 @@ namespace Kistl.Client
                     c.Resolve<IModelFactory>(), 
                     c.Resolve<IUiThreadManager>(), 
                     c.Resolve<IAsyncThreadManager>(),
-                    c.Resolve<IReadOnlyKistlContext>(Kistl.API.Helper.MetaContextServiceName),
                     c.Resolve<IReadOnlyKistlContext>(Kistl.API.Helper.FrozenContextServiceName)))
                 .As<IViewModelDependencies>();
 

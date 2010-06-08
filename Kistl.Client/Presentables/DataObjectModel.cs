@@ -238,7 +238,7 @@ namespace Kistl.Client.Presentables
         private IEnumerable<Property> FetchPropertyList()
         {
             // load properties from MetaContext
-            ObjectClass cls = _object.GetObjectClass(MetaContext);
+            ObjectClass cls = _object.GetObjectClass(FrozenContext);
             var props = new List<Property>();
             while (cls != null)
             {
@@ -255,7 +255,7 @@ namespace Kistl.Client.Presentables
         private IEnumerable<Method> FetchMethodList()
         {
             // load properties from MetaContext
-            ObjectClass cls = _object.GetObjectClass(MetaContext);
+            ObjectClass cls = _object.GetObjectClass(FrozenContext);
             var methods = new List<Method>();
             while (cls != null)
             {
@@ -276,7 +276,7 @@ namespace Kistl.Client.Presentables
         private void FetchActions()
         {
             // load properties
-            ObjectClass cls = _object.GetObjectClass(MetaContext);
+            ObjectClass cls = _object.GetObjectClass(FrozenContext);
             var actions = new List<Method>();
             while (cls != null)
             {
@@ -376,7 +376,7 @@ namespace Kistl.Client.Presentables
                     }
                     else
                     {
-                        _iconCache = _object.GetObjectClass(MetaContext).DefaultIcon;
+                        _iconCache = _object.GetObjectClass(FrozenContext).DefaultIcon;
                     }
                 }
                 return _iconCache;
