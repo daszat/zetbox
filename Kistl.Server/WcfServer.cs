@@ -89,6 +89,12 @@ namespace Kistl.Server
                 serviceThread.Abort();
             }
             serviceThread = null;
+
+            // Work around AppDomainUnloadedException due to Race with WCF's _host.Close()
+            // See https://bugs.launchpad.net/nunitv2/+bug/423611
+            Log.Info("Waiting for WCF to disappear");
+            Thread.Sleep(3000);
+
             serverStarted.Close();
 
             Log.Info("Server stopped");
