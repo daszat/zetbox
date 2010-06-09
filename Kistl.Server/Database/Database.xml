@@ -21649,6 +21649,22 @@
     <GUI:A>ffc833d5-a2a5-4cde-8335-6285973742d8</GUI:A>
     <GUI:B>90d5ff7f-0c82-4278-bb8d-49c240f6bc2c</GUI:B>
   </GUI:ViewModelDescriptor_displayedBy_ControlKind_RelationEntry>
+  <GUI:FilterConfiguration ExportGuid="ba5ec385-d8df-462a-b121-8e891977a99a">
+    <GUI:ChangedOn>2010-06-07T16:25:23.387Z</GUI:ChangedOn>
+    <GUI:CreatedOn>2010-06-07T16:25:23.387Z</GUI:CreatedOn>
+    <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+    <GUI:Multiple>false</GUI:Multiple>
+    <GUI:Requiered>true</GUI:Requiered>
+    <GUI:ViewModelDescriptor>ffc8c974-541b-4f67-8782-674e89887908</GUI:ViewModelDescriptor>
+  </GUI:FilterConfiguration>
+  <GUI:FilterConfiguration ExportGuid="bc4472e6-962a-4422-94c7-4b1de3be054f">
+    <GUI:ChangedOn>2010-05-31T13:31:56.387Z</GUI:ChangedOn>
+    <GUI:CreatedOn>2010-05-31T13:31:56.387Z</GUI:CreatedOn>
+    <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+    <GUI:Multiple>false</GUI:Multiple>
+    <GUI:Requiered>true</GUI:Requiered>
+    <GUI:ViewModelDescriptor>ffc8c974-541b-4f67-8782-674e89887908</GUI:ViewModelDescriptor>
+  </GUI:FilterConfiguration>
   <KistlBase:Module ExportGuid="a56d9701-d98e-49ab-bd49-a491d09e2d46">
     <KistlBase:ChangedOn>2009-12-14T17:08:05.417Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2009-12-14T17:08:05.417Z</KistlBase:CreatedOn>

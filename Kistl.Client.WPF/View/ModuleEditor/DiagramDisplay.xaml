@@ -25,18 +25,21 @@
                 <ComboBoxItem Name="ISOM">ISOM</ComboBoxItem>
                 <ComboBoxItem Name="CompoundFDP">CompoundFDP</ComboBoxItem>
             </ComboBox>
+            <Button Command="{Binding NewObjectClassCommand, Converter= {StaticResource CommandConverter}}" Content="{Binding NewObjectClassCommand.Label}" ToolTip="{Binding NewObjectClassCommand.ToolTip}" />
+            <Button Command="{Binding NewRelationCommand, Converter= {StaticResource CommandConverter}}" Content="{Binding NewRelationCommand.Label}" ToolTip="{Binding NewRelationCommand.ToolTip}" />
+            <Button Click="PrintButton_Click" Content="Print" />
         </StackPanel>
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="300" />
                 <ColumnDefinition Width="5" />
                 <ColumnDefinition Width="2*" />
             </Grid.ColumnDefinitions>
             <DockPanel Grid.Column="0">
                 <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
-                    <Button Command="{Binding SelectAllCommand, Converter= {StaticResource CommandConverter}}">Select all</Button>
-                    <Button Command="{Binding SelectNoneCommand, Converter= {StaticResource CommandConverter}}">Select none</Button>
-                    <Button Command="{Binding AddRelatedCommand, Converter= {StaticResource CommandConverter}}">Add Related</Button>
+                    <Button Command="{Binding SelectAllCommand, Converter= {StaticResource CommandConverter}}" Content="{Binding SelectAllCommand.Label}" ToolTip="{Binding SelectAllCommand.ToolTip}" />
+                    <Button Command="{Binding SelectNoneCommand, Converter= {StaticResource CommandConverter}}" Content="{Binding SelectNoneCommand.Label}" ToolTip="{Binding SelectNoneCommand.ToolTip}" />
+                    <Button Command="{Binding AddRelatedCommand, Converter= {StaticResource CommandConverter}}" Content="{Binding AddRelatedCommand.Label}" ToolTip="{Binding AddRelatedCommand.ToolTip}" />
                 </StackPanel>
                 <ListBox  ItemsSource="{Binding DataTypes}">
                     <ListBox.ItemTemplate>
@@ -50,7 +53,7 @@
             </DockPanel>
             <GridSplitter Grid.Column="1"
                           HorizontalAlignment="Stretch" />
-            <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible">
+            <ScrollViewer Grid.Column="2" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible">
                 <moduleEditor:DataTypeGraphLayout x:Name="graphLayout"
                                     Graph="{Binding Graph}"
                                     LayoutAlgorithmType="{Binding ElementName=cbLayoutAlgorithmType, Path=SelectedValue.Name}"

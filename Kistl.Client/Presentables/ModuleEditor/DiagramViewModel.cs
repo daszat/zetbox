@@ -64,6 +64,23 @@ namespace Kistl.Client.Presentables.ModuleEditor
             }
         }
 
+        private bool _isGraphChecked = false;
+        public bool IsGraphChecked
+        {
+            get
+            {
+                return _isGraphChecked;
+            }
+            set
+            {
+                if (_isGraphChecked != value)
+                {
+                    _isGraphChecked = value;
+                    OnPropertyChanged("IsGraphChecked");
+                }
+            }
+        }
+
         private ICommand _open = null;
         public ICommand Open
         {
@@ -90,11 +107,15 @@ namespace Kistl.Client.Presentables.ModuleEditor
     {
         public new delegate DiagramViewModel Factory(IKistlContext dataCtx, Module module);
 
-        public DiagramViewModel(IViewModelDependencies appCtx, IKistlContext dataCtx, Module module)
+        public DiagramViewModel(IViewModelDependencies appCtx, IKistlContext dataCtx, Module module, Func<IKistlContext> ctxFactory)
             : base(appCtx, dataCtx)
         {
-            this.module = module;
+            this.ctxFactory = ctxFactory;
+            this.Module = module;
         }
+
+        protected readonly Func<IKistlContext> ctxFactory;
+        public Module Module { get; private set; }
 
         #region GraphSettings
         public enum GraphTypeEnum
@@ -131,7 +152,6 @@ namespace Kistl.Client.Presentables.ModuleEditor
         #endregion
 
         #region ViewModel
-        protected Module module;
 
         public override string Name
         {
@@ -153,7 +173,7 @@ namespace Kistl.Client.Presentables.ModuleEditor
             {
                 if (_dataTypes == null)
                 {
-                    _dataTypes = DataContext.GetQuery<DataType>().Where(i => i.Module == module).ToList()
+                    _dataTypes = DataContext.GetQuery<DataType>().Where(i => i.Module == Module).ToList()
                         .Select(i => ModelFactory.CreateViewModel<DataTypeGraphModel.Factory>().Invoke(DataContext, i, this)).OrderBy(i => i.Name).ToList();
                 }
                 return _dataTypes;
@@ -167,17 +187,25 @@ namespace Kistl.Client.Presentables.ModuleEditor
             {
                 if (_relations == null)
                 {
-                    _relations = DataContext.GetQuery<Relation>().Where(i => i.Module == module).ToList();
+                    _relations = DataContext.GetQuery<Relation>().Where(i => i.Module == Module).ToList();
                 }
                 return _relations;
             }
         }
 
-        private IEnumerable<DataTypeGraphModel> SelectedDataTypeModels
+        public IEnumerable<DataTypeGraphModel> SelectedDataTypeModels
         {
             get
             {
-                return _dataTypes.Where(i => i.IsChecked);
+                return DataTypes.Where(i => i.IsChecked);
+            }
+        }
+
+        public IEnumerable<DataTypeGraphModel> SelectedGraphDataTypeModels
+        {
+            get
+            {
+                return DataTypes.Where(i => i.IsGraphChecked);
             }
         }
 
@@ -231,6 +259,24 @@ namespace Kistl.Client.Presentables.ModuleEditor
         #endregion
 
         #region Graph
+        public class RelationEdge
+        {
+            public Relation Rel { get; set; }
+            public override string ToString()
+            {
+                return string.Format("{0} {1} {2}", Rel.A.RoleName, Rel.Verb, Rel.B.RoleName);
+            }
+        }
+
+        public class InheritanceEdge
+        {
+            public ObjectClass ObjClass { get; set; }
+            public override string ToString()
+            {
+                return string.Format("{0} : {1}", ObjClass.Name, ObjClass.BaseObjectClass.Name);
+            }
+        }
+
         private void CreateGraph()
         {
             var g = new DataTypeGraph(true);
@@ -254,7 +300,7 @@ namespace Kistl.Client.Presentables.ModuleEditor
                 {
                     if (typeMdlDict.ContainsKey(rel.A.Type) && typeMdlDict.ContainsKey(rel.B.Type))
                     {
-                        g.AddEdge(new TaggedEdge<DataTypeGraphModel, Relation>(typeMdlDict[rel.A.Type], typeMdlDict[rel.B.Type], rel));
+                        g.AddEdge(new TaggedEdge<DataTypeGraphModel, RelationEdge>(typeMdlDict[rel.A.Type], typeMdlDict[rel.B.Type], new RelationEdge() { Rel = rel }));
                     }
                 }
             }
@@ -264,7 +310,7 @@ namespace Kistl.Client.Presentables.ModuleEditor
                 {
                     if (cls.BaseObjectClass != null && typeMdlDict.ContainsKey(cls) && typeMdlDict.ContainsKey(cls.BaseObjectClass))
                     {
-                        g.AddEdge(new TaggedEdge<DataTypeGraphModel, ObjectClass>(typeMdlDict[cls], typeMdlDict[cls.BaseObjectClass], cls));
+                        g.AddEdge(new TaggedEdge<DataTypeGraphModel, InheritanceEdge>(typeMdlDict[cls.BaseObjectClass], typeMdlDict[cls], new InheritanceEdge() { ObjClass = cls }));
                     }
                 }
             }
@@ -294,108 +340,91 @@ namespace Kistl.Client.Presentables.ModuleEditor
         #endregion
 
         #region Commands
-        private SelectAllCommandModel _selectAllCommand = null;
+        private ICommand _selectAllCommand = null;
         public ICommand SelectAllCommand
         {
             get
             {
                 if (_selectAllCommand == null)
                 {
-                    _selectAllCommand = ModelFactory.CreateViewModel<SelectAllCommandModel.Factory>().Invoke(DataContext, this);
+                    _selectAllCommand = ModelFactory.CreateViewModel<SimpleCommandModel.Factory>().Invoke(DataContext, "Select all", "Selects all DataTypes", () => SelectAllDataTypes(), null);
                 }
                 return _selectAllCommand;
             }
         }
-        internal class SelectAllCommandModel : CommandModel
-        {
-            public new delegate SelectAllCommandModel Factory(IKistlContext dataCtx, DiagramViewModel parent);
 
-            private DiagramViewModel _parent;
-
-            public SelectAllCommandModel(IViewModelDependencies appCtx, IKistlContext dataCtx, DiagramViewModel parent)
-                : base(appCtx, dataCtx, "Select All", "Selects all DataTypes")
-            {
-                _parent = parent;
-            }
-
-            public override bool CanExecute(object data)
-            {
-                return true;
-            }
-
-            protected override void DoExecute(object data)
-            {
-                _parent.SelectAllDataTypes();
-            }
-        }
-
-        private SelectNoneCommandModel _selectNoneCommand = null;
+        private ICommand _selectNoneCommand = null;
         public ICommand SelectNoneCommand
         {
             get
             {
                 if (_selectNoneCommand == null)
                 {
-                    _selectNoneCommand = ModelFactory.CreateViewModel<SelectNoneCommandModel.Factory>().Invoke(DataContext, this);
+                    _selectNoneCommand = ModelFactory.CreateViewModel<SimpleCommandModel.Factory>().Invoke(DataContext, "Select None", "Selects no DataTypes", () => SelectNoDataTypes(), null);
                 }
                 return _selectNoneCommand;
             }
         }
-        internal class SelectNoneCommandModel : CommandModel
-        {
-            public new delegate SelectNoneCommandModel Factory(IKistlContext dataCtx, DiagramViewModel parent);
 
-            private DiagramViewModel _parent;
-
-            public SelectNoneCommandModel(IViewModelDependencies appCtx, IKistlContext dataCtx, DiagramViewModel parent)
-                : base(appCtx, dataCtx, "Select None", "Selects no DataTypes")
-            {
-                _parent = parent;
-            }
-
-            public override bool CanExecute(object data)
-            {
-                return true;
-            }
-
-            protected override void DoExecute(object data)
-            {
-                _parent.SelectNoDataTypes();
-            }
-        }
-
-        private AddRelatedCommandModel _addRelatedCommand = null;
+        private ICommand _addRelatedCommand = null;
         public ICommand AddRelatedCommand
         {
             get
             {
                 if (_addRelatedCommand == null)
                 {
-                    _addRelatedCommand = ModelFactory.CreateViewModel<AddRelatedCommandModel.Factory>().Invoke(DataContext, this);
+                    _addRelatedCommand = ModelFactory.CreateViewModel<SimpleCommandModel.Factory>().Invoke(DataContext, "Add Related", "Add related DataTypes", () => AddRelatedDataTypes(), null);
                 }
                 return _addRelatedCommand;
             }
         }
-        internal class AddRelatedCommandModel : CommandModel
+
+        private ICommand _NewObjectClassCommand = null;
+        public ICommand NewObjectClassCommand
         {
-            public new delegate AddRelatedCommandModel Factory(IKistlContext dataCtx, DiagramViewModel parent);
-
-            private DiagramViewModel _parent;
-
-            public AddRelatedCommandModel(IViewModelDependencies appCtx, IKistlContext dataCtx, DiagramViewModel parent)
-                : base(appCtx, dataCtx, "Select None", "Selects no DataTypes")
+            get
             {
-                _parent = parent;
+                if (_NewObjectClassCommand == null)
+                {
+                    _NewObjectClassCommand = ModelFactory.CreateViewModel<SimpleCommandModel.Factory>().Invoke(DataContext, "New Class", "Creates a new Class", () =>
+                    {
+                        var newCtx = ctxFactory();
+                        var newWorkspace = ModelFactory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(newCtx);
+                        var newCls = newCtx.Create<ObjectClass>();
+                        
+                        newCls.Module = newCtx.Find<Module>(Module.ID);
+                        
+                        newWorkspace.ShowForeignModel(ModelFactory.CreateViewModel<DataObjectModel.Factory>(newCls).Invoke(newCtx, newCls));
+                        ModelFactory.ShowModel(newWorkspace, true);
+                    }, null);
+                }
+                return _NewObjectClassCommand;
             }
+        }
 
-            public override bool CanExecute(object data)
+        private ICommand _NewRelationCommand = null;
+        public ICommand NewRelationCommand
+        {
+            get
             {
-                return true;
-            }
+                if (_NewRelationCommand == null)
+                {
+                    _NewRelationCommand = ModelFactory.CreateViewModel<SimpleCommandModel.Factory>().Invoke(DataContext, "New Relation", "Creates a new Relation", () =>
+                    {
+                        var newCtx = ctxFactory();
+                        var newWorkspace = ModelFactory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(newCtx);
+                        var newRel = newCtx.Create<Relation>();
+                        
+                        newRel.Module = newCtx.Find<Module>(Module.ID);
+                        newRel.A.Type = newCtx.Find<ObjectClass>(SelectedGraphDataTypeModels.First().ID);
+                        newRel.B.Type = newCtx.Find<ObjectClass>(SelectedGraphDataTypeModels.Last().ID);
 
-            protected override void DoExecute(object data)
-            {
-                _parent.AddRelatedDataTypes();
+                        newWorkspace.ShowForeignModel(ModelFactory.CreateViewModel<DataObjectModel.Factory>(newRel).Invoke(newCtx, newRel));
+                        ModelFactory.ShowModel(newWorkspace, true);
+                    }, 
+                    () => SelectedGraphDataTypeModels.Count() == 2 && SelectedGraphDataTypeModels.Any(dt => dt.DataType is ObjectClass) );
+                }
+                return _NewRelationCommand;
             }
         }
         #endregion

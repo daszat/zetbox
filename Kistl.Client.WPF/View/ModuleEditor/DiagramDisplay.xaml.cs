@@ -19,9 +19,6 @@ using GraphSharp.Controls;
 
 namespace Kistl.Client.WPF.View.ModuleEditor
 {
-    [CLSCompliant(false)]
-    public class DataTypeGraphLayout : GraphLayout<DataTypeGraphModel, IEdge<DataTypeGraphModel>, DataTypeGraph> { }
-
     /// <summary>
     /// Interaction logic for DiagramDisplay.xaml
     /// </summary>
@@ -36,5 +33,20 @@ namespace Kistl.Client.WPF.View.ModuleEditor
         {
             get { return (DiagramViewModel)DataContext; }
         }
+
+        private void PrintButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Simple WPF Printing -> cant be a command
+            PrintDialog printDlg = new System.Windows.Controls.PrintDialog();
+            if (printDlg.ShowDialog() == true)
+            {
+                graphLayout.Measure(new Size(printDlg.PrintableAreaWidth,  printDlg.PrintableAreaHeight));
+                graphLayout.Arrange(new Rect(new Point(0, 0), graphLayout.DesiredSize));
+                printDlg.PrintVisual(graphLayout, "Some Datatypes from " + ViewModel.Module.Name);
+            }
+        }
     }
+
+    [CLSCompliant(false)]
+    public class DataTypeGraphLayout : GraphLayout<DataTypeGraphModel, IEdge<DataTypeGraphModel>, DataTypeGraph> { }
 }

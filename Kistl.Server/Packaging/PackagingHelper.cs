@@ -103,6 +103,9 @@ namespace Kistl.Server.Packaging
                     .OrderBy(i => i.A.ViewModelRef.Assembly.Name).ThenBy(i => i.A.ViewModelRef.FullName)
                     .ThenBy(i => i.B.GetType().FullName)
                     .ThenBy(i => i.A.ExportGuid).ThenBy(i => i.B.ExportGuid));
+                AddMetaObjects(result, ctx.GetQuery<FilterConfiguration>()// TODO: .Where(i => i.Module.ID == moduleID)
+                    .ToList().AsQueryable() // TODO: remove this workaround for GetInterfaceType()
+                    .OrderBy(i => i.ExportGuid));
             }
             return result;
         }

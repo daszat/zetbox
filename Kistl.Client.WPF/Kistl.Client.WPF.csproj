@@ -357,6 +357,9 @@
     <Compile Include="View\KistlBase\TextValueSelectionView.xaml.cs">
       <DependentUpon>TextValueSelectionView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ModuleEditor\Converter\EdgeRouteToLabelConverter.cs" />
+    <Compile Include="View\ModuleEditor\Converter\EdgeRouteToPathConverter.cs" />
+    <Compile Include="View\ModuleEditor\Converter\GraphConverterHelper.cs" />
     <Compile Include="View\ModuleEditor\DiagramDisplay.xaml.cs">
       <DependentUpon>DiagramDisplay.xaml</DependentUpon>
     </Compile>
