@@ -529,7 +529,7 @@
   <wsdl:message name="IKistlService_SetBlobStream_ExceptionFault_FaultMessage">
     <wsdl:part xmlns:q6="http://schemas.datacontract.org/2004/07/System" name="detail" element="q6:Exception" />
   </wsdl:message>
-  <wsdl:portType name="IKistlService">
+  <wsdl:portType msc:usingSession="false" name="IKistlService">
     <wsdl:operation name="SetObjects">
       <wsdl:input wsaw:Action="http://tempuri.org/IKistlService/SetObjects" message="tns:IKistlService_SetObjects_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IKistlService/SetObjectsResponse" message="tns:IKistlService_SetObjects_OutputMessage" />

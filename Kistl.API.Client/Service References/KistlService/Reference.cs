@@ -85,16 +85,16 @@ namespace Kistl.API.Client.KistlService {
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Kistl.API.SerializableType[]))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Kistl.API.SerializableExpression[]))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Kistl.API.SerializableExpression))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Kistl.API.SerializableNewExpression))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Kistl.API.SerializableCompoundExpression))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Kistl.API.SerializableParameterExpression))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Kistl.API.SerializableMethodCallExpression))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Kistl.API.SerializableConditionalExpression))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Kistl.API.SerializableCompoundExpression))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Kistl.API.SerializableBinaryExpression))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Kistl.API.SerializableConstantExpression))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Kistl.API.SerializableLambdaExpression))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Kistl.API.SerializableMemberExpression))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Kistl.API.SerializableParameterExpression))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Kistl.API.SerializableConditionalExpression))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Kistl.API.SerializableNewExpression))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(Kistl.API.SerializableUnaryExpression))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Kistl.API.SerializableBinaryExpression))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(int[]))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.Reflection.MemberInfo[]))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.Reflection.MemberInfo))]
@@ -195,7 +195,7 @@ namespace Kistl.API.Client.KistlService {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="KistlService.IKistlService")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="KistlService.IKistlService", SessionMode=System.ServiceModel.SessionMode.NotAllowed)]
     public interface IKistlService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IKistlService/SetObjects", ReplyAction="http://tempuri.org/IKistlService/SetObjectsResponse")]

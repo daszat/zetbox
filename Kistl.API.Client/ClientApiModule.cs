@@ -43,7 +43,8 @@ namespace Kistl.API.Client
 
             moduleBuilder
                 .RegisterType<ProxyImplementation>()
-                .As<IProxy>();
+                .As<IProxy>()
+                .SingleInstance();
         }
     }
 }

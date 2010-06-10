@@ -19,7 +19,7 @@ namespace Kistl.API
     /// TODO: Add FaultContracts
     /// TODO: Remove GetListOf
     /// </summary>
-    [ServiceContract]
+    [ServiceContract(SessionMode=SessionMode.NotAllowed)]
     public interface IKistlService
     {
         /// <summary>
