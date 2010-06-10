@@ -264,7 +264,39 @@ namespace Kistl.API
         public InterfaceType ToInterfaceType()
         {
             // TODO: inline transformation logic to here
-            return new InterfaceType(this.Type.ToInterfaceType(typeTrans.AssemblyConfiguration), typeTrans);
+            return new InterfaceType(ToInterfaceType(this.Type, typeTrans.AssemblyConfiguration), typeTrans);
+        }
+
+        /// <summary>
+        /// Returns the most specific implemented Kistl.Objects interface of a given Type.
+        /// </summary>
+        private static Type ToInterfaceType( Type type, IAssemblyConfiguration assemblyConfig)
+        {
+            if (type == null) { throw new ArgumentNullException("type"); }
+
+            // shortcut and warn when trying to resolve an already resolved type
+            if (type.IsInterface && type.IsIPersistenceObject())
+            {
+                Logging.Log.Error("Tried to convert an interface type a second time");
+                return type;
+            }
+
+            if (type.IsGenericType)
+            {
+                // convert args of things like Generic Collections
+                Type genericType = type.GetGenericTypeDefinition();
+                var genericArguments = type.GetGenericArguments().Select(t => ToInterfaceType(t, assemblyConfig)).ToArray();
+                return genericType.MakeGenericType(genericArguments);
+            }
+            else if (!type.IsInterface)
+            {
+                if (type.IsIPersistenceObject() || type.IsICompoundObject())
+                {
+                    var parts = type.FullName.Split(new string[] { Helper.ImplementationSuffix }, StringSplitOptions.RemoveEmptyEntries);
+                    type = Type.GetType(parts[0] + ", " + assemblyConfig.InterfaceAssemblyName, true);
+                }
+            }
+            return type;
         }
 
         #region implement content equality over the Type property
@@ -295,96 +327,5 @@ namespace Kistl.API
         {
             return Type.ToString();
         }
-    }
-
-    public static class TypeTransformationsExtensions
-    {
-        /// <summary>
-        /// Returns the most specific implemented Kistl.Objects interface of a given Type.
-        /// </summary>
-        public static Type ToInterfaceType(this Type type, IAssemblyConfiguration assemblyConfig)
-        {
-            if (type == null) { throw new ArgumentNullException("type"); }
-
-            // shortcut and warn when trying to resolve an already resolved type
-            if (type.IsInterface && type.IsIPersistenceObject())
-            {
-                Logging.Log.Error("Tried to convert an interface type a second time");
-                return type;
-            }
-
-            if (type.IsGenericType)
-            {
-                // convert args of things like Generic Collections
-                Type genericType = type.GetGenericTypeDefinition();
-                var genericArguments = type.GetGenericArguments().Select(t => t.ToInterfaceType(assemblyConfig)).ToArray();
-                return genericType.MakeGenericType(genericArguments);
-            }
-            else if (!type.IsInterface)
-            {
-                if (type.IsIPersistenceObject() || type.IsICompoundObject())
-                {
-                    var parts = type.FullName.Split(new string[] { Helper.ImplementationSuffix }, StringSplitOptions.RemoveEmptyEntries);
-                    type = Type.GetType(parts[0] + ", " + assemblyConfig.InterfaceAssemblyName, true);
-                }
-            }
-            return type;
-        }
-
-        ///// <summary>
-        ///// Returns the Type implementing a given Kistl.Objects interface from the current ImplementationAssembly
-        ///// </summary>
-        //private static Type ToImplementationType(this Type type, IAssemblyConfiguration assemblyConfig)
-        //{
-        //    if (type == null) { throw new ArgumentNullException("type"); }
-
-        //    // shortcut and warn when trying to resolve an already resolved type
-        //    if (type.FullName.Contains(Kistl.API.Helper.ImplementationSuffix) && type.IsIPersistenceObject())
-        //    {
-        //        Logging.Log.Error("Tried to convert an implementation type a second time");
-        //        return type;
-        //    }
-
-        //    if (type.IsGenericType)
-        //    {
-        //        // convert args of things like Generic Collections
-        //        Type genericType = type.GetGenericTypeDefinition();
-        //        var genericArguments = type.GetGenericArguments().Select(t => t.ToImplementationType(assemblyConfig)).ToArray();
-        //        return genericType.MakeGenericType(genericArguments);
-        //    }
-        //    else
-        //    {
-        //        if (type == typeof(IDataObject))
-        //        {
-        //            return assemblyConfig.BaseDataObjectType;
-        //        }
-        //        else if (type == typeof(IPersistenceObject))
-        //        {
-        //            return assemblyConfig.BasePersistenceObjectType;
-        //        }
-        //        else if (type == typeof(ICompoundObject))
-        //        {
-        //            return assemblyConfig.BaseCompoundObjectType;
-        //        }
-        //        else if (type == typeof(IRelationCollectionEntry))
-        //        {
-        //            return assemblyConfig.BaseCollectionEntryType;
-        //        }
-        //        else if (type == typeof(IValueCollectionEntry))
-        //        {
-        //            return assemblyConfig.BaseCollectionEntryType;
-        //        }
-        //        else if (type.IsInterface)
-        //        {
-        //            if (type.IsIPersistenceObject() || type.IsICompoundObject())
-        //            {
-        //                // add ImplementationSuffix
-        //                string newType = type.FullName + Kistl.API.Helper.ImplementationSuffix + ", " + assemblyConfig.ImplementationAssemblyName;
-        //                return Type.GetType(newType, true);
-        //            }
-        //        }
-        //        return type;
-        //    }
-        //}
     }
 }

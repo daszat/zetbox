@@ -183,7 +183,7 @@ namespace Kistl.API.Server
                 if (result.IsMethodCallExpression("OfType"))
                 {
                     var type = result.Type.FindElementTypes().First();
-                    return AddSecurityFilter(result, typeTrans.AsInterfaceType(type.ToInterfaceType(typeTrans.AssemblyConfiguration)));
+                    return AddSecurityFilter(result, typeTrans.AsInterfaceType(type));
                 }
                 return result;
             }
@@ -227,7 +227,7 @@ namespace Kistl.API.Server
             {
                 var result = Source.Expression;
                 var type = result.Type.GetGenericArguments().First();
-                return AddSecurityFilter(result, typeTrans.AsInterfaceType(type.ToInterfaceType(typeTrans.AssemblyConfiguration)));
+                return AddSecurityFilter(result, typeTrans.AsImplementationType(type).ToInterfaceType());
             }
             else
             {

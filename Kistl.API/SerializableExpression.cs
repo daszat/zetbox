@@ -136,7 +136,7 @@ namespace Kistl.API
         internal SerializableExpression(Expression e, SerializationContext ctx, ITypeTransformations typeTrans)
         {
             this.typeTrans = typeTrans;
-            SerializableType = typeTrans.AsInterfaceType(e.Type.ToInterfaceType(typeTrans.AssemblyConfiguration)).ToSerializableType();
+            SerializableType = typeTrans.AsInterfaceType(e.Type).ToSerializableType();
             NodeType = e.NodeType;
         }
 
