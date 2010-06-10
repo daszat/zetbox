@@ -122,6 +122,7 @@ namespace Kistl.App.Base
             var rel = (Relation)constrainedObject;
             if (rel.A != null && rel.B != null)
             {
+                if (rel.A.Multiplicity == 0 || rel.B.Multiplicity == 0) return false;
                 switch (rel.Storage)
                 {
                     case StorageType.MergeIntoA:
@@ -147,6 +148,7 @@ namespace Kistl.App.Base
             var rel = (Relation)constrainedObject;
             if (rel.A != null && rel.B != null)
             {
+                if (rel.A.Multiplicity == 0 || rel.B.Multiplicity == 0) return "Incomplete Relation (Multiplicity is missing)";
                 switch (rel.Storage)
                 {
                     case StorageType.MergeIntoA:

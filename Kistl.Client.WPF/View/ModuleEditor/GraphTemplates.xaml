@@ -1,5 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls"                    
     xmlns:GraphSharp_Controls="clr-namespace:GraphSharp.Controls;assembly=GraphSharp.Controls"
     xmlns:Converters="clr-namespace:GraphSharp.Converters;assembly=GraphSharp.Controls"
     xmlns:CustomConverters="clr-namespace:Kistl.Client.WPF.View.ModuleEditor.Converter">
@@ -22,7 +23,7 @@
                         <StackPanel DataContext="{TemplateBinding Vertex}">
                             <DockPanel LastChildFill="True">
                                 <CheckBox DockPanel.Dock="Left" IsChecked="{Binding IsGraphChecked}" />
-                                <Button DockPanel.Dock="Right" Command="{Binding Open, Converter={StaticResource CommandConverter}}" Content="{Binding Open.Label}" />
+                                <ctrls:CommandButton DockPanel.Dock="Right" CommandModel="{Binding Open}" />
                                 <TextBlock Text="{Binding Name}" Margin="5,0,0,0" />
                             </DockPanel>
                             <Separator />

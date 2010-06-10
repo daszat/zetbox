@@ -285,6 +285,7 @@
     <Compile Include="Commands\Converter.cs" />
     <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="Commands\WrappedKistlCommand.cs" />
+    <Compile Include="CustomControls\CommandButton.cs" />
     <Compile Include="DebugConsole.cs" />
     <Compile Include="Converter\Converters.cs" />
     <Compile Include="Converter\DebugConverter.cs" />

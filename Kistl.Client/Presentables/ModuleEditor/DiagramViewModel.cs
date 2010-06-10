@@ -165,16 +165,29 @@ namespace Kistl.Client.Presentables.ModuleEditor
         #endregion
 
         #region DataTypes
+        private ReadOnlyProjectedList<DataType, DataTypeGraphModel> _dataTypeModels = null;
+        public IEnumerable<DataTypeGraphModel> DataTypeModels
+        {
+            get
+            {
+                if (_dataTypeModels == null)
+                {
+                    _dataTypeModels = new ReadOnlyProjectedList<DataType, DataTypeGraphModel>(DataTypes,
+                        i => ModelFactory.CreateViewModel<DataTypeGraphModel.Factory>().Invoke(DataContext, i, this),
+                        i => i.DataType);
+                }
+                return _dataTypeModels;
+            }
+        }
 
-        private List<DataTypeGraphModel> _dataTypes = null;
-        public IEnumerable<DataTypeGraphModel> DataTypes
+        private List<DataType> _dataTypes = null;
+        private IList<DataType> DataTypes
         {
             get
             {
                 if (_dataTypes == null)
                 {
-                    _dataTypes = DataContext.GetQuery<DataType>().Where(i => i.Module == Module).ToList()
-                        .Select(i => ModelFactory.CreateViewModel<DataTypeGraphModel.Factory>().Invoke(DataContext, i, this)).OrderBy(i => i.Name).ToList();
+                    _dataTypes = DataContext.GetQuery<DataType>().Where(i => i.Module == Module).OrderBy(i => i.Name).ToList();
                 }
                 return _dataTypes;
             }
@@ -193,11 +206,28 @@ namespace Kistl.Client.Presentables.ModuleEditor
             }
         }
 
+        private void Refresh()
+        {
+            _relations = null;
+            if (_dataTypes != null)
+            {
+                var newDataTypes = DataContext.GetQuery<DataType>().Where(i => i.Module == Module).ToList();
+                // Add new ones, keep old ones
+                _dataTypes.AddRange(newDataTypes.Except(_dataTypes));
+                _dataTypes.RemoveAll(dt => !newDataTypes.Contains(dt));
+                _dataTypes.Sort((a, b) => a.Name.CompareTo(b.Name));
+            }
+            OnPropertyChanged("Relations");
+            OnPropertyChanged("DataTypes");
+            OnPropertyChanged("DataTypeModels");
+            RecreateGraph();
+        }
+
         public IEnumerable<DataTypeGraphModel> SelectedDataTypeModels
         {
             get
             {
-                return DataTypes.Where(i => i.IsChecked);
+                return DataTypeModels.Where(i => i.IsChecked);
             }
         }
 
@@ -205,25 +235,25 @@ namespace Kistl.Client.Presentables.ModuleEditor
         {
             get
             {
-                return DataTypes.Where(i => i.IsGraphChecked);
+                return DataTypeModels.Where(i => i.IsGraphChecked);
             }
         }
 
         private void SelectAllDataTypes()
         {
-            DataTypes.ForEach(i => i.SetChecked(true, false));
+            DataTypeModels.ForEach(i => i.SetChecked(true, false));
             RecreateGraph();
         }
 
         private void SelectNoDataTypes()
         {
-            DataTypes.ForEach(i => i.SetChecked(false, false));
+            DataTypeModels.ForEach(i => i.SetChecked(false, false));
             RecreateGraph();
         }
 
         private void AddRelatedDataTypes()
         {
-            foreach (var dtm in DataTypes.Where(i => i.IsChecked).ToList())
+            foreach (var dtm in DataTypeModels.Where(i => i.IsChecked).ToList())
             {
                 var add = new List<DataTypeGraphModel>();
                 if (GraphType == GraphTypeEnum.Inheritance)
@@ -231,21 +261,21 @@ namespace Kistl.Client.Presentables.ModuleEditor
                     // Add BaseClass
                     if (dtm.DataType is ObjectClass && ((ObjectClass)dtm.DataType).BaseObjectClass != null)
                     {
-                        var item = DataTypes.FirstOrDefault(i => i.DataType == ((ObjectClass)dtm.DataType).BaseObjectClass);
+                        var item = DataTypeModels.FirstOrDefault(i => i.DataType == ((ObjectClass)dtm.DataType).BaseObjectClass);
                         if (item != null) add.Add(item);
                     }
 
                     // Add Inheritance
-                    add.AddRange(DataTypes.Where(i => i.DataType is ObjectClass && ((ObjectClass)i.DataType).BaseObjectClass == dtm.DataType));
+                    add.AddRange(DataTypeModels.Where(i => i.DataType is ObjectClass && ((ObjectClass)i.DataType).BaseObjectClass == dtm.DataType));
 
                 }
                 else if (GraphType == GraphTypeEnum.Relation)
                 {
                     foreach (var rel in Relations.Where(i => i.A.Type == dtm.DataType || i.B.Type == dtm.DataType))
                     {
-                        var a = DataTypes.FirstOrDefault(i => i.DataType == rel.A.Type);
+                        var a = DataTypeModels.FirstOrDefault(i => i.DataType == rel.A.Type);
                         if (a != null) add.Add(a);
-                        var b = DataTypes.FirstOrDefault(i => i.DataType == rel.B.Type);
+                        var b = DataTypeModels.FirstOrDefault(i => i.DataType == rel.B.Type);
                         if (b != null) add.Add(b);
                     }
                 }
@@ -277,14 +307,13 @@ namespace Kistl.Client.Presentables.ModuleEditor
             }
         }
 
-        private void CreateGraph()
+        private DataTypeGraph CreateGraph()
         {
             var g = new DataTypeGraph(true);
 
             if (SelectedDataTypeModels.Count() == 0)
             {
-                _graph = null;
-                return;
+                return null;
             }
 
             Dictionary<DataType, DataTypeGraphModel> typeMdlDict = new Dictionary<DataType, DataTypeGraphModel>();
@@ -315,7 +344,7 @@ namespace Kistl.Client.Presentables.ModuleEditor
                 }
             }
 
-            _graph = g;
+            return g;
         }
 
         internal void RecreateGraph()
@@ -331,7 +360,7 @@ namespace Kistl.Client.Presentables.ModuleEditor
             {
                 if (_graph == null)
                 {
-                    CreateGraph();
+                    _graph = CreateGraph();
                 }
                 return _graph;
             }
@@ -340,6 +369,19 @@ namespace Kistl.Client.Presentables.ModuleEditor
         #endregion
 
         #region Commands
+        private ICommand _RefreshCommand = null;
+        public ICommand RefreshCommand
+        {
+            get
+            {
+                if (_RefreshCommand == null)
+                {
+                    _RefreshCommand = ModelFactory.CreateViewModel<SimpleCommandModel.Factory>().Invoke(DataContext, "Refresh", "Refresh the DataTypes list", () => Refresh(), null);
+                }
+                return _RefreshCommand;
+            }
+        }
+
         private ICommand _selectAllCommand = null;
         public ICommand SelectAllCommand
         {

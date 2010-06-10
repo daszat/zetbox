@@ -1,5 +1,6 @@
 ﻿<UserControl x:Class="Kistl.Client.WPF.View.ModuleEditor.DiagramDisplay"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls"
     xmlns:graphsharp="clr-namespace:GraphSharp.Controls;assembly=GraphSharp.Controls"
     xmlns:moduleEditor="clr-namespace:Kistl.Client.WPF.View.ModuleEditor"
     xmlns:wpfext="clr-namespace:WPFExtensions.Controls;assembly=WPFExtensions"        
@@ -25,9 +26,10 @@
                 <ComboBoxItem Name="ISOM">ISOM</ComboBoxItem>
                 <ComboBoxItem Name="CompoundFDP">CompoundFDP</ComboBoxItem>
             </ComboBox>
-            <Button Command="{Binding NewObjectClassCommand, Converter= {StaticResource CommandConverter}}" Content="{Binding NewObjectClassCommand.Label}" ToolTip="{Binding NewObjectClassCommand.ToolTip}" />
-            <Button Command="{Binding NewRelationCommand, Converter= {StaticResource CommandConverter}}" Content="{Binding NewRelationCommand.Label}" ToolTip="{Binding NewRelationCommand.ToolTip}" />
+            <ctrls:CommandButton CommandModel="{Binding NewObjectClassCommand}" />
+            <ctrls:CommandButton CommandModel="{Binding NewRelationCommand}" />
             <Button Click="PrintButton_Click" Content="Print" />
+            <ctrls:CommandButton CommandModel="{Binding RefreshCommand}" />
         </StackPanel>
         <Grid>
             <Grid.ColumnDefinitions>
@@ -37,11 +39,11 @@
             </Grid.ColumnDefinitions>
             <DockPanel Grid.Column="0">
                 <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
-                    <Button Command="{Binding SelectAllCommand, Converter= {StaticResource CommandConverter}}" Content="{Binding SelectAllCommand.Label}" ToolTip="{Binding SelectAllCommand.ToolTip}" />
-                    <Button Command="{Binding SelectNoneCommand, Converter= {StaticResource CommandConverter}}" Content="{Binding SelectNoneCommand.Label}" ToolTip="{Binding SelectNoneCommand.ToolTip}" />
-                    <Button Command="{Binding AddRelatedCommand, Converter= {StaticResource CommandConverter}}" Content="{Binding AddRelatedCommand.Label}" ToolTip="{Binding AddRelatedCommand.ToolTip}" />
+                    <ctrls:CommandButton CommandModel="{Binding SelectAllCommand}" />
+                    <ctrls:CommandButton CommandModel="{Binding SelectNoneCommand}" />
+                    <ctrls:CommandButton CommandModel="{Binding AddRelatedCommand}" />
                 </StackPanel>
-                <ListBox  ItemsSource="{Binding DataTypes}">
+                <ListBox  ItemsSource="{Binding DataTypeModels}">
                     <ListBox.ItemTemplate>
                         <HierarchicalDataTemplate>
                             <CheckBox IsChecked="{Binding IsChecked}">
