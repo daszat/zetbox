@@ -564,16 +564,17 @@ namespace Kistl.API.Tests
 
 			private SerializableExpression CreateExpression()
 			{
-				TestDataObject obj = new TestDataObject__Implementation__();
+                // Cannot use another KistlObject because in this tests we do not do any type transformations
+				//TestDataObject obj = new TestDataObject__Implementation__();
 				TestObj obj2 = new TestObj();
 				TestQuery<TestDataObject> ctx = new TestQuery<TestDataObject>();
 				var list = from o in ctx
 					where o.IntProperty == 1
 					&& o.IntProperty != 2
 					&& o.IntProperty > 3
-					&& o.IntProperty == obj.ID
+					//&& o.IntProperty == obj.ID
 					&& o.StringProperty == obj2.TestField
-					&& o.StringProperty == obj.StringProperty
+					//&& o.StringProperty == obj.StringProperty
 					&& o.StringProperty.StartsWith(obj2.TestField)
 					&& (o.StringProperty.StartsWith("test") || o.StringProperty == "test")
 					&& !o.BoolProperty
