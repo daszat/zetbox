@@ -15,24 +15,24 @@ namespace Kistl.Server.Generators
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Server.Generator");
 
         // Case #1382?
-        private string codeBasePath = String.Empty;
+        protected string CodeBasePath { get; private set; }
 
         public virtual void Generate(Kistl.API.IKistlContext ctx, string basePath)
         {
             // Case #1382?
-            codeBasePath = Path.Combine(basePath, TargetNameSpace);
-            Directory.CreateDirectory(codeBasePath);
+            CodeBasePath = Path.Combine(basePath, TargetNameSpace);
+            Directory.CreateDirectory(CodeBasePath);
 
-            Directory.GetFiles(codeBasePath, "*.*", SearchOption.AllDirectories)
+            Directory.GetFiles(CodeBasePath, "*.*", SearchOption.AllDirectories)
                 .ToList().ForEach(f => File.Delete(f));
-            Directory.GetDirectories(codeBasePath, "*.*", SearchOption.AllDirectories).OrderByDescending(s => s.Length)
+            Directory.GetDirectories(CodeBasePath, "*.*", SearchOption.AllDirectories).OrderByDescending(s => s.Length)
                 .ToList().ForEach(d => Directory.Delete(d));
 
-            Directory.CreateDirectory(codeBasePath);
+            Directory.CreateDirectory(CodeBasePath);
 
             // Save KeyFile
             using (var snkSrc = typeof(BaseDataObjectGenerator).Assembly.GetManifestResourceStream("Kistl.Server.Generators.Kistl.Objects.snk"))
-            using (var snkDest = File.Open(Path.Combine(codeBasePath, "Kistl.Objects.snk"), FileMode.Create))
+            using (var snkDest = File.Open(Path.Combine(CodeBasePath, "Kistl.Objects.snk"), FileMode.Create))
             {
                 snkDest.SetLength(0);
                 snkSrc.CopyTo(snkDest);
@@ -81,7 +81,7 @@ namespace Kistl.Server.Generators
             string projectFileName = Generate_ProjectFile(ctx, ProjectGuid, generatedFileNames);
 
             // Case #1382
-            this.ProjectFileName = Path.Combine(this.codeBasePath, projectFileName);
+            this.ProjectFileName = Path.Combine(this.CodeBasePath, projectFileName);
         }
 
         /// <summary>
@@ -134,7 +134,7 @@ namespace Kistl.Server.Generators
                 TemplateProviderAssembly,
                 templateName,
                 filename,
-                this.codeBasePath,
+                this.CodeBasePath,
                 new object[] { ctx }.Concat(args).ToArray());
             gen.ExecuteTemplate();
             return filename;
