@@ -66,6 +66,10 @@ namespace Kistl.App.Base
         /// <summary>
         /// 
         /// </summary>
+		 Kistl.API.InterfaceType GetEntryInterfaceType() ;
+        /// <summary>
+        /// 
+        /// </summary>
 		 Kistl.App.Base.RelationEnd GetOtherEnd(Kistl.App.Base.RelationEnd relEnd) ;
         /// <summary>
         /// 

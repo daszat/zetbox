@@ -108,5 +108,9 @@ namespace Kistl.App.KistlBase.Common
                 );
         }
 
+        public static void OnGetEntryInterfaceType(Relation rel, MethodReturnEventArgs<InterfaceType> e)
+        {
+            e.Result = rel.Context.GetInterfaceType(String.Format("{0}.{1}_{2}_{3}_RelationEntry", rel.Module.Namespace, rel.A.Type.Name, rel.Verb, rel.B.Type.Name));
+        }
     }
 }

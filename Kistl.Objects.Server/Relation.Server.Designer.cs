@@ -966,6 +966,28 @@ namespace Kistl.App.Base
         /// <summary>
         /// 
         /// </summary>
+		[EventBasedMethod("OnGetEntryInterfaceType_Relation")]
+		public virtual Kistl.API.InterfaceType GetEntryInterfaceType() 
+        {
+            var e = new MethodReturnEventArgs<Kistl.API.InterfaceType>();
+            if (OnGetEntryInterfaceType_Relation != null)
+            {
+                OnGetEntryInterfaceType_Relation(this, e);
+            }
+            else
+            {
+                throw new NotImplementedException("No handler registered on Relation.GetEntryInterfaceType");
+            }
+            return e.Result;
+        }
+		public delegate void GetEntryInterfaceType_Handler<T>(T obj, MethodReturnEventArgs<Kistl.API.InterfaceType> ret);
+		public static event GetEntryInterfaceType_Handler<Relation> OnGetEntryInterfaceType_Relation;
+
+
+
+        /// <summary>
+        /// 
+        /// </summary>
 		[EventBasedMethod("OnGetOtherEnd_Relation")]
 		public virtual Kistl.App.Base.RelationEnd GetOtherEnd(Kistl.App.Base.RelationEnd relEnd) 
         {
