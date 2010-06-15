@@ -24,7 +24,7 @@
     <NoWarn>1591</NoWarn>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <OutputPath>..\bin\Debug\bin\Server\Fallback\</OutputPath>
-    <KistlAPIPath>..\bin\Debug\bin\Server\</KistlAPIPath>
+    <KistlAPIPath>..\bin\Debug\bin\</KistlAPIPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -35,7 +35,7 @@
     <NoWarn>1591</NoWarn>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <OutputPath>..\bin\Release\bin\Server\Fallback\</OutputPath>
-    <KistlAPIPath>..\bin\Release\bin\Server\</KistlAPIPath>
+    <KistlAPIPath>..\bin\Release\bin\</KistlAPIPath>
   </PropertyGroup>
   <!-- Has to come later to receive correct $(OutputPath) -->
   <PropertyGroup>
@@ -50,12 +50,12 @@
     <Reference Include="System.Xml" />
     <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>$(KistlAPIPath)\log4net.dll</HintPath>
+      <HintPath>$(KistlAPIPath)\Common\log4net.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Kistl.API, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>$(KistlAPIPath)\Kistl.API.dll</HintPath>
+      <HintPath>$(KistlAPIPath)\Common\Kistl.API.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>

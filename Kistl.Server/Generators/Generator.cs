@@ -130,11 +130,9 @@ namespace Kistl.Server.Generators
 
         private void CompileCode(string workingPath)
         {
-            string serverReferencePath = Path.GetDirectoryName(typeof(Generator).Assembly.Location);
-            string clientReferencePath = Path.GetFullPath(Path.Combine(serverReferencePath, @"..\Client"));
+            string referencePath = Path.GetFullPath(Path.Combine(Path.GetDirectoryName(typeof(Generator).Assembly.Location), @".."));
 
-            Log.DebugFormat("serverReferencePath = [{0}]", serverReferencePath);
-            Log.DebugFormat("clientReferencePath = [{0}]", clientReferencePath);
+            Log.DebugFormat("referencePath = [{0}]", referencePath);
 
             // TODO: move MsBuild logging to log4net
             if (File.Exists("TemplateCodegenLog.txt"))
@@ -157,10 +155,10 @@ namespace Kistl.Server.Generators
 
             try
             {
-                CompileSingle(serverReferencePath, clientReferencePath, binPath, engine, _generatorProviders.Single(g => g.BaseName == "Interface"));
+                CompileSingle(referencePath, binPath, engine, _generatorProviders.Single(g => g.BaseName == "Interface"));
                 foreach (var gen in _generatorProviders.Where(g => g.BaseName != "Interface"))
                 {
-                    CompileSingle(serverReferencePath, clientReferencePath, binPath, engine, gen);
+                    CompileSingle(referencePath, binPath, engine, gen);
                 }
             }
             finally
@@ -170,7 +168,7 @@ namespace Kistl.Server.Generators
             }
         }
 
-        private static void CompileSingle(string serverReferencePath, string clientReferencePath, string binPath, Engine engine, BaseDataObjectGenerator gen)
+        private static void CompileSingle(string apiPath, string binPath, Engine engine, BaseDataObjectGenerator gen)
         {
             try
             {
@@ -188,14 +186,7 @@ namespace Kistl.Server.Generators
 #endif
                     // Fix XML Path
                     defaultPropertyGroup.AddNewProperty("DocumentationFile", "$(OutputPath)\\$(AssemblyName).xml", false);
-                    if (gen.BaseName == "Client")
-                    {
-                        defaultPropertyGroup.AddNewProperty("KistlAPIPath", clientReferencePath, true);
-                    }
-                    else
-                    {
-                        defaultPropertyGroup.AddNewProperty("KistlAPIPath", serverReferencePath, true);
-                    }
+                    defaultPropertyGroup.AddNewProperty("KistlAPIPath", apiPath, true);
 
                     Log.DebugFormat("Compiling");
                     if (!engine.BuildProject(proj))

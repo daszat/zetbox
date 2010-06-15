@@ -48,7 +48,7 @@ namespace Kistl.DalProvider.EF.Generator.Implementation
             // EF Provider infrastructure
             this.WriteLine(@"    <Reference Include=""Kistl.DalProvider.EF"">");
             this.WriteLine(@"      <SpecificVersion>False</SpecificVersion>");
-            this.WriteLine(@"      <HintPath>$(KistlAPIPath)\Kistl.DalProvider.EF.dll</HintPath>");
+            this.WriteLine(@"      <HintPath>$(KistlAPIPath)\Server\Kistl.DalProvider.EF.dll</HintPath>");
             this.WriteLine(@"      <Private>False</Private>");
             this.WriteLine(@"    </Reference>");
 
@@ -56,7 +56,7 @@ namespace Kistl.DalProvider.EF.Generator.Implementation
             // Server API
             this.WriteLine(@"    <Reference Include=""Kistl.API.Server"">");
             this.WriteLine(@"      <SpecificVersion>False</SpecificVersion>");
-            this.WriteLine(@"      <HintPath>$(KistlAPIPath)\Kistl.API.Server.dll</HintPath>");
+            this.WriteLine(@"      <HintPath>$(KistlAPIPath)\Server\Kistl.API.Server.dll</HintPath>");
             this.WriteLine(@"      <Private>False</Private>");
             this.WriteLine(@"    </Reference>");
         }

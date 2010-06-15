@@ -36,14 +36,14 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation
             // Client API
             this.WriteLine(@"    <Reference Include=""Kistl.API.Client"">");
             this.WriteLine(@"      <SpecificVersion>False</SpecificVersion>");
-            this.WriteLine(@"      <HintPath>$(KistlAPIPath)\Kistl.API.Client.dll</HintPath>");
+            this.WriteLine(@"      <HintPath>$(KistlAPIPath)\Client\Kistl.API.Client.dll</HintPath>");
             this.WriteLine(@"      <Private>False</Private>");
             this.WriteLine(@"    </Reference>");
 
             // DAL Provider
             this.WriteLine(@"    <Reference Include=""Kistl.DalProvider.ClientObjects"">");
             this.WriteLine(@"      <SpecificVersion>False</SpecificVersion>");
-            this.WriteLine(@"      <HintPath>$(KistlAPIPath)\Kistl.DalProvider.ClientObjects.dll</HintPath>");
+            this.WriteLine(@"      <HintPath>$(KistlAPIPath)\Client\Kistl.DalProvider.ClientObjects.dll</HintPath>");
             this.WriteLine(@"      <Private>False</Private>");
             this.WriteLine(@"    </Reference>");
         }

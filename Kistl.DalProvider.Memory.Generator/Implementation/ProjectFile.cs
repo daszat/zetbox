@@ -36,7 +36,7 @@ namespace Kistl.DalProvider.Memory.Generator.Implementation
             // DAL Provider
             this.WriteLine(@"    <Reference Include=""Kistl.DalProvider.Memory"">");
             this.WriteLine(@"      <SpecificVersion>False</SpecificVersion>");
-            this.WriteLine(@"      <HintPath>$(KistlAPIPath)\Kistl.DalProvider.Memory.dll</HintPath>");
+            this.WriteLine(@"      <HintPath>$(KistlAPIPath)\Common\Kistl.DalProvider.Memory.dll</HintPath>");
             this.WriteLine(@"      <Private>False</Private>");
             this.WriteLine(@"    </Reference>");
         }

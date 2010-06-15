@@ -1,5 +1,5 @@
 
-namespace Kistl.DalProvider.Memory
+namespace Kistl.DalProvider.Memory.Generator
 {
     using System;
     using System.Collections.Generic;
@@ -17,7 +17,7 @@ namespace Kistl.DalProvider.Memory
     public class ServerProvider
         : Module
     {
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.DalProvider.Memory");
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.DalProvider.Memory.Generator");
 
         public static readonly string ContextClassName = "Kistl.Objects.Memory.MemoryContext";
         public static readonly string GeneratedAssemblyName = "Kistl.Objects.Memory, Version=1.0.0.0, Culture=neutral, PublicKeyToken=7b69192d05046fdf";
@@ -48,7 +48,7 @@ namespace Kistl.DalProvider.Memory
             }
 
             moduleBuilder
-                .RegisterType<Generator.MemoryGenerator>()
+                .RegisterType<MemoryGenerator>()
                 .As<BaseDataObjectGenerator>()
                 .SingleInstance();
         }

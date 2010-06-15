@@ -34,13 +34,13 @@ namespace Kistl.DalProvider.Frozen.Generator.Implementation
             // log4net
             this.WriteLine(@"    <Reference Include=""log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL"">");
             this.WriteLine(@"        <SpecificVersion>False</SpecificVersion>");
-            this.WriteLine(@"        <HintPath>$(KistlAPIPath)\log4net.dll</HintPath>");
+            this.WriteLine(@"        <HintPath>$(KistlAPIPath)\Common\log4net.dll</HintPath>");
             this.WriteLine(@"    </Reference>");
 
             // Frozen Provider infrastructure
             this.WriteLine(@"    <Reference Include=""Kistl.DalProvider.Frozen"">");
             this.WriteLine(@"      <SpecificVersion>False</SpecificVersion>");
-            this.WriteLine(@"      <HintPath>$(KistlAPIPath)\Kistl.DalProvider.Frozen.dll</HintPath>");
+            this.WriteLine(@"      <HintPath>$(KistlAPIPath)\Common\Kistl.DalProvider.Frozen.dll</HintPath>");
             this.WriteLine(@"      <Private>False</Private>");
             this.WriteLine(@"    </Reference>");
         }

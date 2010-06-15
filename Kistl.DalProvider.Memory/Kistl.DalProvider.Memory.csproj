@@ -19,31 +19,27 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\bin\Debug\bin\Server\</OutputPath>
+    <OutputPath>..\bin\Debug\bin\Common\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <NoWarn>1591</NoWarn>
-    <DocumentationFile>..\bin\Debug\bin\Server\Kistl.DalProvider.Memory.XML</DocumentationFile>
+    <DocumentationFile>..\bin\Debug\bin\Common\Kistl.DalProvider.Memory.XML</DocumentationFile>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\bin\Release\bin\Server\</OutputPath>
+    <OutputPath>..\bin\Release\bin\Common\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\bin\Release\bin\Server\Kistl.DalProvider.Memory.XML</DocumentationFile>
+    <DocumentationFile>..\bin\Release\bin\Common\Kistl.DalProvider.Memory.XML</DocumentationFile>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <NoWarn>1591</NoWarn>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Arebis.CodeGeneration, Version=1.2.0.1, Culture=neutral, PublicKeyToken=1012dfebee6c8abd, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Program Files\AREBIS\Arebis Generation Tools\Arebis.CodeGeneration.dll</HintPath>
-    </Reference>
     <Reference Include="Autofac, Version=0.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libs\AutoFac 2.1\Autofac.dll</HintPath>
@@ -70,22 +66,7 @@
     <Compile Include="CollectionWrapperImplementations.cs" />
     <Compile Include="ClientProvider.cs" />
     <Compile Include="CustomPropertyDescriptor.cs" />
-    <Compile Include="Generator\Implementation\CollectionEntries\ValueCollectionEntry.cs" />
-    <Compile Include="Generator\Implementation\CollectionEntries\ObjectCollectionEntry.cs" />
-    <Compile Include="Generator\Implementation\CollectionEntries\ValueCollectionEntryParentReference.cs" />
-    <Compile Include="Generator\Implementation\CompoundObjects\Template.cs" />
-    <Compile Include="Generator\Implementation\ObjectClasses\CollectionEntries.cs" />
-    <Compile Include="Generator\Implementation\ObjectClasses\AttachToContextTemplate.cs" />
-    <Compile Include="Generator\Implementation\ObjectClasses\CompoundObjectPropertyTemplate.cs" />
-    <Compile Include="Generator\Implementation\ObjectClasses\ValueCollectionProperty.cs" />
-    <Compile Include="Generator\Implementation\ObjectClasses\ObjectListProperty.cs" />
-    <Compile Include="Generator\Implementation\ObjectClasses\UpdateParentTemplate.cs" />
-    <Compile Include="Generator\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cs" />
-    <Compile Include="Generator\Implementation\ObjectClasses\Template.cs" />
-    <Compile Include="Generator\Implementation\ProjectFile.cs" />
-    <Compile Include="Generator\MemoryGenerator.cs" />
     <Compile Include="OneNRelationList.cs" />
-    <Compile Include="ServerProvider.cs" />
     <Compile Include="MemoryContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="Kistl.snk" />
@@ -99,10 +80,6 @@
       <Project>{0C9E6E69-309F-46F7-A936-D5762229DEB9}</Project>
       <Name>Kistl.Objects</Name>
       <Private>False</Private>
-    </ProjectReference>
-    <ProjectReference Include="..\Kistl.Server\Kistl.Server.csproj">
-      <Project>{FA2B6CCD-95CB-4927-9CB5-AFE833EB38B7}</Project>
-      <Name>Kistl.Server</Name>
     </ProjectReference>
     <ProjectReference Include="..\TempAppHelpers\TempAppHelpers.csproj">
       <Project>{9677AE11-CB92-4F0A-A248-87A21586F0DA}</Project>

@@ -10,10 +10,13 @@
       <Module>Kistl.Client.ClientModule, Kistl.Client</Module>
       <Module>Kistl.Client.WPF.WPFModule, Kistl.Client.WPF</Module>
       <Module>Kistl.DalProvider.Frozen.FrozenClientProvider, Kistl.DalProvider.Frozen</Module>
+      <Module>Kistl.DalProvider.Memory.ClientProvider, Kistl.DalProvider.Memory</Module>
     </Modules>
   </Client>
   <SourceFileLocation>
     <!-- default probe path -->
     <string>P:\Kistl\bin\CodeGen\bin\Debug</string>
+    <!-- common libaries -->
+    <string>P:\Kistl\bin\Debug\bin\Common</string>
   </SourceFileLocation>
 </KistlConfig>

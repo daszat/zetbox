@@ -8,8 +8,6 @@ namespace Kistl.DalProvider.Frozen
 
     using Autofac;
     using Kistl.API;
-    using Kistl.Server;
-    using Kistl.Server.Generators;
     using Kistl.API.Utils;
     using Kistl.API.Configuration;
     using Kistl.App.Extensions;
@@ -36,11 +34,6 @@ namespace Kistl.DalProvider.Frozen
                     })
                     .SingleInstance();
             }
-
-            moduleBuilder
-                .RegisterType<Generator.FreezingGenerator>()
-                .As<BaseDataObjectGenerator>()
-                .SingleInstance();
         }
     }
 }
