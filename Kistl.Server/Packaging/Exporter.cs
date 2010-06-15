@@ -12,11 +12,9 @@ namespace Kistl.Server.Packaging
     using System.Xml;
 
     using Kistl.API;
-    using Kistl.API.Server;
     using Kistl.API.Utils;
     using Kistl.App.Base;
     using Kistl.App.Extensions;
-    using Kistl.Server.Generators.Extensions;
 
     public class Exporter
     {
@@ -115,21 +113,23 @@ namespace Kistl.Server.Packaging
                             if (!rel.A.Type.ImplementsIExportable()) continue;
                             if (!rel.B.Type.ImplementsIExportable()) continue;
 
-                            var ifTypeName = rel.GetRelationFullName();
-                            Log.InfoFormat("    {0} ", ifTypeName);
-                            Type ifType = ctx.GetInterfaceType(ifTypeName).Type;
-                            if (ifType == null)
+                            try
                             {
-                                Log.WarnFormat("RelationType {0} not found", ifTypeName);
-                                continue;
+                                var ifType = rel.GetEntryInterfaceType();
+                                Log.InfoFormat("    {0} ", ifType.Type.Name);
+
+                                MethodInfo mi = ctx.GetType().FindGenericMethod("FetchRelation", new Type[] { ifType.Type }, new Type[] { typeof(Guid), typeof(RelationEndRole), typeof(IDataObject) });
+                                var relations = MagicCollectionFactory.WrapAsCollection<IPersistenceObject>(mi.Invoke(ctx, new object[] { rel.ExportGuid, RelationEndRole.A, null }));
+
+                                foreach (var obj in relations.OrderBy(obj => ((IExportable)obj).ExportGuid))
+                                {
+                                    ExportObject(xml, obj, moduleNamespaces);
+                                }
                             }
-
-                            MethodInfo mi = ctx.GetType().FindGenericMethod("FetchRelation", new Type[] { ifType }, new Type[] { typeof(Guid), typeof(RelationEndRole), typeof(IDataObject) });
-                            var relations = MagicCollectionFactory.WrapAsCollection<IPersistenceObject>(mi.Invoke(ctx, new object[] { rel.ExportGuid, RelationEndRole.A, null }));
-
-                            foreach (var obj in relations.OrderBy(obj => ((IExportable)obj).ExportGuid))
+                            catch (TypeLoadException ex)
                             {
-                                ExportObject(xml, obj, moduleNamespaces);
+                                var message = String.Format("Failed to load InterfaceType for entries of {0}", rel);
+                                Log.Warn(message, ex);
                             }
                         }
                     }

@@ -1,22 +1,22 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Metadata.Edm;
-using System.Data.Objects;
-using System.Data.Objects.DataClasses;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-
-using Kistl.API;
-using Kistl.API.Server;
-using Kistl.App.Base;
-using Kistl.App.Extensions;
-using Kistl.Server.Generators.Extensions;
 
 namespace Kistl.DalProvider.EF
 {
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Data;
+    using System.Data.Metadata.Edm;
+    using System.Data.Objects;
+    using System.Data.Objects.DataClasses;
+    using System.Linq;
+    using System.Reflection;
+    using System.Text;
+
+    using Kistl.API;
+    using Kistl.API.Server;
+    using Kistl.App.Base;
+    using Kistl.App.Extensions;
+
     public class ServerObjectHandler<T>
         : BaseServerObjectHandler<T>
         where T : class, IDataObject
@@ -72,7 +72,7 @@ namespace Kistl.DalProvider.EF
             var relEnd = rel.GetEndFromRole(endRole);
             var relOtherEnd = rel.GetOtherEnd(relEnd);
             var parent = ctx.Find(ctx.GetImplementationType(typeof(TParent)).ToInterfaceType(), parentId);
-            var ceType = ctx.ToImplementationType(ctx.GetInterfaceType(rel.GetRelationFullName())).Type;
+            var ceType = ctx.ToImplementationType(rel.GetEntryInterfaceType()).Type;
 
             var method = this.GetType().GetMethod("GetCollectionEntriesInternal", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
             return (IEnumerable<IRelationCollectionEntry>)method

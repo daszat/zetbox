@@ -11,7 +11,6 @@ namespace Kistl.Server.Packaging
     using System.Xml.XPath;
 
     using Kistl.API;
-    using Kistl.API.Server;
     using Kistl.API.Utils;
 
     public class Importer
@@ -168,7 +167,6 @@ namespace Kistl.Server.Packaging
                         }
                     }
                 }
-
 
                 using (Log.InfoTraceMethodCall("Reloading References"))
                 {
