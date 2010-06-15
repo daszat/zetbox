@@ -26,7 +26,13 @@
     <string>P:\Kistl\bin\Debug\bin\Common</string>
     <!-- Fallback path for local development -->
     <string>P:\Kistl\bin\Debug\bin\Server\fallback</string>
-    <!-- Fallback path for CC.net on srv2008 -->
-    <string>f:\CruiseControl.Net\Projects\Kistl\bin\Debug\bin\Server\Fallback</string>
+    
+    <!-- CC.net on srv2008 -->
+    <!-- default probe path -->
+    <string>F:\CruiseControl.Net\Projects\Kistl\bin\CodeGen\bin\Debug</string>
+    <!-- common libaries -->
+    <string>F:\CruiseControl.Net\Projects\Kistl\bin\Debug\bin\Common</string>
+    <!-- Fallback path for local development -->
+    <string>F:\CruiseControl.Net\Projects\Kistl\bin\Debug\bin\Server\fallback</string>
   </SourceFileLocation>
 </KistlConfig>
