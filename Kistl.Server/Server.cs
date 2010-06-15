@@ -9,14 +9,15 @@ namespace Kistl.Server
     using System.Text;
 
     using Autofac;
-
+    
     using Kistl.API;
     using Kistl.API.Configuration;
     using Kistl.API.Server;
     using Kistl.API.Utils;
+    using Kistl.App.Base;
     using Kistl.App.Extensions;
     using Kistl.App.GUI;
-    using Kistl.App.Base;
+    using Kistl.App.Packaging;
 
     /// <summary>
     /// Serversteuerung
@@ -51,7 +52,7 @@ namespace Kistl.Server
             using (Log.InfoTraceMethodCallFormat("file=[{0}],namespaces=[{1}]", file, String.Join(";", namespaces ?? new string[] { })))
             using (var subContainer = container.BeginLifetimeScope())
             {
-                Packaging.Exporter.ExportFromContext(subContainer.Resolve<IKistlContext>(), file, namespaces);
+                Exporter.ExportFromContext(subContainer.Resolve<IKistlContext>(), file, namespaces);
             }
         }
 
@@ -61,7 +62,7 @@ namespace Kistl.Server
             using (var subContainer = container.BeginLifetimeScope())
             {
                 IKistlServerContext ctx = subContainer.Resolve<IKistlServerContext>();
-                Packaging.Importer.LoadFromXml(ctx, file);
+                Importer.LoadFromXml(ctx, file);
                 Log.Info("Submitting changes");
                 ctx.SubmitRestore();
             }
@@ -72,7 +73,7 @@ namespace Kistl.Server
             using (Log.InfoTraceMethodCallFormat("file=[{0}],namespaces=[{1}]", file, String.Join(";", namespaces ?? new string[] { })))
             using (var subContainer = container.BeginLifetimeScope())
             {
-                Packaging.Exporter.PublishFromContext(subContainer.Resolve<IKistlContext>(), file, namespaces);
+                Exporter.PublishFromContext(subContainer.Resolve<IKistlContext>(), file, namespaces);
             }
         }
 
@@ -83,7 +84,7 @@ namespace Kistl.Server
             using (FileStream fs = File.OpenRead(file))
             {
                 var ctx = subContainer.Resolve<IKistlServerContext>();
-                Packaging.Importer.Deploy(ctx, fs);
+                Importer.Deploy(ctx, fs);
                 Log.Info("Submitting changes");
                 ctx.SubmitRestore();
             }
@@ -120,7 +121,7 @@ namespace Kistl.Server
             using (var subContainer = container.BeginLifetimeScope())
             {
                 IKistlContext ctx = subContainer.Resolve<MemoryContext>();
-                Packaging.Importer.LoadFromXml(ctx, file);
+                Importer.LoadFromXml(ctx, file);
                 var mgr = subContainer.Resolve<SchemaManagement.SchemaManager>(new NamedParameter("newSchema", ctx));
                 mgr.CheckSchema(withRepair);
             }
@@ -139,9 +140,9 @@ namespace Kistl.Server
                 // the schema
                 using (MemoryStream ms = new MemoryStream())
                 {
-                    Packaging.Exporter.PublishFromContext(dbctx, ms, new string[] { "*" });
+                    Exporter.PublishFromContext(dbctx, ms, new string[] { "*" });
                     ms.Seek(0, SeekOrigin.Begin);
-                    Packaging.Importer.LoadFromXml(ctx, ms);
+                    Importer.LoadFromXml(ctx, ms);
                 }
 
                 var mgr = subContainer.Resolve<SchemaManagement.SchemaManager>(new NamedParameter("newSchema", ctx));
@@ -155,7 +156,7 @@ namespace Kistl.Server
             using (var subContainer = container.BeginLifetimeScope())
             {
                 IKistlContext ctx = subContainer.Resolve<MemoryContext>();
-                Packaging.Importer.LoadFromXml(ctx, file);
+                Importer.LoadFromXml(ctx, file);
 
                 var mgr = subContainer.Resolve<SchemaManagement.SchemaManager>(new NamedParameter("newSchema", ctx));
                 mgr.UpdateSchema();

@@ -64,6 +64,9 @@
     <Compile Include="KistlContextExtensions.cs" />
     <Compile Include="MethodExtensions.cs" />
     <Compile Include="MultiplicityExtensions.cs" />
+    <Compile Include="Packaging\Exporter.cs" />
+    <Compile Include="Packaging\Importer.cs" />
+    <Compile Include="Packaging\PackagingHelper.cs" />
     <Compile Include="ParameterExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PropertyExtensions.cs" />

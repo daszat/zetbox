@@ -1,21 +1,23 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-
-using Kistl.API;
-using Kistl.API.Server;
-using Kistl.API.Utils;
-using Kistl.App.Base;
-using Kistl.App.Extensions;
-using Kistl.Server.Generators;
-using Kistl.Server.Generators.Extensions;
-using System.Runtime.Serialization;
-using Kistl.API.Configuration;
 
 namespace Kistl.Server.SchemaManagement
 {
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+    using System.Runtime.Serialization;
+    using System.Text;
+
+    using Kistl.API;
+    using Kistl.API.Configuration;
+    using Kistl.API.Server;
+    using Kistl.API.Utils;
+    using Kistl.App.Base;
+    using Kistl.App.Extensions;
+    using Kistl.App.Packaging;
+    using Kistl.Server.Generators;
+    using Kistl.Server.Generators.Extensions;
+
     public partial class SchemaManager
         : IDisposable
     {
@@ -208,7 +210,7 @@ namespace Kistl.Server.SchemaManagement
             {
                 using (var ms = new MemoryStream(ASCIIEncoding.Default.GetBytes(schema)))
                 {
-                    Packaging.Importer.LoadFromXml(targetCtx, ms);
+                    Importer.LoadFromXml(targetCtx, ms);
                 }
             }
         }
@@ -219,7 +221,7 @@ namespace Kistl.Server.SchemaManagement
             {
                 using (var ms = new MemoryStream())
                 {
-                    Packaging.Exporter.PublishFromContext(schema, ms, new string[] { "*" });
+                    Exporter.PublishFromContext(schema, ms, new string[] { "*" });
                     string schemaStr = ASCIIEncoding.Default.GetString(ms.GetBuffer());
                     db.SaveSchema(schemaStr);
                 }

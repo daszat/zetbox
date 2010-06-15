@@ -8,13 +8,14 @@ namespace Kistl.Server.Service
     using System.Text;
 
     using Autofac;
+    using Autofac.Configuration;
     using Autofac.Integration.Wcf;
     using Kistl.API;
     using Kistl.API.Configuration;
     using Kistl.API.Server;
     using Kistl.API.Utils;
     using Kistl.App.Extensions;
-    using Autofac.Configuration;
+    using Kistl.App.Packaging;
 
     /// <summary>
     /// Mainprogramm
@@ -276,7 +277,7 @@ namespace Kistl.Server.Service
                         // register empty context first, to avoid errors when trying to load defaultvalues
                         // TODO: remove, this should not be needed when using the container.
                         FrozenContext.RegisterFallback(memCtx);
-                        Packaging.Importer.LoadFromXml(memCtx, dataSourceXmlFile);
+                        Importer.LoadFromXml(memCtx, dataSourceXmlFile);
                         return memCtx;
                     })
                     .As<IReadOnlyKistlContext>()
