@@ -41,5 +41,12 @@ namespace Kistl.DalProvider.Memory.Generator.Implementation
             this.WriteLine(@"    </Reference>");
         }
 
+        protected override void ApplyAdditionalItemGroups()
+        {
+            base.ApplyAdditionalItemGroups();
+            this.WriteLine(@"  <ItemGroup>");
+            this.WriteLine(@"    <EmbeddedResource Include=""FrozenObjects.xml""/>");
+            this.WriteLine(@"  </ItemGroup>");
+        }
     }
 }
