@@ -12,7 +12,7 @@ namespace Kistl.DalProvider.Memory
     using Kistl.API.Utils;
     using Kistl.App.Extensions;
 
-    public class ClientProvider
+    public class MemoryProvider
         : Module
     {
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.DalProvider.Memory");
@@ -35,7 +35,7 @@ namespace Kistl.DalProvider.Memory
                     //var fams = args.Context.Resolve<FrozenActionsManager>();
                     //fams.Init((IReadOnlyKistlContext)args.Instance);
                 })
-                .SingleInstance();
+                .InstancePerDependency();
         }
     }
 }

@@ -14,7 +14,7 @@ namespace Kistl.DalProvider.Memory.Generator
     using Kistl.Server;
     using Kistl.Server.Generators;
 
-    public class ServerProvider
+    public class MemoryGeneratorProvider
         : Module
     {
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.DalProvider.Memory.Generator");

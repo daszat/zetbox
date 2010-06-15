@@ -14,7 +14,8 @@
       <Module>Kistl.API.Server.ServerApiModule, Kistl.API.Server</Module>
       <Module>Kistl.Server.ServerModule, Kistl.Server</Module>
       <Module>Kistl.DalProvider.EF.EfProvider, Kistl.DalProvider.EF</Module>
-      <Module>Kistl.DalProvider.Memory.Generator.ServerProvider, Kistl.DalProvider.Memory.Generator</Module>
+      <Module>Kistl.DalProvider.Memory.MemoryProvider, Kistl.DalProvider.Memory</Module>
+      <Module>Kistl.DalProvider.Memory.Generator.MemoryGeneratorProvider, Kistl.DalProvider.Memory.Generator</Module>
       <Module>Kistl.DalProvider.Frozen.FrozenProvider, Kistl.DalProvider.Frozen</Module>
       <Module>Kistl.DalProvider.Frozen.Generator.FrozenGeneratorProvider, Kistl.DalProvider.Frozen.Generator</Module>
     </Modules>

@@ -37,7 +37,7 @@ public sealed class SetUpFixture : Kistl.API.AbstractConsumerTests.AbstractSetUp
 
         // Register modules -> Hosttype = none
         builder.RegisterModule(new Kistl.API.ApiModule());
-        builder.RegisterModule(new Kistl.DalProvider.Memory.ClientProvider());
+        builder.RegisterModule(new Kistl.DalProvider.Memory.MemoryProvider());
 
         builder
            .RegisterType<MemoryAssemblyConfiguration>()

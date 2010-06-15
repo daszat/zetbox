@@ -64,7 +64,7 @@
     <Compile Include="BaseMemoryPersistenceObject.cs" />
     <Compile Include="ClientValueCollectionWrapper.cs" />
     <Compile Include="CollectionWrapperImplementations.cs" />
-    <Compile Include="ClientProvider.cs" />
+    <Compile Include="MemoryProvider.cs" />
     <Compile Include="CustomPropertyDescriptor.cs" />
     <Compile Include="OneNRelationList.cs" />
     <Compile Include="MemoryContext.cs" />
