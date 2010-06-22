@@ -4,6 +4,10 @@
   <Server StartServer="true">
     <DatabaseProvider>System.Data.SqlClient</DatabaseProvider>
     <ConnectionString>Data Source=.\SQLEXPRESS;Initial Catalog=Kistl;Integrated Security=True;MultipleActiveResultSets=true;</ConnectionString>
+    <!--
+    <DatabaseProvider>Npgsql</DatabaseProvider>
+    <ConnectionString>Server=localhost;Database=Kistl;User Id=David Schmitt;Password=YFJRPPCdtba0q3VSdv3a</ConnectionString> 
+    -->
     <DocumentStore>DocumentStore\Server\</DocumentStore>
     <LogFilePath>bin\LogFiles</LogFilePath>
     <CodeGenWorkingPath>bin\CodeGenNext</CodeGenWorkingPath>

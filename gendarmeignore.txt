@@ -150,8 +150,9 @@ M: System.Void Kistl.DalProvider.EF.EntityListWrapper`2::set_Item(System.Int32,T
 M: System.Collections.IEnumerable Kistl.API.Utils.ContextCache::get_Item(Kistl.API.InterfaceType)
 
 R: Gendarme.Rules.Correctness.ProvideCorrectArgumentsToFormattingMethodsRule
-# Format string build during runtime
+# Format string built during runtime
 M: System.Void Kistl.Server.SchemaManagement.SqlProvider.SqlServer::CreateUpdateRightsTrigger(System.String,System.String,System.Collections.Generic.List`1<Kistl.API.Server.RightsTrigger>)
+M: System.Void Kistl.Server.SchemaManagement.NpgsqlProvider.Postgresql::CreateUpdateRightsTrigger(System.String,System.String,System.Collections.Generic.List`1<Kistl.API.Server.RightsTrigger>)
 
 R: Gendarme.Rules.Performance.AvoidUninstantiatedInternalClassesRule
 # The internal type is not instantiated by code within the assembly.
