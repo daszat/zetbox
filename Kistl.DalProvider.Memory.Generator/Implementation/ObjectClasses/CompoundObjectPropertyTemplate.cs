@@ -16,7 +16,7 @@ namespace Kistl.DalProvider.Memory.Generator.Implementation.ObjectClasses
     {
         public CompoundObjectPropertyTemplate(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Templates.Implementation.SerializationMembersList serializationList,
             CompoundObjectProperty prop, string propName, string backingPropertyName, string backingStoreName, string coType, string coImplementationType)
-            : base(_host, ctx, serializationList, prop, propName, backingPropertyName + MemoryGenerator.ExtraSuffix, backingStoreName, coType, coImplementationType + MemoryGenerator.ExtraSuffix)
+            : base(_host, ctx, serializationList, prop, propName, backingPropertyName + MemoryGenerator.Suffix, backingStoreName, coType, coImplementationType + MemoryGenerator.Suffix)
         {
         }
     }

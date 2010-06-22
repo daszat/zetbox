@@ -249,11 +249,6 @@ namespace Kistl.Server.Generators
             var gen = new TemplateGenerator();
 
             gen.Settings.Add("basetemplatepath", "Kistl.Server.Generators.Templates");
-            // TODO: refactor into Frozen Provider
-            if ("Frozen".Equals(provider))
-            {
-                gen.Settings.Add("extrasuffix", "Frozen");
-            }
             gen.Settings.Add("providertemplatenamespace", providerTemplateNamespace);
             gen.Settings.Add("providertemplateassembly", providerTemplateAssembly);
 

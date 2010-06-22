@@ -253,7 +253,7 @@ namespace Kistl.Server.Service
 
                 if (dataSourceXmlFile == null) { FrozenContext.RegisterFallback(container.Resolve<IReadOnlyKistlContext>()); }
 
-                // TODO: Remove when ForzenContext is loaded by AutoFac
+                // TODO: Remove when FrozenContext is loaded by AutoFac
                 FrozenContext.RegisterTypeTransformations(container.Resolve<ITypeTransformations>());
 
                 // initialise custom actions manager
@@ -281,6 +281,13 @@ namespace Kistl.Server.Service
                         return memCtx;
                     })
                     .As<IReadOnlyKistlContext>()
+                    .Named<IReadOnlyKistlContext>(Kistl.API.Helper.FrozenContextServiceName)
+                    .SingleInstance();
+            }
+            else
+            {
+                builder.Register(c => c.Resolve<IReadOnlyKistlContext>())
+                    .Named<IReadOnlyKistlContext>(Kistl.API.Helper.FrozenContextServiceName)
                     .SingleInstance();
             }
             // register deployment-specific components

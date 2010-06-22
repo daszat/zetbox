@@ -11,6 +11,7 @@ namespace Kistl.Server.Generators.Interfaces
     public class InterfaceGenerator
         : BaseDataObjectGenerator
     {
+        public override string ExtraSuffix { get { return String.Empty; } }
         public override string Description { get { return "Interfaces"; } }
         public override string TargetNameSpace { get { return "Kistl.Objects"; } }
         public override string BaseName { get { return "Interface"; } }

@@ -48,7 +48,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
 
             string thisInterface = prop.ObjectClass.Name;
             string referencedType = prop.ReferencedTypeAsCSharp();
-            string referencedCollectionEntry = prop.GetCollectionEntryClassName() + Kistl.API.Helper.ImplementationSuffix;
+            string referencedCollectionEntry = prop.GetCollectionEntryClassName() + Kistl.API.Helper.ImplementationSuffix + host.Settings["extrasuffix"];
 
             string providerCollectionType = "IList<" + referencedCollectionEntry + ">";
             string underlyingCollectionName = "_" + name;

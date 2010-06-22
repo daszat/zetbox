@@ -158,7 +158,7 @@ namespace Kistl.API
                 string frozenAssemblyName = "Kistl.Objects.Frozen.FrozenContextImplementation, " + Kistl.API.Helper.FrozenAssembly;
                 if (!_haveTriedLoading)
                 {
-                    // TODO: Remove that when ForzenContext is loaded by AutoFac
+                    // TODO: Remove that when FrozenContext is loaded by AutoFac
                     if (_typeTrans == null) throw new InvalidOperationException("RegisterTypeTransformations was not called");
                     try
                     {

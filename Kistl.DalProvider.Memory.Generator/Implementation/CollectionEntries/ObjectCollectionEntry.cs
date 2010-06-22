@@ -18,7 +18,7 @@ namespace Kistl.DalProvider.Memory.Generator.Implementation.CollectionEntries
             : base(_host, ctx, rel)
         {
         }
-
+        
         protected override void ApplyObjectReferenceProperty(Relation rel, RelationEndRole endRole, string propertyName)
         {
             RelationEnd relEnd = rel.GetEndFromRole(endRole);

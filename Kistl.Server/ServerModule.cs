@@ -76,7 +76,7 @@ namespace Kistl.Server
             moduleBuilder
                 .Register(c =>
                 {
-                    var ctx = c.Resolve<IReadOnlyKistlContext>();
+                    var ctx = c.Resolve<IReadOnlyKistlContext>(Kistl.API.Helper.FrozenContextServiceName);
                     var cams = new CustomActionsManagerServer();
                     cams.Init(ctx);
 

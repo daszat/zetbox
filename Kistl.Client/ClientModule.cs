@@ -59,7 +59,7 @@ namespace Kistl.Client
             moduleBuilder
                 .Register(c =>
                 {
-                    var ctx = c.Resolve<IReadOnlyKistlContext>();
+                    var ctx = c.Resolve<IReadOnlyKistlContext>(Kistl.API.Helper.FrozenContextServiceName);
                     var cams = new CustomActionsManagerClient();
                     cams.Init(ctx);
 

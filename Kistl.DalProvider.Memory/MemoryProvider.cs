@@ -4,6 +4,7 @@ namespace Kistl.DalProvider.Memory
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Reflection;
     using System.Text;
 
     using Autofac;
@@ -11,9 +12,11 @@ namespace Kistl.DalProvider.Memory
     using Kistl.API;
     using Kistl.API.Utils;
     using Kistl.App.Extensions;
+    using Kistl.App.Packaging;
+    using System.IO;
 
     public class MemoryProvider
-        : Module
+        : Autofac.Module
     {
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.DalProvider.Memory");
 
@@ -24,9 +27,8 @@ namespace Kistl.DalProvider.Memory
         {
             base.Load(moduleBuilder);
 
-            var memoryContextType = typeof(MemoryContext); // Type.GetType(ContextClassName + ", " + GeneratedAssemblyName, true);
             moduleBuilder
-                .RegisterType(memoryContextType)
+                .RegisterType<MemoryContext>()
                 .As<BaseMemoryContext>()
                 .OnActivating(args =>
                 {
@@ -36,6 +38,27 @@ namespace Kistl.DalProvider.Memory
                     //fams.Init((IReadOnlyKistlContext)args.Instance);
                 })
                 .InstancePerDependency();
+
+            try
+            {
+                var generatedAssembly = Assembly.Load(GeneratedAssemblyName);
+                moduleBuilder
+                    .Register(c =>
+                    {
+                        var memCtx = new MemoryContext(c.Resolve<ITypeTransformations>());
+                        // register empty context first, to avoid errors when trying to load defaultvalues
+                        // TODO: remove, this should not be needed when using the container.
+                        FrozenContext.RegisterFallback(memCtx);
+                        Importer.LoadFromXml(memCtx, generatedAssembly.GetManifestResourceStream("Kistl.Objects.Memory.FrozenObjects.xml"));
+                        return memCtx;
+                    })
+                    .Named<IReadOnlyKistlContext>(Kistl.API.Helper.FrozenContextServiceName)
+                    .SingleInstance();
+            }
+            catch (FileNotFoundException ex)
+            {
+                Log.Warn("Could not load memory context", ex);
+            }
         }
     }
 }

@@ -47,7 +47,7 @@ namespace Kistl.Server.Generators.Templates.Implementation.CollectionEntries
 
         protected override string GetCeClassName()
         {
-            return rel.GetRelationClassName() + Kistl.API.Helper.ImplementationSuffix;
+            return rel.GetRelationClassName() + Kistl.API.Helper.ImplementationSuffix + Settings["extrasuffix"];
         }
 
         protected override string GetCeInterface()

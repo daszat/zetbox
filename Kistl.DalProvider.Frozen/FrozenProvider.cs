@@ -15,25 +15,26 @@ namespace Kistl.DalProvider.Frozen
     public class FrozenProvider 
         : Module
     {
-        protected override void Load(ContainerBuilder moduleBuilder)
-        {
-            base.Load(moduleBuilder);
+        //protected override void Load(ContainerBuilder moduleBuilder)
+        //{
+        //    base.Load(moduleBuilder);
 
-            // register the frozen context only when it's available
-            // TODO: also check the version?
-            var frozenContextType = Type.GetType("Kistl.Objects.Frozen.FrozenContextImplementation, " + Kistl.API.Helper.FrozenAssembly, false);
-            if (frozenContextType != null)
-            {
-                moduleBuilder
-                    .RegisterType(frozenContextType)
-                    .As<IReadOnlyKistlContext>()
-                    .OnActivating(frozen => {
-                        Logging.Log.Info("Initialising FrozenActionsManagerServer");
-                        var fams = frozen.Context.Resolve<FrozenActionsManager>();
-                        fams.Init((IReadOnlyKistlContext)frozen.Instance);
-                    })
-                    .SingleInstance();
-            }
-        }
+        //    // register the frozen context only when it's available
+        //    // TODO: also check the version?
+        //    var frozenContextType = Type.GetType("Kistl.Objects.Frozen.FrozenContextImplementation, " + Kistl.API.Helper.FrozenAssembly, false);
+        //    if (frozenContextType != null)
+        //    {
+        //        moduleBuilder
+        //            .RegisterType(frozenContextType)
+        //            .As<IReadOnlyKistlContext>()
+        //            .OnActivating(frozen =>
+        //            {
+        //                Logging.Log.Info("Initialising FrozenActionsManagerServer");
+        //                var fams = frozen.Context.Resolve<FrozenActionsManager>();
+        //                fams.Init((IReadOnlyKistlContext)frozen.Instance);
+        //            })
+        //            .SingleInstance();
+        //    }
+        //}
     }
 }

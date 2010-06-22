@@ -30,12 +30,14 @@ namespace Kistl.DalProvider.Memory
 
         protected override object CreateUnattachedInstance(InterfaceType ifType)
         {
-            throw new NotImplementedException();
+            // TODO: replace with generated switch factory
+            return Activator.CreateInstance(this.ToImplementationType(ifType).Type);
         }
 
         public override ImplementationType ToImplementationType(InterfaceType t)
         {
-            return GetImplementationType(Type.GetType(t.Type.FullName + Kistl.API.Helper.ImplementationSuffix + "," + Kistl.API.Helper.MemoryAssembly));
+            // TODO: replace with generated switch factory
+            return GetImplementationType(Type.GetType(t.Type.FullName + Kistl.API.Helper.ImplementationSuffix + "Memory," + MemoryProvider.GeneratedAssemblyName));
         }
     }
 }

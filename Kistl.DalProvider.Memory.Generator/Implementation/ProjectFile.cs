@@ -16,7 +16,7 @@ namespace Kistl.DalProvider.Memory.Generator.Implementation
 
         protected override string GetAssemblyName()
         {
-            return "Kistl.Objects." + MemoryGenerator.ExtraSuffix;
+            return "Kistl.Objects." + MemoryGenerator.Suffix;
         }
 
         protected override void ApplyAdditionalReferences()

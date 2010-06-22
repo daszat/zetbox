@@ -29,7 +29,7 @@ namespace Kistl.DalProvider.Memory.Generator.Implementation.CompoundObjects
         {
             return base.MungeClassName(name)
                 + Kistl.API.Helper.ImplementationSuffix
-                + MemoryGenerator.ExtraSuffix;
+                + MemoryGenerator.Suffix;
         }
 
         /// <returns>The base class to inherit from.</returns>

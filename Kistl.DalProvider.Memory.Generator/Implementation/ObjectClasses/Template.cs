@@ -34,7 +34,7 @@ namespace Kistl.DalProvider.Memory.Generator.Implementation.ObjectClasses
         {
             return base.MungeClassName(name)
                 + Kistl.API.Helper.ImplementationSuffix
-                + MemoryGenerator.ExtraSuffix;
+                + MemoryGenerator.Suffix;
         }
 
         protected override string GetBaseClass()
@@ -100,9 +100,9 @@ namespace Kistl.DalProvider.Memory.Generator.Implementation.ObjectClasses
                 if (prop.IsNullable()) continue;
 
                 string name = prop.Name;
-                string backingName = name + Kistl.API.Helper.ImplementationSuffix + MemoryGenerator.ExtraSuffix;
+                string backingName = name + Kistl.API.Helper.ImplementationSuffix + MemoryGenerator.Suffix;
                 string coType = prop.GetPropertyTypeString();
-                string coImplementationType = coType + Kistl.API.Helper.ImplementationSuffix + MemoryGenerator.ExtraSuffix;
+                string coImplementationType = coType + Kistl.API.Helper.ImplementationSuffix + MemoryGenerator.Suffix;
                 this.WriteObjects("                ", backingName, " = new ", coImplementationType, "(this, \"", name, "\");");
                 this.WriteLine();
             }

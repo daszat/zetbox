@@ -19,9 +19,6 @@ namespace Kistl.DalProvider.Memory.Generator
     {
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.DalProvider.Memory.Generator");
 
-        public static readonly string ContextClassName = "Kistl.Objects.Memory.MemoryContext";
-        public static readonly string GeneratedAssemblyName = "Kistl.Objects.Memory, Version=1.0.0.0, Culture=neutral, PublicKeyToken=7b69192d05046fdf";
-
         protected override void Load(ContainerBuilder moduleBuilder)
         {
             base.Load(moduleBuilder);

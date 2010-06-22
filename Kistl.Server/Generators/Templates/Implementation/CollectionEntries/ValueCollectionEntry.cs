@@ -40,7 +40,7 @@ namespace Kistl.Server.Generators.Templates.Implementation.CollectionEntries
 
         protected override string GetCeClassName()
         {
-            return prop.GetCollectionEntryClassName() + Kistl.API.Helper.ImplementationSuffix;
+            return prop.GetCollectionEntryClassName() + Kistl.API.Helper.ImplementationSuffix + Settings["extrasuffix"]; ;
         }
 
         protected override string GetCeInterface()

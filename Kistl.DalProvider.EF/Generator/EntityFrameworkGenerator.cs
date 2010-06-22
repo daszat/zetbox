@@ -10,6 +10,7 @@ namespace Kistl.DalProvider.EF.Generator
     public class EntityFrameworkGenerator
         : BaseDataObjectGenerator
     {
+        public override string ExtraSuffix { get { return String.Empty; } }
         public override string Description { get { return "EfObjects"; } }
         public override string TargetNameSpace { get { return "Kistl.Objects.Server"; } }
         public override string BaseName { get { return "Server"; } }

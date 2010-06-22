@@ -61,7 +61,7 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
             
             string aSideType = rel.A.Type.GetDataTypeString();
             string bSideType = rel.B.Type.GetDataTypeString();
-            string entryType = rel.GetRelationClassName() + Kistl.API.Helper.ImplementationSuffix;
+            string entryType = rel.GetRelationClassName() + Kistl.API.Helper.ImplementationSuffix + host.Settings["extrasuffix"];
             string providerCollectionType = (rel.NeedsPositionStorage(otherEnd.GetRole()) ? "IList<" : "ICollection<")
                 + entryType + ">";
 

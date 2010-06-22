@@ -17,6 +17,7 @@ namespace Kistl.DalProvider.Frozen.Generator
     {
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Server.Generator.Frozen");
 
+        public override string ExtraSuffix { get { return "Frozen"; } }
         public override string Description { get { return "Frozen"; } }
         public override string TargetNameSpace { get { return "Kistl.Objects.Frozen"; } }
         public override string BaseName { get { return "Frozen"; } }
