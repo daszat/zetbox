@@ -26,9 +26,15 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("RoleMembership")]
     public class RoleMembership__Implementation__ : Kistl.App.Base.AccessControl__Implementation__, RoleMembership
     {
-    
-		public RoleMembership__Implementation__()
-		{
+        [Obsolete]
+        public RoleMembership__Implementation__()
+            : base(null)
+        {
+        }
+
+        public RoleMembership__Implementation__(Func<IReadOnlyKistlContext> lazyCtx)
+            : base(lazyCtx)
+        {
         }
 
 
@@ -81,10 +87,10 @@ namespace Kistl.App.Base
         private EntityRelationBSideListWrapper<Kistl.App.Base.RoleMembership, Kistl.App.Base.Relation, Kistl.App.Base.RoleMembership_resolves_Relation_RelationEntry__Implementation__> _RelationsWrapper;
 
 
-		public override Type GetImplementedInterface()
-		{
-			return typeof(RoleMembership);
-		}
+        public override Type GetImplementedInterface()
+        {
+            return typeof(RoleMembership);
+        }
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{
@@ -145,19 +151,34 @@ namespace Kistl.App.Base
         public static event ObjectEventHandler<RoleMembership> OnDeleting_RoleMembership;
 
 
-		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
-			new CustomPropertyDescriptor<RoleMembership__Implementation__, IList<Kistl.App.Base.Relation>>(
-				new Guid("fb799900-1a5b-4b62-a445-5dae8febdd28"),
-				"Relations",
-				null,
-				obj => obj.Relations,
-				null), // lists are read-only properties
-		};
+		private static readonly object _propertiesLock = new object();
+		private static System.ComponentModel.PropertyDescriptor[] _properties;
 		
-		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
+		private void _InitializePropertyDescriptors(Func<IReadOnlyKistlContext> lazyCtx)
+		{
+			if (_properties != null) return;
+			lock (_propertiesLock)
+			{
+				// recheck for a lost race after aquiring the lock
+				if (_properties != null) return;
+				
+				_properties = new System.ComponentModel.PropertyDescriptor[] {
+					// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
+					new CustomPropertyDescriptor<RoleMembership__Implementation__, IList<Kistl.App.Base.Relation>>(
+						lazyCtx,
+						new Guid("fb799900-1a5b-4b62-a445-5dae8febdd28"),
+						"Relations",
+						null,
+						obj => obj.Relations,
+						null), // lists are read-only properties
+				};
+			}
+		}
+		
+		protected override void CollectProperties(Func<IReadOnlyKistlContext> lazyCtx, List<System.ComponentModel.PropertyDescriptor> props)
 		{
 			base.CollectProperties(props);
+			_InitializePropertyDescriptors(lazyCtx);
 			props.AddRange(_properties);
 		}
 	

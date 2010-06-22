@@ -1,14 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.IO;
-using System.Linq;
-using System.Text;
-
-using NUnit.Framework;
 
 namespace Kistl.API.Server.Tests.BinarySerializers
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+
+    using NUnit.Framework;
 
     public interface CompoundObjectMock : ICompoundObject
     {
@@ -16,6 +16,8 @@ namespace Kistl.API.Server.Tests.BinarySerializers
 
     public class CompoundObjectMock__Implementation__ : BaseServerCompoundObject
     {
+        public CompoundObjectMock__Implementation__() : base(null) { }
+
         public override Type GetImplementedInterface()
         {
             return typeof(CompoundObjectMock);

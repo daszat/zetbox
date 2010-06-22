@@ -81,7 +81,7 @@ R: Gendarme.Rules.Portability.MonoCompatibilityReviewRule
 A: Kistl.Client.WPF
 A: Kistl.DalProvider.EF
 # this should be replaced in time for a linux-release, ignore for now
-M: System.Void Kistl.Server.Generators.Generator::CompileCode(System.String)
+M: System.Boolean Kistl.Server.Generators.Generator::CompileCode(System.String)
 M: System.Void Kistl.Server.Server::ReadUsers(System.String,System.Collections.Generic.Dictionary`2<System.String,System.String>)
 
 R: Gendarme.Rules.Correctness.EnsureLocalDisposalRule

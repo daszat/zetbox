@@ -26,9 +26,15 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("CompoundObject")]
     public class CompoundObject__Implementation__ : Kistl.App.Base.DataType__Implementation__, CompoundObject
     {
-    
-		public CompoundObject__Implementation__()
-		{
+        [Obsolete]
+        public CompoundObject__Implementation__()
+            : base(null)
+        {
+        }
+
+        public CompoundObject__Implementation__(Func<IReadOnlyKistlContext> lazyCtx)
+            : base(lazyCtx)
+        {
         }
 
 
@@ -74,10 +80,10 @@ namespace Kistl.App.Base
 
 
 
-		public override Type GetImplementedInterface()
-		{
-			return typeof(CompoundObject);
-		}
+        public override Type GetImplementedInterface()
+        {
+            return typeof(CompoundObject);
+        }
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{
@@ -138,13 +144,27 @@ namespace Kistl.App.Base
         public static event ObjectEventHandler<CompoundObject> OnDeleting_CompoundObject;
 
 
-		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			// rel: CompoundObjectProperty has CompoundObjectDefinition (cbc99fc5-2b15-4829-b4ae-bc8e38e767a8)
-		};
+		private static readonly object _propertiesLock = new object();
+		private static System.ComponentModel.PropertyDescriptor[] _properties;
 		
-		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
+		private void _InitializePropertyDescriptors(Func<IReadOnlyKistlContext> lazyCtx)
+		{
+			if (_properties != null) return;
+			lock (_propertiesLock)
+			{
+				// recheck for a lost race after aquiring the lock
+				if (_properties != null) return;
+				
+				_properties = new System.ComponentModel.PropertyDescriptor[] {
+					// rel: CompoundObjectProperty has CompoundObjectDefinition (cbc99fc5-2b15-4829-b4ae-bc8e38e767a8)
+				};
+			}
+		}
+		
+		protected override void CollectProperties(Func<IReadOnlyKistlContext> lazyCtx, List<System.ComponentModel.PropertyDescriptor> props)
 		{
 			base.CollectProperties(props);
+			_InitializePropertyDescriptors(lazyCtx);
 			props.AddRange(_properties);
 		}
 	

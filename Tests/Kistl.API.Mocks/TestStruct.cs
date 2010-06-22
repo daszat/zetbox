@@ -1,11 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
 
 namespace Kistl.API.Mocks
 {
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+
     public interface TestCompoundObject : ICompoundObject
     {
         string TestProperty { get; set; }
@@ -13,6 +14,10 @@ namespace Kistl.API.Mocks
 
     public class TestCompoundObject__Implementation__ : BaseCompoundObject, TestCompoundObject
     {
+        public TestCompoundObject__Implementation__()
+            : base(null)
+        {
+        }
 
         public override void ToStream(BinaryWriter sw)
         {

@@ -26,9 +26,15 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("Relation")]
     public class Relation__Implementation__ : BaseServerDataObject_EntityFramework, Kistl.API.IExportableInternal, Relation
     {
-    
-		public Relation__Implementation__()
-		{
+        [Obsolete]
+        public Relation__Implementation__()
+            : base(null)
+        {
+        }
+
+        public Relation__Implementation__(Func<IReadOnlyKistlContext> lazyCtx)
+            : base(lazyCtx)
+        {
         }
 
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
@@ -1051,10 +1057,10 @@ namespace Kistl.App.Base
 
 
 
-		public override Type GetImplementedInterface()
-		{
-			return typeof(Relation);
-		}
+        public override Type GetImplementedInterface()
+        {
+            return typeof(Relation);
+        }
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{
@@ -1127,99 +1133,125 @@ namespace Kistl.App.Base
         public static event ObjectEventHandler<Relation> OnDeleting_Relation;
 
 
-		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			// else
-			new CustomPropertyDescriptor<Relation__Implementation__, Kistl.App.Base.RelationEnd>(
-				new Guid("d4429d3c-8fd1-468e-88d5-17abfd658d04"),
-				"A",
-				null,
-				obj => obj.A,
-				(obj, val) => obj.A = val),
-			// else
-			new CustomPropertyDescriptor<Relation__Implementation__, Kistl.App.Base.RelationEnd>(
-				new Guid("20331803-079e-471e-ae45-f4d004aef48e"),
-				"B",
-				null,
-				obj => obj.B,
-				(obj, val) => obj.B = val),
-			// else
-			new CustomPropertyDescriptor<Relation__Implementation__, Kistl.App.Base.Identity>(
-				new Guid("d90031ab-e77d-44d9-acc9-4407c8e8d6fc"),
-				"ChangedBy",
-				null,
-				obj => obj.ChangedBy,
-				(obj, val) => obj.ChangedBy = val),
-			// else
-			new CustomPropertyDescriptor<Relation__Implementation__, DateTime?>(
-				new Guid("4629cba1-9162-4d9f-a815-0b0ed96f95be"),
-				"ChangedOn",
-				null,
-				obj => obj.ChangedOn,
-				(obj, val) => obj.ChangedOn = val),
-			// else
-			new CustomPropertyDescriptor<Relation__Implementation__, Kistl.App.Base.ContainmentSpecification>(
-				new Guid("eed9955a-11a3-4c25-b0bb-e01ecd14b26f"),
-				"Containment",
-				null,
-				obj => obj.Containment,
-				(obj, val) => obj.Containment = val),
-			// else
-			new CustomPropertyDescriptor<Relation__Implementation__, Kistl.App.Base.Identity>(
-				new Guid("0cd2b922-99a8-4f36-ab52-0bed4ef08a93"),
-				"CreatedBy",
-				null,
-				obj => obj.CreatedBy,
-				(obj, val) => obj.CreatedBy = val),
-			// else
-			new CustomPropertyDescriptor<Relation__Implementation__, DateTime?>(
-				new Guid("a28faa39-5563-4e2d-b9d9-278ac7dd2200"),
-				"CreatedOn",
-				null,
-				obj => obj.CreatedOn,
-				(obj, val) => obj.CreatedOn = val),
-			// else
-			new CustomPropertyDescriptor<Relation__Implementation__, string>(
-				new Guid("56948ee3-f1a7-44c3-956a-9baa863c5092"),
-				"Description",
-				null,
-				obj => obj.Description,
-				(obj, val) => obj.Description = val),
-			// else
-			new CustomPropertyDescriptor<Relation__Implementation__, Guid>(
-				new Guid("1e600012-3b35-4dc6-af28-1f858b095a15"),
-				"ExportGuid",
-				null,
-				obj => obj.ExportGuid,
-				(obj, val) => obj.ExportGuid = val),
-			// else
-			new CustomPropertyDescriptor<Relation__Implementation__, Kistl.App.Base.Module>(
-				new Guid("2a1a99a4-7dd5-4244-913f-06315f3de831"),
-				"Module",
-				null,
-				obj => obj.Module,
-				(obj, val) => obj.Module = val),
-			// else
-			new CustomPropertyDescriptor<Relation__Implementation__, Kistl.App.Base.StorageType>(
-				new Guid("ba4f10fd-f7cf-4237-93a6-734e7e5c6b8a"),
-				"Storage",
-				null,
-				obj => obj.Storage,
-				(obj, val) => obj.Storage = val),
-			// else
-			new CustomPropertyDescriptor<Relation__Implementation__, string>(
-				new Guid("cd7a8de3-a1bf-4043-93d9-d9874b40bb69"),
-				"Verb",
-				null,
-				obj => obj.Verb,
-				(obj, val) => obj.Verb = val),
-			// rel: Module has Relation (1c91bee2-397b-44f3-8346-313a8e2ba127)
-			// rel: Relation was ChangedBy (ba46e16e-5659-4e29-b770-1222d7b0acc1)
-			// rel: Relation was CreatedBy (84a74390-2386-465d-b9a5-83f9b60a006f)
-		};
+		private static readonly object _propertiesLock = new object();
+		private static System.ComponentModel.PropertyDescriptor[] _properties;
 		
-		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
+		private void _InitializePropertyDescriptors(Func<IReadOnlyKistlContext> lazyCtx)
+		{
+			if (_properties != null) return;
+			lock (_propertiesLock)
+			{
+				// recheck for a lost race after aquiring the lock
+				if (_properties != null) return;
+				
+				_properties = new System.ComponentModel.PropertyDescriptor[] {
+					// else
+					new CustomPropertyDescriptor<Relation__Implementation__, Kistl.App.Base.RelationEnd>(
+						lazyCtx,
+						new Guid("d4429d3c-8fd1-468e-88d5-17abfd658d04"),
+						"A",
+						null,
+						obj => obj.A,
+						(obj, val) => obj.A = val),
+					// else
+					new CustomPropertyDescriptor<Relation__Implementation__, Kistl.App.Base.RelationEnd>(
+						lazyCtx,
+						new Guid("20331803-079e-471e-ae45-f4d004aef48e"),
+						"B",
+						null,
+						obj => obj.B,
+						(obj, val) => obj.B = val),
+					// else
+					new CustomPropertyDescriptor<Relation__Implementation__, Kistl.App.Base.Identity>(
+						lazyCtx,
+						new Guid("d90031ab-e77d-44d9-acc9-4407c8e8d6fc"),
+						"ChangedBy",
+						null,
+						obj => obj.ChangedBy,
+						(obj, val) => obj.ChangedBy = val),
+					// else
+					new CustomPropertyDescriptor<Relation__Implementation__, DateTime?>(
+						lazyCtx,
+						new Guid("4629cba1-9162-4d9f-a815-0b0ed96f95be"),
+						"ChangedOn",
+						null,
+						obj => obj.ChangedOn,
+						(obj, val) => obj.ChangedOn = val),
+					// else
+					new CustomPropertyDescriptor<Relation__Implementation__, Kistl.App.Base.ContainmentSpecification>(
+						lazyCtx,
+						new Guid("eed9955a-11a3-4c25-b0bb-e01ecd14b26f"),
+						"Containment",
+						null,
+						obj => obj.Containment,
+						(obj, val) => obj.Containment = val),
+					// else
+					new CustomPropertyDescriptor<Relation__Implementation__, Kistl.App.Base.Identity>(
+						lazyCtx,
+						new Guid("0cd2b922-99a8-4f36-ab52-0bed4ef08a93"),
+						"CreatedBy",
+						null,
+						obj => obj.CreatedBy,
+						(obj, val) => obj.CreatedBy = val),
+					// else
+					new CustomPropertyDescriptor<Relation__Implementation__, DateTime?>(
+						lazyCtx,
+						new Guid("a28faa39-5563-4e2d-b9d9-278ac7dd2200"),
+						"CreatedOn",
+						null,
+						obj => obj.CreatedOn,
+						(obj, val) => obj.CreatedOn = val),
+					// else
+					new CustomPropertyDescriptor<Relation__Implementation__, string>(
+						lazyCtx,
+						new Guid("56948ee3-f1a7-44c3-956a-9baa863c5092"),
+						"Description",
+						null,
+						obj => obj.Description,
+						(obj, val) => obj.Description = val),
+					// else
+					new CustomPropertyDescriptor<Relation__Implementation__, Guid>(
+						lazyCtx,
+						new Guid("1e600012-3b35-4dc6-af28-1f858b095a15"),
+						"ExportGuid",
+						null,
+						obj => obj.ExportGuid,
+						(obj, val) => obj.ExportGuid = val),
+					// else
+					new CustomPropertyDescriptor<Relation__Implementation__, Kistl.App.Base.Module>(
+						lazyCtx,
+						new Guid("2a1a99a4-7dd5-4244-913f-06315f3de831"),
+						"Module",
+						null,
+						obj => obj.Module,
+						(obj, val) => obj.Module = val),
+					// else
+					new CustomPropertyDescriptor<Relation__Implementation__, Kistl.App.Base.StorageType>(
+						lazyCtx,
+						new Guid("ba4f10fd-f7cf-4237-93a6-734e7e5c6b8a"),
+						"Storage",
+						null,
+						obj => obj.Storage,
+						(obj, val) => obj.Storage = val),
+					// else
+					new CustomPropertyDescriptor<Relation__Implementation__, string>(
+						lazyCtx,
+						new Guid("cd7a8de3-a1bf-4043-93d9-d9874b40bb69"),
+						"Verb",
+						null,
+						obj => obj.Verb,
+						(obj, val) => obj.Verb = val),
+					// rel: Module has Relation (1c91bee2-397b-44f3-8346-313a8e2ba127)
+					// rel: Relation was ChangedBy (ba46e16e-5659-4e29-b770-1222d7b0acc1)
+					// rel: Relation was CreatedBy (84a74390-2386-465d-b9a5-83f9b60a006f)
+				};
+			}
+		}
+		
+		protected override void CollectProperties(Func<IReadOnlyKistlContext> lazyCtx, List<System.ComponentModel.PropertyDescriptor> props)
 		{
 			base.CollectProperties(props);
+			_InitializePropertyDescriptors(lazyCtx);
 			props.AddRange(_properties);
 		}
 	

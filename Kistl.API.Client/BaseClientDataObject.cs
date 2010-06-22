@@ -1,17 +1,19 @@
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Text;
 
 namespace Kistl.API.Client
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Reflection;
+    using System.Text;
+
     public abstract class BaseClientPersistenceObject : BasePersistenceObject
     {
-        protected BaseClientPersistenceObject()
+        protected BaseClientPersistenceObject(Func<IReadOnlyKistlContext> lazyCtx)
+            : base(lazyCtx)
         {
         }
 
@@ -113,7 +115,8 @@ namespace Kistl.API.Client
 
     public abstract class BaseClientDataObject : BaseClientPersistenceObject, IDataObject
     {
-        protected BaseClientDataObject()
+        protected BaseClientDataObject(Func<IReadOnlyKistlContext> lazyCtx)
+            : base(lazyCtx)
         {
         }
 
@@ -143,11 +146,15 @@ namespace Kistl.API.Client
         /// <summary>
         /// Reflects the current access rights by the current Identity. 
         /// </summary>
-        public Kistl.API.AccessRights CurrentAccessRights { get; protected set; }
+        public AccessRights CurrentAccessRights { get; protected set; }
     }
 
     public abstract class BaseClientCollectionEntry : BaseClientPersistenceObject
     {
+        protected BaseClientCollectionEntry(Func<IReadOnlyKistlContext> lazyCtx)
+            : base(lazyCtx)
+        {
+        }
         /// <summary>
         /// Always returns <value>true</value>. CollectionEntries are checked via their navigators or relations.
         /// </summary>
@@ -171,8 +178,13 @@ namespace Kistl.API.Client
     /// <summary>
     /// local proxy
     /// </summary>
-    public abstract class BaseClientCompoundObject : BaseCompoundObject 
+    public abstract class BaseClientCompoundObject : BaseCompoundObject
     {
+        protected BaseClientCompoundObject(Func<IReadOnlyKistlContext> lazyCtx)
+            : base(lazyCtx)
+        {
+        }
+
         protected override void OnPropertyChanging(string property, object oldValue, object newValue)
         {
             base.OnPropertyChanging(property, oldValue, newValue);

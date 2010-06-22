@@ -26,9 +26,15 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("InstanceConstraint")]
     public class InstanceConstraint__Implementation__ : BaseServerDataObject_EntityFramework, InstanceConstraint, Kistl.API.IExportableInternal
     {
-    
-		public InstanceConstraint__Implementation__()
-		{
+        [Obsolete]
+        public InstanceConstraint__Implementation__()
+            : base(null)
+        {
+        }
+
+        public InstanceConstraint__Implementation__(Func<IReadOnlyKistlContext> lazyCtx)
+            : base(lazyCtx)
+        {
         }
 
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
@@ -307,10 +313,10 @@ namespace Kistl.App.Base
 
 
 
-		public override Type GetImplementedInterface()
-		{
-			return typeof(InstanceConstraint);
-		}
+        public override Type GetImplementedInterface()
+        {
+            return typeof(InstanceConstraint);
+        }
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{
@@ -374,34 +380,51 @@ namespace Kistl.App.Base
         public static event ObjectEventHandler<InstanceConstraint> OnDeleting_InstanceConstraint;
 
 
-		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			// else
-			new CustomPropertyDescriptor<InstanceConstraint__Implementation__, Kistl.App.Base.DataType>(
-				new Guid("d89723fc-1050-45a1-9b74-5575a677bc2b"),
-				"Constrained",
-				null,
-				obj => obj.Constrained,
-				(obj, val) => obj.Constrained = val),
-			// else
-			new CustomPropertyDescriptor<InstanceConstraint__Implementation__, Guid>(
-				new Guid("8ef28076-900c-4294-920c-5d0d91e925bb"),
-				"ExportGuid",
-				null,
-				obj => obj.ExportGuid,
-				(obj, val) => obj.ExportGuid = val),
-			// else
-			new CustomPropertyDescriptor<InstanceConstraint__Implementation__, string>(
-				new Guid("83be7495-e0e0-48fc-872a-70de9c0f7a88"),
-				"Reason",
-				null,
-				obj => obj.Reason,
-				(obj, val) => obj.Reason = val),
-			// rel: Constraint on Constrained (e2b66b79-ab7a-43c0-a229-16dddf4b8934)
-		};
+		private static readonly object _propertiesLock = new object();
+		private static System.ComponentModel.PropertyDescriptor[] _properties;
 		
-		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
+		private void _InitializePropertyDescriptors(Func<IReadOnlyKistlContext> lazyCtx)
+		{
+			if (_properties != null) return;
+			lock (_propertiesLock)
+			{
+				// recheck for a lost race after aquiring the lock
+				if (_properties != null) return;
+				
+				_properties = new System.ComponentModel.PropertyDescriptor[] {
+					// else
+					new CustomPropertyDescriptor<InstanceConstraint__Implementation__, Kistl.App.Base.DataType>(
+						lazyCtx,
+						new Guid("d89723fc-1050-45a1-9b74-5575a677bc2b"),
+						"Constrained",
+						null,
+						obj => obj.Constrained,
+						(obj, val) => obj.Constrained = val),
+					// else
+					new CustomPropertyDescriptor<InstanceConstraint__Implementation__, Guid>(
+						lazyCtx,
+						new Guid("8ef28076-900c-4294-920c-5d0d91e925bb"),
+						"ExportGuid",
+						null,
+						obj => obj.ExportGuid,
+						(obj, val) => obj.ExportGuid = val),
+					// else
+					new CustomPropertyDescriptor<InstanceConstraint__Implementation__, string>(
+						lazyCtx,
+						new Guid("83be7495-e0e0-48fc-872a-70de9c0f7a88"),
+						"Reason",
+						null,
+						obj => obj.Reason,
+						(obj, val) => obj.Reason = val),
+					// rel: Constraint on Constrained (e2b66b79-ab7a-43c0-a229-16dddf4b8934)
+				};
+			}
+		}
+		
+		protected override void CollectProperties(Func<IReadOnlyKistlContext> lazyCtx, List<System.ComponentModel.PropertyDescriptor> props)
 		{
 			base.CollectProperties(props);
+			_InitializePropertyDescriptors(lazyCtx);
 			props.AddRange(_properties);
 		}
 	

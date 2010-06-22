@@ -26,9 +26,15 @@ namespace at.dasz.CourseOrganiser
     [System.Diagnostics.DebuggerDisplay("Student")]
     public class Student__Implementation__ : BaseServerDataObject_EntityFramework, Student
     {
-    
-		public Student__Implementation__()
-		{
+        [Obsolete]
+        public Student__Implementation__()
+            : base(null)
+        {
+        }
+
+        public Student__Implementation__(Func<IReadOnlyKistlContext> lazyCtx)
+            : base(lazyCtx)
+        {
         }
 
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
@@ -308,10 +314,10 @@ namespace at.dasz.CourseOrganiser
 
 
 
-		public override Type GetImplementedInterface()
-		{
-			return typeof(Student);
-		}
+        public override Type GetImplementedInterface()
+        {
+            return typeof(Student);
+        }
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{
@@ -374,48 +380,67 @@ namespace at.dasz.CourseOrganiser
         public static event ObjectEventHandler<Student> OnDeleting_Student;
 
 
-		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
-			new CustomPropertyDescriptor<Student__Implementation__, ICollection<at.dasz.CourseOrganiser.GroupExcercise>>(
-				new Guid("6c9bed6d-1ce1-4260-8e25-d864ffb85463"),
-				"GroupExcercise",
-				null,
-				obj => obj.GroupExcercise,
-				null), // lists are read-only properties
-			// else
-			new CustomPropertyDescriptor<Student__Implementation__, string>(
-				new Guid("d65a724a-85eb-49f4-89ce-a050aec5d7f8"),
-				"MatriculationNumber",
-				null,
-				obj => obj.MatriculationNumber,
-				(obj, val) => obj.MatriculationNumber = val),
-			// else
-			new CustomPropertyDescriptor<Student__Implementation__, string>(
-				new Guid("0090bd59-0e0e-49cb-be92-935eae1276ca"),
-				"Name",
-				null,
-				obj => obj.Name,
-				(obj, val) => obj.Name = val),
-			// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
-			new CustomPropertyDescriptor<Student__Implementation__, ICollection<at.dasz.CourseOrganiser.Semester>>(
-				new Guid("f95b44bb-edd0-4e81-82b6-4e1b2476190e"),
-				"Semesters",
-				null,
-				obj => obj.Semesters,
-				null), // lists are read-only properties
-			// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
-			new CustomPropertyDescriptor<Student__Implementation__, ICollection<at.dasz.CourseOrganiser.StudentExam>>(
-				new Guid("b99355b0-540a-4585-9453-bbe16255b164"),
-				"StudentExam",
-				null,
-				obj => obj.StudentExam,
-				null), // lists are read-only properties
-			// rel: StudentExam writtenby Student (da365b25-b8d4-43dd-91c7-f30cad09d600)
-		};
+		private static readonly object _propertiesLock = new object();
+		private static System.ComponentModel.PropertyDescriptor[] _properties;
 		
-		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
+		private void _InitializePropertyDescriptors(Func<IReadOnlyKistlContext> lazyCtx)
+		{
+			if (_properties != null) return;
+			lock (_propertiesLock)
+			{
+				// recheck for a lost race after aquiring the lock
+				if (_properties != null) return;
+				
+				_properties = new System.ComponentModel.PropertyDescriptor[] {
+					// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
+					new CustomPropertyDescriptor<Student__Implementation__, ICollection<at.dasz.CourseOrganiser.GroupExcercise>>(
+						lazyCtx,
+						new Guid("6c9bed6d-1ce1-4260-8e25-d864ffb85463"),
+						"GroupExcercise",
+						null,
+						obj => obj.GroupExcercise,
+						null), // lists are read-only properties
+					// else
+					new CustomPropertyDescriptor<Student__Implementation__, string>(
+						lazyCtx,
+						new Guid("d65a724a-85eb-49f4-89ce-a050aec5d7f8"),
+						"MatriculationNumber",
+						null,
+						obj => obj.MatriculationNumber,
+						(obj, val) => obj.MatriculationNumber = val),
+					// else
+					new CustomPropertyDescriptor<Student__Implementation__, string>(
+						lazyCtx,
+						new Guid("0090bd59-0e0e-49cb-be92-935eae1276ca"),
+						"Name",
+						null,
+						obj => obj.Name,
+						(obj, val) => obj.Name = val),
+					// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
+					new CustomPropertyDescriptor<Student__Implementation__, ICollection<at.dasz.CourseOrganiser.Semester>>(
+						lazyCtx,
+						new Guid("f95b44bb-edd0-4e81-82b6-4e1b2476190e"),
+						"Semesters",
+						null,
+						obj => obj.Semesters,
+						null), // lists are read-only properties
+					// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
+					new CustomPropertyDescriptor<Student__Implementation__, ICollection<at.dasz.CourseOrganiser.StudentExam>>(
+						lazyCtx,
+						new Guid("b99355b0-540a-4585-9453-bbe16255b164"),
+						"StudentExam",
+						null,
+						obj => obj.StudentExam,
+						null), // lists are read-only properties
+					// rel: StudentExam writtenby Student (da365b25-b8d4-43dd-91c7-f30cad09d600)
+				};
+			}
+		}
+		
+		protected override void CollectProperties(Func<IReadOnlyKistlContext> lazyCtx, List<System.ComponentModel.PropertyDescriptor> props)
 		{
 			base.CollectProperties(props);
+			_InitializePropertyDescriptors(lazyCtx);
 			props.AddRange(_properties);
 		}
 	

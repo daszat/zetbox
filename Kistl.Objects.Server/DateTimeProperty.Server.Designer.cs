@@ -26,9 +26,15 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("DateTimeProperty")]
     public class DateTimeProperty__Implementation__ : Kistl.App.Base.ValueTypeProperty__Implementation__, DateTimeProperty
     {
-    
-		public DateTimeProperty__Implementation__()
-		{
+        [Obsolete]
+        public DateTimeProperty__Implementation__()
+            : base(null)
+        {
+        }
+
+        public DateTimeProperty__Implementation__(Func<IReadOnlyKistlContext> lazyCtx)
+            : base(lazyCtx)
+        {
         }
 
 
@@ -74,10 +80,10 @@ namespace Kistl.App.Base
 
 
 
-		public override Type GetImplementedInterface()
-		{
-			return typeof(DateTimeProperty);
-		}
+        public override Type GetImplementedInterface()
+        {
+            return typeof(DateTimeProperty);
+        }
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{

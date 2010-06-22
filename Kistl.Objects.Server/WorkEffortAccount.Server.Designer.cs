@@ -26,9 +26,15 @@ namespace Kistl.App.TimeRecords
     [System.Diagnostics.DebuggerDisplay("WorkEffortAccount")]
     public class WorkEffortAccount__Implementation__ : BaseServerDataObject_EntityFramework, WorkEffortAccount
     {
-    
-		public WorkEffortAccount__Implementation__()
-		{
+        [Obsolete]
+        public WorkEffortAccount__Implementation__()
+            : base(null)
+        {
+        }
+
+        public WorkEffortAccount__Implementation__(Func<IReadOnlyKistlContext> lazyCtx)
+            : base(lazyCtx)
+        {
         }
 
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
@@ -314,10 +320,10 @@ namespace Kistl.App.TimeRecords
 		public static event PropertyPreSetterHandler<Kistl.App.TimeRecords.WorkEffortAccount, double?> OnSpentHours_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.TimeRecords.WorkEffortAccount, double?> OnSpentHours_PostSetter;
 
-		public override Type GetImplementedInterface()
-		{
-			return typeof(WorkEffortAccount);
-		}
+        public override Type GetImplementedInterface()
+        {
+            return typeof(WorkEffortAccount);
+        }
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{
@@ -382,47 +388,66 @@ namespace Kistl.App.TimeRecords
         public static event ObjectEventHandler<WorkEffortAccount> OnDeleting_WorkEffortAccount;
 
 
-		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			// else
-			new CustomPropertyDescriptor<WorkEffortAccount__Implementation__, double?>(
-				new Guid("2f57b6c8-d798-43de-b9c8-29675ff0c65f"),
-				"BudgetHours",
-				null,
-				obj => obj.BudgetHours,
-				(obj, val) => obj.BudgetHours = val),
-			// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
-			new CustomPropertyDescriptor<WorkEffortAccount__Implementation__, ICollection<Kistl.App.Projekte.Mitarbeiter>>(
-				new Guid("21ed2b37-6e10-4aff-b4c1-554a1cc0e967"),
-				"Mitarbeiter",
-				null,
-				obj => obj.Mitarbeiter,
-				null), // lists are read-only properties
-			// else
-			new CustomPropertyDescriptor<WorkEffortAccount__Implementation__, string>(
-				new Guid("763b0b46-8309-4532-ba98-36575f02a1d1"),
-				"Name",
-				null,
-				obj => obj.Name,
-				(obj, val) => obj.Name = val),
-			// else
-			new CustomPropertyDescriptor<WorkEffortAccount__Implementation__, string>(
-				new Guid("79c8188d-d8e2-41b7-82c9-08f384fd6b68"),
-				"Notes",
-				null,
-				obj => obj.Notes,
-				(obj, val) => obj.Notes = val),
-			// else
-			new CustomPropertyDescriptor<WorkEffortAccount__Implementation__, double?>(
-				new Guid("f7816f8a-0b07-429c-9161-47ca495a2e41"),
-				"SpentHours",
-				null,
-				obj => obj.SpentHours,
-				(obj, val) => obj.SpentHours = val),
-		};
+		private static readonly object _propertiesLock = new object();
+		private static System.ComponentModel.PropertyDescriptor[] _properties;
 		
-		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
+		private void _InitializePropertyDescriptors(Func<IReadOnlyKistlContext> lazyCtx)
+		{
+			if (_properties != null) return;
+			lock (_propertiesLock)
+			{
+				// recheck for a lost race after aquiring the lock
+				if (_properties != null) return;
+				
+				_properties = new System.ComponentModel.PropertyDescriptor[] {
+					// else
+					new CustomPropertyDescriptor<WorkEffortAccount__Implementation__, double?>(
+						lazyCtx,
+						new Guid("2f57b6c8-d798-43de-b9c8-29675ff0c65f"),
+						"BudgetHours",
+						null,
+						obj => obj.BudgetHours,
+						(obj, val) => obj.BudgetHours = val),
+					// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
+					new CustomPropertyDescriptor<WorkEffortAccount__Implementation__, ICollection<Kistl.App.Projekte.Mitarbeiter>>(
+						lazyCtx,
+						new Guid("21ed2b37-6e10-4aff-b4c1-554a1cc0e967"),
+						"Mitarbeiter",
+						null,
+						obj => obj.Mitarbeiter,
+						null), // lists are read-only properties
+					// else
+					new CustomPropertyDescriptor<WorkEffortAccount__Implementation__, string>(
+						lazyCtx,
+						new Guid("763b0b46-8309-4532-ba98-36575f02a1d1"),
+						"Name",
+						null,
+						obj => obj.Name,
+						(obj, val) => obj.Name = val),
+					// else
+					new CustomPropertyDescriptor<WorkEffortAccount__Implementation__, string>(
+						lazyCtx,
+						new Guid("79c8188d-d8e2-41b7-82c9-08f384fd6b68"),
+						"Notes",
+						null,
+						obj => obj.Notes,
+						(obj, val) => obj.Notes = val),
+					// else
+					new CustomPropertyDescriptor<WorkEffortAccount__Implementation__, double?>(
+						lazyCtx,
+						new Guid("f7816f8a-0b07-429c-9161-47ca495a2e41"),
+						"SpentHours",
+						null,
+						obj => obj.SpentHours,
+						(obj, val) => obj.SpentHours = val),
+				};
+			}
+		}
+		
+		protected override void CollectProperties(Func<IReadOnlyKistlContext> lazyCtx, List<System.ComponentModel.PropertyDescriptor> props)
 		{
 			base.CollectProperties(props);
+			_InitializePropertyDescriptors(lazyCtx);
 			props.AddRange(_properties);
 		}
 	

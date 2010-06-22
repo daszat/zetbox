@@ -26,9 +26,15 @@ namespace Kistl.App.GUI
     [System.Diagnostics.DebuggerDisplay("Icon")]
     public class Icon__Implementation__ : BaseServerDataObject_EntityFramework, Icon, Kistl.API.IExportableInternal
     {
-    
-		public Icon__Implementation__()
-		{
+        [Obsolete]
+        public Icon__Implementation__()
+            : base(null)
+        {
+        }
+
+        public Icon__Implementation__(Func<IReadOnlyKistlContext> lazyCtx)
+            : base(lazyCtx)
+        {
         }
 
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
@@ -263,10 +269,10 @@ namespace Kistl.App.GUI
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.Icon, Kistl.App.Base.Module> OnModule_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.Icon, Kistl.App.Base.Module> OnModule_PostSetter;
 
-		public override Type GetImplementedInterface()
-		{
-			return typeof(Icon);
-		}
+        public override Type GetImplementedInterface()
+        {
+            return typeof(Icon);
+        }
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{
@@ -330,35 +336,52 @@ namespace Kistl.App.GUI
         public static event ObjectEventHandler<Icon> OnDeleting_Icon;
 
 
-		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			// else
-			new CustomPropertyDescriptor<Icon__Implementation__, Guid>(
-				new Guid("6ce563d7-28e8-4806-bdd1-84c220a6c3ca"),
-				"ExportGuid",
-				null,
-				obj => obj.ExportGuid,
-				(obj, val) => obj.ExportGuid = val),
-			// else
-			new CustomPropertyDescriptor<Icon__Implementation__, string>(
-				new Guid("cdbdfc01-5faa-416b-960f-2eb220f268fe"),
-				"IconFile",
-				null,
-				obj => obj.IconFile,
-				(obj, val) => obj.IconFile = val),
-			// else
-			new CustomPropertyDescriptor<Icon__Implementation__, Kistl.App.Base.Module>(
-				new Guid("052273ac-706a-446b-bb86-83c726ee66d6"),
-				"Module",
-				null,
-				obj => obj.Module,
-				(obj, val) => obj.Module = val),
-			// rel: DataType has DefaultIcon (eb852cc4-3977-42b9-9fcd-3a8c60aa49ac)
-			// rel: Icon has Module (a1360ce2-ecd5-4660-9b4d-3a2dc3919344)
-		};
+		private static readonly object _propertiesLock = new object();
+		private static System.ComponentModel.PropertyDescriptor[] _properties;
 		
-		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
+		private void _InitializePropertyDescriptors(Func<IReadOnlyKistlContext> lazyCtx)
+		{
+			if (_properties != null) return;
+			lock (_propertiesLock)
+			{
+				// recheck for a lost race after aquiring the lock
+				if (_properties != null) return;
+				
+				_properties = new System.ComponentModel.PropertyDescriptor[] {
+					// else
+					new CustomPropertyDescriptor<Icon__Implementation__, Guid>(
+						lazyCtx,
+						new Guid("6ce563d7-28e8-4806-bdd1-84c220a6c3ca"),
+						"ExportGuid",
+						null,
+						obj => obj.ExportGuid,
+						(obj, val) => obj.ExportGuid = val),
+					// else
+					new CustomPropertyDescriptor<Icon__Implementation__, string>(
+						lazyCtx,
+						new Guid("cdbdfc01-5faa-416b-960f-2eb220f268fe"),
+						"IconFile",
+						null,
+						obj => obj.IconFile,
+						(obj, val) => obj.IconFile = val),
+					// else
+					new CustomPropertyDescriptor<Icon__Implementation__, Kistl.App.Base.Module>(
+						lazyCtx,
+						new Guid("052273ac-706a-446b-bb86-83c726ee66d6"),
+						"Module",
+						null,
+						obj => obj.Module,
+						(obj, val) => obj.Module = val),
+					// rel: DataType has DefaultIcon (eb852cc4-3977-42b9-9fcd-3a8c60aa49ac)
+					// rel: Icon has Module (a1360ce2-ecd5-4660-9b4d-3a2dc3919344)
+				};
+			}
+		}
+		
+		protected override void CollectProperties(Func<IReadOnlyKistlContext> lazyCtx, List<System.ComponentModel.PropertyDescriptor> props)
 		{
 			base.CollectProperties(props);
+			_InitializePropertyDescriptors(lazyCtx);
 			props.AddRange(_properties);
 		}
 	

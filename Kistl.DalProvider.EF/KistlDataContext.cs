@@ -62,6 +62,10 @@ namespace Kistl.DalProvider.EF
         private static readonly object _lock = new object();
 
         private readonly EFObjectContext _ctx;
+        /// <summary>
+        /// A lazily initialized frozen context
+        /// </summary>
+        private readonly Func<IReadOnlyKistlContext> _lazyCtx;
 
         /// <summary>
         /// For Clean Up Session
@@ -75,10 +79,11 @@ namespace Kistl.DalProvider.EF
         /// <summary>
         /// Internal Constructor
         /// </summary>
-        public KistlDataContext(IMetaDataResolver metaDataResolver, Identity identity, KistlConfig config, ITypeTransformations typeTrans)
+        public KistlDataContext(IMetaDataResolver metaDataResolver, Identity identity, KistlConfig config, ITypeTransformations typeTrans, Func<IReadOnlyKistlContext> lazyCtx)
             : base(metaDataResolver, identity, config, typeTrans)
         {
             _ctx = new EFObjectContext(config);
+            _lazyCtx = lazyCtx;
         }
 
         internal ObjectContext ObjectContext { get { return _ctx; } }
@@ -400,7 +405,7 @@ namespace Kistl.DalProvider.EF
 
         protected override object CreateUnattachedInstance(InterfaceType ifType)
         {
-            return Activator.CreateInstance(ToImplementationType(ifType).Type);
+            return Activator.CreateInstance(ToImplementationType(ifType).Type, _lazyCtx);
         }
 
         /// <summary>

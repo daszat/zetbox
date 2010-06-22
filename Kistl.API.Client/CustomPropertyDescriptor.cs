@@ -15,6 +15,7 @@ namespace Kistl.API.Client
         private readonly Property _property;
 
         public CustomPropertyDescriptor(
+            Func<IReadOnlyKistlContext> lazyCtx,
             Guid? propertyGuid,
             string name,
             Attribute[] attrs,
@@ -22,9 +23,11 @@ namespace Kistl.API.Client
             Action<TComponent, TProperty> setter)
             : base(name, attrs, getter, setter)
         {
+            if (lazyCtx == null) { throw new ArgumentNullException("lazyCtx"); }
+
             if (propertyGuid.HasValue)
             {
-                _property = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(propertyGuid.Value);
+                _property = lazyCtx().FindPersistenceObject<Kistl.App.Base.Property>(propertyGuid.Value);
             }
             else
             {

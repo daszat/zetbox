@@ -247,7 +247,7 @@ namespace Kistl.DalProvider.EF.Tests
         {
             using (IKistlContext ctx = GetContext())
             {
-                TestObjClass obj = new TestObjClass__Implementation__();
+                TestObjClass obj = new TestObjClass__Implementation__(null);
                 Assert.That(((TestObjClass__Implementation__)obj).EntityState, Is.EqualTo(EntityState.Detached));
                 ctx.Attach(obj);
                 Assert.That(((TestObjClass__Implementation__)obj).EntityState, Is.EqualTo(EntityState.Added));
@@ -274,7 +274,7 @@ namespace Kistl.DalProvider.EF.Tests
         {
             using (IKistlContext ctx = GetContext())
             {
-                TestObjClass obj = new TestObjClass__Implementation__() { ID = 3, ClientObjectState = DataObjectState.Unmodified };
+                TestObjClass obj = new TestObjClass__Implementation__(null) { ID = 3, ClientObjectState = DataObjectState.Unmodified };
                 Assert.That(((TestObjClass__Implementation__)obj).EntityState, Is.EqualTo(EntityState.Detached));
                 ctx.Attach(obj);
                 Assert.That(((TestObjClass__Implementation__)obj).EntityState, Is.EqualTo(EntityState.Unchanged));
@@ -286,7 +286,7 @@ namespace Kistl.DalProvider.EF.Tests
         {
             using (IKistlContext ctx = GetContext())
             {
-                TestObjClass obj = new TestObjClass__Implementation__() { ID = 3, ClientObjectState = DataObjectState.Unmodified };
+                TestObjClass obj = new TestObjClass__Implementation__(null) { ID = 3, ClientObjectState = DataObjectState.Unmodified };
                 Assert.That(((TestObjClass__Implementation__)obj).EntityState, Is.EqualTo(EntityState.Detached));
                 ctx.Attach(obj);
                 Assert.That(((TestObjClass__Implementation__)obj).EntityState, Is.EqualTo(EntityState.Unchanged));
@@ -301,12 +301,12 @@ namespace Kistl.DalProvider.EF.Tests
         {
             using (IKistlContext ctx = GetContext())
             {
-                TestObjClass obj1 = new TestObjClass__Implementation__() { ID = 3, ClientObjectState = DataObjectState.Unmodified };
+                TestObjClass obj1 = new TestObjClass__Implementation__(null) { ID = 3, ClientObjectState = DataObjectState.Unmodified };
                 Assert.That(((TestObjClass__Implementation__)obj1).EntityState, Is.EqualTo(EntityState.Detached));
                 ctx.Attach(obj1);
                 Assert.That(((TestObjClass__Implementation__)obj1).EntityState, Is.EqualTo(EntityState.Unchanged));
 
-                TestObjClass obj2 = new TestObjClass__Implementation__() { ID = 3, ClientObjectState = DataObjectState.Unmodified };
+                TestObjClass obj2 = new TestObjClass__Implementation__(null) { ID = 3, ClientObjectState = DataObjectState.Unmodified };
                 Assert.That(((TestObjClass__Implementation__)obj2).EntityState, Is.EqualTo(EntityState.Detached));
                 ctx.Attach(obj2);
                 Assert.That(((TestObjClass__Implementation__)obj2).EntityState, Is.EqualTo(EntityState.Unchanged));
@@ -374,7 +374,7 @@ namespace Kistl.DalProvider.EF.Tests
         {
             using (IKistlContext ctx = GetContext())
             {
-                TestObjClass obj = new TestObjClass__Implementation__();
+                TestObjClass obj = new TestObjClass__Implementation__(null);
                 ctx.Attach(obj);
                 ctx.Create<TestObjClass>();
 
@@ -387,7 +387,7 @@ namespace Kistl.DalProvider.EF.Tests
         {
             using (IKistlContext ctx = GetContext())
             {
-                TestObjClass obj = new TestObjClass__Implementation__() { ID = 10 };
+                TestObjClass obj = new TestObjClass__Implementation__(null) { ID = 10 };
                 ctx.Attach(obj);
                 ctx.Create<TestObjClass>();
                 Assert.That(ctx.AttachedObjects.Count(), Is.EqualTo(2));
@@ -401,7 +401,7 @@ namespace Kistl.DalProvider.EF.Tests
         {
             using (IKistlContext ctx = GetContext())
             {
-                TestObjClass obj = new TestObjClass__Implementation__() { ID = 10 };
+                TestObjClass obj = new TestObjClass__Implementation__(null) { ID = 10 };
                 ctx.Create<TestObjClass>();
                 Assert.That(ctx.AttachedObjects.Count(), Is.EqualTo(1));
 
@@ -509,7 +509,7 @@ namespace Kistl.DalProvider.EF.Tests
         {
             using (IKistlContext ctx = GetContext())
             {
-                ctx.Detach(new TestObjClass__Implementation__());
+                ctx.Detach(new TestObjClass__Implementation__(null));
             }
         }
 

@@ -26,9 +26,15 @@ namespace Kistl.App.TimeRecords
     [System.Diagnostics.DebuggerDisplay("PresenceRecord")]
     public class PresenceRecord__Implementation__ : BaseServerDataObject_EntityFramework, PresenceRecord
     {
-    
-		public PresenceRecord__Implementation__()
-		{
+        [Obsolete]
+        public PresenceRecord__Implementation__()
+            : base(null)
+        {
+        }
+
+        public PresenceRecord__Implementation__(Func<IReadOnlyKistlContext> lazyCtx)
+            : base(lazyCtx)
+        {
         }
 
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
@@ -252,10 +258,10 @@ namespace Kistl.App.TimeRecords
 		public static event PropertyPreSetterHandler<Kistl.App.TimeRecords.PresenceRecord, DateTime?> OnThru_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.TimeRecords.PresenceRecord, DateTime?> OnThru_PostSetter;
 
-		public override Type GetImplementedInterface()
-		{
-			return typeof(PresenceRecord);
-		}
+        public override Type GetImplementedInterface()
+        {
+            return typeof(PresenceRecord);
+        }
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{
@@ -319,34 +325,51 @@ namespace Kistl.App.TimeRecords
         public static event ObjectEventHandler<PresenceRecord> OnDeleting_PresenceRecord;
 
 
-		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			// else
-			new CustomPropertyDescriptor<PresenceRecord__Implementation__, DateTime>(
-				new Guid("3833e790-e2f2-43c6-b9c2-79dd4a03c8c6"),
-				"From",
-				null,
-				obj => obj.From,
-				(obj, val) => obj.From = val),
-			// else
-			new CustomPropertyDescriptor<PresenceRecord__Implementation__, Kistl.App.Projekte.Mitarbeiter>(
-				new Guid("b67880d2-37b0-436f-8628-6637fbe19e31"),
-				"Mitarbeiter",
-				null,
-				obj => obj.Mitarbeiter,
-				(obj, val) => obj.Mitarbeiter = val),
-			// else
-			new CustomPropertyDescriptor<PresenceRecord__Implementation__, DateTime?>(
-				new Guid("17dabad9-a47e-46b8-a72e-b7616af0ceae"),
-				"Thru",
-				null,
-				obj => obj.Thru,
-				(obj, val) => obj.Thru = val),
-			// rel: PresenceRecord has Mitarbeiter (f6d98929-883a-4457-a49f-157324bd5ae3)
-		};
+		private static readonly object _propertiesLock = new object();
+		private static System.ComponentModel.PropertyDescriptor[] _properties;
 		
-		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
+		private void _InitializePropertyDescriptors(Func<IReadOnlyKistlContext> lazyCtx)
+		{
+			if (_properties != null) return;
+			lock (_propertiesLock)
+			{
+				// recheck for a lost race after aquiring the lock
+				if (_properties != null) return;
+				
+				_properties = new System.ComponentModel.PropertyDescriptor[] {
+					// else
+					new CustomPropertyDescriptor<PresenceRecord__Implementation__, DateTime>(
+						lazyCtx,
+						new Guid("3833e790-e2f2-43c6-b9c2-79dd4a03c8c6"),
+						"From",
+						null,
+						obj => obj.From,
+						(obj, val) => obj.From = val),
+					// else
+					new CustomPropertyDescriptor<PresenceRecord__Implementation__, Kistl.App.Projekte.Mitarbeiter>(
+						lazyCtx,
+						new Guid("b67880d2-37b0-436f-8628-6637fbe19e31"),
+						"Mitarbeiter",
+						null,
+						obj => obj.Mitarbeiter,
+						(obj, val) => obj.Mitarbeiter = val),
+					// else
+					new CustomPropertyDescriptor<PresenceRecord__Implementation__, DateTime?>(
+						lazyCtx,
+						new Guid("17dabad9-a47e-46b8-a72e-b7616af0ceae"),
+						"Thru",
+						null,
+						obj => obj.Thru,
+						(obj, val) => obj.Thru = val),
+					// rel: PresenceRecord has Mitarbeiter (f6d98929-883a-4457-a49f-157324bd5ae3)
+				};
+			}
+		}
+		
+		protected override void CollectProperties(Func<IReadOnlyKistlContext> lazyCtx, List<System.ComponentModel.PropertyDescriptor> props)
 		{
 			base.CollectProperties(props);
+			_InitializePropertyDescriptors(lazyCtx);
 			props.AddRange(_properties);
 		}
 	

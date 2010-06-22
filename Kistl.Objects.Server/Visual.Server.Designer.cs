@@ -26,9 +26,15 @@ namespace Kistl.App.GUI
     [System.Diagnostics.DebuggerDisplay("Visual")]
     public class Visual__Implementation__ : BaseServerDataObject_EntityFramework, Visual
     {
-    
-		public Visual__Implementation__()
-		{
+        [Obsolete]
+        public Visual__Implementation__()
+            : base(null)
+        {
+        }
+
+        public Visual__Implementation__(Func<IReadOnlyKistlContext> lazyCtx)
+            : base(lazyCtx)
+        {
         }
 
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
@@ -389,10 +395,10 @@ namespace Kistl.App.GUI
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.Visual, Kistl.App.Base.Property> OnProperty_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.Visual, Kistl.App.Base.Property> OnProperty_PostSetter;
 
-		public override Type GetImplementedInterface()
-		{
-			return typeof(Visual);
-		}
+        public override Type GetImplementedInterface()
+        {
+            return typeof(Visual);
+        }
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{
@@ -456,50 +462,69 @@ namespace Kistl.App.GUI
         public static event ObjectEventHandler<Visual> OnDeleting_Visual;
 
 
-		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
-			new CustomPropertyDescriptor<Visual__Implementation__, ICollection<Kistl.App.GUI.Visual>>(
-				new Guid("9f69c3bd-e274-4639-b30c-8d2a9599917b"),
-				"Children",
-				null,
-				obj => obj.Children,
-				null), // lists are read-only properties
-			// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
-			new CustomPropertyDescriptor<Visual__Implementation__, ICollection<Kistl.App.GUI.Visual>>(
-				new Guid("7b18f26e-0f3f-4554-b469-1029bd4ca10b"),
-				"ContextMenu",
-				null,
-				obj => obj.ContextMenu,
-				null), // lists are read-only properties
-			// else
-			new CustomPropertyDescriptor<Visual__Implementation__, string>(
-				new Guid("8d3b7c91-2bbf-4dcf-bc37-318dc0fda92d"),
-				"Description",
-				null,
-				obj => obj.Description,
-				(obj, val) => obj.Description = val),
-			// else
-			new CustomPropertyDescriptor<Visual__Implementation__, Kistl.App.Base.Method>(
-				new Guid("0b55b2ba-3ac0-4631-8a73-1e8846c8e9b1"),
-				"Method",
-				null,
-				obj => obj.Method,
-				(obj, val) => obj.Method = val),
-			// else
-			new CustomPropertyDescriptor<Visual__Implementation__, Kistl.App.Base.Property>(
-				new Guid("a432e3ff-61ed-4726-8559-f34516181065"),
-				"Property",
-				null,
-				obj => obj.Property,
-				(obj, val) => obj.Property = val),
-			// rel: Template has VisualTree (299a4cf9-3f3e-4b89-b6ba-6b163b4e5dc0)
-			// rel: Visual has Method (304c9a1e-7365-45ee-a685-348fd76f10e7)
-			// rel: Visual has Property (73178882-7f93-444b-bf93-75db193904cf)
-		};
+		private static readonly object _propertiesLock = new object();
+		private static System.ComponentModel.PropertyDescriptor[] _properties;
 		
-		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
+		private void _InitializePropertyDescriptors(Func<IReadOnlyKistlContext> lazyCtx)
+		{
+			if (_properties != null) return;
+			lock (_propertiesLock)
+			{
+				// recheck for a lost race after aquiring the lock
+				if (_properties != null) return;
+				
+				_properties = new System.ComponentModel.PropertyDescriptor[] {
+					// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
+					new CustomPropertyDescriptor<Visual__Implementation__, ICollection<Kistl.App.GUI.Visual>>(
+						lazyCtx,
+						new Guid("9f69c3bd-e274-4639-b30c-8d2a9599917b"),
+						"Children",
+						null,
+						obj => obj.Children,
+						null), // lists are read-only properties
+					// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
+					new CustomPropertyDescriptor<Visual__Implementation__, ICollection<Kistl.App.GUI.Visual>>(
+						lazyCtx,
+						new Guid("7b18f26e-0f3f-4554-b469-1029bd4ca10b"),
+						"ContextMenu",
+						null,
+						obj => obj.ContextMenu,
+						null), // lists are read-only properties
+					// else
+					new CustomPropertyDescriptor<Visual__Implementation__, string>(
+						lazyCtx,
+						new Guid("8d3b7c91-2bbf-4dcf-bc37-318dc0fda92d"),
+						"Description",
+						null,
+						obj => obj.Description,
+						(obj, val) => obj.Description = val),
+					// else
+					new CustomPropertyDescriptor<Visual__Implementation__, Kistl.App.Base.Method>(
+						lazyCtx,
+						new Guid("0b55b2ba-3ac0-4631-8a73-1e8846c8e9b1"),
+						"Method",
+						null,
+						obj => obj.Method,
+						(obj, val) => obj.Method = val),
+					// else
+					new CustomPropertyDescriptor<Visual__Implementation__, Kistl.App.Base.Property>(
+						lazyCtx,
+						new Guid("a432e3ff-61ed-4726-8559-f34516181065"),
+						"Property",
+						null,
+						obj => obj.Property,
+						(obj, val) => obj.Property = val),
+					// rel: Template has VisualTree (299a4cf9-3f3e-4b89-b6ba-6b163b4e5dc0)
+					// rel: Visual has Method (304c9a1e-7365-45ee-a685-348fd76f10e7)
+					// rel: Visual has Property (73178882-7f93-444b-bf93-75db193904cf)
+				};
+			}
+		}
+		
+		protected override void CollectProperties(Func<IReadOnlyKistlContext> lazyCtx, List<System.ComponentModel.PropertyDescriptor> props)
 		{
 			base.CollectProperties(props);
+			_InitializePropertyDescriptors(lazyCtx);
 			props.AddRange(_properties);
 		}
 	

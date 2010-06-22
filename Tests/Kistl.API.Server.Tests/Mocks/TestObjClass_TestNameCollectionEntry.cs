@@ -29,6 +29,11 @@ namespace Kistl.API.Server.Mocks
     public class TestObjClass_TestNameCollectionEntry__Implementation__
         : BaseServerCollectionEntry, TestObjClass_TestNameCollectionEntry
     {
+        public TestObjClass_TestNameCollectionEntry__Implementation__()
+            : base(null)
+        {
+        }
+
         /// <summary>
         /// returns the most specific implemented data object interface
         /// </summary>

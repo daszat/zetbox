@@ -26,9 +26,15 @@ namespace Kistl.App.GUI
     [System.Diagnostics.DebuggerDisplay("ViewDescriptor")]
     public class ViewDescriptor__Implementation__ : BaseServerDataObject_EntityFramework, Kistl.API.IExportableInternal, ViewDescriptor
     {
-    
-		public ViewDescriptor__Implementation__()
-		{
+        [Obsolete]
+        public ViewDescriptor__Implementation__()
+            : base(null)
+        {
+        }
+
+        public ViewDescriptor__Implementation__(Func<IReadOnlyKistlContext> lazyCtx)
+            : base(lazyCtx)
+        {
         }
 
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
@@ -511,10 +517,10 @@ namespace Kistl.App.GUI
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.ViewDescriptor, Kistl.App.GUI.Toolkit> OnToolkit_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.ViewDescriptor, Kistl.App.GUI.Toolkit> OnToolkit_PostSetter;
 
-		public override Type GetImplementedInterface()
-		{
-			return typeof(ViewDescriptor);
-		}
+        public override Type GetImplementedInterface()
+        {
+            return typeof(ViewDescriptor);
+        }
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{
@@ -580,57 +586,77 @@ namespace Kistl.App.GUI
         public static event ObjectEventHandler<ViewDescriptor> OnDeleting_ViewDescriptor;
 
 
-		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			// else
-			new CustomPropertyDescriptor<ViewDescriptor__Implementation__, Kistl.App.GUI.ControlKind>(
-				new Guid("7720b38c-64af-4607-bc73-d015af6612e3"),
-				"ControlKind",
-				null,
-				obj => obj.ControlKind,
-				(obj, val) => obj.ControlKind = val),
-			// else
-			new CustomPropertyDescriptor<ViewDescriptor__Implementation__, Kistl.App.Base.TypeRef>(
-				new Guid("eff6276d-975b-4a0d-bd3c-ad76af2189c3"),
-				"ControlRef",
-				null,
-				obj => obj.ControlRef,
-				(obj, val) => obj.ControlRef = val),
-			// else
-			new CustomPropertyDescriptor<ViewDescriptor__Implementation__, Guid>(
-				new Guid("94140a56-9fed-4d65-8c2c-cb8e658dff96"),
-				"ExportGuid",
-				null,
-				obj => obj.ExportGuid,
-				(obj, val) => obj.ExportGuid = val),
-			// else
-			new CustomPropertyDescriptor<ViewDescriptor__Implementation__, Kistl.App.Base.Module>(
-				new Guid("25da3568-f362-4441-841e-7c163b10b983"),
-				"Module",
-				null,
-				obj => obj.Module,
-				(obj, val) => obj.Module = val),
-			// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
-			new CustomPropertyDescriptor<ViewDescriptor__Implementation__, ICollection<Kistl.App.Base.TypeRef>>(
-				new Guid("4698cfda-6b1d-4cd7-8350-630a1adab1a8"),
-				"SupportedViewModels",
-				null,
-				obj => obj.SupportedViewModels,
-				null), // lists are read-only properties
-			// else
-			new CustomPropertyDescriptor<ViewDescriptor__Implementation__, Kistl.App.GUI.Toolkit>(
-				new Guid("2a798728-d79d-471f-be51-1f488beb8dc1"),
-				"Toolkit",
-				null,
-				obj => obj.Toolkit,
-				(obj, val) => obj.Toolkit = val),
-			// rel: ViewDescriptor has Module (51b089fa-edd9-4a1b-9f4c-ccfdaad76856)
-			// rel: View has ControlRef (6c1c4c7c-7f0c-4c80-a937-ed6af8774d3f)
-			// rel: ViewDescriptor is_a ControlKind (bffabb36-7862-4fcf-b8fb-efb719c70f3f)
-		};
+		private static readonly object _propertiesLock = new object();
+		private static System.ComponentModel.PropertyDescriptor[] _properties;
 		
-		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
+		private void _InitializePropertyDescriptors(Func<IReadOnlyKistlContext> lazyCtx)
+		{
+			if (_properties != null) return;
+			lock (_propertiesLock)
+			{
+				// recheck for a lost race after aquiring the lock
+				if (_properties != null) return;
+				
+				_properties = new System.ComponentModel.PropertyDescriptor[] {
+					// else
+					new CustomPropertyDescriptor<ViewDescriptor__Implementation__, Kistl.App.GUI.ControlKind>(
+						lazyCtx,
+						new Guid("7720b38c-64af-4607-bc73-d015af6612e3"),
+						"ControlKind",
+						null,
+						obj => obj.ControlKind,
+						(obj, val) => obj.ControlKind = val),
+					// else
+					new CustomPropertyDescriptor<ViewDescriptor__Implementation__, Kistl.App.Base.TypeRef>(
+						lazyCtx,
+						new Guid("eff6276d-975b-4a0d-bd3c-ad76af2189c3"),
+						"ControlRef",
+						null,
+						obj => obj.ControlRef,
+						(obj, val) => obj.ControlRef = val),
+					// else
+					new CustomPropertyDescriptor<ViewDescriptor__Implementation__, Guid>(
+						lazyCtx,
+						new Guid("94140a56-9fed-4d65-8c2c-cb8e658dff96"),
+						"ExportGuid",
+						null,
+						obj => obj.ExportGuid,
+						(obj, val) => obj.ExportGuid = val),
+					// else
+					new CustomPropertyDescriptor<ViewDescriptor__Implementation__, Kistl.App.Base.Module>(
+						lazyCtx,
+						new Guid("25da3568-f362-4441-841e-7c163b10b983"),
+						"Module",
+						null,
+						obj => obj.Module,
+						(obj, val) => obj.Module = val),
+					// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
+					new CustomPropertyDescriptor<ViewDescriptor__Implementation__, ICollection<Kistl.App.Base.TypeRef>>(
+						lazyCtx,
+						new Guid("4698cfda-6b1d-4cd7-8350-630a1adab1a8"),
+						"SupportedViewModels",
+						null,
+						obj => obj.SupportedViewModels,
+						null), // lists are read-only properties
+					// else
+					new CustomPropertyDescriptor<ViewDescriptor__Implementation__, Kistl.App.GUI.Toolkit>(
+						lazyCtx,
+						new Guid("2a798728-d79d-471f-be51-1f488beb8dc1"),
+						"Toolkit",
+						null,
+						obj => obj.Toolkit,
+						(obj, val) => obj.Toolkit = val),
+					// rel: ViewDescriptor has Module (51b089fa-edd9-4a1b-9f4c-ccfdaad76856)
+					// rel: View has ControlRef (6c1c4c7c-7f0c-4c80-a937-ed6af8774d3f)
+					// rel: ViewDescriptor is_a ControlKind (bffabb36-7862-4fcf-b8fb-efb719c70f3f)
+				};
+			}
+		}
+		
+		protected override void CollectProperties(Func<IReadOnlyKistlContext> lazyCtx, List<System.ComponentModel.PropertyDescriptor> props)
 		{
 			base.CollectProperties(props);
+			_InitializePropertyDescriptors(lazyCtx);
 			props.AddRange(_properties);
 		}
 	

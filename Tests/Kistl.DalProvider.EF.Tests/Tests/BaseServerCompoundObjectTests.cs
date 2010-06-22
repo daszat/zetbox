@@ -25,9 +25,9 @@ namespace Kistl.DalProvider.EF.Tests
         [SetUp]
         public void SetUpTestObject()
         {
-            obj = new TestPhoneCompoundObject__Implementation__() { AreaCode = "ABC", Number = "123456" };
+            obj = new TestPhoneCompoundObject__Implementation__(null) { AreaCode = "ABC", Number = "123456" };
 
-            parent = new TestCustomObject__Implementation__();
+            parent = new TestCustomObject__Implementation__(null);
             attachedObj = (TestPhoneCompoundObject__Implementation__)parent.PhoneNumberOffice;
             attachedObj.AreaCode = "attachedAreaCode";
             attachedObj.Number = "attachedNumber";

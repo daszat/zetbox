@@ -26,9 +26,15 @@ namespace Kistl.App.GUI
     [System.Diagnostics.DebuggerDisplay("ControlKind")]
     public class ControlKind__Implementation__ : BaseServerDataObject_EntityFramework, ControlKind, Kistl.API.IExportableInternal
     {
-    
-		public ControlKind__Implementation__()
-		{
+        [Obsolete]
+        public ControlKind__Implementation__()
+            : base(null)
+        {
+        }
+
+        public ControlKind__Implementation__(Func<IReadOnlyKistlContext> lazyCtx)
+            : base(lazyCtx)
+        {
         }
 
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
@@ -403,10 +409,10 @@ namespace Kistl.App.GUI
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.ControlKind, Kistl.App.GUI.ControlKind> OnParent_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.ControlKind, Kistl.App.GUI.ControlKind> OnParent_PostSetter;
 
-		public override Type GetImplementedInterface()
-		{
-			return typeof(ControlKind);
-		}
+        public override Type GetImplementedInterface()
+        {
+            return typeof(ControlKind);
+        }
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{
@@ -471,52 +477,71 @@ namespace Kistl.App.GUI
         public static event ObjectEventHandler<ControlKind> OnDeleting_ControlKind;
 
 
-		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
-			new CustomPropertyDescriptor<ControlKind__Implementation__, ICollection<Kistl.App.GUI.ControlKind>>(
-				new Guid("bf073bb5-eaa8-4e3d-b019-60b47ba6a088"),
-				"ChildControlKinds",
-				null,
-				obj => obj.ChildControlKinds,
-				null), // lists are read-only properties
-			// else
-			new CustomPropertyDescriptor<ControlKind__Implementation__, Guid>(
-				new Guid("758d8eba-b458-4cd4-98a8-e08713912654"),
-				"ExportGuid",
-				null,
-				obj => obj.ExportGuid,
-				(obj, val) => obj.ExportGuid = val),
-			// else
-			new CustomPropertyDescriptor<ControlKind__Implementation__, Kistl.App.Base.Module>(
-				new Guid("e4cf2c2d-be50-4954-a43c-b8df2dedecec"),
-				"Module",
-				null,
-				obj => obj.Module,
-				(obj, val) => obj.Module = val),
-			// else
-			new CustomPropertyDescriptor<ControlKind__Implementation__, string>(
-				new Guid("438ab847-c5d1-4072-9449-96e3d4e92b1f"),
-				"Name",
-				null,
-				obj => obj.Name,
-				(obj, val) => obj.Name = val),
-			// else
-			new CustomPropertyDescriptor<ControlKind__Implementation__, Kistl.App.GUI.ControlKind>(
-				new Guid("5d75bf4f-29dd-4d00-8e4f-b40a1b9ad92c"),
-				"Parent",
-				null,
-				obj => obj.Parent,
-				(obj, val) => obj.Parent = val),
-			// rel: ControlKind has Module (6d5e026a-2605-4630-88ed-9da0b0e14c95)
-			// rel: ChildControlKinds have_a Parent (4ff9061d-f26a-42d6-ae95-b418f039a35e)
-			// rel: ViewDescriptor is_a ControlKind (bffabb36-7862-4fcf-b8fb-efb719c70f3f)
-			// rel: ViewModelDescriptor displayedInGridBy DefaultGridCellKind (0a03215f-1c1a-4a44-892d-86642eefe9f1)
-			// rel: Presentable has DefaultKind (cc835258-6ada-4f3f-839e-7f276ded995a)
-		};
+		private static readonly object _propertiesLock = new object();
+		private static System.ComponentModel.PropertyDescriptor[] _properties;
 		
-		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
+		private void _InitializePropertyDescriptors(Func<IReadOnlyKistlContext> lazyCtx)
+		{
+			if (_properties != null) return;
+			lock (_propertiesLock)
+			{
+				// recheck for a lost race after aquiring the lock
+				if (_properties != null) return;
+				
+				_properties = new System.ComponentModel.PropertyDescriptor[] {
+					// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
+					new CustomPropertyDescriptor<ControlKind__Implementation__, ICollection<Kistl.App.GUI.ControlKind>>(
+						lazyCtx,
+						new Guid("bf073bb5-eaa8-4e3d-b019-60b47ba6a088"),
+						"ChildControlKinds",
+						null,
+						obj => obj.ChildControlKinds,
+						null), // lists are read-only properties
+					// else
+					new CustomPropertyDescriptor<ControlKind__Implementation__, Guid>(
+						lazyCtx,
+						new Guid("758d8eba-b458-4cd4-98a8-e08713912654"),
+						"ExportGuid",
+						null,
+						obj => obj.ExportGuid,
+						(obj, val) => obj.ExportGuid = val),
+					// else
+					new CustomPropertyDescriptor<ControlKind__Implementation__, Kistl.App.Base.Module>(
+						lazyCtx,
+						new Guid("e4cf2c2d-be50-4954-a43c-b8df2dedecec"),
+						"Module",
+						null,
+						obj => obj.Module,
+						(obj, val) => obj.Module = val),
+					// else
+					new CustomPropertyDescriptor<ControlKind__Implementation__, string>(
+						lazyCtx,
+						new Guid("438ab847-c5d1-4072-9449-96e3d4e92b1f"),
+						"Name",
+						null,
+						obj => obj.Name,
+						(obj, val) => obj.Name = val),
+					// else
+					new CustomPropertyDescriptor<ControlKind__Implementation__, Kistl.App.GUI.ControlKind>(
+						lazyCtx,
+						new Guid("5d75bf4f-29dd-4d00-8e4f-b40a1b9ad92c"),
+						"Parent",
+						null,
+						obj => obj.Parent,
+						(obj, val) => obj.Parent = val),
+					// rel: ControlKind has Module (6d5e026a-2605-4630-88ed-9da0b0e14c95)
+					// rel: ChildControlKinds have_a Parent (4ff9061d-f26a-42d6-ae95-b418f039a35e)
+					// rel: ViewDescriptor is_a ControlKind (bffabb36-7862-4fcf-b8fb-efb719c70f3f)
+					// rel: ViewModelDescriptor displayedInGridBy DefaultGridCellKind (0a03215f-1c1a-4a44-892d-86642eefe9f1)
+					// rel: Presentable has DefaultKind (cc835258-6ada-4f3f-839e-7f276ded995a)
+				};
+			}
+		}
+		
+		protected override void CollectProperties(Func<IReadOnlyKistlContext> lazyCtx, List<System.ComponentModel.PropertyDescriptor> props)
 		{
 			base.CollectProperties(props);
+			_InitializePropertyDescriptors(lazyCtx);
 			props.AddRange(_properties);
 		}
 	

@@ -26,9 +26,15 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("ObjectClass")]
     public class ObjectClass__Implementation__ : Kistl.App.Base.DataType__Implementation__, ObjectClass
     {
-    
-		public ObjectClass__Implementation__()
-		{
+        [Obsolete]
+        public ObjectClass__Implementation__()
+            : base(null)
+        {
+        }
+
+        public ObjectClass__Implementation__(Func<IReadOnlyKistlContext> lazyCtx)
+            : base(lazyCtx)
+        {
         }
 
 
@@ -719,10 +725,10 @@ namespace Kistl.App.Base
 
 
 
-		public override Type GetImplementedInterface()
-		{
-			return typeof(ObjectClass);
-		}
+        public override Type GetImplementedInterface()
+        {
+            return typeof(ObjectClass);
+        }
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{
@@ -789,81 +795,104 @@ namespace Kistl.App.Base
         public static event ObjectEventHandler<ObjectClass> OnDeleting_ObjectClass;
 
 
-		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
-			new CustomPropertyDescriptor<ObjectClass__Implementation__, ICollection<Kistl.App.Base.AccessControl>>(
-				new Guid("4514093c-0a1f-4644-b4a6-3389f1ca7aa8"),
-				"AccessControlList",
-				null,
-				obj => obj.AccessControlList,
-				null), // lists are read-only properties
-			// else
-			new CustomPropertyDescriptor<ObjectClass__Implementation__, Kistl.App.Base.ObjectClass>(
-				new Guid("ad060d41-bc7a-41b8-a3e3-ec9302c8c714"),
-				"BaseObjectClass",
-				null,
-				obj => obj.BaseObjectClass,
-				(obj, val) => obj.BaseObjectClass = val),
-			// else
-			new CustomPropertyDescriptor<ObjectClass__Implementation__, Kistl.App.GUI.ViewModelDescriptor>(
-				new Guid("11adedb9-d32a-4da9-b986-0534e65df760"),
-				"DefaultViewModelDescriptor",
-				null,
-				obj => obj.DefaultViewModelDescriptor,
-				(obj, val) => obj.DefaultViewModelDescriptor = val),
-			// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
-			new CustomPropertyDescriptor<ObjectClass__Implementation__, ICollection<Kistl.App.Base.Interface>>(
-				new Guid("a9ec04c2-0807-4d6c-a96a-824d13e5c571"),
-				"ImplementsInterfaces",
-				null,
-				obj => obj.ImplementsInterfaces,
-				null), // lists are read-only properties
-			// else
-			new CustomPropertyDescriptor<ObjectClass__Implementation__, bool>(
-				new Guid("e9d1402e-3580-4084-8836-c44844683191"),
-				"IsAbstract",
-				null,
-				obj => obj.IsAbstract,
-				(obj, val) => obj.IsAbstract = val),
-			// else
-			new CustomPropertyDescriptor<ObjectClass__Implementation__, bool>(
-				new Guid("13c33710-ea02-4621-ad50-294a1f36b07d"),
-				"IsFrozenObject",
-				null,
-				obj => obj.IsFrozenObject,
-				(obj, val) => obj.IsFrozenObject = val),
-			// else
-			new CustomPropertyDescriptor<ObjectClass__Implementation__, bool>(
-				new Guid("edc853d3-0d02-4492-9159-c548c7713e9b"),
-				"IsSimpleObject",
-				null,
-				obj => obj.IsSimpleObject,
-				(obj, val) => obj.IsSimpleObject = val),
-			// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
-			new CustomPropertyDescriptor<ObjectClass__Implementation__, ICollection<Kistl.App.Base.ObjectClass>>(
-				new Guid("0914de6e-966c-46fc-9359-e4da6c3608b1"),
-				"SubClasses",
-				null,
-				obj => obj.SubClasses,
-				null), // lists are read-only properties
-			// else
-			new CustomPropertyDescriptor<ObjectClass__Implementation__, string>(
-				new Guid("2a5e5111-199c-4dce-8369-ce35ee741568"),
-				"TableName",
-				null,
-				obj => obj.TableName,
-				(obj, val) => obj.TableName = val),
-			// rel: CalculatedReference references ReferencedClass (6c207cc8-d6a2-49b5-81f3-743d261b7411)
-			// rel: ObjectClass has AccessControlList (5c3092e0-a3e1-46d2-8e66-e59298b342e7)
-			// rel: BaseObjectClass has SubClasses (cba32040-b1f2-4267-991a-f3dc0e349ff5)
-			// rel: Presentable has DefaultViewModelDescriptor (1ae94c81-3359-45e8-b97a-b61add91abba)
-			// rel: ObjectReferencePlaceholderProperty ofType ReferencedObjectClass (47ccedbe-6cfa-4810-8b8e-c064b8434f3f)
-			// rel: RelationEnd has Type (1d8d8e0b-cb0d-4746-a4c5-85c8f399e00a)
-		};
+		private static readonly object _propertiesLock = new object();
+		private static System.ComponentModel.PropertyDescriptor[] _properties;
 		
-		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
+		private void _InitializePropertyDescriptors(Func<IReadOnlyKistlContext> lazyCtx)
+		{
+			if (_properties != null) return;
+			lock (_propertiesLock)
+			{
+				// recheck for a lost race after aquiring the lock
+				if (_properties != null) return;
+				
+				_properties = new System.ComponentModel.PropertyDescriptor[] {
+					// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
+					new CustomPropertyDescriptor<ObjectClass__Implementation__, ICollection<Kistl.App.Base.AccessControl>>(
+						lazyCtx,
+						new Guid("4514093c-0a1f-4644-b4a6-3389f1ca7aa8"),
+						"AccessControlList",
+						null,
+						obj => obj.AccessControlList,
+						null), // lists are read-only properties
+					// else
+					new CustomPropertyDescriptor<ObjectClass__Implementation__, Kistl.App.Base.ObjectClass>(
+						lazyCtx,
+						new Guid("ad060d41-bc7a-41b8-a3e3-ec9302c8c714"),
+						"BaseObjectClass",
+						null,
+						obj => obj.BaseObjectClass,
+						(obj, val) => obj.BaseObjectClass = val),
+					// else
+					new CustomPropertyDescriptor<ObjectClass__Implementation__, Kistl.App.GUI.ViewModelDescriptor>(
+						lazyCtx,
+						new Guid("11adedb9-d32a-4da9-b986-0534e65df760"),
+						"DefaultViewModelDescriptor",
+						null,
+						obj => obj.DefaultViewModelDescriptor,
+						(obj, val) => obj.DefaultViewModelDescriptor = val),
+					// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
+					new CustomPropertyDescriptor<ObjectClass__Implementation__, ICollection<Kistl.App.Base.Interface>>(
+						lazyCtx,
+						new Guid("a9ec04c2-0807-4d6c-a96a-824d13e5c571"),
+						"ImplementsInterfaces",
+						null,
+						obj => obj.ImplementsInterfaces,
+						null), // lists are read-only properties
+					// else
+					new CustomPropertyDescriptor<ObjectClass__Implementation__, bool>(
+						lazyCtx,
+						new Guid("e9d1402e-3580-4084-8836-c44844683191"),
+						"IsAbstract",
+						null,
+						obj => obj.IsAbstract,
+						(obj, val) => obj.IsAbstract = val),
+					// else
+					new CustomPropertyDescriptor<ObjectClass__Implementation__, bool>(
+						lazyCtx,
+						new Guid("13c33710-ea02-4621-ad50-294a1f36b07d"),
+						"IsFrozenObject",
+						null,
+						obj => obj.IsFrozenObject,
+						(obj, val) => obj.IsFrozenObject = val),
+					// else
+					new CustomPropertyDescriptor<ObjectClass__Implementation__, bool>(
+						lazyCtx,
+						new Guid("edc853d3-0d02-4492-9159-c548c7713e9b"),
+						"IsSimpleObject",
+						null,
+						obj => obj.IsSimpleObject,
+						(obj, val) => obj.IsSimpleObject = val),
+					// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
+					new CustomPropertyDescriptor<ObjectClass__Implementation__, ICollection<Kistl.App.Base.ObjectClass>>(
+						lazyCtx,
+						new Guid("0914de6e-966c-46fc-9359-e4da6c3608b1"),
+						"SubClasses",
+						null,
+						obj => obj.SubClasses,
+						null), // lists are read-only properties
+					// else
+					new CustomPropertyDescriptor<ObjectClass__Implementation__, string>(
+						lazyCtx,
+						new Guid("2a5e5111-199c-4dce-8369-ce35ee741568"),
+						"TableName",
+						null,
+						obj => obj.TableName,
+						(obj, val) => obj.TableName = val),
+					// rel: CalculatedReference references ReferencedClass (6c207cc8-d6a2-49b5-81f3-743d261b7411)
+					// rel: ObjectClass has AccessControlList (5c3092e0-a3e1-46d2-8e66-e59298b342e7)
+					// rel: BaseObjectClass has SubClasses (cba32040-b1f2-4267-991a-f3dc0e349ff5)
+					// rel: Presentable has DefaultViewModelDescriptor (1ae94c81-3359-45e8-b97a-b61add91abba)
+					// rel: ObjectReferencePlaceholderProperty ofType ReferencedObjectClass (47ccedbe-6cfa-4810-8b8e-c064b8434f3f)
+					// rel: RelationEnd has Type (1d8d8e0b-cb0d-4746-a4c5-85c8f399e00a)
+				};
+			}
+		}
+		
+		protected override void CollectProperties(Func<IReadOnlyKistlContext> lazyCtx, List<System.ComponentModel.PropertyDescriptor> props)
 		{
 			base.CollectProperties(props);
+			_InitializePropertyDescriptors(lazyCtx);
 			props.AddRange(_properties);
 		}
 	

@@ -75,95 +75,105 @@ var mungedClassName = GetTypeName();
 this.WriteObjects("    [System.Diagnostics.DebuggerDisplay(\"",  DataType.Name , "\")]\r\n");
 this.WriteObjects("    public",  GetClassModifiers() , " class ",  mungedClassName , " ",  GetInheritance() , "\r\n");
 this.WriteObjects("    {\r\n");
-this.WriteObjects("    \r\n");
-this.WriteObjects("		public ",  mungedClassName , "()\r\n");
-this.WriteObjects("		{\r\n");
-#line 64 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
+this.WriteObjects("        [Obsolete]\r\n");
+this.WriteObjects("        public ",  mungedClassName , "()\r\n");
+this.WriteObjects("            : base(null)\r\n");
+this.WriteObjects("        {\r\n");
+#line 65 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
 ApplyConstructorTemplate();
 
-#line 66 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
+#line 67 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
 this.WriteObjects("        }\r\n");
 this.WriteObjects("\r\n");
-#line 69 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
+this.WriteObjects("        public ",  mungedClassName , "(Func<IReadOnlyKistlContext> lazyCtx)\r\n");
+this.WriteObjects("            : base(lazyCtx)\r\n");
+this.WriteObjects("        {\r\n");
+#line 73 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
+ApplyConstructorTemplate();
+
+#line 75 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
+this.WriteObjects("        }\r\n");
+this.WriteObjects("\r\n");
+#line 78 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
 ApplyIDPropertyTemplate();
 
-		// TODO: decouple serializing format from Name order
+        // TODO: decouple serializing format from Name order
         foreach(Property p in DataType.Properties.OrderBy(p => p.Name))
         {
 
-#line 75 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
+#line 84 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("        /// <summary>\r\n");
 this.WriteObjects("        /// ",  p.Description , "\r\n");
 this.WriteObjects("        /// </summary>\r\n");
-#line 80 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
+#line 89 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
 ApplyPropertyTemplate(p);
         }
 
         foreach(var mg in MethodsToGenerate().GroupBy(m => m.Name).OrderBy(mg => mg.Key))
         {
-			int index = 0;
-			foreach(var m in mg.OrderByDefault())
-			{
+            int index = 0;
+            foreach(var m in mg.OrderByDefault())
+            {
 
-#line 89 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
+#line 98 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("        /// <summary>\r\n");
 this.WriteObjects("        /// ",  m.Description , "\r\n");
 this.WriteObjects("        /// </summary>\r\n");
-#line 94 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
+#line 103 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
 ApplyMethodTemplate(m, index++);
-			}
+            }
         }
 
-#line 98 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
+#line 107 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
 this.WriteObjects("\r\n");
-this.WriteObjects("		public override Type GetImplementedInterface()\r\n");
-this.WriteObjects("		{\r\n");
-this.WriteObjects("			return typeof(",  DataType.Name , ");\r\n");
-this.WriteObjects("		}\r\n");
-#line 104 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
+this.WriteObjects("        public override Type GetImplementedInterface()\r\n");
+this.WriteObjects("        {\r\n");
+this.WriteObjects("            return typeof(",  DataType.Name , ");\r\n");
+this.WriteObjects("        }\r\n");
+#line 113 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
 ApplyApplyChangesFromMethod();
-		ApplyAttachToContextMethod();
+        ApplyAttachToContextMethod();
         ApplyClassTailTemplate();
 
-#line 108 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
+#line 117 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("#region Serializer\r\n");
 this.WriteObjects("\r\n");
-#line 112 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
+#line 121 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
 Implementation.ObjectClasses.SerializerTemplate.Call(Host, ctx,
-			SerializerDirection.ToStream, this.MembersToSerialize, true, false);
-		
-		Implementation.ObjectClasses.SerializerTemplate.Call(Host, ctx,
-			SerializerDirection.FromStream, this.MembersToSerialize, true, false);
+            SerializerDirection.ToStream, this.MembersToSerialize, true, false);
+        
+        Implementation.ObjectClasses.SerializerTemplate.Call(Host, ctx,
+            SerializerDirection.FromStream, this.MembersToSerialize, true, false);
 
-		Implementation.ObjectClasses.SerializerTemplate.Call(Host, ctx,
-			SerializerDirection.ToXmlStream, this.MembersToSerialize, true, false);
-		
-		Implementation.ObjectClasses.SerializerTemplate.Call(Host, ctx,
-			SerializerDirection.FromXmlStream, this.MembersToSerialize, true, false);
+        Implementation.ObjectClasses.SerializerTemplate.Call(Host, ctx,
+            SerializerDirection.ToXmlStream, this.MembersToSerialize, true, false);
+        
+        Implementation.ObjectClasses.SerializerTemplate.Call(Host, ctx,
+            SerializerDirection.FromXmlStream, this.MembersToSerialize, true, false);
 
-		if((DataType is ObjectClass) && ((ObjectClass)DataType).ImplementsIExportable())
-		{
-			ObjectClass cls = (ObjectClass)DataType;			
-			Implementation.ObjectClasses.SerializerTemplate.Call(Host, ctx,
-				SerializerDirection.Export, this.MembersToSerialize, cls.BaseObjectClass != null, true);
-			
-			Implementation.ObjectClasses.SerializerTemplate.Call(Host, ctx,
-				SerializerDirection.MergeImport, this.MembersToSerialize, cls.BaseObjectClass != null, true);
-		}
+        if((DataType is ObjectClass) && ((ObjectClass)DataType).ImplementsIExportable())
+        {
+            ObjectClass cls = (ObjectClass)DataType;            
+            Implementation.ObjectClasses.SerializerTemplate.Call(Host, ctx,
+                SerializerDirection.Export, this.MembersToSerialize, cls.BaseObjectClass != null, true);
+            
+            Implementation.ObjectClasses.SerializerTemplate.Call(Host, ctx,
+                SerializerDirection.MergeImport, this.MembersToSerialize, cls.BaseObjectClass != null, true);
+        }
 
-#line 134 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
+#line 143 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("#endregion\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("    }\r\n");
 this.WriteObjects("\r\n");
-#line 140 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
+#line 149 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
 ApplyNamespaceTailTemplate();
 
-#line 142 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
+#line 151 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("}");
 

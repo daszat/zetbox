@@ -26,9 +26,15 @@ namespace Kistl.App.Test
     [System.Diagnostics.DebuggerDisplay("TestObjClass")]
     public class TestObjClass__Implementation__ : BaseServerDataObject_EntityFramework, TestObjClass
     {
-    
-		public TestObjClass__Implementation__()
-		{
+        [Obsolete]
+        public TestObjClass__Implementation__()
+            : base(null)
+        {
+        }
+
+        public TestObjClass__Implementation__(Func<IReadOnlyKistlContext> lazyCtx)
+            : base(lazyCtx)
+        {
         }
 
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
@@ -341,10 +347,10 @@ namespace Kistl.App.Test
 
 
 
-		public override Type GetImplementedInterface()
-		{
-			return typeof(TestObjClass);
-		}
+        public override Type GetImplementedInterface()
+        {
+            return typeof(TestObjClass);
+        }
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{
@@ -409,41 +415,59 @@ namespace Kistl.App.Test
         public static event ObjectEventHandler<TestObjClass> OnDeleting_TestObjClass;
 
 
-		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			// else
-			new CustomPropertyDescriptor<TestObjClass__Implementation__, int?>(
-				new Guid("29c0242b-cd1c-42b4-8ca0-be0a209afcbf"),
-				"MyIntProperty",
-				null,
-				obj => obj.MyIntProperty,
-				(obj, val) => obj.MyIntProperty = val),
-			// else
-			new CustomPropertyDescriptor<TestObjClass__Implementation__, Kistl.App.Projekte.Kunde>(
-				new Guid("e93b3fc2-2fc9-4577-9a93-a51ed2a4190f"),
-				"ObjectProp",
-				null,
-				obj => obj.ObjectProp,
-				(obj, val) => obj.ObjectProp = val),
-			// else
-			new CustomPropertyDescriptor<TestObjClass__Implementation__, string>(
-				new Guid("c9a3769e-7a53-4e1d-b894-72dc1b4e9aea"),
-				"StringProp",
-				null,
-				obj => obj.StringProp,
-				(obj, val) => obj.StringProp = val),
-			// else
-			new CustomPropertyDescriptor<TestObjClass__Implementation__, Kistl.App.Test.TestEnum>(
-				new Guid("89470dda-4ac6-4bb4-9221-d16f80f8d95a"),
-				"TestEnumProp",
-				null,
-				obj => obj.TestEnumProp,
-				(obj, val) => obj.TestEnumProp = val),
-			// rel: TestObjClass has ObjectProp (9d44eac8-2470-4373-a2bf-df3bc16d3454)
-		};
+		private static readonly object _propertiesLock = new object();
+		private static System.ComponentModel.PropertyDescriptor[] _properties;
 		
-		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
+		private void _InitializePropertyDescriptors(Func<IReadOnlyKistlContext> lazyCtx)
+		{
+			if (_properties != null) return;
+			lock (_propertiesLock)
+			{
+				// recheck for a lost race after aquiring the lock
+				if (_properties != null) return;
+				
+				_properties = new System.ComponentModel.PropertyDescriptor[] {
+					// else
+					new CustomPropertyDescriptor<TestObjClass__Implementation__, int?>(
+						lazyCtx,
+						new Guid("29c0242b-cd1c-42b4-8ca0-be0a209afcbf"),
+						"MyIntProperty",
+						null,
+						obj => obj.MyIntProperty,
+						(obj, val) => obj.MyIntProperty = val),
+					// else
+					new CustomPropertyDescriptor<TestObjClass__Implementation__, Kistl.App.Projekte.Kunde>(
+						lazyCtx,
+						new Guid("e93b3fc2-2fc9-4577-9a93-a51ed2a4190f"),
+						"ObjectProp",
+						null,
+						obj => obj.ObjectProp,
+						(obj, val) => obj.ObjectProp = val),
+					// else
+					new CustomPropertyDescriptor<TestObjClass__Implementation__, string>(
+						lazyCtx,
+						new Guid("c9a3769e-7a53-4e1d-b894-72dc1b4e9aea"),
+						"StringProp",
+						null,
+						obj => obj.StringProp,
+						(obj, val) => obj.StringProp = val),
+					// else
+					new CustomPropertyDescriptor<TestObjClass__Implementation__, Kistl.App.Test.TestEnum>(
+						lazyCtx,
+						new Guid("89470dda-4ac6-4bb4-9221-d16f80f8d95a"),
+						"TestEnumProp",
+						null,
+						obj => obj.TestEnumProp,
+						(obj, val) => obj.TestEnumProp = val),
+					// rel: TestObjClass has ObjectProp (9d44eac8-2470-4373-a2bf-df3bc16d3454)
+				};
+			}
+		}
+		
+		protected override void CollectProperties(Func<IReadOnlyKistlContext> lazyCtx, List<System.ComponentModel.PropertyDescriptor> props)
 		{
 			base.CollectProperties(props);
+			_InitializePropertyDescriptors(lazyCtx);
 			props.AddRange(_properties);
 		}
 	

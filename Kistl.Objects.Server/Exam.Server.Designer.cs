@@ -26,9 +26,15 @@ namespace at.dasz.CourseOrganiser
     [System.Diagnostics.DebuggerDisplay("Exam")]
     public class Exam__Implementation__ : BaseServerDataObject_EntityFramework, Exam
     {
-    
-		public Exam__Implementation__()
-		{
+        [Obsolete]
+        public Exam__Implementation__()
+            : base(null)
+        {
+        }
+
+        public Exam__Implementation__(Func<IReadOnlyKistlContext> lazyCtx)
+            : base(lazyCtx)
+        {
         }
 
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
@@ -304,10 +310,10 @@ namespace at.dasz.CourseOrganiser
 		public static event PropertyPreSetterHandler<at.dasz.CourseOrganiser.Exam, at.dasz.CourseOrganiser.Semester> OnSemester_PreSetter;
 		public static event PropertyPostSetterHandler<at.dasz.CourseOrganiser.Exam, at.dasz.CourseOrganiser.Semester> OnSemester_PostSetter;
 
-		public override Type GetImplementedInterface()
-		{
-			return typeof(Exam);
-		}
+        public override Type GetImplementedInterface()
+        {
+            return typeof(Exam);
+        }
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{
@@ -372,42 +378,60 @@ namespace at.dasz.CourseOrganiser
         public static event ObjectEventHandler<Exam> OnDeleting_Exam;
 
 
-		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			// else
-			new CustomPropertyDescriptor<Exam__Implementation__, DateTime?>(
-				new Guid("bfbc9284-3d72-4966-9b03-2f9f5f628e42"),
-				"Date",
-				null,
-				obj => obj.Date,
-				(obj, val) => obj.Date = val),
-			// else
-			new CustomPropertyDescriptor<Exam__Implementation__, int>(
-				new Guid("9223d17a-d22d-4419-8c47-83414de4ae28"),
-				"MaxScores",
-				null,
-				obj => obj.MaxScores,
-				(obj, val) => obj.MaxScores = val),
-			// else
-			new CustomPropertyDescriptor<Exam__Implementation__, string>(
-				new Guid("7a257582-b2cc-43bc-b76f-03eee27c5a7c"),
-				"Name",
-				null,
-				obj => obj.Name,
-				(obj, val) => obj.Name = val),
-			// else
-			new CustomPropertyDescriptor<Exam__Implementation__, at.dasz.CourseOrganiser.Semester>(
-				new Guid("7b83aa6f-84f3-4c62-8dd8-ce4d1020935a"),
-				"Semester",
-				null,
-				obj => obj.Semester,
-				(obj, val) => obj.Semester = val),
-			// rel: Exam happens_in Semester (af26d91c-68a2-4c18-aca7-4fc56d3b519a)
-			// rel: StudentExam passes Exam (3e15530a-1753-4e97-9390-7235192a1a9e)
-		};
+		private static readonly object _propertiesLock = new object();
+		private static System.ComponentModel.PropertyDescriptor[] _properties;
 		
-		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
+		private void _InitializePropertyDescriptors(Func<IReadOnlyKistlContext> lazyCtx)
+		{
+			if (_properties != null) return;
+			lock (_propertiesLock)
+			{
+				// recheck for a lost race after aquiring the lock
+				if (_properties != null) return;
+				
+				_properties = new System.ComponentModel.PropertyDescriptor[] {
+					// else
+					new CustomPropertyDescriptor<Exam__Implementation__, DateTime?>(
+						lazyCtx,
+						new Guid("bfbc9284-3d72-4966-9b03-2f9f5f628e42"),
+						"Date",
+						null,
+						obj => obj.Date,
+						(obj, val) => obj.Date = val),
+					// else
+					new CustomPropertyDescriptor<Exam__Implementation__, int>(
+						lazyCtx,
+						new Guid("9223d17a-d22d-4419-8c47-83414de4ae28"),
+						"MaxScores",
+						null,
+						obj => obj.MaxScores,
+						(obj, val) => obj.MaxScores = val),
+					// else
+					new CustomPropertyDescriptor<Exam__Implementation__, string>(
+						lazyCtx,
+						new Guid("7a257582-b2cc-43bc-b76f-03eee27c5a7c"),
+						"Name",
+						null,
+						obj => obj.Name,
+						(obj, val) => obj.Name = val),
+					// else
+					new CustomPropertyDescriptor<Exam__Implementation__, at.dasz.CourseOrganiser.Semester>(
+						lazyCtx,
+						new Guid("7b83aa6f-84f3-4c62-8dd8-ce4d1020935a"),
+						"Semester",
+						null,
+						obj => obj.Semester,
+						(obj, val) => obj.Semester = val),
+					// rel: Exam happens_in Semester (af26d91c-68a2-4c18-aca7-4fc56d3b519a)
+					// rel: StudentExam passes Exam (3e15530a-1753-4e97-9390-7235192a1a9e)
+				};
+			}
+		}
+		
+		protected override void CollectProperties(Func<IReadOnlyKistlContext> lazyCtx, List<System.ComponentModel.PropertyDescriptor> props)
 		{
 			base.CollectProperties(props);
+			_InitializePropertyDescriptors(lazyCtx);
 			props.AddRange(_properties);
 		}
 	

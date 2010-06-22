@@ -1,14 +1,18 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Xml.Serialization;
-using Kistl.App.Test;
 
 namespace Kistl.API.Client.Tests
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Xml.Serialization;
+    
+    using Kistl.App.Test;
+
     public class TestObjClass_TestNameCollectionEntry : BaseClientCollectionEntry, IValueCollectionEntry<TestObjClass, string>
     {
+        public TestObjClass_TestNameCollectionEntry() : base(null) { }
+
         private string _Value;
         private int _fk_Parent;
 

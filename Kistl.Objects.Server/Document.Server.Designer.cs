@@ -26,9 +26,15 @@ namespace at.dasz.DocumentManagement
     [System.Diagnostics.DebuggerDisplay("Document")]
     public class Document__Implementation__ : at.dasz.DocumentManagement.File__Implementation__, Document
     {
-    
-		public Document__Implementation__()
-		{
+        [Obsolete]
+        public Document__Implementation__()
+            : base(null)
+        {
+        }
+
+        public Document__Implementation__(Func<IReadOnlyKistlContext> lazyCtx)
+            : base(lazyCtx)
+        {
         }
 
 
@@ -142,10 +148,10 @@ namespace at.dasz.DocumentManagement
 
 
 
-		public override Type GetImplementedInterface()
-		{
-			return typeof(Document);
-		}
+        public override Type GetImplementedInterface()
+        {
+            return typeof(Document);
+        }
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{
@@ -206,19 +212,34 @@ namespace at.dasz.DocumentManagement
         public static event ObjectEventHandler<Document> OnDeleting_Document;
 
 
-		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
-			new CustomPropertyDescriptor<Document__Implementation__, IList<Kistl.App.Base.Blob>>(
-				new Guid("ec544fe0-8189-4bb2-a3d1-3cb61d815aa5"),
-				"Revisions",
-				null,
-				obj => obj.Revisions,
-				null), // lists are read-only properties
-		};
+		private static readonly object _propertiesLock = new object();
+		private static System.ComponentModel.PropertyDescriptor[] _properties;
 		
-		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
+		private void _InitializePropertyDescriptors(Func<IReadOnlyKistlContext> lazyCtx)
+		{
+			if (_properties != null) return;
+			lock (_propertiesLock)
+			{
+				// recheck for a lost race after aquiring the lock
+				if (_properties != null) return;
+				
+				_properties = new System.ComponentModel.PropertyDescriptor[] {
+					// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
+					new CustomPropertyDescriptor<Document__Implementation__, IList<Kistl.App.Base.Blob>>(
+						lazyCtx,
+						new Guid("ec544fe0-8189-4bb2-a3d1-3cb61d815aa5"),
+						"Revisions",
+						null,
+						obj => obj.Revisions,
+						null), // lists are read-only properties
+				};
+			}
+		}
+		
+		protected override void CollectProperties(Func<IReadOnlyKistlContext> lazyCtx, List<System.ComponentModel.PropertyDescriptor> props)
 		{
 			base.CollectProperties(props);
+			_InitializePropertyDescriptors(lazyCtx);
 			props.AddRange(_properties);
 		}
 	

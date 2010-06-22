@@ -1,13 +1,16 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Autofac;
-using System.Reflection;
-using Kistl.API.Configuration;
 
 namespace Kistl.API.Client
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Reflection;
+    using System.Text;
+
+    using Autofac;
+
+    using Kistl.API.Configuration;
+
     internal class ClientAssemblyConfiguration : IAssemblyConfiguration
     {
         #region IAssemblyConfiguration Members
@@ -31,7 +34,15 @@ namespace Kistl.API.Client
         {
             base.Load(moduleBuilder);
 
-            moduleBuilder.Register(c => new KistlContextImpl(c.Resolve<KistlConfig>(), c.Resolve<ITypeTransformations>(), c.Resolve<IProxy>(), Kistl.API.Helper.ClientAssembly))
+            moduleBuilder.Register(c =>
+                {
+                    return new KistlContextImpl(
+                        c.Resolve<KistlConfig>(),
+                        c.Resolve<ITypeTransformations>(),
+                        c.Resolve<IProxy>(),
+                        Kistl.API.Helper.ClientAssembly,
+                        c.Resolve<Func<IReadOnlyKistlContext>>(Kistl.API.Helper.FrozenContextServiceName));
+                })
                 .As<IKistlContext>()
                 .As<IReadOnlyKistlContext>()
                 .InstancePerDependency();

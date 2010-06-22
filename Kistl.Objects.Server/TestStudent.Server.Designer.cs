@@ -26,9 +26,15 @@ namespace Kistl.App.Test
     [System.Diagnostics.DebuggerDisplay("TestStudent")]
     public class TestStudent__Implementation__ : BaseServerDataObject_EntityFramework, TestStudent
     {
-    
-		public TestStudent__Implementation__()
-		{
+        [Obsolete]
+        public TestStudent__Implementation__()
+            : base(null)
+        {
+        }
+
+        public TestStudent__Implementation__(Func<IReadOnlyKistlContext> lazyCtx)
+            : base(lazyCtx)
+        {
         }
 
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
@@ -158,10 +164,10 @@ namespace Kistl.App.Test
         private EntityRelationBSideCollectionWrapper<Kistl.App.Test.TestStudent, Kistl.App.Test.Fragebogen, Kistl.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntry__Implementation__> _TestbogenWrapper;
 
 
-		public override Type GetImplementedInterface()
-		{
-			return typeof(TestStudent);
-		}
+        public override Type GetImplementedInterface()
+        {
+            return typeof(TestStudent);
+        }
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{
@@ -223,26 +229,42 @@ namespace Kistl.App.Test
         public static event ObjectEventHandler<TestStudent> OnDeleting_TestStudent;
 
 
-		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			// else
-			new CustomPropertyDescriptor<TestStudent__Implementation__, string>(
-				new Guid("190b4492-c1cb-40a2-8941-84b8ff3ac141"),
-				"Name",
-				null,
-				obj => obj.Name,
-				(obj, val) => obj.Name = val),
-			// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
-			new CustomPropertyDescriptor<TestStudent__Implementation__, ICollection<Kistl.App.Test.Fragebogen>>(
-				new Guid("f330d95b-372d-4302-b4d1-73afc5fa71de"),
-				"Testbogen",
-				null,
-				obj => obj.Testbogen,
-				null), // lists are read-only properties
-		};
+		private static readonly object _propertiesLock = new object();
+		private static System.ComponentModel.PropertyDescriptor[] _properties;
 		
-		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
+		private void _InitializePropertyDescriptors(Func<IReadOnlyKistlContext> lazyCtx)
+		{
+			if (_properties != null) return;
+			lock (_propertiesLock)
+			{
+				// recheck for a lost race after aquiring the lock
+				if (_properties != null) return;
+				
+				_properties = new System.ComponentModel.PropertyDescriptor[] {
+					// else
+					new CustomPropertyDescriptor<TestStudent__Implementation__, string>(
+						lazyCtx,
+						new Guid("190b4492-c1cb-40a2-8941-84b8ff3ac141"),
+						"Name",
+						null,
+						obj => obj.Name,
+						(obj, val) => obj.Name = val),
+					// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
+					new CustomPropertyDescriptor<TestStudent__Implementation__, ICollection<Kistl.App.Test.Fragebogen>>(
+						lazyCtx,
+						new Guid("f330d95b-372d-4302-b4d1-73afc5fa71de"),
+						"Testbogen",
+						null,
+						obj => obj.Testbogen,
+						null), // lists are read-only properties
+				};
+			}
+		}
+		
+		protected override void CollectProperties(Func<IReadOnlyKistlContext> lazyCtx, List<System.ComponentModel.PropertyDescriptor> props)
 		{
 			base.CollectProperties(props);
+			_InitializePropertyDescriptors(lazyCtx);
 			props.AddRange(_properties);
 		}
 	

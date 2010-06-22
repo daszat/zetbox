@@ -1,14 +1,20 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Kistl.API;
 
 namespace Kistl.DalProvider.Memory
 {
-    public abstract class BaseMemoryPersistenceObject : BasePersistenceObject
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+
+    using Kistl.API;
+
+    public abstract class BaseMemoryPersistenceObject
+        : BasePersistenceObject
     {
-        protected BaseMemoryPersistenceObject()
+        protected BaseMemoryPersistenceObject() : base(null) { _objectState = DataObjectState.New; }
+
+        protected BaseMemoryPersistenceObject(Func<IReadOnlyKistlContext> lazyCtx)
+            : base(lazyCtx)
         {
             _objectState = DataObjectState.New;
         }

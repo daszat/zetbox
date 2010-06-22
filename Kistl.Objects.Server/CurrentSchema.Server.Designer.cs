@@ -26,9 +26,15 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("CurrentSchema")]
     public class CurrentSchema__Implementation__ : BaseServerDataObject_EntityFramework, CurrentSchema
     {
-    
-		public CurrentSchema__Implementation__()
-		{
+        [Obsolete]
+        public CurrentSchema__Implementation__()
+            : base(null)
+        {
+        }
+
+        public CurrentSchema__Implementation__(Func<IReadOnlyKistlContext> lazyCtx)
+            : base(lazyCtx)
+        {
         }
 
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
@@ -161,10 +167,10 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.CurrentSchema, int> OnVersion_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.CurrentSchema, int> OnVersion_PostSetter;
 
-		public override Type GetImplementedInterface()
-		{
-			return typeof(CurrentSchema);
-		}
+        public override Type GetImplementedInterface()
+        {
+            return typeof(CurrentSchema);
+        }
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{
@@ -227,26 +233,42 @@ namespace Kistl.App.Base
         public static event ObjectEventHandler<CurrentSchema> OnDeleting_CurrentSchema;
 
 
-		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			// else
-			new CustomPropertyDescriptor<CurrentSchema__Implementation__, string>(
-				new Guid("175143b9-dd09-4b49-a633-e9cdb508c4c5"),
-				"Schema",
-				null,
-				obj => obj.Schema,
-				(obj, val) => obj.Schema = val),
-			// else
-			new CustomPropertyDescriptor<CurrentSchema__Implementation__, int>(
-				new Guid("193c24c4-5a42-418e-8ed8-6e1689beca50"),
-				"Version",
-				null,
-				obj => obj.Version,
-				(obj, val) => obj.Version = val),
-		};
+		private static readonly object _propertiesLock = new object();
+		private static System.ComponentModel.PropertyDescriptor[] _properties;
 		
-		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
+		private void _InitializePropertyDescriptors(Func<IReadOnlyKistlContext> lazyCtx)
+		{
+			if (_properties != null) return;
+			lock (_propertiesLock)
+			{
+				// recheck for a lost race after aquiring the lock
+				if (_properties != null) return;
+				
+				_properties = new System.ComponentModel.PropertyDescriptor[] {
+					// else
+					new CustomPropertyDescriptor<CurrentSchema__Implementation__, string>(
+						lazyCtx,
+						new Guid("175143b9-dd09-4b49-a633-e9cdb508c4c5"),
+						"Schema",
+						null,
+						obj => obj.Schema,
+						(obj, val) => obj.Schema = val),
+					// else
+					new CustomPropertyDescriptor<CurrentSchema__Implementation__, int>(
+						lazyCtx,
+						new Guid("193c24c4-5a42-418e-8ed8-6e1689beca50"),
+						"Version",
+						null,
+						obj => obj.Version,
+						(obj, val) => obj.Version = val),
+				};
+			}
+		}
+		
+		protected override void CollectProperties(Func<IReadOnlyKistlContext> lazyCtx, List<System.ComponentModel.PropertyDescriptor> props)
 		{
 			base.CollectProperties(props);
+			_InitializePropertyDescriptors(lazyCtx);
 			props.AddRange(_properties);
 		}
 	

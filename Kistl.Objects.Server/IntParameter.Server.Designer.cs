@@ -26,9 +26,15 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("IntParameter")]
     public class IntParameter__Implementation__ : Kistl.App.Base.BaseParameter__Implementation__, IntParameter
     {
-    
-		public IntParameter__Implementation__()
-		{
+        [Obsolete]
+        public IntParameter__Implementation__()
+            : base(null)
+        {
+        }
+
+        public IntParameter__Implementation__(Func<IReadOnlyKistlContext> lazyCtx)
+            : base(lazyCtx)
+        {
         }
 
 
@@ -74,10 +80,10 @@ namespace Kistl.App.Base
 
 
 
-		public override Type GetImplementedInterface()
-		{
-			return typeof(IntParameter);
-		}
+        public override Type GetImplementedInterface()
+        {
+            return typeof(IntParameter);
+        }
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{

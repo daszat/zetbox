@@ -26,9 +26,15 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("CalculatedObjectReferenceProperty")]
     public class CalculatedObjectReferenceProperty__Implementation__ : Kistl.App.Base.Property__Implementation__, CalculatedObjectReferenceProperty
     {
-    
-		public CalculatedObjectReferenceProperty__Implementation__()
-		{
+        [Obsolete]
+        public CalculatedObjectReferenceProperty__Implementation__()
+            : base(null)
+        {
+        }
+
+        public CalculatedObjectReferenceProperty__Implementation__(Func<IReadOnlyKistlContext> lazyCtx)
+            : base(lazyCtx)
+        {
         }
 
 
@@ -215,10 +221,10 @@ namespace Kistl.App.Base
 
 
 
-		public override Type GetImplementedInterface()
-		{
-			return typeof(CalculatedObjectReferenceProperty);
-		}
+        public override Type GetImplementedInterface()
+        {
+            return typeof(CalculatedObjectReferenceProperty);
+        }
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{
@@ -280,27 +286,43 @@ namespace Kistl.App.Base
         public static event ObjectEventHandler<CalculatedObjectReferenceProperty> OnDeleting_CalculatedObjectReferenceProperty;
 
 
-		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
-			new CustomPropertyDescriptor<CalculatedObjectReferenceProperty__Implementation__, ICollection<Kistl.App.Base.Property>>(
-				new Guid("bfda6511-087d-4381-9780-1f76f3abcffe"),
-				"Inputs",
-				null,
-				obj => obj.Inputs,
-				null), // lists are read-only properties
-			// else
-			new CustomPropertyDescriptor<CalculatedObjectReferenceProperty__Implementation__, Kistl.App.Base.ObjectClass>(
-				new Guid("cd62d769-0752-4a72-832f-5935ece1198b"),
-				"ReferencedClass",
-				null,
-				obj => obj.ReferencedClass,
-				(obj, val) => obj.ReferencedClass = val),
-			// rel: CalculatedReference references ReferencedClass (6c207cc8-d6a2-49b5-81f3-743d261b7411)
-		};
+		private static readonly object _propertiesLock = new object();
+		private static System.ComponentModel.PropertyDescriptor[] _properties;
 		
-		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
+		private void _InitializePropertyDescriptors(Func<IReadOnlyKistlContext> lazyCtx)
+		{
+			if (_properties != null) return;
+			lock (_propertiesLock)
+			{
+				// recheck for a lost race after aquiring the lock
+				if (_properties != null) return;
+				
+				_properties = new System.ComponentModel.PropertyDescriptor[] {
+					// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
+					new CustomPropertyDescriptor<CalculatedObjectReferenceProperty__Implementation__, ICollection<Kistl.App.Base.Property>>(
+						lazyCtx,
+						new Guid("bfda6511-087d-4381-9780-1f76f3abcffe"),
+						"Inputs",
+						null,
+						obj => obj.Inputs,
+						null), // lists are read-only properties
+					// else
+					new CustomPropertyDescriptor<CalculatedObjectReferenceProperty__Implementation__, Kistl.App.Base.ObjectClass>(
+						lazyCtx,
+						new Guid("cd62d769-0752-4a72-832f-5935ece1198b"),
+						"ReferencedClass",
+						null,
+						obj => obj.ReferencedClass,
+						(obj, val) => obj.ReferencedClass = val),
+					// rel: CalculatedReference references ReferencedClass (6c207cc8-d6a2-49b5-81f3-743d261b7411)
+				};
+			}
+		}
+		
+		protected override void CollectProperties(Func<IReadOnlyKistlContext> lazyCtx, List<System.ComponentModel.PropertyDescriptor> props)
 		{
 			base.CollectProperties(props);
+			_InitializePropertyDescriptors(lazyCtx);
 			props.AddRange(_properties);
 		}
 	

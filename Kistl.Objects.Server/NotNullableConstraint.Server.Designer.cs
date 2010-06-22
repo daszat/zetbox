@@ -26,9 +26,15 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("NotNullableConstraint")]
     public class NotNullableConstraint__Implementation__ : Kistl.App.Base.Constraint__Implementation__, NotNullableConstraint
     {
-    
-		public NotNullableConstraint__Implementation__()
-		{
+        [Obsolete]
+        public NotNullableConstraint__Implementation__()
+            : base(null)
+        {
+        }
+
+        public NotNullableConstraint__Implementation__(Func<IReadOnlyKistlContext> lazyCtx)
+            : base(lazyCtx)
+        {
         }
 
 
@@ -74,10 +80,10 @@ namespace Kistl.App.Base
 
 
 
-		public override Type GetImplementedInterface()
-		{
-			return typeof(NotNullableConstraint);
-		}
+        public override Type GetImplementedInterface()
+        {
+            return typeof(NotNullableConstraint);
+        }
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{

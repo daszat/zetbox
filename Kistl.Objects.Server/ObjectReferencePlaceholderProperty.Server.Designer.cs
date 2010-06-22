@@ -26,9 +26,15 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("ObjectReferencePlaceholderProperty")]
     public class ObjectReferencePlaceholderProperty__Implementation__ : Kistl.App.Base.Property__Implementation__, ObjectReferencePlaceholderProperty
     {
-    
-		public ObjectReferencePlaceholderProperty__Implementation__()
-		{
+        [Obsolete]
+        public ObjectReferencePlaceholderProperty__Implementation__()
+            : base(null)
+        {
+        }
+
+        public ObjectReferencePlaceholderProperty__Implementation__(Func<IReadOnlyKistlContext> lazyCtx)
+            : base(lazyCtx)
+        {
         }
 
 
@@ -425,10 +431,10 @@ namespace Kistl.App.Base
 
 
 
-		public override Type GetImplementedInterface()
-		{
-			return typeof(ObjectReferencePlaceholderProperty);
-		}
+        public override Type GetImplementedInterface()
+        {
+            return typeof(ObjectReferencePlaceholderProperty);
+        }
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{
@@ -495,55 +501,75 @@ namespace Kistl.App.Base
         public static event ObjectEventHandler<ObjectReferencePlaceholderProperty> OnDeleting_ObjectReferencePlaceholderProperty;
 
 
-		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			// else
-			new CustomPropertyDescriptor<ObjectReferencePlaceholderProperty__Implementation__, bool>(
-				new Guid("7e52aa2a-aa3a-4f5b-8171-c6c2f364108b"),
-				"HasPersistentOrder",
-				null,
-				obj => obj.HasPersistentOrder,
-				(obj, val) => obj.HasPersistentOrder = val),
-			// else
-			new CustomPropertyDescriptor<ObjectReferencePlaceholderProperty__Implementation__, string>(
-				new Guid("b5fa31d8-ad30-4aeb-b5a0-8b4b117b1d29"),
-				"ImplementorRoleName",
-				null,
-				obj => obj.ImplementorRoleName,
-				(obj, val) => obj.ImplementorRoleName = val),
-			// else
-			new CustomPropertyDescriptor<ObjectReferencePlaceholderProperty__Implementation__, bool>(
-				new Guid("52692870-0bd4-47b6-99dc-eb8bf4238f24"),
-				"IsList",
-				null,
-				obj => obj.IsList,
-				(obj, val) => obj.IsList = val),
-			// else
-			new CustomPropertyDescriptor<ObjectReferencePlaceholderProperty__Implementation__, string>(
-				new Guid("06d56d44-bc5f-428b-a6b5-4348573425f9"),
-				"ItemRoleName",
-				null,
-				obj => obj.ItemRoleName,
-				(obj, val) => obj.ItemRoleName = val),
-			// else
-			new CustomPropertyDescriptor<ObjectReferencePlaceholderProperty__Implementation__, Kistl.App.Base.ObjectClass>(
-				new Guid("41da7ae6-aff7-44cf-83be-6150bf7578fd"),
-				"ReferencedObjectClass",
-				null,
-				obj => obj.ReferencedObjectClass,
-				(obj, val) => obj.ReferencedObjectClass = val),
-			// else
-			new CustomPropertyDescriptor<ObjectReferencePlaceholderProperty__Implementation__, string>(
-				new Guid("dd98c4f1-bf83-4d9a-8885-546457fc6591"),
-				"Verb",
-				null,
-				obj => obj.Verb,
-				(obj, val) => obj.Verb = val),
-			// rel: ObjectReferencePlaceholderProperty ofType ReferencedObjectClass (47ccedbe-6cfa-4810-8b8e-c064b8434f3f)
-		};
+		private static readonly object _propertiesLock = new object();
+		private static System.ComponentModel.PropertyDescriptor[] _properties;
 		
-		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
+		private void _InitializePropertyDescriptors(Func<IReadOnlyKistlContext> lazyCtx)
+		{
+			if (_properties != null) return;
+			lock (_propertiesLock)
+			{
+				// recheck for a lost race after aquiring the lock
+				if (_properties != null) return;
+				
+				_properties = new System.ComponentModel.PropertyDescriptor[] {
+					// else
+					new CustomPropertyDescriptor<ObjectReferencePlaceholderProperty__Implementation__, bool>(
+						lazyCtx,
+						new Guid("7e52aa2a-aa3a-4f5b-8171-c6c2f364108b"),
+						"HasPersistentOrder",
+						null,
+						obj => obj.HasPersistentOrder,
+						(obj, val) => obj.HasPersistentOrder = val),
+					// else
+					new CustomPropertyDescriptor<ObjectReferencePlaceholderProperty__Implementation__, string>(
+						lazyCtx,
+						new Guid("b5fa31d8-ad30-4aeb-b5a0-8b4b117b1d29"),
+						"ImplementorRoleName",
+						null,
+						obj => obj.ImplementorRoleName,
+						(obj, val) => obj.ImplementorRoleName = val),
+					// else
+					new CustomPropertyDescriptor<ObjectReferencePlaceholderProperty__Implementation__, bool>(
+						lazyCtx,
+						new Guid("52692870-0bd4-47b6-99dc-eb8bf4238f24"),
+						"IsList",
+						null,
+						obj => obj.IsList,
+						(obj, val) => obj.IsList = val),
+					// else
+					new CustomPropertyDescriptor<ObjectReferencePlaceholderProperty__Implementation__, string>(
+						lazyCtx,
+						new Guid("06d56d44-bc5f-428b-a6b5-4348573425f9"),
+						"ItemRoleName",
+						null,
+						obj => obj.ItemRoleName,
+						(obj, val) => obj.ItemRoleName = val),
+					// else
+					new CustomPropertyDescriptor<ObjectReferencePlaceholderProperty__Implementation__, Kistl.App.Base.ObjectClass>(
+						lazyCtx,
+						new Guid("41da7ae6-aff7-44cf-83be-6150bf7578fd"),
+						"ReferencedObjectClass",
+						null,
+						obj => obj.ReferencedObjectClass,
+						(obj, val) => obj.ReferencedObjectClass = val),
+					// else
+					new CustomPropertyDescriptor<ObjectReferencePlaceholderProperty__Implementation__, string>(
+						lazyCtx,
+						new Guid("dd98c4f1-bf83-4d9a-8885-546457fc6591"),
+						"Verb",
+						null,
+						obj => obj.Verb,
+						(obj, val) => obj.Verb = val),
+					// rel: ObjectReferencePlaceholderProperty ofType ReferencedObjectClass (47ccedbe-6cfa-4810-8b8e-c064b8434f3f)
+				};
+			}
+		}
+		
+		protected override void CollectProperties(Func<IReadOnlyKistlContext> lazyCtx, List<System.ComponentModel.PropertyDescriptor> props)
 		{
 			base.CollectProperties(props);
+			_InitializePropertyDescriptors(lazyCtx);
 			props.AddRange(_properties);
 		}
 	

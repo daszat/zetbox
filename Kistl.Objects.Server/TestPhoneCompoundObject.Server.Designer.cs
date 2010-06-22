@@ -26,9 +26,15 @@ namespace Kistl.App.Test
     [System.Diagnostics.DebuggerDisplay("TestPhoneCompoundObject")]
     public class TestPhoneCompoundObject__Implementation__ : BaseServerCompoundObject_EntityFramework, ICompoundObject, TestPhoneCompoundObject
     {
-    
-		public TestPhoneCompoundObject__Implementation__()
-		{
+        [Obsolete]
+        public TestPhoneCompoundObject__Implementation__()
+            : base(null)
+        {
+        }
+
+        public TestPhoneCompoundObject__Implementation__(Func<IReadOnlyKistlContext> lazyCtx)
+            : base(lazyCtx)
+        {
         }
 
 
@@ -136,11 +142,12 @@ namespace Kistl.App.Test
 		public static event PropertyPreSetterHandler<Kistl.App.Test.TestPhoneCompoundObject, string> OnNumber_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Test.TestPhoneCompoundObject, string> OnNumber_PostSetter;
 
-		public override Type GetImplementedInterface()
-		{
-			return typeof(TestPhoneCompoundObject);
-		}
+        public override Type GetImplementedInterface()
+        {
+            return typeof(TestPhoneCompoundObject);
+        }
         public TestPhoneCompoundObject__Implementation__(bool isNull, IPersistenceObject parent, string property)
+            : base(null) // TODO: pass parent's lazyCtx
         {
             AttachToObject(parent, property);
             CompoundObject_IsNull = isNull;

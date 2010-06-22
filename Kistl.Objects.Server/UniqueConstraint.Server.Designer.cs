@@ -26,9 +26,15 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("UniqueConstraint")]
     public class UniqueConstraint__Implementation__ : Kistl.App.Base.InstanceConstraint__Implementation__, UniqueConstraint
     {
-    
-		public UniqueConstraint__Implementation__()
-		{
+        [Obsolete]
+        public UniqueConstraint__Implementation__()
+            : base(null)
+        {
+        }
+
+        public UniqueConstraint__Implementation__(Func<IReadOnlyKistlContext> lazyCtx)
+            : base(lazyCtx)
+        {
         }
 
 
@@ -123,10 +129,10 @@ namespace Kistl.App.Base
 
 
 
-		public override Type GetImplementedInterface()
-		{
-			return typeof(UniqueConstraint);
-		}
+        public override Type GetImplementedInterface()
+        {
+            return typeof(UniqueConstraint);
+        }
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{
@@ -187,19 +193,34 @@ namespace Kistl.App.Base
         public static event ObjectEventHandler<UniqueConstraint> OnDeleting_UniqueConstraint;
 
 
-		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
-			new CustomPropertyDescriptor<UniqueConstraint__Implementation__, ICollection<Kistl.App.Base.Property>>(
-				new Guid("3e4bfd37-1037-472b-a5d7-2c20a777e6fd"),
-				"Properties",
-				null,
-				obj => obj.Properties,
-				null), // lists are read-only properties
-		};
+		private static readonly object _propertiesLock = new object();
+		private static System.ComponentModel.PropertyDescriptor[] _properties;
 		
-		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
+		private void _InitializePropertyDescriptors(Func<IReadOnlyKistlContext> lazyCtx)
+		{
+			if (_properties != null) return;
+			lock (_propertiesLock)
+			{
+				// recheck for a lost race after aquiring the lock
+				if (_properties != null) return;
+				
+				_properties = new System.ComponentModel.PropertyDescriptor[] {
+					// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
+					new CustomPropertyDescriptor<UniqueConstraint__Implementation__, ICollection<Kistl.App.Base.Property>>(
+						lazyCtx,
+						new Guid("3e4bfd37-1037-472b-a5d7-2c20a777e6fd"),
+						"Properties",
+						null,
+						obj => obj.Properties,
+						null), // lists are read-only properties
+				};
+			}
+		}
+		
+		protected override void CollectProperties(Func<IReadOnlyKistlContext> lazyCtx, List<System.ComponentModel.PropertyDescriptor> props)
 		{
 			base.CollectProperties(props);
+			_InitializePropertyDescriptors(lazyCtx);
 			props.AddRange(_properties);
 		}
 	

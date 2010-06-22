@@ -26,9 +26,15 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("Blob")]
     public class Blob__Implementation__ : BaseServerDataObject_EntityFramework, Blob, Kistl.API.IExportableInternal
     {
-    
-		public Blob__Implementation__()
-		{
+        [Obsolete]
+        public Blob__Implementation__()
+            : base(null)
+        {
+        }
+
+        public Blob__Implementation__(Func<IReadOnlyKistlContext> lazyCtx)
+            : base(lazyCtx)
+        {
         }
 
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
@@ -605,10 +611,10 @@ namespace Kistl.App.Base
 
 
 
-		public override Type GetImplementedInterface()
-		{
-			return typeof(Blob);
-		}
+        public override Type GetImplementedInterface()
+        {
+            return typeof(Blob);
+        }
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{
@@ -677,71 +683,93 @@ namespace Kistl.App.Base
         public static event ObjectEventHandler<Blob> OnDeleting_Blob;
 
 
-		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			// else
-			new CustomPropertyDescriptor<Blob__Implementation__, Kistl.App.Base.Identity>(
-				new Guid("ba5667b5-4306-42cb-8833-45932490ffe0"),
-				"ChangedBy",
-				null,
-				obj => obj.ChangedBy,
-				(obj, val) => obj.ChangedBy = val),
-			// else
-			new CustomPropertyDescriptor<Blob__Implementation__, DateTime?>(
-				new Guid("bd06a19d-16a6-4234-a1cd-79d09e317d92"),
-				"ChangedOn",
-				null,
-				obj => obj.ChangedOn,
-				(obj, val) => obj.ChangedOn = val),
-			// else
-			new CustomPropertyDescriptor<Blob__Implementation__, Kistl.App.Base.Identity>(
-				new Guid("1125d9cf-dcc5-4e70-9a3b-308b2f84ddb6"),
-				"CreatedBy",
-				null,
-				obj => obj.CreatedBy,
-				(obj, val) => obj.CreatedBy = val),
-			// else
-			new CustomPropertyDescriptor<Blob__Implementation__, DateTime?>(
-				new Guid("9cc23a89-9bc3-4feb-bc56-82c696be80ba"),
-				"CreatedOn",
-				null,
-				obj => obj.CreatedOn,
-				(obj, val) => obj.CreatedOn = val),
-			// else
-			new CustomPropertyDescriptor<Blob__Implementation__, Guid>(
-				new Guid("0e39b312-faa7-4ee4-92a4-41773ccbd394"),
-				"ExportGuid",
-				null,
-				obj => obj.ExportGuid,
-				(obj, val) => obj.ExportGuid = val),
-			// else
-			new CustomPropertyDescriptor<Blob__Implementation__, string>(
-				new Guid("182a7118-5123-4d5f-b623-205e38573e8e"),
-				"MimeType",
-				null,
-				obj => obj.MimeType,
-				(obj, val) => obj.MimeType = val),
-			// else
-			new CustomPropertyDescriptor<Blob__Implementation__, string>(
-				new Guid("c1f449e2-9532-4093-8667-6ba5f7372892"),
-				"OriginalName",
-				null,
-				obj => obj.OriginalName,
-				(obj, val) => obj.OriginalName = val),
-			// else
-			new CustomPropertyDescriptor<Blob__Implementation__, string>(
-				new Guid("bd8eaefd-0684-4c05-a6b5-6f4d97017e6c"),
-				"StoragePath",
-				null,
-				obj => obj.StoragePath,
-				(obj, val) => obj.StoragePath = val),
-			// rel: Document was CreatedBy (40257114-de1a-493c-998e-18484521fb8c)
-			// rel: Document was ChangedBy (5b930212-f85a-4be9-9882-437cca6ffe0d)
-			// rel: File has Blob (d93a4ed6-3b8b-44f7-b839-f528d1c06abd)
-		};
+		private static readonly object _propertiesLock = new object();
+		private static System.ComponentModel.PropertyDescriptor[] _properties;
 		
-		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
+		private void _InitializePropertyDescriptors(Func<IReadOnlyKistlContext> lazyCtx)
+		{
+			if (_properties != null) return;
+			lock (_propertiesLock)
+			{
+				// recheck for a lost race after aquiring the lock
+				if (_properties != null) return;
+				
+				_properties = new System.ComponentModel.PropertyDescriptor[] {
+					// else
+					new CustomPropertyDescriptor<Blob__Implementation__, Kistl.App.Base.Identity>(
+						lazyCtx,
+						new Guid("ba5667b5-4306-42cb-8833-45932490ffe0"),
+						"ChangedBy",
+						null,
+						obj => obj.ChangedBy,
+						(obj, val) => obj.ChangedBy = val),
+					// else
+					new CustomPropertyDescriptor<Blob__Implementation__, DateTime?>(
+						lazyCtx,
+						new Guid("bd06a19d-16a6-4234-a1cd-79d09e317d92"),
+						"ChangedOn",
+						null,
+						obj => obj.ChangedOn,
+						(obj, val) => obj.ChangedOn = val),
+					// else
+					new CustomPropertyDescriptor<Blob__Implementation__, Kistl.App.Base.Identity>(
+						lazyCtx,
+						new Guid("1125d9cf-dcc5-4e70-9a3b-308b2f84ddb6"),
+						"CreatedBy",
+						null,
+						obj => obj.CreatedBy,
+						(obj, val) => obj.CreatedBy = val),
+					// else
+					new CustomPropertyDescriptor<Blob__Implementation__, DateTime?>(
+						lazyCtx,
+						new Guid("9cc23a89-9bc3-4feb-bc56-82c696be80ba"),
+						"CreatedOn",
+						null,
+						obj => obj.CreatedOn,
+						(obj, val) => obj.CreatedOn = val),
+					// else
+					new CustomPropertyDescriptor<Blob__Implementation__, Guid>(
+						lazyCtx,
+						new Guid("0e39b312-faa7-4ee4-92a4-41773ccbd394"),
+						"ExportGuid",
+						null,
+						obj => obj.ExportGuid,
+						(obj, val) => obj.ExportGuid = val),
+					// else
+					new CustomPropertyDescriptor<Blob__Implementation__, string>(
+						lazyCtx,
+						new Guid("182a7118-5123-4d5f-b623-205e38573e8e"),
+						"MimeType",
+						null,
+						obj => obj.MimeType,
+						(obj, val) => obj.MimeType = val),
+					// else
+					new CustomPropertyDescriptor<Blob__Implementation__, string>(
+						lazyCtx,
+						new Guid("c1f449e2-9532-4093-8667-6ba5f7372892"),
+						"OriginalName",
+						null,
+						obj => obj.OriginalName,
+						(obj, val) => obj.OriginalName = val),
+					// else
+					new CustomPropertyDescriptor<Blob__Implementation__, string>(
+						lazyCtx,
+						new Guid("bd8eaefd-0684-4c05-a6b5-6f4d97017e6c"),
+						"StoragePath",
+						null,
+						obj => obj.StoragePath,
+						(obj, val) => obj.StoragePath = val),
+					// rel: Document was CreatedBy (40257114-de1a-493c-998e-18484521fb8c)
+					// rel: Document was ChangedBy (5b930212-f85a-4be9-9882-437cca6ffe0d)
+					// rel: File has Blob (d93a4ed6-3b8b-44f7-b839-f528d1c06abd)
+				};
+			}
+		}
+		
+		protected override void CollectProperties(Func<IReadOnlyKistlContext> lazyCtx, List<System.ComponentModel.PropertyDescriptor> props)
 		{
 			base.CollectProperties(props);
+			_InitializePropertyDescriptors(lazyCtx);
 			props.AddRange(_properties);
 		}
 	

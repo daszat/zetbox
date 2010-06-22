@@ -44,6 +44,8 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.CompoundObjects
             // attach compound to parent object
             this.WriteObjects("        public ", clsName, "(IPersistenceObject parent, string property)");
             this.WriteLine();
+            this.WriteObjects("            : base(null) // TODO: pass parent's lazyCtx");
+            this.WriteLine();
             this.WriteObjects("        {");
             this.WriteLine();
             this.WriteObjects("            AttachToObject(parent, property);");

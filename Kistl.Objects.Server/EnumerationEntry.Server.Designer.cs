@@ -26,9 +26,15 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("EnumerationEntry")]
     public class EnumerationEntry__Implementation__ : BaseServerDataObject_EntityFramework, EnumerationEntry, Kistl.API.IExportableInternal
     {
-    
-		public EnumerationEntry__Implementation__()
-		{
+        [Obsolete]
+        public EnumerationEntry__Implementation__()
+            : base(null)
+        {
+        }
+
+        public EnumerationEntry__Implementation__(Func<IReadOnlyKistlContext> lazyCtx)
+            : base(lazyCtx)
+        {
         }
 
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
@@ -653,10 +659,10 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.EnumerationEntry, int> OnValue_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.EnumerationEntry, int> OnValue_PostSetter;
 
-		public override Type GetImplementedInterface()
-		{
-			return typeof(EnumerationEntry);
-		}
+        public override Type GetImplementedInterface()
+        {
+            return typeof(EnumerationEntry);
+        }
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{
@@ -726,78 +732,101 @@ namespace Kistl.App.Base
         public static event ObjectEventHandler<EnumerationEntry> OnDeleting_EnumerationEntry;
 
 
-		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			// else
-			new CustomPropertyDescriptor<EnumerationEntry__Implementation__, Kistl.App.Base.Identity>(
-				new Guid("6f71765b-503a-4ad3-a07b-cea9f2930a84"),
-				"ChangedBy",
-				null,
-				obj => obj.ChangedBy,
-				(obj, val) => obj.ChangedBy = val),
-			// else
-			new CustomPropertyDescriptor<EnumerationEntry__Implementation__, DateTime?>(
-				new Guid("2a1f2193-427f-497b-9f24-8154d789b77b"),
-				"ChangedOn",
-				null,
-				obj => obj.ChangedOn,
-				(obj, val) => obj.ChangedOn = val),
-			// else
-			new CustomPropertyDescriptor<EnumerationEntry__Implementation__, Kistl.App.Base.Identity>(
-				new Guid("d8f94106-ec4f-4604-aaff-8e2f5b4019ba"),
-				"CreatedBy",
-				null,
-				obj => obj.CreatedBy,
-				(obj, val) => obj.CreatedBy = val),
-			// else
-			new CustomPropertyDescriptor<EnumerationEntry__Implementation__, DateTime?>(
-				new Guid("e0091bc7-656a-46fd-a1ff-b542b10a4472"),
-				"CreatedOn",
-				null,
-				obj => obj.CreatedOn,
-				(obj, val) => obj.CreatedOn = val),
-			// else
-			new CustomPropertyDescriptor<EnumerationEntry__Implementation__, string>(
-				new Guid("3366c523-0593-4a29-978f-5ac8a4f15eca"),
-				"Description",
-				null,
-				obj => obj.Description,
-				(obj, val) => obj.Description = val),
-			// else
-			new CustomPropertyDescriptor<EnumerationEntry__Implementation__, Kistl.App.Base.Enumeration>(
-				new Guid("115c3bfb-72fd-46f2-81fe-74ce1cfa1874"),
-				"Enumeration",
-				null,
-				obj => obj.Enumeration,
-				(obj, val) => obj.Enumeration = val),
-			// else
-			new CustomPropertyDescriptor<EnumerationEntry__Implementation__, Guid>(
-				new Guid("9cee8923-5189-4e1e-b752-a87be1968491"),
-				"ExportGuid",
-				null,
-				obj => obj.ExportGuid,
-				(obj, val) => obj.ExportGuid = val),
-			// else
-			new CustomPropertyDescriptor<EnumerationEntry__Implementation__, string>(
-				new Guid("1c1e497b-294f-442e-8793-478b298d4aba"),
-				"Name",
-				null,
-				obj => obj.Name,
-				(obj, val) => obj.Name = val),
-			// else
-			new CustomPropertyDescriptor<EnumerationEntry__Implementation__, int>(
-				new Guid("2fea1d2e-d5ed-457f-9828-4df8c3d3d3aa"),
-				"Value",
-				null,
-				obj => obj.Value,
-				(obj, val) => obj.Value = val),
-			// rel: Enumeration has EnumerationEntries (55bd59b8-ad37-4837-b066-d505f86316fe)
-			// rel: EnumerationEntry was ChangedBy (20d04b3c-9357-440f-96e9-7056736d6ca3)
-			// rel: EnumerationEntry was CreatedBy (c4b36682-947b-4c4a-802f-7618e3b0c3c3)
-		};
+		private static readonly object _propertiesLock = new object();
+		private static System.ComponentModel.PropertyDescriptor[] _properties;
 		
-		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
+		private void _InitializePropertyDescriptors(Func<IReadOnlyKistlContext> lazyCtx)
+		{
+			if (_properties != null) return;
+			lock (_propertiesLock)
+			{
+				// recheck for a lost race after aquiring the lock
+				if (_properties != null) return;
+				
+				_properties = new System.ComponentModel.PropertyDescriptor[] {
+					// else
+					new CustomPropertyDescriptor<EnumerationEntry__Implementation__, Kistl.App.Base.Identity>(
+						lazyCtx,
+						new Guid("6f71765b-503a-4ad3-a07b-cea9f2930a84"),
+						"ChangedBy",
+						null,
+						obj => obj.ChangedBy,
+						(obj, val) => obj.ChangedBy = val),
+					// else
+					new CustomPropertyDescriptor<EnumerationEntry__Implementation__, DateTime?>(
+						lazyCtx,
+						new Guid("2a1f2193-427f-497b-9f24-8154d789b77b"),
+						"ChangedOn",
+						null,
+						obj => obj.ChangedOn,
+						(obj, val) => obj.ChangedOn = val),
+					// else
+					new CustomPropertyDescriptor<EnumerationEntry__Implementation__, Kistl.App.Base.Identity>(
+						lazyCtx,
+						new Guid("d8f94106-ec4f-4604-aaff-8e2f5b4019ba"),
+						"CreatedBy",
+						null,
+						obj => obj.CreatedBy,
+						(obj, val) => obj.CreatedBy = val),
+					// else
+					new CustomPropertyDescriptor<EnumerationEntry__Implementation__, DateTime?>(
+						lazyCtx,
+						new Guid("e0091bc7-656a-46fd-a1ff-b542b10a4472"),
+						"CreatedOn",
+						null,
+						obj => obj.CreatedOn,
+						(obj, val) => obj.CreatedOn = val),
+					// else
+					new CustomPropertyDescriptor<EnumerationEntry__Implementation__, string>(
+						lazyCtx,
+						new Guid("3366c523-0593-4a29-978f-5ac8a4f15eca"),
+						"Description",
+						null,
+						obj => obj.Description,
+						(obj, val) => obj.Description = val),
+					// else
+					new CustomPropertyDescriptor<EnumerationEntry__Implementation__, Kistl.App.Base.Enumeration>(
+						lazyCtx,
+						new Guid("115c3bfb-72fd-46f2-81fe-74ce1cfa1874"),
+						"Enumeration",
+						null,
+						obj => obj.Enumeration,
+						(obj, val) => obj.Enumeration = val),
+					// else
+					new CustomPropertyDescriptor<EnumerationEntry__Implementation__, Guid>(
+						lazyCtx,
+						new Guid("9cee8923-5189-4e1e-b752-a87be1968491"),
+						"ExportGuid",
+						null,
+						obj => obj.ExportGuid,
+						(obj, val) => obj.ExportGuid = val),
+					// else
+					new CustomPropertyDescriptor<EnumerationEntry__Implementation__, string>(
+						lazyCtx,
+						new Guid("1c1e497b-294f-442e-8793-478b298d4aba"),
+						"Name",
+						null,
+						obj => obj.Name,
+						(obj, val) => obj.Name = val),
+					// else
+					new CustomPropertyDescriptor<EnumerationEntry__Implementation__, int>(
+						lazyCtx,
+						new Guid("2fea1d2e-d5ed-457f-9828-4df8c3d3d3aa"),
+						"Value",
+						null,
+						obj => obj.Value,
+						(obj, val) => obj.Value = val),
+					// rel: Enumeration has EnumerationEntries (55bd59b8-ad37-4837-b066-d505f86316fe)
+					// rel: EnumerationEntry was ChangedBy (20d04b3c-9357-440f-96e9-7056736d6ca3)
+					// rel: EnumerationEntry was CreatedBy (c4b36682-947b-4c4a-802f-7618e3b0c3c3)
+				};
+			}
+		}
+		
+		protected override void CollectProperties(Func<IReadOnlyKistlContext> lazyCtx, List<System.ComponentModel.PropertyDescriptor> props)
 		{
 			base.CollectProperties(props);
+			_InitializePropertyDescriptors(lazyCtx);
 			props.AddRange(_properties);
 		}
 	

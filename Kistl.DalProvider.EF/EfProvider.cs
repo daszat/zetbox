@@ -47,7 +47,13 @@ namespace Kistl.DalProvider.EF
                     // EF's meta data initialization is not thread-safe
                     lock (_lock)
                     {
-                        return new KistlDataContext(c.Resolve<IMetaDataResolver>(), null, c.Resolve<KistlConfig>(), c.Resolve<ITypeTransformations>());
+                        return new KistlDataContext(
+                            c.Resolve<IMetaDataResolver>(),
+                            null,
+                            c.Resolve<KistlConfig>(),
+                            c.Resolve<ITypeTransformations>(),
+                            c.Resolve<Func<IReadOnlyKistlContext>>(Kistl.API.Helper.FrozenContextServiceName)
+                            );
                     }
                 })
                 .As<IKistlServerContext>()
@@ -63,7 +69,10 @@ namespace Kistl.DalProvider.EF
                         return new KistlDataContext(
                             c.Resolve<IMetaDataResolver>(),
                             param != null ? (Kistl.App.Base.Identity)param.Value : c.Resolve<IIdentityResolver>().GetCurrent(),
-                            c.Resolve<KistlConfig>(), c.Resolve<ITypeTransformations>());
+                            c.Resolve<KistlConfig>(),
+                            c.Resolve<ITypeTransformations>(),
+                            c.Resolve<Func<IReadOnlyKistlContext>>(Kistl.API.Helper.FrozenContextServiceName)
+                            );
                     }
                 })
                 .As<IKistlContext>()
@@ -76,7 +85,13 @@ namespace Kistl.DalProvider.EF
                     lock (_lock)
                     {
                         var resolver = new CachingMetaDataResolver();
-                        var result = new KistlDataContext(resolver, null, c.Resolve<KistlConfig>(), c.Resolve<ITypeTransformations>());
+                        var result = new KistlDataContext(
+                            resolver, 
+                            null, 
+                            c.Resolve<KistlConfig>(),
+                            c.Resolve<ITypeTransformations>(),
+                            c.Resolve<Func<IReadOnlyKistlContext>>(Kistl.API.Helper.FrozenContextServiceName)
+                            );
                         resolver.Context = result;
                         return result;
                     }

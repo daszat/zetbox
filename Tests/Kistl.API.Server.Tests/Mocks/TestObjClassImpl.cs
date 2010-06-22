@@ -14,6 +14,7 @@ namespace Kistl.API.Server.Mocks
     {
 
         public TestObjClass__Implementation__()
+            : base(null)
         {
             SubClasses = new List<TestObjClass>();
             TestNames__Implementation__ = new List<TestObjClass_TestNameCollectionEntry__Implementation__>();

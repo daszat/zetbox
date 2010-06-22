@@ -26,9 +26,15 @@ namespace Kistl.App.Test
     [System.Diagnostics.DebuggerDisplay("ANewObjectClass")]
     public class ANewObjectClass__Implementation__ : BaseServerDataObject_EntityFramework, ANewObjectClass
     {
-    
-		public ANewObjectClass__Implementation__()
-		{
+        [Obsolete]
+        public ANewObjectClass__Implementation__()
+            : base(null)
+        {
+        }
+
+        public ANewObjectClass__Implementation__(Func<IReadOnlyKistlContext> lazyCtx)
+            : base(lazyCtx)
+        {
         }
 
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
@@ -109,10 +115,10 @@ namespace Kistl.App.Test
 		public static event PropertyPreSetterHandler<Kistl.App.Test.ANewObjectClass, string> OnTestString_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Test.ANewObjectClass, string> OnTestString_PostSetter;
 
-		public override Type GetImplementedInterface()
-		{
-			return typeof(ANewObjectClass);
-		}
+        public override Type GetImplementedInterface()
+        {
+            return typeof(ANewObjectClass);
+        }
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{
@@ -174,19 +180,34 @@ namespace Kistl.App.Test
         public static event ObjectEventHandler<ANewObjectClass> OnDeleting_ANewObjectClass;
 
 
-		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			// else
-			new CustomPropertyDescriptor<ANewObjectClass__Implementation__, string>(
-				new Guid("e7371fa9-cd18-4cdc-91c3-a73c0984a019"),
-				"TestString",
-				null,
-				obj => obj.TestString,
-				(obj, val) => obj.TestString = val),
-		};
+		private static readonly object _propertiesLock = new object();
+		private static System.ComponentModel.PropertyDescriptor[] _properties;
 		
-		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
+		private void _InitializePropertyDescriptors(Func<IReadOnlyKistlContext> lazyCtx)
+		{
+			if (_properties != null) return;
+			lock (_propertiesLock)
+			{
+				// recheck for a lost race after aquiring the lock
+				if (_properties != null) return;
+				
+				_properties = new System.ComponentModel.PropertyDescriptor[] {
+					// else
+					new CustomPropertyDescriptor<ANewObjectClass__Implementation__, string>(
+						lazyCtx,
+						new Guid("e7371fa9-cd18-4cdc-91c3-a73c0984a019"),
+						"TestString",
+						null,
+						obj => obj.TestString,
+						(obj, val) => obj.TestString = val),
+				};
+			}
+		}
+		
+		protected override void CollectProperties(Func<IReadOnlyKistlContext> lazyCtx, List<System.ComponentModel.PropertyDescriptor> props)
 		{
 			base.CollectProperties(props);
+			_InitializePropertyDescriptors(lazyCtx);
 			props.AddRange(_properties);
 		}
 	

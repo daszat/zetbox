@@ -57,9 +57,18 @@ namespace <%= DataType.Module.Namespace %>
     [System.Diagnostics.DebuggerDisplay("<%= DataType.Name %>")]
     public<%= GetClassModifiers() %> class <%= mungedClassName %> <%= GetInheritance() %>
     {
-    
-		public <%= mungedClassName %>()
-		{
+        [Obsolete]
+        public <%= mungedClassName %>()
+            : base(null)
+        {
+<%
+            ApplyConstructorTemplate();
+%>
+        }
+
+        public <%= mungedClassName %>(Func<IReadOnlyKistlContext> lazyCtx)
+            : base(lazyCtx)
+        {
 <%
             ApplyConstructorTemplate();
 %>
@@ -68,7 +77,7 @@ namespace <%= DataType.Module.Namespace %>
 <%
         ApplyIDPropertyTemplate();
 
-		// TODO: decouple serializing format from Name order
+        // TODO: decouple serializing format from Name order
         foreach(Property p in DataType.Properties.OrderBy(p => p.Name))
         {
 %>
@@ -82,54 +91,54 @@ namespace <%= DataType.Module.Namespace %>
 
         foreach(var mg in MethodsToGenerate().GroupBy(m => m.Name).OrderBy(mg => mg.Key))
         {
-			int index = 0;
-			foreach(var m in mg.OrderByDefault())
-			{
+            int index = 0;
+            foreach(var m in mg.OrderByDefault())
+            {
 %>
 
         /// <summary>
         /// <%= m.Description %>
         /// </summary>
 <%
-				ApplyMethodTemplate(m, index++);
-			}
+                ApplyMethodTemplate(m, index++);
+            }
         }
 %>
 
-		public override Type GetImplementedInterface()
-		{
-			return typeof(<%= DataType.Name %>);
-		}
+        public override Type GetImplementedInterface()
+        {
+            return typeof(<%= DataType.Name %>);
+        }
 <%
-		ApplyApplyChangesFromMethod();
-		ApplyAttachToContextMethod();
+        ApplyApplyChangesFromMethod();
+        ApplyAttachToContextMethod();
         ApplyClassTailTemplate();
 %>
 
 #region Serializer
 
 <%
-		Implementation.ObjectClasses.SerializerTemplate.Call(Host, ctx,
-			SerializerDirection.ToStream, this.MembersToSerialize, true, false);
-		
-		Implementation.ObjectClasses.SerializerTemplate.Call(Host, ctx,
-			SerializerDirection.FromStream, this.MembersToSerialize, true, false);
+        Implementation.ObjectClasses.SerializerTemplate.Call(Host, ctx,
+            SerializerDirection.ToStream, this.MembersToSerialize, true, false);
+        
+        Implementation.ObjectClasses.SerializerTemplate.Call(Host, ctx,
+            SerializerDirection.FromStream, this.MembersToSerialize, true, false);
 
-		Implementation.ObjectClasses.SerializerTemplate.Call(Host, ctx,
-			SerializerDirection.ToXmlStream, this.MembersToSerialize, true, false);
-		
-		Implementation.ObjectClasses.SerializerTemplate.Call(Host, ctx,
-			SerializerDirection.FromXmlStream, this.MembersToSerialize, true, false);
+        Implementation.ObjectClasses.SerializerTemplate.Call(Host, ctx,
+            SerializerDirection.ToXmlStream, this.MembersToSerialize, true, false);
+        
+        Implementation.ObjectClasses.SerializerTemplate.Call(Host, ctx,
+            SerializerDirection.FromXmlStream, this.MembersToSerialize, true, false);
 
-		if((DataType is ObjectClass) && ((ObjectClass)DataType).ImplementsIExportable())
-		{
-			ObjectClass cls = (ObjectClass)DataType;			
-			Implementation.ObjectClasses.SerializerTemplate.Call(Host, ctx,
-				SerializerDirection.Export, this.MembersToSerialize, cls.BaseObjectClass != null, true);
-			
-			Implementation.ObjectClasses.SerializerTemplate.Call(Host, ctx,
-				SerializerDirection.MergeImport, this.MembersToSerialize, cls.BaseObjectClass != null, true);
-		}
+        if((DataType is ObjectClass) && ((ObjectClass)DataType).ImplementsIExportable())
+        {
+            ObjectClass cls = (ObjectClass)DataType;            
+            Implementation.ObjectClasses.SerializerTemplate.Call(Host, ctx,
+                SerializerDirection.Export, this.MembersToSerialize, cls.BaseObjectClass != null, true);
+            
+            Implementation.ObjectClasses.SerializerTemplate.Call(Host, ctx,
+                SerializerDirection.MergeImport, this.MembersToSerialize, cls.BaseObjectClass != null, true);
+        }
 %>
 
 #endregion

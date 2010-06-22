@@ -12,6 +12,10 @@ namespace Kistl.API
     /// </summary>
     public abstract class BaseCompoundObject : BaseNotifyingObject, ICompoundObject
     {
+        protected BaseCompoundObject(Func<IReadOnlyKistlContext> lazyCtx)
+            // ignore for now: base(lazyCtx)
+        {
+        }
 
         #region ICompoundObject Members
 

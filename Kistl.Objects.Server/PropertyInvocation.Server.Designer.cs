@@ -26,9 +26,15 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("PropertyInvocation")]
     public class PropertyInvocation__Implementation__ : BaseServerDataObject_EntityFramework, Kistl.API.IExportableInternal, PropertyInvocation
     {
-    
-		public PropertyInvocation__Implementation__()
-		{
+        [Obsolete]
+        public PropertyInvocation__Implementation__()
+            : base(null)
+        {
+        }
+
+        public PropertyInvocation__Implementation__(Func<IReadOnlyKistlContext> lazyCtx)
+            : base(lazyCtx)
+        {
         }
 
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
@@ -752,10 +758,10 @@ namespace Kistl.App.Base
 
 
 
-		public override Type GetImplementedInterface()
-		{
-			return typeof(PropertyInvocation);
-		}
+        public override Type GetImplementedInterface()
+        {
+            return typeof(PropertyInvocation);
+        }
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{
@@ -825,79 +831,102 @@ namespace Kistl.App.Base
         public static event ObjectEventHandler<PropertyInvocation> OnDeleting_PropertyInvocation;
 
 
-		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			// else
-			new CustomPropertyDescriptor<PropertyInvocation__Implementation__, Kistl.App.Base.Identity>(
-				new Guid("6122853b-d42a-4a8a-a4db-93a155a22ef4"),
-				"ChangedBy",
-				null,
-				obj => obj.ChangedBy,
-				(obj, val) => obj.ChangedBy = val),
-			// else
-			new CustomPropertyDescriptor<PropertyInvocation__Implementation__, DateTime?>(
-				new Guid("01872160-2d9b-4adc-92f5-05db7a4b5ce2"),
-				"ChangedOn",
-				null,
-				obj => obj.ChangedOn,
-				(obj, val) => obj.ChangedOn = val),
-			// else
-			new CustomPropertyDescriptor<PropertyInvocation__Implementation__, Kistl.App.Base.Identity>(
-				new Guid("f1244e40-b8ed-44d7-83aa-04a5f964229c"),
-				"CreatedBy",
-				null,
-				obj => obj.CreatedBy,
-				(obj, val) => obj.CreatedBy = val),
-			// else
-			new CustomPropertyDescriptor<PropertyInvocation__Implementation__, DateTime?>(
-				new Guid("04aa5c63-c9a0-4fb0-973b-81d8da9743b9"),
-				"CreatedOn",
-				null,
-				obj => obj.CreatedOn,
-				(obj, val) => obj.CreatedOn = val),
-			// else
-			new CustomPropertyDescriptor<PropertyInvocation__Implementation__, Guid>(
-				new Guid("e7504464-5cf0-4906-b12b-bbcf0deb789c"),
-				"ExportGuid",
-				null,
-				obj => obj.ExportGuid,
-				(obj, val) => obj.ExportGuid = val),
-			// else
-			new CustomPropertyDescriptor<PropertyInvocation__Implementation__, Kistl.App.Base.TypeRef>(
-				new Guid("00bfc51e-ea0e-4de1-9c56-ea8ccc0131c8"),
-				"Implementor",
-				null,
-				obj => obj.Implementor,
-				(obj, val) => obj.Implementor = val),
-			// else
-			new CustomPropertyDescriptor<PropertyInvocation__Implementation__, Kistl.App.Base.PropertyInvocationType>(
-				new Guid("8be56055-5530-4947-a2d4-cb0879e90ebd"),
-				"InvocationType",
-				null,
-				obj => obj.InvocationType,
-				(obj, val) => obj.InvocationType = val),
-			// else
-			new CustomPropertyDescriptor<PropertyInvocation__Implementation__, Kistl.App.Base.Property>(
-				new Guid("b966b081-54c5-440d-b163-df5761c3d4b1"),
-				"InvokeOnProperty",
-				null,
-				obj => obj.InvokeOnProperty,
-				(obj, val) => obj.InvokeOnProperty = val),
-			// else
-			new CustomPropertyDescriptor<PropertyInvocation__Implementation__, string>(
-				new Guid("6f46b94a-9ab7-44cd-bf36-f13e940f51a3"),
-				"MemberName",
-				null,
-				obj => obj.MemberName,
-				(obj, val) => obj.MemberName = val),
-			// rel: InvokeOnProperty has Invocations (dd9f5bf9-8a0e-432b-a7bb-5ba97e12face)
-			// rel: PropertyInvocation has Implementor (7fa78e0e-c9bb-4ce2-ae74-262174f48b45)
-			// rel: PropertyInvocation was ChangedBy (a3de8754-433e-4cd5-b463-7b2708b18e66)
-			// rel: PropertyInvocation was CreatedBy (dc1d4aa8-0253-48da-9ed0-d3c9b8d2746e)
-		};
+		private static readonly object _propertiesLock = new object();
+		private static System.ComponentModel.PropertyDescriptor[] _properties;
 		
-		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
+		private void _InitializePropertyDescriptors(Func<IReadOnlyKistlContext> lazyCtx)
+		{
+			if (_properties != null) return;
+			lock (_propertiesLock)
+			{
+				// recheck for a lost race after aquiring the lock
+				if (_properties != null) return;
+				
+				_properties = new System.ComponentModel.PropertyDescriptor[] {
+					// else
+					new CustomPropertyDescriptor<PropertyInvocation__Implementation__, Kistl.App.Base.Identity>(
+						lazyCtx,
+						new Guid("6122853b-d42a-4a8a-a4db-93a155a22ef4"),
+						"ChangedBy",
+						null,
+						obj => obj.ChangedBy,
+						(obj, val) => obj.ChangedBy = val),
+					// else
+					new CustomPropertyDescriptor<PropertyInvocation__Implementation__, DateTime?>(
+						lazyCtx,
+						new Guid("01872160-2d9b-4adc-92f5-05db7a4b5ce2"),
+						"ChangedOn",
+						null,
+						obj => obj.ChangedOn,
+						(obj, val) => obj.ChangedOn = val),
+					// else
+					new CustomPropertyDescriptor<PropertyInvocation__Implementation__, Kistl.App.Base.Identity>(
+						lazyCtx,
+						new Guid("f1244e40-b8ed-44d7-83aa-04a5f964229c"),
+						"CreatedBy",
+						null,
+						obj => obj.CreatedBy,
+						(obj, val) => obj.CreatedBy = val),
+					// else
+					new CustomPropertyDescriptor<PropertyInvocation__Implementation__, DateTime?>(
+						lazyCtx,
+						new Guid("04aa5c63-c9a0-4fb0-973b-81d8da9743b9"),
+						"CreatedOn",
+						null,
+						obj => obj.CreatedOn,
+						(obj, val) => obj.CreatedOn = val),
+					// else
+					new CustomPropertyDescriptor<PropertyInvocation__Implementation__, Guid>(
+						lazyCtx,
+						new Guid("e7504464-5cf0-4906-b12b-bbcf0deb789c"),
+						"ExportGuid",
+						null,
+						obj => obj.ExportGuid,
+						(obj, val) => obj.ExportGuid = val),
+					// else
+					new CustomPropertyDescriptor<PropertyInvocation__Implementation__, Kistl.App.Base.TypeRef>(
+						lazyCtx,
+						new Guid("00bfc51e-ea0e-4de1-9c56-ea8ccc0131c8"),
+						"Implementor",
+						null,
+						obj => obj.Implementor,
+						(obj, val) => obj.Implementor = val),
+					// else
+					new CustomPropertyDescriptor<PropertyInvocation__Implementation__, Kistl.App.Base.PropertyInvocationType>(
+						lazyCtx,
+						new Guid("8be56055-5530-4947-a2d4-cb0879e90ebd"),
+						"InvocationType",
+						null,
+						obj => obj.InvocationType,
+						(obj, val) => obj.InvocationType = val),
+					// else
+					new CustomPropertyDescriptor<PropertyInvocation__Implementation__, Kistl.App.Base.Property>(
+						lazyCtx,
+						new Guid("b966b081-54c5-440d-b163-df5761c3d4b1"),
+						"InvokeOnProperty",
+						null,
+						obj => obj.InvokeOnProperty,
+						(obj, val) => obj.InvokeOnProperty = val),
+					// else
+					new CustomPropertyDescriptor<PropertyInvocation__Implementation__, string>(
+						lazyCtx,
+						new Guid("6f46b94a-9ab7-44cd-bf36-f13e940f51a3"),
+						"MemberName",
+						null,
+						obj => obj.MemberName,
+						(obj, val) => obj.MemberName = val),
+					// rel: InvokeOnProperty has Invocations (dd9f5bf9-8a0e-432b-a7bb-5ba97e12face)
+					// rel: PropertyInvocation has Implementor (7fa78e0e-c9bb-4ce2-ae74-262174f48b45)
+					// rel: PropertyInvocation was ChangedBy (a3de8754-433e-4cd5-b463-7b2708b18e66)
+					// rel: PropertyInvocation was CreatedBy (dc1d4aa8-0253-48da-9ed0-d3c9b8d2746e)
+				};
+			}
+		}
+		
+		protected override void CollectProperties(Func<IReadOnlyKistlContext> lazyCtx, List<System.ComponentModel.PropertyDescriptor> props)
 		{
 			base.CollectProperties(props);
+			_InitializePropertyDescriptors(lazyCtx);
 			props.AddRange(_properties);
 		}
 	

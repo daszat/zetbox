@@ -26,9 +26,15 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("DefaultPropertyValue")]
     public class DefaultPropertyValue__Implementation__ : BaseServerDataObject_EntityFramework, DefaultPropertyValue, Kistl.API.IExportableInternal
     {
-    
-		public DefaultPropertyValue__Implementation__()
-		{
+        [Obsolete]
+        public DefaultPropertyValue__Implementation__()
+            : base(null)
+        {
+        }
+
+        public DefaultPropertyValue__Implementation__(Func<IReadOnlyKistlContext> lazyCtx)
+            : base(lazyCtx)
+        {
         }
 
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
@@ -519,10 +525,10 @@ namespace Kistl.App.Base
 
 
 
-		public override Type GetImplementedInterface()
-		{
-			return typeof(DefaultPropertyValue);
-		}
+        public override Type GetImplementedInterface()
+        {
+            return typeof(DefaultPropertyValue);
+        }
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{
@@ -589,56 +595,76 @@ namespace Kistl.App.Base
         public static event ObjectEventHandler<DefaultPropertyValue> OnDeleting_DefaultPropertyValue;
 
 
-		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			// else
-			new CustomPropertyDescriptor<DefaultPropertyValue__Implementation__, Kistl.App.Base.Identity>(
-				new Guid("c33da8b7-beba-43e5-a9e8-a8d51c6a3443"),
-				"ChangedBy",
-				null,
-				obj => obj.ChangedBy,
-				(obj, val) => obj.ChangedBy = val),
-			// else
-			new CustomPropertyDescriptor<DefaultPropertyValue__Implementation__, DateTime?>(
-				new Guid("0f199917-c51d-4f4e-9c59-663a274c79a0"),
-				"ChangedOn",
-				null,
-				obj => obj.ChangedOn,
-				(obj, val) => obj.ChangedOn = val),
-			// else
-			new CustomPropertyDescriptor<DefaultPropertyValue__Implementation__, Kistl.App.Base.Identity>(
-				new Guid("68c4fa75-42bd-4d51-b74d-a074ea17e242"),
-				"CreatedBy",
-				null,
-				obj => obj.CreatedBy,
-				(obj, val) => obj.CreatedBy = val),
-			// else
-			new CustomPropertyDescriptor<DefaultPropertyValue__Implementation__, DateTime?>(
-				new Guid("4ace0c4f-58d7-4656-b263-9adae69a6b06"),
-				"CreatedOn",
-				null,
-				obj => obj.CreatedOn,
-				(obj, val) => obj.CreatedOn = val),
-			// else
-			new CustomPropertyDescriptor<DefaultPropertyValue__Implementation__, Guid>(
-				new Guid("e672de1a-e0f4-4613-9d1f-121ba543c2ec"),
-				"ExportGuid",
-				null,
-				obj => obj.ExportGuid,
-				(obj, val) => obj.ExportGuid = val),
-			// else
-			new CustomPropertyDescriptor<DefaultPropertyValue__Implementation__, Kistl.App.Base.Property>(
-				new Guid("a2451b2f-2430-4de4-81a6-3d5ac9f0138f"),
-				"Property",
-				null,
-				obj => obj.Property,
-				(obj, val) => obj.Property = val),
-			// rel: DefaultPropertyValue was CreatedBy (2cec73a2-76e5-4b98-bf49-16e873d4bf67)
-			// rel: DefaultPropertyValue was ChangedBy (7f9ecbb7-c962-4f95-9d89-3cb86857886f)
-		};
+		private static readonly object _propertiesLock = new object();
+		private static System.ComponentModel.PropertyDescriptor[] _properties;
 		
-		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
+		private void _InitializePropertyDescriptors(Func<IReadOnlyKistlContext> lazyCtx)
+		{
+			if (_properties != null) return;
+			lock (_propertiesLock)
+			{
+				// recheck for a lost race after aquiring the lock
+				if (_properties != null) return;
+				
+				_properties = new System.ComponentModel.PropertyDescriptor[] {
+					// else
+					new CustomPropertyDescriptor<DefaultPropertyValue__Implementation__, Kistl.App.Base.Identity>(
+						lazyCtx,
+						new Guid("c33da8b7-beba-43e5-a9e8-a8d51c6a3443"),
+						"ChangedBy",
+						null,
+						obj => obj.ChangedBy,
+						(obj, val) => obj.ChangedBy = val),
+					// else
+					new CustomPropertyDescriptor<DefaultPropertyValue__Implementation__, DateTime?>(
+						lazyCtx,
+						new Guid("0f199917-c51d-4f4e-9c59-663a274c79a0"),
+						"ChangedOn",
+						null,
+						obj => obj.ChangedOn,
+						(obj, val) => obj.ChangedOn = val),
+					// else
+					new CustomPropertyDescriptor<DefaultPropertyValue__Implementation__, Kistl.App.Base.Identity>(
+						lazyCtx,
+						new Guid("68c4fa75-42bd-4d51-b74d-a074ea17e242"),
+						"CreatedBy",
+						null,
+						obj => obj.CreatedBy,
+						(obj, val) => obj.CreatedBy = val),
+					// else
+					new CustomPropertyDescriptor<DefaultPropertyValue__Implementation__, DateTime?>(
+						lazyCtx,
+						new Guid("4ace0c4f-58d7-4656-b263-9adae69a6b06"),
+						"CreatedOn",
+						null,
+						obj => obj.CreatedOn,
+						(obj, val) => obj.CreatedOn = val),
+					// else
+					new CustomPropertyDescriptor<DefaultPropertyValue__Implementation__, Guid>(
+						lazyCtx,
+						new Guid("e672de1a-e0f4-4613-9d1f-121ba543c2ec"),
+						"ExportGuid",
+						null,
+						obj => obj.ExportGuid,
+						(obj, val) => obj.ExportGuid = val),
+					// else
+					new CustomPropertyDescriptor<DefaultPropertyValue__Implementation__, Kistl.App.Base.Property>(
+						lazyCtx,
+						new Guid("a2451b2f-2430-4de4-81a6-3d5ac9f0138f"),
+						"Property",
+						null,
+						obj => obj.Property,
+						(obj, val) => obj.Property = val),
+					// rel: DefaultPropertyValue was CreatedBy (2cec73a2-76e5-4b98-bf49-16e873d4bf67)
+					// rel: DefaultPropertyValue was ChangedBy (7f9ecbb7-c962-4f95-9d89-3cb86857886f)
+				};
+			}
+		}
+		
+		protected override void CollectProperties(Func<IReadOnlyKistlContext> lazyCtx, List<System.ComponentModel.PropertyDescriptor> props)
 		{
 			base.CollectProperties(props);
+			_InitializePropertyDescriptors(lazyCtx);
 			props.AddRange(_properties);
 		}
 	

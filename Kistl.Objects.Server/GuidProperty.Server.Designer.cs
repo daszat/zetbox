@@ -26,9 +26,15 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("GuidProperty")]
     public class GuidProperty__Implementation__ : Kistl.App.Base.ValueTypeProperty__Implementation__, GuidProperty
     {
-    
-		public GuidProperty__Implementation__()
-		{
+        [Obsolete]
+        public GuidProperty__Implementation__()
+            : base(null)
+        {
+        }
+
+        public GuidProperty__Implementation__(Func<IReadOnlyKistlContext> lazyCtx)
+            : base(lazyCtx)
+        {
         }
 
 
@@ -74,10 +80,10 @@ namespace Kistl.App.Base
 
 
 
-		public override Type GetImplementedInterface()
-		{
-			return typeof(GuidProperty);
-		}
+        public override Type GetImplementedInterface()
+        {
+            return typeof(GuidProperty);
+        }
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{

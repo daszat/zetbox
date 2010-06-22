@@ -26,9 +26,15 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("ObjectParameter")]
     public class ObjectParameter__Implementation__ : Kistl.App.Base.BaseParameter__Implementation__, ObjectParameter
     {
-    
-		public ObjectParameter__Implementation__()
-		{
+        [Obsolete]
+        public ObjectParameter__Implementation__()
+            : base(null)
+        {
+        }
+
+        public ObjectParameter__Implementation__(Func<IReadOnlyKistlContext> lazyCtx)
+            : base(lazyCtx)
+        {
         }
 
 
@@ -165,10 +171,10 @@ namespace Kistl.App.Base
 
 
 
-		public override Type GetImplementedInterface()
-		{
-			return typeof(ObjectParameter);
-		}
+        public override Type GetImplementedInterface()
+        {
+            return typeof(ObjectParameter);
+        }
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{
@@ -230,20 +236,35 @@ namespace Kistl.App.Base
         public static event ObjectEventHandler<ObjectParameter> OnDeleting_ObjectParameter;
 
 
-		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			// else
-			new CustomPropertyDescriptor<ObjectParameter__Implementation__, Kistl.App.Base.DataType>(
-				new Guid("9bd64c60-7282-47f0-8069-528a175fcc92"),
-				"DataType",
-				null,
-				obj => obj.DataType,
-				(obj, val) => obj.DataType = val),
-			// rel: ObjectParameter has DataType (a6a30705-15ad-4a3a-b624-23305fe2807a)
-		};
+		private static readonly object _propertiesLock = new object();
+		private static System.ComponentModel.PropertyDescriptor[] _properties;
 		
-		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
+		private void _InitializePropertyDescriptors(Func<IReadOnlyKistlContext> lazyCtx)
+		{
+			if (_properties != null) return;
+			lock (_propertiesLock)
+			{
+				// recheck for a lost race after aquiring the lock
+				if (_properties != null) return;
+				
+				_properties = new System.ComponentModel.PropertyDescriptor[] {
+					// else
+					new CustomPropertyDescriptor<ObjectParameter__Implementation__, Kistl.App.Base.DataType>(
+						lazyCtx,
+						new Guid("9bd64c60-7282-47f0-8069-528a175fcc92"),
+						"DataType",
+						null,
+						obj => obj.DataType,
+						(obj, val) => obj.DataType = val),
+					// rel: ObjectParameter has DataType (a6a30705-15ad-4a3a-b624-23305fe2807a)
+				};
+			}
+		}
+		
+		protected override void CollectProperties(Func<IReadOnlyKistlContext> lazyCtx, List<System.ComponentModel.PropertyDescriptor> props)
 		{
 			base.CollectProperties(props);
+			_InitializePropertyDescriptors(lazyCtx);
 			props.AddRange(_properties);
 		}
 	

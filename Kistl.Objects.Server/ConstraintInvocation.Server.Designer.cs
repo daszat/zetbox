@@ -26,9 +26,15 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("ConstraintInvocation")]
     public class ConstraintInvocation__Implementation__ : BaseServerDataObject_EntityFramework, ConstraintInvocation, Kistl.API.IExportableInternal
     {
-    
-		public ConstraintInvocation__Implementation__()
-		{
+        [Obsolete]
+        public ConstraintInvocation__Implementation__()
+            : base(null)
+        {
+        }
+
+        public ConstraintInvocation__Implementation__(Func<IReadOnlyKistlContext> lazyCtx)
+            : base(lazyCtx)
+        {
         }
 
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
@@ -307,10 +313,10 @@ namespace Kistl.App.Base
 
 
 
-		public override Type GetImplementedInterface()
-		{
-			return typeof(ConstraintInvocation);
-		}
+        public override Type GetImplementedInterface()
+        {
+            return typeof(ConstraintInvocation);
+        }
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{
@@ -374,34 +380,51 @@ namespace Kistl.App.Base
         public static event ObjectEventHandler<ConstraintInvocation> OnDeleting_ConstraintInvocation;
 
 
-		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			// else
-			new CustomPropertyDescriptor<ConstraintInvocation__Implementation__, Guid>(
-				new Guid("06d4a536-d9c4-487f-9861-ac15429e42de"),
-				"ExportGuid",
-				null,
-				obj => obj.ExportGuid,
-				(obj, val) => obj.ExportGuid = val),
-			// else
-			new CustomPropertyDescriptor<ConstraintInvocation__Implementation__, Kistl.App.Base.TypeRef>(
-				new Guid("4b8486d5-2c48-4485-9824-d0a4a8bbbbca"),
-				"Implementor",
-				null,
-				obj => obj.Implementor,
-				(obj, val) => obj.Implementor = val),
-			// else
-			new CustomPropertyDescriptor<ConstraintInvocation__Implementation__, string>(
-				new Guid("fd6ac977-3eab-4b2c-952a-2a1ad043b99a"),
-				"MemberName",
-				null,
-				obj => obj.MemberName,
-				(obj, val) => obj.MemberName = val),
-			// rel: ConstraintInvocation has TypeRef (ed423e87-e04d-4753-ba99-c186a7a12242)
-		};
+		private static readonly object _propertiesLock = new object();
+		private static System.ComponentModel.PropertyDescriptor[] _properties;
 		
-		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
+		private void _InitializePropertyDescriptors(Func<IReadOnlyKistlContext> lazyCtx)
+		{
+			if (_properties != null) return;
+			lock (_propertiesLock)
+			{
+				// recheck for a lost race after aquiring the lock
+				if (_properties != null) return;
+				
+				_properties = new System.ComponentModel.PropertyDescriptor[] {
+					// else
+					new CustomPropertyDescriptor<ConstraintInvocation__Implementation__, Guid>(
+						lazyCtx,
+						new Guid("06d4a536-d9c4-487f-9861-ac15429e42de"),
+						"ExportGuid",
+						null,
+						obj => obj.ExportGuid,
+						(obj, val) => obj.ExportGuid = val),
+					// else
+					new CustomPropertyDescriptor<ConstraintInvocation__Implementation__, Kistl.App.Base.TypeRef>(
+						lazyCtx,
+						new Guid("4b8486d5-2c48-4485-9824-d0a4a8bbbbca"),
+						"Implementor",
+						null,
+						obj => obj.Implementor,
+						(obj, val) => obj.Implementor = val),
+					// else
+					new CustomPropertyDescriptor<ConstraintInvocation__Implementation__, string>(
+						lazyCtx,
+						new Guid("fd6ac977-3eab-4b2c-952a-2a1ad043b99a"),
+						"MemberName",
+						null,
+						obj => obj.MemberName,
+						(obj, val) => obj.MemberName = val),
+					// rel: ConstraintInvocation has TypeRef (ed423e87-e04d-4753-ba99-c186a7a12242)
+				};
+			}
+		}
+		
+		protected override void CollectProperties(Func<IReadOnlyKistlContext> lazyCtx, List<System.ComponentModel.PropertyDescriptor> props)
 		{
 			base.CollectProperties(props);
+			_InitializePropertyDescriptors(lazyCtx);
 			props.AddRange(_properties);
 		}
 	

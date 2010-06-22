@@ -1,20 +1,22 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data.Linq.Mapping;
-using System.Globalization;
-using System.IO;
-using System.Linq;
-using System.Text;
 
 namespace Kistl.API.Server
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.Data.Linq.Mapping;
+    using System.Globalization;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+
     /// <summary>
     /// Abstract Base Class for a PersistenceObject on the Server Side
     /// </summary>
     public abstract class BaseServerPersistenceObject : BasePersistenceObject
     {
-        protected BaseServerPersistenceObject()
+        protected BaseServerPersistenceObject(Func<IReadOnlyKistlContext> lazyCtx)
+            : base(lazyCtx)
         {
             ClientObjectState = DataObjectState.NotDeserialized;
             var trace = new System.Diagnostics.StackTrace(true);
@@ -59,7 +61,8 @@ namespace Kistl.API.Server
         /// <summary>
         /// Attach to Events
         /// </summary>
-        protected BaseServerDataObject()
+        protected BaseServerDataObject(Func<IReadOnlyKistlContext> lazyCtx)
+            : base(lazyCtx)
         {
         }
 
@@ -95,6 +98,11 @@ namespace Kistl.API.Server
     public abstract class BaseServerCollectionEntry
         : BaseServerPersistenceObject
     {
+        protected BaseServerCollectionEntry(Func<IReadOnlyKistlContext> lazyCtx)
+            : base(lazyCtx)
+        {
+        }
+
         /// <summary>
         /// Always returns <value>true</value>. CollectionEntries are checked via their navigators or relations.
         /// </summary>
@@ -120,6 +128,11 @@ namespace Kistl.API.Server
     /// </summary>
     public abstract class BaseServerCompoundObject : BaseCompoundObject
     {
+        protected BaseServerCompoundObject(Func<IReadOnlyKistlContext> lazyCtx)
+            : base(lazyCtx)
+        {
+        }
+        
         protected override void OnPropertyChanging(string property, object oldValue, object newValue)
         {
             base.OnPropertyChanging(property, oldValue, newValue);

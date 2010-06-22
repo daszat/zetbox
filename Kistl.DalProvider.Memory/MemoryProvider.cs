@@ -45,7 +45,8 @@ namespace Kistl.DalProvider.Memory
                 moduleBuilder
                     .Register(c =>
                     {
-                        var memCtx = new MemoryContext(c.Resolve<ITypeTransformations>());
+                        MemoryContext memCtx = null;
+                        memCtx = new MemoryContext(c.Resolve<ITypeTransformations>(), () => memCtx);
                         // register empty context first, to avoid errors when trying to load defaultvalues
                         // TODO: remove, this should not be needed when using the container.
                         FrozenContext.RegisterFallback(memCtx);

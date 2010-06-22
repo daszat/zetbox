@@ -21,10 +21,12 @@ namespace Kistl.DalProvider.Frozen
         /// </summary>
         public ITypeTransformations TypeTrans { get; set; }
 
-        /// <summary>
-        /// 
-        /// </summary>
         protected BaseFrozenObject()
+        {
+            throw new InvalidOperationException("BaseFrozenObject constructor without id called");
+        }
+
+        protected BaseFrozenObject(Func<IReadOnlyKistlContext> lazyCtx)
         {
             throw new InvalidOperationException("BaseFrozenObject constructor without id called");
         }
@@ -230,10 +232,11 @@ namespace Kistl.DalProvider.Frozen
 
         #endregion
 
-
         #region ICustomTypeDescriptor Members
 
         protected virtual void CollectProperties(List<PropertyDescriptor> list) { }
+
+        protected virtual void CollectProperties(Func<IReadOnlyKistlContext> lazyCtx, List<PropertyDescriptor> list) { }
 
         AttributeCollection ICustomTypeDescriptor.GetAttributes()
         {
@@ -303,10 +306,12 @@ namespace Kistl.DalProvider.Frozen
     /// </summary>
     public abstract class BaseFrozenDataObject : BaseFrozenObject, IDataObject
     {
-        /// <summary>
-        /// 
-        /// </summary>
         protected BaseFrozenDataObject()
+        {
+            throw new InvalidOperationException("BaseFrozenDataObject constructor without id called");
+        }
+
+        protected BaseFrozenDataObject(Func<IReadOnlyKistlContext> lazyCtx)
         {
             throw new InvalidOperationException("BaseFrozenDataObject constructor without id called");
         }
@@ -370,28 +375,21 @@ namespace Kistl.DalProvider.Frozen
         public string this[string columnName] { get { return GetPropertyError(columnName); } }
 
         #endregion
-
-
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
     public abstract class BaseFrozenCompoundObject
         : BaseFrozenObject, ICompoundObject
     {
-        /// <summary>
-        /// 
-        /// </summary>
         protected BaseFrozenCompoundObject()
         {
             throw new InvalidOperationException("BaseFrozenCompoundObject constructor without id called");
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="id"></param>
+        protected BaseFrozenCompoundObject(Func<IReadOnlyKistlContext> lazyCtx)
+        {
+            throw new InvalidOperationException("BaseFrozenCompoundObject constructor without id called");
+        }
+
         protected BaseFrozenCompoundObject(int id)
             : base(id)
         {

@@ -26,9 +26,15 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("IsValidNamespaceConstraint")]
     public class IsValidNamespaceConstraint__Implementation__ : Kistl.App.Base.IsValidIdentifierConstraint__Implementation__, IsValidNamespaceConstraint
     {
-    
-		public IsValidNamespaceConstraint__Implementation__()
-		{
+        [Obsolete]
+        public IsValidNamespaceConstraint__Implementation__()
+            : base(null)
+        {
+        }
+
+        public IsValidNamespaceConstraint__Implementation__(Func<IReadOnlyKistlContext> lazyCtx)
+            : base(lazyCtx)
+        {
         }
 
 
@@ -74,10 +80,10 @@ namespace Kistl.App.Base
 
 
 
-		public override Type GetImplementedInterface()
-		{
-			return typeof(IsValidNamespaceConstraint);
-		}
+        public override Type GetImplementedInterface()
+        {
+            return typeof(IsValidNamespaceConstraint);
+        }
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{

@@ -26,9 +26,15 @@ namespace at.dasz.CourseOrganiser
     [System.Diagnostics.DebuggerDisplay("Semester")]
     public class Semester__Implementation__ : BaseServerDataObject_EntityFramework, Semester
     {
-    
-		public Semester__Implementation__()
-		{
+        [Obsolete]
+        public Semester__Implementation__()
+            : base(null)
+        {
+        }
+
+        public Semester__Implementation__(Func<IReadOnlyKistlContext> lazyCtx)
+            : base(lazyCtx)
+        {
         }
 
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
@@ -376,10 +382,10 @@ namespace at.dasz.CourseOrganiser
 		public static event PropertyPreSetterHandler<at.dasz.CourseOrganiser.Semester, int?> OnYear_PreSetter;
 		public static event PropertyPostSetterHandler<at.dasz.CourseOrganiser.Semester, int?> OnYear_PostSetter;
 
-		public override Type GetImplementedInterface()
-		{
-			return typeof(Semester);
-		}
+        public override Type GetImplementedInterface()
+        {
+            return typeof(Semester);
+        }
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{
@@ -443,56 +449,76 @@ namespace at.dasz.CourseOrganiser
         public static event ObjectEventHandler<Semester> OnDeleting_Semester;
 
 
-		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			// else
-			new CustomPropertyDescriptor<Semester__Implementation__, string>(
-				new Guid("7b0ead0e-dbd2-4474-8048-36e5e768ca54"),
-				"CourseName",
-				null,
-				obj => obj.CourseName,
-				(obj, val) => obj.CourseName = val),
-			// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
-			new CustomPropertyDescriptor<Semester__Implementation__, ICollection<at.dasz.CourseOrganiser.Exam>>(
-				new Guid("7f06bb42-4ec6-496e-8ff8-e4a15d21f544"),
-				"Exam",
-				null,
-				obj => obj.Exam,
-				null), // lists are read-only properties
-			// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
-			new CustomPropertyDescriptor<Semester__Implementation__, ICollection<at.dasz.CourseOrganiser.Exercise>>(
-				new Guid("be7c24bf-b8c9-440c-ac42-d0856a3200ac"),
-				"Excercise",
-				null,
-				obj => obj.Excercise,
-				null), // lists are read-only properties
-			// else
-			new CustomPropertyDescriptor<Semester__Implementation__, at.dasz.CourseOrganiser.Periods?>(
-				new Guid("0c554fc0-6f57-4b5d-a546-0fada5e11fde"),
-				"Period",
-				null,
-				obj => obj.Period,
-				(obj, val) => obj.Period = val),
-			// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
-			new CustomPropertyDescriptor<Semester__Implementation__, ICollection<at.dasz.CourseOrganiser.Student>>(
-				new Guid("eaefbcaa-ce9f-43cc-876d-efb6b0c5796c"),
-				"Students",
-				null,
-				obj => obj.Students,
-				null), // lists are read-only properties
-			// else
-			new CustomPropertyDescriptor<Semester__Implementation__, int?>(
-				new Guid("61b3a7f4-2995-4d2f-90bf-98b38deeba4b"),
-				"Year",
-				null,
-				obj => obj.Year,
-				(obj, val) => obj.Year = val),
-			// rel: Exam happens_in Semester (af26d91c-68a2-4c18-aca7-4fc56d3b519a)
-			// rel: Excercise happens_in Semester (719bf072-74d1-4878-8d8b-db1c92d60145)
-		};
+		private static readonly object _propertiesLock = new object();
+		private static System.ComponentModel.PropertyDescriptor[] _properties;
 		
-		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
+		private void _InitializePropertyDescriptors(Func<IReadOnlyKistlContext> lazyCtx)
+		{
+			if (_properties != null) return;
+			lock (_propertiesLock)
+			{
+				// recheck for a lost race after aquiring the lock
+				if (_properties != null) return;
+				
+				_properties = new System.ComponentModel.PropertyDescriptor[] {
+					// else
+					new CustomPropertyDescriptor<Semester__Implementation__, string>(
+						lazyCtx,
+						new Guid("7b0ead0e-dbd2-4474-8048-36e5e768ca54"),
+						"CourseName",
+						null,
+						obj => obj.CourseName,
+						(obj, val) => obj.CourseName = val),
+					// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
+					new CustomPropertyDescriptor<Semester__Implementation__, ICollection<at.dasz.CourseOrganiser.Exam>>(
+						lazyCtx,
+						new Guid("7f06bb42-4ec6-496e-8ff8-e4a15d21f544"),
+						"Exam",
+						null,
+						obj => obj.Exam,
+						null), // lists are read-only properties
+					// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
+					new CustomPropertyDescriptor<Semester__Implementation__, ICollection<at.dasz.CourseOrganiser.Exercise>>(
+						lazyCtx,
+						new Guid("be7c24bf-b8c9-440c-ac42-d0856a3200ac"),
+						"Excercise",
+						null,
+						obj => obj.Excercise,
+						null), // lists are read-only properties
+					// else
+					new CustomPropertyDescriptor<Semester__Implementation__, at.dasz.CourseOrganiser.Periods?>(
+						lazyCtx,
+						new Guid("0c554fc0-6f57-4b5d-a546-0fada5e11fde"),
+						"Period",
+						null,
+						obj => obj.Period,
+						(obj, val) => obj.Period = val),
+					// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
+					new CustomPropertyDescriptor<Semester__Implementation__, ICollection<at.dasz.CourseOrganiser.Student>>(
+						lazyCtx,
+						new Guid("eaefbcaa-ce9f-43cc-876d-efb6b0c5796c"),
+						"Students",
+						null,
+						obj => obj.Students,
+						null), // lists are read-only properties
+					// else
+					new CustomPropertyDescriptor<Semester__Implementation__, int?>(
+						lazyCtx,
+						new Guid("61b3a7f4-2995-4d2f-90bf-98b38deeba4b"),
+						"Year",
+						null,
+						obj => obj.Year,
+						(obj, val) => obj.Year = val),
+					// rel: Exam happens_in Semester (af26d91c-68a2-4c18-aca7-4fc56d3b519a)
+					// rel: Excercise happens_in Semester (719bf072-74d1-4878-8d8b-db1c92d60145)
+				};
+			}
+		}
+		
+		protected override void CollectProperties(Func<IReadOnlyKistlContext> lazyCtx, List<System.ComponentModel.PropertyDescriptor> props)
 		{
 			base.CollectProperties(props);
+			_InitializePropertyDescriptors(lazyCtx);
 			props.AddRange(_properties);
 		}
 	

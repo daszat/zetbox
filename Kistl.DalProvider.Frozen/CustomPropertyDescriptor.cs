@@ -13,6 +13,7 @@ namespace Kistl.DalProvider.Frozen
         : BaseCustomPropertyDescriptor<TComponent, TProperty>
     {
         public CustomPropertyDescriptor(
+            Func<IReadOnlyKistlContext> lazyCtx,
             Guid? propertyGuid,
             string name,
             Attribute[] attrs,

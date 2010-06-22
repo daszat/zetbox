@@ -26,9 +26,15 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("MethodInvocationConstraint")]
     public class MethodInvocationConstraint__Implementation__ : Kistl.App.Base.Constraint__Implementation__, MethodInvocationConstraint
     {
-    
-		public MethodInvocationConstraint__Implementation__()
-		{
+        [Obsolete]
+        public MethodInvocationConstraint__Implementation__()
+            : base(null)
+        {
+        }
+
+        public MethodInvocationConstraint__Implementation__(Func<IReadOnlyKistlContext> lazyCtx)
+            : base(lazyCtx)
+        {
         }
 
 
@@ -74,10 +80,10 @@ namespace Kistl.App.Base
 
 
 
-		public override Type GetImplementedInterface()
-		{
-			return typeof(MethodInvocationConstraint);
-		}
+        public override Type GetImplementedInterface()
+        {
+            return typeof(MethodInvocationConstraint);
+        }
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{

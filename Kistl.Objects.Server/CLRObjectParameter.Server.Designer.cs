@@ -26,9 +26,15 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("CLRObjectParameter")]
     public class CLRObjectParameter__Implementation__ : Kistl.App.Base.BaseParameter__Implementation__, CLRObjectParameter
     {
-    
-		public CLRObjectParameter__Implementation__()
-		{
+        [Obsolete]
+        public CLRObjectParameter__Implementation__()
+            : base(null)
+        {
+        }
+
+        public CLRObjectParameter__Implementation__(Func<IReadOnlyKistlContext> lazyCtx)
+            : base(lazyCtx)
+        {
         }
 
 
@@ -165,10 +171,10 @@ namespace Kistl.App.Base
 
 
 
-		public override Type GetImplementedInterface()
-		{
-			return typeof(CLRObjectParameter);
-		}
+        public override Type GetImplementedInterface()
+        {
+            return typeof(CLRObjectParameter);
+        }
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{
@@ -230,20 +236,35 @@ namespace Kistl.App.Base
         public static event ObjectEventHandler<CLRObjectParameter> OnDeleting_CLRObjectParameter;
 
 
-		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			// else
-			new CustomPropertyDescriptor<CLRObjectParameter__Implementation__, Kistl.App.Base.TypeRef>(
-				new Guid("137292ce-4493-451d-a7fa-1b7cc7df03dd"),
-				"Type",
-				null,
-				obj => obj.Type,
-				(obj, val) => obj.Type = val),
-			// rel: ClrObjectParameter isOf Type (4c7e0ac7-eb8a-4304-85e7-fcc358cb639c)
-		};
+		private static readonly object _propertiesLock = new object();
+		private static System.ComponentModel.PropertyDescriptor[] _properties;
 		
-		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
+		private void _InitializePropertyDescriptors(Func<IReadOnlyKistlContext> lazyCtx)
+		{
+			if (_properties != null) return;
+			lock (_propertiesLock)
+			{
+				// recheck for a lost race after aquiring the lock
+				if (_properties != null) return;
+				
+				_properties = new System.ComponentModel.PropertyDescriptor[] {
+					// else
+					new CustomPropertyDescriptor<CLRObjectParameter__Implementation__, Kistl.App.Base.TypeRef>(
+						lazyCtx,
+						new Guid("137292ce-4493-451d-a7fa-1b7cc7df03dd"),
+						"Type",
+						null,
+						obj => obj.Type,
+						(obj, val) => obj.Type = val),
+					// rel: ClrObjectParameter isOf Type (4c7e0ac7-eb8a-4304-85e7-fcc358cb639c)
+				};
+			}
+		}
+		
+		protected override void CollectProperties(Func<IReadOnlyKistlContext> lazyCtx, List<System.ComponentModel.PropertyDescriptor> props)
 		{
 			base.CollectProperties(props);
+			_InitializePropertyDescriptors(lazyCtx);
 			props.AddRange(_properties);
 		}
 	

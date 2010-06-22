@@ -26,9 +26,15 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("Constraint")]
     public class Constraint__Implementation__ : BaseServerDataObject_EntityFramework, Constraint, Kistl.API.IExportableInternal
     {
-    
-		public Constraint__Implementation__()
-		{
+        [Obsolete]
+        public Constraint__Implementation__()
+            : base(null)
+        {
+        }
+
+        public Constraint__Implementation__(Func<IReadOnlyKistlContext> lazyCtx)
+            : base(lazyCtx)
+        {
         }
 
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
@@ -593,10 +599,10 @@ namespace Kistl.App.Base
 
 
 
-		public override Type GetImplementedInterface()
-		{
-			return typeof(Constraint);
-		}
+        public override Type GetImplementedInterface()
+        {
+            return typeof(Constraint);
+        }
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{
@@ -664,64 +670,85 @@ namespace Kistl.App.Base
         public static event ObjectEventHandler<Constraint> OnDeleting_Constraint;
 
 
-		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			// else
-			new CustomPropertyDescriptor<Constraint__Implementation__, Kistl.App.Base.Identity>(
-				new Guid("b7d3d6d2-6c34-4599-846d-2df3dbf8eda8"),
-				"ChangedBy",
-				null,
-				obj => obj.ChangedBy,
-				(obj, val) => obj.ChangedBy = val),
-			// else
-			new CustomPropertyDescriptor<Constraint__Implementation__, DateTime?>(
-				new Guid("90d7ec21-a775-46f0-8a30-ef25088dd5eb"),
-				"ChangedOn",
-				null,
-				obj => obj.ChangedOn,
-				(obj, val) => obj.ChangedOn = val),
-			// else
-			new CustomPropertyDescriptor<Constraint__Implementation__, Kistl.App.Base.Property>(
-				new Guid("438b9307-fb40-4afe-a66f-a5762c41e14b"),
-				"ConstrainedProperty",
-				null,
-				obj => obj.ConstrainedProperty,
-				(obj, val) => obj.ConstrainedProperty = val),
-			// else
-			new CustomPropertyDescriptor<Constraint__Implementation__, Kistl.App.Base.Identity>(
-				new Guid("51cb0dfc-4156-4dcf-a409-57d0029b4cbb"),
-				"CreatedBy",
-				null,
-				obj => obj.CreatedBy,
-				(obj, val) => obj.CreatedBy = val),
-			// else
-			new CustomPropertyDescriptor<Constraint__Implementation__, DateTime?>(
-				new Guid("a24ba1ea-4ad5-4ffd-bf24-c0f2df4b8e0c"),
-				"CreatedOn",
-				null,
-				obj => obj.CreatedOn,
-				(obj, val) => obj.CreatedOn = val),
-			// else
-			new CustomPropertyDescriptor<Constraint__Implementation__, Guid>(
-				new Guid("8da6d02c-9d9e-4db8-91ee-24a3fd1c74e1"),
-				"ExportGuid",
-				null,
-				obj => obj.ExportGuid,
-				(obj, val) => obj.ExportGuid = val),
-			// else
-			new CustomPropertyDescriptor<Constraint__Implementation__, string>(
-				new Guid("49f759b3-de60-4cee-be06-c712e901c24e"),
-				"Reason",
-				null,
-				obj => obj.Reason,
-				(obj, val) => obj.Reason = val),
-			// rel: Constraint was CreatedBy (f7eab863-c425-4819-b435-10394cf1ca5a)
-			// rel: Constraint was ChangedBy (6b1b0216-b3cf-4a5f-ae59-e6f46fda9331)
-			// rel: ConstrainedProperty has Constraints (6fa271a3-e365-4b8d-9cb1-575d7a3b5d6a)
-		};
+		private static readonly object _propertiesLock = new object();
+		private static System.ComponentModel.PropertyDescriptor[] _properties;
 		
-		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
+		private void _InitializePropertyDescriptors(Func<IReadOnlyKistlContext> lazyCtx)
+		{
+			if (_properties != null) return;
+			lock (_propertiesLock)
+			{
+				// recheck for a lost race after aquiring the lock
+				if (_properties != null) return;
+				
+				_properties = new System.ComponentModel.PropertyDescriptor[] {
+					// else
+					new CustomPropertyDescriptor<Constraint__Implementation__, Kistl.App.Base.Identity>(
+						lazyCtx,
+						new Guid("b7d3d6d2-6c34-4599-846d-2df3dbf8eda8"),
+						"ChangedBy",
+						null,
+						obj => obj.ChangedBy,
+						(obj, val) => obj.ChangedBy = val),
+					// else
+					new CustomPropertyDescriptor<Constraint__Implementation__, DateTime?>(
+						lazyCtx,
+						new Guid("90d7ec21-a775-46f0-8a30-ef25088dd5eb"),
+						"ChangedOn",
+						null,
+						obj => obj.ChangedOn,
+						(obj, val) => obj.ChangedOn = val),
+					// else
+					new CustomPropertyDescriptor<Constraint__Implementation__, Kistl.App.Base.Property>(
+						lazyCtx,
+						new Guid("438b9307-fb40-4afe-a66f-a5762c41e14b"),
+						"ConstrainedProperty",
+						null,
+						obj => obj.ConstrainedProperty,
+						(obj, val) => obj.ConstrainedProperty = val),
+					// else
+					new CustomPropertyDescriptor<Constraint__Implementation__, Kistl.App.Base.Identity>(
+						lazyCtx,
+						new Guid("51cb0dfc-4156-4dcf-a409-57d0029b4cbb"),
+						"CreatedBy",
+						null,
+						obj => obj.CreatedBy,
+						(obj, val) => obj.CreatedBy = val),
+					// else
+					new CustomPropertyDescriptor<Constraint__Implementation__, DateTime?>(
+						lazyCtx,
+						new Guid("a24ba1ea-4ad5-4ffd-bf24-c0f2df4b8e0c"),
+						"CreatedOn",
+						null,
+						obj => obj.CreatedOn,
+						(obj, val) => obj.CreatedOn = val),
+					// else
+					new CustomPropertyDescriptor<Constraint__Implementation__, Guid>(
+						lazyCtx,
+						new Guid("8da6d02c-9d9e-4db8-91ee-24a3fd1c74e1"),
+						"ExportGuid",
+						null,
+						obj => obj.ExportGuid,
+						(obj, val) => obj.ExportGuid = val),
+					// else
+					new CustomPropertyDescriptor<Constraint__Implementation__, string>(
+						lazyCtx,
+						new Guid("49f759b3-de60-4cee-be06-c712e901c24e"),
+						"Reason",
+						null,
+						obj => obj.Reason,
+						(obj, val) => obj.Reason = val),
+					// rel: Constraint was CreatedBy (f7eab863-c425-4819-b435-10394cf1ca5a)
+					// rel: Constraint was ChangedBy (6b1b0216-b3cf-4a5f-ae59-e6f46fda9331)
+					// rel: ConstrainedProperty has Constraints (6fa271a3-e365-4b8d-9cb1-575d7a3b5d6a)
+				};
+			}
+		}
+		
+		protected override void CollectProperties(Func<IReadOnlyKistlContext> lazyCtx, List<System.ComponentModel.PropertyDescriptor> props)
 		{
 			base.CollectProperties(props);
+			_InitializePropertyDescriptors(lazyCtx);
 			props.AddRange(_properties);
 		}
 	

@@ -26,9 +26,15 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("NewGuidDefaultValue")]
     public class NewGuidDefaultValue__Implementation__ : Kistl.App.Base.DefaultPropertyValue__Implementation__, NewGuidDefaultValue
     {
-    
-		public NewGuidDefaultValue__Implementation__()
-		{
+        [Obsolete]
+        public NewGuidDefaultValue__Implementation__()
+            : base(null)
+        {
+        }
+
+        public NewGuidDefaultValue__Implementation__(Func<IReadOnlyKistlContext> lazyCtx)
+            : base(lazyCtx)
+        {
         }
 
 
@@ -53,10 +59,10 @@ namespace Kistl.App.Base
 
 
 
-		public override Type GetImplementedInterface()
-		{
-			return typeof(NewGuidDefaultValue);
-		}
+        public override Type GetImplementedInterface()
+        {
+            return typeof(NewGuidDefaultValue);
+        }
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{

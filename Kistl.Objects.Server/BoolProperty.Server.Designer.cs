@@ -26,9 +26,15 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("BoolProperty")]
     public class BoolProperty__Implementation__ : Kistl.App.Base.ValueTypeProperty__Implementation__, BoolProperty
     {
-    
-		public BoolProperty__Implementation__()
-		{
+        [Obsolete]
+        public BoolProperty__Implementation__()
+            : base(null)
+        {
+        }
+
+        public BoolProperty__Implementation__(Func<IReadOnlyKistlContext> lazyCtx)
+            : base(lazyCtx)
+        {
         }
 
 
@@ -74,10 +80,10 @@ namespace Kistl.App.Base
 
 
 
-		public override Type GetImplementedInterface()
-		{
-			return typeof(BoolProperty);
-		}
+        public override Type GetImplementedInterface()
+        {
+            return typeof(BoolProperty);
+        }
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{

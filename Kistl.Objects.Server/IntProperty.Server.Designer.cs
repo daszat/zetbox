@@ -26,9 +26,15 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("IntProperty")]
     public class IntProperty__Implementation__ : Kistl.App.Base.ValueTypeProperty__Implementation__, IntProperty
     {
-    
-		public IntProperty__Implementation__()
-		{
+        [Obsolete]
+        public IntProperty__Implementation__()
+            : base(null)
+        {
+        }
+
+        public IntProperty__Implementation__(Func<IReadOnlyKistlContext> lazyCtx)
+            : base(lazyCtx)
+        {
         }
 
 
@@ -74,10 +80,10 @@ namespace Kistl.App.Base
 
 
 
-		public override Type GetImplementedInterface()
-		{
-			return typeof(IntProperty);
-		}
+        public override Type GetImplementedInterface()
+        {
+            return typeof(IntProperty);
+        }
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{

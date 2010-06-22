@@ -26,9 +26,15 @@ namespace at.dasz.CourseOrganiser
     [System.Diagnostics.DebuggerDisplay("GroupExcercise")]
     public class GroupExcercise__Implementation__ : BaseServerDataObject_EntityFramework, GroupExcercise
     {
-    
-		public GroupExcercise__Implementation__()
-		{
+        [Obsolete]
+        public GroupExcercise__Implementation__()
+            : base(null)
+        {
+        }
+
+        public GroupExcercise__Implementation__(Func<IReadOnlyKistlContext> lazyCtx)
+            : base(lazyCtx)
+        {
         }
 
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
@@ -249,10 +255,10 @@ namespace at.dasz.CourseOrganiser
         private EntityRelationBSideCollectionWrapper<at.dasz.CourseOrganiser.GroupExcercise, at.dasz.CourseOrganiser.Student, at.dasz.CourseOrganiser.GroupExcercise_accomplished_by_Student_RelationEntry__Implementation__> _StudentsWrapper;
 
 
-		public override Type GetImplementedInterface()
-		{
-			return typeof(GroupExcercise);
-		}
+        public override Type GetImplementedInterface()
+        {
+            return typeof(GroupExcercise);
+        }
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{
@@ -315,34 +321,51 @@ namespace at.dasz.CourseOrganiser
         public static event ObjectEventHandler<GroupExcercise> OnDeleting_GroupExcercise;
 
 
-		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			// else
-			new CustomPropertyDescriptor<GroupExcercise__Implementation__, at.dasz.CourseOrganiser.Exercise>(
-				new Guid("844509ba-ace7-4ce5-a5a0-ec52110d0203"),
-				"Excercise",
-				null,
-				obj => obj.Excercise,
-				(obj, val) => obj.Excercise = val),
-			// else
-			new CustomPropertyDescriptor<GroupExcercise__Implementation__, int?>(
-				new Guid("04f84c64-4d2d-41c3-8007-024ba5f71b08"),
-				"Score",
-				null,
-				obj => obj.Score,
-				(obj, val) => obj.Score = val),
-			// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
-			new CustomPropertyDescriptor<GroupExcercise__Implementation__, ICollection<at.dasz.CourseOrganiser.Student>>(
-				new Guid("f8257ff0-7693-4a11-bb2b-6f6db4666dfa"),
-				"Students",
-				null,
-				obj => obj.Students,
-				null), // lists are read-only properties
-			// rel: GroupExcercise passes Excercise (a8350540-d61e-48b3-b7a1-39751968dcf3)
-		};
+		private static readonly object _propertiesLock = new object();
+		private static System.ComponentModel.PropertyDescriptor[] _properties;
 		
-		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
+		private void _InitializePropertyDescriptors(Func<IReadOnlyKistlContext> lazyCtx)
+		{
+			if (_properties != null) return;
+			lock (_propertiesLock)
+			{
+				// recheck for a lost race after aquiring the lock
+				if (_properties != null) return;
+				
+				_properties = new System.ComponentModel.PropertyDescriptor[] {
+					// else
+					new CustomPropertyDescriptor<GroupExcercise__Implementation__, at.dasz.CourseOrganiser.Exercise>(
+						lazyCtx,
+						new Guid("844509ba-ace7-4ce5-a5a0-ec52110d0203"),
+						"Excercise",
+						null,
+						obj => obj.Excercise,
+						(obj, val) => obj.Excercise = val),
+					// else
+					new CustomPropertyDescriptor<GroupExcercise__Implementation__, int?>(
+						lazyCtx,
+						new Guid("04f84c64-4d2d-41c3-8007-024ba5f71b08"),
+						"Score",
+						null,
+						obj => obj.Score,
+						(obj, val) => obj.Score = val),
+					// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
+					new CustomPropertyDescriptor<GroupExcercise__Implementation__, ICollection<at.dasz.CourseOrganiser.Student>>(
+						lazyCtx,
+						new Guid("f8257ff0-7693-4a11-bb2b-6f6db4666dfa"),
+						"Students",
+						null,
+						obj => obj.Students,
+						null), // lists are read-only properties
+					// rel: GroupExcercise passes Excercise (a8350540-d61e-48b3-b7a1-39751968dcf3)
+				};
+			}
+		}
+		
+		protected override void CollectProperties(Func<IReadOnlyKistlContext> lazyCtx, List<System.ComponentModel.PropertyDescriptor> props)
 		{
 			base.CollectProperties(props);
+			_InitializePropertyDescriptors(lazyCtx);
 			props.AddRange(_properties);
 		}
 	

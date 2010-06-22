@@ -26,9 +26,15 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("TypeRef")]
     public class TypeRef__Implementation__ : BaseServerDataObject_EntityFramework, Kistl.API.IExportableInternal, TypeRef
     {
-    
-		public TypeRef__Implementation__()
-		{
+        [Obsolete]
+        public TypeRef__Implementation__()
+            : base(null)
+        {
+        }
+
+        public TypeRef__Implementation__(Func<IReadOnlyKistlContext> lazyCtx)
+            : base(lazyCtx)
+        {
         }
 
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
@@ -858,10 +864,10 @@ namespace Kistl.App.Base
 
 
 
-		public override Type GetImplementedInterface()
-		{
-			return typeof(TypeRef);
-		}
+        public override Type GetImplementedInterface()
+        {
+            return typeof(TypeRef);
+        }
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{
@@ -932,99 +938,124 @@ namespace Kistl.App.Base
         public static event ObjectEventHandler<TypeRef> OnDeleting_TypeRef;
 
 
-		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			// else
-			new CustomPropertyDescriptor<TypeRef__Implementation__, Kistl.App.Base.Assembly>(
-				new Guid("885bfa97-3d43-48bb-a0aa-1049298714ff"),
-				"Assembly",
-				null,
-				obj => obj.Assembly,
-				(obj, val) => obj.Assembly = val),
-			// else
-			new CustomPropertyDescriptor<TypeRef__Implementation__, Kistl.App.Base.Identity>(
-				new Guid("eaca4d2e-f9e9-4328-92fc-20ba96f59933"),
-				"ChangedBy",
-				null,
-				obj => obj.ChangedBy,
-				(obj, val) => obj.ChangedBy = val),
-			// else
-			new CustomPropertyDescriptor<TypeRef__Implementation__, DateTime?>(
-				new Guid("e6dcca07-a7f3-4ca7-9763-95e1124ffb25"),
-				"ChangedOn",
-				null,
-				obj => obj.ChangedOn,
-				(obj, val) => obj.ChangedOn = val),
-			// else
-			new CustomPropertyDescriptor<TypeRef__Implementation__, Kistl.App.Base.Identity>(
-				new Guid("8e862e5e-bc66-479a-9482-edd3a3355db3"),
-				"CreatedBy",
-				null,
-				obj => obj.CreatedBy,
-				(obj, val) => obj.CreatedBy = val),
-			// else
-			new CustomPropertyDescriptor<TypeRef__Implementation__, DateTime?>(
-				new Guid("d769345e-341e-488d-90c3-821a8b35b4f7"),
-				"CreatedOn",
-				null,
-				obj => obj.CreatedOn,
-				(obj, val) => obj.CreatedOn = val),
-			// else
-			new CustomPropertyDescriptor<TypeRef__Implementation__, bool?>(
-				new Guid("aa1a4c98-2ae0-45d9-a343-7db43ca6430e"),
-				"Deleted",
-				null,
-				obj => obj.Deleted,
-				(obj, val) => obj.Deleted = val),
-			// else
-			new CustomPropertyDescriptor<TypeRef__Implementation__, Guid>(
-				new Guid("48430be7-e17f-48ad-ac8b-7f9cb5341318"),
-				"ExportGuid",
-				null,
-				obj => obj.ExportGuid,
-				(obj, val) => obj.ExportGuid = val),
-			// else
-			new CustomPropertyDescriptor<TypeRef__Implementation__, string>(
-				new Guid("e418e513-e623-4a8f-bcbd-8572a29b7c82"),
-				"FullName",
-				null,
-				obj => obj.FullName,
-				(obj, val) => obj.FullName = val),
-			// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
-			new CustomPropertyDescriptor<TypeRef__Implementation__, IList<Kistl.App.Base.TypeRef>>(
-				new Guid("443e3370-b1f4-46e8-9779-1a8d9ba1c8a6"),
-				"GenericArguments",
-				null,
-				obj => obj.GenericArguments,
-				null), // lists are read-only properties
-			// else
-			new CustomPropertyDescriptor<TypeRef__Implementation__, Kistl.App.Base.TypeRef>(
-				new Guid("f7ed21a0-9a41-40eb-b3ab-b35591f2edd7"),
-				"Parent",
-				null,
-				obj => obj.Parent,
-				(obj, val) => obj.Parent = val),
-			// else
-			new CustomPropertyDescriptor<TypeRef__Implementation__, string>(
-				new Guid("7887ad1c-654c-46fb-b7eb-bde9de04184a"),
-				"ToStringCache",
-				null,
-				obj => obj.ToStringCache,
-				(obj, val) => obj.ToStringCache = val),
-			// rel: ClrObjectParameter isOf Type (4c7e0ac7-eb8a-4304-85e7-fcc358cb639c)
-			// rel: ConstraintInvocation has TypeRef (ed423e87-e04d-4753-ba99-c186a7a12242)
-			// rel: MethodInvocation has Implementor (dc9013af-8758-40b4-8f52-c2c8683a13e0)
-			// rel: PropertyInvocation has Implementor (7fa78e0e-c9bb-4ce2-ae74-262174f48b45)
-			// rel: TypeRef has Assembly (c10b1abc-3786-40f6-8c8c-dccdd8dc03ef)
-			// rel: Child has Parent (2094dc91-456b-4cdf-ac0c-bf97f5c85a7e)
-			// rel: TypeRef was CreatedBy (18ca9bcf-98f8-42b1-8280-649401dec9de)
-			// rel: TypeRef was ChangedBy (b027e54e-632d-43ef-a83f-9d017717a9da)
-			// rel: View has ControlRef (6c1c4c7c-7f0c-4c80-a937-ed6af8774d3f)
-			// rel: Descriptor has ViewModelRef (9d771d87-3b28-4e5e-be33-ea71028e1720)
-		};
+		private static readonly object _propertiesLock = new object();
+		private static System.ComponentModel.PropertyDescriptor[] _properties;
 		
-		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
+		private void _InitializePropertyDescriptors(Func<IReadOnlyKistlContext> lazyCtx)
+		{
+			if (_properties != null) return;
+			lock (_propertiesLock)
+			{
+				// recheck for a lost race after aquiring the lock
+				if (_properties != null) return;
+				
+				_properties = new System.ComponentModel.PropertyDescriptor[] {
+					// else
+					new CustomPropertyDescriptor<TypeRef__Implementation__, Kistl.App.Base.Assembly>(
+						lazyCtx,
+						new Guid("885bfa97-3d43-48bb-a0aa-1049298714ff"),
+						"Assembly",
+						null,
+						obj => obj.Assembly,
+						(obj, val) => obj.Assembly = val),
+					// else
+					new CustomPropertyDescriptor<TypeRef__Implementation__, Kistl.App.Base.Identity>(
+						lazyCtx,
+						new Guid("eaca4d2e-f9e9-4328-92fc-20ba96f59933"),
+						"ChangedBy",
+						null,
+						obj => obj.ChangedBy,
+						(obj, val) => obj.ChangedBy = val),
+					// else
+					new CustomPropertyDescriptor<TypeRef__Implementation__, DateTime?>(
+						lazyCtx,
+						new Guid("e6dcca07-a7f3-4ca7-9763-95e1124ffb25"),
+						"ChangedOn",
+						null,
+						obj => obj.ChangedOn,
+						(obj, val) => obj.ChangedOn = val),
+					// else
+					new CustomPropertyDescriptor<TypeRef__Implementation__, Kistl.App.Base.Identity>(
+						lazyCtx,
+						new Guid("8e862e5e-bc66-479a-9482-edd3a3355db3"),
+						"CreatedBy",
+						null,
+						obj => obj.CreatedBy,
+						(obj, val) => obj.CreatedBy = val),
+					// else
+					new CustomPropertyDescriptor<TypeRef__Implementation__, DateTime?>(
+						lazyCtx,
+						new Guid("d769345e-341e-488d-90c3-821a8b35b4f7"),
+						"CreatedOn",
+						null,
+						obj => obj.CreatedOn,
+						(obj, val) => obj.CreatedOn = val),
+					// else
+					new CustomPropertyDescriptor<TypeRef__Implementation__, bool?>(
+						lazyCtx,
+						new Guid("aa1a4c98-2ae0-45d9-a343-7db43ca6430e"),
+						"Deleted",
+						null,
+						obj => obj.Deleted,
+						(obj, val) => obj.Deleted = val),
+					// else
+					new CustomPropertyDescriptor<TypeRef__Implementation__, Guid>(
+						lazyCtx,
+						new Guid("48430be7-e17f-48ad-ac8b-7f9cb5341318"),
+						"ExportGuid",
+						null,
+						obj => obj.ExportGuid,
+						(obj, val) => obj.ExportGuid = val),
+					// else
+					new CustomPropertyDescriptor<TypeRef__Implementation__, string>(
+						lazyCtx,
+						new Guid("e418e513-e623-4a8f-bcbd-8572a29b7c82"),
+						"FullName",
+						null,
+						obj => obj.FullName,
+						(obj, val) => obj.FullName = val),
+					// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
+					new CustomPropertyDescriptor<TypeRef__Implementation__, IList<Kistl.App.Base.TypeRef>>(
+						lazyCtx,
+						new Guid("443e3370-b1f4-46e8-9779-1a8d9ba1c8a6"),
+						"GenericArguments",
+						null,
+						obj => obj.GenericArguments,
+						null), // lists are read-only properties
+					// else
+					new CustomPropertyDescriptor<TypeRef__Implementation__, Kistl.App.Base.TypeRef>(
+						lazyCtx,
+						new Guid("f7ed21a0-9a41-40eb-b3ab-b35591f2edd7"),
+						"Parent",
+						null,
+						obj => obj.Parent,
+						(obj, val) => obj.Parent = val),
+					// else
+					new CustomPropertyDescriptor<TypeRef__Implementation__, string>(
+						lazyCtx,
+						new Guid("7887ad1c-654c-46fb-b7eb-bde9de04184a"),
+						"ToStringCache",
+						null,
+						obj => obj.ToStringCache,
+						(obj, val) => obj.ToStringCache = val),
+					// rel: ClrObjectParameter isOf Type (4c7e0ac7-eb8a-4304-85e7-fcc358cb639c)
+					// rel: ConstraintInvocation has TypeRef (ed423e87-e04d-4753-ba99-c186a7a12242)
+					// rel: MethodInvocation has Implementor (dc9013af-8758-40b4-8f52-c2c8683a13e0)
+					// rel: PropertyInvocation has Implementor (7fa78e0e-c9bb-4ce2-ae74-262174f48b45)
+					// rel: TypeRef has Assembly (c10b1abc-3786-40f6-8c8c-dccdd8dc03ef)
+					// rel: Child has Parent (2094dc91-456b-4cdf-ac0c-bf97f5c85a7e)
+					// rel: TypeRef was CreatedBy (18ca9bcf-98f8-42b1-8280-649401dec9de)
+					// rel: TypeRef was ChangedBy (b027e54e-632d-43ef-a83f-9d017717a9da)
+					// rel: View has ControlRef (6c1c4c7c-7f0c-4c80-a937-ed6af8774d3f)
+					// rel: Descriptor has ViewModelRef (9d771d87-3b28-4e5e-be33-ea71028e1720)
+				};
+			}
+		}
+		
+		protected override void CollectProperties(Func<IReadOnlyKistlContext> lazyCtx, List<System.ComponentModel.PropertyDescriptor> props)
 		{
 			base.CollectProperties(props);
+			_InitializePropertyDescriptors(lazyCtx);
 			props.AddRange(_properties);
 		}
 	

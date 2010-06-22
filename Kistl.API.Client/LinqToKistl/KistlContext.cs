@@ -22,6 +22,7 @@ namespace Kistl.API.Client
         private readonly ITypeTransformations typeTrans;
         private readonly IProxy proxy;
         private readonly string _ClientImplementationAssembly;
+        private readonly Func<IReadOnlyKistlContext> _lazyCtx;
 
         /// <summary>
         /// List of Objects (IDataObject and ICollectionEntry) in this Context.
@@ -34,13 +35,14 @@ namespace Kistl.API.Client
         [SuppressMessage("Microsoft.Performance", "CA1805:DoNotInitializeUnnecessarily", Justification = "Uses global constant")]
         private int _newIDCounter = Helper.INVALIDID;
 
-        public KistlContextImpl(KistlConfig config, ITypeTransformations typeTrans, IProxy proxy, string clientImplementationAssembly)
+        public KistlContextImpl(KistlConfig config, ITypeTransformations typeTrans, IProxy proxy, string clientImplementationAssembly, Func<IReadOnlyKistlContext> lazyCtx)
         {
             this.config = config;
             this.typeTrans = typeTrans;
             this.proxy = proxy;
             this._ClientImplementationAssembly = clientImplementationAssembly;
             this._objects = new ContextCache(this);
+            this._lazyCtx = lazyCtx;
 
             CreatedAt = new StackTrace(true);
             KistlContextDebuggerSingleton.Created(this);
@@ -281,7 +283,7 @@ namespace Kistl.API.Client
 
         private object CreateUnattachedInstance(InterfaceType ifType)
         {
-            return Activator.CreateInstance(ToImplementationType(ifType).Type);
+            return Activator.CreateInstance(ToImplementationType(ifType).Type, _lazyCtx);
         }
 
         private IPersistenceObject CreateInternal(InterfaceType ifType)

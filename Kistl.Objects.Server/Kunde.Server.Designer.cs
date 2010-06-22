@@ -26,9 +26,15 @@ namespace Kistl.App.Projekte
     [System.Diagnostics.DebuggerDisplay("Kunde")]
     public class Kunde__Implementation__ : BaseServerDataObject_EntityFramework, Kunde
     {
-    
-		public Kunde__Implementation__()
-		{
+        [Obsolete]
+        public Kunde__Implementation__()
+            : base(null)
+        {
+        }
+
+        public Kunde__Implementation__(Func<IReadOnlyKistlContext> lazyCtx)
+            : base(lazyCtx)
+        {
         }
 
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
@@ -647,10 +653,10 @@ namespace Kistl.App.Projekte
 		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Kunde, string> OnPLZ_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Kunde, string> OnPLZ_PostSetter;
 
-		public override Type GetImplementedInterface()
-		{
-			return typeof(Kunde);
-		}
+        public override Type GetImplementedInterface()
+        {
+            return typeof(Kunde);
+        }
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{
@@ -720,86 +726,110 @@ namespace Kistl.App.Projekte
         public static event ObjectEventHandler<Kunde> OnDeleting_Kunde;
 
 
-		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			// else
-			new CustomPropertyDescriptor<Kunde__Implementation__, string>(
-				new Guid("7ba07561-15f4-495a-b2eb-59006e4210e5"),
-				"Adresse",
-				null,
-				obj => obj.Adresse,
-				(obj, val) => obj.Adresse = val),
-			// else
-			new CustomPropertyDescriptor<Kunde__Implementation__, Kistl.App.Base.Identity>(
-				new Guid("d2148600-ebba-4782-8379-a8b03a31362b"),
-				"ChangedBy",
-				null,
-				obj => obj.ChangedBy,
-				(obj, val) => obj.ChangedBy = val),
-			// else
-			new CustomPropertyDescriptor<Kunde__Implementation__, DateTime?>(
-				new Guid("028ff0b0-1beb-486d-b400-bfe3cdf73c5f"),
-				"ChangedOn",
-				null,
-				obj => obj.ChangedOn,
-				(obj, val) => obj.ChangedOn = val),
-			// else
-			new CustomPropertyDescriptor<Kunde__Implementation__, Kistl.App.Base.Identity>(
-				new Guid("acc46d95-0f07-40cd-b2b1-79d093d6e7b4"),
-				"CreatedBy",
-				null,
-				obj => obj.CreatedBy,
-				(obj, val) => obj.CreatedBy = val),
-			// else
-			new CustomPropertyDescriptor<Kunde__Implementation__, DateTime?>(
-				new Guid("1c23561e-07d4-4363-8ceb-3b13f3125634"),
-				"CreatedOn",
-				null,
-				obj => obj.CreatedOn,
-				(obj, val) => obj.CreatedOn = val),
-			// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
-			new CustomPropertyDescriptor<Kunde__Implementation__, ICollection<string>>(
-				new Guid("1d0f6da6-4b69-48d7-9e94-bfb5466654b9"),
-				"EMails",
-				null,
-				obj => obj.EMails,
-				null), // lists are read-only properties
-			// else
-			new CustomPropertyDescriptor<Kunde__Implementation__, string>(
-				new Guid("2817a845-b2d5-43ed-b0f1-5a6692a62183"),
-				"Kundenname",
-				null,
-				obj => obj.Kundenname,
-				(obj, val) => obj.Kundenname = val),
-			// else
-			new CustomPropertyDescriptor<Kunde__Implementation__, string>(
-				new Guid("c01afb40-9f28-494f-9058-9d0eca79a125"),
-				"Land",
-				null,
-				obj => obj.Land,
-				(obj, val) => obj.Land = val),
-			// else
-			new CustomPropertyDescriptor<Kunde__Implementation__, string>(
-				new Guid("5281cbe0-8f63-4a2d-bb9e-2ee04588202d"),
-				"Ort",
-				null,
-				obj => obj.Ort,
-				(obj, val) => obj.Ort = val),
-			// else
-			new CustomPropertyDescriptor<Kunde__Implementation__, string>(
-				new Guid("cafb4b93-4a1a-4753-8ec0-c65936a0d129"),
-				"PLZ",
-				null,
-				obj => obj.PLZ,
-				(obj, val) => obj.PLZ = val),
-			// rel: Auftrag has Kunde (c0c472d1-95b3-4588-812b-0d41c6e692b5)
-			// rel: Kunde was CreatedBy (5daf8db8-be8b-4ac7-a887-9217442fa7f4)
-			// rel: Kunde was ChangedBy (2a33407e-beeb-4919-b4c1-9aa264286151)
-			// rel: TestObjClass has ObjectProp (9d44eac8-2470-4373-a2bf-df3bc16d3454)
-		};
+		private static readonly object _propertiesLock = new object();
+		private static System.ComponentModel.PropertyDescriptor[] _properties;
 		
-		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
+		private void _InitializePropertyDescriptors(Func<IReadOnlyKistlContext> lazyCtx)
+		{
+			if (_properties != null) return;
+			lock (_propertiesLock)
+			{
+				// recheck for a lost race after aquiring the lock
+				if (_properties != null) return;
+				
+				_properties = new System.ComponentModel.PropertyDescriptor[] {
+					// else
+					new CustomPropertyDescriptor<Kunde__Implementation__, string>(
+						lazyCtx,
+						new Guid("7ba07561-15f4-495a-b2eb-59006e4210e5"),
+						"Adresse",
+						null,
+						obj => obj.Adresse,
+						(obj, val) => obj.Adresse = val),
+					// else
+					new CustomPropertyDescriptor<Kunde__Implementation__, Kistl.App.Base.Identity>(
+						lazyCtx,
+						new Guid("d2148600-ebba-4782-8379-a8b03a31362b"),
+						"ChangedBy",
+						null,
+						obj => obj.ChangedBy,
+						(obj, val) => obj.ChangedBy = val),
+					// else
+					new CustomPropertyDescriptor<Kunde__Implementation__, DateTime?>(
+						lazyCtx,
+						new Guid("028ff0b0-1beb-486d-b400-bfe3cdf73c5f"),
+						"ChangedOn",
+						null,
+						obj => obj.ChangedOn,
+						(obj, val) => obj.ChangedOn = val),
+					// else
+					new CustomPropertyDescriptor<Kunde__Implementation__, Kistl.App.Base.Identity>(
+						lazyCtx,
+						new Guid("acc46d95-0f07-40cd-b2b1-79d093d6e7b4"),
+						"CreatedBy",
+						null,
+						obj => obj.CreatedBy,
+						(obj, val) => obj.CreatedBy = val),
+					// else
+					new CustomPropertyDescriptor<Kunde__Implementation__, DateTime?>(
+						lazyCtx,
+						new Guid("1c23561e-07d4-4363-8ceb-3b13f3125634"),
+						"CreatedOn",
+						null,
+						obj => obj.CreatedOn,
+						(obj, val) => obj.CreatedOn = val),
+					// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
+					new CustomPropertyDescriptor<Kunde__Implementation__, ICollection<string>>(
+						lazyCtx,
+						new Guid("1d0f6da6-4b69-48d7-9e94-bfb5466654b9"),
+						"EMails",
+						null,
+						obj => obj.EMails,
+						null), // lists are read-only properties
+					// else
+					new CustomPropertyDescriptor<Kunde__Implementation__, string>(
+						lazyCtx,
+						new Guid("2817a845-b2d5-43ed-b0f1-5a6692a62183"),
+						"Kundenname",
+						null,
+						obj => obj.Kundenname,
+						(obj, val) => obj.Kundenname = val),
+					// else
+					new CustomPropertyDescriptor<Kunde__Implementation__, string>(
+						lazyCtx,
+						new Guid("c01afb40-9f28-494f-9058-9d0eca79a125"),
+						"Land",
+						null,
+						obj => obj.Land,
+						(obj, val) => obj.Land = val),
+					// else
+					new CustomPropertyDescriptor<Kunde__Implementation__, string>(
+						lazyCtx,
+						new Guid("5281cbe0-8f63-4a2d-bb9e-2ee04588202d"),
+						"Ort",
+						null,
+						obj => obj.Ort,
+						(obj, val) => obj.Ort = val),
+					// else
+					new CustomPropertyDescriptor<Kunde__Implementation__, string>(
+						lazyCtx,
+						new Guid("cafb4b93-4a1a-4753-8ec0-c65936a0d129"),
+						"PLZ",
+						null,
+						obj => obj.PLZ,
+						(obj, val) => obj.PLZ = val),
+					// rel: Auftrag has Kunde (c0c472d1-95b3-4588-812b-0d41c6e692b5)
+					// rel: Kunde was CreatedBy (5daf8db8-be8b-4ac7-a887-9217442fa7f4)
+					// rel: Kunde was ChangedBy (2a33407e-beeb-4919-b4c1-9aa264286151)
+					// rel: TestObjClass has ObjectProp (9d44eac8-2470-4373-a2bf-df3bc16d3454)
+				};
+			}
+		}
+		
+		protected override void CollectProperties(Func<IReadOnlyKistlContext> lazyCtx, List<System.ComponentModel.PropertyDescriptor> props)
 		{
 			base.CollectProperties(props);
+			_InitializePropertyDescriptors(lazyCtx);
 			props.AddRange(_properties);
 		}
 	

@@ -26,9 +26,15 @@ namespace Kistl.App.GUI
     [System.Diagnostics.DebuggerDisplay("ViewModelDescriptor")]
     public class ViewModelDescriptor__Implementation__ : BaseServerDataObject_EntityFramework, Kistl.API.IExportableInternal, ViewModelDescriptor
     {
-    
-		public ViewModelDescriptor__Implementation__()
-		{
+        [Obsolete]
+        public ViewModelDescriptor__Implementation__()
+            : base(null)
+        {
+        }
+
+        public ViewModelDescriptor__Implementation__(Func<IReadOnlyKistlContext> lazyCtx)
+            : base(lazyCtx)
+        {
         }
 
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
@@ -585,10 +591,10 @@ namespace Kistl.App.GUI
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.ViewModelDescriptor, Kistl.App.Base.TypeRef> OnViewModelRef_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.ViewModelDescriptor, Kistl.App.Base.TypeRef> OnViewModelRef_PostSetter;
 
-		public override Type GetImplementedInterface()
-		{
-			return typeof(ViewModelDescriptor);
-		}
+        public override Type GetImplementedInterface()
+        {
+            return typeof(ViewModelDescriptor);
+        }
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{
@@ -655,68 +661,89 @@ namespace Kistl.App.GUI
         public static event ObjectEventHandler<ViewModelDescriptor> OnDeleting_ViewModelDescriptor;
 
 
-		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			// else
-			new CustomPropertyDescriptor<ViewModelDescriptor__Implementation__, Kistl.App.GUI.ControlKind>(
-				new Guid("6c744476-35e0-4cef-a221-f02abc81566c"),
-				"DefaultGridCellKind",
-				null,
-				obj => obj.DefaultGridCellKind,
-				(obj, val) => obj.DefaultGridCellKind = val),
-			// else
-			new CustomPropertyDescriptor<ViewModelDescriptor__Implementation__, Kistl.App.GUI.ControlKind>(
-				new Guid("b535115c-b847-479d-bdea-a7994ae6eeca"),
-				"DefaultKind",
-				null,
-				obj => obj.DefaultKind,
-				(obj, val) => obj.DefaultKind = val),
-			// else
-			new CustomPropertyDescriptor<ViewModelDescriptor__Implementation__, string>(
-				new Guid("93e25648-50f9-40d8-8753-e5dadab68e1d"),
-				"Description",
-				null,
-				obj => obj.Description,
-				(obj, val) => obj.Description = val),
-			// else
-			new CustomPropertyDescriptor<ViewModelDescriptor__Implementation__, Guid>(
-				new Guid("77ce1e5b-f244-4279-af13-b3e75b55f933"),
-				"ExportGuid",
-				null,
-				obj => obj.ExportGuid,
-				(obj, val) => obj.ExportGuid = val),
-			// else
-			new CustomPropertyDescriptor<ViewModelDescriptor__Implementation__, Kistl.App.Base.Module>(
-				new Guid("0b7135d3-dedc-4091-a0c4-690c1b4a2b6d"),
-				"Module",
-				null,
-				obj => obj.Module,
-				(obj, val) => obj.Module = val),
-			// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
-			new CustomPropertyDescriptor<ViewModelDescriptor__Implementation__, ICollection<Kistl.App.GUI.ControlKind>>(
-				new Guid("5e2e007c-2e90-4ba6-9c9d-46e62b662ff9"),
-				"SecondaryControlKinds",
-				null,
-				obj => obj.SecondaryControlKinds,
-				null), // lists are read-only properties
-			// else
-			new CustomPropertyDescriptor<ViewModelDescriptor__Implementation__, Kistl.App.Base.TypeRef>(
-				new Guid("554288d1-f5f4-4b22-908b-01525a1d0f9b"),
-				"ViewModelRef",
-				null,
-				obj => obj.ViewModelRef,
-				(obj, val) => obj.ViewModelRef = val),
-			// rel: FilterConfiguration has ViewModelDescriptor (2d856368-2ffc-42de-83ef-5389cc57308a)
-			// rel: Presentable has DefaultViewModelDescriptor (1ae94c81-3359-45e8-b97a-b61add91abba)
-			// rel: Property has ValueModelDescriptor (3437ea5d-d926-4a0b-a848-9dafedf7ad6a)
-			// rel: ViewModelDescriptor displayedInGridBy DefaultGridCellKind (0a03215f-1c1a-4a44-892d-86642eefe9f1)
-			// rel: Presentable has DefaultKind (cc835258-6ada-4f3f-839e-7f276ded995a)
-			// rel: ViewModelDescriptor has Module (557dbc1c-2a38-4c77-8544-264a95307980)
-			// rel: Descriptor has ViewModelRef (9d771d87-3b28-4e5e-be33-ea71028e1720)
-		};
+		private static readonly object _propertiesLock = new object();
+		private static System.ComponentModel.PropertyDescriptor[] _properties;
 		
-		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
+		private void _InitializePropertyDescriptors(Func<IReadOnlyKistlContext> lazyCtx)
+		{
+			if (_properties != null) return;
+			lock (_propertiesLock)
+			{
+				// recheck for a lost race after aquiring the lock
+				if (_properties != null) return;
+				
+				_properties = new System.ComponentModel.PropertyDescriptor[] {
+					// else
+					new CustomPropertyDescriptor<ViewModelDescriptor__Implementation__, Kistl.App.GUI.ControlKind>(
+						lazyCtx,
+						new Guid("6c744476-35e0-4cef-a221-f02abc81566c"),
+						"DefaultGridCellKind",
+						null,
+						obj => obj.DefaultGridCellKind,
+						(obj, val) => obj.DefaultGridCellKind = val),
+					// else
+					new CustomPropertyDescriptor<ViewModelDescriptor__Implementation__, Kistl.App.GUI.ControlKind>(
+						lazyCtx,
+						new Guid("b535115c-b847-479d-bdea-a7994ae6eeca"),
+						"DefaultKind",
+						null,
+						obj => obj.DefaultKind,
+						(obj, val) => obj.DefaultKind = val),
+					// else
+					new CustomPropertyDescriptor<ViewModelDescriptor__Implementation__, string>(
+						lazyCtx,
+						new Guid("93e25648-50f9-40d8-8753-e5dadab68e1d"),
+						"Description",
+						null,
+						obj => obj.Description,
+						(obj, val) => obj.Description = val),
+					// else
+					new CustomPropertyDescriptor<ViewModelDescriptor__Implementation__, Guid>(
+						lazyCtx,
+						new Guid("77ce1e5b-f244-4279-af13-b3e75b55f933"),
+						"ExportGuid",
+						null,
+						obj => obj.ExportGuid,
+						(obj, val) => obj.ExportGuid = val),
+					// else
+					new CustomPropertyDescriptor<ViewModelDescriptor__Implementation__, Kistl.App.Base.Module>(
+						lazyCtx,
+						new Guid("0b7135d3-dedc-4091-a0c4-690c1b4a2b6d"),
+						"Module",
+						null,
+						obj => obj.Module,
+						(obj, val) => obj.Module = val),
+					// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
+					new CustomPropertyDescriptor<ViewModelDescriptor__Implementation__, ICollection<Kistl.App.GUI.ControlKind>>(
+						lazyCtx,
+						new Guid("5e2e007c-2e90-4ba6-9c9d-46e62b662ff9"),
+						"SecondaryControlKinds",
+						null,
+						obj => obj.SecondaryControlKinds,
+						null), // lists are read-only properties
+					// else
+					new CustomPropertyDescriptor<ViewModelDescriptor__Implementation__, Kistl.App.Base.TypeRef>(
+						lazyCtx,
+						new Guid("554288d1-f5f4-4b22-908b-01525a1d0f9b"),
+						"ViewModelRef",
+						null,
+						obj => obj.ViewModelRef,
+						(obj, val) => obj.ViewModelRef = val),
+					// rel: FilterConfiguration has ViewModelDescriptor (2d856368-2ffc-42de-83ef-5389cc57308a)
+					// rel: Presentable has DefaultViewModelDescriptor (1ae94c81-3359-45e8-b97a-b61add91abba)
+					// rel: Property has ValueModelDescriptor (3437ea5d-d926-4a0b-a848-9dafedf7ad6a)
+					// rel: ViewModelDescriptor displayedInGridBy DefaultGridCellKind (0a03215f-1c1a-4a44-892d-86642eefe9f1)
+					// rel: Presentable has DefaultKind (cc835258-6ada-4f3f-839e-7f276ded995a)
+					// rel: ViewModelDescriptor has Module (557dbc1c-2a38-4c77-8544-264a95307980)
+					// rel: Descriptor has ViewModelRef (9d771d87-3b28-4e5e-be33-ea71028e1720)
+				};
+			}
+		}
+		
+		protected override void CollectProperties(Func<IReadOnlyKistlContext> lazyCtx, List<System.ComponentModel.PropertyDescriptor> props)
 		{
 			base.CollectProperties(props);
+			_InitializePropertyDescriptors(lazyCtx);
 			props.AddRange(_properties);
 		}
 	

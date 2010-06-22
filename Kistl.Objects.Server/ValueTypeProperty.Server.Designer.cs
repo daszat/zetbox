@@ -26,9 +26,15 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("ValueTypeProperty")]
     public abstract class ValueTypeProperty__Implementation__ : Kistl.App.Base.Property__Implementation__, ValueTypeProperty
     {
-    
-		public ValueTypeProperty__Implementation__()
-		{
+        [Obsolete]
+        public ValueTypeProperty__Implementation__()
+            : base(null)
+        {
+        }
+
+        public ValueTypeProperty__Implementation__(Func<IReadOnlyKistlContext> lazyCtx)
+            : base(lazyCtx)
+        {
         }
 
 
@@ -178,10 +184,10 @@ namespace Kistl.App.Base
 
 
 
-		public override Type GetImplementedInterface()
-		{
-			return typeof(ValueTypeProperty);
-		}
+        public override Type GetImplementedInterface()
+        {
+            return typeof(ValueTypeProperty);
+        }
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{
@@ -244,26 +250,42 @@ namespace Kistl.App.Base
         public static event ObjectEventHandler<ValueTypeProperty> OnDeleting_ValueTypeProperty;
 
 
-		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			// else
-			new CustomPropertyDescriptor<ValueTypeProperty__Implementation__, bool>(
-				new Guid("b62c7fee-bb67-46a6-b481-81554e788aa0"),
-				"HasPersistentOrder",
-				null,
-				obj => obj.HasPersistentOrder,
-				(obj, val) => obj.HasPersistentOrder = val),
-			// else
-			new CustomPropertyDescriptor<ValueTypeProperty__Implementation__, bool>(
-				new Guid("b2bd1528-c22f-4e12-b80f-f8234a2c0831"),
-				"IsList",
-				null,
-				obj => obj.IsList,
-				(obj, val) => obj.IsList = val),
-		};
+		private static readonly object _propertiesLock = new object();
+		private static System.ComponentModel.PropertyDescriptor[] _properties;
 		
-		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
+		private void _InitializePropertyDescriptors(Func<IReadOnlyKistlContext> lazyCtx)
+		{
+			if (_properties != null) return;
+			lock (_propertiesLock)
+			{
+				// recheck for a lost race after aquiring the lock
+				if (_properties != null) return;
+				
+				_properties = new System.ComponentModel.PropertyDescriptor[] {
+					// else
+					new CustomPropertyDescriptor<ValueTypeProperty__Implementation__, bool>(
+						lazyCtx,
+						new Guid("b62c7fee-bb67-46a6-b481-81554e788aa0"),
+						"HasPersistentOrder",
+						null,
+						obj => obj.HasPersistentOrder,
+						(obj, val) => obj.HasPersistentOrder = val),
+					// else
+					new CustomPropertyDescriptor<ValueTypeProperty__Implementation__, bool>(
+						lazyCtx,
+						new Guid("b2bd1528-c22f-4e12-b80f-f8234a2c0831"),
+						"IsList",
+						null,
+						obj => obj.IsList,
+						(obj, val) => obj.IsList = val),
+				};
+			}
+		}
+		
+		protected override void CollectProperties(Func<IReadOnlyKistlContext> lazyCtx, List<System.ComponentModel.PropertyDescriptor> props)
 		{
 			base.CollectProperties(props);
+			_InitializePropertyDescriptors(lazyCtx);
 			props.AddRange(_properties);
 		}
 	

@@ -66,7 +66,8 @@ namespace Kistl.Server.Generators
         private void CompileCodeOnStaThread(string workingPath)
         {
             Exception failed = null;
-            var staThread = new Thread(() => { try { CompileCode(workingPath); } catch (Exception ex) { failed = ex; } });
+            bool success = false;
+            var staThread = new Thread(() => { try { success = CompileCode(workingPath); } catch (Exception ex) { failed = ex; } });
             if (staThread.TrySetApartmentState(ApartmentState.STA))
             {
                 Log.Info("Successfully set STA on compile thread");
@@ -81,7 +82,12 @@ namespace Kistl.Server.Generators
 
             if (failed != null)
             {
-                throw failed;
+                throw new ApplicationException("Compilation failed", failed);
+            }
+
+            if (!success)
+            {
+                throw new ApplicationException("Compilation failed");
             }
         }
 
@@ -105,7 +111,10 @@ namespace Kistl.Server.Generators
                     }
                     catch (Exception ex)
                     {
-                        failed.Add(ex);
+                        lock (failed)
+                        {
+                            failed.Add(ex);
+                        }
                     }
                 });
                 genThread.Name = gen.BaseName;
@@ -116,6 +125,7 @@ namespace Kistl.Server.Generators
                 //Log.Warn("Serializing generation threads.");
                 //genThread.Join();
             }
+
             foreach (var t in threads)
             {
                 t.Join();
@@ -124,11 +134,11 @@ namespace Kistl.Server.Generators
             if (failed.Count > 0)
             {
                 // TODO: Introduce own exception
-                throw failed.First();
+                throw new ApplicationException("Failed code generation", failed.First());
             }
         }
 
-        private void CompileCode(string workingPath)
+        private bool CompileCode(string workingPath)
         {
             string referencePath = Path.GetFullPath(Path.Combine(Path.GetDirectoryName(typeof(Generator).Assembly.Location), @".."));
 
@@ -155,11 +165,13 @@ namespace Kistl.Server.Generators
 
             try
             {
-                CompileSingle(referencePath, binPath, engine, _generatorProviders.Single(g => g.BaseName == "Interface"));
+                var result = true;
+                result &= CompileSingle(referencePath, binPath, engine, _generatorProviders.Single(g => g.BaseName == "Interface"));
                 foreach (var gen in _generatorProviders.Where(g => g.BaseName != "Interface"))
                 {
-                    CompileSingle(referencePath, binPath, engine, gen);
+                    result &= CompileSingle(referencePath, binPath, engine, gen);
                 }
+                return result;
             }
             finally
             {
@@ -168,7 +180,7 @@ namespace Kistl.Server.Generators
             }
         }
 
-        private static void CompileSingle(string apiPath, string binPath, Engine engine, BaseDataObjectGenerator gen)
+        private static bool CompileSingle(string apiPath, string binPath, Engine engine, BaseDataObjectGenerator gen)
         {
             try
             {
@@ -194,10 +206,12 @@ namespace Kistl.Server.Generators
                         throw new ApplicationException(String.Format("Failed to compile {0}", gen.Description));
                     }
                 }
+                return true;
             }
             catch (Exception ex)
             {
                 Log.Error("Failed compiling " + gen.Description, ex);
+                return false;
             }
         }
 

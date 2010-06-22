@@ -26,9 +26,15 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("BaseParameter")]
     public abstract class BaseParameter__Implementation__ : BaseServerDataObject_EntityFramework, BaseParameter, Kistl.API.IExportableInternal
     {
-    
-		public BaseParameter__Implementation__()
-		{
+        [Obsolete]
+        public BaseParameter__Implementation__()
+            : base(null)
+        {
+        }
+
+        public BaseParameter__Implementation__(Func<IReadOnlyKistlContext> lazyCtx)
+            : base(lazyCtx)
+        {
         }
 
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
@@ -776,10 +782,10 @@ namespace Kistl.App.Base
 
 
 
-		public override Type GetImplementedInterface()
-		{
-			return typeof(BaseParameter);
-		}
+        public override Type GetImplementedInterface()
+        {
+            return typeof(BaseParameter);
+        }
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{
@@ -851,92 +857,117 @@ namespace Kistl.App.Base
         public static event ObjectEventHandler<BaseParameter> OnDeleting_BaseParameter;
 
 
-		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			// else
-			new CustomPropertyDescriptor<BaseParameter__Implementation__, Kistl.App.Base.Identity>(
-				new Guid("61674c10-27f2-4e65-9907-708236b7b749"),
-				"ChangedBy",
-				null,
-				obj => obj.ChangedBy,
-				(obj, val) => obj.ChangedBy = val),
-			// else
-			new CustomPropertyDescriptor<BaseParameter__Implementation__, DateTime?>(
-				new Guid("31b82f61-35b1-403f-9626-d2c5ddfc20bb"),
-				"ChangedOn",
-				null,
-				obj => obj.ChangedOn,
-				(obj, val) => obj.ChangedOn = val),
-			// else
-			new CustomPropertyDescriptor<BaseParameter__Implementation__, Kistl.App.Base.Identity>(
-				new Guid("2a07ada5-3de0-48da-af26-4543533d230e"),
-				"CreatedBy",
-				null,
-				obj => obj.CreatedBy,
-				(obj, val) => obj.CreatedBy = val),
-			// else
-			new CustomPropertyDescriptor<BaseParameter__Implementation__, DateTime?>(
-				new Guid("e60db4c6-1eb9-4e21-a16d-047265b589b6"),
-				"CreatedOn",
-				null,
-				obj => obj.CreatedOn,
-				(obj, val) => obj.CreatedOn = val),
-			// else
-			new CustomPropertyDescriptor<BaseParameter__Implementation__, string>(
-				new Guid("20668b5a-ecaa-4531-81d8-6e50c9858ff0"),
-				"Description",
-				null,
-				obj => obj.Description,
-				(obj, val) => obj.Description = val),
-			// else
-			new CustomPropertyDescriptor<BaseParameter__Implementation__, Guid>(
-				new Guid("74265fbf-2340-4828-82fa-cff4a0d18ffa"),
-				"ExportGuid",
-				null,
-				obj => obj.ExportGuid,
-				(obj, val) => obj.ExportGuid = val),
-			// else
-			new CustomPropertyDescriptor<BaseParameter__Implementation__, bool>(
-				new Guid("ec4d5dbc-f738-4eb3-a663-2328d0baa79c"),
-				"IsList",
-				null,
-				obj => obj.IsList,
-				(obj, val) => obj.IsList = val),
-			// else
-			new CustomPropertyDescriptor<BaseParameter__Implementation__, bool>(
-				new Guid("ba5bfb2e-f679-41b2-93ef-fc795e2e92d4"),
-				"IsReturnParameter",
-				null,
-				obj => obj.IsReturnParameter,
-				(obj, val) => obj.IsReturnParameter = val),
-			// else
-			new CustomPropertyDescriptor<BaseParameter__Implementation__, Kistl.App.Base.Method>(
-				new Guid("29d7eba7-6b87-438a-910d-1a2bf17d8215"),
-				"Method",
-				null,
-				obj => obj.Method,
-				(obj, val) => obj.Method = val),
-			// else
-			new CustomPropertyDescriptor<BaseParameter__Implementation__, string>(
-				new Guid("25c82fbd-cf5d-4021-b549-fccb46e166b3"),
-				"Name",
-				null,
-				obj => obj.Name,
-				(obj, val) => obj.Name = val),
-			// rel: BaseParameter was CreatedBy (e98d475b-1a3f-4ffb-ac5a-4ecbebb2e6ce)
-			// rel: BaseParameter was ChangedBy (50657ede-910f-4552-a58b-b58832b7db8d)
-			// rel: Method has Parameter (f7738ce1-9784-4b8b-8156-9f4f0e97f937)
-			// rel.B.Type == cls && rel.B.HasPersistentOrder
-			new CustomPropertyDescriptor<BaseParameter__Implementation__, int?>(
-				null,
-				"Parameter_pos",
-				null,
-				obj => obj.Parameter_pos,
-				(obj, val) => obj.Parameter_pos = val),
-		};
+		private static readonly object _propertiesLock = new object();
+		private static System.ComponentModel.PropertyDescriptor[] _properties;
 		
-		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
+		private void _InitializePropertyDescriptors(Func<IReadOnlyKistlContext> lazyCtx)
+		{
+			if (_properties != null) return;
+			lock (_propertiesLock)
+			{
+				// recheck for a lost race after aquiring the lock
+				if (_properties != null) return;
+				
+				_properties = new System.ComponentModel.PropertyDescriptor[] {
+					// else
+					new CustomPropertyDescriptor<BaseParameter__Implementation__, Kistl.App.Base.Identity>(
+						lazyCtx,
+						new Guid("61674c10-27f2-4e65-9907-708236b7b749"),
+						"ChangedBy",
+						null,
+						obj => obj.ChangedBy,
+						(obj, val) => obj.ChangedBy = val),
+					// else
+					new CustomPropertyDescriptor<BaseParameter__Implementation__, DateTime?>(
+						lazyCtx,
+						new Guid("31b82f61-35b1-403f-9626-d2c5ddfc20bb"),
+						"ChangedOn",
+						null,
+						obj => obj.ChangedOn,
+						(obj, val) => obj.ChangedOn = val),
+					// else
+					new CustomPropertyDescriptor<BaseParameter__Implementation__, Kistl.App.Base.Identity>(
+						lazyCtx,
+						new Guid("2a07ada5-3de0-48da-af26-4543533d230e"),
+						"CreatedBy",
+						null,
+						obj => obj.CreatedBy,
+						(obj, val) => obj.CreatedBy = val),
+					// else
+					new CustomPropertyDescriptor<BaseParameter__Implementation__, DateTime?>(
+						lazyCtx,
+						new Guid("e60db4c6-1eb9-4e21-a16d-047265b589b6"),
+						"CreatedOn",
+						null,
+						obj => obj.CreatedOn,
+						(obj, val) => obj.CreatedOn = val),
+					// else
+					new CustomPropertyDescriptor<BaseParameter__Implementation__, string>(
+						lazyCtx,
+						new Guid("20668b5a-ecaa-4531-81d8-6e50c9858ff0"),
+						"Description",
+						null,
+						obj => obj.Description,
+						(obj, val) => obj.Description = val),
+					// else
+					new CustomPropertyDescriptor<BaseParameter__Implementation__, Guid>(
+						lazyCtx,
+						new Guid("74265fbf-2340-4828-82fa-cff4a0d18ffa"),
+						"ExportGuid",
+						null,
+						obj => obj.ExportGuid,
+						(obj, val) => obj.ExportGuid = val),
+					// else
+					new CustomPropertyDescriptor<BaseParameter__Implementation__, bool>(
+						lazyCtx,
+						new Guid("ec4d5dbc-f738-4eb3-a663-2328d0baa79c"),
+						"IsList",
+						null,
+						obj => obj.IsList,
+						(obj, val) => obj.IsList = val),
+					// else
+					new CustomPropertyDescriptor<BaseParameter__Implementation__, bool>(
+						lazyCtx,
+						new Guid("ba5bfb2e-f679-41b2-93ef-fc795e2e92d4"),
+						"IsReturnParameter",
+						null,
+						obj => obj.IsReturnParameter,
+						(obj, val) => obj.IsReturnParameter = val),
+					// else
+					new CustomPropertyDescriptor<BaseParameter__Implementation__, Kistl.App.Base.Method>(
+						lazyCtx,
+						new Guid("29d7eba7-6b87-438a-910d-1a2bf17d8215"),
+						"Method",
+						null,
+						obj => obj.Method,
+						(obj, val) => obj.Method = val),
+					// else
+					new CustomPropertyDescriptor<BaseParameter__Implementation__, string>(
+						lazyCtx,
+						new Guid("25c82fbd-cf5d-4021-b549-fccb46e166b3"),
+						"Name",
+						null,
+						obj => obj.Name,
+						(obj, val) => obj.Name = val),
+					// rel: BaseParameter was CreatedBy (e98d475b-1a3f-4ffb-ac5a-4ecbebb2e6ce)
+					// rel: BaseParameter was ChangedBy (50657ede-910f-4552-a58b-b58832b7db8d)
+					// rel: Method has Parameter (f7738ce1-9784-4b8b-8156-9f4f0e97f937)
+					// rel.B.Type == cls && rel.B.HasPersistentOrder
+					new CustomPropertyDescriptor<BaseParameter__Implementation__, int?>(
+						lazyCtx,
+						null,
+						"Parameter_pos",
+						null,
+						obj => obj.Parameter_pos,
+						(obj, val) => obj.Parameter_pos = val),
+				};
+			}
+		}
+		
+		protected override void CollectProperties(Func<IReadOnlyKistlContext> lazyCtx, List<System.ComponentModel.PropertyDescriptor> props)
 		{
 			base.CollectProperties(props);
+			_InitializePropertyDescriptors(lazyCtx);
 			props.AddRange(_properties);
 		}
 	

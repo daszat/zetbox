@@ -1,21 +1,21 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Xml.Serialization;
-using Kistl.API.Client;
-using Kistl.API;
 
 namespace Kistl.App.Test
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Xml.Serialization;
+    using Kistl.API;
+    using Kistl.API.Client;
+    
     public class TestObjClass__Implementation__ : BaseClientDataObject, TestObjClass
     {
         public TestObjClass__Implementation__()
+            : base(null)
         {
-            {
-            }
         }
 
 

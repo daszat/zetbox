@@ -26,9 +26,15 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("CompoundObjectProperty")]
     public class CompoundObjectProperty__Implementation__ : Kistl.App.Base.Property__Implementation__, CompoundObjectProperty
     {
-    
-		public CompoundObjectProperty__Implementation__()
-		{
+        [Obsolete]
+        public CompoundObjectProperty__Implementation__()
+            : base(null)
+        {
+        }
+
+        public CompoundObjectProperty__Implementation__(Func<IReadOnlyKistlContext> lazyCtx)
+            : base(lazyCtx)
+        {
         }
 
 
@@ -269,10 +275,10 @@ namespace Kistl.App.Base
 
 
 
-		public override Type GetImplementedInterface()
-		{
-			return typeof(CompoundObjectProperty);
-		}
+        public override Type GetImplementedInterface()
+        {
+            return typeof(CompoundObjectProperty);
+        }
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{
@@ -336,34 +342,51 @@ namespace Kistl.App.Base
         public static event ObjectEventHandler<CompoundObjectProperty> OnDeleting_CompoundObjectProperty;
 
 
-		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			// else
-			new CustomPropertyDescriptor<CompoundObjectProperty__Implementation__, Kistl.App.Base.CompoundObject>(
-				new Guid("0d78c157-c106-4728-9af2-7992da7c935d"),
-				"CompoundObjectDefinition",
-				null,
-				obj => obj.CompoundObjectDefinition,
-				(obj, val) => obj.CompoundObjectDefinition = val),
-			// else
-			new CustomPropertyDescriptor<CompoundObjectProperty__Implementation__, bool>(
-				new Guid("7c806f25-d85e-4d9f-b082-0cdaa7b60790"),
-				"HasPersistentOrder",
-				null,
-				obj => obj.HasPersistentOrder,
-				(obj, val) => obj.HasPersistentOrder = val),
-			// else
-			new CustomPropertyDescriptor<CompoundObjectProperty__Implementation__, bool>(
-				new Guid("8a861113-a48a-40c5-bdec-6ceafef86f48"),
-				"IsList",
-				null,
-				obj => obj.IsList,
-				(obj, val) => obj.IsList = val),
-			// rel: CompoundObjectProperty has CompoundObjectDefinition (cbc99fc5-2b15-4829-b4ae-bc8e38e767a8)
-		};
+		private static readonly object _propertiesLock = new object();
+		private static System.ComponentModel.PropertyDescriptor[] _properties;
 		
-		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
+		private void _InitializePropertyDescriptors(Func<IReadOnlyKistlContext> lazyCtx)
+		{
+			if (_properties != null) return;
+			lock (_propertiesLock)
+			{
+				// recheck for a lost race after aquiring the lock
+				if (_properties != null) return;
+				
+				_properties = new System.ComponentModel.PropertyDescriptor[] {
+					// else
+					new CustomPropertyDescriptor<CompoundObjectProperty__Implementation__, Kistl.App.Base.CompoundObject>(
+						lazyCtx,
+						new Guid("0d78c157-c106-4728-9af2-7992da7c935d"),
+						"CompoundObjectDefinition",
+						null,
+						obj => obj.CompoundObjectDefinition,
+						(obj, val) => obj.CompoundObjectDefinition = val),
+					// else
+					new CustomPropertyDescriptor<CompoundObjectProperty__Implementation__, bool>(
+						lazyCtx,
+						new Guid("7c806f25-d85e-4d9f-b082-0cdaa7b60790"),
+						"HasPersistentOrder",
+						null,
+						obj => obj.HasPersistentOrder,
+						(obj, val) => obj.HasPersistentOrder = val),
+					// else
+					new CustomPropertyDescriptor<CompoundObjectProperty__Implementation__, bool>(
+						lazyCtx,
+						new Guid("8a861113-a48a-40c5-bdec-6ceafef86f48"),
+						"IsList",
+						null,
+						obj => obj.IsList,
+						(obj, val) => obj.IsList = val),
+					// rel: CompoundObjectProperty has CompoundObjectDefinition (cbc99fc5-2b15-4829-b4ae-bc8e38e767a8)
+				};
+			}
+		}
+		
+		protected override void CollectProperties(Func<IReadOnlyKistlContext> lazyCtx, List<System.ComponentModel.PropertyDescriptor> props)
 		{
 			base.CollectProperties(props);
+			_InitializePropertyDescriptors(lazyCtx);
 			props.AddRange(_properties);
 		}
 	

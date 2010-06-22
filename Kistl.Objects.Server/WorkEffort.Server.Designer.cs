@@ -26,9 +26,15 @@ namespace Kistl.App.TimeRecords
     [System.Diagnostics.DebuggerDisplay("WorkEffort")]
     public class WorkEffort__Implementation__ : BaseServerDataObject_EntityFramework, WorkEffort
     {
-    
-		public WorkEffort__Implementation__()
-		{
+        [Obsolete]
+        public WorkEffort__Implementation__()
+            : base(null)
+        {
+        }
+
+        public WorkEffort__Implementation__(Func<IReadOnlyKistlContext> lazyCtx)
+            : base(lazyCtx)
+        {
         }
 
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
@@ -356,10 +362,10 @@ namespace Kistl.App.TimeRecords
 		public static event PropertyPreSetterHandler<Kistl.App.TimeRecords.WorkEffort, DateTime?> OnThru_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.TimeRecords.WorkEffort, DateTime?> OnThru_PostSetter;
 
-		public override Type GetImplementedInterface()
-		{
-			return typeof(WorkEffort);
-		}
+        public override Type GetImplementedInterface()
+        {
+            return typeof(WorkEffort);
+        }
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{
@@ -425,48 +431,67 @@ namespace Kistl.App.TimeRecords
         public static event ObjectEventHandler<WorkEffort> OnDeleting_WorkEffort;
 
 
-		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			// else
-			new CustomPropertyDescriptor<WorkEffort__Implementation__, DateTime>(
-				new Guid("b169f505-9b5f-4e4e-ae25-a46bc9926c87"),
-				"From",
-				null,
-				obj => obj.From,
-				(obj, val) => obj.From = val),
-			// else
-			new CustomPropertyDescriptor<WorkEffort__Implementation__, Kistl.App.Projekte.Mitarbeiter>(
-				new Guid("720f5bcf-5654-4114-8fba-f57fb7bd48ea"),
-				"Mitarbeiter",
-				null,
-				obj => obj.Mitarbeiter,
-				(obj, val) => obj.Mitarbeiter = val),
-			// else
-			new CustomPropertyDescriptor<WorkEffort__Implementation__, string>(
-				new Guid("a96df76c-c45c-4d21-8221-8c7deaac4814"),
-				"Name",
-				null,
-				obj => obj.Name,
-				(obj, val) => obj.Name = val),
-			// else
-			new CustomPropertyDescriptor<WorkEffort__Implementation__, string>(
-				new Guid("1744a31b-a1c3-4e7c-834c-504521240478"),
-				"Notes",
-				null,
-				obj => obj.Notes,
-				(obj, val) => obj.Notes = val),
-			// else
-			new CustomPropertyDescriptor<WorkEffort__Implementation__, DateTime?>(
-				new Guid("553440f1-3b22-402b-ba5b-355f21cc31d9"),
-				"Thru",
-				null,
-				obj => obj.Thru,
-				(obj, val) => obj.Thru = val),
-			// rel: WorkEffort has Mitarbeiter (3963b6bc-bb5a-4615-b4db-56eecd9d3f97)
-		};
+		private static readonly object _propertiesLock = new object();
+		private static System.ComponentModel.PropertyDescriptor[] _properties;
 		
-		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
+		private void _InitializePropertyDescriptors(Func<IReadOnlyKistlContext> lazyCtx)
+		{
+			if (_properties != null) return;
+			lock (_propertiesLock)
+			{
+				// recheck for a lost race after aquiring the lock
+				if (_properties != null) return;
+				
+				_properties = new System.ComponentModel.PropertyDescriptor[] {
+					// else
+					new CustomPropertyDescriptor<WorkEffort__Implementation__, DateTime>(
+						lazyCtx,
+						new Guid("b169f505-9b5f-4e4e-ae25-a46bc9926c87"),
+						"From",
+						null,
+						obj => obj.From,
+						(obj, val) => obj.From = val),
+					// else
+					new CustomPropertyDescriptor<WorkEffort__Implementation__, Kistl.App.Projekte.Mitarbeiter>(
+						lazyCtx,
+						new Guid("720f5bcf-5654-4114-8fba-f57fb7bd48ea"),
+						"Mitarbeiter",
+						null,
+						obj => obj.Mitarbeiter,
+						(obj, val) => obj.Mitarbeiter = val),
+					// else
+					new CustomPropertyDescriptor<WorkEffort__Implementation__, string>(
+						lazyCtx,
+						new Guid("a96df76c-c45c-4d21-8221-8c7deaac4814"),
+						"Name",
+						null,
+						obj => obj.Name,
+						(obj, val) => obj.Name = val),
+					// else
+					new CustomPropertyDescriptor<WorkEffort__Implementation__, string>(
+						lazyCtx,
+						new Guid("1744a31b-a1c3-4e7c-834c-504521240478"),
+						"Notes",
+						null,
+						obj => obj.Notes,
+						(obj, val) => obj.Notes = val),
+					// else
+					new CustomPropertyDescriptor<WorkEffort__Implementation__, DateTime?>(
+						lazyCtx,
+						new Guid("553440f1-3b22-402b-ba5b-355f21cc31d9"),
+						"Thru",
+						null,
+						obj => obj.Thru,
+						(obj, val) => obj.Thru = val),
+					// rel: WorkEffort has Mitarbeiter (3963b6bc-bb5a-4615-b4db-56eecd9d3f97)
+				};
+			}
+		}
+		
+		protected override void CollectProperties(Func<IReadOnlyKistlContext> lazyCtx, List<System.ComponentModel.PropertyDescriptor> props)
 		{
 			base.CollectProperties(props);
+			_InitializePropertyDescriptors(lazyCtx);
 			props.AddRange(_properties);
 		}
 	

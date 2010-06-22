@@ -52,6 +52,8 @@ namespace Kistl.DalProvider.EF.Generator.Implementation.CompoundObjects
 
             this.WriteObjects("        public ", clsName, "(bool isNull, IPersistenceObject parent, string property)");
             this.WriteLine();
+            this.WriteObjects("            : base(null) // TODO: pass parent's lazyCtx");
+            this.WriteLine();
             this.WriteObjects("        {");
             this.WriteLine();
             this.WriteObjects("            AttachToObject(parent, property);");

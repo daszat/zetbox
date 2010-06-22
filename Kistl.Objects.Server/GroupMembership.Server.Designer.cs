@@ -26,9 +26,15 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("GroupMembership")]
     public class GroupMembership__Implementation__ : Kistl.App.Base.AccessControl__Implementation__, GroupMembership
     {
-    
-		public GroupMembership__Implementation__()
-		{
+        [Obsolete]
+        public GroupMembership__Implementation__()
+            : base(null)
+        {
+        }
+
+        public GroupMembership__Implementation__(Func<IReadOnlyKistlContext> lazyCtx)
+            : base(lazyCtx)
+        {
         }
 
 
@@ -123,10 +129,10 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.GroupMembership, Kistl.App.Base.Group> OnGroup_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.GroupMembership, Kistl.App.Base.Group> OnGroup_PostSetter;
 
-		public override Type GetImplementedInterface()
-		{
-			return typeof(GroupMembership);
-		}
+        public override Type GetImplementedInterface()
+        {
+            return typeof(GroupMembership);
+        }
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{
@@ -188,20 +194,35 @@ namespace Kistl.App.Base
         public static event ObjectEventHandler<GroupMembership> OnDeleting_GroupMembership;
 
 
-		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			// else
-			new CustomPropertyDescriptor<GroupMembership__Implementation__, Kistl.App.Base.Group>(
-				new Guid("da080b07-15d2-4cdf-bc1c-df776e094a75"),
-				"Group",
-				null,
-				obj => obj.Group,
-				(obj, val) => obj.Group = val),
-			// rel: GroupMembership has Group (bb6d8d28-041f-4e53-8916-9f69b480d6ba)
-		};
+		private static readonly object _propertiesLock = new object();
+		private static System.ComponentModel.PropertyDescriptor[] _properties;
 		
-		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
+		private void _InitializePropertyDescriptors(Func<IReadOnlyKistlContext> lazyCtx)
+		{
+			if (_properties != null) return;
+			lock (_propertiesLock)
+			{
+				// recheck for a lost race after aquiring the lock
+				if (_properties != null) return;
+				
+				_properties = new System.ComponentModel.PropertyDescriptor[] {
+					// else
+					new CustomPropertyDescriptor<GroupMembership__Implementation__, Kistl.App.Base.Group>(
+						lazyCtx,
+						new Guid("da080b07-15d2-4cdf-bc1c-df776e094a75"),
+						"Group",
+						null,
+						obj => obj.Group,
+						(obj, val) => obj.Group = val),
+					// rel: GroupMembership has Group (bb6d8d28-041f-4e53-8916-9f69b480d6ba)
+				};
+			}
+		}
+		
+		protected override void CollectProperties(Func<IReadOnlyKistlContext> lazyCtx, List<System.ComponentModel.PropertyDescriptor> props)
 		{
 			base.CollectProperties(props);
+			_InitializePropertyDescriptors(lazyCtx);
 			props.AddRange(_properties);
 		}
 	

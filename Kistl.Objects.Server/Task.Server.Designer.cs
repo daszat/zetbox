@@ -26,9 +26,15 @@ namespace Kistl.App.Projekte
     [System.Diagnostics.DebuggerDisplay("Task")]
     public class Task__Implementation__ : BaseServerDataObject_EntityFramework, Task
     {
-    
-		public Task__Implementation__()
-		{
+        [Obsolete]
+        public Task__Implementation__()
+            : base(null)
+        {
+        }
+
+        public Task__Implementation__(Func<IReadOnlyKistlContext> lazyCtx)
+            : base(lazyCtx)
+        {
         }
 
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
@@ -642,10 +648,10 @@ namespace Kistl.App.Projekte
 		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Task, Kistl.App.Projekte.Projekt> OnProjekt_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Task, Kistl.App.Projekte.Projekt> OnProjekt_PostSetter;
 
-		public override Type GetImplementedInterface()
-		{
-			return typeof(Task);
-		}
+        public override Type GetImplementedInterface()
+        {
+            return typeof(Task);
+        }
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{
@@ -715,78 +721,101 @@ namespace Kistl.App.Projekte
         public static event ObjectEventHandler<Task> OnDeleting_Task;
 
 
-		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			// else
-			new CustomPropertyDescriptor<Task__Implementation__, double?>(
-				new Guid("a28f7536-9b8a-49ca-bc97-d28e1c2c4d3e"),
-				"Aufwand",
-				null,
-				obj => obj.Aufwand,
-				(obj, val) => obj.Aufwand = val),
-			// else
-			new CustomPropertyDescriptor<Task__Implementation__, Kistl.App.Base.Identity>(
-				new Guid("3b21f893-b3d5-4074-99ef-bc8eb2afb240"),
-				"ChangedBy",
-				null,
-				obj => obj.ChangedBy,
-				(obj, val) => obj.ChangedBy = val),
-			// else
-			new CustomPropertyDescriptor<Task__Implementation__, DateTime?>(
-				new Guid("3d472d60-ab48-4957-b4c4-8a16bf2f8484"),
-				"ChangedOn",
-				null,
-				obj => obj.ChangedOn,
-				(obj, val) => obj.ChangedOn = val),
-			// else
-			new CustomPropertyDescriptor<Task__Implementation__, Kistl.App.Base.Identity>(
-				new Guid("64585678-f5fe-4e4e-b2a6-7f67f5444972"),
-				"CreatedBy",
-				null,
-				obj => obj.CreatedBy,
-				(obj, val) => obj.CreatedBy = val),
-			// else
-			new CustomPropertyDescriptor<Task__Implementation__, DateTime?>(
-				new Guid("10f730ed-fade-456d-89a4-f2ab99526705"),
-				"CreatedOn",
-				null,
-				obj => obj.CreatedOn,
-				(obj, val) => obj.CreatedOn = val),
-			// else
-			new CustomPropertyDescriptor<Task__Implementation__, DateTime?>(
-				new Guid("2b705496-388a-43a8-82e8-b17b652a55fc"),
-				"DatumBis",
-				null,
-				obj => obj.DatumBis,
-				(obj, val) => obj.DatumBis = val),
-			// else
-			new CustomPropertyDescriptor<Task__Implementation__, DateTime?>(
-				new Guid("1485a7b7-c4d5-456a-a18a-0c409c3eca8e"),
-				"DatumVon",
-				null,
-				obj => obj.DatumVon,
-				(obj, val) => obj.DatumVon = val),
-			// else
-			new CustomPropertyDescriptor<Task__Implementation__, string>(
-				new Guid("91595e02-411c-40f2-ab83-4cced76e954d"),
-				"Name",
-				null,
-				obj => obj.Name,
-				(obj, val) => obj.Name = val),
-			// else
-			new CustomPropertyDescriptor<Task__Implementation__, Kistl.App.Projekte.Projekt>(
-				new Guid("5545ba8a-3e89-4b22-bd66-c12f3622ace0"),
-				"Projekt",
-				null,
-				obj => obj.Projekt,
-				(obj, val) => obj.Projekt = val),
-			// rel: Projekt has Tasks (434dab4f-0dcd-4724-a62b-730540ce143a)
-			// rel: Task was CreatedBy (d3b22699-c804-4443-bf4d-5d083cb0d313)
-			// rel: Task was ChangedBy (79cfa49b-e629-492f-a8d7-d4467d3a55c0)
-		};
+		private static readonly object _propertiesLock = new object();
+		private static System.ComponentModel.PropertyDescriptor[] _properties;
 		
-		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
+		private void _InitializePropertyDescriptors(Func<IReadOnlyKistlContext> lazyCtx)
+		{
+			if (_properties != null) return;
+			lock (_propertiesLock)
+			{
+				// recheck for a lost race after aquiring the lock
+				if (_properties != null) return;
+				
+				_properties = new System.ComponentModel.PropertyDescriptor[] {
+					// else
+					new CustomPropertyDescriptor<Task__Implementation__, double?>(
+						lazyCtx,
+						new Guid("a28f7536-9b8a-49ca-bc97-d28e1c2c4d3e"),
+						"Aufwand",
+						null,
+						obj => obj.Aufwand,
+						(obj, val) => obj.Aufwand = val),
+					// else
+					new CustomPropertyDescriptor<Task__Implementation__, Kistl.App.Base.Identity>(
+						lazyCtx,
+						new Guid("3b21f893-b3d5-4074-99ef-bc8eb2afb240"),
+						"ChangedBy",
+						null,
+						obj => obj.ChangedBy,
+						(obj, val) => obj.ChangedBy = val),
+					// else
+					new CustomPropertyDescriptor<Task__Implementation__, DateTime?>(
+						lazyCtx,
+						new Guid("3d472d60-ab48-4957-b4c4-8a16bf2f8484"),
+						"ChangedOn",
+						null,
+						obj => obj.ChangedOn,
+						(obj, val) => obj.ChangedOn = val),
+					// else
+					new CustomPropertyDescriptor<Task__Implementation__, Kistl.App.Base.Identity>(
+						lazyCtx,
+						new Guid("64585678-f5fe-4e4e-b2a6-7f67f5444972"),
+						"CreatedBy",
+						null,
+						obj => obj.CreatedBy,
+						(obj, val) => obj.CreatedBy = val),
+					// else
+					new CustomPropertyDescriptor<Task__Implementation__, DateTime?>(
+						lazyCtx,
+						new Guid("10f730ed-fade-456d-89a4-f2ab99526705"),
+						"CreatedOn",
+						null,
+						obj => obj.CreatedOn,
+						(obj, val) => obj.CreatedOn = val),
+					// else
+					new CustomPropertyDescriptor<Task__Implementation__, DateTime?>(
+						lazyCtx,
+						new Guid("2b705496-388a-43a8-82e8-b17b652a55fc"),
+						"DatumBis",
+						null,
+						obj => obj.DatumBis,
+						(obj, val) => obj.DatumBis = val),
+					// else
+					new CustomPropertyDescriptor<Task__Implementation__, DateTime?>(
+						lazyCtx,
+						new Guid("1485a7b7-c4d5-456a-a18a-0c409c3eca8e"),
+						"DatumVon",
+						null,
+						obj => obj.DatumVon,
+						(obj, val) => obj.DatumVon = val),
+					// else
+					new CustomPropertyDescriptor<Task__Implementation__, string>(
+						lazyCtx,
+						new Guid("91595e02-411c-40f2-ab83-4cced76e954d"),
+						"Name",
+						null,
+						obj => obj.Name,
+						(obj, val) => obj.Name = val),
+					// else
+					new CustomPropertyDescriptor<Task__Implementation__, Kistl.App.Projekte.Projekt>(
+						lazyCtx,
+						new Guid("5545ba8a-3e89-4b22-bd66-c12f3622ace0"),
+						"Projekt",
+						null,
+						obj => obj.Projekt,
+						(obj, val) => obj.Projekt = val),
+					// rel: Projekt has Tasks (434dab4f-0dcd-4724-a62b-730540ce143a)
+					// rel: Task was CreatedBy (d3b22699-c804-4443-bf4d-5d083cb0d313)
+					// rel: Task was ChangedBy (79cfa49b-e629-492f-a8d7-d4467d3a55c0)
+				};
+			}
+		}
+		
+		protected override void CollectProperties(Func<IReadOnlyKistlContext> lazyCtx, List<System.ComponentModel.PropertyDescriptor> props)
 		{
 			base.CollectProperties(props);
+			_InitializePropertyDescriptors(lazyCtx);
 			props.AddRange(_properties);
 		}
 	

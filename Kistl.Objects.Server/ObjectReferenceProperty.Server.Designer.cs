@@ -26,9 +26,15 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("ObjectReferenceProperty")]
     public class ObjectReferenceProperty__Implementation__ : Kistl.App.Base.Property__Implementation__, ObjectReferenceProperty
     {
-    
-		public ObjectReferenceProperty__Implementation__()
-		{
+        [Obsolete]
+        public ObjectReferenceProperty__Implementation__()
+            : base(null)
+        {
+        }
+
+        public ObjectReferenceProperty__Implementation__(Func<IReadOnlyKistlContext> lazyCtx)
+            : base(lazyCtx)
+        {
         }
 
 
@@ -239,10 +245,10 @@ namespace Kistl.App.Base
 
 
 
-		public override Type GetImplementedInterface()
-		{
-			return typeof(ObjectReferenceProperty);
-		}
+        public override Type GetImplementedInterface()
+        {
+            return typeof(ObjectReferenceProperty);
+        }
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{
@@ -305,26 +311,42 @@ namespace Kistl.App.Base
         public static event ObjectEventHandler<ObjectReferenceProperty> OnDeleting_ObjectReferenceProperty;
 
 
-		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			// else
-			new CustomPropertyDescriptor<ObjectReferenceProperty__Implementation__, bool>(
-				new Guid("373f0036-42d6-41e2-a2a4-74462537f426"),
-				"EagerLoading",
-				null,
-				obj => obj.EagerLoading,
-				(obj, val) => obj.EagerLoading = val),
-			// else
-			new CustomPropertyDescriptor<ObjectReferenceProperty__Implementation__, Kistl.App.Base.RelationEnd>(
-				new Guid("63ba109d-92c6-4ced-980b-0a52aabfaec0"),
-				"RelationEnd",
-				null,
-				obj => obj.RelationEnd,
-				(obj, val) => obj.RelationEnd = val),
-		};
+		private static readonly object _propertiesLock = new object();
+		private static System.ComponentModel.PropertyDescriptor[] _properties;
 		
-		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
+		private void _InitializePropertyDescriptors(Func<IReadOnlyKistlContext> lazyCtx)
+		{
+			if (_properties != null) return;
+			lock (_propertiesLock)
+			{
+				// recheck for a lost race after aquiring the lock
+				if (_properties != null) return;
+				
+				_properties = new System.ComponentModel.PropertyDescriptor[] {
+					// else
+					new CustomPropertyDescriptor<ObjectReferenceProperty__Implementation__, bool>(
+						lazyCtx,
+						new Guid("373f0036-42d6-41e2-a2a4-74462537f426"),
+						"EagerLoading",
+						null,
+						obj => obj.EagerLoading,
+						(obj, val) => obj.EagerLoading = val),
+					// else
+					new CustomPropertyDescriptor<ObjectReferenceProperty__Implementation__, Kistl.App.Base.RelationEnd>(
+						lazyCtx,
+						new Guid("63ba109d-92c6-4ced-980b-0a52aabfaec0"),
+						"RelationEnd",
+						null,
+						obj => obj.RelationEnd,
+						(obj, val) => obj.RelationEnd = val),
+				};
+			}
+		}
+		
+		protected override void CollectProperties(Func<IReadOnlyKistlContext> lazyCtx, List<System.ComponentModel.PropertyDescriptor> props)
 		{
 			base.CollectProperties(props);
+			_InitializePropertyDescriptors(lazyCtx);
 			props.AddRange(_properties);
 		}
 	

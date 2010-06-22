@@ -26,9 +26,15 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("DoubleParameter")]
     public class DoubleParameter__Implementation__ : Kistl.App.Base.BaseParameter__Implementation__, DoubleParameter
     {
-    
-		public DoubleParameter__Implementation__()
-		{
+        [Obsolete]
+        public DoubleParameter__Implementation__()
+            : base(null)
+        {
+        }
+
+        public DoubleParameter__Implementation__(Func<IReadOnlyKistlContext> lazyCtx)
+            : base(lazyCtx)
+        {
         }
 
 
@@ -74,10 +80,10 @@ namespace Kistl.App.Base
 
 
 
-		public override Type GetImplementedInterface()
-		{
-			return typeof(DoubleParameter);
-		}
+        public override Type GetImplementedInterface()
+        {
+            return typeof(DoubleParameter);
+        }
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{

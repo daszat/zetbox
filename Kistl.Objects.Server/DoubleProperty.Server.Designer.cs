@@ -26,9 +26,15 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("DoubleProperty")]
     public class DoubleProperty__Implementation__ : Kistl.App.Base.ValueTypeProperty__Implementation__, DoubleProperty
     {
-    
-		public DoubleProperty__Implementation__()
-		{
+        [Obsolete]
+        public DoubleProperty__Implementation__()
+            : base(null)
+        {
+        }
+
+        public DoubleProperty__Implementation__(Func<IReadOnlyKistlContext> lazyCtx)
+            : base(lazyCtx)
+        {
         }
 
 
@@ -74,10 +80,10 @@ namespace Kistl.App.Base
 
 
 
-		public override Type GetImplementedInterface()
-		{
-			return typeof(DoubleProperty);
-		}
+        public override Type GetImplementedInterface()
+        {
+            return typeof(DoubleProperty);
+        }
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{

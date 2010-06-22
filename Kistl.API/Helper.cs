@@ -435,6 +435,7 @@ namespace Kistl.API
             return (T)result;
         }
 
+        private static bool _haveWarnedAboutReflection = false;
         private static object GetSinglePropertyValue(object obj, string propName)
         {
             if (obj == null) { throw new ArgumentNullException("obj"); }
@@ -451,7 +452,11 @@ namespace Kistl.API
             }
 
             // fallback to reflection
-            if (Logging.Reflection.IsWarnEnabled) Logging.Reflection.WarnFormat("Fallback to Reflection for {0}.{1}", obj.GetType().FullName, propName);
+            if (!_haveWarnedAboutReflection && Logging.Reflection.IsWarnEnabled)
+            {
+                _haveWarnedAboutReflection = true;
+                Logging.Reflection.WarnFormat("Fallback to Reflection (first time for {0}.{1})", obj.GetType().FullName, propName);
+            }
             PropertyInfo pi = obj.GetType().GetProperty(propName);
             if (pi == null) throw new ArgumentOutOfRangeException("propName", string.Format("Property {0} was not found in Type {1}", propName, obj.GetType().FullName));
             return pi.GetValue(obj, null);

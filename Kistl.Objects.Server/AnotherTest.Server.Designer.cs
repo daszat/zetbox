@@ -26,9 +26,15 @@ namespace Kistl.App.Test
     [System.Diagnostics.DebuggerDisplay("AnotherTest")]
     public class AnotherTest__Implementation__ : BaseServerDataObject_EntityFramework, AnotherTest
     {
-    
-		public AnotherTest__Implementation__()
-		{
+        [Obsolete]
+        public AnotherTest__Implementation__()
+            : base(null)
+        {
+        }
+
+        public AnotherTest__Implementation__(Func<IReadOnlyKistlContext> lazyCtx)
+            : base(lazyCtx)
+        {
         }
 
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
@@ -57,10 +63,10 @@ namespace Kistl.App.Test
         }
         private int _ID;
 
-		public override Type GetImplementedInterface()
-		{
-			return typeof(AnotherTest);
-		}
+        public override Type GetImplementedInterface()
+        {
+            return typeof(AnotherTest);
+        }
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{

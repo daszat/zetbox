@@ -26,9 +26,15 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("InvokingConstraint")]
     public class InvokingConstraint__Implementation__ : Kistl.App.Base.Constraint__Implementation__, InvokingConstraint
     {
-    
-		public InvokingConstraint__Implementation__()
-		{
+        [Obsolete]
+        public InvokingConstraint__Implementation__()
+            : base(null)
+        {
+        }
+
+        public InvokingConstraint__Implementation__(Func<IReadOnlyKistlContext> lazyCtx)
+            : base(lazyCtx)
+        {
         }
 
 
@@ -256,10 +262,10 @@ namespace Kistl.App.Base
 
 
 
-		public override Type GetImplementedInterface()
-		{
-			return typeof(InvokingConstraint);
-		}
+        public override Type GetImplementedInterface()
+        {
+            return typeof(InvokingConstraint);
+        }
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{
@@ -322,26 +328,42 @@ namespace Kistl.App.Base
         public static event ObjectEventHandler<InvokingConstraint> OnDeleting_InvokingConstraint;
 
 
-		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			// else
-			new CustomPropertyDescriptor<InvokingConstraint__Implementation__, Kistl.App.Base.ConstraintInvocation>(
-				new Guid("3b5d70f7-b6fd-4e39-b912-5a644a5de716"),
-				"GetErrorTextInvocation",
-				null,
-				obj => obj.GetErrorTextInvocation,
-				(obj, val) => obj.GetErrorTextInvocation = val),
-			// else
-			new CustomPropertyDescriptor<InvokingConstraint__Implementation__, Kistl.App.Base.ConstraintInvocation>(
-				new Guid("3c98da56-1c21-4849-87b1-81bf72d17e70"),
-				"IsValidInvocation",
-				null,
-				obj => obj.IsValidInvocation,
-				(obj, val) => obj.IsValidInvocation = val),
-		};
+		private static readonly object _propertiesLock = new object();
+		private static System.ComponentModel.PropertyDescriptor[] _properties;
 		
-		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
+		private void _InitializePropertyDescriptors(Func<IReadOnlyKistlContext> lazyCtx)
+		{
+			if (_properties != null) return;
+			lock (_propertiesLock)
+			{
+				// recheck for a lost race after aquiring the lock
+				if (_properties != null) return;
+				
+				_properties = new System.ComponentModel.PropertyDescriptor[] {
+					// else
+					new CustomPropertyDescriptor<InvokingConstraint__Implementation__, Kistl.App.Base.ConstraintInvocation>(
+						lazyCtx,
+						new Guid("3b5d70f7-b6fd-4e39-b912-5a644a5de716"),
+						"GetErrorTextInvocation",
+						null,
+						obj => obj.GetErrorTextInvocation,
+						(obj, val) => obj.GetErrorTextInvocation = val),
+					// else
+					new CustomPropertyDescriptor<InvokingConstraint__Implementation__, Kistl.App.Base.ConstraintInvocation>(
+						lazyCtx,
+						new Guid("3c98da56-1c21-4849-87b1-81bf72d17e70"),
+						"IsValidInvocation",
+						null,
+						obj => obj.IsValidInvocation,
+						(obj, val) => obj.IsValidInvocation = val),
+				};
+			}
+		}
+		
+		protected override void CollectProperties(Func<IReadOnlyKistlContext> lazyCtx, List<System.ComponentModel.PropertyDescriptor> props)
 		{
 			base.CollectProperties(props);
+			_InitializePropertyDescriptors(lazyCtx);
 			props.AddRange(_properties);
 		}
 	

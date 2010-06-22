@@ -26,9 +26,15 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("StringRangeConstraint")]
     public class StringRangeConstraint__Implementation__ : Kistl.App.Base.Constraint__Implementation__, StringRangeConstraint
     {
-    
-		public StringRangeConstraint__Implementation__()
-		{
+        [Obsolete]
+        public StringRangeConstraint__Implementation__()
+            : base(null)
+        {
+        }
+
+        public StringRangeConstraint__Implementation__(Func<IReadOnlyKistlContext> lazyCtx)
+            : base(lazyCtx)
+        {
         }
 
 
@@ -178,10 +184,10 @@ namespace Kistl.App.Base
 
 
 
-		public override Type GetImplementedInterface()
-		{
-			return typeof(StringRangeConstraint);
-		}
+        public override Type GetImplementedInterface()
+        {
+            return typeof(StringRangeConstraint);
+        }
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{
@@ -244,26 +250,42 @@ namespace Kistl.App.Base
         public static event ObjectEventHandler<StringRangeConstraint> OnDeleting_StringRangeConstraint;
 
 
-		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			// else
-			new CustomPropertyDescriptor<StringRangeConstraint__Implementation__, int?>(
-				new Guid("17aa679d-72d0-480e-9bd9-b37f4eba1d68"),
-				"MaxLength",
-				null,
-				obj => obj.MaxLength,
-				(obj, val) => obj.MaxLength = val),
-			// else
-			new CustomPropertyDescriptor<StringRangeConstraint__Implementation__, int>(
-				new Guid("8d3e24f7-c8c8-4bb3-931e-d0452e7ee5b6"),
-				"MinLength",
-				null,
-				obj => obj.MinLength,
-				(obj, val) => obj.MinLength = val),
-		};
+		private static readonly object _propertiesLock = new object();
+		private static System.ComponentModel.PropertyDescriptor[] _properties;
 		
-		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
+		private void _InitializePropertyDescriptors(Func<IReadOnlyKistlContext> lazyCtx)
+		{
+			if (_properties != null) return;
+			lock (_propertiesLock)
+			{
+				// recheck for a lost race after aquiring the lock
+				if (_properties != null) return;
+				
+				_properties = new System.ComponentModel.PropertyDescriptor[] {
+					// else
+					new CustomPropertyDescriptor<StringRangeConstraint__Implementation__, int?>(
+						lazyCtx,
+						new Guid("17aa679d-72d0-480e-9bd9-b37f4eba1d68"),
+						"MaxLength",
+						null,
+						obj => obj.MaxLength,
+						(obj, val) => obj.MaxLength = val),
+					// else
+					new CustomPropertyDescriptor<StringRangeConstraint__Implementation__, int>(
+						lazyCtx,
+						new Guid("8d3e24f7-c8c8-4bb3-931e-d0452e7ee5b6"),
+						"MinLength",
+						null,
+						obj => obj.MinLength,
+						(obj, val) => obj.MinLength = val),
+				};
+			}
+		}
+		
+		protected override void CollectProperties(Func<IReadOnlyKistlContext> lazyCtx, List<System.ComponentModel.PropertyDescriptor> props)
 		{
 			base.CollectProperties(props);
+			_InitializePropertyDescriptors(lazyCtx);
 			props.AddRange(_properties);
 		}
 	

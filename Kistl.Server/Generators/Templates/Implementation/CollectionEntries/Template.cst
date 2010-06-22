@@ -16,6 +16,13 @@
     [System.Diagnostics.DebuggerDisplay("<%= GetCeClassName() %>")]
     public class <%= GetCeClassName() %> <%= GetInheritance() %>
     {
+		[Obsolete]
+		public <%= GetCeClassName() %>() : base(null) {}
+		
+		public <%= GetCeClassName() %>(Func<IReadOnlyKistlContext> lazyCtx)
+			: base(lazyCtx)
+		{
+		}
     
 <%
     ApplyIdPropertyTemplate();
@@ -33,6 +40,7 @@
 <%
     ApplyAPropertyTemplate();
 %>
+
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
@@ -44,8 +52,6 @@
     if (IsOrdered())
     {
 %>
-
-
 
         /// <summary>
         /// Index into the A-side list of this relation

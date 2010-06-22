@@ -26,9 +26,15 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("EnumerationProperty")]
     public class EnumerationProperty__Implementation__ : Kistl.App.Base.ValueTypeProperty__Implementation__, EnumerationProperty
     {
-    
-		public EnumerationProperty__Implementation__()
-		{
+        [Obsolete]
+        public EnumerationProperty__Implementation__()
+            : base(null)
+        {
+        }
+
+        public EnumerationProperty__Implementation__(Func<IReadOnlyKistlContext> lazyCtx)
+            : base(lazyCtx)
+        {
         }
 
 
@@ -165,10 +171,10 @@ namespace Kistl.App.Base
 
 
 
-		public override Type GetImplementedInterface()
-		{
-			return typeof(EnumerationProperty);
-		}
+        public override Type GetImplementedInterface()
+        {
+            return typeof(EnumerationProperty);
+        }
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{
@@ -230,20 +236,35 @@ namespace Kistl.App.Base
         public static event ObjectEventHandler<EnumerationProperty> OnDeleting_EnumerationProperty;
 
 
-		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			// else
-			new CustomPropertyDescriptor<EnumerationProperty__Implementation__, Kistl.App.Base.Enumeration>(
-				new Guid("1144c061-3610-495f-b8b4-951058bb0c23"),
-				"Enumeration",
-				null,
-				obj => obj.Enumeration,
-				(obj, val) => obj.Enumeration = val),
-			// rel: EnumerationProperty has Enumeration (f85ff30f-0907-4e28-806e-a7f1aac98acb)
-		};
+		private static readonly object _propertiesLock = new object();
+		private static System.ComponentModel.PropertyDescriptor[] _properties;
 		
-		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
+		private void _InitializePropertyDescriptors(Func<IReadOnlyKistlContext> lazyCtx)
+		{
+			if (_properties != null) return;
+			lock (_propertiesLock)
+			{
+				// recheck for a lost race after aquiring the lock
+				if (_properties != null) return;
+				
+				_properties = new System.ComponentModel.PropertyDescriptor[] {
+					// else
+					new CustomPropertyDescriptor<EnumerationProperty__Implementation__, Kistl.App.Base.Enumeration>(
+						lazyCtx,
+						new Guid("1144c061-3610-495f-b8b4-951058bb0c23"),
+						"Enumeration",
+						null,
+						obj => obj.Enumeration,
+						(obj, val) => obj.Enumeration = val),
+					// rel: EnumerationProperty has Enumeration (f85ff30f-0907-4e28-806e-a7f1aac98acb)
+				};
+			}
+		}
+		
+		protected override void CollectProperties(Func<IReadOnlyKistlContext> lazyCtx, List<System.ComponentModel.PropertyDescriptor> props)
 		{
 			base.CollectProperties(props);
+			_InitializePropertyDescriptors(lazyCtx);
 			props.AddRange(_properties);
 		}
 	

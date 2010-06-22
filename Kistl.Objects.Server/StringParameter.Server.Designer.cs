@@ -26,9 +26,15 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("StringParameter")]
     public class StringParameter__Implementation__ : Kistl.App.Base.BaseParameter__Implementation__, StringParameter
     {
-    
-		public StringParameter__Implementation__()
-		{
+        [Obsolete]
+        public StringParameter__Implementation__()
+            : base(null)
+        {
+        }
+
+        public StringParameter__Implementation__(Func<IReadOnlyKistlContext> lazyCtx)
+            : base(lazyCtx)
+        {
         }
 
 
@@ -74,10 +80,10 @@ namespace Kistl.App.Base
 
 
 
-		public override Type GetImplementedInterface()
-		{
-			return typeof(StringParameter);
-		}
+        public override Type GetImplementedInterface()
+        {
+            return typeof(StringParameter);
+        }
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{

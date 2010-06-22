@@ -1,14 +1,18 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Kistl.App.Test;
 
 namespace Kistl.API.Client.Mocks
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    
+    using Kistl.App.Test;
+
     public class BaseClientDataObjectMock__Implementation__ 
         : BaseClientDataObject, ANewObjectClass
     {
+        public BaseClientDataObjectMock__Implementation__() : base(null) { }
+    
         public override Type GetImplementedInterface()
         {
             return typeof(ANewObjectClass);

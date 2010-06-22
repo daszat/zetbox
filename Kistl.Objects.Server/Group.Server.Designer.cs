@@ -26,9 +26,15 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("Group")]
     public class Group__Implementation__ : BaseServerDataObject_EntityFramework, Group, Kistl.API.IExportableInternal
     {
-    
-		public Group__Implementation__()
-		{
+        [Obsolete]
+        public Group__Implementation__()
+            : base(null)
+        {
+        }
+
+        public Group__Implementation__(Func<IReadOnlyKistlContext> lazyCtx)
+            : base(lazyCtx)
+        {
         }
 
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
@@ -410,10 +416,10 @@ namespace Kistl.App.Base
         private EntityRelationBSideCollectionWrapper<Kistl.App.Base.Group, Kistl.App.Base.Group, Kistl.App.Base.Group_memberOf_Group_RelationEntry__Implementation__> _ParentGroupsWrapper;
 
 
-		public override Type GetImplementedInterface()
-		{
-			return typeof(Group);
-		}
+        public override Type GetImplementedInterface()
+        {
+            return typeof(Group);
+        }
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{
@@ -477,56 +483,76 @@ namespace Kistl.App.Base
         public static event ObjectEventHandler<Group> OnDeleting_Group;
 
 
-		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
-			new CustomPropertyDescriptor<Group__Implementation__, ICollection<Kistl.App.Base.Group>>(
-				new Guid("8bf923e1-1e2c-4fec-bd18-098b1ca4ff20"),
-				"ChildGroups",
-				null,
-				obj => obj.ChildGroups,
-				null), // lists are read-only properties
-			// else
-			new CustomPropertyDescriptor<Group__Implementation__, Guid>(
-				new Guid("c776e87f-2b95-466e-848e-0ce195f4bd73"),
-				"ExportGuid",
-				null,
-				obj => obj.ExportGuid,
-				(obj, val) => obj.ExportGuid = val),
-			// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
-			new CustomPropertyDescriptor<Group__Implementation__, ICollection<Kistl.App.Base.Identity>>(
-				new Guid("f60308a5-a502-4641-aa19-f895e701778c"),
-				"Member",
-				null,
-				obj => obj.Member,
-				null), // lists are read-only properties
-			// else
-			new CustomPropertyDescriptor<Group__Implementation__, Kistl.App.Base.Module>(
-				new Guid("8da2dab4-81c9-4659-9f25-c6b5177ba26d"),
-				"Module",
-				null,
-				obj => obj.Module,
-				(obj, val) => obj.Module = val),
-			// else
-			new CustomPropertyDescriptor<Group__Implementation__, string>(
-				new Guid("99c320b1-0003-4e2d-aa98-9a215d80988b"),
-				"Name",
-				null,
-				obj => obj.Name,
-				(obj, val) => obj.Name = val),
-			// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
-			new CustomPropertyDescriptor<Group__Implementation__, ICollection<Kistl.App.Base.Group>>(
-				new Guid("257a1f6e-86cf-45a0-bce5-f75cd901c28d"),
-				"ParentGroups",
-				null,
-				obj => obj.ParentGroups,
-				null), // lists are read-only properties
-			// rel: Group has Module (8d76b5ef-a7ae-4d4b-a92e-747fe972acfb)
-			// rel: GroupMembership has Group (bb6d8d28-041f-4e53-8916-9f69b480d6ba)
-		};
+		private static readonly object _propertiesLock = new object();
+		private static System.ComponentModel.PropertyDescriptor[] _properties;
 		
-		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
+		private void _InitializePropertyDescriptors(Func<IReadOnlyKistlContext> lazyCtx)
+		{
+			if (_properties != null) return;
+			lock (_propertiesLock)
+			{
+				// recheck for a lost race after aquiring the lock
+				if (_properties != null) return;
+				
+				_properties = new System.ComponentModel.PropertyDescriptor[] {
+					// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
+					new CustomPropertyDescriptor<Group__Implementation__, ICollection<Kistl.App.Base.Group>>(
+						lazyCtx,
+						new Guid("8bf923e1-1e2c-4fec-bd18-098b1ca4ff20"),
+						"ChildGroups",
+						null,
+						obj => obj.ChildGroups,
+						null), // lists are read-only properties
+					// else
+					new CustomPropertyDescriptor<Group__Implementation__, Guid>(
+						lazyCtx,
+						new Guid("c776e87f-2b95-466e-848e-0ce195f4bd73"),
+						"ExportGuid",
+						null,
+						obj => obj.ExportGuid,
+						(obj, val) => obj.ExportGuid = val),
+					// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
+					new CustomPropertyDescriptor<Group__Implementation__, ICollection<Kistl.App.Base.Identity>>(
+						lazyCtx,
+						new Guid("f60308a5-a502-4641-aa19-f895e701778c"),
+						"Member",
+						null,
+						obj => obj.Member,
+						null), // lists are read-only properties
+					// else
+					new CustomPropertyDescriptor<Group__Implementation__, Kistl.App.Base.Module>(
+						lazyCtx,
+						new Guid("8da2dab4-81c9-4659-9f25-c6b5177ba26d"),
+						"Module",
+						null,
+						obj => obj.Module,
+						(obj, val) => obj.Module = val),
+					// else
+					new CustomPropertyDescriptor<Group__Implementation__, string>(
+						lazyCtx,
+						new Guid("99c320b1-0003-4e2d-aa98-9a215d80988b"),
+						"Name",
+						null,
+						obj => obj.Name,
+						(obj, val) => obj.Name = val),
+					// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
+					new CustomPropertyDescriptor<Group__Implementation__, ICollection<Kistl.App.Base.Group>>(
+						lazyCtx,
+						new Guid("257a1f6e-86cf-45a0-bce5-f75cd901c28d"),
+						"ParentGroups",
+						null,
+						obj => obj.ParentGroups,
+						null), // lists are read-only properties
+					// rel: Group has Module (8d76b5ef-a7ae-4d4b-a92e-747fe972acfb)
+					// rel: GroupMembership has Group (bb6d8d28-041f-4e53-8916-9f69b480d6ba)
+				};
+			}
+		}
+		
+		protected override void CollectProperties(Func<IReadOnlyKistlContext> lazyCtx, List<System.ComponentModel.PropertyDescriptor> props)
 		{
 			base.CollectProperties(props);
+			_InitializePropertyDescriptors(lazyCtx);
 			props.AddRange(_properties);
 		}
 	

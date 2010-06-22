@@ -26,9 +26,15 @@ namespace at.dasz.CourseOrganiser
     [System.Diagnostics.DebuggerDisplay("StudentExam")]
     public class StudentExam__Implementation__ : BaseServerDataObject_EntityFramework, StudentExam
     {
-    
-		public StudentExam__Implementation__()
-		{
+        [Obsolete]
+        public StudentExam__Implementation__()
+            : base(null)
+        {
+        }
+
+        public StudentExam__Implementation__(Func<IReadOnlyKistlContext> lazyCtx)
+            : base(lazyCtx)
+        {
         }
 
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
@@ -291,10 +297,10 @@ namespace at.dasz.CourseOrganiser
 		public static event PropertyPreSetterHandler<at.dasz.CourseOrganiser.StudentExam, at.dasz.CourseOrganiser.Student> OnStudent_PreSetter;
 		public static event PropertyPostSetterHandler<at.dasz.CourseOrganiser.StudentExam, at.dasz.CourseOrganiser.Student> OnStudent_PostSetter;
 
-		public override Type GetImplementedInterface()
-		{
-			return typeof(StudentExam);
-		}
+        public override Type GetImplementedInterface()
+        {
+            return typeof(StudentExam);
+        }
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{
@@ -358,35 +364,52 @@ namespace at.dasz.CourseOrganiser
         public static event ObjectEventHandler<StudentExam> OnDeleting_StudentExam;
 
 
-		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			// else
-			new CustomPropertyDescriptor<StudentExam__Implementation__, at.dasz.CourseOrganiser.Exam>(
-				new Guid("4fe24a6b-6f71-4313-8b1e-6d1a96437abb"),
-				"Exam",
-				null,
-				obj => obj.Exam,
-				(obj, val) => obj.Exam = val),
-			// else
-			new CustomPropertyDescriptor<StudentExam__Implementation__, int?>(
-				new Guid("b7e4ed77-9a3b-497f-9792-3e7341d9b960"),
-				"Score",
-				null,
-				obj => obj.Score,
-				(obj, val) => obj.Score = val),
-			// else
-			new CustomPropertyDescriptor<StudentExam__Implementation__, at.dasz.CourseOrganiser.Student>(
-				new Guid("2fd40eb4-b358-4e7d-bf1e-4f49dd3e5efd"),
-				"Student",
-				null,
-				obj => obj.Student,
-				(obj, val) => obj.Student = val),
-			// rel: StudentExam passes Exam (3e15530a-1753-4e97-9390-7235192a1a9e)
-			// rel: StudentExam writtenby Student (da365b25-b8d4-43dd-91c7-f30cad09d600)
-		};
+		private static readonly object _propertiesLock = new object();
+		private static System.ComponentModel.PropertyDescriptor[] _properties;
 		
-		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
+		private void _InitializePropertyDescriptors(Func<IReadOnlyKistlContext> lazyCtx)
+		{
+			if (_properties != null) return;
+			lock (_propertiesLock)
+			{
+				// recheck for a lost race after aquiring the lock
+				if (_properties != null) return;
+				
+				_properties = new System.ComponentModel.PropertyDescriptor[] {
+					// else
+					new CustomPropertyDescriptor<StudentExam__Implementation__, at.dasz.CourseOrganiser.Exam>(
+						lazyCtx,
+						new Guid("4fe24a6b-6f71-4313-8b1e-6d1a96437abb"),
+						"Exam",
+						null,
+						obj => obj.Exam,
+						(obj, val) => obj.Exam = val),
+					// else
+					new CustomPropertyDescriptor<StudentExam__Implementation__, int?>(
+						lazyCtx,
+						new Guid("b7e4ed77-9a3b-497f-9792-3e7341d9b960"),
+						"Score",
+						null,
+						obj => obj.Score,
+						(obj, val) => obj.Score = val),
+					// else
+					new CustomPropertyDescriptor<StudentExam__Implementation__, at.dasz.CourseOrganiser.Student>(
+						lazyCtx,
+						new Guid("2fd40eb4-b358-4e7d-bf1e-4f49dd3e5efd"),
+						"Student",
+						null,
+						obj => obj.Student,
+						(obj, val) => obj.Student = val),
+					// rel: StudentExam passes Exam (3e15530a-1753-4e97-9390-7235192a1a9e)
+					// rel: StudentExam writtenby Student (da365b25-b8d4-43dd-91c7-f30cad09d600)
+				};
+			}
+		}
+		
+		protected override void CollectProperties(Func<IReadOnlyKistlContext> lazyCtx, List<System.ComponentModel.PropertyDescriptor> props)
 		{
 			base.CollectProperties(props);
+			_InitializePropertyDescriptors(lazyCtx);
 			props.AddRange(_properties);
 		}
 	

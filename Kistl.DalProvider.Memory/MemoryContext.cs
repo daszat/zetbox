@@ -12,10 +12,12 @@ namespace Kistl.DalProvider.Memory
         : BaseMemoryContext
     {
         private static readonly List<IPersistenceObject> emptylist = new List<IPersistenceObject>(0);
-
-        public MemoryContext(ITypeTransformations typeTrans)
+        private readonly Func<IReadOnlyKistlContext> _lazyCtx;
+             
+        public MemoryContext(ITypeTransformations typeTrans, Func<IReadOnlyKistlContext> lazyCtx)
             : base(typeTrans)
         {
+            _lazyCtx = lazyCtx;
         }
 
         public override IQueryable<IPersistenceObject> GetPersistenceObjectQuery(InterfaceType ifType)
@@ -31,7 +33,7 @@ namespace Kistl.DalProvider.Memory
         protected override object CreateUnattachedInstance(InterfaceType ifType)
         {
             // TODO: replace with generated switch factory
-            return Activator.CreateInstance(this.ToImplementationType(ifType).Type);
+            return Activator.CreateInstance(this.ToImplementationType(ifType).Type, _lazyCtx);
         }
 
         public override ImplementationType ToImplementationType(InterfaceType t)

@@ -9,6 +9,9 @@ namespace Kistl.DalProvider.Memory
     public abstract class BaseMemoryDataObject
         : BaseMemoryPersistenceObject, IDataObject
     {
+        protected BaseMemoryDataObject() : base(null) { }
+        protected BaseMemoryDataObject(Func<IReadOnlyKistlContext> lazyCtx) : base(lazyCtx) { }
+
         #region IDataObject Members
 
         /// <inheritdoc />

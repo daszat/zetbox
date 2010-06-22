@@ -26,9 +26,15 @@ namespace at.dasz.DocumentManagement
     [System.Diagnostics.DebuggerDisplay("DynamicFile")]
     public class DynamicFile__Implementation__ : at.dasz.DocumentManagement.File__Implementation__, DynamicFile
     {
-    
-		public DynamicFile__Implementation__()
-		{
+        [Obsolete]
+        public DynamicFile__Implementation__()
+            : base(null)
+        {
+        }
+
+        public DynamicFile__Implementation__(Func<IReadOnlyKistlContext> lazyCtx)
+            : base(lazyCtx)
+        {
         }
 
 
@@ -93,10 +99,10 @@ namespace at.dasz.DocumentManagement
 
 
 
-		public override Type GetImplementedInterface()
-		{
-			return typeof(DynamicFile);
-		}
+        public override Type GetImplementedInterface()
+        {
+            return typeof(DynamicFile);
+        }
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{

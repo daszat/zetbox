@@ -26,9 +26,15 @@ namespace Kistl.App.Test
     [System.Diagnostics.DebuggerDisplay("Fragebogen")]
     public class Fragebogen__Implementation__ : BaseServerDataObject_EntityFramework, Fragebogen
     {
-    
-		public Fragebogen__Implementation__()
-		{
+        [Obsolete]
+        public Fragebogen__Implementation__()
+            : base(null)
+        {
+        }
+
+        public Fragebogen__Implementation__(Func<IReadOnlyKistlContext> lazyCtx)
+            : base(lazyCtx)
+        {
         }
 
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
@@ -209,10 +215,10 @@ namespace Kistl.App.Test
         private EntityRelationASideCollectionWrapper<Kistl.App.Test.TestStudent, Kistl.App.Test.Fragebogen, Kistl.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntry__Implementation__> _StudentWrapper;
 
 
-		public override Type GetImplementedInterface()
-		{
-			return typeof(Fragebogen);
-		}
+        public override Type GetImplementedInterface()
+        {
+            return typeof(Fragebogen);
+        }
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{
@@ -274,34 +280,51 @@ namespace Kistl.App.Test
         public static event ObjectEventHandler<Fragebogen> OnDeleting_Fragebogen;
 
 
-		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
-			new CustomPropertyDescriptor<Fragebogen__Implementation__, IList<Kistl.App.Test.Antwort>>(
-				new Guid("e8f20c02-abea-4c91-850f-c321adfd46f0"),
-				"Antworten",
-				null,
-				obj => obj.Antworten,
-				null), // lists are read-only properties
-			// else
-			new CustomPropertyDescriptor<Fragebogen__Implementation__, int?>(
-				new Guid("b65f1a91-e063-4054-a2e7-d5dc0292e3fc"),
-				"BogenNummer",
-				null,
-				obj => obj.BogenNummer,
-				(obj, val) => obj.BogenNummer = val),
-			// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
-			new CustomPropertyDescriptor<Fragebogen__Implementation__, ICollection<Kistl.App.Test.TestStudent>>(
-				new Guid("3a91e745-0dd2-4f31-864e-eaf657ddb577"),
-				"Student",
-				null,
-				obj => obj.Student,
-				null), // lists are read-only properties
-			// rel: Ein_Fragebogen enthaelt gute_Antworten (0f425937-0d1e-4887-ae65-a162b45fc93e)
-		};
+		private static readonly object _propertiesLock = new object();
+		private static System.ComponentModel.PropertyDescriptor[] _properties;
 		
-		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
+		private void _InitializePropertyDescriptors(Func<IReadOnlyKistlContext> lazyCtx)
+		{
+			if (_properties != null) return;
+			lock (_propertiesLock)
+			{
+				// recheck for a lost race after aquiring the lock
+				if (_properties != null) return;
+				
+				_properties = new System.ComponentModel.PropertyDescriptor[] {
+					// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
+					new CustomPropertyDescriptor<Fragebogen__Implementation__, IList<Kistl.App.Test.Antwort>>(
+						lazyCtx,
+						new Guid("e8f20c02-abea-4c91-850f-c321adfd46f0"),
+						"Antworten",
+						null,
+						obj => obj.Antworten,
+						null), // lists are read-only properties
+					// else
+					new CustomPropertyDescriptor<Fragebogen__Implementation__, int?>(
+						lazyCtx,
+						new Guid("b65f1a91-e063-4054-a2e7-d5dc0292e3fc"),
+						"BogenNummer",
+						null,
+						obj => obj.BogenNummer,
+						(obj, val) => obj.BogenNummer = val),
+					// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
+					new CustomPropertyDescriptor<Fragebogen__Implementation__, ICollection<Kistl.App.Test.TestStudent>>(
+						lazyCtx,
+						new Guid("3a91e745-0dd2-4f31-864e-eaf657ddb577"),
+						"Student",
+						null,
+						obj => obj.Student,
+						null), // lists are read-only properties
+					// rel: Ein_Fragebogen enthaelt gute_Antworten (0f425937-0d1e-4887-ae65-a162b45fc93e)
+				};
+			}
+		}
+		
+		protected override void CollectProperties(Func<IReadOnlyKistlContext> lazyCtx, List<System.ComponentModel.PropertyDescriptor> props)
 		{
 			base.CollectProperties(props);
+			_InitializePropertyDescriptors(lazyCtx);
 			props.AddRange(_properties);
 		}
 	

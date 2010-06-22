@@ -42,7 +42,12 @@ namespace Kistl.API.Client.Tests
                 .As<IAssemblyConfiguration>()
                 .SingleInstance();
 
-            builder.Register(c => new KistlContextImpl(c.Resolve<KistlConfig>(), c.Resolve<ITypeTransformations>(), c.Resolve<IProxy>(), typeof(Kistl.App.Test.TestObjClass__Implementation__).Assembly.FullName))
+            builder.Register(c => new KistlContextImpl(
+                    c.Resolve<KistlConfig>(),
+                    c.Resolve<ITypeTransformations>(),
+                    c.Resolve<IProxy>(),
+                    typeof(Kistl.App.Test.TestObjClass__Implementation__).Assembly.FullName,
+                    c.Resolve<Func<IReadOnlyKistlContext>>(Kistl.API.Helper.FrozenContextServiceName)))
                 .As<IKistlContext>()
                 .As<IReadOnlyKistlContext>()
                 .InstancePerDependency();

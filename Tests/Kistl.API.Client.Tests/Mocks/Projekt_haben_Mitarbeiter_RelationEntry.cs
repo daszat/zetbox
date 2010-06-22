@@ -1,16 +1,19 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Kistl.API.Client;
-using System.Xml.Serialization;
-using Kistl.API;
 
 namespace Kistl.App.Projekte
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Xml.Serialization;
+
+    using Kistl.API;
+    using Kistl.API.Client;
+
     [System.Diagnostics.DebuggerDisplay("Projekt_haben_Mitarbeiter_RelationEntry")]
     public class Projekt_haben_Mitarbeiter_RelationEntry__Implementation__ : BaseClientCollectionEntry, Projekt_haben_Mitarbeiter_RelationEntry
     {
+        public Projekt_haben_Mitarbeiter_RelationEntry__Implementation__() : base(null) { }
 
         // ID is inherited
         public Guid RelationID { get { return Guid.Empty; } }

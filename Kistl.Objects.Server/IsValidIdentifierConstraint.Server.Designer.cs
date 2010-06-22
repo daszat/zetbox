@@ -26,9 +26,15 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("IsValidIdentifierConstraint")]
     public class IsValidIdentifierConstraint__Implementation__ : Kistl.App.Base.Constraint__Implementation__, IsValidIdentifierConstraint
     {
-    
-		public IsValidIdentifierConstraint__Implementation__()
-		{
+        [Obsolete]
+        public IsValidIdentifierConstraint__Implementation__()
+            : base(null)
+        {
+        }
+
+        public IsValidIdentifierConstraint__Implementation__(Func<IReadOnlyKistlContext> lazyCtx)
+            : base(lazyCtx)
+        {
         }
 
 
@@ -74,10 +80,10 @@ namespace Kistl.App.Base
 
 
 
-		public override Type GetImplementedInterface()
-		{
-			return typeof(IsValidIdentifierConstraint);
-		}
+        public override Type GetImplementedInterface()
+        {
+            return typeof(IsValidIdentifierConstraint);
+        }
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{

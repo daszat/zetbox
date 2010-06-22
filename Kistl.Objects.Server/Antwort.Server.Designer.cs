@@ -26,9 +26,15 @@ namespace Kistl.App.Test
     [System.Diagnostics.DebuggerDisplay("Antwort")]
     public class Antwort__Implementation__ : BaseServerDataObject_EntityFramework, Antwort
     {
-    
-		public Antwort__Implementation__()
-		{
+        [Obsolete]
+        public Antwort__Implementation__()
+            : base(null)
+        {
+        }
+
+        public Antwort__Implementation__(Func<IReadOnlyKistlContext> lazyCtx)
+            : base(lazyCtx)
+        {
         }
 
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
@@ -331,10 +337,10 @@ namespace Kistl.App.Test
 		public static event PropertyPreSetterHandler<Kistl.App.Test.Antwort, int?> OnGegebeneAntwort_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Test.Antwort, int?> OnGegebeneAntwort_PostSetter;
 
-		public override Type GetImplementedInterface()
-		{
-			return typeof(Antwort);
-		}
+        public override Type GetImplementedInterface()
+        {
+            return typeof(Antwort);
+        }
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{
@@ -400,48 +406,67 @@ namespace Kistl.App.Test
         public static event ObjectEventHandler<Antwort> OnDeleting_Antwort;
 
 
-		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			// else
-			new CustomPropertyDescriptor<Antwort__Implementation__, string>(
-				new Guid("311cb474-be7d-4e6b-b803-379e6523720c"),
-				"Frage",
-				null,
-				obj => obj.Frage,
-				(obj, val) => obj.Frage = val),
-			// else
-			new CustomPropertyDescriptor<Antwort__Implementation__, Kistl.App.Test.Fragebogen>(
-				new Guid("ae20c23b-0cfa-422a-9f8d-797e9f70bf82"),
-				"Fragebogen",
-				null,
-				obj => obj.Fragebogen,
-				(obj, val) => obj.Fragebogen = val),
-			// else
-			new CustomPropertyDescriptor<Antwort__Implementation__, int>(
-				new Guid("87a005fa-6249-4aab-b90e-b50c97487c09"),
-				"FragenNummer",
-				null,
-				obj => obj.FragenNummer,
-				(obj, val) => obj.FragenNummer = val),
-			// else
-			new CustomPropertyDescriptor<Antwort__Implementation__, int?>(
-				new Guid("bbddff1f-943e-48cb-b097-377040280f0a"),
-				"GegebeneAntwort",
-				null,
-				obj => obj.GegebeneAntwort,
-				(obj, val) => obj.GegebeneAntwort = val),
-			// rel: Ein_Fragebogen enthaelt gute_Antworten (0f425937-0d1e-4887-ae65-a162b45fc93e)
-			// rel.B.Type == cls && rel.B.HasPersistentOrder
-			new CustomPropertyDescriptor<Antwort__Implementation__, int?>(
-				null,
-				"gute_Antworten_pos",
-				null,
-				obj => obj.gute_Antworten_pos,
-				(obj, val) => obj.gute_Antworten_pos = val),
-		};
+		private static readonly object _propertiesLock = new object();
+		private static System.ComponentModel.PropertyDescriptor[] _properties;
 		
-		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
+		private void _InitializePropertyDescriptors(Func<IReadOnlyKistlContext> lazyCtx)
+		{
+			if (_properties != null) return;
+			lock (_propertiesLock)
+			{
+				// recheck for a lost race after aquiring the lock
+				if (_properties != null) return;
+				
+				_properties = new System.ComponentModel.PropertyDescriptor[] {
+					// else
+					new CustomPropertyDescriptor<Antwort__Implementation__, string>(
+						lazyCtx,
+						new Guid("311cb474-be7d-4e6b-b803-379e6523720c"),
+						"Frage",
+						null,
+						obj => obj.Frage,
+						(obj, val) => obj.Frage = val),
+					// else
+					new CustomPropertyDescriptor<Antwort__Implementation__, Kistl.App.Test.Fragebogen>(
+						lazyCtx,
+						new Guid("ae20c23b-0cfa-422a-9f8d-797e9f70bf82"),
+						"Fragebogen",
+						null,
+						obj => obj.Fragebogen,
+						(obj, val) => obj.Fragebogen = val),
+					// else
+					new CustomPropertyDescriptor<Antwort__Implementation__, int>(
+						lazyCtx,
+						new Guid("87a005fa-6249-4aab-b90e-b50c97487c09"),
+						"FragenNummer",
+						null,
+						obj => obj.FragenNummer,
+						(obj, val) => obj.FragenNummer = val),
+					// else
+					new CustomPropertyDescriptor<Antwort__Implementation__, int?>(
+						lazyCtx,
+						new Guid("bbddff1f-943e-48cb-b097-377040280f0a"),
+						"GegebeneAntwort",
+						null,
+						obj => obj.GegebeneAntwort,
+						(obj, val) => obj.GegebeneAntwort = val),
+					// rel: Ein_Fragebogen enthaelt gute_Antworten (0f425937-0d1e-4887-ae65-a162b45fc93e)
+					// rel.B.Type == cls && rel.B.HasPersistentOrder
+					new CustomPropertyDescriptor<Antwort__Implementation__, int?>(
+						lazyCtx,
+						null,
+						"gute_Antworten_pos",
+						null,
+						obj => obj.gute_Antworten_pos,
+						(obj, val) => obj.gute_Antworten_pos = val),
+				};
+			}
+		}
+		
+		protected override void CollectProperties(Func<IReadOnlyKistlContext> lazyCtx, List<System.ComponentModel.PropertyDescriptor> props)
 		{
 			base.CollectProperties(props);
+			_InitializePropertyDescriptors(lazyCtx);
 			props.AddRange(_properties);
 		}
 	

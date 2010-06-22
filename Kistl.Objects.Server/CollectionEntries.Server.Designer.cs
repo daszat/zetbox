@@ -19,6 +19,13 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntry__Implementation__")]
     public class CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntry__Implementation__ : BaseServerCollectionEntry_EntityFramework, CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntry, Kistl.API.IExportableInternal, Kistl.App.Base.IExportable
     {
+		[Obsolete]
+		public CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntry__Implementation__() : base(null) {}
+		
+		public CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntry__Implementation__(Func<IReadOnlyKistlContext> lazyCtx)
+			: base(lazyCtx)
+		{
+		}
     
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
            // Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.IdProperty
@@ -142,6 +149,7 @@ namespace Kistl.App.Base
         }
         
         
+
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
@@ -315,6 +323,13 @@ namespace at.dasz.DocumentManagement
     [System.Diagnostics.DebuggerDisplay("Document_has_Blob_RelationEntry__Implementation__")]
     public class Document_has_Blob_RelationEntry__Implementation__ : BaseServerCollectionEntry_EntityFramework, Document_has_Blob_RelationEntry, Kistl.API.IExportableInternal, Kistl.App.Base.IExportable
     {
+		[Obsolete]
+		public Document_has_Blob_RelationEntry__Implementation__() : base(null) {}
+		
+		public Document_has_Blob_RelationEntry__Implementation__(Func<IReadOnlyKistlContext> lazyCtx)
+			: base(lazyCtx)
+		{
+		}
     
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
            // Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.IdProperty
@@ -465,6 +480,7 @@ namespace at.dasz.DocumentManagement
         }
         private int? _A_pos;
         
+
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
@@ -555,8 +571,6 @@ namespace at.dasz.DocumentManagement
         }
         private int? _B_pos;
         
-
-
 
         /// <summary>
         /// Index into the A-side list of this relation
@@ -701,6 +715,13 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("Group_memberOf_Group_RelationEntry__Implementation__")]
     public class Group_memberOf_Group_RelationEntry__Implementation__ : BaseServerCollectionEntry_EntityFramework, Group_memberOf_Group_RelationEntry, Kistl.API.IExportableInternal, Kistl.App.Base.IExportable
     {
+		[Obsolete]
+		public Group_memberOf_Group_RelationEntry__Implementation__() : base(null) {}
+		
+		public Group_memberOf_Group_RelationEntry__Implementation__(Func<IReadOnlyKistlContext> lazyCtx)
+			: base(lazyCtx)
+		{
+		}
     
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
            // Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.IdProperty
@@ -824,6 +845,7 @@ namespace Kistl.App.Base
         }
         
         
+
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
@@ -993,6 +1015,13 @@ namespace at.dasz.CourseOrganiser
     [System.Diagnostics.DebuggerDisplay("GroupExcercise_accomplished_by_Student_RelationEntry__Implementation__")]
     public class GroupExcercise_accomplished_by_Student_RelationEntry__Implementation__ : BaseServerCollectionEntry_EntityFramework, GroupExcercise_accomplished_by_Student_RelationEntry
     {
+		[Obsolete]
+		public GroupExcercise_accomplished_by_Student_RelationEntry__Implementation__() : base(null) {}
+		
+		public GroupExcercise_accomplished_by_Student_RelationEntry__Implementation__(Func<IReadOnlyKistlContext> lazyCtx)
+			: base(lazyCtx)
+		{
+		}
     
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
            // Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.IdProperty
@@ -1086,6 +1115,7 @@ namespace at.dasz.CourseOrganiser
         }
         
         
+
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
@@ -1236,6 +1266,13 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("Identity_memberOf_Group_RelationEntry__Implementation__")]
     public class Identity_memberOf_Group_RelationEntry__Implementation__ : BaseServerCollectionEntry_EntityFramework, Identity_memberOf_Group_RelationEntry
     {
+		[Obsolete]
+		public Identity_memberOf_Group_RelationEntry__Implementation__() : base(null) {}
+		
+		public Identity_memberOf_Group_RelationEntry__Implementation__(Func<IReadOnlyKistlContext> lazyCtx)
+			: base(lazyCtx)
+		{
+		}
     
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
            // Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.IdProperty
@@ -1329,6 +1366,7 @@ namespace Kistl.App.Base
         }
         
         
+
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
@@ -1479,6 +1517,13 @@ namespace Kistl.App.Test
     [System.Diagnostics.DebuggerDisplay("Muhblah_has_TestCustomObject_RelationEntry__Implementation__")]
     public class Muhblah_has_TestCustomObject_RelationEntry__Implementation__ : BaseServerCollectionEntry_EntityFramework, Muhblah_has_TestCustomObject_RelationEntry
     {
+		[Obsolete]
+		public Muhblah_has_TestCustomObject_RelationEntry__Implementation__() : base(null) {}
+		
+		public Muhblah_has_TestCustomObject_RelationEntry__Implementation__(Func<IReadOnlyKistlContext> lazyCtx)
+			: base(lazyCtx)
+		{
+		}
     
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
            // Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.IdProperty
@@ -1572,6 +1617,7 @@ namespace Kistl.App.Test
         }
         
         
+
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
@@ -1722,6 +1768,13 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("ObjectClass_implements_Interface_RelationEntry__Implementation__")]
     public class ObjectClass_implements_Interface_RelationEntry__Implementation__ : BaseServerCollectionEntry_EntityFramework, Kistl.API.IExportableInternal, Kistl.App.Base.IExportable, ObjectClass_implements_Interface_RelationEntry
     {
+		[Obsolete]
+		public ObjectClass_implements_Interface_RelationEntry__Implementation__() : base(null) {}
+		
+		public ObjectClass_implements_Interface_RelationEntry__Implementation__(Func<IReadOnlyKistlContext> lazyCtx)
+			: base(lazyCtx)
+		{
+		}
     
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
            // Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.IdProperty
@@ -1845,6 +1898,7 @@ namespace Kistl.App.Base
         }
         
         
+
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
@@ -2014,6 +2068,13 @@ namespace Kistl.App.Projekte
     [System.Diagnostics.DebuggerDisplay("Projekt_haben_Mitarbeiter_RelationEntry__Implementation__")]
     public class Projekt_haben_Mitarbeiter_RelationEntry__Implementation__ : BaseServerCollectionEntry_EntityFramework, Projekt_haben_Mitarbeiter_RelationEntry
     {
+		[Obsolete]
+		public Projekt_haben_Mitarbeiter_RelationEntry__Implementation__() : base(null) {}
+		
+		public Projekt_haben_Mitarbeiter_RelationEntry__Implementation__(Func<IReadOnlyKistlContext> lazyCtx)
+			: base(lazyCtx)
+		{
+		}
     
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
            // Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.IdProperty
@@ -2134,6 +2195,7 @@ namespace Kistl.App.Projekte
         }
         private int? _A_pos;
         
+
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
@@ -2224,8 +2286,6 @@ namespace Kistl.App.Projekte
         }
         private int? _B_pos;
         
-
-
 
         /// <summary>
         /// Index into the A-side list of this relation
@@ -2339,6 +2399,13 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("RoleMembership_resolves_Relation_RelationEntry__Implementation__")]
     public class RoleMembership_resolves_Relation_RelationEntry__Implementation__ : BaseServerCollectionEntry_EntityFramework, Kistl.API.IExportableInternal, Kistl.App.Base.IExportable, RoleMembership_resolves_Relation_RelationEntry
     {
+		[Obsolete]
+		public RoleMembership_resolves_Relation_RelationEntry__Implementation__() : base(null) {}
+		
+		public RoleMembership_resolves_Relation_RelationEntry__Implementation__(Func<IReadOnlyKistlContext> lazyCtx)
+			: base(lazyCtx)
+		{
+		}
     
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
            // Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.IdProperty
@@ -2489,6 +2556,7 @@ namespace Kistl.App.Base
         }
         private int? _A_pos;
         
+
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
@@ -2579,8 +2647,6 @@ namespace Kistl.App.Base
         }
         private int? _B_pos;
         
-
-
 
         /// <summary>
         /// Index into the A-side list of this relation
@@ -2725,6 +2791,13 @@ namespace at.dasz.CourseOrganiser
     [System.Diagnostics.DebuggerDisplay("Student_attend_Semester_RelationEntry__Implementation__")]
     public class Student_attend_Semester_RelationEntry__Implementation__ : BaseServerCollectionEntry_EntityFramework, Student_attend_Semester_RelationEntry
     {
+		[Obsolete]
+		public Student_attend_Semester_RelationEntry__Implementation__() : base(null) {}
+		
+		public Student_attend_Semester_RelationEntry__Implementation__(Func<IReadOnlyKistlContext> lazyCtx)
+			: base(lazyCtx)
+		{
+		}
     
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
            // Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.IdProperty
@@ -2818,6 +2891,7 @@ namespace at.dasz.CourseOrganiser
         }
         
         
+
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
@@ -2968,6 +3042,13 @@ namespace Kistl.App.GUI
     [System.Diagnostics.DebuggerDisplay("Template_hasMenu_Visual_RelationEntry__Implementation__")]
     public class Template_hasMenu_Visual_RelationEntry__Implementation__ : BaseServerCollectionEntry_EntityFramework, Template_hasMenu_Visual_RelationEntry
     {
+		[Obsolete]
+		public Template_hasMenu_Visual_RelationEntry__Implementation__() : base(null) {}
+		
+		public Template_hasMenu_Visual_RelationEntry__Implementation__(Func<IReadOnlyKistlContext> lazyCtx)
+			: base(lazyCtx)
+		{
+		}
     
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
            // Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.IdProperty
@@ -3061,6 +3142,7 @@ namespace Kistl.App.GUI
         }
         
         
+
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
@@ -3211,6 +3293,13 @@ namespace Kistl.App.Test
     [System.Diagnostics.DebuggerDisplay("TestStudent_füllt_aus_Fragebogen_RelationEntry__Implementation__")]
     public class TestStudent_füllt_aus_Fragebogen_RelationEntry__Implementation__ : BaseServerCollectionEntry_EntityFramework, TestStudent_füllt_aus_Fragebogen_RelationEntry
     {
+		[Obsolete]
+		public TestStudent_füllt_aus_Fragebogen_RelationEntry__Implementation__() : base(null) {}
+		
+		public TestStudent_füllt_aus_Fragebogen_RelationEntry__Implementation__(Func<IReadOnlyKistlContext> lazyCtx)
+			: base(lazyCtx)
+		{
+		}
     
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
            // Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.IdProperty
@@ -3304,6 +3393,7 @@ namespace Kistl.App.Test
         }
         
         
+
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
@@ -3454,6 +3544,13 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("TypeRef_hasGenericArguments_TypeRef_RelationEntry__Implementation__")]
     public class TypeRef_hasGenericArguments_TypeRef_RelationEntry__Implementation__ : BaseServerCollectionEntry_EntityFramework, Kistl.API.IExportableInternal, Kistl.App.Base.IExportable, TypeRef_hasGenericArguments_TypeRef_RelationEntry
     {
+		[Obsolete]
+		public TypeRef_hasGenericArguments_TypeRef_RelationEntry__Implementation__() : base(null) {}
+		
+		public TypeRef_hasGenericArguments_TypeRef_RelationEntry__Implementation__(Func<IReadOnlyKistlContext> lazyCtx)
+			: base(lazyCtx)
+		{
+		}
     
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
            // Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.IdProperty
@@ -3604,6 +3701,7 @@ namespace Kistl.App.Base
         }
         private int? _A_pos;
         
+
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
@@ -3694,8 +3792,6 @@ namespace Kistl.App.Base
         }
         private int? _B_pos;
         
-
-
 
         /// <summary>
         /// Index into the A-side list of this relation
@@ -3843,6 +3939,13 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("UniqueConstraint_ensures_unique_on_Property_RelationEntry__Implementation__")]
     public class UniqueConstraint_ensures_unique_on_Property_RelationEntry__Implementation__ : BaseServerCollectionEntry_EntityFramework, Kistl.API.IExportableInternal, Kistl.App.Base.IExportable, UniqueConstraint_ensures_unique_on_Property_RelationEntry
     {
+		[Obsolete]
+		public UniqueConstraint_ensures_unique_on_Property_RelationEntry__Implementation__() : base(null) {}
+		
+		public UniqueConstraint_ensures_unique_on_Property_RelationEntry__Implementation__(Func<IReadOnlyKistlContext> lazyCtx)
+			: base(lazyCtx)
+		{
+		}
     
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
            // Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.IdProperty
@@ -3966,6 +4069,7 @@ namespace Kistl.App.Base
         }
         
         
+
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
@@ -4136,6 +4240,13 @@ namespace Kistl.App.GUI
     [System.Diagnostics.DebuggerDisplay("ViewDescriptor_supports_TypeRef_RelationEntry__Implementation__")]
     public class ViewDescriptor_supports_TypeRef_RelationEntry__Implementation__ : BaseServerCollectionEntry_EntityFramework, Kistl.API.IExportableInternal, Kistl.App.Base.IExportable, ViewDescriptor_supports_TypeRef_RelationEntry
     {
+		[Obsolete]
+		public ViewDescriptor_supports_TypeRef_RelationEntry__Implementation__() : base(null) {}
+		
+		public ViewDescriptor_supports_TypeRef_RelationEntry__Implementation__(Func<IReadOnlyKistlContext> lazyCtx)
+			: base(lazyCtx)
+		{
+		}
     
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
            // Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.IdProperty
@@ -4259,6 +4370,7 @@ namespace Kistl.App.GUI
         }
         
         
+
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
@@ -4431,6 +4543,13 @@ namespace Kistl.App.GUI
     [System.Diagnostics.DebuggerDisplay("ViewModelDescriptor_displayedBy_ControlKind_RelationEntry__Implementation__")]
     public class ViewModelDescriptor_displayedBy_ControlKind_RelationEntry__Implementation__ : BaseServerCollectionEntry_EntityFramework, Kistl.API.IExportableInternal, Kistl.App.Base.IExportable, ViewModelDescriptor_displayedBy_ControlKind_RelationEntry
     {
+		[Obsolete]
+		public ViewModelDescriptor_displayedBy_ControlKind_RelationEntry__Implementation__() : base(null) {}
+		
+		public ViewModelDescriptor_displayedBy_ControlKind_RelationEntry__Implementation__(Func<IReadOnlyKistlContext> lazyCtx)
+			: base(lazyCtx)
+		{
+		}
     
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
            // Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.IdProperty
@@ -4554,6 +4673,7 @@ namespace Kistl.App.GUI
         }
         
         
+
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
@@ -4723,6 +4843,13 @@ namespace Kistl.App.GUI
     [System.Diagnostics.DebuggerDisplay("Visual_contains_Visual_RelationEntry__Implementation__")]
     public class Visual_contains_Visual_RelationEntry__Implementation__ : BaseServerCollectionEntry_EntityFramework, Visual_contains_Visual_RelationEntry
     {
+		[Obsolete]
+		public Visual_contains_Visual_RelationEntry__Implementation__() : base(null) {}
+		
+		public Visual_contains_Visual_RelationEntry__Implementation__(Func<IReadOnlyKistlContext> lazyCtx)
+			: base(lazyCtx)
+		{
+		}
     
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
            // Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.IdProperty
@@ -4816,6 +4943,7 @@ namespace Kistl.App.GUI
         }
         
         
+
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
@@ -4966,6 +5094,13 @@ namespace Kistl.App.GUI
     [System.Diagnostics.DebuggerDisplay("Visual_hasContextMenu_Visual_RelationEntry__Implementation__")]
     public class Visual_hasContextMenu_Visual_RelationEntry__Implementation__ : BaseServerCollectionEntry_EntityFramework, Visual_hasContextMenu_Visual_RelationEntry
     {
+		[Obsolete]
+		public Visual_hasContextMenu_Visual_RelationEntry__Implementation__() : base(null) {}
+		
+		public Visual_hasContextMenu_Visual_RelationEntry__Implementation__(Func<IReadOnlyKistlContext> lazyCtx)
+			: base(lazyCtx)
+		{
+		}
     
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
            // Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.IdProperty
@@ -5059,6 +5194,7 @@ namespace Kistl.App.GUI
         }
         
         
+
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
@@ -5210,6 +5346,13 @@ namespace Kistl.App.TimeRecords
     [System.Diagnostics.DebuggerDisplay("WorkEffortAccount_has_Mitarbeiter_RelationEntry__Implementation__")]
     public class WorkEffortAccount_has_Mitarbeiter_RelationEntry__Implementation__ : BaseServerCollectionEntry_EntityFramework, WorkEffortAccount_has_Mitarbeiter_RelationEntry
     {
+		[Obsolete]
+		public WorkEffortAccount_has_Mitarbeiter_RelationEntry__Implementation__() : base(null) {}
+		
+		public WorkEffortAccount_has_Mitarbeiter_RelationEntry__Implementation__(Func<IReadOnlyKistlContext> lazyCtx)
+			: base(lazyCtx)
+		{
+		}
     
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
            // Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.IdProperty
@@ -5303,6 +5446,7 @@ namespace Kistl.App.TimeRecords
         }
         
         
+
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
@@ -5452,6 +5596,13 @@ namespace Kistl.App.Projekte
     [EdmEntityType(NamespaceName="Model", Name="Kunde_EMails_CollectionEntry")]    [System.Diagnostics.DebuggerDisplay("Kunde_EMails_CollectionEntry__Implementation__")]
     public class Kunde_EMails_CollectionEntry__Implementation__ : BaseServerCollectionEntry_EntityFramework, Kunde_EMails_CollectionEntry
     {
+		[Obsolete]
+		public Kunde_EMails_CollectionEntry__Implementation__() : base(null) {}
+		
+		public Kunde_EMails_CollectionEntry__Implementation__(Func<IReadOnlyKistlContext> lazyCtx)
+			: base(lazyCtx)
+		{
+		}
     
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
            // Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.IdProperty
@@ -5544,6 +5695,7 @@ namespace Kistl.App.Projekte
         
         
 public Kunde Parent { get { return A; } set { A = value; } }
+
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>
@@ -5651,6 +5803,13 @@ namespace Kistl.App.Test
     [EdmEntityType(NamespaceName="Model", Name="TestCustomObject_PhoneNumbersOther_CollectionEntry")]    [System.Diagnostics.DebuggerDisplay("TestCustomObject_PhoneNumbersOther_CollectionEntry__Implementation__")]
     public class TestCustomObject_PhoneNumbersOther_CollectionEntry__Implementation__ : BaseServerCollectionEntry_EntityFramework, TestCustomObject_PhoneNumbersOther_CollectionEntry
     {
+		[Obsolete]
+		public TestCustomObject_PhoneNumbersOther_CollectionEntry__Implementation__() : base(null) {}
+		
+		public TestCustomObject_PhoneNumbersOther_CollectionEntry__Implementation__(Func<IReadOnlyKistlContext> lazyCtx)
+			: base(lazyCtx)
+		{
+		}
     
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
            // Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses.IdProperty
@@ -5743,6 +5902,7 @@ namespace Kistl.App.Test
         
         
 public TestCustomObject Parent { get { return A; } set { A = value; } }
+
         /// <summary>
         /// the B-side value of this CollectionEntry
         /// </summary>

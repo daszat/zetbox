@@ -26,9 +26,15 @@ namespace at.dasz.DocumentManagement
     [System.Diagnostics.DebuggerDisplay("StaticFile")]
     public class StaticFile__Implementation__ : at.dasz.DocumentManagement.File__Implementation__, StaticFile
     {
-    
-		public StaticFile__Implementation__()
-		{
+        [Obsolete]
+        public StaticFile__Implementation__()
+            : base(null)
+        {
+        }
+
+        public StaticFile__Implementation__(Func<IReadOnlyKistlContext> lazyCtx)
+            : base(lazyCtx)
+        {
         }
 
 
@@ -93,10 +99,10 @@ namespace at.dasz.DocumentManagement
 
 
 
-		public override Type GetImplementedInterface()
-		{
-			return typeof(StaticFile);
-		}
+        public override Type GetImplementedInterface()
+        {
+            return typeof(StaticFile);
+        }
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{

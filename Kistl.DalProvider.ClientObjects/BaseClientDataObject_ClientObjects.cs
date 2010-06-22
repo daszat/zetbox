@@ -17,5 +17,7 @@ namespace Kistl.DalProvider.ClientObjects
     public abstract class BaseClientDataObject_ClientObjects
         : BaseClientDataObject
     {
+        protected BaseClientDataObject_ClientObjects() : base(null) { }
+        protected BaseClientDataObject_ClientObjects(Func<IReadOnlyKistlContext> lazyCtx) : base(lazyCtx) { }
     }
 }

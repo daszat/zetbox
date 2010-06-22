@@ -16,6 +16,15 @@ namespace Kistl.API
     public abstract class BasePersistenceObject
         : BaseNotifyingObject, IPersistenceObject, IDataErrorInfo, ICustomTypeDescriptor
     {
+        // TODO 4.0: replace Func<> with Lazy<>
+        // http://www.davidhayden.me/2010/01/auto-factories-in-autofac-for-lazy-instantiation-lazydependencymodule.html
+        protected BasePersistenceObject(Func<IReadOnlyKistlContext> lazyCtx)
+        {
+            _lazyCtx = lazyCtx;
+        }
+
+        private readonly Func<IReadOnlyKistlContext> _lazyCtx;
+
         /// <summary>
         /// Interfacetype Factory injected by a Context
         /// </summary>
@@ -347,6 +356,11 @@ namespace Kistl.API
             props.AddRange(_properties);
         }
 
+        protected virtual void CollectProperties(Func<IReadOnlyKistlContext> lazyCtx, List<PropertyDescriptor> props)
+        {
+            props.AddRange(_properties);
+        }
+
         // TODO: make this per-actual-Type instead of per-Instance
         private PropertyDescriptorCollection _propertyDescriptorCollection = null;
 
@@ -355,7 +369,7 @@ namespace Kistl.API
             if (_propertyDescriptorCollection == null)
             {
                 var props = new List<PropertyDescriptor>();
-                CollectProperties(props);
+                CollectProperties(_lazyCtx, props);
                 _propertyDescriptorCollection = new PropertyDescriptorCollection(props.ToArray(), true);
             }
 

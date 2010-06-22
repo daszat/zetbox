@@ -22,7 +22,18 @@
 	if (properties.Count > 0 || rels.Count > 0)
 	{
 %>
-		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
+		private static readonly object _propertiesLock = new object();
+		private static System.ComponentModel.PropertyDescriptor[] _properties;
+		
+		private void _InitializePropertyDescriptors(Func<IReadOnlyKistlContext> lazyCtx)
+		{
+			if (_properties != null) return;
+			lock (_propertiesLock)
+			{
+				// recheck for a lost race after aquiring the lock
+				if (_properties != null) return;
+				
+				_properties = new System.ComponentModel.PropertyDescriptor[] {
 <%
 		foreach(var property in properties)
 		{
@@ -30,61 +41,66 @@
 			if (property.IsAssociation() && !property.IsObjectReferencePropertySingle())
 			{
 %>
-			// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
-			new CustomPropertyDescriptor<<%= implName %>, <%= property.GetCollectionTypeString() %>>(
-				new Guid("<%= property.ExportGuid %>"),
-				"<%= propertyName %>",
-				null,
-				obj => obj.<%= propertyName %>,
-				null), // lists are read-only properties
+					// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
+					new CustomPropertyDescriptor<<%= implName %>, <%= property.GetCollectionTypeString() %>>(
+						lazyCtx,
+						new Guid("<%= property.ExportGuid %>"),
+						"<%= propertyName %>",
+						null,
+						obj => obj.<%= propertyName %>,
+						null), // lists are read-only properties
 <%
 			}
 			else if (property is CalculatedObjectReferenceProperty)
 			{
 %>
-			// property is CalculatedObjectReferenceProperty
-			new CustomPropertyDescriptor<<%= implName %>, <%= property.ReferencedTypeAsCSharp() %>>(
-				new Guid("<%= property.ExportGuid %>"),
-				"<%= propertyName %>",
-				null,
-				obj => obj.<%= propertyName %>,
-				null), // CalculatedObjectReferenceProperty is a read-only property
+					// property is CalculatedObjectReferenceProperty
+					new CustomPropertyDescriptor<<%= implName %>, <%= property.ReferencedTypeAsCSharp() %>>(
+						lazyCtx,
+						new Guid("<%= property.ExportGuid %>"),
+						"<%= propertyName %>",
+						null,
+						obj => obj.<%= propertyName %>,
+						null), // CalculatedObjectReferenceProperty is a read-only property
 <%
 			} else {
 %>
-			// else
-			new CustomPropertyDescriptor<<%= implName %>, <%= property.ReferencedTypeAsCSharp() %>>(
-				new Guid("<%= property.ExportGuid %>"),
-				"<%= propertyName %>",
-				null,
-				obj => obj.<%= propertyName %>,
-				(obj, val) => obj.<%= propertyName %> = val),
+					// else
+					new CustomPropertyDescriptor<<%= implName %>, <%= property.ReferencedTypeAsCSharp() %>>(
+						lazyCtx,
+						new Guid("<%= property.ExportGuid %>"),
+						"<%= propertyName %>",
+						null,
+						obj => obj.<%= propertyName %>,
+						(obj, val) => obj.<%= propertyName %> = val),
 <%
 			}
 		}
 		
+
 		if ("Frozen".Equals(Settings["extrasuffix"]))
 		{
 %>
-			// skipping position columns for frozen context (not implemented)
+					// skipping position columns for frozen context (not implemented)
 <%
 		} else {		
 			foreach(var rel in rels.Where(r => r.GetRelationType() == RelationType.one_n))
 			{
 %>
-			// rel: <%= rel.A.RoleName %> <%= rel.Verb %> <%= rel.B.RoleName %> (<%= rel.ExportGuid %>)
+					// rel: <%= rel.A.RoleName %> <%= rel.Verb %> <%= rel.B.RoleName %> (<%= rel.ExportGuid %>)
 <%
 			if (rel.A.Type == cls && rel.A.HasPersistentOrder) 
 			{
 				var posColumnName = Construct.ListPositionPropertyName(rel.A);
 %>
-			// rel.A.Type == cls && rel.A.HasPersistentOrder
-			new CustomPropertyDescriptor<<%= implName %>, int?>(
-				null,
-				"<%= posColumnName %>",
-				null,
-				obj => obj.<%= posColumnName %>,
-				(obj, val) => obj.<%= posColumnName %> = val),
+					// rel.A.Type == cls && rel.A.HasPersistentOrder
+					new CustomPropertyDescriptor<<%= implName %>, int?>(
+						lazyCtx,
+						null,
+						"<%= posColumnName %>",
+						null,
+						obj => obj.<%= posColumnName %>,
+						(obj, val) => obj.<%= posColumnName %> = val),
 <%
 				}
 			
@@ -92,23 +108,27 @@
 				{
 					var posColumnName = Construct.ListPositionPropertyName(rel.B);
 %>
-			// rel.B.Type == cls && rel.B.HasPersistentOrder
-			new CustomPropertyDescriptor<<%= implName %>, int?>(
-				null,
-				"<%= posColumnName %>",
-				null,
-				obj => obj.<%= posColumnName %>,
-				(obj, val) => obj.<%= posColumnName %> = val),
+					// rel.B.Type == cls && rel.B.HasPersistentOrder
+					new CustomPropertyDescriptor<<%= implName %>, int?>(
+						lazyCtx,
+						null,
+						"<%= posColumnName %>",
+						null,
+						obj => obj.<%= posColumnName %>,
+						(obj, val) => obj.<%= posColumnName %> = val),
 <%
 				}
 			}
 		}
 %>
-		};
+				};
+			}
+		}
 		
-		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
+		protected override void CollectProperties(Func<IReadOnlyKistlContext> lazyCtx, List<System.ComponentModel.PropertyDescriptor> props)
 		{
 			base.CollectProperties(props);
+			_InitializePropertyDescriptors(lazyCtx);
 			props.AddRange(_properties);
 		}
 <%

@@ -26,9 +26,15 @@ namespace Kistl.App.Base
     [System.Diagnostics.DebuggerDisplay("AccessControl")]
     public class AccessControl__Implementation__ : BaseServerDataObject_EntityFramework, AccessControl, Kistl.API.IExportableInternal
     {
-    
-		public AccessControl__Implementation__()
-		{
+        [Obsolete]
+        public AccessControl__Implementation__()
+            : base(null)
+        {
+        }
+
+        public AccessControl__Implementation__(Func<IReadOnlyKistlContext> lazyCtx)
+            : base(lazyCtx)
+        {
         }
 
         [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
@@ -760,10 +766,10 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.AccessControl, Kistl.App.Base.AccessRights?> OnRights_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.AccessControl, Kistl.App.Base.AccessRights?> OnRights_PostSetter;
 
-		public override Type GetImplementedInterface()
-		{
-			return typeof(AccessControl);
-		}
+        public override Type GetImplementedInterface()
+        {
+            return typeof(AccessControl);
+        }
 
 		public override void ApplyChangesFrom(IPersistenceObject obj)
 		{
@@ -834,86 +840,110 @@ namespace Kistl.App.Base
         public static event ObjectEventHandler<AccessControl> OnDeleting_AccessControl;
 
 
-		private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] {
-			// else
-			new CustomPropertyDescriptor<AccessControl__Implementation__, Kistl.App.Base.Identity>(
-				new Guid("c8d556ec-a0b9-4491-95ee-91a1f2018faa"),
-				"ChangedBy",
-				null,
-				obj => obj.ChangedBy,
-				(obj, val) => obj.ChangedBy = val),
-			// else
-			new CustomPropertyDescriptor<AccessControl__Implementation__, DateTime?>(
-				new Guid("f4b0c109-cc3f-4e19-bb83-64c111cf033c"),
-				"ChangedOn",
-				null,
-				obj => obj.ChangedOn,
-				(obj, val) => obj.ChangedOn = val),
-			// else
-			new CustomPropertyDescriptor<AccessControl__Implementation__, Kistl.App.Base.Identity>(
-				new Guid("823a4364-94ba-478e-94d3-9591b9c2f9cf"),
-				"CreatedBy",
-				null,
-				obj => obj.CreatedBy,
-				(obj, val) => obj.CreatedBy = val),
-			// else
-			new CustomPropertyDescriptor<AccessControl__Implementation__, DateTime?>(
-				new Guid("602524ad-2be2-4350-9195-015bc8ac4c8b"),
-				"CreatedOn",
-				null,
-				obj => obj.CreatedOn,
-				(obj, val) => obj.CreatedOn = val),
-			// else
-			new CustomPropertyDescriptor<AccessControl__Implementation__, string>(
-				new Guid("cb4f9bf4-97dc-4b0f-8a30-7e85b37eca69"),
-				"Description",
-				null,
-				obj => obj.Description,
-				(obj, val) => obj.Description = val),
-			// else
-			new CustomPropertyDescriptor<AccessControl__Implementation__, Guid>(
-				new Guid("6f7351e4-a2e3-487a-be50-05a8089e1080"),
-				"ExportGuid",
-				null,
-				obj => obj.ExportGuid,
-				(obj, val) => obj.ExportGuid = val),
-			// else
-			new CustomPropertyDescriptor<AccessControl__Implementation__, Kistl.App.Base.Module>(
-				new Guid("bebc90f3-d8cb-4224-96dc-b477db5bf321"),
-				"Module",
-				null,
-				obj => obj.Module,
-				(obj, val) => obj.Module = val),
-			// else
-			new CustomPropertyDescriptor<AccessControl__Implementation__, string>(
-				new Guid("07846156-f853-4f95-ae6f-09dad6c4d71d"),
-				"Name",
-				null,
-				obj => obj.Name,
-				(obj, val) => obj.Name = val),
-			// else
-			new CustomPropertyDescriptor<AccessControl__Implementation__, Kistl.App.Base.ObjectClass>(
-				new Guid("b2d2a5df-4e4e-490b-84ca-982b0b732e7e"),
-				"ObjectClass",
-				null,
-				obj => obj.ObjectClass,
-				(obj, val) => obj.ObjectClass = val),
-			// else
-			new CustomPropertyDescriptor<AccessControl__Implementation__, Kistl.App.Base.AccessRights?>(
-				new Guid("11235aeb-9610-471c-82f9-ba5738baca2e"),
-				"Rights",
-				null,
-				obj => obj.Rights,
-				(obj, val) => obj.Rights = val),
-			// rel: AccessControl has Module (89b9c0a5-3b5a-4e04-83cf-0e8de37abcf1)
-			// rel: AccessControl was CreatedBy (a6a5dcbf-0751-4911-9a0a-5fb1a59d2a45)
-			// rel: AccessControl was ChangedBy (89cba0a2-2515-45d8-90e5-fa96db0cc4b3)
-			// rel: ObjectClass has AccessControlList (5c3092e0-a3e1-46d2-8e66-e59298b342e7)
-		};
+		private static readonly object _propertiesLock = new object();
+		private static System.ComponentModel.PropertyDescriptor[] _properties;
 		
-		protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
+		private void _InitializePropertyDescriptors(Func<IReadOnlyKistlContext> lazyCtx)
+		{
+			if (_properties != null) return;
+			lock (_propertiesLock)
+			{
+				// recheck for a lost race after aquiring the lock
+				if (_properties != null) return;
+				
+				_properties = new System.ComponentModel.PropertyDescriptor[] {
+					// else
+					new CustomPropertyDescriptor<AccessControl__Implementation__, Kistl.App.Base.Identity>(
+						lazyCtx,
+						new Guid("c8d556ec-a0b9-4491-95ee-91a1f2018faa"),
+						"ChangedBy",
+						null,
+						obj => obj.ChangedBy,
+						(obj, val) => obj.ChangedBy = val),
+					// else
+					new CustomPropertyDescriptor<AccessControl__Implementation__, DateTime?>(
+						lazyCtx,
+						new Guid("f4b0c109-cc3f-4e19-bb83-64c111cf033c"),
+						"ChangedOn",
+						null,
+						obj => obj.ChangedOn,
+						(obj, val) => obj.ChangedOn = val),
+					// else
+					new CustomPropertyDescriptor<AccessControl__Implementation__, Kistl.App.Base.Identity>(
+						lazyCtx,
+						new Guid("823a4364-94ba-478e-94d3-9591b9c2f9cf"),
+						"CreatedBy",
+						null,
+						obj => obj.CreatedBy,
+						(obj, val) => obj.CreatedBy = val),
+					// else
+					new CustomPropertyDescriptor<AccessControl__Implementation__, DateTime?>(
+						lazyCtx,
+						new Guid("602524ad-2be2-4350-9195-015bc8ac4c8b"),
+						"CreatedOn",
+						null,
+						obj => obj.CreatedOn,
+						(obj, val) => obj.CreatedOn = val),
+					// else
+					new CustomPropertyDescriptor<AccessControl__Implementation__, string>(
+						lazyCtx,
+						new Guid("cb4f9bf4-97dc-4b0f-8a30-7e85b37eca69"),
+						"Description",
+						null,
+						obj => obj.Description,
+						(obj, val) => obj.Description = val),
+					// else
+					new CustomPropertyDescriptor<AccessControl__Implementation__, Guid>(
+						lazyCtx,
+						new Guid("6f7351e4-a2e3-487a-be50-05a8089e1080"),
+						"ExportGuid",
+						null,
+						obj => obj.ExportGuid,
+						(obj, val) => obj.ExportGuid = val),
+					// else
+					new CustomPropertyDescriptor<AccessControl__Implementation__, Kistl.App.Base.Module>(
+						lazyCtx,
+						new Guid("bebc90f3-d8cb-4224-96dc-b477db5bf321"),
+						"Module",
+						null,
+						obj => obj.Module,
+						(obj, val) => obj.Module = val),
+					// else
+					new CustomPropertyDescriptor<AccessControl__Implementation__, string>(
+						lazyCtx,
+						new Guid("07846156-f853-4f95-ae6f-09dad6c4d71d"),
+						"Name",
+						null,
+						obj => obj.Name,
+						(obj, val) => obj.Name = val),
+					// else
+					new CustomPropertyDescriptor<AccessControl__Implementation__, Kistl.App.Base.ObjectClass>(
+						lazyCtx,
+						new Guid("b2d2a5df-4e4e-490b-84ca-982b0b732e7e"),
+						"ObjectClass",
+						null,
+						obj => obj.ObjectClass,
+						(obj, val) => obj.ObjectClass = val),
+					// else
+					new CustomPropertyDescriptor<AccessControl__Implementation__, Kistl.App.Base.AccessRights?>(
+						lazyCtx,
+						new Guid("11235aeb-9610-471c-82f9-ba5738baca2e"),
+						"Rights",
+						null,
+						obj => obj.Rights,
+						(obj, val) => obj.Rights = val),
+					// rel: AccessControl has Module (89b9c0a5-3b5a-4e04-83cf-0e8de37abcf1)
+					// rel: AccessControl was CreatedBy (a6a5dcbf-0751-4911-9a0a-5fb1a59d2a45)
+					// rel: AccessControl was ChangedBy (89cba0a2-2515-45d8-90e5-fa96db0cc4b3)
+					// rel: ObjectClass has AccessControlList (5c3092e0-a3e1-46d2-8e66-e59298b342e7)
+				};
+			}
+		}
+		
+		protected override void CollectProperties(Func<IReadOnlyKistlContext> lazyCtx, List<System.ComponentModel.PropertyDescriptor> props)
 		{
 			base.CollectProperties(props);
+			_InitializePropertyDescriptors(lazyCtx);
 			props.AddRange(_properties);
 		}
 	
