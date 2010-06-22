@@ -31,20 +31,24 @@
     <ItemGroup>
       <OldKistlObjectsSources Include="Kistl.Objects\*.*" />
       <OldKistlObjectsServerSources Include="Kistl.Objects.Server\*.*" />
+      <OldKistlObjectsMemorySources Include="Kistl.Objects.Memory\*.*" />
     </ItemGroup>
     <Copy SourceFiles="@(OldKistlObjectsSources)" DestinationFolder="Backup\Kistl.Objects\" />
     <Copy SourceFiles="@(OldKistlObjectsServerSources)" DestinationFolder="Backup\Kistl.Objects.Server\" />
-    <Delete Files="@(OldKistlObjectsSources);@(OldKistlObjectsServerSources)" />
-    <RemoveDir Directories="Kistl.Objects\bin;Kistl.Objects.Server\bin" />
-    <RemoveDir Directories="Kistl.Objects\obj;Kistl.Objects.Server\obj" />
+    <Copy SourceFiles="@(OldKistlObjectsMemorySources)" DestinationFolder="Backup\Kistl.Objects.Memory\" />
+    <Delete Files="@(OldKistlObjectsSources);@(OldKistlObjectsServerSources);@(OldKistlObjectsMemorySources)" />
+    <RemoveDir Directories="Kistl.Objects\bin;Kistl.Objects.Server\bin;Kistl.Objects.Memory\bin" />
+    <RemoveDir Directories="Kistl.Objects\obj;Kistl.Objects.Server\obj;Kistl.Objects.Memory\obj" />
 
     <Message Importance="high" Text="deploy generated code" />
     <ItemGroup>
       <KistlObjectsSources Include="bin\CodeGen\Kistl.Objects\*.*" />
       <KistlObjectsServerSources Include="bin\CodeGen\Kistl.Objects.Server\*.*" />
+      <KistlObjectsMemorySources Include="bin\CodeGen\Kistl.Objects.Memory\*.*" />
     </ItemGroup>
     <Copy SourceFiles="@(KistlObjectsSources)" DestinationFolder="Kistl.Objects\" />
     <Copy SourceFiles="@(KistlObjectsServerSources)" DestinationFolder="Kistl.Objects.Server\" />
+    <Copy SourceFiles="@(KistlObjectsMemorySources)" DestinationFolder="Kistl.Objects.Memory\" />
 
     <!--  -->
     <Message Importance="high" Text="Clean, then rebuild entire solution" />

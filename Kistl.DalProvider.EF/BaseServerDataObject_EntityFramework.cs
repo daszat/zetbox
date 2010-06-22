@@ -47,6 +47,9 @@ namespace Kistl.DalProvider.EF
                         return DataObjectState.Unmodified;
                     case System.Data.EntityState.Deleted:
                         return DataObjectState.Deleted;
+                    // special case, might need more thinking
+                    case System.Data.EntityState.Detached:
+                        return DataObjectState.Unmodified;
                     default:
                         throw new InvalidOperationException("Invalid Entity Object State: " + EntityState.ToString());
                 }

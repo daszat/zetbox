@@ -9,6 +9,8 @@ namespace Kistl.App.Projekte
 {
     public class Mitarbeiter__Implementation__ : Kistl.API.Client.Mocks.BaseClientDataObjectMock__Implementation__, Kistl.App.Projekte.Mitarbeiter
     {
+        public Mitarbeiter__Implementation__(Func<IReadOnlyKistlContext> lazyCtx) : base(lazyCtx) { }
+
         #region Mitarbeiter Members
 
         /// <summary>

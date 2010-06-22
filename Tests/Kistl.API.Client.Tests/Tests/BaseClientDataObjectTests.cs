@@ -22,7 +22,7 @@ namespace Kistl.API.Client.Tests
 
             PropertyChangedCalled = false;
 
-            obj = new BaseClientDataObjectMock__Implementation__();
+            obj = new BaseClientDataObjectMock__Implementation__(null);
             obj.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(obj_PropertyChanged);
         }
 
@@ -78,7 +78,7 @@ namespace Kistl.API.Client.Tests
         [Test]
         public void ApplyChanges()
         {
-            BaseClientDataObjectMock__Implementation__ result = new BaseClientDataObjectMock__Implementation__();
+            BaseClientDataObjectMock__Implementation__ result = new BaseClientDataObjectMock__Implementation__(null);
 
             obj.SetPrivatePropertyValue<int>("ID", 10);
 
@@ -122,7 +122,7 @@ namespace Kistl.API.Client.Tests
             SerializableType t;
             BinarySerializer.FromStream(out t, sr);
 
-            BaseClientDataObjectMock__Implementation__ result = new BaseClientDataObjectMock__Implementation__();
+            BaseClientDataObjectMock__Implementation__ result = new BaseClientDataObjectMock__Implementation__(null);
             result.FromStream(sr);
 
             Assert.That(result.GetType(), Is.EqualTo(obj.GetType()));
@@ -136,7 +136,7 @@ namespace Kistl.API.Client.Tests
         {
             using (IKistlContext ctx = GetContext())
             {
-                BaseClientDataObjectMock__Implementation__ result = new BaseClientDataObjectMock__Implementation__();
+                BaseClientDataObjectMock__Implementation__ result = new BaseClientDataObjectMock__Implementation__(null);
                 result.FromStream((BinaryReader)null);
             }
         }

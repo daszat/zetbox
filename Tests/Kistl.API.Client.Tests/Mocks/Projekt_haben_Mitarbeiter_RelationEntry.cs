@@ -13,7 +13,10 @@ namespace Kistl.App.Projekte
     [System.Diagnostics.DebuggerDisplay("Projekt_haben_Mitarbeiter_RelationEntry")]
     public class Projekt_haben_Mitarbeiter_RelationEntry__Implementation__ : BaseClientCollectionEntry, Projekt_haben_Mitarbeiter_RelationEntry
     {
+        [Obsolete]
         public Projekt_haben_Mitarbeiter_RelationEntry__Implementation__() : base(null) { }
+
+        public Projekt_haben_Mitarbeiter_RelationEntry__Implementation__(Func<IReadOnlyKistlContext> lazyCtx) : base(lazyCtx) { }
 
         // ID is inherited
         public Guid RelationID { get { return Guid.Empty; } }

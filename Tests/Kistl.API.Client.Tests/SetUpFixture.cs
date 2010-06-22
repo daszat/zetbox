@@ -33,6 +33,10 @@ namespace Kistl.API.Client.Tests
         protected override void SetupBuilder(Autofac.ContainerBuilder builder)
         {
             base.SetupBuilder(builder);
+            builder.RegisterModule(new Kistl.API.ApiModule());
+            builder.RegisterModule(new Kistl.API.Client.ClientApiModule());
+            builder.RegisterModule(new Kistl.DalProvider.Memory.MemoryProvider());
+
             builder.RegisterType<TestProxy>()
                 .As<IProxy>()
                 .InstancePerDependency();
@@ -50,6 +54,7 @@ namespace Kistl.API.Client.Tests
                     c.Resolve<Func<IReadOnlyKistlContext>>(Kistl.API.Helper.FrozenContextServiceName)))
                 .As<IKistlContext>()
                 .As<IReadOnlyKistlContext>()
+                .Named<IReadOnlyKistlContext>(Kistl.API.Helper.FrozenContextServiceName)
                 .InstancePerDependency();
         }
 

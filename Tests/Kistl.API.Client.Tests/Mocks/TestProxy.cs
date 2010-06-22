@@ -53,11 +53,11 @@ namespace Kistl.API.Client.Tests
         private static IEnumerable<IDataObject> GetList_TestObjClass()
         {
             List<TestObjClass> result = new List<TestObjClass>();
-            result.Add(new TestObjClass__Implementation__() { StringProp = "String " + 1 });
-            result.Add(new TestObjClass__Implementation__() { StringProp = "String " + 2, _fk_ObjectProp = 1 });
-            result.Add(new TestObjClass__Implementation__() { StringProp = "String " + 3, _fk_ObjectProp = 1 });
-            result.Add(new TestObjClass__Implementation__() { StringProp = "String " + 4 });
-            result.Add(new TestObjClass__Implementation__() { StringProp = "String " + 5 });
+            result.Add(new TestObjClass__Implementation__(null) { StringProp = "String " + 1 });
+            result.Add(new TestObjClass__Implementation__(null) { StringProp = "String " + 2, _fk_ObjectProp = 1 });
+            result.Add(new TestObjClass__Implementation__(null) { StringProp = "String " + 3, _fk_ObjectProp = 1 });
+            result.Add(new TestObjClass__Implementation__(null) { StringProp = "String " + 4 });
+            result.Add(new TestObjClass__Implementation__(null) { StringProp = "String " + 5 });
 
             result[0].SetPrivatePropertyValue<int>("ID", 1);
             result[1].SetPrivatePropertyValue<int>("ID", 2);
@@ -76,8 +76,8 @@ namespace Kistl.API.Client.Tests
             List<TestObjClass> result = new List<TestObjClass>();
             if (ID == 1)
             {
-                result.Add(new TestObjClass__Implementation__() { StringProp = "String " + 2 });
-                result.Add(new TestObjClass__Implementation__() { StringProp = "String " + 3 });
+                result.Add(new TestObjClass__Implementation__(null) { StringProp = "String " + 2 });
+                result.Add(new TestObjClass__Implementation__(null) { StringProp = "String " + 3 });
                 result[0].SetPrivatePropertyValue<int>("ID", 2);
                 result[1].SetPrivatePropertyValue<int>("ID", 3);
             }
@@ -101,7 +101,7 @@ namespace Kistl.API.Client.Tests
 
                 if (obj.ObjectState != DataObjectState.Deleted)
                 {
-                    var newObj = new TestObjClass__Implementation__();
+                    var newObj = new TestObjClass__Implementation__(null);
 
                     // Copy old object to new object
                     newObj.ApplyChangesFrom(obj);

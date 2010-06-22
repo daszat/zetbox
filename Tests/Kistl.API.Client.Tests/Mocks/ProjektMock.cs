@@ -10,6 +10,11 @@ namespace Kistl.App.Projekte
 {
     public class Projekt__Implementation__ : Kistl.API.Client.Mocks.BaseClientDataObjectMock__Implementation__, Kistl.App.Projekte.Projekt
     {
+        public Projekt__Implementation__(Func<IReadOnlyKistlContext> lazyCtx)
+            : base(lazyCtx)
+        {
+        }
+        
         #region Projekt Members
 
         /// <summary>

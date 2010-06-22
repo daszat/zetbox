@@ -11,7 +11,7 @@ namespace Kistl.API.Client.Mocks
     public class BaseClientDataObjectMock__Implementation__ 
         : BaseClientDataObject, ANewObjectClass
     {
-        public BaseClientDataObjectMock__Implementation__() : base(null) { }
+        public BaseClientDataObjectMock__Implementation__(Func<IReadOnlyKistlContext> lazyCtx) : base(lazyCtx) { }
     
         public override Type GetImplementedInterface()
         {

@@ -3,9 +3,5 @@
   <ConfigName>Client.API's Test Configuration</ConfigName>
   <Client StartClient="false" ThrowErrors="true">
     <DocumentStore>DocumentStore\Client\</DocumentStore>
-    <Modules>
-      <Module>Kistl.API.ApiModule, Kistl.API</Module>
-      <Module>Kistl.API.Client.ClientApiModule, Kistl.API.Client</Module>
-    </Modules>
   </Client>
 </KistlConfig>

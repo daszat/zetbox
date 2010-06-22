@@ -8,16 +8,16 @@ namespace Kistl.App.Test
     using System.Linq;
     using System.Text;
     using System.Xml.Serialization;
+
     using Kistl.API;
     using Kistl.API.Client;
     
     public class TestObjClass__Implementation__ : BaseClientDataObject, TestObjClass
     {
-        public TestObjClass__Implementation__()
-            : base(null)
+        public TestObjClass__Implementation__(Func<IReadOnlyKistlContext> lazyCtx)
+            : base(lazyCtx)
         {
         }
-
 
         /// <summary>
         /// test

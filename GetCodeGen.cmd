@@ -14,6 +14,13 @@ del /Q .\Kistl.Objects.Server\*.*
 
 xcopy /y bin\CodeGen\Kistl.Objects.Server\*.* .\Kistl.Objects.Server
 
+rem *********** Memory *********** 
+xcopy /y .\Kistl.Objects.Memory\*.* .\Backup\Kistl.Objects.Memory\
+
+del /Q .\Kistl.Objects.Memory\*.*
+
+xcopy /y bin\CodeGen\Kistl.Objects.Memory\*.* .\Kistl.Objects.Memory
+
 
 rem *********** Assemblies *********** 
 rem Do not copy assemblies
