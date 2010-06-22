@@ -20,11 +20,6 @@ namespace Kistl.DalProvider.Memory
             _lazyCtx = lazyCtx;
         }
 
-        public override IQueryable<IPersistenceObject> GetPersistenceObjectQuery(InterfaceType ifType)
-        {
-            return (this.objects[ifType] ?? emptylist).AsQueryable().OfType<IPersistenceObject>();
-        }
-
         public override int SubmitChanges()
         {
             throw new NotSupportedException();
