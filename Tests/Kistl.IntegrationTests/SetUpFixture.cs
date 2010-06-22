@@ -38,9 +38,6 @@ namespace Kistl.IntegrationTests
                     manager = new ServerDomainManager();
                     manager.Start(config);
 
-                    // TODO: Remove when FrozenContext is loaded by AutoFac
-                    FrozenContext.RegisterTypeTransformations(container.Resolve<ITypeTransformations>());
-
                     // initialise custom actions manager
                     var cams = container.Resolve<BaseCustomActionsManager>();
 

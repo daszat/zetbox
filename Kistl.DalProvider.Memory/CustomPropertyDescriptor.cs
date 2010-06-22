@@ -32,9 +32,10 @@ namespace Kistl.DalProvider.Memory
 
         public override string[] GetValidationErrors(object component)
         {
-            if (_lazyCtx != null && _propertyGuid != null && FrozenContext.Single != null)
+            IReadOnlyKistlContext ctx;
+            if (_lazyCtx != null && _propertyGuid != null && (ctx = _lazyCtx()) != null)
             {
-                var property = _lazyCtx().FindPersistenceObject<Kistl.App.Base.Property>(_propertyGuid.Value);
+                var property = ctx.FindPersistenceObject<Kistl.App.Base.Property>(_propertyGuid.Value);
                 var self = (TComponent)component;
                 var val = getter(self);
                 return property

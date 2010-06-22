@@ -27,10 +27,10 @@ namespace Kistl.App.Extensions
             // TODO: think about and implement naked types (i.e. without arguments)
             if (t.IsGenericTypeDefinition) { throw new ArgumentOutOfRangeException("t"); }
 
-            if (ctx == FrozenContext.Single)
-            {
-                return ToFrozenRef(t);
-            }
+            //if (ctx == FrozenContext.Single)
+            //{
+            //    return ToFrozenRef(t);
+            //}
             var result = LookupByType(ctx, ctx.GetQuery<TypeRef>(), t);
 
             //if (result == null)
@@ -84,10 +84,10 @@ namespace Kistl.App.Extensions
             // TODO: think about and implement naked types (i.e. without arguments)
             if (t.IsGenericTypeDefinition) { throw new ArgumentOutOfRangeException("t"); }
 
-            if (ctx == FrozenContext.Single)
-            {
-                return ToFrozenRef(t);
-            }
+            //if (ctx == FrozenContext.Single)
+            //{
+            //    return ToFrozenRef(t);
+            //}
             var result = LookupByType(ctx, ctx.GetQuery<TypeRef>(), t);
             if (result == null)
             {
@@ -123,24 +123,6 @@ namespace Kistl.App.Extensions
             }
             return result;
         }
-
-        #region Frozen Part
-        private static TypeRef ToFrozenRef(this Type t)
-        {
-            PrimeFrozenRefCache();
-            return LookupByType(FrozenContext.Single, _typeRefsByFullName[t.IsGenericType ? t.GetGenericTypeDefinition().FullName : t.FullName], t);
-        }
-
-        private static ILookup<string, TypeRef> _typeRefsByFullName;
-
-        private static void PrimeFrozenRefCache()
-        {
-            if (_typeRefsByFullName == null)
-            {
-                _typeRefsByFullName = FrozenContext.Single.GetQuery<TypeRef>().ToLookup(obj => obj.FullName);
-            }
-        }
-        #endregion
 
         private static TypeRef LookupByType(IReadOnlyKistlContext ctx, IQueryable<TypeRef> source, Type t)
         {
@@ -178,44 +160,6 @@ namespace Kistl.App.Extensions
                     && tRef.GenericArguments.Count == 0);
             }
         }
-
-        // clone of LookupByType(IKistlContext, IQueryable<TypeRef>, Type) since this function takes 5ms per call when called with an IQueryable
-        private static TypeRef LookupByType(IReadOnlyKistlContext ctx, IEnumerable<TypeRef> source, Type t)
-        {
-            // TODO: think about and implement naked types (i.e. without arguments)
-            if (t.IsGenericTypeDefinition) throw new ArgumentOutOfRangeException("t");
-
-            if (t.IsGenericType)
-            {
-                string fullName = t.GetGenericTypeDefinition().FullName;
-                var args = t.GetGenericArguments().Select(arg => arg.ToRef(ctx)).ToArray();
-                var argsCount = args.Count();
-                foreach (var tRef in source.Where(tRef
-                    => tRef.Assembly.Name == t.Assembly.FullName
-                    && tRef.FullName == fullName
-                    && tRef.GenericArguments.Count == argsCount))
-                {
-                    bool equal = true;
-                    for (int i = 0; i < tRef.GenericArguments.Count; i++)
-                    {
-                        equal &= args[i] == tRef.GenericArguments[i];
-                        if (!equal)
-                            break;
-                    }
-                    if (equal)
-                        return tRef;
-                }
-                return null;
-            }
-            else
-            {
-                return source.SingleOrDefault(tRef
-                    => tRef.Assembly.Name == t.Assembly.FullName
-                    && tRef.FullName == t.FullName
-                    && tRef.GenericArguments.Count == 0);
-            }
-        }
-
 
         /// <summary>
         /// returns a kistl Assembly for a given CLR-Assembly or null if it is not stored

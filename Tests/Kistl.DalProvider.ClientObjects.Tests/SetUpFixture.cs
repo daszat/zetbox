@@ -32,7 +32,6 @@ namespace Kistl.DalProvider.ClientObjects.Tests
         protected override void SetUp(IContainer container)
         {
             base.SetUp(container);
-            FrozenContext.RegisterTypeTransformations(container.Resolve<ITypeTransformations>());
 
             // initialise custom actions manager
             var cams = container.Resolve<BaseCustomActionsManager>();

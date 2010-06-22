@@ -14,9 +14,6 @@ namespace Kistl.App.Extensions
     {
         private readonly static object _lock = new object();
 
-        private static ILookup<string, ObjectClass> _frozenClasses;
-        private static bool isInitializing = false;
-
         public static ObjectClass GetObjectClass(this IDataObject obj, IReadOnlyKistlContext ctx)
         {
             if (obj == null) { throw new ArgumentNullException("obj"); }
@@ -32,34 +29,19 @@ namespace Kistl.App.Extensions
 
             Type type = ifType.Type;
             ObjectClass result;
-            if (ctx == FrozenContext.Single)
-            {
-                // cache frozen classes by class name
-                InitializeFrozenCache(ctx);
-                if (_frozenClasses == null) return null; // Case #1363: GetObjectClass can be called by: InitializeFrozenCache -> QueryTranslator -> OfType Visit -> ApplySecurityFilter ->GetObjectClass
-                result = _frozenClasses[type.Name].First(o => o.Module.Namespace == type.Namespace && o.Name == type.Name);
-            }
-            else
+            //if (ctx == FrozenContext.Single)
+            //{
+            //    // cache frozen classes by class name
+            //    InitializeFrozenCache(ctx);
+            //    if (_frozenClasses == null) return null; // Case #1363: GetObjectClass can be called by: InitializeFrozenCache -> QueryTranslator -> OfType Visit -> ApplySecurityFilter ->GetObjectClass
+            //    result = _frozenClasses[type.Name].First(o => o.Module.Namespace == type.Namespace && o.Name == type.Name);
+            //}
+            //else
             {
                 result = ctx.GetQuery<ObjectClass>().First(o => o.Module.Namespace == type.Namespace && o.Name == type.Name);
             }
 
             return result;
-        }
-
-        private static void InitializeFrozenCache(IReadOnlyKistlContext ctx)
-        {
-            if (ctx == null) { throw new ArgumentNullException("ctx"); }
-            lock (_lock)
-            {
-                if (_frozenClasses == null && !isInitializing)
-                {
-                    isInitializing = true;
-                    // Case #1363: GetQuery may call ObjectQueryTranslator which calls GetObjectClass ....
-                    _frozenClasses = ctx.GetQuery<ObjectClass>().ToLookup(cls => cls.Name);
-                    isInitializing = false;
-                }
-            }
         }
 
         public static ICollection<ObjectClass> GetObjectHierarchie(this ObjectClass cls)

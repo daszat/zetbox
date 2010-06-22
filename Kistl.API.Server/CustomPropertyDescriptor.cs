@@ -14,9 +14,10 @@ namespace Kistl.API.Server
     public class CustomPropertyDescriptor<TComponent, TProperty>
         : BaseCustomPropertyDescriptor<TComponent, TProperty>
     {
+        private static readonly string[] NoErrors = new string[] { };
+
         private readonly Func<IReadOnlyKistlContext> _lazyCtx;
         private readonly Guid? _propertyGuid;
-        private static readonly string[] NoErrors = new string[] { };
 
         public CustomPropertyDescriptor(
             Func<IReadOnlyKistlContext> lazyCtx,
@@ -44,9 +45,10 @@ namespace Kistl.API.Server
 
         public override string[] GetValidationErrors(object component)
         {
-            if (_lazyCtx != null && _propertyGuid != null && FrozenContext.Single != null)
+            IReadOnlyKistlContext ctx;
+            if (_lazyCtx != null && _propertyGuid != null && (ctx = _lazyCtx()) != null)
             {
-                var property = _lazyCtx().FindPersistenceObject<Kistl.App.Base.Property>(_propertyGuid.Value);
+                var property = ctx.FindPersistenceObject<Kistl.App.Base.Property>(_propertyGuid.Value);
                 var self = (TComponent)component;
                 var val = getter(self);
                 return property

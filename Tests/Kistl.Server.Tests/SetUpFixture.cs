@@ -29,7 +29,6 @@ namespace Kistl.Server.Tests
         protected override void SetUp(IContainer container)
         {
             base.SetUp(container);
-            FrozenContext.RegisterTypeTransformations(container.Resolve<ITypeTransformations>());
             using (Log.InfoTraceMethodCall("Starting up"))
             {
                 AutofacServiceHostFactory.Container = container;

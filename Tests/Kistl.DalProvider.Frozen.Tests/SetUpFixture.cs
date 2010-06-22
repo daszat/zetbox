@@ -42,7 +42,6 @@ public class SetUpFixture : Kistl.API.AbstractConsumerTests.AbstractSetUpFixture
     protected override void SetUp(Autofac.IContainer container)
     {
         base.SetUp(container);
-        FrozenContext.RegisterTypeTransformations(container.Resolve<ITypeTransformations>());
     }
 
     protected override string GetConfigFile()

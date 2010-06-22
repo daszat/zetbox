@@ -59,7 +59,6 @@ namespace Kistl.API
         protected override void SetUp(IContainer container)
         {
             base.SetUp(container);
-            FrozenContext.RegisterTypeTransformations(container.Resolve<ITypeTransformations>());
         }
     }
 }

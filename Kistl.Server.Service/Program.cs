@@ -251,11 +251,6 @@ namespace Kistl.Server.Service
             {
                 Log.TraceTotalMemory("Before DefaultInitialisation()");
 
-                if (dataSourceXmlFile == null) { FrozenContext.RegisterFallback(container.Resolve<IReadOnlyKistlContext>()); }
-
-                // TODO: Remove when FrozenContext is loaded by AutoFac
-                FrozenContext.RegisterTypeTransformations(container.Resolve<ITypeTransformations>());
-
                 // initialise custom actions manager
                 var cams = container.Resolve<BaseCustomActionsManager>();
 
@@ -274,9 +269,6 @@ namespace Kistl.Server.Service
                 builder.Register(c =>
                     {
                         var memCtx = c.Resolve<MemoryContext>();
-                        // register empty context first, to avoid errors when trying to load defaultvalues
-                        // TODO: remove, this should not be needed when using the container.
-                        FrozenContext.RegisterFallback(memCtx);
                         Importer.LoadFromXml(memCtx, dataSourceXmlFile);
                         return memCtx;
                     })

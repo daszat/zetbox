@@ -110,7 +110,6 @@ namespace Kistl.App.Packaging
                 LoadFromXml(ctx, fs);
             }
         }
-
   
         /// <summary>
         /// Loads a database from the specified stream into the specified context.

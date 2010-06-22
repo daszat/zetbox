@@ -47,9 +47,6 @@ namespace Kistl.DalProvider.Memory
                     {
                         MemoryContext memCtx = null;
                         memCtx = new MemoryContext(c.Resolve<ITypeTransformations>(), () => memCtx);
-                        // register empty context first, to avoid errors when trying to load defaultvalues
-                        // TODO: remove, this should not be needed when using the container.
-                        FrozenContext.RegisterFallback(memCtx);
                         Importer.LoadFromXml(memCtx, generatedAssembly.GetManifestResourceStream("Kistl.Objects.Memory.FrozenObjects.xml"));
                         return memCtx;
                     })
