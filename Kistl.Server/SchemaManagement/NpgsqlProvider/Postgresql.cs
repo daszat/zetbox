@@ -481,17 +481,6 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
             }
         }
 
-        private object ExecuteScalar(string nonQueryFormat, params object[] args)
-        {
-            string query = String.Format(nonQueryFormat, args);
-
-            using (var cmd = new NpgsqlCommand(query, db, tx))
-            {
-                QueryLog.Debug(query);
-                return cmd.ExecuteScalar();
-            }
-        }
-
         public void DropColumn(string tblName, string colName)
         {
             Log.DebugFormat("Dropping column \"{0}\".\"{1}\"", tblName, colName);
@@ -548,12 +537,6 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
             Log.DebugFormat("Copy FK data from \"{0}\"(\"{1}\") to \"{2}\"(\"{3}\")", srcTblName, srcColName, destTblName, destColName);
             ExecuteNonQuery("UPDATE dest SET dest.\"{0}\" = src.\"{1}\" FROM \"{2}\" dest  INNER JOIN \"{3}\" src ON src.\"{4}\" = dest.\"ID\"",
                 destColName, srcColName, destTblName, srcTblName, srcFKColName);
-        }
-
-        private int GetSQLServerVersion()
-        {
-            string verStr = (string)ExecuteScalar("SELECT SERVERPROPERTY('productversion')");
-            return int.Parse(verStr.Split('.').First());
         }
 
         public bool CheckIndexExists(string tblName, string idxName)
