@@ -229,43 +229,144 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
 
         public IEnumerable<string> GetTableNames()
         {
-            string sqlQuery = "SELECT name FROM sys.objects WHERE type IN (N'U') AND name <> 'sysdiagrams'";
-            QueryLog.Debug(sqlQuery);
-
-            using (var cmd = new OleDbCommand(sqlQuery, db, tx))
-            using (var rd = cmd.ExecuteReader())
+            QueryLog.Debug("GetSchema(TABLES)");
+            var tables = db.GetSchema(OleDbMetaDataCollectionNames.Tables, new string[] { null, null, null, "TABLE" });
+            foreach (DataRow tbl in tables.Rows)
             {
-                while (rd.Read()) yield return rd.GetString(0);
+                yield return (string)tbl["TABLE_NAME"];
             }
         }
 
         public IEnumerable<TableConstraintNamePair> GetFKConstraintNames()
         {
-            string sqlQuery = "SELECT c.name, t.name FROM sys.objects c inner join sys.sysobjects t  on t.id = c.parent_object_id WHERE c.type IN (N'F') order by c.name";
-            QueryLog.Debug(sqlQuery);
+            throw new NotImplementedException();
+        }
 
-            using (var cmd = new OleDbCommand(sqlQuery, db, tx))
-            using (var rd = cmd.ExecuteReader())
+        private System.Data.DbType GetDbType(Type type)
+        {
+            if (type == typeof(bool)) return DbType.Boolean;
+            if (type == typeof(byte)) return DbType.Byte;
+            if (type == typeof(ushort)) return DbType.UInt16;
+            if (type == typeof(uint)) return DbType.UInt32;
+            if (type == typeof(ulong)) return DbType.UInt64;
+            if (type == typeof(short)) return DbType.Int16;
+            if (type == typeof(int)) return DbType.Int32;
+            if (type == typeof(long)) return DbType.Int64;
+            if (type == typeof(string)) return DbType.String;
+            if (type == typeof(float)) return DbType.Double;
+            if (type == typeof(double)) return DbType.Double;
+            if (type == typeof(decimal)) return DbType.Decimal;
+            if (type == typeof(DateTime)) return DbType.DateTime;
+            if (type == typeof(Guid)) return DbType.Guid;
+            if (type == typeof(byte[])) return DbType.Binary;
+            throw new ArgumentOutOfRangeException("type", string.Format("Unable to convert type '{0}' to an DbType", type));
+        }
+
+        private class DataType
+        {
+            public string TypeName { get; set; }
+            public int ProviderDbType { get; set; }
+            public Type Type { get; set; }
+
+            public override string ToString()
             {
-                while (rd.Read()) yield return new TableConstraintNamePair() { ConstraintName = rd.GetString(0), TableName = rd.GetString(1) };
+                return string.Format("{0}: {1}", ProviderDbType, TypeName);
+            }
+        }
+
+        private Dictionary<int, DataType> _DataTypes = null;
+        private Dictionary<int, DataType> DataTypes
+        {
+            get
+            {
+                if (_DataTypes == null)
+                {
+                    _DataTypes = new Dictionary<int, DataType>();
+                    foreach (DataRow dt in db.GetSchema("DataTypes").Rows)
+                    {
+                        int id = (int)dt["ProviderDbType"];
+                        _DataTypes[id] = new DataType() { TypeName = (string)dt["TypeName"], Type = Type.GetType((string)dt["DataType"]), ProviderDbType = id };
+                    }
+
+                    // Add some more
+                    _DataTypes[(int)OleDbType.Boolean] = new DataType() { Type = typeof(bool) };
+                    _DataTypes[(int)OleDbType.TinyInt] = new DataType() { Type = typeof(short) };
+                    _DataTypes[(int)OleDbType.Single] = new DataType() { Type = typeof(short) };
+                    _DataTypes[(int)OleDbType.SmallInt] = new DataType() { Type = typeof(short) };
+                    _DataTypes[(int)OleDbType.Integer] = new DataType() { Type = typeof(int) };
+                    _DataTypes[(int)OleDbType.BigInt] = new DataType() { Type = typeof(long) };
+                    _DataTypes[(int)OleDbType.UnsignedBigInt] = new DataType() { Type = typeof(ulong) };
+                    _DataTypes[(int)OleDbType.UnsignedInt] = new DataType() { Type = typeof(uint) };
+                    _DataTypes[(int)OleDbType.UnsignedSmallInt] = new DataType() { Type = typeof(ushort) };
+                    _DataTypes[(int)OleDbType.UnsignedTinyInt] = new DataType() { Type = typeof(ushort) };
+
+                    _DataTypes[(int)OleDbType.Char] = new DataType() { Type = typeof(char) };
+
+                    _DataTypes[(int)OleDbType.WChar] = new DataType() { Type = typeof(string) };
+                    _DataTypes[(int)OleDbType.VarWChar] = new DataType() { Type = typeof(string) };
+                    _DataTypes[(int)OleDbType.VarChar] = new DataType() { Type = typeof(string) };
+                    _DataTypes[(int)OleDbType.BSTR] = new DataType() { Type = typeof(string) };
+                    _DataTypes[(int)OleDbType.LongVarChar] = new DataType() { Type = typeof(string) };
+                    _DataTypes[(int)OleDbType.LongVarWChar] = new DataType() { Type = typeof(string) };
+
+                    _DataTypes[(int)OleDbType.Binary] = new DataType() { Type = typeof(byte[]) };
+                    _DataTypes[(int)OleDbType.LongVarBinary] = new DataType() { Type = typeof(byte[]) };
+                    _DataTypes[(int)OleDbType.VarBinary] = new DataType() { Type = typeof(byte[]) };
+
+                    _DataTypes[(int)OleDbType.Currency] = new DataType() { Type = typeof(decimal) };
+                    _DataTypes[(int)OleDbType.Decimal] = new DataType() { Type = typeof(decimal) };
+                    _DataTypes[(int)OleDbType.Double] = new DataType() { Type = typeof(double) };
+                    _DataTypes[(int)OleDbType.Numeric] = new DataType() { Type = typeof(double) };
+
+                    _DataTypes[(int)OleDbType.Date] = new DataType() { Type = typeof(DateTime) };
+                    _DataTypes[(int)OleDbType.DBDate] = new DataType() { Type = typeof(DateTime) };
+                    _DataTypes[(int)OleDbType.DBTime] = new DataType() { Type = typeof(DateTime) };
+                    _DataTypes[(int)OleDbType.DBTimeStamp] = new DataType() { Type = typeof(DateTime) };
+                    _DataTypes[(int)OleDbType.Filetime] = new DataType() { Type = typeof(DateTime) };
+
+                    _DataTypes[(int)OleDbType.Guid] = new DataType() { Type = typeof(Guid) };
+
+                }
+                return _DataTypes;
+            }
+        }
+
+        public IEnumerable<Column> GetTableColumns(string tbl)
+        {
+            QueryLog.Debug("GetSchema(Columns)");
+            var columns = db.GetSchema(OleDbMetaDataCollectionNames.Columns, new string[] { null, null, tbl, null });
+            foreach (DataRow col in columns.Rows)
+            {
+                int dt = (int)col["DATA_TYPE"];
+                Type type = DataTypes.ContainsKey(dt) ? DataTypes[dt].Type : typeof(string);
+                long size = col["CHARACTER_MAXIMUM_LENGTH"] as long? ?? 0;
+                if(size == 0 && (type == typeof(string) || type == typeof(byte[])))
+                {
+                    size = int.MaxValue;
+                }
+                yield return new Column()
+                {
+                    Name = (string)col["COLUMN_NAME"],
+                    Size = size,
+                    IsNullable = (bool)col["IS_NULLABLE"],
+                    Type = GetDbType(type)
+                };
             }
         }
 
         public IEnumerable<string> GetTableColumnNames(string tblName)
         {
-            using (var cmd = new OleDbCommand(@"SELECT c.name
-                                FROM sys.objects o 
-                                    INNER JOIN sys.columns c ON c.object_id=o.object_id
-	                            WHERE o.object_id = OBJECT_ID(@table) 
-		                            AND o.type IN (N'U')", db, tx))
+            QueryLog.Debug("GetSchema(Columns)");
+            var columns = db.GetSchema(OleDbMetaDataCollectionNames.Columns, new string[] { null, null, tblName, null });
+            foreach (DataRow col in columns.Rows)
             {
-                cmd.Parameters.AddWithValue("@table", tblName);
-                QueryLog.Debug(cmd.CommandText);
-                using (var rd = cmd.ExecuteReader())
-                {
-                    while (rd.Read()) yield return rd.GetString(0);
-                }
+                yield return (string)col["COLUMN_NAME"];
             }
+        }
+
+        public void CreateTable(string tbl, IEnumerable<Column> cols)
+        {
+            throw new NotSupportedException();
         }
 
         public void CreateTable(string tblName, bool idAsIdentityColumn)
@@ -341,6 +442,11 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
         }
 
         public void DropProcedure(string procName)
+        {
+            throw new NotSupportedException();
+        }
+
+        public void DropAllObjects()
         {
             throw new NotSupportedException();
         }
@@ -443,6 +549,43 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
         public void RenameFKConstraint(string oldConstraintName, string newConstraintName)
         {
             throw new NotSupportedException();
+        }
+
+        public System.Data.IDataReader ReadTableData(string tbl, IEnumerable<string> colNames)
+        {
+            var sb = new StringBuilder();
+            sb.AppendLine("SELECT ");
+            colNames.ForEach(i => sb.Append(Quote(i) + ","));
+            sb.Remove(sb.Length - 1, 1);
+            sb.AppendLine(" FROM " + Quote(tbl));
+
+            var cmd = new OleDbCommand(sb.ToString(), db, tx);
+            return cmd.ExecuteReader();
+        }
+
+        public void WriteTableData(string tbl, IEnumerable<string> colNames, object[] values)
+        {
+            var sb = new StringBuilder();
+            sb.AppendLine(string.Format("INSERT INTO {0} (", Quote(tbl)));
+            
+            colNames.ForEach(i => sb.Append(Quote(i) + ","));
+            sb.Remove(sb.Length - 1, 1);
+            
+            sb.AppendLine(") VALUES (");
+            
+            colNames.ForEach(i => sb.Append("?,"));
+            sb.Remove(sb.Length - 1, 1);
+            
+            sb.AppendLine(")");
+
+            var cmd = new OleDbCommand(sb.ToString(), db, tx);
+            int counter = 0;
+            foreach (var v in values)
+            {
+                cmd.Parameters.AddWithValue(string.Format("@param{0}", ++counter), v ?? DBNull.Value);
+            }
+
+            cmd.ExecuteNonQuery();            
         }
     }
 }

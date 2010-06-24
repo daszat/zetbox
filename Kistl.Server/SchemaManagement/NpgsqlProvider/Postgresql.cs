@@ -346,6 +346,11 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
                 while (rd.Read()) yield return new TableConstraintNamePair() { ConstraintName = rd.GetString(0), TableName = rd.GetString(1) };
             }
         }
+        
+        public IEnumerable<Column> GetTableColumns(string tbl)
+        {
+            throw new NotImplementedException();
+        }
 
         public IEnumerable<string> GetTableColumnNames(string tblName)
         {
@@ -362,6 +367,12 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
                     while (rd.Read()) yield return rd.GetString(0);
                 }
             }
+        }
+
+        public void CreateTable(string tblName, IEnumerable<Column> cols)
+        {
+            Log.DebugFormat("CreateTable \"{0}\"", tblName);
+            throw new NotImplementedException();
         }
 
         public void CreateTable(string tblName, bool idAsIdentityColumn)
@@ -535,6 +546,11 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
         public void DropIndex(string tblName, string idxName)
         {
             ExecuteNonQuery("DROP INDEX {0} ON \"{1}\"", idxName, tblName);
+        }
+
+        public void DropAllObjects()
+        {
+            throw new NotImplementedException();
         }
 
         public void CreateIndex(string tblName, string idxName, bool unique, bool clustered, params string[] columns)
@@ -787,6 +803,16 @@ FROM (", viewName);
         {
             // Do not qualify new name as it will be part of the name
             ExecuteNonQuery("EXEC sp_rename '\"{0}\"', '{1}', 'OBJECT'", oldConstraintName, newConstraintName);
+        }
+
+        public System.Data.IDataReader ReadTableData(string tbl, IEnumerable<string> colNames)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void WriteTableData(string tbl, IEnumerable<string> colNames, object[] values)
+        {
+            throw new NotImplementedException();
         }
     }
 }

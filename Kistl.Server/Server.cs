@@ -18,6 +18,7 @@ namespace Kistl.Server
     using Kistl.App.Extensions;
     using Kistl.App.GUI;
     using Kistl.App.Packaging;
+    using System.Data;
 
     /// <summary>
     /// Serversteuerung
@@ -169,6 +170,32 @@ namespace Kistl.Server
             if (src == null) throw new ArgumentNullException("src");
             if (dest == null) throw new ArgumentNullException("dest");
 
+            Log.InfoFormat("Copy scr Database to staging database");
+
+            Log.Info("Dropping all Tables and Objects");
+            dest.DropAllObjects();
+
+            // foreach table in src
+            foreach (var tbl in src.GetTableNames())
+            {
+                Log.InfoFormat("Migrating table {0}", tbl);
+                var cols = src.GetTableColumns(tbl);
+                dest.CreateTable(tbl, cols);
+
+                var colNames = cols.Select(i => i.Name).ToArray();
+
+                using (IDataReader rd = src.ReadTableData(tbl, colNames))
+                {
+                    object[] values = new object[colNames.Length];
+                    while (rd.Read())
+                    {
+                        rd.GetValues(values);
+                        dest.WriteTableData(tbl, colNames, values);
+                        Console.Write(".");
+                    }
+                }
+                Console.WriteLine();
+            }
         }
 
         // TODO: Replace this when NamedInstances are introduced

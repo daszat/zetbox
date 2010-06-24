@@ -13,7 +13,7 @@ into @fk, @tbl
 
 while @@FETCH_STATUS = 0
 begin
-	select @sql = N'alter table ' + @tbl + ' drop constraint ' + @fk
+	select @sql = N'alter table [' + @tbl + '] drop constraint ' + @fk
 	print @sql
 	exec sp_executesql @sql
 	
@@ -36,7 +36,7 @@ into @tbl
 
 while @@FETCH_STATUS = 0
 begin
-	select @sql = N'drop table ' + @tbl
+	select @sql = N'drop table [' + @tbl + ']'
 	print @sql
 	exec sp_executesql @sql
 	
@@ -58,7 +58,7 @@ into @tbl
 
 while @@FETCH_STATUS = 0
 begin
-	select @sql = N'drop view ' + @tbl
+	select @sql = N'drop view [' + @tbl + ']'
 	print @sql
 	exec sp_executesql @sql
 	
@@ -80,7 +80,7 @@ into @tbl
 
 while @@FETCH_STATUS = 0
 begin
-	select @sql = N'drop procedure ' + @tbl
+	select @sql = N'drop procedure [' + @tbl + ']'
 	print @sql
 	exec sp_executesql @sql
 	

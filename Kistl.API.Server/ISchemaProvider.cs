@@ -50,6 +50,19 @@ namespace Kistl.API.Server
         public List<Join> Relations { get; private set; }
     }
 
+    public class Column
+    {
+        public string Name { get; set; }
+        public System.Data.DbType Type { get; set; }
+        public long Size { get; set; }
+        public bool IsNullable { get; set; }
+
+        public override string ToString()
+        {
+            return string.Format("{0} {1}({2}) {3}", Name, Type, Size, IsNullable ? "NULL" : "NOT NULL");
+        }
+    }
+
     public delegate ISchemaProvider SchemaProviderFactory(string connectionString);
 
     public interface ISchemaProvider : IDisposable
@@ -81,8 +94,10 @@ namespace Kistl.API.Server
 
         IEnumerable<string> GetTableNames();
         IEnumerable<string> GetTableColumnNames(string tblName);
+        IEnumerable<Column> GetTableColumns(string tbl);
         IEnumerable<TableConstraintNamePair> GetFKConstraintNames();
 
+        void CreateTable(string tbl, IEnumerable<Column> cols);
         void CreateTable(string tblName, bool idAsIdentityColumn);
         void CreateTable(string tblName, bool idAsIdentityColumn, bool createPrimaryKey);
         void CreateColumn(string tblName, string colName, System.Data.DbType type, int size, bool isNullable);
@@ -100,6 +115,7 @@ namespace Kistl.API.Server
         void DropView(string viewName);
         void DropProcedure(string procName);
         void DropIndex(string tblName, string idxName);
+        void DropAllObjects();
 
         void CopyColumnData(string srcTblName, string srcColName, string tblName, string colName);
         void MigrateFKs(string srcTblName, string srcColName, string tblName, string colName);
@@ -119,5 +135,8 @@ namespace Kistl.API.Server
         /// </summary>
         /// <param name="refSpecs">a lookup by table name into lists of (fkColumnName, referencedTableName) pairs</param>
         void CreatePositionColumnValidCheckProcedures(ILookup<string, KeyValuePair<string, string>> refSpecs);
+
+        System.Data.IDataReader ReadTableData(string tbl, IEnumerable<string> colNames);
+        void WriteTableData(string tbl, IEnumerable<string> colNames, object[] values);
     }
 }

@@ -76,20 +76,32 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
         {
             switch (type)
             {
+                case System.Data.DbType.UInt16:
+                case System.Data.DbType.UInt32:
+                case System.Data.DbType.Byte:
+                case System.Data.DbType.Int16:
                 case System.Data.DbType.Int32:
                     return "int";
+                case System.Data.DbType.UInt64:
+                case System.Data.DbType.Int64:
+                    return "bigint";
+                case System.Data.DbType.Single:
                 case System.Data.DbType.Double:
                     return "float";
                 case System.Data.DbType.String:
                     return "nvarchar";
                 case System.Data.DbType.Date:
-                    return "datetime";
                 case System.Data.DbType.DateTime:
-                    return "datetime";
+                    // We only support SQLServer 2008
+                    return "datetime2";
                 case System.Data.DbType.Boolean:
                     return "bit";
                 case System.Data.DbType.Guid:
                     return "uniqueidentifier";
+                case System.Data.DbType.Binary:
+                    return "varbinary";
+                case System.Data.DbType.Decimal:
+                    return "decimal";
                 default:
                     throw new ArgumentOutOfRangeException("type", string.Format("Unable to convert type '{0}' to an sql type string", type));
             }
@@ -339,6 +351,11 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
             }
         }
 
+        public IEnumerable<Column> GetTableColumns(string tbl)
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<string> GetTableColumnNames(string tblName)
         {
             using (var cmd = new SqlCommand(@"SELECT c.name
@@ -354,6 +371,47 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
                     while (rd.Read()) yield return rd.GetString(0);
                 }
             }
+        }
+
+        public void CreateTable(string tblName, IEnumerable<Column> cols)
+        {
+            if (string.IsNullOrEmpty(tblName)) throw new ArgumentNullException("tblName");
+            if(cols == null) throw new ArgumentNullException("cols");
+            Log.DebugFormat("CreateTable [{0}]", tblName);
+
+            StringBuilder sb = new StringBuilder();
+            sb.AppendFormat("CREATE TABLE [{0}] (", tblName);
+            sb.AppendLine();
+
+            foreach (var col in cols)
+            {
+                string nullable = col.IsNullable ? "NULL" : "NOT NULL";
+
+                if (col.Type == System.Data.DbType.String && col.Size == int.MaxValue)
+                {
+                    // Create ntext for unlimited string length
+                    sb.AppendFormat("[{0}] ntext {1},", col.Name, nullable);
+                }
+                else if (col.Type == System.Data.DbType.Binary && col.Size == int.MaxValue)
+                {
+                    // Create ntext for unlimited string length
+                    sb.AppendFormat("[{0}] image {1},", col.Name, nullable);
+                }
+                else
+                {
+                    string size = string.Empty;
+                    if (col.Size > 0 && col.Type.In(System.Data.DbType.String, System.Data.DbType.StringFixedLength, System.Data.DbType.AnsiString, System.Data.DbType.AnsiStringFixedLength, System.Data.DbType.Binary))
+                    {
+                        size = string.Format("({0})", col.Size);
+                    }
+                    string typeString = GetSqlTypeString(col.Type) + size;
+                    sb.AppendFormat("[{0}] {1} {2},", col.Name, typeString, nullable);
+                }
+            }
+
+            sb.Remove(sb.Length - 1, 1);
+            sb.Append(")");
+            ExecuteNonQuery(sb.ToString());
         }
 
         public void CreateTable(string tblName, bool idAsIdentityColumn)
@@ -412,9 +470,22 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
                     "ntext",
                     nullable);
             }
+            else if (type == System.Data.DbType.Binary && size == int.MaxValue)
+            {
+                // Create ntext for unlimited string length
+                Log.DebugFormat("[{0}] table [{1}] column [{2}] image [{3}]", addOrAlter, tblName, colName, nullable);
+                sb.AppendFormat("ALTER TABLE [{0}] {1} [{2}] {3} {4}", tblName, addOrAlter, colName,
+                    "image",
+                    nullable);
+            }
             else
             {
-                string typeString = GetSqlTypeString(type) + (size > 0 ? string.Format("({0})", size) : String.Empty);
+                string strSize = string.Empty;
+                if (size > 0 && type.In(System.Data.DbType.String, System.Data.DbType.StringFixedLength, System.Data.DbType.AnsiString, System.Data.DbType.AnsiStringFixedLength, System.Data.DbType.Binary))
+                {
+                    strSize = string.Format("({0})", size);
+                }
+                string typeString = GetSqlTypeString(type) + strSize;
                 Log.DebugFormat("[{0}] table [{1}] column [{2}] [{3}] [{4}]", addOrAlter, tblName, colName, typeString, nullable);
                 sb.AppendFormat("ALTER TABLE [{0}] {1}  [{2}] {3} {4}", tblName, addOrAlter, colName,
                     typeString,
@@ -500,6 +571,11 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
             ExecuteNonQuery("DROP PROCEDURE [{0}]", procName);
         }
 
+        public void DropAllObjects()
+        {
+            ExecuteScriptFromResource("Kistl.Server.Database.Scripts.DropTables.sql");
+        }
+
         public void CopyColumnData(string srcTblName, string srcColName, string tblName, string colName)
         {
             Log.DebugFormat("Copying data from [{0}].[{1}] to [{2}].[{3}]", srcTblName, srcColName, tblName, colName);
@@ -520,7 +596,7 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
             ExecuteNonQuery("INSERT INTO [{0}] ([{1}], [{2}]) SELECT [ID], [{3}] FROM [{4}] WHERE [{3}] IS NOT NULL",
                 tblName, colName, fkColName, srcColName, srcTblName);
         }
-        
+
         public void CopyFKs(string srcTblName, string srcColName, string destTblName, string destColName, string srcFKColName)
         {
             Log.DebugFormat("Copy FK data from [{0}]([{1}]) to [{2}]([{3}])", srcTblName, srcColName, destTblName, destColName);
@@ -562,7 +638,7 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
                 bool isNullable = GetIsColumnNullable(tblName, columns.First());
                 int dbVer = GetSQLServerVersion();
                 // Special checks
-                if(isNullable && dbVer < 10)
+                if (isNullable && dbVer < 10)
                 {
                     Log.WarnFormat("Warning: Unable to create unique index on nullable column [{0}].[{1}]. Creating non unique index.", tblName, columns);
                     unique = false;
@@ -814,6 +890,50 @@ FROM (", viewName);
         {
             // Do not qualify new name as it will be part of the name
             ExecuteNonQuery("EXEC sp_rename '[{0}]', '{1}', 'OBJECT'", oldConstraintName, newConstraintName);
+        }
+
+        public System.Data.IDataReader ReadTableData(string tbl, IEnumerable<string> colNames)
+        {
+            var sb = new StringBuilder();
+            sb.AppendLine("SELECT ");
+            colNames.ForEach(i => sb.AppendLine(string.Format("[{0}],", i)));
+            sb.Remove(sb.Length - 1, 1);
+            sb.AppendLine(string.Format(" FROM [{0}]", tbl));
+
+            var cmd = new SqlCommand(sb.ToString(), db, tx);
+            return cmd.ExecuteReader();
+        }
+
+        public void WriteTableData(string tbl, IEnumerable<string> colNames, object[] values)
+        {
+            var sb = new StringBuilder();
+            sb.AppendLine(string.Format("INSERT INTO [{0}] (", tbl));
+
+            colNames.ForEach(i => sb.Append(string.Format("[{0}],", i)));
+            sb.Remove(sb.Length - 1, 1);
+
+            sb.AppendLine(") VALUES (");
+
+            int counter = 0;
+            colNames.ForEach(i => sb.Append(string.Format("@param{0},", ++counter)));
+            sb.Remove(sb.Length - 1, 1);
+
+            sb.AppendLine(")");
+
+            var cmd = new SqlCommand(sb.ToString(), db, tx);
+            counter = 0;
+            foreach (var v in values)
+            {
+                var param = cmd.Parameters.AddWithValue(string.Format("@param{0}", ++counter), v ?? DBNull.Value);
+                if (v is DateTime)
+                {
+                    // Set Datetime correctly
+                    // We only support SQLServer 2008
+                    param.DbType = System.Data.DbType.DateTime2;
+                }
+            }
+
+            cmd.ExecuteNonQuery();
         }
     }
 }
