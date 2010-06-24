@@ -22,9 +22,9 @@ INSERT INTO #tmpUsers EXEC SP_WHO
 
 DECLARE LoginCursor CURSOR
 READ_ONLY
-FOR SELECT spid FROM #tmpUsers WHERE dbname = @dbname
+FOR SELECT spid FROM #tmpUsers WHERE cmd != 'CHECKPOINT' AND dbname = @dbname
 
-DECLARE @spid varchar(10)
+DECLARE @spid int
 OPEN LoginCursor
 
 FETCH NEXT FROM LoginCursor INTO @spid
@@ -36,7 +36,7 @@ PRINT 'Killing ' + @spid
 SET @strSQL ='KILL ' + @spid
 EXEC (@strSQL)
 END
-FETCH NEXT FROM LoginCursor INTO  @spid
+FETCH NEXT FROM LoginCursor INTO @spid
 END
 
 CLOSE LoginCursor
