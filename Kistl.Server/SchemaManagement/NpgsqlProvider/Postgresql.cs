@@ -233,7 +233,10 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
 
         public bool CheckProcedureExists(string procName)
         {
-            using (var cmd = new NpgsqlCommand("SELECT COUNT(*) FROM sys.objects WHERE object_id = OBJECT_ID(@proc) AND type IN (N'P')", db, tx))
+            using (var cmd = new NpgsqlCommand(@"SELECT count(*)
+	                                                FROM pg_proc p
+	                                                LEFT JOIN pg_namespace n ON p.pronamespace = n.oid
+	                                                WHERE n.nspname = 'public' AND p.proname = @proc", db, tx))
             {
                 cmd.Parameters.AddWithValue("@proc", procName);
                 QueryLog.Debug(cmd.CommandText);
@@ -697,7 +700,7 @@ FROM (", viewName);
             Log.DebugFormat("Creating refresh rights procedure for \"{0}\"", tblName);
             ExecuteNonQuery(@"CREATE FUNCTION ""{0}""(IN ""refreshID"" integer DEFAULT NULL) RETURNS void AS
                     $BODY$BEGIN
-	                    IF (""ID"" IS NULL) THEN
+	                    IF (""refreshID"" IS NULL) THEN
 			                    TRUNCATE TABLE ""{1}"";
 			                    INSERT INTO ""{1}"" (""ID"", ""Identity"", ""Right"") SELECT ""ID"", ""Identity"", ""Right"" FROM ""{2}"";
 	                    ELSE
