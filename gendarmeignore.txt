@@ -77,9 +77,10 @@ R: Gendarme.Rules.Portability.DoNotHardcodePathsRule
 M: System.Void Kistl.App.Projekte.WordHelper::ApplyCustomXml(System.Xml.XmlDocument)
 
 R: Gendarme.Rules.Portability.MonoCompatibilityReviewRule
-# exclude known not-implemented parts: WPF, EF
+# exclude known not-implemented parts: WPF, EF, OleDB (partial)
 A: Kistl.Client.WPF
 A: Kistl.DalProvider.EF
+T: Kistl.Server.SchemaManagement.OleDbProvider.OleDb
 # this should be replaced in time for a linux-release, ignore for now
 M: System.Boolean Kistl.Server.Generators.Generator::CompileCode(System.String)
 M: System.Void Kistl.Server.Server::ReadUsers(System.String,System.Collections.Generic.Dictionary`2<System.String,System.String>)

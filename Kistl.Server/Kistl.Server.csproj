@@ -697,6 +697,7 @@
       <DependentUpon>PropertyInvocationsTemplate.cst</DependentUpon>
     </Compile>
     <Compile Include="SchemaManagement\NpgsqlProvider\Postgresql.cs" />
+    <Compile Include="SchemaManagement\OleDbProvider\OleDb.cs" />
     <Compile Include="SchemaManagement\SchemaManager.CheckSchema.cs" />
     <Compile Include="SchemaManagement\SchemaManager.UpdateSchema.cs" />
     <Compile Include="SchemaManagement\SqlProvider\SqlServer.cs" />

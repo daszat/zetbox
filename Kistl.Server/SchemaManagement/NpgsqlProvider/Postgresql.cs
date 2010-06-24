@@ -22,17 +22,10 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
 
         protected NpgsqlConnection db;
         protected NpgsqlTransaction tx;
-        protected KistlConfig config;
 
-        public Postgresql(KistlConfig config)
+        public Postgresql(string connectionString)
         {
-            if (config == null) throw new ArgumentNullException("config");
-            this.config = config;
-            var connectionString = config.Server.ConnectionString;
-            if (String.IsNullOrEmpty(connectionString))
-            {
-                throw new ConfigurationException("Configuration/Server/ConnectionString empty, cannot connect to database");
-            }
+            if (string.IsNullOrEmpty(connectionString)) throw new ArgumentNullException("connectionString");
 
             NpgsqlEventLog.EchoMessages = true;
             NpgsqlEventLog.Level = LogLevel.Normal;
@@ -184,7 +177,7 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
             }
         }
 
-        public bool CheckColumnIsNullable(string tblName, string colName)
+        public bool GetIsColumnNullable(string tblName, string colName)
         {
             using (var cmd = new NpgsqlCommand(@"SELECT NOT a.attnotnull
                                                     FROM pg_class c
@@ -312,20 +305,6 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
                 cmd.ExecuteNonQuery();
 
                 return (bool)cmd.Parameters["@result"].Value;
-            }
-        }
-
-        public bool GetIsColumnNullable(string tblName, string colName)
-        {
-            using (var cmd = new NpgsqlCommand(@"SELECT c.is_nullable FROM sys.objects o INNER JOIN sys.columns c ON c.object_id=o.object_id
-	                                            WHERE o.object_id = OBJECT_ID(@table) 
-		                                            AND o.type IN (N'U')
-		                                            AND c.Name = @column", db, tx))
-            {
-                cmd.Parameters.AddWithValue("@table", tblName);
-                cmd.Parameters.AddWithValue("@column", colName);
-                QueryLog.Debug(cmd.CommandText);
-                return (bool)cmd.ExecuteScalar();
             }
         }
 

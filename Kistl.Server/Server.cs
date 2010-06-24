@@ -107,7 +107,8 @@ namespace Kistl.Server
             using (var subContainer = container.BeginLifetimeScope())
             {
                 IKistlContext ctx = subContainer.Resolve<MemoryContext>();
-                ISchemaProvider schemaProvider = subContainer.Resolve<ISchemaProvider>();
+                KistlConfig cfg = subContainer.Resolve<KistlConfig>();
+                ISchemaProvider schemaProvider = subContainer.Resolve<SchemaProviderFactory>().Invoke(cfg.Server.ConnectionString);
                 SchemaManagement.SchemaManager.LoadSavedSchemaInto(schemaProvider, ctx);
 
                 var mgr = subContainer.Resolve<SchemaManagement.SchemaManager>(new NamedParameter("newSchema", ctx));
@@ -161,6 +162,13 @@ namespace Kistl.Server
                 var mgr = subContainer.Resolve<SchemaManagement.SchemaManager>(new NamedParameter("newSchema", ctx));
                 mgr.UpdateSchema();
             }
+        }
+
+        public void CopyDatabase(ISchemaProvider src, ISchemaProvider dest)
+        {
+            if (src == null) throw new ArgumentNullException("src");
+            if (dest == null) throw new ArgumentNullException("dest");
+
         }
 
         // TODO: Replace this when NamedInstances are introduced

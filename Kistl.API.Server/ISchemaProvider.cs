@@ -50,6 +50,8 @@ namespace Kistl.API.Server
         public List<Join> Relations { get; private set; }
     }
 
+    public delegate ISchemaProvider SchemaProviderFactory(string connectionString);
+
     public interface ISchemaProvider : IDisposable
     {
         void BeginTransaction();
@@ -69,7 +71,6 @@ namespace Kistl.API.Server
         bool CheckColumnContainsNulls(string tblName, string colName);
         bool CheckColumnContainsUniqueValues(string tblName, string colName);
         bool CheckColumnContainsValues(string tblName, string colName);
-        bool CheckColumnIsNullable(string tblName, string colName);
         bool CheckIndexExists(string tblName, string idxName);
 
         bool CheckPositionColumnValidity(string tblName, string positionColumnName);

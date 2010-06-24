@@ -24,10 +24,10 @@ namespace Kistl.Server
             moduleBuilder
                 .Register((c, p) =>
                 {
-                    IKistlContext ctx = c.Resolve<MemoryContext>();
-                    ISchemaProvider schemaProvider = c.Resolve<ISchemaProvider>();
-                    SchemaManagement.SchemaManager.LoadSavedSchemaInto(schemaProvider, ctx);
                     KistlConfig cfg = c.Resolve<KistlConfig>();
+                    IKistlContext ctx = c.Resolve<MemoryContext>();
+                    ISchemaProvider schemaProvider = c.Resolve<SchemaProviderFactory>().Invoke(cfg.Server.ConnectionString);
+                    SchemaManagement.SchemaManager.LoadSavedSchemaInto(schemaProvider, ctx);
 
                     return new SchemaManagement.SchemaManager(
                         schemaProvider,
@@ -100,6 +100,22 @@ namespace Kistl.Server
             moduleBuilder
                 .RegisterType<Kistl.Server.SchemaManagement.SqlProvider.SqlServer>()
                 .As<ISchemaProvider>()
+                .InstancePerDependency();
+
+            moduleBuilder
+                .RegisterType<Kistl.Server.SchemaManagement.SqlProvider.SqlServer>()
+                .As<ISchemaProvider>()
+                .Named<ISchemaProvider>("MSSQL")
+                .InstancePerDependency();
+            moduleBuilder
+                .RegisterType<Kistl.Server.SchemaManagement.NpgsqlProvider.Postgresql>()
+                .As<ISchemaProvider>()
+                .Named<ISchemaProvider>("POSTGRES")
+                .InstancePerDependency();
+            moduleBuilder
+                .RegisterType<Kistl.Server.SchemaManagement.OleDbProvider.OleDb>()
+                .As<ISchemaProvider>()
+                .Named<ISchemaProvider>("OLEDB")
                 .InstancePerDependency();
         }
     }

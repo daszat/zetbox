@@ -56,7 +56,7 @@ namespace Kistl.Server.Service
             public IList<string> Arguments { get; private set; }
         }
 
-        static int Main(string[] arguments)
+        public static int Main(string[] arguments)
         {
             Logging.Configure();
 
@@ -70,7 +70,7 @@ namespace Kistl.Server.Service
 
                 options = new OptionSet()
                     {
-                        { "export=", "export the database to the specified xml file", 
+                        { "export=", "export the database to the specified xml file. Any extra argument is used as namespace", 
                             v => { if (v != null) { actions.Add((c, args) => c.Resolve<Server>().Export(v, args.ToArray())); } }
                             },
                         { "import=", "import the database from the specified xml file",
@@ -85,7 +85,7 @@ namespace Kistl.Server.Service
                                 dataSourceXmlFile = v;
                                 actions.Add((c, args) => c.Resolve<Server>().Import(v));
                             }},
-                        { "publish=", "publish the specified modules to this xml file",
+                        { "publish=", "publish the specified modules to this xml file. Any extra argument is used as namespace",
                             v => { if (v != null) { actions.Add((c, args) => c.Resolve<Server>().Publish(v, args.ToArray())); } }
                             },
                         { "deploy=", "deploy the database frpm the specified xml file",
@@ -153,6 +153,17 @@ namespace Kistl.Server.Service
                             }},
                         { "syncidentities", "synchronices local and domain users with Kistl Identities",
                             v => { if (v != null) { actions.Add((c, args) => c.Resolve<Server>().SyncIdentities()); } }
+                            },
+                        { "copydb", "copies one database to another. Extra Arguments must be: [SRCPROVIDER] [SRC ConnectionString] [DESTPROVIDER] [DEST ConnectionString]. Valid Providers are: MSSQL, POSTGRES, OLEDB. WARNING: All tables in the destination database will be dropped!",
+                            v => { if (v != null) { 
+                                actions.Add((c, args) => { 
+                                    if (args == null) PrintHelpAndExit();
+                                    if (args.Count != 4) PrintHelpAndExit();
+                                    c.Resolve<Server>().CopyDatabase(
+                                        c.Resolve<SchemaProviderFactory>(args[0]).Invoke(args[1]),
+                                        c.Resolve<SchemaProviderFactory>(args[2]).Invoke(args[3]));
+                                }); 
+                            } }
                             },
                         { "help", "prints this help", 
                             v => { if ( v != null) { PrintHelpAndExit(); } } 

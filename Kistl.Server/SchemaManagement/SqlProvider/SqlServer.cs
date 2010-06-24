@@ -22,17 +22,11 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
 
         protected SqlConnection db;
         protected SqlTransaction tx;
-        protected KistlConfig config;
 
-        public SqlServer(KistlConfig config)
+        public SqlServer(string connectionString)
         {
-            if (config == null) throw new ArgumentNullException("config");
-            this.config = config;
-            var connectionString = config.Server.ConnectionString;
-            if (String.IsNullOrEmpty(connectionString))
-            {
-                throw new ConfigurationException("Configuration/Server/ConnectionString empty, cannot connect to database");
-            }
+            if (string.IsNullOrEmpty(connectionString)) throw new ArgumentNullException("connectionString");
+
             db = new SqlConnection(connectionString);
             db.Open();
         }
@@ -177,20 +171,6 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
                 cmd.Parameters.AddWithValue("@column", colName);
                 QueryLog.Debug(cmd.CommandText);
                 return (int)cmd.ExecuteScalar() > 0;
-            }
-        }
-
-        public bool CheckColumnIsNullable(string tblName, string colName)
-        {
-            using (var cmd = new SqlCommand(@"SELECT is_nullable FROM sys.objects o INNER JOIN sys.columns c ON c.object_id=o.object_id
-	                                            WHERE o.object_id = OBJECT_ID(@table) 
-		                                            AND o.type IN (N'U')
-		                                            AND c.Name = @column", db, tx))
-            {
-                cmd.Parameters.AddWithValue("@table", tblName);
-                cmd.Parameters.AddWithValue("@column", colName);
-                QueryLog.Debug(cmd.CommandText);
-                return (bool)cmd.ExecuteScalar();
             }
         }
 
@@ -579,7 +559,7 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
             string appendIndexFilter = string.Empty;
             if (unique && !clustered && columns.Length == 1)
             {
-                bool isNullable = CheckColumnIsNullable(tblName, columns.First());
+                bool isNullable = GetIsColumnNullable(tblName, columns.First());
                 int dbVer = GetSQLServerVersion();
                 // Special checks
                 if(isNullable && dbVer < 10)
