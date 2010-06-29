@@ -423,25 +423,25 @@ namespace Kistl.DalProvider.Client
             // TODO: Add a better Cache Refresh Strategie
             // CacheController<IDataObject>.Current.Clear();
 
-            var objectsToSubmit = new List<BaseClientDataObject_ClientObjects>();
-            var objectsToAdd = new List<BaseClientDataObject_ClientObjects>();
-            var objectsToDetach = new List<BaseClientDataObject_ClientObjects>();
+            var objectsToSubmit = new List<BaseClientPersistenceObject>();
+            var objectsToAdd = new List<BaseClientPersistenceObject>();
+            var objectsToDetach = new List<BaseClientPersistenceObject>();
 
             // Added Objects
-            foreach (var obj in _objects.OfType<BaseClientDataObject_ClientObjects>()
+            foreach (var obj in _objects.OfType<BaseClientPersistenceObject>()
                 .Where(o => o.ObjectState == DataObjectState.New))
             {
                 objectsToSubmit.Add(obj);
                 objectsToAdd.Add(obj);
             }
             // Changed objects
-            foreach (var obj in _objects.OfType<BaseClientDataObject_ClientObjects>()
+            foreach (var obj in _objects.OfType<BaseClientPersistenceObject>()
                 .Where(o => o.ObjectState == DataObjectState.Modified))
             {
                 objectsToSubmit.Add(obj);
             }
             // Deleted Objects
-            foreach (var obj in _objects.OfType<BaseClientDataObject_ClientObjects>()
+            foreach (var obj in _objects.OfType<BaseClientPersistenceObject>()
                 .Where(o => o.ObjectState == DataObjectState.Deleted))
             {
                 // Submit only persisted objects
@@ -477,7 +477,7 @@ namespace Kistl.DalProvider.Client
 
                 if (counter < objectsToAdd.Count)
                 {
-                    obj = objectsToAdd[counter++];
+                    obj = (IClientObject)objectsToAdd[counter++];
                     underlyingObject = obj.UnderlyingObject;
 
                     // remove object from cache, since index by ID may change.
