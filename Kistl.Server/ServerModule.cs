@@ -92,12 +92,10 @@ namespace Kistl.Server
                 .InstancePerDependency();
             moduleBuilder
                 .RegisterType<Kistl.Server.SchemaManagement.NpgsqlProvider.Postgresql>()
-                .As<ISchemaProvider>()
                 .Named<ISchemaProvider>("POSTGRES")
                 .InstancePerDependency();
             moduleBuilder
                 .RegisterType<Kistl.Server.SchemaManagement.OleDbProvider.OleDb>()
-                .As<ISchemaProvider>()
                 .Named<ISchemaProvider>("OLEDB")
                 .InstancePerDependency();
         }
