@@ -113,6 +113,14 @@
       <Project>{3760694D-3B35-41D4-B1A3-41BB288AA19F}</Project>
       <Name>Kistl.DalProvider.ClientObjects</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Kistl.DalProvider.Memory\Kistl.DalProvider.Memory.csproj">
+      <Project>{7E3CE048-00C1-4357-BE27-801AB5B75FE3}</Project>
+      <Name>Kistl.DalProvider.Memory</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Kistl.Objects.Memory\Kistl.Objects.Memory.csproj">
+      <Project>{01E60FD5-CD96-466A-83B1-8EFC7452B47C}</Project>
+      <Name>Kistl.Objects.Memory</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Kistl.Objects\Kistl.Objects.csproj">
       <Project>{0C9E6E69-309F-46F7-A936-D5762229DEB9}</Project>
       <Name>Kistl.Objects</Name>
