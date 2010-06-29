@@ -8,6 +8,7 @@ namespace Kistl.API
     using System.Linq;
     using System.Reflection;
     using System.Text;
+    using Kistl.API.Utils;
 
     public interface IInterfaceTypeChecker
     {
@@ -73,7 +74,7 @@ namespace Kistl.API
             if (type.Assembly != GetAssembly()
                 && !ImplTypeCheckers.Any(checker => checker.IsImplementationType(type)))
             {
-                Kistl.API.Utils.Logging.Log.WarnFormat("Allowing non-generated type [{0}] as interface type", type.AssemblyQualifiedName);
+                Logging.Log.WarnOnce(String.Format("Allowing non-generated type [{0}] as interface type", type.AssemblyQualifiedName));
                 return true;
             }
 
