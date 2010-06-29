@@ -24,7 +24,7 @@ DECLARE LoginCursor CURSOR
 READ_ONLY
 FOR SELECT spid FROM #tmpUsers WHERE cmd != 'CHECKPOINT' AND dbname = @dbname
 
-DECLARE @spid int
+DECLARE @spid varchar(30)
 OPEN LoginCursor
 
 FETCH NEXT FROM LoginCursor INTO @spid
