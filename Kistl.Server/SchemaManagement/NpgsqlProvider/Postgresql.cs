@@ -108,7 +108,7 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
                 return String.Empty;
             }
 
-            using (var versionCmd = new NpgsqlCommand("SELECT \"Schema\" FROM CurrentSchema", db, tx))
+            using (var versionCmd = new NpgsqlCommand(@"SELECT ""Schema"" FROM ""CurrentSchema""", db, tx))
             {
                 QueryLog.Debug(versionCmd.CommandText);
                 return (string)versionCmd.ExecuteScalar();
@@ -117,7 +117,7 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
 
         private long CheckVersionCount()
         {
-            using (var schemaCountCmd = new NpgsqlCommand("SELECT COUNT(*) FROM CurrentSchema", db, tx))
+            using (var schemaCountCmd = new NpgsqlCommand(@"SELECT count(*) FROM ""CurrentSchema""", db, tx))
             {
                 QueryLog.Debug(schemaCountCmd.CommandText);
                 var count = (long)schemaCountCmd.ExecuteScalar();
@@ -346,7 +346,7 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
                 while (rd.Read()) yield return new TableConstraintNamePair() { ConstraintName = rd.GetString(0), TableName = rd.GetString(1) };
             }
         }
-        
+
         public IEnumerable<Column> GetTableColumns(string tbl)
         {
             throw new NotImplementedException();
@@ -470,7 +470,15 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
             using (var cmd = new NpgsqlCommand(query, db, tx))
             {
                 QueryLog.Debug(query);
-                cmd.ExecuteNonQuery();
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    QueryLog.Error(String.Format("Error executing <<[{0}]>>", query), ex);
+                    throw;
+                }
             }
         }
 
@@ -730,48 +738,47 @@ FROM (", viewName);
                 }
             }
 
-            ExecuteScriptFromResource(String.Format(@"Kistl.Server.Database.Scripts.{0}.sql", procName));
+            ExecuteScriptFromResource(String.Format(@"Kistl.Server.SchemaManagement.NpgsqlProvider.{0}.sql", procName));
 
             var createTableProcQuery = new StringBuilder();
-            createTableProcQuery.AppendFormat("CREATE PROCEDURE \"{0}\" (@repair BIT, @tblName NVARCHAR(255), @colName NVARCHAR(255), @result BIT OUTPUT) AS", tableProcName);
+            createTableProcQuery.AppendFormat("CREATE FUNCTION \"{0}\" (repair boolean, tblName text, colName text) RETURNS boolean AS $BODY$", tableProcName);
             createTableProcQuery.AppendLine();
-            createTableProcQuery.AppendLine("SET @result = 0");
+            createTableProcQuery.AppendLine("DECLARE result boolean DEFAULT true;");
+            createTableProcQuery.AppendLine("BEGIN");
             foreach (var tbl in refSpecs)
             {
-                createTableProcQuery.AppendFormat("IF @tblName IS NULL OR @tblName = '{0}' BEGIN", tbl.Key);
+                createTableProcQuery.AppendFormat("IF tblName IS NULL OR tblName = '{0}' THEN", tbl.Key);
                 createTableProcQuery.AppendLine();
                 createTableProcQuery.Append("\t");
                 foreach (var refSpec in tbl)
                 {
-                    createTableProcQuery.AppendFormat("IF @colName IS NULL OR @colName = '{0}{1}' BEGIN", refSpec.Value, Kistl.API.Helper.PositionSuffix);
+                    createTableProcQuery.AppendFormat("IF colName IS NULL OR colName = '{0}{1}' THEN", refSpec.Value, Kistl.API.Helper.PositionSuffix);
                     createTableProcQuery.AppendLine();
                     createTableProcQuery.AppendFormat(
-                        "\t\tEXECUTE RepairPositionColumnValidity @repair=@repair, @tblName='{0}', @refTblName='{1}', @fkColumnName='{2}', @fkPositionName='{2}{3}', @result = @result OUTPUT",
+                        "\t\tresult := RepairPositionColumnValidity(repair := repair, tblName := '{0}', refTblName := '{1}', fkColumnName := '{2}', fkPositionName := '{2}{3}');",
                         tbl.Key,
                         refSpec.Key,
                         refSpec.Value,
                         Kistl.API.Helper.PositionSuffix);
                     createTableProcQuery.AppendLine();
-                    createTableProcQuery.AppendLine("\t\tIF @repair = 0 AND @result = 1 RETURN");
-                    createTableProcQuery.AppendFormat("\tEND ELSE ", tbl.Key);
+                    createTableProcQuery.AppendLine("\t\tIF NOT repair AND result THEN RETURN true; END IF;");
+                    createTableProcQuery.AppendFormat("\tELS");
                 }
-                createTableProcQuery.AppendLine("BEGIN");
 
-                // see http://msdn.microsoft.com/en-us/library/ms177497.aspx
-                // no sensible advice about the "severity" found, thus using a nice random 17.
-                // this also allows client code to use TRY/CATCH on this error
-                createTableProcQuery.AppendLine("\t\tRAISERROR (N'Column \"%s\".\"%s\" not found', 17, 1, @tblName, @colName)");
-                createTableProcQuery.AppendLine("\tEND");
+                // Complete ELS-E
+                createTableProcQuery.AppendLine("E");
+                createTableProcQuery.AppendLine("\t\tRAISE EXCEPTION 'Column [%].[%] not found', tblName, colName;");
+                createTableProcQuery.AppendLine("\tEND IF;");
 
-                createTableProcQuery.AppendFormat("END ELSE ", tbl.Key);
+                createTableProcQuery.Append("ELS");
             }
-            createTableProcQuery.AppendLine("BEGIN");
 
-            // see http://msdn.microsoft.com/en-us/library/ms177497.aspx
-            // no sensible advice about the "severity" found, thus using a nice random 17.
-            // this also allows client code to use TRY/CATCH on this error
-            createTableProcQuery.AppendLine("\tRAISERROR (N'Table \"%s\" not found', 17, 1, @tblName)");
-            createTableProcQuery.AppendLine("END");
+            // Complete ELS-E
+            createTableProcQuery.AppendLine("E");
+            createTableProcQuery.AppendLine("\tRAISE EXCEPTION 'Table [%] not found', tblName;");
+            createTableProcQuery.AppendLine("END IF;");
+            createTableProcQuery.AppendLine("END;");
+            createTableProcQuery.AppendLine("$BODY$ LANGUAGE 'plpgsql' VOLATILE;");
             ExecuteNonQuery(createTableProcQuery.ToString());
         }
 

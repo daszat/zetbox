@@ -644,6 +644,7 @@
       <LastGenOutput>EagerObjectLoadingSerialization.Designer.cs</LastGenOutput>
     </None>
     <Content Include="Generators\Templates\Interface\README.txt" />
+    <Content Include="SchemaManagement\NpgsqlProvider\TextFile1.txt" />
     <None Include="Generators\Templates\Implementation\ObjectClasses\SimpleFieldSerialization.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>SimpleFieldSerialization.Designer.cs</LastGenOutput>
@@ -677,6 +678,7 @@
       <LastGenOutput>Repository.Designer.cs</LastGenOutput>
     </None>
     <None Include="Kistl.snk" />
+    <EmbeddedResource Include="SchemaManagement\NpgsqlProvider\RepairPositionColumnValidity.sql" />
     <Compile Include="Generators\ClientObjects\Implementation\ObjectClasses\CollectionSerialization.cs" />
     <Compile Include="Generators\Templates\Implementation\ObjectClasses\ReloadOneReference.cs" />
     <Compile Include="Generators\Templates\Implementation\ObjectClasses\ReloadOneReference.Designer.cs">

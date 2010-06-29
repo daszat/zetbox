@@ -4,15 +4,14 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
     using System;
     using System.Collections.Generic;
     using System.Data.SqlClient;
+    using System.IO;
     using System.Linq;
     using System.Text;
-
+    using System.Text.RegularExpressions;
     using Kistl.API;
     using Kistl.API.Configuration;
     using Kistl.API.Server;
     using Kistl.API.Utils;
-    using System.IO;
-    using System.Text.RegularExpressions;
 
     public class SqlServer
         : ISchemaProvider
@@ -117,7 +116,7 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
                 return String.Empty;
             }
 
-            using (var versionCmd = new SqlCommand("SELECT [Schema] FROM CurrentSchema", db, tx))
+            using (var versionCmd = new SqlCommand("SELECT [Schema] FROM [CurrentSchema]", db, tx))
             {
                 QueryLog.Debug(versionCmd.CommandText);
                 return (string)versionCmd.ExecuteScalar();
@@ -126,7 +125,7 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
 
         private int CheckVersionCount()
         {
-            using (var schemaCountCmd = new SqlCommand("SELECT COUNT(*) FROM CurrentSchema", db, tx))
+            using (var schemaCountCmd = new SqlCommand("SELECT COUNT(*) FROM [CurrentSchema]", db, tx))
             {
                 QueryLog.Debug(schemaCountCmd.CommandText);
                 var count = (int)schemaCountCmd.ExecuteScalar();

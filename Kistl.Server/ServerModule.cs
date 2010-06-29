@@ -79,12 +79,7 @@ namespace Kistl.Server
                 .As<IIdentityResolver>()
                 .InstancePerLifetimeScope();
 
-            // TODO: move to separate MSSQL-specific assembly, since the SQL-Schema should be independent of the DalProvider
-            moduleBuilder
-                .RegisterType<Kistl.Server.SchemaManagement.SqlProvider.SqlServer>()
-                .As<ISchemaProvider>()
-                .InstancePerDependency();
-
+            // TODO: move to separate SchemaProvider-specific assembly, since the SQL-Schema should be independent of the DalProvider
             moduleBuilder
                 .RegisterType<Kistl.Server.SchemaManagement.SqlProvider.SqlServer>()
                 .As<ISchemaProvider>()

@@ -222,7 +222,7 @@ namespace Kistl.Server.SchemaManagement
                 using (var ms = new MemoryStream())
                 {
                     Exporter.PublishFromContext(schema, ms, new string[] { "*" });
-                    string schemaStr = ASCIIEncoding.Default.GetString(ms.GetBuffer());
+                    string schemaStr = ASCIIEncoding.Default.GetString(ms.GetBuffer()).TrimEnd((char)0); // Trim possible C++/Database/whatever ending 0 char
                     db.SaveSchema(schemaStr);
                 }
             }
