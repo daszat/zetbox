@@ -24,6 +24,7 @@ namespace Kistl.DalProvider.Memory.Tests.FrozenContext
         }
 
         [Test]
+        [Ignore("Not implemented")]
         public void should_reject_modifications()
         {
             var ctx = scope.Resolve<IReadOnlyKistlContext>(Helper.FrozenContextServiceName);
