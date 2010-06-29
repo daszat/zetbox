@@ -56,6 +56,7 @@
   <ItemGroup>
     <Compile Include="AbstractMemoryContextTextFixture.cs" />
     <Compile Include="ContextTests\when_creating.cs" />
+    <Compile Include="FrozenContext\when_using.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SetUpFixture.cs" />
     <Compile Include="TestDeploymentRestrictor.cs" />
@@ -64,6 +65,14 @@
     <ProjectReference Include="..\..\Kistl.API\Kistl.API.csproj">
       <Project>{AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9}</Project>
       <Name>Kistl.API</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Kistl.App.Projekte.Common\Kistl.App.Projekte.Common.csproj">
+      <Project>{B1AE679D-BA5A-4E70-8D21-D99C46A34F79}</Project>
+      <Name>Kistl.App.Projekte.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Kistl.App.Projekte.Server\Kistl.App.Projekte.Server.csproj">
+      <Project>{E1275AE6-5060-4E93-88D8-BA48BA52DC7A}</Project>
+      <Name>Kistl.App.Projekte.Server</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Kistl.DalProvider.Memory\Kistl.DalProvider.Memory.csproj">
       <Project>{7E3CE048-00C1-4357-BE27-801AB5B75FE3}</Project>

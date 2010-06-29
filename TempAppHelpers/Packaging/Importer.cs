@@ -187,7 +187,11 @@ namespace Kistl.App.Packaging
             foreach (Type t in guids.Keys)
             {
                 IEnumerable<IPersistenceObject> result = ctx.FindPersistenceObjects(ctx.GetInterfaceType(t), guids[t]);
-                Log.DebugFormat("{0}: XML: {1}, Storage: {2}", t.FullName, guids[t].Count, result.Count());
+                if (Log.IsDebugEnabled)
+                {
+                    // avoid result.Count() evaluation if not needed
+                    Log.DebugFormat("{0}: XML: {1}, Storage: {2}", t.FullName, guids[t].Count, result.Count());
+                }
 
                 foreach (IPersistenceObject obj in result)
                 {

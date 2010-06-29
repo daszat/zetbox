@@ -30,7 +30,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.CollectionEntries
                 false,
                 rel.NeedsPositionStorage(endRole), endRole.ToString() + Kistl.API.Helper.PositionSuffix,
                 rel.A.Type.ImplementsIExportable() && rel.B.Type.ImplementsIExportable(),
-                relEnd.Type.Module.Namespace,
+                rel.Module.Namespace,
                 false, true);
         }
 

@@ -157,7 +157,7 @@ namespace Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses
                     rel.NeedsPositionStorage(relEnd.GetRole()),
                     Construct.ListPositionPropertyName(relEnd),
                     otherEnd.Type.ImplementsIExportable(),
-                    prop.Module.Namespace,
+                    rel.Module.Namespace,
                     relEnd.Navigator != null && relEnd.Navigator.EagerLoading,
                     true, 
                     true);

@@ -1577,7 +1577,7 @@ namespace Kistl.App.Base
             XmlStreamer.ToStream(this._ChangedOn, xml, "ChangedOn", "Kistl.App.Base");
             XmlStreamer.ToStream(CreatedBy != null ? CreatedBy.ID : (int?)null, xml, "CreatedBy", "Kistl.App.Base");
             XmlStreamer.ToStream(this._CreatedOn, xml, "CreatedOn", "Kistl.App.Base");
-            XmlStreamer.ToStream(DefaultIcon != null ? DefaultIcon.ID : (int?)null, xml, "DefaultIcon", "Kistl.App.GUI");
+            XmlStreamer.ToStream(DefaultIcon != null ? DefaultIcon.ID : (int?)null, xml, "DefaultIcon", "Kistl.App.Base");
             XmlStreamer.ToStream(this._Description, xml, "Description", "Kistl.App.Base");
             XmlStreamer.ToStream(this._isExportGuidSet, xml, "IsExportGuidSet", "Kistl.App.Base");
             if (this._isExportGuidSet) {
@@ -1598,7 +1598,7 @@ namespace Kistl.App.Base
             XmlStreamer.FromStream(ref this._ChangedOn, xml, "ChangedOn", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_CreatedBy, xml, "CreatedBy", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._CreatedOn, xml, "CreatedOn", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._fk_DefaultIcon, xml, "DefaultIcon", "Kistl.App.GUI");
+            XmlStreamer.FromStream(ref this._fk_DefaultIcon, xml, "DefaultIcon", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._Description, xml, "Description", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._isExportGuidSet, xml, "IsExportGuidSet", "Kistl.App.Base");
             if (this._isExportGuidSet) {
@@ -1619,7 +1619,7 @@ namespace Kistl.App.Base
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._ChangedOn, xml, "ChangedOn", "Kistl.App.Base");
     
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._CreatedOn, xml, "CreatedOn", "Kistl.App.Base");
-            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(DefaultIcon != null ? DefaultIcon.ExportGuid : (Guid?)null, xml, "DefaultIcon", "Kistl.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(DefaultIcon != null ? DefaultIcon.ExportGuid : (Guid?)null, xml, "DefaultIcon", "Kistl.App.Base");
     
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._Description, xml, "Description", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(Module != null ? Module.ExportGuid : (Guid?)null, xml, "Module", "Kistl.App.Base");
@@ -1637,7 +1637,7 @@ namespace Kistl.App.Base
         {
             XmlStreamer.FromStream(ref this._ChangedOn, xml, "ChangedOn", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._CreatedOn, xml, "CreatedOn", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._fk_guid_DefaultIcon, xml, "DefaultIcon", "Kistl.App.GUI");
+            XmlStreamer.FromStream(ref this._fk_guid_DefaultIcon, xml, "DefaultIcon", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._Description, xml, "Description", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
             this._isExportGuidSet = true;

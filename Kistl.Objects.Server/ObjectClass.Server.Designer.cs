@@ -952,7 +952,7 @@ namespace Kistl.App.Base
             
             base.ToStream(xml);
             XmlStreamer.ToStream(BaseObjectClass != null ? BaseObjectClass.ID : (int?)null, xml, "BaseObjectClass", "Kistl.App.Base");
-            XmlStreamer.ToStream(DefaultViewModelDescriptor != null ? DefaultViewModelDescriptor.ID : (int?)null, xml, "DefaultViewModelDescriptor", "Kistl.App.GUI");
+            XmlStreamer.ToStream(DefaultViewModelDescriptor != null ? DefaultViewModelDescriptor.ID : (int?)null, xml, "DefaultViewModelDescriptor", "Kistl.App.Base");
             XmlStreamer.ToStream(this._IsAbstract, xml, "IsAbstract", "Kistl.App.Base");
             XmlStreamer.ToStream(this._IsFrozenObject, xml, "IsFrozenObject", "Kistl.App.Base");
             XmlStreamer.ToStream(this._IsSimpleObject, xml, "IsSimpleObject", "Kistl.App.GUI");
@@ -964,7 +964,7 @@ namespace Kistl.App.Base
             
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._fk_BaseObjectClass, xml, "BaseObjectClass", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._fk_DefaultViewModelDescriptor, xml, "DefaultViewModelDescriptor", "Kistl.App.GUI");
+            XmlStreamer.FromStream(ref this._fk_DefaultViewModelDescriptor, xml, "DefaultViewModelDescriptor", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._IsAbstract, xml, "IsAbstract", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._IsFrozenObject, xml, "IsFrozenObject", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._IsSimpleObject, xml, "IsSimpleObject", "Kistl.App.GUI");
@@ -976,7 +976,7 @@ namespace Kistl.App.Base
             
             base.Export(xml, modules);
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(BaseObjectClass != null ? BaseObjectClass.ExportGuid : (Guid?)null, xml, "BaseObjectClass", "Kistl.App.Base");
-            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(DefaultViewModelDescriptor != null ? DefaultViewModelDescriptor.ExportGuid : (Guid?)null, xml, "DefaultViewModelDescriptor", "Kistl.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(DefaultViewModelDescriptor != null ? DefaultViewModelDescriptor.ExportGuid : (Guid?)null, xml, "DefaultViewModelDescriptor", "Kistl.App.Base");
     
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._IsAbstract, xml, "IsAbstract", "Kistl.App.Base");
     
@@ -992,7 +992,7 @@ namespace Kistl.App.Base
             
             base.MergeImport(xml);
             XmlStreamer.FromStream(ref this._fk_guid_BaseObjectClass, xml, "BaseObjectClass", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._fk_guid_DefaultViewModelDescriptor, xml, "DefaultViewModelDescriptor", "Kistl.App.GUI");
+            XmlStreamer.FromStream(ref this._fk_guid_DefaultViewModelDescriptor, xml, "DefaultViewModelDescriptor", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._IsAbstract, xml, "IsAbstract", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._IsFrozenObject, xml, "IsFrozenObject", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._IsSimpleObject, xml, "IsSimpleObject", "Kistl.App.GUI");

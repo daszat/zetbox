@@ -66,7 +66,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
                 rel.NeedsPositionStorage(endRole),
                 Construct.ListPositionPropertyName(relEnd),
                 rel.A.Type.ImplementsIExportable() && rel.B.Type.ImplementsIExportable(),
-                relEnd.Type.Module.Namespace,
+                rel.Module.Namespace,
                 callGetterSetterEvents, isReloadable);
         }
 

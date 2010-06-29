@@ -1640,7 +1640,7 @@ namespace Kistl.App.Base
             if (this._isExportGuidSet) {
                 XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
             }
-            XmlStreamer.ToStream(this._fk_FilterConfiguration, xml, "FilterConfiguration", "Kistl.App.Base");
+            XmlStreamer.ToStream(this._fk_FilterConfiguration, xml, "FilterConfiguration", "Kistl.App.GUI");
             XmlStreamer.ToStream(this._fk_Module, xml, "Module", "Kistl.App.Base");
             XmlStreamer.ToStream(this._Name, xml, "Name", "Kistl.App.Base");
             XmlStreamer.ToStream(this._fk_ObjectClass, xml, "ObjectClass", "Kistl.App.Base");
@@ -1663,7 +1663,7 @@ namespace Kistl.App.Base
             if (this._isExportGuidSet) {
                 XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
             }
-            XmlStreamer.FromStream(ref this._fk_FilterConfiguration, xml, "FilterConfiguration", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._fk_FilterConfiguration, xml, "FilterConfiguration", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._fk_Module, xml, "Module", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._Name, xml, "Name", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_ObjectClass, xml, "ObjectClass", "Kistl.App.Base");
@@ -1684,7 +1684,7 @@ namespace Kistl.App.Base
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(DefaultValue != null ? DefaultValue.ExportGuid : (Guid?)null, xml, "DefaultValue", "Kistl.App.Base");
     
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._Description, xml, "Description", "Kistl.App.Base");
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(FilterConfiguration != null ? FilterConfiguration.ExportGuid : (Guid?)null, xml, "FilterConfiguration", "Kistl.App.Base");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(FilterConfiguration != null ? FilterConfiguration.ExportGuid : (Guid?)null, xml, "FilterConfiguration", "Kistl.App.GUI");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(Module != null ? Module.ExportGuid : (Guid?)null, xml, "Module", "Kistl.App.Base");
     
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._Name, xml, "Name", "Kistl.App.Base");
@@ -1703,7 +1703,7 @@ namespace Kistl.App.Base
             XmlStreamer.FromStream(ref this._Description, xml, "Description", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
             this._isExportGuidSet = true;
-            XmlStreamer.FromStream(ref this._fk_guid_FilterConfiguration, xml, "FilterConfiguration", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._fk_guid_FilterConfiguration, xml, "FilterConfiguration", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._fk_guid_Module, xml, "Module", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._Name, xml, "Name", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_guid_ObjectClass, xml, "ObjectClass", "Kistl.App.Base");

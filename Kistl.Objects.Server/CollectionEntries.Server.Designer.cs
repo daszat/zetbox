@@ -616,10 +616,10 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
             XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "");
             XmlStreamer.ToStream(A != null ? A.ID : (int?)null, xml, "A", "at.dasz.DocumentManagement");
             XmlStreamer.ToStream(this._A_pos, xml, "A_pos", "at.dasz.DocumentManagement");
-            XmlStreamer.ToStream(B != null ? B.ID : (int?)null, xml, "B", "Kistl.App.Base");
-            XmlStreamer.ToStream(this._B_pos, xml, "B_pos", "Kistl.App.Base");
+            XmlStreamer.ToStream(B != null ? B.ID : (int?)null, xml, "B", "at.dasz.DocumentManagement");
+            XmlStreamer.ToStream(this._B_pos, xml, "B_pos", "at.dasz.DocumentManagement");
             XmlStreamer.ToStream(this._A_pos, xml, "A_pos", "at.dasz.DocumentManagement");
-            XmlStreamer.ToStream(this._B_pos, xml, "B_pos", "Kistl.App.Base");
+            XmlStreamer.ToStream(this._B_pos, xml, "B_pos", "at.dasz.DocumentManagement");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
@@ -629,10 +629,10 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
             XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "");
             XmlStreamer.FromStream(ref this._fk_A, xml, "A", "at.dasz.DocumentManagement");
             XmlStreamer.FromStream(ref this._A_pos, xml, "A_pos", "at.dasz.DocumentManagement");
-            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._B_pos, xml, "B_pos", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "at.dasz.DocumentManagement");
+            XmlStreamer.FromStream(ref this._B_pos, xml, "B_pos", "at.dasz.DocumentManagement");
             XmlStreamer.FromStream(ref this._A_pos, xml, "A_pos", "at.dasz.DocumentManagement");
-            XmlStreamer.FromStream(ref this._B_pos, xml, "B_pos", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._B_pos, xml, "B_pos", "at.dasz.DocumentManagement");
         }
 
         public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
@@ -642,13 +642,13 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
             if (modules.Contains("*") || modules.Contains("at.dasz.DocumentManagement")) XmlStreamer.ToStream(A != null ? A.ExportGuid : (Guid?)null, xml, "A", "at.dasz.DocumentManagement");
 	
             if (modules.Contains("*") || modules.Contains("at.dasz.DocumentManagement")) XmlStreamer.ToStream(this._A_pos, xml, "A_pos", "at.dasz.DocumentManagement");
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(B != null ? B.ExportGuid : (Guid?)null, xml, "B", "Kistl.App.Base");
+            if (modules.Contains("*") || modules.Contains("at.dasz.DocumentManagement")) XmlStreamer.ToStream(B != null ? B.ExportGuid : (Guid?)null, xml, "B", "at.dasz.DocumentManagement");
 	
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._B_pos, xml, "B_pos", "Kistl.App.Base");
+            if (modules.Contains("*") || modules.Contains("at.dasz.DocumentManagement")) XmlStreamer.ToStream(this._B_pos, xml, "B_pos", "at.dasz.DocumentManagement");
 	
             if (modules.Contains("*") || modules.Contains("at.dasz.DocumentManagement")) XmlStreamer.ToStream(this._A_pos, xml, "A_pos", "at.dasz.DocumentManagement");
 	
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._B_pos, xml, "B_pos", "Kistl.App.Base");
+            if (modules.Contains("*") || modules.Contains("at.dasz.DocumentManagement")) XmlStreamer.ToStream(this._B_pos, xml, "B_pos", "at.dasz.DocumentManagement");
         }
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
@@ -656,10 +656,10 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
             XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "");
             XmlStreamer.FromStream(ref this._fk_guid_A, xml, "A", "at.dasz.DocumentManagement");
             XmlStreamer.FromStream(ref this._A_pos, xml, "A_pos", "at.dasz.DocumentManagement");
-            XmlStreamer.FromStream(ref this._fk_guid_B, xml, "B", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._B_pos, xml, "B_pos", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._fk_guid_B, xml, "B", "at.dasz.DocumentManagement");
+            XmlStreamer.FromStream(ref this._B_pos, xml, "B_pos", "at.dasz.DocumentManagement");
             XmlStreamer.FromStream(ref this._A_pos, xml, "A_pos", "at.dasz.DocumentManagement");
-            XmlStreamer.FromStream(ref this._B_pos, xml, "B_pos", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._B_pos, xml, "B_pos", "at.dasz.DocumentManagement");
         }
 
 #endregion
@@ -4465,7 +4465,7 @@ namespace Kistl.App.GUI
             base.ToStream(xml);
             XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "");
             XmlStreamer.ToStream(A != null ? A.ID : (int?)null, xml, "A", "Kistl.App.GUI");
-            XmlStreamer.ToStream(B != null ? B.ID : (int?)null, xml, "B", "Kistl.App.Base");
+            XmlStreamer.ToStream(B != null ? B.ID : (int?)null, xml, "B", "Kistl.App.GUI");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
@@ -4474,7 +4474,7 @@ namespace Kistl.App.GUI
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "");
             XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.GUI");
         }
 
         public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
@@ -4482,14 +4482,14 @@ namespace Kistl.App.GUI
             
             xml.WriteAttributeString("ExportGuid", this._ExportGuid.ToString());
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(A != null ? A.ExportGuid : (Guid?)null, xml, "A", "Kistl.App.GUI");
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(B != null ? B.ExportGuid : (Guid?)null, xml, "B", "Kistl.App.Base");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(B != null ? B.ExportGuid : (Guid?)null, xml, "B", "Kistl.App.GUI");
         }
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
         {
             XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "");
             XmlStreamer.FromStream(ref this._fk_guid_A, xml, "A", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._fk_guid_B, xml, "B", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._fk_guid_B, xml, "B", "Kistl.App.GUI");
         }
 
 #endregion
@@ -5535,7 +5535,7 @@ namespace Kistl.App.TimeRecords
             
             base.ToStream(xml);
             XmlStreamer.ToStream(A != null ? A.ID : (int?)null, xml, "A", "Kistl.App.TimeRecords");
-            XmlStreamer.ToStream(B != null ? B.ID : (int?)null, xml, "B", "Kistl.App.Projekte");
+            XmlStreamer.ToStream(B != null ? B.ID : (int?)null, xml, "B", "Kistl.App.TimeRecords");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
@@ -5543,7 +5543,7 @@ namespace Kistl.App.TimeRecords
             
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.TimeRecords");
-            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.Projekte");
+            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.TimeRecords");
         }
 
 #endregion

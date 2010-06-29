@@ -1634,7 +1634,7 @@ namespace Kistl.App.Base
             XmlStreamer.ToStream(this._Name, xml, "Name", "Kistl.App.Base");
             XmlStreamer.ToStream(ObjectClass != null ? ObjectClass.ID : (int?)null, xml, "ObjectClass", "Kistl.App.Base");
             XmlStreamer.ToStream(this._Properties_pos, xml, "Properties_pos", "Kistl.App.Base");
-            XmlStreamer.ToStream(ValueModelDescriptor != null ? ValueModelDescriptor.ID : (int?)null, xml, "ValueModelDescriptor", "Kistl.App.GUI");
+            XmlStreamer.ToStream(ValueModelDescriptor != null ? ValueModelDescriptor.ID : (int?)null, xml, "ValueModelDescriptor", "Kistl.App.Base");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
@@ -1657,7 +1657,7 @@ namespace Kistl.App.Base
             XmlStreamer.FromStream(ref this._Name, xml, "Name", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_ObjectClass, xml, "ObjectClass", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._Properties_pos, xml, "Properties_pos", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._fk_ValueModelDescriptor, xml, "ValueModelDescriptor", "Kistl.App.GUI");
+            XmlStreamer.FromStream(ref this._fk_ValueModelDescriptor, xml, "ValueModelDescriptor", "Kistl.App.Base");
         }
 
         public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
@@ -1680,7 +1680,7 @@ namespace Kistl.App.Base
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(ObjectClass != null ? ObjectClass.ExportGuid : (Guid?)null, xml, "ObjectClass", "Kistl.App.Base");
 	
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._Properties_pos, xml, "Properties_pos", "Kistl.App.Base");
-            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(ValueModelDescriptor != null ? ValueModelDescriptor.ExportGuid : (Guid?)null, xml, "ValueModelDescriptor", "Kistl.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(ValueModelDescriptor != null ? ValueModelDescriptor.ExportGuid : (Guid?)null, xml, "ValueModelDescriptor", "Kistl.App.Base");
         }
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
@@ -1697,7 +1697,7 @@ namespace Kistl.App.Base
             XmlStreamer.FromStream(ref this._Name, xml, "Name", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_guid_ObjectClass, xml, "ObjectClass", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._Properties_pos, xml, "Properties_pos", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._fk_guid_ValueModelDescriptor, xml, "ValueModelDescriptor", "Kistl.App.GUI");
+            XmlStreamer.FromStream(ref this._fk_guid_ValueModelDescriptor, xml, "ValueModelDescriptor", "Kistl.App.Base");
         }
 
 #endregion

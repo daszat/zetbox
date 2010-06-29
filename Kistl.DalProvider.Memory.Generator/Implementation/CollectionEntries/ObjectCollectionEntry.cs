@@ -23,7 +23,6 @@ namespace Kistl.DalProvider.Memory.Generator.Implementation.CollectionEntries
         protected override void ApplyObjectReferenceProperty(Relation rel, RelationEndRole endRole, string propertyName)
         {
             RelationEnd relEnd = rel.GetEndFromRole(endRole);
-            RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
 
             string backingName = propertyName + Kistl.API.Helper.ImplementationSuffix;
             string fkBackingName = "_fk_" + propertyName;
@@ -36,7 +35,7 @@ namespace Kistl.DalProvider.Memory.Generator.Implementation.CollectionEntries
                 false,
                 rel.NeedsPositionStorage(endRole), endRole.ToString() + Kistl.API.Helper.PositionSuffix,
                 rel.A.Type.ImplementsIExportable() && rel.B.Type.ImplementsIExportable(),
-                relEnd.Type.Module.Namespace,
+                rel.Module.Namespace,
                 false, true);
         }
 
@@ -46,7 +45,7 @@ namespace Kistl.DalProvider.Memory.Generator.Implementation.CollectionEntries
 
             if (rel.NeedsPositionStorage(endRole))
             {
-                this.MembersToSerialize.Add(Templates.Implementation.SerializerType.All, relEnd.Type.Module.Namespace, endRole + Kistl.API.Helper.PositionSuffix, "_" + endRole + Kistl.API.Helper.PositionSuffix);
+                this.MembersToSerialize.Add(Templates.Implementation.SerializerType.All, rel.Module.Namespace, endRole + Kistl.API.Helper.PositionSuffix, "_" + endRole + Kistl.API.Helper.PositionSuffix);
                 this.WriteObjects("public int? ", endRole, "Index { get { return ",
                     endRole, Kistl.API.Helper.PositionSuffix, "; } set { ",
                     endRole, Kistl.API.Helper.PositionSuffix, " = value; } }");
