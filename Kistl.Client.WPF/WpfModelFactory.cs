@@ -7,13 +7,11 @@ namespace Kistl.Client.WPF
     using System.Text;
     using System.Windows;
     using System.Windows.Threading;
-
+    using Autofac;
+    using Kistl.API;
     using Kistl.Client.GUI;
     using Kistl.Client.Presentables;
-
     using Microsoft.Win32;
-    using Autofac;
-using Kistl.API;
 
     public class WpfModelFactory
         : ModelFactory

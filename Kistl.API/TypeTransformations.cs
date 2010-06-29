@@ -62,6 +62,10 @@ namespace Kistl.API
             if (type.IsInterface && type.Assembly == GetAssembly())
                 return true;
 
+            // Allow all enumeration types from the generated assembly
+            if (type.IsEnum && type.Assembly == GetAssembly())
+                return true;
+
             // Allow all generic types which have only interface types as arguments
             if (type.IsGenericType)
                 return type.GetGenericArguments().All(t => IsInterfaceType(t));
@@ -136,7 +140,11 @@ namespace Kistl.API
             if (type == null) throw new ArgumentNullException("type");
             if (typeChecker == null) throw new ArgumentNullException("typeChecker");
 
-            if (!typeChecker.IsInterfaceType(type)) { throw new ArgumentOutOfRangeException("type"); }
+            if (!typeChecker.IsInterfaceType(type))
+            {
+                Logging.Log.ErrorFormat("[{0}] is not an interface type", type.AssemblyQualifiedName);
+                throw new ArgumentOutOfRangeException("type");
+            }
 
             this.Type = type;
             this._typeChecker = typeChecker;

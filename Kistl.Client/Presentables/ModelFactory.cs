@@ -5,8 +5,8 @@ namespace Kistl.Client.Presentables
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Linq;
+    using System.Linq.Expressions;
     using System.Text;
-
     using Autofac;
     using Kistl.API;
     using Kistl.API.Utils;
@@ -14,7 +14,6 @@ namespace Kistl.Client.Presentables
     using Kistl.App.Extensions;
     using Kistl.App.GUI;
     using Kistl.Client.GUI;
-    using System.Linq.Expressions;
 
     /// <summary>
     /// Abstract base class to provide basic functionality of all model factories. Toolkit-specific implementations of this class will be 
@@ -33,6 +32,8 @@ namespace Kistl.Client.Presentables
         protected ModelFactory(Autofac.ILifetimeScope container, IReadOnlyKistlContext frozenCtx)
         {
             if (container == null) throw new ArgumentNullException("container");
+            if (frozenCtx == null) throw new ArgumentNullException("frozenCtx");
+
             this.Container = container;
             this.FrozenContext = frozenCtx;
             this.Managers = new Dictionary<IKistlContext, IMultipleInstancesManager>();

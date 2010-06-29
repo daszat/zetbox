@@ -1,17 +1,17 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-
-using Kistl.Client.Forms.View;
-using Kistl.Client.Presentables;
-using Kistl.Client.GUI;
-using Kistl.Client.Presentables.ObjectBrowser;
-using Kistl.API;
 
 namespace Kistl.Client.Forms
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Windows.Forms;
+    using Kistl.API;
+    using Kistl.Client.Forms.View;
+    using Kistl.Client.GUI;
+    using Kistl.Client.Presentables;
+    using Kistl.Client.Presentables.ObjectBrowser;
+
     public class FormsModelFactory
         : ModelFactory
     {
