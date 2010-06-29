@@ -7,20 +7,9 @@ namespace Kistl.API.Server
     using System.Linq;
     using System.Text;
 
+    using Kistl.API.Configuration;
     using Kistl.App.Base;
     using Kistl.App.Extensions;
-    using Autofac;
-    using Kistl.API.Configuration;
-
-    //public static class AutoFacContainerExtensions
-    //{
-    //    [Obsolete("Replace with Autofac Factory")]
-    //    public static IKistlContext GetKistlContext(this ILifetimeScope container, Identity identity)
-    //    {
-    //        if (container == null) throw new ArgumentNullException("container");
-    //        return container.Resolve<IKistlContext>(new Autofac.PositionalParameter(0, identity));
-    //    }
-    //}
 
     public delegate IKistlContext ServerKistlContextFactory(Identity identity);
 
@@ -30,7 +19,7 @@ namespace Kistl.API.Server
         protected readonly Identity identity;
         protected readonly IMetaDataResolver metaDataResolver;
         protected KistlConfig config;
-        protected ITypeTransformations typeTrans;
+        protected InterfaceType.Factory iftFactory;
 
         /// <summary>
         /// Initializes a new instance of the BaseKistlDataContext class using the specified <see cref="Identity"/>.
@@ -38,15 +27,17 @@ namespace Kistl.API.Server
         /// <param name="metaDataResolver">the IMetaDataResolver for this context.</param>
         /// <param name="identity">the identity of this context. if this is null, the context does no security checks</param>
         /// <param name="config"></param>
-        /// <param name="typeTrans"></param>
-        protected BaseKistlDataContext(IMetaDataResolver metaDataResolver, Identity identity, KistlConfig config, ITypeTransformations typeTrans)
+        /// <param name="iftFactory"></param>
+        protected BaseKistlDataContext(IMetaDataResolver metaDataResolver, Identity identity, KistlConfig config, InterfaceType.Factory iftFactory)
         {
             if (metaDataResolver == null) { throw new ArgumentNullException("metaDataResolver"); }
-            
-            this.config = config;
-            this.identity = identity;
+            if (config == null) { throw new ArgumentNullException("config"); }
+            if (iftFactory == null) { throw new ArgumentNullException("iftFactory"); }
+
             this.metaDataResolver = metaDataResolver;
-            this.typeTrans = typeTrans;
+            this.identity = identity;
+            this.config = config;
+            this.iftFactory = iftFactory;
         }
 
         // TODO: implement proper IDisposable pattern
@@ -302,7 +293,7 @@ namespace Kistl.API.Server
         /// <returns>A new IDataObject</returns>
         public virtual T Create<T>() where T : class, IDataObject
         {
-            return (T)Create(typeTrans.AsInterfaceType(typeof(T)));
+            return (T)Create(iftFactory(typeof(T)));
         }
 
         /// <inheritdoc />
@@ -314,7 +305,7 @@ namespace Kistl.API.Server
         /// <inheritdoc />
         public T CreateUnattached<T>() where T : class, IPersistenceObject
         {
-            return (T)CreateUnattachedInstance(typeTrans.AsInterfaceType(typeof(T)));
+            return (T)CreateUnattachedInstance(iftFactory(typeof(T)));
         }
 
         /// <summary>
@@ -334,7 +325,7 @@ namespace Kistl.API.Server
         /// <returns>A new IDataObject</returns>
         public virtual T CreateRelationCollectionEntry<T>() where T : IRelationCollectionEntry
         {
-            return (T)CreateRelationCollectionEntry(typeTrans.AsInterfaceType(typeof(T)));
+            return (T)CreateRelationCollectionEntry(iftFactory(typeof(T)));
         }
 
         /// <summary>
@@ -354,7 +345,7 @@ namespace Kistl.API.Server
         /// <returns>A new IDataObject</returns>
         public virtual T CreateValueCollectionEntry<T>() where T : IValueCollectionEntry
         {
-            return (T)CreateValueCollectionEntry(typeTrans.AsInterfaceType(typeof(T)));
+            return (T)CreateValueCollectionEntry(iftFactory(typeof(T)));
         }
 
         /// <summary>
@@ -374,7 +365,7 @@ namespace Kistl.API.Server
         /// <returns>A new CompoundObject</returns>
         public virtual T CreateCompoundObject<T>() where T : ICompoundObject
         {
-            return (T)CreateCompoundObject(typeTrans.AsInterfaceType(typeof(T)));
+            return (T)CreateCompoundObject(iftFactory(typeof(T)));
         }
 
         /// <summary>
@@ -455,7 +446,7 @@ namespace Kistl.API.Server
             if (string.IsNullOrEmpty(filename)) throw new ArgumentNullException("filename");
             if (string.IsNullOrEmpty(mimetype)) throw new ArgumentNullException("mimetype");
 
-            var blob = (Kistl.App.Base.Blob)this.CreateInternal(typeTrans.AsInterfaceType(typeof(Kistl.App.Base.Blob)));
+            var blob = (Kistl.App.Base.Blob)this.CreateInternal(iftFactory(typeof(Kistl.App.Base.Blob)));
             DateTime today = DateTime.Today;
             blob.StoragePath = string.Format(@"{0:0000}\{1:00}\{2:00}\({3}) - {4}", today.Year, today.Month, today.Day, Guid.NewGuid(), filename);
             blob.OriginalName = filename;
@@ -517,26 +508,22 @@ namespace Kistl.API.Server
 
         #region IReadOnlyKistlContext Members
 
+        public InterfaceType GetInterfaceType(IPersistenceObject obj)
+        {
+            return iftFactory(((BasePersistenceObject)obj).GetImplementedInterface());
+        }
+
         public InterfaceType GetInterfaceType(Type t)
         {
-            return typeTrans.AsInterfaceType(t);
+            return iftFactory(t);
         }
 
         public InterfaceType GetInterfaceType(string typeName)
         {
-            return typeTrans.AsInterfaceType(typeName);
+            return iftFactory(Type.GetType(typeName + "," + typeof(ObjectClass).Assembly.FullName));
         }
 
-        public InterfaceType GetInterfaceType(IPersistenceObject obj)
-        {
-            return typeTrans.AsInterfaceType(((BasePersistenceObject)obj).GetImplementedInterface());
-        }
-
-        public ImplementationType GetImplementationType(Type t)
-        {
-            return typeTrans.AsImplementationType(t);
-        }
-
+        public abstract ImplementationType GetImplementationType(Type t);
         public abstract ImplementationType ToImplementationType(InterfaceType t);
 
         #endregion

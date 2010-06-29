@@ -10,15 +10,28 @@ namespace Kistl.DalProvider.EF.Tests
     using Kistl.API.Configuration;
     using Kistl.App.Base;
     using Kistl.App.Projekte;
+    using Kistl.DalProvider.EF.Mocks;
     using Kistl.Server;
 
     using NUnit.Framework;
-    using Kistl.DalProvider.EF.Mocks;
 
     [SetUpFixture]
     public class SetUpFixture
         : Kistl.API.AbstractConsumerTests.DatabaseResetup
     {
+
+        protected override void SetupBuilder(ContainerBuilder builder)
+        {
+            base.SetupBuilder(builder);
+            builder.RegisterModule(new Kistl.API.ApiModule());
+            builder.RegisterModule(new Kistl.API.Server.ServerApiModule());
+            builder.RegisterModule(new Kistl.Server.ServerModule());
+            builder.RegisterModule(new Kistl.DalProvider.EF.EfProvider());
+            builder.RegisterModule(new Kistl.DalProvider.Memory.MemoryProvider());
+            builder.RegisterModule(new Kistl.Objects.EFModule());
+            builder.RegisterModule(new Kistl.Objects.MemoryModule());
+        }
+
         protected override void SetUp(IContainer container)
         {
             base.SetUp(container);

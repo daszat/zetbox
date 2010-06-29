@@ -8,7 +8,7 @@
     <ProjectGuid>{3760694D-3B35-41D4-B1A3-41BB288AA19F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Kistl.DalProvider.ClientObjects</RootNamespace>
+    <RootNamespace>Kistl.DalProvider.Client</RootNamespace>
     <AssemblyName>Kistl.DalProvider.ClientObjects</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -44,6 +44,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libs\AutoFac 2.1\Autofac.dll</HintPath>
     </Reference>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -58,7 +62,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseClientDataObject_ClientObjects.cs" />
+    <Compile Include="ClientObjects.cs" />
+    <Compile Include="ClientImplementationType.cs" />
+    <Compile Include="ClientProvider.cs" />
+    <Compile Include="KistlContext.cs" />
+    <Compile Include="LinqToKistl\ConstantEvaluator.cs" />
+    <Compile Include="LinqToKistl\KistlContextProvider.cs" />
+    <Compile Include="LinqToKistl\KistlContextQuery.cs" />
+    <Compile Include="LinqToKistl\QueryTranslator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

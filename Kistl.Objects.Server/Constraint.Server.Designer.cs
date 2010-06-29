@@ -457,7 +457,7 @@ namespace Kistl.App.Base
                 // for the benefit of down-stream templates
                 var __result = _ExportGuid;
                 if (!_isExportGuidSet) {
-                    var __p = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("8da6d02c-9d9e-4db8-91ee-24a3fd1c74e1"));
+                    var __p = FrozenContext.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("8da6d02c-9d9e-4db8-91ee-24a3fd1c74e1"));
                     if (__p != null) {
                         _isExportGuidSet = true;
                         __result = this._ExportGuid = (Guid)__p.DefaultValue.GetDefaultValue();
@@ -620,6 +620,34 @@ namespace Kistl.App.Base
 			this._fk_CreatedBy = otherImpl._fk_CreatedBy;
 		}
 
+		public override void ReloadReferences()
+		{
+			// Do not reload references if the current object has been deleted.
+			// TODO: enable when MemoryContext uses MemoryDataObjects
+			//if (this.ObjectState == DataObjectState.Deleted) return;
+			// fix direct object references
+
+			if (_fk_guid_ChangedBy.HasValue)
+				ChangedBy__Implementation__ = (Kistl.App.Base.Identity__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.Identity>(_fk_guid_ChangedBy.Value);
+			else if (_fk_ChangedBy.HasValue)
+				ChangedBy__Implementation__ = (Kistl.App.Base.Identity__Implementation__)Context.Find<Kistl.App.Base.Identity>(_fk_ChangedBy.Value);
+			else
+				ChangedBy__Implementation__ = null;
+
+			if (_fk_guid_ConstrainedProperty.HasValue)
+				ConstrainedProperty__Implementation__ = (Kistl.App.Base.Property__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.Property>(_fk_guid_ConstrainedProperty.Value);
+			else if (_fk_ConstrainedProperty.HasValue)
+				ConstrainedProperty__Implementation__ = (Kistl.App.Base.Property__Implementation__)Context.Find<Kistl.App.Base.Property>(_fk_ConstrainedProperty.Value);
+			else
+				ConstrainedProperty__Implementation__ = null;
+
+			if (_fk_guid_CreatedBy.HasValue)
+				CreatedBy__Implementation__ = (Kistl.App.Base.Identity__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.Identity>(_fk_guid_CreatedBy.Value);
+			else if (_fk_CreatedBy.HasValue)
+				CreatedBy__Implementation__ = (Kistl.App.Base.Identity__Implementation__)Context.Find<Kistl.App.Base.Identity>(_fk_CreatedBy.Value);
+			else
+				CreatedBy__Implementation__ = null;
+		}
         // tail template
    		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
@@ -753,34 +781,6 @@ namespace Kistl.App.Base
 		}
 	
 
-		public override void ReloadReferences()
-		{
-			// Do not reload references if the current object has been deleted.
-			// TODO: enable when MemoryContext uses MemoryDataObjects
-			//if (this.ObjectState == DataObjectState.Deleted) return;
-			// fix direct object references
-
-			if (_fk_guid_ChangedBy.HasValue)
-				ChangedBy__Implementation__ = (Kistl.App.Base.Identity__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.Identity>(_fk_guid_ChangedBy.Value);
-			else if (_fk_ChangedBy.HasValue)
-				ChangedBy__Implementation__ = (Kistl.App.Base.Identity__Implementation__)Context.Find<Kistl.App.Base.Identity>(_fk_ChangedBy.Value);
-			else
-				ChangedBy__Implementation__ = null;
-
-			if (_fk_guid_ConstrainedProperty.HasValue)
-				ConstrainedProperty__Implementation__ = (Kistl.App.Base.Property__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.Property>(_fk_guid_ConstrainedProperty.Value);
-			else if (_fk_ConstrainedProperty.HasValue)
-				ConstrainedProperty__Implementation__ = (Kistl.App.Base.Property__Implementation__)Context.Find<Kistl.App.Base.Property>(_fk_ConstrainedProperty.Value);
-			else
-				ConstrainedProperty__Implementation__ = null;
-
-			if (_fk_guid_CreatedBy.HasValue)
-				CreatedBy__Implementation__ = (Kistl.App.Base.Identity__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.Identity>(_fk_guid_CreatedBy.Value);
-			else if (_fk_CreatedBy.HasValue)
-				CreatedBy__Implementation__ = (Kistl.App.Base.Identity__Implementation__)Context.Find<Kistl.App.Base.Identity>(_fk_CreatedBy.Value);
-			else
-				CreatedBy__Implementation__ = null;
-		}
 #region Serializer
 
 

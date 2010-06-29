@@ -451,6 +451,22 @@ namespace Kistl.App.Base
 			this._fk_ReferencedObjectClass = otherImpl._fk_ReferencedObjectClass;
 		}
 
+		public override void ReloadReferences()
+		{
+			// Do not reload references if the current object has been deleted.
+			// TODO: enable when MemoryContext uses MemoryDataObjects
+			//if (this.ObjectState == DataObjectState.Deleted) return;
+			base.ReloadReferences();
+			
+			// fix direct object references
+
+			if (_fk_guid_ReferencedObjectClass.HasValue)
+				ReferencedObjectClass__Implementation__ = (Kistl.App.Base.ObjectClass__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.ObjectClass>(_fk_guid_ReferencedObjectClass.Value);
+			else if (_fk_ReferencedObjectClass.HasValue)
+				ReferencedObjectClass__Implementation__ = (Kistl.App.Base.ObjectClass__Implementation__)Context.Find<Kistl.App.Base.ObjectClass>(_fk_ReferencedObjectClass.Value);
+			else
+				ReferencedObjectClass__Implementation__ = null;
+		}
         // tail template
    		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
@@ -574,22 +590,6 @@ namespace Kistl.App.Base
 		}
 	
 
-		public override void ReloadReferences()
-		{
-			// Do not reload references if the current object has been deleted.
-			// TODO: enable when MemoryContext uses MemoryDataObjects
-			//if (this.ObjectState == DataObjectState.Deleted) return;
-			base.ReloadReferences();
-			
-			// fix direct object references
-
-			if (_fk_guid_ReferencedObjectClass.HasValue)
-				ReferencedObjectClass__Implementation__ = (Kistl.App.Base.ObjectClass__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.ObjectClass>(_fk_guid_ReferencedObjectClass.Value);
-			else if (_fk_ReferencedObjectClass.HasValue)
-				ReferencedObjectClass__Implementation__ = (Kistl.App.Base.ObjectClass__Implementation__)Context.Find<Kistl.App.Base.ObjectClass>(_fk_ReferencedObjectClass.Value);
-			else
-				ReferencedObjectClass__Implementation__ = null;
-		}
 #region Serializer
 
 

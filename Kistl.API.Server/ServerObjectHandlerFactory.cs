@@ -44,8 +44,8 @@ namespace Kistl.API.Server
             ImplementationType bType,
             RelationEndRole endRole)
         {
-            if (aType == null) { throw new ArgumentNullException("aType"); }
-            if (bType == null) { throw new ArgumentNullException("bType"); }
+            if (Object.ReferenceEquals(aType, null)) { throw new ArgumentNullException("aType"); }
+            if (Object.ReferenceEquals(bType, null)) { throw new ArgumentNullException("bType"); }
             try
             {
                 // dynamically translate generic types into provider-known types

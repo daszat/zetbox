@@ -278,6 +278,29 @@ namespace Kistl.App.Base
 			this._fk_IsValidInvocation = otherImpl._fk_IsValidInvocation;
 		}
 
+		public override void ReloadReferences()
+		{
+			// Do not reload references if the current object has been deleted.
+			// TODO: enable when MemoryContext uses MemoryDataObjects
+			//if (this.ObjectState == DataObjectState.Deleted) return;
+			base.ReloadReferences();
+			
+			// fix direct object references
+
+			if (_fk_guid_GetErrorTextInvocation.HasValue)
+				GetErrorTextInvocation__Implementation__ = (Kistl.App.Base.ConstraintInvocation__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.ConstraintInvocation>(_fk_guid_GetErrorTextInvocation.Value);
+			else if (_fk_GetErrorTextInvocation.HasValue)
+				GetErrorTextInvocation__Implementation__ = (Kistl.App.Base.ConstraintInvocation__Implementation__)Context.Find<Kistl.App.Base.ConstraintInvocation>(_fk_GetErrorTextInvocation.Value);
+			else
+				GetErrorTextInvocation__Implementation__ = null;
+
+			if (_fk_guid_IsValidInvocation.HasValue)
+				IsValidInvocation__Implementation__ = (Kistl.App.Base.ConstraintInvocation__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.ConstraintInvocation>(_fk_guid_IsValidInvocation.Value);
+			else if (_fk_IsValidInvocation.HasValue)
+				IsValidInvocation__Implementation__ = (Kistl.App.Base.ConstraintInvocation__Implementation__)Context.Find<Kistl.App.Base.ConstraintInvocation>(_fk_IsValidInvocation.Value);
+			else
+				IsValidInvocation__Implementation__ = null;
+		}
         // tail template
    		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
@@ -368,29 +391,6 @@ namespace Kistl.App.Base
 		}
 	
 
-		public override void ReloadReferences()
-		{
-			// Do not reload references if the current object has been deleted.
-			// TODO: enable when MemoryContext uses MemoryDataObjects
-			//if (this.ObjectState == DataObjectState.Deleted) return;
-			base.ReloadReferences();
-			
-			// fix direct object references
-
-			if (_fk_guid_GetErrorTextInvocation.HasValue)
-				GetErrorTextInvocation__Implementation__ = (Kistl.App.Base.ConstraintInvocation__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.ConstraintInvocation>(_fk_guid_GetErrorTextInvocation.Value);
-			else if (_fk_GetErrorTextInvocation.HasValue)
-				GetErrorTextInvocation__Implementation__ = (Kistl.App.Base.ConstraintInvocation__Implementation__)Context.Find<Kistl.App.Base.ConstraintInvocation>(_fk_GetErrorTextInvocation.Value);
-			else
-				GetErrorTextInvocation__Implementation__ = null;
-
-			if (_fk_guid_IsValidInvocation.HasValue)
-				IsValidInvocation__Implementation__ = (Kistl.App.Base.ConstraintInvocation__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.ConstraintInvocation>(_fk_guid_IsValidInvocation.Value);
-			else if (_fk_IsValidInvocation.HasValue)
-				IsValidInvocation__Implementation__ = (Kistl.App.Base.ConstraintInvocation__Implementation__)Context.Find<Kistl.App.Base.ConstraintInvocation>(_fk_IsValidInvocation.Value);
-			else
-				IsValidInvocation__Implementation__ = null;
-		}
 #region Serializer
 
 

@@ -57,11 +57,20 @@
       <HintPath>$(KistlAPIPath)\Common\Kistl.API.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Autofac, Version=2.1.14.854, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(KistlAPIPath)\Common\Autofac.dll</HintPath>
+    </Reference>
     <ProjectReference Include="..\Kistl.Objects\Kistl.Objects.csproj">
       <Project>{0C9E6E69-309F-46F7-A936-D5762229DEB9}</Project>
       <Name>Kistl.Objects</Name>
       <Private>True</Private>
     </ProjectReference>
+    <Reference Include="TempAppHelpers">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(KistlAPIPath)\Common\TempAppHelpers.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="System.Data.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -167,6 +176,7 @@
     <Compile Include="CollectionEntries.Memory.Designer.cs" />
     <Compile Include="TestPhoneCompoundObject.Memory.Designer.cs" />
     <Compile Include="AssemblyInfo.Memory.cs" />
+    <Compile Include="Module.Memory.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Kistl.Objects.snk" />

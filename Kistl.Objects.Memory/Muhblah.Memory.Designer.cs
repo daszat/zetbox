@@ -233,7 +233,21 @@ namespace Kistl.App.Test
             }
         }
         
+        // normalize namespace for Templates
+        private Kistl.App.Test.TestCustomObject TestCustomObjects_Nav__Implementation__
+        {
+			get
+			{
+				return TestCustomObjects_Nav;
+			}
+			set
+			{
+				TestCustomObjects_Nav = value;
+			}
+		}
+        
         private int? _fk_TestCustomObjects_Nav;
+        private Guid? _fk_guid_TestCustomObjects_Nav = null;
 		// END Kistl.DalProvider.Memory.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate for TestCustomObjects_Nav
 		public static event PropertyGetterHandler<Kistl.App.Test.Muhblah, Kistl.App.Test.TestCustomObject> OnTestCustomObjects_Nav_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Test.Muhblah, Kistl.App.Test.TestCustomObject> OnTestCustomObjects_Nav_PreSetter;
@@ -323,7 +337,21 @@ namespace Kistl.App.Test
             }
         }
         
+        // normalize namespace for Templates
+        private Kistl.App.Test.TestCustomObject TestCustomObjects_One_Nav__Implementation__
+        {
+			get
+			{
+				return TestCustomObjects_One_Nav;
+			}
+			set
+			{
+				TestCustomObjects_One_Nav = value;
+			}
+		}
+        
         private int? _fk_TestCustomObjects_One_Nav;
+        private Guid? _fk_guid_TestCustomObjects_One_Nav = null;
 		// END Kistl.DalProvider.Memory.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate for TestCustomObjects_One_Nav
 		public static event PropertyGetterHandler<Kistl.App.Test.Muhblah, Kistl.App.Test.TestCustomObject> OnTestCustomObjects_One_Nav_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Test.Muhblah, Kistl.App.Test.TestCustomObject> OnTestCustomObjects_One_Nav_PreSetter;
@@ -501,6 +529,27 @@ namespace Kistl.App.Test
             base.AttachToContext(ctx);
 		}
 
+		public override void ReloadReferences()
+		{
+			// Do not reload references if the current object has been deleted.
+			// TODO: enable when MemoryContext uses MemoryDataObjects
+			//if (this.ObjectState == DataObjectState.Deleted) return;
+			// fix direct object references
+
+			if (_fk_guid_TestCustomObjects_Nav.HasValue)
+				TestCustomObjects_Nav__Implementation__ = (Kistl.App.Test.TestCustomObject__Implementation__Memory)Context.FindPersistenceObject<Kistl.App.Test.TestCustomObject>(_fk_guid_TestCustomObjects_Nav.Value);
+			else if (_fk_TestCustomObjects_Nav.HasValue)
+				TestCustomObjects_Nav__Implementation__ = (Kistl.App.Test.TestCustomObject__Implementation__Memory)Context.Find<Kistl.App.Test.TestCustomObject>(_fk_TestCustomObjects_Nav.Value);
+			else
+				TestCustomObjects_Nav__Implementation__ = null;
+
+			if (_fk_guid_TestCustomObjects_One_Nav.HasValue)
+				TestCustomObjects_One_Nav__Implementation__ = (Kistl.App.Test.TestCustomObject__Implementation__Memory)Context.FindPersistenceObject<Kistl.App.Test.TestCustomObject>(_fk_guid_TestCustomObjects_One_Nav.Value);
+			else if (_fk_TestCustomObjects_One_Nav.HasValue)
+				TestCustomObjects_One_Nav__Implementation__ = (Kistl.App.Test.TestCustomObject__Implementation__Memory)Context.Find<Kistl.App.Test.TestCustomObject>(_fk_TestCustomObjects_One_Nav.Value);
+			else
+				TestCustomObjects_One_Nav__Implementation__ = null;
+		}
         // tail template
    		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
@@ -701,8 +750,8 @@ namespace Kistl.App.Test
             
             base.ToStream(xml);
             XmlStreamer.ToStream(this._TestBool, xml, "TestBool", "Kistl.App.Test");
-            XmlStreamer.ToStream(this._fk_TestCustomObjects_Nav, xml, "TestCustomObjects_Nav", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(this._fk_TestCustomObjects_One_Nav, xml, "TestCustomObjects_One_Nav", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._fk_TestCustomObjects_Nav, xml, "TestCustomObjects_Nav", "Kistl.App.Test");
+            XmlStreamer.ToStream(this._fk_TestCustomObjects_One_Nav, xml, "TestCustomObjects_One_Nav", "Kistl.App.Test");
             XmlStreamer.ToStream(this._TestDateTime, xml, "TestDateTime", "Kistl.App.Test");
             XmlStreamer.ToStream((int?)this.TestEnum, xml, "TestEnum", "Kistl.App.Test");
             XmlStreamer.ToStream(this._TestString, xml, "TestString", "Kistl.App.Test");
@@ -713,8 +762,8 @@ namespace Kistl.App.Test
             
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._TestBool, xml, "TestBool", "Kistl.App.Test");
-            XmlStreamer.FromStream(ref this._fk_TestCustomObjects_Nav, xml, "TestCustomObjects_Nav", "http://dasz.at/Kistl");
-            XmlStreamer.FromStream(ref this._fk_TestCustomObjects_One_Nav, xml, "TestCustomObjects_One_Nav", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_TestCustomObjects_Nav, xml, "TestCustomObjects_Nav", "Kistl.App.Test");
+            XmlStreamer.FromStream(ref this._fk_TestCustomObjects_One_Nav, xml, "TestCustomObjects_One_Nav", "Kistl.App.Test");
             XmlStreamer.FromStream(ref this._TestDateTime, xml, "TestDateTime", "Kistl.App.Test");
             XmlStreamer.FromStreamConverter(v => ((Muhblah)this).TestEnum = (Kistl.App.Test.TestEnum)v, xml, "TestEnum", "Kistl.App.Test");
             XmlStreamer.FromStream(ref this._TestString, xml, "TestString", "Kistl.App.Test");

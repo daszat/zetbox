@@ -65,7 +65,7 @@ namespace Kistl.API.Client
             }
         }
 
-        internal void SetUnmodified()
+        protected void SetUnmodified()
         {
             var oldValue = this._ObjectState;
             NotifyPropertyChanging("ObjectState", oldValue, DataObjectState.Unmodified);
@@ -73,7 +73,7 @@ namespace Kistl.API.Client
             NotifyPropertyChanged("ObjectState", oldValue, DataObjectState.Unmodified);
         }
 
-        internal void SetDeleted()
+        protected void SetDeleted()
         {
             var oldValue = this._ObjectState;
             NotifyPropertyChanging("ObjectState", oldValue, DataObjectState.Deleted);
@@ -155,6 +155,7 @@ namespace Kistl.API.Client
             : base(lazyCtx)
         {
         }
+
         /// <summary>
         /// Always returns <value>true</value>. CollectionEntries are checked via their navigators or relations.
         /// </summary>

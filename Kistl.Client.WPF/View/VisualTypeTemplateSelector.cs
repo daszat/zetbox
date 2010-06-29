@@ -23,20 +23,20 @@ namespace Kistl.Client.WPF.View
     public class VisualTypeTemplateSelector
         : DataTemplateSelector
     {
-        /// <summary>
-        /// Injected at startup
-        /// </summary>
-        public static ITypeTransformations TypeTrans { get; set; }
+        public delegate VisualTypeTemplateSelector Factory(object requestedKind);
 
-        private static DataTemplate SelectTemplate(ViewModel mdl, string controlKindName)
+        private readonly IReadOnlyKistlContext _frozenCtx;
+        private readonly object _requestedKind;
+
+        private static DataTemplate SelectTemplate(ViewModel mdl, string controlKindName, IReadOnlyKistlContext frozenCtx)
         {
-            var ck = FrozenContext.Single.GetQuery<ControlKind>().SingleOrDefault(c => c.Name == controlKindName);
-            return SelectTemplate(mdl, ck);
+            var ck = frozenCtx.GetQuery<ControlKind>().SingleOrDefault(c => c.Name == controlKindName);
+            return SelectTemplate(mdl, ck, frozenCtx);
         }
 
-        private static DataTemplate SelectTemplate(ViewModel mdl, ControlKind controlKind)
+        private static DataTemplate SelectTemplate(ViewModel mdl, ControlKind controlKind, IReadOnlyKistlContext frozenCtx)
         {
-            ViewModelDescriptor pmd = mdl.GetType().ToRef(FrozenContext.Single).GetViewModelDescriptor();
+            ViewModelDescriptor pmd = mdl.GetType().ToRef(frozenCtx).GetViewModelDescriptor();
             if (pmd == null)
             {
                 Logging.Log.ErrorFormat("No matching ViewModelDescriptor found for {0}", mdl.GetType());
@@ -46,9 +46,9 @@ namespace Kistl.Client.WPF.View
             return CreateTemplate(pmd.GetViewDescriptor(Toolkit.WPF, controlKind));
         }
 
-        private static DataTemplate SelectDefaultTemplate(ViewModel mdl)
+        private static DataTemplate SelectDefaultTemplate(ViewModel mdl, IReadOnlyKistlContext frozenCtx)
         {
-            ViewModelDescriptor pmd = mdl.GetType().ToRef(FrozenContext.Single).GetViewModelDescriptor();
+            ViewModelDescriptor pmd = mdl.GetType().ToRef(frozenCtx).GetViewModelDescriptor();
             if (pmd == null)
             {
                 Logging.Log.ErrorFormat("No matching ViewModelDescriptor found for {0}", mdl.GetType());
@@ -89,17 +89,10 @@ namespace Kistl.Client.WPF.View
         /// <summary>
         /// Initializes a new instance of the VisualTypeTemplateSelector class.
         /// </summary>
-        public VisualTypeTemplateSelector()
+        public VisualTypeTemplateSelector(object requestedKind, IReadOnlyKistlContext frozenCtx)
         {
-        }
-
-        /// <summary>
-        /// Gets or sets the kind of view to use. To select the default view, leave this property at its default null value.
-        /// </summary>
-        public object RequestedKind
-        {
-            get;
-            set;
+            this._requestedKind = requestedKind;
+            this._frozenCtx = frozenCtx;
         }
 
         /// <inheritdoc/>
@@ -110,7 +103,7 @@ namespace Kistl.Client.WPF.View
                 return GetNullTemplate(container);
             }
 
-            var rk = RequestedKind ?? GetRequestedKind(container);
+            var rk = _requestedKind ?? GetRequestedKind(container);
 
             var model = item as ViewModel;
             DataTemplate result = null;
@@ -119,17 +112,17 @@ namespace Kistl.Client.WPF.View
                 if (rk is ControlKind)
                 {
                     Logging.Log.DebugFormat("Searching '{0}' Template for {1}", rk.GetType().FullName, model.GetType().FullName);
-                    result = SelectTemplate(model, rk as ControlKind);
+                    result = SelectTemplate(model, rk as ControlKind, _frozenCtx);
                 }
                 else if (rk is String)
                 {
                     Logging.Log.DebugFormat("Searching '{0}' Template for {1}", rk, model.GetType().FullName);
-                    result = SelectTemplate(model, rk as String);
+                    result = SelectTemplate(model, rk as String, _frozenCtx);
                 }
                 else if (rk == null)
                 {
                     Logging.Log.DebugFormat("Searching default Template for {0}", model.GetType().FullName);
-                    result = SelectDefaultTemplate(model);
+                    result = SelectDefaultTemplate(model, _frozenCtx);
                 }
                 else
                 {

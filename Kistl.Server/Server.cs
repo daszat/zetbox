@@ -107,7 +107,7 @@ namespace Kistl.Server
             using (Log.InfoTraceMethodCallFormat("withRepair=[{0}]", withRepair))
             using (var subContainer = container.BeginLifetimeScope())
             {
-                IKistlContext ctx = subContainer.Resolve<MemoryContext>();
+                IKistlContext ctx = subContainer.Resolve<BaseMemoryContext>();
                 KistlConfig cfg = subContainer.Resolve<KistlConfig>();
                 ISchemaProvider schemaProvider = subContainer.Resolve<SchemaProviderFactory>().Invoke(cfg.Server.ConnectionString);
                 SchemaManagement.SchemaManager.LoadSavedSchemaInto(schemaProvider, ctx);
@@ -122,7 +122,7 @@ namespace Kistl.Server
             using (Log.InfoTraceMethodCallFormat("file=[{0}],withRepair=[{1}]", file, withRepair))
             using (var subContainer = container.BeginLifetimeScope())
             {
-                IKistlContext ctx = subContainer.Resolve<MemoryContext>();
+                IKistlContext ctx = subContainer.Resolve<BaseMemoryContext>();
                 Importer.LoadFromXml(ctx, file);
                 var mgr = subContainer.Resolve<SchemaManagement.SchemaManager>(new NamedParameter("newSchema", ctx));
                 mgr.CheckSchema(withRepair);
@@ -134,7 +134,7 @@ namespace Kistl.Server
             using (Log.InfoTraceMethodCall())
             using (var subContainer = container.BeginLifetimeScope())
             {
-                IKistlContext ctx = subContainer.Resolve<MemoryContext>();
+                IKistlContext ctx = subContainer.Resolve<BaseMemoryContext>();
                 IKistlContext dbctx = subContainer.Resolve<IKistlContext>();
 
                 // load database contents into local cache
@@ -157,7 +157,7 @@ namespace Kistl.Server
             using (Log.InfoTraceMethodCallFormat("file=[{0}]", file))
             using (var subContainer = container.BeginLifetimeScope())
             {
-                IKistlContext ctx = subContainer.Resolve<MemoryContext>();
+                IKistlContext ctx = subContainer.Resolve<BaseMemoryContext>();
                 Importer.LoadFromXml(ctx, file);
 
                 var mgr = subContainer.Resolve<SchemaManagement.SchemaManager>(new NamedParameter("newSchema", ctx));

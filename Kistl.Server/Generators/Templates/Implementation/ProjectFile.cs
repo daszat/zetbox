@@ -25,7 +25,12 @@ namespace Kistl.Server.Generators.Templates.Implementation
             this.WriteLine(@"      <Private>True</Private>");
             this.WriteLine(@"    </ProjectReference>");
 
+            // TempAppHelpers
+            this.WriteLine(@"    <Reference Include=""TempAppHelpers"">");
+            this.WriteLine(@"      <SpecificVersion>False</SpecificVersion>");
+            this.WriteLine(@"      <HintPath>$(KistlAPIPath)\Common\TempAppHelpers.dll</HintPath>");
+            this.WriteLine(@"      <Private>False</Private>");
+            this.WriteLine(@"    </Reference>");
         }
-
     }
 }

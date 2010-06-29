@@ -8,6 +8,7 @@ namespace Kistl.DalProvider.Memory.Generator.Implementation.CollectionEntries
 
     using Kistl.API;
     using Kistl.App.Base;
+    using Kistl.App.Extensions;
     using Kistl.Server.Generators.Extensions;
     using Templates = Kistl.Server.Generators.Templates;
 
@@ -34,7 +35,9 @@ namespace Kistl.DalProvider.Memory.Generator.Implementation.CollectionEntries
                 relEnd.Type.GetDataTypeString(), rel, endRole,
                 false,
                 rel.NeedsPositionStorage(endRole), endRole.ToString() + Kistl.API.Helper.PositionSuffix,
-                false);
+                rel.A.Type.ImplementsIExportable() && rel.B.Type.ImplementsIExportable(),
+                relEnd.Type.Module.Namespace,
+                false, true);
         }
 
         protected override void ApplyIndexPropertyTemplate(Relation rel, RelationEndRole endRole)

@@ -155,7 +155,21 @@ namespace Kistl.App.TimeRecords
             }
         }
         
+        // normalize namespace for Templates
+        private Kistl.App.Projekte.Mitarbeiter Mitarbeiter__Implementation__
+        {
+			get
+			{
+				return Mitarbeiter;
+			}
+			set
+			{
+				Mitarbeiter = value;
+			}
+		}
+        
         private int? _fk_Mitarbeiter;
+        private Guid? _fk_guid_Mitarbeiter = null;
 		// END Kistl.DalProvider.Memory.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate for Mitarbeiter
 		public static event PropertyGetterHandler<Kistl.App.TimeRecords.WorkEffort, Kistl.App.Projekte.Mitarbeiter> OnMitarbeiter_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.TimeRecords.WorkEffort, Kistl.App.Projekte.Mitarbeiter> OnMitarbeiter_PreSetter;
@@ -332,6 +346,20 @@ namespace Kistl.App.TimeRecords
             base.AttachToContext(ctx);
 		}
 
+		public override void ReloadReferences()
+		{
+			// Do not reload references if the current object has been deleted.
+			// TODO: enable when MemoryContext uses MemoryDataObjects
+			//if (this.ObjectState == DataObjectState.Deleted) return;
+			// fix direct object references
+
+			if (_fk_guid_Mitarbeiter.HasValue)
+				Mitarbeiter__Implementation__ = (Kistl.App.Projekte.Mitarbeiter__Implementation__Memory)Context.FindPersistenceObject<Kistl.App.Projekte.Mitarbeiter>(_fk_guid_Mitarbeiter.Value);
+			else if (_fk_Mitarbeiter.HasValue)
+				Mitarbeiter__Implementation__ = (Kistl.App.Projekte.Mitarbeiter__Implementation__Memory)Context.Find<Kistl.App.Projekte.Mitarbeiter>(_fk_Mitarbeiter.Value);
+			else
+				Mitarbeiter__Implementation__ = null;
+		}
         // tail template
    		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
@@ -495,7 +523,7 @@ namespace Kistl.App.TimeRecords
             
             base.ToStream(xml);
             XmlStreamer.ToStream(this._From, xml, "From", "Kistl.App.TimeRecords");
-            XmlStreamer.ToStream(this._fk_Mitarbeiter, xml, "Mitarbeiter", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._fk_Mitarbeiter, xml, "Mitarbeiter", "Kistl.App.TimeRecords");
             XmlStreamer.ToStream(this._Name, xml, "Name", "Kistl.App.TimeRecords");
             XmlStreamer.ToStream(this._Notes, xml, "Notes", "Kistl.App.TimeRecords");
             XmlStreamer.ToStream(this._Thru, xml, "Thru", "Kistl.App.TimeRecords");
@@ -506,7 +534,7 @@ namespace Kistl.App.TimeRecords
             
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._From, xml, "From", "Kistl.App.TimeRecords");
-            XmlStreamer.FromStream(ref this._fk_Mitarbeiter, xml, "Mitarbeiter", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_Mitarbeiter, xml, "Mitarbeiter", "Kistl.App.TimeRecords");
             XmlStreamer.FromStream(ref this._Name, xml, "Name", "Kistl.App.TimeRecords");
             XmlStreamer.FromStream(ref this._Notes, xml, "Notes", "Kistl.App.TimeRecords");
             XmlStreamer.FromStream(ref this._Thru, xml, "Thru", "Kistl.App.TimeRecords");

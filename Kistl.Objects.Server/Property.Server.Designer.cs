@@ -612,7 +612,7 @@ namespace Kistl.App.Base
                 // for the benefit of down-stream templates
                 var __result = _ExportGuid;
                 if (!_isExportGuidSet) {
-                    var __p = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("ca0a099d-3f4c-4604-8303-d751e57041bb"));
+                    var __p = FrozenContext.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("ca0a099d-3f4c-4604-8303-d751e57041bb"));
                     if (__p != null) {
                         _isExportGuidSet = true;
                         __result = this._ExportGuid = (Guid)__p.DefaultValue.GetDefaultValue();
@@ -1224,6 +1224,62 @@ namespace Kistl.App.Base
 			this._fk_ValueModelDescriptor = otherImpl._fk_ValueModelDescriptor;
 		}
 
+		public override void ReloadReferences()
+		{
+			// Do not reload references if the current object has been deleted.
+			// TODO: enable when MemoryContext uses MemoryDataObjects
+			//if (this.ObjectState == DataObjectState.Deleted) return;
+			// fix direct object references
+
+			if (_fk_guid_ChangedBy.HasValue)
+				ChangedBy__Implementation__ = (Kistl.App.Base.Identity__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.Identity>(_fk_guid_ChangedBy.Value);
+			else if (_fk_ChangedBy.HasValue)
+				ChangedBy__Implementation__ = (Kistl.App.Base.Identity__Implementation__)Context.Find<Kistl.App.Base.Identity>(_fk_ChangedBy.Value);
+			else
+				ChangedBy__Implementation__ = null;
+
+			if (_fk_guid_CreatedBy.HasValue)
+				CreatedBy__Implementation__ = (Kistl.App.Base.Identity__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.Identity>(_fk_guid_CreatedBy.Value);
+			else if (_fk_CreatedBy.HasValue)
+				CreatedBy__Implementation__ = (Kistl.App.Base.Identity__Implementation__)Context.Find<Kistl.App.Base.Identity>(_fk_CreatedBy.Value);
+			else
+				CreatedBy__Implementation__ = null;
+
+			if (_fk_guid_DefaultValue.HasValue)
+				DefaultValue__Implementation__ = (Kistl.App.Base.DefaultPropertyValue__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.DefaultPropertyValue>(_fk_guid_DefaultValue.Value);
+			else if (_fk_DefaultValue.HasValue)
+				DefaultValue__Implementation__ = (Kistl.App.Base.DefaultPropertyValue__Implementation__)Context.Find<Kistl.App.Base.DefaultPropertyValue>(_fk_DefaultValue.Value);
+			else
+				DefaultValue__Implementation__ = null;
+
+			if (_fk_guid_FilterConfiguration.HasValue)
+				FilterConfiguration__Implementation__ = (Kistl.App.GUI.FilterConfiguration__Implementation__)Context.FindPersistenceObject<Kistl.App.GUI.FilterConfiguration>(_fk_guid_FilterConfiguration.Value);
+			else if (_fk_FilterConfiguration.HasValue)
+				FilterConfiguration__Implementation__ = (Kistl.App.GUI.FilterConfiguration__Implementation__)Context.Find<Kistl.App.GUI.FilterConfiguration>(_fk_FilterConfiguration.Value);
+			else
+				FilterConfiguration__Implementation__ = null;
+
+			if (_fk_guid_Module.HasValue)
+				Module__Implementation__ = (Kistl.App.Base.Module__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.Module>(_fk_guid_Module.Value);
+			else if (_fk_Module.HasValue)
+				Module__Implementation__ = (Kistl.App.Base.Module__Implementation__)Context.Find<Kistl.App.Base.Module>(_fk_Module.Value);
+			else
+				Module__Implementation__ = null;
+
+			if (_fk_guid_ObjectClass.HasValue)
+				ObjectClass__Implementation__ = (Kistl.App.Base.DataType__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.DataType>(_fk_guid_ObjectClass.Value);
+			else if (_fk_ObjectClass.HasValue)
+				ObjectClass__Implementation__ = (Kistl.App.Base.DataType__Implementation__)Context.Find<Kistl.App.Base.DataType>(_fk_ObjectClass.Value);
+			else
+				ObjectClass__Implementation__ = null;
+
+			if (_fk_guid_ValueModelDescriptor.HasValue)
+				ValueModelDescriptor__Implementation__ = (Kistl.App.GUI.ViewModelDescriptor__Implementation__)Context.FindPersistenceObject<Kistl.App.GUI.ViewModelDescriptor>(_fk_guid_ValueModelDescriptor.Value);
+			else if (_fk_ValueModelDescriptor.HasValue)
+				ValueModelDescriptor__Implementation__ = (Kistl.App.GUI.ViewModelDescriptor__Implementation__)Context.Find<Kistl.App.GUI.ViewModelDescriptor>(_fk_ValueModelDescriptor.Value);
+			else
+				ValueModelDescriptor__Implementation__ = null;
+		}
         // tail template
    		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
@@ -1434,62 +1490,6 @@ namespace Kistl.App.Base
 		}
 	
 
-		public override void ReloadReferences()
-		{
-			// Do not reload references if the current object has been deleted.
-			// TODO: enable when MemoryContext uses MemoryDataObjects
-			//if (this.ObjectState == DataObjectState.Deleted) return;
-			// fix direct object references
-
-			if (_fk_guid_ChangedBy.HasValue)
-				ChangedBy__Implementation__ = (Kistl.App.Base.Identity__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.Identity>(_fk_guid_ChangedBy.Value);
-			else if (_fk_ChangedBy.HasValue)
-				ChangedBy__Implementation__ = (Kistl.App.Base.Identity__Implementation__)Context.Find<Kistl.App.Base.Identity>(_fk_ChangedBy.Value);
-			else
-				ChangedBy__Implementation__ = null;
-
-			if (_fk_guid_CreatedBy.HasValue)
-				CreatedBy__Implementation__ = (Kistl.App.Base.Identity__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.Identity>(_fk_guid_CreatedBy.Value);
-			else if (_fk_CreatedBy.HasValue)
-				CreatedBy__Implementation__ = (Kistl.App.Base.Identity__Implementation__)Context.Find<Kistl.App.Base.Identity>(_fk_CreatedBy.Value);
-			else
-				CreatedBy__Implementation__ = null;
-
-			if (_fk_guid_DefaultValue.HasValue)
-				DefaultValue__Implementation__ = (Kistl.App.Base.DefaultPropertyValue__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.DefaultPropertyValue>(_fk_guid_DefaultValue.Value);
-			else if (_fk_DefaultValue.HasValue)
-				DefaultValue__Implementation__ = (Kistl.App.Base.DefaultPropertyValue__Implementation__)Context.Find<Kistl.App.Base.DefaultPropertyValue>(_fk_DefaultValue.Value);
-			else
-				DefaultValue__Implementation__ = null;
-
-			if (_fk_guid_FilterConfiguration.HasValue)
-				FilterConfiguration__Implementation__ = (Kistl.App.GUI.FilterConfiguration__Implementation__)Context.FindPersistenceObject<Kistl.App.GUI.FilterConfiguration>(_fk_guid_FilterConfiguration.Value);
-			else if (_fk_FilterConfiguration.HasValue)
-				FilterConfiguration__Implementation__ = (Kistl.App.GUI.FilterConfiguration__Implementation__)Context.Find<Kistl.App.GUI.FilterConfiguration>(_fk_FilterConfiguration.Value);
-			else
-				FilterConfiguration__Implementation__ = null;
-
-			if (_fk_guid_Module.HasValue)
-				Module__Implementation__ = (Kistl.App.Base.Module__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.Module>(_fk_guid_Module.Value);
-			else if (_fk_Module.HasValue)
-				Module__Implementation__ = (Kistl.App.Base.Module__Implementation__)Context.Find<Kistl.App.Base.Module>(_fk_Module.Value);
-			else
-				Module__Implementation__ = null;
-
-			if (_fk_guid_ObjectClass.HasValue)
-				ObjectClass__Implementation__ = (Kistl.App.Base.DataType__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.DataType>(_fk_guid_ObjectClass.Value);
-			else if (_fk_ObjectClass.HasValue)
-				ObjectClass__Implementation__ = (Kistl.App.Base.DataType__Implementation__)Context.Find<Kistl.App.Base.DataType>(_fk_ObjectClass.Value);
-			else
-				ObjectClass__Implementation__ = null;
-
-			if (_fk_guid_ValueModelDescriptor.HasValue)
-				ValueModelDescriptor__Implementation__ = (Kistl.App.GUI.ViewModelDescriptor__Implementation__)Context.FindPersistenceObject<Kistl.App.GUI.ViewModelDescriptor>(_fk_guid_ValueModelDescriptor.Value);
-			else if (_fk_ValueModelDescriptor.HasValue)
-				ValueModelDescriptor__Implementation__ = (Kistl.App.GUI.ViewModelDescriptor__Implementation__)Context.Find<Kistl.App.GUI.ViewModelDescriptor>(_fk_ValueModelDescriptor.Value);
-			else
-				ValueModelDescriptor__Implementation__ = null;
-		}
 #region Serializer
 
 

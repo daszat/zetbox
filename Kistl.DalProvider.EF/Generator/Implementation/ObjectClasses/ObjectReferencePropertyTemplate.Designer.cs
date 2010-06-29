@@ -52,7 +52,7 @@ namespace Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses
 #line 27 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
 string efName = name + Kistl.API.Helper.ImplementationSuffix;
 	string fkBackingName = "_fk_" + name;
-	string fGuidkBackingName = "_fk_guid_" + name;
+	string fkGuidBackingName = "_fk_guid_" + name;
 	string eventName = "On" + name;
 
 
@@ -82,7 +82,7 @@ if (isReloadable)
         {
 
 #line 57 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
-this.WriteObjects("        private Guid? ",  fGuidkBackingName , " = null;\r\n");
+this.WriteObjects("        private Guid? ",  fkGuidBackingName , " = null;\r\n");
 #line 59 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
 }
 		

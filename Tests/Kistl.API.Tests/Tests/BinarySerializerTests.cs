@@ -423,7 +423,7 @@ namespace Kistl.API.Tests
 			public IEnumerable<SerializableType> CreateSerializableTypes()
 			{
 				return new[] {
-					typeTrans.AsInterfaceType(typeof(TestDataObject)).ToSerializableType()
+					iftFactory(typeof(TestDataObject)).ToSerializableType()
 				};
 			}
 
@@ -582,7 +582,7 @@ namespace Kistl.API.Tests
 					o.IntProperty,
 					o.BoolProperty
 				};
-				return Kistl.API.SerializableExpression.FromExpression(list.Expression, typeTrans);
+                return Kistl.API.SerializableExpression.FromExpression(list.Expression, iftFactory);
 			}
 		}
 

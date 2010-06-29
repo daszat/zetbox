@@ -28,7 +28,7 @@ R: Gendarme.Rules.Performance.AvoidUncalledPrivateCodeRule
 # This method is flagged with a ConditionalAttribute
 M: System.Void Kistl.API.BinarySerializer::SerializerTrace(System.String,System.Object[])
 # Helper method which is only called by reflection from AddNewLocalObjects
-M: System.Void Kistl.API.Client.KistlContextProvider::AddNewLocalObjectsGeneric(System.Collections.IList)
+M: System.Void Kistl.DalProvider.Client.KistlContextProvider::AddNewLocalObjectsGeneric(System.Collections.IList)
 # Helper method which is only called by reflection from GetCollectionEntries
 M: System.Collections.Generic.IEnumerable`1<Kistl.API.IRelationCollectionEntry> Kistl.DalProvider.EF.ServerCollectionHandler`4::GetCollectionEntriesInternal(TParent,Kistl.App.Base.Relation,Kistl.API.RelationEndRole)
 # generated code (wpf)
@@ -185,8 +185,6 @@ A: Kistl.Client.WPF
 A: TempAppHelpers
 A: Kistl.DalProvider.ClientObjects
 A: Kistl.DalProvider.EF
-A: Kistl.DalProvider.Frozen
-A: Kistl.DalProvider.Frozen.Generator
 A: Kistl.DalProvider.Memory
 A: Kistl.DalProvider.Memory.Generator
 A: Kistl.Server
@@ -209,8 +207,6 @@ A: Kistl.Client.WPF
 A: TempAppHelpers
 A: Kistl.DalProvider.ClientObjects
 A: Kistl.DalProvider.EF
-A: Kistl.DalProvider.Frozen
-A: Kistl.DalProvider.Frozen.Generator
 A: Kistl.DalProvider.Memory
 A: Kistl.DalProvider.Memory.Generator
 A: Kistl.Server
@@ -231,8 +227,6 @@ A: Kistl.Client.WPF
 A: TempAppHelpers
 A: Kistl.DalProvider.ClientObjects
 A: Kistl.DalProvider.EF
-A: Kistl.DalProvider.Frozen
-A: Kistl.DalProvider.Frozen.Generator
 A: Kistl.DalProvider.Memory
 A: Kistl.DalProvider.Memory.Generator
 A: Kistl.Server
@@ -253,8 +247,6 @@ A: Kistl.Client.WPF
 A: TempAppHelpers
 A: Kistl.DalProvider.ClientObjects
 A: Kistl.DalProvider.EF
-A: Kistl.DalProvider.Frozen
-A: Kistl.DalProvider.Frozen.Generator
 A: Kistl.DalProvider.Memory
 A: Kistl.DalProvider.Memory.Generator
 A: Kistl.Server
@@ -275,8 +267,6 @@ A: Kistl.Client.WPF
 A: TempAppHelpers
 A: Kistl.DalProvider.ClientObjects
 A: Kistl.DalProvider.EF
-A: Kistl.DalProvider.Frozen
-A: Kistl.DalProvider.Frozen.Generator
 A: Kistl.DalProvider.Memory
 A: Kistl.DalProvider.Memory.Generator
 A: Kistl.Server
@@ -297,8 +287,6 @@ A: Kistl.Client.WPF
 A: TempAppHelpers
 A: Kistl.DalProvider.ClientObjects
 A: Kistl.DalProvider.EF
-A: Kistl.DalProvider.Frozen
-A: Kistl.DalProvider.Frozen.Generator
 A: Kistl.DalProvider.Memory
 A: Kistl.DalProvider.Memory.Generator
 A: Kistl.Server
@@ -319,8 +307,6 @@ A: Kistl.Client.WPF
 A: TempAppHelpers
 A: Kistl.DalProvider.ClientObjects
 A: Kistl.DalProvider.EF
-A: Kistl.DalProvider.Frozen
-A: Kistl.DalProvider.Frozen.Generator
 A: Kistl.DalProvider.Memory
 A: Kistl.DalProvider.Memory.Generator
 A: Kistl.Server

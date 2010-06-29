@@ -85,7 +85,7 @@ namespace Kistl.Server.Generators
         }
 
         /// <summary>
-        /// A short string describing the generator for logfiles.
+        /// A short string describing the generator for logfiles and namespaces.
         /// </summary>
         public abstract string Description { get; }
 
@@ -181,13 +181,15 @@ namespace Kistl.Server.Generators
 
         protected virtual IEnumerable<string> Generate_Other(IKistlContext ctx)
         {
-            return new List<string>();
+            return new List<string>()
+            {
+                RunTemplateWithExtension(ctx, "Implementation.Module", "Module", "cs", Description, ExtraSuffix)
+            };
         }
 
         protected virtual string Generate_ProjectFile(IKistlContext ctx, string projectGuid, List<string> generatedFileNames)
         {
             return RunTemplate(ctx, "Implementation.ProjectFile", TargetNameSpace + ".csproj", projectGuid, generatedFileNames.Where(s => !String.IsNullOrEmpty(s)).ToList());
         }
-
     }
 }

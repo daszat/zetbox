@@ -1,14 +1,16 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Kistl.API;
-
-using Autofac;
 
 namespace Kistl.DalProvider.Memory
 {
-    public class AbstractMemoryContextTextFixture : Kistl.API.AbstractConsumerTests.AbstractTestFixture
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+
+    using Autofac;
+    using Kistl.API;
+
+    public class AbstractMemoryContextTextFixture 
+        : Kistl.API.AbstractConsumerTests.AbstractTestFixture
     {
         protected IKistlContext GetMemoryContext()
         {

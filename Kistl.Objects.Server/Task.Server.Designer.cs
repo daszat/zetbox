@@ -671,6 +671,34 @@ namespace Kistl.App.Projekte
 			this._fk_Projekt = otherImpl._fk_Projekt;
 		}
 
+		public override void ReloadReferences()
+		{
+			// Do not reload references if the current object has been deleted.
+			// TODO: enable when MemoryContext uses MemoryDataObjects
+			//if (this.ObjectState == DataObjectState.Deleted) return;
+			// fix direct object references
+
+			if (_fk_guid_ChangedBy.HasValue)
+				ChangedBy__Implementation__ = (Kistl.App.Base.Identity__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.Identity>(_fk_guid_ChangedBy.Value);
+			else if (_fk_ChangedBy.HasValue)
+				ChangedBy__Implementation__ = (Kistl.App.Base.Identity__Implementation__)Context.Find<Kistl.App.Base.Identity>(_fk_ChangedBy.Value);
+			else
+				ChangedBy__Implementation__ = null;
+
+			if (_fk_guid_CreatedBy.HasValue)
+				CreatedBy__Implementation__ = (Kistl.App.Base.Identity__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.Identity>(_fk_guid_CreatedBy.Value);
+			else if (_fk_CreatedBy.HasValue)
+				CreatedBy__Implementation__ = (Kistl.App.Base.Identity__Implementation__)Context.Find<Kistl.App.Base.Identity>(_fk_CreatedBy.Value);
+			else
+				CreatedBy__Implementation__ = null;
+
+			if (_fk_guid_Projekt.HasValue)
+				Projekt__Implementation__ = (Kistl.App.Projekte.Projekt__Implementation__)Context.FindPersistenceObject<Kistl.App.Projekte.Projekt>(_fk_guid_Projekt.Value);
+			else if (_fk_Projekt.HasValue)
+				Projekt__Implementation__ = (Kistl.App.Projekte.Projekt__Implementation__)Context.Find<Kistl.App.Projekte.Projekt>(_fk_Projekt.Value);
+			else
+				Projekt__Implementation__ = null;
+		}
         // tail template
    		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
@@ -820,34 +848,6 @@ namespace Kistl.App.Projekte
 		}
 	
 
-		public override void ReloadReferences()
-		{
-			// Do not reload references if the current object has been deleted.
-			// TODO: enable when MemoryContext uses MemoryDataObjects
-			//if (this.ObjectState == DataObjectState.Deleted) return;
-			// fix direct object references
-
-			if (_fk_guid_ChangedBy.HasValue)
-				ChangedBy__Implementation__ = (Kistl.App.Base.Identity__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.Identity>(_fk_guid_ChangedBy.Value);
-			else if (_fk_ChangedBy.HasValue)
-				ChangedBy__Implementation__ = (Kistl.App.Base.Identity__Implementation__)Context.Find<Kistl.App.Base.Identity>(_fk_ChangedBy.Value);
-			else
-				ChangedBy__Implementation__ = null;
-
-			if (_fk_guid_CreatedBy.HasValue)
-				CreatedBy__Implementation__ = (Kistl.App.Base.Identity__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.Identity>(_fk_guid_CreatedBy.Value);
-			else if (_fk_CreatedBy.HasValue)
-				CreatedBy__Implementation__ = (Kistl.App.Base.Identity__Implementation__)Context.Find<Kistl.App.Base.Identity>(_fk_CreatedBy.Value);
-			else
-				CreatedBy__Implementation__ = null;
-
-			if (_fk_guid_Projekt.HasValue)
-				Projekt__Implementation__ = (Kistl.App.Projekte.Projekt__Implementation__)Context.FindPersistenceObject<Kistl.App.Projekte.Projekt>(_fk_guid_Projekt.Value);
-			else if (_fk_Projekt.HasValue)
-				Projekt__Implementation__ = (Kistl.App.Projekte.Projekt__Implementation__)Context.Find<Kistl.App.Projekte.Projekt>(_fk_Projekt.Value);
-			else
-				Projekt__Implementation__ = null;
-		}
 		public override Kistl.API.AccessRights CurrentAccessRights 
 		{ 
 			get 

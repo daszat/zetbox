@@ -80,7 +80,7 @@ namespace Kistl.App.Base
                 // for the benefit of down-stream templates
                 var __result = _ExportGuid;
                 if (!_isExportGuidSet) {
-                    var __p = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("06d4a536-d9c4-487f-9861-ac15429e42de"));
+                    var __p = FrozenContext.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("06d4a536-d9c4-487f-9861-ac15429e42de"));
                     if (__p != null) {
                         _isExportGuidSet = true;
                         __result = this._ExportGuid = (Guid)__p.DefaultValue.GetDefaultValue();
@@ -330,6 +330,20 @@ namespace Kistl.App.Base
 			this._fk_Implementor = otherImpl._fk_Implementor;
 		}
 
+		public override void ReloadReferences()
+		{
+			// Do not reload references if the current object has been deleted.
+			// TODO: enable when MemoryContext uses MemoryDataObjects
+			//if (this.ObjectState == DataObjectState.Deleted) return;
+			// fix direct object references
+
+			if (_fk_guid_Implementor.HasValue)
+				Implementor__Implementation__ = (Kistl.App.Base.TypeRef__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.TypeRef>(_fk_guid_Implementor.Value);
+			else if (_fk_Implementor.HasValue)
+				Implementor__Implementation__ = (Kistl.App.Base.TypeRef__Implementation__)Context.Find<Kistl.App.Base.TypeRef>(_fk_Implementor.Value);
+			else
+				Implementor__Implementation__ = null;
+		}
         // tail template
    		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
@@ -429,20 +443,6 @@ namespace Kistl.App.Base
 		}
 	
 
-		public override void ReloadReferences()
-		{
-			// Do not reload references if the current object has been deleted.
-			// TODO: enable when MemoryContext uses MemoryDataObjects
-			//if (this.ObjectState == DataObjectState.Deleted) return;
-			// fix direct object references
-
-			if (_fk_guid_Implementor.HasValue)
-				Implementor__Implementation__ = (Kistl.App.Base.TypeRef__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.TypeRef>(_fk_guid_Implementor.Value);
-			else if (_fk_Implementor.HasValue)
-				Implementor__Implementation__ = (Kistl.App.Base.TypeRef__Implementation__)Context.Find<Kistl.App.Base.TypeRef>(_fk_Implementor.Value);
-			else
-				Implementor__Implementation__ = null;
-		}
 #region Serializer
 
 

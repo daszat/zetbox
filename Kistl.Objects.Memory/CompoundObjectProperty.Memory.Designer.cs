@@ -106,7 +106,21 @@ namespace Kistl.App.Base
             }
         }
         
+        // normalize namespace for Templates
+        private Kistl.App.Base.CompoundObject CompoundObjectDefinition__Implementation__
+        {
+			get
+			{
+				return CompoundObjectDefinition;
+			}
+			set
+			{
+				CompoundObjectDefinition = value;
+			}
+		}
+        
         private int? _fk_CompoundObjectDefinition;
+        private Guid? _fk_guid_CompoundObjectDefinition = null;
 		// END Kistl.DalProvider.Memory.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate for CompoundObjectDefinition
 		public static event PropertyGetterHandler<Kistl.App.Base.CompoundObjectProperty, Kistl.App.Base.CompoundObject> OnCompoundObjectDefinition_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.CompoundObjectProperty, Kistl.App.Base.CompoundObject> OnCompoundObjectDefinition_PreSetter;
@@ -274,6 +288,22 @@ namespace Kistl.App.Base
             base.AttachToContext(ctx);
 		}
 
+		public override void ReloadReferences()
+		{
+			// Do not reload references if the current object has been deleted.
+			// TODO: enable when MemoryContext uses MemoryDataObjects
+			//if (this.ObjectState == DataObjectState.Deleted) return;
+			base.ReloadReferences();
+			
+			// fix direct object references
+
+			if (_fk_guid_CompoundObjectDefinition.HasValue)
+				CompoundObjectDefinition__Implementation__ = (Kistl.App.Base.CompoundObject__Implementation__Memory)Context.FindPersistenceObject<Kistl.App.Base.CompoundObject>(_fk_guid_CompoundObjectDefinition.Value);
+			else if (_fk_CompoundObjectDefinition.HasValue)
+				CompoundObjectDefinition__Implementation__ = (Kistl.App.Base.CompoundObject__Implementation__Memory)Context.Find<Kistl.App.Base.CompoundObject>(_fk_CompoundObjectDefinition.Value);
+			else
+				CompoundObjectDefinition__Implementation__ = null;
+		}
         // tail template
    		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
@@ -416,7 +446,7 @@ namespace Kistl.App.Base
         {
             
             base.ToStream(xml);
-            XmlStreamer.ToStream(this._fk_CompoundObjectDefinition, xml, "CompoundObjectDefinition", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._fk_CompoundObjectDefinition, xml, "CompoundObjectDefinition", "Kistl.App.Base");
             XmlStreamer.ToStream(this._HasPersistentOrder, xml, "HasPersistentOrder", "Kistl.App.Base");
             XmlStreamer.ToStream(this._IsList, xml, "IsList", "Kistl.App.Base");
         }
@@ -425,7 +455,7 @@ namespace Kistl.App.Base
         {
             
             base.FromStream(xml);
-            XmlStreamer.FromStream(ref this._fk_CompoundObjectDefinition, xml, "CompoundObjectDefinition", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_CompoundObjectDefinition, xml, "CompoundObjectDefinition", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._HasPersistentOrder, xml, "HasPersistentOrder", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._IsList, xml, "IsList", "Kistl.App.Base");
         }
@@ -434,6 +464,7 @@ namespace Kistl.App.Base
         {
             
             base.Export(xml, modules);
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(CompoundObjectDefinition != null ? CompoundObjectDefinition.ExportGuid : (Guid?)null, xml, "CompoundObjectDefinition", "Kistl.App.Base");
     
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._HasPersistentOrder, xml, "HasPersistentOrder", "Kistl.App.Base");
     
@@ -444,6 +475,7 @@ namespace Kistl.App.Base
         {
             
             base.MergeImport(xml);
+            XmlStreamer.FromStream(ref this._fk_guid_CompoundObjectDefinition, xml, "CompoundObjectDefinition", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._HasPersistentOrder, xml, "HasPersistentOrder", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._IsList, xml, "IsList", "Kistl.App.Base");
         }

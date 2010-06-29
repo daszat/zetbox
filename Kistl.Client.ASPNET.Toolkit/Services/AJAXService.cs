@@ -23,7 +23,7 @@ namespace Kistl.Client.ASPNET.Toolkit
 
             try
             {
-                return KistlContextManagerModule.KistlContext.GetQuery(type.GetInterfaceType(KistlContextManagerModule.TypeTransformations))
+                return KistlContextManagerModule.KistlContext.GetQuery(KistlContextManagerModule.IftFactory(type.GetSystemType()))
                     .Select(i => new JavaScriptObjectMoniker(KistlContextManagerModule.KistlContext, i)).ToList();
             }
             catch (Exception ex)

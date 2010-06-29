@@ -31,6 +31,28 @@ namespace Kistl.Server.Generators.Templates.Implementation.CollectionEntries
             ApplyIndexPropertyTemplate(rel, RelationEndRole.B);
         }
 
+        protected override void ApplyReloadReferenceBody()
+        {
+            base.ApplyReloadReferenceBody();
+
+            ReloadReferences(RelationEndRole.A);
+            this.WriteLine();
+
+            ReloadReferences(RelationEndRole.B);
+        }
+
+        private void ReloadReferences(RelationEndRole endRole)
+        {
+            RelationEnd relend = rel.GetEndFromRole(endRole);
+            Templates.Implementation.ObjectClasses.ReloadOneReference.Call(Host, ctx,
+                relend.Type.GetDataTypeString(),
+                relend.Type.GetDataTypeString() + Kistl.API.Helper.ImplementationSuffix + Settings["extrasuffix"],
+                endRole.ToString(),
+                endRole.ToString() + Kistl.API.Helper.ImplementationSuffix,
+                "_fk_" + endRole.ToString(),
+                "_fk_guid_" + endRole.ToString());
+        }
+
         /// <summary>
         /// Creates a object reference property with the given propertyName for this RelationEnd
         /// </summary>
@@ -41,6 +63,5 @@ namespace Kistl.Server.Generators.Templates.Implementation.CollectionEntries
         /// Creates a index property for this RelationEnd
         /// </summary>
         protected abstract void ApplyIndexPropertyTemplate(Relation rel, RelationEndRole endRole);
-
     }
 }

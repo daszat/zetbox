@@ -62,7 +62,7 @@ namespace Kistl.Server.Generators.Templates.Interface.CollectionEntries
         {
             var additionalImports = new HashSet<string>();
 
-            // don't forget to import referenced referenced objectclasses' namespaces
+            // import referenced objectclasses' namespaces
             additionalImports.Add(rel.A.Type.Module.Namespace);
             additionalImports.Add(rel.B.Type.Module.Namespace);
 

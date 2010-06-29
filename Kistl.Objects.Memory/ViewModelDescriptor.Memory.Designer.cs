@@ -106,7 +106,21 @@ namespace Kistl.App.GUI
             }
         }
         
+        // normalize namespace for Templates
+        private Kistl.App.GUI.ControlKind DefaultGridCellKind__Implementation__
+        {
+			get
+			{
+				return DefaultGridCellKind;
+			}
+			set
+			{
+				DefaultGridCellKind = value;
+			}
+		}
+        
         private int? _fk_DefaultGridCellKind;
+        private Guid? _fk_guid_DefaultGridCellKind = null;
 		// END Kistl.DalProvider.Memory.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate for DefaultGridCellKind
 		public static event PropertyGetterHandler<Kistl.App.GUI.ViewModelDescriptor, Kistl.App.GUI.ControlKind> OnDefaultGridCellKind_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.ViewModelDescriptor, Kistl.App.GUI.ControlKind> OnDefaultGridCellKind_PreSetter;
@@ -180,7 +194,21 @@ namespace Kistl.App.GUI
             }
         }
         
+        // normalize namespace for Templates
+        private Kistl.App.GUI.ControlKind DefaultKind__Implementation__
+        {
+			get
+			{
+				return DefaultKind;
+			}
+			set
+			{
+				DefaultKind = value;
+			}
+		}
+        
         private int? _fk_DefaultKind;
+        private Guid? _fk_guid_DefaultKind = null;
 		// END Kistl.DalProvider.Memory.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate for DefaultKind
 		public static event PropertyGetterHandler<Kistl.App.GUI.ViewModelDescriptor, Kistl.App.GUI.ControlKind> OnDefaultKind_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.ViewModelDescriptor, Kistl.App.GUI.ControlKind> OnDefaultKind_PreSetter;
@@ -249,7 +277,7 @@ namespace Kistl.App.GUI
                 // for the benefit of down-stream templates
                 var __result = _ExportGuid;
                 if (!_isExportGuidSet) {
-                    var __p = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("77ce1e5b-f244-4279-af13-b3e75b55f933"));
+                    var __p = FrozenContext.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("77ce1e5b-f244-4279-af13-b3e75b55f933"));
                     if (__p != null) {
                         _isExportGuidSet = true;
                         __result = this._ExportGuid = (Guid)__p.DefaultValue.GetDefaultValue();
@@ -363,7 +391,21 @@ namespace Kistl.App.GUI
             }
         }
         
+        // normalize namespace for Templates
+        private Kistl.App.Base.Module Module__Implementation__
+        {
+			get
+			{
+				return Module;
+			}
+			set
+			{
+				Module = value;
+			}
+		}
+        
         private int? _fk_Module;
+        private Guid? _fk_guid_Module = null;
 		// END Kistl.DalProvider.Memory.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate for Module
 		public static event PropertyGetterHandler<Kistl.App.GUI.ViewModelDescriptor, Kistl.App.Base.Module> OnModule_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.ViewModelDescriptor, Kistl.App.Base.Module> OnModule_PreSetter;
@@ -460,7 +502,21 @@ namespace Kistl.App.GUI
             }
         }
         
+        // normalize namespace for Templates
+        private Kistl.App.Base.TypeRef ViewModelRef__Implementation__
+        {
+			get
+			{
+				return ViewModelRef;
+			}
+			set
+			{
+				ViewModelRef = value;
+			}
+		}
+        
         private int? _fk_ViewModelRef;
+        private Guid? _fk_guid_ViewModelRef = null;
 		// END Kistl.DalProvider.Memory.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate for ViewModelRef
 		public static event PropertyGetterHandler<Kistl.App.GUI.ViewModelDescriptor, Kistl.App.Base.TypeRef> OnViewModelRef_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.ViewModelDescriptor, Kistl.App.Base.TypeRef> OnViewModelRef_PreSetter;
@@ -491,6 +547,41 @@ namespace Kistl.App.GUI
             base.AttachToContext(ctx);
 		}
 
+		public override void ReloadReferences()
+		{
+			// Do not reload references if the current object has been deleted.
+			// TODO: enable when MemoryContext uses MemoryDataObjects
+			//if (this.ObjectState == DataObjectState.Deleted) return;
+			// fix direct object references
+
+			if (_fk_guid_DefaultGridCellKind.HasValue)
+				DefaultGridCellKind__Implementation__ = (Kistl.App.GUI.ControlKind__Implementation__Memory)Context.FindPersistenceObject<Kistl.App.GUI.ControlKind>(_fk_guid_DefaultGridCellKind.Value);
+			else if (_fk_DefaultGridCellKind.HasValue)
+				DefaultGridCellKind__Implementation__ = (Kistl.App.GUI.ControlKind__Implementation__Memory)Context.Find<Kistl.App.GUI.ControlKind>(_fk_DefaultGridCellKind.Value);
+			else
+				DefaultGridCellKind__Implementation__ = null;
+
+			if (_fk_guid_DefaultKind.HasValue)
+				DefaultKind__Implementation__ = (Kistl.App.GUI.ControlKind__Implementation__Memory)Context.FindPersistenceObject<Kistl.App.GUI.ControlKind>(_fk_guid_DefaultKind.Value);
+			else if (_fk_DefaultKind.HasValue)
+				DefaultKind__Implementation__ = (Kistl.App.GUI.ControlKind__Implementation__Memory)Context.Find<Kistl.App.GUI.ControlKind>(_fk_DefaultKind.Value);
+			else
+				DefaultKind__Implementation__ = null;
+
+			if (_fk_guid_Module.HasValue)
+				Module__Implementation__ = (Kistl.App.Base.Module__Implementation__Memory)Context.FindPersistenceObject<Kistl.App.Base.Module>(_fk_guid_Module.Value);
+			else if (_fk_Module.HasValue)
+				Module__Implementation__ = (Kistl.App.Base.Module__Implementation__Memory)Context.Find<Kistl.App.Base.Module>(_fk_Module.Value);
+			else
+				Module__Implementation__ = null;
+
+			if (_fk_guid_ViewModelRef.HasValue)
+				ViewModelRef__Implementation__ = (Kistl.App.Base.TypeRef__Implementation__Memory)Context.FindPersistenceObject<Kistl.App.Base.TypeRef>(_fk_guid_ViewModelRef.Value);
+			else if (_fk_ViewModelRef.HasValue)
+				ViewModelRef__Implementation__ = (Kistl.App.Base.TypeRef__Implementation__Memory)Context.Find<Kistl.App.Base.TypeRef>(_fk_ViewModelRef.Value);
+			else
+				ViewModelRef__Implementation__ = null;
+		}
         // tail template
    		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
@@ -701,45 +792,53 @@ namespace Kistl.App.GUI
         {
             
             base.ToStream(xml);
-            XmlStreamer.ToStream(this._fk_DefaultGridCellKind, xml, "DefaultGridCellKind", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(this._fk_DefaultKind, xml, "DefaultKind", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._fk_DefaultGridCellKind, xml, "DefaultGridCellKind", "Kistl.App.GUI");
+            XmlStreamer.ToStream(this._fk_DefaultKind, xml, "DefaultKind", "Kistl.App.GUI");
             XmlStreamer.ToStream(this._Description, xml, "Description", "Kistl.App.GUI");
             XmlStreamer.ToStream(this._isExportGuidSet, xml, "IsExportGuidSet", "Kistl.App.GUI");
             if (this._isExportGuidSet) {
                 XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.GUI");
             }
-            XmlStreamer.ToStream(this._fk_Module, xml, "Module", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(this._fk_ViewModelRef, xml, "ViewModelRef", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._fk_Module, xml, "Module", "Kistl.App.GUI");
+            XmlStreamer.ToStream(this._fk_ViewModelRef, xml, "ViewModelRef", "Kistl.App.GUI");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
             
             base.FromStream(xml);
-            XmlStreamer.FromStream(ref this._fk_DefaultGridCellKind, xml, "DefaultGridCellKind", "http://dasz.at/Kistl");
-            XmlStreamer.FromStream(ref this._fk_DefaultKind, xml, "DefaultKind", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_DefaultGridCellKind, xml, "DefaultGridCellKind", "Kistl.App.GUI");
+            XmlStreamer.FromStream(ref this._fk_DefaultKind, xml, "DefaultKind", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._Description, xml, "Description", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._isExportGuidSet, xml, "IsExportGuidSet", "Kistl.App.GUI");
             if (this._isExportGuidSet) {
                 XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.GUI");
             }
-            XmlStreamer.FromStream(ref this._fk_Module, xml, "Module", "http://dasz.at/Kistl");
-            XmlStreamer.FromStream(ref this._fk_ViewModelRef, xml, "ViewModelRef", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_Module, xml, "Module", "Kistl.App.GUI");
+            XmlStreamer.FromStream(ref this._fk_ViewModelRef, xml, "ViewModelRef", "Kistl.App.GUI");
         }
 
         public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
         {
             
             xml.WriteAttributeString("ExportGuid", this._ExportGuid.ToString());
+            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(DefaultGridCellKind != null ? DefaultGridCellKind.ExportGuid : (Guid?)null, xml, "DefaultGridCellKind", "Kistl.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(DefaultKind != null ? DefaultKind.ExportGuid : (Guid?)null, xml, "DefaultKind", "Kistl.App.GUI");
     
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this._Description, xml, "Description", "Kistl.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(Module != null ? Module.ExportGuid : (Guid?)null, xml, "Module", "Kistl.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(ViewModelRef != null ? ViewModelRef.ExportGuid : (Guid?)null, xml, "ViewModelRef", "Kistl.App.GUI");
         }
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
         {
+            XmlStreamer.FromStream(ref this._fk_guid_DefaultGridCellKind, xml, "DefaultGridCellKind", "Kistl.App.GUI");
+            XmlStreamer.FromStream(ref this._fk_guid_DefaultKind, xml, "DefaultKind", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._Description, xml, "Description", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.GUI");
             this._isExportGuidSet = true;
+            XmlStreamer.FromStream(ref this._fk_guid_Module, xml, "Module", "Kistl.App.GUI");
+            XmlStreamer.FromStream(ref this._fk_guid_ViewModelRef, xml, "ViewModelRef", "Kistl.App.GUI");
         }
 
 #endregion

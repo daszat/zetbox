@@ -106,7 +106,21 @@ namespace at.dasz.DocumentManagement
             }
         }
         
+        // normalize namespace for Templates
+        private Kistl.App.Base.Blob Blob__Implementation__
+        {
+			get
+			{
+				return Blob;
+			}
+			set
+			{
+				Blob = value;
+			}
+		}
+        
         private int? _fk_Blob;
+        private Guid? _fk_guid_Blob = null;
 		// END Kistl.DalProvider.Memory.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate for Blob
 		public static event PropertyGetterHandler<at.dasz.DocumentManagement.File, Kistl.App.Base.Blob> OnBlob_Getter;
 		public static event PropertyPreSetterHandler<at.dasz.DocumentManagement.File, Kistl.App.Base.Blob> OnBlob_PreSetter;
@@ -180,7 +194,21 @@ namespace at.dasz.DocumentManagement
             }
         }
         
+        // normalize namespace for Templates
+        private Kistl.App.Base.Identity ChangedBy__Implementation__
+        {
+			get
+			{
+				return ChangedBy;
+			}
+			set
+			{
+				ChangedBy = value;
+			}
+		}
+        
         private int? _fk_ChangedBy;
+        private Guid? _fk_guid_ChangedBy = null;
 		// END Kistl.DalProvider.Memory.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate for ChangedBy
 		public static event PropertyGetterHandler<at.dasz.DocumentManagement.File, Kistl.App.Base.Identity> OnChangedBy_Getter;
 		public static event PropertyPreSetterHandler<at.dasz.DocumentManagement.File, Kistl.App.Base.Identity> OnChangedBy_PreSetter;
@@ -303,7 +331,21 @@ namespace at.dasz.DocumentManagement
             }
         }
         
+        // normalize namespace for Templates
+        private Kistl.App.Base.Identity CreatedBy__Implementation__
+        {
+			get
+			{
+				return CreatedBy;
+			}
+			set
+			{
+				CreatedBy = value;
+			}
+		}
+        
         private int? _fk_CreatedBy;
+        private Guid? _fk_guid_CreatedBy = null;
 		// END Kistl.DalProvider.Memory.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate for CreatedBy
 		public static event PropertyGetterHandler<at.dasz.DocumentManagement.File, Kistl.App.Base.Identity> OnCreatedBy_Getter;
 		public static event PropertyPreSetterHandler<at.dasz.DocumentManagement.File, Kistl.App.Base.Identity> OnCreatedBy_PreSetter;
@@ -372,7 +414,7 @@ namespace at.dasz.DocumentManagement
                 // for the benefit of down-stream templates
                 var __result = _ExportGuid;
                 if (!_isExportGuidSet) {
-                    var __p = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("91566b41-879d-4e72-b48b-9677cc156649"));
+                    var __p = FrozenContext.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("91566b41-879d-4e72-b48b-9677cc156649"));
                     if (__p != null) {
                         _isExportGuidSet = true;
                         __result = this._ExportGuid = (Guid)__p.DefaultValue.GetDefaultValue();
@@ -557,6 +599,34 @@ namespace at.dasz.DocumentManagement
             base.AttachToContext(ctx);
 		}
 
+		public override void ReloadReferences()
+		{
+			// Do not reload references if the current object has been deleted.
+			// TODO: enable when MemoryContext uses MemoryDataObjects
+			//if (this.ObjectState == DataObjectState.Deleted) return;
+			// fix direct object references
+
+			if (_fk_guid_Blob.HasValue)
+				Blob__Implementation__ = (Kistl.App.Base.Blob__Implementation__Memory)Context.FindPersistenceObject<Kistl.App.Base.Blob>(_fk_guid_Blob.Value);
+			else if (_fk_Blob.HasValue)
+				Blob__Implementation__ = (Kistl.App.Base.Blob__Implementation__Memory)Context.Find<Kistl.App.Base.Blob>(_fk_Blob.Value);
+			else
+				Blob__Implementation__ = null;
+
+			if (_fk_guid_ChangedBy.HasValue)
+				ChangedBy__Implementation__ = (Kistl.App.Base.Identity__Implementation__Memory)Context.FindPersistenceObject<Kistl.App.Base.Identity>(_fk_guid_ChangedBy.Value);
+			else if (_fk_ChangedBy.HasValue)
+				ChangedBy__Implementation__ = (Kistl.App.Base.Identity__Implementation__Memory)Context.Find<Kistl.App.Base.Identity>(_fk_ChangedBy.Value);
+			else
+				ChangedBy__Implementation__ = null;
+
+			if (_fk_guid_CreatedBy.HasValue)
+				CreatedBy__Implementation__ = (Kistl.App.Base.Identity__Implementation__Memory)Context.FindPersistenceObject<Kistl.App.Base.Identity>(_fk_guid_CreatedBy.Value);
+			else if (_fk_CreatedBy.HasValue)
+				CreatedBy__Implementation__ = (Kistl.App.Base.Identity__Implementation__Memory)Context.Find<Kistl.App.Base.Identity>(_fk_CreatedBy.Value);
+			else
+				CreatedBy__Implementation__ = null;
+		}
         // tail template
    		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
@@ -759,10 +829,10 @@ namespace at.dasz.DocumentManagement
         {
             
             base.ToStream(xml);
-            XmlStreamer.ToStream(this._fk_Blob, xml, "Blob", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(this._fk_ChangedBy, xml, "ChangedBy", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._fk_Blob, xml, "Blob", "at.dasz.DocumentManagement");
+            XmlStreamer.ToStream(this._fk_ChangedBy, xml, "ChangedBy", "at.dasz.DocumentManagement");
             XmlStreamer.ToStream(this._ChangedOn, xml, "ChangedOn", "at.dasz.DocumentManagement");
-            XmlStreamer.ToStream(this._fk_CreatedBy, xml, "CreatedBy", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._fk_CreatedBy, xml, "CreatedBy", "at.dasz.DocumentManagement");
             XmlStreamer.ToStream(this._CreatedOn, xml, "CreatedOn", "at.dasz.DocumentManagement");
             XmlStreamer.ToStream(this._isExportGuidSet, xml, "IsExportGuidSet", "at.dasz.DocumentManagement");
             if (this._isExportGuidSet) {
@@ -775,10 +845,10 @@ namespace at.dasz.DocumentManagement
         {
             
             base.FromStream(xml);
-            XmlStreamer.FromStream(ref this._fk_Blob, xml, "Blob", "http://dasz.at/Kistl");
-            XmlStreamer.FromStream(ref this._fk_ChangedBy, xml, "ChangedBy", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_Blob, xml, "Blob", "at.dasz.DocumentManagement");
+            XmlStreamer.FromStream(ref this._fk_ChangedBy, xml, "ChangedBy", "at.dasz.DocumentManagement");
             XmlStreamer.FromStream(ref this._ChangedOn, xml, "ChangedOn", "at.dasz.DocumentManagement");
-            XmlStreamer.FromStream(ref this._fk_CreatedBy, xml, "CreatedBy", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_CreatedBy, xml, "CreatedBy", "at.dasz.DocumentManagement");
             XmlStreamer.FromStream(ref this._CreatedOn, xml, "CreatedOn", "at.dasz.DocumentManagement");
             XmlStreamer.FromStream(ref this._isExportGuidSet, xml, "IsExportGuidSet", "at.dasz.DocumentManagement");
             if (this._isExportGuidSet) {
@@ -791,6 +861,7 @@ namespace at.dasz.DocumentManagement
         {
             
             xml.WriteAttributeString("ExportGuid", this._ExportGuid.ToString());
+            if (modules.Contains("*") || modules.Contains("at.dasz.DocumentManagement")) XmlStreamer.ToStream(Blob != null ? Blob.ExportGuid : (Guid?)null, xml, "Blob", "at.dasz.DocumentManagement");
     
             if (modules.Contains("*") || modules.Contains("at.dasz.DocumentManagement")) XmlStreamer.ToStream(this._ChangedOn, xml, "ChangedOn", "at.dasz.DocumentManagement");
     
@@ -801,6 +872,7 @@ namespace at.dasz.DocumentManagement
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
         {
+            XmlStreamer.FromStream(ref this._fk_guid_Blob, xml, "Blob", "at.dasz.DocumentManagement");
             XmlStreamer.FromStream(ref this._ChangedOn, xml, "ChangedOn", "at.dasz.DocumentManagement");
             XmlStreamer.FromStream(ref this._CreatedOn, xml, "CreatedOn", "at.dasz.DocumentManagement");
             XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "at.dasz.DocumentManagement");

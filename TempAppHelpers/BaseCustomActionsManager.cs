@@ -19,9 +19,11 @@ namespace Kistl.App.Extensions
         : ICustomActionsManager
     {
         protected readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Common.BaseCustomActionsManager");
-        protected readonly IAssemblyConfiguration assemblyConfiguration;
+        private readonly static object _initLock = new object();
+        private readonly static Dictionary<Type, Type> _initImpls = new Dictionary<Type, Type>();
 
-        protected bool initialized = false;
+        private readonly IDeploymentRestrictor _restrictor;
+
 
         /// <summary>
         /// Gets or sets the extra suffix which is used to create the implementation class' name.
@@ -31,49 +33,42 @@ namespace Kistl.App.Extensions
         protected string ImplementationAssemblyName { get; private set; }
 
         /// <summary>
-        /// Override this method to modify the acceptable DeploymentRestrictions. By default only None is accepted.
-        /// </summary>
-        /// <param name="r">the restriction to check (This parameter is int because <see cref="DeploymentRestriction"/> might not yet be loaded)</param>
-        /// <returns>whether or not the given deployment restriction is acceptable for the implementor</returns>
-        protected abstract bool IsAcceptableDeploymentRestriction(int r);
-
-        /// <summary>
-        /// Retruns true on ObjectClasses that should be managed
-        /// </summary>
-        /// <param name="cls"></param>
-        /// <returns>true</returns>
-        protected virtual bool ObjectClassFilter(ObjectClass cls) { return true; }
-
-        /// <summary>
         /// Initialises a new instance of the BaseCustomActionsManager class 
-        /// using the specified extra suffix and implementation assembly name.
+        /// using the specified extra suffix and the assembly of the actual type of this class.
         /// </summary>
-        /// <param name="extraSuffix"></param>
-        /// <param name="implementationAssemblyName"></param>
-        protected BaseCustomActionsManager(string extraSuffix, string implementationAssemblyName)
+        protected BaseCustomActionsManager(IDeploymentRestrictor restrictor, string extraSuffix)
         {
+            if (restrictor == null) { throw new ArgumentNullException("restrictor"); }
+
+            _restrictor = restrictor;
             ExtraSuffix = extraSuffix;
-            ImplementationAssemblyName = implementationAssemblyName;
+            ImplementationAssemblyName = this.GetType().Assembly.FullName;
         }
 
         /// <summary>
-        /// Initializes this CustomActionsManager
+        /// Initializes this CustomActionsManager. This method is thread-safe and won't do
+        /// anything if the ActionsManager is already initialized.
         /// </summary>
         public virtual void Init(IReadOnlyKistlContext ctx)
         {
-            if (initialized) return;
-            try
+            lock (_initLock)
             {
-                Log.TraceTotalMemory("Before BaseCustomActionsManager.Init()");
+                var implType = this.GetType();
+                if (_initImpls.ContainsKey(implType)) return;
+                try
+                {
+                    Log.InfoFormat("Initialising Actions for [{0}] by [{1}]", ExtraSuffix, implType.Name);
+                    Log.TraceTotalMemory("Before BaseCustomActionsManager.Init()");
 
-                // Init
-                CreateInvokeInfosForObjectClasses(ctx, ExtraSuffix, ImplementationAssemblyName, ObjectClassFilter);
+                    // Init
+                    CreateInvokeInfosForObjectClasses(ctx, ExtraSuffix, ImplementationAssemblyName);
 
-                Log.TraceTotalMemory("After BaseCustomActionsManager.Init()");
-            }
-            finally
-            {
-                initialized = true;
+                    Log.TraceTotalMemory("After BaseCustomActionsManager.Init()");
+                }
+                finally
+                {
+                    _initImpls[implType] = implType;
+                }
             }
         }
 
@@ -98,24 +93,20 @@ namespace Kistl.App.Extensions
         /// <param name="metaCtx">the context used to access the meta data</param>
         /// <param name="extraSuffix">an extra suffix to put into the created implementation class names</param>
         /// <param name="assemblyName">the name of the assembly to load implementation classes from</param>
-        /// <param name="filter"></param>
-        private void CreateInvokeInfosForObjectClasses(IReadOnlyKistlContext metaCtx, string extraSuffix, string assemblyName, Func<ObjectClass, bool> filter)
+        private void CreateInvokeInfosForObjectClasses(IReadOnlyKistlContext metaCtx, string extraSuffix, string assemblyName)
         {
-            if (filter == null) { throw new ArgumentNullException("filter"); }
             if (metaCtx == null) { throw new ArgumentNullException("metaCtx"); }
 
             foreach (ObjectClass objClass in metaCtx.GetQuery<ObjectClass>())
             {
                 try
                 {
-                    if (filter == null || filter(objClass))
-                    {
-                        CreateInvokeInfosForAssembly(objClass, extraSuffix, assemblyName);
-                    }
+                    CreateInvokeInfosForAssembly(objClass, extraSuffix, assemblyName);
                 }
                 catch (Exception ex)
                 {
                     Log.Error("Exception in CreateInvokeInfosForObjectClasses", ex);
+                    throw;
                 }
             }
         }
@@ -189,7 +180,7 @@ namespace Kistl.App.Extensions
             try
             {
                 var restr = invoke.Implementor.Assembly.DeploymentRestrictions;
-                if (!IsAcceptableDeploymentRestriction((int)restr))
+                if (!_restrictor.IsAcceptableDeploymentRestriction((int)restr))
                 {
                     return;
                 }
@@ -235,49 +226,4 @@ namespace Kistl.App.Extensions
 
         #endregion
     }
-
-    #region FrozenActionsManager
-    /// <summary>
-    /// A CustomActionsManager for the FrozenContext.
-    /// </summary>
-    public abstract class FrozenActionsManager
-        : BaseCustomActionsManager
-    {
-        /// <summary>
-        /// Gets a value indicating whether the frozen actions are already initialised.
-        /// </summary>
-        public static bool IsInitialised { get; private set; }
-
-        static FrozenActionsManager()
-        {
-            IsInitialised = false;
-        }
-
-        /// <summary>
-        /// Initialises a new instane of the FrozenActionsManager.
-        /// </summary>
-        protected FrozenActionsManager()
-            : base("Frozen", Kistl.API.Helper.FrozenAssembly)
-        {
-        }
-
-        /// <inheritdoc/>
-        public override void Init(IReadOnlyKistlContext ctx)
-        {
-            if (!IsInitialised)
-            {
-                base.Init(ctx);
-                // try only once
-                IsInitialised = true;
-            }
-        }
-
-        /// <inheritdoc/>
-        protected override bool ObjectClassFilter(ObjectClass cls)
-        {
-            return cls.IsFrozen();
-        }
-    }
-    #endregion
-
 }

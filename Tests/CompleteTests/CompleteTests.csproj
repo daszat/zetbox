@@ -95,10 +95,6 @@
       <Project>{980874F0-D9C1-4EDB-8143-AD51C1E2666F}</Project>
       <Name>Kistl.DalProvider.EF.Tests</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Kistl.DalProvider.Frozen.Tests\Kistl.DalProvider.Frozen.Tests.csproj">
-      <Project>{AC5D6781-62E6-4143-9447-BF7B3F5005F7}</Project>
-      <Name>Kistl.DalProvider.Frozen.Tests</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Kistl.DalProvider.Memory.Tests\Kistl.DalProvider.Memory.Tests.csproj">
       <Project>{CF5E170F-DC31-4AAE-AFFC-8BECA0B366EF}</Project>
       <Name>Kistl.DalProvider.Memory.Tests</Name>

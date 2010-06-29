@@ -269,7 +269,21 @@ namespace at.dasz.CourseOrganiser
             }
         }
         
+        // normalize namespace for Templates
+        private at.dasz.CourseOrganiser.Semester Semester__Implementation__
+        {
+			get
+			{
+				return Semester;
+			}
+			set
+			{
+				Semester = value;
+			}
+		}
+        
         private int? _fk_Semester;
+        private Guid? _fk_guid_Semester = null;
 		// END Kistl.DalProvider.Memory.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate for Semester
 		public static event PropertyGetterHandler<at.dasz.CourseOrganiser.Exam, at.dasz.CourseOrganiser.Semester> OnSemester_Getter;
 		public static event PropertyPreSetterHandler<at.dasz.CourseOrganiser.Exam, at.dasz.CourseOrganiser.Semester> OnSemester_PreSetter;
@@ -298,6 +312,20 @@ namespace at.dasz.CourseOrganiser
             base.AttachToContext(ctx);
 		}
 
+		public override void ReloadReferences()
+		{
+			// Do not reload references if the current object has been deleted.
+			// TODO: enable when MemoryContext uses MemoryDataObjects
+			//if (this.ObjectState == DataObjectState.Deleted) return;
+			// fix direct object references
+
+			if (_fk_guid_Semester.HasValue)
+				Semester__Implementation__ = (at.dasz.CourseOrganiser.Semester__Implementation__Memory)Context.FindPersistenceObject<at.dasz.CourseOrganiser.Semester>(_fk_guid_Semester.Value);
+			else if (_fk_Semester.HasValue)
+				Semester__Implementation__ = (at.dasz.CourseOrganiser.Semester__Implementation__Memory)Context.Find<at.dasz.CourseOrganiser.Semester>(_fk_Semester.Value);
+			else
+				Semester__Implementation__ = null;
+		}
         // tail template
    		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
@@ -454,7 +482,7 @@ namespace at.dasz.CourseOrganiser
             XmlStreamer.ToStream(this._Date, xml, "Date", "at.dasz.CourseOrganiser");
             XmlStreamer.ToStream(this._MaxScores, xml, "MaxScores", "at.dasz.CourseOrganiser");
             XmlStreamer.ToStream(this._Name, xml, "Name", "at.dasz.CourseOrganiser");
-            XmlStreamer.ToStream(this._fk_Semester, xml, "Semester", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._fk_Semester, xml, "Semester", "at.dasz.CourseOrganiser");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
@@ -464,7 +492,7 @@ namespace at.dasz.CourseOrganiser
             XmlStreamer.FromStream(ref this._Date, xml, "Date", "at.dasz.CourseOrganiser");
             XmlStreamer.FromStream(ref this._MaxScores, xml, "MaxScores", "at.dasz.CourseOrganiser");
             XmlStreamer.FromStream(ref this._Name, xml, "Name", "at.dasz.CourseOrganiser");
-            XmlStreamer.FromStream(ref this._fk_Semester, xml, "Semester", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_Semester, xml, "Semester", "at.dasz.CourseOrganiser");
         }
 
 #endregion

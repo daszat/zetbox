@@ -74,6 +74,7 @@
     <Compile Include="Mocks\KistlContextMock.cs" />
     <Compile Include="Mocks\MetaDataResolverMock.cs" />
     <Compile Include="Mocks\ObjectClassMock.cs" />
+    <Compile Include="Mocks\ServerImplementationTypeMock.cs" />
     <Compile Include="Mocks\TestObjClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SetUpFixture.cs" />

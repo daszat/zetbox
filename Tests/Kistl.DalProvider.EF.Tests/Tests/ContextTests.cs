@@ -22,12 +22,12 @@ namespace Kistl.DalProvider.EF.Tests
     {
         int firstId;
         int secondId;
-        ITypeTransformations typeTrans;
+        InterfaceType.Factory iftFactory;
 
         [SetUp]
         public new void SetUp()
         {
-            typeTrans = scope.Resolve<ITypeTransformations>();
+            iftFactory = scope.Resolve<InterfaceType.Factory>();
 
             using (IKistlContext ctx = GetContext())
             {
@@ -79,7 +79,7 @@ namespace Kistl.DalProvider.EF.Tests
         {
             using (IKistlContext ctx = GetContext())
             {
-                var result = ctx.GetQuery(typeTrans.AsInterfaceType(typeof(TestObjClass)));
+                var result = ctx.GetQuery(iftFactory(typeof(TestObjClass)));
                 Assert.That(result, Is.Not.Null);
                 var testObj = result.First(o => o.ID == firstId);
                 Assert.That(testObj, Is.Not.Null);
@@ -114,7 +114,7 @@ namespace Kistl.DalProvider.EF.Tests
         {
             using (IKistlContext ctx = GetContext())
             {
-                TestObjClass obj = (TestObjClass)ctx.Find(typeTrans.AsInterfaceType(typeof(TestObjClass)), firstId);
+                TestObjClass obj = (TestObjClass)ctx.Find(iftFactory(typeof(TestObjClass)), firstId);
                 Assert.That(obj, Is.Not.Null);
                 Assert.That(obj.ID, Is.EqualTo(firstId));
                 Assert.That(obj.TestEnumProp, Is.EqualTo(TestEnum.First));
@@ -127,7 +127,7 @@ namespace Kistl.DalProvider.EF.Tests
         {
             using (IKistlContext ctx = GetContext())
             {
-                TestObjClass obj = (TestObjClass)ctx.Find(typeTrans.AsInterfaceType(typeof(TestObjClass)), Kistl.API.Helper.INVALIDID);
+                TestObjClass obj = (TestObjClass)ctx.Find(iftFactory(typeof(TestObjClass)), Kistl.API.Helper.INVALIDID);
             }
         }
 
@@ -149,7 +149,7 @@ namespace Kistl.DalProvider.EF.Tests
             using (IKistlContext ctx = GetContext())
             {
                 var obj = ctx.GetQuery<ObjectClass>().First(o => o.Name == "DataType");
-                List<ObjectClass> result = ctx.GetListOf<ObjectClass>(typeTrans.AsInterfaceType(typeof(ObjectClass)), obj.ID, "SubClasses").ToList();
+                List<ObjectClass> result = ctx.GetListOf<ObjectClass>(iftFactory(typeof(ObjectClass)), obj.ID, "SubClasses").ToList();
                 Assert.That(result, Is.Not.Null);
                 Assert.That(result.Count, Is.GreaterThan(0));
             }
@@ -172,7 +172,7 @@ namespace Kistl.DalProvider.EF.Tests
         {
             using (IKistlContext ctx = GetContext())
             {
-                var result = ctx.GetListOf<TestObjClass>(typeTrans.AsInterfaceType(typeof(TestObjClass)), firstId, "NotAProperty");
+                var result = ctx.GetListOf<TestObjClass>(iftFactory(typeof(TestObjClass)), firstId, "NotAProperty");
             }
         }
 
@@ -194,7 +194,7 @@ namespace Kistl.DalProvider.EF.Tests
             using (IKistlContext ctx = GetContext())
             {
                 var obj = ctx.GetQuery<ObjectClass>().First(o => o.Name == "DataType");
-                var result = ctx.GetListOf<TestObjClass>(typeTrans.AsInterfaceType(typeof(ObjectClass)), obj.ID, "SubClasses").ToList();
+                var result = ctx.GetListOf<TestObjClass>(iftFactory(typeof(ObjectClass)), obj.ID, "SubClasses").ToList();
             }
         }
 
@@ -432,7 +432,7 @@ namespace Kistl.DalProvider.EF.Tests
         {
             using (IKistlContext ctx = GetContext())
             {
-                TestObjClass newObj = ctx.Create(typeTrans.AsInterfaceType(typeof(TestObjClass))) as TestObjClass;
+                TestObjClass newObj = ctx.Create(iftFactory(typeof(TestObjClass))) as TestObjClass;
                 Assert.That(newObj, Is.Not.Null);
                 Assert.That(newObj.Context, Is.Not.Null);
             }
@@ -443,7 +443,7 @@ namespace Kistl.DalProvider.EF.Tests
         {
             using (IKistlContext ctx = GetContext())
             {
-                TestObjClass newObj = ctx.Create(typeTrans.AsInterfaceType(typeof(TestObjClass))) as TestObjClass;
+                TestObjClass newObj = ctx.Create(iftFactory(typeof(TestObjClass))) as TestObjClass;
                 Assert.That(newObj, Is.Not.Null);
                 Assert.That(newObj.Context, Is.Not.Null);
             }

@@ -17,7 +17,8 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
         public static void Call(Arebis.CodeGeneration.IGenerationHost host,
             IKistlContext ctx,
             Templates.Implementation.SerializationMembersList serializationList,
-            ObjectReferenceProperty prop, bool callGetterSetterEvents)
+            ObjectReferenceProperty prop, bool callGetterSetterEvents,
+            bool isReloadable)
         {
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
             if (prop == null) { throw new ArgumentNullException("prop"); }
@@ -32,7 +33,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
             var rel = RelationExtensions.Lookup(ctx, prop);
             var endRole = rel.GetEnd(prop).GetRole();
             Call(host, ctx, serializationList,
-                name, ownInterface, referencedInterface, rel, endRole, callGetterSetterEvents);
+                name, ownInterface, referencedInterface, rel, endRole, callGetterSetterEvents, isReloadable);
 
         }
 
@@ -43,27 +44,30 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
             string ownInterface,
             string referencedInterface,
             Relation rel,
-            RelationEndRole endRole, bool callGetterSetterEvents)
+            RelationEndRole endRole, bool callGetterSetterEvents,
+            bool isReloadable)
         {
             if (rel == null) { throw new ArgumentNullException("rel"); }
 
             RelationEnd relEnd = rel.GetEndFromRole(endRole);
             RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
 
-            string efName = name + Kistl.API.Helper.ImplementationSuffix;
+            string implName = name + Kistl.API.Helper.ImplementationSuffix;
             string fkBackingName = "_fk_" + name;
             string fkGuidBackingName = "_fk_guid_" + name;
 
             bool hasInverseNavigator = otherEnd.Navigator != null;
 
             Call(host, ctx, serializationList,
-                name, efName, fkBackingName, fkGuidBackingName,
+                name, implName, fkBackingName, fkGuidBackingName,
                 ownInterface, referencedInterface,
                 rel, endRole,
                 hasInverseNavigator,
                 rel.NeedsPositionStorage(endRole),
                 Construct.ListPositionPropertyName(relEnd),
-                callGetterSetterEvents);
+                rel.A.Type.ImplementsIExportable() && rel.B.Type.ImplementsIExportable(),
+                relEnd.Type.Module.Namespace,
+                callGetterSetterEvents, isReloadable);
         }
 
 
@@ -71,7 +75,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
             IKistlContext ctx,
             Templates.Implementation.SerializationMembersList serializationList,
             string name,
-            string efName,
+            string implName,
             string fkBackingName,
             string fkGuidBackingName,
             string ownInterface,
@@ -81,26 +85,28 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
             bool hasInverseNavigator,
             bool hasPositionStorage,
             string positionPropertyName,
-            bool callGetterSetterEvents)
+            bool relDataTypeExportable,
+            string moduleNamespace,
+            bool callGetterSetterEvents,
+            bool isReloadable)
         {
             if (host == null) { throw new ArgumentNullException("host"); }
             if (rel == null) { throw new ArgumentNullException("rel"); }
 
             host.CallTemplate("Implementation.ObjectClasses.ObjectReferencePropertyTemplate", ctx, serializationList,
-                name, efName, fkBackingName, fkGuidBackingName, ownInterface, referencedInterface, rel, endRole,
-                hasInverseNavigator, hasPositionStorage, positionPropertyName, callGetterSetterEvents);
+                name, implName, fkBackingName, fkGuidBackingName, ownInterface, referencedInterface, rel, endRole,
+                hasInverseNavigator, hasPositionStorage, positionPropertyName, relDataTypeExportable, moduleNamespace, callGetterSetterEvents, isReloadable);
         }
 
-        protected virtual void AddSerialization(Templates.Implementation.SerializationMembersList list, string memberName)
+        protected virtual void AddSerialization(Templates.Implementation.SerializationMembersList list, string memberName, string fkBackingName)
         {
-            // TODO: XML Namespace
             if (list != null)
             {
-                //if (relDataTypeExportable)
-                //{
-                // list.Add("Implementation.ObjectClasses.ObjectReferencePropertySerialization", SerializerType.ImportExport, "http://dasz.at/Kistl", name, memberName);
-                //}
-                list.Add(SerializerType.Service, "http://dasz.at/Kistl", name, memberName);
+                if (relDataTypeExportable)
+                {
+                    list.Add("Implementation.ObjectClasses.ObjectReferencePropertySerialization", SerializerType.ImportExport, moduleNamespace, name, memberName);
+                }
+                list.Add(SerializerType.Service, moduleNamespace, name, fkBackingName);
             }
         }
     }

@@ -412,6 +412,27 @@ namespace Kistl.App.GUI
 			this._fk_Property = otherImpl._fk_Property;
 		}
 
+		public override void ReloadReferences()
+		{
+			// Do not reload references if the current object has been deleted.
+			// TODO: enable when MemoryContext uses MemoryDataObjects
+			//if (this.ObjectState == DataObjectState.Deleted) return;
+			// fix direct object references
+
+			if (_fk_guid_Method.HasValue)
+				Method__Implementation__ = (Kistl.App.Base.Method__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.Method>(_fk_guid_Method.Value);
+			else if (_fk_Method.HasValue)
+				Method__Implementation__ = (Kistl.App.Base.Method__Implementation__)Context.Find<Kistl.App.Base.Method>(_fk_Method.Value);
+			else
+				Method__Implementation__ = null;
+
+			if (_fk_guid_Property.HasValue)
+				Property__Implementation__ = (Kistl.App.Base.Property__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.Property>(_fk_guid_Property.Value);
+			else if (_fk_Property.HasValue)
+				Property__Implementation__ = (Kistl.App.Base.Property__Implementation__)Context.Find<Kistl.App.Base.Property>(_fk_Property.Value);
+			else
+				Property__Implementation__ = null;
+		}
         // tail template
    		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
@@ -529,27 +550,6 @@ namespace Kistl.App.GUI
 		}
 	
 
-		public override void ReloadReferences()
-		{
-			// Do not reload references if the current object has been deleted.
-			// TODO: enable when MemoryContext uses MemoryDataObjects
-			//if (this.ObjectState == DataObjectState.Deleted) return;
-			// fix direct object references
-
-			if (_fk_guid_Method.HasValue)
-				Method__Implementation__ = (Kistl.App.Base.Method__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.Method>(_fk_guid_Method.Value);
-			else if (_fk_Method.HasValue)
-				Method__Implementation__ = (Kistl.App.Base.Method__Implementation__)Context.Find<Kistl.App.Base.Method>(_fk_Method.Value);
-			else
-				Method__Implementation__ = null;
-
-			if (_fk_guid_Property.HasValue)
-				Property__Implementation__ = (Kistl.App.Base.Property__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.Property>(_fk_guid_Property.Value);
-			else if (_fk_Property.HasValue)
-				Property__Implementation__ = (Kistl.App.Base.Property__Implementation__)Context.Find<Kistl.App.Base.Property>(_fk_Property.Value);
-			else
-				Property__Implementation__ = null;
-		}
 #region Serializer
 
 

@@ -15,10 +15,10 @@ namespace Kistl.Client.Mocks
 
     public class KistlMockFactory
     {
-        ITypeTransformations typeTrans;
-        public KistlMockFactory(ITypeTransformations typeTrans)
+        InterfaceType.Factory _iftFactory;
+        public KistlMockFactory(InterfaceType.Factory iftFactory)
         {
-            this.typeTrans = typeTrans;
+            this._iftFactory = iftFactory;
         }
 
         public Mock<ObjectReferenceProperty> CreateObjectReferenceProperty(

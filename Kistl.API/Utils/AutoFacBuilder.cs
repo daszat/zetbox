@@ -1,13 +1,15 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Autofac;
-using Kistl.API.Configuration;
-using Autofac.Core;
 
 namespace Kistl.API.Utils
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    
+    using Autofac;
+    using Autofac.Core;
+    using Kistl.API.Configuration;
+    
     public static class AutoFacBuilder
     {
         public static ContainerBuilder CreateContainerBuilder(KistlConfig config)
@@ -31,11 +33,13 @@ namespace Kistl.API.Utils
             {
                 try
                 {
+                    Logging.Log.InfoFormat("Adding module [{0}]", m);
                     builder.RegisterModule((IModule)Activator.CreateInstance(Type.GetType(m, true)));
                 }
                 catch (Exception ex)
                 {
-                    Logging.Log.Error("Unable to register Module from Config", ex);
+                    Logging.Log.Error(String.Format("Unable to register Module [{0}] from Config", m), ex);
+                    throw;
                 }
             }
             return builder;

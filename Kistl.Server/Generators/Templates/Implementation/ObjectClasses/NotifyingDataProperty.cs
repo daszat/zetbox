@@ -59,7 +59,7 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
             if (HasDefaultValue)
             {
                 this.WriteObjects("                if (!", IsSetFlagName, ") {\r\n");
-                this.WriteObjects("                    var __p = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid(\"", _prop.ExportGuid, "\"));\r\n");
+                this.WriteObjects("                    var __p = FrozenContext.FindPersistenceObject<Kistl.App.Base.Property>(new Guid(\"", _prop.ExportGuid, "\"));\r\n");
                 this.WriteObjects("                    if (__p != null) {\r\n");
                 this.WriteObjects("                        ", IsSetFlagName, " = true;\r\n");
                 this.WriteObjects("                        __result = this.", BackingMemberFromName(name), " = (", type, ")__p.DefaultValue.GetDefaultValue();\r\n");

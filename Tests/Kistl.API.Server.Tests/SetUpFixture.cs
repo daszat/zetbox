@@ -1,49 +1,32 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Kistl.API.Server.Mocks;
-
-using NUnit.Framework;
-using Autofac;
-using Kistl.API.Configuration;
 
 namespace Kistl.API.Server.Tests
 {
-    internal class ServerApiAssemblyConfiguration : IAssemblyConfiguration
-    {
-        #region IAssemblyConfiguration Members
-
-        public string InterfaceAssemblyName
-        {
-            get { return typeof(ServerApiAssemblyConfiguration).Assembly.FullName; }
-        }
-
-        public IEnumerable<string> AllImplementationAssemblyNames
-        {
-            get { return new[] { typeof(ServerApiAssemblyConfiguration).Assembly.FullName }; }
-        }
-        #endregion
-    }
-
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    
+    using Autofac;
+    using Kistl.API.Configuration;
+    using Kistl.API.Server.Mocks;
+    using NUnit.Framework;
+    
     [SetUpFixture]
     public class SetUpFixture : AbstractConsumerTests.AbstractSetUpFixture
     {
         protected override void SetupBuilder(Autofac.ContainerBuilder builder)
         {
             base.SetupBuilder(builder);
-            builder
-                .RegisterType<ServerApiAssemblyConfiguration>()
-                .As<IAssemblyConfiguration>()
-                .SingleInstance();
+
+            builder.RegisterModule(new Kistl.API.ApiModule());
+            builder.RegisterModule(new Kistl.API.Server.ServerApiModule());
 
             builder
                 .RegisterType<MetaDataResolverMock>()
                 .As<IMetaDataResolver>()
                 .InstancePerDependency();
 
-            builder.Register(c => new KistlContextMock(c.Resolve<IMetaDataResolver>(), null, c.Resolve<KistlConfig>(), c.Resolve<ITypeTransformations>()))
+            builder.Register(c => new KistlContextMock(c.Resolve<IMetaDataResolver>(), null, c.Resolve<KistlConfig>(), c.Resolve<InterfaceType.Factory>()))
                 .As<IKistlContext>()
                 .As<IReadOnlyKistlContext>()
                 .InstancePerDependency();

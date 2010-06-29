@@ -29,8 +29,6 @@ namespace Kistl.Client.Forms
             var builder = Kistl.API.Utils.AutoFacBuilder.CreateContainerBuilder(config, config.Client.Modules);
             container = builder.Build();
 
-            var cams = container.Resolve<BaseCustomActionsManager>();
-
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 

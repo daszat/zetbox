@@ -25,7 +25,7 @@ namespace Kistl.Server
                 .Register((c, p) =>
                 {
                     KistlConfig cfg = c.Resolve<KistlConfig>();
-                    IKistlContext ctx = c.Resolve<MemoryContext>();
+                    IKistlContext ctx = c.Resolve<BaseMemoryContext>();
                     ISchemaProvider schemaProvider = c.Resolve<SchemaProviderFactory>().Invoke(cfg.Server.ConnectionString);
                     SchemaManagement.SchemaManager.LoadSavedSchemaInto(schemaProvider, ctx);
 
@@ -36,11 +36,6 @@ namespace Kistl.Server
                         cfg);
                 })
                 .InstancePerDependency();
-
-            moduleBuilder
-                .RegisterType<FrozenActionsManagerServer>()
-                .As<FrozenActionsManager>()
-                .SingleInstance();
 
             moduleBuilder
                 .RegisterType<Server>()
@@ -71,18 +66,6 @@ namespace Kistl.Server
 
             moduleBuilder
                 .RegisterType<KistlService>()
-                .SingleInstance();
-
-            moduleBuilder
-                .Register(c =>
-                {
-                    var ctx = c.Resolve<IReadOnlyKistlContext>(Kistl.API.Helper.FrozenContextServiceName);
-                    var cams = new CustomActionsManagerServer();
-                    cams.Init(ctx);
-
-                    return cams;
-                })
-                .As<BaseCustomActionsManager>()
                 .SingleInstance();
 
             moduleBuilder

@@ -121,7 +121,6 @@
     <Compile Include="BaseValueCollectionWrapper.cs" />
     <Compile Include="DynamicLinq.cs" />
     <Compile Include="EventBasedMethodAttribute.cs" />
-    <Compile Include="MemoryContext.cs" />
     <Compile Include="RelationEndRole.cs" />
     <Compile Include="RelationshipFilterCollection.cs" />
     <Compile Include="SerializableExpression.Visitors.cs" />

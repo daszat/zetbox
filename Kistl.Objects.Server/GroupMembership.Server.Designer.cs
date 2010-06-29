@@ -144,6 +144,22 @@ namespace Kistl.App.Base
 			this._fk_Group = otherImpl._fk_Group;
 		}
 
+		public override void ReloadReferences()
+		{
+			// Do not reload references if the current object has been deleted.
+			// TODO: enable when MemoryContext uses MemoryDataObjects
+			//if (this.ObjectState == DataObjectState.Deleted) return;
+			base.ReloadReferences();
+			
+			// fix direct object references
+
+			if (_fk_guid_Group.HasValue)
+				Group__Implementation__ = (Kistl.App.Base.Group__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.Group>(_fk_guid_Group.Value);
+			else if (_fk_Group.HasValue)
+				Group__Implementation__ = (Kistl.App.Base.Group__Implementation__)Context.Find<Kistl.App.Base.Group>(_fk_Group.Value);
+			else
+				Group__Implementation__ = null;
+		}
         // tail template
    		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
@@ -227,22 +243,6 @@ namespace Kistl.App.Base
 		}
 	
 
-		public override void ReloadReferences()
-		{
-			// Do not reload references if the current object has been deleted.
-			// TODO: enable when MemoryContext uses MemoryDataObjects
-			//if (this.ObjectState == DataObjectState.Deleted) return;
-			base.ReloadReferences();
-			
-			// fix direct object references
-
-			if (_fk_guid_Group.HasValue)
-				Group__Implementation__ = (Kistl.App.Base.Group__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.Group>(_fk_guid_Group.Value);
-			else if (_fk_Group.HasValue)
-				Group__Implementation__ = (Kistl.App.Base.Group__Implementation__)Context.Find<Kistl.App.Base.Group>(_fk_Group.Value);
-			else
-				Group__Implementation__ = null;
-		}
 #region Serializer
 
 

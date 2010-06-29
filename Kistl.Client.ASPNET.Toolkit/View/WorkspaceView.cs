@@ -117,7 +117,7 @@ namespace Kistl.Client.ASPNET.Toolkit.View
                         var type = Request["type"];
                         var id = Convert.ToInt32(Request["id"]);
 
-                        InterfaceType ifType = KistlContextManagerModule.TypeTransformations.AsInterfaceType(Type.GetType(type));
+                        InterfaceType ifType = KistlContextManagerModule.IftFactory(Type.GetType(type));
                         IDataObject obj = (IDataObject)KistlContextManagerModule.KistlContext.Find(ifType, id);
 
                         var mdl = KistlContextManagerModule.ModelFactory.CreateViewModel<DataObjectModel.Factory>(obj).Invoke(KistlContextManagerModule.KistlContext, obj);

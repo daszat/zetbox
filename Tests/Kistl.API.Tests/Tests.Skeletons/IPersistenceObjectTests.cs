@@ -8,7 +8,6 @@ using NUnit.Framework;
 
 namespace Kistl.API.Tests.Skeletons
 {
-
     public abstract class IPersistenceObjectTests<T>
         : IStreamableTests<T>
         where T : IPersistenceObject, new()
@@ -24,7 +23,11 @@ namespace Kistl.API.Tests.Skeletons
         }
         public override void TearDown()
         {
-            ctx.Dispose();
+            if (ctx != null)
+            {
+                ctx.Dispose();
+                ctx = null;
+            }
             base.TearDown();
         }
 

@@ -8,14 +8,12 @@ using Kistl.API;
 using Kistl.App.Test;
 
 using NUnit.Framework;
-using Autofac;
 
 namespace Kistl.Server.Tests.CompoundObjects
 {
     [TestFixture]
-    public class when_changing_a_compoundobject_list
-        : Kistl.API.AbstractConsumerTests.CompoundObjects.when_changing_a_compoundobject_list
+    public class when_changing_a_CompoundObject_list
+        : Kistl.API.AbstractConsumerTests.CompoundObjects.when_changing_a_CompoundObject_list
     {
-        
-    }
+    }       
 }

@@ -17,7 +17,18 @@ namespace Kistl.API.Tests
 
         protected readonly int items;
 
-        protected IKistlContext ctx;
+        private IKistlContext _ctx;
+        protected IKistlContext ctx
+        {
+            get
+            {
+                if (_ctx == null)
+                {
+                    _ctx = GetContext();
+                }
+                return _ctx;
+            }
+        }
 
         protected GenericCollectionTests(int items)
         {
@@ -93,7 +104,6 @@ namespace Kistl.API.Tests
         public override void SetUp()
         {
             base.SetUp();
-            ctx = GetContext();
             PreSetup();
             initialItems = InitialItems();
             collection = CreateCollection(initialItems);
@@ -104,6 +114,11 @@ namespace Kistl.API.Tests
         public override void TearDown()
         {
             PostTeardown();
+            if (_ctx != null)
+            {
+                _ctx.Dispose();
+                _ctx = null;
+            }
             base.TearDown();
         }
 

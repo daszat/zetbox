@@ -212,7 +212,21 @@ namespace Kistl.App.Test
             }
         }
         
+        // normalize namespace for Templates
+        private Kistl.App.Test.Muhblah MubBlah_Nav__Implementation__
+        {
+			get
+			{
+				return MubBlah_Nav;
+			}
+			set
+			{
+				MubBlah_Nav = value;
+			}
+		}
+        
         private int? _fk_MubBlah_Nav;
+        private Guid? _fk_guid_MubBlah_Nav = null;
 		// END Kistl.DalProvider.Memory.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate for MubBlah_Nav
 		public static event PropertyGetterHandler<Kistl.App.Test.TestCustomObject, Kistl.App.Test.Muhblah> OnMubBlah_Nav_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Test.TestCustomObject, Kistl.App.Test.Muhblah> OnMubBlah_Nav_PreSetter;
@@ -325,7 +339,21 @@ namespace Kistl.App.Test
             }
         }
         
+        // normalize namespace for Templates
+        private Kistl.App.Test.Muhblah MuhBlah_One_Nav__Implementation__
+        {
+			get
+			{
+				return MuhBlah_One_Nav;
+			}
+			set
+			{
+				MuhBlah_One_Nav = value;
+			}
+		}
+        
         private int? _fk_MuhBlah_One_Nav;
+        private Guid? _fk_guid_MuhBlah_One_Nav = null;
 		// END Kistl.DalProvider.Memory.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate for MuhBlah_One_Nav
 		public static event PropertyGetterHandler<Kistl.App.Test.TestCustomObject, Kistl.App.Test.Muhblah> OnMuhBlah_One_Nav_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Test.TestCustomObject, Kistl.App.Test.Muhblah> OnMuhBlah_One_Nav_PreSetter;
@@ -498,6 +526,27 @@ namespace Kistl.App.Test
 			_PhoneNumbersOther.ForEach<IValueCollectionEntry>(i => ctx.Attach(i));
 		}
 
+		public override void ReloadReferences()
+		{
+			// Do not reload references if the current object has been deleted.
+			// TODO: enable when MemoryContext uses MemoryDataObjects
+			//if (this.ObjectState == DataObjectState.Deleted) return;
+			// fix direct object references
+
+			if (_fk_guid_MubBlah_Nav.HasValue)
+				MubBlah_Nav__Implementation__ = (Kistl.App.Test.Muhblah__Implementation__Memory)Context.FindPersistenceObject<Kistl.App.Test.Muhblah>(_fk_guid_MubBlah_Nav.Value);
+			else if (_fk_MubBlah_Nav.HasValue)
+				MubBlah_Nav__Implementation__ = (Kistl.App.Test.Muhblah__Implementation__Memory)Context.Find<Kistl.App.Test.Muhblah>(_fk_MubBlah_Nav.Value);
+			else
+				MubBlah_Nav__Implementation__ = null;
+
+			if (_fk_guid_MuhBlah_One_Nav.HasValue)
+				MuhBlah_One_Nav__Implementation__ = (Kistl.App.Test.Muhblah__Implementation__Memory)Context.FindPersistenceObject<Kistl.App.Test.Muhblah>(_fk_guid_MuhBlah_One_Nav.Value);
+			else if (_fk_MuhBlah_One_Nav.HasValue)
+				MuhBlah_One_Nav__Implementation__ = (Kistl.App.Test.Muhblah__Implementation__Memory)Context.Find<Kistl.App.Test.Muhblah>(_fk_MuhBlah_One_Nav.Value);
+			else
+				MuhBlah_One_Nav__Implementation__ = null;
+		}
         // tail template
    		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
@@ -710,8 +759,8 @@ namespace Kistl.App.Test
             
             base.ToStream(xml);
             XmlStreamer.ToStream(this._Birthday, xml, "Birthday", "Kistl.App.Test");
-            XmlStreamer.ToStream(this._fk_MubBlah_Nav, xml, "MubBlah_Nav", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(this._fk_MuhBlah_One_Nav, xml, "MuhBlah_One_Nav", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._fk_MubBlah_Nav, xml, "MubBlah_Nav", "Kistl.App.Test");
+            XmlStreamer.ToStream(this._fk_MuhBlah_One_Nav, xml, "MuhBlah_One_Nav", "Kistl.App.Test");
             XmlStreamer.ToStream(this._PersonName, xml, "PersonName", "Kistl.App.Test");
 			// TODO: Add XML Serializer here
 			// TODO: Add XML Serializer here
@@ -723,8 +772,8 @@ namespace Kistl.App.Test
             
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._Birthday, xml, "Birthday", "Kistl.App.Test");
-            XmlStreamer.FromStream(ref this._fk_MubBlah_Nav, xml, "MubBlah_Nav", "http://dasz.at/Kistl");
-            XmlStreamer.FromStream(ref this._fk_MuhBlah_One_Nav, xml, "MuhBlah_One_Nav", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_MubBlah_Nav, xml, "MubBlah_Nav", "Kistl.App.Test");
+            XmlStreamer.FromStream(ref this._fk_MuhBlah_One_Nav, xml, "MuhBlah_One_Nav", "Kistl.App.Test");
             XmlStreamer.FromStream(ref this._PersonName, xml, "PersonName", "Kistl.App.Test");
 			// TODO: Add XML Serializer here
 			// TODO: Add XML Serializer here

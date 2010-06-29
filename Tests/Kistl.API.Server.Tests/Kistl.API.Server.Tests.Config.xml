@@ -9,18 +9,7 @@
     <CodeGenWorkingPath>bin\CodeGenNext</CodeGenWorkingPath>
     <CodeGenOutputPath>bin\CodeGen</CodeGenOutputPath>
     <CodeGenArchivePath>Backup</CodeGenArchivePath>
-    <Modules>
-      <Module>Kistl.API.ApiModule, Kistl.API</Module>
-      <Module>Kistl.API.Server.ServerApiModule, Kistl.API.Server</Module>
-      <Module>Kistl.Server.ServerModule, Kistl.Server</Module>
-      <Module>Kistl.DalProvider.EF.EfProvider, Kistl.DalProvider.EF</Module>
-      <Module>Kistl.DalProvider.Memory.MemoryProvider, Kistl.DalProvider.Memory</Module>
-      <Module>Kistl.DalProvider.Memory.Generator.MemoryGeneratorProvider, Kistl.DalProvider.Memory.Generator</Module>
-      <Module>Kistl.DalProvider.Frozen.FrozenProvider, Kistl.DalProvider.Frozen</Module>
-      <Module>Kistl.DalProvider.Frozen.Generator.FrozenGeneratorProvider, Kistl.DalProvider.Frozen.Generator</Module>
-    </Modules>
   </Server>
-  <Client StartClient="false" ThrowErrors="false"/>
   <SourceFileLocation>
     <!-- default probe path -->
     <string>P:\Kistl\bin\CodeGen\bin\Debug</string>

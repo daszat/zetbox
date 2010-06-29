@@ -106,7 +106,21 @@ namespace Kistl.App.Base
             }
         }
         
+        // normalize namespace for Templates
+        private Kistl.App.Base.ConstraintInvocation GetErrorTextInvocation__Implementation__
+        {
+			get
+			{
+				return GetErrorTextInvocation;
+			}
+			set
+			{
+				GetErrorTextInvocation = value;
+			}
+		}
+        
         private int? _fk_GetErrorTextInvocation;
+        private Guid? _fk_guid_GetErrorTextInvocation = null;
 		// END Kistl.DalProvider.Memory.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate for GetErrorTextInvocation
 		public static event PropertyGetterHandler<Kistl.App.Base.InvokingConstraint, Kistl.App.Base.ConstraintInvocation> OnGetErrorTextInvocation_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.InvokingConstraint, Kistl.App.Base.ConstraintInvocation> OnGetErrorTextInvocation_PreSetter;
@@ -180,7 +194,21 @@ namespace Kistl.App.Base
             }
         }
         
+        // normalize namespace for Templates
+        private Kistl.App.Base.ConstraintInvocation IsValidInvocation__Implementation__
+        {
+			get
+			{
+				return IsValidInvocation;
+			}
+			set
+			{
+				IsValidInvocation = value;
+			}
+		}
+        
         private int? _fk_IsValidInvocation;
+        private Guid? _fk_guid_IsValidInvocation = null;
 		// END Kistl.DalProvider.Memory.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate for IsValidInvocation
 		public static event PropertyGetterHandler<Kistl.App.Base.InvokingConstraint, Kistl.App.Base.ConstraintInvocation> OnIsValidInvocation_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.InvokingConstraint, Kistl.App.Base.ConstraintInvocation> OnIsValidInvocation_PreSetter;
@@ -249,6 +277,29 @@ namespace Kistl.App.Base
             base.AttachToContext(ctx);
 		}
 
+		public override void ReloadReferences()
+		{
+			// Do not reload references if the current object has been deleted.
+			// TODO: enable when MemoryContext uses MemoryDataObjects
+			//if (this.ObjectState == DataObjectState.Deleted) return;
+			base.ReloadReferences();
+			
+			// fix direct object references
+
+			if (_fk_guid_GetErrorTextInvocation.HasValue)
+				GetErrorTextInvocation__Implementation__ = (Kistl.App.Base.ConstraintInvocation__Implementation__Memory)Context.FindPersistenceObject<Kistl.App.Base.ConstraintInvocation>(_fk_guid_GetErrorTextInvocation.Value);
+			else if (_fk_GetErrorTextInvocation.HasValue)
+				GetErrorTextInvocation__Implementation__ = (Kistl.App.Base.ConstraintInvocation__Implementation__Memory)Context.Find<Kistl.App.Base.ConstraintInvocation>(_fk_GetErrorTextInvocation.Value);
+			else
+				GetErrorTextInvocation__Implementation__ = null;
+
+			if (_fk_guid_IsValidInvocation.HasValue)
+				IsValidInvocation__Implementation__ = (Kistl.App.Base.ConstraintInvocation__Implementation__Memory)Context.FindPersistenceObject<Kistl.App.Base.ConstraintInvocation>(_fk_guid_IsValidInvocation.Value);
+			else if (_fk_IsValidInvocation.HasValue)
+				IsValidInvocation__Implementation__ = (Kistl.App.Base.ConstraintInvocation__Implementation__Memory)Context.Find<Kistl.App.Base.ConstraintInvocation>(_fk_IsValidInvocation.Value);
+			else
+				IsValidInvocation__Implementation__ = null;
+		}
         // tail template
    		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
@@ -386,28 +437,32 @@ namespace Kistl.App.Base
         {
             
             base.ToStream(xml);
-            XmlStreamer.ToStream(this._fk_GetErrorTextInvocation, xml, "GetErrorTextInvocation", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(this._fk_IsValidInvocation, xml, "IsValidInvocation", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._fk_GetErrorTextInvocation, xml, "GetErrorTextInvocation", "Kistl.App.Base");
+            XmlStreamer.ToStream(this._fk_IsValidInvocation, xml, "IsValidInvocation", "Kistl.App.Base");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
             
             base.FromStream(xml);
-            XmlStreamer.FromStream(ref this._fk_GetErrorTextInvocation, xml, "GetErrorTextInvocation", "http://dasz.at/Kistl");
-            XmlStreamer.FromStream(ref this._fk_IsValidInvocation, xml, "IsValidInvocation", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_GetErrorTextInvocation, xml, "GetErrorTextInvocation", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._fk_IsValidInvocation, xml, "IsValidInvocation", "Kistl.App.Base");
         }
 
         public override void Export(System.Xml.XmlWriter xml, string[] modules)
         {
             
             base.Export(xml, modules);
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(GetErrorTextInvocation != null ? GetErrorTextInvocation.ExportGuid : (Guid?)null, xml, "GetErrorTextInvocation", "Kistl.App.Base");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(IsValidInvocation != null ? IsValidInvocation.ExportGuid : (Guid?)null, xml, "IsValidInvocation", "Kistl.App.Base");
         }
 
         public override void MergeImport(System.Xml.XmlReader xml)
         {
             
             base.MergeImport(xml);
+            XmlStreamer.FromStream(ref this._fk_guid_GetErrorTextInvocation, xml, "GetErrorTextInvocation", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._fk_guid_IsValidInvocation, xml, "IsValidInvocation", "Kistl.App.Base");
         }
 
 #endregion

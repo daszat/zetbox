@@ -356,6 +356,20 @@ namespace Kistl.App.Test
 			this._fk_Fragebogen = otherImpl._fk_Fragebogen;
 		}
 
+		public override void ReloadReferences()
+		{
+			// Do not reload references if the current object has been deleted.
+			// TODO: enable when MemoryContext uses MemoryDataObjects
+			//if (this.ObjectState == DataObjectState.Deleted) return;
+			// fix direct object references
+
+			if (_fk_guid_Fragebogen.HasValue)
+				Fragebogen__Implementation__ = (Kistl.App.Test.Fragebogen__Implementation__)Context.FindPersistenceObject<Kistl.App.Test.Fragebogen>(_fk_guid_Fragebogen.Value);
+			else if (_fk_Fragebogen.HasValue)
+				Fragebogen__Implementation__ = (Kistl.App.Test.Fragebogen__Implementation__)Context.Find<Kistl.App.Test.Fragebogen>(_fk_Fragebogen.Value);
+			else
+				Fragebogen__Implementation__ = null;
+		}
         // tail template
    		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
@@ -471,20 +485,6 @@ namespace Kistl.App.Test
 		}
 	
 
-		public override void ReloadReferences()
-		{
-			// Do not reload references if the current object has been deleted.
-			// TODO: enable when MemoryContext uses MemoryDataObjects
-			//if (this.ObjectState == DataObjectState.Deleted) return;
-			// fix direct object references
-
-			if (_fk_guid_Fragebogen.HasValue)
-				Fragebogen__Implementation__ = (Kistl.App.Test.Fragebogen__Implementation__)Context.FindPersistenceObject<Kistl.App.Test.Fragebogen>(_fk_guid_Fragebogen.Value);
-			else if (_fk_Fragebogen.HasValue)
-				Fragebogen__Implementation__ = (Kistl.App.Test.Fragebogen__Implementation__)Context.Find<Kistl.App.Test.Fragebogen>(_fk_Fragebogen.Value);
-			else
-				Fragebogen__Implementation__ = null;
-		}
 #region Serializer
 
 

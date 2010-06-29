@@ -6,7 +6,7 @@ using Kistl.API;
 using NUnit.Framework;
 using Kistl.API.Client;
 
-namespace Kistl.DalProvider.ClientObjects.Tests.Blobs
+namespace Kistl.DalProvider.Client.Tests.Blobs
 {
     [TestFixture]
     [Ignore("Needs mocked IKistlService and IKistlServiceStreams")]

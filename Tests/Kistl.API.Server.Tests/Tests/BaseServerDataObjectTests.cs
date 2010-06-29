@@ -18,12 +18,12 @@ namespace Kistl.API.Server.Tests
     {
         private TestObjClass__Implementation__ obj;
         private IKistlContext ctx;
-        private ITypeTransformations typeTrans;
+        private InterfaceType.Factory _iftFactory;
 
         public override void SetUp()
         {
             base.SetUp();
-            typeTrans = scope.Resolve<ITypeTransformations>();
+            _iftFactory = scope.Resolve<InterfaceType.Factory>();
             ctx = GetContext();
             obj = new TestObjClass__Implementation__();
             ctx.Attach(obj);
@@ -99,7 +99,7 @@ namespace Kistl.API.Server.Tests
             Assert.That(ms.Length, Is.GreaterThan(0));
             ms.Seek(0, SeekOrigin.Begin);
 
-            TestObjClassSerializationMock.AssertCorrectContents<TestObjClass, TestEnum>(sr, typeTrans);
+            TestObjClassSerializationMock.AssertCorrectContents<TestObjClass, TestEnum>(sr, _iftFactory);
         }
 
         [Test]
@@ -109,7 +109,7 @@ namespace Kistl.API.Server.Tests
             BinaryWriter sw = new BinaryWriter(ms, UTF8Encoding.UTF8);
             BinaryReader sr = new BinaryReader(ms, UTF8Encoding.UTF8);
 
-            TestObjClassSerializationMock.ToStream<TestObjClass, TestEnum>(sw, typeTrans);
+            TestObjClassSerializationMock.ToStream<TestObjClass, TestEnum>(sw, _iftFactory);
             sw.Flush();
 
             Assert.That(ms.Length, Is.GreaterThan(0));
@@ -162,7 +162,7 @@ namespace Kistl.API.Server.Tests
 
             SerializableType t;
             BinarySerializer.FromStream(out t, sr);
-            Assert.That(t, Is.EqualTo(typeTrans.AsInterfaceType(typeof(TestObjClass)).ToSerializableType()));
+            Assert.That(t, Is.EqualTo(_iftFactory(typeof(TestObjClass)).ToSerializableType()));
         }
     }
 }

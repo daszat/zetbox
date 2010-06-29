@@ -314,6 +314,27 @@ namespace at.dasz.CourseOrganiser
 			this._fk_Student = otherImpl._fk_Student;
 		}
 
+		public override void ReloadReferences()
+		{
+			// Do not reload references if the current object has been deleted.
+			// TODO: enable when MemoryContext uses MemoryDataObjects
+			//if (this.ObjectState == DataObjectState.Deleted) return;
+			// fix direct object references
+
+			if (_fk_guid_Exam.HasValue)
+				Exam__Implementation__ = (at.dasz.CourseOrganiser.Exam__Implementation__)Context.FindPersistenceObject<at.dasz.CourseOrganiser.Exam>(_fk_guid_Exam.Value);
+			else if (_fk_Exam.HasValue)
+				Exam__Implementation__ = (at.dasz.CourseOrganiser.Exam__Implementation__)Context.Find<at.dasz.CourseOrganiser.Exam>(_fk_Exam.Value);
+			else
+				Exam__Implementation__ = null;
+
+			if (_fk_guid_Student.HasValue)
+				Student__Implementation__ = (at.dasz.CourseOrganiser.Student__Implementation__)Context.FindPersistenceObject<at.dasz.CourseOrganiser.Student>(_fk_guid_Student.Value);
+			else if (_fk_Student.HasValue)
+				Student__Implementation__ = (at.dasz.CourseOrganiser.Student__Implementation__)Context.Find<at.dasz.CourseOrganiser.Student>(_fk_Student.Value);
+			else
+				Student__Implementation__ = null;
+		}
         // tail template
    		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
@@ -414,27 +435,6 @@ namespace at.dasz.CourseOrganiser
 		}
 	
 
-		public override void ReloadReferences()
-		{
-			// Do not reload references if the current object has been deleted.
-			// TODO: enable when MemoryContext uses MemoryDataObjects
-			//if (this.ObjectState == DataObjectState.Deleted) return;
-			// fix direct object references
-
-			if (_fk_guid_Exam.HasValue)
-				Exam__Implementation__ = (at.dasz.CourseOrganiser.Exam__Implementation__)Context.FindPersistenceObject<at.dasz.CourseOrganiser.Exam>(_fk_guid_Exam.Value);
-			else if (_fk_Exam.HasValue)
-				Exam__Implementation__ = (at.dasz.CourseOrganiser.Exam__Implementation__)Context.Find<at.dasz.CourseOrganiser.Exam>(_fk_Exam.Value);
-			else
-				Exam__Implementation__ = null;
-
-			if (_fk_guid_Student.HasValue)
-				Student__Implementation__ = (at.dasz.CourseOrganiser.Student__Implementation__)Context.FindPersistenceObject<at.dasz.CourseOrganiser.Student>(_fk_guid_Student.Value);
-			else if (_fk_Student.HasValue)
-				Student__Implementation__ = (at.dasz.CourseOrganiser.Student__Implementation__)Context.Find<at.dasz.CourseOrganiser.Student>(_fk_Student.Value);
-			else
-				Student__Implementation__ = null;
-		}
 #region Serializer
 
 

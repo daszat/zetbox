@@ -6,16 +6,15 @@ using System.Linq;
 using System.Text;
 
 using Kistl.API;
-using Kistl.App.Test;
-
-using NUnit.Framework;
 using Kistl.API.Client;
+using Kistl.App.Test;
+using NUnit.Framework;
 
 namespace Kistl.IntegrationTests.CompoundObjects
 {
     [TestFixture]
-    public class when_changing_a_compoundobject_list
-        : Kistl.API.AbstractConsumerTests.CompoundObjects.when_changing_a_compoundobject_list
+    public class when_changing_a_CompoundObject_list
+        : Kistl.API.AbstractConsumerTests.CompoundObjects.when_changing_a_CompoundObject_list
     {
     }
 }

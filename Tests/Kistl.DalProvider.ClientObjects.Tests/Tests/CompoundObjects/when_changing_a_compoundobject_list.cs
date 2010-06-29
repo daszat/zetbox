@@ -8,13 +8,12 @@ using Kistl.API.Client;
 
 using NUnit.Framework;
 
-namespace Kistl.DalProvider.ClientObjects.Tests.CompoundObjects
+namespace Kistl.DalProvider.Client.Tests.CompoundObjects
 {
-
     [TestFixture]
-    [Ignore("Needs mocked IKistlService and IKistlServiceStreams")]
-    public class when_changing_a_compoundobject_list
-        : Kistl.API.AbstractConsumerTests.CompoundObjects.when_changing_a_compoundobject_list
+    [Ignore("Needs mocked IProxy")]
+    public class when_changing_a_CompoundObject_list
+        : Kistl.API.AbstractConsumerTests.CompoundObjects.when_changing_a_CompoundObject_list
     {
     }
 }

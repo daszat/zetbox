@@ -6,18 +6,21 @@ namespace Kistl.DalProvider.EF
     using System.Linq;
     using System.Reflection;
     using System.Text;
-
     using Autofac;
-
+    using Autofac.Core;
     using Kistl.API;
     using Kistl.API.Configuration;
     using Kistl.API.Server;
+    using Kistl.API.Utils;
     using Kistl.Server.Generators;
-    using Autofac.Core;
+
+    public interface IEFActionsManager : ICustomActionsManager { }
 
     public class EfProvider
         : Autofac.Module
     {
+        internal static readonly string ServerAssembly = "Kistl.Objects.Server, Version=1.0.0.0, Culture=neutral, PublicKeyToken=7b69192d05046fdf";
+
         private static readonly object _lock = new object();
 
         protected override void Load(ContainerBuilder moduleBuilder)
@@ -27,7 +30,7 @@ namespace Kistl.DalProvider.EF
             var interfaceAssembly = Assembly.Load(Kistl.API.Helper.InterfaceAssembly);
             if (interfaceAssembly == null)
                 throw new InvalidOperationException("Unable to load Kistl.Objects Assembly, no Entity Framework Metadata will be loaded");
-            var serverAssembly = Assembly.Load(Kistl.API.Helper.ServerAssembly);
+            var serverAssembly = Assembly.Load(ServerAssembly);
             if (serverAssembly == null)
                 throw new InvalidOperationException("Unable to load Kistl.Objects.Server Assembly, no Entity Framework Metadata will be loaded");
 
@@ -37,7 +40,7 @@ namespace Kistl.DalProvider.EF
             var reflectedInterfaceAssembly = AssemblyLoader.ReflectionOnlyLoadFrom(Kistl.API.Helper.InterfaceAssembly);
             if (reflectedInterfaceAssembly == null)
                 throw new InvalidOperationException("Unable to load Kistl.Objects Assembly for reflection, no Entity Framework Metadata will be loaded");
-            var reflectedServerAssembly = AssemblyLoader.ReflectionOnlyLoadFrom(Kistl.API.Helper.ServerAssembly);
+            var reflectedServerAssembly = AssemblyLoader.ReflectionOnlyLoadFrom(EfProvider.ServerAssembly);
             if (reflectedServerAssembly == null)
                 throw new InvalidOperationException("Unable to load Kistl.Objects.Server Assembly for reflection, no Entity Framework Metadata will be loaded");
 
@@ -51,12 +54,18 @@ namespace Kistl.DalProvider.EF
                             c.Resolve<IMetaDataResolver>(),
                             null,
                             c.Resolve<KistlConfig>(),
-                            c.Resolve<ITypeTransformations>(),
-                            c.Resolve<Func<IReadOnlyKistlContext>>(Kistl.API.Helper.FrozenContextServiceName)
+                            c.Resolve<Func<IReadOnlyKistlContext>>(Kistl.API.Helper.FrozenContextServiceName),
+                            c.Resolve<InterfaceType.Factory>(),
+                            c.Resolve<EfImplementationType.EfFactory>()
                             );
                     }
                 })
                 .As<IKistlServerContext>()
+                .OnActivated(args =>                              
+                {
+                    var manager = args.Context.Resolve<IEFActionsManager>();
+                    manager.Init(args.Context.Resolve<IReadOnlyKistlContext>(Kistl.API.Helper.FrozenContextServiceName));
+                })
                 .InstancePerDependency();
 
             moduleBuilder
@@ -70,12 +79,18 @@ namespace Kistl.DalProvider.EF
                             c.Resolve<IMetaDataResolver>(),
                             param != null ? (Kistl.App.Base.Identity)param.Value : c.Resolve<IIdentityResolver>().GetCurrent(),
                             c.Resolve<KistlConfig>(),
-                            c.Resolve<ITypeTransformations>(),
-                            c.Resolve<Func<IReadOnlyKistlContext>>(Kistl.API.Helper.FrozenContextServiceName)
+                            c.Resolve<Func<IReadOnlyKistlContext>>(Kistl.API.Helper.FrozenContextServiceName),
+                            c.Resolve<InterfaceType.Factory>(),
+                            c.Resolve<EfImplementationType.EfFactory>()
                             );
                     }
                 })
                 .As<IKistlContext>()
+                .OnActivated(args =>
+                {
+                    var manager = args.Context.Resolve<IEFActionsManager>();
+                    manager.Init(args.Context.Resolve<IReadOnlyKistlContext>(Kistl.API.Helper.FrozenContextServiceName));
+                })
                 .InstancePerDependency();
 
             moduleBuilder
@@ -86,30 +101,24 @@ namespace Kistl.DalProvider.EF
                     {
                         var resolver = new CachingMetaDataResolver();
                         var result = new KistlDataContext(
-                            resolver, 
-                            null, 
+                            resolver,
+                            null,
                             c.Resolve<KistlConfig>(),
-                            c.Resolve<ITypeTransformations>(),
-                            c.Resolve<Func<IReadOnlyKistlContext>>(Kistl.API.Helper.FrozenContextServiceName)
+                            c.Resolve<Func<IReadOnlyKistlContext>>(Kistl.API.Helper.FrozenContextServiceName),
+                            c.Resolve<InterfaceType.Factory>(),
+                            c.Resolve<EfImplementationType.EfFactory>()
                             );
                         resolver.Context = result;
                         return result;
                     }
                 })
                 .As<IReadOnlyKistlContext>()
-                .SingleInstance();
-
-            moduleBuilder
-                .Register<MemoryContext>(c =>
+                .OnActivated(args =>
                 {
-                    // defer loading the assemblies until a memory context is needed to avoid 
-                    // initialisation troubles
-
-                    // TODO: decide whether to load this from configuration too?
-                    // TODO: Replace the default TypeTransformations with other configuration
-                    return new MemoryContext(c.Resolve<ITypeTransformations>());
+                    var manager = args.Context.Resolve<IEFActionsManager>();
+                    manager.Init(args.Context.Resolve<IReadOnlyKistlContext>(Kistl.API.Helper.FrozenContextServiceName));
                 })
-                .InstancePerDependency();
+                .SingleInstance();
 
             moduleBuilder
                 .RegisterType<Generator.EntityFrameworkGenerator>()
@@ -119,6 +128,8 @@ namespace Kistl.DalProvider.EF
             moduleBuilder
                 .Register(c => new EfServerObjectHandlerFactory())
                 .As(typeof(IServerObjectHandlerFactory));
+
+            moduleBuilder.RegisterType<EfImplementationType>();
         }
     }
 }

@@ -106,7 +106,21 @@ namespace Kistl.App.GUI
             }
         }
         
+        // normalize namespace for Templates
+        private Kistl.App.Base.Assembly DisplayedTypeAssembly__Implementation__
+        {
+			get
+			{
+				return DisplayedTypeAssembly;
+			}
+			set
+			{
+				DisplayedTypeAssembly = value;
+			}
+		}
+        
         private int? _fk_DisplayedTypeAssembly;
+        private Guid? _fk_guid_DisplayedTypeAssembly = null;
 		// END Kistl.DalProvider.Memory.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate for DisplayedTypeAssembly
 		public static event PropertyGetterHandler<Kistl.App.GUI.Template, Kistl.App.Base.Assembly> OnDisplayedTypeAssembly_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.Template, Kistl.App.Base.Assembly> OnDisplayedTypeAssembly_PreSetter;
@@ -301,7 +315,21 @@ namespace Kistl.App.GUI
             }
         }
         
+        // normalize namespace for Templates
+        private Kistl.App.GUI.Visual VisualTree__Implementation__
+        {
+			get
+			{
+				return VisualTree;
+			}
+			set
+			{
+				VisualTree = value;
+			}
+		}
+        
         private int? _fk_VisualTree;
+        private Guid? _fk_guid_VisualTree = null;
 		// END Kistl.DalProvider.Memory.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate for VisualTree
 		public static event PropertyGetterHandler<Kistl.App.GUI.Template, Kistl.App.GUI.Visual> OnVisualTree_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.Template, Kistl.App.GUI.Visual> OnVisualTree_PreSetter;
@@ -351,6 +379,27 @@ namespace Kistl.App.GUI
             base.AttachToContext(ctx);
 		}
 
+		public override void ReloadReferences()
+		{
+			// Do not reload references if the current object has been deleted.
+			// TODO: enable when MemoryContext uses MemoryDataObjects
+			//if (this.ObjectState == DataObjectState.Deleted) return;
+			// fix direct object references
+
+			if (_fk_guid_DisplayedTypeAssembly.HasValue)
+				DisplayedTypeAssembly__Implementation__ = (Kistl.App.Base.Assembly__Implementation__Memory)Context.FindPersistenceObject<Kistl.App.Base.Assembly>(_fk_guid_DisplayedTypeAssembly.Value);
+			else if (_fk_DisplayedTypeAssembly.HasValue)
+				DisplayedTypeAssembly__Implementation__ = (Kistl.App.Base.Assembly__Implementation__Memory)Context.Find<Kistl.App.Base.Assembly>(_fk_DisplayedTypeAssembly.Value);
+			else
+				DisplayedTypeAssembly__Implementation__ = null;
+
+			if (_fk_guid_VisualTree.HasValue)
+				VisualTree__Implementation__ = (Kistl.App.GUI.Visual__Implementation__Memory)Context.FindPersistenceObject<Kistl.App.GUI.Visual>(_fk_guid_VisualTree.Value);
+			else if (_fk_VisualTree.HasValue)
+				VisualTree__Implementation__ = (Kistl.App.GUI.Visual__Implementation__Memory)Context.Find<Kistl.App.GUI.Visual>(_fk_VisualTree.Value);
+			else
+				VisualTree__Implementation__ = null;
+		}
         // tail template
    		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
@@ -518,20 +567,20 @@ namespace Kistl.App.GUI
         {
             
             base.ToStream(xml);
-            XmlStreamer.ToStream(this._fk_DisplayedTypeAssembly, xml, "DisplayedTypeAssembly", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._fk_DisplayedTypeAssembly, xml, "DisplayedTypeAssembly", "Kistl.App.GUI");
             XmlStreamer.ToStream(this._DisplayedTypeFullName, xml, "DisplayedTypeFullName", "Kistl.App.GUI");
             XmlStreamer.ToStream(this._DisplayName, xml, "DisplayName", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this._fk_VisualTree, xml, "VisualTree", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._fk_VisualTree, xml, "VisualTree", "Kistl.App.GUI");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
             
             base.FromStream(xml);
-            XmlStreamer.FromStream(ref this._fk_DisplayedTypeAssembly, xml, "DisplayedTypeAssembly", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_DisplayedTypeAssembly, xml, "DisplayedTypeAssembly", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._DisplayedTypeFullName, xml, "DisplayedTypeFullName", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._DisplayName, xml, "DisplayName", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._fk_VisualTree, xml, "VisualTree", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_VisualTree, xml, "VisualTree", "Kistl.App.GUI");
         }
 
 #endregion

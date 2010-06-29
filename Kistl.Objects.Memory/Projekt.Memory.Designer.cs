@@ -194,7 +194,21 @@ namespace Kistl.App.Projekte
             }
         }
         
+        // normalize namespace for Templates
+        private Kistl.App.Base.Identity ChangedBy__Implementation__
+        {
+			get
+			{
+				return ChangedBy;
+			}
+			set
+			{
+				ChangedBy = value;
+			}
+		}
+        
         private int? _fk_ChangedBy;
+        private Guid? _fk_guid_ChangedBy = null;
 		// END Kistl.DalProvider.Memory.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate for ChangedBy
 		public static event PropertyGetterHandler<Kistl.App.Projekte.Projekt, Kistl.App.Base.Identity> OnChangedBy_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Projekt, Kistl.App.Base.Identity> OnChangedBy_PreSetter;
@@ -317,7 +331,21 @@ namespace Kistl.App.Projekte
             }
         }
         
+        // normalize namespace for Templates
+        private Kistl.App.Base.Identity CreatedBy__Implementation__
+        {
+			get
+			{
+				return CreatedBy;
+			}
+			set
+			{
+				CreatedBy = value;
+			}
+		}
+        
         private int? _fk_CreatedBy;
+        private Guid? _fk_guid_CreatedBy = null;
 		// END Kistl.DalProvider.Memory.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate for CreatedBy
 		public static event PropertyGetterHandler<Kistl.App.Projekte.Projekt, Kistl.App.Base.Identity> OnCreatedBy_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Projekt, Kistl.App.Base.Identity> OnCreatedBy_PreSetter;
@@ -558,6 +586,27 @@ namespace Kistl.App.Projekte
             base.AttachToContext(ctx);
 		}
 
+		public override void ReloadReferences()
+		{
+			// Do not reload references if the current object has been deleted.
+			// TODO: enable when MemoryContext uses MemoryDataObjects
+			//if (this.ObjectState == DataObjectState.Deleted) return;
+			// fix direct object references
+
+			if (_fk_guid_ChangedBy.HasValue)
+				ChangedBy__Implementation__ = (Kistl.App.Base.Identity__Implementation__Memory)Context.FindPersistenceObject<Kistl.App.Base.Identity>(_fk_guid_ChangedBy.Value);
+			else if (_fk_ChangedBy.HasValue)
+				ChangedBy__Implementation__ = (Kistl.App.Base.Identity__Implementation__Memory)Context.Find<Kistl.App.Base.Identity>(_fk_ChangedBy.Value);
+			else
+				ChangedBy__Implementation__ = null;
+
+			if (_fk_guid_CreatedBy.HasValue)
+				CreatedBy__Implementation__ = (Kistl.App.Base.Identity__Implementation__Memory)Context.FindPersistenceObject<Kistl.App.Base.Identity>(_fk_guid_CreatedBy.Value);
+			else if (_fk_CreatedBy.HasValue)
+				CreatedBy__Implementation__ = (Kistl.App.Base.Identity__Implementation__Memory)Context.Find<Kistl.App.Base.Identity>(_fk_CreatedBy.Value);
+			else
+				CreatedBy__Implementation__ = null;
+		}
         // tail template
    		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
@@ -774,9 +823,9 @@ namespace Kistl.App.Projekte
             
             base.ToStream(xml);
             XmlStreamer.ToStream(this._AufwandGes, xml, "AufwandGes", "Kistl.App.Projekte");
-            XmlStreamer.ToStream(this._fk_ChangedBy, xml, "ChangedBy", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._fk_ChangedBy, xml, "ChangedBy", "Kistl.App.Projekte");
             XmlStreamer.ToStream(this._ChangedOn, xml, "ChangedOn", "Kistl.App.Projekte");
-            XmlStreamer.ToStream(this._fk_CreatedBy, xml, "CreatedBy", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._fk_CreatedBy, xml, "CreatedBy", "Kistl.App.Projekte");
             XmlStreamer.ToStream(this._CreatedOn, xml, "CreatedOn", "Kistl.App.Projekte");
             XmlStreamer.ToStream(this._Kundenname, xml, "Kundenname", "Kistl.App.Projekte");
             XmlStreamer.ToStream(this._Name, xml, "Name", "Kistl.App.Projekte");
@@ -787,9 +836,9 @@ namespace Kistl.App.Projekte
             
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._AufwandGes, xml, "AufwandGes", "Kistl.App.Projekte");
-            XmlStreamer.FromStream(ref this._fk_ChangedBy, xml, "ChangedBy", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_ChangedBy, xml, "ChangedBy", "Kistl.App.Projekte");
             XmlStreamer.FromStream(ref this._ChangedOn, xml, "ChangedOn", "Kistl.App.Projekte");
-            XmlStreamer.FromStream(ref this._fk_CreatedBy, xml, "CreatedBy", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_CreatedBy, xml, "CreatedBy", "Kistl.App.Projekte");
             XmlStreamer.FromStream(ref this._CreatedOn, xml, "CreatedOn", "Kistl.App.Projekte");
             XmlStreamer.FromStream(ref this._Kundenname, xml, "Kundenname", "Kistl.App.Projekte");
             XmlStreamer.FromStream(ref this._Name, xml, "Name", "Kistl.App.Projekte");

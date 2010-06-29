@@ -161,7 +161,21 @@ namespace Kistl.App.Base
             }
         }
         
+        // normalize namespace for Templates
+        private Kistl.App.Base.ObjectClass BaseObjectClass__Implementation__
+        {
+			get
+			{
+				return BaseObjectClass;
+			}
+			set
+			{
+				BaseObjectClass = value;
+			}
+		}
+        
         private int? _fk_BaseObjectClass;
+        private Guid? _fk_guid_BaseObjectClass = null;
 		// END Kistl.DalProvider.Memory.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate for BaseObjectClass
 		public static event PropertyGetterHandler<Kistl.App.Base.ObjectClass, Kistl.App.Base.ObjectClass> OnBaseObjectClass_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.ObjectClass, Kistl.App.Base.ObjectClass> OnBaseObjectClass_PreSetter;
@@ -235,7 +249,21 @@ namespace Kistl.App.Base
             }
         }
         
+        // normalize namespace for Templates
+        private Kistl.App.GUI.ViewModelDescriptor DefaultViewModelDescriptor__Implementation__
+        {
+			get
+			{
+				return DefaultViewModelDescriptor;
+			}
+			set
+			{
+				DefaultViewModelDescriptor = value;
+			}
+		}
+        
         private int? _fk_DefaultViewModelDescriptor;
+        private Guid? _fk_guid_DefaultViewModelDescriptor = null;
 		// END Kistl.DalProvider.Memory.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate for DefaultViewModelDescriptor
 		public static event PropertyGetterHandler<Kistl.App.Base.ObjectClass, Kistl.App.GUI.ViewModelDescriptor> OnDefaultViewModelDescriptor_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.ObjectClass, Kistl.App.GUI.ViewModelDescriptor> OnDefaultViewModelDescriptor_PreSetter;
@@ -674,6 +702,29 @@ namespace Kistl.App.Base
             base.AttachToContext(ctx);
 		}
 
+		public override void ReloadReferences()
+		{
+			// Do not reload references if the current object has been deleted.
+			// TODO: enable when MemoryContext uses MemoryDataObjects
+			//if (this.ObjectState == DataObjectState.Deleted) return;
+			base.ReloadReferences();
+			
+			// fix direct object references
+
+			if (_fk_guid_BaseObjectClass.HasValue)
+				BaseObjectClass__Implementation__ = (Kistl.App.Base.ObjectClass__Implementation__Memory)Context.FindPersistenceObject<Kistl.App.Base.ObjectClass>(_fk_guid_BaseObjectClass.Value);
+			else if (_fk_BaseObjectClass.HasValue)
+				BaseObjectClass__Implementation__ = (Kistl.App.Base.ObjectClass__Implementation__Memory)Context.Find<Kistl.App.Base.ObjectClass>(_fk_BaseObjectClass.Value);
+			else
+				BaseObjectClass__Implementation__ = null;
+
+			if (_fk_guid_DefaultViewModelDescriptor.HasValue)
+				DefaultViewModelDescriptor__Implementation__ = (Kistl.App.GUI.ViewModelDescriptor__Implementation__Memory)Context.FindPersistenceObject<Kistl.App.GUI.ViewModelDescriptor>(_fk_guid_DefaultViewModelDescriptor.Value);
+			else if (_fk_DefaultViewModelDescriptor.HasValue)
+				DefaultViewModelDescriptor__Implementation__ = (Kistl.App.GUI.ViewModelDescriptor__Implementation__Memory)Context.Find<Kistl.App.GUI.ViewModelDescriptor>(_fk_DefaultViewModelDescriptor.Value);
+			else
+				DefaultViewModelDescriptor__Implementation__ = null;
+		}
         // tail template
    		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
@@ -881,8 +932,8 @@ namespace Kistl.App.Base
         {
             
             base.ToStream(xml);
-            XmlStreamer.ToStream(this._fk_BaseObjectClass, xml, "BaseObjectClass", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(this._fk_DefaultViewModelDescriptor, xml, "DefaultViewModelDescriptor", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._fk_BaseObjectClass, xml, "BaseObjectClass", "Kistl.App.Base");
+            XmlStreamer.ToStream(this._fk_DefaultViewModelDescriptor, xml, "DefaultViewModelDescriptor", "Kistl.App.Base");
             XmlStreamer.ToStream(this._IsAbstract, xml, "IsAbstract", "Kistl.App.Base");
             XmlStreamer.ToStream(this._IsFrozenObject, xml, "IsFrozenObject", "Kistl.App.Base");
             XmlStreamer.ToStream(this._IsSimpleObject, xml, "IsSimpleObject", "Kistl.App.GUI");
@@ -893,8 +944,8 @@ namespace Kistl.App.Base
         {
             
             base.FromStream(xml);
-            XmlStreamer.FromStream(ref this._fk_BaseObjectClass, xml, "BaseObjectClass", "http://dasz.at/Kistl");
-            XmlStreamer.FromStream(ref this._fk_DefaultViewModelDescriptor, xml, "DefaultViewModelDescriptor", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_BaseObjectClass, xml, "BaseObjectClass", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._fk_DefaultViewModelDescriptor, xml, "DefaultViewModelDescriptor", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._IsAbstract, xml, "IsAbstract", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._IsFrozenObject, xml, "IsFrozenObject", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._IsSimpleObject, xml, "IsSimpleObject", "Kistl.App.GUI");
@@ -905,6 +956,8 @@ namespace Kistl.App.Base
         {
             
             base.Export(xml, modules);
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(BaseObjectClass != null ? BaseObjectClass.ExportGuid : (Guid?)null, xml, "BaseObjectClass", "Kistl.App.Base");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(DefaultViewModelDescriptor != null ? DefaultViewModelDescriptor.ExportGuid : (Guid?)null, xml, "DefaultViewModelDescriptor", "Kistl.App.Base");
     
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._IsAbstract, xml, "IsAbstract", "Kistl.App.Base");
     
@@ -919,6 +972,8 @@ namespace Kistl.App.Base
         {
             
             base.MergeImport(xml);
+            XmlStreamer.FromStream(ref this._fk_guid_BaseObjectClass, xml, "BaseObjectClass", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._fk_guid_DefaultViewModelDescriptor, xml, "DefaultViewModelDescriptor", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._IsAbstract, xml, "IsAbstract", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._IsFrozenObject, xml, "IsFrozenObject", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._IsSimpleObject, xml, "IsSimpleObject", "Kistl.App.GUI");

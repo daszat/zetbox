@@ -78,11 +78,6 @@ namespace Kistl.IntegrationTests
         protected override void PostTeardown()
         {
             base.PostTeardown();
-            if (ctx != null)
-            {
-                ctx.Dispose();
-                ctx = null;
-            }
         }
 
         protected override Property NewItem()
@@ -246,11 +241,6 @@ namespace Kistl.IntegrationTests
         protected override void PostTeardown()
         {
             base.PostTeardown();
-            if (ctx != null)
-            {
-                ctx.Dispose();
-                ctx = null;
-            }
         }
 
         protected override Property NewItem()

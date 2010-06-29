@@ -19,7 +19,7 @@ namespace Kistl.API.Tests.Serializables
         public override void SetUp()
         {
             base.SetUp();
-            t = typeTrans.AsInterfaceType(typeof(TestDataObject)).ToSerializableType();
+            t = iftFactory(typeof(TestDataObject)).ToSerializableType();
         }
 
         [Test]

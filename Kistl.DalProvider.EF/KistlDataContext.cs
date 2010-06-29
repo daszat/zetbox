@@ -20,52 +20,22 @@ namespace Kistl.DalProvider.EF
     using Kistl.App.Extensions;
     using Kistl.App.Base;
 
-    internal class EFObjectContext : ObjectContext
-    {
-        /// <summary>
-        /// Private Connectionstring
-        /// </summary>
-        private static string connectionString = String.Empty;
-
-        public EFObjectContext(KistlConfig config)
-            : base(GetConnectionString(config), "Entities")
-        {
-        }
-
-        /// <summary>
-        /// Creates the Connectionstring.
-        /// <remarks>Format is: metadata=res://*;provider={provider};provider connection string='{Provider Connectionstring}'</remarks>
-        /// </summary>
-        /// <returns></returns>
-        private static string GetConnectionString(KistlConfig config)
-        {
-            // Build connectionString
-            // metadata=res://*;provider=System.Data.SqlClient;provider connection string='Data Source=.\SQLEXPRESS;Initial Catalog=Kistl;Integrated Security=True;MultipleActiveResultSets=true;'
-            if (string.IsNullOrEmpty(connectionString))
-            {
-                StringBuilder sb = new StringBuilder();
-                sb.Append("metadata=res://*;");
-                sb.AppendFormat("provider={0};", config.Server.DatabaseProvider);
-                sb.AppendFormat("provider connection string='{0}'", config.Server.ConnectionString);
-
-                connectionString = sb.ToString();
-            }
-            return connectionString;
-        }
-    }
-
     /// <summary>
     /// Entityframework IKistlContext implementation
     /// </summary>
-    public sealed class KistlDataContext : BaseKistlDataContext, IKistlContext, IDisposable
+    public sealed class KistlDataContext
+        : BaseKistlDataContext, IKistlContext, IDisposable
     {
         private static readonly object _lock = new object();
 
         private readonly EFObjectContext _ctx;
+        
         /// <summary>
         /// A lazily initialized frozen context
         /// </summary>
         private readonly Func<IReadOnlyKistlContext> _lazyCtx;
+
+        private readonly EfImplementationType.EfFactory _implTypeFactory;
 
         /// <summary>
         /// For Clean Up Session
@@ -79,11 +49,12 @@ namespace Kistl.DalProvider.EF
         /// <summary>
         /// Internal Constructor
         /// </summary>
-        public KistlDataContext(IMetaDataResolver metaDataResolver, Identity identity, KistlConfig config, ITypeTransformations typeTrans, Func<IReadOnlyKistlContext> lazyCtx)
-            : base(metaDataResolver, identity, config, typeTrans)
+        public KistlDataContext(IMetaDataResolver metaDataResolver, Identity identity, KistlConfig config, Func<IReadOnlyKistlContext> lazyCtx, InterfaceType.Factory iftFactory, EfImplementationType.EfFactory implTypeFactory)
+            : base(metaDataResolver, identity, config, iftFactory)
         {
             _ctx = new EFObjectContext(config);
             _lazyCtx = lazyCtx;
+            _implTypeFactory = implTypeFactory;
         }
 
         internal ObjectContext ObjectContext { get { return _ctx; } }
@@ -201,7 +172,7 @@ namespace Kistl.DalProvider.EF
         /// <returns>IQueryable</returns>
         public override IQueryable<T> GetPersistenceObjectQuery<T>()
         {
-            var interfaceType = typeTrans.AsInterfaceType(typeof(T));
+            var interfaceType = iftFactory(typeof(T));
             PrimeQueryCache<T>(interfaceType, ToImplementationType(interfaceType));
             // OfType<T>() at the end adds the security filters
             return ((IQueryable)_table[interfaceType]).OfType<T>();
@@ -210,7 +181,7 @@ namespace Kistl.DalProvider.EF
         public System.Collections.IList GetListHack<T>()
             where T : class, IPersistenceObject
         {
-            var interfaceType = typeTrans.AsInterfaceType(typeof(T));
+            var interfaceType = iftFactory(typeof(T));
             PrimeQueryCache<T>(interfaceType, ToImplementationType(interfaceType));
 
             // OfType<T>() at the end adds the security filters
@@ -236,18 +207,11 @@ namespace Kistl.DalProvider.EF
                 _table[interfaceType] = new QueryTranslator<T>(
                     new EfQueryTranslatorProvider<T>(
                         metaDataResolver, this.identity,
-                        query, this, typeTrans));
+                        query, this, iftFactory));
             }
         }
 
-        /// <summary>
-        /// TODO: Create new override
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="relationId"></param>
-        /// <param name="role"></param>
-        /// <param name="parent"></param>
-        /// <returns></returns>
+        // TODO: Create new override
         public override IList<T> FetchRelation<T>(Guid relationId, RelationEndRole role, IDataObject parent)
         {
             if (parent == null)
@@ -603,7 +567,7 @@ namespace Kistl.DalProvider.EF
             {
                 // TODO: Case #1174
                 var tmp = GetPersistenceObjectQuery<Kistl.App.Base.ObjectClass>().FirstOrDefault();
-                string sql = string.Format("SELECT VALUE e FROM Entities.[{0}] AS e WHERE e.[ExportGuid] = @guid", GetEntityName(typeTrans.AsInterfaceType(typeof(T))));
+                string sql = string.Format("SELECT VALUE e FROM Entities.[{0}] AS e WHERE e.[ExportGuid] = @guid", GetEntityName(iftFactory(typeof(T))));
                 result = _ctx.CreateQuery<T>(sql, new System.Data.Objects.ObjectParameter("guid", exportGuid)).FirstOrDefault();
                 if (result != null) result.AttachToContext(this);
             }
@@ -644,7 +608,7 @@ namespace Kistl.DalProvider.EF
             if (exportGuids.Count() == 0) return new List<T>();
 
             StringBuilder sql = new StringBuilder();
-            sql.AppendFormat("SELECT VALUE e FROM Entities.{0} AS e WHERE e.ExportGuid IN {{", GetEntityName(typeTrans.AsInterfaceType(typeof(T))));
+            sql.AppendFormat("SELECT VALUE e FROM Entities.{0} AS e WHERE e.ExportGuid IN {{", GetEntityName(iftFactory(typeof(T))));
             foreach (Guid g in exportGuids)
             {
                 sql.AppendFormat("Guid'{0}',", g);
@@ -661,7 +625,12 @@ namespace Kistl.DalProvider.EF
 
         public override ImplementationType ToImplementationType(InterfaceType t)
         {
-            return GetImplementationType(Type.GetType(t.Type.FullName + Kistl.API.Helper.ImplementationSuffix + "," + Kistl.API.Helper.ServerAssembly));
+            return _implTypeFactory(Type.GetType(t.Type.FullName + Kistl.API.Helper.ImplementationSuffix + "," + EfProvider.ServerAssembly));
+        }
+
+        public override ImplementationType GetImplementationType(Type t)
+        {
+            return _implTypeFactory(t) ;
         }
     }
 }

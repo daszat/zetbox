@@ -262,9 +262,6 @@ namespace Kistl.Server.Service
             {
                 Log.TraceTotalMemory("Before DefaultInitialisation()");
 
-                // initialise custom actions manager
-                var cams = container.Resolve<BaseCustomActionsManager>();
-
                 Log.TraceTotalMemory("After DefaultInitialisation()");
             }
         }
@@ -279,7 +276,7 @@ namespace Kistl.Server.Service
             {
                 builder.Register(c =>
                     {
-                        var memCtx = c.Resolve<MemoryContext>();
+                        var memCtx = c.Resolve<BaseMemoryContext>();
                         Importer.LoadFromXml(memCtx, dataSourceXmlFile);
                         return memCtx;
                     })

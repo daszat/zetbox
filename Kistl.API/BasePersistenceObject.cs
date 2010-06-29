@@ -24,11 +24,18 @@ namespace Kistl.API
         }
 
         private readonly Func<IReadOnlyKistlContext> _lazyCtx;
-
-        /// <summary>
-        /// Interfacetype Factory injected by a Context
-        /// </summary>
-        public ITypeTransformations TypeTrans { get; set; }
+        private IReadOnlyKistlContext _frozenContext;
+        protected IReadOnlyKistlContext FrozenContext
+        {
+            get
+            {
+                if (_frozenContext == null)
+                {
+                    _frozenContext = _lazyCtx();
+                }
+                return _frozenContext;
+            }
+        }
 
         /// <summary>
         /// Gets or sets the primary key of this object. By convention all persistent objects have to have this synthesised primary key.
@@ -103,7 +110,6 @@ namespace Kistl.API
 
             this.ID = obj.ID;
         }
-
 
         /// <summary>
         /// Returns the most specific System.Type implemented by this object.

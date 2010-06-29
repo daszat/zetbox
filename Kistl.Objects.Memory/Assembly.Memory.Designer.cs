@@ -106,7 +106,21 @@ namespace Kistl.App.Base
             }
         }
         
+        // normalize namespace for Templates
+        private Kistl.App.Base.Identity ChangedBy__Implementation__
+        {
+			get
+			{
+				return ChangedBy;
+			}
+			set
+			{
+				ChangedBy = value;
+			}
+		}
+        
         private int? _fk_ChangedBy;
+        private Guid? _fk_guid_ChangedBy = null;
 		// END Kistl.DalProvider.Memory.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate for ChangedBy
 		public static event PropertyGetterHandler<Kistl.App.Base.Assembly, Kistl.App.Base.Identity> OnChangedBy_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Assembly, Kistl.App.Base.Identity> OnChangedBy_PreSetter;
@@ -229,7 +243,21 @@ namespace Kistl.App.Base
             }
         }
         
+        // normalize namespace for Templates
+        private Kistl.App.Base.Identity CreatedBy__Implementation__
+        {
+			get
+			{
+				return CreatedBy;
+			}
+			set
+			{
+				CreatedBy = value;
+			}
+		}
+        
         private int? _fk_CreatedBy;
+        private Guid? _fk_guid_CreatedBy = null;
 		// END Kistl.DalProvider.Memory.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate for CreatedBy
 		public static event PropertyGetterHandler<Kistl.App.Base.Assembly, Kistl.App.Base.Identity> OnCreatedBy_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Assembly, Kistl.App.Base.Identity> OnCreatedBy_PreSetter;
@@ -347,7 +375,7 @@ namespace Kistl.App.Base
                 // for the benefit of down-stream templates
                 var __result = _ExportGuid;
                 if (!_isExportGuidSet) {
-                    var __p = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("9c1ddbcf-24b9-47cb-a27d-043fc47e4002"));
+                    var __p = FrozenContext.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("9c1ddbcf-24b9-47cb-a27d-043fc47e4002"));
                     if (__p != null) {
                         _isExportGuidSet = true;
                         __result = this._ExportGuid = (Guid)__p.DefaultValue.GetDefaultValue();
@@ -477,7 +505,21 @@ namespace Kistl.App.Base
             }
         }
         
+        // normalize namespace for Templates
+        private Kistl.App.Base.Module Module__Implementation__
+        {
+			get
+			{
+				return Module;
+			}
+			set
+			{
+				Module = value;
+			}
+		}
+        
         private int? _fk_Module;
+        private Guid? _fk_guid_Module = null;
 		// END Kistl.DalProvider.Memory.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate for Module
 		public static event PropertyGetterHandler<Kistl.App.Base.Assembly, Kistl.App.Base.Module> OnModule_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Assembly, Kistl.App.Base.Module> OnModule_PreSetter;
@@ -580,6 +622,34 @@ namespace Kistl.App.Base
             base.AttachToContext(ctx);
 		}
 
+		public override void ReloadReferences()
+		{
+			// Do not reload references if the current object has been deleted.
+			// TODO: enable when MemoryContext uses MemoryDataObjects
+			//if (this.ObjectState == DataObjectState.Deleted) return;
+			// fix direct object references
+
+			if (_fk_guid_ChangedBy.HasValue)
+				ChangedBy__Implementation__ = (Kistl.App.Base.Identity__Implementation__Memory)Context.FindPersistenceObject<Kistl.App.Base.Identity>(_fk_guid_ChangedBy.Value);
+			else if (_fk_ChangedBy.HasValue)
+				ChangedBy__Implementation__ = (Kistl.App.Base.Identity__Implementation__Memory)Context.Find<Kistl.App.Base.Identity>(_fk_ChangedBy.Value);
+			else
+				ChangedBy__Implementation__ = null;
+
+			if (_fk_guid_CreatedBy.HasValue)
+				CreatedBy__Implementation__ = (Kistl.App.Base.Identity__Implementation__Memory)Context.FindPersistenceObject<Kistl.App.Base.Identity>(_fk_guid_CreatedBy.Value);
+			else if (_fk_CreatedBy.HasValue)
+				CreatedBy__Implementation__ = (Kistl.App.Base.Identity__Implementation__Memory)Context.Find<Kistl.App.Base.Identity>(_fk_CreatedBy.Value);
+			else
+				CreatedBy__Implementation__ = null;
+
+			if (_fk_guid_Module.HasValue)
+				Module__Implementation__ = (Kistl.App.Base.Module__Implementation__Memory)Context.FindPersistenceObject<Kistl.App.Base.Module>(_fk_guid_Module.Value);
+			else if (_fk_Module.HasValue)
+				Module__Implementation__ = (Kistl.App.Base.Module__Implementation__Memory)Context.Find<Kistl.App.Base.Module>(_fk_Module.Value);
+			else
+				Module__Implementation__ = null;
+		}
         // tail template
    		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
@@ -798,16 +868,16 @@ namespace Kistl.App.Base
         {
             
             base.ToStream(xml);
-            XmlStreamer.ToStream(this._fk_ChangedBy, xml, "ChangedBy", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._fk_ChangedBy, xml, "ChangedBy", "Kistl.App.Base");
             XmlStreamer.ToStream(this._ChangedOn, xml, "ChangedOn", "Kistl.App.Base");
-            XmlStreamer.ToStream(this._fk_CreatedBy, xml, "CreatedBy", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._fk_CreatedBy, xml, "CreatedBy", "Kistl.App.Base");
             XmlStreamer.ToStream(this._CreatedOn, xml, "CreatedOn", "Kistl.App.Base");
             XmlStreamer.ToStream((int?)this.DeploymentRestrictions, xml, "DeploymentRestrictions", "Kistl.App.Base");
             XmlStreamer.ToStream(this._isExportGuidSet, xml, "IsExportGuidSet", "Kistl.App.Base");
             if (this._isExportGuidSet) {
                 XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
             }
-            XmlStreamer.ToStream(this._fk_Module, xml, "Module", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._fk_Module, xml, "Module", "Kistl.App.Base");
             XmlStreamer.ToStream(this._Name, xml, "Name", "Kistl.App.Base");
         }
 
@@ -815,16 +885,16 @@ namespace Kistl.App.Base
         {
             
             base.FromStream(xml);
-            XmlStreamer.FromStream(ref this._fk_ChangedBy, xml, "ChangedBy", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_ChangedBy, xml, "ChangedBy", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._ChangedOn, xml, "ChangedOn", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._fk_CreatedBy, xml, "CreatedBy", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_CreatedBy, xml, "CreatedBy", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._CreatedOn, xml, "CreatedOn", "Kistl.App.Base");
             XmlStreamer.FromStreamConverter(v => ((Assembly)this).DeploymentRestrictions = (Kistl.App.Base.DeploymentRestriction)v, xml, "DeploymentRestrictions", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._isExportGuidSet, xml, "IsExportGuidSet", "Kistl.App.Base");
             if (this._isExportGuidSet) {
                 XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
             }
-            XmlStreamer.FromStream(ref this._fk_Module, xml, "Module", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_Module, xml, "Module", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._Name, xml, "Name", "Kistl.App.Base");
         }
 
@@ -837,6 +907,7 @@ namespace Kistl.App.Base
     
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._CreatedOn, xml, "CreatedOn", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream((int?)this.DeploymentRestrictions, xml, "DeploymentRestrictions", "Kistl.App.Base");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(Module != null ? Module.ExportGuid : (Guid?)null, xml, "Module", "Kistl.App.Base");
     
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._Name, xml, "Name", "Kistl.App.Base");
         }
@@ -848,6 +919,7 @@ namespace Kistl.App.Base
             XmlStreamer.FromStreamConverter(v => ((Assembly)this).DeploymentRestrictions = (Kistl.App.Base.DeploymentRestriction)v, xml, "DeploymentRestrictions", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
             this._isExportGuidSet = true;
+            XmlStreamer.FromStream(ref this._fk_guid_Module, xml, "Module", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._Name, xml, "Name", "Kistl.App.Base");
         }
 

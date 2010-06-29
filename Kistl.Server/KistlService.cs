@@ -21,14 +21,14 @@ namespace Kistl.Server
     {
         private readonly IServerObjectHandlerFactory _sohFactory;
         private readonly Func<IKistlContext> _ctxFactory;
-        private readonly ITypeTransformations _typeTrans;
+        private readonly InterfaceType.Factory _iftFactory;
 
-        public KistlService(IServerObjectHandlerFactory sohFactory, Func<IKistlContext> ctxFactory, ITypeTransformations typeTrans)
+        public KistlService(IServerObjectHandlerFactory sohFactory, Func<IKistlContext> ctxFactory, InterfaceType.Factory iftFactory)
         {
             Logging.Facade.Info("Creating new KistlService instance");
             _sohFactory = sohFactory;
             _ctxFactory = ctxFactory;
-            _typeTrans = typeTrans;
+            _iftFactory = iftFactory;
         }
 
         private static void DebugLogIdentity()
@@ -65,7 +65,7 @@ namespace Kistl.Server
                             SerializableType objType;
                             BinarySerializer.FromStream(out objType, sr);
 
-                            var obj = ctx.CreateUnattached(_typeTrans.AsInterfaceType(objType.GetSystemType()));
+                            var obj = ctx.CreateUnattached(_iftFactory(objType.GetSystemType()));
                             obj.FromStream(sr);
                             objects.Add(obj);
                             BinarySerializer.FromStream(out @continue, sr);
@@ -111,7 +111,7 @@ namespace Kistl.Server
                     {
                         var filterExpresstions = filter != null ? filter.Select(f => SerializableExpression.ToExpression(f)).ToList() : null;
                         IEnumerable<IStreamable> lst = _sohFactory
-                            .GetServerObjectHandler(type.GetInterfaceType(_typeTrans))
+                            .GetServerObjectHandler(_iftFactory(type.GetSystemType()))
                             .GetList(ctx, maxListCount,
                                 filterExpresstions,
                                 orderBy != null ? orderBy.Select(o => SerializableExpression.ToExpression(o)).ToList() : null);
@@ -214,7 +214,7 @@ namespace Kistl.Server
                     using (IKistlContext ctx = _ctxFactory())
                     {
                         IEnumerable<IStreamable> lst = _sohFactory
-                            .GetServerObjectHandler(type.GetInterfaceType(_typeTrans))
+                            .GetServerObjectHandler(_iftFactory(type.GetSystemType()))
                             .GetListOf(ctx, ID, property);
                         return SendObjects(lst, true);
                     }
@@ -256,8 +256,8 @@ namespace Kistl.Server
                         var lst = _sohFactory
                             .GetServerCollectionHandler(
                                 ctx,
-                                _typeTrans.AsInterfaceType(rel.A.Type.GetDataType()),
-                                _typeTrans.AsInterfaceType(rel.B.Type.GetDataType()),
+                                _iftFactory(rel.A.Type.GetDataType()),
+                                _iftFactory(rel.B.Type.GetDataType()),
                                 endRole)
                             .GetCollectionEntries(ctx, relId, endRole, parentObjID);
 

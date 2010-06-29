@@ -1,23 +1,24 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Kistl.API.Client;
-using Kistl.API;
-using Kistl.App.Test;
-using System.Linq.Expressions;
-using System.Reflection;
 
-namespace Kistl.DalProvider.ClientObjects.Mocks
+namespace Kistl.DalProvider.Client.Mocks
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Linq.Expressions;
+    using System.Reflection;
+    using System.Text;
+    using Kistl.API;
+    using Kistl.API.Client;
+    using Kistl.App.Test;
+    
     public class ProxyMock : IProxy
     {
         private int newID = 10;
-        private ITypeTransformations typeTrans;
+        private InterfaceType.Factory _iftFactory;
 
-        public ProxyMock(ITypeTransformations typeTrans)
+        public ProxyMock(InterfaceType.Factory iftFactory)
         {
-            this.typeTrans = typeTrans;
+            this._iftFactory = iftFactory;
         }
 
         public void Generate()
@@ -64,7 +65,7 @@ namespace Kistl.DalProvider.ClientObjects.Mocks
 
         private T CreateInstance<T>(IKistlContext ctx, int id)
         {
-            InterfaceType ifType = typeTrans.AsInterfaceType(typeof(T));
+            InterfaceType ifType = _iftFactory(typeof(T));
             return (T)CreateInstance(ctx, ifType, id);
         }
 
@@ -109,10 +110,10 @@ namespace Kistl.DalProvider.ClientObjects.Mocks
             result[0].StringProp = "String 1";
 
             result[1].StringProp = "String 2";
-            result[1].SetPrivatePropertyValue<int>("fk_Parent", 1);
+            //result[1].SetPrivatePropertyValue<int>("fk_Parent", 1);
 
             result[2].StringProp = "String 3";
-            result[2].SetPrivatePropertyValue<int>("fk_Parent", 1);
+            //result[2].SetPrivatePropertyValue<int>("fk_Parent", 1);
 
             result[3].StringProp = "String 4";
 
@@ -134,10 +135,10 @@ namespace Kistl.DalProvider.ClientObjects.Mocks
                 result.Add(CreateInstance<TestObjClass>(ctx, 3));
 
                 result[0].StringProp = "String 2";
-                result[0].SetPrivatePropertyValue<int>("fk_Parent", 1);
+                //result[0].SetPrivatePropertyValue<int>("fk_Parent", 1);
 
                 result[1].StringProp = "String 3";
-                result[1].SetPrivatePropertyValue<int>("fk_Parent", 1);
+                //result[1].SetPrivatePropertyValue<int>("fk_Parent", 1);
             }
 
             return result.Cast<IDataObject>();

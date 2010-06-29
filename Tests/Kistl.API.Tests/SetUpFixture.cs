@@ -9,22 +9,6 @@ namespace Kistl.API
     using Autofac;
     using NUnit.Framework;
 
-    internal class ApiAssemblyConfiguration : IAssemblyConfiguration
-    {
-        #region IAssemblyConfiguration Members
-
-        public string InterfaceAssemblyName
-        {
-            get { return typeof(Kistl.API.Mocks.TestDataObject).Assembly.FullName; }
-        }
-
-        public IEnumerable<string> AllImplementationAssemblyNames
-        {
-            get { return new[] { typeof(Kistl.API.Mocks.TestDataObject).Assembly.FullName }; }
-        }
-        #endregion
-    }
-
     [SetUpFixture]
     public class SetUpFixture : AbstractConsumerTests.AbstractSetUpFixture
     {
@@ -34,11 +18,6 @@ namespace Kistl.API
 
             // Register missing Modules. HostType is None!
             builder.RegisterModule(new ApiModule());
-
-            builder
-                .RegisterType<ApiAssemblyConfiguration>()
-                .As<IAssemblyConfiguration>()
-                .SingleInstance();
 
             builder
                 .RegisterType<Mocks.TestKistlContext>()

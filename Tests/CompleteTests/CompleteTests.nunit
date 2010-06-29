@@ -4,36 +4,33 @@
     <assembly path="Kistl.API.Tests.dll" />
     <assembly path="Kistl.API.Client.Tests.dll" />
     <assembly path="Kistl.API.Server.Tests.dll" />
-    <assembly path="Kistl.Client.Tests.dll" />
-    <assembly path="Kistl.IntegrationTests.dll" />
-    <assembly path="Kistl.Server.Tests.dll" />
+    <assembly path="Kistl.DalProvider.Memory.Tests.dll" />
     <assembly path="Kistl.DalProvider.ClientObjects.Tests.dll" />
     <assembly path="Kistl.DalProvider.EF.Tests.dll" />
-    <assembly path="Kistl.DalProvider.Frozen.Tests.dll" />
-    <assembly path="Kistl.DalProvider.Memory.Tests.dll" />
+    <assembly path="Kistl.Server.Tests.dll" />
+    <assembly path="Kistl.Client.Tests.dll" />
+    <assembly path="Kistl.IntegrationTests.dll" />
   </Config>
   <Config name="Release" appbase="bin\Release" configfile="CompleteTests.dll.config" binpathtype="Auto">
     <assembly path="Kistl.API.Tests.dll" />
     <assembly path="Kistl.API.Client.Tests.dll" />
     <assembly path="Kistl.API.Server.Tests.dll" />
-    <assembly path="Kistl.Client.Tests.dll" />
-    <assembly path="Kistl.IntegrationTests.dll" />
-    <assembly path="Kistl.Server.Tests.dll" />
+    <assembly path="Kistl.DalProvider.Memory.Tests.dll" />
     <assembly path="Kistl.DalProvider.ClientObjects.Tests.dll" />
     <assembly path="Kistl.DalProvider.EF.Tests.dll" />
-    <assembly path="Kistl.DalProvider.Frozen.Tests.dll" />
-    <assembly path="Kistl.DalProvider.Memory.Tests.dll" />
+    <assembly path="Kistl.Server.Tests.dll" />
+    <assembly path="Kistl.Client.Tests.dll" />
+    <assembly path="Kistl.IntegrationTests.dll" />
   </Config>
   <Config name="Studio" appbase="" configfile="CompleteTests.dll.config" binpathtype="Auto">
     <assembly path="Kistl.API.Tests.dll" />
     <assembly path="Kistl.API.Client.Tests.dll" />
     <assembly path="Kistl.API.Server.Tests.dll" />
-    <assembly path="Kistl.Client.Tests.dll" />
-    <assembly path="Kistl.IntegrationTests.dll" />
-    <assembly path="Kistl.Server.Tests.dll" />
+    <assembly path="Kistl.DalProvider.Memory.Tests.dll" />
     <assembly path="Kistl.DalProvider.ClientObjects.Tests.dll" />
     <assembly path="Kistl.DalProvider.EF.Tests.dll" />
-    <assembly path="Kistl.DalProvider.Frozen.Tests.dll" />
-    <assembly path="Kistl.DalProvider.Memory.Tests.dll" />
+    <assembly path="Kistl.Server.Tests.dll" />
+    <assembly path="Kistl.Client.Tests.dll" />
+    <assembly path="Kistl.IntegrationTests.dll" />
   </Config>
 </NUnitProject>

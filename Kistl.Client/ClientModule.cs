@@ -1,16 +1,17 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Kistl.API;
-using Kistl.App.Extensions;
-using Kistl.API.Client;
-using Kistl.Client.Presentables;
-using Autofac;
-using Kistl.API.Configuration;
 
 namespace Kistl.Client
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using Autofac;
+    using Kistl.API;
+    using Kistl.API.Client;
+    using Kistl.API.Configuration;
+    using Kistl.App.Extensions;
+    using Kistl.Client.Presentables;
+    
     public sealed class ClientModule : Module
     {
         private class ViewModelDependencies : IViewModelDependencies
@@ -55,23 +56,6 @@ namespace Kistl.Client
         protected override void Load(ContainerBuilder moduleBuilder)
         {
             base.Load(moduleBuilder);
-
-            moduleBuilder
-                .Register(c =>
-                {
-                    var ctx = c.Resolve<IReadOnlyKistlContext>(Kistl.API.Helper.FrozenContextServiceName);
-                    var cams = new CustomActionsManagerClient();
-                    cams.Init(ctx);
-
-                    return cams;
-                })
-                .As<BaseCustomActionsManager>()
-                .SingleInstance();
-
-            moduleBuilder
-                .RegisterType<FrozenActionsManagerClient>()
-                .As<FrozenActionsManager>()
-                .SingleInstance();
 
             moduleBuilder
                 .RegisterType<SynchronousThreadManager>()

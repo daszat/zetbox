@@ -140,7 +140,6 @@
     <Compile Include="Presentables\TimeRecords\WorkEffortRecorderModel.cs" />
     <Compile Include="Presentables\WindowViewModel.cs" />
     <Compile Include="ServerDomainManager.cs" />
-    <Compile Include="CustomActionsManagerClient.cs" />
     <Compile Include="ClientHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

@@ -27,9 +27,11 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.CollectionEntries
                 propertyName, backingName, fkBackingName, fkGuidBackingName,
                 "/* not member of an interface, 'ownInterface' should not be used */",
                 relEnd.Type.GetDataTypeString(), rel, endRole,
-                false, 
+                false,
                 rel.NeedsPositionStorage(endRole), endRole.ToString() + Kistl.API.Helper.PositionSuffix,
-                false);
+                rel.A.Type.ImplementsIExportable() && rel.B.Type.ImplementsIExportable(),
+                relEnd.Type.Module.Namespace,
+                false, true);
         }
 
         protected override void ApplyIndexPropertyTemplate(Relation rel, RelationEndRole endRole)

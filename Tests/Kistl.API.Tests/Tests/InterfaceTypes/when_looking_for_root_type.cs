@@ -19,17 +19,17 @@ namespace Kistl.API.Tests.InterfaceTypes
         [Test]
         public void should_recognize_data_objects()
         {
-            var baseInterfaceType = typeTrans.AsInterfaceType(typeof(BaseClass));
+            var baseInterfaceType = iftFactory(typeof(BaseClass));
             Assert.That(baseInterfaceType.GetRootType(), Is.EqualTo(baseInterfaceType));
 
-            var childInterfaceType = typeTrans.AsInterfaceType(typeof(ChildClass));
+            var childInterfaceType = iftFactory(typeof(ChildClass));
             Assert.That(childInterfaceType.GetRootType(), Is.EqualTo(baseInterfaceType));
         }
 
         [Test]
         public void should_recognize_valueCollectionEntries()
         {
-            var ceInterfaceType = typeTrans.AsInterfaceType(typeof(ValueCollectionEntry));
+            var ceInterfaceType = iftFactory(typeof(ValueCollectionEntry));
             Assert.That(ceInterfaceType.GetRootType(), Is.EqualTo(ceInterfaceType));
         }
     }

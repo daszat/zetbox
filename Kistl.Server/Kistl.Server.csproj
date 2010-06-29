@@ -113,7 +113,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CustomActionsManagerServer.cs" />
     <Compile Include="Generators.Extensions\ContextExtensions.cs" />
     <Compile Include="Generators.Extensions\MethodExtensions.cs" />
     <Compile Include="Generators.Extensions\MiscExtensions.cs" />
@@ -542,6 +541,22 @@
       <LastGenOutput>ObjectListProperty.Designer.cs</LastGenOutput>
     </None>
     <EmbeddedResource Include="Generators\Kistl.Objects.snk" />
+    <None Include="Generators\Templates\Implementation\ObjectClasses\ReloadOneReference.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>ReloadOneReference.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Generators\Templates\Implementation\ObjectClasses\ReloadReferences.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>ReloadReferences.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Generators\Interfaces\Implementation\Module.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>Module.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Generators\Templates\Implementation\Module.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>Module.Designer.cs</LastGenOutput>
+    </None>
     <None Include="Generators\Templates\Implementation\ObjectClasses\CalculatedProperty.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>CalculatedProperty.Designer.cs</LastGenOutput>
@@ -663,8 +678,32 @@
     </None>
     <None Include="Kistl.snk" />
     <Compile Include="Generators\ClientObjects\Implementation\ObjectClasses\CollectionSerialization.cs" />
+    <Compile Include="Generators\Templates\Implementation\ObjectClasses\ReloadOneReference.cs" />
+    <Compile Include="Generators\Templates\Implementation\ObjectClasses\ReloadOneReference.Designer.cs">
+      <DependentUpon>ReloadOneReference.cst</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Generators\Templates\Implementation\ObjectClasses\ReloadReferences.cs">
+      <DependentUpon>ReloadReferences.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Generators\Templates\Implementation\ObjectClasses\ReloadReferences.Designer.cs">
+      <DependentUpon>ReloadReferences.cst</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Generators\Interfaces\Implementation\Module.Designer.cs">
+      <DependentUpon>Module.cst</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Generators\KistlCodeTemplate.cs" />
     <Compile Include="Generators\Templates\Implementation\CollectionEntries\ExportGuidProperty.cs" />
+    <Compile Include="Generators\Templates\Implementation\Module.Designer.cs">
+      <DependentUpon>Module.cst</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Generators\Templates\Implementation\ObjectClasses\CalculatedProperty.cs" />
     <Compile Include="Generators\Templates\Implementation\ObjectClasses\CalculatedProperty.Designer.cs">
       <AutoGen>True</AutoGen>

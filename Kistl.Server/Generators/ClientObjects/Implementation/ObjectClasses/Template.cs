@@ -22,7 +22,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
 
         protected override IEnumerable<string> GetAdditionalImports()
         {
-            return base.GetAdditionalImports().Concat(new string[] { "Kistl.API.Client", "Kistl.DalProvider.ClientObjects" });
+            return base.GetAdditionalImports().Concat(new string[] { "Kistl.API.Client", "Kistl.DalProvider.Client" });
         }
 
         protected override string MungeClassName(string name)
@@ -53,7 +53,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
             this.WriteLine("        // object reference property");
             Implementation.ObjectClasses.ObjectReferencePropertyTemplate.Call(
                 Host, ctx, this.MembersToSerialize,
-                prop, true);
+                prop, true, true);
         }
 
         protected override void ApplyCompoundObjectPropertyTemplate(CompoundObjectProperty prop)

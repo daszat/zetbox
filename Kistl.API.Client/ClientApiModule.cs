@@ -4,28 +4,9 @@ namespace Kistl.API.Client
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Reflection;
     using System.Text;
 
     using Autofac;
-
-    using Kistl.API.Configuration;
-
-    internal class ClientAssemblyConfiguration : IAssemblyConfiguration
-    {
-        #region IAssemblyConfiguration Members
-
-        public string InterfaceAssemblyName
-        {
-            get { return Kistl.API.Helper.InterfaceAssembly; }
-        }
-
-        public IEnumerable<string> AllImplementationAssemblyNames
-        {
-            get { return new[] { Kistl.API.Helper.ClientAssembly, Kistl.API.Helper.FrozenAssembly, Kistl.API.Helper.MemoryAssembly }; }
-        }
-        #endregion
-    }
 
     public sealed class ClientApiModule
         : Autofac.Module
@@ -34,27 +15,14 @@ namespace Kistl.API.Client
         {
             base.Load(moduleBuilder);
 
-            moduleBuilder.Register(c =>
-                {
-                    return new KistlContextImpl(
-                        c.Resolve<KistlConfig>(),
-                        c.Resolve<ITypeTransformations>(),
-                        c.Resolve<IProxy>(),
-                        Kistl.API.Helper.ClientAssembly,
-                        c.Resolve<Func<IReadOnlyKistlContext>>(Kistl.API.Helper.FrozenContextServiceName));
-                })
-                .As<IKistlContext>()
-                .As<IReadOnlyKistlContext>()
-                .InstancePerDependency();
-
-            moduleBuilder
-                .RegisterType<ClientAssemblyConfiguration>()
-                .As<IAssemblyConfiguration>()
-                .SingleInstance();
-
             moduleBuilder
                 .RegisterType<ProxyImplementation>()
                 .As<IProxy>()
+                .SingleInstance();
+
+            moduleBuilder
+                .Register<ClientDeploymentRestrictor>(c => new ClientDeploymentRestrictor())
+                .As<IDeploymentRestrictor>()
                 .SingleInstance();
         }
     }

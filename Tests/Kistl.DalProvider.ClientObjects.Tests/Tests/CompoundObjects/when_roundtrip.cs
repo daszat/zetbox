@@ -8,7 +8,7 @@ using Kistl.API.Client;
 
 using NUnit.Framework;
 
-namespace Kistl.DalProvider.ClientObjects.Tests.CompoundObjects
+namespace Kistl.DalProvider.Client.Tests.CompoundObjects
 {
     [TestFixture]
     [Ignore("Needs mocked IKistlService and IKistlServiceStreams")]

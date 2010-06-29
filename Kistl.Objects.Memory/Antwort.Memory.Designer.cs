@@ -171,7 +171,21 @@ namespace Kistl.App.Test
             }
         }
         
+        // normalize namespace for Templates
+        private Kistl.App.Test.Fragebogen Fragebogen__Implementation__
+        {
+			get
+			{
+				return Fragebogen;
+			}
+			set
+			{
+				Fragebogen = value;
+			}
+		}
+        
         private int? _fk_Fragebogen;
+        private Guid? _fk_guid_Fragebogen = null;
            // Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual int? gute_Antworten_pos
         {
@@ -323,6 +337,20 @@ namespace Kistl.App.Test
             base.AttachToContext(ctx);
 		}
 
+		public override void ReloadReferences()
+		{
+			// Do not reload references if the current object has been deleted.
+			// TODO: enable when MemoryContext uses MemoryDataObjects
+			//if (this.ObjectState == DataObjectState.Deleted) return;
+			// fix direct object references
+
+			if (_fk_guid_Fragebogen.HasValue)
+				Fragebogen__Implementation__ = (Kistl.App.Test.Fragebogen__Implementation__Memory)Context.FindPersistenceObject<Kistl.App.Test.Fragebogen>(_fk_guid_Fragebogen.Value);
+			else if (_fk_Fragebogen.HasValue)
+				Fragebogen__Implementation__ = (Kistl.App.Test.Fragebogen__Implementation__Memory)Context.Find<Kistl.App.Test.Fragebogen>(_fk_Fragebogen.Value);
+			else
+				Fragebogen__Implementation__ = null;
+		}
         // tail template
    		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
@@ -486,7 +514,7 @@ namespace Kistl.App.Test
             
             base.ToStream(xml);
             XmlStreamer.ToStream(this._Frage, xml, "Frage", "Kistl.App.Test");
-            XmlStreamer.ToStream(this._fk_Fragebogen, xml, "Fragebogen", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._fk_Fragebogen, xml, "Fragebogen", "Kistl.App.Test");
             XmlStreamer.ToStream(this._gute_Antworten_pos, xml, "gute_Antworten_pos", "http://dasz.at/Kistl");
             XmlStreamer.ToStream(this._FragenNummer, xml, "FragenNummer", "Kistl.App.Test");
             XmlStreamer.ToStream(this._GegebeneAntwort, xml, "GegebeneAntwort", "Kistl.App.Test");
@@ -497,7 +525,7 @@ namespace Kistl.App.Test
             
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._Frage, xml, "Frage", "Kistl.App.Test");
-            XmlStreamer.FromStream(ref this._fk_Fragebogen, xml, "Fragebogen", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_Fragebogen, xml, "Fragebogen", "Kistl.App.Test");
             XmlStreamer.FromStream(ref this._gute_Antworten_pos, xml, "gute_Antworten_pos", "http://dasz.at/Kistl");
             XmlStreamer.FromStream(ref this._FragenNummer, xml, "FragenNummer", "Kistl.App.Test");
             XmlStreamer.FromStream(ref this._GegebeneAntwort, xml, "GegebeneAntwort", "Kistl.App.Test");

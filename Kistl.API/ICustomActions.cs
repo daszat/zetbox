@@ -18,20 +18,13 @@ namespace Kistl.API
         void Init(IReadOnlyKistlContext ctx);
     }
 
-    /// <summary>
-    /// A noop implementation of the ICustomActionsManager
-    /// </summary>
-    public sealed class NoopActionsManager
-        : ICustomActionsManager
+    public interface IDeploymentRestrictor
     {
-        #region ICustomActionsManager Members
-
         /// <summary>
-        /// Does nothing.
+        /// Override this method to modify the acceptable DeploymentRestrictions.
         /// </summary>
-        /// <param name="ctx">ignored</param>
-        public void Init(IReadOnlyKistlContext ctx) { }
-
-        #endregion
+        /// <param name="r">the restriction to check (This parameter is int because DeploymentRestriction might not yet be loaded)</param>
+        /// <returns>whether or not the given deployment restriction is acceptable for the environment</returns>
+        bool IsAcceptableDeploymentRestriction(int r);
     }
 }

@@ -314,7 +314,7 @@ namespace Kistl.App.GUI
                 // for the benefit of down-stream templates
                 var __result = _ExportGuid;
                 if (!_isExportGuidSet) {
-                    var __p = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("77ce1e5b-f244-4279-af13-b3e75b55f933"));
+                    var __p = FrozenContext.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("77ce1e5b-f244-4279-af13-b3e75b55f933"));
                     if (__p != null) {
                         _isExportGuidSet = true;
                         __result = this._ExportGuid = (Guid)__p.DefaultValue.GetDefaultValue();
@@ -611,6 +611,41 @@ namespace Kistl.App.GUI
 			this._fk_ViewModelRef = otherImpl._fk_ViewModelRef;
 		}
 
+		public override void ReloadReferences()
+		{
+			// Do not reload references if the current object has been deleted.
+			// TODO: enable when MemoryContext uses MemoryDataObjects
+			//if (this.ObjectState == DataObjectState.Deleted) return;
+			// fix direct object references
+
+			if (_fk_guid_DefaultGridCellKind.HasValue)
+				DefaultGridCellKind__Implementation__ = (Kistl.App.GUI.ControlKind__Implementation__)Context.FindPersistenceObject<Kistl.App.GUI.ControlKind>(_fk_guid_DefaultGridCellKind.Value);
+			else if (_fk_DefaultGridCellKind.HasValue)
+				DefaultGridCellKind__Implementation__ = (Kistl.App.GUI.ControlKind__Implementation__)Context.Find<Kistl.App.GUI.ControlKind>(_fk_DefaultGridCellKind.Value);
+			else
+				DefaultGridCellKind__Implementation__ = null;
+
+			if (_fk_guid_DefaultKind.HasValue)
+				DefaultKind__Implementation__ = (Kistl.App.GUI.ControlKind__Implementation__)Context.FindPersistenceObject<Kistl.App.GUI.ControlKind>(_fk_guid_DefaultKind.Value);
+			else if (_fk_DefaultKind.HasValue)
+				DefaultKind__Implementation__ = (Kistl.App.GUI.ControlKind__Implementation__)Context.Find<Kistl.App.GUI.ControlKind>(_fk_DefaultKind.Value);
+			else
+				DefaultKind__Implementation__ = null;
+
+			if (_fk_guid_Module.HasValue)
+				Module__Implementation__ = (Kistl.App.Base.Module__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.Module>(_fk_guid_Module.Value);
+			else if (_fk_Module.HasValue)
+				Module__Implementation__ = (Kistl.App.Base.Module__Implementation__)Context.Find<Kistl.App.Base.Module>(_fk_Module.Value);
+			else
+				Module__Implementation__ = null;
+
+			if (_fk_guid_ViewModelRef.HasValue)
+				ViewModelRef__Implementation__ = (Kistl.App.Base.TypeRef__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.TypeRef>(_fk_guid_ViewModelRef.Value);
+			else if (_fk_ViewModelRef.HasValue)
+				ViewModelRef__Implementation__ = (Kistl.App.Base.TypeRef__Implementation__)Context.Find<Kistl.App.Base.TypeRef>(_fk_ViewModelRef.Value);
+			else
+				ViewModelRef__Implementation__ = null;
+		}
         // tail template
    		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
@@ -748,41 +783,6 @@ namespace Kistl.App.GUI
 		}
 	
 
-		public override void ReloadReferences()
-		{
-			// Do not reload references if the current object has been deleted.
-			// TODO: enable when MemoryContext uses MemoryDataObjects
-			//if (this.ObjectState == DataObjectState.Deleted) return;
-			// fix direct object references
-
-			if (_fk_guid_DefaultGridCellKind.HasValue)
-				DefaultGridCellKind__Implementation__ = (Kistl.App.GUI.ControlKind__Implementation__)Context.FindPersistenceObject<Kistl.App.GUI.ControlKind>(_fk_guid_DefaultGridCellKind.Value);
-			else if (_fk_DefaultGridCellKind.HasValue)
-				DefaultGridCellKind__Implementation__ = (Kistl.App.GUI.ControlKind__Implementation__)Context.Find<Kistl.App.GUI.ControlKind>(_fk_DefaultGridCellKind.Value);
-			else
-				DefaultGridCellKind__Implementation__ = null;
-
-			if (_fk_guid_DefaultKind.HasValue)
-				DefaultKind__Implementation__ = (Kistl.App.GUI.ControlKind__Implementation__)Context.FindPersistenceObject<Kistl.App.GUI.ControlKind>(_fk_guid_DefaultKind.Value);
-			else if (_fk_DefaultKind.HasValue)
-				DefaultKind__Implementation__ = (Kistl.App.GUI.ControlKind__Implementation__)Context.Find<Kistl.App.GUI.ControlKind>(_fk_DefaultKind.Value);
-			else
-				DefaultKind__Implementation__ = null;
-
-			if (_fk_guid_Module.HasValue)
-				Module__Implementation__ = (Kistl.App.Base.Module__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.Module>(_fk_guid_Module.Value);
-			else if (_fk_Module.HasValue)
-				Module__Implementation__ = (Kistl.App.Base.Module__Implementation__)Context.Find<Kistl.App.Base.Module>(_fk_Module.Value);
-			else
-				Module__Implementation__ = null;
-
-			if (_fk_guid_ViewModelRef.HasValue)
-				ViewModelRef__Implementation__ = (Kistl.App.Base.TypeRef__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.TypeRef>(_fk_guid_ViewModelRef.Value);
-			else if (_fk_ViewModelRef.HasValue)
-				ViewModelRef__Implementation__ = (Kistl.App.Base.TypeRef__Implementation__)Context.Find<Kistl.App.Base.TypeRef>(_fk_ViewModelRef.Value);
-			else
-				ViewModelRef__Implementation__ = null;
-		}
 #region Serializer
 
 

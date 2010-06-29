@@ -14,7 +14,7 @@ namespace Kistl.API.Utils
         private readonly static ILog _facade = LogManager.GetLogger("Kistl.Facade");
         private readonly static ILog _linq = LogManager.GetLogger("Kistl.Linq");
         private readonly static ILog _linqquery = LogManager.GetLogger("Kistl.Linq.Query");
-        private readonly static ILog _reflection = LogManager.GetLogger("Kistl.Reflection");        
+        private readonly static ILog _reflection = LogManager.GetLogger("Kistl.Reflection");
 
         public static ILog Log
         {
@@ -310,6 +310,30 @@ namespace Kistl.API.Utils
             if (log == null || !log.IsDebugEnabled) { return; }
 
             log.DebugFormat(msg + ": Consuming {0:0.00} kB Memory", (double)GC.GetTotalMemory(true) / 1024.0);
+        }
+
+        private static object _warnOnceLock = new object();
+
+        private static Dictionary<string, string> _warnOnceSeen = new Dictionary<string, string>();
+
+        /// <summary>
+        /// Logs the specified warning message once. If it is called a second time with the same message and logger name, it won't produce a message.
+        /// </summary>
+        /// <param name="log">the logger to log to</param>
+        /// <param name="msg">the message to log</param>
+        /// <remarks>This method is thread-safe.</remarks>
+        public static void WarnOnce(this ILog log, string msg)
+        {
+            if (log == null || !log.IsWarnEnabled) { return; }
+            lock (_warnOnceLock)
+            {
+                var key = log.Logger.Name + msg;
+                if (!_warnOnceSeen.ContainsKey(key))
+                {
+                    log.Warn(msg);
+                    _warnOnceSeen[key] = key;
+                }
+            }
         }
     }
 }

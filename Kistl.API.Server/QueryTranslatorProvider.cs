@@ -29,17 +29,7 @@ namespace Kistl.API.Server
         protected readonly Identity Identity;
         protected readonly IQueryable Source;
         protected readonly IKistlContext Ctx;
-        protected readonly ITypeTransformations typeTrans;
-
-        /// <summary>
-        /// Provider specific mapping from interface types in the query to 
-        /// provider types.
-        /// </summary>
-        /// <remarks>Implementors should always check that the specified type 
-        /// is an actual <see cref="InterfaceType"/>.</remarks>
-        /// <param name="t">the type from the query</param>
-        /// <returns>a provider specific type, implementing <paramref name="t"/></returns>
-        protected abstract Type ToProviderType(Type t);
+        protected readonly InterfaceType.Factory IftFactory;
 
         /// <summary>
         /// Get a sub-provider using the same components as this provider but working on a different type.
@@ -57,8 +47,8 @@ namespace Kistl.API.Server
         /// <param name="identity">the user who is making the query; if null, a unrestricted query is executed.</param>
         /// <param name="source"></param>
         /// <param name="ctx"></param>
-        /// <param name="typeTrans"></param>
-        protected QueryTranslatorProvider(IMetaDataResolver metaDataResolver, Identity identity, IQueryable source, IKistlContext ctx, ITypeTransformations typeTrans)
+        /// <param name="iftFactory"></param>
+        protected QueryTranslatorProvider(IMetaDataResolver metaDataResolver, Identity identity, IQueryable source, IKistlContext ctx, InterfaceType.Factory iftFactory)
         {
             if (metaDataResolver == null) { throw new ArgumentNullException("metaDataResolver"); }
             if (source == null) { throw new ArgumentNullException("source"); }
@@ -68,7 +58,7 @@ namespace Kistl.API.Server
             this.Identity = identity;
             this.Source = source;
             this.Ctx = ctx;
-            this.typeTrans = typeTrans;
+            this.IftFactory = iftFactory;
         }
 
         #region IQueryProvider Members
@@ -183,7 +173,7 @@ namespace Kistl.API.Server
                 if (result.IsMethodCallExpression("OfType"))
                 {
                     var type = result.Type.FindElementTypes().First();
-                    return AddSecurityFilter(result, typeTrans.AsInterfaceType(type));
+                    return AddSecurityFilter(result, IftFactory(type));
                 }
                 return result;
             }
@@ -227,7 +217,7 @@ namespace Kistl.API.Server
             {
                 var result = Source.Expression;
                 var type = result.Type.GetGenericArguments().First();
-                return AddSecurityFilter(result, typeTrans.AsImplementationType(type).ToInterfaceType());
+                return AddSecurityFilter(result, Ctx.GetImplementationType(type).ToInterfaceType());
             }
             else
             {
@@ -438,7 +428,7 @@ namespace Kistl.API.Server
         private Type TranslateType(Type type)
         {
             return (type.IsIPersistenceObject() || type.IsICompoundObject())
-                ? ToProviderType(type)
+                ? Ctx.ToImplementationType(IftFactory(type)).Type
                 : type.IsGenericType
                     ? type.GetGenericTypeDefinition().MakeGenericType(type.GetGenericArguments().Select(arg => TranslateType(arg)).ToArray())
                     : type;

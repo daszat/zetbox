@@ -19,9 +19,12 @@ namespace Kistl.API
         /// This class is used to place type information on the wire. Since the wire protocol is Provider independent, 
         /// only interface types are stored. Usually this is used to declare the type of the following IPersistenceObject.
         /// </summary>
+        /// <remarks>
+        /// Since the <see cref="InterfaceType.Factory"/> cannot be serialiezed, this class cannot provide full dehydration.
+        /// Use <see cref="GetSystemType"/> and your own factory to retrieve <see cref="InterfaceType"/>.</remarks>
         /// <param name="ifType">System.Type to serialize</param>
-        /// <param name="typeTrans"></param>
-        internal SerializableType(InterfaceType ifType, ITypeTransformations typeTrans)
+        /// <param name="iftFactory"></param>
+        internal SerializableType(InterfaceType ifType, InterfaceType.Factory iftFactory)
         {
             var type = ifType.Type;
 
@@ -32,7 +35,7 @@ namespace Kistl.API
                 AssemblyQualifiedName = genericType.AssemblyQualifiedName;
 
                 GenericTypeParameter = type.GetGenericArguments()
-                    .Select(t => new SerializableType(typeTrans.AsInterfaceType(t), typeTrans))
+                    .Select(t => new SerializableType(iftFactory(t), iftFactory))
                     .ToList();
             }
             else
@@ -64,12 +67,6 @@ namespace Kistl.API
         /// </summary>
         [DataMember]
         public List<SerializableType> GenericTypeParameter { get; set; }
-
-        public InterfaceType GetInterfaceType(ITypeTransformations typeTrans)
-        {
-            if (typeTrans == null) throw new ArgumentNullException("typeTrans");
-            return typeTrans.AsInterfaceType(GetSystemType());
-        }
 
         /// <summary>
         /// Returns the serialized System.Type

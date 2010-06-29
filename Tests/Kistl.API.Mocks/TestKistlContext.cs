@@ -5,13 +5,35 @@ using System.Text;
 
 namespace Kistl.API.Mocks
 {
+    public class MockImplementationTypeChecker
+        : IImplementationTypeChecker
+    {
+        public bool IsImplementationType(Type t)
+        {
+            return true;
+        }
+    }
+
+    public class MockImplementationType 
+        : ImplementationType
+    {
+        public MockImplementationType(Type t, InterfaceType.Factory iftFactory)
+            : base(t, iftFactory, new MockImplementationTypeChecker())
+        {
+        }
+
+        public override InterfaceType ToInterfaceType()
+        {
+            throw new NotImplementedException();
+        }
+    }
+
     public class TestKistlContext : IKistlContext
     {
-        protected ITypeTransformations typeTrans;
-
-        public TestKistlContext(ITypeTransformations typeTrans)
+        private readonly InterfaceType.Factory _iftFactory;
+        public TestKistlContext(InterfaceType.Factory iftFactory)
         {
-            this.typeTrans = typeTrans;
+            _iftFactory = iftFactory;
         }
 
         #region IKistlContext Members
@@ -235,12 +257,12 @@ namespace Kistl.API.Mocks
 
         public InterfaceType GetInterfaceType(Type t)
         {
-            return typeTrans.AsInterfaceType(t);
+            return _iftFactory(t);
         }
 
         public InterfaceType GetInterfaceType(string typeName)
         {
-            return typeTrans.AsInterfaceType(typeName);
+            return _iftFactory(Type.GetType(typeName + ",Kistl.Objects"));
         }
 
         public InterfaceType GetInterfaceType(IPersistenceObject obj)
@@ -258,12 +280,12 @@ namespace Kistl.API.Mocks
             {
                 throw new NotImplementedException("unable to get the implemented interfacetype of the given object");
             }
-            return typeTrans.AsInterfaceType(ifType);
+            return _iftFactory(ifType);
         }
 
         public ImplementationType GetImplementationType(Type t)
         {
-            return typeTrans.AsImplementationType(t);
+            return new MockImplementationType(t, _iftFactory);
         }
 
         public ImplementationType ToImplementationType(InterfaceType t)

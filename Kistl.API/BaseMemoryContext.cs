@@ -19,8 +19,8 @@ namespace Kistl.API
         : IKistlContext
     {
         protected readonly ContextCache objects;
-
-        private readonly ITypeTransformations _typeTrans;
+        private readonly InterfaceType.Factory _iftFactory;
+        protected InterfaceType.Factory IftFactory { get { return _iftFactory; } }
 
         /// <summary>Empty stand-in for object classes without instances.</summary>
         /// <remarks>Used by GetPersistenceObjectQuery()</remarks>
@@ -40,11 +40,10 @@ namespace Kistl.API
         /// <summary>
         /// Initializes a new instance of the BaseMemoryContext class, using the specified assemblies for interfaces and implementation.
         /// </summary>
-        /// <param name="typeTrans"></param>
-        protected BaseMemoryContext(ITypeTransformations typeTrans)
+        protected BaseMemoryContext(InterfaceType.Factory iftFactory)
         {
             this.objects = new ContextCache(this);
-            _typeTrans = typeTrans;
+            this._iftFactory = iftFactory;
         }
 
         /// <inheritdoc />
@@ -123,7 +122,7 @@ namespace Kistl.API
         {
             CheckDisposed();
             //CheckInterfaceAssembly("T", typeof(T));
-            return GetPersistenceObjectQuery(_typeTrans.AsInterfaceType(typeof(T))).Cast<T>();
+            return GetPersistenceObjectQuery(_iftFactory(typeof(T))).Cast<T>();
         }
 
         /// <inheritdoc />
@@ -140,7 +139,7 @@ namespace Kistl.API
         {
             CheckDisposed();
             //CheckInterfaceAssembly("T", typeof(T));
-            return GetPersistenceObjectQuery(_typeTrans.AsInterfaceType(typeof(T))).Cast<T>();
+            return GetPersistenceObjectQuery(_iftFactory(typeof(T))).Cast<T>();
         }
 
         /// <summary>Retrieves a new query on top of the attached objects.</summary>
@@ -173,7 +172,7 @@ namespace Kistl.API
             {
                 CheckDisposed();
                 //CheckInterfaceAssembly("T", typeof(T));
-                return GetPersistenceObjectQuery(_typeTrans.AsInterfaceType(typeof(T))).Cast<T>().ToList();
+                return GetPersistenceObjectQuery(_iftFactory(typeof(T))).Cast<T>().ToList();
             }
             else
             {
@@ -221,7 +220,7 @@ namespace Kistl.API
         {
             CheckDisposed();
             //CheckInterfaceAssembly("T", typeof(T));
-            return (T)Create(_typeTrans.AsInterfaceType(typeof(T)));
+            return (T)Create(_iftFactory(typeof(T)));
         }
 
         /// <inheritdoc />
@@ -238,7 +237,7 @@ namespace Kistl.API
         {
             CheckDisposed();
             //CheckInterfaceAssembly("T", typeof(T));
-            return (T)CreateUnattachedInstance(_typeTrans.AsInterfaceType(typeof(T)));
+            return (T)CreateUnattachedInstance(_iftFactory(typeof(T)));
         }
 
         /// <inheritdoc />
@@ -255,7 +254,7 @@ namespace Kistl.API
         {
             CheckDisposed();
             //CheckInterfaceAssembly("T", typeof(T));
-            return (T)CreateRelationCollectionEntry(_typeTrans.AsInterfaceType(typeof(T)));
+            return (T)CreateRelationCollectionEntry(_iftFactory(typeof(T)));
         }
 
         /// <inheritdoc />
@@ -272,7 +271,7 @@ namespace Kistl.API
         {
             CheckDisposed();
             //CheckInterfaceAssembly("T", typeof(T));
-            return (T)CreateValueCollectionEntry(_typeTrans.AsInterfaceType(typeof(T)));
+            return (T)CreateValueCollectionEntry(_iftFactory(typeof(T)));
         }
 
         /// <inheritdoc />
@@ -325,7 +324,7 @@ namespace Kistl.API
             CheckDisposed();
             //CheckInterfaceAssembly("T", typeof(T));
 
-            return (T)CreateCompoundObject(_typeTrans.AsInterfaceType(typeof(T)));
+            return (T)CreateCompoundObject(_iftFactory(typeof(T)));
         }
 
         /// <inheritdoc />
@@ -345,7 +344,7 @@ namespace Kistl.API
             CheckDisposed();
             //CheckInterfaceAssembly("T", typeof(T));
 
-            return (T)Find(_typeTrans.AsInterfaceType(typeof(T)), ID);
+            return (T)Find(_iftFactory(typeof(T)), ID);
         }
 
         /// <inheritdoc />
@@ -354,7 +353,7 @@ namespace Kistl.API
             CheckDisposed();
             //CheckInterfaceAssembly("T", typeof(T));
 
-            return (T)FindPersistenceObject(_typeTrans.AsInterfaceType(typeof(T)), ID);
+            return (T)FindPersistenceObject(_iftFactory(typeof(T)), ID);
         }
 
         /// <inheritdoc />
@@ -406,7 +405,7 @@ namespace Kistl.API
             //CheckInterfaceAssembly("T", typeof(T));
             if (exportGuids == null) { throw new ArgumentNullException("exportGuids"); }
 
-            return FindPersistenceObjects(_typeTrans.AsInterfaceType(typeof(T)), exportGuids).Cast<T>();
+            return FindPersistenceObjects(_iftFactory(typeof(T)), exportGuids).Cast<T>();
         }
 
         /// <inheritdoc />
@@ -471,28 +470,22 @@ namespace Kistl.API
         }
 
         #region IReadOnlyKistlContext Members
+        
+        public InterfaceType GetInterfaceType(IPersistenceObject obj)
+        {
+            return _iftFactory(((BasePersistenceObject)obj).GetImplementedInterface());
+        }
 
         public InterfaceType GetInterfaceType(Type t)
         {
-            return _typeTrans.AsInterfaceType(t);
+            return _iftFactory(t);
         }
 
-        public InterfaceType GetInterfaceType(string typeName)
-        {
-            return _typeTrans.AsInterfaceType(typeName);
-        }
-
-        public InterfaceType GetInterfaceType(IPersistenceObject obj)
-        {
-            return _typeTrans.AsInterfaceType(((BasePersistenceObject)obj).GetImplementedInterface());
-        }
-
-        public ImplementationType GetImplementationType(Type t)
-        {
-            return _typeTrans.AsImplementationType(t);
-        }
-
+        public abstract InterfaceType GetInterfaceType(string typeName);
+       
+        public abstract ImplementationType GetImplementationType(Type t);
         public abstract ImplementationType ToImplementationType(InterfaceType t);
+
         #endregion
     }
 }

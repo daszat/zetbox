@@ -2,7 +2,6 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:sys="clr-namespace:System;assembly=mscorlib"
                     xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls"
-                    xmlns:view="clr-namespace:Kistl.Client.WPF.View"
                     xmlns:client="clr-namespace:Kistl.Client.Presentables;assembly=Kistl.Client">
 
     <DataTemplate x:Key="emptyTemplate">
@@ -19,13 +18,4 @@
     <DataTemplate x:Key="nullTemplate">
         <TextBlock FontWeight="Bold">(null)</TextBlock>
     </DataTemplate>
-
-    <view:VisualTypeTemplateSelector x:Key="defaultTemplateSelector" />
-    <view:VisualTypeTemplateSelector x:Key="listItemTemplateSelector"
-                                     RequestedKind="Kistl.App.GUI.SingleLineDataObjectKind" />
-    <!--<view:VisualTypeTemplateSelector x:Key="gridCellTemplateSelector"
-                                     RequestedType="GridCell"
-                                     RequestedKind="FAIL" />-->
-    <view:VisualTypeTemplateSelector x:Key="dashBoardTemplateSelector"
-                                     RequestedKind="Kistl.App.GUI.DashboardKind" />
 </ResourceDictionary>

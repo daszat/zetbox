@@ -58,6 +58,10 @@
       <HintPath>$(KistlAPIPath)\Common\Kistl.API.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Autofac, Version=2.1.14.854, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(KistlAPIPath)\Common\Autofac.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccessControl.Interface.Designer.cs" />
@@ -167,6 +171,7 @@
     <Compile Include="Toolkit.Interface.Designer.cs" />
     <Compile Include="TestPhoneCompoundObject.Interface.Designer.cs" />
     <Compile Include="AssemblyInfo.Interface.cs" />
+    <Compile Include="Module.Interface.cs" />
     <Compile Include="ModuleRepository.Interface.Designer.cs" />
     <Compile Include="CourseOrganiserRepository.Interface.Designer.cs" />
     <Compile Include="DocumentManagementRepository.Interface.Designer.cs" />

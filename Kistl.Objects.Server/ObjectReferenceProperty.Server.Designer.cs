@@ -261,6 +261,22 @@ namespace Kistl.App.Base
 			this._fk_RelationEnd = otherImpl._fk_RelationEnd;
 		}
 
+		public override void ReloadReferences()
+		{
+			// Do not reload references if the current object has been deleted.
+			// TODO: enable when MemoryContext uses MemoryDataObjects
+			//if (this.ObjectState == DataObjectState.Deleted) return;
+			base.ReloadReferences();
+			
+			// fix direct object references
+
+			if (_fk_guid_RelationEnd.HasValue)
+				RelationEnd__Implementation__ = (Kistl.App.Base.RelationEnd__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.RelationEnd>(_fk_guid_RelationEnd.Value);
+			else if (_fk_RelationEnd.HasValue)
+				RelationEnd__Implementation__ = (Kistl.App.Base.RelationEnd__Implementation__)Context.Find<Kistl.App.Base.RelationEnd>(_fk_RelationEnd.Value);
+			else
+				RelationEnd__Implementation__ = null;
+		}
         // tail template
    		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
@@ -351,22 +367,6 @@ namespace Kistl.App.Base
 		}
 	
 
-		public override void ReloadReferences()
-		{
-			// Do not reload references if the current object has been deleted.
-			// TODO: enable when MemoryContext uses MemoryDataObjects
-			//if (this.ObjectState == DataObjectState.Deleted) return;
-			base.ReloadReferences();
-			
-			// fix direct object references
-
-			if (_fk_guid_RelationEnd.HasValue)
-				RelationEnd__Implementation__ = (Kistl.App.Base.RelationEnd__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.RelationEnd>(_fk_guid_RelationEnd.Value);
-			else if (_fk_RelationEnd.HasValue)
-				RelationEnd__Implementation__ = (Kistl.App.Base.RelationEnd__Implementation__)Context.Find<Kistl.App.Base.RelationEnd>(_fk_RelationEnd.Value);
-			else
-				RelationEnd__Implementation__ = null;
-		}
 #region Serializer
 
 

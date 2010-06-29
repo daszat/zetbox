@@ -15,10 +15,10 @@ namespace Kistl.DalProvider.Memory.Generator.Implementation.ObjectClasses
         : ClientObjects.Implementation.ObjectClasses.ObjectReferencePropertyTemplate
     {
         public ObjectReferencePropertyTemplate(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Templates.Implementation.SerializationMembersList serializationList,
-            string name, string efName, string fkBackingName, string fkGuidBackingName, string ownInterface, string referencedInterface,
-            Relation rel, RelationEndRole endRole, bool hasInverseNavigator, bool hasPositionStorage, string positionPropertyName, bool callGetterSetterEvents)
-            : base(_host, ctx, serializationList, name, efName, fkBackingName, fkGuidBackingName, ownInterface, referencedInterface, 
-            rel, endRole, hasInverseNavigator, hasPositionStorage, positionPropertyName, callGetterSetterEvents)
+            string name, string implName, string fkBackingName, string fkGuidBackingName, string ownInterface, string referencedInterface,
+            Relation rel, RelationEndRole endRole, bool hasInverseNavigator, bool hasPositionStorage, string positionPropertyName, bool relDataTypeExportable, string moduleNamespace, bool callGetterSetterEvents, bool isReloadable)
+            : base(_host, ctx, serializationList, name, implName, fkBackingName, fkGuidBackingName, ownInterface, referencedInterface,
+            rel, endRole, hasInverseNavigator, hasPositionStorage, positionPropertyName, relDataTypeExportable, moduleNamespace, callGetterSetterEvents, isReloadable)
         {
         }
     }

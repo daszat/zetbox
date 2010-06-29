@@ -29,7 +29,7 @@ namespace Kistl.Client.ASPNET.Toolkit
             }
         }
         public static IModelFactory ModelFactory { get; private set; }
-        public static ITypeTransformations TypeTransformations { get; private set; }
+        public static InterfaceType.Factory IftFactory { get; private set; }
 
         private static IContainer container;
 
@@ -66,11 +66,8 @@ namespace Kistl.Client.ASPNET.Toolkit
                 var builder = Kistl.API.Utils.AutoFacBuilder.CreateContainerBuilder(config, config.Client.Modules);
                 container = builder.Build();
 
-                // initialise custom actions manager
-                var cams = container.Resolve<BaseCustomActionsManager>();
-
                 ModelFactory = container.Resolve<IModelFactory>();
-                TypeTransformations = container.Resolve<ITypeTransformations>();
+                IftFactory = container.Resolve<InterfaceType.Factory>();
 
             }
             KistlContext = container.Resolve<IKistlContext>();

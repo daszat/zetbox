@@ -12,8 +12,7 @@ using NUnit.Framework;
 
 namespace Kistl.API.AbstractConsumerTests.CompoundObjects
 {
-
-    public abstract class when_changing_a_compoundobject_list
+    public abstract class when_changing_a_CompoundObject_list
         : CompoundObjectFixture
     {
         [Test]

@@ -745,6 +745,29 @@ namespace Kistl.App.Base
 			this._fk_DefaultViewModelDescriptor = otherImpl._fk_DefaultViewModelDescriptor;
 		}
 
+		public override void ReloadReferences()
+		{
+			// Do not reload references if the current object has been deleted.
+			// TODO: enable when MemoryContext uses MemoryDataObjects
+			//if (this.ObjectState == DataObjectState.Deleted) return;
+			base.ReloadReferences();
+			
+			// fix direct object references
+
+			if (_fk_guid_BaseObjectClass.HasValue)
+				BaseObjectClass__Implementation__ = (Kistl.App.Base.ObjectClass__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.ObjectClass>(_fk_guid_BaseObjectClass.Value);
+			else if (_fk_BaseObjectClass.HasValue)
+				BaseObjectClass__Implementation__ = (Kistl.App.Base.ObjectClass__Implementation__)Context.Find<Kistl.App.Base.ObjectClass>(_fk_BaseObjectClass.Value);
+			else
+				BaseObjectClass__Implementation__ = null;
+
+			if (_fk_guid_DefaultViewModelDescriptor.HasValue)
+				DefaultViewModelDescriptor__Implementation__ = (Kistl.App.GUI.ViewModelDescriptor__Implementation__)Context.FindPersistenceObject<Kistl.App.GUI.ViewModelDescriptor>(_fk_guid_DefaultViewModelDescriptor.Value);
+			else if (_fk_DefaultViewModelDescriptor.HasValue)
+				DefaultViewModelDescriptor__Implementation__ = (Kistl.App.GUI.ViewModelDescriptor__Implementation__)Context.Find<Kistl.App.GUI.ViewModelDescriptor>(_fk_DefaultViewModelDescriptor.Value);
+			else
+				DefaultViewModelDescriptor__Implementation__ = null;
+		}
         // tail template
    		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
@@ -897,29 +920,6 @@ namespace Kistl.App.Base
 		}
 	
 
-		public override void ReloadReferences()
-		{
-			// Do not reload references if the current object has been deleted.
-			// TODO: enable when MemoryContext uses MemoryDataObjects
-			//if (this.ObjectState == DataObjectState.Deleted) return;
-			base.ReloadReferences();
-			
-			// fix direct object references
-
-			if (_fk_guid_BaseObjectClass.HasValue)
-				BaseObjectClass__Implementation__ = (Kistl.App.Base.ObjectClass__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.ObjectClass>(_fk_guid_BaseObjectClass.Value);
-			else if (_fk_BaseObjectClass.HasValue)
-				BaseObjectClass__Implementation__ = (Kistl.App.Base.ObjectClass__Implementation__)Context.Find<Kistl.App.Base.ObjectClass>(_fk_BaseObjectClass.Value);
-			else
-				BaseObjectClass__Implementation__ = null;
-
-			if (_fk_guid_DefaultViewModelDescriptor.HasValue)
-				DefaultViewModelDescriptor__Implementation__ = (Kistl.App.GUI.ViewModelDescriptor__Implementation__)Context.FindPersistenceObject<Kistl.App.GUI.ViewModelDescriptor>(_fk_guid_DefaultViewModelDescriptor.Value);
-			else if (_fk_DefaultViewModelDescriptor.HasValue)
-				DefaultViewModelDescriptor__Implementation__ = (Kistl.App.GUI.ViewModelDescriptor__Implementation__)Context.Find<Kistl.App.GUI.ViewModelDescriptor>(_fk_DefaultViewModelDescriptor.Value);
-			else
-				DefaultViewModelDescriptor__Implementation__ = null;
-		}
 #region Serializer
 
 

@@ -131,7 +131,21 @@ namespace Kistl.App.Base
             }
         }
         
+        // normalize namespace for Templates
+        private Kistl.App.Base.ObjectClass ReferencedClass__Implementation__
+        {
+			get
+			{
+				return ReferencedClass;
+			}
+			set
+			{
+				ReferencedClass = value;
+			}
+		}
+        
         private int? _fk_ReferencedClass;
+        private Guid? _fk_guid_ReferencedClass = null;
 		// END Kistl.DalProvider.Memory.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate for ReferencedClass
 		public static event PropertyGetterHandler<Kistl.App.Base.CalculatedObjectReferenceProperty, Kistl.App.Base.ObjectClass> OnReferencedClass_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.CalculatedObjectReferenceProperty, Kistl.App.Base.ObjectClass> OnReferencedClass_PreSetter;
@@ -199,6 +213,22 @@ namespace Kistl.App.Base
             base.AttachToContext(ctx);
 		}
 
+		public override void ReloadReferences()
+		{
+			// Do not reload references if the current object has been deleted.
+			// TODO: enable when MemoryContext uses MemoryDataObjects
+			//if (this.ObjectState == DataObjectState.Deleted) return;
+			base.ReloadReferences();
+			
+			// fix direct object references
+
+			if (_fk_guid_ReferencedClass.HasValue)
+				ReferencedClass__Implementation__ = (Kistl.App.Base.ObjectClass__Implementation__Memory)Context.FindPersistenceObject<Kistl.App.Base.ObjectClass>(_fk_guid_ReferencedClass.Value);
+			else if (_fk_ReferencedClass.HasValue)
+				ReferencedClass__Implementation__ = (Kistl.App.Base.ObjectClass__Implementation__Memory)Context.Find<Kistl.App.Base.ObjectClass>(_fk_ReferencedClass.Value);
+			else
+				ReferencedClass__Implementation__ = null;
+		}
         // tail template
    		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
@@ -342,26 +372,28 @@ namespace Kistl.App.Base
         {
             
             base.ToStream(xml);
-            XmlStreamer.ToStream(this._fk_ReferencedClass, xml, "ReferencedClass", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._fk_ReferencedClass, xml, "ReferencedClass", "Kistl.App.Base");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
             
             base.FromStream(xml);
-            XmlStreamer.FromStream(ref this._fk_ReferencedClass, xml, "ReferencedClass", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_ReferencedClass, xml, "ReferencedClass", "Kistl.App.Base");
         }
 
         public override void Export(System.Xml.XmlWriter xml, string[] modules)
         {
             
             base.Export(xml, modules);
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(ReferencedClass != null ? ReferencedClass.ExportGuid : (Guid?)null, xml, "ReferencedClass", "Kistl.App.Base");
         }
 
         public override void MergeImport(System.Xml.XmlReader xml)
         {
             
             base.MergeImport(xml);
+            XmlStreamer.FromStream(ref this._fk_guid_ReferencedClass, xml, "ReferencedClass", "Kistl.App.Base");
         }
 
 #endregion

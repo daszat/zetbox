@@ -171,7 +171,21 @@ namespace Kistl.App.Base
             }
         }
         
+        // normalize namespace for Templates
+        private Kistl.App.Base.RelationEnd RelationEnd__Implementation__
+        {
+			get
+			{
+				return RelationEnd;
+			}
+			set
+			{
+				RelationEnd = value;
+			}
+		}
+        
         private int? _fk_RelationEnd;
+        private Guid? _fk_guid_RelationEnd = null;
 		// END Kistl.DalProvider.Memory.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate for RelationEnd
 		public static event PropertyGetterHandler<Kistl.App.Base.ObjectReferenceProperty, Kistl.App.Base.RelationEnd> OnRelationEnd_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.ObjectReferenceProperty, Kistl.App.Base.RelationEnd> OnRelationEnd_PreSetter;
@@ -262,6 +276,22 @@ namespace Kistl.App.Base
             base.AttachToContext(ctx);
 		}
 
+		public override void ReloadReferences()
+		{
+			// Do not reload references if the current object has been deleted.
+			// TODO: enable when MemoryContext uses MemoryDataObjects
+			//if (this.ObjectState == DataObjectState.Deleted) return;
+			base.ReloadReferences();
+			
+			// fix direct object references
+
+			if (_fk_guid_RelationEnd.HasValue)
+				RelationEnd__Implementation__ = (Kistl.App.Base.RelationEnd__Implementation__Memory)Context.FindPersistenceObject<Kistl.App.Base.RelationEnd>(_fk_guid_RelationEnd.Value);
+			else if (_fk_RelationEnd.HasValue)
+				RelationEnd__Implementation__ = (Kistl.App.Base.RelationEnd__Implementation__Memory)Context.Find<Kistl.App.Base.RelationEnd>(_fk_RelationEnd.Value);
+			else
+				RelationEnd__Implementation__ = null;
+		}
         // tail template
    		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
@@ -377,7 +407,7 @@ namespace Kistl.App.Base
             
             base.ToStream(xml);
             XmlStreamer.ToStream(this._EagerLoading, xml, "EagerLoading", "Kistl.App.Base");
-            XmlStreamer.ToStream(this._fk_RelationEnd, xml, "RelationEnd", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._fk_RelationEnd, xml, "RelationEnd", "Kistl.App.Base");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
@@ -385,7 +415,7 @@ namespace Kistl.App.Base
             
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._EagerLoading, xml, "EagerLoading", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._fk_RelationEnd, xml, "RelationEnd", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_RelationEnd, xml, "RelationEnd", "Kistl.App.Base");
         }
 
         public override void Export(System.Xml.XmlWriter xml, string[] modules)
@@ -394,6 +424,7 @@ namespace Kistl.App.Base
             base.Export(xml, modules);
     
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._EagerLoading, xml, "EagerLoading", "Kistl.App.Base");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(RelationEnd != null ? RelationEnd.ExportGuid : (Guid?)null, xml, "RelationEnd", "Kistl.App.Base");
         }
 
         public override void MergeImport(System.Xml.XmlReader xml)
@@ -401,6 +432,7 @@ namespace Kistl.App.Base
             
             base.MergeImport(xml);
             XmlStreamer.FromStream(ref this._EagerLoading, xml, "EagerLoading", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._fk_guid_RelationEnd, xml, "RelationEnd", "Kistl.App.Base");
         }
 
 #endregion

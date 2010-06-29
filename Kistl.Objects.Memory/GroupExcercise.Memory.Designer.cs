@@ -122,7 +122,21 @@ namespace at.dasz.CourseOrganiser
             }
         }
         
+        // normalize namespace for Templates
+        private at.dasz.CourseOrganiser.Exercise Excercise__Implementation__
+        {
+			get
+			{
+				return Excercise;
+			}
+			set
+			{
+				Excercise = value;
+			}
+		}
+        
         private int? _fk_Excercise;
+        private Guid? _fk_guid_Excercise = null;
 		// END Kistl.DalProvider.Memory.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate for Excercise
 		public static event PropertyGetterHandler<at.dasz.CourseOrganiser.GroupExcercise, at.dasz.CourseOrganiser.Exercise> OnExcercise_Getter;
 		public static event PropertyPreSetterHandler<at.dasz.CourseOrganiser.GroupExcercise, at.dasz.CourseOrganiser.Exercise> OnExcercise_PreSetter;
@@ -221,6 +235,20 @@ namespace at.dasz.CourseOrganiser
             base.AttachToContext(ctx);
 		}
 
+		public override void ReloadReferences()
+		{
+			// Do not reload references if the current object has been deleted.
+			// TODO: enable when MemoryContext uses MemoryDataObjects
+			//if (this.ObjectState == DataObjectState.Deleted) return;
+			// fix direct object references
+
+			if (_fk_guid_Excercise.HasValue)
+				Excercise__Implementation__ = (at.dasz.CourseOrganiser.Exercise__Implementation__Memory)Context.FindPersistenceObject<at.dasz.CourseOrganiser.Exercise>(_fk_guid_Excercise.Value);
+			else if (_fk_Excercise.HasValue)
+				Excercise__Implementation__ = (at.dasz.CourseOrganiser.Exercise__Implementation__Memory)Context.Find<at.dasz.CourseOrganiser.Exercise>(_fk_Excercise.Value);
+			else
+				Excercise__Implementation__ = null;
+		}
         // tail template
    		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
@@ -361,7 +389,7 @@ namespace at.dasz.CourseOrganiser
         {
             
             base.ToStream(xml);
-            XmlStreamer.ToStream(this._fk_Excercise, xml, "Excercise", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._fk_Excercise, xml, "Excercise", "at.dasz.CourseOrganiser");
             XmlStreamer.ToStream(this._Score, xml, "Score", "at.dasz.CourseOrganiser");
         }
 
@@ -369,7 +397,7 @@ namespace at.dasz.CourseOrganiser
         {
             
             base.FromStream(xml);
-            XmlStreamer.FromStream(ref this._fk_Excercise, xml, "Excercise", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_Excercise, xml, "Excercise", "at.dasz.CourseOrganiser");
             XmlStreamer.FromStream(ref this._Score, xml, "Score", "at.dasz.CourseOrganiser");
         }
 

@@ -155,7 +155,21 @@ namespace Kistl.App.Test
             }
         }
         
+        // normalize namespace for Templates
+        private Kistl.App.Projekte.Kunde ObjectProp__Implementation__
+        {
+			get
+			{
+				return ObjectProp;
+			}
+			set
+			{
+				ObjectProp = value;
+			}
+		}
+        
         private int? _fk_ObjectProp;
+        private Guid? _fk_guid_ObjectProp = null;
 		// END Kistl.DalProvider.Memory.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate for ObjectProp
 		public static event PropertyGetterHandler<Kistl.App.Test.TestObjClass, Kistl.App.Projekte.Kunde> OnObjectProp_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Test.TestObjClass, Kistl.App.Projekte.Kunde> OnObjectProp_PreSetter;
@@ -303,6 +317,20 @@ namespace Kistl.App.Test
             base.AttachToContext(ctx);
 		}
 
+		public override void ReloadReferences()
+		{
+			// Do not reload references if the current object has been deleted.
+			// TODO: enable when MemoryContext uses MemoryDataObjects
+			//if (this.ObjectState == DataObjectState.Deleted) return;
+			// fix direct object references
+
+			if (_fk_guid_ObjectProp.HasValue)
+				ObjectProp__Implementation__ = (Kistl.App.Projekte.Kunde__Implementation__Memory)Context.FindPersistenceObject<Kistl.App.Projekte.Kunde>(_fk_guid_ObjectProp.Value);
+			else if (_fk_ObjectProp.HasValue)
+				ObjectProp__Implementation__ = (Kistl.App.Projekte.Kunde__Implementation__Memory)Context.Find<Kistl.App.Projekte.Kunde>(_fk_ObjectProp.Value);
+			else
+				ObjectProp__Implementation__ = null;
+		}
         // tail template
    		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
@@ -460,7 +488,7 @@ namespace Kistl.App.Test
             
             base.ToStream(xml);
             XmlStreamer.ToStream(this._MyIntProperty, xml, "MyIntProperty", "Kistl.App.Test");
-            XmlStreamer.ToStream(this._fk_ObjectProp, xml, "ObjectProp", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._fk_ObjectProp, xml, "ObjectProp", "Kistl.App.Test");
             XmlStreamer.ToStream(this._StringProp, xml, "StringProp", "Kistl.App.Test");
             XmlStreamer.ToStream((int?)this.TestEnumProp, xml, "TestEnumProp", "Kistl.App.Test");
         }
@@ -470,7 +498,7 @@ namespace Kistl.App.Test
             
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._MyIntProperty, xml, "MyIntProperty", "Kistl.App.Test");
-            XmlStreamer.FromStream(ref this._fk_ObjectProp, xml, "ObjectProp", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_ObjectProp, xml, "ObjectProp", "Kistl.App.Test");
             XmlStreamer.FromStream(ref this._StringProp, xml, "StringProp", "Kistl.App.Test");
             XmlStreamer.FromStreamConverter(v => ((TestObjClass)this).TestEnumProp = (Kistl.App.Test.TestEnum)v, xml, "TestEnumProp", "Kistl.App.Test");
         }

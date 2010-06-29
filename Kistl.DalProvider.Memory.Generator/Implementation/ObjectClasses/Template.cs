@@ -60,7 +60,7 @@ namespace Kistl.DalProvider.Memory.Generator.Implementation.ObjectClasses
             this.WriteLine("        // object reference property");
             ClientObjects.Implementation.ObjectClasses.ObjectReferencePropertyTemplate.Call(
                 Host, ctx, this.MembersToSerialize,
-                prop, true);
+                prop, true, true);
         }
 
         protected override void ApplyCompoundObjectPropertyTemplate(CompoundObjectProperty prop)

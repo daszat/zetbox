@@ -193,20 +193,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Generator\Implementation\ObjectClasses\ReloadOneReference.cs" />
-    <Compile Include="Generator\Implementation\ObjectClasses\ReloadOneReference.Designer.cs">
-      <DependentUpon>ReloadOneReference.cst</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Generator\Implementation\ObjectClasses\ReloadReferences.cs">
-      <DependentUpon>ReloadReferences.cst</DependentUpon>
-    </Compile>
-    <Compile Include="Generator\Implementation\ObjectClasses\ReloadReferences.Designer.cs">
-      <DependentUpon>ReloadReferences.cst</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <Compile Include="Generator\Implementation\ObjectClasses\SecurityRulesClass.cs">
       <DependentUpon>SecurityRulesClass.cst</DependentUpon>
     </Compile>
@@ -307,10 +293,12 @@
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>Model.ssdl.EntityTypeColumnsRel.Designer.cs</LastGenOutput>
     </None>
+    <Compile Include="EFObjectContext.cs" />
     <Compile Include="EfQueryTranslatorProvider.cs" />
     <Compile Include="EfServerObjectHandlerFactory.cs" />
     <Compile Include="Generator\Implementation\EfModel\ModelMslEntityTypeMapping.ComplexProperty.cs" />
     <Compile Include="Generator\Implementation\EfModel\ModelMslEntityTypeMapping.ScalarProperty.cs" />
+    <Compile Include="EFImplementationTypeChecker.cs" />
     <None Include="Generator\Implementation\ObjectClasses\AssociationSetAttributes.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>AssociationSetAttributes.Designer.cs</LastGenOutput>
@@ -334,14 +322,6 @@
     <None Include="Generator\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>ObjectReferencePropertyTemplate.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="Generator\Implementation\ObjectClasses\ReloadOneReference.cst">
-      <Generator>Arebis Template Processor</Generator>
-      <LastGenOutput>ReloadOneReference.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="Generator\Implementation\ObjectClasses\ReloadReferences.cst">
-      <Generator>Arebis Template Processor</Generator>
-      <LastGenOutput>ReloadReferences.Designer.cs</LastGenOutput>
     </None>
     <None Include="Generator\Implementation\ObjectClasses\SecurityRulesClass.cst">
       <Generator>Arebis Template Processor</Generator>

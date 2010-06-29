@@ -87,7 +87,7 @@
     <Compile Include="Tests\BaseServerDataObjects\when_loaded.cs" />
     <Compile Include="Tests\BinarySerializers\should_work_with_ICompoundObjects.cs" />
     <Compile Include="Tests\Blobs\when_using.cs" />
-    <Compile Include="Tests\CompoundObject\when_changing_a_compoundobject_list.cs" />
+    <Compile Include="Tests\CompoundObject\when_changing_a_CompoundObject_list.cs" />
     <Compile Include="Tests\CompoundObject\when_changing.cs" />
     <Compile Include="Tests\CompoundObject\when_roundtrip.cs" />
     <Compile Include="Tests\RelationListWrapperTests.cs" />
@@ -128,6 +128,14 @@
     <ProjectReference Include="..\..\Kistl.DalProvider.EF\Kistl.DalProvider.EF.csproj">
       <Project>{52EC8DFB-9C75-4FDB-9EE1-E78847F7F711}</Project>
       <Name>Kistl.DalProvider.EF</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Kistl.DalProvider.Memory\Kistl.DalProvider.Memory.csproj">
+      <Project>{7E3CE048-00C1-4357-BE27-801AB5B75FE3}</Project>
+      <Name>Kistl.DalProvider.Memory</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Kistl.Objects.Memory\Kistl.Objects.Memory.csproj">
+      <Project>{01E60FD5-CD96-466A-83B1-8EFC7452B47C}</Project>
+      <Name>Kistl.Objects.Memory</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Kistl.Objects.Server\Kistl.Objects.Server.csproj">
       <Project>{62B9344A-87D1-4715-9ABB-EAE0ACC4F523}</Project>

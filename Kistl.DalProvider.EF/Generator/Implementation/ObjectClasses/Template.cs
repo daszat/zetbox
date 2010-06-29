@@ -1,17 +1,19 @@
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-
-using Kistl.API;
-using Kistl.App.Base;
-using Kistl.App.Extensions;
-using Kistl.Server.Generators.Extensions;
-using Kistl.Server.Generators;
 
 namespace Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Linq;
+    using System.Text;
+
+    using Kistl.API;
+    using Kistl.App.Base;
+    using Kistl.App.Extensions;
+    using Kistl.Server.Generators;
+    using Kistl.Server.Generators.Extensions;
+    using Templates = Kistl.Server.Generators.Templates;
+
     public class Template
         : Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Template
     {
@@ -181,7 +183,6 @@ namespace Kistl.DalProvider.EF.Generator.Implementation.ObjectClasses
         protected override void ApplyClassTailTemplate()
         {
             base.ApplyClassTailTemplate();
-            Implementation.ObjectClasses.ReloadReferences.Call(Host, ctx, this.DataType);
 
             if (NeedsRightsTable())
             {

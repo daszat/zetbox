@@ -59,7 +59,15 @@ namespace Kistl.Client.WPF
         private IContainer CreateMasterContainer(KistlConfig config)
         {
             var builder = Kistl.API.Utils.AutoFacBuilder.CreateContainerBuilder(config, config.Client.Modules);
-            builder.RegisterType<Launcher>().SingleInstance();
+            
+            builder
+                .RegisterType<Launcher>()
+                .SingleInstance();
+
+            builder
+                .RegisterType<Kistl.Client.WPF.View.VisualTypeTemplateSelector>()
+                .InstancePerDependency();
+            
             return builder.Build();
         }
 
@@ -92,21 +100,14 @@ namespace Kistl.Client.WPF
 
                 container = CreateMasterContainer(config);
 
-                // TODO: Remove when FrozenContext is loaded by AutoFac
-                FrozenContext.RegisterTypeTransformations(container.Resolve<ITypeTransformations>());
-
-                // initialise AppContext
-                SplashScreen.SetInfo("Initializing Custom Actions Manager");
-                // initialise custom actions manager
-                var cams = container.Resolve<BaseCustomActionsManager>();
-
-
                 SplashScreen.SetInfo("Initializing Launcher");
 
                 // Init Resources
-                this.Resources["IconConverter"] = new IconConverter(config.Client.DocumentStore);
-                Kistl.Client.WPF.View.VisualTypeTemplateSelector.TypeTrans = container.Resolve<ITypeTransformations>();
-
+                this.Resources["IconConverter"] = new IconConverter(config.Client.DocumentStore, container.Resolve<IReadOnlyKistlContext>());
+                var templateSelectorFactory = container.Resolve<Kistl.Client.WPF.View.VisualTypeTemplateSelector.Factory>();
+                this.Resources["defaultTemplateSelector"] = templateSelectorFactory(null);
+                this.Resources["listItemTemplateSelector"] = templateSelectorFactory("Kistl.App.GUI.SingleLineDataObjectKind");
+                this.Resources["dashBoardTemplateSelector"] = templateSelectorFactory("Kistl.App.GUI.DashboardKind");
                 // delegate all business logic into another class, which 
                 // allows us to load the Kistl.Objects assemblies _before_ 
                 // they are needed.

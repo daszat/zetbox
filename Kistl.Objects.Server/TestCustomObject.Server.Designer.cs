@@ -624,6 +624,27 @@ namespace Kistl.App.Test
 			this._fk_MuhBlah_One_Nav = otherImpl._fk_MuhBlah_One_Nav;
 		}
 
+		public override void ReloadReferences()
+		{
+			// Do not reload references if the current object has been deleted.
+			// TODO: enable when MemoryContext uses MemoryDataObjects
+			//if (this.ObjectState == DataObjectState.Deleted) return;
+			// fix direct object references
+
+			if (_fk_guid_MubBlah_Nav.HasValue)
+				MubBlah_Nav__Implementation__ = (Kistl.App.Test.Muhblah__Implementation__)Context.FindPersistenceObject<Kistl.App.Test.Muhblah>(_fk_guid_MubBlah_Nav.Value);
+			else if (_fk_MubBlah_Nav.HasValue)
+				MubBlah_Nav__Implementation__ = (Kistl.App.Test.Muhblah__Implementation__)Context.Find<Kistl.App.Test.Muhblah>(_fk_MubBlah_Nav.Value);
+			else
+				MubBlah_Nav__Implementation__ = null;
+
+			if (_fk_guid_MuhBlah_One_Nav.HasValue)
+				MuhBlah_One_Nav__Implementation__ = (Kistl.App.Test.Muhblah__Implementation__)Context.FindPersistenceObject<Kistl.App.Test.Muhblah>(_fk_guid_MuhBlah_One_Nav.Value);
+			else if (_fk_MuhBlah_One_Nav.HasValue)
+				MuhBlah_One_Nav__Implementation__ = (Kistl.App.Test.Muhblah__Implementation__)Context.Find<Kistl.App.Test.Muhblah>(_fk_MuhBlah_One_Nav.Value);
+			else
+				MuhBlah_One_Nav__Implementation__ = null;
+		}
         // tail template
    		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
@@ -772,27 +793,6 @@ namespace Kistl.App.Test
 		}
 	
 
-		public override void ReloadReferences()
-		{
-			// Do not reload references if the current object has been deleted.
-			// TODO: enable when MemoryContext uses MemoryDataObjects
-			//if (this.ObjectState == DataObjectState.Deleted) return;
-			// fix direct object references
-
-			if (_fk_guid_MubBlah_Nav.HasValue)
-				MubBlah_Nav__Implementation__ = (Kistl.App.Test.Muhblah__Implementation__)Context.FindPersistenceObject<Kistl.App.Test.Muhblah>(_fk_guid_MubBlah_Nav.Value);
-			else if (_fk_MubBlah_Nav.HasValue)
-				MubBlah_Nav__Implementation__ = (Kistl.App.Test.Muhblah__Implementation__)Context.Find<Kistl.App.Test.Muhblah>(_fk_MubBlah_Nav.Value);
-			else
-				MubBlah_Nav__Implementation__ = null;
-
-			if (_fk_guid_MuhBlah_One_Nav.HasValue)
-				MuhBlah_One_Nav__Implementation__ = (Kistl.App.Test.Muhblah__Implementation__)Context.FindPersistenceObject<Kistl.App.Test.Muhblah>(_fk_guid_MuhBlah_One_Nav.Value);
-			else if (_fk_MuhBlah_One_Nav.HasValue)
-				MuhBlah_One_Nav__Implementation__ = (Kistl.App.Test.Muhblah__Implementation__)Context.Find<Kistl.App.Test.Muhblah>(_fk_MuhBlah_One_Nav.Value);
-			else
-				MuhBlah_One_Nav__Implementation__ = null;
-		}
 #region Serializer
 
 

@@ -34,9 +34,9 @@ namespace Kistl.API.Tests.Serializables
         [Test]
         public void AssertCorrectContents_correctly_identifies_ToStream_result()
         {
-            TestObjClassSerializationMock.ToStream<LocalMock, TestEnum>(sw, typeTrans);
+            TestObjClassSerializationMock.ToStream<LocalMock, TestEnum>(sw, iftFactory);
             ms.Seek(0, SeekOrigin.Begin);
-            TestObjClassSerializationMock.AssertCorrectContents<LocalMock, TestEnum>(sr, typeTrans);
+            TestObjClassSerializationMock.AssertCorrectContents<LocalMock, TestEnum>(sr, iftFactory);
             Assert.That(ms.Position, Is.EqualTo(ms.Length), "AssertCorrectContents didn't read complete stream");
         }
 	

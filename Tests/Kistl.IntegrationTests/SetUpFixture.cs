@@ -1,23 +1,25 @@
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-
-using Kistl.API;
-using Kistl.API.Configuration;
-using Kistl.API.Utils;
-using Kistl.App.GUI;
-using Kistl.Client;
-
-using Autofac;
-using NUnit.Framework;
-using NUnit.Framework.Constraints;
-using Kistl.App.Extensions;
 
 namespace Kistl.IntegrationTests
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Linq;
+    using System.Reflection;
+    using System.Text;
+    
+    using Autofac;
+    
+    using Kistl.API;
+    using Kistl.API.Configuration;
+    using Kistl.API.Utils;
+    using Kistl.App.Extensions;
+    using Kistl.App.GUI;
+    using Kistl.Client;
+    
+    using NUnit.Framework;
+    using NUnit.Framework.Constraints;
+    
     [SetUpFixture]
     public class SetUpFixture : Kistl.API.AbstractConsumerTests.DatabaseResetup, IDisposable
     {
@@ -37,9 +39,6 @@ namespace Kistl.IntegrationTests
 
                     manager = new ServerDomainManager();
                     manager.Start(config);
-
-                    // initialise custom actions manager
-                    var cams = container.Resolve<BaseCustomActionsManager>();
 
                     using (var initCtx = container.Resolve<IKistlContext>())
                     {

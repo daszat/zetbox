@@ -587,6 +587,27 @@ namespace Kistl.App.Test
 			this._fk_TestCustomObjects_One_Nav = otherImpl._fk_TestCustomObjects_One_Nav;
 		}
 
+		public override void ReloadReferences()
+		{
+			// Do not reload references if the current object has been deleted.
+			// TODO: enable when MemoryContext uses MemoryDataObjects
+			//if (this.ObjectState == DataObjectState.Deleted) return;
+			// fix direct object references
+
+			if (_fk_guid_TestCustomObjects_Nav.HasValue)
+				TestCustomObjects_Nav__Implementation__ = (Kistl.App.Test.TestCustomObject__Implementation__)Context.FindPersistenceObject<Kistl.App.Test.TestCustomObject>(_fk_guid_TestCustomObjects_Nav.Value);
+			else if (_fk_TestCustomObjects_Nav.HasValue)
+				TestCustomObjects_Nav__Implementation__ = (Kistl.App.Test.TestCustomObject__Implementation__)Context.Find<Kistl.App.Test.TestCustomObject>(_fk_TestCustomObjects_Nav.Value);
+			else
+				TestCustomObjects_Nav__Implementation__ = null;
+
+			if (_fk_guid_TestCustomObjects_One_Nav.HasValue)
+				TestCustomObjects_One_Nav__Implementation__ = (Kistl.App.Test.TestCustomObject__Implementation__)Context.FindPersistenceObject<Kistl.App.Test.TestCustomObject>(_fk_guid_TestCustomObjects_One_Nav.Value);
+			else if (_fk_TestCustomObjects_One_Nav.HasValue)
+				TestCustomObjects_One_Nav__Implementation__ = (Kistl.App.Test.TestCustomObject__Implementation__)Context.Find<Kistl.App.Test.TestCustomObject>(_fk_TestCustomObjects_One_Nav.Value);
+			else
+				TestCustomObjects_One_Nav__Implementation__ = null;
+		}
         // tail template
    		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
@@ -727,27 +748,6 @@ namespace Kistl.App.Test
 		}
 	
 
-		public override void ReloadReferences()
-		{
-			// Do not reload references if the current object has been deleted.
-			// TODO: enable when MemoryContext uses MemoryDataObjects
-			//if (this.ObjectState == DataObjectState.Deleted) return;
-			// fix direct object references
-
-			if (_fk_guid_TestCustomObjects_Nav.HasValue)
-				TestCustomObjects_Nav__Implementation__ = (Kistl.App.Test.TestCustomObject__Implementation__)Context.FindPersistenceObject<Kistl.App.Test.TestCustomObject>(_fk_guid_TestCustomObjects_Nav.Value);
-			else if (_fk_TestCustomObjects_Nav.HasValue)
-				TestCustomObjects_Nav__Implementation__ = (Kistl.App.Test.TestCustomObject__Implementation__)Context.Find<Kistl.App.Test.TestCustomObject>(_fk_TestCustomObjects_Nav.Value);
-			else
-				TestCustomObjects_Nav__Implementation__ = null;
-
-			if (_fk_guid_TestCustomObjects_One_Nav.HasValue)
-				TestCustomObjects_One_Nav__Implementation__ = (Kistl.App.Test.TestCustomObject__Implementation__)Context.FindPersistenceObject<Kistl.App.Test.TestCustomObject>(_fk_guid_TestCustomObjects_One_Nav.Value);
-			else if (_fk_TestCustomObjects_One_Nav.HasValue)
-				TestCustomObjects_One_Nav__Implementation__ = (Kistl.App.Test.TestCustomObject__Implementation__)Context.Find<Kistl.App.Test.TestCustomObject>(_fk_TestCustomObjects_One_Nav.Value);
-			else
-				TestCustomObjects_One_Nav__Implementation__ = null;
-		}
 #region Serializer
 
 

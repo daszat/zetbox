@@ -122,7 +122,21 @@ namespace Kistl.App.Base
             }
         }
         
+        // normalize namespace for Templates
+        private Kistl.App.Base.DataType Constrained__Implementation__
+        {
+			get
+			{
+				return Constrained;
+			}
+			set
+			{
+				Constrained = value;
+			}
+		}
+        
         private int? _fk_Constrained;
+        private Guid? _fk_guid_Constrained = null;
 		// END Kistl.DalProvider.Memory.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate for Constrained
 		public static event PropertyGetterHandler<Kistl.App.Base.InstanceConstraint, Kistl.App.Base.DataType> OnConstrained_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.InstanceConstraint, Kistl.App.Base.DataType> OnConstrained_PreSetter;
@@ -142,7 +156,7 @@ namespace Kistl.App.Base
                 // for the benefit of down-stream templates
                 var __result = _ExportGuid;
                 if (!_isExportGuidSet) {
-                    var __p = FrozenContext.Single.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("8ef28076-900c-4294-920c-5d0d91e925bb"));
+                    var __p = FrozenContext.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("8ef28076-900c-4294-920c-5d0d91e925bb"));
                     if (__p != null) {
                         _isExportGuidSet = true;
                         __result = this._ExportGuid = (Guid)__p.DefaultValue.GetDefaultValue();
@@ -303,6 +317,20 @@ namespace Kistl.App.Base
             base.AttachToContext(ctx);
 		}
 
+		public override void ReloadReferences()
+		{
+			// Do not reload references if the current object has been deleted.
+			// TODO: enable when MemoryContext uses MemoryDataObjects
+			//if (this.ObjectState == DataObjectState.Deleted) return;
+			// fix direct object references
+
+			if (_fk_guid_Constrained.HasValue)
+				Constrained__Implementation__ = (Kistl.App.Base.DataType__Implementation__Memory)Context.FindPersistenceObject<Kistl.App.Base.DataType>(_fk_guid_Constrained.Value);
+			else if (_fk_Constrained.HasValue)
+				Constrained__Implementation__ = (Kistl.App.Base.DataType__Implementation__Memory)Context.Find<Kistl.App.Base.DataType>(_fk_Constrained.Value);
+			else
+				Constrained__Implementation__ = null;
+		}
         // tail template
    		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
@@ -451,7 +479,7 @@ namespace Kistl.App.Base
         {
             
             base.ToStream(xml);
-            XmlStreamer.ToStream(this._fk_Constrained, xml, "Constrained", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._fk_Constrained, xml, "Constrained", "Kistl.App.Base");
             XmlStreamer.ToStream(this._isExportGuidSet, xml, "IsExportGuidSet", "Kistl.App.Base");
             if (this._isExportGuidSet) {
                 XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
@@ -463,7 +491,7 @@ namespace Kistl.App.Base
         {
             
             base.FromStream(xml);
-            XmlStreamer.FromStream(ref this._fk_Constrained, xml, "Constrained", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_Constrained, xml, "Constrained", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._isExportGuidSet, xml, "IsExportGuidSet", "Kistl.App.Base");
             if (this._isExportGuidSet) {
                 XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
@@ -475,12 +503,14 @@ namespace Kistl.App.Base
         {
             
             xml.WriteAttributeString("ExportGuid", this._ExportGuid.ToString());
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(Constrained != null ? Constrained.ExportGuid : (Guid?)null, xml, "Constrained", "Kistl.App.Base");
     
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._Reason, xml, "Reason", "Kistl.App.Base");
         }
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
         {
+            XmlStreamer.FromStream(ref this._fk_guid_Constrained, xml, "Constrained", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
             this._isExportGuidSet = true;
             XmlStreamer.FromStream(ref this._Reason, xml, "Reason", "Kistl.App.Base");

@@ -8,7 +8,7 @@ using Kistl.API.Client;
 
 using NUnit.Framework;
 
-namespace Kistl.DalProvider.ClientObjects.Tests.PersistenceObjects
+namespace Kistl.DalProvider.Client.Tests.PersistenceObjects
 {
     [TestFixture]
     public class when_loaded

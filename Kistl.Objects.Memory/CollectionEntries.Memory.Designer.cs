@@ -128,7 +128,21 @@ namespace Kistl.App.Base
             }
         }
         
+        // normalize namespace for Templates
+        private Kistl.App.Base.CalculatedObjectReferenceProperty A__Implementation__
+        {
+			get
+			{
+				return A;
+			}
+			set
+			{
+				A = value;
+			}
+		}
+        
         private int? _fk_A;
+        private Guid? _fk_guid_A = null;
 		// END Kistl.DalProvider.Memory.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate for A
 
         /// <summary>
@@ -181,7 +195,21 @@ namespace Kistl.App.Base
             }
         }
         
+        // normalize namespace for Templates
+        private Kistl.App.Base.Property B__Implementation__
+        {
+			get
+			{
+				return B;
+			}
+			set
+			{
+				B = value;
+			}
+		}
+        
         private int? _fk_B;
+        private Guid? _fk_guid_B = null;
 		// END Kistl.DalProvider.Memory.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate for B
 
 #region Serializer
@@ -210,8 +238,8 @@ namespace Kistl.App.Base
             
             base.ToStream(xml);
             XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "");
-            XmlStreamer.ToStream(this._fk_A, xml, "A", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(this._fk_B, xml, "B", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._fk_A, xml, "A", "Kistl.App.Base");
+            XmlStreamer.ToStream(this._fk_B, xml, "B", "Kistl.App.Base");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
@@ -219,19 +247,23 @@ namespace Kistl.App.Base
             
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "");
-            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "http://dasz.at/Kistl");
-            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.Base");
         }
 
         public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
         {
             
             xml.WriteAttributeString("ExportGuid", this._ExportGuid.ToString());
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(A != null ? A.ExportGuid : (Guid?)null, xml, "A", "Kistl.App.Base");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(B != null ? B.ExportGuid : (Guid?)null, xml, "B", "Kistl.App.Base");
         }
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
         {
             XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "");
+            XmlStreamer.FromStream(ref this._fk_guid_A, xml, "A", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._fk_guid_B, xml, "B", "Kistl.App.Base");
         }
 
 #endregion
@@ -246,6 +278,21 @@ namespace Kistl.App.Base
 			// Do not reload references if the current object has been deleted.
 			// TODO: enable when MemoryContext uses MemoryDataObjects
 			//if (this.ObjectState == DataObjectState.Deleted) return;
+
+			if (_fk_guid_A.HasValue)
+				A__Implementation__ = (Kistl.App.Base.CalculatedObjectReferenceProperty__Implementation__Memory)Context.FindPersistenceObject<Kistl.App.Base.CalculatedObjectReferenceProperty>(_fk_guid_A.Value);
+			else if (_fk_A.HasValue)
+				A__Implementation__ = (Kistl.App.Base.CalculatedObjectReferenceProperty__Implementation__Memory)Context.Find<Kistl.App.Base.CalculatedObjectReferenceProperty>(_fk_A.Value);
+			else
+				A__Implementation__ = null;
+
+
+			if (_fk_guid_B.HasValue)
+				B__Implementation__ = (Kistl.App.Base.Property__Implementation__Memory)Context.FindPersistenceObject<Kistl.App.Base.Property>(_fk_guid_B.Value);
+			else if (_fk_B.HasValue)
+				B__Implementation__ = (Kistl.App.Base.Property__Implementation__Memory)Context.Find<Kistl.App.Base.Property>(_fk_B.Value);
+			else
+				B__Implementation__ = null;
 	
 		}
 		
@@ -381,7 +428,21 @@ namespace at.dasz.DocumentManagement
             }
         }
         
+        // normalize namespace for Templates
+        private at.dasz.DocumentManagement.Document A__Implementation__
+        {
+			get
+			{
+				return A;
+			}
+			set
+			{
+				A = value;
+			}
+		}
+        
         private int? _fk_A;
+        private Guid? _fk_guid_A = null;
            // Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual int? A_pos
         {
@@ -458,7 +519,21 @@ namespace at.dasz.DocumentManagement
             }
         }
         
+        // normalize namespace for Templates
+        private Kistl.App.Base.Blob B__Implementation__
+        {
+			get
+			{
+				return B;
+			}
+			set
+			{
+				B = value;
+			}
+		}
+        
         private int? _fk_B;
+        private Guid? _fk_guid_B = null;
            // Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual int? B_pos
         {
@@ -527,9 +602,9 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
             
             base.ToStream(xml);
             XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "");
-            XmlStreamer.ToStream(this._fk_A, xml, "A", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._fk_A, xml, "A", "at.dasz.DocumentManagement");
             XmlStreamer.ToStream(this._A_pos, xml, "A_pos", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(this._fk_B, xml, "B", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._fk_B, xml, "B", "Kistl.App.Base");
             XmlStreamer.ToStream(this._B_pos, xml, "B_pos", "http://dasz.at/Kistl");
             XmlStreamer.ToStream(this._A_pos, xml, "A_pos", "at.dasz.DocumentManagement");
             XmlStreamer.ToStream(this._B_pos, xml, "B_pos", "Kistl.App.Base");
@@ -540,9 +615,9 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
             
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "");
-            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "at.dasz.DocumentManagement");
             XmlStreamer.FromStream(ref this._A_pos, xml, "A_pos", "http://dasz.at/Kistl");
-            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._B_pos, xml, "B_pos", "http://dasz.at/Kistl");
             XmlStreamer.FromStream(ref this._A_pos, xml, "A_pos", "at.dasz.DocumentManagement");
             XmlStreamer.FromStream(ref this._B_pos, xml, "B_pos", "Kistl.App.Base");
@@ -552,8 +627,10 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
         {
             
             xml.WriteAttributeString("ExportGuid", this._ExportGuid.ToString());
+            if (modules.Contains("*") || modules.Contains("at.dasz.DocumentManagement")) XmlStreamer.ToStream(A != null ? A.ExportGuid : (Guid?)null, xml, "A", "at.dasz.DocumentManagement");
 	
             if (modules.Contains("*") || modules.Contains("http://dasz.at/Kistl")) XmlStreamer.ToStream(this._A_pos, xml, "A_pos", "http://dasz.at/Kistl");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(B != null ? B.ExportGuid : (Guid?)null, xml, "B", "Kistl.App.Base");
 	
             if (modules.Contains("*") || modules.Contains("http://dasz.at/Kistl")) XmlStreamer.ToStream(this._B_pos, xml, "B_pos", "http://dasz.at/Kistl");
 	
@@ -565,7 +642,9 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
         public virtual void MergeImport(System.Xml.XmlReader xml)
         {
             XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "");
+            XmlStreamer.FromStream(ref this._fk_guid_A, xml, "A", "at.dasz.DocumentManagement");
             XmlStreamer.FromStream(ref this._A_pos, xml, "A_pos", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_guid_B, xml, "B", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._B_pos, xml, "B_pos", "http://dasz.at/Kistl");
             XmlStreamer.FromStream(ref this._A_pos, xml, "A_pos", "at.dasz.DocumentManagement");
             XmlStreamer.FromStream(ref this._B_pos, xml, "B_pos", "Kistl.App.Base");
@@ -583,6 +662,21 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
 			// Do not reload references if the current object has been deleted.
 			// TODO: enable when MemoryContext uses MemoryDataObjects
 			//if (this.ObjectState == DataObjectState.Deleted) return;
+
+			if (_fk_guid_A.HasValue)
+				A__Implementation__ = (at.dasz.DocumentManagement.Document__Implementation__Memory)Context.FindPersistenceObject<at.dasz.DocumentManagement.Document>(_fk_guid_A.Value);
+			else if (_fk_A.HasValue)
+				A__Implementation__ = (at.dasz.DocumentManagement.Document__Implementation__Memory)Context.Find<at.dasz.DocumentManagement.Document>(_fk_A.Value);
+			else
+				A__Implementation__ = null;
+
+
+			if (_fk_guid_B.HasValue)
+				B__Implementation__ = (Kistl.App.Base.Blob__Implementation__Memory)Context.FindPersistenceObject<Kistl.App.Base.Blob>(_fk_guid_B.Value);
+			else if (_fk_B.HasValue)
+				B__Implementation__ = (Kistl.App.Base.Blob__Implementation__Memory)Context.Find<Kistl.App.Base.Blob>(_fk_B.Value);
+			else
+				B__Implementation__ = null;
 	
 		}
 		
@@ -719,7 +813,21 @@ namespace Kistl.App.Base
             }
         }
         
+        // normalize namespace for Templates
+        private Kistl.App.Base.Group A__Implementation__
+        {
+			get
+			{
+				return A;
+			}
+			set
+			{
+				A = value;
+			}
+		}
+        
         private int? _fk_A;
+        private Guid? _fk_guid_A = null;
 		// END Kistl.DalProvider.Memory.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate for A
 
         /// <summary>
@@ -772,7 +880,21 @@ namespace Kistl.App.Base
             }
         }
         
+        // normalize namespace for Templates
+        private Kistl.App.Base.Group B__Implementation__
+        {
+			get
+			{
+				return B;
+			}
+			set
+			{
+				B = value;
+			}
+		}
+        
         private int? _fk_B;
+        private Guid? _fk_guid_B = null;
 		// END Kistl.DalProvider.Memory.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate for B
 
 #region Serializer
@@ -801,8 +923,8 @@ namespace Kistl.App.Base
             
             base.ToStream(xml);
             XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "");
-            XmlStreamer.ToStream(this._fk_A, xml, "A", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(this._fk_B, xml, "B", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._fk_A, xml, "A", "Kistl.App.Base");
+            XmlStreamer.ToStream(this._fk_B, xml, "B", "Kistl.App.Base");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
@@ -810,19 +932,23 @@ namespace Kistl.App.Base
             
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "");
-            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "http://dasz.at/Kistl");
-            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.Base");
         }
 
         public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
         {
             
             xml.WriteAttributeString("ExportGuid", this._ExportGuid.ToString());
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(A != null ? A.ExportGuid : (Guid?)null, xml, "A", "Kistl.App.Base");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(B != null ? B.ExportGuid : (Guid?)null, xml, "B", "Kistl.App.Base");
         }
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
         {
             XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "");
+            XmlStreamer.FromStream(ref this._fk_guid_A, xml, "A", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._fk_guid_B, xml, "B", "Kistl.App.Base");
         }
 
 #endregion
@@ -837,6 +963,21 @@ namespace Kistl.App.Base
 			// Do not reload references if the current object has been deleted.
 			// TODO: enable when MemoryContext uses MemoryDataObjects
 			//if (this.ObjectState == DataObjectState.Deleted) return;
+
+			if (_fk_guid_A.HasValue)
+				A__Implementation__ = (Kistl.App.Base.Group__Implementation__Memory)Context.FindPersistenceObject<Kistl.App.Base.Group>(_fk_guid_A.Value);
+			else if (_fk_A.HasValue)
+				A__Implementation__ = (Kistl.App.Base.Group__Implementation__Memory)Context.Find<Kistl.App.Base.Group>(_fk_A.Value);
+			else
+				A__Implementation__ = null;
+
+
+			if (_fk_guid_B.HasValue)
+				B__Implementation__ = (Kistl.App.Base.Group__Implementation__Memory)Context.FindPersistenceObject<Kistl.App.Base.Group>(_fk_guid_B.Value);
+			else if (_fk_B.HasValue)
+				B__Implementation__ = (Kistl.App.Base.Group__Implementation__Memory)Context.Find<Kistl.App.Base.Group>(_fk_B.Value);
+			else
+				B__Implementation__ = null;
 	
 		}
 		
@@ -944,7 +1085,21 @@ namespace at.dasz.CourseOrganiser
             }
         }
         
+        // normalize namespace for Templates
+        private at.dasz.CourseOrganiser.GroupExcercise A__Implementation__
+        {
+			get
+			{
+				return A;
+			}
+			set
+			{
+				A = value;
+			}
+		}
+        
         private int? _fk_A;
+        private Guid? _fk_guid_A = null;
 		// END Kistl.DalProvider.Memory.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate for A
 
         /// <summary>
@@ -997,7 +1152,21 @@ namespace at.dasz.CourseOrganiser
             }
         }
         
+        // normalize namespace for Templates
+        private at.dasz.CourseOrganiser.Student B__Implementation__
+        {
+			get
+			{
+				return B;
+			}
+			set
+			{
+				B = value;
+			}
+		}
+        
         private int? _fk_B;
+        private Guid? _fk_guid_B = null;
 		// END Kistl.DalProvider.Memory.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate for B
 
 #region Serializer
@@ -1023,16 +1192,16 @@ namespace at.dasz.CourseOrganiser
         {
             
             base.ToStream(xml);
-            XmlStreamer.ToStream(this._fk_A, xml, "A", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(this._fk_B, xml, "B", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._fk_A, xml, "A", "at.dasz.CourseOrganiser");
+            XmlStreamer.ToStream(this._fk_B, xml, "B", "at.dasz.CourseOrganiser");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
             
             base.FromStream(xml);
-            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "http://dasz.at/Kistl");
-            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "at.dasz.CourseOrganiser");
+            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "at.dasz.CourseOrganiser");
         }
 
 #endregion
@@ -1047,6 +1216,21 @@ namespace at.dasz.CourseOrganiser
 			// Do not reload references if the current object has been deleted.
 			// TODO: enable when MemoryContext uses MemoryDataObjects
 			//if (this.ObjectState == DataObjectState.Deleted) return;
+
+			if (_fk_guid_A.HasValue)
+				A__Implementation__ = (at.dasz.CourseOrganiser.GroupExcercise__Implementation__Memory)Context.FindPersistenceObject<at.dasz.CourseOrganiser.GroupExcercise>(_fk_guid_A.Value);
+			else if (_fk_A.HasValue)
+				A__Implementation__ = (at.dasz.CourseOrganiser.GroupExcercise__Implementation__Memory)Context.Find<at.dasz.CourseOrganiser.GroupExcercise>(_fk_A.Value);
+			else
+				A__Implementation__ = null;
+
+
+			if (_fk_guid_B.HasValue)
+				B__Implementation__ = (at.dasz.CourseOrganiser.Student__Implementation__Memory)Context.FindPersistenceObject<at.dasz.CourseOrganiser.Student>(_fk_guid_B.Value);
+			else if (_fk_B.HasValue)
+				B__Implementation__ = (at.dasz.CourseOrganiser.Student__Implementation__Memory)Context.Find<at.dasz.CourseOrganiser.Student>(_fk_B.Value);
+			else
+				B__Implementation__ = null;
 	
 		}
 		
@@ -1154,7 +1338,21 @@ namespace Kistl.App.Base
             }
         }
         
+        // normalize namespace for Templates
+        private Kistl.App.Base.Identity A__Implementation__
+        {
+			get
+			{
+				return A;
+			}
+			set
+			{
+				A = value;
+			}
+		}
+        
         private int? _fk_A;
+        private Guid? _fk_guid_A = null;
 		// END Kistl.DalProvider.Memory.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate for A
 
         /// <summary>
@@ -1207,7 +1405,21 @@ namespace Kistl.App.Base
             }
         }
         
+        // normalize namespace for Templates
+        private Kistl.App.Base.Group B__Implementation__
+        {
+			get
+			{
+				return B;
+			}
+			set
+			{
+				B = value;
+			}
+		}
+        
         private int? _fk_B;
+        private Guid? _fk_guid_B = null;
 		// END Kistl.DalProvider.Memory.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate for B
 
 #region Serializer
@@ -1233,16 +1445,16 @@ namespace Kistl.App.Base
         {
             
             base.ToStream(xml);
-            XmlStreamer.ToStream(this._fk_A, xml, "A", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(this._fk_B, xml, "B", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._fk_A, xml, "A", "Kistl.App.Base");
+            XmlStreamer.ToStream(this._fk_B, xml, "B", "Kistl.App.Base");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
             
             base.FromStream(xml);
-            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "http://dasz.at/Kistl");
-            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.Base");
         }
 
 #endregion
@@ -1257,6 +1469,21 @@ namespace Kistl.App.Base
 			// Do not reload references if the current object has been deleted.
 			// TODO: enable when MemoryContext uses MemoryDataObjects
 			//if (this.ObjectState == DataObjectState.Deleted) return;
+
+			if (_fk_guid_A.HasValue)
+				A__Implementation__ = (Kistl.App.Base.Identity__Implementation__Memory)Context.FindPersistenceObject<Kistl.App.Base.Identity>(_fk_guid_A.Value);
+			else if (_fk_A.HasValue)
+				A__Implementation__ = (Kistl.App.Base.Identity__Implementation__Memory)Context.Find<Kistl.App.Base.Identity>(_fk_A.Value);
+			else
+				A__Implementation__ = null;
+
+
+			if (_fk_guid_B.HasValue)
+				B__Implementation__ = (Kistl.App.Base.Group__Implementation__Memory)Context.FindPersistenceObject<Kistl.App.Base.Group>(_fk_guid_B.Value);
+			else if (_fk_B.HasValue)
+				B__Implementation__ = (Kistl.App.Base.Group__Implementation__Memory)Context.Find<Kistl.App.Base.Group>(_fk_B.Value);
+			else
+				B__Implementation__ = null;
 	
 		}
 		
@@ -1364,7 +1591,21 @@ namespace Kistl.App.Test
             }
         }
         
+        // normalize namespace for Templates
+        private Kistl.App.Test.Muhblah A__Implementation__
+        {
+			get
+			{
+				return A;
+			}
+			set
+			{
+				A = value;
+			}
+		}
+        
         private int? _fk_A;
+        private Guid? _fk_guid_A = null;
 		// END Kistl.DalProvider.Memory.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate for A
 
         /// <summary>
@@ -1417,7 +1658,21 @@ namespace Kistl.App.Test
             }
         }
         
+        // normalize namespace for Templates
+        private Kistl.App.Test.TestCustomObject B__Implementation__
+        {
+			get
+			{
+				return B;
+			}
+			set
+			{
+				B = value;
+			}
+		}
+        
         private int? _fk_B;
+        private Guid? _fk_guid_B = null;
 		// END Kistl.DalProvider.Memory.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate for B
 
 #region Serializer
@@ -1443,16 +1698,16 @@ namespace Kistl.App.Test
         {
             
             base.ToStream(xml);
-            XmlStreamer.ToStream(this._fk_A, xml, "A", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(this._fk_B, xml, "B", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._fk_A, xml, "A", "Kistl.App.Test");
+            XmlStreamer.ToStream(this._fk_B, xml, "B", "Kistl.App.Test");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
             
             base.FromStream(xml);
-            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "http://dasz.at/Kistl");
-            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.Test");
+            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.Test");
         }
 
 #endregion
@@ -1467,6 +1722,21 @@ namespace Kistl.App.Test
 			// Do not reload references if the current object has been deleted.
 			// TODO: enable when MemoryContext uses MemoryDataObjects
 			//if (this.ObjectState == DataObjectState.Deleted) return;
+
+			if (_fk_guid_A.HasValue)
+				A__Implementation__ = (Kistl.App.Test.Muhblah__Implementation__Memory)Context.FindPersistenceObject<Kistl.App.Test.Muhblah>(_fk_guid_A.Value);
+			else if (_fk_A.HasValue)
+				A__Implementation__ = (Kistl.App.Test.Muhblah__Implementation__Memory)Context.Find<Kistl.App.Test.Muhblah>(_fk_A.Value);
+			else
+				A__Implementation__ = null;
+
+
+			if (_fk_guid_B.HasValue)
+				B__Implementation__ = (Kistl.App.Test.TestCustomObject__Implementation__Memory)Context.FindPersistenceObject<Kistl.App.Test.TestCustomObject>(_fk_guid_B.Value);
+			else if (_fk_B.HasValue)
+				B__Implementation__ = (Kistl.App.Test.TestCustomObject__Implementation__Memory)Context.Find<Kistl.App.Test.TestCustomObject>(_fk_B.Value);
+			else
+				B__Implementation__ = null;
 	
 		}
 		
@@ -1601,7 +1871,21 @@ namespace Kistl.App.Base
             }
         }
         
+        // normalize namespace for Templates
+        private Kistl.App.Base.ObjectClass A__Implementation__
+        {
+			get
+			{
+				return A;
+			}
+			set
+			{
+				A = value;
+			}
+		}
+        
         private int? _fk_A;
+        private Guid? _fk_guid_A = null;
 		// END Kistl.DalProvider.Memory.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate for A
 
         /// <summary>
@@ -1654,7 +1938,21 @@ namespace Kistl.App.Base
             }
         }
         
+        // normalize namespace for Templates
+        private Kistl.App.Base.Interface B__Implementation__
+        {
+			get
+			{
+				return B;
+			}
+			set
+			{
+				B = value;
+			}
+		}
+        
         private int? _fk_B;
+        private Guid? _fk_guid_B = null;
 		// END Kistl.DalProvider.Memory.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate for B
 
 #region Serializer
@@ -1683,8 +1981,8 @@ namespace Kistl.App.Base
             
             base.ToStream(xml);
             XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "");
-            XmlStreamer.ToStream(this._fk_A, xml, "A", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(this._fk_B, xml, "B", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._fk_A, xml, "A", "Kistl.App.Base");
+            XmlStreamer.ToStream(this._fk_B, xml, "B", "Kistl.App.Base");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
@@ -1692,19 +1990,23 @@ namespace Kistl.App.Base
             
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "");
-            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "http://dasz.at/Kistl");
-            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.Base");
         }
 
         public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
         {
             
             xml.WriteAttributeString("ExportGuid", this._ExportGuid.ToString());
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(A != null ? A.ExportGuid : (Guid?)null, xml, "A", "Kistl.App.Base");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(B != null ? B.ExportGuid : (Guid?)null, xml, "B", "Kistl.App.Base");
         }
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
         {
             XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "");
+            XmlStreamer.FromStream(ref this._fk_guid_A, xml, "A", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._fk_guid_B, xml, "B", "Kistl.App.Base");
         }
 
 #endregion
@@ -1719,6 +2021,21 @@ namespace Kistl.App.Base
 			// Do not reload references if the current object has been deleted.
 			// TODO: enable when MemoryContext uses MemoryDataObjects
 			//if (this.ObjectState == DataObjectState.Deleted) return;
+
+			if (_fk_guid_A.HasValue)
+				A__Implementation__ = (Kistl.App.Base.ObjectClass__Implementation__Memory)Context.FindPersistenceObject<Kistl.App.Base.ObjectClass>(_fk_guid_A.Value);
+			else if (_fk_A.HasValue)
+				A__Implementation__ = (Kistl.App.Base.ObjectClass__Implementation__Memory)Context.Find<Kistl.App.Base.ObjectClass>(_fk_A.Value);
+			else
+				A__Implementation__ = null;
+
+
+			if (_fk_guid_B.HasValue)
+				B__Implementation__ = (Kistl.App.Base.Interface__Implementation__Memory)Context.FindPersistenceObject<Kistl.App.Base.Interface>(_fk_guid_B.Value);
+			else if (_fk_B.HasValue)
+				B__Implementation__ = (Kistl.App.Base.Interface__Implementation__Memory)Context.Find<Kistl.App.Base.Interface>(_fk_B.Value);
+			else
+				B__Implementation__ = null;
 	
 		}
 		
@@ -1826,7 +2143,21 @@ namespace Kistl.App.Projekte
             }
         }
         
+        // normalize namespace for Templates
+        private Kistl.App.Projekte.Projekt A__Implementation__
+        {
+			get
+			{
+				return A;
+			}
+			set
+			{
+				A = value;
+			}
+		}
+        
         private int? _fk_A;
+        private Guid? _fk_guid_A = null;
            // Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual int? A_pos
         {
@@ -1903,7 +2234,21 @@ namespace Kistl.App.Projekte
             }
         }
         
+        // normalize namespace for Templates
+        private Kistl.App.Projekte.Mitarbeiter B__Implementation__
+        {
+			get
+			{
+				return B;
+			}
+			set
+			{
+				B = value;
+			}
+		}
+        
         private int? _fk_B;
+        private Guid? _fk_guid_B = null;
            // Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual int? B_pos
         {
@@ -1969,9 +2314,9 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
         {
             
             base.ToStream(xml);
-            XmlStreamer.ToStream(this._fk_A, xml, "A", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._fk_A, xml, "A", "Kistl.App.Projekte");
             XmlStreamer.ToStream(this._A_pos, xml, "A_pos", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(this._fk_B, xml, "B", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._fk_B, xml, "B", "Kistl.App.Projekte");
             XmlStreamer.ToStream(this._B_pos, xml, "B_pos", "http://dasz.at/Kistl");
             XmlStreamer.ToStream(this._A_pos, xml, "A_pos", "Kistl.App.Projekte");
             XmlStreamer.ToStream(this._B_pos, xml, "B_pos", "Kistl.App.Projekte");
@@ -1981,9 +2326,9 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
         {
             
             base.FromStream(xml);
-            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.Projekte");
             XmlStreamer.FromStream(ref this._A_pos, xml, "A_pos", "http://dasz.at/Kistl");
-            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.Projekte");
             XmlStreamer.FromStream(ref this._B_pos, xml, "B_pos", "http://dasz.at/Kistl");
             XmlStreamer.FromStream(ref this._A_pos, xml, "A_pos", "Kistl.App.Projekte");
             XmlStreamer.FromStream(ref this._B_pos, xml, "B_pos", "Kistl.App.Projekte");
@@ -2001,6 +2346,21 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
 			// Do not reload references if the current object has been deleted.
 			// TODO: enable when MemoryContext uses MemoryDataObjects
 			//if (this.ObjectState == DataObjectState.Deleted) return;
+
+			if (_fk_guid_A.HasValue)
+				A__Implementation__ = (Kistl.App.Projekte.Projekt__Implementation__Memory)Context.FindPersistenceObject<Kistl.App.Projekte.Projekt>(_fk_guid_A.Value);
+			else if (_fk_A.HasValue)
+				A__Implementation__ = (Kistl.App.Projekte.Projekt__Implementation__Memory)Context.Find<Kistl.App.Projekte.Projekt>(_fk_A.Value);
+			else
+				A__Implementation__ = null;
+
+
+			if (_fk_guid_B.HasValue)
+				B__Implementation__ = (Kistl.App.Projekte.Mitarbeiter__Implementation__Memory)Context.FindPersistenceObject<Kistl.App.Projekte.Mitarbeiter>(_fk_guid_B.Value);
+			else if (_fk_B.HasValue)
+				B__Implementation__ = (Kistl.App.Projekte.Mitarbeiter__Implementation__Memory)Context.Find<Kistl.App.Projekte.Mitarbeiter>(_fk_B.Value);
+			else
+				B__Implementation__ = null;
 	
 		}
 		
@@ -2137,7 +2497,21 @@ namespace Kistl.App.Base
             }
         }
         
+        // normalize namespace for Templates
+        private Kistl.App.Base.RoleMembership A__Implementation__
+        {
+			get
+			{
+				return A;
+			}
+			set
+			{
+				A = value;
+			}
+		}
+        
         private int? _fk_A;
+        private Guid? _fk_guid_A = null;
            // Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual int? A_pos
         {
@@ -2214,7 +2588,21 @@ namespace Kistl.App.Base
             }
         }
         
+        // normalize namespace for Templates
+        private Kistl.App.Base.Relation B__Implementation__
+        {
+			get
+			{
+				return B;
+			}
+			set
+			{
+				B = value;
+			}
+		}
+        
         private int? _fk_B;
+        private Guid? _fk_guid_B = null;
            // Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual int? B_pos
         {
@@ -2283,9 +2671,9 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
             
             base.ToStream(xml);
             XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "");
-            XmlStreamer.ToStream(this._fk_A, xml, "A", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._fk_A, xml, "A", "Kistl.App.Base");
             XmlStreamer.ToStream(this._A_pos, xml, "A_pos", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(this._fk_B, xml, "B", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._fk_B, xml, "B", "Kistl.App.Base");
             XmlStreamer.ToStream(this._B_pos, xml, "B_pos", "http://dasz.at/Kistl");
             XmlStreamer.ToStream(this._A_pos, xml, "A_pos", "Kistl.App.Base");
             XmlStreamer.ToStream(this._B_pos, xml, "B_pos", "Kistl.App.Base");
@@ -2296,9 +2684,9 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
             
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "");
-            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._A_pos, xml, "A_pos", "http://dasz.at/Kistl");
-            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._B_pos, xml, "B_pos", "http://dasz.at/Kistl");
             XmlStreamer.FromStream(ref this._A_pos, xml, "A_pos", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._B_pos, xml, "B_pos", "Kistl.App.Base");
@@ -2308,8 +2696,10 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
         {
             
             xml.WriteAttributeString("ExportGuid", this._ExportGuid.ToString());
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(A != null ? A.ExportGuid : (Guid?)null, xml, "A", "Kistl.App.Base");
 	
             if (modules.Contains("*") || modules.Contains("http://dasz.at/Kistl")) XmlStreamer.ToStream(this._A_pos, xml, "A_pos", "http://dasz.at/Kistl");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(B != null ? B.ExportGuid : (Guid?)null, xml, "B", "Kistl.App.Base");
 	
             if (modules.Contains("*") || modules.Contains("http://dasz.at/Kistl")) XmlStreamer.ToStream(this._B_pos, xml, "B_pos", "http://dasz.at/Kistl");
 	
@@ -2321,7 +2711,9 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
         public virtual void MergeImport(System.Xml.XmlReader xml)
         {
             XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "");
+            XmlStreamer.FromStream(ref this._fk_guid_A, xml, "A", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._A_pos, xml, "A_pos", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_guid_B, xml, "B", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._B_pos, xml, "B_pos", "http://dasz.at/Kistl");
             XmlStreamer.FromStream(ref this._A_pos, xml, "A_pos", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._B_pos, xml, "B_pos", "Kistl.App.Base");
@@ -2339,6 +2731,21 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
 			// Do not reload references if the current object has been deleted.
 			// TODO: enable when MemoryContext uses MemoryDataObjects
 			//if (this.ObjectState == DataObjectState.Deleted) return;
+
+			if (_fk_guid_A.HasValue)
+				A__Implementation__ = (Kistl.App.Base.RoleMembership__Implementation__Memory)Context.FindPersistenceObject<Kistl.App.Base.RoleMembership>(_fk_guid_A.Value);
+			else if (_fk_A.HasValue)
+				A__Implementation__ = (Kistl.App.Base.RoleMembership__Implementation__Memory)Context.Find<Kistl.App.Base.RoleMembership>(_fk_A.Value);
+			else
+				A__Implementation__ = null;
+
+
+			if (_fk_guid_B.HasValue)
+				B__Implementation__ = (Kistl.App.Base.Relation__Implementation__Memory)Context.FindPersistenceObject<Kistl.App.Base.Relation>(_fk_guid_B.Value);
+			else if (_fk_B.HasValue)
+				B__Implementation__ = (Kistl.App.Base.Relation__Implementation__Memory)Context.Find<Kistl.App.Base.Relation>(_fk_B.Value);
+			else
+				B__Implementation__ = null;
 	
 		}
 		
@@ -2448,7 +2855,21 @@ namespace at.dasz.CourseOrganiser
             }
         }
         
+        // normalize namespace for Templates
+        private at.dasz.CourseOrganiser.Student A__Implementation__
+        {
+			get
+			{
+				return A;
+			}
+			set
+			{
+				A = value;
+			}
+		}
+        
         private int? _fk_A;
+        private Guid? _fk_guid_A = null;
 		// END Kistl.DalProvider.Memory.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate for A
 
         /// <summary>
@@ -2501,7 +2922,21 @@ namespace at.dasz.CourseOrganiser
             }
         }
         
+        // normalize namespace for Templates
+        private at.dasz.CourseOrganiser.Semester B__Implementation__
+        {
+			get
+			{
+				return B;
+			}
+			set
+			{
+				B = value;
+			}
+		}
+        
         private int? _fk_B;
+        private Guid? _fk_guid_B = null;
 		// END Kistl.DalProvider.Memory.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate for B
 
 #region Serializer
@@ -2527,16 +2962,16 @@ namespace at.dasz.CourseOrganiser
         {
             
             base.ToStream(xml);
-            XmlStreamer.ToStream(this._fk_A, xml, "A", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(this._fk_B, xml, "B", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._fk_A, xml, "A", "at.dasz.CourseOrganiser");
+            XmlStreamer.ToStream(this._fk_B, xml, "B", "at.dasz.CourseOrganiser");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
             
             base.FromStream(xml);
-            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "http://dasz.at/Kistl");
-            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "at.dasz.CourseOrganiser");
+            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "at.dasz.CourseOrganiser");
         }
 
 #endregion
@@ -2551,6 +2986,21 @@ namespace at.dasz.CourseOrganiser
 			// Do not reload references if the current object has been deleted.
 			// TODO: enable when MemoryContext uses MemoryDataObjects
 			//if (this.ObjectState == DataObjectState.Deleted) return;
+
+			if (_fk_guid_A.HasValue)
+				A__Implementation__ = (at.dasz.CourseOrganiser.Student__Implementation__Memory)Context.FindPersistenceObject<at.dasz.CourseOrganiser.Student>(_fk_guid_A.Value);
+			else if (_fk_A.HasValue)
+				A__Implementation__ = (at.dasz.CourseOrganiser.Student__Implementation__Memory)Context.Find<at.dasz.CourseOrganiser.Student>(_fk_A.Value);
+			else
+				A__Implementation__ = null;
+
+
+			if (_fk_guid_B.HasValue)
+				B__Implementation__ = (at.dasz.CourseOrganiser.Semester__Implementation__Memory)Context.FindPersistenceObject<at.dasz.CourseOrganiser.Semester>(_fk_guid_B.Value);
+			else if (_fk_B.HasValue)
+				B__Implementation__ = (at.dasz.CourseOrganiser.Semester__Implementation__Memory)Context.Find<at.dasz.CourseOrganiser.Semester>(_fk_B.Value);
+			else
+				B__Implementation__ = null;
 	
 		}
 		
@@ -2658,7 +3108,21 @@ namespace Kistl.App.GUI
             }
         }
         
+        // normalize namespace for Templates
+        private Kistl.App.GUI.Template A__Implementation__
+        {
+			get
+			{
+				return A;
+			}
+			set
+			{
+				A = value;
+			}
+		}
+        
         private int? _fk_A;
+        private Guid? _fk_guid_A = null;
 		// END Kistl.DalProvider.Memory.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate for A
 
         /// <summary>
@@ -2711,7 +3175,21 @@ namespace Kistl.App.GUI
             }
         }
         
+        // normalize namespace for Templates
+        private Kistl.App.GUI.Visual B__Implementation__
+        {
+			get
+			{
+				return B;
+			}
+			set
+			{
+				B = value;
+			}
+		}
+        
         private int? _fk_B;
+        private Guid? _fk_guid_B = null;
 		// END Kistl.DalProvider.Memory.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate for B
 
 #region Serializer
@@ -2737,16 +3215,16 @@ namespace Kistl.App.GUI
         {
             
             base.ToStream(xml);
-            XmlStreamer.ToStream(this._fk_A, xml, "A", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(this._fk_B, xml, "B", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._fk_A, xml, "A", "Kistl.App.GUI");
+            XmlStreamer.ToStream(this._fk_B, xml, "B", "Kistl.App.GUI");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
             
             base.FromStream(xml);
-            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "http://dasz.at/Kistl");
-            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.GUI");
+            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.GUI");
         }
 
 #endregion
@@ -2761,6 +3239,21 @@ namespace Kistl.App.GUI
 			// Do not reload references if the current object has been deleted.
 			// TODO: enable when MemoryContext uses MemoryDataObjects
 			//if (this.ObjectState == DataObjectState.Deleted) return;
+
+			if (_fk_guid_A.HasValue)
+				A__Implementation__ = (Kistl.App.GUI.Template__Implementation__Memory)Context.FindPersistenceObject<Kistl.App.GUI.Template>(_fk_guid_A.Value);
+			else if (_fk_A.HasValue)
+				A__Implementation__ = (Kistl.App.GUI.Template__Implementation__Memory)Context.Find<Kistl.App.GUI.Template>(_fk_A.Value);
+			else
+				A__Implementation__ = null;
+
+
+			if (_fk_guid_B.HasValue)
+				B__Implementation__ = (Kistl.App.GUI.Visual__Implementation__Memory)Context.FindPersistenceObject<Kistl.App.GUI.Visual>(_fk_guid_B.Value);
+			else if (_fk_B.HasValue)
+				B__Implementation__ = (Kistl.App.GUI.Visual__Implementation__Memory)Context.Find<Kistl.App.GUI.Visual>(_fk_B.Value);
+			else
+				B__Implementation__ = null;
 	
 		}
 		
@@ -2868,7 +3361,21 @@ namespace Kistl.App.Test
             }
         }
         
+        // normalize namespace for Templates
+        private Kistl.App.Test.TestStudent A__Implementation__
+        {
+			get
+			{
+				return A;
+			}
+			set
+			{
+				A = value;
+			}
+		}
+        
         private int? _fk_A;
+        private Guid? _fk_guid_A = null;
 		// END Kistl.DalProvider.Memory.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate for A
 
         /// <summary>
@@ -2921,7 +3428,21 @@ namespace Kistl.App.Test
             }
         }
         
+        // normalize namespace for Templates
+        private Kistl.App.Test.Fragebogen B__Implementation__
+        {
+			get
+			{
+				return B;
+			}
+			set
+			{
+				B = value;
+			}
+		}
+        
         private int? _fk_B;
+        private Guid? _fk_guid_B = null;
 		// END Kistl.DalProvider.Memory.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate for B
 
 #region Serializer
@@ -2947,16 +3468,16 @@ namespace Kistl.App.Test
         {
             
             base.ToStream(xml);
-            XmlStreamer.ToStream(this._fk_A, xml, "A", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(this._fk_B, xml, "B", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._fk_A, xml, "A", "Kistl.App.Test");
+            XmlStreamer.ToStream(this._fk_B, xml, "B", "Kistl.App.Test");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
             
             base.FromStream(xml);
-            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "http://dasz.at/Kistl");
-            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.Test");
+            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.Test");
         }
 
 #endregion
@@ -2971,6 +3492,21 @@ namespace Kistl.App.Test
 			// Do not reload references if the current object has been deleted.
 			// TODO: enable when MemoryContext uses MemoryDataObjects
 			//if (this.ObjectState == DataObjectState.Deleted) return;
+
+			if (_fk_guid_A.HasValue)
+				A__Implementation__ = (Kistl.App.Test.TestStudent__Implementation__Memory)Context.FindPersistenceObject<Kistl.App.Test.TestStudent>(_fk_guid_A.Value);
+			else if (_fk_A.HasValue)
+				A__Implementation__ = (Kistl.App.Test.TestStudent__Implementation__Memory)Context.Find<Kistl.App.Test.TestStudent>(_fk_A.Value);
+			else
+				A__Implementation__ = null;
+
+
+			if (_fk_guid_B.HasValue)
+				B__Implementation__ = (Kistl.App.Test.Fragebogen__Implementation__Memory)Context.FindPersistenceObject<Kistl.App.Test.Fragebogen>(_fk_guid_B.Value);
+			else if (_fk_B.HasValue)
+				B__Implementation__ = (Kistl.App.Test.Fragebogen__Implementation__Memory)Context.Find<Kistl.App.Test.Fragebogen>(_fk_B.Value);
+			else
+				B__Implementation__ = null;
 	
 		}
 		
@@ -3105,7 +3641,21 @@ namespace Kistl.App.Base
             }
         }
         
+        // normalize namespace for Templates
+        private Kistl.App.Base.TypeRef A__Implementation__
+        {
+			get
+			{
+				return A;
+			}
+			set
+			{
+				A = value;
+			}
+		}
+        
         private int? _fk_A;
+        private Guid? _fk_guid_A = null;
            // Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual int? A_pos
         {
@@ -3182,7 +3732,21 @@ namespace Kistl.App.Base
             }
         }
         
+        // normalize namespace for Templates
+        private Kistl.App.Base.TypeRef B__Implementation__
+        {
+			get
+			{
+				return B;
+			}
+			set
+			{
+				B = value;
+			}
+		}
+        
         private int? _fk_B;
+        private Guid? _fk_guid_B = null;
            // Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingValueProperty
         public virtual int? B_pos
         {
@@ -3251,9 +3815,9 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
             
             base.ToStream(xml);
             XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "");
-            XmlStreamer.ToStream(this._fk_A, xml, "A", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._fk_A, xml, "A", "Kistl.App.Base");
             XmlStreamer.ToStream(this._A_pos, xml, "A_pos", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(this._fk_B, xml, "B", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._fk_B, xml, "B", "Kistl.App.Base");
             XmlStreamer.ToStream(this._B_pos, xml, "B_pos", "http://dasz.at/Kistl");
             XmlStreamer.ToStream(this._A_pos, xml, "A_pos", "Kistl.App.Base");
             XmlStreamer.ToStream(this._B_pos, xml, "B_pos", "Kistl.App.Base");
@@ -3264,9 +3828,9 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
             
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "");
-            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._A_pos, xml, "A_pos", "http://dasz.at/Kistl");
-            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._B_pos, xml, "B_pos", "http://dasz.at/Kistl");
             XmlStreamer.FromStream(ref this._A_pos, xml, "A_pos", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._B_pos, xml, "B_pos", "Kistl.App.Base");
@@ -3276,8 +3840,10 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
         {
             
             xml.WriteAttributeString("ExportGuid", this._ExportGuid.ToString());
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(A != null ? A.ExportGuid : (Guid?)null, xml, "A", "Kistl.App.Base");
 	
             if (modules.Contains("*") || modules.Contains("http://dasz.at/Kistl")) XmlStreamer.ToStream(this._A_pos, xml, "A_pos", "http://dasz.at/Kistl");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(B != null ? B.ExportGuid : (Guid?)null, xml, "B", "Kistl.App.Base");
 	
             if (modules.Contains("*") || modules.Contains("http://dasz.at/Kistl")) XmlStreamer.ToStream(this._B_pos, xml, "B_pos", "http://dasz.at/Kistl");
 	
@@ -3289,7 +3855,9 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
         public virtual void MergeImport(System.Xml.XmlReader xml)
         {
             XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "");
+            XmlStreamer.FromStream(ref this._fk_guid_A, xml, "A", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._A_pos, xml, "A_pos", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_guid_B, xml, "B", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._B_pos, xml, "B_pos", "http://dasz.at/Kistl");
             XmlStreamer.FromStream(ref this._A_pos, xml, "A_pos", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._B_pos, xml, "B_pos", "Kistl.App.Base");
@@ -3307,6 +3875,21 @@ public int? BIndex { get { return B_pos; } set { B_pos = value; } }
 			// Do not reload references if the current object has been deleted.
 			// TODO: enable when MemoryContext uses MemoryDataObjects
 			//if (this.ObjectState == DataObjectState.Deleted) return;
+
+			if (_fk_guid_A.HasValue)
+				A__Implementation__ = (Kistl.App.Base.TypeRef__Implementation__Memory)Context.FindPersistenceObject<Kistl.App.Base.TypeRef>(_fk_guid_A.Value);
+			else if (_fk_A.HasValue)
+				A__Implementation__ = (Kistl.App.Base.TypeRef__Implementation__Memory)Context.Find<Kistl.App.Base.TypeRef>(_fk_A.Value);
+			else
+				A__Implementation__ = null;
+
+
+			if (_fk_guid_B.HasValue)
+				B__Implementation__ = (Kistl.App.Base.TypeRef__Implementation__Memory)Context.FindPersistenceObject<Kistl.App.Base.TypeRef>(_fk_guid_B.Value);
+			else if (_fk_B.HasValue)
+				B__Implementation__ = (Kistl.App.Base.TypeRef__Implementation__Memory)Context.Find<Kistl.App.Base.TypeRef>(_fk_B.Value);
+			else
+				B__Implementation__ = null;
 	
 		}
 		
@@ -3443,7 +4026,21 @@ namespace Kistl.App.Base
             }
         }
         
+        // normalize namespace for Templates
+        private Kistl.App.Base.UniqueConstraint A__Implementation__
+        {
+			get
+			{
+				return A;
+			}
+			set
+			{
+				A = value;
+			}
+		}
+        
         private int? _fk_A;
+        private Guid? _fk_guid_A = null;
 		// END Kistl.DalProvider.Memory.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate for A
 
         /// <summary>
@@ -3496,7 +4093,21 @@ namespace Kistl.App.Base
             }
         }
         
+        // normalize namespace for Templates
+        private Kistl.App.Base.Property B__Implementation__
+        {
+			get
+			{
+				return B;
+			}
+			set
+			{
+				B = value;
+			}
+		}
+        
         private int? _fk_B;
+        private Guid? _fk_guid_B = null;
 		// END Kistl.DalProvider.Memory.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate for B
 
 #region Serializer
@@ -3525,8 +4136,8 @@ namespace Kistl.App.Base
             
             base.ToStream(xml);
             XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "");
-            XmlStreamer.ToStream(this._fk_A, xml, "A", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(this._fk_B, xml, "B", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._fk_A, xml, "A", "Kistl.App.Base");
+            XmlStreamer.ToStream(this._fk_B, xml, "B", "Kistl.App.Base");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
@@ -3534,19 +4145,23 @@ namespace Kistl.App.Base
             
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "");
-            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "http://dasz.at/Kistl");
-            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.Base");
         }
 
         public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
         {
             
             xml.WriteAttributeString("ExportGuid", this._ExportGuid.ToString());
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(A != null ? A.ExportGuid : (Guid?)null, xml, "A", "Kistl.App.Base");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(B != null ? B.ExportGuid : (Guid?)null, xml, "B", "Kistl.App.Base");
         }
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
         {
             XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "");
+            XmlStreamer.FromStream(ref this._fk_guid_A, xml, "A", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._fk_guid_B, xml, "B", "Kistl.App.Base");
         }
 
 #endregion
@@ -3561,6 +4176,21 @@ namespace Kistl.App.Base
 			// Do not reload references if the current object has been deleted.
 			// TODO: enable when MemoryContext uses MemoryDataObjects
 			//if (this.ObjectState == DataObjectState.Deleted) return;
+
+			if (_fk_guid_A.HasValue)
+				A__Implementation__ = (Kistl.App.Base.UniqueConstraint__Implementation__Memory)Context.FindPersistenceObject<Kistl.App.Base.UniqueConstraint>(_fk_guid_A.Value);
+			else if (_fk_A.HasValue)
+				A__Implementation__ = (Kistl.App.Base.UniqueConstraint__Implementation__Memory)Context.Find<Kistl.App.Base.UniqueConstraint>(_fk_A.Value);
+			else
+				A__Implementation__ = null;
+
+
+			if (_fk_guid_B.HasValue)
+				B__Implementation__ = (Kistl.App.Base.Property__Implementation__Memory)Context.FindPersistenceObject<Kistl.App.Base.Property>(_fk_guid_B.Value);
+			else if (_fk_B.HasValue)
+				B__Implementation__ = (Kistl.App.Base.Property__Implementation__Memory)Context.Find<Kistl.App.Base.Property>(_fk_B.Value);
+			else
+				B__Implementation__ = null;
 	
 		}
 		
@@ -3696,7 +4326,21 @@ namespace Kistl.App.GUI
             }
         }
         
+        // normalize namespace for Templates
+        private Kistl.App.GUI.ViewDescriptor A__Implementation__
+        {
+			get
+			{
+				return A;
+			}
+			set
+			{
+				A = value;
+			}
+		}
+        
         private int? _fk_A;
+        private Guid? _fk_guid_A = null;
 		// END Kistl.DalProvider.Memory.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate for A
 
         /// <summary>
@@ -3749,7 +4393,21 @@ namespace Kistl.App.GUI
             }
         }
         
+        // normalize namespace for Templates
+        private Kistl.App.Base.TypeRef B__Implementation__
+        {
+			get
+			{
+				return B;
+			}
+			set
+			{
+				B = value;
+			}
+		}
+        
         private int? _fk_B;
+        private Guid? _fk_guid_B = null;
 		// END Kistl.DalProvider.Memory.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate for B
 
 #region Serializer
@@ -3778,8 +4436,8 @@ namespace Kistl.App.GUI
             
             base.ToStream(xml);
             XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "");
-            XmlStreamer.ToStream(this._fk_A, xml, "A", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(this._fk_B, xml, "B", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._fk_A, xml, "A", "Kistl.App.GUI");
+            XmlStreamer.ToStream(this._fk_B, xml, "B", "Kistl.App.Base");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
@@ -3787,19 +4445,23 @@ namespace Kistl.App.GUI
             
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "");
-            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "http://dasz.at/Kistl");
-            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.GUI");
+            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.Base");
         }
 
         public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
         {
             
             xml.WriteAttributeString("ExportGuid", this._ExportGuid.ToString());
+            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(A != null ? A.ExportGuid : (Guid?)null, xml, "A", "Kistl.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(B != null ? B.ExportGuid : (Guid?)null, xml, "B", "Kistl.App.Base");
         }
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
         {
             XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "");
+            XmlStreamer.FromStream(ref this._fk_guid_A, xml, "A", "Kistl.App.GUI");
+            XmlStreamer.FromStream(ref this._fk_guid_B, xml, "B", "Kistl.App.Base");
         }
 
 #endregion
@@ -3814,6 +4476,21 @@ namespace Kistl.App.GUI
 			// Do not reload references if the current object has been deleted.
 			// TODO: enable when MemoryContext uses MemoryDataObjects
 			//if (this.ObjectState == DataObjectState.Deleted) return;
+
+			if (_fk_guid_A.HasValue)
+				A__Implementation__ = (Kistl.App.GUI.ViewDescriptor__Implementation__Memory)Context.FindPersistenceObject<Kistl.App.GUI.ViewDescriptor>(_fk_guid_A.Value);
+			else if (_fk_A.HasValue)
+				A__Implementation__ = (Kistl.App.GUI.ViewDescriptor__Implementation__Memory)Context.Find<Kistl.App.GUI.ViewDescriptor>(_fk_A.Value);
+			else
+				A__Implementation__ = null;
+
+
+			if (_fk_guid_B.HasValue)
+				B__Implementation__ = (Kistl.App.Base.TypeRef__Implementation__Memory)Context.FindPersistenceObject<Kistl.App.Base.TypeRef>(_fk_guid_B.Value);
+			else if (_fk_B.HasValue)
+				B__Implementation__ = (Kistl.App.Base.TypeRef__Implementation__Memory)Context.Find<Kistl.App.Base.TypeRef>(_fk_B.Value);
+			else
+				B__Implementation__ = null;
 	
 		}
 		
@@ -3948,7 +4625,21 @@ namespace Kistl.App.GUI
             }
         }
         
+        // normalize namespace for Templates
+        private Kistl.App.GUI.ViewModelDescriptor A__Implementation__
+        {
+			get
+			{
+				return A;
+			}
+			set
+			{
+				A = value;
+			}
+		}
+        
         private int? _fk_A;
+        private Guid? _fk_guid_A = null;
 		// END Kistl.DalProvider.Memory.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate for A
 
         /// <summary>
@@ -4001,7 +4692,21 @@ namespace Kistl.App.GUI
             }
         }
         
+        // normalize namespace for Templates
+        private Kistl.App.GUI.ControlKind B__Implementation__
+        {
+			get
+			{
+				return B;
+			}
+			set
+			{
+				B = value;
+			}
+		}
+        
         private int? _fk_B;
+        private Guid? _fk_guid_B = null;
 		// END Kistl.DalProvider.Memory.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate for B
 
 #region Serializer
@@ -4030,8 +4735,8 @@ namespace Kistl.App.GUI
             
             base.ToStream(xml);
             XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "");
-            XmlStreamer.ToStream(this._fk_A, xml, "A", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(this._fk_B, xml, "B", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._fk_A, xml, "A", "Kistl.App.GUI");
+            XmlStreamer.ToStream(this._fk_B, xml, "B", "Kistl.App.GUI");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
@@ -4039,19 +4744,23 @@ namespace Kistl.App.GUI
             
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "");
-            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "http://dasz.at/Kistl");
-            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.GUI");
+            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.GUI");
         }
 
         public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
         {
             
             xml.WriteAttributeString("ExportGuid", this._ExportGuid.ToString());
+            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(A != null ? A.ExportGuid : (Guid?)null, xml, "A", "Kistl.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(B != null ? B.ExportGuid : (Guid?)null, xml, "B", "Kistl.App.GUI");
         }
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
         {
             XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "");
+            XmlStreamer.FromStream(ref this._fk_guid_A, xml, "A", "Kistl.App.GUI");
+            XmlStreamer.FromStream(ref this._fk_guid_B, xml, "B", "Kistl.App.GUI");
         }
 
 #endregion
@@ -4066,6 +4775,21 @@ namespace Kistl.App.GUI
 			// Do not reload references if the current object has been deleted.
 			// TODO: enable when MemoryContext uses MemoryDataObjects
 			//if (this.ObjectState == DataObjectState.Deleted) return;
+
+			if (_fk_guid_A.HasValue)
+				A__Implementation__ = (Kistl.App.GUI.ViewModelDescriptor__Implementation__Memory)Context.FindPersistenceObject<Kistl.App.GUI.ViewModelDescriptor>(_fk_guid_A.Value);
+			else if (_fk_A.HasValue)
+				A__Implementation__ = (Kistl.App.GUI.ViewModelDescriptor__Implementation__Memory)Context.Find<Kistl.App.GUI.ViewModelDescriptor>(_fk_A.Value);
+			else
+				A__Implementation__ = null;
+
+
+			if (_fk_guid_B.HasValue)
+				B__Implementation__ = (Kistl.App.GUI.ControlKind__Implementation__Memory)Context.FindPersistenceObject<Kistl.App.GUI.ControlKind>(_fk_guid_B.Value);
+			else if (_fk_B.HasValue)
+				B__Implementation__ = (Kistl.App.GUI.ControlKind__Implementation__Memory)Context.Find<Kistl.App.GUI.ControlKind>(_fk_B.Value);
+			else
+				B__Implementation__ = null;
 	
 		}
 		
@@ -4173,7 +4897,21 @@ namespace Kistl.App.GUI
             }
         }
         
+        // normalize namespace for Templates
+        private Kistl.App.GUI.Visual A__Implementation__
+        {
+			get
+			{
+				return A;
+			}
+			set
+			{
+				A = value;
+			}
+		}
+        
         private int? _fk_A;
+        private Guid? _fk_guid_A = null;
 		// END Kistl.DalProvider.Memory.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate for A
 
         /// <summary>
@@ -4226,7 +4964,21 @@ namespace Kistl.App.GUI
             }
         }
         
+        // normalize namespace for Templates
+        private Kistl.App.GUI.Visual B__Implementation__
+        {
+			get
+			{
+				return B;
+			}
+			set
+			{
+				B = value;
+			}
+		}
+        
         private int? _fk_B;
+        private Guid? _fk_guid_B = null;
 		// END Kistl.DalProvider.Memory.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate for B
 
 #region Serializer
@@ -4252,16 +5004,16 @@ namespace Kistl.App.GUI
         {
             
             base.ToStream(xml);
-            XmlStreamer.ToStream(this._fk_A, xml, "A", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(this._fk_B, xml, "B", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._fk_A, xml, "A", "Kistl.App.GUI");
+            XmlStreamer.ToStream(this._fk_B, xml, "B", "Kistl.App.GUI");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
             
             base.FromStream(xml);
-            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "http://dasz.at/Kistl");
-            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.GUI");
+            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.GUI");
         }
 
 #endregion
@@ -4276,6 +5028,21 @@ namespace Kistl.App.GUI
 			// Do not reload references if the current object has been deleted.
 			// TODO: enable when MemoryContext uses MemoryDataObjects
 			//if (this.ObjectState == DataObjectState.Deleted) return;
+
+			if (_fk_guid_A.HasValue)
+				A__Implementation__ = (Kistl.App.GUI.Visual__Implementation__Memory)Context.FindPersistenceObject<Kistl.App.GUI.Visual>(_fk_guid_A.Value);
+			else if (_fk_A.HasValue)
+				A__Implementation__ = (Kistl.App.GUI.Visual__Implementation__Memory)Context.Find<Kistl.App.GUI.Visual>(_fk_A.Value);
+			else
+				A__Implementation__ = null;
+
+
+			if (_fk_guid_B.HasValue)
+				B__Implementation__ = (Kistl.App.GUI.Visual__Implementation__Memory)Context.FindPersistenceObject<Kistl.App.GUI.Visual>(_fk_guid_B.Value);
+			else if (_fk_B.HasValue)
+				B__Implementation__ = (Kistl.App.GUI.Visual__Implementation__Memory)Context.Find<Kistl.App.GUI.Visual>(_fk_B.Value);
+			else
+				B__Implementation__ = null;
 	
 		}
 		
@@ -4383,7 +5150,21 @@ namespace Kistl.App.GUI
             }
         }
         
+        // normalize namespace for Templates
+        private Kistl.App.GUI.Visual A__Implementation__
+        {
+			get
+			{
+				return A;
+			}
+			set
+			{
+				A = value;
+			}
+		}
+        
         private int? _fk_A;
+        private Guid? _fk_guid_A = null;
 		// END Kistl.DalProvider.Memory.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate for A
 
         /// <summary>
@@ -4436,7 +5217,21 @@ namespace Kistl.App.GUI
             }
         }
         
+        // normalize namespace for Templates
+        private Kistl.App.GUI.Visual B__Implementation__
+        {
+			get
+			{
+				return B;
+			}
+			set
+			{
+				B = value;
+			}
+		}
+        
         private int? _fk_B;
+        private Guid? _fk_guid_B = null;
 		// END Kistl.DalProvider.Memory.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate for B
 
 #region Serializer
@@ -4462,16 +5257,16 @@ namespace Kistl.App.GUI
         {
             
             base.ToStream(xml);
-            XmlStreamer.ToStream(this._fk_A, xml, "A", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(this._fk_B, xml, "B", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._fk_A, xml, "A", "Kistl.App.GUI");
+            XmlStreamer.ToStream(this._fk_B, xml, "B", "Kistl.App.GUI");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
             
             base.FromStream(xml);
-            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "http://dasz.at/Kistl");
-            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.GUI");
+            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.GUI");
         }
 
 #endregion
@@ -4486,6 +5281,21 @@ namespace Kistl.App.GUI
 			// Do not reload references if the current object has been deleted.
 			// TODO: enable when MemoryContext uses MemoryDataObjects
 			//if (this.ObjectState == DataObjectState.Deleted) return;
+
+			if (_fk_guid_A.HasValue)
+				A__Implementation__ = (Kistl.App.GUI.Visual__Implementation__Memory)Context.FindPersistenceObject<Kistl.App.GUI.Visual>(_fk_guid_A.Value);
+			else if (_fk_A.HasValue)
+				A__Implementation__ = (Kistl.App.GUI.Visual__Implementation__Memory)Context.Find<Kistl.App.GUI.Visual>(_fk_A.Value);
+			else
+				A__Implementation__ = null;
+
+
+			if (_fk_guid_B.HasValue)
+				B__Implementation__ = (Kistl.App.GUI.Visual__Implementation__Memory)Context.FindPersistenceObject<Kistl.App.GUI.Visual>(_fk_guid_B.Value);
+			else if (_fk_B.HasValue)
+				B__Implementation__ = (Kistl.App.GUI.Visual__Implementation__Memory)Context.Find<Kistl.App.GUI.Visual>(_fk_B.Value);
+			else
+				B__Implementation__ = null;
 	
 		}
 		
@@ -4594,7 +5404,21 @@ namespace Kistl.App.TimeRecords
             }
         }
         
+        // normalize namespace for Templates
+        private Kistl.App.TimeRecords.WorkEffortAccount A__Implementation__
+        {
+			get
+			{
+				return A;
+			}
+			set
+			{
+				A = value;
+			}
+		}
+        
         private int? _fk_A;
+        private Guid? _fk_guid_A = null;
 		// END Kistl.DalProvider.Memory.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate for A
 
         /// <summary>
@@ -4647,7 +5471,21 @@ namespace Kistl.App.TimeRecords
             }
         }
         
+        // normalize namespace for Templates
+        private Kistl.App.Projekte.Mitarbeiter B__Implementation__
+        {
+			get
+			{
+				return B;
+			}
+			set
+			{
+				B = value;
+			}
+		}
+        
         private int? _fk_B;
+        private Guid? _fk_guid_B = null;
 		// END Kistl.DalProvider.Memory.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate for B
 
 #region Serializer
@@ -4673,16 +5511,16 @@ namespace Kistl.App.TimeRecords
         {
             
             base.ToStream(xml);
-            XmlStreamer.ToStream(this._fk_A, xml, "A", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(this._fk_B, xml, "B", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._fk_A, xml, "A", "Kistl.App.TimeRecords");
+            XmlStreamer.ToStream(this._fk_B, xml, "B", "Kistl.App.Projekte");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
             
             base.FromStream(xml);
-            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "http://dasz.at/Kistl");
-            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.TimeRecords");
+            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.Projekte");
         }
 
 #endregion
@@ -4697,6 +5535,21 @@ namespace Kistl.App.TimeRecords
 			// Do not reload references if the current object has been deleted.
 			// TODO: enable when MemoryContext uses MemoryDataObjects
 			//if (this.ObjectState == DataObjectState.Deleted) return;
+
+			if (_fk_guid_A.HasValue)
+				A__Implementation__ = (Kistl.App.TimeRecords.WorkEffortAccount__Implementation__Memory)Context.FindPersistenceObject<Kistl.App.TimeRecords.WorkEffortAccount>(_fk_guid_A.Value);
+			else if (_fk_A.HasValue)
+				A__Implementation__ = (Kistl.App.TimeRecords.WorkEffortAccount__Implementation__Memory)Context.Find<Kistl.App.TimeRecords.WorkEffortAccount>(_fk_A.Value);
+			else
+				A__Implementation__ = null;
+
+
+			if (_fk_guid_B.HasValue)
+				B__Implementation__ = (Kistl.App.Projekte.Mitarbeiter__Implementation__Memory)Context.FindPersistenceObject<Kistl.App.Projekte.Mitarbeiter>(_fk_guid_B.Value);
+			else if (_fk_B.HasValue)
+				B__Implementation__ = (Kistl.App.Projekte.Mitarbeiter__Implementation__Memory)Context.Find<Kistl.App.Projekte.Mitarbeiter>(_fk_B.Value);
+			else
+				B__Implementation__ = null;
 	
 		}
 		

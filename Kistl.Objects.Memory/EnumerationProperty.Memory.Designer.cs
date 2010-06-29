@@ -106,7 +106,21 @@ namespace Kistl.App.Base
             }
         }
         
+        // normalize namespace for Templates
+        private Kistl.App.Base.Enumeration Enumeration__Implementation__
+        {
+			get
+			{
+				return Enumeration;
+			}
+			set
+			{
+				Enumeration = value;
+			}
+		}
+        
         private int? _fk_Enumeration;
+        private Guid? _fk_guid_Enumeration = null;
 		// END Kistl.DalProvider.Memory.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate for Enumeration
 		public static event PropertyGetterHandler<Kistl.App.Base.EnumerationProperty, Kistl.App.Base.Enumeration> OnEnumeration_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.EnumerationProperty, Kistl.App.Base.Enumeration> OnEnumeration_PreSetter;
@@ -174,6 +188,22 @@ namespace Kistl.App.Base
             base.AttachToContext(ctx);
 		}
 
+		public override void ReloadReferences()
+		{
+			// Do not reload references if the current object has been deleted.
+			// TODO: enable when MemoryContext uses MemoryDataObjects
+			//if (this.ObjectState == DataObjectState.Deleted) return;
+			base.ReloadReferences();
+			
+			// fix direct object references
+
+			if (_fk_guid_Enumeration.HasValue)
+				Enumeration__Implementation__ = (Kistl.App.Base.Enumeration__Implementation__Memory)Context.FindPersistenceObject<Kistl.App.Base.Enumeration>(_fk_guid_Enumeration.Value);
+			else if (_fk_Enumeration.HasValue)
+				Enumeration__Implementation__ = (Kistl.App.Base.Enumeration__Implementation__Memory)Context.Find<Kistl.App.Base.Enumeration>(_fk_Enumeration.Value);
+			else
+				Enumeration__Implementation__ = null;
+		}
         // tail template
    		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
@@ -296,26 +326,28 @@ namespace Kistl.App.Base
         {
             
             base.ToStream(xml);
-            XmlStreamer.ToStream(this._fk_Enumeration, xml, "Enumeration", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._fk_Enumeration, xml, "Enumeration", "Kistl.App.Base");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
             
             base.FromStream(xml);
-            XmlStreamer.FromStream(ref this._fk_Enumeration, xml, "Enumeration", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_Enumeration, xml, "Enumeration", "Kistl.App.Base");
         }
 
         public override void Export(System.Xml.XmlWriter xml, string[] modules)
         {
             
             base.Export(xml, modules);
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(Enumeration != null ? Enumeration.ExportGuid : (Guid?)null, xml, "Enumeration", "Kistl.App.Base");
         }
 
         public override void MergeImport(System.Xml.XmlReader xml)
         {
             
             base.MergeImport(xml);
+            XmlStreamer.FromStream(ref this._fk_guid_Enumeration, xml, "Enumeration", "Kistl.App.Base");
         }
 
 #endregion

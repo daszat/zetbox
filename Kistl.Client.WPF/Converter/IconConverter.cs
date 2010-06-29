@@ -14,9 +14,11 @@ namespace Kistl.Client.WPF.Converter
     [ValueConversion(typeof(IDataObject), typeof(string))]
     public class IconConverter : IValueConverter
     {
-        public IconConverter(string docStore)
+        private readonly IReadOnlyKistlContext FrozenContext;
+        public IconConverter(string docStore, IReadOnlyKistlContext frozenCtx)
         {
             this.DocumentStore = docStore;
+            this.FrozenContext = frozenCtx;
         }
 
         private readonly string DocumentStore;
@@ -52,7 +54,7 @@ namespace Kistl.Client.WPF.Converter
             else if (value is IDataObject)
             {
                 IDataObject obj = (IDataObject)value;
-                var cls = obj.GetObjectClass(FrozenContext.Single);
+                var cls = obj.GetObjectClass(FrozenContext);
                 if (cls.DefaultIcon != null)
                 {
                     return GetIconPath(cls.DefaultIcon.IconFile);

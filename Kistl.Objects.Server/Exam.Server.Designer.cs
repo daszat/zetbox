@@ -328,6 +328,20 @@ namespace at.dasz.CourseOrganiser
 			this._fk_Semester = otherImpl._fk_Semester;
 		}
 
+		public override void ReloadReferences()
+		{
+			// Do not reload references if the current object has been deleted.
+			// TODO: enable when MemoryContext uses MemoryDataObjects
+			//if (this.ObjectState == DataObjectState.Deleted) return;
+			// fix direct object references
+
+			if (_fk_guid_Semester.HasValue)
+				Semester__Implementation__ = (at.dasz.CourseOrganiser.Semester__Implementation__)Context.FindPersistenceObject<at.dasz.CourseOrganiser.Semester>(_fk_guid_Semester.Value);
+			else if (_fk_Semester.HasValue)
+				Semester__Implementation__ = (at.dasz.CourseOrganiser.Semester__Implementation__)Context.Find<at.dasz.CourseOrganiser.Semester>(_fk_Semester.Value);
+			else
+				Semester__Implementation__ = null;
+		}
         // tail template
    		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
@@ -436,20 +450,6 @@ namespace at.dasz.CourseOrganiser
 		}
 	
 
-		public override void ReloadReferences()
-		{
-			// Do not reload references if the current object has been deleted.
-			// TODO: enable when MemoryContext uses MemoryDataObjects
-			//if (this.ObjectState == DataObjectState.Deleted) return;
-			// fix direct object references
-
-			if (_fk_guid_Semester.HasValue)
-				Semester__Implementation__ = (at.dasz.CourseOrganiser.Semester__Implementation__)Context.FindPersistenceObject<at.dasz.CourseOrganiser.Semester>(_fk_guid_Semester.Value);
-			else if (_fk_Semester.HasValue)
-				Semester__Implementation__ = (at.dasz.CourseOrganiser.Semester__Implementation__)Context.Find<at.dasz.CourseOrganiser.Semester>(_fk_Semester.Value);
-			else
-				Semester__Implementation__ = null;
-		}
 #region Serializer
 
 

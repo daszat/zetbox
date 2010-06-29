@@ -25,7 +25,7 @@ namespace Kistl.API.Tests.Serializables
         public void roundtrip_Constant_string()
         {
             ConstantExpression expr = Expression.Constant("a");
-            var result = (ConstantExpression)SerializableExpression.ToExpression(SerializableExpression.FromExpression(expr, typeTrans));
+            var result = (ConstantExpression)SerializableExpression.ToExpression(SerializableExpression.FromExpression(expr, iftFactory));
 
             AssertExpressions.AreEqual(result, expr);
         }
@@ -35,7 +35,7 @@ namespace Kistl.API.Tests.Serializables
         {
             ISomething value = new Something();
             ConstantExpression expr = Expression.Constant(value);
-            var result = (ConstantExpression)SerializableExpression.ToExpression(SerializableExpression.FromExpression(expr, typeTrans));
+            var result = (ConstantExpression)SerializableExpression.ToExpression(SerializableExpression.FromExpression(expr, iftFactory));
 
             AssertExpressions.AreEqual(result, expr);
         }
@@ -45,7 +45,7 @@ namespace Kistl.API.Tests.Serializables
         {
             ISomething value = new Something();
             ConstantExpression expr = Expression.Constant(value, typeof(ISomething));
-            var result = (ConstantExpression)SerializableExpression.ToExpression(SerializableExpression.FromExpression(expr, typeTrans));
+            var result = (ConstantExpression)SerializableExpression.ToExpression(SerializableExpression.FromExpression(expr, iftFactory));
 
             AssertExpressions.AreEqual(result, expr);
             Assert.That(result.Type, Is.EqualTo(typeof(ISomething)));

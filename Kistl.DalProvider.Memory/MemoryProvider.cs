@@ -3,17 +3,15 @@ namespace Kistl.DalProvider.Memory
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
     using System.Reflection;
     using System.Text;
-
     using Autofac;
-
     using Kistl.API;
     using Kistl.API.Utils;
     using Kistl.App.Extensions;
     using Kistl.App.Packaging;
-    using System.IO;
 
     public class MemoryProvider
         : Autofac.Module
@@ -28,34 +26,56 @@ namespace Kistl.DalProvider.Memory
             base.Load(moduleBuilder);
 
             moduleBuilder
-                .RegisterType<MemoryContext>()
+                .RegisterType<MemoryImplementationType>()
+                .As<MemoryImplementationType>()
+                .As<ImplementationType>()
+                .InstancePerDependency();
+
+            moduleBuilder
+                .Register<MemoryContext>(c => new MemoryContext(
+                    c.Resolve<InterfaceType.Factory>(),
+                    c.Resolve<Func<IReadOnlyKistlContext>>(Kistl.API.Helper.FrozenContextServiceName),
+                    c.Resolve<MemoryImplementationType.MemoryFactory>()
+                    ))
                 .As<BaseMemoryContext>()
-                .OnActivating(args =>
+                .OnActivated(args =>
                 {
-                    //// TODO: check validity of using FAMS here.
-                    //Logging.Log.Info("Initialising FrozenActionsManagerClient");
-                    //var fams = args.Context.Resolve<FrozenActionsManager>();
-                    //fams.Init((IReadOnlyKistlContext)args.Instance);
+                    var manager = args.Context.Resolve<IMemoryActionsManager>();
+                    manager.Init(args.Context.Resolve<IReadOnlyKistlContext>(Kistl.API.Helper.FrozenContextServiceName));
                 })
                 .InstancePerDependency();
 
             try
             {
+                // TODO: Move to MemoryModule
                 var generatedAssembly = Assembly.Load(GeneratedAssemblyName);
                 moduleBuilder
                     .Register(c =>
                     {
                         MemoryContext memCtx = null;
-                        memCtx = new MemoryContext(c.Resolve<ITypeTransformations>(), () => memCtx);
+                        memCtx = new MemoryContext(
+                            c.Resolve<InterfaceType.Factory>(),
+                            () => memCtx,
+                            c.Resolve<MemoryImplementationType.MemoryFactory>());
                         Importer.LoadFromXml(memCtx, generatedAssembly.GetManifestResourceStream("Kistl.Objects.Memory.FrozenObjects.xml"));
                         return memCtx;
                     })
                     .Named<IReadOnlyKistlContext>(Kistl.API.Helper.FrozenContextServiceName)
+                    .OnActivated(args =>
+                    {
+                        var manager = args.Context.Resolve<IMemoryActionsManager>();
+                        manager.Init(args.Context.Resolve<IReadOnlyKistlContext>(Kistl.API.Helper.FrozenContextServiceName));
+                    })
                     .SingleInstance();
             }
             catch (FileNotFoundException ex)
             {
                 Log.Warn("Could not load memory context", ex);
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error while loading memory context", ex);
+                throw;
             }
         }
     }

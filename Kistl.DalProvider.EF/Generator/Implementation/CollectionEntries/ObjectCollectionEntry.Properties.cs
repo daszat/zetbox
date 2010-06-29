@@ -10,7 +10,7 @@ namespace Kistl.DalProvider.EF.Generator.Implementation.CollectionEntries
     using Kistl.App.Base;
     using Kistl.App.Extensions;
     using Kistl.Server.Generators;
-    using Kistl.Server.Generators.Templates.Implementation;
+    using Templates = Kistl.Server.Generators.Templates;
 
     public partial class ObjectCollectionEntry
     {
@@ -35,7 +35,7 @@ namespace Kistl.DalProvider.EF.Generator.Implementation.CollectionEntries
 
             if (rel.NeedsPositionStorage(endRole))
             {
-                this.MembersToSerialize.Add(SerializerType.All, relEnd.Type.Module.Namespace, endRole + Kistl.API.Helper.PositionSuffix, "_" + endRole + Kistl.API.Helper.PositionSuffix);
+                this.MembersToSerialize.Add(Templates.Implementation.SerializerType.All, relEnd.Type.Module.Namespace, endRole + Kistl.API.Helper.PositionSuffix, "_" + endRole + Kistl.API.Helper.PositionSuffix);
                 this.WriteObjects("public int? ", endRole, "Index { get { return ",
                     endRole, Kistl.API.Helper.PositionSuffix, "; } set { ",
                     endRole, Kistl.API.Helper.PositionSuffix, " = value; } }");
@@ -46,41 +46,5 @@ namespace Kistl.DalProvider.EF.Generator.Implementation.CollectionEntries
                 this.WriteObjects("public int? ", endRole, "Index { get { return null; } set { } }");
             }
         }
-
-        protected override void ApplyReloadReferenceBody()
-        {
-            base.ApplyReloadReferenceBody();
-
-            ReloadReferences(RelationEndRole.A);
-            this.WriteLine();
-
-            ReloadReferences(RelationEndRole.B);
-        }
-
-        private void ReloadReferences(RelationEndRole endRole)
-        {
-            RelationEnd relend = rel.GetEndFromRole(endRole);
-            ObjectClasses.ReloadOneReference.Call(Host, ctx,
-                relend.Type.GetDataTypeString(),
-                relend.Type.GetDataTypeString() + Kistl.API.Helper.ImplementationSuffix,
-                endRole.ToString(),
-                endRole.ToString() + Kistl.API.Helper.ImplementationSuffix,
-                "_fk_" + endRole.ToString(),
-                "_fk_guid_" + endRole.ToString());
-
-            //this.WriteObjects("\t\t\tif (_fk_", endRole.ToString(), ".HasValue)");
-            //this.WriteLine();
-            //this.WriteObjects("\t\t\t\t", endRole.ToString(), "__Implementation__ = (",
-            //        relend.Type.GetDataTypeString() + Kistl.API.Helper.ImplementationSuffix,
-            //        ")Context.Find<",
-            //        relend.Type.GetDataTypeString(),
-            //        ">(_fk_", endRole.ToString(), ".Value);");
-            //this.WriteLine();
-            //this.WriteObjects("\t\t\telse");
-            //this.WriteLine();
-            //this.WriteObjects("\t\t\t\t", endRole.ToString(), "__Implementation__ = null;");
-            //this.WriteLine();
-        }
-
     }
 }

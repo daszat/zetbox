@@ -13,19 +13,14 @@ namespace Kistl.DalProvider.EF
     internal sealed class EfQueryTranslatorProvider<T>
         : QueryTranslatorProvider<T>
     {
-        internal EfQueryTranslatorProvider(IMetaDataResolver metaDataResolver, Identity identity, IQueryable source, IKistlContext ctx, ITypeTransformations typeTrans)
-            : base(metaDataResolver, identity, source, ctx, typeTrans)
+        internal EfQueryTranslatorProvider(IMetaDataResolver metaDataResolver, Identity identity, IQueryable source, IKistlContext ctx, InterfaceType.Factory iftFactory)
+            : base(metaDataResolver, identity, source, ctx, iftFactory)
         {
-        }
-
-        protected override Type ToProviderType(Type t)
-        {
-            return Ctx.ToImplementationType(typeTrans.AsInterfaceType(t)).Type;
         }
 
         protected override QueryTranslatorProvider<TElement> GetSubProvider<TElement>()
         {
-            return new EfQueryTranslatorProvider<TElement>(MetaDataResolver, Identity, Source, Ctx, typeTrans);
+            return new EfQueryTranslatorProvider<TElement>(MetaDataResolver, Identity, Source, Ctx, IftFactory);
         }
     }
 }

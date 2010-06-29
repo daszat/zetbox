@@ -20,7 +20,7 @@ namespace Kistl.API.Tests.Serializables
 		[Test]
 		public void FromExpression_null_fails()
 		{
-            Assert.That(() => SerializableExpression.FromExpression(null, typeTrans), Throws.InstanceOf<ArgumentNullException>());
+            Assert.That(() => SerializableExpression.FromExpression(null, iftFactory), Throws.InstanceOf<ArgumentNullException>());
 		}
 
 		[Test]

@@ -106,7 +106,21 @@ namespace Kistl.App.Base
             }
         }
         
+        // normalize namespace for Templates
+        private Kistl.App.Base.TypeRef Type__Implementation__
+        {
+			get
+			{
+				return Type;
+			}
+			set
+			{
+				Type = value;
+			}
+		}
+        
         private int? _fk_Type;
+        private Guid? _fk_guid_Type = null;
 		// END Kistl.DalProvider.Memory.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate for Type
 		public static event PropertyGetterHandler<Kistl.App.Base.CLRObjectParameter, Kistl.App.Base.TypeRef> OnType_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Base.CLRObjectParameter, Kistl.App.Base.TypeRef> OnType_PreSetter;
@@ -174,6 +188,22 @@ namespace Kistl.App.Base
             base.AttachToContext(ctx);
 		}
 
+		public override void ReloadReferences()
+		{
+			// Do not reload references if the current object has been deleted.
+			// TODO: enable when MemoryContext uses MemoryDataObjects
+			//if (this.ObjectState == DataObjectState.Deleted) return;
+			base.ReloadReferences();
+			
+			// fix direct object references
+
+			if (_fk_guid_Type.HasValue)
+				Type__Implementation__ = (Kistl.App.Base.TypeRef__Implementation__Memory)Context.FindPersistenceObject<Kistl.App.Base.TypeRef>(_fk_guid_Type.Value);
+			else if (_fk_Type.HasValue)
+				Type__Implementation__ = (Kistl.App.Base.TypeRef__Implementation__Memory)Context.Find<Kistl.App.Base.TypeRef>(_fk_Type.Value);
+			else
+				Type__Implementation__ = null;
+		}
         // tail template
    		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
@@ -296,26 +326,28 @@ namespace Kistl.App.Base
         {
             
             base.ToStream(xml);
-            XmlStreamer.ToStream(this._fk_Type, xml, "Type", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._fk_Type, xml, "Type", "Kistl.App.Base");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
             
             base.FromStream(xml);
-            XmlStreamer.FromStream(ref this._fk_Type, xml, "Type", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_Type, xml, "Type", "Kistl.App.Base");
         }
 
         public override void Export(System.Xml.XmlWriter xml, string[] modules)
         {
             
             base.Export(xml, modules);
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(Type != null ? Type.ExportGuid : (Guid?)null, xml, "Type", "Kistl.App.Base");
         }
 
         public override void MergeImport(System.Xml.XmlReader xml)
         {
             
             base.MergeImport(xml);
+            XmlStreamer.FromStream(ref this._fk_guid_Type, xml, "Type", "Kistl.App.Base");
         }
 
 #endregion

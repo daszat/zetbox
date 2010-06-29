@@ -37,7 +37,7 @@ namespace Kistl.API.Tests.Serializables
             var objExpr = Expression.Constant(testString);
             MemberExpression expr = Expression.MakeMemberAccess(objExpr, typeof(string).GetMember("Length").First());
 
-            var result = SerializableExpression.ToExpression(SerializableExpression.FromExpression(expr, scope.Resolve<ITypeTransformations>()));
+            var result = SerializableExpression.ToExpression(SerializableExpression.FromExpression(expr, scope.Resolve<InterfaceType.Factory>()));
 
             AssertExpressions.AreEqual(result, Expression.Constant(testString.Length));
         }

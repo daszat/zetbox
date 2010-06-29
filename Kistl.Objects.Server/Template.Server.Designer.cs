@@ -437,6 +437,27 @@ namespace Kistl.App.GUI
 			this._fk_VisualTree = otherImpl._fk_VisualTree;
 		}
 
+		public override void ReloadReferences()
+		{
+			// Do not reload references if the current object has been deleted.
+			// TODO: enable when MemoryContext uses MemoryDataObjects
+			//if (this.ObjectState == DataObjectState.Deleted) return;
+			// fix direct object references
+
+			if (_fk_guid_DisplayedTypeAssembly.HasValue)
+				DisplayedTypeAssembly__Implementation__ = (Kistl.App.Base.Assembly__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.Assembly>(_fk_guid_DisplayedTypeAssembly.Value);
+			else if (_fk_DisplayedTypeAssembly.HasValue)
+				DisplayedTypeAssembly__Implementation__ = (Kistl.App.Base.Assembly__Implementation__)Context.Find<Kistl.App.Base.Assembly>(_fk_DisplayedTypeAssembly.Value);
+			else
+				DisplayedTypeAssembly__Implementation__ = null;
+
+			if (_fk_guid_VisualTree.HasValue)
+				VisualTree__Implementation__ = (Kistl.App.GUI.Visual__Implementation__)Context.FindPersistenceObject<Kistl.App.GUI.Visual>(_fk_guid_VisualTree.Value);
+			else if (_fk_VisualTree.HasValue)
+				VisualTree__Implementation__ = (Kistl.App.GUI.Visual__Implementation__)Context.Find<Kistl.App.GUI.Visual>(_fk_VisualTree.Value);
+			else
+				VisualTree__Implementation__ = null;
+		}
         // tail template
    		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
@@ -553,27 +574,6 @@ namespace Kistl.App.GUI
 		}
 	
 
-		public override void ReloadReferences()
-		{
-			// Do not reload references if the current object has been deleted.
-			// TODO: enable when MemoryContext uses MemoryDataObjects
-			//if (this.ObjectState == DataObjectState.Deleted) return;
-			// fix direct object references
-
-			if (_fk_guid_DisplayedTypeAssembly.HasValue)
-				DisplayedTypeAssembly__Implementation__ = (Kistl.App.Base.Assembly__Implementation__)Context.FindPersistenceObject<Kistl.App.Base.Assembly>(_fk_guid_DisplayedTypeAssembly.Value);
-			else if (_fk_DisplayedTypeAssembly.HasValue)
-				DisplayedTypeAssembly__Implementation__ = (Kistl.App.Base.Assembly__Implementation__)Context.Find<Kistl.App.Base.Assembly>(_fk_DisplayedTypeAssembly.Value);
-			else
-				DisplayedTypeAssembly__Implementation__ = null;
-
-			if (_fk_guid_VisualTree.HasValue)
-				VisualTree__Implementation__ = (Kistl.App.GUI.Visual__Implementation__)Context.FindPersistenceObject<Kistl.App.GUI.Visual>(_fk_guid_VisualTree.Value);
-			else if (_fk_VisualTree.HasValue)
-				VisualTree__Implementation__ = (Kistl.App.GUI.Visual__Implementation__)Context.Find<Kistl.App.GUI.Visual>(_fk_VisualTree.Value);
-			else
-				VisualTree__Implementation__ = null;
-		}
 #region Serializer
 
 

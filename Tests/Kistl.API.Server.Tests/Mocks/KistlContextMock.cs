@@ -11,8 +11,8 @@ namespace Kistl.API.Server.Mocks
     public class KistlContextMock : BaseKistlDataContext
     {
         public Dictionary<int, TestObjClass__Implementation__> TestObjClasses = new Dictionary<int, TestObjClass__Implementation__>();
-        public KistlContextMock(IMetaDataResolver metaDataResolver, Identity identity, KistlConfig config, ITypeTransformations typeTrans)
-            : base(metaDataResolver, identity, config, typeTrans)
+        public KistlContextMock(IMetaDataResolver metaDataResolver, Identity identity, KistlConfig config, InterfaceType.Factory iftFactory)
+            : base(metaDataResolver, identity, config, iftFactory)
         {
             TestObjClasses[1] = new TestObjClass__Implementation__() { ID = 1 };
             TestObjClasses[3] = new TestObjClass__Implementation__() { ID = 3 };
@@ -163,6 +163,11 @@ namespace Kistl.API.Server.Mocks
         public override ImplementationType ToImplementationType(InterfaceType t)
         {
             return GetImplementationType(Type.GetType(t.Type.FullName + Kistl.API.Helper.ImplementationSuffix + "," + typeof(KistlContextMock).Assembly.FullName));
+        }
+
+        public override ImplementationType GetImplementationType(Type t)
+        {
+            return new ServerImplementationTypeMock(t, iftFactory);
         }
     }
 }

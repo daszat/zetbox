@@ -201,7 +201,21 @@ namespace Kistl.App.GUI
             }
         }
         
+        // normalize namespace for Templates
+        private Kistl.App.Base.Method Method__Implementation__
+        {
+			get
+			{
+				return Method;
+			}
+			set
+			{
+				Method = value;
+			}
+		}
+        
         private int? _fk_Method;
+        private Guid? _fk_guid_Method = null;
 		// END Kistl.DalProvider.Memory.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate for Method
 		public static event PropertyGetterHandler<Kistl.App.GUI.Visual, Kistl.App.Base.Method> OnMethod_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.Visual, Kistl.App.Base.Method> OnMethod_PreSetter;
@@ -275,7 +289,21 @@ namespace Kistl.App.GUI
             }
         }
         
+        // normalize namespace for Templates
+        private Kistl.App.Base.Property Property__Implementation__
+        {
+			get
+			{
+				return Property;
+			}
+			set
+			{
+				Property = value;
+			}
+		}
+        
         private int? _fk_Property;
+        private Guid? _fk_guid_Property = null;
 		// END Kistl.DalProvider.Memory.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate for Property
 		public static event PropertyGetterHandler<Kistl.App.GUI.Visual, Kistl.App.Base.Property> OnProperty_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.Visual, Kistl.App.Base.Property> OnProperty_PreSetter;
@@ -303,6 +331,27 @@ namespace Kistl.App.GUI
             base.AttachToContext(ctx);
 		}
 
+		public override void ReloadReferences()
+		{
+			// Do not reload references if the current object has been deleted.
+			// TODO: enable when MemoryContext uses MemoryDataObjects
+			//if (this.ObjectState == DataObjectState.Deleted) return;
+			// fix direct object references
+
+			if (_fk_guid_Method.HasValue)
+				Method__Implementation__ = (Kistl.App.Base.Method__Implementation__Memory)Context.FindPersistenceObject<Kistl.App.Base.Method>(_fk_guid_Method.Value);
+			else if (_fk_Method.HasValue)
+				Method__Implementation__ = (Kistl.App.Base.Method__Implementation__Memory)Context.Find<Kistl.App.Base.Method>(_fk_Method.Value);
+			else
+				Method__Implementation__ = null;
+
+			if (_fk_guid_Property.HasValue)
+				Property__Implementation__ = (Kistl.App.Base.Property__Implementation__Memory)Context.FindPersistenceObject<Kistl.App.Base.Property>(_fk_guid_Property.Value);
+			else if (_fk_Property.HasValue)
+				Property__Implementation__ = (Kistl.App.Base.Property__Implementation__Memory)Context.Find<Kistl.App.Base.Property>(_fk_Property.Value);
+			else
+				Property__Implementation__ = null;
+		}
         // tail template
    		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
@@ -470,8 +519,8 @@ namespace Kistl.App.GUI
             
             base.ToStream(xml);
             XmlStreamer.ToStream(this._Description, xml, "Description", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this._fk_Method, xml, "Method", "http://dasz.at/Kistl");
-            XmlStreamer.ToStream(this._fk_Property, xml, "Property", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._fk_Method, xml, "Method", "Kistl.App.GUI");
+            XmlStreamer.ToStream(this._fk_Property, xml, "Property", "Kistl.App.GUI");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
@@ -479,8 +528,8 @@ namespace Kistl.App.GUI
             
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._Description, xml, "Description", "Kistl.App.GUI");
-            XmlStreamer.FromStream(ref this._fk_Method, xml, "Method", "http://dasz.at/Kistl");
-            XmlStreamer.FromStream(ref this._fk_Property, xml, "Property", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_Method, xml, "Method", "Kistl.App.GUI");
+            XmlStreamer.FromStream(ref this._fk_Property, xml, "Property", "Kistl.App.GUI");
         }
 
 #endregion

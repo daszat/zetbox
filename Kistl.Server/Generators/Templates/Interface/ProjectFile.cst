@@ -68,6 +68,10 @@
       <HintPath>$(KistlAPIPath)\Common\Kistl.API.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Autofac, Version=2.1.14.854, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(KistlAPIPath)\Common\Autofac.dll</HintPath>
+    </Reference>
 <%
 	ApplyAdditionalReferences();
 %>

@@ -53,12 +53,12 @@ namespace Kistl.Client.ASPNET.Toolkit
             
             if (ID <= Helper.INVALIDID)
             {
-                obj = ctx.Create(Type.GetInterfaceType(KistlContextManagerModule.TypeTransformations));
+                obj = ctx.Create(KistlContextManagerModule.IftFactory(Type.GetSystemType()));
                 ID = obj.ID;
             }
             else
             {
-                obj = (IDataObject)ctx.Find(Type.GetInterfaceType(KistlContextManagerModule.TypeTransformations), ID);
+                obj = (IDataObject)ctx.Find(KistlContextManagerModule.IftFactory(Type.GetSystemType()), ID);
             }
 
             return KistlContextManagerModule.ModelFactory.CreateViewModel<DataObjectModel.Factory>(obj).Invoke(ctx, obj);

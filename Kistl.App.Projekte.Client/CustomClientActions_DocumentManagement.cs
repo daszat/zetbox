@@ -1,16 +1,17 @@
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Kistl.API;
-using Autofac;
 
 namespace at.dasz.DocumentManagement
 {
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using Autofac;
+    using Kistl.API;
+    
     public static class CustomClientActions_DocumentManagement
     {
-        public static void OnOpen_File(at.dasz.DocumentManagement.File obj)
+        public static void OnOpen_File(File obj)
         {
             if (obj.Blob != null)
             {
@@ -18,7 +19,7 @@ namespace at.dasz.DocumentManagement
             }
         }
 
-        public static void OnUpload_File(at.dasz.DocumentManagement.File obj)
+        public static void OnUpload_File(File obj)
         {
             // No UI Code in Custom Actions
             // This is the ViewModels Job

@@ -76,7 +76,7 @@
     <Compile Include="AbstractIntegrationTestFixture.cs" />
     <Compile Include="Tests\BinarySerializers\should_work_with_ICompoundObjects.cs" />
     <Compile Include="Tests\Blobs\when_using.cs" />
-    <Compile Include="Tests\CompoundObjects\when_changing_a_compoundobject_list.cs" />
+    <Compile Include="Tests\CompoundObjects\when_changing_a_CompoundObject_list.cs" />
     <Compile Include="Tests\CompoundObjects\when_changing.cs" />
     <Compile Include="Tests\CompoundObjects\when_roundtrip.cs" />
     <Compile Include="Tests\GetListTests.cs" />
@@ -147,10 +147,6 @@
     <ProjectReference Include="..\..\Kistl.DalProvider.EF\Kistl.DalProvider.EF.csproj">
       <Project>{52EC8DFB-9C75-4FDB-9EE1-E78847F7F711}</Project>
       <Name>Kistl.DalProvider.EF</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Kistl.DalProvider.Frozen\Kistl.DalProvider.Frozen.csproj">
-      <Project>{F3B74A4A-BE0C-4BC2-BE32-D1A1D179B4F7}</Project>
-      <Name>Kistl.DalProvider.Frozen</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Kistl.Objects\Kistl.Objects.csproj">
       <Project>{0C9E6E69-309F-46F7-A936-D5762229DEB9}</Project>

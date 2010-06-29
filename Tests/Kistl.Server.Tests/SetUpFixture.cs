@@ -26,6 +26,18 @@ namespace Kistl.Server.Tests
 
         private IKistlAppDomain manager;
 
+        protected override void SetupBuilder(ContainerBuilder builder)
+        {
+            base.SetupBuilder(builder);
+            builder.RegisterModule(new Kistl.API.ApiModule());
+            builder.RegisterModule(new Kistl.API.Server.ServerApiModule());
+            builder.RegisterModule(new Kistl.Server.ServerModule());
+            builder.RegisterModule(new Kistl.DalProvider.EF.EfProvider());
+            builder.RegisterModule(new Kistl.DalProvider.Memory.MemoryProvider());
+            builder.RegisterModule(new Kistl.Objects.EFModule());
+            builder.RegisterModule(new Kistl.Objects.MemoryModule());
+        }
+
         protected override void SetUp(IContainer container)
         {
             base.SetUp(container);

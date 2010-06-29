@@ -19,7 +19,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.CollectionEntries
 
         protected override string GetCeBaseClassName()
         {
-            return "BaseClientCollectionEntry";
+            return "Kistl.DalProvider.Client.BaseClientCollectionEntry_ClientObjects";
         }
 
     }

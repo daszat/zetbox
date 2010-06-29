@@ -106,7 +106,21 @@ namespace at.dasz.CourseOrganiser
             }
         }
         
+        // normalize namespace for Templates
+        private at.dasz.CourseOrganiser.Exam Exam__Implementation__
+        {
+			get
+			{
+				return Exam;
+			}
+			set
+			{
+				Exam = value;
+			}
+		}
+        
         private int? _fk_Exam;
+        private Guid? _fk_guid_Exam = null;
 		// END Kistl.DalProvider.Memory.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate for Exam
 		public static event PropertyGetterHandler<at.dasz.CourseOrganiser.StudentExam, at.dasz.CourseOrganiser.Exam> OnExam_Getter;
 		public static event PropertyPreSetterHandler<at.dasz.CourseOrganiser.StudentExam, at.dasz.CourseOrganiser.Exam> OnExam_PreSetter;
@@ -245,7 +259,21 @@ namespace at.dasz.CourseOrganiser
             }
         }
         
+        // normalize namespace for Templates
+        private at.dasz.CourseOrganiser.Student Student__Implementation__
+        {
+			get
+			{
+				return Student;
+			}
+			set
+			{
+				Student = value;
+			}
+		}
+        
         private int? _fk_Student;
+        private Guid? _fk_guid_Student = null;
 		// END Kistl.DalProvider.Memory.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate for Student
 		public static event PropertyGetterHandler<at.dasz.CourseOrganiser.StudentExam, at.dasz.CourseOrganiser.Student> OnStudent_Getter;
 		public static event PropertyPreSetterHandler<at.dasz.CourseOrganiser.StudentExam, at.dasz.CourseOrganiser.Student> OnStudent_PreSetter;
@@ -273,6 +301,27 @@ namespace at.dasz.CourseOrganiser
             base.AttachToContext(ctx);
 		}
 
+		public override void ReloadReferences()
+		{
+			// Do not reload references if the current object has been deleted.
+			// TODO: enable when MemoryContext uses MemoryDataObjects
+			//if (this.ObjectState == DataObjectState.Deleted) return;
+			// fix direct object references
+
+			if (_fk_guid_Exam.HasValue)
+				Exam__Implementation__ = (at.dasz.CourseOrganiser.Exam__Implementation__Memory)Context.FindPersistenceObject<at.dasz.CourseOrganiser.Exam>(_fk_guid_Exam.Value);
+			else if (_fk_Exam.HasValue)
+				Exam__Implementation__ = (at.dasz.CourseOrganiser.Exam__Implementation__Memory)Context.Find<at.dasz.CourseOrganiser.Exam>(_fk_Exam.Value);
+			else
+				Exam__Implementation__ = null;
+
+			if (_fk_guid_Student.HasValue)
+				Student__Implementation__ = (at.dasz.CourseOrganiser.Student__Implementation__Memory)Context.FindPersistenceObject<at.dasz.CourseOrganiser.Student>(_fk_guid_Student.Value);
+			else if (_fk_Student.HasValue)
+				Student__Implementation__ = (at.dasz.CourseOrganiser.Student__Implementation__Memory)Context.Find<at.dasz.CourseOrganiser.Student>(_fk_Student.Value);
+			else
+				Student__Implementation__ = null;
+		}
         // tail template
    		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
 
@@ -422,18 +471,18 @@ namespace at.dasz.CourseOrganiser
         {
             
             base.ToStream(xml);
-            XmlStreamer.ToStream(this._fk_Exam, xml, "Exam", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._fk_Exam, xml, "Exam", "at.dasz.CourseOrganiser");
             XmlStreamer.ToStream(this._Score, xml, "Score", "at.dasz.CourseOrganiser");
-            XmlStreamer.ToStream(this._fk_Student, xml, "Student", "http://dasz.at/Kistl");
+            XmlStreamer.ToStream(this._fk_Student, xml, "Student", "at.dasz.CourseOrganiser");
         }
 
         public override void FromStream(System.Xml.XmlReader xml)
         {
             
             base.FromStream(xml);
-            XmlStreamer.FromStream(ref this._fk_Exam, xml, "Exam", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_Exam, xml, "Exam", "at.dasz.CourseOrganiser");
             XmlStreamer.FromStream(ref this._Score, xml, "Score", "at.dasz.CourseOrganiser");
-            XmlStreamer.FromStream(ref this._fk_Student, xml, "Student", "http://dasz.at/Kistl");
+            XmlStreamer.FromStream(ref this._fk_Student, xml, "Student", "at.dasz.CourseOrganiser");
         }
 
 #endregion

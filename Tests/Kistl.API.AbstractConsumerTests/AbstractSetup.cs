@@ -43,17 +43,25 @@ namespace Kistl.API.AbstractConsumerTests
                 switch (GetHostType())
                 {
                     case HostType.Server:
+                        Log.Info("Adding Server Modules");
                         builder = Kistl.API.Utils.AutoFacBuilder.CreateContainerBuilder(config, config.Server.Modules);
                         break;
                     case HostType.Client:
+                        Log.Info("Adding Client Modules");
                         builder = Kistl.API.Utils.AutoFacBuilder.CreateContainerBuilder(config, config.Client.Modules);
                         break;
                     case HostType.None:
+                        Log.Info("Adding no Modules");
                         builder = Kistl.API.Utils.AutoFacBuilder.CreateContainerBuilder(config);
                         break;
                     default:
                         throw new InvalidOperationException("GetHostType() returned an unknown type");
                 }
+
+                // TODO: totally replace this with test mocks?
+                Log.Info("Adding Interface Module");
+                builder.RegisterModule<Kistl.Objects.InterfaceModule>();
+                
                 SetupBuilder(builder);
                 container = builder.Build();
                 SetUp(container);
