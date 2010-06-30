@@ -17,10 +17,12 @@ namespace Kistl.Client.WPF
         private readonly IKistlContext ctx;
         private readonly Func<IKistlContext> ctxFactory;
         private readonly IModelFactory mdlFactory;
+        private readonly IReadOnlyKistlContext frozenCtx;
 
-        public Launcher(IKistlContext ctx, Func<IKistlContext> ctxFactory, IModelFactory mdlFactory)
+        public Launcher(IKistlContext ctx, Func<IKistlContext> ctxFactory, IModelFactory mdlFactory, IReadOnlyKistlContext frozenCtx)
         {
             this.ctx = ctx;
+            this.frozenCtx = frozenCtx;
             this.ctxFactory = ctxFactory;
             this.mdlFactory = mdlFactory;
         }
@@ -43,7 +45,7 @@ namespace Kistl.Client.WPF
                 initialWorkspace = mdlFactory.CreateViewModel<WorkspaceViewModel.Factory>().Invoke(ctxFactory.Invoke());
             }
 
-            ControlKind launcher = ctx.FindPersistenceObject<ControlKind>(new Guid("90D5FF7F-0C82-4278-BB8D-49C240F6BC2C"));
+            ControlKind launcher = frozenCtx.FindPersistenceObject<ControlKind>(new Guid("90D5FF7F-0C82-4278-BB8D-49C240F6BC2C"));
             mdlFactory.ShowModel(initialWorkspace, launcher, true);
 
             var ctxDebugger = mdlFactory.CreateViewModel<KistlDebuggerAsModel.Factory>().Invoke(ctxFactory());

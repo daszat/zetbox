@@ -200,9 +200,9 @@ namespace Kistl.App.Extensions
             ViewModelDescriptor result = null;
             while (result == null && tr != null)
             {
-                if (_pmdCache.ContainsKey(tr.ID))
+                if (_pmdCache.ContainsKey(tr.ExportGuid))
                 {
-                    result = _pmdCache[tr.ID];
+                    result = _pmdCache[tr.ExportGuid];
                 }
                 tr = tr.Parent;
             }
@@ -367,7 +367,7 @@ namespace Kistl.App.Extensions
 
     internal class ViewModelDescriptorCache : Cache
     {
-        private Dictionary<int, ViewModelDescriptor> _cache = null;
+        private Dictionary<Guid, ViewModelDescriptor> _cache = null;
         private IReadOnlyKistlContext _context = null;
 
         public ViewModelDescriptorCache(IReadOnlyKistlContext ctx)
@@ -380,15 +380,15 @@ namespace Kistl.App.Extensions
         {
             _cache = _context
                 .GetQuery<ViewModelDescriptor>()
-                .ToDictionary(obj => obj.ViewModelRef.ID);
+                .ToDictionary(obj => obj.ViewModelRef.ExportGuid);
         }
 
-        public bool ContainsKey(int key)
+        public bool ContainsKey(Guid key)
         {
             return _cache.ContainsKey(key);
         }
 
-        public ViewModelDescriptor this[int key]
+        public ViewModelDescriptor this[Guid key]
         {
             get
             {

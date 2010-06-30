@@ -27,6 +27,7 @@ namespace Kistl.DalProvider.Memory.Generator
             _server = server;
         }
 
+        // TODO: #1569 Why not using const Suffix?
         public override string ExtraSuffix { get { return "Memory"; } }
         public override string Description { get { return ExtraSuffix; } }
         public override string TargetNameSpace { get { return "Kistl.Objects." + ExtraSuffix; } }

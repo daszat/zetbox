@@ -61,8 +61,13 @@ namespace Kistl.Client.WPF
             var builder = Kistl.API.Utils.AutoFacBuilder.CreateContainerBuilder(config, config.Client.Modules);
             
             builder
-                .RegisterType<Launcher>()
-                .SingleInstance();
+                .Register<Launcher>(c => new Launcher(
+                    c.Resolve<IKistlContext>(), 
+                    c.Resolve<Func<IKistlContext>>(), 
+                    c.Resolve<IModelFactory>(), 
+                    c.Resolve<IReadOnlyKistlContext>(Kistl.API.Helper.FrozenContextServiceName)
+                    )
+                ).SingleInstance();
 
             builder
                 .RegisterType<Kistl.Client.WPF.View.VisualTypeTemplateSelector>()

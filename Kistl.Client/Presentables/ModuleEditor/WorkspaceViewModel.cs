@@ -8,6 +8,7 @@ using Kistl.App.Base;
 using Kistl.App.Extensions;
 using Kistl.Client.Presentables.KistlBase;
 using Kistl.App.GUI;
+using ObjectEditorWorkspace = Kistl.Client.Presentables.ObjectEditor.WorkspaceViewModel;
 
 namespace Kistl.Client.Presentables.ModuleEditor
 {
@@ -15,9 +16,12 @@ namespace Kistl.Client.Presentables.ModuleEditor
     {
         public new delegate WorkspaceViewModel Factory(IKistlContext dataCtx);
 
-        public WorkspaceViewModel(IViewModelDependencies appCtx, IKistlContext dataCtx)
+        protected readonly Func<IKistlContext> ctxFactory;
+
+        public WorkspaceViewModel(IViewModelDependencies appCtx, IKistlContext dataCtx, Func<IKistlContext> ctxFactory)
             : base(appCtx, dataCtx)
         {
+            this.ctxFactory = ctxFactory;
             _CurrentModule = dataCtx.GetQuery<Module>().FirstOrDefault();
         }
 
@@ -158,6 +162,49 @@ namespace Kistl.Client.Presentables.ModuleEditor
                     OnPropertyChanged("SelectedItem");
                 }
             }
+        }
+
+        private ICommand _NewModuleCommand = null;
+        public ICommand NewModuleCommand
+        {
+            get
+            {
+                if (_NewModuleCommand == null)
+                {
+                    _NewModuleCommand = ModelFactory.CreateViewModel<SimpleCommandModel.Factory>().Invoke(DataContext, "New Module", "Creates a new Module", () => CreateNewModule(), null);
+                }
+                return _NewModuleCommand;
+            }
+        }
+
+        private ICommand _RefreshCommand = null;
+        public ICommand RefreshCommand
+        {
+            get
+            {
+                if (_RefreshCommand == null)
+                {
+                    _RefreshCommand = ModelFactory.CreateViewModel<SimpleCommandModel.Factory>().Invoke(DataContext, "Refresh", "Refresh", () => Refresh(), null);
+                }
+                return _RefreshCommand;
+            }
+        }
+
+        public void Refresh()
+        {
+            _modules = null;
+            OnPropertyChanged("ModuleList");
+            OnPropertyChanged("TreeItems");
+        }
+
+        public void CreateNewModule()
+        {
+            var newCtx = ctxFactory();
+            var newWorkspace = ModelFactory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(newCtx);
+            var newObj = newCtx.Create<Module>();
+
+            newWorkspace.ShowForeignModel(ModelFactory.CreateViewModel<DataObjectModel.Factory>(newObj).Invoke(newCtx, newObj));
+            ModelFactory.ShowModel(newWorkspace, true);
         }
     }
 }
