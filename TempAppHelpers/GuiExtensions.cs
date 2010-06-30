@@ -63,13 +63,19 @@ namespace Kistl.App.Extensions
             #endregion
 
             // If the ViewModel has a more specific DefaultKind respect its choice
-            if (self.DefaultKind != null && self.DefaultKind.AndParents().Contains(requestedControlKind))
+            if (self.DefaultKind != null 
+                && self.DefaultKind.AndParents().Select(i => i.ExportGuid).Contains(requestedControlKind.ExportGuid))
             {
                 requestedControlKind = self.DefaultKind;
             }
             else
             {
-                requestedControlKind = self.SecondaryControlKinds.FirstOrDefault(sck => sck.AndParents().Contains(requestedControlKind)) ?? requestedControlKind;
+                requestedControlKind = self.SecondaryControlKinds
+                    .FirstOrDefault(
+                        sck => sck.AndParents()
+                                .Select(i => i.ExportGuid)
+                                .Contains(requestedControlKind.ExportGuid)
+                    ) ?? requestedControlKind;
             }
 
             ViewDescriptor result = null;
@@ -337,12 +343,12 @@ namespace Kistl.App.Extensions
                         Toolkit tk,
                         ControlKind ck)
             {
-                this.vmd = vmd;
+                this.vmd = vmd.ExportGuid;
                 this.tk = tk;
                 this.ck = ck != null ? ck.ExportGuid : Guid.Empty;
             }
 
-            private readonly TypeRef vmd;
+            private readonly Guid vmd;
             private readonly Toolkit tk;
             private readonly Guid ck;
 
@@ -357,8 +363,8 @@ namespace Kistl.App.Extensions
 
             public override int GetHashCode()
             {
-                return vmd.AsType(true).GetHashCode()
-                    + (ck != null ? ck.GetHashCode() : 0)
+                return vmd.GetHashCode()
+                    + ck.GetHashCode()
                     + (int)this.tk;
             }
         }
