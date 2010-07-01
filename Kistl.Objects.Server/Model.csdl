@@ -53,6 +53,8 @@
     <EntitySet Name="Relation" EntityType="Model.Relation" />
     <EntitySet Name="RelationEnd" EntityType="Model.RelationEnd" />
     <EntitySet Name="Semester" EntityType="Model.Semester" />
+    <EntitySet Name="SourceColumn" EntityType="Model.SourceColumn" />
+    <EntitySet Name="SourceTable" EntityType="Model.SourceTable" />
     <EntitySet Name="Student" EntityType="Model.Student" />
     <EntitySet Name="StudentExam" EntityType="Model.StudentExam" />
     <EntitySet Name="Task" EntityType="Model.Task" />
@@ -519,6 +521,10 @@
       <End Role="MethodOwner" EntitySet="DataType" />
       <End Role="MethodInvocations" EntitySet="MethodInvocation" />
     </AssociationSet>
+    <AssociationSet Name="FK_MigrationProject_has_SourceTables" Association="Model.FK_MigrationProject_has_SourceTables" >
+      <End Role="MigrationProject" EntitySet="MigrationProject" />
+      <End Role="SourceTables" EntitySet="SourceTable" />
+    </AssociationSet>
     <AssociationSet Name="FK_Mitarbeiter_is_a_Identity" Association="Model.FK_Mitarbeiter_is_a_Identity" >
       <End Role="Mitarbeiter" EntitySet="Mitarbeiter" />
       <End Role="Identity" EntitySet="Identity" />
@@ -674,6 +680,10 @@
     <AssociationSet Name="FK_RelationEnd_was_CreatedBy" Association="Model.FK_RelationEnd_was_CreatedBy" >
       <End Role="RelationEnd" EntitySet="RelationEnd" />
       <End Role="CreatedBy" EntitySet="Identity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SourceColumn_belongs_to_SourceTable" Association="Model.FK_SourceColumn_belongs_to_SourceTable" >
+      <End Role="SourceColumn" EntitySet="SourceColumn" />
+      <End Role="SourceTable" EntitySet="SourceTable" />
     </AssociationSet>
     <AssociationSet Name="FK_StudentExam_passes_Exam" Association="Model.FK_StudentExam_passes_Exam" >
       <End Role="StudentExam" EntitySet="StudentExam" />
@@ -1358,6 +1368,14 @@
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
     <Property Name="Description" Type="String" Nullable="false" MaxLength="250" />
+    <Property Name="EtlDestDatabasePrefix" Type="String" Nullable="true" MaxLength="200" />
+    <Property Name="EtlQuotePrefix" Type="String" Nullable="true" MaxLength="100" />
+    <Property Name="EtlQuoteSuffix" Type="String" Nullable="true" MaxLength="100" />
+    <Property Name="EtlSrcDatabasePrefix" Type="String" Nullable="true" MaxLength="200" />
+    <NavigationProperty Name="SourceTables__Implementation__"
+                        Relationship="Model.FK_MigrationProject_has_SourceTables"
+                        FromRole="MigrationProject"
+                        ToRole="SourceTables" />
     <Property Name="SrcConnectionString" Type="String" Nullable="false" MaxLength="250" />
     <Property Name="SrcProvider" Type="String" Nullable="false" MaxLength="50" />
   </EntityType>
@@ -1673,6 +1691,37 @@
                         FromRole="Semesters"
                         ToRole="CollectionEntry" />
     <Property Name="Year" Type="Int32" Nullable="true" />
+  </EntityType>
+  <EntityType Name="SourceColumn">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Comment" Type="String" Nullable="true" MaxLength="2147483647" />
+    <Property Name="DbType__Implementation__" Type="Int32" Nullable="false" />
+    <Property Name="Description" Type="String" Nullable="true" MaxLength="250" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="250" />
+    <NavigationProperty Name="SourceTable__Implementation__"
+                        Relationship="Model.FK_SourceColumn_belongs_to_SourceTable"
+                        FromRole="SourceColumn"
+                        ToRole="SourceTable" />
+  </EntityType>
+  <EntityType Name="SourceTable">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Comment" Type="String" Nullable="true" MaxLength="2147483647" />
+    <Property Name="Description" Type="String" Nullable="true" MaxLength="250" />
+    <NavigationProperty Name="MigrationProject__Implementation__"
+                        Relationship="Model.FK_MigrationProject_has_SourceTables"
+                        FromRole="SourceTables"
+                        ToRole="MigrationProject" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="250" />
+    <NavigationProperty Name="SourceColumn__Implementation__"
+                        Relationship="Model.FK_SourceColumn_belongs_to_SourceTable"
+                        FromRole="SourceTable"
+                        ToRole="SourceColumn" />
   </EntityType>
   <EntityType Name="Student">
     <Key>
@@ -3535,6 +3584,14 @@
          Type="Model.MethodInvocation" 
          Multiplicity="*" />
   </Association>
+  <Association Name="FK_MigrationProject_has_SourceTables" >
+    <End Role="MigrationProject"
+         Type="Model.MigrationProject" 
+         Multiplicity="0..1" />
+    <End Role="SourceTables"
+         Type="Model.SourceTable" 
+         Multiplicity="*" />
+  </Association>
   <Association Name="FK_Mitarbeiter_is_a_Identity" >
     <End Role="Mitarbeiter"
          Type="Model.Mitarbeiter" 
@@ -3845,6 +3902,14 @@
          Multiplicity="*" />
     <End Role="CreatedBy"
          Type="Model.Identity" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_SourceColumn_belongs_to_SourceTable" >
+    <End Role="SourceColumn"
+         Type="Model.SourceColumn" 
+         Multiplicity="*" />
+    <End Role="SourceTable"
+         Type="Model.SourceTable" 
          Multiplicity="0..1" />
   </Association>
   <Association Name="FK_StudentExam_passes_Exam" >

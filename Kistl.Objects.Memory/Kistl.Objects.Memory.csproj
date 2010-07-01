@@ -155,6 +155,8 @@
     <Compile Include="RelationEnd.Memory.Designer.cs" />
     <Compile Include="RoleMembership.Memory.Designer.cs" />
     <Compile Include="Semester.Memory.Designer.cs" />
+    <Compile Include="SourceColumn.Memory.Designer.cs" />
+    <Compile Include="SourceTable.Memory.Designer.cs" />
     <Compile Include="StaticFile.Memory.Designer.cs" />
     <Compile Include="StringParameter.Memory.Designer.cs" />
     <Compile Include="StringProperty.Memory.Designer.cs" />

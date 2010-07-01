@@ -12,8 +12,9 @@ namespace ZBox.App.SchemaMigraion
 {
     public static class CustomServerActions_SchemaMigration
     {
-        //public static void OnUpdateFromSourceSchema_MigrationProject(ZBox.App.SchemaMigration.MigrationProject obj)
-        //{
-        //}
+        public static void OnUpdateFromSourceSchema_MigrationProject(ZBox.App.SchemaMigration.MigrationProject obj)
+        {
+
+        }
     }
 }

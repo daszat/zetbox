@@ -72,6 +72,7 @@
     <Compile Include="CustomClientActions_GUI.cs" />
     <Compile Include="CustomClientActions_KistlBase.TypeRefs.cs" />
     <Compile Include="CustomClientActions_Projekte.cs" />
+    <Compile Include="CustomClientActions_SchemaMigration.cs" />
     <Compile Include="CustomClientActions_Zeiterfassung.cs" />
     <Compile Include="Gui\PropertyActions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

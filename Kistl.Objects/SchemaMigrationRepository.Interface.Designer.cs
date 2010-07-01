@@ -16,6 +16,26 @@ namespace ZBox.App.SchemaMigration
 		
 		public IKistlContext Context { get; private set; }
 		
+		/// <summary>List of all SourceTable</summary>
+		/// 
+		public IQueryable<SourceTable> SourceTables
+		{ 
+			get
+			{
+				return Context.GetQuery<SourceTable>();
+			}
+		}
+		
+		/// <summary>List of all SourceColumn</summary>
+		/// 
+		public IQueryable<SourceColumn> SourceColumns
+		{ 
+			get
+			{
+				return Context.GetQuery<SourceColumn>();
+			}
+		}
+		
 		/// <summary>List of all MigrationProject</summary>
 		/// Defines a Schema Migration Project
 		public IQueryable<MigrationProject> MigrationProjects

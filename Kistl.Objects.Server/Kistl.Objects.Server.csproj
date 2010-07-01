@@ -164,6 +164,8 @@
     <Compile Include="RelationEnd.Server.Designer.cs" />
     <Compile Include="RoleMembership.Server.Designer.cs" />
     <Compile Include="Semester.Server.Designer.cs" />
+    <Compile Include="SourceColumn.Server.Designer.cs" />
+    <Compile Include="SourceTable.Server.Designer.cs" />
     <Compile Include="StaticFile.Server.Designer.cs" />
     <Compile Include="StringParameter.Server.Designer.cs" />
     <Compile Include="StringProperty.Server.Designer.cs" />

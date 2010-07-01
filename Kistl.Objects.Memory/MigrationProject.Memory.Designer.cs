@@ -88,6 +88,241 @@ namespace ZBox.App.SchemaMigration
 		public static event PropertyPostSetterHandler<ZBox.App.SchemaMigration.MigrationProject, string> OnDescription_PostSetter;
 
         /// <summary>
+        /// [DestDatabase].[dbo].
+        /// </summary>
+        // value type property
+           // Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingDataProperty
+        public virtual string EtlDestDatabasePrefix
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _EtlDestDatabasePrefix;
+                if (OnEtlDestDatabasePrefix_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<string>(__result);
+                    OnEtlDestDatabasePrefix_Getter(this, __e);
+                    __result = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_EtlDestDatabasePrefix != value)
+                {
+                    var __oldValue = _EtlDestDatabasePrefix;
+                    var __newValue = value;
+                    if(OnEtlDestDatabasePrefix_PreSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
+                        OnEtlDestDatabasePrefix_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("EtlDestDatabasePrefix", __oldValue, __newValue);
+                    _EtlDestDatabasePrefix = __newValue;
+                    NotifyPropertyChanged("EtlDestDatabasePrefix", __oldValue, __newValue);
+                    if(OnEtlDestDatabasePrefix_PostSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
+                        OnEtlDestDatabasePrefix_PostSetter(this, __e);
+                    }
+                }
+            }
+        }
+        private string _EtlDestDatabasePrefix;
+		public static event PropertyGetterHandler<ZBox.App.SchemaMigration.MigrationProject, string> OnEtlDestDatabasePrefix_Getter;
+		public static event PropertyPreSetterHandler<ZBox.App.SchemaMigration.MigrationProject, string> OnEtlDestDatabasePrefix_PreSetter;
+		public static event PropertyPostSetterHandler<ZBox.App.SchemaMigration.MigrationProject, string> OnEtlDestDatabasePrefix_PostSetter;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        // value type property
+           // Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingDataProperty
+        public virtual string EtlQuotePrefix
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _EtlQuotePrefix;
+                if (OnEtlQuotePrefix_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<string>(__result);
+                    OnEtlQuotePrefix_Getter(this, __e);
+                    __result = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_EtlQuotePrefix != value)
+                {
+                    var __oldValue = _EtlQuotePrefix;
+                    var __newValue = value;
+                    if(OnEtlQuotePrefix_PreSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
+                        OnEtlQuotePrefix_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("EtlQuotePrefix", __oldValue, __newValue);
+                    _EtlQuotePrefix = __newValue;
+                    NotifyPropertyChanged("EtlQuotePrefix", __oldValue, __newValue);
+                    if(OnEtlQuotePrefix_PostSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
+                        OnEtlQuotePrefix_PostSetter(this, __e);
+                    }
+                }
+            }
+        }
+        private string _EtlQuotePrefix;
+		public static event PropertyGetterHandler<ZBox.App.SchemaMigration.MigrationProject, string> OnEtlQuotePrefix_Getter;
+		public static event PropertyPreSetterHandler<ZBox.App.SchemaMigration.MigrationProject, string> OnEtlQuotePrefix_PreSetter;
+		public static event PropertyPostSetterHandler<ZBox.App.SchemaMigration.MigrationProject, string> OnEtlQuotePrefix_PostSetter;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        // value type property
+           // Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingDataProperty
+        public virtual string EtlQuoteSuffix
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _EtlQuoteSuffix;
+                if (OnEtlQuoteSuffix_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<string>(__result);
+                    OnEtlQuoteSuffix_Getter(this, __e);
+                    __result = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_EtlQuoteSuffix != value)
+                {
+                    var __oldValue = _EtlQuoteSuffix;
+                    var __newValue = value;
+                    if(OnEtlQuoteSuffix_PreSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
+                        OnEtlQuoteSuffix_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("EtlQuoteSuffix", __oldValue, __newValue);
+                    _EtlQuoteSuffix = __newValue;
+                    NotifyPropertyChanged("EtlQuoteSuffix", __oldValue, __newValue);
+                    if(OnEtlQuoteSuffix_PostSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
+                        OnEtlQuoteSuffix_PostSetter(this, __e);
+                    }
+                }
+            }
+        }
+        private string _EtlQuoteSuffix;
+		public static event PropertyGetterHandler<ZBox.App.SchemaMigration.MigrationProject, string> OnEtlQuoteSuffix_Getter;
+		public static event PropertyPreSetterHandler<ZBox.App.SchemaMigration.MigrationProject, string> OnEtlQuoteSuffix_PreSetter;
+		public static event PropertyPostSetterHandler<ZBox.App.SchemaMigration.MigrationProject, string> OnEtlQuoteSuffix_PostSetter;
+
+        /// <summary>
+        /// [SrcDatabase].[dbo].
+        /// </summary>
+        // value type property
+           // Kistl.Server.Generators.Templates.Implementation.ObjectClasses.NotifyingDataProperty
+        public virtual string EtlSrcDatabasePrefix
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _EtlSrcDatabasePrefix;
+                if (OnEtlSrcDatabasePrefix_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<string>(__result);
+                    OnEtlSrcDatabasePrefix_Getter(this, __e);
+                    __result = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_EtlSrcDatabasePrefix != value)
+                {
+                    var __oldValue = _EtlSrcDatabasePrefix;
+                    var __newValue = value;
+                    if(OnEtlSrcDatabasePrefix_PreSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
+                        OnEtlSrcDatabasePrefix_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("EtlSrcDatabasePrefix", __oldValue, __newValue);
+                    _EtlSrcDatabasePrefix = __newValue;
+                    NotifyPropertyChanged("EtlSrcDatabasePrefix", __oldValue, __newValue);
+                    if(OnEtlSrcDatabasePrefix_PostSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
+                        OnEtlSrcDatabasePrefix_PostSetter(this, __e);
+                    }
+                }
+            }
+        }
+        private string _EtlSrcDatabasePrefix;
+		public static event PropertyGetterHandler<ZBox.App.SchemaMigration.MigrationProject, string> OnEtlSrcDatabasePrefix_Getter;
+		public static event PropertyPreSetterHandler<ZBox.App.SchemaMigration.MigrationProject, string> OnEtlSrcDatabasePrefix_PreSetter;
+		public static event PropertyPostSetterHandler<ZBox.App.SchemaMigration.MigrationProject, string> OnEtlSrcDatabasePrefix_PostSetter;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        // object list property
+        // ApplyObjectListPropertyTemplate
+		// Kistl.DalProvider.Memory.Generator.Implementation.ObjectClasses.ObjectListProperty
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public ICollection<ZBox.App.SchemaMigration.SourceTable> SourceTables
+        {
+            get
+            {
+                if (_SourceTablesWrapper == null)
+                {
+                    List<ZBox.App.SchemaMigration.SourceTable> serverList;
+                    if (Helper.IsPersistedObject(this))
+                    {
+						serverList = Context.GetListOf<ZBox.App.SchemaMigration.SourceTable>(this, "SourceTables");
+					}
+                    else
+                    {
+                        serverList = new List<ZBox.App.SchemaMigration.SourceTable>();
+                    }
+                        
+                    _SourceTablesWrapper = new OneNRelationList<ZBox.App.SchemaMigration.SourceTable>(
+                        "MigrationProject",
+                        null,
+                        this,
+                        () => this.NotifyPropertyChanged("SourceTables", null, null),
+                        serverList);
+                }
+                return _SourceTablesWrapper;
+            }
+        }
+        
+        private OneNRelationList<ZBox.App.SchemaMigration.SourceTable> _SourceTablesWrapper;
+
+
+        /// <summary>
         /// Connectionstring for source database. Providerspecific
         /// </summary>
         // value type property
@@ -188,6 +423,27 @@ namespace ZBox.App.SchemaMigration
         /// <summary>
         /// 
         /// </summary>
+		[EventBasedMethod("OnCreateEtlStatements_MigrationProject")]
+		public virtual void CreateEtlStatements() 
+		{
+            // base.CreateEtlStatements();
+            if (OnCreateEtlStatements_MigrationProject != null)
+            {
+				OnCreateEtlStatements_MigrationProject(this);
+			}
+			else
+			{
+                throw new NotImplementedException("No handler registered on MigrationProject.CreateEtlStatements");
+			}
+        }
+		public delegate void CreateEtlStatements_Handler<T>(T obj);
+		public static event CreateEtlStatements_Handler<MigrationProject> OnCreateEtlStatements_MigrationProject;
+
+
+
+        /// <summary>
+        /// 
+        /// </summary>
 		[EventBasedMethod("OnUpdateFromSourceSchema_MigrationProject")]
 		public virtual void UpdateFromSourceSchema() 
 		{
@@ -219,6 +475,10 @@ namespace ZBox.App.SchemaMigration
 			var me = (MigrationProject)this;
 
 			me.Description = other.Description;
+			me.EtlDestDatabasePrefix = other.EtlDestDatabasePrefix;
+			me.EtlQuotePrefix = other.EtlQuotePrefix;
+			me.EtlQuoteSuffix = other.EtlQuoteSuffix;
+			me.EtlSrcDatabasePrefix = other.EtlSrcDatabasePrefix;
 			me.SrcConnectionString = other.SrcConnectionString;
 			me.SrcProvider = other.SrcProvider;
 		}
@@ -308,6 +568,46 @@ namespace ZBox.App.SchemaMigration
 					// else
 					new CustomPropertyDescriptor<MigrationProject__Implementation__Memory, string>(
 						lazyCtx,
+						new Guid("04ce9592-fbe8-414a-bca7-8dc1961122f9"),
+						"EtlDestDatabasePrefix",
+						null,
+						obj => obj.EtlDestDatabasePrefix,
+						(obj, val) => obj.EtlDestDatabasePrefix = val),
+					// else
+					new CustomPropertyDescriptor<MigrationProject__Implementation__Memory, string>(
+						lazyCtx,
+						new Guid("8682ff1d-4c6a-4a70-8716-99c358d50ee7"),
+						"EtlQuotePrefix",
+						null,
+						obj => obj.EtlQuotePrefix,
+						(obj, val) => obj.EtlQuotePrefix = val),
+					// else
+					new CustomPropertyDescriptor<MigrationProject__Implementation__Memory, string>(
+						lazyCtx,
+						new Guid("b0518a54-8e0d-4b4a-af6e-f82719d587c4"),
+						"EtlQuoteSuffix",
+						null,
+						obj => obj.EtlQuoteSuffix,
+						(obj, val) => obj.EtlQuoteSuffix = val),
+					// else
+					new CustomPropertyDescriptor<MigrationProject__Implementation__Memory, string>(
+						lazyCtx,
+						new Guid("3ab01bc5-d467-4aa0-b14e-95915e03d526"),
+						"EtlSrcDatabasePrefix",
+						null,
+						obj => obj.EtlSrcDatabasePrefix,
+						(obj, val) => obj.EtlSrcDatabasePrefix = val),
+					// property.IsAssociation() && !property.IsObjectReferencePropertySingle()
+					new CustomPropertyDescriptor<MigrationProject__Implementation__Memory, ICollection<ZBox.App.SchemaMigration.SourceTable>>(
+						lazyCtx,
+						new Guid("903d377b-7039-4549-8f2a-88ecf38558e6"),
+						"SourceTables",
+						null,
+						obj => obj.SourceTables,
+						null), // lists are read-only properties
+					// else
+					new CustomPropertyDescriptor<MigrationProject__Implementation__Memory, string>(
+						lazyCtx,
 						new Guid("bfa19150-0c51-48c0-b21d-f4eae2a2e801"),
 						"SrcConnectionString",
 						null,
@@ -321,6 +621,7 @@ namespace ZBox.App.SchemaMigration
 						null,
 						obj => obj.SrcProvider,
 						(obj, val) => obj.SrcProvider = val),
+					// rel: MigrationProject has SourceTables (daf3f4eb-21bc-4ad1-87f1-aef06ade1281)
 				};
 			}
 		}
@@ -342,6 +643,10 @@ namespace ZBox.App.SchemaMigration
             
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             BinarySerializer.ToStream(this._Description, binStream);
+            BinarySerializer.ToStream(this._EtlDestDatabasePrefix, binStream);
+            BinarySerializer.ToStream(this._EtlQuotePrefix, binStream);
+            BinarySerializer.ToStream(this._EtlQuoteSuffix, binStream);
+            BinarySerializer.ToStream(this._EtlSrcDatabasePrefix, binStream);
             BinarySerializer.ToStream(this._SrcConnectionString, binStream);
             BinarySerializer.ToStream(this._SrcProvider, binStream);
         }
@@ -351,6 +656,10 @@ namespace ZBox.App.SchemaMigration
             
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._Description, binStream);
+            BinarySerializer.FromStream(out this._EtlDestDatabasePrefix, binStream);
+            BinarySerializer.FromStream(out this._EtlQuotePrefix, binStream);
+            BinarySerializer.FromStream(out this._EtlQuoteSuffix, binStream);
+            BinarySerializer.FromStream(out this._EtlSrcDatabasePrefix, binStream);
             BinarySerializer.FromStream(out this._SrcConnectionString, binStream);
             BinarySerializer.FromStream(out this._SrcProvider, binStream);
         }
@@ -360,6 +669,10 @@ namespace ZBox.App.SchemaMigration
             
             base.ToStream(xml);
             XmlStreamer.ToStream(this._Description, xml, "Description", "ZBox.App.SchemaMigration");
+            XmlStreamer.ToStream(this._EtlDestDatabasePrefix, xml, "EtlDestDatabasePrefix", "ZBox.App.SchemaMigration");
+            XmlStreamer.ToStream(this._EtlQuotePrefix, xml, "EtlQuotePrefix", "ZBox.App.SchemaMigration");
+            XmlStreamer.ToStream(this._EtlQuoteSuffix, xml, "EtlQuoteSuffix", "ZBox.App.SchemaMigration");
+            XmlStreamer.ToStream(this._EtlSrcDatabasePrefix, xml, "EtlSrcDatabasePrefix", "ZBox.App.SchemaMigration");
             XmlStreamer.ToStream(this._SrcConnectionString, xml, "SrcConnectionString", "ZBox.App.SchemaMigration");
             XmlStreamer.ToStream(this._SrcProvider, xml, "SrcProvider", "ZBox.App.SchemaMigration");
         }
@@ -369,6 +682,10 @@ namespace ZBox.App.SchemaMigration
             
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._Description, xml, "Description", "ZBox.App.SchemaMigration");
+            XmlStreamer.FromStream(ref this._EtlDestDatabasePrefix, xml, "EtlDestDatabasePrefix", "ZBox.App.SchemaMigration");
+            XmlStreamer.FromStream(ref this._EtlQuotePrefix, xml, "EtlQuotePrefix", "ZBox.App.SchemaMigration");
+            XmlStreamer.FromStream(ref this._EtlQuoteSuffix, xml, "EtlQuoteSuffix", "ZBox.App.SchemaMigration");
+            XmlStreamer.FromStream(ref this._EtlSrcDatabasePrefix, xml, "EtlSrcDatabasePrefix", "ZBox.App.SchemaMigration");
             XmlStreamer.FromStream(ref this._SrcConnectionString, xml, "SrcConnectionString", "ZBox.App.SchemaMigration");
             XmlStreamer.FromStream(ref this._SrcProvider, xml, "SrcProvider", "ZBox.App.SchemaMigration");
         }

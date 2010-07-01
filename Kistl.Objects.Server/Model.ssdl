@@ -57,6 +57,8 @@
     <EntitySet Name="Relation" EntityType="Model.Store.Relation" Table="Relations"/>
     <EntitySet Name="RelationEnd" EntityType="Model.Store.RelationEnd" Table="RelationEnds"/>
     <EntitySet Name="Semester" EntityType="Model.Store.Semester" Table="Semesters"/>
+    <EntitySet Name="SourceColumn" EntityType="Model.Store.SourceColumn" Table="SourceColumns"/>
+    <EntitySet Name="SourceTable" EntityType="Model.Store.SourceTable" Table="SourceTables"/>
     <EntitySet Name="Student" EntityType="Model.Store.Student" Table="Students"/>
     <EntitySet Name="StudentExam" EntityType="Model.Store.StudentExam" Table="StudentExams"/>
     <EntitySet Name="Task" EntityType="Model.Store.Task" Table="Tasks"/>
@@ -868,6 +870,10 @@
       <End Role="MethodOwner" EntitySet="DataType" />
       <End Role="MethodInvocations" EntitySet="MethodInvocation" />
     </AssociationSet>
+    <AssociationSet Name="FK_MigrationProject_has_SourceTables" Association="Model.Store.FK_MigrationProject_has_SourceTables" >
+      <End Role="MigrationProject" EntitySet="MigrationProject" />
+      <End Role="SourceTables" EntitySet="SourceTable" />
+    </AssociationSet>
     <AssociationSet Name="FK_Mitarbeiter_is_a_Identity" Association="Model.Store.FK_Mitarbeiter_is_a_Identity" >
       <End Role="Mitarbeiter" EntitySet="Mitarbeiter" />
       <End Role="Identity" EntitySet="Identity" />
@@ -1023,6 +1029,10 @@
     <AssociationSet Name="FK_RelationEnd_was_CreatedBy" Association="Model.Store.FK_RelationEnd_was_CreatedBy" >
       <End Role="RelationEnd" EntitySet="RelationEnd" />
       <End Role="CreatedBy" EntitySet="Identity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SourceColumn_belongs_to_SourceTable" Association="Model.Store.FK_SourceColumn_belongs_to_SourceTable" >
+      <End Role="SourceColumn" EntitySet="SourceColumn" />
+      <End Role="SourceTable" EntitySet="SourceTable" />
     </AssociationSet>
     <AssociationSet Name="FK_StudentExam_passes_Exam" Association="Model.Store.FK_StudentExam_passes_Exam" >
       <End Role="StudentExam" EntitySet="StudentExam" />
@@ -1692,6 +1702,10 @@
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="Description" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="EtlDestDatabasePrefix" Type="nvarchar" MaxLength="200" Nullable="true" />
+    <Property Name="EtlQuotePrefix" Type="nvarchar" MaxLength="100" Nullable="true" />
+    <Property Name="EtlQuoteSuffix" Type="nvarchar" MaxLength="100" Nullable="true" />
+    <Property Name="EtlSrcDatabasePrefix" Type="nvarchar" MaxLength="200" Nullable="true" />
     <Property Name="SrcConnectionString" Type="nvarchar" MaxLength="250" Nullable="false" />
     <Property Name="SrcProvider" Type="nvarchar" MaxLength="50" Nullable="false" />
   </EntityType>
@@ -1928,6 +1942,29 @@
     <Property Name="CourseName" Type="nvarchar" MaxLength="1000" Nullable="false" />
     <Property Name="Period" Type="int" Nullable="true" />
     <Property Name="Year" Type="int" Nullable="true" />
+  </EntityType>
+	
+  <EntityType Name="SourceColumn">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_SourceTable" Type="int" />
+    <Property Name="Comment" Type="nvarchar" Nullable="true" />
+    <Property Name="DbType" Type="int" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="250" Nullable="true" />
+    <Property Name="Name" Type="nvarchar" MaxLength="250" Nullable="false" />
+  </EntityType>
+	
+  <EntityType Name="SourceTable">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_MigrationProject" Type="int" />
+    <Property Name="Comment" Type="nvarchar" Nullable="true" />
+    <Property Name="Description" Type="nvarchar" MaxLength="250" Nullable="true" />
+    <Property Name="Name" Type="nvarchar" MaxLength="250" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="StaticFile">
@@ -3809,6 +3846,20 @@
   </Association>
 
 
+  <Association Name="FK_MigrationProject_has_SourceTables">
+    <End Role="MigrationProject" Type="Model.Store.MigrationProject" Multiplicity="0..1" />
+    <End Role="SourceTables" Type="Model.Store.SourceTable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MigrationProject">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SourceTables">
+        <PropertyRef Name="fk_MigrationProject" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
   <Association Name="FK_Mitarbeiter_is_a_Identity">
     <End Role="Identity" Type="Model.Store.Identity" Multiplicity="0..1" />
     <End Role="Mitarbeiter" Type="Model.Store.Mitarbeiter" Multiplicity="*" />
@@ -4350,6 +4401,20 @@
       </Principal>
       <Dependent Role="RelationEnd">
         <PropertyRef Name="fk_CreatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_SourceColumn_belongs_to_SourceTable">
+    <End Role="SourceTable" Type="Model.Store.SourceTable" Multiplicity="0..1" />
+    <End Role="SourceColumn" Type="Model.Store.SourceColumn" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SourceTable">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SourceColumn">
+        <PropertyRef Name="fk_SourceTable" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

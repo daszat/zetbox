@@ -21,6 +21,39 @@ namespace ZBox.App.SchemaMigration
 			set;
 		}
         /// <summary>
+        /// [DestDatabase].[dbo].
+        /// </summary>
+		string EtlDestDatabasePrefix {
+			get;
+			set;
+		}
+        /// <summary>
+        /// 
+        /// </summary>
+		string EtlQuotePrefix {
+			get;
+			set;
+		}
+        /// <summary>
+        /// 
+        /// </summary>
+		string EtlQuoteSuffix {
+			get;
+			set;
+		}
+        /// <summary>
+        /// [SrcDatabase].[dbo].
+        /// </summary>
+		string EtlSrcDatabasePrefix {
+			get;
+			set;
+		}
+        /// <summary>
+        /// 
+        /// </summary>
+
+        ICollection<ZBox.App.SchemaMigration.SourceTable> SourceTables { get; }
+        /// <summary>
         /// Connectionstring for source database. Providerspecific
         /// </summary>
 		string SrcConnectionString {
@@ -34,6 +67,10 @@ namespace ZBox.App.SchemaMigration
 			get;
 			set;
 		}
+        /// <summary>
+        /// 
+        /// </summary>
+		 void CreateEtlStatements() ;
         /// <summary>
         /// 
         /// </summary>

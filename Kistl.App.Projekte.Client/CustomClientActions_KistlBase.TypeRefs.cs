@@ -23,7 +23,16 @@ namespace Kistl.App.Base
             if (e.Result == null)
             {
                 // Try ReflectionOnly
-                var a = System.Reflection.Assembly.ReflectionOnlyLoad(obj.Assembly.Name);
+                System.Reflection.Assembly a = null;
+                try
+                {
+                    a = System.Reflection.Assembly.ReflectionOnlyLoad(obj.Assembly.Name);
+                }
+                catch
+                {
+                    if (throwOnError) throw;
+                    return;
+                }
                 e.Result = a.GetType(obj.FullName, throwOnError);
             }
 

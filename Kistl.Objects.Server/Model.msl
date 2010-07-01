@@ -468,6 +468,10 @@
 	    <MappingFragment StoreEntitySet="MigrationProject">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="Description" ColumnName="Description" />
+<ScalarProperty Name="EtlDestDatabasePrefix" ColumnName="EtlDestDatabasePrefix" />
+<ScalarProperty Name="EtlQuotePrefix" ColumnName="EtlQuotePrefix" />
+<ScalarProperty Name="EtlQuoteSuffix" ColumnName="EtlQuoteSuffix" />
+<ScalarProperty Name="EtlSrcDatabasePrefix" ColumnName="EtlSrcDatabasePrefix" />
 <ScalarProperty Name="SrcConnectionString" ColumnName="SrcConnectionString" />
 <ScalarProperty Name="SrcProvider" ColumnName="SrcProvider" />
 	    </MappingFragment>
@@ -679,6 +683,27 @@
 <ScalarProperty Name="CourseName" ColumnName="CourseName" />
 <ScalarProperty Name="Period__Implementation__" ColumnName="Period" />
 <ScalarProperty Name="Year" ColumnName="Year" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SourceColumn">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.SourceColumn)">
+	    <MappingFragment StoreEntitySet="SourceColumn">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="Comment" ColumnName="Comment" />
+<ScalarProperty Name="DbType__Implementation__" ColumnName="DbType" />
+<ScalarProperty Name="Description" ColumnName="Description" />
+<ScalarProperty Name="Name" ColumnName="Name" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SourceTable">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.SourceTable)">
+	    <MappingFragment StoreEntitySet="SourceTable">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="Comment" ColumnName="Comment" />
+<ScalarProperty Name="Description" ColumnName="Description" />
+<ScalarProperty Name="Name" ColumnName="Name" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -2688,6 +2713,23 @@
       <Condition ColumnName="fk_MethodOwner" IsNull="false"/>
     </AssociationSetMapping>
     <!--
+    Relation: FK_MigrationProject_has_SourceTables
+    A: One MigrationProject as MigrationProject
+    B: ZeroOrMore SourceTable as SourceTables
+    Preferred Storage: MergeIntoB
+    -->
+    <AssociationSetMapping Name="FK_MigrationProject_has_SourceTables"
+                           TypeName="Model.FK_MigrationProject_has_SourceTables"
+                           StoreEntitySet="SourceTable" >
+      <EndProperty Name="MigrationProject">
+        <ScalarProperty Name="ID" ColumnName="fk_MigrationProject"/>
+      </EndProperty>
+      <EndProperty Name="SourceTables">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_MigrationProject" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
     Relation: FK_Mitarbeiter_is_a_Identity
     A: ZeroOrOne Mitarbeiter as Mitarbeiter
     B: ZeroOrOne Identity as Identity
@@ -3349,6 +3391,23 @@
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="fk_CreatedBy" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_SourceColumn_belongs_to_SourceTable
+    A: ZeroOrMore SourceColumn as SourceColumn
+    B: One SourceTable as SourceTable
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_SourceColumn_belongs_to_SourceTable"
+                           TypeName="Model.FK_SourceColumn_belongs_to_SourceTable"
+                           StoreEntitySet="SourceColumn" >
+      <EndProperty Name="SourceTable">
+        <ScalarProperty Name="ID" ColumnName="fk_SourceTable"/>
+      </EndProperty>
+      <EndProperty Name="SourceColumn">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_SourceTable" IsNull="false"/>
     </AssociationSetMapping>
     <!--
     Relation: FK_StudentExam_passes_Exam

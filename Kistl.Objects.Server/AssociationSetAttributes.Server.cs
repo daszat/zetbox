@@ -1073,6 +1073,21 @@ using Kistl.DalProvider.EF;
 
 
 	/*
+    Relation: FK_MigrationProject_has_SourceTables
+    A: One MigrationProject as MigrationProject
+    B: ZeroOrMore SourceTable as SourceTables
+    Preferred Storage: MergeIntoB
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_MigrationProject_has_SourceTables",
+    "MigrationProject", RelationshipMultiplicity.ZeroOrOne, typeof(ZBox.App.SchemaMigration.MigrationProject__Implementation__),
+    "SourceTables", RelationshipMultiplicity.Many, typeof(ZBox.App.SchemaMigration.SourceTable__Implementation__)
+    )]
+
+
+	/*
     Relation: FK_Mitarbeiter_is_a_Identity
     A: ZeroOrOne Mitarbeiter as Mitarbeiter
     B: ZeroOrOne Identity as Identity
@@ -1746,6 +1761,21 @@ using Kistl.DalProvider.EF;
     "Relations", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Relation__Implementation__),
     "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.RoleMembership_resolves_Relation_RelationEntry__Implementation__)
     )]
+
+	/*
+    Relation: FK_SourceColumn_belongs_to_SourceTable
+    A: ZeroOrMore SourceColumn as SourceColumn
+    B: One SourceTable as SourceTable
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_SourceColumn_belongs_to_SourceTable",
+    "SourceColumn", RelationshipMultiplicity.Many, typeof(ZBox.App.SchemaMigration.SourceColumn__Implementation__),
+    "SourceTable", RelationshipMultiplicity.ZeroOrOne, typeof(ZBox.App.SchemaMigration.SourceTable__Implementation__)
+    )]
+
 
 	/*
     Relation: FK_Student_füllt_aus_Testbogen
