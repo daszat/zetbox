@@ -190,6 +190,29 @@ namespace Kistl.Client.Presentables.ModuleEditor
             }
         }
 
+        private ICommand _EditCurrentModuleCommand = null;
+        public ICommand EditCurrentModuleCommand
+        {
+            get
+            {
+                if (_EditCurrentModuleCommand == null)
+                {
+                    _EditCurrentModuleCommand = ModelFactory.CreateViewModel<SimpleCommandModel.Factory>().Invoke(DataContext, "Edit Module", "Opens the Editor for the current module", () => EditCurrentModule(), null);
+                }
+                return _EditCurrentModuleCommand;
+            }
+        }
+
+        public void EditCurrentModule()
+        {
+            if (CurrentModule == null) return;
+            var newCtx = ctxFactory();
+            var newWorkspace = ModelFactory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(newCtx);
+
+            newWorkspace.ShowForeignModel(ModelFactory.CreateViewModel<DataObjectModel.Factory>(CurrentModule).Invoke(newCtx, CurrentModule));
+            ModelFactory.ShowModel(newWorkspace, true);
+        }
+
         public void Refresh()
         {
             _modules = null;

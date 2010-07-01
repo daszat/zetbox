@@ -11,7 +11,7 @@ using Kistl.Client.Presentables.KistlBase;
 namespace Kistl.Client.Presentables
 {
     public class DataObjectSelectionTaskModel
-        : ViewModel
+        : ViewModel, IRefreshCommandListener
     {
         public new delegate DataObjectSelectionTaskModel Factory(IKistlContext dataCtx,
             DataType type,

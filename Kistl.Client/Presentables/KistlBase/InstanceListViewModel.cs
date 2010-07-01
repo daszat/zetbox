@@ -96,7 +96,7 @@ namespace Kistl.Client.Presentables.KistlBase
                         foreach (var prop in t.Properties.Where(p => p.FilterConfiguration != null))
                         {
                             var cfg = prop.FilterConfiguration;
-                            _filter.Add(ModelFactory.CreateViewModel<PropertyFilterExpression.Factory>(cfg.ViewModelDescriptor.ViewModelRef.AsType(true)).Invoke(DataContext, prop, cfg));
+                            _filter.Add(ModelFactory.CreateViewModel<PropertyFilterExpressionFactory>(cfg.ViewModelDescriptor.ViewModelRef.AsType(true)).Invoke(DataContext, prop, cfg));
                         }
                         if(t is ObjectClass)
                         {

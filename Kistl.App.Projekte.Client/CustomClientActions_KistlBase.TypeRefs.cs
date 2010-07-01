@@ -19,7 +19,14 @@ namespace Kistl.App.Base
     {
         public static void OnAsType_TypeRef(TypeRef obj, MethodReturnEventArgs<Type> e, bool throwOnError)
         {
-            e.Result = Type.GetType(String.Format("{0}, {1}", obj.FullName, obj.Assembly.Name), throwOnError);
+            e.Result = Type.GetType(String.Format("{0}, {1}", obj.FullName, obj.Assembly.Name), false);
+            if (e.Result == null)
+            {
+                // Try ReflectionOnly
+                var a = System.Reflection.Assembly.ReflectionOnlyLoad(obj.Assembly.Name);
+                e.Result = a.GetType(obj.FullName, throwOnError);
+            }
+
             if (e.Result == null)
             {
                 return;
@@ -76,6 +83,9 @@ namespace Kistl.App.Base
                 foreach (var tr in newTypes.Values)
                 {
                     var type = tr.AsType(false);
+                    // Sorry, no support for that yet
+                    // http://blogs.msdn.com/b/kaevans/archive/2005/10/24/484186.aspx
+                    if (type.Assembly.ReflectionOnly) continue; 
                     if (type != null)
                     {
                         var attr = type.GetCustomAttributes(typeof(ViewModelDescriptorAttribute), false).FirstOrDefault() as ViewModelDescriptorAttribute;
@@ -106,6 +116,9 @@ namespace Kistl.App.Base
                 foreach (var tr in newTypes.Values)
                 {
                     var type = tr.AsType(false);
+                    // Sorry, no support for that yet
+                    // http://blogs.msdn.com/b/kaevans/archive/2005/10/24/484186.aspx
+                    if (type.Assembly.ReflectionOnly) continue;
                     if (type != null)
                     {
                         var attr = type.GetCustomAttributes(typeof(ViewDescriptorAttribute), false).FirstOrDefault() as ViewDescriptorAttribute;
@@ -175,7 +188,7 @@ namespace Kistl.App.Base
             using (Logging.Log.InfoTraceMethodCall("Loading new types"))
             {
                 var newTypes = System.Reflection.Assembly
-                    .Load(assembly.Name)
+                    .ReflectionOnlyLoad(assembly.Name)
                     .GetExportedTypes()
                     .Where(t => !t.IsGenericTypeDefinition)
                     .Select(t => t.ToRef(ctx, oldTypes))

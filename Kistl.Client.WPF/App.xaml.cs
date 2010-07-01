@@ -59,7 +59,8 @@ namespace Kistl.Client.WPF
         private IContainer CreateMasterContainer(KistlConfig config)
         {
             var builder = Kistl.API.Utils.AutoFacBuilder.CreateContainerBuilder(config, config.Client.Modules);
-            
+
+            // TODO: #1572: Discuss Interface IForzenContext to avoid complex component autofac registration.
             builder
                 .Register<Launcher>(c => new Launcher(
                     c.Resolve<IKistlContext>(), 
@@ -70,7 +71,8 @@ namespace Kistl.Client.WPF
                 ).SingleInstance();
 
             builder
-                .RegisterType<Kistl.Client.WPF.View.VisualTypeTemplateSelector>()
+                .Register<Kistl.Client.WPF.View.VisualTypeTemplateSelector>((c , p) => new Kistl.Client.WPF.View.VisualTypeTemplateSelector(
+                    p.Named<object>("requestedKind"), c.Resolve<IReadOnlyKistlContext>(Kistl.API.Helper.FrozenContextServiceName)))
                 .InstancePerDependency();
             
             return builder.Build();
@@ -108,7 +110,7 @@ namespace Kistl.Client.WPF
                 SplashScreen.SetInfo("Initializing Launcher");
 
                 // Init Resources
-                this.Resources["IconConverter"] = new IconConverter(config.Client.DocumentStore, container.Resolve<IReadOnlyKistlContext>());
+                this.Resources["IconConverter"] = new IconConverter(config.Client.DocumentStore, container.Resolve<IReadOnlyKistlContext>(Kistl.API.Helper.FrozenContextServiceName));
                 var templateSelectorFactory = container.Resolve<Kistl.Client.WPF.View.VisualTypeTemplateSelector.Factory>();
                 this.Resources["defaultTemplateSelector"] = templateSelectorFactory(null);
                 this.Resources["listItemTemplateSelector"] = templateSelectorFactory("Kistl.App.GUI.SingleLineDataObjectKind");

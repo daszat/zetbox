@@ -80,35 +80,16 @@ namespace Kistl.Client.Presentables.KistlBase
         }
 
         /// <summary>
-        /// Opens a dialog to let the user choose an assembly and the type references from that assembly.
-        /// </summary>
-        protected void ChooseAssemblyAndTypeRef()
-        {
-            var selectionTask = ModelFactory.CreateViewModel<DataObjectSelectionTaskModel.Factory>().Invoke(
-                DataContext,
-                null,
-                DataContext.GetQuery<Kistl.App.Base.Assembly>(),
-                new Action<DataObjectModel>(delegate(DataObjectModel chosen)
-                {
-                    if (chosen != null)
-                    {
-                        ChooseTypeRefFromAssembly(chosen.Object as Kistl.App.Base.Assembly);
-                    }
-                }),
-                null);
-            ModelFactory.ShowModel(selectionTask, true);
-        }
-
-        /// <summary>
         /// Opens a dialog to let the user choose a type references from the specified assembly.
         /// </summary>
         /// <param name="assembly">the assembly to choose from</param>
         protected void ChooseTypeRefFromAssembly(Kistl.App.Base.Assembly assembly)
         {
+            var regenerateCmd = ModelFactory.CreateViewModel<RegenerateTypeRefsCommand.Factory>().Invoke(DataContext, this);
             var selectionTask = ModelFactory.CreateViewModel<DataObjectSelectionTaskModel.Factory>().Invoke(
                 DataContext,
                 null,
-                GetTypeRefList(assembly),
+                DataContext.GetQuery<Kistl.App.Base.TypeRef>(),
                 new Action<DataObjectModel>(delegate(DataObjectModel chosen)
                 {
                     if (chosen != null)
@@ -116,40 +97,44 @@ namespace Kistl.Client.Presentables.KistlBase
                         this.Parent.Value = chosen;
                     }
                 }),
-                new List<CommandModel>() { ModelFactory.CreateViewModel<RegenerateTypeRefsCommand.Factory>().Invoke(DataContext, this, assembly) });
+                new List<CommandModel>() { regenerateCmd });
+            var filter = (ObjectReferencePropertyFilterExpressionViewModel)selectionTask.ListViewModel.Filter.OfType<IPropertyFilterExpression>().Single(i => i.Property.ExportGuid == new Guid("885BFA97-3D43-48BB-A0AA-1049298714FF"));
+            filter.Value = filter.PossibleValues.Cast<DataObjectModel>().FirstOrDefault(m => m.Object == assembly);
+            regenerateCmd.ListModel = selectionTask.ListViewModel;
             ModelFactory.ShowModel(selectionTask, true);
-        }
-
-        internal IQueryable GetTypeRefList(Kistl.App.Base.Assembly assembly)
-        {
-            return DataContext.GetQuery<Kistl.App.Base.TypeRef>().Where(tr => tr.Assembly.ID == assembly.ID);
-                                //.OrderBy(tr => tr.FullName);
         }
 
         private class RegenerateTypeRefsCommand : CommandModel
         {
-            public new delegate RegenerateTypeRefsCommand Factory(IKistlContext dataCtx, LoadTypeRefCommand outer, Kistl.App.Base.Assembly assembly);
+            public new delegate RegenerateTypeRefsCommand Factory(IKistlContext dataCtx, LoadTypeRefCommand outer);
 
-            private Kistl.App.Base.Assembly _assembly;
-            private LoadTypeRefCommand _outer;
+            public InstanceListViewModel ListModel { get; set; }
 
-            public RegenerateTypeRefsCommand(IViewModelDependencies appCtx, IKistlContext dataCtx, LoadTypeRefCommand outer, Kistl.App.Base.Assembly assembly)
+            public RegenerateTypeRefsCommand(IViewModelDependencies appCtx, IKistlContext dataCtx)
                 : base(appCtx, dataCtx, "Regenerate TypeRefs", "Regenerate TypeRefs")
             {
-                _outer = outer;
-                _assembly = assembly;
+            }
+
+            private Assembly FetchAssembly()
+            {
+                var filter = (ObjectReferencePropertyFilterExpressionViewModel)ListModel.Filter.OfType<IPropertyFilterExpression>().Single(i => i.Property.ExportGuid == new Guid("885BFA97-3D43-48BB-A0AA-1049298714FF"));
+                if (filter.Value == null) return null;
+                return (Assembly)filter.Value.Object;
             }
 
             public override bool CanExecute(object data)
             {
-                return data is DataObjectSelectionTaskModel;
+                return FetchAssembly() != null;
             }
 
             protected override void DoExecute(object data)
             {
-                _assembly.RegenerateTypeRefs();
-                var mdl = (DataObjectSelectionTaskModel)data;
-                mdl.Refresh();
+                var a = FetchAssembly();
+                if (a != null)
+                {
+                    a.RegenerateTypeRefs();
+                    ListModel.ReloadInstances();
+                }
             }
         }
 
@@ -252,14 +237,7 @@ namespace Kistl.Client.Presentables.KistlBase
                 return;
 
             var assembly = data as Kistl.App.Base.Assembly;
-            if (assembly == null)
-            {
-                this.ChooseAssemblyAndTypeRef();
-            }
-            else
-            {
-                ChooseTypeRefFromAssembly(assembly);
-            }
+            ChooseTypeRefFromAssembly(assembly);
         }
     }
 }

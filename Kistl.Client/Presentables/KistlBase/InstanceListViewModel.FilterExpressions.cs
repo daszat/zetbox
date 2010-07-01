@@ -173,15 +173,18 @@ namespace Kistl.Client.Presentables.KistlBase
             {
                 if (value == null)
                 {
-                    Values.RemoveAt(0);
-                }
-                else if (Values.Count == 0)
-                {
-                    Values.Add(value);
+                    if (Values.Count > 0) Values.RemoveAt(0);
                 }
                 else
                 {
-                    Values[0] = value;
+                    if (Values.Count == 0)
+                    {
+                        Values.Add(value);
+                    }
+                    else
+                    {
+                        Values[0] = value;
+                    }
                 }
 
                 OnFilterChanged();
@@ -298,12 +301,14 @@ namespace Kistl.Client.Presentables.KistlBase
 
     #region PropertyFilterExpression
 
-    public sealed class PropertyFilterExpression
+    public interface IPropertyFilterExpression : ILinqFilterExpression
     {
-        public delegate IFilterExpression Factory(IKistlContext dataCtx, Property prop, FilterConfiguration filterCfg);
+        Property Property { get; }
     }
 
-    public class ValueTypePropertyFilterExpressionViewModel<TValue> : ValueTypeUIFilterExpressionViewModel<TValue>, ILinqFilterExpression
+    public delegate IFilterExpression PropertyFilterExpressionFactory(IKistlContext dataCtx, Property prop, FilterConfiguration filterCfg);
+
+    public class ValueTypePropertyFilterExpressionViewModel<TValue> : ValueTypeUIFilterExpressionViewModel<TValue>, ILinqFilterExpression, IPropertyFilterExpression
         where TValue : struct
     {
         public new delegate ValueTypePropertyFilterExpressionViewModel<TValue> Factory(IKistlContext dataCtx, Property prop, FilterConfiguration filterCfg);
@@ -318,7 +323,7 @@ namespace Kistl.Client.Presentables.KistlBase
             this.Predicate = string.Format("{0} = @0", prop.Name);
         }
 
-        protected Property Property { get; private set; }
+        public Property Property { get; private set; }
         protected FilterConfiguration Configuration { get; private set; }
 
         public override bool Enabled
@@ -342,7 +347,7 @@ namespace Kistl.Client.Presentables.KistlBase
         }
     }
 
-    public abstract class ReferencePropertyFilterExpressionViewModel<TValue> : ReferenceTypeUIFilterExpressionViewModel<TValue>, ILinqFilterExpression
+    public abstract class ReferencePropertyFilterExpressionViewModel<TValue> : ReferenceTypeUIFilterExpressionViewModel<TValue>, ILinqFilterExpression, IPropertyFilterExpression
         where TValue : class
     {
         public ReferencePropertyFilterExpressionViewModel(IViewModelDependencies appCtx, IKistlContext dataCtx, Property prop, FilterConfiguration filterCfg)
@@ -355,7 +360,7 @@ namespace Kistl.Client.Presentables.KistlBase
             this.Predicate = string.Format("{0} = @0", prop.Name);
         }
 
-        protected Property Property { get; private set; }
+        public Property Property { get; private set; }
         protected FilterConfiguration Configuration { get; private set; }
 
         public override bool Enabled
