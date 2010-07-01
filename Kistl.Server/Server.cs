@@ -256,7 +256,13 @@ namespace Kistl.Server
             using (var subContainer = container.BeginLifetimeScope())
             {
                 var ctx = subContainer.Resolve<IKistlServerContext>();
-                Log.Info("Currently no fixes to do");
+
+                foreach (var prj in ctx.GetQuery<ZBox.App.SchemaMigration.MigrationProject>())
+                {
+                    prj.UpdateFromSourceSchema();
+                }
+
+                //Log.Info("Currently no fixes to do");
 
                 //foreach (var tr in ctx.GetQuery<TypeRef>())
                 //{

@@ -2730,6 +2730,23 @@
       <Condition ColumnName="fk_MigrationProject" IsNull="false"/>
     </AssociationSetMapping>
     <!--
+    Relation: FK_MigrationProject_migrates_to_Module
+    A: ZeroOrMore MigrationProject as MigrationProject
+    B: ZeroOrOne Module as Module
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_MigrationProject_migrates_to_Module"
+                           TypeName="Model.FK_MigrationProject_migrates_to_Module"
+                           StoreEntitySet="MigrationProject" >
+      <EndProperty Name="Module">
+        <ScalarProperty Name="ID" ColumnName="fk_Module"/>
+      </EndProperty>
+      <EndProperty Name="MigrationProject">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_Module" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
     Relation: FK_Mitarbeiter_is_a_Identity
     A: ZeroOrOne Mitarbeiter as Mitarbeiter
     B: ZeroOrOne Identity as Identity
@@ -3408,6 +3425,40 @@
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="fk_SourceTable" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_SourceColumn_created_Property
+    A: ZeroOrOne SourceColumn as SourceColumn
+    B: ZeroOrOne Property as Property
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_SourceColumn_created_Property"
+                           TypeName="Model.FK_SourceColumn_created_Property"
+                           StoreEntitySet="SourceColumn" >
+      <EndProperty Name="Property">
+        <ScalarProperty Name="ID" ColumnName="fk_Property"/>
+      </EndProperty>
+      <EndProperty Name="SourceColumn">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_Property" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_SourceTable_created_ObjectClass
+    A: ZeroOrOne SourceTable as SourceTable
+    B: ZeroOrOne ObjectClass as ObjectClass
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_SourceTable_created_ObjectClass"
+                           TypeName="Model.FK_SourceTable_created_ObjectClass"
+                           StoreEntitySet="SourceTable" >
+      <EndProperty Name="ObjectClass">
+        <ScalarProperty Name="ID" ColumnName="fk_ObjectClass"/>
+      </EndProperty>
+      <EndProperty Name="SourceTable">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_ObjectClass" IsNull="false"/>
     </AssociationSetMapping>
     <!--
     Relation: FK_StudentExam_passes_Exam

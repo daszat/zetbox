@@ -874,6 +874,10 @@
       <End Role="MigrationProject" EntitySet="MigrationProject" />
       <End Role="SourceTables" EntitySet="SourceTable" />
     </AssociationSet>
+    <AssociationSet Name="FK_MigrationProject_migrates_to_Module" Association="Model.Store.FK_MigrationProject_migrates_to_Module" >
+      <End Role="MigrationProject" EntitySet="MigrationProject" />
+      <End Role="Module" EntitySet="Module" />
+    </AssociationSet>
     <AssociationSet Name="FK_Mitarbeiter_is_a_Identity" Association="Model.Store.FK_Mitarbeiter_is_a_Identity" >
       <End Role="Mitarbeiter" EntitySet="Mitarbeiter" />
       <End Role="Identity" EntitySet="Identity" />
@@ -1033,6 +1037,14 @@
     <AssociationSet Name="FK_SourceColumn_belongs_to_SourceTable" Association="Model.Store.FK_SourceColumn_belongs_to_SourceTable" >
       <End Role="SourceColumn" EntitySet="SourceColumn" />
       <End Role="SourceTable" EntitySet="SourceTable" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SourceColumn_created_Property" Association="Model.Store.FK_SourceColumn_created_Property" >
+      <End Role="SourceColumn" EntitySet="SourceColumn" />
+      <End Role="Property" EntitySet="Property" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SourceTable_created_ObjectClass" Association="Model.Store.FK_SourceTable_created_ObjectClass" >
+      <End Role="SourceTable" EntitySet="SourceTable" />
+      <End Role="ObjectClass" EntitySet="ObjectClass" />
     </AssociationSet>
     <AssociationSet Name="FK_StudentExam_passes_Exam" Association="Model.Store.FK_StudentExam_passes_Exam" >
       <End Role="StudentExam" EntitySet="StudentExam" />
@@ -1701,6 +1713,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_Module" Type="int" />
     <Property Name="Description" Type="nvarchar" MaxLength="250" Nullable="false" />
     <Property Name="EtlDestDatabasePrefix" Type="nvarchar" MaxLength="200" Nullable="true" />
     <Property Name="EtlQuotePrefix" Type="nvarchar" MaxLength="100" Nullable="true" />
@@ -1950,6 +1963,7 @@
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="fk_SourceTable" Type="int" />
+    <Property Name="fk_Property" Type="int" />
     <Property Name="Comment" Type="nvarchar" Nullable="true" />
     <Property Name="DbType" Type="int" Nullable="false" />
     <Property Name="Description" Type="nvarchar" MaxLength="250" Nullable="true" />
@@ -1962,6 +1976,7 @@
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="fk_MigrationProject" Type="int" />
+    <Property Name="fk_ObjectClass" Type="int" />
     <Property Name="Comment" Type="nvarchar" Nullable="true" />
     <Property Name="Description" Type="nvarchar" MaxLength="250" Nullable="true" />
     <Property Name="Name" Type="nvarchar" MaxLength="250" Nullable="false" />
@@ -3860,6 +3875,20 @@
   </Association>
 
 
+  <Association Name="FK_MigrationProject_migrates_to_Module">
+    <End Role="Module" Type="Model.Store.Module" Multiplicity="0..1" />
+    <End Role="MigrationProject" Type="Model.Store.MigrationProject" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Module">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="MigrationProject">
+        <PropertyRef Name="fk_Module" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
   <Association Name="FK_Mitarbeiter_is_a_Identity">
     <End Role="Identity" Type="Model.Store.Identity" Multiplicity="0..1" />
     <End Role="Mitarbeiter" Type="Model.Store.Mitarbeiter" Multiplicity="*" />
@@ -4415,6 +4444,34 @@
       </Principal>
       <Dependent Role="SourceColumn">
         <PropertyRef Name="fk_SourceTable" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_SourceColumn_created_Property">
+    <End Role="Property" Type="Model.Store.Property" Multiplicity="0..1" />
+    <End Role="SourceColumn" Type="Model.Store.SourceColumn" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Property">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SourceColumn">
+        <PropertyRef Name="fk_Property" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_SourceTable_created_ObjectClass">
+    <End Role="ObjectClass" Type="Model.Store.ObjectClass" Multiplicity="0..1" />
+    <End Role="SourceTable" Type="Model.Store.SourceTable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ObjectClass">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SourceTable">
+        <PropertyRef Name="fk_ObjectClass" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

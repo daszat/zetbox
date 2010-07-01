@@ -9,7 +9,7 @@ using Kistl.API;
 using Kistl.API.Client;
 using Kistl.App.Base;
 
-namespace ZBox.App.SchemaMigraion
+namespace ZBox.App.SchemaMigration
 {
     public class CustomClientActions_SchemaMigration
     {

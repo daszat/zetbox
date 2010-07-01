@@ -525,6 +525,10 @@
       <End Role="MigrationProject" EntitySet="MigrationProject" />
       <End Role="SourceTables" EntitySet="SourceTable" />
     </AssociationSet>
+    <AssociationSet Name="FK_MigrationProject_migrates_to_Module" Association="Model.FK_MigrationProject_migrates_to_Module" >
+      <End Role="MigrationProject" EntitySet="MigrationProject" />
+      <End Role="Module" EntitySet="Module" />
+    </AssociationSet>
     <AssociationSet Name="FK_Mitarbeiter_is_a_Identity" Association="Model.FK_Mitarbeiter_is_a_Identity" >
       <End Role="Mitarbeiter" EntitySet="Mitarbeiter" />
       <End Role="Identity" EntitySet="Identity" />
@@ -684,6 +688,14 @@
     <AssociationSet Name="FK_SourceColumn_belongs_to_SourceTable" Association="Model.FK_SourceColumn_belongs_to_SourceTable" >
       <End Role="SourceColumn" EntitySet="SourceColumn" />
       <End Role="SourceTable" EntitySet="SourceTable" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SourceColumn_created_Property" Association="Model.FK_SourceColumn_created_Property" >
+      <End Role="SourceColumn" EntitySet="SourceColumn" />
+      <End Role="Property" EntitySet="Property" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SourceTable_created_ObjectClass" Association="Model.FK_SourceTable_created_ObjectClass" >
+      <End Role="SourceTable" EntitySet="SourceTable" />
+      <End Role="ObjectClass" EntitySet="DataType" />
     </AssociationSet>
     <AssociationSet Name="FK_StudentExam_passes_Exam" Association="Model.FK_StudentExam_passes_Exam" >
       <End Role="StudentExam" EntitySet="StudentExam" />
@@ -1368,6 +1380,10 @@
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
     <Property Name="Description" Type="String" Nullable="false" MaxLength="250" />
+    <NavigationProperty Name="DestinationModule__Implementation__"
+                        Relationship="Model.FK_MigrationProject_migrates_to_Module"
+                        FromRole="MigrationProject"
+                        ToRole="Module" />
     <Property Name="EtlDestDatabasePrefix" Type="String" Nullable="true" MaxLength="200" />
     <Property Name="EtlQuotePrefix" Type="String" Nullable="true" MaxLength="100" />
     <Property Name="EtlQuoteSuffix" Type="String" Nullable="true" MaxLength="100" />
@@ -1713,6 +1729,10 @@
     <Property Name="ID" Type="Int32" Nullable="false" />
     <Property Name="Comment" Type="String" Nullable="true" MaxLength="2147483647" />
     <Property Name="Description" Type="String" Nullable="true" MaxLength="250" />
+    <NavigationProperty Name="DestinationObjectClass__Implementation__"
+                        Relationship="Model.FK_SourceTable_created_ObjectClass"
+                        FromRole="SourceTable"
+                        ToRole="ObjectClass" />
     <NavigationProperty Name="MigrationProject__Implementation__"
                         Relationship="Model.FK_MigrationProject_has_SourceTables"
                         FromRole="SourceTables"
@@ -3592,6 +3612,14 @@
          Type="Model.SourceTable" 
          Multiplicity="*" />
   </Association>
+  <Association Name="FK_MigrationProject_migrates_to_Module" >
+    <End Role="MigrationProject"
+         Type="Model.MigrationProject" 
+         Multiplicity="*" />
+    <End Role="Module"
+         Type="Model.Module" 
+         Multiplicity="0..1" />
+  </Association>
   <Association Name="FK_Mitarbeiter_is_a_Identity" >
     <End Role="Mitarbeiter"
          Type="Model.Mitarbeiter" 
@@ -3910,6 +3938,22 @@
          Multiplicity="*" />
     <End Role="SourceTable"
          Type="Model.SourceTable" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_SourceColumn_created_Property" >
+    <End Role="SourceColumn"
+         Type="Model.SourceColumn" 
+         Multiplicity="0..1" />
+    <End Role="Property"
+         Type="Model.Property" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_SourceTable_created_ObjectClass" >
+    <End Role="SourceTable"
+         Type="Model.SourceTable" 
+         Multiplicity="0..1" />
+    <End Role="ObjectClass"
+         Type="Model.ObjectClass" 
          Multiplicity="0..1" />
   </Association>
   <Association Name="FK_StudentExam_passes_Exam" >

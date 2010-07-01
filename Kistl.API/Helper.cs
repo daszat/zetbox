@@ -519,6 +519,23 @@ namespace Kistl.API
         }
 
         /// <summary>
+        /// Checks if a string is one of the given values
+        /// </summary>
+        /// <param name="str">string to check.</param>
+        /// <param name="p">Values</param>
+        /// <returns>true, if the Enum is one of the given Values.</returns>
+        public static bool In(this string str, params string[] p)
+        {
+            if (str == null) { throw new ArgumentNullException("str"); }
+
+            foreach (string v in p)
+            {
+                if (str == v) return true;
+            }
+            return false;
+        }
+
+        /// <summary>
         /// Finds the first member of the given type or null if not found.
         /// </summary>
         /// <param name="t">Type to search</param>

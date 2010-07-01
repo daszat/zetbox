@@ -338,6 +338,27 @@ namespace ZBox.App.SchemaMigration
 		public static event PropertyPreSetterHandler<ZBox.App.SchemaMigration.SourceColumn, ZBox.App.SchemaMigration.SourceTable> OnSourceTable_PreSetter;
 		public static event PropertyPostSetterHandler<ZBox.App.SchemaMigration.SourceColumn, ZBox.App.SchemaMigration.SourceTable> OnSourceTable_PostSetter;
 
+        /// <summary>
+        /// 
+        /// </summary>
+		[EventBasedMethod("OnCreateProperty_SourceColumn")]
+		public virtual void CreateProperty() 
+		{
+            // base.CreateProperty();
+            if (OnCreateProperty_SourceColumn != null)
+            {
+				OnCreateProperty_SourceColumn(this);
+			}
+			else
+			{
+                throw new NotImplementedException("No handler registered on SourceColumn.CreateProperty");
+			}
+        }
+		public delegate void CreateProperty_Handler<T>(T obj);
+		public static event CreateProperty_Handler<SourceColumn> OnCreateProperty_SourceColumn;
+
+
+
         public override Type GetImplementedInterface()
         {
             return typeof(SourceColumn);

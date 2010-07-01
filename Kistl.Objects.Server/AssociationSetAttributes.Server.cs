@@ -1088,6 +1088,21 @@ using Kistl.DalProvider.EF;
 
 
 	/*
+    Relation: FK_MigrationProject_migrates_to_Module
+    A: ZeroOrMore MigrationProject as MigrationProject
+    B: ZeroOrOne Module as Module
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_MigrationProject_migrates_to_Module",
+    "MigrationProject", RelationshipMultiplicity.Many, typeof(ZBox.App.SchemaMigration.MigrationProject__Implementation__),
+    "Module", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Module__Implementation__)
+    )]
+
+
+	/*
     Relation: FK_Mitarbeiter_is_a_Identity
     A: ZeroOrOne Mitarbeiter as Mitarbeiter
     B: ZeroOrOne Identity as Identity
@@ -1774,6 +1789,36 @@ using Kistl.DalProvider.EF;
     "Model", "FK_SourceColumn_belongs_to_SourceTable",
     "SourceColumn", RelationshipMultiplicity.Many, typeof(ZBox.App.SchemaMigration.SourceColumn__Implementation__),
     "SourceTable", RelationshipMultiplicity.ZeroOrOne, typeof(ZBox.App.SchemaMigration.SourceTable__Implementation__)
+    )]
+
+
+	/*
+    Relation: FK_SourceColumn_created_Property
+    A: ZeroOrOne SourceColumn as SourceColumn
+    B: ZeroOrOne Property as Property
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_SourceColumn_created_Property",
+    "SourceColumn", RelationshipMultiplicity.ZeroOrOne, typeof(ZBox.App.SchemaMigration.SourceColumn__Implementation__),
+    "Property", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.Property__Implementation__)
+    )]
+
+
+	/*
+    Relation: FK_SourceTable_created_ObjectClass
+    A: ZeroOrOne SourceTable as SourceTable
+    B: ZeroOrOne ObjectClass as ObjectClass
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_SourceTable_created_ObjectClass",
+    "SourceTable", RelationshipMultiplicity.ZeroOrOne, typeof(ZBox.App.SchemaMigration.SourceTable__Implementation__),
+    "ObjectClass", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.ObjectClass__Implementation__)
     )]
 
 

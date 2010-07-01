@@ -858,6 +858,7 @@ namespace Kistl.App.Base
 					// rel: Icon has Module (a1360ce2-ecd5-4660-9b4d-3a2dc3919344)
 					// rel: Method has Module (b251ee8c-2821-441e-b631-d215c006f1c8)
 					// rel: MethodInvocation has Module (379b7181-a832-431f-a48d-ef1dd1996414)
+					// rel: MigrationProject migrates_to Module (d2972651-cf22-4dcd-8cdf-4aa0aba7ce1f)
 					// rel: Module contains Assemblies (a10474db-85df-4731-a86c-124e54f3d146)
 					// rel: Module contains DataTypes (52c4ab07-f341-4eb3-86e2-05f27c8af2f7)
 					// rel: Module has Relation (1c91bee2-397b-44f3-8346-313a8e2ba127)

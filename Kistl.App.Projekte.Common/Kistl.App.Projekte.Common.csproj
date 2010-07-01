@@ -62,6 +62,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomCommonActions_SchemaMigration.cs" />
     <Compile Include="CustomCommonActions_DocumentManagement.cs" />
     <Compile Include="CustomCommonActions_KistlBase.DefaultPropertyValues.cs" />
     <Compile Include="CustomCommonActions_KistlBase.cs" />

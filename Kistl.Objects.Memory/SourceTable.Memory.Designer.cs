@@ -140,6 +140,94 @@ namespace ZBox.App.SchemaMigration
         /// 
         /// </summary>
         // object reference property
+		// BEGIN Kistl.DalProvider.Memory.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate for DestinationObjectClass
+		// rel(A): SourceTable created ObjectClass
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public Kistl.App.Base.ObjectClass DestinationObjectClass
+        {
+            get
+            {
+				Kistl.App.Base.ObjectClass __value;
+                if (_fk_DestinationObjectClass.HasValue)
+                    __value = Context.Find<Kistl.App.Base.ObjectClass>(_fk_DestinationObjectClass.Value);
+                else
+                    __value = null;
+
+				if(OnDestinationObjectClass_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<Kistl.App.Base.ObjectClass>(__value);
+					OnDestinationObjectClass_Getter(this, e);
+					__value = e.Result;
+				}
+                    
+                return __value;
+            }
+            set
+            {
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if(value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                
+                // shortcut noops
+                if (value == null && _fk_DestinationObjectClass == null)
+					return;
+                else if (value != null && value.ID == _fk_DestinationObjectClass)
+					return;
+			           
+	            // cache old value to remove inverse references later
+                var __oldValue = DestinationObjectClass;
+				var __newValue = value;
+
+				// Changing Event fires before anything is touched
+				NotifyPropertyChanging("DestinationObjectClass", __oldValue, __newValue);
+				
+                if(OnDestinationObjectClass_PreSetter != null && IsAttached)
+                {
+					var e = new PropertyPreSetterEventArgs<Kistl.App.Base.ObjectClass>(__oldValue, __newValue);
+					OnDestinationObjectClass_PreSetter(this, e);
+					__newValue = e.Result;
+                }
+                
+				// next, set the local reference
+                _fk_DestinationObjectClass = __newValue == null ? (int?)null : __newValue.ID;
+				
+				// everything is done. fire the Changed event
+				NotifyPropertyChanged("DestinationObjectClass", __oldValue, __newValue);
+
+                if(OnDestinationObjectClass_PostSetter != null && IsAttached)
+                {
+					var e = new PropertyPostSetterEventArgs<Kistl.App.Base.ObjectClass>(__oldValue, __newValue);
+					OnDestinationObjectClass_PostSetter(this, e);
+                }
+                
+            }
+        }
+        
+        // normalize namespace for Templates
+        private Kistl.App.Base.ObjectClass DestinationObjectClass__Implementation__
+        {
+			get
+			{
+				return DestinationObjectClass;
+			}
+			set
+			{
+				DestinationObjectClass = value;
+			}
+		}
+        
+        private int? _fk_DestinationObjectClass;
+        private Guid? _fk_guid_DestinationObjectClass = null;
+		// END Kistl.DalProvider.Memory.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate for DestinationObjectClass
+		public static event PropertyGetterHandler<ZBox.App.SchemaMigration.SourceTable, Kistl.App.Base.ObjectClass> OnDestinationObjectClass_Getter;
+		public static event PropertyPreSetterHandler<ZBox.App.SchemaMigration.SourceTable, Kistl.App.Base.ObjectClass> OnDestinationObjectClass_PreSetter;
+		public static event PropertyPostSetterHandler<ZBox.App.SchemaMigration.SourceTable, Kistl.App.Base.ObjectClass> OnDestinationObjectClass_PostSetter;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        // object reference property
 		// BEGIN Kistl.DalProvider.Memory.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate for MigrationProject
 		// rel(B): MigrationProject has SourceTables
         // implement the user-visible interface
@@ -328,6 +416,27 @@ namespace ZBox.App.SchemaMigration
         private OneNRelationList<ZBox.App.SchemaMigration.SourceColumn> _SourceColumnWrapper;
 
 
+        /// <summary>
+        /// 
+        /// </summary>
+		[EventBasedMethod("OnCreateObjectClass_SourceTable")]
+		public virtual void CreateObjectClass() 
+		{
+            // base.CreateObjectClass();
+            if (OnCreateObjectClass_SourceTable != null)
+            {
+				OnCreateObjectClass_SourceTable(this);
+			}
+			else
+			{
+                throw new NotImplementedException("No handler registered on SourceTable.CreateObjectClass");
+			}
+        }
+		public delegate void CreateObjectClass_Handler<T>(T obj);
+		public static event CreateObjectClass_Handler<SourceTable> OnCreateObjectClass_SourceTable;
+
+
+
         public override Type GetImplementedInterface()
         {
             return typeof(SourceTable);
@@ -343,6 +452,7 @@ namespace ZBox.App.SchemaMigration
 			me.Comment = other.Comment;
 			me.Description = other.Description;
 			me.Name = other.Name;
+			this._fk_DestinationObjectClass = otherImpl._fk_DestinationObjectClass;
 			this._fk_MigrationProject = otherImpl._fk_MigrationProject;
 		}
 
@@ -357,6 +467,13 @@ namespace ZBox.App.SchemaMigration
 			// TODO: enable when MemoryContext uses MemoryDataObjects
 			//if (this.ObjectState == DataObjectState.Deleted) return;
 			// fix direct object references
+
+			if (_fk_guid_DestinationObjectClass.HasValue)
+				DestinationObjectClass__Implementation__ = (Kistl.App.Base.ObjectClass__Implementation__Memory)Context.FindPersistenceObject<Kistl.App.Base.ObjectClass>(_fk_guid_DestinationObjectClass.Value);
+			else if (_fk_DestinationObjectClass.HasValue)
+				DestinationObjectClass__Implementation__ = (Kistl.App.Base.ObjectClass__Implementation__Memory)Context.Find<Kistl.App.Base.ObjectClass>(_fk_DestinationObjectClass.Value);
+			else
+				DestinationObjectClass__Implementation__ = null;
 
 			if (_fk_guid_MigrationProject.HasValue)
 				MigrationProject__Implementation__ = (ZBox.App.SchemaMigration.MigrationProject__Implementation__Memory)Context.FindPersistenceObject<ZBox.App.SchemaMigration.MigrationProject>(_fk_guid_MigrationProject.Value);
@@ -444,6 +561,14 @@ namespace ZBox.App.SchemaMigration
 						obj => obj.Description,
 						(obj, val) => obj.Description = val),
 					// else
+					new CustomPropertyDescriptor<SourceTable__Implementation__Memory, Kistl.App.Base.ObjectClass>(
+						lazyCtx,
+						new Guid("ec638748-894e-4e61-b618-7d8fbacec2fe"),
+						"DestinationObjectClass",
+						null,
+						obj => obj.DestinationObjectClass,
+						(obj, val) => obj.DestinationObjectClass = val),
+					// else
 					new CustomPropertyDescriptor<SourceTable__Implementation__Memory, ZBox.App.SchemaMigration.MigrationProject>(
 						lazyCtx,
 						new Guid("b26f101a-69dc-4339-bad7-3120373342a7"),
@@ -487,6 +612,12 @@ namespace ZBox.App.SchemaMigration
 			
 			switch(propertyName)
 			{
+                case "DestinationObjectClass":
+                    __oldValue = _fk_DestinationObjectClass;
+                    NotifyPropertyChanging("DestinationObjectClass", __oldValue, __newValue);
+                    _fk_DestinationObjectClass = __newValue;
+                    NotifyPropertyChanged("DestinationObjectClass", __oldValue, __newValue);
+                    break;
                 case "MigrationProject":
                     __oldValue = _fk_MigrationProject;
                     NotifyPropertyChanging("MigrationProject", __oldValue, __newValue);
@@ -508,6 +639,7 @@ namespace ZBox.App.SchemaMigration
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             BinarySerializer.ToStream(this._Comment, binStream);
             BinarySerializer.ToStream(this._Description, binStream);
+            BinarySerializer.ToStream(this._fk_DestinationObjectClass, binStream);
             BinarySerializer.ToStream(this._fk_MigrationProject, binStream);
             BinarySerializer.ToStream(this._Name, binStream);
         }
@@ -518,6 +650,7 @@ namespace ZBox.App.SchemaMigration
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._Comment, binStream);
             BinarySerializer.FromStream(out this._Description, binStream);
+            BinarySerializer.FromStream(out this._fk_DestinationObjectClass, binStream);
             BinarySerializer.FromStream(out this._fk_MigrationProject, binStream);
             BinarySerializer.FromStream(out this._Name, binStream);
         }
@@ -528,6 +661,7 @@ namespace ZBox.App.SchemaMigration
             base.ToStream(xml);
             XmlStreamer.ToStream(this._Comment, xml, "Comment", "ZBox.App.SchemaMigration");
             XmlStreamer.ToStream(this._Description, xml, "Description", "ZBox.App.SchemaMigration");
+            XmlStreamer.ToStream(this._fk_DestinationObjectClass, xml, "DestinationObjectClass", "ZBox.App.SchemaMigration");
             XmlStreamer.ToStream(this._fk_MigrationProject, xml, "MigrationProject", "ZBox.App.SchemaMigration");
             XmlStreamer.ToStream(this._Name, xml, "Name", "ZBox.App.SchemaMigration");
         }
@@ -538,6 +672,7 @@ namespace ZBox.App.SchemaMigration
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._Comment, xml, "Comment", "ZBox.App.SchemaMigration");
             XmlStreamer.FromStream(ref this._Description, xml, "Description", "ZBox.App.SchemaMigration");
+            XmlStreamer.FromStream(ref this._fk_DestinationObjectClass, xml, "DestinationObjectClass", "ZBox.App.SchemaMigration");
             XmlStreamer.FromStream(ref this._fk_MigrationProject, xml, "MigrationProject", "ZBox.App.SchemaMigration");
             XmlStreamer.FromStream(ref this._Name, xml, "Name", "ZBox.App.SchemaMigration");
         }

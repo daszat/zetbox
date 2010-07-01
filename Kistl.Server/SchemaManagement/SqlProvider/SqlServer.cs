@@ -106,6 +106,39 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
             }
         }
 
+        private System.Data.DbType GetDbType(string sqltype)
+        {
+            switch (sqltype)
+            {
+                case "int":
+                    return System.Data.DbType.Int32;
+                case "bigint":
+                    return System.Data.DbType.Int64;
+                case "float":
+                    return System.Data.DbType.Double;
+                case "nvarchar":
+                case "varchar":
+                case "text":
+                case "ntext":
+                    return System.Data.DbType.String;
+                case "datetime":
+                    return System.Data.DbType.DateTime;
+                case "datetime2":
+                    return System.Data.DbType.DateTime2;
+                case "bit":
+                    return System.Data.DbType.Boolean;
+                case "uniqueidentifier":
+                    return System.Data.DbType.Guid;
+                case "binary":
+                case "varbinary":
+                    return System.Data.DbType.Binary;
+                case "decimal":
+                    return System.Data.DbType.Decimal;
+                default:
+                    throw new ArgumentOutOfRangeException("sqltype", string.Format("Unable to convert type '{0}' to an sql type string", sqltype));
+            }
+        }
+
         public string GetSavedSchema()
         {
             if (!CheckTableExists("CurrentSchema")) return string.Empty;
@@ -328,14 +361,17 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
 
         public IEnumerable<string> GetTableNames()
         {
+            List<string> result = new List<string>();
             string sqlQuery = "SELECT name FROM sys.objects WHERE type IN (N'U') AND name <> 'sysdiagrams'";
             QueryLog.Debug(sqlQuery);
 
             using (var cmd = new SqlCommand(sqlQuery, db, tx))
             using (SqlDataReader rd = cmd.ExecuteReader())
             {
-                while (rd.Read()) yield return rd.GetString(0);
+                while (rd.Read()) result.Add(rd.GetString(0));
             }
+
+            return result;
         }
 
         public IEnumerable<TableConstraintNamePair> GetFKConstraintNames()
@@ -352,7 +388,32 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
 
         public IEnumerable<Column> GetTableColumns(string tbl)
         {
-            throw new NotImplementedException();
+            List<Column> result = new List<Column>();
+            using (var cmd = new SqlCommand(@"SELECT c.name, TYPE_NAME(system_type_id) type, max_length, is_nullable
+                                FROM sys.objects o 
+                                    INNER JOIN sys.columns c ON c.object_id=o.object_id
+	                            WHERE o.object_id = OBJECT_ID(@table) 
+		                            AND o.type IN (N'U')", db, tx))
+            {
+                cmd.Parameters.AddWithValue("@table", tbl);
+                QueryLog.Debug(cmd.CommandText);
+                using (SqlDataReader rd = cmd.ExecuteReader())
+                {
+                    while (rd.Read()) 
+                    {
+                        var type = rd.GetString(1);
+                        var isMaxSize = type.In("ntext", "text", "image");
+                        result.Add(new Column()
+                        {
+                            Name = rd.GetString(0),
+                            Type = GetDbType(type),
+                            Size = isMaxSize ? int.MaxValue : rd.GetInt16(2),
+                            IsNullable = rd.GetBoolean(3)
+                        });
+                    }
+                }
+            }
+            return result;
         }
 
         public IEnumerable<string> GetTableColumnNames(string tblName)

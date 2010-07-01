@@ -54,7 +54,7 @@ namespace Kistl.API.Server
     {
         public string Name { get; set; }
         public System.Data.DbType Type { get; set; }
-        public long Size { get; set; }
+        public int Size { get; set; }
         public bool IsNullable { get; set; }
 
         public override string ToString()

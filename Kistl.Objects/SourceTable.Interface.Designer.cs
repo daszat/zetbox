@@ -30,6 +30,13 @@ namespace ZBox.App.SchemaMigration
         /// <summary>
         /// 
         /// </summary>
+		Kistl.App.Base.ObjectClass DestinationObjectClass {
+			get;
+			set;
+		}
+        /// <summary>
+        /// 
+        /// </summary>
 		ZBox.App.SchemaMigration.MigrationProject MigrationProject {
 			get;
 			set;
@@ -46,5 +53,9 @@ namespace ZBox.App.SchemaMigration
         /// </summary>
 
         ICollection<ZBox.App.SchemaMigration.SourceColumn> SourceColumn { get; }
+        /// <summary>
+        /// 
+        /// </summary>
+		 void CreateObjectClass() ;
     }
 }

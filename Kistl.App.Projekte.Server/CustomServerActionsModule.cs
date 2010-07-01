@@ -25,7 +25,7 @@ namespace Kistl.App.Projekte.Server
             }
 
             // Register types explicit
-            moduleBuilder.Register(c => new ZBox.App.SchemaMigraion.CustomServerActions_SchemaMigration(
+            moduleBuilder.Register(c => new ZBox.App.SchemaMigration.CustomServerActions_SchemaMigration(
                 c.Resolve<SchemaProviderFactory> ("MSSQL"),
                 c.Resolve<SchemaProviderFactory>("POSTGRES"),
                 c.Resolve<SchemaProviderFactory>("OLEDB")

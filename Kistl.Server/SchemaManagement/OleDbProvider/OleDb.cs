@@ -214,17 +214,7 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
 
         public int GetColumnMaxLength(string tblName, string colName)
         {
-            // / 2 -> nvarchar!
-            using (var cmd = new OleDbCommand(@"SELECT c.max_length / 2 FROM sys.objects o INNER JOIN sys.columns c ON c.object_id=o.object_id
-	                                            WHERE o.object_id = OBJECT_ID(@table) 
-		                                            AND o.type IN (N'U')
-		                                            AND c.Name = @column", db, tx))
-            {
-                cmd.Parameters.AddWithValue("@table", tblName);
-                cmd.Parameters.AddWithValue("@column", colName);
-                QueryLog.Debug(cmd.CommandText);
-                return (int)cmd.ExecuteScalar();
-            }
+            throw new NotImplementedException();
         }
 
         public IEnumerable<string> GetTableNames()
@@ -339,7 +329,7 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
             {
                 int dt = (int)col["DATA_TYPE"];
                 Type type = DataTypes.ContainsKey(dt) ? DataTypes[dt].Type : typeof(string);
-                long size = col["CHARACTER_MAXIMUM_LENGTH"] as long? ?? 0;
+                int size = (int)(col["CHARACTER_MAXIMUM_LENGTH"] as long? ?? 0);
                 if(size == 0 && (type == typeof(string) || type == typeof(byte[])))
                 {
                     size = int.MaxValue;

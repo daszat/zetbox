@@ -21,6 +21,13 @@ namespace ZBox.App.SchemaMigration
 			set;
 		}
         /// <summary>
+        /// 
+        /// </summary>
+		Kistl.App.Base.Module DestinationModule {
+			get;
+			set;
+		}
+        /// <summary>
         /// [DestDatabase].[dbo].
         /// </summary>
 		string EtlDestDatabasePrefix {

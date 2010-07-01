@@ -48,5 +48,9 @@ namespace ZBox.App.SchemaMigration
 			get;
 			set;
 		}
+        /// <summary>
+        /// 
+        /// </summary>
+		 void CreateProperty() ;
     }
 }

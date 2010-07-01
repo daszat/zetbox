@@ -88,6 +88,94 @@ namespace ZBox.App.SchemaMigration
 		public static event PropertyPostSetterHandler<ZBox.App.SchemaMigration.MigrationProject, string> OnDescription_PostSetter;
 
         /// <summary>
+        /// 
+        /// </summary>
+        // object reference property
+		// BEGIN Kistl.DalProvider.Memory.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate for DestinationModule
+		// rel(A): MigrationProject migrates_to Module
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public Kistl.App.Base.Module DestinationModule
+        {
+            get
+            {
+				Kistl.App.Base.Module __value;
+                if (_fk_DestinationModule.HasValue)
+                    __value = Context.Find<Kistl.App.Base.Module>(_fk_DestinationModule.Value);
+                else
+                    __value = null;
+
+				if(OnDestinationModule_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<Kistl.App.Base.Module>(__value);
+					OnDestinationModule_Getter(this, e);
+					__value = e.Result;
+				}
+                    
+                return __value;
+            }
+            set
+            {
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if(value != null && value.Context != this.Context) throw new WrongKistlContextException();
+                
+                // shortcut noops
+                if (value == null && _fk_DestinationModule == null)
+					return;
+                else if (value != null && value.ID == _fk_DestinationModule)
+					return;
+			           
+	            // cache old value to remove inverse references later
+                var __oldValue = DestinationModule;
+				var __newValue = value;
+
+				// Changing Event fires before anything is touched
+				NotifyPropertyChanging("DestinationModule", __oldValue, __newValue);
+				
+                if(OnDestinationModule_PreSetter != null && IsAttached)
+                {
+					var e = new PropertyPreSetterEventArgs<Kistl.App.Base.Module>(__oldValue, __newValue);
+					OnDestinationModule_PreSetter(this, e);
+					__newValue = e.Result;
+                }
+                
+				// next, set the local reference
+                _fk_DestinationModule = __newValue == null ? (int?)null : __newValue.ID;
+				
+				// everything is done. fire the Changed event
+				NotifyPropertyChanged("DestinationModule", __oldValue, __newValue);
+
+                if(OnDestinationModule_PostSetter != null && IsAttached)
+                {
+					var e = new PropertyPostSetterEventArgs<Kistl.App.Base.Module>(__oldValue, __newValue);
+					OnDestinationModule_PostSetter(this, e);
+                }
+                
+            }
+        }
+        
+        // normalize namespace for Templates
+        private Kistl.App.Base.Module DestinationModule__Implementation__
+        {
+			get
+			{
+				return DestinationModule;
+			}
+			set
+			{
+				DestinationModule = value;
+			}
+		}
+        
+        private int? _fk_DestinationModule;
+        private Guid? _fk_guid_DestinationModule = null;
+		// END Kistl.DalProvider.Memory.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate for DestinationModule
+		public static event PropertyGetterHandler<ZBox.App.SchemaMigration.MigrationProject, Kistl.App.Base.Module> OnDestinationModule_Getter;
+		public static event PropertyPreSetterHandler<ZBox.App.SchemaMigration.MigrationProject, Kistl.App.Base.Module> OnDestinationModule_PreSetter;
+		public static event PropertyPostSetterHandler<ZBox.App.SchemaMigration.MigrationProject, Kistl.App.Base.Module> OnDestinationModule_PostSetter;
+
+        /// <summary>
         /// [DestDatabase].[dbo].
         /// </summary>
         // value type property
@@ -481,6 +569,7 @@ namespace ZBox.App.SchemaMigration
 			me.EtlSrcDatabasePrefix = other.EtlSrcDatabasePrefix;
 			me.SrcConnectionString = other.SrcConnectionString;
 			me.SrcProvider = other.SrcProvider;
+			this._fk_DestinationModule = otherImpl._fk_DestinationModule;
 		}
 
         public override void AttachToContext(IKistlContext ctx)
@@ -494,6 +583,13 @@ namespace ZBox.App.SchemaMigration
 			// TODO: enable when MemoryContext uses MemoryDataObjects
 			//if (this.ObjectState == DataObjectState.Deleted) return;
 			// fix direct object references
+
+			if (_fk_guid_DestinationModule.HasValue)
+				DestinationModule__Implementation__ = (Kistl.App.Base.Module__Implementation__Memory)Context.FindPersistenceObject<Kistl.App.Base.Module>(_fk_guid_DestinationModule.Value);
+			else if (_fk_DestinationModule.HasValue)
+				DestinationModule__Implementation__ = (Kistl.App.Base.Module__Implementation__Memory)Context.Find<Kistl.App.Base.Module>(_fk_DestinationModule.Value);
+			else
+				DestinationModule__Implementation__ = null;
 		}
         // tail template
    		// Kistl.Server.Generators.Templates.Implementation.ObjectClasses.Tail
@@ -566,6 +662,14 @@ namespace ZBox.App.SchemaMigration
 						obj => obj.Description,
 						(obj, val) => obj.Description = val),
 					// else
+					new CustomPropertyDescriptor<MigrationProject__Implementation__Memory, Kistl.App.Base.Module>(
+						lazyCtx,
+						new Guid("ed7a3291-b69b-42f3-9b60-dd06e374f856"),
+						"DestinationModule",
+						null,
+						obj => obj.DestinationModule,
+						(obj, val) => obj.DestinationModule = val),
+					// else
 					new CustomPropertyDescriptor<MigrationProject__Implementation__Memory, string>(
 						lazyCtx,
 						new Guid("04ce9592-fbe8-414a-bca7-8dc1961122f9"),
@@ -622,6 +726,7 @@ namespace ZBox.App.SchemaMigration
 						obj => obj.SrcProvider,
 						(obj, val) => obj.SrcProvider = val),
 					// rel: MigrationProject has SourceTables (daf3f4eb-21bc-4ad1-87f1-aef06ade1281)
+					// rel: MigrationProject migrates_to Module (d2972651-cf22-4dcd-8cdf-4aa0aba7ce1f)
 				};
 			}
 		}
@@ -634,6 +739,23 @@ namespace ZBox.App.SchemaMigration
 		}
 	
 
+		public override void UpdateParent(string propertyName, int? id)
+		{
+			int? __oldValue, __newValue = id;
+			
+			switch(propertyName)
+			{
+                case "DestinationModule":
+                    __oldValue = _fk_DestinationModule;
+                    NotifyPropertyChanging("DestinationModule", __oldValue, __newValue);
+                    _fk_DestinationModule = __newValue;
+                    NotifyPropertyChanged("DestinationModule", __oldValue, __newValue);
+                    break;
+				default:
+					base.UpdateParent(propertyName, id);
+					break;
+			}
+		}
 
 #region Serializer
 
@@ -643,6 +765,7 @@ namespace ZBox.App.SchemaMigration
             
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             BinarySerializer.ToStream(this._Description, binStream);
+            BinarySerializer.ToStream(this._fk_DestinationModule, binStream);
             BinarySerializer.ToStream(this._EtlDestDatabasePrefix, binStream);
             BinarySerializer.ToStream(this._EtlQuotePrefix, binStream);
             BinarySerializer.ToStream(this._EtlQuoteSuffix, binStream);
@@ -656,6 +779,7 @@ namespace ZBox.App.SchemaMigration
             
             base.FromStream(binStream);
             BinarySerializer.FromStream(out this._Description, binStream);
+            BinarySerializer.FromStream(out this._fk_DestinationModule, binStream);
             BinarySerializer.FromStream(out this._EtlDestDatabasePrefix, binStream);
             BinarySerializer.FromStream(out this._EtlQuotePrefix, binStream);
             BinarySerializer.FromStream(out this._EtlQuoteSuffix, binStream);
@@ -669,6 +793,7 @@ namespace ZBox.App.SchemaMigration
             
             base.ToStream(xml);
             XmlStreamer.ToStream(this._Description, xml, "Description", "ZBox.App.SchemaMigration");
+            XmlStreamer.ToStream(this._fk_DestinationModule, xml, "DestinationModule", "ZBox.App.SchemaMigration");
             XmlStreamer.ToStream(this._EtlDestDatabasePrefix, xml, "EtlDestDatabasePrefix", "ZBox.App.SchemaMigration");
             XmlStreamer.ToStream(this._EtlQuotePrefix, xml, "EtlQuotePrefix", "ZBox.App.SchemaMigration");
             XmlStreamer.ToStream(this._EtlQuoteSuffix, xml, "EtlQuoteSuffix", "ZBox.App.SchemaMigration");
@@ -682,6 +807,7 @@ namespace ZBox.App.SchemaMigration
             
             base.FromStream(xml);
             XmlStreamer.FromStream(ref this._Description, xml, "Description", "ZBox.App.SchemaMigration");
+            XmlStreamer.FromStream(ref this._fk_DestinationModule, xml, "DestinationModule", "ZBox.App.SchemaMigration");
             XmlStreamer.FromStream(ref this._EtlDestDatabasePrefix, xml, "EtlDestDatabasePrefix", "ZBox.App.SchemaMigration");
             XmlStreamer.FromStream(ref this._EtlQuotePrefix, xml, "EtlQuotePrefix", "ZBox.App.SchemaMigration");
             XmlStreamer.FromStream(ref this._EtlQuoteSuffix, xml, "EtlQuoteSuffix", "ZBox.App.SchemaMigration");
