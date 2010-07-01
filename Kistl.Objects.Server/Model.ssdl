@@ -41,6 +41,7 @@
     <EntitySet Name="Kunde" EntityType="Model.Store.Kunde" Table="Kunden"/>
     <EntitySet Name="Method" EntityType="Model.Store.Method" Table="Methods"/>
     <EntitySet Name="MethodInvocation" EntityType="Model.Store.MethodInvocation" Table="MethodInvocations"/>
+    <EntitySet Name="MigrationProject" EntityType="Model.Store.MigrationProject" Table="MigrationProjects"/>
     <EntitySet Name="Mitarbeiter" EntityType="Model.Store.Mitarbeiter" Table="Mitarbeiter"/>
     <EntitySet Name="Module" EntityType="Model.Store.Module" Table="Modules"/>
     <EntitySet Name="Muhblah" EntityType="Model.Store.Muhblah" Table="Muhblas"/>
@@ -1683,6 +1684,16 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" />
+  </EntityType>
+	
+  <EntityType Name="MigrationProject">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="SrcConnectionString" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="SrcProvider" Type="nvarchar" MaxLength="50" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="Mitarbeiter">

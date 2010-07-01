@@ -65,7 +65,7 @@ namespace Kistl.DalProvider.Memory
             else
             {
                 // TODO: #1571 This method expects IF Types, but Impl types are passed
-                return GetPersistenceObjectQuery(GetImplementationType(typeof(T)).ToInterfaceType()).Cast<T>().Where(i => i.AObject.ID == parent.ID || i.BObject.ID == parent.ID).ToList();
+                return GetPersistenceObjectQuery(GetImplementationType(typeof(T)).ToInterfaceType()).Cast<T>().Where(i => i.AObject == parent || i.BObject == parent).ToList();
             }
         }
     }

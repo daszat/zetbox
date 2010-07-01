@@ -74,6 +74,16 @@ namespace Kistl.App
 			}
 		}
 		
+		/// <summary>Repository for SchemaMigration</summary>
+		/// 
+		public ZBox.App.SchemaMigration.SchemaMigrationRepository SchemaMigration
+		{
+			get
+			{
+				return new ZBox.App.SchemaMigration.SchemaMigrationRepository(Context);
+			}
+		}
+		
 		/// <summary>Repository for TestModule</summary>
 		/// 
 		public Kistl.App.Test.TestModuleRepository TestModule

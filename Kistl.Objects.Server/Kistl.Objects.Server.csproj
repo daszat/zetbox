@@ -146,6 +146,7 @@
     <Compile Include="Method.Server.Designer.cs" />
     <Compile Include="MethodInvocation.Server.Designer.cs" />
     <Compile Include="MethodInvocationConstraint.Server.Designer.cs" />
+    <Compile Include="MigrationProject.Server.Designer.cs" />
     <Compile Include="Mitarbeiter.Server.Designer.cs" />
     <Compile Include="Module.Server.Designer.cs" />
     <Compile Include="Muhblah.Server.Designer.cs" />

@@ -117,6 +117,7 @@
     <Compile Include="Method.Interface.Designer.cs" />
     <Compile Include="MethodInvocation.Interface.Designer.cs" />
     <Compile Include="MethodInvocationConstraint.Interface.Designer.cs" />
+    <Compile Include="MigrationProject.Interface.Designer.cs" />
     <Compile Include="Mitarbeiter.Interface.Designer.cs" />
     <Compile Include="Module.Interface.Designer.cs" />
     <Compile Include="Muhblah.Interface.Designer.cs" />
@@ -179,6 +180,7 @@
     <Compile Include="KistlBaseRepository.Interface.Designer.cs" />
     <Compile Include="ModuleEditorRepository.Interface.Designer.cs" />
     <Compile Include="ProjekteRepository.Interface.Designer.cs" />
+    <Compile Include="SchemaMigrationRepository.Interface.Designer.cs" />
     <Compile Include="TestModuleRepository.Interface.Designer.cs" />
     <Compile Include="TimeRecordsRepository.Interface.Designer.cs" />
   </ItemGroup>

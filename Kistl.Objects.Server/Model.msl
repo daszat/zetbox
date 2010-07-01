@@ -463,6 +463,16 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="MigrationProject">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.MigrationProject)">
+	    <MappingFragment StoreEntitySet="MigrationProject">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="Description" ColumnName="Description" />
+<ScalarProperty Name="SrcConnectionString" ColumnName="SrcConnectionString" />
+<ScalarProperty Name="SrcProvider" ColumnName="SrcProvider" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Mitarbeiter">
       <EntityTypeMapping TypeName="IsTypeOf(Model.Mitarbeiter)">
 	    <MappingFragment StoreEntitySet="Mitarbeiter">

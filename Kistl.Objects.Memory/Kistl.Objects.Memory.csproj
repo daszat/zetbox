@@ -137,6 +137,7 @@
     <Compile Include="Method.Memory.Designer.cs" />
     <Compile Include="MethodInvocation.Memory.Designer.cs" />
     <Compile Include="MethodInvocationConstraint.Memory.Designer.cs" />
+    <Compile Include="MigrationProject.Memory.Designer.cs" />
     <Compile Include="Mitarbeiter.Memory.Designer.cs" />
     <Compile Include="Module.Memory.Designer.cs" />
     <Compile Include="Muhblah.Memory.Designer.cs" />

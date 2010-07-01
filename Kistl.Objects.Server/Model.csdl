@@ -37,6 +37,7 @@
     <EntitySet Name="Kunde" EntityType="Model.Kunde" />
     <EntitySet Name="Method" EntityType="Model.Method" />
     <EntitySet Name="MethodInvocation" EntityType="Model.MethodInvocation" />
+    <EntitySet Name="MigrationProject" EntityType="Model.MigrationProject" />
     <EntitySet Name="Mitarbeiter" EntityType="Model.Mitarbeiter" />
     <EntitySet Name="Module" EntityType="Model.Module" />
     <EntitySet Name="Muhblah" EntityType="Model.Muhblah" />
@@ -1350,6 +1351,15 @@
                         Relationship="Model.FK_MethodInvocation_has_Module"
                         FromRole="MethodInvocation"
                         ToRole="Module" />
+  </EntityType>
+  <EntityType Name="MigrationProject">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="250" />
+    <Property Name="SrcConnectionString" Type="String" Nullable="false" MaxLength="250" />
+    <Property Name="SrcProvider" Type="String" Nullable="false" MaxLength="50" />
   </EntityType>
   <EntityType Name="Mitarbeiter">
     <Key>
