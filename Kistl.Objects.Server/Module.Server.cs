@@ -29,6 +29,7 @@ namespace Kistl.Objects
             builder
                 .Register<EFActionsManager>(
                     c => new EFActionsManager(
+                        c.Resolve<ILifetimeScope>(),
                         c.Resolve<IDeploymentRestrictor>()))
                 .As<IEFActionsManager>()
                 .InstancePerLifetimeScope();
@@ -53,8 +54,8 @@ namespace Kistl.Objects
     internal sealed class EFActionsManager
         : BaseCustomActionsManager, IEFActionsManager
     {
-        public EFActionsManager(IDeploymentRestrictor restrictor)
-            : base(restrictor, "")
+        public EFActionsManager(ILifetimeScope container, IDeploymentRestrictor restrictor)
+            : base(container, restrictor, "")
         {
         }
     }

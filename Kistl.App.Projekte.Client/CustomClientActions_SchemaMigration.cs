@@ -11,7 +11,7 @@ using Kistl.App.Base;
 
 namespace ZBox.App.SchemaMigraion
 {
-    public static class CustomClientActions_SchemaMigration
+    public class CustomClientActions_SchemaMigration
     {
         public static void OnCreateEtlStatements_MigrationProject(ZBox.App.SchemaMigration.MigrationProject obj)
         {

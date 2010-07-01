@@ -57,6 +57,7 @@ this.WriteObjects("                \r\n");
 this.WriteObjects("            builder\r\n");
 this.WriteObjects("                .Register<",  shortName , "ActionsManager>(\r\n");
 this.WriteObjects("                    c => new ",  shortName , "ActionsManager(\r\n");
+this.WriteObjects("                        c.Resolve<ILifetimeScope>(),\r\n");
 this.WriteObjects("                        c.Resolve<IDeploymentRestrictor>()))\r\n");
 this.WriteObjects("                .As<I",  shortName , "ActionsManager>()\r\n");
 this.WriteObjects("                .InstancePerLifetimeScope();\r\n");
@@ -81,8 +82,8 @@ this.WriteObjects("    // marker class to provide stable and correct assembly re
 this.WriteObjects("    internal sealed class ",  shortName , "ActionsManager\r\n");
 this.WriteObjects("        : BaseCustomActionsManager, I",  shortName , "ActionsManager\r\n");
 this.WriteObjects("    {\r\n");
-this.WriteObjects("        public ",  shortName , "ActionsManager(IDeploymentRestrictor restrictor)\r\n");
-this.WriteObjects("            : base(restrictor, \"",  extraSuffix , "\")\r\n");
+this.WriteObjects("        public ",  shortName , "ActionsManager(ILifetimeScope container, IDeploymentRestrictor restrictor)\r\n");
+this.WriteObjects("            : base(container, restrictor, \"",  extraSuffix , "\")\r\n");
 this.WriteObjects("        {\r\n");
 this.WriteObjects("        }\r\n");
 this.WriteObjects("    }\r\n");

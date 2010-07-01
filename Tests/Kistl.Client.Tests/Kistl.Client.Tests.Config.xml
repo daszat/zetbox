@@ -10,6 +10,8 @@
       <Module>Kistl.DalProvider.Memory.MemoryProvider, Kistl.DalProvider.Memory</Module>
       <Module>Kistl.Objects.InterfaceModule, Kistl.Objects</Module>
       <Module>Kistl.Objects.ClientModule, Kistl.Objects.Client</Module>
+      <Module>Kistl.App.Projekte.Client.CustomClientActionsModule, Kistl.App.Projekte.Client</Module>
+      <Module>Kistl.App.Projekte.Common.CustomCommonActionsModule, Kistl.App.Projekte.Common</Module>
     </Modules>
   </Client>
   <SourceFileLocation>

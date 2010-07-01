@@ -40,6 +40,7 @@ namespace Kistl.Objects
             builder
                 .Register<<%= shortName %>ActionsManager>(
                     c => new <%= shortName %>ActionsManager(
+                        c.Resolve<ILifetimeScope>(),
                         c.Resolve<IDeploymentRestrictor>()))
                 .As<I<%= shortName %>ActionsManager>()
                 .InstancePerLifetimeScope();
@@ -64,8 +65,8 @@ namespace Kistl.Objects
     internal sealed class <%= shortName %>ActionsManager
         : BaseCustomActionsManager, I<%= shortName %>ActionsManager
     {
-        public <%= shortName %>ActionsManager(IDeploymentRestrictor restrictor)
-            : base(restrictor, "<%= extraSuffix %>")
+        public <%= shortName %>ActionsManager(ILifetimeScope container, IDeploymentRestrictor restrictor)
+            : base(container, restrictor, "<%= extraSuffix %>")
         {
         }
     }

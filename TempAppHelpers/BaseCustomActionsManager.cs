@@ -12,6 +12,8 @@ namespace Kistl.App.Extensions
     using Kistl.API.Utils;
     using Kistl.App.Base;
 
+    using Autofac;
+
     /// <summary>
     /// A utility class implementing basic operations and caching needed by all CustomActionsManagers.
     /// </summary>
@@ -23,6 +25,7 @@ namespace Kistl.App.Extensions
         private readonly static Dictionary<Type, Type> _initImpls = new Dictionary<Type, Type>();
 
         private readonly IDeploymentRestrictor _restrictor;
+        private readonly ILifetimeScope _container;
 
 
         /// <summary>
@@ -36,11 +39,13 @@ namespace Kistl.App.Extensions
         /// Initialises a new instance of the BaseCustomActionsManager class 
         /// using the specified extra suffix and the assembly of the actual type of this class.
         /// </summary>
-        protected BaseCustomActionsManager(IDeploymentRestrictor restrictor, string extraSuffix)
+        protected BaseCustomActionsManager(ILifetimeScope container, IDeploymentRestrictor restrictor, string extraSuffix)
         {
             if (restrictor == null) { throw new ArgumentNullException("restrictor"); }
+            if (container == null) { throw new ArgumentNullException("container"); }
 
             _restrictor = restrictor;
+            _container = container;
             ExtraSuffix = extraSuffix;
             ImplementationAssemblyName = this.GetType().Assembly.FullName;
         }
@@ -143,7 +148,7 @@ namespace Kistl.App.Extensions
             foreach (ObjectClass baseObjClass in objObjClass.GetObjectHierarchie())
             {
                 // Method invocations
-                foreach (MethodInvocation mi in baseObjClass.MethodInvocations)
+                foreach (var mi in baseObjClass.MethodInvocations)
                 {
                     Type[] paramTypes = mi.Method.Parameter
                         .Where(p => !p.IsReturnParameter)
@@ -198,8 +203,10 @@ namespace Kistl.App.Extensions
 
                 if (!t.IsStatic())
                 {
-                    Log.ErrorFormat("Type {0}, {1} is not static", invoke.Implementor.FullName, invoke.Implementor.Assembly.Name);
-                    return;
+                    // Changed -> init singleton
+                    // Log.ErrorFormat("Type {0}, {1} is not static", invoke.Implementor.FullName, invoke.Implementor.Assembly.Name);
+                    // return;
+                    var tmp = _container.Resolve(t);
                 }
 
                 MethodInfo clrMethod = t.GetMethod(invoke.MemberName);

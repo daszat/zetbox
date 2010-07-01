@@ -29,6 +29,7 @@ namespace Kistl.Objects
             builder
                 .Register<MemoryActionsManager>(
                     c => new MemoryActionsManager(
+                        c.Resolve<ILifetimeScope>(),
                         c.Resolve<IDeploymentRestrictor>()))
                 .As<IMemoryActionsManager>()
                 .InstancePerLifetimeScope();
@@ -53,8 +54,8 @@ namespace Kistl.Objects
     internal sealed class MemoryActionsManager
         : BaseCustomActionsManager, IMemoryActionsManager
     {
-        public MemoryActionsManager(IDeploymentRestrictor restrictor)
-            : base(restrictor, "Memory")
+        public MemoryActionsManager(ILifetimeScope container, IDeploymentRestrictor restrictor)
+            : base(container, restrictor, "Memory")
         {
         }
     }

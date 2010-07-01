@@ -40,6 +40,10 @@
     <DocumentationFile>..\bin\Release\bin\Server\Kistl.App.Projekte.Server.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac, Version=2.1.14.854, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\AutoFac 2.1\Autofac.dll</HintPath>
+    </Reference>
     <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libs\log4net.dll</HintPath>
@@ -67,6 +71,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomServerActionsModule.cs" />
     <Compile Include="CustomServerActions_KistlBase.cs" />
     <Compile Include="CustomServerActions_Projekte.cs" />
     <Compile Include="CustomServerActions_SchemaMigration.cs" />
