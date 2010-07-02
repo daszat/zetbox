@@ -111,13 +111,18 @@ namespace Kistl.Client.WPF.View
             {
                 if (rk is ControlKind)
                 {
-                    Logging.Log.DebugFormat("Searching '{0}' Template for {1}", rk.GetType().FullName, model.GetType().FullName);
+                    Logging.Log.DebugFormat("Searching '{0}' Template for {1}", rk.ToString(), model.GetType().FullName);
                     result = SelectTemplate(model, rk as ControlKind, _frozenCtx);
                 }
                 else if (rk is String)
                 {
                     Logging.Log.DebugFormat("Searching '{0}' Template for {1}", rk, model.GetType().FullName);
                     result = SelectTemplate(model, rk as String, _frozenCtx);
+                }
+                else if (rk == null && model.RequestedKind != null)
+                {
+                    Logging.Log.DebugFormat("Searching '{0}' Template for {1}", model.RequestedKind.ToString(), model.GetType().FullName);
+                    result = SelectTemplate(model, model.RequestedKind, _frozenCtx);
                 }
                 else if (rk == null)
                 {

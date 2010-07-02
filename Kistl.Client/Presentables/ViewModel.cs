@@ -102,7 +102,13 @@ namespace Kistl.Client.Presentables
         /// <summary>
         /// Used to override DefaultKind in code
         /// </summary>
-        public ControlKind RequestedControlKind { get; set; }
+        private ControlKind _RequestedKind;
+        public virtual ControlKind RequestedKind
+        {
+            get { return _RequestedKind; }
+            set { _RequestedKind = value; OnPropertyChanged("ControlKind"); }
+        }
+
 
         private ModelState _State = ModelState.Active;
         public ModelState State

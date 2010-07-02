@@ -148,11 +148,15 @@ namespace Kistl.Client.Presentables
             }
         }
 
-        public ControlKind RequestedKind
+        public override ControlKind RequestedKind
         {
             get
             {
-                return Property.ValueModelDescriptor.DefaultKind;
+                return base.RequestedKind ?? Property.RequestedKind ?? Property.ValueModelDescriptor.DefaultKind;
+            }
+            set
+            {
+                base.RequestedKind = value;
             }
         }
 

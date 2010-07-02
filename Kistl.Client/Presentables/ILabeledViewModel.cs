@@ -46,13 +46,6 @@ namespace Kistl.Client.Presentables
             set { _ToolTip = value; OnPropertyChanged("ToolTip"); }
         }
 
-        private ControlKind _RequestedKind;
-        public ControlKind RequestedKind
-        {
-            get { return _RequestedKind; }
-            set { _RequestedKind = value; OnPropertyChanged("ControlKind"); }
-        }
-
         public ViewModel Model
         {
             get;

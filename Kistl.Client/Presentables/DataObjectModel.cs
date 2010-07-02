@@ -395,6 +395,18 @@ namespace Kistl.Client.Presentables
             }
         }
 
+        public override ControlKind RequestedKind
+        {
+            get
+            {
+                return base.RequestedKind ?? _object.GetObjectClass(FrozenContext).RequestedKind;
+            }
+            set
+            {
+                base.RequestedKind = value;
+            }
+        }
+
         #endregion
 
         #region PropertyChanged event handlers

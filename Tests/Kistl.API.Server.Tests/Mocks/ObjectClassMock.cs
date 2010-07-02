@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Kistl.App.GUI;
 
 namespace Kistl.API.Server.Mocks
 {
@@ -367,6 +368,19 @@ namespace Kistl.API.Server.Mocks
                 throw new NotImplementedException();
             }
         }
+
+        public ControlKind RequestedKind
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
 
         #endregion
 
