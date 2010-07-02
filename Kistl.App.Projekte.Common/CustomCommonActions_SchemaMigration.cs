@@ -32,6 +32,7 @@ namespace ZBox.App.SchemaMigration
         {
             if (obj.MigrationProject == null) throw new InvalidOperationException("Not attached to a migration project");
             if (obj.MigrationProject.DestinationModule == null) throw new InvalidOperationException("No destination module provided");
+            if (obj.DestinationObjectClass != null) throw new InvalidOperationException("there is already a destination object class");
 
             obj.DestinationObjectClass = obj.Context.Create<ObjectClass>();
             obj.DestinationObjectClass.Name = obj.Name;
@@ -43,6 +44,7 @@ namespace ZBox.App.SchemaMigration
         {
             if (obj.SourceTable == null) throw new InvalidOperationException("Not attached to a source table");
             if (obj.SourceTable.DestinationObjectClass == null) throw new InvalidOperationException("Source table has no destination object class");
+            if (obj.DestinationProperty != null) throw new InvalidOperationException("there is already a destination object property");
 
             Property p = null;
 
