@@ -232,26 +232,6 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
             throw new NotImplementedException();
         }
 
-        private System.Data.DbType GetDbType(Type type)
-        {
-            if (type == typeof(bool)) return DbType.Boolean;
-            if (type == typeof(byte)) return DbType.Byte;
-            if (type == typeof(ushort)) return DbType.UInt16;
-            if (type == typeof(uint)) return DbType.UInt32;
-            if (type == typeof(ulong)) return DbType.UInt64;
-            if (type == typeof(short)) return DbType.Int16;
-            if (type == typeof(int)) return DbType.Int32;
-            if (type == typeof(long)) return DbType.Int64;
-            if (type == typeof(string)) return DbType.String;
-            if (type == typeof(float)) return DbType.Double;
-            if (type == typeof(double)) return DbType.Double;
-            if (type == typeof(decimal)) return DbType.Decimal;
-            if (type == typeof(DateTime)) return DbType.DateTime;
-            if (type == typeof(Guid)) return DbType.Guid;
-            if (type == typeof(byte[])) return DbType.Binary;
-            throw new ArgumentOutOfRangeException("type", string.Format("Unable to convert type '{0}' to an DbType", type));
-        }
-
         private class DataType
         {
             public string TypeName { get; set; }
@@ -330,7 +310,7 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
                 int dt = (int)col["DATA_TYPE"];
                 Type type = DataTypes.ContainsKey(dt) ? DataTypes[dt].Type : typeof(string);
                 int size = (int)(col["CHARACTER_MAXIMUM_LENGTH"] as long? ?? 0);
-                if(size == 0 && (type == typeof(string) || type == typeof(byte[])))
+                if (size == 0 && (type == typeof(string) || type == typeof(byte[])))
                 {
                     size = int.MaxValue;
                 }
@@ -339,7 +319,7 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
                     Name = (string)col["COLUMN_NAME"],
                     Size = size,
                     IsNullable = (bool)col["IS_NULLABLE"],
-                    Type = GetDbType(type)
+                    Type = DbTypeMapper.GetDbType(type)
                 };
             }
         }
@@ -557,15 +537,15 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
         {
             var sb = new StringBuilder();
             sb.AppendLine(string.Format("INSERT INTO {0} (", Quote(tbl)));
-            
+
             colNames.ForEach(i => sb.Append(Quote(i) + ","));
             sb.Remove(sb.Length - 1, 1);
-            
+
             sb.AppendLine(") VALUES (");
-            
+
             colNames.ForEach(i => sb.Append("?,"));
             sb.Remove(sb.Length - 1, 1);
-            
+
             sb.AppendLine(")");
 
             var cmd = new OleDbCommand(sb.ToString(), db, tx);
@@ -575,7 +555,7 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
                 cmd.Parameters.AddWithValue(string.Format("@param{0}", ++counter), v ?? DBNull.Value);
             }
 
-            cmd.ExecuteNonQuery();            
+            cmd.ExecuteNonQuery();
         }
     }
 }

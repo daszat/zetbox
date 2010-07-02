@@ -36,7 +36,7 @@ namespace ZBox.App.SchemaMigration
                 case "MSSQL":
                     src = sqlFactory(obj.SrcConnectionString);
                     break;
-                case "POSTGRES":
+                case "POSTGRESQL":
                     src = postgresFactory(obj.SrcConnectionString);
                     break;
                 case "OLEDB":

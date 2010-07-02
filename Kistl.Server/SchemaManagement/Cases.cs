@@ -128,7 +128,7 @@ namespace Kistl.Server.SchemaManagement
             var srcTblName = ((ObjectClass)saved.ObjectClass).TableName;
             var colName = Construct.NestedColumnName(prop, prefix);
             var srcColName = Construct.NestedColumnName(saved, prefix); // TODO: What if prefix has changed
-            var dbType = SchemaManager.GetDbType(prop);
+            var dbType = prop.GetDbType();
             var size = prop is StringProperty ? ((StringProperty)prop).GetMaxLength() : 0;
 
             if (movedUp)
@@ -196,7 +196,7 @@ namespace Kistl.Server.SchemaManagement
         {
             string colName = Construct.NestedColumnName(prop, prefix);
             Log.InfoFormat("New nullable ValueType Property: '{0}' ('{1}')", prop.Name, colName);
-            db.CreateColumn(objClass.TableName, colName, SchemaManager.GetDbType(prop),
+            db.CreateColumn(objClass.TableName, colName, prop.GetDbType(),
                 prop is StringProperty ? ((StringProperty)prop).GetMaxLength() : 0, true);
         }
         #endregion
@@ -210,7 +210,7 @@ namespace Kistl.Server.SchemaManagement
         {
             string tblName = objClass.TableName;
             string colName = Construct.NestedColumnName(prop, prefix);
-            var dbType = SchemaManager.GetDbType(prop);
+            var dbType = prop.GetDbType();
             var size = prop is StringProperty ? ((StringProperty)prop).GetMaxLength() : 0;
             Log.InfoFormat("New not nullable ValueType Property: [{0}.{1}] (col:{2})", prop.ObjectClass.Name, prop.Name, colName);
             if (!db.CheckTableContainsData(tblName))
@@ -243,7 +243,7 @@ namespace Kistl.Server.SchemaManagement
             }
             else
             {
-                db.AlterColumn(tblName, colName, SchemaManager.GetDbType(prop),
+                db.AlterColumn(tblName, colName, prop.GetDbType(),
                     prop is StringProperty ? ((StringProperty)prop).GetMaxLength() : 0, prop.IsNullable());
             }
         }
@@ -261,7 +261,7 @@ namespace Kistl.Server.SchemaManagement
             string tblName = objClass.TableName;
             string colName = Construct.NestedColumnName(prop, prefix);
 
-            db.AlterColumn(tblName, colName, SchemaManager.GetDbType(prop),
+            db.AlterColumn(tblName, colName, prop.GetDbType(),
                 prop is StringProperty ? ((StringProperty)prop).GetMaxLength() : 0, prop.IsNullable());
         }
         #endregion
@@ -312,7 +312,7 @@ namespace Kistl.Server.SchemaManagement
             db.CreateTable(tblName, true);
             db.CreateColumn(tblName, fkName, System.Data.DbType.Int32, 0, false);
 
-            db.CreateColumn(tblName, valPropName, SchemaManager.GetDbType(prop), prop is StringProperty ? ((StringProperty)prop).GetMaxLength() : 0, false);
+            db.CreateColumn(tblName, valPropName, prop.GetDbType(), prop is StringProperty ? ((StringProperty)prop).GetMaxLength() : 0, false);
 
             if (hasPersistentOrder)
             {
@@ -346,7 +346,7 @@ namespace Kistl.Server.SchemaManagement
             // TODO: Support neested CompoundObject
             foreach (ValueTypeProperty p in prop.CompoundObjectDefinition.Properties)
             {
-                db.CreateColumn(tblName, valPropName + "_" + p.Name, SchemaManager.GetDbType(p), p is StringProperty ? ((StringProperty)p).GetMaxLength() : 0, true);
+                db.CreateColumn(tblName, valPropName + "_" + p.Name, p.GetDbType(), p is StringProperty ? ((StringProperty)p).GetMaxLength() : 0, true);
             }
 
             if (hasPersistentOrder)
@@ -1877,7 +1877,7 @@ namespace Kistl.Server.SchemaManagement
             {
                 var colName = Construct.NestedColumnName(valProp, colName_IsNull);
                 Log.InfoFormat("New nullable ValueType Property: '{0}' ('{1}')", valProp.Name, colName);
-                db.CreateColumn(objClass.TableName, colName, SchemaManager.GetDbType(valProp),
+                db.CreateColumn(objClass.TableName, colName, valProp.GetDbType(),
                     valProp is StringProperty ? ((StringProperty)valProp).GetMaxLength() : 0, valProp.IsNullable());
             }
 

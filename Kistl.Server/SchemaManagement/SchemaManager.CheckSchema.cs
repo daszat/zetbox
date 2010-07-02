@@ -542,7 +542,7 @@ namespace Kistl.Server.SchemaManagement
                 {
                     Log.DebugFormat("{0}", prop.Name);
                     CheckColumn(tblName, fkName, System.Data.DbType.Int32, 0, false);
-                    CheckColumn(tblName, valPropName, GetDbType(prop), prop is StringProperty ? ((StringProperty)prop).GetMaxLength() : 0, false);
+                    CheckColumn(tblName, valPropName, prop.GetDbType(), prop is StringProperty ? ((StringProperty)prop).GetMaxLength() : 0, false);
 
                     if (hasPersistentOrder)
                     {
@@ -600,7 +600,7 @@ namespace Kistl.Server.SchemaManagement
                     // TODO: Support neested CompoundObject
                     foreach (ValueTypeProperty p in prop.CompoundObjectDefinition.Properties)
                     {
-                        CheckColumn(tblName, valPropName + "_" + p.Name, SchemaManager.GetDbType(p), p is StringProperty ? ((StringProperty)p).GetMaxLength() : 0, true);
+                        CheckColumn(tblName, valPropName + "_" + p.Name, p.GetDbType(), p is StringProperty ? ((StringProperty)p).GetMaxLength() : 0, true);
                     }
                     if (hasPersistentOrder)
                     {
@@ -720,7 +720,7 @@ namespace Kistl.Server.SchemaManagement
                 string tblName = objClass.TableName;
                 string colName = Construct.NestedColumnName(prop, prefix);
                 Log.DebugFormat("    {0}", colName);
-                CheckColumn(tblName, colName, GetDbType(prop), prop is StringProperty ? ((StringProperty)prop).GetMaxLength() : 0, prop.IsNullable());
+                CheckColumn(tblName, colName, prop.GetDbType(), prop is StringProperty ? ((StringProperty)prop).GetMaxLength() : 0, prop.IsNullable());
             }
 
             foreach (CompoundObjectProperty sprop in properties.OfType<CompoundObjectProperty>().Where(p => !p.IsList))

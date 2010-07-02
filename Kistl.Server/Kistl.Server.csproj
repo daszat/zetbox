@@ -737,6 +737,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>PropertyInvocationsTemplate.cst</DependentUpon>
     </Compile>
+    <Compile Include="SchemaManagement\DbTypeMapper.cs" />
     <Compile Include="SchemaManagement\NpgsqlProvider\Postgresql.cs" />
     <Compile Include="SchemaManagement\OleDbProvider\OleDb.cs" />
     <Compile Include="SchemaManagement\SchemaManager.CheckSchema.cs" />

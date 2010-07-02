@@ -156,48 +156,6 @@ namespace Kistl.Server.SchemaManagement
         }        
         #endregion
 
-        #region GetDbType
-        internal static System.Data.DbType GetDbType(Property p)
-        {
-            if (p is ObjectReferenceProperty)
-            {
-                return System.Data.DbType.Int32;
-            }
-            else if (p is EnumerationProperty)
-            {
-                return System.Data.DbType.Int32;
-            }
-            else if (p is IntProperty)
-            {
-                return System.Data.DbType.Int32;
-            }
-            else if (p is StringProperty)
-            {
-                return System.Data.DbType.String;
-            }
-            else if (p is DoubleProperty)
-            {
-                return System.Data.DbType.Double;
-            }
-            else if (p is BoolProperty)
-            {
-                return System.Data.DbType.Boolean;
-            }
-            else if (p is DateTimeProperty)
-            {
-                return System.Data.DbType.DateTime;
-            }
-            else if (p is GuidProperty)
-            {
-                return System.Data.DbType.Guid;
-            }
-            else
-            {
-                throw new DBTypeNotFoundException(p);
-            }
-        }
-        #endregion
-
         #region SavedSchema
 
         public static void LoadSavedSchemaInto(ISchemaProvider provider, IKistlContext targetCtx)

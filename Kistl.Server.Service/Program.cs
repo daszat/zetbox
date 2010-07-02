@@ -125,7 +125,7 @@ namespace Kistl.Server.Service
                         { "syncidentities", "synchronices local and domain users with Kistl Identities",
                             v => { if (v != null) { actions.Add((c, args) => c.Resolve<Server>().SyncIdentities()); } }
                             },
-                        { "copydb", "copies a database to a staging database. Extra Arguments are: [SRCPROVIDER] [SRC ConnectionString] [DESTPROVIDER] [DEST ConnectionString]. Valid Providers are: MSSQL, POSTGRES, OLEDB. WARNING: All tables in the destination database will be dropped!",
+                        { "copydb", "copies a database to a staging database. Extra Arguments are: [SRCPROVIDER] [SRC ConnectionString] [DESTPROVIDER] [DEST ConnectionString]. Valid Providers are: MSSQL, POSTGRESQL, OLEDB. WARNING: All tables in the destination database will be dropped!",
                             v => { if (v != null) { 
                                 actions.Add((c, args) => { 
                                     if (args == null) PrintHelpAndExit();
