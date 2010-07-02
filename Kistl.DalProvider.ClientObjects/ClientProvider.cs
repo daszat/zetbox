@@ -27,7 +27,7 @@ namespace Kistl.DalProvider.Client
                         c.Resolve<KistlConfig>(),
                         c.Resolve<IProxy>(),
                         Kistl.API.Helper.ClientAssembly,
-                        c.Resolve<Func<IReadOnlyKistlContext>>(Kistl.API.Helper.FrozenContextServiceName),
+                        c.Resolve<Func<IFrozenContext>>(),
                         c.Resolve<InterfaceType.Factory>(),
                         c.Resolve<ClientImplementationType.ClientFactory>());
                 })
@@ -36,7 +36,7 @@ namespace Kistl.DalProvider.Client
                 .OnActivated(args =>
                 {
                     var manager = args.Context.Resolve<IClientActionsManager>();
-                    manager.Init(args.Context.Resolve<IReadOnlyKistlContext>(Kistl.API.Helper.FrozenContextServiceName));
+                    manager.Init(args.Context.Resolve<IFrozenContext>());
                 })
                 .InstancePerDependency();
 

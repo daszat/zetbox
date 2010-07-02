@@ -15,7 +15,7 @@ namespace Kistl.API.Client
         private readonly Property _property;
 
         public CustomPropertyDescriptor(
-            Func<IReadOnlyKistlContext> lazyCtx,
+            Func<IFrozenContext> lazyCtx,
             Guid? propertyGuid,
             string name,
             Attribute[] attrs,

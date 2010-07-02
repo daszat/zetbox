@@ -11,7 +11,7 @@ namespace Kistl.DalProvider.Memory
     public abstract class BaseMemoryCollectionEntry
         : BaseMemoryPersistenceObject
     {
-        protected BaseMemoryCollectionEntry(Func<IReadOnlyKistlContext> lazyCtx)
+        protected BaseMemoryCollectionEntry(Func<IFrozenContext> lazyCtx)
             : base(lazyCtx)
         {
         }

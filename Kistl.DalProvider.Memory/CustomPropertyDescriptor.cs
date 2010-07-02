@@ -14,11 +14,11 @@ namespace Kistl.DalProvider.Memory
     {
         private static readonly string[] NoErrors = new string[] { };
 
-        private readonly Func<IReadOnlyKistlContext> _lazyCtx;
+        private readonly Func<IFrozenContext> _lazyCtx;
         private readonly Guid? _propertyGuid;
 
         public CustomPropertyDescriptor(
-            Func<IReadOnlyKistlContext> lazyCtx,
+            Func<IFrozenContext> lazyCtx,
             Guid? propertyGuid,
             string name,
             Attribute[] attrs,

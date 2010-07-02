@@ -25,8 +25,7 @@ namespace Kistl.DalProvider.Client
     public abstract class BaseClientDataObject_ClientObjects
         : BaseClientDataObject, IClientObject
     {
-        protected BaseClientDataObject_ClientObjects() : base(null) { }
-        protected BaseClientDataObject_ClientObjects(Func<IReadOnlyKistlContext> lazyCtx) : base(lazyCtx) { }
+        protected BaseClientDataObject_ClientObjects(Func<IFrozenContext> lazyCtx) : base(lazyCtx) { }
 
         #region IClientObject Members
 
@@ -44,7 +43,7 @@ namespace Kistl.DalProvider.Client
     public abstract class BaseClientCollectionEntry_ClientObjects
         : BaseClientCollectionEntry, IClientObject
     {
-        protected BaseClientCollectionEntry_ClientObjects(Func<IReadOnlyKistlContext> lazyCtx)
+        protected BaseClientCollectionEntry_ClientObjects(Func<IFrozenContext> lazyCtx)
             : base(lazyCtx)
         {
         }

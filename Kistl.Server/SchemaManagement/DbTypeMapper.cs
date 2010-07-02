@@ -43,9 +43,12 @@ namespace Kistl.Server.SchemaManagement
 
         private static DbType GetDbType(Type type, KeyValuePair<Type, DbType>[] mapping)
         {
+            if (type == null) { throw new ArgumentNullException("type"); }
+            if (mapping == null) { throw new ArgumentNullException("mapping"); }
+
             foreach (var pair in mapping)
             {
-                if (pair.Key == type)
+                if (pair.Key.IsAssignableFrom(type))
                 {
                     return pair.Value;
                 }
@@ -56,6 +59,8 @@ namespace Kistl.Server.SchemaManagement
 
         private static Type GetSystemType(DbType type, KeyValuePair<Type, DbType>[] mapping)
         {
+            if (mapping == null) { throw new ArgumentNullException("mapping"); }
+
             foreach (var pair in mapping)
             {
                 if (pair.Value == type)

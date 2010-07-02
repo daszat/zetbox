@@ -11,9 +11,7 @@ namespace Kistl.DalProvider.Memory
     public abstract class BaseMemoryPersistenceObject
         : BasePersistenceObject
     {
-        protected BaseMemoryPersistenceObject() : base(null) { _objectState = DataObjectState.New; }
-
-        protected BaseMemoryPersistenceObject(Func<IReadOnlyKistlContext> lazyCtx)
+        protected BaseMemoryPersistenceObject(Func<IFrozenContext> lazyCtx)
             : base(lazyCtx)
         {
             _objectState = DataObjectState.New;

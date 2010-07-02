@@ -19,7 +19,7 @@
 		[Obsolete]
 		public <%= GetCeClassName() %>() : base(null) {}
 		
-		public <%= GetCeClassName() %>(Func<IReadOnlyKistlContext> lazyCtx)
+		public <%= GetCeClassName() %>(Func<IFrozenContext> lazyCtx)
 			: base(lazyCtx)
 		{
 		}

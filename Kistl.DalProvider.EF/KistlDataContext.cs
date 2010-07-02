@@ -30,10 +30,7 @@ namespace Kistl.DalProvider.EF
 
         private readonly EFObjectContext _ctx;
         
-        /// <summary>
-        /// A lazily initialized frozen context
-        /// </summary>
-        private readonly Func<IReadOnlyKistlContext> _lazyCtx;
+        private readonly Func<IFrozenContext> _lazyCtx;
 
         private readonly EfImplementationType.EfFactory _implTypeFactory;
 
@@ -49,7 +46,7 @@ namespace Kistl.DalProvider.EF
         /// <summary>
         /// Internal Constructor
         /// </summary>
-        public KistlDataContext(IMetaDataResolver metaDataResolver, Identity identity, KistlConfig config, Func<IReadOnlyKistlContext> lazyCtx, InterfaceType.Factory iftFactory, EfImplementationType.EfFactory implTypeFactory)
+        public KistlDataContext(IMetaDataResolver metaDataResolver, Identity identity, KistlConfig config, Func<IFrozenContext> lazyCtx, InterfaceType.Factory iftFactory, EfImplementationType.EfFactory implTypeFactory)
             : base(metaDataResolver, identity, config, iftFactory)
         {
             _ctx = new EFObjectContext(config);

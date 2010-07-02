@@ -85,7 +85,7 @@ ApplyConstructorTemplate();
 #line 67 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"
 this.WriteObjects("        }\r\n");
 this.WriteObjects("\r\n");
-this.WriteObjects("        public ",  mungedClassName , "(Func<IReadOnlyKistlContext> lazyCtx)\r\n");
+this.WriteObjects("        public ",  mungedClassName , "(Func<IFrozenContext> lazyCtx)\r\n");
 this.WriteObjects("            : base(lazyCtx)\r\n");
 this.WriteObjects("        {\r\n");
 #line 73 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\TypeBase.cst"

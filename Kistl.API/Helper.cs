@@ -33,6 +33,11 @@ namespace Kistl.API
         public static readonly string ImplementationSuffix = "__Implementation__";
 
         /// <summary>
+        /// Suffix for Position Properties in Lists
+        /// </summary>
+        public static readonly string PositionSuffix = "_pos";
+
+        /// <summary>
         /// Interface Assembly
         /// </summary>
         public static readonly string InterfaceAssembly = "Kistl.Objects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=7b69192d05046fdf";
@@ -40,21 +45,7 @@ namespace Kistl.API
         /// Client Assembly
         /// </summary>
         public static readonly string ClientAssembly = "Kistl.Objects.Client, Version=1.0.0.0, Culture=neutral, PublicKeyToken=7b69192d05046fdf";
-        /// <summary>
-        /// Server Assembly
-        /// </summary>
-        public static readonly string ServerAssembly = "Kistl.Objects.Server, Version=1.0.0.0, Culture=neutral, PublicKeyToken=7b69192d05046fdf";
-
-        /// <summary>
-        /// Suffix for Position Properties in Lists
-        /// </summary>
-        public static readonly string PositionSuffix = "_pos";
-
-        /// <summary>
-        /// Autofac Service Name for the FrozenContext Service
-        /// </summary>
-        public static readonly string FrozenContextServiceName = "FrozenContext";
-
+       
         /// <summary>
         /// Default length if StringRangeConstraint is missing
         /// </summary>

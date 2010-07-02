@@ -15,7 +15,7 @@ namespace Kistl.API.Server
     /// </summary>
     public abstract class BaseServerPersistenceObject : BasePersistenceObject
     {
-        protected BaseServerPersistenceObject(Func<IReadOnlyKistlContext> lazyCtx)
+        protected BaseServerPersistenceObject(Func<IFrozenContext> lazyCtx)
             : base(lazyCtx)
         {
             ClientObjectState = DataObjectState.NotDeserialized;
@@ -61,7 +61,7 @@ namespace Kistl.API.Server
         /// <summary>
         /// Attach to Events
         /// </summary>
-        protected BaseServerDataObject(Func<IReadOnlyKistlContext> lazyCtx)
+        protected BaseServerDataObject(Func<IFrozenContext> lazyCtx)
             : base(lazyCtx)
         {
         }
@@ -98,7 +98,7 @@ namespace Kistl.API.Server
     public abstract class BaseServerCollectionEntry
         : BaseServerPersistenceObject
     {
-        protected BaseServerCollectionEntry(Func<IReadOnlyKistlContext> lazyCtx)
+        protected BaseServerCollectionEntry(Func<IFrozenContext> lazyCtx)
             : base(lazyCtx)
         {
         }
@@ -128,7 +128,7 @@ namespace Kistl.API.Server
     /// </summary>
     public abstract class BaseServerCompoundObject : BaseCompoundObject
     {
-        protected BaseServerCompoundObject(Func<IReadOnlyKistlContext> lazyCtx)
+        protected BaseServerCompoundObject(Func<IFrozenContext> lazyCtx)
             : base(lazyCtx)
         {
         }

@@ -12,7 +12,7 @@ namespace Kistl.API.Client
 
     public abstract class BaseClientPersistenceObject : BasePersistenceObject
     {
-        protected BaseClientPersistenceObject(Func<IReadOnlyKistlContext> lazyCtx)
+        protected BaseClientPersistenceObject(Func<IFrozenContext> lazyCtx)
             : base(lazyCtx)
         {
         }
@@ -115,7 +115,7 @@ namespace Kistl.API.Client
 
     public abstract class BaseClientDataObject : BaseClientPersistenceObject, IDataObject
     {
-        protected BaseClientDataObject(Func<IReadOnlyKistlContext> lazyCtx)
+        protected BaseClientDataObject(Func<IFrozenContext> lazyCtx)
             : base(lazyCtx)
         {
         }
@@ -151,7 +151,7 @@ namespace Kistl.API.Client
 
     public abstract class BaseClientCollectionEntry : BaseClientPersistenceObject
     {
-        protected BaseClientCollectionEntry(Func<IReadOnlyKistlContext> lazyCtx)
+        protected BaseClientCollectionEntry(Func<IFrozenContext> lazyCtx)
             : base(lazyCtx)
         {
         }
@@ -181,7 +181,7 @@ namespace Kistl.API.Client
     /// </summary>
     public abstract class BaseClientCompoundObject : BaseCompoundObject
     {
-        protected BaseClientCompoundObject(Func<IReadOnlyKistlContext> lazyCtx)
+        protected BaseClientCompoundObject(Func<IFrozenContext> lazyCtx)
             : base(lazyCtx)
         {
         }

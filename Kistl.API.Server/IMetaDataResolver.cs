@@ -27,16 +27,16 @@ namespace Kistl.API.Server
     public sealed class CachingMetaDataResolver
         : IMetaDataResolver
     {
-        private readonly Func<IReadOnlyKistlContext> _lazyFrozen;
+        private readonly Func<IFrozenContext> _lazyFrozen;
         private IReadOnlyKistlContext _ctx;
         private ILookup<string, ObjectClass> _cache;
 
-        public CachingMetaDataResolver(Func<IReadOnlyKistlContext> lazyFrozen)
+        public CachingMetaDataResolver(Func<IFrozenContext> lazyFrozen)
         {
             _lazyFrozen = lazyFrozen;
         }
 
-        private void Init(IReadOnlyKistlContext ctx)
+        private void Init(IFrozenContext ctx)
         {
             _ctx = ctx;
             _cache = ctx.GetQuery<ObjectClass>().ToLookup(cls => cls.Name);

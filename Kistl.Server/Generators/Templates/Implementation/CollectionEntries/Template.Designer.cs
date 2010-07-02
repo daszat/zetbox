@@ -34,7 +34,7 @@ this.WriteObjects("    {\r\n");
 this.WriteObjects("		[Obsolete]\r\n");
 this.WriteObjects("		public ",  GetCeClassName() , "() : base(null) {}\r\n");
 this.WriteObjects("		\r\n");
-this.WriteObjects("		public ",  GetCeClassName() , "(Func<IReadOnlyKistlContext> lazyCtx)\r\n");
+this.WriteObjects("		public ",  GetCeClassName() , "(Func<IFrozenContext> lazyCtx)\r\n");
 this.WriteObjects("			: base(lazyCtx)\r\n");
 this.WriteObjects("		{\r\n");
 this.WriteObjects("		}\r\n");

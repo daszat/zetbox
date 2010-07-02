@@ -63,11 +63,7 @@ namespace Kistl.Client
                 .As<IUiThreadManager>();
 
             moduleBuilder
-                .Register(c => new ViewModelDependencies(
-                    c.Resolve<IModelFactory>(), 
-                    c.Resolve<IUiThreadManager>(), 
-                    c.Resolve<IAsyncThreadManager>(),
-                    c.Resolve<IReadOnlyKistlContext>(Kistl.API.Helper.FrozenContextServiceName)))
+                .RegisterType<ViewModelDependencies>()
                 .As<IViewModelDependencies>();
 
             // Register all ViewModel Types

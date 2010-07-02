@@ -25,7 +25,7 @@
 		private static readonly object _propertiesLock = new object();
 		private static System.ComponentModel.PropertyDescriptor[] _properties;
 		
-		private void _InitializePropertyDescriptors(Func<IReadOnlyKistlContext> lazyCtx)
+		private void _InitializePropertyDescriptors(Func<IFrozenContext> lazyCtx)
 		{
 			if (_properties != null) return;
 			lock (_propertiesLock)
@@ -125,7 +125,7 @@
 			}
 		}
 		
-		protected override void CollectProperties(Func<IReadOnlyKistlContext> lazyCtx, List<System.ComponentModel.PropertyDescriptor> props)
+		protected override void CollectProperties(Func<IFrozenContext> lazyCtx, List<System.ComponentModel.PropertyDescriptor> props)
 		{
 			base.CollectProperties(props);
 			_InitializePropertyDescriptors(lazyCtx);

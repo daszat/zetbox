@@ -32,16 +32,12 @@ namespace Kistl.DalProvider.Memory
                 .InstancePerDependency();
 
             moduleBuilder
-                .Register<MemoryContext>(c => new MemoryContext(
-                    c.Resolve<InterfaceType.Factory>(),
-                    c.Resolve<Func<IReadOnlyKistlContext>>(Kistl.API.Helper.FrozenContextServiceName),
-                    c.Resolve<MemoryImplementationType.MemoryFactory>()
-                    ))
+                .RegisterType<MemoryContext>()
                 .As<BaseMemoryContext>()
                 .OnActivated(args =>
                 {
                     var manager = args.Context.Resolve<IMemoryActionsManager>();
-                    manager.Init(args.Context.Resolve<IReadOnlyKistlContext>(Kistl.API.Helper.FrozenContextServiceName));
+                    manager.Init(args.Context.Resolve<IFrozenContext>());
                 })
                 .InstancePerDependency();
 
@@ -52,19 +48,19 @@ namespace Kistl.DalProvider.Memory
                 moduleBuilder
                     .Register(c =>
                     {
-                        MemoryContext memCtx = null;
-                        memCtx = new MemoryContext(
+                        FrozenMemoryContext memCtx = null;
+                        memCtx = new FrozenMemoryContext(
                             c.Resolve<InterfaceType.Factory>(),
                             () => memCtx,
                             c.Resolve<MemoryImplementationType.MemoryFactory>());
                         Importer.LoadFromXml(memCtx, generatedAssembly.GetManifestResourceStream("Kistl.Objects.Memory.FrozenObjects.xml"));
                         return memCtx;
                     })
-                    .Named<IReadOnlyKistlContext>(Kistl.API.Helper.FrozenContextServiceName)
+                    .As<IFrozenContext>()
                     .OnActivated(args =>
                     {
                         var manager = args.Context.Resolve<IMemoryActionsManager>();
-                        manager.Init(args.Context.Resolve<IReadOnlyKistlContext>(Kistl.API.Helper.FrozenContextServiceName));
+                        manager.Init(args.Context.Resolve<IFrozenContext>());
                     })
                     .SingleInstance();
             }

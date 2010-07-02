@@ -262,6 +262,14 @@ namespace Kistl.API
     }
 
     /// <summary>
+    /// A marker interface to denote the context that has all "Frozen" objects in memory.
+    /// </summary>
+    public interface IFrozenContext
+        : IReadOnlyKistlContext
+    {
+    }
+
+    /// <summary>
     /// Interface for a LinqToNNN Context.
     /// </summary>
     public interface IKistlContext

@@ -26,9 +26,7 @@ namespace Kistl.DalProvider.EF
     public abstract class BaseServerDataObject_EntityFramework
         : BaseServerDataObject, IEntityWithKey, IEntityWithRelationships, IEntityWithChangeTracker, IEntityStateObject, IEntityFrameworkNotifyingObject
     {
-        protected BaseServerDataObject_EntityFramework() : base(null) { }
-
-        protected BaseServerDataObject_EntityFramework(Func<IReadOnlyKistlContext> lazyCtx)
+        protected BaseServerDataObject_EntityFramework(Func<IFrozenContext> lazyCtx)
             : base(lazyCtx)
         {
         }
@@ -180,9 +178,7 @@ namespace Kistl.DalProvider.EF
     public abstract class BaseServerCollectionEntry_EntityFramework
         : BaseServerCollectionEntry, IEntityWithKey, IEntityWithRelationships, IEntityWithChangeTracker, IEntityStateObject, IEntityFrameworkNotifyingObject
     {
-        protected BaseServerCollectionEntry_EntityFramework() : base(null) { }
-
-        protected BaseServerCollectionEntry_EntityFramework(Func<IReadOnlyKistlContext> lazyCtx)
+        protected BaseServerCollectionEntry_EntityFramework(Func<IFrozenContext> lazyCtx)
             : base(lazyCtx)
         {
         }
@@ -357,7 +353,7 @@ namespace Kistl.DalProvider.EF
     public abstract class BaseServerCompoundObject_EntityFramework
         : BaseServerCompoundObject
     {
-        protected BaseServerCompoundObject_EntityFramework(Func<IReadOnlyKistlContext> lazyCtx)
+        protected BaseServerCompoundObject_EntityFramework(Func<IFrozenContext> lazyCtx)
             : base(lazyCtx)
         {
         }

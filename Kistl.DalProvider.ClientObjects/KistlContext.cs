@@ -24,7 +24,7 @@ namespace Kistl.DalProvider.Client
         private readonly KistlConfig config;
         private readonly IProxy proxy;
         private readonly string _ClientImplementationAssembly;
-        private readonly Func<IReadOnlyKistlContext> _lazyCtx;
+        private readonly Func<IFrozenContext> _lazyCtx;
         private readonly InterfaceType.Factory _iftFactory;
         private readonly ClientImplementationType.ClientFactory _implTypeFactory;
 
@@ -39,7 +39,7 @@ namespace Kistl.DalProvider.Client
         [SuppressMessage("Microsoft.Performance", "CA1805:DoNotInitializeUnnecessarily", Justification = "Uses global constant")]
         private int _newIDCounter = Helper.INVALIDID;
 
-        public KistlContextImpl(KistlConfig config, IProxy proxy, string clientImplementationAssembly, Func<IReadOnlyKistlContext> lazyCtx, InterfaceType.Factory iftFactory, ClientImplementationType.ClientFactory implTypeFactory)
+        public KistlContextImpl(KistlConfig config, IProxy proxy, string clientImplementationAssembly, Func<IFrozenContext> lazyCtx, InterfaceType.Factory iftFactory, ClientImplementationType.ClientFactory implTypeFactory)
         {
             this.config = config;
             this.proxy = proxy;

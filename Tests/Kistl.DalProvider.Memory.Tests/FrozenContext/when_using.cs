@@ -17,7 +17,7 @@ namespace Kistl.DalProvider.Memory.Tests.FrozenContext
         [Test]
         public void should_have_references()
         {
-            var ctx = scope.Resolve<IReadOnlyKistlContext>(Helper.FrozenContextServiceName);
+            var ctx = scope.Resolve<IFrozenContext>();
             Assert.That(ctx, Is.Not.Null);
             Assert.That(ctx.GetQuery<ObjectClass>().Where(oc => oc.BaseObjectClass != null).ToList(), Is.Not.Empty);
             Assert.That(ctx.GetQuery<ObjectClass>().Where(oc => oc.DefaultViewModelDescriptor != null).ToList(), Is.Not.Empty);
@@ -27,7 +27,7 @@ namespace Kistl.DalProvider.Memory.Tests.FrozenContext
         [Ignore("Not implemented")]
         public void should_reject_modifications()
         {
-            var ctx = scope.Resolve<IReadOnlyKistlContext>(Helper.FrozenContextServiceName);
+            var ctx = scope.Resolve<IFrozenContext>();
             Assert.That(() =>
                 {
                     ctx.GetQuery<ObjectClass>().Where(oc => oc.BaseObjectClass != null).First().BaseObjectClass = null;

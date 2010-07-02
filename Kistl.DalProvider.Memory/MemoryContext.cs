@@ -18,10 +18,10 @@ namespace Kistl.DalProvider.Memory
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.DalProvider.Memory");
 
         private static readonly List<IPersistenceObject> emptylist = new List<IPersistenceObject>(0);
-        private readonly Func<IReadOnlyKistlContext> _lazyCtx;
+        private readonly Func<IFrozenContext> _lazyCtx;
         private readonly MemoryImplementationType.MemoryFactory _implTypeFactory;
 
-        public MemoryContext(InterfaceType.Factory iftFactory, Func<IReadOnlyKistlContext> lazyCtx, MemoryImplementationType.MemoryFactory implTypeFactory)
+        public MemoryContext(InterfaceType.Factory iftFactory, Func<IFrozenContext> lazyCtx, MemoryImplementationType.MemoryFactory implTypeFactory)
             : base(iftFactory)
         {
             _lazyCtx = lazyCtx;

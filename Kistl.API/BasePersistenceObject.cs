@@ -18,14 +18,14 @@ namespace Kistl.API
     {
         // TODO 4.0: replace Func<> with Lazy<>
         // http://www.davidhayden.me/2010/01/auto-factories-in-autofac-for-lazy-instantiation-lazydependencymodule.html
-        protected BasePersistenceObject(Func<IReadOnlyKistlContext> lazyCtx)
+        protected BasePersistenceObject(Func<IFrozenContext> lazyCtx)
         {
             _lazyCtx = lazyCtx;
         }
 
-        private readonly Func<IReadOnlyKistlContext> _lazyCtx;
-        private IReadOnlyKistlContext _frozenContext;
-        protected IReadOnlyKistlContext FrozenContext
+        private readonly Func<IFrozenContext> _lazyCtx;
+        private IFrozenContext _frozenContext;
+        protected IFrozenContext FrozenContext
         {
             get
             {
@@ -362,7 +362,7 @@ namespace Kistl.API
             props.AddRange(_properties);
         }
 
-        protected virtual void CollectProperties(Func<IReadOnlyKistlContext> lazyCtx, List<PropertyDescriptor> props)
+        protected virtual void CollectProperties(Func<IFrozenContext> lazyCtx, List<PropertyDescriptor> props)
         {
             props.AddRange(_properties);
         }

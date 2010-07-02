@@ -27,9 +27,6 @@ namespace Kistl.DalProvider.EF
         {
             base.Load(moduleBuilder);
 
-            var interfaceAssembly = Assembly.Load(Kistl.API.Helper.InterfaceAssembly);
-            if (interfaceAssembly == null)
-                throw new InvalidOperationException("Unable to load Kistl.Objects Assembly, no Entity Framework Metadata will be loaded");
             var serverAssembly = Assembly.Load(ServerAssembly);
             if (serverAssembly == null)
                 throw new InvalidOperationException("Unable to load Kistl.Objects.Server Assembly, no Entity Framework Metadata will be loaded");
@@ -54,7 +51,7 @@ namespace Kistl.DalProvider.EF
                             c.Resolve<IMetaDataResolver>(),
                             null,
                             c.Resolve<KistlConfig>(),
-                            c.Resolve<Func<IReadOnlyKistlContext>>(Kistl.API.Helper.FrozenContextServiceName),
+                            c.Resolve<Func<IFrozenContext>>(),
                             c.Resolve<InterfaceType.Factory>(),
                             c.Resolve<EfImplementationType.EfFactory>()
                             );
@@ -64,7 +61,7 @@ namespace Kistl.DalProvider.EF
                 .OnActivated(args =>                              
                 {
                     var manager = args.Context.Resolve<IEFActionsManager>();
-                    manager.Init(args.Context.Resolve<IReadOnlyKistlContext>(Kistl.API.Helper.FrozenContextServiceName));
+                    manager.Init(args.Context.Resolve<IFrozenContext>());
                 })
                 .InstancePerDependency();
 
@@ -79,7 +76,7 @@ namespace Kistl.DalProvider.EF
                             c.Resolve<IMetaDataResolver>(),
                             param != null ? (Kistl.App.Base.Identity)param.Value : c.Resolve<IIdentityResolver>().GetCurrent(),
                             c.Resolve<KistlConfig>(),
-                            c.Resolve<Func<IReadOnlyKistlContext>>(Kistl.API.Helper.FrozenContextServiceName),
+                            c.Resolve<Func<IFrozenContext>>(),
                             c.Resolve<InterfaceType.Factory>(),
                             c.Resolve<EfImplementationType.EfFactory>()
                             );
@@ -89,7 +86,7 @@ namespace Kistl.DalProvider.EF
                 .OnActivated(args =>
                 {
                     var manager = args.Context.Resolve<IEFActionsManager>();
-                    manager.Init(args.Context.Resolve<IReadOnlyKistlContext>(Kistl.API.Helper.FrozenContextServiceName));
+                    manager.Init(args.Context.Resolve<IFrozenContext>());
                 })
                 .InstancePerDependency();
 
@@ -100,10 +97,10 @@ namespace Kistl.DalProvider.EF
                     lock (_lock)
                     {
                         var result = new KistlDataContext(
-                            new CachingMetaDataResolver(c.Resolve<Func<IReadOnlyKistlContext>>(Kistl.API.Helper.FrozenContextServiceName)),
+                            c.Resolve<CachingMetaDataResolver>(),
                             null,
                             c.Resolve<KistlConfig>(),
-                            c.Resolve<Func<IReadOnlyKistlContext>>(Kistl.API.Helper.FrozenContextServiceName),
+                            c.Resolve<Func<IFrozenContext>>(),
                             c.Resolve<InterfaceType.Factory>(),
                             c.Resolve<EfImplementationType.EfFactory>()
                             );
@@ -114,7 +111,7 @@ namespace Kistl.DalProvider.EF
                 .OnActivated(args =>
                 {
                     var manager = args.Context.Resolve<IEFActionsManager>();
-                    manager.Init(args.Context.Resolve<IReadOnlyKistlContext>(Kistl.API.Helper.FrozenContextServiceName));
+                    manager.Init(args.Context.Resolve<IFrozenContext>());
                 })
                 .SingleInstance();
 

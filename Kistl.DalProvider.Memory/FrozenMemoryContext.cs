@@ -1,0 +1,18 @@
+
+namespace Kistl.DalProvider.Memory
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using Kistl.API;
+
+    public sealed class FrozenMemoryContext
+       : MemoryContext, IFrozenContext
+    {
+        public FrozenMemoryContext(InterfaceType.Factory iftFactory, Func<IFrozenContext> lazyCtx, MemoryImplementationType.MemoryFactory implTypeFactory)
+            : base(iftFactory, lazyCtx, implTypeFactory)
+        {
+        }
+    }
+}

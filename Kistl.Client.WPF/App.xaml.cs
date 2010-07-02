@@ -60,19 +60,14 @@ namespace Kistl.Client.WPF
         {
             var builder = Kistl.API.Utils.AutoFacBuilder.CreateContainerBuilder(config, config.Client.Modules);
 
-            // TODO: #1572: Discuss Interface IForzenContext to avoid complex component autofac registration.
             builder
-                .Register<Launcher>(c => new Launcher(
-                    c.Resolve<IKistlContext>(), 
-                    c.Resolve<Func<IKistlContext>>(), 
-                    c.Resolve<IModelFactory>(), 
-                    c.Resolve<IReadOnlyKistlContext>(Kistl.API.Helper.FrozenContextServiceName)
-                    )
-                ).SingleInstance();
+                .RegisterType<Launcher>()
+                .SingleInstance();
 
             builder
-                .Register<Kistl.Client.WPF.View.VisualTypeTemplateSelector>((c , p) => new Kistl.Client.WPF.View.VisualTypeTemplateSelector(
-                    p.Named<object>("requestedKind"), c.Resolve<IReadOnlyKistlContext>(Kistl.API.Helper.FrozenContextServiceName)))
+                .Register<Kistl.Client.WPF.View.VisualTypeTemplateSelector>((c, p) => new Kistl.Client.WPF.View.VisualTypeTemplateSelector(
+                    p.Named<object>("requestedKind"), 
+                    c.Resolve<IFrozenContext>()))
                 .InstancePerDependency();
             
             return builder.Build();
@@ -110,7 +105,7 @@ namespace Kistl.Client.WPF
                 SplashScreen.SetInfo("Initializing Launcher");
 
                 // Init Resources
-                this.Resources["IconConverter"] = new IconConverter(config.Client.DocumentStore, container.Resolve<IReadOnlyKistlContext>(Kistl.API.Helper.FrozenContextServiceName));
+                this.Resources["IconConverter"] = new IconConverter(config.Client.DocumentStore, container.Resolve<IFrozenContext>());
                 var templateSelectorFactory = container.Resolve<Kistl.Client.WPF.View.VisualTypeTemplateSelector.Factory>();
                 this.Resources["defaultTemplateSelector"] = templateSelectorFactory(null);
                 this.Resources["listItemTemplateSelector"] = templateSelectorFactory("Kistl.App.GUI.SingleLineDataObjectKind");

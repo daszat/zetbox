@@ -12,7 +12,7 @@ namespace Kistl.DalProvider.Client.Mocks
     public class BaseClientDataObjectMock__Implementation__
         : BaseClientDataObject, ANewObjectClass, IClientObject
     {
-        public BaseClientDataObjectMock__Implementation__(Func<IReadOnlyKistlContext> lazyCtx) : base(lazyCtx) { }
+        public BaseClientDataObjectMock__Implementation__(Func<IFrozenContext> lazyCtx) : base(lazyCtx) { }
 
         public override Type GetImplementedInterface()
         {
