@@ -10,6 +10,7 @@ namespace Kistl.App.Extensions
 {
     public static class TypeRefExtensions
     {
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.TypeRef");
         private const string transientCacheKey = "__TypeRefExtensionsCache__";
 
         public static object Create(this TypeRef t, params object[] parameter)
@@ -32,6 +33,7 @@ namespace Kistl.App.Extensions
             if (result != null) return result;
 
             result = LookupByType(ctx, ctx.GetQuery<TypeRef>(), t);
+            if (result != null)  AddToCache(t, result, ctx);
 
             //if (result == null)
             //{
@@ -58,6 +60,7 @@ namespace Kistl.App.Extensions
             {
                 result = CreateTypeRef(t, ctx);
             }
+            AddToCache(t, result, ctx);
             return result;
         }
 
@@ -86,8 +89,6 @@ namespace Kistl.App.Extensions
             {
                 result.Parent = t.BaseType.ToRef(ctx);
             }
-            var cache = (Dictionary<Type, TypeRef>)ctx.TransientState[transientCacheKey];
-            cache[t] = result;
             return result;
         }
 
@@ -162,21 +163,23 @@ namespace Kistl.App.Extensions
         #region Cache Part
         private static TypeRef GetFromCache(Type t, IReadOnlyKistlContext ctx)
         {
-            PrimeCache(ctx);
+            if (!ctx.TransientState.ContainsKey(transientCacheKey))
+            {
+                ctx.TransientState[transientCacheKey] = new Dictionary<Type, TypeRef>();
+            }
             var cache = (Dictionary<Type, TypeRef>)ctx.TransientState[transientCacheKey];
             if (cache.ContainsKey(t)) return cache[t];
             return null;
         }
 
-        private static void PrimeCache(IReadOnlyKistlContext ctx)
+        private static void AddToCache(Type t, TypeRef tr, IReadOnlyKistlContext ctx)
         {
             if (!ctx.TransientState.ContainsKey(transientCacheKey))
             {
-                ctx.TransientState[transientCacheKey] = ctx.GetQuery<TypeRef>()
-                    .Select(obj => new { Type = obj.AsType(false), TypeRef = obj })
-                    .Where(i => i.Type != null)
-                    .ToDictionary(k => k.Type, v => v.TypeRef);
+                ctx.TransientState[transientCacheKey] = new Dictionary<Type, TypeRef>();
             }
+            var cache = (Dictionary<Type, TypeRef>)ctx.TransientState[transientCacheKey];
+            cache[t] = tr;
         }
         #endregion
     }
