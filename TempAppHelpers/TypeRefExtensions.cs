@@ -10,6 +10,7 @@ namespace Kistl.App.Extensions
 {
     public static class TypeRefExtensions
     {
+        private const string transientCacheKey = "__TypeRefExtensionsCache__";
 
         public static object Create(this TypeRef t, params object[] parameter)
         {
@@ -27,11 +28,11 @@ namespace Kistl.App.Extensions
             // TODO: think about and implement naked types (i.e. without arguments)
             if (t.IsGenericTypeDefinition) { throw new ArgumentOutOfRangeException("t"); }
 
-            //if (ctx == FrozenContext.Single)
-            //{
-            //    return ToFrozenRef(t);
-            //}
-            var result = LookupByType(ctx, ctx.GetQuery<TypeRef>(), t);
+
+            var result = GetFromCache(t, ctx);
+            if (result != null) return result;
+
+            result = LookupByType(ctx, ctx.GetQuery<TypeRef>(), t);
 
             //if (result == null)
             //{
@@ -40,6 +41,61 @@ namespace Kistl.App.Extensions
 
             return result;
         }
+
+        #region Cache Part
+        // clone of LookupByType(IKistlContext, IQueryable<TypeRef>, Type) since this function takes 5ms per call when called with an IQueryable
+        private static TypeRef LookupInCache(IReadOnlyKistlContext ctx, IEnumerable<TypeRef> source, Type t)
+        {
+            // TODO: think about and implement naked types (i.e. without arguments)
+            if (t.IsGenericTypeDefinition) throw new ArgumentOutOfRangeException("t");
+
+            if (t.IsGenericType)
+            {
+                string fullName = t.GetGenericTypeDefinition().FullName;
+                var args = t.GetGenericArguments().Select(arg => arg.ToRef(ctx)).ToArray();
+                var argsCount = args.Count();
+                foreach (var tRef in source.Where(tRef
+                    => tRef.Assembly.Name == t.Assembly.FullName
+                    && tRef.FullName == fullName
+                    && tRef.GenericArguments.Count == argsCount))
+                {
+                    bool equal = true;
+                    for (int i = 0; i < tRef.GenericArguments.Count; i++)
+                    {
+                        equal &= args[i] == tRef.GenericArguments[i];
+                        if (!equal)
+                            break;
+                    }
+                    if (equal)
+                        return tRef;
+                }
+                return null;
+            }
+            else
+            {
+                return source.SingleOrDefault(tRef
+                    => tRef.Assembly.Name == t.Assembly.FullName
+                    && tRef.FullName == t.FullName
+                    && tRef.GenericArguments.Count == 0);
+            }
+        }
+        
+        private static TypeRef GetFromCache(Type t, IReadOnlyKistlContext ctx)
+        {
+            PrimeCache(ctx);
+            var cache = (ILookup<string, TypeRef>)ctx.TransientState[transientCacheKey];
+            return LookupInCache(ctx, 
+                cache[t.IsGenericType ? t.GetGenericTypeDefinition().FullName : t.FullName], t);
+        }
+
+        private static void PrimeCache(IReadOnlyKistlContext ctx)
+        {
+            if (!ctx.TransientState.ContainsKey(transientCacheKey))
+            {
+                ctx.TransientState[transientCacheKey] = ctx.GetQuery<TypeRef>().ToLookup(obj => obj.FullName);
+            }
+        }
+        #endregion
 
         /// <summary>
         /// Returns the right TypeRef for the specified system type, using an additional provided cache.
