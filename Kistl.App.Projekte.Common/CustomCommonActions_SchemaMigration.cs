@@ -14,22 +14,99 @@ namespace ZBox.App.SchemaMigration
     {
         public static void OnToString_MigrationProject(ZBox.App.SchemaMigration.MigrationProject obj, MethodReturnEventArgs<System.String> e)
         {
+            e.Result = !string.IsNullOrEmpty(obj.Description) ? obj.Description : "new Migration Project";
         }
 
         public static void OnToString_SourceColumn(ZBox.App.SchemaMigration.SourceColumn obj, MethodReturnEventArgs<System.String> e)
         {
+            e.Result = (obj.SourceTable != null ? obj.SourceTable.Name : null) ?? string.Empty;
+            e.Result += !string.IsNullOrEmpty(obj.Name) ? obj.Name : "new Source Column";
         }
 
         public static void OnToString_SourceTable(ZBox.App.SchemaMigration.SourceTable obj, MethodReturnEventArgs<System.String> e)
         {
+            e.Result = !string.IsNullOrEmpty(obj.Name) ? obj.Name : "new Source Table";
         }
 
         public static void OnCreateObjectClass_SourceTable(ZBox.App.SchemaMigration.SourceTable obj)
         {
+            if (obj.MigrationProject == null) throw new InvalidOperationException("Not attached to a migration project");
+            if (obj.MigrationProject.DestinationModule == null) throw new InvalidOperationException("No destination module provided");
+
+            obj.DestinationObjectClass = obj.Context.Create<ObjectClass>();
+            obj.DestinationObjectClass.Name = obj.Name;
+            obj.DestinationObjectClass.Module = obj.MigrationProject.DestinationModule;
+            obj.DestinationObjectClass.Description = obj.Description;
         }
 
         public static void OnCreateProperty_SourceColumn(ZBox.App.SchemaMigration.SourceColumn obj)
         {
+            if (obj.SourceTable == null) throw new InvalidOperationException("Not attached to a source table");
+            if (obj.SourceTable.DestinationObjectClass == null) throw new InvalidOperationException("Source table has no destination object class");
+
+            Property p = null;
+
+            switch(obj.DbType)
+            {
+                case ColumnType.AnsiString:
+                case ColumnType.AnsiStringFixedLength:
+                case ColumnType.String:
+                case ColumnType.StringFixedLength:
+                    p = obj.Context.Create<StringProperty>();
+                    var c = obj.Context.Create<StringRangeConstraint>();
+                    c.MaxLength = obj.Size;
+                    p.Constraints.Add(c);
+                    break;
+
+
+                case ColumnType.Boolean:
+                    p = obj.Context.Create<BoolProperty>();
+                    break;
+
+                case ColumnType.Date:
+                case ColumnType.DateTime:
+                case ColumnType.DateTime2:
+                    p = obj.Context.Create<DateTimeProperty>();
+                    break;
+
+                case ColumnType.Single:
+                case ColumnType.Double:
+                    p = obj.Context.Create<DoubleProperty>();
+                    break;
+                
+                case ColumnType.Byte:
+                case ColumnType.Int16:
+                case ColumnType.Int32:
+                    p = obj.Context.Create<IntProperty>();
+                    break;
+
+                case ColumnType.Guid:
+                    p = obj.Context.Create<GuidProperty>();
+                    break;
+
+                case ColumnType.Binary:
+                case ColumnType.Currency:
+                case ColumnType.DateTimeOffset:
+                case ColumnType.Decimal:
+                case ColumnType.Int64:
+                case ColumnType.Object:
+                case ColumnType.SByte:
+                case ColumnType.Time:
+                case ColumnType.UInt16:
+                case ColumnType.UInt32:
+                case ColumnType.UInt64:
+                case ColumnType.VarNumeric:
+                case ColumnType.Xml:
+                default:
+                    throw new NotSupportedException("Unknown DbType " + obj.DbType);
+            }
+
+            if (obj.IsNullable == false)
+            {
+                p.Constraints.Add(obj.Context.Create<NotNullableConstraint>());
+            }
+
+            obj.DestinationProperty = p;
         }
 
     }
