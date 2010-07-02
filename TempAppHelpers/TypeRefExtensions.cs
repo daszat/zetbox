@@ -28,7 +28,6 @@ namespace Kistl.App.Extensions
             // TODO: think about and implement naked types (i.e. without arguments)
             if (t.IsGenericTypeDefinition) { throw new ArgumentOutOfRangeException("t"); }
 
-
             var result = GetFromCache(t, ctx);
             if (result != null) return result;
 
@@ -42,95 +41,6 @@ namespace Kistl.App.Extensions
             return result;
         }
 
-        #region Cache Part
-        // clone of LookupByType(IKistlContext, IQueryable<TypeRef>, Type) since this function takes 5ms per call when called with an IQueryable
-        private static TypeRef LookupInCache(IReadOnlyKistlContext ctx, IEnumerable<TypeRef> source, Type t)
-        {
-            // TODO: think about and implement naked types (i.e. without arguments)
-            if (t.IsGenericTypeDefinition) throw new ArgumentOutOfRangeException("t");
-
-            if (t.IsGenericType)
-            {
-                string fullName = t.GetGenericTypeDefinition().FullName;
-                var args = t.GetGenericArguments().Select(arg => arg.ToRef(ctx)).ToArray();
-                var argsCount = args.Count();
-                foreach (var tRef in source.Where(tRef
-                    => tRef.Assembly.Name == t.Assembly.FullName
-                    && tRef.FullName == fullName
-                    && tRef.GenericArguments.Count == argsCount))
-                {
-                    bool equal = true;
-                    for (int i = 0; i < tRef.GenericArguments.Count; i++)
-                    {
-                        equal &= args[i] == tRef.GenericArguments[i];
-                        if (!equal)
-                            break;
-                    }
-                    if (equal)
-                        return tRef;
-                }
-                return null;
-            }
-            else
-            {
-                return source.SingleOrDefault(tRef
-                    => tRef.Assembly.Name == t.Assembly.FullName
-                    && tRef.FullName == t.FullName
-                    && tRef.GenericArguments.Count == 0);
-            }
-        }
-        
-        private static TypeRef GetFromCache(Type t, IReadOnlyKistlContext ctx)
-        {
-            PrimeCache(ctx);
-            var cache = (ILookup<string, TypeRef>)ctx.TransientState[transientCacheKey];
-            return LookupInCache(ctx, 
-                cache[t.IsGenericType ? t.GetGenericTypeDefinition().FullName : t.FullName], t);
-        }
-
-        private static void PrimeCache(IReadOnlyKistlContext ctx)
-        {
-            if (!ctx.TransientState.ContainsKey(transientCacheKey))
-            {
-                ctx.TransientState[transientCacheKey] = ctx.GetQuery<TypeRef>().ToLookup(obj => obj.FullName);
-            }
-        }
-        #endregion
-
-        /// <summary>
-        /// Returns the right TypeRef for the specified system type, using an additional provided cache.
-        /// </summary>
-        /// <param name="t">the type to look up.</param>
-        /// <param name="ctx">the context to use to create the TypeRef if none is availabe.</param>
-        /// <param name="cache">an authoritative cache of all TypeRefs by TypeRef.FullName</param>
-        /// <returns>a TypeRef describing <paramref name="t"/></returns>
-        public static TypeRef ToRef(this Type t, IKistlContext ctx, ILookup<string, TypeRef> cache)
-        {
-            if (t == null) { throw new ArgumentNullException("t"); }
-            if (ctx == null) { throw new ArgumentNullException("ctx"); }
-
-            TypeRef result = null;
-
-            if (cache != null && cache.Contains(t.FullName))
-            {
-                foreach (var tr in cache[t.FullName])
-                {
-                    if (tr.AsType(false) == t)
-                    {
-                        result = tr;
-                        break;
-                    }
-                }
-            }
-
-            if (result == null)
-            {
-                result = t.ToRef(ctx);
-            }
-
-            return result;
-        }
-
         /// <returns>a Kistl TypeRef for a given System.Type</returns>
         public static TypeRef ToRef(this Type t, IKistlContext ctx)
         {
@@ -140,11 +50,10 @@ namespace Kistl.App.Extensions
             // TODO: think about and implement naked types (i.e. without arguments)
             if (t.IsGenericTypeDefinition) { throw new ArgumentOutOfRangeException("t"); }
 
-            //if (ctx == FrozenContext.Single)
-            //{
-            //    return ToFrozenRef(t);
-            //}
-            var result = LookupByType(ctx, ctx.GetQuery<TypeRef>(), t);
+            var result = GetFromCache(t, ctx);
+            if (result != null) return result;
+
+            result = LookupByType(ctx, ctx.GetQuery<TypeRef>(), t);
             if (result == null)
             {
                 result = CreateTypeRef(t, ctx);
@@ -177,6 +86,8 @@ namespace Kistl.App.Extensions
             {
                 result.Parent = t.BaseType.ToRef(ctx);
             }
+            var cache = (Dictionary<Type, TypeRef>)ctx.TransientState[transientCacheKey];
+            cache[t] = result;
             return result;
         }
 
@@ -248,6 +159,26 @@ namespace Kistl.App.Extensions
             return result;
         }
 
+        #region Cache Part
+        private static TypeRef GetFromCache(Type t, IReadOnlyKistlContext ctx)
+        {
+            PrimeCache(ctx);
+            var cache = (Dictionary<Type, TypeRef>)ctx.TransientState[transientCacheKey];
+            if (cache.ContainsKey(t)) return cache[t];
+            return null;
+        }
+
+        private static void PrimeCache(IReadOnlyKistlContext ctx)
+        {
+            if (!ctx.TransientState.ContainsKey(transientCacheKey))
+            {
+                ctx.TransientState[transientCacheKey] = ctx.GetQuery<TypeRef>()
+                    .Select(obj => new { Type = obj.AsType(false), TypeRef = obj })
+                    .Where(i => i.Type != null)
+                    .ToDictionary(k => k.Type, v => v.TypeRef);
+            }
+        }
+        #endregion
     }
 
 }

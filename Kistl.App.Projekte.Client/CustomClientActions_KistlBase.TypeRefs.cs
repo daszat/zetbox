@@ -72,11 +72,11 @@ namespace Kistl.App.Base
 
                 try
                 {
-                    var newTypes = LoadAndCreateTypes(assembly, ctx, oldTypes);
+                    var newTypes = LoadAndCreateTypes(assembly, ctx);
                     MarkOldTypesAsDeleted(ctx, oldTypes, newTypes);
                     UpdateTypeParents(newTypes);
-                    CreateViewModelDescriptors(ctx, newTypes, oldTypes);
-                    CreateViewDescriptors(ctx, newTypes, oldTypes);
+                    CreateViewModelDescriptors(ctx, newTypes);
+                    CreateViewDescriptors(ctx, newTypes);
                 }
                 catch (FileNotFoundException ex)
                 {
@@ -85,7 +85,7 @@ namespace Kistl.App.Base
             }
         }
 
-        private static void CreateViewModelDescriptors(IKistlContext ctx, Dictionary<int, TypeRef> newTypes, ILookup<string, TypeRef> oldTypes)
+        private static void CreateViewModelDescriptors(IKistlContext ctx, Dictionary<int, TypeRef> newTypes)
         {
             using (Logging.Log.InfoTraceMethodCallFormat("Creating ViewModelDescriptors"))
             {
@@ -118,7 +118,7 @@ namespace Kistl.App.Base
             }
         }
 
-        private static void CreateViewDescriptors(IKistlContext ctx, Dictionary<int, TypeRef> newTypes, ILookup<string, TypeRef> oldTypes)
+        private static void CreateViewDescriptors(IKistlContext ctx, Dictionary<int, TypeRef> newTypes)
         {
             using (Logging.Log.InfoTraceMethodCallFormat("Creating ViewDescriptors"))
             {
@@ -192,7 +192,7 @@ namespace Kistl.App.Base
             }
         }
 
-        private static Dictionary<int, TypeRef> LoadAndCreateTypes(Assembly assembly, IKistlContext ctx, ILookup<string, TypeRef> oldTypes)
+        private static Dictionary<int, TypeRef> LoadAndCreateTypes(Assembly assembly, IKistlContext ctx)
         {
             using (Logging.Log.InfoTraceMethodCall("Loading new types"))
             {
@@ -200,7 +200,7 @@ namespace Kistl.App.Base
                     .ReflectionOnlyLoad(assembly.Name)
                     .GetExportedTypes()
                     .Where(t => !t.IsGenericTypeDefinition)
-                    .Select(t => t.ToRef(ctx, oldTypes))
+                    .Select(t => t.ToRef(ctx))
                     .ToDictionary(tr => tr.ID);
                 return newTypes;
             }
