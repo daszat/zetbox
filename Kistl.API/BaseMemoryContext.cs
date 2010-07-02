@@ -44,6 +44,7 @@ namespace Kistl.API
         {
             this.objects = new ContextCache(this);
             this._iftFactory = iftFactory;
+            KistlContextDebuggerSingleton.Created(this);
         }
 
         /// <inheritdoc />
@@ -414,6 +415,10 @@ namespace Kistl.API
         /// <inheritdoc />
         public event GenericEventHandler<IPersistenceObject> ObjectDeleted;
 
+        /// <inheritdoc />
+        public event GenericEventHandler<IKistlContext> Changed;
+
+
         /// <summary>
         /// Triggers the <see cref="ObjectCreated"/> event.
         /// </summary>
@@ -438,9 +443,28 @@ namespace Kistl.API
             }
         }
 
+        protected virtual void OnChanged()
+        {
+            GenericEventHandler<IKistlContext> temp = Changed;
+            if (temp != null)
+            {
+                temp(this, new GenericEventArgs<IKistlContext>() { Data = this });
+            }
+        }
+
+        /// <summary>
+        /// Fired when the Context is beeing disposed.
+        /// </summary>
+        public event GenericEventHandler<IReadOnlyKistlContext> Disposing;
+
         /// <inheritdoc />
         public virtual void Dispose()
         {
+            GenericEventHandler<IReadOnlyKistlContext> temp = Disposing;
+            if (temp != null)
+            {
+                temp(this, new GenericEventArgs<IReadOnlyKistlContext>() { Data = this });
+            }
             // nothing to dispose
             IsDisposed = true;
         }
@@ -469,8 +493,6 @@ namespace Kistl.API
             throw new NotSupportedException();
         }
 
-        #region IReadOnlyKistlContext Members
-        
         public InterfaceType GetInterfaceType(IPersistenceObject obj)
         {
             return _iftFactory(((BasePersistenceObject)obj).GetImplementedInterface());
@@ -482,10 +504,23 @@ namespace Kistl.API
         }
 
         public abstract InterfaceType GetInterfaceType(string typeName);
-       
+
         public abstract ImplementationType GetImplementationType(Type t);
         public abstract ImplementationType ToImplementationType(InterfaceType t);
 
-        #endregion
+        private IDictionary<object, object> _TransientState = null;
+        /// <inheritdoc />
+        public IDictionary<object, object> TransientState
+        {
+            get
+            {
+                CheckDisposed();
+                if (_TransientState == null)
+                {
+                    _TransientState = new Dictionary<object, object>();
+                }
+                return _TransientState;
+            }
+        }
     }
 }

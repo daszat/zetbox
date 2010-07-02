@@ -36,28 +36,5 @@ namespace Kistl.API
                 }
             }
         }
-
-        public static void Disposed(IKistlContext ctx)
-        {
-            lock (_lock)
-            {
-                if (_Current != null)
-                {
-                    _Current.Disposed(ctx);
-                }
-            }
-        }
-
-        public static void Changed(IKistlContext ctx)
-        {
-            lock (_lock)
-            {
-                if (_Current != null)
-                {
-                    _Current.Changed(ctx);
-                }
-            }
-        }
     }
-
 }

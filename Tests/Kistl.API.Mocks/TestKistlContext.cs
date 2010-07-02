@@ -213,6 +213,17 @@ namespace Kistl.API.Mocks
             if (ObjectDeleted != null) ObjectDeleted(this, new GenericEventArgs<IPersistenceObject>());
         }
 
+        /// <inheritdoc />
+        public event GenericEventHandler<IKistlContext> Changed;
+        protected virtual void OnChanged()
+        {
+            GenericEventHandler<IKistlContext> temp = Changed;
+            if (temp != null)
+            {
+                temp(this, new GenericEventArgs<IKistlContext>() { Data = this });
+            }
+        }
+
         public event GenericEventHandler<IPersistenceObject> ObjectCreated;
 
         public event GenericEventHandler<IPersistenceObject> ObjectDeleted;
@@ -220,9 +231,15 @@ namespace Kistl.API.Mocks
         #endregion
 
         #region IDisposable Members
+        public event GenericEventHandler<IReadOnlyKistlContext> Disposing;
 
         public void Dispose()
         {
+            GenericEventHandler<IReadOnlyKistlContext> temp = Disposing;
+            if (temp != null)
+            {
+                temp(this, new GenericEventArgs<IReadOnlyKistlContext>() { Data = this });
+            }
         }
 
         #endregion
@@ -292,6 +309,20 @@ namespace Kistl.API.Mocks
         {
             return GetImplementationType(Type.GetType(t.Type.FullName + Kistl.API.Helper.ImplementationSuffix + "," + typeof(TestKistlContext).Assembly.FullName, true));
         }
+        private IDictionary<object, object> _TransientState = null;
+        /// <inheritdoc />
+        public IDictionary<object, object> TransientState
+        {
+            get
+            {
+                if (_TransientState == null)
+                {
+                    _TransientState = new Dictionary<object, object>();
+                }
+                return _TransientState;
+            }
+        }
         #endregion
+
     }
 }

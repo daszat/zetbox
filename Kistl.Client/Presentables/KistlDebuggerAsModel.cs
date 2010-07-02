@@ -73,19 +73,21 @@ namespace Kistl.Client.Presentables
         void IKistlContextDebugger.Created(IKistlContext ctx)
         {
             _activeCtxCache.Add(GetModel(ctx));
+            ctx.Disposing += Disposing;
+            ctx.Changed += Changed;
         }
 
-        void IKistlContextDebugger.Disposed(IKistlContext ctx)
+        void Disposing(object sender, GenericEventArgs<IReadOnlyKistlContext> e)
         {
-            var mdl = GetModel(ctx);
+            var mdl = GetModel((IKistlContext)e.Data);
             _activeCtxCache.Remove(mdl);
             _disposedCtxCache.Add(mdl);
         }
 
-        void IKistlContextDebugger.Changed(IKistlContext ctx)
+        void Changed(object sender, GenericEventArgs<IKistlContext> e)
         {
-            var ctxMdl = GetModel(ctx);
-            ctxMdl.OnContextChanged();
+            var mdl = GetModel(e.Data);
+            mdl.OnContextChanged();
         }
         #endregion
     }

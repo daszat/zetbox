@@ -41,9 +41,19 @@ namespace Kistl.API.Server
             this.iftFactory = iftFactory;
         }
 
+        /// <summary>
+        /// Fired when the Context is beeing disposed.
+        /// </summary>
+        public event GenericEventHandler<IReadOnlyKistlContext> Disposing;
+
         // TODO: implement proper IDisposable pattern
         public virtual void Dispose()
         {
+            GenericEventHandler<IReadOnlyKistlContext> temp = Disposing;
+            if (temp != null)
+            {
+                temp(this, new GenericEventArgs<IReadOnlyKistlContext>() { Data = this });
+            }
             GC.SuppressFinalize(this);
             IsDisposed = true;
         }
@@ -86,6 +96,8 @@ namespace Kistl.API.Server
             // call Attach on Subitems
             obj.AttachToContext(this);
 
+            OnChanged();
+
             return obj;
         }
 
@@ -98,6 +110,8 @@ namespace Kistl.API.Server
             if (obj == null) { throw new ArgumentNullException("obj"); }
 
             obj.DetachFromContext(this);
+
+            OnChanged();
         }
 
         /// <summary>
@@ -494,6 +508,17 @@ namespace Kistl.API.Server
             return new System.IO.FileInfo(path);
         }
 
+        /// <inheritdoc />
+        public event GenericEventHandler<IKistlContext> Changed;
+        protected virtual void OnChanged()
+        {
+            GenericEventHandler<IKistlContext> temp = Changed;
+            if (temp != null)
+            {
+                temp(this, new GenericEventArgs<IKistlContext>() { Data = this });
+            }
+        }
+
         public event GenericEventHandler<IPersistenceObject> ObjectCreated;
 
         protected virtual void OnObjectCreated(IPersistenceObject obj)
@@ -514,8 +539,6 @@ namespace Kistl.API.Server
             }
         }
 
-        #region IReadOnlyKistlContext Members
-
         public InterfaceType GetInterfaceType(IPersistenceObject obj)
         {
             return iftFactory(((BasePersistenceObject)obj).GetImplementedInterface());
@@ -534,6 +557,18 @@ namespace Kistl.API.Server
         public abstract ImplementationType GetImplementationType(Type t);
         public abstract ImplementationType ToImplementationType(InterfaceType t);
 
-        #endregion
+        private IDictionary<object, object> _TransientState = null;
+        /// <inheritdoc />
+        public IDictionary<object, object> TransientState
+        {
+            get
+            {
+                if (_TransientState == null)
+                {
+                    _TransientState = new Dictionary<object, object>();
+                }
+                return _TransientState;
+            }
+        }
     }
 }

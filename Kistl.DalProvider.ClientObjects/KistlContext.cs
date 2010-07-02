@@ -53,6 +53,8 @@ namespace Kistl.DalProvider.Client
             KistlContextDebuggerSingleton.Created(this);
         }
 
+        public event GenericEventHandler<IReadOnlyKistlContext> Disposing;
+
         [SuppressMessage("Microsoft.Performance", "CA1805:DoNotInitializeUnnecessarily", Justification = "Clarifies intent of variable")]
         private bool disposed = false;
         /// <summary>
@@ -60,13 +62,18 @@ namespace Kistl.DalProvider.Client
         /// </summary>
         public void Dispose()
         {
+            GenericEventHandler<IReadOnlyKistlContext> temp = Disposing;
+            if (temp != null)
+            {
+                temp(this, new GenericEventArgs<IReadOnlyKistlContext>() { Data = this });
+            }
+
             lock (_lock)
             {
                 if (!disposed)
                 {
                     proxy.Dispose();
                     DisposedAt = new StackTrace(true);
-                    KistlContextDebuggerSingleton.Disposed(this);
                 }
                 disposed = true;
             }
@@ -373,8 +380,7 @@ namespace Kistl.DalProvider.Client
             // Call Objects Attach Method to ensure, that every Child Object is also attached
             obj.AttachToContext(this);
 
-            // update the debugger last 
-            KistlContextDebuggerSingleton.Changed(this);
+            OnChanged();
 
             return obj;
         }
@@ -391,7 +397,7 @@ namespace Kistl.DalProvider.Client
 
             _objects.Remove(obj);
             obj.DetachFromContext(this);
-            KistlContextDebuggerSingleton.Changed(this);
+            OnChanged();
         }
 
         /// <summary>
@@ -656,6 +662,17 @@ namespace Kistl.DalProvider.Client
             return GetPersistenceObjectQuery<T>().Where(o => exportGuids.Contains(((Kistl.App.Base.IExportable)o).ExportGuid));
         }
 
+        /// <inheritdoc />
+        public event GenericEventHandler<IKistlContext> Changed;
+        protected virtual void OnChanged()
+        {
+            GenericEventHandler<IKistlContext> temp = Changed;
+            if (temp != null)
+            {
+                temp(this, new GenericEventArgs<IKistlContext>() { Data = this });
+            }
+        }
+
         public event GenericEventHandler<IPersistenceObject> ObjectCreated;
 
         protected virtual void OnObjectCreated(IPersistenceObject obj)
@@ -752,6 +769,20 @@ namespace Kistl.DalProvider.Client
             return _implTypeFactory(t);
         }
 
+        private IDictionary<object, object> _TransientState = null;
+        /// <inheritdoc />
+        public IDictionary<object, object> TransientState
+        {
+            get
+            {
+                CheckDisposed();
+                if (_TransientState == null)
+                {
+                    _TransientState = new Dictionary<object, object>();
+                }
+                return _TransientState;
+            }
+        }
         #endregion
     }
 }

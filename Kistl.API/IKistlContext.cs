@@ -85,8 +85,6 @@ namespace Kistl.API
     public interface IKistlContextDebugger
     {
         void Created(IKistlContext ctx);
-        void Disposed(IKistlContext ctx);
-        void Changed(IKistlContext ctx);
     }
 
     public interface IReadOnlyKistlContext
@@ -97,6 +95,11 @@ namespace Kistl.API
         InterfaceType GetInterfaceType(IPersistenceObject obj);
         ImplementationType GetImplementationType(Type t);
         ImplementationType ToImplementationType(InterfaceType t);
+
+        /// <summary>
+        /// Fired when the Context is beeing disposed.
+        /// </summary>
+        event GenericEventHandler<IReadOnlyKistlContext> Disposing;
 
         /// <summary>
         /// Returns a Query by T
@@ -250,6 +253,12 @@ namespace Kistl.API
         /// IsDisposed can be used to detect whether this IKistlContext was aborted with Dispose()
         /// </summary>
         bool IsDisposed { get; }
+
+        /// <summary>
+        /// Dictionary for storing transient state
+        /// </summary>
+        /// <remarks>The caller is responsible for disposing stored objects. See <see cref="Disposing"/> Event.</remarks>
+        IDictionary<object, object> TransientState { get; }
     }
 
     /// <summary>
@@ -370,6 +379,11 @@ namespace Kistl.API
         /// The delted object is passed as Data.
         /// </summary>
         event GenericEventHandler<IPersistenceObject> ObjectDeleted;
+
+        /// <summary>
+        /// Fired when the AttachedObject collection has been changed.
+        /// </summary>
+        event GenericEventHandler<IKistlContext> Changed;
 
     }
 
