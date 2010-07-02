@@ -66,7 +66,6 @@ namespace Kistl.Server.Service
             try
             {
                 List<Action<ILifetimeScope, List<string>>> actions = new List<Action<ILifetimeScope, List<string>>>();
-                string dataSourceXmlFile = null;
 
                 options = new OptionSet()
                     {
@@ -74,32 +73,14 @@ namespace Kistl.Server.Service
                             v => { if (v != null) { actions.Add((c, args) => c.Resolve<Server>().Export(v, args.ToArray())); } }
                             },
                         { "import=", "import the database from the specified xml file",
-                            v => {
-                                if (v == null) { return; }
-
-                                if (dataSourceXmlFile != null && !dataSourceXmlFile.Equals(v))
-                                { 
-                                    Log.Fatal("Inconsistent XML Source found on command line");
-                                    PrintHelpAndExit(); 
-                                }
-                                dataSourceXmlFile = v;
-                                actions.Add((c, args) => c.Resolve<Server>().Import(v));
-                            }},
+                            v => { if (v != null) { actions.Add((c, args) => c.Resolve<Server>().Import(v)); } }
+                            },
                         { "publish=", "publish the specified modules to this xml file. Any extra argument is used as namespace",
                             v => { if (v != null) { actions.Add((c, args) => c.Resolve<Server>().Publish(v, args.ToArray())); } }
                             },
-                        { "deploy=", "deploy the database frpm the specified xml file",
-                            v => {
-                                if (v == null) { return; }
-
-                                if (dataSourceXmlFile != null && !dataSourceXmlFile.Equals(v))
-                                { 
-                                    Log.Fatal("Inconsistent XML Source found on command line");
-                                    PrintHelpAndExit(); 
-                                }
-                                dataSourceXmlFile = v;
-                                actions.Add((c, args) => c.Resolve<Server>().Deploy(v));
-                            }},
+                        { "deploy=", "deploy the database from the specified xml file",
+                            v => { if (v != null) { actions.Add((c, args) => c.Resolve<Server>().Deploy(v)); } }
+                            },
                         { "checkdeployedschema", "checks the sql schema against the deployed schema",
                             v => { if (v != null) { actions.Add((c, args) => c.Resolve<Server>().CheckSchema(false)); } } 
                             },
@@ -123,18 +104,8 @@ namespace Kistl.Server.Service
                             v => { if (v != null) { actions.Add((c, args) => c.Resolve<Server>().UpdateSchema()); } }
                             },
                         { "updateschema=", "updates the schema to the specified xml file",
-                            v => {
-                                if (v != null) 
-                                {
-                                    if (dataSourceXmlFile != null && !dataSourceXmlFile.Equals(v))
-                                    { 
-                                        Log.Fatal("Inconsistent XML Source found on command line");
-                                        PrintHelpAndExit(); 
-                                    }
-                                    dataSourceXmlFile = v;
-                                    actions.Add((c, args) => c.Resolve<Server>().UpdateSchema(v));
-                                }
-                            }},
+                            v => { if (v != null) { actions.Add((c, args) => c.Resolve<Server>().UpdateSchema(v)); } }
+                            },
                         { "generate", "generates and compiles new data classes",
                             v => { if (v != null) { actions.Add((c, args) => c.Resolve<Server>().GenerateCode()); } }
                             },
@@ -154,7 +125,7 @@ namespace Kistl.Server.Service
                         { "syncidentities", "synchronices local and domain users with Kistl Identities",
                             v => { if (v != null) { actions.Add((c, args) => c.Resolve<Server>().SyncIdentities()); } }
                             },
-                        { "copydb", "copies a database to a staging database. Extra Arguments are be: [SRCPROVIDER] [SRC ConnectionString] [DESTPROVIDER] [DEST ConnectionString]. Valid Providers are: MSSQL, POSTGRES, OLEDB. WARNING: All tables in the destination database will be dropped!",
+                        { "copydb", "copies a database to a staging database. Extra Arguments are: [SRCPROVIDER] [SRC ConnectionString] [DESTPROVIDER] [DEST ConnectionString]. Valid Providers are: MSSQL, POSTGRES, OLEDB. WARNING: All tables in the destination database will be dropped!",
                             v => { if (v != null) { 
                                 actions.Add((c, args) => { 
                                     if (args == null) PrintHelpAndExit();
@@ -181,15 +152,6 @@ namespace Kistl.Server.Service
                     return 1;
                 }
 
-                Action<ContainerBuilder> registerXmlFallback = null;
-                if (dataSourceXmlFile != null)
-                {
-                    registerXmlFallback = container =>
-                    {
-
-                    };
-                }
-
                 Log.TraceTotalMemory("Before InitApplicationContext");
 
                 var config = ExtractConfig(extraArguments);
@@ -197,10 +159,8 @@ namespace Kistl.Server.Service
                 Log.TraceTotalMemory("After InitApplicationContext");
 
                 AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
-                using (var container = CreateMasterContainer(config, dataSourceXmlFile))
+                using (var container = CreateMasterContainer(config, null))
                 {
-                    DefaultInitialisation(dataSourceXmlFile, container);
-
                     // process command line
                     if (actions.Count > 0)
                     {
@@ -256,40 +216,10 @@ namespace Kistl.Server.Service
             }
         }
 
-        internal static void DefaultInitialisation(string dataSourceXmlFile, IContainer container)
-        {
-            using (Log.InfoTraceMethodCall())
-            {
-                Log.TraceTotalMemory("Before DefaultInitialisation()");
-
-                Log.TraceTotalMemory("After DefaultInitialisation()");
-            }
-        }
-
         internal static IContainer CreateMasterContainer(KistlConfig config, string dataSourceXmlFile)
         {
             var builder = Kistl.API.Utils.AutoFacBuilder.CreateContainerBuilder(config, config.Server.Modules);
 
-            // register components from most general to most specific source
-            // if there is a data source xml file, use it instead of a (possibly missing) frozen context
-            if (dataSourceXmlFile != null)
-            {
-                builder.Register(c =>
-                    {
-                        var memCtx = c.Resolve<BaseMemoryContext>();
-                        Importer.LoadFromXml(memCtx, dataSourceXmlFile);
-                        return memCtx;
-                    })
-                    .As<IReadOnlyKistlContext>()
-                    .Named<IReadOnlyKistlContext>(Kistl.API.Helper.FrozenContextServiceName)
-                    .SingleInstance();
-            }
-            else
-            {
-                builder.Register(c => c.Resolve<IReadOnlyKistlContext>())
-                    .Named<IReadOnlyKistlContext>(Kistl.API.Helper.FrozenContextServiceName)
-                    .SingleInstance();
-            }
             // register deployment-specific components
             builder.RegisterModule(new ConfigurationSettingsReader("servercomponents"));
 

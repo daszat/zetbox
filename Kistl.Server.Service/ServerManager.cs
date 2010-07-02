@@ -28,8 +28,6 @@ namespace Kistl.Server.Service
 
             container = Program.CreateMasterContainer(config, null);
 
-            Program.DefaultInitialisation(null, container);
-
             wcfServer = container.Resolve<IKistlAppDomain>();
             wcfServer.Start(config);
         }
