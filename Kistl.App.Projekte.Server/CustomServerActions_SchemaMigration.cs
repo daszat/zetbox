@@ -78,9 +78,15 @@ namespace ZBox.App.SchemaMigration
                     {
                         destCol = obj.Context.Create<SourceColumn>();
                         destCol.Name = col.Name;
-                        destCol.DbType = (ColumnType)col.Type;
                         destTbl.SourceColumn.Add(destCol);
                     }
+                    else
+                    {
+                        destCol = destCols[col.Name];
+                    }
+                    destCol.DbType = (ColumnType)col.Type;
+                    destCol.IsNullable = col.IsNullable;
+                    destCol.Size = col.Size;
                 }
             }
         }

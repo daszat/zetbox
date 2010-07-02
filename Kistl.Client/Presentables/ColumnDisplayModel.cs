@@ -10,6 +10,12 @@ namespace Kistl.Client.Presentables
 
     public class ColumnDisplayModel
     {
+        public ColumnDisplayModel()
+        {
+            IsMethod = false;
+        }
+
+        public bool IsMethod { get; set; }
         public string Header { get; set; }
         public string Name { get; set; }
         public ControlKind ControlKind { get; set; }

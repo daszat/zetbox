@@ -106,7 +106,7 @@ namespace Kistl.Client.Presentables
             get { return _referencedClass; }
         }
 
-        public GridDisplayConfiguration DisplayedColumns
+        public virtual GridDisplayConfiguration DisplayedColumns
         {
             get
             {

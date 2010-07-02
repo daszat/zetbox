@@ -20,6 +20,10 @@ namespace Kistl.Client.WPF.View.KistlBase
     [ContentProperty("Content")]
     public class PropertyEditor : UserControl
     {
+        public PropertyEditor()
+        {
+            VerticalContentAlignment = VerticalAlignment.Top;
+        }
     }
 
 }

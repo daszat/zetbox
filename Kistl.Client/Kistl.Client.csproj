@@ -126,6 +126,7 @@
     <Compile Include="Presentables\ObjectListModel.cs" />
     <Compile Include="Presentables\ObjectReferenceModel.Commands.cs" />
     <Compile Include="Presentables\ObjectReferenceModel.cs" />
+    <Compile Include="Presentables\SchemaMigration\SourceColumnsObjectListModel.cs" />
     <Compile Include="Presentables\ViewModel.cs" />
     <Compile Include="Presentables\PropertyGroupModel.cs" />
     <Compile Include="Presentables\Relations\RelationEndModel.cs" />

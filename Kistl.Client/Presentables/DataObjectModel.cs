@@ -119,6 +119,18 @@ namespace Kistl.Client.Presentables
                 return _actionsView;
             }
         }
+        private IDictionary<string, ActionModel> _actionModelsByName;
+        public IDictionary<string, ActionModel> ActionModelsByName
+        {
+            get
+            {
+                if (_actionModelsByName == null)
+                {
+                    _actionModelsByName = Actions.ToDictionary(a => a.Name);
+                }
+                return _actionModelsByName;
+            }
+        }
 
         private ReadOnlyCollection<PropertyGroupModel> _propertyGroups;
         public ReadOnlyCollection<PropertyGroupModel> PropertyGroups

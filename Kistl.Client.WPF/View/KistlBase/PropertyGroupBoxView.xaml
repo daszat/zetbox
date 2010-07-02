@@ -6,8 +6,9 @@
           xmlns:client="clr-namespace:Kistl.Client.Presentables;assembly=Kistl.Client"
           Header="{Binding Title, Mode=OneWay}"
           ToolTip="{Binding ToolTip}">
-    
-    <ItemsControl ItemsSource="{Binding PropertyModels}"
+
+    <ItemsControl 
+        ItemsSource="{Binding PropertyModels}"
               BorderThickness="0"
               HorizontalContentAlignment="Stretch">
 
@@ -21,16 +22,18 @@
 
         <ItemsControl.ItemsPanel>
             <ItemsPanelTemplate>
-                <DockPanel IsItemsHost="True"
-                           LastChildFill="{Binding DataContext.LastChildFill, RelativeSource={RelativeSource AncestorType={x:Type view:PropertyGroupBoxView}}}" />
+                <ScrollViewer x:Name="ScrollViewerForPropertyGroup" VerticalScrollBarVisibility="Visible">
+                    <DockPanel IsItemsHost="True"
+                           LastChildFill="{Binding DataContext.LastChildFill, RelativeSource={RelativeSource AncestorType={x:Type view:PropertyGroupBoxView}}}" >
+                    </DockPanel>
+                </ScrollViewer>
             </ItemsPanelTemplate>
         </ItemsControl.ItemsPanel>
-        
+
         <ItemsControl.ItemTemplate>
             <DataTemplate DataType="{x:Type client:ViewModel}">
                 <view:LabeledView />
             </DataTemplate>
         </ItemsControl.ItemTemplate>
     </ItemsControl>
-    
 </GroupBox>

@@ -140,8 +140,20 @@ namespace Kistl.API
 
         internal static Assembly ReflectionOnlyAssemblyResolve(object sender, ResolveEventArgs args)
         {
-            if (AssemblyLoader.SearchPath.Count <= 0) return null;
             Logging.Log.DebugFormat("Resolving Assembly {0} for reflection", args.Name);
+            try
+            {
+                // http://blogs.msdn.com/b/jmstall/archive/2006/11/22/reflection-type-load-exception.aspx
+                // try loading through ReflectionOnlyLoad first. This will resolve dependencies
+                // Even to System!
+                var a = System.Reflection.Assembly.ReflectionOnlyLoad(args.Name);
+                if (a != null) return a;
+            }
+            catch
+            {
+                // Don't care, continue loading "by hand"
+            }
+            if (AssemblyLoader.SearchPath.Count <= 0) return null;
             return LoadAssemblyByName(args.Name, true);
         }
 

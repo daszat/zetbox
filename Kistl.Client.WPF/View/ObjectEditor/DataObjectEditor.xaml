@@ -54,32 +54,34 @@
 
                 <TabControl.ContentTemplate>
                     <DataTemplate>
-                        <ItemsControl ItemsSource="{Binding PropertyModels, ValidatesOnDataErrors=true}"
+                        <ScrollViewer x:Name="ScrollViewerForPropertyGroup" VerticalScrollBarVisibility="Visible">
+                            <ItemsControl ItemsSource="{Binding PropertyModels, ValidatesOnDataErrors=true}"
                                   BorderThickness="0"
                                   HorizontalContentAlignment="Stretch"
                                   VerticalContentAlignment="Stretch">
 
-                            <!-- use the whole horizontal space, but no more -->
-                            <ItemsControl.ItemContainerStyle>
-                                <Style>
-                                    <Setter Property="DockPanel.Dock"
-                                            Value="Top" />
-                                </Style>
-                            </ItemsControl.ItemContainerStyle>
+                                <!-- use the whole horizontal space, but no more -->
+                                <ItemsControl.ItemContainerStyle>
+                                    <Style>
+                                        <Setter Property="DockPanel.Dock"
+                                                Value="Top" />
+                                    </Style>
+                                </ItemsControl.ItemContainerStyle>
 
-                            <ItemsControl.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <DockPanel IsItemsHost="True"
-                                           LastChildFill="{Binding DataContext.LastChildFill, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
-                                </ItemsPanelTemplate>
-                            </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                            <DockPanel IsItemsHost="True"
+                                               LastChildFill="{Binding DataContext.LastChildFill, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
 
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate DataType="{x:Type client:ViewModel}">
-                                    <view:LabeledView />
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate DataType="{x:Type client:ViewModel}">
+                                        <view:LabeledView />
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </ScrollViewer>
                     </DataTemplate>
                 </TabControl.ContentTemplate>
             </TabControl>
