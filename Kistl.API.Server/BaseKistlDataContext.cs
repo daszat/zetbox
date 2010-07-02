@@ -10,6 +10,7 @@ namespace Kistl.API.Server
     using Kistl.API.Configuration;
     using Kistl.App.Base;
     using Kistl.App.Extensions;
+    using Kistl.API.Utils;
 
     public delegate IKistlContext ServerKistlContextFactory(Identity identity);
 
@@ -68,7 +69,14 @@ namespace Kistl.API.Server
             if (obj is IDataObject && obj.ObjectState == DataObjectState.New)
             {
                 var ifType = GetInterfaceType(obj);
-                ObjectClass cls = metaDataResolver.GetObjectClass(ifType).GetRootClass();
+                var cls = metaDataResolver.GetObjectClass(ifType);
+                if (cls == null)
+                {
+                    Logging.Log.WarnFormat("obj=[{0}] ifType=[{1}]", obj.GetType().AssemblyQualifiedName, ifType.Type.AssemblyQualifiedName);
+                    Logging.Log.WarnFormat("metaDataResolver=[{0}] => [{1}]", metaDataResolver.GetType().AssemblyQualifiedName, metaDataResolver.ToString());
+                    throw new ApplicationException("Unexpected failure from metadata resolver");
+                }
+                cls = cls.GetRootClass();
                 if (identity != null && cls.HasAccessControlList() && (cls.GetGroupAccessRights(identity) & AccessRights.Create) != AccessRights.Create)
                 {
                     throw new System.Security.SecurityException(string.Format("The current identity has no rights to create an Object of type '{0}'", ifType.Type.FullName));

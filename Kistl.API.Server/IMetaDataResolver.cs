@@ -7,6 +7,7 @@ namespace Kistl.API.Server
     using System.Text;
 
     using Kistl.App.Base;
+    using Kistl.API.Utils;
 
     public interface IMetaDataResolver
     {
@@ -26,28 +27,26 @@ namespace Kistl.API.Server
     public sealed class CachingMetaDataResolver
         : IMetaDataResolver
     {
+        private readonly Func<IReadOnlyKistlContext> _lazyFrozen;
         private IReadOnlyKistlContext _ctx;
         private ILookup<string, ObjectClass> _cache;
 
-        public CachingMetaDataResolver()
+        public CachingMetaDataResolver(Func<IReadOnlyKistlContext> lazyFrozen)
         {
+            _lazyFrozen = lazyFrozen;
         }
-
-        /// <summary>
-        /// Used to break the dependency cycle
-        /// </summary>
-        public IReadOnlyKistlContext Context { set { Init(value); } }
 
         private void Init(IReadOnlyKistlContext ctx)
         {
             _ctx = ctx;
             _cache = ctx.GetQuery<ObjectClass>().ToLookup(cls => cls.Name);
+            Logging.Log.InfoFormat("Initialised CachingMetaDataResolver with {0} classes", _cache.Count);
         }
 
         /// <inheritdoc/>
         public ObjectClass GetObjectClass(InterfaceType ifType)
         {
-            if (_cache == null) { return null; }
+            if (_cache == null) { Init(_lazyFrozen.Invoke()); }
 
             return _cache[ifType.Type.Name].FirstOrDefault(o => o.Module.Namespace == ifType.Type.Namespace && o.Name == ifType.Type.Name);
         }

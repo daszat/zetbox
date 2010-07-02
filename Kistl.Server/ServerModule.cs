@@ -69,9 +69,8 @@ namespace Kistl.Server
                 .SingleInstance();
 
             moduleBuilder
-                .RegisterType<CachingMetaDataResolver>()
+                .Register<CachingMetaDataResolver>(c => new CachingMetaDataResolver(c.Resolve<Func<IReadOnlyKistlContext>>(Kistl.API.Helper.FrozenContextServiceName)))
                 .As<IMetaDataResolver>()
-                .PropertiesAutowired()
                 .SingleInstance();
 
             moduleBuilder

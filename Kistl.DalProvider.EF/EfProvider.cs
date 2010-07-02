@@ -99,16 +99,14 @@ namespace Kistl.DalProvider.EF
                     // EF's meta data initialization is not thread-safe
                     lock (_lock)
                     {
-                        var resolver = new CachingMetaDataResolver();
                         var result = new KistlDataContext(
-                            resolver,
+                            new CachingMetaDataResolver(c.Resolve<Func<IReadOnlyKistlContext>>(Kistl.API.Helper.FrozenContextServiceName)),
                             null,
                             c.Resolve<KistlConfig>(),
                             c.Resolve<Func<IReadOnlyKistlContext>>(Kistl.API.Helper.FrozenContextServiceName),
                             c.Resolve<InterfaceType.Factory>(),
                             c.Resolve<EfImplementationType.EfFactory>()
                             );
-                        resolver.Context = result;
                         return result;
                     }
                 })
