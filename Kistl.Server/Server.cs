@@ -109,7 +109,8 @@ namespace Kistl.Server
             {
                 IKistlContext ctx = subContainer.Resolve<BaseMemoryContext>();
                 KistlConfig cfg = subContainer.Resolve<KistlConfig>();
-                ISchemaProvider schemaProvider = subContainer.Resolve<SchemaProviderFactory>().Invoke(cfg.Server.ConnectionString);
+                ISchemaProvider schemaProvider = subContainer.Resolve<ISchemaProvider>(cfg.Server.SchemaProvider);
+                schemaProvider.Open(cfg.Server.ConnectionString);
                 SchemaManagement.SchemaManager.LoadSavedSchemaInto(schemaProvider, ctx);
 
                 var mgr = subContainer.Resolve<SchemaManagement.SchemaManager>(new NamedParameter("newSchema", ctx));

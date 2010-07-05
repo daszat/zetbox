@@ -23,12 +23,18 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
         protected NpgsqlConnection db;
         protected NpgsqlTransaction tx;
 
-        public Postgresql(string connectionString)
+        public Postgresql()
         {
-            if (string.IsNullOrEmpty(connectionString)) throw new ArgumentNullException("connectionString");
-
             NpgsqlEventLog.EchoMessages = true;
             NpgsqlEventLog.Level = LogLevel.Normal;
+        }
+
+        public string ConfigName { get { return "POSTGRESQL"; } }
+
+        public void Open(string connectionString)
+        {
+            if (db != null) throw new InvalidOperationException("Database already opened");
+            if (string.IsNullOrEmpty(connectionString)) throw new ArgumentNullException("connectionString");
 
             db = new NpgsqlConnection(connectionString);
             db.Open();
@@ -37,6 +43,7 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
         public void BeginTransaction()
         {
             if (tx != null) throw new InvalidOperationException("Transaction is already running");
+            QueryLog.Debug("BEGIN WORK");
             tx = db.BeginTransaction();
         }
 
@@ -44,6 +51,7 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
         {
             if (tx != null)
             {
+                QueryLog.Debug("COMMIT");
                 tx.Commit();
                 tx = null;
             }
@@ -53,6 +61,7 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
         {
             if (tx != null)
             {
+                QueryLog.Debug("ROLLBACK");
                 tx.Rollback();
                 tx = null;
             }
@@ -62,6 +71,7 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
         {
             if (tx != null)
             {
+                QueryLog.Debug("ROLLBACK (dispose)");
                 tx.Rollback();
                 tx.Dispose();
                 tx = null;
@@ -69,32 +79,10 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
 
             if (db != null)
             {
+                QueryLog.Debug("CLOSE DB");
                 db.Close();
                 db.Dispose();
                 db = null;
-            }
-        }
-
-        private string GetSqlTypeString(System.Data.DbType type)
-        {
-            switch (type)
-            {
-                case System.Data.DbType.Int32:
-                    return "integer";
-                case System.Data.DbType.Double:
-                    return "double precision";
-                case System.Data.DbType.String:
-                    return "varchar";
-                case System.Data.DbType.Date:
-                    return "date";
-                case System.Data.DbType.DateTime:
-                    return "timestamp";
-                case System.Data.DbType.Boolean:
-                    return "boolean";
-                case System.Data.DbType.Guid:
-                    return "uuid";
-                default:
-                    throw new ArgumentOutOfRangeException("type", string.Format("Unable to convert type '{0}' to an sql type string", type));
             }
         }
 
@@ -155,7 +143,7 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
 
         public bool CheckTableExists(string tblName)
         {
-            using (var cmd = new NpgsqlCommand("SELECT COUNT(*) FROM pg_tables WHERE schemaname='public' AND tablename=@table", db, tx))
+            using (var cmd = new NpgsqlCommand("SELECT COUNT(*) FROM pg_tables WHERE schemaname='dbo' AND tablename=@table", db, tx))
             {
                 cmd.Parameters.AddWithValue("@table", tblName);
                 QueryLog.Debug(cmd.CommandText);
@@ -165,15 +153,17 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
 
         public bool CheckColumnExists(string tblName, string colName)
         {
-            using (var cmd = new NpgsqlCommand(@"SELECT COUNT(*) FROM sys.objects o INNER JOIN sys.columns c ON c.object_id=o.object_id
-	                                            WHERE o.object_id = OBJECT_ID(@table) 
-		                                            AND o.type IN (N'U')
-		                                            AND c.Name = @column", db, tx))
+            using (var cmd = new NpgsqlCommand(@"
+SELECT COUNT(*)
+FROM pg_attribute a
+    JOIN pg_class c ON c.oid = a.attrelid
+    LEFT JOIN pg_namespace n ON n.oid = c.relnamespace 
+WHERE n.nspname = 'dbo' AND c.relname = @table AND a.attname=@column", db, tx))
             {
                 cmd.Parameters.AddWithValue("@table", tblName);
                 cmd.Parameters.AddWithValue("@column", colName);
                 QueryLog.Debug(cmd.CommandText);
-                return (int)cmd.ExecuteScalar() > 0;
+                return (long)cmd.ExecuteScalar() > 0;
             }
         }
 
@@ -183,7 +173,7 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
                                                     FROM pg_class c
                                                     LEFT JOIN pg_namespace n ON n.oid = c.relnamespace
                                                     LEFT JOIN pg_attribute a ON c.oid = a.attrelid
-                                                    WHERE n.nspname = 'public' AND c.relname=@table AND c.relkind = 'r'
+                                                    WHERE n.nspname = 'dbo' AND c.relname=@table AND c.relkind = 'r'
                                                         AND a.attnum >= 1 AND a.attname=@column", db, tx))
             {
                 cmd.Parameters.AddWithValue("@table", tblName);
@@ -229,7 +219,7 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
             using (var cmd = new NpgsqlCommand(@"SELECT count(*)
 	                                                FROM pg_proc p
 	                                                LEFT JOIN pg_namespace n ON p.pronamespace = n.oid
-	                                                WHERE n.nspname = 'public' AND p.proname = @proc", db, tx))
+	                                                WHERE n.nspname = 'dbo' AND p.proname = @proc", db, tx))
             {
                 cmd.Parameters.AddWithValue("@proc", procName);
                 QueryLog.Debug(cmd.CommandText);
@@ -433,7 +423,7 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
             }
             else
             {
-                string typeString = GetSqlTypeString(type) + (size > 0 ? string.Format("({0})", size) : String.Empty);
+                string typeString = DbTypeToNative(type) + (size > 0 ? string.Format("({0})", size) : String.Empty);
                 Log.DebugFormat("\"{0}\" table \"{1}\" column \"{2}\" \"{3}\" \"{4}\"", addOrAlter, tblName, colName, typeString, nullable);
                 sb.AppendFormat("ALTER TABLE \"{0}\" {1}  \"{2}\" {3} {4}", tblName, addOrAlter, colName,
                     typeString,
@@ -442,7 +432,6 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
 
             ExecuteNonQuery(sb.ToString());
         }
-
 
         public void CreateFKConstraint(string tblName, string refTblName, string colName, string constraintName, bool onDeleteCascade)
         {
@@ -506,10 +495,53 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
             ExecuteNonQuery("DROP VIEW \"{0}\"", viewName);
         }
 
+        private IEnumerable<string[]> GetParameterTypes(string procName)
+        {
+            string sqlQuery = @"SELECT args.proc_oid, t.typname 
+                        FROM pg_type t 
+                            JOIN (
+                                SELECT oid proc_oid, proargtypes::oid[] argtypes, generate_subscripts(proargtypes::oid[], 1) argtype_subscript 
+                                FROM pg_proc where proname = '" + procName + @"') args 
+                            ON t.oid = args.argtypes[args.argtype_subscript] 
+                        ORDER BY args.proc_oid, args.argtype_subscript;";
+            QueryLog.Debug(sqlQuery);
+
+            using (var cmd = new NpgsqlCommand(sqlQuery, db, tx))
+            using (var rd = cmd.ExecuteReader())
+            {
+                long? lastProcOid = null;
+                List<string> types = null;
+                List<string[]> result = new List<string[]>();
+                while (rd.Read())
+                {
+                    var procOid = rd.GetInt64(0);
+                    var argType = rd.GetString(1);
+                    if (lastProcOid != procOid)
+                    {
+                        if (types != null)
+                        {
+                            result.Add(types.ToArray());
+                        }
+                        lastProcOid = procOid;
+                        types = new List<string>();
+                    }
+                    types.Add(argType);
+                }
+                result.Add(types.ToArray());
+                return result;
+            }
+        }
+
+        /// <summary>
+        /// Drops all functions with the specified name.
+        /// </summary>
         public void DropProcedure(string procName)
         {
             Log.DebugFormat("Dropping procedure \"{0}\"", procName);
-            ExecuteNonQuery("DROP PROCEDURE \"{0}\"", procName);
+            foreach (var argTypes in GetParameterTypes(procName))
+            {
+                ExecuteNonQuery("DROP FUNCTION \"{0}\"({1})", procName, String.Join(",", argTypes));
+            }
         }
 
         public void CopyColumnData(string srcTblName, string srcColName, string tblName, string colName)
@@ -738,7 +770,7 @@ FROM (", viewName);
                 }
             }
 
-            ExecuteScriptFromResource(String.Format(@"Kistl.Server.SchemaManagement.NpgsqlProvider.{0}.sql", procName));
+            ExecuteScriptFromResource(String.Format(@"Kistl.Server.SchemaManagement.NpgsqlProvider.Scripts.{0}.sql", procName));
 
             var createTableProcQuery = new StringBuilder();
             createTableProcQuery.AppendFormat("CREATE FUNCTION \"{0}\" (repair boolean, tblName text, colName text) RETURNS boolean AS $BODY$", tableProcName);
@@ -755,7 +787,8 @@ FROM (", viewName);
                     createTableProcQuery.AppendFormat("IF colName IS NULL OR colName = '{0}{1}' THEN", refSpec.Value, Kistl.API.Helper.PositionSuffix);
                     createTableProcQuery.AppendLine();
                     createTableProcQuery.AppendFormat(
-                        "\t\tresult := RepairPositionColumnValidity(repair := repair, tblName := '{0}', refTblName := '{1}', fkColumnName := '{2}', fkPositionName := '{2}{3}');",
+                        // TODO: use named parameters with 9.0: "\t\tresult := RepairPositionColumnValidity(repair := repair, tblName := '{0}', refTblName := '{1}', fkColumnName := '{2}', fkPositionName := '{2}{3}');",
+                        "\t\tresult := RepairPositionColumnValidity(repair, '{0}', '{1}', '{2}', '{2}{3}');",
                         tbl.Key,
                         refSpec.Key,
                         refSpec.Value,
@@ -820,6 +853,75 @@ FROM (", viewName);
         public void WriteTableData(string tbl, IEnumerable<string> colNames, object[] values)
         {
             throw new NotImplementedException();
+        }
+
+        public string DbTypeToNative(System.Data.DbType type)
+        {
+            switch (type)
+            {
+                case System.Data.DbType.Byte:
+                case System.Data.DbType.Int16:
+                    return "int2";
+                case System.Data.DbType.UInt16:
+                case System.Data.DbType.Int32:
+                    return "int4";
+                case System.Data.DbType.Single:
+                    return "float4";
+                case System.Data.DbType.Double:
+                    return "float8";
+                case System.Data.DbType.String:
+                    return "varchar";
+                case System.Data.DbType.Date:
+                    return "date";
+                case System.Data.DbType.DateTime:
+                case System.Data.DbType.DateTime2:
+                    return "timestamp";
+                case System.Data.DbType.Boolean:
+                    return "boolean";
+                case System.Data.DbType.Guid:
+                    return "uuid";
+                case System.Data.DbType.Binary:
+                    return "bytea";
+                case System.Data.DbType.Decimal:
+                    return "numeric";
+                case System.Data.DbType.UInt32: // no int8 supported by Npgsql 2.0.9
+                case System.Data.DbType.Int64:
+                case System.Data.DbType.UInt64: 
+                default:
+                    throw new ArgumentOutOfRangeException("type", string.Format("Unable to convert type '{0}' to an sql type string", type));
+            }
+        }
+
+        public System.Data.DbType NativeToDbType(string type)
+        {
+            switch (type)
+            {
+                case "int2":
+                    return System.Data.DbType.Int16;
+                case "int4":
+                    return System.Data.DbType.Int32;
+                case "float4":
+                    return System.Data.DbType.Single;
+                case "float8":
+                    return System.Data.DbType.Double;
+                case "varchar":
+                case "text":
+                    return System.Data.DbType.String;
+                case "date":
+                    return System.Data.DbType.Date;
+                case "timestamp":
+                    return System.Data.DbType.DateTime;
+                case "bool":
+                    return System.Data.DbType.Boolean;
+                case "uuid":
+                    return System.Data.DbType.Guid;
+                case "bytea":
+                    return System.Data.DbType.Binary;
+                case "numeric":
+                    return System.Data.DbType.Decimal;
+                default:
+                    throw new ArgumentOutOfRangeException("type", string.Format("Unable to convert type '{0}' to a DbType", type));
+            }
         }
     }
 }

@@ -8,6 +8,7 @@ using Kistl.App.Extensions;
 using Kistl.API.Utils;
 using Kistl.API;
 using ZBox.App.SchemaMigration;
+using Autofac;
 
 namespace ZBox.App.SchemaMigration
 {
@@ -15,36 +16,20 @@ namespace ZBox.App.SchemaMigration
     {
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("ZBox.SchemaMigration");
 
-        private static SchemaProviderFactory sqlFactory;
-        private static SchemaProviderFactory postgresFactory;
-        private static SchemaProviderFactory oledbFactory;
+        // TODO: fix this, as it is currently only working by accident
+        private static ILifetimeScope _scope;
 
-        public CustomServerActions_SchemaMigration(SchemaProviderFactory sql, SchemaProviderFactory postgres, SchemaProviderFactory oledb)
+        public CustomServerActions_SchemaMigration(ILifetimeScope scope)
         {
-            sqlFactory = sql;
-            postgresFactory = postgres;
-            oledbFactory = oledb;
+            _scope = scope;
         }
 
         public static void OnUpdateFromSourceSchema_MigrationProject(ZBox.App.SchemaMigration.MigrationProject obj)
         {
             if (string.IsNullOrEmpty(obj.SrcConnectionString)) throw new InvalidOperationException("Source ConnectionString is empty");
             if (string.IsNullOrEmpty(obj.SrcProvider)) throw new InvalidOperationException("Source Provider is empty");
-            ISchemaProvider src;
-            switch(obj.SrcProvider)
-            {
-                case "MSSQL":
-                    src = sqlFactory(obj.SrcConnectionString);
-                    break;
-                case "POSTGRESQL":
-                    src = postgresFactory(obj.SrcConnectionString);
-                    break;
-                case "OLEDB":
-                    src = oledbFactory(obj.SrcConnectionString);
-                    break;
-                default:
-                    throw new InvalidOperationException("Unknown Source Provider '" + obj.SrcProvider + "'");
-            }
+            ISchemaProvider src = _scope.Resolve<ISchemaProvider>(obj.SrcProvider);
+            src.Open(obj.SrcConnectionString);
 
             var destTbls = obj.Context.GetQuery<SourceTable>()
                 .Where(i => i.MigrationProject == obj)

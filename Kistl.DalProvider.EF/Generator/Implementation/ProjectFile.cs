@@ -1,19 +1,20 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Kistl.API;
-using Kistl.Server.Generators;
 
 namespace Kistl.DalProvider.EF.Generator.Implementation
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using Kistl.API;
+    using Kistl.API.Server;
+    using Kistl.Server.Generators;
+    
     public class ProjectFile
         : Kistl.Server.Generators.Templates.Implementation.ProjectFile
     {
 
-        public ProjectFile(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, string projectGuid, List<string> fileNames)
-            : base(_host, ctx, projectGuid, fileNames)
+        public ProjectFile(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, string projectGuid, List<string> fileNames, IEnumerable<ISchemaProvider> schemaProviders)
+            : base(_host, ctx, projectGuid, fileNames, schemaProviders)
         {
         }
 
@@ -67,9 +68,13 @@ namespace Kistl.DalProvider.EF.Generator.Implementation
 
             this.WriteLine(@"  <ItemGroup>");
             this.WriteLine(@"    <EmbeddedResource Include=""Model.csdl"" />");
-            this.WriteLine(@"    <EmbeddedResource Include=""Model.ssdl"" />");
             this.WriteLine(@"    <EmbeddedResource Include=""Model.msl"" />");
-            this.WriteLine(@"    <Compile Include=""Model.Views.cs"" />");
+            foreach (var provider in schemaProviders)
+            {
+                this.WriteLine(@"    <EmbeddedResource Include=""Model.{0}.ssdl"" />", provider.ConfigName);
+            }
+            // hardcoded views for mssql
+            //this.WriteLine(@"    <Compile Include=""Model.MSSQLViews.cs"" />");
             this.WriteLine(@"  </ItemGroup>");
 
         }
@@ -79,7 +84,8 @@ namespace Kistl.DalProvider.EF.Generator.Implementation
             base.ApplyAdditionalPropertyGroups();
 
             this.WriteLine(@"  <PropertyGroup>");
-            this.WriteLine(@"    <PreBuildEvent>""%25windir%25\Microsoft.NET\Framework\v3.5\EdmGen.exe"" /nologo /language:CSharp /mode:ViewGeneration ""/inssdl:$(ProjectDir)Model.ssdl"" ""/incsdl:$(ProjectDir)Model.csdl"" ""/inmsl:$(ProjectDir)Model.msl"" ""/outviews:$(ProjectDir)Model.Views.cs""</PreBuildEvent>");
+            // can only generate views for (globally-)registered data providers
+            //this.WriteLine(@"    <PreBuildEvent>""%25windir%25\Microsoft.NET\Framework\v3.5\EdmGen.exe"" /nologo /language:CSharp /mode:ViewGeneration ""/inssdl:$(ProjectDir)Model.MSSQL.ssdl"" ""/incsdl:$(ProjectDir)Model.csdl"" ""/inmsl:$(ProjectDir)Model.msl"" ""/outviews:$(ProjectDir)Model.MSSQLViews.cs""</PreBuildEvent>");
             this.WriteLine(@"  </PropertyGroup>");
         }
     }

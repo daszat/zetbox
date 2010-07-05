@@ -678,7 +678,8 @@
       <LastGenOutput>Repository.Designer.cs</LastGenOutput>
     </None>
     <None Include="Kistl.snk" />
-    <EmbeddedResource Include="SchemaManagement\NpgsqlProvider\RepairPositionColumnValidity.sql" />
+    <None Include="SchemaManagement\NpgsqlProvider\Scripts\create.sql" />
+    <EmbeddedResource Include="SchemaManagement\NpgsqlProvider\Scripts\RepairPositionColumnValidity.sql" />
     <Compile Include="Generators\ClientObjects\Implementation\ObjectClasses\CollectionSerialization.cs" />
     <Compile Include="Generators\Templates\Implementation\ObjectClasses\ReloadOneReference.cs" />
     <Compile Include="Generators\Templates\Implementation\ObjectClasses\ReloadOneReference.Designer.cs">

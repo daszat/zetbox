@@ -22,11 +22,9 @@ namespace Kistl.App.Projekte.Server
                 .SingleInstance();
 
             // Register types explicit
-            moduleBuilder.Register(c => new ZBox.App.SchemaMigration.CustomServerActions_SchemaMigration(
-                c.Resolve<SchemaProviderFactory>("MSSQL"),
-                c.Resolve<SchemaProviderFactory>("POSTGRESQL"),
-                c.Resolve<SchemaProviderFactory>("OLEDB")
-            ));
+            moduleBuilder
+                .RegisterType<ZBox.App.SchemaMigration.CustomServerActions_SchemaMigration>()
+                .SingleInstance();
         }
     }
 }

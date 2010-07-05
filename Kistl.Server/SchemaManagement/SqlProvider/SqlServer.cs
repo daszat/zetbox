@@ -22,8 +22,11 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
         protected SqlConnection db;
         protected SqlTransaction tx;
 
-        public SqlServer(string connectionString)
+        public string ConfigName { get { return "MSSQL"; } }
+
+        public void Open(string connectionString)
         {
+            if (db != null) throw new InvalidOperationException("Database already opened");
             if (string.IsNullOrEmpty(connectionString)) throw new ArgumentNullException("connectionString");
 
             db = new SqlConnection(connectionString);
@@ -71,7 +74,7 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
             }
         }
 
-        private string GetSqlTypeString(System.Data.DbType type)
+        public string DbTypeToNative(System.Data.DbType type)
         {
             switch (type)
             {
@@ -91,6 +94,7 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
                     return "nvarchar";
                 case System.Data.DbType.Date:
                 case System.Data.DbType.DateTime:
+                case System.Data.DbType.DateTime2:
                     // We only support SQLServer 2008
                     return "datetime2";
                 case System.Data.DbType.Boolean:
@@ -106,9 +110,9 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
             }
         }
 
-        private System.Data.DbType GetDbType(string sqltype)
+        public System.Data.DbType NativeToDbType(string type)
         {
-            switch (sqltype)
+            switch (type)
             {
                 case "int":
                     return System.Data.DbType.Int32;
@@ -135,7 +139,7 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
                 case "decimal":
                     return System.Data.DbType.Decimal;
                 default:
-                    throw new ArgumentOutOfRangeException("sqltype", string.Format("Unable to convert type '{0}' to an sql type string", sqltype));
+                    throw new ArgumentOutOfRangeException("type", string.Format("Unable to convert type '{0}' to a DbType", type));
             }
         }
 
@@ -406,7 +410,7 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
                         result.Add(new Column()
                         {
                             Name = rd.GetString(0),
-                            Type = GetDbType(type),
+                            Type = NativeToDbType(type),
                             Size = isMaxSize ? int.MaxValue : rd.GetInt16(2),
                             IsNullable = rd.GetBoolean(3)
                         });
@@ -464,7 +468,7 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
                     {
                         size = string.Format("({0})", col.Size);
                     }
-                    string typeString = GetSqlTypeString(col.Type) + size;
+                    string typeString = DbTypeToNative(col.Type) + size;
                     sb.AppendFormat("[{0}] {1} {2},", col.Name, typeString, nullable);
                 }
             }
@@ -545,7 +549,7 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
                 {
                     strSize = string.Format("({0})", size);
                 }
-                string typeString = GetSqlTypeString(type) + strSize;
+                string typeString = DbTypeToNative(type) + strSize;
                 Log.DebugFormat("[{0}] table [{1}] column [{2}] [{3}] [{4}]", addOrAlter, tblName, colName, typeString, nullable);
                 sb.AppendFormat("ALTER TABLE [{0}] {1}  [{2}] {3} {4}", tblName, addOrAlter, colName,
                     typeString,

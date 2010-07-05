@@ -8,16 +8,12 @@ namespace Kistl.DalProvider.EF
     using System.Text;
 
     using Kistl.API.Configuration;
+    using Kistl.API.Utils;
 
     internal sealed class EFObjectContext : ObjectContext
     {
-        /// <summary>
-        /// Private Connectionstring
-        /// </summary>
-        private static string connectionString = String.Empty;
-
         public EFObjectContext(KistlConfig config)
-            : base(GetConnectionString(config), "Entities")
+            : base(BuildConnectionString(config), "Entities")
         {
         }
 
@@ -26,20 +22,16 @@ namespace Kistl.DalProvider.EF
         /// <remarks>Format is: metadata=res://*;provider={provider};provider connection string='{Provider Connectionstring}'</remarks>
         /// </summary>
         /// <returns></returns>
-        private static string GetConnectionString(KistlConfig config)
+        private static string BuildConnectionString(KistlConfig config)
         {
             // Build connectionString
             // metadata=res://*;provider=System.Data.SqlClient;provider connection string='Data Source=.\SQLEXPRESS;Initial Catalog=Kistl;Integrated Security=True;MultipleActiveResultSets=true;'
-            if (string.IsNullOrEmpty(connectionString))
-            {
-                StringBuilder sb = new StringBuilder();
-                sb.Append("metadata=res://*;");
-                sb.AppendFormat("provider={0};", config.Server.DatabaseProvider);
-                sb.AppendFormat("provider connection string='{0}'", config.Server.ConnectionString);
+            StringBuilder sb = new StringBuilder();
+            sb.AppendFormat("metadata=res://*/Kistl.Objects.Server.Model.csdl|res://*/Kistl.Objects.Server.Model.msl|res://*/Kistl.Objects.Server.Model.{0}.ssdl;", config.Server.SchemaProvider);
+            sb.AppendFormat("provider={0};", config.Server.DatabaseProvider);
+            sb.AppendFormat("provider connection string='{0}'", config.Server.ConnectionString);
 
-                connectionString = sb.ToString();
-            }
-            return connectionString;
+            return sb.ToString();
         }
     }
 }

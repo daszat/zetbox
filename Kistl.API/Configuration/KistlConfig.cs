@@ -94,6 +94,12 @@ namespace Kistl.API.Configuration
             public bool StartServer { get; set; }
 
             /// <summary>
+            /// Schema Provider Name
+            /// </summary>
+            [XmlElement(IsNullable = false)]
+            public string SchemaProvider { get; set; }
+
+            /// <summary>
             /// Database Provider Name
             /// </summary>
             [XmlElement(IsNullable = false)]

@@ -6,6 +6,7 @@ namespace Kistl.API.Server
     using System.Collections.ObjectModel;
     using System.Linq;
     using System.Text;
+using System.Data;
 
     public class TableConstraintNamePair
     {
@@ -63,10 +64,11 @@ namespace Kistl.API.Server
         }
     }
 
-    public delegate ISchemaProvider SchemaProviderFactory(string connectionString);
-
     public interface ISchemaProvider : IDisposable
     {
+        string ConfigName { get; }
+
+        void Open(string connectionString);
         void BeginTransaction();
         void CommitTransaction();
         void RollbackTransaction();
@@ -138,5 +140,8 @@ namespace Kistl.API.Server
 
         System.Data.IDataReader ReadTableData(string tbl, IEnumerable<string> colNames);
         void WriteTableData(string tbl, IEnumerable<string> colNames, object[] values);
+
+        string DbTypeToNative(DbType type);
+        DbType NativeToDbType(string type);
     }
 }

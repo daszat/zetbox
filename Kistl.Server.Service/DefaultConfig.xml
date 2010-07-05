@@ -2,11 +2,15 @@
 <KistlConfig xmlns="http://dasz.at/Kistl/">
   <ConfigName>Default Server Configuration</ConfigName>
   <Server StartServer="true">
+    <!-- 
+    -->
+    <SchemaProvider>MSSQL</SchemaProvider>
     <DatabaseProvider>System.Data.SqlClient</DatabaseProvider>
     <ConnectionString>Data Source=.\SQLEXPRESS;Initial Catalog=Kistl;Integrated Security=True;MultipleActiveResultSets=true;</ConnectionString>
     <!--
+    <SchemaProvider>POSTGRESQL</SchemaProvider>
     <DatabaseProvider>Npgsql</DatabaseProvider>
-    <ConnectionString>Server=localhost;Database=Kistl;User Id=David Schmitt;Password=YFJRPPCdtba0q3VSdv3a</ConnectionString> 
+    <ConnectionString>Server=localhost;Database=zbox;User Id=zbox;Password=b-cXqMyXEYea2kkjUhkS</ConnectionString>
     -->
     <DocumentStore>DocumentStore\Server\</DocumentStore>
     <LogFilePath>bin\LogFiles</LogFilePath>

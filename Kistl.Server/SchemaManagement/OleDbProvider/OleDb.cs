@@ -26,9 +26,11 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
         protected string quotePrefix;
         protected string quoteSuffix;
 
+        public string ConfigName { get { return "OLEDB"; } }
 
-        public OleDb(string connectionString)
+        public void Open(string connectionString)
         {
+            if (db != null) throw new InvalidOperationException("Database already opened");
             if (string.IsNullOrEmpty(connectionString)) throw new ArgumentNullException("connectionString");
 
             db = new OleDbConnection(connectionString);
@@ -556,6 +558,18 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
             }
 
             cmd.ExecuteNonQuery();
+        }
+
+        /// <summary>Not implemented.</summary>
+        string ISchemaProvider.DbTypeToNative(DbType type)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>Not implemented.</summary>
+        DbType ISchemaProvider.NativeToDbType(string type)
+        {
+            throw new NotImplementedException();
         }
     }
 }

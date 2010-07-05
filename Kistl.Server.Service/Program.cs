@@ -130,9 +130,14 @@ namespace Kistl.Server.Service
                                 actions.Add((c, args) => { 
                                     if (args == null) PrintHelpAndExit();
                                     if (args.Count != 4) PrintHelpAndExit();
-                                    c.Resolve<Server>().CopyDatabase(
-                                        c.Resolve<SchemaProviderFactory>(args[0]).Invoke(args[1]),
-                                        c.Resolve<SchemaProviderFactory>(args[2]).Invoke(args[3]));
+
+                                    var srcProvider = c.Resolve<ISchemaProvider>(args[0]);
+                                    srcProvider.Open(args[1]);
+                                    
+                                    var dstProvider = c.Resolve<ISchemaProvider>(args[2]);
+                                    dstProvider.Open(args[3]);
+                                    
+                                    c.Resolve<Server>().CopyDatabase(srcProvider, dstProvider);
                                 }); 
                             } }
                             },
