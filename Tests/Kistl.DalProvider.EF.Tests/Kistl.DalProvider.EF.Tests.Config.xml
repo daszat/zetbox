@@ -2,6 +2,7 @@
 <KistlConfig xmlns="http://dasz.at/Kistl/">
   <ConfigName>Kistl.DalProvider.EF's Test Configuration</ConfigName>
   <Server StartServer="false">
+    <SchemaProvider>MSSQL</SchemaProvider>
     <DatabaseProvider>System.Data.SqlClient</DatabaseProvider>
     <ConnectionString>Data Source=.\SQLEXPRESS;Initial Catalog=Kistl_test;Integrated Security=True;MultipleActiveResultSets=true;</ConnectionString>
     <DocumentStore>DocumentStore\Server\</DocumentStore>
