@@ -36,6 +36,7 @@ namespace Kistl.Server.SchemaManagement
                     SaveSchema(schema);
 
                     db.CommitTransaction();
+                    db.RefreshDbStats();
                 }
                 catch (Exception ex)
                 {

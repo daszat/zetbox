@@ -573,5 +573,10 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
         {
             throw new NotImplementedException();
         }
+
+        public void RefreshDbStats()
+        {
+            // do nothing
+        }
     }
 }

@@ -25,8 +25,8 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
 
         public Postgresql()
         {
-            NpgsqlEventLog.EchoMessages = true;
-            NpgsqlEventLog.Level = LogLevel.Normal;
+            //NpgsqlEventLog.EchoMessages = true;
+            //NpgsqlEventLog.Level = LogLevel.Normal;
         }
 
         public string ConfigName { get { return "POSTGRESQL"; } }
@@ -187,7 +187,7 @@ WHERE n.nspname = 'dbo' AND c.relname = @table AND a.attname=@column", db, tx))
 
         public bool CheckFKConstraintExists(string fkName)
         {
-            using (var cmd = new NpgsqlCommand("SELECT COUNT(*) FROM sys.objects WHERE object_id = OBJECT_ID(@fk_constraint) AND type IN (N'F')", db, tx))
+            using (var cmd = new NpgsqlCommand("SELECT COUNT(*) FROM pg_constraint WHERE conname = @fk_constraint AND contype = 'f'", db, tx))
             {
                 cmd.Parameters.AddWithValue("@fk_constraint", fkName);
                 QueryLog.Debug(cmd.CommandText);
@@ -197,7 +197,7 @@ WHERE n.nspname = 'dbo' AND c.relname = @table AND a.attname=@column", db, tx))
 
         public bool CheckViewExists(string viewName)
         {
-            using (var cmd = new NpgsqlCommand("SELECT COUNT(*) FROM sys.objects WHERE object_id = OBJECT_ID(@view) AND type IN (N'V')", db, tx))
+            using (var cmd = new NpgsqlCommand("SELECT COUNT(*) FROM pg_views WHERE schemaname = 'dbo' AND viewname = @view", db, tx))
             {
                 cmd.Parameters.AddWithValue("@view", viewName);
                 QueryLog.Debug(cmd.CommandText);
@@ -207,13 +207,15 @@ WHERE n.nspname = 'dbo' AND c.relname = @table AND a.attname=@column", db, tx))
 
         public bool CheckTriggerExists(string objName, string triggerName)
         {
-            using (var cmd = new NpgsqlCommand("SELECT COUNT(*) FROM sys.objects WHERE object_id = OBJECT_ID(@trigger) AND parent_object_id = OBJECT_ID(@parent) AND type IN (N'TR')", db, tx))
-            {
-                cmd.Parameters.AddWithValue("@trigger", triggerName);
-                cmd.Parameters.AddWithValue("@parent", objName);
-                QueryLog.Debug(cmd.CommandText);
-                return (long)cmd.ExecuteScalar() > 0;
-            }
+            //// TODO
+            //using (var cmd = new NpgsqlCommand("SELECT COUNT(*) FROM sys.objects WHERE object_id = OBJECT_ID(@trigger) AND parent_object_id = OBJECT_ID(@parent) AND type IN (N'TR')", db, tx))
+            //{
+            //    cmd.Parameters.AddWithValue("@trigger", triggerName);
+            //    cmd.Parameters.AddWithValue("@parent", objName);
+            //    QueryLog.Debug(cmd.CommandText);
+            //    return (long)cmd.ExecuteScalar() > 0;
+            //}
+            return false;
         }
 
         public bool CheckProcedureExists(string procName)
@@ -231,37 +233,37 @@ WHERE n.nspname = 'dbo' AND c.relname = @table AND a.attname=@column", db, tx))
 
         public bool CheckTableContainsData(string tblName)
         {
-            using (var cmd = new NpgsqlCommand(string.Format("SELECT COUNT(*) FROM \"{0}\"", tblName), db, tx))
+            using (var cmd = new NpgsqlCommand(string.Format("SELECT COUNT(*) > 0 FROM \"{0}\"", tblName), db, tx))
             {
                 QueryLog.Debug(cmd.CommandText);
-                return (long)cmd.ExecuteScalar() > 0;
+                return (bool)cmd.ExecuteScalar();
             }
         }
 
         public bool CheckColumnContainsNulls(string tblName, string colName)
         {
-            using (var cmd = new NpgsqlCommand(string.Format("SELECT COUNT(*) FROM (SELECT TOP 1 \"{1}\" FROM \"{0}\" WHERE \"{1}\" IS NULL) AS nulls", tblName, colName), db, tx))
+            using (var cmd = new NpgsqlCommand(string.Format("SELECT COUNT(*) > 0 FROM (SELECT \"{1}\" FROM \"{0}\" WHERE \"{1}\" IS NULL LIMIT 1) AS nulls", tblName, colName), db, tx))
             {
                 QueryLog.Debug(cmd.CommandText);
-                return (long)cmd.ExecuteScalar() > 0;
+                return (bool)cmd.ExecuteScalar();
             }
         }
 
         public bool CheckColumnContainsUniqueValues(string tblName, string colName)
         {
-            using (var cmd = new NpgsqlCommand(string.Format("SELECT COUNT(*) FROM (SELECT TOP 1 \"{1}\" FROM \"{0}\" WHERE \"{1}\" IS NOT NULL GROUP BY \"{1}\" HAVING COUNT(\"{1}\") > 1) AS tbl", tblName, colName), db, tx))
+            using (var cmd = new NpgsqlCommand(string.Format("SELECT COUNT(*) = 0 FROM (SELECT \"{1}\" FROM \"{0}\" WHERE \"{1}\" IS NOT NULL GROUP BY \"{1}\" HAVING COUNT(\"{1}\") > 1 LIMIT 1) AS tbl", tblName, colName), db, tx))
             {
                 QueryLog.Debug(cmd.CommandText);
-                return (long)cmd.ExecuteScalar() == 0;
+                return (bool)cmd.ExecuteScalar();
             }
         }
 
         public bool CheckColumnContainsValues(string tblName, string colName)
         {
-            using (var cmd = new NpgsqlCommand(string.Format("SELECT COUNT(*) FROM (SELECT TOP 1 \"{1}\" FROM \"{0}\" WHERE \"{1}\" IS NOT NULL) AS nulls", tblName, colName), db, tx))
+            using (var cmd = new NpgsqlCommand(string.Format("SELECT COUNT(*) > 0 FROM (SELECT \"{1}\" FROM \"{0}\" WHERE \"{1}\" IS NOT NULL LIMIT 1) AS nulls", tblName, colName), db, tx))
             {
                 QueryLog.Debug(cmd.CommandText);
-                return (long)cmd.ExecuteScalar() > 0;
+                return (bool)cmd.ExecuteScalar();
             }
         }
 
@@ -284,7 +286,7 @@ WHERE n.nspname = 'dbo' AND c.relname = @table AND a.attname=@column", db, tx))
 
         private bool CallRepairPositionColumn(bool repair, string tblName, string indexName)
         {
-            using (var cmd = new NpgsqlCommand("RepairPositionColumnValidityByTable", db, tx))
+            using (var cmd = new NpgsqlCommand("SELECT \"RepairPositionColumnValidityByTable\"(@repair, @tblName, @colName)", db, tx))
             {
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
 
@@ -294,7 +296,7 @@ WHERE n.nspname = 'dbo' AND c.relname = @table AND a.attname=@column", db, tx))
                 //cmd.Parameters.Add("@result", System.Data.SqlDbType.Bit).Direction = System.Data.ParameterDirection.Output;
 
                 QueryLog.Debug(cmd.CommandText);
-                cmd.ExecuteNonQuery();
+                cmd.ExecuteScalar();
 
                 return (bool)cmd.Parameters["@result"].Value;
             }
@@ -302,11 +304,11 @@ WHERE n.nspname = 'dbo' AND c.relname = @table AND a.attname=@column", db, tx))
 
         public int GetColumnMaxLength(string tblName, string colName)
         {
-            // / 2 -> nvarchar!
-            using (var cmd = new NpgsqlCommand(@"SELECT c.max_length / 2 FROM sys.objects o INNER JOIN sys.columns c ON c.object_id=o.object_id
-	                                            WHERE o.object_id = OBJECT_ID(@table) 
-		                                            AND o.type IN (N'U')
-		                                            AND c.Name = @column", db, tx))
+            using (var cmd = new NpgsqlCommand(@"
+SELECT atttypmod - 4 -- adjust for varchar implementation, storing the length too
+FROM pg_attribute
+    JOIN pg_class ON (attrelid = pg_class.oid)
+WHERE relname = @table AND attname = @column", db, tx))
             {
                 cmd.Parameters.AddWithValue("@table", tblName);
                 cmd.Parameters.AddWithValue("@column", colName);
@@ -317,7 +319,7 @@ WHERE n.nspname = 'dbo' AND c.relname = @table AND a.attname=@column", db, tx))
 
         public IEnumerable<string> GetTableNames()
         {
-            string sqlQuery = "SELECT name FROM sys.objects WHERE type IN (N'U') AND name <> 'sysdiagrams'";
+            string sqlQuery = "SELECT tablename FROM pg_tables WHERE schemaname = 'dbo'";
             QueryLog.Debug(sqlQuery);
 
             using (var cmd = new NpgsqlCommand(sqlQuery, db, tx))
@@ -329,7 +331,7 @@ WHERE n.nspname = 'dbo' AND c.relname = @table AND a.attname=@column", db, tx))
 
         public IEnumerable<TableConstraintNamePair> GetFKConstraintNames()
         {
-            string sqlQuery = "SELECT c.name, t.name FROM sys.objects c inner join sys.sysobjects t  on t.id = c.parent_object_id WHERE c.type IN (N'F') order by c.name";
+            string sqlQuery = "SELECT conname, relname FROM pg_constraints JOIN pg_class ON (conrelid = pg_class.oid) WHERE contype = 'f' ORDER BY conname";
             QueryLog.Debug(sqlQuery);
 
             using (var cmd = new NpgsqlCommand(sqlQuery, db, tx))
@@ -346,11 +348,11 @@ WHERE n.nspname = 'dbo' AND c.relname = @table AND a.attname=@column", db, tx))
 
         public IEnumerable<string> GetTableColumnNames(string tblName)
         {
-            using (var cmd = new NpgsqlCommand(@"SELECT c.name
-                                FROM sys.objects o 
-                                    INNER JOIN sys.columns c ON c.object_id=o.object_id
-	                            WHERE o.object_id = OBJECT_ID(@table) 
-		                            AND o.type IN (N'U')", db, tx))
+            using (var cmd = new NpgsqlCommand(@"SELECT attname
+                                FROM pg_attribute
+                                    JOIN pg_class ON (attrelid = pg_class.oid)
+                                    JOIN pg_namespace ON (relnamespace = pg_namespace.oid)
+	                            WHERE nspname = 'dbo' AND relname = @table and relkind = 'r' AND attnum >= 0", db, tx))
             {
                 cmd.Parameters.AddWithValue("@table", tblName);
                 QueryLog.Debug(cmd.CommandText);
@@ -576,18 +578,24 @@ WHERE n.nspname = 'dbo' AND c.relname = @table AND a.attname=@column", db, tx))
 
         public bool CheckIndexExists(string tblName, string idxName)
         {
-            using (var cmd = new NpgsqlCommand("SELECT COUNT(*) from sys.sysindexes WHERE id = OBJECT_ID(@tbl) AND \"name\" = @idx", db, tx))
+            using (var cmd = new NpgsqlCommand(@"
+SELECT COUNT(*) > 0
+FROM pg_index
+    JOIN pg_class idx ON (indexrelid = idx.oid)
+    JOIN pg_class tbl ON (indrelid = tbl.oid)
+    JOIN pg_namespace ON (tbl.relnamespace = pg_namespace.oid)
+WHERE nspname = 'dbo' AND tbl.relname = @tbl AND idx.relname = @idx", db, tx))
             {
                 cmd.Parameters.AddWithValue("@tbl", tblName);
                 cmd.Parameters.AddWithValue("@idx", idxName);
                 QueryLog.Debug(cmd.CommandText);
-                return (long)cmd.ExecuteScalar() > 0;
+                return (bool)cmd.ExecuteScalar();
             }
         }
 
         public void DropIndex(string tblName, string idxName)
         {
-            ExecuteNonQuery("DROP INDEX {0} ON \"{1}\"", idxName, tblName);
+            ExecuteNonQuery("DROP INDEX \"{0}\" ON \"{1}\"", idxName, tblName);
         }
 
         public void DropAllObjects()
@@ -622,69 +630,78 @@ WHERE n.nspname = 'dbo' AND c.relname = @table AND a.attname=@column", db, tx))
             Log.DebugFormat("Creating trigger to update rights \"{0}\"", triggerName);
 
             StringBuilder sb = new StringBuilder();
-            sb.AppendFormat(@"CREATE TRIGGER ""{0}""
-ON ""{1}""
-AFTER UPDATE, INSERT, DELETE AS
-BEGIN", triggerName, tblName);
+            sb.Append("CREATE OR REPLACE FUNCTION \"");
+            sb.Append(triggerName);
+            sb.Append("\"()");
             sb.AppendLine();
-
+            sb.Append(@"  RETURNS trigger AS
+$BODY$BEGIN
+");
             foreach (var tbl in tblList)
             {
-                StringBuilder select = new StringBuilder();
                 if (tbl.Relations.Count == 0)
                 {
-                    sb.AppendFormat(@"    DELETE FROM ""{0}"" WHERE ""ID"" IN (SELECT ""ID"" FROM inserted)
-    DELETE FROM ""{0}"" WHERE ""ID"" IN (SELECT ""ID"" FROM deleted)
-    INSERT INTO ""{0}"" (""ID"", ""Identity"", ""Right"") SELECT ""ID"", ""Identity"", ""Right"" FROM ""{1}"" WHERE ""ID"" IN (SELECT ""ID"" FROM inserted)",
-                        tbl.TblNameRights, tbl.ViewUnmaterializedName);
-                    sb.AppendLine();
-                    sb.AppendLine();
+                    sb.AppendFormat(@"
+	IF OLD <> NULL THEN
+		DELETE FROM ""{0}"" WHERE ""ID"" = OLD.""ID"";
+	END IF;
+	IF NEW <> NULL THEN
+		DELETE FROM ""{0}"" WHERE ""ID"" = NEW.""ID"";
+		INSERT INTO ""{0}"" (""ID"", ""Identity"", ""Right"")
+			SELECT ""ID"", ""Identity"", ""Right"" FROM ""{1}""
+			WHERE ""ID"" = NEW.""ID"";
+	END IF;
+", tbl.TblNameRights, tbl.ViewUnmaterializedName);
                 }
                 else
                 {
+                    StringBuilder select = new StringBuilder();
                     select.AppendFormat("SELECT t1.\"ID\" FROM \"{0}\" t1", tbl.TblName);
                     int idx = 2;
                     var lastRel = tbl.Relations.Last();
                     foreach (var rel in tbl.Relations)
                     {
-                        var joinTbl = rel == lastRel ? "{0}" : rel.JoinTableName;
                         select.AppendLine();
-                        select.AppendFormat(@"      INNER JOIN ""{0}"" t{1} ON t{1}.""{2}"" = t{3}.""{4}""", joinTbl, idx, rel.JoinColumnName, idx - 1, rel.FKColumnName);
+                        if (rel == lastRel)
+                        {
+                            select.AppendFormat(@"   WHERE t{0}.""{1}"" = {2}.""{3}""", idx, rel.JoinColumnName, "{0}", rel.FKColumnName);
+                        }
+                        else
+                        {
+                            select.AppendFormat(@"      INNER JOIN ""{0}"" t{1} ON (t{1}.""{2}"" = t{3}.""{4}"")", rel.JoinTableName, idx, rel.JoinColumnName, idx - 1, rel.FKColumnName);
+                        }
                         idx++;
                     }
                     string selectFormat = select.ToString();
-                    sb.AppendFormat(@"    DELETE FROM ""{0}"" WHERE ""ID"" IN ({1})", tbl.TblNameRights, string.Format(selectFormat, "inserted"));
-                    sb.AppendLine();
-                    sb.AppendFormat(@"    DELETE FROM ""{0}"" WHERE ""ID"" IN ({1})", tbl.TblNameRights, string.Format(selectFormat, "deleted"));
-                    sb.AppendLine();
-                    sb.AppendFormat(@"    INSERT INTO ""{0}"" (""ID"", ""Identity"", ""Right"") SELECT ""ID"", ""Identity"", ""Right"" FROM ""{2}"" WHERE ""ID"" IN ({1})",
-                        tbl.TblNameRights, string.Format(selectFormat, "inserted"), tbl.ViewUnmaterializedName);
-                    sb.AppendLine();
-                    sb.AppendLine();
+
+                    sb.AppendFormat(@"
+	IF OLD <> NULL THEN
+		DELETE FROM ""{0}"" WHERE ""ID"" IN ({1});
+	END IF;
+	IF NEW <> NULL THEN
+		DELETE FROM ""{0}"" WHERE ""ID"" IN ({2});
+		INSERT INTO ""{0}"" (""ID"", ""Identity"", ""Right"")
+			SELECT ""ID"", ""Identity"", ""Right"" FROM ""{3}""
+			WHERE ""ID"" IN ({2});
+	END IF;
+", tbl.TblNameRights, String.Format(selectFormat, "OLD"), String.Format(selectFormat, "NEW"), tbl.ViewUnmaterializedName);
+
                 }
+                sb.AppendLine();
+                sb.AppendLine();
             }
 
-            sb.AppendLine("END");
+            sb.Append(@"	RETURN NULL;
+END$BODY$
+  LANGUAGE 'plpgsql' VOLATILE
+");
             ExecuteNonQuery(sb.ToString());
-
-            //            ExecuteNonQuery(@"CREATE TRIGGER \"{0}\"
-            //ON \"{1}\"
-            //AFTER UPDATE, INSERT, DELETE AS
-            //BEGIN
-            //    DELETE FROM \"{2}\" WHERE \"ID\" IN (SELECT \"ID\" FROM inserted)
-            //    DELETE FROM \"{2}\" WHERE \"ID\" IN (SELECT \"ID\" FROM deleted)
-            //    INSERT INTO \"{2}\" (\"ID\", \"Identity\", \"Right\") SELECT \"ID\", \"Identity\", \"Right\" FROM \"{3}\" WHERE \"ID\" IN (SELECT \"ID\" FROM inserted)
-            //END",
-            //                triggerName,
-            //                tblName,
-            //                tblNameRights,
-            //                viewUnmaterializedName);
         }
 
         public void CreateEmptyRightsViewUnmaterialized(string viewName)
         {
             Log.DebugFormat("Creating *empty* unmaterialized rights view \"{0}\"", viewName);
-            ExecuteNonQuery(@"SELECT 0 ""ID"", 0 ""Identity"", 0 ""Right"" WHERE 0 = 1");
+            ExecuteNonQuery(@"SELECT 0 AS ""ID"", 0 AS ""Identity"", 0 AS ""Right"" WHERE 0 = 1");
         }
 
         public void CreateRightsViewUnmaterialized(string viewName, string tblName, string tblNameRights, IList<ACL> acls)
@@ -789,8 +806,8 @@ FROM (", viewName);
                     createTableProcQuery.AppendFormat("IF colName IS NULL OR colName = '{0}{1}' THEN", refSpec.Value, Kistl.API.Helper.PositionSuffix);
                     createTableProcQuery.AppendLine();
                     createTableProcQuery.AppendFormat(
-                        // TODO: use named parameters with 9.0: "\t\tresult := RepairPositionColumnValidity(repair := repair, tblName := '{0}', refTblName := '{1}', fkColumnName := '{2}', fkPositionName := '{2}{3}');",
-                        "\t\tresult := RepairPositionColumnValidity(repair, '{0}', '{1}', '{2}', '{2}{3}');",
+                        // TODO: use named parameters with 9.0: "\t\tresult := \"RepairPositionColumnValidity\"(repair := repair, tblName := '{0}', refTblName := '{1}', fkColumnName := '{2}', fkPositionName := '{2}{3}');",
+                        "\t\tresult := \"RepairPositionColumnValidity\"(repair, '{0}', '{1}', '{2}', '{2}{3}');",
                         tbl.Key,
                         refSpec.Key,
                         refSpec.Value,
@@ -831,20 +848,17 @@ FROM (", viewName);
 
         public void RenameTable(string oldTblName, string newTblName)
         {
-            // Do not qualify new name as it will be part of the name
-            ExecuteNonQuery("EXEC sp_rename '\"{0}\"', '{1}'", oldTblName, newTblName);
+            ExecuteNonQuery("ALTER TABLE \"{0}\" RENAME TO \"{1}\"", oldTblName, newTblName);
         }
 
         public void RenameColumn(string tblName, string oldColName, string newColName)
         {
-            // Do not qualify new name as it will be part of the name
-            ExecuteNonQuery("EXEC sp_rename '\"{0}\".\"{1}\"', '{2}', 'COLUMN'", tblName, oldColName, newColName);
+            ExecuteNonQuery("ALTER TABLE \"{0}\" RENAME COLUMN \"{1}\" TO \"{2}\"", tblName, oldColName, newColName);
         }
 
         public void RenameFKConstraint(string oldConstraintName, string newConstraintName)
         {
-            // Do not qualify new name as it will be part of the name
-            ExecuteNonQuery("EXEC sp_rename '\"{0}\"', '{1}', 'OBJECT'", oldConstraintName, newConstraintName);
+            ExecuteNonQuery("ALTER INDEX \"{0}\" RENAME TO \"{1}\")", oldConstraintName, newConstraintName);
         }
 
         public System.Data.IDataReader ReadTableData(string tbl, IEnumerable<string> colNames)
@@ -888,7 +902,7 @@ FROM (", viewName);
                     return "numeric";
                 case System.Data.DbType.UInt32: // no int8 supported by Npgsql 2.0.9
                 case System.Data.DbType.Int64:
-                case System.Data.DbType.UInt64: 
+                case System.Data.DbType.UInt64:
                 default:
                     throw new ArgumentOutOfRangeException("type", string.Format("Unable to convert type '{0}' to an sql type string", type));
             }
@@ -924,6 +938,12 @@ FROM (", viewName);
                 default:
                     throw new ArgumentOutOfRangeException("type", string.Format("Unable to convert type '{0}' to a DbType", type));
             }
+        }
+
+        public void RefreshDbStats()
+        {
+            Log.Info("Vacuuming database");
+            ExecuteNonQuery("VACUUM ANALYZE");
         }
     }
 }

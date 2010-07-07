@@ -33,7 +33,7 @@ using System.Data;
 
         public override string ToString()
         {
-            return string.Format("JOIN {0} ON {1} = {2}", JoinTableName, JoinColumnName, FKColumnName);
+            return string.Format("JOIN {0} ON ({1} = {2})", JoinTableName, JoinColumnName, FKColumnName);
         }
     }
 
@@ -145,5 +145,10 @@ using System.Data;
 
         string DbTypeToNative(DbType type);
         DbType NativeToDbType(string type);
+
+        /// <summary>
+        /// This can be called after significant changes to the database to cause the DBMS' optimizier to refresh its internal stats.
+        /// </summary>
+        void RefreshDbStats();
     }
 }

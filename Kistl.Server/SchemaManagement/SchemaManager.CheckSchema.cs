@@ -44,6 +44,9 @@ namespace Kistl.Server.SchemaManagement
                     Log.Debug(String.Empty);
 
                     CheckExtraRelations();
+
+                    if (withRepair)
+                        db.RefreshDbStats();
                 }
             }
         }

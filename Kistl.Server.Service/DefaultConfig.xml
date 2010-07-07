@@ -3,14 +3,14 @@
   <ConfigName>Default Server Configuration</ConfigName>
   <Server StartServer="true">
     <!-- 
-    -->
     <SchemaProvider>MSSQL</SchemaProvider>
     <DatabaseProvider>System.Data.SqlClient</DatabaseProvider>
     <ConnectionString>Data Source=.\SQLEXPRESS;Initial Catalog=Kistl;Integrated Security=True;MultipleActiveResultSets=true;</ConnectionString>
-    <!--
+    -->
     <SchemaProvider>POSTGRESQL</SchemaProvider>
     <DatabaseProvider>Npgsql</DatabaseProvider>
     <ConnectionString>Server=localhost;Database=zbox;User Id=zbox;Password=b-cXqMyXEYea2kkjUhkS</ConnectionString>
+    <!--
     -->
     <DocumentStore>DocumentStore\Server\</DocumentStore>
     <LogFilePath>bin\LogFiles</LogFilePath>
@@ -38,7 +38,7 @@
     <string>P:\Kistl\bin\Debug\bin\Common</string>
     <!-- Fallback path for local development -->
     <string>P:\Kistl\bin\Debug\bin\Server\fallback</string>
-    
+
     <!-- CC.net on srv2008 -->
     <!-- default probe path -->
     <string>F:\CruiseControl.Net\Projects\Kistl\bin\CodeGen\bin\Debug</string>

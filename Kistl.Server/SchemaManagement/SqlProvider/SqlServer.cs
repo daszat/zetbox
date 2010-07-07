@@ -267,10 +267,10 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
 
         public bool CheckTableContainsData(string tblName)
         {
-            using (var cmd = new SqlCommand(string.Format("SELECT COUNT(*) FROM [{0}]", tblName), db, tx))
+            using (var cmd = new SqlCommand(string.Format("SELECT COUNT(*) > 0 FROM [{0}]", tblName), db, tx))
             {
                 QueryLog.Debug(cmd.CommandText);
-                return (int)cmd.ExecuteScalar() > 0;
+                return (bool)cmd.ExecuteScalar();
             }
         }
 
@@ -775,19 +775,6 @@ BEGIN", triggerName, tblName);
 
             sb.AppendLine("END");
             ExecuteNonQuery(sb.ToString());
-
-            //            ExecuteNonQuery(@"CREATE TRIGGER [{0}]
-            //ON [{1}]
-            //AFTER UPDATE, INSERT, DELETE AS
-            //BEGIN
-            //    DELETE FROM [{2}] WHERE [ID] IN (SELECT [ID] FROM inserted)
-            //    DELETE FROM [{2}] WHERE [ID] IN (SELECT [ID] FROM deleted)
-            //    INSERT INTO [{2}] ([ID], [Identity], [Right]) SELECT [ID], [Identity], [Right] FROM [{3}] WHERE [ID] IN (SELECT [ID] FROM inserted)
-            //END",
-            //                triggerName,
-            //                tblName,
-            //                tblNameRights,
-            //                viewUnmaterializedName);
         }
 
         public void CreateEmptyRightsViewUnmaterialized(string viewName)
@@ -1000,6 +987,11 @@ FROM (", viewName);
             }
 
             cmd.ExecuteNonQuery();
+        }
+
+        public void RefreshDbStats()
+        {
+            // do nothing
         }
     }
 }
