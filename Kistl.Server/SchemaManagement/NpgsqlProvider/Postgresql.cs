@@ -30,6 +30,8 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
         }
 
         public string ConfigName { get { return "POSTGRESQL"; } }
+        public string AdoNetProvider { get { return "Npgsql"; } }
+        public string ManifestToken { get { return "8.1.3"; } }
 
         public void Open(string connectionString)
         {
@@ -877,7 +879,7 @@ FROM (", viewName);
                 case System.Data.DbType.DateTime2:
                     return "timestamp";
                 case System.Data.DbType.Boolean:
-                    return "boolean";
+                    return "bool";
                 case System.Data.DbType.Guid:
                     return "uuid";
                 case System.Data.DbType.Binary:

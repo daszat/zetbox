@@ -41,18 +41,21 @@ namespace Kistl.DalProvider.EF.Generator.Implementation.EfModel
                 ctx,
                 cls,
                 relevantRelations,
-                String.Empty);
+                String.Empty,
+                schemaProvider);
 
             Implementation.EfModel.ModelSsdlEntityTypeColumns.Call(
                 Host,
                 ctx,
                 ModelSsdlHelper.RetrieveAndSortPropertiesOfType<ValueTypeProperty>(cls.Properties, p => !p.IsList).Cast<Property>(),
-                String.Empty);
+                String.Empty,
+                schemaProvider);
             Implementation.EfModel.ModelSsdlEntityTypeColumns.Call(
                 Host,
                 ctx,
                 ModelSsdlHelper.RetrieveAndSortPropertiesOfType<CompoundObjectProperty>(cls.Properties, p => !p.IsList).Cast<Property>(),
-                String.Empty);
+                String.Empty,
+                schemaProvider);
         }
 
         protected virtual void ApplyEntityTypeColumnDefs(CompoundObjectProperty prop)
@@ -61,7 +64,8 @@ namespace Kistl.DalProvider.EF.Generator.Implementation.EfModel
                 Host,
                 ctx,
                 new Property[] { prop },
-                String.Empty);
+                String.Empty,
+                schemaProvider);
         }
     }
 }

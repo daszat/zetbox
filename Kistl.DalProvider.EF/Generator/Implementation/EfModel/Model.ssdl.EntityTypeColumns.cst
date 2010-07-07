@@ -5,6 +5,7 @@
 	Inherits="Kistl.Server.Generators.KistlCodeTemplate" %>
 <%@ Import Namespace="System" %>
 <%@ Import Namespace="System.Collections.Generic" %>
+<%@ Import Namespace="System.Data" %>
 <%@ Import Namespace="System.Linq" %>
 <%@ Import Namespace="Kistl.API" %>
 <%@ Import Namespace="Kistl.API.Server" %>
@@ -12,9 +13,11 @@
 <%@ Import Namespace="Kistl.App.Extensions" %>
 <%@ Import Namespace="Kistl.Server.Generators" %>
 <%@ Import Namespace="Kistl.Server.Generators.Extensions" %>
+<%@ Import Namespace="Kistl.Server.SchemaManagement" %>
 <%@ Parameter Name="ctx" Type="IKistlContext" %>
 <%@ Parameter Name="properties" Type="IEnumerable<Property>" %>
 <%@ Parameter Name="prefix" Type="string" %>
+<%@ Parameter Name="schemaProvider" Type="ISchemaProvider" %>
 <%
 
 	/*
@@ -28,11 +31,12 @@
 		if (p is CompoundObjectProperty)
 		{
 %>		
-    <Property Name="<%= Construct.NestedColumnName(p, prefix) %>" Type="bit" Nullable="false" />
+    <Property Name="<%= Construct.NestedColumnName(p, prefix) %>" Type="<%= schemaProvider.DbTypeToNative(DbType.Boolean) %>" Nullable="false" />
 <%    
 			ApplyEntityTypeColumnDefs(
 				((CompoundObjectProperty)p).CompoundObjectDefinition.Properties.Cast<Property>().OrderBy(prop => prop.Name),
-				Construct.NestedColumnName(p, prefix));
+				Construct.NestedColumnName(p, prefix),
+				schemaProvider);
 		}
 		else if (p is ObjectReferenceProperty)
 		{
@@ -41,7 +45,7 @@
 		else
 		{
 			string propertyName = Construct.NestedColumnName(p, prefix);
-			string sqlTypeName = GetDBType(p);
+			string sqlTypeName = schemaProvider.DbTypeToNative(DbTypeMapper.GetDbTypeForProperty(p.GetType()));
 			
 			string maxLengthAttr = String.Empty;
 			if (p is StringProperty)

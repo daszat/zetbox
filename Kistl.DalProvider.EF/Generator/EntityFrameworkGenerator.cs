@@ -32,8 +32,10 @@ namespace Kistl.DalProvider.EF.Generator
                 // should be handled separately in the ProjectFile Template
                 this.RunTemplate(ctx, "Implementation.EfModel.ModelCsdl", "Model.csdl");
                 this.RunTemplate(ctx, "Implementation.EfModel.ModelMsl", "Model.msl");
-                this.RunTemplate(ctx, "Implementation.EfModel.ModelSsdl", "Model.ssdl");
-
+                foreach (var schemaProvider in SchemaProviders.Where(sp => !String.IsNullOrEmpty(sp.AdoNetProvider)))
+                {
+                    this.RunTemplate(ctx, "Implementation.EfModel.ModelSsdl", String.Format("Model.{0}.ssdl", schemaProvider.ConfigName), schemaProvider);
+                }
                 otherFileNames.Add(this.RunTemplateWithExtension(ctx, "Implementation.ObjectClasses.AssociationSetAttributes", "AssociationSetAttributes", "cs"));
 
                 return base.Generate_Other(ctx).Concat(otherFileNames);

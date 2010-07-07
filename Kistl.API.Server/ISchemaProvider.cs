@@ -67,6 +67,8 @@ using System.Data;
     public interface ISchemaProvider : IDisposable
     {
         string ConfigName { get; }
+        string AdoNetProvider { get; }
+        string ManifestToken { get; }
 
         void Open(string connectionString);
         void BeginTransaction();

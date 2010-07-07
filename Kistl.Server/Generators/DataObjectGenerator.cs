@@ -16,6 +16,10 @@ namespace Kistl.Server.Generators
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Server.Generator");
 
         private readonly IEnumerable<ISchemaProvider> _schemaProviders;
+        protected IEnumerable<ISchemaProvider> SchemaProviders
+        {
+            get { return _schemaProviders; }
+        }
 
         protected BaseDataObjectGenerator(IEnumerable<ISchemaProvider> schemaProviders)
         {

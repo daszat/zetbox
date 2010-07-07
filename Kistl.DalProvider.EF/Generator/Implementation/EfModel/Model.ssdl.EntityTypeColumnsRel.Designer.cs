@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using Kistl.API;
 using Kistl.API.Server;
@@ -18,21 +19,23 @@ namespace Kistl.DalProvider.EF.Generator.Implementation.EfModel
 		protected ObjectClass cls;
 		protected IEnumerable<Relation> relations;
 		protected string prefix;
+		protected ISchemaProvider schemaProvider;
 
 
-        public ModelSsdlEntityTypeColumnsRel(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, ObjectClass cls, IEnumerable<Relation> relations, string prefix)
+        public ModelSsdlEntityTypeColumnsRel(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, ObjectClass cls, IEnumerable<Relation> relations, string prefix, ISchemaProvider schemaProvider)
             : base(_host)
         {
 			this.ctx = ctx;
 			this.cls = cls;
 			this.relations = relations;
 			this.prefix = prefix;
+			this.schemaProvider = schemaProvider;
 
         }
         
         public override void Generate()
         {
-#line 21 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.ssdl.EntityTypeColumnsRel.cst"
+#line 23 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.ssdl.EntityTypeColumnsRel.cst"
 foreach(var rel in relations)
 	{
 		ProcessRelation(rel);
@@ -43,15 +46,15 @@ foreach(var rel in relations)
 private void GenerateProperty(string propertyName, bool needPositionStorage, string positionColumnName)
 {
 
-#line 31 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.ssdl.EntityTypeColumnsRel.cst"
-this.WriteObjects("    <Property Name=\"",  propertyName , "\" Type=\"int\" />\r\n");
-#line 34 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.ssdl.EntityTypeColumnsRel.cst"
+#line 33 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.ssdl.EntityTypeColumnsRel.cst"
+this.WriteObjects("    <Property Name=\"",  propertyName , "\" Type=\"",  schemaProvider.DbTypeToNative(DbType.Int32) , "\" />\r\n");
+#line 36 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.ssdl.EntityTypeColumnsRel.cst"
 if (needPositionStorage)
 	{
 
-#line 37 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.ssdl.EntityTypeColumnsRel.cst"
-this.WriteObjects("    <Property Name=\"",  positionColumnName , "\" Type=\"int\" Nullable=\"true\" />\r\n");
 #line 39 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.ssdl.EntityTypeColumnsRel.cst"
+this.WriteObjects("    <Property Name=\"",  positionColumnName , "\" Type=\"",  schemaProvider.DbTypeToNative(DbType.Int32) , "\" Nullable=\"true\" />\r\n");
+#line 41 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.ssdl.EntityTypeColumnsRel.cst"
 }
 	
 // } last brace added by template expansion 

@@ -41,24 +41,6 @@ namespace Kistl.Server.Generators.Extensions
             }
         }
 
-        public static string ToDbType(this ValueTypeProperty prop)
-        {
-            if (prop == null) { throw new ArgumentNullException("prop"); }
-
-            if (prop is IntProperty)
-                return "int";
-            if (prop is StringProperty)
-                return "nvarchar";
-            if (prop is DoubleProperty)
-                return "float";
-            if (prop is BoolProperty)
-                return "bit";
-            if (prop is DateTimeProperty)
-                return "datetime";
-
-            throw new ArgumentOutOfRangeException("prop", "unknown ValueTypeProperty type: " + prop.GetType().FullName);
-        }
-
         #region Relation naming standards
         public static string GetRelationClassName(this Relation rel)
         {

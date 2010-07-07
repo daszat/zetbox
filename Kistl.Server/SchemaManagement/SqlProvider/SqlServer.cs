@@ -23,6 +23,8 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
         protected SqlTransaction tx;
 
         public string ConfigName { get { return "MSSQL"; } }
+        public string AdoNetProvider { get { return "System.Data.SqlClient"; } }
+        public string ManifestToken { get { return "2008"; } }
 
         public void Open(string connectionString)
         {

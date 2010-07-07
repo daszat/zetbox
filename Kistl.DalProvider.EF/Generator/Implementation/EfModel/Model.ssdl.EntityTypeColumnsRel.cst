@@ -5,6 +5,7 @@
 	Inherits="Kistl.Server.Generators.KistlCodeTemplate" %>
 <%@ Import Namespace="System" %>
 <%@ Import Namespace="System.Collections.Generic" %>
+<%@ Import Namespace="System.Data" %>
 <%@ Import Namespace="System.Linq" %>
 <%@ Import Namespace="Kistl.API" %>
 <%@ Import Namespace="Kistl.API.Server" %>
@@ -16,6 +17,7 @@
 <%@ Parameter Name="cls" Type="ObjectClass" %>
 <%@ Parameter Name="relations" Type="IEnumerable<Relation>" %>
 <%@ Parameter Name="prefix" Type="string" %>
+<%@ Parameter Name="schemaProvider" Type="ISchemaProvider" %>
 <%
 
 	foreach(var rel in relations)
@@ -28,13 +30,13 @@
 private void GenerateProperty(string propertyName, bool needPositionStorage, string positionColumnName)
 {
 %>
-    <Property Name="<%= propertyName %>" Type="int" />
+    <Property Name="<%= propertyName %>" Type="<%= schemaProvider.DbTypeToNative(DbType.Int32) %>" />
 <%
    			
 	if (needPositionStorage)
 	{
 %>
-    <Property Name="<%= positionColumnName %>" Type="int" Nullable="true" />
+    <Property Name="<%= positionColumnName %>" Type="<%= schemaProvider.DbTypeToNative(DbType.Int32) %>" Nullable="true" />
 <%
 	}
 	

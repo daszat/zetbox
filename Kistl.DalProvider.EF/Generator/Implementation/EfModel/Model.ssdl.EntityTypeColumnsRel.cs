@@ -5,20 +5,20 @@ namespace Kistl.DalProvider.EF.Generator.Implementation.EfModel
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-
     using Arebis.CodeGeneration;
     using Kistl.API;
+    using Kistl.API.Server;
     using Kistl.App.Base;
     using Kistl.App.Extensions;
     using Kistl.Server.Generators;
 
     public partial class ModelSsdlEntityTypeColumnsRel
     {
-        public static void Call(IGenerationHost host, IKistlContext ctx, ObjectClass cls, IEnumerable<Relation> relations, string prefix)
+        public static void Call(IGenerationHost host, IKistlContext ctx, ObjectClass cls, IEnumerable<Relation> relations, string prefix, ISchemaProvider schemaProvider)
         {
             if (host == null) { throw new ArgumentNullException("host"); }
 
-            host.CallTemplate("Implementation.EfModel.ModelSsdlEntityTypeColumnsRel", ctx, cls, relations, prefix);
+            host.CallTemplate("Implementation.EfModel.ModelSsdlEntityTypeColumnsRel", ctx, cls, relations, prefix, schemaProvider);
         }
 
         private void ProcessRelation(Relation rel)

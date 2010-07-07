@@ -27,6 +27,8 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
         protected string quoteSuffix;
 
         public string ConfigName { get { return "OLEDB"; } }
+        public string AdoNetProvider { get { return null; } }
+        public string ManifestToken { get { return null; } }
 
         public void Open(string connectionString)
         {
