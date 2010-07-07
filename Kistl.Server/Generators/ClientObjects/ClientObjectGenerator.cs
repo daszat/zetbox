@@ -1,13 +1,20 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Kistl.Server.Generators.ClientObjects
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using Kistl.API.Server;
+
     public class ClientObjectGenerator
         : BaseDataObjectGenerator
     {
+        public ClientObjectGenerator(IEnumerable<ISchemaProvider> schemaProviders)
+            : base(schemaProviders)
+        {
+        }
+
         public override string ExtraSuffix { get { return String.Empty; } }
         public override string Description { get { return "Client"; } }
         public override string TargetNameSpace { get { return "Kistl.Objects.Client"; } }

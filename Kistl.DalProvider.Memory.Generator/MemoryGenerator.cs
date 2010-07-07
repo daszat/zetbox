@@ -6,8 +6,8 @@ namespace Kistl.DalProvider.Memory.Generator
     using System.IO;
     using System.Linq;
     using System.Text;
-
     using Kistl.API;
+    using Kistl.API.Server;
     using Kistl.API.Utils;
     using Kistl.App.Base;
     using Kistl.App.Extensions;
@@ -22,7 +22,8 @@ namespace Kistl.DalProvider.Memory.Generator
 
         private readonly Server.Server _server;
 
-        public MemoryGenerator(Server.Server server)
+        public MemoryGenerator(IEnumerable<ISchemaProvider> schemaProviders, Server.Server server)
+            : base(schemaProviders)
         {
             _server = server;
         }

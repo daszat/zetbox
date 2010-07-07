@@ -1,16 +1,23 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Kistl.API;
-using Kistl.App.Base;
 
 namespace Kistl.Server.Generators.Interfaces
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+
+    using Kistl.API;
+    using Kistl.API.Server;
+    using Kistl.App.Base;
+
     public class InterfaceGenerator
         : BaseDataObjectGenerator
     {
+        public InterfaceGenerator(IEnumerable<ISchemaProvider> schemaProviders)
+            : base(schemaProviders)
+        {
+        }
+
         public override string ExtraSuffix { get { return String.Empty; } }
         public override string Description { get { return "Interfaces"; } }
         public override string TargetNameSpace { get { return "Kistl.Objects"; } }

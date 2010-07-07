@@ -5,11 +5,17 @@ namespace Kistl.DalProvider.EF.Generator
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using Kistl.API.Server;
     using Kistl.Server.Generators;
 
     public class EntityFrameworkGenerator
         : BaseDataObjectGenerator
     {
+        public EntityFrameworkGenerator(IEnumerable<ISchemaProvider> schemaProviders)
+            : base(schemaProviders)
+        {
+        }
+
         public override string ExtraSuffix { get { return String.Empty; } }
         public override string Description { get { return "EF"; } }
         public override string TargetNameSpace { get { return "Kistl.Objects.Server"; } }

@@ -9,10 +9,18 @@ namespace Kistl.Server.Generators
     using Kistl.API;
     using Kistl.API.Utils;
     using Kistl.App.Base;
+    using Kistl.API.Server;
 
     public abstract class BaseDataObjectGenerator
     {
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Server.Generator");
+
+        private readonly IEnumerable<ISchemaProvider> _schemaProviders;
+
+        protected BaseDataObjectGenerator(IEnumerable<ISchemaProvider> schemaProviders)
+        {
+            _schemaProviders = schemaProviders;
+        }
 
         // Case #1382?
         protected string CodeBasePath { get; private set; }
@@ -78,7 +86,7 @@ namespace Kistl.Server.Generators
             generatedFileNames.AddRange(Generate_Other(ctx));
 
             Log.Info("  Project File");
-            string projectFileName = Generate_ProjectFile(ctx, ProjectGuid, generatedFileNames);
+            string projectFileName = Generate_ProjectFile(ctx, ProjectGuid, generatedFileNames, _schemaProviders);
 
             // Case #1382
             this.ProjectFileName = Path.Combine(this.CodeBasePath, projectFileName);
@@ -187,9 +195,9 @@ namespace Kistl.Server.Generators
             };
         }
 
-        protected virtual string Generate_ProjectFile(IKistlContext ctx, string projectGuid, List<string> generatedFileNames)
+        protected virtual string Generate_ProjectFile(IKistlContext ctx, string projectGuid, List<string> generatedFileNames, IEnumerable<ISchemaProvider> schemaProviders)
         {
-            return RunTemplate(ctx, "Implementation.ProjectFile", TargetNameSpace + ".csproj", projectGuid, generatedFileNames.Where(s => !String.IsNullOrEmpty(s)).ToList());
+            return RunTemplate(ctx, "Implementation.ProjectFile", TargetNameSpace + ".csproj", projectGuid, generatedFileNames.Where(s => !String.IsNullOrEmpty(s)).ToList(), schemaProviders);
         }
     }
 }
