@@ -6,11 +6,12 @@ using System.Linq;
 using System.Text;
 
 using Kistl.API;
+using System.ComponentModel;
 
 namespace Kistl.Client.Presentables
 {
 
-    public class KistlDebuggerAsModel 
+    public class KistlDebuggerAsModel
         : ViewModel, IKistlContextDebugger
     {
         public new delegate KistlDebuggerAsModel Factory(IKistlContext dataCtx);
@@ -67,7 +68,7 @@ namespace Kistl.Client.Presentables
 
         private KistlContextModel GetModel(IKistlContext ctx)
         {
-            return ModelFactory.CreateViewModel<KistlContextModel.Factory>().Invoke(ctx);
+            return new KistlContextModel(ctx);
         }
 
         void IKistlContextDebugger.Created(IKistlContext ctx)
@@ -92,15 +93,41 @@ namespace Kistl.Client.Presentables
         #endregion
     }
 
-    public class KistlContextModel
-        : ViewModel
+    /// <summary>
+    /// Cant be a regular view model -> recursion when creating
+    /// </summary>
+    public class KistlContextModel : INotifyPropertyChanged
     {
-        public new delegate KistlContextModel Factory(IKistlContext dataCtx);
+        #region INotifyPropertyChanged Members
 
-        protected IDebuggingKistlContext DebuggingContext { get; private set; }
+        private event PropertyChangedEventHandler _PropertyChangedEvent;
+        public event PropertyChangedEventHandler PropertyChanged
+        {
+            add
+            {
+                _PropertyChangedEvent += value;
+            }
+            remove
+            {
+                _PropertyChangedEvent -= value;
+            }
+        }
 
-        public KistlContextModel(IViewModelDependencies appCtx, IDebuggingKistlContext dataCtx)
-            : base(appCtx, dataCtx)
+        /// <summary>
+        /// Notifies all listeners of PropertyChanged about a change in a property
+        /// </summary>
+        /// <param name="propertyName">the changed property</param>
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            if (_PropertyChangedEvent != null)
+                _PropertyChangedEvent(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        #endregion
+
+        protected IKistlContext DebuggingContext { get; private set; }
+
+        public KistlContextModel(IKistlContext dataCtx)
         {
             DebuggingContext = dataCtx;
         }
@@ -137,7 +164,14 @@ namespace Kistl.Client.Presentables
         {
             get
             {
-                return String.Join(String.Empty, DebuggingContext.CreatedAt.GetFrames().Take(10).Select(sf => sf.ToString()).ToArray());
+                if (DebuggingContext is IDebuggingKistlContext)
+                {
+                    return String.Join(String.Empty, ((IDebuggingKistlContext)DebuggingContext).CreatedAt.GetFrames().Take(10).Select(sf => sf.ToString()).ToArray());
+                }
+                else
+                {
+                    return string.Empty;
+                }
             }
         }
 
@@ -145,13 +179,21 @@ namespace Kistl.Client.Presentables
         {
             get
             {
-                if (DebuggingContext.DisposedAt == null)
+                IDebuggingKistlContext dbgCtx = DebuggingContext as IDebuggingKistlContext;
+                if (dbgCtx != null)
                 {
-                    return "still active";
+                    if (dbgCtx.DisposedAt == null)
+                    {
+                        return "still active";
+                    }
+                    else
+                    {
+                        return String.Join(String.Empty, dbgCtx.DisposedAt.GetFrames().Take(10).Select(sf => sf.ToString()).ToArray());
+                    }
                 }
                 else
                 {
-                    return String.Join(String.Empty, DebuggingContext.DisposedAt.GetFrames().Take(10).Select(sf => sf.ToString()).ToArray());
+                    return string.Empty;
                 }
             }
         }
@@ -166,20 +208,20 @@ namespace Kistl.Client.Presentables
         /// is only called by the <see cref="KistlDebuggerAsModel"/>
         internal void OnContextChanged()
         {
-            var objs = DataContext.AttachedObjects.OfType<IDataObject>().ToArray();
+            var objs = DebuggingContext.AttachedObjects.OfType<IDataObject>().ToArray();
             SyncObjects(objs);
         }
 
         private void SyncObjects(IDataObject[] objs)
         {
             _objCache.Clear();
-            objs.ForEach(o => _objCache.Add(string.Format("({0}) {1}", o.ID, DataContext.GetInterfaceType(o).Type.FullName)));
+            objs.ForEach(o => _objCache.Add(string.Format("({0}) {1}", o.ID, DebuggingContext.GetInterfaceType(o).Type.FullName)));
             Count = objs.Length;
         }
 
         #endregion
 
-        public override string Name
+        public string Name
         {
             get { return "KistlContext"; }
         }
