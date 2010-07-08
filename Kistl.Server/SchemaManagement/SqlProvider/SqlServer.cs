@@ -267,10 +267,10 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
 
         public bool CheckTableContainsData(string tblName)
         {
-            using (var cmd = new SqlCommand(string.Format("SELECT COUNT(*) > 0 FROM [{0}]", tblName), db, tx))
+            using (var cmd = new SqlCommand(string.Format("SELECT COUNT(*) FROM (SELECT TOP 1 * FROM [{0}]) as data", tblName), db, tx))
             {
                 QueryLog.Debug(cmd.CommandText);
-                return (bool)cmd.ExecuteScalar();
+                return (int)cmd.ExecuteScalar() > 0;
             }
         }
 
