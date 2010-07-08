@@ -36,7 +36,7 @@ namespace Kistl.Client.Presentables
         /// <summary>
         /// FrozenContext for resolving meta data
         /// </summary>
-        IReadOnlyKistlContext FrozenContext { get; }
+        IFrozenContext FrozenContext { get; }
     }
 
     [AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = false)]
@@ -207,7 +207,7 @@ namespace Kistl.Client.Presentables
             get { throw new InvalidOperationException("No asynchronous operations allowed in Design mode"); }
         }
 
-        public IReadOnlyKistlContext FrozenContext
+        public IFrozenContext FrozenContext
         {
             get { throw new NotImplementedException(); }
         }
