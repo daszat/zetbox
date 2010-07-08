@@ -16,5 +16,13 @@ namespace ZBox.App.SchemaMigration
         public static void OnCreateEtlStatements_MigrationProject(ZBox.App.SchemaMigration.MigrationProject obj)
         {
         }
+
+        public static void OnCreateMappingReport_MigrationProject(ZBox.App.SchemaMigration.MigrationProject obj)
+        {
+        }
+
+        public static void OnCreateMappingReport_SourceTable(ZBox.App.SchemaMigration.SourceTable obj)
+        {
+        }
     }
 }

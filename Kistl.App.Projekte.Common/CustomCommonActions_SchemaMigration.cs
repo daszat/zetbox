@@ -44,6 +44,8 @@ namespace ZBox.App.SchemaMigration
         {
             if (obj.SourceTable == null) throw new InvalidOperationException("Not attached to a source table");
             if (obj.SourceTable.DestinationObjectClass == null) throw new InvalidOperationException("Source table has no destination object class");
+            if (obj.SourceTable.MigrationProject == null) throw new InvalidOperationException("Not attached to a migration project");
+            if (obj.SourceTable.MigrationProject.DestinationModule == null) throw new InvalidOperationException("No destination module provided");
             if (obj.DestinationProperty != null) throw new InvalidOperationException("there is already a destination object property");
 
             Property p = null;
@@ -109,6 +111,10 @@ namespace ZBox.App.SchemaMigration
             }
 
             obj.DestinationProperty = p;
+            p.Name = obj.Name;
+            p.Description = obj.Description;
+            p.ObjectClass = obj.SourceTable.DestinationObjectClass;
+            p.Module = obj.SourceTable.MigrationProject.DestinationModule;
         }
 
     }
