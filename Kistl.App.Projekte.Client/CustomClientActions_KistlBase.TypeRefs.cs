@@ -118,7 +118,11 @@ namespace Kistl.App.Base
                     var type = tr.AsType(false);
                     // Sorry, no support for that yet
                     // http://blogs.msdn.com/b/kaevans/archive/2005/10/24/484186.aspx
-                    if (type.Assembly.ReflectionOnly) continue; 
+                    if (type.Assembly.ReflectionOnly)
+                    {
+                        Logging.Log.WarnOnce(string.Format("Unable to create ViewModelDescriptors for Assembly {0}. Assembly was loaded with ReflectionOnly. This is not supported yet", type.Assembly.FullName));
+                        continue;
+                    }
                     if (type != null)
                     {
                         var attr = type.GetCustomAttributes(typeof(ViewModelDescriptorAttribute), false).FirstOrDefault() as ViewModelDescriptorAttribute;
@@ -151,7 +155,11 @@ namespace Kistl.App.Base
                     var type = tr.AsType(false);
                     // Sorry, no support for that yet
                     // http://blogs.msdn.com/b/kaevans/archive/2005/10/24/484186.aspx
-                    if (type.Assembly.ReflectionOnly) continue;
+                    if (type.Assembly.ReflectionOnly)
+                    {
+                        Logging.Log.WarnOnce(string.Format("Unable to create ViewDescriptors for Assembly {0}. Assembly was loaded with ReflectionOnly. This is not supported yet", type.Assembly.FullName));
+                        continue;
+                    }
                     if (type != null)
                     {
                         var attr = type.GetCustomAttributes(typeof(ViewDescriptorAttribute), false).FirstOrDefault() as ViewDescriptorAttribute;

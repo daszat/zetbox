@@ -10,6 +10,7 @@ using Kistl.API;
 using Kistl.App.Base;
 using Kistl.App.Extensions;
 using Kistl.App.GUI;
+using Kistl.Client.Presentables.GUI;
 
 namespace Kistl.Client.Presentables
 {
@@ -604,6 +605,67 @@ namespace Kistl.Client.Presentables
         }
 
         #endregion
+    }
+
+    [ViewModelDescriptor("KistlBase", DefaultKind="Kistl.App.GUI.MultiLineTextboxKind", Description="PropertyViewModel for multiline string properties")]
+    public class MultiLineStringPropertyModel 
+        : ReferencePropertyModel<string>
+    {
+        public new delegate MultiLineStringPropertyModel Factory(IKistlContext dataCtx, IDataObject obj, Property prop);
+
+        public MultiLineStringPropertyModel(
+            IViewModelDependencies appCtx, IKistlContext dataCtx,
+            IDataObject obj, ValueTypeProperty prop)
+            : base(appCtx, dataCtx, obj, prop)
+        {
+        }
+
+        protected override void OnPropertyChanged(string propertyName)
+        {
+            base.OnPropertyChanged(propertyName);
+            if (propertyName == "Value")
+            {
+                base.OnPropertyChanged("ShortText");
+            }
+        }
+
+        public string ShortText
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(Value) && Value.Length > 20)
+                {
+                    return Value.Replace("\r", "").Replace('\n', ' ').Substring(0, 20) + "...";
+                }
+                else
+                {
+                    return Value;
+                }
+            }
+        }
+
+        private ICommand _EditCommand = null;
+        public ICommand EditCommand
+        {
+            get
+            {
+                if (_EditCommand == null)
+                {
+                    _EditCommand = ModelFactory.CreateViewModel<SimpleCommandModel.Factory>().Invoke(DataContext, "Edit", "Opens a Editor Dialog", () => Edit(), null);
+                }
+                return _EditCommand;
+            }
+        }
+
+        public void Edit()
+        {
+            ModelFactory.ShowModel(
+                    ModelFactory.CreateViewModel<MultiLineEditorDialogModel.Factory>().Invoke(
+                        DataContext,
+                        Value,
+                        (v) => Value = v),
+                    true);
+        }
     }
 
 }

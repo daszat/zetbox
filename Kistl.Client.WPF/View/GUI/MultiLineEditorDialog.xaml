@@ -1,0 +1,36 @@
+﻿<Window x:Class="Kistl.Client.WPF.View.GUI.MultiLineEditorDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:client="clr-namespace:Kistl.Client.Presentables;assembly=Kistl.Client"
+        Title="Edit Text"
+        ResizeMode="CanResize"
+        SizeToContent="Height"
+        MinWidth="300"
+        Loaded="Window_Loaded"
+        xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls"
+        xmlns:commands="clr-namespace:Kistl.Client.WPF.Commands"
+        commands:SmartRoutedUICommand.IsCommandSink="True">
+    <Window.Resources>
+        <Style x:Key="addedMargins">
+            <Setter Property="FrameworkElement.Margin"
+                    Value="5" />
+        </Style>
+    </Window.Resources>
+    <DockPanel Style="{StaticResource addedMargins}"
+               LastChildFill="True">
+
+        <UniformGrid DockPanel.Dock="Bottom"
+                     Style="{StaticResource addedMargins}"
+                     Rows="1">
+            <ctrls:CommandButton CommandModel="{Binding OKCommand}" Style="{StaticResource addedMargins}"/>
+            <ctrls:CommandButton CommandModel="{Binding CancelCommand}" Style="{StaticResource addedMargins}"/>
+        </UniformGrid>
+
+        <TextBox Text="{Binding Value, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}" 
+                 AcceptsReturn="True"
+                 AcceptsTab="True"
+                 VerticalScrollBarVisibility="Visible"
+                 HorizontalScrollBarVisibility="Visible"
+                 MinLines="10" />
+    </DockPanel>
+</Window>
