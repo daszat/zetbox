@@ -255,6 +255,13 @@ namespace Kistl.Client.Presentables
         /// <param name="filter">a list of filters for files to display in the format of "Label|glob1[;glob2[;...]"</param>
         /// <returns>the chosen file name or <code>String.Empty</code> if the user aborted the selection</returns>
         public abstract string GetSourceFileNameFromUser(params string[] filter);
+        /// <summary>
+        /// Asks the user for a filename to save to.
+        /// </summary>
+        /// <param name="filename">A default filename or null or empty</param>
+        /// <param name="filter">a list of filters for files to display in the format of "Label|glob1[;glob2[;...]"</param>
+        /// <returns>the chosen file name or <code>String.Empty</code> if the user aborted the selection</returns>
+        public abstract string GetDestinationFileNameFromUser(string filename, params string[] filter);
 
         #endregion
     }

@@ -65,5 +65,9 @@ namespace Kistl.Client.Forms
         {
             throw new NotImplementedException();
         }
+        public override string GetDestinationFileNameFromUser(string filename, params string[] filters)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

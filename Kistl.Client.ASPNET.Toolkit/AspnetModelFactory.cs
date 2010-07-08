@@ -93,6 +93,10 @@ namespace Kistl.Client.ASPNET.Toolkit
         {
             throw new NotImplementedException();
         }
+        public override string GetDestinationFileNameFromUser(string filename, params string[] filters)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public static class AspnetModelFactoryExtensions

@@ -10,6 +10,7 @@ namespace Kistl.Client.Presentables
 
         void CreateTimer(TimeSpan tickLength, Action action);
         string GetSourceFileNameFromUser(params string[] filter);
+        string GetDestinationFileNameFromUser(string filename, params string[] filter);
         Toolkit Toolkit { get; }
 
         // Create Models

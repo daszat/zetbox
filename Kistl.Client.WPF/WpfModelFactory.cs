@@ -95,6 +95,28 @@ namespace Kistl.Client.WPF
                 return String.Empty;
             }
         }
+        /// <inheritdoc/>
+        public override string GetDestinationFileNameFromUser(string filename, params string[] filter)
+        {
+            var dialog = new SaveFileDialog()
+            {
+                CheckFileExists = false,
+                CheckPathExists = false,
+                DereferenceLinks = true,
+                Filter = String.Join("|", filter),
+                ValidateNames = true,
+                FileName = filename
+            };
+
+            if (dialog.ShowDialog() == true)
+            {
+                return dialog.FileName;
+            }
+            else
+            {
+                return String.Empty;
+            }
+        }
     }
 
 }
