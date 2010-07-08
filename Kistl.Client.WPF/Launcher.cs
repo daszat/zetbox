@@ -17,9 +17,9 @@ namespace Kistl.Client.WPF
         private readonly IKistlContext ctx;
         private readonly Func<IKistlContext> ctxFactory;
         private readonly IModelFactory mdlFactory;
-        private readonly IReadOnlyKistlContext frozenCtx;
+        private readonly IFrozenContext frozenCtx;
 
-        public Launcher(IKistlContext ctx, Func<IKistlContext> ctxFactory, IModelFactory mdlFactory, IReadOnlyKistlContext frozenCtx)
+        public Launcher(IKistlContext ctx, Func<IKistlContext> ctxFactory, IModelFactory mdlFactory, IFrozenContext frozenCtx)
         {
             this.ctx = ctx;
             this.frozenCtx = frozenCtx;

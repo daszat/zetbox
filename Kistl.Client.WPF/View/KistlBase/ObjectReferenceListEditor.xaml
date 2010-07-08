@@ -50,6 +50,7 @@
                   SelectedItem="{Binding SelectedItem}"
                   MinHeight="50"
                   MouseDoubleClick="ItemActivatedHandler"
-                  Initialized="ListView_Initialized" />
+                  Initialized="ListView_Initialized"
+                  GridViewColumnHeader.Click="ListView_HeaderClick"/>
     </DockPanel>
 </view:PropertyEditor>

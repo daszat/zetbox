@@ -14,8 +14,8 @@ namespace Kistl.Client.WPF.Converter
     [ValueConversion(typeof(IDataObject), typeof(string))]
     public class IconConverter : IValueConverter
     {
-        private readonly IReadOnlyKistlContext FrozenContext;
-        public IconConverter(string docStore, IReadOnlyKistlContext frozenCtx)
+        private readonly IFrozenContext FrozenContext;
+        public IconConverter(string docStore, IFrozenContext frozenCtx)
         {
             this.DocumentStore = docStore;
             this.FrozenContext = frozenCtx;

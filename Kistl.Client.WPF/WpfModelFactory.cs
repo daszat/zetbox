@@ -18,7 +18,7 @@ namespace Kistl.Client.WPF
     {
         private readonly IUiThreadManager uiThread;
 
-        public WpfModelFactory(Autofac.ILifetimeScope container, IUiThreadManager uiThread, IReadOnlyKistlContext frozenCtx)
+        public WpfModelFactory(Autofac.ILifetimeScope container, IUiThreadManager uiThread, IFrozenContext frozenCtx)
             : base(container, frozenCtx)
         {
             this.uiThread = uiThread;

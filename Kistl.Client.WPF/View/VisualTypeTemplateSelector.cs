@@ -25,16 +25,16 @@ namespace Kistl.Client.WPF.View
     {
         public delegate VisualTypeTemplateSelector Factory(object requestedKind);
 
-        private readonly IReadOnlyKistlContext _frozenCtx;
+        private readonly IFrozenContext _frozenCtx;
         private readonly object _requestedKind;
 
-        private static DataTemplate SelectTemplate(ViewModel mdl, string controlKindName, IReadOnlyKistlContext frozenCtx)
+        private static DataTemplate SelectTemplate(ViewModel mdl, string controlKindName, IFrozenContext frozenCtx)
         {
             var ck = frozenCtx.GetQuery<ControlKind>().SingleOrDefault(c => c.Name == controlKindName);
             return SelectTemplate(mdl, ck, frozenCtx);
         }
 
-        private static DataTemplate SelectTemplate(ViewModel mdl, ControlKind controlKind, IReadOnlyKistlContext frozenCtx)
+        private static DataTemplate SelectTemplate(ViewModel mdl, ControlKind controlKind, IFrozenContext frozenCtx)
         {
             ViewModelDescriptor pmd = mdl.GetType().ToRef(frozenCtx).GetViewModelDescriptor();
             if (pmd == null)
@@ -46,7 +46,7 @@ namespace Kistl.Client.WPF.View
             return CreateTemplate(pmd.GetViewDescriptor(Toolkit.WPF, controlKind));
         }
 
-        private static DataTemplate SelectDefaultTemplate(ViewModel mdl, IReadOnlyKistlContext frozenCtx)
+        private static DataTemplate SelectDefaultTemplate(ViewModel mdl, IFrozenContext frozenCtx)
         {
             ViewModelDescriptor pmd = mdl.GetType().ToRef(frozenCtx).GetViewModelDescriptor();
             if (pmd == null)
@@ -89,7 +89,7 @@ namespace Kistl.Client.WPF.View
         /// <summary>
         /// Initializes a new instance of the VisualTypeTemplateSelector class.
         /// </summary>
-        public VisualTypeTemplateSelector(object requestedKind, IReadOnlyKistlContext frozenCtx)
+        public VisualTypeTemplateSelector(object requestedKind, IFrozenContext frozenCtx)
         {
             this._requestedKind = requestedKind;
             this._frozenCtx = frozenCtx;

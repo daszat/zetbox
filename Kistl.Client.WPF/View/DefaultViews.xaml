@@ -18,4 +18,17 @@
     <DataTemplate x:Key="nullTemplate">
         <TextBlock FontWeight="Bold">(null)</TextBlock>
     </DataTemplate>
+
+    <DataTemplate x:Key="GridHeaderTemplateArrowUp">
+        <StackPanel Orientation="Horizontal">
+            <ContentPresenter Content="{Binding}" />
+            <TextBlock Text="^" />
+        </StackPanel>
+    </DataTemplate>
+    <DataTemplate x:Key="GridHeaderTemplateArrowDown">
+        <StackPanel Orientation="Horizontal">
+            <ContentPresenter Content="{Binding}" />
+            <TextBlock Text="^" />
+        </StackPanel>
+    </DataTemplate>
 </ResourceDictionary>

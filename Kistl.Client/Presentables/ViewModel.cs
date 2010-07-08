@@ -76,7 +76,7 @@ namespace Kistl.Client.Presentables
         /// <summary>
         /// FrozenContext for resolving meta data
         /// </summary>
-        protected IReadOnlyKistlContext FrozenContext { get { return _dependencies.FrozenContext; } }
+        protected IFrozenContext FrozenContext { get { return _dependencies.FrozenContext; } }
 
         /// <summary>
         /// The factory from where new models should be created

@@ -18,7 +18,7 @@ namespace Kistl.Client.Forms
 
         private List<WorkspaceView> _workspaces = new List<WorkspaceView>();
 
-        public FormsModelFactory(Autofac.ILifetimeScope container, IReadOnlyKistlContext metaCtx)
+        public FormsModelFactory(Autofac.ILifetimeScope container, IFrozenContext metaCtx)
             : base(container, metaCtx)
         {
         }

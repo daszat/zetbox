@@ -27,9 +27,9 @@ namespace Kistl.Client.Presentables
         public abstract Toolkit Toolkit { get; }
 
         protected readonly Autofac.ILifetimeScope Container;
-        protected readonly IReadOnlyKistlContext FrozenContext;
+        protected readonly IFrozenContext FrozenContext;
 
-        protected ModelFactory(Autofac.ILifetimeScope container, IReadOnlyKistlContext frozenCtx)
+        protected ModelFactory(Autofac.ILifetimeScope container, IFrozenContext frozenCtx)
         {
             if (container == null) throw new ArgumentNullException("container");
             if (frozenCtx == null) throw new ArgumentNullException("frozenCtx");

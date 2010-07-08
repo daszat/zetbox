@@ -38,7 +38,7 @@ namespace Kistl.Client.ASPNET.Toolkit
         : ModelFactory
     {
 
-        public AspnetModelFactory(Autofac.ILifetimeScope container, IReadOnlyKistlContext metaCtx)
+        public AspnetModelFactory(Autofac.ILifetimeScope container, IFrozenContext metaCtx)
             : base(container, metaCtx)
         {
 
