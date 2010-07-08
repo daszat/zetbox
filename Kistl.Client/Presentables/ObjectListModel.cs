@@ -402,5 +402,12 @@ namespace Kistl.Client.Presentables
         }
 
         #endregion
+
+        public void Sort(ColumnDisplayModel header, ListSortDirection direction)
+        {
+            if (HasPersistentOrder) return; // Not supported
+
+            // TODO: Don't know how to implement
+        }
     }
 }
