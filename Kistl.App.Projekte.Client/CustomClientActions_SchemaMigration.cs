@@ -23,8 +23,98 @@ namespace ZBox.App.SchemaMigration
             _mdlFactory = mdlFactory;
         }
 
+        private static string Quote(string str, ZBox.App.SchemaMigration.MigrationProject obj)
+        {
+            return string.Format("{0}{1}{2}", obj.EtlQuotePrefix, str, obj.EtlQuoteSuffix);
+        }
+
         public static void OnCreateEtlStatements_MigrationProject(ZBox.App.SchemaMigration.MigrationProject obj)
         {
+            var fileName = _mdlFactory.GetDestinationFileNameFromUser("Migration Script " + obj.Description + ".sql", "SQL|*.sql");
+            if (!string.IsNullOrEmpty(fileName))
+            {
+                StringBuilder sb = new StringBuilder();
+
+                sb.AppendLine("-- Migration Script Template");
+                sb.AppendLine("-- " + obj.Description);
+                sb.AppendLine();
+
+                sb.AppendLine("-----------------------------------------------------------------");
+                sb.AppendLine("-- delete all tables ");
+                sb.AppendLine("-----------------------------------------------------------------");
+                foreach (var cls in obj.SourceTables.Where(i => i.DestinationObjectClass != null).Select(i => i.DestinationObjectClass))
+                {
+                    sb.Append("DELETE FROM ");
+                    sb.Append(obj.EtlDestDatabasePrefix);
+                    sb.AppendLine(Quote(cls.TableName, obj));
+                }
+                sb.AppendLine("GO");
+                sb.AppendLine();
+
+
+                sb.AppendLine("-----------------------------------------------------------------");
+                sb.AppendLine("-- enum conversion functions");
+                sb.AppendLine("-----------------------------------------------------------------");
+
+                foreach (var tbl in obj.SourceTables.Where(i => i.DestinationObjectClass != null))
+                {
+                    foreach (var col in tbl.SourceColumn.ToList()
+                        .Where(i => i.DestinationProperty != null && typeof(EnumerationProperty).IsAssignableFrom(i.DestinationProperty.GetType())))
+                    {
+                        var e = (EnumerationProperty)col.DestinationProperty;
+                        sb.AppendLine("-- " + e.Enumeration.GetDataTypeString());
+                        sb.AppendLine(string.Format("CREATE FUNCTION fn_mig_ConvertEnum{0}(@val {1}{2})",
+                            e.Enumeration.Name,
+                            "nvarchar", // TODO!!
+                            "(" + col.Size + ")" // TODO!!
+                            )
+                        );
+                        sb.AppendLine("RETURNS INT\nBEGIN\n\tDECLARE @result int");
+                        sb.AppendLine("\tSELECT @result = CASE @val");
+                        foreach (var ev in e.Enumeration.EnumerationEntries)
+                        {
+                            sb.AppendLine(string.Format("WHEN '{0}' THEN {1}", ev.Name, ev.Value));
+                        }
+                        sb.AppendLine("\tELSE 0");
+                        sb.AppendLine("\tEND\n\tRETURN @result\nEND\nGO\n");
+                    }
+                }
+
+                sb.AppendLine("-----------------------------------------------------------------");
+                sb.AppendLine("-- copy statements");
+                sb.AppendLine("-----------------------------------------------------------------");
+                foreach (var tbl in obj.SourceTables.Where(i => i.DestinationObjectClass != null))
+                {
+                    sb.AppendLine("-- " + tbl.Description);
+                    sb.Append(string.Format("INSERT INTO {0}{1} (", obj.EtlDestDatabasePrefix, Quote(tbl.DestinationObjectClass.TableName, obj)));
+                    foreach (var col in tbl.SourceColumn.Where(i => i.DestinationProperty != null))
+                    {
+                        sb.AppendLine();
+                        sb.Append(string.Format("\t{0},", Quote(col.DestinationProperty.Name, obj)));
+                    }
+                    sb.Remove(sb.Length - 1, 1);
+                    sb.Append("\n)\nSELECT");
+                    foreach (var col in tbl.SourceColumn.Where(i => i.DestinationProperty != null))
+                    {
+                        sb.AppendLine();
+                        if (col.DestinationProperty is EnumerationProperty)
+                        {
+                            sb.Append(string.Format("\tdbo.fn_mig_ConvertEnum{0}({1}),", 
+                                ((EnumerationProperty)col.DestinationProperty).Enumeration.Name, 
+                                Quote(col.Name, obj)));
+                        }
+                        else
+                        {
+                            sb.Append(string.Format("\t{0},", Quote(col.Name, obj)));
+                        }
+                    }
+                    sb.Remove(sb.Length - 1, 1);
+                    sb.AppendLine(string.Format("\nFROM {0}{1}", obj.EtlSrcDatabasePrefix, Quote(tbl.Name, obj)));
+                    sb.AppendLine();
+                }
+
+                File.WriteAllText(fileName, sb.ToString(), Encoding.UTF8);
+            }
         }
 
         public static void OnCreateMappingReport_MigrationProject(ZBox.App.SchemaMigration.MigrationProject obj)
