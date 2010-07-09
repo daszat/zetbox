@@ -29,7 +29,7 @@ namespace ZBox.App.SchemaMigration
 
         public static void OnCreateMappingReport_MigrationProject(ZBox.App.SchemaMigration.MigrationProject obj)
         {
-            var fileName = _mdlFactory.GetDestinationFileNameFromUser("Migration Report.pdf", "PDF|*.pdf");
+            var fileName = _mdlFactory.GetDestinationFileNameFromUser("Migration Report " + obj.Description + ".pdf", "PDF|*.pdf");
             if (!string.IsNullOrEmpty(fileName))
             {
                 var r = new MigrationProjectMappingReport();
@@ -41,7 +41,7 @@ namespace ZBox.App.SchemaMigration
 
         public static void OnCreateMappingReport_SourceTable(ZBox.App.SchemaMigration.SourceTable obj)
         {
-            var fileName = _mdlFactory.GetDestinationFileNameFromUser("Migration Report.pdf", "PDF|*.pdf");
+            var fileName = _mdlFactory.GetDestinationFileNameFromUser("Migration Report " + obj.Name + ".pdf", "PDF|*.pdf");
             if (!string.IsNullOrEmpty(fileName))
             {
                 var r = new SourceTableMappingReport();
@@ -87,16 +87,16 @@ namespace ZBox.App.SchemaMigration
                 NewHeading2("Summary");
                 var t = NewTable();
 
-                t.AddColumn("3cm");
-                t.AddColumn("3cm");
-                t.AddColumn("10cm");
+                t.AddColumn("4cm");
+                t.AddColumn("4cm");
+                t.AddColumn("8cm");
 
                 var r = t.AddRow();
                 r.Cells[0].AddParagraph("Src Name").Style = styleTableHeader;
                 r.Cells[1].AddParagraph("Dest Name").Style = styleTableHeader;
                 r.Cells[2].AddParagraph("Description").Style = styleTableHeader;
 
-                foreach (var c in _obj.SourceColumn)
+                foreach (var c in _obj.SourceColumn.OrderBy(i => i.Name))
                 {
                     r = t.AddRow();
                     r.Cells[0].AddParagraph(c.Name ?? string.Empty);
@@ -104,9 +104,10 @@ namespace ZBox.App.SchemaMigration
                     r.Cells[2].AddParagraph(c.Description ?? string.Empty);
                 }
 
-                foreach (var c in _obj.SourceColumn)
+                foreach (var c in _obj.SourceColumn.OrderBy(i => i.Name))
                 {
-                    NewHeading2("Columne " + c.Name);
+                    NewHeading2("Column " + c.Name);
+                    if (!string.IsNullOrEmpty(c.Description)) Section.AddParagraph(c.Description).Format.SpaceAfter = "0.5cm";
                     t = NewTable();
 
                     t.AddColumn("6cm");
@@ -119,7 +120,7 @@ namespace ZBox.App.SchemaMigration
                     r = t.AddRow();
                     r.Cells[0].AddParagraph("Dest Name");
                     r.Cells[1].AddParagraph(c.DestinationProperty != null ? c.DestinationProperty.Name : string.Empty);
-                    
+
                     r = t.AddRow();
                     r.Cells[0].AddParagraph("Source Type");
                     r.Cells[1].AddParagraph(c.DbType.ToString());
@@ -132,52 +133,21 @@ namespace ZBox.App.SchemaMigration
                     r.Cells[0].AddParagraph("IsNullable");
                     r.Cells[1].AddParagraph((c.IsNullable ?? true).ToString());
 
-                    // ....
-                }
-
-                /*
-                r = t.AddRow();
-                r.Cells[0].AddParagraph("Description").Style = styleTableHeader;
-                r.Cells[0].MergeRight = 1;
-
-                r = t.AddRow();
-                r.Cells[0].AddParagraph("DbType").Style = styleTableHeader;
-                r.Cells[1].AddParagraph("Type").Style = styleTableHeader;
-
-                r = t.AddRow();
-                r.Cells[0].AddParagraph("IsNullable").Style = styleTableHeader;
-                r.Cells[1].AddParagraph("Size").Style = styleTableHeader;
-
-
-                foreach (var c in _obj.SourceColumn)
-                {
                     r = t.AddRow();
-                    r.Cells[0].AddParagraph(c.Name ?? string.Empty);
-                    r.Cells[1].AddParagraph(c.DestinationProperty != null ? c.DestinationProperty.Name : string.Empty);
-                    r.Cells[2].AddParagraph(c.Comment ?? string.Empty);
-                    r.Cells[2].MergeDown = 3;
-
-                    r = t.AddRow();
-                    r.Cells[0].AddParagraph(c.Description ?? string.Empty);
-                    r.Cells[0].MergeRight = 1;
-
-                    r = t.AddRow();
-                    r.Cells[0].AddParagraph(c.DbType.ToString());
-                    r.Cells[1].AddParagraph(c.DestinationProperty != null ? c.DestinationProperty.GetPropertyTypeString() : string.Empty);
-
-                    r = t.AddRow();
-                    r.Cells[0].AddParagraph((c.IsNullable ?? true).ToString());
+                    r.Cells[0].AddParagraph("Size");
                     r.Cells[1].AddParagraph(c.Size.ToString());
-                }*/
+
+                    if (!string.IsNullOrEmpty(c.Comment)) Section.AddParagraph(c.Comment).Format.SpaceBefore = "0.5cm";
+                }
             }
 
             private void RenderSummary()
             {
                 base.NewHeading1("Table " + _obj.Name);
-                if(!string.IsNullOrEmpty(_obj.Description)) Section.AddParagraph(_obj.Description);
-                if (!string.IsNullOrEmpty(_obj.Comment)) Section.AddParagraph(_obj.Comment);
+                if (!string.IsNullOrEmpty(_obj.Description)) Section.AddParagraph(_obj.Description).Format.SpaceAfter = "0.5cm";
+                if (!string.IsNullOrEmpty(_obj.Comment)) Section.AddParagraph(_obj.Comment).Format.SpaceAfter = "0.5cm";
 
-                var t = Section.AddTable();
+                var t = NewTable();
                 t.AddColumn("6cm");
                 t.AddColumn("10cm");
 
@@ -209,7 +179,7 @@ namespace ZBox.App.SchemaMigration
                 Section.PageSetup.DifferentFirstPageHeaderFooter = true;
                 var p = Section.Headers.Primary.AddParagraph();
                 p.Format.Font.Size = 10;
-                p.AddText("Migration Report for " + _obj.Description);
+                p.AddText("Migration report for " + _obj.Name);
                 p.Format.Borders.Bottom.Visible = true;
             }
 
@@ -236,13 +206,13 @@ namespace ZBox.App.SchemaMigration
                 p.Format.Alignment = MigraDoc.DocumentObjectModel.ParagraphAlignment.Center;
                 p.Format.SpaceBefore = "2cm";
 
-                p = Section.AddParagraph(_obj.Name ?? string.Empty + "\n" + _obj.Description);
+                p = Section.AddParagraph(_obj.Name ?? string.Empty);
                 p.Format.Alignment = MigraDoc.DocumentObjectModel.ParagraphAlignment.Center;
                 p.Format.SpaceBefore = "2cm";
-                p.Format.SpaceAfter = "2cm";
                 p.Format.Font.Bold = true;
 
-                Section.AddPageBreak();
+                p = Section.AddParagraph(_obj.Description ?? string.Empty);
+                p.Format.Alignment = MigraDoc.DocumentObjectModel.ParagraphAlignment.Center;
             }
         }
 
@@ -262,14 +232,48 @@ namespace ZBox.App.SchemaMigration
             {
                 this._obj = obj;
 
-                foreach (var tbl in _obj.SourceTables)
+                RenderTableMappings();
+
+                foreach (var tbl in _obj.SourceTables.Where(i => i.DestinationObjectClass != null).OrderBy(i => i.Name))
                 {
                     var r = new SourceTableMappingReport(Document);
                     r.CreateReport(tbl);
-                    // Section.AddPageBreak();
+                }
+
+                foreach (var tbl in _obj.SourceTables.Where(i => i.DestinationObjectClass == null).OrderBy(i => i.Name))
+                {
+                    var r = new SourceTableMappingReport(Document);
+                    r.CreateReport(tbl);
                 }
             }
-            
+
+            private void RenderTableMappings()
+            {
+                NewHeading1("Summary");
+                var t = NewTable();
+
+                t.AddColumn("4.5cm");
+                t.AddColumn("4.5cm");
+                t.AddColumn("5.5cm");
+                t.AddColumn("1.5cm");
+
+                var r = t.AddRow();
+                r.Cells[0].AddParagraph("Src Table").Style = styleTableHeader;
+                r.Cells[1].AddParagraph("Dest Class").Style = styleTableHeader;
+                r.Cells[2].AddParagraph("Description").Style = styleTableHeader;
+                r.Cells[3].AddParagraph("%").Style = styleTableHeader;
+
+                foreach (var c in _obj.SourceTables.OrderBy(i => i.Name))
+                {
+                    r = t.AddRow();
+                    r.Cells[0].AddParagraph(c.Name ?? string.Empty);
+                    r.Cells[1].AddParagraph(c.DestinationObjectClass != null ? c.DestinationObjectClass.Name : string.Empty);
+                    r.Cells[2].AddParagraph(c.Description ?? string.Empty);
+                    r.Cells[3].AddParagraph((c.SourceColumn.Count > 0 ? 100 * c.SourceColumn.Count(i => i.DestinationProperty != null) / c.SourceColumn.Count : 0).ToString() + " %")
+                        .Format.Alignment = ParagraphAlignment.Right;
+                }
+            }
+
             protected override void NewDocument()
             {
                 base.NewDocument();
@@ -341,8 +345,6 @@ namespace ZBox.App.SchemaMigration
                 r = t.AddRow();
                 r.Cells[0].AddParagraph("SourceTables mapped");
                 r.Cells[1].AddParagraph(_obj.SourceTables.Count(i => i.DestinationObjectClass != null).ToString());
-
-                Section.AddPageBreak();
             }
         }
         #endregion

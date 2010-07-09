@@ -77,7 +77,7 @@ namespace Kistl.App.Projekte.Client.Helper
             Style s;
             s = Document.Styles[StyleNames.Normal];
             s.Font.Name = "Arial";
-            s.Font.Size = 11;
+            s.Font.Size = 10;
 
             s = Document.Styles[StyleNames.Heading1];
             s.Font.Bold = true;
@@ -86,6 +86,14 @@ namespace Kistl.App.Projekte.Client.Helper
             s.ParagraphFormat.SpaceAfter = "0.5cm";
             s.ParagraphFormat.ListInfo.ListType = ListType.NumberList1;
             s.ParagraphFormat.ListInfo.ContinuePreviousList = true;
+
+            s = Document.Styles[StyleNames.Heading2];
+            s.Font.Bold = true;
+            s.Font.Size = 11;
+            s.ParagraphFormat.SpaceBefore = "1cm";
+            s.ParagraphFormat.SpaceAfter = "0.5cm";
+            s.ParagraphFormat.ListInfo.ListType = ListType.None;
+            s.ParagraphFormat.ListInfo.ContinuePreviousList = false;
 
             s = Document.Styles.AddStyle(styleTableHeader, StyleNames.Normal);
             s.ParagraphFormat.Alignment = ParagraphAlignment.Center;
