@@ -23,6 +23,7 @@ namespace Kistl.Client.WPF.View.KistlBase
     /// <summary>
     /// Interaction logic for DataObjectListView.xaml
     /// </summary>
+    [ViewDescriptor("KistlBase", Kistl.App.GUI.Toolkit.WPF, Kind="Kistl.App.GUI.ObjectListKind")]
     public partial class ObjectReferenceListEditor
         : PropertyEditor, IHasViewModel<ObjectListModel>
     {
@@ -40,16 +41,14 @@ namespace Kistl.Client.WPF.View.KistlBase
                 {
                     _moveUpCommand = new RelayCommand(param =>
                     {
-                        var model = (ObjectListModel)DataContext;
-                        if (model.SelectedItem != null)
+                        if (ViewModel.SelectedItem != null)
                         {
-                            model.MoveItemUp(model.SelectedItem);
+                            ViewModel.MoveItemUp(ViewModel.SelectedItem);
                         }
                     },
                     param =>
                     {
-                        var model = (ObjectListModel)DataContext;
-                        return model.SelectedItem != null;
+                        return ViewModel.SelectedItem != null;
                     });
                 }
                 return _moveUpCommand;
@@ -65,16 +64,14 @@ namespace Kistl.Client.WPF.View.KistlBase
                 {
                     _moveDownCommand = new RelayCommand(param =>
                     {
-                        var model = (ObjectListModel)DataContext;
-                        if (model.SelectedItem != null)
+                        if (ViewModel.SelectedItem != null)
                         {
-                            model.MoveItemDown(model.SelectedItem);
+                            ViewModel.MoveItemDown(ViewModel.SelectedItem);
                         }
                     },
                     param =>
                     {
-                        var model = (ObjectListModel)DataContext;
-                        return model.SelectedItem != null;
+                        return ViewModel.SelectedItem != null;
                     });
                 }
                 return _moveDownCommand;
@@ -97,34 +94,30 @@ namespace Kistl.Client.WPF.View.KistlBase
 
         private void AddExistingItemHandler(object sender, RoutedEventArgs e)
         {
-            var model = (ObjectListModel)DataContext;
-            model.AddExistingItem();
+            ViewModel.AddExistingItem();
         }
 
         private void RemoveHandler(object sender, RoutedEventArgs e)
         {
-            var model = (ObjectListModel)DataContext;
-            if (model.SelectedItem != null)
+            if (ViewModel.SelectedItem != null)
             {
-                model.RemoveItem(model.SelectedItem);
+                ViewModel.RemoveItem(ViewModel.SelectedItem);
             }
         }
 
         private void DeleteHandler(object sender, RoutedEventArgs e)
         {
-            var model = (ObjectListModel)DataContext;
-            if (model.SelectedItem != null)
+            if (ViewModel.SelectedItem != null)
             {
-                model.DeleteItem(model.SelectedItem);
+                ViewModel.DeleteItem(ViewModel.SelectedItem);
             }
         }
 
         private void ItemActivatedHandler(object sender, MouseButtonEventArgs e)
         {
-            var model = (ObjectListModel)DataContext;
-            if (model.SelectedItem != null)
+            if (ViewModel.SelectedItem != null)
             {
-                model.ActivateItem(model.SelectedItem, true);
+                ViewModel.ActivateItem(ViewModel.SelectedItem, true);
             }
         }
 
@@ -172,69 +165,10 @@ namespace Kistl.Client.WPF.View.KistlBase
 
         }
 
-        GridViewColumnHeader _lastHeaderClicked = null;
-        ListSortDirection _lastDirection = ListSortDirection.Ascending;
-
-        private void ListView_HeaderClick(object sender, RoutedEventArgs e)
-        {
-            if (ViewModel.HasPersistentOrder) return; // Not Supported
-
-            GridViewColumnHeader headerClicked = e.OriginalSource as GridViewColumnHeader;
-
-            if (headerClicked != null)
-            {
-                if (headerClicked.Role != GridViewColumnHeaderRole.Padding)
-                {
-                    ListSortDirection direction;
-                    if (headerClicked != _lastHeaderClicked)
-                    {
-                        direction = ListSortDirection.Ascending;
-                    }
-                    else
-                    {
-                        direction = _lastDirection == ListSortDirection.Ascending ? ListSortDirection.Descending : ListSortDirection.Ascending;
-                    }
-
-                    var header = (ColumnDisplayModel)headerClicked.Column.Header;
-                    ViewModel.Sort(header, direction);
-
-                    // Add arrow
-                    if (direction == ListSortDirection.Ascending)
-                    {
-                        headerClicked.Column.HeaderTemplate =
-                          Resources["GridHeaderTemplateArrowUp"] as DataTemplate;
-                    }
-                    else
-                    {
-                        headerClicked.Column.HeaderTemplate =
-                          Resources["GridHeaderTemplateArrowDown"] as DataTemplate;
-                    }
-
-                    // Remove arrow from previously sorted header
-                    if (_lastHeaderClicked != null && _lastHeaderClicked != headerClicked)
-                    {
-                        _lastHeaderClicked.Column.HeaderTemplate = null;
-                    }
-
-
-                    _lastHeaderClicked = headerClicked;
-                    _lastDirection = direction;
-                }
-            }
-        }
-
         protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
         {
             base.OnPropertyChanged(e);
-            if (e.Property == FrameworkElement.DataContextProperty && e.NewValue is ObjectListModel)
-            {
-                RefreshGridView();
-            }
-        }
-
-        private void ListView_Initialized(object sender, EventArgs e)
-        {
-            if (DataContext is ObjectListModel)
+            if (e.Property == FrameworkElement.DataContextProperty)
             {
                 RefreshGridView();
             }

@@ -8,6 +8,7 @@ namespace Kistl.Client.Presentables
     using System.Collections.Specialized;
     using System.ComponentModel;
     using System.Linq;
+    using System.Linq.Dynamic;
     using System.Text;
 
     using Kistl.API;
@@ -17,31 +18,31 @@ namespace Kistl.Client.Presentables
 
     /// <summary>
     /// </summary>
-    [ViewModelDescriptor("KistlBase", DefaultKind = "Kistl.App.GUI.ObjectListKind", Description = "A list of IDataObjects")]
-    public class ObjectListModel
-        : PropertyModel<IList<DataObjectModel>>, IValueListModel<DataObjectModel>
+    [ViewModelDescriptor("KistlBase", DefaultKind = "Kistl.App.GUI.ObjectCollectionKind", Description = "A collection of IDataObjects")]
+    public class ObjectCollectionModel
+        : PropertyModel<ICollection<DataObjectModel>>, IValueCollectionModel<DataObjectModel>
     {
-        public new delegate ObjectListModel Factory(IKistlContext dataCtx, IDataObject obj, Property prop);
+        public new delegate ObjectCollectionModel Factory(IKistlContext dataCtx, IDataObject obj, Property prop);
 
         private readonly ObjectReferenceProperty _property;
         private readonly ObjectClass _referencedClass;
-        private readonly IList _list;
+        private readonly ICollection _collection;
         private readonly INotifyCollectionChanged _notifier;
 
-        public ObjectListModel(
+        public ObjectCollectionModel(
             IViewModelDependencies appCtx, IKistlContext dataCtx,
             IDataObject obj, ObjectReferenceProperty prop)
             : base(appCtx, dataCtx, obj, prop)
         {
             if (!prop.GetIsList()) { throw new ArgumentOutOfRangeException("prop", "ObjectReferenceProperty must be a list"); }
-            if(!GetHasPersistentOrder(prop)) { throw new ArgumentOutOfRangeException("prop", "ObjectReferenceProperty must be a sorted list"); }
+            if (GetHasPersistentOrder(prop)) { throw new ArgumentOutOfRangeException("prop", "ObjectReferenceProperty must not be a sorted list"); }
 
             _property = prop;
             _referencedClass = _property.GetReferencedObjectClass();
 
-            _list = Object.GetPropertyValue<IList>(Property.Name);
-            _notifier = _list as INotifyCollectionChanged;
-
+            _collection = Object.GetPropertyValue<ICollection>(Property.Name);
+            _notifier = _collection as INotifyCollectionChanged;
+            
             if (_notifier == null) throw new ArgumentOutOfRangeException("prop", "Unterlying list does not implement INotifyCollectionChanged");
             _notifier.CollectionChanged += ValueListChanged;
 
@@ -60,6 +61,7 @@ namespace Kistl.Client.Presentables
                 }
             }
         }
+
 
         #region Public interface and IReadOnlyValueModel<IReadOnlyObservableCollection<DataObjectModel>> Members
 
@@ -83,12 +85,151 @@ namespace Kistl.Client.Presentables
             }
         }
 
+        private SortedWrapper _wrapper = null;
+        private class SortedWrapper : INotifyCollectionChanged, IList<IDataObject>
+        {
+            private List<IDataObject> _sortedList;
+            private ICollection _collection;
+            private INotifyCollectionChanged _notifier;
+
+            private string _sortProp = "ID";
+            private ListSortDirection _direction = ListSortDirection.Ascending;
+
+            public SortedWrapper(ICollection collection, INotifyCollectionChanged notifier)
+            {
+                _collection = collection;
+                _notifier = notifier;
+                notifier.CollectionChanged += new NotifyCollectionChangedEventHandler(notifier_CollectionChanged);
+                Sort(_sortProp, _direction);
+            }
+
+            public void Sort(string p, ListSortDirection direction)
+            {
+                _sortProp = p;
+                _direction = direction;
+                _sortedList = _collection.AsQueryable()
+                    .OrderBy(string.Format("{0} {1}", _sortProp, _direction == ListSortDirection.Descending ? "desc" : string.Empty))
+                    .Cast<IDataObject>()
+                    .ToList();
+                OnCollectionChanged();
+            }
+
+            private void OnCollectionChanged()
+            {
+                var temp = CollectionChanged;
+                if (temp != null)
+                {
+                    temp(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+                }
+            }
+
+            void notifier_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+            {
+                Sort(_sortProp, _direction);
+            }
+
+            #region INotifyCollectionChanged Members
+
+            public event NotifyCollectionChangedEventHandler CollectionChanged;
+
+            #endregion
+
+            #region IList<IDataObject> Members
+
+            public int IndexOf(IDataObject item)
+            {
+                return _sortedList.IndexOf(item);
+            }
+
+            public void Insert(int index, IDataObject item)
+            {
+                throw new NotImplementedException();
+            }
+
+            public void RemoveAt(int index)
+            {
+                throw new NotImplementedException();
+            }
+
+            public IDataObject this[int index]
+            {
+                get
+                {
+                    return _sortedList[index];
+                }
+                set
+                {
+                    throw new NotImplementedException();
+                }
+            }
+
+            #endregion
+
+            #region ICollection<IDataObject> Members
+
+            public void Add(IDataObject item)
+            {
+                throw new NotImplementedException();
+            }
+
+            public void Clear()
+            {
+                throw new NotImplementedException();
+            }
+
+            public bool Contains(IDataObject item)
+            {
+                return _sortedList.Contains(item);
+            }
+
+            public void CopyTo(IDataObject[] array, int arrayIndex)
+            {
+                throw new NotImplementedException();
+            }
+
+            public int Count
+            {
+                get { return _sortedList.Count; }
+            }
+
+            public bool IsReadOnly
+            {
+                get { return true; }
+            }
+
+            public bool Remove(IDataObject item)
+            {
+                throw new NotImplementedException();
+            }
+
+            #endregion
+
+            #region IEnumerable<IDataObject> Members
+
+            public IEnumerator<IDataObject> GetEnumerator()
+            {
+                return _sortedList.GetEnumerator();
+            }
+
+            #endregion
+
+            #region IEnumerable Members
+
+            IEnumerator IEnumerable.GetEnumerator()
+            {
+                return _sortedList.GetEnumerator();
+            }
+
+            #endregion
+        }
+
         private void EnsureValueCache()
         {
             if (_valueCache == null)
             {
+                _wrapper = new SortedWrapper(_collection, _notifier);
                 _valueCache = new ReadOnlyObservableProjectedList<IDataObject, DataObjectModel>(
-                    _notifier,
+                    _wrapper,
                     obj => ModelFactory.CreateViewModel<DataObjectModel.Factory>(obj).Invoke(DataContext, obj),
                     mdl => mdl.Object);
             }
@@ -171,10 +312,9 @@ namespace Kistl.Client.Presentables
         {
             get
             {
-                return true;
+                return false;
             }
         }
-
         private bool _allowAddNew = true;
         public bool AllowAddNew
         {
@@ -295,32 +435,6 @@ namespace Kistl.Client.Presentables
                     null), true);
         }
 
-        public void MoveItemUp(DataObjectModel item)
-        {
-            if (item == null) { return; }
-
-            var idx = _list.IndexOf(item.Object);
-            if (idx > 0)
-            {
-                _list.RemoveAt(idx);
-                _list.Insert(idx - 1, item.Object);
-                SelectedItem = item;
-            }
-        }
-
-        public void MoveItemDown(DataObjectModel item)
-        {
-            if (item == null) { return; }
-
-            var idx = _list.IndexOf(item.Object);
-            if (idx != -1 && idx + 1 < _list.Count)
-            {
-                _list.RemoveAt(idx);
-                _list.Insert(idx + 1, item.Object);
-                SelectedItem = item;
-            }
-        }
-
         public void RemoveItem(DataObjectModel item)
         {
             if (item == null) { throw new ArgumentNullException("item"); }
@@ -400,5 +514,12 @@ namespace Kistl.Client.Presentables
         }
 
         #endregion
+
+        public void Sort(string propName, ListSortDirection direction)
+        {
+            if (string.IsNullOrEmpty(propName)) throw new ArgumentNullException("propName");
+            EnsureValueCache();
+            _wrapper.Sort(propName, direction);
+        }
     }
 }

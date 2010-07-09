@@ -8,8 +8,8 @@ using Kistl.App.GUI;
 
 namespace Kistl.Client.Presentables.SchemaMigration
 {
-    [ViewModelDescriptor("SchemaMigration", DefaultKind="Kistl.App.GUI.ObjectListKind", Description="ViewModel for SourceTable.SourceColumns object list")]
-    public class SourceColumnsObjectListModel : ObjectListModel
+    [ViewModelDescriptor("SchemaMigration", DefaultKind="Kistl.App.GUI.ObjectCollectionKind", Description="ViewModel for SourceTable.SourceColumns object collection")]
+    public class SourceColumnsObjectListModel : ObjectCollectionModel
     {
         public new delegate SourceColumnsObjectListModel Factory(IKistlContext dataCtx, IDataObject obj, Property prop);
 

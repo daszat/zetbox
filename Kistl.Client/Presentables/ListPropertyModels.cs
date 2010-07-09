@@ -14,7 +14,7 @@ using Kistl.App.Base;
 
 namespace Kistl.Client.Presentables
 {
-    public interface IValueListModel<TElement>
+    public interface IBaseValueCollectionModel<TElement>
         : IReadOnlyValueModel<IReadOnlyObservableList<TElement>>
     {
         /// <summary>
@@ -32,18 +32,6 @@ namespace Kistl.Client.Presentables
         /// on the underlying <see cref="IReadOnlyValueModel{TValue}.Value"/> property when the change has propagated.
         /// </summary>
         void AddItem(TElement item);
-
-        /// <summary>
-        /// Moves the given item one item up in the list. Triggers <see cref="INotifyCollectionChanged.CollectionChanged"/>
-        /// on the underlying <see cref="IReadOnlyValueModel{TValue}.Value"/> property when the change has propagated.
-        /// </summary>
-        void MoveItemUp(TElement item);
-
-        /// <summary>
-        /// Moves the given item one item down in the list. Triggers <see cref="INotifyCollectionChanged.CollectionChanged"/>
-        /// on the underlying <see cref="IReadOnlyValueModel{TValue}.Value"/> property when the change has propagated.
-        /// </summary>
-        void MoveItemDown(TElement item);
 
         /// <summary>
         /// Remove the given item from the underlying value. Triggers <see cref="INotifyCollectionChanged.CollectionChanged"/>
@@ -68,6 +56,29 @@ namespace Kistl.Client.Presentables
         /// Stores the currently selected item of this list. 
         /// </summary>
         TElement SelectedItem { get; set; }
+    }
+
+    public interface IValueCollectionModel<TElement>
+        : IBaseValueCollectionModel<TElement>
+    {
+        void Sort(string propName, ListSortDirection direction);
+    }
+
+    public interface IValueListModel<TElement>
+        : IBaseValueCollectionModel<TElement>
+    {
+        /// <summary>
+        /// Moves the given item one item up in the list. Triggers <see cref="INotifyCollectionChanged.CollectionChanged"/>
+        /// on the underlying <see cref="IReadOnlyValueModel{TValue}.Value"/> property when the change has propagated.
+        /// </summary>
+        void MoveItemUp(TElement item);
+
+        /// <summary>
+        /// Moves the given item one item down in the list. Triggers <see cref="INotifyCollectionChanged.CollectionChanged"/>
+        /// on the underlying <see cref="IReadOnlyValueModel{TValue}.Value"/> property when the change has propagated.
+        /// </summary>
+        void MoveItemDown(TElement item);
+
     }
 
     public class StringListPropertyModel

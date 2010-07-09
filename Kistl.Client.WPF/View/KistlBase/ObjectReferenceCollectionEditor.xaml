@@ -1,4 +1,4 @@
-﻿<view:PropertyEditor x:Class="Kistl.Client.WPF.View.KistlBase.ObjectReferenceListEditor"
+﻿<view:PropertyEditor x:Class="Kistl.Client.WPF.View.KistlBase.ObjectReferenceCollectionEditor"
                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                    xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls"
@@ -27,14 +27,6 @@
     </view:PropertyEditor.Resources>
 
     <DockPanel>
-        <UniformGrid DockPanel.Dock="Left"
-                     Rows="2">
-
-            <Button Command="{Binding Path=MoveUpCommand, RelativeSource={RelativeSource AncestorType={x:Type view:ObjectReferenceListEditor}}}" IsEnabled="{Binding Path=HasPersistentOrder, Mode=OneWay}">up</Button>
-            <Button Command="{Binding Path=MoveDownCommand, RelativeSource={RelativeSource AncestorType={x:Type view:ObjectReferenceListEditor}}}" IsEnabled="{Binding Path=HasPersistentOrder, Mode=OneWay}">down</Button>
-
-        </UniformGrid>
-
         <WrapPanel DockPanel.Dock="Top"
                    Orientation="Horizontal">
             <ctrls:LoadingIndicator />
@@ -49,6 +41,7 @@
                   ItemsSource="{Binding Value, Mode=OneWay, ValidatesOnDataErrors=true}"
                   SelectedItem="{Binding SelectedItem}"
                   MinHeight="50"
-                  MouseDoubleClick="ItemActivatedHandler" />
+                  MouseDoubleClick="ItemActivatedHandler"
+                  GridViewColumnHeader.Click="ListView_HeaderClick"/>
     </DockPanel>
 </view:PropertyEditor>

@@ -28,7 +28,7 @@
     <DataTemplate x:Key="GridHeaderTemplateArrowDown">
         <StackPanel Orientation="Horizontal">
             <ContentPresenter Content="{Binding}" />
-            <TextBlock Text="^" />
+            <TextBlock Text="v" />
         </StackPanel>
     </DataTemplate>
 </ResourceDictionary>

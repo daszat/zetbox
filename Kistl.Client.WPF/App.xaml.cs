@@ -110,6 +110,9 @@ namespace Kistl.Client.WPF
                 this.Resources["defaultTemplateSelector"] = templateSelectorFactory(null);
                 this.Resources["listItemTemplateSelector"] = templateSelectorFactory("Kistl.App.GUI.SingleLineDataObjectKind");
                 this.Resources["dashBoardTemplateSelector"] = templateSelectorFactory("Kistl.App.GUI.DashboardKind");
+
+                RunFixes(container.Resolve<IKistlContext>());
+
                 // delegate all business logic into another class, which 
                 // allows us to load the Kistl.Objects assemblies _before_ 
                 // they are needed.
@@ -118,6 +121,28 @@ namespace Kistl.Client.WPF
             }
 
             SplashScreen.HideSplashScreen();
+        }
+
+        private void RunFixes(IKistlContext ctx)
+        {
+            //var vmd = ctx.FindPersistenceObject<ViewModelDescriptor>(new Guid("67A49C49-B890-4D35-A8DB-1F8E43BFC7DF"));
+            //foreach (var p in ctx.GetQuery<Kistl.App.Base.ObjectReferenceProperty>())
+            //{
+            //    if (p.GetIsList())
+            //    {
+            //        if (!p.RelationEnd.Parent.GetOtherEnd(p.RelationEnd).HasPersistentOrder)
+            //        {
+            //            Logging.Log.InfoFormat("Changing VMD for {0}", p.Name);
+            //            p.ValueModelDescriptor = vmd;
+            //        }
+            //        else
+            //        {
+            //            Logging.Log.InfoFormat("Leaving VMD for {0}", p.Name);
+            //        }
+            //    }
+            //}
+
+            //ctx.SubmitChanges();
         }
 
         private void Application_Exit(object sender, ExitEventArgs e)

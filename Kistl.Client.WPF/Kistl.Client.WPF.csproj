@@ -147,6 +147,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\KistlBase\ObjectReferenceCollectionEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\KistlBase\NullablePropertyMultiLineTextBoxView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -341,6 +345,9 @@
     </Compile>
     <Compile Include="View\KistlBase\BoolFilterExpression.xaml.cs">
       <DependentUpon>BoolFilterExpression.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\KistlBase\ObjectReferenceCollectionEditor.xaml.cs">
+      <DependentUpon>ObjectReferenceCollectionEditor.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\KistlBase\NullablePropertyMultiLineTextBoxView.xaml.cs">
       <DependentUpon>NullablePropertyMultiLineTextBoxView.xaml</DependentUpon>
