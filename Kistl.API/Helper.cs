@@ -624,6 +624,26 @@ namespace Kistl.API
             add.Invoke(collection, new object[] { val });
         }
 
+        public static void Add(this ICollection col, object val, bool unique)
+        {
+            if (col == null) throw new ArgumentNullException("col");
+
+            Type collectionType = col.GetType();
+            Type collectionItemType = collectionType.GetGenericArguments()[0];
+
+            if (unique)
+            {
+                MethodInfo contains = collectionType.FindMethod("Contains", new Type[] { collectionItemType });
+                if (contains == null) throw new ArgumentException("Cound not find \"Contains\" method of the given Collection");
+                bool result = (bool)contains.Invoke(col, new object[] { val });
+                if (result) return;
+            }
+
+            MethodInfo add = collectionType.FindMethod("Add", new Type[] { collectionItemType });
+            if (add == null) throw new ArgumentException("Cound not find \"Add\" method of the given Collection");
+            add.Invoke(col, new object[] { val });
+        }
+
         /// <summary>
         /// Removes a value from a collection.
         /// </summary>
@@ -648,6 +668,17 @@ namespace Kistl.API
             add.Invoke(collection, new object[] { val });
         }
 
+        public static void Remove(this ICollection col, object val)
+        {
+            if (col == null) throw new ArgumentNullException("col");
+
+            Type collectionType = col.GetType();
+            Type collectionItemType = collectionType.GetGenericArguments()[0];
+
+            MethodInfo remove = collectionType.FindMethod("Remove", new Type[] { collectionItemType });
+            if (remove == null) throw new ArgumentException("Cound not find \"Remove\" method of the given Collection");
+            remove.Invoke(col, new object[] { val });
+        }
 
 
         /// <summary>

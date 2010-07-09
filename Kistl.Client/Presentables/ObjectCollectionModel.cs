@@ -409,7 +409,7 @@ namespace Kistl.Client.Presentables
             if (item == null) { throw new ArgumentNullException("item"); }
 
             EnsureValueCache();
-            _valueCache.Collection.Add(item.Object);
+            _collection.Add(item.Object, false);
         }
 
         /// <summary>
@@ -440,7 +440,7 @@ namespace Kistl.Client.Presentables
             if (item == null) { throw new ArgumentNullException("item"); }
 
             EnsureValueCache();
-            _valueCache.Collection.Remove(item.Object);
+            _collection.Remove(item.Object);
         }
 
         public void DeleteItem(DataObjectModel item)
@@ -448,7 +448,7 @@ namespace Kistl.Client.Presentables
             if (item == null) { throw new ArgumentNullException("item"); }
 
             EnsureValueCache();
-            _valueCache.Collection.Remove(item.Object);
+            _collection.Remove(item.Object);
             item.Delete();
         }
 
