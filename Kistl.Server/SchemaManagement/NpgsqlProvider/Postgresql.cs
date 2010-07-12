@@ -288,17 +288,12 @@ WHERE n.nspname = 'dbo' AND c.relname = @table AND a.attname=@column", db, tx))
         {
             using (var cmd = new NpgsqlCommand("SELECT \"RepairPositionColumnValidityByTable\"(@repair, @tblName, @colName)", db, tx))
             {
-                cmd.CommandType = System.Data.CommandType.StoredProcedure;
-
                 cmd.Parameters.AddWithValue("@repair", repair);
                 cmd.Parameters.AddWithValue("@tblName", tblName);
                 cmd.Parameters.AddWithValue("@colName", indexName);
-                //cmd.Parameters.Add("@result", System.Data.SqlDbType.Bit).Direction = System.Data.ParameterDirection.Output;
 
                 QueryLog.Debug(cmd.CommandText);
-                cmd.ExecuteScalar();
-
-                return (bool)cmd.Parameters["@result"].Value;
+                return (bool)cmd.ExecuteScalar();
             }
         }
 
@@ -331,14 +326,17 @@ WHERE relname = @table AND attname = @column", db, tx))
 
         public IEnumerable<TableConstraintNamePair> GetFKConstraintNames()
         {
-            string sqlQuery = "SELECT conname, relname FROM pg_constraints JOIN pg_class ON (conrelid = pg_class.oid) WHERE contype = 'f' ORDER BY conname";
+            string sqlQuery = "SELECT conname, relname FROM pg_constraint JOIN pg_class ON (conrelid = pg_class.oid) WHERE contype = 'f' ORDER BY conname";
             QueryLog.Debug(sqlQuery);
+
+            var result = new List<TableConstraintNamePair>();
 
             using (var cmd = new NpgsqlCommand(sqlQuery, db, tx))
             using (var rd = cmd.ExecuteReader())
             {
-                while (rd.Read()) yield return new TableConstraintNamePair() { ConstraintName = rd.GetString(0), TableName = rd.GetString(1) };
+                while (rd.Read()) result.Add(new TableConstraintNamePair() { ConstraintName = rd.GetString(0), TableName = rd.GetString(1) });
             }
+            return result;
         }
 
         public IEnumerable<Column> GetTableColumns(string tbl)
@@ -794,7 +792,7 @@ FROM (", viewName);
             var createTableProcQuery = new StringBuilder();
             createTableProcQuery.AppendFormat("CREATE FUNCTION \"{0}\" (repair boolean, tblName text, colName text) RETURNS boolean AS $BODY$", tableProcName);
             createTableProcQuery.AppendLine();
-            createTableProcQuery.AppendLine("DECLARE result boolean DEFAULT true;");
+            createTableProcQuery.AppendLine("DECLARE result boolean DEFAULT false;");
             createTableProcQuery.AppendLine("BEGIN");
             foreach (var tbl in refSpecs)
             {
@@ -829,6 +827,7 @@ FROM (", viewName);
             createTableProcQuery.AppendLine("E");
             createTableProcQuery.AppendLine("\tRAISE EXCEPTION 'Table [%] not found', tblName;");
             createTableProcQuery.AppendLine("END IF;");
+            createTableProcQuery.AppendLine("RETURN result;");
             createTableProcQuery.AppendLine("END;");
             createTableProcQuery.AppendLine("$BODY$ LANGUAGE 'plpgsql' VOLATILE;");
             ExecuteNonQuery(createTableProcQuery.ToString());
