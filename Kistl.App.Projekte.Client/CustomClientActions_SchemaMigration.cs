@@ -24,213 +24,6 @@ namespace ZBox.App.SchemaMigration
             _mdlFactory = mdlFactory;
         }
 
-        private static string Quote(string str, ZBox.App.SchemaMigration.MigrationProject obj)
-        {
-            return string.Format("{0}{1}{2}", obj.EtlQuotePrefix, str, obj.EtlQuoteSuffix);
-        }
-
-        public static void OnCreateEtlStatements_MigrationProject(ZBox.App.SchemaMigration.MigrationProject obj)
-        {
-            var fileName = _mdlFactory.GetDestinationFileNameFromUser("Migration Script " + obj.Description + ".sql", "SQL|*.sql");
-            if (!string.IsNullOrEmpty(fileName))
-            {
-                StringBuilder sb = new StringBuilder();
-
-                sb.AppendLine("-- Migration Script Template");
-                sb.AppendLine("-- " + obj.Description);
-                sb.AppendLine();
-
-                sb.AppendLine("set dateformat dmy");
-                sb.AppendLine();
-
-                sb.AppendLine("-----------------------------------------------------------------");
-                sb.AppendLine("-- delete all tables ");
-                sb.AppendLine("-----------------------------------------------------------------");
-                foreach (var cls in obj.SourceTables.Where(i => i.DestinationObjectClass != null).Select(i => i.DestinationObjectClass))
-                {
-                    sb.Append("DELETE FROM ");
-                    sb.Append(obj.EtlDestDatabasePrefix);
-                    sb.AppendLine(Quote(cls.TableName, obj));
-                }
-                sb.AppendLine("GO");
-                sb.AppendLine();
-
-                #region common functions
-                sb.AppendLine(@"-----------------------------------------------------------------
--- common functions
------------------------------------------------------------------
-IF OBJECT_ID('[dbo].[fn_ConvertStr2Bit]') IS NOT NULL
-DROP FUNCTION [dbo].fn_ConvertStr2Bit
-GO
-CREATE FUNCTION fn_ConvertStr2Bit(@input nvarchar(100))
-RETURNS bit
-BEGIN
-	return case LOWER(@input)
-		when 'ja' then 1
-		when '-1' then 1
-		when '1' then 1
-		else 0 
-		end
-END
-GO
-
-IF OBJECT_ID('[dbo].[fn_ConvertStr2Date]') IS NOT NULL
-DROP FUNCTION [dbo].fn_ConvertStr2Date
-GO
-CREATE FUNCTION fn_ConvertStr2Date(@input nvarchar(100))
-RETURNS datetime2
-BEGIN
-	return case when ISDATE(@input)=1 then convert(datetime2, @input) else null end
-END
-GO
-
-IF OBJECT_ID('[dbo].[fn_ConvertStr2DateErrorMsg]') IS NOT NULL
-DROP FUNCTION [dbo].fn_ConvertStr2DateErrorMsg
-GO
-CREATE FUNCTION fn_ConvertStr2DateErrorMsg(@col nvarchar(100), @input nvarchar(100))
-RETURNS nvarchar(1000)
-BEGIN
-	return case when ISDATE(@input)=0 AND @input is not null then @col + ' enhält kein gültiges Datum ' + @input else null end
-END
-GO
-
-IF OBJECT_ID('[dbo].[IsInteger]') IS NOT NULL
-DROP FUNCTION [dbo].IsInteger
-GO
-CREATE Function IsInteger(@Value VarChar(18))
-Returns Bit
-As 
-Begin
-  
-  Return IsNull(
-     (Select Case When CharIndex('.', @Value) > 0 
-                  Then Case When Convert(int, ParseName(@Value, 1)) <> 0
-                            Then 0
-                            Else 1
-                            End
-                  Else 1
-                  End
-      Where IsNumeric(@Value + 'e0') = 1), 0)
-
-End
-GO
-
-IF OBJECT_ID('[dbo].[fn_ConvertStr2Int]') IS NOT NULL
-DROP FUNCTION [dbo].fn_ConvertStr2Int
-GO
-CREATE FUNCTION fn_ConvertStr2Int(@input nvarchar(100))
-RETURNS int
-BEGIN
-	return case when dbo.IsInteger(@input)=1 then convert(int, @input) else null end
-END
-GO
-
-IF OBJECT_ID('[dbo].[fn_ConvertStr2IntErrorMsg]') IS NOT NULL
-DROP FUNCTION [dbo].fn_ConvertStr2IntErrorMsg
-GO
-CREATE FUNCTION fn_ConvertStr2IntErrorMsg(@col nvarchar(100), @input nvarchar(100))
-RETURNS nvarchar(1000)
-BEGIN
-	return case when dbo.IsInteger(@input)=0 AND @input is not null then @col + ' enhält keine gültige Zahl ' + @input else null end
-END
-GO
-
-");
-                #endregion
-
-                sb.AppendLine("-----------------------------------------------------------------");
-                sb.AppendLine("-- enum conversion functions");
-                sb.AppendLine("-----------------------------------------------------------------");
-
-                foreach (var tbl in obj.SourceTables.Where(i => i.DestinationObjectClass != null))
-                {
-                    foreach (var col in tbl.SourceColumn.ToList()
-                        .Where(i => i.DestinationProperty != null && typeof(EnumerationProperty).IsAssignableFrom(i.DestinationProperty.GetType())))
-                    {
-                        var e = (EnumerationProperty)col.DestinationProperty;
-                        sb.AppendLine("-- " + e.Enumeration.GetDataTypeString());
-                        sb.AppendLine(string.Format("IF OBJECT_ID('[dbo].[fn_mig_ConvertEnum{0}]') IS NOT NULL\nDROP FUNCTION [dbo].fn_mig_ConvertEnum{0}\nGO", e.Enumeration.Name));
-                        sb.AppendLine(string.Format("CREATE FUNCTION fn_mig_ConvertEnum{0}(@val {1}{2})",
-                            e.Enumeration.Name,
-                            "nvarchar", // TODO!!
-                            "(" + col.Size + ")" // TODO!!
-                            )
-                        );
-                        sb.AppendLine("RETURNS INT\nBEGIN\n\tDECLARE @result int");
-                        sb.AppendLine("\tSELECT @result = CASE @val");
-                        foreach (var ev in e.Enumeration.EnumerationEntries)
-                        {
-                            sb.AppendLine(string.Format("\t\tWHEN '{0}' THEN {1}", ev.Name, ev.Value));
-                        }
-                        sb.AppendLine("\t\tELSE 0");
-                        sb.AppendLine("\tEND\n\tRETURN @result\nEND\nGO\n");
-                    }
-                }
-
-                sb.AppendLine("-----------------------------------------------------------------");
-                sb.AppendLine("-- copy statements");
-                sb.AppendLine("-----------------------------------------------------------------");
-                foreach (var tbl in obj.SourceTables.Where(i => i.DestinationObjectClass != null))
-                {
-                    var hasExportGuid = tbl.DestinationObjectClass.ImplementsIExportable(); 
-
-                    sb.AppendLine("-- " + tbl.Description);
-                    sb.Append(string.Format("INSERT INTO {0}{1} (", obj.EtlDestDatabasePrefix, Quote(tbl.DestinationObjectClass.TableName, obj)));
-                    foreach (var col in tbl.SourceColumn.Where(i => i.DestinationProperty != null))
-                    {
-                        sb.AppendLine();
-                        sb.Append(string.Format("\t{0},", Quote(col.DestinationProperty.Name, obj)));
-                    }
-
-                    if (hasExportGuid)
-                    {
-                        sb.AppendLine();
-                        sb.Append(string.Format("\t{0},", Quote("ExportGuid", obj)));
-                    }
-
-                    sb.Remove(sb.Length - 1, 1);
-                    sb.Append("\n)\nSELECT");
-                    foreach (var col in tbl.SourceColumn.Where(i => i.DestinationProperty != null))
-                    {
-                        sb.AppendLine();
-                        if (col.DestinationProperty is EnumerationProperty)
-                        {
-                            sb.Append(string.Format("\tdbo.fn_mig_ConvertEnum{0}({1}),", 
-                                ((EnumerationProperty)col.DestinationProperty).Enumeration.Name, 
-                                Quote(col.Name, obj)));
-                        }
-                        else if (col.DbType == ColumnType.String && col.DestinationProperty is IntProperty)
-                        {
-                            sb.Append(string.Format("\tdbo.fn_ConvertStr2Int({0}),", Quote(col.Name, obj)));
-                        }
-                        else if (col.DbType == ColumnType.String && col.DestinationProperty is DateTimeProperty)
-                        {
-                            sb.Append(string.Format("\tdbo.fn_ConvertStr2Date({0}),", Quote(col.Name, obj)));
-                        }
-                        else if (col.DbType == ColumnType.String && col.DestinationProperty is BoolProperty)
-                        {
-                            sb.Append(string.Format("\tdbo.fn_ConvertStr2Bit({0}),", Quote(col.Name, obj)));
-                        }
-                        else
-                        {
-                            sb.Append(string.Format("\t{0},", Quote(col.Name, obj)));
-                        }
-                    }
-
-                    if (hasExportGuid)
-                    {
-                        sb.AppendLine();
-                        sb.Append("\tnewid(),");
-                    }
-                    sb.Remove(sb.Length - 1, 1);
-                    sb.AppendLine(string.Format("\nFROM {0}{1}", obj.EtlSrcDatabasePrefix, Quote(tbl.Name, obj)));
-                    sb.AppendLine();
-                }
-
-                File.WriteAllText(fileName, sb.ToString(), Encoding.UTF8);
-            }
-        }
-
         public static void OnCreateMappingReport_MigrationProject(ZBox.App.SchemaMigration.MigrationProject obj)
         {
             var fileName = _mdlFactory.GetDestinationFileNameFromUser("Migration Report " + obj.Description + ".pdf", "PDF|*.pdf");
@@ -459,22 +252,26 @@ GO
             {
                 this._obj = obj;
 
-                RenderTableMappings();
-
-                foreach (var tbl in _obj.SourceTables.Where(i => i.DestinationObjectClass != null).OrderBy(i => i.Name))
+                foreach (var s in obj.StagingDatabases)
                 {
-                    var r = new SourceTableMappingReport(Document);
-                    r.CreateReport(tbl);
-                }
 
-                foreach (var tbl in _obj.SourceTables.Where(i => i.DestinationObjectClass == null).OrderBy(i => i.Name))
-                {
-                    var r = new SourceTableMappingReport(Document);
-                    r.CreateReport(tbl);
+                    RenderTableMappings(s);
+
+                    foreach (var tbl in s.SourceTables.Where(i => i.DestinationObjectClass != null).OrderBy(i => i.Name))
+                    {
+                        var r = new SourceTableMappingReport(Document);
+                        r.CreateReport(tbl);
+                    }
+
+                    foreach (var tbl in s.SourceTables.Where(i => i.DestinationObjectClass == null).OrderBy(i => i.Name))
+                    {
+                        var r = new SourceTableMappingReport(Document);
+                        r.CreateReport(tbl);
+                    }
                 }
             }
 
-            private void RenderTableMappings()
+            private void RenderTableMappings(ZBox.App.SchemaMigration.StagingDatabase s)
             {
                 NewHeading1("Summary");
                 var t = NewTable();
@@ -490,7 +287,7 @@ GO
                 r.Cells[2].AddParagraph("Description").Style = styleTableHeader;
                 r.Cells[3].AddParagraph("%").Style = styleTableHeader;
 
-                foreach (var c in _obj.SourceTables.OrderBy(i => i.Name))
+                foreach (var c in s.SourceTables.OrderBy(i => i.Name))
                 {
                     r = t.AddRow();
                     r.Cells[0].AddParagraph(c.Name ?? string.Empty);
@@ -557,21 +354,30 @@ GO
                 r.Cells[0].AddParagraph("Destination module");
                 r.Cells[1].AddParagraph(_obj.DestinationModule != null ? _obj.DestinationModule.Name : string.Empty);
 
-                r = t.AddRow();
-                r.Cells[0].AddParagraph("SrcProvider");
-                r.Cells[1].AddParagraph(_obj.SrcProvider ?? string.Empty);
+                foreach (var s in _obj.StagingDatabases)
+                {
+                    p = Section.AddParagraph("Staging Database " + s.Description);
+                    p.Format.Font.Italic = true;
+                    t = NewTable();
+                    t.AddColumn("6cm");
+                    t.AddColumn("10cm");
 
-                r = t.AddRow();
-                r.Cells[0].AddParagraph("SrcConnectionString");
-                r.Cells[1].AddParagraph(_obj.SrcConnectionString ?? string.Empty);
+                    r = t.AddRow();
+                    r.Cells[0].AddParagraph("Provider");
+                    r.Cells[1].AddParagraph(s.Provider ?? string.Empty);
 
-                r = t.AddRow();
-                r.Cells[0].AddParagraph("SourceTables");
-                r.Cells[1].AddParagraph(_obj.SourceTables.Count.ToString());
+                    r = t.AddRow();
+                    r.Cells[0].AddParagraph("ConnectionString");
+                    r.Cells[1].AddParagraph(s.ConnectionString ?? string.Empty);
 
-                r = t.AddRow();
-                r.Cells[0].AddParagraph("SourceTables mapped");
-                r.Cells[1].AddParagraph(_obj.SourceTables.Count(i => i.DestinationObjectClass != null).ToString());
+                    r = t.AddRow();
+                    r.Cells[0].AddParagraph("SourceTables");
+                    r.Cells[1].AddParagraph(s.SourceTables.Count.ToString());
+
+                    r = t.AddRow();
+                    r.Cells[0].AddParagraph("SourceTables mapped");
+                    r.Cells[1].AddParagraph(s.SourceTables.Count(i => i.DestinationObjectClass != null).ToString());
+                }
             }
         }
         #endregion

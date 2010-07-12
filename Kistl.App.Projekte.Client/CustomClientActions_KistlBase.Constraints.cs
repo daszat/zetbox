@@ -173,7 +173,7 @@ namespace Kistl.App.Base
             var method = (Method)constrainedValueParam;
             e.Result = String.Format("This Invocation's  InvokeOnObjectClass ('{1}') should be a descendent of (or equal to) the Method's class ('{0}'), but isn't",
                 (method != null) ? method.ObjectClass.ToString() : "(no Method yet)",
-                constrainedObject.InvokeOnObjectClass);
+                constrainedObject.InvokeOnObjectClass != null ? constrainedObject.InvokeOnObjectClass.ToString() : "(no ObjectClass yet)");
         }
 
 

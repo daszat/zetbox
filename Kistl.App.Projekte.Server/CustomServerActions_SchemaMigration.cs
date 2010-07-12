@@ -26,52 +26,54 @@ namespace ZBox.App.SchemaMigration
 
         public static void OnUpdateFromSourceSchema_MigrationProject(ZBox.App.SchemaMigration.MigrationProject obj)
         {
-            if (string.IsNullOrEmpty(obj.SrcConnectionString)) throw new InvalidOperationException("Source ConnectionString is empty");
-            if (string.IsNullOrEmpty(obj.SrcProvider)) throw new InvalidOperationException("Source Provider is empty");
-            ISchemaProvider src = _scope.Resolve<ISchemaProvider>(obj.SrcProvider);
-            src.Open(obj.SrcConnectionString);
-
-            var destTbls = obj.Context.GetQuery<SourceTable>()
-                .Where(i => i.MigrationProject == obj)
-                .ToDictionary(k => k.Name);
-
-            // foreach table in src
-            foreach (var tbl in src.GetTableNames())
+            foreach (var s in obj.StagingDatabases)
             {
-                Log.InfoFormat("reading table {0}", tbl);
-                SourceTable destTbl;
-                if (!destTbls.ContainsKey(tbl))
-                {
-                    destTbl = obj.Context.Create<SourceTable>();
-                    destTbl.Name = tbl;
-                    obj.SourceTables.Add(destTbl);
-                }
-                else
-                {
-                    destTbl = destTbls[tbl];
-                }
+                if (string.IsNullOrEmpty(s.ConnectionString)) throw new InvalidOperationException("Source ConnectionString is empty");
+                if (string.IsNullOrEmpty(s.Provider)) throw new InvalidOperationException("Source Provider is empty");
+                ISchemaProvider src = _scope.Resolve<ISchemaProvider>(s.Provider);
+                src.Open(s.ConnectionString);
 
-                var cols = src.GetTableColumns(tbl);
-                var destCols = obj.Context.GetQuery<SourceColumn>()
-                    .Where(i => i.SourceTable == destTbl)
+                var destTbls = s.SourceTables
                     .ToDictionary(k => k.Name);
 
-                foreach (var col in cols)
+                // foreach table in src
+                foreach (var tbl in src.GetTableNames())
                 {
-                    SourceColumn destCol;
-                    if (!destCols.ContainsKey(col.Name))
+                    Log.InfoFormat("reading table {0}", tbl);
+                    SourceTable destTbl;
+                    if (!destTbls.ContainsKey(tbl))
                     {
-                        destCol = obj.Context.Create<SourceColumn>();
-                        destCol.Name = col.Name;
-                        destTbl.SourceColumn.Add(destCol);
+                        destTbl = obj.Context.Create<SourceTable>();
+                        destTbl.Name = tbl;
+                        s.SourceTables.Add(destTbl);
                     }
                     else
                     {
-                        destCol = destCols[col.Name];
+                        destTbl = destTbls[tbl];
                     }
-                    destCol.DbType = (ColumnType)col.Type;
-                    destCol.IsNullable = col.IsNullable;
-                    destCol.Size = col.Size;
+
+                    var cols = src.GetTableColumns(tbl);
+                    var destCols = obj.Context.GetQuery<SourceColumn>()
+                        .Where(i => i.SourceTable == destTbl)
+                        .ToDictionary(k => k.Name);
+
+                    foreach (var col in cols)
+                    {
+                        SourceColumn destCol;
+                        if (!destCols.ContainsKey(col.Name))
+                        {
+                            destCol = obj.Context.Create<SourceColumn>();
+                            destCol.Name = col.Name;
+                            destTbl.SourceColumn.Add(destCol);
+                        }
+                        else
+                        {
+                            destCol = destCols[col.Name];
+                        }
+                        destCol.DbType = (ColumnType)col.Type;
+                        destCol.IsNullable = col.IsNullable;
+                        destCol.Size = col.Size;
+                    }
                 }
             }
         }

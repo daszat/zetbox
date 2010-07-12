@@ -30,13 +30,14 @@ namespace ZBox.App.SchemaMigration
 
         public static void OnCreateObjectClass_SourceTable(ZBox.App.SchemaMigration.SourceTable obj)
         {
-            if (obj.MigrationProject == null) throw new InvalidOperationException("Not attached to a migration project");
-            if (obj.MigrationProject.DestinationModule == null) throw new InvalidOperationException("No destination module provided");
+            if (obj.StagingDatabase == null) throw new InvalidOperationException("Not attached to a staging database");
+            if (obj.StagingDatabase.MigrationProject == null) throw new InvalidOperationException("Not attached to a migration project");
+            if (obj.StagingDatabase.MigrationProject.DestinationModule == null) throw new InvalidOperationException("No destination module provided");
             if (obj.DestinationObjectClass != null) throw new InvalidOperationException("there is already a destination object class");
 
             obj.DestinationObjectClass = obj.Context.Create<ObjectClass>();
             obj.DestinationObjectClass.Name = obj.Name;
-            obj.DestinationObjectClass.Module = obj.MigrationProject.DestinationModule;
+            obj.DestinationObjectClass.Module = obj.StagingDatabase.MigrationProject.DestinationModule;
             obj.DestinationObjectClass.Description = obj.Description;
         }
 
@@ -44,8 +45,9 @@ namespace ZBox.App.SchemaMigration
         {
             if (obj.SourceTable == null) throw new InvalidOperationException("Not attached to a source table");
             if (obj.SourceTable.DestinationObjectClass == null) throw new InvalidOperationException("Source table has no destination object class");
-            if (obj.SourceTable.MigrationProject == null) throw new InvalidOperationException("Not attached to a migration project");
-            if (obj.SourceTable.MigrationProject.DestinationModule == null) throw new InvalidOperationException("No destination module provided");
+            if (obj.SourceTable.StagingDatabase == null) throw new InvalidOperationException("Not attached to a staging database");
+            if (obj.SourceTable.StagingDatabase.MigrationProject == null) throw new InvalidOperationException("Not attached to a migration project");
+            if (obj.SourceTable.StagingDatabase.MigrationProject.DestinationModule == null) throw new InvalidOperationException("No destination module provided");
             if (obj.DestinationProperty != null) throw new InvalidOperationException("there is already a destination object property");
 
             Property p = null;
@@ -114,7 +116,7 @@ namespace ZBox.App.SchemaMigration
             p.Name = obj.Name;
             p.Description = obj.Description;
             p.ObjectClass = obj.SourceTable.DestinationObjectClass;
-            p.Module = obj.SourceTable.MigrationProject.DestinationModule;
+            p.Module = obj.SourceTable.StagingDatabase.MigrationProject.DestinationModule;
         }
 
     }
