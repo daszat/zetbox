@@ -63,6 +63,7 @@ namespace Kistl.Server.Service
             Log.InfoFormat("Starting Kistl Server with args [{0}]", String.Join(" ", arguments));
 
             bool waitForKey = false;
+            bool bulk = false;
             try
             {
                 List<Action<ILifetimeScope, List<string>>> actions = new List<Action<ILifetimeScope, List<string>>>();
@@ -125,6 +126,9 @@ namespace Kistl.Server.Service
                         { "syncidentities", "synchronices local and domain users with Kistl Identities",
                             v => { if (v != null) { actions.Add((c, args) => c.Resolve<Server>().SyncIdentities()); } }
                             },
+                        { "bulk", "whether or not to use bulk loading",
+                            v => { if (v != null) { bulk = true; } }
+                            },
                         { "copydb", "copies a database to a staging database. Extra Arguments are: [SRCPROVIDER] [SRC ConnectionString] [DESTPROVIDER] [DEST ConnectionString]. Valid Providers are: MSSQL, POSTGRESQL, OLEDB. WARNING: All tables in the destination database will be dropped!",
                             v => { if (v != null) { 
                                 actions.Add((c, args) => { 
@@ -137,7 +141,7 @@ namespace Kistl.Server.Service
                                     var dstProvider = c.Resolve<ISchemaProvider>(args[2]);
                                     dstProvider.Open(args[3]);
                                     
-                                    c.Resolve<Server>().CopyDatabase(srcProvider, dstProvider);
+                                    c.Resolve<Server>().CopyDatabase(srcProvider, dstProvider, bulk);
                                 }); 
                             } }
                             },

@@ -9,7 +9,7 @@ namespace Kistl.Server
     using System.Text;
 
     using Autofac;
-    
+
     using Kistl.API;
     using Kistl.API.Configuration;
     using Kistl.API.Server;
@@ -166,36 +166,44 @@ namespace Kistl.Server
             }
         }
 
-        public void CopyDatabase(ISchemaProvider src, ISchemaProvider dest)
+        public void CopyDatabase(ISchemaProvider src, ISchemaProvider dest, bool bulk)
         {
             if (src == null) throw new ArgumentNullException("src");
             if (dest == null) throw new ArgumentNullException("dest");
 
-            Log.InfoFormat("Copy scr Database to staging database");
+            Log.InfoFormat("Copy data source to staging database");
 
             Log.Info("Dropping all Tables and Objects");
             dest.DropAllObjects();
 
-            // foreach table in src
-            foreach (var tbl in src.GetTableNames())
+            using (Log.InfoTraceMethodCall(String.Format("Copying all data {0}using bulk", bulk ? String.Empty : "not ")))
             {
-                Log.InfoFormat("Migrating table {0}", tbl);
-                var cols = src.GetTableColumns(tbl);
-                dest.CreateTable(tbl, cols);
-
-                var colNames = cols.Select(i => i.Name).ToArray();
-
-                using (IDataReader rd = src.ReadTableData(tbl, colNames))
+                // foreach table in src
+                foreach (var tbl in src.GetTableNames())
                 {
-                    object[] values = new object[colNames.Length];
-                    while (rd.Read())
+                    Log.InfoFormat("Migrating table {0}", tbl);
+                    var cols = src.GetTableColumns(tbl);
+                    dest.CreateTable(tbl, cols);
+
+                    var colNames = cols.Select(i => i.Name).ToArray();
+
+                    using (IDataReader rd = src.ReadTableData(tbl, colNames))
                     {
-                        rd.GetValues(values);
-                        dest.WriteTableData(tbl, colNames, values);
-                        Console.Write(".");
+                        if (bulk)
+                        {
+                            dest.WriteTableData(tbl, rd);
+                        }
+                        else
+                        {
+                            object[] values = new object[colNames.Length];
+                            while (rd.Read())
+                            {
+                                rd.GetValues(values);
+                                dest.WriteTableData(tbl, colNames, values);
+                            }
+                        }
                     }
                 }
-                Console.WriteLine();
             }
         }
 

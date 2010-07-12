@@ -141,7 +141,8 @@ using System.Data;
         void CreatePositionColumnValidCheckProcedures(ILookup<string, KeyValuePair<string, string>> refSpecs);
 
         System.Data.IDataReader ReadTableData(string tbl, IEnumerable<string> colNames);
-        void WriteTableData(string tbl, IEnumerable<string> colNames, object[] values);
+        void WriteTableData(string destTbl, IEnumerable<string> colNames, object[] values);
+        void WriteTableData(string destTbl, IDataReader source);
 
         string DbTypeToNative(DbType type);
         DbType NativeToDbType(string type);
@@ -150,5 +151,6 @@ using System.Data;
         /// This can be called after significant changes to the database to cause the DBMS' optimizier to refresh its internal stats.
         /// </summary>
         void RefreshDbStats();
+
     }
 }

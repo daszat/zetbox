@@ -537,6 +537,11 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
             return cmd.ExecuteReader();
         }
 
+        public void WriteTableData(string destTbl, IDataReader source)
+        {
+            throw new NotImplementedException();
+        }
+
         public void WriteTableData(string tbl, IEnumerable<string> colNames, object[] values)
         {
             var sb = new StringBuilder();

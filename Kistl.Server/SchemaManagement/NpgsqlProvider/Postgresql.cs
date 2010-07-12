@@ -13,6 +13,7 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
     using Kistl.API.Configuration;
     using Kistl.API.Server;
     using Kistl.API.Utils;
+using System.Data;
 
     public class Postgresql
         : ISchemaProvider
@@ -861,6 +862,11 @@ FROM (", viewName);
         }
 
         public System.Data.IDataReader ReadTableData(string tbl, IEnumerable<string> colNames)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void WriteTableData(string destTbl, IDataReader source)
         {
             throw new NotImplementedException();
         }

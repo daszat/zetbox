@@ -12,6 +12,7 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
     using Kistl.API.Configuration;
     using Kistl.API.Server;
     using Kistl.API.Utils;
+    using System.Data;
 
     public class SqlServer
         : ISchemaProvider
@@ -405,7 +406,7 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
                 QueryLog.Debug(cmd.CommandText);
                 using (SqlDataReader rd = cmd.ExecuteReader())
                 {
-                    while (rd.Read()) 
+                    while (rd.Read())
                     {
                         var type = rd.GetString(1);
                         var isMaxSize = type.In("ntext", "text", "image");
@@ -442,7 +443,7 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
         public void CreateTable(string tblName, IEnumerable<Column> cols)
         {
             if (string.IsNullOrEmpty(tblName)) throw new ArgumentNullException("tblName");
-            if(cols == null) throw new ArgumentNullException("cols");
+            if (cols == null) throw new ArgumentNullException("cols");
             Log.DebugFormat("CreateTable [{0}]", tblName);
 
             StringBuilder sb = new StringBuilder();
@@ -945,7 +946,7 @@ FROM (", viewName);
             ExecuteNonQuery("EXEC sp_rename '[{0}]', '{1}', 'OBJECT'", oldConstraintName, newConstraintName);
         }
 
-        public System.Data.IDataReader ReadTableData(string tbl, IEnumerable<string> colNames)
+        public IDataReader ReadTableData(string tbl, IEnumerable<string> colNames)
         {
             var sb = new StringBuilder();
             sb.AppendLine("SELECT ");
@@ -955,6 +956,23 @@ FROM (", viewName);
 
             var cmd = new SqlCommand(sb.ToString(), db, tx);
             return cmd.ExecuteReader();
+        }
+
+        public void WriteTableData(string destTbl, IDataReader source)
+        {
+            using (SqlBulkCopy bulkCopy = new SqlBulkCopy(db))
+            {
+                bulkCopy.DestinationTableName = destTbl;
+                try
+                {
+                    bulkCopy.WriteToServer(source);
+                }
+                catch (Exception ex)
+                {
+                    Log.Error("Error bulk writing to destination", ex);
+                    throw;
+                }
+            }
         }
 
         public void WriteTableData(string tbl, IEnumerable<string> colNames, object[] values)
