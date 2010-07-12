@@ -44,6 +44,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libs\AutoFac 2.1\Autofac.dll</HintPath>
     </Reference>
+    <Reference Include="Autofac.Configuration, Version=2.1.14.854, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\AutoFac 2.1\Autofac.Configuration.dll</HintPath>
+    </Reference>
     <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libs\log4net.dll</HintPath>
@@ -70,6 +74,11 @@
   <ItemGroup>
     <Compile Include="BaseKistlDataContext.cs" />
     <Compile Include="BaseServerDataObject.cs" />
+    <Compile Include="DbTypeMapper.cs" />
+    <Compile Include="Kistl.API.Migration\IMigrationTasks.cs" />
+    <Compile Include="Kistl.API.Migration\MigrationProgram.cs" />
+    <Compile Include="Kistl.API.Migration\MigrationTasksBase.cs" />
+    <Compile Include="Kistl.API.Migration\Translator.cs" />
     <Compile Include="ServerApiModule.cs" />
     <Compile Include="QueryTranslatorProvider.cs" />
     <Compile Include="CustomPropertyDescriptor.cs" />

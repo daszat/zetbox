@@ -4,9 +4,9 @@ namespace Kistl.API.Server
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Data;
     using System.Linq;
     using System.Text;
-using System.Data;
 
     public class TableConstraintNamePair
     {
@@ -112,6 +112,7 @@ using System.Data;
         void RenameColumn(string tblName, string oldColName, string newColName);
         void RenameFKConstraint(string oldConstraintName, string newConstraintName);
 
+        void TruncateTable(string tblName);
         void DropTable(string tblName);
         void DropColumn(string tblName, string colName);
         void DropFKConstraint(string tblName, string fkName);
@@ -141,8 +142,7 @@ using System.Data;
         void CreatePositionColumnValidCheckProcedures(ILookup<string, KeyValuePair<string, string>> refSpecs);
 
         System.Data.IDataReader ReadTableData(string tbl, IEnumerable<string> colNames);
-        void WriteTableData(string destTbl, IEnumerable<string> colNames, object[] values);
-        void WriteTableData(string destTbl, IDataReader source);
+        void WriteTableData(string destTbl, IDataReader source, IEnumerable<string> colNames);
 
         string DbTypeToNative(DbType type);
         DbType NativeToDbType(string type);
@@ -151,6 +151,5 @@ using System.Data;
         /// This can be called after significant changes to the database to cause the DBMS' optimizier to refresh its internal stats.
         /// </summary>
         void RefreshDbStats();
-
     }
 }

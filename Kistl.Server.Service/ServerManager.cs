@@ -26,7 +26,7 @@ namespace Kistl.Server.Service
             Logging.Configure();
             AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
 
-            container = Program.CreateMasterContainer(config, null);
+            container = Program.CreateMasterContainer(config);
 
             wcfServer = container.Resolve<IKistlAppDomain>();
             wcfServer.Start(config);

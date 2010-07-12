@@ -44,18 +44,6 @@ namespace Kistl.Server.Service
             }
         }
 
-        private class CmdLineArg
-        {
-            public CmdLineArg(string cmd)
-            {
-                Command = cmd;
-                Arguments = new List<string>();
-            }
-
-            public string Command { get; set; }
-            public IList<string> Arguments { get; private set; }
-        }
-
         public static int Main(string[] arguments)
         {
             Logging.Configure();
@@ -63,7 +51,6 @@ namespace Kistl.Server.Service
             Log.InfoFormat("Starting Kistl Server with args [{0}]", String.Join(" ", arguments));
 
             bool waitForKey = false;
-            bool bulk = false;
             try
             {
                 List<Action<ILifetimeScope, List<string>>> actions = new List<Action<ILifetimeScope, List<string>>>();
@@ -126,25 +113,6 @@ namespace Kistl.Server.Service
                         { "syncidentities", "synchronices local and domain users with Kistl Identities",
                             v => { if (v != null) { actions.Add((c, args) => c.Resolve<Server>().SyncIdentities()); } }
                             },
-                        { "bulk", "whether or not to use bulk loading",
-                            v => { if (v != null) { bulk = true; } }
-                            },
-                        { "copydb", "copies a database to a staging database. Extra Arguments are: [SRCPROVIDER] [SRC ConnectionString] [DESTPROVIDER] [DEST ConnectionString]. Valid Providers are: MSSQL, POSTGRESQL, OLEDB. WARNING: All tables in the destination database will be dropped!",
-                            v => { if (v != null) { 
-                                actions.Add((c, args) => { 
-                                    if (args == null) PrintHelpAndExit();
-                                    if (args.Count != 4) PrintHelpAndExit();
-
-                                    var srcProvider = c.Resolve<ISchemaProvider>(args[0]);
-                                    srcProvider.Open(args[1]);
-                                    
-                                    var dstProvider = c.Resolve<ISchemaProvider>(args[2]);
-                                    dstProvider.Open(args[3]);
-                                    
-                                    c.Resolve<Server>().CopyDatabase(srcProvider, dstProvider, bulk);
-                                }); 
-                            } }
-                            },
                         { "help", "prints this help", 
                             v => { if ( v != null) { PrintHelpAndExit(); } } 
                             },
@@ -168,7 +136,7 @@ namespace Kistl.Server.Service
                 Log.TraceTotalMemory("After InitApplicationContext");
 
                 AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
-                using (var container = CreateMasterContainer(config, null))
+                using (var container = CreateMasterContainer(config))
                 {
                     // process command line
                     if (actions.Count > 0)
@@ -225,7 +193,7 @@ namespace Kistl.Server.Service
             }
         }
 
-        internal static IContainer CreateMasterContainer(KistlConfig config, string dataSourceXmlFile)
+        internal static IContainer CreateMasterContainer(KistlConfig config)
         {
             var builder = Kistl.API.Utils.AutoFacBuilder.CreateContainerBuilder(config, config.Server.Modules);
 

@@ -19,6 +19,11 @@ namespace Kistl.API.Server
                 .Register<ServerDeploymentRestrictor>(c => new ServerDeploymentRestrictor())
                 .As<IDeploymentRestrictor>()
                 .SingleInstance();
+
+            moduleBuilder
+                .RegisterType<Migration.MigrationTasksBase>()
+                .As<Migration.IMigrationTasks>()
+                .InstancePerDependency();
         }
     }
 }

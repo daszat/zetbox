@@ -166,47 +166,6 @@ namespace Kistl.Server
             }
         }
 
-        public void CopyDatabase(ISchemaProvider src, ISchemaProvider dest, bool bulk)
-        {
-            if (src == null) throw new ArgumentNullException("src");
-            if (dest == null) throw new ArgumentNullException("dest");
-
-            Log.InfoFormat("Copy data source to staging database");
-
-            Log.Info("Dropping all Tables and Objects");
-            dest.DropAllObjects();
-
-            using (Log.InfoTraceMethodCall(String.Format("Copying all data {0}using bulk", bulk ? String.Empty : "not ")))
-            {
-                // foreach table in src
-                foreach (var tbl in src.GetTableNames())
-                {
-                    Log.InfoFormat("Migrating table {0}", tbl);
-                    var cols = src.GetTableColumns(tbl);
-                    dest.CreateTable(tbl, cols);
-
-                    var colNames = cols.Select(i => i.Name).ToArray();
-
-                    using (IDataReader rd = src.ReadTableData(tbl, colNames))
-                    {
-                        if (bulk)
-                        {
-                            dest.WriteTableData(tbl, rd);
-                        }
-                        else
-                        {
-                            object[] values = new object[colNames.Length];
-                            while (rd.Read())
-                            {
-                                rd.GetValues(values);
-                                dest.WriteTableData(tbl, colNames, values);
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
         // TODO: Replace this when NamedInstances are introduced
         public static readonly Guid Groups_Everyone = new Guid("76D43CF2-4DDF-4A3A-9AD6-28CABFDDDFF1");
 

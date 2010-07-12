@@ -373,6 +373,11 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
             throw new NotSupportedException();
         }
 
+        public void TruncateTable(string tblName)
+        {
+            throw new NotSupportedException();
+        }
+
         private void ExecuteNonQuery(string nonQueryFormat, params object[] args)
         {
             string query = String.Format(nonQueryFormat, args);
@@ -537,12 +542,20 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
             return cmd.ExecuteReader();
         }
 
-        public void WriteTableData(string destTbl, IDataReader source)
+        public void WriteTableData(string destTbl, IDataReader source, IEnumerable<string> ignored)
         {
-            throw new NotImplementedException();
+            if (String.IsNullOrEmpty(destTbl)) throw new ArgumentNullException("destTbl");
+            if (source == null) throw new ArgumentNullException("source");
+
+            var values = new object[source.FieldCount];
+            while (source.Read())
+            {
+                source.GetValues(values);
+                WriteTableData(destTbl, this.GetTableColumnNames(destTbl), values);
+            }
         }
 
-        public void WriteTableData(string tbl, IEnumerable<string> colNames, object[] values)
+        private void WriteTableData(string tbl, IEnumerable<string> colNames, object[] values)
         {
             var sb = new StringBuilder();
             sb.AppendLine(string.Format("INSERT INTO {0} (", Quote(tbl)));

@@ -1,5 +1,5 @@
 
-namespace Kistl.Server.SchemaManagement
+namespace Kistl.API.Server
 {
     using System;
     using System.Collections.Generic;
@@ -7,6 +7,7 @@ namespace Kistl.Server.SchemaManagement
     using System.Linq;
     using System.Text;
     using Kistl.App.Base;
+    using ZBox.App.SchemaMigration;
 
     public static class DbTypeMapper
     {
@@ -92,9 +93,16 @@ namespace Kistl.Server.SchemaManagement
             return GetSystemType(type, _propertyMapping);
         }
 
-        // TODO: should be implemented on the Property
-        internal static DbType GetDbType(this Property prop)
+        public static DbType GetDbType(ColumnType colType)
         {
+            return (DbType)colType;
+        }
+
+        // TODO: should be implemented on the Property
+        public static DbType GetDbType(this Property prop)
+        {
+            if (prop == null) throw new ArgumentNullException("prop");
+
             return GetDbTypeForProperty(prop.GetType());
         }
     }

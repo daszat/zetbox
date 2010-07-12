@@ -3,6 +3,7 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
 {
     using System;
     using System.Collections.Generic;
+    using System.Data;
     using System.Data.SqlClient;
     using System.IO;
     using System.Linq;
@@ -10,9 +11,9 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
     using System.Text.RegularExpressions;
     using Kistl.API;
     using Kistl.API.Configuration;
+    using Kistl.API.Migration;
     using Kistl.API.Server;
     using Kistl.API.Utils;
-    using System.Data;
 
     public class SqlServer
         : ISchemaProvider
@@ -586,6 +587,12 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
             ExecuteNonQuery("DROP TABLE [{0}]", tblName);
         }
 
+        public void TruncateTable(string tblName)
+        {
+            Log.DebugFormat("Truncating table [{0}]", tblName);
+            ExecuteNonQuery("DELETE FROM [{0}]", tblName);
+        }
+
         private void ExecuteNonQuery(string nonQueryFormat, params object[] args)
         {
             string query = String.Format(nonQueryFormat, args);
@@ -948,21 +955,31 @@ FROM (", viewName);
 
         public IDataReader ReadTableData(string tbl, IEnumerable<string> colNames)
         {
-            var sb = new StringBuilder();
-            sb.AppendLine("SELECT ");
-            colNames.ForEach(i => sb.AppendLine(string.Format("[{0}],", i)));
-            sb.Remove(sb.Length - 1, 1);
-            sb.AppendLine(string.Format(" FROM [{0}]", tbl));
-
-            var cmd = new SqlCommand(sb.ToString(), db, tx);
+            var columns = String.Join(",", colNames.Select(n => "[" + n + "]").ToArray());
+            var query = String.Format("SELECT {0} FROM [{1}]", columns, tbl);
+            
+            var cmd = new SqlCommand(query, db, tx);
             return cmd.ExecuteReader();
         }
 
-        public void WriteTableData(string destTbl, IDataReader source)
+        public void WriteTableData(string destTbl, IDataReader source, IEnumerable<string> colNames)
         {
+            if (String.IsNullOrEmpty(destTbl)) throw new ArgumentNullException("destTbl");
+            if (source == null) throw new ArgumentNullException("source");
+            if (colNames == null) throw new ArgumentNullException("colNames");
+
             using (SqlBulkCopy bulkCopy = new SqlBulkCopy(db))
             {
                 bulkCopy.DestinationTableName = destTbl;
+                
+                int i = 0;
+                foreach (var colName in colNames)
+                {
+                    bulkCopy.ColumnMappings.Add(new SqlBulkCopyColumnMapping(i, colName));
+                }
+
+                bulkCopy.ColumnMappings.Add(new SqlBulkCopyColumnMapping(2000, "ExportGuid"));
+
                 try
                 {
                     bulkCopy.WriteToServer(source);
@@ -973,38 +990,6 @@ FROM (", viewName);
                     throw;
                 }
             }
-        }
-
-        public void WriteTableData(string tbl, IEnumerable<string> colNames, object[] values)
-        {
-            var sb = new StringBuilder();
-            sb.AppendLine(string.Format("INSERT INTO [{0}] (", tbl));
-
-            colNames.ForEach(i => sb.Append(string.Format("[{0}],", i)));
-            sb.Remove(sb.Length - 1, 1);
-
-            sb.AppendLine(") VALUES (");
-
-            int counter = 0;
-            colNames.ForEach(i => sb.Append(string.Format("@param{0},", ++counter)));
-            sb.Remove(sb.Length - 1, 1);
-
-            sb.AppendLine(")");
-
-            var cmd = new SqlCommand(sb.ToString(), db, tx);
-            counter = 0;
-            foreach (var v in values)
-            {
-                var param = cmd.Parameters.AddWithValue(string.Format("@param{0}", ++counter), v ?? DBNull.Value);
-                if (v is DateTime)
-                {
-                    // Set Datetime correctly
-                    // We only support SQLServer 2008
-                    param.DbType = System.Data.DbType.DateTime2;
-                }
-            }
-
-            cmd.ExecuteNonQuery();
         }
 
         public void RefreshDbStats()

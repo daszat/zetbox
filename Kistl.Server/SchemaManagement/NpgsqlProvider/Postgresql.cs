@@ -3,17 +3,16 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
 {
     using System;
     using System.Collections.Generic;
-    using Npgsql;
+    using System.Data;
     using System.IO;
     using System.Linq;
     using System.Text;
     using System.Text.RegularExpressions;
-
     using Kistl.API;
     using Kistl.API.Configuration;
     using Kistl.API.Server;
     using Kistl.API.Utils;
-using System.Data;
+    using Npgsql;
 
     public class Postgresql
         : ISchemaProvider
@@ -455,6 +454,12 @@ WHERE relname = @table AND attname = @column", db, tx))
             ExecuteNonQuery("DROP TABLE \"{0}\"", tblName);
         }
 
+        public void TruncateTable(string tblName)
+        {
+            Log.DebugFormat("Truncating table \"{0}\"", tblName);
+            ExecuteNonQuery("DELETE FROM \"{0}\"", tblName);
+        }
+
         private void ExecuteNonQuery(string nonQueryFormat, params object[] args)
         {
             string query = String.Format(nonQueryFormat, args);
@@ -866,12 +871,7 @@ FROM (", viewName);
             throw new NotImplementedException();
         }
 
-        public void WriteTableData(string destTbl, IDataReader source)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void WriteTableData(string tbl, IEnumerable<string> colNames, object[] values)
+        public void WriteTableData(string destTbl, IDataReader source, IEnumerable<string> colNames)
         {
             throw new NotImplementedException();
         }
