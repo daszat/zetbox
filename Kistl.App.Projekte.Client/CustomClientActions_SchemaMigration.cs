@@ -9,6 +9,7 @@ using Kistl.API;
 using Kistl.API.Client;
 using Kistl.App.Base;
 using Kistl.App.Projekte.Client.Helper;
+using Kistl.App.Extensions;
 using MigraDoc.DocumentObjectModel;
 using Kistl.Client.Presentables;
 
@@ -39,6 +40,9 @@ namespace ZBox.App.SchemaMigration
                 sb.AppendLine("-- " + obj.Description);
                 sb.AppendLine();
 
+                sb.AppendLine("set dateformat dmy");
+                sb.AppendLine();
+
                 sb.AppendLine("-----------------------------------------------------------------");
                 sb.AppendLine("-- delete all tables ");
                 sb.AppendLine("-----------------------------------------------------------------");
@@ -51,6 +55,88 @@ namespace ZBox.App.SchemaMigration
                 sb.AppendLine("GO");
                 sb.AppendLine();
 
+                #region common functions
+                sb.AppendLine(@"-----------------------------------------------------------------
+-- common functions
+-----------------------------------------------------------------
+IF OBJECT_ID('[dbo].[fn_ConvertStr2Bit]') IS NOT NULL
+DROP FUNCTION [dbo].fn_ConvertStr2Bit
+GO
+CREATE FUNCTION fn_ConvertStr2Bit(@input nvarchar(100))
+RETURNS bit
+BEGIN
+	return case LOWER(@input)
+		when 'ja' then 1
+		when '-1' then 1
+		when '1' then 1
+		else 0 
+		end
+END
+GO
+
+IF OBJECT_ID('[dbo].[fn_ConvertStr2Date]') IS NOT NULL
+DROP FUNCTION [dbo].fn_ConvertStr2Date
+GO
+CREATE FUNCTION fn_ConvertStr2Date(@input nvarchar(100))
+RETURNS datetime2
+BEGIN
+	return case when ISDATE(@input)=1 then convert(datetime2, @input) else null end
+END
+GO
+
+IF OBJECT_ID('[dbo].[fn_ConvertStr2DateErrorMsg]') IS NOT NULL
+DROP FUNCTION [dbo].fn_ConvertStr2DateErrorMsg
+GO
+CREATE FUNCTION fn_ConvertStr2DateErrorMsg(@col nvarchar(100), @input nvarchar(100))
+RETURNS nvarchar(1000)
+BEGIN
+	return case when ISDATE(@input)=0 AND @input is not null then @col + ' enhält kein gültiges Datum ' + @input else null end
+END
+GO
+
+IF OBJECT_ID('[dbo].[IsInteger]') IS NOT NULL
+DROP FUNCTION [dbo].IsInteger
+GO
+CREATE Function IsInteger(@Value VarChar(18))
+Returns Bit
+As 
+Begin
+  
+  Return IsNull(
+     (Select Case When CharIndex('.', @Value) > 0 
+                  Then Case When Convert(int, ParseName(@Value, 1)) <> 0
+                            Then 0
+                            Else 1
+                            End
+                  Else 1
+                  End
+      Where IsNumeric(@Value + 'e0') = 1), 0)
+
+End
+GO
+
+IF OBJECT_ID('[dbo].[fn_ConvertStr2Int]') IS NOT NULL
+DROP FUNCTION [dbo].fn_ConvertStr2Int
+GO
+CREATE FUNCTION fn_ConvertStr2Int(@input nvarchar(100))
+RETURNS int
+BEGIN
+	return case when dbo.IsInteger(@input)=1 then convert(int, @input) else null end
+END
+GO
+
+IF OBJECT_ID('[dbo].[fn_ConvertStr2IntErrorMsg]') IS NOT NULL
+DROP FUNCTION [dbo].fn_ConvertStr2IntErrorMsg
+GO
+CREATE FUNCTION fn_ConvertStr2IntErrorMsg(@col nvarchar(100), @input nvarchar(100))
+RETURNS nvarchar(1000)
+BEGIN
+	return case when dbo.IsInteger(@input)=0 AND @input is not null then @col + ' enhält keine gültige Zahl ' + @input else null end
+END
+GO
+
+");
+                #endregion
 
                 sb.AppendLine("-----------------------------------------------------------------");
                 sb.AppendLine("-- enum conversion functions");
@@ -63,6 +149,7 @@ namespace ZBox.App.SchemaMigration
                     {
                         var e = (EnumerationProperty)col.DestinationProperty;
                         sb.AppendLine("-- " + e.Enumeration.GetDataTypeString());
+                        sb.AppendLine(string.Format("IF OBJECT_ID('[dbo].[fn_mig_ConvertEnum{0}]') IS NOT NULL\nDROP FUNCTION [dbo].fn_mig_ConvertEnum{0}\nGO", e.Enumeration.Name));
                         sb.AppendLine(string.Format("CREATE FUNCTION fn_mig_ConvertEnum{0}(@val {1}{2})",
                             e.Enumeration.Name,
                             "nvarchar", // TODO!!
@@ -73,9 +160,9 @@ namespace ZBox.App.SchemaMigration
                         sb.AppendLine("\tSELECT @result = CASE @val");
                         foreach (var ev in e.Enumeration.EnumerationEntries)
                         {
-                            sb.AppendLine(string.Format("WHEN '{0}' THEN {1}", ev.Name, ev.Value));
+                            sb.AppendLine(string.Format("\t\tWHEN '{0}' THEN {1}", ev.Name, ev.Value));
                         }
-                        sb.AppendLine("\tELSE 0");
+                        sb.AppendLine("\t\tELSE 0");
                         sb.AppendLine("\tEND\n\tRETURN @result\nEND\nGO\n");
                     }
                 }
@@ -85,6 +172,8 @@ namespace ZBox.App.SchemaMigration
                 sb.AppendLine("-----------------------------------------------------------------");
                 foreach (var tbl in obj.SourceTables.Where(i => i.DestinationObjectClass != null))
                 {
+                    var hasExportGuid = tbl.DestinationObjectClass.ImplementsIExportable(); 
+
                     sb.AppendLine("-- " + tbl.Description);
                     sb.Append(string.Format("INSERT INTO {0}{1} (", obj.EtlDestDatabasePrefix, Quote(tbl.DestinationObjectClass.TableName, obj)));
                     foreach (var col in tbl.SourceColumn.Where(i => i.DestinationProperty != null))
@@ -92,6 +181,13 @@ namespace ZBox.App.SchemaMigration
                         sb.AppendLine();
                         sb.Append(string.Format("\t{0},", Quote(col.DestinationProperty.Name, obj)));
                     }
+
+                    if (hasExportGuid)
+                    {
+                        sb.AppendLine();
+                        sb.Append(string.Format("\t{0},", Quote("ExportGuid", obj)));
+                    }
+
                     sb.Remove(sb.Length - 1, 1);
                     sb.Append("\n)\nSELECT");
                     foreach (var col in tbl.SourceColumn.Where(i => i.DestinationProperty != null))
@@ -103,10 +199,28 @@ namespace ZBox.App.SchemaMigration
                                 ((EnumerationProperty)col.DestinationProperty).Enumeration.Name, 
                                 Quote(col.Name, obj)));
                         }
+                        else if (col.DbType == ColumnType.String && col.DestinationProperty is IntProperty)
+                        {
+                            sb.Append(string.Format("\tdbo.fn_ConvertStr2Int({0}),", Quote(col.Name, obj)));
+                        }
+                        else if (col.DbType == ColumnType.String && col.DestinationProperty is DateTimeProperty)
+                        {
+                            sb.Append(string.Format("\tdbo.fn_ConvertStr2Date({0}),", Quote(col.Name, obj)));
+                        }
+                        else if (col.DbType == ColumnType.String && col.DestinationProperty is BoolProperty)
+                        {
+                            sb.Append(string.Format("\tdbo.fn_ConvertStr2Bit({0}),", Quote(col.Name, obj)));
+                        }
                         else
                         {
                             sb.Append(string.Format("\t{0},", Quote(col.Name, obj)));
                         }
+                    }
+
+                    if (hasExportGuid)
+                    {
+                        sb.AppendLine();
+                        sb.Append("\tnewid(),");
                     }
                     sb.Remove(sb.Length - 1, 1);
                     sb.AppendLine(string.Format("\nFROM {0}{1}", obj.EtlSrcDatabasePrefix, Quote(tbl.Name, obj)));
