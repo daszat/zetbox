@@ -342,6 +342,29 @@ GO
                     r.Cells[1].AddParagraph(c.Size.ToString());
 
                     if (!string.IsNullOrEmpty(c.Comment)) Section.AddParagraph(c.Comment).Format.SpaceBefore = "0.5cm";
+
+                    if (c.EnumEntries.Count > 0)
+                    {
+                        var p = Section.AddParagraph("Enum Mapping");
+                        p.Format.Font.Italic = true;
+                        p.Format.SpaceBefore = "0.5cm";
+                        p.Format.SpaceAfter = "0.5cm";
+                        t = NewTable();
+
+                        t.AddColumn("6cm");
+                        t.AddColumn("10cm");
+
+                        r = t.AddRow();
+                        r.Cells[0].AddParagraph("Src. Value").Style = styleTableHeader;
+                        r.Cells[1].AddParagraph("Dest. Value").Style = styleTableHeader;
+
+                        foreach (var e in c.EnumEntries)
+                        {
+                            r = t.AddRow();
+                            r.Cells[0].AddParagraph(e.SourceValue);
+                            r.Cells[1].AddParagraph(e.DestinationValue.Name + (string.IsNullOrEmpty(e.DestinationValue.Description) ? ", " + e.DestinationValue.Description : string.Empty));
+                        }
+                    }
                 }
             }
 
