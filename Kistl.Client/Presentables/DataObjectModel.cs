@@ -184,7 +184,8 @@ namespace Kistl.Client.Presentables
             set
             {
                 // only accept new value if it is a contained model
-                if (value == null || (PropertyGroupsByName.ContainsKey(value.Name) && PropertyGroupsByName[value.Name] == value))
+                // Do not accept null's
+                if (value != null && (PropertyGroupsByName.ContainsKey(value.Name) && PropertyGroupsByName[value.Name] == value))
                 {
                     _selectedPropertyGroup = value;
                     OnPropertyChanged("SelectedPropertyGroup");
