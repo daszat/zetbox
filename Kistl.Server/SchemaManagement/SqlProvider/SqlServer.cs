@@ -147,6 +147,12 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
             }
         }
 
+        private static string ConstructDefaultConstraintName(string tblName, string colName)
+        {
+            var constrName = string.Format("default_{0}_{1}", tblName, colName);
+            return constrName;
+        }
+
         public string GetSavedSchema()
         {
             if (!CheckTableExists("CurrentSchema")) return string.Empty;
@@ -352,6 +358,16 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
             }
         }
 
+        public bool GetHasColumnDefaultValue(string tblName, string colName)
+        {
+            using (var cmd = new SqlCommand("SELECT COUNT(*) FROM sys.objects WHERE object_id = OBJECT_ID(@def) AND type IN (N'D')", db, tx))
+            {
+                cmd.Parameters.AddWithValue("@def", ConstructDefaultConstraintName(tblName, colName));
+                QueryLog.Debug(cmd.CommandText);
+                return (int)cmd.ExecuteScalar() > 0;
+            }
+        }
+
         public int GetColumnMaxLength(string tblName, string colName)
         {
             // / 2 -> nvarchar!
@@ -513,17 +529,17 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
             ExecuteNonQuery(sb.ToString());
         }
 
-        public void CreateColumn(string tblName, string colName, System.Data.DbType type, int size, int scale, bool isNullable)
+        public void CreateColumn(string tblName, string colName, System.Data.DbType type, int size, int scale, bool isNullable, DefaultConstraint defContraint)
         {
-            DoColumn(true, tblName, colName, type, size, scale, isNullable);
+            DoColumn(true, tblName, colName, type, size, scale, isNullable, defContraint);
         }
 
-        public void AlterColumn(string tblName, string colName, System.Data.DbType type, int size, int scale, bool isNullable)
+        public void AlterColumn(string tblName, string colName, System.Data.DbType type, int size, int scale, bool isNullable, DefaultConstraint defContraint)
         {
-            DoColumn(false, tblName, colName, type, size, scale, isNullable);
+            DoColumn(false, tblName, colName, type, size, scale, isNullable, defContraint);
         }
 
-        private void DoColumn(bool add, string tblName, string colName, System.Data.DbType type, int size, int scale, bool isNullable)
+        private void DoColumn(bool add, string tblName, string colName, System.Data.DbType type, int size, int scale, bool isNullable, DefaultConstraint defContraint)
         {
             StringBuilder sb = new StringBuilder();
 
@@ -566,8 +582,31 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
             }
 
             ExecuteNonQuery(sb.ToString());
-        }
 
+            var constrName = ConstructDefaultConstraintName(tblName, colName);
+            ExecuteNonQuery("IF OBJECT_ID('[{0}]') IS NOT NULL\nALTER TABLE [{1}] DROP CONSTRAINT [{0}]", constrName, tblName);
+            if (defContraint != null)
+            {
+                string defValue;
+                if (defContraint is NewGuidDefaultConstraint)
+                {
+                    defValue = "NEWID()";
+                }
+                else if (defContraint is IntDefaultConstraint)
+                {
+                    defValue = ((IntDefaultConstraint)defContraint).Value.ToString();
+                }
+                else if (defContraint is DateTimeDefaultConstraint)
+                {
+                    defValue = "getdate()";
+                }
+                else 
+                {
+                    throw new ArgumentOutOfRangeException("defContraint", "Unsupported default constraint " + defContraint.GetType().Name);
+                }
+                ExecuteNonQuery("ALTER TABLE [{1}] ADD CONSTRAINT [{0}] DEFAULT {3} FOR [{2}]", constrName, tblName, colName, defValue);
+            }
+        }
 
         public void CreateFKConstraint(string tblName, string refTblName, string colName, string constraintName, bool onDeleteCascade)
         {
@@ -980,10 +1019,8 @@ FROM (", viewName);
                 int i = 0;
                 foreach (var colName in colNames)
                 {
-                    bulkCopy.ColumnMappings.Add(new SqlBulkCopyColumnMapping(i, colName));
+                    bulkCopy.ColumnMappings.Add(new SqlBulkCopyColumnMapping(i++, colName));
                 }
-
-                bulkCopy.ColumnMappings.Add(new SqlBulkCopyColumnMapping(2000, "ExportGuid"));
 
                 try
                 {

@@ -207,6 +207,10 @@ namespace Kistl.Server.SchemaManagement
                 {
                     Case.DoChangeValueTypeProperty_To_Nullable(objClass, prop, prefix);
                 }
+                if (Case.IsChangeDefaultValue(prop))
+                {
+                    Case.DoChangeDefaultValue(objClass, prop, prefix);
+                }
             }
 
             foreach (CompoundObjectProperty sprop in properties.OfType<CompoundObjectProperty>().Where(p => !p.IsList))

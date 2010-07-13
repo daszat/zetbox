@@ -398,17 +398,17 @@ WHERE relname = @table AND attname = @column", db, tx))
             ExecuteNonQuery(sb.ToString());
         }
 
-        public void CreateColumn(string tblName, string colName, System.Data.DbType type, int size, int scale, bool isNullable)
+        public void CreateColumn(string tblName, string colName, System.Data.DbType type, int size, int scale, bool isNullable, DefaultConstraint defContraint)
         {
-            DoColumn(true, tblName, colName, type, size, scale, isNullable);
+            DoColumn(true, tblName, colName, type, size, scale, isNullable, defContraint);
         }
 
-        public void AlterColumn(string tblName, string colName, System.Data.DbType type, int size, int scale, bool isNullable)
+        public void AlterColumn(string tblName, string colName, System.Data.DbType type, int size, int scale, bool isNullable, DefaultConstraint defContraint)
         {
-            DoColumn(false, tblName, colName, type, size, scale, isNullable);
+            DoColumn(false, tblName, colName, type, size, scale, isNullable, defContraint);
         }
 
-        private void DoColumn(bool add, string tblName, string colName, System.Data.DbType type, int size, int scale, bool isNullable)
+        private void DoColumn(bool add, string tblName, string colName, System.Data.DbType type, int size, int scale, bool isNullable, DefaultConstraint defContraint)
         {
             StringBuilder sb = new StringBuilder();
 
@@ -951,6 +951,11 @@ FROM (", viewName);
         {
             Log.Info("Vacuuming database");
             ExecuteNonQuery("VACUUM ANALYZE");
+        }
+
+        public bool GetHasColumnDefaultValue(string tblName, string colName)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -64,6 +64,23 @@ namespace Kistl.API.Server
         }
     }
 
+    public abstract class DefaultConstraint
+    {
+    }
+
+    public class IntDefaultConstraint : DefaultConstraint
+    {
+        public int Value { get; set; }
+    }
+
+    public class NewGuidDefaultConstraint : DefaultConstraint
+    {
+    }
+
+    public class DateTimeDefaultConstraint : DefaultConstraint
+    {
+    }
+
     public interface ISchemaProvider : IDisposable
     {
         string ConfigName { get; }
@@ -94,6 +111,7 @@ namespace Kistl.API.Server
         bool RepairPositionColumn(string tblName, string positionColumnName);
 
         bool GetIsColumnNullable(string tblName, string colName);
+        bool GetHasColumnDefaultValue(string tblName, string colName);
         int GetColumnMaxLength(string tblName, string colName);
 
         IEnumerable<string> GetTableNames();
@@ -104,8 +122,8 @@ namespace Kistl.API.Server
         void CreateTable(string tbl, IEnumerable<Column> cols);
         void CreateTable(string tblName, bool idAsIdentityColumn);
         void CreateTable(string tblName, bool idAsIdentityColumn, bool createPrimaryKey);
-        void CreateColumn(string tblName, string colName, System.Data.DbType type, int size, int scale, bool isNullable);
-        void AlterColumn(string tblName, string colName, System.Data.DbType type, int size, int scale, bool isNullable);
+        void CreateColumn(string tblName, string colName, System.Data.DbType type, int size, int scale, bool isNullable, DefaultConstraint defContraint);
+        void AlterColumn(string tblName, string colName, System.Data.DbType type, int size, int scale, bool isNullable, DefaultConstraint defContraint);
         void CreateFKConstraint(string tblName, string refTblName, string colName, string constraintName, bool onDeleteCascade);
 
         void RenameTable(string oldTblName, string newTblName);

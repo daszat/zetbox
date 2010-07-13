@@ -180,6 +180,8 @@ namespace Kistl.API.Migration
                 var srcSchema = OpenSource(reloadScope, stage.OriginProvider, stage.OriginConnectionString);
                 var dstSchema = OpenSource(reloadScope, stage.Provider, stage.ConnectionString);
 
+                dstSchema.DropAllObjects();
+
                 foreach (var tbl in srcSchema.GetTableNames())
                 {
                     Log.InfoFormat("Migrating table {0}", tbl);

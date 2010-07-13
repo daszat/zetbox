@@ -71,11 +71,89 @@ namespace Kistl.API.Migration
 
                 for (int i = 0; i < _srcColumnNames.Length; i++)
                 {
-                    if (DbTypeMapper.GetDbTypeForProperty(_srcColumns[i].DestinationProperty.GetType()) != DbTypeMapper.GetDbType(_srcColumns[i].DbType))
+                    var val = _source.GetValue(i);
+                    var srcType = DbTypeMapper.GetDbTypeForProperty(_srcColumns[i].DestinationProperty.GetType());
+                    var destType = DbTypeMapper.GetDbType(_srcColumns[i].DbType);
+
+                    if (val != null
+                        && val != DBNull.Value
+                        && srcType != destType)
                     {
-                        Log.InfoFormat("Should convert [{0}] from [{1}] to [{2}]", _srcColumns[i].Name, DbTypeMapper.GetDbType(_srcColumns[i].DbType), DbTypeMapper.GetDbTypeForProperty(_srcColumns[i].DestinationProperty.GetType()));
+                        Log.InfoFormat("Convert [{0}] from [{1}] to [{2}]", _srcColumns[i].Name, srcType, destType);
+                        switch (destType)
+                        {
+                            case DbType.AnsiString:
+                            case DbType.AnsiStringFixedLength:
+                            case DbType.String:
+                            case DbType.StringFixedLength:
+                                val = val.ToString();
+                                break;
+
+                            case DbType.Boolean:
+                                val = Convert.ToBoolean(val);
+                                break;
+
+                            case DbType.Date:
+                            case DbType.DateTime:
+                            case DbType.DateTime2:
+                                val = Convert.ToDateTime(val);
+                                break;
+
+                            case DbType.Single:
+                                val = Convert.ToSingle(val);
+                                break;
+                            case DbType.Double:
+                                val = Convert.ToDouble(val);                                
+                                break;
+
+                            case DbType.Byte:
+                                val = Convert.ToByte(val);
+                                break;
+                            case DbType.Int16:
+                                val = Convert.ToInt16(val);
+                                break;
+                            case DbType.Int32:
+                                val = Convert.ToInt32(val);
+                                break;
+
+                            case DbType.SByte:
+                                val = Convert.ToSByte(val);
+                                break;
+                            case DbType.Int64:
+                                val = Convert.ToInt64(val);
+                                break;
+                            case DbType.UInt16:
+                                val = Convert.ToUInt16(val);
+                                break;
+                            case DbType.UInt32:
+                                val = Convert.ToUInt32(val);
+                                break;
+                            case DbType.UInt64:
+                                val = Convert.ToUInt64(val);
+                                break;
+
+                            case DbType.Guid:
+                                val = new Guid(val.ToString());
+                                break;
+
+                            case DbType.Currency:
+                            case DbType.Decimal:
+                            case DbType.VarNumeric:
+                                val = Convert.ToDecimal(val);
+                                break;
+
+
+                            case DbType.Binary:
+                            case DbType.DateTimeOffset:
+                            case DbType.Object:
+                            case DbType.Time:
+                            case DbType.Xml:
+                            default:
+                                throw new NotSupportedException("Unknown DbType " + destType);
+
+                        }
                     }
-                    _resultValues[i] = _source.GetValue(i);
+                    _resultValues[i] = val;
                 }
             }
             else

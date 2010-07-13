@@ -353,12 +353,12 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
             throw new NotSupportedException();
         }
 
-        public void CreateColumn(string tblName, string colName, System.Data.DbType type, int size, int scale, bool isNullable)
+        public void CreateColumn(string tblName, string colName, System.Data.DbType type, int size, int scale, bool isNullable, DefaultConstraint defContraint)
         {
             throw new NotSupportedException();
         }
 
-        public void AlterColumn(string tblName, string colName, System.Data.DbType type, int size, int scale, bool isNullable)
+        public void AlterColumn(string tblName, string colName, System.Data.DbType type, int size, int scale, bool isNullable, DefaultConstraint defContraint)
         {
             throw new NotSupportedException();
         }
@@ -595,6 +595,11 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
         public void RefreshDbStats()
         {
             // do nothing
+        }
+
+        public bool GetHasColumnDefaultValue(string tblName, string colName)
+        {
+            throw new NotImplementedException();
         }
     }
 }

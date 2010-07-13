@@ -46,7 +46,9 @@ namespace Kistl.API.Migration
                 return;
             }
 
-            var srcColumns = tbl.SourceColumn.Where(c => c.DestinationProperty != null).OrderBy(c => c.Name).ToList();
+            var srcColumns = tbl.SourceColumn
+                .Where(c => c.DestinationProperty != null && c.DestinationProperty is Kistl.App.Base.ValueTypeProperty)
+                .OrderBy(c => c.Name).ToList();
             var srcColumnNames = srcColumns.Select(c => c.Name).ToArray();
             var dstColumnNames = srcColumns.Select(c => c.DestinationProperty.Name).ToArray();
 

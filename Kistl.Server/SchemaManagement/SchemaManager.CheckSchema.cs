@@ -285,7 +285,7 @@ namespace Kistl.Server.SchemaManagement
                 string assocName = rel.GetRelationAssociationName(role);
                 string idxName = Construct.IndexName(tblName, colName);
 
-                CheckColumn(relEnd.Type.TableName, Construct.ForeignKeyColumnName(otherEnd), System.Data.DbType.Int32, 0, 0, otherEnd.IsNullable());
+                CheckColumn(relEnd.Type.TableName, Construct.ForeignKeyColumnName(otherEnd), System.Data.DbType.Int32, 0, 0, otherEnd.IsNullable(), null);
                 if (!db.CheckFKConstraintExists(assocName))
                 {
                     Log.WarnFormat("FK Constraint '{0}' is missing", assocName);
@@ -333,7 +333,7 @@ namespace Kistl.Server.SchemaManagement
             string colName = Construct.ForeignKeyColumnName(otherEnd);
             string indexName = Construct.ListPositionColumnName(otherEnd);
 
-            CheckColumn(tblName, colName, System.Data.DbType.Int32, 0, 0, otherEnd.IsNullable());
+            CheckColumn(tblName, colName, System.Data.DbType.Int32, 0, 0, otherEnd.IsNullable(), null);
 
             if (!db.CheckFKConstraintExists(assocName))
             {
@@ -381,8 +381,8 @@ namespace Kistl.Server.SchemaManagement
                 }
                 return;
             }
-            CheckColumn(tblName, fkAName, System.Data.DbType.Int32, 0, 0, false);
-            CheckColumn(tblName, fkBName, System.Data.DbType.Int32, 0, 0, false);
+            CheckColumn(tblName, fkAName, System.Data.DbType.Int32, 0, 0, false, null);
+            CheckColumn(tblName, fkBName, System.Data.DbType.Int32, 0, 0, false, null);
 
             if (!db.CheckFKConstraintExists(assocAName))
             {
@@ -403,7 +403,7 @@ namespace Kistl.Server.SchemaManagement
 
             if (rel.NeedsPositionStorage(RelationEndRole.A))
             {
-                CheckColumn(tblName, fkAIndex, System.Data.DbType.Int32, 0, 0, true);
+                CheckColumn(tblName, fkAIndex, System.Data.DbType.Int32, 0, 0, true, null);
                 if (repair)
                 {
                     // TODO: Call case
@@ -420,7 +420,7 @@ namespace Kistl.Server.SchemaManagement
 
             if (rel.NeedsPositionStorage(RelationEndRole.B))
             {
-                CheckColumn(tblName, fkBIndex, System.Data.DbType.Int32, 0, 0, true);
+                CheckColumn(tblName, fkBIndex, System.Data.DbType.Int32, 0, 0, true, null);
                 if (repair)
                 {
                     // TODO: Call case
@@ -437,7 +437,7 @@ namespace Kistl.Server.SchemaManagement
 
             if (rel.A.Type.ImplementsIExportable() && rel.B.Type.ImplementsIExportable())
             {
-                CheckColumn(tblName, "ExportGuid", System.Data.DbType.Guid, 0, 0, false);
+                CheckColumn(tblName, "ExportGuid", System.Data.DbType.Guid, 0, 0, false, null);
             }
         }
 
@@ -544,12 +544,12 @@ namespace Kistl.Server.SchemaManagement
                 if (db.CheckTableExists(tblName))
                 {
                     Log.DebugFormat("{0}", prop.Name);
-                    CheckColumn(tblName, fkName, System.Data.DbType.Int32, 0, 0, false);
-                    CheckColumn(tblName, valPropName, prop.GetDbType(), prop.GetSize(), prop.GetScale(), false);
+                    CheckColumn(tblName, fkName, System.Data.DbType.Int32, 0, 0, false, null);
+                    CheckColumn(tblName, valPropName, prop.GetDbType(), prop.GetSize(), prop.GetScale(), false, SchemaManager.GetDefaultContraint(prop));
 
                     if (hasPersistentOrder)
                     {
-                        CheckColumn(tblName, valPropIndexName, System.Data.DbType.Int32, 0, 0, true);
+                        CheckColumn(tblName, valPropIndexName, System.Data.DbType.Int32, 0, 0, true, null);
                     }
                     if (!hasPersistentOrder && db.CheckColumnExists(tblName, valPropIndexName))
                     {
@@ -597,17 +597,17 @@ namespace Kistl.Server.SchemaManagement
                     // Check isnull column
                     // TODO: Support neested CompoundObject
                     string colName = Construct.NestedColumnName(prop, string.Empty);
-                    CheckColumn(tblName, colName, System.Data.DbType.Boolean, 0, 0, false);
+                    CheckColumn(tblName, colName, System.Data.DbType.Boolean, 0, 0, false, null);
 
-                    CheckColumn(tblName, fkName, System.Data.DbType.Int32, 0, 0, false);
+                    CheckColumn(tblName, fkName, System.Data.DbType.Int32, 0, 0, false, null);
                     // TODO: Support neested CompoundObject
                     foreach (ValueTypeProperty p in prop.CompoundObjectDefinition.Properties)
                     {
-                        CheckColumn(tblName, valPropName + "_" + p.Name, p.GetDbType(), p.GetSize(), p.GetScale(), true);
+                        CheckColumn(tblName, valPropName + "_" + p.Name, p.GetDbType(), p.GetSize(), p.GetScale(), true, SchemaManager.GetDefaultContraint(p));
                     }
                     if (hasPersistentOrder)
                     {
-                        CheckColumn(tblName, valPropIndexName, System.Data.DbType.Int32, 0, 0, true);
+                        CheckColumn(tblName, valPropIndexName, System.Data.DbType.Int32, 0, 0, true, null);
                     }
                     if (!hasPersistentOrder && db.CheckColumnExists(tblName, valPropIndexName))
                     {
@@ -633,28 +633,30 @@ namespace Kistl.Server.SchemaManagement
             }
         }
 
-        private void CheckColumn(string tblName, string colName, System.Data.DbType type, int size, int scale, bool isNullable)
+        private void CheckColumn(string tblName, string colName, System.Data.DbType type, int size, int scale, bool isNullable, DefaultConstraint defConstr)
         {
             if (db.CheckColumnExists(tblName, colName))
             {
                 // TODO: Add DataType Check
-                bool colIsNullable = db.GetIsColumnNullable(tblName, colName);
-                if (colIsNullable != isNullable)
                 {
-                    Log.WarnFormat("Column '{0}'.'{1}' nullable mismatch. Column is {2} but should be {3}", tblName, colName,
-                        colIsNullable ? "NULLABLE" : "NOT NULLABLE",
-                        isNullable ? "NULLABLE" : "NOT NULLABLE");
-
-                    if (repair)
+                    bool colIsNullable = db.GetIsColumnNullable(tblName, colName);
+                    if (colIsNullable != isNullable)
                     {
-                        if (isNullable || (!isNullable && !db.CheckColumnContainsNulls(tblName, colName)))
+                        Log.WarnFormat("Column '{0}'.'{1}' nullable mismatch. Column is {2} but should be {3}", tblName, colName,
+                            colIsNullable ? "NULLABLE" : "NOT NULLABLE",
+                            isNullable ? "NULLABLE" : "NOT NULLABLE");
+
+                        if (repair)
                         {
-                            db.AlterColumn(tblName, colName, type, size, scale, isNullable);
-                            Log.Info("Fixed");
-                        }
-                        else if (!isNullable && db.CheckColumnContainsNulls(tblName, colName))
-                        {
-                            Log.WarnFormat("Column '{0}.{1}' contains NULL values, cannot set NOT NULLABLE", tblName, colName);
+                            if (isNullable || (!isNullable && !db.CheckColumnContainsNulls(tblName, colName)))
+                            {
+                                db.AlterColumn(tblName, colName, type, size, scale, isNullable, defConstr);
+                                Log.Info("Fixed");
+                            }
+                            else if (!isNullable && db.CheckColumnContainsNulls(tblName, colName))
+                            {
+                                Log.WarnFormat("Column '{0}.{1}' contains NULL values, cannot set NOT NULLABLE", tblName, colName);
+                            }
                         }
                     }
                 }
@@ -662,13 +664,28 @@ namespace Kistl.Server.SchemaManagement
                 {
                     int colSize = db.GetColumnMaxLength(tblName, colName);
                     // TODO: Introduce TextProperty
-                    if (size > 1000)
+                    if (size == int.MaxValue)
                     {
                         // TODO: Check if ntext
                     }
                     else if (colSize != size)
                     {
                         Log.WarnFormat("Column '{0}'.'{1}' length mismatch. Columns length is {2} but should be {3}", tblName, colName, colSize, size);
+                    }
+                }
+                {
+                    bool colHasDefValue = db.GetHasColumnDefaultValue(tblName, colName);
+                    bool hasDefValue = defConstr != null;
+                    if (colHasDefValue != hasDefValue)
+                    {
+                        Log.WarnFormat("Column '{0}'.'{1}' default value mismatch. Column {2}have a default value but should {3}have one", tblName, colName,
+                            colHasDefValue ? string.Empty : "do not ",
+                            hasDefValue ? string.Empty : "not ");
+
+                        if (repair)
+                        {
+                            db.AlterColumn(tblName, colName, type, size, scale, isNullable, defConstr);
+                        }
                     }
                 }
             }
@@ -681,11 +698,11 @@ namespace Kistl.Server.SchemaManagement
                     if (!isNullable && db.CheckTableContainsData(tblName))
                     {
                         Log.WarnFormat("Table '{0}' contains data, cannot create NOT NULLABLE column '{1}'", tblName, colName);
-                        db.CreateColumn(tblName, colName, type, size, scale, true);
+                        db.CreateColumn(tblName, colName, type, size, scale, true, defConstr);
                     }
                     else
                     {
-                        db.CreateColumn(tblName, colName, type, size, scale, isNullable);
+                        db.CreateColumn(tblName, colName, type, size, scale, isNullable, defConstr);
                     }
                 }
             }
@@ -693,7 +710,7 @@ namespace Kistl.Server.SchemaManagement
 
         private void CheckOrderColumn(string tblName, string indexName)
         {
-            CheckColumn(tblName, indexName, System.Data.DbType.Int32, 0, 0, true);
+            CheckColumn(tblName, indexName, System.Data.DbType.Int32, 0, 0, true, null);
             if (repair)
             {
                 using (Log.InfoTraceMethodCallFormat(
@@ -723,7 +740,7 @@ namespace Kistl.Server.SchemaManagement
                 string tblName = objClass.TableName;
                 string colName = Construct.NestedColumnName(prop, prefix);
                 Log.DebugFormat("    {0}", colName);
-                CheckColumn(tblName, colName, prop.GetDbType(), prop.GetSize(), prop.GetScale(), prop.IsNullable());
+                CheckColumn(tblName, colName, prop.GetDbType(), prop.GetSize(), prop.GetScale(), prop.IsNullable(), SchemaManager.GetDefaultContraint(prop));
             }
 
             foreach (CompoundObjectProperty sprop in properties.OfType<CompoundObjectProperty>().Where(p => !p.IsList))
@@ -732,7 +749,7 @@ namespace Kistl.Server.SchemaManagement
                 string tblName = objClass.TableName;
                 string colName = Construct.NestedColumnName(sprop, prefix);
                 Log.DebugFormat("    {0}", colName);
-                CheckColumn(tblName, colName, System.Data.DbType.Boolean, 0, 0, false);
+                CheckColumn(tblName, colName, System.Data.DbType.Boolean, 0, 0, false, null);
 
                 // Check other columns
                 CheckColumns(objClass, sprop.CompoundObjectDefinition.Properties, Construct.NestedColumnName(sprop, prefix));

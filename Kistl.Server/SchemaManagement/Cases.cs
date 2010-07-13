@@ -131,11 +131,12 @@ namespace Kistl.Server.SchemaManagement
             var dbType = prop.GetDbType();
             var size = prop.GetSize();
             var scale = prop.GetScale();
+            var defConstr = SchemaManager.GetDefaultContraint(prop);
 
             if (movedUp)
             {
                 Log.InfoFormat("Moving property '{0}' from '{1}' up to '{2}'", prop.Name, saved.ObjectClass.Name, objClass.Name);
-                db.CreateColumn(tblName, colName, dbType, size, scale, true);
+                db.CreateColumn(tblName, colName, dbType, size, scale, true, defConstr);
 
                 db.CopyColumnData(srcTblName, srcColName, tblName, colName);
 
@@ -147,7 +148,7 @@ namespace Kistl.Server.SchemaManagement
                     }
                     else
                     {
-                        db.AlterColumn(tblName, colName, dbType, size, scale, prop.IsNullable());
+                        db.AlterColumn(tblName, colName, dbType, size, scale, prop.IsNullable(), defConstr);
                     }
                 }
 
@@ -156,13 +157,13 @@ namespace Kistl.Server.SchemaManagement
             else if (movedDown)
             {
                 Log.InfoFormat("Moving property '{0}' from '{1}' down to '{2}' (dataloss possible)", prop.Name, saved.ObjectClass.Name, objClass.Name);
-                db.CreateColumn(tblName, colName, dbType, size, scale, true);
+                db.CreateColumn(tblName, colName, dbType, size, scale, true, defConstr);
 
                 db.CopyColumnData(srcTblName, srcColName, tblName, colName);
 
                 if (!prop.IsNullable())
                 {
-                    db.AlterColumn(tblName, colName, dbType, size, scale, prop.IsNullable());
+                    db.AlterColumn(tblName, colName, dbType, size, scale, prop.IsNullable(), defConstr);
                 }
 
                 db.DropColumn(srcTblName, srcColName);
@@ -197,8 +198,7 @@ namespace Kistl.Server.SchemaManagement
         {
             string colName = Construct.NestedColumnName(prop, prefix);
             Log.InfoFormat("New nullable ValueType Property: '{0}' ('{1}')", prop.Name, colName);
-            db.CreateColumn(objClass.TableName, colName, prop.GetDbType(),
-                prop.GetSize(), prop.GetScale(), true);
+            db.CreateColumn(objClass.TableName, colName, prop.GetDbType(), prop.GetSize(), prop.GetScale(), true, SchemaManager.GetDefaultContraint(prop));
         }
         #endregion
 
@@ -214,16 +214,36 @@ namespace Kistl.Server.SchemaManagement
             var dbType = prop.GetDbType();
             var size = prop.GetSize();
             var scale = prop.GetScale();
+            var def = SchemaManager.GetDefaultContraint(prop);
             Log.InfoFormat("New not nullable ValueType Property: [{0}.{1}] (col:{2})", prop.ObjectClass.Name, prop.Name, colName);
             if (!db.CheckTableContainsData(tblName))
             {
-                db.CreateColumn(tblName, colName, dbType, size, scale, false);
+                db.CreateColumn(tblName, colName, dbType, size, scale, false, def);
             }
             else
             {
-                db.CreateColumn(tblName, colName, dbType, size, scale, true);
+                db.CreateColumn(tblName, colName, dbType, size, scale, true, def);
                 Log.ErrorFormat("unable to create new not nullable ValueType Property '{0}' when table '{1}' contains data. Created nullable column instead.", colName, tblName);
             }
+        }
+        #endregion
+
+        #region ChangeDefaultValue
+        public bool IsChangeDefaultValue(Property prop)
+        {
+            var saved = savedSchema.FindPersistenceObject<Property>(prop.ExportGuid);
+            if (saved == null) return false;
+            if (saved.DefaultValue == null && prop.DefaultValue == null) return false;
+            return 
+                (saved.DefaultValue != null && prop.DefaultValue == null)
+                || (saved.DefaultValue == null && prop.DefaultValue != null)
+                || (saved.DefaultValue.ExportGuid != prop.DefaultValue.ExportGuid);
+        }
+        public void DoChangeDefaultValue(ObjectClass objClass, ValueTypeProperty prop, string prefix)
+        {
+            string tblName = objClass.TableName;
+            string colName = Construct.NestedColumnName(prop, prefix);
+            db.AlterColumn(tblName, colName, prop.GetDbType(), prop.GetSize(), prop.GetScale(), prop.IsNullable(), SchemaManager.GetDefaultContraint(prop));
         }
         #endregion
 
@@ -245,8 +265,7 @@ namespace Kistl.Server.SchemaManagement
             }
             else
             {
-                db.AlterColumn(tblName, colName, prop.GetDbType(),
-                    prop.GetSize(), prop.GetScale(), prop.IsNullable());
+                db.AlterColumn(tblName, colName, prop.GetDbType(), prop.GetSize(), prop.GetScale(), prop.IsNullable(), null);
             }
         }
         #endregion
@@ -263,8 +282,7 @@ namespace Kistl.Server.SchemaManagement
             string tblName = objClass.TableName;
             string colName = Construct.NestedColumnName(prop, prefix);
 
-            db.AlterColumn(tblName, colName, prop.GetDbType(),
-                prop.GetSize(), prop.GetScale(), prop.IsNullable());
+            db.AlterColumn(tblName, colName, prop.GetDbType(), prop.GetSize(), prop.GetScale(), prop.IsNullable(), null);
         }
         #endregion
 
@@ -312,13 +330,13 @@ namespace Kistl.Server.SchemaManagement
             bool hasPersistentOrder = prop.HasPersistentOrder;
 
             db.CreateTable(tblName, true);
-            db.CreateColumn(tblName, fkName, System.Data.DbType.Int32, 0, 0, false);
+            db.CreateColumn(tblName, fkName, System.Data.DbType.Int32, 0, 0, false, null);
 
-            db.CreateColumn(tblName, valPropName, prop.GetDbType(), prop.GetSize(), prop.GetScale(), false);
+            db.CreateColumn(tblName, valPropName, prop.GetDbType(), prop.GetSize(), prop.GetScale(), false, SchemaManager.GetDefaultContraint(prop));
 
             if (hasPersistentOrder)
             {
-                db.CreateColumn(tblName, valPropIndexName, System.Data.DbType.Int32, 0, 0, false);
+                db.CreateColumn(tblName, valPropIndexName, System.Data.DbType.Int32, 0, 0, false, null);
             }
             db.CreateFKConstraint(tblName, objClass.TableName, fkName, prop.GetAssociationName(), true);
         }
@@ -342,18 +360,18 @@ namespace Kistl.Server.SchemaManagement
             bool hasPersistentOrder = prop.HasPersistentOrder;
 
             db.CreateTable(tblName, true);
-            db.CreateColumn(tblName, fkName, System.Data.DbType.Int32, 0, 0, false);
+            db.CreateColumn(tblName, fkName, System.Data.DbType.Int32, 0, 0, false, null);
 
-            db.CreateColumn(tblName, valPropName, System.Data.DbType.Boolean, 0, 0, false);
+            db.CreateColumn(tblName, valPropName, System.Data.DbType.Boolean, 0, 0, false, null);
             // TODO: Support neested CompoundObject
             foreach (ValueTypeProperty p in prop.CompoundObjectDefinition.Properties)
             {
-                db.CreateColumn(tblName, valPropName + "_" + p.Name, p.GetDbType(), p.GetSize(), p.GetScale(), true);
+                db.CreateColumn(tblName, valPropName + "_" + p.Name, p.GetDbType(), p.GetSize(), p.GetScale(), true, SchemaManager.GetDefaultContraint(prop));
             }
 
             if (hasPersistentOrder)
             {
-                db.CreateColumn(tblName, valPropIndexName, System.Data.DbType.Int32, 0, 0, false);
+                db.CreateColumn(tblName, valPropIndexName, System.Data.DbType.Int32, 0, 0, false, null);
             }
             db.CreateFKConstraint(tblName, objClass.TableName, fkName, prop.GetAssociationName(), true);
         }
@@ -420,7 +438,7 @@ namespace Kistl.Server.SchemaManagement
             string tblName = relEnd.Type.TableName;
             string colName = Construct.ListPositionColumnName(otherEnd);
             // always allow nulls for items missing a definite order
-            db.CreateColumn(tblName, colName, System.Data.DbType.Int32, 0, 0, true);
+            db.CreateColumn(tblName, colName, System.Data.DbType.Int32, 0, 0, true, null);
         }
         #endregion
 
@@ -492,7 +510,7 @@ namespace Kistl.Server.SchemaManagement
             string tblName = relEnd.Type.TableName;
             string colName = Construct.ForeignKeyColumnName(otherEnd);
 
-            db.AlterColumn(tblName, colName, System.Data.DbType.Int32, 0, 0, otherEnd.IsNullable());
+            db.AlterColumn(tblName, colName, System.Data.DbType.Int32, 0, 0, otherEnd.IsNullable(), null);
         }
         #endregion
 
@@ -535,7 +553,7 @@ namespace Kistl.Server.SchemaManagement
             }
             else
             {
-                db.AlterColumn(tblName, colName, System.Data.DbType.Int32, 0, 0, otherEnd.IsNullable());
+                db.AlterColumn(tblName, colName, System.Data.DbType.Int32, 0, 0, otherEnd.IsNullable(), null);
             }
         }
         #endregion
@@ -662,13 +680,13 @@ namespace Kistl.Server.SchemaManagement
             }
             else
             {
-                db.CreateColumn(destTblName, destColName, System.Data.DbType.Int32, 0, 0, true);
+                db.CreateColumn(destTblName, destColName, System.Data.DbType.Int32, 0, 0, true, null);
                 db.MigrateFKs(srcTblName, srcColName, destTblName, destColName);
                 if (!otherEnd.IsNullable())
                 {
                     if (!db.CheckColumnContainsNulls(destTblName, destColName))
                     {
-                        db.AlterColumn(destTblName, destColName, System.Data.DbType.Int32, 0, 0, false);
+                        db.AlterColumn(destTblName, destColName, System.Data.DbType.Int32, 0, 0, false, null);
                     }
                     else
                     {
@@ -681,7 +699,7 @@ namespace Kistl.Server.SchemaManagement
             if (isIndexed)
             {
                 Log.InfoFormat("Creating position column '{0}.{1}'", destTblName, destIndexName);
-                db.CreateColumn(destTblName, destIndexName, System.Data.DbType.Int32, 0, 0, true);
+                db.CreateColumn(destTblName, destIndexName, System.Data.DbType.Int32, 0, 0, true, null);
             }
 
             // Cleanup
@@ -1238,7 +1256,7 @@ namespace Kistl.Server.SchemaManagement
             if (isIndexed)
             {
                 Log.InfoFormat("Creating position column '{0}.{1}'", tblName, indexName);
-                db.CreateColumn(tblName, indexName, System.Data.DbType.Int32, 0, 0, true);
+                db.CreateColumn(tblName, indexName, System.Data.DbType.Int32, 0, 0, true, null);
             }
         }
         #endregion
@@ -1258,7 +1276,7 @@ namespace Kistl.Server.SchemaManagement
             string tblName = rel.GetRelationTableName();
             string fkName = rel.GetRelationFkColumnName(role);
 
-            db.CreateColumn(tblName, fkName + Kistl.API.Helper.PositionSuffix, System.Data.DbType.Int32, 0, 0, true);
+            db.CreateColumn(tblName, fkName + Kistl.API.Helper.PositionSuffix, System.Data.DbType.Int32, 0, 0, true, null);
         }
         #endregion
 
@@ -1318,21 +1336,21 @@ namespace Kistl.Server.SchemaManagement
 
             db.CreateTable(tblName, true);
 
-            db.CreateColumn(tblName, fkAName, System.Data.DbType.Int32, 0, 0, false);
+            db.CreateColumn(tblName, fkAName, System.Data.DbType.Int32, 0, 0, false, null);
             if (rel.NeedsPositionStorage(RelationEndRole.A))
             {
-                db.CreateColumn(tblName, fkAName + Kistl.API.Helper.PositionSuffix, System.Data.DbType.Int32, 0, 0, true);
+                db.CreateColumn(tblName, fkAName + Kistl.API.Helper.PositionSuffix, System.Data.DbType.Int32, 0, 0, true, null);
             }
 
-            db.CreateColumn(tblName, fkBName, System.Data.DbType.Int32, 0, 0, false);
+            db.CreateColumn(tblName, fkBName, System.Data.DbType.Int32, 0, 0, false, null);
             if (rel.NeedsPositionStorage(RelationEndRole.B))
             {
-                db.CreateColumn(tblName, fkBName + Kistl.API.Helper.PositionSuffix, System.Data.DbType.Int32, 0, 0, true);
+                db.CreateColumn(tblName, fkBName + Kistl.API.Helper.PositionSuffix, System.Data.DbType.Int32, 0, 0, true, null);
             }
 
             if (rel.A.Type.ImplementsIExportable() && rel.B.Type.ImplementsIExportable())
             {
-                db.CreateColumn(tblName, "ExportGuid", System.Data.DbType.Guid, 0, 0, false);
+                db.CreateColumn(tblName, "ExportGuid", System.Data.DbType.Guid, 0, 0, false, new NewGuidDefaultConstraint());
             }
 
             db.CreateFKConstraint(tblName, rel.A.Type.TableName, fkAName, rel.GetRelationAssociationName(RelationEndRole.A), false);
@@ -1419,11 +1437,11 @@ namespace Kistl.Server.SchemaManagement
         {
             if (otherEnd.IsNullable() || !db.CheckTableContainsData(tblName))
             {
-                db.CreateColumn(tblName, colName, System.Data.DbType.Int32, 0, 0, otherEnd.IsNullable());
+                db.CreateColumn(tblName, colName, System.Data.DbType.Int32, 0, 0, otherEnd.IsNullable(), null);
             }
             else
             {
-                db.CreateColumn(tblName, colName, System.Data.DbType.Int32, 0, 0, true);
+                db.CreateColumn(tblName, colName, System.Data.DbType.Int32, 0, 0, true, null);
                 Log.ErrorFormat("Unable to create NOT NULL column, since table contains data. Created nullable column instead");
             }
         }
@@ -1491,7 +1509,7 @@ namespace Kistl.Server.SchemaManagement
                 {
                     if (!db.CheckColumnContainsNulls(destTbl, destCol))
                     {
-                        db.AlterColumn(destTbl, destCol, System.Data.DbType.Int32, 0, 0, false);
+                        db.AlterColumn(destTbl, destCol, System.Data.DbType.Int32, 0, 0, false, null);
                     }
                     else
                     {
@@ -1528,7 +1546,7 @@ namespace Kistl.Server.SchemaManagement
             string tblName = relEnd.Type.TableName;
             string colName = Construct.ForeignKeyColumnName(otherEnd);
 
-            db.AlterColumn(tblName, colName, System.Data.DbType.Int32, 0, 0, otherEnd.IsNullable());
+            db.AlterColumn(tblName, colName, System.Data.DbType.Int32, 0, 0, otherEnd.IsNullable(), null);
         }
         #endregion
 
@@ -1559,7 +1577,7 @@ namespace Kistl.Server.SchemaManagement
             }
             else
             {
-                db.AlterColumn(tblName, colName, System.Data.DbType.Int32, 0, 0, otherEnd.IsNullable());
+                db.AlterColumn(tblName, colName, System.Data.DbType.Int32, 0, 0, otherEnd.IsNullable(), null);
             }
         }
         #endregion
@@ -1641,8 +1659,8 @@ namespace Kistl.Server.SchemaManagement
             string tblRightsName = Construct.SecurityRulesTableName(objClass);
 
             db.CreateTable(tblRightsName, false, false);
-            db.CreateColumn(tblRightsName, "Identity", System.Data.DbType.Int32, 0, 0, false);
-            db.CreateColumn(tblRightsName, "Right", System.Data.DbType.Int32, 0, 0, false);
+            db.CreateColumn(tblRightsName, "Identity", System.Data.DbType.Int32, 0, 0, false, null);
+            db.CreateColumn(tblRightsName, "Right", System.Data.DbType.Int32, 0, 0, false, null);
 
             db.CreateIndex(tblRightsName, Construct.SecurityRulesIndexName(objClass), true, true, "ID", "Identity");
             db.CreateFKConstraint(tblRightsName, objClass.TableName, "ID", Construct.SecurityRulesFKName(objClass), true);
@@ -1873,14 +1891,13 @@ namespace Kistl.Server.SchemaManagement
         {
             string colName_IsNull = Construct.NestedColumnName(sprop, prefix);
             Log.InfoFormat("New is null column for CompoundObject Property: '{0}' ('{1}')", sprop.Name, colName_IsNull);
-            db.CreateColumn(objClass.TableName, colName_IsNull, System.Data.DbType.Boolean, 0, 0, false);
+            db.CreateColumn(objClass.TableName, colName_IsNull, System.Data.DbType.Boolean, 0, 0, false, null);
 
             foreach (var valProp in sprop.CompoundObjectDefinition.Properties.OfType<ValueTypeProperty>())
             {
                 var colName = Construct.NestedColumnName(valProp, colName_IsNull);
                 Log.InfoFormat("New nullable ValueType Property: '{0}' ('{1}')", valProp.Name, colName);
-                db.CreateColumn(objClass.TableName, colName, valProp.GetDbType(),
-                    valProp.GetSize(), valProp.GetScale(), valProp.IsNullable());
+                db.CreateColumn(objClass.TableName, colName, valProp.GetDbType(), valProp.GetSize(), valProp.GetScale(), valProp.IsNullable(), SchemaManager.GetDefaultContraint(valProp));
             }
 
             // TODO: Add neested CompoundObjectProperty

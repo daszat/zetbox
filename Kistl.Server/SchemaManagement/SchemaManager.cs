@@ -71,7 +71,7 @@ namespace Kistl.Server.SchemaManagement
         public class JoinListException : Exception
         {
             public JoinListException()
-            {                
+            {
             }
 
             public JoinListException(string message)
@@ -88,7 +88,7 @@ namespace Kistl.Server.SchemaManagement
             {
             }
         }
-        
+
         public static IList<Join> CreateJoinList(ObjectClass objClass, IEnumerable<Relation> relations)
         {
             return CreateJoinList(objClass, relations, null);
@@ -153,7 +153,22 @@ namespace Kistl.Server.SchemaManagement
                 if (rel == until) return result;
             }
             return result;
-        }        
+        }
+        #endregion
+
+        #region Helper
+        public static DefaultConstraint GetDefaultContraint(Property prop)
+        {
+            if (prop == null) throw new ArgumentNullException("prop");
+            if (prop.DefaultValue is Kistl.App.Base.NewGuidDefaultValue)
+            {
+                return new NewGuidDefaultConstraint();
+            }
+            else
+            {
+                return null;
+            }
+        }
         #endregion
 
         #region SavedSchema
