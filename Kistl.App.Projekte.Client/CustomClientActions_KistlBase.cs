@@ -117,6 +117,11 @@ namespace Kistl.App.Base
             e.Result = "System.Int32";
         }
 
+        public static void OnGetPropertyTypeString_DecimalProperty(DecimalProperty obj, MethodReturnEventArgs<string> e)
+        {
+            e.Result = "System.Decimal";
+        }
+
         public static void OnGetPropertyTypeString_DateTimeProperty(DateTimeProperty obj, MethodReturnEventArgs<string> e)
         {
             e.Result = "System.DateTime";

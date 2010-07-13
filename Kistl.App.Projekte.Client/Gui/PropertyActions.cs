@@ -24,6 +24,7 @@ namespace Kistl.App.Projekte.Gui
         public static readonly Guid ViewModelDescriptor_NullableValuePropertyModel_Double = new Guid("3a3d0c1c-679e-4d4d-adeb-3ab260079ccb");
         public static readonly Guid ViewModelDescriptor_NullableValuePropertyModel_Enum = new Guid("a6ff986c-a485-4c4d-947c-e59d14112ec2");
         public static readonly Guid ViewModelDescriptor_NullableValuePropertyModel_Int = new Guid("edaf9334-dc36-4778-aa33-1e5cdaeeb767");
+        public static readonly Guid ViewModelDescriptor_NullableValuePropertyModel_Decimal = new Guid("481d7a65-208c-4706-8d4d-64ea629a109c");
         public static readonly Guid ViewModelDescriptor_NullableValuePropertyModel_Guid = new Guid("2B6FB70F-A382-4057-A139-CC33333D619D");
         public static readonly Guid ViewModelDescriptor_ObjectReferenceModel = new Guid("83aae6fd-0fae-4348-b313-737a6e751027");
         public static readonly Guid ViewModelDescriptor_ObjectListModel = new Guid("9fce01fe-fd6d-4e21-8b55-08d5e38aea36");
@@ -58,6 +59,11 @@ namespace Kistl.App.Projekte.Gui
         public static void OnNotifyCreated_IntProperty(Kistl.App.Base.IntProperty obj)
         {
             obj.ValueModelDescriptor = obj.Context.FindPersistenceObject<ViewModelDescriptor>(ViewModelDescriptor_NullableValuePropertyModel_Int);
+        }
+
+        public static void OnNotifyCreated_DecimalProperty(Kistl.App.Base.DecimalProperty obj)
+        {
+            obj.ValueModelDescriptor = obj.Context.FindPersistenceObject<ViewModelDescriptor>(ViewModelDescriptor_NullableValuePropertyModel_Decimal);
         }
 
         public static void OnNotifyCreated_ObjectReferenceProperty(Kistl.App.Base.ObjectReferenceProperty obj)
