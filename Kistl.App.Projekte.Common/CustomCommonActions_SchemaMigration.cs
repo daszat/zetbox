@@ -89,13 +89,15 @@ namespace ZBox.App.SchemaMigration
                 case ColumnType.Guid:
                     p = obj.Context.Create<GuidProperty>();
                     break;
+                case ColumnType.Currency:
                 case ColumnType.Decimal:
                 case ColumnType.VarNumeric:
                     p = obj.Context.Create<DecimalProperty>();
+                    ((DecimalProperty)p).Precision = (int)obj.Size;
+                    ((DecimalProperty)p).Scale = 2;
                     break;
 
                 case ColumnType.Binary:
-                case ColumnType.Currency:
                 case ColumnType.DateTimeOffset:
                 case ColumnType.Int64:
                 case ColumnType.Object:
