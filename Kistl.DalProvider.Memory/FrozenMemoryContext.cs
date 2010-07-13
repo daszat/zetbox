@@ -14,5 +14,19 @@ namespace Kistl.DalProvider.Memory
             : base(iftFactory, lazyCtx, implTypeFactory)
         {
         }
+
+        private bool _sealed = false;
+        public override bool IsReadonly
+        {
+            get
+            {
+                return _sealed;
+            }
+        }
+
+        internal void Seal()
+        {
+            _sealed = true;
+        }
     }
 }

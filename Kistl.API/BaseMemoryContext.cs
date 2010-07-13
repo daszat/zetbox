@@ -207,7 +207,7 @@ namespace Kistl.API
         public bool IsDisposed { get; private set; }
 
         /// <summary>This context is read/write.</summary>
-        public bool IsReadonly
+        public virtual bool IsReadonly
         {
             get
             {

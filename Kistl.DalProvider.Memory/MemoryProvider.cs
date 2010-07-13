@@ -54,6 +54,7 @@ namespace Kistl.DalProvider.Memory
                             () => memCtx,
                             c.Resolve<MemoryImplementationType.MemoryFactory>());
                         Importer.LoadFromXml(memCtx, generatedAssembly.GetManifestResourceStream("Kistl.Objects.Memory.FrozenObjects.xml"));
+                        memCtx.Seal();
                         return memCtx;
                     })
                     .As<IFrozenContext>()
