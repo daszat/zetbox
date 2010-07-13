@@ -58,6 +58,14 @@
 				}
 			}
 			
+			string precScaleAttr = String.Empty;
+			if (p is DecimalProperty)
+			{
+				DecimalProperty dp = (DecimalProperty)p;
+				// must have one space at the end
+				precScaleAttr = String.Format("Precision=\"{0}\" Scale=\"{1}\" ", dp.Precision, dp.Scale);
+			}
+			
 			string nullableAttr = String.Empty;
 			if (p.IsValueTypePropertySingle())
 			{
@@ -65,7 +73,7 @@
 				nullableAttr = String.Format("Nullable=\"{0}\" ", ((Property)p).IsNullable().ToString().ToLowerInvariant());
 			}
 %>
-    <Property Name="<%= propertyName %>" Type="<%= sqlTypeName %>" <%= maxLengthAttr %><%= nullableAttr %>/>
+    <Property Name="<%= propertyName %>" Type="<%= sqlTypeName %>" <%= maxLengthAttr %><%= precScaleAttr %><%= nullableAttr %>/>
 <%
 		}
 	}

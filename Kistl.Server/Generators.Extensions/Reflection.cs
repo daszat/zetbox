@@ -70,6 +70,10 @@ namespace Kistl.Server.Generators.Extensions
             {
                 return "int" + (prop.IsNullable() ? "?" : String.Empty);
             }
+            else if (prop is DecimalProperty)
+            {
+                return "decimal" + (prop.IsNullable() ? "?" : String.Empty);
+            }
             else if (prop is DoubleProperty)
             {
                 return "double" + (prop.IsNullable() ? "?" : String.Empty);

@@ -104,8 +104,8 @@ namespace Kistl.API.Server
         void CreateTable(string tbl, IEnumerable<Column> cols);
         void CreateTable(string tblName, bool idAsIdentityColumn);
         void CreateTable(string tblName, bool idAsIdentityColumn, bool createPrimaryKey);
-        void CreateColumn(string tblName, string colName, System.Data.DbType type, int size, bool isNullable);
-        void AlterColumn(string tblName, string colName, System.Data.DbType type, int size, bool isNullable);
+        void CreateColumn(string tblName, string colName, System.Data.DbType type, int size, int scale, bool isNullable);
+        void AlterColumn(string tblName, string colName, System.Data.DbType type, int size, int scale, bool isNullable);
         void CreateFKConstraint(string tblName, string refTblName, string colName, string constraintName, bool onDeleteCascade);
 
         void RenameTable(string oldTblName, string newTblName);

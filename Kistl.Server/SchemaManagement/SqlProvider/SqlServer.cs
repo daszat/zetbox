@@ -513,17 +513,17 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
             ExecuteNonQuery(sb.ToString());
         }
 
-        public void CreateColumn(string tblName, string colName, System.Data.DbType type, int size, bool isNullable)
+        public void CreateColumn(string tblName, string colName, System.Data.DbType type, int size, int scale, bool isNullable)
         {
-            DoColumn(true, tblName, colName, type, size, isNullable);
+            DoColumn(true, tblName, colName, type, size, scale, isNullable);
         }
 
-        public void AlterColumn(string tblName, string colName, System.Data.DbType type, int size, bool isNullable)
+        public void AlterColumn(string tblName, string colName, System.Data.DbType type, int size, int scale, bool isNullable)
         {
-            DoColumn(false, tblName, colName, type, size, isNullable);
+            DoColumn(false, tblName, colName, type, size, scale, isNullable);
         }
 
-        private void DoColumn(bool add, string tblName, string colName, System.Data.DbType type, int size, bool isNullable)
+        private void DoColumn(bool add, string tblName, string colName, System.Data.DbType type, int size, int scale, bool isNullable)
         {
             StringBuilder sb = new StringBuilder();
 
@@ -553,6 +553,11 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
                 {
                     strSize = string.Format("({0})", size);
                 }
+                else if (size > 0 && type.In(System.Data.DbType.Decimal, System.Data.DbType.VarNumeric))
+                {
+                    strSize = string.Format("({0}, {1})", size, scale);
+                }
+
                 string typeString = DbTypeToNative(type) + strSize;
                 Log.DebugFormat("[{0}] table [{1}] column [{2}] [{3}] [{4}]", addOrAlter, tblName, colName, typeString, nullable);
                 sb.AppendFormat("ALTER TABLE [{0}] {1}  [{2}] {3} {4}", tblName, addOrAlter, colName,

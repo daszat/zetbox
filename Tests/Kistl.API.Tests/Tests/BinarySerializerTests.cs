@@ -233,6 +233,68 @@ namespace Kistl.API.Tests
 			}
 		}
 
+        [TestFixture]
+        public class when_serializing_decimals : BinarySerializerTests
+        {
+            [Datapoints]
+            public readonly decimal[] Values = new[] { decimal.MinValue, -257.12m, -256.0m, -255m, -1m, 0m, 1m, 255m, 256m, 257.092m, decimal.MaxValue };
+
+            [Theory]
+            public void should_roundtrip(decimal value)
+            {
+                BinarySerializer.ToStream(value, sw);
+                ms.Seek(0, SeekOrigin.Begin);
+
+                int readValue;
+                BinarySerializer.FromStream(out readValue, sr);
+                Assert.That(readValue, Is.EqualTo(value));
+            }
+
+            [Theory]
+            public void should_fail_on_writing_to_null_stream(decimal value)
+            {
+                Assert.That(() => BinarySerializer.ToStream(value, null), Throws.InstanceOf<ArgumentNullException>());
+            }
+
+            [Test]
+            public void should_fail_on_reading_from_null_stream()
+            {
+                decimal value;
+                Assert.That(() => BinarySerializer.FromStream(out value, null), Throws.InstanceOf<ArgumentNullException>());
+            }
+        }
+
+        [TestFixture]
+        public class when_serializing_nullable_decimals : BinarySerializerTests
+        {
+            [Datapoints]
+            public readonly decimal?[] Values = new decimal?[] { decimal.MinValue, -257.45m, -256m, -255.18m, -1m, 0m, 1m, 255m, 256.078m, 257m, decimal.MaxValue, null };
+
+            [Theory]
+            public void should_roundtrip(decimal? value)
+            {
+                BinarySerializer.ToStream(value, sw);
+                ms.Seek(0, SeekOrigin.Begin);
+
+                int? readValue;
+                BinarySerializer.FromStream(out readValue, sr);
+                Assert.That(readValue, Is.EqualTo(value));
+            }
+
+            [Theory]
+            public void should_fail_on_writing_to_null_stream(int? value)
+            {
+                Assert.That(() => BinarySerializer.ToStream(value, null), Throws.InstanceOf<ArgumentNullException>());
+            }
+
+            [Test]
+            public void should_fail_on_reading_from_null_stream()
+            {
+                decimal? value;
+                Assert.That(() => BinarySerializer.FromStream(out value, null), Throws.InstanceOf<ArgumentNullException>());
+            }
+        }
+
 		[TestFixture]
 		public class when_serializing_floats : BinarySerializerTests
 		{

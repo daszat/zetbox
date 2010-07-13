@@ -376,6 +376,61 @@ namespace Kistl.API
 		}
 
 		#endregion
+        
+        #region decimal
+
+        /// <summary>
+        /// Serialize a decimal
+        /// </summary>
+        /// <param name="val">Value to serialize,</param>
+        /// <param name="sw">BinaryWrite to serialize to.</param>
+        public static void ToStream(decimal val, BinaryWriter sw)
+        {
+            if (sw == null) throw new ArgumentNullException("sw");
+            SerializerTrace("CurrentPos: {0}", sw.BaseStream.Position);
+            SerializerTrace("Writing int {0} (four bytes)", val);
+            sw.Write(val);
+        }
+
+        /// <summary>
+        /// Deserialize a decimal
+        /// </summary>
+        /// <param name="val">Destination Value.</param>
+        /// <param name="sr">BinaryReader to deserialize from.</param>
+        public static void FromStream(out decimal val, BinaryReader sr)
+        {
+            if (sr == null) throw new ArgumentNullException("sr");
+            SerializerTrace("CurrentPos: {0}", sr.BaseStream.Position);
+            val = sr.ReadDecimal();
+            SerializerTrace("read int {0} (4 bytes)", val);
+        }
+
+        /// <summary>
+        /// Serialize a nullable decimal. Format is: NULL (true/false), Value (if not null).
+        /// </summary>
+        /// <param name="val">Value to serialize,</param>
+        /// <param name="sw">BinaryWrite to serialize to.</param>
+        public static void ToStream(decimal? val, BinaryWriter sw)
+        {
+            if (sw == null) throw new ArgumentNullException("sw");
+            SerializerTrace("CurrentPos: {0}", sw.BaseStream.Position);
+            SerializerTrace("Writing int? {0}", val);
+            if (val.HasValue) { sw.Write(true); sw.Write(val.Value); } else sw.Write(false);
+        }
+        /// <summary>
+        /// Deserialize a nullable decimal, expected format: NULL (true/false), Value (if not null).
+        /// </summary>
+        /// <param name="val">Destination Value.</param>
+        /// <param name="sr">BinaryReader to deserialize from.</param>
+        public static void FromStream(out decimal? val, BinaryReader sr)
+        {
+            if (sr == null) throw new ArgumentNullException("sr");
+            SerializerTrace("CurrentPos: {0}", sr.BaseStream.Position);
+            val = sr.ReadBoolean() ? (decimal?)sr.ReadDecimal() : null;
+            SerializerTrace("read int? {0}", val);
+        }
+
+        #endregion
 
 		#region ICompoundObject
 

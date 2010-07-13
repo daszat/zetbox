@@ -354,6 +354,10 @@
 			var sProp = (StringProperty)prop;
 			constraint += String.Format("MaxLength=\"{0}\" ", sProp.GetMaxLength());
 		}
+		if (prop is DecimalProperty) {
+			var dProp = (DecimalProperty)prop;
+			constraint += String.Format("Precision=\"{0}\" Scale=\"{1}\" ", dProp.Precision, dProp.Scale);
+		}
 
 %>
     <EntityType Name="<%= entryTypeName %>" >

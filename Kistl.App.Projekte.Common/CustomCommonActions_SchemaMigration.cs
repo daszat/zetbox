@@ -89,11 +89,14 @@ namespace ZBox.App.SchemaMigration
                 case ColumnType.Guid:
                     p = obj.Context.Create<GuidProperty>();
                     break;
+                case ColumnType.Decimal:
+                case ColumnType.VarNumeric:
+                    p = obj.Context.Create<DecimalProperty>();
+                    break;
 
                 case ColumnType.Binary:
                 case ColumnType.Currency:
                 case ColumnType.DateTimeOffset:
-                case ColumnType.Decimal:
                 case ColumnType.Int64:
                 case ColumnType.Object:
                 case ColumnType.SByte:
@@ -101,7 +104,6 @@ namespace ZBox.App.SchemaMigration
                 case ColumnType.UInt16:
                 case ColumnType.UInt32:
                 case ColumnType.UInt64:
-                case ColumnType.VarNumeric:
                 case ColumnType.Xml:
                 default:
                     throw new NotSupportedException("Unknown DbType " + obj.DbType);

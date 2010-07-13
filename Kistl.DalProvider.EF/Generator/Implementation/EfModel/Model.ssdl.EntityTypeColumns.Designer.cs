@@ -75,6 +75,14 @@ ApplyEntityTypeColumnDefs(
 				}
 			}
 			
+			string precScaleAttr = String.Empty;
+			if (p is DecimalProperty)
+			{
+				DecimalProperty dp = (DecimalProperty)p;
+				// must have one space at the end
+				precScaleAttr = String.Format("Precision=\"{0}\" Scale=\"{1}\" ", dp.Precision, dp.Scale);
+			}
+			
 			string nullableAttr = String.Empty;
 			if (p.IsValueTypePropertySingle())
 			{
@@ -82,9 +90,9 @@ ApplyEntityTypeColumnDefs(
 				nullableAttr = String.Format("Nullable=\"{0}\" ", ((Property)p).IsNullable().ToString().ToLowerInvariant());
 			}
 
-#line 68 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.ssdl.EntityTypeColumns.cst"
-this.WriteObjects("    <Property Name=\"",  propertyName , "\" Type=\"",  sqlTypeName , "\" ",  maxLengthAttr , "",  nullableAttr , "/>\r\n");
-#line 70 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.ssdl.EntityTypeColumns.cst"
+#line 76 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.ssdl.EntityTypeColumns.cst"
+this.WriteObjects("    <Property Name=\"",  propertyName , "\" Type=\"",  sqlTypeName , "\" ",  maxLengthAttr , "",  precScaleAttr , "",  nullableAttr , "/>\r\n");
+#line 78 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.ssdl.EntityTypeColumns.cst"
 }
 	}
 

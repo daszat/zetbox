@@ -231,6 +231,41 @@ namespace Kistl.API
         }
         #endregion
 
+        #region decimal
+        public static void ToStream(decimal val, XmlWriter xml, string name, string ns)
+        {
+            if (xml == null) { throw new ArgumentNullException("xml"); }
+
+            xml.WriteElementString(name, ns, XmlConvert.ToString(val));
+        }
+        public static void ToStream(decimal? val, XmlWriter xml, string name, string ns)
+        {
+            if (xml == null) { throw new ArgumentNullException("xml"); }
+
+            if (!val.HasValue) return;
+            xml.WriteElementString(name, ns, XmlConvert.ToString(val.Value));
+        }
+
+        public static void FromStream(ref decimal val, XmlReader xml, string name, string ns)
+        {
+            if (xml == null) { throw new ArgumentNullException("xml"); }
+
+            if (xml.LocalName == name && xml.NamespaceURI == ns)
+            {
+                val = xml.ReadElementContentAsDecimal();
+            }
+        }
+        public static void FromStream(ref decimal? val, XmlReader xml, string name, string ns)
+        {
+            if (xml == null) { throw new ArgumentNullException("xml"); }
+
+            if (xml.LocalName == name && xml.NamespaceURI == ns)
+            {
+                val = xml.ReadElementContentAsDecimal();
+            }
+        }
+        #endregion
+
         #region string
         public static void ToStream(string val, XmlWriter xml, string name, string ns)
         {

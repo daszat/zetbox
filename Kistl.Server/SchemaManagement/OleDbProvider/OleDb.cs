@@ -353,12 +353,12 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
             throw new NotSupportedException();
         }
 
-        public void CreateColumn(string tblName, string colName, System.Data.DbType type, int size, bool isNullable)
+        public void CreateColumn(string tblName, string colName, System.Data.DbType type, int size, int scale, bool isNullable)
         {
             throw new NotSupportedException();
         }
 
-        public void AlterColumn(string tblName, string colName, System.Data.DbType type, int size, bool isNullable)
+        public void AlterColumn(string tblName, string colName, System.Data.DbType type, int size, int scale, bool isNullable)
         {
             throw new NotSupportedException();
         }

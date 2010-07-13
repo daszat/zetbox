@@ -57,6 +57,21 @@ namespace Kistl.App.Extensions
             return prop.Constraints.OfType<StringRangeConstraint>().FirstOrDefault();
         }
 
+        public static int GetSize(this Property prop)
+        {
+            if (prop == null) { throw new ArgumentNullException("prop"); }
+            if (prop is StringProperty) return GetMaxLength((StringProperty)prop);
+            if (prop is DecimalProperty) return ((DecimalProperty)prop).Precision;
+            return 0;
+        }
+
+        public static int GetScale(this Property prop)
+        {
+            if (prop == null) { throw new ArgumentNullException("prop"); }
+            if (prop is DecimalProperty) return ((DecimalProperty)prop).Scale;
+            return 0;
+        }
+
         public static int GetMaxLength(this StringProperty prop)
         {
             if (prop == null) { throw new ArgumentNullException("prop"); }

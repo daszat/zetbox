@@ -49,6 +49,10 @@ namespace Kistl.Client.Presentables
                 {
                     return "int";
                 }
+                else if (_prop is DecimalProperty)
+                {
+                    return "decimal";
+                }
                 else if (_prop is DoubleProperty)
                 {
                     return "double";

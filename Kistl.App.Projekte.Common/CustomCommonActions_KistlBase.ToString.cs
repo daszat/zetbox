@@ -244,6 +244,7 @@ namespace Kistl.App.Base
         /// <param name="e">The ToString MethodReturnEventArgs.</param>
         private static void FixupFloatingObjectsToString(IDataObject obj, MethodReturnEventArgs<string> e)
         {
+            if (obj.Context != null && obj.Context.IsReadonly) return;
             if (Helper.IsFloatingObject(obj))
             {
                 e.Result = String.Format("new {0}(#{1}): {2}", obj.GetType().Name, obj.ID, e.Result);
