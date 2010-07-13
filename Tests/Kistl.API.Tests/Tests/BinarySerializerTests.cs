@@ -245,7 +245,7 @@ namespace Kistl.API.Tests
                 BinarySerializer.ToStream(value, sw);
                 ms.Seek(0, SeekOrigin.Begin);
 
-                int readValue;
+                decimal readValue;
                 BinarySerializer.FromStream(out readValue, sr);
                 Assert.That(readValue, Is.EqualTo(value));
             }
@@ -276,13 +276,13 @@ namespace Kistl.API.Tests
                 BinarySerializer.ToStream(value, sw);
                 ms.Seek(0, SeekOrigin.Begin);
 
-                int? readValue;
+                decimal? readValue;
                 BinarySerializer.FromStream(out readValue, sr);
                 Assert.That(readValue, Is.EqualTo(value));
             }
 
             [Theory]
-            public void should_fail_on_writing_to_null_stream(int? value)
+            public void should_fail_on_writing_to_null_stream(decimal? value)
             {
                 Assert.That(() => BinarySerializer.ToStream(value, null), Throws.InstanceOf<ArgumentNullException>());
             }
