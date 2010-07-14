@@ -3,17 +3,16 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
 {
     using System;
     using System.Collections.Generic;
+    using System.Data;
     using System.Data.OleDb;
+    using System.IO;
     using System.Linq;
     using System.Text;
-
+    using System.Text.RegularExpressions;
     using Kistl.API;
     using Kistl.API.Configuration;
     using Kistl.API.Server;
     using Kistl.API.Utils;
-    using System.IO;
-    using System.Text.RegularExpressions;
-    using System.Data;
 
     public class OleDb
         : ISchemaProvider
@@ -93,6 +92,11 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
             return string.Format("{0}{1}{2}", quotePrefix ?? string.Empty, val, quoteSuffix ?? string.Empty);
         }
 
+        private string FormatTableName(TableRef tbl)
+        {
+            return String.Format("[{0}].[{1}]", tbl.Schema, tbl.Name);
+        }
+
         public string GetSavedSchema()
         {
             throw new NotSupportedException();
@@ -107,31 +111,31 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
             throw new NotSupportedException();
         }
 
-        public bool CheckTableExists(string tblName)
+        public bool CheckTableExists(TableRef tblName)
         {
             using (var cmd = new OleDbCommand("SELECT COUNT(*) FROM sys.objects WHERE object_id = OBJECT_ID(@table) AND type IN (N'U')", db, tx))
             {
-                cmd.Parameters.AddWithValue("@table", tblName);
+                cmd.Parameters.AddWithValue("@table", tblName.Name);
                 QueryLog.Debug(cmd.CommandText);
                 return (int)cmd.ExecuteScalar() > 0;
             }
         }
 
-        public bool CheckColumnExists(string tblName, string colName)
+        public bool CheckColumnExists(TableRef tblName, string colName)
         {
             using (var cmd = new OleDbCommand(@"SELECT COUNT(*) FROM sys.objects o INNER JOIN sys.columns c ON c.object_id=o.object_id
 	                                            WHERE o.object_id = OBJECT_ID(@table) 
 		                                            AND o.type IN (N'U')
 		                                            AND c.Name = @column", db, tx))
             {
-                cmd.Parameters.AddWithValue("@table", tblName);
+                cmd.Parameters.AddWithValue("@table", tblName.Name);
                 cmd.Parameters.AddWithValue("@column", colName);
                 QueryLog.Debug(cmd.CommandText);
                 return (int)cmd.ExecuteScalar() > 0;
             }
         }
 
-        public bool GetIsColumnNullable(string tblName, string colName)
+        public bool GetIsColumnNullable(TableRef tblName, string colName)
         {
             using (var cmd = new OleDbCommand(@"SELECT c.is_nullable FROM sys.objects o INNER JOIN sys.columns c ON c.object_id=o.object_id
 	                                            WHERE o.object_id = OBJECT_ID(@table) 
@@ -150,7 +154,7 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
             throw new NotImplementedException();
         }
 
-        public bool CheckViewExists(string viewName)
+        public bool CheckViewExists(TableRef viewName)
         {
             using (var cmd = new OleDbCommand("SELECT COUNT(*) FROM sys.objects WHERE object_id = OBJECT_ID(@view) AND type IN (N'V')", db, tx))
             {
@@ -160,7 +164,7 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
             }
         }
 
-        public bool CheckTriggerExists(string objName, string triggerName)
+        public bool CheckTriggerExists(TableRef objName, string triggerName)
         {
             throw new NotSupportedException();
         }
@@ -170,16 +174,16 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
             throw new NotSupportedException();
         }
 
-        public bool CheckTableContainsData(string tblName)
+        public bool CheckTableContainsData(TableRef tblName)
         {
-            using (var cmd = new OleDbCommand(string.Format("SELECT COUNT(*) FROM {0}", Quote(tblName)), db, tx))
+            using (var cmd = new OleDbCommand(string.Format("SELECT COUNT(*) FROM {0}", FormatTableName(tblName), db, tx)))
             {
                 QueryLog.Debug(cmd.CommandText);
                 return (int)cmd.ExecuteScalar() > 0;
             }
         }
 
-        public bool CheckColumnContainsNulls(string tblName, string colName)
+        public bool CheckColumnContainsNulls(TableRef tblName, string colName)
         {
             using (var cmd = new OleDbCommand(string.Format("SELECT COUNT(*) FROM (SELECT TOP 1 [{1}] FROM [{0}] WHERE [{1}] IS NULL) AS nulls", tblName, colName), db, tx))
             {
@@ -188,7 +192,7 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
             }
         }
 
-        public bool CheckColumnContainsUniqueValues(string tblName, string colName)
+        public bool CheckColumnContainsUniqueValues(TableRef tblName, string colName)
         {
             using (var cmd = new OleDbCommand(string.Format("SELECT COUNT(*) FROM (SELECT TOP 1 [{1}] FROM [{0}] WHERE [{1}] IS NOT NULL GROUP BY [{1}] HAVING COUNT([{1}]) > 1) AS tbl", tblName, colName), db, tx))
             {
@@ -197,7 +201,7 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
             }
         }
 
-        public bool CheckColumnContainsValues(string tblName, string colName)
+        public bool CheckColumnContainsValues(TableRef tblName, string colName)
         {
             using (var cmd = new OleDbCommand(string.Format("SELECT COUNT(*) FROM (SELECT TOP 1 [{1}] FROM [{0}] WHERE [{1}] IS NOT NULL) AS nulls", tblName, colName), db, tx))
             {
@@ -206,28 +210,33 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
             }
         }
 
-        public bool CheckPositionColumnValidity(string tblName, string posName)
+        public bool CheckPositionColumnValidity(TableRef tblName, string posName)
         {
             throw new NotSupportedException();
         }
 
-        public bool RepairPositionColumn(string tblName, string posName)
+        public bool RepairPositionColumn(TableRef tblName, string posName)
         {
             throw new NotSupportedException();
         }
 
-        public int GetColumnMaxLength(string tblName, string colName)
+        public int GetColumnMaxLength(TableRef tblName, string colName)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<string> GetTableNames()
+        public TableRef GetQualifiedTableName(string tblName)
+        {
+            return new TableRef(db.Database, "dbo", tblName);
+        }
+
+        public IEnumerable<TableRef> GetTableNames()
         {
             QueryLog.Debug("GetSchema(TABLES)");
             var tables = db.GetSchema(OleDbMetaDataCollectionNames.Tables, new string[] { null, null, null, "TABLE" });
             foreach (DataRow tbl in tables.Rows)
             {
-                yield return (string)tbl["TABLE_NAME"];
+                yield return GetQualifiedTableName((string)tbl["TABLE_NAME"]);
             }
         }
 
@@ -305,10 +314,10 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
             }
         }
 
-        public IEnumerable<Column> GetTableColumns(string tbl)
+        public IEnumerable<Column> GetTableColumns(TableRef tbl)
         {
             QueryLog.Debug("GetSchema(Columns)");
-            var columns = db.GetSchema(OleDbMetaDataCollectionNames.Columns, new string[] { null, null, tbl, null });
+            var columns = db.GetSchema(OleDbMetaDataCollectionNames.Columns, new string[] { null, null, tbl.Name, null });
             foreach (DataRow col in columns.Rows)
             {
                 int dt = (int)col["DATA_TYPE"];
@@ -328,52 +337,52 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
             }
         }
 
-        public IEnumerable<string> GetTableColumnNames(string tblName)
+        public IEnumerable<string> GetTableColumnNames(TableRef tblName)
         {
             QueryLog.Debug("GetSchema(Columns)");
-            var columns = db.GetSchema(OleDbMetaDataCollectionNames.Columns, new string[] { null, null, tblName, null });
+            var columns = db.GetSchema(OleDbMetaDataCollectionNames.Columns, new string[] { null, null, tblName.Name, null });
             foreach (DataRow col in columns.Rows)
             {
                 yield return (string)col["COLUMN_NAME"];
             }
         }
 
-        public void CreateTable(string tbl, IEnumerable<Column> cols)
+        public void CreateTable(TableRef tbl, IEnumerable<Column> cols)
         {
             throw new NotSupportedException();
         }
 
-        public void CreateTable(string tblName, bool idAsIdentityColumn)
+        public void CreateTable(TableRef tblName, bool idAsIdentityColumn)
         {
             CreateTable(tblName, idAsIdentityColumn, true);
         }
 
-        public void CreateTable(string tblName, bool idAsIdentityColumn, bool createPrimaryKey)
+        public void CreateTable(TableRef tblName, bool idAsIdentityColumn, bool createPrimaryKey)
         {
             throw new NotSupportedException();
         }
 
-        public void CreateColumn(string tblName, string colName, System.Data.DbType type, int size, int scale, bool isNullable, DefaultConstraint defContraint)
+        public void CreateColumn(TableRef tblName, string colName, DbType type, int size, int scale, bool isNullable, DefaultConstraint defConstraint)
         {
             throw new NotSupportedException();
         }
 
-        public void AlterColumn(string tblName, string colName, System.Data.DbType type, int size, int scale, bool isNullable, DefaultConstraint defContraint)
+        public void AlterColumn(TableRef tblName, string colName, DbType type, int size, int scale, bool isNullable, DefaultConstraint defConstraint)
         {
             throw new NotSupportedException();
         }
 
-        public void CreateFKConstraint(string tblName, string refTblName, string colName, string constraintName, bool onDeleteCascade)
+        public void CreateFKConstraint(TableRef tblName, TableRef refTblName, string colName, string constraintName, bool onDeleteCascade)
         {
             throw new NotSupportedException();
         }
 
-        public void DropTable(string tblName)
+        public void DropTable(TableRef tblName)
         {
             throw new NotSupportedException();
         }
 
-        public void TruncateTable(string tblName)
+        public void TruncateTable(TableRef tblName)
         {
             throw new NotSupportedException();
         }
@@ -400,12 +409,12 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
         //    }
         //}
 
-        public void DropColumn(string tblName, string colName)
+        public void DropColumn(TableRef tblName, string colName)
         {
             throw new NotSupportedException();
         }
 
-        public void DropFKConstraint(string tblName, string fkName)
+        public void DropFKConstraint(TableRef tblName, string fkName)
         {
             throw new NotSupportedException();
         }
@@ -415,7 +424,7 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
             throw new NotSupportedException();
         }
 
-        public void DropView(string viewName)
+        public void DropView(TableRef viewName)
         {
             throw new NotSupportedException();
         }
@@ -430,65 +439,65 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
             throw new NotSupportedException();
         }
 
-        public void CopyColumnData(string srcTblName, string srcColName, string tblName, string colName)
+        public void CopyColumnData(TableRef srcTblName, string srcColName, TableRef tblName, string colName)
         {
             Log.DebugFormat("Copying data from [{0}].[{1}] to [{2}].[{3}]", srcTblName, srcColName, tblName, colName);
             ExecuteNonQuery("UPDATE dest SET dest.[{0}] = src.[{1}] FROM [{2}] dest INNER JOIN [{3}] src ON dest.ID = src.ID",
                 colName, srcColName, tblName, srcTblName);
         }
 
-        public void MigrateFKs(string srcTblName, string srcColName, string tblName, string colName)
+        public void MigrateFKs(TableRef srcTblName, string srcColName, TableRef tblName, string colName)
         {
             Log.DebugFormat("Migrating FK data from [{0}].[{1}] to [{2}].[{3}]", srcTblName, srcColName, tblName, colName);
             ExecuteNonQuery("UPDATE dest SET dest.[{0}] = src.[ID] FROM [{2}] dest INNER JOIN [{3}] src ON dest.ID = src.[{1}]",
                 colName, srcColName, tblName, srcTblName);
         }
 
-        public void InsertFKs(string srcTblName, string srcColName, string tblName, string colName, string fkColName)
+        public void InsertFKs(TableRef srcTblName, string srcColName, TableRef tblName, string colName, string fkColName)
         {
             Log.DebugFormat("Inserting FK data from [{0}]([{1}]) to [{2}]([{3}],[{4}])", srcTblName, srcColName, tblName, colName, fkColName);
             ExecuteNonQuery("INSERT INTO [{0}] ([{1}], [{2}]) SELECT [ID], [{3}] FROM [{4}] WHERE [{3}] IS NOT NULL",
                 tblName, colName, fkColName, srcColName, srcTblName);
         }
 
-        public void CopyFKs(string srcTblName, string srcColName, string destTblName, string destColName, string srcFKColName)
+        public void CopyFKs(TableRef srcTblName, string srcColName, TableRef destTblName, string destColName, string srcFKColName)
         {
             Log.DebugFormat("Copy FK data from [{0}]([{1}]) to [{2}]([{3}])", srcTblName, srcColName, destTblName, destColName);
             ExecuteNonQuery("UPDATE dest SET dest.[{0}] = src.[{1}] FROM [{2}] dest  INNER JOIN [{3}] src ON src.[{4}] = dest.[ID]",
                 destColName, srcColName, destTblName, srcTblName, srcFKColName);
         }
 
-        public bool CheckIndexExists(string tblName, string idxName)
+        public bool CheckIndexExists(TableRef tblName, string idxName)
         {
             throw new NotImplementedException();
         }
 
-        public void DropIndex(string tblName, string idxName)
+        public void DropIndex(TableRef tblName, string idxName)
         {
             throw new NotImplementedException();
         }
 
-        public void CreateIndex(string tblName, string idxName, bool unique, bool clustered, params string[] columns)
+        public void CreateIndex(TableRef tblName, string idxName, bool unique, bool clustered, params string[] columns)
         {
             throw new NotImplementedException();
         }
 
-        public void CreateUpdateRightsTrigger(string triggerName, string tblName, List<RightsTrigger> tblList)
+        public void CreateUpdateRightsTrigger(string triggerName, TableRef tblName, List<RightsTrigger> tblList)
         {
             throw new NotSupportedException();
         }
 
-        public void CreateEmptyRightsViewUnmaterialized(string viewName)
+        public void CreateEmptyRightsViewUnmaterialized(TableRef viewName)
         {
             throw new NotSupportedException();
         }
 
-        public void CreateRightsViewUnmaterialized(string viewName, string tblName, string tblNameRights, IList<ACL> acls)
+        public void CreateRightsViewUnmaterialized(TableRef viewName, TableRef tblName, TableRef tblNameRights, IList<ACL> acls)
         {
             throw new NotSupportedException();
         }
 
-        public void CreateRefreshRightsOnProcedure(string procName, string viewUnmaterializedName, string tblName, string tblNameRights)
+        public void CreateRefreshRightsOnProcedure(string procName, TableRef viewUnmaterializedName, TableRef tblName, TableRef tblNameRights)
         {
             throw new NotSupportedException();
         }
@@ -515,12 +524,12 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
         //    }
         //}
 
-        public void RenameTable(string oldTblName, string newTblName)
+        public void RenameTable(TableRef oldTblName, TableRef newTblName)
         {
             throw new NotSupportedException();
         }
 
-        public void RenameColumn(string tblName, string oldColName, string newColName)
+        public void RenameColumn(TableRef tblName, string oldColName, string newColName)
         {
             throw new NotSupportedException();
         }
@@ -530,21 +539,25 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
             throw new NotSupportedException();
         }
 
-        public System.Data.IDataReader ReadTableData(string tbl, IEnumerable<string> colNames)
+        public IDataReader ReadTableData(TableRef tbl, IEnumerable<string> colNames)
         {
             var sb = new StringBuilder();
             sb.AppendLine("SELECT ");
             colNames.ForEach(i => sb.Append(Quote(i) + ","));
             sb.Remove(sb.Length - 1, 1);
-            sb.AppendLine(" FROM " + Quote(tbl));
+            sb.AppendLine(" FROM " + tbl.Name);
 
             var cmd = new OleDbCommand(sb.ToString(), db, tx);
             return cmd.ExecuteReader();
         }
 
-        public void WriteTableData(string destTbl, IDataReader source, IEnumerable<string> ignored)
+        public IDataReader ReadJoin(TableRef tbl, IEnumerable<Join> joins)
         {
-            if (String.IsNullOrEmpty(destTbl)) throw new ArgumentNullException("destTbl");
+            throw new NotImplementedException();
+        }
+
+        public void WriteTableData(TableRef destTbl, IDataReader source, IEnumerable<string> ignored)
+        {
             if (source == null) throw new ArgumentNullException("source");
 
             var values = new object[source.FieldCount];
@@ -555,10 +568,10 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
             }
         }
 
-        private void WriteTableData(string tbl, IEnumerable<string> colNames, object[] values)
+        private void WriteTableData(TableRef tbl, IEnumerable<string> colNames, object[] values)
         {
             var sb = new StringBuilder();
-            sb.AppendLine(string.Format("INSERT INTO {0} (", Quote(tbl)));
+            sb.AppendLine(string.Format("INSERT INTO {0} (", Quote(tbl.Name)));
 
             colNames.ForEach(i => sb.Append(Quote(i) + ","));
             sb.Remove(sb.Length - 1, 1);
@@ -597,7 +610,7 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
             // do nothing
         }
 
-        public bool GetHasColumnDefaultValue(string tblName, string colName)
+        public bool GetHasColumnDefaultValue(TableRef tblName, string colName)
         {
             throw new NotImplementedException();
         }

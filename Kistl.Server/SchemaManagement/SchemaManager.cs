@@ -89,13 +89,14 @@ namespace Kistl.Server.SchemaManagement
             }
         }
 
-        public static IList<Join> CreateJoinList(ObjectClass objClass, IEnumerable<Relation> relations)
+        public static IList<Join> CreateJoinList(ISchemaProvider db, ObjectClass objClass, IEnumerable<Relation> relations)
         {
-            return CreateJoinList(objClass, relations, null);
+            return CreateJoinList(db, objClass, relations, null);
         }
 
-        public static IList<Join> CreateJoinList(ObjectClass objClass, IEnumerable<Relation> relations, Relation until)
+        public static IList<Join> CreateJoinList(ISchemaProvider db, ObjectClass objClass, IEnumerable<Relation> relations, Relation until)
         {
+            if (db == null) throw new ArgumentNullException("db");
             if (objClass == null) throw new ArgumentNullException("objClass");
             if (relations == null) throw new ArgumentNullException("relations");
 
@@ -126,13 +127,13 @@ namespace Kistl.Server.SchemaManagement
                 {
                     var viewRel = new Join();
                     result.Add(viewRel);
-                    viewRel.JoinTableName = rel.GetRelationTableName();
+                    viewRel.JoinTableName = db.GetQualifiedTableName( rel.GetRelationTableName());
                     viewRel.JoinColumnName = Construct.ForeignKeyColumnName(lastRelEnd);
                     viewRel.FKColumnName = lastColumName;
 
                     viewRel = new Join();
                     result.Add(viewRel);
-                    viewRel.JoinTableName = nextRelEnd.Type.TableName;
+                    viewRel.JoinTableName = db.GetQualifiedTableName(nextRelEnd.Type.TableName);
                     viewRel.JoinColumnName = "ID";
                     viewRel.FKColumnName = Construct.ForeignKeyColumnName(nextRelEnd);
 
@@ -142,7 +143,7 @@ namespace Kistl.Server.SchemaManagement
                 {
                     var viewRel = new Join();
                     result.Add(viewRel);
-                    viewRel.JoinTableName = nextRelEnd.Type.TableName;
+                    viewRel.JoinTableName = db.GetQualifiedTableName(nextRelEnd.Type.TableName);
                     viewRel.JoinColumnName = "ID";
                     viewRel.FKColumnName = Construct.ForeignKeyColumnName(nextRelEnd);
 

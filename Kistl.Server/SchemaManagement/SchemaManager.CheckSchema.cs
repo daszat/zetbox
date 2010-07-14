@@ -65,7 +65,7 @@ namespace Kistl.Server.SchemaManagement
                 else
                 {
                     var updateRightsTriggerName = Construct.SecurityRulesUpdateRightsTriggerName(objClass);
-                    var tblName = objClass.TableName;
+                    var tblName = db.GetQualifiedTableName(objClass.TableName);
                     if (!db.CheckTriggerExists(tblName, updateRightsTriggerName))
                     {
                         Log.WarnFormat("Security Rules Trigger '{0}' is missing", updateRightsTriggerName);
@@ -86,7 +86,7 @@ namespace Kistl.Server.SchemaManagement
                 else
                 {
                     var updateRightsTriggerName = Construct.SecurityRulesUpdateRightsTriggerName(rel);
-                    var tblName =  rel.GetRelationTableName();
+                    var tblName = db.GetQualifiedTableName(rel.GetRelationTableName());
                     if (!db.CheckTriggerExists(tblName, updateRightsTriggerName))
                     {
                         Log.WarnFormat("Security Rules Trigger '{0}' is missing", updateRightsTriggerName);
@@ -143,7 +143,8 @@ namespace Kistl.Server.SchemaManagement
                 .Where(o => o.NeedsRightsTable())
                 .Select(o => Construct.SecurityRulesTableName(o)));
 
-            foreach (string tblName in db.GetTableNames())
+            // TODO: be schema-aware
+            foreach (var tblName in db.GetTableNames().Select(r => r.Name))
             {
                 if (!tableNames.Contains(tblName))
                 {
@@ -184,7 +185,7 @@ namespace Kistl.Server.SchemaManagement
             GetExistingColumnNames(objClass, objClass.Properties, String.Empty, columns);
             GetRelationColumnNames(objClass, columns);
 
-            foreach (string propName in db.GetTableColumnNames(objClass.TableName))
+            foreach (string propName in db.GetTableColumnNames(db.GetQualifiedTableName(objClass.TableName)))
             {
                 if (propName == "ID") continue;
                 if (!columns.Contains(propName))
@@ -244,7 +245,7 @@ namespace Kistl.Server.SchemaManagement
                     Log.WarnFormat("'{0}' on table '{1}' found in database but no relation object was defined", rel.ConstraintName, rel.TableName);
                     if (repair)
                     {
-                        db.DropFKConstraint(rel.TableName, rel.ConstraintName);
+                        db.DropFKConstraint(db.GetQualifiedTableName(rel.TableName), rel.ConstraintName);
                     }
                 }
             }
@@ -278,14 +279,14 @@ namespace Kistl.Server.SchemaManagement
         {
             if (rel.HasStorage(role))
             {
-                string tblName = relEnd.Type.TableName;
+                var tblName = db.GetQualifiedTableName(relEnd.Type.TableName);
                 RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
-                string refTblName = otherEnd.Type.TableName;
+                var refTblName = db.GetQualifiedTableName(otherEnd.Type.TableName);
                 string colName = Construct.ForeignKeyColumnName(otherEnd);
                 string assocName = rel.GetRelationAssociationName(role);
-                string idxName = Construct.IndexName(tblName, colName);
+                string idxName = Construct.IndexName(tblName.Name, colName);
 
-                CheckColumn(relEnd.Type.TableName, Construct.ForeignKeyColumnName(otherEnd), System.Data.DbType.Int32, 0, 0, otherEnd.IsNullable(), null);
+                CheckColumn(tblName, Construct.ForeignKeyColumnName(otherEnd), System.Data.DbType.Int32, 0, 0, otherEnd.IsNullable(), null);
                 if (!db.CheckFKConstraintExists(assocName))
                 {
                     Log.WarnFormat("FK Constraint '{0}' is missing", assocName);
@@ -326,8 +327,8 @@ namespace Kistl.Server.SchemaManagement
                     return;
             }
 
-            string tblName = relEnd.Type.TableName;
-            string refTblName = otherEnd.Type.TableName;
+            var tblName = db.GetQualifiedTableName(relEnd.Type.TableName);
+            var refTblName = db.GetQualifiedTableName(otherEnd.Type.TableName);
             bool isIndexed = rel.NeedsPositionStorage(relEnd.GetRole());
 
             string colName = Construct.ForeignKeyColumnName(otherEnd);
@@ -362,7 +363,7 @@ namespace Kistl.Server.SchemaManagement
         {
             string assocName = rel.GetAssociationName();
 
-            string tblName = rel.GetRelationTableName();
+            var tblName = db.GetQualifiedTableName(rel.GetRelationTableName());
             string fkAName = rel.GetRelationFkColumnName(RelationEndRole.A);
             string fkBName = rel.GetRelationFkColumnName(RelationEndRole.B);
             string assocAName = rel.GetRelationAssociationName(RelationEndRole.A);
@@ -389,7 +390,7 @@ namespace Kistl.Server.SchemaManagement
                 Log.WarnFormat("FK Constraint '{0}' for A is missing for [{1}]", assocAName, assocName);
                 if (repair)
                 {
-                    db.CreateFKConstraint(tblName, rel.A.Type.TableName, fkAName, assocAName, true);
+                    db.CreateFKConstraint(tblName, db.GetQualifiedTableName(rel.A.Type.TableName), fkAName, assocAName, true);
                 }
             }
             if (!db.CheckFKConstraintExists(assocBName))
@@ -397,7 +398,7 @@ namespace Kistl.Server.SchemaManagement
                 Log.WarnFormat("FK Constraint '{0}' for B is missing for [{1}]", assocBName, assocName);
                 if (repair)
                 {
-                    db.CreateFKConstraint(tblName, rel.B.Type.TableName, fkBName, assocBName, true);
+                    db.CreateFKConstraint(tblName, db.GetQualifiedTableName(rel.B.Type.TableName), fkBName, assocBName, true);
                 }
             }
 
@@ -451,7 +452,7 @@ namespace Kistl.Server.SchemaManagement
             {
                 Log.DebugFormat("Objectclass: {0}.{1}", objClass.Module.Namespace, objClass.Name);
 
-                if (db.CheckTableExists(objClass.TableName))
+                if (db.CheckTableExists(db.GetQualifiedTableName(objClass.TableName)))
                 {
                     Log.DebugFormat("  Table: {0}", objClass.TableName);
                     CheckColumns(objClass, objClass.Properties, String.Empty);
@@ -472,9 +473,9 @@ namespace Kistl.Server.SchemaManagement
         {
             foreach (var uc in objClass.Constraints.OfType<UniqueConstraint>())
             {
-                var tblName = objClass.TableName;
+                var tblName = db.GetQualifiedTableName(objClass.TableName);
                 var columns = Cases.GetUCColNames(uc);
-                var idxName = Construct.UniqueIndexName(tblName, columns);
+                var idxName = Construct.UniqueIndexName(tblName.Name, columns);
                 if (!db.CheckIndexExists(tblName, idxName))
                 {
                     Log.WarnFormat("Unique Constraint '{0}' is missing", idxName);
@@ -490,10 +491,10 @@ namespace Kistl.Server.SchemaManagement
         {
             if (objClass.NeedsRightsTable())
             {
-                var tblName = objClass.TableName;
-                var tblRightsName = Construct.SecurityRulesTableName(objClass);
+                var tblName = db.GetQualifiedTableName(objClass.TableName);
+                var tblRightsName = db.GetQualifiedTableName(Construct.SecurityRulesTableName(objClass));
                 var updateRightsTriggerName = Construct.SecurityRulesUpdateRightsTriggerName(objClass);
-                var rightsViewUnmaterializedName = Construct.SecurityRulesRightsViewUnmaterializedName(objClass);
+                var rightsViewUnmaterializedName = db.GetQualifiedTableName(Construct.SecurityRulesRightsViewUnmaterializedName(objClass));
                 var refreshRightsOnProcedureName = Construct.SecurityRulesRefreshRightsOnProcedureName(objClass);
 
                 if (!db.CheckTableExists(tblRightsName))
@@ -534,12 +535,12 @@ namespace Kistl.Server.SchemaManagement
             .Where(p => p.IsList)
             .OrderBy(p => p.Module.Namespace).ThenBy(p => p.Name))
             {
-                string tblName = prop.GetCollectionEntryTable();
-                string fkName = "fk_" + prop.ObjectClass.Name;
-                string valPropName = prop.Name;
-                string valPropIndexName = prop.Name + "Index";
-                string assocName = prop.GetAssociationName();
-                string refTblName = objClass.TableName;
+                var tblName = db.GetQualifiedTableName(prop.GetCollectionEntryTable());
+                var fkName = "fk_" + prop.ObjectClass.Name;
+                var valPropName = prop.Name;
+                var valPropIndexName = prop.Name + "Index";
+                var assocName = prop.GetAssociationName();
+                var refTblName = db.GetQualifiedTableName(objClass.TableName);
                 bool hasPersistentOrder = prop.HasPersistentOrder;
                 if (db.CheckTableExists(tblName))
                 {
@@ -583,12 +584,12 @@ namespace Kistl.Server.SchemaManagement
             .Where(p => p.IsList)
             .OrderBy(p => p.Module.Namespace).ThenBy(p => p.Name))
             {
-                string tblName = prop.GetCollectionEntryTable();
-                string fkName = "fk_" + prop.ObjectClass.Name;
-                string valPropName = prop.Name;
-                string valPropIndexName = prop.Name + "Index";
-                string assocName = prop.GetAssociationName();
-                string refTblName = objClass.TableName;
+                var tblName = db.GetQualifiedTableName(prop.GetCollectionEntryTable());
+                var fkName = "fk_" + prop.ObjectClass.Name;
+                var valPropName = prop.Name;
+                var valPropIndexName = prop.Name + "Index";
+                var assocName = prop.GetAssociationName();
+                var refTblName = db.GetQualifiedTableName(objClass.TableName);
                 bool hasPersistentOrder = prop.HasPersistentOrder;
                 if (db.CheckTableExists(tblName))
                 {
@@ -633,7 +634,7 @@ namespace Kistl.Server.SchemaManagement
             }
         }
 
-        private void CheckColumn(string tblName, string colName, System.Data.DbType type, int size, int scale, bool isNullable, DefaultConstraint defConstr)
+        private void CheckColumn(TableRef tblName, string colName, System.Data.DbType type, int size, int scale, bool isNullable, DefaultConstraint defConstr)
         {
             if (db.CheckColumnExists(tblName, colName))
             {
@@ -708,7 +709,7 @@ namespace Kistl.Server.SchemaManagement
             }
         }
 
-        private void CheckOrderColumn(string tblName, string indexName)
+        private void CheckOrderColumn(TableRef tblName, string indexName)
         {
             CheckColumn(tblName, indexName, System.Data.DbType.Int32, 0, 0, true, null);
             if (repair)
@@ -737,8 +738,8 @@ namespace Kistl.Server.SchemaManagement
                 .Where(p => !p.IsList)
                 .OrderBy(p => p.Module.Namespace).ThenBy(p => p.Name))
             {
-                string tblName = objClass.TableName;
-                string colName = Construct.NestedColumnName(prop, prefix);
+                var tblName = db.GetQualifiedTableName(objClass.TableName);
+                var colName = Construct.NestedColumnName(prop, prefix);
                 Log.DebugFormat("    {0}", colName);
                 CheckColumn(tblName, colName, prop.GetDbType(), prop.GetSize(), prop.GetScale(), prop.IsNullable(), SchemaManager.GetDefaultContraint(prop));
             }
@@ -746,8 +747,8 @@ namespace Kistl.Server.SchemaManagement
             foreach (CompoundObjectProperty sprop in properties.OfType<CompoundObjectProperty>().Where(p => !p.IsList))
             {
                 // Check isnull column
-                string tblName = objClass.TableName;
-                string colName = Construct.NestedColumnName(sprop, prefix);
+                var tblName = db.GetQualifiedTableName(objClass.TableName);
+                var colName = Construct.NestedColumnName(sprop, prefix);
                 Log.DebugFormat("    {0}", colName);
                 CheckColumn(tblName, colName, System.Data.DbType.Boolean, 0, 0, false, null);
 

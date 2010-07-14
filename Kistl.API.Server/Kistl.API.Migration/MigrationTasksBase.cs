@@ -11,7 +11,7 @@ namespace Kistl.API.Migration
     public class MigrationTasksBase : IMigrationTasks
     {
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.API.Migration");
-        
+
         private readonly ISchemaProvider _src;
         private readonly ISchemaProvider _dst;
         public MigrationTasksBase(ISchemaProvider src, ISchemaProvider dst)
@@ -33,7 +33,7 @@ namespace Kistl.API.Migration
                 return;
             }
 
-            _dst.TruncateTable(tbl.DestinationObjectClass.TableName);
+            _dst.TruncateTable(_dst.GetQualifiedTableName(tbl.DestinationObjectClass.TableName));
         }
 
         public void TableBaseMigration(SourceTable tbl)
@@ -48,14 +48,40 @@ namespace Kistl.API.Migration
 
             var srcColumns = tbl.SourceColumn
                 .Where(c => c.DestinationProperty != null && c.DestinationProperty is Kistl.App.Base.ValueTypeProperty)
-                .OrderBy(c => c.Name).ToList();
+                .OrderBy(c => c.Name)
+                .ToList();
             var srcColumnNames = srcColumns.Select(c => c.Name).ToArray();
             var dstColumnNames = srcColumns.Select(c => c.DestinationProperty.Name).ToArray();
 
-            using (var sourceTbl = _src.ReadTableData(tbl.Name, srcColumnNames))
-            using (var translator = new Translator(tbl, sourceTbl, srcColumns))
+            var referringCols = srcColumns.Where(c => c.References != null).ToList();
+            if (referringCols.Count == 0)
             {
-                _dst.WriteTableData(tbl.DestinationObjectClass.TableName, translator, dstColumnNames);
+                // no fk mapping required
+                using (var sourceTbl = _src.ReadTableData(_dst.GetQualifiedTableName(tbl.Name), srcColumnNames))
+                using (var translator = new Translator(tbl, sourceTbl, srcColumns))
+                {
+                    _dst.WriteTableData(_dst.GetQualifiedTableName(tbl.DestinationObjectClass.TableName), translator, dstColumnNames);
+                }
+            }
+            else
+            {
+                // could automatically create needed indices
+
+                var joins = referringCols.Select(reference =>
+                {
+                    var referencedTable = _dst.GetQualifiedTableName(reference.References.SourceTable.DestinationObjectClass.TableName);
+                    return new Join()
+                    {
+                        JoinTableName = referencedTable,
+                        Type = JoinType.Left,
+                        JoinColumnName = reference.References.DestinationProperty.Name,
+                        FKColumnName = reference.Name
+                    };
+                });
+
+                var srcReader = _src.ReadJoin(_src.GetQualifiedTableName(tbl.Name), joins);
+                // SELECT src.*, ref1.ID, ... FROM src LEFT JOIN referencedTableDestination ref1 ON (src.col = ref1.col) ...
+                // if (ref1.ID == null) { error += "ref1 could not be resolved"; set default }
             }
         }
     }

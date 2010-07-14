@@ -41,15 +41,15 @@ namespace ZBox.App.SchemaMigration
                 {
                     Log.InfoFormat("reading table {0}", tbl);
                     SourceTable destTbl;
-                    if (!destTbls.ContainsKey(tbl))
+                    if (!destTbls.ContainsKey(tbl.Name))
                     {
                         destTbl = obj.Context.Create<SourceTable>();
-                        destTbl.Name = tbl;
+                        destTbl.Name = tbl.Name;
                         s.SourceTables.Add(destTbl);
                     }
                     else
                     {
-                        destTbl = destTbls[tbl];
+                        destTbl = destTbls[tbl.Name];
                     }
 
                     var cols = src.GetTableColumns(tbl);
