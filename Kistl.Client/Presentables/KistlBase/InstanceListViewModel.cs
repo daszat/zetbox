@@ -116,7 +116,16 @@ namespace Kistl.Client.Presentables.KistlBase
             foreach (var item in e.NewItems.OfType<IUIFilterExpression>())
             {
                 // attach change events
-                item.FilterChanged += new EventHandler(delegate(object s, EventArgs a) { ReloadInstances(); });
+                item.FilterChanged += new EventHandler(delegate(object s, EventArgs a) {
+                    if (s is IPostFilterExpression)
+                    {
+                        ExecutePostFilter();
+                    }
+                    else
+                    {
+                        ReloadInstances();
+                    }
+                });
             }
 
             OnPropertyChanged("FilterViewModels");
