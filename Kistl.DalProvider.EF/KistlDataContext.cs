@@ -29,7 +29,7 @@ namespace Kistl.DalProvider.EF
         private static readonly object _lock = new object();
 
         private readonly EFObjectContext _ctx;
-        
+
         private readonly Func<IFrozenContext> _lazyCtx;
 
         private readonly EfImplementationType.EfFactory _implTypeFactory;
@@ -602,22 +602,42 @@ namespace Kistl.DalProvider.EF
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
         public override IEnumerable<T> FindPersistenceObjects<T>(IEnumerable<Guid> exportGuids)
         {
-            if (exportGuids.Count() == 0) return new List<T>();
+            var guidStrings = exportGuids.Select(g => g.ToString()).ToList();
 
-            StringBuilder sql = new StringBuilder();
-            sql.AppendFormat("SELECT VALUE e FROM Entities.{0} AS e WHERE e.ExportGuid IN {{", GetEntityName(iftFactory(typeof(T))));
-            foreach (Guid g in exportGuids)
+            if (guidStrings.Count == 0) return new List<T>();
+
+            IEnumerable<T> result = null;
+            int offset = 0;
+
+            // EF dies from stack overflow exception when trying to fetch 2000+ elements
+            // therefore this splits the export guids into batches of 100
+            while (offset < guidStrings.Count)
             {
-                sql.AppendFormat("Guid'{0}',", g);
+                var tmp = SelectByExportGuid<T>(guidStrings.Skip(offset).Take(100).ToArray());
+                result = result == null ? tmp : result.Concat(tmp);
+                offset += 100;
             }
-            sql.Remove(sql.Length - 1, 1);
-            sql.Append("}");
-            IEnumerable<T> result = _ctx.CreateQuery<T>(sql.ToString()).ToList();
+            
             foreach (IPersistenceObject obj in result)
             {
                 obj.AttachToContext(this);
             }
+
             return result;
+        }
+
+        private List<T> SelectByExportGuid<T>(string[] cache)
+        {
+            if (cache == null) throw new ArgumentNullException("cache");
+            if (cache.Length > 100) throw new ArgumentOutOfRangeException("cache", "cache too big");
+
+            if (cache.Length == 0) return new List<T>(0);
+
+            StringBuilder sql = new StringBuilder();
+            sql.AppendFormat("SELECT VALUE e FROM Entities.{0} AS e WHERE e.ExportGuid IN {{Guid'", GetEntityName(iftFactory(typeof(T))));
+            sql.Append(String.Join("',Guid'", cache));
+            sql.Append("'}");
+            return _ctx.CreateQuery<T>(sql.ToString()).ToList();
         }
 
         public override ImplementationType ToImplementationType(InterfaceType t)
@@ -627,7 +647,7 @@ namespace Kistl.DalProvider.EF
 
         public override ImplementationType GetImplementationType(Type t)
         {
-            return _implTypeFactory(t) ;
+            return _implTypeFactory(t);
         }
     }
 }
