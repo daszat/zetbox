@@ -97,7 +97,7 @@ namespace Kistl.App.Packaging
                     foreach (var module in moduleList)
                     {
                         Log.InfoFormat("  exporting {0}", module.Name);
-                        foreach (var objClass in module.DataTypes.OfType<ObjectClass>().Where(o => o.ImplementsInterfaces.Contains(iexpIf)))
+                        foreach (var objClass in module.DataTypes.OfType<ObjectClass>().Where(o => o.ImplementsInterfaces.Contains(iexpIf)).OrderBy(o => o.Name))
                         {
                             Log.InfoFormat("    {0} ", objClass.Name);
                             foreach (var obj in ctx.GetQuery(objClass.GetDescribedInterfaceType()).OrderBy(obj => ((IExportable)obj).ExportGuid))
@@ -107,7 +107,8 @@ namespace Kistl.App.Packaging
                         }
 
                         int moduleID = module.ID; // Dont ask
-                        foreach (var rel in ctx.GetQuery<Relation>().Where(r => r.Module.ID == moduleID))
+                        foreach (var rel in ctx.GetQuery<Relation>().Where(r => r.Module.ID == moduleID)
+                            .OrderBy(r => r.A.Type.Name).ThenBy(r => r.A.RoleName).ThenBy(r => r.B.Type.Name).ThenBy(r => r.B.RoleName).ThenBy(r => r.ExportGuid))
                         {
                             if (rel.GetRelationType() != RelationType.n_m) continue;
                             if (!rel.A.Type.ImplementsIExportable()) continue;
@@ -187,7 +188,7 @@ namespace Kistl.App.Packaging
             var moduleList = new List<Kistl.App.Base.Module>();
             if (moduleNamespaces.Contains("*"))
             {
-                moduleList.AddRange(ctx.GetQuery<Kistl.App.Base.Module>().OrderBy(m => m.Namespace));
+                moduleList.AddRange(ctx.GetQuery<Kistl.App.Base.Module>());
             }
             else
             {
@@ -202,7 +203,7 @@ namespace Kistl.App.Packaging
                     moduleList.Add(module);
                 }
             }
-            return moduleList;
+            return moduleList.OrderBy(m => m.Namespace).ToList();
         }
         #endregion
     }
