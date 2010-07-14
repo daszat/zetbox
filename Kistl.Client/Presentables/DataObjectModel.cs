@@ -154,11 +154,22 @@ namespace Kistl.Client.Presentables
                                             .Select(s => new { Category = s, Property = p }))
                         .GroupBy(x => x.Category, x => x.Property)
                         .OrderBy(group => group.Key)
-                        .Select(group => ModelFactory.CreateViewModel<PropertyGroupModel.Factory>().Invoke(
-                            DataContext,
-                            group.Key,
-                            group.Select(p =>
-                                 ModelFactory.CreateViewModel<BasePropertyModel.Factory>(p).Invoke(DataContext, _object, p)).Cast<ViewModel>()))
+                        .Select <IGrouping<string, Property>, PropertyGroupModel > (group =>
+                        {
+                            var lst = group.Select(p =>
+                                     ModelFactory.CreateViewModel<BasePropertyModel.Factory>(p).Invoke(DataContext, _object, p)).Cast<ViewModel>().ToList();
+
+                            if (lst.Count == 1)
+                            {
+                                return ModelFactory.CreateViewModel<SinglePropertyGroupModel.Factory>().Invoke(
+                                    DataContext, group.Key, lst);
+                            }
+                            else
+                            {
+                                return ModelFactory.CreateViewModel<MultiplePropertyGroupModel.Factory>().Invoke(
+                                    DataContext, group.Key, lst);
+                            }
+                        })
                         .ToList();
         }
 

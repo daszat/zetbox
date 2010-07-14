@@ -34,6 +34,8 @@
         <ctrls:LoadingIndicator DockPanel.Dock="Top" />
 
         <Grid>
+
+
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
@@ -42,23 +44,32 @@
             <TabControl x:Name="PropertyGroupTabs"
                         Grid.Row="0"
                         ItemsSource="{Binding PropertyGroups, ValidatesOnDataErrors=true}"
-                        SelectedValue="{Binding SelectedPropertyGroup}"
+                        SelectedValue="{Binding SelectedPropertyGroup}"                        
                         BorderThickness="0"
                         HorizontalContentAlignment="Stretch">
-
-                <TabControl.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding Title, Mode=OneWay, ValidatesOnDataErrors=true}" />
+                <TabControl.Resources>
+                    <DataTemplate DataType="{x:Type client:SinglePropertyGroupModel}">
+                        <ItemsControl ItemsSource="{Binding PropertyModels, ValidatesOnDataErrors=true}"
+                                          BorderThickness="0"
+                                          HorizontalContentAlignment="Stretch">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <Grid IsItemsHost="True" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate DataType="{x:Type client:ViewModel}">
+                                    <view:LabeledView />
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
                     </DataTemplate>
-                </TabControl.ItemTemplate>
-
-                <TabControl.ContentTemplate>
-                    <DataTemplate>
-                        <ScrollViewer x:Name="ScrollViewerForPropertyGroup" VerticalScrollBarVisibility="Visible">
+                    <DataTemplate DataType="{x:Type client:MultiplePropertyGroupModel}">
+                        <ScrollViewer VerticalScrollBarVisibility="Visible">
                             <ItemsControl ItemsSource="{Binding PropertyModels, ValidatesOnDataErrors=true}"
-                                  BorderThickness="0"
-                                  HorizontalContentAlignment="Stretch"
-                                  VerticalContentAlignment="Stretch">
+                                          BorderThickness="0"
+                                          HorizontalContentAlignment="Stretch"
+                                          VerticalContentAlignment="Stretch">
 
                                 <!-- use the whole horizontal space, but no more -->
                                 <ItemsControl.ItemContainerStyle>
@@ -70,8 +81,7 @@
 
                                 <ItemsControl.ItemsPanel>
                                     <ItemsPanelTemplate>
-                                            <DockPanel IsItemsHost="True"
-                                               LastChildFill="{Binding DataContext.LastChildFill, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
+                                        <DockPanel IsItemsHost="True" />
                                     </ItemsPanelTemplate>
                                 </ItemsControl.ItemsPanel>
 
@@ -83,7 +93,13 @@
                             </ItemsControl>
                         </ScrollViewer>
                     </DataTemplate>
-                </TabControl.ContentTemplate>
+                </TabControl.Resources>
+                
+                <TabControl.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Title, Mode=OneWay, ValidatesOnDataErrors=true}" />
+                    </DataTemplate>
+                </TabControl.ItemTemplate>
             </TabControl>
 
             <ListView x:Name="ResultList"
@@ -92,7 +108,6 @@
                       BorderThickness="0"
                       ItemTemplateSelector="{StaticResource defaultTemplateSelector}"
                       HorizontalContentAlignment="Stretch">
-
                 <!-- use the whole horizontal space, but no more -->
                 <ListView.ItemContainerStyle>
                     <Style>

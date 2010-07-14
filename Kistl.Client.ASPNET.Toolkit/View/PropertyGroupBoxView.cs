@@ -30,7 +30,7 @@ namespace Kistl.Client.ASPNET.Toolkit.View
             panelCtrl.GroupingText = Model.Title;
 
             repPropertiesCtrl.ItemDataBound += new RepeaterItemEventHandler(repPropertiesCtrl_ItemDataBound);
-            repPropertiesCtrl.DataSource = Model.PropertyModels;
+            repPropertiesCtrl.DataSource = Model is SinglePropertyGroupModel ? new ViewModel [] { ((SinglePropertyGroupModel)Model).PropertyModel } : ((MultiplePropertyGroupModel)Model).PropertyModels.AsEnumerable();
             repPropertiesCtrl.DataBind();
         }
 

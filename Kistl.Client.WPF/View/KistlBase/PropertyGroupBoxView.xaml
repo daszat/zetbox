@@ -7,33 +7,5 @@
           Header="{Binding Title, Mode=OneWay}"
           ToolTip="{Binding ToolTip}">
 
-    <ItemsControl 
-        ItemsSource="{Binding PropertyModels}"
-              BorderThickness="0"
-              HorizontalContentAlignment="Stretch">
-
-        <!-- use the whole horizontal space, but no more -->
-        <ItemsControl.ItemContainerStyle>
-            <Style>
-                <Setter Property="DockPanel.Dock"
-                        Value="Top" />
-            </Style>
-        </ItemsControl.ItemContainerStyle>
-
-        <ItemsControl.ItemsPanel>
-            <ItemsPanelTemplate>
-                <ScrollViewer x:Name="ScrollViewerForPropertyGroup" VerticalScrollBarVisibility="Visible">
-                    <DockPanel IsItemsHost="True"
-                           LastChildFill="{Binding DataContext.LastChildFill, RelativeSource={RelativeSource AncestorType={x:Type view:PropertyGroupBoxView}}}" >
-                    </DockPanel>
-                </ScrollViewer>
-            </ItemsPanelTemplate>
-        </ItemsControl.ItemsPanel>
-
-        <ItemsControl.ItemTemplate>
-            <DataTemplate DataType="{x:Type client:ViewModel}">
-                <view:LabeledView />
-            </DataTemplate>
-        </ItemsControl.ItemTemplate>
-    </ItemsControl>
+    <TextBlock Text="Not used in wpf" />
 </GroupBox>

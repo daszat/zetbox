@@ -15,13 +15,13 @@ namespace Kistl.Client.Presentables
     /// <summary>
     /// Models a group of Property(Models)
     /// </summary>
-    public class PropertyGroupModel
+    public abstract class PropertyGroupModel
         : ViewModel, IDataErrorInfo
     {
         public new delegate PropertyGroupModel Factory(IKistlContext dataCtx, string title, IEnumerable<ViewModel> obj);
 
         private string _title;
-        private ObservableCollection<ViewModel> _properties;
+        protected ObservableCollection<ViewModel> properties;
 
         public PropertyGroupModel(
             IViewModelDependencies appCtx, IKistlContext dataCtx,
@@ -30,9 +30,9 @@ namespace Kistl.Client.Presentables
             : base(appCtx, dataCtx)
         {
             _title = title;
-            _properties = new ObservableCollection<ViewModel>(obj);
-            _properties.CollectionChanged += PropertyListChanged;
-            foreach (var prop in _properties)
+            properties = new ObservableCollection<ViewModel>(obj);
+            properties.CollectionChanged += PropertyListChanged;
+            foreach (var prop in properties)
             {
                 prop.PropertyChanged += AnyPropertyChangedHandler;
             }
@@ -43,6 +43,11 @@ namespace Kistl.Client.Presentables
         public string Title { get { return _title; } }
         public string ToolTip { get { return _title; } }
 
+        public override string Name
+        {
+            get { return Title; }
+        }
+
         private ReadOnlyObservableCollection<ViewModel> _propertyModelsCache;
         public ReadOnlyObservableCollection<ViewModel> PropertyModels
         {
@@ -50,25 +55,11 @@ namespace Kistl.Client.Presentables
             {
                 if (_propertyModelsCache == null)
                 {
-                    _propertyModelsCache = new ReadOnlyObservableCollection<ViewModel>(_properties);
+                    _propertyModelsCache = new ReadOnlyObservableCollection<ViewModel>(properties);
                 }
                 return _propertyModelsCache;
             }
         }
-
-        public override string Name
-        {
-            get { return Title; }
-        }
-
-        public bool LastChildFill
-        {
-            get
-            {
-                return _properties.Count == 1;
-            }
-        }
-
         #endregion
 
         #region IDataErrorInfo Members
@@ -86,7 +77,7 @@ namespace Kistl.Client.Presentables
                 {
                     case "Title":
                     case "PropertyModels":
-                        return String.Join("\n", PropertyModels.OfType<IDataErrorInfo>().Select(idei => idei.Error).Where(s => !String.IsNullOrEmpty(s)).ToArray());
+                        return String.Join("\n", properties.OfType<IDataErrorInfo>().Select(idei => idei.Error).Where(s => !String.IsNullOrEmpty(s)).ToArray());
                     default:
                         return null;
                 }
@@ -123,5 +114,40 @@ namespace Kistl.Client.Presentables
         }
 
         #endregion
+    }
+
+    public class SinglePropertyGroupModel : PropertyGroupModel
+    {
+        public new delegate SinglePropertyGroupModel Factory(IKistlContext dataCtx, string title, IEnumerable<ViewModel> obj);
+        
+        public SinglePropertyGroupModel(
+            IViewModelDependencies appCtx, IKistlContext dataCtx,
+            string title,
+            IEnumerable<ViewModel> obj)
+            : base(appCtx, dataCtx, title, obj)
+        {
+        }
+
+        public ViewModel PropertyModel
+        {
+            get
+            {
+                return PropertyModels.Single();
+            }
+        }
+
+    }
+
+    public class MultiplePropertyGroupModel : PropertyGroupModel
+    {
+        public new delegate MultiplePropertyGroupModel Factory(IKistlContext dataCtx, string title, IEnumerable<ViewModel> obj);
+        
+        public MultiplePropertyGroupModel(
+            IViewModelDependencies appCtx, IKistlContext dataCtx,
+            string title,
+            IEnumerable<ViewModel> obj)
+            : base(appCtx, dataCtx, title, obj)
+        {
+        }
     }
 }
