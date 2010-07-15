@@ -20,7 +20,7 @@ namespace ZBox.App.SchemaMigration
         public static void OnToString_SourceColumn(ZBox.App.SchemaMigration.SourceColumn obj, MethodReturnEventArgs<System.String> e)
         {
             e.Result = (obj.SourceTable != null ? obj.SourceTable.Name : null) ?? string.Empty;
-            e.Result += !string.IsNullOrEmpty(obj.Name) ? obj.Name : "new Source Column";
+            e.Result += "." + (!string.IsNullOrEmpty(obj.Name) ? obj.Name : "new Source Column");
         }
 
         public static void OnToString_SourceTable(ZBox.App.SchemaMigration.SourceTable obj, MethodReturnEventArgs<System.String> e)

@@ -391,7 +391,7 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
             Log.DebugFormat("CreateTable {0}", tblName);
 
             StringBuilder sb = new StringBuilder();
-            sb.AppendFormat("CREATE TABLE {0} (", FormatFullName(tblName));
+            sb.AppendFormat("CREATE TABLE {0} (", FormatSchemaName(tblName));
             sb.AppendLine();
 
             foreach (var col in cols)
@@ -917,14 +917,23 @@ FROM (", viewName.Schema, viewName.Name);
             return cmd.ExecuteReader();
         }
 
-        public override IDataReader ReadJoin(TableRef tbl, IEnumerable<Join> joins)
+        public override IDataReader ReadJoin(TableRef tbl, IEnumerable<string> colNames, IEnumerable<Join> joins)
         {
-            //var query = new StringBuilder(String.Format("SELECT * FROM {0}", tbl));
-            //foreach (var join in joins)
-            //{
-            //    query.AppendFormat(@"  {0}JOIN {1} ON t{1}.[{2}] = t{3}.[{4}]", rel.JoinTableName, idx, rel.JoinColumnName, idx - 1, rel.FKColumnName);
-            //}
-            throw new NotImplementedException();
+            if (tbl == null) throw new ArgumentNullException("tbl");
+            if (colNames == null) throw new ArgumentNullException("colNames");
+            if (joins == null) throw new ArgumentNullException("joins");
+            
+            var columns = String.Join(",", colNames.Select(n => QuoteIdentifier(n)).ToArray());
+            var query = new StringBuilder();
+            query.AppendFormat("SELECT {0} FROM {1} t0", columns, FormatFullName(tbl));
+            int idx = 1;
+            foreach (var join in joins)
+            {
+                query.AppendFormat(@"  LEFT JOIN {0} t{1} ON t{1}.[{2}] = t{3}.[{4}]", join.JoinTableName, idx, join.JoinColumnName, idx - 1, join.FKColumnName);
+                idx++;
+            }
+            var cmd = new SqlCommand(query.ToString(), CurrentConnection, CurrentTransaction);
+            return cmd.ExecuteReader();
         }
 
         public override void WriteTableData(TableRef destTbl, IDataReader source, IEnumerable<string> colNames)

@@ -47,18 +47,18 @@ namespace Kistl.API.Migration
             }
 
             var srcColumns = tbl.SourceColumn
-                .Where(c => c.DestinationProperty != null && c.DestinationProperty is Kistl.App.Base.ValueTypeProperty)
+                .Where(c => c.DestinationProperty != null)
                 .OrderBy(c => c.Name)
                 .ToList();
-            var srcColumnNames = srcColumns.Select(c => c.Name).ToArray();
             var dstColumnNames = srcColumns.Select(c => c.DestinationProperty.Name).ToArray();
 
             var referringCols = srcColumns.Where(c => c.References != null).ToList();
             if (referringCols.Count == 0)
             {
+                var srcColumnNames = srcColumns.Select(c => c.Name).ToArray();
                 // no fk mapping required
-                using (var sourceTbl = _src.ReadTableData(_dst.GetQualifiedTableName(tbl.Name), srcColumnNames))
-                using (var translator = new Translator(tbl, sourceTbl, srcColumns))
+                using (var srcReader = _src.ReadTableData(_src.GetQualifiedTableName(tbl.Name), srcColumnNames))
+                using (var translator = new Translator(tbl, srcReader, srcColumns))
                 {
                     _dst.WriteTableData(_dst.GetQualifiedTableName(tbl.DestinationObjectClass.TableName), translator, dstColumnNames);
                 }
@@ -78,8 +78,12 @@ namespace Kistl.API.Migration
                         FKColumnName = reference.Name
                     };
                 });
+                var srcColumnNames = srcColumns.Select(c => {
+                    /*if (c.References == null) */ return c.Name;
 
-                var srcReader = _src.ReadJoin(_src.GetQualifiedTableName(tbl.Name), joins);
+                }).ToArray();
+
+                var srcReader = _src.ReadJoin(_src.GetQualifiedTableName(tbl.Name), srcColumnNames, joins);
                 // SELECT src.*, ref1.ID, ... FROM src LEFT JOIN referencedTableDestination ref1 ON (src.col = ref1.col) ...
                 // if (ref1.ID == null) { error += "ref1 could not be resolved"; set default }
             }

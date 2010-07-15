@@ -429,7 +429,7 @@ namespace Kistl.Server.SchemaManagement
         public abstract void CreatePositionColumnValidCheckProcedures(ILookup<string, KeyValuePair<string, string>> refSpecs);
 
         public abstract IDataReader ReadTableData(TableRef tbl, IEnumerable<string> colNames);
-        public abstract IDataReader ReadJoin(TableRef tbl, IEnumerable<Join> joins);
+        public abstract IDataReader ReadJoin(TableRef tbl, IEnumerable<string> colNames, IEnumerable<Join> joins);
 
         public abstract void WriteTableData(TableRef destTbl, IDataReader source, IEnumerable<string> colNames);
 
