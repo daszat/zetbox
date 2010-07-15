@@ -16,6 +16,7 @@ namespace Kistl.Server.SchemaManagement
 
         public LoggingSchemaProviderAdapter(ISchemaProvider provider)
         {
+            if (provider == null) throw new ArgumentNullException("provider");
             _provider = provider;
             Log = log4net.LogManager.GetLogger("Kistl.Server.Schema." + provider.ConfigName);
         }
