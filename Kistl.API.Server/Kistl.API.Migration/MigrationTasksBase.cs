@@ -36,6 +36,19 @@ namespace Kistl.API.Migration
             _dst.TruncateTable(_dst.GetQualifiedTableName(tbl.DestinationObjectClass.TableName));
         }
 
+        private static string GetColName(Kistl.App.Base.Property prop)
+        {
+            if (prop is Kistl.App.Base.ObjectReferenceProperty)
+            {
+                var orp = (Kistl.App.Base.ObjectReferenceProperty)prop;
+                return "fk_" + orp.RelationEnd.Parent.GetOtherEnd(orp.RelationEnd).RoleName;
+            }
+            else
+            {
+                return prop.Name;
+            }
+        }
+
         public void TableBaseMigration(SourceTable tbl)
         {
             if (tbl == null) throw new ArgumentNullException("tbl");
@@ -50,7 +63,7 @@ namespace Kistl.API.Migration
                 .Where(c => c.DestinationProperty != null)
                 .OrderBy(c => c.Name)
                 .ToList();
-            var dstColumnNames = srcColumns.Select(c => c.DestinationProperty.Name).ToArray();
+            var dstColumnNames = srcColumns.Select(c => GetColName(c.DestinationProperty)).ToArray();
 
             var referringCols = srcColumns.Where(c => c.References != null).ToList();
             if (referringCols.Count == 0)
@@ -66,7 +79,6 @@ namespace Kistl.API.Migration
             else
             {
                 // could automatically create needed indices
-
                 var joins = referringCols.Select(reference =>
                 {
                     var referencedTable = _dst.GetQualifiedTableName(reference.References.SourceTable.DestinationObjectClass.TableName);
@@ -79,13 +91,21 @@ namespace Kistl.API.Migration
                     };
                 });
                 var srcColumnNames = srcColumns.Select(c => {
-                    /*if (c.References == null) */ return c.Name;
-
+                    if (c.References == null) return new ProjectionColumn() { 
+                        ColumnName = c.Name, 
+                        TableName = _src.GetQualifiedTableName(tbl.Name) 
+                    };
+                    else return new ProjectionColumn() { 
+                        ColumnName = "ID", 
+                        Alias = c.DestinationProperty.Name, 
+                        TableName = _dst.GetQualifiedTableName(c.References.SourceTable.DestinationObjectClass.TableName) };
                 }).ToArray();
 
-                var srcReader = _src.ReadJoin(_src.GetQualifiedTableName(tbl.Name), srcColumnNames, joins);
-                // SELECT src.*, ref1.ID, ... FROM src LEFT JOIN referencedTableDestination ref1 ON (src.col = ref1.col) ...
-                // if (ref1.ID == null) { error += "ref1 could not be resolved"; set default }
+                using (var srcReader = _src.ReadJoin(_src.GetQualifiedTableName(tbl.Name), srcColumnNames, joins))
+                using (var translator = new Translator(tbl, srcReader, srcColumns))
+                {
+                    _dst.WriteTableData(_dst.GetQualifiedTableName(tbl.DestinationObjectClass.TableName), translator, dstColumnNames);
+                }
             }
         }
     }

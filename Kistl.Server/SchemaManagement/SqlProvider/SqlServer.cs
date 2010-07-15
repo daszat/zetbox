@@ -917,20 +917,44 @@ FROM (", viewName.Schema, viewName.Name);
             return cmd.ExecuteReader();
         }
 
-        public override IDataReader ReadJoin(TableRef tbl, IEnumerable<string> colNames, IEnumerable<Join> joins)
+        private static int JoinIndex(IEnumerable<Join> joins, TableRef tbl)
+        {
+            int idx = 0;
+            foreach (var j in joins)
+            {
+                if (j.JoinTableName == tbl) return idx;
+                idx++;
+            }
+            return int.MinValue;
+        }
+
+        public override IDataReader ReadJoin(TableRef tbl, IEnumerable<ProjectionColumn> colNames, IEnumerable<Join> joins)
         {
             if (tbl == null) throw new ArgumentNullException("tbl");
             if (colNames == null) throw new ArgumentNullException("colNames");
             if (joins == null) throw new ArgumentNullException("joins");
-            
-            var columns = String.Join(",", colNames.Select(n => QuoteIdentifier(n)).ToArray());
+
+            var columns = String.Join(",\n", colNames.Select(n => {
+                string result = "\t";
+                if (n.TableName == tbl) result += string.Format("t0.{0}", QuoteIdentifier(n.ColumnName));
+                else result += string.Format("t{0}.{1}", JoinIndex(joins, n.TableName) + 1, QuoteIdentifier(n.ColumnName));
+                if (!string.IsNullOrEmpty(n.NullValue))
+                {
+                    result = string.Format("ISNULL({0}, {1})", result, n.NullValue);
+                }
+                if (!string.IsNullOrEmpty(n.Alias))
+                {
+                    result += " " + n.Alias;
+                }
+                return result;
+            }).ToArray());
+
             var query = new StringBuilder();
-            query.AppendFormat("SELECT {0} FROM {1} t0", columns, FormatFullName(tbl));
+            query.AppendFormat("SELECT \n{0} \nFROM {1} t0", columns, FormatFullName(tbl));
             int idx = 1;
             foreach (var join in joins)
             {
-                query.AppendFormat(@"  LEFT JOIN {0} t{1} ON t{1}.[{2}] = t{3}.[{4}]", join.JoinTableName, idx, join.JoinColumnName, idx - 1, join.FKColumnName);
-                idx++;
+                query.AppendFormat("\n  LEFT JOIN {0} t{1} ON t{1}.[{2}] = t0.[{3}]", join.JoinTableName, idx++, join.JoinColumnName, join.FKColumnName);
             }
             var cmd = new SqlCommand(query.ToString(), CurrentConnection, CurrentTransaction);
             return cmd.ExecuteReader();

@@ -551,7 +551,7 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
             return cmd.ExecuteReader();
         }
 
-        public IDataReader ReadJoin(TableRef tbl, IEnumerable<string> colNames, IEnumerable<Join> joins)
+        public IDataReader ReadJoin(TableRef tbl, IEnumerable<ProjectionColumn> colNames, IEnumerable<Join> joins)
         {
             throw new NotImplementedException();
         }

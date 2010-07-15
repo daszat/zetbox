@@ -890,7 +890,7 @@ LANGUAGE 'plpgsql' VOLATILE",
             throw new NotImplementedException();
         }
 
-        public override IDataReader ReadJoin(TableRef tbl, IEnumerable<string> colNames, IEnumerable<Join> joins)
+        public override IDataReader ReadJoin(TableRef tbl, IEnumerable<ProjectionColumn> colNames, IEnumerable<Join> joins)
         {
             throw new NotImplementedException();
         }

@@ -331,7 +331,7 @@ namespace Kistl.Server.SchemaManagement
             return _provider.ReadTableData(tbl, colNames);
         }
 
-        public IDataReader ReadJoin(TableRef tbl, IEnumerable<string> colNames, IEnumerable<Join> joins)
+        public IDataReader ReadJoin(TableRef tbl, IEnumerable<ProjectionColumn> colNames, IEnumerable<Join> joins)
         {
             return _provider.ReadJoin(tbl, colNames, joins);
         }
