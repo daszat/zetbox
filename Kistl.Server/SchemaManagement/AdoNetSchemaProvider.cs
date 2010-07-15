@@ -36,7 +36,10 @@ namespace Kistl.Server.SchemaManagement
                 {
                     foreach (var pair in args)
                     {
-                        cmd.Parameters[pair.Key] = pair.Value;
+                        var param = cmd.CreateParameter();
+                        param.ParameterName = pair.Key;
+                        param.Value = pair.Value;
+                        cmd.Parameters.Add(param);
                     }
                 }
                 using (var rd = cmd.ExecuteReader())
@@ -63,7 +66,10 @@ namespace Kistl.Server.SchemaManagement
                 {
                     foreach (var pair in args)
                     {
-                        cmd.Parameters[pair.Key] = pair.Value;
+                        var param = cmd.CreateParameter();
+                        param.ParameterName = pair.Key;
+                        param.Value = pair.Value;
+                        cmd.Parameters.Add(param);
                     }
                 }
                 return cmd.ExecuteScalar();
@@ -84,7 +90,10 @@ namespace Kistl.Server.SchemaManagement
                 {
                     foreach (var pair in args)
                     {
-                        cmd.Parameters[pair.Key] = pair.Value;
+                        var param = cmd.CreateParameter();
+                        param.ParameterName = pair.Key;
+                        param.Value = pair.Value;
+                        cmd.Parameters.Add(param);
                     }
                 }
                 cmd.ExecuteNonQuery();
@@ -189,7 +198,7 @@ namespace Kistl.Server.SchemaManagement
                 return String.Empty;
             }
 
-            var count = (long)ExecuteScalar("SELECT COUNT(*) FROM " + FormatTableName(currentSchemaRef));
+            var count = (int)ExecuteScalar("SELECT COUNT(*) FROM " + FormatFullName(currentSchemaRef));
             if (count == 0)
             {
                 return String.Empty;
@@ -217,7 +226,8 @@ namespace Kistl.Server.SchemaManagement
 
             using (Log.DebugTraceMethodCall("Saving schema"))
             {
-                long count = (long)ExecuteScalar("SELECT COUNT(*) FROM " + FormatTableName(currentSchemaRef));
+                // Under SQL Server count(*) is a int
+                int count = (int)ExecuteScalar("SELECT COUNT(*) FROM " + FormatFullName(currentSchemaRef));
                 if (count == 0)
                 {
                     ExecuteNonQuery(GetSchemaInsertStatement(), new Dictionary<string, object>() { { "@schema", schema } });
@@ -251,27 +261,22 @@ namespace Kistl.Server.SchemaManagement
             return "SELECT "
                 + String.Join(",", columns.Select(c => QuoteIdentifier(c)).ToArray())
                 + " FROM "
-                + FormatTableName(tbl);
+                + FormatFullName(tbl);
         }
 
         #endregion
 
         #region Table Structure
 
-        protected abstract string FormatTableName(TableRef tbl);
+        protected abstract string FormatFullName(TableRef tbl);
+        protected abstract string FormatSchemaName(TableRef tbl);
 
         public TableRef GetQualifiedTableName(string tbl)
         {
             return new TableRef(db.Database, "dbo", tbl);
         }
 
-        // IN: @schema, @table, OUT: exists?
-        protected abstract string GetTableExistsStatement();
-
-        public bool CheckTableExists(TableRef tblName)
-        {
-            return (bool)ExecuteScalar(GetTableExistsStatement());
-        }
+        public abstract bool CheckTableExists(TableRef tblName);
 
         // OUT: schema, name
         protected abstract string GetTableNamesStatement();
@@ -282,18 +287,7 @@ namespace Kistl.Server.SchemaManagement
                 .Select(rd => new TableRef(db.Database, rd.GetString(0), rd.GetString(1)));
         }
 
-        // IN: schema, table, name, OUT: exists?
-        protected abstract string GetColumnExistsStatment();
-
-        public bool CheckColumnExists(TableRef tblName, string colName)
-        {
-            return (bool)ExecuteScalar(GetColumnExistsStatment(),
-                new Dictionary<string, object>(){
-                    { "@schema", tblName.Schema },
-                    { "@table", tblName.Name },
-                    { "@name", colName },
-                });
-        }
+        public abstract bool CheckColumnExists(TableRef tblName, string colName);
 
         // IN: @schema, @table, OUT: name, type, max_length, is_nullable
         protected abstract string GetTableColumnsStatement();
@@ -348,29 +342,9 @@ namespace Kistl.Server.SchemaManagement
         }
 
 
-        // IN: constraint_name, OUT: exists?
-        protected abstract string GetFKConstraintExistsStatement();
+        public abstract bool CheckFKConstraintExists(string fkName);
 
-        public bool CheckFKConstraintExists(string fkName)
-        {
-            return (bool)ExecuteScalar(GetFKConstraintExistsStatement(),
-                 new Dictionary<string, object>(){
-                    { "@constraint_name", fkName },
-                });
-        }
-
-        // IN: schema, table, index, OUT: exists?
-        protected abstract string GetIndexExistsStatement();
-
-        public bool CheckIndexExists(TableRef tblName, string idxName)
-        {
-            return (bool)ExecuteScalar(GetIndexExistsStatement(),
-                      new Dictionary<string, object>(){
-                    { "@schema", tblName.Schema },
-                    { "@table", tblName.Name},
-                    { "@index", idxName },
-                });
-        }
+        public abstract bool CheckIndexExists(TableRef tblName, string idxName);
 
         #endregion
 
