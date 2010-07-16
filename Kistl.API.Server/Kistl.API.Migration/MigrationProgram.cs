@@ -177,8 +177,8 @@ namespace Kistl.API.Migration
             using (Log.InfoTraceMethodCallFormat("Reloading staging database [{0}]", stage.Description))
             using (var reloadScope = _applicationScope.BeginLifetimeScope())
             {
-                var srcSchema = OpenSource(reloadScope, stage.OriginProvider, stage.OriginConnectionString);
-                var dstSchema = OpenSource(reloadScope, stage.Provider, stage.ConnectionString);
+                var srcSchema = OpenProvider(reloadScope, stage.OriginProvider, stage.OriginConnectionString);
+                var dstSchema = OpenProvider(reloadScope, stage.Provider, stage.ConnectionString);
 
                 dstSchema.DropAllObjects();
 
@@ -198,7 +198,7 @@ namespace Kistl.API.Migration
             }
         }
 
-        protected static ISchemaProvider OpenSource(ILifetimeScope scope, string provider, string connectionString)
+        protected static ISchemaProvider OpenProvider(ILifetimeScope scope, string provider, string connectionString)
         {
             var srcSchema = scope.Resolve<ISchemaProvider>(provider);
             try

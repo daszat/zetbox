@@ -65,7 +65,13 @@ namespace Kistl.API.Migration
                 .Where(c => c.DestinationProperty != null)
                 .OrderBy(c => c.Name)
                 .ToList();
-            var dstColumnNames = srcColumns.Select(c => GetColName(c.DestinationProperty)).ToArray();
+            var dstColumnNames = srcColumns.Select(c => GetColName(c.DestinationProperty)).ToList();
+
+            // Error Col
+            if (typeof(IMigrationInfo).IsAssignableFrom(tbl.DestinationObjectClass.GetDataType()))
+            {
+                dstColumnNames.Add("MigrationErrors");
+            }
 
             var referringCols = srcColumns.Where(c => c.References != null).ToList();
             if (referringCols.Count == 0)

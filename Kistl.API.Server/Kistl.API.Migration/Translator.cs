@@ -22,6 +22,9 @@ namespace Kistl.API.Migration
         private readonly string[] _srcColumnNames;
         private readonly string[] _dstColumnNames;
 
+        private readonly int _errorColIdx;
+
+        private StringBuilder _currentError;
         private object[] _resultValues;
 
         public Translator(SourceTable tbl, IDataReader source, IEnumerable<SourceColumn> srcColumns, NullConverter[] nullConverter)
@@ -36,6 +39,23 @@ namespace Kistl.API.Migration
             _srcColumnNames = srcColumns.Select(c => c.Name).ToArray();
             _dstColumnNames = srcColumns.Select(c => c.DestinationProperty.Name).ToArray();
             _nullConverter = nullConverter ?? new NullConverter[] { };
+
+
+            if (typeof(IMigrationInfo).IsAssignableFrom(tbl.DestinationObjectClass.GetDataType()))
+            {
+                _errorColIdx = _dstColumnNames.Length;
+            }
+            else
+            {
+                _errorColIdx = -1;
+            }
+        }
+
+        private void AddError(string msg, object val)
+        {
+            if (_currentError == null) _currentError = new StringBuilder();
+            _currentError.AppendFormat(msg, val);
+            _currentError.AppendLine();
         }
 
         #region IDataReader Members
@@ -69,19 +89,34 @@ namespace Kistl.API.Migration
 
         public bool Read()
         {
+            _currentError = null;
             var result = _source.Read();
             if (result)
             {
-                // calculate new row
-                _resultValues = new object[_srcColumnNames.Length];
+                // allocate new row
+                if (_errorColIdx != -1)
+                {
+                    _resultValues = new object[_srcColumnNames.Length + 1];
+                }
+                else
+                {
+                    _resultValues = new object[_srcColumnNames.Length];
+                }
                 _source.GetValues(_resultValues);
 
+                // calculate new row
                 for (int i = 0; i < _srcColumnNames.Length; i++)
                 {
-                    var val = _source.GetValue(i);
-                    val = ConvertType(_srcColumns[i], val);
-                    val = HandleNullValue(_srcColumns[i], val);
+                    var src_val = _source.GetValue(i);
+                    var val = ConvertType(_srcColumns[i], src_val);
+                    val = HandleNullValue(_srcColumns[i], val, src_val);
                     _resultValues[i] = val;
+                }
+
+                // append errors
+                if (_errorColIdx != -1)
+                {
+                    _resultValues[_errorColIdx] = _currentError != null ? (object)_currentError.ToString() : DBNull.Value;
                 }
             }
             else
@@ -91,35 +126,36 @@ namespace Kistl.API.Migration
             return result;
         }
 
-        private object HandleNullValue(SourceColumn sourceColumn, object val)
+        private object HandleNullValue(SourceColumn sourceColumn, object val, object src_val)
         {
             var nullConv = _nullConverter.SingleOrDefault(i => i.Column == sourceColumn);
             if (nullConv == null) return val;
             if (val == null || val == DBNull.Value)
             {
+                AddError(nullConv.ErrorMsg, "(null)");
                 val = nullConv.NullValue;
-                // Add Error
             }
             return val;
         }
 
-        private object ConvertType(SourceColumn col, object val)
+        private object ConvertType(SourceColumn col, object src_val)
         {
-            if (val == null || val == DBNull.Value) return val;
+            if (src_val == null || src_val == DBNull.Value) return src_val;
 
             var destType = DbTypeMapper.GetDbTypeForProperty(col.DestinationProperty.GetType());
             var srcType = DbTypeMapper.GetDbType(col.DbType);
+            object dest_val = src_val;
 
             if (col.DestinationProperty is Kistl.App.Base.EnumerationProperty)
             {
-                Log.DebugFormat("Convert [{0}] = '{1}' from [{2}] to enum", col.Name, val, srcType);
-                var destVal = col.EnumEntries.FirstOrDefault(e => e.SourceValue == val.ToString());
-                return destVal != null ? (object)destVal.DestinationValue.Value : DBNull.Value;
+                Log.DebugFormat("Convert [{0}] = '{1}' from [{2}] to enum", col.Name, src_val, srcType);
+                var destEnum = col.EnumEntries.FirstOrDefault(e => e.SourceValue == src_val.ToString());
+                return destEnum != null ? (object)destEnum.DestinationValue.Value : DBNull.Value;
             }
             else if (srcType != destType
                 && col.References == null)
             {
-                Log.DebugFormat("Convert [{0}] = '{1}' from [{2}] to [{3}]", col.Name, val, srcType, destType);
+                Log.DebugFormat("Convert [{0}] = '{1}' from [{2}] to [{3}]", col.Name, src_val, srcType, destType);
                 try
                 {
                     switch (destType)
@@ -128,82 +164,86 @@ namespace Kistl.API.Migration
                         case DbType.AnsiStringFixedLength:
                         case DbType.String:
                         case DbType.StringFixedLength:
-                            val = val.ToString();
+                            dest_val = src_val.ToString();
                             break;
 
                         case DbType.Boolean:
                             // try string convertions
-                            if (val is string)
+                            if (src_val is string)
                             {
-                                var s = ((string)val).ToLower();
-                                if (s.Contains("yes")) val = true;
-                                else if (s.Contains("no")) val = false;
-                                else if (s.Contains("ja")) val = true;
-                                else if (s.Contains("nein")) val = false;
-                                else if (s.Contains("-1")) val = true;
-                                else if (s.Contains("1")) val = true;
-                                else if (s.Contains("0")) val = false;
-                                else val = DBNull.Value; // Error
+                                var s = ((string)src_val).ToLower();
+                                if (s.Contains("yes")) dest_val = true;
+                                else if (s.Contains("no")) dest_val = false;
+                                else if (s.Contains("ja")) dest_val = true;
+                                else if (s.Contains("nein")) dest_val = false;
+                                else if (s.Contains("-1")) dest_val = true;
+                                else if (s.Contains("1")) dest_val = true;
+                                else if (s.Contains("0")) dest_val = false;
+                                else
+                                {
+                                    dest_val = DBNull.Value;
+                                    AddError("Unable to convert '{0}' to a boolean", src_val);
+                                }
                             }
-                            else if (val is int)
+                            else if (src_val is int)
                             {
-                                var i = (int)val;
-                                val = i != 0;
+                                var i = (int)src_val;
+                                dest_val = i != 0;
                             }
                             else
                             {
                                 // try other
-                                val = Convert.ToBoolean(val);
+                                dest_val = Convert.ToBoolean(src_val);
                             }
                             break;
 
                         case DbType.Date:
                         case DbType.DateTime:
                         case DbType.DateTime2:
-                            val = Convert.ToDateTime(val);
+                            dest_val = Convert.ToDateTime(src_val);
                             break;
 
                         case DbType.Single:
-                            val = Convert.ToSingle(val);
+                            dest_val = Convert.ToSingle(src_val);
                             break;
                         case DbType.Double:
-                            val = Convert.ToDouble(val);
+                            dest_val = Convert.ToDouble(src_val);
                             break;
 
                         case DbType.Byte:
-                            val = Convert.ToByte(val);
+                            dest_val = Convert.ToByte(src_val);
                             break;
                         case DbType.Int16:
-                            val = Convert.ToInt16(val);
+                            dest_val = Convert.ToInt16(src_val);
                             break;
                         case DbType.Int32:
-                            val = Convert.ToInt32(val);
+                            dest_val = Convert.ToInt32(src_val);
                             break;
 
                         case DbType.SByte:
-                            val = Convert.ToSByte(val);
+                            dest_val = Convert.ToSByte(src_val);
                             break;
                         case DbType.Int64:
-                            val = Convert.ToInt64(val);
+                            dest_val = Convert.ToInt64(src_val);
                             break;
                         case DbType.UInt16:
-                            val = Convert.ToUInt16(val);
+                            dest_val = Convert.ToUInt16(src_val);
                             break;
                         case DbType.UInt32:
-                            val = Convert.ToUInt32(val);
+                            dest_val = Convert.ToUInt32(src_val);
                             break;
                         case DbType.UInt64:
-                            val = Convert.ToUInt64(val);
+                            dest_val = Convert.ToUInt64(src_val);
                             break;
 
                         case DbType.Guid:
-                            val = new Guid(val.ToString());
+                            dest_val = new Guid(src_val.ToString());
                             break;
 
                         case DbType.Currency:
                         case DbType.Decimal:
                         case DbType.VarNumeric:
-                            val = Convert.ToDecimal(val);
+                            dest_val = Convert.ToDecimal(src_val);
                             break;
 
 
@@ -219,12 +259,12 @@ namespace Kistl.API.Migration
                 }
                 catch
                 {
-                    // error
-                    val = DBNull.Value;
+                    dest_val = DBNull.Value;
+                    AddError(string.Format("Unable to convert '{{0}}' to {0}", destType), src_val);
                 }
             }
-            Log.DebugFormat(" => '{0}'", val);
-            return val;
+            Log.DebugFormat(" => '{0}'", dest_val);
+            return dest_val;
         }
 
         public int RecordsAffected
