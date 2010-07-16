@@ -228,8 +228,8 @@ namespace Kistl.App.Base
         {
             using (Logging.Log.InfoTraceMethodCall("Loading new types"))
             {
-                var newTypes = System.Reflection.Assembly
-                    .ReflectionOnlyLoad(assembly.Name)
+                var newTypes = AssemblyLoader
+                    .ReflectionOnlyLoadFrom(assembly.Name)
                     .GetExportedTypes()
                     .Where(t => !t.IsGenericTypeDefinition)
                     .Select(t => t.ToRef(ctx))
