@@ -18,18 +18,24 @@ namespace Kistl.API.Migration
         private readonly SourceTable _tbl;
         private readonly IDataReader _source;
         private readonly SourceColumn[] _srcColumns;
+        private readonly NullConverter[] _nullConverter;
         private readonly string[] _srcColumnNames;
         private readonly string[] _dstColumnNames;
 
         private object[] _resultValues;
 
-        public Translator(SourceTable tbl, IDataReader source, IEnumerable<SourceColumn> srcColumns)
+        public Translator(SourceTable tbl, IDataReader source, IEnumerable<SourceColumn> srcColumns, NullConverter[] nullConverter)
         {
+            if (tbl == null) throw new ArgumentNullException("tbl");
+            if (source == null) throw new ArgumentNullException("source");
+            if (srcColumns == null) throw new ArgumentNullException("srcColumns");
+
             _tbl = tbl;
             _source = source;
             _srcColumns = srcColumns.ToArray();
             _srcColumnNames = srcColumns.Select(c => c.Name).ToArray();
             _dstColumnNames = srcColumns.Select(c => c.DestinationProperty.Name).ToArray();
+            _nullConverter = nullConverter ?? new NullConverter[] { };
         }
 
         #region IDataReader Members
@@ -74,6 +80,7 @@ namespace Kistl.API.Migration
                 {
                     var val = _source.GetValue(i);
                     val = ConvertType(_srcColumns[i], val);
+                    val = HandleNullValue(_srcColumns[i], val);
                     _resultValues[i] = val;
                 }
             }
@@ -82,6 +89,18 @@ namespace Kistl.API.Migration
                 _resultValues = null;
             }
             return result;
+        }
+
+        private object HandleNullValue(SourceColumn sourceColumn, object val)
+        {
+            var nullConv = _nullConverter.SingleOrDefault(i => i.Column == sourceColumn);
+            if (nullConv == null) return val;
+            if (val == null || val == DBNull.Value)
+            {
+                val = nullConv.NullValue;
+                // Add Error
+            }
+            return val;
         }
 
         private object ConvertType(SourceColumn col, object val)
@@ -93,14 +112,14 @@ namespace Kistl.API.Migration
 
             if (col.DestinationProperty is Kistl.App.Base.EnumerationProperty)
             {
-                Log.InfoFormat("Convert [{0}] = '{1}' from [{2}] to enum", col.Name, val, srcType);
+                Log.DebugFormat("Convert [{0}] = '{1}' from [{2}] to enum", col.Name, val, srcType);
                 var destVal = col.EnumEntries.FirstOrDefault(e => e.SourceValue == val.ToString());
                 return destVal != null ? (object)destVal.DestinationValue.Value : DBNull.Value;
             }
             else if (srcType != destType
                 && col.References == null)
             {
-                Log.InfoFormat("Convert [{0}] = '{1}' from [{2}] to [{3}]", col.Name, val, srcType, destType);
+                Log.DebugFormat("Convert [{0}] = '{1}' from [{2}] to [{3}]", col.Name, val, srcType, destType);
                 try
                 {
                     switch (destType)

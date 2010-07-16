@@ -49,7 +49,7 @@ namespace Kistl.API.Migration
             }
         }
 
-        public void TableBaseMigration(SourceTable tbl)
+        public void TableBaseMigration(SourceTable tbl, params NullConverter[] nullConverter)
         {
             if (tbl == null) throw new ArgumentNullException("tbl");
 
@@ -58,6 +58,8 @@ namespace Kistl.API.Migration
                 Log.InfoFormat("Skipping base migration of unmapped table [{0}]", tbl.Name);
                 return;
             }
+
+            Log.InfoFormat("Migrating {0} to {1}", tbl.Name, tbl.DestinationObjectClass.Name);
 
             var srcColumns = tbl.SourceColumn
                 .Where(c => c.DestinationProperty != null)
@@ -71,7 +73,7 @@ namespace Kistl.API.Migration
                 var srcColumnNames = srcColumns.Select(c => c.Name).ToArray();
                 // no fk mapping required
                 using (var srcReader = _src.ReadTableData(_src.GetQualifiedTableName(tbl.Name), srcColumnNames))
-                using (var translator = new Translator(tbl, srcReader, srcColumns))
+                using (var translator = new Translator(tbl, srcReader, srcColumns, nullConverter))
                 {
                     _dst.WriteTableData(_dst.GetQualifiedTableName(tbl.DestinationObjectClass.TableName), translator, dstColumnNames);
                 }
@@ -102,7 +104,7 @@ namespace Kistl.API.Migration
                 }).ToArray();
 
                 using (var srcReader = _src.ReadJoin(_src.GetQualifiedTableName(tbl.Name), srcColumnNames, joins))
-                using (var translator = new Translator(tbl, srcReader, srcColumns))
+                using (var translator = new Translator(tbl, srcReader, srcColumns, nullConverter))
                 {
                     _dst.WriteTableData(_dst.GetQualifiedTableName(tbl.DestinationObjectClass.TableName), translator, dstColumnNames);
                 }

@@ -44,7 +44,7 @@ namespace Kistl.Client.Presentables
             relListMdl.Filter.Add(new ConstantFilterExpression("A.Type = @0 || B.Type = @0", this.Object));
 
             var lblMdl = ModelFactory.CreateViewModel<LabeledViewContainerViewModel.Factory>().Invoke(DataContext, "Relations", "", relListMdl);
-            var propGrpMdl = ModelFactory.CreateViewModel<PropertyGroupModel.Factory>().Invoke(DataContext, "Relations", new ViewModel[] { lblMdl});
+            var propGrpMdl = ModelFactory.CreateViewModel<SinglePropertyGroupModel.Factory>().Invoke(DataContext, "Relations", new ViewModel[] { lblMdl });
             result.Add(propGrpMdl);
             return result;
         }

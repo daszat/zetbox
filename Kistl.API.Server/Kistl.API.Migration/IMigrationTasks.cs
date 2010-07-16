@@ -10,6 +10,13 @@ namespace Kistl.API.Migration
 
     public delegate IMigrationTasks TaskFactory(ISchemaProvider src, ISchemaProvider dst);
 
+    public class NullConverter
+    {
+        public SourceColumn Column { get; set; }
+        public object NullValue { get; set; }
+        public string ErrorMsg { get; set; }
+    }
+
     public interface IMigrationTasks
     {
         /// <summary>
@@ -20,6 +27,6 @@ namespace Kistl.API.Migration
         /// <summary>
         /// Executes the basic defined migrations from the specified source table.
         /// </summary>
-        void TableBaseMigration(SourceTable tbl);
+        void TableBaseMigration(SourceTable tbl, params NullConverter[] nullConverter);
     }
 }
