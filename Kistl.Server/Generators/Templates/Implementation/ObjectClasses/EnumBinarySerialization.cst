@@ -7,6 +7,7 @@
 <%@ Import Namespace="Kistl.API" %>
 <%@ Import Namespace="Kistl.API.Server" %>
 <%@ Import Namespace="Kistl.App.Base" %>
+<%@ Import Namespace="Kistl.App.Extensions" %>
 <%@ Import Namespace="Kistl.Server.Generators" %>
 <%@ Import Namespace="Kistl.Server.Generators.Extensions" %>
 <%@ Parameter Name="ctx" Type="IKistlContext" %>
@@ -20,6 +21,7 @@
 	string interfaceName = prop.ObjectClass.Name;
     string memberName = prop.Name;
     string enumName =  prop.Enumeration.Module.Namespace + "." +  prop.Enumeration.Name;
+    if(prop.IsNullable()) enumName += "?";
 	string methodName = direction.ToString();
 	
 	////
