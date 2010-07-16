@@ -7,6 +7,7 @@ namespace Kistl.API.Server
     using System.Data;
     using System.Linq;
     using System.Text;
+    using System.Collections;
 
     public struct TableRef : IComparable<TableRef>, ICloneable
     {
@@ -305,13 +306,17 @@ namespace Kistl.API.Server
         void CreatePositionColumnValidCheckProcedures(ILookup<string, KeyValuePair<string, string>> refSpecs);
 
         IDataReader ReadTableData(TableRef tbl, IEnumerable<string> colNames);
+        IDataReader ReadTableData(string sql);
         IDataReader ReadJoin(TableRef tbl, IEnumerable<ProjectionColumn> colNames, IEnumerable<Join> joins);
 
         void WriteTableData(TableRef destTbl, IDataReader source, IEnumerable<string> colNames);
+        void WriteTableData(TableRef destTbl, IEnumerable<string> colNames, IEnumerable values);
 
         /// <summary>
         /// This can be called after significant changes to the database to cause the DBMS' optimizier to refresh its internal stats.
         /// </summary>
         void RefreshDbStats();
+
+        void ExecuteSqlResource(Type type, string scriptResourceName);
     }
 }

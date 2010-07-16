@@ -14,6 +14,7 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
     using Kistl.API.Migration;
     using Kistl.API.Server;
     using Kistl.API.Utils;
+    using System.Collections;
 
     public class SqlServer
         : AdoNetSchemaProvider<SqlConnection, SqlTransaction, SqlCommand>
@@ -618,7 +619,7 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
 
         public override void DropAllObjects()
         {
-            ExecuteNonQueryScriptFromResource("Kistl.Server.Database.Scripts.DropTables.sql");
+            ExecuteSqlResource(this.GetType(), "Kistl.Server.Database.Scripts.DropTables.sql");
         }
 
         public override void CopyColumnData(TableRef srcTblName, string srcColName, TableRef tblName, string colName)
@@ -845,7 +846,7 @@ FROM (", viewName.Schema, viewName.Name);
                 }
             }
 
-            ExecuteNonQueryScriptFromResource(String.Format(@"Kistl.Server.Database.Scripts.{0}.sql", procName));
+            ExecuteSqlResource(this.GetType(), String.Format(@"Kistl.Server.Database.Scripts.{0}.sql", procName));
 
             var createTableProcQuery = new StringBuilder();
             createTableProcQuery.AppendFormat("CREATE PROCEDURE [{0}] (@repair BIT, @tblName NVARCHAR(255), @colName NVARCHAR(255), @result BIT OUTPUT) AS", tableProcName);
@@ -917,6 +918,13 @@ FROM (", viewName.Schema, viewName.Name);
             return cmd.ExecuteReader();
         }
 
+        public override IDataReader ReadTableData(string sql)
+        {
+            SqlCommand cmd = new SqlCommand(sql, CurrentConnection, CurrentTransaction);
+            return cmd.ExecuteReader();
+        }
+
+
         private static int JoinIndex(IEnumerable<Join> joins, TableRef tbl)
         {
             int idx = 0;
@@ -986,6 +994,36 @@ FROM (", viewName.Schema, viewName.Name);
                 }
             }
         }
+
+        public override void WriteTableData(TableRef destTbl, IEnumerable<string> colNames, IEnumerable values)
+        {
+            if (colNames == null) throw new ArgumentNullException("colNames");
+            if (values == null) throw new ArgumentNullException("values");
+
+            var sb = new StringBuilder();
+            sb.AppendLine(string.Format("INSERT INTO {0} (", FormatFullName(destTbl)));
+
+            colNames.ForEach(i => sb.Append("[" + i + "],"));
+            sb.Remove(sb.Length - 1, 1);
+
+            sb.AppendLine(") VALUES (");
+
+            int counter = 0;
+            colNames.ForEach(i => sb.Append(string.Format("@param{0},", ++counter)));
+            sb.Remove(sb.Length - 1, 1);
+
+            sb.AppendLine(")");
+
+            var cmd = new SqlCommand(sb.ToString(), CurrentConnection, CurrentTransaction);
+            counter = 0;
+            foreach (var v in values)
+            {
+                cmd.Parameters.AddWithValue(string.Format("@param{0}", ++counter), v ?? DBNull.Value);
+            }
+
+            cmd.ExecuteNonQuery();
+        }
+
 
         public override void RefreshDbStats()
         {

@@ -7,6 +7,7 @@ namespace Kistl.Server.SchemaManagement
     using System.Linq;
     using System.Text;
     using Kistl.API.Server;
+    using System.Collections;
 
     public class LoggingSchemaProviderAdapter
         : ISchemaProvider
@@ -331,6 +332,11 @@ namespace Kistl.Server.SchemaManagement
             return _provider.ReadTableData(tbl, colNames);
         }
 
+        public IDataReader ReadTableData(string sql)
+        {
+            return _provider.ReadTableData(sql);
+        }
+
         public IDataReader ReadJoin(TableRef tbl, IEnumerable<ProjectionColumn> colNames, IEnumerable<Join> joins)
         {
             return _provider.ReadJoin(tbl, colNames, joins);
@@ -341,9 +347,19 @@ namespace Kistl.Server.SchemaManagement
             _provider.WriteTableData(destTbl, source, colNames);
         }
 
+        public void WriteTableData(TableRef destTbl, IEnumerable<string> colNames, IEnumerable values)
+        {
+            _provider.WriteTableData(destTbl, colNames, values);
+        }
+
         public void RefreshDbStats()
         {
             _provider.RefreshDbStats();
+        }
+
+        public void ExecuteSqlResource(Type type, string scriptResourceName)
+        {
+            _provider.ExecuteSqlResource(type, scriptResourceName);
         }
 
         public void Dispose()

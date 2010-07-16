@@ -76,9 +76,12 @@
     <Compile Include="BaseServerDataObject.cs" />
     <Compile Include="DbTypeMapper.cs" />
     <Compile Include="Kistl.API.Migration\IMigrationTasks.cs" />
+    <Compile Include="Kistl.API.Migration\InputStream.cs" />
     <Compile Include="Kistl.API.Migration\MigrationException.cs" />
     <Compile Include="Kistl.API.Migration\MigrationProgram.cs" />
     <Compile Include="Kistl.API.Migration\MigrationTasksBase.cs" />
+    <Compile Include="Kistl.API.Migration\OutputStream.cs" />
+    <Compile Include="Kistl.API.Migration\Record.cs" />
     <Compile Include="Kistl.API.Migration\Translator.cs" />
     <Compile Include="ServerApiModule.cs" />
     <Compile Include="QueryTranslatorProvider.cs" />

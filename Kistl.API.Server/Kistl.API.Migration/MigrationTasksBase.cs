@@ -7,6 +7,7 @@ namespace Kistl.API.Migration
     using System.Text;
     using Kistl.API.Server;
     using ZBox.App.SchemaMigration;
+    using Kistl.App.Base;
 
     public class MigrationTasksBase : IMigrationTasks
     {
@@ -23,17 +24,30 @@ namespace Kistl.API.Migration
             _dst = dst;
         }
 
+        public InputStream ExecuteQueryStreaming(string sql)
+        {
+            return new InputStream(_src.ReadTableData(sql));
+        }
+
+        public OutputStream WriteTableStreaming(string destTable)
+        {
+            return new OutputStream(_dst.GetQualifiedTableName(destTable), _dst);
+        }
+
         public void CleanDestination(SourceTable tbl)
         {
             if (tbl == null) throw new ArgumentNullException("tbl");
-
             if (tbl.DestinationObjectClass == null)
             {
                 Log.InfoFormat("Skipping cleaning of unmapped table [{0}]", tbl.Name);
                 return;
             }
+            CleanDestination(_dst.GetQualifiedTableName(tbl.DestinationObjectClass.TableName));
+        }
 
-            _dst.TruncateTable(_dst.GetQualifiedTableName(tbl.DestinationObjectClass.TableName));
+        public void CleanDestination(TableRef tbl)
+        {
+            _dst.TruncateTable(tbl);
         }
 
         private static string GetColName(Kistl.App.Base.Property prop)
@@ -49,7 +63,7 @@ namespace Kistl.API.Migration
             }
         }
 
-        public void TableBaseMigration(SourceTable tbl, params NullConverter[] nullConverter)
+        public void TableBaseMigration(SourceTable tbl, NullConverter[] nullConverter, Join[] additional_joins)
         {
             if (tbl == null) throw new ArgumentNullException("tbl");
 
@@ -74,7 +88,7 @@ namespace Kistl.API.Migration
             }
 
             var referringCols = srcColumns.Where(c => c.References != null).ToList();
-            if (referringCols.Count == 0)
+            if (referringCols.Count == 0 && (additional_joins == null || additional_joins.Length == 0))
             {
                 var srcColumnNames = srcColumns.Select(c => c.Name).ToArray();
                 // no fk mapping required
@@ -87,7 +101,7 @@ namespace Kistl.API.Migration
             else
             {
                 // could automatically create needed indices
-                var joins = referringCols.Select(reference =>
+                var ref_joins = referringCols.Select(reference =>
                 {
                     var referencedTable = _dst.GetQualifiedTableName(reference.References.SourceTable.DestinationObjectClass.TableName);
                     return new Join()
@@ -98,15 +112,48 @@ namespace Kistl.API.Migration
                         FKColumnName = reference.Name
                     };
                 });
+                // Add manual joins
+                IEnumerable<Join> joins;
+                if (additional_joins != null)
+                {
+                    joins = ref_joins.Union(additional_joins);
+                }
+                else
+                {
+                    joins = ref_joins;
+                }
+
                 var srcColumnNames = srcColumns.Select(c => {
-                    if (c.References == null) return new ProjectionColumn() { 
-                        ColumnName = c.Name, 
-                        TableName = _src.GetQualifiedTableName(tbl.Name) 
-                    };
-                    else return new ProjectionColumn() { 
-                        ColumnName = "ID", 
-                        Alias = c.DestinationProperty.Name, 
-                        TableName = _dst.GetQualifiedTableName(c.References.SourceTable.DestinationObjectClass.TableName) };
+                    var orp = c.DestinationProperty as ObjectReferenceProperty;
+                    if (c.References != null)
+                    {
+                        return new ProjectionColumn()
+                        {
+                            ColumnName = "ID",
+                            Alias = c.DestinationProperty.Name,
+                            TableName = _dst.GetQualifiedTableName(c.References.SourceTable.DestinationObjectClass.TableName)
+                        };
+                    }
+                    else if (c.References == null
+                        && c.DestinationProperty is ObjectReferenceProperty
+                        && additional_joins != null
+                        && additional_joins.Count(i => i.JoinTableName == _dst.GetQualifiedTableName(orp.RelationEnd.Parent.GetOtherEnd(orp.RelationEnd).Type.TableName)) > 0)
+                    {
+                        return new ProjectionColumn()
+                        {
+                            ColumnName = "ID",
+                            Alias = c.DestinationProperty.Name,
+                            TableName = _dst.GetQualifiedTableName(orp.RelationEnd.Parent.GetOtherEnd(orp.RelationEnd).Type.TableName)
+                        };
+                    }
+                    else
+                    {
+                        return new ProjectionColumn()
+                        {
+                            ColumnName = c.Name,
+                            TableName = _src.GetQualifiedTableName(tbl.Name)
+                        };
+                    }
                 }).ToArray();
 
                 using (var srcReader = _src.ReadJoin(_src.GetQualifiedTableName(tbl.Name), srcColumnNames, joins))

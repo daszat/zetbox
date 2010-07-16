@@ -7,6 +7,7 @@ namespace Kistl.API.Migration
     using System.Text;
     using Kistl.API.Server;
     using ZBox.App.SchemaMigration;
+    using System.Data;
 
     public delegate IMigrationTasks TaskFactory(ISchemaProvider src, ISchemaProvider dst);
 
@@ -23,10 +24,18 @@ namespace Kistl.API.Migration
         /// Removes all existing data in the destination.
         /// </summary>
         void CleanDestination(SourceTable tbl);
+        /// <summary>
+        /// Removes all existing data in the destination.
+        /// </summary>
+        void CleanDestination(TableRef tbl);
 
         /// <summary>
         /// Executes the basic defined migrations from the specified source table.
         /// </summary>
-        void TableBaseMigration(SourceTable tbl, params NullConverter[] nullConverter);
+        void TableBaseMigration(SourceTable tbl, NullConverter[] nullConverter, Join[] joins);
+
+        InputStream ExecuteQueryStreaming(string sql);
+
+        OutputStream WriteTableStreaming(string destTable);
     }
 }

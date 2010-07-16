@@ -10,6 +10,7 @@ namespace Kistl.Server.SchemaManagement
     using System.Text.RegularExpressions;
     using Kistl.API.Server;
     using Kistl.API.Utils;
+    using System.Collections;
 
     public abstract class AdoNetSchemaProvider<TConnection, TTransaction, TCommand>
         : ISchemaProvider
@@ -100,9 +101,12 @@ namespace Kistl.Server.SchemaManagement
             }
         }
 
-        protected void ExecuteNonQueryScriptFromResource(string scriptResourceName)
+        public void ExecuteSqlResource(Type type, string scriptResourceName)
         {
-            using (var scriptStream = new StreamReader(this.GetType().Assembly.GetManifestResourceStream(scriptResourceName)))
+            if (type == null) throw new ArgumentNullException("type");
+            if (string.IsNullOrEmpty(scriptResourceName)) throw new ArgumentNullException("scriptResourceName");
+            
+            using (var scriptStream = new StreamReader(type.Assembly.GetManifestResourceStream(scriptResourceName)))
             {
                 var databaseScript = scriptStream.ReadToEnd();
                 foreach (var cmdString in Regex.Split(databaseScript, "\r?\nGO\r?\n").Where(s => !String.IsNullOrEmpty(s)))
@@ -429,9 +433,11 @@ namespace Kistl.Server.SchemaManagement
         public abstract void CreatePositionColumnValidCheckProcedures(ILookup<string, KeyValuePair<string, string>> refSpecs);
 
         public abstract IDataReader ReadTableData(TableRef tbl, IEnumerable<string> colNames);
+        public abstract IDataReader ReadTableData(string sql);
         public abstract IDataReader ReadJoin(TableRef tbl, IEnumerable<ProjectionColumn> colNames, IEnumerable<Join> joins);
 
         public abstract void WriteTableData(TableRef destTbl, IDataReader source, IEnumerable<string> colNames);
+        public abstract void WriteTableData(TableRef destTbl, IEnumerable<string> colNames, IEnumerable values);
 
         /// <summary>
         /// This can be called after significant changes to the database to cause the DBMS' optimizier to refresh its internal stats.

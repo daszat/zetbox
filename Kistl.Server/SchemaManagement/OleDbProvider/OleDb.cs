@@ -13,6 +13,7 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
     using Kistl.API.Configuration;
     using Kistl.API.Server;
     using Kistl.API.Utils;
+    using System.Collections;
 
     public class OleDb
         : ISchemaProvider
@@ -551,12 +552,18 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
             return cmd.ExecuteReader();
         }
 
+        public IDataReader ReadTableData(string sql)
+        {
+            var cmd = new OleDbCommand(sql, db, tx);
+            return cmd.ExecuteReader();
+        }
+
         public IDataReader ReadJoin(TableRef tbl, IEnumerable<ProjectionColumn> colNames, IEnumerable<Join> joins)
         {
             throw new NotImplementedException();
         }
 
-        public void WriteTableData(TableRef destTbl, IDataReader source, IEnumerable<string> ignored)
+        public void WriteTableData(TableRef destTbl, IDataReader source, IEnumerable<string> colNames)
         {
             if (source == null) throw new ArgumentNullException("source");
 
@@ -568,8 +575,11 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
             }
         }
 
-        private void WriteTableData(TableRef tbl, IEnumerable<string> colNames, object[] values)
+        public void WriteTableData(TableRef tbl, IEnumerable<string> colNames, IEnumerable values)
         {
+            if (colNames == null) throw new ArgumentNullException("colNames");
+            if (values == null) throw new ArgumentNullException("values");
+
             var sb = new StringBuilder();
             sb.AppendLine(string.Format("INSERT INTO {0} (", Quote(tbl.Name)));
 
@@ -593,6 +603,7 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
             cmd.ExecuteNonQuery();
         }
 
+
         /// <summary>Not implemented.</summary>
         string ISchemaProvider.DbTypeToNative(DbType type)
         {
@@ -613,6 +624,21 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
         public bool GetHasColumnDefaultValue(TableRef tblName, string colName)
         {
             throw new NotImplementedException();
+        }
+
+        public void ExecuteSqlResource(Type type, string scriptResourceName)
+        {
+            if (type == null) throw new ArgumentNullException("type");
+            if (string.IsNullOrEmpty(scriptResourceName)) throw new ArgumentNullException("scriptResourceName");
+
+            using (var scriptStream = new StreamReader(type.Assembly.GetManifestResourceStream(scriptResourceName)))
+            {
+                var databaseScript = scriptStream.ReadToEnd();
+                foreach (var cmdString in Regex.Split(databaseScript, "\r?\nGO\r?\n").Where(s => !String.IsNullOrEmpty(s)))
+                {
+                    ExecuteNonQuery(cmdString);
+                }
+            }
         }
     }
 }

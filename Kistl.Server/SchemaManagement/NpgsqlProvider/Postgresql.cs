@@ -13,6 +13,7 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
     using Kistl.API.Server;
     using Kistl.API.Utils;
     using Npgsql;
+    using System.Collections;
 
     public class Postgresql
         : AdoNetSchemaProvider<NpgsqlConnection, NpgsqlTransaction, NpgsqlCommand>
@@ -814,7 +815,7 @@ LANGUAGE 'plpgsql' VOLATILE",
                 }
             }
 
-            ExecuteNonQueryScriptFromResource(String.Format(@"Kistl.Server.SchemaManagement.NpgsqlProvider.Scripts.{0}.sql", procName));
+            ExecuteSqlResource(this.GetType(), String.Format(@"Kistl.Server.SchemaManagement.NpgsqlProvider.Scripts.{0}.sql", procName));
 
             var createTableProcQuery = new StringBuilder();
             createTableProcQuery.AppendFormat("CREATE FUNCTION \"{0}\" (repair boolean, tblName text, colName text) RETURNS boolean AS $BODY$", tableProcName);
@@ -890,12 +891,22 @@ LANGUAGE 'plpgsql' VOLATILE",
             throw new NotImplementedException();
         }
 
+        public override IDataReader ReadTableData(string sql)
+        {
+            throw new NotImplementedException();
+        }
+
         public override IDataReader ReadJoin(TableRef tbl, IEnumerable<ProjectionColumn> colNames, IEnumerable<Join> joins)
         {
             throw new NotImplementedException();
         }
 
         public override void WriteTableData(TableRef destTbl, IDataReader source, IEnumerable<string> colNames)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void WriteTableData(TableRef destTbl, IEnumerable<string> colNames, IEnumerable values)
         {
             throw new NotImplementedException();
         }
