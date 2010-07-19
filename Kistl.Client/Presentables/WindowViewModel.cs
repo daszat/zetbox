@@ -20,5 +20,11 @@ namespace Kistl.Client.Presentables
         {
         }
 
+        private bool _show = true;
+        public bool Show
+        {
+            get { return _show; }
+            set { _show = value; OnPropertyChanged("Show"); }
+        }
     }
 }
