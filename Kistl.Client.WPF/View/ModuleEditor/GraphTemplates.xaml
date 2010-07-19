@@ -1,6 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls"                    
+    xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls;assembly=Kistl.Client.WPF.Toolkit"
     xmlns:GraphSharp_Controls="clr-namespace:GraphSharp.Controls;assembly=GraphSharp.Controls"
     xmlns:Converters="clr-namespace:GraphSharp.Converters;assembly=GraphSharp.Controls"
     xmlns:CustomConverters="clr-namespace:Kistl.Client.WPF.View.ModuleEditor.Converter">

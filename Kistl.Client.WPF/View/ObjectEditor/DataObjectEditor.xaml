@@ -1,7 +1,7 @@
 ﻿<UserControl x:Class="Kistl.Client.WPF.View.ObjectEditor.DataObjectEditor"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls"
+             xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls;assembly=Kistl.Client.WPF.Toolkit"
              xmlns:view="clr-namespace:Kistl.Client.WPF.View"
              xmlns:doeview="clr-namespace:Kistl.Client.WPF.View.ObjectEditor"
              xmlns:client="clr-namespace:Kistl.Client.Presentables;assembly=Kistl.Client">

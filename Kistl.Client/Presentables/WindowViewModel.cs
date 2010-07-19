@@ -14,5 +14,11 @@ namespace Kistl.Client.Presentables
             : base(appCtx, dataCtx)
         {
         }
+
+        public WindowViewModel(bool designMode)
+            : base(designMode)
+        {
+        }
+
     }
 }

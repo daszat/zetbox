@@ -1,6 +1,6 @@
 ﻿<UserControl x:Class="Kistl.Client.WPF.View.ModuleEditor.DiagramDisplay"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls"
+    xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls;assembly=Kistl.Client.WPF.Toolkit"
     xmlns:graphsharp="clr-namespace:GraphSharp.Controls;assembly=GraphSharp.Controls"
     xmlns:moduleEditor="clr-namespace:Kistl.Client.WPF.View.ModuleEditor"
     xmlns:wpfext="clr-namespace:WPFExtensions.Controls;assembly=WPFExtensions"        

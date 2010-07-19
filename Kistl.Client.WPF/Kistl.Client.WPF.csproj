@@ -115,14 +115,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="CustomControls\ErrorReporter.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="CustomControls\LoadingIndicator.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="View\CacheDebuggerDisplay.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -298,15 +290,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.Fixes.cs" />
-    <Compile Include="CustomControls\CommandButton.cs" />
     <Compile Include="DebugConsole.cs" />
-    <Compile Include="CustomControls\ErrorReporter.xaml.cs">
-      <DependentUpon>ErrorReporter.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="CustomControls\LoadingIndicator.xaml.cs">
-      <DependentUpon>LoadingIndicator.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="CustomControls\WorkaroundToolBar.cs" />
     <Compile Include="Launcher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -532,6 +516,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="CustomControls\" />
     <Folder Include="Dialogs\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

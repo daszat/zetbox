@@ -66,6 +66,14 @@
     <Compile Include="Converter\Converters.cs" />
     <Compile Include="Converter\DebugConverter.cs" />
     <Compile Include="Converter\IconConverter.cs" />
+    <Compile Include="CustomControls\CommandButton.cs" />
+    <Compile Include="CustomControls\ErrorReporter.xaml.cs">
+      <DependentUpon>ErrorReporter.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\LoadingIndicator.xaml.cs">
+      <DependentUpon>LoadingIndicator.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\WorkaroundToolBar.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -93,6 +101,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Kistl.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="CustomControls\ErrorReporter.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="CustomControls\LoadingIndicator.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -81,6 +81,13 @@ namespace Kistl.Client.Presentables
             this._toolTipCache = tooltip;
         }
 
+        protected CommandModel(bool desingMode, string label)
+            : base(desingMode)
+        {
+            this._labelCache = label;
+        }
+
+
         #region ICommand Members
 
         #region CanExecute handling
@@ -245,6 +252,11 @@ namespace Kistl.Client.Presentables
             if (execute == null) throw new ArgumentNullException("execute");
             this.execute = execute;
             this.canExecute = canExecute;
+        }
+
+        public SimpleCommandModel(bool desingMode, string label)
+            : base(desingMode, label)
+        {
         }
 
         public override bool CanExecute(object data)
