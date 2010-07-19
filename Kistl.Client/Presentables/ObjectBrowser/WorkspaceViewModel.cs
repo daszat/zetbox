@@ -120,9 +120,10 @@ namespace Kistl.Client.Presentables.ObjectBrowser
 
         private void LoadApplications()
         {
-            this.Applications.Add(ModelFactory.CreateViewModel<ApplicationViewModel.Factory>().Invoke(DataContext, "GUI", typeof(GUI.DashboardModel.Factory)));
-            this.Applications.Add(ModelFactory.CreateViewModel<ApplicationViewModel.Factory>().Invoke(DataContext, "TimeRecords", typeof(TimeRecords.Dashboard.Factory)));
-            this.Applications.Add(ModelFactory.CreateViewModel<ApplicationViewModel.Factory>().Invoke(DataContext, "Module Editor", typeof(ModuleEditor.WorkspaceViewModel.Factory)));
+            foreach (var app in FrozenContext.GetQuery<Kistl.App.GUI.Application>())
+            {
+                this.Applications.Add(ModelFactory.CreateViewModel<ApplicationViewModel.Factory>().Invoke(DataContext, app));
+            }
         }
 
         #endregion

@@ -298,14 +298,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.Fixes.cs" />
-    <Compile Include="Commands\Converter.cs" />
-    <Compile Include="Commands\RelayCommand.cs" />
-    <Compile Include="Commands\WrappedKistlCommand.cs" />
     <Compile Include="CustomControls\CommandButton.cs" />
     <Compile Include="DebugConsole.cs" />
-    <Compile Include="Converter\Converters.cs" />
-    <Compile Include="Converter\DebugConverter.cs" />
-    <Compile Include="Converter\IconConverter.cs" />
     <Compile Include="CustomControls\ErrorReporter.xaml.cs">
       <DependentUpon>ErrorReporter.xaml</DependentUpon>
     </Compile>
@@ -327,7 +321,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Commands\SmartRoutedUICommand.cs" />
     <Compile Include="View\CacheDebuggerDisplay.xaml.cs">
       <DependentUpon>CacheDebuggerDisplay.xaml</DependentUpon>
     </Compile>
@@ -476,6 +469,10 @@
     <ProjectReference Include="..\Kistl.API\Kistl.API.csproj">
       <Project>{AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9}</Project>
       <Name>Kistl.API</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Kistl.Client.WPF.Toolkit\Kistl.Client.WPF.Toolkit.csproj">
+      <Project>{D5ADAF5E-024D-46B1-B75D-0F93A3E4A50B}</Project>
+      <Name>Kistl.Client.WPF.Toolkit</Name>
     </ProjectReference>
     <ProjectReference Include="..\Kistl.Client\Kistl.Client.csproj">
       <Project>{A736E13F-D349-4CE5-A397-8438F58D0B9D}</Project>

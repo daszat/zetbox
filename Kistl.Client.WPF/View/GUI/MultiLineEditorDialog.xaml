@@ -8,7 +8,7 @@
         MinWidth="300"
         Loaded="Window_Loaded"
         xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls"
-        xmlns:commands="clr-namespace:Kistl.Client.WPF.Commands"
+        xmlns:commands="clr-namespace:Kistl.Client.WPF.Commands;assembly=Kistl.Client.WPF.Toolkit"
         commands:SmartRoutedUICommand.IsCommandSink="True">
     <Window.Resources>
         <Style x:Key="addedMargins">

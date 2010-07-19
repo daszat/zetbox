@@ -5,7 +5,7 @@
     xmlns:moduleEditor="clr-namespace:Kistl.Client.WPF.View.ModuleEditor"
     xmlns:wpfext="clr-namespace:WPFExtensions.Controls;assembly=WPFExtensions"        
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:commands="clr-namespace:Kistl.Client.WPF.Commands"
+    xmlns:commands="clr-namespace:Kistl.Client.WPF.Commands;assembly=Kistl.Client.WPF.Toolkit"
     commands:SmartRoutedUICommand.IsCommandSink="True">
     <UserControl.Resources>
         <ResourceDictionary>

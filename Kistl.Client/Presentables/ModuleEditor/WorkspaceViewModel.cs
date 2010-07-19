@@ -133,6 +133,11 @@ namespace Kistl.Client.Presentables.ModuleEditor
                     lstMdl.Filter.Add(new ConstantFilterExpression("Module = @0", CurrentModule));
                     lst.Add(lstMdl);
 
+                    // Application
+                    lstMdl = ModelFactory.CreateViewModel<InstanceListViewModel.Factory>().Invoke(DataContext, null, DataContext.GetQuery<Application>());
+                    lstMdl.Filter.Add(new ConstantFilterExpression("Module = @0", CurrentModule));
+                    lst.Add(lstMdl);
+
                     // Relation
                     lstMdl = ModelFactory.CreateViewModel<InstanceListViewModel.Factory>().Invoke(DataContext, null, DataContext.GetQuery<Relation>());
                     lstMdl.Filter.Add(new ConstantFilterExpression("Module = @0", CurrentModule));

@@ -21,9 +21,9 @@ namespace Kistl.Client.WPF
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
-    public partial class App : Application
+    public partial class App : System.Windows.Application
     {
-        public static new App Current { get { return (App)(Application.Current); } }
+        public static new App Current { get { return (App)(System.Windows.Application.Current); } }
 
         /// <summary>
         ///  See http://dasz.at/index.php/2007/12/wpf-datetime-format/

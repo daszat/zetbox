@@ -45,7 +45,7 @@ namespace Kistl.Client.WPF
             else
             {
                 // TODO: what should be done here, really?
-                throw new NotImplementedException(String.Format("Cannot show view of type {0}", view == null ? "(null)" : view.GetType().ToString()));
+                throw new NotImplementedException(String.Format("Cannot show view of type {0}, it's not a Window", view == null ? "(null)" : view.GetType().ToString()));
             }
         }
 

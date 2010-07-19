@@ -1,8 +1,8 @@
 ﻿<Application x:Class="Kistl.Client.WPF.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:commands="clr-namespace:Kistl.Client.WPF.Commands"
-             xmlns:converter="clr-namespace:Kistl.Client.WPF.Converter"
+             xmlns:commands="clr-namespace:Kistl.Client.WPF.Commands;assembly=Kistl.Client.WPF.Toolkit"
+             xmlns:converter="clr-namespace:Kistl.Client.WPF.Converter;assembly=Kistl.Client.WPF.Toolkit"
              Startup="Application_Startup"
              Exit="Application_Exit"
              DispatcherUnhandledException="Application_DispatcherUnhandledException">

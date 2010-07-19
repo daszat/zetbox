@@ -106,6 +106,9 @@ namespace Kistl.App.Packaging
                 AddMetaObjects(result, ctx.GetQuery<FilterConfiguration>()// TODO: .Where(i => i.Module.ID == moduleID)
                     .ToList().AsQueryable() // TODO: remove this workaround for GetInterfaceType()
                     .OrderBy(i => i.ExportGuid));
+                AddMetaObjects(result, ctx.GetQuery<Application>()// TODO: .Where(i => i.Module.ID == moduleID)
+                    .ToList().AsQueryable() // TODO: remove this workaround for GetInterfaceType()
+                    .OrderBy(i => i.Name).ThenBy(i => i.ExportGuid));
             }
             return result;
         }
