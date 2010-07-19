@@ -126,11 +126,26 @@ namespace Kistl.API.Server
         Left,
     }
 
+    /// <summary>
+    /// Represents a Join Operation between two Tables
+    /// </summary>
     public class Join
     {
+        /// <summary>
+        /// The Table to join
+        /// </summary>
         public TableRef JoinTableName { get; set; }
-        public string JoinColumnName { get; set; }
-        public string FKColumnName { get; set; }
+        /// <summary>
+        /// The Columns to join in the referenced table
+        /// </summary>
+        public string[] JoinColumnName { get; set; }
+        /// <summary>
+        /// The own FK-Columns
+        /// </summary>
+        public string[] FKColumnName { get; set; }
+        /// <summary>
+        /// Type of Join
+        /// </summary>
         public JoinType Type { get; set; }
 
         public override string ToString()

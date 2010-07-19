@@ -50,6 +50,11 @@ namespace Kistl.API.Migration
             _dst.TruncateTable(tbl);
         }
 
+        /// <summary>
+        /// TODO: Use Construct from Generator
+        /// </summary>
+        /// <param name="prop"></param>
+        /// <returns></returns>
         private static string GetColName(Kistl.App.Base.Property prop)
         {
             if (prop is Kistl.App.Base.ObjectReferenceProperty)
@@ -63,7 +68,22 @@ namespace Kistl.API.Migration
             }
         }
 
-        public void TableBaseMigration(SourceTable tbl, NullConverter[] nullConverter, Join[] additional_joins)
+        public void TableBaseMigration(SourceTable tbl)
+        {
+            TableBaseMigration(tbl, null, null, null);
+        }
+
+        public void TableBaseMigration(SourceTable tbl, NullConverter[] nullConverter)
+        {
+            TableBaseMigration(tbl, nullConverter, null, null);
+        }
+
+        public void TableBaseMigration(SourceTable tbl, NullConverter[] nullConverter, Join[] joins)
+        {
+            TableBaseMigration(tbl, nullConverter, joins, null);
+        }
+
+        public void TableBaseMigration(SourceTable tbl, NullConverter[] nullConverter, Join[] additional_joins, Join[] override_joins)
         {
             if (tbl == null) throw new ArgumentNullException("tbl");
 
@@ -100,17 +120,25 @@ namespace Kistl.API.Migration
             }
             else
             {
+                var override_joins_dict = override_joins != null ? override_joins.ToDictionary(k => k.FKColumnName.First()) : new Dictionary<string, Join>();
                 // could automatically create needed indices
                 var ref_joins = referringCols.Select(reference =>
                 {
                     var referencedTable = _dst.GetQualifiedTableName(reference.References.SourceTable.DestinationObjectClass.TableName);
-                    return new Join()
+                    if (!override_joins_dict.ContainsKey(reference.Name))
                     {
-                        JoinTableName = referencedTable,
-                        Type = JoinType.Left,
-                        JoinColumnName = reference.References.DestinationProperty.Name,
-                        FKColumnName = reference.Name
-                    };
+                        return new Join()
+                        {
+                            Type = JoinType.Left,
+                            JoinTableName = referencedTable,
+                            JoinColumnName = new[] { reference.References.DestinationProperty.Name },
+                            FKColumnName = new[] { reference.Name }
+                        };
+                    }
+                    else
+                    {
+                        return override_joins_dict[reference.Name];
+                    }
                 });
                 // Add manual joins
                 IEnumerable<Join> joins;
@@ -123,7 +151,8 @@ namespace Kistl.API.Migration
                     joins = ref_joins;
                 }
 
-                var srcColumnNames = srcColumns.Select(c => {
+                var srcColumnNames = srcColumns.Select(c =>
+                {
                     var orp = c.DestinationProperty as ObjectReferenceProperty;
                     if (c.References != null)
                     {
@@ -131,7 +160,7 @@ namespace Kistl.API.Migration
                         {
                             ColumnName = "ID",
                             Alias = c.DestinationProperty.Name,
-                            TableName = _dst.GetQualifiedTableName(c.References.SourceTable.DestinationObjectClass.TableName)
+                            TableName = override_joins_dict.ContainsKey(c.Name) ? override_joins_dict[c.Name].JoinTableName : _dst.GetQualifiedTableName(c.References.SourceTable.DestinationObjectClass.TableName)
                         };
                     }
                     else if (c.References == null

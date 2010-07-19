@@ -127,25 +127,25 @@ namespace Kistl.Server.SchemaManagement
                 {
                     var viewRel = new Join();
                     result.Add(viewRel);
-                    viewRel.JoinTableName = db.GetQualifiedTableName( rel.GetRelationTableName());
-                    viewRel.JoinColumnName = Construct.ForeignKeyColumnName(lastRelEnd);
-                    viewRel.FKColumnName = lastColumName;
+                    viewRel.JoinTableName = db.GetQualifiedTableName(rel.GetRelationTableName());
+                    viewRel.JoinColumnName = new[] { Construct.ForeignKeyColumnName(lastRelEnd) };
+                    viewRel.FKColumnName = new[] { lastColumName };
 
                     viewRel = new Join();
                     result.Add(viewRel);
                     viewRel.JoinTableName = db.GetQualifiedTableName(nextRelEnd.Type.TableName);
-                    viewRel.JoinColumnName = "ID";
-                    viewRel.FKColumnName = Construct.ForeignKeyColumnName(nextRelEnd);
+                    viewRel.JoinColumnName = new[] { "ID" };
+                    viewRel.FKColumnName = new[] { Construct.ForeignKeyColumnName(nextRelEnd) };
 
-                    lastColumName = viewRel.FKColumnName;
+                    lastColumName = viewRel.FKColumnName.Single();
                 }
                 else
                 {
                     var viewRel = new Join();
                     result.Add(viewRel);
                     viewRel.JoinTableName = db.GetQualifiedTableName(nextRelEnd.Type.TableName);
-                    viewRel.JoinColumnName = "ID";
-                    viewRel.FKColumnName = Construct.ForeignKeyColumnName(nextRelEnd);
+                    viewRel.JoinColumnName = new[] { "ID" };
+                    viewRel.FKColumnName = new[] { Construct.ForeignKeyColumnName(nextRelEnd) };
 
                     lastColumName = "ID";
                 }

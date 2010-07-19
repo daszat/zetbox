@@ -734,7 +734,7 @@ BEGIN", triggerName, FormatFullName(tblName));
                     {
                         var joinTbl = rel == lastRel ? "{0}" : FormatFullName(rel.JoinTableName);
                         select.AppendLine();
-                        select.AppendFormat(@"      INNER JOIN {0} t{1} ON t{1}.[{2}] = t{3}.[{4}]", joinTbl, idx, rel.JoinColumnName, idx - 1, rel.FKColumnName);
+                        select.AppendFormat(@"      INNER JOIN {0} t{1} ON t{1}.[{2}] = t{3}.[{4}]", joinTbl, idx, rel.JoinColumnName.Single(), idx - 1, rel.FKColumnName.Single());
                         idx++;
                     }
                     string selectFormat = select.ToString();
@@ -778,7 +778,7 @@ FROM (", viewName.Schema, viewName.Name);
             {
                 view.AppendFormat(@"  SELECT t1.[ID] [ID], t{0}.[{1}] [Identity], {2} [Right]",
                     acl.Relations.Count,
-                    acl.Relations.Last().FKColumnName,
+                    acl.Relations.Last().FKColumnName.Single(),
                     (int)acl.Right);
                 view.AppendLine();
                 view.AppendFormat(@"  FROM {0} t1", FormatFullName(tblName));
@@ -787,13 +787,13 @@ FROM (", viewName.Schema, viewName.Name);
                 int idx = 2;
                 foreach (var rel in acl.Relations.Take(acl.Relations.Count - 1))
                 {
-                    view.AppendFormat(@"  INNER JOIN {0} t{1} ON t{1}.[{2}] = t{3}.[{4}]", FormatFullName(rel.JoinTableName), idx, rel.JoinColumnName, idx - 1, rel.FKColumnName);
+                    view.AppendFormat(@"  INNER JOIN {0} t{1} ON t{1}.[{2}] = t{3}.[{4}]", FormatFullName(rel.JoinTableName), idx, rel.JoinColumnName.Single(), idx - 1, rel.FKColumnName.Single());
                     view.AppendLine();
                     idx++;
                 }
                 view.AppendFormat(@"  WHERE t{0}.[{1}] IS NOT NULL",
                     acl.Relations.Count,
-                    acl.Relations.Last().FKColumnName);
+                    acl.Relations.Last().FKColumnName.Single());
                 view.AppendLine();
                 view.AppendLine("  UNION ALL");
             }
@@ -933,7 +933,7 @@ FROM (", viewName.Schema, viewName.Name);
                 if (j.JoinTableName == tbl) return idx;
                 idx++;
             }
-            return int.MinValue;
+            throw new InvalidOperationException("Unable to compute index of join: " + tbl);
         }
 
         public override IDataReader ReadJoin(TableRef tbl, IEnumerable<ProjectionColumn> colNames, IEnumerable<Join> joins)
@@ -962,7 +962,14 @@ FROM (", viewName.Schema, viewName.Name);
             int idx = 1;
             foreach (var join in joins)
             {
-                query.AppendFormat("\n  LEFT JOIN {0} t{1} ON t{1}.[{2}] = t0.[{3}]", join.JoinTableName, idx++, join.JoinColumnName, join.FKColumnName);
+                if (join.JoinColumnName.Length != join.FKColumnName.Length) throw new ArgumentException(string.Format("Column count on Join '{0}' does not match", join), "joins");
+                query.AppendFormat("\n  {2} JOIN {0} t{1} ON ", join.JoinTableName, idx, join.Type.ToString().ToUpper());
+                for (int i = 0; i < join.JoinColumnName.Length; i++)
+                {
+                    query.AppendFormat("t{0}.[{1}] = t0.[{2}]", idx, join.JoinColumnName[i], join.FKColumnName[i]);
+                    if (i < join.JoinColumnName.Length - 1) query.Append(" AND ");
+                }
+                idx++;
             }
             var cmd = new SqlCommand(query.ToString(), CurrentConnection, CurrentTransaction);
             return cmd.ExecuteReader();

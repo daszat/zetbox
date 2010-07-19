@@ -672,18 +672,18 @@ $BODY$BEGIN
                         {
                             select.AppendFormat(@"   WHERE t{0}.{1} = {2}.{3}",
                                 idx,
-                                QuoteIdentifier(rel.JoinColumnName),
+                                QuoteIdentifier(rel.JoinColumnName.Single()),
                                 "{0}",
-                                QuoteIdentifier(rel.FKColumnName));
+                                QuoteIdentifier(rel.FKColumnName.Single()));
                         }
                         else
                         {
                             select.AppendFormat(@"      INNER JOIN {0} t{1} ON (t{1}.{2} = t{3}.{4})",
                                 FormatFullName(rel.JoinTableName),
                                 idx,
-                                QuoteIdentifier(rel.JoinColumnName),
+                                QuoteIdentifier(rel.JoinColumnName.Single()),
                                 idx - 1,
-                                QuoteIdentifier(rel.FKColumnName));
+                                QuoteIdentifier(rel.FKColumnName.Single()));
                         }
                         idx++;
                     }
@@ -743,7 +743,7 @@ FROM (", viewName);
             {
                 view.AppendFormat(@"  SELECT t1.""ID"" ""ID"", t{0}.""{1}"" ""Identity"", {2} ""Right""",
                     acl.Relations.Count,
-                    acl.Relations.Last().FKColumnName,
+                    acl.Relations.Last().FKColumnName.Single(),
                     (int)acl.Right);
                 view.AppendLine();
                 view.AppendFormat(@"  FROM ""{0}"" t1", tblName);
@@ -752,13 +752,13 @@ FROM (", viewName);
                 int idx = 2;
                 foreach (var rel in acl.Relations.Take(acl.Relations.Count - 1))
                 {
-                    view.AppendFormat(@"  INNER JOIN ""{0}"" t{1} ON t{1}.""{2}"" = t{3}.""{4}""", rel.JoinTableName, idx, rel.JoinColumnName, idx - 1, rel.FKColumnName);
+                    view.AppendFormat(@"  INNER JOIN ""{0}"" t{1} ON t{1}.""{2}"" = t{3}.""{4}""", rel.JoinTableName, idx, rel.JoinColumnName.Single(), idx - 1, rel.FKColumnName.Single());
                     view.AppendLine();
                     idx++;
                 }
                 view.AppendFormat(@"  WHERE t{0}.""{1}"" IS NOT NULL",
                     acl.Relations.Count,
-                    acl.Relations.Last().FKColumnName);
+                    acl.Relations.Last().FKColumnName.Single());
                 view.AppendLine();
                 view.AppendLine("  UNION ALL");
             }

@@ -32,7 +32,10 @@ namespace Kistl.API.Migration
         /// <summary>
         /// Executes the basic defined migrations from the specified source table.
         /// </summary>
+        void TableBaseMigration(SourceTable tbl);
+        void TableBaseMigration(SourceTable tbl, NullConverter[] nullConverter);
         void TableBaseMigration(SourceTable tbl, NullConverter[] nullConverter, Join[] joins);
+        void TableBaseMigration(SourceTable tbl, NullConverter[] nullConverter, Join[] joins, Join[] override_joins);
 
         InputStream ExecuteQueryStreaming(string sql);
 
