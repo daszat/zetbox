@@ -183,7 +183,7 @@ namespace Kistl.API.Migration
                             TableName = _src.GetQualifiedTableName(tbl.Name)
                         };
                     }
-                }).ToArray();
+                }).ToList();
 
                 using (var srcReader = _src.ReadJoin(_src.GetQualifiedTableName(tbl.Name), srcColumnNames, joins))
                 using (var translator = new Translator(tbl, srcReader, srcColumns, nullConverter))
