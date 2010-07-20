@@ -171,7 +171,7 @@ namespace Kistl.Client.Presentables.KistlBase
             }
             set
             {
-                if (value == null)
+                if (value == null || (value as string) == string.Empty)
                 {
                     if (Values.Count > 0) Values.RemoveAt(0);
                 }
@@ -375,7 +375,7 @@ namespace Kistl.Client.Presentables.KistlBase
         public virtual string Predicate
         {
             get;
-            private set;
+            protected set;
         }
 
         public virtual object[] FilterValues
@@ -392,6 +392,7 @@ namespace Kistl.Client.Presentables.KistlBase
         public StringPropertyFilterExpressionViewModel(IViewModelDependencies appCtx, IKistlContext dataCtx, Property prop, FilterConfiguration filterCfg)
             : base(appCtx, dataCtx, prop, filterCfg)
         {
+            this.Predicate = string.Format("{0}.Contains(@0)", prop.Name);
         }
     }
 
