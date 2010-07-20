@@ -20,7 +20,7 @@ namespace Kistl.Client.Presentables.ObjectEditor
         public WorkspaceViewModel(IViewModelDependencies appCtx, IKistlContext dataCtx)
             : base(appCtx, dataCtx)
         {
-            RecentObjects = new ObservableCollection<ViewModel>();
+            Items = new ObservableCollection<ViewModel>();
             appCtx.Factory.OnIMultipleInstancesManagerCreated(dataCtx, this);
         }
 
@@ -28,7 +28,7 @@ namespace Kistl.Client.Presentables.ObjectEditor
         /// <summary>
         /// A list of "active" <see cref="IDataObject"/>s
         /// </summary>
-        public ObservableCollection<ViewModel> RecentObjects { get; private set; }
+        public ObservableCollection<ViewModel> Items { get; private set; }
 
         private ViewModel _selectedItem;
         /// <summary>
@@ -54,6 +54,20 @@ namespace Kistl.Client.Presentables.ObjectEditor
 
         #region Commands
 
+        private ICommand _DeleteCommand = null;
+        public ICommand DeleteCommand
+        {
+            get
+            {
+                if (_DeleteCommand == null)
+                {
+                    _DeleteCommand = ModelFactory.CreateViewModel<SimpleItemCommandModel<DataObjectModel>.Factory>().Invoke(DataContext, "Delete", "", 
+                        (items) => items.ForEach(i => i.Delete()));
+                }
+                return _DeleteCommand;
+            }
+        }
+
         #region Save Context
 
         private SaveContextCommand _saveCommand;
@@ -74,39 +88,19 @@ namespace Kistl.Client.Presentables.ObjectEditor
 
         #endregion
 
-        #region Create New Instance
-
-        private CreateNewInstanceCommand _createNewInstanceCommand = null;
-        /// <summary>
-        /// Creates a new instance of an <see cref="ObjectClass"/> and makes it the currently selected instance.
-        /// </summary>
-        public ICommand CreateNewInstanceCommand
-        {
-            get
-            {
-                if (_createNewInstanceCommand == null)
-                {
-                    _createNewInstanceCommand = ModelFactory.CreateViewModel<CreateNewInstanceCommand.Factory>().Invoke(DataContext, this);
-                }
-                return _createNewInstanceCommand;
-            }
-        }
-
-        #endregion
-
         #region History Touch
 
         /// <summary>
         /// registers a user contact with the mdl in this <see cref="WorkspaceViewModel"/>'s history
         /// </summary>
         /// <param name="mdl"></param>
-        public void HistoryTouch(ViewModel mdl)
+        public void AddItem(ViewModel mdl)
         {
             // fetch old SelectedItem to reestablish selection after modifying RecentObjects
             var item = SelectedItem;
-            if (!RecentObjects.Contains(mdl))
+            if (!Items.Contains(mdl))
             {
-                RecentObjects.Add(mdl);
+                Items.Add(mdl);
             }
             // reestablish selection 
             SelectedItem = item;
@@ -142,13 +136,26 @@ namespace Kistl.Client.Presentables.ObjectEditor
         /// <returns></returns>
         public void ShowForeignModel(DataObjectModel dataObject)
         {
+            ShowForeignModel(dataObject, null);
+        }
+
+        /// <summary>
+        /// Show a foreign model by finding and creating the equivalent model on the local DataContext.
+        /// </summary>
+        /// <param name="dataObject"></param>
+        /// <param name="requestedKind"></param>
+        /// <returns></returns>
+        public void ShowForeignModel(DataObjectModel dataObject, Kistl.App.GUI.ControlKind requestedKind)
+        {
             if (dataObject == null || dataObject.Object == null)
                 return;
 
             var other = dataObject.Object;
             var here = DataContext.Find(DataContext.GetInterfaceType(other), other.ID);
-            SelectedItem = ModelFactory.CreateViewModel<DataObjectModel.Factory>(here).Invoke(DataContext, here);
-            HistoryTouch(SelectedItem);
+            var vm = ModelFactory.CreateViewModel<DataObjectModel.Factory>(here).Invoke(DataContext, here);
+            SelectedItem = vm;
+            vm.RequestedKind = requestedKind;
+            AddItem(vm);
         }
 
         public override string Name
@@ -225,7 +232,7 @@ namespace Kistl.Client.Presentables.ObjectEditor
         /// <returns></returns>
         public override bool CanExecute(object data)
         {
-            return data == null && CheckValidity();
+            return CheckValidity();
         }
 
         protected override void DoExecute(object data)
@@ -238,42 +245,5 @@ namespace Kistl.Client.Presentables.ObjectEditor
             DataContext.SubmitChanges();
         }
 
-    }
-
-    /// <summary>
-    /// Creates a new instance of an <see cref="ObjectClass"/> and makes it the currently selected instance.
-    /// </summary>
-    internal class CreateNewInstanceCommand : CommandModel
-    {
-        public new delegate CreateNewInstanceCommand Factory(IKistlContext dataCtx, WorkspaceViewModel parent);
-
-        public CreateNewInstanceCommand(IViewModelDependencies appCtx, IKistlContext dataCtx, WorkspaceViewModel parent)
-            : base(appCtx, dataCtx, "New", "Create a new instance")
-        {
-            _parent = parent;
-        }
-
-        private WorkspaceViewModel _parent;
-
-        public override bool CanExecute(object data)
-        {
-            return DataContext != null
-                && !DataContext.IsReadonly
-                && _parent != null
-                && data != null
-                && data is ObjectClassModel;
-        }
-
-        protected override void DoExecute(object data)
-        {
-            if (CanExecute(data))
-            {
-                var objectClass = data as ObjectClassModel;
-                var newObject = DataContext.Create(objectClass.GetDescribedInterfaceType());
-                var newModel = ModelFactory.CreateViewModel<DataObjectModel.Factory>(newObject).Invoke(DataContext, newObject);
-                _parent.HistoryTouch(newModel);
-                _parent.SelectedItem = newModel;
-            }
-        }
     }
 }

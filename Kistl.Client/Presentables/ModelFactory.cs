@@ -221,7 +221,7 @@ namespace Kistl.Client.Presentables
             else
             {
                 var m = Managers[dom.Object.Context];
-                m.HistoryTouch(dom);
+                m.AddItem(dom);
                 m.SelectedItem = dom;
             }
         }

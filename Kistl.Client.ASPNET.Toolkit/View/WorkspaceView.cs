@@ -55,17 +55,17 @@ namespace Kistl.Client.ASPNET.Toolkit.View
         public override void SetModel(ViewModel mdl)
         {
             base.SetModel(mdl);
-            Model.RecentObjects.CollectionChanged += new System.Collections.Specialized.NotifyCollectionChangedEventHandler(RecentObjects_CollectionChanged);
+            Model.Items.CollectionChanged += new System.Collections.Specialized.NotifyCollectionChangedEventHandler(Items_CollectionChanged);
         }
 
-        void RecentObjects_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        void Items_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Add)
             {
                 foreach (DataObjectModel mdl in e.NewItems)
                 {
                     var container = new HtmlGenericControl("div");
-                    container.ID = "mdlContainer" + Model.RecentObjects.IndexOf(mdl);
+                    container.ID = "mdlContainer" + Model.Items.IndexOf(mdl);
                     container.Attributes.Add("display", "node");
                     containerObjectsCtrl.Controls.Add(container);
 
@@ -143,12 +143,12 @@ namespace Kistl.Client.ASPNET.Toolkit.View
         {
             base.OnPreRender(e);
 
-            repObjectsCtrl.DataSource = Model.RecentObjects;
+            repObjectsCtrl.DataSource = Model.Items;
             repObjectsCtrl.DataBind();
 
-            hdObjectsControl.Value = Model.RecentObjects.Cast<DataObjectModel>().ToJSONArray();
+            hdObjectsControl.Value = Model.Items.Cast<DataObjectModel>().ToJSONArray();
 
-            CurrentIndex = Model.RecentObjects.IndexOf(Model.SelectedItem);
+            CurrentIndex = Model.Items.IndexOf(Model.SelectedItem);
 
             ScriptManager scriptManager = ScriptManager.GetCurrent(Page);
             if (scriptManager == null) throw new InvalidOperationException("ScriptManager required on the page.");

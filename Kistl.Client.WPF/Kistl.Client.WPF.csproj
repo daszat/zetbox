@@ -227,10 +227,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\LabeledView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="SplashScreen.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -390,9 +386,6 @@
     <Compile Include="View\KistlBase\TypeRefPropertyView.xaml.cs">
       <DependentUpon>TypeRefPropertyView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\LabeledView.xaml.cs">
-      <DependentUpon>LabeledView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\KistlDebuggerView.xaml.cs">
       <DependentUpon>KistlDebuggerView.xaml</DependentUpon>
     </Compile>
@@ -421,7 +414,6 @@
     <Compile Include="View\ObjectBrowser\WorkspaceDisplay.xaml.cs">
       <DependentUpon>WorkspaceDisplay.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ObjectEditor\WorkspaceDisplay.xaml.Commands.cs" />
     <Compile Include="View\ObjectEditor\WorkspaceDisplay.xaml.cs">
       <DependentUpon>WorkspaceDisplay.xaml</DependentUpon>
     </Compile>
@@ -431,7 +423,6 @@
     <Compile Include="View\TimeRecords\WorkEffortRecorderView.xaml.cs">
       <DependentUpon>WorkEffortRecorderView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\VisualTypeTemplateSelector.cs" />
     <Compile Include="WpfModelFactory.cs" />
     <Compile Include="WPFModule.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">

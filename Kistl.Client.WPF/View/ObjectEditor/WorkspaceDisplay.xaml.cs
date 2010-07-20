@@ -28,16 +28,6 @@ namespace Kistl.Client.WPF.View.ObjectEditor
             InitializeComponent();
         }
 
-        private void DeleteHandler(object sender, RoutedEventArgs e)
-        {
-            var item = ViewModel.SelectedItem as DataObjectModel;
-            if (item != null)
-            {
-                item.Delete();
-                ViewModel.HistoryTouch(item);
-            }
-        }
-
         public WorkspaceViewModel ViewModel
         {
             get { return (WorkspaceViewModel)this.DataContext; }

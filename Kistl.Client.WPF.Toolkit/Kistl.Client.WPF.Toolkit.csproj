@@ -33,6 +33,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
@@ -70,11 +74,15 @@
     <Compile Include="CustomControls\ErrorReporter.xaml.cs">
       <DependentUpon>ErrorReporter.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CustomControls\LabeledView.xaml.cs">
+      <DependentUpon>LabeledView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CustomControls\LoadingIndicator.xaml.cs">
       <DependentUpon>LoadingIndicator.xaml</DependentUpon>
     </Compile>
     <Compile Include="CustomControls\WorkaroundToolBar.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VisualTypeTemplateSelector.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Kistl.API.Client\Kistl.API.Client.csproj">
@@ -104,6 +112,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="CustomControls\ErrorReporter.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="CustomControls\LabeledView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

@@ -9,6 +9,6 @@ namespace Kistl.Client.Presentables
     public interface IMultipleInstancesManager
     {
         ViewModel SelectedItem { get; set; }
-        void HistoryTouch(ViewModel mdl);
+        void AddItem(ViewModel mdl);
     }
 }

@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls;assembly=Kistl.Client.WPF.Toolkit"
              xmlns:rels="clr-namespace:Kistl.Client.WPF.View.Relations"
-             xmlns:view="clr-namespace:Kistl.Client.WPF.View">
+             xmlns:view="clr-namespace:Kistl.Client.WPF.View;assembly=Kistl.Client.WPF.Toolkit">
 
     <DockPanel>
         <ToolBar DockPanel.Dock="Top"

@@ -2,7 +2,6 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls;assembly=Kistl.Client.WPF.Toolkit"
-        xmlns:view="clr-namespace:Kistl.Client.WPF.View.ObjectEditor"
         xmlns:client="clr-namespace:Kistl.Client.Presentables;assembly=Kistl.Client"
         xmlns:commands="clr-namespace:Kistl.Client.WPF.Commands;assembly=Kistl.Client.WPF.Toolkit"
         Title="DesktopView"
@@ -11,14 +10,11 @@
         commands:SmartRoutedUICommand.IsCommandSink="True">
     <DockPanel>
         <Menu DockPanel.Dock="Top">
-            <MenuItem Command="view:WorkspaceDisplay.Save"
-                      CommandParameter="{Binding}" />
-            <MenuItem Command="view:WorkspaceDisplay.Verify"
-                      CommandParameter="{Binding}" />
-            <MenuItem Click="DeleteHandler"
-                      Header="Delete" />
-            <MenuItem Header="{Binding CreateNewInstanceCommand.Label}"
-                      Command="{Binding CreateNewInstanceCommand, Converter={StaticResource CommandConverter}}"
+            <MenuItem Command="{Binding SaveCommand, Converter={StaticResource CommandConverter}}"
+                      CommandParameter="{Binding SelectedItem}" />
+            <MenuItem Command="{Binding VerifyContextCommand, Converter={StaticResource CommandConverter}}"
+                      CommandParameter="{Binding SelectedItem}" />
+            <MenuItem Command="{Binding DeleteCommand, Converter={StaticResource CommandConverter}}"
                       CommandParameter="{Binding SelectedItem}" />
         </Menu>
         <Grid>
@@ -31,7 +27,7 @@
             <DockPanel Grid.Column="0">
                 <TextBlock DockPanel.Dock="Top"
                            HorizontalAlignment="Center">Objects:</TextBlock>
-                <ListBox ItemsSource="{Binding RecentObjects}"
+                <ListBox ItemsSource="{Binding Items}"
                          SelectedItem="{Binding SelectedItem}"
                          ItemTemplateSelector="{StaticResource listItemTemplateSelector}"
                          BorderThickness="0" />
