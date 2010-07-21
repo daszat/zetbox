@@ -34,8 +34,7 @@ namespace Kistl.API.Migration
         /// </summary>
         void TableBaseMigration(SourceTable tbl);
         void TableBaseMigration(SourceTable tbl, NullConverter[] nullConverter);
-        void TableBaseMigration(SourceTable tbl, NullConverter[] nullConverter, Join[] joins);
-        void TableBaseMigration(SourceTable tbl, NullConverter[] nullConverter, Join[] joins, Join[] override_joins);
+        void TableBaseMigration(SourceTable tbl, NullConverter[] nullConverter, Join[] additional_joins);
 
         InputStream ExecuteQueryStreaming(string sql);
 

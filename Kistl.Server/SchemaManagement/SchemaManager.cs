@@ -102,6 +102,7 @@ namespace Kistl.Server.SchemaManagement
 
             List<Join> result = new List<Join>();
             string lastColumName = "ID";
+            Join lastJoin = null;
             ObjectClass lastType = objClass;
             foreach (var rel in relations)
             {
@@ -128,26 +129,29 @@ namespace Kistl.Server.SchemaManagement
                     var viewRel = new Join();
                     result.Add(viewRel);
                     viewRel.JoinTableName = db.GetQualifiedTableName(rel.GetRelationTableName());
-                    viewRel.JoinColumnName = new[] { Construct.ForeignKeyColumnName(lastRelEnd) };
-                    viewRel.FKColumnName = new[] { lastColumName };
+                    viewRel.JoinColumnName = new[] { new ColumnRef(Construct.ForeignKeyColumnName(lastRelEnd), ColumnRef.Local) };
+                    viewRel.FKColumnName = new[] { new ColumnRef(lastColumName, lastJoin) };
+                    lastJoin = viewRel;
 
                     viewRel = new Join();
                     result.Add(viewRel);
                     viewRel.JoinTableName = db.GetQualifiedTableName(nextRelEnd.Type.TableName);
-                    viewRel.JoinColumnName = new[] { "ID" };
-                    viewRel.FKColumnName = new[] { Construct.ForeignKeyColumnName(nextRelEnd) };
+                    viewRel.JoinColumnName = new[] { new ColumnRef("ID", ColumnRef.Local) };
+                    viewRel.FKColumnName = new[] { new ColumnRef(Construct.ForeignKeyColumnName(nextRelEnd), lastJoin) };
 
-                    lastColumName = viewRel.FKColumnName.Single();
+                    lastColumName = viewRel.FKColumnName.Single().ColumnName;
+                    lastJoin = viewRel;
                 }
                 else
                 {
                     var viewRel = new Join();
                     result.Add(viewRel);
                     viewRel.JoinTableName = db.GetQualifiedTableName(nextRelEnd.Type.TableName);
-                    viewRel.JoinColumnName = new[] { "ID" };
-                    viewRel.FKColumnName = new[] { Construct.ForeignKeyColumnName(nextRelEnd) };
+                    viewRel.JoinColumnName = new[] { new ColumnRef("ID", ColumnRef.Local) };
+                    viewRel.FKColumnName = new[] { new ColumnRef(Construct.ForeignKeyColumnName(nextRelEnd), lastJoin) };
 
                     lastColumName = "ID";
+                    lastJoin = viewRel;
                 }
 
                 lastType = nextRelEnd.Type;

@@ -8,6 +8,7 @@ namespace Kistl.API.Server
     using System.Linq;
     using System.Text;
     using System.Collections;
+    using System.Diagnostics;
 
     public struct TableRef : IComparable<TableRef>, ICloneable
     {
@@ -138,15 +139,28 @@ namespace Kistl.API.Server
         /// <summary>
         /// The Columns to join in the referenced table
         /// </summary>
-        public string[] JoinColumnName { get; set; }
+        public ColumnRef[] JoinColumnName { get; set; }
         /// <summary>
         /// The own FK-Columns
         /// </summary>
-        public string[] FKColumnName { get; set; }
+        public ColumnRef[] FKColumnName { get; set; }
         /// <summary>
         /// Type of Join
         /// </summary>
         public JoinType Type { get; set; }
+
+        private List<Join> _joins = null;
+        public List<Join> Joins
+        {
+            get
+            {
+                if (_joins == null)
+                {
+                    _joins = new List<Join>();
+                }
+                return _joins;
+            }
+        }
 
         public override string ToString()
         {
@@ -159,12 +173,39 @@ namespace Kistl.API.Server
         }
     }
 
-    public class ProjectionColumn
+    public class ColumnRef
     {
-        public TableRef TableName { get; set; }
+        public static readonly Join Local = new Join();
+        public static readonly Join PrimaryTable = null;
+
+        public ColumnRef()
+        {
+        }
+
+        public ColumnRef(string name, Join source)
+        {
+            this.ColumnName = name;
+            this.Source = source;
+        }
+
+        public Join Source { get; set; }
         public string ColumnName { get; set; }
+
+        public override string ToString()
+        {
+            return string.Format("CR: {0}{1}", Source != null ? "." + Source : string.Empty, ColumnName);
+        }
+    }
+
+    public class ProjectionColumn : ColumnRef
+    {
         public string Alias { get; set; }
         public string NullValue { get; set; }
+
+        public override string ToString()
+        {
+            return string.Format("PC: {0}{1}", Source != null ? "." + Source : string.Empty , ColumnName);
+        }
     }
 
     public class RightsTrigger

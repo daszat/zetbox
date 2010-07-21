@@ -20,7 +20,6 @@ namespace Kistl.API.Migration
         private readonly SourceColumn[] _srcColumns;
         private readonly NullConverter[] _nullConverter;
         private readonly string[] _srcColumnNames;
-        private readonly string[] _dstColumnNames;
 
         private readonly int _errorColIdx;
 
@@ -37,13 +36,11 @@ namespace Kistl.API.Migration
             _source = source;
             _srcColumns = srcColumns.ToArray();
             _srcColumnNames = srcColumns.Select(c => c.Name).ToArray();
-            _dstColumnNames = srcColumns.Select(c => c.DestinationProperty.Name).ToArray();
             _nullConverter = nullConverter ?? new NullConverter[] { };
-
 
             if (typeof(IMigrationInfo).IsAssignableFrom(tbl.DestinationObjectClass.GetDataType()))
             {
-                _errorColIdx = _dstColumnNames.Length;
+                _errorColIdx = _srcColumns.Length;
             }
             else
             {

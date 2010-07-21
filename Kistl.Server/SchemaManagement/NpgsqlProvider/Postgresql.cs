@@ -672,18 +672,18 @@ $BODY$BEGIN
                         {
                             select.AppendFormat(@"   WHERE t{0}.{1} = {2}.{3}",
                                 idx,
-                                QuoteIdentifier(rel.JoinColumnName.Single()),
+                                QuoteIdentifier(rel.JoinColumnName.Single().ColumnName),
                                 "{0}",
-                                QuoteIdentifier(rel.FKColumnName.Single()));
+                                QuoteIdentifier(rel.FKColumnName.Single().ColumnName));
                         }
                         else
                         {
                             select.AppendFormat(@"      INNER JOIN {0} t{1} ON (t{1}.{2} = t{3}.{4})",
                                 FormatFullName(rel.JoinTableName),
                                 idx,
-                                QuoteIdentifier(rel.JoinColumnName.Single()),
+                                QuoteIdentifier(rel.JoinColumnName.Single().ColumnName),
                                 idx - 1,
-                                QuoteIdentifier(rel.FKColumnName.Single()));
+                                QuoteIdentifier(rel.FKColumnName.Single().ColumnName));
                         }
                         idx++;
                     }

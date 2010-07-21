@@ -70,23 +70,18 @@ namespace Kistl.API.Migration
 
         public void TableBaseMigration(SourceTable tbl)
         {
-            TableBaseMigration(tbl, null, null, null);
+            TableBaseMigration(tbl, null, null);
         }
 
         public void TableBaseMigration(SourceTable tbl, NullConverter[] nullConverter)
         {
-            TableBaseMigration(tbl, nullConverter, null, null);
+            TableBaseMigration(tbl, nullConverter, null);
         }
 
-        public void TableBaseMigration(SourceTable tbl, NullConverter[] nullConverter, Join[] joins)
+        public void TableBaseMigration(SourceTable tbl, NullConverter[] nullConverter, Join[] additional_joins)
         {
-            TableBaseMigration(tbl, nullConverter, joins, null);
-        }
-
-        public void TableBaseMigration(SourceTable tbl, NullConverter[] nullConverter, Join[] additional_joins, Join[] override_joins)
-        {
+            // ------------------- Argument checks ------------------- 
             if (tbl == null) throw new ArgumentNullException("tbl");
-
             if (tbl.DestinationObjectClass == null)
             {
                 Log.InfoFormat("Skipping base migration of unmapped table [{0}]", tbl.Name);
@@ -95,101 +90,183 @@ namespace Kistl.API.Migration
 
             Log.InfoFormat("Migrating {0} to {1}", tbl.Name, tbl.DestinationObjectClass.Name);
 
-            var srcColumns = tbl.SourceColumn
+            // ------------------- Build columns ------------------- 
+            var mappedColumns = tbl.SourceColumn
                 .Where(c => c.DestinationProperty != null)
                 .OrderBy(c => c.Name)
                 .ToList();
-            var dstColumnNames = srcColumns.Select(c => GetColName(c.DestinationProperty)).ToList();
+            // Ref Cols
+            var referringCols = mappedColumns.Where(c => c.References != null).ToList();
 
+            // ------------------- Migrate ------------------- 
+            if (referringCols.Count == 0 && (additional_joins == null || additional_joins.Length == 0))
+            {
+                TableBaseSimpleMigration(tbl, nullConverter, mappedColumns);
+            }
+            else
+            {
+                TableBaseComplexMigration(tbl, nullConverter, mappedColumns, referringCols, additional_joins);
+            }
+        }
+
+        private static List<string> GetDestinationColumnNames(SourceTable tbl, List<SourceColumn> srcColumns)
+        {
+            var dstColumnNames = srcColumns.Select(c => GetColName(c.DestinationProperty)).ToList();
             // Error Col
             if (typeof(IMigrationInfo).IsAssignableFrom(tbl.DestinationObjectClass.GetDataType()))
             {
                 dstColumnNames.Add("MigrationErrors");
             }
+            return dstColumnNames;
+        }
 
-            var referringCols = srcColumns.Where(c => c.References != null).ToList();
-            if (referringCols.Count == 0 && (additional_joins == null || additional_joins.Length == 0))
+        private void TableBaseComplexMigration(SourceTable tbl, NullConverter[] nullConverter, List<SourceColumn> mappedColumns, List<SourceColumn> referringCols, Join[] additional_joins)
+        {
+            if (additional_joins != null
+                && additional_joins.Length > 0
+                && additional_joins.All(j => referringCols
+                    .Select(c => c.DestinationProperty)
+                    .OfType<ObjectReferenceProperty>()
+                    .Any(orp => j.JoinTableName == _dst.GetQualifiedTableName(orp.RelationEnd.Parent.GetOtherEnd(orp.RelationEnd).Type.TableName))))
             {
-                var srcColumnNames = srcColumns.Select(c => c.Name).ToArray();
-                // no fk mapping required
-                using (var srcReader = _src.ReadTableData(_src.GetQualifiedTableName(tbl.Name), srcColumnNames))
-                using (var translator = new Translator(tbl, srcReader, srcColumns, nullConverter))
-                {
-                    _dst.WriteTableData(_dst.GetQualifiedTableName(tbl.DestinationObjectClass.TableName), translator, dstColumnNames);
-                }
+                throw new InvalidOperationException("Unmapped additional joins found");
+            }
+
+            // could automatically create needed indices
+            var all_joins = new Dictionary<SourceColumn, Join>();
+            var root_joins = referringCols
+                .GroupBy(k => k.DestinationProperty)
+                .SelectMany(referenceGroup => CreateReferenceJoin(referenceGroup, all_joins))
+                .ToArray();
+
+            // Add manual joins
+            IEnumerable<Join> joins;
+            if (additional_joins != null)
+            {
+                joins = root_joins.Union(additional_joins);
             }
             else
             {
-                var override_joins_dict = override_joins != null ? override_joins.ToDictionary(k => k.FKColumnName.First()) : new Dictionary<string, Join>();
-                // could automatically create needed indices
-                var ref_joins = referringCols.Select(reference =>
-                {
-                    var referencedTable = _dst.GetQualifiedTableName(reference.References.SourceTable.DestinationObjectClass.TableName);
-                    if (!override_joins_dict.ContainsKey(reference.Name))
-                    {
-                        return new Join()
-                        {
-                            Type = JoinType.Left,
-                            JoinTableName = referencedTable,
-                            JoinColumnName = new[] { reference.References.DestinationProperty.Name },
-                            FKColumnName = new[] { reference.Name }
-                        };
-                    }
-                    else
-                    {
-                        return override_joins_dict[reference.Name];
-                    }
-                });
-                // Add manual joins
-                IEnumerable<Join> joins;
-                if (additional_joins != null)
-                {
-                    joins = ref_joins.Union(additional_joins);
-                }
-                else
-                {
-                    joins = ref_joins;
-                }
+                joins = root_joins;
+            }
 
-                var srcColumnNames = srcColumns.Select(c =>
+            var srcColumns = mappedColumns.Where(c => c.References == null).Union(referringCols.GroupBy(k => k.DestinationProperty).Select(g => g.First())).ToList();
+            var srcColumnNames = srcColumns.Select(c =>
+            {
+                var orp = c.DestinationProperty as ObjectReferenceProperty;
+                if (c.References != null)
                 {
-                    var orp = c.DestinationProperty as ObjectReferenceProperty;
-                    if (c.References != null)
+                    return new ProjectionColumn()
                     {
-                        return new ProjectionColumn()
-                        {
-                            ColumnName = "ID",
-                            Alias = c.DestinationProperty.Name,
-                            TableName = override_joins_dict.ContainsKey(c.Name) ? override_joins_dict[c.Name].JoinTableName : _dst.GetQualifiedTableName(c.References.SourceTable.DestinationObjectClass.TableName)
-                        };
-                    }
-                    else if (c.References == null
-                        && c.DestinationProperty is ObjectReferenceProperty
-                        && additional_joins != null
+                        ColumnName = "ID",
+                        Alias = c.DestinationProperty.Name,
+                        Source = all_joins[c]
+                    };
+                }
+                else if (c.References == null
+                    && c.DestinationProperty is ObjectReferenceProperty)
+                {
+                    if (additional_joins != null
                         && additional_joins.Count(i => i.JoinTableName == _dst.GetQualifiedTableName(orp.RelationEnd.Parent.GetOtherEnd(orp.RelationEnd).Type.TableName)) > 0)
                     {
                         return new ProjectionColumn()
                         {
                             ColumnName = "ID",
                             Alias = c.DestinationProperty.Name,
-                            TableName = _dst.GetQualifiedTableName(orp.RelationEnd.Parent.GetOtherEnd(orp.RelationEnd).Type.TableName)
+                            Source = additional_joins.Single(j => j.JoinTableName == _dst.GetQualifiedTableName(orp.RelationEnd.Parent.GetOtherEnd(orp.RelationEnd).Type.TableName))
                         };
                     }
                     else
                     {
-                        return new ProjectionColumn()
-                        {
-                            ColumnName = c.Name,
-                            TableName = _src.GetQualifiedTableName(tbl.Name)
-                        };
+                        throw new InvalidOperationException(string.Format("No join found for {0}", c));
                     }
-                }).ToList();
-
-                using (var srcReader = _src.ReadJoin(_src.GetQualifiedTableName(tbl.Name), srcColumnNames, joins))
-                using (var translator = new Translator(tbl, srcReader, srcColumns, nullConverter))
-                {
-                    _dst.WriteTableData(_dst.GetQualifiedTableName(tbl.DestinationObjectClass.TableName), translator, dstColumnNames);
                 }
+                else
+                {
+                    return new ProjectionColumn()
+                    {
+                        ColumnName = c.Name,
+                        Source = null
+                    };
+                }
+            }).ToList();
+            var dstColumnNames = GetDestinationColumnNames(tbl, srcColumns);
+
+            using (var srcReader = _src.ReadJoin(_src.GetQualifiedTableName(tbl.Name), srcColumnNames, joins))
+            using (var translator = new Translator(tbl, srcReader, srcColumns, nullConverter))
+            {
+                _dst.WriteTableData(_dst.GetQualifiedTableName(tbl.DestinationObjectClass.TableName), translator, dstColumnNames);
+            }
+        }
+
+        private IEnumerable<Join> CreateReferenceJoin(IGrouping<Property, SourceColumn> referenceGroup, Dictionary<SourceColumn, Join> all_joins)
+        {
+            // Create a "fake" intermediate IGrouping of the right type
+            return CreateReferenceJoin(referenceGroup
+                .Select(g => new KeyValuePair<SourceColumn, SourceColumn>(g, g))
+                .GroupBy(g => referenceGroup.Key)
+                .Single(),
+                all_joins);
+        }
+
+        private IEnumerable<Join> CreateReferenceJoin(IGrouping<Property, KeyValuePair<SourceColumn, SourceColumn>> referenceGroup, Dictionary<SourceColumn, Join> all_joins)
+        {
+            var x = referenceGroup
+                .Select(r => new KeyValuePair<SourceColumn, SourceColumn>(r.Key, r.Value.References)) // go to referenced SourceColumns
+                .Where(r => r.Value.References != null && r.Value.DestinationProperty != null) // find secondary references
+                .GroupBy(r => r.Value.DestinationProperty)
+                .Select(g => new { Property = g.Key, Result = CreateReferenceJoin(g, all_joins) })
+                .ToArray();
+
+            if (x.Length > 0)
+            {
+                var result = new List<Join>();
+                foreach (var i in x)
+                {
+                    foreach (var j in i.Result)
+                    {
+                        var join = CreateJoinComponent(referenceGroup, all_joins);
+                        join.JoinColumnName = join.JoinColumnName.Concat(new[] { new ColumnRef("ID", j) }).ToArray();
+                        join.FKColumnName = join.FKColumnName.Concat(new[] { new ColumnRef(GetColName(i.Property), ColumnRef.Local) }).ToArray();
+                        j.Joins.Add(join);
+                        result.Add(j);
+                    }
+                }
+                return result;
+            }
+            else
+            {
+                var result = CreateJoinComponent(referenceGroup, all_joins);
+                return new[] { result };
+            }
+        }
+
+        private Join CreateJoinComponent(IGrouping<Property, KeyValuePair<SourceColumn, SourceColumn>> referenceGroup, Dictionary<SourceColumn, Join> all_joins)
+        {
+            // Get SrcTbl & check for uniqueness.
+            var srcTbl = referenceGroup.Select(r => r.Value.References.SourceTable).Distinct().Single();
+            var directRefs = referenceGroup.Where(r => r.Value.References.References == null);
+
+            var result = new Join()
+            {
+                Type = JoinType.Left,
+                JoinTableName = _dst.GetQualifiedTableName(srcTbl.DestinationObjectClass.TableName),
+                JoinColumnName = directRefs.Select(reference => new ColumnRef(reference.Value.References.DestinationProperty.Name, ColumnRef.Local)).ToArray(),
+                FKColumnName = directRefs.Select(reference => new ColumnRef(reference.Value.Name, ColumnRef.PrimaryTable)).ToArray()
+            };
+            directRefs.ForEach(dr => all_joins[dr.Key] = result);
+            return result;
+        }
+
+        private void TableBaseSimpleMigration(SourceTable tbl, NullConverter[] nullConverter, List<SourceColumn> mappedColumns)
+        {
+            var dstColumnNames = GetDestinationColumnNames(tbl, mappedColumns);
+            var srcColumnNames = mappedColumns.Select(c => c.Name).ToArray();
+            // no fk mapping required
+            using (var srcReader = _src.ReadTableData(_src.GetQualifiedTableName(tbl.Name), srcColumnNames))
+            using (var translator = new Translator(tbl, srcReader, mappedColumns, nullConverter))
+            {
+                _dst.WriteTableData(_dst.GetQualifiedTableName(tbl.DestinationObjectClass.TableName), translator, dstColumnNames);
             }
         }
     }

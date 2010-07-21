@@ -734,7 +734,7 @@ BEGIN", triggerName, FormatFullName(tblName));
                     {
                         var joinTbl = rel == lastRel ? "{0}" : FormatFullName(rel.JoinTableName);
                         select.AppendLine();
-                        select.AppendFormat(@"      INNER JOIN {0} t{1} ON t{1}.[{2}] = t{3}.[{4}]", joinTbl, idx, rel.JoinColumnName.Single(), idx - 1, rel.FKColumnName.Single());
+                        select.AppendFormat(@"      INNER JOIN {0} t{1} ON t{1}.[{2}] = t{3}.[{4}]", joinTbl, idx, rel.JoinColumnName.Single().ColumnName, idx - 1, rel.FKColumnName.Single().ColumnName);
                         idx++;
                     }
                     string selectFormat = select.ToString();
@@ -787,7 +787,7 @@ FROM (", viewName.Schema, viewName.Name);
                 int idx = 2;
                 foreach (var rel in acl.Relations.Take(acl.Relations.Count - 1))
                 {
-                    view.AppendFormat(@"  INNER JOIN {0} t{1} ON t{1}.[{2}] = t{3}.[{4}]", FormatFullName(rel.JoinTableName), idx, rel.JoinColumnName.Single(), idx - 1, rel.FKColumnName.Single());
+                    view.AppendFormat(@"  INNER JOIN {0} t{1} ON t{1}.[{2}] = t{3}.[{4}]", FormatFullName(rel.JoinTableName), idx, rel.JoinColumnName.Single().ColumnName, idx - 1, rel.FKColumnName.Single().ColumnName);
                     view.AppendLine();
                     idx++;
                 }
@@ -925,54 +925,64 @@ FROM (", viewName.Schema, viewName.Name);
         }
 
 
-        private static int JoinIndex(IEnumerable<Join> joins, TableRef tbl)
-        {
-            int idx = 0;
-            foreach (var j in joins)
-            {
-                if (j.JoinTableName == tbl) return idx;
-                idx++;
-            }
-            throw new InvalidOperationException("Unable to compute index of join: " + tbl);
-        }
-
         public override IDataReader ReadJoin(TableRef tbl, IEnumerable<ProjectionColumn> colNames, IEnumerable<Join> joins)
         {
             if (tbl == null) throw new ArgumentNullException("tbl");
             if (colNames == null) throw new ArgumentNullException("colNames");
             if (joins == null) throw new ArgumentNullException("joins");
 
-            var columns = String.Join(",\n", colNames.Select(n => {
+            var join_alias = new Dictionary<Join, string>();
+            var joinQueryPart = new StringBuilder();
+            int idx = 1;
+            foreach (var join in joins)
+            {
+                AddReadJoin(joinQueryPart, ref idx, join, join_alias);
+                idx++;
+            }
+
+            var columns = String.Join(",\n", colNames.Select(pc =>
+            {
                 string result = "\t";
-                if (n.TableName == tbl) result += string.Format("t0.{0}", QuoteIdentifier(n.ColumnName));
-                else result += string.Format("t{0}.{1}", JoinIndex(joins, n.TableName) + 1, QuoteIdentifier(n.ColumnName));
-                if (!string.IsNullOrEmpty(n.NullValue))
+                if (pc.Source == null) result += string.Format("t0.{0}", QuoteIdentifier(pc.ColumnName));
+                else result += string.Format("{0}.{1}", join_alias[pc.Source], QuoteIdentifier(pc.ColumnName));
+
+                if (!string.IsNullOrEmpty(pc.NullValue))
                 {
-                    result = string.Format("ISNULL({0}, {1})", result, n.NullValue);
+                    result = string.Format("ISNULL({0}, {1})", result, pc.NullValue);
                 }
-                if (!string.IsNullOrEmpty(n.Alias))
+                if (!string.IsNullOrEmpty(pc.Alias))
                 {
-                    result += " " + n.Alias;
+                    result += " " + pc.Alias;
                 }
                 return result;
             }).ToArray());
 
             var query = new StringBuilder();
-            query.AppendFormat("SELECT \n{0} \nFROM {1} t0", columns, FormatFullName(tbl));
-            int idx = 1;
-            foreach (var join in joins)
-            {
-                if (join.JoinColumnName.Length != join.FKColumnName.Length) throw new ArgumentException(string.Format("Column count on Join '{0}' does not match", join), "joins");
-                query.AppendFormat("\n  {2} JOIN {0} t{1} ON ", join.JoinTableName, idx, join.Type.ToString().ToUpper());
-                for (int i = 0; i < join.JoinColumnName.Length; i++)
-                {
-                    query.AppendFormat("t{0}.[{1}] = t0.[{2}]", idx, join.JoinColumnName[i], join.FKColumnName[i]);
-                    if (i < join.JoinColumnName.Length - 1) query.Append(" AND ");
-                }
-                idx++;
-            }
+            query.AppendFormat("SELECT \n{0} \nFROM {1} t0{2}", columns, FormatFullName(tbl), joinQueryPart.ToString());
             var cmd = new SqlCommand(query.ToString(), CurrentConnection, CurrentTransaction);
             return cmd.ExecuteReader();
+        }
+
+        private static void AddReadJoin(StringBuilder query, ref int idx, Join join, Dictionary<Join, string> join_alias)
+        {
+            if (join.JoinColumnName.Length != join.FKColumnName.Length) throw new ArgumentException(string.Format("Column count on Join '{0}' does not match", join), "join");
+
+            join_alias[join] = string.Format("t{0}", idx);
+            query.AppendFormat("\n  {2} JOIN {0} t{1} ON ", join.JoinTableName, idx, join.Type.ToString().ToUpper());
+            for (int i = 0; i < join.JoinColumnName.Length; i++)
+            {
+                query.AppendFormat("{0}.[{1}] = {2}.[{3}]",
+                    join.JoinColumnName[i].Source == ColumnRef.PrimaryTable ? "t0" : (join.JoinColumnName[i].Source == ColumnRef.Local ? "t" + idx : join_alias[join.JoinColumnName[i].Source]),
+                    join.JoinColumnName[i].ColumnName,
+                    join.FKColumnName[i].Source == ColumnRef.PrimaryTable ? "t0" : (join.FKColumnName[i].Source == ColumnRef.Local ? "t" + idx : join_alias[join.FKColumnName[i].Source]),
+                    join.FKColumnName[i].ColumnName);
+                if (i < join.JoinColumnName.Length - 1) query.Append(" AND ");
+            }
+            foreach (var j in join.Joins)
+            {
+                idx++;
+                AddReadJoin(query, ref idx, j, join_alias);
+            }
         }
 
         public override void WriteTableData(TableRef destTbl, IDataReader source, IEnumerable<string> colNames)
