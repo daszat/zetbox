@@ -24,7 +24,7 @@ namespace Kistl.Client.WPF.View
     {
         public LabeledView()
         {
-            InitializeComponent();
+            InitializeComponent();            
         }
 
 
@@ -50,5 +50,17 @@ namespace Kistl.Client.WPF.View
         // Using a DependencyProperty as the backing store for LabelWidth.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty LabelWidthProperty =
             DependencyProperty.Register("LabelWidth", typeof(double), typeof(LabeledView), new UIPropertyMetadata(Double.NaN));
+
+
+
+        public string LabelSharedSizeGroup
+        {
+            get { return (string)GetValue(LabelSharedSizeGroupProperty); }
+            set { SetValue(LabelSharedSizeGroupProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for LabelSharedSizeGroup.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty LabelSharedSizeGroupProperty =
+            DependencyProperty.Register("LabelSharedSizeGroup", typeof(string), typeof(LabeledView), new UIPropertyMetadata("LabeledViewLabel"));
     }
 }

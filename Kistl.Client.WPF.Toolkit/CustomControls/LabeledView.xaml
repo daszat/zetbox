@@ -10,15 +10,16 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition MinWidth="{Binding Path=LabelMinWidth, ElementName=lbView}"
                               Width="{Binding Path=LabelWidth, ElementName=lbView}"
-                              SharedSizeGroup="Label" />
+                              SharedSizeGroup="{Binding Path=LabelSharedSizeGroup, ElementName=lbView}" />
             <ColumnDefinition Width="1*" />
         </Grid.ColumnDefinitions>
         
-        <TextBlock Grid.Column="0"
+        <TextBlock Grid.Column="0"                   
                    Text="{Binding Label, Mode=OneWay}"
                    ToolTip="{Binding ToolTip, Mode=OneWay}" />
 
         <ContentPresenter Grid.Column="1"
+                          Margin="5,0,0,0"
                           Content="{Binding Model, Mode=OneWay}"
                           tk:VisualTypeTemplateSelector.RequestedKind="{Binding RequestedKind, Mode=OneWay}"
                           ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />
