@@ -48,6 +48,23 @@ namespace ZBox.App.SchemaMigration
             }
         }
 
+        private static string GetStatusString(MappingStatus? s)
+        {
+            switch (s)
+            {
+                case MappingStatus.Mapped:
+                    return "OK";
+                case MappingStatus.Questions:
+                    return "?";
+                case MappingStatus.CustomSource:
+                    return "CS";
+                case MappingStatus.Ignored:
+                    return "I";
+                default:
+                    return string.Empty;
+            }
+        }
+
         #region Reports
         [CLSCompliant(false)]
         public class SourceTableMappingReport : PdfReport
@@ -84,21 +101,24 @@ namespace ZBox.App.SchemaMigration
                 NewHeading2("Summary");
                 var t = NewTable();
 
+                t.AddColumn("1cm");
                 t.AddColumn("4cm");
                 t.AddColumn("4cm");
-                t.AddColumn("8cm");
+                t.AddColumn("7cm");
 
                 var r = t.AddRow();
-                r.Cells[0].AddParagraph("Src Name").Style = styleTableHeader;
-                r.Cells[1].AddParagraph("Dest Name").Style = styleTableHeader;
-                r.Cells[2].AddParagraph("Description").Style = styleTableHeader;
+                r.Cells[0].AddParagraph("Stat.").Style = styleTableHeader;
+                r.Cells[1].AddParagraph("Src Name").Style = styleTableHeader;
+                r.Cells[2].AddParagraph("Dest Name").Style = styleTableHeader;
+                r.Cells[3].AddParagraph("Description").Style = styleTableHeader;
 
                 foreach (var c in _obj.SourceColumn.OrderBy(i => i.Name))
                 {
                     r = t.AddRow();
-                    r.Cells[0].AddParagraph(c.Name ?? string.Empty);
-                    r.Cells[1].AddParagraph(c.DestinationProperty != null ? c.DestinationProperty.Name : string.Empty);
-                    r.Cells[2].AddParagraph(c.Description ?? string.Empty);
+                    r.Cells[0].AddParagraph(GetStatusString(c.Status));
+                    r.Cells[1].AddParagraph(c.Name ?? string.Empty);
+                    r.Cells[2].AddParagraph(c.DestinationProperty != null ? c.DestinationProperty.Name : string.Empty);
+                    r.Cells[3].AddParagraph(c.Description ?? string.Empty);
                 }
 
                 foreach (var c in _obj.SourceColumn.OrderBy(i => i.Name))
@@ -109,6 +129,10 @@ namespace ZBox.App.SchemaMigration
 
                     t.AddColumn("6cm");
                     t.AddColumn("10cm");
+                    
+                    r = t.AddRow();
+                    r.Cells[0].AddParagraph("Source Name");
+                    r.Cells[1].AddParagraph(c.Status.HasValue ? c.Status.Value.ToString() : string.Empty);
 
                     r = t.AddRow();
                     r.Cells[0].AddParagraph("Source Name");
@@ -172,6 +196,10 @@ namespace ZBox.App.SchemaMigration
                 t.AddColumn("10cm");
 
                 var r = t.AddRow();
+                r.Cells[0].AddParagraph("Status");
+                r.Cells[1].AddParagraph(_obj.Status.HasValue ? _obj.Status.Value.ToString() : string.Empty);
+
+                r = t.AddRow();
                 r.Cells[0].AddParagraph("DestinationObjectClass");
                 r.Cells[1].AddParagraph(_obj.DestinationObjectClass != null ? _obj.DestinationObjectClass.Name : string.Empty);
 
@@ -276,24 +304,28 @@ namespace ZBox.App.SchemaMigration
                 NewHeading1("Summary");
                 var t = NewTable();
 
+                t.AddColumn("1cm");
                 t.AddColumn("4.5cm");
                 t.AddColumn("4.5cm");
-                t.AddColumn("5.5cm");
+                t.AddColumn("4.5cm");
                 t.AddColumn("1.5cm");
 
                 var r = t.AddRow();
-                r.Cells[0].AddParagraph("Src Table").Style = styleTableHeader;
-                r.Cells[1].AddParagraph("Dest Class").Style = styleTableHeader;
-                r.Cells[2].AddParagraph("Description").Style = styleTableHeader;
-                r.Cells[3].AddParagraph("%").Style = styleTableHeader;
+                r.Cells[0].AddParagraph("Stat.").Style = styleTableHeader;
+                r.Cells[1].AddParagraph("Src Table").Style = styleTableHeader;
+                r.Cells[2].AddParagraph("Dest Class").Style = styleTableHeader;
+                r.Cells[3].AddParagraph("Description").Style = styleTableHeader;
+                r.Cells[4].AddParagraph("%").Style = styleTableHeader;
 
                 foreach (var c in s.SourceTables.OrderBy(i => i.Name))
                 {
                     r = t.AddRow();
-                    r.Cells[0].AddParagraph(c.Name ?? string.Empty);
-                    r.Cells[1].AddParagraph(c.DestinationObjectClass != null ? c.DestinationObjectClass.Name : string.Empty);
-                    r.Cells[2].AddParagraph(c.Description ?? string.Empty);
-                    r.Cells[3].AddParagraph((c.SourceColumn.Count > 0 ? 100 * c.SourceColumn.Count(i => i.DestinationProperty != null) / c.SourceColumn.Count : 0).ToString() + " %")
+                    r.Cells[0].AddParagraph(GetStatusString(c.Status));
+                    r.Cells[1].AddParagraph(c.Name ?? string.Empty);
+                    r.Cells[2].AddParagraph(c.DestinationObjectClass != null ? c.DestinationObjectClass.Name : string.Empty);
+                    r.Cells[3].AddParagraph(c.Description ?? string.Empty);
+                    var cols_ok = c.SourceColumn.Count(i => i.Status.HasValue && i.Status.In(MappingStatus.Mapped, MappingStatus.CustomSource, MappingStatus.Ignored));
+                    r.Cells[4].AddParagraph((c.SourceColumn.Count > 0 ? (100 * cols_ok / c.SourceColumn.Count) : 0).ToString() + " %")
                         .Format.Alignment = ParagraphAlignment.Right;
                 }
             }

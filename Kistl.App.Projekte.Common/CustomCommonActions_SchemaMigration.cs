@@ -28,6 +28,11 @@ namespace ZBox.App.SchemaMigration
             e.Result = !string.IsNullOrEmpty(obj.Name) ? obj.Name : "new Source Table";
         }
 
+        public static void OnToString_StagingDatabase(ZBox.App.SchemaMigration.StagingDatabase obj, MethodReturnEventArgs<System.String> e)
+        {
+            e.Result = obj.Description;
+        }
+
         public static void OnCreateObjectClass_SourceTable(ZBox.App.SchemaMigration.SourceTable obj)
         {
             if (obj.StagingDatabase == null) throw new InvalidOperationException("Not attached to a staging database");
