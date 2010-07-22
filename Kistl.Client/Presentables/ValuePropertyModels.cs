@@ -92,7 +92,7 @@ namespace Kistl.Client.Presentables
     }
 
     public abstract class PropertyModel<TValue>
-        : BasePropertyModel, IPropertyValueModel, IDataErrorInfo
+        : BasePropertyModel, IPropertyValueModel, IDataErrorInfo, ILabeledViewModel
     {
         public new delegate PropertyModel<TValue> Factory(IKistlContext dataCtx, IDataObject obj, Property prop);
 

@@ -20,7 +20,7 @@ namespace Kistl.Client.WPF.View
     /// <summary>
     /// Interaction logic for LabeledView.xaml
     /// </summary>
-    public partial class LabeledView : UserControl
+    public partial class LabeledView : UserControl, IHasViewModel<ILabeledViewModel>, INotifyPropertyChanged
     {
         public LabeledView()
         {
@@ -62,5 +62,35 @@ namespace Kistl.Client.WPF.View
         // Using a DependencyProperty as the backing store for LabelSharedSizeGroup.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty LabelSharedSizeGroupProperty =
             DependencyProperty.Register("LabelSharedSizeGroup", typeof(string), typeof(LabeledView), new UIPropertyMetadata("LabeledViewLabel"));
+
+        private object _requestedKind = null;
+        public object RequestedKind
+        {
+            get { return _requestedKind ?? (ViewModel != null ? ViewModel.RequestedKind : null); }
+            set 
+            { 
+                _requestedKind = value;
+                PropertyChangedEventHandler temp = PropertyChanged;
+                if (temp != null)
+                {
+                    temp(this, new PropertyChangedEventArgs("RequestedKind"));
+                }
+            }
+        }
+
+        #region IHasViewModel<ILabeledViewModel> Members
+
+        public ILabeledViewModel ViewModel
+        {
+            get { return (ILabeledViewModel)DataContext; }
+        }
+
+        #endregion
+
+        #region INotifyPropertyChanged Members
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        #endregion
     }
 }

@@ -150,7 +150,13 @@ namespace Kistl.API.Migration
                 joins = root_joins;
             }
 
-            var srcColumns = mappedColumns.Where(c => c.References == null).Union(referringCols.GroupBy(k => k.DestinationProperty).Select(g => g.First())).ToList();
+            var srcColumns = mappedColumns
+                                .Where(c => c.References == null)
+                                .Union(
+                                    referringCols
+                                        .GroupBy(k => k.DestinationProperty)
+                                        .Select(g => g.First(p => p.References.References == null))
+                                ).ToList();
             var srcColumnNames = srcColumns.Select(c =>
             {
                 var orp = c.DestinationProperty as ObjectReferenceProperty;
