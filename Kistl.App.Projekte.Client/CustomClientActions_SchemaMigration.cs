@@ -74,8 +74,8 @@ namespace ZBox.App.SchemaMigration
             {
             }
 
-            public SourceTableMappingReport(Document doc)
-                : base(doc)
+            public SourceTableMappingReport(Section s)
+                : base(s)
             {
             }
 
@@ -280,20 +280,23 @@ namespace ZBox.App.SchemaMigration
             {
                 this._obj = obj;
 
+                NewHeading1("Summary");
                 foreach (var s in obj.StagingDatabases)
                 {
-
                     RenderTableMappings(s);
+                }
 
+                foreach (var s in obj.StagingDatabases)
+                {
                     foreach (var tbl in s.SourceTables.Where(i => i.DestinationObjectClass != null).OrderBy(i => i.Name))
                     {
-                        var r = new SourceTableMappingReport(Document);
+                        var r = new SourceTableMappingReport(Section);
                         r.CreateReport(tbl);
                     }
 
-                    foreach (var tbl in s.SourceTables.Where(i => i.DestinationObjectClass == null).OrderBy(i => i.Name))
+                    foreach (var tbl in s.SourceTables.Where(i => i.DestinationObjectClass == null && i.Status != MappingStatus.Ignored).OrderBy(i => i.Name))
                     {
-                        var r = new SourceTableMappingReport(Document);
+                        var r = new SourceTableMappingReport(Section);
                         r.CreateReport(tbl);
                     }
                 }
@@ -301,7 +304,7 @@ namespace ZBox.App.SchemaMigration
 
             private void RenderTableMappings(ZBox.App.SchemaMigration.StagingDatabase s)
             {
-                NewHeading1("Summary");
+                var p = Section.AddParagraph(s.Description);
                 var t = NewTable();
 
                 t.AddColumn("1cm");
@@ -324,10 +327,21 @@ namespace ZBox.App.SchemaMigration
                     r.Cells[1].AddParagraph(c.Name ?? string.Empty);
                     r.Cells[2].AddParagraph(c.DestinationObjectClass != null ? c.DestinationObjectClass.Name : string.Empty);
                     r.Cells[3].AddParagraph(c.Description ?? string.Empty);
-                    var cols_ok = c.SourceColumn.Count(i => i.Status.HasValue && i.Status.In(MappingStatus.Mapped, MappingStatus.CustomSource, MappingStatus.Ignored));
-                    r.Cells[4].AddParagraph((c.SourceColumn.Count > 0 ? (100 * cols_ok / c.SourceColumn.Count) : 0).ToString() + " %")
-                        .Format.Alignment = ParagraphAlignment.Right;
+
+                    if (c.Status != MappingStatus.Ignored)
+                    {
+                        var cols_ok = c.SourceColumn.Count(i => i.Status.HasValue && i.Status.In(MappingStatus.Mapped, MappingStatus.CustomSource, MappingStatus.Ignored));
+                        r.Cells[4].AddParagraph((c.SourceColumn.Count > 0 ? (100 * cols_ok / c.SourceColumn.Count) : 0).ToString() + " %")
+                            .Format.Alignment = ParagraphAlignment.Right;
+                    }
+                    else 
+                    {
+                        r.Cells[4].AddParagraph("-");
+                    }
                 }
+
+                p = Section.AddParagraph();
+                p.Format.SpaceAfter = "1cm";
             }
 
             protected override void NewDocument()
@@ -390,6 +404,7 @@ namespace ZBox.App.SchemaMigration
                 {
                     p = Section.AddParagraph("Staging Database " + s.Description);
                     p.Format.Font.Italic = true;
+                    p.Format.SpaceBefore = "1cm";
                     t = NewTable();
                     t.AddColumn("6cm");
                     t.AddColumn("10cm");
