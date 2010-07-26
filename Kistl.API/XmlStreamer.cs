@@ -272,7 +272,10 @@ namespace Kistl.API
             if (val == null) return;
             if (xml == null) { throw new ArgumentNullException("xml"); }
 
-            xml.WriteElementString(name, ns, val);
+            // Replace illegal chars
+            // TODO: what is the right way to to this?
+            // http://stackoverflow.com/questions/1927402/why-net-xml-api-doesnt-protect-me-from-null-character
+            xml.WriteElementString(name, ns, val.Replace("\0", "\\0"));
         }
 
         public static void FromStream(ref string val, XmlReader xml, string name, string ns)

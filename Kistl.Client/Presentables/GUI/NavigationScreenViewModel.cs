@@ -19,6 +19,8 @@ namespace Kistl.Client.Presentables.GUI
 
         public static NavigationScreenViewModel Create(IModelFactory ModelFactory, IKistlContext dataCtx, NavigationScreenViewModel parent, NavigationScreen screen)
         {
+            if (ModelFactory == null) throw new ArgumentNullException("ModelFactory");
+            if (screen == null) throw new ArgumentNullException("screen");
 
             var t = screen.ViewModelDescriptor.ViewModelRef.AsType(true);
             return ModelFactory.CreateViewModel<NavigationScreenViewModel.Factory>(t).Invoke(dataCtx, parent, screen);
