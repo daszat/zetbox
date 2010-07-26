@@ -84,6 +84,11 @@ namespace Kistl.App.Packaging
                 .OrderBy(i => i.ControlRef.Assembly.Name).ThenBy(i => i.ControlRef.FullName).ThenBy(i => i.ExportGuid));
             AddMetaObjects(result, ctx.GetPersistenceObjectQuery<ViewDescriptor_supports_TypeRef_RelationEntry>().Where(i => i.A.Module.ID == moduleID)
                 .OrderBy(i => i.A.ControlRef.Assembly.Name).ThenBy(i => i.A.ControlRef.FullName).ThenBy(i => i.A.ExportGuid));
+            AddMetaObjects(result, ctx.GetQuery<NavigationScreen>()
+                .Where(i => i.Module.ID == moduleID)
+                .OrderBy(i => i.Title)
+                .ThenBy(i => i.Parent != null ? i.Parent.Title : String.Empty)
+                .ThenBy(i => i.ExportGuid));
 
             // Security
             AddMetaObjects(result, ctx.GetQuery<Group>().Where(i => i.Module.ID == moduleID)
@@ -93,23 +98,22 @@ namespace Kistl.App.Packaging
             AddMetaObjects(result, ctx.GetPersistenceObjectQuery<RoleMembership_resolves_Relation_RelationEntry>().Where(i => i.A.Module.ID == moduleID)
                 .ToList().AsQueryable().OrderBy(i => i.A.ExportGuid).ThenBy(i => i.B.ExportGuid));
 
-            if (module.Name == "GUI")
-            {
-                AddMetaObjects(result, ctx.GetQuery<ControlKind>()// TODO: .Where(i => i.Module.ID == moduleID)
-                    .ToList().AsQueryable() // TODO: remove this workaround for GetInterfaceType()
-                    .OrderBy(i => ctx.GetInterfaceType(i).Type.FullName).ThenBy(i => i.ExportGuid));
-                AddMetaObjects(result, ctx.GetPersistenceObjectQuery<ViewModelDescriptor_displayedBy_ControlKind_RelationEntry>()
-                    .ToList().AsQueryable() // TODO: remove this workaround for GetType()
-                    .OrderBy(i => i.A.ViewModelRef.Assembly.Name).ThenBy(i => i.A.ViewModelRef.FullName)
-                    .ThenBy(i => i.B.GetType().FullName)
-                    .ThenBy(i => i.A.ExportGuid).ThenBy(i => i.B.ExportGuid));
-                AddMetaObjects(result, ctx.GetQuery<FilterConfiguration>()// TODO: .Where(i => i.Module.ID == moduleID)
-                    .ToList().AsQueryable() // TODO: remove this workaround for GetInterfaceType()
-                    .OrderBy(i => i.ExportGuid));
-                AddMetaObjects(result, ctx.GetQuery<Application>()// TODO: .Where(i => i.Module.ID == moduleID)
-                    .ToList().AsQueryable() // TODO: remove this workaround for GetInterfaceType()
-                    .OrderBy(i => i.Name).ThenBy(i => i.ExportGuid));
-            }
+            AddMetaObjects(result, ctx.GetQuery<ControlKind>().Where(i => i.Module.ID == moduleID)
+                .ToList().AsQueryable() // TODO: remove this workaround for GetInterfaceType()
+                .OrderBy(i => ctx.GetInterfaceType(i).Type.FullName)
+                .ThenBy(i => i.ExportGuid));
+            AddMetaObjects(result, ctx.GetPersistenceObjectQuery<ViewModelDescriptor_displayedBy_ControlKind_RelationEntry>()
+                .Where(i => i.A.Module.ID == moduleID)
+                .OrderBy(i => i.A.ViewModelRef.Assembly.Name)
+                .ThenBy(i => i.A.ViewModelRef.FullName)
+                .ThenBy(i => i.A.ExportGuid)
+                .ThenBy(i => i.B.ExportGuid));
+            AddMetaObjects(result, ctx.GetQuery<FilterConfiguration>().Where(i => i.Module.ID == moduleID)
+                .OrderBy(i => i.ExportGuid));
+            AddMetaObjects(result, ctx.GetQuery<Application>().Where(i => i.Module.ID == moduleID)
+                .OrderBy(i => i.Name)
+                .ThenBy(i => i.ExportGuid));
+
             return result;
         }
 

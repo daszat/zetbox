@@ -90,7 +90,9 @@
     <Compile Include="Presentables\AsyncList.cs" />
     <Compile Include="Presentables\CacheDebuggerViewModel.cs" />
     <Compile Include="Presentables\ColumnDisplayModel.cs" />
-    <Compile Include="Presentables\MethodParametersModel.cs" />
+    <Compile Include="Presentables\GUI\NavigatorViewModel.cs" />
+    <Compile Include="Presentables\GUI\NavigationScreenViewModel.cs" />
+    <Compile Include="Presentables\MethodInvokerViewModel.cs" />
     <Compile Include="Presentables\ObjectCollectionModel.cs" />
     <Compile Include="Presentables\DataObjectModel.cs" />
     <Compile Include="Presentables\DataTypeModel.cs" />

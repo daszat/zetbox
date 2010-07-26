@@ -131,6 +131,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\GUI\NavigationScreenDisplay.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\GUI\NavigatorDisplay.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\KistlBase\ActionDisplay.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -312,6 +320,12 @@
     </Compile>
     <Compile Include="View\GUI\MultiLineEditorDialog.xaml.cs">
       <DependentUpon>MultiLineEditorDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\GUI\NavigationScreenDisplay.xaml.cs">
+      <DependentUpon>NavigationScreenDisplay.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\GUI\NavigatorDisplay.xaml.cs">
+      <DependentUpon>NavigatorDisplay.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\KistlBase\ActionDisplay.xaml.cs">
       <DependentUpon>ActionDisplay.xaml</DependentUpon>

@@ -23,7 +23,7 @@
                 <MenuItem.ItemContainerStyle>
                     <Style TargetType="{x:Type MenuItem}">
                         <Setter Property="Header" Value="{Binding Name}" />
-                        <Setter Property="Command" Value="{Binding OpenApplicatonCommand, Converter={StaticResource CommandConverter}}" />
+                        <Setter Property="Command" Value="{Binding OpenApplicationCommand, Converter={StaticResource CommandConverter}}" />
                         <Setter Property="CommandParameter" Value="{Binding}" />
                     </Style>
                 </MenuItem.ItemContainerStyle>

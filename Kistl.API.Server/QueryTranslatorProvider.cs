@@ -246,10 +246,15 @@ namespace Kistl.API.Server
             {
                 type = e.Type;
             }
-            else
+            else if (m.Expression != null)
             {
                 type = TranslateType(m.Expression.Type);
             }
+            else
+            {
+                type = TranslateType(m.Type);
+            }
+
             MemberExpression result;
             if (type.GetMember(memberName).Length > 0 && type.GetMember(memberName + Kistl.API.Helper.ImplementationSuffix).Length > 0)
             {

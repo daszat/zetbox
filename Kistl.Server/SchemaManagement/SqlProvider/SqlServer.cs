@@ -778,7 +778,7 @@ FROM (", viewName.Schema, viewName.Name);
             {
                 view.AppendFormat(@"  SELECT t1.[ID] [ID], t{0}.[{1}] [Identity], {2} [Right]",
                     acl.Relations.Count,
-                    acl.Relations.Last().FKColumnName.Single(),
+                    acl.Relations.Last().FKColumnName.Single().ColumnName,
                     (int)acl.Right);
                 view.AppendLine();
                 view.AppendFormat(@"  FROM {0} t1", FormatFullName(tblName));
@@ -793,7 +793,7 @@ FROM (", viewName.Schema, viewName.Name);
                 }
                 view.AppendFormat(@"  WHERE t{0}.[{1}] IS NOT NULL",
                     acl.Relations.Count,
-                    acl.Relations.Last().FKColumnName.Single());
+                    acl.Relations.Last().FKColumnName.Single().ColumnName);
                 view.AppendLine();
                 view.AppendLine("  UNION ALL");
             }

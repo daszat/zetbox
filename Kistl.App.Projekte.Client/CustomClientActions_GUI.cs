@@ -1,14 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Kistl.API;
-using Kistl.App.Base;
-using Kistl.API.Client;
 
 namespace Kistl.App.GUI
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using Kistl.API;
+    using Kistl.API.Client;
+    using Kistl.App.Base;
+    
     public static class CustomClientActions_GUI
     {
         public static void OnToString_Icon(Icon obj, MethodReturnEventArgs<string> e)
@@ -60,5 +60,10 @@ namespace Kistl.App.GUI
                     : obj.ControlRef.ToString());
         }
 
+        public static void OnToString_NavigationScreen(Kistl.App.GUI.NavigationScreen obj, MethodReturnEventArgs<System.String> e)
+        {
+            e.Result = String.Format("Screen: {0}",
+                  obj.Title);
+        }
     }
 }

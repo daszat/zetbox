@@ -14,6 +14,7 @@ namespace Kistl.Client.Presentables.GUI
     /// <summary>
     /// A dashboard for the GUI Module.
     /// </summary>
+    [Obsolete("replaced by applications")]
     public class DashboardModel
         : ViewModel
     {
