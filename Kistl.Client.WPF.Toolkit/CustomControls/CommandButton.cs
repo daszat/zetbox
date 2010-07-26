@@ -1,14 +1,15 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Controls;
-using Kistl.Client.Presentables;
-using System.Windows;
-using System.Windows.Data;
 
 namespace Kistl.Client.WPF.CustomControls
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Windows;
+    using System.Windows.Controls;
+    using System.Windows.Data;
+    using Kistl.Client.Presentables;
+    
     public class CommandButton : Button
     {
         public CommandButton()

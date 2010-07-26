@@ -1,8 +1,16 @@
 ﻿<UserControl x:Class="Kistl.Client.WPF.View.GUI.NavigationScreenDisplay"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    Height="300" Width="300">
-    <Grid>
-            
-    </Grid>
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls;assembly=Kistl.Client.WPF.Toolkit">
+    
+    <ItemsControl ItemsSource="{Binding Children}">
+        <ItemsControl.ItemTemplate>
+            <DataTemplate>
+                <ctrls:CommandButton CommandModel="{Binding Displayer.NavigateToCommand}"
+                                     CommandParameter="{Binding}"
+                                     Content="{Binding Name}"
+                                     Margin="5" />
+            </DataTemplate>
+        </ItemsControl.ItemTemplate>
+    </ItemsControl>
 </UserControl>

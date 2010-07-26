@@ -87,7 +87,6 @@ namespace Kistl.Client.Presentables
             this._labelCache = label;
         }
 
-
         #region ICommand Members
 
         #region CanExecute handling

@@ -54,7 +54,10 @@ namespace Kistl.Client.Presentables.ObjectBrowser
                 if (_applicationsCache == null)
                 {
                     _applicationsCache = new ObservableCollection<ApplicationViewModel>();
-                    LoadApplications();
+                    foreach (var app in FrozenContext.GetQuery<Kistl.App.GUI.Application>())
+                    {
+                        _applicationsCache.Add(ModelFactory.CreateViewModel<ApplicationViewModel.Factory>().Invoke(DataContext, app));
+                    }
                 }
                 return _applicationsCache;
             }
@@ -115,14 +118,6 @@ namespace Kistl.Client.Presentables.ObjectBrowser
             foreach (var m in modules)
             {
                 Modules.Add(ModelFactory.CreateViewModel<ModuleViewModel.Factory>(m).Invoke(DataContext, m));
-            }
-        }
-
-        private void LoadApplications()
-        {
-            foreach (var app in FrozenContext.GetQuery<Kistl.App.GUI.Application>())
-            {
-                this.Applications.Add(ModelFactory.CreateViewModel<ApplicationViewModel.Factory>().Invoke(DataContext, app));
             }
         }
 

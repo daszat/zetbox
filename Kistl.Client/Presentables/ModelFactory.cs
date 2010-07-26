@@ -73,6 +73,7 @@ namespace Kistl.Client.Presentables
             }
         }
 
+        // TODO: memoize this function
         public TModelFactory CreateViewModel<TModelFactory>(Type t) where TModelFactory : class
         {
             if (t == null) throw new ArgumentNullException("t");
@@ -98,6 +99,9 @@ namespace Kistl.Client.Presentables
                 // create cast expressions. Sometimes a UpCast is needed. 
                 // TModelFactory == DataTypeModel
                 // typeof(factory) == ObjectClassModel
+                // TODO: check that the parameter types can match at all
+                //       this is necessary to create proper errors when Factory delegates
+                //       are out of sync
                 var invoke = Expression.Invoke(Expression.Constant(factoryDelegate), 
                     parameter.Select(
                         (p,idx) => Expression.Convert(p, parameter_factory[idx].ParameterType) 
@@ -123,7 +127,7 @@ namespace Kistl.Client.Presentables
                 f = t.GetNestedType("Factory");
                 if (f == null)
                 {
-                    Logging.Log.WarnFormat("Type {0} does not have a factory delegate. Lokking in base class", t.FullName);
+                    Logging.Log.WarnFormat("Type [{0}] does not have a [Factory] delegate. Looking in base class", t.FullName);
                     t = t.BaseType;
                 }
                 else
@@ -135,7 +139,7 @@ namespace Kistl.Client.Presentables
                     break;
                 }
             }
-            if (f == null) throw new InvalidOperationException(string.Format("The given Type {0} does not contain a Factory", t.FullName));
+            if (f == null) throw new InvalidOperationException(string.Format("The specified Type [{0}] does not contain a Factory", t.FullName));
             return f;
         }
         #endregion
