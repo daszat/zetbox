@@ -22,19 +22,37 @@ namespace Kistl.Client.Presentables.GUI
         private readonly ObservableCollection<NavigationScreenViewModel> _history;
         private readonly ReadOnlyObservableCollection<NavigationScreenViewModel> _historyRO;
 
+        private readonly ObservableCollection<NavigationScreenViewModel> _location;
+        private readonly ReadOnlyObservableCollection<NavigationScreenViewModel> _locationRO;
+
         public NavigatorViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, NavigationScreen root)
             : base(dependencies, dataCtx)
         {
-            _current = _root = ModelFactory.CreateViewModel<NavigationScreenViewModel.Factory>().Invoke(dataCtx, root);
+            _current = _root = ModelFactory.CreateViewModel<NavigationScreenViewModel.Factory>().Invoke(dataCtx, null, root);
             _current.Displayer = this;
+
             _history = new ObservableCollection<NavigationScreenViewModel>() { _current };
             _historyRO = new ReadOnlyObservableCollection<NavigationScreenViewModel>(_history);
+
+            _location = new ObservableCollection<NavigationScreenViewModel>() { _root };
+            _locationRO = new ReadOnlyObservableCollection<NavigationScreenViewModel>(_location);
         }
+
+        #region Name
 
         public override string Name
         {
             get { return GetTitle(_root, _current); }
         }
+
+        private static string GetTitle(NavigationScreenViewModel root, NavigationScreenViewModel current)
+        {
+            return root.Name + ": " + current.Name;
+        }
+
+        #endregion
+
+        #region Navigational Aides
 
         public NavigationScreenViewModel CurrentScreen
         {
@@ -49,23 +67,61 @@ namespace Kistl.Client.Presentables.GUI
                 {
                     _current = value;
                     _current.Displayer = this;
+                    _history.Add(_current);
+                    UpdateLocation();
                     OnPropertyChanged("CurrentScreen");
                 }
             }
         }
 
-        public ReadOnlyObservableCollection<NavigationScreenViewModel> History
+        public ReadOnlyObservableCollection<NavigationScreenViewModel> Location
         {
-            get
+            get { return _locationRO; }
+        }
+
+        private void UpdateLocation()
+        {
+            var newLocation = new List<NavigationScreenViewModel>();
+            var screen = CurrentScreen;
+            while (screen != null)
             {
-                return _historyRO;
+                newLocation.Add(screen);
+                screen = screen.Parent;
+            }
+            newLocation.Reverse();
+
+            int prefixLength = 0;
+            while (prefixLength < newLocation.Count
+                && prefixLength < Location.Count
+                && newLocation[prefixLength] == Location[prefixLength])
+            {
+                prefixLength += 1;
+            }
+            // now we know that the first "prefixLength" items are equal
+            // and we can replace the rest with the "newLocation" suffix
+
+            // remove from end
+            while (Location.Count > prefixLength)
+            {
+                _location.RemoveAt(Location.Count - 1);
+            }
+
+            // add remaining items
+            while (prefixLength < newLocation.Count)
+            {
+                _location.Add(newLocation[prefixLength]);
+                prefixLength += 1;
             }
         }
 
-        private static string GetTitle(NavigationScreenViewModel root, NavigationScreenViewModel current)
+        public ReadOnlyObservableCollection<NavigationScreenViewModel> History
         {
-            return root.Name + ": " + current.Name;
+            get { return _historyRO; }
         }
+
+        #endregion
+
+        #region Commands
 
         public CommandModel HomeCommand
         {
@@ -88,8 +144,15 @@ namespace Kistl.Client.Presentables.GUI
                     DataContext,
                     "Back",
                     "Navigates back to the last screen",
-                    () => { CurrentScreen = _history.Last(); _history.RemoveAt(_history.Count - 1); },
-                    () => _history.Count <= 1);
+                    () =>
+                    {
+                        // remove "current" screen from history
+                        _history.RemoveAt(_history.Count - 1);
+                        CurrentScreen = _history.Last();
+                        // remove the back step from history too
+                        _history.RemoveAt(_history.Count - 1);
+                    },
+                    () => _history.Count > 1);
             }
         }
 
@@ -97,15 +160,15 @@ namespace Kistl.Client.Presentables.GUI
         {
             get
             {
-                // capture "this"
-                var self = this;
                 return ModelFactory.CreateViewModel<SimpleParameterCommandModel<NavigationScreenViewModel>.Factory>().Invoke(
                     DataContext,
                     "Go to ...",
                     "Navigates to the selected screen",
-                    screen => self.CurrentScreen = screen,
-                    screen => self.CurrentScreen != screen);
+                    screen => CurrentScreen = screen,
+                    screen => CurrentScreen != screen);
             }
         }
+
+        #endregion
     }
 }

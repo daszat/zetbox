@@ -15,21 +15,27 @@ namespace Kistl.Client.Presentables.GUI
     public class NavigationScreenViewModel
         : ViewModel
     {
-        public new delegate NavigationScreenViewModel Factory(IKistlContext dataCtx, NavigationScreen screen);
+        public new delegate NavigationScreenViewModel Factory(IKistlContext dataCtx, NavigationScreenViewModel parent, NavigationScreen screen);
 
         private readonly NavigationScreen _screen;
+        private readonly NavigationScreenViewModel _parent;
         private readonly ObservableCollection<NavigationScreenViewModel> _children = new ObservableCollection<NavigationScreenViewModel>();
         private readonly ReadOnlyObservableCollection<NavigationScreenViewModel> _childrenRO;
         private NavigatorViewModel _displayer = null;
 
-        public NavigationScreenViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, NavigationScreen screen)
+        public NavigationScreenViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, NavigationScreenViewModel parent, NavigationScreen screen)
             : base(dependencies, dataCtx)
         {
+            if (screen == null) throw new ArgumentNullException("screen");
+            if (parent == null && screen.Parent != null) throw new ArgumentOutOfRangeException("parent", "parent missing");
+            if (parent != null && parent._screen != screen.Parent) throw new ArgumentOutOfRangeException("parent", "inconsistent parent found");
+
+            _parent = parent;
             _screen = screen;
             foreach (var s in _screen.Children)
             {
                 var t = s.ViewModelDescriptor.ViewModelRef.AsType(true);
-                _children.Add(ModelFactory.CreateViewModel<NavigationScreenViewModel.Factory>(t).Invoke(DataContext, s));
+                _children.Add(ModelFactory.CreateViewModel<NavigationScreenViewModel.Factory>(t).Invoke(DataContext, this, s));
             }
             _childrenRO = new ReadOnlyObservableCollection<NavigationScreenViewModel>(_children);
         }
@@ -57,6 +63,11 @@ namespace Kistl.Client.Presentables.GUI
                     OnPropertyChanged("Displayer");
                 }
             }
+        }
+
+        public NavigationScreenViewModel Parent
+        {
+            get { return _parent; }
         }
 
         public ReadOnlyObservableCollection<NavigationScreenViewModel> Children

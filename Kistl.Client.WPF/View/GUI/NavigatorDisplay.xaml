@@ -17,9 +17,8 @@
         </UniformGrid>
 
         <!-- location breadcrumbs -->
-        <!-- TODO use breadcrumbs instead of history -->
         <ItemsControl DockPanel.Dock="Top"
-                      ItemsSource="{Binding History}">
+                      ItemsSource="{Binding Location}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <StackPanel Orientation="Horizontal"
