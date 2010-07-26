@@ -39,6 +39,7 @@ M: System.Delegate Kistl.Client.WPF.View.KistlBase.ObjectReferenceListEditor::_C
 M: System.Delegate Kistl.Client.WPF.View.KistlBase.ObjectReferenceCollectionEditor::_CreateDelegate(System.Type,System.String)
 M: System.Delegate Kistl.Client.WPF.View.KistlBase.StringDisplay::_CreateDelegate(System.Type,System.String)
 M: System.Delegate Kistl.Client.WPF.View.KistlBase.TypeRefPropertyView::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Kistl.Client.WPF.View.KistlBase.CompoundObjectPropertyEditor::_CreateDelegate(System.Type,System.String)
 
 M: System.Delegate Kistl.Client.WPF.View.ObjectEditor.DataObjectEditor::_CreateDelegate(System.Type,System.String)
 M: System.Delegate Kistl.Client.WPF.View.ObjectEditor.WorkspaceDisplay::_CreateDelegate(System.Type,System.String)

@@ -524,6 +524,10 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
                 {
                     defValue = ((IntDefaultConstraint)defConstraint).Value.ToString();
                 }
+                else if (defConstraint is BoolDefaultConstraint)
+                {
+                    defValue = ((BoolDefaultConstraint)defConstraint).Value ? "1" : "0";
+                }
                 else if (defConstraint is DateTimeDefaultConstraint)
                 {
                     defValue = "getdate()";

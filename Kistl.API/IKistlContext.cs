@@ -93,6 +93,7 @@ namespace Kistl.API
         InterfaceType GetInterfaceType(Type t);
         InterfaceType GetInterfaceType(string typeName);
         InterfaceType GetInterfaceType(IPersistenceObject obj);
+        InterfaceType GetInterfaceType(ICompoundObject obj);
         ImplementationType GetImplementationType(Type t);
         ImplementationType ToImplementationType(InterfaceType t);
 

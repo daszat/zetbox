@@ -46,26 +46,18 @@ namespace Kistl.API
         #region IStreamable Members
 
         /// <summary>
+        /// Base method for serializing this Object.
         /// Serializes a CompoundObject to the specified stream. Since CompoundObject have no 
         /// own identity the ParentObject has to be constructed somewhere else 
         /// using external means, e.g. by examining the position in the stream.
-        /// </summary>
-        /// <param name="sw">the stream to write to</param>
-        public virtual void ToStream(BinaryWriter sw)
-        {
-            if (sw == null)
-                throw new ArgumentNullException("sw");
-        }
-
-        /// <summary>
-        /// Base method for serializing this Object.
         /// </summary>
         /// <param name="sw">Stream to serialize to</param>
         /// <param name="auxObjects">pass a List here to collect auxiliary, eagerly loaded objects. Ignored if null.</param>
         /// <param name="eagerLoadLists">True if lists should be eager loaded</param>
         public virtual void ToStream(BinaryWriter sw, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
-            this.ToStream(sw);
+            if (sw == null)
+                throw new ArgumentNullException("sw");
         }
 
         /// <summary>
@@ -78,12 +70,6 @@ namespace Kistl.API
         {
             if (sr == null)
                 throw new ArgumentNullException("sr");
-        }
-
-        [Obsolete]
-        public virtual void ToStream(System.Xml.XmlWriter xml, string[] modules)
-        {
-            if (xml == null) throw new ArgumentNullException("xml");
         }
 
         public virtual void ToStream(System.Xml.XmlWriter xml)

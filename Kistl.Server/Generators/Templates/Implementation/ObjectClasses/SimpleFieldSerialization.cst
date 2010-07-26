@@ -16,6 +16,7 @@
 <%@ Parameter Name="xmlname" Type="string" %>
 <%@ Parameter Name="memberName" Type="string" %>
 <%
+	
 	switch(direction)
 	{
 		case SerializerDirection.ToStream:

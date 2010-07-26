@@ -42,12 +42,6 @@ namespace Kistl.API.AbstractConsumerTests.BinarySerializers
         {
         }
 
-        [Obsolete]
-        public virtual void ToStream(System.Xml.XmlWriter xml, string[] modules)
-        {
-            if (xml == null) throw new ArgumentNullException("xml");
-        }
-
         public virtual void ToStream(System.Xml.XmlWriter xml)
         {
             if (xml == null) throw new ArgumentNullException("xml");

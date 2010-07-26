@@ -360,5 +360,36 @@ namespace Kistl.API
             }
         }
         #endregion
+
+        #region ICompoundObject
+        public static void ToStream(ICompoundObject val, XmlWriter xml, string name, string ns)
+        {
+            if (xml == null) { throw new ArgumentNullException("xml"); }
+
+            if (val != null)
+            {
+                xml.WriteStartElement(name, ns);
+                val.ToStream(xml);
+                xml.WriteEndElement();
+            }
+        }
+
+        public static void FromStream(ICompoundObject val, XmlReader xml, string name, string ns)
+        {
+            if (xml == null) { throw new ArgumentNullException("xml"); }
+            if (val == null) { throw new ArgumentNullException("val"); }
+
+            if (xml.LocalName == name && xml.NamespaceURI == ns)
+            {
+                using (var entries = xml.ReadSubtree())
+                {
+                    while (entries.Read())
+                    {
+                        val.FromStream(xml);
+                    }
+                }
+            }
+        }
+        #endregion
     }
 }

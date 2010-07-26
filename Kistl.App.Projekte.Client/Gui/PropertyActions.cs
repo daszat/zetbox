@@ -30,6 +30,7 @@ namespace Kistl.App.Projekte.Gui
         public static readonly Guid ViewModelDescriptor_ObjectListModel = new Guid("9fce01fe-fd6d-4e21-8b55-08d5e38aea36");
         public static readonly Guid ViewModelDescriptor_ObjectCollectionModel = new Guid("67A49C49-B890-4D35-A8DB-1F8E43BFC7DF");
         public static readonly Guid ViewModelDescriptor_ReferencePropertyModel_String = new Guid("975eee82-e7e1-4a12-ab43-d2e3bc3766e4");
+        public static readonly Guid ViewModelDescriptor_CompoundObjectPropertyViewModel = new Guid("A63B9F47-18B7-463D-A06B-7B636DE9553F");
 
         public static void OnNotifyCreated_BoolProperty(Kistl.App.Base.BoolProperty obj)
         {
@@ -79,7 +80,7 @@ namespace Kistl.App.Projekte.Gui
 
         public static void OnNotifyCreated_CompoundObjectProperty(Kistl.App.Base.CompoundObjectProperty obj)
         {
-            // TODO:
+            obj.ValueModelDescriptor = obj.Context.FindPersistenceObject<ViewModelDescriptor>(ViewModelDescriptor_CompoundObjectPropertyViewModel);
         }
     }
 }

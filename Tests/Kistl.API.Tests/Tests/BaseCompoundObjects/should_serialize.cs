@@ -40,7 +40,7 @@ namespace Kistl.API.Tests.BaseCompoundObjects
         [Test]
         public void without_exceptions()
         {
-            test.ToStream(sw);
+            test.ToStream(sw, null, false);
             RewindStreams();
 
             Assert.DoesNotThrow(() =>
@@ -55,7 +55,7 @@ namespace Kistl.API.Tests.BaseCompoundObjects
         {
             const string val = "muh";
             test.TestProperty = val;
-            test.ToStream(sw);
+            test.ToStream(sw, null, false);
             test.TestProperty = null;
             
             RewindStreams();

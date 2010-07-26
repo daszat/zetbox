@@ -34,40 +34,40 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
         
         public override void Generate()
         {
-#line 19 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SimpleFieldSerialization.cst"
+#line 20 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SimpleFieldSerialization.cst"
 switch(direction)
 	{
 		case SerializerDirection.ToStream:
 
-#line 23 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SimpleFieldSerialization.cst"
+#line 24 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SimpleFieldSerialization.cst"
 this.WriteObjects("            BinarySerializer.ToStream(this.",  memberName , ", ",  streamName , ");\r\n");
-#line 25 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SimpleFieldSerialization.cst"
+#line 26 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SimpleFieldSerialization.cst"
 break;
 		case SerializerDirection.FromStream:
 
-#line 28 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SimpleFieldSerialization.cst"
+#line 29 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SimpleFieldSerialization.cst"
 this.WriteObjects("            BinarySerializer.FromStream(out this.",  memberName , ", ",  streamName , ");\r\n");
-#line 30 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SimpleFieldSerialization.cst"
+#line 31 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SimpleFieldSerialization.cst"
 break;
 		case SerializerDirection.ToXmlStream:
 
-#line 33 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SimpleFieldSerialization.cst"
+#line 34 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SimpleFieldSerialization.cst"
 this.WriteObjects("            XmlStreamer.ToStream(this.",  memberName , ", ",  streamName , ", \"",  xmlname , "\", \"",  xmlnamespace , "\");\r\n");
-#line 35 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SimpleFieldSerialization.cst"
+#line 36 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SimpleFieldSerialization.cst"
 break;
 		case SerializerDirection.FromXmlStream:
 		case SerializerDirection.MergeImport:
 
-#line 39 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SimpleFieldSerialization.cst"
+#line 40 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SimpleFieldSerialization.cst"
 this.WriteObjects("            XmlStreamer.FromStream(ref this.",  memberName , ", ",  streamName , ", \"",  xmlname , "\", \"",  xmlnamespace , "\");\r\n");
-#line 41 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SimpleFieldSerialization.cst"
+#line 42 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SimpleFieldSerialization.cst"
 break;
 		case SerializerDirection.Export:
 
-#line 43 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SimpleFieldSerialization.cst"
+#line 44 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SimpleFieldSerialization.cst"
 this.WriteObjects("	\r\n");
 this.WriteObjects("            if (modules.Contains(\"*\") || modules.Contains(\"",  xmlnamespace , "\")) XmlStreamer.ToStream(this.",  memberName , ", ",  streamName , ", \"",  xmlname , "\", \"",  xmlnamespace , "\");\r\n");
-#line 46 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SimpleFieldSerialization.cst"
+#line 47 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SimpleFieldSerialization.cst"
 break;
 		default:
 			throw new ArgumentOutOfRangeException("direction");

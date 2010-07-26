@@ -1,4 +1,3 @@
-
 namespace Kistl.Client.Presentables
 {
     using System;
@@ -12,34 +11,24 @@ namespace Kistl.Client.Presentables
     using Kistl.App.Base;
     using Kistl.App.Extensions;
 
-    public partial class ObjectReferenceModel
-        : PropertyModel<DataObjectModel>, IValueModel<DataObjectModel>
+    [ViewModelDescriptor("GUI", DefaultKind = "Kistl.App.GUI.CompoundObjectPropertyKind", Description = "Viewmodel for editing a CompoundObject Property")]
+    public class CompoundObjectPropertyViewModel : PropertyModel<CompoundObjectViewModel>, IValueModel<CompoundObjectViewModel>
     {
-        public new delegate ObjectReferenceModel Factory(IKistlContext dataCtx, INotifyingObject obj, Property prop);
+        public new delegate CompoundObjectPropertyViewModel Factory(IKistlContext dataCtx, INotifyingObject obj, CompoundObjectProperty prop);
 
-        public ObjectReferenceModel(
+
+        public CompoundObjectPropertyViewModel(
             IViewModelDependencies appCtx, IKistlContext dataCtx,
-            INotifyingObject obj, Property prop)
+            INotifyingObject obj, CompoundObjectProperty prop)
             : base(appCtx, dataCtx, obj, prop)
         {
             AllowNullInput = prop.IsNullable();
-            if (prop is ObjectReferenceProperty)
-            {
-                ReferencedClass = ((ObjectReferenceProperty)prop).GetReferencedObjectClass();
-            }
-            else if (prop is CalculatedObjectReferenceProperty)
-            {
-                ReferencedClass = ((CalculatedObjectReferenceProperty)prop).ReferencedClass;
-            }
-            else
-            {
-                throw new ArgumentOutOfRangeException("prop", "prop must be ObjectReferenceProperty or CalculatedObjectReferenceProperty");
-            }
+            ReferencedType = prop.CompoundObjectDefinition;
         }
 
         #region Public Interface
 
-        public ObjectClass ReferencedClass
+        public CompoundObject ReferencedType
         {
             get;
             protected set;
@@ -79,11 +68,11 @@ namespace Kistl.Client.Presentables
             else throw new InvalidOperationException();
         }
 
-        private DataObjectModel _valueCache;
+        private CompoundObjectViewModel _valueCache;
         /// <summary>
         /// The value of the property presented by this model
         /// </summary>
-        public DataObjectModel Value
+        public CompoundObjectViewModel Value
         {
             get { return _valueCache; }
             set
@@ -92,9 +81,9 @@ namespace Kistl.Client.Presentables
 
                 var newPropertyValue = _valueCache == null ? null : _valueCache.Object;
 
-                if (!object.Equals(Object.GetPropertyValue<IDataObject>(Property.Name), newPropertyValue))
+                if (!object.Equals(Object.GetPropertyValue<object>(Property.Name), newPropertyValue))
                 {
-                    Object.SetPropertyValue<IDataObject>(Property.Name, newPropertyValue);
+                    Object.SetPropertyValue<object>(Property.Name, newPropertyValue);
                     CheckConstraints();
 
                     OnPropertyChanged("Value");
@@ -106,7 +95,7 @@ namespace Kistl.Client.Presentables
 
         public override string Name
         {
-            get { return Value == null ? "(null)" : "Reference to " + Value.Name; }
+            get { return Value == null ? "(null)" : "CompoundObject: " + Value.Name; }
         }
         #endregion
 
@@ -114,32 +103,14 @@ namespace Kistl.Client.Presentables
 
         protected override void UpdatePropertyValue()
         {
-            IDataObject newValue = Object.GetPropertyValue<IDataObject>(Property.Name);
-            var newModel = newValue == null ? null : ModelFactory.CreateViewModel<DataObjectModel.Factory>(newValue).Invoke(DataContext, newValue);
+            var newValue = Object.GetPropertyValue<ICompoundObject>(Property.Name) ?? DataContext.CreateCompoundObject(DataContext.GetInterfaceType(((CompoundObjectProperty)Property).CompoundObjectDefinition.GetDataType()));
+            var newModel = ModelFactory.CreateViewModel<CompoundObjectViewModel.Factory>(newValue).Invoke(DataContext, newValue);
             if (Value != newModel)
             {
                 Value = newModel;
             }
         }
 
-        private void CollectChildClasses(int id, List<ObjectClass> children)
-        {
-            var nextChildren = FrozenContext
-                .GetQuery<ObjectClass>()
-                .Where(oc => oc.BaseObjectClass != null && oc.BaseObjectClass.ID == id)
-                .ToList();
-
-            if (nextChildren.Count() > 0)
-            {
-                foreach (ObjectClass oc in nextChildren)
-                {
-                    children.Add(oc);
-                    CollectChildClasses(oc.ID, children);
-                };
-            }
-        }
-
         #endregion
-
     }
 }

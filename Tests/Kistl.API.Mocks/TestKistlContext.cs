@@ -300,6 +300,11 @@ namespace Kistl.API.Mocks
             return _iftFactory(ifType);
         }
 
+        public InterfaceType GetInterfaceType(ICompoundObject obj)
+        {
+            throw new NotImplementedException();
+        }
+
         public ImplementationType GetImplementationType(Type t)
         {
             return new MockImplementationType(t, _iftFactory);

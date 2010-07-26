@@ -76,11 +76,11 @@ namespace Kistl.Client.Presentables
 
     public abstract class BasePropertyModel : ViewModel
     {
-        public new delegate BasePropertyModel Factory(IKistlContext dataCtx, IDataObject obj, Property prop);
+        public new delegate BasePropertyModel Factory(IKistlContext dataCtx, INotifyingObject obj, Property prop);
 
         protected BasePropertyModel(
             IViewModelDependencies appCtx, IKistlContext dataCtx,
-            IDataObject obj, Property prop)
+            INotifyingObject obj, Property prop)
             : base(appCtx, dataCtx)
         {
         }
@@ -94,11 +94,11 @@ namespace Kistl.Client.Presentables
     public abstract class PropertyModel<TValue>
         : BasePropertyModel, IPropertyValueModel, IDataErrorInfo, ILabeledViewModel
     {
-        public new delegate PropertyModel<TValue> Factory(IKistlContext dataCtx, IDataObject obj, Property prop);
+        public new delegate PropertyModel<TValue> Factory(IKistlContext dataCtx, INotifyingObject obj, Property prop);
 
         protected PropertyModel(
             IViewModelDependencies appCtx, IKistlContext dataCtx,
-            IDataObject obj, Property prop)
+            INotifyingObject obj, Property prop)
             : base(appCtx, dataCtx, obj, prop)
         {
             if (obj == null)
@@ -175,7 +175,10 @@ namespace Kistl.Client.Presentables
         /// </summary> 
         protected void CheckConstraints()
         {
-            this.ValueError = Object[Property.Name];
+            if (Object is IDataErrorInfo)
+            {
+                this.ValueError = ((IDataErrorInfo)Object)[Property.Name];
+            }
         }
 
         #endregion
@@ -255,7 +258,7 @@ namespace Kistl.Client.Presentables
 
         #endregion
 
-        protected IDataObject Object { get; private set; }
+        protected INotifyingObject Object { get; private set; }
 
         protected Property Property { get; private set; }
 
@@ -274,11 +277,11 @@ namespace Kistl.Client.Presentables
         : PropertyModel<Nullable<TValue>>, IValueModel<Nullable<TValue>>, IValueModel<string>
         where TValue : struct
     {
-        public new delegate NullableValuePropertyModel<TValue> Factory(IKistlContext dataCtx, IDataObject obj, Property prop);
+        public new delegate NullableValuePropertyModel<TValue> Factory(IKistlContext dataCtx, INotifyingObject obj, Property prop);
 
         public NullableValuePropertyModel(
             IViewModelDependencies appCtx, IKistlContext dataCtx,
-            IDataObject obj, ValueTypeProperty prop)
+            INotifyingObject obj, ValueTypeProperty prop)
             : base(appCtx, dataCtx, obj, prop)
         {
             this.AllowNullInput = prop.IsNullable();
@@ -423,11 +426,11 @@ namespace Kistl.Client.Presentables
         : PropertyModel<TValue>, IValueModel<TValue>
         where TValue : class
     {
-        public new delegate ReferencePropertyModel<TValue> Factory(IKistlContext dataCtx, IDataObject obj, Property prop);
+        public new delegate ReferencePropertyModel<TValue> Factory(IKistlContext dataCtx, INotifyingObject obj, Property prop);
 
         public ReferencePropertyModel(
             IViewModelDependencies appCtx, IKistlContext dataCtx,
-            IDataObject obj, ValueTypeProperty prop)
+            INotifyingObject obj, ValueTypeProperty prop)
             : base(appCtx, dataCtx, obj, prop)
         {
             this.AllowNullInput = prop.IsNullable();
@@ -517,11 +520,11 @@ namespace Kistl.Client.Presentables
         : ReferencePropertyModel<TValue>
         where TValue : class
     {
-        public new delegate ChooseReferencePropertyModel<TValue> Factory(IKistlContext dataCtx, IDataObject obj, Property prop);
+        public new delegate ChooseReferencePropertyModel<TValue> Factory(IKistlContext dataCtx, INotifyingObject obj, Property prop);
 
         public ChooseReferencePropertyModel(
             IViewModelDependencies appCtx, IKistlContext dataCtx,
-            IDataObject obj, ValueTypeProperty prop)
+            INotifyingObject obj, ValueTypeProperty prop)
             : base(appCtx, dataCtx, obj, prop)
         {
             PossibleValues = new ObservableCollection<TValue>();
@@ -538,11 +541,11 @@ namespace Kistl.Client.Presentables
         : NullableValuePropertyModel<TValue>
         where TValue : struct
     {
-        public new delegate EnumerationPropertyModel<TValue> Factory(IKistlContext dataCtx, IDataObject obj, Property prop);
+        public new delegate EnumerationPropertyModel<TValue> Factory(IKistlContext dataCtx, INotifyingObject obj, Property prop);
 
         public EnumerationPropertyModel(
             IViewModelDependencies appCtx, IKistlContext dataCtx,
-            IDataObject obj, EnumerationProperty prop)
+            INotifyingObject obj, EnumerationProperty prop)
             : base(appCtx, dataCtx, obj, prop)
         {
             this.PossibleValues = new ReadOnlyCollection<KeyValuePair<TValue, string>>(Enum.GetValues(typeof(TValue))
@@ -559,11 +562,11 @@ namespace Kistl.Client.Presentables
     public class EnumerationPropertyModel
         : NullableValuePropertyModel<int>
     {
-        public new delegate EnumerationPropertyModel Factory(IKistlContext dataCtx, IDataObject obj, Property prop);
+        public new delegate EnumerationPropertyModel Factory(IKistlContext dataCtx, INotifyingObject obj, Property prop);
 
         public EnumerationPropertyModel(
             IViewModelDependencies appCtx, IKistlContext dataCtx,
-            IDataObject obj, EnumerationProperty prop)
+            INotifyingObject obj, EnumerationProperty prop)
             : base(appCtx, dataCtx, obj, prop)
         {
             this.PossibleValues = new ReadOnlyCollection<KeyValuePair<int, string>>(prop.Enumeration.EnumerationEntries.Select(e => new KeyValuePair<int, string>(e.Value, e.Name)).ToList());
@@ -611,11 +614,11 @@ namespace Kistl.Client.Presentables
     public class MultiLineStringPropertyModel 
         : ReferencePropertyModel<string>
     {
-        public new delegate MultiLineStringPropertyModel Factory(IKistlContext dataCtx, IDataObject obj, Property prop);
+        public new delegate MultiLineStringPropertyModel Factory(IKistlContext dataCtx, INotifyingObject obj, Property prop);
 
         public MultiLineStringPropertyModel(
             IViewModelDependencies appCtx, IKistlContext dataCtx,
-            IDataObject obj, ValueTypeProperty prop)
+            INotifyingObject obj, ValueTypeProperty prop)
             : base(appCtx, dataCtx, obj, prop)
         {
         }

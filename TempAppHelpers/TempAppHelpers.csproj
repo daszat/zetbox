@@ -63,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseCustomActionsManager.cs" />
+    <Compile Include="CompoundObjectExtensions.cs" />
     <Compile Include="GuiExtensions.cs" />
     <Compile Include="IdentityExtensions.cs" />
     <Compile Include="KistlContextExtensions.cs" />

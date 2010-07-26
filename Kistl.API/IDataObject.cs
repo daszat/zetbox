@@ -260,7 +260,7 @@ namespace Kistl.API
     /// An ICompoundObject is a simple bag of named values.
     /// </summary>
     /// Supports <see cref="ICloneable"/>, because CompoundObject don't have a independent identity and thus can be copied freely.
-    public interface ICompoundObject : INotifyingObject, IStreamable, ICloneable
+    public interface ICompoundObject : INotifyingObject, ICloneable, IStreamable
     {
         /// <summary>
         /// Gets a value indicating whether values of this object can be set. This mostly depends on the state of the containing object.

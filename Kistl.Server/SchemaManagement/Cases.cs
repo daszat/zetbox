@@ -1890,17 +1890,24 @@ namespace Kistl.Server.SchemaManagement
         {
             return savedSchema.FindPersistenceObject<CompoundObjectProperty>(prop.ExportGuid) == null;
         }
-        public void DoNewCompoundObjectProperty(ObjectClass objClass, CompoundObjectProperty sprop, string prefix)
+        public void DoNewCompoundObjectProperty(ObjectClass objClass, CompoundObjectProperty cprop, string prefix)
         {
-            string colName_IsNull = Construct.NestedColumnName(sprop, prefix);
-            Log.InfoFormat("New is null column for CompoundObject Property: '{0}' ('{1}')", sprop.Name, colName_IsNull);
-            db.CreateColumn(db.GetQualifiedTableName(objClass.TableName), colName_IsNull, System.Data.DbType.Boolean, 0, 0, false, null);
+            string colName_IsNull = Construct.NestedColumnName(cprop, prefix);
+            Log.InfoFormat("New is null column for CompoundObject Property: '{0}' ('{1}')", cprop.Name, colName_IsNull);
+            db.CreateColumn(db.GetQualifiedTableName(objClass.TableName), colName_IsNull, System.Data.DbType.Boolean, 0, 0, false, new BoolDefaultConstraint() { Value = true });
 
-            foreach (var valProp in sprop.CompoundObjectDefinition.Properties.OfType<ValueTypeProperty>())
+            foreach (var valProp in cprop.CompoundObjectDefinition.Properties.OfType<ValueTypeProperty>())
             {
                 var colName = Construct.NestedColumnName(valProp, colName_IsNull);
                 Log.InfoFormat("New nullable ValueType Property: '{0}' ('{1}')", valProp.Name, colName);
-                db.CreateColumn(db.GetQualifiedTableName(objClass.TableName), colName, valProp.GetDbType(), valProp.GetSize(), valProp.GetScale(), valProp.IsNullable(), SchemaManager.GetDefaultContraint(valProp));
+                db.CreateColumn(
+                    db.GetQualifiedTableName(objClass.TableName), 
+                    colName, 
+                    valProp.GetDbType(), 
+                    valProp.GetSize(), 
+                    valProp.GetScale(),
+                    cprop.IsNullable() || valProp.IsNullable(), 
+                    SchemaManager.GetDefaultContraint(valProp));
             }
 
             // TODO: Add neested CompoundObjectProperty

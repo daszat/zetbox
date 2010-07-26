@@ -759,6 +759,11 @@ namespace Kistl.DalProvider.Client
             return _iftFactory(((BasePersistenceObject)obj).GetImplementedInterface());
         }
 
+        public InterfaceType GetInterfaceType(ICompoundObject obj)
+        {
+            return _iftFactory(((BaseCompoundObject)obj).GetImplementedInterface());
+        }
+
         public ImplementationType ToImplementationType(InterfaceType t)
         {
             return GetImplementationType(Type.GetType(t.Type.FullName + Kistl.API.Helper.ImplementationSuffix + "," + _ClientImplementationAssembly, true));

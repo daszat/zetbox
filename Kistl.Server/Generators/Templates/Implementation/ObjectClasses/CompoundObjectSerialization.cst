@@ -45,7 +45,19 @@
 	else if (direction == SerializerDirection.FromXmlStream)
 	{
 %>
-			// TODO: Add XML Serializer here
+            // TODO: Add XML Serializer here
+<%
+	}
+	else if (direction == SerializerDirection.Export)
+	{
+%>
+            if (modules.Contains("*") || modules.Contains("<%= xmlnamespace %>")) XmlStreamer.ToStream(this.<%= memberName %>, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
+<%
+	}
+	else if (direction == SerializerDirection.MergeImport)
+	{
+%>
+			XmlStreamer.FromStream(this.<%= backingStoreName %>, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
 <%
 	}
 	else

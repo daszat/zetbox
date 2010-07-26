@@ -244,6 +244,11 @@ namespace Kistl.API.Server
         public int Value { get; set; }
     }
 
+    public class BoolDefaultConstraint : DefaultConstraint
+    {
+        public bool Value { get; set; }
+    }
+
     public class NewGuidDefaultConstraint : DefaultConstraint
     {
     }

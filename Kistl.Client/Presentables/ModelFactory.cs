@@ -56,6 +56,19 @@ namespace Kistl.Client.Presentables
             return CreateViewModel<TModelFactory>(ResolveFactory(t));
         }
 
+        public TModelFactory CreateViewModel<TModelFactory>(ICompoundObject obj) where TModelFactory : class
+        {
+            if (obj == null) throw new ArgumentNullException("obj");
+
+            // TODO: Move DefaultViewModelDescriptor back to DataType
+            var t = typeof(CompoundObjectViewModel);
+            //var t = obj.GetCompoundObjectDefinition(FrozenContext)
+            //    .DefaultViewModelDescriptor
+            //    .ViewModelRef
+            //    .AsType(true);
+            return CreateViewModel<TModelFactory>(ResolveFactory(t));
+        }
+
         public TModelFactory CreateViewModel<TModelFactory>(Property p) where TModelFactory : class
         {
             if (p == null) { throw new ArgumentNullException("p"); }

@@ -498,6 +498,11 @@ namespace Kistl.API
             return _iftFactory(((BasePersistenceObject)obj).GetImplementedInterface());
         }
 
+        public InterfaceType GetInterfaceType(ICompoundObject obj)
+        {
+            return _iftFactory(((BaseCompoundObject)obj).GetImplementedInterface());
+        }
+
         public InterfaceType GetInterfaceType(Type t)
         {
             return _iftFactory(t);

@@ -124,20 +124,20 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
             {
                 if (HasDefaultValue)
                 {
-                    list.Add(new SerializationMember("Implementation.ObjectClasses.NotifyingDataPropertyWithDefaultSerialization",
+                    list.Add("Implementation.ObjectClasses.NotifyingDataPropertyWithDefaultSerialization",
                         SerializerType.All,
                         _prop.Module.Namespace,
                         name,
                         BackingMemberFromName(name),
-                        IsSetFlagName));
+                        IsSetFlagName);
                 }
                 else
                 {
-                    list.Add(new SerializationMember("Implementation.ObjectClasses.NotifyingDataPropertySerialization",
+                    list.Add("Implementation.ObjectClasses.NotifyingDataPropertySerialization",
                         SerializerType.All,
                         _prop.Module.Namespace,
                         name,
-                        BackingMemberFromName(name)));
+                        BackingMemberFromName(name));
                 }
             }
         }

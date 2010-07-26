@@ -16,6 +16,7 @@ namespace Kistl.Client.Presentables
         // Create Models
         TModelFactory CreateViewModel<TModelFactory>() where TModelFactory : class;
         TModelFactory CreateViewModel<TModelFactory>(Kistl.API.IDataObject obj) where TModelFactory : class;
+        TModelFactory CreateViewModel<TModelFactory>(Kistl.API.ICompoundObject obj) where TModelFactory : class;
         TModelFactory CreateViewModel<TModelFactory>(Kistl.App.Base.Property p) where TModelFactory : class;
         TModelFactory CreateViewModel<TModelFactory>(System.Type t) where TModelFactory : class;
 
