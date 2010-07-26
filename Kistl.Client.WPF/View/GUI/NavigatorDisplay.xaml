@@ -18,7 +18,8 @@
 
         <!-- location breadcrumbs -->
         <ItemsControl DockPanel.Dock="Top"
-                      ItemsSource="{Binding Location}">
+                      ItemsSource="{Binding Location}"
+                      Margin="5">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <StackPanel Orientation="Horizontal"

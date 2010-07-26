@@ -17,6 +17,13 @@ namespace Kistl.Client.Presentables.GUI
     {
         public new delegate NavigationScreenViewModel Factory(IKistlContext dataCtx, NavigationScreenViewModel parent, NavigationScreen screen);
 
+        public static NavigationScreenViewModel Create(IModelFactory ModelFactory, IKistlContext dataCtx, NavigationScreenViewModel parent, NavigationScreen screen)
+        {
+
+            var t = screen.ViewModelDescriptor.ViewModelRef.AsType(true);
+            return ModelFactory.CreateViewModel<NavigationScreenViewModel.Factory>(t).Invoke(dataCtx, parent, screen);
+        }
+
         private readonly NavigationScreen _screen;
         private readonly NavigationScreenViewModel _parent;
         private readonly ObservableCollection<NavigationScreenViewModel> _children = new ObservableCollection<NavigationScreenViewModel>();
@@ -34,8 +41,7 @@ namespace Kistl.Client.Presentables.GUI
             _screen = screen;
             foreach (var s in _screen.Children)
             {
-                var t = s.ViewModelDescriptor.ViewModelRef.AsType(true);
-                _children.Add(ModelFactory.CreateViewModel<NavigationScreenViewModel.Factory>(t).Invoke(DataContext, this, s));
+                _children.Add(NavigationScreenViewModel.Create(ModelFactory, DataContext, this, s));
             }
             _childrenRO = new ReadOnlyObservableCollection<NavigationScreenViewModel>(_children);
         }

@@ -97,7 +97,7 @@ namespace Kistl.Client.WPF
                     SplashScreen.SetInfo("No server start required");
                 }
 
-                SplashScreen.SetInfo("Bootstraping Assembly Resolver");
+                SplashScreen.SetInfo("Bootstrapping Assembly Resolver");
                 AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
 
                 container = CreateMasterContainer(config);

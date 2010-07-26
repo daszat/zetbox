@@ -190,47 +190,47 @@ namespace Kistl.API.Migration
                             else
                             {
                                 // try other
-                                dest_val = Convert.ToBoolean(src_val);
+                                dest_val = Convert.ToBoolean(src_val, CultureInfo.GetCultureInfo("de-AT"));
                             }
                             break;
 
                         case DbType.Date:
                         case DbType.DateTime:
                         case DbType.DateTime2:
-                            dest_val = Convert.ToDateTime(src_val);
+                            dest_val = Convert.ToDateTime(src_val, CultureInfo.GetCultureInfo("de-AT"));
                             break;
 
                         case DbType.Single:
-                            dest_val = Convert.ToSingle(src_val);
+                            dest_val = Convert.ToSingle(src_val, CultureInfo.GetCultureInfo("de-AT"));
                             break;
                         case DbType.Double:
-                            dest_val = Convert.ToDouble(src_val);
+                            dest_val = Convert.ToDouble(src_val, CultureInfo.GetCultureInfo("de-AT"));
                             break;
 
                         case DbType.Byte:
-                            dest_val = Convert.ToByte(src_val);
+                            dest_val = Convert.ToByte(src_val, CultureInfo.GetCultureInfo("de-AT"));
                             break;
                         case DbType.Int16:
-                            dest_val = Convert.ToInt16(src_val);
+                            dest_val = Convert.ToInt16(src_val, CultureInfo.GetCultureInfo("de-AT"));
                             break;
                         case DbType.Int32:
-                            dest_val = Convert.ToInt32(src_val);
+                            dest_val = Convert.ToInt32(src_val, CultureInfo.GetCultureInfo("de-AT"));
                             break;
 
                         case DbType.SByte:
-                            dest_val = Convert.ToSByte(src_val);
+                            dest_val = Convert.ToSByte(src_val, CultureInfo.GetCultureInfo("de-AT"));
                             break;
                         case DbType.Int64:
-                            dest_val = Convert.ToInt64(src_val);
+                            dest_val = Convert.ToInt64(src_val, CultureInfo.GetCultureInfo("de-AT"));
                             break;
                         case DbType.UInt16:
-                            dest_val = Convert.ToUInt16(src_val);
+                            dest_val = Convert.ToUInt16(src_val, CultureInfo.GetCultureInfo("de-AT"));
                             break;
                         case DbType.UInt32:
-                            dest_val = Convert.ToUInt32(src_val);
+                            dest_val = Convert.ToUInt32(src_val, CultureInfo.GetCultureInfo("de-AT"));
                             break;
                         case DbType.UInt64:
-                            dest_val = Convert.ToUInt64(src_val);
+                            dest_val = Convert.ToUInt64(src_val, CultureInfo.GetCultureInfo("de-AT"));
                             break;
 
                         case DbType.Guid:
@@ -240,7 +240,7 @@ namespace Kistl.API.Migration
                         case DbType.Currency:
                         case DbType.Decimal:
                         case DbType.VarNumeric:
-                            dest_val = Convert.ToDecimal(src_val);
+                            dest_val = Convert.ToDecimal(src_val, CultureInfo.GetCultureInfo("de-AT"));
                             break;
 
 

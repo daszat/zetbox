@@ -28,7 +28,7 @@ namespace Kistl.Client.Presentables.GUI
         public NavigatorViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, NavigationScreen root)
             : base(dependencies, dataCtx)
         {
-            _current = _root = ModelFactory.CreateViewModel<NavigationScreenViewModel.Factory>().Invoke(dataCtx, null, root);
+            _current = _root = NavigationScreenViewModel.Create(ModelFactory, dataCtx, null, root);
             _current.Displayer = this;
 
             _history = new ObservableCollection<NavigationScreenViewModel>() { _current };

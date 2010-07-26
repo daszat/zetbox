@@ -2,14 +2,14 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls;assembly=Kistl.Client.WPF.Toolkit">
-    
+
     <ItemsControl ItemsSource="{Binding Children}">
         <ItemsControl.ItemTemplate>
             <DataTemplate>
-                <ctrls:CommandButton CommandModel="{Binding Displayer.NavigateToCommand}"
-                                     CommandParameter="{Binding}"
-                                     Content="{Binding Name}"
-                                     Margin="5" />
+                <Button Command="{Binding Displayer.NavigateToCommand, Converter={StaticResource CommandConverter}}"
+                        CommandParameter="{Binding}"
+                        Content="{Binding Name}"
+                        Margin="5" />
             </DataTemplate>
         </ItemsControl.ItemTemplate>
     </ItemsControl>
