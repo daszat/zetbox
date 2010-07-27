@@ -16,26 +16,28 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.CollectionEntries
 		protected Templates.Implementation.SerializationMembersList serializationList;
 		protected string referencedInterface;
 		protected string propertyName;
+		protected string moduleNamespace;
 
 
-        public ValueCollectionEntryParentReference(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Templates.Implementation.SerializationMembersList serializationList, string referencedInterface, string propertyName)
+        public ValueCollectionEntryParentReference(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Templates.Implementation.SerializationMembersList serializationList, string referencedInterface, string propertyName, string moduleNamespace)
             : base(_host)
         {
 			this.ctx = ctx;
 			this.serializationList = serializationList;
 			this.referencedInterface = referencedInterface;
 			this.propertyName = propertyName;
+			this.moduleNamespace = moduleNamespace;
 
         }
         
         public override void Generate()
         {
-#line 17 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\CollectionEntries\ValueCollectionEntryParentReference.cst"
+#line 18 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\CollectionEntries\ValueCollectionEntryParentReference.cst"
 string cacheName = "_" + propertyName + "Cache";
 	string fkName = "fk_" + propertyName;
 	string backingName = "_" + fkName;
 
-#line 21 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\CollectionEntries\ValueCollectionEntryParentReference.cst"
+#line 22 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\CollectionEntries\ValueCollectionEntryParentReference.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("        public ",  referencedInterface , " ",  propertyName , "\r\n");
 this.WriteObjects("        {\r\n");
@@ -88,9 +90,9 @@ this.WriteObjects("\r\n");
 this.WriteObjects("        // backing store for serialization\r\n");
 this.WriteObjects("        private int? ",  backingName , ";\r\n");
 this.WriteObjects("        \r\n");
-#line 74 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\CollectionEntries\ValueCollectionEntryParentReference.cst"
+#line 75 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\CollectionEntries\ValueCollectionEntryParentReference.cst"
 if (serializationList != null)
-		serializationList.Add(Kistl.Server.Generators.Templates.Implementation.SerializerType.All, "http://dasz.at/Kistl", propertyName,backingName); // TODO: XML Namespace
+		serializationList.Add(Kistl.Server.Generators.Templates.Implementation.SerializerType.All, moduleNamespace, propertyName, backingName); // TODO: XML Namespace
 
 
         }

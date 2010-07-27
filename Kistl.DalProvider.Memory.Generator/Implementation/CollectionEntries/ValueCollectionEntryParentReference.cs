@@ -15,8 +15,8 @@ namespace Kistl.DalProvider.Memory.Generator.Implementation.CollectionEntries
         : ClientObjects.Implementation.CollectionEntries.ValueCollectionEntryParentReference
     {
         public ValueCollectionEntryParentReference(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Templates.Implementation.SerializationMembersList serializationList,
-            string referencedInterface, string propertyName)
-            : base(_host, ctx, serializationList, referencedInterface, propertyName)
+            string referencedInterface, string propertyName, string moduleNamespace)
+            : base(_host, ctx, serializationList, referencedInterface, propertyName, moduleNamespace)
         {
         }
     }

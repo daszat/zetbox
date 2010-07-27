@@ -25,9 +25,10 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
 		protected string providerCollectionType;
 		protected string underlyingCollectionName;
 		protected bool orderByB;
+		protected string moduleNamespace;
 
 
-        public ValueCollectionProperty(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Templates.Implementation.SerializationMembersList serializationList, string name, string backingName, string backingCollectionType, string exposedCollectionInterface, string thisInterface, string referencedType, string entryType, string providerCollectionType, string underlyingCollectionName, bool orderByB)
+        public ValueCollectionProperty(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Templates.Implementation.SerializationMembersList serializationList, string name, string backingName, string backingCollectionType, string exposedCollectionInterface, string thisInterface, string referencedType, string entryType, string providerCollectionType, string underlyingCollectionName, bool orderByB, string moduleNamespace)
             : base(_host)
         {
 			this.ctx = ctx;
@@ -42,16 +43,17 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
 			this.providerCollectionType = providerCollectionType;
 			this.underlyingCollectionName = underlyingCollectionName;
 			this.orderByB = orderByB;
+			this.moduleNamespace = moduleNamespace;
 
         }
         
         public override void Generate()
         {
-#line 27 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ValueCollectionProperty.cst"
+#line 28 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ValueCollectionProperty.cst"
 AddSerialization(serializationList, underlyingCollectionName);
 
 
-#line 30 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ValueCollectionProperty.cst"
+#line 31 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ValueCollectionProperty.cst"
 this.WriteObjects("		// ",  this.GetType() , "\r\n");
 this.WriteObjects("		public ",  exposedCollectionInterface , "<",  referencedType , "> ",  name , "\r\n");
 this.WriteObjects("		{\r\n");

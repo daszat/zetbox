@@ -23,7 +23,7 @@ namespace Kistl.DalProvider.Memory.Generator.Implementation.CollectionEntries
         protected override void ApplyParentReferencePropertyTemplate(Property prop, string propertyName)
         {
             ClientObjects.Implementation.CollectionEntries.ValueCollectionEntryParentReference.Call(Host, ctx,
-                MembersToSerialize, prop.ObjectClass.Name, propertyName);
+                MembersToSerialize, prop.ObjectClass.Name, propertyName, prop.Module.Namespace);
         }
 
         protected override void ApplyCompoundObjectPropertyTemplate(CompoundObjectProperty prop, string propertyName)

@@ -26,8 +26,8 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
             : base(_host, ctx,
                 // ID is currently serialized by the infrastructure, so ignore it here
                 new Templates.Implementation.SerializationMembersList(),
-                // hardcoded type and name
-                "int", "ID", "http://dasz.at/Kistl") // TODO: use namespace of containing objectclass
+                // hardcoded type, name, and namespace
+                "int", "ID", "http://dasz.at/Kistl")
         {
 
         }

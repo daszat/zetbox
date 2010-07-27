@@ -22,8 +22,15 @@ namespace Kistl.Client.Presentables.GUI
             if (ModelFactory == null) throw new ArgumentNullException("ModelFactory");
             if (screen == null) throw new ArgumentNullException("screen");
 
-            var t = screen.ViewModelDescriptor.ViewModelRef.AsType(true);
-            return ModelFactory.CreateViewModel<NavigationScreenViewModel.Factory>(t).Invoke(dataCtx, parent, screen);
+            if (screen.ViewModelDescriptor != null)
+            {
+                var t = screen.ViewModelDescriptor.ViewModelRef.AsType(true);
+                return ModelFactory.CreateViewModel<NavigationScreenViewModel.Factory>(t).Invoke(dataCtx, parent, screen);
+            }
+            else
+            {
+                return ModelFactory.CreateViewModel<NavigationScreenViewModel.Factory>().Invoke(dataCtx, parent, screen);
+            }
         }
 
         private readonly NavigationScreen _screen;

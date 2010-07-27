@@ -12,12 +12,12 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.CollectionEntries
     {
         public static void Call(Arebis.CodeGeneration.IGenerationHost host, IKistlContext ctx,
            Templates.Implementation.SerializationMembersList membersToSerialize,
-           string className, string propertyName)
+           string className, string propertyName, string moduleName)
         {
             if (host == null) { throw new ArgumentNullException("host"); }
 
             host.CallTemplate("Implementation.CollectionEntries.ValueCollectionEntryParentReference",
-                ctx, membersToSerialize, className, propertyName);
+                ctx, membersToSerialize, className, propertyName, moduleName);
         }
     }
 }

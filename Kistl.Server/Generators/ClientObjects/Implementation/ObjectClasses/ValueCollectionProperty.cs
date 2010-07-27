@@ -53,11 +53,14 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
             string providerCollectionType = "IList<" + referencedCollectionEntry + ">";
             string underlyingCollectionName = "_" + name;
 
+            string moduleNamespace = prop.Module.Namespace;
+
             Call(
                 host, ctx, serializationList,
                 name, backingName, backingCollectionType, exposedCollectionInterface,
                 thisInterface, referencedType, referencedCollectionEntry,
-                providerCollectionType, underlyingCollectionName, !hasPersistentOrder);
+                providerCollectionType, underlyingCollectionName, !hasPersistentOrder,
+                moduleNamespace);
         }
 
         /// <summary>
@@ -76,13 +79,14 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
         /// <param name="providerCollectionType">the provider type of this collection</param>
         /// <param name="underlyingCollectionName">how the underlying collection is called</param>
         /// <param name="orderByB">true if the collection sould be ordered during export</param>
+        /// <param name="moduleNamespace">the xml namespace of the module</param>
         public static void Call(
             Arebis.CodeGeneration.IGenerationHost host,
             IKistlContext ctx,
             Templates.Implementation.SerializationMembersList serializationList,
             string name, string backingName, string backingCollectionType, string exposedCollectionInterface,
             string thisInterface, string referencedType, string entryType,
-            string providerCollectionType, string underlyingCollectionName, bool orderByB)
+            string providerCollectionType, string underlyingCollectionName, bool orderByB, string moduleNamespace)
         {
             if (host == null) { throw new ArgumentNullException("host"); }
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
@@ -90,7 +94,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
             host.CallTemplate("Implementation.ObjectClasses.ValueCollectionProperty",
                 ctx, serializationList,
                 name, backingName, backingCollectionType, exposedCollectionInterface,
-                thisInterface, referencedType, entryType, providerCollectionType, underlyingCollectionName, orderByB);
+                thisInterface, referencedType, entryType, providerCollectionType, underlyingCollectionName, orderByB, moduleNamespace);
         }
 
         protected virtual void AddSerialization(Templates.Implementation.SerializationMembersList list, string underlyingCollectionName)
@@ -98,7 +102,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
             // TODO: XML Namespace
             if (list != null)
             {
-                list.Add("Implementation.ObjectClasses.CollectionSerialization", SerializerType.All, "http://dasz.at/Kistl", name, underlyingCollectionName, orderByB);
+                list.Add("Implementation.ObjectClasses.CollectionSerialization", SerializerType.All, moduleNamespace, name, underlyingCollectionName, orderByB);
             }
         }
     }

@@ -246,7 +246,7 @@ this.WriteObjects("        private Guid? ",  fkGuidBackingName , " = null;\r\n")
 	{
 		Templates.Implementation.ObjectClasses.NotifyingValueProperty.Call(Host, ctx,
 		    serializationList,
-			"int?", positionPropertyName, "http://dasz.at/Kistl");
+			"int?", positionPropertyName, moduleNamespace);
 	}
 
 #line 206 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
