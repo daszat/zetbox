@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Kistl.Client.WPF.View.LabeledView"
+﻿<UserControl x:Class="Kistl.Client.WPF.View.LabeledContainer"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:tk="clr-namespace:Kistl.Client.WPF.View"
@@ -13,15 +13,13 @@
                               SharedSizeGroup="{Binding Path=LabelSharedSizeGroup, ElementName=lbView}" />
             <ColumnDefinition Width="1*" />
         </Grid.ColumnDefinitions>
-
-        <TextBlock Grid.Column="0"
-                   Text="{Binding Label, Mode=OneWay}"
-                   ToolTip="{Binding ToolTip, Mode=OneWay}" />
+        
+        <TextBlock Grid.Column="0"                   
+                   Text="{Binding Label, Mode=OneWay, ElementName=lbView}"
+                   ToolTip="{Binding ToolTip, Mode=OneWay, ElementName=lbView}" />
 
         <ContentPresenter Grid.Column="1"
                           Margin="5,0,0,0"
-                          Content="{Binding Model, Mode=OneWay}"
-                          tk:VisualTypeTemplateSelector.RequestedKind="{Binding RequestedKind, Mode=OneWay, ElementName=lbView}"
-                          ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />
+                          Content="{Binding LabeledContent, Mode=OneWay, ElementName=lbView}" />
     </Grid>
 </UserControl>

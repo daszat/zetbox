@@ -71,6 +71,9 @@
     <Compile Include="Converter\DebugConverter.cs" />
     <Compile Include="Converter\IconConverter.cs" />
     <Compile Include="CustomControls\CommandButton.cs" />
+    <Compile Include="CustomControls\LabeledContainer.xaml.cs">
+      <DependentUpon>LabeledContainer.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CustomControls\ErrorReporter.xaml.cs">
       <DependentUpon>ErrorReporter.xaml</DependentUpon>
     </Compile>
@@ -111,6 +114,10 @@
     <None Include="Kistl.snk" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="CustomControls\LabeledContainer.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="CustomControls\ErrorReporter.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
