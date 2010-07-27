@@ -118,6 +118,16 @@ namespace Kistl.Client.Presentables.ModuleEditor
                     lstMdl.Commands.Add(ModelFactory.CreateViewModel<DeleteDataObjectCommand.Factory>().Invoke(DataContext));
                     lst.Add(lstMdl);
 
+                    // Application
+                    lstMdl = ModelFactory.CreateViewModel<InstanceListViewModel.Factory>().Invoke(DataContext, null, DataContext.GetQuery<Application>());
+                    lstMdl.Filter.Add(new ConstantFilterExpression("Module = @0", CurrentModule));
+                    lst.Add(lstMdl);
+
+                    // NavigationScreens
+                    lstMdl = ModelFactory.CreateViewModel<InstanceListViewModel.Factory>().Invoke(DataContext, null, DataContext.GetQuery<NavigationScreen>());
+                    lstMdl.Filter.Add(new ConstantFilterExpression("Module = @0", CurrentModule));
+                    lst.Add(lstMdl);
+
                     // ViewDescriptor
                     lstMdl = ModelFactory.CreateViewModel<InstanceListViewModel.Factory>().Invoke(DataContext, null, DataContext.GetQuery<ViewDescriptor>());
                     lstMdl.Filter.Add(new ConstantFilterExpression("Module = @0", CurrentModule));
@@ -130,11 +140,6 @@ namespace Kistl.Client.Presentables.ModuleEditor
 
                     // ControlKinds
                     lstMdl = ModelFactory.CreateViewModel<InstanceListViewModel.Factory>().Invoke(DataContext, null, DataContext.GetQuery<ControlKind>());
-                    lstMdl.Filter.Add(new ConstantFilterExpression("Module = @0", CurrentModule));
-                    lst.Add(lstMdl);
-
-                    // Application
-                    lstMdl = ModelFactory.CreateViewModel<InstanceListViewModel.Factory>().Invoke(DataContext, null, DataContext.GetQuery<Application>());
                     lstMdl.Filter.Add(new ConstantFilterExpression("Module = @0", CurrentModule));
                     lst.Add(lstMdl);
 
