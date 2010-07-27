@@ -31,4 +31,34 @@
             <TextBlock Text="v" />
         </StackPanel>
     </DataTemplate>
+
+    <!-- from http://stackoverflow.com/questions/780426/link-button-in-wpf by Anderson Imes -->
+    <Style x:Key="LinkButton"
+           TargetType="Button">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <TextBlock x:Name="Underliner">
+                    <ContentPresenter />
+                    </TextBlock>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Foreground"
+                Value="Blue" />
+        <Setter Property="Cursor"
+                Value="Hand" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver"
+                     Value="true">
+                <Setter Property="Foreground"
+                        Value="Red" />
+            </Trigger>
+            <Trigger Property="IsEnabled"
+                     Value="false">
+                <Setter Property="Foreground"
+                        Value="Black" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
 </ResourceDictionary>

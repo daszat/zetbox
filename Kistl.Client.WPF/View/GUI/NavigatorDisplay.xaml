@@ -8,13 +8,13 @@
         Width="800"
         Title="{Binding Name}">
     <DockPanel LastChildFill="True">
-        <UniformGrid DockPanel.Dock="Top"
+        <!--<UniformGrid DockPanel.Dock="Top"
                      Rows="1">
             <ctrls:CommandButton CommandModel="{Binding BackCommand}"
                                  Margin="5" />
             <ctrls:CommandButton CommandModel="{Binding HomeCommand}"
                                  Margin="5" />
-        </UniformGrid>
+        </UniformGrid>-->
 
         <!-- location breadcrumbs -->
         <ItemsControl DockPanel.Dock="Top"
@@ -30,10 +30,10 @@
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text=">" />
-                        <ctrls:CommandButton CommandModel="{Binding Displayer.NavigateToCommand}"
-                                             CommandParameter="{Binding}"
-                                             Content="{Binding Name}" />
-                        <TextBlock Text="{Binding Name}" />
+                        <Button Style="{StaticResource LinkButton}"
+                                Command="{Binding Displayer.NavigateToCommand, Converter={StaticResource CommandConverter}}"
+                                CommandParameter="{Binding}"
+                                Content="{Binding Name}" />
                     </StackPanel>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>

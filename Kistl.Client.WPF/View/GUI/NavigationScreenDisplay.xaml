@@ -3,14 +3,24 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls;assembly=Kistl.Client.WPF.Toolkit">
 
-    <ItemsControl ItemsSource="{Binding Children}">
-        <ItemsControl.ItemTemplate>
-            <DataTemplate>
-                <Button Command="{Binding Displayer.NavigateToCommand, Converter={StaticResource CommandConverter}}"
-                        CommandParameter="{Binding}"
-                        Content="{Binding Name}"
-                        Margin="5" />
-            </DataTemplate>
-        </ItemsControl.ItemTemplate>
-    </ItemsControl>
+    <StackPanel>
+        <ItemsControl ItemsSource="{Binding Children}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Button Command="{Binding Displayer.NavigateToCommand, Converter={StaticResource CommandConverter}}"
+                            CommandParameter="{Binding}"
+                            Content="{Binding Name}"
+                            Margin="5" />
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        <ItemsControl ItemsSource="{Binding AdditionalCommands}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <ctrls:CommandButton CommandModel="{Binding}"
+                                         Margin="5" />
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </StackPanel>
 </UserControl>

@@ -43,7 +43,14 @@ namespace Kistl.DalProvider.Memory
 
         public void AddWithoutSetParent(T item)
         {
-            collection.Add(item);
+            if (_posProperty != null)
+            {
+                collection.Insert(GetIndex(item), item);
+            }
+            else
+            {
+                collection.Add(item);
+            }
             OnItemAdded(item);
         }
 
@@ -98,6 +105,31 @@ namespace Kistl.DalProvider.Memory
             }
             collection.Clear();
             OnCollectionReset();
+        }
+
+        private int GetIndex(T item)
+        {
+            int result = 0;
+            int? itemPos = GetPosition(item);
+
+            if (!itemPos.HasValue)
+            {
+                return collection.Count;
+            }
+
+            foreach (var i in collection)
+            {
+                int? curPos = GetPosition(i);
+
+                if (curPos != null && curPos.Value > itemPos.Value)
+                {
+                    return result;
+                }
+
+                result += 1;
+            }
+
+            return collection.Count;
         }
 
         private int? GetPosition(T item)

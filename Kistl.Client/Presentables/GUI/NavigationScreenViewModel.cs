@@ -37,6 +37,10 @@ namespace Kistl.Client.Presentables.GUI
         private readonly NavigationScreenViewModel _parent;
         private readonly ObservableCollection<NavigationScreenViewModel> _children = new ObservableCollection<NavigationScreenViewModel>();
         private readonly ReadOnlyObservableCollection<NavigationScreenViewModel> _childrenRO;
+
+        private readonly ObservableCollection<CommandModel> _additionalCommands = new ObservableCollection<CommandModel>();
+        private readonly ReadOnlyObservableCollection<CommandModel> _additionalCommandsRO;
+        
         private NavigatorViewModel _displayer = null;
 
         public NavigationScreenViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, NavigationScreenViewModel parent, NavigationScreen screen)
@@ -53,12 +57,15 @@ namespace Kistl.Client.Presentables.GUI
                 _children.Add(NavigationScreenViewModel.Create(ModelFactory, DataContext, this, s));
             }
             _childrenRO = new ReadOnlyObservableCollection<NavigationScreenViewModel>(_children);
+            _additionalCommandsRO = new ReadOnlyObservableCollection<CommandModel>(_additionalCommands);
         }
 
         public override string Name
         {
             get { return _screen.Title; }
         }
+
+        public Guid ExportGuid { get { return _screen.ExportGuid; } }
 
         public NavigatorViewModel Displayer
         {
@@ -91,6 +98,16 @@ namespace Kistl.Client.Presentables.GUI
             {
                 return _childrenRO;
             }
+        }
+
+        protected ObservableCollection<CommandModel> AdditionalCommandsRW
+        {
+            get { return _additionalCommands; }
+        }
+
+        public ReadOnlyObservableCollection<CommandModel> AdditionalCommands
+        {
+            get { return _additionalCommandsRO; }
         }
     }
 }
