@@ -748,9 +748,9 @@ namespace Kistl.Server.SchemaManagement
             {
                 // Check isnull column
                 var tblName = db.GetQualifiedTableName(objClass.TableName);
-                var colName = Construct.NestedColumnName(sprop, prefix);
-                Log.DebugFormat("    {0}", colName);
-                CheckColumn(tblName, colName, System.Data.DbType.Boolean, 0, 0, false, null);
+                var colName_IsNull = Construct.NestedColumnName(sprop, prefix);
+                Log.DebugFormat("    {0}", colName_IsNull);
+                CheckColumn(tblName, colName_IsNull, System.Data.DbType.Boolean, 0, 0, false, new BoolDefaultConstraint() { Value = true });
 
                 // Check other columns
                 CheckColumns(objClass, sprop.CompoundObjectDefinition.Properties, Construct.NestedColumnName(sprop, prefix));
