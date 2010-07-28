@@ -597,12 +597,17 @@ namespace Kistl.Client.Presentables
             INotifyingObject obj, EnumerationProperty prop)
             : base(appCtx, dataCtx, obj, prop)
         {
-            this.PossibleValues = new ReadOnlyCollection<KeyValuePair<int, string>>(prop.Enumeration.EnumerationEntries.Select(e => new KeyValuePair<int, string>(e.Value, e.Name)).ToList());
+            var enumValues = prop.Enumeration.EnumerationEntries.Select(e => new KeyValuePair<int?, string>(e.Value, e.Name));
+            this.PossibleValues = new ReadOnlyCollection<KeyValuePair<int?, string>>(
+                new[] { new KeyValuePair<int?, string>(null, "") }
+                .Concat(enumValues)
+                .ToList()
+            );
         }
 
         #region Public Interface
 
-        public ReadOnlyCollection<KeyValuePair<int, string>> PossibleValues { get; private set; }
+        public ReadOnlyCollection<KeyValuePair<int?, string>> PossibleValues { get; private set; }
 
         #endregion
 
@@ -632,14 +637,14 @@ namespace Kistl.Client.Presentables
             else
             {
                 Object.SetPropertyValue<object>(Property.Name, Enum.ToObject(((EnumerationProperty)Property).Enumeration.GetDataType(), val));
-            } 
+            }
         }
 
         #endregion
     }
 
-    [ViewModelDescriptor("KistlBase", DefaultKind="Kistl.App.GUI.MultiLineTextboxKind", Description="PropertyViewModel for multiline string properties")]
-    public class MultiLineStringPropertyModel 
+    [ViewModelDescriptor("KistlBase", DefaultKind = "Kistl.App.GUI.MultiLineTextboxKind", Description = "PropertyViewModel for multiline string properties")]
+    public class MultiLineStringPropertyModel
         : ReferencePropertyModel<string>
     {
         public new delegate MultiLineStringPropertyModel Factory(IKistlContext dataCtx, INotifyingObject obj, Property prop);
