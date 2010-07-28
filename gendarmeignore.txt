@@ -67,7 +67,8 @@ M: System.Delegate Kistl.Client.WPF.View.KistlBase.InstanceListDisplay::_CreateD
 M: System.Delegate Kistl.Client.WPF.View.GridCells.MultilineStringValue::_CreateDelegate(System.Type,System.String)
 M: System.Delegate Kistl.Client.WPF.View.GUI.MultiLineEditorDialog::_CreateDelegate(System.Type,System.String)
 
-# Called by an Lambda
+
+# Called by a lambda
 M: System.Boolean System.Linq.Dynamic.ExpressionParser::IsBetterThan(System.Linq.Expressions.Expression[],System.Linq.Dynamic.ExpressionParser/MethodData,System.Linq.Dynamic.ExpressionParser/MethodData)
 
 R: Gendarme.Rules.Correctness.CheckParametersNullityInVisibleMethodsRule
@@ -320,5 +321,4 @@ A: Kistl.DalProvider.Memory
 A: Kistl.DalProvider.Memory.Generator
 A: Kistl.Server
 A: Kistl.Server.Service
-
 
