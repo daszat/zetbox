@@ -5,7 +5,8 @@
              xmlns:client="clr-namespace:Kistl.Client.WPF.View"
              xmlns:clientKistlBase="clr-namespace:Kistl.Client.WPF.View.KistlBase"
              xmlns:commands="clr-namespace:Kistl.Client.WPF.Commands;assembly=Kistl.Client.WPF.Toolkit"
-             commands:SmartRoutedUICommand.IsCommandSink="True">
+             commands:SmartRoutedUICommand.IsCommandSink="True"
+             MinWidth="150">
     <DockPanel>
         <ctrls:CommandButton DockPanel.Dock="Right" CommandModel="{Binding EditCommand}" />
         <TextBlock Text="{Binding ShortText, Mode=OneWay}" />

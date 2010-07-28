@@ -20,11 +20,20 @@ namespace Kistl.Client.WPF.View.KistlBase
     /// <summary>
     /// Interaction logic for ObjectReferenceEditor.xaml
     /// </summary>
-    public partial class ObjectReferenceEditor : PropertyEditor
+    public partial class ObjectReferenceEditor : PropertyEditor, IHasViewModel<ObjectReferenceModel>
     {
         public ObjectReferenceEditor()
         {
             InitializeComponent();
         }
+
+        #region IHasViewModel<ObjectReferenceModel> Members
+
+        public ObjectReferenceModel ViewModel
+        {
+            get { return (ObjectReferenceModel)DataContext; }
+        }
+
+        #endregion
     }
 }

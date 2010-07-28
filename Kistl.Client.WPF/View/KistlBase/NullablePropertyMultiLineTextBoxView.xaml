@@ -1,24 +1,23 @@
 ﻿<view:PropertyEditor x:Class="Kistl.Client.WPF.View.NullablePropertyMultiLineTextBoxView"
-                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                   xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls;assembly=Kistl.Client.WPF.Toolkit"
-                   xmlns:view="clr-namespace:Kistl.Client.WPF.View.KistlBase"
-                   ToolTip="{Binding ToolTip}"
-                   VerticalContentAlignment="Stretch">
-    <DockPanel>
-        <CheckBox DockPanel.Dock="Left"
-                  VerticalAlignment="Center"
-                  IsChecked="{Binding HasValue, Mode=OneWay}"
-                  IsEnabled="False" />
-        <Button DockPanel.Dock="Right"
-                Visibility="{Binding AllowNullInput, Converter={StaticResource BooleanToVisibilityConverter}}"
-                Click="ClearValueHandler">Clear Value</Button>
-        <TextBox Text="{Binding Value, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}" 
-                 AcceptsReturn="True"
-                 AcceptsTab="True"
-                 VerticalScrollBarVisibility="Visible"
-                 HorizontalScrollBarVisibility="Visible"
-                 MinLines="10" />
-    </DockPanel>
+                     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls;assembly=Kistl.Client.WPF.Toolkit"
+                     xmlns:view="clr-namespace:Kistl.Client.WPF.View.KistlBase"
+                     ToolTip="{Binding ToolTip}"
+                     VerticalContentAlignment="Stretch">
+    <TextBox Text="{Binding Value, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"
+             AcceptsReturn="True"
+             AcceptsTab="True"
+             VerticalScrollBarVisibility="Visible"
+             HorizontalScrollBarVisibility="Visible"
+             MinLines="10">
+        <TextBox.ContextMenu>
+            <ContextMenu>
+                <MenuItem Command="{Binding ClearValueCommand, Converter={StaticResource CommandConverter}}"
+                          Header="{Binding ClearValueCommand.Label}"
+                          ToolTip="{Binding ClearValueCommand.ToolTip}" />
+            </ContextMenu>
+        </TextBox.ContextMenu>
+    </TextBox>
 
 </view:PropertyEditor>

@@ -1,11 +1,11 @@
 ﻿<view:PropertyEditor x:Class="Kistl.Client.WPF.View.KistlBase.ObjectReferenceListEditor"
-                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                   xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls;assembly=Kistl.Client.WPF.Toolkit"
-                   xmlns:view="clr-namespace:Kistl.Client.WPF.View.KistlBase"
-                   xmlns:kevin="clr-namespace:Microsoft.Samples.KMoore.WPFSamples.InfoTextBox;assembly=WPFSamplesLib"
-                   xmlns:client="clr-namespace:Kistl.Client.Presentables;assembly=Kistl.Client"
-                   VerticalContentAlignment="Stretch">
+                     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls;assembly=Kistl.Client.WPF.Toolkit"
+                     xmlns:view="clr-namespace:Kistl.Client.WPF.View.KistlBase"
+                     xmlns:kevin="clr-namespace:Microsoft.Samples.KMoore.WPFSamples.InfoTextBox;assembly=WPFSamplesLib"
+                     xmlns:client="clr-namespace:Kistl.Client.Presentables;assembly=Kistl.Client"
+                     VerticalContentAlignment="Stretch">
     <view:PropertyEditor.Resources>
         <DataTemplate x:Key="idCellTemplate">
             <TextBlock Text="{Binding ID}" />
@@ -30,25 +30,43 @@
         <UniformGrid DockPanel.Dock="Left"
                      Rows="2">
 
-            <Button Command="{Binding Path=MoveUpCommand, RelativeSource={RelativeSource AncestorType={x:Type view:ObjectReferenceListEditor}}}" IsEnabled="{Binding Path=HasPersistentOrder, Mode=OneWay}">up</Button>
-            <Button Command="{Binding Path=MoveDownCommand, RelativeSource={RelativeSource AncestorType={x:Type view:ObjectReferenceListEditor}}}" IsEnabled="{Binding Path=HasPersistentOrder, Mode=OneWay}">down</Button>
+            <Button Command="{Binding Path=MoveUpCommand, RelativeSource={RelativeSource AncestorType={x:Type view:ObjectReferenceListEditor}}}"
+                    IsEnabled="{Binding Path=HasPersistentOrder, Mode=OneWay}">up</Button>
+            <Button Command="{Binding Path=MoveDownCommand, RelativeSource={RelativeSource AncestorType={x:Type view:ObjectReferenceListEditor}}}"
+                    IsEnabled="{Binding Path=HasPersistentOrder, Mode=OneWay}">down</Button>
 
         </UniformGrid>
 
-        <WrapPanel DockPanel.Dock="Top"
-                   Orientation="Horizontal">
+        <ToolBar DockPanel.Dock="Top">
             <ctrls:LoadingIndicator />
-            <Button Click="AddExistingItemHandler" Visibility="{Binding AllowAddExisting, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}">Add existing ...</Button>
-            <Button Click="AddNewHandler" Visibility="{Binding AllowAddNew, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}">Add new ...</Button>
+            <Button Click="AddExistingItemHandler"
+                    Visibility="{Binding AllowAddExisting, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}">Add existing ...</Button>
+            <Button Click="AddNewHandler"
+                    Visibility="{Binding AllowAddNew, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}">Add new ...</Button>
             <Button Click="RemoveHandler">Remove selection from list</Button>
             <Button Click="DeleteHandler">Delete selection from data store</Button>
-        </WrapPanel>
+        </ToolBar>
 
         <!-- configured from code, see RefreshGridView() -->
         <ListView x:Name="ListView"
                   ItemsSource="{Binding Value, Mode=OneWay, ValidatesOnDataErrors=true}"
                   SelectedItem="{Binding SelectedItem}"
                   MinHeight="50"
-                  MouseDoubleClick="ItemActivatedHandler" />
+                  MouseDoubleClick="ItemActivatedHandler">
+            <ListView.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Add existing"
+                              Click="AddExistingItemHandler"
+                              Visibility="{Binding AllowAddExisting, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                    <MenuItem Header="Add new"
+                              Click="AddNewHandler"
+                              Visibility="{Binding AllowAddNew, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                    <MenuItem Header="Remove selection from list"
+                              Click="RemoveHandler" />
+                    <MenuItem Header="Delete selection from data store"
+                              Click="DeleteHandler" />
+                </ContextMenu>
+            </ListView.ContextMenu>
+        </ListView>
     </DockPanel>
 </view:PropertyEditor>

@@ -21,7 +21,7 @@ namespace Kistl.Client.WPF.View
     /// Interaction logic for NullablePropertyMultiLineTextBoxView.xaml
     /// </summary>
     [ViewDescriptor("GUI", Kistl.App.GUI.Toolkit.WPF, Kind="Kistl.App.GUI.MultiLineTextboxKind")]
-    public partial class NullablePropertyMultiLineTextBoxView : PropertyEditor
+    public partial class NullablePropertyMultiLineTextBoxView : PropertyEditor, IHasViewModel<IValueModel<string>>
     {
         public NullablePropertyMultiLineTextBoxView()
         {
@@ -29,10 +29,13 @@ namespace Kistl.Client.WPF.View
         }
 
 
-        private void ClearValueHandler(object sender, RoutedEventArgs e)
+        #region IHasViewModel<IValueModel<string>> Members
+
+        public IValueModel<string> ViewModel
         {
-            var mdl = (IClearableValue)DataContext;
-            mdl.ClearValue();
-        }  
+            get { return (IValueModel<string>)DataContext; }
+        }
+
+        #endregion
     }
 }

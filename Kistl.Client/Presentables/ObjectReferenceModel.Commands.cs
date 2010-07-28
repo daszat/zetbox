@@ -15,50 +15,25 @@ namespace Kistl.Client.Presentables
     public partial class ObjectReferenceModel
     {
         #region OpenReference
-
         public void OpenReference()
         {
             if (Value != null)
                 ModelFactory.ShowModel(Value, true);
         }
 
-        private OpenReferenceCommandModel _openReferenceCommand;
-
+        private ICommand _openReferenceCommand;
         public ICommand OpenReferenceCommand
         {
             get
             {
                 if (_openReferenceCommand == null)
                 {
-                    _openReferenceCommand = ModelFactory.CreateViewModel<OpenReferenceCommandModel.Factory>().Invoke(DataContext, this);
+                    _openReferenceCommand = ModelFactory.CreateViewModel<SimpleCommandModel.Factory>()
+                        .Invoke(DataContext, "Open", "Open the referenced object", () => OpenReference(), () => Value != null);
                 }
                 return _openReferenceCommand;
             }
         }
-
-        private class OpenReferenceCommandModel
-            : CommandModel
-        {
-            public new delegate OpenReferenceCommandModel Factory(IKistlContext dataCtx, ObjectReferenceModel parent);
-
-            public OpenReferenceCommandModel(IViewModelDependencies appCtx, IKistlContext dataCtx, ObjectReferenceModel parent)
-                : base(appCtx, dataCtx, "Open reference", "Open the referenced object")
-            {
-                _parent = parent;
-            }
-            private ObjectReferenceModel _parent;
-
-            public override bool CanExecute(object data)
-            {
-                return (_parent.Value != null);
-            }
-
-            protected override void DoExecute(object data)
-            {
-                _parent.OpenReference();
-            }
-        }
-
         #endregion
 
         #region CreateNewItemAndSetValue
@@ -112,43 +87,19 @@ namespace Kistl.Client.Presentables
             }
         }
 
-        private CreateNewItemAndSetValueCommandModel _createNewItemAndSetValueCommand;
-
+        private ICommand _createNewItemAndSetValueCommand;
         public ICommand CreateNewItemAndSetValueCommand
         {
             get
             {
                 if (_createNewItemAndSetValueCommand == null)
                 {
-                    _createNewItemAndSetValueCommand = ModelFactory.CreateViewModel<CreateNewItemAndSetValueCommandModel.Factory>().Invoke(DataContext, this);
+                    _createNewItemAndSetValueCommand = ModelFactory.CreateViewModel<SimpleCommandModel.Factory>()
+                        .Invoke(DataContext, "Create new item", "Create new item", () => CreateNewItemAndSetValue(null), () => !DataContext.IsReadonly);
                 }
                 return _createNewItemAndSetValueCommand;
             }
         }
-
-        private class CreateNewItemAndSetValueCommandModel
-            : CommandModel
-        {
-            public new delegate CreateNewItemAndSetValueCommandModel Factory(IKistlContext dataCtx, ObjectReferenceModel parent);
-
-            public CreateNewItemAndSetValueCommandModel(IViewModelDependencies appCtx, IKistlContext dataCtx, ObjectReferenceModel parent)
-                : base(appCtx, dataCtx, "Create new item", "Create new item")
-            {
-                _parent = parent;
-            }
-            private ObjectReferenceModel _parent;
-
-            public override bool CanExecute(object data)
-            {
-                return !DataContext.IsReadonly;
-            }
-
-            protected override void DoExecute(object data)
-            {
-                _parent.CreateNewItemAndSetValue(null);
-            }
-        }
-
         #endregion
 
         #region SelectValue
@@ -171,7 +122,7 @@ namespace Kistl.Client.Presentables
             ModelFactory.ShowModel(selectionTask, true);
         }
 
-        private SelectValueCommandModel _SelectValueCommand;
+        private ICommand _SelectValueCommand;
 
         public ICommand SelectValueCommand
         {
@@ -179,35 +130,12 @@ namespace Kistl.Client.Presentables
             {
                 if (_SelectValueCommand == null)
                 {
-                    _SelectValueCommand = ModelFactory.CreateViewModel<SelectValueCommandModel.Factory>().Invoke(DataContext, this);
+                    _SelectValueCommand = ModelFactory.CreateViewModel<SimpleCommandModel.Factory>()
+                        .Invoke(DataContext, "Select", "Selects another reference", () => SelectValue(), () => !DataContext.IsReadonly);
                 }
                 return _SelectValueCommand;
             }
         }
-
-        private class SelectValueCommandModel
-            : CommandModel
-        {
-            public new delegate SelectValueCommandModel Factory(IKistlContext dataCtx, ObjectReferenceModel parent);
-
-            public SelectValueCommandModel(IViewModelDependencies appCtx, IKistlContext dataCtx, ObjectReferenceModel parent)
-                : base(appCtx, dataCtx, "Open reference", "Open reference")
-            {
-                _parent = parent;
-            }
-            private ObjectReferenceModel _parent;
-
-            public override bool CanExecute(object data)
-            {
-                return !DataContext.IsReadonly;
-            }
-
-            protected override void DoExecute(object data)
-            {
-                _parent.SelectValue();
-            }
-        }
-
         #endregion
     }
 }

@@ -6,16 +6,17 @@
                    xmlns:kevin="clr-namespace:Microsoft.Samples.KMoore.WPFSamples.InfoTextBox;assembly=WPFSamplesLib"
                    ToolTip="{Binding ToolTip}">
 
-    <DockPanel>
-        <CheckBox DockPanel.Dock="Left"
-                  VerticalAlignment="Center"
-                  IsChecked="{Binding HasValue, Mode=OneWay}"
-                  IsEnabled="False" />
-        <Button DockPanel.Dock="Right"
-                Visibility="{Binding AllowNullInput, Converter={StaticResource BooleanToVisibilityConverter}}"
-                Click="ClearValueHandler">Clear Value</Button>
-        <ComboBox ItemsSource="{Binding PossibleValues, Mode=OneWay}" DisplayMemberPath="Value" SelectedValuePath="Key"
-                  SelectedValue="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}" />
-    </DockPanel>
+    <ComboBox ItemsSource="{Binding PossibleValues, Mode=OneWay}"
+              DisplayMemberPath="Value"
+              SelectedValuePath="Key"
+              SelectedValue="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}">
+        <ComboBox.ContextMenu>
+            <ContextMenu>
+                <MenuItem Command="{Binding ClearValueCommand, Converter={StaticResource CommandConverter}}"
+                          Header="{Binding ClearValueCommand.Label}"
+                          ToolTip="{Binding ClearValueCommand.ToolTip}" />
+            </ContextMenu>
+        </ComboBox.ContextMenu>
+    </ComboBox>
 
 </view:PropertyEditor>

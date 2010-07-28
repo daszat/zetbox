@@ -21,17 +21,20 @@ namespace Kistl.Client.WPF.View
     /// <summary>
     /// Interaction logic for EnumSelectionView.xaml
     /// </summary>
-    public partial class EnumSelectionView : PropertyEditor
+    public partial class EnumSelectionView : PropertyEditor, IHasViewModel<EnumerationPropertyModel>
     {
         public EnumSelectionView()
         {
             InitializeComponent();
         }
 
-        private void ClearValueHandler(object sender, RoutedEventArgs e)
+        #region IHasViewModel<EnumerationPropertyModel> Members
+
+        public EnumerationPropertyModel ViewModel
         {
-            var mdl = (IClearableValue)DataContext;
-            mdl.ClearValue();
-        }        
+            get { return (EnumerationPropertyModel)DataContext; }
+        }
+
+        #endregion
     }
 }

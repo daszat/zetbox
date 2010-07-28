@@ -23,6 +23,7 @@ namespace Kistl.Client.WPF.View.KistlBase
         public PropertyEditor()
         {
             VerticalContentAlignment = VerticalAlignment.Top;
+            MinWidth = 100;
         }
     }
 
