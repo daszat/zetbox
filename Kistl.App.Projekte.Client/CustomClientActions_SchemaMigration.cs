@@ -121,9 +121,9 @@ namespace ZBox.App.SchemaMigration
                     r.Cells[3].AddParagraph(c.Description ?? string.Empty);
                 }
 
-                foreach (var c in _obj.SourceColumn.OrderBy(i => i.Name))
+                foreach (var c in _obj.SourceColumn.Where(i => i.Status != MappingStatus.Ignored).OrderBy(i => i.Name))
                 {
-                    NewHeading2("Column " + c.Name);
+                    NewHeading2(string.Format("{1}Column {0}", c.Name, c.Status == MappingStatus.Questions ? "** " : string.Empty));
                     if (!string.IsNullOrEmpty(c.Description)) Section.AddParagraph(c.Description).Format.SpaceAfter = "0.5cm";
                     t = NewTable();
 
@@ -131,7 +131,7 @@ namespace ZBox.App.SchemaMigration
                     t.AddColumn("10cm");
                     
                     r = t.AddRow();
-                    r.Cells[0].AddParagraph("Source Name");
+                    r.Cells[0].AddParagraph("Status");
                     r.Cells[1].AddParagraph(c.Status.HasValue ? c.Status.Value.ToString() : string.Empty);
 
                     r = t.AddRow();
