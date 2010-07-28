@@ -81,15 +81,7 @@ namespace Kistl.Client.WPF.View.KistlBase
         private void AddNewHandler(object sender, RoutedEventArgs e)
         {
             var model = (ObjectListModel)DataContext;
-            model.CreateNewItem(newitem =>
-            {
-                if (newitem != null)
-                {
-                    model.AddItem(newitem);
-                    model.SelectedItem = newitem;
-                    model.ActivateItem(model.SelectedItem, true);
-                }
-            });
+            model.CreateNewItem();
         }
 
         private void AddExistingItemHandler(object sender, RoutedEventArgs e)

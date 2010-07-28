@@ -33,8 +33,10 @@
                     Visibility="{Binding AllowAddExisting, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}">Add existing</Button>
             <Button Click="AddNewHandler"
                     Visibility="{Binding AllowAddNew, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}">Add new</Button>
-            <Button Click="RemoveHandler">Remove selection from list</Button>
-            <Button Click="DeleteHandler">Delete selection from data store</Button>
+            <Button Click="RemoveHandler"
+                    Visibility="{Binding AllowRemove, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}">Remove selection from list</Button>
+            <Button Click="DeleteHandler"
+                    Visibility="{Binding AllowDelete, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}">Delete selection from data store</Button>
         </ToolBar>
         <!-- configured from code, see RefreshGridView() -->
         <ListView x:Name="ListView"
@@ -52,9 +54,11 @@
                               Click="AddNewHandler"
                               Visibility="{Binding AllowAddNew, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}" />
                     <MenuItem Header="Remove selection from list"
-                              Click="RemoveHandler" />
+                              Click="RemoveHandler"
+                              Visibility="{Binding AllowRemove, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"/>
                     <MenuItem Header="Delete selection from data store"
-                              Click="DeleteHandler" />
+                              Click="DeleteHandler"
+                              Visibility="{Binding AllowDelete, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"/>
                 </ContextMenu>
             </ListView.ContextMenu>
         </ListView>

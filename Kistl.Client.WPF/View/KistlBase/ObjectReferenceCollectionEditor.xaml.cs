@@ -52,15 +52,7 @@ namespace Kistl.Client.WPF.View.KistlBase
 
         private void AddNewHandler(object sender, RoutedEventArgs e)
         {
-            ViewModel.CreateNewItem(newitem =>
-            {
-                if (newitem != null)
-                {
-                    ViewModel.AddItem(newitem);
-                    ViewModel.SelectedItem = newitem;
-                    ViewModel.ActivateItem(ViewModel.SelectedItem, true);
-                }
-            });
+            ViewModel.CreateNewItem();
         }
 
         private void AddExistingItemHandler(object sender, RoutedEventArgs e)

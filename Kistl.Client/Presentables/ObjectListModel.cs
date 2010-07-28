@@ -56,6 +56,7 @@ namespace Kistl.Client.Presentables
                     if (otherEnd != null && otherEnd.Multiplicity.UpperBound() > 1 && rel.Containment != ContainmentSpecification.Independent)
                     {
                         _allowAddExisting = false;
+                        _allowRemove = false;
                     }
                 }
             }
@@ -209,36 +210,114 @@ namespace Kistl.Client.Presentables
             }
         }
 
+        private bool _allowRemove = true;
+        public bool AllowRemove
+        {
+            get
+            {
+                return _allowRemove;
+            }
+            set
+            {
+                if (_allowRemove != value)
+                {
+                    _allowRemove = value;
+                    OnPropertyChanged("AllowRemove");
+                }
+            }
+        }
+
+        private bool _allowDelete = true;
+        public bool AllowDelete
+        {
+            get
+            {
+                return _allowDelete;
+            }
+            set
+            {
+                if (_allowDelete != value)
+                {
+                    _allowDelete = value;
+                    OnPropertyChanged("AllowDelete");
+                }
+            }
+        }
+
+        private ICommand _CreateNewCommand = null;
+        public ICommand CreateNewCommand
+        {
+            get
+            {
+                if (_CreateNewCommand == null)
+                {
+                    _CreateNewCommand = ModelFactory.CreateViewModel<SimpleCommandModel.Factory>()
+                        .Invoke(DataContext, "Add new", "Creates a new Item suitable for adding to the list.", () => CreateNewItem(), () => AllowAddNew);
+                }
+                return _CreateNewCommand;
+            }
+        }
+
+        private ICommand _AddExistingCommand = null;
+        public ICommand AddExistingCommand
+        {
+            get
+            {
+                if (_AddExistingCommand == null)
+                {
+                    _AddExistingCommand = ModelFactory.CreateViewModel<SimpleCommandModel.Factory>()
+                        .Invoke(DataContext, "Add existing", "Adds an existing item into this list.", () => AddExistingItem(), () => AllowAddExisting);
+                }
+                return _AddExistingCommand;
+            }
+        }
+
+        private ICommand _RemoveCommand = null;
+        public ICommand RemoveCommand
+        {
+            get
+            {
+                if (_RemoveCommand == null)
+                {
+                    _RemoveCommand = ModelFactory.CreateViewModel<SimpleParameterCommandModel<IEnumerable<DataObjectModel>>.Factory>()
+                        .Invoke(DataContext, "Remove", "Remove selection from list", (items) => items.ForEach(i => RemoveItem(i)), (items) => items.Count() > 0 && AllowRemove);
+                }
+                return _RemoveCommand;
+            }
+        }
+
+        private ICommand _DeleteCommand = null;
+        public ICommand DeleteCommand
+        {
+            get
+            {
+                if (_DeleteCommand == null)
+                {
+                    _DeleteCommand = ModelFactory.CreateViewModel < SimpleParameterCommandModel<IEnumerable<DataObjectModel>>.Factory>()
+                        .Invoke(DataContext, "Delete", "Delete selection from data store", (items) => items.ForEach(i => DeleteItem(i)), (items) => items.Count() > 0 && AllowDelete);
+                }
+                return _DeleteCommand;
+            }
+        }
+
         /// <summary>
         /// Creates a new Item suitable for adding to the list. This may prompt 
         /// the user to choose a type of item to add or enter an initial value.
         /// </summary>
-        /// <param name="onCreated">this callback will be called with the newly created item on the UI thread</param>
-        /// 
-        /// This example creates a new item and activates it for the user to edit:
-        /// <example><![CDATA[
-        /// model.CreateNewElement(newitem =>
-        /// {
-        ///     if (newitem != null)
-        ///     {
-        ///         model.AddItem(newitem);
-        ///         model.SelectedItem = newitem;
-        ///         model.ActivateItem(model.SelectedItem, true);
-        ///     }
-        /// });]]>
-        /// </example>
-        public void CreateNewItem(Action<DataObjectModel> onCreated)
+        public void CreateNewItem()
         {
             ObjectClass baseclass = ((ObjectReferenceProperty)this.Property).GetReferencedObjectClass();
 
             var children = new List<ObjectClass>() { baseclass };
             CollectChildClasses(baseclass.ID, children);
 
+            DataObjectModel result = null;
+
             if (children.Count == 1)
             {
                 var targetType = baseclass.GetDescribedInterfaceType();
                 var item = this.DataContext.Create(targetType);
-                onCreated(ModelFactory.CreateViewModel<DataObjectModel.Factory>().Invoke(DataContext, item));
+                result = ModelFactory.CreateViewModel<DataObjectModel.Factory>().Invoke(DataContext, item);
             }
             else
             {
@@ -253,25 +332,21 @@ namespace Kistl.Client.Presentables
                             {
                                 var targetType = ((ObjectClass)chosen.Object).GetDescribedInterfaceType();
                                 var item = this.DataContext.Create(targetType);
-                                onCreated(ModelFactory.CreateViewModel<DataObjectModel.Factory>(item).Invoke(DataContext, item));
-                            }
-                            else
-                            {
-                                onCreated(null);
+                                result = ModelFactory.CreateViewModel<DataObjectModel.Factory>(item).Invoke(DataContext, item);
                             }
                         }),
                     null), true);
             }
+
+            if (result != null)
+            {
+                AddItem(result);
+                SelectedItem = result;
+                ActivateItem(result, true);
+            }
         }
 
-        public void AddItem(DataObjectModel item)
-        {
-            if (item == null) { throw new ArgumentNullException("item"); }
-
-            EnsureValueCache();
-            _list.Add(item.Object);
-        }
-
+        
         /// <summary>
         /// Adds an existing item into this ObjectList. Asks the User which should be added.
         /// </summary>
@@ -293,6 +368,14 @@ namespace Kistl.Client.Presentables
                         }
                     }),
                     null), true);
+        }
+
+        public void AddItem(DataObjectModel item)
+        {
+            if (item == null) { throw new ArgumentNullException("item"); }
+
+            EnsureValueCache();
+            _list.Add(item.Object);
         }
 
         public void MoveItemUp(DataObjectModel item)
