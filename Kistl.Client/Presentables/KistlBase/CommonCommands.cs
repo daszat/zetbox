@@ -5,19 +5,58 @@ using System.Text;
 using Kistl.API;
 using Kistl.App.Base;
 using ObjectEditorWorkspace = Kistl.Client.Presentables.ObjectEditor.WorkspaceViewModel;
+using Kistl.App.GUI;
 
 namespace Kistl.Client.Presentables.KistlBase
 {
     public class OpenDataObjectCommand : ItemCommandModel<DataObjectModel>
     {
-        public new delegate OpenDataObjectCommand Factory(IKistlContext dataCtx);
+        public new delegate OpenDataObjectCommand Factory(IKistlContext dataCtx, ControlKind reqWorkspaceKind, ControlKind reqEditorKind);
 
         protected readonly Func<IKistlContext> ctxFactory;
 
-        public OpenDataObjectCommand(IViewModelDependencies appCtx, IKistlContext dataCtx, Func<IKistlContext> ctxFactory)
+        public OpenDataObjectCommand(IViewModelDependencies appCtx, Func<IKistlContext> ctxFactory,
+            IKistlContext dataCtx, ControlKind reqWorkspaceKind, ControlKind reqEditorKind
+            )
             : base(appCtx, dataCtx, "Open", "Opens the current selected Object")
         {
             this.ctxFactory = ctxFactory;
+            this._requestedWorkspaceKind = reqWorkspaceKind;
+            this._requestedEditorKind = reqEditorKind;
+        }
+
+        private ControlKind _requestedEditorKind;
+        public ControlKind RequestedEditorKind
+        {
+            get
+            {
+                return _requestedEditorKind;
+            }
+            set
+            {
+                if (_requestedEditorKind != value)
+                {
+                    _requestedEditorKind = value;
+                    OnPropertyChanged("RequestedEditorKind");
+                }
+            }
+        }
+
+        private ControlKind _requestedWorkspaceKind;
+        public ControlKind RequestedWorkspaceKind
+        {
+            get
+            {
+                return _requestedWorkspaceKind;
+            }
+            set
+            {
+                if (_requestedWorkspaceKind != value)
+                {
+                    _requestedWorkspaceKind = value;
+                    OnPropertyChanged("RequestedWorkspaceKind");
+                }
+            }
         }
 
         protected override void DoExecute(IEnumerable<DataObjectModel> data)
@@ -25,9 +64,9 @@ namespace Kistl.Client.Presentables.KistlBase
             var newWorkspace = ModelFactory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(ctxFactory());
             foreach (var item in data)
             {
-                newWorkspace.ShowForeignModel(item);
+                newWorkspace.ShowForeignModel(item, RequestedEditorKind);
             }
-            ModelFactory.ShowModel(newWorkspace, true);
+            ModelFactory.ShowModel(newWorkspace, RequestedWorkspaceKind, true);
         }
     }
 
@@ -52,18 +91,53 @@ namespace Kistl.Client.Presentables.KistlBase
 
     public class NewDataObjectCommand : CommandModel
     {
-        public new delegate NewDataObjectCommand Factory(IKistlContext dataCtx, DataType type);
+        public new delegate NewDataObjectCommand Factory(IKistlContext dataCtx, DataType type, ControlKind reqWorkspaceKind, ControlKind reqEditorKind);
 
         protected readonly Func<IKistlContext> ctxFactory;
         protected DataType Type { get; private set; }
 
-        public NewDataObjectCommand(IViewModelDependencies appCtx, 
-            IKistlContext dataCtx, DataType type,
-            Func<IKistlContext> ctxFactory)
+        public NewDataObjectCommand(IViewModelDependencies appCtx, Func<IKistlContext> ctxFactory,
+            IKistlContext dataCtx, DataType type, ControlKind reqWorkspaceKind, ControlKind reqEditorKind)
             : base(appCtx, dataCtx, "New", "Creates a new Object")
         {
             this.Type = type;
             this.ctxFactory = ctxFactory;
+            this._requestedWorkspaceKind = reqWorkspaceKind;
+            this._requestedEditorKind = reqEditorKind;
+        }
+
+        private ControlKind _requestedEditorKind;
+        public ControlKind RequestedEditorKind
+        {
+            get
+            {
+                return _requestedEditorKind;
+            }
+            set
+            {
+                if (_requestedEditorKind != value)
+                {
+                    _requestedEditorKind = value;
+                    OnPropertyChanged("RequestedEditorKind");
+                }
+            }
+        }
+
+        private ControlKind _requestedWorkspaceKind;
+        public ControlKind RequestedWorkspaceKind
+        {
+            get
+            {
+                return _requestedWorkspaceKind;
+            }
+            set
+            {
+                if (_requestedWorkspaceKind != value)
+                {
+                    _requestedWorkspaceKind = value;
+                    OnPropertyChanged("RequestedWorkspaceKind");
+                }
+            }
         }
 
         public override bool CanExecute(object data)
@@ -76,8 +150,8 @@ namespace Kistl.Client.Presentables.KistlBase
             var newCtx =  ctxFactory();
             var newWorkspace = ModelFactory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(newCtx);
             var newObj = newCtx.Create(DataContext.GetInterfaceType(Type.GetDataType()));
-            newWorkspace.ShowForeignModel(ModelFactory.CreateViewModel<DataObjectModel.Factory>(newObj).Invoke(newCtx, newObj));
-            ModelFactory.ShowModel(newWorkspace, true);
+            newWorkspace.ShowForeignModel(ModelFactory.CreateViewModel<DataObjectModel.Factory>(newObj).Invoke(newCtx, newObj), RequestedEditorKind);
+            ModelFactory.ShowModel(newWorkspace, RequestedWorkspaceKind, true);
         }
     }
 

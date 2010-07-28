@@ -428,7 +428,7 @@ namespace Kistl.Client.Presentables.KistlBase
             }
         }
 
-        List<DataObjectModel> _PossibleValues = null;
+        private List<KeyValuePair<DataObjectModel, string>> _PossibleValues = null;
 
         public IEnumerable PossibleValues
         {
@@ -436,13 +436,17 @@ namespace Kistl.Client.Presentables.KistlBase
             {
                 if (_PossibleValues == null)
                 {
-                    _PossibleValues = new List<DataObjectModel>();
+                    _PossibleValues = new List<KeyValuePair<DataObjectModel, string>>();
+                    _PossibleValues.Add(new KeyValuePair<DataObjectModel, string>());
                     foreach (var obj in DataContext
                         .GetQuery(DataContext.GetInterfaceType(Property.GetPropertyType()))
                         .ToList() // TODO: remove this
                         .OrderBy(obj => obj.ToString()).ToList())
                     {
-                        _PossibleValues.Add(ModelFactory.CreateViewModel<DataObjectModel.Factory>(obj).Invoke(DataContext, obj));
+                        _PossibleValues.Add(new KeyValuePair<DataObjectModel, string>(
+                            ModelFactory.CreateViewModel<DataObjectModel.Factory>(obj).Invoke(DataContext, obj),
+                            obj.ToString())
+                        );
                     }
                 }
                 return _PossibleValues;

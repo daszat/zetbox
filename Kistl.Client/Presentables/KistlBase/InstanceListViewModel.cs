@@ -7,14 +7,14 @@ namespace Kistl.Client.Presentables.KistlBase
     using System.Collections.Specialized;
     using System.Linq;
     using System.Linq.Dynamic;
+    using System.Reflection;
     using System.Text;
-    using ObjectEditorWorkspace = Kistl.Client.Presentables.ObjectEditor.WorkspaceViewModel;
-
     using Kistl.API;
     using Kistl.API.Client;
-    using Kistl.App.Base;
     using Kistl.API.Configuration;
-    using System.Reflection;
+    using Kistl.App.Base;
+    using Kistl.App.GUI;
+    using ObjectEditor = Kistl.Client.Presentables.ObjectEditor;
 
     /// <summary>
     /// Models the specialities of <see cref="DataType"/>s.
@@ -75,6 +75,41 @@ namespace Kistl.Client.Presentables.KistlBase
         {
             return DataContext.GetQuery<T>();
         }
+
+        private ControlKind _requestedEditorKind;
+        public ControlKind RequestedEditorKind
+        {
+            get
+            {
+                return _requestedEditorKind;
+            }
+            set
+            {
+                if (_requestedEditorKind != value)
+                {
+                    _requestedEditorKind = value;
+                    OnPropertyChanged("RequestedEditorKind");
+                }
+            }
+        }
+
+        private ControlKind _requestedWorkspaceKind;
+        public ControlKind RequestedWorkspaceKind
+        {
+            get
+            {
+                return _requestedWorkspaceKind;
+            }
+            set
+            {
+                if (_requestedWorkspaceKind != value)
+                {
+                    _requestedWorkspaceKind = value;
+                    OnPropertyChanged("RequestedWorkspaceKind");
+                }
+            }
+        }
+
 
         #region Public interface
         private ObservableCollection<IFilterExpression> _filter = null;
@@ -140,7 +175,7 @@ namespace Kistl.Client.Presentables.KistlBase
         }
 
         private ObservableCollection<ICommand> _commands = null;
-        public ICollection<ICommand> Commands
+        public ObservableCollection<ICommand> Commands
         {
             get
             {
@@ -148,13 +183,62 @@ namespace Kistl.Client.Presentables.KistlBase
                 {
                     _commands = new ObservableCollection<ICommand>();
                     // Add default actions
-                    _commands.Add(ModelFactory.CreateViewModel<NewDataObjectCommand.Factory>().Invoke(DataContext, _type));
-                    _commands.Add(ModelFactory.CreateViewModel<OpenDataObjectCommand.Factory>().Invoke(DataContext));
-                    _commands.Add(ModelFactory.CreateViewModel<RefreshCommand.Factory>().Invoke(DataContext, this));
+                    _commands.Add(NewCommand);
+                    _commands.Add(OpenCommand);
+                    _commands.Add(RefreshCommand);
                 }
                 return _commands;
             }
         }
+
+        private ICommand _RefreshCommand;
+        public ICommand RefreshCommand
+        {
+            get
+            {
+                if (_RefreshCommand == null)
+                {
+                    _RefreshCommand = ModelFactory.CreateViewModel<RefreshCommand.Factory>().Invoke(DataContext, this);
+                }
+                return _RefreshCommand;
+            }
+        }
+
+        private ICommand _OpenCommand;
+        public ICommand OpenCommand
+        {
+            get
+            {
+                if (_OpenCommand == null)
+                {
+                    _OpenCommand = ModelFactory.CreateViewModel<OpenDataObjectCommand.Factory>().Invoke(DataContext, RequestedWorkspaceKind, RequestedEditorKind);
+                }
+                return _OpenCommand;
+            }
+        }
+
+        private ICommand _NewCommand;
+        public ICommand NewCommand
+        {
+            get
+            {
+                if (_NewCommand == null)
+                {
+                    _NewCommand = ModelFactory.CreateViewModel<NewDataObjectCommand.Factory>().Invoke(DataContext, _type, RequestedWorkspaceKind, RequestedEditorKind);
+                }
+                return _NewCommand;
+            }
+        }
+
+        private DataType _type;
+        public DataType DataType
+        {
+            get
+            {
+                return _type;
+            }
+        }
+
 
         private Kistl.Client.Presentables.DataTypeModel _dataTypeMdl = null;
         public Kistl.Client.Presentables.DataTypeModel DataTypeModel
@@ -242,12 +326,12 @@ namespace Kistl.Client.Presentables.KistlBase
         {
             if (objects == null) throw new ArgumentNullException("objects");
 
-            var newWorkspace = ModelFactory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(ctxFactory());
+            var newWorkspace = ModelFactory.CreateViewModel<ObjectEditor.WorkspaceViewModel.Factory>().Invoke(ctxFactory());
             foreach (var item in objects)
             {
-                newWorkspace.ShowForeignModel(item);
+                newWorkspace.ShowForeignModel(item, RequestedEditorKind);
             }
-            ModelFactory.ShowModel(newWorkspace, true);
+            ModelFactory.ShowModel(newWorkspace, RequestedWorkspaceKind,  true);
         }
 
         public delegate void ItemsDefaultActionHandler(IEnumerable<DataObjectModel> objects);
@@ -352,8 +436,6 @@ namespace Kistl.Client.Presentables.KistlBase
         }
 
         #endregion
-
-        private DataType _type;
 
         #region IRefreshCommandListener Members
 
