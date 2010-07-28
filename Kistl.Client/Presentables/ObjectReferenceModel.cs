@@ -71,8 +71,6 @@ namespace Kistl.Client.Presentables
             }
         }
 
-        public bool AllowNullInput { get; private set; }
-
         public void ClearValue()
         {
             if (AllowNullInput) Value = null;

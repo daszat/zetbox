@@ -33,6 +33,8 @@ namespace Kistl.Client.Presentables.KistlBase
     {
         string Label { get; }
         event EventHandler FilterChanged;
+        bool Enabled { get; }
+        bool Requiered { get; }
     }
 
     public interface IValueTypeFilterViewModel<TValue> : IUIFilterExpression
@@ -95,6 +97,7 @@ namespace Kistl.Client.Presentables.KistlBase
         }
 
         public abstract bool Enabled { get; }
+        public abstract bool Requiered { get; }
 
         public string ToolTip { get; set; }
 
@@ -245,7 +248,7 @@ namespace Kistl.Client.Presentables.KistlBase
             }
         }
 
-        public bool Requiered { get { return false; } }
+        public override bool Requiered { get { return false; } }
 
         #region ILinqFilterExpression Members
         public string Predicate
@@ -282,7 +285,7 @@ namespace Kistl.Client.Presentables.KistlBase
                 return Values.Count > 0 && !string.IsNullOrEmpty(Values[0]);
             }
         }
-        public bool Requiered { get { return false; } }
+        public override bool Requiered { get { return false; } }
 
         #region IPostFilterExpression Members
 
@@ -333,7 +336,7 @@ namespace Kistl.Client.Presentables.KistlBase
                 return base.Values.Count > 0;
             }
         }
-        public virtual bool Requiered { get { return Configuration.Requiered; } }
+        public override bool Requiered { get { return Configuration.Requiered; } }
 
         public virtual string Predicate
         {
@@ -370,7 +373,7 @@ namespace Kistl.Client.Presentables.KistlBase
                 return base.Values.Count > 0;
             }
         }
-        public virtual bool Requiered { get { return Configuration.Requiered; } }
+        public override bool Requiered { get { return Configuration.Requiered; } }
 
         public virtual string Predicate
         {

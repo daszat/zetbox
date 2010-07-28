@@ -6,7 +6,8 @@
         commands:SmartRoutedUICommand.IsCommandSink="True"
         Height="600"
         Width="800"
-        Title="{Binding Name}">
+        Title="{Binding Name}"
+        WindowState="Maximized">
     <DockPanel LastChildFill="True">
         <!--<UniformGrid DockPanel.Dock="Top"
                      Rows="1">

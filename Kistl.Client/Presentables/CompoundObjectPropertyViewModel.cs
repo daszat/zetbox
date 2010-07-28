@@ -60,8 +60,6 @@ namespace Kistl.Client.Presentables
             }
         }
 
-        public bool AllowNullInput { get; private set; }
-
         #region IClearableValue Members
 
         public void ClearValue()

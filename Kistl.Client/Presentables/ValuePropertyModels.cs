@@ -108,6 +108,7 @@ namespace Kistl.Client.Presentables
             if (prop == null)
                 throw new ArgumentNullException("prop");
 
+            this.AllowNullInput = false;
             this.Object = obj;
             this.Property = prop;
 
@@ -142,6 +143,9 @@ namespace Kistl.Client.Presentables
         {
             get { return Label; }
         }
+
+        public bool AllowNullInput { get; protected set; }
+        public bool Requiered { get { return !AllowNullInput; } }
 
         public ViewModel Model
         {
@@ -317,8 +321,6 @@ namespace Kistl.Client.Presentables
             }
         }
 
-        public bool AllowNullInput { get; private set; }
-
         public void ClearValue()
         {
             if (this.AllowNullInput) Value = null;
@@ -482,8 +484,6 @@ namespace Kistl.Client.Presentables
                     this.Value = null;
             }
         }
-
-        public bool AllowNullInput { get; private set; }
 
         public void ClearValue()
         {

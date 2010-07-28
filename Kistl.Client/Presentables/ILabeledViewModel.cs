@@ -15,6 +15,7 @@ namespace Kistl.Client.Presentables
         string ToolTip { get; }
         ControlKind RequestedKind { get; }
         ViewModel Model { get; }
+        bool Requiered { get; }
     }
 
     // No Viewdescriptor, code only
@@ -44,6 +45,13 @@ namespace Kistl.Client.Presentables
         {
             get { return _ToolTip; }
             set { _ToolTip = value; OnPropertyChanged("ToolTip"); }
+        }
+
+        private bool _Requiered;
+        public bool Requiered
+        {
+            get { return _Requiered; }
+            set { _Requiered = value; OnPropertyChanged("Requiered"); }
         }
 
         public ViewModel Model
