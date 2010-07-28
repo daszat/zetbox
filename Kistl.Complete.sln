@@ -108,6 +108,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WPF", "WPF", "{9B65F71F-98A5-4744-B45F-9C5D99F99D23}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.Client.WPF", "Kistl.Client.WPF\Kistl.Client.WPF.csproj", "{2C899579-BF78-442B-8810-8C7E7A2CA212}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFSamplesLib", "WPFLibrary\WPFSamplesLib.csproj", "{E4BBC94F-B837-4668-A127-E36E6DE012F5}"
 EndProject
