@@ -89,15 +89,5 @@ namespace Kistl.Client.WPF.View
         public static readonly DependencyProperty LabelProperty =
             DependencyProperty.Register("Label", typeof(string), typeof(LabeledContainer), new UIPropertyMetadata(string.Empty));
 
-        public string ToolTip
-        {
-            get { return (string)GetValue(ToolTipProperty); }
-            set { SetValue(ToolTipProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for ToolTip.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty ToolTipProperty =
-            DependencyProperty.Register("ToolTip", typeof(string), typeof(LabeledContainer), new UIPropertyMetadata(string.Empty));
-
     }
 }

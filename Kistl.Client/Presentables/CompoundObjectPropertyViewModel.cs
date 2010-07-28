@@ -62,11 +62,30 @@ namespace Kistl.Client.Presentables
 
         public bool AllowNullInput { get; private set; }
 
+        #region IClearableValue Members
+
         public void ClearValue()
         {
             if (AllowNullInput) Value = null;
             else throw new InvalidOperationException();
         }
+
+        private ICommand _ClearValueCommand = null;
+        public ICommand ClearValueCommand
+        {
+            get
+            {
+                if (_ClearValueCommand == null)
+                {
+                    _ClearValueCommand = ModelFactory.CreateViewModel<SimpleCommandModel.Factory>()
+                        .Invoke(DataContext, "Clear value", "Sets the value to nothing", () => ClearValue(), () => AllowNullInput);
+                }
+                return _ClearValueCommand;
+            }
+        }
+
+        #endregion
+
 
         private CompoundObjectViewModel _valueCache;
         /// <summary>
@@ -112,5 +131,6 @@ namespace Kistl.Client.Presentables
         }
 
         #endregion
+
     }
 }

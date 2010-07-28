@@ -58,6 +58,8 @@ namespace Kistl.Client.Presentables
         /// Clears the value of this Model. After calling this method the value should be <value>null</value> or "empty".
         /// </summary>
         void ClearValue();
+
+        ICommand ClearValueCommand { get; }
     }
 
     public interface IValueModel<TValue>
@@ -322,6 +324,19 @@ namespace Kistl.Client.Presentables
             if (this.AllowNullInput) Value = null;
             else throw new InvalidOperationException("\"null\" input not allowed");
         }
+        private ICommand _ClearValueCommand = null;
+        public ICommand ClearValueCommand
+        {
+            get
+            {
+                if (_ClearValueCommand == null)
+                {
+                    _ClearValueCommand = ModelFactory.CreateViewModel<SimpleCommandModel.Factory>()
+                        .Invoke(DataContext, "Clear value", "Sets the value to nothing", () => ClearValue(), () => AllowNullInput);
+                }
+                return _ClearValueCommand;
+            }
+        }
 
         private Nullable<TValue> _valueCache;
 
@@ -474,6 +489,19 @@ namespace Kistl.Client.Presentables
         {
             if (this.AllowNullInput) this.Value = null;
             else throw new InvalidOperationException();
+        }
+        private ICommand _ClearValueCommand = null;
+        public ICommand ClearValueCommand
+        {
+            get
+            {
+                if (_ClearValueCommand == null)
+                {
+                    _ClearValueCommand = ModelFactory.CreateViewModel<SimpleCommandModel.Factory>()
+                        .Invoke(DataContext, "Clear value", "Sets the value to nothing", () => ClearValue(), () => AllowNullInput);
+                }
+                return _ClearValueCommand;
+            }
         }
 
         private TValue _valueCache;

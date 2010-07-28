@@ -21,17 +21,20 @@ namespace Kistl.Client.WPF.View
     /// <summary>
     /// Interaction logic for NullablePropertyTextBoxView.xaml
     /// </summary>
-    public partial class NullablePropertyTextBoxView : PropertyEditor
+    public partial class NullablePropertyTextBoxView : PropertyEditor, IHasViewModel<IValueModel<string>>
     {
         public NullablePropertyTextBoxView()
         {
             InitializeComponent();
         }
 
-        private void ClearValueHandler(object sender, RoutedEventArgs e)
+        #region IHasViewModel<IValueModel<string>> Members
+
+        public IValueModel<string> ViewModel
         {
-            var mdl = (IClearableValue)DataContext;
-            mdl.ClearValue();
-        }  
+            get { return (IValueModel<string>)DataContext; }
+        }
+
+        #endregion
     }
 }

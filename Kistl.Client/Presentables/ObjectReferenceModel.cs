@@ -78,6 +78,19 @@ namespace Kistl.Client.Presentables
             if (AllowNullInput) Value = null;
             else throw new InvalidOperationException();
         }
+        private ICommand _ClearValueCommand = null;
+        public ICommand ClearValueCommand
+        {
+            get
+            {
+                if (_ClearValueCommand == null)
+                {
+                    _ClearValueCommand = ModelFactory.CreateViewModel<SimpleCommandModel.Factory>()
+                        .Invoke(DataContext, "Clear value", "Sets the value to nothing", () => ClearValue(), () => AllowNullInput);
+                }
+                return _ClearValueCommand;
+            }
+        }
 
         private DataObjectModel _valueCache;
         /// <summary>
