@@ -1,71 +1,31 @@
-using System;
-using System.Linq;
-using System.Text;
-using System.Collections;
-using System.Collections.Generic;
-using System.Data;
 
 namespace Kistl.API.Migration
 {
+    using System;
+    using System.Linq;
+    using System.Text;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Data;
+
     public class InputStream : IDisposable, IEnumerable<Record>
     {
-        public class InputStreamEnumerator : IEnumerator<Record>
-        {
-            private readonly IDataReader _rd;
-            private Record _current = null;
-
-            public InputStreamEnumerator(IDataReader rd)
-            {
-                if (rd == null) throw new ArgumentNullException("rd");
-                _rd = rd;
-            }
-
-            #region IEnumerator<Record> Members
-
-            public Record Current
-            {
-                get { return _current; }
-            }
-
-            #endregion
-
-            #region IDisposable Members
-
-            public void Dispose()
-            {
-                if (_rd != null) _rd.Dispose();
-            }
-
-            #endregion
-
-            #region IEnumerator Members
-
-            object IEnumerator.Current
-            {
-                get { return _current; }
-            }
-
-            public bool MoveNext()
-            {
-                var result = _rd.Read();
-                _current = result ? new Record(_rd) : null;
-                return result;
-            }
-
-            public void Reset()
-            {
-                throw new NotSupportedException();
-            }
-
-            #endregion
-        }
-
         private readonly IDataReader _rd;
+        private bool _open = false;
+        private long _readRecords = 0;
 
         public InputStream(IDataReader rd)
         {
             if (rd == null) throw new ArgumentNullException("rd");
             _rd = rd;
+        }
+
+        /// <summary>
+        /// The number of records read from this InputStream.
+        /// </summary>
+        public long ReadRecords
+        {
+            get { return _readRecords; }
         }
 
         #region IDisposable Members
@@ -81,7 +41,20 @@ namespace Kistl.API.Migration
 
         public IEnumerator<Record> GetEnumerator()
         {
-            return new InputStreamEnumerator(_rd);
+            if (_open)
+            {
+                throw new InvalidOperationException("InputStream enumeration is already in progress");
+            }
+            else
+            {
+                _open = true;
+            }
+
+            while (_rd.Read())
+            {
+                _readRecords += 1;
+                yield return new Record(_rd);
+            }
         }
 
         #endregion
@@ -90,7 +63,7 @@ namespace Kistl.API.Migration
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return new InputStreamEnumerator(_rd);
+            return this.GetEnumerator();
         }
 
         #endregion

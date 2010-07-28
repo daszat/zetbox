@@ -137,6 +137,11 @@ namespace Kistl.Server.SchemaManagement
             return _provider.CheckColumnContainsValues(tblName, colName);
         }
 
+        public long CountRows(TableRef tblName)
+        {
+            return _provider.CountRows(tblName);
+        }
+
         public bool CheckViewExists(TableRef viewName)
         {
             return _provider.CheckViewExists(viewName);

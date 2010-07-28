@@ -311,6 +311,7 @@ namespace Kistl.API.Server
         bool CheckColumnContainsNulls(TableRef tblName, string colName);
         bool CheckColumnContainsUniqueValues(TableRef tblName, string colName);
         bool CheckColumnContainsValues(TableRef tblName, string colName);
+        long CountRows(TableRef tableRef);
 
         #endregion
 
@@ -379,5 +380,6 @@ namespace Kistl.API.Server
         void RefreshDbStats();
 
         void ExecuteSqlResource(Type type, string scriptResourceName);
+
     }
 }

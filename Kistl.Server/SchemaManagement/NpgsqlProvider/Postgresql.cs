@@ -171,12 +171,12 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
         public override bool CheckColumnExists(TableRef tblName, string colName)
         {
             throw new NotImplementedException();
-//            return @"
-//                SELECT COUNT(*) > 0
-//                FROM pg_attribute a
-//                    JOIN pg_class c ON c.oid = a.attrelid
-//                    LEFT JOIN pg_namespace n ON n.oid = c.relnamespace 
-//                WHERE n.nspname = 'dbo' AND c.relname = @table AND a.attname=@name";
+            //            return @"
+            //                SELECT COUNT(*) > 0
+            //                FROM pg_attribute a
+            //                    JOIN pg_class c ON c.oid = a.attrelid
+            //                    LEFT JOIN pg_namespace n ON n.oid = c.relnamespace 
+            //                WHERE n.nspname = 'dbo' AND c.relname = @table AND a.attname=@name";
         }
 
         protected override string GetTableColumnsStatement()
@@ -202,13 +202,13 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
         public override bool CheckIndexExists(TableRef tblName, string idxName)
         {
             throw new NotImplementedException();
-//            return @"
-//                SELECT COUNT(*) > 0
-//                FROM pg_index
-//                    JOIN pg_class idx ON (indexrelid = idx.oid)
-//                    JOIN pg_class tbl ON (indrelid = tbl.oid)
-//                    JOIN pg_namespace ON (tbl.relnamespace = pg_namespace.oid)
-//                WHERE nspname = @schema AND tbl.relname = @table AND idx.relname = @index";
+            //            return @"
+            //                SELECT COUNT(*) > 0
+            //                FROM pg_index
+            //                    JOIN pg_class idx ON (indexrelid = idx.oid)
+            //                    JOIN pg_class tbl ON (indrelid = tbl.oid)
+            //                    JOIN pg_namespace ON (tbl.relnamespace = pg_namespace.oid)
+            //                WHERE nspname = @schema AND tbl.relname = @table AND idx.relname = @index";
         }
 
         #endregion
@@ -239,6 +239,13 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
                     HAVING COUNT({1}) > 1 LIMIT 1) AS tbl",
                 FormatFullName(tbl),
                 QuoteIdentifier(colName)));
+        }
+
+        public override long CountRows(TableRef tblName)
+        {
+            return (long)ExecuteScalar(String.Format(
+                @"SELECT COUNT(*) FROM {0}",
+                FormatFullName(tblName)));
         }
 
         #endregion

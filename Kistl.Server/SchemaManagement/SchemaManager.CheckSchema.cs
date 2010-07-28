@@ -679,8 +679,8 @@ namespace Kistl.Server.SchemaManagement
                     bool hasDefValue = defConstr != null;
                     if (colHasDefValue != hasDefValue)
                     {
-                        Log.WarnFormat("Column '{0}'.'{1}' default value mismatch. Column {2}have a default value but should {3}have one", tblName, colName,
-                            colHasDefValue ? string.Empty : "do not ",
+                        Log.WarnFormat("Column '{0}'.'{1}' default value mismatch. Column {2} a default value but should {3}have one", tblName, colName,
+                            colHasDefValue ? "has" : "does not have",
                             hasDefValue ? string.Empty : "not ");
 
                         if (repair)

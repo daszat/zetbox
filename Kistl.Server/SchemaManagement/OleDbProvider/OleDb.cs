@@ -211,6 +211,11 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
             }
         }
 
+        public long CountRows(TableRef tblName)
+        {
+            throw new NotSupportedException();
+        }
+
         public bool CheckPositionColumnValidity(TableRef tblName, string posName)
         {
             throw new NotSupportedException();

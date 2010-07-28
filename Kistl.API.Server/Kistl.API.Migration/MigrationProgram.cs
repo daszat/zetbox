@@ -162,7 +162,11 @@ namespace Kistl.API.Migration
             {
                 ExecuteCore(_applicationScope.Resolve<IKistlContext>());
             }
+
+            CreateReport();
         }
+
+        protected abstract void CreateReport();
 
         protected abstract void ExecuteCore(IKistlContext ctx);
 
@@ -211,6 +215,36 @@ namespace Kistl.API.Migration
                 throw;
             }
             return srcSchema;
+        }
+
+        protected static void CreateMigrationReport(IEnumerable<SourceTable> srcTables, ISchemaProvider srcSchema, ISchemaProvider dstSchema)
+        {
+            foreach (var srcTbl in srcTables.OrderBy(tbl => tbl.Name))
+            {
+                var srcCount = srcSchema.CountRows(srcSchema.GetQualifiedTableName(srcTbl.Name));
+                var dstCount = dstSchema.CountRows(dstSchema.GetQualifiedTableName(srcTbl.DestinationObjectClass.TableName));
+
+                Log.InfoFormat("Mapped [{0}] rows from [{1}] to [{2}] [{3}] entities",
+                    srcCount,
+                    srcTbl.Name,
+                    dstCount,
+                    srcTbl.DestinationObjectClass.Name);
+            }
+        }
+
+        protected void WriteLog(string srcTbl, long srcRows, string dstTbl, long dstRows)
+        {
+            using (var logScope = _applicationScope.BeginLifetimeScope())
+            using (var logCtx = logScope.Resolve<IKistlContext>())
+            {
+                var log = logCtx.Create<MigrationLog>();
+                log.Timestamp = DateTime.Now;
+                log.Source = srcTbl;
+                log.SourceRows = (int)srcRows;
+                log.Destination = dstTbl;
+                log.DestinationRows = (int)dstRows;
+                logCtx.SubmitChanges();
+            }
         }
     }
 }

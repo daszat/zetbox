@@ -105,7 +105,7 @@ namespace Kistl.Server.SchemaManagement
         {
             if (type == null) throw new ArgumentNullException("type");
             if (string.IsNullOrEmpty(scriptResourceName)) throw new ArgumentNullException("scriptResourceName");
-            
+
             using (var scriptStream = new StreamReader(type.Assembly.GetManifestResourceStream(scriptResourceName)))
             {
                 var databaseScript = scriptStream.ReadToEnd();
@@ -362,6 +362,8 @@ namespace Kistl.Server.SchemaManagement
         {
             return !CheckColumnContainsNulls(tbl, colName);
         }
+
+        public abstract long CountRows(TableRef tblName);
 
         #endregion
 

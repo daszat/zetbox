@@ -26,6 +26,8 @@ namespace Kistl.API.Migration
         private StringBuilder _currentError;
         private object[] _resultValues;
 
+        private long _processedRows = 0;
+
         public Translator(SourceTable tbl, IDataReader source, IEnumerable<SourceColumn> srcColumns, NullConverter[] nullConverter)
         {
             if (tbl == null) throw new ArgumentNullException("tbl");
@@ -46,6 +48,11 @@ namespace Kistl.API.Migration
             {
                 _errorColIdx = -1;
             }
+        }
+
+        public long ProcessedRows
+        {
+            get { return _processedRows; }
         }
 
         private void AddError(string msg, object val)
@@ -115,6 +122,7 @@ namespace Kistl.API.Migration
                 {
                     _resultValues[_errorColIdx] = _currentError != null ? (object)_currentError.ToString() : DBNull.Value;
                 }
+                _processedRows += 1;
             }
             else
             {

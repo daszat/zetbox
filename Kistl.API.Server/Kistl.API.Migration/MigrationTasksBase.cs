@@ -6,8 +6,8 @@ namespace Kistl.API.Migration
     using System.Linq;
     using System.Text;
     using Kistl.API.Server;
-    using ZBox.App.SchemaMigration;
     using Kistl.App.Base;
+    using ZBox.App.SchemaMigration;
 
     public class MigrationTasksBase : IMigrationTasks
     {
@@ -15,13 +15,17 @@ namespace Kistl.API.Migration
 
         private readonly ISchemaProvider _src;
         private readonly ISchemaProvider _dst;
-        public MigrationTasksBase(ISchemaProvider src, ISchemaProvider dst)
+        private readonly IKistlContext _logCtx;
+
+        public MigrationTasksBase(IKistlContext logCtx, ISchemaProvider src, ISchemaProvider dst)
         {
             if (src == null) throw new ArgumentNullException("src");
             if (dst == null) throw new ArgumentNullException("dst");
+            if (logCtx == null) throw new ArgumentNullException("logCtx");
 
             _src = src;
             _dst = dst;
+            _logCtx = logCtx;
         }
 
         public InputStream ExecuteQueryStreaming(string sql)
@@ -196,13 +200,21 @@ namespace Kistl.API.Migration
                     };
                 }
             }).ToList();
+
             var dstColumnNames = GetDestinationColumnNames(tbl, srcColumns);
+            long processedRows;
 
             using (var srcReader = _src.ReadJoin(_src.GetQualifiedTableName(tbl.Name), srcColumnNames, joins))
             using (var translator = new Translator(tbl, srcReader, srcColumns, nullConverter))
             {
                 _dst.WriteTableData(_dst.GetQualifiedTableName(tbl.DestinationObjectClass.TableName), translator, dstColumnNames);
+                processedRows = translator.ProcessedRows;
             }
+
+            // count rows in original table, joins should not add or remove rows
+            WriteLog(
+                tbl.Name, _src.CountRows(_src.GetQualifiedTableName(tbl.Name)),
+                tbl.DestinationObjectClass.TableName, processedRows);
         }
 
         private IEnumerable<Join> CreateReferenceJoin(IGrouping<Property, SourceColumn> referenceGroup, Dictionary<SourceColumn, Join> all_joins)
@@ -268,12 +280,28 @@ namespace Kistl.API.Migration
         {
             var dstColumnNames = GetDestinationColumnNames(tbl, mappedColumns);
             var srcColumnNames = mappedColumns.Select(c => c.Name).ToArray();
+
             // no fk mapping required
             using (var srcReader = _src.ReadTableData(_src.GetQualifiedTableName(tbl.Name), srcColumnNames))
             using (var translator = new Translator(tbl, srcReader, mappedColumns, nullConverter))
             {
                 _dst.WriteTableData(_dst.GetQualifiedTableName(tbl.DestinationObjectClass.TableName), translator, dstColumnNames);
+
+                WriteLog(
+                    tbl.Name, translator.ProcessedRows,
+                    tbl.DestinationObjectClass.TableName, translator.ProcessedRows);
             }
+        }
+
+        private void WriteLog(string srcTbl, long srcRows, string dstTbl, long dstRows)
+        {
+            var log = _logCtx.Create<MigrationLog>();
+            log.Timestamp = DateTime.Now;
+            log.Source = srcTbl;
+            log.SourceRows = (int)srcRows;
+            log.Destination = dstTbl;
+            log.DestinationRows = (int)dstRows;
+            _logCtx.SubmitChanges();
         }
     }
 }

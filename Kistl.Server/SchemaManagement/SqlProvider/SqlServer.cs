@@ -252,6 +252,13 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
                 QuoteIdentifier(colName))) == 0;
         }
 
+        public override long CountRows(TableRef tblName)
+        {
+            return (int)ExecuteScalar(String.Format(
+                @"SELECT COUNT(*) FROM {0}",
+                FormatFullName(tblName)));
+        }
+
         #endregion
 
         public override bool CheckViewExists(TableRef viewName)
