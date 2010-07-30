@@ -356,8 +356,8 @@ this.WriteObjects("  <!-- derived->base ObjectClass references -->\r\n");
 #line 312 "P:\Kistl\Kistl.DalProvider.EF\Generator\Implementation\EfModel\Model.ssdl.cst"
 foreach(var cls in ctx.GetDerivedClasses().OrderBy(c => c.Name))
 	{
-		TypeMoniker parentType = cls.BaseObjectClass.GetTypeMoniker();
-		TypeMoniker childType = cls.GetTypeMoniker();
+		var parentType = cls.BaseObjectClass;
+		var childType = cls;
 		
 		string parentRoleName = Construct.AssociationParentRoleName(parentType);
 		string childRoleName = Construct.AssociationChildRoleName(childType);

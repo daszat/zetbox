@@ -19,22 +19,17 @@ namespace Kistl.DalProvider.EF.Generator.Implementation
             if (cls.BaseObjectClass == null)
                 throw new ArgumentOutOfRangeException("cls", "should be a derived ObjectClass");
 
-            Class = cls;
-            Parent = Class.BaseObjectClass.GetTypeMoniker();
-            Child = Class.GetTypeMoniker();
+            var parent = cls.BaseObjectClass;
+            var child = cls;
 
-            AssociationName = Construct.InheritanceAssociationName(Parent, Child);
+            AssociationName = Construct.InheritanceAssociationName(parent, child);
 
-            ParentRoleName = "A_" + Parent.Name;
-            ChildRoleName = "B_" + Child.Name;
+            ParentRoleName = Construct.AssociationParentRoleName(parent);
+            ChildRoleName = Construct.AssociationChildRoleName(child);
 
-            ParentEntitySetName = Parent.Name;
-            ChildEntitySetName = Child.Name;
+            ParentEntitySetName = parent.Name;
+            ChildEntitySetName = child.Name;
         }
-
-        public ObjectClass Class { get; private set; }
-        public TypeMoniker Parent { get; private set; }
-        public TypeMoniker Child { get; private set; }
 
         public string AssociationName { get; private set; }
 

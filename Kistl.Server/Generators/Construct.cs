@@ -33,14 +33,6 @@ namespace Kistl.Server.Generators
             return InheritanceAssociationName(parentClass.Type.Name, childClass.Type.Name);
         }
 
-        public static string InheritanceAssociationName(TypeMoniker parentClass, TypeMoniker childClass)
-        {
-            if (parentClass == null) { throw new ArgumentNullException("parentClass"); }
-            if (childClass == null) { throw new ArgumentNullException("childClass"); }
-
-            return InheritanceAssociationName(parentClass.Name, childClass.Name);
-        }
-
         public static string InheritanceAssociationName(ObjectClass parentClass, ObjectClass childClass)
         {
             if (parentClass == null) { throw new ArgumentNullException("parentClass"); }
@@ -58,7 +50,7 @@ namespace Kistl.Server.Generators
             return "A_" + obj;
         }
 
-        public static string AssociationParentRoleName(TypeMoniker obj)
+        public static string AssociationParentRoleName(ObjectClass obj)
         {
             if (obj == null) { throw new ArgumentNullException("obj"); }
 
@@ -74,7 +66,7 @@ namespace Kistl.Server.Generators
             return "B_" + obj;
         }
 
-        public static string AssociationChildRoleName(TypeMoniker obj)
+        public static string AssociationChildRoleName(ObjectClass obj)
         {
             if (obj == null) { throw new ArgumentNullException("obj"); }
 

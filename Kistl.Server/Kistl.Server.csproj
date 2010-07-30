@@ -118,8 +118,6 @@
     <Compile Include="Generators.Extensions\MiscExtensions.cs" />
     <Compile Include="Generators.Extensions\PropertyChecks.cs" />
     <Compile Include="Generators.Extensions\Reflection.cs" />
-    <Compile Include="Generators.Extensions\TypeMonikerExtensions.cs" />
-    <Compile Include="Generators\TypeMoniker.cs" />
     <Compile Include="Generators\ClientObjects\Implementation\AssemblyInfoTemplate.cs" />
     <Compile Include="Generators\ClientObjects\Implementation\ObjectClasses\Template.cs" />
     <Compile Include="Generators\DataObjectGenerator.cs">
