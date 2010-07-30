@@ -23,9 +23,12 @@ namespace Kistl.Client.Presentables
             : base(appCtx, dataCtx, obj, prop)
         {
             AllowNullInput = prop.IsNullable();
+
+            RelationEnd relEnd = null;
             if (prop is ObjectReferenceProperty)
             {
                 ReferencedClass = ((ObjectReferenceProperty)prop).GetReferencedObjectClass();
+                relEnd = ((ObjectReferenceProperty)prop).RelationEnd;
             }
             else if (prop is CalculatedObjectReferenceProperty)
             {
@@ -35,6 +38,23 @@ namespace Kistl.Client.Presentables
             {
                 throw new ArgumentOutOfRangeException("prop", "prop must be ObjectReferenceProperty or CalculatedObjectReferenceProperty");
             }
+
+            if (relEnd != null)
+            {
+                var rel = relEnd.Parent;
+                if (rel != null)
+                {
+                    var otherEnd = rel.GetOtherEnd(relEnd);
+                    // TODO: Needs to be implemented, but not on a Friday!
+                    //if (otherEnd != null && otherEnd.Multiplicity.UpperBound() > 1 && rel.Containment != ContainmentSpecification.Independent)
+                    //{
+                    //    _allowSelectValue = false;
+                    //    _allowCreateNewItem = false;
+                    //    _allowClear = false;
+                    //}
+                }
+            }
+
         }
 
         #region Public Interface
@@ -43,6 +63,75 @@ namespace Kistl.Client.Presentables
         {
             get;
             protected set;
+        }
+
+        private bool _allowCreateNewItem = true;
+        public bool AllowCreateNewItem
+        {
+            get
+            {
+                return _allowCreateNewItem;
+            }
+            set
+            {
+                if (_allowCreateNewItem != value)
+                {
+                    _allowCreateNewItem = value;
+                    OnPropertyChanged("AllowCreateNewItem");
+                }
+            }
+        }
+
+        private bool _allowSelectValue = true;
+        public bool AllowSelectValue
+        {
+            get
+            {
+                return _allowSelectValue;
+            }
+            set
+            {
+                if (_allowSelectValue != value)
+                {
+                    _allowSelectValue = value;
+                    OnPropertyChanged("AllowSelectValue");
+                }
+            }
+        }
+
+        private bool _allowClear = true;
+        public bool AllowClear
+        {
+            get
+            {
+                return _allowClear;
+            }
+            set
+            {
+                if (_allowClear != value)
+                {
+                    _allowClear = value;
+                    OnPropertyChanged("Clear");
+                }
+            }
+        }
+
+        // Not supported by any command yet
+        private bool _allowDelete = false;
+        public bool AllowDelete
+        {
+            get
+            {
+                return _allowDelete;
+            }
+            set
+            {
+                if (_allowDelete != value)
+                {
+                    _allowDelete = value;
+                    OnPropertyChanged("AllowDelete");
+                }
+            }
         }
 
         public bool HasValue
@@ -68,25 +157,6 @@ namespace Kistl.Client.Presentables
             {
                 if (value)
                     Value = null;
-            }
-        }
-
-        public void ClearValue()
-        {
-            if (AllowNullInput) Value = null;
-            else throw new InvalidOperationException();
-        }
-        private ICommand _ClearValueCommand = null;
-        public ICommand ClearValueCommand
-        {
-            get
-            {
-                if (_ClearValueCommand == null)
-                {
-                    _ClearValueCommand = ModelFactory.CreateViewModel<SimpleCommandModel.Factory>()
-                        .Invoke(DataContext, "Clear value", "Sets the value to nothing", () => ClearValue(), () => AllowNullInput);
-                }
-                return _ClearValueCommand;
             }
         }
 

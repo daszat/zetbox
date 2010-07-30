@@ -46,11 +46,10 @@ namespace Kistl.Client.Presentables
             if (_notifier == null) throw new ArgumentOutOfRangeException("prop", "Unterlying list does not implement INotifyCollectionChanged");
             _notifier.CollectionChanged += ValueListChanged;
 
-            // Move to AddExistingItemCommand
             var relEnd = _property.RelationEnd;
             if (relEnd != null)
             {
-                var rel = _property.RelationEnd.Parent;
+                var rel = relEnd.Parent;
                 if (rel != null)
                 {
                     var otherEnd = rel.GetOtherEnd(relEnd);
