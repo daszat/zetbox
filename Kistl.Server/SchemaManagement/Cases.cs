@@ -1673,8 +1673,7 @@ namespace Kistl.Server.SchemaManagement
             var rightsViewUnmaterializedName = db.GetQualifiedTableName(Construct.SecurityRulesRightsViewUnmaterializedName(objClass));
             var refreshRightsOnProcedureName = Construct.SecurityRulesRefreshRightsOnProcedureName(objClass);
 
-            // TODO: Remove
-            // db.CreateUpdateRightsTrigger(updateRightsTriggerName, rightsViewUnmaterializedName, tblName, tblRightsName);
+            DoCreateUpdateRightsTrigger(objClass);
             DoCreateRightsViewUnmaterialized(objClass);
             db.CreateRefreshRightsOnProcedure(refreshRightsOnProcedureName, rightsViewUnmaterializedName, tblName, tblRightsName);
             db.ExecRefreshRightsOnProcedure(refreshRightsOnProcedureName);

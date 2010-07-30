@@ -731,30 +731,30 @@ BEGIN", triggerName, FormatFullName(tblName));
         SELECT [ID], [Identity], [Right]
         FROM {1}
         WHERE [ID] IN (SELECT [ID] FROM inserted)",
-                        FormatFullName(tbl.TblNameRights),
-                        FormatFullName(tbl.ViewUnmaterializedName));
+                        FormatSchemaName(tbl.TblNameRights),
+                        FormatSchemaName(tbl.ViewUnmaterializedName));
                     sb.AppendLine();
                     sb.AppendLine();
                 }
                 else
                 {
-                    select.AppendFormat("SELECT t1.[ID] FROM {0} t1", FormatFullName(tbl.TblName));
+                    select.AppendFormat("SELECT t1.[ID] FROM {0} t1", FormatSchemaName(tbl.TblName));
                     int idx = 2;
                     var lastRel = tbl.Relations.Last();
                     foreach (var rel in tbl.Relations)
                     {
-                        var joinTbl = rel == lastRel ? "{0}" : FormatFullName(rel.JoinTableName);
+                        var joinTbl = rel == lastRel ? "{0}" : FormatSchemaName(rel.JoinTableName);
                         select.AppendLine();
                         select.AppendFormat(@"      INNER JOIN {0} t{1} ON t{1}.[{2}] = t{3}.[{4}]", joinTbl, idx, rel.JoinColumnName.Single().ColumnName, idx - 1, rel.FKColumnName.Single().ColumnName);
                         idx++;
                     }
                     string selectFormat = select.ToString();
-                    sb.AppendFormat(@"    DELETE FROM {0} WHERE [ID] IN ({1})", FormatFullName(tbl.TblNameRights), string.Format(selectFormat, "inserted"));
+                    sb.AppendFormat(@"    DELETE FROM {0} WHERE [ID] IN ({1})", FormatSchemaName(tbl.TblNameRights), string.Format(selectFormat, "inserted"));
                     sb.AppendLine();
-                    sb.AppendFormat(@"    DELETE FROM {0} WHERE [ID] IN ({1})", FormatFullName(tbl.TblNameRights), string.Format(selectFormat, "deleted"));
+                    sb.AppendFormat(@"    DELETE FROM {0} WHERE [ID] IN ({1})", FormatSchemaName(tbl.TblNameRights), string.Format(selectFormat, "deleted"));
                     sb.AppendLine();
                     sb.AppendFormat(@"    INSERT INTO {0} ([ID], [Identity], [Right]) SELECT [ID], [Identity], [Right] FROM {2} WHERE [ID] IN ({1})",
-                        FormatFullName(tbl.TblNameRights), string.Format(selectFormat, "inserted"), FormatFullName(tbl.ViewUnmaterializedName));
+                        FormatSchemaName(tbl.TblNameRights), string.Format(selectFormat, "inserted"), FormatSchemaName(tbl.ViewUnmaterializedName));
                     sb.AppendLine();
                     sb.AppendLine();
                 }
@@ -767,7 +767,7 @@ BEGIN", triggerName, FormatFullName(tblName));
         public override void CreateEmptyRightsViewUnmaterialized(TableRef viewName)
         {
             Log.DebugFormat("Creating *empty* unmaterialized rights view [{0}]", viewName);
-            ExecuteNonQuery(string.Format(@"CREATE VIEW {0} AS SELECT 0 [ID], 0 [Identity], 0 [Right] WHERE 0 = 1", FormatFullName(viewName)));
+            ExecuteNonQuery(string.Format(@"CREATE VIEW {0} AS SELECT 0 [ID], 0 [Identity], 0 [Right] WHERE 0 = 1", FormatSchemaName(viewName)));
         }
 
         public override void CreateRightsViewUnmaterialized(TableRef viewName, TableRef tblName, TableRef tblNameRights, IList<ACL> acls)
@@ -792,13 +792,13 @@ FROM (", viewName.Schema, viewName.Name);
                     acl.Relations.Last().FKColumnName.Single().ColumnName,
                     (int)acl.Right);
                 view.AppendLine();
-                view.AppendFormat(@"  FROM {0} t1", FormatFullName(tblName));
+                view.AppendFormat(@"  FROM {0} t1", FormatSchemaName(tblName));
                 view.AppendLine();
 
                 int idx = 2;
                 foreach (var rel in acl.Relations.Take(acl.Relations.Count - 1))
                 {
-                    view.AppendFormat(@"  INNER JOIN {0} t{1} ON t{1}.[{2}] = t{3}.[{4}]", FormatFullName(rel.JoinTableName), idx, rel.JoinColumnName.Single().ColumnName, idx - 1, rel.FKColumnName.Single().ColumnName);
+                    view.AppendFormat(@"  INNER JOIN {0} t{1} ON t{1}.[{2}] = t{3}.[{4}]", FormatSchemaName(rel.JoinTableName), idx, rel.JoinColumnName.Single().ColumnName, idx - 1, rel.FKColumnName.Single().ColumnName);
                     view.AppendLine();
                     idx++;
                 }
@@ -832,8 +832,8 @@ FROM (", viewName.Schema, viewName.Name);
 		                    END
                     END",
                 procName,
-                FormatFullName(tblNameRights),
-                FormatFullName(viewUnmaterializedName)));
+                FormatSchemaName(tblNameRights),
+                FormatSchemaName(viewUnmaterializedName)));
         }
 
         public override void ExecRefreshRightsOnProcedure(string procName)
