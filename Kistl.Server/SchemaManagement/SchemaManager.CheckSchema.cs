@@ -438,7 +438,7 @@ namespace Kistl.Server.SchemaManagement
 
             if (rel.A.Type.ImplementsIExportable() && rel.B.Type.ImplementsIExportable())
             {
-                CheckColumn(tblName, "ExportGuid", System.Data.DbType.Guid, 0, 0, false, null);
+                CheckColumn(tblName, "ExportGuid", System.Data.DbType.Guid, 0, 0, false, new NewGuidDefaultConstraint());
             }
         }
 
