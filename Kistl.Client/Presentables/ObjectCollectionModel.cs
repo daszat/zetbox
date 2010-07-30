@@ -304,6 +304,25 @@ namespace Kistl.Client.Presentables
             }
         }
 
+        private ObservableCollection<DataObjectModel> _selectedItems = null;
+        public ObservableCollection<DataObjectModel> SelectedItems
+        {
+            get
+            {
+                if (_selectedItems == null)
+                {
+                    _selectedItems = new ObservableCollection<DataObjectModel>();
+                }
+                return _selectedItems;
+            }
+            set
+            {
+                _selectedItems = value;
+                OnPropertyChanged("SelectedItems");
+            }
+        }
+
+
         private static bool GetHasPersistentOrder(ObjectReferenceProperty prop)
         {
             return prop.RelationEnd.Parent.GetOtherEnd(prop.RelationEnd).HasPersistentOrder;
@@ -420,7 +439,9 @@ namespace Kistl.Client.Presentables
                 if (_RemoveCommand == null)
                 {
                     _RemoveCommand = ModelFactory.CreateViewModel<SimpleParameterCommandModel<IEnumerable<DataObjectModel>>.Factory>()
-                        .Invoke(DataContext, "Remove", "Remove selection from list", (items) => items.ForEach(i => RemoveItem(i)), (items) => items.Count() > 0 && AllowRemove);
+                        .Invoke(DataContext, "Remove", "Remove selection from list",
+                        (items) => items.ToList().ForEach(i => RemoveItem(i)), // Collection will change while deleting!
+                        (items) => items != null && items.Count() > 0 && AllowRemove);
                 }
                 return _RemoveCommand;
             }
@@ -434,7 +455,9 @@ namespace Kistl.Client.Presentables
                 if (_DeleteCommand == null)
                 {
                     _DeleteCommand = ModelFactory.CreateViewModel<SimpleParameterCommandModel<IEnumerable<DataObjectModel>>.Factory>()
-                        .Invoke(DataContext, "Delete", "Delete selection from data store", (items) => items.ForEach(i => DeleteItem(i)), (items) => items.Count() > 0 && AllowDelete);
+                        .Invoke(DataContext, "Delete", "Delete selection from data store", 
+                        (items) => items.ToList().ForEach(i => DeleteItem(i)), // Collection will change while deleting!
+                        (items) => items != null && items.Count() > 0 && AllowDelete);
                 }
                 return _DeleteCommand;
             }

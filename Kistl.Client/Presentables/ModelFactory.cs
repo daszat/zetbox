@@ -216,7 +216,14 @@ namespace Kistl.Client.Presentables
 
         public void ShowModel(ViewModel mdl, ControlKind kind, bool activate)
         {
-            ShowInView(mdl, CreateSpecificView(mdl, kind), activate);
+            if (kind == null)
+            {
+                ShowModel(mdl, activate);
+            }
+            else
+            {
+                ShowInView(mdl, CreateSpecificView(mdl, kind), activate);
+            }
         }
 
         /// <summary>

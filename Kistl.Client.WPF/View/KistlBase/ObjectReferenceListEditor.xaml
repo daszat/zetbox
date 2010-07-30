@@ -38,36 +38,42 @@
         </UniformGrid>
 
         <ToolBar DockPanel.Dock="Top">
-            <Button Click="AddExistingItemHandler"
-                    Visibility="{Binding AllowAddExisting, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}">Add existing ...</Button>
-            <Button Click="AddNewHandler"
-                    Visibility="{Binding AllowAddNew, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}">Add new ...</Button>
-            <Button Click="RemoveHandler"
-                    Visibility="{Binding AllowRemove, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}">Remove selection from list</Button>
-            <Button Click="DeleteHandler"
-                    Visibility="{Binding AllowDelete, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}">Delete selection from data store</Button>
+            <ctrls:LoadingIndicator />
+            <ctrls:CommandButton CommandModel="{Binding AddExistingCommand}"
+                                 Visibility="{Binding AllowAddExisting, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}" />
+            <ctrls:CommandButton CommandModel="{Binding CreateNewCommand}"
+                                 Visibility="{Binding AllowAddNew, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}" />
+            <ctrls:CommandButton CommandModel="{Binding RemoveCommand}"
+                                 CommandParameter="{Binding SelectedItems, Mode=OneWay}"
+                                 Visibility="{Binding AllowRemove, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}" />
+            <ctrls:CommandButton CommandModel="{Binding DeleteCommand}"
+                                 CommandParameter="{Binding SelectedItems, Mode=OneWay}"
+                                 Visibility="{Binding AllowDelete, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}" />
         </ToolBar>
 
         <!-- configured from code, see RefreshGridView() -->
-        <ListView x:Name="ListView"
+        <ListView x:Name="lst"
                   ItemsSource="{Binding Value, Mode=OneWay, ValidatesOnDataErrors=true}"
                   SelectedItem="{Binding SelectedItem}"
                   MinHeight="50"
+                  SelectionChanged="lst_SelectionChanged"
                   MouseDoubleClick="ItemActivatedHandler">
             <ListView.ContextMenu>
                 <ContextMenu>
-                    <MenuItem Header="Add existing"
-                              Click="AddExistingItemHandler"
+                    <MenuItem Header="{Binding AddExistingCommand.Label}"
+                              Command="{Binding AddExistingCommand, Converter={StaticResource CommandConverter}}"
                               Visibility="{Binding AllowAddExisting, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                    <MenuItem Header="Add new"
-                              Click="AddNewHandler"
+                    <MenuItem Header="{Binding CreateNewCommand.Label}"
+                              Command="{Binding CreateNewCommand, Converter={StaticResource CommandConverter}}"
                               Visibility="{Binding AllowAddNew, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                    <MenuItem Header="Remove selection from list"
-                              Click="RemoveHandler"
-                              Visibility="{Binding AllowRemove, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"/>
-                    <MenuItem Header="Delete selection from data store"
-                              Click="DeleteHandler"
-                              Visibility="{Binding AllowDelete, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                    <MenuItem Header="{Binding RemoveCommand.Label}"
+                              Command="{Binding RemoveCommand, Converter={StaticResource CommandConverter}}"
+                              CommandParameter="{Binding SelectedItems, Mode=OneWay}"
+                              Visibility="{Binding AllowRemove, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                    <MenuItem Header="{Binding DeleteCommand.Label}"
+                              Command="{Binding DeleteCommand, Converter={StaticResource CommandConverter}}"
+                              CommandParameter="{Binding SelectedItems, Mode=OneWay}"
+                              Visibility="{Binding AllowDelete, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}" />
                 </ContextMenu>
             </ListView.ContextMenu>
         </ListView>

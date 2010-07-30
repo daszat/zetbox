@@ -15,6 +15,7 @@ namespace Kistl.Client.WPF.View.KistlBase
     using System.Windows.Navigation;
     using System.Windows.Shapes;
 
+    using Kistl.API;
     using Kistl.Client.GUI;
     using Kistl.Client.Presentables;
     using Kistl.Client.WPF.Commands;
@@ -78,33 +79,6 @@ namespace Kistl.Client.WPF.View.KistlBase
             }
         }
 
-        private void AddNewHandler(object sender, RoutedEventArgs e)
-        {
-            var model = (ObjectListModel)DataContext;
-            model.CreateNewItem();
-        }
-
-        private void AddExistingItemHandler(object sender, RoutedEventArgs e)
-        {
-            ViewModel.AddExistingItem();
-        }
-
-        private void RemoveHandler(object sender, RoutedEventArgs e)
-        {
-            if (ViewModel.SelectedItem != null)
-            {
-                ViewModel.RemoveItem(ViewModel.SelectedItem);
-            }
-        }
-
-        private void DeleteHandler(object sender, RoutedEventArgs e)
-        {
-            if (ViewModel.SelectedItem != null)
-            {
-                ViewModel.DeleteItem(ViewModel.SelectedItem);
-            }
-        }
-
         private void ItemActivatedHandler(object sender, MouseButtonEventArgs e)
         {
             if (ViewModel.SelectedItem != null)
@@ -116,7 +90,7 @@ namespace Kistl.Client.WPF.View.KistlBase
         private void RefreshGridView()
         {
             GridView view = new GridView() { AllowsColumnReorder = true };
-            ListView.View = view;
+            lst.View = view;
             GridDisplayConfiguration cfg = ViewModel.DisplayedColumns;
             if (cfg.ShowIcon)
             {
@@ -163,6 +137,15 @@ namespace Kistl.Client.WPF.View.KistlBase
             if (e.Property == FrameworkElement.DataContextProperty)
             {
                 RefreshGridView();
+            }
+        }
+
+        private void lst_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.OriginalSource == lst)
+            {
+                e.RemovedItems.ForEach<DataObjectModel>(i => ViewModel.SelectedItems.Remove(i));
+                e.AddedItems.ForEach<DataObjectModel>(i => ViewModel.SelectedItems.Add(i));
             }
         }
 
