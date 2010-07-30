@@ -401,5 +401,18 @@ namespace Kistl.IntegrationTests
                 Assert.That(result.Count, Is.GreaterThan(0));
             }
         }
+
+        [Test]
+        public void GetListWithObjectFilterAndCast()
+        {
+            using (IKistlContext ctx = GetContext())
+            {
+                var module = ctx.GetQuery<Module>().Where(m => m.Name == "KistlBase").Single();
+                Assert.That(module, Is.Not.Null);
+                var result = ctx.GetQuery<ObjectClass>().Where(c => c.Module == module).Cast<IDataObject>().ToList();
+                Assert.That(result, Is.Not.Null);
+                Assert.That(result.Count, Is.GreaterThan(0));
+            }
+        }
     }
 }
