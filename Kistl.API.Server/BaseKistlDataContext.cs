@@ -556,7 +556,7 @@ namespace Kistl.API.Server
 
         public InterfaceType GetInterfaceType(string typeName)
         {
-            return iftFactory(Type.GetType(typeName + "," + typeof(ObjectClass).Assembly.FullName));
+            return iftFactory(Type.GetType(typeName + "," + typeof(ObjectClass).Assembly.FullName, true));
         }
 
         public abstract ImplementationType GetImplementationType(Type t);
