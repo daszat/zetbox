@@ -14,7 +14,6 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
     using Kistl.API.Migration;
     using Kistl.API.Server;
     using Kistl.API.Utils;
-    using System.Collections;
 
     public class SqlServer
         : AdoNetSchemaProvider<SqlConnection, SqlTransaction, SqlCommand>
@@ -27,22 +26,8 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
         #region Meta data
 
         public override string ConfigName { get { return "MSSQL"; } }
-        public override string AdoNetProvider { get { return "System.Data.SqlClient"; } }
+        public override string AdoNetProvider { get { return "SqlClient"; } }
         public override string ManifestToken { get { return "2008"; } }
-
-        #endregion
-
-        #region ZBox Schema Handling
-
-        protected override string GetSchemaInsertStatement()
-        {
-            return "INSERT INTO [CurrentSchema] ([Version], [Schema]) VALUES (1, @schema)";
-        }
-
-        protected override string GetSchemaUpdateStatement()
-        {
-            return "UPDATE [CurrentSchema] SET [Schema] = @schema, [Version] = [Version] + 1";
-        }
 
         #endregion
 
@@ -71,32 +56,33 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
         {
             switch (type)
             {
-                case System.Data.DbType.UInt16:
-                case System.Data.DbType.UInt32:
-                case System.Data.DbType.Byte:
-                case System.Data.DbType.Int16:
-                case System.Data.DbType.Int32:
+                case DbType.UInt16:
+                case DbType.UInt32:
+                case DbType.Byte:
+                case DbType.Int16:
+                case DbType.Int32:
                     return "int";
-                case System.Data.DbType.UInt64:
-                case System.Data.DbType.Int64:
+                case DbType.UInt64:
+                case DbType.Int64:
                     return "bigint";
-                case System.Data.DbType.Single:
-                case System.Data.DbType.Double:
+                case DbType.Single:
+                case DbType.Double:
                     return "float";
-                case System.Data.DbType.String:
+                case DbType.String:
                     return "nvarchar";
-                case System.Data.DbType.Date:
-                case System.Data.DbType.DateTime:
-                case System.Data.DbType.DateTime2:
+                case DbType.Date:
+                case DbType.DateTime:
+                case DbType.DateTime2:
                     // We only support SQLServer 2008
                     return "datetime2";
-                case System.Data.DbType.Boolean:
+                case DbType.Boolean:
                     return "bit";
-                case System.Data.DbType.Guid:
+                case DbType.Guid:
                     return "uniqueidentifier";
-                case System.Data.DbType.Binary:
+                case DbType.Binary:
                     return "varbinary";
-                case System.Data.DbType.Decimal:
+                case DbType.Decimal:
+                case DbType.VarNumeric:
                     return "decimal";
                 default:
                     throw new ArgumentOutOfRangeException("type", string.Format("Unable to convert type '{0}' to an sql type string", type));
@@ -108,29 +94,29 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
             switch (type)
             {
                 case "int":
-                    return System.Data.DbType.Int32;
+                    return DbType.Int32;
                 case "bigint":
-                    return System.Data.DbType.Int64;
+                    return DbType.Int64;
                 case "float":
-                    return System.Data.DbType.Double;
+                    return DbType.Double;
                 case "nvarchar":
                 case "varchar":
                 case "text":
                 case "ntext":
-                    return System.Data.DbType.String;
+                    return DbType.String;
                 case "datetime":
-                    return System.Data.DbType.DateTime;
+                    return DbType.DateTime;
                 case "datetime2":
-                    return System.Data.DbType.DateTime2;
+                    return DbType.DateTime2;
                 case "bit":
-                    return System.Data.DbType.Boolean;
+                    return DbType.Boolean;
                 case "uniqueidentifier":
-                    return System.Data.DbType.Guid;
+                    return DbType.Guid;
                 case "binary":
                 case "varbinary":
-                    return System.Data.DbType.Binary;
+                    return DbType.Binary;
                 case "decimal":
-                    return System.Data.DbType.Decimal;
+                    return DbType.Decimal;
                 default:
                     throw new ArgumentOutOfRangeException("type", string.Format("Unable to convert type '{0}' to a DbType", type));
             }
@@ -145,31 +131,116 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
             return "[" + name + "]";
         }
 
+        protected string GetColumnDefinition(Column col)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            string nullable = col.IsNullable ? "NULL" : "NOT NULL";
+
+            // hardcoded special cases
+            if (col.Type == DbType.String && col.Size == int.MaxValue)
+            {
+                // Create ntext columns for unlimited string length
+                sb.AppendFormat("{0} ntext {1}", QuoteIdentifier(col.Name), nullable);
+            }
+            else if (col.Type == DbType.Binary && col.Size == int.MaxValue)
+            {
+                // Create image columns for unlimited blob length
+                sb.AppendFormat("{0} image {1}", QuoteIdentifier(col.Name), nullable);
+            }
+            else
+            {
+                string size = string.Empty;
+                if (col.Size > 0 && col.Type.In(DbType.String, DbType.StringFixedLength, DbType.AnsiString, DbType.AnsiStringFixedLength, DbType.Binary))
+                {
+                    size = String.Format("({0})", col.Size);
+                }
+                else if (col.Size > 0 && col.Type.In(DbType.Decimal, DbType.VarNumeric))
+                {
+                    size = String.Format("({0}, {1})", col.Size, col.Scale.Value);
+                }
+
+                string typeString = DbTypeToNative(col.Type) + size;
+                sb.AppendFormat("{0} {1} {2}", QuoteIdentifier(col.Name), typeString, nullable);
+            }
+            return sb.ToString();
+        }
+
         #endregion
 
         #region Table Structure
 
-        protected override string FormatFullName(TableRef tbl)
+        protected override string FormatFullName(TableRef tblName)
         {
-            return String.Format("[{0}].[{1}].[{2}]", tbl.Database, tbl.Schema, tbl.Name);
+            return String.Format("[{0}].[{1}].[{2}]", tblName.Database, tblName.Schema, tblName.Name);
         }
 
-        protected override string FormatSchemaName(TableRef tbl)
+        protected override string FormatSchemaName(TableRef tblName)
         {
-            return String.Format("[{0}].[{1}]", tbl.Schema, tbl.Name);
+            return String.Format("[{0}].[{1}]", tblName.Schema, tblName.Name);
         }
 
         public override bool CheckTableExists(TableRef tblName)
         {
+            // TODO: check schema/database
             return (int)ExecuteScalar("SELECT COUNT(*) FROM sys.objects WHERE object_id = OBJECT_ID(@tbl) AND type IN (N'U')",
                 new Dictionary<string, object>() { 
                     { "@tbl", FormatFullName(tblName) }
                 }) > 0;
         }
 
-        protected override string GetTableNamesStatement()
+        public override IEnumerable<TableRef> GetTableNames()
         {
-            return "SELECT s.name, o.name FROM sys.objects o JOIN sys.schemas s ON o.schema_id = s.schema_id WHERE o.type = N'U' AND o.name <> 'sysdiagrams'";
+            return ExecuteReader("SELECT s.name, o.name FROM sys.objects o JOIN sys.schemas s ON o.schema_id = s.schema_id WHERE o.type = N'U' AND o.name <> 'sysdiagrams'")
+                .Select(rd => new TableRef(CurrentConnection.Database, rd.GetString(0), rd.GetString(1)));
+        }
+
+        public override void CreateTable(TableRef tblName, IEnumerable<Column> cols)
+        {
+            if (cols == null) throw new ArgumentNullException("cols");
+
+            StringBuilder sb = new StringBuilder();
+            sb.AppendFormat("CREATE TABLE {0} (", FormatSchemaName(tblName));
+            sb.AppendLine();
+
+            sb.Append(String.Join(",\n", cols.Select(col => GetColumnDefinition(col)).ToArray()));
+
+            sb.Append(")");
+            ExecuteNonQuery(sb.ToString());
+        }
+
+        public override void CreateTable(TableRef tblName, bool idAsIdentityColumn, bool createPrimaryKey)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendFormat("CREATE TABLE [{0}].[{1}] (", tblName.Schema, tblName.Name);
+            if (idAsIdentityColumn)
+            {
+                sb.AppendLine("[ID] [int] IDENTITY(1,1) NOT NULL");
+            }
+            else
+            {
+                sb.AppendLine("[ID] [int] NOT NULL");
+            }
+
+            if (createPrimaryKey)
+            {
+                // TODO: use Construct to create PK_{0}
+                sb.AppendFormat(", CONSTRAINT [PK_{0}] PRIMARY KEY CLUSTERED ( [ID] ASC )", tblName.Name);
+            }
+
+            sb.AppendLine();
+            sb.Append(")");
+
+            ExecuteNonQuery(sb.ToString());
+        }
+
+        public override void RenameTable(TableRef oldTblName, TableRef newTblName)
+        {
+            if (!oldTblName.Database.Equals(newTblName.Database)) { throw new ArgumentOutOfRangeException("newTblName", "cannot rename table to different database"); }
+            if (!oldTblName.Schema.Equals(newTblName.Schema)) { throw new ArgumentOutOfRangeException("newTblName", "cannot rename table to different schema"); }
+
+            // Do not qualify new name as it will be part of the old schema
+            ExecuteNonQuery(string.Format("EXEC sp_rename '{0}', '{1}'", FormatFullName(oldTblName), newTblName.Name));
         }
 
         public override bool CheckColumnExists(TableRef tblName, string colName)
@@ -184,337 +255,68 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
                     { "@tbl", FormatFullName(tblName) },
                     { "@name", colName },
                 }) > 0;
-
         }
 
-        protected override string GetTableColumnsStatement()
+        public override IEnumerable<string> GetTableColumnNames(TableRef tblName)
         {
-            return @"SELECT c.name, TYPE_NAME(system_type_id) type, max_length, is_nullable
+            return ExecuteReader(
+               @"SELECT c.name
                         FROM sys.objects o 
                             INNER JOIN sys.columns c ON c.object_id=o.object_id
-                        WHERE o.object_id = OBJECT_ID('[' + @schema + '].[' + @table + ']') 
-                            AND o.type IN (N'U')";
-        }
-
-        protected override string GetTableColumnNamesStatement()
-        {
-            return @"SELECT c.name
-                        FROM sys.objects o 
-                            INNER JOIN sys.columns c ON c.object_id=o.object_id
-                        WHERE o.object_id = OBJECT_ID('[' + @schema + '].[' + @table + ']') 
-                            AND o.type IN (N'U')";
-        }
-
-        public override bool CheckFKConstraintExists(string fkName)
-        {
-            return (int)ExecuteScalar("SELECT COUNT(*) FROM sys.objects WHERE object_id = OBJECT_ID(@constraint_name) AND type IN (N'F')",
-                         new Dictionary<string, object>(){
-                                        { "@constraint_name", fkName },
-                                    }) > 0;
-        }
-
-        public override bool CheckIndexExists(TableRef tblName, string idxName)
-        {
-            return (int)ExecuteScalar("SELECT COUNT(*) from sys.sysindexes WHERE id = OBJECT_ID(@tbl) AND [name] = @index",
-                      new Dictionary<string, object>(){
+                        WHERE o.object_id = OBJECT_ID(@tbl)
+                            AND o.type IN (N'U')",
+                new Dictionary<string, object>() {
                     { "@tbl", FormatFullName(tblName) },
-                    { "@index", idxName },
-                }) > 0;
+                })
+                .Select(rd => rd.GetString(0));
         }
 
-        #endregion
-
-        #region Table Content
-
-        public override bool CheckTableContainsData(TableRef tbl)
+        public override IEnumerable<Column> GetTableColumns(TableRef tblName)
         {
-            return (int)ExecuteScalar(String.Format(
-                "SELECT COUNT(*) FROM (SELECT TOP 1 * FROM {0}) as data",
-                FormatFullName(tbl))) > 0;
-        }
-
-        public override bool CheckColumnContainsNulls(TableRef tbl, string colName)
-        {
-            return (int)ExecuteScalar(String.Format(
-                "SELECT COUNT(*) FROM (SELECT TOP 1 {1} FROM {0} WHERE {1} IS NULL) AS nulls",
-                FormatFullName(tbl),
-                QuoteIdentifier(colName))) > 0;
-        }
-
-        public override bool CheckColumnContainsUniqueValues(TableRef tbl, string colName)
-        {
-            return (int)ExecuteScalar(String.Format(
-                @"SELECT COUNT(*)  FROM (
-                    SELECT TOP 1 {1} FROM {0} WHERE {1} IS NOT NULL
-                    GROUP BY {1} 
-                    HAVING COUNT({1}) > 1) AS tbl",
-                FormatFullName(tbl),
-                QuoteIdentifier(colName))) == 0;
-        }
-
-        public override long CountRows(TableRef tblName)
-        {
-            return (int)ExecuteScalar(String.Format(
-                @"SELECT COUNT(*) FROM {0}",
-                FormatFullName(tblName)));
-        }
-
-        #endregion
-
-        public override bool CheckViewExists(TableRef viewName)
-        {
-            using (var cmd = new SqlCommand("SELECT COUNT(*) FROM sys.objects WHERE object_id = OBJECT_ID(@view) AND type IN (N'V')", CurrentConnection, CurrentTransaction))
-            {
-                cmd.Parameters.AddWithValue("@view", FormatFullName(viewName));
-                QueryLog.Debug(cmd.CommandText);
-                return (int)cmd.ExecuteScalar() > 0;
-            }
-        }
-
-        public override bool CheckTriggerExists(TableRef objName, string triggerName)
-        {
-            using (var cmd = new SqlCommand("SELECT COUNT(*) FROM sys.objects WHERE object_id = OBJECT_ID(@trigger) AND parent_object_id = OBJECT_ID(@parent) AND type IN (N'TR')", CurrentConnection, CurrentTransaction))
-            {
-                cmd.Parameters.AddWithValue("@trigger", triggerName);
-                cmd.Parameters.AddWithValue("@parent", FormatFullName(objName));
-                QueryLog.Debug(cmd.CommandText);
-                return (int)cmd.ExecuteScalar() > 0;
-            }
-        }
-
-        public override bool CheckProcedureExists(string procName)
-        {
-            using (var cmd = new SqlCommand("SELECT COUNT(*) FROM sys.objects WHERE object_id = OBJECT_ID(@proc) AND type IN (N'P')", CurrentConnection, CurrentTransaction))
-            {
-                cmd.Parameters.AddWithValue("@proc", procName);
-                QueryLog.Debug(cmd.CommandText);
-                return (int)cmd.ExecuteScalar() > 0;
-            }
-        }
-
-        public override bool CheckPositionColumnValidity(TableRef tblName, string posName)
-        {
-            var failed = CheckColumnContainsNulls(tblName, posName);
-            if (failed)
-            {
-                Log.WarnFormat("Order Column [{0}].[{1}] contains NULLs.", tblName, posName);
-                return false;
-            }
-
-            return CallRepairPositionColumn(false, tblName, posName);
-        }
-
-        public override bool RepairPositionColumn(TableRef tblName, string posName)
-        {
-            return CallRepairPositionColumn(true, tblName, posName);
-        }
-
-
-        // ---------------------------------------------------------------------------
-        // ---------------------------------------------------------------------------
-        // ---------------------------------------------------------------------------
-        // ---------------------------------------------------------------------------
-        // ---------------------------------------------------------------------------
-        // ---------------------------------------------------------------------------
-        // ---------------------------------------------------------------------------
-        // ---------------------------------------------------------------------------
-        // ---------------------------------------------------------------------------
-        // ---------------------------------------------------------------------------
-        // ---------------------------------------------------------------------------
-        // ---------------------------------------------------------------------------
-        // ---------------------------------------------------------------------------
-
-        private static string ConstructDefaultConstraintName(TableRef tblName, string colName)
-        {
-            var constrName = string.Format("default_{0}_{1}", tblName.Name, colName);
-            return constrName;
-        }
-
-        private bool CallRepairPositionColumn(bool repair, TableRef tblName, string indexName)
-        {
-            using (var cmd = new SqlCommand("RepairPositionColumnValidityByTable", CurrentConnection, CurrentTransaction))
-            {
-                cmd.CommandType = System.Data.CommandType.StoredProcedure;
-
-                cmd.Parameters.AddWithValue("@repair", repair);
-                cmd.Parameters.AddWithValue("@tblName", tblName.Name);
-                cmd.Parameters.AddWithValue("@colName", indexName);
-                cmd.Parameters.Add("@result", System.Data.SqlDbType.Bit).Direction = System.Data.ParameterDirection.Output;
-
-                QueryLog.Debug(cmd.CommandText);
-                cmd.ExecuteNonQuery();
-
-                return (bool)cmd.Parameters["@result"].Value;
-            }
-        }
-
-        public override bool GetIsColumnNullable(TableRef tblName, string colName)
-        {
-            using (var cmd = new SqlCommand(@"SELECT c.is_nullable FROM sys.objects o INNER JOIN sys.columns c ON c.object_id=o.object_id
-	                                            WHERE o.object_id = OBJECT_ID(@table) 
-		                                            AND o.type IN (N'U')
-		                                            AND c.Name = @column", CurrentConnection, CurrentTransaction))
-            {
-                cmd.Parameters.AddWithValue("@table", FormatFullName(tblName));
-                cmd.Parameters.AddWithValue("@column", colName);
-                QueryLog.Debug(cmd.CommandText);
-                return (bool)cmd.ExecuteScalar();
-            }
-        }
-
-        public override bool GetHasColumnDefaultValue(TableRef tblName, string colName)
-        {
-            using (var cmd = new SqlCommand("SELECT COUNT(*) FROM sys.objects WHERE object_id = OBJECT_ID(@def) AND type IN (N'D')", CurrentConnection, CurrentTransaction))
-            {
-                cmd.Parameters.AddWithValue("@def", ConstructDefaultConstraintName(tblName, colName));
-                QueryLog.Debug(cmd.CommandText);
-                return (int)cmd.ExecuteScalar() > 0;
-            }
-        }
-
-        public override int GetColumnMaxLength(TableRef tblName, string colName)
-        {
-            // / 2 -> nvarchar!
-            using (var cmd = new SqlCommand(@"SELECT c.max_length / 2 FROM sys.objects o INNER JOIN sys.columns c ON c.object_id=o.object_id
-	                                            WHERE o.object_id = OBJECT_ID(@table) 
-		                                            AND o.type IN (N'U')
-		                                            AND c.Name = @column", CurrentConnection, CurrentTransaction))
-            {
-                cmd.Parameters.AddWithValue("@table", FormatFullName(tblName));
-                cmd.Parameters.AddWithValue("@column", colName);
-                QueryLog.Debug(cmd.CommandText);
-                return (int)cmd.ExecuteScalar();
-            }
-        }
-
-        public override IEnumerable<TableConstraintNamePair> GetFKConstraintNames()
-        {
-            return ExecuteReader("SELECT c.name, t.name FROM sys.objects c inner join sys.sysobjects t  on t.id = c.parent_object_id WHERE c.type IN (N'F') order by c.name")
-                .Select(rd => new TableConstraintNamePair() { ConstraintName = rd.GetString(0), TableName = rd.GetString(1) });
-        }
-
-        public override void CreateTable(TableRef tblName, IEnumerable<Column> cols)
-        {
-            if (cols == null) throw new ArgumentNullException("cols");
-            Log.DebugFormat("CreateTable {0}", tblName);
-
-            StringBuilder sb = new StringBuilder();
-            sb.AppendFormat("CREATE TABLE {0} (", FormatSchemaName(tblName));
-            sb.AppendLine();
-
-            foreach (var col in cols)
-            {
-                string nullable = col.IsNullable ? "NULL" : "NOT NULL";
-
-                if (col.Type == System.Data.DbType.String && col.Size == int.MaxValue)
+            return ExecuteReader(
+                @"SELECT c.name, TYPE_NAME(system_type_id) type, max_length, is_nullable
+                    FROM sys.objects o 
+                        INNER JOIN sys.columns c ON c.object_id=o.object_id
+                    WHERE o.object_id = OBJECT_ID(@tbl)
+                        AND o.type IN (N'U')",
+                new Dictionary<string, object>() {
+                    { "@tbl", FormatFullName(tblName) },
+                })
+                .Select(rd =>
                 {
-                    // Create ntext for unlimited string length
-                    sb.AppendFormat("[{0}] ntext {1},", col.Name, nullable);
-                }
-                else if (col.Type == System.Data.DbType.Binary && col.Size == int.MaxValue)
-                {
-                    // Create ntext for unlimited string length
-                    sb.AppendFormat("[{0}] image {1},", col.Name, nullable);
-                }
-                else
-                {
-                    string size = string.Empty;
-                    if (col.Size > 0 && col.Type.In(System.Data.DbType.String, System.Data.DbType.StringFixedLength, System.Data.DbType.AnsiString, System.Data.DbType.AnsiStringFixedLength, System.Data.DbType.Binary))
+                    var type = NativeToDbType(rd.GetString(1));
+                    int maxSize = int.MaxValue;
+                    switch (type)
                     {
-                        size = string.Format("({0})", col.Size);
+                        case DbType.AnsiString:
+                        case DbType.AnsiStringFixedLength:
+                        case DbType.Binary:
+                        case DbType.String:
+                        case DbType.StringFixedLength:
+                        case DbType.Xml:
+                            maxSize = rd.GetInt16(2);
+                            break;
+                        default:
+                            break;
                     }
-                    string typeString = DbTypeToNative(col.Type) + size;
-                    sb.AppendFormat("[{0}] {1} {2},", col.Name, typeString, nullable);
-                }
-            }
-
-            sb.Remove(sb.Length - 1, 1);
-            sb.Append(")");
-            ExecuteNonQuery(sb.ToString());
+                    return new Column()
+                    {
+                        Name = rd.GetString(0),
+                        Type = type,
+                        Size = maxSize,
+                        IsNullable = rd.GetBoolean(3)
+                    };
+                });
         }
 
-        public override void CreateTable(TableRef tblName, bool idAsIdentityColumn)
-        {
-            CreateTable(tblName, idAsIdentityColumn, true);
-        }
-
-        public override void CreateTable(TableRef tblName, bool idAsIdentityColumn, bool createPrimaryKey)
-        {
-            Log.DebugFormat("CreateTable [{0}]", tblName);
-
-            StringBuilder sb = new StringBuilder();
-            sb.AppendFormat("CREATE TABLE [{0}].[{1}] (", tblName.Schema, tblName.Name);
-            if (idAsIdentityColumn)
-            {
-                sb.AppendLine("[ID] [int] IDENTITY(1,1) NOT NULL");
-            }
-            else
-            {
-                sb.AppendLine("[ID] [int] NOT NULL");
-            }
-
-            if (createPrimaryKey)
-            {
-                sb.AppendFormat(", CONSTRAINT [PK_{0}] PRIMARY KEY CLUSTERED ( [ID] ASC )", tblName.Name);
-            }
-
-            sb.AppendLine();
-            sb.Append(")");
-
-            ExecuteNonQuery(sb.ToString());
-        }
-
-        public override void CreateColumn(TableRef tblName, string colName, DbType type, int size, int scale, bool isNullable, DefaultConstraint defConstraint)
-        {
-            DoColumn(true, tblName, colName, type, size, scale, isNullable, defConstraint);
-        }
-
-        public override void AlterColumn(TableRef tblName, string colName, DbType type, int size, int scale, bool isNullable, DefaultConstraint defConstraint)
-        {
-            DoColumn(false, tblName, colName, type, size, scale, isNullable, defConstraint);
-        }
-
-        private void DoColumn(bool add, TableRef tblName, string colName, System.Data.DbType type, int size, int scale, bool isNullable, DefaultConstraint defConstraint)
+        protected override void DoColumn(bool add, TableRef tblName, string colName, DbType type, int size, int scale, bool isNullable, DefaultConstraint defConstraint)
         {
             StringBuilder sb = new StringBuilder();
 
             string addOrAlter = add ? "ADD" : "ALTER COLUMN";
             string nullable = isNullable ? "NULL" : "NOT NULL";
 
-            if (type == System.Data.DbType.String && size == int.MaxValue)
-            {
-                // Create ntext for unlimited string length
-                Log.DebugFormat("[{0}] table [{1}] column [{2}] ntext [{3}]", addOrAlter, tblName, colName, nullable);
-                sb.AppendFormat("ALTER TABLE {0} {1} [{2}] {3} {4}", FormatFullName(tblName), addOrAlter, colName,
-                    "ntext",
-                    nullable);
-            }
-            else if (type == System.Data.DbType.Binary && size == int.MaxValue)
-            {
-                // Create ntext for unlimited string length
-                Log.DebugFormat("[{0}] table [{1}] column [{2}] image [{3}]", addOrAlter, tblName, colName, nullable);
-                sb.AppendFormat("ALTER TABLE {0} {1} [{2}] {3} {4}", FormatFullName(tblName), addOrAlter, colName,
-                    "image",
-                    nullable);
-            }
-            else
-            {
-                string strSize = string.Empty;
-                if (size > 0 && type.In(System.Data.DbType.String, System.Data.DbType.StringFixedLength, System.Data.DbType.AnsiString, System.Data.DbType.AnsiStringFixedLength, System.Data.DbType.Binary))
-                {
-                    strSize = string.Format("({0})", size);
-                }
-                else if (size > 0 && type.In(System.Data.DbType.Decimal, System.Data.DbType.VarNumeric))
-                {
-                    strSize = string.Format("({0}, {1})", size, scale);
-                }
-
-                string typeString = DbTypeToNative(type) + strSize;
-                Log.DebugFormat("[{0}] table [{1}] column [{2}] [{3}] [{4}]", addOrAlter, tblName, colName, typeString, nullable);
-                sb.AppendFormat("ALTER TABLE {0} {1}  [{2}] {3} {4}", FormatFullName(tblName), addOrAlter, colName,
-                    typeString,
-                    nullable);
-            }
+            sb.AppendFormat("ALTER TABLE {0} {1} {2}", FormatFullName(tblName), addOrAlter, GetColumnDefinition(new Column() { Name = colName, Type = type, Size = size, Scale = scale, IsNullable = isNullable }));
 
             ExecuteNonQuery(sb.ToString());
 
@@ -547,85 +349,200 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
             }
         }
 
+        public override void RenameColumn(TableRef tblName, string oldColName, string newColName)
+        {
+            // Do not qualify new name as it will stay part of the original table
+            ExecuteNonQuery(string.Format("EXEC sp_rename '{0}.[{1}]', '{2}', 'COLUMN'", FormatFullName(tblName), oldColName, newColName));
+        }
+
+        public override bool GetIsColumnNullable(TableRef tblName, string colName)
+        {
+            return (bool)ExecuteScalar(@"
+                SELECT c.is_nullable
+                FROM sys.objects o
+                    INNER JOIN sys.columns c ON c.object_id=o.object_id
+                WHERE o.object_id = OBJECT_ID(@table) 
+		            AND o.type IN (N'U')
+		            AND c.Name = @column",
+                new Dictionary<string, object>(){
+                    { "@table", FormatFullName(tblName) },
+                    { "@column", colName },
+                });
+        }
+
+        public override bool GetHasColumnDefaultValue(TableRef tblName, string colName)
+        {
+            return (int)ExecuteScalar("SELECT COUNT(*) FROM sys.objects WHERE object_id = OBJECT_ID(@def) AND type IN (N'D')",
+                new Dictionary<string, object>(){
+                    { "@def", ConstructDefaultConstraintName(tblName, colName) },
+                }) > 0;
+        }
+
+        public override int GetColumnMaxLength(TableRef tblName, string colName)
+        {
+            // divide by 2 to account for _n_varchar!
+            return (int)ExecuteScalar(@"
+                SELECT c.max_length / 2
+                FROM sys.objects o
+                    INNER JOIN sys.columns c ON c.object_id=o.object_id
+	            WHERE o.object_id = OBJECT_ID(@table) 
+		            AND o.type IN (N'U')
+		            AND c.Name = @column",
+                new Dictionary<string, object>(){
+                    { "@table", FormatFullName(tblName) },
+                    { "@column", colName },
+                });
+        }
+
+        #endregion
+
+        #region Table Content
+
+        public override bool CheckTableContainsData(TableRef tbl)
+        {
+            return (int)ExecuteScalar(String.Format(
+                "SELECT COUNT(*) FROM (SELECT TOP 1 * FROM {0}) AS data",
+                FormatFullName(tbl))) > 0;
+        }
+
+        public override bool CheckColumnContainsNulls(TableRef tbl, string colName)
+        {
+            return (int)ExecuteScalar(String.Format(
+                "SELECT COUNT(*) FROM (SELECT TOP 1 {1} FROM {0} WHERE {1} IS NULL) AS nulls",
+                FormatFullName(tbl),
+                QuoteIdentifier(colName))) > 0;
+        }
+
+        public override bool CheckColumnContainsUniqueValues(TableRef tbl, string colName)
+        {
+            return (int)ExecuteScalar(String.Format(
+                @"SELECT COUNT(*) FROM (
+                    SELECT TOP 1 {1} FROM {0} WHERE {1} IS NOT NULL
+                    GROUP BY {1} 
+                    HAVING COUNT({1}) > 1) AS tbl",
+                FormatFullName(tbl),
+                QuoteIdentifier(colName))) == 0;
+        }
+
+        public override bool CheckColumnContainsValues(TableRef tbl, string colName)
+        {
+            return (int)ExecuteScalar(String.Format(
+                "SELECT COUNT(*) FROM (SELECT TOP 1 {1} FROM {0} WHERE {1} IS NOT NULL) AS data",
+                FormatFullName(tbl),
+                QuoteIdentifier(colName))) > 0;
+        }
+
+        public override long CountRows(TableRef tblName)
+        {
+            return (int)ExecuteScalar(String.Format(
+                @"SELECT COUNT(*) FROM {0}",
+                FormatFullName(tblName)));
+        }
+
+        #endregion
+
+        #region Constraint and Index Management
+
+        public override bool CheckFKConstraintExists(string fkName)
+        {
+            return (int)ExecuteScalar("SELECT COUNT(*) FROM sys.objects WHERE object_id = OBJECT_ID(@constraint_name) AND type IN (N'F')",
+                new Dictionary<string, object>() {
+                    { "@constraint_name", fkName },
+                }) > 0;
+        }
+
+        public override IEnumerable<TableConstraintNamePair> GetFKConstraintNames()
+        {
+            return ExecuteReader("SELECT c.name, t.name FROM sys.objects c INNER JOIN sys.sysobjects t ON t.id = c.parent_object_id WHERE c.type IN (N'F') ORDER BY c.name")
+                .Select(rd => new TableConstraintNamePair()
+                {
+                    ConstraintName = rd.GetString(0),
+                    // TODO: remove 'dbo' reference and return all tablerefs with proper namespace
+                    TableName = new TableRef(CurrentConnection.Database, "dbo", rd.GetString(1))
+                });
+        }
+
         public override void CreateFKConstraint(TableRef tblName, TableRef refTblName, string colName, string constraintName, bool onDeleteCascade)
         {
-            Log.DebugFormat("Creating foreign key constraint [{0}].[{1}] -> [{2}].ID", tblName, colName, refTblName);
-            ExecuteNonQuery(string.Format(@"ALTER TABLE {0}  WITH CHECK 
-                    ADD CONSTRAINT [{1}] FOREIGN KEY([{2}])
-                    REFERENCES {3} ([ID]){4}",
-                   FormatFullName(tblName),
-                   constraintName,
-                   colName,
-                   FormatFullName(refTblName),
-                   onDeleteCascade ? @" ON DELETE CASCADE" : String.Empty));
+            ExecuteNonQuery(string.Format(@"
+                ALTER TABLE {0} WITH CHECK 
+                ADD CONSTRAINT [{1}] FOREIGN KEY([{2}])
+                REFERENCES {3} ([ID]){4}",
+                FormatFullName(tblName),
+                constraintName,
+                colName,
+                FormatFullName(refTblName),
+                onDeleteCascade ? @" ON DELETE CASCADE" : String.Empty));
 
             ExecuteNonQuery(string.Format(@"ALTER TABLE {0} CHECK CONSTRAINT [{1}]",
                    FormatFullName(tblName),
                    constraintName));
         }
 
-        public override void DropTable(TableRef tblName)
+        public override void RenameFKConstraint(string oldConstraintName, string newConstraintName)
         {
-            Log.DebugFormat("Dropping table [{0}]", tblName);
-            ExecuteNonQuery(string.Format("DROP TABLE {0}", FormatFullName(tblName)));
+            // Do not qualify new name as it will be part of the name
+            ExecuteNonQuery(string.Format("EXEC sp_rename '[{0}]', '{1}', 'OBJECT'", oldConstraintName, newConstraintName));
         }
 
-        public override void TruncateTable(TableRef tblName)
+        public override bool CheckIndexExists(TableRef tblName, string idxName)
         {
-            Log.DebugFormat("Truncating table [{0}]", tblName);
-            ExecuteNonQuery(string.Format("DELETE FROM {0}", FormatFullName(tblName)));
+            return (int)ExecuteScalar("SELECT COUNT(*) from sys.sysindexes WHERE id = OBJECT_ID(@tbl) AND [name] = @index",
+                new Dictionary<string, object>(){
+                    { "@tbl", FormatFullName(tblName) },
+                    { "@index", idxName },
+                }) > 0;
         }
 
-        //private void ExecuteNonQuery(string nonQueryFormat, params object[] args)
-        //{
-        //    string query = String.Format(nonQueryFormat, args);
-
-        //    using (var cmd = new SqlCommand(query, CurrentConnection, CurrentTransaction))
-        //    {
-        //        QueryLog.Debug(query);
-        //        cmd.ExecuteNonQuery();
-        //    }
-        //}
-
-        //private object ExecuteScalar(string nonQueryFormat, params object[] args)
-        //{
-        //    string query = String.Format(nonQueryFormat, args);
-
-        //    using (var cmd = new SqlCommand(query, CurrentConnection, CurrentTransaction))
-        //    {
-        //        QueryLog.Debug(query);
-        //        return cmd.ExecuteScalar();
-        //    }
-        //}
-
-        public override void DropColumn(TableRef tblName, string colName)
+        public override void DropIndex(TableRef tblName, string idxName)
         {
-            Log.DebugFormat("Dropping column [{0}].[{1}]", tblName, colName);
-            ExecuteNonQuery(string.Format("ALTER TABLE {0} DROP COLUMN [{1}]", FormatFullName(tblName), colName));
+            ExecuteNonQuery(string.Format("DROP INDEX [{0}] ON {1}", idxName, FormatFullName(tblName)));
         }
 
-        public override void DropFKConstraint(TableRef tblName, string fkName)
+        #endregion
+
+        #region Other DB Objects (Views, Triggers, Procedures)
+
+        public override bool CheckViewExists(TableRef viewName)
         {
-            Log.DebugFormat("Dropping foreign key constraint [{0}].[{1}]", tblName, fkName);
-            ExecuteNonQuery(string.Format("ALTER TABLE {0} DROP CONSTRAINT [{1}]", FormatFullName(tblName), fkName));
+            return (int)ExecuteScalar(
+                "SELECT COUNT(*) FROM sys.objects WHERE object_id = OBJECT_ID(@view) AND type IN (N'V')",
+                new Dictionary<string, object>() {
+                    { "@view", FormatFullName(viewName) },
+                }) > 0;
         }
 
-        public override void DropTrigger(string triggerName)
+        public override bool CheckTriggerExists(TableRef objName, string triggerName)
         {
-            Log.DebugFormat("Dropping trigger [{0}]", triggerName);
+            return (int)ExecuteScalar(
+                "SELECT COUNT(*) FROM sys.objects WHERE object_id = OBJECT_ID(@trigger) AND parent_object_id = OBJECT_ID(@parent) AND type IN (N'TR')",
+                new Dictionary<string, object>(){
+                    { "@trigger", triggerName },
+                    { "@parent", FormatFullName(objName) },
+                }) > 0;
+        }
+
+        public override void DropTrigger(TableRef objName, string triggerName)
+        {
             ExecuteNonQuery(string.Format("DROP TRIGGER [{0}]", triggerName));
         }
 
-        public override void DropView(TableRef viewName)
+        public override bool CheckProcedureExists(string procName)
         {
-            Log.DebugFormat("Dropping view [{0}]", viewName);
-            ExecuteNonQuery(string.Format("DROP VIEW {0}", FormatFullName(viewName)));
+            return (int)ExecuteScalar(
+                  "SELECT COUNT(*) FROM sys.objects WHERE object_id = OBJECT_ID(@proc) AND type IN (N'P')",
+                  new Dictionary<string, object>(){
+                    { "@proc", procName },
+                }) > 0;
         }
 
         public override void DropProcedure(string procName)
         {
-            Log.DebugFormat("Dropping procedure [{0}]", procName);
             ExecuteNonQuery(string.Format("DROP PROCEDURE [{0}]", procName));
+        }
+
+        public override void EnsureInfrastructure()
+        {
         }
 
         public override void DropAllObjects()
@@ -633,6 +550,59 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
             ExecuteSqlResource(this.GetType(), "Kistl.Server.Database.Scripts.DropTables.sql");
         }
 
+        #endregion
+
+        #region ZBox Schema Handling
+
+        protected override string GetSchemaInsertStatement()
+        {
+            return "INSERT INTO [CurrentSchema] ([Version], [Schema]) VALUES (1, @schema)";
+        }
+
+        protected override string GetSchemaUpdateStatement()
+        {
+            return "UPDATE [CurrentSchema] SET [Schema] = @schema, [Version] = [Version] + 1";
+        }
+
+        #endregion
+
+        #region zBox Accelerators
+
+        protected override bool CallRepairPositionColumn(bool repair, TableRef tblName, string indexName)
+        {
+            using (var cmd = new SqlCommand("RepairPositionColumnValidityByTable", CurrentConnection, CurrentTransaction))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@repair", repair);
+                cmd.Parameters.AddWithValue("@tblName", tblName.Name);
+                cmd.Parameters.AddWithValue("@colName", indexName);
+                cmd.Parameters.Add("@result", SqlDbType.Bit).Direction = ParameterDirection.Output;
+
+                QueryLog.Debug(cmd.CommandText);
+                cmd.ExecuteNonQuery();
+
+                return (bool)cmd.Parameters["@result"].Value;
+            }
+        }
+
+        #endregion
+
+        // --  TODO  --  Cleanup stuff below  ----------------------------------------
+        // ---------------------------------------------------------------------------
+        // ---------------------------------------------------------------------------
+        // ---------------------------------------------------------------------------
+        // ---------------------------------------------------------------------------
+        // ---------------------------------------------------------------------------
+        // ---------------------------------------------------------------------------
+        // ---------------------------------------------------------------------------
+        // ---------------------------------------------------------------------------
+        // ---------------------------------------------------------------------------
+        // ---------------------------------------------------------------------------
+        // ---------------------------------------------------------------------------
+        // ---------------------------------------------------------------------------
+
+      
         public override void CopyColumnData(TableRef srcTblName, string srcColName, TableRef tblName, string colName)
         {
             Log.DebugFormat("Copying data from [{0}].[{1}] to [{2}].[{3}]", srcTblName, srcColName, tblName, colName);
@@ -665,12 +635,6 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
         {
             string verStr = (string)ExecuteScalar("SELECT SERVERPROPERTY('productversion')");
             return int.Parse(verStr.Split('.').First());
-        }
-
-
-        public override void DropIndex(TableRef tblName, string idxName)
-        {
-            ExecuteNonQuery(string.Format("DROP INDEX [{0}] ON {1}", idxName, FormatFullName(tblName)));
         }
 
         public override void CreateIndex(TableRef tblName, string idxName, bool unique, bool clustered, params string[] columns)
@@ -902,24 +866,6 @@ FROM (", viewName.Schema, viewName.Name);
             ExecuteNonQuery(createTableProcQuery.ToString());
         }
 
-        public override void RenameTable(TableRef oldTblName, TableRef newTblName)
-        {
-            // Do not qualify new name as it will be part of the name
-            ExecuteNonQuery(string.Format("EXEC sp_rename '{0}', '{1}'", FormatFullName(oldTblName), FormatFullName(newTblName)));
-        }
-
-        public override void RenameColumn(TableRef tblName, string oldColName, string newColName)
-        {
-            // Do not qualify new name as it will be part of the name
-            ExecuteNonQuery(string.Format("EXEC sp_rename '{0}.[{1}]', '{2}', 'COLUMN'", FormatFullName(tblName), oldColName, newColName));
-        }
-
-        public override void RenameFKConstraint(string oldConstraintName, string newConstraintName)
-        {
-            // Do not qualify new name as it will be part of the name
-            ExecuteNonQuery(string.Format("EXEC sp_rename '[{0}]', '{1}', 'OBJECT'", oldConstraintName, newConstraintName));
-        }
-
         public override IDataReader ReadTableData(TableRef tbl, IEnumerable<string> colNames)
         {
             var columns = String.Join(",", colNames.Select(n => QuoteIdentifier(n)).ToArray());
@@ -1023,7 +969,7 @@ FROM (", viewName.Schema, viewName.Name);
             }
         }
 
-        public override void WriteTableData(TableRef destTbl, IEnumerable<string> colNames, IEnumerable values)
+        public override void WriteTableData(TableRef destTbl, IEnumerable<string> colNames, System.Collections.IEnumerable values)
         {
             if (colNames == null) throw new ArgumentNullException("colNames");
             if (values == null) throw new ArgumentNullException("values");

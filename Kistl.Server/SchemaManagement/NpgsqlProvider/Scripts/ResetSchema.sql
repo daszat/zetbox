@@ -1,0 +1,5 @@
+﻿DROP SCHEMA dbo;
+
+CREATE SCHEMA dbo
+  AUTHORIZATION zbox;
+GRANT ALL ON SCHEMA dbo TO zbox;

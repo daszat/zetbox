@@ -1725,7 +1725,7 @@ namespace Kistl.Server.SchemaManagement
         {
             var updateRightsTriggerName = Construct.SecurityRulesUpdateRightsTriggerName(objClass);
             var tblName = db.GetQualifiedTableName(objClass.TableName);
-            if (db.CheckTriggerExists(tblName, updateRightsTriggerName)) db.DropTrigger(updateRightsTriggerName);
+            if (db.CheckTriggerExists(tblName, updateRightsTriggerName)) db.DropTrigger(tblName, updateRightsTriggerName);
 
             var tblList = new List<RightsTrigger>();
             tblList.Add(new RightsTrigger()
@@ -1768,7 +1768,7 @@ namespace Kistl.Server.SchemaManagement
         {
             var updateRightsTriggerName = Construct.SecurityRulesUpdateRightsTriggerName(rel);
             var tblName = db.GetQualifiedTableName(rel.GetRelationTableName());
-            if (db.CheckTriggerExists(tblName, updateRightsTriggerName)) db.DropTrigger(updateRightsTriggerName);
+            if (db.CheckTriggerExists(tblName, updateRightsTriggerName)) db.DropTrigger(tblName, updateRightsTriggerName);
 
             var tblList = new List<RightsTrigger>();
 

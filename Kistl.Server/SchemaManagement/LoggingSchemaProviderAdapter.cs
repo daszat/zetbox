@@ -102,9 +102,9 @@ namespace Kistl.Server.SchemaManagement
             return _provider.GetTableColumnNames(tblName);
         }
 
-        public IEnumerable<Column> GetTableColumns(TableRef tbl)
+        public IEnumerable<Column> GetTableColumns(TableRef tblName)
         {
-            return _provider.GetTableColumns(tbl);
+            return _provider.GetTableColumns(tblName);
         }
 
         public bool CheckFKConstraintExists(string fkName)
@@ -182,18 +182,27 @@ namespace Kistl.Server.SchemaManagement
             return _provider.GetColumnMaxLength(tblName, colName);
         }
 
-        public void CreateTable(TableRef tbl, IEnumerable<Column> cols)
+        public void CreateTable(TableRef tblName, IEnumerable<Column> cols)
         {
-            _provider.CreateTable(tbl, cols);
+            if (Log.IsDebugEnabled)
+                Log.DebugFormat("CreateTable {0} with {1} columns", tblName, cols.Count());
+            _provider.CreateTable(tblName, cols);
         }
 
         public void CreateTable(TableRef tblName, bool idAsIdentityColumn)
         {
+            Log.DebugFormat("CreateTable [{0}] {1} and a primary key",
+                tblName,
+                idAsIdentityColumn ? "with identity" : "without identity");
             _provider.CreateTable(tblName, idAsIdentityColumn);
         }
 
         public void CreateTable(TableRef tblName, bool idAsIdentityColumn, bool createPrimaryKey)
         {
+            Log.DebugFormat("CreateTable [{0}] {1} {2}",
+                tblName,
+                idAsIdentityColumn ? "with identity" : "without identity",
+                createPrimaryKey ? "and a primary key" : "and no primary key");
             _provider.CreateTable(tblName, idAsIdentityColumn, createPrimaryKey);
         }
 
@@ -214,6 +223,7 @@ namespace Kistl.Server.SchemaManagement
 
         public void CreateFKConstraint(TableRef tblName, TableRef refTblName, string colName, string constraintName, bool onDeleteCascade)
         {
+            Log.DebugFormat("Creating foreign key constraint [{0}].[{1}] -> [{2}].ID", tblName, colName, refTblName);
             _provider.CreateFKConstraint(tblName, refTblName, colName, constraintName, onDeleteCascade);
         }
 
@@ -234,36 +244,43 @@ namespace Kistl.Server.SchemaManagement
 
         public void TruncateTable(TableRef tblName)
         {
+            Log.DebugFormat("Truncating table [{0}]", tblName);
             _provider.TruncateTable(tblName);
         }
 
         public void DropTable(TableRef tblName)
         {
+            Log.DebugFormat("Dropping table [{0}]", tblName);
             _provider.DropTable(tblName);
         }
 
         public void DropColumn(TableRef tblName, string colName)
         {
+            Log.DebugFormat("Dropping column [{0}].[{1}]", tblName, colName);
             _provider.DropColumn(tblName, colName);
         }
 
         public void DropFKConstraint(TableRef tblName, string fkName)
         {
+            Log.DebugFormat("Dropping foreign key constraint [{0}].[{1}]", tblName, fkName);
             _provider.DropFKConstraint(tblName, fkName);
         }
 
-        public void DropTrigger(string triggerName)
+        public void DropTrigger(TableRef objName, string triggerName)
         {
-            _provider.DropTrigger(triggerName);
+            Log.DebugFormat("Dropping trigger [{0}]", triggerName);
+            _provider.DropTrigger(objName, triggerName);
         }
 
         public void DropView(TableRef viewName)
         {
+            Log.DebugFormat("Dropping view [{0}]", viewName);
             _provider.DropView(viewName);
         }
 
         public void DropProcedure(string procName)
         {
+            Log.DebugFormat("Dropping procedure [{0}]", procName);
             _provider.DropProcedure(procName);
         }
 
@@ -332,9 +349,9 @@ namespace Kistl.Server.SchemaManagement
             _provider.CreatePositionColumnValidCheckProcedures(refSpecs);
         }
 
-        public IDataReader ReadTableData(TableRef tbl, IEnumerable<string> colNames)
+        public IDataReader ReadTableData(TableRef tblName, IEnumerable<string> colNames)
         {
-            return _provider.ReadTableData(tbl, colNames);
+            return _provider.ReadTableData(tblName, colNames);
         }
 
         public IDataReader ReadTableData(string sql)
@@ -342,9 +359,9 @@ namespace Kistl.Server.SchemaManagement
             return _provider.ReadTableData(sql);
         }
 
-        public IDataReader ReadJoin(TableRef tbl, IEnumerable<ProjectionColumn> colNames, IEnumerable<Join> joins)
+        public IDataReader ReadJoin(TableRef tblName, IEnumerable<ProjectionColumn> colNames, IEnumerable<Join> joins)
         {
-            return _provider.ReadJoin(tbl, colNames, joins);
+            return _provider.ReadJoin(tblName, colNames, joins);
         }
 
         public void WriteTableData(TableRef destTbl, IDataReader source, IEnumerable<string> colNames)
@@ -370,6 +387,11 @@ namespace Kistl.Server.SchemaManagement
         public void Dispose()
         {
             _provider.Dispose();
+        }
+
+        public void EnsureInfrastructure()
+        {
+            _provider.EnsureInfrastructure();
         }
     }
 }

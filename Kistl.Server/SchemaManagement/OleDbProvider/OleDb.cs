@@ -10,10 +10,7 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
     using System.Text;
     using System.Text.RegularExpressions;
     using Kistl.API;
-    using Kistl.API.Configuration;
     using Kistl.API.Server;
-    using Kistl.API.Utils;
-    using System.Collections;
 
     public class OleDb
         : ISchemaProvider
@@ -98,20 +95,6 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
             return String.Format("[{0}].[{1}]", tbl.Schema, tbl.Name);
         }
 
-        public string GetSavedSchema()
-        {
-            throw new NotSupportedException();
-        }
-
-        /// <summary>
-        /// TODO: Was ist die Version?
-        /// </summary>
-        /// <param name="schema"></param>
-        public void SaveSchema(string schema)
-        {
-            throw new NotSupportedException();
-        }
-
         public bool CheckTableExists(TableRef tblName)
         {
             using (var cmd = new OleDbCommand("SELECT COUNT(*) FROM sys.objects WHERE object_id = OBJECT_ID(@table) AND type IN (N'U')", db, tx))
@@ -150,11 +133,6 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
             }
         }
 
-        public bool CheckFKConstraintExists(string fkName)
-        {
-            throw new NotImplementedException();
-        }
-
         public bool CheckViewExists(TableRef viewName)
         {
             using (var cmd = new OleDbCommand("SELECT COUNT(*) FROM sys.objects WHERE object_id = OBJECT_ID(@view) AND type IN (N'V')", db, tx))
@@ -163,16 +141,6 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
                 QueryLog.Debug(cmd.CommandText);
                 return (int)cmd.ExecuteScalar() > 0;
             }
-        }
-
-        public bool CheckTriggerExists(TableRef objName, string triggerName)
-        {
-            throw new NotSupportedException();
-        }
-
-        public bool CheckProcedureExists(string procName)
-        {
-            throw new NotSupportedException();
         }
 
         public bool CheckTableContainsData(TableRef tblName)
@@ -211,26 +179,6 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
             }
         }
 
-        public long CountRows(TableRef tblName)
-        {
-            throw new NotSupportedException();
-        }
-
-        public bool CheckPositionColumnValidity(TableRef tblName, string posName)
-        {
-            throw new NotSupportedException();
-        }
-
-        public bool RepairPositionColumn(TableRef tblName, string posName)
-        {
-            throw new NotSupportedException();
-        }
-
-        public int GetColumnMaxLength(TableRef tblName, string colName)
-        {
-            throw new NotImplementedException();
-        }
-
         public TableRef GetQualifiedTableName(string tblName)
         {
             return new TableRef(db.Database, "dbo", tblName);
@@ -244,11 +192,6 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
             {
                 yield return GetQualifiedTableName((string)tbl["TABLE_NAME"]);
             }
-        }
-
-        public IEnumerable<TableConstraintNamePair> GetFKConstraintNames()
-        {
-            throw new NotImplementedException();
         }
 
         private class DataType
@@ -353,46 +296,6 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
             }
         }
 
-        public void CreateTable(TableRef tbl, IEnumerable<Column> cols)
-        {
-            throw new NotSupportedException();
-        }
-
-        public void CreateTable(TableRef tblName, bool idAsIdentityColumn)
-        {
-            CreateTable(tblName, idAsIdentityColumn, true);
-        }
-
-        public void CreateTable(TableRef tblName, bool idAsIdentityColumn, bool createPrimaryKey)
-        {
-            throw new NotSupportedException();
-        }
-
-        public void CreateColumn(TableRef tblName, string colName, DbType type, int size, int scale, bool isNullable, DefaultConstraint defConstraint)
-        {
-            throw new NotSupportedException();
-        }
-
-        public void AlterColumn(TableRef tblName, string colName, DbType type, int size, int scale, bool isNullable, DefaultConstraint defConstraint)
-        {
-            throw new NotSupportedException();
-        }
-
-        public void CreateFKConstraint(TableRef tblName, TableRef refTblName, string colName, string constraintName, bool onDeleteCascade)
-        {
-            throw new NotSupportedException();
-        }
-
-        public void DropTable(TableRef tblName)
-        {
-            throw new NotSupportedException();
-        }
-
-        public void TruncateTable(TableRef tblName)
-        {
-            throw new NotSupportedException();
-        }
-
         private void ExecuteNonQuery(string nonQueryFormat, params object[] args)
         {
             string query = String.Format(nonQueryFormat, args);
@@ -402,47 +305,6 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
                 QueryLog.Debug(query);
                 cmd.ExecuteNonQuery();
             }
-        }
-
-        //private object ExecuteScalar(string nonQueryFormat, params object[] args)
-        //{
-        //    string query = String.Format(nonQueryFormat, args);
-
-        //    using (var cmd = new OleDbCommand(query, db, tx))
-        //    {
-        //        QueryLog.Debug(query);
-        //        return cmd.ExecuteScalar();
-        //    }
-        //}
-
-        public void DropColumn(TableRef tblName, string colName)
-        {
-            throw new NotSupportedException();
-        }
-
-        public void DropFKConstraint(TableRef tblName, string fkName)
-        {
-            throw new NotSupportedException();
-        }
-
-        public void DropTrigger(string triggerName)
-        {
-            throw new NotSupportedException();
-        }
-
-        public void DropView(TableRef viewName)
-        {
-            throw new NotSupportedException();
-        }
-
-        public void DropProcedure(string procName)
-        {
-            throw new NotSupportedException();
-        }
-
-        public void DropAllObjects()
-        {
-            throw new NotSupportedException();
         }
 
         public void CopyColumnData(TableRef srcTblName, string srcColName, TableRef tblName, string colName)
@@ -473,78 +335,6 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
                 destColName, srcColName, destTblName, srcTblName, srcFKColName);
         }
 
-        public bool CheckIndexExists(TableRef tblName, string idxName)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void DropIndex(TableRef tblName, string idxName)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void CreateIndex(TableRef tblName, string idxName, bool unique, bool clustered, params string[] columns)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void CreateUpdateRightsTrigger(string triggerName, TableRef tblName, List<RightsTrigger> tblList)
-        {
-            throw new NotSupportedException();
-        }
-
-        public void CreateEmptyRightsViewUnmaterialized(TableRef viewName)
-        {
-            throw new NotSupportedException();
-        }
-
-        public void CreateRightsViewUnmaterialized(TableRef viewName, TableRef tblName, TableRef tblNameRights, IList<ACL> acls)
-        {
-            throw new NotSupportedException();
-        }
-
-        public void CreateRefreshRightsOnProcedure(string procName, TableRef viewUnmaterializedName, TableRef tblName, TableRef tblNameRights)
-        {
-            throw new NotSupportedException();
-        }
-
-        public void ExecRefreshRightsOnProcedure(string procName)
-        {
-            throw new NotSupportedException();
-        }
-
-        public void CreatePositionColumnValidCheckProcedures(ILookup<string, KeyValuePair<string, string>> refSpecs)
-        {
-            throw new NotSupportedException();
-        }
-
-        //private void ExecuteScriptFromResource(string scriptResourceName)
-        //{
-        //    using (var scriptStream = new StreamReader(this.GetType().Assembly.GetManifestResourceStream(scriptResourceName)))
-        //    {
-        //        var databaseScript = scriptStream.ReadToEnd();
-        //        foreach (var cmdString in Regex.Split(databaseScript, "\r?\nGO\r?\n").Where(s => !String.IsNullOrEmpty(s)))
-        //        {
-        //            ExecuteNonQuery(cmdString);
-        //        }
-        //    }
-        //}
-
-        public void RenameTable(TableRef oldTblName, TableRef newTblName)
-        {
-            throw new NotSupportedException();
-        }
-
-        public void RenameColumn(TableRef tblName, string oldColName, string newColName)
-        {
-            throw new NotSupportedException();
-        }
-
-        public void RenameFKConstraint(string oldConstraintName, string newConstraintName)
-        {
-            throw new NotSupportedException();
-        }
-
         public IDataReader ReadTableData(TableRef tbl, IEnumerable<string> colNames)
         {
             var sb = new StringBuilder();
@@ -565,6 +355,7 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
 
         public IDataReader ReadJoin(TableRef tbl, IEnumerable<ProjectionColumn> colNames, IEnumerable<Join> joins)
         {
+            // TODO: implement
             throw new NotImplementedException();
         }
 
@@ -580,7 +371,7 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
             }
         }
 
-        public void WriteTableData(TableRef tbl, IEnumerable<string> colNames, IEnumerable values)
+        public void WriteTableData(TableRef tbl, IEnumerable<string> colNames, System.Collections.IEnumerable values)
         {
             if (colNames == null) throw new ArgumentNullException("colNames");
             if (values == null) throw new ArgumentNullException("values");
@@ -608,27 +399,9 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
             cmd.ExecuteNonQuery();
         }
 
-
-        /// <summary>Not implemented.</summary>
-        string ISchemaProvider.DbTypeToNative(DbType type)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>Not implemented.</summary>
-        DbType ISchemaProvider.NativeToDbType(string type)
-        {
-            throw new NotImplementedException();
-        }
-
         public void RefreshDbStats()
         {
             // do nothing
-        }
-
-        public bool GetHasColumnDefaultValue(TableRef tblName, string colName)
-        {
-            throw new NotImplementedException();
         }
 
         public void ExecuteSqlResource(Type type, string scriptResourceName)
@@ -644,6 +417,246 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
                     ExecuteNonQuery(cmdString);
                 }
             }
+        }
+
+        /// <summary>Not supported.</summary>
+        string ISchemaProvider.GetSavedSchema()
+        {
+            throw new NotSupportedException();
+        }
+
+        /// <summary>Not supported.</summary>
+        void ISchemaProvider.SaveSchema(string schema)
+        {
+            throw new NotSupportedException();
+        }
+
+        /// <summary>Not supported.</summary>
+        bool ISchemaProvider.CheckFKConstraintExists(string fkName)
+        {
+            throw new NotSupportedException();
+        }
+
+        /// <summary>Not supported.</summary>
+        bool ISchemaProvider.CheckTriggerExists(TableRef objName, string triggerName)
+        {
+            throw new NotSupportedException();
+        }
+
+        /// <summary>Not supported.</summary>
+        bool ISchemaProvider.CheckProcedureExists(string procName)
+        {
+            throw new NotSupportedException();
+        }
+
+        /// <summary>Not supported.</summary>
+        long ISchemaProvider.CountRows(TableRef tblName)
+        {
+            throw new NotSupportedException();
+        }
+
+        /// <summary>Not supported.</summary>
+        bool ISchemaProvider.CheckPositionColumnValidity(TableRef tblName, string posName)
+        {
+            throw new NotSupportedException();
+        }
+
+        /// <summary>Not supported.</summary>
+        bool ISchemaProvider.RepairPositionColumn(TableRef tblName, string posName)
+        {
+            throw new NotSupportedException();
+        }
+
+        /// <summary>Not supported.</summary>
+        int ISchemaProvider.GetColumnMaxLength(TableRef tblName, string colName)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>Not supported.</summary>
+        IEnumerable<TableConstraintNamePair> ISchemaProvider.GetFKConstraintNames()
+        {
+            throw new NotSupportedException();
+        }
+
+        /// <summary>Not supported.</summary>
+        void ISchemaProvider.CreateTable(TableRef tbl, IEnumerable<Column> cols)
+        {
+            throw new NotSupportedException();
+        }
+
+        /// <summary>Not supported.</summary>
+        void ISchemaProvider.CreateTable(TableRef tblName, bool idAsIdentityColumn)
+        {
+            throw new NotSupportedException();
+        }
+
+        /// <summary>Not supported.</summary>
+        void ISchemaProvider.CreateTable(TableRef tblName, bool idAsIdentityColumn, bool createPrimaryKey)
+        {
+            throw new NotSupportedException();
+        }
+
+        /// <summary>Not supported.</summary>
+        void ISchemaProvider.CreateColumn(TableRef tblName, string colName, DbType type, int size, int scale, bool isNullable, DefaultConstraint defConstraint)
+        {
+            throw new NotSupportedException();
+        }
+
+        /// <summary>Not supported.</summary>
+        void ISchemaProvider.AlterColumn(TableRef tblName, string colName, DbType type, int size, int scale, bool isNullable, DefaultConstraint defConstraint)
+        {
+            throw new NotSupportedException();
+        }
+
+        /// <summary>Not supported.</summary>
+        void ISchemaProvider.CreateFKConstraint(TableRef tblName, TableRef refTblName, string colName, string constraintName, bool onDeleteCascade)
+        {
+            throw new NotSupportedException();
+        }
+
+        /// <summary>Not supported.</summary>
+        void ISchemaProvider.DropTable(TableRef tblName)
+        {
+            throw new NotSupportedException();
+        }
+
+        /// <summary>Not supported.</summary>
+        void ISchemaProvider.TruncateTable(TableRef tblName)
+        {
+            throw new NotSupportedException();
+        }
+
+        /// <summary>Not supported.</summary>
+        void ISchemaProvider.DropColumn(TableRef tblName, string colName)
+        {
+            throw new NotSupportedException();
+        }
+
+        /// <summary>Not supported.</summary>
+        void ISchemaProvider.DropFKConstraint(TableRef tblName, string fkName)
+        {
+            throw new NotSupportedException();
+        }
+
+        /// <summary>Not supported.</summary>
+        void ISchemaProvider.DropTrigger(TableRef objName, string triggerName)
+        {
+            throw new NotSupportedException();
+        }
+
+        /// <summary>Not supported.</summary>
+        void ISchemaProvider.DropView(TableRef viewName)
+        {
+            throw new NotSupportedException();
+        }
+
+        /// <summary>Not supported.</summary>
+        void ISchemaProvider.DropProcedure(string procName)
+        {
+            throw new NotSupportedException();
+        }
+
+        /// <summary>Not supported.</summary>
+        void ISchemaProvider.DropAllObjects()
+        {
+            throw new NotSupportedException();
+        }
+
+        /// <summary>Not supported.</summary>
+        bool ISchemaProvider.CheckIndexExists(TableRef tblName, string idxName)
+        {
+            throw new NotSupportedException();
+        }
+
+        /// <summary>Not supported.</summary>
+        void ISchemaProvider.DropIndex(TableRef tblName, string idxName)
+        {
+            throw new NotSupportedException();
+        }
+
+        /// <summary>Not supported.</summary>
+        void ISchemaProvider.CreateIndex(TableRef tblName, string idxName, bool unique, bool clustered, params string[] columns)
+        {
+            throw new NotSupportedException();
+        }
+
+        /// <summary>Not supported.</summary>
+        void ISchemaProvider.CreateUpdateRightsTrigger(string triggerName, TableRef tblName, List<RightsTrigger> tblList)
+        {
+            throw new NotSupportedException();
+        }
+
+        /// <summary>Not supported.</summary>
+        void ISchemaProvider.CreateEmptyRightsViewUnmaterialized(TableRef viewName)
+        {
+            throw new NotSupportedException();
+        }
+
+        /// <summary>Not supported.</summary>
+        void ISchemaProvider.CreateRightsViewUnmaterialized(TableRef viewName, TableRef tblName, TableRef tblNameRights, IList<ACL> acls)
+        {
+            throw new NotSupportedException();
+        }
+
+        /// <summary>Not supported.</summary>
+        void ISchemaProvider.CreateRefreshRightsOnProcedure(string procName, TableRef viewUnmaterializedName, TableRef tblName, TableRef tblNameRights)
+        {
+            throw new NotSupportedException();
+        }
+
+        /// <summary>Not supported.</summary>
+        void ISchemaProvider.ExecRefreshRightsOnProcedure(string procName)
+        {
+            throw new NotSupportedException();
+        }
+
+        /// <summary>Not supported.</summary>
+        void ISchemaProvider.CreatePositionColumnValidCheckProcedures(ILookup<string, KeyValuePair<string, string>> refSpecs)
+        {
+            throw new NotSupportedException();
+        }
+
+        /// <summary>Not supported.</summary>
+        void ISchemaProvider.RenameTable(TableRef oldTblName, TableRef newTblName)
+        {
+            throw new NotSupportedException();
+        }
+
+        /// <summary>Not supported.</summary>
+        void ISchemaProvider.RenameColumn(TableRef tblName, string oldColName, string newColName)
+        {
+            throw new NotSupportedException();
+        }
+
+        /// <summary>Not supported.</summary>
+        void ISchemaProvider.RenameFKConstraint(string oldConstraintName, string newConstraintName)
+        {
+            throw new NotSupportedException();
+        }
+
+        /// <summary>Not implemented.</summary>
+        string ISchemaProvider.DbTypeToNative(DbType type)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>Not implemented.</summary>
+        DbType ISchemaProvider.NativeToDbType(string type)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>Not supported.</summary>
+        bool ISchemaProvider.GetHasColumnDefaultValue(TableRef tblName, string colName)
+        {
+            throw new NotSupportedException();
+        }
+
+        /// <summary>Not supported.</summary>
+        void ISchemaProvider.EnsureInfrastructure()
+        {
+            throw new NotSupportedException();
         }
     }
 }

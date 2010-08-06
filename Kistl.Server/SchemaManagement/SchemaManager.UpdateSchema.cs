@@ -1,17 +1,16 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Kistl.API;
-using Kistl.API.Server;
-using Kistl.App.Base;
-using Kistl.App.Extensions;
-using Kistl.Server.Generators.Extensions;
-using Kistl.Server.Generators;
-using Kistl.API.Utils;
 
 namespace Kistl.Server.SchemaManagement
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using Kistl.API;
+    using Kistl.API.Utils;
+    using Kistl.App.Base;
+    using Kistl.App.Extensions;
+    using Kistl.Server.Generators;
+
     public partial class SchemaManager
     {
         public void UpdateSchema()
@@ -23,6 +22,8 @@ namespace Kistl.Server.SchemaManagement
                 db.BeginTransaction();
                 try
                 {
+                    db.EnsureInfrastructure();
+
                     UpdateTables();
                     UpdateRelations();
                     UpdateInheritance();

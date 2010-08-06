@@ -13,12 +13,24 @@ namespace Kistl.API.Server
     public struct TableRef : IComparable<TableRef>, ICloneable
     {
         private readonly string _database;
+
+        /// <summary>
+        /// The database containing this table.
+        /// </summary>
         public string Database { get { return _database; } }
 
         private readonly string _schema;
+
+        /// <summary>
+        /// The database schema containing this table.
+        /// </summary>
         public string Schema { get { return _schema; } }
 
         private readonly string _name;
+
+        /// <summary>
+        /// The name of the table.
+        /// </summary>
         public string Name { get { return _name; } }
 
         public TableRef(string database, string schema, string name)
@@ -106,7 +118,7 @@ namespace Kistl.API.Server
 
     public class TableConstraintNamePair
     {
-        public string TableName { get; set; }
+        public TableRef TableName { get; set; }
         public string ConstraintName { get; set; }
     }
 
@@ -204,7 +216,7 @@ namespace Kistl.API.Server
 
         public override string ToString()
         {
-            return string.Format("PC: {0}{1}", Source != null ? "." + Source : string.Empty , ColumnName);
+            return string.Format("PC: {0}{1}", Source != null ? "." + Source : string.Empty, ColumnName);
         }
     }
 
@@ -225,13 +237,19 @@ namespace Kistl.API.Server
     public class Column
     {
         public string Name { get; set; }
-        public System.Data.DbType Type { get; set; }
+        public DbType Type { get; set; }
         public int Size { get; set; }
+        public int? Scale { get; set; }
         public bool IsNullable { get; set; }
 
         public override string ToString()
         {
-            return string.Format("{0} {1}({2}) {3}", Name, Type, Size, IsNullable ? "NULL" : "NOT NULL");
+            return string.Format("{0} {1}({2}{3}) {3}",
+                Name,
+                Type,
+                Size,
+                Scale.HasValue ? ", " + Scale.Value : String.Empty,
+                IsNullable ? "NULL" : "NOT NULL");
         }
     }
 
@@ -267,13 +285,6 @@ namespace Kistl.API.Server
 
         #endregion
 
-        #region ZBox Schema Handling
-
-        string GetSavedSchema();
-        void SaveSchema(string schema);
-
-        #endregion
-
         #region Connection and Transaction Handling
 
         void Open(string connectionString);
@@ -293,18 +304,35 @@ namespace Kistl.API.Server
         #region Table Structure
 
         TableRef GetQualifiedTableName(string tblName);
+
         bool CheckTableExists(TableRef tblName);
         IEnumerable<TableRef> GetTableNames();
 
+        void CreateTable(TableRef tblName, IEnumerable<Column> cols);
+        void CreateTable(TableRef tblName, bool idAsIdentityColumn);
+        void CreateTable(TableRef tblName, bool idAsIdentityColumn, bool createPrimaryKey);
+
+        void RenameTable(TableRef oldTblName, TableRef newTblName);
+
+        void DropTable(TableRef tblName);
+
         bool CheckColumnExists(TableRef tblName, string colName);
         IEnumerable<string> GetTableColumnNames(TableRef tblName);
-        IEnumerable<Column> GetTableColumns(TableRef tbl);
+        IEnumerable<Column> GetTableColumns(TableRef tblName);
 
-        bool CheckFKConstraintExists(string fkName);
-        bool CheckIndexExists(TableRef tblName, string idxName);
+        void CreateColumn(TableRef tblName, string colName, DbType type, int size, int scale, bool isNullable, DefaultConstraint defConstraint);
+        void AlterColumn(TableRef tblName, string colName, DbType type, int size, int scale, bool isNullable, DefaultConstraint defConstraint);
+
+        void RenameColumn(TableRef tblName, string oldColName, string newColName);
+
+        bool GetIsColumnNullable(TableRef tblName, string colName);
+        bool GetHasColumnDefaultValue(TableRef tblName, string colName);
+        int GetColumnMaxLength(TableRef tblName, string colName);
+
+        void DropColumn(TableRef tblName, string colName);
 
         #endregion
-
+        
         #region Table Content
 
         bool CheckTableContainsData(TableRef tblName);
@@ -313,42 +341,58 @@ namespace Kistl.API.Server
         bool CheckColumnContainsValues(TableRef tblName, string colName);
         long CountRows(TableRef tableRef);
 
+        void TruncateTable(TableRef tblName);
+
+        void CopyColumnData(TableRef srcTblName, string srcColName, TableRef tblName, string colName);
+
         #endregion
 
+        #region Constraint and Index Management
+
+        bool CheckFKConstraintExists(string fkName);
+        IEnumerable<TableConstraintNamePair> GetFKConstraintNames();
+        void CreateFKConstraint(TableRef tblName, TableRef refTblName, string colName, string constraintName, bool onDeleteCascade);
+        void RenameFKConstraint(string oldConstraintName, string newConstraintName);
+        void DropFKConstraint(TableRef tblName, string fkName);
+
+        bool CheckIndexExists(TableRef tblName, string idxName);
+        void DropIndex(TableRef tblName, string idxName);
+
+        #endregion
+
+        #region Other DB Objects (Views, Triggers, Procedures)
+
         bool CheckViewExists(TableRef viewName);
+        void DropView(TableRef viewName);
+
         bool CheckTriggerExists(TableRef objName, string triggerName);
+        void DropTrigger(TableRef objName, string triggerName);
+
         bool CheckProcedureExists(string procName);
+        void DropProcedure(string procName);
+
+        /// <summary>
+        /// Setup schema provider-local structures
+        /// </summary>
+        void EnsureInfrastructure();
+        void DropAllObjects();
+
+        #endregion
+
+        #region ZBox Schema Handling
+
+        string GetSavedSchema();
+        void SaveSchema(string schema);
+
+        #endregion
+
+        #region zBox Accelerators
 
         bool CheckPositionColumnValidity(TableRef tblName, string positionColumnName);
         bool RepairPositionColumn(TableRef tblName, string positionColumnName);
 
-        bool GetIsColumnNullable(TableRef tblName, string colName);
-        bool GetHasColumnDefaultValue(TableRef tblName, string colName);
-        int GetColumnMaxLength(TableRef tblName, string colName);
+        #endregion
 
-        void CreateTable(TableRef tbl, IEnumerable<Column> cols);
-        void CreateTable(TableRef tblName, bool idAsIdentityColumn);
-        void CreateTable(TableRef tblName, bool idAsIdentityColumn, bool createPrimaryKey);
-        void CreateColumn(TableRef tblName, string colName, DbType type, int size, int scale, bool isNullable, DefaultConstraint defConstraint);
-        void AlterColumn(TableRef tblName, string colName, DbType type, int size, int scale, bool isNullable, DefaultConstraint defConstraint);
-        IEnumerable<TableConstraintNamePair> GetFKConstraintNames();
-        void CreateFKConstraint(TableRef tblName, TableRef refTblName, string colName, string constraintName, bool onDeleteCascade);
-
-        void RenameTable(TableRef oldTblName, TableRef newTblName);
-        void RenameColumn(TableRef tblName, string oldColName, string newColName);
-        void RenameFKConstraint(string oldConstraintName, string newConstraintName);
-
-        void TruncateTable(TableRef tblName);
-        void DropTable(TableRef tblName);
-        void DropColumn(TableRef tblName, string colName);
-        void DropFKConstraint(TableRef tblName, string fkName);
-        void DropTrigger(string triggerName);
-        void DropView(TableRef viewName);
-        void DropProcedure(string procName);
-        void DropIndex(TableRef tblName, string idxName);
-        void DropAllObjects();
-
-        void CopyColumnData(TableRef srcTblName, string srcColName, TableRef tblName, string colName);
         void MigrateFKs(TableRef srcTblName, string srcColName, TableRef tblName, string colName);
         void InsertFKs(TableRef srcTblName, string srcColName, TableRef tblName, string colName, string fkColName);
         void CopyFKs(TableRef srcTblName, string srcColName, TableRef destTblName, string destColName, string srcFKColName);
@@ -367,12 +411,12 @@ namespace Kistl.API.Server
         /// <param name="refSpecs">a lookup by table name into lists of (fkColumnName, referencedTableName) pairs</param>
         void CreatePositionColumnValidCheckProcedures(ILookup<string, KeyValuePair<string, string>> refSpecs);
 
-        IDataReader ReadTableData(TableRef tbl, IEnumerable<string> colNames);
+        IDataReader ReadTableData(TableRef tblName, IEnumerable<string> colNames);
         IDataReader ReadTableData(string sql);
-        IDataReader ReadJoin(TableRef tbl, IEnumerable<ProjectionColumn> colNames, IEnumerable<Join> joins);
+        IDataReader ReadJoin(TableRef tblName, IEnumerable<ProjectionColumn> colNames, IEnumerable<Join> joins);
 
-        void WriteTableData(TableRef destTbl, IDataReader source, IEnumerable<string> colNames);
-        void WriteTableData(TableRef destTbl, IEnumerable<string> colNames, IEnumerable values);
+        void WriteTableData(TableRef destTblName, IDataReader source, IEnumerable<string> colNames);
+        void WriteTableData(TableRef destTblName, IEnumerable<string> colNames, IEnumerable values);
 
         /// <summary>
         /// This can be called after significant changes to the database to cause the DBMS' optimizier to refresh its internal stats.
@@ -380,6 +424,5 @@ namespace Kistl.API.Server
         void RefreshDbStats();
 
         void ExecuteSqlResource(Type type, string scriptResourceName);
-
     }
 }

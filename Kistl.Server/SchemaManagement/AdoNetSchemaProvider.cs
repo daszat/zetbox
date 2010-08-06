@@ -192,63 +192,6 @@ namespace Kistl.Server.SchemaManagement
 
         #endregion
 
-        #region ZBox Schema Handling
-
-        public string GetSavedSchema()
-        {
-            var currentSchemaRef = GetQualifiedTableName("CurrentSchema");
-            if (!CheckTableExists(currentSchemaRef))
-            {
-                return String.Empty;
-            }
-
-            var count = (int)ExecuteScalar("SELECT COUNT(*) FROM " + FormatFullName(currentSchemaRef));
-            if (count == 0)
-            {
-                return String.Empty;
-            }
-            else if (count == 1)
-            {
-                return (string)ExecuteScalar(BuildSelect(currentSchemaRef, "Schema"));
-            }
-            else
-            {
-                throw new InvalidOperationException("There is more then one Schema saved in your Database");
-            }
-        }
-
-        // IN: schema
-        protected abstract string GetSchemaInsertStatement();
-        // IN: schema
-        protected abstract string GetSchemaUpdateStatement();
-
-        public void SaveSchema(string schema)
-        {
-            var currentSchemaRef = GetQualifiedTableName("CurrentSchema");
-            if (!CheckTableExists(currentSchemaRef))
-                throw new InvalidOperationException("Unable to save Schema. Schematable does not exist.");
-
-            using (Log.DebugTraceMethodCall("Saving schema"))
-            {
-                // Under SQL Server count(*) is a int
-                int count = (int)ExecuteScalar("SELECT COUNT(*) FROM " + FormatFullName(currentSchemaRef));
-                if (count == 0)
-                {
-                    ExecuteNonQuery(GetSchemaInsertStatement(), new Dictionary<string, object>() { { "@schema", schema } });
-                }
-                else if (count == 1)
-                {
-                    ExecuteNonQuery(GetSchemaUpdateStatement(), new Dictionary<string, object>() { { "@schema", schema } });
-                }
-                else
-                {
-                    throw new InvalidOperationException("There is more then one Schema saved in your Database");
-                }
-            }
-        }
-
-        #endregion
-
         #region Type Mapping
 
         public abstract string DbTypeToNative(DbType type);
@@ -268,102 +211,209 @@ namespace Kistl.Server.SchemaManagement
                 + FormatFullName(tbl);
         }
 
+        protected static string ConstructDefaultConstraintName(TableRef tblName, string colName)
+        {
+            return String.Format("default_{0}_{1}", tblName.Name, colName);
+        }
+
         #endregion
 
         #region Table Structure
 
-        protected abstract string FormatFullName(TableRef tbl);
-        protected abstract string FormatSchemaName(TableRef tbl);
+        protected abstract string FormatFullName(TableRef tblName);
+        protected abstract string FormatSchemaName(TableRef tblName);
 
-        public TableRef GetQualifiedTableName(string tbl)
+        public TableRef GetQualifiedTableName(string tblName)
         {
-            return new TableRef(db.Database, "dbo", tbl);
+            // keep "dbo" as default schema until we implement schemas in the infrastructure
+            return new TableRef(db.Database, "dbo", tblName);
         }
 
         public abstract bool CheckTableExists(TableRef tblName);
 
-        // OUT: schema, name
-        protected abstract string GetTableNamesStatement();
+        public abstract IEnumerable<TableRef> GetTableNames();
 
-        public IEnumerable<TableRef> GetTableNames()
+        public abstract void CreateTable(TableRef tblName, IEnumerable<Column> cols);
+
+        public void CreateTable(TableRef tblName, bool idAsIdentityColumn)
         {
-            return ExecuteReader(GetTableNamesStatement())
-                .Select(rd => new TableRef(db.Database, rd.GetString(0), rd.GetString(1)));
+            // create public key by default
+            CreateTable(tblName, idAsIdentityColumn, true);
         }
 
+        public abstract void CreateTable(TableRef tblName, bool idAsIdentityColumn, bool createPrimaryKey);
+
+        public abstract void RenameTable(TableRef oldTblName, TableRef newTblName);
+
+        public virtual void DropTable(TableRef tblName)
+        {
+            ExecuteNonQuery(String.Format("DROP TABLE {0}", FormatFullName(tblName)));
+        }
+        
         public abstract bool CheckColumnExists(TableRef tblName, string colName);
 
-        // IN: @schema, @table, OUT: name, type, max_length, is_nullable
-        protected abstract string GetTableColumnsStatement();
+        public abstract IEnumerable<string> GetTableColumnNames(TableRef tblName);
 
-        public IEnumerable<string> GetTableColumnNames(TableRef tbl)
+        public abstract IEnumerable<Column> GetTableColumns(TableRef tblName);
+
+        public void CreateColumn(TableRef tblName, string colName, DbType type, int size, int scale, bool isNullable, DefaultConstraint defConstraint)
         {
-            return ExecuteReader(
-                    GetTableColumnNamesStatement(),
-                    new Dictionary<string, object>() {
-                        { "@schema", tbl.Schema },
-                        { "@table", tbl.Name }
-                    })
-                .Select(rd => rd.GetString(0));
+            DoColumn(true, tblName, colName, type, size, scale, isNullable, defConstraint);
         }
 
-        // IN: @schema, @table, OUT: name
-        protected abstract string GetTableColumnNamesStatement();
-
-        public IEnumerable<Column> GetTableColumns(TableRef tbl)
+        public void AlterColumn(TableRef tblName, string colName, DbType type, int size, int scale, bool isNullable, DefaultConstraint defConstraint)
         {
-            return ExecuteReader(
-                    GetTableColumnsStatement(),
-                    new Dictionary<string, object>() {
-                        { "@schema", tbl.Schema },
-                        { "@table", tbl.Name } 
-                    })
-                .Select(rd =>
-                {
-                    var type = NativeToDbType(rd.GetString(1));
-                    int maxSize = int.MaxValue;
-                    switch (type)
-                    {
-                        case DbType.AnsiString:
-                        case DbType.AnsiStringFixedLength:
-                        case DbType.Binary:
-                        case DbType.String:
-                        case DbType.StringFixedLength:
-                        case DbType.Xml:
-                            maxSize = rd.GetInt16(2);
-                            break;
-                        default:
-                            break;
-                    }
-                    return new Column()
-                    {
-                        Name = rd.GetString(0),
-                        Type = type,
-                        Size = maxSize,
-                        IsNullable = rd.GetBoolean(3)
-                    };
-                });
+            DoColumn(false, tblName, colName, type, size, scale, isNullable, defConstraint);
         }
 
+        protected abstract void DoColumn(bool add, TableRef tblName, string colName, DbType type, int size, int scale, bool isNullable, DefaultConstraint defConstraint);
 
-        public abstract bool CheckFKConstraintExists(string fkName);
+        public abstract void RenameColumn(TableRef tblName, string oldColName, string newColName);
 
-        public abstract bool CheckIndexExists(TableRef tblName, string idxName);
+        public abstract bool GetIsColumnNullable(TableRef tblName, string colName);
+
+        public abstract bool GetHasColumnDefaultValue(TableRef tblName, string colName);
+
+        public abstract int GetColumnMaxLength(TableRef tblName, string colName);
+
+        public virtual void DropColumn(TableRef tblName, string colName)
+        {
+            ExecuteNonQuery(String.Format("ALTER TABLE {0} DROP COLUMN {1}",
+                FormatFullName(tblName),
+                QuoteIdentifier(colName)));
+        }
 
         #endregion
 
         #region Table Content
 
         public abstract bool CheckTableContainsData(TableRef tblName);
+
         public abstract bool CheckColumnContainsNulls(TableRef tblName, string colName);
+
         public abstract bool CheckColumnContainsUniqueValues(TableRef tblName, string colName);
 
-        public bool CheckColumnContainsValues(TableRef tbl, string colName)
-        {
-            return !CheckColumnContainsNulls(tbl, colName);
-        }
+        public abstract bool CheckColumnContainsValues(TableRef tblName, string colName);
 
         public abstract long CountRows(TableRef tblName);
+
+        public virtual void TruncateTable(TableRef tblName)
+        {
+            ExecuteNonQuery(String.Format("DELETE FROM {0}", FormatFullName(tblName)));
+        }
+
+        #endregion
+
+        #region Constraint and Index Management
+
+        public abstract bool CheckFKConstraintExists(string fkName);
+        public abstract IEnumerable<TableConstraintNamePair> GetFKConstraintNames();
+        public abstract void CreateFKConstraint(TableRef tblName, TableRef refTblName, string colName, string constraintName, bool onDeleteCascade);
+        public abstract void RenameFKConstraint(string oldConstraintName, string newConstraintName);
+        public virtual void DropFKConstraint(TableRef tblName, string fkName)
+        {
+            ExecuteNonQuery(String.Format("ALTER TABLE {0} DROP CONSTRAINT {1}",
+                FormatFullName(tblName),
+                QuoteIdentifier(fkName)));
+        }
+
+        public abstract bool CheckIndexExists(TableRef tblName, string idxName);
+        public abstract void DropIndex(TableRef tblName, string idxName);
+
+        #endregion
+
+        #region Other DB Objects (Views, Triggers, Procedures)
+
+        public abstract bool CheckViewExists(TableRef viewName);
+        public override void DropView(TableRef viewName)
+        {
+            ExecuteNonQuery(String.Format("DROP VIEW {0}",
+                FormatFullName(viewName)));
+        }
+
+        public abstract bool CheckTriggerExists(TableRef objName, string triggerName);
+        public abstract void DropTrigger(TableRef objName, string triggerName);
+
+        public abstract bool CheckProcedureExists(string procName);
+        public abstract void DropProcedure(string procName);
+
+        public abstract void EnsureInfrastructure();
+        public abstract void DropAllObjects();
+
+        #endregion
+
+        #region ZBox Schema Handling
+
+        public string GetSavedSchema()
+        {
+            var currentSchemaRef = GetQualifiedTableName("CurrentSchema");
+            if (!CheckTableExists(currentSchemaRef))
+            {
+                return String.Empty;
+            }
+
+            long count = CountRows(currentSchemaRef);
+            switch (count)
+            {
+                case 0:
+                    return String.Empty;
+                case 1:
+                    return (string)ExecuteScalar(BuildSelect(currentSchemaRef, "Schema"));
+                default:
+                    throw new InvalidOperationException("There is more then one Schema saved in your Database");
+            }
+        }
+
+        // IN: schema
+        protected abstract string GetSchemaInsertStatement();
+        // IN: schema
+        protected abstract string GetSchemaUpdateStatement();
+
+        public void SaveSchema(string schema)
+        {
+            var currentSchemaRef = GetQualifiedTableName("CurrentSchema");
+            if (!CheckTableExists(currentSchemaRef))
+                throw new InvalidOperationException("Unable to save Schema. Schematable does not exist.");
+
+            using (Log.DebugTraceMethodCall("Saving schema"))
+            {
+                long count = CountRows(currentSchemaRef);
+                switch (count)
+                {
+                    case 0:
+                        ExecuteNonQuery(GetSchemaInsertStatement(), new Dictionary<string, object>() { { "@schema", schema } });
+                        break;
+                    case 1:
+                        ExecuteNonQuery(GetSchemaUpdateStatement(), new Dictionary<string, object>() { { "@schema", schema } });
+                        break;
+                    default:
+                        throw new InvalidOperationException("There is more then one Schema saved in your Database");
+                }
+            }
+        }
+
+        #endregion
+
+        #region zBox Accelerators
+
+        public virtual bool CheckPositionColumnValidity(TableRef tblName, string posName)
+        {
+            var failed = CheckColumnContainsNulls(tblName, posName);
+            if (failed)
+            {
+                Log.WarnFormat("Order Column [{0}].[{1}] contains NULLs.", tblName, posName);
+                return false;
+            }
+
+            return CallRepairPositionColumn(false, tblName, posName);
+        }
+
+        public virtual bool RepairPositionColumn(TableRef tblName, string posName)
+        {
+            return CallRepairPositionColumn(true, tblName, posName);
+        }
+
+        protected abstract bool CallRepairPositionColumn(bool repair, TableRef tblName, string indexName);
 
         #endregion
 
@@ -381,39 +431,6 @@ namespace Kistl.Server.SchemaManagement
         // ---------------------------------------------------------------------------
         // ---------------------------------------------------------------------------
 
-
-        public abstract bool CheckViewExists(TableRef viewName);
-        public abstract bool CheckTriggerExists(TableRef objName, string triggerName);
-        public abstract bool CheckProcedureExists(string procName);
-
-        public abstract bool CheckPositionColumnValidity(TableRef tblName, string positionColumnName);
-        public abstract bool RepairPositionColumn(TableRef tblName, string positionColumnName);
-
-        public abstract bool GetIsColumnNullable(TableRef tblName, string colName);
-        public abstract bool GetHasColumnDefaultValue(TableRef tblName, string colName);
-        public abstract int GetColumnMaxLength(TableRef tblName, string colName);
-
-        public abstract void CreateTable(TableRef tbl, IEnumerable<Column> cols);
-        public abstract void CreateTable(TableRef tblName, bool idAsIdentityColumn);
-        public abstract void CreateTable(TableRef tblName, bool idAsIdentityColumn, bool createPrimaryKey);
-        public abstract void CreateColumn(TableRef tblName, string colName, DbType type, int size, int scale, bool isNullable, DefaultConstraint defConstraint);
-        public abstract void AlterColumn(TableRef tblName, string colName, DbType type, int size, int scale, bool isNullable, DefaultConstraint defConstraint);
-        public abstract IEnumerable<TableConstraintNamePair> GetFKConstraintNames();
-        public abstract void CreateFKConstraint(TableRef tblName, TableRef refTblName, string colName, string constraintName, bool onDeleteCascade);
-
-        public abstract void RenameTable(TableRef oldTblName, TableRef newTblName);
-        public abstract void RenameColumn(TableRef tblName, string oldColName, string newColName);
-        public abstract void RenameFKConstraint(string oldConstraintName, string newConstraintName);
-
-        public abstract void TruncateTable(TableRef tblName);
-        public abstract void DropTable(TableRef tblName);
-        public abstract void DropColumn(TableRef tblName, string colName);
-        public abstract void DropFKConstraint(TableRef tblName, string fkName);
-        public abstract void DropTrigger(string triggerName);
-        public abstract void DropView(TableRef viewName);
-        public abstract void DropProcedure(string procName);
-        public abstract void DropIndex(TableRef tblName, string idxName);
-        public abstract void DropAllObjects();
 
         public abstract void CopyColumnData(TableRef srcTblName, string srcColName, TableRef tblName, string colName);
         public abstract void MigrateFKs(TableRef srcTblName, string srcColName, TableRef tblName, string colName);

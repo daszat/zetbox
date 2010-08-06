@@ -245,7 +245,7 @@ namespace Kistl.Server.SchemaManagement
                     Log.WarnFormat("'{0}' on table '{1}' found in database but no relation object was defined", rel.ConstraintName, rel.TableName);
                     if (repair)
                     {
-                        db.DropFKConstraint(db.GetQualifiedTableName(rel.TableName), rel.ConstraintName);
+                        db.DropFKConstraint(rel.TableName, rel.ConstraintName);
                     }
                 }
             }
