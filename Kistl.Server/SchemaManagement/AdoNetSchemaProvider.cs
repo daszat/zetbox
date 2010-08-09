@@ -325,7 +325,7 @@ namespace Kistl.Server.SchemaManagement
         #region Other DB Objects (Views, Triggers, Procedures)
 
         public abstract bool CheckViewExists(TableRef viewName);
-        public override void DropView(TableRef viewName)
+        public virtual void DropView(TableRef viewName)
         {
             ExecuteNonQuery(String.Format("DROP VIEW {0}",
                 FormatFullName(viewName)));
