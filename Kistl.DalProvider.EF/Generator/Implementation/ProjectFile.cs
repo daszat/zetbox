@@ -69,7 +69,7 @@ namespace Kistl.DalProvider.EF.Generator.Implementation
             this.WriteLine(@"  <ItemGroup>");
             this.WriteLine(@"    <EmbeddedResource Include=""Model.csdl"" />");
             this.WriteLine(@"    <EmbeddedResource Include=""Model.msl"" />");
-            foreach (var provider in schemaProviders.Where(sp => !String.IsNullOrEmpty(sp.AdoNetProvider)))
+            foreach (var provider in schemaProviders.Where(sp => sp.IsStorageProvider))
             {
                 this.WriteLine(@"    <EmbeddedResource Include=""Model.{0}.ssdl"" />", provider.ConfigName);
             }

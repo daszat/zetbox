@@ -32,7 +32,7 @@ namespace Kistl.DalProvider.EF.Generator
                 // should be handled separately in the ProjectFile Template
                 this.RunTemplate(ctx, "Implementation.EfModel.ModelCsdl", "Model.csdl");
                 this.RunTemplate(ctx, "Implementation.EfModel.ModelMsl", "Model.msl");
-                foreach (var schemaProvider in SchemaProviders.Where(sp => !String.IsNullOrEmpty(sp.AdoNetProvider)))
+                foreach (var schemaProvider in SchemaProviders.Where(sp => sp.IsStorageProvider))
                 {
                     this.RunTemplate(ctx, "Implementation.EfModel.ModelSsdl", String.Format("Model.{0}.ssdl", schemaProvider.ConfigName), schemaProvider);
                 }

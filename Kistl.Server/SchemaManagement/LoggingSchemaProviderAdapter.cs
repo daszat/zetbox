@@ -37,6 +37,11 @@ namespace Kistl.Server.SchemaManagement
             get { return _provider.ManifestToken; }
         }
 
+        public bool IsStorageProvider
+        {
+            get { return _provider.IsStorageProvider; }
+        }
+
         public string GetSavedSchema()
         {
             return _provider.GetSavedSchema();

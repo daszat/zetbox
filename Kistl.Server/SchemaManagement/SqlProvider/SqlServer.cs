@@ -26,8 +26,9 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
         #region Meta data
 
         public override string ConfigName { get { return "MSSQL"; } }
-        public override string AdoNetProvider { get { return "SqlClient"; } }
+        public override string AdoNetProvider { get { return "System.Data.SqlClient"; } }
         public override string ManifestToken { get { return "2008"; } }
+        public override bool IsStorageProvider { get { return true; } }
 
         #endregion
 

@@ -282,6 +282,12 @@ namespace Kistl.API.Server
         string ConfigName { get; }
         string AdoNetProvider { get; }
         string ManifestToken { get; }
+        /// <summary>
+        /// Returns true if this ISchemaProvider implementation can be used as ZBox Storage provider.
+        /// Currently only SqlServer and Postgres are supported. OleDb is only capable of providing functionality
+        /// for Data/Schema migration.
+        /// </summary>
+        bool IsStorageProvider { get; }
 
         #endregion
 

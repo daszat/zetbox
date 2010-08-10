@@ -27,6 +27,7 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
         public override string ConfigName { get { return "POSTGRESQL"; } }
         public override string AdoNetProvider { get { return "Npgsql"; } }
         public override string ManifestToken { get { return "8.1.3"; } }
+        public override bool IsStorageProvider { get { return true; } }
 
         #endregion
 

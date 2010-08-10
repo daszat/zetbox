@@ -123,6 +123,8 @@ namespace Kistl.Server.SchemaManagement
         public abstract string ConfigName { get; }
         public abstract string AdoNetProvider { get; }
         public abstract string ManifestToken { get; }
+        /// <inheritdoc />
+        public abstract bool IsStorageProvider { get; }
 
         #endregion
 
