@@ -473,13 +473,10 @@ namespace Kistl.Client.Presentables
             var children = new List<ObjectClass>() { baseclass };
             CollectChildClasses(baseclass.ID, children);
 
-            DataObjectModel result = null;
-
             if (children.Count == 1)
             {
                 var targetType = baseclass.GetDescribedInterfaceType();
-                var item = this.DataContext.Create(targetType);
-                result = ModelFactory.CreateViewModel<DataObjectModel.Factory>().Invoke(DataContext, item);
+                CreateItemAndActivate(targetType);
             }
             else
             {
@@ -493,20 +490,21 @@ namespace Kistl.Client.Presentables
                             if (chosen != null)
                             {
                                 var targetType = ((ObjectClass)chosen.Object).GetDescribedInterfaceType();
-                                var item = this.DataContext.Create(targetType);
-                                result = ModelFactory.CreateViewModel<DataObjectModel.Factory>(item).Invoke(DataContext, item);
+                                CreateItemAndActivate(targetType);
                             }
                         }),
                     null), true);
             }
-
-            if (result != null)
-            {
-                AddItem(result);
-                SelectedItem = result;
-                ActivateItem(result, true);
-            }
         }
+
+        private void CreateItemAndActivate(InterfaceType targetType)
+        {
+            var item = this.DataContext.Create(targetType);
+            var result = ModelFactory.CreateViewModel<DataObjectModel.Factory>().Invoke(DataContext, item);
+            AddItem(result);
+            ActivateItem(result, true);
+        }
+
 
         public void AddItem(DataObjectModel item)
         {
@@ -514,6 +512,8 @@ namespace Kistl.Client.Presentables
 
             EnsureValueCache();
             _collection.Add(item.Object, false);
+
+            SelectedItem = item;
         }
 
         /// <summary>
@@ -533,7 +533,6 @@ namespace Kistl.Client.Presentables
                         if (chosen != null)
                         {
                             AddItem(chosen);
-                            SelectedItem = chosen;
                         }
                     }),
                     null), true);
