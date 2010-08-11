@@ -69,5 +69,12 @@ namespace Kistl.DalProvider.EF.Generator.Implementation.CompoundObjects
             this.WriteLine();
         }
 
+        protected override void ApplyEnumerationPropertyTemplate(EnumerationProperty prop)
+        {
+            this.WriteLine("        // enumeration property");
+            Implementation.ObjectClasses.EnumerationPropertyTemplate.Call(Host, ctx,
+                this.MembersToSerialize,
+                prop, true);
+        }
     }
 }
