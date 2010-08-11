@@ -28,13 +28,44 @@ namespace Kistl.API.Migration
 
         public object GetField(string name)
         {
+            return GetField(name, null);
+        }
+
+        public object GetField(string name, IConverter converter)
+        {
             if (!_values.ContainsKey(name)) throw new ArgumentOutOfRangeException("name", "Record does not contains field " + name);
-            return _values[name];
+            if (converter == null) return _values[name];
+            return converter.Convert(_values[name]);
+        }
+
+        public object GetField(string name, object ifNull)
+        {
+            return GetField(name, ifNull, null);
+        }
+        
+        public object GetField(string name, object ifNull, IConverter converter)
+        {
+            var v = GetField(name, converter);
+            if (v == null || v == DBNull.Value)
+            {
+                return ifNull;
+            }
+            else
+            {
+                return v;
+            }
         }
 
         public void SetField(string name, object val)
         {
+            if (string.IsNullOrEmpty(name)) throw new ArgumentNullException("name");
             _values[name] = val;
+        }
+
+        public void SetField(string name, object val, IConverter converter)
+        {
+            if (converter == null) throw new ArgumentNullException("converter");
+            SetField(name, converter.Convert(val));
         }
 
         public IEnumerable<string> GetFieldNames()

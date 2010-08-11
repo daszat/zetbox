@@ -143,6 +143,8 @@ namespace Kistl.API.Migration
             return val;
         }
 
+        private static IConverter _dateTimeConverter = new SqlServerDateTimeConverter();
+
         private object ConvertType(SourceColumn col, object src_val)
         {
             if (src_val == null || src_val == DBNull.Value) return src_val;
@@ -205,7 +207,7 @@ namespace Kistl.API.Migration
                         case DbType.Date:
                         case DbType.DateTime:
                         case DbType.DateTime2:
-                            dest_val = Convert.ToDateTime(src_val, CultureInfo.GetCultureInfo("de-AT"));
+                            dest_val = _dateTimeConverter.Convert(src_val);
                             break;
 
                         case DbType.Single:
@@ -265,6 +267,10 @@ namespace Kistl.API.Migration
                 catch
                 {
                     dest_val = DBNull.Value;
+                }
+
+                if (dest_val == null || dest_val == DBNull.Value)
+                {
                     AddError(string.Format("Unable to convert '{{0}}' to {0}", destType), src_val);
                 }
             }
