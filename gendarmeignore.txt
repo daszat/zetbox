@@ -68,6 +68,7 @@ M: System.Delegate Kistl.Client.WPF.View.GridCells.MultilineStringValue::_Create
 M: System.Delegate Kistl.Client.WPF.View.GUI.MultiLineEditorDialog::_CreateDelegate(System.Type,System.String)
 
 
+
 # Called by a lambda
 M: System.Boolean System.Linq.Dynamic.ExpressionParser::IsBetterThan(System.Linq.Expressions.Expression[],System.Linq.Dynamic.ExpressionParser/MethodData,System.Linq.Dynamic.ExpressionParser/MethodData)
 
