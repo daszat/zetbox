@@ -104,48 +104,12 @@ namespace Kistl.Client.Presentables
         {
             get
             {
-                GridDisplayConfiguration result = new GridDisplayConfiguration()
-                {
-                    ShowIcon = ReferencedClass.ShowIconInLists,
-                    ShowId = ReferencedClass.ShowIdInLists,
-                    ShowName = ReferencedClass.ShowNameInLists
-                };
-
-                var group = this.ReferencedClass.GetAllProperties()
-                    .Where(p => (p.CategoryTags ?? String.Empty).Split(',', ' ').Contains("Summary"));
-                if (group.Count() == 0)
-                {
-                    group = this.ReferencedClass.GetAllProperties().Where(p =>
-                    {
-                        var orp = p as ObjectReferenceProperty;
-                        if (orp == null) { return true; }
-
-                        switch (orp.RelationEnd.Parent.GetRelationType())
-                        {
-                            case RelationType.n_m:
-                                return false; // don't display lists in grids
-                            case RelationType.one_n:
-                                return orp.RelationEnd.Multiplicity.UpperBound() > 1; // if we're "n", the navigator is a pointer, not a list
-                            case RelationType.one_one:
-                                return true; // can always display
-                            default:
-                                return false; // something went wrong
-                        }
-                    });
-                }
-
-                result.Columns = group
-                    .Select(p => new ColumnDisplayModel()
-                    {
-                        Header = p.Name,
-                        Name = p.Name,
-                        ControlKind = p.ValueModelDescriptor.GetDefaultGridCellKind()
-                    })
-                    .ToList();
+                GridDisplayConfiguration result = new GridDisplayConfiguration();
+                result.BuildColumns(this.ReferencedClass);
                 return result;
             }
         }
-
+        
         private DataObjectModel _selectedItem;
         public DataObjectModel SelectedItem
         {

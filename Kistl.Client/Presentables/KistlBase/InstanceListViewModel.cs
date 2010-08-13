@@ -16,6 +16,12 @@ namespace Kistl.Client.Presentables.KistlBase
     using Kistl.App.GUI;
     using ObjectEditor = Kistl.Client.Presentables.ObjectEditor;
 
+    public enum InstanceListViewMethod
+    {
+        List = 1,
+        Details = 2,
+    }
+
     /// <summary>
     /// Models the specialities of <see cref="DataType"/>s.
     /// </summary>
@@ -23,7 +29,7 @@ namespace Kistl.Client.Presentables.KistlBase
     public class InstanceListViewModel
         : ViewModel, IViewModelWithIcon, IRefreshCommandListener
     {
-        public new delegate InstanceListViewModel Factory(IKistlContext dataCtx, DataType type, IQueryable qry);
+        public new delegate InstanceListViewModel Factory(IKistlContext dataCtx, ObjectClass type, IQueryable qry);
 
         protected readonly Func<IKistlContext> ctxFactory;
 
@@ -40,7 +46,7 @@ namespace Kistl.Client.Presentables.KistlBase
             IViewModelDependencies appCtx,
             KistlConfig config,
             IKistlContext dataCtx,
-            DataType type,
+            ObjectClass type,
             IQueryable qry,
             Func<IKistlContext> ctxFactory)
             : base(appCtx, dataCtx)
@@ -54,7 +60,7 @@ namespace Kistl.Client.Presentables.KistlBase
             }
             else
             {
-                this._type = FrozenContext.GetQuery<DataType>().SingleOrDefault(dt => dt.GetDataType() == qry.ElementType);
+                this._type = FrozenContext.GetQuery<ObjectClass>().SingleOrDefault(dt => dt.GetDataType() == qry.ElementType);
                 if (_type == null) throw new ArgumentException("Cannot resolve type from Query");
             }
             if (qry == null)
@@ -71,11 +77,7 @@ namespace Kistl.Client.Presentables.KistlBase
             this.ctxFactory = ctxFactory;
         }
 
-        public IQueryable GetTypedQuery<T>() where T : class, IDataObject
-        {
-            return DataContext.GetQuery<T>();
-        }
-
+        #region Kind Management
         private ControlKind _requestedEditorKind;
         public ControlKind RequestedEditorKind
         {
@@ -109,9 +111,9 @@ namespace Kistl.Client.Presentables.KistlBase
                 }
             }
         }
+        #endregion
 
-
-        #region Public interface
+        #region Filter Collection
         private ObservableCollection<IFilterExpression> _filter = null;
         public ICollection<IFilterExpression> Filter
         {
@@ -173,7 +175,9 @@ namespace Kistl.Client.Presentables.KistlBase
                 return Filter.OfType<IUIFilterExpression>();
             }
         }
+        #endregion
 
+        #region Commands
         private ObservableCollection<ICommand> _commands = null;
         public ObservableCollection<ICommand> Commands
         {
@@ -229,9 +233,11 @@ namespace Kistl.Client.Presentables.KistlBase
                 return _NewCommand;
             }
         }
+        #endregion
 
-        private DataType _type;
-        public DataType DataType
+        #region Type Management
+        private ObjectClass _type;
+        public ObjectClass DataType
         {
             get
             {
@@ -240,19 +246,29 @@ namespace Kistl.Client.Presentables.KistlBase
         }
 
 
-        private Kistl.Client.Presentables.DataTypeModel _dataTypeMdl = null;
-        public Kistl.Client.Presentables.DataTypeModel DataTypeModel
+        private Kistl.Client.Presentables.ObjectClassModel _dataTypeMdl = null;
+        public Kistl.Client.Presentables.ObjectClassModel DataTypeModel
         {
             get
             {
                 if (_dataTypeMdl == null)
                 {
-                    _dataTypeMdl = ModelFactory.CreateViewModel<DataTypeModel.Factory>(_type).Invoke(DataContext, _type);
+                    _dataTypeMdl = ModelFactory.CreateViewModel<ObjectClassModel.Factory>(_type).Invoke(DataContext, _type);
                 }
                 return _dataTypeMdl;
             }
         }
 
+        public InterfaceType InterfaceType
+        {
+            get
+            {
+                return DataContext.GetInterfaceType(_type.GetDataType());
+            }
+        }
+        #endregion
+
+        #region Instances
         // TODO: make readonly, take care of new and deleted+submitted objects
         private ObservableCollection<DataObjectModel> _instances = null;
         public ObservableCollection<DataObjectModel> Instances
@@ -313,15 +329,9 @@ namespace Kistl.Client.Presentables.KistlBase
                 ExecutePostFilter();
             }
         }
+        #endregion
 
-        public InterfaceType InterfaceType
-        {
-            get
-            {
-                return DataContext.GetInterfaceType(_type.GetDataType());
-            }
-        }
-
+        #region Opening items
         public void OpenObjects(IEnumerable<DataObjectModel> objects)
         {
             if (objects == null) throw new ArgumentNullException("objects");
@@ -349,10 +359,9 @@ namespace Kistl.Client.Presentables.KistlBase
                 OpenObjects(objects);
             }
         }
-
         #endregion
 
-        #region Utilities and UI callbacks
+        #region UI
         /// <returns>the default icon of this <see cref="DataType"/></returns>
         public Kistl.App.GUI.Icon Icon
         {
@@ -378,7 +387,35 @@ namespace Kistl.Client.Presentables.KistlBase
             return Name;
         }
 
+        private InstanceListViewMethod _viewMethod = InstanceListViewMethod.List;
+        public InstanceListViewMethod ViewMethod
+        {
+            get
+            {
+                return _viewMethod;
+            }
+            set
+            {
+                if (_viewMethod != value)
+                {
+                    _viewMethod = value;
+                    OnPropertyChanged("ViewMethod");
+                }
+            }
+        }
 
+        public virtual GridDisplayConfiguration DisplayedColumns
+        {
+            get
+            {
+                GridDisplayConfiguration result = new GridDisplayConfiguration();
+                result.BuildColumns(this._type);
+                return result;
+            }
+        }
+        #endregion
+
+        #region Execute Filter and fill List
         private IQueryable _query;
         protected virtual IQueryable GetQuery()
         {
@@ -392,6 +429,10 @@ namespace Kistl.Client.Presentables.KistlBase
             return result;
         }
 
+        public IQueryable GetTypedQuery<T>() where T : class, IDataObject
+        {
+            return DataContext.GetQuery<T>();
+        }
 
         /// <summary>
         /// Loads the instances of this DataType and adds them to the Instances collection

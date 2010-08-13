@@ -14,7 +14,7 @@ namespace Kistl.Client.Presentables
         : ViewModel, IRefreshCommandListener
     {
         public new delegate DataObjectSelectionTaskModel Factory(IKistlContext dataCtx,
-            DataType type,
+            ObjectClass type,
             IQueryable qry,
             Action<DataObjectModel> callback,
             IList<CommandModel> additionalActions);
@@ -33,7 +33,7 @@ namespace Kistl.Client.Presentables
         /// <param name="additionalActions"></param>
         public DataObjectSelectionTaskModel(
             IViewModelDependencies appCtx, IKistlContext dataCtx,
-            DataType type,
+            ObjectClass type,
             IQueryable qry,
             Action<DataObjectModel> callback,
             IList<CommandModel> additionalActions)

@@ -28,7 +28,7 @@ namespace Kistl.Client.WPF.View.KistlBase
     public partial class ObjectReferenceCollectionEditor
         : PropertyEditor, IHasViewModel<ObjectCollectionModel>
     {
-
+        #region Sort dependency properties
         public static readonly DependencyProperty SortPropertyNameProperty =
             DependencyProperty.RegisterAttached("SortPropertyName", typeof(string), typeof(ObjectReferenceCollectionEditor));
 
@@ -43,12 +43,14 @@ namespace Kistl.Client.WPF.View.KistlBase
             if (obj == null) throw new ArgumentNullException("obj");
             obj.SetValue(SortPropertyNameProperty, value);
         }
+        #endregion
 
         public ObjectReferenceCollectionEditor()
         {
             InitializeComponent();
         }
 
+        #region Item Management
         private void ItemActivatedHandler(object sender, MouseButtonEventArgs e)
         {
             if (ViewModel.SelectedItem != null)
@@ -57,6 +59,17 @@ namespace Kistl.Client.WPF.View.KistlBase
             }
         }
 
+        private void lst_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.OriginalSource == lst)
+            {
+                e.RemovedItems.ForEach<DataObjectModel>(i => ViewModel.SelectedItems.Remove(i));
+                e.AddedItems.ForEach<DataObjectModel>(i => ViewModel.SelectedItems.Add(i));
+            }
+        }
+        #endregion
+
+        #region RefreshGridView
         private void RefreshGridView()
         {
             GridView view = new GridView() { AllowsColumnReorder = true };
@@ -107,6 +120,17 @@ namespace Kistl.Client.WPF.View.KistlBase
 
         }
 
+        protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
+        {
+            base.OnPropertyChanged(e);
+            if (e.Property == FrameworkElement.DataContextProperty)
+            {
+                RefreshGridView();
+            }
+        }
+        #endregion
+
+        #region HeaderClickManagement
         GridViewColumnHeader _lastHeaderClicked = null;
         ListSortDirection _lastDirection = ListSortDirection.Ascending;
 
@@ -157,15 +181,7 @@ namespace Kistl.Client.WPF.View.KistlBase
                 }
             }
         }
-
-        protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
-        {
-            base.OnPropertyChanged(e);
-            if (e.Property == FrameworkElement.DataContextProperty)
-            {
-                RefreshGridView();
-            }
-        }
+        #endregion
 
         #region IHasViewModel<ObjectCollectionModel> Members
 
@@ -175,14 +191,5 @@ namespace Kistl.Client.WPF.View.KistlBase
         }
 
         #endregion
-
-        private void lst_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (e.OriginalSource == lst)
-            {
-                e.RemovedItems.ForEach<DataObjectModel>(i => ViewModel.SelectedItems.Remove(i));
-                e.AddedItems.ForEach<DataObjectModel>(i => ViewModel.SelectedItems.Add(i));
-            }
-        }
     }
 }

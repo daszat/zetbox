@@ -48,20 +48,20 @@
             </ToolBar.ItemTemplate>
         </ToolBar>
 
-        <ListView x:Name="ClassList"
+        <ListView x:Name="lst"
                   Margin="10"
                   BorderThickness="0"
                   ItemsSource="{Binding InstancesFiltered}"
                   ItemTemplateSelector="{StaticResource listItemTemplateSelector}"
-                  SelectionChanged="ClassList_SelectionChanged">
+                  SelectionChanged="lst_SelectionChanged">
 
-            <ListView.Template>
+            <!--<ListView.Template>
                 <ControlTemplate>
                     <ScrollViewer HorizontalScrollBarVisibility="Visible">
                         <StackPanel IsItemsHost="True" />
                     </ScrollViewer>
                 </ControlTemplate>
-            </ListView.Template>
+            </ListView.Template>-->
 
             <ListView.Resources>
                 <Style TargetType="ListViewItem">
