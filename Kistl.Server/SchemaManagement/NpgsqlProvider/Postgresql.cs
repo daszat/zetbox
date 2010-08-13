@@ -241,7 +241,7 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
             ExecuteNonQuery(String.Format(
                 "ALTER TABLE {0} RENAME TO {1}",
                 FormatFullName(oldTblName),
-                FormatFullName(newTblName)));
+                QuoteIdentifier(newTblName.Name)));
         }
 
         public override bool CheckColumnExists(TableRef tblName, string colName)
@@ -277,7 +277,24 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
 
         public override IEnumerable<Column> GetTableColumns(TableRef tblName)
         {
-            throw new NotImplementedException();
+            return ExecuteReader(
+                @"SELECT a.attname, t.typname, a.atttypmod - 4 as len, not a.attnotnull as nullable, t.typlen < 0 as variable_length
+                    FROM pg_attribute a
+                        JOIN pg_class c ON (a.attrelid = c.oid)
+                        JOIN pg_namespace n ON (c.relnamespace = n.oid)
+                        JOIN pg_type t ON (a.atttypid = t.oid)
+                    WHERE n.nspname = @schema AND c.relname = @table and c.relkind = 'r' AND a.attnum >= 0",
+                new Dictionary<string, object>() {
+                    { "@schema", tblName.Schema },
+                    { "@table", tblName.Name }
+                })
+                .Select(rd => new Column()
+                {
+                    Name = rd.GetString(0),
+                    Type = NativeToDbType(rd.GetString(1)),
+                    Size = rd.GetBoolean(4) ? rd.GetInt16(2) : int.MaxValue,
+                    IsNullable = rd.GetBoolean(3)
+                });
         }
 
         protected override void DoColumn(bool add, TableRef tblName, string colName, DbType type, int size, int scale, bool isNullable, DefaultConstraint defConstraint)

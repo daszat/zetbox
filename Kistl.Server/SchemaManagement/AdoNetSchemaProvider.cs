@@ -227,6 +227,7 @@ namespace Kistl.Server.SchemaManagement
 
         public TableRef GetQualifiedTableName(string tblName)
         {
+            if (db == null) throw new InvalidOperationException("cannot qualify table name without database connection");
             // keep "dbo" as default schema until we implement schemas in the infrastructure
             return new TableRef(db.Database, "dbo", tblName);
         }
