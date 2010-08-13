@@ -2,12 +2,13 @@
 namespace Kistl.Server.SchemaManagement
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.Data;
     using System.Linq;
     using System.Text;
     using Kistl.API.Server;
-    using System.Collections;
+    using Kistl.API.Utils;
 
     public class LoggingSchemaProviderAdapter
         : ISchemaProvider
@@ -57,14 +58,23 @@ namespace Kistl.Server.SchemaManagement
             _provider.Open(connectionString);
         }
 
+        private Guid? _currentTxId;
         public void BeginTransaction()
         {
+            if (_currentTxId.HasValue)
+            {
+                Log.WarnFormat("Resetting transaction {0}", _currentTxId);
+            }
+            _currentTxId = Guid.NewGuid();
+            Log.InfoFormat("Begin Transaction {0}", _currentTxId);
             _provider.BeginTransaction();
         }
 
         public void CommitTransaction()
         {
             _provider.CommitTransaction();
+            Log.InfoFormat("Committed Transaction {0}", _currentTxId);
+            _currentTxId = null;
         }
 
         public void RollbackTransaction()
@@ -349,7 +359,7 @@ namespace Kistl.Server.SchemaManagement
             _provider.ExecRefreshRightsOnProcedure(procName);
         }
 
-        public void CreatePositionColumnValidCheckProcedures(ILookup<string, KeyValuePair<string, string>> refSpecs)
+        public void CreatePositionColumnValidCheckProcedures(ILookup<TableRef, KeyValuePair<TableRef, string>> refSpecs)
         {
             _provider.CreatePositionColumnValidCheckProcedures(refSpecs);
         }
@@ -396,7 +406,16 @@ namespace Kistl.Server.SchemaManagement
 
         public void EnsureInfrastructure()
         {
+            Log.Debug("Ensuring Infrastructure is available on target");
             _provider.EnsureInfrastructure();
+        }
+
+        public void WipeDatabase()
+        {
+            using (Log.InfoTraceMethodCall("Wiping database"))
+            {
+                _provider.WipeDatabase();
+            }
         }
     }
 }

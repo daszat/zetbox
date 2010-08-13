@@ -10,7 +10,7 @@ IF ERRORLEVEL 1 GOTO FAIL
 bin\debug\bin\Server\Kistl.Server.Service.exe Kistl.Server.Service\DefaultConfig.xml -import Kistl.Server\Database\SchemaMigrationProjects.xml ZBox.App.SchemaMigration
 IF ERRORLEVEL 1 GOTO FAIL
 
-bin\debug\bin\Server\Ini50.Migrate.exe Ini50.Migrate\ExampleConfig.xml
+bin\debug\bin\Server\Ini50.Migrate.exe Ini50.Migrate\DefaultConfig.xml
 IF ERRORLEVEL 1 GOTO FAIL
 
 echo ********************************************************************************

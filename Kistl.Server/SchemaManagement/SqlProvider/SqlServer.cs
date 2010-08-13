@@ -581,8 +581,19 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
                 cmd.Parameters.Add("@result", SqlDbType.Bit).Direction = ParameterDirection.Output;
 
                 QueryLog.Debug(cmd.CommandText);
-                cmd.ExecuteNonQuery();
-
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                }
+                catch
+                {
+                    LogError("RepairPositionColumnValidityByTable(@repair, @tblName, @colName)",
+                        new Dictionary<string, object>() {
+                            { "@repair", repair },
+                            { "@tblName", tblName.Name },
+                            { "@colName", indexName },
+                        });
+                }
                 return (bool)cmd.Parameters["@result"].Value;
             }
         }
@@ -807,7 +818,7 @@ FROM (", viewName.Schema, viewName.Name);
             ExecuteNonQuery(string.Format(@"EXEC [{0}]", procName));
         }
 
-        public override void CreatePositionColumnValidCheckProcedures(ILookup<string, KeyValuePair<string, string>> refSpecs)
+        public override void CreatePositionColumnValidCheckProcedures(ILookup<TableRef, KeyValuePair<TableRef, string>> refSpecs)
         {
             if (refSpecs == null) { throw new ArgumentNullException("refSpecs"); }
 
@@ -830,7 +841,7 @@ FROM (", viewName.Schema, viewName.Name);
             createTableProcQuery.AppendLine("SET @result = 0");
             foreach (var tbl in refSpecs)
             {
-                createTableProcQuery.AppendFormat("IF @tblName IS NULL OR @tblName = '{0}' BEGIN", tbl.Key);
+                createTableProcQuery.AppendFormat("IF @tblName IS NULL OR @tblName = '{0}' BEGIN", FormatSchemaName(tbl.Key));
                 createTableProcQuery.AppendLine();
                 createTableProcQuery.Append("\t");
                 foreach (var refSpec in tbl)
@@ -839,8 +850,8 @@ FROM (", viewName.Schema, viewName.Name);
                     createTableProcQuery.AppendLine();
                     createTableProcQuery.AppendFormat(
                         "\t\tEXECUTE RepairPositionColumnValidity @repair=@repair, @tblName='{0}', @refTblName='{1}', @fkColumnName='{2}', @fkPositionName='{2}{3}', @result = @result OUTPUT",
-                        tbl.Key,
-                        refSpec.Key,
+                        FormatSchemaName(tbl.Key),
+                        FormatSchemaName(refSpec.Key),
                         refSpec.Value,
                         Kistl.API.Helper.PositionSuffix);
                     createTableProcQuery.AppendLine();
@@ -999,10 +1010,14 @@ FROM (", viewName.Schema, viewName.Name);
             cmd.ExecuteNonQuery();
         }
 
-
         public override void RefreshDbStats()
         {
             // do nothing
+        }
+
+        public override void WipeDatabase()
+        {
+            ExecuteSqlResource(this.GetType(), "Kistl.Server.SchemaManagement.SqlProvider.Scripts.DropTables.sql");
         }
     }
 }

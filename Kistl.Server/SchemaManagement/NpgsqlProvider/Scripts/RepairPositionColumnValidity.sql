@@ -1,4 +1,4 @@
-﻿CREATE OR REPLACE FUNCTION "RepairPositionColumnValidity"(
+﻿CREATE OR REPLACE FUNCTION "dbo"."RepairPositionColumnValidity"(
 	IN repair boolean,
 	IN tblName text,
 	IN refTblName text,
@@ -14,13 +14,13 @@ DECLARE
 	-- over $fkColumnName and using SELECT DISTINCT $fkColumnName
 	-- Since this creates more overhead for "normal" operations, this 
 	-- option is currently not implemented
-	idSelectStatement CONSTANT text DEFAULT $$SELECT "ID" FROM $$ || quote_ident(refTblName);
+	idSelectStatement CONSTANT text DEFAULT $$SELECT "ID" FROM $$ || refTblName;
 	idToCheckRec RECORD;
 	
 	duplicateStatement CONSTANT text DEFAULT $$
 		SELECT COUNT(*) > 0
 		FROM (SELECT $$ || quote_ident(fkPositionName) || $$
-				FROM $$ || quote_ident(tblName) || $$
+				FROM $$ || tblName || $$
 				WHERE $$ || quote_ident(fkColumnName) || $$ = $1
 				GROUP BY $$ || quote_ident(fkPositionName) || $$
 				HAVING COUNT(*) > 1
@@ -31,18 +31,18 @@ DECLARE
 	repairStatement CONSTANT text DEFAULT $$
 		WITH numbered_rows ("ID", "rowNum") AS 
 			(SELECT "ID", ROW_NUMBER() OVER (ORDER BY $$ || quote_ident(fkPositionName) || $$)
-			 FROM $$ || quote_ident(tblName) || $$
+			 FROM $$ || tblName || $$
 			 WHERE $$ || quote_ident(fkColumnName) || $$ = $1)
-		UPDATE $$ || quote_ident(tblName) || $$
+		UPDATE $$ || tblName || $$
 		SET $$ || quote_ident(fkPositionName) || $$ = (rowNum * 100)
-		FROM $$ || quote_ident(tblName) || $$ tbl
+		FROM $$ || tblName || $$ tbl
 			INNER JOIN numbered_rows nr ON (tbl.ID = nr.ID)
 		WHERE $$ || quote_ident(fkColumnName) || $$ = $1 $$;
 
 	hasDuplicates boolean;
 	
 	setZeroStatement CONSTANT text DEFAULT $$
-		UPDATE $$ || quote_ident(tblName) || $$
+		UPDATE $$ || tblName || $$
 		SET $$ || quote_ident(fkPositionName) || $$ = 0
 		WHERE $$ || quote_ident(fkPositionName) || $$ IS NULL
 			AND $$ || quote_ident(fkColumnName) || $$ IS NOT NULL $$;

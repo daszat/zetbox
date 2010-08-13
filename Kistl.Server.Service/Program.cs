@@ -100,6 +100,9 @@ namespace Kistl.Server.Service
                         { "fix", "[DEVEL] run ad-hoc fixes against the database",
                             v => { if (v != null) { actions.Add((c, args) => c.Resolve<Server>().RunFixes()); } }
                             },
+                        { "wipe", "[DEVEL] completely wipe the contents of the database",
+                            v => { if (v != null) { actions.Add((c, args) => c.Resolve<Server>().WipeDatabase()); } }
+                            },
                         { "benchmark", "[DEVEL] run ad-hoc benchmarks against the database",
                             v => { if (v != null) {
                 				actions.Add((c, args) => c.Resolve<Server>().RunBenchmarks());

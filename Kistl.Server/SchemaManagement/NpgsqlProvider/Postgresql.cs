@@ -189,7 +189,7 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
 
         public override IEnumerable<TableRef> GetTableNames()
         {
-            return ExecuteReader("SELECT schemaname, tablename FROM pg_tables")
+            return ExecuteReader("SELECT schemaname, tablename FROM pg_tables WHERE schemaname not in ('information_schema', 'pg_catalog')")
                 .Select(rd => new TableRef(CurrentConnection.Database, rd.GetString(0), rd.GetString(1)));
         }
 
@@ -311,7 +311,7 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
             var constrName = ConstructDefaultConstraintName(tblName, colName);
             if (GetHasColumnDefaultValue(tblName, colName))
             {
-                ExecuteNonQuery(String.Format("ALTER TABLE {0} DROP CONSTRAINT {1}", FormatFullName(tblName), constrName));
+                ExecuteNonQuery(String.Format("ALTER TABLE {0} ALTER COLUMN {0} DROP DEFAULT", FormatFullName(tblName), QuoteIdentifier(colName)));
             }
 
             if (defConstraint != null)
@@ -337,7 +337,7 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
                 {
                     throw new ArgumentOutOfRangeException("defConstraint", "Unsupported default constraint " + defConstraint.GetType().Name);
                 }
-                ExecuteNonQuery(string.Format("ALTER TABLE {0} ADD CONSTRAINT {1} DEFAULT {2} FOR {3}", FormatFullName(tblName), constrName, defValue, colName));
+                ExecuteNonQuery(string.Format("ALTER TABLE {0} ALTER COLUMN {1} SET DEFAULT {2}", FormatFullName(tblName), QuoteIdentifier(colName), defValue));
             }
         }
 
@@ -467,7 +467,8 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
                 {
                     ConstraintName = rd.GetString(2),
                     TableName = new TableRef(CurrentConnection.Database, rd.GetString(0), rd.GetString(1))
-                });
+                })
+                .ToList();
         }
 
         public override void CreateFKConstraint(TableRef tblName, TableRef refTblName, string colName, string constraintName, bool onDeleteCascade)
@@ -534,21 +535,22 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
 
         public override bool CheckTriggerExists(TableRef objName, string triggerName)
         {
-            return false;
-            // TODO
-            //return (int)ExecuteScalar(
-            //    "SELECT COUNT(*) FROM sys.objects WHERE object_id = OBJECT_ID(@trigger) AND parent_object_id = OBJECT_ID(@parent) AND type IN (N'TR')",
-            //    new Dictionary<string, object>(){
-            //        { "@trigger", triggerName },
-            //        { "@parent", FormatFullName(objName) },
-            //    }) > 0;
+            return (bool)ExecuteScalar(@"
+                SELECT count(*) > 0
+                FROM pg_proc p
+                    JOIN pg_namespace n ON p.pronamespace = n.oid
+                    JOIN pg_type t ON p.prorettype = t.oid
+                WHERE n.nspname = @schema AND p.proname = @trigger AND t.typname = 'trigger'",
+                new Dictionary<string, object>(){
+                    { "@schema", objName.Schema },
+                    { "@trigger", triggerName },
+                });
         }
 
         public override void DropTrigger(TableRef objName, string triggerName)
         {
-            ExecuteNonQuery(String.Format("DROP TRIGGER {0} ON {1} RESTRICT",
-                QuoteIdentifier(triggerName),
-                FormatFullName(objName)));
+            ExecuteNonQuery(String.Format("DROP FUNCTION \"dbo\".{0}() CASCADE",
+                QuoteIdentifier(triggerName)));
         }
 
         public override bool CheckProcedureExists(string procName)
@@ -613,12 +615,6 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
 
         public override void EnsureInfrastructure()
         {
-            ExecuteNonQuery(@"
-                CREATE OR REPLACE FUNCTION uuid_generate_v4()
-                RETURNS uuid
-                AS '$libdir/uuid-ossp', 'uuid_generate_v4'
-                VOLATILE STRICT LANGUAGE C;
-            ");
         }
 
         public override void DropAllObjects()
@@ -632,12 +628,12 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
 
         protected override string GetSchemaInsertStatement()
         {
-            return "INSERT INTO \"CurrentSchema\" (\"Version\", \"Schema\") VALUES (1, @schema)";
+            return "INSERT INTO \"dbo\".\"CurrentSchema\" (\"Version\", \"Schema\") VALUES (1, @schema)";
         }
 
         protected override string GetSchemaUpdateStatement()
         {
-            return "UPDATE \"CurrentSchema\" SET \"Schema\" = @schema, \"Version\" = \"Version\" + 1";
+            return "UPDATE \"dbo\".\"CurrentSchema\" SET \"Schema\" = @schema, \"Version\" = \"Version\" + 1";
         }
 
         #endregion
@@ -646,15 +642,12 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
 
         protected override bool CallRepairPositionColumn(bool repair, TableRef tblName, string indexName)
         {
-            using (var cmd = new NpgsqlCommand("SELECT \"RepairPositionColumnValidityByTable\"(@repair, @tblName, @colName)", CurrentConnection, CurrentTransaction))
-            {
-                cmd.Parameters.AddWithValue("@repair", repair);
-                cmd.Parameters.AddWithValue("@tblName", tblName);
-                cmd.Parameters.AddWithValue("@colName", indexName);
-
-                QueryLog.Debug(cmd.CommandText);
-                return (bool)cmd.ExecuteScalar();
-            }
+            return (bool)ExecuteScalar("SELECT \"dbo\".\"RepairPositionColumnValidityByTable\"(@repair, @tblName, @colName)",
+                 new Dictionary<string, object>() {
+                    {"@repair", repair},
+                    {"@tblName", FormatSchemaName(tblName)},
+                    {"@colName", indexName},
+                 });
         }
 
         #endregion
@@ -679,11 +672,11 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
         {
             ExecuteNonQuery(String.Format(
                 "UPDATE dest SET dest.{3} = src.{1} FROM {2} dest INNER JOIN {0} src ON dest.{4} = src.{4}",
-                FormatFullName(srcTblName), // 0
-                QuoteIdentifier(srcColName), // 1
-                FormatFullName(tblName),    // 2
-                QuoteIdentifier(colName),    // 3
-                QuoteIdentifier("ID")));     // 4
+                FormatFullName(srcTblName),     // 0
+                QuoteIdentifier(srcColName),    // 1
+                FormatFullName(tblName),        // 2
+                QuoteIdentifier(colName),       // 3
+                QuoteIdentifier("ID")));        // 4
         }
 
         public override void MigrateFKs(
@@ -753,6 +746,8 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
 
             StringBuilder sb = new StringBuilder();
             sb.Append("CREATE OR REPLACE FUNCTION ");
+            sb.Append(QuoteIdentifier("dbo"));
+            sb.Append(".");
             sb.Append(QuoteIdentifier(triggerName));
             sb.Append("()");
             sb.AppendLine();
@@ -770,7 +765,7 @@ $BODY$BEGIN
 	IF NEW <> NULL THEN
 		DELETE FROM {0} WHERE {2} = NEW.{2};
 		INSERT INTO {0} ({2}, ""Identity"", ""Right"")
-			SELECT {2}, ""Identity"", ""Right"" FROM ""{1}""
+			SELECT {2}, ""Identity"", ""Right"" FROM {1}
 			WHERE {2} = NEW.{2};
 	END IF;
 ", FormatFullName(tbl.TblNameRights), FormatFullName(tbl.ViewUnmaterializedName), QuoteIdentifier("ID"));
@@ -812,7 +807,7 @@ $BODY$BEGIN
 	IF NEW <> NULL THEN
 		DELETE FROM {0} WHERE {4} IN ({2});
 		INSERT INTO {0} ({4}, ""Identity"", ""Right"")
-			SELECT {4}, ""Identity"", ""Right"" FROM ""{3}""
+			SELECT {4}, ""Identity"", ""Right"" FROM {3}
 			WHERE {4} IN ({2});
 	END IF;
 ",
@@ -832,6 +827,13 @@ END$BODY$
   LANGUAGE 'plpgsql' VOLATILE
 ");
             ExecuteNonQuery(sb.ToString());
+            ExecuteNonQuery(String.Format(@"
+                CREATE TRIGGER {0} AFTER INSERT OR UPDATE OR DELETE
+                    ON {1} FOR EACH ROW
+                    EXECUTE PROCEDURE ""dbo"".{0}()",
+                QuoteIdentifier(triggerName),
+                FormatSchemaName(tblName)
+                ));
         }
 
         public override void CreateEmptyRightsViewUnmaterialized(TableRef viewName)
@@ -846,35 +848,40 @@ END$BODY$
             Log.DebugFormat("Creating unmaterialized rights view for \"{0}\"", tblName);
 
             StringBuilder view = new StringBuilder();
-            view.AppendFormat(@"CREATE VIEW ""{0}"" AS
-SELECT	""ID"", ""Identity"", 
+            view.AppendFormat(@"CREATE VIEW {0} AS
+SELECT  ""ID"", ""Identity"", 
 		(case SUM(""Right"" & 1) when 0 then 0 else 1 end) +
 		(case SUM(""Right"" & 2) when 0 then 0 else 2 end) +
 		(case SUM(""Right"" & 4) when 0 then 0 else 4 end) +
 		(case SUM(""Right"" & 8) when 0 then 0 else 8 end) ""Right"" 
-FROM (", viewName);
+FROM (", FormatFullName(viewName));
             view.AppendLine();
 
             foreach (var acl in acls)
             {
-                view.AppendFormat(@"  SELECT t1.""ID"" ""ID"", t{0}.""{1}"" ""Identity"", {2} ""Right""",
+                view.AppendFormat(@"  SELECT t1.""ID"" ""ID"", t{0}.{1} ""Identity"", {2} ""Right""",
                     acl.Relations.Count,
-                    acl.Relations.Last().FKColumnName.Single(),
+                    QuoteIdentifier(acl.Relations.Last().FKColumnName.Single().ColumnName),
                     (int)acl.Right);
                 view.AppendLine();
-                view.AppendFormat(@"  FROM ""{0}"" t1", tblName);
+                view.AppendFormat(@"  FROM {0} t1", FormatFullName(tblName));
                 view.AppendLine();
 
                 int idx = 2;
                 foreach (var rel in acl.Relations.Take(acl.Relations.Count - 1))
                 {
-                    view.AppendFormat(@"  INNER JOIN ""{0}"" t{1} ON t{1}.""{2}"" = t{3}.""{4}""", rel.JoinTableName, idx, rel.JoinColumnName.Single(), idx - 1, rel.FKColumnName.Single());
+                    view.AppendFormat(@"  INNER JOIN {0} t{1} ON t{1}.{2} = t{3}.{4}",
+                        FormatFullName(rel.JoinTableName),
+                        idx,
+                        QuoteIdentifier(rel.JoinColumnName.Single().ColumnName),
+                        idx - 1,
+                        QuoteIdentifier(rel.FKColumnName.Single().ColumnName));
                     view.AppendLine();
                     idx++;
                 }
-                view.AppendFormat(@"  WHERE t{0}.""{1}"" IS NOT NULL",
+                view.AppendFormat(@"  WHERE t{0}.{1} IS NOT NULL",
                     acl.Relations.Count,
-                    acl.Relations.Last().FKColumnName.Single());
+                    QuoteIdentifier(acl.Relations.Last().FKColumnName.Single().ColumnName));
                 view.AppendLine();
                 view.AppendLine("  UNION ALL");
             }
@@ -894,7 +901,7 @@ FROM (", viewName);
             Log.DebugFormat("Creating refresh rights procedure for \"{0}\"", tblName);
             ExecuteNonQuery(String.Format(
                 @"
-CREATE FUNCTION {0}(IN refreshID integer DEFAULT NULL) RETURNS void AS
+CREATE FUNCTION ""dbo"".{0}(IN refreshID integer DEFAULT NULL) RETURNS void AS
 $BODY$BEGIN
     IF (refreshID IS NULL) THEN
             TRUNCATE TABLE {1};
@@ -913,10 +920,10 @@ LANGUAGE 'plpgsql' VOLATILE",
         public override void ExecRefreshRightsOnProcedure(string procName)
         {
             Log.DebugFormat("Refreshing rights for \"{0}\"", procName);
-            ExecuteNonQuery(String.Format(@"SELECT {0}()", QuoteIdentifier(procName)));
+            ExecuteNonQuery(String.Format(@"SELECT ""dbo"".{0}()", QuoteIdentifier(procName)));
         }
 
-        public override void CreatePositionColumnValidCheckProcedures(ILookup<string, KeyValuePair<string, string>> refSpecs)
+        public override void CreatePositionColumnValidCheckProcedures(ILookup<TableRef, KeyValuePair<TableRef, string>> refSpecs)
         {
             if (refSpecs == null) { throw new ArgumentNullException("refSpecs"); }
 
@@ -934,13 +941,13 @@ LANGUAGE 'plpgsql' VOLATILE",
             ExecuteSqlResource(this.GetType(), String.Format(@"Kistl.Server.SchemaManagement.NpgsqlProvider.Scripts.{0}.sql", procName));
 
             var createTableProcQuery = new StringBuilder();
-            createTableProcQuery.AppendFormat("CREATE FUNCTION \"{0}\" (repair boolean, tblName text, colName text) RETURNS boolean AS $BODY$", tableProcName);
+            createTableProcQuery.AppendFormat("CREATE OR REPLACE FUNCTION \"dbo\".\"{0}\" (repair boolean, tblName text, colName text) RETURNS boolean AS $BODY$", tableProcName);
             createTableProcQuery.AppendLine();
             createTableProcQuery.AppendLine("DECLARE result boolean DEFAULT false;");
             createTableProcQuery.AppendLine("BEGIN");
             foreach (var tbl in refSpecs)
             {
-                createTableProcQuery.AppendFormat("IF tblName IS NULL OR tblName = '{0}' THEN", tbl.Key);
+                createTableProcQuery.AppendFormat("IF tblName IS NULL OR tblName = '{0}' THEN", FormatSchemaName(tbl.Key));
                 createTableProcQuery.AppendLine();
                 createTableProcQuery.Append("\t");
                 foreach (var refSpec in tbl)
@@ -949,9 +956,9 @@ LANGUAGE 'plpgsql' VOLATILE",
                     createTableProcQuery.AppendLine();
                     createTableProcQuery.AppendFormat(
                         // TODO: use named parameters with 9.0: "\t\tresult := \"RepairPositionColumnValidity\"(repair := repair, tblName := '{0}', refTblName := '{1}', fkColumnName := '{2}', fkPositionName := '{2}{3}');",
-                        "\t\tresult := \"RepairPositionColumnValidity\"(repair, '{0}', '{1}', '{2}', '{2}{3}');",
-                        tbl.Key,
-                        refSpec.Key,
+                        "\t\tresult := \"dbo\".\"RepairPositionColumnValidity\"(repair, '{0}', '{1}', '{2}', '{2}{3}');",
+                        FormatSchemaName(tbl.Key),
+                        FormatSchemaName(refSpec.Key),
                         refSpec.Value,
                         Kistl.API.Helper.PositionSuffix);
                     createTableProcQuery.AppendLine();
@@ -1008,5 +1015,9 @@ LANGUAGE 'plpgsql' VOLATILE",
             ExecuteNonQuery("VACUUM ANALYZE");
         }
 
+        public override void WipeDatabase()
+        {
+            ExecuteSqlResource(this.GetType(), "Kistl.Server.SchemaManagement.NpgsqlProvider.Scripts.ResetSchema.sql");
+        }
     }
 }

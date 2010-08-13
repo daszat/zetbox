@@ -338,7 +338,7 @@ namespace Kistl.API.Server
         void DropColumn(TableRef tblName, string colName);
 
         #endregion
-        
+
         #region Table Content
 
         bool CheckTableContainsData(TableRef tblName);
@@ -414,8 +414,8 @@ namespace Kistl.API.Server
         /// <summary>
         /// Creates a procedure to check position columns for their validity.
         /// </summary>
-        /// <param name="refSpecs">a lookup by table name into lists of (fkColumnName, referencedTableName) pairs</param>
-        void CreatePositionColumnValidCheckProcedures(ILookup<string, KeyValuePair<string, string>> refSpecs);
+        /// <param name="refSpecs">a lookup by table name into lists of (referencedTableName, fkColumnName) pairs</param>
+        void CreatePositionColumnValidCheckProcedures(ILookup<TableRef, KeyValuePair<TableRef, string>> refSpecs);
 
         IDataReader ReadTableData(TableRef tblName, IEnumerable<string> colNames);
         IDataReader ReadTableData(string sql);
@@ -430,5 +430,7 @@ namespace Kistl.API.Server
         void RefreshDbStats();
 
         void ExecuteSqlResource(Type type, string scriptResourceName);
+
+        void WipeDatabase();
     }
 }

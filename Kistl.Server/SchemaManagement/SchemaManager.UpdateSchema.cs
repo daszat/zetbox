@@ -6,6 +6,7 @@ namespace Kistl.Server.SchemaManagement
     using System.Linq;
     using System.Text;
     using Kistl.API;
+    using Kistl.API.Server;
     using Kistl.API.Utils;
     using Kistl.App.Base;
     using Kistl.App.Extensions;
@@ -85,7 +86,9 @@ namespace Kistl.Server.SchemaManagement
                 .ToList();
 
             var refSpecs = refSpecsASide.Concat(refSpecsBSide)
-                .ToLookup(refSpec => refSpec.tblName, refSpec => new KeyValuePair<string, string>(refSpec.refTableName, Construct.ForeignKeyColumnName(refSpec.OtherEnd)));
+                .ToLookup(
+                    refSpec => db.GetQualifiedTableName(refSpec.tblName),
+                    refSpec => new KeyValuePair<TableRef, string>(db.GetQualifiedTableName(refSpec.refTableName), Construct.ForeignKeyColumnName(refSpec.OtherEnd)));
 
             db.CreatePositionColumnValidCheckProcedures(refSpecs);
         }

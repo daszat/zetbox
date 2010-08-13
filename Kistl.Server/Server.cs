@@ -283,6 +283,17 @@ namespace Kistl.Server
             }
         }
 
+        public void WipeDatabase()
+        {
+            using (var subContainer = container.BeginLifetimeScope())
+            {
+                var config = subContainer.Resolve<KistlConfig>();
+                var schemaProvider = subContainer.Resolve<ISchemaProvider>(config.Server.SchemaProvider);
+                schemaProvider.Open(config.Server.ConnectionString);
+                schemaProvider.WipeDatabase();
+            }
+        }
+
         public void RunBenchmarks()
         {
             // FetchObjectClasses();        

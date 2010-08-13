@@ -23,6 +23,24 @@ namespace Kistl.Server.SchemaManagement
 
         #region ADO.NET Infrastructure
 
+        protected void LogError(string query, IDictionary<string, object> args)
+        {
+            Log.ErrorFormat("Error in statement: [{0}]", query);
+            if (args != null)
+            {
+                foreach (var pair in args)
+                {
+                    // avoid huge values
+                    var val = (pair.Value ?? String.Empty).ToString();
+                    if (val.Length > 300)
+                    {
+                        val = val.Substring(0, 296) + " ...";
+                    }
+                    Log.ErrorFormat("[{0}] => [{1}]", pair.Key, val);
+                }
+            }
+        }
+
         protected IEnumerable<IDataRecord> ExecuteReader(string query)
         {
             return ExecuteReader(query, null);
@@ -61,19 +79,27 @@ namespace Kistl.Server.SchemaManagement
         protected object ExecuteScalar(string query, IDictionary<string, object> args)
         {
             QueryLog.Debug(query);
-            using (var cmd = CreateCommand(query))
+            try
             {
-                if (args != null)
+                using (var cmd = CreateCommand(query))
                 {
-                    foreach (var pair in args)
+                    if (args != null)
                     {
-                        var param = cmd.CreateParameter();
-                        param.ParameterName = pair.Key;
-                        param.Value = pair.Value;
-                        cmd.Parameters.Add(param);
+                        foreach (var pair in args)
+                        {
+                            var param = cmd.CreateParameter();
+                            param.ParameterName = pair.Key;
+                            param.Value = pair.Value;
+                            cmd.Parameters.Add(param);
+                        }
                     }
+                    return cmd.ExecuteScalar();
                 }
-                return cmd.ExecuteScalar();
+            }
+            catch
+            {
+                LogError(query, args);
+                throw;
             }
         }
 
@@ -85,19 +111,28 @@ namespace Kistl.Server.SchemaManagement
         protected void ExecuteNonQuery(string query, IDictionary<string, object> args)
         {
             QueryLog.Debug(query);
-            using (var cmd = CreateCommand(query))
+            try
             {
-                if (args != null)
+                using (var cmd = CreateCommand(query))
                 {
-                    foreach (var pair in args)
+                    if (args != null)
                     {
-                        var param = cmd.CreateParameter();
-                        param.ParameterName = pair.Key;
-                        param.Value = pair.Value;
-                        cmd.Parameters.Add(param);
+                        foreach (var pair in args)
+                        {
+                            var param = cmd.CreateParameter();
+                            param.ParameterName = pair.Key;
+                            param.Value = pair.Value;
+                            cmd.Parameters.Add(param);
+                        }
                     }
+
+                    cmd.ExecuteNonQuery();
                 }
-                cmd.ExecuteNonQuery();
+            }
+            catch
+            {
+                LogError(query, args);
+                throw;
             }
         }
 
@@ -106,12 +141,24 @@ namespace Kistl.Server.SchemaManagement
             if (type == null) throw new ArgumentNullException("type");
             if (string.IsNullOrEmpty(scriptResourceName)) throw new ArgumentNullException("scriptResourceName");
 
-            using (var scriptStream = new StreamReader(type.Assembly.GetManifestResourceStream(scriptResourceName)))
+            var stream = type.Assembly.GetManifestResourceStream(scriptResourceName);
+            if (stream == null) throw new ArgumentOutOfRangeException("scriptResourceName", String.Format("Script [{0}] not found in assembly [{1}]", scriptResourceName, type.Assembly.FullName));
+
+            using (var scriptStream = new StreamReader(stream))
             {
                 var databaseScript = scriptStream.ReadToEnd();
+
                 foreach (var cmdString in Regex.Split(databaseScript, "\r?\nGO\r?\n").Where(s => !String.IsNullOrEmpty(s)))
                 {
-                    ExecuteNonQuery(cmdString);
+                    try
+                    {
+                        ExecuteNonQuery(cmdString);
+                    }
+                    catch
+                    {
+                        LogError(cmdString, null);
+                        throw;
+                    }
                 }
             }
         }
@@ -252,7 +299,7 @@ namespace Kistl.Server.SchemaManagement
         {
             ExecuteNonQuery(String.Format("DROP TABLE {0}", FormatFullName(tblName)));
         }
-        
+
         public abstract bool CheckColumnExists(TableRef tblName, string colName);
 
         public abstract IEnumerable<string> GetTableColumnNames(TableRef tblName);
@@ -451,8 +498,8 @@ namespace Kistl.Server.SchemaManagement
         /// <summary>
         /// Creates a procedure to check position columns for their validity.
         /// </summary>
-        /// <param name="refSpecs">a lookup by table name into lists of (fkColumnName, referencedTableName) pairs</param>
-        public abstract void CreatePositionColumnValidCheckProcedures(ILookup<string, KeyValuePair<string, string>> refSpecs);
+        /// <param name="refSpecs">a lookup by table name into lists of (referencedTableName, fkColumnName) pairs</param>
+        public abstract void CreatePositionColumnValidCheckProcedures(ILookup<TableRef, KeyValuePair<TableRef, string>> refSpecs);
 
         public abstract IDataReader ReadTableData(TableRef tbl, IEnumerable<string> colNames);
         public abstract IDataReader ReadTableData(string sql);
@@ -465,5 +512,7 @@ namespace Kistl.Server.SchemaManagement
         /// This can be called after significant changes to the database to cause the DBMS' optimizier to refresh its internal stats.
         /// </summary>
         public abstract void RefreshDbStats();
+
+        public abstract void WipeDatabase();
     }
 }
