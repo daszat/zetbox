@@ -39,6 +39,11 @@ namespace Kistl.Client.Presentables
 
         public void BuildColumns(Kistl.App.Base.ObjectClass cls)
         {
+            BuildColumns(cls, null);
+        }
+
+        public void BuildColumns(Kistl.App.Base.ObjectClass cls, ControlKind requestedControlKind)
+        {
             if (cls == null) throw new ArgumentNullException("cls");
 
             ShowIcon = cls.ShowIconInLists;
@@ -73,7 +78,7 @@ namespace Kistl.Client.Presentables
                 {
                     Header = p.Name,
                     Name = p.Name,
-                    ControlKind = p.ValueModelDescriptor.GetDefaultGridCellKind()
+                    ControlKind = requestedControlKind ?? p.ValueModelDescriptor.GetDefaultGridCellKind()
                 })
                 .ToList();
         }

@@ -409,7 +409,7 @@ namespace Kistl.Client.Presentables.KistlBase
             get
             {
                 GridDisplayConfiguration result = new GridDisplayConfiguration();
-                result.BuildColumns(this._type);
+                result.BuildColumns(this._type, FrozenContext.GetQuery<ControlKind>().Single(i => i.Name == "Kistl.App.GUI.LabelKind"));
                 return result;
             }
         }
