@@ -53,7 +53,7 @@ namespace Kistl.Server.Generators
             var generatedFileNames = new List<string>();
 
             Log.Info("  Object Classes");
-            foreach (ObjectClass objClass in Generator.GetObjectClassList(ctx).OrderBy(x => x.Name))
+            foreach (ObjectClass objClass in Generator.GetObjectClassList(ctx).OrderBy(x => x.Name).ToList())
             {
                 generatedFileNames.Add(Generate_ObjectClass(ctx, objClass));
                 Log.Debug("    " + objClass.Name);

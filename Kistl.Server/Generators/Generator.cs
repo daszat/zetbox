@@ -111,6 +111,7 @@ namespace Kistl.Server.Generators
                     }
                     catch (Exception ex)
                     {
+                        Log.Error(String.Format("Error generating [{0}]:", generator.Description), ex);
                         lock (failed)
                         {
                             failed.Add(ex);
@@ -134,7 +135,7 @@ namespace Kistl.Server.Generators
             if (failed.Count > 0)
             {
                 // TODO: Introduce own exception
-                throw new ApplicationException("Failed code generation", failed.First());
+                throw new ApplicationException(String.Format("Failed code generation in {0} threads", failed.Count), failed.First());
             }
         }
 
