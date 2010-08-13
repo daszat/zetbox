@@ -659,11 +659,5 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
         {
             throw new NotSupportedException();
         }
-
-        /// <summary>Not supported.</summary>
-        void ISchemaProvider.WipeDatabase()
-        {
-            throw new NotSupportedException();
-        }
     }
 }

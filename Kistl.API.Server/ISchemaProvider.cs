@@ -430,7 +430,5 @@ namespace Kistl.API.Server
         void RefreshDbStats();
 
         void ExecuteSqlResource(Type type, string scriptResourceName);
-
-        void WipeDatabase();
     }
 }

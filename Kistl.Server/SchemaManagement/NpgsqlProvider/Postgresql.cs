@@ -1014,10 +1014,5 @@ LANGUAGE 'plpgsql' VOLATILE",
             Log.Info("Vacuuming database");
             ExecuteNonQuery("VACUUM ANALYZE");
         }
-
-        public override void WipeDatabase()
-        {
-            ExecuteSqlResource(this.GetType(), "Kistl.Server.SchemaManagement.NpgsqlProvider.Scripts.ResetSchema.sql");
-        }
     }
 }

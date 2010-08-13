@@ -33,13 +33,15 @@ this.WriteObjects("\r\n");
 #line 17 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CustomTypeDescriptor.cst"
 var properties = cls.Properties.OrderBy(p => p.Name).ToList();
 	var rels = cls.Context.GetQuery<Relation>().Where(r => r.A.Type == cls || r.B.Type == cls)
-		.OrderBy(i => i.A.Type.Name).ThenBy(i => i.Verb).ThenBy(i => i.B.Type.Name).ThenBy(i => i.ExportGuid)
+		.OrderBy(i => i.A.RoleName).ThenBy(i => i.Verb).ThenBy(i => i.B.RoleName)
+		.OrderBy(i => i.A.Type.Name).ThenBy(i => i.B.Type.Name)
+		.ThenBy(i => i.ExportGuid)
 		.ToList();
 	
 	if (properties.Count > 0 || rels.Count > 0)
 	{
 
-#line 25 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CustomTypeDescriptor.cst"
+#line 27 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CustomTypeDescriptor.cst"
 this.WriteObjects("		private static readonly object _propertiesLock = new object();\r\n");
 this.WriteObjects("		private static System.ComponentModel.PropertyDescriptor[] _properties;\r\n");
 this.WriteObjects("		\r\n");
@@ -52,14 +54,14 @@ this.WriteObjects("				// recheck for a lost race after aquiring the lock\r\n");
 this.WriteObjects("				if (_properties != null) return;\r\n");
 this.WriteObjects("				\r\n");
 this.WriteObjects("				_properties = new System.ComponentModel.PropertyDescriptor[] {\r\n");
-#line 38 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CustomTypeDescriptor.cst"
+#line 40 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CustomTypeDescriptor.cst"
 foreach(var property in properties)
 		{
 			string propertyName = property.Name;
 			if (property.IsAssociation() && !property.IsObjectReferencePropertySingle())
 			{
 
-#line 44 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CustomTypeDescriptor.cst"
+#line 46 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CustomTypeDescriptor.cst"
 this.WriteObjects("					// property.IsAssociation() && !property.IsObjectReferencePropertySingle()\r\n");
 this.WriteObjects("					new CustomPropertyDescriptor<",  implName , ", ",  property.GetCollectionTypeString() , ">(\r\n");
 this.WriteObjects("						lazyCtx,\r\n");
@@ -68,12 +70,12 @@ this.WriteObjects("						\"",  propertyName , "\",\r\n");
 this.WriteObjects("						null,\r\n");
 this.WriteObjects("						obj => obj.",  propertyName , ",\r\n");
 this.WriteObjects("						null), // lists are read-only properties\r\n");
-#line 53 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CustomTypeDescriptor.cst"
+#line 55 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CustomTypeDescriptor.cst"
 }
 			else if (property is CalculatedObjectReferenceProperty)
 			{
 
-#line 57 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CustomTypeDescriptor.cst"
+#line 59 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CustomTypeDescriptor.cst"
 this.WriteObjects("					// property is CalculatedObjectReferenceProperty\r\n");
 this.WriteObjects("					new CustomPropertyDescriptor<",  implName , ", ",  property.ReferencedTypeAsCSharp() , ">(\r\n");
 this.WriteObjects("						lazyCtx,\r\n");
@@ -82,10 +84,10 @@ this.WriteObjects("						\"",  propertyName , "\",\r\n");
 this.WriteObjects("						null,\r\n");
 this.WriteObjects("						obj => obj.",  propertyName , ",\r\n");
 this.WriteObjects("						null), // CalculatedObjectReferenceProperty is a read-only property\r\n");
-#line 66 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CustomTypeDescriptor.cst"
+#line 68 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CustomTypeDescriptor.cst"
 } else {
 
-#line 68 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CustomTypeDescriptor.cst"
+#line 70 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CustomTypeDescriptor.cst"
 this.WriteObjects("					// else\r\n");
 this.WriteObjects("					new CustomPropertyDescriptor<",  implName , ", ",  property.ReferencedTypeAsCSharp() , ">(\r\n");
 this.WriteObjects("						lazyCtx,\r\n");
@@ -94,7 +96,7 @@ this.WriteObjects("						\"",  propertyName , "\",\r\n");
 this.WriteObjects("						null,\r\n");
 this.WriteObjects("						obj => obj.",  propertyName , ",\r\n");
 this.WriteObjects("						(obj, val) => obj.",  propertyName , " = val),\r\n");
-#line 77 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CustomTypeDescriptor.cst"
+#line 79 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CustomTypeDescriptor.cst"
 }
 		}
 		
@@ -102,21 +104,30 @@ this.WriteObjects("						(obj, val) => obj.",  propertyName , " = val),\r\n");
 		if ("Frozen".Equals(Settings["extrasuffix"]))
 		{
 
-#line 84 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CustomTypeDescriptor.cst"
-this.WriteObjects("					// skipping position columns for frozen context (not implemented)\r\n");
 #line 86 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CustomTypeDescriptor.cst"
+this.WriteObjects("					// skipping position columns for frozen context (not implemented)\r\n");
+#line 88 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CustomTypeDescriptor.cst"
 } else {		
-			foreach(var rel in rels.Where(r => r.GetRelationType() == RelationType.one_n))
-			{
 
 #line 90 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CustomTypeDescriptor.cst"
-this.WriteObjects("					// rel: ",  rel.A.RoleName , " ",  rel.Verb , " ",  rel.B.RoleName , " (",  rel.ExportGuid , ")\r\n");
+this.WriteObjects("					// position columns\r\n");
 #line 92 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CustomTypeDescriptor.cst"
-if (rel.A.Type == cls && rel.A.HasPersistentOrder) 
+foreach(var rel in rels.Where(r => r.GetRelationType() == RelationType.one_n))
+			{
+			// only show debugging if there actually is an position column
+			if (   (rel.A.Type == cls && rel.A.HasPersistentOrder)
+				|| (rel.B.Type == cls && rel.B.HasPersistentOrder))
+			{			
+
+#line 99 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CustomTypeDescriptor.cst"
+this.WriteObjects("					// rel: ",  rel.A.RoleName , " ",  rel.Verb , " ",  rel.B.RoleName , " (",  rel.ExportGuid , ")\r\n");
+#line 101 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CustomTypeDescriptor.cst"
+}
+			if (rel.A.Type == cls && rel.A.HasPersistentOrder) 
 			{
 				var posColumnName = Construct.ListPositionPropertyName(rel.A);
 
-#line 96 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CustomTypeDescriptor.cst"
+#line 106 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CustomTypeDescriptor.cst"
 this.WriteObjects("					// rel.A.Type == cls && rel.A.HasPersistentOrder\r\n");
 this.WriteObjects("					new CustomPropertyDescriptor<",  implName , ", int?>(\r\n");
 this.WriteObjects("						lazyCtx,\r\n");
@@ -125,14 +136,14 @@ this.WriteObjects("						\"",  posColumnName , "\",\r\n");
 this.WriteObjects("						null,\r\n");
 this.WriteObjects("						obj => obj.",  posColumnName , ",\r\n");
 this.WriteObjects("						(obj, val) => obj.",  posColumnName , " = val),\r\n");
-#line 105 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CustomTypeDescriptor.cst"
+#line 115 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CustomTypeDescriptor.cst"
 }
 			
 				if (rel.B.Type == cls && rel.B.HasPersistentOrder) 
 				{
 					var posColumnName = Construct.ListPositionPropertyName(rel.B);
 
-#line 111 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CustomTypeDescriptor.cst"
+#line 121 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CustomTypeDescriptor.cst"
 this.WriteObjects("					// rel.B.Type == cls && rel.B.HasPersistentOrder\r\n");
 this.WriteObjects("					new CustomPropertyDescriptor<",  implName , ", int?>(\r\n");
 this.WriteObjects("						lazyCtx,\r\n");
@@ -141,12 +152,12 @@ this.WriteObjects("						\"",  posColumnName , "\",\r\n");
 this.WriteObjects("						null,\r\n");
 this.WriteObjects("						obj => obj.",  posColumnName , ",\r\n");
 this.WriteObjects("						(obj, val) => obj.",  posColumnName , " = val),\r\n");
-#line 120 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CustomTypeDescriptor.cst"
+#line 130 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CustomTypeDescriptor.cst"
 }
 			}
 		}
 
-#line 124 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CustomTypeDescriptor.cst"
+#line 134 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CustomTypeDescriptor.cst"
 this.WriteObjects("				};\r\n");
 this.WriteObjects("			}\r\n");
 this.WriteObjects("		}\r\n");
@@ -157,10 +168,10 @@ this.WriteObjects("			base.CollectProperties(props);\r\n");
 this.WriteObjects("			_InitializePropertyDescriptors(lazyCtx);\r\n");
 this.WriteObjects("			props.AddRange(_properties);\r\n");
 this.WriteObjects("		}\r\n");
-#line 135 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CustomTypeDescriptor.cst"
+#line 145 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CustomTypeDescriptor.cst"
 }
 
-#line 137 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CustomTypeDescriptor.cst"
+#line 147 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CustomTypeDescriptor.cst"
 this.WriteObjects("	\r\n");
 
         }

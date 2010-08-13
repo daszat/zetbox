@@ -306,7 +306,10 @@ namespace Kistl.Server.SchemaManagement
 
         public void DropAllObjects()
         {
-            _provider.DropAllObjects();
+            using (Log.InfoTraceMethodCall("Dropping all database objects"))
+            {
+                _provider.DropAllObjects();
+            }
         }
 
         public void CopyColumnData(TableRef srcTblName, string srcColName, TableRef tblName, string colName)
@@ -408,14 +411,6 @@ namespace Kistl.Server.SchemaManagement
         {
             Log.Debug("Ensuring Infrastructure is available on target");
             _provider.EnsureInfrastructure();
-        }
-
-        public void WipeDatabase()
-        {
-            using (Log.InfoTraceMethodCall("Wiping database"))
-            {
-                _provider.WipeDatabase();
-            }
         }
     }
 }

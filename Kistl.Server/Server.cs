@@ -290,7 +290,7 @@ namespace Kistl.Server
                 var config = subContainer.Resolve<KistlConfig>();
                 var schemaProvider = subContainer.Resolve<ISchemaProvider>(config.Server.SchemaProvider);
                 schemaProvider.Open(config.Server.ConnectionString);
-                schemaProvider.WipeDatabase();
+                schemaProvider.DropAllObjects();
             }
         }
 

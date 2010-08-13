@@ -512,7 +512,5 @@ namespace Kistl.Server.SchemaManagement
         /// This can be called after significant changes to the database to cause the DBMS' optimizier to refresh its internal stats.
         /// </summary>
         public abstract void RefreshDbStats();
-
-        public abstract void WipeDatabase();
     }
 }

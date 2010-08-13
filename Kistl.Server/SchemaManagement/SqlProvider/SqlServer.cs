@@ -548,7 +548,7 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
 
         public override void DropAllObjects()
         {
-            ExecuteSqlResource(this.GetType(), "Kistl.Server.Database.Scripts.DropTables.sql");
+            ExecuteSqlResource(this.GetType(), "Kistl.Server.SchemaManagement.SqlProvider.Scripts.DropTables.sql");
         }
 
         #endregion
@@ -1013,11 +1013,6 @@ FROM (", viewName.Schema, viewName.Name);
         public override void RefreshDbStats()
         {
             // do nothing
-        }
-
-        public override void WipeDatabase()
-        {
-            ExecuteSqlResource(this.GetType(), "Kistl.Server.SchemaManagement.SqlProvider.Scripts.DropTables.sql");
         }
     }
 }
