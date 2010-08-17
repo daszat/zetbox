@@ -73,6 +73,7 @@ M: System.Delegate Kistl.Client.WPF.View.GUI.MultiLineEditorDialog::_CreateDeleg
 
 
 
+
 # Called by a lambda
 M: System.Boolean System.Linq.Dynamic.ExpressionParser::IsBetterThan(System.Linq.Expressions.Expression[],System.Linq.Dynamic.ExpressionParser/MethodData,System.Linq.Dynamic.ExpressionParser/MethodData)
 
