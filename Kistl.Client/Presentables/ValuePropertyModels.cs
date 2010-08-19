@@ -62,6 +62,11 @@ namespace Kistl.Client.Presentables
         ICommand ClearValueCommand { get; }
     }
 
+    public interface IValueModelAsString
+    {
+        string StringValue { get; set; }
+    }
+
     public interface IValueModel<TValue>
         : IReadOnlyValueModel<TValue>, IClearableValue, INotifyPropertyChanged
     {
@@ -75,6 +80,7 @@ namespace Kistl.Client.Presentables
         /// </summary>
         bool AllowNullInput { get; }
     }
+
 
     public abstract class BasePropertyModel : ViewModel
     {
@@ -280,7 +286,7 @@ namespace Kistl.Client.Presentables
     }
 
     public class NullableValuePropertyModel<TValue>
-        : PropertyModel<Nullable<TValue>>, IValueModel<Nullable<TValue>>, IValueModel<string>
+        : PropertyModel<Nullable<TValue>>, IValueModel<Nullable<TValue>>, IValueModel<string>, IValueModelAsString
         where TValue : struct
     {
         public new delegate NullableValuePropertyModel<TValue> Factory(IKistlContext dataCtx, INotifyingObject obj, Property prop);
@@ -373,15 +379,37 @@ namespace Kistl.Client.Presentables
             }
         }
 
+        protected virtual string FormatValue()
+        {
+            return Value != null ? Value.ToString() : String.Empty;
+        }
+
+        protected virtual void ParseValue(string str)
+        {
+            this.Value = String.IsNullOrEmpty(str) ? null : (Nullable<TValue>)System.Convert.ChangeType(str, typeof(TValue));
+        }
+
+        public string StringValue
+        {
+            get
+            {
+                return FormatValue();
+            }
+            set
+            {
+                ParseValue(value);
+            }
+        }
+
         string IValueModel<string>.Value
         {
             get
             {
-                return _valueCache != null ? _valueCache.ToString() : String.Empty;
+                return FormatValue();
             }
             set
             {
-                this.Value = String.IsNullOrEmpty(value) ? null : (Nullable<TValue>)System.Convert.ChangeType(value, typeof(TValue));
+                ParseValue(value);
             }
         }
 
@@ -389,7 +417,7 @@ namespace Kistl.Client.Presentables
         {
             get
             {
-                return _valueCache != null ? _valueCache.ToString() : String.Empty;
+                return FormatValue();
             }
         }
 
@@ -440,7 +468,7 @@ namespace Kistl.Client.Presentables
     }
 
     public class ReferencePropertyModel<TValue>
-        : PropertyModel<TValue>, IValueModel<TValue>
+        : PropertyModel<TValue>, IValueModel<TValue>, IValueModelAsString
         where TValue : class
     {
         public new delegate ReferencePropertyModel<TValue> Factory(IKistlContext dataCtx, INotifyingObject obj, Property prop);
@@ -531,6 +559,27 @@ namespace Kistl.Client.Presentables
             }
         }
 
+        protected virtual string FormatValue()
+        {
+            return Value != null ? Value.ToString() : String.Empty;
+        }
+
+        protected virtual void ParseValue(string str)
+        {
+            this.Value = String.IsNullOrEmpty(str) ? null : (TValue)System.Convert.ChangeType(str, typeof(TValue));
+        }
+
+        public string StringValue
+        {
+            get
+            {
+                return FormatValue();
+            }
+            set
+            {
+                ParseValue(value);
+            }
+        }
         #endregion
 
         #region Utilities and UI callbacks
@@ -704,4 +753,34 @@ namespace Kistl.Client.Presentables
         }
     }
 
+    public class NullableDateTimePropertyModel
+        : NullableValuePropertyModel<DateTime>
+    {
+        public new delegate NullableDateTimePropertyModel Factory(IKistlContext dataCtx, INotifyingObject obj, Property prop);
+
+        private DateTimeProperty _dtProp;
+
+        public NullableDateTimePropertyModel(
+            IViewModelDependencies appCtx, IKistlContext dataCtx,
+            INotifyingObject obj, ValueTypeProperty prop)
+            : base(appCtx, dataCtx, obj, prop)
+        {
+            if (prop == null) throw new ArgumentNullException("prop");
+            _dtProp = (DateTimeProperty)prop;
+        }
+
+        protected override string FormatValue()
+        {
+            if (Value == null) return string.Empty;
+            switch(_dtProp.DateTimeStyle)
+            {
+                case DateTimeStyles.Date:
+                    return Value.Value.ToShortDateString();
+                case DateTimeStyles.Time:
+                    return Value.Value.ToShortTimeString();
+                default:
+                    return Value.Value.ToString();
+            }
+        }
+    }
 }

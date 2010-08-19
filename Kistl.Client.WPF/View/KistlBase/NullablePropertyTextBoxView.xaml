@@ -3,10 +3,11 @@
                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                      xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls;assembly=Kistl.Client.WPF.Toolkit"
                      xmlns:view="clr-namespace:Kistl.Client.WPF.View.KistlBase"
+                     xmlns:client="clr-namespace:Kistl.Client.Presentables;assembly=Kistl.Client"
                      xmlns:kevin="clr-namespace:Microsoft.Samples.KMoore.WPFSamples.InfoTextBox;assembly=WPFSamplesLib"
                      ToolTip="{Binding ToolTip}">
 
-    <kevin:InfoTextBox Text="{Binding Value, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=true}"
+    <kevin:InfoTextBox Text="{Binding StringValue, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=true}"
                        TextBoxInfo="{Binding ToolTip}">
         <kevin:InfoTextBox.ContextMenu>
             <ContextMenu>

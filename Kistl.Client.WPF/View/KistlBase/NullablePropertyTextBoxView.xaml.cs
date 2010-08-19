@@ -28,7 +28,7 @@ namespace Kistl.Client.WPF.View
             InitializeComponent();
         }
 
-        #region IHasViewModel<IValueModel<string>> Members
+        #region IHasViewModel<IValueModelAsString> Members
 
         public IValueModel<string> ViewModel
         {

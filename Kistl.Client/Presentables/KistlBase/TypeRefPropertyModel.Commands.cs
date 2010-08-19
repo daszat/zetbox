@@ -99,7 +99,11 @@ namespace Kistl.Client.Presentables.KistlBase
                 }),
                 new List<CommandModel>() { regenerateCmd });
             var filter = (ObjectReferencePropertyFilterExpressionViewModel)selectionTask.ListViewModel.Filter.OfType<IPropertyFilterExpression>().Single(i => i.Property.ExportGuid == new Guid("885BFA97-3D43-48BB-A0AA-1049298714FF"));
-            filter.Value = filter.PossibleValues.Cast<DataObjectModel>().FirstOrDefault(m => m.Object == assembly);
+            filter.Value = filter.PossibleValues
+                .Cast<KeyValuePair<DataObjectModel, string>>()
+                .Where(m => m.Key != null)
+                .FirstOrDefault(m => m.Key.Object == assembly)
+                .Key;
             regenerateCmd.ListModel = selectionTask.ListViewModel;
             ModelFactory.ShowModel(selectionTask, true);
         }
