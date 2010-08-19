@@ -1,0 +1,23 @@
+﻿<view:PropertyEditor x:Class="Kistl.Client.WPF.View.NullableBoolValueDropdownView"
+                     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls;assembly=Kistl.Client.WPF.Toolkit"
+                     xmlns:view="clr-namespace:Kistl.Client.WPF.View.KistlBase"
+                     xmlns:kevin="clr-namespace:Microsoft.Samples.KMoore.WPFSamples.InfoTextBox;assembly=WPFSamplesLib"
+                     ToolTip="{Binding ToolTip}"
+                     MinWidth="1">
+
+    <ComboBox x:Name="cbBool"
+              DisplayMemberPath="Value"
+              SelectedValuePath="Key"
+              SelectedValue="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}">
+        <ComboBox.ContextMenu>
+            <ContextMenu>
+                <MenuItem Command="{Binding ClearValueCommand, Converter={StaticResource CommandConverter}}"
+                          Header="{Binding ClearValueCommand.Label}"
+                          ToolTip="{Binding ClearValueCommand.ToolTip}" />
+            </ContextMenu>
+        </ComboBox.ContextMenu>
+    </ComboBox>
+
+</view:PropertyEditor>

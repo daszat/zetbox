@@ -63,6 +63,7 @@ M: System.Delegate Kistl.Client.WPF.View.NullablePropertyMultiLineTextBoxView::_
 M: System.Delegate Kistl.Client.WPF.View.TextValueSelectionView::_CreateDelegate(System.Type,System.String)
 M: System.Delegate Kistl.Client.WPF.View.CacheDebuggerDisplay::_CreateDelegate(System.Type,System.String)
 M: System.Delegate Kistl.Client.WPF.View.KistlBase.InstanceListDisplay::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Kistl.Client.WPF.View.NullableBoolValueDropdownView::_CreateDelegate(System.Type,System.String)
 
 M: System.Delegate Kistl.Client.WPF.View.GridCells.MultilineStringValue::_CreateDelegate(System.Type,System.String)
 M: System.Delegate Kistl.Client.WPF.View.GUI.MultiLineEditorDialog::_CreateDelegate(System.Type,System.String)

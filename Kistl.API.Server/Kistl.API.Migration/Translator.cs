@@ -156,8 +156,38 @@ namespace Kistl.API.Migration
             if (col.DestinationProperty is Kistl.App.Base.EnumerationProperty)
             {
                 Log.DebugFormat("Convert [{0}] = '{1}' from [{2}] to enum", col.Name, src_val, srcType);
+                // Lookup mapping first
                 var destEnum = col.EnumEntries.FirstOrDefault(e => e.SourceValue == src_val.ToString());
-                return destEnum != null ? (object)destEnum.DestinationValue.Value : DBNull.Value;
+                if (destEnum != null)
+                {
+                    return destEnum.DestinationValue.Value;
+                }
+                else
+                {
+                    // Try to autoresolve
+                    var enumProp = (Kistl.App.Base.EnumerationProperty)col.DestinationProperty;
+                    // Lookup by name
+                    var destEnumEntry = enumProp.Enumeration.EnumerationEntries.FirstOrDefault(e => e.Name == src_val.ToString());
+                    if (destEnumEntry != null)
+                    {
+                        return destEnumEntry.Value;
+                    }
+                    else
+                    {
+                        // Try by number
+                        int int_val;
+                        if (int.TryParse(src_val.ToString(), out int_val))
+                        {
+                            destEnumEntry = enumProp.Enumeration.EnumerationEntries.FirstOrDefault(e => e.Value == int_val);
+                            if (destEnumEntry != null)
+                            {
+                                return destEnumEntry.Value;
+                            }
+                        }
+                    }
+                    // Nothing found -> return null
+                    return DBNull.Value;
+                }                
             }
             else if (srcType != destType
                 && col.References == null)

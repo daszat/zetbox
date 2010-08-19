@@ -151,6 +151,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\KistlBase\NullableBoolValueDropdownView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\KistlBase\ObjectReferenceCollectionEditor.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -339,6 +343,9 @@
     </Compile>
     <Compile Include="View\KistlBase\CompoundObjectPropertyEditor.xaml.cs">
       <DependentUpon>CompoundObjectPropertyEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\KistlBase\NullableBoolValueDropdownView.xaml.cs">
+      <DependentUpon>NullableBoolValueDropdownView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\KistlBase\ObjectReferenceCollectionEditor.xaml.cs">
       <DependentUpon>ObjectReferenceCollectionEditor.xaml</DependentUpon>
