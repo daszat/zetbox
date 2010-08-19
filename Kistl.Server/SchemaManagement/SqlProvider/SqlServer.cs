@@ -314,18 +314,15 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
         {
             StringBuilder sb = new StringBuilder();
 
+            // Prepare
             string addOrAlter = add ? "ADD" : "ALTER COLUMN";
             string nullable = isNullable ? "NULL" : "NOT NULL";
+            string defValue = string.Empty;
+            var constrName = string.Empty;
 
-            sb.AppendFormat("ALTER TABLE {0} {1} {2}", FormatFullName(tblName), addOrAlter, GetColumnDefinition(new Column() { Name = colName, Type = type, Size = size, Scale = scale, IsNullable = isNullable }));
-
-            ExecuteNonQuery(sb.ToString());
-
-            var constrName = ConstructDefaultConstraintName(tblName, colName);
-            ExecuteNonQuery(string.Format("IF OBJECT_ID('[{0}]') IS NOT NULL\nALTER TABLE {1} DROP CONSTRAINT [{0}]", constrName, FormatFullName(tblName)));
             if (defConstraint != null)
             {
-                string defValue;
+                constrName = ConstructDefaultConstraintName(tblName, colName);
                 if (defConstraint is NewGuidDefaultConstraint)
                 {
                     defValue = "NEWID()";
@@ -346,6 +343,28 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
                 {
                     throw new ArgumentOutOfRangeException("defConstraint", "Unsupported default constraint " + defConstraint.GetType().Name);
                 }
+            }
+
+            // Drop a existing default constraint
+            if (!add)
+            {
+                ExecuteNonQuery(string.Format("IF OBJECT_ID('[{0}]') IS NOT NULL\nALTER TABLE {1} DROP CONSTRAINT [{0}]", constrName, FormatFullName(tblName)));
+            }
+
+            // Construct statement
+            sb.AppendFormat("ALTER TABLE {0} {1} {2}", FormatFullName(tblName), addOrAlter, GetColumnDefinition(new Column() { Name = colName, Type = type, Size = size, Scale = scale, IsNullable = isNullable }));
+
+            // Add Default Constraint only if column is been added
+            if (defConstraint != null && add)
+            {
+                sb.AppendFormat(" CONSTRAINT {0} DEFAULT {1}", constrName, defValue);
+            }
+
+            ExecuteNonQuery(sb.ToString());
+
+            // Recreate Constraint only if not done during add
+            if (defConstraint != null && !add)
+            {
                 ExecuteNonQuery(string.Format("ALTER TABLE {1} ADD CONSTRAINT [{0}] DEFAULT {3} FOR [{2}]", constrName, FormatFullName(tblName), colName, defValue));
             }
         }
