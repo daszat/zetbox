@@ -149,11 +149,11 @@ namespace Kistl.API.Migration
         {
             if (src_val == null || src_val == DBNull.Value) return src_val;
 
-            var destType = DbTypeMapper.GetDbTypeForProperty(col.DestinationProperty.GetType());
+            var destType = DbTypeMapper.GetDbTypeForProperty(col.DestinationProperty.Last().GetType());
             var srcType = DbTypeMapper.GetDbType(col.DbType);
             object dest_val = src_val;
 
-            if (col.DestinationProperty is Kistl.App.Base.EnumerationProperty)
+            if (col.DestinationProperty.Last() is Kistl.App.Base.EnumerationProperty)
             {
                 Log.DebugFormat("Convert [{0}] = '{1}' from [{2}] to enum", col.Name, src_val, srcType);
                 // Lookup mapping first
@@ -165,7 +165,7 @@ namespace Kistl.API.Migration
                 else
                 {
                     // Try to autoresolve
-                    var enumProp = (Kistl.App.Base.EnumerationProperty)col.DestinationProperty;
+                    var enumProp = (Kistl.App.Base.EnumerationProperty)col.DestinationProperty.Last();
                     // Lookup by name
                     var destEnumEntry = enumProp.Enumeration.EnumerationEntries.FirstOrDefault(e => e.Name == src_val.ToString());
                     if (destEnumEntry != null)
@@ -384,7 +384,7 @@ namespace Kistl.API.Migration
         public Type GetFieldType(int i)
         {
             var col = _srcColumns[i];
-            return col.DestinationProperty.GetPropertyType();
+            return col.DestinationProperty.SingleOrDefault().GetPropertyType();
         }
 
         public float GetFloat(int i)

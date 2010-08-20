@@ -117,7 +117,7 @@ namespace ZBox.App.SchemaMigration
                     r = t.AddRow();
                     r.Cells[0].AddParagraph(GetStatusString(c.Status));
                     r.Cells[1].AddParagraph(c.Name ?? string.Empty);
-                    r.Cells[2].AddParagraph(c.DestinationProperty != null ? c.DestinationProperty.Name : string.Empty);
+                    r.Cells[2].AddParagraph(c.DestinationProperty.Count > 0 ? c.DestinationProperty.Last().Name : string.Empty);
                     r.Cells[3].AddParagraph(c.Description ?? string.Empty);
                 }
 
@@ -140,7 +140,7 @@ namespace ZBox.App.SchemaMigration
 
                     r = t.AddRow();
                     r.Cells[0].AddParagraph("Dest Name");
-                    r.Cells[1].AddParagraph(c.DestinationProperty != null ? c.DestinationProperty.Name : string.Empty);
+                    r.Cells[1].AddParagraph(c.DestinationProperty.Count > 0 ? c.DestinationProperty.Last().Name : string.Empty);
 
                     r = t.AddRow();
                     r.Cells[0].AddParagraph("Source Type");
@@ -148,7 +148,7 @@ namespace ZBox.App.SchemaMigration
 
                     r = t.AddRow();
                     r.Cells[0].AddParagraph("Dest Type");
-                    r.Cells[1].AddParagraph(c.DestinationProperty != null ? c.DestinationProperty.GetPropertyTypeString() : string.Empty);
+                    r.Cells[1].AddParagraph(c.DestinationProperty.Count > 0 ? c.DestinationProperty.Last().GetPropertyTypeString() : string.Empty);
 
                     r = t.AddRow();
                     r.Cells[0].AddParagraph("IsNullable");
@@ -209,7 +209,7 @@ namespace ZBox.App.SchemaMigration
 
                 r = t.AddRow();
                 r.Cells[0].AddParagraph("SourceColumns mapped");
-                r.Cells[1].AddParagraph(_obj.SourceColumn.Count(i => i.DestinationProperty != null).ToString());
+                r.Cells[1].AddParagraph(_obj.SourceColumn.Count(i => i.DestinationProperty.Count > 0).ToString());
             }
 
             protected override void NewDocument()

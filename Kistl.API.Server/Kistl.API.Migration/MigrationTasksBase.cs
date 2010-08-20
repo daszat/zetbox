@@ -96,7 +96,7 @@ namespace Kistl.API.Migration
 
             // ------------------- Build columns ------------------- 
             var mappedColumns = tbl.SourceColumn
-                .Where(c => c.DestinationProperty != null)
+                .Where(c => c.DestinationProperty.Count > 0)
                 .OrderBy(c => c.Name)
                 .ToList();
             // Ref Cols
@@ -115,7 +115,7 @@ namespace Kistl.API.Migration
 
         private static List<string> GetDestinationColumnNames(SourceTable tbl, List<SourceColumn> srcColumns)
         {
-            var dstColumnNames = srcColumns.Select(c => GetColName(c.DestinationProperty)).ToList();
+            var dstColumnNames = srcColumns.Select(c => GetColName(c.DestinationProperty.Single())).ToList();
             // Error Col
             if (typeof(IMigrationInfo).IsAssignableFrom(tbl.DestinationObjectClass.GetDataType()))
             {
@@ -129,7 +129,7 @@ namespace Kistl.API.Migration
             if (additional_joins != null
                 && additional_joins.Length > 0
                 && additional_joins.All(j => referringCols
-                    .Select(c => c.DestinationProperty)
+                    .Select(c => c.DestinationProperty.Single())
                     .OfType<ObjectReferenceProperty>()
                     .Any(orp => j.JoinTableName == _dst.GetQualifiedTableName(orp.RelationEnd.Parent.GetOtherEnd(orp.RelationEnd).Type.TableName))))
             {
@@ -139,7 +139,7 @@ namespace Kistl.API.Migration
             // could automatically create needed indices
             var all_joins = new Dictionary<SourceColumn, Join>();
             var root_joins = referringCols
-                .GroupBy(k => k.DestinationProperty)
+                .GroupBy(k => k.DestinationProperty.Single())
                 .SelectMany(referenceGroup => CreateReferenceJoin(referenceGroup, all_joins))
                 .ToArray();
 
@@ -158,23 +158,23 @@ namespace Kistl.API.Migration
                                 .Where(c => c.References == null)
                                 .Union(
                                     referringCols
-                                        .GroupBy(k => k.DestinationProperty)
+                                        .GroupBy(k => k.DestinationProperty.Single()) // referring columns cannot be mapped remotely
                                         .Select(g => g.First(p => p.References.References == null))
                                 ).ToList();
             var srcColumnNames = srcColumns.Select(c =>
             {
-                var orp = c.DestinationProperty as ObjectReferenceProperty;
+                var orp = c.DestinationProperty.FirstOrDefault() as ObjectReferenceProperty;
                 if (c.References != null)
                 {
                     return new ProjectionColumn()
                     {
                         ColumnName = "ID",
-                        Alias = c.DestinationProperty.Name,
+                        Alias = c.DestinationProperty.Single().Name,
                         Source = all_joins[c]
                     };
                 }
                 else if (c.References == null
-                    && c.DestinationProperty is ObjectReferenceProperty)
+                    && orp != null)
                 {
                     if (additional_joins != null
                         && additional_joins.Count(i => i.JoinTableName == _dst.GetQualifiedTableName(orp.RelationEnd.Parent.GetOtherEnd(orp.RelationEnd).Type.TableName)) > 0)
@@ -182,7 +182,7 @@ namespace Kistl.API.Migration
                         return new ProjectionColumn()
                         {
                             ColumnName = "ID",
-                            Alias = c.DestinationProperty.Name,
+                            Alias = orp.Name,
                             Source = additional_joins.Single(j => j.JoinTableName == _dst.GetQualifiedTableName(orp.RelationEnd.Parent.GetOtherEnd(orp.RelationEnd).Type.TableName))
                         };
                     }
@@ -231,8 +231,8 @@ namespace Kistl.API.Migration
         {
             var x = referenceGroup
                 .Select(r => new KeyValuePair<SourceColumn, SourceColumn>(r.Key, r.Value.References)) // go to referenced SourceColumns
-                .Where(r => r.Value.References != null && r.Value.DestinationProperty != null) // find secondary references
-                .GroupBy(r => r.Value.DestinationProperty)
+                .Where(r => r.Value.References != null && r.Value.DestinationProperty.Count > 0) // find secondary references
+                .GroupBy(r => r.Value.DestinationProperty.Single())
                 .Select(g => new { Property = g.Key, Result = CreateReferenceJoin(g, all_joins) })
                 .ToArray();
 
@@ -269,7 +269,7 @@ namespace Kistl.API.Migration
             {
                 Type = JoinType.Left,
                 JoinTableName = _dst.GetQualifiedTableName(srcTbl.DestinationObjectClass.TableName),
-                JoinColumnName = directRefs.Select(reference => new ColumnRef(reference.Value.References.DestinationProperty.Name, ColumnRef.Local)).ToArray(),
+                JoinColumnName = directRefs.Select(reference => new ColumnRef(reference.Value.References.DestinationProperty.Single().Name, ColumnRef.Local)).ToArray(),
                 FKColumnName = directRefs.Select(reference => new ColumnRef(reference.Value.Name, ColumnRef.PrimaryTable)).ToArray()
             };
             directRefs.ForEach(dr => all_joins[dr.Key] = result);

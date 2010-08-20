@@ -53,7 +53,7 @@ namespace ZBox.App.SchemaMigration
             if (obj.SourceTable.StagingDatabase == null) throw new InvalidOperationException("Not attached to a staging database");
             if (obj.SourceTable.StagingDatabase.MigrationProject == null) throw new InvalidOperationException("Not attached to a migration project");
             if (obj.SourceTable.StagingDatabase.MigrationProject.DestinationModule == null) throw new InvalidOperationException("No destination module provided");
-            if (obj.DestinationProperty != null) throw new InvalidOperationException("there is already a destination object property");
+            if (obj.DestinationProperty.Count > 0) throw new InvalidOperationException("there is already a destination object property");
 
             Property p = null;
 
@@ -121,7 +121,7 @@ namespace ZBox.App.SchemaMigration
                 p.Constraints.Add(obj.Context.Create<NotNullableConstraint>());
             }
 
-            obj.DestinationProperty = p;
+            obj.DestinationProperty.Add(p);
             p.Name = obj.Name;
             p.Description = obj.Description;
             p.ObjectClass = obj.SourceTable.DestinationObjectClass;

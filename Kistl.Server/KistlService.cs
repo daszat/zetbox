@@ -82,7 +82,7 @@ namespace Kistl.Server
             }
             catch (Exception ex)
             {
-                Helper.HandleError(ex, true);
+                Helper.ThrowFaultException(ex);
                 // Never called, Handle errors throws an Exception
                 return null;
             }
@@ -122,7 +122,7 @@ namespace Kistl.Server
             }
             catch (Exception ex)
             {
-                Helper.HandleError(ex, true);
+                Helper.ThrowFaultException(ex);
                 // Never called, Handle errors throws an Exception
                 return null;
             }
@@ -222,7 +222,7 @@ namespace Kistl.Server
             }
             catch (Exception ex)
             {
-                Helper.HandleError(ex, true);
+                Helper.ThrowFaultException(ex);
                 // Never called, Handle errors throws an Exception
                 return null;
             }
@@ -267,7 +267,7 @@ namespace Kistl.Server
             }
             catch (Exception ex)
             {
-                Helper.HandleError(ex, true);
+                Helper.ThrowFaultException(ex);
                 // Never called, Handle errors throws an Exception
                 return null;
             }
@@ -296,7 +296,7 @@ namespace Kistl.Server
             }
             catch (Exception ex)
             {
-                Helper.HandleError(ex, true);
+                Helper.ThrowFaultException(ex);
                 // Never called, Handle errors throws an Exception
                 return null;
             }
@@ -330,7 +330,7 @@ namespace Kistl.Server
             }
             catch (Exception ex)
             {
-                Helper.HandleError(ex, true);
+                Helper.ThrowFaultException(ex);
                 // Never called, Handle errors throws an Exception
                 return null;
             }
