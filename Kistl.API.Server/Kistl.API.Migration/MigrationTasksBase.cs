@@ -59,16 +59,38 @@ namespace Kistl.API.Migration
         /// </summary>
         /// <param name="prop"></param>
         /// <returns></returns>
-        private static string GetColName(Kistl.App.Base.Property prop)
+        private static string GetColName(Property prop)
         {
-            if (prop is Kistl.App.Base.ObjectReferenceProperty)
+            if (prop is ObjectReferenceProperty)
             {
-                var orp = (Kistl.App.Base.ObjectReferenceProperty)prop;
+                var orp = (ObjectReferenceProperty)prop;
                 return "fk_" + orp.RelationEnd.Parent.GetOtherEnd(orp.RelationEnd).RoleName;
             }
             else
             {
                 return prop.Name;
+            }
+        }
+
+        /// <summary>
+        /// TODO: Use Construct from Generator
+        /// </summary>
+        /// <param name="props"></param>
+        /// <returns></returns>
+        private static string GetColName(IEnumerable<Property> props)
+        {
+            // TODO: Move Consruct to Server.API so we can use it here
+            if (props.First() is CompoundObjectProperty)
+            {
+                return string.Join("_", props.Select(p => p.Name).ToArray());
+            }
+            else if (props.Count() == 1)
+            {
+                return GetColName(props.Single());
+            }
+            else
+            {
+                throw new ArgumentException("Property must only contain exact one DestinationProperty or first must be a CompoundObjectProperty", "props");
             }
         }
 
@@ -115,7 +137,7 @@ namespace Kistl.API.Migration
 
         private static List<string> GetDestinationColumnNames(SourceTable tbl, List<SourceColumn> srcColumns)
         {
-            var dstColumnNames = srcColumns.Select(c => GetColName(c.DestinationProperty.Single())).ToList();
+            var dstColumnNames = srcColumns.Select(c => GetColName(c.DestinationProperty)).ToList();
             // Error Col
             if (typeof(IMigrationInfo).IsAssignableFrom(tbl.DestinationObjectClass.GetDataType()))
             {
