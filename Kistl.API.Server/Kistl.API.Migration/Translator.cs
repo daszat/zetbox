@@ -9,6 +9,7 @@ namespace Kistl.API.Migration
     using Kistl.API.Server;
     using ZBox.App.SchemaMigration;
     using System.Globalization;
+    using Kistl.App.Base;
 
     public sealed class Translator
         : IDataReader
@@ -19,12 +20,14 @@ namespace Kistl.API.Migration
         private readonly IDataReader _source;
         private readonly SourceColumn[] _srcColumns;
         private readonly NullConverter[] _nullConverter;
-        private readonly string[] _srcColumnNames;
 
         private readonly int _errorColIdx;
-
         private StringBuilder _currentError;
+
         private object[] _resultValues;
+        private int _resultColumnCount;
+
+        private Dictionary<string, int> _compoundObjectSourceColumns = new Dictionary<string,int>();
 
         private long _processedRows = 0;
 
@@ -37,16 +40,29 @@ namespace Kistl.API.Migration
             _tbl = tbl;
             _source = source;
             _srcColumns = srcColumns.ToArray();
-            _srcColumnNames = srcColumns.Select(c => c.Name).ToArray();
             _nullConverter = nullConverter ?? new NullConverter[] { };
+            _resultColumnCount = _srcColumns.Length;
 
             if (typeof(IMigrationInfo).IsAssignableFrom(tbl.DestinationObjectClass.GetDataType()))
             {
-                _errorColIdx = _srcColumns.Length;
+                // TODO: That's a bad hack!
+                _errorColIdx = _resultColumnCount;
+                _resultColumnCount++;
             }
             else
             {
                 _errorColIdx = -1;
+            }
+
+            foreach(var comp in srcColumns
+                .Where(c => c.DestinationProperty.First() is CompoundObjectProperty)
+                .GroupBy(c => c.DestinationProperty.First()))
+            {
+                foreach (var col in comp)
+                {
+                    _compoundObjectSourceColumns[col.Name] = _resultColumnCount;
+                }
+                _resultColumnCount++;
             }
         }
 
@@ -98,23 +114,32 @@ namespace Kistl.API.Migration
             if (result)
             {
                 // allocate new row
-                if (_errorColIdx != -1)
-                {
-                    _resultValues = new object[_srcColumnNames.Length + 1];
-                }
-                else
-                {
-                    _resultValues = new object[_srcColumnNames.Length];
-                }
+                _resultValues = new object[_resultColumnCount];
                 _source.GetValues(_resultValues);
 
                 // calculate new row
-                for (int i = 0; i < _srcColumnNames.Length; i++)
+                for (int i = 0; i < _srcColumns.Length; i++)
                 {
+                    var src_col = _srcColumns[i];
                     var src_val = _source.GetValue(i);
-                    var val = ConvertType(_srcColumns[i], src_val);
-                    val = HandleNullValue(_srcColumns[i], val, src_val);
+                    var val = ConvertType(src_col, src_val);
+                    val = HandleNullValue(src_col, val, src_val);
                     _resultValues[i] = val;
+
+                    // Handle compound object null bit
+                    if (src_col.DestinationProperty.First() is CompoundObjectProperty)
+                    {
+                        bool isNull = val == null || val == DBNull.Value;
+                        var idx = _compoundObjectSourceColumns[src_col.Name];
+                        if (_resultValues[idx] == null)
+                        {
+                            _resultValues[idx] = isNull;
+                        }
+                        else
+                        {
+                            _resultValues[idx] = (bool)_resultValues[idx] && isNull;
+                        }
+                    }
                 }
 
                 // append errors

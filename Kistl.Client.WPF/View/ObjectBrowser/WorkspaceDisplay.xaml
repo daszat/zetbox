@@ -45,10 +45,24 @@
                 <TreeView.Resources>
                     <HierarchicalDataTemplate DataType="{x:Type objBrowser:ModuleViewModel}"
                                                       ItemsSource="{Binding ObjectClasses}">
-                        <view:DataObjectLineDisplay />
+                        <!--<view:DataObjectLineDisplay />-->
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="{Binding Converter={StaticResource IconConverter}}"
+                                   Width="14"
+                                   Height="14" />
+                            <TextBlock Text="{Binding PropertyModelsByName[Name]}"
+                                       Margin="3,0,0,0"/>
+                        </StackPanel>
                     </HierarchicalDataTemplate>
                     <DataTemplate DataType="{x:Type clientKistlBase:InstanceListViewModel}">
-                        <view:DataObjectLineDisplay DataContext="{Binding DataTypeModel}" />
+                        <!-- <view:DataObjectLineDisplay DataContext="{Binding DataTypeModel}" />-->
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="{Binding Converter={StaticResource IconConverter}}"
+                                   Width="14"
+                                   Height="14" />
+                            <TextBlock Text="{Binding PropertyModelsByName[Name]}"
+                                       Margin="3,0,0,0"/>
+                        </StackPanel>
                     </DataTemplate>
                 </TreeView.Resources>
                 <TreeViewItem Header="Browse"

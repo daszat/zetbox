@@ -143,6 +143,11 @@ namespace Kistl.API.Migration
             {
                 dstColumnNames.Add("MigrationErrors");
             }
+            dstColumnNames.AddRange(srcColumns
+                .Where(c => c.DestinationProperty.First() is CompoundObjectProperty)
+                .GroupBy(c => c.DestinationProperty.First())
+                .Select(grp => GetColName(grp.Key)));
+
             return dstColumnNames;
         }
 
