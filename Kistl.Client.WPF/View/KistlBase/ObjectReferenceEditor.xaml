@@ -22,11 +22,13 @@
         </ContextMenu>
     </view:PropertyEditor.ContextMenu>
 
-    <Border BorderBrush="Black"
-            BorderThickness="1">
+    <DockPanel>
+        <Image DockPanel.Dock="Left"
+               Width="16"
+               Height="16"
+               Source="/Kistl.Client.WPF;component/Images/EditTableHS.png"/>
         <ContentPresenter Content="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"
-                          ContentTemplateSelector="{StaticResource listItemTemplateSelector}">
-        </ContentPresenter>
-    </Border>
+                          ContentTemplateSelector="{StaticResource listItemTemplateSelector}" />
+    </DockPanel>
 
 </view:PropertyEditor>

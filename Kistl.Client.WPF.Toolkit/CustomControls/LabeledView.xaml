@@ -4,7 +4,7 @@
              xmlns:tk="clr-namespace:Kistl.Client.WPF.View"
              MinWidth="100"
              MinHeight="26"
-             Margin="4"
+             Margin="2,1,2,1"
              x:Name="lbView">
     <Grid>
         <Grid.ColumnDefinitions>

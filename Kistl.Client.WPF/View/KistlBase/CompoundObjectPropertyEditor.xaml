@@ -27,7 +27,7 @@
 
         <ItemsControl.ItemTemplate>
             <DataTemplate DataType="{x:Type client:ViewModel}">
-                <ctrls:LabeledView />
+                <ctrls:LabeledView LabelSharedSizeGroup="CompoundObjectLabeledView" LabelMinWidth="10" />
             </DataTemplate>
         </ItemsControl.ItemTemplate>
     </ItemsControl>
