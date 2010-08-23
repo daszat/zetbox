@@ -50,7 +50,7 @@
                             <Image Source="{Binding Converter={StaticResource IconConverter}}"
                                    Width="14"
                                    Height="14" />
-                            <TextBlock Text="{Binding PropertyModelsByName[Name]}"
+                            <TextBlock Text="{Binding PropertyModelsByName[Name].Value}"
                                        Margin="3,0,0,0"/>
                         </StackPanel>
                     </HierarchicalDataTemplate>
@@ -60,7 +60,7 @@
                             <Image Source="{Binding Converter={StaticResource IconConverter}}"
                                    Width="14"
                                    Height="14" />
-                            <TextBlock Text="{Binding PropertyModelsByName[Name]}"
+                            <TextBlock Text="{Binding DataTypeModel.PropertyModelsByName[Name].Value}"
                                        Margin="3,0,0,0"/>
                         </StackPanel>
                     </DataTemplate>
