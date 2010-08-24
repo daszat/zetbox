@@ -13,13 +13,14 @@ using System.Windows.Shapes;
 
 using Kistl.Client.Presentables;
 using Kistl.Client.GUI;
+using Kistl.Client.WPF.CustomControls;
 
 namespace Kistl.Client.WPF.View
 {
     /// <summary>
     /// Interaction logic for SelectionDialog.xaml
     /// </summary>
-    public partial class SelectionDialog : Window, IHasViewModel<DataObjectSelectionTaskModel>
+    public partial class SelectionDialog : WindowView, IHasViewModel<DataObjectSelectionTaskModel>
     {
         public SelectionDialog()
         {

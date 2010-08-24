@@ -15,13 +15,14 @@ using Kistl.App.GUI;
 using Kistl.Client.GUI;
 using Kistl.Client.Presentables;
 using Kistl.Client.Presentables.ObjectEditor;
+using Kistl.Client.WPF.CustomControls;
 
 namespace Kistl.Client.WPF.View.ObjectEditor
 {
     /// <summary>
     /// Interaction logic for DesktopView.xaml
     /// </summary>
-    public partial class WorkspaceDisplay : Window, IHasViewModel<WorkspaceViewModel>
+    public partial class WorkspaceDisplay : WindowView, IHasViewModel<WorkspaceViewModel>
     {
         public WorkspaceDisplay()
         {

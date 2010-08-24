@@ -16,12 +16,13 @@ namespace Kistl.Client.WPF.View.GUI
     using System.Windows.Shapes;
     using Kistl.Client.GUI;
     using Kistl.Client.Presentables.GUI;
+    using Kistl.Client.WPF.CustomControls;
 
     /// <summary>
     /// Interaction logic for NavigatorDisplay.xaml
     /// </summary>
     [ViewDescriptor("GUI", Kistl.App.GUI.Toolkit.WPF, Kind = "Kistl.App.GUI.Navigator")]
-    public partial class NavigatorDisplay : Window, IHasViewModel<NavigatorViewModel>
+    public partial class NavigatorDisplay : WindowView, IHasViewModel<NavigatorViewModel>
     {
         public NavigatorDisplay()
         {

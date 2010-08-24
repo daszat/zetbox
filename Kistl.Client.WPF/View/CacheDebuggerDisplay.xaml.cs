@@ -12,13 +12,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Kistl.Client.GUI;
 using Kistl.Client.Presentables;
+using Kistl.Client.WPF.CustomControls;
 
 namespace Kistl.Client.WPF.View
 {
     /// <summary>
     /// Interaction logic for CacheDebuggerDisplay.xaml
     /// </summary>
-    public partial class CacheDebuggerDisplay : Window, IHasViewModel<CacheDebuggerViewModel>
+    public partial class CacheDebuggerDisplay : WindowView, IHasViewModel<CacheDebuggerViewModel>
     {
         public CacheDebuggerDisplay()
         {

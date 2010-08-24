@@ -19,11 +19,12 @@ namespace Kistl.Client.WPF.View.ObjectBrowser
     using Kistl.Client.Presentables;
     using Kistl.Client.GUI;
     using Kistl.Client.Presentables.ObjectBrowser;
+    using Kistl.Client.WPF.CustomControls;
 
     /// <summary>
     /// Interaction logic for WorkspaceDisplay.xaml, a read-only display of a <see cref="Kistl.Client.Presentables.ObjectBrowser.WorkspaceViewModel"/>.
     /// </summary>
-    public partial class WorkspaceDisplay : Window, IHasViewModel<WorkspaceViewModel>
+    public partial class WorkspaceDisplay : WindowView, IHasViewModel<WorkspaceViewModel>
     {
         /// <summary>
         /// Initializes a new instance of the WorkspaceDisplay class.

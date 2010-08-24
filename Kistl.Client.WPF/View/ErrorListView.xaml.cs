@@ -15,11 +15,12 @@ namespace Kistl.Client.WPF.View
     using System.Windows.Shapes;
     
     using Kistl.Client.Presentables;
+    using Kistl.Client.WPF.CustomControls;
 
     /// <summary>
     /// Interaction logic for ErrorListView.xaml
     /// </summary>
-    public partial class ErrorListView : Window
+    public partial class ErrorListView : WindowView
     {
         public ErrorListView()
         {

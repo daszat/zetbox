@@ -1,4 +1,4 @@
-﻿<Window x:Class="Kistl.Client.WPF.View.ObjectBrowser.WorkspaceDisplay"
+﻿<ctrls:WindowView x:Class="Kistl.Client.WPF.View.ObjectBrowser.WorkspaceDisplay"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls;assembly=Kistl.Client.WPF.Toolkit"
@@ -82,4 +82,4 @@
                               ContentTemplateSelector="{StaticResource dashBoardTemplateSelector}" />
         </Grid>
     </DockPanel>
-</Window>
+</ctrls:WindowView>

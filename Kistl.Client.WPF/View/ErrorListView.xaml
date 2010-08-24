@@ -1,12 +1,14 @@
-﻿<Window x:Class="Kistl.Client.WPF.View.ErrorListView"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:client="clr-namespace:Kistl.Client.Presentables;assembly=Kistl.Client"
-        Title="ErrorListView"
-        Height="300"
-        Width="300">
+﻿<ctrls:WindowView x:Class="Kistl.Client.WPF.View.ErrorListView"
+                  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                  xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls;assembly=Kistl.Client.WPF.Toolkit"
+                  xmlns:client="clr-namespace:Kistl.Client.Presentables;assembly=Kistl.Client"
+                  Title="ErrorListView"
+                  Height="300"
+                  Width="300">
     <DockPanel>
-        <UniformGrid DockPanel.Dock="Bottom" Rows="1">
+        <UniformGrid DockPanel.Dock="Bottom"
+                     Rows="1">
             <Button Click="Refresh_Click">Refresh</Button>
             <Button>Close</Button>
         </UniformGrid>
@@ -14,11 +16,11 @@
             <ListView.ItemTemplate>
                 <DataTemplate DataType="{x:Type client:ErrorDescriptor}">
                     <StackPanel>
-                        <TextBlock Text="{Binding Item}"/>
-                        <ListBox ItemsSource="{Binding Errors}"/>
+                        <TextBlock Text="{Binding Item}" />
+                        <ListBox ItemsSource="{Binding Errors}" />
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
     </DockPanel>
-</Window>
+</ctrls:WindowView>

@@ -11,7 +11,7 @@ using Kistl.Client.Presentables.KistlBase;
 namespace Kistl.Client.Presentables
 {
     public class DataObjectSelectionTaskModel
-        : ViewModel, IRefreshCommandListener
+        : WindowViewModel, IRefreshCommandListener
     {
         public new delegate DataObjectSelectionTaskModel Factory(IKistlContext dataCtx,
             ObjectClass type,
@@ -94,14 +94,6 @@ namespace Kistl.Client.Presentables
                 return ListViewModel.SelectedItems.FirstOrDefault();
             }
         }
-
-        private bool _show = true;
-        public bool Show
-        {
-            get { return _show; }
-            private set { _show = value; OnPropertyChanged("Show"); }
-        }
-
         #endregion
 
         private Action<DataObjectModel> _callback;

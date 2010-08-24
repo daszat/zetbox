@@ -8,7 +8,7 @@ namespace Kistl.Client.Presentables.GUI
 {
     [ViewModelDescriptor("GUI", DefaultKind = "Kistl.App.GUI.MultiLineEditorDialog", Description = "ViewModel for displaying a multiline string editor dialog")]
     public class MultiLineEditorDialogModel
-        : ViewModel
+        : WindowViewModel
     {
         private Action<string> _callback;
 
@@ -83,13 +83,6 @@ namespace Kistl.Client.Presentables.GUI
         public void Cancel()
         {
             Show = false;
-        }
-
-        private bool _show = true;
-        public bool Show
-        {
-            get { return _show; }
-            private set { _show = value; OnPropertyChanged("Show"); }
         }
     }
 }

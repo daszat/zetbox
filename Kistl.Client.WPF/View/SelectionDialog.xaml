@@ -1,20 +1,21 @@
-﻿<Window x:Class="Kistl.Client.WPF.View.SelectionDialog"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:client="clr-namespace:Kistl.Client.Presentables;assembly=Kistl.Client"
-        Title="Choose Object"
-        ResizeMode="CanResize"
-        SizeToContent="Height"
-        MinWidth="300"
-        Loaded="Window_Loaded"
-        xmlns:commands="clr-namespace:Kistl.Client.WPF.Commands;assembly=Kistl.Client.WPF.Toolkit"
-        commands:SmartRoutedUICommand.IsCommandSink="True">
-    <Window.Resources>
+﻿<ctrls:WindowView x:Class="Kistl.Client.WPF.View.SelectionDialog"
+                  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                  xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls;assembly=Kistl.Client.WPF.Toolkit"
+                  xmlns:client="clr-namespace:Kistl.Client.Presentables;assembly=Kistl.Client"
+                  Title="Choose Object"
+                  ResizeMode="CanResize"
+                  SizeToContent="Height"
+                  MinWidth="300"
+                  Loaded="Window_Loaded"
+                  xmlns:commands="clr-namespace:Kistl.Client.WPF.Commands;assembly=Kistl.Client.WPF.Toolkit"
+                  commands:SmartRoutedUICommand.IsCommandSink="True">
+    <ctrls:WindowView.Resources>
         <Style x:Key="addedMargins">
             <Setter Property="FrameworkElement.Margin"
                     Value="5" />
         </Style>
-    </Window.Resources>
+    </ctrls:WindowView.Resources>
     <DockPanel Style="{StaticResource addedMargins}"
                LastChildFill="True">
 
@@ -29,8 +30,7 @@
                     Style="{StaticResource addedMargins}">Cancel</Button>
         </UniformGrid>
 
-        <ContentPresenter 
-                  ContentTemplateSelector="{StaticResource defaultTemplateSelector}"
-                  Content="{Binding ListViewModel}" />
+        <ContentPresenter ContentTemplateSelector="{StaticResource defaultTemplateSelector}"
+                          Content="{Binding ListViewModel}" />
     </DockPanel>
-</Window>
+</ctrls:WindowView>

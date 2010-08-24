@@ -12,13 +12,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Kistl.Client.GUI;
 using Kistl.Client.Presentables.ModuleEditor;
+using Kistl.Client.WPF.CustomControls;
 
 namespace Kistl.Client.WPF.View.ModuleEditor
 {
     /// <summary>
     /// Interaction logic for Workspace.xaml
     /// </summary>
-    public partial class WorkspaceDisplay : Window, IHasViewModel<WorkspaceViewModel>
+    public partial class WorkspaceDisplay : WindowView, IHasViewModel<WorkspaceViewModel>
     {
         public WorkspaceDisplay()
         {
