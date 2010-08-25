@@ -114,6 +114,29 @@ namespace Kistl.Client.Presentables.KistlBase
         #endregion
 
         #region Filter Collection
+        private bool _enableAutoFilter = true;
+
+        /// <summary>
+        /// Enables the auto filter feature. This is the default. Setting this property will cause the filter collection to be cleared.
+        /// </summary>
+        public bool EnableAutoFilter
+        {
+            get
+            {
+                return _enableAutoFilter;
+            }
+            set
+            {
+                if (_enableAutoFilter != value)
+                {
+                    _enableAutoFilter = value;
+                    _filter = null;
+                    OnPropertyChanged("EnableAutoFilter");
+                    OnPropertyChanged("Filter");
+                }
+            }
+        }
+ 
         private ObservableCollection<IFilterExpression> _filter = null;
         public ICollection<IFilterExpression> Filter
         {
@@ -125,24 +148,27 @@ namespace Kistl.Client.Presentables.KistlBase
                     // React on changes -> attach to FilterChanged Event
                     _filter.CollectionChanged += new NotifyCollectionChangedEventHandler(_filter_CollectionChanged);
 
-                    // Resolve default property filter
-                    var t = _type;
-                    while (t != null)
+                    if (EnableAutoFilter)
                     {
-                        // Add Property filter expressions
-                        foreach (var prop in t.Properties.Where(p => p.FilterConfiguration != null))
+                        // Resolve default property filter
+                        var t = _type;
+                        while (t != null)
                         {
-                            var cfg = prop.FilterConfiguration;
-                            _filter.Add(ModelFactory.CreateViewModel<PropertyFilterExpressionFactory>(cfg.ViewModelDescriptor.ViewModelRef.AsType(true)).Invoke(DataContext, prop, cfg));
+                            // Add Property filter expressions
+                            foreach (var prop in t.Properties.Where(p => p.FilterConfiguration != null))
+                            {
+                                var cfg = prop.FilterConfiguration;
+                                _filter.Add(ModelFactory.CreateViewModel<PropertyFilterExpressionFactory>(cfg.ViewModelDescriptor.ViewModelRef.AsType(true)).Invoke(DataContext, prop, cfg));
+                            }
+                            if (t is ObjectClass)
+                            {
+                                t = ((ObjectClass)t).BaseObjectClass;
+                            }
                         }
-                        if(t is ObjectClass)
-                        {
-                            t = ((ObjectClass)t).BaseObjectClass;
-                        }
-                    }
 
-                    // Add default ToString Filter for all
-                    _filter.Add(ModelFactory.CreateViewModel<ToStringFilterExpression.Factory>().Invoke(DataContext, "Name"));
+                        // Add default ToString Filter for all
+                        _filter.Add(ModelFactory.CreateViewModel<ToStringFilterExpression.Factory>().Invoke(DataContext, "Name"));
+                    }
                 }
                 return _filter;
             }
