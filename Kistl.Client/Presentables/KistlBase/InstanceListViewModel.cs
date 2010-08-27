@@ -388,6 +388,23 @@ namespace Kistl.Client.Presentables.KistlBase
         #endregion
 
         #region UI
+        private bool _isItemsReadOnly = true;
+        public bool IsItemsReadOnly
+        {
+            get
+            {
+                return _isItemsReadOnly;
+            }
+            set
+            {
+                if (_isItemsReadOnly != value)
+                {
+                    _isItemsReadOnly = value;
+                    OnPropertyChanged("IsItemsReadOnly");
+                }
+            }
+        }
+
         /// <returns>the default icon of this <see cref="DataType"/></returns>
         public Kistl.App.GUI.Icon Icon
         {

@@ -123,52 +123,78 @@ namespace Kistl.Client.Presentables.GUI
 
         #region Commands
 
-        public CommandModel HomeCommand
+        private ICommand _HomeCommand = null;
+        public ICommand HomeCommand
         {
             get
             {
-                return ModelFactory.CreateViewModel<SimpleCommandModel.Factory>().Invoke(
-                    DataContext,
-                    "Home",
-                    "Navigates back to the top-most screen",
-                    () => CurrentScreen = _root,
-                    () => CurrentScreen != _root);
+                if (_HomeCommand == null)
+                {
+                    _HomeCommand = ModelFactory.CreateViewModel<SimpleCommandModel.Factory>().Invoke(
+                        DataContext,
+                        "Home",
+                        "Navigates back to the top-most screen",
+                        Home,
+                        () => CurrentScreen != _root);
+                }
+                return _HomeCommand;
             }
         }
 
-        public CommandModel BackCommand
+        public void Home()
+        {
+            CurrentScreen = _root;
+        }
+
+        private ICommand _BackCommand = null;
+        public ICommand BackCommand
         {
             get
             {
-                return ModelFactory.CreateViewModel<SimpleCommandModel.Factory>().Invoke(
-                    DataContext,
-                    "Back",
-                    "Navigates back to the last screen",
-                    () =>
-                    {
-                        // remove "current" screen from history
-                        _history.RemoveAt(_history.Count - 1);
-                        CurrentScreen = _history.Last();
-                        // remove the back step from history too
-                        _history.RemoveAt(_history.Count - 1);
-                    },
-                    () => _history.Count > 1);
+                if (_BackCommand == null)
+                {
+                    _BackCommand = ModelFactory.CreateViewModel<SimpleCommandModel.Factory>().Invoke(
+                        DataContext,
+                        "Back",
+                        "Navigates back to the last screen",
+                        Back,
+                        () => _history.Count > 1);
+                }
+                return _BackCommand;
             }
         }
 
-        public CommandModel NavigateToCommand
+        public void Back()
+        {
+            // remove "current" screen from history
+            _history.RemoveAt(_history.Count - 1);
+            CurrentScreen = _history.Last();
+            // remove the back step from history too
+            _history.RemoveAt(_history.Count - 1);
+        }
+
+        private ICommand _NavigateToCommand = null;
+        public ICommand NavigateToCommand
         {
             get
             {
-                return ModelFactory.CreateViewModel<SimpleParameterCommandModel<NavigationScreenViewModel>.Factory>().Invoke(
-                    DataContext,
-                    "Go to ...",
-                    "Navigates to the selected screen",
-                    screen => CurrentScreen = screen,
-                    screen => CurrentScreen != screen);
+                if (_NavigateToCommand == null)
+                {
+                    _NavigateToCommand = ModelFactory.CreateViewModel<SimpleParameterCommandModel<NavigationScreenViewModel>.Factory>().Invoke(
+                                DataContext,
+                                "Go to ...",
+                                "Navigates to the selected screen",
+                                NavigateTo,
+                                screen => CurrentScreen != screen);
+                }
+                return _NavigateToCommand;
             }
         }
 
+        public void NavigateTo(NavigationScreenViewModel screen)
+        {
+            CurrentScreen = screen;
+        }
         #endregion
     }
 }

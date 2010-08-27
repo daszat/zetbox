@@ -62,9 +62,12 @@ namespace Kistl.Client.Presentables
         ICommand ClearValueCommand { get; }
     }
 
+    /// <summary>
+    /// WPF is not able to bind to a explicit implemented interface
+    /// </summary>
     public interface IValueModelAsString
     {
-        string StringValue { get; set; }
+        string FormattedValue { get; set; }
     }
 
     public interface IValueModel<TValue>
@@ -79,28 +82,37 @@ namespace Kistl.Client.Presentables
         /// Gets a value indicating whether or not to allow <value>null</value> as input.
         /// </summary>
         bool AllowNullInput { get; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether or not the property may be edited
+        /// </summary>
+        bool IsReadOnly { get; set; }
     }
 
-
-    public abstract class BasePropertyModel : ViewModel
+    /// <summary>
+    /// Non generic base class to enable easy autofac usage
+    /// </summary>
+    public abstract class BasePropertyViewModel : ViewModel
     {
-        public new delegate BasePropertyModel Factory(IKistlContext dataCtx, INotifyingObject obj, Property prop);
+        public new delegate BasePropertyViewModel Factory(IKistlContext dataCtx, INotifyingObject obj, Property prop);
 
-        protected BasePropertyModel(
+        protected BasePropertyViewModel(
             IViewModelDependencies appCtx, IKistlContext dataCtx,
             INotifyingObject obj, Property prop)
             : base(appCtx, dataCtx)
         {
         }
 
-        protected BasePropertyModel(bool designMode)
+        protected BasePropertyViewModel(bool designMode)
             : base(designMode)
         {
         }
+
+        public abstract bool IsReadOnly { get; set; }
     }
 
     public abstract class PropertyModel<TValue>
-        : BasePropertyModel, IPropertyValueModel, IDataErrorInfo, ILabeledViewModel
+        : BasePropertyViewModel, IPropertyValueModel, IDataErrorInfo, ILabeledViewModel
     {
         public new delegate PropertyModel<TValue> Factory(IKistlContext dataCtx, INotifyingObject obj, Property prop);
 
@@ -170,6 +182,23 @@ namespace Kistl.Client.Presentables
             set
             {
                 base.RequestedKind = value;
+            }
+        }
+
+        protected bool isReadOnlyStore = false;
+        public override bool IsReadOnly
+        {
+            get
+            {
+                return isReadOnlyStore;
+            }
+            set
+            {
+                if (isReadOnlyStore != value)
+                {
+                    isReadOnlyStore = value;
+                    OnPropertyChanged("IsReadOnly");
+                }
             }
         }
 
@@ -389,7 +418,7 @@ namespace Kistl.Client.Presentables
             this.Value = String.IsNullOrEmpty(str) ? null : (Nullable<TValue>)System.Convert.ChangeType(str, typeof(TValue));
         }
 
-        public string StringValue
+        public string FormattedValue
         {
             get
             {
@@ -553,6 +582,7 @@ namespace Kistl.Client.Presentables
                     CheckConstraints();
 
                     OnPropertyChanged("Value");
+                    OnPropertyChanged("FormattedValue");
                     OnPropertyChanged("IsNull");
                     OnPropertyChanged("HasValue");
                 }
@@ -569,7 +599,7 @@ namespace Kistl.Client.Presentables
             this.Value = String.IsNullOrEmpty(str) ? null : (TValue)System.Convert.ChangeType(str, typeof(TValue));
         }
 
-        public string StringValue
+        public string FormattedValue
         {
             get
             {
@@ -686,6 +716,33 @@ namespace Kistl.Client.Presentables
             else
             {
                 Object.SetPropertyValue<object>(Property.Name, Enum.ToObject(((EnumerationProperty)Property).Enumeration.GetDataType(), val));
+            }
+        }
+
+        protected override string FormatValue()
+        {
+            if (Value == null) return string.Empty;
+            // This hurts, but looks funny
+            return PossibleValues.Single(key => key.Key == Value.Value).Value;
+        }
+
+        protected override void ParseValue(string str)
+        {
+            if (string.IsNullOrEmpty(str))
+            {
+                Value = null;
+            }
+            else
+            {
+                var item = PossibleValues.SingleOrDefault(value => string.Compare(value.Value, str, true) == 0);
+                if (item.Key != null)
+                {
+                    Value = item.Key.Value;
+                }
+                else
+                {
+                    // TODO: Set Error
+                }
             }
         }
 

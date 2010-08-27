@@ -40,95 +40,71 @@ namespace Kistl.Client.Presentables
             InitialiseViewCache();
         }
 
-        #region Public Interface
+        #region Property Management
 
-        private IDataObject _object;
-        public IDataObject Object { get { return _object; } }
-
-        public int ID
+        private List<Property> _propertyList = null;
+        private void FetchPropertyList()
         {
-            get
+            if (_propertyList == null)
             {
-                return IsInDesignMode
-                    ? 42
-                    // this should always be instantaneous
-                    : _object.ID;
-            }
-        }
-
-        private ReadOnlyProjectedList<Property, ViewModel> _propertyModels;
-        public IReadOnlyList<ViewModel> PropertyModels
-        {
-            get
-            {
-                if (_propertyModels == null)
+                // load properties from MetaContext
+                ObjectClass cls = _object.GetObjectClass(FrozenContext);
+                _propertyList = new List<Property>();
+                while (cls != null)
                 {
-                    _propertyModels = new ReadOnlyProjectedList<Property, ViewModel>(
-                        FetchPropertyList().ToList(),
-                        property => ModelFactory.CreateViewModel<BasePropertyModel.Factory>(property).Invoke(DataContext, Object, property),
-                        null);
+                    foreach (Property p in cls.Properties)
+                    {
+                        _propertyList.Add(p);
+                    }
+                    cls = cls.BaseObjectClass;
                 }
-                return _propertyModels;
+            }
+
+        }
+
+        private Dictionary<Property, BasePropertyViewModel> _propertyModels;
+        private ReadOnlyProjectedList<Property, BasePropertyViewModel> _propertyModelList;
+        public IReadOnlyList<BasePropertyViewModel> PropertyModels
+        {
+            get
+            {
+                if (_propertyModelList == null)
+                {
+                    FetchPropertyModels();
+                    _propertyModelList = new ReadOnlyProjectedList<Property, BasePropertyViewModel>(_propertyList, p => _propertyModels[p], null);
+                }
+                return _propertyModelList;
             }
         }
-        private LookupDictionary<string, Property, ViewModel> _propertyModelsByName;
-        public LookupDictionary<string, Property, ViewModel> PropertyModelsByName
+
+        private void FetchPropertyModels()
+        {
+            if (_propertyModels == null)
+            {
+                FetchPropertyList();
+                _propertyModels = _propertyList.ToDictionary(k => k, v =>
+                {
+                    var result = ModelFactory.CreateViewModel<BasePropertyViewModel.Factory>(v).Invoke(DataContext, Object, v);
+                    result.IsReadOnly = IsReadOnly;
+                    return result;
+                });
+            }
+        }
+
+        private Dictionary<string, BasePropertyViewModel> _propertyModelsByName;
+        public Dictionary<string, BasePropertyViewModel> PropertyModelsByName
         {
             get
             {
                 if (_propertyModelsByName == null)
                 {
-                    _propertyModelsByName = new LookupDictionary<string, Property, ViewModel>(FetchPropertyList().ToList(), prop => prop.Name, prop => ModelFactory.CreateViewModel<BasePropertyModel.Factory>(prop).Invoke(DataContext, Object, prop));
+                    FetchPropertyModels();
+                    _propertyModelsByName = _propertyModels.ToDictionary(
+                        k => k.Key.Name,
+                        v => v.Value
+                    );
                 }
                 return _propertyModelsByName;
-            }
-        }
-
-        private ReadOnlyProjectedList<Method, ViewModel> _methodResultsCache;
-        public IReadOnlyList<ViewModel> MethodResults
-        {
-            get
-            {
-                if (_methodResultsCache == null)
-                {
-                    _methodResultsCache = new ReadOnlyProjectedList<Method, ViewModel>(
-                        FetchMethodList().ToList(),
-                        method =>
-                        {
-                            ObjectClass cls = _object.GetObjectClass(FrozenContext);
-                            return ModelFromMethod(cls, method);
-                        },
-                        null);
-                }
-                return _methodResultsCache;
-            }
-        }
-
-        private ObservableCollection<ActionModel> _actionsCache;
-        private ReadOnlyObservableCollection<ActionModel> _actionsView;
-        public ReadOnlyObservableCollection<ActionModel> Actions
-        {
-            get
-            {
-                if (_actionsView == null)
-                {
-                    _actionsCache = new ObservableCollection<ActionModel>();
-                    _actionsView = new ReadOnlyObservableCollection<ActionModel>(_actionsCache);
-                    FetchActions();
-                }
-                return _actionsView;
-            }
-        }
-        private IDictionary<string, ActionModel> _actionModelsByName;
-        public IDictionary<string, ActionModel> ActionModelsByName
-        {
-            get
-            {
-                if (_actionModelsByName == null)
-                {
-                    _actionModelsByName = Actions.ToDictionary(a => a.Name);
-                }
-                return _actionModelsByName;
             }
         }
 
@@ -148,16 +124,16 @@ namespace Kistl.Client.Presentables
 
         protected virtual List<PropertyGroupModel> CreatePropertyGroups()
         {
-            return FetchPropertyList()
+            FetchPropertyModels();
+            return _propertyList
                         .SelectMany(p => (String.IsNullOrEmpty(p.CategoryTags) ? "Uncategorised" : p.CategoryTags)
                                             .Split(", ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries)
                                             .Select(s => new { Category = s, Property = p }))
                         .GroupBy(x => x.Category, x => x.Property)
                         .OrderBy(group => group.Key)
-                        .Select <IGrouping<string, Property>, PropertyGroupModel > (group =>
+                        .Select<IGrouping<string, Property>, PropertyGroupModel>(group =>
                         {
-                            var lst = group.Select(p =>
-                                     ModelFactory.CreateViewModel<BasePropertyModel.Factory>(p).Invoke(DataContext, _object, p)).Cast<ViewModel>().ToList();
+                            var lst = group.Select(p => _propertyModels[p]).Cast<ViewModel>().ToList();
 
                             if (lst.Count == 1)
                             {
@@ -218,6 +194,97 @@ namespace Kistl.Client.Presentables
                 }
             }
         }
+        #endregion
+
+        #region Public Interface
+
+        private IDataObject _object;
+        public IDataObject Object { get { return _object; } }
+
+        public int ID
+        {
+            get
+            {
+                return IsInDesignMode
+                    ? 42
+                    // this should always be instantaneous
+                    : _object.ID;
+            }
+        }
+
+        protected bool isReadOnlyStore = false;
+        public virtual bool IsReadOnly
+        {
+            get
+            {
+                return isReadOnlyStore;
+            }
+            set
+            {
+                if (isReadOnlyStore != value)
+                {
+                    isReadOnlyStore = value;
+                    if (_propertyModels != null)
+                    {
+                        foreach (var p in _propertyModels.Cast<BasePropertyViewModel>())
+                        {
+                            p.IsReadOnly = IsReadOnly;
+                        }
+                    }
+                    OnPropertyChanged("IsReadOnly");
+                }
+            }
+        }
+
+        private ReadOnlyProjectedList<Method, ViewModel> _methodResultsCache;
+        public IReadOnlyList<ViewModel> MethodResults
+        {
+            get
+            {
+                if (_methodResultsCache == null)
+                {
+                    _methodResultsCache = new ReadOnlyProjectedList<Method, ViewModel>(
+                        FetchMethodList().ToList(),
+                        method =>
+                        {
+                            ObjectClass cls = _object.GetObjectClass(FrozenContext);
+                            return ModelFromMethod(cls, method);
+                        },
+                        null);
+                }
+                return _methodResultsCache;
+            }
+        }
+
+        private ObservableCollection<ActionModel> _actionsCache;
+        private ReadOnlyObservableCollection<ActionModel> _actionsView;
+        public ReadOnlyObservableCollection<ActionModel> Actions
+        {
+            get
+            {
+                if (_actionsView == null)
+                {
+                    _actionsCache = new ObservableCollection<ActionModel>();
+                    _actionsView = new ReadOnlyObservableCollection<ActionModel>(_actionsCache);
+                    FetchActions();
+                }
+                return _actionsView;
+            }
+        }
+        private IDictionary<string, ActionModel> _actionModelsByName;
+        public IDictionary<string, ActionModel> ActionModelsByName
+        {
+            get
+            {
+                if (_actionModelsByName == null)
+                {
+                    _actionModelsByName = Actions.ToDictionary(a => a.Name);
+                }
+                return _actionModelsByName;
+            }
+        }
+
+
 
         private string _nameCache;
         public override string Name
@@ -258,23 +325,6 @@ namespace Kistl.Client.Presentables
         #endregion
 
         #region Utilities and UI callbacks
-
-        private IEnumerable<Property> FetchPropertyList()
-        {
-            // load properties from MetaContext
-            ObjectClass cls = _object.GetObjectClass(FrozenContext);
-            var props = new List<Property>();
-            while (cls != null)
-            {
-                foreach (Property p in cls.Properties)
-                {
-                    props.Add(p);
-                }
-                cls = cls.BaseObjectClass;
-            }
-
-            return props;
-        }
 
         private IEnumerable<Method> FetchMethodList()
         {

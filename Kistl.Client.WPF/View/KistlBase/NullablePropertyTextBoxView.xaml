@@ -7,7 +7,7 @@
                      xmlns:kevin="clr-namespace:Microsoft.Samples.KMoore.WPFSamples.InfoTextBox;assembly=WPFSamplesLib"
                      ToolTip="{Binding ToolTip}">
 
-    <kevin:InfoTextBox Text="{Binding StringValue, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=true}"
+    <kevin:InfoTextBox Text="{Binding FormattedValue, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=true}"
                        TextBoxInfo="{Binding ToolTip}">
         <kevin:InfoTextBox.ContextMenu>
             <ContextMenu>

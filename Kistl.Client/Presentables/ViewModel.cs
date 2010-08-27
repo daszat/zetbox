@@ -127,6 +127,23 @@ namespace Kistl.Client.Presentables
             }
         }
 
+        private bool _isEnabled = true;
+        public bool IsEnabled
+        {
+            get
+            {
+                return _isEnabled;
+            }
+            set
+            {
+                if (_isEnabled != value)
+                {
+                    _isEnabled = value;
+                    OnPropertyChanged("IsEnabled");
+                }
+            }
+        }
+
         /// <summary>
         /// A common "name" of this Model. May be used for generic filtering or displaying.
         /// </summary>
