@@ -29,15 +29,12 @@ DECLARE
 	-- rowNum gets multiplied by 100 to spread indices for cheaper 
 	-- collection-insertions (no need to move as many higher indices)
 	repairStatement CONSTANT text DEFAULT $$
-		WITH numbered_rows ("ID", "rowNum") AS 
-			(SELECT "ID", ROW_NUMBER() OVER (ORDER BY $$ || quote_ident(fkPositionName) || $$)
-			 FROM $$ || tblName || $$
-			 WHERE $$ || quote_ident(fkColumnName) || $$ = $1)
-		UPDATE $$ || tblName || $$
+		UPDATE $$ || tblName || $$ tbl
 		SET $$ || quote_ident(fkPositionName) || $$ = (rowNum * 100)
-		FROM $$ || tblName || $$ tbl
-			INNER JOIN numbered_rows nr ON (tbl.ID = nr.ID)
-		WHERE $$ || quote_ident(fkColumnName) || $$ = $1 $$;
+		FROM (SELECT "ID", ROW_NUMBER() OVER (ORDER BY $$ || quote_ident(fkPositionName) || $$) as rowNum
+			FROM $$ || tblName || $$
+			WHERE $$ || quote_ident(fkColumnName) || $$ = $1) nr 
+		WHERE tbl."ID" = nr."ID" $$;
 
 	hasDuplicates boolean;
 	
