@@ -6,6 +6,7 @@
                      ToolTip="{Binding ToolTip}"
                      VerticalContentAlignment="Stretch">
     <TextBox Text="{Binding Value, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"
+             IsReadOnly="{Binding IsReadOnly}"
              AcceptsReturn="True"
              AcceptsTab="True"
              VerticalScrollBarVisibility="Visible"

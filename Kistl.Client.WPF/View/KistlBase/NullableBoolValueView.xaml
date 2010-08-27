@@ -9,6 +9,7 @@
 
     <CheckBox IsChecked="{Binding Value, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"
               IsThreeState="{Binding AllowNullInput, Mode=OneWay}"
+              IsEnabled="{Binding IsReadOnly, Converter={StaticResource InvertedBoolConverter}}"
               ToolTip="{Binding ToolTip}" />
 
 </view:PropertyEditor>

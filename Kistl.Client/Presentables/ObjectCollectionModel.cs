@@ -240,14 +240,23 @@ namespace Kistl.Client.Presentables
             get { return _referencedClass; }
         }
 
-        public virtual GridDisplayConfiguration DisplayedColumns
+        private GridDisplayConfiguration _displayedColumns = null;
+        public GridDisplayConfiguration DisplayedColumns
         {
             get
             {
-                GridDisplayConfiguration result = new GridDisplayConfiguration();
-                result.BuildColumns(this.ReferencedClass);
-                return result;
+                if (_displayedColumns == null)
+                {
+                    _displayedColumns = CreateDisplayedColumns();
+                }
+                return _displayedColumns;
             }
+        }
+        protected virtual GridDisplayConfiguration CreateDisplayedColumns()
+        {
+            var result = new GridDisplayConfiguration();
+            result.BuildColumns(this.ReferencedClass, false);
+            return result;
         }
 
         private DataObjectModel _selectedItem;

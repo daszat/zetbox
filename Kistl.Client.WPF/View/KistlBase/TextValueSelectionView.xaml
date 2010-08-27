@@ -14,6 +14,7 @@
 
         <ComboBox Text="{Binding Value, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"
                   ItemsSource="{Binding PossibleValues, Mode=OneWay}"
+                  IsEnabled="{Binding IsReadOnly, Converter={StaticResource InvertedBoolConverter}}"
                   ToolTip="{Binding ToolTip}"
                   IsEditable="True"
                   StaysOpenOnEdit="True" />

@@ -62,7 +62,6 @@ namespace Kistl.Client.Presentables
 
         }
 
-        private Dictionary<Property, BasePropertyViewModel> _propertyModels;
         private ReadOnlyProjectedList<Property, BasePropertyViewModel> _propertyModelList;
         public IReadOnlyList<BasePropertyViewModel> PropertyModels
         {
@@ -77,12 +76,13 @@ namespace Kistl.Client.Presentables
             }
         }
 
+        private LookupDictionary<Property, Property, BasePropertyViewModel> _propertyModels;
         private void FetchPropertyModels()
         {
             if (_propertyModels == null)
             {
                 FetchPropertyList();
-                _propertyModels = _propertyList.ToDictionary(k => k, v =>
+                _propertyModels = new LookupDictionary<Property,Property,BasePropertyViewModel>( _propertyList, k => k, v =>
                 {
                     var result = ModelFactory.CreateViewModel<BasePropertyViewModel.Factory>(v).Invoke(DataContext, Object, v);
                     result.IsReadOnly = IsReadOnly;
@@ -91,17 +91,18 @@ namespace Kistl.Client.Presentables
             }
         }
 
-        private Dictionary<string, BasePropertyViewModel> _propertyModelsByName;
-        public Dictionary<string, BasePropertyViewModel> PropertyModelsByName
+        private LookupDictionary<string, Property, BasePropertyViewModel> _propertyModelsByName;
+        public LookupDictionary<string, Property, BasePropertyViewModel> PropertyModelsByName
         {
             get
             {
                 if (_propertyModelsByName == null)
                 {
                     FetchPropertyModels();
-                    _propertyModelsByName = _propertyModels.ToDictionary(
-                        k => k.Key.Name,
-                        v => v.Value
+                    _propertyModelsByName = new LookupDictionary<string, Property, BasePropertyViewModel>(
+                        _propertyList,
+                        k => k.Name,
+                        v => _propertyModels[v]
                     );
                 }
                 return _propertyModelsByName;

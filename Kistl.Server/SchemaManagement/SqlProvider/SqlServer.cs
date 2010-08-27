@@ -978,7 +978,7 @@ FROM (", viewName.Schema, viewName.Name);
             if (source == null) throw new ArgumentNullException("source");
             if (colNames == null) throw new ArgumentNullException("colNames");
 
-            using (SqlBulkCopy bulkCopy = new SqlBulkCopy(CurrentConnection))
+            using (SqlBulkCopy bulkCopy = new SqlBulkCopy(CurrentConnection, SqlBulkCopyOptions.CheckConstraints, null))
             {
                 bulkCopy.DestinationTableName = destTbl.Name;
 

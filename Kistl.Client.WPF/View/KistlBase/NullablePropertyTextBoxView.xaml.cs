@@ -21,7 +21,7 @@ namespace Kistl.Client.WPF.View
     /// <summary>
     /// Interaction logic for NullablePropertyTextBoxView.xaml
     /// </summary>
-    public partial class NullablePropertyTextBoxView : PropertyEditor, IHasViewModel<IValueModel<string>>
+    public partial class NullablePropertyTextBoxView : PropertyEditor, IHasViewModel<IValueModel<string>>, IHasViewModel<IValueModelAsString>
     {
         public NullablePropertyTextBoxView()
         {
@@ -33,6 +33,15 @@ namespace Kistl.Client.WPF.View
         public IValueModel<string> ViewModel
         {
             get { return (IValueModel<string>)DataContext; }
+        }
+
+        #endregion
+
+        #region IHasViewModel<IValueModelAsString> Members
+
+        IValueModelAsString IHasViewModel<IValueModelAsString>.ViewModel
+        {
+            get { return (IValueModelAsString)DataContext; }
         }
 
         #endregion

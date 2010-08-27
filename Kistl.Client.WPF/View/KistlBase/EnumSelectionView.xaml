@@ -9,6 +9,7 @@
     <ComboBox ItemsSource="{Binding PossibleValues, Mode=OneWay}"
               DisplayMemberPath="Value"
               SelectedValuePath="Key"
+              IsEnabled="{Binding IsReadOnly, Converter={StaticResource InvertedBoolConverter}}"
               SelectedValue="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}">
         <ComboBox.ContextMenu>
             <ContextMenu>

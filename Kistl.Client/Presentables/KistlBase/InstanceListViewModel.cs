@@ -79,6 +79,9 @@ namespace Kistl.Client.Presentables.KistlBase
 
         #region Kind Management
         private ControlKind _requestedEditorKind;
+        /// <summary>
+        /// Requested editor kind for opening object
+        /// </summary>
         public ControlKind RequestedEditorKind
         {
             get
@@ -96,6 +99,9 @@ namespace Kistl.Client.Presentables.KistlBase
         }
 
         private ControlKind _requestedWorkspaceKind;
+        /// <summary>
+        /// Requested workspace kind for opening object
+        /// </summary>
         public ControlKind RequestedWorkspaceKind
         {
             get
@@ -400,9 +406,23 @@ namespace Kistl.Client.Presentables.KistlBase
                 if (_isItemsReadOnly != value)
                 {
                     _isItemsReadOnly = value;
-                    OnPropertyChanged("IsItemsReadOnly");
+                    OnIsItemsReadOnlyChanged();
                 }
             }
+        }
+
+        protected virtual void OnIsItemsReadOnlyChanged()
+        {
+            _displayedColumns = null;
+            if (_instances != null)
+            {
+                foreach (var i in _instances)
+                {
+                    i.IsReadOnly = _isItemsReadOnly;
+                }
+            }
+            OnPropertyChanged("IsItemsReadOnly");
+            OnPropertyChanged("DisplayedColumns");
         }
 
         /// <returns>the default icon of this <see cref="DataType"/></returns>
@@ -447,14 +467,23 @@ namespace Kistl.Client.Presentables.KistlBase
             }
         }
 
-        public virtual GridDisplayConfiguration DisplayedColumns
+        private GridDisplayConfiguration _displayedColumns = null;
+        public GridDisplayConfiguration DisplayedColumns
         {
             get
             {
-                GridDisplayConfiguration result = new GridDisplayConfiguration();
-                result.BuildColumns(this._type, FrozenContext.GetQuery<ControlKind>().Single(i => i.Name == "Kistl.App.GUI.LabelKind"));
-                return result;
+                if (_displayedColumns == null)
+                {
+                    _displayedColumns = CreateDisplayedColumns();
+                }
+                return _displayedColumns;
             }
+        }
+        protected virtual GridDisplayConfiguration CreateDisplayedColumns()
+        {
+            var result = new GridDisplayConfiguration();
+            result.BuildColumns(this._type, IsItemsReadOnly);
+            return result;
         }
         #endregion
 
@@ -487,7 +516,9 @@ namespace Kistl.Client.Presentables.KistlBase
 
             foreach (var obj in GetQuery().Cast<IDataObject>().ToList().OrderBy(obj => obj.ToString()))
             {
-                _instances.Add(ModelFactory.CreateViewModel<DataObjectModel.Factory>(obj).Invoke(DataContext, obj));
+                var mdl = ModelFactory.CreateViewModel<DataObjectModel.Factory>(obj).Invoke(DataContext, obj);
+                mdl.IsReadOnly = IsItemsReadOnly;
+                _instances.Add(mdl);
             }
             OnInstancesChanged();
         }

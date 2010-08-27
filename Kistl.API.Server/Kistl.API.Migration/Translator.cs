@@ -162,7 +162,7 @@ namespace Kistl.API.Migration
             if (nullConv == null) return val;
             if (val == null || val == DBNull.Value)
             {
-                AddError(nullConv.ErrorMsg, "(null)");
+                AddError(nullConv.ErrorMsg, src_val != null ? src_val.ToString() : "(null)");
                 val = nullConv.NullValue;
             }
             return val;

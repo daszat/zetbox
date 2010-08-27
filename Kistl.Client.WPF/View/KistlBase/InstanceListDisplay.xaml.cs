@@ -68,8 +68,12 @@ namespace Kistl.Client.WPF.View.KistlBase
 
         private void lst_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            e.RemovedItems.ForEach<DataObjectModel>(i => ViewModel.SelectedItems.Remove(i));            
-            e.AddedItems.ForEach<DataObjectModel>(i => ViewModel.SelectedItems.Add(i));
+            if (e.OriginalSource == lst)
+            {
+                e.Handled = true;
+                e.RemovedItems.ForEach<DataObjectModel>(i => ViewModel.SelectedItems.Remove(i));
+                e.AddedItems.ForEach<DataObjectModel>(i => ViewModel.SelectedItems.Add(i));
+            }
         }
 
         #region RefreshGridView

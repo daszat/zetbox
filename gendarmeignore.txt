@@ -98,6 +98,7 @@ R: Gendarme.Rules.Portability.MonoCompatibilityReviewRule
 A: Kistl.Client.WPF
 A: Kistl.DalProvider.EF
 T: Kistl.Server.SchemaManagement.OleDbProvider.OleDb
+T: Kistl.Server.SchemaManagement.SqlProvider.SqlServer
 M: System.Boolean Kistl.Server.SchemaManagement.OleDbProvider.OleDb/<GetTableNames>d__0::MoveNext()
 M: System.Boolean Kistl.Server.SchemaManagement.OleDbProvider.OleDb/<GetTableColumns>d__28::MoveNext()
 M: System.Boolean Kistl.Server.SchemaManagement.OleDbProvider.OleDb/<GetTableColumnNames>d__33::MoveNext()

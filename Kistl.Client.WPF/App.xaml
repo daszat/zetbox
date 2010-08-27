@@ -13,6 +13,7 @@
             <converter:ValidityToBrushConverter x:Key="ValidityToBrushConverter" />
             <converter:DebugConverter x:Key="debug" />
             <converter:HourConverter x:Key="HourConverter" />
+            <converter:InvertedBoolConverter x:Key="InvertedBoolConverter" />
             <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
             <commands:Converter x:Key="CommandConverter" />
             <ResourceDictionary.MergedDictionaries>
