@@ -165,6 +165,7 @@ M: System.Void Kistl.API.BaseMemoryContext::CheckImplementationAssembly(System.S
 # see https://bugzilla.novell.com/show_bug.cgi?id=567995 , should be fixed in gendarme 2.8
 M: TItem Kistl.API.BaseRelationListWrapper`6::get_Item(System.Int32)
 M: System.Void Kistl.API.BaseRelationListWrapper`6::set_Item(System.Int32,TItem)
+M: TValue Kistl.API.Utils.LookupDictionary`3::get_Item(TKey)
 M: TValue Kistl.API.ValueListWrapper`4::get_Item(System.Int32)
 M: System.Void Kistl.API.ValueListWrapper`4::set_Item(System.Int32,TValue)
 M: TInterface Kistl.DalProvider.EF.EntityListWrapper`2::get_Item(System.Int32)

@@ -480,12 +480,6 @@ namespace Kistl.Client.Presentables
             if (e.PropertyName == "ID")
                 OnPropertyChanged("ID");
 
-            // propagate updates for IDataErrorInfo
-            OnPropertyChanged("PropertyModels");
-            OnPropertyChanged("PropertyModelsByName");
-            OnPropertyChanged("PropertyGroups");
-            OnPropertyChanged("PropertyGroupsByName");
-
             UpdateViewCache();
             // all updates done
         }

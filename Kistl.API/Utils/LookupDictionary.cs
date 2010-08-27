@@ -7,10 +7,17 @@ namespace Kistl.API.Utils
     using System.Text;
 
     /// <summary>
-    /// This class wraps a list into a dictionary and uses specified lambdas for looking up values in the list.
-    /// Contrary to Linq's Lookup operator, this class has no up-front costs in CPU or RAM but has to search 
-    /// through the underlying list on access. This is needed when the underlying list is mutable.
+    /// This class transforms a list into a dictionary. The specified lambdas are used to create the keys and values.
+    /// On initialisation all keys are created and stored. The values are created lazily on first access and cached.
     /// </summary>
+    /// <remarks>
+    /// <para>
+    /// Contrary to Linq's Lookup operator, this class has reduced up-front costs in CPU and RAM.
+    /// </para>
+    /// <para>
+    /// Changes to the source list are ignored.
+    /// </para>
+    /// </remarks>
     /// <typeparam name="TKey">the type of values used as lookup key</typeparam>
     /// <typeparam name="TUnderlyingValue">the type of stored objects</typeparam>
     /// <typeparam name="TValue">the type of presented objects</typeparam>
@@ -18,22 +25,22 @@ namespace Kistl.API.Utils
             : IDictionary<TKey, TValue>, System.Collections.IDictionary
     {
         /// <summary>
-        /// The backing store of this ListDictionary. This list is searched when looking up stuff.
+        /// The underlying items of this LookupDictionary. Stores items by their generated key.
         /// </summary>
-        private readonly IList<TUnderlyingValue> _list;
+        private readonly Dictionary<TKey, TUnderlyingValue> _items;
 
         /// <summary>
-        /// The function to get a key from an item.
+        /// The backing store of this LookupDictionary. Stores already generated values by key.
         /// </summary>
-        private readonly Func<TUnderlyingValue, TKey> _key;
+        private readonly Dictionary<TKey, TValue> _values;
 
         /// <summary>
         /// The function to get a value from an item.
         /// </summary>
-        private readonly Func<TUnderlyingValue, TValue> _value;
+        private readonly Func<TUnderlyingValue, TValue> _valueFunc;
 
         /// <summary>
-        /// Initialises a new instance of the ListDictionary class.
+        /// Initialises a new instance of the LookupDictionary class.
         /// </summary>
         /// <param name="list">the list to use as underlying storage</param>
         /// <param name="key">the function to create keys for lookups</param>
@@ -43,36 +50,9 @@ namespace Kistl.API.Utils
             if (list == null) { throw new ArgumentNullException("list"); }
             if (key == null) { throw new ArgumentNullException("key"); }
             if (value == null) { throw new ArgumentNullException("value"); }
-            _list = list;
-            _key = key;
-            _value = value;
-        }
-
-        /// <summary>
-        /// An enumerable list of Keys. May not have to evaluate keys for all items.
-        /// </summary>
-        public IEnumerable<TKey> KeysEnumerable
-        {
-            get { return _list.Select(item => _key(item)); }
-        }
-
-        /// <summary>
-        /// Returns the index of the first item matching the specified key.
-        /// </summary>
-        /// <param name="key">the key to search for</param>
-        /// <returns>the index of the found item or -1 if there is no matching item found</returns>
-        public int IndexOf(TKey key)
-        {
-            int idx = 0;
-            foreach (var item in _list)
-            {
-                if (Object.Equals(key, _key(item)))
-                {
-                    return idx;
-                }
-                idx += 1;
-            }
-            return -1;
+            _items = list.ToDictionary(key);
+            _values = new Dictionary<TKey, TValue>();
+            _valueFunc = value;
         }
 
         #region IDictionary<TKey,TValue> Members
@@ -91,13 +71,13 @@ namespace Kistl.API.Utils
         /// <inheritdoc/>
         public bool ContainsKey(TKey key)
         {
-            return KeysEnumerable.Contains(key);
+            return _items.ContainsKey(key);
         }
 
         /// <inheritdoc/>
         public ICollection<TKey> Keys
         {
-            get { return KeysEnumerable.ToList(); }
+            get { return _items.Keys; }
         }
 
         /// <summary>
@@ -118,23 +98,40 @@ namespace Kistl.API.Utils
         /// <returns>a value indicating whether or not an item was found</returns>
         public bool TryGetValue(TKey key, out TValue value)
         {
-            int idx = IndexOf(key);
-            if (idx == -1)
+            if (!_items.ContainsKey(key))
             {
                 value = default(TValue);
                 return false;
             }
 
-            value = _value(_list[idx]);
+            if (_values.ContainsKey(key))
+            {
+                value = _values[key];
+            }
+            else
+            {
+                _values[key] = value = _valueFunc(_items[key]);
+            }
+
             return true;
         }
 
         /// <summary>
         /// the underlying list of values
         /// </summary>
-        public ICollection<TValue> Values
+        ICollection<TValue> IDictionary<TKey, TValue>.Values
         {
-            get { return _list.Select(i => _value(i)).ToList(); }
+            get
+            {
+                foreach (var k in _items.Keys)
+                {
+                    if (!_values.ContainsKey(k))
+                    {
+                        _values[k] = _valueFunc(_items[k]);
+                    }
+                }
+                return _values.Values;
+            }
         }
 
         /// <summary>
@@ -154,7 +151,7 @@ namespace Kistl.API.Utils
                 }
                 else
                 {
-                    return default(TValue); // throw new ArgumentOutOfRangeException("key");
+                    throw new ArgumentOutOfRangeException("key");
                 }
             }
             set
@@ -182,30 +179,30 @@ namespace Kistl.API.Utils
         /// <inheritdoc/>
         public bool Contains(KeyValuePair<TKey, TValue> item)
         {
-            return _list.Any(i => _value(i).Equals(item.Value));
+            return _items.ContainsKey(item.Key) && this[item.Key].Equals(item.Value);
         }
 
         /// <inheritdoc/>
-        public void CopyTo(KeyValuePair<TKey, TValue>[] array, int arrayIndex)
+        void ICollection<KeyValuePair<TKey, TValue>>.CopyTo(KeyValuePair<TKey, TValue>[] array, int arrayIndex)
         {
             if (array == null) { throw new ArgumentNullException("array"); }
 
-            for (int i = 0; i < _list.Count; i++)
+            foreach (var key in _items.Keys)
             {
-                array[i + arrayIndex] = new KeyValuePair<TKey, TValue>(_key(_list[i]), _value(_list[i]));
+                array[arrayIndex++] = new KeyValuePair<TKey, TValue>(key, this[key]);
             }
         }
 
         /// <inheritdoc/>
         public int Count
         {
-            get { return _list.Count; }
+            get { return _items.Count; }
         }
 
         /// <inheritdoc/>
         public bool IsReadOnly
         {
-            get { return _list.IsReadOnly; }
+            get { return true; }
         }
 
         /// <inheritdoc/>
@@ -219,9 +216,9 @@ namespace Kistl.API.Utils
         #region IEnumerable<KeyValuePair<TKey,TValue>> Members
 
         /// <inheritdoc/>
-        public IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator()
+        IEnumerator<KeyValuePair<TKey, TValue>> IEnumerable<KeyValuePair<TKey, TValue>>.GetEnumerator()
         {
-            return _list.Select(item => new KeyValuePair<TKey, TValue>(_key(item), _value(item))).GetEnumerator();
+            return _items.Keys.Select(key => new KeyValuePair<TKey, TValue>(key, this[key])).GetEnumerator();
         }
 
         #endregion
@@ -231,7 +228,7 @@ namespace Kistl.API.Utils
         /// <inheritdoc/>
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
-            return GetEnumerator();
+            return ((IEnumerable<KeyValuePair<TKey, TValue>>)this).GetEnumerator();
         }
 
         #endregion
@@ -280,7 +277,7 @@ namespace Kistl.API.Utils
 
         System.Collections.ICollection System.Collections.IDictionary.Values
         {
-            get { return this.Values.ToList(); }
+            get { return ((IDictionary<TKey, TValue>)this).Values.ToList(); }
         }
 
         object System.Collections.IDictionary.this[object key]
@@ -301,9 +298,11 @@ namespace Kistl.API.Utils
 
         void System.Collections.ICollection.CopyTo(Array array, int index)
         {
-            for (int i = 0; i < _list.Count; i++)
+            if (array == null) { throw new ArgumentNullException("array"); }
+
+            foreach (var key in _items.Keys)
             {
-                array.SetValue(new KeyValuePair<TKey, TValue>(_key(_list[i]), _value(_list[i])), i + index);
+                array.SetValue(new KeyValuePair<TKey, TValue>(key, this[key]), index++);
             }
         }
 
