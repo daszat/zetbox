@@ -23,7 +23,7 @@ namespace Kistl.Client.Presentables.SchemaMigration
 
         protected override GridDisplayConfiguration CreateDisplayedColumns()
         {
-            var result = base.DisplayedColumns;
+            var result = base.CreateDisplayedColumns();
             // Add create property button
             result.Columns.Add(new ColumnDisplayModel()
                 {
