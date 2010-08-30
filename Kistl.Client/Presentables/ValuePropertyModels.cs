@@ -401,6 +401,7 @@ namespace Kistl.Client.Presentables
                     CheckConstraints();
 
                     OnPropertyChanged("Value");
+                    OnPropertyChanged("FormattedValue");
                     OnPropertyChanged("IsNull");
                     OnPropertyChanged("HasValue");
                 }
