@@ -21,6 +21,8 @@ namespace Kistl.Client.Presentables
         }
         private Property _prop;
 
+        public Property DescribedProperty { get { return _prop; } }
+
         public override string Name
         {
             get

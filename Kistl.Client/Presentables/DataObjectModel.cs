@@ -70,7 +70,7 @@ namespace Kistl.Client.Presentables
                 if (_propertyModelList == null)
                 {
                     FetchPropertyModels();
-                    _propertyModelList = new ReadOnlyProjectedList<Property, BasePropertyViewModel>(_propertyList, p => _propertyModels[p], null);
+                    _propertyModelList = new ReadOnlyProjectedList<Property, BasePropertyViewModel>(_propertyList, p => _propertyModels[p], m => m.Property);
                 }
                 return _propertyModelList;
             }
@@ -237,21 +237,21 @@ namespace Kistl.Client.Presentables
             }
         }
 
-        private ReadOnlyProjectedList<Method, ViewModel> _methodResultsCache;
-        public IReadOnlyList<ViewModel> MethodResults
+        private ReadOnlyProjectedList<Method, BaseMethodResultModel> _methodResultsCache;
+        public IReadOnlyList<BaseMethodResultModel> MethodResults
         {
             get
             {
                 if (_methodResultsCache == null)
                 {
-                    _methodResultsCache = new ReadOnlyProjectedList<Method, ViewModel>(
+                    _methodResultsCache = new ReadOnlyProjectedList<Method, BaseMethodResultModel>(
                         FetchMethodList().ToList(),
                         method =>
                         {
                             ObjectClass cls = _object.GetObjectClass(FrozenContext);
                             return ModelFromMethod(cls, method);
                         },
-                        null);
+                        m => m.Method);
                 }
                 return _methodResultsCache;
             }
@@ -379,7 +379,7 @@ namespace Kistl.Client.Presentables
         }
 
         // TODO: should go to renderer and use database backed decision tables
-        protected virtual ViewModel ModelFromMethod(ObjectClass cls, Method pm)
+        protected virtual BaseMethodResultModel ModelFromMethod(ObjectClass cls, Method pm)
         {
             Debug.Assert(pm.Parameter.Single().IsReturnParameter);
             var retParam = pm.GetReturnParameter();

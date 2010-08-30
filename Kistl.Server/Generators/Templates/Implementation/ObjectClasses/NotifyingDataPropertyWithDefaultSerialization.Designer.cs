@@ -79,7 +79,7 @@ break;
 
 #line 55 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\NotifyingDataPropertyWithDefaultSerialization.cst"
 this.WriteObjects("    \r\n");
-this.WriteObjects("            Debug.Assert(this.",  isSetFlagName , ", \"Exported objects need to have all default values evaluated\");\r\n");
+this.WriteObjects("            System.Diagnostics.Debug.Assert(this.",  isSetFlagName , ", \"Exported objects need to have all default values evaluated\");\r\n");
 this.WriteObjects("            if (modules.Contains(\"*\") || modules.Contains(\"",  xmlnamespace , "\")) XmlStreamer.ToStream(this.",  backingStoreName , ", ",  streamName , ", \"",  xmlname , "\", \"",  xmlnamespace , "\");\r\n");
 #line 59 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\NotifyingDataPropertyWithDefaultSerialization.cst"
 break;

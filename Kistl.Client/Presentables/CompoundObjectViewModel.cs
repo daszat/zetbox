@@ -42,17 +42,17 @@ namespace Kistl.Client.Presentables
         private ICompoundObject _object;
         public ICompoundObject Object { get { return _object; } }
 
-        private ReadOnlyProjectedList<Property, ViewModel> _propertyModels;
-        public IReadOnlyList<ViewModel> PropertyModels
+        private ReadOnlyProjectedList<Property, BasePropertyViewModel> _propertyModels;
+        public IReadOnlyList<BasePropertyViewModel> PropertyModels
         {
             get
             {
                 if (_propertyModels == null)
                 {
-                    _propertyModels = new ReadOnlyProjectedList<Property, ViewModel>(
+                    _propertyModels = new ReadOnlyProjectedList<Property, BasePropertyViewModel>(
                         FetchPropertyList().ToList(),
                         property => ModelFactory.CreateViewModel<BasePropertyViewModel.Factory>(property).Invoke(DataContext, _object, property),
-                        null);
+                        m => m.Property);
                 }
                 return _propertyModels;
             }

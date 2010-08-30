@@ -318,11 +318,10 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
             string addOrAlter = add ? "ADD" : "ALTER COLUMN";
             string nullable = isNullable ? "NULL" : "NOT NULL";
             string defValue = string.Empty;
-            var constrName = string.Empty;
+            var constrName = ConstructDefaultConstraintName(tblName, colName); 
 
             if (defConstraint != null)
             {
-                constrName = ConstructDefaultConstraintName(tblName, colName);
                 if (defConstraint is NewGuidDefaultConstraint)
                 {
                     defValue = "NEWID()";
@@ -345,7 +344,7 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
                 }
             }
 
-            // Drop a existing default constraint
+            // Drop an existing default constraint
             if (!add)
             {
                 ExecuteNonQuery(string.Format("IF OBJECT_ID('[{0}]') IS NOT NULL\nALTER TABLE {1} DROP CONSTRAINT [{0}]", constrName, FormatFullName(tblName)));

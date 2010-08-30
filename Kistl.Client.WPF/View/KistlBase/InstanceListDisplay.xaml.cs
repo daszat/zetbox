@@ -130,7 +130,7 @@ namespace Kistl.Client.WPF.View.KistlBase
         protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
         {
             base.OnPropertyChanged(e);
-            if (e.Property == FrameworkElement.DataContextProperty)
+            if (ViewModel != null && e.Property == FrameworkElement.DataContextProperty)
             {
                 if (ViewModel.ViewMethod == InstanceListViewMethod.Details)
                 {

@@ -33,7 +33,7 @@ namespace Kistl.Client.Presentables
                     _propertyModels = new ReadOnlyProjectedList<Property, DescribedPropertyViewModel>(
                         _dataType.Properties.OrderBy(p => p.Name).ToList(),
                         property => ModelFactory.CreateViewModel<DescribedPropertyViewModel.Factory>().Invoke(DataContext, property),
-                        null);
+                        m => m.DescribedProperty);
                 }
                 return _propertyModels;
             }
@@ -49,7 +49,7 @@ namespace Kistl.Client.Presentables
                     _methodModels = new ReadOnlyProjectedList<Method, DescribedMethodViewModel>(
                         _dataType.Methods.OrderBy(m => m.Name).ToList(),
                         m => ModelFactory.CreateViewModel<DescribedMethodViewModel.Factory>().Invoke(DataContext, m),
-                        null);
+                        m => m.DescribedMethod);
                 }
                 return _methodModels;
             }

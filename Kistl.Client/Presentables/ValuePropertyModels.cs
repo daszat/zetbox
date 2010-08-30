@@ -101,6 +101,8 @@ namespace Kistl.Client.Presentables
             INotifyingObject obj, Property prop)
             : base(appCtx, dataCtx)
         {
+            this.Property = prop;
+            this.Object = obj;
         }
 
         protected BasePropertyViewModel(bool designMode)
@@ -109,6 +111,9 @@ namespace Kistl.Client.Presentables
         }
 
         public abstract bool IsReadOnly { get; set; }
+
+        public Property Property { get; private set; }
+        public INotifyingObject Object { get; private set; }
     }
 
     public abstract class PropertyModel<TValue>
@@ -127,8 +132,6 @@ namespace Kistl.Client.Presentables
                 throw new ArgumentNullException("prop");
 
             this.AllowNullInput = false;
-            this.Object = obj;
-            this.Property = prop;
 
             this.Property.PropertyChanged += this.PropertyPropertyChangedHandler;
             this.Object.PropertyChanged += this.ObjectPropertyChangedHandler;
@@ -298,10 +301,6 @@ namespace Kistl.Client.Presentables
         }
 
         #endregion
-
-        protected INotifyingObject Object { get; private set; }
-
-        protected Property Property { get; private set; }
 
         #region Design Mode
 

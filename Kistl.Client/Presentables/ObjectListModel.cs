@@ -309,8 +309,7 @@ namespace Kistl.Client.Presentables
 
             if (children.Count == 1)
             {
-                var targetType = baseclass.GetDescribedInterfaceType();
-                CreateItemAndActivate(targetType);
+                CreateItemAndActivate(baseclass);
             }
             else
             {
@@ -323,20 +322,24 @@ namespace Kistl.Client.Presentables
                         {
                             if (chosen != null)
                             {
-                                var targetType = ((ObjectClass)chosen.Object).GetDescribedInterfaceType();
-                                CreateItemAndActivate(targetType);
+                                var targetClass = ((ObjectClass)chosen.Object);
+                                CreateItemAndActivate(targetClass);
                             }
                         }),
                     null), true);
             }
         }
 
-        private void CreateItemAndActivate(InterfaceType targetType)
+        private void CreateItemAndActivate(ObjectClass targetClass)
         {
+            var targetType = targetClass.GetDescribedInterfaceType();
             var item = this.DataContext.Create(targetType);
             var result = ModelFactory.CreateViewModel<DataObjectModel.Factory>().Invoke(DataContext, item);
             AddItem(result);
-            ActivateItem(result, true);
+            if (!targetClass.IsSimpleObject)
+            {
+                ActivateItem(result, true);
+            }
         }
 
 

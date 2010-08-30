@@ -169,6 +169,10 @@ namespace Kistl.Server.SchemaManagement
             {
                 return new NewGuidDefaultConstraint();
             }
+            else if (prop.DefaultValue is Kistl.App.Base.CurrentDateTimeDefaultValue)
+            {
+                return new DateTimeDefaultConstraint();
+            }
             else
             {
                 return null;

@@ -124,7 +124,7 @@ namespace Kistl.Client.Presentables.ModuleEditor
             Inheritance,
         }
 
-        private GraphTypeEnum _graphType = GraphTypeEnum.Inheritance;
+        private GraphTypeEnum _graphType = GraphTypeEnum.Relation;
         public GraphTypeEnum GraphType
         {
             get

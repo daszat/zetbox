@@ -21,6 +21,7 @@ namespace Kistl.Client.Presentables
             _method = meth;
         }
         private Method _method;
+        public Method DescribedMethod { get { return _method; } }
 
         public override string Name
         {

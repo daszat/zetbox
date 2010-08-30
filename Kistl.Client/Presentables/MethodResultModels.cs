@@ -17,7 +17,12 @@ namespace Kistl.Client.Presentables
                IDataObject obj, Method m)
             : base(appCtx, dataCtx)
         {
+            Object = obj;
+            Method = m;
         }
+
+        public IDataObject Object { get; private set; }
+        public Method Method { get; private set; }
     }
 
     public abstract class MethodResultModel<TValue>
@@ -30,9 +35,6 @@ namespace Kistl.Client.Presentables
             IDataObject obj, Method m)
             : base(appCtx, dataCtx, obj, m)
         {
-            Object = obj;
-            Method = m;
-
             Method.PropertyChanged += MethodPropertyChanged;
             Object.PropertyChanged += ObjectPropertyChanged;
 
@@ -94,9 +96,6 @@ namespace Kistl.Client.Presentables
         }
 
         #endregion
-
-        protected IDataObject Object { get; private set; }
-        protected Method Method { get; private set; }
 
         #region IReadOnlyValueModel<string> Members
 

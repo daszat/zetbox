@@ -31,5 +31,25 @@ namespace Kistl.App.Base
         }
 
         #endregion
+
+        #region NewGuidDefaultValue
+        public static void OnGetDefaultValue_CurrentDateTimeDefaultValue(Kistl.App.Base.CurrentDateTimeDefaultValue obj, MethodReturnEventArgs<System.Object> e)
+        {
+            e.Result = DateTime.Now;
+        }
+
+        public static void OnToString_CurrentDateTimeDefaultValue(Kistl.App.Base.CurrentDateTimeDefaultValue obj, MethodReturnEventArgs<string> e)
+        {
+            if (obj.Property != null)
+            {
+                e.Result = string.Format("{0} will be initialized with the current date and time", obj.Property.Name);
+            }
+            else
+            {
+                e.Result = "Initializes a property with the current date and time";
+            }
+        }
+
+        #endregion
     }
 }
