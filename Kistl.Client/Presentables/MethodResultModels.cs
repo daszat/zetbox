@@ -26,7 +26,7 @@ namespace Kistl.Client.Presentables
     }
 
     public abstract class MethodResultModel<TValue>
-        : BaseMethodResultModel, IReadOnlyValueModel<string>
+        : BaseMethodResultModel, IReadOnlyValueModel<string>, IValueModelAsString
     {
         public new delegate MethodResultModel<TValue> Factory(IKistlContext dataCtx, IDataObject obj, Method m);
 
@@ -49,6 +49,8 @@ namespace Kistl.Client.Presentables
         public string ToolTip { get { return Method.Description; } }
 
         public abstract TValue Value { get; protected set; }
+
+        public bool IsReadOnly { get { return true; } }
 
         public override string Name
         {
@@ -73,6 +75,7 @@ namespace Kistl.Client.Presentables
         protected virtual void OnResultChanged()
         {
             OnPropertyChanged("Value");
+            OnPropertyChanged("FormattedValue");
             OnPropertyChanged("IsNull");
             OnPropertyChanged("HasValue");
         }
@@ -107,6 +110,22 @@ namespace Kistl.Client.Presentables
             get
             {
                 return HasValue ? Value.ToString() : "(null)";
+            }
+        }
+
+        #endregion
+
+        #region IValueModelAsString Members
+
+        public string FormattedValue
+        {
+            get
+            {
+                return ((IReadOnlyValueModel<string>)this).Value;
+            }
+            set
+            {
+                throw new NotSupportedException();
             }
         }
 

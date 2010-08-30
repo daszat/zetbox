@@ -47,6 +47,11 @@ namespace Kistl.Client.Presentables
         /// Gets the value of this model.
         /// </summary>
         TValue Value { get; }
+
+        /// <summary>
+        /// Gets a value indicating whether or not the property may be edited
+        /// </summary>
+        bool IsReadOnly { get; }
     }
 
     /// <summary>
@@ -82,11 +87,6 @@ namespace Kistl.Client.Presentables
         /// Gets a value indicating whether or not to allow <value>null</value> as input.
         /// </summary>
         bool AllowNullInput { get; }
-
-        /// <summary>
-        /// Gets or sets a value indicating whether or not the property may be edited
-        /// </summary>
-        bool IsReadOnly { get; set; }
     }
 
     /// <summary>
