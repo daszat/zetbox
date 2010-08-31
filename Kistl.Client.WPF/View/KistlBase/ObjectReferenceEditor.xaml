@@ -23,10 +23,31 @@
     </view:PropertyEditor.ContextMenu>
 
     <DockPanel>
-        <Image DockPanel.Dock="Left"
-               Width="16"
-               Height="16"
-               Source="/Kistl.Client.WPF;component/Images/EditTableHS.png"/>
+        <ctrls:DropDownButton>
+            <ctrls:DropDownButton.Content>
+                <Image DockPanel.Dock="Left"
+                       Width="16"
+                       Height="16"
+                       Source="/Kistl.Client.WPF;component/Images/EditTableHS.png" />
+            </ctrls:DropDownButton.Content>
+            <ctrls:DropDownButton.DropDown>
+                <ContextMenu>
+                    <MenuItem Header="{Binding SelectValueCommand.Label}"
+                              ToolTip="{Binding SelectValueCommand.ToolTip}"
+                              Command="{Binding SelectValueCommand, Converter={StaticResource CommandConverter}}" />
+                    <MenuItem Header="{Binding CreateNewItemAndSetValueCommand.Label}"
+                              ToolTip="{Binding CreateNewItemAndSetValueCommand.ToolTip}"
+                              Command="{Binding CreateNewItemAndSetValueCommand, Converter={StaticResource CommandConverter}}" />
+                    <MenuItem Header="{Binding OpenReferenceCommand.Label}"
+                              ToolTip="{Binding OpenReferenceCommand.ToolTip}"
+                              Command="{Binding OpenReferenceCommand, Converter={StaticResource CommandConverter}}"
+                              IsEnabled="{Binding HasValue}" />
+                    <MenuItem Command="{Binding ClearValueCommand, Converter={StaticResource CommandConverter}}"
+                              Header="{Binding ClearValueCommand.Label}"
+                              ToolTip="{Binding ClearValueCommand.ToolTip}" />
+                </ContextMenu>
+            </ctrls:DropDownButton.DropDown>
+        </ctrls:DropDownButton>
         <ContentPresenter Content="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"
                           ContentTemplateSelector="{StaticResource listItemTemplateSelector}" />
     </DockPanel>

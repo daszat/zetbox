@@ -83,6 +83,7 @@
     <Compile Include="Converter\DebugConverter.cs" />
     <Compile Include="Converter\IconConverter.cs" />
     <Compile Include="CustomControls\CommandButton.cs" />
+    <Compile Include="CustomControls\DropDownButton.cs" />
     <Compile Include="CustomControls\LabeledContainer.xaml.cs">
       <DependentUpon>LabeledContainer.xaml</DependentUpon>
     </Compile>
