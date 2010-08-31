@@ -53,16 +53,8 @@
                   BorderThickness="0"
                   ItemsSource="{Binding InstancesFiltered}"
                   ItemTemplateSelector="{StaticResource listItemTemplateSelector}"
-                  SelectionChanged="lst_SelectionChanged">
-
-            <!--<ListView.Template>
-                <ControlTemplate>
-                    <ScrollViewer HorizontalScrollBarVisibility="Visible">
-                        <StackPanel IsItemsHost="True" />
-                    </ScrollViewer>
-                </ControlTemplate>
-            </ListView.Template>-->
-
+                  SelectionChanged="lst_SelectionChanged"
+                  GridViewColumnHeader.Click="ListView_HeaderClick">
             <ListView.Resources>
                 <Style TargetType="ListViewItem">
                     <EventSetter Event="MouseDoubleClick"

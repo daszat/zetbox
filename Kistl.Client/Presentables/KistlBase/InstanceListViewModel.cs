@@ -15,6 +15,7 @@ namespace Kistl.Client.Presentables.KistlBase
     using Kistl.App.Base;
     using Kistl.App.GUI;
     using ObjectEditor = Kistl.Client.Presentables.ObjectEditor;
+    using System.ComponentModel;
 
     public enum InstanceListViewMethod
     {
@@ -363,6 +364,18 @@ namespace Kistl.Client.Presentables.KistlBase
         }
         #endregion
 
+        #region Sorting
+        private string _sortProperty = null;
+        private ListSortDirection _sortDirection = ListSortDirection.Ascending;
+        public void Sort(string propName, ListSortDirection direction)
+        {
+            if (string.IsNullOrEmpty(propName)) throw new ArgumentNullException("propName");
+            _sortProperty = propName;
+            _sortDirection = direction;
+            ExecutePostFilter();
+        }
+        #endregion
+
         #region Opening items
         public void OpenObjects(IEnumerable<DataObjectModel> objects)
         {
@@ -547,6 +560,23 @@ namespace Kistl.Client.Presentables.KistlBase
                     _instancesFiltered = filter.Execute(_instancesFiltered);
                 }
             }
+
+            // Sort
+            if (!string.IsNullOrEmpty(_sortProperty))
+            {
+                _instancesFiltered = new ReadOnlyObservableCollection<DataObjectModel>(
+                    new ObservableCollection<DataObjectModel>(
+                    _instancesFiltered
+                        .AsQueryable()
+                        .OrderBy(string.Format("it.Object.{0} {1}", 
+                                    _sortProperty, 
+                                    _sortDirection == ListSortDirection.Descending ? "desc" : string.Empty
+                                )
+                            )
+                        )
+                    );
+            }
+
             OnPropertyChanged("InstancesFiltered");
         }
 

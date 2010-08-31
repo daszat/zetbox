@@ -269,7 +269,7 @@ namespace Kistl.Client.Presentables
         {
             get
             {
-                if (columnName == "Value")
+                if (columnName == "Value" || columnName == "FormattedValue")
                 {
                     return this.ValueError;
                 }
@@ -296,6 +296,7 @@ namespace Kistl.Client.Presentables
 
                     // notify listeners that the error state of the Value has changed
                     OnPropertyChanged("Value");
+                    OnPropertyChanged("FormattedValue");
                 }
             }
         }

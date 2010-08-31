@@ -21,6 +21,7 @@ namespace Kistl.Client.WPF.View.KistlBase
     using Kistl.Client.Presentables;
     using Kistl.Client.GUI;
     using Kistl.Client.Presentables.KistlBase;
+    using System.ComponentModel;
 
     /// <summary>
     /// Shows all instances of a given DataTypeModel
@@ -29,6 +30,23 @@ namespace Kistl.Client.WPF.View.KistlBase
     public partial class InstanceListDisplay
         : UserControl, IHasViewModel<InstanceListViewModel>
     {
+        #region Sort dependency properties
+        public static readonly DependencyProperty SortPropertyNameProperty =
+            DependencyProperty.RegisterAttached("SortPropertyName", typeof(string), typeof(InstanceListDisplay));
+
+        public static string GetSortPropertyName(GridViewColumn obj)
+        {
+            if (obj == null) throw new ArgumentNullException("obj");
+            return (string)obj.GetValue(SortPropertyNameProperty);
+        }
+
+        public static void SetSortPropertyName(GridViewColumn obj, string value)
+        {
+            if (obj == null) throw new ArgumentNullException("obj");
+            obj.SetValue(SortPropertyNameProperty, value);
+        }
+        #endregion
+
         /// <summary>
         /// Initializes a new instance of the ObjectClassDisplay class.
         /// </summary>
@@ -106,7 +124,7 @@ namespace Kistl.Client.WPF.View.KistlBase
             {
                 // TODO: use default controls after moving labeling to infrastructure
                 var col = new GridViewColumn() { Header = desc.Header };
-                // SetSortPropertyName(col, desc.Name);
+                SetSortPropertyName(col, desc.Name);
 
                 DataTemplate result = new DataTemplate();
                 var cpFef = new FrameworkElementFactory(typeof(ContentPresenter));
@@ -140,6 +158,58 @@ namespace Kistl.Client.WPF.View.KistlBase
         }
         #endregion
 
+        #region HeaderClickManagement
+        GridViewColumnHeader _lastHeaderClicked = null;
+        ListSortDirection _lastDirection = ListSortDirection.Ascending;
+
+        private void ListView_HeaderClick(object sender, RoutedEventArgs e)
+        {
+            GridViewColumnHeader headerClicked = e.OriginalSource as GridViewColumnHeader;
+
+            if (headerClicked != null)
+            {
+                if (headerClicked.Role != GridViewColumnHeaderRole.Padding)
+                {
+                    var propName = GetSortPropertyName(headerClicked.Column);
+                    if (string.IsNullOrEmpty(propName)) return;
+
+                    ListSortDirection direction;
+                    if (headerClicked != _lastHeaderClicked)
+                    {
+                        direction = ListSortDirection.Ascending;
+                    }
+                    else
+                    {
+                        direction = _lastDirection == ListSortDirection.Ascending ? ListSortDirection.Descending : ListSortDirection.Ascending;
+                    }
+
+                    ViewModel.Sort(propName, direction);
+
+                    // Add arrow
+                    if (direction == ListSortDirection.Ascending)
+                    {
+                        headerClicked.Column.HeaderTemplate =
+                          TryFindResource("GridHeaderTemplateArrowUp") as DataTemplate;
+                    }
+                    else
+                    {
+                        headerClicked.Column.HeaderTemplate =
+                          TryFindResource("GridHeaderTemplateArrowDown") as DataTemplate;
+                    }
+
+                    // Remove arrow from previously sorted header
+                    if (_lastHeaderClicked != null && _lastHeaderClicked != headerClicked)
+                    {
+                        _lastHeaderClicked.Column.HeaderTemplate = null;
+                    }
+
+
+                    _lastHeaderClicked = headerClicked;
+                    _lastDirection = direction;
+                }
+            }
+        }
+        #endregion
 
         #region IHasViewModel<DataTypeModel> Members
 
