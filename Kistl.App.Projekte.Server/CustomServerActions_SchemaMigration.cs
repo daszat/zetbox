@@ -37,7 +37,8 @@ namespace ZBox.App.SchemaMigration
                     .ToDictionary(k => k.Name);
 
                 // foreach table in src
-                foreach (var tbl in src.GetTableNames())
+                // TODO: And views!!
+                foreach (var tbl in src.GetTableNames()/*.Union(src.getviewnames()*/)
                 {
                     Log.InfoFormat("reading table {0}", tbl);
                     SourceTable destTbl;
