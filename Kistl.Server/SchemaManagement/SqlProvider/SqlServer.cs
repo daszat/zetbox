@@ -256,7 +256,7 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
                 FROM sys.objects o 
                     INNER JOIN sys.columns c ON c.object_id=o.object_id
                 WHERE o.object_id = OBJECT_ID(@tbl) 
-                    AND o.type IN (N'U')
+                    AND o.type IN (N'U', N'V')
                     AND c.Name = @name",
                 new Dictionary<string, object>(){
                     { "@tbl", FormatFullName(tblName) },
@@ -271,7 +271,7 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
                         FROM sys.objects o 
                             INNER JOIN sys.columns c ON c.object_id=o.object_id
                         WHERE o.object_id = OBJECT_ID(@tbl)
-                            AND o.type IN (N'U')",
+                            AND o.type IN (N'U', N'V')",
                 new Dictionary<string, object>() {
                     { "@tbl", FormatFullName(tblName) },
                 })
@@ -285,7 +285,7 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
                     FROM sys.objects o 
                         INNER JOIN sys.columns c ON c.object_id=o.object_id
                     WHERE o.object_id = OBJECT_ID(@tbl)
-                        AND o.type IN (N'U')",
+                        AND o.type IN (N'U', N'V')",
                 new Dictionary<string, object>() {
                     { "@tbl", FormatFullName(tblName) },
                 })
@@ -387,7 +387,7 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
                 FROM sys.objects o
                     INNER JOIN sys.columns c ON c.object_id=o.object_id
                 WHERE o.object_id = OBJECT_ID(@table) 
-		            AND o.type IN (N'U')
+		            AND o.type IN (N'U', N'V')
 		            AND c.Name = @column",
                 new Dictionary<string, object>(){
                     { "@table", FormatFullName(tblName) },
@@ -411,7 +411,7 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
                 FROM sys.objects o
                     INNER JOIN sys.columns c ON c.object_id=o.object_id
 	            WHERE o.object_id = OBJECT_ID(@table) 
-		            AND o.type IN (N'U')
+		            AND o.type IN (N'U', N'V')
 		            AND c.Name = @column",
                 new Dictionary<string, object>(){
                     { "@table", FormatFullName(tblName) },
