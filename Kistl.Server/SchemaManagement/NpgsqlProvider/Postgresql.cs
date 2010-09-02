@@ -193,6 +193,11 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
                 .Select(rd => new TableRef(CurrentConnection.Database, rd.GetString(0), rd.GetString(1)));
         }
 
+        public override IEnumerable<TableRef> GetViewNames()
+        {
+            throw new NotImplementedException();
+        }
+
         public override void CreateTable(TableRef tblName, IEnumerable<Column> cols)
         {
             if (cols == null) throw new ArgumentNullException("cols");

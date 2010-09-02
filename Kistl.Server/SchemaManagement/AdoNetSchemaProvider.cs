@@ -282,6 +282,7 @@ namespace Kistl.Server.SchemaManagement
         public abstract bool CheckTableExists(TableRef tblName);
 
         public abstract IEnumerable<TableRef> GetTableNames();
+        public abstract IEnumerable<TableRef> GetViewNames();
 
         public abstract void CreateTable(TableRef tblName, IEnumerable<Column> cols);
 

@@ -313,6 +313,7 @@ namespace Kistl.API.Server
 
         bool CheckTableExists(TableRef tblName);
         IEnumerable<TableRef> GetTableNames();
+        IEnumerable<TableRef> GetViewNames();
 
         void CreateTable(TableRef tblName, IEnumerable<Column> cols);
         void CreateTable(TableRef tblName, bool idAsIdentityColumn);

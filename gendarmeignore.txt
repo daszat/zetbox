@@ -100,8 +100,9 @@ A: Kistl.DalProvider.EF
 T: Kistl.Server.SchemaManagement.OleDbProvider.OleDb
 T: Kistl.Server.SchemaManagement.SqlProvider.SqlServer
 M: System.Boolean Kistl.Server.SchemaManagement.OleDbProvider.OleDb/<GetTableNames>d__0::MoveNext()
-M: System.Boolean Kistl.Server.SchemaManagement.OleDbProvider.OleDb/<GetTableColumns>d__28::MoveNext()
-M: System.Boolean Kistl.Server.SchemaManagement.OleDbProvider.OleDb/<GetTableColumnNames>d__33::MoveNext()
+M: System.Boolean Kistl.Server.SchemaManagement.OleDbProvider.OleDb/<GetViewNames>d__8::MoveNext()
+M: System.Boolean Kistl.Server.SchemaManagement.OleDbProvider.OleDb/<GetTableColumns>d__30::MoveNext()
+M: System.Boolean Kistl.Server.SchemaManagement.OleDbProvider.OleDb/<GetTableColumnNames>d__3b::MoveNext()
 # this should be replaced in time for a linux-release, ignore for now
 M: System.Boolean Kistl.Server.Generators.Generator::CompileCode(System.String)
 M: System.Void Kistl.Server.Server::ReadUsers(System.String,System.Collections.Generic.Dictionary`2<System.String,System.String>)

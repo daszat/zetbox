@@ -196,6 +196,12 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
                 .Select(rd => new TableRef(CurrentConnection.Database, rd.GetString(0), rd.GetString(1)));
         }
 
+        public override IEnumerable<TableRef> GetViewNames()
+        {
+            return ExecuteReader("SELECT s.name, o.name FROM sys.objects o JOIN sys.schemas s ON o.schema_id = s.schema_id WHERE o.type = N'V' AND o.name <> 'sysdiagrams'")
+                .Select(rd => new TableRef(CurrentConnection.Database, rd.GetString(0), rd.GetString(1)));
+        }
+
         public override void CreateTable(TableRef tblName, IEnumerable<Column> cols)
         {
             if (cols == null) throw new ArgumentNullException("cols");

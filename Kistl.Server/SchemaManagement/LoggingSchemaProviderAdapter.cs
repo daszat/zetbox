@@ -107,6 +107,11 @@ namespace Kistl.Server.SchemaManagement
             return _provider.GetTableNames();
         }
 
+        public IEnumerable<TableRef> GetViewNames()
+        {
+            return _provider.GetViewNames();
+        }
+
         public bool CheckColumnExists(TableRef tblName, string colName)
         {
             return _provider.CheckColumnExists(tblName, colName);

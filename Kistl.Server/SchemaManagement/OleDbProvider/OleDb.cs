@@ -194,6 +194,15 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
                 yield return GetQualifiedTableName((string)tbl["TABLE_NAME"]);
             }
         }
+        public IEnumerable<TableRef> GetViewNames()
+        {
+            QueryLog.Debug("GetSchema(VIEWS)");
+            var tables = db.GetSchema(OleDbMetaDataCollectionNames.Tables, new string[] { null, null, null, "VIEW" });
+            foreach (DataRow tbl in tables.Rows)
+            {
+                yield return GetQualifiedTableName((string)tbl["TABLE_NAME"]);
+            }
+        }
 
         private class DataType
         {
