@@ -96,15 +96,15 @@ namespace Kistl.API.Migration
 
         public void TableBaseMigration(SourceTable tbl)
         {
-            TableBaseMigration(tbl, null, null);
+            TableBaseMigration(tbl, (Converter[])null, (Join[])null);
         }
 
-        public void TableBaseMigration(SourceTable tbl, NullConverter[] nullConverter)
+        public void TableBaseMigration(SourceTable tbl, params Converter[] nullConverter)
         {
             TableBaseMigration(tbl, nullConverter, null);
         }
 
-        public void TableBaseMigration(SourceTable tbl, NullConverter[] nullConverter, Join[] additional_joins)
+        public void TableBaseMigration(SourceTable tbl, Converter[] nullConverter, Join[] additional_joins)
         {
             // ------------------- Argument checks ------------------- 
             if (tbl == null) throw new ArgumentNullException("tbl");
@@ -151,7 +151,7 @@ namespace Kistl.API.Migration
             return dstColumnNames;
         }
 
-        private void TableBaseComplexMigration(SourceTable tbl, NullConverter[] nullConverter, List<SourceColumn> mappedColumns, List<SourceColumn> referringCols, Join[] additional_joins)
+        private void TableBaseComplexMigration(SourceTable tbl, Converter[] nullConverter, List<SourceColumn> mappedColumns, List<SourceColumn> referringCols, Join[] additional_joins)
         {
             if (additional_joins != null
                 && additional_joins.Length > 0
@@ -303,7 +303,7 @@ namespace Kistl.API.Migration
             return result;
         }
 
-        private void TableBaseSimpleMigration(SourceTable tbl, NullConverter[] nullConverter, List<SourceColumn> mappedColumns)
+        private void TableBaseSimpleMigration(SourceTable tbl, Converter[] nullConverter, List<SourceColumn> mappedColumns)
         {
             var dstColumnNames = GetDestinationColumnNames(tbl, mappedColumns);
             var srcColumnNames = mappedColumns.Select(c => c.Name).ToArray();

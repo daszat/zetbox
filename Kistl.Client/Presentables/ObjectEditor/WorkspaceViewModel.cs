@@ -114,7 +114,7 @@ namespace Kistl.Client.Presentables.ObjectEditor
         private IEnumerable<string> GetErrors()
         {
             return DataContext.AttachedObjects
-                .Where(po => po.ObjectState != DataObjectState.Unmodified)
+                .Where(o => o.ObjectState == DataObjectState.Modified || o.ObjectState == DataObjectState.New)
                 .OfType<IDataErrorInfo>()
                 .Select(o => o.Error)
                 .Where(s => !String.IsNullOrEmpty(s));

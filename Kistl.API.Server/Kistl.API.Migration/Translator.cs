@@ -19,7 +19,7 @@ namespace Kistl.API.Migration
         private readonly SourceTable _tbl;
         private readonly IDataReader _source;
         private readonly SourceColumn[] _srcColumns;
-        private readonly NullConverter[] _nullConverter;
+        private readonly Converter[] _nullConverter;
 
         private readonly int _errorColIdx;
         private StringBuilder _currentError;
@@ -31,7 +31,7 @@ namespace Kistl.API.Migration
 
         private long _processedRows = 0;
 
-        public Translator(SourceTable tbl, IDataReader source, IEnumerable<SourceColumn> srcColumns, NullConverter[] nullConverter)
+        public Translator(SourceTable tbl, IDataReader source, IEnumerable<SourceColumn> srcColumns, Converter[] nullConverter)
         {
             if (tbl == null) throw new ArgumentNullException("tbl");
             if (source == null) throw new ArgumentNullException("source");
@@ -40,7 +40,7 @@ namespace Kistl.API.Migration
             _tbl = tbl;
             _source = source;
             _srcColumns = srcColumns.ToArray();
-            _nullConverter = nullConverter ?? new NullConverter[] { };
+            _nullConverter = nullConverter ?? new Converter[] { };
             _resultColumnCount = _srcColumns.Length;
 
             if (typeof(IMigrationInfo).IsAssignableFrom(tbl.DestinationObjectClass.GetDataType()))
@@ -122,7 +122,18 @@ namespace Kistl.API.Migration
                 {
                     var src_col = _srcColumns[i];
                     var src_val = _source.GetValue(i);
-                    var val = ConvertType(src_col, src_val);
+                    object val = null;
+
+                    var fieldConv = _nullConverter.OfType<FieldConverter>().SingleOrDefault(c => c.Column.Name == src_col.Name);
+                    if (fieldConv != null)
+                    {
+                        val = fieldConv.Converter(_source);
+                    }
+                    else
+                    {
+                        val = ConvertType(src_col, src_val);
+                    }
+
                     val = HandleNullValue(src_col, val, src_val);
                     _resultValues[i] = val;
 
@@ -158,7 +169,7 @@ namespace Kistl.API.Migration
 
         private object HandleNullValue(SourceColumn sourceColumn, object val, object src_val)
         {
-            var nullConv = _nullConverter.SingleOrDefault(i => i.Column == sourceColumn);
+            var nullConv = _nullConverter.OfType<NullConverter>().SingleOrDefault(i => i.Column == sourceColumn);
             if (nullConv == null) return val;
             if (val == null || val == DBNull.Value)
             {
@@ -168,7 +179,7 @@ namespace Kistl.API.Migration
             return val;
         }
 
-        private static IConverter _dateTimeConverter = new SqlServerDateTimeConverter();
+        private static ITypeConverter _dateTimeConverter = new SqlServerDateTimeConverter();
 
         private object ConvertType(SourceColumn col, object src_val)
         {

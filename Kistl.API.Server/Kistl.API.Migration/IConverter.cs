@@ -7,12 +7,12 @@ using System.Text.RegularExpressions;
 
 namespace Kistl.API.Migration
 {
-    public interface IConverter
+    public interface ITypeConverter
     {
         object Convert(object v);
     }
 
-    public class DateTimeConverter : IConverter
+    public class DateTimeConverter : ITypeConverter
     {
         private static readonly Regex RegExYear = new Regex("^(\\d{4})$");
         private static readonly Regex RegExYearMonth = new Regex("^(\\d{4})/(\\d{2})$");

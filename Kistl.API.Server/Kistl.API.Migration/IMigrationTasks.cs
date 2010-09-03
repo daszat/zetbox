@@ -11,11 +11,48 @@ namespace Kistl.API.Migration
 
     public delegate IMigrationTasks TaskFactory(ISchemaProvider src, ISchemaProvider dst);
 
-    public class NullConverter
+    public abstract class Converter
     {
         public SourceColumn Column { get; set; }
-        public object NullValue { get; set; }
         public string ErrorMsg { get; set; }
+    }
+
+    public class NullConverter : Converter
+    {
+        public NullConverter()
+        {
+        }
+
+        public NullConverter(SourceColumn column, object nullValue, string errorMsg)
+        {
+            this.Column = column;
+            this.NullValue = nullValue;
+            this.ErrorMsg = errorMsg;
+        }
+
+        public object NullValue { get; set; }
+    }
+
+    public class FieldConverter : Converter
+    {
+        public FieldConverter()
+        {
+        }
+
+        public FieldConverter(SourceColumn column, Func<IDataReader, object> converter)
+        {
+            this.Column = column;
+            this.Converter = converter;
+        }
+
+        public FieldConverter(SourceColumn column, Func<IDataReader, object> converter, string errorMsg)
+        {
+            this.Column = column;
+            this.Converter = converter;
+            this.ErrorMsg = errorMsg;
+        }
+
+        public Func<IDataReader, object> Converter { get; set; }
     }
 
     public interface IMigrationTasks
@@ -33,8 +70,8 @@ namespace Kistl.API.Migration
         /// Executes the basic defined migrations from the specified source table.
         /// </summary>
         void TableBaseMigration(SourceTable tbl);
-        void TableBaseMigration(SourceTable tbl, NullConverter[] nullConverter);
-        void TableBaseMigration(SourceTable tbl, NullConverter[] nullConverter, Join[] additional_joins);
+        void TableBaseMigration(SourceTable tbl, params Converter[] nullConverter);
+        void TableBaseMigration(SourceTable tbl, Converter[] nullConverter, Join[] additional_joins);
 
         InputStream ExecuteQueryStreaming(string sql);
 

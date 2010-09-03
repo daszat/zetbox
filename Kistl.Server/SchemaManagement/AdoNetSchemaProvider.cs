@@ -144,7 +144,7 @@ namespace Kistl.Server.SchemaManagement
             var stream = type.Assembly.GetManifestResourceStream(scriptResourceName);
             if (stream == null) throw new ArgumentOutOfRangeException("scriptResourceName", String.Format("Script [{0}] not found in assembly [{1}]", scriptResourceName, type.Assembly.FullName));
 
-            using (var scriptStream = new StreamReader(stream))
+            using (var scriptStream = new StreamReader(stream, Encoding.UTF8))
             {
                 var databaseScript = scriptStream.ReadToEnd();
 

@@ -31,7 +31,7 @@ namespace Kistl.API.Migration
             return GetField(name, null);
         }
 
-        public object GetField(string name, IConverter converter)
+        public object GetField(string name, ITypeConverter converter)
         {
             if (!_values.ContainsKey(name)) throw new ArgumentOutOfRangeException("name", "Record does not contains field " + name);
             if (converter == null) return _values[name];
@@ -43,7 +43,7 @@ namespace Kistl.API.Migration
             return GetField(name, ifNull, null);
         }
         
-        public object GetField(string name, object ifNull, IConverter converter)
+        public object GetField(string name, object ifNull, ITypeConverter converter)
         {
             var v = GetField(name, converter);
             if (v == null || v == DBNull.Value)
@@ -62,7 +62,7 @@ namespace Kistl.API.Migration
             _values[name] = val;
         }
 
-        public void SetField(string name, object val, IConverter converter)
+        public void SetField(string name, object val, ITypeConverter converter)
         {
             if (converter == null) throw new ArgumentNullException("converter");
             SetField(name, converter.Convert(val));
