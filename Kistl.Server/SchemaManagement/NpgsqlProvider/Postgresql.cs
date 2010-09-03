@@ -13,6 +13,7 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
     using Kistl.API.Server;
     using Kistl.API.Utils;
     using Npgsql;
+    using System.Globalization;
 
     public class Postgresql
         : AdoNetSchemaProvider<NpgsqlConnection, NpgsqlTransaction, NpgsqlCommand>
@@ -35,7 +36,16 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
 
         protected override NpgsqlConnection CreateConnection(string connectionString)
         {
-            return new NpgsqlConnection(connectionString);
+            var origCS = connectionString;
+            // TODO: improve hack
+            Regex.Replace(connectionString, "SyncNotification=[^;]*", "");
+            //connectionString += ";SyncNotification=true";
+            var result = new NpgsqlConnection(connectionString);
+            if (!result.SyncNotification)
+            {
+                _log.ErrorFormat("Must set 'SyncNotification=true' in connection string [{0}]", origCS);
+            }
+            return result;
         }
 
         protected override NpgsqlTransaction CreateTransaction()
@@ -165,16 +175,39 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
 
         #endregion
 
-        #region Table Structure
+        #region Database Schemas
 
-        protected override string FormatFullName(TableRef tbl)
+        public override IEnumerable<string> GetSchemaNames()
         {
-            return String.Format("\"{0}\".\"{1}\".\"{2}\"", tbl.Database, tbl.Schema, tbl.Name);
+            return ExecuteReader("SELECT nspname FROM pg_catalog.pg_namespace WHERE nspname NOT IN ('information_schema', 'pg_catalog', 'pg_toast', 'public')")
+                .Select(rd => rd.GetString(0));
         }
 
-        protected override string FormatSchemaName(TableRef tbl)
+        public override void CreateSchema(string schemaName)
         {
-            return String.Format("\"{0}\".\"{1}\"", tbl.Schema, tbl.Name);
+            ExecuteNonQuery(String.Format("CREATE SCHEMA {0}", QuoteIdentifier(schemaName)));
+        }
+
+        public override void DropSchema(string schemaName, bool force)
+        {
+            ExecuteNonQuery(String.Format(
+                "DROP SCHEMA {0} {1}",
+                QuoteIdentifier(schemaName),
+                force ? "CASCADE" : "RESTRICT"));
+        }
+
+        #endregion
+
+        #region Table Structure
+
+        protected override string FormatFullName(DboRef dbo)
+        {
+            return String.Format("\"{0}\".\"{1}\".\"{2}\"", dbo.Database, dbo.Schema, dbo.Name);
+        }
+
+        protected override string FormatSchemaName(DboRef dbo)
+        {
+            return String.Format("\"{0}\".\"{1}\"", dbo.Schema, dbo.Name);
         }
 
         public override bool CheckTableExists(TableRef tblName)
@@ -208,7 +241,6 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
 
             sb.Append(String.Join(",\n", cols.Select(col => GetColumnDefinition(col)).ToArray()));
 
-            sb.Remove(sb.Length - 1, 1);
             sb.Append(")");
             ExecuteNonQuery(sb.ToString());
         }
@@ -558,33 +590,39 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
                 QuoteIdentifier(triggerName)));
         }
 
-        public override bool CheckProcedureExists(string procName)
+        public override bool CheckProcedureExists(ProcRef procName)
         {
-            // TODO: remove 'dbo' reference
             return (bool)ExecuteScalar(@"
                 SELECT count(*) > 0
                 FROM pg_proc p
                     LEFT JOIN pg_namespace n ON p.pronamespace = n.oid
-                WHERE n.nspname = 'dbo' AND p.proname = @proc",
+                WHERE n.nspname = @schema AND p.proname = @proc",
                 new Dictionary<string, object>() {
-                    { "@proc", procName },
+                    { "@schema", procName.Schema },
+                    { "@proc", procName.Name },
                 });
         }
 
         /// <summary>
         /// Drops all versions of the function with the specified name.
         /// </summary>
-        public override void DropProcedure(string procName)
+        public override void DropProcedure(ProcRef procName)
+        {
+            DropProcedureInternal(procName, false);
+        }
+
+        private void DropProcedureInternal(ProcRef procName, bool cascade)
         {
             foreach (var argTypes in GetParameterTypes(procName))
             {
-                ExecuteNonQuery(String.Format("DROP FUNCTION {0}({1})",
-                    QuoteIdentifier(procName),
-                    String.Join(",", argTypes)));
+                ExecuteNonQuery(String.Format("DROP FUNCTION {0}({1}) {2}",
+                    FormatSchemaName(procName),
+                    String.Join(",", argTypes),
+                    cascade ? "CASCADE" : "RESTRICT"));
             }
         }
 
-        private IEnumerable<string[]> GetParameterTypes(string procName)
+        private IEnumerable<string[]> GetParameterTypes(ProcRef procName)
         {
             string sqlQuery = @"
                 SELECT args.proc_oid, t.typname 
@@ -624,7 +662,30 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
 
         public override void DropAllObjects()
         {
-            ExecuteSqlResource(this.GetType(), "Kistl.Server.SchemaManagement.NpgsqlProvider.Scripts.ResetSchema.sql");
+            foreach (var proc in GetProcedureNames().ToList())
+            {
+                DropProcedureInternal(proc, true);
+            }
+
+            foreach (var tbl in GetTableNames().ToList())
+            {
+                DropTableCascade(tbl);
+            }
+
+            if (!GetSchemaNames().Contains("dbo"))
+            {
+                CreateSchema("dbo");
+            }
+        }
+
+        public override IEnumerable<ProcRef> GetProcedureNames()
+        {
+            return ExecuteReader(@"
+                    SELECT n.nspname, p.proname
+                    FROM pg_proc p
+                        JOIN pg_namespace n ON (p.pronamespace = n.oid)
+                    WHERE nspname NOT IN ('pg_catalog', 'pg_toast', 'information_schema', 'public');")
+                .Select(rd => new ProcRef(this.CurrentConnection.Database, rd.GetString(0), rd.GetString(1)));
         }
 
         #endregion
@@ -898,7 +959,7 @@ FROM (", FormatFullName(viewName));
         }
 
         public override void CreateRefreshRightsOnProcedure(
-            string procName,
+            ProcRef procName,
             TableRef viewUnmaterializedName,
             TableRef tblName,
             TableRef tblNameRights)
@@ -906,7 +967,7 @@ FROM (", FormatFullName(viewName));
             Log.DebugFormat("Creating refresh rights procedure for \"{0}\"", tblName);
             ExecuteNonQuery(String.Format(
                 @"
-CREATE FUNCTION ""dbo"".{0}(IN refreshID integer DEFAULT NULL) RETURNS void AS
+CREATE FUNCTION {0}(IN refreshID integer DEFAULT NULL) RETURNS void AS
 $BODY$BEGIN
     IF (refreshID IS NULL) THEN
             TRUNCATE TABLE {1};
@@ -917,15 +978,15 @@ $BODY$BEGIN
     END IF;
 END$BODY$
 LANGUAGE 'plpgsql' VOLATILE",
-                QuoteIdentifier(procName),
+                FormatSchemaName(procName),
                 FormatFullName(tblNameRights),
                 FormatFullName(viewUnmaterializedName)));
         }
 
-        public override void ExecRefreshRightsOnProcedure(string procName)
+        public override void ExecRefreshRightsOnProcedure(ProcRef procName)
         {
-            Log.DebugFormat("Refreshing rights for \"{0}\"", procName);
-            ExecuteNonQuery(String.Format(@"SELECT ""dbo"".{0}()", QuoteIdentifier(procName)));
+            Log.DebugFormat("Refreshing rights for [{0}]", procName);
+            ExecuteNonQuery(String.Format(@"SELECT ()", FormatSchemaName(procName)));
         }
 
         public override void CreatePositionColumnValidCheckProcedures(ILookup<TableRef, KeyValuePair<TableRef, string>> refSpecs)
@@ -937,9 +998,10 @@ LANGUAGE 'plpgsql' VOLATILE",
 
             foreach (var name in new[] { procName, tableProcName })
             {
-                if (CheckProcedureExists(name))
+                var procRef = new ProcRef(null, "dbo", name);
+                if (CheckProcedureExists(procRef))
                 {
-                    DropProcedure(name);
+                    DropProcedure(procRef);
                 }
             }
 
@@ -1004,9 +1066,129 @@ LANGUAGE 'plpgsql' VOLATILE",
             throw new NotImplementedException();
         }
 
+        private const string COPY_SEPARATOR = "|";
+        private const string COPY_NULL = "\\N";
+
         public override void WriteTableData(TableRef destTbl, IDataReader source, IEnumerable<string> colNames)
         {
-            throw new NotImplementedException();
+            if (source == null) throw new ArgumentNullException("source");
+            if (colNames == null) throw new ArgumentNullException("colNames");
+
+            var cols = colNames.Select(n => QuoteIdentifier(n)).ToArray();
+            var query = String.Format("COPY {0} ({1}) FROM STDIN WITH DELIMITER '{2}' NULL '{3}'", FormatSchemaName(destTbl), String.Join(",", cols), COPY_SEPARATOR, COPY_NULL);
+            _log.InfoFormat("Copy from: [{0}]", query);
+            var bulkCopy = new NpgsqlCopyIn(query, CurrentConnection);
+            try
+            {
+                bulkCopy.Start();
+                var dst = new StreamWriter(bulkCopy.CopyStream, Encoding.UTF8); // explicitly use Npgsql's default encoding
+
+                while (source.Read())
+                {
+                    var vals = new string[cols.Length];
+
+                    for (int srcIdx = 0; srcIdx < cols.Length; srcIdx++)
+                    {
+                        object val = null;
+                        if (source.IsDBNull(srcIdx) || (val = source.GetValue(srcIdx)) == null)
+                        {
+                            vals[srcIdx] = COPY_NULL;
+                        }
+                        else
+                        {
+                            var date = val as DateTime?;
+                            if (date != null)
+                            {
+                                vals[srcIdx] = date.Value.ToString("s", CultureInfo.InvariantCulture);
+                            }
+                            else
+                            {
+                                var dec = val as decimal?;
+                                if (dec != null)
+                                {
+                                    vals[srcIdx] = dec.Value.ToString(CultureInfo.InvariantCulture);
+                                }
+                                else
+                                {
+                                    var dbl = val as double?;
+                                    if (dbl != null)
+                                    {
+                                        vals[srcIdx] = dbl.Value.ToString(CultureInfo.InvariantCulture);
+                                    }
+                                    else
+                                    {
+                                        var flt = val as float?;
+                                        if (flt != null)
+                                        {
+                                            vals[srcIdx] = flt.Value.ToString(CultureInfo.InvariantCulture);
+                                        }
+                                        else
+                                        {
+                                            var lng = val as long?;
+                                            if (lng != null)
+                                            {
+                                                vals[srcIdx] = lng.Value.ToString(CultureInfo.InvariantCulture);
+                                            }
+                                            else
+                                            {
+                                                var integ = val as int?;
+                                                if (integ != null)
+                                                {
+                                                    vals[srcIdx] = integ.Value.ToString(CultureInfo.InvariantCulture);
+                                                }
+                                                else
+                                                {
+                                                    var str = val as string;
+                                                    if (str != null)
+                                                    {
+                                                        vals[srcIdx] = str;
+                                                    }
+                                                    else
+                                                    {
+                                                        // error out
+                                                        var strVal = val.ToString();
+                                                        if (strVal.Length > 100)
+                                                        {
+                                                            str = str.Substring(0, 100);
+                                                            str += " ...";
+                                                        }
+                                                        throw new NotSupportedException(String.Format("Cannot transform [{0}] of Type [{1}] for WriteTableData", strVal, val.GetType()));
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            vals[srcIdx] = CopyEscape(vals[srcIdx]);
+                        }
+                    }
+                    string line = String.Join(COPY_SEPARATOR, vals);
+                    Console.WriteLine(String.Join("|", vals.Select(s=>s.Length.ToString()).ToArray()));
+                    Console.WriteLine(Regex.Replace(line, @"[^-a-z0-9A-Z|°!""§$%&/()=?`´'#+*~öäüÖÄÜ:;\._ ,]", "@"));
+                    dst.Write(line);
+                    // normal writeline confuses npgsql
+                    dst.Write("\n");
+                    dst.Flush();
+                    System.Threading.Thread.Sleep(1);
+                }
+                dst.Close();
+                bulkCopy.End();
+                Console.WriteLine("Written: {0}", ExecuteScalar(String.Format("SELECT Count(*) FROM {0}", FormatSchemaName(destTbl))));
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error bulk writing to destination", ex);
+                bulkCopy.Cancel("Aborting COPY operation");
+                throw;
+            }
+        }
+
+        private static string CopyEscape(string p)
+        {
+            // TODO: remove \0 replacement. should be done by migration transformations/data cleaner
+            return p.Replace("\\", "\\\\").Replace("\r", "\\r").Replace("\n", "\\n").Replace(COPY_SEPARATOR, "\\" + COPY_SEPARATOR).Replace("\0", "");
         }
 
         public override void WriteTableData(TableRef destTbl, IEnumerable<string> colNames, System.Collections.IEnumerable values)

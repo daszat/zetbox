@@ -643,7 +643,6 @@
       <LastGenOutput>EagerObjectLoadingSerialization.Designer.cs</LastGenOutput>
     </None>
     <Content Include="Generators\Templates\Interface\README.txt" />
-    <EmbeddedResource Include="SchemaManagement\NpgsqlProvider\Scripts\ResetSchema.sql" />
     <Content Include="SchemaManagement\NpgsqlProvider\TextFile1.txt" />
     <None Include="Generators\Templates\Implementation\ObjectClasses\SimpleFieldSerialization.cst">
       <Generator>Arebis Template Processor</Generator>

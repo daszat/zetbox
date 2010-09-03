@@ -10,7 +10,7 @@ namespace Kistl.API.Server
     using System.Collections;
     using System.Diagnostics;
 
-    public struct TableRef : IComparable<TableRef>, ICloneable
+    public abstract class DboRef : IComparable<DboRef>
     {
         private readonly string _database;
 
@@ -33,7 +33,7 @@ namespace Kistl.API.Server
         /// </summary>
         public string Name { get { return _name; } }
 
-        public TableRef(string database, string schema, string name)
+        protected DboRef(string database, string schema, string name)
         {
             _database = database;
             _schema = schema;
@@ -64,55 +64,86 @@ namespace Kistl.API.Server
                 return false;
             }
 
-            return this == (TableRef)obj;
+            return this == (DboRef)obj;
         }
 
-        int IComparable<TableRef>.CompareTo(TableRef other)
+        int IComparable<DboRef>.CompareTo(DboRef other)
         {
+            if (other == null)
+                return -1;
+
+            var type = this.GetType().AssemblyQualifiedName.CompareTo(other.GetType().AssemblyQualifiedName);
+            if (type != 0)
+                return type;
+
             var db = _database.CompareTo(other._database);
-            if (db == 0)
-            {
-                var sc = _schema.CompareTo(other._schema);
-                if (sc == 0)
-                {
-                    return _name.CompareTo(other._name);
-                }
-                else
-                {
-                    return sc;
-                }
-            }
-            else
-            {
+            if (db != 0)
                 return db;
-            }
+
+            var sc = _schema.CompareTo(other._schema);
+            if (sc != 0)
+                return sc;
+
+            return _name.CompareTo(other._name);
         }
 
-        public static bool operator ==(TableRef x, TableRef y)
+        public static bool operator ==(DboRef x, DboRef y)
         {
-            return x._database == y._database
+            return x.GetType().Equals(y.GetType())
+                && x._database == y._database
                 && x._schema == y._schema
                 && x._name == y._name;
         }
 
-        public static bool operator !=(TableRef x, TableRef y)
+        public static bool operator !=(DboRef x, DboRef y)
         {
             return !(x == y);
         }
 
-        public static bool operator >(TableRef x, TableRef y)
+        public static bool operator >(DboRef x, DboRef y)
         {
-            return ((IComparable<TableRef>)x).CompareTo(y) > 0;
+            return ((IComparable<DboRef>)x).CompareTo(y) > 0;
         }
 
-        public static bool operator <(TableRef x, TableRef y)
+        public static bool operator <(DboRef x, DboRef y)
         {
-            return ((IComparable<TableRef>)x).CompareTo(y) < 0;
+            return ((IComparable<DboRef>)x).CompareTo(y) < 0;
+        }
+    }
+
+    public sealed class TableRef : DboRef, IComparable<TableRef>, ICloneable
+    {
+        public TableRef(string database, string schema, string name)
+            : base(database, schema, name)
+        {
+        }
+
+        int IComparable<TableRef>.CompareTo(TableRef other)
+        {
+            return ((IComparable<DboRef>)this).CompareTo(other);
         }
 
         object ICloneable.Clone()
         {
-            return new TableRef(_database, _schema, _name);
+            return new TableRef(Database, Schema, Name);
+        }
+    }
+
+    public sealed class ProcRef : DboRef, IComparable<ProcRef>, ICloneable
+    {
+        public ProcRef(string database, string schema, string name)
+            : base(database, schema, name)
+        {
+        }
+
+        int IComparable<ProcRef>.CompareTo(ProcRef other)
+        {
+            return ((IComparable<DboRef>)this).CompareTo(other);
+        }
+
+        object ICloneable.Clone()
+        {
+            return new ProcRef(Database, Schema, Name);
         }
     }
 
@@ -307,6 +338,14 @@ namespace Kistl.API.Server
 
         #endregion
 
+        #region Database Schemas
+
+        IEnumerable<string> GetSchemaNames();
+        void CreateSchema(string schemaName);
+        void DropSchema(string schemaName, bool force);
+        
+        #endregion
+
         #region Table Structure
 
         TableRef GetQualifiedTableName(string tblName);
@@ -375,8 +414,10 @@ namespace Kistl.API.Server
         bool CheckTriggerExists(TableRef objName, string triggerName);
         void DropTrigger(TableRef objName, string triggerName);
 
-        bool CheckProcedureExists(string procName);
-        void DropProcedure(string procName);
+        ProcRef GetQualifiedProcedureName(string procName);
+        IEnumerable<ProcRef> GetProcedureNames();
+        bool CheckProcedureExists(ProcRef procName);
+        void DropProcedure(ProcRef procName);
 
         /// <summary>
         /// Setup schema provider-local structures
@@ -409,8 +450,8 @@ namespace Kistl.API.Server
         void CreateUpdateRightsTrigger(string triggerName, TableRef tblName, List<RightsTrigger> tblList);
         void CreateRightsViewUnmaterialized(TableRef viewName, TableRef tblName, TableRef tblNameRights, IList<ACL> acls);
         void CreateEmptyRightsViewUnmaterialized(TableRef viewName);
-        void CreateRefreshRightsOnProcedure(string procName, TableRef viewUnmaterializedName, TableRef tblName, TableRef tblNameRights);
-        void ExecRefreshRightsOnProcedure(string procName);
+        void CreateRefreshRightsOnProcedure(ProcRef procName, TableRef viewUnmaterializedName, TableRef tblName, TableRef tblNameRights);
+        void ExecRefreshRightsOnProcedure(ProcRef procName);
 
         /// <summary>
         /// Creates a procedure to check position columns for their validity.
@@ -431,5 +472,6 @@ namespace Kistl.API.Server
         void RefreshDbStats();
 
         void ExecuteSqlResource(Type type, string scriptResourceName);
+
     }
 }

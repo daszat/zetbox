@@ -169,16 +169,38 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
 
         #endregion
 
-        #region Table Structure
+        #region Database Schemas
 
-        protected override string FormatFullName(TableRef tblName)
+        public override IEnumerable<string> GetSchemaNames()
         {
-            return String.Format("[{0}].[{1}].[{2}]", tblName.Database, tblName.Schema, tblName.Name);
+            throw new NotImplementedException();
         }
 
-        protected override string FormatSchemaName(TableRef tblName)
+        public override void CreateSchema(string schemaName)
         {
-            return String.Format("[{0}].[{1}]", tblName.Schema, tblName.Name);
+            ExecuteNonQuery(String.Format("CREATE SCHEMA {0}", QuoteIdentifier(schemaName)));
+        }
+
+        public override void DropSchema(string schemaName, bool force)
+        {
+            ExecuteNonQuery(String.Format(
+                "DROP SCHEMA {0} {1}",
+                QuoteIdentifier(schemaName),
+                force ? "CASCADE" : "RESTRICT"));
+        }
+
+        #endregion
+
+        #region Table Structure
+
+        protected override string FormatFullName(DboRef dbo)
+        {
+            return String.Format("[{0}].[{1}].[{2}]", dbo.Database, dbo.Schema, dbo.Name);
+        }
+
+        protected override string FormatSchemaName(DboRef dbo)
+        {
+            return String.Format("[{0}].[{1}]", dbo.Schema, dbo.Name);
         }
 
         public override bool CheckTableExists(TableRef tblName)
@@ -324,7 +346,7 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
             string addOrAlter = add ? "ADD" : "ALTER COLUMN";
             string nullable = isNullable ? "NULL" : "NOT NULL";
             string defValue = string.Empty;
-            var constrName = ConstructDefaultConstraintName(tblName, colName); 
+            var constrName = ConstructDefaultConstraintName(tblName, colName);
 
             if (defConstraint != null)
             {
@@ -552,18 +574,23 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
             ExecuteNonQuery(string.Format("DROP TRIGGER [{0}]", triggerName));
         }
 
-        public override bool CheckProcedureExists(string procName)
+        public override IEnumerable<ProcRef> GetProcedureNames()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override bool CheckProcedureExists(ProcRef procName)
         {
             return (int)ExecuteScalar(
                   "SELECT COUNT(*) FROM sys.objects WHERE object_id = OBJECT_ID(@proc) AND type IN (N'P')",
                   new Dictionary<string, object>(){
-                    { "@proc", procName },
+                    { "@proc", FormatSchemaName(procName) },
                 }) > 0;
         }
 
-        public override void DropProcedure(string procName)
+        public override void DropProcedure(ProcRef procName)
         {
-            ExecuteNonQuery(string.Format("DROP PROCEDURE [{0}]", procName));
+            ExecuteNonQuery(string.Format("DROP PROCEDURE {0}", FormatSchemaName(procName)));
         }
 
         public override void EnsureInfrastructure()
@@ -638,7 +665,7 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
         // ---------------------------------------------------------------------------
         // ---------------------------------------------------------------------------
 
-      
+
         public override void CopyColumnData(TableRef srcTblName, string srcColName, TableRef tblName, string colName)
         {
             Log.DebugFormat("Copying data from [{0}].[{1}] to [{2}].[{3}]", srcTblName, srcColName, tblName, colName);
@@ -815,7 +842,7 @@ FROM (", viewName.Schema, viewName.Name);
             ExecuteNonQuery(view.ToString());
         }
 
-        public override void CreateRefreshRightsOnProcedure(string procName, TableRef viewUnmaterializedName, TableRef tblName, TableRef tblNameRights)
+        public override void CreateRefreshRightsOnProcedure(ProcRef procName, TableRef viewUnmaterializedName, TableRef tblName, TableRef tblNameRights)
         {
             Log.DebugFormat("Creating refresh rights procedure for [{0}]", tblName);
             ExecuteNonQuery(string.Format(@"CREATE PROCEDURE [{0}] (@ID INT = NULL) AS
@@ -831,15 +858,15 @@ FROM (", viewName.Schema, viewName.Name);
 			                    INSERT INTO {1} ([ID], [Identity], [Right]) SELECT [ID], [Identity], [Right] FROM {2} WHERE [ID] = @ID
 		                    END
                     END",
-                procName,
+                FormatSchemaName(procName),
                 FormatSchemaName(tblNameRights),
                 FormatSchemaName(viewUnmaterializedName)));
         }
 
-        public override void ExecRefreshRightsOnProcedure(string procName)
+        public override void ExecRefreshRightsOnProcedure(ProcRef procName)
         {
             Log.DebugFormat("Refreshing rights for [{0}]", procName);
-            ExecuteNonQuery(string.Format(@"EXEC [{0}]", procName));
+            ExecuteNonQuery(string.Format(@"EXEC {0}", FormatSchemaName(procName)));
         }
 
         public override void CreatePositionColumnValidCheckProcedures(ILookup<TableRef, KeyValuePair<TableRef, string>> refSpecs)
@@ -851,9 +878,10 @@ FROM (", viewName.Schema, viewName.Name);
 
             foreach (var name in new[] { procName, tableProcName })
             {
-                if (CheckProcedureExists(name))
+                var procRef = new ProcRef(null, "dbo", name);
+                if (CheckProcedureExists(procRef))
                 {
-                    DropProcedure(name);
+                    DropProcedure(procRef);
                 }
             }
 

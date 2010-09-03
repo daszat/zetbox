@@ -1671,7 +1671,7 @@ namespace Kistl.Server.SchemaManagement
             var tblName = db.GetQualifiedTableName(objClass.TableName);
             var updateRightsTriggerName = Construct.SecurityRulesUpdateRightsTriggerName(objClass);
             var rightsViewUnmaterializedName = db.GetQualifiedTableName(Construct.SecurityRulesRightsViewUnmaterializedName(objClass));
-            var refreshRightsOnProcedureName = Construct.SecurityRulesRefreshRightsOnProcedureName(objClass);
+            var refreshRightsOnProcedureName = db.GetQualifiedProcedureName(Construct.SecurityRulesRefreshRightsOnProcedureName(objClass));
 
             DoCreateUpdateRightsTrigger(objClass);
             DoCreateRightsViewUnmaterialized(objClass);
@@ -1840,7 +1840,7 @@ namespace Kistl.Server.SchemaManagement
         public void DoChangeObjectClassACL(ObjectClass objClass)
         {
             var rightsViewUnmaterializedName = db.GetQualifiedTableName(Construct.SecurityRulesRightsViewUnmaterializedName(objClass));
-            var refreshRightsOnProcedureName = Construct.SecurityRulesRefreshRightsOnProcedureName(objClass);
+            var refreshRightsOnProcedureName = db.GetQualifiedProcedureName(Construct.SecurityRulesRefreshRightsOnProcedureName(objClass));
 
             db.DropView(rightsViewUnmaterializedName);
             DoCreateRightsViewUnmaterialized(objClass);
@@ -1863,7 +1863,7 @@ namespace Kistl.Server.SchemaManagement
 
             Log.InfoFormat("Delete ObjectClass Security Rules: {0}", objClass.Name);
 
-            db.DropProcedure(refreshRightsOnProcedureName);
+            db.DropProcedure(db.GetQualifiedProcedureName(refreshRightsOnProcedureName));
             db.DropView(rightsViewUnmaterializedName);
             db.DropTable(tblRightsName);
         }
@@ -1900,12 +1900,12 @@ namespace Kistl.Server.SchemaManagement
                 var colName = Construct.NestedColumnName(valProp, colName_IsNull);
                 Log.InfoFormat("New nullable ValueType Property: '{0}' ('{1}')", valProp.Name, colName);
                 db.CreateColumn(
-                    db.GetQualifiedTableName(objClass.TableName), 
-                    colName, 
-                    valProp.GetDbType(), 
-                    valProp.GetSize(), 
+                    db.GetQualifiedTableName(objClass.TableName),
+                    colName,
+                    valProp.GetDbType(),
+                    valProp.GetSize(),
                     valProp.GetScale(),
-                    cprop.IsNullable() || valProp.IsNullable(), 
+                    cprop.IsNullable() || valProp.IsNullable(),
                     SchemaManager.GetDefaultContraint(valProp));
             }
 

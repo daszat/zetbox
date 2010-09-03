@@ -454,7 +454,7 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
         }
 
         /// <summary>Not supported.</summary>
-        bool ISchemaProvider.CheckProcedureExists(string procName)
+        bool ISchemaProvider.CheckProcedureExists(ProcRef procName)
         {
             throw new NotSupportedException();
         }
@@ -562,7 +562,7 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
         }
 
         /// <summary>Not supported.</summary>
-        void ISchemaProvider.DropProcedure(string procName)
+        void ISchemaProvider.DropProcedure(ProcRef procName)
         {
             throw new NotSupportedException();
         }
@@ -610,13 +610,13 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
         }
 
         /// <summary>Not supported.</summary>
-        void ISchemaProvider.CreateRefreshRightsOnProcedure(string procName, TableRef viewUnmaterializedName, TableRef tblName, TableRef tblNameRights)
+        void ISchemaProvider.CreateRefreshRightsOnProcedure(ProcRef procName, TableRef viewUnmaterializedName, TableRef tblName, TableRef tblNameRights)
         {
             throw new NotSupportedException();
         }
 
         /// <summary>Not supported.</summary>
-        void ISchemaProvider.ExecRefreshRightsOnProcedure(string procName)
+        void ISchemaProvider.ExecRefreshRightsOnProcedure(ProcRef procName)
         {
             throw new NotSupportedException();
         }
@@ -665,6 +665,31 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
 
         /// <summary>Not supported.</summary>
         void ISchemaProvider.EnsureInfrastructure()
+        {
+            throw new NotSupportedException();
+        }
+
+        IEnumerable<ProcRef> ISchemaProvider.GetProcedureNames()
+        {
+            throw new NotSupportedException();
+        }
+
+        ProcRef ISchemaProvider.GetQualifiedProcedureName(string procName)
+        {
+            throw new NotSupportedException();
+        }
+
+        IEnumerable<string> ISchemaProvider.GetSchemaNames()
+        {
+            throw new NotSupportedException();
+        }
+
+        void ISchemaProvider.CreateSchema(string schemaName)
+        {
+            throw new NotSupportedException();
+        }
+
+        void ISchemaProvider.DropSchema(string schemaName, bool force)
         {
             throw new NotSupportedException();
         }

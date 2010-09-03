@@ -267,10 +267,18 @@ namespace Kistl.Server.SchemaManagement
 
         #endregion
 
+        #region Database Schemas
+
+        public abstract IEnumerable<string> GetSchemaNames();
+        public abstract void CreateSchema(string schemaName);
+        public abstract void DropSchema(string schemaName, bool force);
+
+        #endregion
+
         #region Table Structure
 
-        protected abstract string FormatFullName(TableRef tblName);
-        protected abstract string FormatSchemaName(TableRef tblName);
+        protected abstract string FormatFullName(DboRef tblName);
+        protected abstract string FormatSchemaName(DboRef tblName);
 
         public TableRef GetQualifiedTableName(string tblName)
         {
@@ -299,6 +307,11 @@ namespace Kistl.Server.SchemaManagement
         public virtual void DropTable(TableRef tblName)
         {
             ExecuteNonQuery(String.Format("DROP TABLE {0}", FormatFullName(tblName)));
+        }
+
+        protected virtual void DropTableCascade(TableRef tblName)
+        {
+            ExecuteNonQuery(String.Format("DROP TABLE {0} CASCADE", FormatFullName(tblName)));
         }
 
         public abstract bool CheckColumnExists(TableRef tblName, string colName);
@@ -385,8 +398,16 @@ namespace Kistl.Server.SchemaManagement
         public abstract bool CheckTriggerExists(TableRef objName, string triggerName);
         public abstract void DropTrigger(TableRef objName, string triggerName);
 
-        public abstract bool CheckProcedureExists(string procName);
-        public abstract void DropProcedure(string procName);
+        public ProcRef GetQualifiedProcedureName(string procName)
+        {
+            if (db == null) throw new InvalidOperationException("cannot qualify table name without database connection");
+            // keep "dbo" as default schema until we implement schemas in the infrastructure
+            return new ProcRef(db.Database, "dbo", procName);
+        }
+        
+        public abstract IEnumerable<ProcRef> GetProcedureNames();
+        public abstract bool CheckProcedureExists(ProcRef procName);
+        public abstract void DropProcedure(ProcRef procName);
 
         public abstract void EnsureInfrastructure();
         public abstract void DropAllObjects();
@@ -493,8 +514,8 @@ namespace Kistl.Server.SchemaManagement
         public abstract void CreateUpdateRightsTrigger(string triggerName, TableRef tblName, List<RightsTrigger> tblList);
         public abstract void CreateRightsViewUnmaterialized(TableRef viewName, TableRef tblName, TableRef tblNameRights, IList<ACL> acls);
         public abstract void CreateEmptyRightsViewUnmaterialized(TableRef viewName);
-        public abstract void CreateRefreshRightsOnProcedure(string procName, TableRef viewUnmaterializedName, TableRef tblName, TableRef tblNameRights);
-        public abstract void ExecRefreshRightsOnProcedure(string procName);
+        public abstract void CreateRefreshRightsOnProcedure(ProcRef procName, TableRef viewUnmaterializedName, TableRef tblName, TableRef tblNameRights);
+        public abstract void ExecRefreshRightsOnProcedure(ProcRef procName);
 
         /// <summary>
         /// Creates a procedure to check position columns for their validity.

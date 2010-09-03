@@ -112,6 +112,16 @@ namespace Kistl.Server.SchemaManagement
             return _provider.GetViewNames();
         }
 
+        public ProcRef GetQualifiedProcedureName(string procName)
+        {
+            return _provider.GetQualifiedProcedureName(procName);
+        }
+
+        public IEnumerable<ProcRef> GetProcedureNames()
+        {
+            return _provider.GetProcedureNames();
+        }
+
         public bool CheckColumnExists(TableRef tblName, string colName)
         {
             return _provider.CheckColumnExists(tblName, colName);
@@ -172,7 +182,7 @@ namespace Kistl.Server.SchemaManagement
             return _provider.CheckTriggerExists(objName, triggerName);
         }
 
-        public bool CheckProcedureExists(string procName)
+        public bool CheckProcedureExists(ProcRef procName)
         {
             return _provider.CheckProcedureExists(procName);
         }
@@ -298,7 +308,7 @@ namespace Kistl.Server.SchemaManagement
             _provider.DropView(viewName);
         }
 
-        public void DropProcedure(string procName)
+        public void DropProcedure(ProcRef procName)
         {
             Log.DebugFormat("Dropping procedure [{0}]", procName);
             _provider.DropProcedure(procName);
@@ -357,12 +367,12 @@ namespace Kistl.Server.SchemaManagement
             _provider.CreateEmptyRightsViewUnmaterialized(viewName);
         }
 
-        public void CreateRefreshRightsOnProcedure(string procName, TableRef viewUnmaterializedName, TableRef tblName, TableRef tblNameRights)
+        public void CreateRefreshRightsOnProcedure(ProcRef procName, TableRef viewUnmaterializedName, TableRef tblName, TableRef tblNameRights)
         {
             _provider.CreateRefreshRightsOnProcedure(procName, viewUnmaterializedName, tblName, tblNameRights);
         }
 
-        public void ExecRefreshRightsOnProcedure(string procName)
+        public void ExecRefreshRightsOnProcedure(ProcRef procName)
         {
             _provider.ExecRefreshRightsOnProcedure(procName);
         }
@@ -416,6 +426,21 @@ namespace Kistl.Server.SchemaManagement
         {
             Log.Debug("Ensuring Infrastructure is available on target");
             _provider.EnsureInfrastructure();
+        }
+
+        public IEnumerable<string> GetSchemaNames()
+        {
+            return _provider.GetSchemaNames();
+        }
+
+        public void CreateSchema(string schemaName)
+        {
+            _provider.CreateSchema(schemaName);
+        }
+
+        public void DropSchema(string schemaName, bool force)
+        {
+            _provider.DropSchema(schemaName, force);
         }
     }
 }
