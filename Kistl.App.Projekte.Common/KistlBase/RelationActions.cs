@@ -112,5 +112,32 @@ namespace Kistl.App.KistlBase.Common
         {
             e.Result = rel.Context.GetInterfaceType(String.Format("{0}.{1}_{2}_{3}_RelationEntry", rel.Module.Namespace, rel.A.Type.Name, rel.Verb, rel.B.Type.Name));
         }
+
+        public static void OnSwapRelationEnds_Relation(Kistl.App.Base.Relation obj)
+        {
+            var tmp = obj.A;
+            obj.A = obj.B;
+            obj.B = tmp;
+
+            switch(obj.Containment)
+            {
+                case ContainmentSpecification.AContainsB:
+                    obj.Containment = ContainmentSpecification.BContainsA;
+                    break;
+                case ContainmentSpecification.BContainsA:
+                    obj.Containment = ContainmentSpecification.AContainsB;
+                    break;
+            }
+
+            switch(obj.Storage)
+            {
+                case StorageType.MergeIntoA:
+                    obj.Storage = StorageType.MergeIntoB;
+                    break;
+                case StorageType.MergeIntoB:
+                    obj.Storage = StorageType.MergeIntoA;
+                    break;
+            }
+        }
     }
 }

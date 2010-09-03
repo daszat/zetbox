@@ -265,7 +265,9 @@ namespace Kistl.App.Base
         public static bool OnIsValid_RelationEnd_Navigator(object constrainedObject, object constrainedValue)
         {
             var relEnd = (RelationEnd)constrainedObject;
-            var otherEnd = relEnd.GetParent().GetOtherEnd(relEnd);
+            var rel = relEnd.GetParent();
+            if (rel == null) return false;
+            var otherEnd = rel.GetOtherEnd(relEnd);
             var orp = (ObjectReferenceProperty)constrainedValue;
 
             if (orp != null)
@@ -297,7 +299,9 @@ namespace Kistl.App.Base
         public static string OnGetErrorText_RelationEnd_Navigator(object constrainedObject, object constrainedValue)
         {
             var relEnd = (RelationEnd)constrainedObject;
-            var otherEnd = (relEnd.AParent ?? relEnd.BParent).GetOtherEnd(relEnd);
+            var rel = relEnd.GetParent();
+            if (rel == null) return "No Relation assigned to Relation end";
+            var otherEnd = rel.GetOtherEnd(relEnd);
             var orp = (ObjectReferenceProperty)constrainedValue;
 
             var result = new List<string>();
