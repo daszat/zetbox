@@ -89,7 +89,7 @@ namespace Kistl.API.Server
 
         public static bool operator ==(DboRef x, DboRef y)
         {
-            if (x != null && y != null)
+            if (!object.ReferenceEquals(x, null) && !object.ReferenceEquals(y, null))
             {
                 return x.GetType().Equals(y.GetType())
                     && x._database == y._database

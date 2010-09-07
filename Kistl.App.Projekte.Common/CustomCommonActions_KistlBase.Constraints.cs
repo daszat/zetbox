@@ -63,6 +63,22 @@ namespace Kistl.App.Base
         {
             e.Result = "Method names, property names, enum names etc. must be valid names.";
         }
+
+        public static void OnToString_ViewReadOnlyConstraint(Kistl.App.Base.ViewReadOnlyConstraint obj, MethodReturnEventArgs<System.String> e)
+        {
+            e.Result = "Item is readonly in view but changable on the server/client";
+        }
+
+        public static void OnToString_ClientReadOnlyConstraint(Kistl.App.Base.ClientReadOnlyConstraint obj, MethodReturnEventArgs<System.String> e)
+        {
+            e.Result = "Item is readonly on client but changable on the server";
+        }
+
+        public static void OnToString_InitOnlyConstraint(Kistl.App.Base.InitOnlyConstraint obj, MethodReturnEventArgs<System.String> e)
+        {
+            e.Result = "The item can only be set during initialization";
+        }
+
         #endregion
 
         #region InvokingConstraint
@@ -445,6 +461,17 @@ namespace Kistl.App.Base
         public static void OnIsValid_UniqueConstraint(Kistl.App.Base.UniqueConstraint obj, MethodReturnEventArgs<bool> e, Kistl.API.IDataObject constrainedObject)
         {
             e.Result = true; // enforced by database
+        }
+        #endregion
+
+        #region ReadOnlyConstraints
+        public static void OnIsValid_ReadOnlyConstraint(Kistl.App.Base.ReadOnlyConstraint obj, MethodReturnEventArgs<System.Boolean> e, Kistl.API.IDataObject constrainedObject, object constrainedValue)
+        {
+            e.Result = true; // always valid
+        }
+        public static void OnGetErrorText_ReadOnlyConstraint(Kistl.App.Base.ReadOnlyConstraint obj, MethodReturnEventArgs<System.String> e, Kistl.API.IDataObject constrainedObject, object constrainedValue)
+        {
+            e.Result = string.Empty; // always valid
         }
         #endregion
     }
