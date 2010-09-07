@@ -89,10 +89,17 @@ namespace Kistl.API.Server
 
         public static bool operator ==(DboRef x, DboRef y)
         {
-            return x.GetType().Equals(y.GetType())
-                && x._database == y._database
-                && x._schema == y._schema
-                && x._name == y._name;
+            if (x != null && y != null)
+            {
+                return x.GetType().Equals(y.GetType())
+                    && x._database == y._database
+                    && x._schema == y._schema
+                    && x._name == y._name;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public static bool operator !=(DboRef x, DboRef y)
@@ -102,11 +109,13 @@ namespace Kistl.API.Server
 
         public static bool operator >(DboRef x, DboRef y)
         {
+            if (x == null) throw new ArgumentNullException("x");
             return ((IComparable<DboRef>)x).CompareTo(y) > 0;
         }
 
         public static bool operator <(DboRef x, DboRef y)
         {
+            if (x == null) throw new ArgumentNullException("x");
             return ((IComparable<DboRef>)x).CompareTo(y) < 0;
         }
     }
@@ -123,9 +132,36 @@ namespace Kistl.API.Server
             return ((IComparable<DboRef>)this).CompareTo(other);
         }
 
+        public static bool operator ==(TableRef x, TableRef y)
+        {
+            return ((DboRef)x) == ((DboRef)y);
+        }
+        public static bool operator !=(TableRef x, TableRef y)
+        {
+            return ((DboRef)x) != ((DboRef)y);
+        }
+        public static bool operator >(TableRef x, TableRef y)
+        {
+            return ((DboRef)x) > ((DboRef)y);
+        }
+        public static bool operator <(TableRef x, TableRef y)
+        {
+            return ((DboRef)x) < ((DboRef)y);
+        }
+
+        public override bool Equals(object obj)
+        {
+            return base.Equals(obj);
+        }
+
         object ICloneable.Clone()
         {
             return new TableRef(Database, Schema, Name);
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
         }
     }
 
@@ -141,9 +177,37 @@ namespace Kistl.API.Server
             return ((IComparable<DboRef>)this).CompareTo(other);
         }
 
+        public static bool operator ==(ProcRef x, ProcRef y)
+        {
+            return ((DboRef)x) == ((DboRef)y);
+        }
+        public static bool operator !=(ProcRef x, ProcRef y)
+        {
+            return ((DboRef)x) != ((DboRef)y);
+        }
+        public static bool operator >(ProcRef x, ProcRef y)
+        {
+            return ((DboRef)x) > ((DboRef)y);
+        }
+        public static bool operator <(ProcRef x, ProcRef y)
+        {
+            return ((DboRef)x) < ((DboRef)y);
+        }
+
+        public override bool Equals(object obj)
+        {
+            return base.Equals(obj);
+        }
+
+
         object ICloneable.Clone()
         {
             return new ProcRef(Database, Schema, Name);
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
         }
     }
 

@@ -229,6 +229,8 @@ namespace Kistl.Server.SchemaManagement
 
         public void CreateTable(TableRef tblName, bool idAsIdentityColumn, bool createPrimaryKey)
         {
+            if (tblName == null) throw new ArgumentNullException("tblName");
+
             Log.DebugFormat("CreateTable [{0}] {1} {2}",
                 tblName,
                 idAsIdentityColumn ? "with identity" : "without identity",

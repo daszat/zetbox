@@ -212,6 +212,8 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
 
         public override bool CheckTableExists(TableRef tblName)
         {
+            if (tblName == null) throw new ArgumentNullException("tblName");
+
             return (bool)ExecuteScalar("SELECT COUNT(*) > 0 FROM pg_tables WHERE schemaname=@schema AND tablename=@table",
                 new Dictionary<string, object>()
                 {
@@ -247,6 +249,8 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
 
         public override void CreateTable(TableRef tblName, bool idAsIdentityColumn, bool createPrimaryKey)
         {
+            if (tblName == null) throw new ArgumentNullException("tblName");
+
             StringBuilder sb = new StringBuilder();
             sb.AppendFormat("CREATE TABLE \"{0}\".\"{1}\" ( ", tblName.Schema, tblName.Name);
             if (idAsIdentityColumn)
@@ -272,6 +276,8 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
 
         public override void RenameTable(TableRef oldTblName, TableRef newTblName)
         {
+            if (oldTblName == null) throw new ArgumentNullException("oldTblName");
+            if (newTblName == null) throw new ArgumentNullException("newTblName");
             if (!oldTblName.Database.Equals(newTblName.Database)) { throw new ArgumentOutOfRangeException("newTblName", "cannot rename table to different database"); }
             if (!oldTblName.Schema.Equals(newTblName.Schema)) { throw new ArgumentOutOfRangeException("newTblName", "cannot rename table to different schema"); }
 
@@ -283,6 +289,7 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
 
         public override bool CheckColumnExists(TableRef tblName, string colName)
         {
+            if (tblName == null) throw new ArgumentNullException("tblName");
             return (bool)ExecuteScalar(@"
                 SELECT COUNT(*) > 0
                 FROM pg_attribute a
@@ -299,6 +306,7 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
 
         public override IEnumerable<string> GetTableColumnNames(TableRef tbl)
         {
+            if (tbl == null) throw new ArgumentNullException("tbl");
             return ExecuteReader(
                     @"SELECT attname
                         FROM pg_attribute
@@ -314,6 +322,8 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
 
         public override IEnumerable<Column> GetTableColumns(TableRef tblName)
         {
+            if (tblName == null) throw new ArgumentNullException("tblName");
+
             return ExecuteReader(
                 @"SELECT a.attname, t.typname, a.atttypmod - 4 as len, not a.attnotnull as nullable, t.typlen < 0 as variable_length
                     FROM pg_attribute a
@@ -389,6 +399,8 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
 
         public override bool GetIsColumnNullable(TableRef tblName, string colName)
         {
+            if (tblName == null) throw new ArgumentNullException("tblName");
+
             return (bool)ExecuteScalar(@"
                 SELECT NOT a.attnotnull
                 FROM pg_class c
@@ -405,6 +417,8 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
 
         public override bool GetHasColumnDefaultValue(TableRef tblName, string colName)
         {
+            if (tblName == null) throw new ArgumentNullException("tblName");
+
             return (bool)ExecuteScalar(@"
                 SELECT (d.adbin IS NOT NULL AND d.adbin <> '') as has_default
                 FROM pg_class c
@@ -421,6 +435,8 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
 
         public override int GetColumnMaxLength(TableRef tblName, string colName)
         {
+            if (tblName == null) throw new ArgumentNullException("tblName");
+
             return (int)ExecuteScalar(@"
                 SELECT a.atttypmod - 4 -- adjust for varchar implementation, which is storing the length too
                 FROM pg_class c
@@ -532,6 +548,8 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
 
         public override bool CheckIndexExists(TableRef tblName, string idxName)
         {
+            if (tblName == null) throw new ArgumentNullException("tblName");
+
             return (bool)ExecuteScalar(@"
                 SELECT COUNT(*) > 0
                     FROM pg_index
@@ -548,6 +566,8 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
 
         public override void DropIndex(TableRef tblName, string idxName)
         {
+            if (tblName == null) throw new ArgumentNullException("tblName");
+
             ExecuteNonQuery(String.Format(
                 "DROP INDEX {0}.{1}",
                 QuoteIdentifier(tblName.Schema),
@@ -560,6 +580,8 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
 
         public override bool CheckViewExists(TableRef viewName)
         {
+            if (viewName == null) throw new ArgumentNullException("viewName");
+
             return (bool)ExecuteScalar(@"
                 SELECT COUNT(*) > 0
                 FROM pg_views
@@ -572,6 +594,7 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
 
         public override bool CheckTriggerExists(TableRef objName, string triggerName)
         {
+            if (objName == null) throw new ArgumentNullException("objName");
             return (bool)ExecuteScalar(@"
                 SELECT count(*) > 0
                 FROM pg_proc p
@@ -592,6 +615,7 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
 
         public override bool CheckProcedureExists(ProcRef procName)
         {
+            if (procName == null) throw new ArgumentNullException("procName");
             return (bool)ExecuteScalar(@"
                 SELECT count(*) > 0
                 FROM pg_proc p

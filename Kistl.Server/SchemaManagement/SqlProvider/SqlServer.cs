@@ -240,6 +240,8 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
 
         public override void CreateTable(TableRef tblName, bool idAsIdentityColumn, bool createPrimaryKey)
         {
+            if (tblName == null) throw new ArgumentNullException("tblName");
+
             StringBuilder sb = new StringBuilder();
             sb.AppendFormat("CREATE TABLE [{0}].[{1}] (", tblName.Schema, tblName.Name);
             if (idAsIdentityColumn)
@@ -265,6 +267,8 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
 
         public override void RenameTable(TableRef oldTblName, TableRef newTblName)
         {
+            if (oldTblName == null) throw new ArgumentNullException("oldTblName");
+            if (newTblName == null) throw new ArgumentNullException("newTblName");
             if (!oldTblName.Database.Equals(newTblName.Database)) { throw new ArgumentOutOfRangeException("newTblName", "cannot rename table to different database"); }
             if (!oldTblName.Schema.Equals(newTblName.Schema)) { throw new ArgumentOutOfRangeException("newTblName", "cannot rename table to different schema"); }
 
@@ -799,6 +803,8 @@ BEGIN", triggerName, FormatFullName(tblName));
 
         public override void CreateRightsViewUnmaterialized(TableRef viewName, TableRef tblName, TableRef tblNameRights, IList<ACL> acls)
         {
+            if (viewName == null) throw new ArgumentNullException("viewName");
+            if (tblName == null) throw new ArgumentNullException("tblName");
             if (acls == null) throw new ArgumentNullException("acls");
             Log.DebugFormat("Creating unmaterialized rights view for [{0}]", tblName);
 
@@ -1008,6 +1014,7 @@ FROM (", viewName.Schema, viewName.Name);
 
         public override void WriteTableData(TableRef destTbl, IDataReader source, IEnumerable<string> colNames)
         {
+            if (destTbl == null) throw new ArgumentNullException("destTbl");
             if (source == null) throw new ArgumentNullException("source");
             if (colNames == null) throw new ArgumentNullException("colNames");
 

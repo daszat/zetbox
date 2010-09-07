@@ -98,6 +98,8 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
 
         public bool CheckTableExists(TableRef tblName)
         {
+            if (tblName == null) throw new ArgumentNullException("tblName");
+
             using (var cmd = new OleDbCommand("SELECT COUNT(*) FROM sys.objects WHERE object_id = OBJECT_ID(@table) AND type IN (N'U')", db, tx))
             {
                 cmd.Parameters.AddWithValue("@table", tblName.Name);
@@ -108,6 +110,8 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
 
         public bool CheckColumnExists(TableRef tblName, string colName)
         {
+            if (tblName == null) throw new ArgumentNullException("tblName");
+
             using (var cmd = new OleDbCommand(@"SELECT COUNT(*) FROM sys.objects o INNER JOIN sys.columns c ON c.object_id=o.object_id
 	                                            WHERE o.object_id = OBJECT_ID(@table) 
 		                                            AND o.type IN (N'U')
@@ -347,6 +351,8 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
 
         public IDataReader ReadTableData(TableRef tbl, IEnumerable<string> colNames)
         {
+            if (tbl == null) throw new ArgumentNullException("tbl");
+
             var sb = new StringBuilder();
             sb.AppendLine("SELECT ");
             colNames.ForEach(i => sb.Append(Quote(i) + ","));
@@ -371,6 +377,7 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
 
         public void WriteTableData(TableRef destTbl, IDataReader source, IEnumerable<string> colNames)
         {
+            if (destTbl == null) throw new ArgumentNullException("destTbl");
             if (source == null) throw new ArgumentNullException("source");
 
             var values = new object[source.FieldCount];
@@ -383,6 +390,7 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
 
         public void WriteTableData(TableRef tbl, IEnumerable<string> colNames, System.Collections.IEnumerable values)
         {
+            if (tbl == null) throw new ArgumentNullException("tbl");
             if (colNames == null) throw new ArgumentNullException("colNames");
             if (values == null) throw new ArgumentNullException("values");
 
