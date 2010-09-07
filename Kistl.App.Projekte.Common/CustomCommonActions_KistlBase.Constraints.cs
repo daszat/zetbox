@@ -465,11 +465,11 @@ namespace Kistl.App.Base
         #endregion
 
         #region ReadOnlyConstraints
-        public static void OnIsValid_ReadOnlyConstraint(Kistl.App.Base.ReadOnlyConstraint obj, MethodReturnEventArgs<System.Boolean> e, Kistl.API.IDataObject constrainedObject, object constrainedValue)
+        public static void OnIsValid_ReadOnlyConstraint(Kistl.App.Base.ReadOnlyConstraint obj, MethodReturnEventArgs<System.Boolean> e, object constrainedObject, object constrainedValue)
         {
             e.Result = true; // always valid
         }
-        public static void OnGetErrorText_ReadOnlyConstraint(Kistl.App.Base.ReadOnlyConstraint obj, MethodReturnEventArgs<System.String> e, Kistl.API.IDataObject constrainedObject, object constrainedValue)
+        public static void OnGetErrorText_ReadOnlyConstraint(Kistl.App.Base.ReadOnlyConstraint obj, MethodReturnEventArgs<System.String> e, object constrainedObject, object constrainedValue)
         {
             e.Result = string.Empty; // always valid
         }

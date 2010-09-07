@@ -631,7 +631,7 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 cmd.Parameters.AddWithValue("@repair", repair);
-                cmd.Parameters.AddWithValue("@tblName", tblName.Name);
+                cmd.Parameters.AddWithValue("@tblName", FormatSchemaName(tblName));
                 cmd.Parameters.AddWithValue("@colName", indexName);
                 cmd.Parameters.Add("@result", SqlDbType.Bit).Direction = ParameterDirection.Output;
 
@@ -851,7 +851,7 @@ FROM (", viewName.Schema, viewName.Name);
         public override void CreateRefreshRightsOnProcedure(ProcRef procName, TableRef viewUnmaterializedName, TableRef tblName, TableRef tblNameRights)
         {
             Log.DebugFormat("Creating refresh rights procedure for [{0}]", tblName);
-            ExecuteNonQuery(string.Format(@"CREATE PROCEDURE [{0}] (@ID INT = NULL) AS
+            ExecuteNonQuery(string.Format(@"CREATE PROCEDURE {0} (@ID INT = NULL) AS
                     BEGIN
 	                    IF (@ID IS NULL)
 		                    BEGIN

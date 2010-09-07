@@ -147,10 +147,35 @@ namespace Kistl.Server.SchemaManagement
                     var viewRel = new Join();
                     result.Add(viewRel);
                     viewRel.JoinTableName = db.GetQualifiedTableName(nextRelEnd.Type.TableName);
-                    viewRel.JoinColumnName = new[] { new ColumnRef("ID", ColumnRef.Local) };
-                    viewRel.FKColumnName = new[] { new ColumnRef(Construct.ForeignKeyColumnName(nextRelEnd), lastJoin) };
-
-                    lastColumName = "ID";
+                    string localCol;
+                    string fkCol;
+                    if (nextRelEnd == rel.A && rel.Storage == StorageType.MergeIntoB)
+                    {
+                        localCol = "ID";
+                        fkCol = Construct.ForeignKeyColumnName(nextRelEnd);
+                    }
+                    else if (nextRelEnd == rel.A && rel.Storage == StorageType.MergeIntoA)
+                    {
+                        localCol = Construct.ForeignKeyColumnName(lastRelEnd);
+                        fkCol = "ID";
+                    }
+                    else if (nextRelEnd == rel.B && rel.Storage == StorageType.MergeIntoB)
+                    {
+                        localCol = "ID";
+                        fkCol = Construct.ForeignKeyColumnName(lastRelEnd);
+                    }
+                    else if (nextRelEnd == rel.B && rel.Storage == StorageType.MergeIntoA)
+                    {
+                        localCol = Construct.ForeignKeyColumnName(nextRelEnd);
+                        fkCol = "ID";
+                    }
+                    else
+                    {
+                        throw new NotSupportedException(string.Format("StorageType {0} is not supported", rel.Storage));
+                    }
+                    viewRel.JoinColumnName = new[] { new ColumnRef(localCol, ColumnRef.Local) };
+                    viewRel.FKColumnName = new[] { new ColumnRef(fkCol, lastJoin) };
+                    lastColumName = localCol;
                     lastJoin = viewRel;
                 }
 

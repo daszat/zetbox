@@ -22,6 +22,30 @@ namespace Kistl.App.Extensions
             return String.Format("FK_{0}_{1}_{2}", prop.ObjectClass.Name, "value", prop.Name);
         }
 
+        public static bool IsReadOnly(this Property p)
+        {
+            if (p == null) { throw new ArgumentNullException("p"); }
+            return p.Constraints.OfType<ReadOnlyConstraint>().Count() > 0;
+        }
+
+        public static bool IsViewReadOnly(this Property p)
+        {
+            if (p == null) { throw new ArgumentNullException("p"); }
+            return p.Constraints.OfType<ViewReadOnlyConstraint>().Count() > 0;
+        }
+
+        public static bool IsClientReadOnly(this Property p)
+        {
+            if (p == null) { throw new ArgumentNullException("p"); }
+            return p.Constraints.OfType<ClientReadOnlyConstraint>().Count() > 0;
+        }
+
+        public static bool IsInitOnly(this Property p)
+        {
+            if (p == null) { throw new ArgumentNullException("p"); }
+            return p.Constraints.OfType<InitOnlyConstraint>().Count() > 0;
+        }
+
         public static bool IsNullable(this Property p)
         {
             if (p == null) { throw new ArgumentNullException("p"); }

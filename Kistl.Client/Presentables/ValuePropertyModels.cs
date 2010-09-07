@@ -132,6 +132,7 @@ namespace Kistl.Client.Presentables
                 throw new ArgumentNullException("prop");
 
             this.AllowNullInput = false;
+            this.isPropertyReadOnly = prop.IsReadOnly();
 
             this.Property.PropertyChanged += this.PropertyPropertyChangedHandler;
             this.Object.PropertyChanged += this.ObjectPropertyChangedHandler;
@@ -189,11 +190,12 @@ namespace Kistl.Client.Presentables
         }
 
         protected bool isReadOnlyStore = false;
+        protected bool isPropertyReadOnly = false;
         public override bool IsReadOnly
         {
             get
             {
-                return isReadOnlyStore;
+                return isPropertyReadOnly || isReadOnlyStore;
             }
             set
             {
