@@ -942,12 +942,14 @@ FROM (", viewName.Schema, viewName.Name);
             var query = String.Format("SELECT {0} FROM {1}", columns, FormatFullName(tbl));
 
             var cmd = new SqlCommand(query, CurrentConnection, CurrentTransaction);
+            QueryLog.Debug(query);
             return cmd.ExecuteReader();
         }
 
         public override IDataReader ReadTableData(string sql)
         {
             SqlCommand cmd = new SqlCommand(sql, CurrentConnection, CurrentTransaction);
+            QueryLog.Debug(sql);
             return cmd.ExecuteReader();
         }
 
@@ -987,6 +989,7 @@ FROM (", viewName.Schema, viewName.Name);
             var query = new StringBuilder();
             query.AppendFormat("SELECT \n{0} \nFROM {1} t0{2}", columns, FormatFullName(tbl), joinQueryPart.ToString());
             var cmd = new SqlCommand(query.ToString(), CurrentConnection, CurrentTransaction);
+            QueryLog.Debug(query.ToString());
             return cmd.ExecuteReader();
         }
 

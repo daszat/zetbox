@@ -25,7 +25,8 @@ namespace ZBox.App.SchemaMigration
 
         public static void OnToString_SourceTable(ZBox.App.SchemaMigration.SourceTable obj, MethodReturnEventArgs<System.String> e)
         {
-            e.Result = !string.IsNullOrEmpty(obj.Name) ? obj.Name : "new Source Table";
+            e.Result = "[" + ((obj.StagingDatabase != null ? obj.StagingDatabase.Description : null) ?? string.Empty) + "]";
+            e.Result += "." + (!string.IsNullOrEmpty(obj.Name) ? obj.Name : "new Source Table");
         }
 
         public static void OnToString_StagingDatabase(ZBox.App.SchemaMigration.StagingDatabase obj, MethodReturnEventArgs<System.String> e)
