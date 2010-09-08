@@ -180,6 +180,10 @@ namespace Kistl.API.Migration
         }
 
         private static ITypeConverter _dateTimeConverter = new SqlServerDateTimeConverter();
+        private static ITypeConverter _int32Converter = new Int32Converter();
+        private static ITypeConverter _int16Converter = new Int16Converter();
+        private static ITypeConverter _byteConverter = new ByteConverter();
+        private static ITypeConverter _boolConverter = new BoolConverter();
 
         private object ConvertType(SourceColumn col, object src_val)
         {
@@ -241,33 +245,7 @@ namespace Kistl.API.Migration
                             break;
 
                         case DbType.Boolean:
-                            // try string convertions
-                            if (src_val is string)
-                            {
-                                var s = ((string)src_val).ToLower();
-                                if (s.Contains("yes")) dest_val = true;
-                                else if (s.Contains("no")) dest_val = false;
-                                else if (s.Contains("ja")) dest_val = true;
-                                else if (s.Contains("nein")) dest_val = false;
-                                else if (s.Contains("-1")) dest_val = true;
-                                else if (s.Contains("1")) dest_val = true;
-                                else if (s.Contains("0")) dest_val = false;
-                                else
-                                {
-                                    dest_val = DBNull.Value;
-                                    AddError("Unable to convert '{0}' to a boolean", src_val);
-                                }
-                            }
-                            else if (src_val is int)
-                            {
-                                var i = (int)src_val;
-                                dest_val = i != 0;
-                            }
-                            else
-                            {
-                                // try other
-                                dest_val = Convert.ToBoolean(src_val, CultureInfo.GetCultureInfo("de-AT"));
-                            }
+                            dest_val = _boolConverter.Convert(src_val);
                             break;
 
                         case DbType.Date:
@@ -284,13 +262,13 @@ namespace Kistl.API.Migration
                             break;
 
                         case DbType.Byte:
-                            dest_val = Convert.ToByte(src_val, CultureInfo.GetCultureInfo("de-AT"));
+                            dest_val = _byteConverter.Convert(src_val);
                             break;
                         case DbType.Int16:
-                            dest_val = Convert.ToInt16(src_val, CultureInfo.GetCultureInfo("de-AT"));
+                            dest_val = _int16Converter.Convert(src_val);
                             break;
                         case DbType.Int32:
-                            dest_val = Convert.ToInt32(src_val, CultureInfo.GetCultureInfo("de-AT"));
+                            dest_val = _int32Converter.Convert(src_val);
                             break;
 
                         case DbType.SByte:
