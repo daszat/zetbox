@@ -147,26 +147,26 @@ namespace Kistl.Server.SchemaManagement
                     var viewRel = new Join();
                     result.Add(viewRel);
                     viewRel.JoinTableName = db.GetQualifiedTableName(nextRelEnd.Type.TableName);
-                    string localCol;
-                    string fkCol;
-                    if (nextRelEnd == rel.A && rel.Storage == StorageType.MergeIntoB)
-                    {
-                        localCol = "ID";
-                        fkCol = Construct.ForeignKeyColumnName(nextRelEnd);
-                    }
-                    else if (nextRelEnd == rel.A && rel.Storage == StorageType.MergeIntoA)
+                    string localCol = string.Empty;
+                    string fkCol = string.Empty;
+                    if (nextRelEnd == rel.A && rel.Storage == StorageType.MergeIntoA)
                     {
                         localCol = Construct.ForeignKeyColumnName(lastRelEnd);
                         fkCol = "ID";
                     }
-                    else if (nextRelEnd == rel.B && rel.Storage == StorageType.MergeIntoB)
+                    else if (nextRelEnd == rel.A && rel.Storage == StorageType.MergeIntoB)
                     {
                         localCol = "ID";
-                        fkCol = Construct.ForeignKeyColumnName(lastRelEnd);
+                        fkCol = Construct.ForeignKeyColumnName(nextRelEnd); 
                     }
                     else if (nextRelEnd == rel.B && rel.Storage == StorageType.MergeIntoA)
                     {
-                        localCol = Construct.ForeignKeyColumnName(nextRelEnd);
+                        localCol = "ID";
+                        fkCol = Construct.ForeignKeyColumnName(nextRelEnd); 
+                    }
+                    else if (nextRelEnd == rel.B && rel.Storage == StorageType.MergeIntoB)
+                    {
+                        localCol = Construct.ForeignKeyColumnName(lastRelEnd);
                         fkCol = "ID";
                     }
                     else
