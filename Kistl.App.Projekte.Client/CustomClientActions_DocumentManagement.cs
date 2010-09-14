@@ -8,9 +8,17 @@ namespace at.dasz.DocumentManagement
     using System.Text;
     using Autofac;
     using Kistl.API;
+using Kistl.Client.Presentables;
     
-    public static class CustomClientActions_DocumentManagement
+    public class CustomClientActions_DocumentManagement
     {
+        private static IModelFactory _factory;
+
+        public CustomClientActions_DocumentManagement(IModelFactory factory)
+        {
+            _factory = factory;
+        }
+
         public static void OnOpen_File(File obj)
         {
             if (obj.Blob != null)
@@ -21,19 +29,16 @@ namespace at.dasz.DocumentManagement
 
         public static void OnUpload_File(File obj)
         {
-            // No UI Code in Custom Actions
-            // This is the ViewModels Job
-            // They know in combination with their associatied Views how to render such tasks
+            // UI Code in Custom Actions!
             // ASP.NET would have a big Problem with that function
-            throw new NotImplementedException("Add a FileInfo parameter to this method and detect that fact in the DataObjectViewModel while rendering invokable Methods. -> Open FileDialog");
-            //string path = Kistl.Client.GuiApplicationContext.Current.ModelFactory.GetSourceFileNameFromUser();
-            //if (!string.IsNullOrEmpty(path))
-            //{
-            //    var fi = new System.IO.FileInfo(path);
-            //    int id = obj.Context.CreateBlob(fi, fi.GetMimeType());
-            //    obj.Blob = obj.Context.Find<Kistl.App.Base.Blob>(id);
-            //    obj.Name = obj.Blob.OriginalName;
-            //}
+            string path = _factory.GetSourceFileNameFromUser();
+            if (!string.IsNullOrEmpty(path))
+            {
+                var fi = new System.IO.FileInfo(path);
+                int id = obj.Context.CreateBlob(fi, fi.GetMimeType());
+                obj.Blob = obj.Context.Find<Kistl.App.Base.Blob>(id);
+                obj.Name = obj.Blob.OriginalName;
+            }
         }
     }
 }
