@@ -59,6 +59,16 @@ namespace Kistl.App.Extensions
                 return t;
             }
 
+            else if (param is EnumParameter)
+            {
+                var p = param as EnumParameter;
+                Type t = Type.GetType(p.Enumeration.Module.Namespace + "." + p.Enumeration.Name + ", " + Kistl.API.Helper.InterfaceAssembly, true);
+                if (param.IsList)
+                    t = typeof(IList<>).MakeGenericType(t);
+
+                return t;
+            }
+
             else if (param is StringParameter && param.IsList)
                 return typeof(IList<string>);
             else if (param is StringParameter && !param.IsList)

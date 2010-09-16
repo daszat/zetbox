@@ -179,6 +179,11 @@ namespace Kistl.App.Base
         {
             e.Result = obj.Type.FullName;
         }
+
+        public static void OnGetParameterTypeString_EnumParameter(Kistl.App.Base.EnumParameter obj, MethodReturnEventArgs<System.String> e)
+        {
+            e.Result = obj.Enumeration.Module.Namespace + "." + obj.Enumeration.Name;
+        }
         #endregion
 
         #region Document Management

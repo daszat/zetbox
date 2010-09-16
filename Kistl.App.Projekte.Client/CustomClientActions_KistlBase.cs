@@ -227,6 +227,21 @@ namespace Kistl.App.Base
             }
         }
 
+        public static void OnGetParameterTypeString_EnumParameter(Kistl.App.Base.EnumParameter obj, MethodReturnEventArgs<System.String> e)
+        {
+            if (obj.Enumeration == null)
+            {
+                e.Result = string.Empty;
+            }
+            else if (obj.Enumeration.Module == null)
+            {
+                e.Result = "?." + obj.Enumeration.Name;
+            }
+            else
+            {
+                e.Result = obj.Enumeration.Module.Namespace + "." + obj.Enumeration.Name;
+            }
+        }
         #endregion
 
         public static void OnGetReturnParameter_Method(Method obj, MethodReturnEventArgs<BaseParameter> e)
