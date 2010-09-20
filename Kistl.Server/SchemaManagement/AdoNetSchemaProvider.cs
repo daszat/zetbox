@@ -392,7 +392,7 @@ namespace Kistl.Server.SchemaManagement
         public virtual void DropView(TableRef viewName)
         {
             ExecuteNonQuery(String.Format("DROP VIEW {0}",
-                FormatFullName(viewName)));
+                FormatSchemaName(viewName)));
         }
 
         public abstract bool CheckTriggerExists(TableRef objName, string triggerName);
