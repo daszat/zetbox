@@ -11,7 +11,8 @@ namespace Kistl.Client
     using Kistl.API.Configuration;
     using Kistl.App.Extensions;
     using Kistl.Client.Presentables;
-    
+    using Kistl.API.Common;
+
     public sealed class ClientModule : Module
     {
         private class ViewModelDependencies : IViewModelDependencies
@@ -65,6 +66,11 @@ namespace Kistl.Client
             moduleBuilder
                 .RegisterType<ViewModelDependencies>()
                 .As<IViewModelDependencies>();
+
+            moduleBuilder
+                .RegisterType<ThreadPrincipalResolver>()
+                .As<IIdentityResolver>()
+                .InstancePerLifetimeScope();
 
             // Register all ViewModel Types
             foreach (var t in typeof(ClientModule).Assembly.GetTypes()

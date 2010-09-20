@@ -1,14 +1,15 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Kistl.API;
-using Kistl.App.Base;
-using Kistl.Server.Generators.Extensions;
-
 namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+
+    using Kistl.API;
+    using Kistl.App.Base;
+    using Kistl.App.Extensions;
+    using Kistl.Server.Generators.Extensions;
+
     public class NotifyingDataProperty
         : NotifyingValueProperty
     {
@@ -62,7 +63,15 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
                 this.WriteObjects("                    var __p = FrozenContext.FindPersistenceObject<Kistl.App.Base.Property>(new Guid(\"", _prop.ExportGuid, "\"));\r\n");
                 this.WriteObjects("                    if (__p != null) {\r\n");
                 this.WriteObjects("                        ", IsSetFlagName, " = true;\r\n");
-                this.WriteObjects("                        __result = this.", BackingMemberFromName(name), " = (", type, ")__p.DefaultValue.GetDefaultValue();\r\n");
+                this.WriteObjects("                        // http://connect.microsoft.com/VisualStudio/feedback/details/593117/cannot-directly-cast-boxed-int-to-nullable-enum\r\n");
+                this.WriteObjects("                        object __tmp_value = __p.DefaultValue.GetDefaultValue();\r\n");
+                if (this._prop.IsNullable())
+                {
+                    this.WriteObjects("                        if (__tmp_value == null)\r\n");
+                    this.WriteObjects("                            __result = this.", BackingMemberFromName(name), " = null;\r\n");
+                    this.WriteObjects("                        else\r\n    "); // Fix indent
+                }
+                this.WriteObjects("                        __result = this.", BackingMemberFromName(name), " = (", type.TrimEnd('?'), ")__tmp_value;\r\n");
                 this.WriteObjects("                    } else {\r\n");
                 this.WriteObjects("                        Kistl.API.Utils.Logging.Log.Warn(\"Unable to get default value for property '", _prop.ObjectClass.Name, ".", _prop.Name, "'\");\r\n");
                 this.WriteObjects("                    }\r\n");

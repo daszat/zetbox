@@ -1,5 +1,5 @@
 
-namespace Kistl.API.Server
+namespace Kistl.API.Common
 {
     using System.Security.Principal;
     using Kistl.App.Base;

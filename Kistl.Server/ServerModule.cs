@@ -14,6 +14,7 @@ namespace Kistl.Server
     using Kistl.API.Configuration;
     using Kistl.API.Server;
     using Kistl.App.Extensions;
+    using Kistl.API.Common;
 
     public class ServerModule : Module
     {

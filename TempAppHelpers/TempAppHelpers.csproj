@@ -60,12 +60,16 @@
     </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseCustomActionsManager.cs" />
     <Compile Include="CompoundObjectExtensions.cs" />
     <Compile Include="GuiExtensions.cs" />
     <Compile Include="IdentityExtensions.cs" />
+    <Compile Include="IIdentityResolver.cs" />
     <Compile Include="KistlContextExtensions.cs" />
     <Compile Include="MethodExtensions.cs" />
     <Compile Include="MultiplicityExtensions.cs" />
@@ -77,6 +81,7 @@
     <Compile Include="PropertyExtensions.cs" />
     <Compile Include="RelationExtensions.cs" />
     <Compile Include="ObjectClassExtensions.cs" />
+    <Compile Include="ThreadPrincipalResolver.cs" />
     <Compile Include="TypeRefExtensions.cs" />
   </ItemGroup>
   <ItemGroup>

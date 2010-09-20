@@ -32,7 +32,7 @@ namespace Kistl.App.Base
 
         #endregion
 
-        #region NewGuidDefaultValue
+        #region CurrentDateTimeDefaultValue
         public static void OnGetDefaultValue_CurrentDateTimeDefaultValue(Kistl.App.Base.CurrentDateTimeDefaultValue obj, MethodReturnEventArgs<System.Object> e)
         {
             e.Result = DateTime.Now;
@@ -50,6 +50,28 @@ namespace Kistl.App.Base
             }
         }
 
+        #endregion
+
+        #region EnumDefaultValue
+        public static void OnGetDefaultValue_EnumDefaultValue(Kistl.App.Base.EnumDefaultValue obj, MethodReturnEventArgs<object> e)
+        {
+            e.Result = obj.EnumValue.Value;
+        }
+
+        public static void OnToString_EnumDefaultValue(Kistl.App.Base.EnumDefaultValue obj, MethodReturnEventArgs<System.String> e)
+        {
+            if (obj.Property != null)
+            {
+                e.Result = string.Format("{0} will be initialized with '{1}.{2}'", 
+                    obj.Property.Name, 
+                    obj.EnumValue != null && obj.EnumValue.Enumeration != null ?  obj.EnumValue.Enumeration.Name : "<unknown>",
+                    obj.EnumValue != null ? obj.EnumValue.Name : "<unknown>");
+            }
+            else
+            {
+                e.Result = "Initializes a property with a configured enum value";
+            }
+        }
         #endregion
     }
 }

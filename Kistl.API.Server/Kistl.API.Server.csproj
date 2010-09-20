@@ -88,7 +88,6 @@
     <Compile Include="ServerApiModule.cs" />
     <Compile Include="QueryTranslatorProvider.cs" />
     <Compile Include="CustomPropertyDescriptor.cs" />
-    <Compile Include="IdentityManager.cs" />
     <Compile Include="IKistlServerContext.cs" />
     <Compile Include="IMetaDataResolver.cs" />
     <Compile Include="ISchemaProvider.cs" />

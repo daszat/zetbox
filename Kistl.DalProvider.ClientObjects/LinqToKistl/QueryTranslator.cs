@@ -21,6 +21,7 @@ namespace Kistl.DalProvider.Client
         {
             if (b.NodeType == ExpressionType.Equal && b.Left.Type.IsIDataObject() && b.Right.Type.IsIDataObject())
             {
+                // TODO: Case# 1717: Check for nulls!
                 return Expression.MakeBinary(b.NodeType,
                     Expression.MakeMemberAccess(Visit(b.Left), b.Left.Type.FindFirstOrDefaultMember("ID")),
                     Expression.MakeMemberAccess(Visit(b.Right), b.Right.Type.FindFirstOrDefaultMember("ID")));

@@ -1,5 +1,5 @@
 
-namespace Kistl.Server
+namespace Kistl.API.Common
 {
     using System;
     using System.Collections.Generic;
@@ -9,22 +9,24 @@ namespace Kistl.Server
     using System.Threading;
 
     using Kistl.API;
-    using Kistl.API.Server;
     using Kistl.App.Base;
 
     public class ThreadPrincipalResolver
         : IIdentityResolver
     {
-        private readonly IKistlServerContext _resolverCtx;
+        private readonly IReadOnlyKistlContext _resolverCtx;
 
-        public ThreadPrincipalResolver(IKistlServerContext resolverCtx)
+        public ThreadPrincipalResolver(IReadOnlyKistlContext resolverCtx)
         {
             _resolverCtx = resolverCtx;
         }
 
         public Identity GetCurrent()
         {
-            return Resolve(Thread.CurrentPrincipal.Identity);
+            if (!string.IsNullOrEmpty(Thread.CurrentPrincipal.Identity.Name))
+                return Resolve(Thread.CurrentPrincipal.Identity);
+            else
+                return Resolve(WindowsIdentity.GetCurrent());
         }
 
         public Identity Resolve(IIdentity identity)

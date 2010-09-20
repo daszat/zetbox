@@ -13,6 +13,7 @@ namespace Kistl.DalProvider.EF
     using Kistl.API.Server;
     using Kistl.API.Utils;
     using Kistl.Server.Generators;
+    using Kistl.API.Common;
 
     public interface IEFActionsManager : ICustomActionsManager { }
 
