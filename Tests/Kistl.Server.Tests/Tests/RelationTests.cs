@@ -447,6 +447,10 @@ namespace Kistl.Server.Tests
 
             var tmpMitarbeiter = prj.Mitarbeiter.ToList();
             prj.Mitarbeiter.Clear();
+            
+            // TODO: Workaround! EF is inserting "newly" added MA first, then it deletes the old one. This breaks the right trigger
+            ctx.SubmitChanges(); 
+
             foreach (Kistl.App.Projekte.Mitarbeiter m in tmpMitarbeiter
                 .OrderBy(m => m.Name))
             {
