@@ -160,7 +160,7 @@ namespace Kistl.API.Migration
 
             using (Log.InfoTraceMethodCallFormat("Executing migration for [{0}]", _name))
             {
-                ExecuteCore(_applicationScope.Resolve<IKistlContext>());
+                ExecuteCore(_applicationScope.Resolve<IKistlServerContext>());
             }
 
             CreateReport();
@@ -168,7 +168,7 @@ namespace Kistl.API.Migration
 
         protected abstract void CreateReport();
 
-        protected abstract void ExecuteCore(IKistlContext ctx);
+        protected abstract void ExecuteCore(IKistlServerContext ctx);
 
         protected void ReloadStaging(StagingDatabase stage)
         {
