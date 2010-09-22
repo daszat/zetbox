@@ -26,7 +26,7 @@ namespace at.dasz.DocumentManagement
 
         public static void OnHandleBlobChange_StaticFile(at.dasz.DocumentManagement.StaticFile obj, MethodReturnEventArgs<Kistl.App.Base.Blob> e, Kistl.App.Base.Blob oldBlob, Kistl.App.Base.Blob newBlob)
         {
-            if (oldBlob != null)
+            if (oldBlob != null && newBlob != oldBlob)
             {
                 throw new InvalidOperationException("Changing blob on static files is not allowed");
             }
