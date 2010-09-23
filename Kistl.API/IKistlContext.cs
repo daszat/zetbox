@@ -151,7 +151,7 @@ namespace Kistl.API
         List<T> GetListOf<T>(InterfaceType ifType, int ID, string propertyName) where T : class, IDataObject;
 
         /// <summary>
-        /// Fetches all collection entries of a given Relation (specified by <paramref name="ID"/>)
+        /// Fetches all collection entries of a given Relation (specified by <paramref name="relationId"/>)
         /// which reference the given <paramref name="container"/> on the side <paramref name="role"/>
         /// of the relation. Mostly for internal use.
         /// </summary>

@@ -19,7 +19,7 @@ namespace Kistl.API
     /// TODO: Add FaultContracts
     /// TODO: Remove GetListOf
     /// </summary>
-    [ServiceContract(SessionMode=SessionMode.NotAllowed)]
+    [ServiceContract(SessionMode=SessionMode.NotAllowed, Namespace="http://dasz.at/ZBox/")]
     public interface IKistlService
     {
         /// <summary>
@@ -59,7 +59,7 @@ namespace Kistl.API
 
         /// <summary>
         /// Fetches a list of CollectionEntry objects of the Relation 
-        /// <paramref name="relID"/> which are owned by the object with the 
+        /// <paramref name="relId"/> which are owned by the object with the 
         /// ID <paramref name="ID"/> in the role <paramref name="role"/>.
         /// </summary>
         /// <param name="relId">the requested Relation</param>
@@ -110,7 +110,7 @@ namespace Kistl.API
     }
 
 
-    [DataContract]
+    [DataContract(Namespace = "http://dasz.at/ZBox/")]
     [DebuggerDisplay("{IDs.Length} reqs for {Type.TypeName}")]
     public class ObjectNotificationRequest
     {

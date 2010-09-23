@@ -8,11 +8,66 @@ using System.Runtime.Serialization;
 
 namespace Kistl.API
 {
+    [DataContract(Namespace = "http://dasz.at/ZBox/")]
+    [Serializable]
+    public class SerializableMemberInfo
+    {
+        public SerializableMemberInfo()
+        {
+        }
+
+        public SerializableMemberInfo(MemberInfo mi, InterfaceType.Factory iftFactory)
+        {
+            if (mi == null) throw new ArgumentNullException("mi");
+            if (iftFactory == null) throw new ArgumentNullException("iftFactory");
+
+            this.Type = new SerializableType(iftFactory(mi.DeclaringType), iftFactory);
+            this.Name = mi.Name;
+        }
+
+        [DataMember]
+        public SerializableType Type { get; set; }
+        [DataMember]
+        public string Name { get; set; }
+
+        public MemberInfo GetMemberInfo()
+        {
+            return this.Type.GetSystemType().GetMember(Name).SingleOrDefault();
+        }
+    }
+
+    [DataContract(Namespace = "http://dasz.at/ZBox/")]
+    [Serializable]
+    public class SerializableConstructorInfo : SerializableMemberInfo
+    {
+        [DataMember]
+        public List<SerializableType> ParameterTypes { get; set; }
+
+        public SerializableConstructorInfo()
+        {
+            this.ParameterTypes = new List<SerializableType>();
+        }
+
+        public SerializableConstructorInfo(ConstructorInfo ci, InterfaceType.Factory iftFactory)
+            : base(ci, iftFactory)
+        {
+            if (ci == null) throw new ArgumentNullException("ci");
+            if (iftFactory == null) throw new ArgumentNullException("iftFactory");
+
+            this.ParameterTypes = new List<SerializableType>(ci.GetParameters().Select(i => new SerializableType(iftFactory(i.ParameterType), iftFactory)).ToArray());
+        }
+
+        public ConstructorInfo GetConstructorInfo()
+        {
+            return this.Type.GetSystemType().GetConstructor(this.ParameterTypes.Select(i => i.GetSystemType()).ToArray());
+        }
+    }
+
     /// <summary>
     /// Abstract Base Class for a serializable Expression
     /// </summary>
     [Serializable]
-    [DataContract]
+    [DataContract(Namespace = "http://dasz.at/ZBox/")]
     [KnownType(typeof(SerializableBinaryExpression))]
     [KnownType(typeof(SerializableConditionalExpression))]
     [KnownType(typeof(SerializableConstantExpression))]
@@ -137,14 +192,14 @@ namespace Kistl.API
         {
             this.iftFactory = iftFactory;
             SerializableType = iftFactory(e.Type).ToSerializableType();
-            NodeType = e.NodeType;
+            NodeType = (int)e.NodeType;
         }
 
         /// <summary>
         /// Expression Node Type
         /// </summary>
         [DataMember]
-        public ExpressionType NodeType { get; set; }
+        public int NodeType { get; set; }
 
         /// <summary>
         /// SerializableType of this Expression
@@ -212,7 +267,7 @@ namespace Kistl.API
 
         internal override Expression ToExpressionInternal(SerializationContext ctx)
         {
-            return Expression.MakeBinary(NodeType, Children[0].ToExpressionInternal(ctx), Children[1].ToExpressionInternal(ctx));
+            return Expression.MakeBinary((ExpressionType)NodeType, Children[0].ToExpressionInternal(ctx), Children[1].ToExpressionInternal(ctx));
         }
     }
     #endregion
@@ -232,7 +287,7 @@ namespace Kistl.API
 
         internal override Expression ToExpressionInternal(SerializationContext ctx)
         {
-            return Expression.MakeUnary(NodeType, Children[0].ToExpressionInternal(ctx), Type);
+            return Expression.MakeUnary((ExpressionType)NodeType, Children[0].ToExpressionInternal(ctx), Type);
         }
     }
     #endregion
@@ -338,6 +393,7 @@ namespace Kistl.API
         /// <summary>
         /// Type where this Method is implemented
         /// </summary>
+        [IgnoreDataMember]
         public Type MethodType
         {
             get
@@ -492,18 +548,18 @@ namespace Kistl.API
     public class SerializableNewExpression : SerializableCompoundExpression
     {
         [DataMember]
-        public ConstructorInfo Constructor { get; set; }
+        public SerializableConstructorInfo Constructor { get; set; }
 
         [DataMember]
-        public List<MemberInfo> Members;
+        public List<SerializableMemberInfo> Members;
 
         internal SerializableNewExpression(NewExpression source, SerializationContext ctx, InterfaceType.Factory iftFactory)
             : base(source, ctx, iftFactory)
         {
-            Constructor = source.Constructor;
+            Constructor = new SerializableConstructorInfo(source.Constructor, iftFactory);
             if (source.Members != null)
             {
-                Members = source.Members.ToList();
+                Members = source.Members.Select(i => new SerializableMemberInfo(i, iftFactory)).ToList();
             }
 
             Children = source.Arguments.Select(a => SerializableExpression.FromExpression(a, ctx, iftFactory)).ToList();
@@ -515,11 +571,11 @@ namespace Kistl.API
 
             if (Members != null)
             {
-                return Expression.New(Constructor, arguments, Members.ToArray());
+                return Expression.New(Constructor.GetConstructorInfo(), arguments, Members.Select(i => i.GetMemberInfo()).ToArray());
             }
             else
             {
-                return Expression.New(Constructor, arguments);
+                return Expression.New(Constructor.GetConstructorInfo(), arguments);
             }
         }
     }

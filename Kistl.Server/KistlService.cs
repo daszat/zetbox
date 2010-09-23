@@ -230,8 +230,8 @@ namespace Kistl.Server
 
         /// <summary>
         /// Fetches a list of CollectionEntry objects of the Relation 
-        /// <paramref name="relID"/> which are owned by the object with the 
-        /// ID <paramref name="ID"/> in the role <paramref name="role"/>.
+        /// <paramref name="relId"/> which are owned by the object with the 
+        /// ID <paramref name="parentObjID"/> in the role <paramref name="serializableRole"/>.
         /// </summary>
         /// <param name="relId">the requested Relation</param>
         /// <param name="serializableRole">the parent role (1 == A, 2 == B)</param>

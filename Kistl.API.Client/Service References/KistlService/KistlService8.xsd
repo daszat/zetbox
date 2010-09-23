@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://dasz.at/ZBox/" elementFormDefault="qualified" targetNamespace="http://dasz.at/ZBox/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:6666/KistlService?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/System.IO" />
+  <xs:import schemaLocation="http://localhost:6666/KistlService?xsd=xsd4" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:import schemaLocation="http://localhost:6666/KistlService?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:import schemaLocation="http://localhost:6666/KistlService?xsd=xsd6" namespace="http://schemas.microsoft.com/Message" />
+  <xs:element name="SetObjects">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/System.IO" minOccurs="0" name="msg" nillable="true" type="q1:MemoryStream" />
+        <xs:element minOccurs="0" name="notificationRequests" nillable="true" type="tns:ArrayOfObjectNotificationRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="ArrayOfObjectNotificationRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ObjectNotificationRequest" nillable="true" type="tns:ObjectNotificationRequest" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfObjectNotificationRequest" nillable="true" type="tns:ArrayOfObjectNotificationRequest" />
+  <xs:complexType name="ObjectNotificationRequest">
+    <xs:sequence>
+      <xs:element xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="IDs" nillable="true" type="q2:ArrayOfint" />
+      <xs:element minOccurs="0" name="Type" nillable="true" type="tns:SerializableType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ObjectNotificationRequest" nillable="true" type="tns:ObjectNotificationRequest" />
+  <xs:complexType name="SerializableType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AssemblyQualifiedName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="GenericTypeParameter" nillable="true" type="tns:ArrayOfSerializableType" />
+      <xs:element minOccurs="0" name="TypeName" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SerializableType" nillable="true" type="tns:SerializableType" />
+  <xs:complexType name="ArrayOfSerializableType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SerializableType" nillable="true" type="tns:SerializableType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfSerializableType" nillable="true" type="tns:ArrayOfSerializableType" />
+  <xs:element name="SetObjectsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/System.IO" minOccurs="0" name="SetObjectsResult" nillable="true" type="q3:MemoryStream" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="type" nillable="true" type="tns:SerializableType" />
+        <xs:element minOccurs="0" name="maxListCount" type="xs:int" />
+        <xs:element minOccurs="0" name="eagerLoadLists" type="xs:boolean" />
+        <xs:element minOccurs="0" name="filter" nillable="true" type="tns:ArrayOfSerializableExpression" />
+        <xs:element minOccurs="0" name="orderBy" nillable="true" type="tns:ArrayOfSerializableExpression" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="ArrayOfSerializableExpression">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SerializableExpression" nillable="true" type="tns:SerializableExpression" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfSerializableExpression" nillable="true" type="tns:ArrayOfSerializableExpression" />
+  <xs:complexType name="SerializableExpression">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="NodeType" type="xs:int" />
+      <xs:element minOccurs="0" name="SerializableType" nillable="true" type="tns:SerializableType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SerializableExpression" nillable="true" type="tns:SerializableExpression" />
+  <xs:complexType name="ArrayOfSerializableMemberInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SerializableMemberInfo" nillable="true" type="tns:SerializableMemberInfo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfSerializableMemberInfo" nillable="true" type="tns:ArrayOfSerializableMemberInfo" />
+  <xs:complexType name="SerializableMemberInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Type" nillable="true" type="tns:SerializableType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SerializableMemberInfo" nillable="true" type="tns:SerializableMemberInfo" />
+  <xs:element name="GetListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/System.IO" minOccurs="0" name="GetListResult" nillable="true" type="q4:MemoryStream" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetListOf">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="type" nillable="true" type="tns:SerializableType" />
+        <xs:element minOccurs="0" name="ID" type="xs:int" />
+        <xs:element minOccurs="0" name="property" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetListOfResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/System.IO" minOccurs="0" name="GetListOfResult" nillable="true" type="q5:MemoryStream" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FetchRelation">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="relId" type="q6:guid" />
+        <xs:element minOccurs="0" name="role" type="xs:int" />
+        <xs:element minOccurs="0" name="ID" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FetchRelationResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/System.IO" minOccurs="0" name="FetchRelationResult" nillable="true" type="q7:MemoryStream" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetBlobStream">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ID" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetBlobStreamResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q8="http://schemas.microsoft.com/Message" name="GetBlobStreamResult" type="q8:StreamBody" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="BlobMessage">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q9="http://schemas.microsoft.com/Message" name="Stream" type="q9:StreamBody" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FileName" nillable="true" type="xs:string" />
+  <xs:element name="MimeType" nillable="true" type="xs:string" />
+  <xs:element name="BlobResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q10="http://schemas.microsoft.com/Message" name="BlobInstance" type="q10:StreamBody" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ID" type="xs:int" />
+</xs:schema>

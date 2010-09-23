@@ -1,6 +1,20 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{ACC74A05-6833-4897-B739-8D5E82E846C2}"
+	ProjectSection(SolutionItems) = preProject
+		Tests\DisposableMockTemplate.cs = Tests\DisposableMockTemplate.cs
+		Tests\README.txt = Tests\README.txt
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ASP.NET", "ASP.NET", "{ACDAC04D-0C0C-4FDF-BF8A-DDB0205C7A51}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WPF", "WPF", "{9B65F71F-98A5-4744-B45F-9C5D99F99D23}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Generated Code", "Generated Code", "{70BC8B82-94AE-4823-85FF-B3FEDFD60F32}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DalProviders", "DalProviders", "{0EBD0023-C7AE-4C6F-BF07-0CEA724F2B0F}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.Server", "Kistl.Server\Kistl.Server.csproj", "{FA2B6CCD-95CB-4927-9CB5-AFE833EB38B7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.Client", "Kistl.Client\Kistl.Client.csproj", "{A736E13F-D349-4CE5-A397-8438F58D0B9D}"
@@ -14,12 +28,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.App.Projekte.Client", "Kistl.App.Projekte.Client\Kistl.App.Projekte.Client.csproj", "{379A67E8-388E-47B6-A591-5D4C05DAFBDB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.App.Projekte.Server", "Kistl.App.Projekte.Server\Kistl.App.Projekte.Server.csproj", "{E1275AE6-5060-4E93-88D8-BA48BA52DC7A}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{ACC74A05-6833-4897-B739-8D5E82E846C2}"
-	ProjectSection(SolutionItems) = preProject
-		Tests\DisposableMockTemplate.cs = Tests\DisposableMockTemplate.cs
-		Tests\README.txt = Tests\README.txt
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.API.Client.Tests", "Tests\Kistl.API.Client.Tests\Kistl.API.Client.Tests.csproj", "{382F1331-A177-4B38-A3E7-6D1B9A0F812B}"
 EndProject
@@ -80,13 +88,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.API.AbstractConsumerT
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.DalProvider.ClientObjects.Tests", "Tests\Kistl.DalProvider.ClientObjects.Tests\Kistl.DalProvider.ClientObjects.Tests.csproj", "{1BF9C9A2-9A22-4C22-AFE8-DDB711CC1EEB}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ASP.NET", "ASP.NET", "{ACDAC04D-0C0C-4FDF-BF8A-DDB0205C7A51}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.Client.ASPNET.Toolkit", "Kistl.Client.ASPNET.Toolkit\Kistl.Client.ASPNET.Toolkit.csproj", "{04656394-60EA-4675-95EE-3DA6D07BAB89}"
 EndProject
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Kistl.Client.ASPNET", "Kistl.Client.ASPNET\", "{CBE35A83-01BB-4F10-93E3-241784A22620}"
 	ProjectSection(WebsiteProperties) = preProject
-		TargetFramework = "3.5"
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv3.5"
 		ProjectReferences = "{AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9}|Kistl.API.dll;{DD11A4F6-24C2-4935-8042-DE49CA6B32C0}|Kistl.API.Client.dll;{A736E13F-D349-4CE5-A397-8438F58D0B9D}|Kistl.Client.dll;{04656394-60EA-4675-95EE-3DA6D07BAB89}|Kistl.Client.ASPNET.Toolkit.dll;{0C9E6E69-309F-46F7-A936-D5762229DEB9}|Kistl.Objects.dll;{9677AE11-CB92-4F0A-A248-87A21586F0DA}|TempAppHelpers.dll;"
 		Debug.AspNetCompiler.VirtualPath = "/Kistl.Client.ASPNET"
 		Debug.AspNetCompiler.PhysicalPath = "Kistl.Client.ASPNET\"
@@ -105,15 +111,11 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Kistl.Client.ASPNET", "Kist
 		VWDPort = "53524"
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WPF", "WPF", "{9B65F71F-98A5-4744-B45F-9C5D99F99D23}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.Client.WPF", "Kistl.Client.WPF\Kistl.Client.WPF.csproj", "{2C899579-BF78-442B-8810-8C7E7A2CA212}"
 	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFSamplesLib", "WPFLibrary\WPFSamplesLib.csproj", "{E4BBC94F-B837-4668-A127-E36E6DE012F5}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Generated Code", "Generated Code", "{70BC8B82-94AE-4823-85FF-B3FEDFD60F32}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.Objects.Server", "Kistl.Objects.Server\Kistl.Objects.Server.csproj", "{62B9344A-87D1-4715-9ABB-EAE0ACC4F523}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -147,8 +149,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.DalProvider.Memory.Ge
 	ProjectSection(ProjectDependencies) = postProject
 		{7E3CE048-00C1-4357-BE27-801AB5B75FE3} = {7E3CE048-00C1-4357-BE27-801AB5B75FE3}
 	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DalProviders", "DalProviders", "{0EBD0023-C7AE-4C6F-BF07-0CEA724F2B0F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.Objects.Memory", "Kistl.Objects.Memory\Kistl.Objects.Memory.csproj", "{01E60FD5-CD96-466A-83B1-8EFC7452B47C}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -608,9 +608,9 @@ Global
 		{62B9344A-87D1-4715-9ABB-EAE0ACC4F523} = {70BC8B82-94AE-4823-85FF-B3FEDFD60F32}
 		{0C9E6E69-309F-46F7-A936-D5762229DEB9} = {70BC8B82-94AE-4823-85FF-B3FEDFD60F32}
 		{01E60FD5-CD96-466A-83B1-8EFC7452B47C} = {70BC8B82-94AE-4823-85FF-B3FEDFD60F32}
+		{52EC8DFB-9C75-4FDB-9EE1-E78847F7F711} = {0EBD0023-C7AE-4C6F-BF07-0CEA724F2B0F}
 		{3760694D-3B35-41D4-B1A3-41BB288AA19F} = {0EBD0023-C7AE-4C6F-BF07-0CEA724F2B0F}
 		{7E3CE048-00C1-4357-BE27-801AB5B75FE3} = {0EBD0023-C7AE-4C6F-BF07-0CEA724F2B0F}
 		{2CE191A7-1E73-4E7E-A8AB-545B3B33325D} = {0EBD0023-C7AE-4C6F-BF07-0CEA724F2B0F}
-		{52EC8DFB-9C75-4FDB-9EE1-E78847F7F711} = {0EBD0023-C7AE-4C6F-BF07-0CEA724F2B0F}
 	EndGlobalSection
 EndGlobal

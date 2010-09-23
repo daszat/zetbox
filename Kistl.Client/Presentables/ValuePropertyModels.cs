@@ -15,7 +15,7 @@ using Kistl.Client.Presentables.GUI;
 namespace Kistl.Client.Presentables
 {
     /// <summary>
-    /// A Model describing a read-only value of type <paramref name="TValue"/>, usually read from a property or a method return value.
+    /// A Model describing a read-only value of type <typeparamref name="TValue"/>, usually read from a property or a method return value.
     /// </summary>
     /// <typeparam name="TValue">the type of the presented value</typeparam>
     public interface IReadOnlyValueModel<TValue>

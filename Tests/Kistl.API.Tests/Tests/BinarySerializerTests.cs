@@ -621,7 +621,7 @@ namespace Kistl.API.Tests
 				SerializableExpression fromval;
 				BinarySerializer.FromStream(out fromval, sr);
 				Assert.That(fromval.NodeType, Is.EqualTo(expression.NodeType));
-				Assert.That(expression.NodeType, Is.EqualTo(SerializableExpression.ToExpression(fromval).NodeType));
+				Assert.That((ExpressionType)expression.NodeType, Is.EqualTo(SerializableExpression.ToExpression(fromval).NodeType));
 			}
 
 			private SerializableExpression CreateExpression()
