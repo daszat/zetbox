@@ -207,9 +207,9 @@ namespace Kistl.Client.Presentables.ObjectEditor
         /// </summary>
         /// <param name="dataObject"></param>
         /// <returns></returns>
-        public void ShowForeignModel(DataObjectModel dataObject)
+        public DataObjectModel ShowForeignModel(DataObjectModel dataObject)
         {
-            ShowForeignModel(dataObject, null);
+            return ShowForeignModel(dataObject, null);
         }
 
         /// <summary>
@@ -218,10 +218,10 @@ namespace Kistl.Client.Presentables.ObjectEditor
         /// <param name="dataObject"></param>
         /// <param name="requestedKind"></param>
         /// <returns></returns>
-        public void ShowForeignModel(DataObjectModel dataObject, Kistl.App.GUI.ControlKind requestedKind)
+        public DataObjectModel ShowForeignModel(DataObjectModel dataObject, Kistl.App.GUI.ControlKind requestedKind)
         {
             if (dataObject == null || dataObject.Object == null)
-                return;
+                return null;
 
             var other = dataObject.Object;
             var here = DataContext.Find(DataContext.GetInterfaceType(other), other.ID);
@@ -229,6 +229,7 @@ namespace Kistl.Client.Presentables.ObjectEditor
             SelectedItem = vm;
             vm.RequestedKind = requestedKind;
             AddItem(vm);
+            return vm;
         }
 
         public override string Name

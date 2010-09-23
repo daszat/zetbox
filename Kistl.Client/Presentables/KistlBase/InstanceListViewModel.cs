@@ -228,8 +228,8 @@ namespace Kistl.Client.Presentables.KistlBase
             }
         }
 
-        private ICommand _RefreshCommand;
-        public ICommand RefreshCommand
+        private RefreshCommand _RefreshCommand;
+        public RefreshCommand RefreshCommand
         {
             get
             {
@@ -241,8 +241,8 @@ namespace Kistl.Client.Presentables.KistlBase
             }
         }
 
-        private ICommand _OpenCommand;
-        public ICommand OpenCommand
+        private OpenDataObjectCommand _OpenCommand;
+        public OpenDataObjectCommand OpenCommand
         {
             get
             {
@@ -254,8 +254,8 @@ namespace Kistl.Client.Presentables.KistlBase
             }
         }
 
-        private ICommand _NewCommand;
-        public ICommand NewCommand
+        private NewDataObjectCommand _NewCommand;
+        public NewDataObjectCommand NewCommand
         {
             get
             {
@@ -380,13 +380,8 @@ namespace Kistl.Client.Presentables.KistlBase
         public void OpenObjects(IEnumerable<DataObjectModel> objects)
         {
             if (objects == null) throw new ArgumentNullException("objects");
-
-            var newWorkspace = ModelFactory.CreateViewModel<ObjectEditor.WorkspaceViewModel.Factory>().Invoke(ctxFactory());
-            foreach (var item in objects)
-            {
-                newWorkspace.ShowForeignModel(item, RequestedEditorKind);
-            }
-            ModelFactory.ShowModel(newWorkspace, RequestedWorkspaceKind,  true);
+            // TODO: Refactor this
+            OpenCommand.Execute(objects);
         }
 
         public delegate void ItemsDefaultActionHandler(IEnumerable<DataObjectModel> objects);

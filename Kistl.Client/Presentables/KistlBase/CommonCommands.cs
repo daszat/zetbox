@@ -59,12 +59,20 @@ namespace Kistl.Client.Presentables.KistlBase
             }
         }
 
+        public delegate void ModelCreatedEventHandler(DataObjectModel mdl);
+        public event ModelCreatedEventHandler ModelCreated;
+
         protected override void DoExecute(IEnumerable<DataObjectModel> data)
         {
             var newWorkspace = ModelFactory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(ctxFactory());
             foreach (var item in data)
             {
-                newWorkspace.ShowForeignModel(item, RequestedEditorKind);
+                var newMdl = newWorkspace.ShowForeignModel(item, RequestedEditorKind);
+                ModelCreatedEventHandler temp = ModelCreated;
+                if (temp != null)
+                {
+                    temp(newMdl);
+                }
             }
             ModelFactory.ShowModel(newWorkspace, RequestedWorkspaceKind, true);
         }
