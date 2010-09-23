@@ -15,21 +15,21 @@ namespace Kistl.API.Server
         private readonly string _database;
 
         /// <summary>
-        /// The database containing this table.
+        /// The database containing this database object.
         /// </summary>
         public string Database { get { return _database; } }
 
         private readonly string _schema;
 
         /// <summary>
-        /// The database schema containing this table.
+        /// The database schema containing this database object.
         /// </summary>
         public string Schema { get { return _schema; } }
 
         private readonly string _name;
 
         /// <summary>
-        /// The name of the table.
+        /// The name of the database object.
         /// </summary>
         public string Name { get { return _name; } }
 
