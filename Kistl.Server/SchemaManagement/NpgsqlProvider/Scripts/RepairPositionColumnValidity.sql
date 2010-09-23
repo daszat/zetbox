@@ -46,11 +46,13 @@ DECLARE
 BEGIN
 
 FOR idToCheckRec IN EXECUTE idSelectStatement LOOP
-	EXECUTE duplicateStatement INTO hasDuplicates USING idToCheckRec."ID";
+	EXECUTE replace(duplicateStatement, '$1', idToCheckRec."ID"::text) INTO hasDuplicates;
+	-- 8.4 and later: EXECUTE replace(duplicateStatement, '$1',  INTO hasDuplicates USING idToCheckRec."ID";
 	IF hasDuplicates THEN
 		result := false;
 		IF repair THEN
-			EXECUTE repairStatement USING idToCheckRec."ID";
+			EXECUTE replace(repairStatement, '$1', idToCheckRec."ID"::text);
+			-- 8.4 and later: EXECUTE repairStatement USING idToCheckRec."ID";
 		ELSE
 			-- abort on first error, if we don't repair
 			RETURN result;

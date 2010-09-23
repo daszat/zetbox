@@ -648,35 +648,39 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
 
         private IEnumerable<string[]> GetParameterTypes(ProcRef procName)
         {
-            string sqlQuery = @"
-                SELECT args.proc_oid, t.typname 
-                FROM pg_type t 
-                    JOIN (
-                        SELECT oid proc_oid, proargtypes::oid[] argtypes, generate_subscripts(proargtypes::oid[], 1) argtype_subscript 
-                        FROM pg_proc where proname = @procName) args 
-                    ON t.oid = args.argtypes[args.argtype_subscript] 
-                ORDER BY args.proc_oid, args.argtype_subscript;";
-            QueryLog.Debug(sqlQuery);
-
-            long? lastProcOid = null;
-            List<string> types = null;
             List<string[]> result = new List<string[]>();
-            foreach (var rd in ExecuteReader(sqlQuery, new Dictionary<string, object>() { { "@procname", procName } }))
-            {
-                var procOid = rd.GetInt64(0);
-                var argType = rd.GetString(1);
-                if (lastProcOid != procOid)
-                {
-                    if (types != null)
-                    {
-                        result.Add(types.ToArray());
-                    }
-                    lastProcOid = procOid;
-                    types = new List<string>();
-                }
-                types.Add(argType);
-            }
-            result.Add(types.ToArray());
+// TODO re-enable for postgres 8.4; re-implement without generate_subscripts for 8.3
+//            string sqlQuery = @"
+//                SELECT args.proc_oid, t.typname 
+//                FROM pg_type t 
+//                    JOIN (
+//                        SELECT oid AS proc_oid, proargtypes::oid[] AS argtypes, generate_subscripts(proargtypes::oid[], 1) AS argtype_subscript 
+//                        FROM pg_proc where proname = @procName) args 
+//                    ON t.oid = args.argtypes[args.argtype_subscript] 
+//                ORDER BY args.proc_oid, args.argtype_subscript;";
+//            QueryLog.Debug(sqlQuery);
+
+//            long? lastProcOid = null;
+//            List<string> types = null;
+//            foreach (var rd in ExecuteReader(sqlQuery, new Dictionary<string, object>() { { "@procname", procName.Name } }))
+//            {
+//                var procOid = rd.GetInt64(0);
+//                var argType = rd.GetString(1);
+//                if (lastProcOid != procOid)
+//                {
+//                    if (types != null)
+//                    {
+//                        result.Add(types.ToArray());
+//                    }
+//                    lastProcOid = procOid;
+//                    types = new List<string>();
+//                }
+//                types.Add(argType);
+//            }
+//            if (types != null)
+//            {
+//                result.Add(types.ToArray());
+//            }
             return result;
         }
 
@@ -943,13 +947,13 @@ SELECT  ""ID"", ""Identity"",
 		(case SUM(""Right"" & 1) when 0 then 0 else 1 end) +
 		(case SUM(""Right"" & 2) when 0 then 0 else 2 end) +
 		(case SUM(""Right"" & 4) when 0 then 0 else 4 end) +
-		(case SUM(""Right"" & 8) when 0 then 0 else 8 end) ""Right"" 
+		(case SUM(""Right"" & 8) when 0 then 0 else 8 end) AS ""Right"" 
 FROM (", FormatFullName(viewName));
             view.AppendLine();
 
             foreach (var acl in acls)
             {
-                view.AppendFormat(@"  SELECT t1.""ID"" ""ID"", t{0}.{1} ""Identity"", {2} ""Right""",
+                view.AppendFormat(@"  SELECT t1.""ID"" AS ""ID"", t{0}.{1} AS ""Identity"", {2} AS ""Right""",
                     acl.Relations.Count,
                     QuoteIdentifier(acl.Relations.Last().FKColumnName.Single().ColumnName),
                     (int)acl.Right);
@@ -991,7 +995,7 @@ FROM (", FormatFullName(viewName));
             Log.DebugFormat("Creating refresh rights procedure for \"{0}\"", tblName);
             ExecuteNonQuery(String.Format(
                 @"
-CREATE FUNCTION {0}(IN refreshID integer DEFAULT NULL) RETURNS void AS
+CREATE FUNCTION {0}(IN refreshID integer) RETURNS void AS
 $BODY$BEGIN
     IF (refreshID IS NULL) THEN
             TRUNCATE TABLE {1};
@@ -1010,7 +1014,7 @@ LANGUAGE 'plpgsql' VOLATILE",
         public override void ExecRefreshRightsOnProcedure(ProcRef procName)
         {
             Log.DebugFormat("Refreshing rights for [{0}]", procName);
-            ExecuteNonQuery(String.Format(@"SELECT ()", FormatSchemaName(procName)));
+            ExecuteNonQuery(String.Format(@"SELECT {0}(NULL)", FormatSchemaName(procName)));
         }
 
         public override void CreatePositionColumnValidCheckProcedures(ILookup<TableRef, KeyValuePair<TableRef, string>> refSpecs)
