@@ -27,7 +27,7 @@ namespace Kistl.Server.Generators.Templates.Interface
         {
 #line 11 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\ProjectFile.cst"
 this.WriteObjects("<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n");
-this.WriteObjects("<Project ToolsVersion=\"3.5\" DefaultTargets=\"Build\" xmlns=\"http://schemas.microsoft.com/developer/msbuild/2003\">\r\n");
+this.WriteObjects("<Project ToolsVersion=\"4.0\" DefaultTargets=\"Build\" xmlns=\"http://schemas.microsoft.com/developer/msbuild/2003\">\r\n");
 this.WriteObjects("  <PropertyGroup>\r\n");
 this.WriteObjects("    <Configuration Condition=\" '$(Configuration)' == '' \">Debug</Configuration>\r\n");
 this.WriteObjects("    <Platform Condition=\" '$(Platform)' == '' \">AnyCPU</Platform>\r\n");
@@ -116,8 +116,7 @@ this.WriteObjects("  </ItemGroup>\r\n");
 #line 95 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\ProjectFile.cst"
 ApplyAdditionalItemGroups();
 
-#line 96 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\ProjectFile.cst"
-this.WriteObjects("  \r\n");
+#line 97 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\ProjectFile.cst"
 this.WriteObjects("  <Import Project=\"$(MSBuildBinPath)\\Microsoft.CSharp.targets\" />\r\n");
 this.WriteObjects("  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. \r\n");
 this.WriteObjects("       Other similar extension points exist, see Microsoft.Common.targets.\r\n");
@@ -131,7 +130,7 @@ this.WriteObjects("  ");
 ApplyAdditionalPropertyGroups();
   
 #line 108 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\ProjectFile.cst"
-this.WriteObjects("</Project>");
+this.WriteObjects("</Project>\r\n");
 
         }
 
