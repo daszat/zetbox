@@ -34,9 +34,31 @@ namespace Kistl.Client.WPF.View
             return SelectTemplate(mdl, ck, frozenCtx);
         }
 
+        private static TypeRef GetTypeRef(ViewModel mdl, IFrozenContext frozenCtx)
+        {
+            var tr = mdl.GetType().ToRef(frozenCtx);
+            if (tr == null)
+            {
+                var mdlType = mdl.GetType();
+                if (mdlType.IsGenericType)
+                {
+                    Logging.Log.ErrorFormat("Unable to resolve TypeRef of given ViewModel '{0}'. You have to manually create a generic TypeRef.", mdlType);
+                }
+                else
+                {
+                    Logging.Log.ErrorFormat("Unable to resolve TypeRef of given ViewModel '{0}'. Regenerate Assembly Refs.", mdlType);
+                }
+                return null;
+            }
+            return tr;
+        }
+
         private static DataTemplate SelectTemplate(ViewModel mdl, ControlKind controlKind, IFrozenContext frozenCtx)
         {
-            ViewModelDescriptor pmd = mdl.GetType().ToRef(frozenCtx).GetViewModelDescriptor();
+            var tr = GetTypeRef(mdl, frozenCtx);
+            if (tr == null) return null;
+
+            ViewModelDescriptor pmd = tr.GetViewModelDescriptor();
             if (pmd == null)
             {
                 Logging.Log.ErrorFormat("No matching ViewModelDescriptor found for {0}", mdl.GetType());
@@ -48,7 +70,10 @@ namespace Kistl.Client.WPF.View
 
         private static DataTemplate SelectDefaultTemplate(ViewModel mdl, IFrozenContext frozenCtx)
         {
-            ViewModelDescriptor pmd = mdl.GetType().ToRef(frozenCtx).GetViewModelDescriptor();
+            var tr = GetTypeRef(mdl, frozenCtx);
+            if (tr == null) return null;
+
+            ViewModelDescriptor pmd = tr.GetViewModelDescriptor();
             if (pmd == null)
             {
                 Logging.Log.ErrorFormat("No matching ViewModelDescriptor found for {0}", mdl.GetType());

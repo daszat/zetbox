@@ -273,7 +273,7 @@ namespace Kistl.App.Base
             obj.ToStringCache = String.Format("{0}{1}, {2}",
                 obj.FullName,
                 obj.GenericArguments.Count > 0
-                    ? "<" + String.Join(", ", obj.GenericArguments.Select(tr => tr.ToStringCache).ToArray()) + ">"
+                    ? "<" + String.Join(", ", obj.GenericArguments.Select(tr => tr.FullName).ToArray()) + ">"
                     : String.Empty,
                 obj.Assembly);
         }

@@ -143,7 +143,7 @@ namespace Kistl.Client.Presentables.KistlBase
                 }
             }
         }
- 
+
         private ObservableCollection<IFilterExpression> _filter = null;
         public ICollection<IFilterExpression> Filter
         {
@@ -186,7 +186,8 @@ namespace Kistl.Client.Presentables.KistlBase
             foreach (var item in e.NewItems.OfType<IUIFilterExpression>())
             {
                 // attach change events
-                item.FilterChanged += new EventHandler(delegate(object s, EventArgs a) {
+                item.FilterChanged += new EventHandler(delegate(object s, EventArgs a)
+                {
                     if (s is IPostFilterExpression)
                     {
                         ExecutePostFilter();
@@ -211,6 +212,68 @@ namespace Kistl.Client.Presentables.KistlBase
         #endregion
 
         #region Commands
+
+        private bool _ShowOpenCommand = true;
+        public bool ShowOpenCommand
+        {
+            get
+            {
+                return _ShowOpenCommand;
+            }
+            set
+            {
+                if (_ShowOpenCommand != value)
+                {
+                    _ShowOpenCommand = value;
+                    UpdateCommands();
+                }
+            }
+        }
+        private bool _ShowNewCommand = true;
+        public bool ShowNewCommand
+        {
+            get
+            {
+                return _ShowNewCommand;
+            }
+            set
+            {
+                if (_ShowNewCommand != value)
+                {
+                    _ShowNewCommand = value;
+                    UpdateCommands();
+                }
+            }
+        }
+        private bool _ShowRefreshCommand = true;
+        public bool ShowRefreshCommand
+        {
+            get
+            {
+                return _ShowRefreshCommand;
+            }
+            set
+            {
+                if (_ShowRefreshCommand != value)
+                {
+                    _ShowRefreshCommand = value;
+                    UpdateCommands();
+                }
+            }
+        }
+
+        private void UpdateCommands()
+        {
+            if (_commands == null) return;
+            if (!ShowNewCommand && _commands.Contains(NewCommand)) _commands.Remove(NewCommand);
+            if (!ShowOpenCommand && _commands.Contains(OpenCommand)) _commands.Remove(OpenCommand);
+            if (!ShowRefreshCommand && _commands.Contains(RefreshCommand)) _commands.Remove(RefreshCommand);
+
+            if (ShowNewCommand && !_commands.Contains(NewCommand)) _commands.Insert(0, NewCommand);
+            if (ShowOpenCommand && !_commands.Contains(OpenCommand)) _commands.Insert(ShowNewCommand ? 1 : 0, OpenCommand);
+            if (ShowRefreshCommand && !_commands.Contains(RefreshCommand)) _commands.Insert((ShowNewCommand ? 1 : 0) + (ShowOpenCommand ? 1 : 0), RefreshCommand);
+        }
+
         private ObservableCollection<ICommand> _commands = null;
         public ObservableCollection<ICommand> Commands
         {
@@ -220,9 +283,9 @@ namespace Kistl.Client.Presentables.KistlBase
                 {
                     _commands = new ObservableCollection<ICommand>();
                     // Add default actions
-                    _commands.Add(NewCommand);
-                    _commands.Add(OpenCommand);
-                    _commands.Add(RefreshCommand);
+                    if(ShowNewCommand) _commands.Add(NewCommand);
+                    if (ShowOpenCommand) _commands.Add(OpenCommand);
+                    if (ShowRefreshCommand) _commands.Add(RefreshCommand);
                 }
                 return _commands;
             }
@@ -563,8 +626,8 @@ namespace Kistl.Client.Presentables.KistlBase
                     new ObservableCollection<DataObjectModel>(
                     _instancesFiltered
                         .AsQueryable()
-                        .OrderBy(string.Format("it.Object.{0} {1}", 
-                                    _sortProperty, 
+                        .OrderBy(string.Format("it.Object.{0} {1}",
+                                    _sortProperty,
                                     _sortDirection == ListSortDirection.Descending ? "desc" : string.Empty
                                 )
                             )

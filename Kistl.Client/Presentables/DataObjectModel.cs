@@ -237,25 +237,78 @@ namespace Kistl.Client.Presentables
             }
         }
 
-        private ReadOnlyProjectedList<Method, BaseMethodResultModel> _methodResultsCache;
+        #region MethodResults
+
+        private List<Method> _MethodList = null;
+        private void FetchMethodList()
+        {
+            if (_MethodList != null) return;
+            // load properties from MetaContext
+            ObjectClass cls = _object.GetObjectClass(FrozenContext);
+            var methods = new List<Method>();
+            while (cls != null)
+            {
+                foreach (Method m in cls.Methods.Where(m =>
+                    m.IsDisplayable
+                    && m.Parameter.Count == 1
+                    && m.Parameter.Single().IsReturnParameter
+                    && !(m.Parameter.Single() is ObjectParameter))) // Could be a CreateRelatedUseCase, and we don't want to go around creating new objects
+                {
+                    methods.Add(m);
+                }
+                cls = cls.BaseObjectClass;
+            }
+
+            _MethodList = methods;
+        }
+
+        private ReadOnlyProjectedList<Method, BaseMethodResultModel> _MethodResultsList;
         public IReadOnlyList<BaseMethodResultModel> MethodResults
         {
             get
             {
-                if (_methodResultsCache == null)
+                if (_MethodResultsList == null)
                 {
-                    _methodResultsCache = new ReadOnlyProjectedList<Method, BaseMethodResultModel>(
-                        FetchMethodList().ToList(),
-                        method =>
-                        {
-                            ObjectClass cls = _object.GetObjectClass(FrozenContext);
-                            return ModelFromMethod(cls, method);
-                        },
-                        m => m.Method);
+                    FetchMethodModels();
+                    _MethodResultsList = new ReadOnlyProjectedList<Method, BaseMethodResultModel>(_MethodList, p => _MethodModels[p], m => m.Method);
                 }
-                return _methodResultsCache;
+                return _MethodResultsList;
             }
         }
+
+        private LookupDictionary<Method, Method, BaseMethodResultModel> _MethodModels;
+        private void FetchMethodModels()
+        {
+            if (_MethodModels == null)
+            {
+                FetchMethodList();
+                _MethodModels = new LookupDictionary<Method, Method, BaseMethodResultModel>(
+                    _MethodList, 
+                    k => k,
+                    v => ModelFromMethod(v)
+                );
+            }
+        }
+
+        private LookupDictionary<string, Method, BaseMethodResultModel> _MethodResultsByName;
+        public LookupDictionary<string, Method, BaseMethodResultModel> MethodResultsByName
+        {
+            get
+            {
+                if (_MethodResultsByName == null)
+                {
+                    FetchMethodModels();
+                    _MethodResultsByName = new LookupDictionary<string, Method, BaseMethodResultModel>(
+                        _MethodList,
+                        k => k.Name,
+                        v => _MethodModels[v]
+                    );
+                }
+                return _MethodResultsByName;
+            }
+        }
+        #endregion
+
 
         private ObservableCollection<ActionModel> _actionsCache;
         private ReadOnlyObservableCollection<ActionModel> _actionsView;
@@ -326,28 +379,6 @@ namespace Kistl.Client.Presentables
         #endregion
 
         #region Utilities and UI callbacks
-
-        private IEnumerable<Method> FetchMethodList()
-        {
-            // load properties from MetaContext
-            ObjectClass cls = _object.GetObjectClass(FrozenContext);
-            var methods = new List<Method>();
-            while (cls != null)
-            {
-                foreach (Method m in cls.Methods.Where(m =>
-                    m.IsDisplayable
-                    && m.Parameter.Count == 1
-                    && m.Parameter.Single().IsReturnParameter
-                    && !(m.Parameter.Single() is ObjectParameter))) // Could be a CreateRelatedUseCase, and we don't want to go around creating new objects
-                {
-                    methods.Add(m);
-                }
-                cls = cls.BaseObjectClass;
-            }
-
-            return methods;
-        }
-
         private void FetchActions()
         {
             // load properties
@@ -379,7 +410,7 @@ namespace Kistl.Client.Presentables
         }
 
         // TODO: should go to renderer and use database backed decision tables
-        protected virtual BaseMethodResultModel ModelFromMethod(ObjectClass cls, Method pm)
+        protected virtual BaseMethodResultModel ModelFromMethod(Method pm)
         {
             Debug.Assert(pm.Parameter.Single().IsReturnParameter);
             var retParam = pm.GetReturnParameter();
@@ -400,6 +431,10 @@ namespace Kistl.Client.Presentables
             {
                 return (ModelFactory.CreateViewModel<NullableResultModel<int>.Factory>().Invoke(DataContext, _object, pm));
             }
+            else if (retParam is DecimalParameter && !retParam.IsList)
+            {
+                return (ModelFactory.CreateViewModel<NullableResultModel<decimal>.Factory>().Invoke(DataContext, _object, pm));
+            }
             else if (retParam is StringParameter && !retParam.IsList)
             {
                 return (ModelFactory.CreateViewModel<ObjectResultModel<string>.Factory>().Invoke(DataContext, _object, pm));
@@ -408,9 +443,13 @@ namespace Kistl.Client.Presentables
             {
                 return (ModelFactory.CreateViewModel<ObjectResultModel<IDataObject>.Factory>().Invoke(DataContext, _object, pm));
             }
+            //else if (retParam is EnumParameter && !retParam.IsList)
+            //{
+            //    return (ModelFactory.CreateViewModel<NullableResultModel<?>.Factory>().Invoke(DataContext, _object, pm));
+            //}
             else
             {
-                Logging.Log.WarnFormat("No model for property: '{0}' of Type '{1}'", pm, pm.GetType());
+                Logging.Log.WarnFormat("No model for method: '{0}' of return type '{1}'", pm, pm.GetReturnParameter().GetParameterTypeString());
                 return null;
             }
         }
