@@ -131,13 +131,21 @@ namespace Kistl.App.Base
                             var descr = ctx.GetQuery<ViewModelDescriptor>().FirstOrDefault(i => i.ViewModelRef == tr);
                             if (descr == null)
                             {
-                                descr = ctx.Create<ViewModelDescriptor>();
-                                descr.ViewModelRef = tr;
-                                descr.Module = ctx.GetQuery<Module>().First(i => i.Name == attr.Module);
-                                descr.Description = string.IsNullOrEmpty(attr.Description) ? "TODO: Add description" : attr.Description;
-                                if (!string.IsNullOrEmpty(attr.DefaultKind))
+                                var module = ctx.GetQuery<Module>().FirstOrDefault(i => i.Name == attr.Module);
+                                if (module != null)
                                 {
-                                    descr.DefaultKind = ctx.GetQuery<ControlKind>().FirstOrDefault(c => c.Name == attr.DefaultKind);
+                                    descr = ctx.Create<ViewModelDescriptor>();
+                                    descr.ViewModelRef = tr;
+                                    descr.Module = module;
+                                    descr.Description = string.IsNullOrEmpty(attr.Description) ? "TODO: Add description" : attr.Description;
+                                    if (!string.IsNullOrEmpty(attr.DefaultKind))
+                                    {
+                                        descr.DefaultKind = ctx.GetQuery<ControlKind>().FirstOrDefault(c => c.Name == attr.DefaultKind);
+                                    }
+                                }
+                                else
+                                {
+                                    Logging.Log.Warn(string.Format("Unable to create ViewModelDescriptors for Type {0}. Attribute has a invalid Module Reference '{1}'", type.FullName, attr.Module));
                                 }
                             }
                         }
@@ -168,10 +176,18 @@ namespace Kistl.App.Base
                             var descr = ctx.GetQuery<ViewDescriptor>().FirstOrDefault(i => i.ControlRef == tr);
                             if (descr == null)
                             {
-                                descr = ctx.Create<ViewDescriptor>();
-                                descr.ControlRef = tr;
-                                descr.Module = ctx.GetQuery<Module>().First(i => i.Name == attr.Module);
-                                descr.Toolkit = attr.Toolkit;
+                                var module = ctx.GetQuery<Module>().FirstOrDefault(i => i.Name == attr.Module);
+                                if (module != null)
+                                {
+                                    descr = ctx.Create<ViewDescriptor>();
+                                    descr.ControlRef = tr;
+                                    descr.Module = module;
+                                    descr.Toolkit = attr.Toolkit;
+                                }
+                                else
+                                {
+                                    Logging.Log.Warn(string.Format("Unable to create ViewDescriptors for Type {0}. Attribute has a invalid Module Reference '{1}'", type.FullName, attr.Module));
+                                }
                                 if (!string.IsNullOrEmpty(attr.Kind))
                                 {
                                     descr.ControlKind = ctx.GetQuery<ControlKind>().FirstOrDefault(c => c.Name == attr.Kind);

@@ -14,12 +14,28 @@ namespace Kistl.Client.Presentables
 
     public class ColumnDisplayModel
     {
-        public ColumnDisplayModel()
+        public enum ColumnType
         {
-            IsMethod = false;
+            /// <summary>
+            /// References a DataObjectModel.PropertyModelsByName[] ViewModel
+            /// </summary>
+            PropertyModel,
+            /// <summary>
+            /// References a ViewModels property directly
+            /// </summary>
+            Property,
+            /// <summary>
+            /// References a DataObjectModel.ActionModelsByName[] ViewModel
+            /// </summary>
+            MethodModel,
         }
 
-        public bool IsMethod { get; set; }
+        public ColumnDisplayModel()
+        {
+            this.Type = ColumnType.PropertyModel;
+        }
+
+        public ColumnType Type { get; set; }
         public string Header { get; set; }
         public string Name { get; set; }
         public ControlKind ControlKind { get; set; }

@@ -27,7 +27,7 @@ namespace Kistl.Client.Presentables.SchemaMigration
             // Add create property button
             result.Columns.Add(new ColumnDisplayModel()
                 {
-                    IsMethod = true,
+                    Type = ColumnDisplayModel.ColumnType.MethodModel,
                     Header = "Create",
                     Name = "CreateProperty",
                     ControlKind = FrozenContext.FindPersistenceObject<ControlKind>(new Guid("364aaaf3-0f61-4642-a0e3-bd812935cf44")) // Kistl.App.GUI.ActionKind

@@ -550,10 +550,21 @@ namespace Kistl.Client.Presentables.KistlBase
                 return _displayedColumns;
             }
         }
+
+        public delegate void DisplayedColumnsCreatedHandler(GridDisplayConfiguration cols);
+        public event DisplayedColumnsCreatedHandler DisplayedColumnsCreated;
+        
         protected virtual GridDisplayConfiguration CreateDisplayedColumns()
         {
             var result = new GridDisplayConfiguration();
             result.BuildColumns(this._type, IsItemsReadOnly);
+
+            DisplayedColumnsCreatedHandler temp = DisplayedColumnsCreated;
+            if (temp != null)
+            {
+                temp(result);
+            }
+
             return result;
         }
         #endregion

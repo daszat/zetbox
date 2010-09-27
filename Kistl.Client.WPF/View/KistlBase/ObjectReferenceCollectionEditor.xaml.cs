@@ -73,6 +73,8 @@ namespace Kistl.Client.WPF.View.KistlBase
         #region RefreshGridView
         private void RefreshGridView()
         {
+            if (ViewModel == null) return;
+
             GridView view = new GridView() { AllowsColumnReorder = true };
             lst.View = view;
             GridDisplayConfiguration cfg = ViewModel.DisplayedColumns;
@@ -104,13 +106,17 @@ namespace Kistl.Client.WPF.View.KistlBase
 
                 DataTemplate result = new DataTemplate();
                 var cpFef = new FrameworkElementFactory(typeof(ContentPresenter));
-                if (desc.IsMethod)
+                switch (desc.Type)
                 {
-                    cpFef.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath(String.Format("ActionModelsByName[{0}]", desc.Name)), Mode = BindingMode.OneWay });
-                }
-                else
-                {
-                    cpFef.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath(String.Format("PropertyModelsByName[{0}]", desc.Name)), Mode = BindingMode.OneWay });
+                    case ColumnDisplayModel.ColumnType.MethodModel:
+                        cpFef.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath(String.Format("ActionModelsByName[{0}]", desc.Name)), Mode = BindingMode.OneWay });
+                        break;
+                    case ColumnDisplayModel.ColumnType.PropertyModel:
+                        cpFef.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath(String.Format("PropertyModelsByName[{0}]", desc.Name)), Mode = BindingMode.OneWay });
+                        break;
+                    case ColumnDisplayModel.ColumnType.Property:
+                        cpFef.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath(desc.Name), Mode = BindingMode.OneWay });
+                        break;
                 }
                 cpFef.SetValue(VisualTypeTemplateSelector.RequestedKindProperty, desc.ControlKind);
                 cpFef.SetValue(ContentPresenter.ContentTemplateSelectorProperty, FindResource("defaultTemplateSelector"));
