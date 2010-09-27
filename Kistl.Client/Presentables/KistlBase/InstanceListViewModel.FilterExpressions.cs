@@ -222,7 +222,7 @@ namespace Kistl.Client.Presentables.KistlBase
         public bool Requiered { get { return true; } }
     }
 
-    [ViewModelDescriptor("GUI", DefaultKind = "Kistl.App.GUI.SimpleBoolFilterKind", Description = "Filter expressions for switchable Filter")]
+    [ViewModelDescriptor("GUI", DefaultKind = "Kistl.App.GUI.SimpleBoolFilterKind", Description = "Code only filter expressions for switchable Filter")]
     public class EnableFilterExpression : ValueTypeUIFilterExpressionViewModel<bool>, ILinqFilterExpression
     {
         public new delegate EnableFilterExpression Factory(IKistlContext dataCtx, string label, string filter, params object[] values);
@@ -264,7 +264,7 @@ namespace Kistl.Client.Presentables.KistlBase
         #endregion
     }
 
-    [ViewModelDescriptor("GUI", DefaultKind = "Kistl.App.GUI.StringFilterKind", Description = "Filter expression for searching in ViewModel names")]
+    [ViewModelDescriptor("GUI", DefaultKind = "Kistl.App.GUI.StringFilterKind", Description = "Code only filter expression for searching in ViewModel names")]
     public class ToStringFilterExpression : ReferenceTypeUIFilterExpressionViewModel<string>, IPostFilterExpression
     {
         public new delegate ToStringFilterExpression Factory(IKistlContext dataCtx, string label);
@@ -299,6 +299,42 @@ namespace Kistl.Client.Presentables.KistlBase
         }
 
         #endregion
+    }
+
+    [ViewModelDescriptor("GUI", DefaultKind = "Kistl.App.GUI.StringFilterKind", Description = "Code only filter expression for searching in IDataObject Properties")]
+    public class StringFilterExpression : ReferenceTypeUIFilterExpressionViewModel<string>, ILinqFilterExpression
+    {
+        public new delegate StringFilterExpression Factory(IKistlContext dataCtx, string label, string filter);
+
+        public StringFilterExpression(
+            IViewModelDependencies appCtx, IKistlContext dataCtx,
+            string label, string filter)
+            : base(appCtx, dataCtx, label)
+        {
+            this.Label = label;
+            AllowNullInput = false;
+            this.Predicate = filter;
+        }
+
+        public override bool Enabled
+        {
+            get
+            {
+                return Values.Count > 0 && !string.IsNullOrEmpty(Values[0]);
+            }
+        }
+        public override bool Requiered { get { return false; } }
+
+        public virtual string Predicate
+        {
+            get;
+            private set;
+        }
+
+        public virtual object[] FilterValues
+        {
+            get { return base.Values.Cast<object>().ToArray(); }
+        }        
     }
     #endregion
 

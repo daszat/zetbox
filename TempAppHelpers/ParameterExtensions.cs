@@ -49,6 +49,11 @@ namespace Kistl.App.Extensions
             else if (param is IntParameter && !param.IsList)
                 return typeof(int);
 
+            else if (param is DecimalParameter && param.IsList)
+                return typeof(IList<decimal>);
+            else if (param is DecimalParameter && !param.IsList)
+                return typeof(decimal);
+
             else if (param is ObjectParameter)
             {
                 var p = param as ObjectParameter;
