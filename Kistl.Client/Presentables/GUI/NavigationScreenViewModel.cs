@@ -117,7 +117,7 @@ namespace Kistl.Client.Presentables.GUI
                 var tmp = _screen;
                 while (tmp != null)
                 {
-                    if (!string.IsNullOrEmpty(tmp.Color)) return _screen.Color;
+                    if (!string.IsNullOrEmpty(tmp.Color)) return tmp.Color;
                     tmp = tmp.Parent;
                 }
                 return null;

@@ -40,7 +40,9 @@
             </ItemsControl.ItemTemplate>
         </ItemsControl>
 
-        <ContentPresenter Content="{Binding CurrentScreen}"
+        <Grid Background="{Binding CurrentScreen.Color}">
+            <ContentPresenter Content="{Binding CurrentScreen}"
                           ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />
+        </Grid>
     </DockPanel>
 </ctrls:WindowView>

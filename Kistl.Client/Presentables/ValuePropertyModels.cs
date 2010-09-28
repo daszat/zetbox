@@ -216,6 +216,14 @@ namespace Kistl.Client.Presentables
         /// </summary>
         protected abstract void UpdatePropertyValue();
 
+        protected void NotifyValueChanged()
+        {
+            OnPropertyChanged("Value");
+            OnPropertyChanged("FormattedValue");
+            OnPropertyChanged("IsNull");
+            OnPropertyChanged("HasValue");
+        }
+
         /// <summary>
         /// Checks constraints on the object and puts the results into the cache.
         /// </summary> 
@@ -297,8 +305,7 @@ namespace Kistl.Client.Presentables
                     _errorCache = value;
 
                     // notify listeners that the error state of the Value has changed
-                    OnPropertyChanged("Value");
-                    OnPropertyChanged("FormattedValue");
+                    NotifyValueChanged();
                 }
             }
         }
@@ -402,11 +409,7 @@ namespace Kistl.Client.Presentables
                 {
                     SetPropertyValue(value);
                     CheckConstraints();
-
-                    OnPropertyChanged("Value");
-                    OnPropertyChanged("FormattedValue");
-                    OnPropertyChanged("IsNull");
-                    OnPropertyChanged("HasValue");
+                    NotifyValueChanged();
                 }
             }
         }
@@ -460,6 +463,7 @@ namespace Kistl.Client.Presentables
         protected override void UpdatePropertyValue()
         {
             this.Value = GetPropertyValue();
+            NotifyValueChanged();
         }
 
         /// <summary>
@@ -620,6 +624,7 @@ namespace Kistl.Client.Presentables
         protected override void UpdatePropertyValue()
         {
             this.Value = Object.GetPropertyValue<TValue>(Property.Name);
+            NotifyValueChanged();
         }
 
         #endregion
