@@ -147,7 +147,7 @@ namespace Kistl.Client.Presentables
         {
             get
             {
-                return IsInDesignMode ? "Some Label" : Property.Name;
+                return IsInDesignMode ? "Some Label" : (!string.IsNullOrEmpty(Property.Label) ? Property.Label : Property.Name);
             }
         }
 
