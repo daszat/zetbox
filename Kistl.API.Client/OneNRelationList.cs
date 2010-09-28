@@ -36,8 +36,9 @@ namespace Kistl.API.Client
             _posProperty = posProperty;
             _owner = owner;
             _ownerNotifier = ownerNotifier;
-            this.collection = new List<T>(collection);
-            foreach (var item in collection)
+            this.collection = collection != null ? new List<T>(collection) : new List<T>();
+
+            foreach (var item in this.collection)
             {
                 item.PropertyChanged += item_PropertyChanged;
             }
