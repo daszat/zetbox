@@ -109,5 +109,19 @@ namespace Kistl.Client.Presentables.GUI
         {
             get { return _additionalCommandsRO; }
         }
+
+        public string Color
+        {
+            get
+            {
+                var tmp = _screen;
+                while (tmp != null)
+                {
+                    if (!string.IsNullOrEmpty(tmp.Color)) return _screen.Color;
+                    tmp = tmp.Parent;
+                }
+                return null;
+            }
+        }
     }
 }
