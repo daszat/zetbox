@@ -140,6 +140,24 @@ namespace Kistl.Client.Presentables.KistlBase
                     _filter = null;
                     OnPropertyChanged("EnableAutoFilter");
                     OnPropertyChanged("Filter");
+                    OnPropertyChanged("ShowFilter");
+                }
+            }
+        }
+
+        private bool? _showFilter = null;
+        public bool ShowFilter
+        {
+            get
+            {
+                return _showFilter ?? Filter.Count > 0;
+            }
+            set
+            {
+                if (_showFilter != value)
+                {
+                    _showFilter = value;
+                    OnPropertyChanged("ShowFilter");
                 }
             }
         }
@@ -200,6 +218,7 @@ namespace Kistl.Client.Presentables.KistlBase
             }
 
             OnPropertyChanged("FilterViewModels");
+            OnPropertyChanged("ShowFilter");
         }
 
         public IEnumerable<IUIFilterExpression> FilterViewModels

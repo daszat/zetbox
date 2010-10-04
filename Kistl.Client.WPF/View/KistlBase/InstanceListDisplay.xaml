@@ -8,7 +8,8 @@
     <DockPanel>
         <GroupBox DockPanel.Dock="Top"
                   Header="Filter"
-                  Padding="10">
+                  Padding="10"
+                  Visibility="{Binding ShowFilter, Converter={StaticResource BooleanToVisibilityConverter}}">
             <StackPanel>
                 <ItemsControl ItemsSource="{Binding FilterViewModels}">
                     <ItemsControl.ItemTemplate>

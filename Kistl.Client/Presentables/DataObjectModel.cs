@@ -82,7 +82,7 @@ namespace Kistl.Client.Presentables
             if (_propertyModels == null)
             {
                 FetchPropertyList();
-                _propertyModels = new LookupDictionary<Property,Property,BasePropertyViewModel>( _propertyList, k => k, v =>
+                _propertyModels = new LookupDictionary<Property, Property, BasePropertyViewModel>(_propertyList, k => k, v =>
                 {
                     var result = ModelFactory.CreateViewModel<BasePropertyViewModel.Factory>(v).Invoke(DataContext, Object, v);
                     result.IsReadOnly = IsReadOnly;
@@ -283,7 +283,7 @@ namespace Kistl.Client.Presentables
             {
                 FetchMethodList();
                 _MethodModels = new LookupDictionary<Method, Method, BaseMethodResultModel>(
-                    _MethodList, 
+                    _MethodList,
                     k => k,
                     v => ModelFromMethod(v)
                 );
@@ -386,13 +386,14 @@ namespace Kistl.Client.Presentables
             var actions = new List<Method>();
             while (cls != null)
             {
-                actions.AddRange(cls.Methods
-                    .Where(m => m.IsDisplayable
-                        && (m.Parameter.Count == 0
-                        || (m.Parameter.Count == 1
-                            && m.Parameter.Single().IsReturnParameter
-                            && m.Name.StartsWith("Create")))));
+                //actions.AddRange(cls.Methods
+                //    .Where(m => m.IsDisplayable
+                //        && (m.Parameter.Count == 0
+                //        || (m.Parameter.Count == 1
+                //            && m.Parameter.Single().IsReturnParameter
+                //            && m.Name.StartsWith("Create")))));
 
+                actions.AddRange(cls.Methods.Where(m => m.IsDisplayable));
                 cls = cls.BaseObjectClass;
             }
 
